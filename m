@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 056F0C25B06
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 15:05:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.380520.614734 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 661DDC19F2A
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 15:05:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.380518.614707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJcPP-0002bA-8Y; Thu, 04 Aug 2022 15:05:11 +0000
+	id 1oJcPM-0001tD-JJ; Thu, 04 Aug 2022 15:05:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 380520.614734; Thu, 04 Aug 2022 15:05:11 +0000
+Received: by outflank-mailman (output) from mailman id 380518.614707; Thu, 04 Aug 2022 15:05:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJcPP-0002b1-4H; Thu, 04 Aug 2022 15:05:11 +0000
-Received: by outflank-mailman (input) for mailman id 380520;
- Thu, 04 Aug 2022 15:05:09 +0000
+	id 1oJcPM-0001sY-Dp; Thu, 04 Aug 2022 15:05:08 +0000
+Received: by outflank-mailman (input) for mailman id 380518;
+ Thu, 04 Aug 2022 15:05:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QMPZ=YI=citrix.com=prvs=2084bc4d8=Jane.Malalane@srs-se1.protection.inumbo.net>)
- id 1oJcPN-0001pR-Tb
- for xen-devel@lists.xenproject.org; Thu, 04 Aug 2022 15:05:09 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d33b262a-1406-11ed-bd2d-47488cf2e6aa;
- Thu, 04 Aug 2022 17:05:08 +0200 (CEST)
+ id 1oJcPL-0001pR-SR
+ for xen-devel@lists.xenproject.org; Thu, 04 Aug 2022 15:05:07 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d2558e88-1406-11ed-bd2d-47488cf2e6aa;
+ Thu, 04 Aug 2022 17:05:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,67 +38,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d33b262a-1406-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: d2558e88-1406-11ed-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1659625508;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=o5iccEivDKlcTxNxatFjrVJPq9arILcmjVDpwc+JipU=;
-  b=a/20Qmf25f7d4fi/46KEMWAiHhm3TJSgrPyEFtVXBWG0dGRcdVmEgmiG
-   2n02f9RH61o5ggDlVG1U8yUHYLFdmNzVOjlZiKX/Pj2SnpYu0lFiZnyG/
-   unnD/Rrim3W1ngD+7jMD6oxZ8L6Vc6Uwm09mPg09wCwNg6CguNyl0SOz0
-   g=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1659625506;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=QgUZ32yF2K286P2BkzCo1ex4mjo4Zhntd7s4lmaIVpo=;
+  b=NwI6vkdyRFBY/3g9ch+1ooY+csxsAfuHJ4aTLVGCPcrbF3+H/0zjm10f
+   MH1Riie6aGUS4t7KELeiw0NdV1WRELH0I/eq2eNUKuCUL8TwtVZmpgpqo
+   dB5FhPafbWnEynArDkFsaLHdX2t1eigTCHuwgtnFjd4pgOyLqozXjW/CN
+   E=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77150536
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 77379592
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:xdS+qatmRQWq5MfCngdOfdptSufnVBleMUV32f8akzHdYApBsoF/q
- tZmKWGHPv2MZzT1fIp2YY3n9RgFvpfTyNJqTwdqri0zEioV+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZhSAgk/vOHtIQMcacUghpXwhoVSw9vhxqnu89k+ZAjMOwRgiAo
- rsemeWGULOe82MyYzl8B56r8ks15qyi4G9A5TTSWNgQ1LPgvyhNZH4gDfnZw0vQGuF8AuO8T
- uDf+7C1lkuxE8AFU47Nfh7TKyXmc5aKVeS8oiM+t5uK23CukhcawKcjXMfwXG8M49m/c3Kd/
- /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTGCFcpqHLWyKE/hlgMK05FdIe5txUWD11z
- 8c/Bwsza0uy2/O9g4vuH4GAhux7RCXqFIYWu3UmxjDFF/c2B5vERs0m5/cBgm123JoXW6+DO
- YxJMlKDbzyZC/FLEnUeDp94ue6sj332dTBwo1OJv6snpWPUyWSd1ZCyb4OIIoHRG625mG64/
- lj75Gv0UitZKeS+0gjb9CyFnurQyHaTtIU6S+Tjq68CbEeo7nweDlgaWEW2pdG9i1WiQJRPJ
- koM4C0soKMuskuxQbHAswaQ+SDe+ERGApwJTrN8uFrlJrfoDxixWW4YdB0YNOccj+gZfgIvj
- W7VjtiqPGk62FGKck5x5ot4vBvrZ3VEcTdfPHJeJecWy4K9+d9u13ojWv4mSffo1YOtRFkc1
- hjQ9EADa6MvYdnnPklR1XTOmHqSq5fAVWbZDS2HDzv+vmuViGNIDrFECGQ3Dt4ade51tnHb4
- BA5dzG2tYji962lmi2XW/kqF7q0/fuDOzC0qQcxQsh8qm3yqyXzIts4DNRCyKBBYq45lcLBO
- heP6Wu9GrcJVJdVUUOHS93oUJl7pUQRPd/kSurVfrJzX3SFTyfepXkGTRPBgAjQfL0Ey/5X1
- WGzLZnxVh73yM1PkFKLegvq+eBxl31mlDqDGPgWDX2PiNKjWZJccp9dWHPmUwzzxPnsTNn9m
- zqHC/a39g==
-IronPort-HdrOrdr: A9a23:4Cwl8akCTBfjv9GLu8PVafokRX3pDfIg3DAbv31ZSRFFG/Fxl6
- iV8sjzsiWE7wr5OUtQ/exoV5PhfZqxz/JICOoqTNKftWvdyQiVxehZhOOIqVDd8kXFh4hgPM
- xbEpSWZueeMbEDt7eZ3DWF
+IronPort-Data: A9a23:4j5itK/RN50nuPFwmNsfDrUD7H6TJUtcMsCJ2f8bNWPcYEJGY0x3n
+ GQcWTyHM/yIZWqmfdtyb4vi/RsC7MODytJmQANuqys8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si+Fa+Sn9z8kvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYctitWia++3k
+ YqaT/b3ZRn0gFaYDkpOs/jZ8EM34Kyp0N8llgdWic5j7Qe2e0Y9VPrzFYnpR1PkT49dGPKNR
+ uqr5NlVKUuAon/Bovv8+lrKWhViroz6ZGBiuVIPM0SWuTBQpzRa70oOHKF0hXG7Kdm+t4sZJ
+ N1l7fRcQOqyV0HGsLx1vxJwS0mSMUDakVNuzLfWXcG7liX7n3XQL/pGHX8RAqlA/sNOBVpN8
+ dMWa2kAdh7SiLfjqF67YrEEasULKcDqOMUUu216zCGfBvEjKXzBa/yUv5kChm52350QW6aFD
+ yYaQWMHgBDoQRRJNxEyAZY3mO6ui1H0ciFCqULTrq0yi4TW5FMui+e8bYuPEjCMbYZz3UfAm
+ 0KXxmfSOwgCPcCd9zHUr1v504cjmgukAdlPRdVU7MVCn1m71mEVThoMWjOTo/O0l0q/UNJ3M
+ FEP92wlqq1a3FymSJzxUgO1pFaAvwUAQJxAHusi8gaPx6HIpQGDCQA5oiVpMYJ88pVsHHpzi
+ wHPz4iB6SFTXKO9WEy6yZPMqRaLPRMWKUAMJnYJVQVU7Iy2yG0stS4jXuqPAYbs0ICkRWmtm
+ m3QxMQtr+5N1JBWjs1X6XiC2mvx/caRE2bZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
+ 1BUypHFvIji4Xxg/RFhodnh/5nzvp5pyBWG3TZS82AJrlxBAUKLc4FK+y1ZL0x0KMsCcjKBS
+ BaN5FIMucYMbCD6MvQfj2eN5yMCncDd+SnNDKiIPrKinLArHON4wM2eTRHJhD28+KTduao+J
+ Y2aYa6RMJruMow+lWLeb7pMjtcWKtUWnzy7qWbTk0v6itJzpRe9Fd84Dbd5Rr9jvf7c8VyFr
+ r6y9aKikn1ibQE3WQGPmaZ7ELzABSFT6UzewyCPStO+Hw==
+IronPort-HdrOrdr: A9a23:9+M+/Km6aGtqgmMDuqOVGtUUKhDpDfIU3DAbv31ZSRFFG/Fxl6
+ iV8sjzsiWE8Qr5OUtQ/+xoV5PhfZqxz/JICMwqTNKftWrdyQyVxeNZnOjfKlTbckWUnINgPO
+ VbAsxD4bXLfCBHZK3BgTVQfexO/DD+ytHLudvj
 X-IronPort-AV: E=Sophos;i="5.93,216,1654574400"; 
-   d="scan'208";a="77150536"
+   d="scan'208";a="77379592"
 From: Jane Malalane <jane.malalane@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Jane Malalane <jane.malalane@citrix.com>
-Subject: [PATCH 0/4] xen/x86: import linkage.h and clean up x86/kexec.S and x86/entry.S
-Date: Thu, 4 Aug 2022 16:04:20 +0100
-Message-ID: <20220804150424.17584-1-jane.malalane@citrix.com>
+CC: Jane Malalane <jane.malalane@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH 3/4] x86/entry: move .init.text section higher up in the code for readability
+Date: Thu, 4 Aug 2022 16:04:23 +0100
+Message-ID: <20220804150424.17584-4-jane.malalane@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20220804150424.17584-1-jane.malalane@citrix.com>
+References: <20220804150424.17584-1-jane.malalane@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Jane Malalane (4):
-  x86/kexec: Add the '.L_' prefix to is_* and call_* labels
-  xen: Port linkage.h from kernel code
-  x86/entry: move .init.text section higher up in the code for
-    readability
-  x86: Use linkage.h helpers to add tags to symbols
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Jane Malalane <jane.malalane@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: "Roger Pau Monné" <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/arch/x86/x86_64/entry.S | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
- xen/arch/x86/x86_64/entry.S       | 124 +++++++++++-------
- xen/arch/x86/x86_64/kexec_reloc.S |  85 ++++++-------
- xen/include/xen/linkage.h         | 260 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 376 insertions(+), 93 deletions(-)
- create mode 100644 xen/include/xen/linkage.h
-
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index 26bf2f1941..4ad25d9c90 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -140,6 +140,15 @@ process_trap:
+         call create_bounce_frame
+         jmp  test_all_events
+ 
++        .pushsection .init.text, "ax", @progbits
++        ENTRY(early_page_fault)
++        ENDBR64
++        movl  $TRAP_page_fault,4(%rsp)
++        SAVE_ALL
++        movq  %rsp,%rdi
++        call  do_early_page_fault
++        jmp   restore_all_xen
++
+         .section .text.entry, "ax", @progbits
+ 
+ /* %rbx: struct vcpu, interrupts disabled */
+@@ -982,16 +991,6 @@ ENTRY(double_fault)
+         call  do_double_fault
+         BUG   /* do_double_fault() shouldn't return. */
+ 
+-        .pushsection .init.text, "ax", @progbits
+-ENTRY(early_page_fault)
+-        ENDBR64
+-        movl  $TRAP_page_fault,4(%rsp)
+-        SAVE_ALL
+-        movq  %rsp,%rdi
+-        call  do_early_page_fault
+-        jmp   restore_all_xen
+-        .popsection
+-
+ ENTRY(nmi)
+         ENDBR64
+         pushq $0
 -- 
 2.11.0
 
