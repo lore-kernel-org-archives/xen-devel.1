@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A20C3F6B0
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 07:02:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.380186.614216 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2C1C00144
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 07:02:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.380192.614261 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJUrt-00088G-9b; Thu, 04 Aug 2022 07:02:05 +0000
+	id 1oJUs6-0000ss-Mr; Thu, 04 Aug 2022 07:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 380186.614216; Thu, 04 Aug 2022 07:02:05 +0000
+Received: by outflank-mailman (output) from mailman id 380192.614261; Thu, 04 Aug 2022 07:02:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJUrt-000889-6r; Thu, 04 Aug 2022 07:02:05 +0000
-Received: by outflank-mailman (input) for mailman id 380186;
- Thu, 04 Aug 2022 07:02:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oJUs6-0000sd-ID; Thu, 04 Aug 2022 07:02:18 +0000
+Received: by outflank-mailman (input) for mailman id 380192;
+ Thu, 04 Aug 2022 07:02:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wk0C=YI=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1oJUrr-000883-M1
- for xen-devel@lists.xen.org; Thu, 04 Aug 2022 07:02:03 +0000
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [2607:f8b0:4864:20::102c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 56b0d934-13c3-11ed-bd2d-47488cf2e6aa;
- Thu, 04 Aug 2022 09:02:02 +0200 (CEST)
-Received: by mail-pj1-x102c.google.com with SMTP id a8so5219193pjg.5
- for <xen-devel@lists.xen.org>; Thu, 04 Aug 2022 00:02:02 -0700 (PDT)
+ id 1oJUs4-0000K7-WC
+ for xen-devel@lists.xen.org; Thu, 04 Aug 2022 07:02:17 +0000
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [2607:f8b0:4864:20::1033])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5ecd4071-13c3-11ed-924f-1f966e50362f;
+ Thu, 04 Aug 2022 09:02:15 +0200 (CEST)
+Received: by mail-pj1-x1033.google.com with SMTP id gj1so3706980pjb.0
+ for <xen-devel@lists.xen.org>; Thu, 04 Aug 2022 00:02:16 -0700 (PDT)
 Received: from localhost ([122.171.18.80]) by smtp.gmail.com with ESMTPSA id
- g5-20020a17090a4b0500b001f31e91200asm2833108pjh.44.2022.08.04.00.01.57
+ 13-20020a170902c20d00b0016e808dbe55sm61539pll.96.2022.08.04.00.02.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Aug 2022 00:01:58 -0700 (PDT)
+ Thu, 04 Aug 2022 00:02:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56b0d934-13c3-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: 5ecd4071-13c3-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=h6YCloTz4rK9ZTPSsprXuTgjj/k37+SDGUBkJBTTEWc=;
-        b=vGT1V0KS5mQsDzTZeYW/BxV/IVD9XHv0dfzb3dRtjW1bEP3pM1S0AD3RIlGtTkAHJ/
-         1DCxv1hxmido7M1LGOnxhMHC92RXK17Zo/u0NSbxxEybISdZg9oxhPqCZGkSMORxXoav
-         jDiFUKsOs1+qTTbILYRKg41gyzEMkqGpi2qFMRhCqgiVjoD4p2G0Z+rRISAZ940n+sTp
-         bOCCcnyBREqtuh7z5fmz1h4f+t1JxgfNqy7mebcBgkqjNCdG8SLuYKmQ6eAPa3zL9Ida
-         MGF6JopNEzzE48A1ZxLteHCUPfT0j9WpAeC1bvDYR8jq4/YXnUaCy9ldzOeo2wb3uyv3
-         ECxg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=jnP87DDY9e5w/7DpOY7qD8IgK2FdJZgySh2bza0OcUU=;
+        b=hPlIZbpNzs5JyiNyGlwydaIggY2csLotkcb9yq3kJMW3dGJiHfcr0mfqeBbiiEtkox
+         Zw5I4a4OByiKiXu3+khoeWfqLWSdVI3UO7eUabIoUDcbcfVIL7lleB5zkfWgEv7H8XTI
+         gafGXs+tmRa1RhdVRpTmB/dPTYZrEAEvBt5j0s3wtw5zUd1BERUHOire1ErjZCG46gtz
+         TuVtw1QBzMq1wiGfdm/msZwjeOWOdnTMduO/gwGngC8XsyMo6Y4qVvJ0Xvkk5+/rjYRu
+         cLKpb3ERUXqhqF4eMPgwWMzLLvotFPZr8m7pXfajIiXew/CeeMfzir4vj7ps2SXee4u2
+         +dJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=h6YCloTz4rK9ZTPSsprXuTgjj/k37+SDGUBkJBTTEWc=;
-        b=WuJv2OSSAvSW4h8CdudYeRDBrLYzvZmQT8YUPIVHFjCmd7IqNZlGHXGDxpPbMHoquj
-         1cww0emrtqjCZKx2ue0VC/USBuUymh7g/nXUbzi8wQBJLyHSCEfNvGqVQ22PvfFNICyU
-         FgxCw3KrBSLsaP/UNGh/F+8jhb44/URsi2m/uemqqYE1tKJ/ZZ9oOw8kwclmTW3ZMmm3
-         lEUsfWTa8zSwlHDcJoD3lvh0SFcfY4ld7o0T0HLiWLwfGAsLjtd+ez3DOgDBAX8KSmdQ
-         bH+EZZOi00lZK2cBejEJXObZskt1cyYzpCvjfdJj9FnwtMX8AQqhMPcMVO9oiP/EkKla
-         0MsQ==
-X-Gm-Message-State: ACgBeo0e1N9WcQlIAVkGyLGVMjQcvDCA7Ord5eLRpsacnlYeD1lUhKCb
-	A3SYy1cKpMFWTg5NQmWguqApCSAmGs8AsA==
-X-Google-Smtp-Source: AA6agR5i1p3YHct5wewjflQUqsRPmnWesYXt4n10tisD8DVVl54kywGeFMcrEHZ3AwA1KItU4moAQQ==
-X-Received: by 2002:a17:902:e543:b0:16f:23b5:9120 with SMTP id n3-20020a170902e54300b0016f23b59120mr629846plf.30.1659596520607;
-        Thu, 04 Aug 2022 00:02:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=jnP87DDY9e5w/7DpOY7qD8IgK2FdJZgySh2bza0OcUU=;
+        b=QmlrWKszX2ZJOK22Vj/JrlvcOd/lqVcDHJstNQiiQqMX7rNamLAdPGp3kn/EfdOrhO
+         iSnqvKb240oaaensQc/YTqUwEJB/iRU7oMJYVt1w4aP4O6lgBHbRs5YJzeqDvY7cYDWi
+         YpbgzFf23HpR6Jq0AxZubPnLuffV0m1fUmem3noVpurBxZoiyPhSLWChXICWankr18vc
+         gSBL2OmcBdl+clFCWosYAf9HqDRoNL0+OTG7UCyGAbge7LeKhfk8bVB1vM00nfDhxpPD
+         AmcgjR6WzC6oLWh3e8UUYu++xpKRwGfhnnGS1Z94NgwfxNeJJEALqYmL1shqRZ+iAyoJ
+         VeEg==
+X-Gm-Message-State: ACgBeo14aei7q3Ms8oNOT4chSpDVkU8b+GD1qTe8woMTSxcbq0anjlmO
+	hj3n5HHLvUFKgj6mIR4sQPZq3VjB27hwtQ==
+X-Google-Smtp-Source: AA6agR4ijlVlOpqTXiYXXLsVPnBoPAub2by/fursTxgK7g2T0ShzSEw4Kj7xvjSvQYiKBuHI3EOu5A==
+X-Received: by 2002:a17:90a:f418:b0:1f3:223d:4349 with SMTP id ch24-20020a17090af41800b001f3223d4349mr9189723pjb.2.1659596534819;
+        Thu, 04 Aug 2022 00:02:14 -0700 (PDT)
 From: Viresh Kumar <viresh.kumar@linaro.org>
 To: xen-devel@lists.xen.org
 Cc: Viresh Kumar <viresh.kumar@linaro.org>,
@@ -86,80 +86,83 @@ Cc: Viresh Kumar <viresh.kumar@linaro.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH V3 0/6] Virtio toolstack support for I2C and GPIO on Arm
-Date: Thu,  4 Aug 2022 12:31:48 +0530
-Message-Id: <cover.1659596139.git.viresh.kumar@linaro.org>
+Subject: [PATCH V3 4/6] libxl: arm: Split make_virtio_mmio_node()
+Date: Thu,  4 Aug 2022 12:31:52 +0530
+Message-Id: <ae20b87d583b981302905059d157a03400cd8eb2.1659596139.git.viresh.kumar@linaro.org>
 X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+In-Reply-To: <cover.1659596139.git.viresh.kumar@linaro.org>
+References: <cover.1659596139.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hello,
+make_virtio_mmio_node() creates the DT node for simple MMIO devices
+currently, i.e. the ones that don't require any additional properties.
 
-This patchset adds toolstack support for I2C and GPIO virtio devices. This is
-inspired from the work done by Oleksandr for the Disk device.
+In order to allow using it for other complex device types, split the
+functionality into two, one where the fdt node isn't closed and the
+other one to create a simple DT node.
 
-This is developed as part of Linaro's Project Stratos, where we are working
-towards Hypervisor agnostic Rust based backend [1].
+Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
+---
+ tools/libs/light/libxl_arm.c | 24 ++++++++++++++----------
+ 1 file changed, 14 insertions(+), 10 deletions(-)
 
-This is based of origin/staging (commit 01ca29f0b17a ("sched: dom0_vcpus_pin
-should only affect dom0")) which already has Oleksandr's patches applied.
-
-V2->V3:
-- Rebased over latest tree and made changes according to changes in Oleksandr's
-  patches from sometime back.
-- Minor cleanups.
-
-V1->V2:
-- Patches 3/6 and 4/6 are new.
-- Patches 5/6 and 6/6 updated based on the above two patches.
-- Added link to the bindings for I2C and GPIO.
-- Rebased over latest master branch.
-
-
-Thanks.
-
---
-Viresh
-
-[1] https://lore.kernel.org/xen-devel/20220414092358.kepxbmnrtycz7mhe@vireshk-i7/
-
-Viresh Kumar (6):
-  libxl: Add support for Virtio I2C device
-  libxl: Add support for Virtio GPIO device
-  libxl: arm: Create alloc_virtio_mmio_params()
-  libxl: arm: Split make_virtio_mmio_node()
-  libxl: Allocate MMIO params for I2c device and update DT
-  libxl: Allocate MMIO params for GPIO device and update DT
-
- tools/golang/xenlight/helpers.gen.go      | 212 ++++++++++++++++++++
- tools/golang/xenlight/types.gen.go        |  54 ++++++
- tools/include/libxl.h                     |  64 ++++++
- tools/include/libxl_utils.h               |   6 +
- tools/libs/light/Makefile                 |   2 +
- tools/libs/light/libxl_arm.c              | 138 +++++++++++--
- tools/libs/light/libxl_create.c           |  26 +++
- tools/libs/light/libxl_dm.c               |  34 +++-
- tools/libs/light/libxl_gpio.c             | 226 ++++++++++++++++++++++
- tools/libs/light/libxl_i2c.c              | 226 ++++++++++++++++++++++
- tools/libs/light/libxl_internal.h         |   2 +
- tools/libs/light/libxl_types.idl          |  48 +++++
- tools/libs/light/libxl_types_internal.idl |   2 +
- tools/ocaml/libs/xl/genwrap.py            |   2 +
- tools/ocaml/libs/xl/xenlight_stubs.c      |   2 +
- tools/xl/Makefile                         |   2 +-
- tools/xl/xl.h                             |   6 +
- tools/xl/xl_cmdtable.c                    |  30 +++
- tools/xl/xl_gpio.c                        | 142 ++++++++++++++
- tools/xl/xl_i2c.c                         | 142 ++++++++++++++
- tools/xl/xl_parse.c                       | 160 +++++++++++++++
- tools/xl/xl_parse.h                       |   2 +
- tools/xl/xl_sxp.c                         |   4 +
- 23 files changed, 1509 insertions(+), 23 deletions(-)
- create mode 100644 tools/libs/light/libxl_gpio.c
- create mode 100644 tools/libs/light/libxl_i2c.c
- create mode 100644 tools/xl/xl_gpio.c
- create mode 100644 tools/xl/xl_i2c.c
-
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 2f64b9f0ebee..6a8c4d042bd9 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -900,9 +900,8 @@ static int make_xen_iommu_node(libxl__gc *gc, void *fdt)
+     return 0;
+ }
+ 
+-static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
+-                                 uint64_t base, uint32_t irq,
+-                                 uint32_t backend_domid)
++static int make_virtio_mmio_node_common(libxl__gc *gc, void *fdt, uint64_t base,
++                                        uint32_t irq)
+ {
+     int res;
+     gic_interrupt intr;
+@@ -922,7 +921,15 @@ static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
+     res = fdt_property_interrupts(gc, fdt, &intr, 1);
+     if (res) return res;
+ 
+-    res = fdt_property(fdt, "dma-coherent", NULL, 0);
++    return fdt_property(fdt, "dma-coherent", NULL, 0);
++}
++
++static int make_virtio_mmio_node_simple(libxl__gc *gc, void *fdt, uint64_t base,
++                                        uint32_t irq, uint32_t backend_domid)
++{
++    int res;
++
++    res = make_virtio_mmio_node_common(gc, fdt, base, irq);
+     if (res) return res;
+ 
+     if (backend_domid != LIBXL_TOOLSTACK_DOMID) {
+@@ -935,10 +942,7 @@ static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
+         if (res) return res;
+     }
+ 
+-    res = fdt_end_node(fdt);
+-    if (res) return res;
+-
+-    return 0;
++    return fdt_end_node(fdt);
+ }
+ 
+ static const struct arch_info *get_arch_info(libxl__gc *gc,
+@@ -1261,8 +1265,8 @@ static int libxl__prepare_dtb(libxl__gc *gc, libxl_domain_config *d_config,
+                     iommu_created = true;
+                 }
+ 
+-                FDT( make_virtio_mmio_node(gc, fdt, disk->base, disk->irq,
+-                                           disk->backend_domid) );
++                FDT( make_virtio_mmio_node_simple(gc, fdt, disk->base,
++                                            disk->irq, disk->backend_domid) );
+             }
+         }
+ 
 -- 
 2.31.1.272.g89b43f80a514
 
