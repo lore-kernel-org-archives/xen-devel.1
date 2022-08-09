@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC1ABC19F2D
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Aug 2022 17:01:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.383094.618204 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4C0C25B07
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Aug 2022 17:01:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.383095.618210 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLSb8-0003xM-OY; Tue, 09 Aug 2022 17:00:54 +0000
+	id 1oLSb9-00044J-4p; Tue, 09 Aug 2022 17:00:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 383094.618204; Tue, 09 Aug 2022 17:00:54 +0000
+Received: by outflank-mailman (output) from mailman id 383095.618210; Tue, 09 Aug 2022 17:00:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLSb8-0003xF-L3; Tue, 09 Aug 2022 17:00:54 +0000
-Received: by outflank-mailman (input) for mailman id 383094;
- Tue, 09 Aug 2022 17:00:53 +0000
+	id 1oLSb9-00042Y-0q; Tue, 09 Aug 2022 17:00:55 +0000
+Received: by outflank-mailman (input) for mailman id 383095;
+ Tue, 09 Aug 2022 17:00:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flEI=YN=citrix.com=prvs=213c446d4=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1oLSb7-0003x4-3n
- for xen-devel@lists.xenproject.org; Tue, 09 Aug 2022 17:00:53 +0000
+ id 1oLSb8-0003x4-1d
+ for xen-devel@lists.xenproject.org; Tue, 09 Aug 2022 17:00:54 +0000
 Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
  [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d14c2803-1804-11ed-bd2e-47488cf2e6aa;
- Tue, 09 Aug 2022 19:00:51 +0200 (CEST)
+ id d2b37ace-1804-11ed-bd2e-47488cf2e6aa;
+ Tue, 09 Aug 2022 19:00:53 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,288 +38,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d14c2803-1804-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: d2b37ace-1804-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660064450;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=kzV1NdfmDwjrGppyGg4tphySuRUYrZFiMHQBlfQ9nGk=;
-  b=Biu9oyHUUShEUY33R3GAo2yfZIRqpF6PHXGeFPjw591N/tUfrKR2a7Oq
-   9xtqmnCvZCWwzKhcNo+hcfITAb4+iyS1yNprs2aQX3L2pQxmTMdHcyC58
-   XZVT+FqoKplg9dtCVYNNq565f1qQexnrQYM4FCOo1MylJ0q3YYkcan+wA
-   g=;
+  d=citrix.com; s=securemail; t=1660064452;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=2bdCLaN+uBCS21iweS7oRTWqNsYNq+ooB0klsI5LdSI=;
+  b=aL9qBU/xHNlhaNhM7MgKmfFIlijAxBvIxlq37BGpsyoaFbEo6RpW9KOu
+   /GRbGKJhYAFtMAH2qJlgqKQOcJuemVKEZdeWcbDY+qldWQ+NAItAUnF/7
+   vTvYGquSl6IlbJjevndanzUvQR6w2UCcCC0ITG+lmkTU0kztlBgObOcvj
+   E=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77711799
+X-MesageID: 77711806
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:mu+MU6+20BbYGm+Ix/acDrUD736TJUtcMsCJ2f8bNWPcYEJGY0x3m
- DAcWWuCOv6PZmH3edh3O4y19RwC6pbWmt43SQRl/Hs8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si+Fa+Sn9z8kvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYctitWia++3k
- YqaT/b3ZRn0gFaYDkpOs/jZ8EM37ayo0N8llgdWic5j7Qe2e0Y9VPrzFYnpR1PkT49dGPKNR
- uqr5NlVKUuAon/Bovv8+lrKWhViroz6ZGBiuVIPM0SWuTBQpzRa70oOHKF0hXG7Kdm+t4sZJ
- N1l7fRcQOqyV0HGsLx1vxJwS0mSMUDakVNuzLfWXcG7liX7n3XQL/pGB0I3PqIX4vdMAkYf1
- +48GW0tbU2ZrrfjqF67YrEEasULKcDqOMUUu216zCGfBvEjKXzBa/yUv5kChm52350QW6aFD
- yYaQWMHgBDoShtDIFoITrk5m/+lnCLXeDxEslOF46Ew5gA/ySQuj+e0aYWEK7RmQ+1UnEmFh
- UHDw13SGy0DM+6wxyqkolej07qncSTTB9tJSezQGuRRqEKX7nweDlsRT1TTiduTh1O6WtlfA
- 1cJ4Sdopq83nGS7Q9+4UxCmrXqsuh8HR8EWA+A88BuKyKff/0CeHGdsc9JaQIV47olsH2Vsj
- wLX2YOybdByjFGLYXme97S7oiujAisyfE0QQR5ZbQhY+fC29enfkSnzosZf/L+d14OrQWmpm
- 23U9UDSlJ1I05dVivzTEUTvxmv1+8OXFlNdChD/BDrN0+9vWGKyi2VEA3D/5O0IEouWR0LpU
- JMsy5nHt7Bm4X1geUWwrAQx8FKBva/t3MX02wIHInXY323FF4SfVY5R+ipiA0xiL9wJfzTkC
- GeK514Atc8IbCL1PPEvC25UNyjN5fmIKDgYfqqMMoomjmZZLWdrAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMEv2/Z9PlWPuL89AgOBD+8zL7TmMLXwN50j4jOH2ib/8YettDWZimchgt/za/VuJq
- 4s32gnj40w3bdASqxL/qeY7RW3m51BibXwqg6S7rtK+Hzc=
-IronPort-HdrOrdr: A9a23:ZY4hCKO1xvLVLcBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3gqy
- nOpoV86faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrZ
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:N8t+T61N0zwxsInjcPbD5Z1xkn2cJEfYwER7XKvMYLTBsI5bpz0Fn
+ GVJWT3TO/uPMGDyfd90YIXkpB5XscLRnN5iSgs4pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkjk7xdOKn9RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUwx4VlmrBVOSvU0
+ T/Ji5CZaQTNNwJcaDpOsfrT8EI35pwehRtD1rAATaET1LPhvyF94KI3fcmZM3b+S49IKe+2L
+ 86rIGaRpz6xE78FU7tJo56jGqE4aue60Tum0xK6b5OKkBlazhHe545gXBYqheW7vB3S9zx54
+ I0lWZVd0m7FNIWU8AgWe0Ew/y2TocSqUVIISJSymZX78qHIT5fj6+gwA1MfFq8dwd0tXEJXx
+ aUyLxYvKTnW0opawJrjIgVtrsEqLc2tN4IDoHBwizreCJ7KQ7iaHf+Mv4UBmm5t2IYeRp4yZ
+ OJAAdZrRD3GbwdCJRE8D5Umkf3zrnL+bydZuBSeoq9fD237k1MuieG9aIS9ltqiSp4PnWTCh
+ ED/oUfLITg2HY2mxhi+yyf57gPItXyiA99DfFGizdZ6jVvWymENBRk+UVqgveL/mkO4Q8hYK
+ UEf5mwpt6dayaCwZoCjBVvi+ifC50NCHYoLewEn1O2T4reK7BSwLUoBdQUbNf8/hJYcQhoIk
+ XbcyrsFGgdTXK2ppWO1r+nK9WvrYXVLdAfudgdfE1JbvoCLTJUby0uWE409SPPdYsjdQ2mY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi2+AswGzAQ5odtrxc7V4l
+ CFsdzKixO4PF4qRsyeGXf8AGrqkj97cbmCN0A40T8B+pmr1k5JGQWy3yGAWGauUGpxcJW+Bj
+ LH74Gu9G6O/zFP1NPQqMupd+uwhzLT6FMSNa804muFmO8EpHCfarX4GWKJl9zqy+KTauf1gZ
+ MzznAfFJSpyNJmLOxLvHLhDjOF3nn1WKKG6bcmT8ilLGIG2PBa9IYrp+nPXBgzlxMtoeDnoz
+ us=
+IronPort-HdrOrdr: A9a23:22BZ9a7jjKNZbMoEmwPXwMTXdLJyesId70hD6qhwISY6TiX+rb
+ HIoB17726RtN9/YhEdcLy7VJVoIkmskKKdg7NhXotKNTOO0ADDQb2KhbGSpQEIcBeeygcy78
+ hdmtBFeb/NMWQ=
 X-IronPort-AV: E=Sophos;i="5.93,225,1654574400"; 
-   d="scan'208";a="77711799"
+   d="scan'208";a="77711806"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 2/2] x86/spec-ctrl: Reduce HVM RSB overhead where possible
-Date: Tue, 9 Aug 2022 18:00:16 +0100
-Message-ID: <20220809170016.25148-3-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 0/2] x86/spec-ctrl: Reduce HVM RSB overhead
+Date: Tue, 9 Aug 2022 18:00:14 +0100
+Message-ID: <20220809170016.25148-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220809170016.25148-1-andrew.cooper3@citrix.com>
-References: <20220809170016.25148-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-The documentation for eIBRS has finally been clarified to state that it is
-intended to flush the RSB on VMExit.  So in principle, we shouldn't have been
-using opt_rsb_hvm on eIBRS hardware.
+Xen happens to be not vulnerable to PBRSB, but it turns out we can improve the
+performance on all eIBRS systems.
 
-However, dropping the 32 entry RSB stuff makes us vulnerable to Post-Barrier
-RSB speculation on affected Intel CPUs.
+Andrew Cooper (2):
+  x86/spec-ctrl: Enumeration for PBRSB_NO
+  x86/spec-ctrl: Reduce HVM RSB overhead where possible
 
-Introduce hvm_rsb_calculations() which selects between a 32-entry stuff, a
-PBRSB specific workaround, or nothing, based on hardware details.
-
-To mitigate PBRSB, put an LFENCE at the top of vmx_vmexit_handler().  This
-forces the necessary safety property, without having to do a 1-entry RSB stuff
-and fix up the stack(s) afterwards.
-
-Update opt_rsb_hvm to be tristate.  On eIBRS-capable CPUs not susceptible to
-PBRSB, this disables HVM RSB software protections entirely.  On eIBRS-capable
-CPUs suceptible to to PBRSB, this reduces a 32-entry RSB stuff down to just
-one LFENCE.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
  xen/arch/x86/hvm/vmx/entry.S           |   1 +
  xen/arch/x86/hvm/vmx/vmx.c             |  20 ++++++-
  xen/arch/x86/include/asm/cpufeatures.h |   1 +
- xen/arch/x86/spec_ctrl.c               | 103 ++++++++++++++++++++++++++++++++-
- 4 files changed, 120 insertions(+), 5 deletions(-)
+ xen/arch/x86/include/asm/msr-index.h   |   1 +
+ xen/arch/x86/msr.c                     |   5 +-
+ xen/arch/x86/spec_ctrl.c               | 106 +++++++++++++++++++++++++++++++--
+ 6 files changed, 126 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vmx/entry.S b/xen/arch/x86/hvm/vmx/entry.S
-index 5f5de45a1309..222495aed19f 100644
---- a/xen/arch/x86/hvm/vmx/entry.S
-+++ b/xen/arch/x86/hvm/vmx/entry.S
-@@ -44,6 +44,7 @@ ENTRY(vmx_asm_vmexit_handler)
-         .endm
-         ALTERNATIVE "", restore_spec_ctrl, X86_FEATURE_SC_MSR_HVM
-         /* WARNING! `ret`, `call *`, `jmp *` not safe before this point. */
-+        /* On PBRSB-vulenrable hardware, `ret` not safe before the start of vmx_vmexit_handler() */
- 
-         /* Hardware clears MSR_DEBUGCTL on VMExit.  Reinstate it if debugging Xen. */
-         .macro restore_lbr
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 17e103188a53..8a6a5cf20525 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3934,8 +3934,24 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
- {
-     unsigned long exit_qualification, exit_reason, idtv_info, intr_info = 0;
-     unsigned int vector = 0, mode;
--    struct vcpu *v = current;
--    struct domain *currd = v->domain;
-+    struct vcpu *v;
-+    struct domain *currd;
-+
-+    /*
-+     * To mitigate Post-Barrier RSB speculation, we must force one CALL
-+     * instruction to retire before letting a RET instruction execute.
-+     *
-+     * On PBRSB-vulnerable CPUs, it is not safe for a RET to be executed
-+     * before this point.
-+     *
-+     * Defer any non-trivial variable initialisation to avoid problems if the
-+     * compiler decides to out-of-line any helpers.  This depends on
-+     * alternative() being a full compiler barrier too.
-+     */
-+    alternative("", "lfence", X86_BUG_PBRSB);
-+
-+    v = current;
-+    currd = v->domain;
- 
-     __vmread(GUEST_RIP,    &regs->rip);
-     __vmread(GUEST_RSP,    &regs->rsp);
-diff --git a/xen/arch/x86/include/asm/cpufeatures.h b/xen/arch/x86/include/asm/cpufeatures.h
-index 672c9ee22ba2..fdb9bff833c1 100644
---- a/xen/arch/x86/include/asm/cpufeatures.h
-+++ b/xen/arch/x86/include/asm/cpufeatures.h
-@@ -49,6 +49,7 @@ XEN_CPUFEATURE(IBPB_ENTRY_HVM,    X86_SYNTH(29)) /* MSR_PRED_CMD used by Xen for
- #define X86_BUG_FPU_PTRS          X86_BUG( 0) /* (F)X{SAVE,RSTOR} doesn't save/restore FOP/FIP/FDP. */
- #define X86_BUG_NULL_SEG          X86_BUG( 1) /* NULL-ing a selector preserves the base and limit. */
- #define X86_BUG_CLFLUSH_MFENCE    X86_BUG( 2) /* MFENCE needed to serialise CLFLUSH */
-+#define X86_BUG_PBRSB             X86_BUG( 3) /* CPU suffers from Post-Barrier RSB speculation */
- 
- /* Total number of capability words, inc synth and bug words. */
- #define NCAPINTS (FSCAPINTS + X86_NR_SYNTH + X86_NR_BUG) /* N 32-bit words worth of info */
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 160cc68086c6..ffad202200ad 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -35,7 +35,7 @@
- static bool __initdata opt_msr_sc_pv = true;
- static bool __initdata opt_msr_sc_hvm = true;
- static int8_t __initdata opt_rsb_pv = -1;
--static bool __initdata opt_rsb_hvm = true;
-+static int8_t __initdata opt_rsb_hvm = -1;
- static int8_t __ro_after_init opt_md_clear_pv = -1;
- static int8_t __ro_after_init opt_md_clear_hvm = -1;
- 
-@@ -515,7 +515,8 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
-             boot_cpu_has(X86_FEATURE_IBPB_ENTRY_HVM) ||
-             opt_eager_fpu || opt_md_clear_hvm)       ? ""               : " None",
-            boot_cpu_has(X86_FEATURE_SC_MSR_HVM)      ? " MSR_SPEC_CTRL" : "",
--           boot_cpu_has(X86_FEATURE_SC_RSB_HVM)      ? " RSB"           : "",
-+           boot_cpu_has(X86_FEATURE_SC_RSB_HVM)      ? " RSB"           :
-+           boot_cpu_has(X86_BUG_PBRSB)               ? " PBRSB"         : "",
-            opt_eager_fpu                             ? " EAGER_FPU"     : "",
-            opt_md_clear_hvm                          ? " MD_CLEAR"      : "",
-            boot_cpu_has(X86_FEATURE_IBPB_ENTRY_HVM)  ? " IBPB-entry"    : "");
-@@ -718,6 +719,77 @@ static bool __init rsb_is_full_width(void)
-     return true;
- }
- 
-+/*
-+ * HVM guests can create arbitrary RSB entries, including ones which point at
-+ * Xen supervisor mappings.
-+ *
-+ * Traditionally, the RSB is not isolated on vmexit, so Xen needs to take
-+ * safety precautions to prevent RSB speculation from consuming guest values.
-+ *
-+ * Intel eIBRS specifies that the RSB is flushed:
-+ *   1) on VMExit when IBRS=1, or
-+ *   2) shortly thereafter when Xen restores the host IBRS=1 setting.
-+ * However, a subset of eIBRS-capable parts also suffer PBRSB and need
-+ * software assistance to maintain RSB safety.
-+ */
-+static __init enum hvm_rsb {
-+    hvm_rsb_none,
-+    hvm_rsb_pbrsb,
-+    hvm_rsb_stuff32,
-+} hvm_rsb_calculations(uint64_t caps)
-+{
-+    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
-+         boot_cpu_data.x86 != 6 )
-+        return hvm_rsb_stuff32;
-+
-+    if ( !(caps & ARCH_CAPS_IBRS_ALL) )
-+        return hvm_rsb_stuff32;
-+
-+    if ( caps & ARCH_CAPS_PBRSB_NO )
-+        return hvm_rsb_none;
-+
-+    /*
-+     * We're choosing between the eIBRS-capable models which don't enumerate
-+     * PBRSB_NO.  Earlier steppings of some models don't enumerate eIBRS and
-+     * are excluded above.
-+     */
-+    switch ( boot_cpu_data.x86_model )
-+    {
-+        /*
-+         * Core (inc Hybrid) CPUs to date (August 2022) are vulenrable.
-+         */
-+    case 0x55: /* Skylake X */
-+    case 0x6a: /* Ice Lake SP */
-+    case 0x6c: /* Ice Lake D */
-+    case 0x7e: /* Ice Lake client */
-+    case 0x8a: /* Lakefield (SNC/TMT) */
-+    case 0x8c: /* Tiger Lake U */
-+    case 0x8d: /* Tiger Lake H */
-+    case 0x8e: /* Skylake-L */
-+    case 0x97: /* Alder Lake S */
-+    case 0x9a: /* Alder Lake H/P/U */
-+    case 0x9e: /* Skylake */
-+    case 0xa5: /* Comet Lake */
-+    case 0xa6: /* Comet Lake U62 */
-+    case 0xa7: /* Rocket Lake */
-+        return hvm_rsb_pbrsb;
-+
-+        /*
-+         * Atom CPUs are not vulnerable.
-+         */
-+    case 0x7a: /* Gemini Lake */
-+    case 0x86: /* Snow Ridge (Tremont) */
-+    case 0x96: /* Elkhart Lake (Tremont) */
-+    case 0x9c: /* Jasper Lake (Tremont) */
-+        return hvm_rsb_none;
-+
-+    default:
-+        printk("Unrecognised CPU model %#x - using software HVM RSB mitigations\n",
-+               boot_cpu_data.x86_model);
-+        return hvm_rsb_stuff32;
-+    }
-+}
-+
- /* Calculate whether this CPU speculates past #NM */
- static bool __init should_use_eager_fpu(void)
- {
-@@ -1110,6 +1182,7 @@ void spec_ctrl_init_domain(struct domain *d)
- void __init init_speculation_mitigations(void)
- {
-     enum ind_thunk thunk = THUNK_DEFAULT;
-+    enum hvm_rsb hvm_rsb;
-     bool has_spec_ctrl, ibrs = false, hw_smt_enabled;
-     bool cpu_has_bug_taa;
-     uint64_t caps = 0;
-@@ -1327,9 +1400,33 @@ void __init init_speculation_mitigations(void)
-      * HVM guests can always poison the RSB to point at Xen supervisor
-      * mappings.
-      */
-+    hvm_rsb = hvm_rsb_calculations(caps);
-+    if ( opt_rsb_hvm == -1 )
-+        opt_rsb_hvm = hvm_rsb != hvm_rsb_none;
-+
-     if ( opt_rsb_hvm )
-     {
--        setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
-+        switch ( hvm_rsb )
-+        {
-+        case hvm_rsb_pbrsb:
-+            setup_force_cpu_cap(X86_BUG_PBRSB);
-+            break;
-+
-+        case hvm_rsb_none:
-+            /*
-+             * Somewhat arbitrary.  If something is wrong and the user has
-+             * forced HVM RSB protections on a system where we think nothing
-+             * is necessary, they they possibly know something we dont.
-+             *
-+             * Use stuff32 in this case, which is the most protection we can
-+             * muster.
-+             */
-+            fallthrough;
-+
-+        case hvm_rsb_stuff32:
-+            setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
-+            break;
-+        }
- 
-         /*
-          * For SVM, Xen's RSB safety actions are performed before STGI, so
 -- 
 2.11.0
 
