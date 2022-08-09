@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1D6C19F2D
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Aug 2022 17:01:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.383101.618225 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53499C25B0C
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Aug 2022 18:20:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.383123.618237 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLSbc-0004rV-BC; Tue, 09 Aug 2022 17:01:24 +0000
+	id 1oLTpK-0003qE-0D; Tue, 09 Aug 2022 18:19:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 383101.618225; Tue, 09 Aug 2022 17:01:24 +0000
+Received: by outflank-mailman (output) from mailman id 383123.618237; Tue, 09 Aug 2022 18:19:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLSbc-0004rO-8U; Tue, 09 Aug 2022 17:01:24 +0000
-Received: by outflank-mailman (input) for mailman id 383101;
- Tue, 09 Aug 2022 17:01:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=flEI=YN=citrix.com=prvs=213c446d4=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1oLSba-0003x4-Vy
- for xen-devel@lists.xenproject.org; Tue, 09 Aug 2022 17:01:23 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3606ba6-1804-11ed-bd2e-47488cf2e6aa;
- Tue, 09 Aug 2022 19:01:21 +0200 (CEST)
+	id 1oLTpJ-0003q7-Tf; Tue, 09 Aug 2022 18:19:37 +0000
+Received: by outflank-mailman (input) for mailman id 383123;
+ Tue, 09 Aug 2022 18:19:36 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1oLTpI-0003q1-G0
+ for xen-devel@lists.xenproject.org; Tue, 09 Aug 2022 18:19:36 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oLTpI-00056o-5b; Tue, 09 Aug 2022 18:19:36 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=[192.168.14.84]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oLTpH-0005jz-WA; Tue, 09 Aug 2022 18:19:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,129 +41,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3606ba6-1804-11ed-bd2e-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660064481;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=BjsbhCrYHcz6DpzW2qJjo+cMWTneVBzlQHfGChbvUbI=;
-  b=ZJSdRKFWQqNPeVZq28AmH/jeXscioh1+viSI4jMyRDGWB0j1KhHrjA6t
-   GmBluLzaNi3ukchJaN0dc3qFF9FwIsH7AOKweEa9FJN7dUFtaRpjxpG1z
-   rnK/3hTeKmToLioEc0sv2PtJ+NiFpW37bjAE4QCQ18XpGiW5pYPS9ukZq
-   c=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 2.7
-X-MesageID: 80265504
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:b4UPeqwKDmcCgV6YSsd6t+dYxirEfRIJ4+MujC+fZmUNrF6WrkUBm
- GcYXDiAM/jbNzbxKY0kbYTlp0JV7ZKEn4MwGQM5+CAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnj/0bv676yEUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii8tjjMPR7zml4
- LsemOWCfg7+s9JIGjhMsfjb+Es+5K6aVA4w5TTSW9ga5DcyqFFNZH4vDfnZB2f1RIBSAtm7S
- 47rpF1u1jqEl/uFIorNfofTKiXmcJaLVeS9oiM+t5yZqgpDvkQPPpMTb5LwX6v1ZwKhxLidw
- P0V3XC5pJxA0qfkwIzxWDEAe81y0DEvFBYq7hFTvOTKp3AqfUcAzN01C0x1I484oN9aJn9A5
- dU+FHMfVB+q0rfeLLKTEoGAh+wmJcjveogepmth3XfSCvNOrZLrGvuQo4UChXFp254ITa22i
- 8kxMFKDaDzpZRFVN0hRI5U5hOqy3VH0ciFCqULTrq0yi4TW5FwpiuawbYKJEjCMbeFOt0GIi
- HLYwyfoEg4hLP2jxQCd7X3504cjmgukAdlPRdVU7MVCn1m71mEVThoMWjOTg9O0l0q/UNJ3M
- FEP92wlqq1a3FymSJzxUgO1pFaAvwUAQJxAHusi8gaPx6HIpQGDCQA5oiVpMYJ88pVsHHpzi
- wHPz4iB6SFTXKO9EnWQtamWjWmLFA8LI38rQxNHXzEKyoy2yG0stS4jXuqPAYbs0IOtQWion
- m7TxMQtr+5N1JBWjs1X6XiC2mvx/caRE2bZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/5nzvp5pyBWG3TZS82AJrlxBAUKLc4FK+y1ZL0x0KMsCcjKBS
- BaN5FIAtMQDZST7M/cfj2eN5yMCnMDd+SnNDKiIPrKinLAoHON4wM2eTRHJhD28+KTduao+J
- Y2aYa6RMJruMow+lWLeb7pMjtcWKtUWnzy7qWbTk0v6itJzpRe9Fd84Dbd5Rrlis/3Z/lmNr
- r6y9aKikn1ibQE3WQGPmaZ7ELzABShT6UzewyCPStO+Hw==
-IronPort-HdrOrdr: A9a23:Sr5hZ6myQ8GBnryv3UkCa9jHLi7pDfIW3DAbv31ZSRFFG/Fxl6
- iV/cjzsiWE8Ar5OUtQ4OxoV5PwIk80maQb3WBVB8bHYOCEghrPEGgB1/qB/9SIIUSXnYQxuZ
- uIMZIOb+EYZWIK9voSizPZLz9P+re6GdiT9ILj80s=
-X-IronPort-AV: E=Sophos;i="5.93,225,1654574400"; 
-   d="scan'208";a="80265504"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] x86/spec-ctrl: Enumeration for PBRSB_NO
-Date: Tue, 9 Aug 2022 18:00:15 +0100
-Message-ID: <20220809170016.25148-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220809170016.25148-1-andrew.cooper3@citrix.com>
-References: <20220809170016.25148-1-andrew.cooper3@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=50cTcQN9kQWrwNQ7hdY31jwdICssF8lJSJBZGSkq80U=; b=RwfYEAQ+OA8JHpVTKtEezs04L6
+	NmU7nygMpC+Qnot/cycW6W7cCEmkBVSQQYOwvSiwWQQRfpv4yXepgPfT1OS0/9UsKmLkVS2zxqtId
+	CZ3uywi9hH5NTQkrRDRF8KHriqBn7QTpLisCkWiBkRF8QhQbklnjqZpxliMAQTl7iu3w=;
+Message-ID: <0f1e12d0-1c58-8457-b3ff-26048f46430a@xen.org>
+Date: Tue, 9 Aug 2022 19:19:34 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.1.0
+Subject: Re: [PATCH] xen/arm: smmuv1: Set s2cr to type fault when the devices
+ are deassigned
+Content-Language: en-US
+To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <5650ddce1de4fd5471823bde44a12a03f157bc11.1659713913.git.rahul.singh@arm.com>
+ <e6a8807af0832db752d735e4f9ebddaa6bbd7c12.1659713886.git.rahul.singh@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <e6a8807af0832db752d735e4f9ebddaa6bbd7c12.1659713886.git.rahul.singh@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The PBRSB_NO bit indicates that the CPU is not vulnerable to the Post-Barrier
-RSB speculative vulnerability.
+Hi Rahul,
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/include/asm/msr-index.h | 1 +
- xen/arch/x86/msr.c                   | 5 +++--
- xen/arch/x86/spec_ctrl.c             | 3 ++-
- 3 files changed, 6 insertions(+), 3 deletions(-)
+title: The driver is for both smmuv1 and v2. Are you suggesting the 
+issue only occurs on v1?
 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 1a928ea6af2f..0a8852f3c246 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -84,6 +84,7 @@
- #define  ARCH_CAPS_FB_CLEAR_CTRL            (_AC(1, ULL) << 18)
- #define  ARCH_CAPS_RRSBA                    (_AC(1, ULL) << 19)
- #define  ARCH_CAPS_BHI_NO                   (_AC(1, ULL) << 20)
-+#define  ARCH_CAPS_PBRSB_NO                 (_AC(1, ULL) << 24)
- 
- #define MSR_FLUSH_CMD                       0x0000010b
- #define  FLUSH_CMD_L1D                      (_AC(1, ULL) <<  0)
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 170f04179347..d2e2dc2a6b91 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -74,7 +74,8 @@ static void __init calculate_host_policy(void)
-          ARCH_CAPS_SKIP_L1DFL | ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO |
-          ARCH_CAPS_IF_PSCHANGE_MC_NO | ARCH_CAPS_TSX_CTRL | ARCH_CAPS_TAA_NO |
-          ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO | ARCH_CAPS_PSDP_NO |
--         ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA | ARCH_CAPS_BHI_NO);
-+         ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA | ARCH_CAPS_BHI_NO |
-+         ARCH_CAPS_PBRSB_NO);
- }
- 
- static void __init calculate_pv_max_policy(void)
-@@ -166,7 +167,7 @@ int init_domain_msr_policy(struct domain *d)
-              ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO | ARCH_CAPS_IF_PSCHANGE_MC_NO |
-              ARCH_CAPS_TAA_NO | ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO |
-              ARCH_CAPS_PSDP_NO | ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA |
--             ARCH_CAPS_BHI_NO);
-+             ARCH_CAPS_BHI_NO | ARCH_CAPS_PBRSB_NO);
-     }
- 
-     d->arch.msr = mp;
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index d2cd5459739f..160cc68086c6 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -419,7 +419,7 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
-      * Hardware read-only information, stating immunity to certain issues, or
-      * suggestions of which mitigation to use.
-      */
--    printk("  Hardware hints:%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
-+    printk("  Hardware hints:%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
-            (caps & ARCH_CAPS_RDCL_NO)                        ? " RDCL_NO"        : "",
-            (caps & ARCH_CAPS_IBRS_ALL)                       ? " IBRS_ALL"       : "",
-            (caps & ARCH_CAPS_RSBA)                           ? " RSBA"           : "",
-@@ -431,6 +431,7 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
-            (caps & ARCH_CAPS_SBDR_SSDP_NO)                   ? " SBDR_SSDP_NO"   : "",
-            (caps & ARCH_CAPS_FBSDP_NO)                       ? " FBSDP_NO"       : "",
-            (caps & ARCH_CAPS_PSDP_NO)                        ? " PSDP_NO"        : "",
-+           (caps & ARCH_CAPS_PBRSB_NO)                       ? " PBRSB_NO"       : "",
-            (e8b  & cpufeat_mask(X86_FEATURE_IBRS_ALWAYS))    ? " IBRS_ALWAYS"    : "",
-            (e8b  & cpufeat_mask(X86_FEATURE_STIBP_ALWAYS))   ? " STIBP_ALWAYS"   : "",
-            (e8b  & cpufeat_mask(X86_FEATURE_IBRS_FAST))      ? " IBRS_FAST"      : "",
+On 05/08/2022 16:43, Rahul Singh wrote:
+> When devices are deassigned/assigned, SMMU global fault is observed
+> because SMEs are freed in detach function and not allocated again when
+> the device is assigned back to the guest.
+> 
+> Don't free the SMEs when devices are deassigned, set the s2cr to type
+> fault. This way the SMMU will generate a fault if a DMA access is done
+> by a device not assigned to a guest
+> 
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+
+AFAICT, this is fixing 0435784cc75d ("xen/arm: smmuv1: Intelligent SMR 
+allocation"). If I am correct, can you add a Fixes tag?
+
+> ---
+>   xen/drivers/passthrough/arm/smmu.c | 32 +++++++++++++++---------------
+>   1 file changed, 16 insertions(+), 16 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+> index 69511683b4..141948decd 100644
+> --- a/xen/drivers/passthrough/arm/smmu.c
+> +++ b/xen/drivers/passthrough/arm/smmu.c
+> @@ -1598,21 +1598,6 @@ out_err:
+>   	return ret;
+>   }
+>   
+> -static void arm_smmu_master_free_smes(struct arm_smmu_master_cfg *cfg)
+
+IIUC, the function needs to be moved because you need to use 
+arm_smmu_write_s2cr(). If so, I would suggest to mention in the commit 
+message because at first it seems unwarranted.
+
+> -{
+> -    struct arm_smmu_device *smmu = cfg->smmu;
+> -	int i, idx;
+> -	struct iommu_fwspec *fwspec = arm_smmu_get_fwspec(cfg);
+> -
+> -	spin_lock(&smmu->stream_map_lock);
+> -	for_each_cfg_sme(cfg, i, idx, fwspec->num_ids) {
+> -		if (arm_smmu_free_sme(smmu, idx))
+> -			arm_smmu_write_sme(smmu, idx);
+> -		cfg->smendx[i] = INVALID_SMENDX;
+> -	}
+> -	spin_unlock(&smmu->stream_map_lock);
+> -}
+> -
+>   static int arm_smmu_domain_add_master(struct arm_smmu_domain *smmu_domain,
+>   				      struct arm_smmu_master_cfg *cfg)
+>   {
+> @@ -1635,6 +1620,20 @@ static int arm_smmu_domain_add_master(struct arm_smmu_domain *smmu_domain,
+>   	return 0;
+>   }
+>   
+> +static void arm_smmu_domain_remove_master(struct arm_smmu_domain *smmu_domain,
+> +				      struct arm_smmu_master_cfg *cfg)
+> +{
+> +	int i, idx;
+
+NIT: I would suggest to take the opportunity to switch to "unsigned int" 
+and ...
+
+> +	struct arm_smmu_device *smmu = smmu_domain->smmu;
+> +	struct arm_smmu_s2cr *s2cr = smmu->s2crs;
+> +	struct iommu_fwspec *fwspec = arm_smmu_get_fwspec(cfg);
+
+... use const here. "cfg" and "smmu" can't be consistent but 
+"smmu_domain" technically could (thanks to how C works). That said, I 
+quite dislike it as the code ends up to be confusing...
+
+> +
+> +	for_each_cfg_sme(cfg, i, idx, fwspec->num_ids) {
+> +		s2cr[idx] = s2cr_init_val;
+> +		arm_smmu_write_s2cr(smmu, idx);
+> +	}
+> +}
+> +
+>   static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
+>   {
+>   	int ret;
+> @@ -1684,10 +1683,11 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
+>   
+>   static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
+>   {
+> +	struct arm_smmu_domain *smmu_domain = domain->priv;
+>   	struct arm_smmu_master_cfg *cfg = find_smmu_master_cfg(dev);
+>   
+>   	if (cfg)
+> -		arm_smmu_master_free_smes(cfg);
+> +		return arm_smmu_domain_remove_master(smmu_domain, cfg);
+
+Why are you using adding a 'return' here?
+
+Cheers,
+
 -- 
-2.11.0
-
+Julien Grall
 
