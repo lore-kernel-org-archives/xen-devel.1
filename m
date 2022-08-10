@@ -4,39 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A33EC00140
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Aug 2022 05:08:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.383323.618475 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B33FC00140
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Aug 2022 05:37:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.383371.618537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLdwT-0005BS-D8; Wed, 10 Aug 2022 05:07:41 +0000
+	id 1oLeOi-0002QP-3R; Wed, 10 Aug 2022 05:36:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 383323.618475; Wed, 10 Aug 2022 05:07:41 +0000
+Received: by outflank-mailman (output) from mailman id 383371.618537; Wed, 10 Aug 2022 05:36:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLdwT-0005BL-Aa; Wed, 10 Aug 2022 05:07:41 +0000
-Received: by outflank-mailman (input) for mailman id 383323;
- Wed, 10 Aug 2022 05:07:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CIQX=YO=gmail.com=lukas.bulwahn@srs-se1.protection.inumbo.net>)
- id 1oLdwR-0005BF-Vk
- for xen-devel@lists.xenproject.org; Wed, 10 Aug 2022 05:07:40 +0000
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [2a00:1450:4864:20::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a656361-186a-11ed-924f-1f966e50362f;
- Wed, 10 Aug 2022 07:07:38 +0200 (CEST)
-Received: by mail-ej1-x62a.google.com with SMTP id tl27so25720871ejc.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 Aug 2022 22:07:38 -0700 (PDT)
-Received: from felia.fritz.box
- (200116b826504800504e9aff21bf95aa.dip.versatel-1u1.de.
- [2001:16b8:2650:4800:504e:9aff:21bf:95aa])
- by smtp.gmail.com with ESMTPSA id
- ew12-20020a056402538c00b0043bbbaa323dsm7009781edb.0.2022.08.09.22.07.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Aug 2022 22:07:37 -0700 (PDT)
+	id 1oLeOi-0002QI-0V; Wed, 10 Aug 2022 05:36:52 +0000
+Received: by outflank-mailman (input) for mailman id 383371;
+ Wed, 10 Aug 2022 05:36:50 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oLeOg-0002Q8-Nm; Wed, 10 Aug 2022 05:36:50 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oLeOg-0001C5-LK; Wed, 10 Aug 2022 05:36:50 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oLeOg-0006r2-84; Wed, 10 Aug 2022 05:36:50 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1oLeOg-0002Ts-7Z; Wed, 10 Aug 2022 05:36:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,76 +44,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a656361-186a-11ed-924f-1f966e50362f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:subject:cc:to:from:from:to:cc;
-        bh=VbxQoe6fQMjbmMOpKGDHrB2IUNlWA7xE7c6RSpLy3Nw=;
-        b=IC7qDwj3uhTT/tFcQhX0fl7EMLGTEXGn5oBMYiSuK2Mlf8TK/1vbV1vtnOGgnf5dt7
-         PIW9KtfwJjkiVzT2qnmm15x0hvLxc6edoBw+yw5XxQxy4MrmKwkDrJOUsAnLN6qi8Lvh
-         ygKmYs2LsXBhzP8VN0k6HSklP9GJHeSfjUveBAgL08trFsbKIp6pF4zuqiZtwQv1nR/M
-         7XcLqDPUUv8/2hZbHDr+HiMz6NuhWE0aOGU9j3BZpwlgoWlFTZOrxvUeyk+wG88l0PFx
-         8emfmV2xOpJa7WgWKj5xHL46rWQF4LBpc3wKzDezENR+Mwwb4q5rH6crmhQAdYfr8GLZ
-         1dQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=VbxQoe6fQMjbmMOpKGDHrB2IUNlWA7xE7c6RSpLy3Nw=;
-        b=XyOZI/oJpXhPJz0fy0X+i2fpMY8hjODtw5vFS2ObbUnFgGBOwCcfb3xqaA0L5sV4Jk
-         Nuhunx7lGMNEL4JAd6OsH4Eqjx27E3ue7GHJF+al4U+Hywt4tEGr0eUamt5NfMoS9Nm1
-         CjWEFmneBcJFtu8vL/ycZ7Wa19/pV6J9VMvmScKER4fndW8EsapNkYBBNeNZe1ckwSD1
-         yWtVvMAy6iNCUJsVVXTHj7mywQzugd+u1VF64aFWe63pGpIzE84j4+tlzZazZCknaaP1
-         jMQSDIUqzKH1UOoFvfXzettmdSMob0e0djlpXZCwO2+u/94nGRhACcPLBbIgYoJwYmRF
-         JIuQ==
-X-Gm-Message-State: ACgBeo0/mKB2lVDvA87M+djgeVLu2Ul3uvG0qiZ321JjVCbsxyQxVlfb
-	apMimaHjp1J/ejHOtN0Uovo=
-X-Google-Smtp-Source: AA6agR4Ilc9Mmk6bCf71q9Y4U7vONUnnGKet9rfY352UzgsL/7b2MdbpGf+DD7cnLyWAO/IqoW1hNA==
-X-Received: by 2002:a17:907:608b:b0:731:8a9d:5a2d with SMTP id ht11-20020a170907608b00b007318a9d5a2dmr5099609ejc.443.1660108057768;
-        Tue, 09 Aug 2022 22:07:37 -0700 (PDT)
-From: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org
-Cc: Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	kernel-janitors@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Subject: [PATCH 0/4] update the xen config fragments
-Date: Wed, 10 Aug 2022 07:07:08 +0200
-Message-Id: <20220810050712.9539-1-lukas.bulwahn@gmail.com>
-X-Mailer: git-send-email 2.17.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=v7B+gIKPI2V4SxXiXaZsDb0BpyDTAXuru1VBy1j8iag=; b=yB4zjcsYOvcmSl30AXymlPwcoq
+	vDyZiMXzieu8oXDX7zsR8u8LBrlj+pDRvwL/5oqT9Pz4vOBx3LkHZBCSyxu3AK8DaDncIUM6RTba2
+	87Qb4r4O3S1eHEn0bKebnDW2alEjUaamtOd5QlsvywTBezvdWa/nvxp3OPT/YkEDuRh4=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-172346-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 172346: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64-libvirt:libvirt-build:fail:regression
+    ovmf:build-i386-libvirt:libvirt-build:fail:regression
+X-Osstest-Versions-This:
+    ovmf=e9e2ecab2d931069d5f9afaae313e09d42bee6e9
+X-Osstest-Versions-That:
+    ovmf=444260d45ec2a84e8f8c192b3539a3cd5591d009
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 10 Aug 2022 05:36:50 +0000
 
-Dear xen maintainers,
+flight 172346 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/172346/
 
-here are three patches to update the xen config fragments to the currently
-existing configs.
+Regressions :-(
 
-The fourth patch is just an addition to MAINTAINERS that I saw reasonable
-after get_maintainers did not point to the XEN subsystem.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 172136
+ build-i386-libvirt            6 libvirt-build            fail REGR. vs. 172136
 
-It applies cleanly on next-20220810.
+version targeted for testing:
+ ovmf                 e9e2ecab2d931069d5f9afaae313e09d42bee6e9
+baseline version:
+ ovmf                 444260d45ec2a84e8f8c192b3539a3cd5591d009
 
-Lukas
+Last test of basis   172136  2022-08-04 06:43:42 Z    5 days
+Failing since        172151  2022-08-05 02:40:28 Z    5 days   50 attempts
+Testing same since   172322  2022-08-09 08:10:24 Z    0 days    9 attempts
 
-Lukas Bulwahn (4):
-  xen: x86: set the config XEN_512GB after config change
-  xen: remove XEN_SCRUB_PAGES in xen.config
-  xen: move XEN_BALLOON_MEMORY_HOTPLUG to generic config
-  MAINTAINERS: add xen config fragments to XEN HYPERVISOR sections
+------------------------------------------------------------
+People who touched revisions under test:
+  Czajkowski, Maciej <maciej.czajkowski@intel.com>
+  Edward Pickup <edward.pickup@arm.com>
+  Jose Marinho <jose.marinho@arm.com>
+  Konstantin Aladyshev <aladyshev22@gmail.com>
+  Liu, Zhiguang <Zhiguang.Liu@intel.com>
+  Maciej Czajkowski <maciej.czajkowski@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Zhiguang Liu <zhiguang.liu@intel.com>
 
- MAINTAINERS                 | 2 ++
- arch/x86/configs/xen.config | 5 +----
- kernel/configs/xen.config   | 2 +-
- 3 files changed, 4 insertions(+), 5 deletions(-)
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          fail    
+ build-i386-libvirt                                           fail    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
--- 
-2.17.1
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 492 lines long.)
 
