@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1443CC3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845C1C2BB41
 	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 08:05:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.383694.619551 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.383699.619564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oM3C8-0004h0-T5; Thu, 11 Aug 2022 08:05:32 +0000
+	id 1oM3C9-0004wj-Jv; Thu, 11 Aug 2022 08:05:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 383694.619551; Thu, 11 Aug 2022 08:05:32 +0000
+Received: by outflank-mailman (output) from mailman id 383699.619564; Thu, 11 Aug 2022 08:05:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oM3C8-0004fU-NU; Thu, 11 Aug 2022 08:05:32 +0000
-Received: by outflank-mailman (input) for mailman id 383694;
- Wed, 10 Aug 2022 15:51:40 +0000
+	id 1oM3C9-0004sw-D4; Thu, 11 Aug 2022 08:05:33 +0000
+Received: by outflank-mailman (input) for mailman id 383699;
+ Wed, 10 Aug 2022 15:51:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eIlE=YO=gmail.com=asml.silence@srs-se1.protection.inumbo.net>)
- id 1oLnzg-00016q-6c
- for xen-devel@lists.xenproject.org; Wed, 10 Aug 2022 15:51:40 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
+ id 1oLnzj-00016q-8T
+ for xen-devel@lists.xenproject.org; Wed, 10 Aug 2022 15:51:43 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5259254d-18c4-11ed-bd2e-47488cf2e6aa;
- Wed, 10 Aug 2022 17:51:39 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id p10so18205183wru.8
- for <xen-devel@lists.xenproject.org>; Wed, 10 Aug 2022 08:51:39 -0700 (PDT)
+ id 541ecaca-18c4-11ed-bd2e-47488cf2e6aa;
+ Wed, 10 Aug 2022 17:51:42 +0200 (CEST)
+Received: by mail-wr1-x435.google.com with SMTP id n4so16465056wrp.10
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Aug 2022 08:51:42 -0700 (PDT)
 Received: from 127.0.0.1localhost (188.28.126.24.threembb.co.uk.
  [188.28.126.24]) by smtp.gmail.com with ESMTPSA id
- ay1-20020a05600c1e0100b003a342933727sm3004519wmb.3.2022.08.10.08.51.37
+ ay1-20020a05600c1e0100b003a342933727sm3004519wmb.3.2022.08.10.08.51.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Aug 2022 08:51:38 -0700 (PDT)
+ Wed, 10 Aug 2022 08:51:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5259254d-18c4-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 541ecaca-18c4-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=RS63Hb0HKwQLj+yY8E+g8nWuxDYTXWs65j0+OKPH1OE=;
-        b=ZQdOMbpO/VHyANe5mleak9CanXYG2CBuqoaXodVPqSxfN0jYX3Wpv/vcb6iubMBW1u
-         4Ble+mSyTPc7xm8K/FN13yhEm7K3hDV1my/RtaOdys3+jH8lzdROVrs3yday1zidVe+x
-         bMEKgzVG6yfs6m4/lp21crX1YCY0qdX1LO/SN3r1GTpQB97R7NYdjhtr4vcyw0X1MhlZ
-         Rsr3NqzS5od350DfBp0/rWIgXTPVwoJA57tT5sN5ssmtZG7YNPmWvIuqmqqLbLD3mFiz
-         LM3JoK9cwamnuJVbkAxMoi+VNXdtwhLPXE2PCWt/23HgKhwIUuswHMgcOCy1QLV1mNAn
-         Xu2w==
+        bh=k7b9egffbhRjX5/OjtOx/by90hRcurZmtiI07zTQ9r0=;
+        b=DO5S08zBi3vihZLd+TPnKuLvUBVq1/APvJ0DNR/ZVpJjz4DlQk8pVoCf++lDJQ+qCe
+         J5GiO2q7rRcXgkXHqvH+Xa7gnatlgZJV5TwqmNquXIn+gL91mG56ATFSsq9BpXpc7zr0
+         /1S04KGFgf42+WhssmeRXUhlovG5xP8Cx3T/uzDl82B5aLUk0pPU9HQVxh+wNlScY3LK
+         CgQH74Kc4vSw87U7lXPsLH2C2ORUZZBxNzu/uVo2SSLsJLJNwcM+/ACew/XMVXYxRLdn
+         VTO2yH9kAmRsQtleJsYuYUQbcBz0OVWz31KhDO6+31seXNLpFkbd/CzwI333S10XzntZ
+         GzzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=RS63Hb0HKwQLj+yY8E+g8nWuxDYTXWs65j0+OKPH1OE=;
-        b=Gr4KgvZMRV0/TgpcKcSPSZCBFXb/9Jbbn7b7AFXStaS7USHY2W6eD3SwJ8rKqENqKq
-         4oUwNrYY1RJ3kK6osWpfXqQChcE89Flq/2XZkIntU4TUwmeBZbikkVaHwHYHcKHT7pzb
-         bP1Np8kF1kbfWkyIk+VgagaRg1JGRAC+h2/zVMxFdMcmXq4GNj5NGN0mfevvRV4Yrixm
-         DsRsmaKX9JsmvcpJVpdxqXXYhGj5v+tXIEmKBzRIfGL0YuQM0PfOihK5F7a+xGopI1m8
-         SwDTXinAbE0Nn/40XcYhHnV+4SQz+2ocAl72M+rU2s2hjmpLzLd33LVzFAka6Gf5hxUI
-         RhkA==
-X-Gm-Message-State: ACgBeo2h4bASfGJXdn4j8p3eflTRwDQXRH+e7Mw0Jaq6mrE1PRJuqTid
-	trHk0AAi0e5aNLbJy5fj6AQ=
-X-Google-Smtp-Source: AA6agR4m7a1ZpBafnXxHxc3Qgb+mIUi9eJAFTWTIHDXvxrcaOuXHorpWp86zCAS5S/bxu6e6MTh00Q==
-X-Received: by 2002:a5d:64aa:0:b0:21e:be27:6dfb with SMTP id m10-20020a5d64aa000000b0021ebe276dfbmr18180217wrp.456.1660146698952;
-        Wed, 10 Aug 2022 08:51:38 -0700 (PDT)
+        bh=k7b9egffbhRjX5/OjtOx/by90hRcurZmtiI07zTQ9r0=;
+        b=AdwYvUhrPJImmIpqUfsocOuARRDqwfyvRtRncLpbURVVdKOZLNq9N5ezLo0959NMLs
+         0ozbQamR9jbCuqHCfvZijusXUUVeW2DkQM/kD9UNs8N+o614rOWUeAHb5WnmbqR4Romi
+         igyZwOsG0a1rfEd8hl27uZ5dJUezxT92c2AYZ2vjHk+wOOKHLIn3EvEqYiUpNIpwjdOK
+         M4fB64sSf5MqdMwYKQBVdiawTMnwYVX0JPh8vY/vLQbOMBTxLuNUBET83/eJCRbv9fZK
+         JguvxSGFLaI2esAetCw44+N4lgCxL3fopxdxGW8DO6HKL6tvAP94Qq+cmO07L3Qup5UF
+         pwuQ==
+X-Gm-Message-State: ACgBeo0zFu5Hj2c1tFt37Ws+mF33dkLqWk+FMCqsp292xDKgI9lEjEaa
+	xi4TEYxPPLY9OriLvHdeyQ8=
+X-Google-Smtp-Source: AA6agR6suRfvAaYpMQRv+C0nU04QPftK1r02sWI7OLgKf0C0mEfWd53MX+qfOk7MeFvdNRw94olKdA==
+X-Received: by 2002:adf:db8f:0:b0:220:6059:5284 with SMTP id u15-20020adfdb8f000000b0022060595284mr18041360wri.33.1660146701918;
+        Wed, 10 Aug 2022 08:51:41 -0700 (PDT)
 From: Pavel Begunkov <asml.silence@gmail.com>
 To: io-uring@vger.kernel.org,
 	netdev@vger.kernel.org
@@ -90,88 +90,219 @@ Cc: Jens Axboe <axboe@kernel.dk>,
 	"Michael S . Tsirkin" <mst@redhat.com>,
 	Jason Wang <jasowang@redhat.com>,
 	Pavel Begunkov <asml.silence@gmail.com>
-Subject: [RFC net-next io_uring 02/11] xen/netback: use struct ubuf_info_msgzc
-Date: Wed, 10 Aug 2022 16:49:10 +0100
-Message-Id: <9d13d0d17d672ce55a3d5cfd06d5c521270a7d4d.1660124059.git.asml.silence@gmail.com>
+Subject: [RFC net-next io_uring 04/11] net: shrink struct ubuf_info
+Date: Wed, 10 Aug 2022 16:49:12 +0100
+Message-Id: <1e2d0bef44cd68b0e3dd106283f4536645c2a124.1660124059.git.asml.silence@gmail.com>
 X-Mailer: git-send-email 2.37.0
 In-Reply-To: <cover.1660124059.git.asml.silence@gmail.com>
 References: <cover.1660124059.git.asml.silence@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-struct ubuf_info will be changed, use ubuf_info_msgzc instead.
+We can benefit from a smaller struct ubuf_info, so leave only mandatory
+fields and let users to decide how they want to extend it. Convert
+MSG_ZEROCOPY to struct ubuf_info_msgzc and remove duplicated fields.
+This reduces the size from 48 bytes to just 16.
 
 Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
 ---
- drivers/net/xen-netback/common.h    | 2 +-
- drivers/net/xen-netback/interface.c | 4 ++--
- drivers/net/xen-netback/netback.c   | 7 ++++---
- 3 files changed, 7 insertions(+), 6 deletions(-)
+ include/linux/skbuff.h | 22 ++++------------------
+ net/core/skbuff.c      | 38 +++++++++++++++++++++-----------------
+ net/ipv4/ip_output.c   |  2 +-
+ net/ipv4/tcp.c         |  2 +-
+ net/ipv6/ip6_output.c  |  2 +-
+ 5 files changed, 28 insertions(+), 38 deletions(-)
 
-diff --git a/drivers/net/xen-netback/common.h b/drivers/net/xen-netback/common.h
-index 8174d7b2966c..1545cbee77a4 100644
---- a/drivers/net/xen-netback/common.h
-+++ b/drivers/net/xen-netback/common.h
-@@ -62,7 +62,7 @@ struct pending_tx_info {
- 	 * ubuf_to_vif is a helper which finds the struct xenvif from a pointer
- 	 * to this field.
- 	 */
--	struct ubuf_info callback_struct;
-+	struct ubuf_info_msgzc callback_struct;
+diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
+index f8ac3678dab8..afd7400d7f62 100644
+--- a/include/linux/skbuff.h
++++ b/include/linux/skbuff.h
+@@ -533,25 +533,8 @@ enum {
+ struct ubuf_info {
+ 	void (*callback)(struct sk_buff *, struct ubuf_info *,
+ 			 bool zerocopy_success);
+-	union {
+-		struct {
+-			unsigned long desc;
+-			void *ctx;
+-		};
+-		struct {
+-			u32 id;
+-			u16 len;
+-			u16 zerocopy:1;
+-			u32 bytelen;
+-		};
+-	};
+ 	refcount_t refcnt;
+ 	u8 flags;
+-
+-	struct mmpin {
+-		struct user_struct *user;
+-		unsigned int num_pg;
+-	} mmp;
  };
  
- #define XEN_NETIF_TX_RING_SIZE __CONST_RING_SIZE(xen_netif_tx, XEN_PAGE_SIZE)
-diff --git a/drivers/net/xen-netback/interface.c b/drivers/net/xen-netback/interface.c
-index fb32ae82d9b0..e579ecd40b74 100644
---- a/drivers/net/xen-netback/interface.c
-+++ b/drivers/net/xen-netback/interface.c
-@@ -591,8 +591,8 @@ int xenvif_init_queue(struct xenvif_queue *queue)
+ struct ubuf_info_msgzc {
+@@ -570,7 +553,10 @@ struct ubuf_info_msgzc {
+ 		};
+ 	};
+ 
+-	struct mmpin mmp;
++	struct mmpin {
++		struct user_struct *user;
++		unsigned int num_pg;
++	} mmp;
+ };
+ 
+ #define skb_uarg(SKB)	((struct ubuf_info *)(skb_shinfo(SKB)->destructor_arg))
+diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+index 974bbbbe7138..b047a773acd7 100644
+--- a/net/core/skbuff.c
++++ b/net/core/skbuff.c
+@@ -1183,7 +1183,7 @@ EXPORT_SYMBOL_GPL(mm_unaccount_pinned_pages);
+ 
+ static struct ubuf_info *msg_zerocopy_alloc(struct sock *sk, size_t size)
+ {
+-	struct ubuf_info *uarg;
++	struct ubuf_info_msgzc *uarg;
+ 	struct sk_buff *skb;
+ 
+ 	WARN_ON_ONCE(!in_task());
+@@ -1201,19 +1201,19 @@ static struct ubuf_info *msg_zerocopy_alloc(struct sock *sk, size_t size)
+ 		return NULL;
  	}
  
- 	for (i = 0; i < MAX_PENDING_REQS; i++) {
--		queue->pending_tx_info[i].callback_struct = (struct ubuf_info)
--			{ .callback = xenvif_zerocopy_callback,
-+		queue->pending_tx_info[i].callback_struct = (struct ubuf_info_msgzc)
-+			{ { .callback = xenvif_zerocopy_callback },
- 			  { { .ctx = NULL,
- 			      .desc = i } } };
- 		queue->grant_tx_handle[i] = NETBACK_INVALID_HANDLE;
-diff --git a/drivers/net/xen-netback/netback.c b/drivers/net/xen-netback/netback.c
-index a256695fc89e..3d2081bbbc86 100644
---- a/drivers/net/xen-netback/netback.c
-+++ b/drivers/net/xen-netback/netback.c
-@@ -133,7 +133,7 @@ static inline unsigned long idx_to_kaddr(struct xenvif_queue *queue,
+-	uarg->callback = msg_zerocopy_callback;
++	uarg->ubuf.callback = msg_zerocopy_callback;
+ 	uarg->id = ((u32)atomic_inc_return(&sk->sk_zckey)) - 1;
+ 	uarg->len = 1;
+ 	uarg->bytelen = size;
+ 	uarg->zerocopy = 1;
+-	uarg->flags = SKBFL_ZEROCOPY_FRAG | SKBFL_DONT_ORPHAN;
+-	refcount_set(&uarg->refcnt, 1);
++	uarg->ubuf.flags = SKBFL_ZEROCOPY_FRAG | SKBFL_DONT_ORPHAN;
++	refcount_set(&uarg->ubuf.refcnt, 1);
+ 	sock_hold(sk);
  
- /* Find the containing VIF's structure from a pointer in pending_tx_info array
-  */
--static inline struct xenvif_queue *ubuf_to_queue(const struct ubuf_info *ubuf)
-+static inline struct xenvif_queue *ubuf_to_queue(const struct ubuf_info_msgzc *ubuf)
- {
- 	u16 pending_idx = ubuf->desc;
- 	struct pending_tx_info *temp =
-@@ -1228,11 +1228,12 @@ static int xenvif_tx_submit(struct xenvif_queue *queue)
- 	return work_done;
+-	return uarg;
++	return &uarg->ubuf;
  }
  
--void xenvif_zerocopy_callback(struct sk_buff *skb, struct ubuf_info *ubuf,
-+void xenvif_zerocopy_callback(struct sk_buff *skb, struct ubuf_info *ubuf_base,
- 			      bool zerocopy_success)
+-static inline struct sk_buff *skb_from_uarg(struct ubuf_info *uarg)
++static inline struct sk_buff *skb_from_uarg(struct ubuf_info_msgzc *uarg)
  {
- 	unsigned long flags;
- 	pending_ring_idx_t index;
-+	struct ubuf_info_msgzc *ubuf = uarg_to_msgzc(ubuf_base);
- 	struct xenvif_queue *queue = ubuf_to_queue(ubuf);
+ 	return container_of((void *)uarg, struct sk_buff, cb);
+ }
+@@ -1222,6 +1222,7 @@ struct ubuf_info *msg_zerocopy_realloc(struct sock *sk, size_t size,
+ 				       struct ubuf_info *uarg)
+ {
+ 	if (uarg) {
++		struct ubuf_info_msgzc *uarg_zc;
+ 		const u32 byte_limit = 1 << 19;		/* limit to a few TSO */
+ 		u32 bytelen, next;
  
- 	/* This is the only place where we grab this lock, to protect callbacks
-@@ -1241,7 +1242,7 @@ void xenvif_zerocopy_callback(struct sk_buff *skb, struct ubuf_info *ubuf,
- 	spin_lock_irqsave(&queue->callback_lock, flags);
- 	do {
- 		u16 pending_idx = ubuf->desc;
--		ubuf = (struct ubuf_info *) ubuf->ctx;
-+		ubuf = (struct ubuf_info_msgzc *) ubuf->ctx;
- 		BUG_ON(queue->dealloc_prod - queue->dealloc_cons >=
- 			MAX_PENDING_REQS);
- 		index = pending_index(queue->dealloc_prod);
+@@ -1237,8 +1238,9 @@ struct ubuf_info *msg_zerocopy_realloc(struct sock *sk, size_t size,
+ 			return NULL;
+ 		}
+ 
+-		bytelen = uarg->bytelen + size;
+-		if (uarg->len == USHRT_MAX - 1 || bytelen > byte_limit) {
++		uarg_zc = uarg_to_msgzc(uarg);
++		bytelen = uarg_zc->bytelen + size;
++		if (uarg_zc->len == USHRT_MAX - 1 || bytelen > byte_limit) {
+ 			/* TCP can create new skb to attach new uarg */
+ 			if (sk->sk_type == SOCK_STREAM)
+ 				goto new_alloc;
+@@ -1246,11 +1248,11 @@ struct ubuf_info *msg_zerocopy_realloc(struct sock *sk, size_t size,
+ 		}
+ 
+ 		next = (u32)atomic_read(&sk->sk_zckey);
+-		if ((u32)(uarg->id + uarg->len) == next) {
+-			if (mm_account_pinned_pages(&uarg->mmp, size))
++		if ((u32)(uarg_zc->id + uarg_zc->len) == next) {
++			if (mm_account_pinned_pages(&uarg_zc->mmp, size))
+ 				return NULL;
+-			uarg->len++;
+-			uarg->bytelen = bytelen;
++			uarg_zc->len++;
++			uarg_zc->bytelen = bytelen;
+ 			atomic_set(&sk->sk_zckey, ++next);
+ 
+ 			/* no extra ref when appending to datagram (MSG_MORE) */
+@@ -1286,7 +1288,7 @@ static bool skb_zerocopy_notify_extend(struct sk_buff *skb, u32 lo, u16 len)
+ 	return true;
+ }
+ 
+-static void __msg_zerocopy_callback(struct ubuf_info *uarg)
++static void __msg_zerocopy_callback(struct ubuf_info_msgzc *uarg)
+ {
+ 	struct sk_buff *tail, *skb = skb_from_uarg(uarg);
+ 	struct sock_exterr_skb *serr;
+@@ -1339,19 +1341,21 @@ static void __msg_zerocopy_callback(struct ubuf_info *uarg)
+ void msg_zerocopy_callback(struct sk_buff *skb, struct ubuf_info *uarg,
+ 			   bool success)
+ {
+-	uarg->zerocopy = uarg->zerocopy & success;
++	struct ubuf_info_msgzc *uarg_zc = uarg_to_msgzc(uarg);
++
++	uarg_zc->zerocopy = uarg_zc->zerocopy & success;
+ 
+ 	if (refcount_dec_and_test(&uarg->refcnt))
+-		__msg_zerocopy_callback(uarg);
++		__msg_zerocopy_callback(uarg_zc);
+ }
+ EXPORT_SYMBOL_GPL(msg_zerocopy_callback);
+ 
+ void msg_zerocopy_put_abort(struct ubuf_info *uarg, bool have_uref)
+ {
+-	struct sock *sk = skb_from_uarg(uarg)->sk;
++	struct sock *sk = skb_from_uarg(uarg_to_msgzc(uarg))->sk;
+ 
+ 	atomic_dec(&sk->sk_zckey);
+-	uarg->len--;
++	uarg_to_msgzc(uarg)->len--;
+ 
+ 	if (have_uref)
+ 		msg_zerocopy_callback(NULL, uarg, true);
+diff --git a/net/ipv4/ip_output.c b/net/ipv4/ip_output.c
+index d7bd1daf022b..546897a4b4fa 100644
+--- a/net/ipv4/ip_output.c
++++ b/net/ipv4/ip_output.c
+@@ -1043,7 +1043,7 @@ static int __ip_append_data(struct sock *sk,
+ 				paged = true;
+ 				zc = true;
+ 			} else {
+-				uarg->zerocopy = 0;
++				uarg_to_msgzc(uarg)->zerocopy = 0;
+ 				skb_zcopy_set(skb, uarg, &extra_uref);
+ 			}
+ 		}
+diff --git a/net/ipv4/tcp.c b/net/ipv4/tcp.c
+index 970e9a2cca4a..3152da8f4763 100644
+--- a/net/ipv4/tcp.c
++++ b/net/ipv4/tcp.c
+@@ -1239,7 +1239,7 @@ int tcp_sendmsg_locked(struct sock *sk, struct msghdr *msg, size_t size)
+ 			}
+ 			zc = sk->sk_route_caps & NETIF_F_SG;
+ 			if (!zc)
+-				uarg->zerocopy = 0;
++				uarg_to_msgzc(uarg)->zerocopy = 0;
+ 		}
+ 	}
+ 
+diff --git a/net/ipv6/ip6_output.c b/net/ipv6/ip6_output.c
+index 897ca4f9b791..6d4f01a0cf6e 100644
+--- a/net/ipv6/ip6_output.c
++++ b/net/ipv6/ip6_output.c
+@@ -1568,7 +1568,7 @@ static int __ip6_append_data(struct sock *sk,
+ 				paged = true;
+ 				zc = true;
+ 			} else {
+-				uarg->zerocopy = 0;
++				uarg_to_msgzc(uarg)->zerocopy = 0;
+ 				skb_zcopy_set(skb, uarg, &extra_uref);
+ 			}
+ 		}
 -- 
 2.37.0
 
