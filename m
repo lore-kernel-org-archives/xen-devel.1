@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B105DC25B07
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Aug 2022 19:39:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.383962.619230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF817C00140
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Aug 2022 19:49:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.383997.619242 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLrYJ-0005mf-8c; Wed, 10 Aug 2022 19:39:39 +0000
+	id 1oLrhH-0007KB-5G; Wed, 10 Aug 2022 19:48:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 383962.619230; Wed, 10 Aug 2022 19:39:39 +0000
+Received: by outflank-mailman (output) from mailman id 383997.619242; Wed, 10 Aug 2022 19:48:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oLrYJ-0005mY-5a; Wed, 10 Aug 2022 19:39:39 +0000
-Received: by outflank-mailman (input) for mailman id 383962;
- Wed, 10 Aug 2022 19:39:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oLrhH-0007K4-2W; Wed, 10 Aug 2022 19:48:55 +0000
+Received: by outflank-mailman (input) for mailman id 383997;
+ Wed, 10 Aug 2022 19:48:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UxBI=YO=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1oLrPg-00067E-6s
- for xen-devel@lists.xenproject.org; Wed, 10 Aug 2022 19:30:44 +0000
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [2607:f8b0:4864:20::736])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eabc46a6-18e2-11ed-924f-1f966e50362f;
- Wed, 10 Aug 2022 21:30:40 +0200 (CEST)
-Received: by mail-qk1-x736.google.com with SMTP id i24so11901699qkg.13
- for <xen-devel@lists.xenproject.org>; Wed, 10 Aug 2022 12:30:40 -0700 (PDT)
+ id 1oLrhF-0007Jy-VX
+ for xen-devel@lists.xenproject.org; Wed, 10 Aug 2022 19:48:54 +0000
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [2607:f8b0:4864:20::731])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 75e531df-18e5-11ed-bd2e-47488cf2e6aa;
+ Wed, 10 Aug 2022 21:48:53 +0200 (CEST)
+Received: by mail-qk1-x731.google.com with SMTP id t11so1213827qkt.6
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Aug 2022 12:48:52 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:289e:b898:c7de:df6c])
  by smtp.gmail.com with ESMTPSA id
- v6-20020a05620a0f0600b006af10bd3635sm537231qkl.57.2022.08.10.12.30.38
+ bk9-20020a05620a1a0900b006b978b521c8sm520897qkb.69.2022.08.10.12.48.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Aug 2022 12:30:38 -0700 (PDT)
+ Wed, 10 Aug 2022 12:48:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,71 +46,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eabc46a6-18e2-11ed-924f-1f966e50362f
+X-Inumbo-ID: 75e531df-18e5-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=ZVyxx+81E7lUFgUdbheKS4DtvqtlloOOvzDpUFkNgHU=;
-        b=b9SSycSXr2T/kBrMVg2g6/0gFR08Le8iiib9o0Jy6q5p9CL7Z+wDLFDWdxGzPyzFGL
-         xTHyT8f17772PdU1IbuULI9EiLekKrC70SL0nsH9O8mjUHVt9uW73dSBeF9yU0iwcqWq
-         +vCsZpEjBOckf0HODXM3UuL1Xoyiwz/XYB8DOntsK8XCS8yMr0w8/lUnEJiXI3q4gxNa
-         CRHGOJVw9bNySb2mL3nmcL7sdUzgeazQO6il2XnEkWSlI17/FWAgt3Y9IviaUyfljpkQ
-         1UDqMIJHfALZ6fBXI+CMp+TMC2It2mlTKoeX3hv7h+G5efB8IehCk41dGjAeldwzW2mb
-         MbhQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=QQXz13C4QpBnoSIB6G/QdpXurbcsW+r771/2/v8X8Eg=;
+        b=DnDteQPj5aR12v8C6pwJWtGUrY5XcNNgA2jfxY+40VTKM5+vVZH3hndHbJyyDe2Z0S
+         NeoV3IYVjvFFbrADf5ssweHA8qpV0ev8IKYcthH3VFAkMpz4JD7kB6Ga73jXbg+P2Eav
+         NkIiB9Vh0HBkqVkkvmirha1KBaQziYLwm52leROPenNRX2pF5MGQjfMSO+dN0COsjGy8
+         Z8T+DI7JlfHmeoR54XV27oX3FLYlHmGmUl/Dk+kZSUOyzeBAeDs4WY4iQDpabk9Ovnnu
+         B6uT1PgDz53D+6DDFgLodh0fpCsW03gUG2b9DMkSgbXbkC9QdoflX7s18ywasY8PxRF9
+         EBTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=ZVyxx+81E7lUFgUdbheKS4DtvqtlloOOvzDpUFkNgHU=;
-        b=l4Ms4t662R5HWbROilCAFl7+lkBRbaUy61VNC93QEfMBfPTa2uD+fN6FYHGThuXCdM
-         fhaikAkuCjXwA/xnK4J0OCmcTiAAUDQ4DC6OMhAizodxEDsXPwFcasUqAxAVxZVtRStz
-         0bJr6YY50RdiIpve1uQcGo9PiMa0sRAofqWmeSPmkOFM5D8rseSIu6QaXWWltXHCxGCs
-         aJ61ifgNxKF+za3RLfrFyg4cRJgTL3+scOQQHnOUQmt2ZUNqdpkdqfmdz0FJFvQqTVmN
-         2vVZvxojIM4klY/Bv0KW5+WuP0P5vHfuQMoNuY/czbROHEn7h8YW0ZvIhstdIf3dinVY
-         mKsA==
-X-Gm-Message-State: ACgBeo2EqvZPMb4aSyI9vlqwrsSOfCPUmq1dQFuA5khiB+evM+Q6RO5e
-	tbXkKbMNLHzXg06RVRzRjL7TGPEOVDs=
-X-Google-Smtp-Source: AA6agR7r32NDisgo1x2kSfxJb5FUC7I8Dh9FaL30qP+g8vq30mkw/k7TEbsBhxNG/n/TC8Ac+c2AAg==
-X-Received: by 2002:a05:620a:2b8b:b0:6b9:43ca:4a6 with SMTP id dz11-20020a05620a2b8b00b006b943ca04a6mr12469847qkb.346.1660159839109;
-        Wed, 10 Aug 2022 12:30:39 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=QQXz13C4QpBnoSIB6G/QdpXurbcsW+r771/2/v8X8Eg=;
+        b=MhYKabDzJpBqwSo+d8J2KsuRxuj5YxTFnaKM4L3QSdD7v0GpPsnRJ6V4KTui0i/1sh
+         nlunJkIUM8aoaV29M0QO+u2a8NW1IOG+WKg8PktFcxiGagc8L/W579NYxaHTwo1TK9kx
+         jrQ4Xi9Nv4L3sgHiL1KELmXXMwI8cfCH4P+H/r04IfxWLZ4gvVvKSK8UFM3F7Y88H+j8
+         hmNWxcYA689yMxGR/dBgVau0XUaO88aBbHcb/4bePOJcmgzh3HPd1OdOdL7Mj4OcQtXQ
+         xnqoL3Knh39TSV2zrokL/GcNTjsHFs9fohOj5WAvRT7lWOLupftEP86AjpLHj4zc/wsx
+         valw==
+X-Gm-Message-State: ACgBeo1NyrzrYks2yinEGrw1TFzC7U2pzsbXPaGVw2aLmvodZCqYOm4e
+	NkZhavbLsYfoPzw2X4DmbaYl3YJtoWM=
+X-Google-Smtp-Source: AA6agR5QJ6NF835S+D0GBaIudLoXytyZlZUls2cm9dEHiwRT7//36PAPIAaS4Oqxky87lXnFl+smAw==
+X-Received: by 2002:a05:620a:c55:b0:6a7:9e01:95c9 with SMTP id u21-20020a05620a0c5500b006a79e0195c9mr22093906qki.63.1660160931564;
+        Wed, 10 Aug 2022 12:48:51 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
-	Henry Wang <Henry.Wang@arm.com>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH v2 13/13] CHANGELOG: Add Intel HWP entry
-Date: Wed, 10 Aug 2022 15:29:44 -0400
-Message-Id: <20220810192944.102135-14-jandryuk@gmail.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Nick Rosbrook <rosbrookn@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 0/3] libxl smbios support
+Date: Wed, 10 Aug 2022 15:48:24 -0400
+Message-Id: <20220810194827.103428-1-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220810192944.102135-1-jandryuk@gmail.com>
-References: <20220810192944.102135-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+hvm_xs_strings.h specifies xenstore entries which can be used to set or
+override smbios strings.  hvmloader has support for reading them, but
+xl/libxl support is not wired up.  This patches adds a new xl.cfg option
+and libxl support to write the xenstore strings.
 
----
-v2:
-Add blank line
----
- CHANGELOG.md | 3 +++
- 1 file changed, 3 insertions(+)
+The xl syntax looks like:
+smbios=["bios_vendor=Xen Project","system_version=1.0"]
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index a87a193e15..3d982bf96b 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
- 
- ## [unstable UNRELEASED](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
- 
-+### Added
-+ - Intel Hardware P-States (HWP) cpufreq driver
-+
- ### Changed
-  - On x86 "vga=current" can now be used together with GrUB2's gfxpayload setting. Note that
-    this requires use of "multiboot2" (and "module2") as the GrUB commands loading Xen.
+The Go binding generation needed extending to support Arrays inside a
+KeyedUnion, which is what the first patch does.  The generated go code
+builds, but it is otherwise untested.
+
+There are also oem strings, oem-1..oem-99, that HVM loader supports.
+The use of smbios_type Enum is a little unwieldy to defined so many
+entries, but it works.  xl will internally parse smbios=["oem=A,oem=B"]
+into oem_1 = "A" and oem_2 = "B".  xl still accepts oem_$N, though
+hvmloader only reads sequentially from 1 up to a maximum of 99.  It's a
+corner case what doesn't seem worth dealing with.
+
+The rendered man page and html don't have a newline at then end of the
+new section after patch 2.
+"""
+           battery_device_name=STRING
+       ms_vm_genid="OPTION"
+"""
+
+however the txt format is correct:
+"""
+        battery_device_name=STRING
+
+    ms_vm_genid="OPTION"
+"""
+
+It goes away after patch 3 is applied since it adds text about the "oem"
+option in between the two lines above.  I'm at a loss as to why this is
+happening.
+
+Jason Andryuk (3):
+  golang/xenlight: Extend KeyedUnion to support Arrays
+  xl/libxl: Add ability to specify SMBIOS strings
+  xl/libxl: Add OEM string support to smbios
+
+ docs/man/xl.cfg.5.pod.in             |  49 +++++++++++
+ tools/golang/xenlight/gengotypes.py  |  41 +++++----
+ tools/golang/xenlight/helpers.gen.go |  51 +++++++++++
+ tools/golang/xenlight/types.gen.go   | 126 +++++++++++++++++++++++++++
+ tools/include/libxl.h                |   5 ++
+ tools/libs/light/libxl_dom.c         |  20 +++++
+ tools/libs/light/libxl_types.idl     | 125 ++++++++++++++++++++++++++
+ tools/xl/xl_parse.c                  |  59 ++++++++++++-
+ 8 files changed, 459 insertions(+), 17 deletions(-)
+
 -- 
 2.37.1
 
