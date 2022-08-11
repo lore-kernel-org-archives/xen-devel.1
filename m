@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D95A2C25B0C
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:59:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.384908.620488 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50534C19F2A
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:59:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.384910.620498 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBX8-00075O-Hp; Thu, 11 Aug 2022 16:59:46 +0000
+	id 1oMBXA-0007L9-CB; Thu, 11 Aug 2022 16:59:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 384908.620488; Thu, 11 Aug 2022 16:59:46 +0000
+Received: by outflank-mailman (output) from mailman id 384910.620498; Thu, 11 Aug 2022 16:59:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBX8-00074P-4J; Thu, 11 Aug 2022 16:59:46 +0000
-Received: by outflank-mailman (input) for mailman id 384908;
- Thu, 11 Aug 2022 16:59:44 +0000
+	id 1oMBX9-0007HC-K4; Thu, 11 Aug 2022 16:59:47 +0000
+Received: by outflank-mailman (input) for mailman id 384910;
+ Thu, 11 Aug 2022 16:59:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jhQd=YP=citrix.com=prvs=21531f474=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oMBNA-0003Aq-JA
- for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:28 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8eee6a8d-1995-11ed-bd2e-47488cf2e6aa;
- Thu, 11 Aug 2022 18:49:27 +0200 (CEST)
+ id 1oMBNB-0003Aq-Sj
+ for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:30 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8fcff216-1995-11ed-bd2e-47488cf2e6aa;
+ Thu, 11 Aug 2022 18:49:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,79 +38,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8eee6a8d-1995-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 8fcff216-1995-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660236567;
+  d=citrix.com; s=securemail; t=1660236568;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=IYKuPYRjZ6pvXVQdnWBlSSCMGmweNvIFFiS+JhxCSBY=;
-  b=YP9nzi4lncPf28Qmtkw/6vdTGP1apUtKhhLHJ1yGKGR+xO/EJdDxX9cB
-   bgtJ/sY8nu4reKiarjMoVRc9N50Jg8zYfi++rrF/pvfuvllBnobUFQ94m
-   SYDnj+WCbYXngn81s7PvO9jLVZFlQfD+LYmZksBR52xANQWbSWby2J59F
-   k=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=fS+wXyRWRj324Cveg5Ri5jEcXsCtRAlbPU6C8RaaQxw=;
+  b=e++SsEIb7gtIJfdACUDP2J7sMTsGBYhLMH+y6zGxrVhjuWMkzhvhkGoS
+   8WbG3Bp/HCMLI0aG8hoxXSPI9pgyAD6Dn5hdEb1/qqVPJPg47bd9s7msC
+   shE2uujHFnLn2CxXDUAZH7f/GN7xaUWLiqUI7icQMoh1ct+7INMHpTiVZ
+   M=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77898051
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 77650143
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: =?us-ascii?q?A9a23=3A+y7RlaM1YfKrNxLvrXNrnJZn9oimJRAgMRhcQ?=
- =?us-ascii?q?xGJyBt+GUZOw4laZrtjiq2i3aJmyGb9mmIBeKSSRr53aQm6gXAjCuHlasX+9?=
- =?us-ascii?q?5QHLC0YumKzbe0XjW3twuEXz1JRUf8BtCM7bJ8mgR2FR/vv/j1PJnkIdwUDM?=
- =?us-ascii?q?A15FlVxhm+g3eQV6f2UeZZ5LJGwsp5ifkrjn1gPlhF7vW5yEW4eLeEqvXAXV?=
- =?us-ascii?q?o/BIvZgFei4+eLqAsjioD2WaKfh/Pv4N+gnpFoR2q5z8BdREzFfQ1FHsdT1m?=
- =?us-ascii?q?w0aW/e2HSTeNU27twua3Pbh/ux4pnYCkePlZpqUJNDZH65g0giiiRHQVWa/X?=
- =?us-ascii?q?FIlLRnA6k1s0dnji49pQ8Z/fm1cENPEDSk72hwYifP/wSHFrvvgMH0/Bo+oe?=
- =?us-ascii?q?GPjTMRuB0qUBcrN8Mq6PPcZT4QAVbuI3TDzd4ksGhYsP3pL6JiXENF+g3agN?=
- =?us-ascii?q?XsV4hMNeYVPRIfaNBTj2vZiE4980PS37alh39Xykct0dk+K23kAwtROZJgT/?=
- =?us-ascii?q?pTcECBM2OL/abDWtYpsAz+J1HDcY7GoMZJT32GJG7HM+unWfay6tQSq1UdnO?=
- =?us-ascii?q?8R0FhhKicbCK0sMm4LP7GNrDW7kUtNOap7uev71qkYTK80ggu+qX/7QbP+dU?=
- =?us-ascii?q?G2+QQ+XybxT3Jur7CSaRxClAtkJ7QigUWI75t2C94YbiMN3ZS+MYIv8+nj9u?=
- =?us-ascii?q?BPbs4wOKswJHGezM1ksIywaNbIt7hodgCyA5J/l8q9y99gCNYgfAw2UNZRf1?=
- =?us-ascii?q?51zb4yxc3vQ/F+62Z0thHzYpYRiB0A76m6P4JWVZjqHv8/hPP+Nn8jbcogE7?=
- =?us-ascii?q?o2ylyyj3j4MdWq/COxGn7P6oREr4IQqbOdOgDRz+idmBRVIrBcrEzgNhJaV8?=
- =?us-ascii?q?DhF785c3JaWcSv6RfJnjzHJ3LeImuDq1bFLgD4KpVSYr3s3GzPxCotZV7Weo?=
- =?us-ascii?q?kUJzQvZooxjME5+0L7xDr9PniZG6ouOaomYn1WOCTVbx6z5AgasrwEAdB+Ki?=
- =?us-ascii?q?sUHm0BwE5c9TfYVzLKagRv6EOFs92NKEyZpIIxna6uH6DQn6WxQXl8OHufiQ?=
- =?us-ascii?q?ZXREUX8slIl2tMuLeInGxtXbWOSwQo4P2kO9zRZuTUvCKGMDLGz+EZcOLuEB?=
- =?us-ascii?q?eb4SrFvZhoR8LKmSZXzagjbxw2qXq+TJtnWwntzfJk7geX7LrQ1b+EolnC5L?=
- =?us-ascii?q?3itLttkKCgGZuLERzaxVuTkKeOPdHHEkKcZYn6421rXcYyFQBtkPP4FRIsDO?=
- =?us-ascii?q?tkr3ab5dUFN5oruLhsyVRJtWS90pLHIlxUksaJ4Kjo42fAX467WWi9qG2Bdt?=
- =?us-ascii?q?HzMQcsMLa+42PZxUeMtLATLAPIMIEva0O+m2xxnSrZnf479waXGeBccgw5Jg?=
- =?us-ascii?q?MemyDu5AYNRauBnA46Hh5bfHojBbeY4gcJL2u2cjbyTRx5KdoncoGgMcj7ny?=
- =?us-ascii?q?sA/BUn2ugZ02lCtT9jZiVNZmzy0DX2cmFoZov3YXElmlM77KKorPdG3Po45d?=
- =?us-ascii?q?R5GiXt1x3mmMRgHs+WEJKjI3ENRc3AZb4Fvx1v9g0g+Pud9WbJJ8eTon9QnM?=
- =?us-ascii?q?0QBqgrAiIMOiFGbzBQKdb8sNwuSolvKqD7hNwVMZpRBZFgU57c4pt5ueTnpJ?=
- =?us-ascii?q?P79l4f9NyR8fz08W6bWy0uI6MYxLR9JXSd6Bl+8rmfT90WjFmhEXTE5OP5cA?=
- =?us-ascii?q?alGyxM5GPCV1kaSYsvjfMZA90JtEKurd6COmMKazI7b18UwtSX0rsst0LLV0?=
- =?us-ascii?q?u0ZSz5zEQnZrykzep+8Go3Df8YczY2Uw946Id1jgODR+YrNbhG8dJMVWDabC?=
- =?us-ascii?q?u44izdTK+drXrBgCRFajYcRLTkKRBtyVnHE48BK91ZhCVrZiJqaNo5iP6z7z?=
- =?us-ascii?q?v9Tery70nFGXmieMHsnrXLkdN8gkP67xySN/Y9BBWbw5QXDr7Dl2FTooSW8K?=
- =?us-ascii?q?InI6UbljdbYOsmj8UV5l18lYB2Z9FfBsxDfJgM/OdWVe7cCugirq7kBW4yNw?=
- =?us-ascii?q?JGFkMx7sPeNuViw+XtEJOJm4Yb5VkWf7E39VpHatVymIAjwp/KlBI2cb7ySJ?=
- =?us-ascii?q?oe9RLgTjyJk+8Eo4wmkJlE+KW2wtnxW7dUzNM3JKi7wYx/oYeaqCaTmj3xI/?=
- =?us-ascii?q?/iB6GnruipsGVz+zpqp8NGDMaaWL0cbrFXI/UzdRk0KuJMHCRHlpGpcW4yBf?=
- =?us-ascii?q?wpCNmn9DQpiH3xbx7E1zCJRxsq/4I9zAl1/8wm3BZ3dWnXHXBFcg4QoKvg1Y?=
- =?us-ascii?q?7bpQshw1/5eIlzLXkFN/wOwuXAeg9KPWoojKOuX5SqW/Z0e9Thf/7UqSHnAC?=
- =?us-ascii?q?HfTk3XpwY+4W6NDD0ESuex+SDStm2wmFuhWzTJ84nJ3dROOcTAEJ4Ct2HjbT?=
- =?us-ascii?q?l3p47wAPZTznsuA3MacoJDCHT30gTbLsduwQcuRMNgwSjJY85oA4/ilSOdGN?=
- =?us-ascii?q?n1cWXpM4NdsTDsrDleSZem3z+DXadYeWCObVemxTt3CNmFe8t7vuGb+d8Phb?=
- =?us-ascii?q?hwop1sCofY77cu/25FcsJ0yypRAaAh60hDctjL4uIroHBzkwJ65j1dzgNDGt?=
- =?us-ascii?q?Nt2RqV761XkvRgEAy93EnzH4bEhtXaX1L8uq45um4lFuEWYKxV15I3/fZWTP?=
- =?us-ascii?q?PVpyrF4naceUYQ/h6FNxZpgh9KsG1NoSRrQMfvp1WQx05gokDBw6eCfRUDHy?=
- =?us-ascii?q?9l0Zw62h+iy7APR+yshESgxpfJ42+Dxj9VkK1sphrMCEJC3CSCw3d/4kM8lC?=
- =?us-ascii?q?9fxzZvr7LzM/7MXGfhl635yJyx73Bq7sAtIiEOG3iOsIsj9FtfXFbhk7jHs4?=
- =?us-ascii?q?Ws420j0ZaeIJoWBkft3spBGvGSXFaWbFKdKUF3LPsGy8c2L1w=3D=3D?=
+IronPort-Data: A9a23:Z7wPEKiqgzY37ADrzRBYJInmX161ChAKZh0ujC45NGQN5FlHY01je
+ htvXW7Xa67YMGrzLop1a422oBtSvpLdzIBjHgRrpCk0QSkb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oDJ9CU6j+fQLlbFILasEjhrQgN5QzsWhxtmmuoo6qZlmtH8CA6W0
+ T/Ii5S31GSNhnglaQr414rZ8Ek15KSr4WtC1rADTasjUGH2xiF94K03fcldH1OgKqFIE+izQ
+ fr0zb3R1gs1KD90V7tJOp6iGqE7aua60Tqm0xK6aID76vR2nQQg075TCRYpQRw/ZwNlPTxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJQWXAP6I0DuKhPRL/tS4E4ePdxG9/0tX2V30
+ /UqDxoiNS6ijMzo+efuIgVsrpxLwMjDOYoevjdrzC3DDOZgSpfGK0nIzYYGhnFq3JkIRKuAI
+ ZpCAdZsRE2ojxlnM1ELCJU4jaGwi2P2aTFwo1OJv6snpWPUyWSd1ZCyb4SIIoXWHq25mG7Cg
+ m34oGfbBy04E+6ZwDaarViRhuPAyHaTtIU6S+Tjq68CbEeo7nMXIA0bUx28u/bRokqjUNsZJ
+ UUS8ScqqbUa/VauCNL6WnWQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3PLaXhRzi
+ AXPxYmwQ2Uy7vvFEhpx64t4sxuyaHYYNjVcYRYiRDkiyfa4nqA4oEz2G4ML/LGOsjHlJd3h6
+ 2nU8nBm1upK1JBjO7aTpg6e3W/1znTdZktsv1iMADr4hu9sTNT9D7FE/2Q3+hqpwGyxalCa9
+ EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE/qQQ2d3XZ327xk0NPhKgJiN2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSX0NfcoO9vgW5lwl8AM8OgJsdiKBuein7ArLFPXlM2QTRf4M5/RfLgEzvhkZ
+ MbznTeEBncGE6V3pAeLqxMm+eZynkgWmDKMLa0XOjz9jtJyklbJFupeWLZPB8hlhJ65TPL9r
+ 48Da5fXkEUDCYUToED/qOYuELzDFlBjbbieliCdXrfrztZOcI35N8Ls/A==
+IronPort-HdrOrdr: A9a23:rsaVJqPdi++MN8BcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3/qy
+ nOpoVi6faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrJ
+ uIGJIeNDSfNzdHZL7BkWuFL+o=
 X-IronPort-AV: E=Sophos;i="5.93,230,1654574400"; 
-   d="scan'208";a="77898051"
+   d="scan'208";a="77650143"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Bertrand Marquis <bertrand.marquis@arm.com>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v4 10/32] tools/libs/util: cleanup Makefile
-Date: Thu, 11 Aug 2022 17:48:23 +0100
-Message-ID: <20220811164845.38083-11-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Luca Fancellu
+	<luca.fancellu@arm.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v4 18/32] tools/helper: Cleanup Makefile
+Date: Thu, 11 Aug 2022 17:48:31 +0100
+Message-ID: <20220811164845.38083-19-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220811164845.38083-1-anthony.perard@citrix.com>
 References: <20220811164845.38083-1-anthony.perard@citrix.com>
@@ -118,38 +89,102 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Remove -I. from CFLAGS, it isn't necessary.
-
-Removed $(AUTOSRCS), it isn't used.
+Use $(TARGETS) to collect targets. Use := for the first target instead
+of +=.
+Collect library to link against in $(LDLIBS).
+Remove extra "-f" flags that is already part of $(RM).
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Tested-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- tools/libs/util/Makefile | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/tools/libs/util/Makefile b/tools/libs/util/Makefile
-index ffe507b379..493d2e00be 100644
---- a/tools/libs/util/Makefile
-+++ b/tools/libs/util/Makefile
-@@ -11,7 +11,7 @@ OBJS-y += libxlu_pci.o
+Notes:
+    v4:
+    - use := for the first TARGETS
+    v3:
+    - apply changes to the new "init-dom0less" helper.
+    - make use of the new macro $(xenlibs-ldlibs,)
+
+ tools/helpers/Makefile | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
+
+diff --git a/tools/helpers/Makefile b/tools/helpers/Makefile
+index 8d78ab1e90..09590eb5b6 100644
+--- a/tools/helpers/Makefile
++++ b/tools/helpers/Makefile
+@@ -5,13 +5,13 @@
+ XEN_ROOT = $(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
- CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
- 	-Wno-declaration-after-statement -Wformat-nonliteral
--CFLAGS += -I. $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenctrl)
- 
- CFLAGS += $(PTHREAD_CFLAGS)
- LDFLAGS += $(PTHREAD_LDFLAGS)
-@@ -29,7 +29,6 @@ ifeq ($(BISON),)
+-PROGS += xen-init-dom0
++TARGETS := xen-init-dom0
+ ifeq ($(CONFIG_Linux),y)
+ ifeq ($(CONFIG_X86),y)
+-PROGS += init-xenstore-domain
++TARGETS += init-xenstore-domain
+ endif
+ ifeq ($(CONFIG_ARM),y)
+-PROGS += init-dom0less
++TARGETS += init-dom0less
+ endif
  endif
  
- AUTOINCS = libxlu_cfg_y.h libxlu_cfg_l.h libxlu_disk_l.h
--AUTOSRCS = libxlu_cfg_y.c libxlu_cfg_l.c
+@@ -20,6 +20,7 @@ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenstore)
+ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenlight)
+ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
++xen-init-dom0: LDLIBS += $(call xenlibs-ldlibs,ctrl toollog store light)
  
- LIBHEADER := libxlutil.h
- PKG_CONFIG_NAME := Xlutil
+ INIT_XENSTORE_DOMAIN_OBJS = init-xenstore-domain.o init-dom-json.o
+ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+@@ -28,6 +29,7 @@ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
+ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenstore)
+ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenlight)
+ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h
++init-xenstore-domain: LDLIBS += $(call xenlibs-ldlibs,toollog store ctrl guest light)
+ 
+ INIT_DOM0LESS_OBJS = init-dom0less.o init-dom-json.o
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+@@ -35,30 +37,31 @@ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenstore)
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenlight)
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenevtchn)
++init-dom0less: LDLIBS += $(call xenlibs-ldlibs,ctrl evtchn toollog store light guest foreignmemory)
+ 
+ .PHONY: all
+-all: $(PROGS)
++all: $(TARGETS)
+ 
+ xen-init-dom0: $(XEN_INIT_DOM0_OBJS)
+-	$(CC) $(LDFLAGS) -o $@ $(XEN_INIT_DOM0_OBJS) $(LDLIBS_libxenctrl) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenlight) $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) -o $@ $(XEN_INIT_DOM0_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ init-xenstore-domain: $(INIT_XENSTORE_DOMAIN_OBJS)
+-	$(CC) $(LDFLAGS) -o $@ $(INIT_XENSTORE_DOMAIN_OBJS) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenlight) $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) -o $@ $(INIT_XENSTORE_DOMAIN_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ init-dom0less: $(INIT_DOM0LESS_OBJS)
+-	$(CC) $(LDFLAGS) -o $@ $(INIT_DOM0LESS_OBJS) $(LDLIBS_libxenctrl) $(LDLIBS_libxenevtchn) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenlight) $(LDLIBS_libxenguest) $(LDLIBS_libxenforeignmemory) $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) -o $@ $(INIT_DOM0LESS_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ .PHONY: install
+ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+-	for i in $(PROGS); do $(INSTALL_PROG) $$i $(DESTDIR)$(LIBEXEC_BIN); done
++	for i in $(TARGETS); do $(INSTALL_PROG) $$i $(DESTDIR)$(LIBEXEC_BIN); done
+ 
+ .PHONY: uninstall
+ uninstall:
+-	for i in $(PROGS); do rm -f $(DESTDIR)$(LIBEXEC_BIN)/$$i; done
++	for i in $(TARGETS); do rm -f $(DESTDIR)$(LIBEXEC_BIN)/$$i; done
+ 
+ .PHONY: clean
+ clean:
+-	$(RM) -f *.o $(PROGS) $(DEPS_RM)
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
+ 
+ distclean: clean
 -- 
 Anthony PERARD
 
