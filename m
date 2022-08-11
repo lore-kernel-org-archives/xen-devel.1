@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F41AAC25B06
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 17:00:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.384959.620555 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EB6C19F2A
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 17:00:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.384954.620550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBXN-0001uy-2r; Thu, 11 Aug 2022 17:00:01 +0000
+	id 1oMBXM-0001hv-3A; Thu, 11 Aug 2022 17:00:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 384959.620555; Thu, 11 Aug 2022 17:00:00 +0000
+Received: by outflank-mailman (output) from mailman id 384954.620550; Thu, 11 Aug 2022 17:00:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBXM-0001qf-Gr; Thu, 11 Aug 2022 17:00:00 +0000
-Received: by outflank-mailman (input) for mailman id 384959;
- Thu, 11 Aug 2022 16:59:59 +0000
+	id 1oMBXL-0001fg-M9; Thu, 11 Aug 2022 16:59:59 +0000
+Received: by outflank-mailman (input) for mailman id 384954;
+ Thu, 11 Aug 2022 16:59:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jhQd=YP=citrix.com=prvs=21531f474=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oMBN8-0003Aq-1i
- for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:26 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8e3751cf-1995-11ed-bd2e-47488cf2e6aa;
- Thu, 11 Aug 2022 18:49:24 +0200 (CEST)
+ id 1oMBNO-0003Aq-6b
+ for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:42 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 95297b85-1995-11ed-bd2e-47488cf2e6aa;
+ Thu, 11 Aug 2022 18:49:36 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,50 +38,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e3751cf-1995-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 95297b85-1995-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660236564;
+  d=citrix.com; s=securemail; t=1660236576;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Cj3s7yDvAwdl+LH39Fhy7fBMjMaaqIg2Y2xcVMdDEwk=;
-  b=O8na1xt/KDB20tzbE75aGDUGv0n69HGJMmUck1QfbLPeOqhKd4+GFAUB
-   9K8bo7crr0CdpBs0W/fKkhfDztEdPHm/mNWZPZSH/YanpJUiopFKhTEvy
-   07aHaquZEwFW86c4Wlkd89bUwO5JEXU75vPkAq9O2TdCoQZi/q1uIkoYv
+  bh=WWgKKsGpMO0s5/MpdnydWA9yplEqj5PrJ/SuQ+hxLac=;
+  b=Z2IliiFVz30TrJkggKbdYyyPykX3xuEqDgmyBhEAfMz1GFZ0OO+yTxQp
+   85NvynIbftSCCWHRj2OwJrrAw7/wtDQ5gD6Ei4SUA0hXJwKdzZ0XfrP2K
+   M3Z1Yuoz49ksoF4BNZ7vYV1+XffdxrTLInXnwnxB53myOrq/QMaRfOc1r
    4=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 80449025
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 78334375
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:sh0As6o9z6XTXhWa2mGTO8Sc+pNeBmJ0ZRIvgKrLsJaIsI4StFCzt
- garIBmHbP7fYzP9etByPoq3/UoD6sXXnYRgTAc9/no0FnwQ9ZuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlVEliefSAOKU5NfsYkhZXRVjRDoqlSVtkus4hp8AqdWiCkaGt
- MiaT/f3YTdJ4BYpdDNPg06/gEk35q6q6GpB5gZWic1j5zcyqVFEVPrzGonpR5fIatE8NvK3Q
- e/F0Ia48gvxl/v6Ior4+lpTWhRiro/6ZWBiuFIPM0SRqkEqShgJ+rQ6LJIhhXJ/0F1lqTzTJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXWV+ACQqflO1q8iCAn3aMqVFo9YnBk1w8
- cUaKW4tMDeln73tnKmSH7wEasQLdKEHPasas3BkizrYEewnUdbIRKCiCd1whWlqwJoURLCHO
- pRfOWEHgBfoOnWjPn8eDo4+m+G5wGHyaTRCpHqepLYt4niVxwt0uFToGIqNJoDbHZ8I9qqej
- lnl4XTBGlJDDoOO6Bmc/yyoo7bPhzyuDer+E5Xnr6U30TV/3Fc7Fxk+RVa95/6jhSaWWd1FL
- FcP0jEztqV0/0uuJvHtUhv9rHOasxo0X9tLD/Z8+AyL0rDT4QuSGi4DVDEpVTA9nJZoH3pwj
- AbPxo63Q2w02FGIdZ6D3urNnWO1FRYRFG0DOw9aai0dvIK/u6hm23ojUe1f/L6JYszdQG+um
- 2jb83Fn2d3/nuZQifzloAmvbyaE48GQE1Vrvli/sneNtFsRWWKzW2C/BbE3B95kJZ3RcFSOt
- WNsdyO2vLFXVsHleMBgrYww8FCVCxWtamS0baZHRcVJythU0yfLkXpsyD9/Plx1Fc0PZCXkZ
- kTe0SsIusELZCTyNP4nPtjrYyjP8UQHPYqNaxwpRoAWPsgZmPGvpUmCmnJ8L0iyyRNxwMnTy
- L+QcNq2DGZyNJmLOAGeHr5FuZd2l39W+I8mbcqkp/hR+ebBOSX9pHZsGAfmU93VG4vY+VmJr
- 4sEZ5fTo/idOcWnChTqHUcoBQhiBRAG6Vre96S7qsbrztJaJVwc
-IronPort-HdrOrdr: A9a23:y5ReQq2ypPjKrpqgSQk5KwqjBIokLtp133Aq2lEZdPRUGvb3qy
+IronPort-Data: A9a23:XTZfqKjcttlOaiQA46HuDZ7+X161PRAKZh0ujC45NGQN5FlHY01je
+ htvWW6BPqmLYWf2c94ibovnoBgB7Z6Ay4RhSVY/r3w9RCgb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oDJ9CU6j+fQLlbFILasEjhrQgN5QzsWhxtmmuoo6qZlmtH8CA6W0
+ T/Ii5S31GSNhnglaQr414rZ8Ek15KSr4WtC1rADTasjUGH2xiF94K03fcldH1OgKqFIE+izQ
+ fr0zb3R1gs1KD90V7tJOp6iGqE7aua60Tqm0xK6aID76vR2nQQg075TCRYpQRw/ZwNlPTxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJQWXAP6I0DuKhPRL/tS4E4eMdc+wLZaWHt0/
+ 781LAoUXBqnmcKN+efuIgVsrpxLwMjDOYoevjdrzC3DDOZgSpfGK0nIzYYGhnFq3JkIRKuAI
+ ZpCAdZsRE2ojxlnM1ELCJU4jaGwi2P2aTFwo1OJv6snpWPUyWSd1ZCyYIGOJofVGK25mG7Jq
+ mTp2Tv0WisiPf2u8wfaqkzzgcHQyHaTtIU6S+Tjq68CbEeo7nMXIA0bUx28u/bRol6zXZdTJ
+ lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJt//YSsV/XjPCOukDAWzZCHmUphMEaWNEeSWYM7
+ A+kxsnTD39CtIeMe3i56JevlGbnUcQKFlPudRPoXCNcvYe7+NBs10uRJjpwOPXr14OoQFkc1
+ xjP9XFj3OtL0Kbnwo3hpTj6bySQSo8lp+LfziHeRSqb4wxwf+ZJjKT4uAGAvZ6swGt0J2RtX
+ UToeODEtYji9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOvmkmex8wY5ZZI2WBj
+ KrvVeR5uvdu0IaCN/crM+pd9exzpUQfKTgVfq+NNYcfCnSAXASG4DtvdSat4owZq2B1yPlXE
+ crKLq6R4YMyU/sPIMyeG7hAitfGB0kWmQvueHwM50j+jebCOSXFFe5t3ZnnRrlR0Z5oaT79q
+ 753X/ZmAT0FOAEiSkE7KbIuEG0=
+IronPort-HdrOrdr: A9a23:Xl3ZDK3cYa2qDKCj4UaCbgqjBIokLtp133Aq2lEZdPRUGvb3qy
  nIpoV86faUskdoZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
  uIG5IOceEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.93,230,1654574400"; 
-   d="scan'208";a="80449025"
+   d="scan'208";a="78334375"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v4 16/32] tools: Introduce $(xenlibs-ldlibs, ) macro
-Date: Thu, 11 Aug 2022 17:48:29 +0100
-Message-ID: <20220811164845.38083-17-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v4 22/32] tools/hotplug: Generate "hotplugpath.sh" with configure
+Date: Thu, 11 Aug 2022 17:48:35 +0100
+Message-ID: <20220811164845.38083-23-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220811164845.38083-1-anthony.perard@citrix.com>
 References: <20220811164845.38083-1-anthony.perard@citrix.com>
@@ -89,74 +88,109 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This can be used when linking against multiple in-tree Xen libraries,
-and avoid duplicated flags. It can be used instead of multiple
-$(LDLIBS_libxen*).
-
-For now, replace the open-coding in libs.mk.
-
-The macro $(xenlibs-libs, ) will be useful later when only the path to
-the libraries is wanted (e.g. for checking for dependencies).
-
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/Rules.mk     | 16 ++++++++++++++--
- tools/libs/libs.mk |  2 +-
- 2 files changed, 15 insertions(+), 3 deletions(-)
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 23979ed254..ce77dd2eb1 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -93,12 +93,24 @@ define xenlibs-rpath
-     $(addprefix -Wl$(comma)-rpath-link=$(XEN_ROOT)/tools/libs/,$(call xenlibs-dependencies,$(1)))
- endef
+Notes:
+    v4:
+    - new patch
+
+ tools/configure.ac                     |  1 +
+ tools/hotplug/common/Makefile          | 10 ++--------
+ tools/configure                        |  3 ++-
+ tools/hotplug/common/hotplugpath.sh.in | 16 ++++++++++++++++
+ 4 files changed, 21 insertions(+), 9 deletions(-)
+ create mode 100644 tools/hotplug/common/hotplugpath.sh.in
+
+diff --git a/tools/configure.ac b/tools/configure.ac
+index 09059bc569..18e481d77e 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -7,6 +7,7 @@ AC_INIT([Xen Hypervisor Tools], m4_esyscmd([../version.sh ../xen/Makefile]),
+ AC_CONFIG_SRCDIR([libs/light/libxl.c])
+ AC_CONFIG_FILES([
+ ../config/Tools.mk
++hotplug/common/hotplugpath.sh
+ hotplug/FreeBSD/rc.d/xencommons
+ hotplug/FreeBSD/rc.d/xendriverdomain
+ hotplug/Linux/init.d/sysconfig.xencommons
+diff --git a/tools/hotplug/common/Makefile b/tools/hotplug/common/Makefile
+index e8a8dbea6c..62afe1019e 100644
+--- a/tools/hotplug/common/Makefile
++++ b/tools/hotplug/common/Makefile
+@@ -1,19 +1,14 @@
+ XEN_ROOT = $(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
-+# Provide a path for each library in $(1)
-+define xenlibs-libs
-+    $(foreach lib,$(1), \
-+        $(XEN_ROOT)/tools/libs/$(lib)/lib$(FILENAME_$(lib))$(libextension))
-+endef
-+
-+# Flags for linking against all Xen libraries listed in $(1)
-+define xenlibs-ldlibs
-+    $(call xenlibs-rpath,$(1)) $(call xenlibs-libs,$(1)) \
-+    $(foreach lib,$(1),$(xenlibs-ldlibs-$(lib)))
-+endef
-+
- define LIB_defs
-  FILENAME_$(1) ?= xen$(1)
-  XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
-  CFLAGS_libxen$(1) = $$(CFLAGS_xeninclude)
-  SHLIB_libxen$(1) = $$(call xenlibs-rpath,$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
-- LDLIBS_libxen$(1) = $$(call xenlibs-rpath,$(1)) $$(XEN_libxen$(1))/lib$$(FILENAME_$(1))$$(libextension)
-+ LDLIBS_libxen$(1) = $$(call xenlibs-ldlibs,$(1))
- endef
+-HOTPLUGPATH := hotplugpath.sh
+-
+ # OS-independent hotplug scripts go in this directory
  
- $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
-@@ -108,7 +120,7 @@ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
- CFLAGS_libxenctrl += -D__XEN_TOOLS__
+ # Xen scripts to go there.
+ XEN_SCRIPTS :=
+-XEN_SCRIPT_DATA := $(HOTPLUGPATH)
+-
+-genpath-target = $(call buildmakevars2file,$(HOTPLUGPATH))
+-$(eval $(genpath-target))
++XEN_SCRIPT_DATA := hotplugpath.sh
  
- ifeq ($(CONFIG_Linux),y)
--LDLIBS_libxenstore += -ldl
-+xenlibs-ldlibs-store := -ldl
- endif
+ .PHONY: all
+-all: $(HOTPLUGPATH)
++all:
  
- CFLAGS_libxenlight += $(CFLAGS_libxenctrl)
-diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index d7e1274249..2b8e7a6128 100644
---- a/tools/libs/libs.mk
-+++ b/tools/libs/libs.mk
-@@ -18,7 +18,7 @@ CFLAGS   += -Werror -Wmissing-prototypes
- CFLAGS   += $(CFLAGS_xeninclude)
- CFLAGS   += $(foreach lib, $(USELIBS_$(LIBNAME)), $(CFLAGS_libxen$(lib)))
+ .PHONY: install
+ install: install-scripts
+@@ -40,7 +35,6 @@ uninstall-scripts:
  
--LDLIBS += $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_libxen$(lib)))
-+LDLIBS += $(call xenlibs-ldlibs,$(USELIBS_$(LIBNAME)))
+ .PHONY: clean
+ clean:
+-	rm -f $(HOTPLUGPATH)
  
- PIC_OBJS := $(OBJS-y:.o=.opic)
+ .PHONY: distclean
+ distclean: clean
+diff --git a/tools/configure b/tools/configure
+index acd9a04c3b..6199823f5a 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -2456,7 +2456,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
+ 
+ 
+-ac_config_files="$ac_config_files ../config/Tools.mk hotplug/FreeBSD/rc.d/xencommons hotplug/FreeBSD/rc.d/xendriverdomain hotplug/Linux/init.d/sysconfig.xencommons hotplug/Linux/init.d/sysconfig.xendomains hotplug/Linux/init.d/xen-watchdog hotplug/Linux/init.d/xencommons hotplug/Linux/init.d/xendomains hotplug/Linux/init.d/xendriverdomain hotplug/Linux/launch-xenstore hotplug/Linux/vif-setup hotplug/Linux/xen-hotplug-common.sh hotplug/Linux/xendomains hotplug/NetBSD/rc.d/xencommons hotplug/NetBSD/rc.d/xendriverdomain ocaml/libs/xs/paths.ml ocaml/xenstored/paths.ml ocaml/xenstored/oxenstored.conf"
++ac_config_files="$ac_config_files ../config/Tools.mk hotplug/common/hotplugpath.sh hotplug/FreeBSD/rc.d/xencommons hotplug/FreeBSD/rc.d/xendriverdomain hotplug/Linux/init.d/sysconfig.xencommons hotplug/Linux/init.d/sysconfig.xendomains hotplug/Linux/init.d/xen-watchdog hotplug/Linux/init.d/xencommons hotplug/Linux/init.d/xendomains hotplug/Linux/init.d/xendriverdomain hotplug/Linux/launch-xenstore hotplug/Linux/vif-setup hotplug/Linux/xen-hotplug-common.sh hotplug/Linux/xendomains hotplug/NetBSD/rc.d/xencommons hotplug/NetBSD/rc.d/xendriverdomain ocaml/libs/xs/paths.ml ocaml/xenstored/paths.ml ocaml/xenstored/oxenstored.conf"
+ 
+ ac_config_headers="$ac_config_headers config.h"
+ 
+@@ -10947,6 +10947,7 @@ for ac_config_target in $ac_config_targets
+ do
+   case $ac_config_target in
+     "../config/Tools.mk") CONFIG_FILES="$CONFIG_FILES ../config/Tools.mk" ;;
++    "hotplug/common/hotplugpath.sh") CONFIG_FILES="$CONFIG_FILES hotplug/common/hotplugpath.sh" ;;
+     "hotplug/FreeBSD/rc.d/xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/FreeBSD/rc.d/xencommons" ;;
+     "hotplug/FreeBSD/rc.d/xendriverdomain") CONFIG_FILES="$CONFIG_FILES hotplug/FreeBSD/rc.d/xendriverdomain" ;;
+     "hotplug/Linux/init.d/sysconfig.xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/sysconfig.xencommons" ;;
+diff --git a/tools/hotplug/common/hotplugpath.sh.in b/tools/hotplug/common/hotplugpath.sh.in
+new file mode 100644
+index 0000000000..1036b884b8
+--- /dev/null
++++ b/tools/hotplug/common/hotplugpath.sh.in
+@@ -0,0 +1,16 @@
++sbindir="@sbindir@"
++bindir="@bindir@"
++LIBEXEC="@LIBEXEC@"
++LIBEXEC_BIN="@LIBEXEC_BIN@"
++libdir="@libdir@"
++SHAREDIR="@SHAREDIR@"
++XENFIRMWAREDIR="@XENFIRMWAREDIR@"
++XEN_CONFIG_DIR="@XEN_CONFIG_DIR@"
++XEN_SCRIPT_DIR="@XEN_SCRIPT_DIR@"
++XEN_LOCK_DIR="@XEN_LOCK_DIR@"
++XEN_RUN_DIR="@XEN_RUN_DIR@"
++XEN_PAGING_DIR="@XEN_PAGING_DIR@"
++XEN_DUMP_DIR="@XEN_DUMP_DIR@"
++XEN_LOG_DIR="@XEN_LOG_DIR@"
++XEN_LIB_DIR="@XEN_LIB_DIR@"
++XEN_RUN_STORED="@XEN_RUN_STORED@"
 -- 
 Anthony PERARD
 
