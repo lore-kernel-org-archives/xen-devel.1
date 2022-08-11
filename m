@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05134C25B06
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:59:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.384916.620509 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEDAC19F2A
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 17:00:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.384918.620518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBXC-0007vk-96; Thu, 11 Aug 2022 16:59:50 +0000
+	id 1oMBXE-00089N-2x; Thu, 11 Aug 2022 16:59:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 384916.620509; Thu, 11 Aug 2022 16:59:50 +0000
+Received: by outflank-mailman (output) from mailman id 384918.620518; Thu, 11 Aug 2022 16:59:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBXB-0007sp-Sf; Thu, 11 Aug 2022 16:59:49 +0000
-Received: by outflank-mailman (input) for mailman id 384916;
- Thu, 11 Aug 2022 16:59:47 +0000
+	id 1oMBXC-00084e-SA; Thu, 11 Aug 2022 16:59:50 +0000
+Received: by outflank-mailman (input) for mailman id 384918;
+ Thu, 11 Aug 2022 16:59:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jhQd=YP=citrix.com=prvs=21531f474=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oMBNU-0003Aq-87
- for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:48 +0000
+ id 1oMBNX-0003Aq-8h
+ for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:51 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 973f5cd3-1995-11ed-bd2e-47488cf2e6aa;
- Thu, 11 Aug 2022 18:49:41 +0200 (CEST)
+ id 99f14366-1995-11ed-bd2e-47488cf2e6aa;
+ Thu, 11 Aug 2022 18:49:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,80 +38,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 973f5cd3-1995-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 99f14366-1995-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660236581;
+  d=citrix.com; s=securemail; t=1660236584;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=W6vCbrh65CqtneFRPKerc/tF+uYF6bBQ+treqeycw4E=;
-  b=B+yYT4xTMoCyP4HbTgPkrrlRK5VVtV29sJ6Ax11DE/lF6AukyIFj9BxV
-   x3FNfqj8EB5+wr7e7PLN7lW1e4fMmeLzdkfMNPlBb62S89MDA+eDJwK07
-   ZSb+UQ0K4xqDr77pfU3M2Ur+kubuiTswVSQOr1j7mbpMJSSd+w+37OEAh
-   Y=;
+  bh=dR83eQZUkBseSL1TT8Ybm7GdBrsNbP3ypihJcI9wWTg=;
+  b=DmIbQsltO6d5Z/VTjJl1iNzjANfDxTKMqOLJjKXxRt+kuvUWk9iT1Hye
+   dxEc5jk7XA7MvS5qi3WBG/TykDA2fwGpwXiBkA/urKE/FMQaCGZpJm50U
+   JubTmTkd6zu/MzykJkZPBdqBE79NAyciHchm6TR+I7iGvm9fqLQVUgfA2
+   E=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77898109
+X-MesageID: 77898114
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: =?us-ascii?q?A9a23=3AaVG8CKnncLjjaAHjvQOC/4ro5mJPLRN+VbBN2?=
- =?us-ascii?q?KgSYl3aPzYEGi7M+fK5BX4HbfXpEBkXJ6DNWZp+jjygzYrHtUg2Xxbj45YZf?=
- =?us-ascii?q?yDZLXmqdZgs0VxX6vn0ZOlwoiFN1XsDjuYdcDWPVIPGpeEQDFzbZKfGyJh0o?=
- =?us-ascii?q?JTlcDTURsW6/O+DBuvFIgpPt653o7KWjKJYK1cCcPdYWSMeOq8Wg+dLlLy7D?=
- =?us-ascii?q?iknrOc9ndkYuEn/kabEvtHuigADi58QgSP3SwBBg0cWDhRbaT7kUiV2Akg8L?=
- =?us-ascii?q?bYTJtu0Au6XiyJ4IyxgowRQeLsKh/mqBmNerufe/AyIABnOriJgbY2LivAJj?=
- =?us-ascii?q?g9gxgj3GoXyPNShhAR/efpWNlqFb8NujQsYBaJ3kjr0Bqe8zlk3nzf6lEjKE?=
- =?us-ascii?q?TJ7KdzklJ1dayNvDS72lUM7T8a4Tq4/0QeLhbuxeYZKUNtdJ1Yc9vY0HX3E+?=
- =?us-ascii?q?HtbK9IVWmHMOfXa9Hkx6fTg0pfkPesg/xRcv5czRtJNO8Qx8SKBG4CaN32PM?=
- =?us-ascii?q?XMiVkEGQRTXBgC6PqWv/WgytQwOIv5k6LQVB9IIa3ZLLftUUGTUe2E/UOJQd?=
- =?us-ascii?q?y5OT0YXDcR+TGErJ3ROEfk8DNkoZPNF5BoVKeXyRgtdwPkU4mHB4nHhjpjqO?=
- =?us-ascii?q?3mByYmn+6pB12gWE/ir8mSNeyHMKzNKSy9gSsfXWSFuUHUZ1b+0IRpbMIjDy?=
- =?us-ascii?q?G/2TBcqlkwilko2tlMMvKuzXjmfcIIsG5BV+JiUURvnwJYwXwIOoTDvCeVex?=
- =?us-ascii?q?01siOhJPp1eHNSeieqEg2DYPZcRrlp/lLAawO8FPBEcniyutiAbev/tREMvV?=
- =?us-ascii?q?441SNFY1ER1JN0+nYTNmdg+Cy0LwMM8qtNKQK0GyAEX7WipQ6ixDOWIqbqlm?=
- =?us-ascii?q?BZZX9mH4ouwooa6II9v3i/6WJ1owdr3qUk9e4xszpwq4SW/xxVfe/+HIF7f3?=
- =?us-ascii?q?4FtCNEzKqk1tcLQYXylDxFvkCcup4WR7haqvkWBCzJZJmeFFB4KLgQGc9VTu?=
- =?us-ascii?q?qgFmN9xCuRR3ErLEWJosKSgg9u0WjlXQgZeLrS/ktoPpAg3TTyIfd+OsC7A6?=
- =?us-ascii?q?Y8WRmCp8a3dLC5kaPSCISA7ULlx1ungExH8RqMYm2sMTEpZKSP97ZH0ifUHo?=
- =?us-ascii?q?WtH146kMvCSddaygun4W6HFAkydHnb+FqpwVA5zLEA6F6DJyOwmAlNi8vtqy?=
- =?us-ascii?q?/X4xfqm0tjD9yrzL1ga+fyzEU4nRUwdGZGdxo2oAqI+PtwSk6mjC+c8J7vAO?=
- =?us-ascii?q?3cWooenQWiaSHJJk9SpEghtpak16SC+SkwRLDTtudvmX4RCvlknuNLU3o8OP?=
- =?us-ascii?q?2ie+YigNOGgCFeMI53VK3C2OUeVuF4X8AqOjcggNb3XTQGnVr+JAouE44y8G?=
- =?us-ascii?q?mLWEXWbjglo/uUs2E0NSAwPh7WW07hSsBA5RHkYYGeWnIuW4D8ZgVbNVmolW?=
- =?us-ascii?q?YB7U4PIr113xtofpfJmqyxj2FVWSSnhJ+R0tmkZ8Pb2CpS5/zAVkd7y3dLBa?=
- =?us-ascii?q?lA9JpLgN/hlG67cTgXdYsgaBp5egThvKJrT3z3G/5gzr3uXs+46UG+k8lIhu?=
- =?us-ascii?q?7vDS9PgIsEtDxontowKV3uCgIlzxG+W23L9+/xIXlsUQ1vtWIrLnPL9NPDyl?=
- =?us-ascii?q?tqPUeArDZhFTYO8Y1aS8aPKgxiDTDkwwY17dewNdGinlw4hKb92kAFW596Tf?=
- =?us-ascii?q?Oami2yMcpsl7WTT3a8TcXIJy5/QEg6Qq7YGpm0FxxLFXB/wpA1jssusmsS0s?=
- =?us-ascii?q?6baqKTlkAn6GGcbjEZS6o7XxIsHHIBc+UpQF55+gLkay0BtBEI6q6ILGsXjR?=
- =?us-ascii?q?fyUUj4wXOJ1Q7adUacW6TBg9R0APjezijGWd5yR/F9UQVoAyfWtDmxRpSdf6?=
- =?us-ascii?q?sy/DPLQNnQlpaNUmAofo5foJ9hot/CBp1ev+bZI6bgvjHOxMp8Qr8DvU/Oju?=
- =?us-ascii?q?SvL4kKpqaxO0EuomG28FnhpnhX9LkL9VNWYpqLqUiAIdbPYpBWulDa4Y2Gwj?=
- =?us-ascii?q?UXFEA0oaqzvgpTILHf9essG/U/0mhRXJDz5X5NpEy/EF+Ax/a/7SPppLFJbL?=
- =?us-ascii?q?UPg7S/HkMW8J0uNETCCTSDrkimCLj04RFyRLb4TAU4xgtVIG3RNoudB4RCUY?=
- =?us-ascii?q?Zl3fRJ5sdc6KZhqcNq53L9E20dGONn1dct99e9eNmwppfydbh5haROoJAmLN?=
- =?us-ascii?q?Z4P3UAOgJ+qQK1XZk3zqvKjvPM3v0Lff4cXhArtzXQg3v4pjRsb5yIU8NrU+?=
- =?us-ascii?q?+3qNn0UHG4+EGgOTP9ulLHmoUx/ppzIXyF1ICnG0RLvzTHoqVG7XSp/NnNVo?=
- =?us-ascii?q?omyCl9UqxQhtXqG7717zOrUhCMgoG70+bEWkKPx/hUkbfMuhN+fut/gOrIHz?=
- =?us-ascii?q?ajpXshO1uh26g3C75bRWHIPHyYTafacLD/k8W3DmRmcQCpfieuSAPRyz5bVJ?=
- =?us-ascii?q?4XVm2EcpPBYPp8x7FJK0q7QV7JcLfzt/DOQKzZyCnkkFtwkCmken90hF5xaW?=
- =?us-ascii?q?tBp7KJG9GNmiVb3H5i7Xpu5mlHxlYk2ZEetIhh8oXMZuqtJdLVaI+Ie+sUyO?=
- =?us-ascii?q?SteRfEVIahTRmIjyxse1PW/+QoFjlq1QLxV0zHxduRSw4RTT9gC+cc5jwAnd?=
- =?us-ascii?q?NaTLV9Vc6dxtNfH66/iGt/0RYQlU6/bkOV8aM7Clhy7KYvlIOkjmjnntbHIb?=
- =?us-ascii?q?mZ/xfrhymqIm6nFhoufOEfXsPjSr5UJBU0jWWO7XuOmkW5Gkn3/gJkg4j0R2?=
- =?us-ascii?q?5UDfNn/2zx1CTmbC1AvlnDc/TisvlXmcDMz9iNwH3Xev+JJcsPrBCYUpe6rz?=
- =?us-ascii?q?rPHmQA0cmdmj3CmidFuEJywFXsBlwGuA/PWpjElA4jIToB01zfbSMAACS75?=
+IronPort-Data: =?us-ascii?q?A9a23=3AmwNJlaksXp4cVxN+3mINEIHo5mJPLRN1VbBN2?=
+ =?us-ascii?q?KgaYm36RzIEGi7MwEco7ei7X2ZQdm8EpoD9Y5lHzFUYqI9Fpq5fek2hZyTH7?=
+ =?us-ascii?q?r5JptRazAfTr1EELKXvfEPq+ByDfNM6uT8a7r7mlV34rBkx8fxw4femqX/7o?=
+ =?us-ascii?q?TEE0KZYNXvbigSTbgqBRwQzatawkbXCYDgXt4hKiJs4a4X2fCynhMLz/j+R8?=
+ =?us-ascii?q?qnyFWAsm95gDiNmmBPU9f+wTimASqHr8hgbDXXRxpqY1jmhC2QI2yMZP59li?=
+ =?us-ascii?q?f0jE/3B4e6sAi98/ZuFI0LswhRV8b+rdY+olUwI7WvQUZAmjlPmsTb4rjaZO?=
+ =?us-ascii?q?ALUixCA57q7QIZERdN6ZjtumhiRf96o1qhjw84k9EK9KLXjW6kM2xy75Yizu?=
+ =?us-ascii?q?W8sAutRTELoVAuE/0+gOptPx87Z//Su9u0V6M/qaiBLwT10OIRsEyMPi9PcA?=
+ =?us-ascii?q?sbLqWrGB2C5qCbqpw6E7z9QHCJukGdZfvGL3YplreaSYkJYnSqDG4GaP32/M?=
+ =?us-ascii?q?aM17E0b2G++kA65sOF0M6Bqg8/acqDvpp5tKd8TWOhuw+Mb31P6EwbmcjNWd?=
+ =?us-ascii?q?g5Oz1kXDeR+TGUrZ/uPEXk8FuxcuxsGaKupFZ+Q16hKbnvdFFXsuHIK8Cr1O?=
+ =?us-ascii?q?avtN36CncY96XJcP8sjnoisdij9gCeX2F/X4u3UmDGvMHYZVa/oEOdcKoQ19?=
+ =?us-ascii?q?ULvYryDL0Zt0xeLQ3SgRpYTLiagqJGEI3LzUpKSu3zAq2yOQprQtqSfecF0O?=
+ =?us-ascii?q?Vvebb46dNo5F//eqEm7FWNGYD4xzUXYhlu5UVx4IZnM+PRWJcKknV+d8hUsK?=
+ =?us-ascii?q?OZ3DVzk4uJtrHwcfE4Ao1iIS9D5EojqOUgVjB/m0wUum/TFhqjypzDtTbZjm?=
+ =?us-ascii?q?RbZIjnH0M9lEPB97Z6lWiPSemuv8VQhrfk7go817eECKCohgWD/3o1Zjo1Ph?=
+ =?us-ascii?q?UOOC3uxYMMuiJ5wR+Mto0w+2WvMa7wTda8ncmh3cvn/R1xcggL4ioEK7BR4q?=
+ =?us-ascii?q?oifHDqN24U7/PPEcrwmXQ8Fc3BR3CYIfjDiC5BZ8AFAW7zYyspFK2e6P22k6?=
+ =?us-ascii?q?vLCrlvFKx4d0sHmAWTRtKclcgpWkhGrDPXi18rbQ1ED63XPd4Qqq/utw2VAa?=
+ =?us-ascii?q?xiT8A+YFT+RMBxoXfiOojPb5c+FidIT7+PnqxT7GEGbJdH8w+Hp/jfZxEJdr?=
+ =?us-ascii?q?EjZ49KPb1OTIr71Bo4YBoEgJis/8ZxO0/5vYG1b5mN9pqxRlFBmCEfDJWJzg?=
+ =?us-ascii?q?+tJmJXml8G7mp3MJBauaqwaQuW5e9tAxzVRYnlAuKXBwewMcVXBX5nc6aFFI?=
+ =?us-ascii?q?9F1PfWqUr+zD+db13hHTG3TrMuaevucN27mkGI4DDfAoR5ryW0YkvCRGeHKt?=
+ =?us-ascii?q?93rmHeNmAZer7ocQMcyr+JQirdt500AnzktSV3nLaBls913VGcck1TNVmUEX?=
+ =?us-ascii?q?rk0sZfXRhFTRAqP1nGarCxj3Cx2TSjhJ+Q2tmH/cea0Cuy5/wgVkd7y3dDBb?=
+ =?us-ascii?q?hM9JhLcN/hlG5fcTgXdYggdh55egTjx55nS3zm+/4Fb+CfX9ay401u6Kdr8I?=
+ =?us-ascii?q?56mK9HxA/UV5yd+TtUKpXvCbxKxDw42H/dxYQWpUFQd/TrjHjrrkPRDjoVBw?=
+ =?us-ascii?q?XFPoDW6Uhq2nG+87UepzItGabj0R/5ZFSeeIGg0OK4VXwEWh8ASSvF21l25k?=
+ =?us-ascii?q?nGaVeG7FoVcBLsyOzLDrN9lbCFvK9gDSmXHQNXNLJv+c2qVRdLfUV9tktIyu?=
+ =?us-ascii?q?BIFLoYvCouuSTE/jZbwP6lG7hwW7V0/IbmA6zddkeRajeLe708YVBRXFWUDL?=
+ =?us-ascii?q?UHJMW1bH94V1n7x7WEpwLrJchXBfA8UJUfsHwIy12+I9JlJMaM/jqeR9uFNM?=
+ =?us-ascii?q?Ozf3YmwJraO18PJhS7e6DZhsSXO5t7ghEJElI4SuiUlHS0r3gHQuDsWowW+u?=
+ =?us-ascii?q?KLWWbo0HiURuKQujVNEnPvVcMk3gMWa4W06WWsJN43TvCmRnqNL2Xt7DECQl?=
+ =?us-ascii?q?kWXJAcy1/uYGBjG2Qx1Z4zPo6pTL8o+sZBoZxiipyRdsb0EBO3Vh92y3J8UP?=
+ =?us-ascii?q?8X5MlTLeKrSzYojq6+GpogIumnMsHARZrpPWO2ZCAKCh0ygONT0XcRQobXxu?=
+ =?us-ascii?q?CfkzFZMcmZayxwPKZAJEz192TjcNSYMBlaL6VJUVMkTMzQ1FtB07cl6IOyuE?=
+ =?us-ascii?q?lLnriWiOp3jU4Ex6EsbJnFuFVrPWGDr4hr/0iJNhTxwsSfwrNwJ5bflV8Fts?=
+ =?us-ascii?q?Rrw7RlJ2a/BBF19Os7Gaif/GNmVbcIMpCgRwbibF/PAPGznwj/ctHob6SQ8a?=
+ =?us-ascii?q?4Uw8L92VW0f+nj5Yg6kd7s226vfNJp5V1kvI8+/M6v4LRtl4u5kuIP9d4ooZ?=
+ =?us-ascii?q?4CW1nMkLU0X+Q65GIQ1I5pW8xZin5wGUqYqzHLgIc6K1+6MUkcr2IAldlJ3I?=
+ =?us-ascii?q?XeTMXHvW2/6TsNrrLT+9L5NLMsToJnqFdsU9fF6v9Yb7fqFuuq/yKp7sIEDR?=
+ =?us-ascii?q?vc1kdh/arVtVSBQ/Mh3s2/Iby1ppzXHp6fW2lJ9lNBdlxlN12JgC6Pyuum+t?=
+ =?us-ascii?q?Cp8ibYQvDTubIF6VyCbMIpyemqZBaeogCWkc8TUSkdvLgTYTQftOzCmSpTdg?=
+ =?us-ascii?q?meyhkV/6XMI2E6i3dr5FpMODD0a7e8ffmq/ncBqqaOf0zj6jM2nyYgzWx3um?=
+ =?us-ascii?q?yXT+s8VtFuW578LlT9jCkgm9LLcgqSqmNuIBnr8PvTMUoO6VEeedDdlecCP5?=
+ =?us-ascii?q?9Y4lskr7oTV+BDqbqMnutW5+TCvxeyFQzi+FGf81iLlSHh88NYpPvc0ZO/ux?=
+ =?us-ascii?q?Yf7dR4hQjC6PGo/YuXl8nxiFhobNrudK6vU5f0niDcnyiSTfV4sLuyLpJSGO?=
+ =?us-ascii?q?s3OLJZcn++DK3oOZJTn1HFc/VMfasPbGYBLcczMVzhwQvlzig3p1wNdOA+tU?=
+ =?us-ascii?q?OA2xFnwd7BVkA=3D=3D?=
 X-IronPort-AV: E=Sophos;i="5.93,230,1654574400"; 
-   d="scan'208";a="77898109"
+   d="scan'208";a="77898114"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
  Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v4 24/32] git-checkout.sh: handle running git-checkout from a different directory
-Date: Thu, 11 Aug 2022 17:48:37 +0100
-Message-ID: <20220811164845.38083-25-anthony.perard@citrix.com>
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>
+Subject: [XEN PATCH v4 26/32] libs: Fix auto-generation of version-script for unstable libs
+Date: Thu, 11 Aug 2022 17:48:39 +0100
+Message-ID: <20220811164845.38083-27-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220811164845.38083-1-anthony.perard@citrix.com>
 References: <20220811164845.38083-1-anthony.perard@citrix.com>
@@ -119,40 +122,332 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-"$DIR" might not be a full path and it might not have `pwd` as ".."
-directory. So use `cd -` to undo the first `cd` command.
+When there isn't a version-script for a shared library (like for
+unstable libs), we create one based on the current Xen version. But
+that version-script became out-of-date as soon as Xen's version
+changes and make as no way to regenerate the version-script on
+rebuild.
 
-Also, use `basename` to make a symbolic link with a relative path.
+In order to allow regenerating the script, we'll have a different
+filename. In order to check if the content is up-to-date, we'll always
+generated it and compare.
 
-This doesn't matter yet but it will when for example the commands to
-clone OVMF is been run from tools/ rather than tools/firmware/.
+But we also need to know if there's already an existing version script
+or if we need to generate one, for that we introduce $(version-script)
+to be used to point to the path of the existing script. (Guessing if a
+version script exist for a stable library with for example $(wildcard)
+won't work as a file will exist when building the library without this
+patch.)
+
+We don't need the version-script unless we are making the shared
+library so it is removed from the "all" target.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+
+Alternatively, we could remove the need for to generate a
+version-script, but that would mean the exported symbols won't have a
+version anymore (like before, a few versions of Xen ago). Or, we could
+use --default-symver, but the symboled would be versionned with the
+soname (e.g. "libxenctrl.so.4.16.0") instead of "VERS_4.16.0".
 ---
 
 Notes:
     v4:
     - new patch
 
- scripts/git-checkout.sh | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/libs/call/Makefile          |  1 +
+ tools/libs/ctrl/Makefile          |  3 ---
+ tools/libs/devicemodel/Makefile   |  1 +
+ tools/libs/evtchn/Makefile        |  1 +
+ tools/libs/foreignmemory/Makefile |  1 +
+ tools/libs/gnttab/Makefile        |  1 +
+ tools/libs/guest/Makefile         |  3 ---
+ tools/libs/hypfs/Makefile         |  1 +
+ tools/libs/light/Makefile         |  1 -
+ tools/libs/stat/Makefile          |  2 +-
+ tools/libs/store/Makefile         |  1 +
+ tools/libs/toolcore/Makefile      |  1 +
+ tools/libs/toollog/Makefile       |  1 +
+ tools/libs/util/Makefile          |  3 ---
+ tools/libs/vchan/Makefile         |  3 ---
+ tools/libs/libs.mk                | 19 +++++++++++++------
+ .gitignore                        |  6 ------
+ 17 files changed, 23 insertions(+), 26 deletions(-)
 
-diff --git a/scripts/git-checkout.sh b/scripts/git-checkout.sh
-index 20ae31ff23..fd4425ac4e 100755
---- a/scripts/git-checkout.sh
-+++ b/scripts/git-checkout.sh
-@@ -19,9 +19,9 @@ if test \! -d $DIR-remote; then
- 		cd $DIR-remote.tmp
- 		$GIT branch -D dummy >/dev/null 2>&1 ||:
- 		$GIT checkout -b dummy $TAG
--		cd ..
-+		cd -
- 	fi
- 	mv $DIR-remote.tmp $DIR-remote
- fi
- rm -f $DIR
--ln -sf $DIR-remote $DIR
-+ln -sf $(basename $DIR-remote) $DIR
+diff --git a/tools/libs/call/Makefile b/tools/libs/call/Makefile
+index 103f5ad360..56a964b517 100644
+--- a/tools/libs/call/Makefile
++++ b/tools/libs/call/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 3
++version-script := libxencall.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
+index 93442ab389..094e84b8d8 100644
+--- a/tools/libs/ctrl/Makefile
++++ b/tools/libs/ctrl/Makefile
+@@ -10,6 +10,3 @@ PKG_CONFIG_NAME := Xencontrol
+ NO_HEADERS_CHK := y
+ 
+ include $(XEN_ROOT)/tools/libs/libs.mk
+-
+-clean::
+-	rm -f libxenctrl.map
+diff --git a/tools/libs/devicemodel/Makefile b/tools/libs/devicemodel/Makefile
+index b70dd774e4..20d1d112e7 100644
+--- a/tools/libs/devicemodel/Makefile
++++ b/tools/libs/devicemodel/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 4
++version-script := libxendevicemodel.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/evtchn/Makefile b/tools/libs/evtchn/Makefile
+index 3dad3840c6..18cdaab89e 100644
+--- a/tools/libs/evtchn/Makefile
++++ b/tools/libs/evtchn/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 2
++version-script := libxenevtchn.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/foreignmemory/Makefile b/tools/libs/foreignmemory/Makefile
+index b70dd774e4..81398e88b1 100644
+--- a/tools/libs/foreignmemory/Makefile
++++ b/tools/libs/foreignmemory/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 4
++version-script := libxenforeignmemory.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/gnttab/Makefile b/tools/libs/gnttab/Makefile
+index 3dad3840c6..4528830bdc 100644
+--- a/tools/libs/gnttab/Makefile
++++ b/tools/libs/gnttab/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 2
++version-script := libxengnttab.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
+index 19d3ff2fdb..93338a9301 100644
+--- a/tools/libs/guest/Makefile
++++ b/tools/libs/guest/Makefile
+@@ -14,6 +14,3 @@ NO_HEADERS_CHK := y
+ include $(XEN_ROOT)/tools/libs/libs.mk
+ 
+ libxenguest.so.$(MAJOR).$(MINOR): LDLIBS += $(ZLIB_LIBS) -lz
+-
+-clean::
+-	rm -f libxenguest.map
+diff --git a/tools/libs/hypfs/Makefile b/tools/libs/hypfs/Makefile
+index 630e1e6f3e..7fae5c750d 100644
+--- a/tools/libs/hypfs/Makefile
++++ b/tools/libs/hypfs/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+ MINOR    = 0
++version-script := libxenhypfs.map
+ 
+ LDLIBS += -lz
+ 
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 13545654c2..1d5716dbba 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -252,6 +252,5 @@ clean::
+ 	$(RM) testidl.c.new testidl.c *.api-ok
+ 	$(RM) $(TEST_PROGS) libxenlight_test.so libxl_test_*.opic
+ 	$(RM) -r __pycache__
+-	$(RM) libxenlight.map
+ 	$(RM) $(AUTOSRCS) $(AUTOINCS)
+ 	$(MAKE) -C $(ACPI_PATH) ACPI_BUILD_DIR=$(CURDIR) clean
+diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
+index 7eaf50e91e..ee5c42bf7b 100644
+--- a/tools/libs/stat/Makefile
++++ b/tools/libs/stat/Makefile
+@@ -134,4 +134,4 @@ uninstall:: uninstall-perl-bindings
+ endif
+ 
+ clean::
+-	$(RM) libxenstat.map $(BINDINGS) $(BINDINGSRC)
++	$(RM) $(BINDINGS) $(BINDINGSRC)
+diff --git a/tools/libs/store/Makefile b/tools/libs/store/Makefile
+index 2334c953bb..300c271eb0 100644
+--- a/tools/libs/store/Makefile
++++ b/tools/libs/store/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR = 4
+ MINOR = 0
++version-script := libxenstore.map
+ 
+ ifeq ($(CONFIG_Linux),y)
+ LDLIBS += -ldl
+diff --git a/tools/libs/toolcore/Makefile b/tools/libs/toolcore/Makefile
+index 0d92b68b3b..20671dadd0 100644
+--- a/tools/libs/toolcore/Makefile
++++ b/tools/libs/toolcore/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR	= 1
+ MINOR	= 0
++version-script := libxentoolcore.map
+ 
+ LIBHEADER := xentoolcore.h
+ 
+diff --git a/tools/libs/toollog/Makefile b/tools/libs/toollog/Makefile
+index 2361b8cbf1..d612227c85 100644
+--- a/tools/libs/toollog/Makefile
++++ b/tools/libs/toollog/Makefile
+@@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR	= 1
+ MINOR	= 0
++version-script := libxentoollog.map
+ 
+ include Makefile.common
+ 
+diff --git a/tools/libs/util/Makefile b/tools/libs/util/Makefile
+index 493d2e00be..e016baf888 100644
+--- a/tools/libs/util/Makefile
++++ b/tools/libs/util/Makefile
+@@ -47,6 +47,3 @@ $(OBJS-y) $(PIC_OBJS): $(AUTOINCS)
+ %.c %.h:: %.l
+ 	@rm -f $*.[ch]
+ 	$(FLEX) --header-file=$*.h --outfile=$*.c $<
+-
+-clean::
+-	$(RM) libxenutil.map
+diff --git a/tools/libs/vchan/Makefile b/tools/libs/vchan/Makefile
+index ac2bff66f5..a1ef60ac8e 100644
+--- a/tools/libs/vchan/Makefile
++++ b/tools/libs/vchan/Makefile
+@@ -11,6 +11,3 @@ OBJS-y += io.o
+ NO_HEADERS_CHK := y
+ 
+ include $(XEN_ROOT)/tools/libs/libs.mk
+-
+-clean::
+-	rm -f libxenvchan.map
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index 3eb91fc8f3..cab8e9704a 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -4,6 +4,8 @@
+ #   PKG_CONFIG: name of pkg-config file (xen$(LIBNAME).pc if empty)
+ #   MAJOR:   major version of lib (Xen version if empty)
+ #   MINOR:   minor version of lib (0 if empty)
++#   version-script: Specify the name of a version script to the linker.
++#     (If empty, a temporary one for unstable library is created)
+ 
+ LIBNAME := $(notdir $(CURDIR))
+ 
+@@ -12,6 +14,10 @@ MAJOR := $(shell $(XEN_ROOT)/version.sh $(XEN_ROOT)/xen/Makefile)
+ endif
+ MINOR ?= 0
+ 
++ifeq ($(origin version-script), undefined)
++version-script := libxen$(LIBNAME).map.tmp
++endif
++
+ CFLAGS   += -Wmissing-prototypes
+ CFLAGS   += $(CFLAGS_xeninclude)
+ CFLAGS   += $(foreach lib, $(USELIBS_$(LIBNAME)), $(CFLAGS_libxen$(lib)))
+@@ -53,7 +59,7 @@ $(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_INCLUDE)
+ $(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
+ 
+ .PHONY: all
+-all: $(TARGETS) $(PKG_CONFIG_LOCAL) libxen$(LIBNAME).map $(LIBHEADERS)
++all: $(TARGETS) $(PKG_CONFIG_LOCAL) $(LIBHEADERS)
+ 
+ ifneq ($(NO_HEADERS_CHK),y)
+ all: headers.chk
+@@ -71,8 +77,9 @@ headers.lst: FORCE
+ 	@{ set -e; $(foreach h,$(LIBHEADERS),echo $(h);) } > $@.tmp
+ 	@$(call move-if-changed,$@.tmp,$@)
+ 
+-libxen$(LIBNAME).map:
+-	echo 'VERS_$(MAJOR).$(MINOR) { global: *; };' >$@
++libxen$(LIBNAME).map.tmp: FORCE
++	echo 'VERS_$(MAJOR).$(MINOR) { global: *; };' >.$@.tmp
++	$(call move-if-changed,.$@.tmp,$@)
+ 
+ lib$(LIB_FILE_NAME).a: $(OBJS-y)
+ 	$(AR) rc $@ $^
+@@ -82,8 +89,8 @@ lib$(LIB_FILE_NAME).so: lib$(LIB_FILE_NAME).so.$(MAJOR)
+ lib$(LIB_FILE_NAME).so.$(MAJOR): lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR)
+ 	$(SYMLINK_SHLIB) $< $@
+ 
+-lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) libxen$(LIBNAME).map
+-	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,lib$(LIB_FILE_NAME).so.$(MAJOR) -Wl,--version-script=libxen$(LIBNAME).map $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
++lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) $(version-script)
++	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,lib$(LIB_FILE_NAME).so.$(MAJOR) -Wl,--version-script=$(version-script) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ # If abi-dumper is available, write out the ABI analysis
+ ifneq ($(ABI_DUMPER),)
+@@ -122,7 +129,7 @@ TAGS:
+ clean::
+ 	rm -rf $(TARGETS) *~ $(DEPS_RM) $(OBJS-y) $(PIC_OBJS)
+ 	rm -f lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) lib$(LIB_FILE_NAME).so.$(MAJOR)
+-	rm -f headers.chk headers.lst
++	rm -f headers.chk headers.lst libxen*.map.tmp
+ 
+ .PHONY: distclean
+ distclean: clean
+diff --git a/.gitignore b/.gitignore
+index e3fe06cd13..1e415fbb99 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -106,8 +106,6 @@ tools/config.cache
+ config/Tools.mk
+ config/Stubdom.mk
+ config/Docs.mk
+-tools/libs/ctrl/libxenctrl.map
+-tools/libs/guest/libxenguest.map
+ tools/libs/guest/xc_bitops.h
+ tools/libs/guest/xc_core.h
+ tools/libs/guest/xc_core_arm.h
+@@ -117,7 +115,6 @@ tools/libs/light/_*.[ch]
+ tools/libs/light/*.pyc
+ tools/libs/light/_libxl.api-for-check
+ tools/libs/light/*.api-ok
+-tools/libs/light/libxenlight.map
+ tools/libs/light/libxl-save-helper
+ tools/libs/light/dsdt*
+ tools/libs/light/mk_dsdt
+@@ -127,13 +124,10 @@ tools/libs/light/testidl.c
+ tools/libs/light/test_timedereg
+ tools/libs/light/test_fdderegrace
+ tools/libs/light/tmp.*
+-tools/libs/stat/libxenstat.map
+ tools/libs/store/list.h
+ tools/libs/store/utils.h
+ tools/libs/store/xs_lib.c
+ tools/libs/util/libxlu_cfg_y.output
+-tools/libs/util/libxenutil.map
+-tools/libs/vchan/libxenvchan.map
+ tools/debugger/gdb/gdb-6.2.1-linux-i386-xen/*
+ tools/debugger/gdb/gdb-6.2.1/*
+ tools/debugger/gdb/gdb-6.2.1.tar.bz2
 -- 
 Anthony PERARD
 
