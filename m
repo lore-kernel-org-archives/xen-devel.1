@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9EC0C3F6B0
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:49:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.384787.620288 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29EB9C25B0E
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:49:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.384789.620300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBMq-0004Tj-FX; Thu, 11 Aug 2022 16:49:08 +0000
+	id 1oMBMr-0004fD-BL; Thu, 11 Aug 2022 16:49:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 384787.620288; Thu, 11 Aug 2022 16:49:08 +0000
+Received: by outflank-mailman (output) from mailman id 384789.620300; Thu, 11 Aug 2022 16:49:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBMq-0004SM-Be; Thu, 11 Aug 2022 16:49:08 +0000
-Received: by outflank-mailman (input) for mailman id 384787;
- Thu, 11 Aug 2022 16:49:06 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oMBMr-0004e3-3m; Thu, 11 Aug 2022 16:49:09 +0000
+Received: by outflank-mailman (input) for mailman id 384789;
+ Thu, 11 Aug 2022 16:49:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jhQd=YP=citrix.com=prvs=21531f474=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oMBMo-0003Aq-OE
- for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:06 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 81cb3c3d-1995-11ed-bd2e-47488cf2e6aa;
- Thu, 11 Aug 2022 18:49:05 +0200 (CEST)
+ id 1oMBMp-0003s9-Oo
+ for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:07 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 83148bdf-1995-11ed-924f-1f966e50362f;
+ Thu, 11 Aug 2022 18:49:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,50 +38,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 81cb3c3d-1995-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 83148bdf-1995-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1660236545;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ysnWsjj7Rb1EHEFLlv8kUsqZAX1qaQM4OVjafbYC2NQ=;
-  b=N3h0c+becblvFHHaq6ZaIovFvr8+Evh9C5SdTq4LC0cUBST2WpU3IUmb
-   9Xx8xY3zBTLSP/nqEuk+nGkTk7l04I4Hcy77sRwXsVN2aS0dZb0QyL3Pc
-   Ie8AVRlYJHvmi+epXlNqgzLVyR/U0Kct+SdDbTBrzCaa6Q3GAV/PcsdSy
-   E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=oiMxhY9aNAuabaL1poisWXh5+cq7pv8wOKvWKuB/m94=;
+  b=R3jt1ro69G6fAqc79zHZ0N3saSgB98WWnMWfjoGdOkOgehzfzENO0Stv
+   DYvFUB1O4toi9tH0LgGHciVM0tUzelnA5TS7GCZn5wprhYrVNZG5rpNiF
+   060j4mSLhKyFz4jAdP0psrmq3rB/1BKDI9KqqYVZoTjiKkZPilWFyXZVk
+   U=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77650099
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 78334323
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:hJ6ys6Ouj/mpT0fvrR3Pl8FynXyQoLVcMsEvi/4bfWQNrUp31zBVz
- jQZXWiPO//fYTageohwOoS3o01QvsSBnYNnSAto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdleF+lH3dOCJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kqsyj5UAbeKRWmthg
- vuv5ZyEULOZ82QsaDhMu/va8EkHUMna41v0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- woU5Ojklo9x105F5uKNyt4XQGVTKlLhFVHmZk5tc7qjmnB/Shkaic7XAha+hXB/0F1ll/gpo
- DlEWAfZpQ0BZsUgk8xFO/VU/r0X0QSrN9YrLFDm2fF/wXEqfFPp/tI3ImUWFLZE58BQG25Cq
- +QjdmoCO0Xra+KemNpXS8Fpj8UnasLqIJkeqjdryjSx4fQOGM6ZBf+QvJkBgWl21psm8fX2P
- qL1bRJmagjAZBtefE8aEpskkM+jh2Xlci0eo1WQzUYyyzeMklEpiOm8WDbTUt/WXYIJumi4n
- CHpwV/zGDsXDfPB7yXQpxpAgceQxHimCer+DoaQ6fpCkFCVgGsJB3U+UUawqL+3g0i1VtZbN
- mQd4C9opq83nGS7Q9+4UxCmrXqsuh8HR8EWA+A88BuKyKff/0CeHGdsc9JaQIV47olsH2Vsj
- wLX2YOybdByjFGLYXeg0e66iRObAnQIC0gYaiNaVTBbuda29enfkSnzosZf/L+d14OrQWmhn
- GnT8kDSlJ1I05dVivzTEUTvxmv1+8OXFlNdChD/BDrN0+9vWGKyi2VEA3D/5O0IEouWR0LpU
- JMsy5nHt7Bm4X1geUWwrAQx8FKBva/t3MX02wIHInXY323FF4SfVY5R+ipiA0xiL9wJfzTkC
- GeK510JvMALZSr6MPUtC25UNyjN5faIKDgYfqqMMoomjmZZLWdrAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMEv2/Z9PlWPuL89AgOBD+8zL7TmMLXwN50j4jOH2ib/8YettDWZimchltf/Y/FiOo
- 4oGXyZIoj0GONDDjuDs2dZ7BTg3wbITX/gad+Q/mja/Hzdb
-IronPort-HdrOrdr: A9a23:UxciEqj2X9dXuIo5ipjFcbzlU3BQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+IronPort-Data: A9a23:YWYn3qjcjDODML9NnKEhr1iUX161ChAKZh0ujC45NGQN5FlHY01je
+ htvW2+Ba6qPZWf0c9ElPYuzoB8AuZfTz95kHgo5qCszFysb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oDJ9CU6j+fQLlbFILasEjhrQgN5QzsWhxtmmuoo6qZlmtH8CA6W0
+ T/Ii5S31GSNhnglaQr414rZ8Ek15KSr4WtC1rADTasjUGH2xiF94K03fcldH1OgKqFIE+izQ
+ fr0zb3R1gs1KD90V7tJOp6iGqE7aua60Tqm0xK6aID76vR2nQQg075TCRYpQRw/ZwNlPTxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJQWXAP6I0DuKhPRL/tS4E4eM6IS0OlyX25yz
+ OUyKTsBVE+Bqe2s3+fuIgVsrpxLwMjDOYoevjdrzC3DDOZgSpfGK0nIzYYGhnFq3JkIRKuAI
+ ZpCAdZsRE2ojxlnM1ELCJU4jaGwi2P2aTFwo1OJv6snpWPUyWSd1ZCyYIGOJofQHq25mG6Al
+ j7m8ifTPSsoMc2t5hy/7C+u19X2yHaTtIU6S+Tjq68CbEeo7nMXIA0bUx28u/bRokqjUNsZJ
+ UUS8ScqqbUa/VauCNL6WnWQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3PLaXhRzi
+ AXPxYmwQ2Uy7vvFEhpx64t4sxu8FiI/ImpcahM9VCEE6NXZ/4MdgQjQG4ML/LGOsjHlJd3h6
+ 2nU8nBm1upK1JBjO7aTpg6e3W/1znTdZktsv1iMADr4hu9sTNT9D7FE/2Q3+hqpwGyxalCa9
+ EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE/qQQ2d3XZ327xk0NPhKgJiN2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSX0NfcoO9vgW5lwl8AM8OgJsdiKBuein7ArLFPXlM2QTRf4M5/RfLgEzvhkZ
+ MbznTeEBncGE6V3pAeLqxMm+eZynkgWmDKMLa0XOjz9jtJyklbJFupeWLZPB8hlhJ65TPL9r
+ 48Da5fXkEUDCYUToED/qOYuELzDFlBjbbieliCdXrXrztZOcI35N8Ls/A==
+IronPort-HdrOrdr: A9a23:jtS076zDTBAGJb3Vc5voKrPwFL1zdoMgy1knxilNoRw8SKKlfq
+ eV7ZImPH7P+U4ssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
+ 4JSdkGNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.93,230,1654574400"; 
-   d="scan'208";a="77650099"
+   d="scan'208";a="78334323"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Luca Fancellu
 	<luca.fancellu@arm.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v4 04/32] tools/hotplug: cleanup Makefiles
-Date: Thu, 11 Aug 2022 17:48:17 +0100
-Message-ID: <20220811164845.38083-5-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 07/32] tools/xentop: rework makefile
+Date: Thu, 11 Aug 2022 17:48:20 +0100
+Message-ID: <20220811164845.38083-8-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220811164845.38083-1-anthony.perard@citrix.com>
 References: <20220811164845.38083-1-anthony.perard@citrix.com>
@@ -89,245 +89,101 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Remove "build" targets.
+Add "xentop" to "TARGETS" because this variable will be useful later.
 
-Use simply expanded variables when recursively expanded variable
-aren't needed. (Use ":=" instead of "=".)
+Always define all the targets, even when configured with
+--disable-monitor, instead don't visit the subdirectory.
+This mean xentop/ isn't visited anymore during "make clean" that's how
+most other subdirs in the tools/ works.
 
-Don't check if a directory already exist when installing, just create
-it.
+Also add missing "xentop" rules. It only works without it because we
+still have make's built-ins rules and variables, but fix this to not
+have to rely on them.
 
-Fix $(HOTPLUGPATH), it shouldn't have any double-quote.
+Use $(TARGETS) with $(INSTALL_PROG), and thus install into the
+directory rather than spelling the program name.
 
-Some reindentation.
-
-FreeBSD, "hotplugpath.sh" is already installed by common/.
+In the "clean" rule, use $(RM) and remove all "*.o" instead of just
+one object.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- tools/hotplug/FreeBSD/Makefile       | 11 +++--------
- tools/hotplug/Linux/Makefile         | 16 ++++++----------
- tools/hotplug/Linux/systemd/Makefile | 16 +++++++---------
- tools/hotplug/NetBSD/Makefile        |  9 +++------
- tools/hotplug/common/Makefile        | 16 ++++++----------
- 5 files changed, 25 insertions(+), 43 deletions(-)
 
-diff --git a/tools/hotplug/FreeBSD/Makefile b/tools/hotplug/FreeBSD/Makefile
-index de9928cd86..a6552c9884 100644
---- a/tools/hotplug/FreeBSD/Makefile
-+++ b/tools/hotplug/FreeBSD/Makefile
-@@ -2,18 +2,15 @@ XEN_ROOT = $(CURDIR)/../../..
+Notes:
+    v2:
+    - use $(RM) in clean.
+    - remove all *.o instead of just one object in "clean" rule.
+    - in "install" rule, make use of $(TARGETS). install into a dir rather
+      than to a specific path, in case there's more targets.
+
+ tools/Makefile        |  2 +-
+ tools/xentop/Makefile | 21 +++++++++------------
+ 2 files changed, 10 insertions(+), 13 deletions(-)
+
+diff --git a/tools/Makefile b/tools/Makefile
+index 79b4c7e3de..0c1d8b64a4 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -17,7 +17,7 @@ SUBDIRS-$(CONFIG_XCUTILS) += xcutils
+ SUBDIRS-$(CONFIG_X86) += firmware
+ SUBDIRS-y += console
+ SUBDIRS-y += xenmon
+-SUBDIRS-y += xentop
++SUBDIRS-$(XENSTAT_XENTOP) += xentop
+ SUBDIRS-y += libfsimage
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ 
+diff --git a/tools/xentop/Makefile b/tools/xentop/Makefile
+index 0034114684..7bd96f34d5 100644
+--- a/tools/xentop/Makefile
++++ b/tools/xentop/Makefile
+@@ -13,36 +13,33 @@
+ XEN_ROOT=$(CURDIR)/../..
  include $(XEN_ROOT)/tools/Rules.mk
  
- # Xen script dir and scripts to go there.
--XEN_SCRIPTS = vif-bridge block
-+XEN_SCRIPTS := vif-bridge block
+-ifneq ($(XENSTAT_XENTOP),y)
+-.PHONY: all install xentop uninstall
+-all install xentop uninstall:
+-else
+-
+ CFLAGS += -DGCC_PRINTF -Werror $(CFLAGS_libxenstat)
+ LDLIBS += $(LDLIBS_libxenstat) $(CURSES_LIBS) $(TINFO_LIBS) $(SOCKET_LIBS) -lm
+ CFLAGS += -DHOST_$(XEN_OS)
  
--XEN_SCRIPT_DATA =
-+XEN_SCRIPT_DATA :=
- 
--XEN_RCD_PROG = rc.d/xencommons rc.d/xendriverdomain
-+XEN_RCD_PROG := rc.d/xencommons rc.d/xendriverdomain
+ # Include configure output (config.h)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-LDFLAGS += $(APPEND_LDFLAGS)
++
++TARGETS := xentop
  
  .PHONY: all
- all:
+-all: xentop
++all: $(TARGETS)
++
++xentop: xentop.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
  
--.PHONY: build
--build:
--
  .PHONY: install
- install: install-scripts install-rcd
+-install: xentop
++install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
+-	$(INSTALL_PROG) xentop $(DESTDIR)$(sbindir)/xentop
++	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(sbindir)
  
-@@ -44,12 +41,10 @@ install-rcd:
- 	   do \
- 	   $(INSTALL_PROG) $$i $(DESTDIR)$(INITD_DIR); \
- 	done
--	$(INSTALL_DATA) ../common/hotplugpath.sh $(DESTDIR)$(XEN_SCRIPT_DIR)
+ .PHONY: uninstall
+ uninstall:
+ 	rm -f $(DESTDIR)$(sbindir)/xentop
  
- .PHONY: uninstall-rcd
- uninstall-rcd:
- 	rm -f $(addprefix $(DESTDIR)$(INITD_DIR)/, $(XEN_RCD_PROG))
--	rm -f $(DESTDIR)$(XEN_SCRIPT_DIR)/hotplugpath.sh
- 
+-endif
+-
  .PHONY: clean
  clean:
-diff --git a/tools/hotplug/Linux/Makefile b/tools/hotplug/Linux/Makefile
-index 0b1d111d7e..9a7b3a3515 100644
---- a/tools/hotplug/Linux/Makefile
-+++ b/tools/hotplug/Linux/Makefile
-@@ -2,7 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
+-	rm -f xentop xentop.o $(DEPS_RM)
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
  
- # Xen script dir and scripts to go there.
--XEN_SCRIPTS = vif-bridge
-+XEN_SCRIPTS := vif-bridge
- XEN_SCRIPTS += vif-route
- XEN_SCRIPTS += vif-nat
- XEN_SCRIPTS += vif-openvswitch
-@@ -22,16 +22,13 @@ XEN_SCRIPTS += launch-xenstore
- 
- SUBDIRS-$(CONFIG_SYSTEMD) += systemd
- 
--XEN_SCRIPT_DATA = xen-script-common.sh locking.sh logging.sh
-+XEN_SCRIPT_DATA := xen-script-common.sh locking.sh logging.sh
- XEN_SCRIPT_DATA += xen-hotplug-common.sh xen-network-common.sh vif-common.sh
- XEN_SCRIPT_DATA += block-common.sh
- 
- .PHONY: all
- all: subdirs-all
- 
--.PHONY: build
--build:
--
- .PHONY: install
- install: install-initd install-scripts subdirs-install
- 
-@@ -41,9 +38,9 @@ uninstall: uninstall-initd uninstall-scripts subdirs-uninstall
- # See docs/misc/distro_mapping.txt for INITD_DIR location
- .PHONY: install-initd
- install-initd:
--	[ -d $(DESTDIR)$(INITD_DIR) ] || $(INSTALL_DIR) $(DESTDIR)$(INITD_DIR)
--	[ -d $(DESTDIR)$(SYSCONFIG_DIR) ] || $(INSTALL_DIR) $(DESTDIR)$(SYSCONFIG_DIR)
--	[ -d $(DESTDIR)$(LIBEXEC_BIN) ] || $(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
-+	$(INSTALL_DIR) $(DESTDIR)$(INITD_DIR)
-+	$(INSTALL_DIR) $(DESTDIR)$(SYSCONFIG_DIR)
-+	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
- 	$(INSTALL_DATA) init.d/sysconfig.xendomains $(DESTDIR)$(SYSCONFIG_DIR)/xendomains
- 	$(INSTALL_DATA) init.d/sysconfig.xencommons $(DESTDIR)$(SYSCONFIG_DIR)/xencommons
- 	$(INSTALL_PROG) xendomains $(DESTDIR)$(LIBEXEC_BIN)
-@@ -64,8 +61,7 @@ uninstall-initd:
- 
- .PHONY: install-scripts
- install-scripts:
--	[ -d $(DESTDIR)$(XEN_SCRIPT_DIR) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_SCRIPT_DIR)
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_SCRIPT_DIR)
- 	set -e; for i in $(XEN_SCRIPTS); \
- 	    do \
- 	    $(INSTALL_PROG) $$i $(DESTDIR)$(XEN_SCRIPT_DIR); \
-diff --git a/tools/hotplug/Linux/systemd/Makefile b/tools/hotplug/Linux/systemd/Makefile
-index a5d41d86ef..26df2a43b1 100644
---- a/tools/hotplug/Linux/systemd/Makefile
-+++ b/tools/hotplug/Linux/systemd/Makefile
-@@ -1,12 +1,12 @@
- XEN_ROOT = $(CURDIR)/../../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
--XEN_SYSTEMD_MODULES = xen.conf
-+XEN_SYSTEMD_MODULES := xen.conf
- 
--XEN_SYSTEMD_MOUNT =  proc-xen.mount
-+XEN_SYSTEMD_MOUNT := proc-xen.mount
- XEN_SYSTEMD_MOUNT += var-lib-xenstored.mount
- 
--XEN_SYSTEMD_SERVICE  = xenstored.service
-+XEN_SYSTEMD_SERVICE := xenstored.service
- XEN_SYSTEMD_SERVICE += xenconsoled.service
- XEN_SYSTEMD_SERVICE += xen-qemu-dom0-disk-backend.service
- XEN_SYSTEMD_SERVICE += xendomains.service
-@@ -14,7 +14,7 @@ XEN_SYSTEMD_SERVICE += xen-watchdog.service
- XEN_SYSTEMD_SERVICE += xen-init-dom0.service
- XEN_SYSTEMD_SERVICE += xendriverdomain.service
- 
--ALL_XEN_SYSTEMD =	$(XEN_SYSTEMD_MODULES)  \
-+ALL_XEN_SYSTEMD :=	$(XEN_SYSTEMD_MODULES)  \
- 			$(XEN_SYSTEMD_MOUNT)	\
- 			$(XEN_SYSTEMD_SERVICE)
- 
-@@ -30,10 +30,8 @@ distclean: clean
- 
- .PHONY: install
- install: $(ALL_XEN_SYSTEMD)
--	[ -d $(DESTDIR)$(XEN_SYSTEMD_DIR) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_SYSTEMD_DIR)
--	[ -d $(DESTDIR)$(XEN_SYSTEMD_MODULES_LOAD) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_SYSTEMD_MODULES_LOAD)
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_SYSTEMD_DIR)
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_SYSTEMD_MODULES_LOAD)
- 	$(INSTALL_DATA) *.service $(DESTDIR)$(XEN_SYSTEMD_DIR)
- 	$(INSTALL_DATA) *.mount $(DESTDIR)$(XEN_SYSTEMD_DIR)
- 	$(INSTALL_DATA) *.conf $(DESTDIR)$(XEN_SYSTEMD_MODULES_LOAD)
-@@ -48,5 +46,5 @@ $(XEN_SYSTEMD_MODULES):
- 	rm -f $@.tmp
- 	for mod in $(LINUX_BACKEND_MODULES) ; do \
- 		echo $$mod ; \
--		done > $@.tmp
-+	done > $@.tmp
- 	$(call move-if-changed,$@.tmp,$@)
-diff --git a/tools/hotplug/NetBSD/Makefile b/tools/hotplug/NetBSD/Makefile
-index f909ffa367..1cd3db2ccb 100644
---- a/tools/hotplug/NetBSD/Makefile
-+++ b/tools/hotplug/NetBSD/Makefile
-@@ -2,22 +2,19 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- # Xen script dir and scripts to go there.
--XEN_SCRIPTS =
-+XEN_SCRIPTS :=
- XEN_SCRIPTS += locking.sh
- XEN_SCRIPTS += block
- XEN_SCRIPTS += vif-bridge
- XEN_SCRIPTS += vif-ip
- XEN_SCRIPTS += qemu-ifup
- 
--XEN_SCRIPT_DATA =
--XEN_RCD_PROG = rc.d/xencommons rc.d/xendomains rc.d/xen-watchdog rc.d/xendriverdomain
-+XEN_SCRIPT_DATA :=
-+XEN_RCD_PROG := rc.d/xencommons rc.d/xendomains rc.d/xen-watchdog rc.d/xendriverdomain
- 
- .PHONY: all
- all:
- 
--.PHONY: build
--build:
--
- .PHONY: install
- install: install-scripts install-rcd
- 
-diff --git a/tools/hotplug/common/Makefile b/tools/hotplug/common/Makefile
-index ef48bfacc9..e8a8dbea6c 100644
---- a/tools/hotplug/common/Makefile
-+++ b/tools/hotplug/common/Makefile
-@@ -1,22 +1,19 @@
- XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
--HOTPLUGPATH="hotplugpath.sh"
-+HOTPLUGPATH := hotplugpath.sh
- 
- # OS-independent hotplug scripts go in this directory
- 
- # Xen scripts to go there.
--XEN_SCRIPTS =
--XEN_SCRIPT_DATA = $(HOTPLUGPATH)
-+XEN_SCRIPTS :=
-+XEN_SCRIPT_DATA := $(HOTPLUGPATH)
- 
- genpath-target = $(call buildmakevars2file,$(HOTPLUGPATH))
- $(eval $(genpath-target))
- 
- .PHONY: all
--all: build
--
--.PHONY: build
--build: $(HOTPLUGPATH)
-+all: $(HOTPLUGPATH)
- 
- .PHONY: install
- install: install-scripts
-@@ -25,9 +22,8 @@ install: install-scripts
- uninstall: uninstall-scripts
- 
- .PHONY: install-scripts
--install-scripts: build
--	[ -d $(DESTDIR)$(XEN_SCRIPT_DIR) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_SCRIPT_DIR)
-+install-scripts: all
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_SCRIPT_DIR)
- 	set -e; for i in $(XEN_SCRIPTS); \
- 	   do \
- 	   $(INSTALL_PROG) $$i $(DESTDIR)$(XEN_SCRIPT_DIR); \
+ .PHONY: distclean
+ distclean: clean
 -- 
 Anthony PERARD
 
