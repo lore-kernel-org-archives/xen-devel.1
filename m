@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F947C25B0C
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:49:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.384798.620350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A9FC19F2A
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Aug 2022 16:49:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.384801.620362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBN3-0006e1-IZ; Thu, 11 Aug 2022 16:49:21 +0000
+	id 1oMBN6-0007OD-1j; Thu, 11 Aug 2022 16:49:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 384798.620350; Thu, 11 Aug 2022 16:49:21 +0000
+Received: by outflank-mailman (output) from mailman id 384801.620362; Thu, 11 Aug 2022 16:49:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMBN3-0006cO-4s; Thu, 11 Aug 2022 16:49:21 +0000
-Received: by outflank-mailman (input) for mailman id 384798;
- Thu, 11 Aug 2022 16:49:19 +0000
+	id 1oMBN5-0007KG-P0; Thu, 11 Aug 2022 16:49:23 +0000
+Received: by outflank-mailman (input) for mailman id 384801;
+ Thu, 11 Aug 2022 16:49:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jhQd=YP=citrix.com=prvs=21531f474=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oMBN1-0003Aq-Ep
- for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:19 +0000
+ id 1oMBN3-0003Aq-DN
+ for xen-devel@lists.xenproject.org; Thu, 11 Aug 2022 16:49:21 +0000
 Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
  [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8991fb32-1995-11ed-bd2e-47488cf2e6aa;
- Thu, 11 Aug 2022 18:49:18 +0200 (CEST)
+ id 8b44c487-1995-11ed-bd2e-47488cf2e6aa;
+ Thu, 11 Aug 2022 18:49:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8991fb32-1995-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 8b44c487-1995-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1660236558;
+  d=citrix.com; s=securemail; t=1660236560;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bUOi3WNc8oZFZzCNM4EoNrFdmqodDZX34IS+jodiKpU=;
-  b=dN/QJmGl+E1J8AFUSvoBbfrhpgGmGsE4Cb0KLvREZ9zFUjsseW/YoNqQ
-   r8mfAH8EPG67qn2rq4hz4RIatUaJ/GJyy9IcgTxfMU9/4xpIrkWbgCyK4
-   /0NzafJhMtjBKGyU0+0tOfuL/fFMNB5F0EZ3IWxQF2fIleDl0bZcokIyC
-   A=;
+  bh=OlPVmttWbfxru1ipdHV5J3q6iQpuewLRL8Acv8ppp/4=;
+  b=DGMyvuWFQm9J9AsKIUTS1WRxQ4igH+5ijF57Bkx8jdfgPUFM6hRC/DZ7
+   ea/NcbpqkcLny9FqH9JBXblfUX1mPvxyvGWRYUFoPqA9zYqlS4uMu6w7i
+   W+DYGKPdTgF5THZl5wUOeJKml4+llKpzv4gdm/0FAGaed5C/WQEwfq7wg
+   s=;
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 80449000
+X-MesageID: 80449013
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:BgLCHKJ4Z7WBzAExFE+R15UlxSXFcZb7ZxGr2PjKsXjdYENShDwPm
- GoZCzrTO/fbZmrwLYt2Ot7ipkkBv5/Sm4BhHgdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokf0/0vraP65xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOd8iYNz6TSDK1rlV
- eja/ouOYzdJ5xYuajhOs/La8Us11BjPkGhwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 44vG5ngows1Vz90Yj+Uuu6Tnn8iG9Y+DiDX4pZiYICwgwAqm8AH+v1T2Mzwy6tgo27hc9hZk
- L2hvHErIOsjFvWkdO81C3G0H8ziVEHvFXCuzXWX6KSuI0P6n3TE298/FkQ5L6gjo8FzInFHy
- uIaETAnV0XW7w626OrTpuhEg80iKI/gPZ8Fu2EmxjbcZRokacmdGeOQv4YehWpuwJAVdRrdT
- 5NxhT5HZRLcYxpJKxEPBYg3huuAjXjjaTxI7lmSoMLb5kCDlFAtgeC1aLI5fPSGH9lEgRjEm
- ljm2Fn5IC4EL5uj1QSspyfEaujnwnqgBdN6+KeD3vRnmkGJz2ofThgfT0KmoOKRg1S7HdlYL
- iQ85S4GvaU0skuxQbHVTxC+5XKJoBMYc95RCPEhrhGAzLLO5ASUDXRCSSROAPQku9UxXicCz
- UKSkpXiAjkHjVGOYSvDrPHO92r0YHVLaz9ZDcMZcecby8HJ8Zs2gQDqdY9EFI2lh+LrGwjw6
- Qnf+UDSmI4vYd43O7STpA6Z22r9+cGQEGbZ9S2MADv7s1oRiJqNItXxtAOFtasowJOxFAHpg
- ZQSpySJAAni57mpnTfFfugCFarBCx2tYGyF2g4H83XMGl2QF5+fkWN4umgWyL9BaJpsRNMQS
- Ba7VfltzJFSJmC2SqR8fpi8Dc8npYC5S4q9Dq+MN4seP8IrHONiwM2JTRD44owQuBJ0zfFX1
- WmzKK5A8kr2+Yw4lWHrFo/xIJcgxzwkxHO7eK0XOy+PiOPGDFbIGOhtDbd7RrpmhE9yiFmKr
- o032grj40k3bdASlQGLqNJPcQ1RfSRibX00wuQOHtO+zsNdMDlJI5fsLXkJJ+SJQ4w9ej/0w
- 0yA
-IronPort-HdrOrdr: A9a23:+r1HwKCOkpHHAgPlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo8f
- xG/c5rrSMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 5dmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:Yy9cUaDLkqfJnhVW/y/jw5YqxClBgxIJ4kV8jS/XYbTApDgi0DUAy
+ WFNCmuBbP6CZ2b1co8kPYvg/U4Bu8LRxtVqQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMZiaA4E3ratANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq3uU0meaEu/Dga++2k
+ Y608pa31GONgWYuaDpEsvvb8nuDgdyp0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSq
+ zHrlezREsvxpn/BO/v9+lrJWhRiro36ZGBivkF+Sam66iWukwRpukoN2FjwXm8M49mBt4gZJ
+ NygLvVcQy9xVkHHsLx1vxW1j0iSlECJkVPKCSHXjCCd86HJW2Du6PlvE1wTBK8d/fZTLGhv1
+ uAgIglYO3hvh8ruqF66Yuxlh8BlJ8j3JoIP/HpnyFk1D95/H8qFGf+To4YFgnFg3aiiHt6HD
+ yYdQTNpcBTHZQwJIloNAYgytOypmmP+Y3tTr1f9Sa8fszCPkF0pieOF3Nz9VdmFaOdTr3+ig
+ kH07WPLCykWMO2h4G/Qmp6rrrCWxn6qMG4IL5Wy++R2mlSVyioWAQcPSFqgifCjjwi1XNc3A
+ 1MQ0jojq+417kPDZsnwWVi0rWCJujYYWsFMCKsq5QeV0K3W7g2FQG8eQVZpatM8s9QtbSc3z
+ VLPlNTsbQGDq5XMFyjbrO3N62rvZ25FdgfueBPoUyMe4fLvoZ4uqyvtS9FzNIO8r/7pITvJl
+ mXiQDcFu1kDsSIa//zlowif0m31/8ahoh0dvVuOAD/8hu9tTMv8PtHztwCGhRpVBNzBJmRtq
+ kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JAVdoJiN2GDB01WvvogBewC
+ KMphStf5YVIIFyhZrJtboS6BqwClPa+TYy6DqmFPocUOPCdkTNrGwkwDXN8Iki3yBR8+U3BE
+ c7znTmQ4YYyVv08kWveqxY12r433CEurV7uqWTA503+idK2OS/KIYrpxXPUMYjVGovY/1iOm
+ zueXuPWoyhivBrWPnCLrdJOdgBWdBDWx/ne8qRqSwJKGSI+cElJNhMb6ehJl1BN90iNqtr1w
+ w==
+IronPort-HdrOrdr: A9a23:us/JbqMoefBe4cBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3/qy
+ nOpoVi6faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrJ
+ uIGJIeNDSfNzdHZL7BkWuFL+o=
 X-IronPort-AV: E=Sophos;i="5.93,230,1654574400"; 
-   d="scan'208";a="80449000"
+   d="scan'208";a="80449013"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
 	<jgross@suse.com>, Bertrand Marquis <bertrand.marquis@arm.com>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH v4 12/32] libs/libs.mk: Rename $(LIB) to $(TARGETS)
-Date: Thu, 11 Aug 2022 17:48:25 +0100
-Message-ID: <20220811164845.38083-13-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 14/32] libs/libs.mk: Rework target headers.chk dependencies
+Date: Thu, 11 Aug 2022 17:48:27 +0100
+Message-ID: <20220811164845.38083-15-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220811164845.38083-1-anthony.perard@citrix.com>
 References: <20220811164845.38083-1-anthony.perard@citrix.com>
@@ -91,47 +91,50 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+There is no need to call the "headers.chk" target when it isn't
+wanted, so it never need to be .PHONY.
+
+Also, there is no more reason to separate the prerequisites from the
+recipe.
+
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- tools/libs/libs.mk | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/libs/libs.mk | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index 58d8166b09..e02f91f95e 100644
+index 7aee449370..f778a7df82 100644
 --- a/tools/libs/libs.mk
 +++ b/tools/libs/libs.mk
-@@ -23,9 +23,9 @@ LDLIBS += $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_libxen$(lib)))
- PIC_OBJS := $(OBJS-y:.o=.opic)
- 
- LIB_FILE_NAME = $(FILENAME_$(LIBNAME))
--LIB := lib$(LIB_FILE_NAME).a
-+TARGETS := lib$(LIB_FILE_NAME).a
- ifneq ($(nosharedlibs),y)
--LIB += lib$(LIB_FILE_NAME).so
-+TARGETS += lib$(LIB_FILE_NAME).so
- endif
- 
- PKG_CONFIG ?= $(LIB_FILE_NAME).pc
-@@ -55,7 +55,7 @@ $(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_INCLUDE)
+@@ -55,22 +55,20 @@ $(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_INCLUDE)
  $(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
  
  .PHONY: all
--all: headers.chk $(LIB) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL) libxen$(LIBNAME).map $(LIBHEADERS)
-+all: headers.chk $(TARGETS) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL) libxen$(LIBNAME).map $(LIBHEADERS)
+-all: headers.chk $(TARGETS) $(PKG_CONFIG_LOCAL) libxen$(LIBNAME).map $(LIBHEADERS)
++all: $(TARGETS) $(PKG_CONFIG_LOCAL) libxen$(LIBNAME).map $(LIBHEADERS)
  
  ifneq ($(NO_HEADERS_CHK),y)
- headers.chk:
-@@ -124,7 +124,7 @@ TAGS:
+-headers.chk:
++all: headers.chk
++
++headers.chk: $(LIBHEADERS) $(AUTOINCS)
+ 	for i in $(filter %.h,$^); do \
+ 	    $(CC) -x c -ansi -Wall -Werror $(CFLAGS_xeninclude) \
+ 	          -S -o /dev/null $$i || exit 1; \
+ 	    echo $$i; \
+ 	done >$@.new
+ 	mv $@.new $@
+-else
+-.PHONY: headers.chk
+ endif
  
- .PHONY: clean
- clean::
--	rm -rf $(LIB) *~ $(DEPS_RM) $(OBJS-y) $(PIC_OBJS)
-+	rm -rf $(TARGETS) *~ $(DEPS_RM) $(OBJS-y) $(PIC_OBJS)
- 	rm -f lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) lib$(LIB_FILE_NAME).so.$(MAJOR)
- 	rm -f headers.chk headers.lst
- 	rm -f $(PKG_CONFIG)
+-headers.chk: $(LIBHEADERS) $(AUTOINCS)
+-
+ headers.lst: FORCE
+ 	@{ set -e; $(foreach h,$(LIBHEADERS),echo $(h);) } > $@.tmp
+ 	@$(call move-if-changed,$@.tmp,$@)
 -- 
 Anthony PERARD
 
