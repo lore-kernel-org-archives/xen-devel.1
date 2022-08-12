@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7144FC25B0E
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Aug 2022 19:25:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.385855.621639 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E30AC282E7
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Aug 2022 19:25:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.385862.621688 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMaHP-0000Ve-1A; Fri, 12 Aug 2022 19:25:11 +0000
+	id 1oMaHU-0001hU-5n; Fri, 12 Aug 2022 19:25:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 385855.621639; Fri, 12 Aug 2022 19:25:10 +0000
+Received: by outflank-mailman (output) from mailman id 385862.621688; Fri, 12 Aug 2022 19:25:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMaHO-0000VX-T8; Fri, 12 Aug 2022 19:25:10 +0000
-Received: by outflank-mailman (input) for mailman id 385855;
- Fri, 12 Aug 2022 19:25:09 +0000
+	id 1oMaHT-0001fu-Sf; Fri, 12 Aug 2022 19:25:15 +0000
+Received: by outflank-mailman (input) for mailman id 385862;
+ Fri, 12 Aug 2022 19:25:15 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1oMaHN-0000FX-4o
- for xen-devel@lists.xenproject.org; Fri, 12 Aug 2022 19:25:09 +0000
+ (envelope-from <julien@xen.org>) id 1oMaHT-0001Zh-43
+ for xen-devel@lists.xenproject.org; Fri, 12 Aug 2022 19:25:15 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oMaHM-0000xY-SH; Fri, 12 Aug 2022 19:25:08 +0000
+ id 1oMaHS-0000yh-2I; Fri, 12 Aug 2022 19:25:14 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oMaHM-0006n6-Js; Fri, 12 Aug 2022 19:25:08 +0000
+ id 1oMaHR-0006n6-Qr; Fri, 12 Aug 2022 19:25:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=1G2Qt2AMX5j11jO0S4LFhw33Cq6gRJqjfValRIvJxXM=; b=wG7b+kJxPPFG3besl9gWU5of8e
-	C7nM6s3pbhEZDBdgS9KDNWWChZVzaYR74kPR/yg6YpR8XR+7tSIszLd7l5cG+YPywhg3qLBj4HuC3
-	GF+2LuvmVa29mkcrbf53zQ5V/vVzdsqoR3Cee/qRnf6TJX4z0oPfDuQBugPX+Gd1hzuM=;
+	bh=eGtlPOnezZCPLrLes6dERbD5TA/IOWPTENXfEX+3CEs=; b=6Te1Jx2dnT6deYglAWnLaUUau3
+	U/r15cOgOvWaXvMcF/a2mzL/7pyf8Rm4JGqCykyoOIXjqAcwWlGqtMDz0XdHLsceAKfT3bkQYD4v0
+	uOATOoul/JA3wyyWq3riti4jsIA1JPT+uXkQirm1j/5103YUwlLmCN5N5xgc4mu1b0NM=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -55,9 +55,9 @@ Cc: julien@xen.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/7] xen/arm64: head: Don't set x22 and update the documentation
-Date: Fri, 12 Aug 2022 20:24:40 +0100
-Message-Id: <20220812192448.43016-2-julien@xen.org>
+Subject: [PATCH 6/7] xen/arm: Tweak the dump page-table walk output
+Date: Fri, 12 Aug 2022 20:24:45 +0100
+Message-Id: <20220812192448.43016-7-julien@xen.org>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220812192448.43016-1-julien@xen.org>
 References: <20220812192448.43016-1-julien@xen.org>
@@ -66,48 +66,40 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Since commit 7e14a47e7c73 ("xen/arm64: head Rework and document
-launch()"), the boot code is setting x22 but not read it.
+Currently the output is looking like:
 
-So remove the two instructions setting x22 and update the documentation
-to show x22 has no specific purpose.
+(XEN) 1ST[0x1] = 0x000000004015ff7f
+(XEN) 2ND[0x1f] = 0x00500000bfe00f7d
+
+The content of the entries are not aligned making a bit trickier to
+read (I appreciate this is a matter of taste).
+
+Align the values by forcing the index to be always printed using
+3 characters (enough to cover 512 in hexadecimal).
+
+New output:
+
+(XEN) 1ST[0x001] = 0x000000004015ff7f
+(XEN) 2ND[0x01f] = 0x00500000bfe00f7d
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/arm64/head.S | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ xen/arch/arm/mm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 1babcc65d7c9..26cc7705f556 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -71,7 +71,7 @@
-  *  x19 - paddr(start)
-  *  x20 - phys offset
-  *  x21 - DTB address (boot cpu only)
-- *  x22 - is_secondary_cpu
-+ *  x22 -
-  *  x23 - UART address
-  *  x24 -
-  *  x25 -
-@@ -305,8 +305,6 @@ real_start_efi:
- #endif
-         PRINT("- Boot CPU booting -\r\n")
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index b42cddb1b446..c81c706c8b23 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -234,7 +234,7 @@ void dump_pt_walk(paddr_t ttbr, paddr_t addr,
  
--        mov   x22, #0                /* x22 := is_secondary_cpu */
--
-         bl    check_cpu_mode
-         bl    cpu_init
-         bl    create_page_tables
-@@ -345,8 +343,6 @@ GLOBAL(init_secondary)
-         adr   x19, start             /* x19 := paddr (start) */
-         sub   x20, x19, x0           /* x20 := phys-offset */
+         pte = mapping[offsets[level]];
  
--        mov   x22, #1                /* x22 := is_secondary_cpu */
--
-         mrs   x0, mpidr_el1
-         ldr   x13, =(~MPIDR_HWID_MASK)
-         bic   x24, x0, x13           /* Mask out flags to get CPU ID */
+-        printk("%s[0x%x] = 0x%"PRIpaddr"\n",
++        printk("%s[0x%03x] = 0x%"PRIpaddr"\n",
+                level_strs[level], offsets[level], pte.bits);
+ 
+         if ( level == 3 || !pte.walk.valid || !pte.walk.table )
 -- 
 2.37.1
 
