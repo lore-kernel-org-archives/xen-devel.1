@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F264CC28B2B
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Aug 2022 19:25:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.385856.621647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5498C28B2C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Aug 2022 19:25:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.385860.621683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMaHP-0000d8-JI; Fri, 12 Aug 2022 19:25:11 +0000
+	id 1oMaHT-0001cI-KC; Fri, 12 Aug 2022 19:25:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 385856.621647; Fri, 12 Aug 2022 19:25:11 +0000
+Received: by outflank-mailman (output) from mailman id 385860.621683; Fri, 12 Aug 2022 19:25:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMaHP-0000bb-CI; Fri, 12 Aug 2022 19:25:11 +0000
-Received: by outflank-mailman (input) for mailman id 385856;
- Fri, 12 Aug 2022 19:25:10 +0000
+	id 1oMaHT-0001bf-CH; Fri, 12 Aug 2022 19:25:15 +0000
+Received: by outflank-mailman (input) for mailman id 385860;
+ Fri, 12 Aug 2022 19:25:13 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1oMaHO-0000OU-3A
- for xen-devel@lists.xenproject.org; Fri, 12 Aug 2022 19:25:10 +0000
+ (envelope-from <julien@xen.org>) id 1oMaHR-0001CF-BA
+ for xen-devel@lists.xenproject.org; Fri, 12 Aug 2022 19:25:13 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oMaHN-0000xo-TP; Fri, 12 Aug 2022 19:25:09 +0000
+ id 1oMaHR-0000yS-13; Fri, 12 Aug 2022 19:25:13 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oMaHN-0006n6-LI; Fri, 12 Aug 2022 19:25:09 +0000
+ id 1oMaHQ-0006n6-PT; Fri, 12 Aug 2022 19:25:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ngshIEE2EN6MEfw9zmbHPOq0MvbgTTFSHuQTBxj5Rkw=; b=6AOrZflQqxWt6ZUuxW+F80X5TW
-	UkChC67IgilFd/Mv8haKA1DcebMlYmv7kYezggohNyTbySnsmPaTpFm+bsWk+RkYu01XIg9PCzByT
-	e5e6SvFQz0NFelgVgSfpcKU/8vim9tSGvDSFS6WqnAl2WAJ7mZSvqTgxE+5FR5qXKcB4=;
+	bh=KSNSRhk/b7PF+Veoqw2eqLMcjCDzJVoJhlmghRfM920=; b=ZCkoDm+ZTirO4BNHjMNk5xuq33
+	f3rtyXAH3xWYCjq79zyYeHN2QV+2yLqY6vW97Eu3JLKvZnY8hFYAFlnUO84vIXG3hmy+zt+pYG84p
+	JnLwH6tMPpXjgCHTrYAZ3AgMerdBr8qCs382VleKjRokRwzoeBp0Xn7ubJG9iGjpm3tg=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -55,9 +55,9 @@ Cc: julien@xen.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 2/7] xen/arm64: head: Introduce get_table_slot() and use it
-Date: Fri, 12 Aug 2022 20:24:41 +0100
-Message-Id: <20220812192448.43016-3-julien@xen.org>
+Subject: [PATCH 5/7] xen/arm32: head: Move earlyprintk messages to .rodata.str
+Date: Fri, 12 Aug 2022 20:24:44 +0100
+Message-Id: <20220812192448.43016-6-julien@xen.org>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220812192448.43016-1-julien@xen.org>
 References: <20220812192448.43016-1-julien@xen.org>
@@ -66,189 +66,60 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-There are a few places in the code that need to find the slot
-at a given page-table level.
+At the moment, the strings are in text right after each use because
+the instruction 'adr' has specific requirement on the location
+and the compiler will forbid cross section label.
 
-So create a new macro get_table_slot() for that. This will reduce
-the effort to figure out whether the code is doing the right thing.
+The macro 'adr_l' was recently reworked so the caller doesn't need
+to know whether the MMU is on. This makes it easier to use where
+instructions can be run in both context.
 
-Take the opportunity to use 'ubfx'. The only benefits is reducing
-the number of instructions from 2 to 1.
-
-The new macro is used everywhere we need to compute the slot. This
-requires to tweak the parameter of create_table_entry() to pass
-a level rather than shift.
-
-Note, for slot 0 the code is currently skipping the masking part. While
-this is fine, it is safer to mask it as technically slot 0 only covers
-bit 48 - 39 bit (assuming 4KB page granularity).
-
-Take the opportunity to correct the comment when finding the second
-slot for the identity mapping (we are computing the second slot
-rather than first).
+This also means that the strings don't need to be part of .text
+anymore. So move them to .rodata.str.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-----
-
-    This patch also has the benefits to reduce the number
-    of use of {ZEROETH, FIRST, SECOND, THIRD}_SHIFT. The next
-    patch for arm32 will reduce further.
 ---
- xen/arch/arm/arm64/head.S | 55 +++++++++++++++++++++------------------
- 1 file changed, 30 insertions(+), 25 deletions(-)
+ xen/arch/arm/arm32/head.S | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 26cc7705f556..ad014716db6f 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -493,13 +493,24 @@ cpu_init:
-         ret
- ENDPROC(cpu_init)
- 
-+/*
-+ * Macro to find the slot number at a given page-table level
-+ *
-+ * slot:     slot computed
-+ * virt:     virtual address
-+ * lvl:      page-table level
-+ */
-+.macro get_table_slot, slot, virt, lvl
-+        ubfx  \slot, \virt, #XEN_PT_LEVEL_SHIFT(\lvl), #XEN_PT_LPAE_SHIFT
-+.endm
-+
- /*
-  * Macro to create a page table entry in \ptbl to \tbl
-  *
-  * ptbl:    table symbol where the entry will be created
-  * tbl:     table symbol to point to
-  * virt:    virtual address
-- * shift:   #imm page table shift
-+ * lvl:     page-table level
-  * tmp1:    scratch register
-  * tmp2:    scratch register
-  * tmp3:    scratch register
-@@ -511,9 +522,8 @@ ENDPROC(cpu_init)
-  *
-  * Note that all parameters using registers should be distinct.
+diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+index 27d02ac8d68f..a558c2a6876e 100644
+--- a/xen/arch/arm/arm32/head.S
++++ b/xen/arch/arm/arm32/head.S
+@@ -93,13 +93,10 @@
   */
--.macro create_table_entry, ptbl, tbl, virt, shift, tmp1, tmp2, tmp3
--        lsr   \tmp1, \virt, #\shift
--        and   \tmp1, \tmp1, #XEN_PT_LPAE_ENTRY_MASK/* \tmp1 := slot in \tlb */
-+.macro create_table_entry, ptbl, tbl, virt, lvl, tmp1, tmp2, tmp3
-+        get_table_slot \tmp1, \virt, \lvl   /* \tmp1 := slot in \tlb */
+ #define PRINT(_s)           \
+         mov   r3, lr       ;\
+-        adr   r0, 98f      ;\
++        adr_l r0, 98f      ;\
+         bl    puts         ;\
+         mov   lr, r3       ;\
+-        b     99f          ;\
+-98:     .asciz _s          ;\
+-        .align 2           ;\
+-99:
++        RODATA_STR(98, _s)
  
-         load_paddr \tmp2, \tbl
-         mov   \tmp3, #PT_PT                 /* \tmp3 := right for linear PT */
-@@ -544,8 +554,7 @@ ENDPROC(cpu_init)
- .macro create_mapping_entry, ptbl, virt, phys, tmp1, tmp2, tmp3, type=PT_MEM_L3
-         and   \tmp3, \phys, #THIRD_MASK     /* \tmp3 := PAGE_ALIGNED(phys) */
- 
--        lsr   \tmp1, \virt, #THIRD_SHIFT
--        and   \tmp1, \tmp1, #XEN_PT_LPAE_ENTRY_MASK/* \tmp1 := slot in \tlb */
-+        get_table_slot \tmp1, \virt, 3      /* \tmp1 := slot in \tlb */
- 
-         mov   \tmp2, #\type                 /* \tmp2 := right for section PT */
-         orr   \tmp2, \tmp2, \tmp3           /*          + PAGE_ALIGNED(phys) */
-@@ -573,9 +582,9 @@ ENDPROC(cpu_init)
- create_page_tables:
-         /* Prepare the page-tables for mapping Xen */
-         ldr   x0, =XEN_VIRT_START
--        create_table_entry boot_pgtable, boot_first, x0, ZEROETH_SHIFT, x1, x2, x3
--        create_table_entry boot_first, boot_second, x0, FIRST_SHIFT, x1, x2, x3
--        create_table_entry boot_second, boot_third, x0, SECOND_SHIFT, x1, x2, x3
-+        create_table_entry boot_pgtable, boot_first, x0, 0, x1, x2, x3
-+        create_table_entry boot_first, boot_second, x0, 1, x1, x2, x3
-+        create_table_entry boot_second, boot_third, x0, 2, x1, x2, x3
- 
-         /* Map Xen */
-         adr_l x4, boot_third
-@@ -612,10 +621,10 @@ create_page_tables:
-          * XEN_ZEROETH_SLOT, then the 1:1 mapping will use its own set of
-          * page-tables from the first level.
-          */
--        lsr   x0, x19, #ZEROETH_SHIFT   /* x0 := zeroeth slot */
-+        get_table_slot x0, x19, 0       /* x0 := zeroeth slot */
-         cmp   x0, #XEN_ZEROETH_SLOT
-         beq   1f
--        create_table_entry boot_pgtable, boot_first_id, x19, ZEROETH_SHIFT, x0, x1, x2
-+        create_table_entry boot_pgtable, boot_first_id, x19, 0, x0, x1, x2
-         b     link_from_first_id
- 
+ /*
+  * Macro to print the value of register \rb
+@@ -736,7 +733,7 @@ ENDPROC(puts)
+  * Clobbers r0-r3
+  */
+ putn:
+-        adr   r1, hex
++        adr_l r1, hex
+         mov   r3, #8
  1:
-@@ -624,11 +633,10 @@ create_page_tables:
-          * then the 1:1 mapping will use its own set of page-tables from
-          * the second level.
-          */
--        lsr   x0, x19, #FIRST_SHIFT
--        and   x0, x0, #XEN_PT_LPAE_ENTRY_MASK  /* x0 := first slot */
-+        get_table_slot x0, x19, 1      /* x0 := first slot */
-         cmp   x0, #XEN_FIRST_SLOT
-         beq   1f
--        create_table_entry boot_first, boot_second_id, x19, FIRST_SHIFT, x0, x1, x2
-+        create_table_entry boot_first, boot_second_id, x19, 1, x0, x1, x2
-         b     link_from_second_id
+         early_uart_ready r11, r2
+@@ -749,8 +746,7 @@ putn:
+         mov   pc, lr
+ ENDPROC(putn)
  
- 1:
-@@ -638,17 +646,16 @@ create_page_tables:
-          * third level. For slot XEN_SECOND_SLOT, Xen is not yet able to handle
-          * it.
-          */
--        lsr   x0, x19, #SECOND_SHIFT
--        and   x0, x0, #XEN_PT_LPAE_ENTRY_MASK  /* x0 := first slot */
-+        get_table_slot x0, x19, 2     /* x0 := second slot */
-         cmp   x0, #XEN_SECOND_SLOT
-         beq   virtphys_clash
--        create_table_entry boot_second, boot_third_id, x19, SECOND_SHIFT, x0, x1, x2
-+        create_table_entry boot_second, boot_third_id, x19, 2, x0, x1, x2
-         b     link_from_third_id
+-hex:    .ascii "0123456789abcdef"
+-        .align 2
++RODATA_STR(hex, "0123456789abcdef")
  
- link_from_first_id:
--        create_table_entry boot_first_id, boot_second_id, x19, FIRST_SHIFT, x0, x1, x2
-+        create_table_entry boot_first_id, boot_second_id, x19, 1, x0, x1, x2
- link_from_second_id:
--        create_table_entry boot_second_id, boot_third_id, x19, SECOND_SHIFT, x0, x1, x2
-+        create_table_entry boot_second_id, boot_third_id, x19, 2, x0, x1, x2
- link_from_third_id:
-         create_mapping_entry boot_third_id, x19, x19, x0, x1, x2
-         ret
-@@ -705,7 +712,7 @@ remove_identity_mapping:
-          * Find the zeroeth slot used. Remove the entry from zeroeth
-          * table if the slot is not XEN_ZEROETH_SLOT.
-          */
--        lsr   x1, x19, #ZEROETH_SHIFT   /* x1 := zeroeth slot */
-+        get_table_slot x1, x19, 0       /* x1 := zeroeth slot */
-         cmp   x1, #XEN_ZEROETH_SLOT
-         beq   1f
-         /* It is not in slot XEN_ZEROETH_SLOT, remove the entry. */
-@@ -718,8 +725,7 @@ remove_identity_mapping:
-          * Find the first slot used. Remove the entry for the first
-          * table if the slot is not XEN_FIRST_SLOT.
-          */
--        lsr   x1, x19, #FIRST_SHIFT
--        and   x1, x1, #XEN_PT_LPAE_ENTRY_MASK  /* x1 := first slot */
-+        get_table_slot x1, x19, 1       /* x1 := first slot */
-         cmp   x1, #XEN_FIRST_SLOT
-         beq   1f
-         /* It is not in slot XEN_FIRST_SLOT, remove the entry. */
-@@ -732,8 +738,7 @@ remove_identity_mapping:
-          * Find the second slot used. Remove the entry for the first
-          * table if the slot is not XEN_SECOND_SLOT.
-          */
--        lsr   x1, x19, #SECOND_SHIFT
--        and   x1, x1, #XEN_PT_LPAE_ENTRY_MASK  /* x1 := first slot */
-+        get_table_slot x1, x19, 2       /* x1 := second slot */
-         cmp   x1, #XEN_SECOND_SLOT
-         beq   identity_mapping_removed
-         /* It is not in slot 1, remove the entry */
-@@ -771,7 +776,7 @@ setup_fixmap:
- #endif
-         /* Map fixmap into boot_second */
-         ldr   x0, =FIXMAP_ADDR(0)
--        create_table_entry boot_second, xen_fixmap, x0, SECOND_SHIFT, x1, x2, x3
-+        create_table_entry boot_second, xen_fixmap, x0, 2, x1, x2, x3
-         /* Ensure any page table updates made above have occurred. */
-         dsb   nshst
+ #else  /* CONFIG_EARLY_PRINTK */
  
 -- 
 2.37.1
