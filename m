@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A5D7C2BB47
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Aug 2022 01:39:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.386019.621912 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A3BC2BB45
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Aug 2022 01:39:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.386027.621963 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMg7Z-000246-OC; Sat, 13 Aug 2022 01:39:25 +0000
+	id 1oMg7g-0003YD-Qf; Sat, 13 Aug 2022 01:39:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 386019.621912; Sat, 13 Aug 2022 01:39:25 +0000
+Received: by outflank-mailman (output) from mailman id 386027.621963; Sat, 13 Aug 2022 01:39:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oMg7Z-00023H-Jl; Sat, 13 Aug 2022 01:39:25 +0000
-Received: by outflank-mailman (input) for mailman id 386019;
- Sat, 13 Aug 2022 01:39:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oMg7g-0003WQ-FB; Sat, 13 Aug 2022 01:39:32 +0000
+Received: by outflank-mailman (input) for mailman id 386027;
+ Sat, 13 Aug 2022 01:39:31 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zRGa=YR=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1oMg7Y-0000pT-G4
- for xen-devel@lists.xenproject.org; Sat, 13 Aug 2022 01:39:24 +0000
+ id 1oMg7f-0000pU-2a
+ for xen-devel@lists.xenproject.org; Sat, 13 Aug 2022 01:39:31 +0000
 Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c1e4604b-1aa8-11ed-bd2e-47488cf2e6aa;
- Sat, 13 Aug 2022 03:39:23 +0200 (CEST)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id A24465C00D8;
- Fri, 12 Aug 2022 21:39:22 -0400 (EDT)
+ [66.111.4.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c5cf44b2-1aa8-11ed-924f-1f966e50362f;
+ Sat, 13 Aug 2022 03:39:30 +0200 (CEST)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 2FFB05C00C6;
+ Fri, 12 Aug 2022 21:39:29 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Fri, 12 Aug 2022 21:39:22 -0400
+ by compute2.internal (MEProxy); Fri, 12 Aug 2022 21:39:29 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 12 Aug 2022 21:39:21 -0400 (EDT)
+ 12 Aug 2022 21:39:27 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1e4604b-1aa8-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: c5cf44b2-1aa8-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm3; t=1660354762; x=1660441162; bh=3vwZO/cHIy
-	oLl/Bx95EOgkgvhsPphVoLUtAC3Lmmo20=; b=yn5worH2WLJ0T1xlJShsvUa6xO
-	+n0UqbfoFdQnPpimQbgpwAqAs3qUbEmDowsRPnNY6FT0ySdOURdQfH4SPplYaxGW
-	JGikB6YQ8t2X5P4mPHc+Wperb4Wq0XC5xrUXWgvCScn4PppMT51ZdT5C0RECf3/s
-	FUn1BWoZHCsEmV3e6AsIW7u4KIngvrE2PtRvmHfDGIs7DKE01ng1elFZ/gPDMynZ
-	2Ko9EiZ81FFT1lRWqpku1ysAq97i2Nnl+Aeqzv8+YmNalt4ECdfvMD2Qtgcwjv60
-	Ztme2G3CuOAGzfo6o1dln6O3J92dDkCFILxtaq69mzdzPZd2GNwsCJSh9h3Q==
+	:subject:to:to; s=fm3; t=1660354769; x=1660441169; bh=6mkVeqGFyN
+	FEqWIFEDSQOHdBSu7AAuGeWY7gU2J9ZPg=; b=oI56fsSaq3dig6Zye8GTagmUKS
+	1fxnrJqXyB1nPazTF2OESQpBcgXsRR0bNSt7cOHfBKH85NDXbW9xxC7hS3KFa+cH
+	YiBvokPS2xN54EB25y1abYoLNSlA/iFlXVCWWREz/t+NGzULW5FB9Xng2qqNuaom
+	gugEXP1sfRWJDfXvk+eiAMCuXoaz3b9ar71qmH0Q9sVJ0A29QuksmzYSLkyxfwER
+	cFZLCdbrr2ZQjuSR+Hsl5/0OSTTJX8PxfzMImyjMoVHEhPY2C3Q4BvkrSL8cRqOO
+	UOQ8Ep2qvDJl3xa5yUlUmduyKprEH7d86nYMWeFZ2cfLPGbE+upC+KgF+slg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1660354762; x=
-	1660441162; bh=3vwZO/cHIyoLl/Bx95EOgkgvhsPphVoLUtAC3Lmmo20=; b=I
-	01NskkBRHJGGIiYHsX7cP3e54I6sm+oqObFw3m67cRacxGxeszC2gaK5wlMema2h
-	MpqnTHB9q40TjzvIRuFSN6+JQEu30p48QDANm5RfrWTHxBPcYxjrY6OvnxDh4dox
-	OQOrXW9+oSk/miR1jeIXnZl5Y0FCKSYia0NPhSWdfuEpJKqqnWg10JixeWWOqeKg
-	Fg13KXGY0zMtPFQ2LF/2EBFyiEzluM60wWq5pDBY75AM1UbDaIWDEAFfqOoX2+/c
-	/sjbMNych50zlp0qa1PI0jLWK5zifGrqzRChCy/bfUbQ6pF4DTCY4t4WkbWdkduZ
-	/EMY5lzDnJuBXpkPxxFJA==
-X-ME-Sender: <xms:ygD3YrRO2sIoGRVxpgW1nM3rUVx9hGjEo-si3IQcDpw8-YXEVRaAMw>
-    <xme:ygD3YsxWjwf3fDFMh0H4wvioy0CHsmcJ18777sCljQvegXFzymQOlcv08qT1yvjSM
-    EmLTt2YdUWpfg>
-X-ME-Received: <xmr:ygD3Yg2Vc-NxaYbTvL02-RAL0dN8c-uB3XbF3kbNa24_IISoIKWkJ7lIVY0bTZ90SZTcYJYRsWM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdegjedggeelucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1660354769; x=
+	1660441169; bh=6mkVeqGFyNFEqWIFEDSQOHdBSu7AAuGeWY7gU2J9ZPg=; b=e
+	5CmP1uaP41LAZWj9aF+FH3jBZF8p7KQfIRNZP+XYUKHGLg2vg2jAqTkzcr0EWMXQ
+	lHvzffbO7EFxM6OroFgnkB9sKFQq5Ff/2dsjhzGz8/s1y/9N6Z+Z2ftKm+74U1zK
+	yRpjKXZnDZ1vYi6g2aZ0IQlwBY8YfjtyZiKA7dnyVd0w55FN6S97GqAbqy5RUuac
+	rHS5f5W6nDOCPxijVCaX+4dc68+bTddsSojdZhHX1+CpYk2MvsiRWzQsgN4Y5gWt
+	sgpcucklPzFL3OOsrUpFnhYRWoM4b5ikaNhQPE2CFZ0Hwus4XPePiUpAI/hifiwA
+	PVtb7FkLzgRioioe1SkGA==
+X-ME-Sender: <xms:0QD3Yhe5c8moysw8TsjHfKgwFPqOQrhyy6h6N_QWhWAv6T6VQuOnuA>
+    <xme:0QD3YvOUupkMhPsCHIcWbQpZTELeahQeP-HDmzUXAx-Vr5MPYcSTVZgc1C4QC8woR
+    chT4SVq9GEBZA>
+X-ME-Received: <xmr:0QD3YqgVqBc5O5cuO99k4iOe088ZiKluL_ahcdB__hWK-M2-Bs0FkBPFMZUiJEKQ-Bcp9hwx_QM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdegjedghedtucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
@@ -83,10 +83,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdegjedggeelucetufdoteggod
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
     hushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:ygD3YrCQ_6IS0_iylVSqrnZFG9j0UIfzDmSBNEFZtOEofbabxOnujg>
-    <xmx:ygD3Ykh_UkF4Jhsdxy62GkP8bS4bW54JSRPGUWwf6R6p1PMEjgUXxA>
-    <xmx:ygD3Yvp9wTUVpgWnvWpU-NE8EEsalekVgNubQ5aa-JVgTcVMMk0QiQ>
-    <xmx:ygD3YuYikfjfdZ7VhOEdlyoBwkunsfwYXCUsOIdmjofd56a-e0UzEA>
+X-ME-Proxy: <xmx:0QD3Yq-UyQGQbtrBGRNOtyy4Inz04iN1D2exMmu0o2Afkasc4sNSSA>
+    <xmx:0QD3YttMAe5Hj-XlDjiZYUKUuxeJz7ofF578BNTq7rZpILqaye4A-A>
+    <xmx:0QD3YpEXZcZ2_O1DAU-St8uqmAfI3_mBgCJZNDSqsvmFsz3TNKFQ9Q>
+    <xmx:0QD3YrUWQ-i_zia0ypjL99bzb6gxHKTWwC50SAEuznrGMuSbAgMnnw>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,9 +97,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 05/11] console: support multiple serial console simultaneously
-Date: Sat, 13 Aug 2022 03:38:55 +0200
-Message-Id: <e750ea9b05c1976a0439277a74ee2b439714a6c1.1660354597.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v4 10/11] drivers/char: add RX support to the XHCI driver
+Date: Sat, 13 Aug 2022 03:39:00 +0200
+Message-Id: <0ba9941595e5237a3eeb260e7aaf75269e094786.1660354597.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.05bda81c2f5ff91948f96e397b6836bcede71ef8.1660354597.git-series.marmarek@invisiblethingslab.com>
 References: <cover.05bda81c2f5ff91948f96e397b6836bcede71ef8.1660354597.git-series.marmarek@invisiblethingslab.com>
@@ -107,292 +107,295 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Previously only one serial console was supported at the same time. Using
-console=com1,dbgp,vga silently ignored all but last serial console (in
-this case: only dbgp and vga were active).
-
-Fix this by storing not a single sercon_handle, but an array of them, up
-to MAX_SERCONS entries. The value of MAX_SERCONS can be chosen in
-kconfig, the default (4) is arbitrary, inspired by the number of
-SERHND_IDX values.
-
-Make console_steal() aware of multiple consoles too. It can now either
-steal output from specific console (for gdbstub), or from all of them at
-once (for console suspend).
+Add another work ring buffer for received data, and point IN TRB at it.
+Ensure there is always at least one pending IN TRB, so the controller
+has a way to send incoming data to the driver.
+Note that both "success" and "short packet" completion codes are okay -
+in fact it will be "short packet" most of the time, as the TRB length is
+about maximum size, not required size.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
 Changes in v4:
-- use unsigned int for loop counters
-- other minor changes
-Changes in v3:
-- adjust console_steal() for multiple consoles too
-- add MAX_SERCONS to kconfig
-- add warning about sync_console impact
-- add warning if too many consoles are configured
-- log issue with PCI spec parsing
+- adjust return types
+- add some const
+New patch in v3
 ---
- docs/misc/xen-command-line.pandoc |  4 +-
- xen/drivers/char/Kconfig          | 11 ++++-
- xen/drivers/char/console.c        | 98 ++++++++++++++++++++++++--------
- xen/include/xen/serial.h          |  1 +-
- 4 files changed, 92 insertions(+), 22 deletions(-)
+ docs/misc/xen-command-line.pandoc |   4 +-
+ xen/drivers/char/xhci-dbc.c       | 129 +++++++++++++++++++++++++++++++-
+ 2 files changed, 131 insertions(+), 2 deletions(-)
 
 diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 6b1e515bfc8c..163b05886ed6 100644
+index 163b05886ed6..64441a2679b8 100644
 --- a/docs/misc/xen-command-line.pandoc
 +++ b/docs/misc/xen-command-line.pandoc
-@@ -433,6 +433,9 @@ only available when used together with `pv-in-pvh`.
- `none` indicates that Xen should not use a console.  This option only
- makes sense on its own.
+@@ -729,8 +729,8 @@ Available alternatives, with their meaning, are:
+ Specify the USB controller to use, either by instance number (when going
+ over the PCI busses sequentially) or by PCI device (must be on segment 0).
  
-+Specifying more than one serial console will increase console latency,
-+especially when `sync_console` option is used.
+-Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability (output
+-only). XHCI driver will wait indefinitely for the debug host to connect - make
++Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability.
++XHCI driver will wait indefinitely for the debug host to connect - make
+ sure the cable is connected.
+ 
+ ### debug_stack_lines
+diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
+index 8d83d8307fcd..a94a48a48989 100644
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -111,6 +111,7 @@ enum {
+ enum {
+     XHCI_TRB_CC_SUCCESS = 1,
+     XHCI_TRB_CC_TRB_ERR = 5,
++    XHCI_TRB_CC_SHORT_PACKET = 13,
+ };
+ 
+ /* DbC endpoint types */
+@@ -239,6 +240,7 @@ struct dbc {
+     struct xhci_trb_ring dbc_oring;
+     struct xhci_trb_ring dbc_iring;
+     struct dbc_work_ring dbc_owork;
++    struct dbc_work_ring dbc_iwork;
+     struct xhci_string_descriptor *dbc_str;
+ 
+     pci_sbdf_t sbdf;
+@@ -443,6 +445,16 @@ static void xhci_trb_norm_set_ioc(struct xhci_trb *trb)
+     trb->ctrl |= 0x20;
+ }
+ 
++static uint64_t xhci_trb_norm_buf(const struct xhci_trb *trb)
++{
++    return trb->params;
++}
 +
- ### console_timestamps
- > `= none | date | datems | boot | raw`
- 
-@@ -2390,6 +2393,7 @@ vulnerabilities.
- 
- Flag to force synchronous console output.  Useful for debugging, but
- not suitable for production environments due to incurred overhead.
-+If multiple consoles are configured, the incurred overhead is even bigger.
- 
- ### tboot (x86)
- > `= 0x<phys_addr>`
-diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
-index 06350c387371..7b5ff0c414ec 100644
---- a/xen/drivers/char/Kconfig
-+++ b/xen/drivers/char/Kconfig
-@@ -85,6 +85,17 @@ config SERIAL_TX_BUFSIZE
- 
- 	  Default value is 16384 (16kiB).
- 
-+config MAX_SERCONS
-+	int "Maximum number of serial consoles active at once"
-+	default 4
-+	help
-+	  Controls how many serial consoles can be active at once. Configuring more
-+	  using `console=` parameter will be ignored.
-+	  When multiple consoles are configured, overhead of `sync_console` option
-+	  is even bigger.
++static uint32_t xhci_trb_norm_len(const struct xhci_trb *trb)
++{
++    return trb->status & 0x1FFFF;
++}
 +
-+	  Default value is 4.
+ /**
+  * Fields for Transfer Event TRBs (see section 6.4.2.1). Note that event
+  * TRBs are read-only from software
+@@ -452,6 +464,17 @@ static uint64_t xhci_trb_tfre_ptr(const struct xhci_trb *trb)
+     return trb->params;
+ }
+ 
++static uint32_t xhci_trb_tfre_cc(const struct xhci_trb *trb)
++{
++    return trb->status >> 24;
++}
 +
- config XHCI
- 	bool "XHCI DbC UART driver"
- 	depends on X86
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index e8468c121ad0..60d42284f606 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -113,7 +113,9 @@ static char *__read_mostly conring = _conring;
- static uint32_t __read_mostly conring_size = _CONRING_SIZE;
- static uint32_t conringc, conringp;
++/* Amount of data _not_ transferred */
++static uint32_t xhci_trb_tfre_len(const struct xhci_trb *trb)
++{
++    return trb->status & 0x1FFFF;
++}
++
+ /* Fields for link TRBs (section 6.4.4.1) */
+ static void xhci_trb_link_set_rsp(struct xhci_trb *trb, uint64_t rsp)
+ {
+@@ -493,6 +516,14 @@ static bool xhci_trb_ring_full(const struct xhci_trb_ring *ring)
+     return ((ring->enq + 1) & (DBC_TRB_RING_CAP - 1)) == ring->deq;
+ }
  
--static int __read_mostly sercon_handle = -1;
-+#define MAX_SERCONS CONFIG_MAX_SERCONS
-+static int __read_mostly sercon_handle[MAX_SERCONS];
-+static unsigned int __read_mostly nr_sercon_handle = 0;
++static unsigned int xhci_trb_ring_size(const struct xhci_trb_ring *ring)
++{
++    if ( ring->enq >= ring->deq )
++        return ring->enq - ring->deq;
++
++    return DBC_TRB_RING_CAP - ring->deq + ring->enq;
++}
++
+ static bool dbc_work_ring_full(const struct dbc_work_ring *ring)
+ {
+     return ((ring->enq + 1) & (DBC_WORK_RING_CAP - 1)) == ring->deq;
+@@ -506,6 +537,14 @@ static unsigned int dbc_work_ring_size(const struct dbc_work_ring *ring)
+     return DBC_WORK_RING_CAP - ring->deq + ring->enq;
+ }
  
- #ifdef CONFIG_X86
- /* Tristate: 0 disabled, 1 user enabled, -1 default enabled */
-@@ -393,32 +395,61 @@ long read_console_ring(struct xen_sysctl_readconsole *op)
- static char serial_rx_ring[SERIAL_RX_SIZE];
- static unsigned int serial_rx_cons, serial_rx_prod;
++static unsigned int dbc_work_ring_space_to_end(const struct dbc_work_ring *ring)
++{
++    if ( ring->enq >= ring->deq )
++        return DBC_WORK_RING_CAP - ring->enq;
++
++    return ring->deq - ring->enq;
++}
++
+ static void dbc_push_trb(struct dbc *dbc, struct xhci_trb_ring *ring,
+                          uint64_t dma, uint64_t len)
+ {
+@@ -566,6 +605,31 @@ static unsigned int dbc_push_work(struct dbc *dbc, struct dbc_work_ring *ring,
+     return i;
+ }
  
--static void (*serial_steal_fn)(const char *, size_t nr) = early_puts;
-+/* The last entry means "steal from all consoles" */
-+static void (*serial_steal_fn[])(const char *, size_t nr) = {
-+    [MAX_SERCONS] = early_puts,
-+};
++static void dbc_rx_trb(struct dbc *dbc, struct xhci_trb *trb,
++                       uint64_t not_transferred)
++{
++    struct dbc_work_ring *ring = &dbc->dbc_iwork;
++    unsigned int rx_len;
++    unsigned int end, start = ring->enq;
++
++    if ( xhci_trb_type(trb) != XHCI_TRB_NORM )
++        /* Can be Link TRB for example. */
++        return;
++
++    ASSERT(xhci_trb_norm_buf(trb) == ring->dma + ring->enq);
++    ASSERT(xhci_trb_norm_len(trb) >= not_transferred);
++    rx_len = xhci_trb_norm_len(trb) - not_transferred;
++
++    /* It can hit the ring end, but should not wrap around. */
++    ASSERT(ring->enq + rx_len <= DBC_WORK_RING_CAP);
++    ring->enq = (ring->enq + rx_len) & (DBC_WORK_RING_CAP - 1);
++
++    end = ring->enq;
++
++    if ( end > start )
++        cache_flush(&ring->buf[start], end - start);
++}
++
+ /*
+  * Note that if IN transfer support is added, then this
+  * will need to be changed; it assumes an OUT transfer ring only
+@@ -575,6 +639,7 @@ static void dbc_pop_events(struct dbc *dbc)
+     struct dbc_reg *reg = dbc->dbc_reg;
+     struct xhci_trb_ring *er = &dbc->dbc_ering;
+     struct xhci_trb_ring *tr = &dbc->dbc_oring;
++    struct xhci_trb_ring *ir = &dbc->dbc_iring;
+     struct xhci_trb *event = &er->trb[er->deq];
+     uint64_t erdp = readq(&reg->erdp);
+     uint32_t portsc;
+@@ -600,6 +665,14 @@ static void dbc_pop_events(struct dbc *dbc)
+                 trb_idx = (event_ptr - tr->dma) >> XHCI_TRB_SHIFT;
+                 tr->deq = (trb_idx + 1) & (DBC_TRB_RING_CAP - 1);
+             }
++            else if ( event_ptr - ir->dma < DBC_TRB_RING_BYTES )
++            {
++                trb_idx = (event_ptr - ir->dma) >> XHCI_TRB_SHIFT;
++                if ( xhci_trb_tfre_cc(event) == XHCI_TRB_CC_SUCCESS ||
++                     xhci_trb_tfre_cc(event) == XHCI_TRB_CC_SHORT_PACKET )
++                    dbc_rx_trb(dbc, &ir->trb[trb_idx], xhci_trb_tfre_len(event));
++                ir->deq = (trb_idx + 1) & (DBC_TRB_RING_CAP - 1);
++            }
+             else
+                 dbc_alert("event: TRB 0x%lx not found in any ring\n",
+                           event_ptr);
+@@ -870,6 +943,7 @@ static bool __init dbc_open(struct dbc *dbc)
+         return false;
  
-+/*
-+ * Redirect console *handle* output to *fn*. Use SERHND_STEAL_ALL as *handle* to
-+ * redirect all the consoles. 
+     dbc_init_work_ring(dbc, &dbc->dbc_owork);
++    dbc_init_work_ring(dbc, &dbc->dbc_iwork);
+     dbc_enable_dbc(dbc);
+     dbc->open = true;
+ 
+@@ -946,6 +1020,33 @@ static void dbc_flush(struct dbc *dbc, struct xhci_trb_ring *trb,
+ }
+ 
+ /**
++ * Ensure DbC has a pending transfer TRB to receive data into.
++ *
++ * @param dbc the dbc to flush
++ * @param trb the ring for the TRBs to transfer
++ * @param wrk the work ring to receive data into
 + */
- int console_steal(int handle, void (*fn)(const char *, size_t nr))
- {
--    if ( (handle == -1) || (handle != sercon_handle) )
--        return 0;
-+    unsigned int i;
++static void dbc_enqueue_in(struct dbc *dbc, struct xhci_trb_ring *trb,
++                           struct dbc_work_ring *wrk)
++{
++    struct dbc_reg *reg = dbc->dbc_reg;
++    uint32_t db = (readl(&reg->db) & 0xFFFF00FF) | (trb->db << 8);
 +
-+    if ( handle == -1 )
-+        return -ENOENT;
-+    if ( serial_steal_fn[MAX_SERCONS] != NULL )
-+        return -EBUSY;
-+    if ( handle == SERHND_STEAL_ALL )
-+    {
-+        serial_steal_fn[MAX_SERCONS] = fn;
-+        return MAX_SERCONS;
-+    }
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        if ( handle == sercon_handle[i] )
-+            break;
-+    if ( i == nr_sercon_handle )
-+        return -ENOENT;
- 
--    if ( serial_steal_fn != NULL )
-+    if ( serial_steal_fn[i] != NULL )
-         return -EBUSY;
- 
--    serial_steal_fn = fn;
--    return 1;
-+    serial_steal_fn[i] = fn;
-+    return i;
++    /* Check if there is already queued TRB */
++    if ( xhci_trb_ring_size(trb) >= 1 )
++        return;
++
++    if ( dbc_work_ring_full(wrk) )
++        return;
++
++    dbc_push_trb(dbc, trb, wrk->dma + wrk->enq,
++                 dbc_work_ring_space_to_end(wrk));
++
++    wmb();
++    writel(db, &reg->db);
++}
++
++/**
+  * Queue a single character to the DbC. A transfer TRB will be created
+  * if the character is a newline and the DbC will be notified that data is
+  * available for writing to the debug host.
+@@ -968,6 +1069,19 @@ static int64_t dbc_putc(struct dbc *dbc, char c)
+     return 1;
  }
  
- void console_giveback(int id)
- {
--    if ( id == 1 )
--        serial_steal_fn = NULL;
-+    if ( id >= 0 && id <= MAX_SERCONS )
-+        serial_steal_fn[id] = NULL;
- }
- 
- void console_serial_puts(const char *s, size_t nr)
- {
--    if ( serial_steal_fn != NULL )
--        serial_steal_fn(s, nr);
-+    unsigned int i;
++static int dbc_getc(struct dbc *dbc, char *c)
++{
++    struct dbc_work_ring *wrk = &dbc->dbc_iwork;
 +
-+    if ( serial_steal_fn[MAX_SERCONS] != NULL )
-+        serial_steal_fn[MAX_SERCONS](s, nr);
-     else
--        serial_puts(sercon_handle, s, nr);
-+        for ( i = 0; i < nr_sercon_handle; i++ )
-+        {
-+            if ( serial_steal_fn[i] != NULL )
-+                serial_steal_fn[i](s, nr);
-+            else
-+                serial_puts(sercon_handle[i], s, nr);
-+        }
- 
-     /* Copy all serial output into PV console */
-     pv_console_puts(s, nr);
-@@ -957,6 +988,7 @@ void __init console_init_preirq(void)
- {
-     char *p;
-     int sh;
-+    unsigned int i;
- 
-     serial_init_preirq();
- 
-@@ -977,8 +1009,12 @@ void __init console_init_preirq(void)
-             continue;
-         else if ( (sh = serial_parse_handle(p)) >= 0 )
-         {
--            sercon_handle = sh;
--            serial_steal_fn = NULL;
-+            if ( nr_sercon_handle < MAX_SERCONS )
-+                sercon_handle[nr_sercon_handle++] = sh;
-+            else
-+                printk("Too many consoles (max %d), ignoring '%s'\n",
-+                       MAX_SERCONS, p);
-+            serial_steal_fn[MAX_SERCONS] = NULL;
-         }
-         else
-         {
-@@ -996,7 +1032,8 @@ void __init console_init_preirq(void)
-         opt_console_xen = 0;
- #endif
- 
--    serial_set_rx_handler(sercon_handle, serial_rx);
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_set_rx_handler(sercon_handle[i], serial_rx);
-     pv_console_set_rx_handler(serial_rx);
- 
-     /* HELLO WORLD --- start-of-day banner text. */
-@@ -1014,7 +1051,8 @@ void __init console_init_preirq(void)
- 
-     if ( opt_sync_console )
++    if ( dbc_work_ring_size(wrk) == 0 )
++        return 0;
++
++    *c = wrk->buf[wrk->deq];
++    wrk->deq = (wrk->deq + 1) & (DBC_WORK_RING_CAP - 1);
++
++    return 1;
++}
++
+ struct dbc_uart {
+     struct dbc dbc;
+     struct timer timer;
+@@ -986,10 +1100,16 @@ static void cf_check dbc_uart_poll(void *data)
+     if ( spin_trylock_irqsave(&port->tx_lock, flags) )
      {
--        serial_start_sync(sercon_handle);
-+        for ( i = 0; i < nr_sercon_handle; i++ )
-+            serial_start_sync(sercon_handle[i]);
-         add_taint(TAINT_SYNC_CONSOLE);
-         printk("Console output is synchronous.\n");
-         warning_add(warning_sync_console);
-@@ -1121,13 +1159,19 @@ int __init console_has(const char *device)
+         if ( dbc_ensure_running(dbc) )
++        {
+             dbc_flush(dbc, &dbc->dbc_oring, &dbc->dbc_owork);
++            dbc_enqueue_in(dbc, &dbc->dbc_iring, &dbc->dbc_iwork);
++        }
+         spin_unlock_irqrestore(&port->tx_lock, flags);
+     }
  
- void console_start_log_everything(void)
- {
--    serial_start_log_everything(sercon_handle);
-+    unsigned int i;
++    while ( dbc_work_ring_size(&dbc->dbc_iwork) )
++        serial_rx_interrupt(port, guest_cpu_user_regs());
 +
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_start_log_everything(sercon_handle[i]);
-     atomic_inc(&print_everything);
+     serial_tx_interrupt(port, guest_cpu_user_regs());
+     set_timer(&uart->timer, NOW() + MICROSECS(DBC_POLL_INTERVAL));
+ }
+@@ -1028,6 +1148,12 @@ static void cf_check dbc_uart_putc(struct serial_port *port, char c)
+     dbc_putc(&uart->dbc, c);
  }
  
- void console_end_log_everything(void)
- {
--    serial_end_log_everything(sercon_handle);
-+    unsigned int i;
++static int cf_check dbc_uart_getc(struct serial_port *port, char *c)
++{
++    struct dbc_uart *uart = port->uart;
++    return dbc_getc(&uart->dbc, c);
++}
 +
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_end_log_everything(sercon_handle[i]);
-     atomic_dec(&print_everything);
- }
- 
-@@ -1149,23 +1193,32 @@ void console_unlock_recursive_irqrestore(unsigned long flags)
- 
- void console_force_unlock(void)
+ static void cf_check dbc_uart_flush(struct serial_port *port)
  {
-+    unsigned int i;
-+
-     watchdog_disable();
-     spin_debug_disable();
-     spin_lock_init(&console_lock);
--    serial_force_unlock(sercon_handle);
-+    for ( i = 0 ; i < nr_sercon_handle ; i++ )
-+        serial_force_unlock(sercon_handle[i]);
-     console_locks_busted = 1;
-     console_start_sync();
- }
+     s_time_t goal;
+@@ -1047,6 +1173,7 @@ static struct uart_driver dbc_uart_driver = {
+     .init_postirq = dbc_uart_init_postirq,
+     .tx_ready = dbc_uart_tx_ready,
+     .putc = dbc_uart_putc,
++    .getc = dbc_uart_getc,
+     .flush = dbc_uart_flush,
+ };
  
- void console_start_sync(void)
- {
-+    unsigned int i;
-+
-     atomic_inc(&print_everything);
--    serial_start_sync(sercon_handle);
-+    for ( i = 0 ; i < nr_sercon_handle ; i++ )
-+        serial_start_sync(sercon_handle[i]);
- }
+@@ -1056,6 +1183,7 @@ struct dbc_dma_bufs {
+     struct xhci_trb out_trb[DBC_TRB_RING_CAP];
+     struct xhci_trb in_trb[DBC_TRB_RING_CAP];
+     uint8_t out_wrk_buf[DBC_WORK_RING_CAP];
++    uint8_t in_wrk_buf[DBC_WORK_RING_CAP];
+     struct xhci_erst_segment erst __aligned(16);
+     struct xhci_dbc_ctx ctx __aligned(16);
+     struct xhci_string_descriptor str_buf[DBC_STRINGS_COUNT];
+@@ -1107,6 +1235,7 @@ void __init xhci_dbc_uart_init(void)
+     dbc->dbc_oring.trb = dbc_dma_bufs.out_trb;
+     dbc->dbc_iring.trb = dbc_dma_bufs.in_trb;
+     dbc->dbc_owork.buf = dbc_dma_bufs.out_wrk_buf;
++    dbc->dbc_iwork.buf = dbc_dma_bufs.in_wrk_buf;
+     dbc->dbc_str = dbc_dma_bufs.str_buf;
  
- void console_end_sync(void)
- {
--    serial_end_sync(sercon_handle);
-+    unsigned int i;
-+
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_end_sync(sercon_handle[i]);
-     atomic_dec(&print_everything);
- }
- 
-@@ -1291,7 +1344,8 @@ static int suspend_steal_id;
- 
- int console_suspend(void)
- {
--    suspend_steal_id = console_steal(sercon_handle, suspend_steal_fn);
-+    if ( nr_sercon_handle )
-+        suspend_steal_id = console_steal(SERHND_STEAL_ALL, suspend_steal_fn);
-     serial_suspend();
-     return 0;
- }
-diff --git a/xen/include/xen/serial.h b/xen/include/xen/serial.h
-index 4cd4ae5e6f1c..36ddf062ccad 100644
---- a/xen/include/xen/serial.h
-+++ b/xen/include/xen/serial.h
-@@ -99,6 +99,7 @@ struct uart_driver {
- #define SERHND_HI       (1<<2) /* Mux/demux each transferred char by MSB. */
- #define SERHND_LO       (1<<3) /* Ditto, except that the MSB is cleared.  */
- #define SERHND_COOKED   (1<<4) /* Newline/carriage-return translation?    */
-+#define SERHND_STEAL_ALL 0xff  /* Synthetic handle used in console_steal() */
- 
- /* Three-stage initialisation (before/during/after IRQ-subsystem setup). */
- void serial_init_preirq(void);
+     if ( dbc_open(dbc) )
 -- 
 git-series 0.9.1
 
