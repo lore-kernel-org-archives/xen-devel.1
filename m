@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B4BC32771
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 031CCC32774
 	for <xen-devel@archiver.kernel.org>; Tue, 16 Aug 2022 10:13:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.388168.624788 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.388166.624760 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oNtZc-0004sJ-Hv; Tue, 16 Aug 2022 10:13:24 +0000
+	id 1oNtZa-0004DE-WC; Tue, 16 Aug 2022 10:13:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 388168.624788; Tue, 16 Aug 2022 10:13:24 +0000
+Received: by outflank-mailman (output) from mailman id 388166.624760; Tue, 16 Aug 2022 10:13:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oNtZc-0004s4-EN; Tue, 16 Aug 2022 10:13:24 +0000
-Received: by outflank-mailman (input) for mailman id 388168;
- Tue, 16 Aug 2022 10:13:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oNtZa-0004CQ-QV; Tue, 16 Aug 2022 10:13:22 +0000
+Received: by outflank-mailman (input) for mailman id 388166;
+ Tue, 16 Aug 2022 10:13:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NQK8=YU=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oNtZa-00049L-UP
- for xen-devel@lists.xenproject.org; Tue, 16 Aug 2022 10:13:23 +0000
+ id 1oNtZZ-00049M-Df
+ for xen-devel@lists.xenproject.org; Tue, 16 Aug 2022 10:13:21 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0dcc39bf-1d4c-11ed-bd2e-47488cf2e6aa;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0d886314-1d4c-11ed-9250-1f966e50362f;
  Tue, 16 Aug 2022 12:13:20 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 60E1135226;
- Tue, 16 Aug 2022 10:13:20 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E0D0B35222;
+ Tue, 16 Aug 2022 10:13:19 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 27ADA13B16;
- Tue, 16 Aug 2022 10:13:20 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 99EF81345B;
+ Tue, 16 Aug 2022 10:13:19 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id MLZXCMBt+2IgEAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 16 Aug 2022 10:13:20 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 6EJWJL9t+2IgEAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 16 Aug 2022 10:13:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,338 +53,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0dcc39bf-1d4c-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 0d886314-1d4c-11ed-9250-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1660644800; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1660644799; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r7aMac0xJGFVHnrQYBiYsDG0gFd0QHb+rgXXGs3E20s=;
-	b=nyy+F09wPWxDRplIGpzr0LE1l+i0vabzVbegspekfH+LbI3s9HDguE8OmsQ5bcn6lgPmab
-	i2yk1yhh1qxpoLS5WTeFQiAIRL24qpE5Xq7TdV9zbOkhbjw/E84+dcY5VXnbVplN1ijTlU
-	T7G9OGqQZWq5P6mZRS5EtFyFoo+DGMg=
+	bh=96fOKoVyLwCWE0oLcfiULEQOFvzEWtUphr4q6MrvQAQ=;
+	b=ouqTS3i+29ayOrSEcobTxRaruPCzrCapOiJRpucjGfW9JFl1AGyycRpDEeH1W5T0PhuLVt
+	2UZHTli0U1y3qYImjkm1LU1h+6bnGtcHO+i9II4IAjRLmRvDlxPopQ+/vM30v5kFEzuCZW
+	yBa5vR5U1bNUwEOUGRVNqCJCsqZx+KM=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Dario Faggioli <dfaggioli@suse.com>,
-	Gao Ruifeng <ruifeng.gao@intel.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3 3/3] xen/sched: fix cpu hotplug
-Date: Tue, 16 Aug 2022 12:13:17 +0200
-Message-Id: <20220816101317.23014-4-jgross@suse.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 1/3] xen/sched: introduce cpupool_update_node_affinity()
+Date: Tue, 16 Aug 2022 12:13:15 +0200
+Message-Id: <20220816101317.23014-2-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220816101317.23014-1-jgross@suse.com>
 References: <20220816101317.23014-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Cpu cpu unplugging is calling schedule_cpu_rm() via stop_machine_run()
-with interrupts disabled, thus any memory allocation or freeing must
-be avoided.
+For updating the node affinities of all domains in a cpupool add a new
+function cpupool_update_node_affinity().
 
-Since commit 5047cd1d5dea ("xen/common: Use enhanced
-ASSERT_ALLOC_CONTEXT in xmalloc()") this restriction is being enforced
-via an assertion, which will now fail.
+In order to avoid multiple allocations of cpumasks carve out memory
+allocation and freeing from domain_update_node_affinity() into new
+helpers, which can be used by cpupool_update_node_affinity().
 
-Before that commit cpu unplugging in normal configurations was working
-just by chance as only the cpu performing schedule_cpu_rm() was doing
-active work. With core scheduling enabled, however, failures could
-result from memory allocations not being properly propagated to other
-cpus' TLBs.
+Modify domain_update_node_affinity() to take an additional parameter
+for passing the allocated memory in and to allocate and free the memory
+via the new helpers in case NULL was passed.
 
-Fix this mess by allocating needed memory before entering
-stop_machine_run() and freeing any memory only after having finished
-stop_machine_run().
+This will help later to pre-allocate the cpumasks in order to avoid
+allocations in stop-machine context.
 
-Fixes: 1ec410112cdd ("xen/sched: support differing granularity in schedule_cpu_[add/rm]()")
-Reported-by: Gao Ruifeng <ruifeng.gao@intel.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 V2:
-- move affinity mask allocation into schedule_cpu_rm_alloc() (Jan Beulich)
+- move helpers to core.c (Jan Beulich)
+- allocate/free memory in domain_update_node_aff() if NULL was passed
+  in (Jan Beulich)
+V3:
+- remove pointless initializer (Jan Beulich)
 ---
- xen/common/sched/core.c    | 27 +++++++++++----
- xen/common/sched/cpupool.c | 68 +++++++++++++++++++++++++++++---------
- xen/common/sched/private.h |  5 ++-
- 3 files changed, 78 insertions(+), 22 deletions(-)
+ xen/common/sched/core.c    | 54 ++++++++++++++++++++++++++------------
+ xen/common/sched/cpupool.c | 39 +++++++++++++++------------
+ xen/common/sched/private.h |  7 +++++
+ xen/include/xen/sched.h    |  9 ++++++-
+ 4 files changed, 74 insertions(+), 35 deletions(-)
 
 diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 228470ac41..ffb2d6202b 100644
+index ff1ddc7624..f6eed88930 100644
 --- a/xen/common/sched/core.c
 +++ b/xen/common/sched/core.c
-@@ -3247,7 +3247,7 @@ out:
-  * by schedule_cpu_rm_alloc() is modified only in case the cpu in question is
-  * being moved from or to a cpupool.
-  */
--static struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu)
-+struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu, bool aff_alloc)
- {
-     struct cpu_rm_data *data;
-     const struct sched_resource *sr;
-@@ -3260,6 +3260,17 @@ static struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu)
-     if ( !data )
-         goto out;
+@@ -1824,9 +1824,28 @@ int vcpu_affinity_domctl(struct domain *d, uint32_t cmd,
+     return ret;
+ }
  
-+    if ( aff_alloc )
+-void domain_update_node_affinity(struct domain *d)
++bool update_node_aff_alloc(struct affinity_masks *affinity)
+ {
+-    cpumask_var_t dom_cpumask, dom_cpumask_soft;
++    if ( !alloc_cpumask_var(&affinity->hard) )
++        return false;
++    if ( !alloc_cpumask_var(&affinity->soft) )
 +    {
-+        if ( !update_node_aff_alloc(&data->affinity) )
-+        {
-+            XFREE(data);
-+            goto out;
-+        }
++        free_cpumask_var(affinity->hard);
++        return false;
 +    }
-+    else
-+        memset(&data->affinity, 0, sizeof(data->affinity));
 +
-     data->old_ops = sr->scheduler;
-     data->vpriv_old = idle_vcpu[cpu]->sched_unit->priv;
-     data->ppriv_old = sr->sched_priv;
-@@ -3280,6 +3291,7 @@ static struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu)
-         {
-             while ( idx > 0 )
-                 sched_res_free(&data->sr[--idx]->rcu);
-+            update_node_aff_free(&data->affinity);
-             XFREE(data);
-             goto out;
-         }
-@@ -3298,10 +3310,11 @@ static struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu)
-     return data;
- }
- 
--static void schedule_cpu_rm_free(struct cpu_rm_data *mem, unsigned int cpu)
-+void schedule_cpu_rm_free(struct cpu_rm_data *mem, unsigned int cpu)
- {
-     sched_free_udata(mem->old_ops, mem->vpriv_old);
-     sched_free_pdata(mem->old_ops, mem->ppriv_old, cpu);
-+    update_node_aff_free(&mem->affinity);
- 
-     xfree(mem);
- }
-@@ -3312,17 +3325,18 @@ static void schedule_cpu_rm_free(struct cpu_rm_data *mem, unsigned int cpu)
-  * The cpu is already marked as "free" and not valid any longer for its
-  * cpupool.
-  */
--int schedule_cpu_rm(unsigned int cpu)
-+int schedule_cpu_rm(unsigned int cpu, struct cpu_rm_data *data)
- {
-     struct sched_resource *sr;
--    struct cpu_rm_data *data;
++    return true;
++}
++
++void update_node_aff_free(struct affinity_masks *affinity)
++{
++    free_cpumask_var(affinity->soft);
++    free_cpumask_var(affinity->hard);
++}
++
++void domain_update_node_aff(struct domain *d, struct affinity_masks *affinity)
++{
++    struct affinity_masks masks;
+     cpumask_t *dom_affinity;
+     const cpumask_t *online;
      struct sched_unit *unit;
-     spinlock_t *old_lock;
-     unsigned long flags;
-     int idx = 0;
-     unsigned int cpu_iter;
-+    bool freemem = !data;
+@@ -1836,14 +1855,16 @@ void domain_update_node_affinity(struct domain *d)
+     if ( !d->vcpu || !d->vcpu[0] )
+         return;
  
--    data = schedule_cpu_rm_alloc(cpu);
-+    if ( !data )
-+        data = schedule_cpu_rm_alloc(cpu, false);
-     if ( !data )
-         return -ENOMEM;
+-    if ( !zalloc_cpumask_var(&dom_cpumask) )
+-        return;
+-    if ( !zalloc_cpumask_var(&dom_cpumask_soft) )
++    if ( !affinity )
+     {
+-        free_cpumask_var(dom_cpumask);
+-        return;
++        affinity = &masks;
++        if ( !update_node_aff_alloc(affinity) )
++            return;
+     }
  
-@@ -3390,7 +3404,8 @@ int schedule_cpu_rm(unsigned int cpu)
-     sched_deinit_pdata(data->old_ops, data->ppriv_old, cpu);
++    cpumask_clear(affinity->hard);
++    cpumask_clear(affinity->soft);
++
+     online = cpupool_domain_master_cpumask(d);
  
-     rcu_read_unlock(&sched_res_rculock);
--    schedule_cpu_rm_free(data, cpu);
-+    if ( freemem )
-+        schedule_cpu_rm_free(data, cpu);
+     spin_lock(&d->node_affinity_lock);
+@@ -1864,22 +1885,21 @@ void domain_update_node_affinity(struct domain *d)
+          */
+         for_each_sched_unit ( d, unit )
+         {
+-            cpumask_or(dom_cpumask, dom_cpumask, unit->cpu_hard_affinity);
+-            cpumask_or(dom_cpumask_soft, dom_cpumask_soft,
+-                       unit->cpu_soft_affinity);
++            cpumask_or(affinity->hard, affinity->hard, unit->cpu_hard_affinity);
++            cpumask_or(affinity->soft, affinity->soft, unit->cpu_soft_affinity);
+         }
+         /* Filter out non-online cpus */
+-        cpumask_and(dom_cpumask, dom_cpumask, online);
+-        ASSERT(!cpumask_empty(dom_cpumask));
++        cpumask_and(affinity->hard, affinity->hard, online);
++        ASSERT(!cpumask_empty(affinity->hard));
+         /* And compute the intersection between hard, online and soft */
+-        cpumask_and(dom_cpumask_soft, dom_cpumask_soft, dom_cpumask);
++        cpumask_and(affinity->soft, affinity->soft, affinity->hard);
  
-     return 0;
+         /*
+          * If not empty, the intersection of hard, soft and online is the
+          * narrowest set we want. If empty, we fall back to hard&online.
+          */
+-        dom_affinity = cpumask_empty(dom_cpumask_soft) ?
+-                           dom_cpumask : dom_cpumask_soft;
++        dom_affinity = cpumask_empty(affinity->soft) ? affinity->hard
++                                                     : affinity->soft;
+ 
+         nodes_clear(d->node_affinity);
+         for_each_cpu ( cpu, dom_affinity )
+@@ -1888,8 +1908,8 @@ void domain_update_node_affinity(struct domain *d)
+ 
+     spin_unlock(&d->node_affinity_lock);
+ 
+-    free_cpumask_var(dom_cpumask_soft);
+-    free_cpumask_var(dom_cpumask);
++    if ( affinity == &masks )
++        update_node_aff_free(affinity);
  }
+ 
+ typedef long ret_t;
 diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 58e082eb4c..2506861e4f 100644
+index 2afe54f54d..58e082eb4c 100644
 --- a/xen/common/sched/cpupool.c
 +++ b/xen/common/sched/cpupool.c
-@@ -411,22 +411,28 @@ int cpupool_move_domain(struct domain *d, struct cpupool *c)
+@@ -410,6 +410,25 @@ int cpupool_move_domain(struct domain *d, struct cpupool *c)
+     return ret;
  }
  
- /* Update affinities of all domains in a cpupool. */
--static void cpupool_update_node_affinity(const struct cpupool *c)
-+static void cpupool_update_node_affinity(const struct cpupool *c,
-+                                         struct affinity_masks *masks)
- {
--    struct affinity_masks masks;
-+    struct affinity_masks local_masks;
-     struct domain *d;
- 
--    if ( !update_node_aff_alloc(&masks) )
--        return;
-+    if ( !masks )
-+    {
-+        if ( !update_node_aff_alloc(&local_masks) )
-+            return;
-+        masks = &local_masks;
-+    }
- 
-     rcu_read_lock(&domlist_read_lock);
- 
-     for_each_domain_in_cpupool(d, c)
--        domain_update_node_aff(d, &masks);
-+        domain_update_node_aff(d, masks);
- 
-     rcu_read_unlock(&domlist_read_lock);
- 
--    update_node_aff_free(&masks);
-+    if ( masks == &local_masks )
-+        update_node_aff_free(masks);
- }
- 
++/* Update affinities of all domains in a cpupool. */
++static void cpupool_update_node_affinity(const struct cpupool *c)
++{
++    struct affinity_masks masks;
++    struct domain *d;
++
++    if ( !update_node_aff_alloc(&masks) )
++        return;
++
++    rcu_read_lock(&domlist_read_lock);
++
++    for_each_domain_in_cpupool(d, c)
++        domain_update_node_aff(d, &masks);
++
++    rcu_read_unlock(&domlist_read_lock);
++
++    update_node_aff_free(&masks);
++}
++
  /*
-@@ -460,15 +466,17 @@ static int cpupool_assign_cpu_locked(struct cpupool *c, unsigned int cpu)
+  * assign a specific cpu to a cpupool
+  * cpupool_lock must be held
+@@ -417,7 +436,6 @@ int cpupool_move_domain(struct domain *d, struct cpupool *c)
+ static int cpupool_assign_cpu_locked(struct cpupool *c, unsigned int cpu)
+ {
+     int ret;
+-    struct domain *d;
+     const cpumask_t *cpus;
+ 
+     cpus = sched_get_opt_cpumask(c->gran, cpu);
+@@ -442,12 +460,7 @@ static int cpupool_assign_cpu_locked(struct cpupool *c, unsigned int cpu)
  
      rcu_read_unlock(&sched_res_rculock);
  
--    cpupool_update_node_affinity(c);
-+    cpupool_update_node_affinity(c, NULL);
+-    rcu_read_lock(&domlist_read_lock);
+-    for_each_domain_in_cpupool(d, c)
+-    {
+-        domain_update_node_affinity(d);
+-    }
+-    rcu_read_unlock(&domlist_read_lock);
++    cpupool_update_node_affinity(c);
  
      return 0;
  }
- 
--static int cpupool_unassign_cpu_finish(struct cpupool *c)
-+static int cpupool_unassign_cpu_finish(struct cpupool *c,
-+                                       struct cpu_rm_data *mem)
+@@ -456,18 +469,14 @@ static int cpupool_unassign_cpu_finish(struct cpupool *c)
  {
      int cpu = cpupool_moving_cpu;
      const cpumask_t *cpus;
-+    struct affinity_masks *masks = mem ? &mem->affinity : NULL;
+-    struct domain *d;
      int ret;
  
      if ( c != cpupool_cpu_moving )
-@@ -491,7 +499,7 @@ static int cpupool_unassign_cpu_finish(struct cpupool *c)
-      */
-     if ( !ret )
-     {
--        ret = schedule_cpu_rm(cpu);
-+        ret = schedule_cpu_rm(cpu, mem);
-         if ( ret )
-             cpumask_andnot(&cpupool_free_cpus, &cpupool_free_cpus, cpus);
-         else
-@@ -503,7 +511,7 @@ static int cpupool_unassign_cpu_finish(struct cpupool *c)
+         return -EADDRNOTAVAIL;
+ 
+-    /*
+-     * We need this for scanning the domain list, both in
+-     * cpu_disable_scheduler(), and at the bottom of this function.
+-     */
+     rcu_read_lock(&domlist_read_lock);
+     ret = cpu_disable_scheduler(cpu);
++    rcu_read_unlock(&domlist_read_lock);
+ 
+     rcu_read_lock(&sched_res_rculock);
+     cpus = get_sched_res(cpu)->cpus;
+@@ -494,11 +503,7 @@ static int cpupool_unassign_cpu_finish(struct cpupool *c)
      }
      rcu_read_unlock(&sched_res_rculock);
  
--    cpupool_update_node_affinity(c);
-+    cpupool_update_node_affinity(c, masks);
+-    for_each_domain_in_cpupool(d, c)
+-    {
+-        domain_update_node_affinity(d);
+-    }
+-    rcu_read_unlock(&domlist_read_lock);
++    cpupool_update_node_affinity(c);
  
      return ret;
  }
-@@ -567,7 +575,7 @@ static long cf_check cpupool_unassign_cpu_helper(void *info)
-                       cpupool_cpu_moving->cpupool_id, cpupool_moving_cpu);
-     spin_lock(&cpupool_lock);
- 
--    ret = cpupool_unassign_cpu_finish(c);
-+    ret = cpupool_unassign_cpu_finish(c, NULL);
- 
-     spin_unlock(&cpupool_lock);
-     debugtrace_printk("cpupool_unassign_cpu ret=%ld\n", ret);
-@@ -714,7 +722,7 @@ static int cpupool_cpu_add(unsigned int cpu)
-  * This function is called in stop_machine context, so we can be sure no
-  * non-idle vcpu is active on the system.
-  */
--static void cpupool_cpu_remove(unsigned int cpu)
-+static void cpupool_cpu_remove(unsigned int cpu, struct cpu_rm_data *mem)
- {
-     int ret;
- 
-@@ -722,7 +730,7 @@ static void cpupool_cpu_remove(unsigned int cpu)
- 
-     if ( !cpumask_test_cpu(cpu, &cpupool_free_cpus) )
-     {
--        ret = cpupool_unassign_cpu_finish(cpupool0);
-+        ret = cpupool_unassign_cpu_finish(cpupool0, mem);
-         BUG_ON(ret);
-     }
-     cpumask_clear_cpu(cpu, &cpupool_free_cpus);
-@@ -788,7 +796,7 @@ static void cpupool_cpu_remove_forced(unsigned int cpu)
-         {
-             ret = cpupool_unassign_cpu_start(c, master_cpu);
-             BUG_ON(ret);
--            ret = cpupool_unassign_cpu_finish(c);
-+            ret = cpupool_unassign_cpu_finish(c, NULL);
-             BUG_ON(ret);
-         }
-     }
-@@ -1008,10 +1016,21 @@ static int cf_check cpu_callback(
- {
-     unsigned int cpu = (unsigned long)hcpu;
-     int rc = 0;
-+    static struct cpu_rm_data *mem;
- 
-     switch ( action )
-     {
-     case CPU_DOWN_FAILED:
-+        if ( system_state <= SYS_STATE_active )
-+        {
-+            if ( mem )
-+            {
-+                schedule_cpu_rm_free(mem, cpu);
-+                mem = NULL;
-+            }
-+            rc = cpupool_cpu_add(cpu);
-+        }
-+        break;
-     case CPU_ONLINE:
-         if ( system_state <= SYS_STATE_active )
-             rc = cpupool_cpu_add(cpu);
-@@ -1019,12 +1038,31 @@ static int cf_check cpu_callback(
-     case CPU_DOWN_PREPARE:
-         /* Suspend/Resume don't change assignments of cpus to cpupools. */
-         if ( system_state <= SYS_STATE_active )
-+        {
-             rc = cpupool_cpu_remove_prologue(cpu);
-+            if ( !rc )
-+            {
-+                ASSERT(!mem);
-+                mem = schedule_cpu_rm_alloc(cpu, true);
-+                rc = mem ? 0 : -ENOMEM;
-+            }
-+        }
-         break;
-     case CPU_DYING:
-         /* Suspend/Resume don't change assignments of cpus to cpupools. */
-         if ( system_state <= SYS_STATE_active )
--            cpupool_cpu_remove(cpu);
-+        {
-+            ASSERT(mem);
-+            cpupool_cpu_remove(cpu, mem);
-+        }
-+        break;
-+    case CPU_DEAD:
-+        if ( system_state <= SYS_STATE_active )
-+        {
-+            ASSERT(mem);
-+            schedule_cpu_rm_free(mem, cpu);
-+            mem = NULL;
-+        }
-         break;
-     case CPU_RESUME_FAILED:
-         cpupool_cpu_remove_forced(cpu);
 diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
-index 601d639699..cc7a6cb571 100644
+index a870320146..38251b1f7b 100644
 --- a/xen/common/sched/private.h
 +++ b/xen/common/sched/private.h
-@@ -603,6 +603,7 @@ void update_node_aff_free(struct affinity_masks *affinity);
+@@ -593,6 +593,13 @@ affinity_balance_cpumask(const struct sched_unit *unit, int step,
+         cpumask_copy(mask, unit->cpu_hard_affinity);
+ }
  
- /* Memory allocation related data for schedule_cpu_rm(). */
- struct cpu_rm_data {
-+    struct affinity_masks affinity;
-     const struct scheduler *old_ops;
-     void *ppriv_old;
-     void *vpriv_old;
-@@ -617,7 +618,9 @@ struct scheduler *scheduler_alloc(unsigned int sched_id);
- void scheduler_free(struct scheduler *sched);
- int cpu_disable_scheduler(unsigned int cpu);
- int schedule_cpu_add(unsigned int cpu, struct cpupool *c);
--int schedule_cpu_rm(unsigned int cpu);
-+struct cpu_rm_data *schedule_cpu_rm_alloc(unsigned int cpu, bool aff_alloc);
-+void schedule_cpu_rm_free(struct cpu_rm_data *mem, unsigned int cpu);
-+int schedule_cpu_rm(unsigned int cpu, struct cpu_rm_data *mem);
- int sched_move_domain(struct domain *d, struct cpupool *c);
- struct cpupool *cpupool_get_by_id(unsigned int poolid);
- void cpupool_put(struct cpupool *pool);
++struct affinity_masks {
++    cpumask_var_t hard;
++    cpumask_var_t soft;
++};
++
++bool update_node_aff_alloc(struct affinity_masks *affinity);
++void update_node_aff_free(struct affinity_masks *affinity);
+ void sched_rm_cpu(unsigned int cpu);
+ const cpumask_t *sched_get_opt_cpumask(enum sched_gran opt, unsigned int cpu);
+ void schedule_dump(struct cpupool *c);
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index e2b3b6daa3..666264b8c3 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -663,8 +663,15 @@ static inline void get_knownalive_domain(struct domain *d)
+     ASSERT(!(atomic_read(&d->refcnt) & DOMAIN_DESTROYED));
+ }
+ 
++struct affinity_masks;
++
+ int domain_set_node_affinity(struct domain *d, const nodemask_t *affinity);
+-void domain_update_node_affinity(struct domain *d);
++void domain_update_node_aff(struct domain *d, struct affinity_masks *affinity);
++
++static inline void domain_update_node_affinity(struct domain *d)
++{
++    domain_update_node_aff(d, NULL);
++}
+ 
+ /*
+  * To be implemented by each architecture, sanity checking the configuration
 -- 
 2.35.3
 
