@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB94C25B08
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42ECAC25B0E
 	for <xen-devel@archiver.kernel.org>; Tue, 16 Aug 2022 02:37:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.387834.624277 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.387839.624321 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oNmSF-0007Fx-Sk; Tue, 16 Aug 2022 02:37:19 +0000
+	id 1oNmST-0008TI-U2; Tue, 16 Aug 2022 02:37:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 387834.624277; Tue, 16 Aug 2022 02:37:19 +0000
+Received: by outflank-mailman (output) from mailman id 387839.624321; Tue, 16 Aug 2022 02:37:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oNmSF-0007Fe-NC; Tue, 16 Aug 2022 02:37:19 +0000
-Received: by outflank-mailman (input) for mailman id 387834;
- Tue, 16 Aug 2022 02:37:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oNmST-0008TB-RF; Tue, 16 Aug 2022 02:37:33 +0000
+Received: by outflank-mailman (input) for mailman id 387839;
+ Tue, 16 Aug 2022 02:37:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YdlV=YU=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1oNmSE-0007FY-Gs
- for xen-devel@lists.xenproject.org; Tue, 16 Aug 2022 02:37:18 +0000
+ id 1oNmSS-0008P8-S5
+ for xen-devel@lists.xenproject.org; Tue, 16 Aug 2022 02:37:32 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 5673c57f-1d0c-11ed-924f-1f966e50362f;
- Tue, 16 Aug 2022 04:37:15 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 6099ba52-1d0c-11ed-bd2e-47488cf2e6aa;
+ Tue, 16 Aug 2022 04:37:31 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ECA33106F;
- Mon, 15 Aug 2022 19:37:14 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F0B3A106F;
+ Mon, 15 Aug 2022 19:37:31 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id BA54D3F70D;
- Mon, 15 Aug 2022 19:37:10 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 486FE3F70D;
+ Mon, 15 Aug 2022 19:37:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5673c57f-1d0c-11ed-924f-1f966e50362f
+X-Inumbo-ID: 6099ba52-1d0c-11ed-bd2e-47488cf2e6aa
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -57,160 +57,125 @@ Cc: wei.chen@arm.com,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v10 0/9] populate/unpopulate memory when domain on static allocation
-Date: Tue, 16 Aug 2022 10:36:49 +0800
-Message-Id: <20220816023658.3551936-1-Penny.Zheng@arm.com>
+	Wei Liu <wl@xen.org>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v10 4/9] xen: add field "flags" to cover all internal CDF_XXX
+Date: Tue, 16 Aug 2022 10:36:53 +0800
+Message-Id: <20220816023658.3551936-5-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220816023658.3551936-1-Penny.Zheng@arm.com>
+References: <20220816023658.3551936-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Today when a domain unpopulates the memory on runtime, they will always
-hand the memory over to the heap allocator. And it will be a problem if it
-is a static domain.
-Pages used as guest RAM for static domain shall always be reserved to this
-domain only, and not be used for any other purposes, so they shall never go
-back to heap allocator.
+With more and more CDF_xxx internal flags in and to save the space, this
+commit introduces a new field "flags" in struct domain to store CDF_*
+internal flags directly.
 
-This patch serie intends to fix this issue, by adding pages on the new list
-resv_page_list after having taken them off the "normal" list, when unpopulating
-memory, and retrieving pages from resv page list(resv_page_list) when
-populating memory.
+Another new CDF_xxx will be introduced in the next patch.
 
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
 v10 changes:
-- let Arm keep #define PGC_static 0 private, with the generic fallback
-remaining in page_alloc.c
-- change ASSERT(d) to ASSERT_UNREACHABLE() to be more robust looking
-forward, and also add a printk() to log the problem
-- mention the the removal of #ifdef CONFIG_STATIC_MEMORY in commit
-message
-- commit message typo fix
-- Do not skip the list addition in that one special case
-- add lock on the fail path
-- new commit "xen: rename free_staticmem_pages to unprepare_staticmem_pages"
+- no change
 ---
 v9 changes:
-- move free_domheap_page into else-condition
-- considering scrubbing static pages, domain dying case and opt_scrub_domheap
-both do not apply to static pages.
-- as unowned static pages don't make themselves to free_domstatic_page
-at the moment, remove else-condition and add ASSERT(d) at the top of the
-function
-- remove macro helper put_static_page, and just expand its code inside
-free_domstatic_page
-- Use ASSERT_ALLOC_CONTEXT() in acquire_reserved_page
-- Add free_staticmem_pages to undo prepare_staticmem_pages when
-assign_domstatic_pages fails
-- Remove redundant static in error message
+- no change
 ---
 v8 changes:
-- introduce new helper free_domstatic_page
-- let put_page call free_domstatic_page for static page, when last ref
-drops
-- #define PGC_static zero when !CONFIG_STATIC_MEMORY, as it is used
-outside page_alloc.c
-- #ifdef-ary around is_domain_using_staticmem() is not needed anymore
-- order as a parameter is not needed here, as all staticmem operations are
-limited to order-0 regions
-- move d->page_alloc_lock after operation on d->resv_page_list
-- As concurrent free/allocate could modify the resv_page_list, we still
-need the lock
+- no change
 ---
 v7 changes:
-- protect free_staticmem_pages with heap_lock to match its reverse function
-acquire_staticmem_pages
-- IS_ENABLED(CONFIG_STATIC_MEMORY) would not be needed anymore
-- add page on the rsv_page_list *after* it has been freed
-- remove the lock, since we add the page to rsv_page_list after it has
-been totally freed.
+- no change
 ---
 v6 changes:
-- rename PGC_staticmem to PGC_static
-- remove #ifdef aroud function declaration
-- use domain instead of sub-systems
-- move non-zero is_domain_using_staticmem() from ARM header to common
-header
-- move PGC_static !CONFIG_STATIC_MEMORY definition to common header
-- drop the lock before returning
+- no change
 ---
 v5 changes:
-- introduce three new commits
-- In order to avoid stub functions, we #define PGC_staticmem to non-zero only
-when CONFIG_STATIC_MEMORY
-- use "unlikely()" around pg->count_info & PGC_staticmem
-- remove pointless "if", since mark_page_free() is going to set count_info
-to PGC_state_free and by consequence clear PGC_staticmem
-- move #define PGC_staticmem 0 to mm.h
-- guard "is_domain_using_staticmem" under CONFIG_STATIC_MEMORY
-- #define is_domain_using_staticmem zero if undefined
-- extract common codes for assigning pages into a helper assign_domstatic_pages
-- refine commit message
-- remove stub function acquire_reserved_page
-- Alloc/free of memory can happen concurrently. So access to rsv_page_list
-needs to be protected with a spinlock
+- no change
 ---
 v4 changes:
-- commit message refinement
-- miss dropping __init in acquire_domstatic_pages
-- add the page back to the reserved list in case of error
-- remove redundant printk
-- refine log message and make it warn level
-- guard "is_domain_using_staticmem" under CONFIG_STATIC_MEMORY
-- #define is_domain_using_staticmem zero if undefined
+- no change
 ---
 v3 changes:
-- fix possible racy issue in free_staticmem_pages()
-- introduce a stub free_staticmem_pages() for the !CONFIG_STATIC_MEMORY case
-- move the change to free_heap_pages() to cover other potential call sites
 - change fixed width type uint32_t to unsigned int
 - change "flags" to a more descriptive name "cdf"
-- change name from "is_domain_static()" to "is_domain_using_staticmem"
-- have page_list_del() just once out of the if()
-- remove resv_pages counter
-- make arch_free_heap_page be an expression, not a compound statement.
-- move #ifndef is_domain_using_staticmem to the common header file
-- remove #ifdef CONFIG_STATIC_MEMORY-ary
-- remove meaningless page_to_mfn(page) in error log
 ---
 v2 changes:
 - let "flags" live in the struct domain. So other arch can take
 advantage of it in the future
-- change name from "is_domain_on_static_allocation" to "is_domain_static()"
-- put reserved pages on resv_page_list after having taken them off
-the "normal" list
-- introduce acquire_reserved_page to retrieve reserved pages from
-resv_page_list
-- forbid non-zero-order requests in populate_physmap
-- let is_domain_static return ((void)(d), false) on x86
 - fix coding style
+---
+ xen/arch/arm/domain.c             | 2 --
+ xen/arch/arm/include/asm/domain.h | 3 +--
+ xen/common/domain.c               | 3 +++
+ xen/include/xen/sched.h           | 3 +++
+ 4 files changed, 7 insertions(+), 4 deletions(-)
 
-Penny Zheng (9):
-  xen/arm: rename PGC_reserved to PGC_static
-  xen: do not free reserved memory into heap
-  xen: do not merge reserved pages in free_heap_pages()
-  xen: add field "flags" to cover all internal CDF_XXX
-  xen/arm: introduce CDF_staticmem
-  xen: unpopulate memory when domain is static
-  xen: introduce prepare_staticmem_pages
-  xen: retrieve reserved pages on populate_physmap
-  xen: rename free_staticmem_pages to unprepare_staticmem_pages
-
- xen/arch/arm/domain.c             |   2 -
- xen/arch/arm/domain_build.c       |   5 +-
- xen/arch/arm/include/asm/domain.h |   3 +-
- xen/arch/arm/include/asm/mm.h     |  10 +-
- xen/arch/arm/mm.c                 |   5 +-
- xen/arch/arm/setup.c              |   3 +-
- xen/common/domain.c               |   7 ++
- xen/common/memory.c               |  23 ++++
- xen/common/page_alloc.c           | 192 ++++++++++++++++++++++--------
- xen/include/xen/domain.h          |   8 ++
- xen/include/xen/mm.h              |   8 +-
- xen/include/xen/sched.h           |   6 +
- 12 files changed, 209 insertions(+), 63 deletions(-)
-
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 2cd481979c..a963884e81 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -712,8 +712,6 @@ int arch_domain_create(struct domain *d,
+     ioreq_domain_init(d);
+ #endif
+ 
+-    d->arch.directmap = flags & CDF_directmap;
+-
+     /* p2m_init relies on some value initialized by the IOMMU subsystem */
+     if ( (rc = iommu_domain_init(d, config->iommu_opts)) != 0 )
+         goto fail;
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index cd9ce19b4b..26a8348eed 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -29,7 +29,7 @@ enum domain_type {
+ #define is_64bit_domain(d) (0)
+ #endif
+ 
+-#define is_domain_direct_mapped(d) (d)->arch.directmap
++#define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+ 
+ /*
+  * Is the domain using the host memory layout?
+@@ -104,7 +104,6 @@ struct arch_domain
+     void *tee;
+ #endif
+ 
+-    bool directmap;
+ }  __cacheline_aligned;
+ 
+ struct arch_vcpu
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 618410e3b2..7062393e37 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -567,6 +567,9 @@ struct domain *domain_create(domid_t domid,
+     /* Sort out our idea of is_system_domain(). */
+     d->domain_id = domid;
+ 
++    /* Holding CDF_* internal flags. */
++    d->cdf = flags;
++
+     /* Debug sanity. */
+     ASSERT(is_system_domain(d) ? config == NULL : config != NULL);
+ 
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index e2b3b6daa3..1cf629e7ec 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -596,6 +596,9 @@ struct domain
+         struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
+     } ioreq_server;
+ #endif
++
++    /* Holding CDF_* constant. Internal flags for domain creation. */
++    unsigned int cdf;
+ };
+ 
+ static inline struct page_list_head *page_to_list(
 -- 
 2.25.1
 
