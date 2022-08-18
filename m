@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA10C32772
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Aug 2022 13:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.389524.626501 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEDF3C00140
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Aug 2022 13:09:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.389533.626512 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oOfCk-0008Fr-1k; Thu, 18 Aug 2022 13:04:58 +0000
+	id 1oOfGm-0000hE-KR; Thu, 18 Aug 2022 13:09:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 389524.626501; Thu, 18 Aug 2022 13:04:58 +0000
+Received: by outflank-mailman (output) from mailman id 389533.626512; Thu, 18 Aug 2022 13:09:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oOfCj-0008Fk-VB; Thu, 18 Aug 2022 13:04:57 +0000
-Received: by outflank-mailman (input) for mailman id 389524;
- Thu, 18 Aug 2022 13:04:56 +0000
+	id 1oOfGm-0000h7-Fv; Thu, 18 Aug 2022 13:09:08 +0000
+Received: by outflank-mailman (input) for mailman id 389533;
+ Thu, 18 Aug 2022 13:09:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1x1s=YW=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1oOfCi-0007Vi-9h
- for xen-devel@lists.xenproject.org; Thu, 18 Aug 2022 13:04:56 +0000
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on2049.outbound.protection.outlook.com [40.107.104.49])
+ id 1oOfGk-0000h1-Mr
+ for xen-devel@lists.xenproject.org; Thu, 18 Aug 2022 13:09:06 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-eopbgr80059.outbound.protection.outlook.com [40.107.8.59])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5a5d0c3c-1ef6-11ed-bd2e-47488cf2e6aa;
- Thu, 18 Aug 2022 15:04:54 +0200 (CEST)
+ id efebed1f-1ef6-11ed-bd2e-47488cf2e6aa;
+ Thu, 18 Aug 2022 15:09:05 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by VI1PR04MB4989.eurprd04.prod.outlook.com (2603:10a6:803:60::11)
+ by DB8PR04MB7180.eurprd04.prod.outlook.com (2603:10a6:10:12c::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.11; Thu, 18 Aug
- 2022 13:04:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.19; Thu, 18 Aug
+ 2022 13:09:03 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::2d5d:bae0:430f:70ad]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::2d5d:bae0:430f:70ad%4]) with mapi id 15.20.5525.010; Thu, 18 Aug 2022
- 13:04:53 +0000
+ 13:09:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,248 +48,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a5d0c3c-1ef6-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: efebed1f-1ef6-11ed-bd2e-47488cf2e6aa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=m2HnhP9YZkSDdlmjNmJDXCo/StiUW5T4KzDiHbcUlonLeTTQcvnXC8i4eGtgOmZss5Ke4xMt7ScpJV6cMxYTI03jSY1o3M2raCk9y01v+IVFfc3aM3Pbn8aPOlUo0LB60ffnvnvHmK6NkQSy7Sm72oLCYXR36grhB1OjuikikzM5R0upr2Eq6NtsPyGWcaQhp0qayFrHcCj3PfzkMne3fCWhmZ2wc0CtYjCYA1HfOIZqDnCKxp3EerRrFv4bXBiFX4mMpHoxPAfs8pkN5q2cizXoMxgWCtQQZyfOY3tg8n3ghGzBXU6dZFe8sYiEPR3jIPt4OGTc0r0NfwvC//VuSQ==
+ b=hYqZJWergUzK8ZXX9Nk9TmUAX1eIEob/w/lBEsKJjvhoqrNlMd7cfgeBfRxTETahWSs2pVy3H8mq2PpdQywtd2HUovg5GcFJ5jBh1ugjNK/5jSgQSoxN6lL+aAtNhXdYOsQTMR8WfxbaqpqKFgmzLOKrSR5MgslS0E7jZEzd4kYaUrm8QsJqUeAzPWAgZpqebIj/BrQ4uwLL8kLkw4aFAUh5+xC8q9TqTUlk2fCTif2UQF4wP9oyPWF6byuvslefyNIujCQTKEBq4iBYPuL3q5lME8hZZ17H82IBaxaBGVcM3oVkhxoSToEkifdt49yuHvFoD9MeCFs6stPPYmDQ7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JmYPLXj1oFALypXZrKMo7JnkebrUsMPgDdXSnPxVHFw=;
- b=WVPxuo37uieUih/BDu/GG1ddNyaDCk1K4YVx81OanLyX57Mi6qfmsjbHZx8SgYvQB2q02rBiKr/blrOJTYzrE3dUP6YQaFwEiGbHZXrvdW61xxgwWJMcrB3vCeChc+T1OukoX9ISd3I2liiD9E9tuG4c2bfp4EVNGJssdMHRtmZ7mF+XMG2l2eV/iwITuwJHKlJLgC6NwSpwHoeLrWQ02G6TKd8SkJZ/2pmasUsqJI2DqtnJitybH/62G9mTE7jjb1+sdVvW2pHT/ABskClSYVxZXF+ilD5FUNyScAGcxeO5j/58en86whmjkTRVGwHcBBZytcnjYJ6kGtFEQaUPjQ==
+ bh=SJoHEJ3i8waIJ6upmWdZZkotMfcpN476vyOI2anv1tU=;
+ b=TzJ7U4SEer1Vf2GsTDsXpN7u4Fo5AWRbR/PEowVnZS8LMtEGjThKM5yLCrPs6ijqeNIs+zw7BFiUKWtSZTLOn3qJjHKO5lI5F4EoTVi4O3o2gLpVNKeDaIUQ/ECaqdjqTWXrLSuXDKzltKFzjeC/4TN6zb8+jKEvpO0jpVRM8NL3PBPbd6YLJsrPq2c4h6l7NZQMuPQgGfVCPMdiqORopQs4MGwsCentF4RE8o9GH1w+oPZxgIb0n5hjPDaJIIVfL0R6XjMAfasLEsZ9Lgl1ZCK1ri1iteOJ21iFa5gpgRq45dwNWi2R5rmuw93OJV65HFfbh7CteXp6zc52qogAtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JmYPLXj1oFALypXZrKMo7JnkebrUsMPgDdXSnPxVHFw=;
- b=uJxfuBegTlLjvwt5XYGv1lSLV3o5+LQ0bycRE+3ywgjDFuwR9CcxOnkZxxoV50eat5yhm4mHl/KcTNB0hcK9GmrIyvSL+DE3c1KHgVKEi6uaG58U9yajhxBq/EuLOAWnuFjJ99BPhYRrkdg6PmIOcjbIgwBnbtMCWJJRjtPOZrXC2M1/8/swHq8KFVa4Zl2/I0Ju6a2Bcna+vX7yMm69KZ2MC6KxczEaNEN4OaezP5AnaT13zTd3ZUmigzP1gZ+M64QoNa8FAXcnuYMgtTbsdOjsZE33CP02EfzwMzvBI6sd5yqoSwkGvtBahzgVCdiYx7QM4kPaaqiXTpPJLsWvvA==
+ bh=SJoHEJ3i8waIJ6upmWdZZkotMfcpN476vyOI2anv1tU=;
+ b=gc1DIEngReCci5P09KhYj9KNPNgwzDsE/WluHNsY+IwRXsMSskcd/+b0ilNAtDm7VdLEQr0Q9k+fBt1QbFS9kKBjXGCsR5woqdUZoXVrWIXmu+oDYTkj1dzT8WY54GkOtnAIEVok9VIppuuarc+xtuIjm5d5B1LPp0QCpYGOf9z7WKagvqcMh1tBcrMOLdqHYtmbmzuTmFb3c02jZOZsKY+LxSkIi/yx6DfWe+Ii+lP2ZISZgTxfhpd3oEPe9hIrz4DLLFMBnK4P97prw21ZwLRJz1ZSvOMwBXlL+D/F6RMq1jn2dHDzzOEIYxhKXg+BlKn85pyOaM2yVcr/Ra5V9Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <38839202-426f-eb31-2997-ef557ab1583e@suse.com>
-Date: Thu, 18 Aug 2022 15:04:51 +0200
+Message-ID: <b0a3960c-8d1b-556d-f4fa-4fa4c8597a7b@suse.com>
+Date: Thu, 18 Aug 2022 15:09:00 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.12.0
-Subject: [PATCH v3 4/5] x86/mwait-idle: disable IBRS during long idle
+Subject: Re: [PATCH v3 0/5] x86/mwait-idle: (remaining) SPR + (new) ADL
+ support
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Henry Wang <Henry.Wang@arm.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <84200e9c-ee22-c240-826f-6c7006c0ef57@suse.com>
 In-Reply-To: <84200e9c-ee22-c240-826f-6c7006c0ef57@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0023.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1c::7) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0109.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a8::9) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2c357887-08f0-4173-d826-08da811a3dd7
-X-MS-TrafficTypeDiagnostic: VI1PR04MB4989:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5a129b7-c798-43fc-69c5-08da811ad2ad
+X-MS-TrafficTypeDiagnostic: DB8PR04MB7180:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	3K7O2bK21Hm30qOwqsF9RgskyhRv0bPWS+slnd8ack3OV9mnj/OP2pBj9pzuYmWWV1CU5wzWpj2SW99Ibs4hRYpsC+TkuHHhCTmnTU1ege4h3O0JPLVQHrufRIEcU8HygvUXdPv2XzTpQhZeJsspkoNVrQQwTsVQnxYocVhrxN6Zl2b3mwieE68q4N3CctqSo6Q7sLhgfen3mNJQNBXBSoenKDbfDyGhrjDd5/5vKB15RKUZlH85mMth1F7yLI1XwsAXnRwVMeY7OyZxHvtOETMkdePETvQX99mwPjEA52vsp7gXhbilcvHyNTrWj54w4j8epV3CT1S/6QYcOIRfQnP9EORiq1IXn3PFly9Xd0UcxBHO7g3IhTvfmBYFFRTPi9RxUnpgnEFrf2drlhG4MjIvd9FbhCx57Y4lcgRu5Jm3VmSqaKDJla7xkuHKeZ/nFAYpo2yp+ZwQzqk0XJVdCw8MLK+KxI1IW92Blqqi4NUhGuMXRQtsJx0JhnTdtuwLCBkm13csDvlwf3Zu94O5o/KdM6dFuJr5viQMm65hyEjyc/VeLPc0ttAN0rC9oF6c8xTSmqJLIVOJzUi3by8I2J02rvIPE73/TbRz9QXr0z6GFT0TfR/EtC3+AhtmN/5Jtg4zvjEIqQCSZd5f6EtlVV5ZVx15yxS2KQAh3J5EVaRFrpxtBZIkkhw0R6Xws0KRMkre7tJYxRqx+6Smb7EBr0603K5RL9FhuIKdN5Z3FVh4L8//Q2MB1TEUqYlYlu/6bWLBRnkXdtJOTlL3pT7Se/jejPKdV2zoaQcZbLLj90RiLxViFoRn4PZz4xKboqKqRfQIMBPpTkS/rW4JQ+dx4g==
+	2MMIsC2US2lQCEtsMFARzocrt38x0kBkveuB7Nvopry8KOivJ65wDkR0Rl139IagkNxOyULbBJ1+vI5tTBdwXt3hJOzECnAQHi8C32TM1Z7U0CYnyHDJUuy493BoB/XNvHajLU2qYqcDiyKO8CpcbLEpEI0VWuQaAde77KSzQksqyfQ+fi1wQmAgJgTNeiNU2Jzdt7vhETFC2p8XM4nl5ht+rvjgk9Zk0GYyotTaAzSVmAEgISVPDKboTuwwjZxQ6prWBoBinT43tku0L/6MGdvieAsaq4+AEdQNEBB0PBDxyaIlORVSf2/cKDAVS/KDa2x/6IIYCQVxJ+XJFcIWx0BN6G0Gt/CZgf4eTI/P51OcV66FB9cI3vaBeEDGjBSgd6Fvzw3HARIdL+4XT9ipldZkzebewuZPectJdbF/MflP3Jw1Cc0Xc+gRAG/yzBzvt9nhoA73oY1as3uhk2byS2CindtDysxlB+e1IB9Pbbg/RyywRkUYqSawR2e76qa6OruEHVO7XT24TSUh+97fLMXdlcN94NY0PrH683YCacWci9uYeatvrVk788SWGrzkaXRpE0VvsXSTDpuMm3cOyhJREanh9mi5KxKQI83jfIn6KMTa7C7gekcNKToSnUYfBXtFFiHuCP5bz3CyVAklU4nVgtUM528qHdUgHn3J17mB0CBglTvGkUUWnFLZqwsJR9GWaUfRzkeslCzQJNyofGouNq8RfVHQGJUvJqTwIHimy+ghxbZ5XqP0rQWMeO3kj/WyyBbLt3NbkBzlbcp0DE/5OXevmceHCTLD5n4k36g=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(376002)(39860400002)(136003)(396003)(346002)(2906002)(66946007)(478600001)(66476007)(8676002)(66556008)(6506007)(41300700001)(31686004)(186003)(26005)(2616005)(6512007)(4326008)(6486002)(83380400001)(36756003)(86362001)(31696002)(5660300002)(38100700002)(316002)(54906003)(6916009)(8936002)(21314003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(396003)(136003)(346002)(39860400002)(376002)(316002)(6916009)(54906003)(8936002)(4326008)(8676002)(36756003)(66946007)(66556008)(31686004)(38100700002)(66476007)(2906002)(83380400001)(6486002)(478600001)(6512007)(2616005)(86362001)(31696002)(186003)(5660300002)(4744005)(53546011)(6506007)(26005)(41300700001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?T3h2dWxGZjZFZEZOTTgyK3pSaXRhSWtCWG1lRjZ1bTY0VjZESkxadG8zZkdC?=
- =?utf-8?B?VndRYWxCOHoySFlvQmpkNS8yRjRWVU9mMHdVM1VRaldNWEZKTUZIRFdmV1JY?=
- =?utf-8?B?T3BQUzJYNTRvdVZOYVdBTEdsSjVsNHdrZW9xYlVINkRDbkpvc0piRmFOdDN6?=
- =?utf-8?B?cTBTV2loN0tDdU5Eblc5WHZROGRTWEg5bzFHQTY0c2NFa1E0TEphYUFXWVlh?=
- =?utf-8?B?Sm5wVWtoNTBnSndPcUVGZklteEV5V0RaNWVUVHg5K3NHejVTRWNvc3ZFa1BU?=
- =?utf-8?B?cVYxU092NVJKOERuRUdOZkhTRzNYT2tFTEdidEhKZTJLcG9tR1oyQ2tLVy9O?=
- =?utf-8?B?SVdYU2xCZ1MzZGJMNmZ3QW1SUHIxOGRmMllscHRKbU4yTUc5MWcrbTRUWjVn?=
- =?utf-8?B?S2xkeW5SRFNWYjVxUmhnSklXemFHb3E5RlR5VWdveGx3Rlp6VDN4YVNoWTlt?=
- =?utf-8?B?U2ZZbk1USndycHVlNVdyaEprRFVPYmhmb3lCdkdWK2h5L3VuK1BzUzk4SzJu?=
- =?utf-8?B?bVhvNFlsKyt3MERpWXZKRnNjeE03UDRibmJaQzkwc25OSUFhQ0VqTFVCK1Vn?=
- =?utf-8?B?NDV6MjgwZ2NiSWpYcnA2cjFBVnJwWDdPcVdMaFlYZ2x2VGxScTg1dGRJd2sz?=
- =?utf-8?B?bUtQWEhWcytFN2ZVc1QySy9IMUpaR1dsNjJJTTM0M2JYdmgyc2Jyai9PYXhO?=
- =?utf-8?B?RDFZSGNWSStib0wydnFoaHVRZThTRHpGM3dDSnE4Q2pKSGJzMldoOWJ6Y2k3?=
- =?utf-8?B?aklJRUc0a2NocnN4bmRlVXRkcDFrTTh1QTRrWFcweHNUKzJFWDFiRy9RZ2wx?=
- =?utf-8?B?L2R5b0p4VklLSnFtbW9MbDNRMW1TVWJXcFArV3krTUd1M282K2tkS2xhTEhG?=
- =?utf-8?B?MmdsYnVVeVZwYjFoUG5TQXNHWlh5SDRHbTkzSjFpUW0xaFZlenJidTBoSU1L?=
- =?utf-8?B?eW4yeW9lT1U5MlBHb3BWRTlWTzhoSW1pKzZqQ2pMdXdnd1FJSkRJYkZaWFVi?=
- =?utf-8?B?U0lhcndWVTFZTWEzeDlFRzNQcHF4WWZGUXp5dEhva1lnWG4vN1AxSWp1UTdl?=
- =?utf-8?B?cWdkM2kzdzFNUHlMcmpsYVYxVVliclU3cTJCUmNhQk9ybzNTK2dUdGMwOGtL?=
- =?utf-8?B?bHlIK0tCWnJZR3FLUzVsYzhqZDg4MDdVUjVQZlpkVVF4eHN1bldodTBOVitl?=
- =?utf-8?B?SzF2LzY5WnZtOFphR3o3RklwUHlyMFMvd2VKTDBLRGl1bUhXQlZYRlpUNE9m?=
- =?utf-8?B?aXRKWnMxcWRJRzc5ZVU0V1NQV0IxNmEzUzEyQStrS2NpWW1LdUxNcHRweTlG?=
- =?utf-8?B?aXJkT2lPNVFjUHkyVjBUbDRwRG9ucFUySUEyN0liUVBxQmR5UStETGNmTTRT?=
- =?utf-8?B?cDAxUFZKeWVDTW5GbmtuU0Fhblh3YUxhOXdTbERwYWhhNklGWHYxdFhRNDZt?=
- =?utf-8?B?Sndka3V4aFVNZlFaelBlMUpVVDZoWHVLTUpyNXhEeDhoa3ExaGMySWR0bkJo?=
- =?utf-8?B?emNBQ1RFeEkwdnpBWExsanF6OExmQXBobFFPYS9Ed3EyV2NUeXJQWHJFYWZY?=
- =?utf-8?B?TitMWHE5eUs2MVMwMTVDWHk5VHhqckJGV1hxbmMxdC9uT05SQTA0L1UraXJO?=
- =?utf-8?B?WlpFWnJWS2F1NTZzM3ViQ3lVdzJnMlhHdmdWQ3IxbFBhNVRDMTFVRXJFLysr?=
- =?utf-8?B?NlJRQXo4N1YzN0drcGJsUEhLZVNJcGNGNEFISHRESmRDNmY2QmU2MGQxT3Mw?=
- =?utf-8?B?dlJRYUtIU3JVSVl2M1F1bTVvWEpHNnBQQStIdlk3TWlSc2dNM1dGUWp6ZFNV?=
- =?utf-8?B?OU5qbTJZNWlLbGdtcExZNjI4Ykhla3k3dUpqU3NoREJubkJoL3lTNnBUZllI?=
- =?utf-8?B?dDFJU1hUZXRpd0h5RkpZNjVGZExBcWVuWitWb0hFWGpjVU5iQTVFVHRCSElq?=
- =?utf-8?B?b0tMUytpZ3Uxa3AxRm5yai9FRG1kWTZQdEYxZmJuNEk4TWY1SDg4aVZxdGxL?=
- =?utf-8?B?U2Z0ZUYydVYxQk9Edzh4VlBLaEt6OGtDRTVIbVMvYTBMcGVqcDBwSHNJZjdK?=
- =?utf-8?B?UTdWcTJKVlVQY1JFQ3VDMjhpa3N6VG82MytYczRuc0JoRUI1N1NTVTA5ZU5r?=
- =?utf-8?Q?lwudXdvheHyF/++NGsc6rOMCe?=
+	=?utf-8?B?SGh0RllKenRURWU5Wk5pRlUySFFmZ2hsam1lWmprK0JneUVrc3JvY3YveXVl?=
+ =?utf-8?B?LzliRk8zaFAySWVzZng2aktucC9Td1hZSVREVWJUVmNhdVloY3dyMHQ1Tjhz?=
+ =?utf-8?B?ajI4T0FuTTVHakhuZWs0aXFYcHo3bXNRWW9sNXl1SXZoT0kxclB1RWtsQUhv?=
+ =?utf-8?B?L2hEZGRBcHF1MFV0cXVzVzd2SFhMR1RSZkc2M0IrNVBoU0c0WUhmTHFGK1JF?=
+ =?utf-8?B?OTZFOFJlcVlNSEZMdVhOSnZVRmtrWXNPalM3WENUblNLUy9lUStKTmcvYjRT?=
+ =?utf-8?B?VFRHei81V2s5b0d2b3dXZUR6SHRGcXNEaEYxOEY4VW45ajVWc0w2OFRPRFBO?=
+ =?utf-8?B?bDFVNWlFK2xhNEJJblVXSFRhVWxmOENPdmVUT29JRGxJYnhSajY1dnpacVYw?=
+ =?utf-8?B?ODM5eTZ4R0FlK1VmQXd2WVhHaGR6bFRrTjBzQnUxZlJheEJHYjQxcWttRElw?=
+ =?utf-8?B?d0NsWUFrTGhzdWNXVGdIb0VseUZvd2diN1B3RHMzYXJQeGRudzRIR29oUWw4?=
+ =?utf-8?B?QmllYXAwRUd4OWNoeGlXcWRrRmd6ZmJrcWtsTDNxVU5YR25KUVA2bG1UdG1t?=
+ =?utf-8?B?Z3ZJenV4cmlJd2tHNmRTLy9HY3NOSy9LT3RmeWRDa29uY2h5NUxoWitZYWc2?=
+ =?utf-8?B?RTJxOWpQaWJvZlFRSDd1TG44a3JudWFDNi8rNHV6MndRYUJ6S3JxRzlMbE9N?=
+ =?utf-8?B?cHJUbWJnVlpRNDUrdG9WT1VpSEFvNzZFT2VaeGx5QXJsQ01UWjZHakpncHNu?=
+ =?utf-8?B?QXhaQTlxcUduYkp5TnNXQUd2cVU5clZ2TDEzUm9HQXVpNCsxMnQ1Mys4VUt5?=
+ =?utf-8?B?cWRjZllsYkZCS1Z6RHhFQStuUmRVTDRuQVdrQ0JBam1qZytNbkRpY2JwN2lq?=
+ =?utf-8?B?eFYzenAwVk45QnRjNHRReVgrMHpDZmhteEZPSUxkUm1kQ3VLbDNYNGNvaEhq?=
+ =?utf-8?B?TENjaGRMcjJLZll6R0tTZ0NQV3FLYVU4eGFLNlFyMEk5c0U5OGx6S0RwVFV0?=
+ =?utf-8?B?TWFYenJqclNTWDdYY2xoWCtTVzNac2p2d01LRHNNYzV0R3J0dDZJaG1yY0VC?=
+ =?utf-8?B?RU5iRWFiVkk0NTZEdmNlRkdpMUhXdUdiMEF4K1JCYll0K0VJcWMrWnd2NkQy?=
+ =?utf-8?B?Y1ZLU1RVOEdKVzUwbXlvTFZ0SkNuMHhZQVk0VUc2L0RIZ2pqVzV5KytVY01M?=
+ =?utf-8?B?RzRoUDQ0WXhKVUxKeS82Ui9nOTBaYkZiV2hQbmd6aWx1SU83RllMWGJkVjNp?=
+ =?utf-8?B?Ly9td1FaTDkvRXJmSVpZQVphOXRTaTR2OW42MHl4MVZDZHZBcE5sODFmaDVM?=
+ =?utf-8?B?MVJobURuQnZ2UFl3dFZmV2hiM244YmNpaGZMMlptcWdpK2xEbnc5UGdVTkRa?=
+ =?utf-8?B?djRNR0F5bHpLMXRRQU4wNnMxWnhnNnh0VGJzbFBXSjlIV2oyaFZHL1p6MHpy?=
+ =?utf-8?B?VVNMN0pzQml3TEJxSzhmZ0t1ZmxCRjUrWDc3MEsyV3pmZisrWWlNYlZ5LzNQ?=
+ =?utf-8?B?Tks1TjNsS3NEd3lVbEVoT3NWRG1nSzhUdzc1NmdJY1pDeSs1U01xWUl1aDV4?=
+ =?utf-8?B?L1AxUWp3Mk93NmpvZ1BSblQrR3NIMUFiNTRjTW8xZFdFLzJjMCtLMlMwcnNa?=
+ =?utf-8?B?cVVzMEtvWFFrWWFNbmxhdEtUc2ZYU0dLM2lDTmVQTXF2VzlPTUNYek1BR2FD?=
+ =?utf-8?B?QmdaSG1YYkN6c00rcHhienJBVmNNSGsydkVzR05kRmF4MVpkcEZNUUpmcEhF?=
+ =?utf-8?B?RVpHNDZWb3pjV3dUMVNJVTJwVzFJa2Eyajh5bXFZck0rUk1CNzRIYlpTaDRO?=
+ =?utf-8?B?aWJaNHhYMFJJWnpBdEkyOFVzcTFUb0hpQnczNnM4dnpzeHVQMVlISWFkKzdm?=
+ =?utf-8?B?Rmg2bUU5YzA3UENYMjE0U3VzK2VYZldFUHZDTWJybjFjanVVdEJydm9LZHRa?=
+ =?utf-8?B?RU1CQVJkMUxscy96ZFZ0ZVp6ZFp5aHZsUWVMeHczVzFTMHdsY3J5UXI0VWE0?=
+ =?utf-8?B?ZWpIV1VqNjVrRHcvZW9SM2s1eFR3VERNdzlaaWNCMTVVdnErVFNYTVJoZ2NE?=
+ =?utf-8?B?dWxIQ0hNaDV4UUN2ekdDWDZZNzBmUXR5ZkdXNnEzU05CZ0VxczU5SVFmRkZV?=
+ =?utf-8?Q?C+7iuw83Iarx/qukL+WOte5b2?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c357887-08f0-4173-d826-08da811a3dd7
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5a129b7-c798-43fc-69c5-08da811ad2ad
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2022 13:04:53.4128
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2022 13:09:03.0840
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pmSCZbRzCW6ldhDNi3eo5ivZetIpG16ap5rzL3no3H698z2BKPFscANqPPgg3/xVp72HBrWRLfo9j19yG/oLiQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4989
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8Q3D6tNnUGu2XWrThu9Qeoc2yjtRYb5/+1/9Nd1Haf7hbJRg/Qb956ao3lE9tYjrk03e0d6ujl87bOk5Mn/hBA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7180
 
-From: Peter Zijlstra <peterz@infradead.org>
+Henry,
 
-Having IBRS enabled while the SMT sibling is idle unnecessarily slows
-down the running sibling. OTOH, disabling IBRS around idle takes two
-MSR writes, which will increase the idle latency.
+On 18.08.2022 15:02, Jan Beulich wrote:
+> New changes have appeared in the meantime, in particular one partly undoing
+> what we still haven't merged (patch 1 here).
+> 
+> 1: add 'preferred_cstates' module argument
+> 2: add core C6 optimization for SPR
+> 3: add AlderLake support
+> 4: disable IBRS during long idle
+> 5: make SPR C1 and C1E be independent
 
-Therefore, only disable IBRS around deeper idle states. Shallow idle
-states are bounded by the tick in duration, since NOHZ is not allowed
-for them by virtue of their short target residency.
+strictly speaking patches 3-5 are late submissions. Patch 5, however,
+actually corrects patch 1, and I'd prefer to keep things in the order
+in which they were put in for Linux. Whether we actually want patch 4
+is to be determined; if not that one should be easy to leave out. In
+any event I'd like to ask for you to consider granting an exception
+on these last three patches.
 
-Only do this for mwait-driven idle, since that keeps interrupts disabled
-across idle, which makes disabling IBRS vs IRQ-entry a non-issue.
-
-Note: C6 is a random threshold, most importantly C1 probably shouldn't
-disable IBRS, benchmarking needed.
-
-Suggested-by: Tim Chen <tim.c.chen@linux.intel.com>
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Signed-off-by: Borislav Petkov <bp@suse.de>
-Reviewed-by: Josh Poimboeuf <jpoimboe@kernel.org>
-Signed-off-by: Borislav Petkov <bp@suse.de>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git bf5835bcdb96
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v3: New.
-
---- a/xen/arch/x86/cpu/mwait-idle.c
-+++ b/xen/arch/x86/cpu/mwait-idle.c
-@@ -141,6 +141,12 @@ static const struct cpuidle_state {
- #define CPUIDLE_FLAG_TLB_FLUSHED	0x10000
- 
- /*
-+ * Disable IBRS across idle (when KERNEL_IBRS), is exclusive vs IRQ_ENABLE
-+ * above.
-+ */
-+#define CPUIDLE_FLAG_IBRS		0x20000
-+
-+/*
-  * MWAIT takes an 8-bit "hint" in EAX "suggesting"
-  * the C-state (top nibble) and sub-state (bottom nibble)
-  * 0x00 means "MWAIT(C1)", 0x10 means "MWAIT(C2)" etc.
-@@ -530,31 +536,31 @@ static struct cpuidle_state __read_mostl
- 	},
- 	{
- 		.name = "C6",
--		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 85,
- 		.target_residency = 200,
- 	},
- 	{
- 		.name = "C7s",
--		.flags = MWAIT2flg(0x33) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x33) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 124,
- 		.target_residency = 800,
- 	},
- 	{
- 		.name = "C8",
--		.flags = MWAIT2flg(0x40) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x40) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 200,
- 		.target_residency = 800,
- 	},
- 	{
- 		.name = "C9",
--		.flags = MWAIT2flg(0x50) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x50) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 480,
- 		.target_residency = 5000,
- 	},
- 	{
- 		.name = "C10",
--		.flags = MWAIT2flg(0x60) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x60) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 890,
- 		.target_residency = 5000,
- 	},
-@@ -576,7 +582,7 @@ static struct cpuidle_state __read_mostl
- 	},
- 	{
- 		.name = "C6",
--		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED,
-+		.flags = MWAIT2flg(0x20) | CPUIDLE_FLAG_TLB_FLUSHED | CPUIDLE_FLAG_IBRS,
- 		.exit_latency = 133,
- 		.target_residency = 600,
- 	},
-@@ -906,6 +912,7 @@ static const struct cpuidle_state snr_cs
- static void cf_check mwait_idle(void)
- {
- 	unsigned int cpu = smp_processor_id();
-+	struct cpu_info *info = get_cpu_info();
- 	struct acpi_processor_power *power = processor_powers[cpu];
- 	struct acpi_processor_cx *cx = NULL;
- 	unsigned int next_state;
-@@ -932,8 +939,6 @@ static void cf_check mwait_idle(void)
- 			pm_idle_save();
- 		else
- 		{
--			struct cpu_info *info = get_cpu_info();
--
- 			spec_ctrl_enter_idle(info);
- 			safe_halt();
- 			spec_ctrl_exit_idle(info);
-@@ -960,6 +965,11 @@ static void cf_check mwait_idle(void)
- 	if ((cx->type >= 3) && errata_c6_workaround())
- 		cx = power->safe_state;
- 
-+	if (cx->ibrs_disable) {
-+		ASSERT(!cx->irq_enable_early);
-+		spec_ctrl_enter_idle(info);
-+	}
-+
- #if 0 /* XXX Can we/do we need to do something similar on Xen? */
- 	/*
- 	 * leave_mm() to avoid costly and often unnecessary wakeups
-@@ -991,6 +1001,10 @@ static void cf_check mwait_idle(void)
- 
- 	/* Now back in C0. */
- 	update_idle_stats(power, cx, before, after);
-+
-+	if (cx->ibrs_disable)
-+		spec_ctrl_exit_idle(info);
-+
- 	local_irq_enable();
- 
- 	TRACE_6D(TRC_PM_IDLE_EXIT, cx->type, after,
-@@ -1603,6 +1617,8 @@ static int cf_check mwait_idle_cpu_init(
- 		    /* cstate_restore_tsc() needs to be a no-op */
- 		    boot_cpu_has(X86_FEATURE_NONSTOP_TSC))
- 			cx->irq_enable_early = true;
-+		if (cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IBRS)
-+			cx->ibrs_disable = true;
- 
- 		dev->count++;
- 	}
---- a/xen/include/xen/cpuidle.h
-+++ b/xen/include/xen/cpuidle.h
-@@ -42,7 +42,8 @@ struct acpi_processor_cx
-     u8 idx;
-     u8 type;         /* ACPI_STATE_Cn */
-     u8 entry_method; /* ACPI_CSTATE_EM_xxx */
--    bool irq_enable_early;
-+    bool irq_enable_early:1;
-+    bool ibrs_disable:1;
-     u32 address;
-     u32 latency;
-     u32 target_residency;
-
+Thanks, Jan
 
