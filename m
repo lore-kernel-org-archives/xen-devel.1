@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E90F4C28D13
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Aug 2022 02:59:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.391098.628801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1326CC00140
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Aug 2022 02:59:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.391102.628845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oPxf8-0005Ux-7F; Mon, 22 Aug 2022 02:59:38 +0000
+	id 1oPxfI-0006nL-Sb; Mon, 22 Aug 2022 02:59:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 391098.628801; Mon, 22 Aug 2022 02:59:38 +0000
+Received: by outflank-mailman (output) from mailman id 391102.628845; Mon, 22 Aug 2022 02:59:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oPxf8-0005Uq-3X; Mon, 22 Aug 2022 02:59:38 +0000
-Received: by outflank-mailman (input) for mailman id 391098;
- Mon, 22 Aug 2022 02:59:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oPxfI-0006nC-OE; Mon, 22 Aug 2022 02:59:48 +0000
+Received: by outflank-mailman (input) for mailman id 391102;
+ Mon, 22 Aug 2022 02:59:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=t9b2=Y2=arm.com=Wei.Chen@srs-se1.protection.inumbo.net>)
- id 1oPxf6-0005FA-5W
- for xen-devel@lists.xenproject.org; Mon, 22 Aug 2022 02:59:36 +0000
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr130045.outbound.protection.outlook.com [40.107.13.45])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 73174d9b-21c6-11ed-bd2e-47488cf2e6aa;
- Mon, 22 Aug 2022 04:59:33 +0200 (CEST)
-Received: from AS8PR04CA0121.eurprd04.prod.outlook.com (2603:10a6:20b:127::6)
- by AS8PR08MB6632.eurprd08.prod.outlook.com (2603:10a6:20b:31c::14)
+ id 1oPxfG-0005Ul-Th
+ for xen-devel@lists.xenproject.org; Mon, 22 Aug 2022 02:59:47 +0000
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on2058.outbound.protection.outlook.com [40.107.104.58])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 79551ff1-21c6-11ed-9250-1f966e50362f;
+ Mon, 22 Aug 2022 04:59:44 +0200 (CEST)
+Received: from AS9PR06CA0679.eurprd06.prod.outlook.com (2603:10a6:20b:49c::23)
+ by DB9PR08MB8436.eurprd08.prod.outlook.com (2603:10a6:10:3d4::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.19; Mon, 22 Aug
- 2022 02:59:31 +0000
-Received: from AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:127:cafe::60) by AS8PR04CA0121.outlook.office365.com
- (2603:10a6:20b:127::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.19 via Frontend
- Transport; Mon, 22 Aug 2022 02:59:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.21; Mon, 22 Aug
+ 2022 02:59:40 +0000
+Received: from AM7EUR03FT029.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:49c:cafe::7a) by AS9PR06CA0679.outlook.office365.com
+ (2603:10a6:20b:49c::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.17 via Frontend
+ Transport; Mon, 22 Aug 2022 02:59:40 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM7EUR03FT058.mail.protection.outlook.com (100.127.140.247) with
+ AM7EUR03FT029.mail.protection.outlook.com (100.127.140.143) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5546.15 via Frontend Transport; Mon, 22 Aug 2022 02:59:30 +0000
-Received: ("Tessian outbound 73dd6a25223d:v123");
- Mon, 22 Aug 2022 02:59:30 +0000
-Received: from a23310b7b957.1
+ 15.20.5546.15 via Frontend Transport; Mon, 22 Aug 2022 02:59:39 +0000
+Received: ("Tessian outbound 2af316122c7a:v123");
+ Mon, 22 Aug 2022 02:59:39 +0000
+Received: from eb0c16658fa5.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- AD78A4DD-EE1C-4475-8606-A961A815C8A7.1; 
- Mon, 22 Aug 2022 02:59:23 +0000
-Received: from EUR02-VE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id a23310b7b957.1
+ 5939F284-5EE9-4BF2-931F-73790550EBA5.1; 
+ Mon, 22 Aug 2022 02:59:32 +0000
+Received: from EUR03-VE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id eb0c16658fa5.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Mon, 22 Aug 2022 02:59:23 +0000
-Received: from AS9PR04CA0162.eurprd04.prod.outlook.com (2603:10a6:20b:530::22)
- by AM8PR08MB5587.eurprd08.prod.outlook.com (2603:10a6:20b:1dd::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.19; Mon, 22 Aug
- 2022 02:59:21 +0000
-Received: from AM7EUR03FT057.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:530::4) by AS9PR04CA0162.outlook.office365.com
- (2603:10a6:20b:530::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.22 via Frontend
- Transport; Mon, 22 Aug 2022 02:59:21 +0000
+ Mon, 22 Aug 2022 02:59:32 +0000
+Received: from DB6P191CA0014.EURP191.PROD.OUTLOOK.COM (2603:10a6:6:28::24) by
+ AM6PR08MB4674.eurprd08.prod.outlook.com (2603:10a6:20b:c7::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5546.19; Mon, 22 Aug 2022 02:59:29 +0000
+Received: from DBAEUR03FT064.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:6:28:cafe::4f) by DB6P191CA0014.outlook.office365.com
+ (2603:10a6:6:28::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.19 via Frontend
+ Transport; Mon, 22 Aug 2022 02:59:29 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- AM7EUR03FT057.mail.protection.outlook.com (100.127.140.117) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5546.15 via Frontend Transport; Mon, 22 Aug 2022 02:59:20 +0000
-Received: from AZ-NEU-EX01.Emea.Arm.com (10.251.26.4) by AZ-NEU-EX04.Arm.com
- (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.9; Mon, 22 Aug
- 2022 02:59:18 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX01.Emea.Arm.com
- (10.251.26.4) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.9; Mon, 22
- Aug 2022 02:59:16 +0000
+ DBAEUR03FT064.mail.protection.outlook.com (100.127.143.3) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5546.15 via Frontend Transport; Mon, 22 Aug 2022 02:59:28 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX03.Arm.com
+ (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.9; Mon, 22 Aug
+ 2022 02:59:27 +0000
 Received: from ais-wip-ds.shanghai.arm.com (10.169.190.86) by mail.arm.com
  (10.251.24.32) with Microsoft SMTP Server id 15.1.2507.9 via Frontend
- Transport; Mon, 22 Aug 2022 02:59:13 +0000
+ Transport; Mon, 22 Aug 2022 02:59:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -89,14 +85,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73174d9b-21c6-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 79551ff1-21c6-11ed-9250-1f966e50362f
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=WJtkcvjYQKUW3sgVS1cJKXNWBb8GQkPNU1npATDqkI6tIqM0Nfm7K9S2jot9INRy5vQXhFvw12IGj0bY17tSxFmL7UivdhRb6YxqaUdL+Bkn/49n/Tr69CYJD5WOMb4SxKt49V4aDrGSvFitMl8AyP1psaEVus5pW8zE1/QtzZd6QoCJeZgr1xPZEStv0mFMLxlPUsRMSXw9SHVkt2JR2oMATPC9bd+ktwwZ7zUiIvf++j+ddOVtxfcYRbq7gVDL8rD/7GIsXzx7Y4/NNCk6YestV7DHX/TVVYFeLf8kdcEBPgjpExZkuGCXj3jNEVY9hcar5uxTdUH0hYTM6kVvCA==
+ b=mleWoDmrVNRd4Yd2K5nHyN3ml0ecwh40zYe98TT3ayIliYEzVcTdf4juQnQJOUeujVNSMz2Yr9KWOsB4WJAi4pJxBHiNjRBRLIaiSqm3W9OjfctYruIg7rqSmkzvgmgOLLXT1KorIr5wYfaQv78jtw+yct1iPamBpygVTxegPI2/Evv1l1ZRtSgDNk5QwAJsxXtjzu6jKX7pKt2gBZ2TUCgaxTcPDcRtY/O5QkuFhIzAb+nsT0TeClNziCxXsRFZar7NcHDsQKNA6dzg4kO7LoYpdzmX8Amu6MCuNBTO3R8VondnJuSlXBu3mdVRsr+9XO2tLO0+iC8Y0FDlrdIESw==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wM+YrkpSRguyVUUYGUbn2ZtGMpJm+jBJSYhlQlDiMsY=;
- b=SAf2rsC5Oxa7c48zfWUdzcam1kp+nOlZ+8HnnDVB0ZAFXe3I2Dey5/LdNzZiloOqd8I8HbiQ3Aba85CfCze1B8RmKlD9/jVvo0KHmOzOJUUh0BYh52jSvyk4CHHlWjgoYtirEKWwKQtHsvb2giwVFGb9VFsKJUoc8bmdn0UiOQbHg8tSq+MNSBXGZRutkKuVS480ak7civGHnRa+B3CTamBYS9lEo2Ftn//jz3LaG3nhSBCVH2Rytsd6MNRpD3p401MNZY3eLNUBZ19OqFRMsI5wfdTi35C/8/L0ffnoShMl4bYuUf3Y4ruDIEB5cSFRDa+1NfALo6AxVupIcXz5oA==
+ bh=/VIRTJghwmtHmw2M8Zc2MlGMRRcSAmOUEJcgJOUC368=;
+ b=cKnykkA8xP+DiPFioGgpWRZhUs0kctdX82+ATDhUxw0zz7Xx9b2mAe87Afh3hyIDwex89N4VkfhUt/9GODLYLAXagXLdkAvn8/EeOYOuXOEN7CSPbryxuCRYFxJT+Rme7C/1aSzfN7jHcY3NtnF6WYF/FX1IAJYDA14aGi7wUVbRTplA3t6CuKTZ4a1rlKS0wqTKBZZwe+bOuZGt+5+L9jHdjYSSKFnuUzMCOFhXltnkWCLlfUUyYTchIOxBSTa/QgCQMqRHNpTJ9lXymVWJrEzb1A9W7XQNV6YqBI6kqQBYmWFEDvxe/APn14JPD+n6Fjoir0CAi+T/OMOaFtV8KQ==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -105,8 +101,8 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wM+YrkpSRguyVUUYGUbn2ZtGMpJm+jBJSYhlQlDiMsY=;
- b=qysYybDhWrIxR9z1a3KKWCovSMuQD4wUWicvPNEQmDr/MQ0ogH+Iplb9WvDwQnxqPD17p8NVDGD5iHAQHXxfEtMNUiSYNAt+sTxhSSpGzoI1GBSF9tMWiQqZW8f3P/8Gwv5B6krlg37uIhtsNS64ulS4dF/FXzpajyTXO98eJdI=
+ bh=/VIRTJghwmtHmw2M8Zc2MlGMRRcSAmOUEJcgJOUC368=;
+ b=qXoAR3XNiibKOxZ/+JTDUtebn27H6DnUFzCUXQ9meIkJI/eFwC6ULh+ok886vDJV+/MIdMFhn+h6ggMorz3O5/V/a0S2XK6r6tTYK6fVishQGF2mQH6idkHetVTVV1r/1FBwLtv/0XQxWCBu5HKITStOm3HBbHQr8qxTqH0xMoA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -115,15 +111,15 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: d836e03677c60b86
+X-CR-MTA-CID: b5483bcc3e200c83
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Kj/QICaCOePSJopSb7KOequCeCEGp2aopitLgramMH3pzh9pBOAcC7O1A5QOBitO+BDgAGvOfjX3O4m7V2D0HsEla4ekpyBGqOeNUnBaA3Hbdh7W5H8ngsHnrmxHMibIBQVbUjBCvt6IocazoCqzEQLy2DwLWAMzONP0QqgXN2KRJDt0JmSqDtZfMFrv440SniiaZ0iAeBqPYmA9FeAC0xrfORHkn3m7G6My9E6l/TJWRsNrtUbaYYd909mBMhEF8PSXIlAvtE+bTIyGRQXi2N9H7HKBkyrWttJkhGqwgPTL4iLG/RobpSAYlHHnnElK5/RNSGuSoyfRwMG8wwsnWQ==
+ b=So6XDM7g9Nh2s4hnMw9OHnobW3xGa4UajnNOmF/fv0mxKzcGQG7A1b7DYAkrO5Cp4NwMbiXYgnYAWhXXmFviCe5BRak9OeSziWfofMMxJ08YAjCqGhe8VC5n70NIW1QG9M7XR+r5p5SyHrDsm4WvEgtnhFxyCSaotc7QomAi/1Ki/jsywNBC33o67kQil/c5bwAXLn18vyuTw4qmj8zlRrIIFRROOWe04kVkXQlSJDh2NIHkspR36jM5kfi6HenQ3C377jCUbcr0NKV+SYe8d/SPp7ec1Q2vQ5tQnz+2icseFIMX//2QnXZKw0wXJpesJ/MNJBorWzrSHZFjmrJIiw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wM+YrkpSRguyVUUYGUbn2ZtGMpJm+jBJSYhlQlDiMsY=;
- b=N7SZpAd5Ij6PuFbu7iSwbFRSH4OmbhX9Yd57vlufF4qRaohWRvyfpV5W32jPfun2FadP9J6tJrL3hnRTuIRJblVDEgibZehK3gctyC1Y5dzaCQ2aHsx8TWW4ny9r1X377Kc7WTmjD+pao+LgyLb6WT9PUuH4YMaicJHI+/Mieex2js3BnBHcV0h4Pg6hVwoYbAXNSOXEO6M6vk2LosTGueEbcq8tvo/QEOJQaH9wZmv4BMk/VxVpsk3AHQQEb/xM3lJHdQ/eIKD639ukhUOEMQJ7NPo9Qx0aGYpphox2+MSeCCcxpV+q9nYB6cCFqMzacKXyR8rmfkXMxHLQzuEoDw==
+ bh=/VIRTJghwmtHmw2M8Zc2MlGMRRcSAmOUEJcgJOUC368=;
+ b=AzSiiK+SmUkHDjdpAr3+0VR9qCHQ1ooj+qk57xV83kYsz/Iq62PbXN9Omg4FCy1skgRLpM3kUiznSI/igXgyKaHee2eeC/GMURIdv9c0Z+5Os+F5cG4iLsn5n+lXLypT3YmLKEQWUjwSLtmp8xQZ6LbZk7NvxCdhAGCWhMiujvx3aIcfY8k/wTw3ArrhpV4p9CPVQNIyX67xvkleogivjuUDKpk4IY25Y0/ruNnV2DbFlM0yzAoDY+PNF//tkMpW6CgStUt9SSgfS1hho743i+w7UOoU96Qi1J8jb0cvbC3FSXhIxp+rKxllxIosOub+itpBriVpRv8aY8uGPMe7wA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -131,8 +127,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wM+YrkpSRguyVUUYGUbn2ZtGMpJm+jBJSYhlQlDiMsY=;
- b=qysYybDhWrIxR9z1a3KKWCovSMuQD4wUWicvPNEQmDr/MQ0ogH+Iplb9WvDwQnxqPD17p8NVDGD5iHAQHXxfEtMNUiSYNAt+sTxhSSpGzoI1GBSF9tMWiQqZW8f3P/8Gwv5B6krlg37uIhtsNS64ulS4dF/FXzpajyTXO98eJdI=
+ bh=/VIRTJghwmtHmw2M8Zc2MlGMRRcSAmOUEJcgJOUC368=;
+ b=qXoAR3XNiibKOxZ/+JTDUtebn27H6DnUFzCUXQ9meIkJI/eFwC6ULh+ok886vDJV+/MIdMFhn+h6ggMorz3O5/V/a0S2XK6r6tTYK6fVishQGF2mQH6idkHetVTVV1r/1FBwLtv/0XQxWCBu5HKITStOm3HBbHQr8qxTqH0xMoA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=arm.com;
@@ -146,1266 +142,998 @@ CC: <nd@arm.com>, Wei Chen <wei.chen@arm.com>, Jan Beulich
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
 	<wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 2/6] xen/x86: move generically usable NUMA code from x86 to common
-Date: Mon, 22 Aug 2022 10:58:06 +0800
-Message-ID: <20220822025810.2240707-3-wei.chen@arm.com>
+Subject: [PATCH v3 5/6] xen/x86: move NUMA scan nodes codes from x86 to common
+Date: Mon, 22 Aug 2022 10:58:09 +0800
+Message-ID: <20220822025810.2240707-6-wei.chen@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220822025810.2240707-1-wei.chen@arm.com>
 References: <20220822025810.2240707-1-wei.chen@arm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-EOPAttributedMessage: 1
-X-MS-Office365-Filtering-Correlation-Id: 3a3e176d-67f9-4643-c092-08da83ea5593
+X-MS-Office365-Filtering-Correlation-Id: ad40ea3d-9ede-4d1a-b27c-08da83ea5ae1
 X-MS-TrafficTypeDiagnostic:
-	AM8PR08MB5587:EE_|AM7EUR03FT058:EE_|AS8PR08MB6632:EE_
+	AM6PR08MB4674:EE_|AM7EUR03FT029:EE_|DB9PR08MB8436:EE_
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- zHOfs1eTBK/HfoDPe1HmDhO45vW4ifZ8Z7vEUEYRvLNyriY2ub6hHjvCAswClqpeP6Ty019m41L0Fq2GStt5v+WX1Ilpfz/EYayZpCm99VqIZoRFc2WlXcodkN+G6oy7XpF6OWS3dYtAc5Ko+qFmGCWFsBMye+iSei3rUHLYyqDR9H+DTA1sgSbAfDa6WtMsdSlsHustt/mXkoil1XM8xPHmtw/ZpZyn3LHTEHMuFUvbp3HNtTKlJq3otQNWgvFNKNJILQuu9hoCg+vCP7TIiWSHbE0s0V887TMRRoAXH2qxJfb7tKVJ2uEvE1gHJGWFxxEjt8vV+phqyF3cSTCOZjiaZHPZvDWw7x/XWt+eSUQNE0wFbOGkraQd0ZcJYzVq5OMZ3cm7E/P+aNXkFaasJ7UjpA3DKOSHe9JWuLZtz8GvAD5ApUl2fhG8KF9ZHm80q3SxeWYOSKYZFhDgUVfyXa8/LkwOVN4mP5TcihXkm1IofSVc/lu24B4CyIOYcjp1ISyfbbiU9dAWu+hDM7hinwiajzJtB1ZK0nrrc5jyg4EdH/7TQe/x2kvsrMh7h39mWZ+RPoUn+Kh30V3i9ZsgaJozHwGK0LSanpf3/SN9J6N4KeIz4qiWQWIaGsWQsluRco5pLzUJtEh9IOhbNIjGQdVHJolGPz6ezV3dzkVKGY0HNIwNvbvPNUVOOUqXMyC4vBOnDQtWYbmMRlYXMnFUHZA30NI0+hF5HXthQ1rU9BPz6ePylY4RAeEqgiXWvQZzOQ7KtOXv+ccG+xiABamtkoT7eOxRrQnVIupBA16VxLMwxK4C15j83stKpR2hfreoqgBvOk10zgMAmpUjEO6OSQ==
+ H1FkKHhtAJTMeLGEocTNVbsbIH+MUZ/oXu1BR/byL8hdmY+WQBkVXkF1b0KWaDxpVdpD9JZrmYyoWp3SsZPFsKmDXUebXCTih3c5f6lQwUjTYJQNfqrT2rMRX0bBWRt3/uO6WZdVrJFR2SUVsUgqqFTAi+cruZs8ZOcwZ3/ncYGC/Y6R3hDO8flkprC1tAvYLTN1gTL5BPf0qx5+Ln5pzmZ+OT4iXfJsoGxEDmuch0FVn+0SailuBif0pjQWlaqHF2C/KUGTrqFTBfqZEMz1qKbqHiYtckpSPrrSAP7hZ8csQS8gfUGzp5xuD5/mtweSqJuyfTjoSL7lsDWnCYbDmAc1Nkus4pecA5YXNcmMrBCJCXE1saJMT+vo6sGqYJ5Pa1zWBgnqXyD4nngt29H7Kj39zCxvISxg0H6j+KY/CePBFnkONBgX/L2NFAe88UXsG6xJKZ7kOrD8Yltj7cVcvHS6HJ8m/7WwMwZ5R8IxfYKGhxfett0McwfJ35jOxjIKG5XZgYrgUEEa3sWVco3iIaAoEGr88vaE5o/jfzKkdmHPE3pSme37r6ZIDa6VL8rmTGrnVFi4a13kCqT6VEpZS1GJqGoekbrjZJe5zCBSZOROV3x0VMbDHWZZSTwOxxFU3VSsm0Ts1WsXh0WNn8+0UK3QHtnrKYxtdYS4qxfCzWug6sMoKL6lIbqLnRLwhAo5OV5AeyGmquEFd1Cs+D6P7a7Zkpbsle2UGdTkNsallfDbUS0ngweTm4cHdi3BBzdUdZraPxNfUC1hjzutRzYi3BN3/VQolUgZDGuLxAbyLi827wyH/BYZBAPG98sddyz7
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(346002)(396003)(39850400004)(376002)(136003)(40470700004)(36840700001)(46966006)(41300700001)(44832011)(30864003)(5660300002)(8936002)(40460700003)(316002)(70206006)(478600001)(70586007)(336012)(40480700001)(8676002)(36860700001)(26005)(426003)(47076005)(186003)(2616005)(86362001)(4326008)(1076003)(83380400001)(81166007)(356005)(6666004)(7696005)(82310400005)(82740400003)(2906002)(6916009)(36756003)(54906003)(21314003)(36900700001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5587
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(346002)(376002)(136003)(396003)(39850400004)(40470700004)(36840700001)(46966006)(40480700001)(36860700001)(6916009)(54906003)(36756003)(82310400005)(81166007)(82740400003)(316002)(478600001)(26005)(2906002)(30864003)(40460700003)(8676002)(4326008)(70206006)(70586007)(6666004)(44832011)(7696005)(356005)(1076003)(2616005)(426003)(336012)(47076005)(83380400001)(41300700001)(5660300002)(8936002)(186003)(86362001)(36900700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4674
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
+ AM7EUR03FT029.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	9def69fe-b986-40d8-f4ab-08da83ea4f9f
+	9d85791e-4c7d-41d5-3867-08da83ea544c
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	BWKev+jjhuaMGHaUrPPy74tO+8+PquhNTkNU7I3aVCYIYNnv34aERmdQMXBuYk7AiKZg8sfUdoGZhYTfvRIkJYoi3J8KX3IxHB+PxQi/qBJAxs1YdeD+iFPgcUd9cjoXugfNm43N9GBLDUahhcTtcJNvFmCFEstYeFIr4vq9iimYzoQve9xgxLKN2eHO2KnU3Cxx71Oo0izXpPbNQzSGYEEkLBn1bkiNHRNu+zV/Xgm25uR2BhFQJ7ejT05jvZqlbncYy3bx77yM4CD1B1QhBVCmtVoXLgGmXk2XAVt2oGoCXhOvJqLP9H4p+DaUnSS7/KqVvBtz6AUV2jTnV4fzzXD1PqzvpLy/tU5YtbjdhcIpFBVYAZ3z1Ilap+5m27zgstUsKItA8b1FfLgowqqMR04W6UeTRI4v9M48d+RkjBmveEnVdplJ/1Fk6sWIgUdrYgb/pryKDTD928ZdGy+IcZVsCsEtpocW219Io2kZHaCD0ff3qGJii+S9f4UJMCdrPoYI+btFlsTpyfZs9yO8C+1f227Ua02lKCkteWFHINjuaW6JO4pOZPKcE1CdX+1U3cSlAVdYpC4e4VB8uts9kL64P3MQSiNKX4zhNIkopR28bG1ypWdH1T+hAVbLZ2owqKPn5oHcvCrmvr6OWZQdJLc0Zu6VOu3o9f837xeTQV8026d3i2yfUKaRaY8FLfO6Afy8VKS3/nGWbhh/9My5V8rMHTAD8mFPwjJLKhonfVl+2XE33adqYoBVHk6xRpX85WLYCM6mCW1kw5ACseBRdw==
+	EIl3cI0/GsIVtJ1k3YRxVBAMhJ0GTNPi16n2gj9tsewXD3FZKqqigvdjgeeSHWXMWFqQpIq9MWWKv78tLARwc/b9dM0ROuPyfJ4nG6VeI6WdU2C0jpOqAaWmSzxwRWtGbHvmqHHxIh0puidZZtZFFHBf3cJRXg53yMV38beU8CNBcEN0CzZ5Dc+ApgiI5JPnDNfSjwZTf3cACoSh5eyfMjrRBoQD1c/REoq33axBx8g4qio5x60/lWWIdJLsY15rAxBSI5V32SBnCcU00y2vQTkVErxpivKab2AXTrJKXDjnk9VUQmE/TLBk6RGg/GbLKKDRS2nK7q30/TpJ/EBhNsGZL4wkiqa4tzgfthUalaSsgAzAgJx2lgOB+xlPC7H9EPGTRqIH87agvUmZi6Sy+1EqDYXdMYCP4ifBS6O2TY7VDAdo15jhB9lujFU4F4brynBcbDz2tFJmfx/6Cd/Xbe26FIy64scoRxlcDps1u4d+PM3ITzs6PWQZFm5DaJ2IgrZdUzbug/6R15SLlc7ygaygGEVqOGZXNaVOxBIFAD7HqufLshLG/vFpDSBCOkTg8T/EtZfDRiYOfTIFk3lW858IlnsEkG6Ep+IrXBxPTxIk0gIFNDq4DzUTA2PWufeiJAuuPaosm1BXHI58ZU2IV10xYbuZIyuhpt/+OHtiU98ssmt4uGRgzRnxpbq7vsCQiZemoD3cvzSLVz3a2BWldxVocO7sUaIqQn8yKGEt24hOOixMLpSmZt8KNAojv8bx
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(376002)(136003)(396003)(39850400004)(346002)(46966006)(36840700001)(6666004)(336012)(426003)(47076005)(86362001)(7696005)(2616005)(1076003)(2906002)(83380400001)(107886003)(36756003)(186003)(81166007)(82740400003)(36860700001)(6916009)(82310400005)(54906003)(316002)(44832011)(30864003)(5660300002)(4326008)(478600001)(8676002)(70586007)(70206006)(8936002)(26005)(40480700001)(41300700001)(21314003);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(39850400004)(136003)(376002)(396003)(346002)(36840700001)(46966006)(2906002)(4326008)(8676002)(82310400005)(8936002)(5660300002)(44832011)(30864003)(70586007)(70206006)(40480700001)(107886003)(36756003)(7696005)(6666004)(26005)(186003)(336012)(47076005)(2616005)(1076003)(478600001)(41300700001)(426003)(81166007)(82740400003)(36860700001)(86362001)(83380400001)(54906003)(316002)(6916009);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2022 02:59:30.6897
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2022 02:59:39.5735
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a3e176d-67f9-4643-c092-08da83ea5593
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad40ea3d-9ede-4d1a-b27c-08da83ea5ae1
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
+	AM7EUR03FT029.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6632
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB8436
 
-There are some codes in x86/numa.c can be shared by common
-architectures to implememnt NUMA support. Just like some
-variables and functions to check and store NUMA memory map.
-And some variables and functions to do NUMA initialization.
+x86 has implemented a set of codes to scan NUMA nodes. These
+codes will parse NUMA memory and processor information from
+ACPI SRAT table. But except some ACPI specific codes, most
+of the scan codes like memory blocks validation, node memory
+range updates and some sanity check can be reused by other
+NUMA implementation.
 
-In this patch, we move them to common/numa.c and xen/numa.h
-and use the CONFIG_NUMA to gate them for non-NUMA supported
-architectures. As the target header file is Xen-style, so
-we trim some spaces and replace tabs for the codes that has
-been moved to xen/numa.h at the same time.
+So in this patch, we move some variables and related functions
+for NUMA memory and processor to common as library. At the
+same time, numa_set_processor_nodes_parsed has been introduced
+for ACPI specific code to update processor parsing results.
+With this helper, we can reuse most of NUMA memory affinity init
+code from ACPI. As bad_srat and node_to_pxm functions have been
+used in common code to do architectural fallback and node to
+architectural node info translation. But it doesn't make sense
+to reuse the functions names in common code, we have rename them
+to neutral names as well.
 
-As acpi_scan_nodes has been used in a common function, it
-doesn't make sense to use acpi_xxx in common code, so we
-rename it to numa_scan_nodes in this patch too. After that
-if we still use CONFIG_ACPI_NUMA in to gate numa_scan_nodes
-in numa_initmem_init, that doesn't make sense. As CONFIG_NUMA
-will be selected by CONFIG_ACPI_NUMA for x86. So, we replace
-CONFIG_ACPI_NUMA by CONFIG_NUMA to gate numa_scan_nodes.
+PXM is an ACPI specific item, we can't use it in common code
+directly. As an alternative, we extend the parameters of
+numa_update_node_memblks. The caller can pass the PXM as print
+messages' prefix or as architectural node id. In this case, we
+do not need to retain a lot of per-arch code but still can print
+architectural log messages for different NUMA implementations.
 
-As arch_numa_disabled has been implememnted for ACPI NUMA,
-we can rename srat_disabled to numa_disabled and move it
-to common code as well.
+mem_hotplug also has been accessing by common code, except x86,
+other architectures like Arm will also want to implement memory
+hotplug in future. We export mem_hotplug to common will not bring
+any harm for Arm and we also can reduce some per-arch helpers to
+access mem_hotplug.
+
+As asm/acpi.h has been removed from common/numa.c, we have to
+move NR_NODE_MEMBLKS from asm/acpi.h to xen/numa.h in this patch
+as well.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
 v2 -> v3:
- 1. Remove acpi.h from common/numa.c.
- 2. Rename acpi_scan_nodes to numa_scan_nodes.
- 3. Replace u8 by uint8_t for memnodemap.
- 4. Use unsigned int for memnode_shift and adjust related functions
-    (compute_hash_shift, populate_memnodemap) to use correct types for
-    return values or parameters.
- 5. Use nodeid_t for nodeid and node numbers.
- 6. Use __read_mostly and __ro_after_init for appropriate variables.
- 7. Adjust the __read_mostly and __initdata location for some variables.
- 8. convert from plain int to unsigned for cpuid and other proper variables.
- 9. Use __attribute_pure__ instead of __attribute__((pure)).
-10. Replace CONFIG_ACPI_NUMA by CONFIG_NUMA in numa_initmem_init.
-11. Add const for some functions' parameters.
-12. Move srat_disabled to common code with new name numa_disabled.
-13. Fix some spaces code-style for numa_emulation.
-14. Change from int to unsigned int for numa_fake.
+1. Add __ro_after_init to proper variables.
+2. Rename bad_srat to numa_fw_bad.
+3. Rename node_to_pxm to numa_node_to_arch_nid.
+4. Merge patch#7 and #8 into this patch.
+5. Correct int to unsigned int in proper places.
+6. Move NR_NODE_MEMBLKS from x86/acpi.h to common/numa.h
+7. Drop helpers to access mem_hotplug, we export mem_hotplug
+   from x86/mm.c to common/page_alloc.c
 v1 -> v2:
-1. New patch in v2.
+1. Add code comment for numa_update_node_memblks to explain:
+   Assumes all memory regions belonging to a single node
+   are in one chunk. Holes between them will be included
+   in the node.
+2. Merge this single patch instead of serval patches to move
+   x86 SRAT code to common.
+3. Export node_to_pxm to keep pxm information in NUMA scan
+   nodes error messages.
+4. Change the code style to target file's Xen code-style.
+5. Adjust some __init and __initdata for some functions and
+   variables.
+6. Merge two patches into this patch:
+   1. replace CONFIG_ACPI_NUMA by CONFIG_NUMA.
+   2. replace "SRAT" texts.
+7. Turn numa_scan_nodes to static.
 ---
- xen/arch/x86/include/asm/acpi.h  |   1 -
- xen/arch/x86/include/asm/numa.h  |  57 +---
- xen/arch/x86/include/asm/setup.h |   1 -
- xen/arch/x86/numa.c              | 430 +-----------------------------
- xen/arch/x86/smpboot.c           |   2 +-
- xen/arch/x86/srat.c              |   8 +-
- xen/common/Makefile              |   1 +
- xen/common/numa.c                | 440 +++++++++++++++++++++++++++++++
- xen/include/xen/numa.h           |  66 +++++
- 9 files changed, 514 insertions(+), 492 deletions(-)
- create mode 100644 xen/common/numa.c
+ xen/arch/x86/include/asm/acpi.h |   1 -
+ xen/arch/x86/include/asm/mm.h   |   2 -
+ xen/arch/x86/include/asm/numa.h |   3 +-
+ xen/arch/x86/mm.c               |   2 -
+ xen/arch/x86/srat.c             | 311 +++----------------------------
+ xen/common/numa.c               | 317 ++++++++++++++++++++++++++++++++
+ xen/common/page_alloc.c         |   2 +
+ xen/include/xen/mm.h            |   2 +
+ xen/include/xen/numa.h          |  11 +-
+ 9 files changed, 357 insertions(+), 294 deletions(-)
 
 diff --git a/xen/arch/x86/include/asm/acpi.h b/xen/arch/x86/include/asm/acpi.h
-index 9a9cc4c240..5c2dd5da2d 100644
+index 5c2dd5da2d..c453450a74 100644
 --- a/xen/arch/x86/include/asm/acpi.h
 +++ b/xen/arch/x86/include/asm/acpi.h
 @@ -102,7 +102,6 @@ extern unsigned long acpi_wakeup_address;
  #define ARCH_HAS_POWER_INIT	1
  
  extern s8 acpi_numa;
--extern int acpi_scan_nodes(u64 start, u64 end);
- #define NR_NODE_MEMBLKS (MAX_NUMNODES*2)
+-#define NR_NODE_MEMBLKS (MAX_NUMNODES*2)
  
  extern struct acpi_sleep_info acpi_sinfo;
+ #define acpi_video_flags bootsym(video_flags)
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 0fc826de46..95ff71a83a 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -474,8 +474,6 @@ static inline int get_page_and_type(struct page_info *page,
+     ASSERT(((_p)->count_info & PGC_count_mask) != 0);          \
+     ASSERT(page_get_owner(_p) == (_d))
+ 
+-extern paddr_t mem_hotplug;
+-
+ /******************************************************************************
+  * With shadow pagetables, the different kinds of address start
+  * to get get confusing.
 diff --git a/xen/arch/x86/include/asm/numa.h b/xen/arch/x86/include/asm/numa.h
-index f41fe20f9b..6c87942d43 100644
+index 6c87942d43..2ca3475271 100644
 --- a/xen/arch/x86/include/asm/numa.h
 +++ b/xen/arch/x86/include/asm/numa.h
-@@ -9,72 +9,17 @@ typedef u8 nodeid_t;
- 
+@@ -10,6 +10,7 @@ typedef u8 nodeid_t;
  extern int srat_rev;
  
--extern nodeid_t      cpu_to_node[NR_CPUS];
--extern cpumask_t     node_to_cpumask[];
--
--#define cpu_to_node(cpu)		(cpu_to_node[cpu])
--#define parent_node(node)		(node)
--#define node_to_first_cpu(node)  (__ffs(node_to_cpumask[node]))
--#define node_to_cpumask(node)    (node_to_cpumask[node])
--
--struct node { 
--	paddr_t start, end;
--};
--
--extern int compute_hash_shift(struct node *nodes, int numnodes,
--			      nodeid_t *nodeids);
  extern nodeid_t pxm_to_node(unsigned int pxm);
++extern unsigned int numa_node_to_arch_nid(nodeid_t n);
  
  #define ZONE_ALIGN (1UL << (MAX_ORDER+PAGE_SHIFT))
--#define VIRTUAL_BUG_ON(x) 
  
--extern void numa_add_cpu(int cpu);
--extern void numa_init_array(void);
--extern bool numa_off;
--
--extern int arch_numa_setup(const char *opt);
--extern bool arch_numa_disabled(bool init_as_disable);
--extern bool srat_disabled(void);
--extern void numa_set_node(int cpu, nodeid_t node);
-+extern bool numa_disabled(void);
- extern nodeid_t setup_node(unsigned int pxm);
- extern void srat_detect_node(int cpu);
+@@ -22,8 +23,6 @@ extern void init_cpu_to_node(void);
  
--extern void setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end);
- extern nodeid_t apicid_to_node[];
- extern void init_cpu_to_node(void);
- 
--static inline void clear_node_cpumask(int cpu)
--{
--	cpumask_clear_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
--}
--
--/* Simple perfect hash to map pdx to node numbers */
--extern int memnode_shift; 
--extern unsigned long memnodemapsize;
--extern u8 *memnodemap;
--
--struct node_data {
--    unsigned long node_start_pfn;
--    unsigned long node_spanned_pages;
--};
--
--extern struct node_data node_data[];
--
--static inline __attribute__((pure)) nodeid_t phys_to_nid(paddr_t addr)
--{ 
--	nodeid_t nid;
--	VIRTUAL_BUG_ON((paddr_to_pdx(addr) >> memnode_shift) >= memnodemapsize);
--	nid = memnodemap[paddr_to_pdx(addr) >> memnode_shift]; 
--	VIRTUAL_BUG_ON(nid >= MAX_NUMNODES || !node_data[nid]); 
--	return nid; 
--} 
--
--#define NODE_DATA(nid)		(&(node_data[nid]))
--
--#define node_start_pfn(nid)	(NODE_DATA(nid)->node_start_pfn)
--#define node_spanned_pages(nid)	(NODE_DATA(nid)->node_spanned_pages)
--#define node_end_pfn(nid)       (NODE_DATA(nid)->node_start_pfn + \
--				 NODE_DATA(nid)->node_spanned_pages)
  #define arch_want_default_dmazone() (num_online_nodes() > 1)
  
- extern int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node);
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index 21037b7f31..ae470ea12f 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -20,7 +20,6 @@ void early_time_init(void);
+-extern int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node);
+-
+ void srat_parse_regions(paddr_t addr);
+ extern u8 __node_distance(nodeid_t a, nodeid_t b);
+ unsigned int arch_get_dma_bitsize(void);
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index db1817b691..68f9989e1f 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -157,8 +157,6 @@ l1_pgentry_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+ l1_pgentry_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+     l1_fixmap_x[L1_PAGETABLE_ENTRIES];
  
- void set_nr_cpu_ids(unsigned int max_cpus);
- 
--void numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn);
- void arch_init_memory(void);
- void subarch_init_memory(void);
- 
-diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
-index 3d3081c967..9a9090e99a 100644
---- a/xen/arch/x86/numa.c
-+++ b/xen/arch/x86/numa.c
-@@ -4,20 +4,11 @@
-  * Adapted for Xen: Ryan Harper <ryanh@us.ibm.com>
-  */ 
- 
--#include <xen/mm.h>
--#include <xen/string.h>
- #include <xen/init.h>
--#include <xen/ctype.h>
-+#include <xen/mm.h>
- #include <xen/nodemask.h>
- #include <xen/numa.h>
--#include <xen/keyhandler.h>
--#include <xen/param.h>
--#include <xen/time.h>
--#include <xen/smp.h>
--#include <xen/pfn.h>
- #include <asm/acpi.h>
--#include <xen/sched.h>
--#include <xen/softirq.h>
- 
- #ifndef Dprintk
- #define Dprintk(x...)
-@@ -26,28 +17,13 @@
- /* from proto.h */
- #define round_up(x,y) ((((x)+(y))-1) & (~((y)-1)))
- 
--struct node_data node_data[MAX_NUMNODES];
+-paddr_t __read_mostly mem_hotplug;
 -
--/* Mapping from pdx to node id */
--int memnode_shift;
--static typeof(*memnodemap) _memnodemap[64];
--unsigned long memnodemapsize;
--u8 *memnodemap;
--
--nodeid_t cpu_to_node[NR_CPUS] __read_mostly = {
--    [0 ... NR_CPUS-1] = NUMA_NO_NODE
--};
- /*
-  * Keep BIOS's CPU2node information, should not be used for memory allocaion
-  */
- nodeid_t apicid_to_node[MAX_LOCAL_APIC] = {
-     [0 ... MAX_LOCAL_APIC-1] = NUMA_NO_NODE
- };
--cpumask_t node_to_cpumask[MAX_NUMNODES] __read_mostly;
- 
--nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
--
--bool numa_off;
- s8 acpi_numa = 0;
- 
- int __init arch_numa_setup(const char *opt)
-@@ -72,267 +48,6 @@ bool arch_numa_disabled(bool init_as_disable)
-     return acpi_numa <= 0;
- }
- 
--bool srat_disabled(void)
--{
--    return numa_off || arch_numa_disabled(false);
--}
--
--/*
-- * Given a shift value, try to populate memnodemap[]
-- * Returns :
-- * 1 if OK
-- * 0 if memnodmap[] too small (of shift too small)
-- * -1 if node overlap or lost ram (shift too big)
-- */
--static int __init populate_memnodemap(const struct node *nodes,
--                                      int numnodes, int shift, nodeid_t *nodeids)
--{
--    unsigned long spdx, epdx;
--    int i, res = -1;
--
--    memset(memnodemap, NUMA_NO_NODE, memnodemapsize * sizeof(*memnodemap));
--    for ( i = 0; i < numnodes; i++ )
--    {
--        spdx = paddr_to_pdx(nodes[i].start);
--        epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
--        if ( spdx >= epdx )
--            continue;
--        if ( (epdx >> shift) >= memnodemapsize )
--            return 0;
--        do {
--            if ( memnodemap[spdx >> shift] != NUMA_NO_NODE )
--                return -1;
--
--            if ( !nodeids )
--                memnodemap[spdx >> shift] = i;
--            else
--                memnodemap[spdx >> shift] = nodeids[i];
--
--            spdx += (1UL << shift);
--        } while ( spdx < epdx );
--        res = 1;
--    }
--
--    return res;
--}
--
--static int __init allocate_cachealigned_memnodemap(void)
--{
--    unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
--    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
--
--    memnodemap = mfn_to_virt(mfn);
--    mfn <<= PAGE_SHIFT;
--    size <<= PAGE_SHIFT;
--    printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
--           mfn, mfn + size);
--    memnodemapsize = size / sizeof(*memnodemap);
--
--    return 0;
--}
--
--/*
-- * The LSB of all start and end addresses in the node map is the value of the
-- * maximum possible shift.
-- */
--static int __init extract_lsb_from_nodes(const struct node *nodes,
--                                         int numnodes)
--{
--    int i, nodes_used = 0;
--    unsigned long spdx, epdx;
--    unsigned long bitfield = 0, memtop = 0;
--
--    for ( i = 0; i < numnodes; i++ )
--    {
--        spdx = paddr_to_pdx(nodes[i].start);
--        epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
--        if ( spdx >= epdx )
--            continue;
--        bitfield |= spdx;
--        nodes_used++;
--        if ( epdx > memtop )
--            memtop = epdx;
--    }
--    if ( nodes_used <= 1 )
--        i = BITS_PER_LONG - 1;
--    else
--        i = find_first_bit(&bitfield, sizeof(unsigned long)*8);
--    memnodemapsize = (memtop >> i) + 1;
--    return i;
--}
--
--int __init compute_hash_shift(struct node *nodes, int numnodes,
--                              nodeid_t *nodeids)
--{
--    int shift;
--
--    shift = extract_lsb_from_nodes(nodes, numnodes);
--    if ( memnodemapsize <= ARRAY_SIZE(_memnodemap) )
--        memnodemap = _memnodemap;
--    else if ( allocate_cachealigned_memnodemap() )
--        return -1;
--    printk(KERN_DEBUG "NUMA: Using %d for the hash shift.\n", shift);
--
--    if ( populate_memnodemap(nodes, numnodes, shift, nodeids) != 1 )
--    {
--        printk(KERN_INFO "Your memory is not aligned you need to "
--               "rebuild your hypervisor with a bigger NODEMAPSIZE "
--               "shift=%d\n", shift);
--        return -1;
--    }
--
--    return shift;
--}
--/* initialize NODE_DATA given nodeid and start/end */
--void __init setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end)
--{
--    unsigned long start_pfn = paddr_to_pfn(start);
--    unsigned long end_pfn = paddr_to_pfn(end);
--
--    NODE_DATA(nodeid)->node_start_pfn = start_pfn;
--    NODE_DATA(nodeid)->node_spanned_pages = end_pfn - start_pfn;
--
--    node_set_online(nodeid);
--} 
--
--void __init numa_init_array(void)
--{
--    int rr, i;
--
--    /* There are unfortunately some poorly designed mainboards around
--       that only connect memory to a single CPU. This breaks the 1:1 cpu->node
--       mapping. To avoid this fill in the mapping for all possible
--       CPUs, as the number of CPUs is not known yet.
--       We round robin the existing nodes. */
--    rr = first_node(node_online_map);
--    for ( i = 0; i < nr_cpu_ids; i++ )
--    {
--        if ( cpu_to_node[i] != NUMA_NO_NODE )
--            continue;
--        numa_set_node(i, rr);
--        rr = cycle_node(rr, node_online_map);
--    }
--}
--
--#ifdef CONFIG_NUMA_EMU
--static int numa_fake __initdata = 0;
--
--/* Numa emulation */
--static int __init numa_emulation(unsigned long start_pfn,
--                                 unsigned long end_pfn)
--{
--    int i;
--    struct node nodes[MAX_NUMNODES];
--    uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
--
--    /* Kludge needed for the hash function */
--    if ( hweight64(sz) > 1 )
--    {
--        u64 x = 1;
--        while ( (x << 1) < sz )
--            x <<= 1;
--        if ( x < sz/2 )
--            printk(KERN_ERR "Numa emulation unbalanced. Complain to maintainer\n");
--        sz = x;
--    }
--
--    memset(&nodes,0,sizeof(nodes));
--    for ( i = 0; i < numa_fake; i++ )
--    {
--        nodes[i].start = pfn_to_paddr(start_pfn) + i * sz;
--        if ( i == numa_fake - 1 )
--            sz = pfn_to_paddr(end_pfn) - nodes[i].start;
--        nodes[i].end = nodes[i].start + sz;
--        printk(KERN_INFO "Faking node %d at %"PRIx64"-%"PRIx64" (%"PRIu64"MB)\n",
--               i,
--               nodes[i].start, nodes[i].end,
--               (nodes[i].end - nodes[i].start) >> 20);
--        node_set_online(i);
--    }
--    memnode_shift = compute_hash_shift(nodes, numa_fake, NULL);
--    if ( memnode_shift < 0 )
--    {
--        memnode_shift = 0;
--        printk(KERN_ERR "No NUMA hash function found. Emulation disabled.\n");
--        return -1;
--    }
--    for_each_online_node ( i )
--        setup_node_bootmem(i, nodes[i].start, nodes[i].end);
--    numa_init_array();
--
--    return 0;
--}
--#endif
--
--void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
--{ 
--    int i;
--    paddr_t start = pfn_to_paddr(start_pfn);
--    paddr_t end = pfn_to_paddr(end_pfn);
--
--#ifdef CONFIG_NUMA_EMU
--    if ( numa_fake && !numa_emulation(start_pfn, end_pfn) )
--        return;
--#endif
--
--#ifdef CONFIG_ACPI_NUMA
--    if ( !numa_off && !acpi_scan_nodes(start, end) )
--        return;
--#endif
--
--    printk(KERN_INFO "%s\n",
--           numa_off ? "NUMA turned off" : "No NUMA configuration found");
--
--    printk(KERN_INFO "Faking a node at %"PRIpaddr"-%"PRIpaddr"\n",
--           start, end);
--    /* setup dummy node covering all memory */
--    memnode_shift = BITS_PER_LONG - 1;
--    memnodemap = _memnodemap;
--    /* Dummy node only uses 1 slot in reality */
--    memnodemap[0] = 0;
--    memnodemapsize = 1;
--
--    nodes_clear(node_online_map);
--    node_set_online(0);
--    for ( i = 0; i < nr_cpu_ids; i++ )
--        numa_set_node(i, 0);
--    cpumask_copy(&node_to_cpumask[0], cpumask_of(0));
--    setup_node_bootmem(0, start, end);
--}
--
--void numa_add_cpu(int cpu)
--{
--    cpumask_set_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
--} 
--
--void numa_set_node(int cpu, nodeid_t node)
--{
--    cpu_to_node[cpu] = node;
--}
--
--/* [numa=off] */
--static int __init cf_check numa_setup(const char *opt)
--{
--    if ( !strncmp(opt, "off", 3) )
--        numa_off = true;
--    else if ( !strncmp(opt, "on", 2) )
--        numa_off = false;
--#ifdef CONFIG_NUMA_EMU
--    else if ( !strncmp(opt, "fake=", 5) )
--    {
--        numa_off = false;
--        numa_fake = simple_strtoul(opt + 5, NULL, 0);
--        if ( numa_fake >= MAX_NUMNODES )
--            numa_fake = MAX_NUMNODES;
--    }
--#endif
--    else
--        return arch_numa_setup(opt);
--
--    return 0;
--} 
--custom_param("numa", numa_setup);
--
- /*
-  * Setup early cpu_to_node.
-  *
-@@ -381,146 +96,3 @@ unsigned int __init arch_get_dma_bitsize(void)
-                  flsl(node_start_pfn(node) + node_spanned_pages(node) / 4 - 1)
-                  + PAGE_SHIFT, 32);
- }
--
--static void cf_check dump_numa(unsigned char key)
--{
--    s_time_t now = NOW();
--    unsigned int i, j, n;
--    struct domain *d;
--    struct page_info *page;
--    unsigned int page_num_node[MAX_NUMNODES];
--    const struct vnuma_info *vnuma;
--
--    printk("'%c' pressed -> dumping numa info (now = %"PRI_stime")\n", key,
--           now);
--
--    for_each_online_node ( i )
--    {
--        paddr_t pa = pfn_to_paddr(node_start_pfn(i) + 1);
--
--        printk("NODE%u start->%lu size->%lu free->%lu\n",
--               i, node_start_pfn(i), node_spanned_pages(i),
--               avail_node_heap_pages(i));
--        /* sanity check phys_to_nid() */
--        if ( phys_to_nid(pa) != i )
--            printk("phys_to_nid(%"PRIpaddr") -> %d should be %u\n",
--                   pa, phys_to_nid(pa), i);
--    }
--
--    j = cpumask_first(&cpu_online_map);
--    n = 0;
--    for_each_online_cpu ( i )
--    {
--        if ( i != j + n || cpu_to_node[j] != cpu_to_node[i] )
--        {
--            if ( n > 1 )
--                printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
--            else
--                printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
--            j = i;
--            n = 1;
--        }
--        else
--            ++n;
--    }
--    if ( n > 1 )
--        printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
--    else
--        printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
--
--    rcu_read_lock(&domlist_read_lock);
--
--    printk("Memory location of each domain:\n");
--    for_each_domain ( d )
--    {
--        process_pending_softirqs();
--
--        printk("Domain %u (total: %u):\n", d->domain_id, domain_tot_pages(d));
--
--        for_each_online_node ( i )
--            page_num_node[i] = 0;
--
--        spin_lock(&d->page_alloc_lock);
--        page_list_for_each(page, &d->page_list)
--        {
--            i = phys_to_nid(page_to_maddr(page));
--            page_num_node[i]++;
--        }
--        spin_unlock(&d->page_alloc_lock);
--
--        for_each_online_node ( i )
--            printk("    Node %u: %u\n", i, page_num_node[i]);
--
--        if ( !read_trylock(&d->vnuma_rwlock) )
--            continue;
--
--        if ( !d->vnuma )
--        {
--            read_unlock(&d->vnuma_rwlock);
--            continue;
--        }
--
--        vnuma = d->vnuma;
--        printk("     %u vnodes, %u vcpus, guest physical layout:\n",
--               vnuma->nr_vnodes, d->max_vcpus);
--        for ( i = 0; i < vnuma->nr_vnodes; i++ )
--        {
--            unsigned int start_cpu = ~0U;
--
--            if ( vnuma->vnode_to_pnode[i] == NUMA_NO_NODE )
--                printk("       %3u: pnode ???,", i);
--            else
--                printk("       %3u: pnode %3u,", i, vnuma->vnode_to_pnode[i]);
--
--            printk(" vcpus ");
--
--            for ( j = 0; j < d->max_vcpus; j++ )
--            {
--                if ( !(j & 0x3f) )
--                    process_pending_softirqs();
--
--                if ( vnuma->vcpu_to_vnode[j] == i )
--                {
--                    if ( start_cpu == ~0U )
--                    {
--                        printk("%d", j);
--                        start_cpu = j;
--                    }
--                }
--                else if ( start_cpu != ~0U )
--                {
--                    if ( j - 1 != start_cpu )
--                        printk("-%d ", j - 1);
--                    else
--                        printk(" ");
--                    start_cpu = ~0U;
--                }
--            }
--
--            if ( start_cpu != ~0U  && start_cpu != j - 1 )
--                printk("-%d", j - 1);
--
--            printk("\n");
--
--            for ( j = 0; j < vnuma->nr_vmemranges; j++ )
--            {
--                if ( vnuma->vmemrange[j].nid == i )
--                    printk("           %016"PRIx64" - %016"PRIx64"\n",
--                           vnuma->vmemrange[j].start,
--                           vnuma->vmemrange[j].end);
--            }
--        }
--
--        read_unlock(&d->vnuma_rwlock);
--    }
--
--    rcu_read_unlock(&domlist_read_lock);
--}
--
--static int __init cf_check register_numa_trigger(void)
--{
--    register_keyhandler('u', dump_numa, "dump NUMA info", 1);
--    return 0;
--}
--__initcall(register_numa_trigger);
--
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index b46fd9ab18..9df08e9366 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1350,7 +1350,7 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm)
- 
-     x86_acpiid_to_apicid[acpi_id] = apic_id;
- 
--    if ( !srat_disabled() )
-+    if ( !numa_disabled() )
-     {
-         nodeid_t node = setup_node(pxm);
- 
+ /* Frame table size in pages. */
+ unsigned long max_page;
+ unsigned long total_pages;
 diff --git a/xen/arch/x86/srat.c b/xen/arch/x86/srat.c
-index b62a152911..4c7f0c547e 100644
+index 6bebfb344f..b6ffde4401 100644
 --- a/xen/arch/x86/srat.c
 +++ b/xen/arch/x86/srat.c
-@@ -238,7 +238,7 @@ acpi_numa_x2apic_affinity_init(const struct acpi_srat_x2apic_cpu_affinity *pa)
+@@ -24,10 +24,6 @@
+ 
+ static struct acpi_table_slit *__read_mostly acpi_slit;
+ 
+-static nodemask_t memory_nodes_parsed __initdata;
+-static nodemask_t processor_nodes_parsed __initdata;
+-static struct node nodes[MAX_NUMNODES] __initdata;
+-
+ struct pxm2node {
  	unsigned pxm;
  	nodeid_t node;
+@@ -35,19 +31,6 @@ struct pxm2node {
+ static struct pxm2node __read_mostly pxm2node[MAX_NUMNODES] =
+ 	{ [0 ... MAX_NUMNODES - 1] = {.node = NUMA_NO_NODE} };
  
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (pa->header.length < sizeof(struct acpi_srat_x2apic_cpu_affinity)) {
- 		bad_srat();
-@@ -274,7 +274,7 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
- 	unsigned pxm;
- 	nodeid_t node;
- 
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (pa->header.length != sizeof(struct acpi_srat_cpu_affinity)) {
- 		bad_srat();
-@@ -313,7 +313,7 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
- 	nodeid_t node;
- 	unsigned int i;
- 
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (ma->header.length != sizeof(struct acpi_srat_mem_affinity)) {
- 		bad_srat();
-@@ -520,7 +520,7 @@ void __init srat_parse_regions(paddr_t addr)
+-static unsigned node_to_pxm(nodeid_t n);
+-
+-static int num_node_memblks;
+-static struct node node_memblk_range[NR_NODE_MEMBLKS];
+-static nodeid_t memblk_nodeid[NR_NODE_MEMBLKS];
+-static __initdata DECLARE_BITMAP(memblk_hotplug, NR_NODE_MEMBLKS);
+-
+-enum conflicts {
+-	NO_CONFLICT,
+-	OVERLAP,
+-	INTERLEAVE,
+-};
+-
+ static inline bool node_found(unsigned idx, unsigned pxm)
+ {
+ 	return ((pxm2node[idx].pxm == pxm) &&
+@@ -110,78 +93,7 @@ nodeid_t setup_node(unsigned pxm)
+ 	return node;
  }
  
- /* Use the information discovered above to actually set up the nodes. */
--int __init acpi_scan_nodes(paddr_t start, paddr_t end)
-+int __init numa_scan_nodes(paddr_t start, paddr_t end)
+-int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node)
+-{
+-	int i;
+-
+-	for (i = 0; i < num_node_memblks; i++) {
+-		struct node *nd = &node_memblk_range[i];
+-
+-		if (nd->start <= start && nd->end >= end &&
+-			memblk_nodeid[i] == node)
+-			return 1;
+-	}
+-
+-	return 0;
+-}
+-
+-static
+-enum conflicts __init conflicting_memblks(nodeid_t nid, paddr_t start,
+-					  paddr_t end, paddr_t nd_start,
+-					  paddr_t nd_end, unsigned int *mblkid)
+-{
+-	unsigned int i;
+-
+-	/*
+-	 * Scan all recorded nodes' memory blocks to check conflicts:
+-	 * Overlap or interleave.
+-	 */
+-	for (i = 0; i < num_node_memblks; i++) {
+-		struct node *nd = &node_memblk_range[i];
+-
+-		*mblkid = i;
+-
+-		/* Skip 0 bytes node memory block. */
+-		if (nd->start == nd->end)
+-			continue;
+-		/*
+-		 * Use memblk range to check memblk overlaps, include the
+-		 * self-overlap case. As nd's range is non-empty, the special
+-		 * case "nd->end == end && nd->start == start" also can be covered.
+-		 */
+-		if (nd->end > start && nd->start < end)
+-			return OVERLAP;
+-
+-		/*
+-		 * Use node memory range to check whether new range contains
+-		 * memory from other nodes - interleave check. We just need
+-		 * to check full contains situation. Because overlaps have
+-		 * been checked above.
+-		 */
+-	        if (nid != memblk_nodeid[i] &&
+-		    nd->start >= nd_start && nd->end <= nd_end)
+-			return INTERLEAVE;
+-	}
+-
+-	return NO_CONFLICT;
+-}
+-
+-static __init void cutoff_node(int i, paddr_t start, paddr_t end)
+-{
+-	struct node *nd = &nodes[i];
+-	if (nd->start < start) {
+-		nd->start = start;
+-		if (nd->end < nd->start)
+-			nd->start = nd->end;
+-	}
+-	if (nd->end > end) {
+-		nd->end = end;
+-		if (nd->start > nd->end)
+-			nd->start = nd->end;
+-	}
+-}
+-
+-static __init void bad_srat(void)
++void __init numa_fw_bad(void)
  {
  	int i;
- 	nodemask_t all_nodes_parsed;
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 3baf83d527..9a3a12b12d 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_MEM_ACCESS) += mem_access.o
- obj-y += memory.o
- obj-y += multicall.o
- obj-y += notifier.o
-+obj-$(CONFIG_NUMA) += numa.o
- obj-y += page_alloc.o
- obj-$(CONFIG_HAS_PDX) += pdx.o
- obj-$(CONFIG_PERF_COUNTERS) += perfc.o
+ 	printk(KERN_ERR "SRAT: SRAT not used.\n");
+@@ -241,7 +153,7 @@ acpi_numa_x2apic_affinity_init(const struct acpi_srat_x2apic_cpu_affinity *pa)
+ 	if (numa_disabled())
+ 		return;
+ 	if (pa->header.length < sizeof(struct acpi_srat_x2apic_cpu_affinity)) {
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+ 	}
+ 	if (!(pa->flags & ACPI_SRAT_CPU_ENABLED))
+@@ -254,12 +166,12 @@ acpi_numa_x2apic_affinity_init(const struct acpi_srat_x2apic_cpu_affinity *pa)
+ 	pxm = pa->proximity_domain;
+ 	node = setup_node(pxm);
+ 	if (node == NUMA_NO_NODE) {
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+ 	}
+ 
+ 	apicid_to_node[pa->apic_id] = node;
+-	node_set(node, processor_nodes_parsed);
++	numa_set_processor_nodes_parsed(node);
+ 	acpi_numa = 1;
+ 
+ 	if (opt_acpi_verbose)
+@@ -277,7 +189,7 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
+ 	if (numa_disabled())
+ 		return;
+ 	if (pa->header.length != sizeof(struct acpi_srat_cpu_affinity)) {
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+ 	}
+ 	if (!(pa->flags & ACPI_SRAT_CPU_ENABLED))
+@@ -290,11 +202,11 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
+ 	}
+ 	node = setup_node(pxm);
+ 	if (node == NUMA_NO_NODE) {
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+ 	}
+ 	apicid_to_node[pa->apic_id] = node;
+-	node_set(node, processor_nodes_parsed);
++	numa_set_processor_nodes_parsed(node);
+ 	acpi_numa = 1;
+ 
+ 	if (opt_acpi_verbose)
+@@ -306,32 +218,28 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
+ void __init
+ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ {
+-	struct node *nd;
+-	paddr_t nd_start, nd_end;
+-	paddr_t start, end;
+ 	unsigned pxm;
+ 	nodeid_t node;
+-	unsigned int i;
++	int ret;
+ 
+ 	if (numa_disabled())
+ 		return;
+ 	if (ma->header.length != sizeof(struct acpi_srat_mem_affinity)) {
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+ 	}
+ 	if (!(ma->flags & ACPI_SRAT_MEM_ENABLED))
+ 		return;
+ 
+-	start = ma->base_address;
+-	end = start + ma->length;
+ 	/* Supplement the heuristics in l1tf_calculations(). */
+-	l1tf_safe_maddr = max(l1tf_safe_maddr, ROUNDUP(end, PAGE_SIZE));
++	l1tf_safe_maddr = max(l1tf_safe_maddr,
++			      ROUNDUP(ma->base_address + ma->length,
++			      PAGE_SIZE));
+ 
+-	if (num_node_memblks >= NR_NODE_MEMBLKS)
+-	{
++	if (!numa_memblks_available()) {
+ 		dprintk(XENLOG_WARNING,
+-                "Too many numa entry, try bigger NR_NODE_MEMBLKS \n");
+-		bad_srat();
++			"Too many numa entries, try bigger NR_NODE_MEMBLKS!\n");
++		numa_fw_bad();
+ 		return;
+ 	}
+ 
+@@ -340,134 +248,15 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ 		pxm &= 0xff;
+ 	node = setup_node(pxm);
+ 	if (node == NUMA_NO_NODE) {
+-		bad_srat();
+-		return;
+-	}
+-
+-	/*
+-	 * For the node that already has some memory blocks, we will
+-	 * expand the node memory range temporarily to check memory
+-	 * interleaves with other nodes. We will not use this node
+-	 * temp memory range to check overlaps, because it will mask
+-	 * the overlaps in same node.
+-	 *
+-	 * Node with 0 bytes memory doesn't need this expandsion.
+-	 */
+-	nd_start = start;
+-	nd_end = end;
+-	nd = &nodes[node];
+-	if (nd->start != nd->end) {
+-		if (nd_start > nd->start)
+-			nd_start = nd->start;
+-
+-		if (nd_end < nd->end)
+-			nd_end = nd->end;
+-	}
+-
+-	/* It is fine to add this area to the nodes data it will be used later*/
+-	switch (conflicting_memblks(node, start, end, nd_start, nd_end, &i)) {
+-	case OVERLAP:
+-		if (memblk_nodeid[i] == node) {
+-			bool mismatch = !(ma->flags &
+-					  ACPI_SRAT_MEM_HOT_PLUGGABLE) !=
+-			                !test_bit(i, memblk_hotplug);
+-
+-			printk("%sSRAT: PXM %u [%"PRIpaddr", %"PRIpaddr"] overlaps with itself [%"PRIpaddr", %"PRIpaddr"]\n",
+-			       mismatch ? KERN_ERR : KERN_WARNING, pxm, start,
+-			       end - 1, node_memblk_range[i].start,
+-			       node_memblk_range[i].end - 1);
+-			if (mismatch) {
+-				bad_srat();
+-				return;
+-			}
+-			break;
+-		}
+-
+-		printk(KERN_ERR
+-		       "SRAT: PXM %u [%"PRIpaddr", %"PRIpaddr"] overlaps with PXM %u [%"PRIpaddr", %"PRIpaddr"]\n",
+-		       pxm, start, end - 1, node_to_pxm(memblk_nodeid[i]),
+-		       node_memblk_range[i].start,
+-		       node_memblk_range[i].end - 1);
+-		bad_srat();
+-		return;
+-
+-	case INTERLEAVE:
+-		printk(KERN_ERR
+-		       "SRAT： PXM %u: [%"PRIpaddr", %"PRIpaddr"] interleaves with PXM %u memblk [%"PRIpaddr", %"PRIpaddr"]\n",
+-		       pxm, nd_start, nd_end - 1, node_to_pxm(memblk_nodeid[i]),
+-		       node_memblk_range[i].start, node_memblk_range[i].end - 1);
+-		bad_srat();
++		numa_fw_bad();
+ 		return;
+-
+-	case NO_CONFLICT:
+-		break;
+ 	}
+ 
+-	if (!(ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE)) {
+-		node_set(node, memory_nodes_parsed);
+-		nd->start = nd_start;
+-		nd->end = nd_end;
+-	}
+-
+-	printk(KERN_INFO "SRAT: Node %u PXM %u [%"PRIpaddr", %"PRIpaddr"]%s\n",
+-	       node, pxm, start, end - 1,
+-	       ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE ? " (hotplug)" : "");
+-
+-	node_memblk_range[num_node_memblks].start = start;
+-	node_memblk_range[num_node_memblks].end = end;
+-	memblk_nodeid[num_node_memblks] = node;
+-	if (ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE) {
+-		__set_bit(num_node_memblks, memblk_hotplug);
+-		if (end > mem_hotplug)
+-			mem_hotplug = end;
+-	}
+-	num_node_memblks++;
+-}
+-
+-/* Sanity check to catch more bad SRATs (they are amazingly common).
+-   Make sure the PXMs cover all memory. */
+-static int __init nodes_cover_memory(void)
+-{
+-	unsigned int i;
+-
+-	for (i = 0; ; i++) {
+-		int j, found;
+-		paddr_t start, end;
+-
+-		/* Try to loop memory map from index 0 to end to get RAM ranges. */
+-		found = arch_get_ram_range(i, &start, &end);
+-
+-		/* Index relate entry is not RAM, skip it. */
+-		if (found == -EINVAL)
+-			continue;
+-
+-		/* Reach the end of arch's memory map */
+-		if (found == -ENOENT)
+-			break;
+-
+-		do {
+-			found = 0;
+-			for_each_node_mask(j, memory_nodes_parsed)
+-				if (start < nodes[j].end
+-				    && end > nodes[j].start) {
+-					if (start >= nodes[j].start) {
+-						start = nodes[j].end;
+-						found = 1;
+-					}
+-					if (end <= nodes[j].end) {
+-						end = nodes[j].start;
+-						found = 1;
+-					}
+-				}
+-		} while (found && start < end);
+-
+-		if (start < end) {
+-			printk(KERN_ERR "NUMA: No NODE for RAM range: "
+-				"[%"PRIpaddr", %"PRIpaddr"]\n", start, end - 1);
+-			return 0;
+-		}
+-	}
+-	return 1;
++	ret = numa_update_node_memblks(node, pxm, ma->base_address,
++				       ma->length, "PXM",
++				       ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE);
++	if (ret)
++		numa_fw_bad();
+ }
+ 
+ void __init acpi_numa_arch_fixup(void) {}
+@@ -523,59 +312,9 @@ void __init srat_parse_regions(paddr_t addr)
+ 	pfn_pdx_hole_setup(mask >> PAGE_SHIFT);
+ }
+ 
+-/* Use the information discovered above to actually set up the nodes. */
+-int __init numa_scan_nodes(paddr_t start, paddr_t end)
+-{
+-	int i;
+-	nodemask_t all_nodes_parsed;
+-
+-	/* First clean up the node list */
+-	for (i = 0; i < MAX_NUMNODES; i++)
+-		cutoff_node(i, start, end);
+-
+-	if (acpi_numa <= 0)
+-		return -1;
+-
+-	if (!nodes_cover_memory()) {
+-		bad_srat();
+-		return -1;
+-	}
+-
+-	memnode_shift = compute_hash_shift(node_memblk_range, num_node_memblks,
+-				memblk_nodeid);
+-
+-	if (memnode_shift < 0) {
+-		printk(KERN_ERR
+-		     "SRAT: No NUMA node hash function found. Contact maintainer\n");
+-		bad_srat();
+-		return -1;
+-	}
+-
+-	nodes_or(all_nodes_parsed, memory_nodes_parsed, processor_nodes_parsed);
+-
+-	/* Finally register nodes */
+-	for_each_node_mask(i, all_nodes_parsed)
+-	{
+-		uint64_t size = nodes[i].end - nodes[i].start;
+-
+-		if ( size == 0 )
+-			printk(KERN_INFO "SRAT: node %u has no memory\n", i);
+-
+-		setup_node_bootmem(i, nodes[i].start, nodes[i].end);
+-	}
+-	for (i = 0; i < nr_cpu_ids; i++) {
+-		if (cpu_to_node[i] == NUMA_NO_NODE)
+-			continue;
+-		if (!nodemask_test(cpu_to_node[i], &processor_nodes_parsed))
+-			numa_set_node(i, NUMA_NO_NODE);
+-	}
+-	numa_init_array();
+-	return 0;
+-}
+-
+-static unsigned node_to_pxm(nodeid_t n)
++unsigned int numa_node_to_arch_nid(nodeid_t n)
+ {
+-	unsigned i;
++	unsigned int i;
+ 
+ 	if ((n < ARRAY_SIZE(pxm2node)) && (pxm2node[n].node == n))
+ 		return pxm2node[n].pxm;
+@@ -592,8 +331,8 @@ u8 __node_distance(nodeid_t a, nodeid_t b)
+ 
+ 	if (!acpi_slit)
+ 		return a == b ? 10 : 20;
+-	index = acpi_slit->locality_count * node_to_pxm(a);
+-	slit_val = acpi_slit->entry[index + node_to_pxm(b)];
++	index = acpi_slit->locality_count * numa_node_to_arch_nid(a);
++	slit_val = acpi_slit->entry[index + numa_node_to_arch_nid(b)];
+ 
+ 	/* ACPI defines 0xff as an unreachable node and 0-9 are undefined */
+ 	if ((slit_val == 0xff) || (slit_val <= 9))
 diff --git a/xen/common/numa.c b/xen/common/numa.c
-new file mode 100644
-index 0000000000..0bc5113753
---- /dev/null
+index 0bc5113753..3b8b475af7 100644
+--- a/xen/common/numa.c
 +++ b/xen/common/numa.c
-@@ -0,0 +1,440 @@
-+/*
-+ * Generic VM initialization for NUMA setups.
-+ * Copyright 2002,2003 Andi Kleen, SuSE Labs.
-+ * Adapted for Xen: Ryan Harper <ryanh@us.ibm.com>
-+ */
+@@ -13,6 +13,21 @@
+ #include <xen/sched.h>
+ #include <xen/softirq.h>
+ 
++static nodemask_t __initdata processor_nodes_parsed;
++static nodemask_t __initdata memory_nodes_parsed;
++static struct node __initdata nodes[MAX_NUMNODES];
 +
-+#include <xen/init.h>
-+#include <xen/keyhandler.h>
-+#include <xen/mm.h>
-+#include <xen/nodemask.h>
-+#include <xen/numa.h>
-+#include <xen/param.h>
-+#include <xen/sched.h>
-+#include <xen/softirq.h>
++static int __ro_after_init num_node_memblks;
++static struct node __ro_after_init node_memblk_range[NR_NODE_MEMBLKS];
++static nodeid_t __ro_after_init memblk_nodeid[NR_NODE_MEMBLKS];
++static __initdata DECLARE_BITMAP(memblk_hotplug, NR_NODE_MEMBLKS);
 +
-+struct node_data __ro_after_init node_data[MAX_NUMNODES];
-+
-+/* Mapping from pdx to node id */
-+unsigned int __ro_after_init memnode_shift;
-+unsigned long __ro_after_init memnodemapsize;
-+uint8_t *__ro_after_init memnodemap;
-+static uint8_t __ro_after_init _memnodemap[64];
-+
-+nodeid_t __ro_after_init cpu_to_node[NR_CPUS] = {
-+    [0 ... NR_CPUS-1] = NUMA_NO_NODE
++enum conflicts {
++    NO_CONFLICT,
++    OVERLAP,
++    INTERLEAVE,
 +};
 +
-+cpumask_t __ro_after_init node_to_cpumask[MAX_NUMNODES];
-+
-+nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
-+
-+bool __read_mostly numa_off;
-+
-+bool numa_disabled(void)
+ struct node_data __ro_after_init node_data[MAX_NUMNODES];
+ 
+ /* Mapping from pdx to node id */
+@@ -36,6 +51,308 @@ bool numa_disabled(void)
+     return numa_off || arch_numa_disabled(false);
+ }
+ 
++void __init numa_set_processor_nodes_parsed(nodeid_t node)
 +{
-+    return numa_off || arch_numa_disabled(false);
++    node_set(node, processor_nodes_parsed);
 +}
 +
-+/*
-+ * Given a shift value, try to populate memnodemap[]
-+ * Returns :
-+ * 1 if OK
-+ * 0 if memnodmap[] too small (of shift too small)
-+ * -1 if node overlap or lost ram (shift too big)
-+ */
-+static int __init populate_memnodemap(const struct node *nodes,
-+                                      nodeid_t numnodes, unsigned int shift,
-+                                      nodeid_t *nodeids)
++unsigned int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node)
 +{
-+    unsigned long spdx, epdx;
-+    nodeid_t i;
-+    int res = -1;
++    unsigned int i;
 +
-+    memset(memnodemap, NUMA_NO_NODE, memnodemapsize * sizeof(*memnodemap));
-+    for ( i = 0; i < numnodes; i++ )
++    for ( i = 0; i < num_node_memblks; i++ )
 +    {
-+        spdx = paddr_to_pdx(nodes[i].start);
-+        epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
-+        if ( spdx >= epdx )
-+            continue;
-+        if ( (epdx >> shift) >= memnodemapsize )
-+            return 0;
-+        do {
-+            if ( memnodemap[spdx >> shift] != NUMA_NO_NODE )
-+                return -1;
++        struct node *nd = &node_memblk_range[i];
 +
-+            if ( !nodeids )
-+                memnodemap[spdx >> shift] = i;
-+            else
-+                memnodemap[spdx >> shift] = nodeids[i];
-+
-+            spdx += (1UL << shift);
-+        } while ( spdx < epdx );
-+        res = 1;
++        if ( nd->start <= start && nd->end >= end &&
++             memblk_nodeid[i] == node )
++            return 1;
 +    }
-+
-+    return res;
-+}
-+
-+static int __init allocate_cachealigned_memnodemap(void)
-+{
-+    unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
-+    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
-+
-+    memnodemap = mfn_to_virt(mfn);
-+    mfn <<= PAGE_SHIFT;
-+    size <<= PAGE_SHIFT;
-+    printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
-+           mfn, mfn + size);
-+    memnodemapsize = size / sizeof(*memnodemap);
 +
 +    return 0;
 +}
 +
-+/*
-+ * The LSB of all start and end addresses in the node map is the value of the
-+ * maximum possible shift.
-+ */
-+static unsigned int __init extract_lsb_from_nodes(const struct node *nodes,
-+                                                  nodeid_t numnodes)
++static
++enum conflicts __init conflicting_memblks(nodeid_t nid, paddr_t start,
++                                          paddr_t end, paddr_t nd_start,
++                                          paddr_t nd_end, unsigned int *mblkid)
 +{
 +    unsigned int i;
-+    nodeid_t nodes_used = 0;
-+    unsigned long spdx, epdx;
-+    unsigned long bitfield = 0, memtop = 0;
-+
-+    for ( i = 0; i < numnodes; i++ )
-+    {
-+        spdx = paddr_to_pdx(nodes[i].start);
-+        epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
-+        if ( spdx >= epdx )
-+            continue;
-+        bitfield |= spdx;
-+        nodes_used++;
-+        if ( epdx > memtop )
-+            memtop = epdx;
-+    }
-+    if ( nodes_used <= 1 )
-+        i = BITS_PER_LONG - 1;
-+    else
-+        i = find_first_bit(&bitfield, sizeof(unsigned long)*8);
-+    memnodemapsize = (memtop >> i) + 1;
-+    return i;
-+}
-+
-+unsigned int __init compute_hash_shift(const struct node *nodes,
-+                                       nodeid_t numnodes, nodeid_t *nodeids)
-+{
-+    unsigned int shift;
-+
-+    shift = extract_lsb_from_nodes(nodes, numnodes);
-+    if ( memnodemapsize <= ARRAY_SIZE(_memnodemap) )
-+        memnodemap = _memnodemap;
-+    else if ( allocate_cachealigned_memnodemap() )
-+        return -1;
-+    printk(KERN_DEBUG "NUMA: Using %d for the hash shift.\n", shift);
-+
-+    if ( populate_memnodemap(nodes, numnodes, shift, nodeids) != 1 )
-+    {
-+        printk(KERN_INFO "Your memory is not aligned you need to "
-+               "rebuild your hypervisor with a bigger NODEMAPSIZE "
-+               "shift=%d\n", shift);
-+        return -1;
-+    }
-+
-+    return shift;
-+}
-+
-+/* initialize NODE_DATA given nodeid and start/end */
-+void __init setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end)
-+{
-+    unsigned long start_pfn = paddr_to_pfn(start);
-+    unsigned long end_pfn = paddr_to_pfn(end);
-+
-+    NODE_DATA(nodeid)->node_start_pfn = start_pfn;
-+    NODE_DATA(nodeid)->node_spanned_pages = end_pfn - start_pfn;
-+
-+    node_set_online(nodeid);
-+}
-+
-+void __init numa_init_array(void)
-+{
-+    int rr, i;
 +
 +    /*
-+     * There are unfortunately some poorly designed mainboards around
-+     * that only connect memory to a single CPU. This breaks the 1:1 cpu->node
-+     * mapping. To avoid this fill in the mapping for all possible
-+     * CPUs, as the number of CPUs is not known yet.
-+     * We round robin the existing nodes.
++     * Scan all recorded nodes' memory blocks to check conflicts:
++     * Overlap or interleave.
 +     */
-+    rr = first_node(node_online_map);
-+    for ( i = 0; i < nr_cpu_ids; i++ )
++    for ( i = 0; i < num_node_memblks; i++ )
 +    {
-+        if ( cpu_to_node[i] != NUMA_NO_NODE )
++        struct node *nd = &node_memblk_range[i];
++
++        *mblkid = i;
++
++        /* Skip 0 bytes node memory block. */
++        if ( nd->start == nd->end )
 +            continue;
-+        numa_set_node(i, rr);
-+        rr = cycle_node(rr, node_online_map);
++        /*
++         * Use memblk range to check memblk overlaps, include the
++         * self-overlap case. As nd's range is non-empty, the special
++         * case "nd->end == end && nd->start == start" also can be covered.
++         */
++        if ( nd->end > start && nd->start < end )
++            return OVERLAP;
++
++        /*
++         * Use node memory range to check whether new range contains
++         * memory from other nodes - interleave check. We just need
++         * to check full contains situation. Because overlaps have
++         * been checked above.
++         */
++        if ( nid != memblk_nodeid[i] &&
++             nd->start >= nd_start && nd->end <= nd_end )
++            return INTERLEAVE;
++    }
++
++    return NO_CONFLICT;
++}
++
++static void __init cutoff_node(nodeid_t i, paddr_t start, paddr_t end)
++{
++    struct node *nd = &nodes[i];
++
++    if ( nd->start < start )
++    {
++        nd->start = start;
++        if ( nd->end < nd->start )
++            nd->start = nd->end;
++    }
++
++    if ( nd->end > end )
++    {
++        nd->end = end;
++        if ( nd->start > nd->end )
++            nd->start = nd->end;
 +    }
 +}
 +
-+#ifdef CONFIG_NUMA_EMU
-+static unsigned int __initdata numa_fake;
++bool __init numa_memblks_available(void)
++{
++    return num_node_memblks < NR_NODE_MEMBLKS;
++}
 +
-+/* Numa emulation */
-+static int __init numa_emulation(unsigned long start_pfn,
-+                                 unsigned long end_pfn)
++/*
++ * This function will be called by NUMA memory affinity initialization to
++ * update NUMA node's memory range. In this function, we assume all memory
++ * regions belonging to a single node are in one chunk. Holes (or MMIO
++ * ranges) between them will be included in the node.
++ *
++ * So in numa_update_node_memblks, if there are multiple banks for each
++ * node, start and end are stretched to cover the holes between them, and
++ * it works as long as memory banks of different NUMA nodes don't interleave.
++ */
++int __init numa_update_node_memblks(nodeid_t node, unsigned int arch_nid,
++                                    paddr_t start, paddr_t size,
++                                    const char *prefix,
++                                    bool hotplug)
 +{
 +    unsigned int i;
-+    struct node nodes[MAX_NUMNODES];
-+    uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
++    paddr_t end = start + size;
++    paddr_t nd_start = start;
++    paddr_t nd_end = end;
++    struct node *nd = &nodes[node];
 +
-+    /* Kludge needed for the hash function */
-+    if ( hweight64(sz) > 1 )
++    /*
++     * For the node that already has some memory blocks, we will
++     * expand the node memory range temporarily to check memory
++     * interleaves with other nodes. We will not use this node
++     * temp memory range to check overlaps, because it will mask
++     * the overlaps in same node.
++     *
++     * Node with 0 bytes memory doesn't need this expandsion.
++     */
++    if ( nd->start != nd->end )
 +    {
-+        u64 x = 1;
-+        while ( (x << 1) < sz )
-+            x <<= 1;
-+        if ( x < sz / 2 )
-+            printk(KERN_ERR "Numa emulation unbalanced. Complain to maintainer\n");
-+        sz = x;
++        if ( nd_start > nd->start )
++            nd_start = nd->start;
++
++        if ( nd_end < nd->end )
++            nd_end = nd->end;
 +    }
 +
-+    memset(&nodes, 0, sizeof(nodes));
-+    for ( i = 0; i < numa_fake; i++ )
++    /* It is fine to add this area to the nodes data it will be used later*/
++    switch ( conflicting_memblks(node, start, end, nd_start, nd_end, &i) )
 +    {
-+        nodes[i].start = pfn_to_paddr(start_pfn) + i * sz;
-+        if ( i == numa_fake - 1 )
-+            sz = pfn_to_paddr(end_pfn) - nodes[i].start;
-+        nodes[i].end = nodes[i].start + sz;
-+        printk(KERN_INFO "Faking node %u at %"PRIx64"-%"PRIx64" (%"PRIu64"MB)\n",
-+               i, nodes[i].start, nodes[i].end,
-+               (nodes[i].end - nodes[i].start) >> 20);
-+        node_set_online(i);
++    case OVERLAP:
++        if ( memblk_nodeid[i] == node )
++        {
++            bool mismatch = !(hotplug) != !test_bit(i, memblk_hotplug);
++
++            printk("%sNUMA: %s %u [%"PRIpaddr", %"PRIpaddr"] overlaps with itself [%"PRIpaddr", %"PRIpaddr"]\n",
++                   mismatch ? KERN_ERR : KERN_WARNING, prefix,
++                   arch_nid, start, end - 1,
++                   node_memblk_range[i].start, node_memblk_range[i].end - 1);
++            if ( mismatch )
++                return -EINVAL;
++            break;
++        }
++
++        printk(KERN_ERR
++               "NUMA: %s %u [%"PRIpaddr", %"PRIpaddr"] overlaps with %s %u [%"PRIpaddr", %"PRIpaddr"]\n",
++               prefix, arch_nid, start, end - 1, prefix,
++               numa_node_to_arch_nid(memblk_nodeid[i]),
++               node_memblk_range[i].start, node_memblk_range[i].end - 1);
++        return -EINVAL;
++
++
++    case INTERLEAVE:
++        printk(KERN_ERR
++               "NUMA： %s %u: [%"PRIpaddr", %"PRIpaddr"] interleaves with %s %u memblk [%"PRIpaddr", %"PRIpaddr"]\n",
++               prefix, arch_nid, nd_start, nd_end - 1,
++               prefix, numa_node_to_arch_nid(memblk_nodeid[i]),
++               node_memblk_range[i].start, node_memblk_range[i].end - 1);
++        return -EINVAL;
++
++    case NO_CONFLICT:
++        break;
 +    }
-+    memnode_shift = compute_hash_shift(nodes, numa_fake, NULL);
-+    if ( memnode_shift < 0 )
++
++    if ( !hotplug )
 +    {
-+        memnode_shift = 0;
-+        printk(KERN_ERR "No NUMA hash function found. Emulation disabled.\n");
-+        return -1;
++        node_set(node, memory_nodes_parsed);
++        nd->start = nd_start;
++        nd->end = nd_end;
 +    }
-+    for_each_online_node ( i )
-+        setup_node_bootmem(i, nodes[i].start, nodes[i].end);
-+    numa_init_array();
++
++    if ( strcasecmp("Node", prefix) )
++        printk(KERN_INFO "NUMA: Node %u %s %u [%"PRIpaddr", %"PRIpaddr"]%s\n",
++               node, prefix, arch_nid, start, end - 1,
++               hotplug ? " (hotplug)" : "");
++    else
++        printk(KERN_INFO "NUMA: Node %u [%"PRIpaddr", %"PRIpaddr"]%s\n",
++               node, start, end - 1, hotplug ? " (hotplug)" : "");
++
++    node_memblk_range[num_node_memblks].start = start;
++    node_memblk_range[num_node_memblks].end = end;
++    memblk_nodeid[num_node_memblks] = node;
++    if ( hotplug )
++    {
++        __set_bit(num_node_memblks, memblk_hotplug);
++        if ( end > mem_hotplug )
++            mem_hotplug = end;
++    }
++    num_node_memblks++;
 +
 +    return 0;
 +}
-+#endif
 +
-+void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
++/*
++ * Sanity check to catch more bad SRATs (they are amazingly common).
++ * Make sure the PXMs cover all memory.
++ */
++static int __init nodes_cover_memory(void)
 +{
 +    unsigned int i;
-+    paddr_t start = pfn_to_paddr(start_pfn);
-+    paddr_t end = pfn_to_paddr(end_pfn);
 +
-+#ifdef CONFIG_NUMA_EMU
-+    if ( numa_fake && !numa_emulation(start_pfn, end_pfn) )
-+        return;
-+#endif
-+
-+#ifdef CONFIG_NUMA
-+    if ( !numa_off && !numa_scan_nodes(start, end) )
-+        return;
-+#endif
-+
-+    printk(KERN_INFO "%s\n",
-+           numa_off ? "NUMA turned off" : "No NUMA configuration found");
-+
-+    printk(KERN_INFO "Faking a node at %"PRIpaddr"-%"PRIpaddr"\n",
-+           start, end);
-+    /* setup dummy node covering all memory */
-+    memnode_shift = BITS_PER_LONG - 1;
-+    memnodemap = _memnodemap;
-+    /* Dummy node only uses 1 slot in reality */
-+    memnodemap[0] = 0;
-+    memnodemapsize = 1;
-+
-+    nodes_clear(node_online_map);
-+    node_set_online(0);
-+    for ( i = 0; i < nr_cpu_ids; i++ )
-+        numa_set_node(i, 0);
-+    cpumask_copy(&node_to_cpumask[0], cpumask_of(0));
-+    setup_node_bootmem(0, start, end);
-+}
-+
-+void numa_add_cpu(unsigned int cpu)
-+{
-+    cpumask_set_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
-+}
-+
-+void numa_set_node(unsigned int cpu, nodeid_t node)
-+{
-+    cpu_to_node[cpu] = node;
-+}
-+
-+/* [numa=off] */
-+static int __init cf_check numa_setup(const char *opt)
-+{
-+    if ( !strncmp(opt, "off", 3) )
-+        numa_off = true;
-+    else if ( !strncmp(opt, "on", 2) )
-+        numa_off = false;
-+#ifdef CONFIG_NUMA_EMU
-+    else if ( !strncmp(opt, "fake=", 5) )
++    for ( i = 0; ; i++ )
 +    {
-+        numa_off = false;
-+        numa_fake = simple_strtoul(opt + 5, NULL, 0);
-+        if ( numa_fake >= MAX_NUMNODES )
-+            numa_fake = MAX_NUMNODES;
-+    }
-+#endif
-+    else
-+        return arch_numa_setup(opt);
++        int found;
++        nodeid_t j;
++        paddr_t start, end;
 +
-+    return 0;
-+}
-+custom_param("numa", numa_setup);
++        /* Try to loop memory map from index 0 to end to get RAM ranges. */
++        found = arch_get_ram_range(i, &start, &end);
 +
-+static void cf_check dump_numa(unsigned char key)
-+{
-+    s_time_t now = NOW();
-+    unsigned int i, j, n;
-+    struct domain *d;
-+    struct page_info *page;
-+    unsigned int page_num_node[MAX_NUMNODES];
-+    const struct vnuma_info *vnuma;
-+
-+    printk("'%c' pressed -> dumping numa info (now = %"PRI_stime")\n", key,
-+           now);
-+
-+    for_each_online_node ( i )
-+    {
-+        paddr_t pa = pfn_to_paddr(node_start_pfn(i) + 1);
-+
-+        printk("NODE%u start->%lu size->%lu free->%lu\n",
-+               i, node_start_pfn(i), node_spanned_pages(i),
-+               avail_node_heap_pages(i));
-+        /* sanity check phys_to_nid() */
-+        if ( phys_to_nid(pa) != i )
-+            printk("phys_to_nid(%"PRIpaddr") -> %d should be %u\n",
-+                   pa, phys_to_nid(pa), i);
-+    }
-+
-+    j = cpumask_first(&cpu_online_map);
-+    n = 0;
-+    for_each_online_cpu ( i )
-+    {
-+        if ( i != j + n || cpu_to_node[j] != cpu_to_node[i] )
-+        {
-+            if ( n > 1 )
-+                printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
-+            else
-+                printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
-+            j = i;
-+            n = 1;
-+        }
-+        else
-+            ++n;
-+    }
-+    if ( n > 1 )
-+        printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
-+    else
-+        printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
-+
-+    rcu_read_lock(&domlist_read_lock);
-+
-+    printk("Memory location of each domain:\n");
-+    for_each_domain ( d )
-+    {
-+        process_pending_softirqs();
-+
-+        printk("Domain %u (total: %u):\n", d->domain_id, domain_tot_pages(d));
-+
-+        for_each_online_node ( i )
-+            page_num_node[i] = 0;
-+
-+        spin_lock(&d->page_alloc_lock);
-+        page_list_for_each(page, &d->page_list)
-+        {
-+            i = phys_to_nid(page_to_maddr(page));
-+            page_num_node[i]++;
-+        }
-+        spin_unlock(&d->page_alloc_lock);
-+
-+        for_each_online_node ( i )
-+            printk("    Node %u: %u\n", i, page_num_node[i]);
-+
-+        if ( !read_trylock(&d->vnuma_rwlock) )
++        /* Index relate entry is not RAM, skip it. */
++        if ( found == -EINVAL )
 +            continue;
 +
-+        if ( !d->vnuma )
-+        {
-+            read_unlock(&d->vnuma_rwlock);
-+            continue;
-+        }
++        /* Reach the end of arch's memory map */
++        if ( found == -ENOENT )
++            break;
 +
-+        vnuma = d->vnuma;
-+        printk("     %u vnodes, %u vcpus, guest physical layout:\n",
-+               vnuma->nr_vnodes, d->max_vcpus);
-+        for ( i = 0; i < vnuma->nr_vnodes; i++ )
-+        {
-+            unsigned int start_cpu = ~0U;
-+
-+            if ( vnuma->vnode_to_pnode[i] == NUMA_NO_NODE )
-+                printk("       %3u: pnode ???,", i);
-+            else
-+                printk("       %3u: pnode %3u,", i, vnuma->vnode_to_pnode[i]);
-+
-+            printk(" vcpus ");
-+
-+            for ( j = 0; j < d->max_vcpus; j++ )
-+            {
-+                if ( !(j & 0x3f) )
-+                    process_pending_softirqs();
-+
-+                if ( vnuma->vcpu_to_vnode[j] == i )
++        do {
++            found = 0;
++            for_each_node_mask( j, memory_nodes_parsed )
++                if ( start < nodes[j].end
++                    && end > nodes[j].start )
 +                {
-+                    if ( start_cpu == ~0U )
++                    if ( start >= nodes[j].start )
 +                    {
-+                        printk("%d", j);
-+                        start_cpu = j;
++                        start = nodes[j].end;
++                        found = 1;
++                    }
++
++                    if ( end <= nodes[j].end )
++                    {
++                        end = nodes[j].start;
++                        found = 1;
 +                    }
 +                }
-+                else if ( start_cpu != ~0U )
-+                {
-+                    if ( j - 1 != start_cpu )
-+                        printk("-%d ", j - 1);
-+                    else
-+                        printk(" ");
-+                    start_cpu = ~0U;
-+                }
-+            }
++        } while ( found && start < end );
 +
-+            if ( start_cpu != ~0U  && start_cpu != j - 1 )
-+                printk("-%d", j - 1);
-+
-+            printk("\n");
-+
-+            for ( j = 0; j < vnuma->nr_vmemranges; j++ )
-+            {
-+                if ( vnuma->vmemrange[j].nid == i )
-+                    printk("           %016"PRIx64" - %016"PRIx64"\n",
-+                           vnuma->vmemrange[j].start,
-+                           vnuma->vmemrange[j].end);
-+            }
++        if ( start < end )
++        {
++            printk(KERN_ERR "NUMA: No node for RAM range: "
++                   "[%"PRIpaddr", %"PRIpaddr"]\n", start, end - 1);
++            return 0;
 +        }
++    }
++    return 1;
++}
 +
-+        read_unlock(&d->vnuma_rwlock);
++/* Use the information discovered above to actually set up the nodes. */
++static int __init numa_scan_nodes(paddr_t start, paddr_t end)
++{
++    unsigned int i;
++    nodemask_t all_nodes_parsed;
++
++    /* First clean up the node list */
++    for ( i = 0; i < MAX_NUMNODES; i++ )
++        cutoff_node(i, start, end);
++
++    /* When numa is on with good firmware, we can do numa scan nodes. */
++    if ( arch_numa_disabled(true) )
++        return -1;
++
++    if ( !nodes_cover_memory() )
++    {
++        numa_fw_bad();
++        return -1;
 +    }
 +
-+    rcu_read_unlock(&domlist_read_lock);
-+}
++    memnode_shift = compute_hash_shift(node_memblk_range, num_node_memblks,
++                                       memblk_nodeid);
 +
-+static int __init cf_check register_numa_trigger(void)
-+{
-+    register_keyhandler('u', dump_numa, "dump NUMA info", 1);
++    if ( memnode_shift < 0 )
++    {
++        printk(KERN_ERR
++               "NUMA: No NUMA node hash function found. Contact maintainer\n");
++        numa_fw_bad();
++        return -1;
++    }
++
++    nodes_or(all_nodes_parsed, memory_nodes_parsed, processor_nodes_parsed);
++
++    /* Finally register nodes */
++    for_each_node_mask( i, all_nodes_parsed )
++    {
++        paddr_t size = nodes[i].end - nodes[i].start;
++
++        if ( size == 0 )
++            printk(KERN_INFO "NUMA: node %u has no memory\n", i);
++
++        setup_node_bootmem(i, nodes[i].start, nodes[i].end);
++    }
++
++    for ( i = 0; i < nr_cpu_ids; i++ )
++    {
++        if ( cpu_to_node[i] == NUMA_NO_NODE )
++            continue;
++        if ( !nodemask_test(cpu_to_node[i], &processor_nodes_parsed) )
++            numa_set_node(i, NUMA_NO_NODE);
++    }
++    numa_init_array();
 +    return 0;
 +}
-+__initcall(register_numa_trigger);
++
+ /*
+  * Given a shift value, try to populate memnodemap[]
+  * Returns :
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 00fa24e330..641d864774 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -159,6 +159,8 @@
+ #define PGT_TYPE_INFO_INITIALIZER 0
+ #endif
+ 
++paddr_t __read_mostly mem_hotplug;
++
+ /*
+  * Comma-separated list of hexadecimal page numbers containing bad bytes.
+  * e.g. 'badpage=0x3f45,0x8a321'.
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 35b065146f..7b5ba5c189 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -58,6 +58,8 @@
+ #include <xen/perfc.h>
+ #include <public/memory.h>
+ 
++extern paddr_t mem_hotplug;
++
+ struct page_info;
+ 
+ void put_page(struct page_info *);
 diff --git a/xen/include/xen/numa.h b/xen/include/xen/numa.h
-index 7aef1a88dc..bae534bb04 100644
+index d64006483a..b5c9de24ed 100644
 --- a/xen/include/xen/numa.h
 +++ b/xen/include/xen/numa.h
-@@ -18,4 +18,70 @@
-   (((d)->vcpu != NULL && (d)->vcpu[0] != NULL) \
-    ? vcpu_to_node((d)->vcpu[0]) : NUMA_NO_NODE)
+@@ -11,6 +11,7 @@
+ #define NUMA_NO_DISTANCE 0xFF
  
-+/* The following content can be used when NUMA feature is enabled */
-+#ifdef CONFIG_NUMA
-+
-+extern nodeid_t      cpu_to_node[NR_CPUS];
-+extern cpumask_t     node_to_cpumask[];
-+
-+#define cpu_to_node(cpu)        (cpu_to_node[cpu])
-+#define parent_node(node)       (node)
-+#define node_to_first_cpu(node) (__ffs(node_to_cpumask[node]))
-+#define node_to_cpumask(node)   (node_to_cpumask[node])
-+
-+struct node {
-+    paddr_t start, end;
-+};
-+
-+extern unsigned int compute_hash_shift(const struct node *nodes,
-+                                       nodeid_t numnodes, nodeid_t *nodeids);
-+
-+#define VIRTUAL_BUG_ON(x)
-+
-+extern bool numa_off;
-+extern void numa_add_cpu(unsigned int cpu);
-+extern void numa_init_array(void);
-+extern void numa_set_node(unsigned int cpu, nodeid_t node);
-+extern void numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn);
-+extern int  numa_scan_nodes(paddr_t start, paddr_t end);
-+
-+extern int arch_numa_setup(const char *opt);
-+extern bool arch_numa_disabled(bool init_as_disable);
-+extern void setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end);
-+
-+static inline void clear_node_cpumask(unsigned int cpu)
-+{
-+    cpumask_clear_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
-+}
-+
-+/* Simple perfect hash to map pdx to node numbers */
-+extern unsigned int memnode_shift;
-+extern unsigned long memnodemapsize;
-+extern uint8_t *memnodemap;
-+
-+struct node_data {
-+    unsigned long node_start_pfn;
-+    unsigned long node_spanned_pages;
-+};
-+
-+extern struct node_data node_data[];
-+
-+static inline __attribute_pure__ nodeid_t phys_to_nid(paddr_t addr)
-+{
-+    nodeid_t nid;
-+    VIRTUAL_BUG_ON((paddr_to_pdx(addr) >> memnode_shift) >= memnodemapsize);
-+    nid = memnodemap[paddr_to_pdx(addr) >> memnode_shift];
-+    VIRTUAL_BUG_ON(nid >= MAX_NUMNODES || !node_data[nid]);
-+    return nid;
-+}
-+
-+#define NODE_DATA(nid)          (&(node_data[nid]))
-+
-+#define node_start_pfn(nid)     (NODE_DATA(nid)->node_start_pfn)
-+#define node_spanned_pages(nid) (NODE_DATA(nid)->node_spanned_pages)
-+#define node_end_pfn(nid)       (NODE_DATA(nid)->node_start_pfn + \
-+                                NODE_DATA(nid)->node_spanned_pages)
-+
-+#endif
-+
- #endif /* _XEN_NUMA_H */
+ #define MAX_NUMNODES    (1 << NODES_SHIFT)
++#define NR_NODE_MEMBLKS (MAX_NUMNODES * 2)
+ 
+ #define vcpu_to_node(v) (cpu_to_node((v)->processor))
+ 
+@@ -41,7 +42,7 @@ extern void numa_add_cpu(unsigned int cpu);
+ extern void numa_init_array(void);
+ extern void numa_set_node(unsigned int cpu, nodeid_t node);
+ extern void numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn);
+-extern int  numa_scan_nodes(paddr_t start, paddr_t end);
++extern void numa_fw_bad(void);
+ 
+ extern int arch_numa_setup(const char *opt);
+ extern bool arch_numa_disabled(bool init_as_disable);
+@@ -82,6 +83,14 @@ static inline __attribute_pure__ nodeid_t phys_to_nid(paddr_t addr)
+ 
+ extern int arch_get_ram_range(unsigned int idx,
+                               paddr_t *start, paddr_t *end);
++extern unsigned int valid_numa_range(paddr_t start, paddr_t end,
++                                     nodeid_t node);
++extern bool numa_memblks_available(void);
++extern int numa_update_node_memblks(nodeid_t node, unsigned int arch_nid,
++                                    paddr_t start, paddr_t size,
++                                    const char *prefix,
++                                    bool hotplug);
++extern void numa_set_processor_nodes_parsed(nodeid_t node);
+ 
+ #endif
+ 
 -- 
 2.25.1
 
