@@ -4,39 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3E2C00140
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 06:40:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.392222.630423 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBFA6C00140
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 07:32:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.392230.630446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQk3z-0003ke-26; Wed, 24 Aug 2022 06:40:31 +0000
+	id 1oQkrr-0000mA-5S; Wed, 24 Aug 2022 07:32:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 392222.630423; Wed, 24 Aug 2022 06:40:31 +0000
+Received: by outflank-mailman (output) from mailman id 392230.630446; Wed, 24 Aug 2022 07:32:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQk3y-0003kX-Vd; Wed, 24 Aug 2022 06:40:30 +0000
-Received: by outflank-mailman (input) for mailman id 392222;
- Wed, 24 Aug 2022 06:40:29 +0000
+	id 1oQkrr-0000m1-1n; Wed, 24 Aug 2022 07:32:03 +0000
+Received: by outflank-mailman (input) for mailman id 392230;
+ Wed, 24 Aug 2022 07:32:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=M3pU=Y4=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1oQk3x-0003kR-Np
- for xen-devel@lists.xenproject.org; Wed, 24 Aug 2022 06:40:29 +0000
-Received: from EUR02-VE1-obe.outbound.protection.outlook.com
- (mail-eopbgr20078.outbound.protection.outlook.com [40.107.2.78])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a3d06287-2377-11ed-9250-1f966e50362f;
- Wed, 24 Aug 2022 08:40:28 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by DBBPR04MB7787.eurprd04.prod.outlook.com (2603:10a6:10:1e3::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.15; Wed, 24 Aug
- 2022 06:40:24 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::2d5d:bae0:430f:70ad]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::2d5d:bae0:430f:70ad%4]) with mapi id 15.20.5566.015; Wed, 24 Aug 2022
- 06:40:24 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=pSDv=Y4=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1oQkrp-0000ky-RQ
+ for xen-devel@lists.xenproject.org; Wed, 24 Aug 2022 07:32:02 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id d62fdb6d-237e-11ed-9250-1f966e50362f;
+ Wed, 24 Aug 2022 09:31:58 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E9C4A1063;
+ Wed, 24 Aug 2022 00:32:01 -0700 (PDT)
+Received: from entos-skylake.shanghai.arm.com (entos-skylake.shanghai.arm.com
+ [10.169.212.207])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5C0313F718;
+ Wed, 24 Aug 2022 00:31:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,128 +45,280 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3d06287-2377-11ed-9250-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BePX4AbHxl+b27xqK0DAFoFdzYrG5rpizv0IYdF6A3lmhlf/Y3agyZa+z3saiTM0b24ovCFXwpY4kNXt6WmIjH7uiKkZWC3cT9RrOqKQ+OKpXZqs9DTFRCqHbcXe8PA77N7pgfZkC3g7GW2IbTsLCTCafX5arq37xHVgsLPLkXZI7ZeYlqCPBU47e3dVVXkXkEILzN9rBJCCwFUvj00ulHCrT89zbj42mklscoJG5wcryMR3MEzvwSQDT/YfVM5DhTit7FKjnALOKBg246nA8/Ik3SvvfrNmZMliOCaZrYeia5GGHRz9Fx1tBm3ZsoN8o2azvswA9oifcimtxSSpFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L2tASAJcbyeoJJNHMXYy+/pVjGHuvQF0cvFlbJWfWIk=;
- b=UoDYovgQHV2k1iKP0+PEGW3gvY+DdBmXGZQnhITzTAwdIfoJJaLZ7rxGon7k91Fybg4afD0jxFja2KS5b9L4ADRwwh9UkFyypz/cEYfjpguohExTsncfkMPLoADqFRmZG5V4qdbyiuCy5pB3LaNuQAEHKNTepKIbrS3tVpCgRwwy0n7KuluCGZPT4taShj0ia4vudGtcQ7+eEj08pYRUDYt83oNAavR26haUaFUO8VgNxCa1EEcnCQ5YpMZXQN/QcrBWN7U5wYABb9dFCAzRaAhaiqRtixJPIxmBhbLUYNSykP7DN84YbbADTgkdsm7Sck4Gnxpfr2QAOs2aFaMXJg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L2tASAJcbyeoJJNHMXYy+/pVjGHuvQF0cvFlbJWfWIk=;
- b=oXSpHJsnxWdyft7VAdKVNhxUpdOofbtxkzqQdP321FRZ/AI1XCrlSdQkgTYHXukO1Ecp6RzJ5uOoxNg6M0el012qXpXAitZ1OoB9InOeZ6pjbLF1pu6zL852F7g2mSmxtCilmi/Ee2q9QTjYWKjxk8OtTS19Op/3ZGySQhPKyS3m1lOlBDwpAHtXgmxOd7TD3+2WfoC0dMKekLdgEVtRStYptIMtNtwFoy0HkC805B0SrLahvyf7gbkMgYg/42isvbT5w6+IotQv8DYYhDPlEVcJCi/WSv5f6h47wJdi6muEQNzhwEt1zlgxrEZluPnuebrmJjKV6JvibV52YmFfIA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <42123645-19cf-ffde-8c7e-6e1445182b85@suse.com>
-Date: Wed, 24 Aug 2022 08:40:22 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Subject: =?UTF-8?Q?Re=3a_=e2=80=9cBackend_has_not_unmapped_grant=e2=80=9d_er?=
- =?UTF-8?Q?rors?=
-Content-Language: en-US
-To: Juergen Gross <jgross@suse.com>
-Cc: Xen developer discussion <xen-devel@lists.xenproject.org>,
- SeongJae Park <sjpark@amazon.com>, Maximilian Heyne <mheyne@amazon.de>,
- =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
-References: <YwSEXonOg1CMzeQv@itl-email>
- <fe4aa229-2d3b-2bc7-e906-bb61a5d45f6d@suse.com> <YwVuwXOGoZX3pM7n@mail-itl>
- <bd818aba-4857-bc07-dc8a-e9b2f8c5f7cd@suse.com>
- <82fe9c20-2b6a-fb53-8ab2-84a955efe14e@suse.com>
- <81811b5a-7006-bae3-422b-81e38bcdaef3@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <81811b5a-7006-bae3-422b-81e38bcdaef3@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0087.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1f::9) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a086a4eb-95af-4c87-5e5b-08da859b85d7
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7787:EE_
-X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	EqAyUL9q+jCH0eppNeTAcduzAzVxgzsOGfs6nRTxsHiQAM7ZEawexWIoD81bzA+LVaNeLIjLdG0eOZR4taphWDTFEAZa/Q5ImUmDurEmSUbP0GuKSL9VEOSvsusCCEMUnagZeSDLcJcdosIteDhpLS7uWkTGW1MGStQEmjTWZtVtkDLUNkm+LisFZOzIakuo/fjy9DNRDPV6RgmDhqWq3dIALQFXjUrH/s7PbAt/UNvZk3+sdtYN1RO1z8e1SQVBaQd4itiY/dvcY5Ujp07lkJM+CLVY45AXAi7XQ44aFyF/evNO6SAb57oWvnrjliuutiaJtqV5xd/Zt+luupSRfVKPkrFsXDM02N45cMCOWPQjrI2Ao/sHW3tqw9meLeNBmJW8l0J8jc6N2taDi4B57Fkgz5EdItdql+gx6YLa+iz2Hfza1HJLtPGNlHOo5D4ZaLIx3N+/SG+aLeLLTx0fh8ea5UT9cPdtbMguSfim/uZmCFpRKSckAcvRq0bPSggeavi0+ktU0kKEjPpJ8VpVFe4SX0Y0CIFMDrbUh9OIzdfkcpYZhpmjaqqNHevh+1A3zatPHGzsbn7q/RZVs2f52/GIJeCubKXEiticx/nb69qkI0zUUqpNIrcfRq6X5kZByvZBTkNcXi1bvaHd+4SJWimN+M92EYBmzA3bz4UouktfULm/FNjLiFTTx0qxPoz3FsPlE7KIxiv+B082CkImUxGlE5uQuOo8EjUo8dfF+sFHjVn9YNmlt7RZedJ2U8n39FldhLS2Pj/qpiedFE2fCBCEcAE9Oiu7drYSRIVzaRo=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(136003)(366004)(346002)(396003)(376002)(39860400002)(4326008)(66556008)(66946007)(478600001)(6486002)(26005)(6512007)(66476007)(6506007)(2906002)(31696002)(53546011)(86362001)(5660300002)(6862004)(8936002)(41300700001)(83380400001)(316002)(37006003)(2616005)(4744005)(6636002)(54906003)(31686004)(38100700002)(36756003)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NGFvZEcvYlpGc29ydUc2RUcrZkxqUGNPUFZndjBpV0dyUDM2aE1IVE5wNVJ1?=
- =?utf-8?B?MjNBdUlOQUNobVFBeHZHL293MmJrT2puSzIyN095QjVHWHljZnkzQ0ZQbWRD?=
- =?utf-8?B?Y2VLek1jQzdwTkxIQzZCMWlFamZ4ckIxVEQ0NEt6NnZRalIzdkdxa2V1bHMw?=
- =?utf-8?B?SUx0N1pPZm5QNEs0d0o3Qlp4QWJDbDZabXpJa0MzRTJUa1Y5azlRQ05nR21r?=
- =?utf-8?B?RGNSQ0tkWExSTjA5SStQU2lidy9KZitUNytKbU1RL2h5NXJ6SVpqbUJyTTdT?=
- =?utf-8?B?TkZkZ0duQXlYUU80ZFQ4VEszOFFpSW5IM2pOUXUzaWMrc1ducExmM2ZSQXhV?=
- =?utf-8?B?NW1abUdkNFFaTERCeGpSdGdDdXQwNldtdkgyMVN6RUpPOGIxVm03UitqeWJn?=
- =?utf-8?B?aStBMEtEdGZ3aGlKNERjSVg4QXd2UktQMDQydlpaVVRabGRRWktmWVkvWFFS?=
- =?utf-8?B?OXNKM2xtcEJZUElGZmlFdllmMUs5TlJjdlBDc1FVdEllUGJqY0FGWFJJM2sr?=
- =?utf-8?B?K3RKOU1neTgyemk4STZ1MzZ3QU5PWjc4MFB1eStaN1htMUdvQTFnVTlIUG9j?=
- =?utf-8?B?WmZVU3YrSVBxUUtjVmdNTno0bHp1UXlXNkxsMHZJZnhvcDNHMVR2cktMY1Fj?=
- =?utf-8?B?WU5zWm9XRFNWQWN0M2cvd0d5Z28vN08yaTRVZUx2SVNBeTl4THd4elVZNEVZ?=
- =?utf-8?B?eXFtRktML3l0dkNHR09NZVFzSi9ISXpnaHRsdVFQMWlPbnBuQ3hjNW1CNXJx?=
- =?utf-8?B?dUNEUmkvcmlwSnFxNDRMM25sVGZ5WjBkNUVYNUExLy9vckpoVVd0dEpHVXZu?=
- =?utf-8?B?ODNvUVI0WEo5b1luVm9mTWdCdjFCaFVtNE8xQkt6NU5tOG05U21ib2k5czZu?=
- =?utf-8?B?RDhDQjE0TGFLWE1SS1dYK3pydlJjTFNXMU9SRk14cTdENFZOMEJia21BWmlD?=
- =?utf-8?B?MmU0dDQ1K3A5RERuQ1VrNFpIVFJjbUJkSlA3YmVTZGxTRUdSdDIyM1VzVjZa?=
- =?utf-8?B?WUl5QmdtbnhoWGUzU3hTTWNZYm16dGV0TnF5OUc0R0pFTXErL3ltUVJYVng1?=
- =?utf-8?B?R2RrRkQyMlNlVFpaVmpDaUFTVkp1MHpGVnZ2c0JQNUFsampubjZhR1RWeTQz?=
- =?utf-8?B?QTV6M250R3lJK2pJZU5lVS9BMU92TWRwUHNCWmpRZEtaVlFKb3lMNXY1TGY2?=
- =?utf-8?B?UTNjUjZ2YUU3NExRTm5Wc1VGOGwyYUtpQ0I2VVZaallZamE3MVRmQjhSTUlR?=
- =?utf-8?B?ZWVSQkltQkN5cCt5WmNBRDV5U3ZTNmNId1AvSC9idCtCNmg4c2hlM09XUytr?=
- =?utf-8?B?YmNCb1R4UmcwUUg1YTM4aWpmM2Jqdlc2UlMwSzA4MjZlcDZqcnZGR0hHSjJq?=
- =?utf-8?B?ZTR3RmhqYllSWThqRWZsYlJvWDk2S3FGUkJiRkppZ1BmNlBGcHBrWEhzdVl6?=
- =?utf-8?B?SkhwaGliRnhNZGsxVmJNOG9DSGxIelpYbjE2RjZvYk0xL3B4cnVkcEZRM2dL?=
- =?utf-8?B?eDhJNnAzak5RU2x4c2tVWjczVTRqeExPbjhZSmZUUEJFdFVwbTBTT0pkYzZ1?=
- =?utf-8?B?MGRrNkFFYXFXb0lCbjQ2dlU5ek5udGJDbUc3Q00xNDBBUVZaK3B2aXhZN05y?=
- =?utf-8?B?bFRBbENBQUNKNytBWlJqRmltRXg4YlNGQmIxZkNnYXk2Z0U2czhIOExFczZl?=
- =?utf-8?B?UjkwWVhrZnp1VkViREFWMXNWcXNkbVZUSWc2SExjV3EzNHlJUmZrbnRTTTlN?=
- =?utf-8?B?UGdJeGtWVWtra0tjc1kyWkFZYWxDM2tVV0kzaVhOTjQ0M2Nmclp3U09HWTQv?=
- =?utf-8?B?N09HZFQxakVRVWExZnA2NU9Cb2NFeTJocDY3RFczZGY4VEt6MUhrSzBTODBi?=
- =?utf-8?B?ZjE3a2JBd0YxVHBGVmNkc2ZvNUM0RlI5VE5BUEhxL3lnVytVUkJPYW5qRjZP?=
- =?utf-8?B?VUhhQ3hyQU5vejVGeGVLT1FUY2VzdXJGRVpuNHh6Z3FBTVdBSHhXejIyU3Yz?=
- =?utf-8?B?R3oxczJEeS9vRjFzUU5mc2VqOER1YkovQkJIaVRzV0p2ajJlUXIxZFN5aWFX?=
- =?utf-8?B?bTllVDBFdlZ3cXErckd3QmUvSXVwYjRwQ1ZVUXRVNkx4UUEwSVI4NE5xVnNo?=
- =?utf-8?Q?YXmG17toW+WAFk1u7Dh62Tiga?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a086a4eb-95af-4c87-5e5b-08da859b85d7
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2022 06:40:23.9505
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: v8pOeqqOCNH9sR206pts4tfVJSO4f08wV4aZ2ovaVxgeMl31M47XKfrh/eE2YnRKwnn1dHasWvs0QV+meSYdAg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7787
+X-Inumbo-ID: d62fdb6d-237e-11ed-9250-1f966e50362f
+From: Henry Wang <Henry.Wang@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Henry Wang <Henry.Wang@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Wei Chen <Wei.Chen@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH 1/2] docs, xen/arm: Introduce reserved heap memory
+Date: Wed, 24 Aug 2022 07:31:26 +0000
+Message-Id: <20220824073127.16762-2-Henry.Wang@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220824073127.16762-1-Henry.Wang@arm.com>
+References: <20220824073127.16762-1-Henry.Wang@arm.com>
 
-On 24.08.2022 08:36, Juergen Gross wrote:
-> On 24.08.22 08:30, Jan Beulich wrote:
->> On 24.08.2022 08:02, Juergen Gross wrote:
->>> The blkif.h comments should be updated to make it clear that the values in
->>> Xenstore don't reflect the state of the connection, but the availability of
->>> the feature in the related driver.
->>
->> Isn't that implied for all the feature-* leaves? I certainly don't mind it
->> being spelled out, but I don't think there's any real ambiguity here.
-> 
-> I think it should spelled out explicitly, maybe in the general paragraph
-> about feature negotiation.
-> 
-> To me especially the phrasing on the frontend side was reading as if a "1"
-> would indicate the feature to be actively used:
-> 
-> "A value of "1" indicates that the frontend will reuse the same grants ..."
+This commit introduces the reserved heap memory, which is parts of RAM
+reserved in the beginning of the boot time for heap.
 
-Hmm, yes, that's certainly wording worth of improving (regardless of any
-addition to the general paragraph).
+A new boolean field `xen_heap` in `struct membank` is added to store the
+configuration telling if the memory bank is reserved as heap through
+`xen,static-mem` property in device tree `chosen` node.
 
-Jan
+Also, this commit introduces the logic to parse the reserved heap
+configuation in device tree by reusing the device tree entry definition
+of the static memory allocation feature:
+
+- Add a boolean parameter `xen_heap` to `device_tree_get_meminfo` to
+reflect whether the memory bank is reserved as heap.
+
+- Use `device_tree_get_meminfo` to parse the reserved heap configuation
+in `chosen` node of the device tree.
+
+- In order to reuse the function `device_tree_get_meminfo`, the
+return type of `process_chosen_node` is changed from void to int.
+
+A documentation section is added, describing the definition of reserved
+heap memory and the method of enabling the reserved heap memory through
+device tree at boot time.
+
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+---
+The name of the device tree property was chosen because we want to
+reuse as much as the device tree parsing helpers from the static
+memory allocation feature, but we would like to hear the upstream
+reviewers' opinion about if using "xen,static-heap" is better.
+---
+Changes from RFC to v1:
+- Rename the terminology to reserved heap.
+---
+ docs/misc/arm/device-tree/booting.txt | 46 +++++++++++++++++++++++++
+ xen/arch/arm/bootfdt.c                | 49 +++++++++++++++++++++------
+ xen/arch/arm/domain_build.c           |  5 +--
+ xen/arch/arm/include/asm/setup.h      |  1 +
+ 4 files changed, 89 insertions(+), 12 deletions(-)
+
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 98253414b8..e064f64d9a 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -378,3 +378,49 @@ device-tree:
+ 
+ This will reserve a 512MB region starting at the host physical address
+ 0x30000000 to be exclusively used by DomU1.
++
++
++Reserved Heap Memory
++====================
++
++The reserved heap memory (also known as the statically-configured heap) refers
++to parts of RAM reserved in the beginning for heap. The memory is reserved by
++configuration in the device tree using physical address ranges.
++
++The reserved heap memory declared in the device tree defines the memory areas
++that will be reserved to be used exclusively as heap.
++
++- For Arm32, since there can be seperated heaps, the reserved heap will be used
++for both domheap and xenheap.
++- For Arm64, since domheap and xenheap are the same, the defined reserved heap
++areas shall always go to the heap allocator.
++
++The reserved heap memory is an optional feature and can be enabled by adding a
++device tree property in the `chosen` node. Currently, this feature reuses the
++static memory allocation device tree configuration.
++
++The dtb property should look like as follows:
++
++- property name
++
++    "xen,static-mem" (Should be used in the `chosen` node)
++
++- cells
++
++    Specify the start address and the length of the reserved heap memory.
++    The number of cells for the address and the size should be defined
++    using the properties `#xen,static-mem-address-cells` and
++    `#xen,static-mem-size-cells` respectively.
++
++Below is an example on how to specify the reserved heap in device tree:
++
++    / {
++        chosen {
++            #xen,static-mem-address-cells = <0x2>;
++            #xen,static-mem-size-cells = <0x2>;
++            xen,static-mem = <0x0 0x30000000 0x0 0x40000000>;
++        };
++    };
++
++RAM at 0x30000000 of 1G size will be reserved as heap.
++
+diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+index ec81a45de9..33704ca487 100644
+--- a/xen/arch/arm/bootfdt.c
++++ b/xen/arch/arm/bootfdt.c
+@@ -64,7 +64,8 @@ void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
+ static int __init device_tree_get_meminfo(const void *fdt, int node,
+                                           const char *prop_name,
+                                           u32 address_cells, u32 size_cells,
+-                                          void *data, bool xen_domain)
++                                          void *data, bool xen_domain,
++                                          bool xen_heap)
+ {
+     const struct fdt_property *prop;
+     unsigned int i, banks;
+@@ -96,6 +97,7 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
+         mem->bank[mem->nr_banks].start = start;
+         mem->bank[mem->nr_banks].size = size;
+         mem->bank[mem->nr_banks].xen_domain = xen_domain;
++        mem->bank[mem->nr_banks].xen_heap = xen_heap;
+         mem->nr_banks++;
+     }
+ 
+@@ -185,7 +187,7 @@ static int __init process_memory_node(const void *fdt, int node,
+                                       void *data)
+ {
+     return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
+-                                   data, false);
++                                   data, false, false);
+ }
+ 
+ static int __init process_reserved_memory_node(const void *fdt, int node,
+@@ -293,7 +295,7 @@ static void __init process_multiboot_node(const void *fdt, int node,
+                      kind, start, domU);
+ }
+ 
+-static void __init process_chosen_node(const void *fdt, int node,
++static int __init process_chosen_node(const void *fdt, int node,
+                                        const char *name,
+                                        u32 address_cells, u32 size_cells)
+ {
+@@ -301,16 +303,40 @@ static void __init process_chosen_node(const void *fdt, int node,
+     paddr_t start, end;
+     int len;
+ 
++    if ( fdt_get_property(fdt, node, "xen,static-mem", NULL) )
++    {
++        u32 address_cells = device_tree_get_u32(fdt, node,
++                                                "#xen,static-mem-address-cells",
++                                                0);
++        u32 size_cells = device_tree_get_u32(fdt, node,
++                                             "#xen,static-mem-size-cells", 0);
++        int rc;
++
++        printk("Checking for reserved heap in /chosen\n");
++        if ( address_cells < 1 || size_cells < 1 )
++        {
++            printk("fdt: node `%s': invalid #xen,static-mem-address-cells or #xen,static-mem-size-cells\n",
++                   name);
++            return -EINVAL;
++        }
++
++        rc = device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
++                                     size_cells, &bootinfo.reserved_mem, false,
++                                     true);
++        if ( rc )
++            return rc;
++    }
++
+     printk("Checking for initrd in /chosen\n");
+ 
+     prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
+     if ( !prop )
+         /* No initrd present. */
+-        return;
++        return 0;
+     if ( len != sizeof(u32) && len != sizeof(u64) )
+     {
+         printk("linux,initrd-start property has invalid length %d\n", len);
+-        return;
++        return -EINVAL;
+     }
+     start = dt_read_number((void *)&prop->data, dt_size_to_cells(len));
+ 
+@@ -318,12 +344,12 @@ static void __init process_chosen_node(const void *fdt, int node,
+     if ( !prop )
+     {
+         printk("linux,initrd-end not present but -start was\n");
+-        return;
++        return -EINVAL;
+     }
+     if ( len != sizeof(u32) && len != sizeof(u64) )
+     {
+         printk("linux,initrd-end property has invalid length %d\n", len);
+-        return;
++        return -EINVAL;
+     }
+     end = dt_read_number((void *)&prop->data, dt_size_to_cells(len));
+ 
+@@ -331,12 +357,14 @@ static void __init process_chosen_node(const void *fdt, int node,
+     {
+         printk("linux,initrd limits invalid: %"PRIpaddr" >= %"PRIpaddr"\n",
+                   start, end);
+-        return;
++        return -EINVAL;
+     }
+ 
+     printk("Initrd %"PRIpaddr"-%"PRIpaddr"\n", start, end);
+ 
+     add_boot_module(BOOTMOD_RAMDISK, start, end-start, false);
++
++    return 0;
+ }
+ 
+ static int __init process_domain_node(const void *fdt, int node,
+@@ -358,7 +386,8 @@ static int __init process_domain_node(const void *fdt, int node,
+                                      "#xen,static-mem-size-cells", 0);
+ 
+     return device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
+-                                   size_cells, &bootinfo.reserved_mem, true);
++                                   size_cells, &bootinfo.reserved_mem, true,
++                                   false);
+ }
+ 
+ static int __init early_scan_node(const void *fdt,
+@@ -383,7 +412,7 @@ static int __init early_scan_node(const void *fdt,
+               device_tree_node_compatible(fdt, node, "multiboot,module" )))
+         process_multiboot_node(fdt, node, name, address_cells, size_cells);
+     else if ( depth == 1 && device_tree_node_matches(fdt, node, "chosen") )
+-        process_chosen_node(fdt, node, name, address_cells, size_cells);
++        rc = process_chosen_node(fdt, node, name, address_cells, size_cells);
+     else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
+         rc = process_domain_node(fdt, node, name, address_cells, size_cells);
+ 
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 3fd1186b53..6f97f5f06a 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1038,8 +1038,9 @@ static int __init make_memory_node(const struct domain *d,
+     if ( mem->nr_banks == 0 )
+         return -ENOENT;
+ 
+-    /* find first memory range not bound to a Xen domain */
+-    for ( i = 0; i < mem->nr_banks && mem->bank[i].xen_domain; i++ )
++    /* find first memory range not bound to neither a Xen domain nor heap */
++    for ( i = 0; i < mem->nr_banks &&
++                 (mem->bank[i].xen_domain || mem->bank[i].xen_heap); i++ )
+         ;
+     if ( i == mem->nr_banks )
+         return 0;
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 2bb01ecfa8..e80f3d6201 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -27,6 +27,7 @@ struct membank {
+     paddr_t start;
+     paddr_t size;
+     bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
++    bool xen_heap;   /* whether the memory bank is reserved as heap. */
+ };
+ 
+ struct meminfo {
+-- 
+2.17.1
+
 
