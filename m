@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AE0C00140
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 11:47:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.392476.630845 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE8EFC00140
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 11:48:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.392482.630857 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQoqJ-0003C5-27; Wed, 24 Aug 2022 11:46:43 +0000
+	id 1oQorW-0003jA-DP; Wed, 24 Aug 2022 11:47:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 392476.630845; Wed, 24 Aug 2022 11:46:43 +0000
+Received: by outflank-mailman (output) from mailman id 392482.630857; Wed, 24 Aug 2022 11:47:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQoqI-0003By-Vn; Wed, 24 Aug 2022 11:46:42 +0000
-Received: by outflank-mailman (input) for mailman id 392476;
- Wed, 24 Aug 2022 11:46:42 +0000
+	id 1oQorW-0003j3-9z; Wed, 24 Aug 2022 11:47:58 +0000
+Received: by outflank-mailman (input) for mailman id 392482;
+ Wed, 24 Aug 2022 11:47:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+X8Z=Y4=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1oQoqI-0003Bs-0u
- for xen-devel@lists.xen.org; Wed, 24 Aug 2022 11:46:42 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1oQorU-0003it-HK
+ for xen-devel@lists.xen.org; Wed, 24 Aug 2022 11:47:56 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 69dcbb30-23a2-11ed-bd2e-47488cf2e6aa;
- Wed, 24 Aug 2022 13:46:40 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- k18-20020a05600c0b5200b003a5dab49d0bso690024wmr.3
- for <xen-devel@lists.xen.org>; Wed, 24 Aug 2022 04:46:38 -0700 (PDT)
+ id 979a3878-23a2-11ed-bd2e-47488cf2e6aa;
+ Wed, 24 Aug 2022 13:47:55 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ k6-20020a05600c1c8600b003a54ecc62f6so691117wms.5
+ for <xen-devel@lists.xen.org>; Wed, 24 Aug 2022 04:47:55 -0700 (PDT)
 Received: from zen.linaroharston ([185.81.254.11])
  by smtp.gmail.com with ESMTPSA id
- n3-20020a05600c3b8300b003a319b67f64sm8255516wms.0.2022.08.24.04.46.36
+ j27-20020a05600c1c1b00b003a5ce167a68sm1904338wms.7.2022.08.24.04.47.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Aug 2022 04:46:36 -0700 (PDT)
+ Wed, 24 Aug 2022 04:47:54 -0700 (PDT)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id A8F601FFB7;
- Wed, 24 Aug 2022 12:46:35 +0100 (BST)
+ by zen.linaroharston (Postfix) with ESMTP id 870E31FFB7;
+ Wed, 24 Aug 2022 12:47:53 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,63 +50,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69dcbb30-23a2-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: 979a3878-23a2-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
          :subject:cc:to:from:user-agent:references:from:to:cc;
-        bh=XxhKIjR8GaWVfm2736zYQHBVI04PuDH60V7gYHYS8cg=;
-        b=ebZa0Scl5OyKn9ed+TB/PKDU3u7VG6fw1G31e/0LxGJG/Ws11BDGGt/q9DCOeSWbDR
-         JBgKK5ejYli3GEWq9kSDUagi8Kmdyr+p22FjL/WReDws8n5U186cx5T225S/hrEcTIcP
-         7UFTpI+pH6TbYyuXySxwW21cL4QFgZEa+NMA1Gn/zWOksnzQKaoeTuz3nmoUbZjjJckS
-         x8KR/+KstXaZOU53bXkNqfW8tXvLwYJ7vl9m1l7uPvV+FXUVs4YPBQCrkTSMWmGkgpJV
-         8czWEjtUpmiBFql9r4BFDKPnO9XF0LbALavhQ/xCKw6j+f4ggF2XFkBzruUOD3zL5MB4
-         Ce8Q==
+        bh=kv6MSDgrqc8RobeBOkbfaxVuprh9CpQpHYry2ThHKr8=;
+        b=h9pb1oR04ZF95kY6jBIMvgc8xrDkRTzcPYb5a2adG6QUCcb0MG0laAAySG0CXfDnig
+         yXTYO+bUdWnI56/sYHFdQ+yLmT5D2N3DPgp7nZ8aDd1Li7ukowZ6aeXs2peuC7jMjYBK
+         VCd6GuN83kidzbQr/F1SdKhKSZ9j4/a05ztsoJQjAJFNqc9i0tp9ui2mnZPNWHM4vQYw
+         JlU4DLRWmLu0vOuiDDR79MuajK3DcP96HENGtcOqMOsrcEPCbaNErCChMgBzlt5rhHve
+         pIjIN1oc7cJuoAYdi6wK+XsWsCJDA0buFgg5hav/8I9MDxN2Zy0+l+gsgcMnI6cSr2cX
+         6/9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
          :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
          :cc;
-        bh=XxhKIjR8GaWVfm2736zYQHBVI04PuDH60V7gYHYS8cg=;
-        b=BTF4om6r+xKXantwrw3jWNisLvngwhysIh+vvWCITa16d+yGvQnzDCis+baGrnjRDS
-         KUCQrHI1PN/P5wNSRdVYI6FdUVvz+Jce6AIRB/wKevFtv0xcATCGK0AL12KX+ZEN+6ro
-         yLn4N9QIvqNZy/fyKbFJ3JZCK3SLDqwT6j+3uv5V72ryRS1MXvrwnLzLgFRemGFFKGqI
-         rAyWhWfgUCpz8fe7rQRZ83uGVMYchAgt637s3IqKmbm+irIraMb1teDYGF29t9RxP7OV
-         wP7/sWGMYRzGLOOxaeOG0tobwvG2LG5F/8Qb9Ah40lPWg88ORIipbQ6KqMcBFjUmf6a/
-         1m1w==
-X-Gm-Message-State: ACgBeo0n32TY+dK3sZgLwxzWhyAnsvX4lCziVVVzmsHnsLt9/ls/h6oK
-	n5ShVFZpK68dUB9LtO7EMq0HMw==
-X-Google-Smtp-Source: AA6agR5Zv6eNrWbFYJ+TFCnhBh0Jo/cioog7snDtr10vWjAp26CGn/rodkkROJFz7XRaZGCjMjKl/Q==
-X-Received: by 2002:a05:600c:4f49:b0:3a6:1cc6:afba with SMTP id m9-20020a05600c4f4900b003a61cc6afbamr5125967wmq.80.1661341598215;
-        Wed, 24 Aug 2022 04:46:38 -0700 (PDT)
+        bh=kv6MSDgrqc8RobeBOkbfaxVuprh9CpQpHYry2ThHKr8=;
+        b=7kz7MsDpBmX3YzCMPtLdmwvMSi6xxnfxhrrOmJEdD6oTAiOIEOLaf7NyZAPQh2Pdpo
+         P4j7DTaSw7t8DDWsDVq6cGQ3ioabMWq/ZEPqUdZX1ieiom0fwupwDO2zIZ/xkW4vF0Lk
+         Zvg2ADLw7hsjEVefUKCMuhs1zwtQi+7a7q8WzjehB/hfF8wO2+fu++suXVNwDS3j/JMD
+         1IHMeJTY+q1Ogc4RqDZlU2K2cwoGuD2alxRNOweBh1pH3H1TP8qOlP2TI903Ntmg+fVU
+         PKsdxQF8pGvGJogjRuqiIpR2pykYQTDIyXCpj7MN4x8eY+M1xd8v8o3bEzNHXou9bP8J
+         m7YA==
+X-Gm-Message-State: ACgBeo24Jt6DxtNTM8MKfqENMBS/XeD2ayyeXtp6UN3gsUHeztRvPmjt
+	kWUbh+QvaFccbMzfvnkpcgna+Q==
+X-Google-Smtp-Source: AA6agR5OzyL0PrRHXkxR0p1iv1i7iftCNzeUEeMySUhhzecIdFAxSM+HSsIcqFeLVxWTs+s8NIA5cQ==
+X-Received: by 2002:a1c:770f:0:b0:3a5:ef7f:2973 with SMTP id t15-20020a1c770f000000b003a5ef7f2973mr5067511wmi.111.1661341675005;
+        Wed, 24 Aug 2022 04:47:55 -0700 (PDT)
 References: <alpine.DEB.2.22.394.2203231838130.2910984@ubuntu-linux-20-04-desktop>
  <57549560-879d-f705-8693-9bfdc73e3f7f@suse.com>
  <20220824091918.szrd6e6ll6h6u2pw@vireshk-i7>
- <63eecf7a-aa69-28bf-9664-8ee8554a161f@citrix.com>
+ <a04eebde-1ad4-b6d2-9867-caea88de0484@suse.com>
 User-agent: mu4e 1.9.0; emacs 28.1.91
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Andrew Cooper <Andrew.Cooper3@citrix.com>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, "xen-devel@lists.xen.org"
- <xen-devel@lists.xen.org>, "Stratos-dev@op-lists.linaro.org"
- <Stratos-dev@op-lists.linaro.org>, "mathieu.poirier@linaro.com"
- <mathieu.poirier@linaro.com>, "christopher.w.clark@gmail.com"
- <christopher.w.clark@gmail.com>, "boris.ostrovsky@oracle.com"
- <boris.ostrovsky@oracle.com>, "gregkh@linuxfoundation.org"
- <gregkh@linuxfoundation.org>, "vincent.guittot@linaro.org"
- <vincent.guittot@linaro.org>, "olekstysh@gmail.com" <olekstysh@gmail.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, xen-devel@lists.xen.org,
+ Stratos-dev@op-lists.linaro.org, mathieu.poirier@linaro.com,
+ christopher.w.clark@gmail.com, boris.ostrovsky@oracle.com,
+ gregkh@linuxfoundation.org, vincent.guittot@linaro.org,
+ olekstysh@gmail.com
 Subject: Re: Understanding osdep_xenforeignmemory_map mmap behaviour
-Date: Wed, 24 Aug 2022 12:22:44 +0100
-In-reply-to: <63eecf7a-aa69-28bf-9664-8ee8554a161f@citrix.com>
-Message-ID: <877d2xj23o.fsf@linaro.org>
+Date: Wed, 24 Aug 2022 12:47:08 +0100
+In-reply-to: <a04eebde-1ad4-b6d2-9867-caea88de0484@suse.com>
+Message-ID: <8735dlj21i.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 
-Andrew Cooper <Andrew.Cooper3@citrix.com> writes:
+Juergen Gross <jgross@suse.com> writes:
 
-> On 24/08/2022 10:19, Viresh Kumar wrote:
+> [[PGP Signed Part:Undecided]]
+> On 24.08.22 11:19, Viresh Kumar wrote:
 >> On 24-03-22, 06:12, Juergen Gross wrote:
 >>> For a rather long time we were using "normal" user pages for this purpo=
 se,
@@ -121,68 +119,38 @@ se,
 >>> reason why the hypercall buffers are allocated and mmap()-ed through the
 >>> privcmd driver.
 >> Hi Juergen,
->>
->> I understand why we moved from user pages to kernel pages, but I don't
+>> I understand why we moved from user pages to kernel pages, but I
+>> don't
 >> fully understand why we need to make two separate calls to map the
 >> guest memory, i.e. mmap() followed by ioctl(IOCTL_PRIVCMD_MMAPBATCH).
->>
 >> Why aren't we doing all of it from mmap() itself ? I hacked it up to
 >> check on it and it works fine if we do it all from mmap() itself.
-
-As I understand it the MMAPBATCH ioctl is being treated like every other
-hypercall proxy through the ioctl interface. Which makes sense from the
-point of view of having a consistent interface to the hypervisor but not
-from point of view of providing a consistent userspace interface for
-mapping memory which doesn't care about the hypervisor details.
-
-The privcmd_mmapbatch_v2 interface is slightly richer than what you
-could expose via mmap() because it allows the handling of partial
-mappings with what I presume is a per-page *err array. If you issued the
-hypercall directly from the mmap() and one of the pages wasn't mapped by
-the hypervisor you would have to unwind everything before returning
-EFAULT to the user.
-
+>
+> Hypercall buffers are needed for more than just the "MMAPBATCH" hypercall.
+> Or are you suggesting one device per possible hypercall?
+>
 >> Aren't we abusing the Linux userspace ABI here ? As standard userspace
 >> code would expect just mmap() to be enough to map the memory. Yes, the
 >> current user, Xen itself, is adapted to make two calls, but it breaks
 >> as soon as we want to use something that relies on Linux userspace
 >> ABI.
->>
->> For instance, in our case, where we are looking to create
->> hypervisor-agnostic virtio backends, the rust-vmm library [1] issues
->> mmap() only and expects it to work. It doesn't know it is running on a
->> Xen system, and it shouldn't know that as well.
 >
-> Use /dev/xen/hypercall which has a sane ABI for getting "safe" memory.=C2=
-=A0
-> privcmd is very much not sane.
+> I think you are still mixing up the hypercall buffers with the memory
+> you want to map via the hypercall. At least the reference to kernel
+> memory above is suggesting that.
+
+Aren't the hypercall buffers all internal to the kernel/hypervisor
+interface or are you talking about the ioctl contents?
+
 >
-> In practice you'll need to use both.=C2=A0 /dev/xen/hypercall for getting
-> "safe" memory, and /dev/xen/privcmd for issuing hypercalls for now.
+>
+> Juergen
+>
+> [2. OpenPGP public key --- application/pgp-keys; OpenPGP_0xB0DE9DD628BF13=
+2F.asc]...
+>
+> [[End of PGP Signed Part]]
 
-I'm unsure what is meant by safe memory here. privcmd_buf_mmap() looks
-like it just allocates a bunch of GFP_KERNEL pages rather than
-interacting with the hypervisor directly. Are these the same pages that
-get used when you eventually call privcmd_ioctl_mmap_batch()?
-
-The fact that /dev/xen/hypercall is specified by xen_privcmdbuf_dev is a
-little confusing TBH.
-
-Anyway the goal here is to provide a non-xen aware userspace with
-standard userspace API to access the guests memory. Perhaps messing
-around with the semantics of the /dev/xen/[hypercall|privcmd] devices
-nodes is too confusing.
-
-Maybe we could instead:
-
- 1. Have the Xen aware VMM ask to make the guests memory visible to the
-    host kernels address space.
- 2. When this is done explicitly create a device node to represent it (/dev=
-/xen/dom-%d-mem?)
- 3. Pass this new device to the non-Xen aware userspace which uses the
-    standard mmap() call to make the kernel pages visible to userspace
-
-Does that make sense?
 
 --=20
 Alex Benn=C3=A9e
