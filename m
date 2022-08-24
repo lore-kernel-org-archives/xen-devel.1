@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 510B2C00140
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 11:20:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.392458.630824 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AC7C00140
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Aug 2022 11:28:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.392470.630835 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQoQr-0008Ra-Op; Wed, 24 Aug 2022 11:20:25 +0000
+	id 1oQoYX-0000rC-IJ; Wed, 24 Aug 2022 11:28:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 392458.630824; Wed, 24 Aug 2022 11:20:25 +0000
+Received: by outflank-mailman (output) from mailman id 392470.630835; Wed, 24 Aug 2022 11:28:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oQoQr-0008RT-L0; Wed, 24 Aug 2022 11:20:25 +0000
-Received: by outflank-mailman (input) for mailman id 392458;
- Wed, 24 Aug 2022 11:20:24 +0000
+	id 1oQoYX-0000r5-Fh; Wed, 24 Aug 2022 11:28:21 +0000
+Received: by outflank-mailman (input) for mailman id 392470;
+ Wed, 24 Aug 2022 11:28:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jRce=Y4=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oQoQq-0008K0-Bn
- for xen-devel@lists.xenproject.org; Wed, 24 Aug 2022 11:20:24 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1oQoYW-0000qz-Op
+ for xen-devel@lists.xenproject.org; Wed, 24 Aug 2022 11:28:20 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bf169d6b-239e-11ed-bd2e-47488cf2e6aa;
- Wed, 24 Aug 2022 13:20:23 +0200 (CEST)
+ id da9c871a-239f-11ed-bd2e-47488cf2e6aa;
+ Wed, 24 Aug 2022 13:28:19 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 5CAA420571;
- Wed, 24 Aug 2022 11:20:23 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E51A8336A7;
+ Wed, 24 Aug 2022 11:28:18 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 22BA613780;
- Wed, 24 Aug 2022 11:20:23 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 918F113780;
+ Wed, 24 Aug 2022 11:28:18 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id FEFBBXcJBmMfMgAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 24 Aug 2022 11:20:23 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4sscIlILBmNqNQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 24 Aug 2022 11:28:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,57 +53,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf169d6b-239e-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: da9c871a-239f-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1661340023; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type;
-	bh=AKuEjVYr13+g7ydKEzxK/KUmR2jVY9glKL3oNnq0MEI=;
-	b=iValF1lRbDaksK1hapeQGFvlfmMtEt4P6B4+VXZMTLoPuG0AUowlJ6Dlf+EWQi8N+nqE7S
-	FyQSkqnxgT8EYQ1KJBb5XPksbr2w3exDhouFJdePnBxoTJNq0Swky2v6Q55r36xayTEbEM
-	VMuBdJApkXw/zE0KOQ/himsY47M4sIU=
-Message-ID: <f02f8fb3-2e68-a405-aaef-adc769754bd3@suse.com>
-Date: Wed, 24 Aug 2022 13:20:22 +0200
+	t=1661340498; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+pWZEMJHDDWvoypE91ZsNAUt0AldcHG+mqtHsHy8fwk=;
+	b=cOjJQVrff3Gs74i4lr/D6Z+98mSt6h9a4w0tpdSEbshftcotbBsPm8mM1K6tWpxMOh9bGG
+	rAuEQLgxCdpBjUwS5N775jyzPs1lwW6n78yVQAJy6ceAR6BjmNEvWTQfHUnMaeNIr7C/SO
+	V0FiTjgfDOt7QjflYNfBVpcGROzPdHg=
+Message-ID: <be746029-d140-78e2-5c67-2913236eadfb@suse.com>
+Date: Wed, 24 Aug 2022 13:28:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
+Subject: Re: [PATCH] xen: let ASSERT_UNREACHABLE() WARN() in non-debug builds
 Content-Language: en-US
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "stable@vger.kernel.org" <stable@vger.kernel.org>
-Cc: Lai Jiangshan <jiangshanlai@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Henry.Wang@arm.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20220824102225.11431-1-jgross@suse.com>
+ <e611392b-7186-cf0a-96e0-4ea39b2bc151@suse.com>
+ <de8a9208-0936-27db-e3ec-742254ff0525@suse.com>
+ <6c29aab9-2d8b-44a2-d6c8-3316ac437c1e@suse.com>
 From: Juergen Gross <jgross@suse.com>
-Subject: Backport request
+In-Reply-To: <6c29aab9-2d8b-44a2-d6c8-3316ac437c1e@suse.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------IXQavvdb25FEDZ76gY0TQPjx"
+ boundary="------------JW0Qn0KteBHamQA22KGnDhjT"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------IXQavvdb25FEDZ76gY0TQPjx
-Content-Type: multipart/mixed; boundary="------------tf1I5KTNKqSuIc0cJ6tfzTGG";
+--------------JW0Qn0KteBHamQA22KGnDhjT
+Content-Type: multipart/mixed; boundary="------------AIR7bT7dpPwi8GjpaQaqKiT0";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "stable@vger.kernel.org" <stable@vger.kernel.org>
-Cc: Lai Jiangshan <jiangshanlai@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <f02f8fb3-2e68-a405-aaef-adc769754bd3@suse.com>
-Subject: Backport request
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Henry.Wang@arm.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+Message-ID: <be746029-d140-78e2-5c67-2913236eadfb@suse.com>
+Subject: Re: [PATCH] xen: let ASSERT_UNREACHABLE() WARN() in non-debug builds
+References: <20220824102225.11431-1-jgross@suse.com>
+ <e611392b-7186-cf0a-96e0-4ea39b2bc151@suse.com>
+ <de8a9208-0936-27db-e3ec-742254ff0525@suse.com>
+ <6c29aab9-2d8b-44a2-d6c8-3316ac437c1e@suse.com>
+In-Reply-To: <6c29aab9-2d8b-44a2-d6c8-3316ac437c1e@suse.com>
 
---------------tf1I5KTNKqSuIc0cJ6tfzTGG
-Content-Type: multipart/mixed; boundary="------------alCt58FMc7bOXzUH0JanDgDJ"
+--------------AIR7bT7dpPwi8GjpaQaqKiT0
+Content-Type: multipart/mixed; boundary="------------ftCogh8QRgrursOUE0LUxrk9"
 
---------------alCt58FMc7bOXzUH0JanDgDJ
+--------------ftCogh8QRgrursOUE0LUxrk9
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-SGkgR3JlZywNCg0Kc3RhYmxlIGtlcm5lbHMgNS4xOCBhbmQgNS4xNSBzZWVtIHRvIGJlIG1p
-c3NpbmcgdXBzdHJlYW0gcGF0Y2gNCmM2NGNjMjgwMmE3OCAoIng4Ni9lbnRyeTogTW92ZSBD
-TEQgdG8gdGhlIHN0YXJ0IG9mIHRoZSBpZHRlbnRyeSBtYWNybyIpLg0KVGhpcyBpcyBhIHBy
-ZXJlcXVpc2l0ZSBwYXRjaCBmb3IgNjRjYmQwYWNiNTgyICgieDg2L2VudHJ5OiBEb24ndCBj
-YWxsDQplcnJvcl9lbnRyeSgpIGZvciBYRU5QViIpLCB3aGljaCBpcyBpbmNsdWRlZCBpbiA1
-LjE1LnkgYW5kIDUuMTgueS4NCg0KQ291bGQgeW91IHBsZWFzZSB0YWtlIGM2NGNjMjgwMmE3
-OCBmb3IgNS4xNSBhbmQgNS4xOD8NCg0KDQpKdWVyZ2VuDQo=
---------------alCt58FMc7bOXzUH0JanDgDJ
+T24gMjQuMDguMjIgMTM6MTIsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAyNC4wOC4yMDIy
+IDEyOjQ1LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gT24gMjQuMDguMjIgMTI6MzUsIEph
+biBCZXVsaWNoIHdyb3RlOg0KPj4+IE9uIDI0LjA4LjIwMjIgMTI6MjIsIEp1ZXJnZW4gR3Jv
+c3Mgd3JvdGU6DQo+Pj4+IEhpdHRpbmcgYW4gQVNTRVJUX1VOUkVBQ0hBQkxFKCkgaXMgYWx3
+YXlzIHdyb25nLCBzbyBldmVuIGluIHByb2R1Y3Rpb24NCj4+Pj4gYnVpbGRzIGEgd2Fybmlu
+ZyBzZWVtcyB0byBiZSBhcHByb3ByaWF0ZSB3aGVuIGhpdHRpbmcgb25lLg0KPj4+DQo+Pj4g
+SSBkaXNhZ3JlZSwgZm9yIHR3byByZWFzb25zOiBUaGlzIHZpb2xhdGVzIHRoZSBpbXBsaWNh
+dGlvbiBvZiBOREVCVUcNCj4+PiBtZWFuaW5nIEFTU0VSVCgpIGFuZCBmcmllbmRzIGV4cGFu
+ZCB0byBubyBhY3R1YWwgY29kZS4gUGx1cyBpZiBkb2luZyBzbw0KPj4NCj4+IFRoaXMgaXMg
+c29tZXRoaW5nIHdlIGNhbiBjaGFuZ2UgSU1ITy4NCj4+DQo+Pj4gZm9yIEFTU0VSVF9VTlJF
+QUNIQUJMRSgpLCB3aHkgd291bGQgd2Ugbm90IGRvIHRoZSBzYW1lIGZvciBBU1NFUlQoKT8N
+Cj4+DQo+PiBUaGVyZSBhcmUgbXVsdGlwbGUgcmVhc29ucyB0byBoYXZlIEFTU0VSVCgpcy4g
+U29tZSBzZXJ2ZSBhcyBhIGtpbmQgb2YNCj4+IGRvY3VtZW50YXRpb24gKGUuZy4gdG8gZG9j
+dW1lbnQgdGhhdCB0aGUgcHJvZ3JhbW1lciB0aG91Z2h0IG9mIGEgc3BlY2lhbA0KPj4gY2Fz
+ZSBub3QgYmVpbmcgcG9zc2libGUpLCBvciB0aGV5IGFyZSBtZWFudCB0byBjYXRjaCBoYXJk
+IHRvIGRpYWdub3NlDQo+PiBidWdzIHJhdGhlciBlYXJseSBpbnN0ZWFkIG9mIGxldHRpbmcg
+dGhlbSBoaXQgbGF0ZXIgaW4gYSBzaXR1YXRpb24gd2hlcmUNCj4+IGl0IHdvdWxkbid0IGJl
+IGNsZWFyIHdoYXQgY2F1c2VkIHRoZW0uIEFkZGluZyBhIFdBUk4oKSBmb3IgYWxsIG9mIHRo
+ZXNlDQo+PiBjYXNlcyBpc24ndCByZWFsbHkgYXBwcm9wcmlhdGUsIGVzcGVjaWFsbHkgYXMg
+dGhpcyBtaWdodCBpbXBhY3QNCj4+IHBlcmZvcm1hbmNlIGR1ZSB0byBhZGRlZCB0ZXN0cywg
+d2hpY2ggaXNuJ3QgdGhlIGNhc2UgZm9yIHRoZW9yZXRpY2FsbHkNCj4+IHVucmVhY2hhYmxl
+IGNvZGUuDQo+Pg0KPj4+IFRoZXJlJ3MgYSByZWFzb24gd2UgaGF2ZSBBU1NFUlQoKSBhbmQg
+ZnJpZW5kcyBhbmQsIGluZGVwZW5kZW50bHksDQo+Pj4gV0FSTl9PTigpIC8gQlVHX09OKCkg
+ZXQgYWwuDQo+Pg0KPj4gV2UgbWlnaHQgd2FudCB0byBpbnRyb2R1Y2Ugc29tZXRoaW5nIGxp
+a2UgQVNTRVJUX09SX1dBUk4oKS4gSSdtIHN1cmUNCj4+IHRoaXMgY291bGQgYmUgdXNlZnVs
+IGluIHNvbWUgY2FzZXMuDQo+IA0KPiBJJ20gY3VyaW91cyB3aHkgaW4gc3VjaCBjYXNlcyBp
+dCBjYW4ndCBqdXN0IGJlIFdBUk5fT04oKS4NCg0KSXQgd29uJ3QgcmVzdWx0IGluIHRlc3Qg
+ZmFpbHVyZSBvZiBkZWJ1ZyBidWlsZHMuDQoNCkluIHRoZSBlbmQgSSdtIG5vdCBmZWVsaW5n
+IHJlYWxseSBzdHJvbmcgaGVyZSwgc28gSSdtIGZpbmUgdG8gZHJvcCB0aGlzDQpwYXRjaC4N
+Cg0KDQpKdWVyZ2VuDQo=
+--------------ftCogh8QRgrursOUE0LUxrk9
 Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Description: OpenPGP public key
@@ -161,25 +197,25 @@ jR/i1DG86lem3iBDXzXsZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------alCt58FMc7bOXzUH0JanDgDJ--
+--------------ftCogh8QRgrursOUE0LUxrk9--
 
---------------tf1I5KTNKqSuIc0cJ6tfzTGG--
+--------------AIR7bT7dpPwi8GjpaQaqKiT0--
 
---------------IXQavvdb25FEDZ76gY0TQPjx
+--------------JW0Qn0KteBHamQA22KGnDhjT
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmMGCXYFAwAAAAAACgkQsN6d1ii/Ey90
-XwgAkWhjSA4XaftfLce/IiJxeHYZ9zU+J2TtVSoWkWf825QrZU2i3MC9wB4bGVCH3I7q1Y0v+p2j
-1wBUuM6iC5U/FifoOQQBB2F8fD0eyGdkUabqJGrT92aFlWUwbZ3TkukjVKJ0XjzsDD90/VrBF8JS
-bEDuBXubeWlQQrieoce5wtW+NINeXCiGdycmzFhGyljIwJGKvdr6pZ9GyVUWiS45yTWn6yowy8fy
-lbRWdphJSoMygGnSA7eDgR3BKeNYg8QfiOwXAovH4T9HeLXzcvu1WB7Xw1/t2ZOYzFrptOf+v4zb
-dZJvFrrenqDF+m62iPLrlxaFW0KZQC4oxzGlYok1cQ==
-=8uty
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmMGC1IFAwAAAAAACgkQsN6d1ii/Ey+T
+bgf/fd6hhyh5Q4qCNd7BMHiY5uDftrQlnxaTwsynpxi/HNTTwWajB9y1tg1Y+EmQEKPrfpu7MCc0
+1mboPQSCsd8rV/kF4LLjhcALTcetfqmJc43Xkm0DI8p+d6f+s3adOYi/Djhub8vHCwfmuLqHv9ex
+eG0R4mx+uWJjuVg33XdzykADiMp/P4dXrgB8OeYYYDl6jXF4tlmPG7COma7h/VHQ4TZxVuMd7VOd
+oE2RJ1h025NFC6hC404ON2JWywJZW2+agsYXITlsdBpcsrbAQ0kpRdoBnMdRgvXklukBuT2SknU1
+nymZMWLlemzmmkK9HTAKuenoDM2YMHhgRjco+JcsfQ==
+=cCZv
 -----END PGP SIGNATURE-----
 
---------------IXQavvdb25FEDZ76gY0TQPjx--
+--------------JW0Qn0KteBHamQA22KGnDhjT--
 
