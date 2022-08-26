@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E45FECAAA3
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Aug 2022 12:51:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.393757.632927 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54722ECAADA
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Aug 2022 12:51:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.393758.632938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oRYoE-0002VN-IK; Fri, 26 Aug 2022 12:51:38 +0000
+	id 1oRYoH-0002r6-4p; Fri, 26 Aug 2022 12:51:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 393757.632927; Fri, 26 Aug 2022 12:51:38 +0000
+Received: by outflank-mailman (output) from mailman id 393758.632938; Fri, 26 Aug 2022 12:51:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oRYoE-0002V7-Cg; Fri, 26 Aug 2022 12:51:38 +0000
-Received: by outflank-mailman (input) for mailman id 393757;
- Fri, 26 Aug 2022 12:51:37 +0000
+	id 1oRYoG-0002qw-Vv; Fri, 26 Aug 2022 12:51:40 +0000
+Received: by outflank-mailman (input) for mailman id 393758;
+ Fri, 26 Aug 2022 12:51:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Z28m=Y6=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1oRYoD-00013M-3t
- for xen-devel@lists.xenproject.org; Fri, 26 Aug 2022 12:51:37 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
+ id 1oRYoF-00013M-E0
+ for xen-devel@lists.xenproject.org; Fri, 26 Aug 2022 12:51:39 +0000
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [2a00:1450:4864:20::631])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1c65ce9-253d-11ed-9250-1f966e50362f;
- Fri, 26 Aug 2022 14:51:36 +0200 (CEST)
-Received: by mail-ej1-x633.google.com with SMTP id h22so2987366ejk.4
- for <xen-devel@lists.xenproject.org>; Fri, 26 Aug 2022 05:51:36 -0700 (PDT)
+ id d36904fd-253d-11ed-9250-1f966e50362f;
+ Fri, 26 Aug 2022 14:51:38 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id fy31so2562260ejc.6
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Aug 2022 05:51:38 -0700 (PDT)
 Received: from carlo-ubuntu.. (hipert-gw1.mat.unimo.it. [155.185.5.1])
  by smtp.gmail.com with ESMTPSA id
- b18-20020a1709063cb200b006ff0b457cdasm888812ejh.53.2022.08.26.05.51.34
+ b18-20020a1709063cb200b006ff0b457cdasm888812ejh.53.2022.08.26.05.51.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Aug 2022 05:51:35 -0700 (PDT)
+ Fri, 26 Aug 2022 05:51:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1c65ce9-253d-11ed-9250-1f966e50362f
+X-Inumbo-ID: d36904fd-253d-11ed-9250-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=minervasys-tech.20210112.gappssmtp.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=/k6VvB3GlpUbTg4zEznZ7s2FszL8KBjsUm71X4Idjuk=;
-        b=TkjcBMbK5k+ifi9o1Ju2dmUOhDYdZocxEf3v1aJeONp3N/Qm9YFiXb/9q9AMinR2kl
-         YhnGZb95x3BQtTbpDeqkH491kkSW2V1K6ZdKXZyY4S6hG1GRen613zzRtrGgY059aQ5M
-         B7phPR0z0xvb+U5Xhiy44RXY0MSCmhb/zAYbas8hb48iLI7ypAlslyI+sb3EnmhrBXhZ
-         6G+XFBtOmFB/vn3axX4wWZfiLzGMe2KM6RzDlcvmK/UZNWyV+EjDY3Mv05EAMmJr84a0
-         lWf3mbjvsxt7dgNILST3Br5ATKgl4Y86pALj2BQpIg9PsVZv0PB9XeZz0vFnHV0rqpa/
-         qycw==
+        bh=8q8cSK0/ZbUuwajE+w5sunrFXcqx/YGVTD9wQaToEI0=;
+        b=nbqKRXAqk2Udr8kI/SUFCexCVkpyFcD7/XcAuGIl8cue6/F+BzHuaCCJkXY4RWOYs0
+         ZshlxV4FtJIKeJ9rTD+AG9T7olxSOwbPRR1Qp1okXYmUJCxous0RgjYSD6CLBmrfv+Go
+         P9HVDtkKvMOtfhdbFk5Qh1Cf2CQ5VVDV4qzm/LQjNaxaAK5Glnv1Ku+UjXOlU5XC/ZWT
+         3Zcv6QEBbmjf/wSbprs9Tnazd3U1wt1goOn1essPXdpbipZE9lCJIw6kVmmA9f4XivUx
+         tzhUkDTCLTBFV5vXKmXUD5BeRPY83McAzK/okdxy7TYZoIRdR7Uguh//rjthiLTBdIPE
+         Qoxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=/k6VvB3GlpUbTg4zEznZ7s2FszL8KBjsUm71X4Idjuk=;
-        b=NM6vVkUnhW6fHQ+4YYx+9ufLwBgcv9NoT/YYEbFBbNMpk/4fuzSRv4H5yoQzIWkH9R
-         /03G2KiYWsIXzeig+WGmzoznjkQATC7kCRjkd1BfZO4RxrFwwDsQtA02vQX57StOdhEG
-         meG8ZuIhFh3dtLX6WOHOoOzH6bwk1AyIpYHC9cuX1IMRopwrSFLRWNVNrEZMclVDUEP6
-         poxbWxs5dw44ZEkAHqe8BUAKWqqeaQTgSN+lQ+6KwVIXQ7nt9Rw/dN/3z9kainnLwqV9
-         nu9dPDz8XONrvPuo8iE/GyashnwKUpGtar1Erw78rt/dFgc/GQi6k2UdkQ78rUeRo67R
-         aqJA==
-X-Gm-Message-State: ACgBeo1QHgVqHXqzc7rTTxeY7LNBsfrRYnO4gEAxBeCXMZCz66VtIS23
-	hwtvbQheCDvwh2FPwysZyN1CIo1a7tsNRw==
-X-Google-Smtp-Source: AA6agR4cmYT6GhJBqHIWhFgE6ZHbq+wC+jPgGthC2iv6Rv7beNG7K5JqPb+y3XB5NXs2nrKOgup5Rw==
-X-Received: by 2002:a17:907:9484:b0:738:6f9f:6032 with SMTP id dm4-20020a170907948400b007386f9f6032mr5437827ejc.602.1661518295433;
-        Fri, 26 Aug 2022 05:51:35 -0700 (PDT)
+        bh=8q8cSK0/ZbUuwajE+w5sunrFXcqx/YGVTD9wQaToEI0=;
+        b=PSLRuQT+2sg8GFcPeibLTNhdQgHcvC199NT3KSNuP3HePvd6FTwX21j7FpzFEN1yIX
+         1MwukTNVxd2cAI+6KF8C0bGAGDGV/JALVn7gC4RIsCEfiFTsN30Nrv8/CUwnXFoHfs11
+         inVRGspGwAjeJ+khiD5+82mZPfcZuz06N0Q80jPHPvKfZW/eLhC23S4f2KUae+CP2prj
+         N8zQpG2jUOp2XCaOnwmiqP3G0D0cEeozA4sChh9gCyn9Z1rbB3h44vFj5dfwEtrwCSRc
+         pr7QxiLOZVh/GXyW57r7E0h3Vd5Y2jTypxet5da10gXKoI7+d9Z6LnDmym9JXjYUM3Q4
+         ZIeA==
+X-Gm-Message-State: ACgBeo3wpcbzgKf8Mkd3s3Qkjq1rpzM1SLj4qrbu+EnvIbcVBh7jX4yr
+	OhOmdXn7kM+Vo8naTfLMfxdDFE2Cm6sZ7g==
+X-Google-Smtp-Source: AA6agR5U5N1r4qkF/3vBc7BJpuniwJiwk4Drng/nfaijetjjGomI6h419PBY2XUs+KbJ4yUPlFIPgw==
+X-Received: by 2002:a17:907:d08:b0:72f:b107:c07a with SMTP id gn8-20020a1709070d0800b0072fb107c07amr5492067ejc.340.1661518298352;
+        Fri, 26 Aug 2022 05:51:38 -0700 (PDT)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com,
@@ -87,183 +87,66 @@ Cc: andrew.cooper3@citrix.com,
 	lucmiccio@gmail.com,
 	Carlo Nonato <carlo.nonato@minervasys.tech>,
 	Marco Solieri <marco.solieri@minervasys.tech>
-Subject: [PATCH 05/12] xen/arm: add support for cache coloring configuration via device-tree
-Date: Fri, 26 Aug 2022 14:51:04 +0200
-Message-Id: <20220826125111.152261-6-carlo.nonato@minervasys.tech>
+Subject: [PATCH 07/12] xen/common: add colored heap info debug-key
+Date: Fri, 26 Aug 2022 14:51:06 +0200
+Message-Id: <20220826125111.152261-8-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220826125111.152261-1-carlo.nonato@minervasys.tech>
 References: <20220826125111.152261-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This commit adds the "colors" Device Tree attribute that can be used for
-DomUs and Dom0less color configurations. The syntax is the same used
-for every color config.
+This commit adds a debug-key to let the user inspect the colored heap
+information. The number of pages stored for each available color is dumped.
 
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
 Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 ---
- docs/misc/arm/cache-coloring.rst      | 45 +++++++++++++++++++++++++++
- docs/misc/arm/device-tree/booting.txt |  4 +++
- xen/arch/arm/coloring.c               | 17 ++++++++++
- xen/arch/arm/domain_build.c           |  9 ++++++
- xen/arch/arm/include/asm/coloring.h   |  3 ++
- 5 files changed, 78 insertions(+)
+ xen/common/page_alloc.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/docs/misc/arm/cache-coloring.rst b/docs/misc/arm/cache-coloring.rst
-index 345d97cb56..763acd2d3f 100644
---- a/docs/misc/arm/cache-coloring.rst
-+++ b/docs/misc/arm/cache-coloring.rst
-@@ -111,5 +111,50 @@ LLC way size (as previously discussed) and Dom0 colors can be set using the
- appropriate command line parameters. See the relevant documentation in
- "docs/misc/xen-command-line.pandoc".
- 
-+DomUs colors can be set either in the xl configuration file (relative
-+documentation at "docs/man/xl.cfg.pod.5.in") or via Device Tree, also for
-+Dom0less configurations, as in the following example:
-+
-+.. raw:: html
-+
-+    <pre>
-+        xen,xen-bootargs = "console=dtuart dtuart=serial0 dom0_mem=1G dom0_max_vcpus=1 sched=null llc-way-size=64K xen-colors=0-1 dom0-colors=2-6";
-+        xen,dom0-bootargs "console=hvc0 earlycon=xen earlyprintk=xen root=/dev/ram0"
-+
-+        dom0 {
-+            compatible = "xen,linux-zimage" "xen,multiboot-module";
-+            reg = <0x0 0x1000000 0x0 15858176>;
-+        };
-+
-+        dom0-ramdisk {
-+            compatible = "xen,linux-initrd" "xen,multiboot-module";
-+            reg = <0x0 0x2000000 0x0 20638062>;
-+        };
-+
-+        domU0 {
-+            #address-cells = <0x1>;
-+            #size-cells = <0x1>;
-+            compatible = "xen,domain";
-+            memory = <0x0 0x40000>;
-+            colors = "4-8,10,11,12";
-+            cpus = <0x1>;
-+            vpl011 = <0x1>;
-+
-+            module@2000000 {
-+                compatible = "multiboot,kernel", "multiboot,module";
-+                reg = <0x2000000 0xffffff>;
-+                bootargs = "console=ttyAMA0";
-+            };
-+
-+            module@30000000 {
-+                compatible = "multiboot,ramdisk", "multiboot,module";
-+                reg = <0x3000000 0xffffff>;
-+            };
-+        };
-+    </pre>
-+
-+Please refer to the relative documentation in
-+"docs/misc/arm/device-tree/booting.txt".
-+
- Note that if no color configuration is provided for domains, they fallback to
- the default one, which corresponds simply to all available colors.
-\ No newline at end of file
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 98253414b8..82e8dd89c8 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -162,6 +162,10 @@ with the following properties:
- 
-     An integer specifying the number of vcpus to allocate to the guest.
- 
-+- colors
-+    A string specifying the color configuration for the guest. Refer to
-+    "docs/misc/arm/cache_coloring.rst" for syntax.
-+
- - vpl011
- 
-     An empty property to enable/disable a virtual pl011 for the guest to
-diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
-index 40a07617cc..87e20b952e 100644
---- a/xen/arch/arm/coloring.c
-+++ b/xen/arch/arm/coloring.c
-@@ -252,8 +252,11 @@ int domain_coloring_init(struct domain *d,
-         if ( config->from_guest )
-             copy_from_guest(d->arch.colors, config->colors, config->num_colors);
-         else
-+        {
-             memcpy(d->arch.colors, config->colors.p,
-                    sizeof(unsigned int) * config->num_colors);
-+            xfree(config->colors.p);
-+        }
-     }
- 
-     if ( !d->arch.colors )
-@@ -283,6 +286,20 @@ void domain_dump_coloring_info(struct domain *d)
-     print_colors(d->arch.colors, d->arch.num_colors);
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 4ae3cfe9a7..be6bb2b9a1 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -605,6 +605,27 @@ static struct page_info *alloc_col_domheap_page(struct domain *d,
+     return pg;
  }
  
-+void prepare_color_domain_config(struct xen_arch_domainconfig *config,
-+                                 const char *colors_str)
++static void dump_col_heap(unsigned char key)
 +{
-+    unsigned int num;
++    struct page_info *pg;
++    unsigned long pages;
++    unsigned int color;
 +
-+    config->colors.p = xzalloc_array(unsigned int, max_colors);
-+    if ( !config->colors.p )
-+        panic("Unable to allocate cache colors\n");
++    printk("'%c' pressed -> dumping coloring heap info\n", key);
 +
-+    if ( parse_color_config(colors_str, config->colors.p, &num) )
-+        panic("Error parsing the color configuration\n");
-+    config->num_colors = (uint16_t)num;
++    for ( color = 0; color < get_max_colors(); color++ )
++    {
++        printk("Heap[%u]: ", color);
++        pages = 0;
++        page_list_for_each( pg, colored_pages(color) )
++        {
++            BUG_ON(!(page_to_color(pg) == color));
++            pages++;
++        }
++        printk("%lu pages\n", pages);
++    }
 +}
 +
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 4d4cb692fc..979b9c8906 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -34,6 +34,7 @@
- #include <xen/serial.h>
- 
- #ifdef CONFIG_CACHE_COLORING
-+#include <asm/coloring.h>
- #define XEN_DOM0_CREATE_FLAGS CDF_privileged
+ size_param("buddy-alloc-size", buddy_alloc_size);
  #else
- #define XEN_DOM0_CREATE_FLAGS CDF_privileged | CDF_directmap
-@@ -3275,6 +3276,7 @@ void __init create_domUs(void)
-     struct dt_device_node *node;
-     const struct dt_device_node *cpupool_node,
-                                 *chosen = dt_find_node_by_path("/chosen");
-+    const char * __maybe_unused colors_str;
- 
-     BUG_ON(chosen == NULL);
-     dt_for_each_child_node(chosen, node)
-@@ -3354,6 +3356,13 @@ void __init create_domUs(void)
-             d_cfg.cpupool_id = pool_id;
-         }
- 
+ static void free_col_domheap_page(struct page_info *pg)
+@@ -2853,6 +2874,9 @@ static void cf_check dump_heap(unsigned char key)
+ static __init int cf_check register_heap_trigger(void)
+ {
+     register_keyhandler('H', dump_heap, "dump heap info", 1);
 +#ifdef CONFIG_CACHE_COLORING
-+        if ( dt_find_property(node, "xen,static-mem", NULL) )
-+            panic("static-mem is not valid when cache coloring is enabled\n");
-+        if ( !dt_property_read_string(node, "colors", &colors_str) )
-+            prepare_color_domain_config(&d_cfg.arch, colors_str);
++    register_keyhandler('k', dump_col_heap, "dump coloring heap info", 1);
 +#endif
-+
-         /*
-          * The variable max_init_domid is initialized with zero, so here it's
-          * very important to use the pre-increment operator to call
-diff --git a/xen/arch/arm/include/asm/coloring.h b/xen/arch/arm/include/asm/coloring.h
-index 967031ae04..b7fa323870 100644
---- a/xen/arch/arm/include/asm/coloring.h
-+++ b/xen/arch/arm/include/asm/coloring.h
-@@ -36,4 +36,7 @@ int domain_coloring_init(struct domain *d,
- void domain_coloring_free(struct domain *d);
- void domain_dump_coloring_info(struct domain *d);
- 
-+void prepare_color_domain_config(struct xen_arch_domainconfig *config,
-+                                 const char *colors_str);
-+
- #endif /* !__ASM_ARM_COLORING_H__ */
+     return 0;
+ }
+ __initcall(register_heap_trigger);
 -- 
 2.34.1
 
