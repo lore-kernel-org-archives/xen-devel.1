@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71662ECAAD4
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Aug 2022 11:46:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.393744.632860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDAEECAAD4
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Aug 2022 12:51:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.393755.632905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oRXn8-0002d2-9b; Fri, 26 Aug 2022 11:46:26 +0000
+	id 1oRYoB-0001v6-U8; Fri, 26 Aug 2022 12:51:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 393744.632860; Fri, 26 Aug 2022 11:46:26 +0000
+Received: by outflank-mailman (output) from mailman id 393755.632905; Fri, 26 Aug 2022 12:51:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oRXn8-0002cv-6q; Fri, 26 Aug 2022 11:46:26 +0000
-Received: by outflank-mailman (input) for mailman id 393744;
- Fri, 26 Aug 2022 11:46:24 +0000
+	id 1oRYoB-0001uz-R9; Fri, 26 Aug 2022 12:51:35 +0000
+Received: by outflank-mailman (input) for mailman id 393755;
+ Fri, 26 Aug 2022 12:51:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=f/ol=Y6=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1oRXn6-0002cn-3B
- for xen-devel@lists.xenproject.org; Fri, 26 Aug 2022 11:46:24 +0000
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
- [64.147.123.21]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b1b825e4-2534-11ed-bd2e-47488cf2e6aa;
- Fri, 26 Aug 2022 13:46:21 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 0DF4A32009BA;
- Fri, 26 Aug 2022 07:46:14 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 26 Aug 2022 07:46:15 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 26 Aug 2022 07:46:13 -0400 (EDT)
+ <SRS0=Z28m=Y6=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
+ id 1oRYoA-0001dl-AC
+ for xen-devel@lists.xenproject.org; Fri, 26 Aug 2022 12:51:34 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cfbe9594-253d-11ed-bd2e-47488cf2e6aa;
+ Fri, 26 Aug 2022 14:51:33 +0200 (CEST)
+Received: by mail-ej1-x632.google.com with SMTP id kk26so2943049ejc.11
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Aug 2022 05:51:32 -0700 (PDT)
+Received: from carlo-ubuntu.. (hipert-gw1.mat.unimo.it. [155.185.5.1])
+ by smtp.gmail.com with ESMTPSA id
+ b18-20020a1709063cb200b006ff0b457cdasm888812ejh.53.2022.08.26.05.51.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Aug 2022 05:51:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,165 +46,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1b825e4-2534-11ed-bd2e-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm1; t=1661514374; x=
-	1661600774; bh=yhS27Ab1W8mIUyTQLj+wS32fp2GXOTqJpSeJR/gvLbo=; b=n
-	Ny1m2vKz6pgUQMS+9WOx7sU/zTVqO2NzW4BxKjT2vwltSdWaID5mePKsuFj63x5g
-	AcNjRySxglkeGVcG+gHOnfjb8MR5e45QDpRNXsjh3cldKbNzee9Qz810LWfzRUtO
-	wn9U0o/u5YRnDDMSdbElcApWCxkTO1juKaVxSBc1NhpfiTLR/PZkJ3LYOopHtLHG
-	JMbIK2gqaYUw6iTZvjf1w7IWpPJsb9ZS+jdkM1ZxAt1+Z+hmNLN6Q/ybrURbZj8q
-	Fa2LHIVbDBAzXO43X3IxxqYoc68ztFuXPxnc+AnB4hFclnppS0/vcfvLoYpS892T
-	tEX4OCveMRKD3vOzdli6A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
-	:mime-version:references:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1661514374; x=1661600774; bh=yhS27Ab1W8mIUyTQLj+wS32fp2GX
-	OTqJpSeJR/gvLbo=; b=Wdp0DpT2ER+eitMUds5Yo2xqzIxI3Um+czjLVCtVKqcA
-	i3KHliQf8DsYN3UsDVoxNjQFbaGDPZS+Qqy73A8AcFG8TZ3UkyUME6EeOje51Jw5
-	3HLdZE2iHefyK9cIvkIIkk/seo+5LIPpHZnOud7sOOMSKi4xk7r2qKXwGdxBV1xe
-	RsboDJxujoTo3+1UY92Bv2X7l5kIwrbqWkLpTTdxLECWFszpSKVfGNJ85Ie99YQi
-	VCHBxCp3z42gwnLyPifmD5/rspZr8bBWnJR65+tu33cBfL7sQlBkW6L360gnW+3y
-	Cs6k/Lxif5a/pvVzZkn2xSKnHHCon5KMHqk6bsZosQ==
-X-ME-Sender: <xms:hrIIYzNdMaqNpK5WVz6RIko7NDp-hhfVijorDxcERZeDz35eD5jAWA>
-    <xme:hrIIY9-cuj1PyiZk_Wk9rb0b5gDPZkkQ_0nL9Ta5yPmjxvUQDyUXebeheJWwgQqSE
-    yY694zwECxSfw>
-X-ME-Received: <xmr:hrIIYyR9Wegr8iRw-2Cl75zEDO5wcB3Ri7ReBmjVjLOtk6jYV5-3K2pD_pcgIDkQM5PMXA-83O8veLvMwtFOsIxxra91HxPVBTto>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdejhedggeefucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgv
-    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
-    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfdu
-    leetfeevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:hrIIY3sMnC6ZmJgMa_AHKBTgaVup9by6B1bHAGqHL-5KqRvWrAI1IA>
-    <xmx:hrIIY7eWT3Mm9hudY0FAIXwroc5h4tzEgYEltA0mdAYhEe8gEnx64Q>
-    <xmx:hrIIYz0y5r3v1p4pxFmvKPUYpBSZHdCrJz3Jakkx4ypl3o8C7NfXSQ>
-    <xmx:hrIIYy6jsEaS5m3bW8K1uyavrtN8Rm5rbFGArxQkknLwuVOGhIy-qg>
-Feedback-ID: i1568416f:Fastmail
-Date: Fri, 26 Aug 2022 13:46:09 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v5 1/9] drivers/char: separate dbgp=xhci to dbc=xhci
- option
-Message-ID: <YwiygukKUUqiAke9@mail-itl>
-References: <cover.4afa0fece5b70e838e4f1c7c7f25d0fa3d157073.1661181584.git-series.marmarek@invisiblethingslab.com>
- <edff5ba0d286a41b94a6b4bb332b63228f7faebe.1661181584.git-series.marmarek@invisiblethingslab.com>
- <b323ebc3-68fc-f6e1-b9ac-d508855a605b@suse.com>
+X-Inumbo-ID: cfbe9594-253d-11ed-bd2e-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=minervasys-tech.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=KUUG3oBu2sZvqX2D9rJkuOuQmnOvyHH8GrWoUzfp3Co=;
+        b=Oiy1yctzwOMWIvwKtGoMgkuywg12OKtQRBp9V+oUGbkP/OXN7ECgN0PcUiosnp39xk
+         /hgkpd+VH3OPLhRyzwyyQfy6VhWw/bykqd+5GJ8Gc/YB34VHcUGPRNT5goTnsyioXAw4
+         rHxUti3ck5WigE+xhLWiEYYNBrlM/GwWrT5/z6XFBLy6rmg7Og85MgPoJ4nfQbv3x8XG
+         GnafJ3xgf4DsFIPTWukH+c5G5odiQekl5fN4SST9uA2cUY/HgfspAG142jEKFkmpZ5rl
+         w2DFEV0Qdo9omlVTeCoLSWbxCAX3IhP1LgyyXkGPNj0gXSYEKBegK01YZYXf7yLNbvpb
+         rdog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=KUUG3oBu2sZvqX2D9rJkuOuQmnOvyHH8GrWoUzfp3Co=;
+        b=cB4tl5RAoEHWYBGcDbXWbzw1SVqEyxhHpA03CCbgu3xqYNKd06Pq7e9tSdGhFBIJiQ
+         4MhrpZ5L35jZY/qiftctXXkQLaiJSthd1IPWtrNJa2eyG/W4VlGULH08iNEA3PTMIT3f
+         3zzCyfNq0bOZfv2hk+W7FYeIm4bbGWMDd8Iaia/rEBzK7oQLcaW7A5e0awiBjiVkWY9I
+         CAmRFA/WXq+Jklxwa4CcP0WjZQl50nUrmJsiRP4UOkGXiF7oRG+Wf3B0L6YNFsFkl1xj
+         Bt+GwLXg38txx7V4O5wPhjKh0gJgZZgOotOtAdiuFy5JtiOg1pdkMzLcECnV0cceIDfi
+         to5g==
+X-Gm-Message-State: ACgBeo0zbLn6L6R5XVLCATRBPe+EumM6izMbKDh35MlqE+1i09qYZl2j
+	Li5nXs+p97ZgIRuQ5DeOo+SPKFrkn7VS/g==
+X-Google-Smtp-Source: AA6agR4y4ZyBsKL9yN9HoaM+dJZ6Zq+gSYvqaQ/rT0daG/uYAEbT6gfIkKZ1U8JUKMq3hulYOlOALw==
+X-Received: by 2002:a17:907:7e8c:b0:73d:85ec:46c with SMTP id qb12-20020a1709077e8c00b0073d85ec046cmr5080773ejc.257.1661518292192;
+        Fri, 26 Aug 2022 05:51:32 -0700 (PDT)
+From: Carlo Nonato <carlo.nonato@minervasys.tech>
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	george.dunlap@citrix.com,
+	jbeulich@suse.com,
+	julien@xen.org,
+	stefano.stabellini@amd.com,
+	wl@xen.org,
+	marco.solieri@unimore.it,
+	andrea.bastoni@minervasys.tech,
+	lucmiccio@gmail.com,
+	Carlo Nonato <carlo.nonato@minervasys.tech>,
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH 03/12] xen/arm: dump cache colors in domain info debug-key
+Date: Fri, 26 Aug 2022 14:51:02 +0200
+Message-Id: <20220826125111.152261-4-carlo.nonato@minervasys.tech>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220826125111.152261-1-carlo.nonato@minervasys.tech>
+References: <20220826125111.152261-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Li+cuNswEYNZshdT"
-Content-Disposition: inline
-In-Reply-To: <b323ebc3-68fc-f6e1-b9ac-d508855a605b@suse.com>
+Content-Transfer-Encoding: 8bit
 
+This commit adds cache colors to the information dumped with the domain info
+debug-key.
 
---Li+cuNswEYNZshdT
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 26 Aug 2022 13:46:09 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v5 1/9] drivers/char: separate dbgp=xhci to dbc=xhci
- option
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+---
+ xen/arch/arm/coloring.c             | 16 ++++++++++++++++
+ xen/arch/arm/domain.c               |  3 +++
+ xen/arch/arm/include/asm/coloring.h |  1 +
+ 3 files changed, 20 insertions(+)
 
-On Thu, Aug 25, 2022 at 05:44:54PM +0200, Jan Beulich wrote:
-> On 22.08.2022 17:27, Marek Marczykowski-G=C3=B3recki wrote:
-> > This allows configuring EHCI and XHCI consoles separately,
-> > simultaneously.
-> >=20
-> > Suggested-by: Jan Beulich <jbeulich@suse.com>
->=20
-> But was I maybe confused, and much less of a change would suffice? After
-> all ...
->=20
-> > --- a/xen/drivers/char/xhci-dbc.c
-> > +++ b/xen/drivers/char/xhci-dbc.c
-> > @@ -1058,9 +1058,9 @@ static struct xhci_dbc_ctx ctx __aligned(16);
-> >  static uint8_t out_wrk_buf[DBC_WORK_RING_CAP];
-> >  static struct xhci_string_descriptor str_buf[DBC_STRINGS_COUNT];
-> > =20
-> > -static char __initdata opt_dbgp[30];
-> > +static char __initdata opt_dbc[30];
-> > =20
-> > -string_param("dbgp", opt_dbgp);
-> > +string_param("dbc", opt_dbc);
-> > =20
-> >  void __init xhci_dbc_uart_init(void)
-> >  {
-> > @@ -1068,25 +1068,25 @@ void __init xhci_dbc_uart_init(void)
-> >      struct dbc *dbc =3D &uart->dbc;
-> >      const char *e;
-> > =20
-> > -    if ( strncmp(opt_dbgp, "xhci", 4) )
-> > +    if ( strncmp(opt_dbc, "xhci", 4) )
-> >          return;
->=20
-> ... this already avoids mixing up who's going to parse what. So right
-> now I think that ...
->=20
-> > @@ -1102,7 +1102,7 @@ void __init xhci_dbc_uart_init(void)
-> >      dbc->dbc_str =3D str_buf;
-> > =20
-> >      if ( dbc_open(dbc) )
-> > -        serial_register_uart(SERHND_DBGP, &dbc_uart_driver, &dbc_uart);
-> > +        serial_register_uart(SERHND_DBC, &dbc_uart_driver, &dbc_uart);
-> >  }
->=20
-> ... this and other SERHND_* related changes are enough, and there's no
-> need for a separate "dbc=3D" option.
+diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
+index 2b37cda067..40a07617cc 100644
+--- a/xen/arch/arm/coloring.c
++++ b/xen/arch/arm/coloring.c
+@@ -171,6 +171,16 @@ static unsigned int set_default_domain_colors(unsigned int *colors)
+     return max_colors;
+ }
+ 
++static void print_colors(unsigned int *colors, unsigned int num_colors)
++{
++    unsigned int i;
++
++    printk("[ ");
++    for ( i = 0; i < num_colors; i++ )
++        printk("%u ", colors[i]);
++    printk("]\n");
++}
++
+ static void dump_coloring_info(unsigned char key)
+ {
+     printk("'%c' pressed -> dumping coloring general info\n", key);
+@@ -267,6 +277,12 @@ void domain_coloring_free(struct domain *d)
+         xfree(d->arch.colors);
+ }
+ 
++void domain_dump_coloring_info(struct domain *d)
++{
++    printk("Domain %pd has %u colors: ", d, d->arch.num_colors);
++    print_colors(d->arch.colors, d->arch.num_colors);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index c6fa8adc99..bca418e374 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -1087,6 +1087,9 @@ int domain_relinquish_resources(struct domain *d)
+ void arch_dump_domain_info(struct domain *d)
+ {
+     p2m_dump_info(d);
++#ifdef CONFIG_CACHE_COLORING
++    domain_dump_coloring_info(d);
++#endif
+ }
+ 
+ 
+diff --git a/xen/arch/arm/include/asm/coloring.h b/xen/arch/arm/include/asm/coloring.h
+index 60c8b1f079..967031ae04 100644
+--- a/xen/arch/arm/include/asm/coloring.h
++++ b/xen/arch/arm/include/asm/coloring.h
+@@ -34,5 +34,6 @@ bool __init coloring_init(void);
+ int domain_coloring_init(struct domain *d,
+                          const struct xen_arch_domainconfig *config);
+ void domain_coloring_free(struct domain *d);
++void domain_dump_coloring_info(struct domain *d);
+ 
+ #endif /* !__ASM_ARM_COLORING_H__ */
+-- 
+2.34.1
 
-But then you wouldn't be able to configure "dbgp=3Dehci dbgp=3Dxhci" as
-one would override the other, no?
-
->=20
-> > --- a/xen/include/xen/serial.h
-> > +++ b/xen/include/xen/serial.h
-> > @@ -95,6 +95,7 @@ struct uart_driver {
-> >  # define SERHND_COM1    (0<<0)
-> >  # define SERHND_COM2    (1<<0)
-> >  # define SERHND_DBGP    (2<<0)
-> > +# define SERHND_DBC     (3<<0)
->=20
-> Please also update the comment just out of context.
->=20
-> Jan
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---Li+cuNswEYNZshdT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmMIsoIACgkQ24/THMrX
-1yzW+AgAhFh2Zfp7PGtgXSy9OUqvvWr3e2+HvaUqGY867L+BYFq14TxSKaGX2Qcr
-OTJZ1d8X1CcMpyfAjAyA1hD2GT568lXM9oh5EdHEOriczLPrKsVfSIK/K3zj8j1s
-X9DGYC92lAQ1dRW9HQDnNZXY9QJGcUCu5GKvb2xjnPqfbD6XwW1Zy4AS7dIEsRXk
-ey5oCEmhH5OGah6RNxB8IMFRSIrZ1sBOtipZXlgtDtnGSwNOgDfK9pCjHOna1MFP
-aad2p6m+enIutyrfdNJhOEaBDQ2lnr1rPqRhQjleqxEBkrRaFc7hkZJVh8vj/hSr
-u1PCLSKjGCF3WTXGtxl2+BXFv09dWg==
-=qJoS
------END PGP SIGNATURE-----
-
---Li+cuNswEYNZshdT--
 
