@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC0DECAAD3
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 05:05:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.395163.634942 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 781AAC0502A
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 05:05:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.395173.634975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFv5-0007ZX-0N; Wed, 31 Aug 2022 05:05:43 +0000
+	id 1oTFv6-00088p-Su; Wed, 31 Aug 2022 05:05:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 395163.634942; Wed, 31 Aug 2022 05:05:42 +0000
+Received: by outflank-mailman (output) from mailman id 395173.634975; Wed, 31 Aug 2022 05:05:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFv4-0007ZQ-SE; Wed, 31 Aug 2022 05:05:42 +0000
-Received: by outflank-mailman (input) for mailman id 395163;
- Tue, 30 Aug 2022 21:49:27 +0000
+	id 1oTFv6-00086k-L4; Wed, 31 Aug 2022 05:05:44 +0000
+Received: by outflank-mailman (input) for mailman id 395173;
+ Tue, 30 Aug 2022 21:49:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2bUK=ZC=flex--surenb.bounces.google.com=35IUOYwYKCUk352pymrzzrwp.nzx8py-op6pwwt343.8py02zupn4.z2r@srs-se1.protection.inumbo.net>)
- id 1oT96t-0008CX-EV
- for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:27 +0000
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
- [2607:f8b0:4864:20::1149])
+ <SRS0=Ivjr=ZC=flex--surenb.bounces.google.com=38YUOYwYKCVYGIF2Bz4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-se1.protection.inumbo.net>)
+ id 1oT975-0008CX-Al
+ for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:39 +0000
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
+ [2607:f8b0:4864:20::b49])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d406446-28ad-11ed-a60c-1f1ba7de4fb0;
- Tue, 30 Aug 2022 23:49:25 +0200 (CEST)
-Received: by mail-yw1-x1149.google.com with SMTP id
- 00721157ae682-33f8988daecso180733297b3.12
- for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:25 -0700 (PDT)
+ id a4a35f39-28ad-11ed-a60c-1f1ba7de4fb0;
+ Tue, 30 Aug 2022 23:49:38 +0200 (CEST)
+Received: by mail-yb1-xb49.google.com with SMTP id
+ y81-20020a253254000000b0069339437485so707827yby.5
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,40 +42,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d406446-28ad-11ed-a60c-1f1ba7de4fb0
+X-Inumbo-ID: a4a35f39-28ad-11ed-a60c-1f1ba7de4fb0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc;
-        bh=1lX3k8bH6+3ighIlH+rh55fF9o5O4fyOugMRXdd7M+o=;
-        b=TLaJItWbDQbvhKHzG038LNGm0CScYZSKmwQZZ5uimu3NF1cUdVRiMphTcTUfMFGxbA
-         5MXDa00pC4jx1dox6rXbqMWBtWC4G64n3rtvQ9WFmciJtHtJLVCWET5Kdb7EyuzkVYPX
-         i4J0Y6C4bz8XfJq1YpoTofkF51DS5zPKbupPaaT66wch8+NkTWL2E1S5s0ZkHIotLxVb
-         lHmExQmnrBRVXZ4L6czz/14NhyHQZKxDWFmpYXVuNp5UTUZUPBV0MZqwCFaN6+K53hjG
-         Et4iC4dnJNUgJmAGWozRlGh2FkpEq40YiSSTQfp1Q8IZTvSW9ersWg+tDXVZ8w+7HE/r
-         XOYQ==
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc;
+        bh=kcUwO49ZlU6bl/Tm+t4qMFM3AvAt3rlv3WDq12yXCn8=;
+        b=IB5sn3g8G5XCtC4vvUkMJf3Z0NCybbDF4PfUg7xY8jaPrHiWi7tBKXZi3iw7JzW/hg
+         R1rg3QKwvg2o4P0UJORvK/vnl+yrRARG5QS+tHVqZj7Wlke8B5UL2GccofvWmM5QTLmm
+         X07Mo57+bKLwACVIf4YGvfOrnuhdmQMRu0jBSFOkXWJ/DCc2JiFJS2dKowFDk3y0y1lo
+         ++gDXN1YD0J2obdelJxD0Ca+lRDY4iXl62HepJKu5B9nBoEEZMQwIAzfpufGcQaLvs6J
+         LfNF8Ip/phVmlaMWNU5bNvIxjy7nc6YboQjzsEA9CsIOA+UQlQ9lwqxZiOCG8LXjXtLj
+         HTKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
-         :from:to:cc;
-        bh=1lX3k8bH6+3ighIlH+rh55fF9o5O4fyOugMRXdd7M+o=;
-        b=187CK/R60xuaTW1ISV4Fp14/xC57/neI/yBS6tA2EzU01D9x2KSGpyzj1p2PsvbFwz
-         5Twh9LHI14ayHulfHJtP32/ohMrLIcJOiUJj2WLpFOC/tBc27cFwZtvW0t172XbXoOQ3
-         ZXj36WHlxh3cHEudVUvb5UsYxlvXoJgwpK27ijfLDV2f40W0JFXmbIXyVhUBoyKzVXJj
-         Ct6aXoJIEH4aJtWa2ul9qWIGSwHd6cAl/76OOzbCeZAQM3rbmGTlpCAP3mgo7XiD3ubD
-         br7xqOr6dw2n4x6lcCACAac+MbQrLuTgvo9QLJ8Y9WxciI9fznq0ZusVPXwHswC4gZ02
-         YZdw==
-X-Gm-Message-State: ACgBeo0isDHBG9p2f24+oWoCeF1NsqWtwW++fYm1+jgABlPdBBkVCP+w
-	U2ksxC0HBBhZLuHye+0RONXxBqXpzBc=
-X-Google-Smtp-Source: AA6agR5j08Skk81v71QmaDi/WT6bCECv+zqPYuRoUXIcSYHRwqbk8VPDDLd37sGsnmTNsd8iQzIrOAzDMtY=
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc;
+        bh=kcUwO49ZlU6bl/Tm+t4qMFM3AvAt3rlv3WDq12yXCn8=;
+        b=MfadkIVzL1N9GD5IuDNUIQmq2MT5aEr0X3aCqabhvFd+G/acLbLagC45LRRxg/2wSh
+         uoyagJZ84OMm3t/bzg9ciEGLcU2j/gFBUu+zK5H9Sx1hyRmb2afbmguO3B66yUeh5HiX
+         5A2r3h2U61suY9G5SWGxqse4c2grhZaaoGpCBNzdaHyRJI4c0OoQFypMujXhIQ/jla/r
+         ToKTvRGhxgiwlcwdto+KO99Jy4z177MTrwJxqf7wVZawdc24YLrYeDullPYZF06w59U4
+         W+w9Ul4rolMzgR/mKGOwvs5pXpcd0ON58Gsz4gtit0jLoXNUqWPlxdyo4pQr+NDnCSK4
+         Q2YA==
+X-Gm-Message-State: ACgBeo2kpeGDe4i0RogOJKxk8DfS5fVKkEsDPuO4DjXuwdWkvGPmAZA5
+	733EuAMGjifJLgz3nzKbo1ErqvZp04o=
+X-Google-Smtp-Source: AA6agR6vbeCOP++6z+390hwytf4tDzdTpspO7jE9UZOGKy2Zs51apVk0rDEGDjb4QkAG6+ILkunHIACE8Y4=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:a005:55b3:6c26:b3e4])
- (user=surenb job=sendgmr) by 2002:a81:7992:0:b0:336:8015:4889 with SMTP id
- u140-20020a817992000000b0033680154889mr16036203ywc.80.1661896164558; Tue, 30
- Aug 2022 14:49:24 -0700 (PDT)
-Date: Tue, 30 Aug 2022 14:48:49 -0700
+ (user=surenb job=sendgmr) by 2002:a5b:18d:0:b0:695:a9d7:44b5 with SMTP id
+ r13-20020a5b018d000000b00695a9d744b5mr13051126ybl.549.1661896177035; Tue, 30
+ Aug 2022 14:49:37 -0700 (PDT)
+Date: Tue, 30 Aug 2022 14:48:54 -0700
+In-Reply-To: <20220830214919.53220-1-surenb@google.com>
 Mime-Version: 1.0
+References: <20220830214919.53220-1-surenb@google.com>
 X-Mailer: git-send-email 2.37.2.672.g94769d06f0-goog
-Message-ID: <20220830214919.53220-1-surenb@google.com>
-Subject: [RFC PATCH 00/30] Code tagging framework and applications
+Message-ID: <20220830214919.53220-6-surenb@google.com>
+Subject: [RFC PATCH 05/30] lib: code tagging framework
 From: Suren Baghdasaryan <surenb@google.com>
 To: akpm@linux-foundation.org
 Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz, 
@@ -98,312 +101,332 @@ Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz,
 	linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
-===========================
-Code tagging framework
-===========================
-Code tag is a structure identifying a specific location in the source code
-which is generated at compile time and can be embedded in an application-
-specific structure. Several applications of code tagging are included in
-this RFC, such as memory allocation tracking, dynamic fault injection,
-latency tracking and improved error code reporting.
-Basically, it takes the old trick of "define a special elf section for
-objects of a given type so that we can iterate over them at runtime" and
-creates a proper library for it.
+Add basic infrastructure to support code tagging which stores tag common
+information consisting of the module name, function, file name and line
+number. Provide functions to register a new code tag type and navigate
+between code tags.
 
-===========================
-Memory allocation tracking
-===========================
-The goal for using codetags for memory allocation tracking is to minimize
-performance and memory overhead. By recording only the call count and
-allocation size, the required operations are kept at the minimum while
-collecting statistics for every allocation in the codebase. With that
-information, if users are interested in mode detailed context for a
-specific allocation, they can enable more in-depth context tracking,
-which includes capturing the pid, tgid, task name, allocation size,
-timestamp and call stack for every allocation at the specified code
-location.
-Memory allocation tracking is implemented in two parts:
-
-part1: instruments page and slab allocators to record call count and total
-memory allocated at every allocation in the source code. Every time an
-allocation is performed by an instrumented allocator, the codetag at that
-location increments its call and size counters. Every time the memory is
-freed these counters are decremented. To decrement the counters upon free,
-allocated object needs a reference to its codetag. Page allocators use
-page_ext to record this reference while slab allocators use memcg_data of
-the slab page.
-The data is exposed to the user space via a read-only debugfs file called
-alloc_tags.
-
-Usage example:
-
-$ sort -hr /sys/kernel/debug/alloc_tags|head
-  153MiB     8599 mm/slub.c:1826 module:slub func:alloc_slab_page
- 6.08MiB      49 mm/slab_common.c:950 module:slab_common func:_kmalloc_order
- 5.09MiB     6335 mm/memcontrol.c:2814 module:memcontrol func:alloc_slab_obj_exts
- 4.54MiB      78 mm/page_alloc.c:5777 module:page_alloc func:alloc_pages_exact
- 1.32MiB      338 include/asm-generic/pgalloc.h:63 module:pgtable func:__pte_alloc_one
- 1.16MiB      603 fs/xfs/xfs_log_priv.h:700 module:xfs func:xlog_kvmalloc
- 1.00MiB      256 mm/swap_cgroup.c:48 module:swap_cgroup func:swap_cgroup_prepare
-  734KiB     5380 fs/xfs/kmem.c:20 module:xfs func:kmem_alloc
-  640KiB      160 kernel/rcu/tree.c:3184 module:tree func:fill_page_cache_func
-  640KiB      160 drivers/char/virtio_console.c:452 module:virtio_console func:alloc_buf
-
-part2: adds support for the user to select a specific code location to capture
-allocation context. A new debugfs file called alloc_tags.ctx is used to select
-which code location should capture allocation context and to read captured
-context information.
-
-Usage example:
-
-$ cd /sys/kernel/debug/
-$ echo "file include/asm-generic/pgalloc.h line 63 enable" > alloc_tags.ctx
-$ cat alloc_tags.ctx
-  920KiB      230 include/asm-generic/pgalloc.h:63 module:pgtable func:__pte_alloc_one
-    size: 4096
-    pid: 1474
-    tgid: 1474
-    comm: bash
-    ts: 175332940994
-    call stack:
-         pte_alloc_one+0xfe/0x130
-         __pte_alloc+0x22/0xb0
-         copy_page_range+0x842/0x1640
-         dup_mm+0x42d/0x580
-         copy_process+0xfb1/0x1ac0
-         kernel_clone+0x92/0x3e0
-         __do_sys_clone+0x66/0x90
-         do_syscall_64+0x38/0x90
-         entry_SYSCALL_64_after_hwframe+0x63/0xcd
-...
-
-NOTE: slab allocation tracking is not yet stable and has a leak that
-shows up in long-running tests. We are working on fixing it and posting
-the RFC early to collect some feedback and to have a reference code in
-public before presenting the idea at LPC2022.
-
-===========================
-Dynamic fault injection
-===========================
-Dynamic fault injection lets you do fault injection with a single call
-to dynamic_fault(), with a debugfs interface similar to dynamic_debug.
-
-Calls to dynamic_fault are listed in debugfs and can be enabled at
-runtime (oneshot mode or a defined frequency are also available). This
-patch also uses the memory allocation wrapper macros introduced by the
-memory allocation tracking patches to add distinct fault injection
-points for every memory allocation in the kernel.
-
-Example fault injection points, after hooking memory allocation paths:
-
-  fs/xfs/libxfs/xfs_iext_tree.c:606 module:xfs func:xfs_iext_realloc_rootclass:memory disabled "
-  fs/xfs/libxfs/xfs_inode_fork.c:503 module:xfs func:xfs_idata_reallocclass:memory disabled "
-  fs/xfs/libxfs/xfs_inode_fork.c:399 module:xfs func:xfs_iroot_reallocclass:memory disabled "
-  fs/xfs/xfs_buf.c:373 module:xfs func:xfs_buf_alloc_pagesclass:memory disabled "
-  fs/xfs/xfs_iops.c:497 module:xfs func:xfs_vn_get_linkclass:memory disabled "
-  fs/xfs/xfs_mount.c:85 module:xfs func:xfs_uuid_mountclass:memory disabled "
-
-===========================
-Latency tracking
-===========================
-This lets you instrument code for measuring latency with just two calls
-to code_tag_time_stats_start() and code_tag_time_stats_finish(), and
-makes statistics available in debugfs on a per-callsite basis.
-
-Recorded statistics include total count, frequency/rate, average
-duration, max duration, and event duration quantiles.
-
-Additionally, this patch instruments prepare_to_wait() and finish_wait().
-
-Example output:
-
-  fs/xfs/xfs_extent_busy.c:589 module:xfs func:xfs_extent_busy_flush
-  count:          61
-  rate:           0/sec
-  frequency:    19 sec
-  avg duration:   632 us
-  max duration:   2 ms
-  quantiles (us): 274 288 288 296 296 296 296 336 336 336 336 336 336 336 336
-
-===========================
-Improved error codes
-===========================
-Ever waste hours trying to figure out which line of code from some
-obscure module is returning you -EINVAL and nothing else?
-
-What if we had... more error codes?
-
-This patch adds ERR(), which returns a unique error code that is related
-to the error code that passed to it: the original error code can be
-recovered with error_class(), and errname() (as well as %pE) returns an
-error string that includes the file and line number of the ERR() call.
-
-Example output:
-
-  VFS: Cannot open root device "sda" or unknown-block(8,0): error -EINVAL at fs/ext4/super.c:4387
-
-===========================
-Dynamic debug conversion to code tagging
-===========================
-There are several open coded implementations of the "define a special elf
-section for objects and iterate" technique that should be converted to
-code tagging. This series just converts dynamic debug; there are others
-(multiple in ftrace, in particular) that should also be converted.
-
-===========================
-
-The patchset applies cleanly over Linux 6.0-rc3
-The tree for testing is published at:
-https://github.com/surenbaghdasaryan/linux/tree/alloc_tags_rfc
-
-The structure of the patchset is:
-- code tagging framework (patches 1-6)
-- page allocation tracking (patches 7-10)
-- slab allocation tracking (patch 11-16)
-- allocation context capture (patch 17-21)
-- dynamic fault injection (patch 22)
-- latency tracking (patch 23-27)
-- improved error codes (patch 28)
-- dynamic debug conversion to code tagging (patch 29)
-- MAINTAINERS update (patch 30)
-
-Next steps:
-- track and fix slab allocator leak mentioned earlier;
-- instrument more allocators: vmalloc, per-cpu allocations, others?
-
-
-Kent Overstreet (14):
-  lib/string_helpers: Drop space in string_get_size's output
-  Lazy percpu counters
-  scripts/kallysms: Always include __start and __stop symbols
-  lib/string.c: strsep_no_empty()
-  codetag: add codetag query helper functions
-  Code tagging based fault injection
-  timekeeping: Add a missing include
-  wait: Clean up waitqueue_entry initialization
-  lib/time_stats: New library for statistics on events
-  bcache: Convert to lib/time_stats
-  Code tagging based latency tracking
-  Improved symbolic error names
-  dyndbg: Convert to code tagging
-  MAINTAINERS: Add entries for code tagging & related
-
-Suren Baghdasaryan (16):
-  kernel/module: move find_kallsyms_symbol_value declaration
-  lib: code tagging framework
-  lib: code tagging module support
-  lib: add support for allocation tagging
-  lib: introduce page allocation tagging
-  change alloc_pages name in dma_map_ops to avoid name conflicts
-  mm: enable page allocation tagging for __get_free_pages and
-    alloc_pages
-  mm: introduce slabobj_ext to support slab object extensions
-  mm: introduce __GFP_NO_OBJ_EXT flag to selectively prevent slabobj_ext
-    creation
-  mm/slab: introduce SLAB_NO_OBJ_EXT to avoid obj_ext creation
-  mm: prevent slabobj_ext allocations for slabobj_ext and kmem_cache
-    objects
-  lib: introduce slab allocation tagging
-  mm: enable slab allocation tagging for kmalloc and friends
-  move stack capture functionality into a separate function for reuse
-  lib: introduce support for storing code tag context
-  lib: implement context capture support for page and slab allocators
-
- MAINTAINERS                         |  34 ++
- arch/x86/kernel/amd_gart_64.c       |   2 +-
- drivers/iommu/dma-iommu.c           |   2 +-
- drivers/md/bcache/Kconfig           |   1 +
- drivers/md/bcache/bcache.h          |   1 +
- drivers/md/bcache/bset.c            |   8 +-
- drivers/md/bcache/bset.h            |   1 +
- drivers/md/bcache/btree.c           |  12 +-
- drivers/md/bcache/super.c           |   3 +
- drivers/md/bcache/sysfs.c           |  43 ++-
- drivers/md/bcache/util.c            |  30 --
- drivers/md/bcache/util.h            |  57 ---
- drivers/xen/grant-dma-ops.c         |   2 +-
- drivers/xen/swiotlb-xen.c           |   2 +-
- include/asm-generic/codetag.lds.h   |  18 +
- include/asm-generic/vmlinux.lds.h   |   8 +-
- include/linux/alloc_tag.h           |  84 +++++
- include/linux/codetag.h             | 159 +++++++++
- include/linux/codetag_ctx.h         |  48 +++
- include/linux/codetag_time_stats.h  |  54 +++
- include/linux/dma-map-ops.h         |   2 +-
- include/linux/dynamic_debug.h       |  11 +-
- include/linux/dynamic_fault.h       |  79 +++++
- include/linux/err.h                 |   2 +-
- include/linux/errname.h             |  50 +++
- include/linux/gfp.h                 |  10 +-
- include/linux/gfp_types.h           |  12 +-
- include/linux/io_uring_types.h      |   2 +-
- include/linux/lazy-percpu-counter.h |  67 ++++
- include/linux/memcontrol.h          |  23 +-
- include/linux/module.h              |   1 +
- include/linux/page_ext.h            |   3 +-
- include/linux/pgalloc_tag.h         |  63 ++++
- include/linux/sbitmap.h             |   6 +-
- include/linux/sched.h               |   6 +-
- include/linux/slab.h                | 136 +++++---
- include/linux/slab_def.h            |   2 +-
- include/linux/slub_def.h            |   4 +-
- include/linux/stackdepot.h          |   3 +
- include/linux/string.h              |   1 +
- include/linux/time_stats.h          |  44 +++
- include/linux/timekeeping.h         |   1 +
- include/linux/wait.h                |  72 ++--
- include/linux/wait_bit.h            |   7 +-
- init/Kconfig                        |   5 +
- kernel/dma/mapping.c                |   4 +-
- kernel/module/internal.h            |   3 -
- kernel/module/main.c                |  27 +-
- kernel/sched/wait.c                 |  15 +-
- lib/Kconfig                         |   6 +
- lib/Kconfig.debug                   |  46 +++
- lib/Makefile                        |  10 +
- lib/alloc_tag.c                     | 391 +++++++++++++++++++++
- lib/codetag.c                       | 519 ++++++++++++++++++++++++++++
- lib/codetag_time_stats.c            | 143 ++++++++
- lib/dynamic_debug.c                 | 452 +++++++++---------------
- lib/dynamic_fault.c                 | 372 ++++++++++++++++++++
- lib/errname.c                       | 103 ++++++
- lib/lazy-percpu-counter.c           | 141 ++++++++
- lib/pgalloc_tag.c                   |  22 ++
- lib/stackdepot.c                    |  68 ++++
- lib/string.c                        |  19 +
- lib/string_helpers.c                |   3 +-
- lib/time_stats.c                    | 236 +++++++++++++
- mm/kfence/core.c                    |   2 +-
- mm/memcontrol.c                     |  62 ++--
- mm/mempolicy.c                      |   4 +-
- mm/page_alloc.c                     |  13 +-
- mm/page_ext.c                       |   6 +
- mm/page_owner.c                     |  54 +--
- mm/slab.c                           |   4 +-
- mm/slab.h                           | 125 ++++---
- mm/slab_common.c                    |  49 ++-
- mm/slob.c                           |   2 +
- mm/slub.c                           |   7 +-
- scripts/kallsyms.c                  |  13 +
- scripts/module.lds.S                |   7 +
- 77 files changed, 3406 insertions(+), 703 deletions(-)
- create mode 100644 include/asm-generic/codetag.lds.h
- create mode 100644 include/linux/alloc_tag.h
+Co-developed-by: Kent Overstreet <kent.overstreet@linux.dev>
+Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
+Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+---
+ include/linux/codetag.h |  71 ++++++++++++++
+ lib/Kconfig.debug       |   4 +
+ lib/Makefile            |   1 +
+ lib/codetag.c           | 199 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 275 insertions(+)
  create mode 100644 include/linux/codetag.h
- create mode 100644 include/linux/codetag_ctx.h
- create mode 100644 include/linux/codetag_time_stats.h
- create mode 100644 include/linux/dynamic_fault.h
- create mode 100644 include/linux/lazy-percpu-counter.h
- create mode 100644 include/linux/pgalloc_tag.h
- create mode 100644 include/linux/time_stats.h
- create mode 100644 lib/alloc_tag.c
  create mode 100644 lib/codetag.c
- create mode 100644 lib/codetag_time_stats.c
- create mode 100644 lib/dynamic_fault.c
- create mode 100644 lib/lazy-percpu-counter.c
- create mode 100644 lib/pgalloc_tag.c
- create mode 100644 lib/time_stats.c
 
+diff --git a/include/linux/codetag.h b/include/linux/codetag.h
+new file mode 100644
+index 000000000000..a9d7adecc2a5
+--- /dev/null
++++ b/include/linux/codetag.h
+@@ -0,0 +1,71 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * code tagging framework
++ */
++#ifndef _LINUX_CODETAG_H
++#define _LINUX_CODETAG_H
++
++#include <linux/types.h>
++
++struct codetag_iterator;
++struct codetag_type;
++struct seq_buf;
++struct module;
++
++/*
++ * An instance of this structure is created in a special ELF section at every
++ * code location being tagged.  At runtime, the special section is treated as
++ * an array of these.
++ */
++struct codetag {
++	unsigned int flags; /* used in later patches */
++	unsigned int lineno;
++	const char *modname;
++	const char *function;
++	const char *filename;
++} __aligned(8);
++
++union codetag_ref {
++	struct codetag *ct;
++};
++
++struct codetag_range {
++	struct codetag *start;
++	struct codetag *stop;
++};
++
++struct codetag_module {
++	struct module *mod;
++	struct codetag_range range;
++};
++
++struct codetag_type_desc {
++	const char *section;
++	size_t tag_size;
++};
++
++struct codetag_iterator {
++	struct codetag_type *cttype;
++	struct codetag_module *cmod;
++	unsigned long mod_id;
++	struct codetag *ct;
++};
++
++#define CODE_TAG_INIT {					\
++	.modname	= KBUILD_MODNAME,		\
++	.function	= __func__,			\
++	.filename	= __FILE__,			\
++	.lineno		= __LINE__,			\
++	.flags		= 0,				\
++}
++
++void codetag_lock_module_list(struct codetag_type *cttype, bool lock);
++struct codetag_iterator codetag_get_ct_iter(struct codetag_type *cttype);
++struct codetag *codetag_next_ct(struct codetag_iterator *iter);
++
++void codetag_to_text(struct seq_buf *out, struct codetag *ct);
++
++struct codetag_type *
++codetag_register_type(const struct codetag_type_desc *desc);
++
++#endif /* _LINUX_CODETAG_H */
+diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+index bcbe60d6c80c..22bc1eff7f8f 100644
+--- a/lib/Kconfig.debug
++++ b/lib/Kconfig.debug
+@@ -969,6 +969,10 @@ config DEBUG_STACKOVERFLOW
+ 
+ 	  If in doubt, say "N".
+ 
++config CODE_TAGGING
++	bool
++	select KALLSYMS
++
+ source "lib/Kconfig.kasan"
+ source "lib/Kconfig.kfence"
+ 
+diff --git a/lib/Makefile b/lib/Makefile
+index cc7762748708..574d7716e640 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -227,6 +227,7 @@ obj-$(CONFIG_OF_RECONFIG_NOTIFIER_ERROR_INJECT) += \
+ 	of-reconfig-notifier-error-inject.o
+ obj-$(CONFIG_FUNCTION_ERROR_INJECTION) += error-inject.o
+ 
++obj-$(CONFIG_CODE_TAGGING) += codetag.o
+ lib-$(CONFIG_GENERIC_BUG) += bug.o
+ 
+ obj-$(CONFIG_HAVE_ARCH_TRACEHOOK) += syscall.o
+diff --git a/lib/codetag.c b/lib/codetag.c
+new file mode 100644
+index 000000000000..7708f8388e55
+--- /dev/null
++++ b/lib/codetag.c
+@@ -0,0 +1,199 @@
++// SPDX-License-Identifier: GPL-2.0-only
++#include <linux/codetag.h>
++#include <linux/idr.h>
++#include <linux/kallsyms.h>
++#include <linux/module.h>
++#include <linux/seq_buf.h>
++#include <linux/slab.h>
++
++struct codetag_type {
++	struct list_head link;
++	unsigned int count;
++	struct idr mod_idr;
++	struct rw_semaphore mod_lock; /* protects mod_idr */
++	struct codetag_type_desc desc;
++};
++
++static DEFINE_MUTEX(codetag_lock);
++static LIST_HEAD(codetag_types);
++
++void codetag_lock_module_list(struct codetag_type *cttype, bool lock)
++{
++	if (lock)
++		down_read(&cttype->mod_lock);
++	else
++		up_read(&cttype->mod_lock);
++}
++
++struct codetag_iterator codetag_get_ct_iter(struct codetag_type *cttype)
++{
++	struct codetag_iterator iter = {
++		.cttype = cttype,
++		.cmod = NULL,
++		.mod_id = 0,
++		.ct = NULL,
++	};
++
++	return iter;
++}
++
++static inline struct codetag *get_first_module_ct(struct codetag_module *cmod)
++{
++	return cmod->range.start < cmod->range.stop ? cmod->range.start : NULL;
++}
++
++static inline
++struct codetag *get_next_module_ct(struct codetag_iterator *iter)
++{
++	struct codetag *res = (struct codetag *)
++			((char *)iter->ct + iter->cttype->desc.tag_size);
++
++	return res < iter->cmod->range.stop ? res : NULL;
++}
++
++struct codetag *codetag_next_ct(struct codetag_iterator *iter)
++{
++	struct codetag_type *cttype = iter->cttype;
++	struct codetag_module *cmod;
++	struct codetag *ct;
++
++	lockdep_assert_held(&cttype->mod_lock);
++
++	if (unlikely(idr_is_empty(&cttype->mod_idr)))
++		return NULL;
++
++	ct = NULL;
++	while (true) {
++		cmod = idr_find(&cttype->mod_idr, iter->mod_id);
++
++		/* If module was removed move to the next one */
++		if (!cmod)
++			cmod = idr_get_next_ul(&cttype->mod_idr,
++					       &iter->mod_id);
++
++		/* Exit if no more modules */
++		if (!cmod)
++			break;
++
++		if (cmod != iter->cmod) {
++			iter->cmod = cmod;
++			ct = get_first_module_ct(cmod);
++		} else
++			ct = get_next_module_ct(iter);
++
++		if (ct)
++			break;
++
++		iter->mod_id++;
++	}
++
++	iter->ct = ct;
++	return ct;
++}
++
++void codetag_to_text(struct seq_buf *out, struct codetag *ct)
++{
++	seq_buf_printf(out, "%s:%u module:%s func:%s",
++		       ct->filename, ct->lineno,
++		       ct->modname, ct->function);
++}
++
++static inline size_t range_size(const struct codetag_type *cttype,
++				const struct codetag_range *range)
++{
++	return ((char *)range->stop - (char *)range->start) /
++			cttype->desc.tag_size;
++}
++
++static void *get_symbol(struct module *mod, const char *prefix, const char *name)
++{
++	char buf[64];
++	int res;
++
++	res = snprintf(buf, sizeof(buf), "%s%s", prefix, name);
++	if (WARN_ON(res < 1 || res > sizeof(buf)))
++		return NULL;
++
++	return mod ?
++		(void *)find_kallsyms_symbol_value(mod, buf) :
++		(void *)kallsyms_lookup_name(buf);
++}
++
++static struct codetag_range get_section_range(struct module *mod,
++					      const char *section)
++{
++	return (struct codetag_range) {
++		get_symbol(mod, "__start_", section),
++		get_symbol(mod, "__stop_", section),
++	};
++}
++
++static int codetag_module_init(struct codetag_type *cttype, struct module *mod)
++{
++	struct codetag_range range;
++	struct codetag_module *cmod;
++	int err;
++
++	range = get_section_range(mod, cttype->desc.section);
++	if (!range.start || !range.stop) {
++		pr_warn("Failed to load code tags of type %s from the module %s\n",
++			cttype->desc.section,
++			mod ? mod->name : "(built-in)");
++		return -EINVAL;
++	}
++
++	/* Ignore empty ranges */
++	if (range.start == range.stop)
++		return 0;
++
++	BUG_ON(range.start > range.stop);
++
++	cmod = kmalloc(sizeof(*cmod), GFP_KERNEL);
++	if (unlikely(!cmod))
++		return -ENOMEM;
++
++	cmod->mod = mod;
++	cmod->range = range;
++
++	down_write(&cttype->mod_lock);
++	err = idr_alloc(&cttype->mod_idr, cmod, 0, 0, GFP_KERNEL);
++	if (err >= 0)
++		cttype->count += range_size(cttype, &range);
++	up_write(&cttype->mod_lock);
++
++	if (err < 0) {
++		kfree(cmod);
++		return err;
++	}
++
++	return 0;
++}
++
++struct codetag_type *
++codetag_register_type(const struct codetag_type_desc *desc)
++{
++	struct codetag_type *cttype;
++	int err;
++
++	BUG_ON(desc->tag_size <= 0);
++
++	cttype = kzalloc(sizeof(*cttype), GFP_KERNEL);
++	if (unlikely(!cttype))
++		return ERR_PTR(-ENOMEM);
++
++	cttype->desc = *desc;
++	idr_init(&cttype->mod_idr);
++	init_rwsem(&cttype->mod_lock);
++
++	err = codetag_module_init(cttype, NULL);
++	if (unlikely(err)) {
++		kfree(cttype);
++		return ERR_PTR(err);
++	}
++
++	mutex_lock(&codetag_lock);
++	list_add_tail(&cttype->link, &codetag_types);
++	mutex_unlock(&codetag_lock);
++
++	return cttype;
++}
 -- 
 2.37.2.672.g94769d06f0-goog
 
