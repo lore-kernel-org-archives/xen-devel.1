@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16861ECAAD8
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 05:05:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.395186.635042 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8846C64991
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 05:05:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.395183.635019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFvC-0001C6-HH; Wed, 31 Aug 2022 05:05:50 +0000
+	id 1oTFvA-0000eF-Au; Wed, 31 Aug 2022 05:05:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 395186.635042; Wed, 31 Aug 2022 05:05:50 +0000
+Received: by outflank-mailman (output) from mailman id 395183.635019; Wed, 31 Aug 2022 05:05:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFvB-00018u-R9; Wed, 31 Aug 2022 05:05:49 +0000
-Received: by outflank-mailman (input) for mailman id 395186;
- Tue, 30 Aug 2022 21:49:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oTFv9-0000bi-Mt; Wed, 31 Aug 2022 05:05:47 +0000
+Received: by outflank-mailman (input) for mailman id 395183;
+ Tue, 30 Aug 2022 21:49:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GzUx=ZC=flex--surenb.bounces.google.com=3A4YOYwYKCWgYaXKTHMUUMRK.IUSdKT-JKbKRROYZY.dKTVXUPKIZ.UXM@srs-se1.protection.inumbo.net>)
- id 1oT97N-0008CX-2L
- for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:57 +0000
-Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
- [2607:f8b0:4864:20::b49])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af85246f-28ad-11ed-a60c-1f1ba7de4fb0;
- Tue, 30 Aug 2022 23:49:56 +0200 (CEST)
-Received: by mail-yb1-xb49.google.com with SMTP id
- p8-20020a258188000000b0069ca52d9f68so712448ybk.2
- for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:56 -0700 (PDT)
+ <SRS0=/tbd=ZC=flex--surenb.bounces.google.com=3_YUOYwYKCWISURENBGOOGLE.COMXEN-DEVELLISTS.XENPROJECT.ORG@srs-se1.protection.inumbo.net>)
+ id 1oT97H-0008Cd-94
+ for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:51 +0000
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [2607:f8b0:4864:20::114a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ac5a98d9-28ad-11ed-bd2e-47488cf2e6aa;
+ Tue, 30 Aug 2022 23:49:50 +0200 (CEST)
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-33dce8cae71so188549747b3.8
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,44 +42,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af85246f-28ad-11ed-a60c-1f1ba7de4fb0
+X-Inumbo-ID: ac5a98d9-28ad-11ed-bd2e-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc;
-        bh=+dBCH/ZYeXKPl1XZC0y8jtwH0hgKGXE3JjJWq8gRM44=;
-        b=AFaSMy8jXac7TuC+3zPxWUGJEoV6Xwt0zQp9MqDmFFlT9mWJtIdF7dkyLAZ2dlc2YA
-         b9Gf5k0v2Zvts/DmzzZ5pyBGK4PvMyQtpd/jCDUfU7pbPfnKneDUuVfIqoh8xzC2EEXM
-         ggO+9/ET/L3N7vFPV9TWkym8O3GXfgaPKOHQOvjujiuqNd9k0qGNIcoGl/dBIZk4zlFa
-         QTsb0Fx654oBfwlYyCvPgpIbUnjCokKwOPL7A775wrhi+ShDtrR1D6bLCXYg9BBaYtDw
-         bc4QILCqScR/90fRkJQtLt8mPydrXHAQRmui3zER0ZDrlUBSto4jKF/epnVV4Tt3A9sc
-         lVzg==
+        bh=hT6Mz/zinVpRQBPKe7V7vUNm2EL+nNA0Rd6lje133es=;
+        b=dfpyzvwd4Cc++xCQWq35JB0wJm+WrSSoxMENLy9aDfaWxkxM1OaMmDnm/vqeqmhqwU
+         gZ74ppSfTAgF7SE3SqSoTv2aIM58r+Pz/1W9uwrKdGiDv7ewg2BuxbdnPUGh3CuiOCkA
+         14w+GGgADDYFbMYHNlMxcXneiC4QjBwI/pjC3GHz1ttLv+1YSdBbrybMdEtkcC5CZ2yG
+         0v6U9Ssq49CU9MEssaTVF8mmd1yQf+A9weRhrB49GBJc7iyJ1ibIQDHVBUxMDTeBzNZT
+         89GZsPPyB1nT7HTWg+BylmuFWY1bglVPePrUwBMLPZc7q+nvTNhi0s23dmExUdbXdR5Y
+         Cwww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc;
-        bh=+dBCH/ZYeXKPl1XZC0y8jtwH0hgKGXE3JjJWq8gRM44=;
-        b=L8xjTa/wSHJmHSZFYg34SzMLFWAJdZnHQiTSFRJ4u2d6emDajBogvZYUsHXqseSSPs
-         APofAI5oVtJuh7wwhSX+HqfSTma+tvCUxPoaeyuJYV3Ups+eW0dHMcyeJs7CtEttEbnN
-         uHSICSDcLDgC7yzSfCjcO7zqssbir1QMQ0lYFBQsmIIJLcruw4RcNEq06wdg3MOMcNlJ
-         pLyCCOIkEoBYga7y5v9GoCD6PYT8dNlMDVQ4HFD8O9xXw+IEc67XMVFyErq41Rw4gIj8
-         YTbQ728uTF+C7hFriWvCwg6S4DGXpga1EV1m+69QUfxKO0Nn2Uq32B/1EryMgQXpY2nN
-         qEyw==
-X-Gm-Message-State: ACgBeo0S1Cay2MSpDbB5CgUkvGYiqSYaqZKA6WRyNdIf31MwDPGu5uxp
-	MhzvsMrKgMr63T/gIA2lPfLo6G3ctfQ=
-X-Google-Smtp-Source: AA6agR5IHyLOVpCYPsGCTl1WAh1PLHzSkOgAmQAkkvI/LDvSxkU9pCXJyMghFPF7B9PD/jn9WBQElFJpekI=
+        bh=hT6Mz/zinVpRQBPKe7V7vUNm2EL+nNA0Rd6lje133es=;
+        b=PX2GUKIYSAzNNbC2SE3FscIehlmsyYg9HAynh4l8Z82e0owON33YnsLsPrpTSSvoQS
+         hY4Uuu8FgZPCOvNbxetA8d/z3MF6x9XHiVImplcolG7VUgkqkY5MTxGju2D0U6Eg1KXW
+         kZluvAk7vay7VQVZgUcZICrZO3hJROdfNZfU1ZkniTDwHEU05kE8y6WJlRm2KJSJyL9M
+         ZMlBRLjnaWrAUK7+WZHq2EYFPulgjZimNJ3et/+dXTAPuS4bQlG2F4C3svUAJ3IYl8Rk
+         bACliuD23Rv90rTqEHcXIYvUtDtTqU62+lC3IhrLiLnldQzmd9edBg+kGTa+fW+39EZ0
+         ruug==
+X-Gm-Message-State: ACgBeo3vEbwEZE9ZXiuIxAt7vqpnZ+O5QW89z7alpO5/VUO9cgNjJXuP
+	CdsqZY8D0UnyNKK92nGEi0wT3qRJ3OA=
+X-Google-Smtp-Source: AA6agR6wiYlgc1y+Ddz6GZjAkBSlMmUIZ6hPk3nzcjnnuhPA77BDamNwQUPuwNWjTzLGCV8DDV21TdlLdak=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:a005:55b3:6c26:b3e4])
- (user=surenb job=sendgmr) by 2002:a25:94b:0:b0:68f:4e05:e8f0 with SMTP id
- u11-20020a25094b000000b0068f4e05e8f0mr13319593ybm.115.1661896195289; Tue, 30
- Aug 2022 14:49:55 -0700 (PDT)
-Date: Tue, 30 Aug 2022 14:49:01 -0700
+ (user=surenb job=sendgmr) by 2002:a25:cf0e:0:b0:696:42f1:3889 with SMTP id
+ f14-20020a25cf0e000000b0069642f13889mr13000431ybg.175.1661896189937; Tue, 30
+ Aug 2022 14:49:49 -0700 (PDT)
+Date: Tue, 30 Aug 2022 14:48:59 -0700
 In-Reply-To: <20220830214919.53220-1-surenb@google.com>
 Mime-Version: 1.0
 References: <20220830214919.53220-1-surenb@google.com>
 X-Mailer: git-send-email 2.37.2.672.g94769d06f0-goog
-Message-ID: <20220830214919.53220-13-surenb@google.com>
-Subject: [RFC PATCH 12/30] mm: introduce __GFP_NO_OBJ_EXT flag to selectively
- prevent slabobj_ext creation
+Message-ID: <20220830214919.53220-11-surenb@google.com>
+Subject: [RFC PATCH 10/30] mm: enable page allocation tagging for
+ __get_free_pages and alloc_pages
 From: Suren Baghdasaryan <surenb@google.com>
 To: akpm@linux-foundation.org
 Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz, 
@@ -102,58 +102,210 @@ Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz,
 	linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
-Introduce __GFP_NO_OBJ_EXT flag in order to prevent recursive allocations
-when allocating slabobj_ext on a slab.
+Redefine alloc_pages, __get_free_pages to record allocations done by
+these functions. Instrument deallocation hooks to record object freeing.
 
 Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 ---
- include/linux/gfp_types.h | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ include/linux/gfp.h         | 10 +++++++---
+ include/linux/page_ext.h    |  3 ++-
+ include/linux/pgalloc_tag.h | 35 +++++++++++++++++++++++++++++++++++
+ mm/mempolicy.c              |  4 ++--
+ mm/page_alloc.c             | 13 ++++++++++---
+ 5 files changed, 56 insertions(+), 9 deletions(-)
 
-diff --git a/include/linux/gfp_types.h b/include/linux/gfp_types.h
-index d88c46ca82e1..a2cba1d20b86 100644
---- a/include/linux/gfp_types.h
-+++ b/include/linux/gfp_types.h
-@@ -55,8 +55,13 @@ typedef unsigned int __bitwise gfp_t;
- #define ___GFP_SKIP_KASAN_UNPOISON	0
- #define ___GFP_SKIP_KASAN_POISON	0
- #endif
-+#ifdef CONFIG_SLAB_OBJ_EXT
-+#define ___GFP_NO_OBJ_EXT       0x8000000u
-+#else
-+#define ___GFP_NO_OBJ_EXT       0
-+#endif
- #ifdef CONFIG_LOCKDEP
--#define ___GFP_NOLOCKDEP	0x8000000u
-+#define ___GFP_NOLOCKDEP	0x10000000u
+diff --git a/include/linux/gfp.h b/include/linux/gfp.h
+index f314be58fa77..5cb950a49d40 100644
+--- a/include/linux/gfp.h
++++ b/include/linux/gfp.h
+@@ -6,6 +6,7 @@
+ 
+ #include <linux/mmzone.h>
+ #include <linux/topology.h>
++#include <linux/pgalloc_tag.h>
+ 
+ struct vm_area_struct;
+ 
+@@ -267,12 +268,12 @@ static inline struct page *alloc_pages_node(int nid, gfp_t gfp_mask,
+ }
+ 
+ #ifdef CONFIG_NUMA
+-struct page *alloc_pages(gfp_t gfp, unsigned int order);
++struct page *_alloc_pages(gfp_t gfp, unsigned int order);
+ struct folio *folio_alloc(gfp_t gfp, unsigned order);
+ struct folio *vma_alloc_folio(gfp_t gfp, int order, struct vm_area_struct *vma,
+ 		unsigned long addr, bool hugepage);
  #else
- #define ___GFP_NOLOCKDEP	0
+-static inline struct page *alloc_pages(gfp_t gfp_mask, unsigned int order)
++static inline struct page *_alloc_pages(gfp_t gfp_mask, unsigned int order)
+ {
+ 	return alloc_pages_node(numa_node_id(), gfp_mask, order);
+ }
+@@ -283,6 +284,7 @@ static inline struct folio *folio_alloc(gfp_t gfp, unsigned int order)
+ #define vma_alloc_folio(gfp, order, vma, addr, hugepage)		\
+ 	folio_alloc(gfp, order)
  #endif
-@@ -101,12 +106,15 @@ typedef unsigned int __bitwise gfp_t;
-  * node with no fallbacks or placement policy enforcements.
-  *
-  * %__GFP_ACCOUNT causes the allocation to be accounted to kmemcg.
-+ *
-+ * %__GFP_NO_OBJ_EXT causes slab allocation to have no object extension.
++#define alloc_pages(gfp, order) pgtag_alloc_pages(gfp, order)
+ #define alloc_page(gfp_mask) alloc_pages(gfp_mask, 0)
+ static inline struct page *alloc_page_vma(gfp_t gfp,
+ 		struct vm_area_struct *vma, unsigned long addr)
+@@ -292,7 +294,9 @@ static inline struct page *alloc_page_vma(gfp_t gfp,
+ 	return &folio->page;
+ }
+ 
+-extern unsigned long __get_free_pages(gfp_t gfp_mask, unsigned int order);
++extern unsigned long _get_free_pages(gfp_t gfp_mask, unsigned int order,
++				     struct page **ppage);
++#define __get_free_pages(gfp_mask, order) pgtag_get_free_pages(gfp_mask, order)
+ extern unsigned long get_zeroed_page(gfp_t gfp_mask);
+ 
+ void *alloc_pages_exact(size_t size, gfp_t gfp_mask) __alloc_size(1);
+diff --git a/include/linux/page_ext.h b/include/linux/page_ext.h
+index fabb2e1e087f..b26077110fb3 100644
+--- a/include/linux/page_ext.h
++++ b/include/linux/page_ext.h
+@@ -4,7 +4,6 @@
+ 
+ #include <linux/types.h>
+ #include <linux/stacktrace.h>
+-#include <linux/stackdepot.h>
+ 
+ struct pglist_data;
+ struct page_ext_operations {
+@@ -14,6 +13,8 @@ struct page_ext_operations {
+ 	void (*init)(void);
+ };
+ 
++#include <linux/stackdepot.h>
++
+ #ifdef CONFIG_PAGE_EXTENSION
+ 
+ enum page_ext_flags {
+diff --git a/include/linux/pgalloc_tag.h b/include/linux/pgalloc_tag.h
+index f525abfe51d4..154ea7436fec 100644
+--- a/include/linux/pgalloc_tag.h
++++ b/include/linux/pgalloc_tag.h
+@@ -5,6 +5,8 @@
+ #ifndef _LINUX_PGALLOC_TAG_H
+ #define _LINUX_PGALLOC_TAG_H
+ 
++#ifdef CONFIG_PAGE_ALLOC_TAGGING
++
+ #include <linux/alloc_tag.h>
+ #include <linux/page_ext.h>
+ 
+@@ -25,4 +27,37 @@ static inline void pgalloc_tag_dec(struct page *page, unsigned int order)
+ 		alloc_tag_sub(get_page_tag_ref(page), PAGE_SIZE << order);
+ }
+ 
++/*
++ * Redefinitions of the common page allocators/destructors
++ */
++#define pgtag_alloc_pages(gfp, order)					\
++({									\
++	struct page *_page = _alloc_pages((gfp), (order));		\
++									\
++	if (_page)							\
++		alloc_tag_add(get_page_tag_ref(_page), PAGE_SIZE << (order));\
++	_page;								\
++})
++
++#define pgtag_get_free_pages(gfp_mask, order)				\
++({									\
++	struct page *_page;						\
++	unsigned long _res = _get_free_pages((gfp_mask), (order), &_page);\
++									\
++	if (_res)							\
++		alloc_tag_add(get_page_tag_ref(_page), PAGE_SIZE << (order));\
++	_res;								\
++})
++
++#else /* CONFIG_PAGE_ALLOC_TAGGING */
++
++#define pgtag_alloc_pages(gfp, order) _alloc_pages(gfp, order)
++
++#define pgtag_get_free_pages(gfp_mask, order) \
++	_get_free_pages((gfp_mask), (order), NULL)
++
++#define pgalloc_tag_dec(__page, __size)		do {} while (0)
++
++#endif /* CONFIG_PAGE_ALLOC_TAGGING */
++
+ #endif /* _LINUX_PGALLOC_TAG_H */
+diff --git a/mm/mempolicy.c b/mm/mempolicy.c
+index b73d3248d976..f7e6d9564a49 100644
+--- a/mm/mempolicy.c
++++ b/mm/mempolicy.c
+@@ -2249,7 +2249,7 @@ EXPORT_SYMBOL(vma_alloc_folio);
+  * flags are used.
+  * Return: The page on success or NULL if allocation fails.
   */
- #define __GFP_RECLAIMABLE ((__force gfp_t)___GFP_RECLAIMABLE)
- #define __GFP_WRITE	((__force gfp_t)___GFP_WRITE)
- #define __GFP_HARDWALL   ((__force gfp_t)___GFP_HARDWALL)
- #define __GFP_THISNODE	((__force gfp_t)___GFP_THISNODE)
- #define __GFP_ACCOUNT	((__force gfp_t)___GFP_ACCOUNT)
-+#define __GFP_NO_OBJ_EXT   ((__force gfp_t)___GFP_NO_OBJ_EXT)
+-struct page *alloc_pages(gfp_t gfp, unsigned order)
++struct page *_alloc_pages(gfp_t gfp, unsigned int order)
+ {
+ 	struct mempolicy *pol = &default_policy;
+ 	struct page *page;
+@@ -2273,7 +2273,7 @@ struct page *alloc_pages(gfp_t gfp, unsigned order)
  
- /**
-  * DOC: Watermark modifiers
-@@ -256,7 +264,7 @@ typedef unsigned int __bitwise gfp_t;
- #define __GFP_NOLOCKDEP ((__force gfp_t)___GFP_NOLOCKDEP)
+ 	return page;
+ }
+-EXPORT_SYMBOL(alloc_pages);
++EXPORT_SYMBOL(_alloc_pages);
  
- /* Room for N __GFP_FOO bits */
--#define __GFP_BITS_SHIFT (27 + IS_ENABLED(CONFIG_LOCKDEP))
-+#define __GFP_BITS_SHIFT (28 + IS_ENABLED(CONFIG_LOCKDEP))
- #define __GFP_BITS_MASK ((__force gfp_t)((1 << __GFP_BITS_SHIFT) - 1))
+ struct folio *folio_alloc(gfp_t gfp, unsigned order)
+ {
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index e5486d47406e..165daba19e2a 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -763,6 +763,7 @@ static inline bool pcp_allowed_order(unsigned int order)
  
- /**
+ static inline void free_the_page(struct page *page, unsigned int order)
+ {
++
+ 	if (pcp_allowed_order(order))		/* Via pcp? */
+ 		free_unref_page(page, order);
+ 	else
+@@ -1120,6 +1121,8 @@ static inline void __free_one_page(struct page *page,
+ 	VM_BUG_ON_PAGE(pfn & ((1 << order) - 1), page);
+ 	VM_BUG_ON_PAGE(bad_range(zone, page), page);
+ 
++	pgalloc_tag_dec(page, order);
++
+ 	while (order < MAX_ORDER - 1) {
+ 		if (compaction_capture(capc, page, order, migratetype)) {
+ 			__mod_zone_freepage_state(zone, -(1 << order),
+@@ -3440,6 +3443,7 @@ static void free_unref_page_commit(struct zone *zone, struct per_cpu_pages *pcp,
+ 	int pindex;
+ 	bool free_high;
+ 
++	pgalloc_tag_dec(page, order);
+ 	__count_vm_event(PGFREE);
+ 	pindex = order_to_pindex(migratetype, order);
+ 	list_add(&page->pcp_list, &pcp->lists[pindex]);
+@@ -5557,16 +5561,19 @@ EXPORT_SYMBOL(__folio_alloc);
+  * address cannot represent highmem pages. Use alloc_pages and then kmap if
+  * you need to access high mem.
+  */
+-unsigned long __get_free_pages(gfp_t gfp_mask, unsigned int order)
++unsigned long _get_free_pages(gfp_t gfp_mask, unsigned int order,
++			      struct page **ppage)
+ {
+ 	struct page *page;
+ 
+-	page = alloc_pages(gfp_mask & ~__GFP_HIGHMEM, order);
++	page = _alloc_pages(gfp_mask & ~__GFP_HIGHMEM, order);
++	if (ppage)
++		*ppage = page;
+ 	if (!page)
+ 		return 0;
+ 	return (unsigned long) page_address(page);
+ }
+-EXPORT_SYMBOL(__get_free_pages);
++EXPORT_SYMBOL(_get_free_pages);
+ 
+ unsigned long get_zeroed_page(gfp_t gfp_mask)
+ {
 -- 
 2.37.2.672.g94769d06f0-goog
 
