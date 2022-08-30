@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B67CECAAD8
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125A7C0502C
 	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 05:05:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.395166.634952 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.395171.634969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFv5-0007j2-KT; Wed, 31 Aug 2022 05:05:43 +0000
+	id 1oTFv6-000818-JR; Wed, 31 Aug 2022 05:05:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 395166.634952; Wed, 31 Aug 2022 05:05:43 +0000
+Received: by outflank-mailman (output) from mailman id 395171.634969; Wed, 31 Aug 2022 05:05:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTFv5-0007ho-FF; Wed, 31 Aug 2022 05:05:43 +0000
-Received: by outflank-mailman (input) for mailman id 395166;
- Tue, 30 Aug 2022 21:49:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oTFv6-0007yE-7k; Wed, 31 Aug 2022 05:05:44 +0000
+Received: by outflank-mailman (input) for mailman id 395171;
+ Tue, 30 Aug 2022 21:49:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=j0IG=ZC=flex--surenb.bounces.google.com=36YUOYwYKCU48A7u3rw44w1u.s42Du3-tuBu11y898.Du3574zus9.47w@srs-se1.protection.inumbo.net>)
- id 1oT96x-0008Cd-9f
- for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:31 +0000
-Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
- [2607:f8b0:4864:20::b49])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a0275f40-28ad-11ed-bd2e-47488cf2e6aa;
- Tue, 30 Aug 2022 23:49:30 +0200 (CEST)
-Received: by mail-yb1-xb49.google.com with SMTP id
- v5-20020a2583c5000000b006964324be8cso713972ybm.14
- for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:30 -0700 (PDT)
+ <SRS0=uQxP=ZC=flex--surenb.bounces.google.com=37oUOYwYKCVMDFCz8w19916z.x97Iz8-yzGz663DED.Iz8AC94zxE.9C1@srs-se1.protection.inumbo.net>)
+ id 1oT972-0008CX-I9
+ for xen-devel@lists.xenproject.org; Tue, 30 Aug 2022 21:49:36 +0000
+Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
+ [2607:f8b0:4864:20::1149])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a34913ca-28ad-11ed-a60c-1f1ba7de4fb0;
+ Tue, 30 Aug 2022 23:49:35 +0200 (CEST)
+Received: by mail-yw1-x1149.google.com with SMTP id
+ 00721157ae682-33e1114437fso189328857b3.19
+ for <xen-devel@lists.xenproject.org>; Tue, 30 Aug 2022 14:49:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,43 +42,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0275f40-28ad-11ed-bd2e-47488cf2e6aa
+X-Inumbo-ID: a34913ca-28ad-11ed-a60c-1f1ba7de4fb0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:from:to:cc;
-        bh=nkzMCqKgjBTn+NwznXGF4FkMKBv5sNXeON2LIxVXB6M=;
-        b=kJlmMVVbY7IXNl91XGcBvO3YBT3quRQF4WCS0SiH4LOLG/e+9p2jaPHVw9E6t43+lu
-         d4/47XlZrYUEtJ7XQ4VgzKUrbfj5xy9BOKDP//VyLPwp6hXR8zYzPt3dQTar5Wyr4GYS
-         iZIbWUJ75o4n7+UgTsXC+An80tm2UyPOQgFq5wJiP9bNIbl98o3r9SGFN0OGKpWzVCwL
-         D90b1H3jXLeXTLKjKOyg3XK2WfiVlhvPG/TS9Z+MZLclTKFSEr9IlFYU0A0pKe+sQn6L
-         rk2/ZWVdc/gD2rOE75MuQ1Xdte4UkYIWIQjcJTwqiH4rcTqyxgiTvaJazxYK/g79dGii
-         T0zg==
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc;
+        bh=Ximx3byfJ7rLtdPEIh1Ra0raz9MzgSTr/ga3ge5UvWM=;
+        b=hlMw9ssXTclldlCaHPrcXJ+C8bd3xApn5Llhx/6gZpRfRlRJOwhqWghtr5RVB1LK2v
+         8FfTzwl4OCrCjFuadtzRuPxbLUjQJudmMLjVKcB1W8L4nbh23VnBIJLeDBpv1hunXsFS
+         TNZP/OkUwJBjRdLHnTFXsfbD3FCLleefIIXeH80z2Nq7UmGRffrhNJtzi3K0o37plX80
+         MxuLJZry+KmCa87qIRicDj7F3K2/cxyGqrCNJyg48FflYe+16BIsOuCNrNLVMYU6qqtM
+         jxbTTAqnCt+yOzPfECe6hBLshpNDmGjFaoiWgb1ccH/WG7XlQYWhlthKRprfEZxNn5xs
+         7PgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:from:subject:message-id:references
-         :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc;
-        bh=nkzMCqKgjBTn+NwznXGF4FkMKBv5sNXeON2LIxVXB6M=;
-        b=5r8v6Rh1odhB+sCnciBhWoA/u3jzoipztFjgKS3TmHyYJd892Rnh5iF7StBxHTjnmA
-         yoENcXEiuGeh/p5rA2GVetOQC/71kRQxLpKN3xExzEieImoPsRlegX8XswFRwYvLuARg
-         69i59XQ43ZjZRUkbjMn5WyTONxLhFJHGG4uaCIlysZoMNHd6CmywdulZih96fzhVeo3b
-         TQTxOIdr3KOGNnPp6CeyQnY+rZo1onc+udWkzUupKCwjXMfNSdAN+unR5tMKzm/karUL
-         0sJ0pY0da1h6kWkotvZVd1usWHlOK4p7pNez1v4bMhLGGIAQ5uNEVf5jbYz7Nd5wgkja
-         qTwQ==
-X-Gm-Message-State: ACgBeo2vuSQnvCrwX0u1L2tCk3LuyG/VZitzlL/YQlX9jEC+POPL60ed
-	49aYOFPJBEgkCZW+KoXopWzuh0HmcJs=
-X-Google-Smtp-Source: AA6agR58VLI71n7hWTuP/n58j09zS0GpQ603/kDNR321OvTW6NJyNZKRSs+4OQb0POQ9FkLHMKokHnLGLkM=
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc;
+        bh=Ximx3byfJ7rLtdPEIh1Ra0raz9MzgSTr/ga3ge5UvWM=;
+        b=X1agUhLrwf7PukrYRMbQ9/ZGNEYwRufDUTKPovibteWYfHLM4hGfdhQGUUiRSvk/ke
+         POWTsraUJI1rxScrfZ/TITQHIlf+7Y0puc8alfQ3CsMEHcC3+++lyzwjamyi6KCsFl/7
+         qrpa06BPCd8V7XEc8SRjn5/EKT+j0x/RW9WopsuDpnsctHEPWSGkmcBcyvVCSxAsMuvZ
+         L2uSQk3+pl38tJTn2fELpE4DvMI3C/6BRMU5Q+EmblrtlhiOb78YRUKFNHdvEUtBIgpW
+         MKapyoZgvjNbT6NTJcHoxM5hGYBcNuo42cPZgGeZwBE7Ou1BxUcBgsBA4gOwvGxqwwrh
+         qnNw==
+X-Gm-Message-State: ACgBeo2hfMeKISn5BKWM8tGh4TrRjgUBLV7k0pGQ1rG7VxkUUNF4kb5F
+	EJ5Gp2VN3DdzMAx43tlvEfFxva5zzNU=
+X-Google-Smtp-Source: AA6agR7neVKTaIOQpaQTJJtMxLoXgZYEqvCUk9V+fUBv2iEO9EJWDyjyjmM2UWOPn+DCBvrBJ11meMcGOpo=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:a005:55b3:6c26:b3e4])
- (user=surenb job=sendgmr) by 2002:a25:e90e:0:b0:695:64cf:5d2 with SMTP id
- n14-20020a25e90e000000b0069564cf05d2mr12975575ybd.541.1661896169455; Tue, 30
- Aug 2022 14:49:29 -0700 (PDT)
-Date: Tue, 30 Aug 2022 14:48:51 -0700
+ (user=surenb job=sendgmr) by 2002:a0d:d98c:0:b0:33d:c482:9714 with SMTP id
+ b134-20020a0dd98c000000b0033dc4829714mr15776751ywe.415.1661896174717; Tue, 30
+ Aug 2022 14:49:34 -0700 (PDT)
+Date: Tue, 30 Aug 2022 14:48:53 -0700
 In-Reply-To: <20220830214919.53220-1-surenb@google.com>
 Mime-Version: 1.0
 References: <20220830214919.53220-1-surenb@google.com>
 X-Mailer: git-send-email 2.37.2.672.g94769d06f0-goog
-Message-ID: <20220830214919.53220-3-surenb@google.com>
-Subject: [RFC PATCH 02/30] lib/string_helpers: Drop space in string_get_size's output
+Message-ID: <20220830214919.53220-5-surenb@google.com>
+Subject: [RFC PATCH 04/30] scripts/kallysms: Always include __start and __stop symbols
 From: Suren Baghdasaryan <surenb@google.com>
 To: akpm@linux-foundation.org
 Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz, 
@@ -98,53 +98,52 @@ Cc: kent.overstreet@linux.dev, mhocko@suse.com, vbabka@suse.cz,
 	iommu@lists.linux.dev, kasan-dev@googlegroups.com, io-uring@vger.kernel.org, 
 	linux-arch@vger.kernel.org, xen-devel@lists.xenproject.org, 
 	linux-bcache@vger.kernel.org, linux-modules@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Andy Shevchenko <andy@kernel.org>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, 
-	Paul Mackerras <paulus@samba.org>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
-	"=?UTF-8?q?Noralf=20Tr=C3=B8nnes?=" <noralf@tronnes.org>
+	linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
 From: Kent Overstreet <kent.overstreet@linux.dev>
 
-Previously, string_get_size() outputted a space between the number and
-the units, i.e.
-  9.88 MiB
-
-This changes it to
-  9.88MiB
-
-which allows it to be parsed correctly by the 'sort -h' command.
+These symbols are used to denote section boundaries: by always including
+them we can unify loading sections from modules with loading built-in
+sections, which leads to some significant cleanup.
 
 Signed-off-by: Kent Overstreet <kent.overstreet@linux.dev>
-Cc: Andy Shevchenko <andy@kernel.org>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
-Cc: Paul Mackerras <paulus@samba.org>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: "Noralf Tr=C3=B8nnes" <noralf@tronnes.org>
-Cc: Jens Axboe <axboe@kernel.dk>
 ---
- lib/string_helpers.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ scripts/kallsyms.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/lib/string_helpers.c b/lib/string_helpers.c
-index 5ed3beb066e6..3032d1b04ca3 100644
---- a/lib/string_helpers.c
-+++ b/lib/string_helpers.c
-@@ -126,8 +126,7 @@ void string_get_size(u64 size, u64 blk_size, const enum=
- string_size_units units,
- 	else
- 		unit =3D units_str[units][i];
-=20
--	snprintf(buf, len, "%u%s %s", (u32)size,
--		 tmp, unit);
-+	snprintf(buf, len, "%u%s%s", (u32)size, tmp, unit);
+diff --git a/scripts/kallsyms.c b/scripts/kallsyms.c
+index f18e6dfc68c5..3d51639a595d 100644
+--- a/scripts/kallsyms.c
++++ b/scripts/kallsyms.c
+@@ -263,6 +263,11 @@ static int symbol_in_range(const struct sym_entry *s,
+ 	return 0;
  }
- EXPORT_SYMBOL(string_get_size);
-=20
---=20
+ 
++static bool string_starts_with(const char *s, const char *prefix)
++{
++	return strncmp(s, prefix, strlen(prefix)) == 0;
++}
++
+ static int symbol_valid(const struct sym_entry *s)
+ {
+ 	const char *name = sym_name(s);
+@@ -270,6 +275,14 @@ static int symbol_valid(const struct sym_entry *s)
+ 	/* if --all-symbols is not specified, then symbols outside the text
+ 	 * and inittext sections are discarded */
+ 	if (!all_symbols) {
++		/*
++		 * Symbols starting with __start and __stop are used to denote
++		 * section boundaries, and should always be included:
++		 */
++		if (string_starts_with(name, "__start_") ||
++		    string_starts_with(name, "__stop_"))
++			return 1;
++
+ 		if (symbol_in_range(s, text_ranges,
+ 				    ARRAY_SIZE(text_ranges)) == 0)
+ 			return 0;
+-- 
 2.37.2.672.g94769d06f0-goog
 
 
