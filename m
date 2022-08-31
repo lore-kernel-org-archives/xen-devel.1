@@ -4,33 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF3AECAAD1
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 15:52:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.395804.635664 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB6BECAAD1
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 15:54:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.395809.635681 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTQ15-0005CK-19; Wed, 31 Aug 2022 15:52:35 +0000
+	id 1oTQ2K-0005s6-Mz; Wed, 31 Aug 2022 15:53:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 395804.635664; Wed, 31 Aug 2022 15:52:35 +0000
+Received: by outflank-mailman (output) from mailman id 395809.635681; Wed, 31 Aug 2022 15:53:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTQ14-0005CD-Uj; Wed, 31 Aug 2022 15:52:34 +0000
-Received: by outflank-mailman (input) for mailman id 395804;
- Wed, 31 Aug 2022 15:52:33 +0000
+	id 1oTQ2K-0005rf-IH; Wed, 31 Aug 2022 15:53:52 +0000
+Received: by outflank-mailman (input) for mailman id 395809;
+ Wed, 31 Aug 2022 15:53:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=q2E5=ZD=google.com=surenb@srs-se1.protection.inumbo.net>)
- id 1oTQ13-0005C5-7e
- for xen-devel@lists.xenproject.org; Wed, 31 Aug 2022 15:52:33 +0000
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [2607:f8b0:4864:20::1133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ec10724c-2944-11ed-82f2-63bd783d45fa;
- Wed, 31 Aug 2022 17:52:32 +0200 (CEST)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-33da3a391d8so311597157b3.2
- for <xen-devel@lists.xenproject.org>; Wed, 31 Aug 2022 08:52:32 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ruj9=ZD=amazon.com=prvs=235f00a87=ptyadav@srs-se1.protection.inumbo.net>)
+ id 1oTQ1Y-0005in-RX
+ for xen-devel@lists.xenproject.org; Wed, 31 Aug 2022 15:53:04 +0000
+Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com
+ [99.78.197.218]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fe29f6e8-2944-11ed-82f2-63bd783d45fa;
+ Wed, 31 Aug 2022 17:53:03 +0200 (CEST)
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO
+ email-inbound-relay-iad-1e-0bfdb89e.us-east-1.amazon.com) ([10.25.36.214])
+ by smtp-border-fw-80007.pdx80.corp.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Aug 2022 15:50:53 +0000
+Received: from EX13D08EUB002.ant.amazon.com
+ (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+ by email-inbound-relay-iad-1e-0bfdb89e.us-east-1.amazon.com (Postfix) with
+ ESMTPS id C7B80E00BA; Wed, 31 Aug 2022 15:50:49 +0000 (UTC)
+Received: from EX13MTAUWB001.ant.amazon.com (10.43.161.207) by
+ EX13D08EUB002.ant.amazon.com (10.43.166.232) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.38; Wed, 31 Aug 2022 15:50:48 +0000
+Received: from dev-dsk-ptyadav-1c-613f0921.eu-west-1.amazon.com (10.15.8.155)
+ by mail-relay.amazon.com (10.43.161.249) with Microsoft SMTP Server
+ id
+ 15.0.1497.38 via Frontend Transport; Wed, 31 Aug 2022 15:50:47 +0000
+Received: by dev-dsk-ptyadav-1c-613f0921.eu-west-1.amazon.com (Postfix,
+ from userid 23027615)
+ id 0804D25976; Wed, 31 Aug 2022 15:50:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,186 +54,116 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec10724c-2944-11ed-82f2-63bd783d45fa
+X-Inumbo-ID: fe29f6e8-2944-11ed-82f2-63bd783d45fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=DPh7ToX/xZeKd5sie6f3GwYv1dgrGEWOsdwYUdRqOV8=;
-        b=Ib8pAgAXpi66eUIrDx9HR42EQ83DMfbld1dlC8/B6EAvidr1kvmEAZeUXRt94L1+CY
-         fOk9VsOVmUuFoA3ousl8Ls9nH8k8tfM+rNhI6xbMFrdhErQiM5hQSsqd2rBTC4+hb+jz
-         x5t/VHEd7zMohGNGfLtkKMabhYYj05y3VRMNFTksjD0TxoUQD1VZClnayPhKj0nf7p9J
-         AKzTfeLiXAmgNrt2WdWSuelER8LXAcfC5HgCInP5/nDUlNIINl8G7Ik3e4I5/pB0YrkX
-         Qcp8GP0MNCkY9+ymMPvS4UyuNVxGZAw/VRq+/lxc53pSVnVgD3IP07MsNXunkZUp3HjH
-         knuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=DPh7ToX/xZeKd5sie6f3GwYv1dgrGEWOsdwYUdRqOV8=;
-        b=im7+I/OE7cYvFqbB/gH3czlPR1MKcP9pLZDFPL+gm6QjhPgvsW+vlgbp0IUZrF8hvp
-         virwDhislkW8UOtKkpQOzYSnwe1JS1oOAsLiIEk+zfS8UQSaotCogRO5Uffr6HHy4hBz
-         YTUrUJG0+QSOyDpHS5FtiioxlmhWbKV+9KtDgkOlrp57/D4ui5iZfhmpATzbPfw8M27/
-         sB050eJ8I5ol4fl+eOzLtHNHQvtTUdpV4a1ff87zHICzCq1mLj/u/PbRZJ8BZXkomnef
-         2bLOe9XTk4W5ARUHUfXqUDwEX7C/eCRtyf2mY/UnjsOQN4avJnvL+83bd45VTm3Lfi+7
-         ozZg==
-X-Gm-Message-State: ACgBeo1/ReVYWcRbo33ryplLNf+rlU66ayQTjHWNAluHOocCiBdTd+A0
-	EOonNDQ71CEOknwVuTI2PyjEHAvrDoiwMerqMb0IOw==
-X-Google-Smtp-Source: AA6agR77ayVKimqTSvnLuFWBEKBbMWCXeZt/MyEcvQRogVe/KquV1BGkRaxT2hK9yX4AVYf+RasGcwvoXy2efvclpMo=
-X-Received: by 2002:a0d:d850:0:b0:340:d2c0:b022 with SMTP id
- a77-20020a0dd850000000b00340d2c0b022mr16260868ywe.469.1661961150716; Wed, 31
- Aug 2022 08:52:30 -0700 (PDT)
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1661961183; x=1693497183;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=vyta+/0lDuDRefxlgv1vkaHwbgOICyXw1l+oC05BEd8=;
+  b=q1isutIcOKn8EcK0xpFjC1+iZ290KGaGDgtZO3dCRQWWJmCUc4wJ4f1Z
+   SUOHbFdzHN6xZZ+Syo+khfvLM3Eb8cb5hthpcOJypF0cfyiks2mtoQVxW
+   CRgH/0okpm085tGg0okxcWY28gJ5H0o1ZPJ1eR4XoUd9m0lZ2kaDBsu4p
+   c=;
+X-IronPort-AV: E=Sophos;i="5.93,278,1654560000"; 
+   d="scan'208";a="125407135"
+Date: Wed, 31 Aug 2022 15:50:45 +0000
+From: Pratyush Yadav <ptyadav@amazon.de>
+To: SeongJae Park <sj@kernel.org>
+CC: <jgross@suse.com>, <roger.pau@citrix.com>,
+	<marmarek@invisiblethingslab.com>, <mheyne@amazon.de>,
+	<xen-devel@lists.xenproject.org>, <axboe@kernel.dk>,
+	<linux-block@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<stable@vger.kernel.org>
+Subject: Re: [PATCH 2/2] xen-blkfront: Advertise feature-persistent as user
+ requested
+Message-ID: <20220831155045.kxopdchlc67fmi5n@yadavpratyush.com>
+References: <20220825161511.94922-1-sj@kernel.org>
+ <20220825161511.94922-3-sj@kernel.org>
 MIME-Version: 1.0
-References: <20220830214919.53220-1-surenb@google.com> <20220830214919.53220-11-surenb@google.com>
- <20220831101103.fj5hjgy3dbb44fit@suse.de> <CAJuCfpHwUUc_VphqBY9KmWvZJDrsBG6Za+kG_MW=J-abjuM4Lw@mail.gmail.com>
-In-Reply-To: <CAJuCfpHwUUc_VphqBY9KmWvZJDrsBG6Za+kG_MW=J-abjuM4Lw@mail.gmail.com>
-From: Suren Baghdasaryan <surenb@google.com>
-Date: Wed, 31 Aug 2022 08:52:19 -0700
-Message-ID: <CAJuCfpGy_RrQBUy2yxvcZzAXO5cJU5BHxRko+b8p7wWLjQwXvA@mail.gmail.com>
-Subject: Re: [RFC PATCH 10/30] mm: enable page allocation tagging for
- __get_free_pages and alloc_pages
-To: Mel Gorman <mgorman@suse.de>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Kent Overstreet <kent.overstreet@linux.dev>, 
-	Michal Hocko <mhocko@suse.com>, Vlastimil Babka <vbabka@suse.cz>, Johannes Weiner <hannes@cmpxchg.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Davidlohr Bueso <dave@stgolabs.net>, 
-	Matthew Wilcox <willy@infradead.org>, "Liam R. Howlett" <liam.howlett@oracle.com>, 
-	David Vernet <void@manifault.com>, Peter Zijlstra <peterz@infradead.org>, 
-	Juri Lelli <juri.lelli@redhat.com>, Laurent Dufour <ldufour@linux.ibm.com>, 
-	Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>, Jens Axboe <axboe@kernel.dk>, 
-	mcgrof@kernel.org, masahiroy@kernel.org, nathan@kernel.org, 
-	changbin.du@intel.com, ytcoode@gmail.com, 
-	Vincent Guittot <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Benjamin Segall <bsegall@google.com>, 
-	Daniel Bristot de Oliveira <bristot@redhat.com>, Valentin Schneider <vschneid@redhat.com>, 
-	Christopher Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, 
-	42.hyeyoo@gmail.com, Alexander Potapenko <glider@google.com>, Marco Elver <elver@google.com>, 
-	dvyukov@google.com, Shakeel Butt <shakeelb@google.com>, 
-	Muchun Song <songmuchun@bytedance.com>, arnd@arndb.de, jbaron@akamai.com, 
-	David Rientjes <rientjes@google.com>, Minchan Kim <minchan@google.com>, 
-	Kalesh Singh <kaleshsingh@google.com>, kernel-team <kernel-team@android.com>, 
-	linux-mm <linux-mm@kvack.org>, iommu@lists.linux.dev, kasan-dev@googlegroups.com, 
-	io-uring@vger.kernel.org, linux-arch@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org, 
-	linux-modules@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220825161511.94922-3-sj@kernel.org>
+Precedence: Bulk
 
-On Wed, Aug 31, 2022 at 8:45 AM Suren Baghdasaryan <surenb@google.com> wrote:
->
-> On Wed, Aug 31, 2022 at 3:11 AM Mel Gorman <mgorman@suse.de> wrote:
-> >
-> > On Tue, Aug 30, 2022 at 02:48:59PM -0700, Suren Baghdasaryan wrote:
-> > > Redefine alloc_pages, __get_free_pages to record allocations done by
-> > > these functions. Instrument deallocation hooks to record object freeing.
-> > >
-> > > Signed-off-by: Suren Baghdasaryan <surenb@google.com>
-> > > +#ifdef CONFIG_PAGE_ALLOC_TAGGING
-> > > +
-> > >  #include <linux/alloc_tag.h>
-> > >  #include <linux/page_ext.h>
-> > >
-> > > @@ -25,4 +27,37 @@ static inline void pgalloc_tag_dec(struct page *page, unsigned int order)
-> > >               alloc_tag_sub(get_page_tag_ref(page), PAGE_SIZE << order);
-> > >  }
-> > >
-> > > +/*
-> > > + * Redefinitions of the common page allocators/destructors
-> > > + */
-> > > +#define pgtag_alloc_pages(gfp, order)                                        \
-> > > +({                                                                   \
-> > > +     struct page *_page = _alloc_pages((gfp), (order));              \
-> > > +                                                                     \
-> > > +     if (_page)                                                      \
-> > > +             alloc_tag_add(get_page_tag_ref(_page), PAGE_SIZE << (order));\
-> > > +     _page;                                                          \
-> > > +})
-> > > +
-> >
-> > Instead of renaming alloc_pages, why is the tagging not done in
-> > __alloc_pages()? At least __alloc_pages_bulk() is also missed. The branch
-> > can be guarded with IS_ENABLED.
->
-> Hmm. Assuming all the other allocators using __alloc_pages are inlined, that
-> should work. I'll try that and if that works will incorporate in the
-> next respin.
-> Thanks!
->
-> I don't think IS_ENABLED is required because the tagging functions are already
-> defined as empty if the appropriate configs are not enabled. Unless I
-> misunderstood
-> your node.
->
-> >
-> > > +#define pgtag_get_free_pages(gfp_mask, order)                                \
-> > > +({                                                                   \
-> > > +     struct page *_page;                                             \
-> > > +     unsigned long _res = _get_free_pages((gfp_mask), (order), &_page);\
-> > > +                                                                     \
-> > > +     if (_res)                                                       \
-> > > +             alloc_tag_add(get_page_tag_ref(_page), PAGE_SIZE << (order));\
-> > > +     _res;                                                           \
-> > > +})
-> > > +
-> >
-> > Similar, the tagging could happen in a core function instead of a wrapper.
+On 25/08/22 04:15PM, SeongJae Park wrote:
+> Commit e94c6101e151 ("xen-blkback: Apply 'feature_persistent' parameter
+> when connect") made blkback to advertise its support of the persistent
+> grants feature only if the user sets the 'feature_persistent' parameter
+> of the driver and the frontend advertised its support of the feature.
+> However, following commit 402c43ea6b34 ("xen-blkfront: Apply
+> 'feature_persistent' parameter when connect") made the blkfront to work
+> in the same way.  That is, blkfront also advertises its support of the
+> persistent grants feature only if the user sets the 'feature_persistent'
+> parameter of the driver and the backend advertised its support of the
+> feature.
+> 
+> Hence blkback and blkfront will never advertise their support of the
+> feature but wait until the other advertises the support, even though
+> users set the 'feature_persistent' parameters of the drivers.  As a
+> result, the persistent grants feature is disabled always regardless of
+> the 'feature_persistent' values[1].
+> 
+> The problem comes from the misuse of the semantic of the advertisement
+> of the feature.  The advertisement of the feature should means only
+> availability of the feature not the decision for using the feature.
+> However, current behavior is working in the wrong way.
+> 
+> This commit fixes the issue by making the blkfront advertises its
+> support of the feature as user requested via 'feature_persistent'
+> parameter regardless of the otherend's support of the feature.
+> 
+> [1] https://lore.kernel.org/xen-devel/bd818aba-4857-bc07-dc8a-e9b2f8c5f7cd@suse.com/
+> 
+> Fixes: 402c43ea6b34 ("xen-blkfront: Apply 'feature_persistent' parameter when connect")
+> Cc: <stable@vger.kernel.org> # 5.10.x
+> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> Suggested-by: Juergen Gross <jgross@suse.com>
+> Signed-off-by: SeongJae Park <sj@kernel.org>
+> ---
+>  drivers/block/xen-blkfront.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+> index 8e56e69fb4c4..dfae08115450 100644
+> --- a/drivers/block/xen-blkfront.c
+> +++ b/drivers/block/xen-blkfront.c
+> @@ -213,6 +213,9 @@ struct blkfront_info
+>  	unsigned int feature_fua:1;
+>  	unsigned int feature_discard:1;
+>  	unsigned int feature_secdiscard:1;
+> +	/* Connect-time cached feature_persistent parameter */
+> +	unsigned int feature_persistent_parm:1;
+> +	/* Persistent grants feature negotiation result */
+>  	unsigned int feature_persistent:1;
+>  	unsigned int bounce:1;
+>  	unsigned int discard_granularity;
+> @@ -1848,7 +1851,7 @@ static int talk_to_blkback(struct xenbus_device *dev,
+>  		goto abort_transaction;
+>  	}
+>  	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
+> -			info->feature_persistent);
+> +			info->feature_persistent_parm);
+>  	if (err)
+>  		dev_warn(&dev->dev,
+>  			 "writing persistent grants feature to xenbus");
+> @@ -2281,7 +2284,8 @@ static void blkfront_gather_backend_features(struct blkfront_info *info)
+>  	if (xenbus_read_unsigned(info->xbdev->otherend, "feature-discard", 0))
+>  		blkfront_setup_discard(info);
+>  
+> -	if (feature_persistent)
+> +	info->feature_persistent_parm = feature_persistent;
 
-Ack.
+Same question as before. Why not just use feature_persistent directly?
 
-> >
-> > > +#else /* CONFIG_PAGE_ALLOC_TAGGING */
-> > > +
-> > > +#define pgtag_alloc_pages(gfp, order) _alloc_pages(gfp, order)
-> > > +
-> > > +#define pgtag_get_free_pages(gfp_mask, order) \
-> > > +     _get_free_pages((gfp_mask), (order), NULL)
-> > > +
-> > > +#define pgalloc_tag_dec(__page, __size)              do {} while (0)
-> > > +
-> > > +#endif /* CONFIG_PAGE_ALLOC_TAGGING */
-> > > +
-> > >  #endif /* _LINUX_PGALLOC_TAG_H */
-> > > diff --git a/mm/mempolicy.c b/mm/mempolicy.c
-> > > index b73d3248d976..f7e6d9564a49 100644
-> > > --- a/mm/mempolicy.c
-> > > +++ b/mm/mempolicy.c
-> > > @@ -2249,7 +2249,7 @@ EXPORT_SYMBOL(vma_alloc_folio);
-> > >   * flags are used.
-> > >   * Return: The page on success or NULL if allocation fails.
-> > >   */
-> > > -struct page *alloc_pages(gfp_t gfp, unsigned order)
-> > > +struct page *_alloc_pages(gfp_t gfp, unsigned int order)
-> > >  {
-> > >       struct mempolicy *pol = &default_policy;
-> > >       struct page *page;
-> > > @@ -2273,7 +2273,7 @@ struct page *alloc_pages(gfp_t gfp, unsigned order)
-> > >
-> > >       return page;
-> > >  }
-> > > -EXPORT_SYMBOL(alloc_pages);
-> > > +EXPORT_SYMBOL(_alloc_pages);
-> > >
-> > >  struct folio *folio_alloc(gfp_t gfp, unsigned order)
-> > >  {
-> > > diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-> > > index e5486d47406e..165daba19e2a 100644
-> > > --- a/mm/page_alloc.c
-> > > +++ b/mm/page_alloc.c
-> > > @@ -763,6 +763,7 @@ static inline bool pcp_allowed_order(unsigned int order)
-> > >
-> > >  static inline void free_the_page(struct page *page, unsigned int order)
-> > >  {
-> > > +
-> > >       if (pcp_allowed_order(order))           /* Via pcp? */
-> > >               free_unref_page(page, order);
-> > >       else
-> >
-> > Spurious wide-space change.
+> +	if (info->feature_persistent_parm)
+>  		info->feature_persistent =
+>  			!!xenbus_read_unsigned(info->xbdev->otherend,
+>  					       "feature-persistent", 0);
 
-Ack.
+Aside: IMO this would look nicer as below:
 
-> >
-> > --
-> > Mel Gorman
-> > SUSE Labs
+	info->feature_persistent = feature_persistent && !!xenbus_read_unsigned();
 
