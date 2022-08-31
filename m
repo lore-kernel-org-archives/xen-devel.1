@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5642ECAAD4
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 14:11:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.395690.635570 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5BA2ECAAD1
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Aug 2022 14:11:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.395691.635576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTORA-0004wP-E6; Wed, 31 Aug 2022 14:11:24 +0000
+	id 1oTORB-00056L-56; Wed, 31 Aug 2022 14:11:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 395690.635570; Wed, 31 Aug 2022 14:11:24 +0000
+Received: by outflank-mailman (output) from mailman id 395691.635576; Wed, 31 Aug 2022 14:11:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTORA-0004u6-4T; Wed, 31 Aug 2022 14:11:24 +0000
-Received: by outflank-mailman (input) for mailman id 395690;
- Wed, 31 Aug 2022 14:11:22 +0000
+	id 1oTORA-00053b-Nj; Wed, 31 Aug 2022 14:11:24 +0000
+Received: by outflank-mailman (input) for mailman id 395691;
+ Wed, 31 Aug 2022 14:11:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jA7u=ZD=epam.com=prvs=1242718080=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1oTOR8-0002bv-HB
- for xen-devel@lists.xenproject.org; Wed, 31 Aug 2022 14:11:22 +0000
+ id 1oTOR9-0002bv-7B
+ for xen-devel@lists.xenproject.org; Wed, 31 Aug 2022 14:11:23 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
  [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c8a5b30f-2936-11ed-934f-f50d60e1c1bd;
- Wed, 31 Aug 2022 16:11:20 +0200 (CEST)
+ id c95c3cde-2936-11ed-934f-f50d60e1c1bd;
+ Wed, 31 Aug 2022 16:11:21 +0200 (CEST)
 Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 27VBo4GF032537;
- Wed, 31 Aug 2022 14:11:08 GMT
+ by mx0a-0039f301.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 27VBo4GC032537;
+ Wed, 31 Aug 2022 14:11:07 GMT
 Received: from eur04-vi1-obe.outbound.protection.outlook.com
  (mail-vi1eur04lp2055.outbound.protection.outlook.com [104.47.14.55])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3ja427h4rd-8
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3ja427h4rd-6
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 31 Aug 2022 14:11:08 +0000
+ Wed, 31 Aug 2022 14:11:06 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by VI1PR03MB6301.eurprd03.prod.outlook.com (2603:10a6:800:133::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.10; Wed, 31 Aug
- 2022 14:11:01 +0000
+ 2022 14:11:00 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::9190:c0a7:bd87:f01f]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::9190:c0a7:bd87:f01f%6]) with mapi id 15.20.5566.019; Wed, 31 Aug 2022
- 14:11:01 +0000
+ 14:11:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8a5b30f-2936-11ed-934f-f50d60e1c1bd
+X-Inumbo-ID: c95c3cde-2936-11ed-934f-f50d60e1c1bd
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BylhPzfMiZD/a3ix4uXkaPyXO2X3+A4M8LLD/FrCC5n455S/y5awC784zdtc4QDGC969dPhCvf9v6CsBUKVPphMBBUhBSZY/Lua4mr+L1/mbbt+R1LVWGfvnu987g9yJQY8F635tZBwXFBDSIPvYuU+ogo7TPQYJlCY7qI1niG5atLrUrJzJfSvFyArAtbmUj1PVMY46iKTdLe7mHoi2SfFQTKYj3UiuJlIfGnqN7JcMBK2yRwXxun5Rb4C9AJdBiwCkwoJk5XWMI0YdD9Qh2TqBP6bcPTqlBjlH9XcGwthXU7wuY+60FHLAm1xe2FlLWxsYRJIPmNN+JG0NL4Xqfw==
+ b=T4tz3hcRtDxJOimtE+Qo210yGmvik98SPc2LVgIHmtcKAaM2MW06k70S7YRJbuzAfTPwqU4XSuaASPO5Dqsj6TEye++tK7bNeHsgUUmt3pnbgA8HZ8K2W7ljImRudhnRU+Z1MZsHTpFa2PqTasBMr1aCmBLRhNKjmdf6WTUeXQwUHBK4+u6f5f1zOiWX7uIs0yGNrqZFTbS5s5En/lWXR5O5BcZvAlRFVxHR2ToRd3qLbsQUe6bzeYpSuq8jDbaxLX7Uw0fETRtZ6ZsUE7GX+Hvjc574h1dQCia9rXd8HtFdDqysAs6p1IVisFYg9KliucHgWHRD1plEKnC1EpB/fQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LiizKjLCyBEAFE8BknfyWCXpKCtSOHBlrRlnh2irPYc=;
- b=CJXfYLGxTiE7nZ/3XDUXjQZi10iID28k4aA3glU1mdyrg5ZBB5NslWilecEntzy8LCpBw7Oa5LcbFwqbWkpr2T+1wEfUJit4XPSj+10ZDIXqHjaAV7fdu65xwYDopo1GgUszPLpgOOXS3hfEmcY82ZpKS9kvPKiPSCdeF3uQGFOmpIXWnk/8ukxVwQN5xZkhNmIX3hsXsTBXjqpLfGvlgbdkO9+DwXZq1J0KEML+00xWoNRmvZorqhtt7CQtrDgSckK+f7JbWaKDFvOlJv8stZebpir2Mt9H3iH9/0nP+RfqmxOzuA4JuFWxojmnAQAz02SchXuMkgN2jpUA5ALI0w==
+ bh=v2KJogI0cZ3+/0Y09TtsZB2L93c8/aUqCi7d7m62KUI=;
+ b=aAhPNgj7Kqq0n9284TLky1fCFsCTJibZsA+Hu5vF36vIBRQEjtLIuW3mieEruinhJv6MGxf/cLWtAWMZMRfzZC/ofCNJWcayOghGjr5WDWSfkxMt2ZSI4DDHrXNR2KXCMZ5aaiN66ZKIHszrSsSXgiiDCCpP7sNZqF9u12iyjqxOWUuq/s5E5uTVCwF+Q8IVziUBFtDNVqJaEwORPeuTRqZ6fP6Xl4UtoDaSVWVvFU69XLcDeqXdCKYpGuTNbND86SHZO04py+owCHRvaOo/+qYcXSrBCP5B4riGjTxN7LiG6hAJIyHCUCJR/M2QrQjMUVCd1lH2GaP3oSXaHUsWJA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LiizKjLCyBEAFE8BknfyWCXpKCtSOHBlrRlnh2irPYc=;
- b=rnA3SGKVZ6CjI2yzG8Zo6giGzXYWPfCAGw1PGRDpErlajt6xXe1AbBVQq1AjJbV6/gTW5Q0im23kwxxQFxluVKX7U2jYr/HW+MJ8QRsBPjWxVaL3TDDDrHPrJNfU0VpygEYGT8P+A44V8ap/T4UiepZOECk5Qn3agas13lQKwN3D9YAMMt4sEdzpvJI7VzzYtx/UYMvDNw19rLmZU0x50KTalu+wcVacd0quKeeJ7IKPFYosnjSaQqa3x2jz3x1vfKhOvWa7golH8Az5cadabLKAPB+vab+ySdtpb/vQG3H0TXzPSH+qJgFUcPCNkJGluP2hPHszwXwTDrgpRr9PIA==
+ bh=v2KJogI0cZ3+/0Y09TtsZB2L93c8/aUqCi7d7m62KUI=;
+ b=Nda++i4c2UHeS/sbPzAdVwxvIIxMERodtX5ElzDdjsSGna6CUTyNKz3X/I5nMbfqT83MDMUMq/YTFdv8kRtYWJAvUZmjh7ObBpSqpEephbWSVyNOvM9r99dHGpw96KPRyeUXAH//3bBCoSj6DK/cjVNeuFj1ZoNcCyPW2EECG0BK78RH+j8i3wqc27IYYVwYnH/zB6/wH6bWBw1VMShyFed0kckYLpl/VeIB0sFpc7WQyqZmrWTxKB5Fm9G8gxAGVgT4Ws1Cu/GwB4/kl/Nzif3AngQ4NfX+KbrXtLkyykbUiSj1LKNHVKcRubucE0oZBmDfUDo2wlLy3BwOl4PWgw==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
@@ -87,11 +87,12 @@ CC: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
 	<sstabellini@kernel.org>,
         Paul Durrant <paul@xen.org>, Kevin Tian
 	<kevin.tian@intel.com>
-Subject: [RFC PATCH 08/10] xen: pci: remove pcidev_[un]lock[ed] calls
-Thread-Topic: [RFC PATCH 08/10] xen: pci: remove pcidev_[un]lock[ed] calls
-Thread-Index: AQHYvUN/BRbyNewJG0OqhFjBUWUt7Q==
-Date: Wed, 31 Aug 2022 14:11:01 +0000
-Message-ID: <20220831141040.13231-9-volodymyr_babchuk@epam.com>
+Subject: [RFC PATCH 05/10] xen: pci: introduce reference counting for pdev
+Thread-Topic: [RFC PATCH 05/10] xen: pci: introduce reference counting for
+ pdev
+Thread-Index: AQHYvUN/KKgAm1RVgESUCJeBYUFHMA==
+Date: Wed, 31 Aug 2022 14:11:00 +0000
+Message-ID: <20220831141040.13231-6-volodymyr_babchuk@epam.com>
 References: <20220831141040.13231-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20220831141040.13231-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -100,45 +101,45 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.37.1
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 43e7eaa6-475c-4549-5b42-08da8b5aa278
+x-ms-office365-filtering-correlation-id: 117792c6-6aaa-4f73-4008-08da8b5aa1b7
 x-ms-traffictypediagnostic: VI1PR03MB6301:EE_
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- fY4dwPhqrYUvR6va25FXVt+QM+VZvdj/8671K3X8ygBNS8GyBFVd4Tnb0eYZ13rFfQ82xwWmtgEOKJDUOnW99KAkYnIiN0wz6F+ZLVFxQiZH4fGc8XYq6aTxo8DYjF6oMioMyXetZvfhhLGnSfTqYvMDKUQoxeTj8KpxsMtQHWkCtKfBOU6AimMOfzRnNFZqBHeo0GW1hrnNHDqKXujxBD0k6hz6/DE2xuKIyq3QiMXhrm46Bu/repkzaXY5rlwFB0ZPqQAqmhfiW8IXuII7u8e/PYbgYyB5e2X/WJ1v9SwNq1/JCkbBNock2S/J6XxGgKXoe7xSt043PGK/0RFPE8C2ScQYEq/GTvfCJJ/1pplRTGeU1FU3yImC0zqRfMM1rWcbW+lH4tWVdpRwsub7bArMoMwuNBx0w+LvE0S9aqLQSV96FW2qOf1YMK2BLB1XpdFosZR5YvPD4AqM9gQpM3GwJThWMKeKEXAOIK8K6SGt77poFnuxUOjge9RRUtXa4y6YgrIUdgRs6nCiBlLvQ9A36ahoVt96lhwOlGkNHgEaj0M0y+tMeSI/DDlQk9H6K/pynev29HI9Zl7Gc3N3pjurEoiOiFpYIBsbjj/aRhxXlzuuefnzpB8iG/3kgy2g9tcOR6ubl+P1NDInzdADLoALvADaxcFaQ8hElezNJW+J7pX+nDMH+etidJm6nwjgH9Vb5TzQXbnpb46Tc4p1r98jfkAj+AGBaRlxbqVE+tCBD5GsLNG7wexAH3VrclRzBPeyjO9O9/hTlSRDnv4otYKKXiTkTID2bl1qTCyOg7s=
+ 6bkUaBK9ZjdMIoeTKG355OI2ylD8DOW1tK5qf5n4uWgSK/vJAsytkTNkfyfKiUzKHCdPIrP4ednZScopZn6InwHEOdtb5Zxs22MbW5qAr++zcPGQhZAbX6a52YzEWTDYZDuLJXBT79IdkKZ5WiEhTF6gYVjDhtCCpQIwdp8RiqR43zlhvQSk1i2awB3T+B25fcuY8Z6A5a9/e5qa2UgcGTWhu4PLaGNd6zO1QUAStQpaqls/qBs6mz8YyR2n/+eAJS9UueUnJNRoeUbKjz7DLW/Typ1D0U/ILeye0kzJEtaudiKE//p5Wo0Vl9QiIwe0Dba8LtS8nMy5fsBnAj03KlisAOLK3aP+QmnJZhdmXGMFRiaEirFHqtc6+Z+Og3GHpvGW5Xooabn2j3hX0RnsA/OY1WWe3DYYWB7LzqSGQviULUck8ju6YurTiMQQe+ukUB8xv1YeoXWoXjITZoHG97TieaxAcjAvt4QUmJgK5DG06xjURNvpYMrj1evvDqyMolRGEto/IlN4ySl0VuV6gL8y3hyl904fdl+Gszsz/8nQm87WUsF2x9On2+FFWlwriS9GINbaCPB42Zhx+cXf9MnrPprLlYdPbV7Llp0UhWFqE51eOXEXsty6i743w2CV7OVj1jotLHWyc+rfcQs2w16q28Ka7twzyzhiCLh8DzLezkLmLOXcAKcpxJHjrUzoCmmQ+q7VzhhACg8nDHl921vLftrjlltL/BOtyEhF3JF3iiKFKlGNdxJ/tvJmGJIhi+lJZnF7UtirR8m2pZHPD+jczNCHAMpBpfEo4SXQH1Q=
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(346002)(39860400002)(366004)(376002)(396003)(136003)(4326008)(66556008)(76116006)(66946007)(38070700005)(66476007)(8676002)(2906002)(66446008)(64756008)(54906003)(1076003)(186003)(83380400001)(2616005)(5660300002)(91956017)(7416002)(8936002)(316002)(36756003)(6916009)(30864003)(6486002)(478600001)(71200400001)(86362001)(55236004)(26005)(41300700001)(6512007)(6506007)(122000001)(38100700002)(21314003)(579004)(559001);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?i4WCKy2gPNX2cRjthJVXDpyy1ku0SH2n0McEZn93mJlYxXtEwFeZ5ObNqm?=
- =?iso-8859-1?Q?4Ixgl9gRE+mRGUC7vql0i+e7Kli/FvFFQFieUSZiPd63uzwKM3GTzSLPcQ?=
- =?iso-8859-1?Q?S+bsbUCPbZzbZzymXEl6FqY5joWgyGfLGbP/f1TZOQOyL63L4ynjLAfx+E?=
- =?iso-8859-1?Q?nEeZQX/tlrYGXTR/U580FxvZt6VSRQG7nTBtASmvINhpKYgKQmk6gqPh4p?=
- =?iso-8859-1?Q?7szYh4WJJPLgvYCeYpUUrgFfF91EPXV9lDheIl5RikH+/hT8G9XwynH24L?=
- =?iso-8859-1?Q?sy+RqiMBbLpFEMr0qzFCF7LLejGocbQ/v2PrXyc5MxQsc/2MAiu7MrObva?=
- =?iso-8859-1?Q?WREpGLlMM6LkBq/U3b0P8iQI7ABglN3NahRMPNv5WzwO2x1VoD8W4c6neY?=
- =?iso-8859-1?Q?k9bRfYomU2o9f8fLUzLpQ6JGnl/qaFgCFhenF0DCtTqTec68fmpyfp/doD?=
- =?iso-8859-1?Q?1OqqJ1KfGuKzv3U6rYanmELLJgEh5weFSuVq6GDCr2CSctS3lLTjQWxgr2?=
- =?iso-8859-1?Q?PEk+vXyKXKapAAdL6Pz6O01AYjOUJCy5ekc2TfsObEmgkVXoexTSOWL2Yg?=
- =?iso-8859-1?Q?n92ZRcwb1ZEnvcExVAZAzjkulNoKhEzXGGyAKPCuRMtQ0KNj+4DyObgUaI?=
- =?iso-8859-1?Q?4CBcQAodfFLsycqels3ymWQSnp7PfzpNlXd4D2KGyMX9h8C8G02wnkk7ox?=
- =?iso-8859-1?Q?DbS/hq/4RgKdvCNH+Q7Z/Q3kaYcYxEVRKyCrQ97Ncr3/hjyJpmGiXMEDHR?=
- =?iso-8859-1?Q?pNYQWMUuTyW5J6k8LSL1u5ZlrSNJmecCrymadyFDoJZqnryDrKE5X3mkzu?=
- =?iso-8859-1?Q?ZboSPUn5sllnELu5Fn7Kqy50sFq8tRHb9f/K7TWOwtkTfrhR0sAqk9Okmt?=
- =?iso-8859-1?Q?VHv0HDhmjnOriteBqblujvHXMALW9RVok90wr0YJixOADqAE0/ExIb+Dje?=
- =?iso-8859-1?Q?IpF6XmycKVjL62ah3CiWfVvLwUsmVY8660pweR9a/CJXLEPrI6N+O7GWKv?=
- =?iso-8859-1?Q?mH0XkHcgGYi8Hv0WPDx9x0pN5QTZrjsbfPH+EtQdKKiBZbwQb26L9tQgCw?=
- =?iso-8859-1?Q?jum8HzGvv4YBk58D721CLLYjXx5ukKSnt3sW4d/0vXH0YJW5Vsqm1fvHB/?=
- =?iso-8859-1?Q?tuV6EFKmC9pHjVP25EpoIuOUvIih+fGsgh6+3wqgux2w2saxjtlZ8Ib9vt?=
- =?iso-8859-1?Q?Y9gi3ujmrp7qmBbS9ajV+4nTLD+1Rf7fIZWP74rXlYhV4MbOABfHu8siQg?=
- =?iso-8859-1?Q?iUVW7ld0Qi+7KzzRIUTrMWNHDc21/wvmQ++RoXYP1PIe3vsGIgqBjDu3EO?=
- =?iso-8859-1?Q?VQgDMpWzQ4M86Z4LwboFTRWrzggqYoihUSBxj01t92aclK6QaKZsyHWSxs?=
- =?iso-8859-1?Q?ypwuvI+1u8MVS8tk/Iie1FY2v/0DlzEU8Abmv2cmlwD3zlfUzwqNtIEpfT?=
- =?iso-8859-1?Q?P51Xm978n+QIUOUEMfYp5uos8VRK4Nfst/2WmDkbC/KDaXuETE39lnFk3e?=
- =?iso-8859-1?Q?PLJYMZQ7TmGbfoKlAYVNBn9lgk0JJMxlT7LknL2gfQLhTUXwGi70pD7BFN?=
- =?iso-8859-1?Q?rwkvbtnSj21ATDqwttNCkcj2ych5pXnqM5UZYuepFZMiMfC0Y7KfY+Kwro?=
- =?iso-8859-1?Q?3kiiO79rAcIJigRBSTQlXLiYsTZb6jPKNYdRjh9xWOTcUy9GdeG7rTbg?=
+ =?iso-8859-1?Q?TlgNITTR6PX7M2TRGPJMuMxZQ4NaKi5kuQfy4lRRGppqyXQpLMTOQdXh5G?=
+ =?iso-8859-1?Q?jOeIp5n7zdR8AE1mS6eOzv1iBTmsdxYsOGjHoJz9i/K9GDRzSLQI4v0Kio?=
+ =?iso-8859-1?Q?FyiMby4BMOcQTe+pLCLoEoZQzE2DARkPnE7ntGB4mVYGfOpm2B9En1GPw9?=
+ =?iso-8859-1?Q?4ddg+bL3VC0LwQJW7ay99DcJvkp1zNBRbur2iU52q4k4WYQCSRgD5kihZW?=
+ =?iso-8859-1?Q?YCt/Dyk/Z8k2P5c3G2b9JigRHwAaFOwfaN8ayUj5sClTrn2HJvPEfLb/Xx?=
+ =?iso-8859-1?Q?85RTlPurda55D/QMOcH9jY60IOn5Dilp2WbqUkf6MbaNmlJdt9RuLjde/m?=
+ =?iso-8859-1?Q?k7ott9WFDdvBEJQyC13Eh3jxhHKlwXzG8HGdryEkZ/4zxwE8vbL//47fWS?=
+ =?iso-8859-1?Q?4e7tw5IkJc92Hw+puOBXYVoUOL8/TrKEOro8qnZtgoiNvTBT/FFv4wPu5r?=
+ =?iso-8859-1?Q?Fuj2hPXEHWhgJOO1Nayi/2Sf9bUCpYHSFBZHtJY6fPAQvs/cbegGidu/h9?=
+ =?iso-8859-1?Q?6DDGe10e+6mGmAlc83CaKgmKHBZQXoKN3AdBEc1k9S1C842HLlbwMc3QXk?=
+ =?iso-8859-1?Q?YRciEcarq1sQVFmNdymzQx6uh5QpvzozZo2ZfcLwtCvzUvjGNjeKDvCcH7?=
+ =?iso-8859-1?Q?tIgq8r9UAKVWPg5YD+Jv3Hims91ELiQd6dMbRSlW/7U/oevDt6byZyg8Nc?=
+ =?iso-8859-1?Q?dtSeB58kiGD49Qxnnpv4pkM5+0Qe//QXPWeGXytmeNhlrKVMPaAiXijtJ7?=
+ =?iso-8859-1?Q?EfsQZWs9qUid9KlyL8yExQZ3NKVtsgeLsfUSm79BUpmIsqqMrbI9WmtWlD?=
+ =?iso-8859-1?Q?I4cIMp52WhSTtrsLJuwHZYbvvA/00qZd0D8smtr4QrTF8hU4g+hoOBoNLH?=
+ =?iso-8859-1?Q?FucuEY8CHy5wj7HogcSCw98EDF3qITLJNIQU/0tPbJTgOJUVcwt5FkBSi3?=
+ =?iso-8859-1?Q?gdgp9Y2X5mXVcyRxIuIN1eewE147r9AaCWoWCdfQhUEnc1GiKY+u503qaA?=
+ =?iso-8859-1?Q?ZzLpf1FwHDQ80oqdzQ717cw2wzeM31qR2NIqLOMZWcq1tL7axcUcfp2s0z?=
+ =?iso-8859-1?Q?zoQI0amlwMrNiY5e9v/AUctxcsLcdFbXb31ReGZzxSFjWSKSSJVRJvoAOE?=
+ =?iso-8859-1?Q?AJ+3VpCLGJnOvkmvI92eL8w0w/tJSuvA5l4gJsuL0HakbMRufj3AXhcs+a?=
+ =?iso-8859-1?Q?lvLWZbKQPj1JBmrkBmXeTwp7/xeCNQVCCy8KmlKjVzvXpD1VtpQOu33OhA?=
+ =?iso-8859-1?Q?hTrzMqmz79F+Ixn5ttghPIvdPuoN4H8icQC+l3ot37S78NBMUcfsXiHK3m?=
+ =?iso-8859-1?Q?ZMIgdZwly0g2/8fO38PYaVQe1bwn8KmlDLE799aycwaMOdm3w0MSWi5Xr0?=
+ =?iso-8859-1?Q?vnSMnwJOsWFau27dO8ewah6fRiwDJIomzNdoF/M6mnpG9R9oIehK5SQ71N?=
+ =?iso-8859-1?Q?hUDDsRsDAE0KTEsZluNTgWh3aRNiVpVEQJ44HT9mVMDjZtbJVux4CDc6e9?=
+ =?iso-8859-1?Q?I23c/TO0U40f5AI/HvHvDdpZQesWlB+1d0BjKGmupIMOeNxS3+nYAWBfwH?=
+ =?iso-8859-1?Q?WwVZutZ4DtB8mo+5t4SpSXuSqp0TxTAHhpwhJg+IBWb5reKGZaYTmUhvtp?=
+ =?iso-8859-1?Q?fIElQrstfkwZNf1Qb53OujKzW2Tos8+e2SvvltTWJk7CZryhXrFftK/Q?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -146,16 +147,16 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 43e7eaa6-475c-4549-5b42-08da8b5aa278
-X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Aug 2022 14:11:01.4991
+X-MS-Exchange-CrossTenant-Network-Message-Id: 117792c6-6aaa-4f73-4008-08da8b5aa1b7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Aug 2022 14:11:00.2492
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Pz8Nsf2rqRneOLWVXiES3m1n/mKV12QukkHumg5mwgbOxelyIBIzLSQMr1mWLDwsWUGz0qXJOZweu9Tfw9mKDVTzwcTgCLcac4PLVocEi+I=
+X-MS-Exchange-CrossTenant-userprincipalname: XPPZQpvKHY2H6MHWjCiEW4XEJIVtOcT4d7o8m6QQsHPZmhAOCUt8ABlhTGNz9DSL0fD2nLTuQDogcXOkufQkRRjAWQjsz2CRTGUogsm8DFo=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB6301
-X-Proofpoint-GUID: ejVwXPRGnwer7_PrxgkE1CwtrtoWDyIO
-X-Proofpoint-ORIG-GUID: ejVwXPRGnwer7_PrxgkE1CwtrtoWDyIO
+X-Proofpoint-GUID: aVlkLkwcfazWl26gJqx2Ls0rL_uqJPWH
+X-Proofpoint-ORIG-GUID: aVlkLkwcfazWl26gJqx2Ls0rL_uqJPWH
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
  definitions=2022-08-31_08,2022-08-31_03,2022-06-22_01
@@ -165,933 +166,901 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 imposto
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2207270000
  definitions=main-2208310070
 
-As pci devices are refcounted now and all list that store them are
-protected by separate locks, we can safely drop global pcidevs_lock.
+Prior to this change, lifetime of pci_dev objects was protected by global
+pcidevs_lock(). We are going to get if of this lock, so we need some
+other mechanism to ensure that those objects will not disappear under
+feet of code that access them. Reference counting is a good choice as
+it provides easy to comprehend way to control object lifetime with
+better granularity than global super lock.
+
+This patch adds two new helper functions: pcidev_get() and
+pcidev_put(). pcidev_get() will increase reference counter, while
+pcidev_put() will decrease it, destroying object when counter reaches
+zero.
+
+pcidev_get() should be used only when you already have a valid pointer
+to the object or you are holding lock that protects one of the
+lists (domain, pseg or ats) that store pci_dev structs.
+
+pcidev_get() is rarely used directly, because there already are
+functions that will provide valid pointer to pci_dev struct:
+pci_get_pdev() and pci_get_real_pdev(). They will lock appropriate
+list, find needed object and increase its reference counter before
+returning to the caller.
+
+Naturally, pci_put() should be called after finishing working with a
+received object. This is the reason why this patch have so many
+pcidev_put()s and so little pcidev_get()s: existing calls to
+pci_get_*() functions now will increase reference counter
+automatically, we just need to decrease it back when we finished.
+
+This patch removes "const" qualifier from some pdev pointers because
+pcidev_put() technically alters the contents of pci_dev structure.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
----
- xen/arch/x86/domctl.c                       |  8 ---
- xen/arch/x86/hvm/vioapic.c                  |  2 -
- xen/arch/x86/hvm/vmsi.c                     | 12 ----
- xen/arch/x86/irq.c                          |  7 ---
- xen/arch/x86/msi.c                          | 11 ----
- xen/arch/x86/pci.c                          |  4 --
- xen/arch/x86/physdev.c                      |  7 +--
- xen/common/sysctl.c                         |  2 -
- xen/drivers/char/ns16550.c                  |  4 --
- xen/drivers/passthrough/amd/iommu_init.c    |  7 ---
- xen/drivers/passthrough/amd/iommu_map.c     |  5 --
- xen/drivers/passthrough/amd/pci_amd_iommu.c |  4 --
- xen/drivers/passthrough/pci.c               | 63 +--------------------
- xen/drivers/passthrough/vtd/iommu.c         |  8 ---
- xen/drivers/video/vga.c                     |  2 -
- 15 files changed, 4 insertions(+), 142 deletions(-)
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 020df615bd..9f4ca03385 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -537,11 +537,7 @@ long arch_do_domctl(
-=20
-         ret =3D -ESRCH;
-         if ( is_iommu_enabled(d) )
--        {
--            pcidevs_lock();
-             ret =3D pt_irq_create_bind(d, bind);
--            pcidevs_unlock();
--        }
-         if ( ret < 0 )
-             printk(XENLOG_G_ERR "pt_irq_create_bind failed (%ld) for dom%d=
-\n",
-                    ret, d->domain_id);
-@@ -566,11 +562,7 @@ long arch_do_domctl(
-             break;
-=20
-         if ( is_iommu_enabled(d) )
--        {
--            pcidevs_lock();
-             ret =3D pt_irq_destroy_bind(d, bind);
--            pcidevs_unlock();
--        }
-         if ( ret < 0 )
-             printk(XENLOG_G_ERR "pt_irq_destroy_bind failed (%ld) for dom%=
-d\n",
-                    ret, d->domain_id);
-diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
-index cb7f440160..aa4e7766a3 100644
---- a/xen/arch/x86/hvm/vioapic.c
-+++ b/xen/arch/x86/hvm/vioapic.c
-@@ -197,7 +197,6 @@ static int vioapic_hwdom_map_gsi(unsigned int gsi, unsi=
-gned int trig,
-         return ret;
-     }
-=20
--    pcidevs_lock();
-     ret =3D pt_irq_create_bind(currd, &pt_irq_bind);
-     if ( ret )
-     {
-@@ -207,7 +206,6 @@ static int vioapic_hwdom_map_gsi(unsigned int gsi, unsi=
-gned int trig,
-         unmap_domain_pirq(currd, pirq);
-         write_unlock(&currd->event_lock);
-     }
--    pcidevs_unlock();
-=20
-     return ret;
- }
+---
+
+- Jan, can I add your Suggested-by tag?
+---
+ xen/arch/x86/hvm/vmsi.c                  |   2 +-
+ xen/arch/x86/irq.c                       |   4 +
+ xen/arch/x86/msi.c                       |  41 ++++++-
+ xen/arch/x86/pci.c                       |   4 +-
+ xen/arch/x86/physdev.c                   |  17 ++-
+ xen/common/sysctl.c                      |   5 +-
+ xen/drivers/passthrough/amd/iommu_init.c |  12 ++-
+ xen/drivers/passthrough/amd/iommu_map.c  |   6 +-
+ xen/drivers/passthrough/pci.c            | 131 +++++++++++++++--------
+ xen/drivers/passthrough/vtd/quirks.c     |   2 +
+ xen/drivers/video/vga.c                  |  10 +-
+ xen/drivers/vpci/vpci.c                  |   6 +-
+ xen/include/xen/pci.h                    |  18 ++++
+ 13 files changed, 201 insertions(+), 57 deletions(-)
+
 diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
-index c9e5f279c5..344bbd646c 100644
+index 75f92885dc..7fb1075673 100644
 --- a/xen/arch/x86/hvm/vmsi.c
 +++ b/xen/arch/x86/hvm/vmsi.c
-@@ -470,7 +470,6 @@ int msixtbl_pt_register(struct domain *d, struct pirq *=
-pirq, uint64_t gtable)
-     struct msixtbl_entry *entry, *new_entry;
-     int r =3D -EINVAL;
+@@ -912,7 +912,7 @@ int vpci_msix_arch_print(const struct vpci_msix *msix)
 =20
--    ASSERT(pcidevs_locked());
-     ASSERT(rw_is_write_locked(&d->event_lock));
-=20
-     if ( !msixtbl_initialised(d) )
-@@ -540,7 +539,6 @@ void msixtbl_pt_unregister(struct domain *d, struct pir=
-q *pirq)
-     struct pci_dev *pdev;
-     struct msixtbl_entry *entry;
-=20
--    ASSERT(pcidevs_locked());
-     ASSERT(rw_is_write_locked(&d->event_lock));
-=20
-     if ( !msixtbl_initialised(d) )
-@@ -686,8 +684,6 @@ static int vpci_msi_update(const struct pci_dev *pdev, =
-uint32_t data,
- {
-     unsigned int i;
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( (address & MSI_ADDR_BASE_MASK) !=3D MSI_ADDR_HEADER )
-     {
-         gdprintk(XENLOG_ERR, "%pp: PIRQ %u: unsupported address %lx\n",
-@@ -728,7 +724,6 @@ void vpci_msi_arch_update(struct vpci_msi *msi, const s=
-truct pci_dev *pdev)
-=20
-     ASSERT(msi->arch.pirq !=3D INVALID_PIRQ);
-=20
--    pcidevs_lock();
-     for ( i =3D 0; i < msi->vectors && msi->arch.bound; i++ )
-     {
-         struct xen_domctl_bind_pt_irq unbind =3D {
-@@ -747,7 +742,6 @@ void vpci_msi_arch_update(struct vpci_msi *msi, const s=
-truct pci_dev *pdev)
-=20
-     msi->arch.bound =3D !vpci_msi_update(pdev, msi->data, msi->address,
-                                        msi->vectors, msi->arch.pirq, msi->=
-mask);
--    pcidevs_unlock();
- }
-=20
- static int vpci_msi_enable(const struct pci_dev *pdev, unsigned int nr,
-@@ -785,10 +779,8 @@ int vpci_msi_arch_enable(struct vpci_msi *msi, const s=
-truct pci_dev *pdev,
-         return rc;
-     msi->arch.pirq =3D rc;
-=20
--    pcidevs_lock();
-     msi->arch.bound =3D !vpci_msi_update(pdev, msi->data, msi->address, ve=
-ctors,
-                                        msi->arch.pirq, msi->mask);
--    pcidevs_unlock();
-=20
-     return 0;
- }
-@@ -800,7 +792,6 @@ static void vpci_msi_disable(const struct pci_dev *pdev=
-, int pirq,
-=20
-     ASSERT(pirq !=3D INVALID_PIRQ);
-=20
--    pcidevs_lock();
-     for ( i =3D 0; i < nr && bound; i++ )
-     {
-         struct xen_domctl_bind_pt_irq bind =3D {
-@@ -816,7 +807,6 @@ static void vpci_msi_disable(const struct pci_dev *pdev=
-, int pirq,
-     write_lock(&pdev->domain->event_lock);
-     unmap_domain_pirq(pdev->domain, pirq);
-     write_unlock(&pdev->domain->event_lock);
--    pcidevs_unlock();
- }
-=20
- void vpci_msi_arch_disable(struct vpci_msi *msi, const struct pci_dev *pde=
-v)
-@@ -863,7 +853,6 @@ int vpci_msix_arch_enable_entry(struct vpci_msix_entry =
-*entry,
-=20
-     entry->arch.pirq =3D rc;
-=20
--    pcidevs_lock();
-     rc =3D vpci_msi_update(pdev, entry->data, entry->addr, 1, entry->arch.=
-pirq,
-                          entry->masked);
-     if ( rc )
-@@ -871,7 +860,6 @@ int vpci_msix_arch_enable_entry(struct vpci_msix_entry =
-*entry,
-         vpci_msi_disable(pdev, entry->arch.pirq, 1, false);
-         entry->arch.pirq =3D INVALID_PIRQ;
-     }
--    pcidevs_unlock();
-=20
-     return rc;
- }
+             spin_unlock(&msix->pdev->vpci->lock);
+             process_pending_softirqs();
+-            /* NB: we assume that pdev cannot go away for an alive domain.=
+ */
++
+             if ( !pdev->vpci || !spin_trylock(&pdev->vpci->lock) )
+                 return -EBUSY;
+             if ( pdev->vpci->msix !=3D msix )
 diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index d8672a03e1..6a08830a55 100644
+index cd0c8a30a8..d8672a03e1 100644
 --- a/xen/arch/x86/irq.c
 +++ b/xen/arch/x86/irq.c
-@@ -2156,8 +2156,6 @@ int map_domain_pirq(
-         struct pci_dev *pdev;
-         unsigned int nr =3D 0;
-=20
--        ASSERT(pcidevs_locked());
--
-         ret =3D -ENODEV;
-         if ( !cpu_has_apic )
+@@ -2174,6 +2174,7 @@ int map_domain_pirq(
+                 msi->entry_nr =3D ret;
+                 ret =3D -ENFILE;
+             }
++	    pcidev_put(pdev);
              goto done;
-@@ -2317,7 +2315,6 @@ int unmap_domain_pirq(struct domain *d, int pirq)
-     if ( (pirq < 0) || (pirq >=3D d->nr_pirqs) )
-         return -EINVAL;
+         }
 =20
--    ASSERT(pcidevs_locked());
-     ASSERT(rw_is_write_locked(&d->event_lock));
+@@ -2188,6 +2189,7 @@ int map_domain_pirq(
+             msi_desc->irq =3D -1;
+             msi_free_irq(msi_desc);
+             ret =3D -EBUSY;
++	    pcidev_put(pdev);
+             goto done;
+         }
 =20
-     info =3D pirq_info(d, pirq);
-@@ -2423,7 +2420,6 @@ void free_domain_pirqs(struct domain *d)
- {
-     int i;
+@@ -2272,10 +2274,12 @@ int map_domain_pirq(
+             }
+             msi_desc->irq =3D -1;
+             msi_free_irq(msi_desc);
++	    pcidev_put(pdev);
+             goto done;
+         }
 =20
--    pcidevs_lock();
-     write_lock(&d->event_lock);
-=20
-     for ( i =3D 0; i < d->nr_pirqs; i++ )
-@@ -2431,7 +2427,6 @@ void free_domain_pirqs(struct domain *d)
-             unmap_domain_pirq(d, i);
-=20
-     write_unlock(&d->event_lock);
--    pcidevs_unlock();
- }
-=20
- static void cf_check dump_irqs(unsigned char key)
-@@ -2911,7 +2906,6 @@ int allocate_and_map_msi_pirq(struct domain *d, int i=
-ndex, int *pirq_p,
-=20
-     msi->irq =3D irq;
-=20
--    pcidevs_lock();
-     /* Verify or get pirq. */
-     write_lock(&d->event_lock);
-     pirq =3D allocate_pirq(d, index, *pirq_p, irq, type, &msi->entry_nr);
-@@ -2927,7 +2921,6 @@ int allocate_and_map_msi_pirq(struct domain *d, int i=
-ndex, int *pirq_p,
-=20
-  done:
-     write_unlock(&d->event_lock);
--    pcidevs_unlock();
-     if ( ret )
-     {
-         switch ( type )
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index 6b62c4f452..f04b90e235 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -623,7 +623,6 @@ static int msi_capability_init(struct pci_dev *dev,
-     u8 slot =3D PCI_SLOT(dev->devfn);
-     u8 func =3D PCI_FUNC(dev->devfn);
-=20
--    ASSERT(pcidevs_locked());
-     pos =3D pci_find_cap_offset(seg, bus, slot, func, PCI_CAP_ID_MSI);
-     if ( !pos )
-         return -ENODEV;
-@@ -810,8 +809,6 @@ static int msix_capability_init(struct pci_dev *dev,
-     if ( !pos )
-         return -ENODEV;
-=20
--    ASSERT(pcidevs_locked());
--
-     control =3D pci_conf_read16(dev->sbdf, msix_control_reg(pos));
-     /*
-      * Ensure MSI-X interrupts are masked during setup. Some devices requi=
-re
-@@ -1032,7 +1029,6 @@ static int __pci_enable_msi(struct msi_info *msi, str=
-uct msi_desc **desc)
-     struct msi_desc *old_desc;
-     int ret;
-=20
--    ASSERT(pcidevs_locked());
-     pdev =3D pci_get_pdev(NULL, msi->sbdf);
-     if ( !pdev )
-         return -ENODEV;
-@@ -1092,7 +1088,6 @@ static int __pci_enable_msix(struct msi_info *msi, st=
-ruct msi_desc **desc)
-     struct msi_desc *old_desc;
-     int ret;
-=20
--    ASSERT(pcidevs_locked());
-     pdev =3D pci_get_pdev(NULL, msi->sbdf);
-     if ( !pdev || !pdev->msix )
-         return -ENODEV;
-@@ -1191,7 +1186,6 @@ int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool =
-off)
-     if ( !use_msi )
-         return 0;
-=20
--    pcidevs_lock();
-     pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bus, devfn));
-     if ( !pdev )
-         rc =3D -ENODEV;
-@@ -1204,7 +1198,6 @@ int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool =
-off)
+         set_domain_irq_pirq(d, irq, info);
++	pcidev_put(pdev);
+         spin_unlock_irqrestore(&desc->lock, flags);
      }
      else
-         rc =3D msix_capability_init(pdev, NULL, NULL);
--    pcidevs_unlock();
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index d0bf63df1d..bccaccb98b 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -572,6 +572,10 @@ int msi_free_irq(struct msi_desc *entry)
+                         virt_to_fix((unsigned long)entry->mask_base));
 =20
-     pcidev_put(pdev);
+     list_del(&entry->list);
++
++    /* Corresponds to pcidev_get() in msi[x]_capability_init()  */
++    pcidev_put(entry->dev);
++
+     xfree(entry);
+     return 0;
+ }
+@@ -644,6 +648,7 @@ static int msi_capability_init(struct pci_dev *dev,
+             entry[i].msi.mpos =3D mpos;
+         entry[i].msi.nvec =3D 0;
+         entry[i].dev =3D dev;
++	pcidev_get(dev);
+     }
+     entry->msi.nvec =3D nvec;
+     entry->irq =3D irq;
+@@ -703,22 +708,36 @@ static u64 read_pci_mem_bar(u16 seg, u8 bus, u8 slot,=
+ u8 func, u8 bir, int vf)
+              !num_vf || !offset || (num_vf > 1 && !stride) ||
+              bir >=3D PCI_SRIOV_NUM_BARS ||
+              !pdev->vf_rlen[bir] )
++        {
++            if ( pdev )
++                pcidev_put(pdev);
+             return 0;
++        }
+         base =3D pos + PCI_SRIOV_BAR;
+         vf -=3D PCI_BDF(bus, slot, func) + offset;
+         if ( vf < 0 )
++        {
++            pcidev_put(pdev);
+             return 0;
++        }
+         if ( stride )
+         {
+             if ( vf % stride )
++            {
++                pcidev_put(pdev);
+                 return 0;
++            }
+             vf /=3D stride;
+         }
+         if ( vf >=3D num_vf )
++        {
++            pcidev_put(pdev);
+             return 0;
++        }
+         BUILD_BUG_ON(ARRAY_SIZE(pdev->vf_rlen) !=3D PCI_SRIOV_NUM_BARS);
+         disp =3D vf * pdev->vf_rlen[bir];
+         limit =3D PCI_SRIOV_NUM_BARS;
++        pcidev_put(pdev);
+     }
+     else switch ( pci_conf_read8(PCI_SBDF(seg, bus, slot, func),
+                                  PCI_HEADER_TYPE) & 0x7f )
+@@ -925,6 +944,8 @@ static int msix_capability_init(struct pci_dev *dev,
+         entry->dev =3D dev;
+         entry->mask_base =3D base;
 =20
-@@ -1217,8 +1210,6 @@ int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool =
-off)
-  */
- int pci_enable_msi(struct msi_info *msi, struct msi_desc **desc)
++	pcidev_get(dev);
++
+         list_add_tail(&entry->list, &dev->msi_list);
+         *desc =3D entry;
+     }
+@@ -999,6 +1020,7 @@ static int __pci_enable_msi(struct msi_info *msi, stru=
+ct msi_desc **desc)
  {
--    ASSERT(pcidevs_locked());
--
-     if ( !use_msi )
-         return -EPERM;
+     struct pci_dev *pdev;
+     struct msi_desc *old_desc;
++    int ret;
 =20
-@@ -1355,8 +1346,6 @@ int pci_restore_msi_state(struct pci_dev *pdev)
-     unsigned int type =3D 0, pos =3D 0;
-     u16 control =3D 0;
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( !use_msi )
-         return -EOPNOTSUPP;
-=20
-diff --git a/xen/arch/x86/pci.c b/xen/arch/x86/pci.c
-index 1d38f0df7c..4dcd6d96f3 100644
---- a/xen/arch/x86/pci.c
-+++ b/xen/arch/x86/pci.c
-@@ -88,15 +88,11 @@ int pci_conf_write_intercept(unsigned int seg, unsigned=
- int bdf,
-     if ( reg < 64 || reg >=3D 256 )
-         return 0;
-=20
--    pcidevs_lock();
--
-     pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bdf));
-     if ( pdev ) {
-         rc =3D pci_msi_conf_write_intercept(pdev, reg, size, data);
- 	pcidev_put(pdev);
+     ASSERT(pcidevs_locked());
+     pdev =3D pci_get_pdev(NULL, msi->sbdf);
+@@ -1010,6 +1032,7 @@ static int __pci_enable_msi(struct msi_info *msi, str=
+uct msi_desc **desc)
+     {
+         printk(XENLOG_ERR "irq %d already mapped to MSI on %pp\n",
+                msi->irq, &pdev->sbdf);
++	pcidev_put(pdev);
+         return -EEXIST;
      }
 =20
--    pcidevs_unlock();
--
+@@ -1020,7 +1043,10 @@ static int __pci_enable_msi(struct msi_info *msi, st=
+ruct msi_desc **desc)
+         __pci_disable_msix(old_desc);
+     }
+=20
+-    return msi_capability_init(pdev, msi->irq, desc, msi->entry_nr);
++    ret =3D msi_capability_init(pdev, msi->irq, desc, msi->entry_nr);
++    pcidev_put(pdev);
++
++    return ret;
+ }
+=20
+ static void __pci_disable_msi(struct msi_desc *entry)
+@@ -1054,6 +1080,7 @@ static int __pci_enable_msix(struct msi_info *msi, st=
+ruct msi_desc **desc)
+ {
+     struct pci_dev *pdev;
+     struct msi_desc *old_desc;
++    int ret;
+=20
+     ASSERT(pcidevs_locked());
+     pdev =3D pci_get_pdev(NULL, msi->sbdf);
+@@ -1061,13 +1088,17 @@ static int __pci_enable_msix(struct msi_info *msi, =
+struct msi_desc **desc)
+         return -ENODEV;
+=20
+     if ( msi->entry_nr >=3D pdev->msix->nr_entries )
++    {
++	pcidev_put(pdev);
+         return -EINVAL;
++    }
+=20
+     old_desc =3D find_msi_entry(pdev, msi->irq, PCI_CAP_ID_MSIX);
+     if ( old_desc )
+     {
+         printk(XENLOG_ERR "irq %d already mapped to MSI-X on %pp\n",
+                msi->irq, &pdev->sbdf);
++	pcidev_put(pdev);
+         return -EEXIST;
+     }
+=20
+@@ -1078,7 +1109,11 @@ static int __pci_enable_msix(struct msi_info *msi, s=
+truct msi_desc **desc)
+         __pci_disable_msi(old_desc);
+     }
+=20
+-    return msix_capability_init(pdev, msi, desc);
++    ret =3D msix_capability_init(pdev, msi, desc);
++
++    pcidev_put(pdev);
++
++    return ret;
+ }
+=20
+ static void _pci_cleanup_msix(struct arch_msix *msix)
+@@ -1161,6 +1196,8 @@ int pci_prepare_msix(u16 seg, u8 bus, u8 devfn, bool =
+off)
+         rc =3D msix_capability_init(pdev, NULL, NULL);
+     pcidevs_unlock();
+=20
++    pcidev_put(pdev);
++
      return rc;
  }
+=20
+diff --git a/xen/arch/x86/pci.c b/xen/arch/x86/pci.c
+index 97b792e578..1d38f0df7c 100644
+--- a/xen/arch/x86/pci.c
++++ b/xen/arch/x86/pci.c
+@@ -91,8 +91,10 @@ int pci_conf_write_intercept(unsigned int seg, unsigned =
+int bdf,
+     pcidevs_lock();
+=20
+     pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bdf));
+-    if ( pdev )
++    if ( pdev ) {
+         rc =3D pci_msi_conf_write_intercept(pdev, reg, size, data);
++	pcidev_put(pdev);
++    }
+=20
+     pcidevs_unlock();
+=20
 diff --git a/xen/arch/x86/physdev.c b/xen/arch/x86/physdev.c
-index 96214a3d40..a41366b609 100644
+index 2f1d955a96..96214a3d40 100644
 --- a/xen/arch/x86/physdev.c
 +++ b/xen/arch/x86/physdev.c
-@@ -162,11 +162,9 @@ int physdev_unmap_pirq(domid_t domid, int pirq)
-             goto free_domain;
-     }
-=20
--    pcidevs_lock();
-     write_lock(&d->event_lock);
-     ret =3D unmap_domain_pirq(d, pirq);
-     write_unlock(&d->event_lock);
--    pcidevs_unlock();
-=20
-  free_domain:
-     rcu_unlock_domain(d);
-@@ -530,7 +528,6 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-         if ( copy_from_guest(&restore_msi, arg, 1) !=3D 0 )
-             break;
-=20
--        pcidevs_lock();
+@@ -533,7 +533,14 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(vo=
+id) arg)
+         pcidevs_lock();
          pdev =3D pci_get_pdev(NULL,
                              PCI_SBDF(0, restore_msi.bus, restore_msi.devfn=
 ));
-         if ( pdev )
-@@ -541,7 +538,6 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-         else
-             ret =3D -ENODEV;
-=20
--        pcidevs_unlock();
+-        ret =3D pdev ? pci_restore_msi_state(pdev) : -ENODEV;
++        if ( pdev )
++        {
++            ret =3D pci_restore_msi_state(pdev);
++            pcidev_put(pdev);
++        }
++        else
++            ret =3D -ENODEV;
++
+         pcidevs_unlock();
          break;
      }
+@@ -548,7 +555,13 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(vo=
+id) arg)
 =20
-@@ -553,7 +549,6 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-         if ( copy_from_guest(&dev, arg, 1) !=3D 0 )
-             break;
-=20
--        pcidevs_lock();
+         pcidevs_lock();
          pdev =3D pci_get_pdev(NULL, PCI_SBDF(dev.seg, dev.bus, dev.devfn))=
 ;
-         if ( pdev )
-         {
-@@ -562,7 +557,7 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-         }
-         else
-             ret =3D -ENODEV;
--        pcidevs_unlock();
-+
+-        ret =3D pdev ? pci_restore_msi_state(pdev) : -ENODEV;
++        if ( pdev )
++        {
++            ret =3D  pci_restore_msi_state(pdev);
++            pcidev_put(pdev);
++        }
++        else
++            ret =3D -ENODEV;
+         pcidevs_unlock();
          break;
      }
-=20
 diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
-index 0feef94cd2..6bb8c5c295 100644
+index 02505ab044..0feef94cd2 100644
 --- a/xen/common/sysctl.c
 +++ b/xen/common/sysctl.c
-@@ -446,7 +446,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_s=
+@@ -438,7 +438,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_s=
 ysctl)
-                 break;
-             }
+         {
+             physdev_pci_device_t dev;
+             uint32_t node;
+-            const struct pci_dev *pdev;
++            struct pci_dev *pdev;
 =20
--            pcidevs_lock();
-             pdev =3D pci_get_pdev(NULL, PCI_SBDF(dev.seg, dev.bus, dev.dev=
-fn));
-             if ( !pdev )
-                 node =3D XEN_INVALID_DEV;
-@@ -454,7 +453,6 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_s=
-ysctl)
-                 node =3D XEN_INVALID_NODE_ID;
-             else
-                 node =3D pdev->node;
--            pcidevs_unlock();
-=20
-             if ( pdev )
-                 pcidev_put(pdev);
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 01a05c9aa8..66c10b18e5 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -445,8 +445,6 @@ static void __init cf_check ns16550_init_postirq(struct=
- serial_port *port)
+             if ( copy_from_guest_offset(&dev, ti->devs, i, 1) )
              {
-                 struct msi_desc *msi_desc =3D NULL;
+@@ -456,6 +456,9 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_s=
+ysctl)
+                 node =3D pdev->node;
+             pcidevs_unlock();
 =20
--                pcidevs_lock();
--
-                 rc =3D pci_enable_msi(&msi, &msi_desc);
-                 if ( !rc )
-                 {
-@@ -460,8 +458,6 @@ static void __init cf_check ns16550_init_postirq(struct=
- serial_port *port)
-                         pci_disable_msi(msi_desc);
-                 }
-=20
--                pcidevs_unlock();
--
-                 if ( rc )
-                 {
-                     uart->irq =3D 0;
++            if ( pdev )
++                pcidev_put(pdev);
++
+             if ( copy_to_guest_offset(ti->nodes, i, &node, 1) )
+             {
+                 ret =3D -EFAULT;
 diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthr=
 ough/amd/iommu_init.c
-index 7c1713a602..e42af65a40 100644
+index 1f14aaf49e..7c1713a602 100644
 --- a/xen/drivers/passthrough/amd/iommu_init.c
 +++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -638,10 +638,7 @@ static void cf_check parse_ppr_log_entry(struct amd_io=
-mmu *iommu, u32 entry[])
-     uint16_t device_id =3D iommu_get_devid_from_cmd(entry[0]);
-     struct pci_dev *pdev;
+@@ -644,6 +644,7 @@ static void cf_check parse_ppr_log_entry(struct amd_iom=
+mu *iommu, u32 entry[])
 =20
--    pcidevs_lock();
-     pdev =3D pci_get_real_pdev(PCI_SBDF(iommu->seg, device_id));
--    pcidevs_unlock();
--
      if ( pdev )
          guest_iommu_add_ppr_log(pdev->domain, entry);
-     pcidev_put(pdev);
-@@ -747,14 +744,12 @@ static bool_t __init set_iommu_interrupt_handler(stru=
-ct amd_iommu *iommu)
-         return 0;
++    pcidev_put(pdev);
+ }
+=20
+ static void iommu_check_ppr_log(struct amd_iommu *iommu)
+@@ -747,6 +748,11 @@ static bool_t __init set_iommu_interrupt_handler(struc=
+t amd_iommu *iommu)
      }
 =20
--    pcidevs_lock();
-     /*
-      * XXX: it is unclear if this device can be removed. Right now
-      * there is no code that clears msi.dev, so no one will decrease
-      * refcount on it.
-      */
+     pcidevs_lock();
++    /*
++     * XXX: it is unclear if this device can be removed. Right now
++     * there is no code that clears msi.dev, so no one will decrease
++     * refcount on it.
++     */
      iommu->msi.dev =3D pci_get_pdev(NULL, PCI_SBDF(iommu->seg, iommu->bdf)=
 );
--    pcidevs_unlock();
+     pcidevs_unlock();
      if ( !iommu->msi.dev )
-     {
-         AMD_IOMMU_WARN("no pdev for %pp\n",
-@@ -1289,9 +1284,7 @@ static int __init cf_check amd_iommu_setup_device_tab=
+@@ -1272,7 +1278,7 @@ static int __init cf_check amd_iommu_setup_device_tab=
 le(
-             {
-                 if ( !pci_init )
-                     continue;
--                pcidevs_lock();
-                 pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bdf));
--                pcidevs_unlock();
+     {
+         if ( ivrs_mappings[bdf].valid )
+         {
+-            const struct pci_dev *pdev =3D NULL;
++            struct pci_dev *pdev =3D NULL;
+=20
+             /* add device table entry */
+             iommu_dte_add_device_entry(&dt[bdf], &ivrs_mappings[bdf]);
+@@ -1297,7 +1303,10 @@ static int __init cf_check amd_iommu_setup_device_ta=
+ble(
+                         pdev->msix ? pdev->msix->nr_entries
+                                    : pdev->msi_maxvec);
+                 if ( !ivrs_mappings[bdf].intremap_table )
++		{
++		    pcidev_put(pdev);
+                     return -ENOMEM;
++		}
+=20
+                 if ( pdev->phantom_stride )
+                 {
+@@ -1315,6 +1324,7 @@ static int __init cf_check amd_iommu_setup_device_tab=
+le(
+                             ivrs_mappings[bdf].intremap_inuse;
+                     }
+                 }
++		pcidev_put(pdev);
              }
 =20
-             if ( pdev && (pdev->msix || pdev->msi_maxvec) )
+             amd_iommu_set_intremap_table(
 diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthro=
 ugh/amd/iommu_map.c
-index 9d621e3d36..d04aa37538 100644
+index 993bac6f88..9d621e3d36 100644
 --- a/xen/drivers/passthrough/amd/iommu_map.c
 +++ b/xen/drivers/passthrough/amd/iommu_map.c
-@@ -726,9 +726,7 @@ int cf_check amd_iommu_get_reserved_device_memory(
+@@ -724,14 +724,18 @@ int cf_check amd_iommu_get_reserved_device_memory(
+         if ( !iommu )
+         {
              /* May need to trigger the workaround in find_iommu_for_device=
 (). */
-             struct pci_dev *pdev;
+-            const struct pci_dev *pdev;
++            struct pci_dev *pdev;
 =20
--            pcidevs_lock();
+             pcidevs_lock();
              pdev =3D pci_get_pdev(NULL, sbdf);
--            pcidevs_unlock();
+             pcidevs_unlock();
 =20
              if ( pdev )
-             {
-@@ -848,7 +846,6 @@ int cf_check amd_iommu_quarantine_init(struct pci_dev *=
-pdev, bool scratch_page)
-     const struct ivrs_mappings *ivrs_mappings =3D get_ivrs_mappings(pdev->=
-seg);
-     int rc;
-=20
--    ASSERT(pcidevs_locked());
-     ASSERT(!hd->arch.amd.root_table);
-     ASSERT(page_list_empty(&hd->arch.pgtables.list));
-=20
-@@ -903,8 +900,6 @@ void amd_iommu_quarantine_teardown(struct pci_dev *pdev=
-)
- {
-     struct domain_iommu *hd =3D dom_iommu(dom_io);
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( !pdev->arch.amd.root_table )
-         return;
-=20
-diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/pass=
-through/amd/pci_amd_iommu.c
-index 955f3af57a..919e30129e 100644
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -268,8 +268,6 @@ static int __must_check amd_iommu_setup_domain_device(
-                     req_id, pdev->type, page_to_maddr(root_pg),
-                     domid, hd->arch.amd.paging_mode);
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( pci_ats_device(iommu->seg, bus, pdev->devfn) &&
-          !ivrs_dev->block_ats &&
-          iommu_has_cap(iommu, PCI_CAP_IOTLB_SHIFT) &&
-@@ -416,8 +414,6 @@ static void amd_iommu_disable_domain_device(const struc=
-t domain *domain,
-     if ( QUARANTINE_SKIP(domain, pdev) )
-         return;
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( pci_ats_device(iommu->seg, bus, pdev->devfn) &&
-          pci_ats_enabled(iommu->seg, bus, pdev->devfn) )
-     {
++            {
+                 iommu =3D find_iommu_for_device(seg, bdf);
++                /* XXX: Should we hold pdev reference till end of the loop=
+? */
++                pcidev_put(pdev);
++            }
+             if ( !iommu )
+                 continue;
+         }
 diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index c83397211b..cc62a5aec4 100644
+index b5db5498a1..a6c6368769 100644
 --- a/xen/drivers/passthrough/pci.c
 +++ b/xen/drivers/passthrough/pci.c
-@@ -517,7 +517,6 @@ int __init pci_hide_device(unsigned int seg, unsigned i=
-nt bus,
-     struct pci_seg *pseg;
-     int rc =3D -ENOMEM;
+@@ -403,6 +403,7 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg,=
+ u8 bus, u8 devfn)
+     *((u8*) &pdev->bus) =3D bus;
+     *((u8*) &pdev->devfn) =3D devfn;
+     pdev->domain =3D NULL;
++    refcnt_init(&pdev->refcnt);
 =20
--    pcidevs_lock();
-     pseg =3D alloc_pseg(seg);
-     if ( pseg )
-     {
-@@ -528,7 +527,6 @@ int __init pci_hide_device(unsigned int seg, unsigned i=
-nt bus,
-             rc =3D 0;
-         }
-     }
--    pcidevs_unlock();
+     arch_pci_init_pdev(pdev);
 =20
-     return rc;
+@@ -499,33 +500,6 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg=
+, u8 bus, u8 devfn)
+     return pdev;
  }
-@@ -588,8 +586,6 @@ struct pci_dev *pci_get_pdev(struct domain *d, pci_sbdf=
-_t sbdf)
- {
-     struct pci_dev *pdev;
 =20
--    ASSERT(d || pcidevs_locked());
+-static void free_pdev(struct pci_seg *pseg, struct pci_dev *pdev)
+-{
+-    /* update bus2bridge */
+-    switch ( pdev->type )
+-    {
+-        unsigned int sec_bus, sub_bus;
 -
-     /*
-      * The hardware domain owns the majority of the devices in the system.
-      * When there are multiple segments, traversing the per-segment list i=
-s
-@@ -730,7 +726,6 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-         pdev_type =3D "device";
-     else if ( info->is_virtfn )
+-        case DEV_TYPE_PCIe2PCI_BRIDGE:
+-        case DEV_TYPE_LEGACY_PCI_BRIDGE:
+-            sec_bus =3D pci_conf_read8(pdev->sbdf, PCI_SECONDARY_BUS);
+-            sub_bus =3D pci_conf_read8(pdev->sbdf, PCI_SUBORDINATE_BUS);
+-
+-            spin_lock(&pseg->bus2bridge_lock);
+-            for ( ; sec_bus <=3D sub_bus; sec_bus++ )
+-                pseg->bus2bridge[sec_bus] =3D pseg->bus2bridge[pdev->bus];
+-            spin_unlock(&pseg->bus2bridge_lock);
+-            break;
+-
+-        default:
+-            break;
+-    }
+-
+-    list_del(&pdev->alldevs_list);
+-    pdev_msi_deinit(pdev);
+-    xfree(pdev);
+-}
+-
+ static void __init _pci_hide_device(struct pci_dev *pdev)
+ {
+     if ( pdev->domain )
+@@ -596,10 +570,15 @@ struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf)
      {
--        pcidevs_lock();
-         pdev =3D pci_get_pdev(NULL,
+         if ( !(sbdf.devfn & stride) )
+             continue;
++
+         sbdf.devfn &=3D ~stride;
++        pcidev_put(pdev);
+         pdev =3D pci_get_pdev(NULL, sbdf);
+         if ( pdev && stride !=3D pdev->phantom_stride )
++        {
++            pcidev_put(pdev);
+             pdev =3D NULL;
++        }
+     }
+=20
+     return pdev;
+@@ -629,6 +608,7 @@ struct pci_dev *pci_get_pdev(struct domain *d, pci_sbdf=
+_t sbdf)
+             if ( pdev->sbdf.bdf =3D=3D sbdf.bdf &&
+                  (!d || pdev->domain =3D=3D d) )
+             {
++                pcidev_get(pdev);
+                 spin_unlock(&pseg->alldevs_lock);
+                 return pdev;
+             }
+@@ -640,6 +620,7 @@ struct pci_dev *pci_get_pdev(struct domain *d, pci_sbdf=
+_t sbdf)
+         list_for_each_entry ( pdev, &d->pdev_list, domain_list )
+             if ( pdev->sbdf.bdf =3D=3D sbdf.bdf )
+             {
++                pcidev_get(pdev);
+                 spin_unlock(&d->pdevs_lock);
+                 return pdev;
+             }
+@@ -754,7 +735,10 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
                              PCI_SBDF(seg, info->physfn.bus,
                                       info->physfn.devfn));
-@@ -739,7 +734,6 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+         if ( pdev )
++        {
              pf_is_extfn =3D pdev->info.is_extfn;
-             pcidev_put(pdev);
-         }
--        pcidevs_unlock();
++            pcidev_put(pdev);
++        }
+         pcidevs_unlock();
          if ( !pdev )
              pci_add_device(seg, info->physfn.bus, info->physfn.devfn,
-                            NULL, node);
-@@ -756,7 +750,6 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-=20
-     ret =3D -ENOMEM;
-=20
--    pcidevs_lock();
-     pseg =3D alloc_pseg(seg);
-     if ( !pseg )
-         goto out;
-@@ -858,7 +851,6 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
-     pci_enable_acs(pdev);
-=20
- out:
--    pcidevs_unlock();
-     if ( !ret )
-     {
-         printk(XENLOG_DEBUG "PCI add %s %pp\n", pdev_type,  &pdev->sbdf);
-@@ -889,7 +881,6 @@ int pci_remove_device(u16 seg, u8 bus, u8 devfn)
-     if ( !pseg )
-         return -ENODEV;
-=20
--    pcidevs_lock();
-     spin_lock(&pseg->alldevs_lock);
-     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-         if ( pdev->bus =3D=3D bus && pdev->devfn =3D=3D devfn )
-@@ -910,12 +901,10 @@ int pci_remove_device(u16 seg, u8 bus, u8 devfn)
+@@ -920,8 +904,9 @@ int pci_remove_device(u16 seg, u8 bus, u8 devfn)
+                 spin_unlock(&pdev->domain->pdevs_lock);
+             }
+             printk(XENLOG_DEBUG "PCI remove device %pp\n", &pdev->sbdf);
+-            free_pdev(pseg, pdev);
+             list_del(&pdev->alldevs_list);
++            pdev_msi_deinit(pdev);
++            pcidev_put(pdev);
              break;
          }
 =20
--    pcidevs_unlock();
-     spin_unlock(&pseg->alldevs_lock);
-     return ret;
- }
-=20
--/* Caller should hold the pcidevs_lock */
- static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
-                            uint8_t devfn)
- {
-@@ -927,7 +916,6 @@ static int deassign_device(struct domain *d, uint16_t s=
+@@ -952,7 +937,7 @@ static int deassign_device(struct domain *d, uint16_t s=
 eg, uint8_t bus,
-     if ( !is_iommu_enabled(d) )
-         return -EINVAL;
+     {
+         ret =3D iommu_quarantine_dev_init(pci_to_dev(pdev));
+         if ( ret )
+-           return ret;
++            goto out;
 =20
--    ASSERT(pcidevs_locked());
-     pdev =3D pci_get_pdev(d, PCI_SBDF(seg, bus, devfn));
-     if ( !pdev )
-         return -ENODEV;
-@@ -981,13 +969,10 @@ int pci_release_devices(struct domain *d)
-     u8 bus, devfn;
-     int ret;
+         target =3D dom_io;
+     }
+@@ -982,6 +967,7 @@ static int deassign_device(struct domain *d, uint16_t s=
+eg, uint8_t bus,
+     pdev->fault.count =3D 0;
 =20
--    pcidevs_lock();
-     ret =3D arch_pci_clean_pirqs(d);
+  out:
++    pcidev_put(pdev);
      if ( ret )
--    {
--        pcidevs_unlock();
-         return ret;
--    }
-+
-     spin_lock(&d->pdevs_lock);
-     list_for_each_entry_safe ( pdev, tmp, &d->pdev_list, domain_list )
-     {
-@@ -996,7 +981,6 @@ int pci_release_devices(struct domain *d)
-         ret =3D deassign_device(d, pdev->seg, bus, devfn) ?: ret;
-     }
-     spin_unlock(&d->pdevs_lock);
--    pcidevs_unlock();
-=20
-     return ret;
- }
-@@ -1094,7 +1078,6 @@ void pci_check_disable_device(u16 seg, u8 bus, u8 dev=
-fn)
-     s_time_t now =3D NOW();
-     u16 cword;
-=20
--    pcidevs_lock();
-     pdev =3D pci_get_real_pdev(PCI_SBDF(seg, bus, devfn));
-     if ( pdev )
-     {
-@@ -1108,7 +1091,6 @@ void pci_check_disable_device(u16 seg, u8 bus, u8 dev=
-fn)
+         printk(XENLOG_G_ERR "%pd: deassign (%pp) failed (%d)\n",
+                d, &PCI_SBDF(seg, bus, devfn), ret);
+@@ -1117,7 +1103,10 @@ void pci_check_disable_device(u16 seg, u8 bus, u8 de=
+vfn)
+             pdev->fault.count >>=3D 1;
+         pdev->fault.time =3D now;
+         if ( ++pdev->fault.count < PT_FAULT_THRESHOLD )
++        {
++            pcidev_put(pdev);
              pdev =3D NULL;
-         }
++        }
      }
--    pcidevs_unlock();
+     pcidevs_unlock();
 =20
-     if ( !pdev )
-         return;
-@@ -1164,13 +1146,7 @@ static int __init cf_check _scan_pci_devices(struct =
-pci_seg *pseg, void *arg)
-=20
- int __init scan_pci_devices(void)
- {
--    int ret;
--
--    pcidevs_lock();
--    ret =3D pci_segments_iterate(_scan_pci_devices, NULL);
--    pcidevs_unlock();
--
--    return ret;
-+    return pci_segments_iterate(_scan_pci_devices, NULL);
+@@ -1128,6 +1117,8 @@ void pci_check_disable_device(u16 seg, u8 bus, u8 dev=
+fn)
+      * control it for us. */
+     cword =3D pci_conf_read16(pdev->sbdf, PCI_COMMAND);
+     pci_conf_write16(pdev->sbdf, PCI_COMMAND, cword & ~PCI_COMMAND_MASTER)=
+;
++
++    pcidev_put(pdev);
  }
 =20
- struct setup_hwdom {
-@@ -1239,19 +1215,11 @@ static int __hwdom_init cf_check _setup_hwdom_pci_d=
-evices(
+ /*
+@@ -1246,6 +1237,7 @@ static int __hwdom_init cf_check _setup_hwdom_pci_dev=
+ices(
+                 printk(XENLOG_WARNING "Dom%d owning %pp?\n",
+                        pdev->domain->domain_id, &pdev->sbdf);
 =20
-             pcidev_put(pdev);
++            pcidev_put(pdev);
              if ( iommu_verbose )
--            {
--                pcidevs_unlock();
-                 process_pending_softirqs();
--                pcidevs_lock();
--            }
-         }
-=20
-         if ( !iommu_verbose )
--        {
--            pcidevs_unlock();
-             process_pending_softirqs();
--            pcidevs_lock();
--        }
-     }
-=20
-     return 0;
-@@ -1262,9 +1230,7 @@ void __hwdom_init setup_hwdom_pci_devices(
- {
-     struct setup_hwdom ctxt =3D { .d =3D d, .handler =3D handler };
-=20
--    pcidevs_lock();
-     pci_segments_iterate(_setup_hwdom_pci_devices, &ctxt);
--    pcidevs_unlock();
+             {
+                 pcidevs_unlock();
+@@ -1495,33 +1487,28 @@ static int iommu_remove_device(struct pci_dev *pdev=
+)
+     return iommu_call(hd->platform_ops, remove_device, devfn, pci_to_dev(p=
+dev));
  }
 =20
- /* APEI not supported on ARM yet. */
-@@ -1396,9 +1362,7 @@ static int cf_check _dump_pci_devices(struct pci_seg =
-*pseg, void *arg)
- static void cf_check dump_pci_devices(unsigned char ch)
+-static int device_assigned(u16 seg, u8 bus, u8 devfn)
++static int device_assigned(struct pci_dev *pdev)
  {
-     printk("=3D=3D=3D=3D PCI devices =3D=3D=3D=3D\n");
--    pcidevs_lock();
-     pci_segments_iterate(_dump_pci_devices, NULL);
--    pcidevs_unlock();
- }
-=20
- static int __init cf_check setup_dump_pcidevs(void)
-@@ -1417,8 +1381,6 @@ static int iommu_add_device(struct pci_dev *pdev)
-     if ( !pdev->domain )
-         return -EINVAL;
-=20
--    ASSERT(pcidevs_locked());
--
-     hd =3D dom_iommu(pdev->domain);
-     if ( !is_iommu_enabled(pdev->domain) )
-         return 0;
-@@ -1446,8 +1408,6 @@ static int iommu_enable_device(struct pci_dev *pdev)
-     if ( !pdev->domain )
-         return -EINVAL;
-=20
--    ASSERT(pcidevs_locked());
--
-     hd =3D dom_iommu(pdev->domain);
-     if ( !is_iommu_enabled(pdev->domain) ||
-          !hd->platform_ops->enable_device )
-@@ -1494,7 +1454,6 @@ static int device_assigned(struct pci_dev *pdev)
- {
+-    struct pci_dev *pdev;
      int rc =3D 0;
 =20
--    ASSERT(pcidevs_locked());
+     ASSERT(pcidevs_locked());
+-    pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bus, devfn));
+-
+-    if ( !pdev )
+-        rc =3D -ENODEV;
      /*
       * If the device exists and it is not owned by either the hardware
       * domain or dom_io then it must be assigned to a guest, or be
-@@ -1507,7 +1466,6 @@ static int device_assigned(struct pci_dev *pdev)
+      * hidden (owned by dom_xen).
+      */
+-    else if ( pdev->domain !=3D hardware_domain &&
+-              pdev->domain !=3D dom_io )
++    if ( pdev->domain !=3D hardware_domain &&
++         pdev->domain !=3D dom_io )
+         rc =3D -EBUSY;
+=20
      return rc;
  }
 =20
--/* Caller should hold the pcidevs_lock */
- static int assign_device(struct domain *d, struct pci_dev *pdev, u32 flag)
+ /* Caller should hold the pcidevs_lock */
+-static int assign_device(struct domain *d, u16 seg, u8 bus, u8 devfn, u32 =
+flag)
++static int assign_device(struct domain *d, struct pci_dev *pdev, u32 flag)
  {
      const struct domain_iommu *hd =3D dom_iommu(d);
-@@ -1521,7 +1479,6 @@ static int assign_device(struct domain *d, struct pci=
-_dev *pdev, u32 flag)
-         return -EXDEV;
+-    struct pci_dev *pdev;
++    uint8_t devfn;
+     int rc =3D 0;
+=20
+     if ( !is_iommu_enabled(d) )
+@@ -1532,10 +1519,11 @@ static int assign_device(struct domain *d, u16 seg,=
+ u8 bus, u8 devfn, u32 flag)
 =20
      /* device_assigned() should already have cleared the device for assign=
 ment */
--    ASSERT(pcidevs_locked());
+     ASSERT(pcidevs_locked());
+-    pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bus, devfn));
      ASSERT(pdev && (pdev->domain =3D=3D hardware_domain ||
                      pdev->domain =3D=3D dom_io));
 =20
-@@ -1587,7 +1544,6 @@ static int iommu_get_device_group(
-     if ( group_id < 0 )
-         return group_id;
-=20
--    pcidevs_lock();
-     spin_lock(&d->pdevs_lock);
-     for_each_pdev( d, pdev )
-     {
-@@ -1603,7 +1559,6 @@ static int iommu_get_device_group(
-         sdev_id =3D iommu_call(ops, get_device_group_id, seg, b, df);
-         if ( sdev_id < 0 )
++    devfn =3D pdev->devfn;
++
+     /* Do not allow broken devices to be assigned to guests. */
+     rc =3D -EBADF;
+     if ( pdev->broken && d !=3D hardware_domain && d !=3D dom_io )
+@@ -1570,7 +1558,7 @@ static int assign_device(struct domain *d, u16 seg, u=
+8 bus, u8 devfn, u32 flag)
+  done:
+     if ( rc )
+         printk(XENLOG_G_WARNING "%pd: assign (%pp) failed (%d)\n",
+-               d, &PCI_SBDF(seg, bus, devfn), rc);
++               d, &PCI_SBDF(pdev->seg, pdev->bus, devfn), rc);
+     /* The device is assigned to dom_io so mark it as quarantined */
+     else if ( d =3D=3D dom_io )
+         pdev->quarantine =3D true;
+@@ -1710,6 +1698,9 @@ int iommu_do_pci_domctl(
+         ASSERT(d);
+         /* fall through */
+     case XEN_DOMCTL_test_assign_device:
++    {
++        struct pci_dev *pdev;
++
+         /* Don't support self-assignment of devices. */
+         if ( d =3D=3D current->domain )
          {
--            pcidevs_unlock();
-             spin_unlock(&d->pdevs_lock);
-             return sdev_id;
-         }
-@@ -1614,7 +1569,6 @@ static int iommu_get_device_group(
+@@ -1737,26 +1728,36 @@ int iommu_do_pci_domctl(
+         seg =3D machine_sbdf >> 16;
+         bus =3D PCI_BUS(machine_sbdf);
+         devfn =3D PCI_DEVFN(machine_sbdf);
++        pdev =3D pci_get_pdev(NULL, PCI_SBDF(seg, bus, devfn));
++        if ( !pdev )
++        {
++            printk(XENLOG_G_INFO "%pp non-existent\n",
++                   &PCI_SBDF(seg, bus, devfn));
++            ret =3D -EINVAL;
++            break;
++        }
 =20
-             if ( unlikely(copy_to_guest_offset(buf, i, &bdf, 1)) )
-             {
--                pcidevs_unlock();
-                 spin_unlock(&d->pdevs_lock);
-                 return -EFAULT;
-             }
-@@ -1622,7 +1576,6 @@ static int iommu_get_device_group(
-         }
-     }
-=20
--    pcidevs_unlock();
-     spin_unlock(&d->pdevs_lock);
-=20
-     return i;
-@@ -1630,17 +1583,12 @@ static int iommu_get_device_group(
-=20
- void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev)
- {
--    pcidevs_lock();
--
-     /* iommu->ats_list_lock is taken by the caller of this function */
-     disable_ats_device(pdev);
-=20
-     ASSERT(pdev->domain);
-     if ( d !=3D pdev->domain )
--    {
--        pcidevs_unlock();
-         return;
--    }
-=20
-     pdev->broken =3D true;
-=20
-@@ -1649,8 +1597,6 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, =
-struct pci_dev *pdev)
-                d->domain_id, &pdev->sbdf);
-     if ( !is_hardware_domain(d) )
-         domain_crash(d);
--
--    pcidevs_unlock();
- }
-=20
- int iommu_do_pci_domctl(
-@@ -1740,7 +1686,6 @@ int iommu_do_pci_domctl(
-             break;
-         }
-=20
--        pcidevs_lock();
-         ret =3D device_assigned(pdev);
+         pcidevs_lock();
+-        ret =3D device_assigned(seg, bus, devfn);
++        ret =3D device_assigned(pdev);
          if ( domctl->cmd =3D=3D XEN_DOMCTL_test_assign_device )
          {
-@@ -1755,7 +1700,7 @@ int iommu_do_pci_domctl(
-             ret =3D assign_device(d, pdev, flags);
-=20
-         pcidev_put(pdev);
--        pcidevs_unlock();
+             if ( ret )
+             {
+-                printk(XENLOG_G_INFO "%pp already assigned, or non-existen=
+t\n",
++                printk(XENLOG_G_INFO "%pp already assigned\n",
+                        &PCI_SBDF(seg, bus, devfn));
+                 ret =3D -EINVAL;
+             }
+         }
+         else if ( !ret )
+-            ret =3D assign_device(d, seg, bus, devfn, flags);
++            ret =3D assign_device(d, pdev, flags);
 +
++        pcidev_put(pdev);
+         pcidevs_unlock();
          if ( ret =3D=3D -ERESTART )
              ret =3D hypercall_create_continuation(__HYPERVISOR_domctl,
                                                  "h", u_domctl);
-@@ -1787,9 +1732,7 @@ int iommu_do_pci_domctl(
-         bus =3D PCI_BUS(machine_sbdf);
-         devfn =3D PCI_DEVFN(machine_sbdf);
-=20
--        pcidevs_lock();
-         ret =3D deassign_device(d, seg, bus, devfn);
--        pcidevs_unlock();
          break;
-=20
-     default:
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/=
-vtd/iommu.c
-index 42661f22f4..87868188b7 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1490,7 +1490,6 @@ int domain_context_mapping_one(
-     if ( QUARANTINE_SKIP(domain, pgd_maddr) )
-         return 0;
-=20
--    ASSERT(pcidevs_locked());
-     spin_lock(&iommu->lock);
-     maddr =3D bus_to_context_maddr(iommu, bus);
-     context_entries =3D (struct context_entry *)map_vtd_domain_page(maddr)=
-;
-@@ -1711,8 +1710,6 @@ static int domain_context_mapping(struct domain *doma=
-in, u8 devfn,
-     if ( drhd && drhd->iommu->node !=3D NUMA_NO_NODE )
-         dom_iommu(domain)->node =3D drhd->iommu->node;
-=20
--    ASSERT(pcidevs_locked());
 -
-     for_each_rmrr_device( rmrr, bdf, i )
-     {
-         if ( rmrr->segment !=3D pdev->seg || bdf !=3D pdev->sbdf.bdf )
-@@ -2072,8 +2069,6 @@ static void quarantine_teardown(struct pci_dev *pdev,
- {
-     struct domain_iommu *hd =3D dom_iommu(dom_io);
++    }
+     case XEN_DOMCTL_deassign_device:
+         /* Don't support self-deassignment of devices. */
+         if ( d =3D=3D current->domain )
+@@ -1796,6 +1797,46 @@ int iommu_do_pci_domctl(
+     return ret;
+ }
 =20
--    ASSERT(pcidevs_locked());
--
-     if ( !pdev->arch.vtd.pgd_maddr )
-         return;
++static void release_pdev(refcnt_t *refcnt)
++{
++    struct pci_dev *pdev =3D container_of(refcnt, struct pci_dev, refcnt);
++    struct pci_seg *pseg =3D get_pseg(pdev->seg);
++
++    printk(XENLOG_DEBUG "PCI release device %pp\n", &pdev->sbdf);
++
++    /* update bus2bridge */
++    switch ( pdev->type )
++    {
++        unsigned int sec_bus, sub_bus;
++
++        case DEV_TYPE_PCIe2PCI_BRIDGE:
++        case DEV_TYPE_LEGACY_PCI_BRIDGE:
++            sec_bus =3D pci_conf_read8(pdev->sbdf, PCI_SECONDARY_BUS);
++            sub_bus =3D pci_conf_read8(pdev->sbdf, PCI_SUBORDINATE_BUS);
++
++            spin_lock(&pseg->bus2bridge_lock);
++            for ( ; sec_bus <=3D sub_bus; sec_bus++ )
++                pseg->bus2bridge[sec_bus] =3D pseg->bus2bridge[pdev->bus];
++            spin_unlock(&pseg->bus2bridge_lock);
++            break;
++
++        default:
++            break;
++    }
++
++    xfree(pdev);
++}
++
++void pcidev_get(struct pci_dev *pdev)
++{
++    refcnt_get(&pdev->refcnt);
++}
++
++void pcidev_put(struct pci_dev *pdev)
++{
++    refcnt_put(&pdev->refcnt, release_pdev);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/drivers/passthrough/vtd/quirks.c b/xen/drivers/passthrough=
+/vtd/quirks.c
+index fcc8f73e8b..d240da0416 100644
+--- a/xen/drivers/passthrough/vtd/quirks.c
++++ b/xen/drivers/passthrough/vtd/quirks.c
+@@ -429,6 +429,8 @@ static int __must_check map_me_phantom_function(struct =
+domain *domain,
+         rc =3D domain_context_unmap_one(domain, drhd->iommu, 0,
+                                       PCI_DEVFN(dev, 7));
 =20
-@@ -2341,8 +2336,6 @@ static int cf_check intel_iommu_add_device(u8 devfn, =
-struct pci_dev *pdev)
-     u16 bdf;
-     int ret, i;
-=20
--    ASSERT(pcidevs_locked());
--
-     if ( !pdev->domain )
-         return -EINVAL;
-=20
-@@ -3176,7 +3169,6 @@ static int cf_check intel_iommu_quarantine_init(struc=
-t pci_dev *pdev,
-     bool rmrr_found =3D false;
-     int rc;
-=20
--    ASSERT(pcidevs_locked());
-     ASSERT(!hd->arch.vtd.pgd_maddr);
-     ASSERT(page_list_empty(&hd->arch.pgtables.list));
++    pcidev_put(pdev);
++
+     return rc;
+ }
 =20
 diff --git a/xen/drivers/video/vga.c b/xen/drivers/video/vga.c
-index 1298f3a7b6..1f7c496114 100644
+index 29a88e8241..1298f3a7b6 100644
 --- a/xen/drivers/video/vga.c
 +++ b/xen/drivers/video/vga.c
-@@ -117,9 +117,7 @@ void __init video_endboot(void)
-                 struct pci_dev *pdev;
+@@ -114,7 +114,7 @@ void __init video_endboot(void)
+         for ( bus =3D 0; bus < 256; ++bus )
+             for ( devfn =3D 0; devfn < 256; ++devfn )
+             {
+-                const struct pci_dev *pdev;
++                struct pci_dev *pdev;
                  u8 b =3D bus, df =3D devfn, sb;
 =20
--                pcidevs_lock();
-                 pdev =3D pci_get_pdev(NULL, PCI_SBDF(0, bus, devfn));
--                pcidevs_unlock();
+                 pcidevs_lock();
+@@ -126,7 +126,11 @@ void __init video_endboot(void)
+                                      PCI_CLASS_DEVICE) !=3D 0x0300 ||
+                      !(pci_conf_read16(PCI_SBDF(0, bus, devfn), PCI_COMMAN=
+D) &
+                        (PCI_COMMAND_IO | PCI_COMMAND_MEMORY)) )
++		{
++		    if (pdev)
++			pcidev_put(pdev);
+                     continue;
++		}
 =20
-                 if ( !pdev ||
-                      pci_conf_read16(PCI_SBDF(0, bus, devfn),
+                 while ( b )
+                 {
+@@ -144,7 +148,10 @@ void __init video_endboot(void)
+                             if ( pci_conf_read16(PCI_SBDF(0, b, df),
+                                                  PCI_BRIDGE_CONTROL) &
+                                  PCI_BRIDGE_CTL_VGA )
++			    {
++				pcidev_put(pdev);
+                                 continue;
++			    }
+                             break;
+                         }
+                         break;
+@@ -157,6 +164,7 @@ void __init video_endboot(void)
+                            bus, PCI_SLOT(devfn), PCI_FUNC(devfn));
+                     pci_hide_device(0, bus, devfn);
+                 }
++		pcidev_put(pdev);
+             }
+     }
+=20
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 7d1f9fd438..59dc55f498 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -313,7 +313,7 @@ static uint32_t merge_result(uint32_t data, uint32_t ne=
+w, unsigned int size,
+ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+ {
+     struct domain *d =3D current->domain;
+-    const struct pci_dev *pdev;
++    struct pci_dev *pdev;
+     const struct vpci_register *r;
+     unsigned int data_offset =3D 0;
+     uint32_t data =3D ~(uint32_t)0;
+@@ -373,6 +373,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, u=
+nsigned int size)
+         ASSERT(data_offset < size);
+     }
+     spin_unlock(&pdev->vpci->lock);
++    pcidev_put(pdev);
+=20
+     if ( data_offset < size )
+     {
+@@ -416,7 +417,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsi=
+gned int size,
+                 uint32_t data)
+ {
+     struct domain *d =3D current->domain;
+-    const struct pci_dev *pdev;
++    struct pci_dev *pdev;
+     const struct vpci_register *r;
+     unsigned int data_offset =3D 0;
+     const unsigned long *ro_map =3D pci_get_ro_map(sbdf.seg);
+@@ -478,6 +479,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsi=
+gned int size,
+         ASSERT(data_offset < size);
+     }
+     spin_unlock(&pdev->vpci->lock);
++    pcidev_put(pdev);
+=20
+     if ( data_offset < size )
+         /* Tailing gap, write the remaining. */
+diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
+index 19047b4b20..e71a180ef3 100644
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -13,6 +13,7 @@
+ #include <xen/irq.h>
+ #include <xen/pci_regs.h>
+ #include <xen/pfn.h>
++#include <xen/refcnt.h>
+ #include <asm/device.h>
+ #include <asm/numa.h>
+=20
+@@ -116,6 +117,9 @@ struct pci_dev {
+     /* Device misbehaving, prevent assigning it to guests. */
+     bool broken;
+=20
++    /* Reference counter */
++    refcnt_t refcnt;
++
+     enum pdev_type {
+         DEV_TYPE_PCI_UNKNOWN,
+         DEV_TYPE_PCIe_ENDPOINT,
+@@ -160,6 +164,14 @@ void pcidevs_lock(void);
+ void pcidevs_unlock(void);
+ bool_t __must_check pcidevs_locked(void);
+=20
++/*
++ * Acquire and release reference to the given device. Holding
++ * reference ensures that device will not disappear under feet, but
++ * does not guarantee that code has exclusive access to the device.
++ */
++void pcidev_get(struct pci_dev *pdev);
++void pcidev_put(struct pci_dev *pdev);
++
+ bool_t pci_known_segment(u16 seg);
+ bool_t pci_device_detect(u16 seg, u8 bus, u8 dev, u8 func);
+ int scan_pci_devices(void);
+@@ -177,8 +189,14 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+ int pci_remove_device(u16 seg, u8 bus, u8 devfn);
+ int pci_ro_device(int seg, int bus, int devfn);
+ int pci_hide_device(unsigned int seg, unsigned int bus, unsigned int devfn=
+);
++
++/*
++ * Next two functions will find a requested device and acquire
++ * reference to it. Use pcidev_put() to release the reference.
++ */
+ struct pci_dev *pci_get_pdev(struct domain *d, pci_sbdf_t sbdf);
+ struct pci_dev *pci_get_real_pdev(pci_sbdf_t sbdf);
++
+ void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
+=20
+ uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg);
 --=20
 2.36.1
 
