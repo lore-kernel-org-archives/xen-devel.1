@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F355ECAAD1
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Sep 2022 00:50:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.396137.636157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBCDECAAD4
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Sep 2022 01:08:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.396145.636168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTYPu-0002xJ-7i; Thu, 01 Sep 2022 00:50:46 +0000
+	id 1oTYgY-0002uV-Mz; Thu, 01 Sep 2022 01:07:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 396137.636157; Thu, 01 Sep 2022 00:50:46 +0000
+Received: by outflank-mailman (output) from mailman id 396145.636168; Thu, 01 Sep 2022 01:07:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTYPu-0002xC-4X; Thu, 01 Sep 2022 00:50:46 +0000
-Received: by outflank-mailman (input) for mailman id 396137;
- Thu, 01 Sep 2022 00:50:45 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1oTYgY-0002uO-Iz; Thu, 01 Sep 2022 01:07:58 +0000
+Received: by outflank-mailman (input) for mailman id 396145;
+ Thu, 01 Sep 2022 01:07:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oTYPt-0002x0-14; Thu, 01 Sep 2022 00:50:45 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oTYPs-0003Q6-Vg; Thu, 01 Sep 2022 00:50:44 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oTYPs-0008E1-L6; Thu, 01 Sep 2022 00:50:44 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oTYPs-0005rX-Ka; Thu, 01 Sep 2022 00:50:44 +0000
+ (envelope-from <SRS0=86q5=ZE=google.com=surenb@srs-se1.protection.inumbo.net>)
+ id 1oTYgX-0002uI-8V
+ for xen-devel@lists.xenproject.org; Thu, 01 Sep 2022 01:07:57 +0000
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [2607:f8b0:4864:20::b30])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 826c974b-2992-11ed-934f-f50d60e1c1bd;
+ Thu, 01 Sep 2022 03:07:55 +0200 (CEST)
+Received: by mail-yb1-xb30.google.com with SMTP id p204so6579183yba.3
+ for <xen-devel@lists.xenproject.org>; Wed, 31 Aug 2022 18:07:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,87 +41,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=cyA88cQ7zuiVC8/d8EXk54gcBiZpx4wBIQ33zw2pJrM=; b=w4AH+Vz83JORXGTwi/sBC/ryqt
-	SntcUzNkHJvh8UdT73zgHacWFOE3q6Q7Zogx7KHvhUZLYDkimu5QFsnzP4a0Ku9v4lLe14osXCzwD
-	g2Ap8AmcDnJs2XbS9dC/YQWO5HkJc/88InisKezrpYAGSW29t7SFqPi3HH2CfnsWH01w=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-172899-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 826c974b-2992-11ed-934f-f50d60e1c1bd
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=MRPzoJhQ6jRX3IlC8DX7IgvLpQbZlMnsgnvZKuuei8w=;
+        b=FN6oNUdWK/epLWx1TsL9yA3judc8GEWbPUlFBZx3N+obm1zvmXwKLTgA0C+din1hae
+         QL+aeoxudtTxFElhfOjbFrb5XsjBAilaB08Ldofl1XN7K/KLlXYDWHTq4s13vSXmuj5f
+         DKOIAo7JDYtLr+88kw7IWfUfQEtwzvbREYO0F51ITJHJcS5BlsMkaJFVMWN04WfbWge0
+         QaMLxE28PQcRoEcCdCRT5hYYcc5qJq1t6S50Lj3dBP+TXgyTlXN6pUj2nAiR7uqNJFnz
+         LBjn/+WoYkZm8EFAaPai3sk01dRp3NFnU9eS/Pc/JsqSX+SuHO7G2QXvivbbuPpvEXP7
+         8nRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=MRPzoJhQ6jRX3IlC8DX7IgvLpQbZlMnsgnvZKuuei8w=;
+        b=u4ail2qdqQyUaKx+TELG+9hmzA6SZUdzd7w+sF/IihaU8XF8aH3zBn911K6jVerDx+
+         Z8WmouBa9qWFATlqjvJCmsLTjlQJJI9ceDD03JCv4sN3GNxU1eIIczKfH80G/BavJ5Eq
+         15acQgSzkh28UCJIKwAbQwclnJ6/wheyA9BV0G3H2X1BDHHRq3BbwOpULCAVLwfB7ISN
+         AMO5BcBOskGZxkC/xscZcAoOnwwyVlMOsyg2HTlsI4jKr8QcRV5xb/iVuwVPbOyqSFBv
+         1RjTEgfREm4bVCwB+88CZzDTG1caEkgwhHDgtNcUCWDbxe6wo5Jxxa6cSEQGSwP9lh/j
+         MH7A==
+X-Gm-Message-State: ACgBeo12YTUtayOVKgdYQerve9n1d7eQaEx3YXiOmVQvfy4H+WV5oy5G
+	eMOqqbYGaeNby0IeLnYATsh6jxSR2HI2TW4eiZV+tQ==
+X-Google-Smtp-Source: AA6agR7ANRZu1y3V5ec1pN1knn4GFpXcEWezad8yEa+jyRtwuxFDik/95LNfhWenWi2n9p8vw7Ebn9CJDR6Mcs4MSyE=
+X-Received: by 2002:a05:6902:4c7:b0:69a:9e36:debe with SMTP id
+ v7-20020a05690204c700b0069a9e36debemr14531815ybs.543.1661994474639; Wed, 31
+ Aug 2022 18:07:54 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 172899: tolerable FAIL - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:build-amd64-libvirt:libvirt-build:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=e997d055929665b12246e89eb092dc79c65de9a4
-X-Osstest-Versions-That:
-    xen=ace403022358b736755e3042e949540e775c65f1
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 01 Sep 2022 00:50:44 +0000
+References: <20220830214919.53220-1-surenb@google.com> <20220830214919.53220-11-surenb@google.com>
+ <20220831101103.fj5hjgy3dbb44fit@suse.de> <20220831174629.zpa2pu6hpxmytqya@moria.home.lan>
+In-Reply-To: <20220831174629.zpa2pu6hpxmytqya@moria.home.lan>
+From: Suren Baghdasaryan <surenb@google.com>
+Date: Wed, 31 Aug 2022 18:07:43 -0700
+Message-ID: <CAJuCfpGxxzHT7X+q2zzu+WRrmyjLsT+RMJ7+LFOECtFuXvt3gA@mail.gmail.com>
+Subject: Re: [RFC PATCH 10/30] mm: enable page allocation tagging for
+ __get_free_pages and alloc_pages
+To: Kent Overstreet <kent.overstreet@linux.dev>
+Cc: Mel Gorman <mgorman@suse.de>, Andrew Morton <akpm@linux-foundation.org>, 
+	Michal Hocko <mhocko@suse.com>, Vlastimil Babka <vbabka@suse.cz>, Johannes Weiner <hannes@cmpxchg.org>, 
+	Roman Gushchin <roman.gushchin@linux.dev>, Davidlohr Bueso <dave@stgolabs.net>, 
+	Matthew Wilcox <willy@infradead.org>, "Liam R. Howlett" <liam.howlett@oracle.com>, 
+	David Vernet <void@manifault.com>, Peter Zijlstra <peterz@infradead.org>, 
+	Juri Lelli <juri.lelli@redhat.com>, Laurent Dufour <ldufour@linux.ibm.com>, 
+	Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>, Jens Axboe <axboe@kernel.dk>, 
+	mcgrof@kernel.org, masahiroy@kernel.org, nathan@kernel.org, 
+	changbin.du@intel.com, ytcoode@gmail.com, 
+	Vincent Guittot <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, Benjamin Segall <bsegall@google.com>, 
+	Daniel Bristot de Oliveira <bristot@redhat.com>, Valentin Schneider <vschneid@redhat.com>, 
+	Christopher Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, 
+	42.hyeyoo@gmail.com, Alexander Potapenko <glider@google.com>, Marco Elver <elver@google.com>, 
+	dvyukov@google.com, Shakeel Butt <shakeelb@google.com>, 
+	Muchun Song <songmuchun@bytedance.com>, arnd@arndb.de, jbaron@akamai.com, 
+	David Rientjes <rientjes@google.com>, Minchan Kim <minchan@google.com>, 
+	Kalesh Singh <kaleshsingh@google.com>, kernel-team <kernel-team@android.com>, 
+	linux-mm <linux-mm@kvack.org>, iommu@lists.linux.dev, kasan-dev@googlegroups.com, 
+	io-uring@vger.kernel.org, linux-arch@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org, 
+	linux-modules@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-flight 172899 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/172899/
+On Wed, Aug 31, 2022 at 10:46 AM Kent Overstreet
+<kent.overstreet@linux.dev> wrote:
+>
+> On Wed, Aug 31, 2022 at 11:11:03AM +0100, Mel Gorman wrote:
+> > On Tue, Aug 30, 2022 at 02:48:59PM -0700, Suren Baghdasaryan wrote:
+> > > Redefine alloc_pages, __get_free_pages to record allocations done by
+> > > these functions. Instrument deallocation hooks to record object freeing.
+> > >
+> > > Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> > > +#ifdef CONFIG_PAGE_ALLOC_TAGGING
+> > > +
+> > >  #include <linux/alloc_tag.h>
+> > >  #include <linux/page_ext.h>
+> > >
+> > > @@ -25,4 +27,37 @@ static inline void pgalloc_tag_dec(struct page *page, unsigned int order)
+> > >             alloc_tag_sub(get_page_tag_ref(page), PAGE_SIZE << order);
+> > >  }
+> > >
+> > > +/*
+> > > + * Redefinitions of the common page allocators/destructors
+> > > + */
+> > > +#define pgtag_alloc_pages(gfp, order)                                      \
+> > > +({                                                                 \
+> > > +   struct page *_page = _alloc_pages((gfp), (order));              \
+> > > +                                                                   \
+> > > +   if (_page)                                                      \
+> > > +           alloc_tag_add(get_page_tag_ref(_page), PAGE_SIZE << (order));\
+> > > +   _page;                                                          \
+> > > +})
+> > > +
+> >
+> > Instead of renaming alloc_pages, why is the tagging not done in
+> > __alloc_pages()? At least __alloc_pages_bulk() is also missed. The branch
+> > can be guarded with IS_ENABLED.
+>
+> It can't be in a function, it has to be in a wrapper macro.
 
-Failures :-/ but no regressions.
+Ah, right. __FILE__, __LINE__ and others we use to record the call
+location would point to include/linux/gfp.h instead of the location
+allocation is performed at.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- build-amd64-libvirt           6 libvirt-build                fail  like 172897
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  e997d055929665b12246e89eb092dc79c65de9a4
-baseline version:
- xen                  ace403022358b736755e3042e949540e775c65f1
-
-Last test of basis   172897  2022-08-31 19:01:51 Z    0 days
-Testing same since   172899  2022-08-31 22:01:49 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Bertrand Marquis <bertrand.marquis@arm.com>
-  Julien Grall <jgrall@amazon.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          fail    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   ace4030223..e997d05592  e997d055929665b12246e89eb092dc79c65de9a4 -> smoke
+>
+> alloc_tag_add() is a macro that defines a static struct in a special elf
+> section. That struct holds the allocation counters, and putting it in a special
+> elf section is how the code to list it in debugfs finds it.
+>
+> Look at the dynamic debug code for prior precedence for this trick in the kernel
+> - that's how it makes pr_debug() calls dynamically controllable at runtime, from
+> debugfs. We're taking that method and turning it into a proper library.
+>
+> Because all the counters are statically allocated, without even a pointer deref
+> to get to them in the allocation path (one pointer deref to get to them in the
+> deallocate path), that makes this _much, much_ cheaper than anything that could
+> be done with tracing - cheap enough that I expect many users will want to enable
+> it in production.
+>
+> --
+> To unsubscribe from this group and stop receiving emails from it, send an email to kernel-team+unsubscribe@android.com.
+>
 
