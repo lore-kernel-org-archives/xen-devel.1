@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D28C6FA81
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7324ECAAA1
 	for <xen-devel@archiver.kernel.org>; Fri,  2 Sep 2022 05:28:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.397100.637867 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.397000.637839 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTzEE-0003jO-UA; Fri, 02 Sep 2022 05:28:30 +0000
+	id 1oTzED-0003Fk-Fo; Fri, 02 Sep 2022 05:28:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 397100.637867; Fri, 02 Sep 2022 05:28:30 +0000
+Received: by outflank-mailman (output) from mailman id 397000.637839; Fri, 02 Sep 2022 05:28:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oTzEE-0003gb-Iz; Fri, 02 Sep 2022 05:28:30 +0000
-Received: by outflank-mailman (input) for mailman id 397100;
- Fri, 02 Sep 2022 01:05:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oTzED-0003F9-Ap; Fri, 02 Sep 2022 05:28:29 +0000
+Received: by outflank-mailman (input) for mailman id 397000;
+ Thu, 01 Sep 2022 22:54:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DrtX=ZF=linux.dev=roman.gushchin@srs-se1.protection.inumbo.net>)
- id 1oTv7E-0006MX-F5
- for xen-devel@lists.xenproject.org; Fri, 02 Sep 2022 01:05:01 +0000
+ <SRS0=M97J=ZE=linux.dev=roman.gushchin@srs-se1.protection.inumbo.net>)
+ id 1oTt4s-0003zw-D8
+ for xen-devel@lists.xenproject.org; Thu, 01 Sep 2022 22:54:26 +0000
 Received: from out1.migadu.com (out1.migadu.com [91.121.223.63])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 439feea4-2a5b-11ed-934f-f50d60e1c1bd;
- Fri, 02 Sep 2022 03:04:58 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 059e4dde-2a49-11ed-82f2-63bd783d45fa;
+ Fri, 02 Sep 2022 00:54:23 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,17 +38,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 439feea4-2a5b-11ed-934f-f50d60e1c1bd
-Date: Thu, 1 Sep 2022 18:04:46 -0700
+X-Inumbo-ID: 059e4dde-2a49-11ed-82f2-63bd783d45fa
+Date: Thu, 1 Sep 2022 15:53:57 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1662080697;
+	t=1662072863;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=oRI44dmgZNXvCbxbx0ytBb5MNkpf1qBSJsTY6pAYXVg=;
-	b=tb82WN7ukOq58edHhF7JOoDon3b2L1v/3IY97PsYRx6OPp66Trpvsx1rbRyhlh12fOiUwG
-	EZmYoO3fSDUB2lu8gxsuWxZiVkHfm4qLeJxKDdrjL94MRoA3GDg6F5I9+Uj2cx14iFfbdO
-	He+0U/hKqYLU04r4PhzKId0lgLZpOKY=
+	bh=HsNTuFQ7XbCclBZlUbN3U5MkNcD4kydlxiKj9ag/mqM=;
+	b=oPzrWlMu1zttBKXqMooMVKLQBDEeBWlyjX9vsDJkAXG+i91talZG3CnOLGZqJ/j7NVGRKB
+	wZTWLVRasLoef5Won/PgGguSqmh0FC7JUNFBw6OgxkY16iM6YRuGaquB3T/TIBb4G8gtzw
+	fhM8xA0vhhBp50IAflanG0eJ5LKzxK0=
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 From: Roman Gushchin <roman.gushchin@linux.dev>
 To: Kent Overstreet <kent.overstreet@linux.dev>
@@ -79,8 +79,9 @@ Cc: Yosry Ahmed <yosryahmed@google.com>, Michal Hocko <mhocko@suse.com>,
 	linux-bcache@vger.kernel.org, linux-modules@vger.kernel.org,
 	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
 Subject: Re: [RFC PATCH 00/30] Code tagging framework and applications
-Message-ID: <YxFWrka+Wx0FfLXU@P9FQF9L96D.lan>
-References: <Yw8P8xZ4zqu121xL@hirez.programming.kicks-ass.net>
+Message-ID: <YxE4BXw5i+BkxxD8@P9FQF9L96D.corp.robot.car>
+References: <20220830214919.53220-1-surenb@google.com>
+ <Yw8P8xZ4zqu121xL@hirez.programming.kicks-ass.net>
  <20220831084230.3ti3vitrzhzsu3fs@moria.home.lan>
  <20220831101948.f3etturccmp5ovkl@suse.de>
  <Yw88RFuBgc7yFYxA@dhcp22.suse.cz>
@@ -88,46 +89,59 @@ References: <Yw8P8xZ4zqu121xL@hirez.programming.kicks-ass.net>
  <CAJD7tkaev9B=UDYj2RL6pz-1454J8tv4gEr9y-2dnCksoLK0bw@mail.gmail.com>
  <YxExz+c1k3nbQMh4@P9FQF9L96D.corp.robot.car>
  <20220901223720.e4gudprscjtwltif@moria.home.lan>
- <YxE4BXw5i+BkxxD8@P9FQF9L96D.corp.robot.car>
- <20220902001747.qqsv2lzkuycffuqe@moria.home.lan>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220902001747.qqsv2lzkuycffuqe@moria.home.lan>
+In-Reply-To: <20220901223720.e4gudprscjtwltif@moria.home.lan>
 X-Migadu-Flow: FLOW_OUT
 X-Migadu-Auth-User: linux.dev
 
-On Thu, Sep 01, 2022 at 08:17:47PM -0400, Kent Overstreet wrote:
-> On Thu, Sep 01, 2022 at 03:53:57PM -0700, Roman Gushchin wrote:
-> > I'd suggest to run something like iperf on a fast hardware. And maybe some
-> > io_uring stuff too. These are two places which were historically most sensitive
-> > to the (kernel) memory accounting speed.
+On Thu, Sep 01, 2022 at 06:37:20PM -0400, Kent Overstreet wrote:
+> On Thu, Sep 01, 2022 at 03:27:27PM -0700, Roman Gushchin wrote:
+> > On Wed, Aug 31, 2022 at 01:56:08PM -0700, Yosry Ahmed wrote:
+> > > This is very interesting work! Do you have any data about the overhead
+> > > this introduces, especially in a production environment? I am
+> > > especially interested in memory allocations tracking and detecting
+> > > leaks.
+> > 
+> > +1
+> > 
+> > I think the question whether it indeed can be always turned on in the production
+> > or not is the main one. If not, the advantage over ftrace/bpf/... is not that
+> > obvious. Otherwise it will be indeed a VERY useful thing.
 > 
-> I'm getting wildly inconsistent results with iperf.
+> Low enough overhead to run in production was my primary design goal.
 > 
-> io_uring-echo-server and rust_echo_bench gets me:
-> Benchmarking: 127.0.0.1:12345
-> 50 clients, running 512 bytes, 60 sec.
+> Stats are kept in a struct that's defined at the callsite. So this adds _no_
+> pointer chasing to the allocation path, unless we've switch to percpu counters
+> at that callsite (see the lazy percpu counters patch), where we need to deref
+> one percpu pointer to save an atomic.
 > 
-> Without alloc tagging:	120547 request/sec
-> With:			116748 request/sec
+> Then we need to stash a pointer to the alloc_tag, so that kfree() can find it.
+> For slab allocations this uses the same storage area as memcg, so for
+> allocations that are using that we won't be touching any additional cachelines.
+> (I wanted the pointer to the alloc_tag to be stored inline with the allocation,
+> but that would've caused alignment difficulties).
 > 
-> https://github.com/frevib/io_uring-echo-server
-> https://github.com/haraldh/rust_echo_bench
+> Then there's a pointer deref introduced to the kfree() path, to get back to the
+> original alloc_tag and subtract the allocation from that callsite. That one
+> won't be free, and with percpu counters we've got another dependent load too -
+> hmm, it might be worth benchmarking with just atomics, skipping the percpu
+> counters.
 > 
-> How's that look to you? Close enough? :)
+> So the overhead won't be zero, I expect it'll show up in some synthetic
+> benchmarks, but yes I do definitely expect this to be worth enabling in
+> production in many scenarios.
 
-Yes, this looks good (a bit too good).
+I'm somewhat sceptical, but I usually am. And in this case I'll be really happy
+to be wrong.
 
-I'm not that familiar with io_uring, Jens and Pavel should have a better idea
-what and how to run (I know they've workarounded the kernel memory accounting
-because of the performance in the past, this is why I suspect it might be an
-issue here as well).
+On a bright side, maybe most of the overhead will come from few allocations,
+so an option to explicitly exclude them will do the trick.
 
-This is a recent optimization on the networking side:
-https://lore.kernel.org/linux-mm/20220825000506.239406-1-shakeelb@google.com/
-
-Maybe you can try to repeat this experiment.
+I'd suggest to run something like iperf on a fast hardware. And maybe some
+io_uring stuff too. These are two places which were historically most sensitive
+to the (kernel) memory accounting speed.
 
 Thanks!
 
