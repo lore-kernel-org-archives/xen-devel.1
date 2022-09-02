@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC99ECAAD5
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Sep 2022 13:37:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.397731.638402 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C651EECAAD5
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Sep 2022 13:38:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.397742.638411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oU6rU-0002ei-UK; Fri, 02 Sep 2022 13:37:32 +0000
+	id 1oU6sS-0003Pl-51; Fri, 02 Sep 2022 13:38:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 397731.638402; Fri, 02 Sep 2022 13:37:32 +0000
+Received: by outflank-mailman (output) from mailman id 397742.638411; Fri, 02 Sep 2022 13:38:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oU6rU-0002dl-PU; Fri, 02 Sep 2022 13:37:32 +0000
-Received: by outflank-mailman (input) for mailman id 397731;
- Fri, 02 Sep 2022 13:37:31 +0000
+	id 1oU6sS-0003Pe-2U; Fri, 02 Sep 2022 13:38:32 +0000
+Received: by outflank-mailman (input) for mailman id 397742;
+ Fri, 02 Sep 2022 13:38:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Z99=ZF=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oU6rT-0002bO-H5
- for xen-devel@lists.xenproject.org; Fri, 02 Sep 2022 13:37:31 +0000
+ id 1oU6sQ-0003PW-Kx
+ for xen-devel@lists.xenproject.org; Fri, 02 Sep 2022 13:38:30 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 6412f538-2ac4-11ed-934f-f50d60e1c1bd;
- Fri, 02 Sep 2022 15:37:30 +0200 (CEST)
+ id 87245b12-2ac4-11ed-934f-f50d60e1c1bd;
+ Fri, 02 Sep 2022 15:38:29 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0A5B61516;
- Fri,  2 Sep 2022 06:37:36 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CAF301516;
+ Fri,  2 Sep 2022 06:38:34 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B6BAE3F766;
- Fri,  2 Sep 2022 06:37:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 82CE23F766;
+ Fri,  2 Sep 2022 06:38:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,76 +45,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6412f538-2ac4-11ed-934f-f50d60e1c1bd
+X-Inumbo-ID: 87245b12-2ac4-11ed-934f-f50d60e1c1bd
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
-	Zenghui Yu <yuzenghui@huawei.com>,
+	Zhen Lei <thunder.leizhen@huawei.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Will Deacon <will@kernel.org>
-Subject: [PATCH v2 06/10] xen/arm: smmuv3: Remove the unused fields for PREFETCH_CONFIG command
-Date: Fri,  2 Sep 2022 14:34:58 +0100
-Message-Id: <6e2951d4ec67a48d9e01c4b87289cfe56b00a345.1662123432.git.rahul.singh@arm.com>
+Subject: [PATCH v2 08/10] xen/arm: smmuv3: Remove unnecessary oom message
+Date: Fri,  2 Sep 2022 14:35:00 +0100
+Message-Id: <43ec5ca66040cea4783fe5608a68d667597ddb24.1662123432.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1662123432.git.rahul.singh@arm.com>
 References: <cover.1662123432.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Zenghui Yu <yuzenghui@huawei.com>
+From: Zhen Lei <thunder.leizhen@huawei.com>
 
-Backport Linux commit e0bb4b735404. This is the clean backport without
+Backport Linux commit affa909571b0. This is the clean backport without
 any changes.
 
-Per SMMUv3 spec, there is no Size and Addr field in the
-PREFETCH_CONFIG command and they're not used by the driver.
-Remove them.
+Fixes scripts/checkpatch.pl warning:
+WARNING: Possible unnecessary 'out of memory' message
 
-We can add them back if we're going to use PREFETCH_ADDR in the
-future.
+Remove it can help us save a bit of memory.
 
-Signed-off-by: Zenghui Yu <yuzenghui@huawei.com>
-Link: https://lore.kernel.org/r/20210407084448.1838-1-yuzenghui@huawei.com
+Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+Link: https://lore.kernel.org/r/20210609125438.14369-1-thunder.leizhen@huawei.com
 Signed-off-by: Will Deacon <will@kernel.org>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git e0bb4b735404
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git affa909571b0
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
 Changes in v2:
  - fix commit msg
 ---
- xen/drivers/passthrough/arm/smmu-v3.c | 2 --
- xen/drivers/passthrough/arm/smmu-v3.h | 2 --
- 2 files changed, 4 deletions(-)
+ xen/drivers/passthrough/arm/smmu-v3.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
 diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index f5485a8a1c..2b04f73b87 100644
+index 9bd0c211c0..f8f0eeb528 100644
 --- a/xen/drivers/passthrough/arm/smmu-v3.c
 +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -402,8 +402,6 @@ static int arm_smmu_cmdq_build_cmd(u64 *cmd, struct arm_smmu_cmdq_ent *ent)
- 		break;
- 	case CMDQ_OP_PREFETCH_CFG:
- 		cmd[0] |= FIELD_PREP(CMDQ_PREFETCH_0_SID, ent->prefetch.sid);
--		cmd[1] |= FIELD_PREP(CMDQ_PREFETCH_1_SIZE, ent->prefetch.size);
--		cmd[1] |= ent->prefetch.addr & CMDQ_PREFETCH_1_ADDR_MASK;
- 		break;
- 	case CMDQ_OP_CFGI_STE:
- 		cmd[0] |= FIELD_PREP(CMDQ_CFGI_0_SID, ent->cfgi.sid);
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
-index 0742bc393f..b381ad3738 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.h
-+++ b/xen/drivers/passthrough/arm/smmu-v3.h
-@@ -456,8 +456,6 @@ struct arm_smmu_cmdq_ent {
- 		#define CMDQ_OP_PREFETCH_CFG	0x1
- 		struct {
- 			u32			sid;
--			u8			size;
--			u64			addr;
- 		} prefetch;
+@@ -1644,10 +1644,8 @@ static int arm_smmu_init_l1_strtab(struct arm_smmu_device *smmu)
+ 	void *strtab = smmu->strtab_cfg.strtab;
  
- 		#define CMDQ_OP_CFGI_STE	0x3
+ 	cfg->l1_desc = _xzalloc(size, sizeof(void *));
+-	if (!cfg->l1_desc) {
+-		dev_err(smmu->dev, "failed to allocate l1 stream table desc\n");
++	if (!cfg->l1_desc)
+ 		return -ENOMEM;
+-	}
+ 
+ 	for (i = 0; i < cfg->num_l1_ents; ++i) {
+ 		arm_smmu_write_strtab_l1_desc(strtab, &cfg->l1_desc[i]);
+@@ -2432,10 +2430,8 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+ 	struct arm_smmu_device *smmu;
+ 
+ 	smmu = xzalloc(struct arm_smmu_device);
+-	if (!smmu) {
+-		dev_err(pdev, "failed to allocate arm_smmu_device\n");
++	if (!smmu)
+ 		return -ENOMEM;
+-	}
+ 	smmu->dev = pdev;
+ 
+ 	if (pdev->of_node) {
 -- 
 2.25.1
 
