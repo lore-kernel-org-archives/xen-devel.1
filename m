@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FD62C6FA82
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Sep 2022 13:18:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.397608.638299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC3BC6FA85
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Sep 2022 13:18:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.397611.638329 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oU6YY-0001xu-AQ; Fri, 02 Sep 2022 13:17:58 +0000
+	id 1oU6Yc-0002r8-KL; Fri, 02 Sep 2022 13:18:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 397608.638299; Fri, 02 Sep 2022 13:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 397611.638329; Fri, 02 Sep 2022 13:18:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oU6YY-0001xb-5v; Fri, 02 Sep 2022 13:17:58 +0000
-Received: by outflank-mailman (input) for mailman id 397608;
- Fri, 02 Sep 2022 13:17:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oU6Yc-0002oi-9P; Fri, 02 Sep 2022 13:18:02 +0000
+Received: by outflank-mailman (input) for mailman id 397611;
+ Fri, 02 Sep 2022 13:18:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uHR5=ZF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1oU6YW-0000AI-5s
- for xen-devel@lists.xenproject.org; Fri, 02 Sep 2022 13:17:56 +0000
+ id 1oU6Ya-0008Qk-Io
+ for xen-devel@lists.xenproject.org; Fri, 02 Sep 2022 13:18:00 +0000
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a73937dd-2ac1-11ed-934f-f50d60e1c1bd;
- Fri, 02 Sep 2022 15:17:54 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 37AC95C00F5;
- Fri,  2 Sep 2022 09:17:54 -0400 (EDT)
+ [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aa413bd4-2ac1-11ed-82f2-63bd783d45fa;
+ Fri, 02 Sep 2022 15:17:59 +0200 (CEST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id E76215C00DD;
+ Fri,  2 Sep 2022 09:17:58 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Fri, 02 Sep 2022 09:17:54 -0400
+ by compute4.internal (MEProxy); Fri, 02 Sep 2022 09:17:58 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 2 Sep 2022 09:17:52 -0400 (EDT)
+ 2 Sep 2022 09:17:57 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a73937dd-2ac1-11ed-934f-f50d60e1c1bd
+X-Inumbo-ID: aa413bd4-2ac1-11ed-82f2-63bd783d45fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1662124674; x=1662211074; bh=ZZ9BIZu9qK
-	s+KPb2WpJ/gZIcmxFuDcvZaabjVF9MD4g=; b=RcS37mLq52/1OhfQ2WUvsq9tX5
-	Kq++tb+2EeBCWQ4qrpi3IGZxiXLU/cNYA3T2pO4Infs9SWwNcBmEWlhzya9h2/yL
-	nG6qrGuaSeOWIohsLE8TaWx/bPv8aHuFd2DpOkkX1hg0Tk376G7Ix3E5celdeiS5
-	Zq7Zs+3u76cRjlUkEbrgqQ6UbD44yoSm/ixWLfp29cutHq8npkaLLZHFKsQ6SP2/
-	6uY0SZ/cYFCejM1yEvR5K0NNzfuTZ8BTyep0ykEbfpOJNXXLpyBdONGu3dsUIzDy
-	jZE6qZbprmKNGzIpY/5Vd4BoyRibTVJKlHepY1WvZm9Hq7tXAoVAduac7HUg==
+	:subject:to:to; s=fm1; t=1662124678; x=1662211078; bh=pEWUqxEj2m
+	kIrRCvTAQi0Yzt/WUEwDzCu/7BJlYxh6A=; b=ElFWG///z1wqbpKkdQNnPsW8Er
+	qFP9ZLwZKKqZPmKvmiZBEBDXQQneQXMwlwBT/rQPVDGX0W36MBxO02y5cQsA/TgQ
+	pIFcpZD6Z4EPDIINj+9QoIZBNJIFd49Ui23JXIl6wlmAVOFEEc2hROgbL7qkWa+7
+	OHUsQVC6vVW/FMlFajEGoWSjJLKCbcuFxmmfhoylF98WdDufUXYSoDsVNIZBP9lt
+	VgQ+z9ljZP2gYaW5uURthapsyHjPu7IaRpcRHTfF/yJRanpVJsPOAlA1C328+YfF
+	VGmpFR8EFGq2O0L01lKpnr75+Ujn6kSkeIAnyczwzy5GTJHnZE4+VWzoteqw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1662124674; x=
-	1662211074; bh=ZZ9BIZu9qKs+KPb2WpJ/gZIcmxFuDcvZaabjVF9MD4g=; b=p
-	hp/wGIb+mVHUdGnRxnDxDS9w6r0Mtw/pUPmve4zPFyv3ViXdG+WKT8yvdryQv2Vs
-	5x+x3F0GsfAjIb3i66bDTpjtQrqNIXFJYJe78ulHb4VWX7fsjAnZGFgUaUhPePjT
-	5vE419Z8LJiKttjkHY2TwTSTnDLO2mZ74EPFXwboVfnM+MnqEi++3tIzy3EpiHld
-	+57WkB6+ymnQRrG7S2OQnkyyNf0oVDQL+7UwprLrKOz3h3bME6V63ox5hCyketXn
-	ZZ6R/3GdkXgawl3sm+d8utHrI6BxxH/+N2RN3jZYQOg5gvjwEKllklZJeWyIpvg9
-	bVPWSNusRfPPrppEckuRQ==
-X-ME-Sender: <xms:ggISYybVCQ9GwXKpSerPM83DJ_6bR1B2MEqNoI3wrTEyOJwYI8KA4w>
-    <xme:ggISY1YBrvc8sgIc6b_rjCSMFvYGspcLNwTyE1gQZThCIUMwlY3WEf69JOFrMbWSU
-    P6CArTgzU7xHA>
-X-ME-Received: <xmr:ggISY88t8pAl5qGtRsMLWbq-TMAIpauqohXuITJ39HyXGUTw1D1F0Ssgcyc0tFG_ErbK2azt7qY9f19tA70cK2c8b7Ln5wbjxI0IGolxT-_vTOHaitIW5Q>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1662124678; x=
+	1662211078; bh=pEWUqxEj2mkIrRCvTAQi0Yzt/WUEwDzCu/7BJlYxh6A=; b=j
+	Hm1jHCb5X79ToZEa3aQ1IR17i2zIuTUxeP7rGJBwHd+4iGzQLRQOA96y/hIafJI8
+	DZ+ODjpvDUf2LSmEmliWsF+dzLekcJWNTdeOcZkqKSWrjv3ZI/TPYW4nVU14bPbW
+	YItn9Q1ZHLaUAi4PHT+mW8QsIaJxfJk9mPrfxsMB7E8Lf9vf3TcTVJjxK/7WNFHG
+	IqC1dDGq4OZqog3+A9zc17LIlq+RTxJpMISbCOp+mwEWr6XxvrRwQBIEoYHGuTbd
+	Pqb92WyUfpw6XgJsEqQJZzd6qXJUXkULF9R07Mej3e0ol+jIMfZr2GZHKUcXbXxz
+	WNT+fi0nIqUzKnnOWH3mg==
+X-ME-Sender: <xms:hgISY43y4qLU8_OBUsPXfMZv5nTF-OFubIkSw37mIWmmAuXTOKe4lQ>
+    <xme:hgISYzEQfmg8_6VddXo4dq83rO8ln_I77FZyshayc-5_CTS7mGmNScd4IUQB2pjNo
+    AuDIvJg0qx07g>
+X-ME-Received: <xmr:hgISYw5DxSKhNf51Y_wSGPgE8NYNk3oEosamQPRbOGelcGEz9VcYQmr4qdhB2zHuWZrZK7zQpBoJQkybVz-Goxu04ba7RY6l7QWd6QEfposllx-zHorUXw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeltddgieeiucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -81,25 +81,25 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeltddgieeiucetufdoteggod
     vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
     hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
+    hushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:ggISY0rn_E1mGmVhzhhwsZ4d3rtf06eZap6UxS8qMxnFVW7ukKetDg>
-    <xmx:ggISY9q69gzasJP-CA1SMvXna9ZyS9hZ2hs4Bmb2bcIqQyA2hhC2Og>
-    <xmx:ggISYyQHzP5fuunxieMV9AOLQn7RUEiAwv3jpVlXuMhuH3xSWZnEUg>
-    <xmx:ggISY2DWGyuQSJeFBzVbSQaO8Ovq7Djr3HXX9s4mmXGhBA508yqcDQ>
+X-ME-Proxy: <xmx:hgISYx2NB0LPTjCX9oc4rN7iTRvo2rqoRcJ5BbxRPI5ZsoBdM_pc2Q>
+    <xmx:hgISY7Hn_l4Ms1xOeeDL0zH7ZbyHv8G8nwyqY2vKw3Wl57lD2cg8Jw>
+    <xmx:hgISY69IxAx1pk80gujTdnjWccdlytxSCSFC2NbiLNgvOcTILzx-PQ>
+    <xmx:hgISY8MDCfbiRHaWDZR7J5z-TgSTYce-uXSpdT3REVVFR5E2HMEZbg>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 07/10] drivers/char: add RX support to the XHCI driver
-Date: Fri,  2 Sep 2022 15:17:28 +0200
-Message-Id: <b59b98713590b4ed2b20b5fa3559ce97d9a820c3.1662124370.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v6 10/10] drivers/char: use smp barriers in xhci driver
+Date: Fri,  2 Sep 2022 15:17:31 +0200
+Message-Id: <992c6512e54435a006c6de28515d1242518cb974.1662124370.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.00134d06d2e52e209e9f7778513a27cf0b2a3bd3.1662124370.git-series.marmarek@invisiblethingslab.com>
 References: <cover.00134d06d2e52e209e9f7778513a27cf0b2a3bd3.1662124370.git-series.marmarek@invisiblethingslab.com>
@@ -107,298 +107,100 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add another work ring buffer for received data, and point IN TRB at it.
-Ensure there is always at least one pending IN TRB, so the controller
-has a way to send incoming data to the driver.
-Note that both "success" and "short packet" completion codes are okay -
-in fact it will be "short packet" most of the time, as the TRB length is
-about maximum size, not required size.
+All (interesting) data is in plain WB cached memory, and the few BAR
+register that are configured have a UC mapping, which orders properly
+WRT other writes on x86.
 
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v4:
-- adjust return types
-- add some const
-New patch in v3
+New in v6
 ---
- docs/misc/xen-command-line.pandoc |   6 +-
- xen/drivers/char/xhci-dbc.c       | 129 +++++++++++++++++++++++++++++++-
- 2 files changed, 132 insertions(+), 3 deletions(-)
+ xen/drivers/char/xhci-dbc.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index f6bdae9ca5f4..fb4d80c590f3 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -731,9 +731,9 @@ Available alternatives, with their meaning, are:
- Specify the USB controller to use, either by instance number (when going
- over the PCI busses sequentially) or by PCI device (must be on segment 0).
- 
--Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability (output
--only). XHCI driver will wait indefinitely for the debug host to connect - make
--sure the cable is connected.
-+Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability.
-+XHCI driver will wait indefinitely for the debug host to connect - make sure
-+the cable is connected.
- 
- ### debug_stack_lines
- > `= <integer>`
 diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
-index fc9745f7c2ac..557c5fc785ce 100644
+index 829f1d1d910f..03df4d82a623 100644
 --- a/xen/drivers/char/xhci-dbc.c
 +++ b/xen/drivers/char/xhci-dbc.c
-@@ -111,6 +111,7 @@ enum {
- enum {
-     XHCI_TRB_CC_SUCCESS = 1,
-     XHCI_TRB_CC_TRB_ERR = 5,
-+    XHCI_TRB_CC_SHORT_PACKET = 13,
- };
+@@ -666,7 +666,7 @@ static void dbc_pop_events(struct dbc *dbc)
  
- /* DbC endpoint types */
-@@ -239,6 +240,7 @@ struct dbc {
-     struct xhci_trb_ring dbc_oring;
-     struct xhci_trb_ring dbc_iring;
-     struct dbc_work_ring dbc_owork;
-+    struct dbc_work_ring dbc_iwork;
-     struct xhci_string_descriptor *dbc_str;
+     BUILD_BUG_ON((1 << XHCI_TRB_SHIFT) != sizeof(struct xhci_trb));
  
-     pci_sbdf_t sbdf;
-@@ -444,6 +446,16 @@ static void xhci_trb_norm_set_ioc(struct xhci_trb *trb)
-     trb->ctrl |= 0x20;
- }
+-    rmb();
++    smp_rmb();
  
-+static uint64_t xhci_trb_norm_buf(const struct xhci_trb *trb)
-+{
-+    return trb->params;
-+}
-+
-+static uint32_t xhci_trb_norm_len(const struct xhci_trb *trb)
-+{
-+    return trb->status & 0x1FFFF;
-+}
-+
- /**
-  * Fields for Transfer Event TRBs (see section 6.4.2.1). Note that event
-  * TRBs are read-only from software
-@@ -453,6 +465,17 @@ static uint64_t xhci_trb_tfre_ptr(const struct xhci_trb *trb)
-     return trb->params;
- }
- 
-+static uint32_t xhci_trb_tfre_cc(const struct xhci_trb *trb)
-+{
-+    return trb->status >> 24;
-+}
-+
-+/* Amount of data _not_ transferred */
-+static uint32_t xhci_trb_tfre_len(const struct xhci_trb *trb)
-+{
-+    return trb->status & 0x1FFFF;
-+}
-+
- /* Fields for link TRBs (section 6.4.4.1) */
- static void xhci_trb_link_set_rsp(struct xhci_trb *trb, uint64_t rsp)
- {
-@@ -494,6 +517,14 @@ static bool xhci_trb_ring_full(const struct xhci_trb_ring *ring)
-     return ((ring->enq + 1) & (DBC_TRB_RING_CAP - 1)) == ring->deq;
- }
- 
-+static unsigned int xhci_trb_ring_size(const struct xhci_trb_ring *ring)
-+{
-+    if ( ring->enq >= ring->deq )
-+        return ring->enq - ring->deq;
-+
-+    return DBC_TRB_RING_CAP - ring->deq + ring->enq;
-+}
-+
- static bool dbc_work_ring_full(const struct dbc_work_ring *ring)
- {
-     return ((ring->enq + 1) & (DBC_WORK_RING_CAP - 1)) == ring->deq;
-@@ -507,6 +538,14 @@ static unsigned int dbc_work_ring_size(const struct dbc_work_ring *ring)
-     return DBC_WORK_RING_CAP - ring->deq + ring->enq;
- }
- 
-+static unsigned int dbc_work_ring_space_to_end(const struct dbc_work_ring *ring)
-+{
-+    if ( ring->enq >= ring->deq )
-+        return DBC_WORK_RING_CAP - ring->enq;
-+
-+    return ring->deq - ring->enq;
-+}
-+
- static void dbc_push_trb(struct dbc *dbc, struct xhci_trb_ring *ring,
-                          uint64_t dma, uint64_t len)
- {
-@@ -567,6 +606,31 @@ static unsigned int dbc_push_work(struct dbc *dbc, struct dbc_work_ring *ring,
-     return i;
- }
- 
-+static void dbc_rx_trb(struct dbc *dbc, struct xhci_trb *trb,
-+                       uint64_t not_transferred)
-+{
-+    struct dbc_work_ring *ring = &dbc->dbc_iwork;
-+    unsigned int rx_len;
-+    unsigned int end, start = ring->enq;
-+
-+    if ( xhci_trb_type(trb) != XHCI_TRB_NORM )
-+        /* Can be Link TRB for example. */
-+        return;
-+
-+    ASSERT(xhci_trb_norm_buf(trb) == ring->dma + ring->enq);
-+    ASSERT(xhci_trb_norm_len(trb) >= not_transferred);
-+    rx_len = xhci_trb_norm_len(trb) - not_transferred;
-+
-+    /* It can hit the ring end, but should not wrap around. */
-+    ASSERT(ring->enq + rx_len <= DBC_WORK_RING_CAP);
-+    ring->enq = (ring->enq + rx_len) & (DBC_WORK_RING_CAP - 1);
-+
-+    end = ring->enq;
-+
-+    if ( end > start )
-+        cache_flush(&ring->buf[start], end - start);
-+}
-+
- /*
-  * Note that if IN transfer support is added, then this
-  * will need to be changed; it assumes an OUT transfer ring only
-@@ -576,6 +640,7 @@ static void dbc_pop_events(struct dbc *dbc)
-     struct dbc_reg *reg = dbc->dbc_reg;
-     struct xhci_trb_ring *er = &dbc->dbc_ering;
-     struct xhci_trb_ring *tr = &dbc->dbc_oring;
-+    struct xhci_trb_ring *ir = &dbc->dbc_iring;
-     struct xhci_trb *event = &er->trb[er->deq];
-     uint64_t erdp = readq(&reg->erdp);
-     uint32_t portsc;
-@@ -601,6 +666,14 @@ static void dbc_pop_events(struct dbc *dbc)
-                 trb_idx = (event_ptr - tr->dma) >> XHCI_TRB_SHIFT;
-                 tr->deq = (trb_idx + 1) & (DBC_TRB_RING_CAP - 1);
-             }
-+            else if ( event_ptr - ir->dma < DBC_TRB_RING_BYTES )
-+            {
-+                trb_idx = (event_ptr - ir->dma) >> XHCI_TRB_SHIFT;
-+                if ( xhci_trb_tfre_cc(event) == XHCI_TRB_CC_SUCCESS ||
-+                     xhci_trb_tfre_cc(event) == XHCI_TRB_CC_SHORT_PACKET )
-+                    dbc_rx_trb(dbc, &ir->trb[trb_idx], xhci_trb_tfre_len(event));
-+                ir->deq = (trb_idx + 1) & (DBC_TRB_RING_CAP - 1);
-+            }
-             else
-                 dbc_alert("event: TRB 0x%lx not found in any ring\n",
-                           event_ptr);
-@@ -871,6 +944,7 @@ static bool __init dbc_open(struct dbc *dbc)
-         return false;
- 
-     dbc_init_work_ring(dbc, &dbc->dbc_owork);
-+    dbc_init_work_ring(dbc, &dbc->dbc_iwork);
-     dbc_enable_dbc(dbc);
-     dbc->open = true;
- 
-@@ -947,6 +1021,33 @@ static void dbc_flush(struct dbc *dbc, struct xhci_trb_ring *trb,
- }
- 
- /**
-+ * Ensure DbC has a pending transfer TRB to receive data into.
-+ *
-+ * @param dbc the dbc to flush
-+ * @param trb the ring for the TRBs to transfer
-+ * @param wrk the work ring to receive data into
-+ */
-+static void dbc_enqueue_in(struct dbc *dbc, struct xhci_trb_ring *trb,
-+                           struct dbc_work_ring *wrk)
-+{
-+    struct dbc_reg *reg = dbc->dbc_reg;
-+    uint32_t db = (readl(&reg->db) & 0xFFFF00FF) | (trb->db << 8);
-+
-+    /* Check if there is already queued TRB */
-+    if ( xhci_trb_ring_size(trb) >= 1 )
-+        return;
-+
-+    if ( dbc_work_ring_full(wrk) )
-+        return;
-+
-+    dbc_push_trb(dbc, trb, wrk->dma + wrk->enq,
-+                 dbc_work_ring_space_to_end(wrk));
-+
-+    wmb();
-+    writel(db, &reg->db);
-+}
-+
-+/**
-  * Queue a single character to the DbC. A transfer TRB will be created
-  * if the character is a newline and the DbC will be notified that data is
-  * available for writing to the debug host.
-@@ -969,6 +1070,19 @@ static int64_t dbc_putc(struct dbc *dbc, char c)
-     return 1;
- }
- 
-+static int dbc_getc(struct dbc *dbc, char *c)
-+{
-+    struct dbc_work_ring *wrk = &dbc->dbc_iwork;
-+
-+    if ( dbc_work_ring_size(wrk) == 0 )
-+        return 0;
-+
-+    *c = wrk->buf[wrk->deq];
-+    wrk->deq = (wrk->deq + 1) & (DBC_WORK_RING_CAP - 1);
-+
-+    return 1;
-+}
-+
- struct dbc_uart {
-     struct dbc dbc;
-     struct timer timer;
-@@ -987,10 +1101,16 @@ static void cf_check dbc_uart_poll(void *data)
-     if ( spin_trylock_irqsave(&port->tx_lock, flags) )
+     while ( xhci_trb_cyc(event) == er->cyc )
      {
-         if ( dbc_ensure_running(dbc) )
-+        {
-             dbc_flush(dbc, &dbc->dbc_oring, &dbc->dbc_owork);
-+            dbc_enqueue_in(dbc, &dbc->dbc_iring, &dbc->dbc_iwork);
-+        }
-         spin_unlock_irqrestore(&port->tx_lock, flags);
+@@ -710,7 +710,7 @@ static void dbc_pop_events(struct dbc *dbc)
      }
  
-+    while ( dbc_work_ring_size(&dbc->dbc_iwork) )
-+        serial_rx_interrupt(port, guest_cpu_user_regs());
-+
-     serial_tx_interrupt(port, guest_cpu_user_regs());
-     set_timer(&uart->timer, NOW() + MICROSECS(DBC_POLL_INTERVAL));
- }
-@@ -1029,6 +1149,12 @@ static void cf_check dbc_uart_putc(struct serial_port *port, char c)
-     dbc_putc(&uart->dbc, c);
+     erdp = er->dma + (er->deq << XHCI_TRB_SHIFT);
+-    wmb();
++    smp_wmb();
+     writeq(erdp, &reg->erdp);
  }
  
-+static int cf_check dbc_uart_getc(struct serial_port *port, char *c)
-+{
-+    struct dbc_uart *uart = port->uart;
-+    return dbc_getc(&uart->dbc, c);
-+}
-+
- static void cf_check dbc_uart_flush(struct serial_port *port)
+@@ -847,9 +847,9 @@ static void dbc_enable_dbc(struct dbc *dbc)
  {
-     s_time_t goal;
-@@ -1048,6 +1174,7 @@ static struct uart_driver dbc_uart_driver = {
-     .init_postirq = dbc_uart_init_postirq,
-     .tx_ready = dbc_uart_tx_ready,
-     .putc = dbc_uart_putc,
-+    .getc = dbc_uart_getc,
-     .flush = dbc_uart_flush,
- };
+     struct dbc_reg *reg = dbc->dbc_reg;
  
-@@ -1057,6 +1184,7 @@ struct dbc_dma_bufs {
-     struct xhci_trb out_trb[DBC_TRB_RING_CAP];
-     struct xhci_trb in_trb[DBC_TRB_RING_CAP];
-     uint8_t out_wrk_buf[DBC_WORK_RING_CAP];
-+    uint8_t in_wrk_buf[DBC_WORK_RING_CAP];
-     struct xhci_erst_segment erst __aligned(16);
-     struct xhci_dbc_ctx ctx __aligned(16);
-     struct xhci_string_descriptor str_buf[DBC_STRINGS_COUNT];
-@@ -1118,6 +1246,7 @@ void __init xhci_dbc_uart_init(void)
-     dbc->dbc_oring.trb = dbc_dma_bufs.out_trb;
-     dbc->dbc_iring.trb = dbc_dma_bufs.in_trb;
-     dbc->dbc_owork.buf = dbc_dma_bufs.out_wrk_buf;
-+    dbc->dbc_iwork.buf = dbc_dma_bufs.in_wrk_buf;
-     dbc->dbc_str = dbc_dma_bufs.str_buf;
+-    wmb();
++    smp_wmb();
+     writel(readl(&reg->ctrl) | (1U << DBC_CTRL_DCE), &reg->ctrl);
+-    wmb();
++    smp_wmb();
  
-     if ( dbc_open(dbc) )
+     while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCE)) == 0 )
+         cpu_relax();
+@@ -858,9 +858,9 @@ static void dbc_enable_dbc(struct dbc *dbc)
+     if ( !dbc->open )
+         dbc_reset_debug_port(dbc);
+ 
+-    wmb();
++    smp_wmb();
+     writel(readl(&reg->portsc) | (1U << DBC_PSC_PED), &reg->portsc);
+-    wmb();
++    smp_wmb();
+ 
+     while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 )
+         cpu_relax();
+@@ -871,7 +871,7 @@ static void dbc_disable_dbc(struct dbc *dbc)
+     struct dbc_reg *reg = dbc->dbc_reg;
+ 
+     writel(readl(&reg->portsc) & ~(1U << DBC_PSC_PED), &reg->portsc);
+-    wmb();
++    smp_wmb();
+     writel(readl(&reg->ctrl) & ~(1U << DBC_CTRL_DCE), &reg->ctrl);
+ 
+     while ( readl(&reg->ctrl) & (1U << DBC_CTRL_DCE) )
+@@ -1032,7 +1032,7 @@ static bool dbc_ensure_running(struct dbc *dbc)
+     {
+         writel(ctrl | (1U << DBC_CTRL_DRC), &reg->ctrl);
+         writel(readl(&reg->portsc) | (1U << DBC_PSC_PED), &reg->portsc);
+-        wmb();
++        smp_wmb();
+         dbc_ring_doorbell(dbc, dbc->dbc_iring.db);
+         dbc_ring_doorbell(dbc, dbc->dbc_oring.db);
+     }
+@@ -1074,7 +1074,7 @@ static void dbc_flush(struct dbc *dbc, struct xhci_trb_ring *trb,
+         }
+     }
+ 
+-    wmb();
++    smp_wmb();
+     dbc_ring_doorbell(dbc, trb->db);
+ }
+ 
+@@ -1101,7 +1101,7 @@ static void dbc_enqueue_in(struct dbc *dbc, struct xhci_trb_ring *trb,
+     dbc_push_trb(dbc, trb, wrk->dma + wrk->enq,
+                  dbc_work_ring_space_to_end(wrk));
+ 
+-    wmb();
++    smp_wmb();
+     writel(db, &reg->db);
+ }
+ 
 -- 
 git-series 0.9.1
 
