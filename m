@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50139C6FA83
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Sep 2022 16:32:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.398969.639979 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F25ECAAD3
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Sep 2022 16:33:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.398979.640001 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVF1E-0000Wf-Ps; Mon, 05 Sep 2022 16:32:16 +0000
+	id 1oVF2f-0001aO-Fn; Mon, 05 Sep 2022 16:33:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 398969.639979; Mon, 05 Sep 2022 16:32:16 +0000
+Received: by outflank-mailman (output) from mailman id 398979.640001; Mon, 05 Sep 2022 16:33:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVF1E-0000WW-Mu; Mon, 05 Sep 2022 16:32:16 +0000
-Received: by outflank-mailman (input) for mailman id 398969;
- Mon, 05 Sep 2022 16:32:14 +0000
+	id 1oVF2f-0001aB-Cu; Mon, 05 Sep 2022 16:33:45 +0000
+Received: by outflank-mailman (input) for mailman id 398979;
+ Mon, 05 Sep 2022 16:33:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fkdn=ZI=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oVF1C-0000Uj-HU
- for xen-devel@lists.xenproject.org; Mon, 05 Sep 2022 16:32:14 +0000
+ id 1oVF2e-0001Jo-JF
+ for xen-devel@lists.xenproject.org; Mon, 05 Sep 2022 16:33:44 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 4bd3d7e7-2d38-11ed-af93-0125da4c0113;
- Mon, 05 Sep 2022 18:32:13 +0200 (CEST)
+ id 81b5caa4-2d38-11ed-af93-0125da4c0113;
+ Mon, 05 Sep 2022 18:33:43 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F2897139F;
- Mon,  5 Sep 2022 09:32:18 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 652911756;
+ Mon,  5 Sep 2022 09:33:49 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B74923F534;
- Mon,  5 Sep 2022 09:32:11 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A3133F534;
+ Mon,  5 Sep 2022 09:33:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,96 +45,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4bd3d7e7-2d38-11ed-af93-0125da4c0113
+X-Inumbo-ID: 81b5caa4-2d38-11ed-af93-0125da4c0113
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Zhou Wang <wangzhou1@hisilicon.com>,
+Cc: Zhen Lei <thunder.leizhen@huawei.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Will Deacon <will@kernel.org>
-Subject: [PATCH v3 03/10] xen/arm: smmuv3: Ensure queue is read after updating prod pointer
-Date: Mon,  5 Sep 2022 17:30:38 +0100
-Message-Id: <bd55c05d7197b72cb4597c7412fc4911fa2281d1.1662394710.git.rahul.singh@arm.com>
+Subject: [PATCH v3 08/10] xen/arm: smmuv3: Remove unnecessary oom message
+Date: Mon,  5 Sep 2022 17:30:43 +0100
+Message-Id: <02838ee702b7455831bf5f8022cf361f44e9e4f2.1662394710.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1662394710.git.rahul.singh@arm.com>
 References: <cover.1662394710.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Zhou Wang <wangzhou1@hisilicon.com>
+From: Zhen Lei <thunder.leizhen@huawei.com>
 
-Backport Linux commit a76a37777f2c. Rename __iomb to iomb() while
-merging to get in sync with other Xen definitions.
+Backport Linux commit affa909571b0. This is the clean backport without
+any changes.
 
-Reading the 'prod' MMIO register in order to determine whether or
-not there is valid data beyond 'cons' for a given queue does not
-provide sufficient dependency ordering, as the resulting access is
-address dependent only on 'cons' and can therefore be speculated
-ahead of time, potentially allowing stale data to be read by the
-CPU.
+Fixes scripts/checkpatch.pl warning:
+WARNING: Possible unnecessary 'out of memory' message
 
-Use readl() instead of readl_relaxed() when updating the shadow copy
-of the 'prod' pointer, so that all speculated memory reads from the
-corresponding queue can occur only from valid slots.
+Remove it can help us save a bit of memory.
 
-Signed-off-by: Zhou Wang <wangzhou1@hisilicon.com>
-Link: https://lore.kernel.org/r/1601281922-117296-1-git-send-email-wangzhou1@hisilicon.com
-[will: Use readl() instead of explicit barrier. Update 'cons' side to match.]
+Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+Link: https://lore.kernel.org/r/20210609125438.14369-1-thunder.leizhen@huawei.com
 Signed-off-by: Will Deacon <will@kernel.org>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git a76a37777f2c
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git affa909571b0
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
 Changes in v3:
- - rename __iomb() to iomb() and also move it from common file to
-   smmu-v3.c file
+ - Added Stefano Acked-by
 Changes in v2:
  - fix commit msg
- - add _iomb changes also from the origin patch
 ---
- xen/drivers/passthrough/arm/smmu-v3.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+---
+ xen/drivers/passthrough/arm/smmu-v3.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
 diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index 64d39bb4d3..e632c75b21 100644
+index ef1604d863..6f551cfede 100644
 --- a/xen/drivers/passthrough/arm/smmu-v3.c
 +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -107,6 +107,8 @@ typedef paddr_t		dma_addr_t;
- typedef paddr_t		phys_addr_t;
- typedef unsigned int		gfp_t;
+@@ -1647,10 +1647,8 @@ static int arm_smmu_init_l1_strtab(struct arm_smmu_device *smmu)
+ 	void *strtab = smmu->strtab_cfg.strtab;
  
-+#define iomb()		dmb(osh)
-+
- #define platform_device		device
+ 	cfg->l1_desc = _xzalloc(size, sizeof(void *));
+-	if (!cfg->l1_desc) {
+-		dev_err(smmu->dev, "failed to allocate l1 stream table desc\n");
++	if (!cfg->l1_desc)
+ 		return -ENOMEM;
+-	}
  
- #define GFP_KERNEL		0
-@@ -951,7 +953,7 @@ static void queue_sync_cons_out(struct arm_smmu_queue *q)
- 	 * Ensure that all CPU accesses (reads and writes) to the queue
- 	 * are complete before we update the cons pointer.
- 	 */
--	mb();
-+	iomb();
- 	writel_relaxed(q->llq.cons, q->cons_reg);
- }
+ 	for (i = 0; i < cfg->num_l1_ents; ++i) {
+ 		arm_smmu_write_strtab_l1_desc(strtab, &cfg->l1_desc[i]);
+@@ -2435,10 +2433,8 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+ 	struct arm_smmu_device *smmu;
  
-@@ -963,8 +965,15 @@ static void queue_inc_cons(struct arm_smmu_ll_queue *q)
+ 	smmu = xzalloc(struct arm_smmu_device);
+-	if (!smmu) {
+-		dev_err(pdev, "failed to allocate arm_smmu_device\n");
++	if (!smmu)
+ 		return -ENOMEM;
+-	}
+ 	smmu->dev = pdev;
  
- static int queue_sync_prod_in(struct arm_smmu_queue *q)
- {
-+	u32 prod;
- 	int ret = 0;
--	u32 prod = readl_relaxed(q->prod_reg);
-+
-+	/*
-+	 * We can't use the _relaxed() variant here, as we must prevent
-+	 * speculative reads of the queue before we have determined that
-+	 * prod has indeed moved.
-+	 */
-+	prod = readl(q->prod_reg);
- 
- 	if (Q_OVF(prod) != Q_OVF(q->llq.prod))
- 		ret = -EOVERFLOW;
+ 	if (pdev->of_node) {
 -- 
 2.25.1
 
