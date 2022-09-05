@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05B2C6FA8C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA96C6FA8B
 	for <xen-devel@archiver.kernel.org>; Mon,  5 Sep 2022 12:48:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.398799.639751 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.398802.639768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVBW5-0000kN-7W; Mon, 05 Sep 2022 12:47:53 +0000
+	id 1oVBW6-00011I-1u; Mon, 05 Sep 2022 12:47:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 398799.639751; Mon, 05 Sep 2022 12:47:53 +0000
+Received: by outflank-mailman (output) from mailman id 398802.639768; Mon, 05 Sep 2022 12:47:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVBW5-0000kD-39; Mon, 05 Sep 2022 12:47:53 +0000
-Received: by outflank-mailman (input) for mailman id 398799;
+	id 1oVBW5-0000zz-S3; Mon, 05 Sep 2022 12:47:53 +0000
+Received: by outflank-mailman (input) for mailman id 398802;
  Mon, 05 Sep 2022 12:47:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=XgUS=ZI=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oVBW3-0000jr-TR
+ id 1oVBW4-0000jq-G3
  for xen-devel@lists.xenproject.org; Mon, 05 Sep 2022 12:47:52 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f3303210-2d18-11ed-a016-b9edf5238543;
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f321b54b-2d18-11ed-af93-0125da4c0113;
  Mon, 05 Sep 2022 14:47:50 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 34494388A3;
- Mon,  5 Sep 2022 12:47:50 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id DEDC61FFD9;
+ Mon,  5 Sep 2022 12:47:49 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E6C6613A66;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 98C2413A66;
  Mon,  5 Sep 2022 12:47:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id AN4IN/XvFWO1DAAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id QAn8I/XvFWO1DAAAMHmgww
  (envelope-from <jgross@suse.com>); Mon, 05 Sep 2022 12:47:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3303210-2d18-11ed-a016-b9edf5238543
+X-Inumbo-ID: f321b54b-2d18-11ed-af93-0125da4c0113
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1662382070; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1662382069; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rGlCKEwcU/SZ0y9iAyqoydp7gF1Ss4+EyFvuwscMXI8=;
-	b=D+XbUfY5DqhzDLv3fkIGTYgyJfygElHDI+FpD++HdkoM9dZxckoFGEPSLgkmnyt/imRwHn
-	sj7Lkv74+vdmwoNnbEa71JHpO6xBmt8iTRlzY7Jtxgq/NjynElc0oPzZjhbagbIbqxpLii
-	UaYwhim36MYw5I0k0D/QfcaSbbPale8=
+	bh=NpHiptJcwGoAMGrSBmcUyjE7qCo40p2IN4dYlppaCrM=;
+	b=KcMQH7MMzfweSsHBfbp36uANpyg5uB6Wd0mtHzPylQMnAhey4flWR/yTY+1dpQEnVu/cCc
+	RwpwevS06zGfKz7JBu9nEWNT4BpcxH8K9XJUfPZ4fSl8Qe6wJPf6pO1eMYJeKW17RlAX+M
+	fFfsrBg525Pe3cqHcw2O/9mjUWX/pH0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry.Wang@arm.com,
@@ -74,80 +74,57 @@ Cc: Henry.Wang@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 3/4] tools/xenstore: add documentation for extended watch command
-Date: Mon,  5 Sep 2022 14:47:45 +0200
-Message-Id: <20220905124746.1975-4-jgross@suse.com>
+Subject: [PATCH v4 2/4] tools/xenstore: add documentation for new set/get-quota commands
+Date: Mon,  5 Sep 2022 14:47:44 +0200
+Message-Id: <20220905124746.1975-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220905124746.1975-1-jgross@suse.com>
 References: <20220905124746.1975-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add documentation for an extension of the WATCH command used to limit
-the scope of watched paths. Additionally it enables to receive more
-information in the events related to special watches (@introduceDomain
-or @releaseDomain).
+Add documentation for two new Xenstore wire commands SET_QUOTA and
+GET_QUOTA used to set or query the global Xenstore quota or those of
+a given domain.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- docs/misc/xenstore-ring.txt |  1 +
- docs/misc/xenstore.txt      | 16 +++++++++++++---
- 2 files changed, 14 insertions(+), 3 deletions(-)
+V2:
+- remove feature bit (Julien Grall)
+- add possibility to access global quota and to query supported quotas
+---
+ docs/misc/xenstore.txt | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/docs/misc/xenstore-ring.txt b/docs/misc/xenstore-ring.txt
-index 2792d13530..dbc7335e24 100644
---- a/docs/misc/xenstore-ring.txt
-+++ b/docs/misc/xenstore-ring.txt
-@@ -69,6 +69,7 @@ Bit     Description
- -----------------------------------------------------------------
- 0       Ring reconnection (see the ring reconnection feature below)
- 1       Connection error indicator (see connection error feature below)
-+2       WATCH can take a third parameter limiting its scope
- 
- The "Connection state" field is used to request a ring close and reconnect.
- The "Connection state" field only contains valid data if the server has
 diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
-index 73670d7907..da47d7bb16 100644
+index 33d8fc87f7..73670d7907 100644
 --- a/docs/misc/xenstore.txt
 +++ b/docs/misc/xenstore.txt
-@@ -187,7 +187,7 @@ SET_PERMS		<path>|<perm-as-string>|+?
+@@ -348,6 +348,23 @@ SET_FEATURE		<domid>|<value>|
+ 	xenstored prevents the use of GET_FEATURE and SET_FEATURE other
+ 	than by dom0.
  
- ---------- Watches ----------
++GET_QUOTA		[[<domid>|]<quota>|]	<value>|
++SET_QUOTA		[<domid>|]<quota>|<value>|
++	Returns or sets a quota value for the domain being specified by
++	<domid>. Omitting <domid> will return or set the global quota
++	values, which are the default values for new domains. <quota> is
++	 one of "nodes", "watches", "transactions", "node-size",
++	"permissions", or any other implementation defined value. For
++	GET_QUOTA it is possible to omit the <quota> parameter together
++	with the <domid> parameter, which will return a single string of
++	all supported <quota> values separated by blanks. <value> is a
++	decimal number specifying the quota value, with "0" having the
++	special meaning of quota checks being disabled. The initial quota
++	settings for a domain are the global ones of Xenstore.
++
++	xenstored prevents the use of GET_QUOTA and SET_QUOTA other
++	than by dom0.
++
+ ---------- Miscellaneous ----------
  
--WATCH			<wpath>|<token>|?
-+WATCH			<wpath>|<token>|[<depth>|]?
- 	Adds a watch.
- 
- 	When a <path> is modified (including path creation, removal,
-@@ -198,7 +198,11 @@ WATCH			<wpath>|<token>|?
- 	matching watch results in a WATCH_EVENT message (see below).
- 
- 	The event's path matches the watch's <wpath> if it is an child
--	of <wpath>.
-+	of <wpath>. This match can be limited by specifying <depth> (a
-+	decimal value of 0 or larger): it denotes the directory levels
-+	below <wpath> to consider for a match ("0" would not match for
-+	a child of <wpath>, "1" would match only for a direct child,
-+	etc.).
- 
- 	<wpath> can be a <path> to watch or @<wspecial>.  In the
- 	latter case <wspecial> may have any syntax but it matches
-@@ -209,7 +213,13 @@ WATCH			<wpath>|<token>|?
- 				shutdown, and also on RELEASE
- 				and domain destruction
- 	<wspecial> events are sent to privileged callers or explicitly
--	via SET_PERMS enabled domains only.
-+	via SET_PERMS enabled domains only. The semantics for a
-+	specification of <depth> differ for generating <wspecial>
-+	events: specifying "1" will report the related domid by using
-+	@<wspecial>/<domid> for the reported path. Other <depth>
-+	values are not supported.
-+	For @releaseDomain it is possible to watch only for a specific
-+	domain by specifying @releaseDomain/<domid> for the path.
- 
- 	When a watch is first set up it is triggered once straight
- 	away, with <path> equal to <wpath>.  Watches may be triggered
+ CONTROL			<command>|[<parameters>|]
 -- 
 2.35.3
 
