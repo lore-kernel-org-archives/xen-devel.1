@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFF1C54EE9
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:49:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400315.642032 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72955ECAAA1
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400346.642044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgRq-0006Io-J7; Tue, 06 Sep 2022 21:49:34 +0000
+	id 1oVgSC-0007WW-To; Tue, 06 Sep 2022 21:49:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400315.642032; Tue, 06 Sep 2022 21:49:34 +0000
+Received: by outflank-mailman (output) from mailman id 400346.642044; Tue, 06 Sep 2022 21:49:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgRq-0006I6-GH; Tue, 06 Sep 2022 21:49:34 +0000
-Received: by outflank-mailman (input) for mailman id 400315;
- Tue, 06 Sep 2022 21:49:33 +0000
+	id 1oVgSC-0007WP-PO; Tue, 06 Sep 2022 21:49:56 +0000
+Received: by outflank-mailman (input) for mailman id 400346;
+ Tue, 06 Sep 2022 21:49:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lcW6=ZJ=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oVgIY-0000Cs-J3
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:58 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id e2bdeef3-2de9-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 15:43:27 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 194701A2D;
- Tue,  6 Sep 2022 06:43:33 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C62643F7B4;
- Tue,  6 Sep 2022 06:43:25 -0700 (PDT)
+ <SRS0=FLlR=ZJ=bounce.vates.fr=bounce-md_30504962.631718d1.v1-a8dca91a88494f7f8b1011af811f372b@srs-se1.protection.inumbo.net>)
+ id 1oVgIW-0000Cs-Ii
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:56 +0000
+Received: from mail136-23.atl41.mandrillapp.com
+ (mail136-23.atl41.mandrillapp.com [198.2.136.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e2f74d4e-2dc9-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 11:54:24 +0200 (CEST)
+Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
+ by mail136-23.atl41.mandrillapp.com (Mailchimp) with ESMTP id
+ 4MMLMP1T42z1XLFCT
+ for <xen-devel@lists.xenproject.org>; Tue,  6 Sep 2022 09:54:25 +0000 (GMT)
+Received: from [37.26.189.201] by mandrillapp.com id
+ a8dca91a88494f7f8b1011af811f372b; Tue, 06 Sep 2022 09:54:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,390 +45,428 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2bdeef3-2de9-11ed-af93-0125da4c0113
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: rahul.singh@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v4 7/7] xen/arm: introduce xen-evtchn dom0less property
-Date: Tue,  6 Sep 2022 14:40:45 +0100
-Message-Id: <055660c342c85cd97d6e3a5551c84e62f49dece6.1662462034.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1662462034.git.rahul.singh@arm.com>
-References: <cover.1662462034.git.rahul.singh@arm.com>
+X-Inumbo-ID: e2f74d4e-2dc9-11ed-af93-0125da4c0113
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.fr;
+	s=mandrill; t=1662458065; x=1662760465; i=andrei.semenov@vates.fr;
+	bh=pQxC6Pftr2jRoWbYvo9cSoey9URYE0qRetJUWBPSTIk=;
+	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
+	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+	 Subject:From;
+	b=J90RHZxdhtwm0LlZD5oP7VGWGxM2WYnsvbxujyoIj7OZyxJ2L8DcSnznz0iwWhGQx
+	 4j8zU2jvtl8f6/tVakm3nXQpuDvU0ui833kHI6YphNgRKEWWa9VteIIOMYKVAUwOhE
+	 Y+9kAWW5xFh7MBCSzKb01D1BXCvqY4p5wCLaB1t4=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com; 
+ i=@mandrillapp.com; q=dns/txt; s=mandrill; t=1662458065; h=From : 
+ Subject : To : Cc : Message-Id : In-Reply-To : References : Date : 
+ MIME-Version : Content-Type : Content-Transfer-Encoding : From : 
+ Subject : Date : X-Mandrill-User : List-Unsubscribe; 
+ bh=pQxC6Pftr2jRoWbYvo9cSoey9URYE0qRetJUWBPSTIk=; 
+ b=e0+uul0MFDsDLUDNu96xRuh9CG/82ragY2k/HAkqMg56LHNA/ReMr5e51SC+DdBmoopGXO
+ Eadu31KqK0bTJRk/lzpfBgCrt940lXdKeR9B5VbqIeAcRYbJiwTxiyU5SRABg3Jkkvm2CvQn
+ CIg/M9VSPS2AD5mopYBo9SHRA4HeA=
+From: Andrei Semenov <andrei.semenov@vates.fr>
+Subject: [PATCH v2 2/2] live migration: use superpages for physmap population on restore when possible
+X-Mailer: git-send-email 2.34.1
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 5cd6f291-6f11-459d-97c0-d09b574c3896
+X-Bm-Transport-Timestamp: 1662458064080
+To: andrei.semenov@vates.fr, xen-devel@lists.xenproject.org
+Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
+Message-Id: <657d6dad39f4ab87569470c94afb4cc6d005e829.1662457291.git.andrei.semenov@vates.fr>
+In-Reply-To: <cover.1662457291.git.andrei.semenov@vates.fr>
+References: <cover.1662457291.git.andrei.semenov@vates.fr>
+X-Report-Abuse: Please forward a copy of this message, including all headers, to abuse@mandrill.com
+X-Report-Abuse: You can also report abuse here: http://mandrillapp.com/contact/abuse?id=30504962.a8dca91a88494f7f8b1011af811f372b
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20220906:md
+Date: Tue, 06 Sep 2022 09:54:25 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=Y
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Introduce a new sub-node under /chosen node to establish static event
-channel communication between domains on dom0less systems.
+Implement an heuristic for X86 HVM guests which tries to use superpages while
+populating guest physmap on live migration. This should impove memory accesses
+performances for these guests.
 
-An event channel will be created beforehand to allow the domains to
-send notifications to each other.
-
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Signed-off-by: Andrei Semenov <andrei.semenov@vates.fr>
 ---
-Changes in v4:
- - move documentation to common place for evtchn node in booting.txt
- - Add comment why we use dt_device_static_evtchn_created()
- - check if dt_get_parent() returns NULL
- - fold process_static_evtchn_node() in alloc_static_evtchn()
-Changes in v3:
- - use device-tree used_by to find the domain id of the evtchn node.
- - add new static_evtchn_create variable in struct dt_device_node to
-   hold the information if evtchn is already created.
- - fix minor comments
-Changes in v2:
- - no change
----
- docs/misc/arm/device-tree/booting.txt |  98 +++++++++++++++++
- xen/arch/arm/domain_build.c           | 147 ++++++++++++++++++++++++++
- xen/arch/arm/include/asm/setup.h      |   1 +
- xen/arch/arm/setup.c                  |   2 +
- xen/include/xen/device_tree.h         |  16 +++
- 5 files changed, 264 insertions(+)
+ tools/include/xen-tools/libs.h           |  4 ++
+ tools/libs/guest/xg_private.h            |  3 +
+ tools/libs/guest/xg_sr_common.h          | 18 ++++-
+ tools/libs/guest/xg_sr_restore.c         | 60 +++++++---------
+ tools/libs/guest/xg_sr_restore_x86_hvm.c | 88 +++++++++++++++++++++++-
+ tools/libs/guest/xg_sr_restore_x86_pv.c  | 22 +++++-
+ 6 files changed, 154 insertions(+), 41 deletions(-)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 1b0dca1454..c8329b73e5 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -382,3 +382,101 @@ device-tree:
+diff --git a/tools/include/xen-tools/libs.h b/tools/include/xen-tools/libs.h
+index a16e0c3807..bdd903eb7b 100644
+--- a/tools/include/xen-tools/libs.h
++++ b/tools/include/xen-tools/libs.h
+@@ -63,4 +63,8 @@
+ #define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
+ #endif
  
- This will reserve a 512MB region starting at the host physical address
- 0x30000000 to be exclusively used by DomU1.
++#ifndef ROUNDDOWN
++#define ROUNDDOWN(_x,_w) ((unsigned long)(_x) & (-1UL << (_w)))
++#endif
 +
-+Static Event Channel
-+====================
-+The event channel communication will be established statically between two
-+domains (dom0 and domU also). Event channel connection information between
-+domains will be passed to Xen via the device tree node. The event channel
-+will be created and established in Xen before the domain started. The domain
-+doesn’t need to do any operation to establish a connection. Domain only
-+needs hypercall EVTCHNOP_send(local port) to send notifications to the
-+remote guest.
-+
-+There is no need to describe the static event channel info in the domU device
-+tree. Static event channels are only useful in fully static configurations,
-+and in those configurations, the domU device tree dynamically generated by Xen
-+is not needed.
-+
-+To enable the event-channel interface for domU guests include the
-+"xen,enhanced = "no-xenstore"" property in the domU Xen device tree node.
-+
-+Under the "xen,domain" compatible node for domU, there needs to be sub-nodes
-+with compatible "xen,evtchn" that describe the event channel connection
-+between two domUs. For dom0, there needs to be sub-nodes with compatible
-+"xen,evtchn" under the chosen node.
-+
-+The static event channel node has the following properties:
-+
-+- compatible
-+
-+    "xen,evtchn"
-+
-+- xen,evtchn
-+
-+    The property is tuples of two numbers
-+    (local-evtchn link-to-foreign-evtchn) where:
-+
-+    local-evtchn is an integer value that will be used to allocate local port
-+    for a domain to send and receive event notifications to/from the remote
-+    domain. Maximum supported value is 2^17 for FIFO ABI and 4096 for 2L ABI.
-+    It is recommended to use low event channel IDs.
-+
-+    link-to-foreign-evtchn is a single phandle to a remote evtchn to which
-+    local-evtchn will be connected.
-+
-+Example
-+=======
-+
-+chosen {
-+
-+    /* one sub-node per local event channel */
-+    ec1: evtchn@1 {
-+         compatible = "xen,evtchn-v1";
-+         /* local-evtchn link-to-foreign-evtchn */
-+         xen,evtchn = <0xa &ec2>;
-+    };
-+
-+    domU1 {
-+        compatible = "xen,domain";
-+        #address-cells = <0x2>;
-+        #size-cells = <0x1>;
-+        xen,enhanced = "no-xenstore";
-+
-+        /* one sub-node per local event channel */
-+        ec2: evtchn@2 {
-+            compatible = "xen,evtchn-v1";
-+            /* local-evtchn link-to-foreign-evtchn */
-+            xen,evtchn = <0xa &ec1>;
-+        };
-+
-+        ec3: evtchn@3 {
-+            compatible = "xen,evtchn-v1";
-+            xen,evtchn = <0xb &ec5>;
-+        };
-+
-+        ec4: evtchn@4 {
-+            compatible = "xen,evtchn-v1";
-+            xen,evtchn = <0xc &ec6>;
-+        };
-+    };
-+
-+    domU2 {
-+        compatible = "xen,domain";
-+        #address-cells = <0x2>;
-+        #size-cells = <0x1>;
-+        xen,enhanced = "no-xenstore";
-+
-+        /* one sub-node per local event channel */
-+        ec5: evtchn@5 {
-+            compatible = "xen,evtchn-v1";
-+            /* local-evtchn link-to-foreign-evtchn */
-+            xen,evtchn = <0xb &ec3>;
-+        };
-+
-+        ec6: evtchn@6 {
-+            compatible = "xen,evtchn-v1";
-+            xen,evtchn = <0xd &ec4>;
-+        };
-+    };
-+};
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 0b164ef595..bb96fa5096 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -33,6 +33,8 @@
- #include <xen/grant_table.h>
- #include <xen/serial.h>
+ #endif	/* __XEN_TOOLS_LIBS__ */
+diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
+index 09e24f1227..dcf63b5188 100644
+--- a/tools/libs/guest/xg_private.h
++++ b/tools/libs/guest/xg_private.h
+@@ -134,6 +134,9 @@ typedef uint64_t x86_pgentry_t;
+ #define PAGE_SIZE_X86           (1UL << PAGE_SHIFT_X86)
+ #define PAGE_MASK_X86           (~(PAGE_SIZE_X86-1))
  
-+#define STATIC_EVTCHN_NODE_SIZE_CELLS 2
++#define S_PAGE_1GB_ORDER        18
++#define S_PAGE_2MB_ORDER         9
 +
- static unsigned int __initdata opt_dom0_max_vcpus;
- integer_param("dom0_max_vcpus", opt_dom0_max_vcpus);
+ #define NRPAGES(x) (ROUNDUP(x, PAGE_SHIFT) >> PAGE_SHIFT)
  
-@@ -3052,6 +3054,150 @@ void __init evtchn_allocate(struct domain *d)
-     d->arch.hvm.params[HVM_PARAM_CALLBACK_IRQ] = val;
- }
+ static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 941e24d7b7..96365e05a8 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -137,7 +137,8 @@ struct xc_sr_restore_ops
+     bool (*pfn_is_valid)(const struct xc_sr_context *ctx, xen_pfn_t pfn);
  
-+static int __init get_evtchn_dt_property(const struct dt_device_node *np,
-+                                         uint32_t *port, uint32_t *phandle)
-+{
-+    const __be32 *prop = NULL;
-+    uint32_t len;
-+
-+    prop = dt_get_property(np, "xen,evtchn", &len);
-+    if ( !prop )
-+    {
-+        printk(XENLOG_ERR "xen,evtchn property should not be empty.\n");
-+        return -EINVAL;
-+    }
-+
-+    if ( !len || len < dt_cells_to_size(STATIC_EVTCHN_NODE_SIZE_CELLS) )
-+    {
-+        printk(XENLOG_ERR "xen,evtchn property value is not valid.\n");
-+        return -EINVAL;
-+    }
-+
-+    *port = dt_next_cell(1, &prop);
-+    *phandle = dt_next_cell(1, &prop);
-+
-+    return 0;
-+}
-+
-+static int __init alloc_domain_evtchn(struct dt_device_node *node)
-+{
-+    int rc;
-+    uint32_t domU1_port, domU2_port, remote_phandle;
-+    struct dt_device_node *remote_node;
-+    const struct dt_device_node *p1_node, *p2_node;
-+    struct evtchn_alloc_unbound alloc_unbound;
-+    struct evtchn_bind_interdomain bind_interdomain;
-+    struct domain *d1 = NULL, *d2 = NULL;
-+
-+    if ( !dt_device_is_compatible(node, "xen,evtchn-v1") )
-+        return 0;
-+
-+    /*
-+     * Event channel is already created while parsing the other side of
-+     * evtchn node.
+     /* Set the GFN of a PFN. */
+-    void (*set_gfn)(struct xc_sr_context *ctx, xen_pfn_t pfn, xen_pfn_t gfn);
++    void (*set_gfn)(struct xc_sr_context *ctx, xen_pfn_t pfn, xen_pfn_t gfn,
++                    unsigned int order);
+ 
+     /* Set the type of a PFN. */
+     void (*set_page_type)(struct xc_sr_context *ctx, xen_pfn_t pfn,
+@@ -175,6 +176,17 @@ struct xc_sr_restore_ops
+ #define BROKEN_CHANNEL 2
+     int (*process_record)(struct xc_sr_context *ctx, struct xc_sr_record *rec);
+ 
++    /**
++     * Guest physmap population order is based on heuristic which is family
++     * dependant. X86 HVM  heuristic is interested in observing the whole
++     * record (the first) in order to guess how the physmap should be populated.
 +     */
-+    if ( dt_device_static_evtchn_created(node) )
++    void (*guess_physmap)(struct xc_sr_context *ctx, unsigned int count,
++                          const xen_pfn_t *pfns, const uint32_t *types);
++
++    /* Get the physmap population order for given PFN */
++    int (*get_physmap_order)(const struct xc_sr_context *ctx, xen_pfn_t pfn);
++
+     /**
+      * Perform any actions required after the static data has arrived.  Called
+      * when the STATIC_DATA_COMPLETE record has been recieved/inferred.
+@@ -404,6 +416,10 @@ struct xc_sr_context
+                     {
+                         /* HVM context blob. */
+                         struct xc_sr_blob context;
++
++                        /* Set guest type (based on the first record) */
++                        bool set_guest_type;
++                        bool pvh_guest;
+                     } restore;
+                 };
+             } hvm;
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index 074b56d263..af864bd5ea 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -86,18 +86,21 @@ static bool pfn_is_populated(const struct xc_sr_context *ctx, xen_pfn_t pfn)
+  * avoid realloc()ing too excessively, the size increased to the nearest power
+  * of two large enough to contain the required pfn.
+  */
+-static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
++static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn,
++                             unsigned int order)
+ {
+     xc_interface *xch = ctx->xch;
++    xen_pfn_t start_pfn = ROUNDDOWN(pfn, order),
++        end_pfn = (ROUNDUP(pfn + 1, order) - 1);
+ 
+-    if ( pfn > ctx->restore.max_populated_pfn )
++    if ( end_pfn > ctx->restore.max_populated_pfn )
+     {
+         xen_pfn_t new_max;
+         size_t old_sz, new_sz;
+         unsigned long *p;
+ 
+         /* Round up to the nearest power of two larger than pfn, less 1. */
+-        new_max = pfn;
++        new_max = end_pfn;
+         new_max |= new_max >> 1;
+         new_max |= new_max >> 2;
+         new_max |= new_max >> 4;
+@@ -123,8 +126,11 @@ static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
+         ctx->restore.max_populated_pfn = new_max;
+     }
+ 
+-    assert(!test_bit(pfn, ctx->restore.populated_pfns));
+-    set_bit(pfn, ctx->restore.populated_pfns);
++    for ( pfn = start_pfn; pfn <= end_pfn; ++pfn )
++    {
++        assert(!test_bit(pfn, ctx->restore.populated_pfns));
++        set_bit(pfn, ctx->restore.populated_pfns);
++    }
+ 
+     return 0;
+ }
+@@ -138,60 +144,40 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+                   const xen_pfn_t *original_pfns, const uint32_t *types)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
+-        *pfns = malloc(count * sizeof(*pfns));
+-    unsigned int i, nr_pfns = 0;
++    xen_pfn_t mfn, pfn;
++    unsigned int i, order;
+     int rc = -1;
+ 
+-    if ( !mfns || !pfns )
+-    {
+-        ERROR("Failed to allocate %zu bytes for populating the physmap",
+-              2 * count * sizeof(*mfns));
+-        goto err;
+-    }
++    /* Feed this record for family dependant heuristic to guess the physmap */
++    ctx->restore.ops.guess_physmap(ctx, count, original_pfns, types);
+ 
+     for ( i = 0; i < count; ++i )
+     {
+         if ( (!types || page_type_to_populate(types[i])) &&
+              !pfn_is_populated(ctx, original_pfns[i]) )
+         {
+-            rc = pfn_set_populated(ctx, original_pfns[i]);
++            order = ctx->restore.ops.get_physmap_order(ctx, original_pfns[i]);
++            rc = pfn_set_populated(ctx, original_pfns[i], order);
+             if ( rc )
+                 goto err;
+-            pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
+-            ++nr_pfns;
+-        }
+-    }
+-
+-    if ( nr_pfns )
+-    {
+-        rc = xc_domain_populate_physmap_exact(
+-            xch, ctx->domid, nr_pfns, 0, 0, mfns);
+-        if ( rc )
+-        {
+-            PERROR("Failed to populate physmap");
+-            goto err;
+-        }
+ 
+-        for ( i = 0; i < nr_pfns; ++i )
+-        {
+-            if ( mfns[i] == INVALID_MFN )
++            pfn = mfn = ROUNDDOWN(original_pfns[i], order);
++            rc = xc_domain_populate_physmap_exact(xch, ctx->domid, 1, order, 0,
++                                                  &mfn);
++            if ( rc || (mfn == INVALID_MFN) )
+             {
+-                ERROR("Populate physmap failed for pfn %u", i);
++                ERROR("Failed to populate physmap for pfn %lu (%u)", pfn, order);
+                 rc = -1;
+                 goto err;
+             }
+ 
+-            ctx->restore.ops.set_gfn(ctx, pfns[i], mfns[i]);
++            ctx->restore.ops.set_gfn(ctx, pfn, mfn, order);
+         }
+     }
+ 
+     rc = 0;
+ 
+  err:
+-    free(pfns);
+-    free(mfns);
+-
+     return rc;
+ }
+ 
+diff --git a/tools/libs/guest/xg_sr_restore_x86_hvm.c b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+index d6ea6f3012..2e525443ab 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_hvm.c
++++ b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+@@ -110,7 +110,7 @@ static xen_pfn_t x86_hvm_pfn_to_gfn(const struct xc_sr_context *ctx,
+ 
+ /* restore_ops function. */
+ static void x86_hvm_set_gfn(struct xc_sr_context *ctx, xen_pfn_t pfn,
+-                            xen_pfn_t gfn)
++                            xen_pfn_t gfn, unsigned int order)
+ {
+     /* no op */
+ }
+@@ -161,6 +161,8 @@ static int x86_hvm_setup(struct xc_sr_context *ctx)
+     }
+ #endif
+ 
++    ctx->x86.hvm.restore.set_guest_type = true;
++
+     return 0;
+ }
+ 
+@@ -192,6 +194,88 @@ static int x86_hvm_process_record(struct xc_sr_context *ctx,
+     }
+ }
+ 
++/*
++ * We consider that PVH guest physmap starts from 0 and coninugiously cover the
++ * pysical memory space for the first GB of memory.  HVM guest will have I/0
++ * holes in the first 2MB of memory space (at least for VGA). Therefore we
++ * should observe the very first record (wich comes in physmap order) to find
++ * out how we should map this first GB.
++ * To map the rest of the memory space in both cases (PVH or HVM) we will use
++ * the maximum available order (up to 1GB), except for forth GB wich holds the
++ * low MMIO hole (at least for LAPIC MMIO window and for potential passthroughed
++ * or emulated PCI devices BARs).
++ */
++static void x86_hvm_guess_physmap(struct xc_sr_context *ctx, unsigned int count,
++                         const xen_pfn_t *pfns, const uint32_t *types)
++{
++    xen_pfn_t prev;
++    unsigned int i;
++
++
++    if ( !ctx->x86.hvm.restore.set_guest_type )
++        return;
++
++    for ( i = 0, prev = INVALID_PFN; i < count; ++i )
++    {
++        if ( !types || page_type_to_populate(types[i]) )
++        {
++            if ( prev == INVALID_MFN )
++            {
++                if (pfns[i] != 0)
++                    break;
++            }
++            else
++            {
++                if ( pfns[i] != (prev + 1) )
++                    break;
++            }
++            prev = pfns[i];
++        }
++    }
++
++    ctx->x86.hvm.restore.pvh_guest = (i == count) ? true : false;
++    ctx->x86.hvm.restore.set_guest_type = false;
++}
++
++/*
++ *
++ */
++static int x86_hvm_get_physmap_order(const struct xc_sr_context *ctx,
++                                      xen_pfn_t pfn)
++{
++    int order;
++
++    if ( pfn >= ctx->restore.p2m_size )
 +        return 0;
 +
-+    rc = get_evtchn_dt_property(node, &domU1_port, &remote_phandle);
-+    if ( rc )
-+        return rc;
-+
-+    remote_node = dt_find_node_by_phandle(remote_phandle);
-+    if ( !remote_node )
++    switch (pfn >> S_PAGE_1GB_ORDER)
 +    {
-+        printk(XENLOG_ERR
-+                "evtchn: could not find remote evtchn phandle\n");
-+        return -EINVAL;
++    case 3:
++        /* The forth GB of memory is mapped with 2MB superpages */
++        order = S_PAGE_2MB_ORDER;
++        break;
++    case 0:
++        if (!ctx->x86.hvm.restore.pvh_guest)
++        {
++            /* First 2MB are mapped as 4K for HVM guest */
++            order = (pfn > 0x1ff) ? S_PAGE_2MB_ORDER : 0;
++            break;
++        }
++    default:
++        order = S_PAGE_1GB_ORDER;
 +    }
 +
-+    rc = get_evtchn_dt_property(remote_node, &domU2_port, &remote_phandle);
-+    if ( rc )
-+        return rc;
++    if ( ((ROUNDUP(pfn + 1, S_PAGE_1GB_ORDER) - 1) >= ctx->restore.p2m_size) &&
++         order == S_PAGE_1GB_ORDER )
++        order = S_PAGE_2MB_ORDER;
 +
-+    if ( node->phandle != remote_phandle )
-+    {
-+        printk(XENLOG_ERR "xen,evtchn property is not setup correctly.\n");
-+        return -EINVAL;
-+    }
++    if ( ((ROUNDUP(pfn + 1, S_PAGE_2MB_ORDER) - 1) >= ctx->restore.p2m_size) &&
++         order == S_PAGE_2MB_ORDER )
++        order = 0;
 +
-+    p1_node = dt_get_parent(node);
-+    if ( !p1_node )
-+    {
-+        printk(XENLOG_ERR "evtchn: evtchn parent node is NULL\n" );
-+        return -EINVAL;
-+    }
++    return order;
++}
 +
-+    p2_node = dt_get_parent(remote_node);
-+    if ( !p2_node )
-+    {
-+        printk(XENLOG_ERR "evtchn: remote parent node is NULL\n" );
-+        return -EINVAL;
-+    }
+ /*
+  * restore_ops function.  Sets extra hvm parameters and seeds the grant table.
+  */
+@@ -258,6 +342,8 @@ struct xc_sr_restore_ops restore_ops_x86_hvm =
+     .localise_page   = x86_hvm_localise_page,
+     .setup           = x86_hvm_setup,
+     .process_record  = x86_hvm_process_record,
++    .guess_physmap   = x86_hvm_guess_physmap,
++    .get_physmap_order = x86_hvm_get_physmap_order,
+     .static_data_complete = x86_static_data_complete,
+     .stream_complete = x86_hvm_stream_complete,
+     .cleanup         = x86_hvm_cleanup,
+diff --git a/tools/libs/guest/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
+index dc50b0f5a8..f8545f941a 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_pv.c
++++ b/tools/libs/guest/xg_sr_restore_x86_pv.c
+@@ -59,7 +59,7 @@ static int expand_p2m(struct xc_sr_context *ctx, unsigned long max_pfn)
+     ctx->x86.pv.max_pfn = max_pfn;
+     for ( i = (old_max ? old_max + 1 : 0); i <= max_pfn; ++i )
+     {
+-        ctx->restore.ops.set_gfn(ctx, i, INVALID_MFN);
++        ctx->restore.ops.set_gfn(ctx, i, INVALID_MFN, 0);
+         ctx->restore.ops.set_page_type(ctx, i, 0);
+     }
+ 
+@@ -947,9 +947,10 @@ static void x86_pv_set_page_type(struct xc_sr_context *ctx, xen_pfn_t pfn,
+ 
+ /* restore_ops function. */
+ static void x86_pv_set_gfn(struct xc_sr_context *ctx, xen_pfn_t pfn,
+-                           xen_pfn_t mfn)
++                           xen_pfn_t mfn, unsigned int order)
+ {
+     assert(pfn <= ctx->x86.pv.max_pfn);
++    assert(!order);
+ 
+     if ( ctx->x86.pv.width == sizeof(uint64_t) )
+         /* 64 bit guest.  Need to expand INVALID_MFN for 32 bit toolstacks. */
+@@ -1113,6 +1114,21 @@ static int x86_pv_process_record(struct xc_sr_context *ctx,
+     }
+ }
+ 
++/*
++ * There's no reliable heuristic which can predict the PV guest physmap.
++ * Therefore the 0 order always will be used.
++ */
++static void x86_pv_guess_physmap(struct xc_sr_context *ctx, unsigned int count,
++                                 const xen_pfn_t *pfns, const uint32_t *types)
++{
++}
 +
-+    d1 = get_domain_by_id(p1_node->used_by);
-+    d2 = get_domain_by_id(p2_node->used_by);
-+
-+    if ( !d1 || !d2 )
-+    {
-+        printk(XENLOG_ERR "evtchn: could not find domains\n" );
-+        return -EINVAL;
-+    }
-+
-+    alloc_unbound.dom = d1->domain_id;
-+    alloc_unbound.remote_dom = d2->domain_id;
-+
-+    rc = evtchn_alloc_unbound(&alloc_unbound, domU1_port);
-+    if ( rc < 0 )
-+    {
-+        printk(XENLOG_ERR
-+                "evtchn_alloc_unbound() failure (Error %d) \n", rc);
-+        return rc;
-+    }
-+
-+    bind_interdomain.remote_dom  = d1->domain_id;
-+    bind_interdomain.remote_port = domU1_port;
-+
-+    rc = evtchn_bind_interdomain(&bind_interdomain, d2, domU2_port);
-+    if ( rc < 0 )
-+    {
-+        printk(XENLOG_ERR
-+                "evtchn_bind_interdomain() failure (Error %d) \n", rc);
-+        return rc;
-+    }
-+
-+    dt_device_set_static_evtchn_created(node);
-+    dt_device_set_static_evtchn_created(remote_node);
-+
++static int x86_pv_get_physmap_order(const struct xc_sr_context *ctx,
++                                    xen_pfn_t pfn)
++{
 +    return 0;
 +}
 +
-+void __init alloc_static_evtchn(void)
-+{
-+    struct dt_device_node *node, *evtchn_node;
-+    struct dt_device_node *chosen = dt_find_node_by_path("/chosen");
-+
-+    BUG_ON(chosen == NULL);
-+
-+    if ( hardware_domain )
-+        dt_device_set_used_by(chosen, hardware_domain->domain_id);
-+
-+    dt_for_each_child_node(chosen, node)
-+    {
-+        if ( hardware_domain )
-+        {
-+            if ( alloc_domain_evtchn(node) != 0 )
-+                panic("Could not set up domains evtchn\n");
-+        }
-+
-+        dt_for_each_child_node(node, evtchn_node)
-+        {
-+            if ( alloc_domain_evtchn(evtchn_node) != 0 )
-+                panic("Could not set up domains evtchn\n");
-+        }
-+    }
-+}
-+
- static void __init find_gnttab_region(struct domain *d,
-                                       struct kernel_info *kinfo)
- {
-@@ -3366,6 +3512,7 @@ void __init create_domUs(void)
-             panic("Error creating domain %s\n", dt_node_name(node));
- 
-         d->is_console = true;
-+        dt_device_set_used_by(node, d->domain_id);
- 
-         if ( construct_domU(d, node) != 0 )
-             panic("Could not set up domain %s\n", dt_node_name(node));
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 5815ccf8c5..5ee28b270f 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -106,6 +106,7 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
- 
- void create_domUs(void);
- void create_dom0(void);
-+void alloc_static_evtchn(void);
- 
- void discard_initial_modules(void);
- void fw_unreserved_regions(paddr_t s, paddr_t e,
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 6e0398f3f6..cf15d359d2 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -1077,6 +1077,8 @@ void __init start_xen(unsigned long boot_phys_offset,
-     if ( acpi_disabled )
-         create_domUs();
- 
-+    alloc_static_evtchn();
-+
-     /*
-      * This needs to be called **before** heap_init_late() so modules
-      * will be scrubbed (unless suppressed).
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 430a1ef445..a28937d12a 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -92,6 +92,10 @@ struct dt_device_node {
- 
-     /* IOMMU specific fields */
-     bool is_protected;
-+
-+    /* HACK: Remove this if there is a need of space */
-+    bool_t static_evtchn_created;
-+
-     /*
-      * The main purpose of this list is to link the structure in the list
-      * of devices assigned to domain.
-@@ -317,6 +321,18 @@ static inline bool_t dt_property_name_is_equal(const struct dt_property *pp,
-     return !dt_prop_cmp(pp->name, name);
- }
- 
-+static inline void
-+dt_device_set_static_evtchn_created(struct dt_device_node *device)
-+{
-+    device->static_evtchn_created = true;
-+}
-+
-+static inline bool_t
-+dt_device_static_evtchn_created(const struct dt_device_node *device)
-+{
-+    return device->static_evtchn_created;
-+}
-+
- /**
-  * dt_find_compatible_node - Find a node based on type and one of the
-  *                           tokens in its "compatible" property
+ /*
+  * restore_ops function.  Update the vcpu context in Xen, pin the pagetables,
+  * rewrite the p2m and seed the grant table.
+@@ -1194,6 +1210,8 @@ struct xc_sr_restore_ops restore_ops_x86_pv =
+     .localise_page   = x86_pv_localise_page,
+     .setup           = x86_pv_setup,
+     .process_record  = x86_pv_process_record,
++    .guess_physmap   = x86_pv_guess_physmap,
++    .get_physmap_order = x86_pv_get_physmap_order,
+     .static_data_complete = x86_static_data_complete,
+     .stream_complete = x86_pv_stream_complete,
+     .cleanup         = x86_pv_cleanup,
 -- 
-2.25.1
+2.34.1
 
+
+
+Andrei Semenov | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+w: vates.fr | xcp-ng.org | xen-orchestra.com
 
