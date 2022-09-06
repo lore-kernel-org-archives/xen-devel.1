@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7D3C38145
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400374.642077 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA1FDECAAA1
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400387.642088 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgST-0001Kp-SW; Tue, 06 Sep 2022 21:50:13 +0000
+	id 1oVgSb-000208-A2; Tue, 06 Sep 2022 21:50:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400374.642077; Tue, 06 Sep 2022 21:50:13 +0000
+Received: by outflank-mailman (output) from mailman id 400387.642088; Tue, 06 Sep 2022 21:50:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgST-0001Ke-OU; Tue, 06 Sep 2022 21:50:13 +0000
-Received: by outflank-mailman (input) for mailman id 400374;
- Tue, 06 Sep 2022 21:50:11 +0000
+	id 1oVgSb-0001zw-6z; Tue, 06 Sep 2022 21:50:21 +0000
+Received: by outflank-mailman (input) for mailman id 400387;
+ Tue, 06 Sep 2022 21:50:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YUvx=ZJ=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1oVgIA-0000Cs-F6
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:34 +0000
+ id 1oVgHv-0000Cs-C8
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:19 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 476269f8-2dc2-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 10:59:56 +0200 (CEST)
+ id 50df1d04-2dc2-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 11:00:12 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 69E5B1756;
- Tue,  6 Sep 2022 02:00:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C1BF139F;
+ Tue,  6 Sep 2022 02:00:22 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C70633F7B4;
- Tue,  6 Sep 2022 01:59:56 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 910463F7B4;
+ Tue,  6 Sep 2022 02:00:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,281 +45,288 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 476269f8-2dc2-11ed-af93-0125da4c0113
+X-Inumbo-ID: 50df1d04-2dc2-11ed-af93-0125da4c0113
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
-	Penny Zheng <penny.zheng@arm.com>,
+	Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 2/9] xen/arm: assign static shared memory to the default owner dom_io
-Date: Tue,  6 Sep 2022 16:59:34 +0800
-Message-Id: <20220906085941.944592-3-Penny.Zheng@arm.com>
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v7 7/9] xen/arm: create shared memory nodes in guest device tree
+Date: Tue,  6 Sep 2022 16:59:39 +0800
+Message-Id: <20220906085941.944592-8-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220906085941.944592-1-Penny.Zheng@arm.com>
 References: <20220906085941.944592-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Penny Zheng <penny.zheng@arm.com>
+We expose the shared memory to the domU using the "xen,shared-memory-v1"
+reserved-memory binding. See
+Documentation/devicetree/bindings/reserved-memory/xen,shared-memory.txt
+in Linux for the corresponding device tree binding.
 
-This commit introduces process_shm to cope with static shared memory in
-domain construction.
+To save the cost of re-parsing shared memory device tree configuration when
+creating shared memory nodes in guest device tree, this commit adds new field
+"shm_mem" to store shm-info per domain.
 
-DOMID_IO will be the default owner of memory pre-shared among multiple domains
-at boot time, when no explicit owner is specified.
-And DOMID_IO is a fake domain and is not described in the Device-Tree.
-Therefore When the owner of the shared region is DOMID_IO, we will only
-find the borrowers when parsing the Device-Tree.
-When we found the first borrower of the region, we need to assign the region to
-DOMID_IO
-
-This commit only considers allocating static shared memory to dom_io
-when owner domain is not explicitly defined in device tree, all the left,
-including the "borrower" code path, the "explicit owner" code path, shall
-be introduced later in the following patches.
+For each shared memory region, a range is exposed under
+the /reserved-memory node as a child node. Each range sub-node is
+named xen-shmem@<address> and has the following properties:
+- compatible:
+        compatible = "xen,shared-memory-v1"
+- reg:
+        the base guest physical address and size of the shared memory region
+- xen,id:
+        a string that identifies the shared memory region.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
 v7 changes:
-- page_get_owner() can only be called for pages that are marked inuse,
-so use page_get_owner_and_reference() instead
-- reference shall be dropped using put_page()
-- adjust "d->max_pages" when acquire_domstatic_pages() fails
-- switch from assert to BUG_ON() because this is init code
-- refine commit message and in-code comments
-- rename allocate_shared_memory() to assign_shared_memory()
+- allocate reg for worst case addrcells + sizecells
+- replace assert() with BUG_ON() since it is init code
 ---
 v6 change:
-- use if-array to check psize, pbase and gbase are suitably aligned and
-valid
-- use mfn_valid to check (pbase, pbase + psize)
-- check d->max_pages will not overflow
-- refine acquire_shared_memory_bank to not reuse acquire_static_memory_bank,
-then input pbase and psize do not need to be used as a pointer.
-- use if-array to check if page owner is dom_io
-- in-code comment refinement
+- change "struct meminfo *mem" to "const struct meminfo *mem"
+- change "unsigned long i" to "unsigned int i" to match the type of nr_banks.
+- accroding to the Linux binding, "xen,id" is meant to be a string, not
+an integer
 ---
 v5 change:
-- refine in-code comment
+- no change
 ---
 v4 change:
-- no changes
+- no change
 ---
 v3 change:
-- refine in-code comment
+- move field "shm_mem" to kernel_info
 ---
 v2 change:
-- instead of introducing a new system domain, reuse the existing dom_io
-- make dom_io a non-auto-translated domain, then no need to create P2M
-for it
-- change dom_io definition and make it wider to support static shm here too
-- introduce is_shm_allocated_to_domio to check whether static shm is
-allocated yet, instead of using shm_mask bitmap
-- add in-code comment
+- using xzalloc
+- shm_id should be uint8_t
+- make reg a local variable
+- add #address-cells and #size-cells properties
+- fix alignment
 ---
- xen/arch/arm/domain_build.c | 160 ++++++++++++++++++++++++++++++++++++
- xen/common/domain.c         |   3 +
- 2 files changed, 163 insertions(+)
+ xen/arch/arm/domain_build.c       | 147 +++++++++++++++++++++++++++++-
+ xen/arch/arm/include/asm/kernel.h |   1 +
+ 2 files changed, 146 insertions(+), 2 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 3fd1186b53..be98ff83b1 100644
+index d0ff487cc6..3b7436030e 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -759,6 +759,160 @@ static void __init assign_static_memory_11(struct domain *d,
-     panic("Failed to assign requested static memory for direct-map domain %pd.",
-           d);
+@@ -914,7 +914,22 @@ static int __init assign_shared_memory(struct domain *d,
+     return ret;
  }
-+
-+#ifdef CONFIG_STATIC_SHM
-+/*
-+ * This function checks whether the static shared memory region is
-+ * already allocated to dom_io.
-+ */
-+static bool __init is_shm_allocated_to_domio(paddr_t pbase)
+ 
+-static int __init process_shm(struct domain *d,
++static int __init append_shm_bank_to_domain(struct kernel_info *kinfo,
++                                            paddr_t start, paddr_t size,
++                                            const char *shm_id)
 +{
-+    struct page_info *page;
-+    struct domain *d;
++    if ( (kinfo->shm_mem.nr_banks + 1) > NR_MEM_BANKS )
++        return -ENOMEM;
 +
-+    page = maddr_to_page(pbase);
-+    d = page_get_owner_and_reference(page);
-+    if ( d == NULL )
-+        return false;
-+    put_page(page);
++    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].start = start;
++    kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].size = size;
++    safe_strcpy(kinfo->shm_mem.bank[kinfo->shm_mem.nr_banks].shm_id, shm_id);
++    kinfo->shm_mem.nr_banks++;
 +
-+    if ( d != dom_io )
-+    {
-+        printk(XENLOG_ERR
-+               "shm memory node has already been allocated to a specific owner %pd, Please check your configuration\n",
-+               d);
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static mfn_t __init acquire_shared_memory_bank(struct domain *d,
-+                                               paddr_t pbase, paddr_t psize)
-+{
-+    mfn_t smfn;
-+    unsigned long nr_pfns;
-+    int res;
-+
-+    /*
-+     * Pages of statically shared memory shall be included
-+     * into domain_tot_pages().
-+     */
-+    nr_pfns = PFN_DOWN(psize);
-+    if ( (UINT_MAX - d->max_pages) < nr_pfns )
-+    {
-+        printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
-+               d, nr_pfns);
-+        return INVALID_MFN;
-+    }
-+    d->max_pages += nr_pfns;
-+
-+    smfn = maddr_to_mfn(pbase);
-+    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
-+    if ( res )
-+    {
-+        printk(XENLOG_ERR
-+               "%pd: failed to acquire static memory: %d.\n", d, res);
-+        d->max_pages -= nr_pfns;
-+        return INVALID_MFN;
-+    }
-+
-+    return smfn;
-+}
-+
-+static int __init assign_shared_memory(struct domain *d,
-+                                       uint32_t addr_cells, uint32_t size_cells,
-+                                       paddr_t pbase, paddr_t psize)
-+{
-+    mfn_t smfn;
-+
-+    dprintk(XENLOG_INFO,
-+            "%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
-+            d, pbase, pbase + psize);
-+
-+    smfn = acquire_shared_memory_bank(d, pbase, psize);
-+    if ( mfn_eq(smfn, INVALID_MFN) )
-+        return -EINVAL;
-+
-+    /*
-+     * DOMID_IO is auto-translated (i.e. it seems RAM 1:1). So we do not need
-+     * to create mapping in the P2M.
-+     */
-+    ASSERT(d == dom_io);
 +    return 0;
 +}
 +
-+static int __init process_shm(struct domain *d,
-+                              const struct dt_device_node *node)
-+{
-+    struct dt_device_node *shm_node;
++static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
+                               const struct dt_device_node *node)
+ {
+     struct dt_device_node *shm_node;
+@@ -928,6 +943,7 @@ static int __init process_shm(struct domain *d,
+         int ret = 0;
+         unsigned int i;
+         const char *role_str;
++        const char *shm_id;
+         bool owner_dom_io = true;
+ 
+         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
+@@ -972,6 +988,9 @@ static int __init process_shm(struct domain *d,
+         if ( dt_property_read_string(shm_node, "role", &role_str) == 0 )
+             owner_dom_io = false;
+ 
++        dt_property_read_string(shm_node, "xen,shm-id", &shm_id);
++        BUG_ON((strlen(shm_id) <= 0) || (strlen(shm_id) >= MAX_SHM_ID_LENGTH));
 +
-+    dt_for_each_child_node(node, shm_node)
-+    {
-+        const struct dt_property *prop;
-+        const __be32 *cells;
-+        uint32_t addr_cells, size_cells;
-+        paddr_t gbase, pbase, psize;
-+        int ret = 0;
-+        unsigned int i;
-+
-+        if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
-+            continue;
+         /*
+          * DOMID_IO is a fake domain and is not described in the Device-Tree.
+          * Therefore when the owner of the shared region is DOMID_IO, we will
+@@ -999,6 +1018,14 @@ static int __init process_shm(struct domain *d,
+             if ( ret )
+                 return ret;
+         }
 +
 +        /*
-+         * xen,shared-mem = <pbase, gbase, size>;
-+         * TODO: pbase is optional.
++         * Record static shared memory region info for later setting
++         * up shm-node in guest device tree.
 +         */
-+        addr_cells = dt_n_addr_cells(shm_node);
-+        size_cells = dt_n_size_cells(shm_node);
-+        prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
-+        BUG_ON(!prop);
-+        cells = (const __be32 *)prop->value;
-+        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
-+        psize = dt_read_number(cells, size_cells);
-+        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
-+        {
-+            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
-+                   d, pbase, gbase);
-+            return -EINVAL;
-+        }
-+        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
-+        {
-+            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
-+                   d, psize);
-+            return -EINVAL;
-+        }
-+
-+        for ( i = 0; i < PFN_DOWN(psize); i++ )
-+            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
-+            {
-+                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
-+                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
-+                return -EINVAL;
-+            }
-+
-+        /* TODO: Consider owner domain is not the default dom_io. */
-+        /*
-+         * DOMID_IO is a fake domain and is not described in the Device-Tree.
-+         * Therefore when the owner of the shared region is DOMID_IO, we will
-+         * only find the borrowers.
-+         */
-+        if ( !is_shm_allocated_to_domio(pbase) )
-+        {
-+            /*
-+             * We found the first borrower of the region, the owner was not
-+             * specified, so they should be assigned to dom_io.
-+             */
-+            ret = assign_shared_memory(dom_io, addr_cells, size_cells,
-+                                       pbase, psize);
-+            if ( ret )
-+                return ret;
-+        }
-+    }
-+
-+    return 0;
-+}
-+#endif /* CONFIG_STATIC_SHM */
- #else
- static void __init allocate_static_memory(struct domain *d,
-                                           struct kernel_info *kinfo,
-@@ -3236,6 +3390,12 @@ static int __init construct_domU(struct domain *d,
-     else
-         assign_static_memory_11(d, &kinfo, node);
++        ret = append_shm_bank_to_domain(kinfo, gbase, psize, shm_id);
++        if ( ret )
++            return ret;
+     }
+ 
+     return 0;
+@@ -1329,6 +1356,117 @@ static int __init make_memory_node(const struct domain *d,
+     return res;
+ }
  
 +#ifdef CONFIG_STATIC_SHM
-+    rc = process_shm(d, node);
-+    if ( rc < 0 )
-+        return rc;
++static int __init make_shm_memory_node(const struct domain *d,
++                                       void *fdt,
++                                       int addrcells, int sizecells,
++                                       const struct meminfo *mem)
++{
++    unsigned int i = 0;
++    int res = 0;
++
++    if ( mem->nr_banks == 0 )
++        return -ENOENT;
++
++    /*
++     * For each shared memory region, a range is exposed under
++     * the /reserved-memory node as a child node. Each range sub-node is
++     * named xen-shmem@<address>.
++     */
++    dt_dprintk("Create xen-shmem node\n");
++
++    for ( ; i < mem->nr_banks; i++ )
++    {
++        uint64_t start = mem->bank[i].start;
++        uint64_t size = mem->bank[i].size;
++        /* Placeholder for xen-shmem@ + a 64-bit number + \0 */
++        char buf[27];
++        const char compat[] = "xen,shared-memory-v1";
++        /* Worst case addrcells + sizecells */
++        __be32 reg[4];
++        __be32 *cells;
++        unsigned int len = (addrcells + sizecells) * sizeof(__be32);
++
++        snprintf(buf, sizeof(buf), "xen-shmem@%"PRIx64, mem->bank[i].start);
++        res = fdt_begin_node(fdt, buf);
++        if ( res )
++            return res;
++
++        res = fdt_property(fdt, "compatible", compat, sizeof(compat));
++        if ( res )
++            return res;
++
++        cells = reg;
++        dt_child_set_range(&cells, addrcells, sizecells, start, size);
++
++        res = fdt_property(fdt, "reg", reg, len);
++        if ( res )
++            return res;
++
++        dt_dprintk("Shared memory bank %u: %#"PRIx64"->%#"PRIx64"\n",
++                   i, start, start + size);
++
++        res = fdt_property_string(fdt, "xen,id", mem->bank[i].shm_id);
++        if ( res )
++            return res;
++
++        res = fdt_end_node(fdt);
++        if ( res )
++            return res;
++    }
++
++    return res;
++}
++#else
++static int __init make_shm_memory_node(const struct domain *d,
++                                       void *fdt,
++                                       int addrcells, int sizecells,
++                                       struct meminfo *mem)
++{
++    ASSERT_UNREACHABLE();
++}
 +#endif
 +
++static int __init make_resv_memory_node(const struct domain *d,
++                                        void *fdt,
++                                        int addrcells, int sizecells,
++                                        struct meminfo *mem)
++{
++    int res = 0;
++    /* Placeholder for reserved-memory\0 */
++    char resvbuf[16] = "reserved-memory";
++
++    if ( mem->nr_banks == 0 )
++        /* No shared memory provided. */
++        return 0;
++
++    dt_dprintk("Create reserved-memory node\n");
++
++    res = fdt_begin_node(fdt, resvbuf);
++    if ( res )
++        return res;
++
++    res = fdt_property(fdt, "ranges", NULL, 0);
++    if ( res )
++        return res;
++
++    res = fdt_property_cell(fdt, "#address-cells", addrcells);
++    if ( res )
++        return res;
++
++    res = fdt_property_cell(fdt, "#size-cells", sizecells);
++    if ( res )
++        return res;
++
++    res = make_shm_memory_node(d, fdt, addrcells, sizecells, mem);
++    if ( res )
++        return res;
++
++    res = fdt_end_node(fdt);
++
++    return res;
++}
++
+ static int __init add_ext_regions(unsigned long s, unsigned long e, void *data)
+ {
+     struct meminfo *ext_regions = data;
+@@ -3106,6 +3244,11 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+     if ( ret )
+         goto err;
+ 
++    ret = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
++                                &kinfo->shm_mem);
++    if ( ret )
++        goto err;
++
      /*
-      * Base address and irq number are needed when creating vpl011 device
-      * tree node in prepare_dtb_domU, so initialization on related variables
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 7062393e37..fbd290ece7 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -783,6 +783,9 @@ void __init setup_system_domains(void)
-      * This domain owns I/O pages that are within the range of the page_info
-      * array. Mappings occur at the priv of the caller.
-      * Quarantined PCI devices will be associated with this domain.
-+     *
-+     * DOMID_IO is also the default owner of memory pre-shared among multiple
-+     * domains at boot time.
-      */
-     dom_io = domain_create(DOMID_IO, NULL, 0);
-     if ( IS_ERR(dom_io) )
+      * domain_handle_dtb_bootmodule has to be called before the rest of
+      * the device tree is generated because it depends on the value of
+@@ -3482,7 +3625,7 @@ static int __init construct_domU(struct domain *d,
+         assign_static_memory_11(d, &kinfo, node);
+ 
+ #ifdef CONFIG_STATIC_SHM
+-    rc = process_shm(d, node);
++    rc = process_shm(d, &kinfo, node);
+     if ( rc < 0 )
+         return rc;
+ #endif
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index c4dc039b54..2cc506b100 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -19,6 +19,7 @@ struct kernel_info {
+     void *fdt; /* flat device tree */
+     paddr_t unassigned_mem; /* RAM not (yet) assigned to a bank */
+     struct meminfo mem;
++    struct meminfo shm_mem;
+ 
+     /* kernel entry point */
+     paddr_t entry;
 -- 
 2.25.1
 
