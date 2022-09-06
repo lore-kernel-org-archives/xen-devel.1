@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCEE6ECAAA1
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400403.642143 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E09FAC38145
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400411.642154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSn-000400-Gj; Tue, 06 Sep 2022 21:50:33 +0000
+	id 1oVgSp-0004Qs-PU; Tue, 06 Sep 2022 21:50:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400403.642143; Tue, 06 Sep 2022 21:50:33 +0000
+Received: by outflank-mailman (output) from mailman id 400411.642154; Tue, 06 Sep 2022 21:50:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSn-0003zk-Aj; Tue, 06 Sep 2022 21:50:33 +0000
-Received: by outflank-mailman (input) for mailman id 400403;
- Tue, 06 Sep 2022 21:50:31 +0000
+	id 1oVgSp-0004Qe-L9; Tue, 06 Sep 2022 21:50:35 +0000
+Received: by outflank-mailman (input) for mailman id 400411;
+ Tue, 06 Sep 2022 21:50:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lcW6=ZJ=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oVgI7-0000Cs-Ec
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:31 +0000
+ id 1oVgIP-0000Cs-HA
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:49 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id dd83d0cd-2dca-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 12:01:24 +0200 (CEST)
+ id dc1713fa-2dca-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 12:01:22 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A1963D6E;
- Tue,  6 Sep 2022 03:01:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5F8D8176C;
+ Tue,  6 Sep 2022 03:01:29 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 482E73F534;
- Tue,  6 Sep 2022 03:01:24 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1F1DA3F534;
+ Tue,  6 Sep 2022 03:01:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,72 +45,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd83d0cd-2dca-11ed-af93-0125da4c0113
+X-Inumbo-ID: dc1713fa-2dca-11ed-af93-0125da4c0113
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Will Deacon <will@kernel.org>
-Subject: [PATCH v4 10/10] xen/arm: smmuv3: Avoid open coded arithmetic in memory allocation
-Date: Tue,  6 Sep 2022 10:55:57 +0100
-Message-Id: <ebbfb61417f73bbfca341a9f0b97c6c372ac5865.1662455798.git.rahul.singh@arm.com>
+	kernel test robot <lkp@intel.com>
+Subject: [PATCH v4 09/10] xen/arm: smmuv3: Fix fall-through warning for Clang
+Date: Tue,  6 Sep 2022 10:55:56 +0100
+Message-Id: <8ac83afdb6be598dc9965f86041f5a515486a7c4.1662455798.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1662455798.git.rahul.singh@arm.com>
 References: <cover.1662455798.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
 
-Backport Linux commit 98b64741d611. This is the clean backport without
-any changes
+Backport Linux commit 5a1ab5c0299a. This is the clean backport without
+any changes.
 
-kmalloc_array()/kcalloc() should be used to avoid potential overflow
-when a multiplication is needed to compute the size of the requested
-memory.
+Fix the following fallthrough warning (arm64-randconfig with Clang):
 
-So turn a devm_kzalloc()+explicit size computation into an
-equivalent devm_kcalloc().
+drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c:382:2: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]
 
-Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-Acked-by: Robin Murphy <robin.murphy@arm.com>
-Link: https://lore.kernel.org/r/3f7b9b202c6b6f5edc234ab7af5f208fbf8bc944.1644274051.git.christophe.jaillet@wanadoo.fr
-Signed-off-by: Will Deacon <will@kernel.org>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 98b64741d611
+Reported-by: kernel test robot <lkp@intel.com>
+Link: https://lore.kernel.org/lkml/60edca25.k00ut905IFBjPyt5%25lkp@intel.com/
+Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 5a1ab5c0299a
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v4:
 - Move Stefano Acked-by after Signed-off
 Changes in v3:
- - Added Stefano Acked-by
+ - Added Stefano Acked-by.
 Changes in v2:
- - fix commit msg
+ - fix commit msg.
 ---
- xen/drivers/passthrough/arm/smmu-v3.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/drivers/passthrough/arm/smmu-v3.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index b8ca4b0a24..9c9f463009 100644
+index c47e7dea04..b8ca4b0a24 100644
 --- a/xen/drivers/passthrough/arm/smmu-v3.c
 +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1644,10 +1644,10 @@ static int arm_smmu_init_l1_strtab(struct arm_smmu_device *smmu)
- {
- 	unsigned int i;
- 	struct arm_smmu_strtab_cfg *cfg = &smmu->strtab_cfg;
--	size_t size = sizeof(*cfg->l1_desc) * cfg->num_l1_ents;
- 	void *strtab = smmu->strtab_cfg.strtab;
- 
--	cfg->l1_desc = _xzalloc(size, sizeof(void *));
-+	cfg->l1_desc = _xzalloc_array(sizeof(*cfg->l1_desc), sizeof(void *),
-+								  cfg->num_l1_ents);
- 	if (!cfg->l1_desc)
- 		return -ENOMEM;
- 
+@@ -492,6 +492,7 @@ static void arm_smmu_cmdq_skip_err(struct arm_smmu_device *smmu)
+ 	switch (idx) {
+ 	case CMDQ_ERR_CERROR_ABT_IDX:
+ 		dev_err(smmu->dev, "retrying command fetch\n");
++		return;
+ 	case CMDQ_ERR_CERROR_NONE_IDX:
+ 		return;
+ 	case CMDQ_ERR_CERROR_ATC_INV_IDX:
 -- 
 2.25.1
 
