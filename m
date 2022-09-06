@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FD1C54EE9
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:37:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400063.641638 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98694C6FA8B
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:37:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400062.641632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgFr-0000f1-Lh; Tue, 06 Sep 2022 21:37:11 +0000
+	id 1oVgFr-0000Yt-AC; Tue, 06 Sep 2022 21:37:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400063.641638; Tue, 06 Sep 2022 21:37:11 +0000
+Received: by outflank-mailman (output) from mailman id 400062.641632; Tue, 06 Sep 2022 21:37:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgFr-0000dX-CX; Tue, 06 Sep 2022 21:37:11 +0000
-Received: by outflank-mailman (input) for mailman id 400063;
- Tue, 06 Sep 2022 21:37:10 +0000
+	id 1oVgFr-0000XB-15; Tue, 06 Sep 2022 21:37:11 +0000
+Received: by outflank-mailman (input) for mailman id 400062;
+ Tue, 06 Sep 2022 21:37:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+HoH=ZJ=citrix.com=prvs=2410c4419=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oVgFq-0000Cs-JZ
- for xen-devel@lists.xen.org; Tue, 06 Sep 2022 21:37:10 +0000
+ id 1oVgFp-0000Cs-Gl
+ for xen-devel@lists.xen.org; Tue, 06 Sep 2022 21:37:09 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0d260ed1-2e03-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 18:43:37 +0200 (CEST)
+ id 2306c22a-2e01-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 18:29:55 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,49 +38,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d260ed1-2e03-11ed-af93-0125da4c0113
+X-Inumbo-ID: 2306c22a-2e01-11ed-af93-0125da4c0113
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1662482617;
+  d=citrix.com; s=securemail; t=1662481795;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=pa1RL658MOY2x+MYF4zQp4voWWRCaFCGRfsvy99OMWo=;
-  b=Vp09P5ZDm4EMHpCzpnc+TFMr3ZFzY4z4KJhdTPfksklee7IgkY1rq33S
-   SbSL34gRg9MFC69F/33iNdtSjAIB9tXSSluneRA9Gke1jd3S5sX8MJjUT
-   b6MRNPpnhI1WRTt+W5R8AjnBXhHgz9MysaRICuVdcsxi2YCAcUGg0dYXu
-   4=;
+  bh=0G/6mXL/Y37gyhQ+RC+HyWT47eAXf3k8XGHQflSS00o=;
+  b=WSSWx9Oy3+kf2yf5PfhPGeinJnfTfHn6qA603bz5+RhkK3h0qDpyRYXJ
+   0P23MLRI/YUekptwf7JKBhto0sHUKZSFJTRCJqwf4xUg8bQPd7qgAbu3C
+   EIPURbt3Jlad15tmSksd92LGRLd6nB9ezvPSrXlBltClTn9N8u8ZWHAHA
+   0=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 80311183
+X-MesageID: 80309892
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:EaDUKKI+4Vk12QjLFE+Rt5IlxSXFcZb7ZxGr2PjKsXjdYENShmMEz
- GUYWmmOP/uMMzPwLt9wYI+x9k9Xv8LXytAwQQFlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokf0/0vraP65xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOd8iYNz6TSDK1rlV
- eja/ouOYzdJ5xYuajhOs/Pb9ks11BjPkGhwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 44vG5ngows1Vz90Yj+Uuu6Tnn8iG9Y+DiDX4pZiYICwgwAqm8AH+v1T2Mzwy6tgo27hc9hZk
- L2hvHErIOsjFvWkdO81C3G0H8ziVEHvFXCuzXWX6KSuI0P6n3TEk7ZILkE0F5Eh0d0sBU5ez
- LscEhUXV0XW7w626OrTpuhEg80iKI/gPZ8Fu2EmxjbcZRokacmdGeOQv4YehWpuwJAVdRrdT
- 5NxhT5HZRLcYxpJKxEPBYg3huuAjXjjaTxI7lmSoMLb5kCDlFcoieG9a7I5fPSlHsly3X+Hj
- FncvHXiOkwkM4KA43mKpyfEaujnwnqgBdN6+KeD3uFuqE2ewCoUEhJ+fVy/rPqill+lW/pQL
- kUV/mwlqq1a3EmqTdS7Xxq8pXOflhodXdNKFKs98g7l4q3Q7gWCD24IVAldeccmv887Qz8t/
- lKRltavDjtq2JWXVHac+7G8vT60fy8PIgcqZyAeShAey8L+u4x1hRXKJv5mGbK1j9DoXyn3w
- iqLoTIWg7QVhNQMka68+DjvnTOqrZXPUkg6+wTLQmW5xgd4Yoe/YMqv81ezxeZNKsOVQ0eMu
- FAAmtOC96YeAJfLkzaCKM0THauk/PbDMyDZiERHG5gn/i6qvXm5cuh4+y1zKk5vNYAfZTbjb
- UvXuAVQzI9SOHqsfel8ZIfZI80uwLimH9njUP3ZRt5PZJFrc0mA5i4GTVWMxWnxl1NpnawhE
- ZCDNMKtFmoBT6BmyjOsQKEay7BD+8wl7TqNH9ahlU3hiOfAIi7OIVsYDLeQRrB6yoGEoi/Jy
- v1kbM+l2ywYVNfbeBCCpOb/Mms2wWgH6YHe8pIJLLbTeVs4RgnNGNeKn+p/JtUNc7B9076Ro
- yrjAhIwJE/X3yWvFOmcVpx0hFoDt75bpGlzAyEjNE3AN5MLMdf2t/d3m3fakNAaGA1fIR1cF
- aNtlz2oWKgnd9g+0211gWPBhIJjbg+3ogmFIjCoZjMyF7Y5GVKTpoe+L1S0rnZXZsZSiSfZi
- +T5vj43vLJZH1gyZCooQKnHI6yNUYg1x7spAhqgzih7c0Tw6ol6QxHMYgsMC5hVcX3+Ks6yj
- Vn+7eEw+baQ+OfYMbDh2ci5kmteO7ImTxoGQzmLse3e2Ouz1jPL/LKsmd2gJVj1PF4YMo37D
- QmJ55kQ6ME6oWs=
-IronPort-HdrOrdr: A9a23:CrupV676w5DMWc3LnAPXwMrXdLJyesId70hD6qhwISY1TiW9rb
- HIoB17726RtN9/Yh0dcLy7V5VoBEmsk6KdgrNhWItKPjOW21dARbsKheCJrgEIWReOlNK1vZ
- 0QCpSWY+eRMbEVt6jH3DU=
+IronPort-Data: A9a23:/4G4RawJIhQ3HtDeT5d6t+dWwSrEfRIJ4+MujC+fZmUNrF6WrkVTz
+ 2EeDWuGOvePYjehKNonYInkpkxQu5TSmNFhQQM/qCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnj/0bv676yEUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii8tjjMPR7zml4
+ LsemOWCfg7+s9JIGjhMsfjb+Usx5K6aVA4w5TTSW9ga5DcyqFFNZH4vDfnZB2f1RIBSAtm7S
+ 47rpF1u1jqEl/uFIorNfofTKiXmcJaLVeS9oiM+t5yZqgpDvkQPPpMTb5LwX6v1ZwKhxLidw
+ P0V3XC5pJxA0qfkwIzxWDEAe81y0DEvFBYq7hFTvOTKp3AqfUcAzN1qVmUXBa8j+9xeAFF/6
+ uY/MnM8Qz6M0rfeLLKTEoGAh+wmJcjveogepmth3XfSCvNOrZLrGvuQo4UChXFp254ITa22i
+ 8kxMFKDaDzJZQFPPVEGToozhu6yilH0ciFCqULTrq0yi4TW5Fwpi+C8YIuPEjCMbeJz3U2ni
+ FnexV78CxwRbfjE1mG37W3504cjmgukAdlPRdVU7MVCn1m71mEVThoMWjOTpv20iVWiSslfA
+ 0MR8ysq66M18SSDS9j+Ulu4p3qBswU0X9tWGvc9rgaXxcL85AKUBXMNSDJbX8A3r889RTEs1
+ VihksvgAHpkt7j9YXCA8raZqxuiNC5TKnUNDQcGQhEC+MLLu5wog1TESdMLOKu8kt30FCy22
+ zeLtikznZ0XjMgCzaL99lfC6xqyp57CQwgpoArKX3656R9RYI+jbpavr1/B4p5oPIufC1WMo
+ nUAs8yf9/wVS4GAkmqKWuplNK+o/fueMHvfnFtmBbEl9jKk4XnleppfiBllOEpnO8ADPyT1a
+ UXevQdQ4p57LHqubKlnJYm2DqwCxKztBZLvW/bSY9dmZpl3fRWAuiZ0aia4xHz3mVQriuQzN
+ Imzdt7pCXcBFb8hyDuwTv0al7gxyUgDKXj7HM6hiU79iPzHOSDTGext3Eaygv4R6PmggT33y
+ NdlHsq6+gpFd/e9UwT5/ttGRbwVFkTXFawauuQOKLDZelo9ST9/YxPC6eh/ItI4xsy5gs+Np
+ yjgAREAlTITkFWdcW23hmZfhKQDtHqVhVYyJmQSMFmhwBDPiq7/vf5EJ/PbkVTKndGPLMKYr
+ NFfIa1s+twVFlz6F801NPERVrBKehWxnh6pNCG4ejU5dJMIb1WXpIW4JlG+q3JUUXPfWS4CT
+ 1qIj1qzfHb+b146UJa+hAyHlDtdQkTxaMotBhCVc7G/iW3n8ZRwKjyZs8Lb1/okcEybrgZ2I
+ i7MXn/0U8GR/NJumDQI7IjYx7qU/xxWRxAFQDeEsufvZUE3PAOLmOd9bQpBRhiFPEucxUloT
+ b4Kpx0gGJXrRGp3jrc=
+IronPort-HdrOrdr: A9a23:5R4ZR6qHimWS2n3Kjoydy3oaV5oreYIsimQD101hICG8cqSj+f
+ xGuM5rsSMc6QxhPU3I9ursBEDtex/hHNtOkO4s1NSZLWvbUQmTTL2KhLGKq1aLJ8S9zJ8/6U
+ 4JSdkZNDSaNzlHZKjBjzWFLw==
 X-IronPort-AV: E=Sophos;i="5.93,294,1654574400"; 
-   d="scan'208";a="80311183"
-Date: Tue, 6 Sep 2022 17:43:30 +0100
+   d="scan'208";a="80309892"
+Date: Tue, 6 Sep 2022 17:29:31 +0100
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: Viresh Kumar <viresh.kumar@linaro.org>
 CC: <xen-devel@lists.xen.org>, Vincent Guittot <vincent.guittot@linaro.org>,
@@ -90,48 +90,78 @@ CC: <xen-devel@lists.xen.org>, Vincent Guittot <vincent.guittot@linaro.org>,
 	<mike.holmes@linaro.org>, Oleksandr Tyshchenko <olekstysh@gmail.com>, Wei Liu
 	<wl@xen.org>, Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: Re: [PATCH V5 6/6] libxl: Allocate MMIO params for GPIO device and
- update DT
-Message-ID: <Yxd4srBXfXZKVoxm@perard.uk.xensource.com>
+Subject: Re: [PATCH V5 3/6] libxl: arm: Create alloc_virtio_mmio_params()
+Message-ID: <Yxd1a1m9aH7tkk5F@perard.uk.xensource.com>
 References: <cover.1661159474.git.viresh.kumar@linaro.org>
- <4a238937ceb803f494e5633a3a779866383bd463.1661159474.git.viresh.kumar@linaro.org>
+ <e07aa93a748525d81d6524c492347626ca7a362a.1661159474.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <4a238937ceb803f494e5633a3a779866383bd463.1661159474.git.viresh.kumar@linaro.org>
+In-Reply-To: <e07aa93a748525d81d6524c492347626ca7a362a.1661159474.git.viresh.kumar@linaro.org>
 
-On Mon, Aug 22, 2022 at 02:45:18PM +0530, Viresh Kumar wrote:
-> This patch allocates Virtio MMIO params (IRQ and memory region) and pass
-> them to the backend, also update Guest device-tree based on Virtio GPIO
-> DT bindings [1].
+On Mon, Aug 22, 2022 at 02:45:15PM +0530, Viresh Kumar wrote:
+> Create a separate routine to allocate base and irq for a device as the
+> same code will be required for each device type.
 > 
-> [1] https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio-virtio.yaml
-> 
+> Suggested-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 > ---
->  tools/libs/light/libxl_arm.c | 51 ++++++++++++++++++++++++++++++++++++
->  1 file changed, 51 insertions(+)
+>  tools/libs/light/libxl_arm.c | 46 +++++++++++++++++++++++++-----------
+>  1 file changed, 32 insertions(+), 14 deletions(-)
 > 
 > diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-> index 4c1012e56893..86c1e560900f 100644
+> index 1a3ac1646e94..0e3051bac5e4 100644
 > --- a/tools/libs/light/libxl_arm.c
 > +++ b/tools/libs/light/libxl_arm.c
-> @@ -121,6 +121,15 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
->              return rc;
+> @@ -85,20 +103,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+>          libxl_device_disk *disk = &d_config->disks[i];
+>  
+>          if (disk->specification == LIBXL_DISK_SPECIFICATION_VIRTIO) {
+> -            disk->base = alloc_virtio_mmio_base(gc, &virtio_mmio_base);
+> -            if (!disk->base)
+> -                return ERROR_FAIL;
+> -
+> -            disk->irq = alloc_virtio_mmio_irq(gc, &virtio_mmio_irq);
+> -            if (!disk->irq)
+> -                return ERROR_FAIL;
+> +            int rc = alloc_virtio_mmio_params(gc, &disk->base, &disk->irq,
+> +                                              &virtio_mmio_base,
+> +                                              &virtio_mmio_irq);
+>  
+> -            if (virtio_irq < disk->irq)
+> -                virtio_irq = disk->irq;
+> -            virtio_enabled = true;
+
+This change to virtio_irq and virtio_enabled, as well as the chunck
+below, isn't explained in the patch description.
+
+> -
+> -            LOG(DEBUG, "Allocate Virtio MMIO params for Vdev %s: IRQ %u BASE 0x%"PRIx64,
+> -                disk->vdev, disk->irq, disk->base);
+> +            if (rc)
+> +                return rc;
+>          }
 >      }
 >  
-> +    for (i = 0; i < d_config->num_gpios; i++) {
-> +        libxl_device_gpio *gpio = &d_config->gpios[i];
-> +    int rc = alloc_virtio_mmio_params(gc, &gpio->base, &gpio->irq,
-
-Indentation seems wrong here.
-
-Also, you could declare "rc" (without an initial value) for the whole
-function rather than declaring it in each for loop scope.
-
-Then, this patch could be squash into the one that adds GPIO support to
-libxl.
+> @@ -107,8 +117,16 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+>       * present, make sure that we allocate enough SPIs for them.
+>       * The resulting "nr_spis" needs to cover the highest possible SPI.
+>       */
+> -    if (virtio_enabled)
+> +    if (virtio_mmio_irq != GUEST_VIRTIO_MMIO_SPI_FIRST) {
+> +        virtio_enabled = true;
+> +
+> +        /*
+> +         * Assumes that "virtio_mmio_irq" is the highest allocated irq, which is
+> +         * updated from alloc_virtio_mmio_irq() currently.
+> +         */
+> +        virtio_irq = virtio_mmio_irq - 1;
+>          nr_spis = max(nr_spis, virtio_irq - 32 + 1);
+> +    }
+>  
+>      for (i = 0; i < d_config->b_info.num_irqs; i++) {
+>          uint32_t irq = d_config->b_info.irqs[i];
 
 Thanks,
 
