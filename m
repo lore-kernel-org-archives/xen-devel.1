@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C095EC38145
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:39:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400138.641780 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79AEFECAAA1
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:39:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400142.641789 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgHq-000825-Sp; Tue, 06 Sep 2022 21:39:14 +0000
+	id 1oVgHs-0008Ni-4L; Tue, 06 Sep 2022 21:39:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400138.641780; Tue, 06 Sep 2022 21:39:14 +0000
+Received: by outflank-mailman (output) from mailman id 400142.641789; Tue, 06 Sep 2022 21:39:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgHq-00081N-JJ; Tue, 06 Sep 2022 21:39:14 +0000
-Received: by outflank-mailman (input) for mailman id 400138;
+	id 1oVgHr-0008MW-Ux; Tue, 06 Sep 2022 21:39:15 +0000
+Received: by outflank-mailman (input) for mailman id 400142;
  Tue, 06 Sep 2022 21:39:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=y6pK=ZJ=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1oVgHG-0000Cs-5N
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:38:38 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Hbfa=ZJ=kernel.org=sj@srs-se1.protection.inumbo.net>)
+ id 1oVgGA-0000Cs-JT
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:37:30 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4a9f8d7d-2df7-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 17:19:26 +0200 (CEST)
-Received: by mail-pf1-x435.google.com with SMTP id o126so2695771pfb.6
- for <xen-devel@lists.xenproject.org>; Tue, 06 Sep 2022 08:19:25 -0700 (PDT)
+ id 5eee24f9-2e00-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 18:24:25 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E5EA6614A7;
+ Tue,  6 Sep 2022 16:24:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6D5CC433C1;
+ Tue,  6 Sep 2022 16:24:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,182 +45,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a9f8d7d-2df7-11ed-af93-0125da4c0113
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=XWFZ4vpQXZV3nrlkQj2xV+OEMAM0JTmWSZ9iqG0RFzM=;
-        b=tuEY+cBXOGTWnnKi0v2V50lRBvidObSqy8a28X+SQ5zwCK8JJEFavk/Z/NcWwMRAUt
-         tZKhO07uOtxBe8QQo9q8R6pfgtZFSikbotcz9pr1LufvWVUcAy9HmDypTZA0TblKCXe1
-         knDMC8P4/KKlhMBiz4khWgZKQaQfPoE+SSSsGaj8uQzbSKFM7TOPWofZbuPM0BTyxsPu
-         Udrk+mXataxHYELqkPvnLzj06d3cRR8NsfbF3T2SuOIabvPA6oz+j/q8lLU1drBFkeo3
-         ttUw3+x8DePE9kPXgP/9XVXA2pbcTNhT/ub6DrLVweRIuXsI8l60v+kyEwFki93bDyLU
-         xgMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=XWFZ4vpQXZV3nrlkQj2xV+OEMAM0JTmWSZ9iqG0RFzM=;
-        b=qWTDMhfOS7QF+FRvD6eAGhBp7ghbeL4wDkvJnzxANnZYJbKb8Sxf93p8UMF0AyRv9l
-         w+FTdI2eczMgcIMQYJ/eJN7LeMJIuZN8hmUuZoQjtu+6qw4szJ2SXrC93JxYpe/CjIrd
-         pKodkbqlaZzr0wctkZKcDZO3tETJeKkT6zIwRPn5HYbjaLGzMUO1RjC2LPZ9XIuCpfa0
-         RvnBON23aMp2qcMV0MZ6nDIW8Rd19OFMaS3AGvh80zJurh4WUAlaJqAKsHcIx8kp3qjT
-         q5BOQ3L0NGQYKo8KmT/CJWbRVj3ixpuKsNoffvCv6uGYxlBo0VYeWnR0iZLa1mk0tFPP
-         fqlQ==
-X-Gm-Message-State: ACgBeo2UV8zFuCJKyF40Gev9BCrFb8ACP9o5gG678ysGrtvdMtjhNP5w
-	/7PcfG9dctQ1cvmQ8H+fPJqa82Z57A+mTeWrZwra4A==
-X-Google-Smtp-Source: AA6agR5giouvQtvY8QQNPBjopg3XanTewoWbTfcX4JBOo1MdYfK6cJRXpBDlqkeJeMFaQso6UIk48fKNDA4zrFNmR+A=
-X-Received: by 2002:a63:1a23:0:b0:434:4395:8b5a with SMTP id
- a35-20020a631a23000000b0043443958b5amr9763601pga.428.1662477564378; Tue, 06
- Sep 2022 08:19:24 -0700 (PDT)
+X-Inumbo-ID: 5eee24f9-2e00-11ed-af93-0125da4c0113
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1662481463;
+	bh=I9HEnsbD64k69AXnJTEmM71NuSK/jsrCbllGo7OZAcE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=oGNhKoZ23xmRmuMfF5By9jdWcF+k0B2GSVOYstp81XQgpGtsjDdL+emiHg7zYoqMj
+	 IflTD2XbgUMEVE/Eq55++YXOFYXbNtIs8Gmh4D6kxh0WCjoFV2wYWFFrXiAIP0sotW
+	 sVPNy5kCa//2GRAZX2RitE35UUcpj++7o4GjeAnIO5cfR6zH3DGGR6970lnX1UCQ7G
+	 lzKflOjgv6TtMc7FcduohNII9+XludVGhDPdV8Q4YxDYfRfUE0PCsybDCpBZjUn0dx
+	 +ZQxwz7p95fO4m4IyNAHH1pMMwsmcNjx3DNhIWXEM4EfoVws9j9iTM1KyjDy5d4N/t
+	 udVbnIp9osezw==
+From: SeongJae Park <sj@kernel.org>
+To: stable@vger.kernel.org
+Cc: gregkh@linuxfoundation.org,
+	xen-devel@lists.xenproject.org,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	SeongJae Park <sj@kernel.org>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH for-stable-5.10.y] xen-blkfront: Cache feature_persistent value before advertisement
+Date: Tue,  6 Sep 2022 16:24:14 +0000
+Message-Id: <20220906162414.105452-1-sj@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220818105601.1896082-1-jens.wiklander@linaro.org>
- <20220818105601.1896082-4-jens.wiklander@linaro.org> <057e2a04-545f-0de8-1d42-8b19ae19f009@xen.org>
-In-Reply-To: <057e2a04-545f-0de8-1d42-8b19ae19f009@xen.org>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Tue, 6 Sep 2022 17:19:13 +0200
-Message-ID: <CAHUa44HjjwYJfFdUUkcE9J+DVKisEevWwubE+hRHnw9514HFQw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/9] xen/arm: add a primitive FF-A mediator
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org, 
-	Stefano Stabellini <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Bertrand.Marquis@arm.com, Anthony PERARD <anthony.perard@citrix.com>, 
-	Juergen Gross <jgross@suse.com>, Wei Liu <wl@xen.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Julien,
+commit fe8f65b018effbf473f53af3538d0c1878b8b329 upstream.
 
-On Tue, Sep 6, 2022 at 12:25 AM Julien Grall <julien@xen.org> wrote:
->
-> Hi Jens,
->
-> More remarks.
->
-> On 18/08/2022 11:55, Jens Wiklander wrote:
-> > +/* Negotiated FF-A version to use with the SPMC */
-> > +static uint32_t ffa_version __read_mostly;
->
-> NIT: if this is not meant to be modified after boot, then I would
-> suggest to use __ro_after_init. This was introduced recently and will
-> prevent the variable to be modified after boot.
+Xen blkfront advertises its support of the persistent grants feature
+when it first setting up and when resuming in 'talk_to_blkback()'.
+Then, blkback reads the advertised value when it connects with blkfront
+and decides if it will use the persistent grants feature or not, and
+advertises its decision to blkfront.  Blkfront reads the blkback's
+decision and it also makes the decision for the use of the feature.
 
-Thanks, I'll update
+Commit 402c43ea6b34 ("xen-blkfront: Apply 'feature_persistent' parameter
+when connect"), however, made the blkfront's read of the parameter for
+disabling the advertisement, namely 'feature_persistent', to be done
+when it negotiate, not when advertise.  Therefore blkfront advertises
+without reading the parameter.  As the field for caching the parameter
+value is zero-initialized, it always advertises as the feature is
+disabled, so that the persistent grants feature becomes always disabled.
 
-> > +
-> > +static bool ffa_get_version(uint32_t *vers)
->
-> This is not __init. Is this going to be called at runtime by a domain?
-> If yes...
+This commit fixes the issue by making the blkfront does parmeter caching
+just before the advertisement.
 
-Correct.
+Fixes: 402c43ea6b34 ("xen-blkfront: Apply 'feature_persistent' parameter when connect")
+Cc: <stable@vger.kernel.org> # 5.10.x
+Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Signed-off-by: SeongJae Park <sj@kernel.org>
+Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+Link: https://lore.kernel.org/r/20220831165824.94815-4-sj@kernel.org
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
 
->
-> > +{
-> > +    const struct arm_smccc_1_2_regs arg = {
-> > +        .a0 = FFA_VERSION,
-> > +        .a1 = FFA_MY_VERSION,
-> > +    };
-> > +    struct arm_smccc_1_2_regs resp;
-> > +
-> > +    arm_smccc_1_2_smc(&arg, &resp);
-> > +    if ( resp.a0 == FFA_RET_NOT_SUPPORTED )
-> > +    {
-> > +        printk(XENLOG_ERR "ffa: FFA_VERSION returned not supported\n");
->
-> ... this wants to be a XENLOG_G_ERR to rate limited it. XENLOG_ERR is
-> not by default and will allow a domain to spam Xen console.
->
-> A rule of thumb is any code reachable for a domain (other than dom0)
-> should use XENLOG_G_* when printing or gprintk(XENLOG_*, ) if you want
-> to print the domain ID and ratelimit. Note that the latter doesn't
-> require the G_* becauce it will add it automatically.
+This patch is a manual backport of the upstream commit on the 5.10.y
+kernel.  Please note that this patch can be applied on the latest 5.10.y
+only after the preceding patch[1] is applied.
 
-Thanks for the explanation, I'll update accordingly.
+[1] https://lore.kernel.org/stable/20220906132819.016040100@linuxfoundation.org/
 
->
-> > +        return false;
-> > +    }
-> > +
-> > +    *vers = resp.a0;
-> > +
-> > +    return true;
-> > +}
-> > +
-> > +static u16 get_vm_id(const struct domain *d)
-> > +{
-> > +    /* +1 since 0 is reserved for the hypervisor in FF-A */
-> > +    return d->domain_id + 1;
-> > +}
-> > +
-> > +static void set_regs(struct cpu_user_regs *regs, register_t v0, register_t v1,
-> > +                     register_t v2, register_t v3, register_t v4, register_t v5,
-> > +                     register_t v6, register_t v7)
-> > +{
-> > +        set_user_reg(regs, 0, v0);
-> > +        set_user_reg(regs, 1, v1);
-> > +        set_user_reg(regs, 2, v2);
-> > +        set_user_reg(regs, 3, v3);
-> > +        set_user_reg(regs, 4, v4);
-> > +        set_user_reg(regs, 5, v5);
-> > +        set_user_reg(regs, 6, v6);
-> > +        set_user_reg(regs, 7, v7);
-> > +}
-> > +
-> > +static void set_regs_success(struct cpu_user_regs *regs, uint32_t w2,
-> > +                             uint32_t w3)
-> > +{
-> > +    set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, 0, 0, 0, 0);
-> > +}
-> > +
-> > +static void handle_version(struct cpu_user_regs *regs)
-> > +{
-> > +    struct domain *d = current->domain;
-> > +    struct ffa_ctx *ctx = d->arch.ffa;
-> > +    uint32_t vers = get_user_reg(regs, 1);
-> > +
-> > +    if ( vers < FFA_VERSION_1_1 )
-> > +        vers = FFA_VERSION_1_0;
-> > +    else
-> > +        vers = FFA_VERSION_1_1;
-> > +
-> > +    ctx->guest_vers = vers;
-> > +    set_regs(regs, vers, 0, 0, 0, 0, 0, 0, 0);
-> > +}
-> > +
-> > +bool ffa_handle_call(struct cpu_user_regs *regs, uint32_t fid)
-> > +{
-> > +    struct domain *d = current->domain;
-> > +    struct ffa_ctx *ctx = d->arch.ffa;
-> > +
-> > +    if ( !ctx )
-> > +        return false;
-> > +
-> > +    switch ( fid )
-> > +    {
-> > +    case FFA_VERSION:
-> > +        handle_version(regs);
-> > +        return true;
-> > +    case FFA_ID_GET:
-> > +        set_regs_success(regs, get_vm_id(d), 0);
-> > +        return true;
-> > +
-> > +    default:
-> > +        printk(XENLOG_ERR "ffa: unhandled fid 0x%x\n", fid);
->
-> This one definitely want to be a XENLOG_G_ERR. But I would use
-> gprintk(XENLOG_ERR, ).
+ drivers/block/xen-blkfront.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-I'll update.
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 9d5460f6e0ff..6f33d62331b1 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -1852,6 +1852,12 @@ static void free_info(struct blkfront_info *info)
+ 	kfree(info);
+ }
+ 
++/* Enable the persistent grants feature. */
++static bool feature_persistent = true;
++module_param(feature_persistent, bool, 0644);
++MODULE_PARM_DESC(feature_persistent,
++		"Enables the persistent grants feature");
++
+ /* Common code used when first setting up, and when resuming. */
+ static int talk_to_blkback(struct xenbus_device *dev,
+ 			   struct blkfront_info *info)
+@@ -1943,6 +1949,7 @@ static int talk_to_blkback(struct xenbus_device *dev,
+ 		message = "writing protocol";
+ 		goto abort_transaction;
+ 	}
++	info->feature_persistent_parm = feature_persistent;
+ 	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
+ 			info->feature_persistent_parm);
+ 	if (err)
+@@ -2019,12 +2026,6 @@ static int negotiate_mq(struct blkfront_info *info)
+ 	return 0;
+ }
+ 
+-/* Enable the persistent grants feature. */
+-static bool feature_persistent = true;
+-module_param(feature_persistent, bool, 0644);
+-MODULE_PARM_DESC(feature_persistent,
+-		"Enables the persistent grants feature");
+-
+ /**
+  * Entry point to this code when a new device is created.  Allocate the basic
+  * structures and the ring buffer for communication with the backend, and
+@@ -2394,7 +2395,6 @@ static void blkfront_gather_backend_features(struct blkfront_info *info)
+ 	if (xenbus_read_unsigned(info->xbdev->otherend, "feature-discard", 0))
+ 		blkfront_setup_discard(info);
+ 
+-	info->feature_persistent_parm = feature_persistent;
+ 	if (info->feature_persistent_parm)
+ 		info->feature_persistent =
+ 			!!xenbus_read_unsigned(info->xbdev->otherend,
+-- 
+2.25.1
 
-Again, thanks for the review.
-
-Cheers,
-Jens
-
->
-> Cheers,
->
-> --
-> Julien Grall
 
