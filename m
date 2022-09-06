@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39AA1C38145
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 10:01:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.399749.641040 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD07BC54EE9
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 10:01:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.399751.641062 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVVON-0006Tz-Hy; Tue, 06 Sep 2022 10:01:15 +0000
+	id 1oVVOT-000741-1W; Tue, 06 Sep 2022 10:01:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 399749.641040; Tue, 06 Sep 2022 10:01:15 +0000
+Received: by outflank-mailman (output) from mailman id 399751.641062; Tue, 06 Sep 2022 10:01:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVVON-0006Ts-F5; Tue, 06 Sep 2022 10:01:15 +0000
-Received: by outflank-mailman (input) for mailman id 399749;
- Tue, 06 Sep 2022 10:01:13 +0000
+	id 1oVVOS-00073u-UX; Tue, 06 Sep 2022 10:01:20 +0000
+Received: by outflank-mailman (input) for mailman id 399751;
+ Tue, 06 Sep 2022 10:01:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lcW6=ZJ=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oVVOL-0006Tk-Ki
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 10:01:13 +0000
+ id 1oVVOR-0006Tk-My
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 10:01:19 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id d642f1e0-2dca-11ed-a016-b9edf5238543;
- Tue, 06 Sep 2022 12:01:12 +0200 (CEST)
+ id da4c68ef-2dca-11ed-a016-b9edf5238543;
+ Tue, 06 Sep 2022 12:01:19 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CABB7176C;
- Tue,  6 Sep 2022 03:01:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 93B66D6E;
+ Tue,  6 Sep 2022 03:01:24 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C5BD3F534;
- Tue,  6 Sep 2022 03:01:10 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 551413F534;
+ Tue,  6 Sep 2022 03:01:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,178 +45,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d642f1e0-2dca-11ed-a016-b9edf5238543
+X-Inumbo-ID: da4c68ef-2dca-11ed-a016-b9edf5238543
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Robin Murphy <robin.murphy@arm.com>,
+Cc: Bixuan Cui <cuibixuan@huawei.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Will Deacon <will@kernel.org>
-Subject: [PATCH v4 05/10] xen/arm: smmuv3: Remove the page 1 fixup
-Date: Tue,  6 Sep 2022 10:55:52 +0100
-Message-Id: <eaf0b23e9ba8942ebf4c3b0c82417bc1b9680d38.1662455798.git.rahul.singh@arm.com>
+Subject: [PATCH v4 07/10] xen/arm: smmuv3: Change *array into *const array
+Date: Tue,  6 Sep 2022 10:55:54 +0100
+Message-Id: <2693ef69907c51c351c1ab7f25ba1f4df4625b71.1662455798.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1662455798.git.rahul.singh@arm.com>
 References: <cover.1662455798.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Robin Murphy <robin.murphy@arm.com>
+From: Bixuan Cui <cuibixuan@huawei.com>
 
-Backport Linux commit 86d2d9214880. This is the clean backport without
+Backport Linux commit d56d5162e317. This is the clean backport without
 any changes.
 
-Since we now keep track of page 1 via a separate pointer that
-already encapsulates aliasing to page 0 as necessary, we can remove
-the clunky fixup routine and simply use the relevant bases directly.
-The current architecture spec (IHI0070D.a) defines
-SMMU_{EVENTQ,PRIQ}_{PROD,CONS} as offsets relative to page 1, so the
-cleanup represents a little bit of convergence as well as just
-lines of code saved.
+Fix checkpatch warning in arm-smmu-v3.c:
+static const char * array should probably be static const char
+* const
 
-Signed-off-by: Robin Murphy <robin.murphy@arm.com>
+Signed-off-by: Bixuan Cui <cuibixuan@huawei.com>
 Signed-off-by: Will Deacon <will@kernel.org>
-Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 86d2d9214880
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git d56d5162e317
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes in v4:
- - Added Stefano Acked-by
+- Move Stefano Acked-by after Signed-off
 Changes in v3:
- - fix "q->cons_reg = page + cons_off"
+ - Added Stefano Acked-by
 Changes in v2:
- - fix commit msg.
+ - fix commit msg
 ---
- xen/drivers/passthrough/arm/smmu-v3.c | 42 ++++++++++-----------------
- xen/drivers/passthrough/arm/smmu-v3.h |  8 ++---
- 2 files changed, 20 insertions(+), 30 deletions(-)
+ xen/drivers/passthrough/arm/smmu-v3.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index ba24a26ad6..15bb4d7e19 100644
+index 28fcb01757..c53d4c96a4 100644
 --- a/xen/drivers/passthrough/arm/smmu-v3.c
 +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -238,15 +238,6 @@ static struct arm_smmu_option_prop arm_smmu_options[] = {
- 	{ 0, NULL},
- };
+@@ -470,7 +470,7 @@ static int arm_smmu_cmdq_build_cmd(u64 *cmd, struct arm_smmu_cmdq_ent *ent)
  
--static inline void __iomem *arm_smmu_page1_fixup(unsigned long offset,
--						 struct arm_smmu_device *smmu)
--{
--	if (offset > SZ_64K)
--		return smmu->page1 + offset - SZ_64K;
--
--	return smmu->base + offset;
--}
--
- static struct arm_smmu_domain *to_smmu_domain(struct iommu_domain *dom)
+ static void arm_smmu_cmdq_skip_err(struct arm_smmu_device *smmu)
  {
- 	return container_of(dom, struct arm_smmu_domain, domain);
-@@ -1581,6 +1572,7 @@ static int arm_smmu_dt_xlate(struct device *dev,
- /* Probing and initialisation functions */
- static int arm_smmu_init_one_queue(struct arm_smmu_device *smmu,
- 				   struct arm_smmu_queue *q,
-+				   void __iomem *page,
- 				   unsigned long prod_off,
- 				   unsigned long cons_off,
- 				   size_t dwords, const char *name)
-@@ -1609,8 +1601,8 @@ static int arm_smmu_init_one_queue(struct arm_smmu_device *smmu,
- 			 1 << q->llq.max_n_shift, name);
- 	}
- 
--	q->prod_reg	= arm_smmu_page1_fixup(prod_off, smmu);
--	q->cons_reg	= arm_smmu_page1_fixup(cons_off, smmu);
-+	q->prod_reg	= page + prod_off;
-+	q->cons_reg	= page + cons_off;
- 	q->ent_dwords	= dwords;
- 
- 	q->q_base  = Q_BASE_RWA;
-@@ -1627,16 +1619,16 @@ static int arm_smmu_init_queues(struct arm_smmu_device *smmu)
- 
- 	/* cmdq */
- 	spin_lock_init(&smmu->cmdq.lock);
--	ret = arm_smmu_init_one_queue(smmu, &smmu->cmdq.q, ARM_SMMU_CMDQ_PROD,
--				      ARM_SMMU_CMDQ_CONS, CMDQ_ENT_DWORDS,
--				      "cmdq");
-+	ret = arm_smmu_init_one_queue(smmu, &smmu->cmdq.q, smmu->base,
-+					  ARM_SMMU_CMDQ_PROD, ARM_SMMU_CMDQ_CONS,
-+					  CMDQ_ENT_DWORDS, "cmdq");
- 	if (ret)
- 		return ret;
- 
- 	/* evtq */
--	ret = arm_smmu_init_one_queue(smmu, &smmu->evtq.q, ARM_SMMU_EVTQ_PROD,
--				      ARM_SMMU_EVTQ_CONS, EVTQ_ENT_DWORDS,
--				      "evtq");
-+	ret = arm_smmu_init_one_queue(smmu, &smmu->evtq.q, smmu->page1,
-+					  ARM_SMMU_EVTQ_PROD, ARM_SMMU_EVTQ_CONS,
-+					  EVTQ_ENT_DWORDS, "evtq");
- 	if (ret)
- 		return ret;
- 
-@@ -1644,9 +1636,9 @@ static int arm_smmu_init_queues(struct arm_smmu_device *smmu)
- 	if (!(smmu->features & ARM_SMMU_FEAT_PRI))
- 		return 0;
- 
--	return arm_smmu_init_one_queue(smmu, &smmu->priq.q, ARM_SMMU_PRIQ_PROD,
--				       ARM_SMMU_PRIQ_CONS, PRIQ_ENT_DWORDS,
--				       "priq");
-+	return arm_smmu_init_one_queue(smmu, &smmu->priq.q, smmu->page1,
-+					   ARM_SMMU_PRIQ_PROD, ARM_SMMU_PRIQ_CONS,
-+					   PRIQ_ENT_DWORDS, "priq");
- }
- 
- static int arm_smmu_init_l1_strtab(struct arm_smmu_device *smmu)
-@@ -2090,10 +2082,8 @@ static int arm_smmu_device_reset(struct arm_smmu_device *smmu)
- 
- 	/* Event queue */
- 	writeq_relaxed(smmu->evtq.q.q_base, smmu->base + ARM_SMMU_EVTQ_BASE);
--	writel_relaxed(smmu->evtq.q.llq.prod,
--		       arm_smmu_page1_fixup(ARM_SMMU_EVTQ_PROD, smmu));
--	writel_relaxed(smmu->evtq.q.llq.cons,
--		       arm_smmu_page1_fixup(ARM_SMMU_EVTQ_CONS, smmu));
-+	writel_relaxed(smmu->evtq.q.llq.prod, smmu->page1 + ARM_SMMU_EVTQ_PROD);
-+	writel_relaxed(smmu->evtq.q.llq.cons, smmu->page1 + ARM_SMMU_EVTQ_CONS);
- 
- 	enables |= CR0_EVTQEN;
- 	ret = arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
-@@ -2108,9 +2098,9 @@ static int arm_smmu_device_reset(struct arm_smmu_device *smmu)
- 		writeq_relaxed(smmu->priq.q.q_base,
- 			       smmu->base + ARM_SMMU_PRIQ_BASE);
- 		writel_relaxed(smmu->priq.q.llq.prod,
--			       arm_smmu_page1_fixup(ARM_SMMU_PRIQ_PROD, smmu));
-+			       smmu->page1 + ARM_SMMU_PRIQ_PROD);
- 		writel_relaxed(smmu->priq.q.llq.cons,
--			       arm_smmu_page1_fixup(ARM_SMMU_PRIQ_CONS, smmu));
-+			       smmu->page1 + ARM_SMMU_PRIQ_CONS);
- 
- 		enables |= CR0_PRIQEN;
- 		ret = arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
-index c45d2f16c4..0742bc393f 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.h
-+++ b/xen/drivers/passthrough/arm/smmu-v3.h
-@@ -130,15 +130,15 @@
- #define ARM_SMMU_CMDQ_CONS		0x9c
- 
- #define ARM_SMMU_EVTQ_BASE		0xa0
--#define ARM_SMMU_EVTQ_PROD		0x100a8
--#define ARM_SMMU_EVTQ_CONS		0x100ac
-+#define ARM_SMMU_EVTQ_PROD		0xa8
-+#define ARM_SMMU_EVTQ_CONS		0xac
- #define ARM_SMMU_EVTQ_IRQ_CFG0		0xb0
- #define ARM_SMMU_EVTQ_IRQ_CFG1		0xb8
- #define ARM_SMMU_EVTQ_IRQ_CFG2		0xbc
- 
- #define ARM_SMMU_PRIQ_BASE		0xc0
--#define ARM_SMMU_PRIQ_PROD		0x100c8
--#define ARM_SMMU_PRIQ_CONS		0x100cc
-+#define ARM_SMMU_PRIQ_PROD		0xc8
-+#define ARM_SMMU_PRIQ_CONS		0xcc
- #define ARM_SMMU_PRIQ_IRQ_CFG0		0xd0
- #define ARM_SMMU_PRIQ_IRQ_CFG1		0xd8
- #define ARM_SMMU_PRIQ_IRQ_CFG2		0xdc
+-	static const char *cerror_str[] = {
++	static const char * const cerror_str[] = {
+ 		[CMDQ_ERR_CERROR_NONE_IDX]	= "No error",
+ 		[CMDQ_ERR_CERROR_ILL_IDX]	= "Illegal command",
+ 		[CMDQ_ERR_CERROR_ABT_IDX]	= "Abort on command fetch",
 -- 
 2.25.1
 
