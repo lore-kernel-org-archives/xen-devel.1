@@ -4,36 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72955ECAAA1
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400346.642044 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8E9ECAAA1
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400348.642056 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSC-0007WW-To; Tue, 06 Sep 2022 21:49:56 +0000
+	id 1oVgSG-0007ue-CY; Tue, 06 Sep 2022 21:50:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400346.642044; Tue, 06 Sep 2022 21:49:56 +0000
+Received: by outflank-mailman (output) from mailman id 400348.642056; Tue, 06 Sep 2022 21:50:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSC-0007WP-PO; Tue, 06 Sep 2022 21:49:56 +0000
-Received: by outflank-mailman (input) for mailman id 400346;
- Tue, 06 Sep 2022 21:49:54 +0000
+	id 1oVgSG-0007uS-69; Tue, 06 Sep 2022 21:50:00 +0000
+Received: by outflank-mailman (input) for mailman id 400348;
+ Tue, 06 Sep 2022 21:49:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=FLlR=ZJ=bounce.vates.fr=bounce-md_30504962.631718d1.v1-a8dca91a88494f7f8b1011af811f372b@srs-se1.protection.inumbo.net>)
- id 1oVgIW-0000Cs-Ii
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:56 +0000
-Received: from mail136-23.atl41.mandrillapp.com
- (mail136-23.atl41.mandrillapp.com [198.2.136.23])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=o/Pp=ZJ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1oVgIJ-0000Cs-GS
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:43 +0000
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr140083.outbound.protection.outlook.com [40.107.14.83])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e2f74d4e-2dc9-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 11:54:24 +0200 (CEST)
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-23.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4MMLMP1T42z1XLFCT
- for <xen-devel@lists.xenproject.org>; Tue,  6 Sep 2022 09:54:25 +0000 (GMT)
-Received: from [37.26.189.201] by mandrillapp.com id
- a8dca91a88494f7f8b1011af811f372b; Tue, 06 Sep 2022 09:54:25 +0000
+ id 2d2ff0d9-2dcf-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 12:32:16 +0200 (CEST)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by VI1PR04MB7134.eurprd04.prod.outlook.com (2603:10a6:800:12e::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.17; Tue, 6 Sep
+ 2022 10:32:16 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::59bc:901a:98a7:76d4]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::59bc:901a:98a7:76d4%5]) with mapi id 15.20.5588.017; Tue, 6 Sep 2022
+ 10:32:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,428 +48,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2f74d4e-2dc9-11ed-af93-0125da4c0113
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.fr;
-	s=mandrill; t=1662458065; x=1662760465; i=andrei.semenov@vates.fr;
-	bh=pQxC6Pftr2jRoWbYvo9cSoey9URYE0qRetJUWBPSTIk=;
-	h=From:Subject:To:Cc:Message-Id:In-Reply-To:References:Feedback-ID:
-	 Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
-	 Subject:From;
-	b=J90RHZxdhtwm0LlZD5oP7VGWGxM2WYnsvbxujyoIj7OZyxJ2L8DcSnznz0iwWhGQx
-	 4j8zU2jvtl8f6/tVakm3nXQpuDvU0ui833kHI6YphNgRKEWWa9VteIIOMYKVAUwOhE
-	 Y+9kAWW5xFh7MBCSzKb01D1BXCvqY4p5wCLaB1t4=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com; 
- i=@mandrillapp.com; q=dns/txt; s=mandrill; t=1662458065; h=From : 
- Subject : To : Cc : Message-Id : In-Reply-To : References : Date : 
- MIME-Version : Content-Type : Content-Transfer-Encoding : From : 
- Subject : Date : X-Mandrill-User : List-Unsubscribe; 
- bh=pQxC6Pftr2jRoWbYvo9cSoey9URYE0qRetJUWBPSTIk=; 
- b=e0+uul0MFDsDLUDNu96xRuh9CG/82ragY2k/HAkqMg56LHNA/ReMr5e51SC+DdBmoopGXO
- Eadu31KqK0bTJRk/lzpfBgCrt940lXdKeR9B5VbqIeAcRYbJiwTxiyU5SRABg3Jkkvm2CvQn
- CIg/M9VSPS2AD5mopYBo9SHRA4HeA=
-From: Andrei Semenov <andrei.semenov@vates.fr>
-Subject: [PATCH v2 2/2] live migration: use superpages for physmap population on restore when possible
-X-Mailer: git-send-email 2.34.1
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 5cd6f291-6f11-459d-97c0-d09b574c3896
-X-Bm-Transport-Timestamp: 1662458064080
-To: andrei.semenov@vates.fr, xen-devel@lists.xenproject.org
-Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
-Message-Id: <657d6dad39f4ab87569470c94afb4cc6d005e829.1662457291.git.andrei.semenov@vates.fr>
-In-Reply-To: <cover.1662457291.git.andrei.semenov@vates.fr>
-References: <cover.1662457291.git.andrei.semenov@vates.fr>
-X-Report-Abuse: Please forward a copy of this message, including all headers, to abuse@mandrill.com
-X-Report-Abuse: You can also report abuse here: http://mandrillapp.com/contact/abuse?id=30504962.a8dca91a88494f7f8b1011af811f372b
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20220906:md
-Date: Tue, 06 Sep 2022 09:54:25 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+X-Inumbo-ID: 2d2ff0d9-2dcf-11ed-af93-0125da4c0113
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nyuEAr3yxqu33u5aujl4OtenHRyY3sX5YejnBtXQjN74LrCedYyCFz1oASJDjQdbhOF0WJmPpHMR07QvICq4znv1WK42N/nZIr+PvZvCn7g2spbKFyRkRIGu/1YlmuMqgHQlu+M/5yK65DaQN71FikMHmPPq19oN0vDH41TDbQ3xcPa+eVWS9gd+YAc6yIOxkc8uNGUXxgKf6bER/bdUgDcBVLkM7qaIWp4Q8iq7Vs7vjW3Nqf2MA5OxmP6HyX/SWdlcDrYW/oF0t6DZWKQX2mn+s/KoJVPw514UH6wQyOxBUd+9VaWDqOUZ8RcTpUCfLtAmAt1JXp37W201cUQ2LQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2Ux+tUw5q0jp5KZY1D27e/BBjcFYHXCAZ+7fbJZGQ2A=;
+ b=MV9BzyGvocQG4Txxq05kJgfZ6qDoOxmSXnrhDtM0lmskwYHsQZ9q2raG7nqkUIGPQK0tnJlWQ//Bzdl6AF3F4lKdq1rPjUnqjxMFk7FA80lGiouHktBDIIDANPP4HreOY2OWqH5Cz9q+NkNCmvNuQ28CVcfGj3Dp6hStmTdGUZFVWxV/Z0t+rQG8+5xKG/kxrJtPTDBdCz/bHK17G6mziX3WcNHaIB6p23CxsM71JoOgAFcW54D6UlYHCp0ZXC0u6f+M7qsSs+8CyweNWUIT5wJZq6Ze63yX00W69kdXDjaB0/zio/xAaI/Vy0DbsBdBEYVawiEQgpQUCSNaPACXPg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2Ux+tUw5q0jp5KZY1D27e/BBjcFYHXCAZ+7fbJZGQ2A=;
+ b=m1l90+HDYozS8hhKh7ZQM93eC+bLHUit7Kt50sLo8f2/taH++om1k6HBieZsRnGG9Rj/hcg8rMVXAxpFKm9mxOCv9YnXsOS5nJuxK6UY/u9RWWoBBaXIaj6o7oZAXoD4cn9+RsjN4pdFuVUV9RiKBaOydy90MNWi4jqfWFmx33w3c6/oeCz/FpbTVOl/3ZkkUhDb7+R2LKhmJVLcnknwNlcv9fywkOy3gTsmBfAeVriu1zl76ANh6a1YVVMpL+8X/NIdUbwvrG9PY7C31TMV5Jl5VPA7tH0PXjmTZGpErTESrO1Zot2d5yLjZd7ENd8bTJCo3BQ3AnORvW1z56hQYA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <9a98a83a-32e5-67fe-431d-7bc5f070674e@suse.com>
+Date: Tue, 6 Sep 2022 12:32:22 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+Subject: Re: [RFC PATCH 00/10] Rework PCI locking
+Content-Language: en-US
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Paul Durrant <paul@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Kevin Tian <kevin.tian@intel.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20220831141040.13231-1-volodymyr_babchuk@epam.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <20220831141040.13231-1-volodymyr_babchuk@epam.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0033.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::12) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8859c1b6-4198-41b0-8e4f-08da8ff311ac
+X-MS-TrafficTypeDiagnostic: VI1PR04MB7134:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	k0mWRJrU0D5Di/xsU/AT8AP/br6NGAdZrIXUN4zrdepa8py5Szrqv4KxxEyHkZx8G7HgE+g2iM/oyYGDxLXS/93H2rHoqR9TDiEimzg/H0HlXhKRw9NUH7DZXcPdgjf/o5U7d+Fu4ol92t51h2Q4ezM6Hi6+GXTrKthh0AS3+hrEUF2zoBkvUjkgNeZ4YwSsvMya6V7GzsIx5FwvuHGnBgAGDrHDAHRhB4+WOscJSHykW6TlE3/H33Pc62nrgUNTz52ILix1z4M9FJbBBkvTKZy9HqD0nLK590TaAv88Nwh5j3mfvzK9edXGRGA/YBWwLbWkZrs9uuz4OAjaK1IkjiyiphuCnbEzFw/uEmEdxaDYh4/ZBab8EsRycFfKUbSEisM4XtTdFSuH4Zi4N6F42DBVowv440ezwaJhOITpk+D4OxoAKYkECH+b93FkUzxe32G78GWWcAUzJVfGE5eWG2ozsDaOCOpYDioKQWtm8X/xu/O1jfDR0lEX6EPVX4CB/Lzwo1VqIBCanczPq9XPJd1ECBJ5QQF400BkG2r4wdwZwNrVLcgY9jsI915CKrQ7Unnt9zO6qeww8Zy2NA/f2bdwwVL80pb78z4Y1z3Vvpz1rHrywZrJJMXX8u4fLIkCHHzwbPahVz33osUJOkLHOxE6VOMsbPIINCUPH2ppnWJ1CQn+FWNHAY6oBNJToHTqdJeYbKBlMqxTYbbfLykM0XQSHqbWHGuGuPV1oETNYqqmwJW2pxutSGZM+qOunSPG00wUsYLTZV5g4GZJxJhbhKRDClkUl2mQiGiCZXwnhCo=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(376002)(396003)(346002)(136003)(39860400002)(366004)(38100700002)(66476007)(66946007)(4326008)(54906003)(6916009)(66556008)(316002)(8676002)(2906002)(7416002)(5660300002)(2616005)(8936002)(186003)(6512007)(83380400001)(6506007)(6486002)(26005)(478600001)(31696002)(41300700001)(31686004)(53546011)(6666004)(36756003)(86362001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZVJ2K3h2SEFIcWtZcC83aExtTUJmcGZrcXlzNkdXTTlod29iRXlCRlY1ZEN1?=
+ =?utf-8?B?LzNQcG43SnJlM0U3ZXFOV3p4VmI3Mld3SHVVci9RYVNRdWpZbTgxSHVPWEZs?=
+ =?utf-8?B?dEgrZ2VScU5saUZuN21RbkRNU0dqWWZKUTEzU2VWaEZxQkh5Sm9BK1B0L2U5?=
+ =?utf-8?B?UkVHVzhGWm5DWFRDbHBSSVBUNVZ5bElVRTR5Q2x3Ymljd3JVVVVKaDZvdFB5?=
+ =?utf-8?B?V1M1ZDdtVUtUSTFtNkdVT2p5TS9nYmUvcHRsNWROR1d0VjZGU09IdkRzVzdr?=
+ =?utf-8?B?QW94RTczSnBjdnRONmNkeDVrekJEemFDVGd4T3hZN0xsUDVIZnlvbUs1eFd4?=
+ =?utf-8?B?YWtZdG5OZlN0SXBBeE1CMkI0cFRmaENhZmlQTzcrZ20xMzZsSGRyU2piSUcy?=
+ =?utf-8?B?VXhEeFdrc05janE5U1pJekcyd3JoWUJnV0JPb3VTSGhxb3dhWndRQ1NWc2dX?=
+ =?utf-8?B?TURDeEVYMWFJdlpwOFRjYVY3LzBXbk93T3BtTGQ3SkEwcjY0Z1kwemtRb2dw?=
+ =?utf-8?B?RXZvQUtHclh1MHR6VkZTMStKN3p3N09SS3FwL1ozSVRGWUJrMk12Uld6a3Fy?=
+ =?utf-8?B?OEJIeGw5TEp2dGpMUTlGVHRLMSthRG11eTZWMkkyM2ZSaVR1cTA3L09rRDlX?=
+ =?utf-8?B?ZGlYTVFjTXRnTUs2ditobzVkQXBOTGR3cVRwcG54R1IvRDVNRXhsS2R6eVky?=
+ =?utf-8?B?V2h3L3JTOTRXZC90bmlrVUVja1NBN0RCZHJhQTJPelNsSzBTa1AwUmZUc2lV?=
+ =?utf-8?B?WnFmaGRFRyt3L3ZTKzRyZmZETkhSaUtVMTI0K2RmcGJQaENiUGh3aGowemdk?=
+ =?utf-8?B?Ly9xSjMwcVZEZjhGQm9idEFvNXlGeVdyYWpwN2VLSWJRamxYWmFOVGNlUkZw?=
+ =?utf-8?B?c1pqNUIzS3Z0d0pCZVhjRllVQW5oTWNWOFZ4eXUzQVJPNmN6VU1aZmwxRWtl?=
+ =?utf-8?B?MnFhQm1OUEhsdW8xSnBMZ3dKbStBOWdaTFRGKysxNUI0WnJvV0hKNnBQMXl3?=
+ =?utf-8?B?UFJhU3Urek9JdUU3YWREY0VKR1RTQUJTN3NwbWtxZFZjbm50NU1zRG1QYnlo?=
+ =?utf-8?B?d1BPakJ1RjRhSnVNajc5dVZWSWN5d1BZLzZoN0p2Q0xaZkNqVjA3eFdVZGY4?=
+ =?utf-8?B?S1hpQzRnT3k4WjQyUnVXY2N0ZG90NytHYkI2OUkrNmFzUlpBQVpwTEtvSElB?=
+ =?utf-8?B?bldWL1FxeDZyS3F3VkNpeG1CZWgxZ3hZVGpUd0JNcVRsSWFlZHk4OTV5SmZC?=
+ =?utf-8?B?L2FoTEJwV1lKV3loV0xqSlA3Z2M3WWVwY2lmQnpMYkJiNHlZaU41amY0VzFv?=
+ =?utf-8?B?emxSYUFSemVmdFBFNzE4YXNubEtBdllBQ1luQXpPZUtMRkhualFEMkc2OWc1?=
+ =?utf-8?B?K2IwdXQzOGFDYlAvajlYSHFITTEvMmMxdDVuWVMyUCt6eFRQZjBjNzVvM3NU?=
+ =?utf-8?B?NTZoRG80cURyYVRyZVYyb2YyeWRUVUFkelhla2hwZ1EwZ0dxaVFaWlcvQjRF?=
+ =?utf-8?B?UUNWNGNndVcwZEhFYjljeGY3TFJNNjBPRUN0ZCtpaWtlUFVzcktUWXF4SW00?=
+ =?utf-8?B?UmxrN3llSzVlTnFUdFZlTzhCZ3RlQmE2S2h4RDlDWThQVWxHS2dLZVNNd2Ji?=
+ =?utf-8?B?bFpnQUV6MEFwamIyaEhhLzQzSjR5Z3Zva3FodDdzY3ZzdUFjUzJvRFRKRk82?=
+ =?utf-8?B?QVRkdktNb3g3dkwxK3EwMWloa0VDckdRMEJyeTFpNlg4T3JIWWw4dUJnamgr?=
+ =?utf-8?B?am1lRmVlVTBEamxEb3E2TStCVEcyeEVHQmNMd1p0d0FnOHlXOU9zdnlaWThy?=
+ =?utf-8?B?bWxaN1VlSXRxbWdXOG1ZQUNDN0dmUXIvV0k5alJLaWFBc29lalZmSzM1bC9w?=
+ =?utf-8?B?cStIc0F2Wk5TWDljbGoveGc3c2ZYb0xnRkFvNDVFSjNPR3huMGh2ZGl2T1lX?=
+ =?utf-8?B?UHlMRjJJZTg1Vjl4Tlo5TjA2blh2Q2hhNiswWjVqUTVFclBablNMc3dXRkwz?=
+ =?utf-8?B?OFpEajB1VHNUb29kT0gxTnpGWFJ0WU1iaExmR0dicTNiYlhJeDJoUXBRQi9h?=
+ =?utf-8?B?YnhjeWdTUVVwUmU4M0sveUhxVlQvQXNkdHBuOXN4dFZvc3VHSFUvTDU4MVd0?=
+ =?utf-8?Q?HZRs0fZml/e6aLY/buipweBcr?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8859c1b6-4198-41b0-8e4f-08da8ff311ac
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2022 10:32:16.3942
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0YL16EhstA25N4s8LdjxfTE0phqaRniry1MWNpeTDG3naFxTliKwaE8IkA4SZZDb3+Guh/jrp4ZnTG0Bme0yQg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7134
 
-Implement an heuristic for X86 HVM guests which tries to use superpages while
-populating guest physmap on live migration. This should impove memory accesses
-performances for these guests.
+On 31.08.2022 16:10, Volodymyr Babchuk wrote:
+> Hello,
+> 
+> This is yet another take to a PCI locking rework. This approach
+> was suggest by Jan Beulich who proposed to use a reference
+> counter to control lifetime of pci_dev objects.
+> 
+> When I started added reference counting it quickly became clear
+> that this approach can provide more granular locking insted of
+> huge pcidevs_lock() which is used right now. I studied how this
+> lock used and what it protects. And found the following:
+> 
+> 0. Comment in pci.h states the following:
+> 
+>  153 /*
+>  154  * The pcidevs_lock protect alldevs_list, and the assignment for the
+>  155  * devices, it also sync the access to the msi capability that is not
+>  156  * interrupt handling related (the mask bit register).
+>  157  */
+> 
+> But in reality it does much more. Here is what I found:
+> 
+> 1. Lifetime of pci_dev struct
+> 
+> 2. Access to pseg->alldevs_list
+> 
+> 3. Access to domain->pdev_list
+> 
+> 4. Access to iommu->ats_list
+> 
+> 5. Access to MSI capability
+> 
+> 6. Some obsucure stuff in IOMMU drivers: there are places that
+> are guarded by pcidevs_lock() but it seems that nothing
+> PCI-related happens there.
 
-Signed-off-by: Andrei Semenov <andrei.semenov@vates.fr>
----
- tools/include/xen-tools/libs.h           |  4 ++
- tools/libs/guest/xg_private.h            |  3 +
- tools/libs/guest/xg_sr_common.h          | 18 ++++-
- tools/libs/guest/xg_sr_restore.c         | 60 +++++++---------
- tools/libs/guest/xg_sr_restore_x86_hvm.c | 88 +++++++++++++++++++++++-
- tools/libs/guest/xg_sr_restore_x86_pv.c  | 22 +++++-
- 6 files changed, 154 insertions(+), 41 deletions(-)
+Right - the lock being held was (ab)used in IOMMU code in a number of
+places. This likely needs to change in the course of this re-work;
+patch titles don't suggest this is currently part of the series.
 
-diff --git a/tools/include/xen-tools/libs.h b/tools/include/xen-tools/libs.h
-index a16e0c3807..bdd903eb7b 100644
---- a/tools/include/xen-tools/libs.h
-+++ b/tools/include/xen-tools/libs.h
-@@ -63,4 +63,8 @@
- #define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
- #endif
- 
-+#ifndef ROUNDDOWN
-+#define ROUNDDOWN(_x,_w) ((unsigned long)(_x) & (-1UL << (_w)))
-+#endif
-+
- #endif	/* __XEN_TOOLS_LIBS__ */
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index 09e24f1227..dcf63b5188 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -134,6 +134,9 @@ typedef uint64_t x86_pgentry_t;
- #define PAGE_SIZE_X86           (1UL << PAGE_SHIFT_X86)
- #define PAGE_MASK_X86           (~(PAGE_SIZE_X86-1))
- 
-+#define S_PAGE_1GB_ORDER        18
-+#define S_PAGE_2MB_ORDER         9
-+
- #define NRPAGES(x) (ROUNDUP(x, PAGE_SHIFT) >> PAGE_SHIFT)
- 
- static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 941e24d7b7..96365e05a8 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -137,7 +137,8 @@ struct xc_sr_restore_ops
-     bool (*pfn_is_valid)(const struct xc_sr_context *ctx, xen_pfn_t pfn);
- 
-     /* Set the GFN of a PFN. */
--    void (*set_gfn)(struct xc_sr_context *ctx, xen_pfn_t pfn, xen_pfn_t gfn);
-+    void (*set_gfn)(struct xc_sr_context *ctx, xen_pfn_t pfn, xen_pfn_t gfn,
-+                    unsigned int order);
- 
-     /* Set the type of a PFN. */
-     void (*set_page_type)(struct xc_sr_context *ctx, xen_pfn_t pfn,
-@@ -175,6 +176,17 @@ struct xc_sr_restore_ops
- #define BROKEN_CHANNEL 2
-     int (*process_record)(struct xc_sr_context *ctx, struct xc_sr_record *rec);
- 
-+    /**
-+     * Guest physmap population order is based on heuristic which is family
-+     * dependant. X86 HVM  heuristic is interested in observing the whole
-+     * record (the first) in order to guess how the physmap should be populated.
-+     */
-+    void (*guess_physmap)(struct xc_sr_context *ctx, unsigned int count,
-+                          const xen_pfn_t *pfns, const uint32_t *types);
-+
-+    /* Get the physmap population order for given PFN */
-+    int (*get_physmap_order)(const struct xc_sr_context *ctx, xen_pfn_t pfn);
-+
-     /**
-      * Perform any actions required after the static data has arrived.  Called
-      * when the STATIC_DATA_COMPLETE record has been recieved/inferred.
-@@ -404,6 +416,10 @@ struct xc_sr_context
-                     {
-                         /* HVM context blob. */
-                         struct xc_sr_blob context;
-+
-+                        /* Set guest type (based on the first record) */
-+                        bool set_guest_type;
-+                        bool pvh_guest;
-                     } restore;
-                 };
-             } hvm;
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 074b56d263..af864bd5ea 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -86,18 +86,21 @@ static bool pfn_is_populated(const struct xc_sr_context *ctx, xen_pfn_t pfn)
-  * avoid realloc()ing too excessively, the size increased to the nearest power
-  * of two large enough to contain the required pfn.
-  */
--static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
-+static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn,
-+                             unsigned int order)
- {
-     xc_interface *xch = ctx->xch;
-+    xen_pfn_t start_pfn = ROUNDDOWN(pfn, order),
-+        end_pfn = (ROUNDUP(pfn + 1, order) - 1);
- 
--    if ( pfn > ctx->restore.max_populated_pfn )
-+    if ( end_pfn > ctx->restore.max_populated_pfn )
-     {
-         xen_pfn_t new_max;
-         size_t old_sz, new_sz;
-         unsigned long *p;
- 
-         /* Round up to the nearest power of two larger than pfn, less 1. */
--        new_max = pfn;
-+        new_max = end_pfn;
-         new_max |= new_max >> 1;
-         new_max |= new_max >> 2;
-         new_max |= new_max >> 4;
-@@ -123,8 +126,11 @@ static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
-         ctx->restore.max_populated_pfn = new_max;
-     }
- 
--    assert(!test_bit(pfn, ctx->restore.populated_pfns));
--    set_bit(pfn, ctx->restore.populated_pfns);
-+    for ( pfn = start_pfn; pfn <= end_pfn; ++pfn )
-+    {
-+        assert(!test_bit(pfn, ctx->restore.populated_pfns));
-+        set_bit(pfn, ctx->restore.populated_pfns);
-+    }
- 
-     return 0;
- }
-@@ -138,60 +144,40 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                   const xen_pfn_t *original_pfns, const uint32_t *types)
- {
-     xc_interface *xch = ctx->xch;
--    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
--        *pfns = malloc(count * sizeof(*pfns));
--    unsigned int i, nr_pfns = 0;
-+    xen_pfn_t mfn, pfn;
-+    unsigned int i, order;
-     int rc = -1;
- 
--    if ( !mfns || !pfns )
--    {
--        ERROR("Failed to allocate %zu bytes for populating the physmap",
--              2 * count * sizeof(*mfns));
--        goto err;
--    }
-+    /* Feed this record for family dependant heuristic to guess the physmap */
-+    ctx->restore.ops.guess_physmap(ctx, count, original_pfns, types);
- 
-     for ( i = 0; i < count; ++i )
-     {
-         if ( (!types || page_type_to_populate(types[i])) &&
-              !pfn_is_populated(ctx, original_pfns[i]) )
-         {
--            rc = pfn_set_populated(ctx, original_pfns[i]);
-+            order = ctx->restore.ops.get_physmap_order(ctx, original_pfns[i]);
-+            rc = pfn_set_populated(ctx, original_pfns[i], order);
-             if ( rc )
-                 goto err;
--            pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
--            ++nr_pfns;
--        }
--    }
--
--    if ( nr_pfns )
--    {
--        rc = xc_domain_populate_physmap_exact(
--            xch, ctx->domid, nr_pfns, 0, 0, mfns);
--        if ( rc )
--        {
--            PERROR("Failed to populate physmap");
--            goto err;
--        }
- 
--        for ( i = 0; i < nr_pfns; ++i )
--        {
--            if ( mfns[i] == INVALID_MFN )
-+            pfn = mfn = ROUNDDOWN(original_pfns[i], order);
-+            rc = xc_domain_populate_physmap_exact(xch, ctx->domid, 1, order, 0,
-+                                                  &mfn);
-+            if ( rc || (mfn == INVALID_MFN) )
-             {
--                ERROR("Populate physmap failed for pfn %u", i);
-+                ERROR("Failed to populate physmap for pfn %lu (%u)", pfn, order);
-                 rc = -1;
-                 goto err;
-             }
- 
--            ctx->restore.ops.set_gfn(ctx, pfns[i], mfns[i]);
-+            ctx->restore.ops.set_gfn(ctx, pfn, mfn, order);
-         }
-     }
- 
-     rc = 0;
- 
-  err:
--    free(pfns);
--    free(mfns);
--
-     return rc;
- }
- 
-diff --git a/tools/libs/guest/xg_sr_restore_x86_hvm.c b/tools/libs/guest/xg_sr_restore_x86_hvm.c
-index d6ea6f3012..2e525443ab 100644
---- a/tools/libs/guest/xg_sr_restore_x86_hvm.c
-+++ b/tools/libs/guest/xg_sr_restore_x86_hvm.c
-@@ -110,7 +110,7 @@ static xen_pfn_t x86_hvm_pfn_to_gfn(const struct xc_sr_context *ctx,
- 
- /* restore_ops function. */
- static void x86_hvm_set_gfn(struct xc_sr_context *ctx, xen_pfn_t pfn,
--                            xen_pfn_t gfn)
-+                            xen_pfn_t gfn, unsigned int order)
- {
-     /* no op */
- }
-@@ -161,6 +161,8 @@ static int x86_hvm_setup(struct xc_sr_context *ctx)
-     }
- #endif
- 
-+    ctx->x86.hvm.restore.set_guest_type = true;
-+
-     return 0;
- }
- 
-@@ -192,6 +194,88 @@ static int x86_hvm_process_record(struct xc_sr_context *ctx,
-     }
- }
- 
-+/*
-+ * We consider that PVH guest physmap starts from 0 and coninugiously cover the
-+ * pysical memory space for the first GB of memory.  HVM guest will have I/0
-+ * holes in the first 2MB of memory space (at least for VGA). Therefore we
-+ * should observe the very first record (wich comes in physmap order) to find
-+ * out how we should map this first GB.
-+ * To map the rest of the memory space in both cases (PVH or HVM) we will use
-+ * the maximum available order (up to 1GB), except for forth GB wich holds the
-+ * low MMIO hole (at least for LAPIC MMIO window and for potential passthroughed
-+ * or emulated PCI devices BARs).
-+ */
-+static void x86_hvm_guess_physmap(struct xc_sr_context *ctx, unsigned int count,
-+                         const xen_pfn_t *pfns, const uint32_t *types)
-+{
-+    xen_pfn_t prev;
-+    unsigned int i;
-+
-+
-+    if ( !ctx->x86.hvm.restore.set_guest_type )
-+        return;
-+
-+    for ( i = 0, prev = INVALID_PFN; i < count; ++i )
-+    {
-+        if ( !types || page_type_to_populate(types[i]) )
-+        {
-+            if ( prev == INVALID_MFN )
-+            {
-+                if (pfns[i] != 0)
-+                    break;
-+            }
-+            else
-+            {
-+                if ( pfns[i] != (prev + 1) )
-+                    break;
-+            }
-+            prev = pfns[i];
-+        }
-+    }
-+
-+    ctx->x86.hvm.restore.pvh_guest = (i == count) ? true : false;
-+    ctx->x86.hvm.restore.set_guest_type = false;
-+}
-+
-+/*
-+ *
-+ */
-+static int x86_hvm_get_physmap_order(const struct xc_sr_context *ctx,
-+                                      xen_pfn_t pfn)
-+{
-+    int order;
-+
-+    if ( pfn >= ctx->restore.p2m_size )
-+        return 0;
-+
-+    switch (pfn >> S_PAGE_1GB_ORDER)
-+    {
-+    case 3:
-+        /* The forth GB of memory is mapped with 2MB superpages */
-+        order = S_PAGE_2MB_ORDER;
-+        break;
-+    case 0:
-+        if (!ctx->x86.hvm.restore.pvh_guest)
-+        {
-+            /* First 2MB are mapped as 4K for HVM guest */
-+            order = (pfn > 0x1ff) ? S_PAGE_2MB_ORDER : 0;
-+            break;
-+        }
-+    default:
-+        order = S_PAGE_1GB_ORDER;
-+    }
-+
-+    if ( ((ROUNDUP(pfn + 1, S_PAGE_1GB_ORDER) - 1) >= ctx->restore.p2m_size) &&
-+         order == S_PAGE_1GB_ORDER )
-+        order = S_PAGE_2MB_ORDER;
-+
-+    if ( ((ROUNDUP(pfn + 1, S_PAGE_2MB_ORDER) - 1) >= ctx->restore.p2m_size) &&
-+         order == S_PAGE_2MB_ORDER )
-+        order = 0;
-+
-+    return order;
-+}
-+
- /*
-  * restore_ops function.  Sets extra hvm parameters and seeds the grant table.
-  */
-@@ -258,6 +342,8 @@ struct xc_sr_restore_ops restore_ops_x86_hvm =
-     .localise_page   = x86_hvm_localise_page,
-     .setup           = x86_hvm_setup,
-     .process_record  = x86_hvm_process_record,
-+    .guess_physmap   = x86_hvm_guess_physmap,
-+    .get_physmap_order = x86_hvm_get_physmap_order,
-     .static_data_complete = x86_static_data_complete,
-     .stream_complete = x86_hvm_stream_complete,
-     .cleanup         = x86_hvm_cleanup,
-diff --git a/tools/libs/guest/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
-index dc50b0f5a8..f8545f941a 100644
---- a/tools/libs/guest/xg_sr_restore_x86_pv.c
-+++ b/tools/libs/guest/xg_sr_restore_x86_pv.c
-@@ -59,7 +59,7 @@ static int expand_p2m(struct xc_sr_context *ctx, unsigned long max_pfn)
-     ctx->x86.pv.max_pfn = max_pfn;
-     for ( i = (old_max ? old_max + 1 : 0); i <= max_pfn; ++i )
-     {
--        ctx->restore.ops.set_gfn(ctx, i, INVALID_MFN);
-+        ctx->restore.ops.set_gfn(ctx, i, INVALID_MFN, 0);
-         ctx->restore.ops.set_page_type(ctx, i, 0);
-     }
- 
-@@ -947,9 +947,10 @@ static void x86_pv_set_page_type(struct xc_sr_context *ctx, xen_pfn_t pfn,
- 
- /* restore_ops function. */
- static void x86_pv_set_gfn(struct xc_sr_context *ctx, xen_pfn_t pfn,
--                           xen_pfn_t mfn)
-+                           xen_pfn_t mfn, unsigned int order)
- {
-     assert(pfn <= ctx->x86.pv.max_pfn);
-+    assert(!order);
- 
-     if ( ctx->x86.pv.width == sizeof(uint64_t) )
-         /* 64 bit guest.  Need to expand INVALID_MFN for 32 bit toolstacks. */
-@@ -1113,6 +1114,21 @@ static int x86_pv_process_record(struct xc_sr_context *ctx,
-     }
- }
- 
-+/*
-+ * There's no reliable heuristic which can predict the PV guest physmap.
-+ * Therefore the 0 order always will be used.
-+ */
-+static void x86_pv_guess_physmap(struct xc_sr_context *ctx, unsigned int count,
-+                                 const xen_pfn_t *pfns, const uint32_t *types)
-+{
-+}
-+
-+static int x86_pv_get_physmap_order(const struct xc_sr_context *ctx,
-+                                    xen_pfn_t pfn)
-+{
-+    return 0;
-+}
-+
- /*
-  * restore_ops function.  Update the vcpu context in Xen, pin the pagetables,
-  * rewrite the p2m and seed the grant table.
-@@ -1194,6 +1210,8 @@ struct xc_sr_restore_ops restore_ops_x86_pv =
-     .localise_page   = x86_pv_localise_page,
-     .setup           = x86_pv_setup,
-     .process_record  = x86_pv_process_record,
-+    .guess_physmap   = x86_pv_guess_physmap,
-+    .get_physmap_order = x86_pv_get_physmap_order,
-     .static_data_complete = x86_static_data_complete,
-     .stream_complete = x86_pv_stream_complete,
-     .cleanup         = x86_pv_cleanup,
--- 
-2.34.1
+> 7. Something that I probably overlooked
 
+And this is the main risk here. The huge scope of the original lock
+means that many things are serialized now but won't be anymore once
+the lock is gone.
 
+But yes - thanks for the work. To be honest I don't expect to be able
+to look at this series in detail until after the Xen Summit. And even
+then it may take a while ...
 
-Andrei Semenov | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-w: vates.fr | xcp-ng.org | xen-orchestra.com
+Jan
 
