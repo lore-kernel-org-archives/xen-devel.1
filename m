@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79AEFECAAA1
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:39:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400142.641789 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0A9C54EE9
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:39:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400144.641800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgHs-0008Ni-4L; Tue, 06 Sep 2022 21:39:16 +0000
+	id 1oVgHt-0000Jk-IF; Tue, 06 Sep 2022 21:39:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400142.641789; Tue, 06 Sep 2022 21:39:16 +0000
+Received: by outflank-mailman (output) from mailman id 400144.641800; Tue, 06 Sep 2022 21:39:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgHr-0008MW-Ux; Tue, 06 Sep 2022 21:39:15 +0000
-Received: by outflank-mailman (input) for mailman id 400142;
- Tue, 06 Sep 2022 21:39:14 +0000
+	id 1oVgHt-0000J2-Bd; Tue, 06 Sep 2022 21:39:17 +0000
+Received: by outflank-mailman (input) for mailman id 400144;
+ Tue, 06 Sep 2022 21:39:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Hbfa=ZJ=kernel.org=sj@srs-se1.protection.inumbo.net>)
- id 1oVgGA-0000Cs-JT
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:37:30 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5eee24f9-2e00-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 18:24:25 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E5EA6614A7;
- Tue,  6 Sep 2022 16:24:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6D5CC433C1;
- Tue,  6 Sep 2022 16:24:22 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YUvx=ZJ=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
+ id 1oVgG0-0000Cs-EM
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:37:20 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 52927a1e-2dc2-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 11:00:15 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 45732139F;
+ Tue,  6 Sep 2022 02:00:25 -0700 (PDT)
+Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
+ [10.169.190.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A951A3F7B4;
+ Tue,  6 Sep 2022 02:00:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,119 +45,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5eee24f9-2e00-11ed-af93-0125da4c0113
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1662481463;
-	bh=I9HEnsbD64k69AXnJTEmM71NuSK/jsrCbllGo7OZAcE=;
-	h=From:To:Cc:Subject:Date:From;
-	b=oGNhKoZ23xmRmuMfF5By9jdWcF+k0B2GSVOYstp81XQgpGtsjDdL+emiHg7zYoqMj
-	 IflTD2XbgUMEVE/Eq55++YXOFYXbNtIs8Gmh4D6kxh0WCjoFV2wYWFFrXiAIP0sotW
-	 sVPNy5kCa//2GRAZX2RitE35UUcpj++7o4GjeAnIO5cfR6zH3DGGR6970lnX1UCQ7G
-	 lzKflOjgv6TtMc7FcduohNII9+XludVGhDPdV8Q4YxDYfRfUE0PCsybDCpBZjUn0dx
-	 +ZQxwz7p95fO4m4IyNAHH1pMMwsmcNjx3DNhIWXEM4EfoVws9j9iTM1KyjDy5d4N/t
-	 udVbnIp9osezw==
-From: SeongJae Park <sj@kernel.org>
-To: stable@vger.kernel.org
-Cc: gregkh@linuxfoundation.org,
-	xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	SeongJae Park <sj@kernel.org>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH for-stable-5.10.y] xen-blkfront: Cache feature_persistent value before advertisement
-Date: Tue,  6 Sep 2022 16:24:14 +0000
-Message-Id: <20220906162414.105452-1-sj@kernel.org>
+X-Inumbo-ID: 52927a1e-2dc2-11ed-af93-0125da4c0113
+From: Penny Zheng <Penny.Zheng@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Penny Zheng <penny.zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v7 8/9] xen/arm: enable statically shared memory on Dom0
+Date: Tue,  6 Sep 2022 16:59:40 +0800
+Message-Id: <20220906085941.944592-9-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220906085941.944592-1-Penny.Zheng@arm.com>
+References: <20220906085941.944592-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-commit fe8f65b018effbf473f53af3538d0c1878b8b329 upstream.
+From: Penny Zheng <penny.zheng@arm.com>
 
-Xen blkfront advertises its support of the persistent grants feature
-when it first setting up and when resuming in 'talk_to_blkback()'.
-Then, blkback reads the advertised value when it connects with blkfront
-and decides if it will use the persistent grants feature or not, and
-advertises its decision to blkfront.  Blkfront reads the blkback's
-decision and it also makes the decision for the use of the feature.
+To add statically shared memory nodes in Dom0, user shall put according
+static shared memory configuration under /chosen node.
 
-Commit 402c43ea6b34 ("xen-blkfront: Apply 'feature_persistent' parameter
-when connect"), however, made the blkfront's read of the parameter for
-disabling the advertisement, namely 'feature_persistent', to be done
-when it negotiate, not when advertise.  Therefore blkfront advertises
-without reading the parameter.  As the field for caching the parameter
-value is zero-initialized, it always advertises as the feature is
-disabled, so that the persistent grants feature becomes always disabled.
+This commit adds shm-processing function process_shm in construct_dom0
+to enable statically shared memory on Dom0.
 
-This commit fixes the issue by making the blkfront does parmeter caching
-just before the advertisement.
-
-Fixes: 402c43ea6b34 ("xen-blkfront: Apply 'feature_persistent' parameter when connect")
-Cc: <stable@vger.kernel.org> # 5.10.x
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Signed-off-by: SeongJae Park <sj@kernel.org>
-Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-Link: https://lore.kernel.org/r/20220831165824.94815-4-sj@kernel.org
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
+v7 changes:
+- no change
+---
+v6 change:
+- no change
+---
+v5 change:
+- no change
+---
+v4 change:
+- no change
+---
+v3 change:
+- no change
+---
+v2 change:
+- no change
+---
+ xen/arch/arm/domain_build.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-This patch is a manual backport of the upstream commit on the 5.10.y
-kernel.  Please note that this patch can be applied on the latest 5.10.y
-only after the preceding patch[1] is applied.
-
-[1] https://lore.kernel.org/stable/20220906132819.016040100@linuxfoundation.org/
-
- drivers/block/xen-blkfront.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 9d5460f6e0ff..6f33d62331b1 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -1852,6 +1852,12 @@ static void free_info(struct blkfront_info *info)
- 	kfree(info);
- }
- 
-+/* Enable the persistent grants feature. */
-+static bool feature_persistent = true;
-+module_param(feature_persistent, bool, 0644);
-+MODULE_PARM_DESC(feature_persistent,
-+		"Enables the persistent grants feature");
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 3b7436030e..29865637ef 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2690,6 +2690,11 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+             if ( res )
+                 return res;
+         }
 +
- /* Common code used when first setting up, and when resuming. */
- static int talk_to_blkback(struct xenbus_device *dev,
- 			   struct blkfront_info *info)
-@@ -1943,6 +1949,7 @@ static int talk_to_blkback(struct xenbus_device *dev,
- 		message = "writing protocol";
- 		goto abort_transaction;
- 	}
-+	info->feature_persistent_parm = feature_persistent;
- 	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
- 			info->feature_persistent_parm);
- 	if (err)
-@@ -2019,12 +2026,6 @@ static int negotiate_mq(struct blkfront_info *info)
- 	return 0;
- }
++        res = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
++                                    &kinfo->shm_mem);
++        if ( res )
++            return res;
+     }
  
--/* Enable the persistent grants feature. */
--static bool feature_persistent = true;
--module_param(feature_persistent, bool, 0644);
--MODULE_PARM_DESC(feature_persistent,
--		"Enables the persistent grants feature");
--
- /**
-  * Entry point to this code when a new device is created.  Allocate the basic
-  * structures and the ring buffer for communication with the backend, and
-@@ -2394,7 +2395,6 @@ static void blkfront_gather_backend_features(struct blkfront_info *info)
- 	if (xenbus_read_unsigned(info->xbdev->otherend, "feature-discard", 0))
- 		blkfront_setup_discard(info);
+     res = fdt_end_node(kinfo->fdt);
+@@ -3762,6 +3767,9 @@ static int __init construct_dom0(struct domain *d)
+ {
+     struct kernel_info kinfo = {};
+     int rc;
++#ifdef CONFIG_STATIC_SHM
++    const struct dt_device_node *chosen = dt_find_node_by_path("/chosen");
++#endif
  
--	info->feature_persistent_parm = feature_persistent;
- 	if (info->feature_persistent_parm)
- 		info->feature_persistent =
- 			!!xenbus_read_unsigned(info->xbdev->otherend,
+     /* Sanity! */
+     BUG_ON(d->domain_id != 0);
+@@ -3796,6 +3804,12 @@ static int __init construct_dom0(struct domain *d)
+     allocate_memory_11(d, &kinfo);
+     find_gnttab_region(d, &kinfo);
+ 
++#ifdef CONFIG_STATIC_SHM
++    rc = process_shm(d, &kinfo, chosen);
++    if ( rc < 0 )
++        return rc;
++#endif
++
+     /* Map extra GIC MMIO, irqs and other hw stuffs to dom0. */
+     rc = gic_map_hwdom_extra_mappings(d);
+     if ( rc < 0 )
 -- 
 2.25.1
 
