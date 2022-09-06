@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B5AECAAA1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5562C54EE9
 	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:39:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400235.641942 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.400233.641937 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgIO-000748-27; Tue, 06 Sep 2022 21:39:48 +0000
+	id 1oVgIN-0006tj-9Q; Tue, 06 Sep 2022 21:39:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400235.641942; Tue, 06 Sep 2022 21:39:47 +0000
+Received: by outflank-mailman (output) from mailman id 400233.641937; Tue, 06 Sep 2022 21:39:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgIN-000710-Go; Tue, 06 Sep 2022 21:39:47 +0000
-Received: by outflank-mailman (input) for mailman id 400235;
- Tue, 06 Sep 2022 21:39:45 +0000
+	id 1oVgIM-0006r8-OK; Tue, 06 Sep 2022 21:39:46 +0000
+Received: by outflank-mailman (input) for mailman id 400233;
+ Tue, 06 Sep 2022 21:39:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CCHN=ZJ=linaro.org=leo.yan@srs-se1.protection.inumbo.net>)
- id 1oVgHL-0000Cs-69
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:38:43 +0000
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [2607:f8b0:4864:20::62a])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=o/Pp=ZJ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1oVgHT-0000Cs-7F
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:38:51 +0000
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr130087.outbound.protection.outlook.com [40.107.13.87])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 77817fd5-2df6-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 17:13:31 +0200 (CEST)
-Received: by mail-pl1-x62a.google.com with SMTP id u22so11572406plq.12
- for <xen-devel@lists.xenproject.org>; Tue, 06 Sep 2022 08:13:31 -0700 (PDT)
-Received: from leoy-huanghe.lan (n058152048222.netvigator.com. [58.152.48.222])
- by smtp.gmail.com with ESMTPSA id
- cp12-20020a170902e78c00b00176ae5c0f3dsm4612341plb.171.2022.09.06.08.13.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Sep 2022 08:13:29 -0700 (PDT)
+ id 253ff66f-2dfc-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 17:54:10 +0200 (CEST)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by HE1PR0402MB3356.eurprd04.prod.outlook.com (2603:10a6:7:8a::29)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.18; Tue, 6 Sep
+ 2022 15:54:08 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::59bc:901a:98a7:76d4]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::59bc:901a:98a7:76d4%5]) with mapi id 15.20.5588.017; Tue, 6 Sep 2022
+ 15:54:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,179 +48,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 77817fd5-2df6-11ed-af93-0125da4c0113
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date;
-        bh=jA89J5PXWFSo0e0TqoV7gOHS44VOEBuMtm2R8Su092w=;
-        b=cp2rtOrnzJS3wbldxOBy+V7nGWzxJIjTr7pwwkD0dyDexznSGikxJRK2/RzvLruA0z
-         E8H9PSYBBQCpo4oJ9h3xdPtkRgaSeKUEjQwXyDXffk0WfQPi2oDNMzR+VI/xJiMHNtBD
-         fKEtVgDoG7NpQKnzwV1Is1k2koaW44tUhY1OFMqXlvaXUKe1s+bQlfeMJBp3d9YHgynu
-         IIznmJ6v+DnQ++XXPtpNZzxBrwArAAXjsmqZpkrmKKmzELd2EsABKSMkkHUzPWgJ1NLY
-         N63bMg8XkRc20GX7QaiDXS2t6juTD97kzcUDP6DUe1CoL4NYx3jYDgSLNuCH3TD1z3EP
-         SrVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
-        bh=jA89J5PXWFSo0e0TqoV7gOHS44VOEBuMtm2R8Su092w=;
-        b=6NIdTXZpfdbKbU9Sn5jSAp/v/BOXGDyYTL471NT1UwC1FxuAVQvJNnk0/LQQEwBNF6
-         I87L9IXADzem0zsseiJVfI/vyfoixGvHGtZZ0Wl9ODNzXnq2VefJ+yBTXjoFL10NSQle
-         YetMio83uKfKI0sWbemd68XA5KFoHwjQn/18Sf1x6DYeSFmb3K/NkWvWZ9pm2bG7C1Z7
-         9iVPDJEksEClmk8zy/QEIO5CjWfv9YcxC071AYhpcIkpgrOkU3ijEsbd6NeXTmjkqzDX
-         p5AVHmvhvbsH/0Qgc3hs8zD3OlQ/hRXnNT3Hi0DwS6RZG1+8LbWuGRCDUbZ8jtYwH7YE
-         Izrw==
-X-Gm-Message-State: ACgBeo3hsLo0e/tTXD2UCimuZAm3+WoeSZ+AM+TsJFDHwwz2Mhy+DCUc
-	StG37ukCxu47Xx+/4bu33LOVuw==
-X-Google-Smtp-Source: AA6agR4WewInFzFmv6YhxACWQaFEDh/Lc3sUXlRsCzH7xXMcaUoc77SE2+K7/mZAaAGR6MRmT7o+LA==
-X-Received: by 2002:a17:902:e844:b0:172:d21c:3fe2 with SMTP id t4-20020a170902e84400b00172d21c3fe2mr54473636plg.43.1662477210088;
-        Tue, 06 Sep 2022 08:13:30 -0700 (PDT)
-Date: Tue, 6 Sep 2022 23:13:25 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Marc Zyngier <maz@kernel.org>
-Cc: Julien Grall <julien@xen.org>, Ard Biesheuvel <ardb@kernel.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Bertrand Marquis <Bertrand.Marquis@arm.com>,
-	Rahul Singh <Rahul.Singh@arm.com>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	xen-devel <xen-devel@lists.xenproject.org>,
-	Julien Grall <jgrall@amazon.com>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [PATCH] xen/arm: acpi: Support memory reserve configuration table
-Message-ID: <YxdjlddwusPJ4GTU@leoy-huanghe.lan>
-References: <871qtcsacd.wl-maz@kernel.org>
- <Ywcr1849LiEHezd3@leoy-huanghe>
- <12a8c169-55aa-5e9f-19f8-acd77ea2a8fe@xen.org>
- <YwdiDr2uLXGEl2TC@leoy-huanghe>
- <52f24132-ba2b-d4ab-ebd0-613f673b5658@xen.org>
- <YweJ6ZpRhMkT5bab@leoy-yangtze.lan>
- <CALZQ+UN8cQ4avggxqgjed=DsitfEteQpuhEqb+p747vmeFCyUA@mail.gmail.com>
- <87r10puiey.wl-maz@kernel.org>
- <Yxbz+pOs5+1RkEkx@leoy-huanghe.lan>
- <87leqxq6qp.wl-maz@kernel.org>
+X-Inumbo-ID: 253ff66f-2dfc-11ed-af93-0125da4c0113
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TIPnV44K0ew46faJv1fCjxhnZZ6LmTl6/ooqtVAx62RB6xVWZ2u3Xhewsu6XyhkGudBtA/QztbnP/B8oVviBuG9RTVlMlAVviIPnVa9k1E+B9NoGX/KvdavheivwFmNAG0cSnwJl6VWqkkbmRs8ObB2uRMMTnofcmiD+FhES0N1ijiJbrc0dPl8++zaeBmo4ff7eynFW6B94iGGXlrLLJqIFYLv+LaZaeWbuqzNfe48hqBy4pBVABvszNSb6qwn/MtY98x49AyUJhNUGxLaDBuDH/qUqWNUfZuYysxdSQg7Fjm4+tSQhorqsFs9lAwWobm6IPyt/0nl++7NDWX8ABg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1iDBAHzV9MbG1FBjlh7WM0trQYZ4f3zj/7HPeYAcyrE=;
+ b=ButTz2teH3HoO2PMOb8OqkqALGEpZRqnAk+LMQsk3/VDyJy4tf362tppy5AlG0hjAGnHgDivaA4Y/MEr6dxxUrR18CLJejB0pXXhGcQdw9KllFMAkqGzYcQnAfq3jAaamxI4sEwNSFIrUfLbdL11fmsX9p5owylR9OukFm3rqFskyddOCUKFHextvWx6WcOjVJG66J1zkIAb3HShgSurI5eIIu9shsXxZi89vE3UbGOfPvTNJDVwcDVLneMVWbd0nFQQKd+FRoiL65PHR/D2PTwOeEVz6mNhu0yD0YrCrD8DJEr+tXLKT0F4co8zs5i9ERbcANPQzULY5SD/KvbIIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1iDBAHzV9MbG1FBjlh7WM0trQYZ4f3zj/7HPeYAcyrE=;
+ b=5mltI3BqFqD/ncFNdaOVNjAmsSw+eHAG24AWI27+uzizAXiAEzcZuhbAdrfxq43bpoDgZbN/n3a9lm0WCWcVpG705Or6xZxjZYOgxPMju4cylViFvZYZ7bgNcDGZp981CyJEUML0vx5hojVkF/8VRAPQzq+zaUidGDdlvho2bipgbHRY/gn4SraNwuJ1g5n6+L2AKFMTuFQUpjjQlwLxnHYmZNcuQlEeWWBJSq0YAZXW89OJybPdjL3BLZLWYtdgfC6ppyUll91aBZjXOMPXOyn3z/hAKtv3iHqk6EqhuX2XdPoYbLpp5s2aB5Oas2bb1HkfgL0sfahxa2J4c9IxwA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <5289a154-177e-4805-2123-f5f2226394cd@suse.com>
+Date: Tue, 6 Sep 2022 17:54:07 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+Subject: Re: [PATCH v6 01/10] drivers/char: allow using both dbgp=xhci and
+ dbgp=ehci
+Content-Language: en-US
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.00134d06d2e52e209e9f7778513a27cf0b2a3bd3.1662124370.git-series.marmarek@invisiblethingslab.com>
+ <f9c4f0df804ed406dea0e480614a033d5bd434c6.1662124370.git-series.marmarek@invisiblethingslab.com>
+ <08c9df71-0470-c9eb-94f0-776eaacefa5b@suse.com> <YxdrRUEJ31ZgmilH@mail-itl>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <YxdrRUEJ31ZgmilH@mail-itl>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0078.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1e::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87leqxq6qp.wl-maz@kernel.org>
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3272b511-efff-4b6b-cba9-08da90200899
+X-MS-TrafficTypeDiagnostic: HE1PR0402MB3356:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	uKTTyzd14e/rkLKEvYVOT6004T0HR0jpu6hghjtXttGYm+EC61jNa054jQoSfllETndc3oHfKFVcUtmmingO7pc4VG6QEpDuOo1vlZixz8ZHNLbJasGQX5v5INTA8cb9zUXT1KFBRAkoBQNA7nZP78fz3FFCwU4vtJAI6RrwbR3M+RgUNNRSheXeoqR07Pln5RC/DHgeelRZRBr6nzGhXww5v2/2ieoHRqFGxOscP4lIPxmE+o6YIVN6G+DNyWtA5jb9e7OFRgQjNhppxWZDauHjrWqDs+L0GPDhY2A0jRoqaDcaf74DHrG/2RuIxxtMNWNN6x/ZPHI3n5usYoBKbcwqhAVS4gUAgIM9CAacuFhpfdEdXKqYT7UhJhga34nz+Tt2dTKMQ9yUl98F9X6ISbK+o+LpGQOjpxOwbTaCPCu8yw84o/D/FRpFjqOypUEbVShdHaqpw1nNzXVd0Xq86jrs2S8Xu1OkeQduUTpoW6uuo+KdxVWiAJNCFDbTXebg2tR7He6iJvfJBXv/Kd6zc6m2MwOrnlU1mWExCJOLzWoudSG+09e0M3kBPItl3f53PZxGtgbsbi+2Gfl5xhcp2kUzCbfDv/dSyXkRxPaskFvLHGW3hOSXQOvH+qpy1rW1yN46Jy4J7EajZzhLAZzmWEsmSInDvhbJm5w2M5UC4YSSJ6kqLcbsGDpwjs7IpNWVBOGAwN0WLt1hxpOaKokQuZp43QcJktdNN2cm/OOs9jnJf0QlWQh8jBObuC2B3tO9sZPe27KhFeNheuK+dOJhO9Y69xTDF9j/MxXTEoV53Ds=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(136003)(39860400002)(396003)(376002)(346002)(366004)(31686004)(53546011)(26005)(6512007)(6506007)(41300700001)(2906002)(478600001)(38100700002)(6486002)(36756003)(66556008)(66946007)(54906003)(6916009)(316002)(5660300002)(4744005)(8676002)(66476007)(31696002)(86362001)(8936002)(186003)(4326008)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?VjhqRjhTc2NrNnl4ZVNFVkpTQWdEeEk5NjQrVldWUWRUek5jcVUxUU15am43?=
+ =?utf-8?B?YTFHU2VmQ1ZzNFlGT1dEQ2dDUXltSllkSm5xVDFaQTNoQlNJL0tydEhXSGFE?=
+ =?utf-8?B?NjRvVFVqNFR1SUROampoR1V4TGJYdmxZdDU1QTZlVnlRN3ppNFhucjlCdE5Y?=
+ =?utf-8?B?V0NzV0FFNzg2NGczcFd3UTdwY01qc3dOYXBzWmVjK0I2bTlTdTJJbFdpM2Qz?=
+ =?utf-8?B?NVJmbkltdmM5ZWNRbk4ydHlGQWI5SzBRdk1tY0tPTEdBUDB0clJBSjdXR2xL?=
+ =?utf-8?B?cWttc2Z4SjVKK0N6amdFVXZMS2hEUFMrV1dNRXVYUS8wVDZqVjlrN0ttclFq?=
+ =?utf-8?B?dnUveDg1YmxSU09INjRMeE92QW5uSTNmM3Q5L3pIZGhxdURaVEtGRjhYZ2JR?=
+ =?utf-8?B?dytOUVZkcVRjQnBtL01DL1ovNUFXNFU0WVA4SGRTZDdzc3MxbnRDd29rcGho?=
+ =?utf-8?B?cFZkSm5naVdwU0x2eEJrNHhwMVNmZDVyOEJPQ21tNS95ZUVWL0E0TlVlMFBn?=
+ =?utf-8?B?S3FQcG1mRjdXNGhyWVhFWmdEY0NhS2pRUGFWR1lkQ1lZTFg2V2J1ZE4ycnlW?=
+ =?utf-8?B?V0QxYUQ0OTI2NUpBVDFCQ21rZjk5UEh2clhqcWpHa3ZUWnFJNEcwNWd5bTJC?=
+ =?utf-8?B?MXdhSWdRN2l6K2UrRkZEejRONVZmbDlnalNJTkhWMGlKR0V6V0JESVJRenA5?=
+ =?utf-8?B?NEg0cW0ySlRybTVyMEFMb3R4MVRCRmsyOE1ybGVPbWxkRE9FOGhKUGh3cW0y?=
+ =?utf-8?B?MjFMUTdXV1JBa21iYTNVVE5xWDhreVlTdkxxVXA2OWJ3WVVqVlJXaTh5NWJH?=
+ =?utf-8?B?eG9VU0tFMWdxWWFCRXFKTEd0a2R4NlBGUzFRRTBDTTN2Q3VHdXdiVm83UHdW?=
+ =?utf-8?B?N0NpemVPQTJYY2J6d1BlT0E3dEJEQmx5YUhDQlVUcWQ5RUZYNGJETWI2UlIy?=
+ =?utf-8?B?UlZ1N01NQ0VzS3N5M0FNNXBxVFliR3JUYktBa04va1lSZXpOeG5WVUFkRXBz?=
+ =?utf-8?B?ZlBwaTFML3lCbWpIRFJGaXZIc25CVjZXQzBaYzRBbkhYU2hPOVpUTzRseGZJ?=
+ =?utf-8?B?emFCSlBIUDdaWG5hR0NuYnZCcERod04yQUdoYVZIOHMwUHFORzJPaXd1NnI5?=
+ =?utf-8?B?TlVGalZLanJhQ0NZaUVWckw2dFRiYzIzSW5YbUhPWTdsUC9rc3ovZGp2ZGRz?=
+ =?utf-8?B?UlE0NVpMbisrWVhVNVFGQTF0NU92eUNtZVh4dnp1VjU4dXFLQnIzVFZZZXFS?=
+ =?utf-8?B?TGQ0MFZpNFhPVTEycHBiYi9iV0JLOE5WL1pvTnIrZ2MybUtDOCtLM2VJazcv?=
+ =?utf-8?B?QUxQMVBvUDFxT2lsa3BqQUxyQkcxRmgzVDZTdDZhcVp6NDFLeUxaUWtBZTNJ?=
+ =?utf-8?B?YlJPdlZGQ3N0cUVFYlhDMm05MW9nUThjYVhnY3lvZ3JPMjE4VGZxbGZXZDdu?=
+ =?utf-8?B?Zk4rS3kxVGU4SE1rL1pvSG1iQ2VRRElOaEVKUXRSMGV6WjZnNTdMa3BlajhX?=
+ =?utf-8?B?TnBZd0kwQkVkN0R4NElPditnak13dmQ1N2g2c0kvOXF5bG9qREJJbU54VWlp?=
+ =?utf-8?B?Ky9DRmxzZUVRaktpR2JPVUZPN2YyRjFJam52YmFQYVorMTVZc2czODlSV2VH?=
+ =?utf-8?B?QVEyMDNGdTFyREcrMlVvTXFXTXZiMy9CL0tibG1IZVUvbThPejgrSU5VK0FP?=
+ =?utf-8?B?Zi9uNUIyVm1HVXFacTVIOFlhTi9ZRVplRW1PMm9MZkQ2U0Z5ekRGR3laM0Z6?=
+ =?utf-8?B?eG5QQU0zcDdXakYybVBOUmQvbi9pVkhUVllpMkJ3RXc3VEJvTmF4ZVFBdWJC?=
+ =?utf-8?B?Z0MySXh6RWZrd0VCY2Frc1lseUFkb1l4d3E0SlIvdGZCTFo2aHlvaVhhM0J4?=
+ =?utf-8?B?ejExbXFxSUZtOVNBQXo2NzVJMEU0by96UVZJUUQ5Z2dPTm1IT055YlN3OVc0?=
+ =?utf-8?B?Q0NnU2lQMEZnRnhpZUxENitnZ0YrU0hjNERwSGcvWjllMlZnaHhuMU1SZTUy?=
+ =?utf-8?B?emNCdGNvWmNpbWFQYzRIaW5hQ29ScnF2SmNjb2VqYzFVZGErdStFVCtIRmpE?=
+ =?utf-8?B?blRoUi82MUlLamplRHJXMEJ4VncxL2w2OHFpczA3SVBzSzgzeXhuQnc1UmYw?=
+ =?utf-8?Q?cjcSqUzh7iIAFrR19oHiOj3jW?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3272b511-efff-4b6b-cba9-08da90200899
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2022 15:54:08.5558
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pwpQLdD6uRqScWhTlvHpNXgHJ6OSSJa482T1HxXNPsXP5U/KIv2RLpUEAtYu+5d8ghcgrJ2eDcAluFwNeutj3w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0402MB3356
 
-On Tue, Sep 06, 2022 at 08:53:02AM +0100, Marc Zyngier wrote:
-
-[...]
-
-> > Okay, I think have two questions for you:
-> > 
-> > - The first question is if we really need to reserve persistent memory
-> >   for RD pending table and configuration table when Linux kernel runs
-> >   in Xen domain?
+On 06.09.2022 17:46, Marek Marczykowski-Górecki wrote:
+> On Tue, Sep 06, 2022 at 05:07:27PM +0200, Jan Beulich wrote:
+>> On 02.09.2022 15:17, Marek Marczykowski-Górecki wrote:
+>>> --- a/xen/drivers/char/xhci-dbc.c
+>>> +++ b/xen/drivers/char/xhci-dbc.c
+>>> @@ -245,6 +245,7 @@ struct dbc {
+>>>      uint64_t xhc_dbc_offset;
+>>>      void __iomem *xhc_mmio;
+>>>  
+>>> +    bool enable; /* whether dbgp=xhci was set at all */
+>>
+>> In dbc_init_xhc() there's an assumption that the "sbdf" field is
+>> always non-zero. Do you really need this separate flag then?
 > 
-> I have no idea, and really I don't want to know. The architecture
-> doesn't make it safe to reuse that memory, and the driver does the
-> right thing by always reserving that memory when the FW is supposed to
-> support it.
-> 
-> The "oh but it is safe on so and so" approach doesn't scale. If you
-> want to have such a thing, just convince people at ARM that it is
-> possible to implement a GICv3-compliant system without the RD tables,
-> get them to update the architecture to allow this scheme and advertise
-> it in a discoverable register. Xen could then implement it, Linux
-> could check this bit, and we'd all be a happy family.
+> Not really, sbdf == 0 means "find Nth xhci", where N=xhc_num+1 (and
+> xhc_num can be zero too). See the "if" at the very top of
+> dbc_init_xhc().
 
-I agree that my patch is not based on a scale approach, this is also
-my concern.
+Oh, I see. I'm sorry for mis-reading that code.
 
-To be honest, convincing Arm GIC team is a bit out of my working scope.
-I am working on automative project, when I saw verbose log with bunch of
-kernel warnings with Xen, it motivated me to chase down, this is the
-main reason I tried to explore some solutions at here.
-
-> Because that's really what this is: it isn't that you don't care about
-> the RD tables being reserved. It is that you don't care about them at
-> all because they are never used by Xen as the GIC implementation. Your
-> approach of "huh, let's not reserve it" just papers over this.
-
-> > - If the first question's answer is no, so it's not necessary to reserve
-> >   RD pending table and configuration table for Xen, then what's the good
-> >   way to dismiss the kernel oops?
-> 
-> A warning, not an oops.
-> 
-> > 
-> > IIUC, you consider the general flow from architecture view, so you prefer
-> > to ask Xen to implement EFI stub to comply the general flow for EFI
-> > booting sequence, right?
-> 
-> If you want to use ACPI, you use EFI, and not a vague emulation of
-> it. If you use DT, you can reserve the memory upfront. The various
-> alternatives are in this thread.
-
-Given I proposed two fixes, one is for Xen and another is for kernel,
-but both are rejected, so I would like to hold on a bit for this.
-
-Maybe it's a good point for Xen maintainers to review if it needs to
-support EFI stub, or welcome any other suggestions.
-
-> > If the conclusion is to change Xen for support EFI stub, then this
-> > would be fine for me and I will hold on and leave Xen developers to work
-> > on it.
-> > 
-> > > > [1] https://lore.kernel.org/lkml/20220906024040.503764-1-leo.yan@linaro.org/T/#u
-> > > 
-> > > I'm totally baffled by the fact you're trying to add some extra hacks
-> > > to Linux just to paper over some of the Xen's own issues.
-> > 
-> > I have a last question for why kernel reserves RD pending table and
-> > configuration table for kexec.  As we know, the primary kernel and
-> > the secondary kernel use separate memory regions,
-> 
-> No, you got it wrong. Only with *kdump* do you get separate memory
-> regions. kexec reuses all of the memory visible by the primary kernel.
-
-Thanks for correction.
-
-> > this means there have
-> > no race condition that secondary kernel modifies the tables whilist the
-> > GIC accesses the table if the secondary kernel allocates new pages for
-> > RD tables.  So only one potential issue I can image is the secondary
-> > kernel sets new RD pending table and configuration table, which might
-> > introduce inconsistent issue with rest RDs in the system.
-> > 
-> > Could you confirm if my understanding is correct or not?
-> 
-> It isn't correct.
-> 
-> - There is no race condition. Once the RD tables are configured, they
->   cannot be changed.
-> 
-> - When the kdump kernel boots, none of the primary OS memory is
->   reused, so it is safe to continue and use the same tables in place
-> 
-> - When the kexec kernel boots, all of the memory except for the
->   reserved memory is reused. If your RD tables are used for anything,
->   you'll see memory corruption as the GIC writes pending bits in the
->   pending table, and you'll be unable to configure interrupts
->   correctly.
-
-This gives me impression that when do a power cycle, CPUs are reset
-but GIC is still alive, so for every booting time the same memory
-region should be reserved for RD tables.
-
-To be honest, it's a bit weird for me that if a system cannot reset
-CPUs and GIC together.
-
-> In conclusion, using kexec with GICv3 is completely unsafe if you
-> don't reserve the memory allocated to the RDs.
-> 
-> > Sorry for noise and many questions.  I understand this is a complex
-> > and difficult topic for me, and it's very likely that I am absent
-> > sufficient knowledge for this part, this is just what I want to
-> > learn from the discussion and from you :-)
-> 
-> I suggest you read the architecture spec, which has all the details.
-
-Thank you for many suggestions!  I read a bit for GICv3/v4 arch spec
-at last week, but I need to do more homework.
-
-Thanks,
-Leo
+Jan
 
