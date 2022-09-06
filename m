@@ -4,39 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FABC54EE9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFCBECAAA1
 	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 21:50:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400394.642121 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.400399.642127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSi-00037s-7T; Tue, 06 Sep 2022 21:50:28 +0000
+	id 1oVgSj-0003Jh-2i; Tue, 06 Sep 2022 21:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400394.642121; Tue, 06 Sep 2022 21:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 400399.642127; Tue, 06 Sep 2022 21:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVgSi-00037f-3I; Tue, 06 Sep 2022 21:50:28 +0000
-Received: by outflank-mailman (input) for mailman id 400394;
- Tue, 06 Sep 2022 21:50:26 +0000
+	id 1oVgSi-0003HR-R7; Tue, 06 Sep 2022 21:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 400399;
+ Tue, 06 Sep 2022 21:50:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=o/Pp=ZJ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1oVgIe-0000Cs-Jr
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:40:04 +0000
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2069.outbound.protection.outlook.com [40.107.105.69])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51fdf2d6-2df7-11ed-af93-0125da4c0113;
- Tue, 06 Sep 2022 17:19:37 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AM0PR04MB5538.eurprd04.prod.outlook.com (2603:10a6:208:116::33)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.12; Tue, 6 Sep
- 2022 15:19:35 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::59bc:901a:98a7:76d4]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::59bc:901a:98a7:76d4%5]) with mapi id 15.20.5588.017; Tue, 6 Sep 2022
- 15:19:35 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YUvx=ZJ=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
+ id 1oVgHs-0000Cs-BU
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 21:39:16 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 4506b3cb-2dc2-11ed-af93-0125da4c0113;
+ Tue, 06 Sep 2022 10:59:52 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 897E81756;
+ Tue,  6 Sep 2022 02:00:02 -0700 (PDT)
+Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
+ [10.169.190.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id ED8C93F7B4;
+ Tue,  6 Sep 2022 01:59:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,111 +45,456 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51fdf2d6-2df7-11ed-af93-0125da4c0113
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SYMGqPpnjogP8Al98+icrL464+9P70ZKJCnJa/r82Dyp+lFCcv0x/dqqPjGpMWmz1e7SN2H6kPOeD3wzW/TSnWRIvWoHzaGF2uwl6cHXApr2g02VF3PUchaENodAn/E+VrXrRJmTv+EMXUxChNLmj/Ns4flnSkcBEs6kFFmrrJllR98BAg8xECTAem/tD/g3GLp6cx8yHDjgB0+BPGszg06xqTxM7JMEarPnrs90a2xvB1ZDDpOLMdjaWlLVr4/DRryOjST5jolRS4qy4c2dTEexNwzQaXHWR8KYuu4bZ3UPV7Fa+0xYskFj9daKo7VogoC92BJmQV5XmJkzBCuyhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wDEf9qVEL1hTifWUUb4Tp4Q2nMlfRlUG6qWgu15qKVg=;
- b=SyNWjMDV/pr+03Z6X6Ya9ZNzUbdVrrCyMVcuDUnds/p540nJo5Zyj7s71KuT9WF4bajXmTb/s7YU36i7XT/xU9s2o06EKoWXKYz0JQkFGoo0kSFhajHxnOMfuPQYBtyGbtdzQKTzkRjHbBd8gaHNxt6abBCVktsyacFupP0ZCMUsPqOiEUQYZXIt8wv7QLcEbRkNSlwLN6lueNb+DCxPT70md0juLDKnJhE34wW0VW6sK8Mq2bgARwzfNBPEMK/7MiLnUplx+PGywpWjYDfzyq0IpQ5OHZQspiwAODX/YWUJdqqCQAZADzF8wzAK8W8NUMrtQg9y5aItzFT2jq5tIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wDEf9qVEL1hTifWUUb4Tp4Q2nMlfRlUG6qWgu15qKVg=;
- b=iqGOwWYCgXg1y4HHPBoYuj/s7aD4mmsJjXh5x0rQIjT2E5o5C8UrEgMVYcqSPJKEmVPUSakkdLT4/k0NMjiOQuLKFzKnJoPvQs0gceYr4tSbIfRgGMh47ccxWpJF+uZEydMSKqYZZ4gcmsPMyR3hDmw3ZvaESSTA+noAe6It7k2ZhNOF+vMsRCQWHglCoSRVxebpWUhJHY81qrVttHZOYlRTHh7isc7ZU3AK5LYwH/mPO1+WmbyT6FiO5u2wW523xmxE6vnkZaKw1kGFF9ajYtzwwf4K8aZXJMmLHnXouZnZ2+7X81mf49w8s8GPGn3ijcDLYIjbrc+ee0js5lTcyg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <788681d2-123b-8af1-0f29-cae0c72a920f@suse.com>
-Date: Tue, 6 Sep 2022 17:19:34 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.1
-Subject: Re: [PATCH v1 1/4] automation: Only filter build-*/ in gitignore
-Content-Language: en-US
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <cover.1661352827.git.bertrand.marquis@arm.com>
- <b51e0e7682cf45e5844de8e0f1ef1593049b6c05.1661352827.git.bertrand.marquis@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <b51e0e7682cf45e5844de8e0f1ef1593049b6c05.1661352827.git.bertrand.marquis@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0058.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:49::19) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-Inumbo-ID: 4506b3cb-2dc2-11ed-af93-0125da4c0113
+From: Penny Zheng <Penny.Zheng@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Penny Zheng <penny.zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v7 1/9] xen/arm: introduce static shared memory
+Date: Tue,  6 Sep 2022 16:59:33 +0800
+Message-Id: <20220906085941.944592-2-Penny.Zheng@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220906085941.944592-1-Penny.Zheng@arm.com>
+References: <20220906085941.944592-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ac93ecb6-e7e2-4eae-aec9-08da901b3528
-X-MS-TrafficTypeDiagnostic: AM0PR04MB5538:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	A9ApIci+jiV2kEub7pv5WKd3kL3zkZQ+eWlsTC8SR9ypdK8mY3vEAbBYZ88jc8Op9XlvGyjcxaHoKQpexOzAHYTXoq7IaJ6M3BzvHFtK8DpaOabKU420G/kzdfEIuZntFx33wU5xbbR8J9dkfGCeCk1M71fkVpU9CgEf1PHzStjlR8czFsQDm3ceMIn/4hz0lZ+URVsdLCFP3Won3UuKq0uB89WU5a+OnZRn6FXJfQDlZKNqzcS0xfHi93Xnd1p4kOSrQcsxM8TGy1KmmPXgidr4OQlHnh9WJ60iseiITl9P3xgCewBNA3q2HLC/FD2/ofDOYtDtmAX5CdkdITXk9kmI9F3ZPbY22gCu1HPqedH4o9tObKAnUAgc3vKsw7qTEoIsiE8yEchlDkeLw7yp8IymaCQoT6GqUcvHwdXPMOWchcDtlbdB5P/9ab7VUno0FnQVsUAQMefVBrTnP0a/354KBO2qUqT6AZcPv1wUoznhTAAWBrqEAkG92nkYAn7PuIsnXqmmEmKhao24SQmHceMyxHHoOpShzXYotslknGohcaRcrnc0rVZZTJ2AVfY8qx0pTmqNGoDdmcrkl7fyBP/iYLi19/siHajQYqpUcLofpoyeC1CRZpEJsCVomcZQiNtiaZnK3WsJ4EwbCIQCa3V4d+mEuHoWB5GV3Bz3siCYPQPfZEDxgnxpk+O3z2ITnDmm3FsQ2bpzALByFHVWF1HyDWIq9gXW6JkXvlqu40d5ME8bLMX7+ev9cmJwRCFKYeDfMM7a35IT7ArL5QFWX1aBapalvEL3MhM2ditjxbA=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(376002)(136003)(396003)(39860400002)(346002)(8936002)(5660300002)(2906002)(31686004)(66476007)(36756003)(8676002)(558084003)(38100700002)(4326008)(66556008)(66946007)(316002)(6916009)(54906003)(86362001)(31696002)(6506007)(26005)(2616005)(41300700001)(186003)(478600001)(53546011)(6512007)(6486002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dDAyZ0N2dUVmRFdVMnNraTZ6eFJpQWJoNGN5dXhWYm93Zkh6QmNaMGdLVHNx?=
- =?utf-8?B?UFAyNjhXOXJMN0xvZ3ZGRm5tb21RclpTR3VQY3JGcSt0c3FDdEZ6ZEhKRHhT?=
- =?utf-8?B?ZW5Wc05ESmxuUklCQnZ2d2V2MFFZR0Urd3g3UkN4U1NJZ1BGSUcvdFJXc01j?=
- =?utf-8?B?Vk1oSmtkQ0NUSzM1bXAvVlhUcjM3cU1nOHpBTzdndUdhV21QTUEzRy9RWXk2?=
- =?utf-8?B?SnRjZHZ5dWg5dG1oTDV3WHlNQ2NYQ1FsT3JaVnU5VkUyR0N0eERjN0gvZWMw?=
- =?utf-8?B?dnh1YlpKQXgvK25lTzNYaVBXQjlmY0N4Y21LT0ZXejRXWW9BRnBJR0dKZnha?=
- =?utf-8?B?VzJNbXdkOUUrRy9wNnJnb05lQXpwa0FSUmdPZmlKejBoY2NmUXhFWHhHbldS?=
- =?utf-8?B?Um02TFFyaEMzRUhVR2JSSEplMU52Slc1cFZSS3JaTUV1dWQ1eFB4ZHlwZGJn?=
- =?utf-8?B?MCtENHdsL0NwNE0vVTFBSml6dzg1dCtvWVNKQmhTeC9HRGFCL2M5VnExSGZJ?=
- =?utf-8?B?V1QvM1NuczUwREFtZGFaQkUzU3NSeUNOTDZjZ3ljc2xlMW13Y05yQ1ovdkdr?=
- =?utf-8?B?OGFoU215Mlp5OHU0NkdyUG9ZaGQxZWZNdmxvcGhva2MvM1pNUExneWJ6OFkz?=
- =?utf-8?B?Y1NwWkRsRGZTbGpOQWV5anJzNnFmOEI0aDBCd05WbXAwVjJtMWpmdEEwdnN5?=
- =?utf-8?B?eXpoOGFvR1J5Y2RJWVNrdWZ4UzU1SHl3dE1XUFd1VTAyaUxEZXJWYkxXRjRm?=
- =?utf-8?B?eHB0dnBEVlZxaU04bTJyZVdxUlFRZ3pLZHV3bjJTdUJaR2ZSdkx0UWFoNnFX?=
- =?utf-8?B?U2hUREJIVXRCS2pBSUN3TGh1d1FuenR2VzdYanVlQmVKeUNkN0ozNjVvYURm?=
- =?utf-8?B?cWJ3K0xRQi9XQXFycmZXbnFTaDNBc3BiMytYWCtic2Vvc1pBcE4vRndpZmhp?=
- =?utf-8?B?a2JpakZTVC9ScmVLeFBYcU1Sd211MXNaV0pINjBGbXhUTFZkWjBJNWE1Zll5?=
- =?utf-8?B?M3FRZDkzbFYrVjRlMnM5b3pDaU1ITGs1eUdzZ2ZpVVpURkRCMisrcFJaRno2?=
- =?utf-8?B?dXVTcHdOZnZaRngzUHo4ZTAveEFKVUpSS1FEcjZkMDQwdStyVjNvSzlVUVZu?=
- =?utf-8?B?by9wZ0I0VW1ndkVwOTVCVHBEODdNYzZEMjlwcEEwbEdPTTA2aTB5RC9UdXlB?=
- =?utf-8?B?dTdYc3VlOEYzbUNMK1J1dStTNXhqUU5zMWs1T0ZzQkN5VjhoQk9XL1dOakl6?=
- =?utf-8?B?OXVrdHVHcTBWbHgxdzg4L3ozNVRnK2dFeTYrSzJ1WFVCekxJSUtoeHpXVlVE?=
- =?utf-8?B?NlNVUjIzZUNFWk9QL0xRUENFeW1lcVg3em5yV1lUS0dqa3BPcXorSW1wcVdT?=
- =?utf-8?B?MjBvaysvakZhRUU2Zmc1RDdueklnRG8xeU9DbXhSaDdndUpSeW9xaSsxa0JC?=
- =?utf-8?B?R1pWNW5nSzA4T0FLbyszVDcxTGxRNmV4TlZNZE9yL0UyTzQ3ZzY2QWpvcU5q?=
- =?utf-8?B?UVNuQW82U1NTaCtTZ2ZKRVhmOXF5elREYUtOWnMzcTFKVWxHZENaMm4xd2l1?=
- =?utf-8?B?TVloOHAzdEFjNUZHdVI4VUl1SUlueWZyNWhZTkQ4UnRPaXMzTGtydzJ6RCtu?=
- =?utf-8?B?VnB0RjRVR0VucGZROTU5b2pVRm9QN3FKNGlBMU8yVWk4SGFkQzc4SVdMZWVD?=
- =?utf-8?B?NFlqMU50bStmcS9BaW9STDlnYnpsck8rZ3ZYcVRaeTNrTkdkRTJlZFdsUFhn?=
- =?utf-8?B?UzNZZDdNblExRzJldmpTOW9ROEdJK2JhMmRhWkRsbElGVHRQcnFrNm1jK0ZB?=
- =?utf-8?B?a2dGMEx6R2ZJYkErL05lTisrSkZ3eTBESlQ4VndkcnRPbXhVYXpiNmFteW8y?=
- =?utf-8?B?T0Q3bm1EaVlWYXJtVGcvWHg4djdQdU9PTUxRMzN6V0pjNWNXWVY3TFAzR1M5?=
- =?utf-8?B?L2RNS0k0dVlZekJNTUN4ZlZYb3lUNUhLZk5qRGhnU1h2dlBZWlk3ZjMxWHAy?=
- =?utf-8?B?MjZQVC91WXRtcDBsdlFNWXl4T3k0d1ZuNjdFakZBR2ZBb3BYbWVWREhDSitV?=
- =?utf-8?B?MFFzVEo2VG5kWHZITVVnWSt0bnI1b1NtQzh2VnV5Z3hZd2VzVmdScHE2d1NJ?=
- =?utf-8?Q?mCkowj4y6tzko4fkxH8YWfGxH?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac93ecb6-e7e2-4eae-aec9-08da901b3528
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2022 15:19:35.8128
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T5sSqjRoWgWOJ/RJ/gtlGqVUYFa4JlwuWdEyoo5kC9O9zeVXBMGN8Bgm6rC34heIGekrkQVzxg1EkqpYBBdylQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB5538
+Content-Transfer-Encoding: 8bit
 
-On 24.08.2022 16:57, Bertrand Marquis wrote:
-> ...because there are some script in automation corresponding to the
-> build-* filter (build-test.sh and build-each-commit.sh)
-> 
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+From: Penny Zheng <penny.zheng@arm.com>
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+This patch series introduces a new feature: setting up static
+shared memory on a dom0less system, through device tree configuration.
 
+This commit parses shared memory node at boot-time, and reserve it in
+bootinfo.reserved_mem to avoid other use.
+
+This commits proposes a new Kconfig CONFIG_STATIC_SHM to wrap
+static-shm-related codes, and this option depends on static memory(
+CONFIG_STATIC_MEMORY). That's because that later we want to reuse a few
+helpers, guarded with CONFIG_STATIC_MEMORY, like acquire_staticmem_pages, etc,
+on static shared memory.
+
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+---
+v7 change:
+- add docs about checking for region overlap, etc
+- update docs to reflect that the host physical address is optional
+- end/bank_end may end up to be lower than paddr/mem->bank[i].start, So check
+that they don't overflow.
+- replace strcmp with strncmp since the string has already be validated
+- provide a dummy helper for process_shm_node() when !CONFIG_STATIC_SHM
+- remove useless #ifdef CONFIG_STATIC_SHM
+- change the order of property xen,shared-mem to
+xen,shared-mem = < [host physical address] [guest address] [size] >
+---
+v6 change:
+- when host physical address is ommited, output the error message since
+xen doesn't support it at the moment
+- add the following check: 1) The shm ID matches and the region exactly match
+2) The shm ID doesn't match and the region doesn't overlap
+- change it to "unsigned int" to be aligned with nr_banks
+- check the len of the property to confirm is it big enough to
+contain "paddr", "size", and "gaddr"
+- shm_id defined before nr_shm_domain, so we could re-use the existing hole and
+avoid increasing the size of the structure.
+- change "nr_shm_domain" to "nr_shm_borrowers", to not increment if the role
+is owner in parsing code
+- make "xen,shm_id" property as arbitrary string, with a strict limit on
+the number of characters, MAX_SHM_ID_LENGTH
+---
+v5 change:
+- no change
+---
+v4 change:
+- nit fix on doc
+---
+v3 change:
+- make nr_shm_domain unsigned int
+---
+v2 change:
+- document refinement
+- remove bitmap and use the iteration to check
+- add a new field nr_shm_domain to keep the number of shared domain
+---
+ docs/misc/arm/device-tree/booting.txt | 132 +++++++++++++++++++++
+ xen/arch/arm/Kconfig                  |   6 +
+ xen/arch/arm/bootfdt.c                | 165 ++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/setup.h      |   7 ++
+ 4 files changed, 310 insertions(+)
+
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 98253414b8..1c50fc6351 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -378,3 +378,135 @@ device-tree:
+ 
+ This will reserve a 512MB region starting at the host physical address
+ 0x30000000 to be exclusively used by DomU1.
++
++Static Shared Memory
++====================
++
++The static shared memory device tree nodes allow users to statically set up
++shared memory on dom0less system, enabling domains to do shm-based
++communication.
++
++- compatible
++
++    "xen,domain-shared-memory-v1"
++
++- xen,shm-id
++
++    An arbitrary string that represents the unique identifier of the shared
++    memory region, with a strict limit on the number of characters(\0 included),
++    `MAX_SHM_ID_LENGTH(16)`. e.g. "xen,shm-id = "my-shared-mem-1"".
++
++- xen,shared-mem
++
++    An array takes a physical address, which is the base address of the
++    shared memory region in host physical address space, a size, and a guest
++    physical address, as the target address of the mapping.
++    e.g. xen,shared-mem = < [host physical address] [guest address] [size] >
++
++    It shall also meet the following criteria:
++    1) If the SHM ID matches with an existing region, the address range of the
++    region shall also exactly match.
++    2) If the SHM ID does not match with any other existing region, it should
++    also not overlap with any other regions.
++
++    The number of cells for the host address (and size) is the same as the
++    guest pseudo-physical address and they are inherited from the parent node.
++
++    Host physical address is optional, when missing Xen decides the location
++    (currently unimplemented).
++
++- role (Optional)
++
++    A string property specifying the ownership of a shared memory region,
++    the value must be one of the following: "owner", or "borrower"
++    A shared memory region could be explicitly backed by one domain, which is
++    called "owner domain", and all the other domains who are also sharing
++    this region are called "borrower domain".
++    If not specified, the default value is "borrower" and owner is
++    DOMID_IO, a system domain.
++
++As an example:
++
++chosen {
++    #address-cells = <0x1>;
++    #size-cells = <0x1>;
++    xen,xen-bootargs = "console=dtuart dtuart=serial0 bootscrub=0";
++
++    ......
++
++    /* this is for Dom0 */
++    dom0-shared-mem@10000000 {
++        compatible = "xen,domain-shared-memory-v1";
++        role = "owner";
++        xen,shm-id = "my-shared-mem-0";
++        xen,shared-mem = <0x10000000 0x10000000 0x10000000>;
++    }
++
++    domU1 {
++        compatible = "xen,domain";
++        #address-cells = <0x1>;
++        #size-cells = <0x1>;
++        memory = <0 131072>;
++        cpus = <2>;
++        vpl011;
++
++        /*
++         * shared memory region identified as 0x0(xen,shm-id = <0x0>)
++         * is shared between Dom0 and DomU1.
++         */
++        domU1-shared-mem@10000000 {
++            compatible = "xen,domain-shared-memory-v1";
++            role = "borrower";
++            xen,shm-id = "my-shared-mem-0";
++            xen,shared-mem = <0x10000000 0x50000000 0x10000000>;
++        }
++
++        /*
++         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
++         * is shared between DomU1 and DomU2.
++         */
++        domU1-shared-mem@50000000 {
++            compatible = "xen,domain-shared-memory-v1";
++            xen,shm-id = "my-shared-mem-1";
++            xen,shared-mem = <0x50000000 0x60000000 0x20000000>;
++        }
++
++        ......
++
++    };
++
++    domU2 {
++        compatible = "xen,domain";
++        #address-cells = <0x1>;
++        #size-cells = <0x1>;
++        memory = <0 65536>;
++        cpus = <1>;
++
++        /*
++         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
++         * is shared between domU1 and domU2.
++         */
++        domU2-shared-mem@50000000 {
++            compatible = "xen,domain-shared-memory-v1";
++            xen,shm-id = "my-shared-mem-1";
++            xen,shared-mem = <0x50000000 0x70000000 0x20000000>;
++        }
++
++        ......
++    };
++};
++
++This is an example with two static shared memory regions.
++
++For the static shared memory region identified as "my-shared-mem-0", host
++physical address starting at 0x10000000 of 256MB will be reserved to be
++shared between Dom0 and DomU1. It will get mapped at 0x10000000 in Dom0 guest
++physical address space, and at 0x50000000 in DomU1 guest physical address space.
++Dom0 is explicitly defined as the owner domain, and DomU1 is the borrower domain.
++
++For the static shared memory region identified as "my-shared-mem-1", host
++physical address starting at 0x50000000 of 512MB will be reserved to be
++shared between DomU1 and DomU2. It will get mapped at 0x60000000 in DomU1 guest
++physical address space, and at 0x70000000 in DomU2 guest physical address space.
++DomU1 and DomU2 are both the borrower domain, the owner domain is the default
++owner domain DOMID_IO.
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 33e004d702..1fe5faf847 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -140,6 +140,12 @@ config TEE
+ 
+ source "arch/arm/tee/Kconfig"
+ 
++config STATIC_SHM
++	bool "Statically shared memory on a dom0less system" if UNSUPPORTED
++	depends on STATIC_MEMORY
++	help
++	  This option enables statically shared memory on a dom0less system.
++
+ endmenu
+ 
+ menu "ARM errata workaround via the alternative framework"
+diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+index ec81a45de9..b2cd425dac 100644
+--- a/xen/arch/arm/bootfdt.c
++++ b/xen/arch/arm/bootfdt.c
+@@ -13,6 +13,7 @@
+ #include <xen/init.h>
+ #include <xen/efi.h>
+ #include <xen/device_tree.h>
++#include <xen/lib.h>
+ #include <xen/libfdt/libfdt.h>
+ #include <xen/sort.h>
+ #include <xsm/xsm.h>
+@@ -361,6 +362,168 @@ static int __init process_domain_node(const void *fdt, int node,
+                                    size_cells, &bootinfo.reserved_mem, true);
+ }
+ 
++#ifdef CONFIG_STATIC_SHM
++static int __init process_shm_node(const void *fdt, int node,
++                                   uint32_t address_cells, uint32_t size_cells)
++{
++    const struct fdt_property *prop, *prop_id, *prop_role;
++    const __be32 *cell;
++    paddr_t paddr, gaddr, size;
++    struct meminfo *mem = &bootinfo.reserved_mem;
++    unsigned int i;
++    int len;
++    bool owner = false;
++    const char *shm_id;
++
++    if ( address_cells < 1 || size_cells < 1 )
++    {
++        printk("fdt: invalid #address-cells or #size-cells for static shared memory node.\n");
++        return -EINVAL;
++    }
++
++    /*
++     * "xen,shm-id" property holds an arbitrary string with a strict limit
++     * on the number of characters, MAX_SHM_ID_LENGTH
++     */
++    prop_id = fdt_get_property(fdt, node, "xen,shm-id", NULL);
++    if ( !prop_id )
++        return -ENOENT;
++    shm_id = (const char *)prop_id->data;
++    if ( strnlen(shm_id, MAX_SHM_ID_LENGTH) == MAX_SHM_ID_LENGTH )
++    {
++        printk("fdt: invalid xen,shm-id %s, it must be limited to %u characters\n",
++               shm_id, MAX_SHM_ID_LENGTH);
++        return -EINVAL;
++    }
++
++    /*
++     * "role" property is optional and if it is defined explicitly,
++     * it must be either `owner` or `borrower`.
++     */
++    prop_role = fdt_get_property(fdt, node, "role", NULL);
++    if ( prop_role )
++    {
++        if ( !strcmp(prop_role->data, "owner") )
++            owner = true;
++        else if ( strcmp(prop_role->data, "borrower") )
++        {
++            printk("fdt: invalid `role` property for static shared memory node.\n");
++            return -EINVAL;
++        }
++    }
++
++    /*
++     * xen,shared-mem = <paddr, gaddr, size>;
++     * Memory region starting from physical address #paddr of #size shall
++     * be mapped to guest physical address #gaddr as static shared memory
++     * region.
++     */
++    prop = fdt_get_property(fdt, node, "xen,shared-mem", &len);
++    if ( !prop )
++        return -ENOENT;
++
++    if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
++    {
++        if ( len == dt_cells_to_size(size_cells + address_cells) )
++            printk("fdt: host physical address must be chosen by users at the moment.\n");
++
++        printk("fdt: invalid `xen,shared-mem` property.\n");
++        return -EINVAL;
++    }
++
++    cell = (const __be32 *)prop->data;
++    device_tree_get_reg(&cell, address_cells, address_cells, &paddr, &gaddr);
++    size = dt_next_cell(size_cells, &cell);
++
++    if ( !size )
++    {
++        printk("fdt: the size for static shared memory region can not be zero\n");
++        return -EINVAL;
++    }
++
++    for ( i = 0; i < mem->nr_banks; i++ )
++    {
++        /*
++         * Meet the following check:
++         * 1) The shm ID matches and the region exactly match
++         * 2) The shm ID doesn't match and the region doesn't overlap
++         * with an existing one
++         */
++        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
++        {
++            if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) == 0 )
++                break;
++            else
++            {
++                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
++                       shm_id);
++                return -EINVAL;
++            }
++        }
++        else
++        {
++            paddr_t end = paddr + size;
++            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
++
++            if ( (end <= paddr) || (bank_end <= mem->bank[i].start) )
++                printk("fdt: static shared memory region %s overflow\n", shm_id);
++
++            if ( (end <= mem->bank[i].start) || (paddr >= bank_end) )
++            {
++                if ( strcmp(shm_id, mem->bank[i].shm_id) != 0 )
++                    continue;
++                else
++                {
++                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
++                           shm_id);
++                    return -EINVAL;
++                }
++            }
++            else
++            {
++                printk("fdt: shared memory region overlap with an existing entry %#"PRIpaddr" - %#"PRIpaddr"\n",
++                        mem->bank[i].start, bank_end);
++                return -EINVAL;
++            }
++        }
++    }
++
++    if ( i == mem->nr_banks )
++    {
++        if ( i < NR_MEM_BANKS )
++        {
++            /* Static shared memory shall be reserved from any other use. */
++            safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
++            mem->bank[mem->nr_banks].start = paddr;
++            mem->bank[mem->nr_banks].size = size;
++            mem->bank[mem->nr_banks].xen_domain = true;
++            mem->nr_banks++;
++        }
++        else
++        {
++            printk("Warning: Max number of supported memory regions reached.\n");
++            return -ENOSPC;
++        }
++    }
++    /*
++     * keep a count of the number of borrowers, which later may be used
++     * to calculate the reference count.
++     */
++    if ( !owner )
++        mem->bank[i].nr_shm_borrowers++;
++
++    return 0;
++}
++#else
++static int __init process_shm_node(const void *fdt, int node,
++                                   uint32_t address_cells, uint32_t size_cells)
++{
++    printk("CONFIG_STATIC_SHM must be enabled for parsing static shared memory nodes\n");
++    WARN();
++    return -EINVAL;
++}
++#endif
++
+ static int __init early_scan_node(const void *fdt,
+                                   int node, const char *name, int depth,
+                                   u32 address_cells, u32 size_cells,
+@@ -386,6 +549,8 @@ static int __init early_scan_node(const void *fdt,
+         process_chosen_node(fdt, node, name, address_cells, size_cells);
+     else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
+         rc = process_domain_node(fdt, node, name, address_cells, size_cells);
++    else if ( depth <= 3 && device_tree_node_compatible(fdt, node, "xen,domain-shared-memory-v1") )
++        rc = process_shm_node(fdt, node, address_cells, size_cells);
+ 
+     if ( rc < 0 )
+         printk("fdt: node `%s': parsing failed\n", name);
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 5815ccf8c5..995eee1d09 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -23,10 +23,17 @@ typedef enum {
+ }  bootmodule_kind;
+ 
+ 
++/* Indicates the maximum number of characters(\0 included) for shm_id */
++#define MAX_SHM_ID_LENGTH 16
++
+ struct membank {
+     paddr_t start;
+     paddr_t size;
+     bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
++#ifdef CONFIG_STATIC_SHM
++    char shm_id[MAX_SHM_ID_LENGTH];
++    unsigned int nr_shm_borrowers;
++#endif
+ };
+ 
+ struct meminfo {
+-- 
+2.25.1
 
 
