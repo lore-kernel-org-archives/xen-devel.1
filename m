@@ -4,40 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A823EECAAA1
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 07:30:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.399442.640722 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A68FC38145
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Sep 2022 07:39:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.399534.640732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVT2S-0006Wj-4V; Tue, 06 Sep 2022 07:30:28 +0000
+	id 1oVTBJ-0007HT-Vy; Tue, 06 Sep 2022 07:39:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 399442.640722; Tue, 06 Sep 2022 07:30:28 +0000
+Received: by outflank-mailman (output) from mailman id 399534.640732; Tue, 06 Sep 2022 07:39:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVT2S-0006Wc-1O; Tue, 06 Sep 2022 07:30:28 +0000
-Received: by outflank-mailman (input) for mailman id 399442;
- Tue, 06 Sep 2022 07:09:18 +0000
+	id 1oVTBJ-0007HM-TI; Tue, 06 Sep 2022 07:39:37 +0000
+Received: by outflank-mailman (input) for mailman id 399534;
+ Tue, 06 Sep 2022 07:39:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=S2FI=ZJ=vmware.com=akaher@srs-se1.protection.inumbo.net>)
- id 1oVShx-0005zG-Vq
- for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 07:09:18 +0000
-Received: from na01-obe.outbound.protection.outlook.com
- (mail-westcentralusazlp170100000.outbound.protection.outlook.com
- [2a01:111:f403:c112::])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d09e7e7e-2db2-11ed-a016-b9edf5238543;
- Tue, 06 Sep 2022 09:09:16 +0200 (CEST)
-Received: from PH0PR05MB8703.namprd05.prod.outlook.com (2603:10b6:510:bd::5)
- by DM6PR05MB4970.namprd05.prod.outlook.com (2603:10b6:5:31::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.5; Tue, 6 Sep
- 2022 07:09:11 +0000
-Received: from PH0PR05MB8703.namprd05.prod.outlook.com
- ([fe80::95af:33a4:b350:c335]) by PH0PR05MB8703.namprd05.prod.outlook.com
- ([fe80::95af:33a4:b350:c335%8]) with mapi id 15.20.5612.012; Tue, 6 Sep 2022
- 07:09:11 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YUvx=ZJ=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
+ id 1oVTBI-0007HG-Ly
+ for xen-devel@lists.xenproject.org; Tue, 06 Sep 2022 07:39:36 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 0d4519ba-2db7-11ed-a016-b9edf5238543;
+ Tue, 06 Sep 2022 09:39:35 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B7591756;
+ Tue,  6 Sep 2022 00:39:40 -0700 (PDT)
+Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
+ [10.169.190.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id ED0623F7D8;
+ Tue,  6 Sep 2022 00:39:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,224 +45,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d09e7e7e-2db2-11ed-a016-b9edf5238543
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dY1wPXHnrMEnxZciiGfS4XSgRUh/IXWahcmOFtN/+OdybMsqd+W9x/lxWaIUsqZoTHsH4rsItI3kf/WVJyG9N4L1/3650PE0b5ekY7q7/TkyYk1kaFTRV71pcqZg0cYrsNOH50wqJfo+3oaq1+hLEdabZ+g0ZXt8ot9tZR/4nLnlzrX7nNcByzU06t59VYkKLaeR5Ca7notRErd3djgctnEd0RhZjM82yjSahbJ+wXD8lh6GP3XvVrWWQZ0NK6ie5ynRxZ4jtoffE5znaOCBXc1E5adrXc9H20HBkP+h+M2P4AsoPbXJZVz0STnp89ZuoKucMcF56QktfLboXeanuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tVqjBGkFgXrs31AA2OHw7MU01gBpvRs6t5y6CM6f2Tg=;
- b=lOjDBVufiEWaMCHFThqVBpo69/Ca31qNmAVV5ydA1N/za1AnL70f597eaeTUBLXh7c5GOQ8Cx1iP3NgeHOT/gpLn9pkmeyCzmcVRxIDxq3GRLtBeaYyTT+bQZt4vVfZGcjnMHn5XMX5nisIerqCYxNqztaQBm686q3OA1EwFNuEh4Uo0fxQoJN1wvBrLQcVSnIaEJZLsd+aYS94sZ8qLcjGPPwAKg/8L83hf9DmRz+kTHdVJEaVbrIdJxk9/TIuA21lA8Db30Mp7jWNW0m40fbeWAT4dB4iZbyzWe270UXcfEKsTJfKpSGMP7n8rD821EzIvoB4/5Vw7pE3xM0srww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tVqjBGkFgXrs31AA2OHw7MU01gBpvRs6t5y6CM6f2Tg=;
- b=zn+MsRJlDS55rB9koppwTf9JIKLqRyfwc9/3fsa+EyQq1LsG/Ej88qKLWxqlQ9HMBg9TQdzHm5bHYB8dNb5HZ77UVn+5BWw2vEp6rM6MeB/yDVsMEcgd9VZRx+u8GRb4FhMwPCoBW+1jbfjxu8akK3rfxsEI3r68Bek3vxInxPI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vmware.com;
-From: Ajay Kaher <akaher@vmware.com>
-To: helgaas@kernel.org,
-	bhelgaas@google.com,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com
-Cc: x86@kernel.org,
-	hpa@zytor.com,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	rostedt@goodmis.org,
-	srivatsab@vmware.com,
-	srivatsa@csail.mit.edu,
-	amakhalov@vmware.com,
-	vsirnapalli@vmware.com,
-	er.ajay.kaher@gmail.com,
-	willy@infradead.org,
-	namit@vmware.com,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	jailhouse-dev@googlegroups.com,
-	xen-devel@lists.xenproject.org,
-	acrn-dev@lists.projectacrn.org
-Subject: [PATCH v2] x86/PCI: Prefer MMIO over PIO on VMware hypervisor
-Date: Tue,  6 Sep 2022 12:38:37 +0530
-Message-Id: <1662448117-10807-1-git-send-email-akaher@vmware.com>
-X-Mailer: git-send-email 2.7.4
+X-Inumbo-ID: 0d4519ba-2db7-11ed-a016-b9edf5238543
+From: Penny Zheng <Penny.Zheng@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Penny Zheng <Penny.Zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v12 0/6] populate/unpopulate memory when domain on static allocation
+Date: Tue,  6 Sep 2022 15:39:13 +0800
+Message-Id: <20220906073919.941934-1-Penny.Zheng@arm.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BYAPR05CA0061.namprd05.prod.outlook.com
- (2603:10b6:a03:74::38) To PH0PR05MB8703.namprd05.prod.outlook.com
- (2603:10b6:510:bd::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR05MB8703:EE_|DM6PR05MB4970:EE_
-X-MS-Office365-Filtering-Correlation-Id: 361688ab-6f30-4422-58aa-08da8fd6b2f1
-X-LD-Processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
- rpEmG/ZTZD41ci8rzga319nfcfWs6F4whtCEkJI1igtHShj/5o1VLFdArTGqtjMdJUQ3j1333o5vV/Px1O0GG2Uj3zj4cq7EBbEGguwtuYnG5WIzK014XG1a0SNRRgHxy+QGhgx78DPW/4hP/rPKdkm46Fq32f/JlnYXfu9fAgz3YWw6gWVRZ1uLE9Wk41ANTglPoqfvyd1FcExNpN3JePJe4sH7NLghX6okgRdiytGbNtziY91ftsvWi29UMKDMINRi6zUmWJZpuv5MPmedTsHEu0m1L1QttboRINoi06f0XUdZXfLYw5MTbIsktHtLW33/6Y46vb4nt2jCe269qOC9cXOy4nQHmZTBL7j4jq4mYUEtRuiKN51HVsLHxts5DVJxTmG3pK/89SJKCisLEDJ6zIC/ib/p3bZ2vvQyJKUfxzcfkErOwElh4SEXu5yJ7swQ8PiEghfIm0g2kc8nFLG3skw8+p01cV3BkoKkxArc7qtWQUDYczpG+TJEs+gZXNp2TfgFvX69zGcuhV16L05T83k9fi5MHBweme39oWZYLD1PXSJ4DBHvkTEXmMrK+OPt6NjIbuCdWOty8rltMwG+zYD4+ZaCzZobICxj/++mWLqADs7AixCOHeN9sNIplsC374NGmwCnH1vmWGSVj29LORst5AuIwRxWUKbF92Q4ee4VRAjEGZOlb+Qd5wTOhuAtFMiJrTWcvOMzkK/VbE/ocOYSloUCw7SUZd4AUcgfrKYFhnkJgpTdnwMIh3oVz6eR6dz2TT9zucNl6YOmTGKhfQFshJnL4y0VEi1NzK3XWey4TwqPevATsZhAuBHb
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR05MB8703.namprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(346002)(366004)(376002)(136003)(396003)(38350700002)(38100700002)(4326008)(8676002)(66946007)(66556008)(66476007)(316002)(2906002)(7416002)(26005)(5660300002)(8936002)(6512007)(52116002)(83380400001)(2616005)(186003)(6666004)(41300700001)(6486002)(6506007)(86362001)(36756003)(478600001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?utf-8?B?cmthdHdLNFUwaVhQU08zS2ZzaUQwd3ppUUpKM3BFeVVnTDZYTzRjZGQ5NHcy?=
- =?utf-8?B?Y0kyRWhmVkY3dTZyd1VnWVEyNkNBM3VnU1ZvZE1ZMmFTWDM5Q2l0dGs1WWk0?=
- =?utf-8?B?UU5zWTVGMU1ianJsdldkNHk2elk0K0xHcEZEWXNrQndlZFV1cmhyeHhVcGhR?=
- =?utf-8?B?NjRjQnh2MUhkKzRFSThZT093M0U1MUR3OVZhUkFTWmdaSTg1SmUrT3EzYWpz?=
- =?utf-8?B?cE9oaUdJWjZtb2IrZ1h6SERzSDI2Ni9oaGVaNHBIS1RRNC9YNHAyamNSSjIw?=
- =?utf-8?B?cHpNaXpsU25RaFJBY0lZcGFkS2JIU2xDNFdvSHpWTjJVcVJsMmZURHBNSWJU?=
- =?utf-8?B?NjI0NVFSS0NyOGFBdWdBU1pQRTB6eDZZdG1HbzRUdjZQZWVFWExxVlBaMklB?=
- =?utf-8?B?L3gyNDc5a1ZoczAraXc5d1E4ZDNPYkJhOG1FejNXMFBieEcrVG1zQzg3RkxZ?=
- =?utf-8?B?VWYxNFM3QnN2QkZTZEg4WWJuUXRrUHJYdTZwYy9GM2JjL1pLNTdtcW5JaVZn?=
- =?utf-8?B?RkRPTnQ0a1ptKzhuTDdldUhXWk9XNFdXSVpYTWpJSW8rdHBQcno5MEg0MzVX?=
- =?utf-8?B?bzk3RTBCazl1eFpyTGl0WHFvcnFTaGVqS1pSOUFGWE1KNm9CVWY4Y1hpRVJ3?=
- =?utf-8?B?VVoxZ1ZzaHliR0VNWW4xTGk3VHRLZnV0djVjVnJTRUUvUmJXNnVUZnpBNGQv?=
- =?utf-8?B?bEY5QWZQNzRYc2JRdzhQUDNYY2xyVHhJQWsyb1o0QzQ2YlBma3JWUy8rZzdu?=
- =?utf-8?B?ZGMycC9YRjZTTGsrKzVaTGVaRmIvRlNiaVl0SGVrckRoY2R5cndpVjFoZ2k1?=
- =?utf-8?B?N3RSQmFBSEpNR2s4QnoySVNOdGFFR0VnOEFTOTB6Q01tZWF4bFRwRTZwaFdv?=
- =?utf-8?B?Zkl1ZzRNZXZiNS8rSHFESmpZMSt1bUEzUExKUUtPRFpQUzNkaWFQaDUvQnFE?=
- =?utf-8?B?WXNJa1ZGcndETUkzTmgxem1QUlJWMDhOb2k1R0xTNytwWmh4cXo5d0xvcW9k?=
- =?utf-8?B?enVhVFFPcndROGliRHlOaXMzdUZiSmFyNFZ3dVptbW82dWg1Q0N6NFNXeHFx?=
- =?utf-8?B?NHFMazJuSHR5QU8xNXUrNThURTQxV2YzcHFJMWhSN2w5TlV6RklscVVQSTBX?=
- =?utf-8?B?bUN0aytXbjV4cnpSWDkweXhNOW02UTNMdHZSSFJxN1Z4QmFyQ3FnMFo4bU1i?=
- =?utf-8?B?c2NVeEp5NlBJR2xlemJ0U2xtUUl1S3RUOG90VUgxck1OeGU4RVZHL2RXL3hJ?=
- =?utf-8?B?T2duVnJOTWE0Wmt5aUNEYlhWZ1A0Sm4yL3JXdWFiYU9VVGhTUU5iQ2hORUVG?=
- =?utf-8?B?QWNueGlEVGZsOHpwVnU1cTZQRTZET3l4Z2VaY3VKQy8vRE9Hd2gxaU1HYzIr?=
- =?utf-8?B?OGMrNHhVOTJETkFxUkpyT2hlSEZqT1ZFeHpFTGxpb0pkSG9tWXA0cHpxcEIv?=
- =?utf-8?B?NmFiZzVYaWYxM212L01YRFJVR1NiZVNaaTFrOUlUcjk1ZDgzRE00ZWRKazVm?=
- =?utf-8?B?TTBHeFBqb1ArMEMzSHNOWUlHYmxPM3Z0TlRLUGxoNDNkd3BjWjc1M1NrN2U0?=
- =?utf-8?B?VjFuK1JYQWt4ZWphSU90TWxIYmhLVGpoWTlpSlhrbWNrWjVWSWllemIzMVF0?=
- =?utf-8?B?ZnFqcVJ6alFhWVhvVE1DUlE5TmJYWndzc3l2cW1VNVJQSVNhZXNlR3FkVW9k?=
- =?utf-8?B?WnY2aTRjbWNiZmdVNWlvS3dMdXhndVZxYU13ZEQvc2hLSDFnWG9sZXpDTVB0?=
- =?utf-8?B?V1FtUHBTcy9RNHRNbzBkSWlENk9CWGFoUjVYWXRWa2hzWkdCeEtnNFhKSjJ2?=
- =?utf-8?B?VEMxT0Z3QXEySTBjZmppRTBOVlpHQjhKL2VEd3lSY2I2SmpyejRRRElOKzR4?=
- =?utf-8?B?eHRRZWwwZG1zcHRobDhOVkNIL3dEWGtUSlZ5ZDhEQXFlRG9rY05BR2NhYjVM?=
- =?utf-8?B?WWpQbUlsckhyb1NZRGxrVXlhTHBzYktvQTVzeWc0MG9JMUg3QzBFVW9qaTJ3?=
- =?utf-8?B?eTVOUVZjQnI1VmJwQjZIQ1M2YVpVTVA3MW9GWnM2eW1MZ0p0dmUzSzFmZzY1?=
- =?utf-8?B?ckdBY0FibkhWUHVydFFZVFhtTDZLZDV6emQ0SE5UZVBRVFFBSHdWRDV5ZDh0?=
- =?utf-8?Q?3d+euH4uv/iBa1JTsHAqiuoX8?=
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR05MB4970
 
-During boot-time there are many PCI config reads, these could be performed
-either using Port IO instructions (PIO) or memory mapped I/O (MMIO).
+Today when a domain unpopulates the memory on runtime, they will always
+hand the memory over to the heap allocator. And it will be a problem if it
+is a static domain.
+Pages used as guest RAM for static domain shall always be reserved to this
+domain only, and not be used for any other purposes, so they shall never go
+back to heap allocator.
 
-PIO are less efficient than MMIO, they require twice as many PCI accesses
-and PIO instructions are serializing. As a result, MMIO should be preferred
-when possible over PIO.
+This patch serie intends to fix this issue, by adding pages on the new list
+resv_page_list after having taken them off the "normal" list, when unpopulating
+memory, and retrieving pages from resv page list(resv_page_list) when
+populating memory.
 
-Virtual Machine test result using VMware hypervisor
-1 hundred thousand reads using raw_pci_read() took:
-PIO: 12.809 seconds
-MMIO: 8.517 seconds (~33.5% faster then PIO)
-
-Currently, when these reads are performed by a virtual machine, they all
-cause a VM-exit, and therefore each one of them induces a considerable
-overhead.
-
-This overhead can be further improved, by mapping MMIO region of virtual
-machine to memory area that holds the values that the “emulated hardware”
-is supposed to return. The memory region is mapped as "read-only” in the
-NPT/EPT, so reads from these regions would be treated as regular memory
-reads. Writes would still be trapped and emulated by the hypervisor.
-
-Virtual Machine test result with above changes in VMware hypervisor
-1 hundred thousand read using raw_pci_read() took:
-PIO: 12.809 seconds
-MMIO: 0.010 seconds
-
-This helps to reduce virtual machine PCI scan and initialization time by
-~65%. In our case it reduced to ~18 mSec from ~55 mSec.
-
-MMIO is also faster than PIO on bare-metal systems, but due to some bugs
-with legacy hardware and the smaller gains on bare-metal, it seems prudent
-not to change bare-metal behavior.
-
-Signed-off-by: Ajay Kaher <akaher@vmware.com>
 ---
-v1 -> v2:
-Limit changes to apply only to VMs [Matthew W.]
+v12 changes:
+- it should be acquire_domstatic_pages() calling unprepare_staticmem_pages()
+on failing
+- add in-code comment
 ---
- arch/x86/pci/common.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+v11 changes:
+- printing message ahead of the assertion, which should also be
+XENLOG_G_* kind of log level
+- commit message tweak
+- move "xen: rename free_staticmem_pages to unprepare_staticmem_pages" ahead
+of "xen: retrieve reserved pages on populate_physmap"
+- with assignment having failed and the page not exposed to the guest at any
+point, there is no need for scrubbing
+---
+v10 changes:
+- let Arm keep #define PGC_static 0 private, with the generic fallback
+remaining in page_alloc.c
+- change ASSERT(d) to ASSERT_UNREACHABLE() to be more robust looking
+forward, and also add a printk() to log the problem
+- mention the the removal of #ifdef CONFIG_STATIC_MEMORY in commit
+message
+- commit message typo fix
+- Do not skip the list addition in that one special case
+- add lock on the fail path
+- new commit "xen: rename free_staticmem_pages to unprepare_staticmem_pages"
+---
+v9 changes:
+- move free_domheap_page into else-condition
+- considering scrubbing static pages, domain dying case and opt_scrub_domheap
+both do not apply to static pages.
+- as unowned static pages don't make themselves to free_domstatic_page
+at the moment, remove else-condition and add ASSERT(d) at the top of the
+function
+- remove macro helper put_static_page, and just expand its code inside
+free_domstatic_page
+- Use ASSERT_ALLOC_CONTEXT() in acquire_reserved_page
+- Add free_staticmem_pages to undo prepare_staticmem_pages when
+assign_domstatic_pages fails
+- Remove redundant static in error message
+---
+v8 changes:
+- introduce new helper free_domstatic_page
+- let put_page call free_domstatic_page for static page, when last ref
+drops
+- #define PGC_static zero when !CONFIG_STATIC_MEMORY, as it is used
+outside page_alloc.c
+- #ifdef-ary around is_domain_using_staticmem() is not needed anymore
+- order as a parameter is not needed here, as all staticmem operations are
+limited to order-0 regions
+- move d->page_alloc_lock after operation on d->resv_page_list
+- As concurrent free/allocate could modify the resv_page_list, we still
+need the lock
+---
+v7 changes:
+- protect free_staticmem_pages with heap_lock to match its reverse function
+acquire_staticmem_pages
+- IS_ENABLED(CONFIG_STATIC_MEMORY) would not be needed anymore
+- add page on the rsv_page_list *after* it has been freed
+- remove the lock, since we add the page to rsv_page_list after it has
+been totally freed.
+---
+v6 changes:
+- rename PGC_staticmem to PGC_static
+- remove #ifdef aroud function declaration
+- use domain instead of sub-systems
+- move non-zero is_domain_using_staticmem() from ARM header to common
+header
+- move PGC_static !CONFIG_STATIC_MEMORY definition to common header
+- drop the lock before returning
+---
+v5 changes:
+- introduce three new commits
+- In order to avoid stub functions, we #define PGC_staticmem to non-zero only
+when CONFIG_STATIC_MEMORY
+- use "unlikely()" around pg->count_info & PGC_staticmem
+- remove pointless "if", since mark_page_free() is going to set count_info
+to PGC_state_free and by consequence clear PGC_staticmem
+- move #define PGC_staticmem 0 to mm.h
+- guard "is_domain_using_staticmem" under CONFIG_STATIC_MEMORY
+- #define is_domain_using_staticmem zero if undefined
+- extract common codes for assigning pages into a helper assign_domstatic_pages
+- refine commit message
+- remove stub function acquire_reserved_page
+- Alloc/free of memory can happen concurrently. So access to rsv_page_list
+needs to be protected with a spinlock
+---
+v4 changes:
+- commit message refinement
+- miss dropping __init in acquire_domstatic_pages
+- add the page back to the reserved list in case of error
+- remove redundant printk
+- refine log message and make it warn level
+- guard "is_domain_using_staticmem" under CONFIG_STATIC_MEMORY
+- #define is_domain_using_staticmem zero if undefined
+---
+v3 changes:
+- fix possible racy issue in free_staticmem_pages()
+- introduce a stub free_staticmem_pages() for the !CONFIG_STATIC_MEMORY case
+- move the change to free_heap_pages() to cover other potential call sites
+- change fixed width type uint32_t to unsigned int
+- change "flags" to a more descriptive name "cdf"
+- change name from "is_domain_static()" to "is_domain_using_staticmem"
+- have page_list_del() just once out of the if()
+- remove resv_pages counter
+- make arch_free_heap_page be an expression, not a compound statement.
+- move #ifndef is_domain_using_staticmem to the common header file
+- remove #ifdef CONFIG_STATIC_MEMORY-ary
+- remove meaningless page_to_mfn(page) in error log
+---
+v2 changes:
+- let "flags" live in the struct domain. So other arch can take
+advantage of it in the future
+- change name from "is_domain_on_static_allocation" to "is_domain_static()"
+- put reserved pages on resv_page_list after having taken them off
+the "normal" list
+- introduce acquire_reserved_page to retrieve reserved pages from
+resv_page_list
+- forbid non-zero-order requests in populate_physmap
+- let is_domain_static return ((void)(d), false) on x86
+- fix coding style
 
-diff --git a/arch/x86/pci/common.c b/arch/x86/pci/common.c
-index ddb7986..1e5a8f7 100644
---- a/arch/x86/pci/common.c
-+++ b/arch/x86/pci/common.c
-@@ -20,6 +20,7 @@
- #include <asm/pci_x86.h>
- #include <asm/setup.h>
- #include <asm/irqdomain.h>
-+#include <asm/hypervisor.h>
- 
- unsigned int pci_probe = PCI_PROBE_BIOS | PCI_PROBE_CONF1 | PCI_PROBE_CONF2 |
- 				PCI_PROBE_MMCONF;
-@@ -57,14 +58,58 @@ int raw_pci_write(unsigned int domain, unsigned int bus, unsigned int devfn,
- 	return -EINVAL;
- }
- 
-+#ifdef CONFIG_HYPERVISOR_GUEST
-+static int vm_raw_pci_read(unsigned int domain, unsigned int bus, unsigned int devfn,
-+						int reg, int len, u32 *val)
-+{
-+	if (raw_pci_ext_ops)
-+		return raw_pci_ext_ops->read(domain, bus, devfn, reg, len, val);
-+	if (domain == 0 && reg < 256 && raw_pci_ops)
-+		return raw_pci_ops->read(domain, bus, devfn, reg, len, val);
-+	return -EINVAL;
-+}
-+
-+static int vm_raw_pci_write(unsigned int domain, unsigned int bus, unsigned int devfn,
-+						int reg, int len, u32 val)
-+{
-+	if (raw_pci_ext_ops)
-+		return raw_pci_ext_ops->write(domain, bus, devfn, reg, len, val);
-+	if (domain == 0 && reg < 256 && raw_pci_ops)
-+		return raw_pci_ops->write(domain, bus, devfn, reg, len, val);
-+	return -EINVAL;
-+}
-+#endif /* CONFIG_HYPERVISOR_GUEST */
-+
- static int pci_read(struct pci_bus *bus, unsigned int devfn, int where, int size, u32 *value)
- {
-+#ifdef CONFIG_HYPERVISOR_GUEST
-+	/*
-+	 * MMIO is faster than PIO, but due to some bugs with legacy
-+	 * hardware, it seems prudent to prefer MMIO for VMs and PIO
-+	 * for bare-metal.
-+	 */
-+	if (!hypervisor_is_type(X86_HYPER_NATIVE))
-+		return vm_raw_pci_read(pci_domain_nr(bus), bus->number,
-+					 devfn, where, size, value);
-+#endif /* CONFIG_HYPERVISOR_GUEST */
-+
- 	return raw_pci_read(pci_domain_nr(bus), bus->number,
- 				 devfn, where, size, value);
- }
- 
- static int pci_write(struct pci_bus *bus, unsigned int devfn, int where, int size, u32 value)
- {
-+#ifdef CONFIG_HYPERVISOR_GUEST
-+	/*
-+	 * MMIO is faster than PIO, but due to some bugs with legacy
-+	 * hardware, it seems prudent to prefer MMIO for VMs and PIO
-+	 * for bare-metal.
-+	 */
-+	if (!hypervisor_is_type(X86_HYPER_NATIVE))
-+		return vm_raw_pci_write(pci_domain_nr(bus), bus->number,
-+					  devfn, where, size, value);
-+#endif /* CONFIG_HYPERVISOR_GUEST */
-+
- 	return raw_pci_write(pci_domain_nr(bus), bus->number,
- 				  devfn, where, size, value);
- }
+Penny Zheng (6):
+  xen: do not free reserved memory into heap
+  xen/arm: introduce CDF_staticmem
+  xen: unpopulate memory when domain is static
+  xen: introduce prepare_staticmem_pages
+  xen: rename free_staticmem_pages to unprepare_staticmem_pages
+  xen: retrieve reserved pages on populate_physmap
+
+ xen/arch/arm/domain_build.c   |   5 +-
+ xen/arch/arm/include/asm/mm.h |   6 +-
+ xen/arch/arm/mm.c             |   5 +-
+ xen/arch/arm/setup.c          |   3 +-
+ xen/common/domain.c           |   4 +
+ xen/common/memory.c           |  23 +++++
+ xen/common/page_alloc.c       | 173 ++++++++++++++++++++++++++--------
+ xen/include/xen/domain.h      |   8 ++
+ xen/include/xen/mm.h          |   8 +-
+ xen/include/xen/sched.h       |   3 +
+ 10 files changed, 192 insertions(+), 46 deletions(-)
+
 -- 
-2.7.4
+2.25.1
 
 
