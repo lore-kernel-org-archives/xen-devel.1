@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB66C54EE9
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 08:37:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.400945.642607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E40C38145
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 08:37:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.400947.642629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVqYW-0003LA-OM; Wed, 07 Sep 2022 08:37:08 +0000
+	id 1oVqYb-0003yX-CM; Wed, 07 Sep 2022 08:37:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 400945.642607; Wed, 07 Sep 2022 08:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 400947.642629; Wed, 07 Sep 2022 08:37:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVqYW-0003L0-KV; Wed, 07 Sep 2022 08:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 400945;
- Wed, 07 Sep 2022 08:37:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1oVqYV-0003GF-46
- for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 08:37:07 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1oVqYS-0000gH-Ar; Wed, 07 Sep 2022 08:37:04 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=[192.168.17.46]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1oVqYS-0005l8-34; Wed, 07 Sep 2022 08:37:04 +0000
+	id 1oVqYb-0003yM-8p; Wed, 07 Sep 2022 08:37:13 +0000
+Received: by outflank-mailman (input) for mailman id 400947;
+ Wed, 07 Sep 2022 08:37:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=9gDT=ZK=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1oVqYZ-0002lD-O9
+ for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 08:37:11 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 43a27fa8-2e88-11ed-a016-b9edf5238543;
+ Wed, 07 Sep 2022 10:37:10 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 24808106F;
+ Wed,  7 Sep 2022 01:37:16 -0700 (PDT)
+Received: from entos-skylake.shanghai.arm.com (entos-skylake.shanghai.arm.com
+ [10.169.212.207])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D6E3A3F534;
+ Wed,  7 Sep 2022 01:37:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,114 +45,252 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=k9B4coASMmrd0YSag7YYJthd88IeeWe+L/qb7wXUl/8=; b=4m1vNC5JdgBxTtJZBThuKAasiv
-	CdOPOXI2L+ml40itvm0eWr1znNPQI2Hh2abvz0UpL/cqcPxGAtDvHA0ckqqaUdHd55ECeDTFKa/1N
-	G39fH1WSvgJUfqh4/zrVmXlnTLSLr4+USGHOyGyq1pw/Xj38zY3nrgoZc+L3Hy8sghL4=;
-Message-ID: <79fa1351-18e5-0a54-c50d-c9b09a6b3d9e@xen.org>
-Date: Wed, 7 Sep 2022 09:37:02 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.2.1
-Subject: Re: [PATCH] xen/arm: acpi: Include header file for version number
-Content-Language: en-US
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "leo.yan@linaro.org" <leo.yan@linaro.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20220906113112.106995-1-leo.yan@linaro.org>
- <d8ae8cce-0b05-a920-7439-3a6f5c3520f3@xen.org>
- <DFE32545-1B8A-4121-9D34-FE121CF4D3A7@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <DFE32545-1B8A-4121-9D34-FE121CF4D3A7@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Inumbo-ID: 43a27fa8-2e88-11ed-a016-b9edf5238543
+From: Henry Wang <Henry.Wang@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Henry Wang <Henry.Wang@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Wei Chen <wei.chen@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 3/4] xen/arm: mm: Rename xenheap_* variable to directmap_*
+Date: Wed,  7 Sep 2022 08:36:42 +0000
+Message-Id: <20220907083643.20152-4-Henry.Wang@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220907083643.20152-1-Henry.Wang@arm.com>
+References: <20220907083643.20152-1-Henry.Wang@arm.com>
 
+With the static heap setup, keep using xenheap_* in the function
+setup_xenheap_mappings() will make the code confusing to read,
+because we always need to map the full RAM on Arm64. Therefore,
+renaming all "xenheap_*" variables to "directmap_*" to make clear
+the area is used to access the RAM easily.
 
+On Arm32, only the xenheap is direct mapped today. So the renaming
+to "directmap_*" would be still valid for Arm32.
 
-On 07/09/2022 09:30, Bertrand Marquis wrote:
->> On 7 Sep 2022, at 09:26, Julien Grall <julien@xen.org> wrote:
->>
->> Hi Leo,
->>
->> On 06/09/2022 12:31, Leo Yan wrote:
->>> On Arm64 Linux kernel prints log for Xen version number:
->>>    [    0.000000] Xen XEN_VERSION.XEN_SUBVERSION support found
->>> Because the header file "xen/compile.h" is missed, XEN_VERSION and
->>> XEN_SUBVERSION are not defined, thus compiler directly uses the
->>> string "XEN_VERSION" and "XEN_SUBVERSION" in the compatible string.
->>> This patch includes the header "xen/compile.h" which defines macros for
->>> XEN_VERSION and XEN_SUBVERSION, thus Xen can pass the version number via
->>> hypervisor node.
->>> Signed-off-by: Leo Yan <leo.yan@linaro.org>
->>
->> AFAICT, the problem was introduced when we split the ACPI code from arch/domain_build.c. So I would add the following tag:
->>
->> Fixes: 5d797ee199b3 ("xen/arm: split domain_build.c")
->>
->> Now, this means we shipped Xen for ~4 years with the wrong compatible. The compatible is meant to indicate the Xen version. However, I don't think this is used for anything other than printing the version on the console.
->>
->> Also, the problem occurs only when using ACPI. This is still in tech preview, so I think we don't need to document the issue in the documentation (we can easily break ABI).
->>
->>> ---
->>>   xen/arch/arm/acpi/domain_build.c | 1 +
->>>   1 file changed, 1 insertion(+)
->>> diff --git a/xen/arch/arm/acpi/domain_build.c b/xen/arch/arm/acpi/domain_build.c
->>> index bbdc90f92c..2649e11fd4 100644
->>> --- a/xen/arch/arm/acpi/domain_build.c
->>> +++ b/xen/arch/arm/acpi/domain_build.c
->>> @@ -9,6 +9,7 @@
->>>    * GNU General Public License for more details.
->>>    */
->>>   +#include <xen/compile.h>
->>
->> So this is fixing the immediate problem. Given the subtlety of the bug, I think it would be good to also harden the code at the same time.
-> 
-> I think we should commit the patch as is and harden the code in a subsequent patch.
+No functional change is intended.
 
-I thought about this. However, if we do the hardening in the same patch, 
-then it makes a lot easier to confirm that the patch works when ingested 
-in downstream code or backported.
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+Changes from v2 to v3:
+- Adjust the order of this patch, make it #3.
+Changes from v1 to v2:
+- New commit.
+---
+ xen/arch/arm/include/asm/config.h |  2 +-
+ xen/arch/arm/include/asm/mm.h     | 22 +++++++++++-----------
+ xen/arch/arm/mm.c                 | 24 ++++++++++++------------
+ xen/arch/arm/setup.c              | 27 ++++++++++++++-------------
+ 4 files changed, 38 insertions(+), 37 deletions(-)
 
-> 
->>
->> I can see two way to do that:
->>   1) Dropping the use of __stringify
->>   2) Check if XEN_VERSION and XEN_SUBVERSION are defined
->>
->> The latter is probably lightweight. This could be added right next to acpi_make_hypervisor_node() for clarify.
->>
->> Something like:
->>
->> #ifndef XEN_VERSION
->> # error "XEN_VERSION is not defined"
->> #endif
->>
->> #ifndef XEN_SUBVERSION
->> # error "XEN_SUBVERSION is not defined"
->> #endif
->>
->> Could you have a look?
-> 
-> There are actually several places in the code where we use the stringify system.
-> Would it make sense to actually have a string version provided in compile.h and use it instead ?
-
-I think so.
-
-> 
-> Otherwise if we start adding those kinds of checks, we will have to add them in at least 3 places in xen code.
-
-The solution I proposed above is easy to implement right now. My gut 
-feeling is tweaking __stringify (or else) will take a bit more time.
-
-If you (or Leo) can come up with a solution quickly then fine. 
-Otherwise, I think we still want some hardening for backporting purpose.
-
-Cheers,
-
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index 2fafb9f228..0fefed1b8a 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -160,7 +160,7 @@
+ #define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (265-256))
+ #define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
+ 
+-#define XENHEAP_VIRT_START     xenheap_virt_start
++#define XENHEAP_VIRT_START     directmap_virt_start
+ 
+ #define HYPERVISOR_VIRT_END    DIRECTMAP_VIRT_END
+ 
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 749fbefa0c..7b4f6ce233 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -154,19 +154,19 @@ struct page_info
+ #define _PGC_need_scrub   _PGC_allocated
+ #define PGC_need_scrub    PGC_allocated
+ 
+-extern mfn_t xenheap_mfn_start, xenheap_mfn_end;
+-extern vaddr_t xenheap_virt_end;
++extern mfn_t directmap_mfn_start, directmap_mfn_end;
++extern vaddr_t directmap_virt_end;
+ #ifdef CONFIG_ARM_64
+-extern vaddr_t xenheap_virt_start;
+-extern unsigned long xenheap_base_pdx;
++extern vaddr_t directmap_virt_start;
++extern unsigned long directmap_base_pdx;
+ #endif
+ 
+ #ifdef CONFIG_ARM_32
+ #define is_xen_heap_page(page) is_xen_heap_mfn(page_to_mfn(page))
+ #define is_xen_heap_mfn(mfn) ({                                 \
+     unsigned long mfn_ = mfn_x(mfn);                            \
+-    (mfn_ >= mfn_x(xenheap_mfn_start) &&                        \
+-     mfn_ < mfn_x(xenheap_mfn_end));                            \
++    (mfn_ >= mfn_x(directmap_mfn_start) &&                      \
++     mfn_ < mfn_x(directmap_mfn_end));                          \
+ })
+ #else
+ #define is_xen_heap_page(page) ((page)->count_info & PGC_xen_heap)
+@@ -267,16 +267,16 @@ static inline paddr_t __virt_to_maddr(vaddr_t va)
+ static inline void *maddr_to_virt(paddr_t ma)
+ {
+     ASSERT(is_xen_heap_mfn(maddr_to_mfn(ma)));
+-    ma -= mfn_to_maddr(xenheap_mfn_start);
++    ma -= mfn_to_maddr(directmap_mfn_start);
+     return (void *)(unsigned long) ma + XENHEAP_VIRT_START;
+ }
+ #else
+ static inline void *maddr_to_virt(paddr_t ma)
+ {
+-    ASSERT((mfn_to_pdx(maddr_to_mfn(ma)) - xenheap_base_pdx) <
++    ASSERT((mfn_to_pdx(maddr_to_mfn(ma)) - directmap_base_pdx) <
+            (DIRECTMAP_SIZE >> PAGE_SHIFT));
+     return (void *)(XENHEAP_VIRT_START -
+-                    (xenheap_base_pdx << PAGE_SHIFT) +
++                    (directmap_base_pdx << PAGE_SHIFT) +
+                     ((ma & ma_va_bottom_mask) |
+                      ((ma & ma_top_mask) >> pfn_pdx_hole_shift)));
+ }
+@@ -319,10 +319,10 @@ static inline struct page_info *virt_to_page(const void *v)
+     unsigned long pdx;
+ 
+     ASSERT(va >= XENHEAP_VIRT_START);
+-    ASSERT(va < xenheap_virt_end);
++    ASSERT(va < directmap_virt_end);
+ 
+     pdx = (va - XENHEAP_VIRT_START) >> PAGE_SHIFT;
+-    pdx += mfn_to_pdx(xenheap_mfn_start);
++    pdx += mfn_to_pdx(directmap_mfn_start);
+     return frame_table + pdx - frametable_base_pdx;
+ }
+ 
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 7f5b317d3e..4a70ed2986 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -132,12 +132,12 @@ uint64_t init_ttbr;
+ static paddr_t phys_offset;
+ 
+ /* Limits of the Xen heap */
+-mfn_t xenheap_mfn_start __read_mostly = INVALID_MFN_INITIALIZER;
+-mfn_t xenheap_mfn_end __read_mostly;
+-vaddr_t xenheap_virt_end __read_mostly;
++mfn_t directmap_mfn_start __read_mostly = INVALID_MFN_INITIALIZER;
++mfn_t directmap_mfn_end __read_mostly;
++vaddr_t directmap_virt_end __read_mostly;
+ #ifdef CONFIG_ARM_64
+-vaddr_t xenheap_virt_start __read_mostly;
+-unsigned long xenheap_base_pdx __read_mostly;
++vaddr_t directmap_virt_start __read_mostly;
++unsigned long directmap_base_pdx __read_mostly;
+ #endif
+ 
+ unsigned long frametable_base_pdx __read_mostly;
+@@ -609,7 +609,7 @@ void __init setup_xenheap_mappings(unsigned long base_mfn,
+         panic("Unable to setup the xenheap mappings.\n");
+ 
+     /* Record where the xenheap is, for translation routines. */
+-    xenheap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
++    directmap_virt_end = XENHEAP_VIRT_START + nr_mfns * PAGE_SIZE;
+ }
+ #else /* CONFIG_ARM_64 */
+ void __init setup_xenheap_mappings(unsigned long base_mfn,
+@@ -618,12 +618,12 @@ void __init setup_xenheap_mappings(unsigned long base_mfn,
+     int rc;
+ 
+     /* First call sets the xenheap physical and virtual offset. */
+-    if ( mfn_eq(xenheap_mfn_start, INVALID_MFN) )
++    if ( mfn_eq(directmap_mfn_start, INVALID_MFN) )
+     {
+         unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
+ 
+-        xenheap_mfn_start = _mfn(base_mfn);
+-        xenheap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
++        directmap_mfn_start = _mfn(base_mfn);
++        directmap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
+         /*
+          * The base address may not be aligned to the first level
+          * size (e.g. 1GB when using 4KB pages). This would prevent
+@@ -633,13 +633,13 @@ void __init setup_xenheap_mappings(unsigned long base_mfn,
+          * Prevent that by offsetting the start of the xenheap virtual
+          * address.
+          */
+-        xenheap_virt_start = DIRECTMAP_VIRT_START +
++        directmap_virt_start = DIRECTMAP_VIRT_START +
+             (base_mfn - mfn_gb) * PAGE_SIZE;
+     }
+ 
+-    if ( base_mfn < mfn_x(xenheap_mfn_start) )
++    if ( base_mfn < mfn_x(directmap_mfn_start) )
+         panic("cannot add xenheap mapping at %lx below heap start %lx\n",
+-              base_mfn, mfn_x(xenheap_mfn_start));
++              base_mfn, mfn_x(directmap_mfn_start));
+ 
+     rc = map_pages_to_xen((vaddr_t)__mfn_to_virt(base_mfn),
+                           _mfn(base_mfn), nr_mfns,
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 3c36c050bf..4a8334c268 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -697,11 +697,11 @@ static void __init populate_boot_allocator(void)
+ 
+ #ifdef CONFIG_ARM_32
+             /* Avoid the xenheap */
+-            if ( s < mfn_to_maddr(xenheap_mfn_end) &&
+-                 mfn_to_maddr(xenheap_mfn_start) < e )
++            if ( s < mfn_to_maddr(directmap_mfn_end) &&
++                 mfn_to_maddr(directmap_mfn_start) < e )
+             {
+-                e = mfn_to_maddr(xenheap_mfn_start);
+-                n = mfn_to_maddr(xenheap_mfn_end);
++                e = mfn_to_maddr(directmap_mfn_start);
++                n = mfn_to_maddr(directmap_mfn_end);
+             }
+ #endif
+ 
+@@ -793,15 +793,16 @@ static void __init setup_mm(void)
+      * We need some memory to allocate the page-tables used for the
+      * xenheap mappings. So populate the boot allocator first.
+      *
+-     * This requires us to set xenheap_mfn_{start, end} first so the Xenheap
++     * Note that currently xenheap is direct mapped on Arm32.
++     * This requires us to set directmap_mfn_{start, end} first so the Xenheap
+      * region can be avoided.
+      */
+-    xenheap_mfn_start = _mfn((e >> PAGE_SHIFT) - xenheap_pages);
+-    xenheap_mfn_end = mfn_add(xenheap_mfn_start, xenheap_pages);
++    directmap_mfn_start = _mfn((e >> PAGE_SHIFT) - xenheap_pages);
++    directmap_mfn_end = mfn_add(directmap_mfn_start, xenheap_pages);
+ 
+     populate_boot_allocator();
+ 
+-    setup_xenheap_mappings(mfn_x(xenheap_mfn_start), xenheap_pages);
++    setup_xenheap_mappings(mfn_x(directmap_mfn_start), xenheap_pages);
+ 
+     /* Frame table covers all of RAM region, including holes */
+     setup_frametable_mappings(ram_start, ram_end);
+@@ -816,8 +817,8 @@ static void __init setup_mm(void)
+               smp_processor_id());
+ 
+     /* Add xenheap memory that was not already added to the boot allocator. */
+-    init_xenheap_pages(mfn_to_maddr(xenheap_mfn_start),
+-                       mfn_to_maddr(xenheap_mfn_end));
++    init_xenheap_pages(mfn_to_maddr(directmap_mfn_start),
++                       mfn_to_maddr(directmap_mfn_end));
+ 
+     init_staticmem_pages();
+ }
+@@ -858,9 +859,9 @@ static void __init setup_mm(void)
+ 
+     total_pages += ram_size >> PAGE_SHIFT;
+ 
+-    xenheap_virt_end = XENHEAP_VIRT_START + ram_end - ram_start;
+-    xenheap_mfn_start = maddr_to_mfn(ram_start);
+-    xenheap_mfn_end = maddr_to_mfn(ram_end);
++    directmap_virt_end = XENHEAP_VIRT_START + ram_end - ram_start;
++    directmap_mfn_start = maddr_to_mfn(ram_start);
++    directmap_mfn_end = maddr_to_mfn(ram_end);
+ 
+     setup_frametable_mappings(ram_start, ram_end);
+     max_page = PFN_DOWN(ram_end);
 -- 
-Julien Grall
+2.17.1
+
 
