@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143E1C54EE9
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 11:19:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.401342.643189 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B81C38145
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 11:23:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.401351.643202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVt5b-0005RD-4K; Wed, 07 Sep 2022 11:19:27 +0000
+	id 1oVt96-0006rt-M7; Wed, 07 Sep 2022 11:23:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 401342.643189; Wed, 07 Sep 2022 11:19:27 +0000
+Received: by outflank-mailman (output) from mailman id 401351.643202; Wed, 07 Sep 2022 11:23:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVt5b-0005R6-1e; Wed, 07 Sep 2022 11:19:27 +0000
-Received: by outflank-mailman (input) for mailman id 401342;
- Wed, 07 Sep 2022 11:19:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=a/dp=ZK=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1oVsx3-0006sS-Lc
- for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 11:10:37 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id b2f190e1-2e9d-11ed-a016-b9edf5238543;
- Wed, 07 Sep 2022 13:10:36 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 88FBD1042;
- Wed,  7 Sep 2022 04:10:42 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5FF073F7B4;
- Wed,  7 Sep 2022 04:10:35 -0700 (PDT)
+	id 1oVt96-0006rl-HT; Wed, 07 Sep 2022 11:23:04 +0000
+Received: by outflank-mailman (input) for mailman id 401351;
+ Wed, 07 Sep 2022 11:23:03 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1oVt95-0006qS-LB
+ for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 11:23:03 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oVt94-0003rR-E7; Wed, 07 Sep 2022 11:23:02 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=[192.168.17.46]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oVt94-0005Ur-6x; Wed, 07 Sep 2022 11:23:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,72 +41,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2f190e1-2e9d-11ed-a016-b9edf5238543
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH v4 1/2] xen/arm: pci: modify pci_find_host_bridge_node argument to const pdev
-Date: Wed,  7 Sep 2022 12:09:49 +0100
-Message-Id: <535d4f87b6632edfca76e0be6db371ab817b7f82.1662548825.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1662548825.git.rahul.singh@arm.com>
-References: <cover.1662548825.git.rahul.singh@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=yMaeCOuQqEnswGVCYMoa6kBWGy/c9kwqMVWaf82VIYg=; b=IpACjnDcUZtXTYCB8kEVq0MaE4
+	SlY8rDYV6Yzyd06huqwfUoHfZqUjHhY3Dv0sfYyXeXXKVxLF6D/PdXHRAoY0Hyxj6fA6wfDXj7HBb
+	o+8qGLA1at/ywHpF/CURJc4IMhOHJPj76O2zVmXT5XQrs48Jgle72zOh8Sw3cksF2ydU=;
+Message-ID: <206db3d1-4609-fea6-9cb2-a56cc9d6f7ba@xen.org>
+Date: Wed, 7 Sep 2022 12:22:59 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.2.1
+Subject: Re: [PATCH v7 2/9] xen/arm: assign static shared memory to the
+ default owner dom_io
+Content-Language: en-US
+To: Penny Zheng <Penny.Zheng@arm.com>, xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <20220906085941.944592-1-Penny.Zheng@arm.com>
+ <20220906085941.944592-3-Penny.Zheng@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20220906085941.944592-3-Penny.Zheng@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Modify pci_find_host_bridge_node argument to const pdev to avoid
-converting the dev to pdev in pci_find_host_bridge_node and also
-constify the return.
+Hi Penny,
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
----
-Changes in v4:
- - no changes
-Changes in v3:
- - no changes
----
- xen/arch/arm/include/asm/pci.h     | 3 ++-
- xen/arch/arm/pci/pci-host-common.c | 4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+On 06/09/2022 09:59, Penny Zheng wrote:
+> +static int __init assign_shared_memory(struct domain *d,
+> +                                       uint32_t addr_cells, uint32_t size_cells,
+> +                                       paddr_t pbase, paddr_t psize)
+> +{
+> +    mfn_t smfn;
+> +
+> +    dprintk(XENLOG_INFO,
+> +            "%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
+> +            d, pbase, pbase + psize);
+> +
+> +    smfn = acquire_shared_memory_bank(d, pbase, psize);
+> +    if ( mfn_eq(smfn, INVALID_MFN) )
+> +        return -EINVAL;
+> +
+> +    /*
+> +     * DOMID_IO is auto-translated (i.e. it seems RAM 1:1). So we do not need
 
-diff --git a/xen/arch/arm/include/asm/pci.h b/xen/arch/arm/include/asm/pci.h
-index 7c7449d64f..80a2431804 100644
---- a/xen/arch/arm/include/asm/pci.h
-+++ b/xen/arch/arm/include/asm/pci.h
-@@ -106,7 +106,8 @@ bool pci_ecam_need_p2m_hwdom_mapping(struct domain *d,
-                                      struct pci_host_bridge *bridge,
-                                      uint64_t addr);
- struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
--struct dt_device_node *pci_find_host_bridge_node(struct device *dev);
-+const struct dt_device_node *
-+pci_find_host_bridge_node(const struct pci_dev *pdev);
- int pci_get_host_bridge_segment(const struct dt_device_node *node,
-                                 uint16_t *segment);
- 
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index fd8c0f837a..89ef30028e 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -243,10 +243,10 @@ err_exit:
- /*
-  * Get host bridge node given a device attached to it.
-  */
--struct dt_device_node *pci_find_host_bridge_node(struct device *dev)
-+const struct dt_device_node *
-+pci_find_host_bridge_node(const struct pci_dev *pdev)
- {
-     struct pci_host_bridge *bridge;
--    struct pci_dev *pdev = dev_to_pci(dev);
- 
-     bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
-     if ( unlikely(!bridge) )
+Hmmm... I should have re-read my sentence before hitting sending. It 
+should be "is not auto-translated" and s/seeems/sees/.
+
+Other than that:
+
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
+
 -- 
-2.25.1
-
+Julien Grall
 
