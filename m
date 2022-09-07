@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBBEC38145
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 13:05:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.401658.643543 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEDFC38145
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Sep 2022 13:09:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.401665.643554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVujl-0002CI-AO; Wed, 07 Sep 2022 13:05:01 +0000
+	id 1oVunr-0002tP-RB; Wed, 07 Sep 2022 13:09:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 401658.643543; Wed, 07 Sep 2022 13:05:01 +0000
+Received: by outflank-mailman (output) from mailman id 401665.643554; Wed, 07 Sep 2022 13:09:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oVujl-0002CB-7M; Wed, 07 Sep 2022 13:05:01 +0000
-Received: by outflank-mailman (input) for mailman id 401658;
- Wed, 07 Sep 2022 13:05:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iSht=ZK=linux.dev=kent.overstreet@srs-se1.protection.inumbo.net>)
- id 1oVujj-0002C3-IE
- for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 13:05:00 +0000
-Received: from out2.migadu.com (out2.migadu.com [2001:41d0:2:aacc::])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab1dbe95-2ead-11ed-af93-0125da4c0113;
- Wed, 07 Sep 2022 15:04:56 +0200 (CEST)
+	id 1oVunr-0002tI-OD; Wed, 07 Sep 2022 13:09:15 +0000
+Received: by outflank-mailman (input) for mailman id 401665;
+ Wed, 07 Sep 2022 13:09:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1oVunq-0002tC-1P
+ for xen-devel@lists.xenproject.org; Wed, 07 Sep 2022 13:09:14 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oVunp-00062E-NH; Wed, 07 Sep 2022 13:09:13 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=[192.168.17.46]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oVunp-0002ho-HR; Wed, 07 Sep 2022 13:09:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,83 +41,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab1dbe95-2ead-11ed-af93-0125da4c0113
-Date: Wed, 7 Sep 2022 09:04:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1662555894;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3UodEGmtAL0Z2fi75TPwE5UbXZRqdKXtyJj7vm5kpXk=;
-	b=er2MzJbTg47iAo/XMusErAaGYdN6LhjL9qJ7uEt4qEtP6HbsNa3eddpgjMgNqeDLP23aLT
-	Gwip6c5VZ7JEEH0cUPSDYRDY/kPSA/0lPyiKeXik8d/k2hQ2yrItfs4NovpVivoEk4ZzdX
-	atkHw1ns446d4aZFxAc03p1ps6wQ2SU=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Michal Hocko <mhocko@suse.com>
-Cc: Suren Baghdasaryan <surenb@google.com>, Mel Gorman <mgorman@suse.de>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Vlastimil Babka <vbabka@suse.cz>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Davidlohr Bueso <dave@stgolabs.net>,
-	Matthew Wilcox <willy@infradead.org>,
-	"Liam R. Howlett" <liam.howlett@oracle.com>,
-	David Vernet <void@manifault.com>,
-	Juri Lelli <juri.lelli@redhat.com>,
-	Laurent Dufour <ldufour@linux.ibm.com>,
-	Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>, mcgrof@kernel.org,
-	masahiroy@kernel.org, nathan@kernel.org, changbin.du@intel.com,
-	ytcoode@gmail.com, Vincent Guittot <vincent.guittot@linaro.org>,
-	Dietmar Eggemann <dietmar.eggemann@arm.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Benjamin Segall <bsegall@google.com>,
-	Daniel Bristot de Oliveira <bristot@redhat.com>,
-	Valentin Schneider <vschneid@redhat.com>,
-	Christopher Lameter <cl@linux.com>,
-	Pekka Enberg <penberg@kernel.org>,
-	Joonsoo Kim <iamjoonsoo.kim@lge.com>, 42.hyeyoo@gmail.com,
-	Alexander Potapenko <glider@google.com>,
-	Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>,
-	Shakeel Butt <shakeelb@google.com>,
-	Muchun Song <songmuchun@bytedance.com>, arnd@arndb.de,
-	jbaron@akamai.com, David Rientjes <rientjes@google.com>,
-	Minchan Kim <minchan@google.com>,
-	Kalesh Singh <kaleshsingh@google.com>,
-	kernel-team <kernel-team@android.com>,
-	linux-mm <linux-mm@kvack.org>, iommu@lists.linux.dev,
-	kasan-dev@googlegroups.com, io-uring@vger.kernel.org,
-	linux-arch@vger.kernel.org, xen-devel@lists.xenproject.org,
-	linux-bcache@vger.kernel.org, linux-modules@vger.kernel.org,
-	LKML <linux-kernel@vger.kernel.org>
-Subject: Re: [RFC PATCH 00/30] Code tagging framework and applications
-Message-ID: <20220907130323.rwycrntnckc6h43n@kmo-framework>
-References: <YxBc1xuGbB36f8zC@dhcp22.suse.cz>
- <CAJuCfpGhwPFYdkOLjwwD4ra9JxPqq1T5d1jd41Jy3LJnVnhNdg@mail.gmail.com>
- <YxEE1vOwRPdzKxoq@dhcp22.suse.cz>
- <CAJuCfpHuzJGTA_-m0Jfawc7LgJLt4GztUUY4K9N9-7bFqJuXnw@mail.gmail.com>
- <20220901201502.sn6223bayzwferxv@moria.home.lan>
- <YxW4Ig338d2vQAz3@dhcp22.suse.cz>
- <20220905234649.525vorzx27ybypsn@kmo-framework>
- <Yxb1cxDSyte1Ut/F@dhcp22.suse.cz>
- <20220906182058.iijmpzu4rtxowy37@kmo-framework>
- <Yxh5ueDTAOcwEmCQ@dhcp22.suse.cz>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=nEgytAqoIrDwIJUb1uAV841ZpJnJnGzO+XSBQUOD1X0=; b=qB38DkG7g5caWm6YDOvgdIR9dS
+	JSz2OwUga8h1Kc9y9Io6vdQOlFc6CNC0wwehykp3162eSey1IX00FoJarv9IXKrHz4dqR78N6v910
+	YAEuUEJUlMSh8zE5kFx7Ri5UFhHJy01Bsq9zs/0BI4f0e/Dyn3ZiGIST1FuKLBst9n7Q=;
+Message-ID: <a94d42dc-eebc-ae9f-26b0-2553398195ff@xen.org>
+Date: Wed, 7 Sep 2022 14:09:11 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Yxh5ueDTAOcwEmCQ@dhcp22.suse.cz>
-X-Migadu-Flow: FLOW_OUT
-X-Migadu-Auth-User: linux.dev
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.2.1
+Subject: Re: [PATCH v4 6/7] xen/arm: introduce new xen,enhanced property value
+Content-Language: en-US
+To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1662462034.git.rahul.singh@arm.com>
+ <667059a3bc6ed9a8b993f64f2b1176a2a131f41e.1662462034.git.rahul.singh@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <667059a3bc6ed9a8b993f64f2b1176a2a131f41e.1662462034.git.rahul.singh@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 07, 2022 at 01:00:09PM +0200, Michal Hocko wrote:
-> Hmm, it seems that further discussion doesn't really make much sense
-> here. I know how to use my time better.
+Hi Rahul
 
-Just a thought, but I generally find it more productive to propose ideas than to
-just be disparaging.
+On 06/09/2022 14:40, Rahul Singh wrote:
+> Introduce a new "xen,enhanced" dom0less property value "no-xenstore" to
+> disable xenstore interface for dom0less guests.
+> 
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+> ---
+> Changes in v4:
+>   - Implement defines for dom0less features
+> Changes in v3:
+>   - new patch in this version
+> ---
+>   docs/misc/arm/device-tree/booting.txt |  4 ++++
+>   xen/arch/arm/domain_build.c           | 10 ++++++----
+>   xen/arch/arm/include/asm/kernel.h     | 23 +++++++++++++++++++++--
+>   3 files changed, 31 insertions(+), 6 deletions(-)
+> 
+> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+> index 98253414b8..1b0dca1454 100644
+> --- a/docs/misc/arm/device-tree/booting.txt
+> +++ b/docs/misc/arm/device-tree/booting.txt
+> @@ -204,6 +204,10 @@ with the following properties:
+>       - "disabled"
+>       Xen PV interfaces are disabled.
+>   
+> +    - no-xenstore
+> +    Xen PV interfaces, including grant-table will be enabled but xenstore
+
+Please use "All default" in front. So it is clear that everything is 
+enabled but xenstore.
+
+> +    will be disabled for the VM.
+> +
+>       If the xen,enhanced property is present with no value, it defaults
+>       to "enabled". If the xen,enhanced property is not present, PV
+>       interfaces are disabled.
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 707e247f6a..0b164ef595 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -2891,7 +2891,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>               goto err;
+>       }
+>   
+> -    if ( kinfo->dom0less_enhanced )
+> +    if ( kinfo->dom0less_feature & DOM0LESS_ENHANCED_NO_XS )
+>       {
+>           ret = make_hypervisor_node(d, kinfo, addrcells, sizecells);
+>           if ( ret )
+> @@ -3209,10 +3209,12 @@ static int __init construct_domU(struct domain *d,
+>            (rc == 0 && !strcmp(dom0less_enhanced, "enabled")) )
+>       {
+>           if ( hardware_domain )
+> -            kinfo.dom0less_enhanced = true;
+> +            kinfo.dom0less_feature = DOM0LESS_ENHANCED;
+>           else
+> -            panic("Tried to use xen,enhanced without dom0\n");
+> +            panic("At the moment, Xenstore support requires dom0 to be present\n");
+>       }
+> +    else if ( rc == 0 && !strcmp(dom0less_enhanced, "no-xenstore") )
+> +        kinfo.dom0less_feature = DOM0LESS_ENHANCED_NO_XS;
+>   
+>       if ( vcpu_create(d, 0) == NULL )
+>           return -ENOMEM;
+> @@ -3252,7 +3254,7 @@ static int __init construct_domU(struct domain *d,
+>       if ( rc < 0 )
+>           return rc;
+>   
+> -    if ( kinfo.dom0less_enhanced )
+> +    if ( kinfo.dom0less_feature & DOM0LESS_XENSTORE )
+>       {
+>           ASSERT(hardware_domain);
+>           rc = alloc_xenstore_evtchn(d);
+> diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+> index c4dc039b54..ad240494ea 100644
+> --- a/xen/arch/arm/include/asm/kernel.h
+> +++ b/xen/arch/arm/include/asm/kernel.h
+> @@ -9,6 +9,25 @@
+>   #include <xen/device_tree.h>
+>   #include <asm/setup.h>
+>   
+> +/*
+> + * List of possible features for dom0less domUs
+> + *
+> + * DOM0LESS_ENHANCED_NO_XS: Notify the OS it is running on top of Xen. All the
+> + *                          default features (excluding Xenstore) will be
+> + *                          available. Note that an OS *must* not rely on the
+> + *                          availability of Xen features if this is not set.
+> + * DOM0LESS_XENSTORE:       Xenstore will be enabled for the VM. This feature
+> + *                          can't be enabled without the
+> + *                          DOM0LESS_ENHANCED_NO_XS.
+> + * DOM0LESS_ENHANCED:       Notify the OS it is running on top of Xen. All the
+> + *                          default features (including Xenstore) will be
+> + *                          available. Note that an OS *must* not rely on the
+> + *                          availability of Xen features if this is not set.
+> + */
+> +#define DOM0LESS_ENHANCED_NO_XS  BIT(0, U)
+> +#define DOM0LESS_XENSTORE        BIT(1, U)
+> +#define DOM0LESS_ENHANCED        (DOM0LESS_ENHANCED_NO_XS | DOM0LESS_XENSTORE)
+> +
+>   struct kernel_info {
+>   #ifdef CONFIG_ARM_64
+>       enum domain_type type;
+> @@ -36,8 +55,8 @@ struct kernel_info {
+>       /* Enable pl011 emulation */
+>       bool vpl011;
+>   
+> -    /* Enable PV drivers */
+> -    bool dom0less_enhanced;
+> +    /* Enable/Disable PV drivers interface,grant table, evtchn or xenstore */
+
+The part after "," is technically wrong because it also affects other 
+interfaces. But I would drop it to avoid any stale comment (we may add 
+new one in the futures).
 
 Cheers,
-Kent
+
+-- 
+Julien Grall
 
