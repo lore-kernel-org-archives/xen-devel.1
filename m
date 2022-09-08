@@ -4,55 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED85C38145
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 09:18:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.402983.644929 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F9B5C54EE9
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 09:22:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.402994.644946 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDg2-0004Pe-4N; Thu, 08 Sep 2022 09:18:26 +0000
+	id 1oWDkB-00066R-3z; Thu, 08 Sep 2022 09:22:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 402983.644929; Thu, 08 Sep 2022 09:18:26 +0000
+Received: by outflank-mailman (output) from mailman id 402994.644946; Thu, 08 Sep 2022 09:22:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDg2-0004PX-1M; Thu, 08 Sep 2022 09:18:26 +0000
-Received: by outflank-mailman (input) for mailman id 402983;
- Thu, 08 Sep 2022 09:18:24 +0000
+	id 1oWDkA-00065X-Tp; Thu, 08 Sep 2022 09:22:42 +0000
+Received: by outflank-mailman (input) for mailman id 402994;
+ Thu, 08 Sep 2022 09:22:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VI1a=ZL=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1oWDg0-0004PR-Nj
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 09:18:24 +0000
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam07on2070.outbound.protection.outlook.com [40.107.212.70])
+ id 1oWDk9-00062t-PT
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 09:22:41 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2059.outbound.protection.outlook.com [40.107.243.59])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2fc889a7-2f57-11ed-a31c-8f8a9ae3403f;
- Thu, 08 Sep 2022 11:18:23 +0200 (CEST)
-Received: from MW4PR04CA0300.namprd04.prod.outlook.com (2603:10b6:303:89::35)
- by DM6PR12MB4299.namprd12.prod.outlook.com (2603:10b6:5:223::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.14; Thu, 8 Sep
- 2022 09:18:20 +0000
-Received: from CO1NAM11FT079.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:89:cafe::89) by MW4PR04CA0300.outlook.office365.com
- (2603:10b6:303:89::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.14 via Frontend
- Transport; Thu, 8 Sep 2022 09:18:20 +0000
+ id c8bb93aa-2f57-11ed-a31c-8f8a9ae3403f;
+ Thu, 08 Sep 2022 11:22:40 +0200 (CEST)
+Received: from MW4PR02CA0004.namprd02.prod.outlook.com (2603:10b6:303:16d::19)
+ by MW4PR12MB6949.namprd12.prod.outlook.com (2603:10b6:303:208::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.12; Thu, 8 Sep
+ 2022 09:22:37 +0000
+Received: from CO1NAM11FT056.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:16d:cafe::84) by MW4PR02CA0004.outlook.office365.com
+ (2603:10b6:303:16d::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.15 via Frontend
+ Transport; Thu, 8 Sep 2022 09:22:37 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT079.mail.protection.outlook.com (10.13.175.134) with Microsoft SMTP
+ CO1NAM11FT056.mail.protection.outlook.com (10.13.175.107) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5612.13 via Frontend Transport; Thu, 8 Sep 2022 09:18:19 +0000
-Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
+ 15.20.5612.13 via Frontend Transport; Thu, 8 Sep 2022 09:22:36 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 8 Sep
- 2022 04:18:19 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
- (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 8 Sep
- 2022 02:18:19 -0700
-Received: from [10.71.192.107] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.28 via Frontend
- Transport; Thu, 8 Sep 2022 04:18:18 -0500
+ 2022 04:22:35 -0500
+Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
+ SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.28
+ via Frontend Transport; Thu, 8 Sep 2022 04:22:34 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,88 +60,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2fc889a7-2f57-11ed-a31c-8f8a9ae3403f
+X-Inumbo-ID: c8bb93aa-2f57-11ed-a31c-8f8a9ae3403f
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=H5SA2IuLQEQWvoSgmsyET3iRlJXTPYhrug+P3KZk7SUwBO1t9GIGA7PN9kFJxPqbuXdCBqw4H+kFjWOctmu4uBlBoXLxAcx8mKNNvHU703Cbx0mE8/g4j22xYSY/pcAfzfUFFKxR6szSqeaHm0Z/phc2P6sG/RY1rdu10EQp2+LCMWvTz+JnEaSV1bGzbc21kAucufpEN4jKcOcY6V6XnMgIni5iOpkRFoRn+gV44g6Ksz6Yq6gSZ9sYL2/5GsdCKdInzfDj6LGLSKh9IbqYfwZavoqX63QiGcH9grOKzgvwyML3eUM6C299icqWdCBbE5SgPMm1bm7ZGff06VV9uA==
+ b=aAmnqea1r1TWORAioI2l0a5veDLrZo7PSHHsPU1eC0UE/Y//wMOSzDZRSvJVPYwkStXwiMcSkvmgPFDxcFoFK2mUJlJmT1Qql5ji7XfAEn+5ozx8k703imXdbB2+++ECFbQr/KJG+dz81guh5161TrLkUltEcKTrHoOoyi0L4BGH8br0DMILezil+vzLLNrcQEA1jzoQ0g6X8nM/nXXruL5fmmo//ZQ6oeFpDwI7LQxxt+iSArwJufHloqub4AYOip4FX7rF2GG7sXBiZY/JN+j3ri8ibhj3GTGnc3oTeOZQ0GhTHXaqOOd/r2h0JRzWBjitCap8iCyjKo4UpUMJaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/JRfagLwxe8Mn4cKVjlgfmqszDxiPFDPL4PefAQpVJE=;
- b=fHKZq2lGhcbFNUL67VVd0C2oWQ0kImVYoeKStPZIb6oYRljlUSqA8LB9rndDvMnRHqCuq9EHozBCNQL27coNRJ51U5nTSrdlbbNB460vVmnU43XyQU3wflfC2tVi4WbVFIOeY42vTZGLiYLvgpVnNYfEgDhBwlNYUOhrLJXsf6KJjGPjoVphLJKQHCndJ3jGnCVxscikKUKZg3WiezShaO/cy3ew2jw4Vtqq8L4mlDB3bLQ3KS084y+xsQhtRxskQpxYzelL48nR5YGq/YXAlUo/XXzb9zLR57GWChRgm5hOb1e+0IVf1y6neDsLDK5GCce1X7o85l5DVTqdSWykSw==
+ bh=tyfchKA7NgWWrIrLugjPaY2e//gdOL9mWhpHot2OCqg=;
+ b=ICkS6HZq2fe3AOjC/blGL7qfRHcYQhBDAPiHPHeTkqB4iL7EIbo5/J64I2Zx1pJPZLJw4EcoMZguyJIfpVQKlncbR05bc0ZkwSHCsX6clTqHMWU0eKk9cPilys0japDGxJOdEe1kiflcv+61zfM05TWHss4vfPSw09icc0kZRUtelz+NMnKD0ymkGEZzpLF0vIh9nPjHkQthuJN4gsvIXypdyX0EgUV7blSQt7QYyKehP0cKAeNhV+lxaLkJ3176esR+2o14haf2RBnouHOUDwJKEdZY+Ny2QJhTxjOYN2OrDASsS6KXhQI3RwL7F6ArYq3SsMah5qGDauoGy7++NQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/JRfagLwxe8Mn4cKVjlgfmqszDxiPFDPL4PefAQpVJE=;
- b=c0yGIuCkPUk1MG84RKcQ2zSsdTft+jrRJXZxPrajzih/m/zfh150HHN5zAcSPaBc6f1LO9f5rh+DJKAEpb1Np9yVv3HQzPhuf/6r0Rj/ot6i0mT9rtSvChmeVz9918dj6bDlQXN1CdSVqh/f7tHf/KjUv3QBSdIrBzu8BE8qzus=
+ bh=tyfchKA7NgWWrIrLugjPaY2e//gdOL9mWhpHot2OCqg=;
+ b=dOAyNW3Ak/S6wqPwAiqXp38at/fXYNPoX5lQx5MhBty+3pdw46lsXpXl6IC77py4gnLeNkjyu/QX7NLZk1ywOTrQiy0quioFvkhXYEpW++d4/WvQDTfDaHJzFzbacxHXLGYAe5WrQho00fyLJjA30MCsn4qP/uzqyBF5FQNjRyE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <86bf3f23-80ba-54a1-ff87-2fe45cd1c181@amd.com>
-Date: Thu, 8 Sep 2022 11:18:17 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.1
-Subject: Re: [for-4.17 1/3] automation: qemu-alpine-arm64-gcc: Use kernel 5.19
-Content-Language: en-US
-To: Ayan Kumar Halder <ayankuma@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Doug Goldstein <cardoe@cardoe.com>, Stefano Stabellini
-	<sstabellini@kernel.org>
-References: <20220902070905.1262-1-michal.orzel@amd.com>
- <20220902070905.1262-2-michal.orzel@amd.com>
- <2c2c0315-8694-d9ef-5f08-01c7bce3329a@amd.com>
 From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <2c2c0315-8694-d9ef-5f08-01c7bce3329a@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Luca Fancellu
+	<luca.fancellu@arm.com>, Ayan Kumar Halder <ayankuma@amd.com>
+Subject: [for-4.17 v2 1/3] automation: qemu-alpine-arm64-gcc: Use kernel 5.19
+Date: Thu, 8 Sep 2022 11:22:28 +0200
+Message-ID: <20220908092230.21421-2-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220908092230.21421-1-michal.orzel@amd.com>
+References: <20220908092230.21421-1-michal.orzel@amd.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT079:EE_|DM6PR12MB4299:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5453b115-aa9b-43d7-b35e-08da917b1235
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT056:EE_|MW4PR12MB6949:EE_
+X-MS-Office365-Filtering-Correlation-Id: d54294cb-a9f9-4f26-5d7e-08da917bab92
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	lNpiz0hP/LFPQMpf6KZaxU/rQXTlxcW6nAJ2QVh9kQXplJcHandxvnsgN7MTZOZvgPyVrjEZazewe4knZ1CNyfULLBpXq1OFtfkG0puja26cydstQuSx2JCX0diCj4wZD85R+siVs1A0qD+JpYgk21kAoRbxl9D6pT5pmShXfVpWznV9qmLKyr8ACezyua+zaxaPuWoJhof7KkK+Rsi0nDiUonY9HvxZ7qNaiOMT4rDNzYL6pNgQYN5i/7Zcri0k1sr3tXoqog7OWwuHe7BTsvDlIL0C/Kvuw/4TaV0jqPRzGmjRhWXdagcCmBrVYwnde6rY09trKdI/h5a0oTJZHYrHSIFmvD/o/qyNsepAeL4+QbxRr/MI0v1+M0hSG7YEjyRfAcmyf+OmIGXS8zJh/6KOefsy3KpMbRA5xbx1TWytZWJwqNN1u5Ys31AvJJNIAZCjDa/1/WKJECpxRXClhCmBq7UJNpqhIKPV14+38cLNSR9hpyKFpj3Rx3Uea3nYcw8C7/MDsVdemw5VmwDlCT36y1As2rzvtdpXGWay0IypZKHxngBsAYlb+KW9V7JLUjM3grIhVVgFimYHviSNNn2D1C5e0Dt/x2nK91n15TZx4DPWlAvEthAe7sYCyc8mjwziwiOCSBR6/v2VYY+tl5BhVxHc+rrfRGbJGQMYd9f1K52v14zqoFLvILlYcrD1qa14k5ukBuYpfunBZjuHEoAAeA+0tDhIrvtJIbahTUmaas+BQHULUd5YwXkQZxqkMLAaICXP5cUnPKXfrj3NaUUadQQUPtCR7TooUJJcEgZ9tmcsZ4ME0tn0dggfq0Bm9UarTikrOfRSkh9YiYb3qA==
+	SjIiWqALMBxzrnh8u0JllRhyAJnUvrutBn2hSL2dk5NeHmrm+M+oS01Jvwh2+6XXozmNGBzInNnDdWLY1emjZi8pfqKK8f59m56P/WrHbYp7m9KpOA6RzBX3Pfwe/3eLM7HgGHlYfRBe0ooVVZLiCyin7vjw39Zppk9ThxikMFeco0AFPn+eXtaN0vj8vj3JLuyqutX6eK/sRlJg9Ib8PITrglzwtIBWe6BJvUMJsg7yqXJaI5OIR8w6nQGcqvQEYJT0SScUGz+Ty7mY80FMsBbg0ZPRzUoF2fBAzJXfIOeKBnYVqa/Qq8n7cM7i7RBnSVYHMpBbeAPcZ6RK388yKaUzCsBjcjlBV3ZK6HtSu/HakOpuz/+vPa7kz3u42twmkgDcFrw4ygO80VArMmEKZAQ481+CPHuaQEzMd0QFvsmiMKY4RVLE97Y3j+soKTpn6wd8n8R14M1f4chcuRUytV7SIyil0uK3+YREyaeLF8SkaN4+56ewACmiM6nfjdSM4/yBB9ID6zgimAbOYgq5F7vy3Xy3tsKu/FRXLFUAsnJ1RA1VnJrttu0c3lYulCr8gKZoi4ce3Y9ljA4TbgYVsARG1en0bVM7KdvnqJPH7Ngc/cdFywRoJTze/SGUAqJcM8n9pbit/qphmvNhJT/pO6iLFvUtLfemWxxvn1kNhFaHYMohxawVZ7sRx81R9LJnKLiDOL7s2uPXODOzVpqjWJzdEJJXzY7+YxKX4ocLQTy0DBUhA2OFuZa0nI2/fRocu8hYPX86AoYtA0w/6/5GvP5AATmciGf1ikB3LO3whIQ8bW5qtgPT479l0Wmk7r2aP6YuhPRuv1xP/qO/v885Pw==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(346002)(396003)(376002)(39860400002)(136003)(46966006)(40470700004)(36840700001)(70206006)(31696002)(2616005)(8676002)(44832011)(336012)(4326008)(86362001)(426003)(53546011)(47076005)(186003)(5660300002)(36756003)(31686004)(4744005)(40480700001)(70586007)(82310400005)(2906002)(8936002)(16576012)(110136005)(54906003)(316002)(478600001)(26005)(356005)(82740400003)(41300700001)(83380400001)(40460700003)(36860700001)(81166007)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(346002)(39860400002)(376002)(136003)(396003)(46966006)(36840700001)(40470700004)(40480700001)(316002)(36756003)(41300700001)(82310400005)(81166007)(356005)(82740400003)(6916009)(54906003)(36860700001)(4326008)(966005)(44832011)(478600001)(70206006)(47076005)(5660300002)(70586007)(8676002)(84970400001)(83380400001)(336012)(8936002)(426003)(86362001)(186003)(2616005)(2906002)(6666004)(26005)(40460700003)(1076003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2022 09:18:19.6985
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2022 09:22:36.9816
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5453b115-aa9b-43d7-b35e-08da917b1235
+X-MS-Exchange-CrossTenant-Network-Message-Id: d54294cb-a9f9-4f26-5d7e-08da917bab92
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT079.eop-nam11.prod.protection.outlook.com
+	CO1NAM11FT056.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4299
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6949
 
-Hi Ayan,
+After qemu-smoke-arm64 was changed to use kernel 5.19 we end up having
+two kernel configurations. This is something not needed and maintaining
+a single kernel version is always easier. Modify qemu-alpine-arm64-gcc
+to use kernel 5.19 and remove kernel 5.9 from tests-artifacts.
 
-On 08/09/2022 11:07, Ayan Kumar Halder wrote:
-> Hi Michal,
-> 
-> On 02/09/2022 08:09, Michal Orzel wrote:
->> After qemu-smoke-arm64 was changed to use kernel 5.19 we end up having
->> two kernel configurations. This is something not needed and maintaining
->> a single kernel version is always easier. Modify qemu-alpine-arm64-gcc
->> to use kernel 5.19 and remove kernel 5.9 from tests-artifacts.
->>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> Reviewed-by: Ayan Kumar Halder <ayankuma@amd.com>
-> 
-> Question unrelated to the patch.
-> 
-> When do we decide that we need to upgrade the kernel version ?
-Usually when we need a feature from the newer kernel version.
-Upgrade to 5.19 was done so that we can test dom0less enhanced
-as this kernel introduced late xenstore initialization.
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Ayan Kumar Halder <ayankuma@amd.com>
+---
+Changes in v2:
+- none
+---
+ automation/gitlab-ci/build.yaml               | 11 ------
+ automation/gitlab-ci/test.yaml                |  2 +-
+ .../kernel/5.9.9-arm64v8.dockerfile           | 34 -------------------
+ 3 files changed, 1 insertion(+), 46 deletions(-)
+ delete mode 100644 automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile
 
-~Michal
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index d2f75a090c0f..720ce6e07ba0 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -586,17 +586,6 @@ alpine-3.12-arm64-rootfs-export:
+   tags:
+     - arm64
+ 
+-kernel-5.9.9-arm64-export:
+-  extends: .test-jobs-artifact-common
+-  image: registry.gitlab.com/xen-project/xen/tests-artifacts/kernel:5.9.9-arm64v8
+-  script:
+-    - mkdir binaries && cp /Image binaries/Image
+-  artifacts:
+-    paths:
+-      - binaries/Image
+-  tags:
+-    - arm64
+-
+ kernel-5.19-arm64-export:
+   extends: .test-jobs-artifact-common
+   image: registry.gitlab.com/xen-project/xen/tests-artifacts/kernel:5.19-arm64v8
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 2eb6c3866e2c..07209820b474 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -34,7 +34,7 @@ qemu-alpine-arm64-gcc:
+   needs:
+     - alpine-3.12-gcc-arm64
+     - alpine-3.12-arm64-rootfs-export
+-    - kernel-5.9.9-arm64-export
++    - kernel-5.19-arm64-export
+     - qemu-system-aarch64-6.0.0-arm64-export
+   artifacts:
+     paths:
+diff --git a/automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile b/automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile
+deleted file mode 100644
+index 053d65a3454e..000000000000
+--- a/automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile
++++ /dev/null
+@@ -1,34 +0,0 @@
+-FROM arm64v8/debian:unstable
+-LABEL maintainer.name="The Xen Project" \
+-      maintainer.email="xen-devel@lists.xenproject.org"
+-
+-ENV DEBIAN_FRONTEND=noninteractive
+-ENV LINUX_VERSION=5.9.9
+-ENV USER root
+-
+-RUN mkdir /build
+-WORKDIR /build
+-
+-# build depends
+-RUN apt-get update && \
+-    apt-get --quiet --yes install \
+-        build-essential \
+-        libssl-dev \
+-        bc \
+-        curl \
+-        flex \
+-        bison \
+-        && \
+-    \
+-    # Build the kernel
+-    curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-"$LINUX_VERSION".tar.xz && \
+-    tar xvJf linux-"$LINUX_VERSION".tar.xz && \
+-    cd linux-"$LINUX_VERSION" && \
+-    make defconfig && \
+-    make -j$(nproc) Image.gz && \
+-    cp arch/arm64/boot/Image / && \
+-    cd /build && \
+-    rm -rf linux-"$LINUX_VERSION"* && \
+-    apt-get autoremove -y && \
+-    apt-get clean && \
+-    rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+-- 
+2.25.1
+
 
