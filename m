@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D313C6FA82
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 09:22:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.402995.644962 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D40ECAAD5
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 09:22:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.402993.644940 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDkC-0006Z8-CH; Thu, 08 Sep 2022 09:22:44 +0000
+	id 1oWDkA-00063B-Pi; Thu, 08 Sep 2022 09:22:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 402995.644962; Thu, 08 Sep 2022 09:22:44 +0000
+Received: by outflank-mailman (output) from mailman id 402993.644940; Thu, 08 Sep 2022 09:22:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDkC-0006Yv-7p; Thu, 08 Sep 2022 09:22:44 +0000
-Received: by outflank-mailman (input) for mailman id 402995;
- Thu, 08 Sep 2022 09:22:43 +0000
+	id 1oWDkA-000634-MN; Thu, 08 Sep 2022 09:22:42 +0000
+Received: by outflank-mailman (input) for mailman id 402993;
+ Thu, 08 Sep 2022 09:22:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VI1a=ZL=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1oWDkB-00062s-Hl
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 09:22:43 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2064.outbound.protection.outlook.com [40.107.223.64])
+ id 1oWDk9-00062s-GL
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 09:22:41 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2089.outbound.protection.outlook.com [40.107.244.89])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ca847a7b-2f57-11ed-9760-273f2230c3a0;
- Thu, 08 Sep 2022 11:22:42 +0200 (CEST)
-Received: from MW4PR03CA0346.namprd03.prod.outlook.com (2603:10b6:303:dc::21)
- by DM4PR12MB5184.namprd12.prod.outlook.com (2603:10b6:5:397::18) with
+ id c85641d1-2f57-11ed-9760-273f2230c3a0;
+ Thu, 08 Sep 2022 11:22:40 +0200 (CEST)
+Received: from MW4PR03CA0359.namprd03.prod.outlook.com (2603:10b6:303:dc::34)
+ by DM6PR12MB4154.namprd12.prod.outlook.com (2603:10b6:5:21d::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.12; Thu, 8 Sep
- 2022 09:22:39 +0000
-Received: from CO1NAM11FT064.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:dc:cafe::b4) by MW4PR03CA0346.outlook.office365.com
- (2603:10b6:303:dc::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.14 via Frontend
- Transport; Thu, 8 Sep 2022 09:22:39 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.19; Thu, 8 Sep
+ 2022 09:22:35 +0000
+Received: from CO1NAM11FT028.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:dc:cafe::18) by MW4PR03CA0359.outlook.office365.com
+ (2603:10b6:303:dc::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.12 via Frontend
+ Transport; Thu, 8 Sep 2022 09:22:35 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT064.mail.protection.outlook.com (10.13.175.77) with Microsoft SMTP
+ CO1NAM11FT028.mail.protection.outlook.com (10.13.175.214) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5612.13 via Frontend Transport; Thu, 8 Sep 2022 09:22:39 +0000
+ 15.20.5612.13 via Frontend Transport; Thu, 8 Sep 2022 09:22:34 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 8 Sep
- 2022 04:22:37 -0500
+ 2022 04:22:33 -0500
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.28
- via Frontend Transport; Thu, 8 Sep 2022 04:22:36 -0500
+ via Frontend Transport; Thu, 8 Sep 2022 04:22:32 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,22 +60,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca847a7b-2f57-11ed-9760-273f2230c3a0
+X-Inumbo-ID: c85641d1-2f57-11ed-9760-273f2230c3a0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JxN2pbZRREUTXnEVTnw+wReYdUTCGtUKqkFh3lS2t9pAYa6HIlTNXlofngLiIwSoq9do5Glzu06XxxJRqXwnM9d4Qzprg0yWnZr0oM2Wjqm3ojwrAQfgLfGpBIG7z8zFyDUVcrnxfnBB7rUuWwvCJrAM9oeTvwPQbQnmFgFqRiiZxtqGeANU3bXcPGtMoTY+53/saAz5BMhQNkmLpRhtMz0aeDHhADzmVNUrvzWK/hFDrflgJJbWhsaE3p7BUeUlgG0HWifrlme1U74l1dymtqyUx9XdbFx5lnOIfAJbtPKYjtXhDb4R+eJGxwGy7IVxGx4DvL5sfEnYtNb2DpJtkQ==
+ b=TStrnrH/6K159MtoqzHrAFPgpk3OdA5BOebRW8diHyQXrpaY6jOFPC2MJDrTbryp/ixVl5DTZBuXFwwpLn9T1Vvo2Ir2akC9UCyJd7YfZYAr1p+2ASwVMfGq7NqN703Kt3DFMVmsc1O1MsfCJzrnrxfe6iV7WJo+AtwuC7TvoaSzlc3rRK1jBkskC96lCXG2cKUNz8QaANlKujmSitJtXvZlVoUPKauaKmvVZ597Lh6dvM2RK2rxL/wa7i2cl4Bmwf+O8rXpN2jkYO8ZWSVv860E7t4Sk05qU/WrtZmaWXg/Mqyep2zWaEbj6AmbGvlxpl29/0FCOPS5oh19vVqUtw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jvUwy5NfFiVoeWjuPBA52OtQW6Tn5x/aILqdyOhSfG8=;
- b=djBgLSL1x9hA58gRko08qu811zYuagxl+4fuQWUA2OlQRsr1tSscg35JpFKxATVNMloEX97OExlkaHP5fKAkE7PZcDS93RMyIFcQLZQSie/PAl63a13Wt7wKPPiqIVBf1oxdKbCLK+iFqSHxR1KMSl1K2rZ+2fH6aHJ3JbHuZfttCu2AlA2EP0vDtYCPirTVCf7WzUGdM5U35pTwav9AUFue7w6rIr98XYYaUatoErzBJOtv24DehV7WksGsk/tN8+uI7WuGssX1F6ScmMjttecNSREWbj9VOMOXUReL2lHRyaNmLC0aS//M2dEgwpuvl4P2Z0OW+1jsAH/mSuksXw==
+ bh=vGowwKByJkESWe8YZ9ffA5s4KxBegBee6qfPCvv+E9A=;
+ b=Lpk6BjNS/AVSej1MXxO12LFjBAA45X209i3sLjnEPDN3HSjRBIc2rdW4wezDiBkNiPbvsMYb+CfodquxuSRhB4mTiUD8eo5ZEK246jvCrrOgNLYb5xtmE4qP3yFOc1dA6Riv6bMTief63n9u5wnLO+JO3NmGRNnzoiRft8u84Fg3BqDIVw+V1YxSWj2M7v+MbxNRLVD9AjZoRnCW2Z8DowAX3kme+L1pH88x8Ezwxz+uG4Pv/kYTAN68h1RiU3GzIRz/L19n6CTsP55f6gSST6GmXCWQDHklDdqmjhtmPcSjxgRc7e5EtoztbwNpRhqDz5TNRiOZj3Iu+cU03hzaqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jvUwy5NfFiVoeWjuPBA52OtQW6Tn5x/aILqdyOhSfG8=;
- b=rf0FY1gxBXhgoCo1QUc01zHERgeZ1G34lIjxARi4UtfqWnA68h8R1FeAdIVjM0FtNAuHLTFYb6B0y0BDpeUq5kkLhr+o/SmJEvmBLTElWi4H8/+DzeZ5rWxbrCiZuzq2V96vtZpsAyoKsWC5yx8M733sNoQ3SA0Lwi7aI5ZcsSc=
+ bh=vGowwKByJkESWe8YZ9ffA5s4KxBegBee6qfPCvv+E9A=;
+ b=DKuSAc34xG/xs/gVNJKqt3alVesE45ss+dkbqw6iUJplWyCzhcAjAhggoAaOVy6rmITofcQRkab7bkxuLtNxiFTvHYkmGsdx9R8IYripiRr0LOeGQRncKBRpoWXQgcJrII8TRgUrUfNkYIrOpB9Ro36pPbDsid4mxfslCjzKIvg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,71 +85,60 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Luca Fancellu
-	<luca.fancellu@arm.com>, Ayan Kumar Halder <ayankuma@amd.com>
-Subject: [for-4.17 v2 2/3] automation: qemu-smoke-arm64: Silence ifconfig error messages
-Date: Thu, 8 Sep 2022 11:22:29 +0200
-Message-ID: <20220908092230.21421-3-michal.orzel@amd.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [for-4.17 v2 0/3] GitLab CI cleanup and boot time cpupools test
+Date: Thu, 8 Sep 2022 11:22:27 +0200
+Message-ID: <20220908092230.21421-1-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220908092230.21421-1-michal.orzel@amd.com>
-References: <20220908092230.21421-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT064:EE_|DM4PR12MB5184:EE_
-X-MS-Office365-Filtering-Correlation-Id: 25cdd7fe-2187-4e0d-e258-08da917bacdd
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT028:EE_|DM6PR12MB4154:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4b116774-f8a7-42c7-967a-08da917baa25
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ZGbRchYuTW71s6rPUZJj/3OkLRT5VOFprifrKEliSAW1ZAWtkFKL2KbvhiEORu5fu85sAonA0z6cITyPLGc4C/CDuMU5YEeMWJvMnykVjjx5610Af815IqUpGJse20f9hyGu0m3+vpcTQaBZ8WLQ+wmhvxf7vg4KcGP3NGnK+FC7vF+kcaLqk/bmipY+zW6cLj5p496KN/y2Op9ZIrwMt0WmAd/xKzHQNvsOIGtP7rSP0LGnHmsgZvk9Eb2+ggjrAOcBpI5HG6Uj0xNDFhPtkhYXHNpKBavuVdjaca6fzAvycK43mNUpZYwurbiY1jctPx+JAC7eqjk96LfR7YYPPvMnxFlR99ieadcP6Iwy56s43dluVW3KN5AH+0erSgzE3kZn4lGY1P+H6zyFJHhBW25e2aPML84u1Dr6yG1n64nMH4EaRlyW7nRhqf8FZ6X6QzGDg9Z46HeXAdF3WbMfK1glz17lfNHc7SBPMcSod3ZGryxtEMTXwbbnNR7gxcHdRYDQVZge2X7M4N4GUfvL/9sUCUw6RmhfDOt9lee+g0zyWnkjcMFtn7gvNX9dIB6BfkbJEP1gO1wCwWp4zckkSI+xyPvR1UYFm5tDVwI8LCDLguruSuCoSK3OOGO5/fYok/a7NW9Tl+4e4Q+E02rzfjg8p2Q9eApRNi0eXxv7wZ4Zy30iAtnqkUCWSrpiyLLA6KDjmxOzjHQLEc6KsHudcQxg3yhpl09rvPVlfAfnwie4Rb3MoNMWm/28RpCthYFjWfJ/S+lzCuVXDtsNnjQvt5d6GajpC5uMkW+VhmADClh8nXMgY3VnRJMaIlZyVAMC
+	CoGr8mqAxUQOWJzM8xOHDgNolweEE6FTO+WUTBcy8RRQo/Tbn6gLVK6VoVa9fHhX/BykKE1MMTw0L7FQrq+NYAfuFmLHHfE9Ekv6IIsRnqAAkiyI3GrtK2rf9xTR0PpFSeT1xnCJnx0m/Ar4QK0i0bTCyxf0ItAv5tT1VF46moP8qqsTG4f1I+qjss89AioXAWBO86iPaTqX/BgBeTo796YJYBzXR5Vzd0uAMIrrf9O7E1Zi2SA+nENM9tzRC8mWBbjAyyiQ1EF4kdoKp257T7jNtsCXFFrXXbiujKpzF1CsbDlHAd16azt3872Mmq+k3QFZgdMDpiAdFt9osJe3iu7rrHaTaeZ8JDFD0fbd1O0pNDESgT9RT5+QYHwBpvu6JI7FUHnvQcZUs4EHj9nZW5+iBgUxSVnUdvuCs+cDN7X8jnOcoped8wzdYZTzmS3CC2sb5jdEXF78fBbf5nQOr+15ZaHHY7ymMVUSDt/F1h1WLIVX+bMYXvH9rb5+zbh6OIU/T4w5Fvn1sZGfo6uLRsWvtEZFg+NMOiUzmP+s3+4WYmetn6EcjFhYqxRJEcEOJ0dbG6WbWBJT2mc4NjW9DscNWm/+vRel6HUrooMzly+z1qcGxt1HWV/inWkH1H9ItnFxVf3f8je4CFwnGdBQEcz/KLyHAFqoqvBIznyWKBdz6S04KoOAiWIz4PPGlBlXM+I72P/r1feJBcRY1AU7FXdsXkWJsboLl0bTjmU0fNLCeOK+ZKOgY7w0aQe9WSNxssYFsVxJ0Fr09/urGiI42Xs9EqBCH4oQ2g7bRHQqiZ3HQ4333rA/ShMwiw7TJudv
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(376002)(136003)(396003)(346002)(40470700004)(46966006)(36840700001)(5660300002)(6916009)(54906003)(316002)(36860700001)(36756003)(70586007)(44832011)(8676002)(2906002)(8936002)(4326008)(15650500001)(70206006)(82310400005)(478600001)(86362001)(2616005)(41300700001)(426003)(40480700001)(1076003)(82740400003)(186003)(47076005)(81166007)(83380400001)(26005)(336012)(40460700003)(356005)(6666004)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(136003)(376002)(346002)(396003)(39860400002)(36840700001)(40470700004)(46966006)(478600001)(336012)(426003)(47076005)(186003)(83380400001)(4326008)(6666004)(1076003)(8676002)(2616005)(36756003)(41300700001)(26005)(86362001)(2906002)(82310400005)(70206006)(6916009)(316002)(40460700003)(36860700001)(54906003)(4744005)(5660300002)(44832011)(70586007)(8936002)(356005)(82740400003)(40480700001)(81166007)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2022 09:22:39.0761
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2022 09:22:34.6066
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25cdd7fe-2187-4e0d-e258-08da917bacdd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b116774-f8a7-42c7-967a-08da917baa25
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT064.eop-nam11.prod.protection.outlook.com
+	CO1NAM11FT028.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5184
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4154
 
-During the ping test, dom1 tries to assign an ip to eth0 in a loop.
-Before setting up the network interface by dom0, this results in
-printing the following error message several times:
-(XEN) DOM1: ifconfig: SIOCSIFADDR: No such device
+This patch series performs a small cleanup before the release and adds
+a test for validating boot time cpupools feature introduced in 4.17.
 
-Silence this by redirecting stderr/stdout to /dev/null as we do not
-care about the output and we should not pollute the log file.
+Notes for the release manager:
+Benefits:
+ - improved dom0less test coverage
+ - tested feature that is introduced in 4.17
+Risks:
+ - CI pipeline failure
 
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Ayan Kumar Halder <ayankuma@amd.com>
----
-Changes in v2:
-- none
----
- automation/scripts/qemu-smoke-arm64.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Michal Orzel (3):
+  automation: qemu-alpine-arm64-gcc: Use kernel 5.19
+  automation: qemu-smoke-arm64: Silence ifconfig error messages
+  automation: Add a new job for testing boot time cpupools on arm64
 
-diff --git a/automation/scripts/qemu-smoke-arm64.sh b/automation/scripts/qemu-smoke-arm64.sh
-index c80d9b2aee00..7ac96027760d 100755
---- a/automation/scripts/qemu-smoke-arm64.sh
-+++ b/automation/scripts/qemu-smoke-arm64.sh
-@@ -6,7 +6,7 @@ test_variant=$1
- 
- passed="passed"
- check="
--until ifconfig eth0 192.168.0.2 && ping -c 10 192.168.0.1; do
-+until ifconfig eth0 192.168.0.2 &> /dev/null && ping -c 10 192.168.0.1; do
-     sleep 30
- done
- echo \"${passed}\"
+ automation/gitlab-ci/build.yaml               | 11 ------
+ automation/gitlab-ci/test.yaml                | 21 +++++++++-
+ automation/scripts/build                      |  3 +-
+ automation/scripts/qemu-smoke-arm64.sh        | 38 ++++++++++++++-----
+ .../kernel/5.9.9-arm64v8.dockerfile           | 34 -----------------
+ 5 files changed, 50 insertions(+), 57 deletions(-)
+ delete mode 100644 automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile
+
 -- 
 2.25.1
 
