@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F8E7C38145
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 16:35:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.403495.645624 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB8DC38145
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 16:39:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.403504.645635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWKVH-0004K2-Jz; Thu, 08 Sep 2022 16:35:47 +0000
+	id 1oWKYS-0004yz-2o; Thu, 08 Sep 2022 16:39:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 403495.645624; Thu, 08 Sep 2022 16:35:47 +0000
+Received: by outflank-mailman (output) from mailman id 403504.645635; Thu, 08 Sep 2022 16:39:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWKVH-0004Jv-HH; Thu, 08 Sep 2022 16:35:47 +0000
-Received: by outflank-mailman (input) for mailman id 403495;
- Thu, 08 Sep 2022 16:35:47 +0000
+	id 1oWKYR-0004yr-VP; Thu, 08 Sep 2022 16:39:03 +0000
+Received: by outflank-mailman (input) for mailman id 403504;
+ Thu, 08 Sep 2022 16:39:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=J4jV=ZL=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1oWKVG-0004Jp-Us
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 16:35:46 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4970dcf3-2f94-11ed-9760-273f2230c3a0;
- Thu, 08 Sep 2022 18:35:46 +0200 (CEST)
-Received: by mail-ed1-x534.google.com with SMTP id q21so17605043edc.9
- for <xen-devel@lists.xenproject.org>; Thu, 08 Sep 2022 09:35:45 -0700 (PDT)
+ <SRS0=fLS5=ZL=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
+ id 1oWKSh-0002V6-Nw
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 16:33:07 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id d3622308-2f7d-11ed-9760-273f2230c3a0;
+ Thu, 08 Sep 2022 15:54:58 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 40DA2106F;
+ Thu,  8 Sep 2022 06:55:38 -0700 (PDT)
+Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
+ [10.169.190.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 53A803F7B4;
+ Thu,  8 Sep 2022 06:55:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,77 +45,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4970dcf3-2f94-11ed-9760-273f2230c3a0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=VW4KfvfzyVHPd8uiTuoi1ws0SBlUslXncR/03SR1FNE=;
-        b=Gj4Njw0OFwJFGyy/CpBsWrtaBlodwVsytOVMo0at++gVmVcKEHXv5IQZFRIQwT/d+N
-         fhtp/sGmbhcxk802b1qtoS2CFjSCb5IB4RXY+j1IUxlac4iD9wgSqvayqv9zSzL2n2te
-         QLcpJ22aUMWyxS7AJ3tRskbVVFVLOlIreLWxxHR79eGs6p4Wm6y6ouJHj5/y2hroCJlC
-         GIBT8RbNzpIhPwTLRxM3eKJV/eO7k82LKj4xAtC+Irw3bO/1lkpEzwk6ZZgN+9SU/FoE
-         dYp2nlq6kQgDNjeGTXsHZvG7rTa7CLNqoypOWNlltFodkAqGjGs5ALlV6T9QyI6cqbLz
-         RfkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=VW4KfvfzyVHPd8uiTuoi1ws0SBlUslXncR/03SR1FNE=;
-        b=IKAhwp1WptFNVVl6y1ka3x/8OnbqzfnFFkny7nelJI9wEoVO4hRb7q3zfZc4nkgJGh
-         d7zXQgh+FkVb4k9FHjuAXaNyMaiqyibiWSWuSGCKms9m2ZsV5ZZkXzqvOrhQqjjeb68i
-         zbNTYEbFPn6pOAE8Mmknzs49p6Swd2RZKQ7VkgAKWjgj1NUiixHjhrJFx3PJO2x6+v6j
-         Rqx4+ooG27mK7BoZTxTgw99FaVgmz5VQtDLuKcTfYGTFX0Pch7sM++wcM5lB7w5pB//9
-         jKeIe+uO9VoMLb666CUe5Vnix1eF3ACetYq2MjV76oL5brFNN0YucRa4LFGpUjAelnC3
-         FIwQ==
-X-Gm-Message-State: ACgBeo3g5H9w+ynd/LMQuFn6IMNJvgOId6Qk7cKJydm9bs0G6cqti06J
-	MfGiM949mSp2TkO5YAZtXNhTcpf3JHceSl8XnTA=
-X-Google-Smtp-Source: AA6agR60EsHy+umEW+DkcyJqAPtFQEJqGtmjo3l8FZl0Yg8CwYgu7ksl7zLlC55BFTK6IgOpyhuXXPeH7d4z5KExZ5s=
-X-Received: by 2002:aa7:c956:0:b0:43b:206d:c283 with SMTP id
- h22-20020aa7c956000000b0043b206dc283mr7892981edt.381.1662654944865; Thu, 08
- Sep 2022 09:35:44 -0700 (PDT)
+X-Inumbo-ID: d3622308-2f7d-11ed-9760-273f2230c3a0
+From: Penny Zheng <Penny.Zheng@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Penny Zheng <penny.zheng@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v8 2/9] xen/arm: assign static shared memory to the default owner dom_io
+Date: Thu,  8 Sep 2022 21:55:06 +0800
+Message-Id: <20220908135513.1800511-3-Penny.Zheng@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220908135513.1800511-1-Penny.Zheng@arm.com>
+References: <20220908135513.1800511-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-References: <20220810194827.103428-1-jandryuk@gmail.com> <20220810194827.103428-3-jandryuk@gmail.com>
- <YxnixSEDEoYOlzfm@perard.uk.xensource.com>
-In-Reply-To: <YxnixSEDEoYOlzfm@perard.uk.xensource.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Thu, 8 Sep 2022 12:35:33 -0400
-Message-ID: <CAKf6xpt6fVMQ5QjpyFQ1opYH_yfRkubgbM19j+9EOBc87_6EaQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] xl/libxl: Add ability to specify SMBIOS strings
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>, 
-	George Dunlap <george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>, 
-	Juergen Gross <jgross@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 8, 2022 at 8:40 AM Anthony PERARD <anthony.perard@citrix.com> wrote:
+From: Penny Zheng <penny.zheng@arm.com>
 
-> > ---
-> > diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
-> > index 2abaab439c..9034933ea8 100644
-> > --- a/tools/libs/light/libxl_dom.c
-> > +++ b/tools/libs/light/libxl_dom.c
-> > @@ -771,6 +771,26 @@ static int hvm_build_set_xs_values(libxl__gc *gc,
-> >              goto err;
-> >      }
-> >
-> > +    for (int i = 0; i < info->u.hvm.num_smbios; i++) {
-> > +        char *p;
-> > +        path = GCSPRINTF("/local/domain/%d/"HVM_XS_BIOS_STRINGS"/%s", domid,
-> > +                   libxl_smbios_type_to_string(info->u.hvm.smbios[i].key));
-> > +
-> > +        /* libxl defines are all "_", but the HVM_XS_ strings are "-". */
->
-> "libxl defines are all "_"" seems a bit weird to me as a comment in
-> the source code, maybe a better comment would the conversion we need to
-> do, something like:
->
->     Convert libxl_smbios_type string to xenstore path that hvmloader
->     will use, as defined by HVM_XS_*. That is convert the '_' to '-'.
+This commit introduces process_shm to cope with static shared memory in
+domain construction.
 
-I'll use this.  All your other comments sound good, and I'll change accordingly.
+DOMID_IO will be the default owner of memory pre-shared among multiple domains
+at boot time, when no explicit owner is specified.
+And DOMID_IO is a fake domain and is not described in the Device-Tree.
+Therefore When the owner of the shared region is DOMID_IO, we will only
+find the borrowers when parsing the Device-Tree.
+When we found the first borrower of the region, we need to assign the region to
+DOMID_IO
 
-Thanks for taking a look.
+This commit only considers allocating static shared memory to dom_io
+when owner domain is not explicitly defined in device tree, all the left,
+including the "borrower" code path, the "explicit owner" code path, shall
+be introduced later in the following patches.
 
--Jason
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+v8 changes:
+- in-code comment tweak
+---
+v7 changes:
+- page_get_owner() can only be called for pages that are marked inuse,
+so use page_get_owner_and_reference() instead
+- reference shall be dropped using put_page()
+- adjust "d->max_pages" when acquire_domstatic_pages() fails
+- switch from assert to BUG_ON() because this is init code
+- refine commit message and in-code comments
+- rename allocate_shared_memory() to assign_shared_memory()
+---
+v6 change:
+- use if-array to check psize, pbase and gbase are suitably aligned and
+valid
+- use mfn_valid to check (pbase, pbase + psize)
+- check d->max_pages will not overflow
+- refine acquire_shared_memory_bank to not reuse acquire_static_memory_bank,
+then input pbase and psize do not need to be used as a pointer.
+- use if-array to check if page owner is dom_io
+- in-code comment refinement
+---
+v5 change:
+- refine in-code comment
+---
+v4 change:
+- no changes
+---
+v3 change:
+- refine in-code comment
+---
+v2 change:
+- instead of introducing a new system domain, reuse the existing dom_io
+- make dom_io a non-auto-translated domain, then no need to create P2M
+for it
+- change dom_io definition and make it wider to support static shm here too
+- introduce is_shm_allocated_to_domio to check whether static shm is
+allocated yet, instead of using shm_mask bitmap
+- add in-code comment
+---
+ xen/arch/arm/domain_build.c | 160 ++++++++++++++++++++++++++++++++++++
+ xen/common/domain.c         |   3 +
+ 2 files changed, 163 insertions(+)
+
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 0741645014..e30ee65621 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -759,6 +759,160 @@ static void __init assign_static_memory_11(struct domain *d,
+     panic("Failed to assign requested static memory for direct-map domain %pd.",
+           d);
+ }
++
++#ifdef CONFIG_STATIC_SHM
++/*
++ * This function checks whether the static shared memory region is
++ * already allocated to dom_io.
++ */
++static bool __init is_shm_allocated_to_domio(paddr_t pbase)
++{
++    struct page_info *page;
++    struct domain *d;
++
++    page = maddr_to_page(pbase);
++    d = page_get_owner_and_reference(page);
++    if ( d == NULL )
++        return false;
++    put_page(page);
++
++    if ( d != dom_io )
++    {
++        printk(XENLOG_ERR
++               "shm memory node has already been allocated to a specific owner %pd, Please check your configuration\n",
++               d);
++        return false;
++    }
++
++    return true;
++}
++
++static mfn_t __init acquire_shared_memory_bank(struct domain *d,
++                                               paddr_t pbase, paddr_t psize)
++{
++    mfn_t smfn;
++    unsigned long nr_pfns;
++    int res;
++
++    /*
++     * Pages of statically shared memory shall be included
++     * into domain_tot_pages().
++     */
++    nr_pfns = PFN_DOWN(psize);
++    if ( (UINT_MAX - d->max_pages) < nr_pfns )
++    {
++        printk(XENLOG_ERR "%pd: Over-allocation for d->max_pages: %lu.\n",
++               d, nr_pfns);
++        return INVALID_MFN;
++    }
++    d->max_pages += nr_pfns;
++
++    smfn = maddr_to_mfn(pbase);
++    res = acquire_domstatic_pages(d, smfn, nr_pfns, 0);
++    if ( res )
++    {
++        printk(XENLOG_ERR
++               "%pd: failed to acquire static memory: %d.\n", d, res);
++        d->max_pages -= nr_pfns;
++        return INVALID_MFN;
++    }
++
++    return smfn;
++}
++
++static int __init assign_shared_memory(struct domain *d,
++                                       uint32_t addr_cells, uint32_t size_cells,
++                                       paddr_t pbase, paddr_t psize)
++{
++    mfn_t smfn;
++
++    dprintk(XENLOG_INFO,
++            "%pd: allocate static shared memory BANK %#"PRIpaddr"-%#"PRIpaddr".\n",
++            d, pbase, pbase + psize);
++
++    smfn = acquire_shared_memory_bank(d, pbase, psize);
++    if ( mfn_eq(smfn, INVALID_MFN) )
++        return -EINVAL;
++
++    /*
++     * DOMID_IO is not auto-translated (i.e. it sees RAM 1:1). So we do not need
++     * to create mapping in the P2M.
++     */
++    ASSERT(d == dom_io);
++    return 0;
++}
++
++static int __init process_shm(struct domain *d,
++                              const struct dt_device_node *node)
++{
++    struct dt_device_node *shm_node;
++
++    dt_for_each_child_node(node, shm_node)
++    {
++        const struct dt_property *prop;
++        const __be32 *cells;
++        uint32_t addr_cells, size_cells;
++        paddr_t gbase, pbase, psize;
++        int ret = 0;
++        unsigned int i;
++
++        if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
++            continue;
++
++        /*
++         * xen,shared-mem = <pbase, gbase, size>;
++         * TODO: pbase is optional.
++         */
++        addr_cells = dt_n_addr_cells(shm_node);
++        size_cells = dt_n_size_cells(shm_node);
++        prop = dt_find_property(shm_node, "xen,shared-mem", NULL);
++        BUG_ON(!prop);
++        cells = (const __be32 *)prop->value;
++        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, &gbase);
++        psize = dt_read_number(cells, size_cells);
++        if ( !IS_ALIGNED(pbase, PAGE_SIZE) || !IS_ALIGNED(gbase, PAGE_SIZE) )
++        {
++            printk("%pd: physical address 0x%"PRIpaddr", or guest address 0x%"PRIpaddr" is not suitably aligned.\n",
++                   d, pbase, gbase);
++            return -EINVAL;
++        }
++        if ( !IS_ALIGNED(psize, PAGE_SIZE) )
++        {
++            printk("%pd: size 0x%"PRIpaddr" is not suitably aligned\n",
++                   d, psize);
++            return -EINVAL;
++        }
++
++        for ( i = 0; i < PFN_DOWN(psize); i++ )
++            if ( !mfn_valid(mfn_add(maddr_to_mfn(pbase), i)) )
++            {
++                printk("%pd: invalid physical address 0x%"PRI_mfn"\n",
++                       d, mfn_x(mfn_add(maddr_to_mfn(pbase), i)));
++                return -EINVAL;
++            }
++
++        /* TODO: Consider owner domain is not the default dom_io. */
++        /*
++         * DOMID_IO is a fake domain and is not described in the Device-Tree.
++         * Therefore when the owner of the shared region is DOMID_IO, we will
++         * only find the borrowers.
++         */
++        if ( !is_shm_allocated_to_domio(pbase) )
++        {
++            /*
++             * We found the first borrower of the region, the owner was not
++             * specified, so they should be assigned to dom_io.
++             */
++            ret = assign_shared_memory(dom_io, addr_cells, size_cells,
++                                       pbase, psize);
++            if ( ret )
++                return ret;
++        }
++    }
++
++    return 0;
++}
++#endif /* CONFIG_STATIC_SHM */
+ #else
+ static void __init allocate_static_memory(struct domain *d,
+                                           struct kernel_info *kinfo,
+@@ -3238,6 +3392,12 @@ static int __init construct_domU(struct domain *d,
+     else
+         assign_static_memory_11(d, &kinfo, node);
+ 
++#ifdef CONFIG_STATIC_SHM
++    rc = process_shm(d, node);
++    if ( rc < 0 )
++        return rc;
++#endif
++
+     /*
+      * Base address and irq number are needed when creating vpl011 device
+      * tree node in prepare_dtb_domU, so initialization on related variables
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index c23f449451..8dd6cd5a8f 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -787,6 +787,9 @@ void __init setup_system_domains(void)
+      * This domain owns I/O pages that are within the range of the page_info
+      * array. Mappings occur at the priv of the caller.
+      * Quarantined PCI devices will be associated with this domain.
++     *
++     * DOMID_IO is also the default owner of memory pre-shared among multiple
++     * domains at boot time.
+      */
+     dom_io = domain_create(DOMID_IO, NULL, 0);
+     if ( IS_ERR(dom_io) )
+-- 
+2.25.1
+
 
