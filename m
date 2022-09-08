@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B93C38145
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 11:10:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.403132.645133 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29812C54EE9
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 11:10:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.403137.645155 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWFQ3-000285-60; Thu, 08 Sep 2022 11:10:03 +0000
+	id 1oWFQ6-0002yW-0g; Thu, 08 Sep 2022 11:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 403132.645133; Thu, 08 Sep 2022 11:10:03 +0000
+Received: by outflank-mailman (output) from mailman id 403137.645155; Thu, 08 Sep 2022 11:10:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWFQ3-00027j-1A; Thu, 08 Sep 2022 11:10:03 +0000
-Received: by outflank-mailman (input) for mailman id 403132;
- Thu, 08 Sep 2022 11:10:01 +0000
+	id 1oWFQ5-0002xw-Su; Thu, 08 Sep 2022 11:10:05 +0000
+Received: by outflank-mailman (input) for mailman id 403137;
+ Thu, 08 Sep 2022 11:10:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ymCA=ZL=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1oWFQ1-0001tk-H3
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 11:10:01 +0000
+ id 1oWFQ5-0001tk-A4
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 11:10:05 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id b52a440a-2f66-11ed-9760-273f2230c3a0;
- Thu, 08 Sep 2022 13:09:29 +0200 (CEST)
+ id b90e09f1-2f66-11ed-9760-273f2230c3a0;
+ Thu, 08 Sep 2022 13:09:35 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFD7714BF;
- Thu,  8 Sep 2022 04:09:34 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 82E7F153B;
+ Thu,  8 Sep 2022 04:09:41 -0700 (PDT)
 Received: from entos-skylake.shanghai.arm.com (entos-skylake.shanghai.arm.com
  [10.169.212.207])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 50A7E3F71A;
- Thu,  8 Sep 2022 04:09:25 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 29B833F71A;
+ Thu,  8 Sep 2022 04:09:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,295 +45,306 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b52a440a-2f66-11ed-9760-273f2230c3a0
+X-Inumbo-ID: b90e09f1-2f66-11ed-9760-273f2230c3a0
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Henry Wang <Henry.Wang@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v6 2/4] docs, xen/arm: Introduce static heap memory
-Date: Thu,  8 Sep 2022 11:09:08 +0000
-Message-Id: <20220908110910.17108-3-Henry.Wang@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 4/4] xen/arm: Handle static heap pages in boot and heap allocator
+Date: Thu,  8 Sep 2022 11:09:10 +0000
+Message-Id: <20220908110910.17108-5-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220908110910.17108-1-Henry.Wang@arm.com>
 References: <20220908110910.17108-1-Henry.Wang@arm.com>
 
-This commit introduces the static heap memory, which is parts of RAM
-reserved in the beginning of the boot time for heap.
+This commit firstly adds a bool field `static_heap` to bootinfo.
+This newly introduced field is set at the device tree parsing time
+if the static heap ranges are defined in the device tree chosen
+node.
 
-Firstly, since a new type of memory bank is needed for marking the
-memory bank solely as the heap, this commit defines `enum membank_type`
-and use this enum in function device_tree_get_meminfo(). Changes of
-code are done accordingly following the introduction of this enum.
+For Arm32, In `setup_mm`, if the static heap is enabled, we use the
+static heap region for both domheap and xenheap allocation. Note
+that the xenheap on Arm32 should be always contiguous, so also add
+a helper fit_xenheap_in_static_heap() for Arm32 to find the required
+xenheap in the static heap regions.
 
-Also, this commit introduces the logic to parse the static heap
-configuration in device tree. If the memory bank is reserved as heap
-through `xen,static-heap` property in device tree `chosen` node, the
-memory will be marked as static heap type.
+For Arm64, In `setup_mm`, if the static heap is enabled and used,
+we make sure that only these static heap pages are added to the boot
+allocator. These static heap pages in the boot allocator are
+added to the heap allocator at `end_boot_allocator()`.
 
-A documentation section is added, describing the definition of static
-heap memory and the method of enabling the static heap memory through
-device tree at boot time.
+If the static heap is disabled, we stick to current page allocation
+strategy at boot time.
+
+Also, take the chance to correct a "double not" print in Arm32
+`setup_mm()` and replace the open-coding address ~0 by INVALID_PADDR.
 
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 Changes from v5 to v6:
-- Refine doc.
-- Drop duplicated code.
-- Add Julien's Reviewed-by.
+- No changes.
 Changes from v4 to v5:
-- Use #address-cells and #size-cells for static heap, do not introduce
-  new address/size cells. Update the dt-binding accordingly.
-- Correct a typo in code comments.
-- Drop Stefano's acked-by as it is not valid.
+- No changes.
 Changes from v3 to v4:
-- Change of wording in comments.
-- Add the static heap feature in SUPPORT.md as tech preview.
+- Add Julien's Reviewed-by.
 Changes from v2 to v3:
-- Define `enum membank_type` properly, drop the typedef.
-- Rename the feature terminology to static heap.
-- Rename MEMBANK_MEMORY to MEMBANK_DEFAULT and MEMBANK_XEN_DOMAIN to
-  MEMBANK_STATIC_DOMAIN. Add comments to `enum membank_type`.
-- Correct typo, add the clarification of the static heap region
-  should contain enough memory below 4GB to cater 32-bit DMA for Arm32,
-  and add the 64KB alignment requirement in doc.
-- Add Stefano's Acked-by for device tree interface.
+- Adjustment of the terminology change to "static heap".
+- Change of wording in comments.
+- int i -> unsigned int i.
+- Avoid extra indentation by reverting the check of MEMBANK_RSVD_HEAP.
+- Use MB(32).
+- Drop unnecessary panic and unused variables.
+- Avoid the ternary operation in assigning the heap_pages.
+- Rework populate_boot_allocator() for static heap.
 Changes from v1 to v2:
-- Rename the device tree property to xen,static-heap to avoid confusion.
-- Change of commit msg and doc wording, correct typo in commit msg.
-- Do not change the process_chosen_node() return type.
-- Add an empty line in make_memory_node() memory type check to improve
-  readability.
-- Use enum membank_type to make the memory type cleaner.
+- Move the global bool `reserved_heap` to bootinfo.
+- Replace the open open-coding address ~0 by INVALID_PADDR.
+- Do not use reverted logic in heap_pages calculation.
+- Remove unused Arm32 reserved_heap_start variable.
+- Decouple the arm32 reserved heap too small size check with region
+  end check.
+- Reuse the arm32 original xenheap finding logic with the new helper
+  to make sure xenheap on arm32 is contiguous.
 Changes from RFC to v1:
-- Rename the terminology to reserved heap.
+- Rebase on top of latest `setup_mm()` changes.
+- Added Arm32 logic in `setup_mm()`.
 ---
- SUPPORT.md                            |  7 +++++
- docs/misc/arm/device-tree/booting.txt | 44 +++++++++++++++++++++++++++
- xen/arch/arm/bootfdt.c                | 23 +++++++++++---
- xen/arch/arm/domain_build.c           |  8 +++--
- xen/arch/arm/include/asm/setup.h      | 22 +++++++++++++-
- xen/arch/arm/setup.c                  |  2 +-
- 6 files changed, 97 insertions(+), 9 deletions(-)
+ xen/arch/arm/bootfdt.c           |   2 +
+ xen/arch/arm/include/asm/setup.h |   1 +
+ xen/arch/arm/setup.c             | 118 +++++++++++++++++++++++++++----
+ 3 files changed, 107 insertions(+), 14 deletions(-)
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index 8e040d1c1e..b02a5d25ca 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -293,6 +293,13 @@ pre-defined by configuration using physical address ranges.
- 
-     Status, ARM: Tech Preview
- 
-+### Static Heap
-+
-+Allow reserving parts of RAM through the device tree using physical
-+address ranges as heap.
-+
-+    Status, ARM: Tech Preview
-+
- ### Memory Sharing
- 
- Allow sharing of identical pages between guests
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 98253414b8..d71f59b63c 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -378,3 +378,47 @@ device-tree:
- 
- This will reserve a 512MB region starting at the host physical address
- 0x30000000 to be exclusively used by DomU1.
-+
-+
-+Static Heap Memory
-+==================
-+
-+The static heap memory refers to parts of RAM reserved in the beginning of
-+boot time for heap. The memory is reserved by configuration in the device
-+tree using physical address ranges.
-+
-+The static heap memory declared in the device tree defines the memory areas
-+that will be reserved to be used exclusively as heap.
-+
-+- For Arm32, since there are separated heaps, the static heap will be used
-+for both domheap and xenheap. The admin should make sure that the static
-+heap region should contain enough memory below 4GB to cater 32-bit DMA.
-+
-+- For Arm64, since there is a single heap, the defined static heap areas
-+shall always go to the heap allocator.
-+
-+The static heap memory is an optional feature and can be enabled by adding
-+below device tree property.
-+
-+- xen,static-heap
-+
-+    Property under the top-level "chosen" node. It specifies the address
-+    and size of Xen static heap memory. Number of address and size cells
-+    for the "xen,static-heap" property is determined by the root node
-+    "#address-cells" and "#size-cells". Note that at least a 64KB alignment
-+    is required.
-+
-+Below is an example on how to specify the static heap in device tree:
-+
-+    / {
-+        #address-cells = <0x2>;
-+        #size-cells = <0x2>;
-+        ...
-+        chosen {
-+            xen,static-heap = <0x0 0x30000000 0x0 0x40000000>;
-+            ...
-+        };
-+    };
-+
-+RAM starting from the host physical address 0x30000000 of 1GB size will
-+be reserved as static heap.
 diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index 1a79b969af..0ca7b44446 100644
+index c39aacbd60..9e1ea60094 100644
 --- a/xen/arch/arm/bootfdt.c
 +++ b/xen/arch/arm/bootfdt.c
-@@ -64,7 +64,7 @@ void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
- static int __init device_tree_get_meminfo(const void *fdt, int node,
-                                           const char *prop_name,
-                                           u32 address_cells, u32 size_cells,
--                                          void *data, bool xen_domain)
-+                                          void *data, enum membank_type type)
- {
-     const struct fdt_property *prop;
-     unsigned int i, banks;
-@@ -95,7 +95,7 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-             continue;
-         mem->bank[mem->nr_banks].start = start;
-         mem->bank[mem->nr_banks].size = size;
--        mem->bank[mem->nr_banks].xen_domain = xen_domain;
-+        mem->bank[mem->nr_banks].type = type;
-         mem->nr_banks++;
+@@ -313,6 +313,8 @@ static int __init process_chosen_node(const void *fdt, int node,
+                                      MEMBANK_STATIC_HEAP);
+         if ( rc )
+             return rc;
++
++        bootinfo.static_heap = true;
      }
  
-@@ -185,7 +185,7 @@ static int __init process_memory_node(const void *fdt, int node,
-                                       void *data)
- {
-     return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
--                                   data, false);
-+                                   data, MEMBANK_DEFAULT);
- }
- 
- static int __init process_reserved_memory_node(const void *fdt, int node,
-@@ -301,6 +301,20 @@ static int __init process_chosen_node(const void *fdt, int node,
-     paddr_t start, end;
-     int len;
- 
-+    if ( fdt_get_property(fdt, node, "xen,static-heap", NULL) )
-+    {
-+        int rc;
-+
-+        printk("Checking for static heap in /chosen\n");
-+
-+        rc = device_tree_get_meminfo(fdt, node, "xen,static-heap",
-+                                     address_cells, size_cells,
-+                                     &bootinfo.reserved_mem,
-+                                     MEMBANK_STATIC_HEAP);
-+        if ( rc )
-+            return rc;
-+    }
-+
      printk("Checking for initrd in /chosen\n");
- 
-     prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
-@@ -360,7 +374,8 @@ static int __init process_domain_node(const void *fdt, int node,
-                                      "#xen,static-mem-size-cells", 0);
- 
-     return device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
--                                   size_cells, &bootinfo.reserved_mem, true);
-+                                   size_cells, &bootinfo.reserved_mem,
-+                                   MEMBANK_STATIC_DOMAIN);
- }
- 
- static int __init early_scan_node(const void *fdt,
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index b76a84e8f5..cea82374f7 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -1038,9 +1038,11 @@ static int __init make_memory_node(const struct domain *d,
-     if ( mem->nr_banks == 0 )
-         return -ENOENT;
- 
--    /* find first memory range not bound to a Xen domain */
--    for ( i = 0; i < mem->nr_banks && mem->bank[i].xen_domain; i++ )
-+    /* find the first memory range that is reserved for device (or firmware) */
-+    for ( i = 0; i < mem->nr_banks &&
-+                 (mem->bank[i].type != MEMBANK_DEFAULT); i++ )
-         ;
-+
-     if ( i == mem->nr_banks )
-         return 0;
- 
-@@ -1062,7 +1064,7 @@ static int __init make_memory_node(const struct domain *d,
-         u64 start = mem->bank[i].start;
-         u64 size = mem->bank[i].size;
- 
--        if ( mem->bank[i].xen_domain )
-+        if ( mem->bank[i].type == MEMBANK_STATIC_DOMAIN )
-             continue;
- 
-         dt_dprintk("  Bank %d: %#"PRIx64"->%#"PRIx64"\n",
 diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 5815ccf8c5..09188acae8 100644
+index 09188acae8..5b86cf0245 100644
 --- a/xen/arch/arm/include/asm/setup.h
 +++ b/xen/arch/arm/include/asm/setup.h
-@@ -22,11 +22,31 @@ typedef enum {
-     BOOTMOD_UNKNOWN
- }  bootmodule_kind;
- 
-+enum membank_type {
-+    /*
-+     * The MEMBANK_DEFAULT type refers to either reserved memory for the
-+     * device/firmware (when the bank is in 'reserved_mem') or any RAM (when
-+     * the bank is in 'mem').
-+     */
-+    MEMBANK_DEFAULT,
-+    /*
-+     * The MEMBANK_STATIC_DOMAIN type is used to indicate whether the memory
-+     * bank is bound to a static Xen domain. It is only valid when the bank
-+     * is in reserved_mem.
-+     */
-+    MEMBANK_STATIC_DOMAIN,
-+    /*
-+     * The MEMBANK_STATIC_HEAP type is used to indicate whether the memory
-+     * bank is reserved as static heap. It is only valid when the bank is
-+     * in reserved_mem.
-+     */
-+    MEMBANK_STATIC_HEAP,
-+};
- 
- struct membank {
-     paddr_t start;
-     paddr_t size;
--    bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
-+    enum membank_type type;
+@@ -97,6 +97,7 @@ struct bootinfo {
+ #ifdef CONFIG_ACPI
+     struct meminfo acpi;
+ #endif
++    bool static_heap;
  };
  
- struct meminfo {
+ struct map_range_data
 diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 7814fe323d..3c36c050bf 100644
+index 9f3838d004..e0f9809d7e 100644
 --- a/xen/arch/arm/setup.c
 +++ b/xen/arch/arm/setup.c
-@@ -644,7 +644,7 @@ static void __init init_staticmem_pages(void)
+@@ -556,6 +556,44 @@ static paddr_t __init consider_modules(paddr_t s, paddr_t e,
+     }
+     return e;
+ }
++
++/*
++ * Find a contiguous region that fits in the static heap region with
++ * required size and alignment, and return the end address of the region
++ * if found otherwise 0.
++ */
++static paddr_t __init fit_xenheap_in_static_heap(uint32_t size, paddr_t align)
++{
++    unsigned int i;
++    paddr_t end = 0, aligned_start, aligned_end;
++    paddr_t bank_start, bank_size, bank_end;
++
++    for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
++    {
++        if ( bootinfo.reserved_mem.bank[i].type != MEMBANK_STATIC_HEAP )
++            continue;
++
++        bank_start = bootinfo.reserved_mem.bank[i].start;
++        bank_size = bootinfo.reserved_mem.bank[i].size;
++        bank_end = bank_start + bank_size;
++
++        if ( bank_size < size )
++            continue;
++
++        aligned_end = bank_end & ~(align - 1);
++        aligned_start = (aligned_end - size) & ~(align - 1);
++
++        if ( aligned_start > bank_start )
++            /*
++             * Allocate the xenheap as high as possible to keep low-memory
++             * available (assuming the admin supplied region below 4GB)
++             * for other use (e.g. domain memory allocation).
++             */
++            end = max(end, aligned_end);
++    }
++
++    return end;
++}
+ #endif
  
-     for ( bank = 0 ; bank < bootinfo.reserved_mem.nr_banks; bank++ )
+ /*
+@@ -661,22 +699,51 @@ static void __init init_staticmem_pages(void)
+ }
+ 
+ /*
+- * Populate the boot allocator. All the RAM but the following regions
+- * will be added:
++ * Populate the boot allocator.
++ * If a static heap was not provided by the admin, all the RAM but the
++ * following regions will be added:
+  *  - Modules (e.g., Xen, Kernel)
+  *  - Reserved regions
+  *  - Xenheap (arm32 only)
++ * If a static heap was provided by the admin, populate the boot
++ * allocator with the corresponding regions only, but with Xenheap excluded
++ * on arm32.
+  */
+ static void __init populate_boot_allocator(void)
+ {
+     unsigned int i;
+     const struct meminfo *banks = &bootinfo.mem;
++    paddr_t s, e;
++
++    if ( bootinfo.static_heap )
++    {
++        for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
++        {
++            if ( bootinfo.reserved_mem.bank[i].type != MEMBANK_STATIC_HEAP )
++                continue;
++
++            s = bootinfo.reserved_mem.bank[i].start;
++            e = s + bootinfo.reserved_mem.bank[i].size;
++#ifdef CONFIG_ARM_32
++            /* Avoid the xenheap, note that the xenheap cannot across a bank */
++            if ( s <= mfn_to_maddr(directmap_mfn_start) &&
++                 e >= mfn_to_maddr(directmap_mfn_end) )
++            {
++                init_boot_pages(s, mfn_to_maddr(directmap_mfn_start));
++                init_boot_pages(mfn_to_maddr(directmap_mfn_end), e);
++            }
++            else
++#endif
++                init_boot_pages(s, e);
++        }
++
++        return;
++    }
+ 
+     for ( i = 0; i < banks->nr_banks; i++ )
      {
--        if ( bootinfo.reserved_mem.bank[bank].xen_domain )
-+        if ( bootinfo.reserved_mem.bank[bank].type == MEMBANK_STATIC_DOMAIN )
-         {
-             mfn_t bank_start = _mfn(PFN_UP(bootinfo.reserved_mem.bank[bank].start));
-             unsigned long bank_pages = PFN_DOWN(bootinfo.reserved_mem.bank[bank].size);
+         const struct membank *bank = &banks->bank[i];
+         paddr_t bank_end = bank->start + bank->size;
+-        paddr_t s, e;
+ 
+         s = bank->start;
+         while ( s < bank_end )
+@@ -714,8 +781,8 @@ static void __init populate_boot_allocator(void)
+ #ifdef CONFIG_ARM_32
+ static void __init setup_mm(void)
+ {
+-    paddr_t ram_start, ram_end, ram_size, e;
+-    unsigned long ram_pages;
++    paddr_t ram_start, ram_end, ram_size, e, bank_start, bank_end, bank_size;
++    paddr_t static_heap_end = 0, static_heap_size = 0;
+     unsigned long heap_pages, xenheap_pages, domheap_pages;
+     unsigned int i;
+     const uint32_t ctr = READ_CP32(CTR);
+@@ -735,30 +802,51 @@ static void __init setup_mm(void)
+ 
+     for ( i = 1; i < bootinfo.mem.nr_banks; i++ )
+     {
+-        paddr_t bank_start = bootinfo.mem.bank[i].start;
+-        paddr_t bank_size = bootinfo.mem.bank[i].size;
+-        paddr_t bank_end = bank_start + bank_size;
++        bank_start = bootinfo.mem.bank[i].start;
++        bank_size = bootinfo.mem.bank[i].size;
++        bank_end = bank_start + bank_size;
+ 
+         ram_size  = ram_size + bank_size;
+         ram_start = min(ram_start,bank_start);
+         ram_end   = max(ram_end,bank_end);
+     }
+ 
+-    total_pages = ram_pages = ram_size >> PAGE_SHIFT;
++    total_pages = ram_size >> PAGE_SHIFT;
++
++    if ( bootinfo.static_heap )
++    {
++        for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
++        {
++            if ( bootinfo.reserved_mem.bank[i].type != MEMBANK_STATIC_HEAP )
++                continue;
++
++            bank_start = bootinfo.reserved_mem.bank[i].start;
++            bank_size = bootinfo.reserved_mem.bank[i].size;
++            bank_end = bank_start + bank_size;
++
++            static_heap_size += bank_size;
++            static_heap_end = max(static_heap_end, bank_end);
++        }
++
++        heap_pages = static_heap_size >> PAGE_SHIFT;
++    }
++    else
++        heap_pages = total_pages;
+ 
+     /*
+      * If the user has not requested otherwise via the command line
+      * then locate the xenheap using these constraints:
+      *
++     *  - must be contiguous
+      *  - must be 32 MiB aligned
+      *  - must not include Xen itself or the boot modules
+-     *  - must be at most 1GB or 1/32 the total RAM in the system if less
++     *  - must be at most 1GB or 1/32 the total RAM in the system (or static
++          heap if enabled) if less
+      *  - must be at least 32M
+      *
+      * We try to allocate the largest xenheap possible within these
+      * constraints.
+      */
+-    heap_pages = ram_pages;
+     if ( opt_xenheap_megabytes )
+         xenheap_pages = opt_xenheap_megabytes << (20-PAGE_SHIFT);
+     else
+@@ -770,7 +858,9 @@ static void __init setup_mm(void)
+ 
+     do
+     {
+-        e = consider_modules(ram_start, ram_end,
++        e = bootinfo.static_heap ?
++            fit_xenheap_in_static_heap(pfn_to_paddr(xenheap_pages), MB(32)) :
++            consider_modules(ram_start, ram_end,
+                              pfn_to_paddr(xenheap_pages),
+                              32<<20, 0);
+         if ( e )
+@@ -780,7 +870,7 @@ static void __init setup_mm(void)
+     } while ( !opt_xenheap_megabytes && xenheap_pages > 32<<(20-PAGE_SHIFT) );
+ 
+     if ( ! e )
+-        panic("Not not enough space for xenheap\n");
++        panic("Not enough space for xenheap\n");
+ 
+     domheap_pages = heap_pages - xenheap_pages;
+ 
+@@ -825,7 +915,7 @@ static void __init setup_mm(void)
+ static void __init setup_mm(void)
+ {
+     const struct meminfo *banks = &bootinfo.mem;
+-    paddr_t ram_start = ~0;
++    paddr_t ram_start = INVALID_PADDR;
+     paddr_t ram_end = 0;
+     paddr_t ram_size = 0;
+     unsigned int i;
 -- 
 2.17.1
 
