@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B12ECAAD5
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 08:59:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.402922.644863 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFABEC54EE9
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 08:59:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.402939.644873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDNR-0006tW-1S; Thu, 08 Sep 2022 08:59:13 +0000
+	id 1oWDNz-0007nO-FP; Thu, 08 Sep 2022 08:59:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 402922.644863; Thu, 08 Sep 2022 08:59:13 +0000
+Received: by outflank-mailman (output) from mailman id 402939.644873; Thu, 08 Sep 2022 08:59:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWDNQ-0006tM-Ug; Thu, 08 Sep 2022 08:59:12 +0000
-Received: by outflank-mailman (input) for mailman id 402922;
- Thu, 08 Sep 2022 08:59:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oWDNz-0007nH-CT; Thu, 08 Sep 2022 08:59:47 +0000
+Received: by outflank-mailman (input) for mailman id 402939;
+ Thu, 08 Sep 2022 08:59:46 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wZDO=ZL=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oWDEm-0007YH-Eo
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 08:50:16 +0000
+ id 1oWDEb-0006wz-0G
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 08:50:05 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 41e5a0d7-2f53-11ed-a31c-8f8a9ae3403f;
- Thu, 08 Sep 2022 10:50:15 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3b14764f-2f53-11ed-9760-273f2230c3a0;
+ Thu, 08 Sep 2022 10:50:04 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 353F41F8A3;
- Thu,  8 Sep 2022 08:50:15 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id C11C21F8A3;
+ Thu,  8 Sep 2022 08:50:03 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D9E4D1322C;
- Thu,  8 Sep 2022 08:50:14 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 859771322C;
+ Thu,  8 Sep 2022 08:50:03 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id E07rM8asGWPhNgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 08 Sep 2022 08:50:14 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id MIhjH7usGWPDNgAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 08 Sep 2022 08:50:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41e5a0d7-2f53-11ed-a31c-8f8a9ae3403f
+X-Inumbo-ID: 3b14764f-2f53-11ed-9760-273f2230c3a0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1662627015; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1662627003; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=OOtMBsGKsiODO1IZdVdZQy6U6TpDMNmPLdot2OAbD6M=;
-	b=P/AdcYFG8Q+ca28IGPz11ED5v9Ycrj6+tV0FRqp+h7EqocIy+ohGzTrBHRUhV7eQ5OXmoo
-	MMkCayjIy3hC3DdVxZcAw2aMpvk6iAXozwGW5xdB+tyEoQ+slVAOpHH+oi2Y2cCIuMbfDH
-	2fnD/fOy5T32axn6/iULM2Pww+H7zG0=
+	bh=3x/3mvtUgMk6arimR7zM4AOZuvsh6hiHAFQZy5JP30o=;
+	b=XSrXbJzHIKdeE0LpAyVmKgSg5WxKGlPjq4GG28gKFV4o5a3dWFHOKWvug0jRv8BKXPGN9U
+	cMSjZJLeSWzcsPwQlP8wtCL8/QdAUVSilPAWNgGJ4kSufisKLhhDCcOdwhKLw2SLtAx1ZB
+	9TGK0fqh/ZsjffOkRYLNv51PxfRCGLQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
@@ -72,380 +72,164 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH v3 10/10] x86: decouple pat and mtrr handling
-Date: Thu,  8 Sep 2022 10:49:14 +0200
-Message-Id: <20220908084914.21703-11-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v3 08/10] x86/mtrr: let cache_aps_delayed_init replace mtrr_aps_delayed_init
+Date: Thu,  8 Sep 2022 10:49:12 +0200
+Message-Id: <20220908084914.21703-9-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220908084914.21703-1-jgross@suse.com>
 References: <20220908084914.21703-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today PAT is usable only with MTRR being active, with some nasty tweaks
-to make PAT usable when running as Xen PV guest, which doesn't support
-MTRR.
-
-The reason for this coupling is, that both, PAT MSR changes and MTRR
-changes, require a similar sequence and so full PAT support was added
-using the already available MTRR handling.
-
-Xen PV PAT handling can work without MTRR, as it just needs to consume
-the PAT MSR setting done by the hypervisor without the ability and need
-to change it. This in turn has resulted in a convoluted initialization
-sequence and wrong decisions regarding cache mode availability due to
-misguiding PAT availability flags.
-
-Fix all of that by allowing to use PAT without MTRR and by reworking
-the current PAT initialization sequence to match better with the newly
-introduced generic cache initialization.
-
-This removes the need of the recently added pat_force_disabled flag, so
-remove the remnants of the patch adding it.
+In order to prepare decoupling MTRR and PAT replace the MTRR specific
+mtrr_aps_delayed_init flag with a more generic cache_aps_delayed_init
+one.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V2:
-- former patch 3 completely reworked
+- new patch
 ---
- arch/x86/include/asm/memtype.h  |   5 +-
- arch/x86/kernel/cpu/cacheinfo.c |   3 +-
- arch/x86/kernel/cpu/mtrr/mtrr.c |  13 +---
- arch/x86/kernel/setup.c         |  13 +---
- arch/x86/mm/pat/memtype.c       | 127 ++++++++++----------------------
- 5 files changed, 45 insertions(+), 116 deletions(-)
+ arch/x86/include/asm/cacheinfo.h |  2 ++
+ arch/x86/include/asm/mtrr.h      |  2 --
+ arch/x86/kernel/cpu/cacheinfo.c  |  2 ++
+ arch/x86/kernel/cpu/mtrr/mtrr.c  | 17 ++++-------------
+ arch/x86/kernel/smpboot.c        |  5 +++--
+ 5 files changed, 11 insertions(+), 17 deletions(-)
 
-diff --git a/arch/x86/include/asm/memtype.h b/arch/x86/include/asm/memtype.h
-index 9ca760e430b9..113b2fa51849 100644
---- a/arch/x86/include/asm/memtype.h
-+++ b/arch/x86/include/asm/memtype.h
-@@ -6,9 +6,8 @@
- #include <asm/pgtable_types.h>
+diff --git a/arch/x86/include/asm/cacheinfo.h b/arch/x86/include/asm/cacheinfo.h
+index 563d9cb5fcf5..e80ed3c523c8 100644
+--- a/arch/x86/include/asm/cacheinfo.h
++++ b/arch/x86/include/asm/cacheinfo.h
+@@ -7,6 +7,8 @@ extern unsigned int cache_generic;
+ #define CACHE_GENERIC_MTRR 0x01
+ #define CACHE_GENERIC_PAT  0x02
  
- extern bool pat_enabled(void);
--extern void pat_disable(const char *reason);
--extern void pat_init(void);
--extern void init_cache_modes(void);
-+extern void pat_bp_init(void);
-+extern void pat_cpu_init(void);
++extern bool cache_aps_delayed_init;
++
+ void cacheinfo_amd_init_llc_id(struct cpuinfo_x86 *c, int cpu);
+ void cacheinfo_hygon_init_llc_id(struct cpuinfo_x86 *c, int cpu);
  
- extern int memtype_reserve(u64 start, u64 end,
- 		enum page_cache_mode req_pcm, enum page_cache_mode *ret_pcm);
+diff --git a/arch/x86/include/asm/mtrr.h b/arch/x86/include/asm/mtrr.h
+index 986249a2b9b6..5d31219c8529 100644
+--- a/arch/x86/include/asm/mtrr.h
++++ b/arch/x86/include/asm/mtrr.h
+@@ -43,7 +43,6 @@ extern int mtrr_del(int reg, unsigned long base, unsigned long size);
+ extern int mtrr_del_page(int reg, unsigned long base, unsigned long size);
+ extern void mtrr_centaur_report_mcr(int mcr, u32 lo, u32 hi);
+ extern void mtrr_ap_init(void);
+-extern void set_mtrr_aps_delayed_init(void);
+ extern void mtrr_aps_init(void);
+ extern void mtrr_bp_restore(void);
+ extern int mtrr_trim_uncached_memory(unsigned long end_pfn);
+@@ -87,7 +86,6 @@ static inline void mtrr_centaur_report_mcr(int mcr, u32 lo, u32 hi)
+ {
+ }
+ #define mtrr_ap_init() do {} while (0)
+-#define set_mtrr_aps_delayed_init() do {} while (0)
+ #define mtrr_aps_init() do {} while (0)
+ #define mtrr_bp_restore() do {} while (0)
+ #define mtrr_disable() do {} while (0)
 diff --git a/arch/x86/kernel/cpu/cacheinfo.c b/arch/x86/kernel/cpu/cacheinfo.c
-index 4946f93eb16f..08130919d55d 100644
+index 36378604ec61..c6e7c93e45e8 100644
 --- a/arch/x86/kernel/cpu/cacheinfo.c
 +++ b/arch/x86/kernel/cpu/cacheinfo.c
-@@ -1135,7 +1135,7 @@ static void cache_cpu_init(void)
- 
- 	/* Set PAT. */
- 	if (cache_generic & CACHE_GENERIC_PAT)
--		pat_init();
-+		pat_cpu_init();
- 
+@@ -1139,3 +1139,5 @@ void cache_cpu_init(void)
  	cache_enable();
  	local_irq_restore(flags);
-@@ -1154,6 +1154,7 @@ static int cache_rendezvous_handler(void *unused)
- void __init cache_bp_init(void)
- {
- 	mtrr_bp_init();
-+	pat_bp_init();
- 
- 	if (cache_generic)
- 		cache_cpu_init();
+ }
++
++bool cache_aps_delayed_init;
 diff --git a/arch/x86/kernel/cpu/mtrr/mtrr.c b/arch/x86/kernel/cpu/mtrr/mtrr.c
-index 5e8be11d1873..921f425fe7b3 100644
+index 956838bb4481..a47d46035240 100644
 --- a/arch/x86/kernel/cpu/mtrr/mtrr.c
 +++ b/arch/x86/kernel/cpu/mtrr/mtrr.c
-@@ -727,24 +727,15 @@ void __init mtrr_bp_init(void)
- 			mtrr_enabled = get_mtrr_state();
+@@ -65,7 +65,6 @@ unsigned int mtrr_usage_table[MTRR_MAX_VAR_RANGES];
+ static DEFINE_MUTEX(mtrr_mutex);
  
- 			if (mtrr_enabled) {
--				cache_generic |= CACHE_GENERIC_MTRR |
--						 CACHE_GENERIC_PAT;
-+				cache_generic |= CACHE_GENERIC_MTRR;
- 				changed_by_mtrr_cleanup =
- 					mtrr_cleanup(phys_addr);
- 			}
- 		}
+ u64 size_or_mask, size_and_mask;
+-static bool mtrr_aps_delayed_init;
+ 
+ static const struct mtrr_ops *mtrr_ops[X86_VENDOR_NUM] __ro_after_init;
+ 
+@@ -172,7 +171,7 @@ static int mtrr_rendezvous_handler(void *info)
+ 	if (data->smp_reg != ~0U) {
+ 		mtrr_if->set(data->smp_reg, data->smp_base,
+ 			     data->smp_size, data->smp_type);
+-	} else if (mtrr_aps_delayed_init || !cpu_online(smp_processor_id())) {
++	} else if (cache_aps_delayed_init || !cpu_online(smp_processor_id())) {
+ 		cache_cpu_init();
  	}
- 
--	if (!mtrr_enabled) {
-+	if (!mtrr_enabled)
- 		pr_info("Disabled\n");
--
--		/*
--		 * PAT initialization relies on MTRR's rendezvous handler.
--		 * Skip PAT init until the handler can initialize both
--		 * features independently.
--		 */
--		pat_disable("MTRRs disabled, skipping PAT initialization too.");
--	}
- }
- 
- /**
-diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
-index e0e185ee0229..aacaa96f0195 100644
---- a/arch/x86/kernel/setup.c
-+++ b/arch/x86/kernel/setup.c
-@@ -1075,23 +1075,12 @@ void __init setup_arch(char **cmdline_p)
- 	max_pfn = e820__end_of_ram_pfn();
- 
- 	/* update e820 for memory not covered by WB MTRRs */
--	if (IS_ENABLED(CONFIG_MTRR))
--		cache_bp_init();
--	else
--		pat_disable("PAT support disabled because CONFIG_MTRR is disabled in the kernel.");
--
-+	cache_bp_init();
- 	if (mtrr_trim_uncached_memory(max_pfn))
- 		max_pfn = e820__end_of_ram_pfn();
- 
- 	max_possible_pfn = max_pfn;
- 
--	/*
--	 * This call is required when the CPU does not support PAT. If
--	 * mtrr_bp_init() invoked it already via pat_init() the call has no
--	 * effect.
--	 */
--	init_cache_modes();
--
- 	/*
- 	 * Define random base addresses for memory sections after max_pfn is
- 	 * defined and before each memory section base is used.
-diff --git a/arch/x86/mm/pat/memtype.c b/arch/x86/mm/pat/memtype.c
-index 66a209f7eb86..1f62fc40e6df 100644
---- a/arch/x86/mm/pat/memtype.c
-+++ b/arch/x86/mm/pat/memtype.c
-@@ -43,6 +43,7 @@
- #include <linux/rbtree.h>
- 
- #include <asm/cacheflush.h>
-+#include <asm/cacheinfo.h>
- #include <asm/processor.h>
- #include <asm/tlbflush.h>
- #include <asm/x86_init.h>
-@@ -60,41 +61,34 @@
- #undef pr_fmt
- #define pr_fmt(fmt) "" fmt
- 
--static bool __read_mostly pat_bp_initialized;
- static bool __read_mostly pat_disabled = !IS_ENABLED(CONFIG_X86_PAT);
--static bool __initdata pat_force_disabled = !IS_ENABLED(CONFIG_X86_PAT);
--static bool __read_mostly pat_bp_enabled;
--static bool __read_mostly pat_cm_initialized;
-+static u64 __read_mostly pat_msr_val;
- 
- /*
-  * PAT support is enabled by default, but can be disabled for
-  * various user-requested or hardware-forced reasons:
-  */
--void pat_disable(const char *msg_reason)
-+static void __init pat_disable(const char *msg_reason)
- {
- 	if (pat_disabled)
- 		return;
- 
--	if (pat_bp_initialized) {
--		WARN_ONCE(1, "x86/PAT: PAT cannot be disabled after initialization\n");
--		return;
--	}
--
- 	pat_disabled = true;
- 	pr_info("x86/PAT: %s\n", msg_reason);
-+
-+	cache_generic &= ~CACHE_GENERIC_PAT;
- }
- 
- static int __init nopat(char *str)
- {
- 	pat_disable("PAT support disabled via boot option.");
--	pat_force_disabled = true;
  	return 0;
- }
- early_param("nopat", nopat);
+@@ -784,7 +783,7 @@ void __init mtrr_bp_init(void)
  
- bool pat_enabled(void)
+ void mtrr_ap_init(void)
  {
--	return pat_bp_enabled;
-+	return !pat_disabled;
- }
- EXPORT_SYMBOL_GPL(pat_enabled);
- 
-@@ -192,7 +186,8 @@ enum {
- 
- #define CM(c) (_PAGE_CACHE_MODE_ ## c)
- 
--static enum page_cache_mode pat_get_cache_mode(unsigned pat_val, char *msg)
-+static enum page_cache_mode __init pat_get_cache_mode(unsigned int pat_val,
-+						      char *msg)
- {
- 	enum page_cache_mode cache;
- 	char *cache_mode;
-@@ -219,14 +214,12 @@ static enum page_cache_mode pat_get_cache_mode(unsigned pat_val, char *msg)
-  * configuration.
-  * Using lower indices is preferred, so we start with highest index.
-  */
--static void __init_cache_modes(u64 pat)
-+static void __init init_cache_modes(u64 pat)
- {
- 	enum page_cache_mode cache;
- 	char pat_msg[33];
- 	int i;
- 
--	WARN_ON_ONCE(pat_cm_initialized);
--
- 	pat_msg[32] = 0;
- 	for (i = 7; i >= 0; i--) {
- 		cache = pat_get_cache_mode((pat >> (i * 8)) & 7,
-@@ -234,34 +227,11 @@ static void __init_cache_modes(u64 pat)
- 		update_cache_mode_entry(i, cache);
- 	}
- 	pr_info("x86/PAT: Configuration [0-7]: %s\n", pat_msg);
--
--	pat_cm_initialized = true;
- }
- 
- #define PAT(x, y)	((u64)PAT_ ## y << ((x)*8))
- 
--static void pat_bp_init(u64 pat)
--{
--	u64 tmp_pat;
--
--	if (!boot_cpu_has(X86_FEATURE_PAT)) {
--		pat_disable("PAT not supported by the CPU.");
--		return;
--	}
--
--	rdmsrl(MSR_IA32_CR_PAT, tmp_pat);
--	if (!tmp_pat) {
--		pat_disable("PAT support disabled by the firmware.");
--		return;
--	}
--
--	wrmsrl(MSR_IA32_CR_PAT, pat);
--	pat_bp_enabled = true;
--
--	__init_cache_modes(pat);
--}
--
--static void pat_ap_init(u64 pat)
-+void pat_cpu_init(void)
- {
- 	if (!boot_cpu_has(X86_FEATURE_PAT)) {
- 		/*
-@@ -271,30 +241,35 @@ static void pat_ap_init(u64 pat)
- 		panic("x86/PAT: PAT enabled, but not supported by secondary CPU\n");
- 	}
- 
--	wrmsrl(MSR_IA32_CR_PAT, pat);
-+	wrmsrl(MSR_IA32_CR_PAT, pat_msr_val);
- }
- 
--void __init init_cache_modes(void)
-+/**
-+ * pat_bp_init - Initialize the PAT MSR value and PAT table
-+ *
-+ * This function initializes PAT MSR value and PAT table with an OS-defined
-+ * value to enable additional cache attributes, WC, WT and WP.
-+ *
-+ * This function prepares the calls of pat_cpu_init() via cache_cpu_init()
-+ * on all cpus.
-+ */
-+void __init pat_bp_init(void)
- {
-+	struct cpuinfo_x86 *c = &boot_cpu_data;
- 	u64 pat = 0;
- 
--	if (pat_cm_initialized)
--		return;
-+#ifndef CONFIG_X86_PAT
-+	pr_info_once("x86/PAT: PAT support disabled because CONFIG_X86_PAT is disabled in the kernel.\n");
-+#endif
- 
--	if (boot_cpu_has(X86_FEATURE_PAT)) {
--		/*
--		 * CPU supports PAT. Set PAT table to be consistent with
--		 * PAT MSR. This case supports "nopat" boot option, and
--		 * virtual machine environments which support PAT without
--		 * MTRRs. In specific, Xen has unique setup to PAT MSR.
--		 *
--		 * If PAT MSR returns 0, it is considered invalid and emulates
--		 * as No PAT.
--		 */
-+	if (!boot_cpu_has(X86_FEATURE_PAT))
-+		pat_disable("PAT not supported by the CPU.");
-+	else
- 		rdmsrl(MSR_IA32_CR_PAT, pat);
--	}
- 
- 	if (!pat) {
-+		pat_disable("PAT support disabled by the firmware.");
-+
- 		/*
- 		 * No PAT. Emulate the PAT table that corresponds to the two
- 		 * cache bits, PWT (Write Through) and PCD (Cache Disable).
-@@ -315,38 +290,14 @@ void __init init_cache_modes(void)
- 		 */
- 		pat = PAT(0, WB) | PAT(1, WT) | PAT(2, UC_MINUS) | PAT(3, UC) |
- 		      PAT(4, WB) | PAT(5, WT) | PAT(6, UC_MINUS) | PAT(7, UC);
--	} else if (!pat_force_disabled && cpu_feature_enabled(X86_FEATURE_HYPERVISOR)) {
--		/*
--		 * Clearly PAT is enabled underneath. Allow pat_enabled() to
--		 * reflect this.
--		 */
--		pat_bp_enabled = true;
- 	}
- 
--	__init_cache_modes(pat);
--}
--
--/**
-- * pat_init - Initialize the PAT MSR and PAT table on the current CPU
-- *
-- * This function initializes PAT MSR and PAT table with an OS-defined value
-- * to enable additional cache attributes, WC, WT and WP.
-- *
-- * This function must be called on all CPUs using the specific sequence of
-- * operations defined in Intel SDM. mtrr_rendezvous_handler() provides this
-- * procedure for PAT.
-- */
--void pat_init(void)
--{
--	u64 pat;
--	struct cpuinfo_x86 *c = &boot_cpu_data;
--
--#ifndef CONFIG_X86_PAT
--	pr_info_once("x86/PAT: PAT support disabled because CONFIG_X86_PAT is disabled in the kernel.\n");
--#endif
-+	/* Xen PV doesn't allow to set PAT MSR, but all cache modes are fine. */
-+	if (pat_disabled || cpu_feature_enabled(X86_FEATURE_XENPV)) {
-+		init_cache_modes(pat);
- 
--	if (pat_disabled)
+-	if (!cache_generic || mtrr_aps_delayed_init)
++	if (!cache_generic || cache_aps_delayed_init)
  		return;
-+	}
  
- 	if ((c->x86_vendor == X86_VENDOR_INTEL) &&
- 	    (((c->x86 == 0x6) && (c->x86_model <= 0xd)) ||
-@@ -404,12 +355,10 @@ void pat_init(void)
- 		      PAT(4, WB) | PAT(5, WP) | PAT(6, UC_MINUS) | PAT(7, WT);
- 	}
- 
--	if (!pat_bp_initialized) {
--		pat_bp_init(pat);
--		pat_bp_initialized = true;
--	} else {
--		pat_ap_init(pat);
--	}
-+	pat_msr_val = pat;
-+	cache_generic |= CACHE_GENERIC_PAT;
-+
-+	init_cache_modes(pat);
+ 	/*
+@@ -818,14 +817,6 @@ void mtrr_save_state(void)
+ 	smp_call_function_single(first_cpu, mtrr_save_fixed_ranges, NULL, 1);
  }
  
- #undef PAT
+-void set_mtrr_aps_delayed_init(void)
+-{
+-	if (!cache_generic)
+-		return;
+-
+-	mtrr_aps_delayed_init = true;
+-}
+-
+ /*
+  * Delayed MTRR initialization for all AP's
+  */
+@@ -839,11 +830,11 @@ void mtrr_aps_init(void)
+ 	 * by doing set_mtrr_aps_delayed_init(), prior to this point. If not,
+ 	 * then we are done.
+ 	 */
+-	if (!mtrr_aps_delayed_init)
++	if (!cache_aps_delayed_init)
+ 		return;
+ 
+ 	set_mtrr(~0U, 0, 0, 0);
+-	mtrr_aps_delayed_init = false;
++	cache_aps_delayed_init = false;
+ }
+ 
+ void mtrr_bp_restore(void)
+diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
+index f24227bc3220..ef7bce21cbe8 100644
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -58,6 +58,7 @@
+ #include <linux/overflow.h>
+ 
+ #include <asm/acpi.h>
++#include <asm/cacheinfo.h>
+ #include <asm/desc.h>
+ #include <asm/nmi.h>
+ #include <asm/irq.h>
+@@ -1428,7 +1429,7 @@ void __init native_smp_prepare_cpus(unsigned int max_cpus)
+ 
+ 	uv_system_init();
+ 
+-	set_mtrr_aps_delayed_init();
++	cache_aps_delayed_init = true;
+ 
+ 	smp_quirk_init_udelay();
+ 
+@@ -1439,7 +1440,7 @@ void __init native_smp_prepare_cpus(unsigned int max_cpus)
+ 
+ void arch_thaw_secondary_cpus_begin(void)
+ {
+-	set_mtrr_aps_delayed_init();
++	cache_aps_delayed_init = true;
+ }
+ 
+ void arch_thaw_secondary_cpus_end(void)
 -- 
 2.35.3
 
