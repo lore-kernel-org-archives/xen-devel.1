@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D8DC54EE9
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 19:52:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.403574.645717 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4712C54EE9
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Sep 2022 19:52:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.403576.645740 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWNYx-0005yh-Ih; Thu, 08 Sep 2022 19:51:47 +0000
+	id 1oWNZ4-0006aU-9K; Thu, 08 Sep 2022 19:51:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 403574.645717; Thu, 08 Sep 2022 19:51:47 +0000
+Received: by outflank-mailman (output) from mailman id 403576.645740; Thu, 08 Sep 2022 19:51:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oWNYx-0005ya-G0; Thu, 08 Sep 2022 19:51:47 +0000
-Received: by outflank-mailman (input) for mailman id 403574;
- Thu, 08 Sep 2022 19:51:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oWNZ4-0006aJ-62; Thu, 08 Sep 2022 19:51:54 +0000
+Received: by outflank-mailman (input) for mailman id 403576;
+ Thu, 08 Sep 2022 19:51:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J4jV=ZL=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1oWNYw-0005iM-QY
- for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 19:51:46 +0000
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [2607:f8b0:4864:20::731])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aafc992a-2faf-11ed-a31c-8f8a9ae3403f;
- Thu, 08 Sep 2022 21:51:46 +0200 (CEST)
-Received: by mail-qk1-x731.google.com with SMTP id b2so13748179qkh.12
- for <xen-devel@lists.xenproject.org>; Thu, 08 Sep 2022 12:51:45 -0700 (PDT)
+ id 1oWNZ2-0006Gh-9q
+ for xen-devel@lists.xenproject.org; Thu, 08 Sep 2022 19:51:52 +0000
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [2607:f8b0:4864:20::730])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ae4d52bb-2faf-11ed-9760-273f2230c3a0;
+ Thu, 08 Sep 2022 21:51:51 +0200 (CEST)
+Received: by mail-qk1-x730.google.com with SMTP id d15so1315375qka.9
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Sep 2022 12:51:51 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
  by smtp.gmail.com with ESMTPSA id
- bp33-20020a05620a45a100b006b8e049cf08sm17095814qkb.2.2022.09.08.12.51.43
+ bp33-20020a05620a45a100b006b8e049cf08sm17095814qkb.2.2022.09.08.12.51.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Sep 2022 12:51:43 -0700 (PDT)
+ Thu, 08 Sep 2022 12:51:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,166 +46,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aafc992a-2faf-11ed-a31c-8f8a9ae3403f
+X-Inumbo-ID: ae4d52bb-2faf-11ed-9760-273f2230c3a0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=0c9AKXalp2sKJ7cfJ+vPBAUxcJIApFm3DGF7p3Liepw=;
-        b=NmcUFcM+lVkVNUbqSzGu6sFBj8Aqd7hR7bofQeP9Ij67wwU6oR8m8t6MAAh2Wi146y
-         bJPfHVAH3QxkK9XKl3NERqQCa3GjxsAl+lijaROmdO4H7+Ei+1iBM6vsROt0BL0WRtXQ
-         AIRfsHPinOB5EsQroBIPJ01/Bf6Oi3hWEXqimrJgXx6ymF0s0+Bdgym2+wAzRsxZ98B2
-         HoyQhP9B2OkmKGh/PP+LGoBukh95uTo6OjyVAvwPP4x9VAs5beROKOZKdYsdt4sDM8An
-         LbFLzARycUrsV/YWStpeZbIwFBlDg7cpBRY5eE3rvzE1HfxCmAHyN6tRywhCEzmxEtLJ
-         Rwiw==
+        bh=BfIK73LhsgvoonHDGwM8ni7GnGln9k+nUNcjXEorNtg=;
+        b=gI/EPdKEfu4OL3Ad95ueCyGYqP0gnXMZU8zy29VWl4kvsy6kmPLM2mOpOdk0GKkW6c
+         uDzTYp2KBUVJUreOgiu28sVUEFbAcsd79c+W6kwIc52cel3ecQO3v6schFBn4C5sy7S1
+         XNrPsXjAkv2+j/scMaaV8MjoS02oToXzVEyjIRPdblgTCZbmMwrnEkvFWMvtjibqt271
+         /cOpugvA2e8EUI5os6iNGTxjD60YiR7aJGDf2EOMA9biJAL0oAG71EaV8Snm7TVVPgzn
+         HmGsdzdogTvlYDEghGME1HkuO/J/fIC9/296QF2d65ekCUjKe3jjtzTXcGvDXQ3i6qkH
+         7ZNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=0c9AKXalp2sKJ7cfJ+vPBAUxcJIApFm3DGF7p3Liepw=;
-        b=TLYGJ96p1CrMlmaR1Kd28UasElX+Bzjoa3pK+l5EGbLH8SgguxvxgfG8O3Isa6b+ZK
-         OAkkVjNkgWpdVN1tGx+PTWjJU54/mj2a8HLUFE1PEuNLGKKJ8H9myXemApyCeRDasgSW
-         RRkv23uoHywpfUTiVOYmrtOcZO06mh8X4JFu+CUDNPu17muRTa8rebqCvkdIl0LpvSa9
-         t5bWlBp4FCOnuullgC+hXe0vnVXsjVEFTb4moqIcSIfvJf4Pb3ogtWo4RhyS9Xcl6KoI
-         DcuVD5B73XoXVQ1SNA8gQv/BXh8AJzM37m1s23rHG383gaYsur5/caWsFuwFqNWuF63W
-         Jk8A==
-X-Gm-Message-State: ACgBeo16u+cY+nNkzqZqVLArF2a9WsLCpFEbjgBKqsCIn/W4aMPJOnnB
-	oTfQygU32MJRgs7a32+tpUEb4Gulmhk=
-X-Google-Smtp-Source: AA6agR6SpiKWtaXs0OLwuOa+Jy7q2Kcg3zyzl/nufIOhOBz8EMcZ4AM/eL8t77DDPGMHDGgtBe6sPA==
-X-Received: by 2002:a37:91c3:0:b0:6bc:5322:d49e with SMTP id t186-20020a3791c3000000b006bc5322d49emr7781474qkd.583.1662666704527;
-        Thu, 08 Sep 2022 12:51:44 -0700 (PDT)
+        bh=BfIK73LhsgvoonHDGwM8ni7GnGln9k+nUNcjXEorNtg=;
+        b=yEuSQ1AhePCHq/j82IUNpgmXTEMQWF5fVFXsxFVEzbt4ZPSfDBx5w7MngDxmZuCtHM
+         q2Qx3Ge8wFXZEQbJ8om1unareYHVB6D5Z/qTzJHjhPHU+liXx91m8hN1ev79+Rf5Ltoi
+         8fw1Lbh+7z9N892CaSRNRf5VrG9FbZQPBg0cjURBlkBiD74UMSuqYzNVL770xApkkEyB
+         szDKCamlIO6qFx03UyzKi0k7CmA+zo6JNmPLEbf0l2qupMgPRLZiRXBTPpTsdwJzQiRB
+         /xl2fB6mq+9lw+1pq94ibMxuO/E2jLUSicL3ppyuL9Ylr7z6nnTjmgfOsRsMpVigSLKY
+         iVaQ==
+X-Gm-Message-State: ACgBeo20YtEwqd1BH83sTQ3Pqm+k5YZb8qGSrCojHXHzTgcgaUq9SAqm
+	FNTbK0QQCJxMJQ2NHKHoQx8oeLl6yco=
+X-Google-Smtp-Source: AA6agR6+hC/F719d9liH745eJACRB2wYFcMVHq5BW4bw9QgoMTO+/SixWy1Hx/neKt9PnEqpKWfHeQ==
+X-Received: by 2002:a05:620a:2b98:b0:6bb:11fc:40b7 with SMTP id dz24-20020a05620a2b9800b006bb11fc40b7mr7978841qkb.467.1662666710145;
+        Thu, 08 Sep 2022 12:51:50 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Nick Rosbrook <rosbrookn@gmail.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 1/3] golang/xenlight: Extend KeyedUnion to support Arrays
-Date: Thu,  8 Sep 2022 15:51:11 -0400
-Message-Id: <20220908195113.218201-2-jandryuk@gmail.com>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 3/3] xl/libxl: Add OEM string support to smbios
+Date: Thu,  8 Sep 2022 15:51:13 -0400
+Message-Id: <20220908195113.218201-4-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220908195113.218201-1-jandryuk@gmail.com>
 References: <20220908195113.218201-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Generation for KeyedUnion types doesn't support Arrays.  The smbios
-support will place an smbios array inside the hvm KeyedUnion, and
-gentotypes doesn't generate buildable Go code.
+Add support for OEM strings in the SMBIOS type 11.
 
-Have KeyedUnion add an idl.Array check and issue the approriate
-xenlight_golang_array_to_C and xenlight_golang_array_from_C calls when
-needed.  This matches how it is done in xenlight_golang_define_to_C &
-xenlight_golang_define_from_C
-
-xenlight_golang_array_to_C and xenlight_golang_array_from_C need to be
-extended to set the cvarname and govarname as approriate for the
-KeyedUnion cases to match the surrounding code.
+hvmloader checks them sequentially, so hide the implementation detail.
+Allow multiple plain oem= items and assign the numeric values
+internally.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 ---
- tools/golang/xenlight/gengotypes.py | 41 ++++++++++++++++++-----------
- 1 file changed, 25 insertions(+), 16 deletions(-)
+v2:
+Move oem= description to be indented in docs
+Re-work oem= description
+Re-word oem string limit xl error message
+Replace OEM_{1,99) with just OEM and handle in libxl
 
-diff --git a/tools/golang/xenlight/gengotypes.py b/tools/golang/xenlight/gengotypes.py
-index ac1cf060dd..745a3cb466 100644
---- a/tools/golang/xenlight/gengotypes.py
-+++ b/tools/golang/xenlight/gengotypes.py
-@@ -374,6 +374,10 @@ def xenlight_golang_union_from_C(ty = None, union_name = '', struct_name = ''):
-         s += 'tmp := (*C.{0})(unsafe.Pointer(&xc.{1}[0]))\n'.format(typename,union_name)
+This change re-introduces the newline before ms_vm_genid.
+---
+ docs/man/xl.cfg.5.pod.in           |  4 ++++
+ tools/golang/xenlight/types.gen.go |  1 +
+ tools/libs/light/libxl_dom.c       | 15 +++++++++++++--
+ tools/libs/light/libxl_types.idl   |  1 +
+ tools/xl/xl_parse.c                | 12 ++++++++++++
+ 5 files changed, 31 insertions(+), 2 deletions(-)
+
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index fa78fba361..ddba1c3a05 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -2104,6 +2104,10 @@ Each B<SMBIOS_SPEC_STRING> is a C<KEY=VALUE> string from the following list:
  
-         for nf in f.type.fields:
-+            if isinstance(nf.type, idl.Array):
-+                s += xenlight_golang_array_from_C(nf,cvarname='tmp')
-+                continue
+ =item B<battery_device_name=STRING>
+ 
++=item B<oem=STRING>
 +
-             s += xenlight_golang_convert_from_C(nf,cvarname='tmp')
- 
-         s += 'return nil\n'
-@@ -414,7 +418,7 @@ def xenlight_golang_union_from_C(ty = None, union_name = '', struct_name = ''):
- 
-     return (s,extras)
- 
--def xenlight_golang_array_from_C(ty = None):
-+def xenlight_golang_array_from_C(ty = None, cvarname = 'xc'):
-     """
-     Convert C array to Go slice using the method
-     described here:
-@@ -431,9 +435,9 @@ def xenlight_golang_array_from_C(ty = None):
-     clenvar    = ty.type.lenvar.name
- 
-     s += 'x.{0} = nil\n'.format(goname)
--    s += 'if n := int(xc.{0}); n > 0 {{\n'.format(clenvar)
-+    s += 'if n := int({0}.{1}); n > 0 {{\n'.format(cvarname,clenvar)
-     s += '{0} := '.format(cslice)
--    s +='(*[1<<28]C.{0})(unsafe.Pointer(xc.{1}))[:n:n]\n'.format(ctypename, cname)
-+    s +='(*[1<<28]C.{0})(unsafe.Pointer({1}.{2}))[:n:n]\n'.format(ctypename, cvarname, cname)
-     s += 'x.{0} = make([]{1}, n)\n'.format(goname, gotypename)
-     s += 'for i, v := range {0} {{\n'.format(cslice)
- 
-@@ -577,6 +581,11 @@ def xenlight_golang_union_to_C(ty = None, union_name = '',
- 
-         s += 'var {0} C.{1}\n'.format(f.name,cgotype)
-         for uf in f.type.fields:
-+            if isinstance(uf.type, idl.Array):
-+                s += xenlight_golang_array_to_C(uf, cvarname=f.name,
-+                                                govarname="tmp")
-+                continue
++oem= can be specified up to 99 times.
 +
-             s += xenlight_golang_convert_to_C(uf,cvarname=f.name,
-                                               govarname='tmp')
+ =back
  
-@@ -594,7 +603,7 @@ def xenlight_golang_union_to_C(ty = None, union_name = '',
+ =item B<ms_vm_genid="OPTION">
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index e084c3540b..51076249b4 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -405,6 +405,7 @@ SmbiosTypeEnclosureSerialNumber SmbiosType = 14
+ SmbiosTypeEnclosureAssetTag SmbiosType = 15
+ SmbiosTypeBatteryManufacturer SmbiosType = 16
+ SmbiosTypeBatteryDeviceName SmbiosType = 17
++SmbiosTypeOem SmbiosType = 18
+ )
  
-     return s
+ type Smbios struct {
+diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
+index c3125ed310..0b01e09632 100644
+--- a/tools/libs/light/libxl_dom.c
++++ b/tools/libs/light/libxl_dom.c
+@@ -753,6 +753,7 @@ static int hvm_build_set_xs_values(libxl__gc *gc,
+                                    const libxl_domain_build_info *info)
+ {
+     char *path = NULL;
++    int num_oem = 1;
+     int ret = 0;
  
--def xenlight_golang_array_to_C(ty = None):
-+def xenlight_golang_array_to_C(ty = None, cvarname="xc", govarname="x"):
-     s = ''
+     if (dom->smbios_module.guest_addr_out) {
+@@ -773,8 +774,18 @@ static int hvm_build_set_xs_values(libxl__gc *gc,
  
-     gotypename = xenlight_golang_fmt_name(ty.type.elem_type.typename)
-@@ -606,27 +615,27 @@ def xenlight_golang_array_to_C(ty = None):
+     for (int i = 0; i < info->u.hvm.num_smbios; i++) {
+         char *p;
+-        path = GCSPRINTF("/local/domain/%d/"HVM_XS_BIOS_STRINGS"/%s", domid,
+-                   libxl_smbios_type_to_string(info->u.hvm.smbios[i].key));
++        if (info->u.hvm.smbios[i].key == LIBXL_SMBIOS_TYPE_OEM) {
++            if (num_oem > 99) {
++                ret = ERROR_INVAL;
++                goto err;
++            }
++            path = GCSPRINTF("/local/domain/%d/"HVM_XS_OEM_STRINGS, domid,
++                             num_oem);
++            num_oem++;
++        } else {
++            path = GCSPRINTF("/local/domain/%d/"HVM_XS_BIOS_STRINGS"/%s", domid,
++                       libxl_smbios_type_to_string(info->u.hvm.smbios[i].key));
++        }
  
-     is_enum = isinstance(ty.type.elem_type,idl.Enumeration)
-     if gotypename in go_builtin_types or is_enum:
--        s += 'if {0} := len(x.{1}); {2} > 0 {{\n'.format(golenvar,goname,golenvar)
--        s += 'xc.{0} = (*C.{1})(C.malloc(C.size_t({2}*{3})))\n'.format(cname,ctypename,
-+        s += 'if {0} := len({1}.{2}); {3} > 0 {{\n'.format(golenvar,govarname,goname,golenvar)
-+        s += '{0}.{1} = (*C.{2})(C.malloc(C.size_t({3}*{4})))\n'.format(cvarname,cname,ctypename,
-                                                                    golenvar,golenvar)
--        s += 'xc.{0} = C.int({1})\n'.format(clenvar,golenvar)
--        s += 'c{0} := (*[1<<28]C.{1})(unsafe.Pointer(xc.{2}))[:{3}:{4}]\n'.format(goname,
--                                                                      ctypename,cname,
-+        s += '{0}.{1} = C.int({2})\n'.format(cvarname,clenvar,golenvar)
-+        s += 'c{0} := (*[1<<28]C.{1})(unsafe.Pointer({2}.{3}))[:{4}:{5}]\n'.format(goname,
-+                                                                      ctypename,cvarname,cname,
-                                                                       golenvar,golenvar)
--        s += 'for i,v := range x.{0} {{\n'.format(goname)
-+        s += 'for i,v := range {0}.{1} {{\n'.format(govarname,goname)
-         s += 'c{0}[i] = C.{1}(v)\n'.format(goname,ctypename)
-         s += '}\n}\n'
+         /* Convert libxl_smbios_type string to xenstore path that hvmloader
+            will use, as defined by HVM_XS_*. That is convert the '_' to '-'. */
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index d04207748e..76651eea43 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -436,6 +436,7 @@ libxl_smbios_type = Enumeration("smbios_type", [
+     (15, "enclosure_asset_tag"),
+     (16, "battery_manufacturer"),
+     (17, "battery_device_name"),
++    (18, "oem"),
+     ])
  
-         return s
+ libxl_smbios = Struct("smbios", [
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 5413c36645..d0f8a14827 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1787,6 +1787,9 @@ void parse_config_data(const char *config_source,
+         switch (xlu_cfg_get_list(config, "smbios", &smbios, &num_smbios, 0))
+         {
+         case 0: /* Success */
++        {
++            unsigned int num_oem = 1;
++
+             b_info->u.hvm.num_smbios = num_smbios;
+             b_info->u.hvm.smbios = xcalloc(num_smbios, sizeof(libxl_smbios));
+             for (i = 0; i < num_smbios; i++) {
+@@ -1823,6 +1826,15 @@ void parse_config_data(const char *config_source,
+                 }
+                 free(option);
  
--    s += 'if {0} := len(x.{1}); {2} > 0 {{\n'.format(golenvar,goname,golenvar)
--    s += 'xc.{0} = (*C.{1})(C.malloc(C.ulong({2})*C.sizeof_{3}))\n'.format(cname,ctypename,
-+    s += 'if {0} := len({1}.{2}); {3} > 0 {{\n'.format(golenvar,govarname,goname,golenvar)
-+    s += '{0}.{1} = (*C.{2})(C.malloc(C.ulong({3})*C.sizeof_{4}))\n'.format(cvarname,cname,ctypename,
-                                                                    golenvar,ctypename)
--    s += 'xc.{0} = C.int({1})\n'.format(clenvar,golenvar)
--    s += 'c{0} := (*[1<<28]C.{1})(unsafe.Pointer(xc.{2}))[:{3}:{4}]\n'.format(goname,
--                                                                         ctypename,cname,
-+    s += '{0}.{1} = C.int({2})\n'.format(cvarname,clenvar,golenvar)
-+    s += 'c{0} := (*[1<<28]C.{1})(unsafe.Pointer({2}.{3}))[:{4}:{5}]\n'.format(goname,
-+                                                                         ctypename,cvarname,cname,
-                                                                          golenvar,golenvar)
--    s += 'for i,v := range x.{0} {{\n'.format(goname)
-+    s += 'for i,v := range {0}.{1} {{\n'.format(govarname,goname)
-     s += 'if err := v.toC(&c{0}[i]); err != nil {{\n'.format(goname)
-     s += 'return fmt.Errorf("converting field {0}: %v", err)\n'.format(goname)
-     s += '}\n}\n}\n'
++                if (v == LIBXL_SMBIOS_TYPE_OEM) {
++                    if (num_oem > 99) {
++                        fprintf(stderr,
++                                "xl: smbios limited to 99 oem strings\n");
++                        exit(-ERROR_FAIL);
++                    }
++                    num_oem++;
++                }
++
+                 b_info->u.hvm.smbios[i].key = v;
+                 b_info->u.hvm.smbios[i].value = value;
+             }
 -- 
 2.37.3
 
