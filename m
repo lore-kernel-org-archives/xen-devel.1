@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 473E4ECAAA1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Sep 2022 04:42:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.405411.647850 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53831ECAAD5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Sep 2022 05:54:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.405422.647884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oXbGP-0006gj-4w; Mon, 12 Sep 2022 04:41:41 +0000
+	id 1oXcOc-0007RQ-21; Mon, 12 Sep 2022 05:54:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 405411.647850; Mon, 12 Sep 2022 04:41:41 +0000
+Received: by outflank-mailman (output) from mailman id 405422.647884; Mon, 12 Sep 2022 05:54:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oXbGP-0006gc-2O; Mon, 12 Sep 2022 04:41:41 +0000
-Received: by outflank-mailman (input) for mailman id 405411;
- Mon, 12 Sep 2022 04:41:40 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1oXcOb-0007RJ-Un; Mon, 12 Sep 2022 05:54:13 +0000
+Received: by outflank-mailman (input) for mailman id 405422;
+ Mon, 12 Sep 2022 05:54:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oXbGO-0006gS-Bs; Mon, 12 Sep 2022 04:41:40 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oXbGO-0005Xc-5B; Mon, 12 Sep 2022 04:41:40 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oXbGN-0001ru-K0; Mon, 12 Sep 2022 04:41:39 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oXbGN-000271-JU; Mon, 12 Sep 2022 04:41:39 +0000
+ (envelope-from <SRS0=KFiP=ZP=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1oXcOa-00078t-4d
+ for xen-devel@lists.xenproject.org; Mon, 12 Sep 2022 05:54:12 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 52a17d56-325f-11ed-a31c-8f8a9ae3403f;
+ Mon, 12 Sep 2022 07:54:11 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B3E25227C6;
+ Mon, 12 Sep 2022 05:54:10 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6E504139BE;
+ Mon, 12 Sep 2022 05:54:10 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id HJuEGYLJHmMuawAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 12 Sep 2022 05:54:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,135 +53,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=AdcmEaSPJ+nkFvk6e6fdkq6kxeH4oLxRo795AmTYbNc=; b=L92HVJV6z8ESdlGr3vgvwt6Mth
-	b+dJ2QlKmuhDNPrZ07vCPfEKsKYwC/cGVYBRXj2TT78nF0+YsaqiENreZTQVAAR29EnyPqkE8iw5v
-	Sv9Eqy8aQr11p4Em8I7Mi8sy8ygJa++tWriNS6NIs2APuNXg1cCeqtIH0ozkzAAr47bw=;
+X-Inumbo-ID: 52a17d56-325f-11ed-a31c-8f8a9ae3403f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1662962050; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Ul1iFRnyaP+EjSwgFYHlOg+ezwj9WuwKzmQ6FnbRLy4=;
+	b=ObwtyCGROAgkmoE9giDM1R+ryoK6UHuHq00FAOvQdcf+/7Kcq3LYYFsMD3OgNI7pZxuh8h
+	cNs+ByOJlNBuI2UDlgaezEtW6bXLf0Xn+/YhDmNoLEpURH3UrT66OeeGAhoY1GJlecgOCR
+	RMG6MXrMqlGp88Hr5SVcSgVXuoA9LYs=
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-173143-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 2/2] xen/gnttab: reduce size of struct active_grant_entry
+Date: Mon, 12 Sep 2022 07:53:56 +0200
+Message-Id: <20220912055356.24064-3-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220912055356.24064-1-jgross@suse.com>
+References: <20220912055356.24064-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 173143: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-i386-libvirt:libvirt-build:fail:regression
-    ovmf:build-amd64-libvirt:libvirt-build:fail:regression
-X-Osstest-Versions-This:
-    ovmf=970e26294905d2d27369cf4041c6778105754f5e
-X-Osstest-Versions-That:
-    ovmf=444260d45ec2a84e8f8c192b3539a3cd5591d009
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 12 Sep 2022 04:41:39 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 173143 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/173143/
+The size of struct active_grant_entry for 64-bit builds is 40 or 48
+bytes today (with or without NDEBUG).
 
-Regressions :-(
+It can easily be reduced by 8 bytes by replacing the trans_domain
+pointer with the domid of the related domain. trans_domain is only ever
+used for transitive grants, which last known user has been the old
+Xenolinux branch of the Linux kernel.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-i386-libvirt            6 libvirt-build            fail REGR. vs. 172136
- build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 172136
+This reduction will result in less memory usage and (for production
+builds) in faster code, as indexing into the active_grant_entry array
+will be much easier with an entry having a power-of-2 size.
 
-version targeted for testing:
- ovmf                 970e26294905d2d27369cf4041c6778105754f5e
-baseline version:
- ovmf                 444260d45ec2a84e8f8c192b3539a3cd5591d009
+The performance loss when using transitive grants shouldn't really
+matter, given the probability that those aren't in use at all today.
 
-Last test of basis   172136  2022-08-04 06:43:42 Z   38 days
-Failing since        172151  2022-08-05 02:40:28 Z   38 days  293 attempts
-Testing same since   173112  2022-09-10 10:12:05 Z    1 days   12 attempts
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/common/grant_table.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  "Lee, Chun-Yi" <jlee@suse.com>
-  Abdul Lateef Attar <abdattar@amd.com>
-  Abner Chang <abner.chang@amd.com>
-  Annie Li <annie.li@oracle.com>
-  Ard Biesheuvel <ardb@kernel.org>
-  Bob Feng <bob.c.feng@intel.com>
-  Chasel Chiu <chasel.chiu@intel.com>
-  Chen, Xiao X <xiao.x.chen@intel.com>
-  Corvin Köhne <c.koehne@beckhoff.com>
-  Czajkowski, Maciej <maciej.czajkowski@intel.com>
-  Dimitrije Pavlov <Dimitrije.Pavlov@arm.com>
-  Dun Tan <dun.tan@intel.com>
-  Edward Pickup <edward.pickup@arm.com>
-  Feng, Bob C <bob.c.feng@intel.com>
-  Foster Nong <foster.nong@intel.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Gregx Yeh <gregx.yeh@intel.com>
-  Guo Dong <guo.dong@intel.com>
-  Igor Kulchytskyy <igork@ami.com>
-  James Lu <james.lu@intel.com>
-  Jeff Brasen <jbrasen@nvidia.com>
-  Jianyong Wu <jianyong.wu@arm.com>
-  Jiaxin Wu <jiaxin.wu@intel.com>
-  Jose Marinho <jose.marinho@arm.com>
-  KasimX Liu <kasimx.liu@intel.com>
-  Kavya <k.kavyax.sravanthi@intel.com>
-  Konstantin Aladyshev <aladyshev22@gmail.com>
-  Kun Qin <kuqin12@gmail.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Lee, Chun-Yi <joeyli.kernel@gmail.com>
-  Leif Lindholm <quic_llindhol@quicinc.com>
-  Liming Gao <gaoliming@byosoft.com.cn>
-  Liu, Zhiguang <Zhiguang.Liu@intel.com>
-  Maciej Czajkowski <maciej.czajkowski@intel.com>
-  Michael D Kinney <michael.d.kinney@intel.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Min M Xu <min.m.xu@intel.com>
-  Min Xu <min.m.xu@intel.com>
-  Oliver Steffen <osteffen@redhat.com>
-  Pierre Gondois <pierre.gondois@arm.com>
-  Pranav Madhu <pranav.madhu@arm.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <rebecca@bsdio.com>
-  Rebecca Cran <rebecca@quicinc.com>
-  Rohit Mathew <rohit.mathew@arm.com>
-  Sainadh Nagolu <sainadhn@ami.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Shengfengx Xue <shengfengx.xue@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  Wu, Jiaxin <jiaxin.wu@intel.com>
-  Xiao X Chen <xiao.x.chen@intel.com>
-  Yuan Yu <yuanyu@google.com>
-  Yuanhao Xie <yuanhao.xie@intel.com>
-  Zhiguang Liu <zhiguang.liu@intel.com>
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index fba329dcc2..8e4bbe3824 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -381,13 +381,13 @@ struct active_grant_entry {
+ })
+ 
+     domid_t       domid;  /* Domain being granted access.             */
++    domid_t       trans_domid; /* Domain granting access.             */
+     unsigned int  start:15; /* For sub-page grants, the start offset
+                                in the page.                           */
+     bool          is_sub_page:1; /* True if this is a sub-page grant. */
+     unsigned int  length:16; /* For sub-page grants, the length of the
+                                 grant.                                */
+     grant_ref_t   trans_gref;
+-    struct domain *trans_domain;
+     mfn_t         mfn;    /* Machine frame being granted.             */
+ #ifndef NDEBUG
+     gfn_t         gfn;    /* Guest's idea of the frame being granted. */
+@@ -1095,7 +1095,7 @@ map_grant_ref(
+             act->start = 0;
+             act->length = PAGE_SIZE;
+             act->is_sub_page = false;
+-            act->trans_domain = rd;
++            act->trans_domid = rd->domain_id;
+             act->trans_gref = ref;
+         }
+     }
+@@ -2494,7 +2494,8 @@ release_grant_for_copy(
+     else
+     {
+         status = &status_entry(rgt, gref);
+-        td = act->trans_domain;
++        td = (act->trans_domid == rd->domain_id)
++             ? rd : domid_to_domain(act->trans_domid);
+         trans_gref = act->trans_gref;
+     }
+ 
+@@ -2657,7 +2658,7 @@ acquire_grant_for_copy(
+                           !mfn_eq(act->mfn, grant_mfn) ||
+                           act->start != trans_page_off ||
+                           act->length != trans_length ||
+-                          act->trans_domain != td ||
++                          act->trans_domid != td->domain_id ||
+                           act->trans_gref != trans_gref ||
+                           !act->is_sub_page)) )
+         {
+@@ -2676,7 +2677,7 @@ acquire_grant_for_copy(
+             act->domid = ldom;
+             act->start = trans_page_off;
+             act->length = trans_length;
+-            act->trans_domain = td;
++            act->trans_domid = td->domain_id;
+             act->trans_gref = trans_gref;
+             act->mfn = grant_mfn;
+             act_set_gfn(act, INVALID_GFN);
+@@ -2738,7 +2739,7 @@ acquire_grant_for_copy(
+             act->is_sub_page = is_sub_page;
+             act->start = trans_page_off;
+             act->length = trans_length;
+-            act->trans_domain = td;
++            act->trans_domid = td->domain_id;
+             act->trans_gref = trans_gref;
+             act->mfn = grant_mfn;
+         }
+-- 
+2.35.3
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          fail    
- build-i386-libvirt                                           fail    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 2470 lines long.)
 
