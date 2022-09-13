@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DA4C6FA89
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Sep 2022 09:33:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.406231.648615 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88C8C6FA8A
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Sep 2022 09:33:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.406233.648638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oY2Hw-00067I-Ig; Tue, 13 Sep 2022 09:33:04 +0000
+	id 1oY2I6-0006gu-43; Tue, 13 Sep 2022 09:33:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 406231.648615; Tue, 13 Sep 2022 09:33:04 +0000
+Received: by outflank-mailman (output) from mailman id 406233.648638; Tue, 13 Sep 2022 09:33:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oY2Hw-00067B-Fb; Tue, 13 Sep 2022 09:33:04 +0000
-Received: by outflank-mailman (input) for mailman id 406231;
- Tue, 13 Sep 2022 09:33:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oY2I6-0006gl-0m; Tue, 13 Sep 2022 09:33:14 +0000
+Received: by outflank-mailman (input) for mailman id 406233;
+ Tue, 13 Sep 2022 09:33:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=fQ52=ZQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oY2Hu-000675-Mx
- for xen-devel@lists.xenproject.org; Tue, 13 Sep 2022 09:33:02 +0000
+ id 1oY2I4-0006MX-KT
+ for xen-devel@lists.xenproject.org; Tue, 13 Sep 2022 09:33:12 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1dcf1ed-3346-11ed-9761-273f2230c3a0;
- Tue, 13 Sep 2022 11:30:24 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 15b43bcc-3347-11ed-a31c-8f8a9ae3403f;
+ Tue, 13 Sep 2022 11:33:11 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 83D7434A56;
- Tue, 13 Sep 2022 09:33:00 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id BC60434A56;
+ Tue, 13 Sep 2022 09:33:11 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3E3A013AB5;
- Tue, 13 Sep 2022 09:33:00 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8515613AB5;
+ Tue, 13 Sep 2022 09:33:11 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id FXfEDUxOIGNzMwAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 13 Sep 2022 09:33:00 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id sKg1H1dOIGOQMwAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 13 Sep 2022 09:33:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,14 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1dcf1ed-3346-11ed-9761-273f2230c3a0
+X-Inumbo-ID: 15b43bcc-3347-11ed-a31c-8f8a9ae3403f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1663061580; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=/5pLYXZNjCGOsvALaYTumY4Dq6WSSAQIzCShFqFyEVM=;
-	b=BVrOf7dx/BtsZ92d85fLDOvNFv7oqqdYA+SV8Rw8UtVwplG8/CedJ2yiG4qKc7bwUmCp05
-	tRP4WVTK9BFnE4zM/jy59OCBlXP9vdQEWJt4+G5rItlUmwasCSfKjM+q3oeyRR1zXZdlKJ
-	M5hLnHx99ab9CoZvjcX+IyPlFABEmiw=
+	t=1663061591; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fCT/cuoPBGBD3g7UNXsZEuzKp2LwjEpE8HR7l0u5x5Q=;
+	b=XWLZ7yzP442dEmPKWuPDa4r7Sf53z1Z5qEcTw1vtk49OHlGciYylr4mRFLj7Lk4ae6NBD0
+	HqFerIkB3T/PfTs9n9i1wYS+P+D/6I+Ks9G/2AXmb8lOaqEGo7nJUBGxQkBHfsOq8sKByx
+	gAcj5M8uzlCXO+h5S/XPfT5myj98O6Y=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -70,27 +72,102 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 0/2] xen/gnttab: reduce size of struct active_grant_entry
-Date: Tue, 13 Sep 2022 11:32:54 +0200
-Message-Id: <20220913093256.22880-1-jgross@suse.com>
+Subject: [PATCH v2 2/2] xen/gnttab: reduce size of struct active_grant_entry
+Date: Tue, 13 Sep 2022 11:32:56 +0200
+Message-Id: <20220913093256.22880-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220913093256.22880-1-jgross@suse.com>
+References: <20220913093256.22880-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-While looking at the grant table code I thought it should be possible
-to have a smaller struct active_grant_entry. This approach should only
-hit transitive grants with some negative performance effect, "normal"
-grants should be not affected.
+The size of struct active_grant_entry for 64-bit builds is 40 or 48
+bytes today (with or without NDEBUG).
 
-Juergen Gross (2):
-  xen: add knownalive_domain_from_domid() helper
-  xen/gnttab: reduce size of struct active_grant_entry
+It can easily be reduced by 8 bytes by replacing the trans_domain
+pointer with the domid of the related domain. trans_domain is only ever
+used for transitive grants, which doesn't have any known users.
 
- xen/common/domain.c      | 53 +++++++++++++++++++++++++---------------
- xen/common/grant_table.c | 13 +++++-----
- xen/include/xen/sched.h  |  4 +++
- 3 files changed, 44 insertions(+), 26 deletions(-)
+This reduction will result in less memory usage and (for production
+builds) in faster code, as indexing into the active_grant_entry array
+will be much easier with an entry having a power-of-2 size.
 
+The performance loss when using transitive grants shouldn't really
+matter, given the probability that those aren't in use at all.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- rename trans_domid to src_domid (Jan Beulich)
+---
+ xen/common/grant_table.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index fba329dcc2..59342df3b7 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -381,13 +381,13 @@ struct active_grant_entry {
+ })
+ 
+     domid_t       domid;  /* Domain being granted access.             */
++    domid_t       src_domid; /* Domain granting access.               */
+     unsigned int  start:15; /* For sub-page grants, the start offset
+                                in the page.                           */
+     bool          is_sub_page:1; /* True if this is a sub-page grant. */
+     unsigned int  length:16; /* For sub-page grants, the length of the
+                                 grant.                                */
+     grant_ref_t   trans_gref;
+-    struct domain *trans_domain;
+     mfn_t         mfn;    /* Machine frame being granted.             */
+ #ifndef NDEBUG
+     gfn_t         gfn;    /* Guest's idea of the frame being granted. */
+@@ -1095,7 +1095,7 @@ map_grant_ref(
+             act->start = 0;
+             act->length = PAGE_SIZE;
+             act->is_sub_page = false;
+-            act->trans_domain = rd;
++            act->src_domid = rd->domain_id;
+             act->trans_gref = ref;
+         }
+     }
+@@ -2494,7 +2494,8 @@ release_grant_for_copy(
+     else
+     {
+         status = &status_entry(rgt, gref);
+-        td = act->trans_domain;
++        td = (act->src_domid == rd->domain_id)
++             ? rd : knownalive_domain_from_domid(act->src_domid);
+         trans_gref = act->trans_gref;
+     }
+ 
+@@ -2657,7 +2658,7 @@ acquire_grant_for_copy(
+                           !mfn_eq(act->mfn, grant_mfn) ||
+                           act->start != trans_page_off ||
+                           act->length != trans_length ||
+-                          act->trans_domain != td ||
++                          act->src_domid != td->domain_id ||
+                           act->trans_gref != trans_gref ||
+                           !act->is_sub_page)) )
+         {
+@@ -2676,7 +2677,7 @@ acquire_grant_for_copy(
+             act->domid = ldom;
+             act->start = trans_page_off;
+             act->length = trans_length;
+-            act->trans_domain = td;
++            act->src_domid = td->domain_id;
+             act->trans_gref = trans_gref;
+             act->mfn = grant_mfn;
+             act_set_gfn(act, INVALID_GFN);
+@@ -2738,7 +2739,7 @@ acquire_grant_for_copy(
+             act->is_sub_page = is_sub_page;
+             act->start = trans_page_off;
+             act->length = trans_length;
+-            act->trans_domain = td;
++            act->src_domid = td->domain_id;
+             act->trans_gref = trans_gref;
+             act->mfn = grant_mfn;
+         }
 -- 
 2.35.3
 
