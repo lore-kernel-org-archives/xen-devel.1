@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C7AC6FA82
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Sep 2022 20:41:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.407668.650247 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96440C32771
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Sep 2022 21:19:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.407684.650258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oYvfg-0005mX-Gf; Thu, 15 Sep 2022 20:41:16 +0000
+	id 1oYwGQ-0001q4-IC; Thu, 15 Sep 2022 21:19:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 407668.650247; Thu, 15 Sep 2022 20:41:16 +0000
+Received: by outflank-mailman (output) from mailman id 407684.650258; Thu, 15 Sep 2022 21:19:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oYvfg-0005mQ-Cu; Thu, 15 Sep 2022 20:41:16 +0000
-Received: by outflank-mailman (input) for mailman id 407668;
- Thu, 15 Sep 2022 20:41:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HaRG=ZS=citrix.com=prvs=250bec243=jennifer.herbert@srs-se1.protection.inumbo.net>)
- id 1oYvff-0005Wf-2j
- for xen-devel@lists.xenproject.org; Thu, 15 Sep 2022 20:41:15 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bc7e9695-3536-11ed-9761-273f2230c3a0;
- Thu, 15 Sep 2022 22:41:13 +0200 (CEST)
+	id 1oYwGQ-0001px-Ep; Thu, 15 Sep 2022 21:19:14 +0000
+Received: by outflank-mailman (input) for mailman id 407684;
+ Thu, 15 Sep 2022 21:19:13 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oYwGP-0001pm-K1; Thu, 15 Sep 2022 21:19:13 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oYwGP-0006ry-Iz; Thu, 15 Sep 2022 21:19:13 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oYwGP-0000wQ-6U; Thu, 15 Sep 2022 21:19:13 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1oYwGP-0002Ne-65; Thu, 15 Sep 2022 21:19:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,224 +44,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc7e9695-3536-11ed-9761-273f2230c3a0
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1663274473;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=a81udNHz/IlPqVKBLEW5GyDm0ULIJu6/GbwCobxYlU8=;
-  b=CeSkpd05aSPdG6oYylmBbfr/4TSiUcO/LMiW8StM2AUt5NNXmhINg8U5
-   k+bMMiJwUbI3aP6jyjt/QfX0MbeN1eUeMEUIVbuqIsmFvhv1qTlyHMaVS
-   QGn9EarOAlFbi8ffLWEmZtsHN4tiXHNcPxjPvGdSRRD7yTCDsiLemwmZU
-   k=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 2.7
-X-MesageID: 83155908
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:XQR+jaIYO6UYFy/KFE+RvJUlxSXFcZb7ZxGr2PjKsXjdYENS0DYCx
- zNJUWzQPKqOMWukLt4lPojl8klXsZHcyt9qSgdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokf0/0vraP65xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOd8iYNz6TSDK1rlV
- eja/ouOYzdJ5xYuajhOs/Pa9Us01BjPkGhwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
- 44vG5ngows1Vz90Yj+Uuu6Tnn8iG9Y+DiDX4pZiYICwgwAqm8AH+v1T2Mzwy6tgo27hc9hZk
- L2hvHErIOsjFvWkdO81C3G0H8ziVEHvFXCuzXWX6KSuI0P6n3TEzq5IMWMfP6Ah/cFvGz1R2
- OEhDD0KV0XW7w626OrTpuhEg80iKI/gPZ8Fu2EmxjbcZRokacmdGeOQv4YehWpuwJAVdRrdT
- 5NxhT5HbhnGZRxBN01RCJ8kluqymlH0ciFCqULTrq0yi4TW5FwqieWwYYKFEjCMbe5snBep5
- X/bxUP4AkBELd3c8haI1X3504cjmgukAdlPRdVU7MVCkFCVg2AeFhASfV+6uuWizF6zXcpFL
- E4Z8TZoqrI9nGS0SvHtUhv+p2SL1jYeUddNF+wx6CmW17HZpQ2eAwA5oiVpMYJ88pVsHHpzi
- wHPz4iB6SFTXKO9RCm7y5W9rx6LPg8NNzMdSDI9aQYC2oy2yG0stS4jXuqPAYbs0IOuQWyqm
- 23UxMQtr+5N1JBWjs1X6XiC2mvx/caRE2bZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/5nzvZ5pyBWG3TZS82AJrlxBAUKLc4FK+y1ZL0x0KMsCcjKBS
- BaN51gLusECZyr1Mf8fj2eN5yMClPCIKDgYfqqMMoomjmZZLmdrAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMEv2/Z9PlWPuL9rxJJdxmUjSM0uPGs2gp/lmuJLCDEOopUAtbgbfN71psfveyOgXm
- v4GX/a3J9xkeLWWSkHqHUQ7dzjm8VBT6UjKlvFq
-IronPort-HdrOrdr: A9a23:GEbk3qhJsuFPLZ+UWUFLbyqM5XBQXuIji2hC6mlwRA09TySZ//
- rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
-X-IronPort-AV: E=Sophos;i="5.93,319,1654574400"; 
-   d="scan'208";a="83155908"
-From: Jennifer Herbert <jennifer.herbert@citrix.com>
-To: <jbeulich@suse.com>, <andrew.cooper3@citrix.com>, <wl@xen.org>,
-	<roger.pau@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Jennifer Herbert
-	<jennifer.herbert@citrix.com>
-Subject: [PATCH 1/2] acpi: Make TPM version configurable.
-Date: Thu, 15 Sep 2022 20:40:28 +0000
-Message-ID: <20220915204029.1227112-1-jennifer.herbert@citrix.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <0548fa97-5384-94e4-7329-b019e60555f4@citrix.com>
-References: <0548fa97-5384-94e4-7329-b019e60555f4@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=LD+NOl6qXC/z+6sOpJxQZSN5asOCzQ7V/Pecow97fGs=; b=jY6kggAcr0AgOqZ3RaG4mmYALI
+	2gdnk5Xb3T+ceugbImqr46Fti0OtD0Q0A2ZDT63xxoNEukoYhi7J+Bfu7B73+VXzV4Hh2K/xWBO9D
+	UKxJhHPuWdlkPzrqaLgOh+IAgG+ssCQZJviXflaARPrMAvOjdpPujnmUjIbXYFxNx4/E=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-173218-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+MIME-Version: 1.0
+Subject: [ovmf test] 173218: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-i386-libvirt:libvirt-build:fail:regression
+    ovmf:build-amd64-libvirt:libvirt-build:fail:regression
+X-Osstest-Versions-This:
+    ovmf=3184e44df1042ae41c1cd8d2acaa47d7d30cd07c
+X-Osstest-Versions-That:
+    ovmf=444260d45ec2a84e8f8c192b3539a3cd5591d009
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 15 Sep 2022 21:19:13 +0000
 
-This patch makes the TPM version, for which the ACPI libary probes, configurable.
-If acpi_config.tpm_verison is set to 1, it indicates that 1.2 (TCPA) should be probed.
-I have also added to hvmloader an option to allow setting this new config, which can
-be triggered by setting the platform/tpm_verion xenstore key.
+flight 173218 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/173218/
 
-Signed-off-by: Jennifer Herbert <jennifer.herbert@citrix.com>
----
- docs/misc/xenstore-paths.pandoc |  8 ++++
- tools/firmware/hvmloader/util.c | 13 ++++++-
- tools/libacpi/build.c           | 68 ++++++++++++++++++---------------
- tools/libacpi/libacpi.h         |  4 +-
- 4 files changed, 59 insertions(+), 34 deletions(-)
+Regressions :-(
 
-diff --git a/docs/misc/xenstore-paths.pandoc b/docs/misc/xenstore-paths.pandoc
-index 5cd5c8a3b9..7270b46721 100644
---- a/docs/misc/xenstore-paths.pandoc
-+++ b/docs/misc/xenstore-paths.pandoc
-@@ -269,6 +269,14 @@ at the guest physical address in HVM_PARAM_VM_GENERATION_ID_ADDR.
- See Microsoft's "Virtual Machine Generation ID" specification for the
- circumstances where the generation ID needs to be changed.
- 
-+
-+#### ~/platform/tpm_version = INTEGER [HVM,INTERNAL]
-+
-+The TPM version to be probed for.
-+
-+A value of 1 indicates to probe for TPM 1.2. If unset, or an
-+invalid version, then no TPM is probed.
-+
- ### Frontend device paths
- 
- Paravirtual device frontends are generally specified by their own
-diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
-index 581b35e5cf..87bc2d677f 100644
---- a/tools/firmware/hvmloader/util.c
-+++ b/tools/firmware/hvmloader/util.c
-@@ -994,13 +994,22 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
-     if ( !strncmp(xenstore_read("platform/acpi_laptop_slate", "0"), "1", 1)  )
-         config->table_flags |= ACPI_HAS_SSDT_LAPTOP_SLATE;
- 
--    config->table_flags |= (ACPI_HAS_TCPA | ACPI_HAS_IOAPIC |
-+    config->table_flags |= (ACPI_HAS_TPM | ACPI_HAS_IOAPIC |
-                             ACPI_HAS_WAET | ACPI_HAS_PMTIMER |
-                             ACPI_HAS_BUTTONS | ACPI_HAS_VGA |
-                             ACPI_HAS_8042 | ACPI_HAS_CMOS_RTC);
-     config->acpi_revision = 4;
- 
--    config->tis_hdr = (uint16_t *)ACPI_TIS_HDR_ADDRESS;
-+    s = xenstore_read("platform/tpm_version", "0");
-+    config->tpm_version = strtoll(s, NULL, 0);
-+
-+    switch( config->tpm_version )
-+    {
-+    case 1:
-+        config->table_flags |= ACPI_HAS_TPM;
-+        config->tis_hdr = (uint16_t *)ACPI_TIS_HDR_ADDRESS;
-+        break;
-+    }
- 
-     config->numa.nr_vmemranges = nr_vmemranges;
-     config->numa.nr_vnodes = nr_vnodes;
-diff --git a/tools/libacpi/build.c b/tools/libacpi/build.c
-index fe2db66a62..d313ccd8cf 100644
---- a/tools/libacpi/build.c
-+++ b/tools/libacpi/build.c
-@@ -409,38 +409,46 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
-         memcpy(ssdt, ssdt_laptop_slate, sizeof(ssdt_laptop_slate));
-         table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, ssdt);
-     }
--
--    /* TPM TCPA and SSDT. */
--    if ( (config->table_flags & ACPI_HAS_TCPA) &&
--         (config->tis_hdr[0] != 0 && config->tis_hdr[0] != 0xffff) &&
--         (config->tis_hdr[1] != 0 && config->tis_hdr[1] != 0xffff) )
-+    /* TPM and SSDT. */
-+    if (config->table_flags & ACPI_HAS_TPM)
-     {
--        ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm), 16);
--        if (!ssdt) return -1;
--        memcpy(ssdt, ssdt_tpm, sizeof(ssdt_tpm));
--        table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, ssdt);
--
--        tcpa = ctxt->mem_ops.alloc(ctxt, sizeof(struct acpi_20_tcpa), 16);
--        if (!tcpa) return -1;
--        memset(tcpa, 0, sizeof(*tcpa));
--        table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, tcpa);
--
--        tcpa->header.signature = ACPI_2_0_TCPA_SIGNATURE;
--        tcpa->header.length    = sizeof(*tcpa);
--        tcpa->header.revision  = ACPI_2_0_TCPA_REVISION;
--        fixed_strcpy(tcpa->header.oem_id, ACPI_OEM_ID);
--        fixed_strcpy(tcpa->header.oem_table_id, ACPI_OEM_TABLE_ID);
--        tcpa->header.oem_revision = ACPI_OEM_REVISION;
--        tcpa->header.creator_id   = ACPI_CREATOR_ID;
--        tcpa->header.creator_revision = ACPI_CREATOR_REVISION;
--        if ( (lasa = ctxt->mem_ops.alloc(ctxt, ACPI_2_0_TCPA_LAML_SIZE, 16)) != NULL )
-+        switch (config->tpm_version)
-         {
--            tcpa->lasa = ctxt->mem_ops.v2p(ctxt, lasa);
--            tcpa->laml = ACPI_2_0_TCPA_LAML_SIZE;
--            memset(lasa, 0, tcpa->laml);
--            set_checksum(tcpa,
--                         offsetof(struct acpi_header, checksum),
--                         tcpa->header.length);
-+        case 1:
-+            if (!config->tis_hdr ||
-+                config->tis_hdr[0] == 0 || config->tis_hdr[0] == 0xffff ||
-+                config->tis_hdr[1] == 0 || config->tis_hdr[1] == 0xffff)
-+                break;
-+
-+            ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm), 16);
-+            if (!ssdt) return -1;
-+            memcpy(ssdt, ssdt_tpm, sizeof(ssdt_tpm));
-+            table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, ssdt);
-+
-+            tcpa = ctxt->mem_ops.alloc(ctxt, sizeof(struct acpi_20_tcpa), 16);
-+            if (!tcpa) return -1;
-+            memset(tcpa, 0, sizeof(*tcpa));
-+            table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, tcpa);
-+
-+            tcpa->header.signature = ACPI_2_0_TCPA_SIGNATURE;
-+            tcpa->header.length    = sizeof(*tcpa);
-+            tcpa->header.revision  = ACPI_2_0_TCPA_REVISION;
-+            fixed_strcpy(tcpa->header.oem_id, ACPI_OEM_ID);
-+            fixed_strcpy(tcpa->header.oem_table_id, ACPI_OEM_TABLE_ID);
-+            tcpa->header.oem_revision = ACPI_OEM_REVISION;
-+            tcpa->header.creator_id   = ACPI_CREATOR_ID;
-+            tcpa->header.creator_revision = ACPI_CREATOR_REVISION;
-+
-+            if ( (lasa = ctxt->mem_ops.alloc(ctxt, ACPI_2_0_TCPA_LAML_SIZE, 16)) != NULL )
-+            {
-+                tcpa->lasa = ctxt->mem_ops.v2p(ctxt, lasa);
-+                tcpa->laml = ACPI_2_0_TCPA_LAML_SIZE;
-+                memset(lasa, 0, tcpa->laml);
-+                set_checksum(tcpa,
-+                             offsetof(struct acpi_header, checksum),
-+                             tcpa->header.length);
-+            }
-+            break;
-         }
-     }
- 
-diff --git a/tools/libacpi/libacpi.h b/tools/libacpi/libacpi.h
-index a2efd23b0b..9143616130 100644
---- a/tools/libacpi/libacpi.h
-+++ b/tools/libacpi/libacpi.h
-@@ -27,7 +27,7 @@
- #define ACPI_HAS_SSDT_PM           (1<<4)
- #define ACPI_HAS_SSDT_S3           (1<<5)
- #define ACPI_HAS_SSDT_S4           (1<<6)
--#define ACPI_HAS_TCPA              (1<<7)
-+#define ACPI_HAS_TPM               (1<<7)
- #define ACPI_HAS_IOAPIC            (1<<8)
- #define ACPI_HAS_WAET              (1<<9)
- #define ACPI_HAS_PMTIMER           (1<<10)
-@@ -78,8 +78,8 @@ struct acpi_config {
-     struct acpi_numa numa;
-     const struct hvm_info_table *hvminfo;
- 
-+    uint8_t tpm_version;
-     const uint16_t *tis_hdr;
--
-     /*
-      * Address where acpi_info should be placed.
-      * This must match the OperationRegion(BIOS, SystemMemory, ....)
--- 
-2.31.1
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386-libvirt            6 libvirt-build            fail REGR. vs. 172136
+ build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 172136
 
+version targeted for testing:
+ ovmf                 3184e44df1042ae41c1cd8d2acaa47d7d30cd07c
+baseline version:
+ ovmf                 444260d45ec2a84e8f8c192b3539a3cd5591d009
+
+Last test of basis   172136  2022-08-04 06:43:42 Z   42 days
+Failing since        172151  2022-08-05 02:40:28 Z   41 days  315 attempts
+Testing same since   173218  2022-09-15 19:13:25 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  "Lee, Chun-Yi" <jlee@suse.com>
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abner Chang <abner.chang@amd.com>
+  Annie Li <annie.li@oracle.com>
+  Ard Biesheuvel <ardb@kernel.org>
+  Baraneedharan Anbazhagan <anbazhagan@hp.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Bret Barkelew <bret.barkelew@microsoft.com>
+  Chasel Chiu <chasel.chiu@intel.com>
+  Chen, Xiao X <xiao.x.chen@intel.com>
+  Corvin Köhne <c.koehne@beckhoff.com>
+  Czajkowski, Maciej <maciej.czajkowski@intel.com>
+  Dimitrije Pavlov <Dimitrije.Pavlov@arm.com>
+  Dun Tan <dun.tan@intel.com>
+  Edward Pickup <edward.pickup@arm.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Foster Nong <foster.nong@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Gregx Yeh <gregx.yeh@intel.com>
+  Guo Dong <guo.dong@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Igor Kulchytskyy <igork@ami.com>
+  James Lu <james.lu@intel.com>
+  Jeff Brasen <jbrasen@nvidia.com>
+  Jianyong Wu <jianyong.wu@arm.com>
+  Jiaxin Wu <jiaxin.wu@intel.com>
+  Jose Marinho <jose.marinho@arm.com>
+  KasimX Liu <kasimx.liu@intel.com>
+  Kavya <k.kavyax.sravanthi@intel.com>
+  Konstantin Aladyshev <aladyshev22@gmail.com>
+  Kun Qin <kuqin12@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lee, Chun-Yi <joeyli.kernel@gmail.com>
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu, Zhiguang <Zhiguang.Liu@intel.com>
+  Maciej Czajkowski <maciej.czajkowski@intel.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Min M Xu <min.m.xu@intel.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Pierre Gondois <pierre.gondois@arm.com>
+  Pranav Madhu <pranav.madhu@arm.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <rebecca@bsdio.com>
+  Rebecca Cran <rebecca@quicinc.com>
+  Rohit Mathew <rohit.mathew@arm.com>
+  Sainadh Nagolu <sainadhn@ami.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Shengfengx Xue <shengfengx.xue@intel.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  Wu, Jiaxin <jiaxin.wu@intel.com>
+  Xiao X Chen <xiao.x.chen@intel.com>
+  Yuan Yu <yuanyu@google.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Zhiguang Liu <zhiguang.liu@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          fail    
+ build-i386-libvirt                                           fail    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 2616 lines long.)
 
