@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 597FDC6FA8B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A31C6FA82
 	for <xen-devel@archiver.kernel.org>; Sat, 17 Sep 2022 02:52:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.408209.651026 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.408206.650998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oZNw0-0005gy-H5; Sat, 17 Sep 2022 02:52:00 +0000
+	id 1oZNvx-0004un-3S; Sat, 17 Sep 2022 02:51:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 408209.651026; Sat, 17 Sep 2022 02:52:00 +0000
+Received: by outflank-mailman (output) from mailman id 408206.650998; Sat, 17 Sep 2022 02:51:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oZNw0-0005fp-Bp; Sat, 17 Sep 2022 02:52:00 +0000
-Received: by outflank-mailman (input) for mailman id 408209;
- Sat, 17 Sep 2022 02:51:59 +0000
+	id 1oZNvw-0004ub-Vp; Sat, 17 Sep 2022 02:51:56 +0000
+Received: by outflank-mailman (input) for mailman id 408206;
+ Sat, 17 Sep 2022 02:51:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=os+o=ZU=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1oZNvz-0002wS-3N
- for xen-devel@lists.xenproject.org; Sat, 17 Sep 2022 02:51:59 +0000
+ id 1oZNvv-0002wS-6Z
+ for xen-devel@lists.xenproject.org; Sat, 17 Sep 2022 02:51:55 +0000
 Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
  [66.111.4.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b20af080-3633-11ed-9761-273f2230c3a0;
- Sat, 17 Sep 2022 04:51:58 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 7F4B15C00AC;
- Fri, 16 Sep 2022 22:51:57 -0400 (EDT)
+ id af96ef2a-3633-11ed-9761-273f2230c3a0;
+ Sat, 17 Sep 2022 04:51:54 +0200 (CEST)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 632395C00A9;
+ Fri, 16 Sep 2022 22:51:53 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Fri, 16 Sep 2022 22:51:57 -0400
+ by compute2.internal (MEProxy); Fri, 16 Sep 2022 22:51:53 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 16 Sep 2022 22:51:56 -0400 (EDT)
+ 16 Sep 2022 22:51:51 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b20af080-3633-11ed-9761-273f2230c3a0
+X-Inumbo-ID: af96ef2a-3633-11ed-9761-273f2230c3a0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1663383117; x=1663469517; bh=aUXbRcRCV6
-	JyIMsNvZBMmFwwnT4bncaXUatuQgqKC8I=; b=hrwTSlAmBEurETa0SdKNsHFVhp
-	YYdutLUlbvW7V6+e4i8fma2rBXItvH784MUMfvUXSY6JiXg9I+zha3ETpPFif6Q2
-	YMLBepSWhPF27X73KmxU8c67OFhTDMq/WZNcnuhJMcms8L9KYdk/9TW1w75fv2hN
-	L4doZd2y2+vyOj450rPeTsZBXC8RQvrR7CllwQQn/+oCODPkZWfmtnqRyFBGbRHy
-	IrQzAPQwCHTP2yxyGX4crRtKTXLhijGvQuNqu8T6lHp5Pg5zfuXdc1U1MOBkMku1
-	j91PbKZGX0Ir6Jt8Cx18WNRasAP6+a9rH/MZfj5SX7w7dcbspfaa7qGlMVrA==
+	:subject:to:to; s=fm2; t=1663383113; x=1663469513; bh=NiyNOXiNwr
+	iNwBPnQLIEDaYmk/WxMl7jUGwTLDkTZnY=; b=l5qqbsUMOsoYp45rOMwIcZ9cy8
+	YKw4H30YbIlatKG9UWO3DbwmHg2bHbzSkvwkDXcvdDVUPvAgWXFf4JRHIe969fvn
+	h5NnMSqybsxnqZGr+N9Csmvzrs+uccbDLT7nN9rMb1ZQtmhz5ewuFKvFHHrfvnUv
+	4A6WYilJko5NEMruCVW3iYOJQjuQy4bloatHwQOMqAf6+zZh0aadIA1gNa350Ihf
+	Vg4h49jekggAhsQpPqevFSyeYhFOuprA/fOy0B7mSxqiDoRQj4T7GFJkGEuOEF41
+	RZEOZ0VCvoZAba167FixX0vKfV5ZaTsKq42fLsQlhg+H3X0JUsGLkSUnqZMg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1663383117; x=
-	1663469517; bh=aUXbRcRCV6JyIMsNvZBMmFwwnT4bncaXUatuQgqKC8I=; b=t
-	QJQpEIgQXyRGELsZubrcM1kWswGGm2eh/w5hsJPnxArJ2PKKD9EVPFzQrQg57hut
-	r3Xi7oxvFfN/Z273nUdrnqpi1afNwOpd9rojn9ZNMFrAqZjZ0hfTlXxdB46SBV5r
-	4ouMWHBOvKA9XR6351UJZIW0u/UXQdfvi570sOqZp61A8XsQT7qCQtAK8PWvgMr9
-	VVVG6J7H/NS6/mLwqqDqzsYEeE+s5CLywg+hUsynagfBrKIZCPGQomI5q2FWcZew
-	sDnKgzpgAyk0+8UiX/pIAJNPoqhsPrqdQAJEPNNMlBwuFCdEoAc+4NMLhCpGBg6k
-	JohlKsT1ntcJ38icPPR7w==
-X-ME-Sender: <xms:TTYlY5-lYSct5melHfQEAzelbW-_KCbtbt49AqHXuPkEPdIhTtjwUg>
-    <xme:TTYlY9t66lfbXxzP5xib74R0tJ9xcrFLLZ-ATbyuNyiynz-BbPU_SWAsaWpOdSQyW
-    XC6rkID0_yFHA>
-X-ME-Received: <xmr:TTYlY3BpezwkR4sKzxEfO3lKpE4DhD_jA4HJdOgbU-vVHXXM6K6x_3ApGJP2Euld-FJ3xsJdF-c8RNN56lPiJqD7l7Zge7tIIyV4-_3nNqZbb5_mRMWmBw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedvuddgieefucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1663383113; x=
+	1663469513; bh=NiyNOXiNwriNwBPnQLIEDaYmk/WxMl7jUGwTLDkTZnY=; b=R
+	M2S+tL24N5FRiCN4eJSJSHj5iCIwX1beSVXWUQRhcBKa4rpPXZYrJQCIxRwq1ACK
+	s3DXdyVyRgVL/4O5QGmHNebQ769rW3a1rKvPauyAfKti0F9W3vxJvVF/xmMPebDR
+	4W7VWc4UakwoU8THg+lKefLrYR4HCBSiXTKbMTLYbRTd54ptVMCQlx1fRZ0Z1cAO
+	U1A3L6vqJAMaRZG6x5iLFAnM+cseUF1W4w1mzGMRasSxVKd2sub3tmfhDMl41ALu
+	OBeBY1Yx3XTcYOB/9Ji/5qZOj1Qp+043y04MX0KKwQVSgK5mz1izaYLlSxHZ1swU
+	ZrFmKS8ceWAgEcwVZz7KA==
+X-ME-Sender: <xms:STYlY7QUhTSNDsgZNCvozGjekyWOGjOO5YYn5_EHGLak5pvzd0ZrjQ>
+    <xme:STYlY8ykKWMQsF1vXFbkqR3JNGH4HAtqaVxVmSvjII4P5pzu-eAF-vg_2pNio-TQh
+    3n7DeDqK-whbg>
+X-ME-Received: <xmr:STYlYw3LOm5IQqx9FNoa4yPR6RnrIz14XjiIiGtShPupwJ8f89Zyu4raxYKpYMI5A2svZa7Hn8aZA_pbrHSFpCLdPZAzhQwtekHm6V51Rtb-A_8N6zmceQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedvuddgieegucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
@@ -83,23 +83,23 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedvuddgieefucetufdoteggod
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
     hushhtvghrufhiiigvpeefnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:TTYlY9fwaTkjQQMlm3525CjuZFHvu6mW97Hq9hLw4c3Hz0-YXQ8C4A>
-    <xmx:TTYlY-N59FTpJ08axgFNMVFb_jvydl8TO7rJFEJI7VdBOUdcg9x2VA>
-    <xmx:TTYlY_lzxIkmK3ajm_4-nj_0T1Lxk0mbsWnNN5v59jLxxbYpxFThrA>
-    <xmx:TTYlY106lcGwXpSUmQOCbUFztxD745HEUGgFR40Po7yIEdK2-A2PKw>
+X-ME-Proxy: <xmx:STYlY7COVXxrUiwy_f40eX36qlYO2gl9VZsA5rOWatXaIY6bPAKd0g>
+    <xmx:STYlY0ilIzV4Ut2Aba3ZFZsGxF0p6dujkG6gSNgdW9qR59XQFdvqbQ>
+    <xmx:STYlY_qr8vWEjmUOlY-55Y3DT7TDIDW1Ellfkaz--HCwHS1GE1d3LA>
+    <xmx:STYlY-bAZgBAXCcqN5DqhZ84EP_0wvyc9iRIA49c2aILOS-OjxocVw>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 10/11] drivers/char: suspend handling in XHCI console driver
-Date: Sat, 17 Sep 2022 04:51:29 +0200
-Message-Id: <927d01aa54cf6f5291e506179e3d15dc32ebad40.1663383053.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v7 07/11] drivers/char: allow driving the rest of XHCI by a domain while Xen uses DbC
+Date: Sat, 17 Sep 2022 04:51:26 +0200
+Message-Id: <41e4f161de6f22d92db81f4822c164a9ad256147.1663383053.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.677e6604707b02741b065906ac6f3ea8f3a2f4ca.1663383053.git-series.marmarek@invisiblethingslab.com>
 References: <cover.677e6604707b02741b065906ac6f3ea8f3a2f4ca.1663383053.git-series.marmarek@invisiblethingslab.com>
@@ -107,135 +107,282 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Similar to the EHCI driver - save/restore relevant BAR and command
-register, re-configure DbC on resume and stop/start timer.
-On resume trigger sending anything that was queued in the meantime.
-Save full BAR value, instead of just the address part, to ease restoring
-on resume.
+That's possible, because the capability was designed specifically to
+allow separate driver handle it, in parallel to unmodified xhci driver
+(separate set of registers, pretending the port is "disconnected" for
+the main xhci driver etc). It works with Linux dom0, although requires
+an awful hack - re-enabling bus mastering behind dom0's backs.
+Linux driver does similar thing - see
+drivers/usb/early/xhci-dbc.c:xdbc_handle_events().
+
+When controller sharing is enabled in kconfig (option marked as
+experimental), dom0 is allowed to use the controller even if Xen uses it
+for debug console. Additionally, option `dbgp=xhci,share=` is available
+to either prevent even dom0 from using it (`no` value), or allow any
+domain using it (`any` value).
+
+In any case, to avoid Linux messing with the DbC, mark this MMIO area as
+read-only. This might cause issues for Linux's driver (if it tries to
+write something on the same page - like anoter xcap), but makes Xen's
+use safe. In practice, as of Linux 5.18, it seems to work without
+issues.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-New in v7
-
-Without this patch, the console is broken after S3, and in some cases
-the suspend doesn't succeed at all (when xhci console is enabled).
-
-Very similar (if not the same) functions might be used for coordinated
-reset handling. I tried to include it in this patch too, but it's a bit
-more involved, mostly due to share=yes case (PHYSDEVOP_dbgp_op can be
-called by the hardware domain only).
+Changes in v5:
+- drop CONFIG_XHCI_SHARE
+- make XHCI_SHARE_HWDOM = 0
+- use parse_boolean
+- add comment about mmio_ro_ranges
+- fix doc
+Changes in v4:
+- minor fix for cmdline parsing
+- make sharing opt-in build time, with option marked as EXPERIMENTAL
+- change cmdline syntax to share=<bool>|hwdom
+- make share=hwdom default (if enabled build-time)
+Changes in v3:
+- adjust for xhci-dbc rename
+- adjust for dbc_ensure_running() split
+- wrap long lines
+- add runtime option for sharing USB controller
 ---
- xen/drivers/char/xhci-dbc.c | 55 +++++++++++++++++++++++++++++++++-----
- 1 file changed, 49 insertions(+), 6 deletions(-)
+ docs/misc/xen-command-line.pandoc |  14 ++-
+ xen/drivers/char/xhci-dbc.c       | 129 +++++++++++++++++++++++++++++--
+ 2 files changed, 134 insertions(+), 9 deletions(-)
 
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 92d668afa06c..bbb4652bbfcd 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -723,7 +723,7 @@ Available alternatives, with their meaning, are:
+ 
+ ### dbgp
+ > `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
+-> `= xhci[ <integer> | @pci<bus>:<slot>.<func> ]`
++> `= xhci[ <integer> | @pci<bus>:<slot>.<func> ][,share=<bool>|hwdom]`
+ 
+ Specify the USB controller to use, either by instance number (when going
+ over the PCI busses sequentially) or by PCI device (must be on segment 0).
+@@ -731,6 +731,18 @@ over the PCI busses sequentially) or by PCI device (must be on segment 0).
+ Use `ehci` for EHCI debug port, use `xhci` for XHCI debug capability.
+ XHCI driver will wait indefinitely for the debug host to connect - make sure
+ the cable is connected.
++The `share` option for xhci controls who else can use the controller:
++* `no`: use the controller exclusively for console, even hardware domain
++  (dom0) cannot use it
++* `hwdom`: hardware domain may use the controller too, ports not used for debug
++  console will be available for normal devices; this is the default
++* `yes`: the controller can be assigned to any domain; it is not safe to assign
++  the controller to untrusted domain
++
++Choosing `share=hwdom` (the default) or `share=yes` allows a domain to reset the
++controller, which may cause small portion of the console output to be lost.
++
++The `share=yes` configuration is not security supported.
+ 
+ ### debug_stack_lines
+ > `= <integer>`
 diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
-index 5f92234a9594..81a4fd5b12c3 100644
+index 5f47733c1801..5f92234a9594 100644
 --- a/xen/drivers/char/xhci-dbc.c
 +++ b/xen/drivers/char/xhci-dbc.c
-@@ -251,7 +251,7 @@ struct dbc {
-     struct xhci_string_descriptor *dbc_str;
- 
-     pci_sbdf_t sbdf;
--    uint64_t xhc_mmio_phys;
-+    uint64_t bar_val;
-     uint64_t xhc_dbc_offset;
-     void __iomem *xhc_mmio;
- 
-@@ -259,6 +259,9 @@ struct dbc {
-     bool open;
-     enum xhci_share share;
-     unsigned int xhc_num; /* look for n-th xhc */
-+    /* state saved across suspend */
-+    bool suspended;
-+    uint16_t pci_cr;
+@@ -23,6 +23,7 @@
+ #include <xen/iommu.h>
+ #include <xen/mm.h>
+ #include <xen/param.h>
++#include <xen/rangeset.h>
+ #include <xen/serial.h>
+ #include <xen/timer.h>
+ #include <xen/types.h>
+@@ -232,6 +233,12 @@ struct dbc_work_ring {
+     uint64_t dma;
  };
  
- static void *dbc_sys_map_xhc(uint64_t phys, size_t size)
-@@ -358,8 +361,9 @@ static bool __init dbc_init_xhc(struct dbc *dbc)
- 
-     pci_conf_write16(dbc->sbdf, PCI_COMMAND, cmd);
- 
--    dbc->xhc_mmio_phys = (bar0 & PCI_BASE_ADDRESS_MEM_MASK) | (bar1 << 32);
--    dbc->xhc_mmio = dbc_sys_map_xhc(dbc->xhc_mmio_phys, xhc_mmio_size);
-+    dbc->bar_val = bar0 | (bar1 << 32);
-+    dbc->xhc_mmio = dbc_sys_map_xhc(dbc->bar_val & PCI_BASE_ADDRESS_MEM_MASK,
-+                                    xhc_mmio_size);
- 
-     if ( dbc->xhc_mmio == NULL )
-         return false;
-@@ -979,6 +983,9 @@ static bool dbc_ensure_running(struct dbc *dbc)
-     uint32_t ctrl;
-     uint16_t cmd;
- 
-+    if ( dbc->suspended )
-+        return false;
++enum xhci_share {
++    XHCI_SHARE_HWDOM = 0,
++    XHCI_SHARE_NONE,
++    XHCI_SHARE_ANY
++};
 +
-     if ( dbc->share != XHCI_SHARE_NONE )
-     {
-         /*
-@@ -1213,9 +1220,11 @@ static void __init cf_check dbc_uart_init_postirq(struct serial_port *port)
-      * page, so keep it simple.
-      */
-     if ( rangeset_add_range(mmio_ro_ranges,
--                PFN_DOWN(uart->dbc.xhc_mmio_phys + uart->dbc.xhc_dbc_offset),
--                PFN_UP(uart->dbc.xhc_mmio_phys + uart->dbc.xhc_dbc_offset +
--                       sizeof(*uart->dbc.dbc_reg)) - 1) )
-+                PFN_DOWN((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
-+                         uart->dbc.xhc_dbc_offset),
-+                PFN_UP((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK) +
-+                       uart->dbc.xhc_dbc_offset +
-+                sizeof(*uart->dbc.dbc_reg)) - 1) )
-         printk(XENLOG_INFO
-                "Error while adding MMIO range of device to mmio_ro_ranges\n");
- #endif
-@@ -1255,6 +1264,38 @@ static void cf_check dbc_uart_flush(struct serial_port *port)
-         set_timer(&uart->timer, goal);
+ struct dbc {
+     struct dbc_reg __iomem *dbc_reg;
+     struct xhci_dbc_ctx *dbc_ctx;
+@@ -250,6 +257,7 @@ struct dbc {
+ 
+     bool enable; /* whether dbgp=xhci was set at all */
+     bool open;
++    enum xhci_share share;
+     unsigned int xhc_num; /* look for n-th xhc */
+ };
+ 
+@@ -961,13 +969,56 @@ static bool __init dbc_open(struct dbc *dbc)
  }
  
-+static void cf_check dbc_uart_suspend(struct serial_port *port)
-+{
-+    struct dbc_uart *uart = port->uart;
-+    struct dbc *dbc = &uart->dbc;
+ /*
+- * Ensure DbC is still running, handle events, and possibly re-enable if cable
+- * was re-plugged. Returns true if DbC is operational.
++ * Ensure DbC is still running, handle events, and possibly
++ * re-enable/re-configure if cable was re-plugged or controller was reset.
++ * Returns true if DbC is operational.
+  */
+ static bool dbc_ensure_running(struct dbc *dbc)
+ {
+     struct dbc_reg *reg = dbc->dbc_reg;
+     uint32_t ctrl;
++    uint16_t cmd;
 +
-+    dbc_pop_events(dbc);
-+    stop_timer(&uart->timer);
-+    dbc->pci_cr = pci_conf_read16(dbc->sbdf, PCI_COMMAND);
-+    dbc->suspended = true;
-+}
-+
-+static void cf_check dbc_uart_resume(struct serial_port *port)
-+{
-+    struct dbc_uart *uart = port->uart;
-+    struct dbc *dbc = &uart->dbc;
-+
-+    pci_conf_write32(dbc->sbdf, PCI_BASE_ADDRESS_0, dbc->bar_val & 0xFFFFFFFF);
-+    pci_conf_write32(dbc->sbdf, PCI_BASE_ADDRESS_1, dbc->bar_val >> 32);
-+    pci_conf_write16(dbc->sbdf, PCI_COMMAND, dbc->pci_cr);
-+
-+    if ( !dbc_init_dbc(dbc) )
++    if ( dbc->share != XHCI_SHARE_NONE )
 +    {
-+        dbc_error("resume failed\n");
-+        return;
++        /*
++         * Re-enable memory decoding and later bus mastering, if dom0 (or
++         * other) disabled it in the meantime.
++         */
++        cmd = pci_conf_read16(dbc->sbdf, PCI_COMMAND);
++        if ( !(cmd & PCI_COMMAND_MEMORY) )
++        {
++            cmd |= PCI_COMMAND_MEMORY;
++            pci_conf_write16(dbc->sbdf, PCI_COMMAND, cmd);
++        }
++
++        /*
++         * FIXME: Make Linux coordinate XHCI reset, so the DbC driver can
++         * prepare for it properly, instead of only detecting it after the
++         * fact. See EHCI driver for similar handling.
++         */
++        if ( dbc->open && !(readl(&reg->ctrl) & (1U << DBC_CTRL_DCE)) )
++        {
++            if ( !dbc_init_dbc(dbc) )
++                return false;
++
++            dbc_init_work_ring(dbc, &dbc->dbc_owork);
++            dbc_enable_dbc(dbc);
++        }
++        else
++        {
++            /*
++             * dbc_init_dbc() takes care about it, so check only if it wasn't
++             * called.
++             */
++            cmd = pci_conf_read16(dbc->sbdf, PCI_COMMAND);
++            if ( !(cmd & PCI_COMMAND_MASTER) )
++            {
++                cmd |= PCI_COMMAND_MASTER;
++                pci_conf_write16(dbc->sbdf, PCI_COMMAND, cmd);
++            }
++        }
++    }
+ 
+     dbc_pop_events(dbc);
+ 
+@@ -1136,10 +1187,38 @@ static void __init cf_check dbc_uart_init_postirq(struct serial_port *port)
+     init_timer(&uart->timer, dbc_uart_poll, port, 0);
+     set_timer(&uart->timer, NOW() + MILLISECS(1));
+ 
+-    if ( pci_ro_device(0, uart->dbc.sbdf.bus, uart->dbc.sbdf.devfn) )
+-        printk(XENLOG_WARNING
+-               "Failed to mark read-only %pp used for XHCI console\n",
+-               &uart->dbc.sbdf);
++    switch ( uart->dbc.share )
++    {
++    case XHCI_SHARE_NONE:
++        if ( pci_ro_device(0, uart->dbc.sbdf.bus, uart->dbc.sbdf.devfn) )
++            printk(XENLOG_WARNING
++                   "Failed to mark read-only %pp used for XHCI console\n",
++                   &uart->dbc.sbdf);
++        break;
++    case XHCI_SHARE_HWDOM:
++        if ( pci_hide_device(0, uart->dbc.sbdf.bus, uart->dbc.sbdf.devfn) )
++            printk(XENLOG_WARNING
++                   "Failed to hide %pp used for XHCI console\n",
++                   &uart->dbc.sbdf);
++        break;
++    case XHCI_SHARE_ANY:
++        /* Do not hide. */
++        break;
++    }
++#ifdef CONFIG_X86
++    /*
++     * This marks the whole page as R/O, which may include other registers
++     * unrelated to DbC. Xen needs only DbC area protected, but it seems
++     * Linux's XHCI driver (as of 5.18) works without writting to the whole
++     * page, so keep it simple.
++     */
++    if ( rangeset_add_range(mmio_ro_ranges,
++                PFN_DOWN(uart->dbc.xhc_mmio_phys + uart->dbc.xhc_dbc_offset),
++                PFN_UP(uart->dbc.xhc_mmio_phys + uart->dbc.xhc_dbc_offset +
++                       sizeof(*uart->dbc.dbc_reg)) - 1) )
++        printk(XENLOG_INFO
++               "Error while adding MMIO range of device to mmio_ro_ranges\n");
++#endif
+ }
+ 
+ static int cf_check dbc_uart_tx_ready(struct serial_port *port)
+@@ -1207,13 +1286,15 @@ static int __init xhci_parse_dbgp(const char *opt_dbgp)
+ {
+     struct dbc_uart *uart = &dbc_uart;
+     struct dbc *dbc = &uart->dbc;
+-    const char *e;
++    const char *e, *opt;
++    int val;
+ 
+     if ( strncmp(opt_dbgp, "xhci", 4) )
+         return 0;
+ 
+     memset(dbc, 0, sizeof(*dbc));
+ 
++    e = &opt_dbgp[4];
+     if ( isdigit(opt_dbgp[4]) )
+     {
+         dbc->xhc_num = simple_strtoul(opt_dbgp + 4, &e, 10);
+@@ -1223,7 +1304,7 @@ static int __init xhci_parse_dbgp(const char *opt_dbgp)
+         unsigned int bus, slot, func;
+ 
+         e = parse_pci(opt_dbgp + 8, NULL, &bus, &slot, &func);
+-        if ( !e || *e )
++        if ( !e || (*e && *e != ',') )
+         {
+             printk(XENLOG_ERR
+                    "Invalid dbgp= PCI device spec: '%s'\n",
+@@ -1233,6 +1314,38 @@ static int __init xhci_parse_dbgp(const char *opt_dbgp)
+ 
+         dbc->sbdf = PCI_SBDF(0, bus, slot, func);
+     }
++    opt = e;
++
++    /* other options */
++    while ( *opt == ',' )
++    {
++        opt++;
++        e = strchr(opt, ',');
++        if ( !e )
++            e = strchr(opt, '\0');
++
++        if ( (val = parse_boolean("share", opt, e)) != -1 )
++        {
++            if ( val == -2 && !cmdline_strcmp(opt + 6, "hwdom") )
++                dbc->share = XHCI_SHARE_HWDOM;
++            else if ( val == 0 )
++                dbc->share = XHCI_SHARE_NONE;
++            else if ( val == 1 )
++                dbc->share = XHCI_SHARE_ANY;
++            else
++                break;
++        }
++        else
++            break;
++
++        opt = e;
 +    }
 +
-+    dbc_enable_dbc(dbc);
-+    dbc->suspended = false;
-+    dbc_flush(dbc, &dbc->dbc_oring, &dbc->dbc_owork);
-+    set_timer(&uart->timer, NOW() + MICROSECS(DBC_POLL_INTERVAL));
-+}
-+
- static struct uart_driver dbc_uart_driver = {
-     .init_preirq = dbc_uart_init_preirq,
-     .init_postirq = dbc_uart_init_postirq,
-@@ -1262,6 +1303,8 @@ static struct uart_driver dbc_uart_driver = {
-     .putc = dbc_uart_putc,
-     .getc = dbc_uart_getc,
-     .flush = dbc_uart_flush,
-+    .suspend = dbc_uart_suspend,
-+    .resume = dbc_uart_resume,
- };
++    if ( *opt )
++    {
++        printk(XENLOG_ERR "Invalid dbgp= parameters: '%s'\n", opt);
++        return -EINVAL;
++    }
  
- /* Those are accessed via DMA. */
+     dbc->enable = true;
+ 
 -- 
 git-series 0.9.1
 
