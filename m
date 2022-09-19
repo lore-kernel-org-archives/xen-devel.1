@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A1EFECAAD3
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Sep 2022 22:43:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.409004.651840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BBDCC6FA8B
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Sep 2022 23:18:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.409016.651863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oaPTj-0000kr-Tk; Mon, 19 Sep 2022 22:43:03 +0000
+	id 1oaQ1x-0004cT-2G; Mon, 19 Sep 2022 23:18:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 409004.651840; Mon, 19 Sep 2022 22:43:03 +0000
+Received: by outflank-mailman (output) from mailman id 409016.651863; Mon, 19 Sep 2022 23:18:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oaPTj-0000kk-Qw; Mon, 19 Sep 2022 22:43:03 +0000
-Received: by outflank-mailman (input) for mailman id 409004;
- Mon, 19 Sep 2022 22:43:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3Zb/=ZW=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1oaPTj-0000aW-48
- for xen-devel@lists.xenproject.org; Mon, 19 Sep 2022 22:43:03 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6a2bb0a0-386c-11ed-9647-05401a9f4f97;
- Tue, 20 Sep 2022 00:43:01 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 47CC2618CB;
- Mon, 19 Sep 2022 22:43:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F421C433C1;
- Mon, 19 Sep 2022 22:42:58 +0000 (UTC)
+	id 1oaQ1w-0004cM-Ve; Mon, 19 Sep 2022 23:18:24 +0000
+Received: by outflank-mailman (input) for mailman id 409016;
+ Mon, 19 Sep 2022 23:18:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WN4B=ZW=gmail.com=shentey@srs-se1.protection.inumbo.net>)
+ id 1oaQ1v-0004MC-Iz
+ for xen-devel@lists.xenproject.org; Mon, 19 Sep 2022 23:18:23 +0000
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [2a00:1450:4864:20::535])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5affec36-3871-11ed-bad8-01ff208a15ba;
+ Tue, 20 Sep 2022 01:18:22 +0200 (CEST)
+Received: by mail-ed1-x535.google.com with SMTP id z2so1412038edi.1
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Sep 2022 16:18:22 -0700 (PDT)
+Received: from localhost.localdomain
+ (dynamic-078-054-077-055.78.54.pool.telefonica.de. [78.54.77.55])
+ by smtp.gmail.com with ESMTPSA id
+ rn24-20020a170906d93800b00780f6071b5dsm4800926ejb.188.2022.09.19.16.18.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Sep 2022 16:18:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,138 +47,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a2bb0a0-386c-11ed-9647-05401a9f4f97
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1663627379;
-	bh=7QmkftuHXBne/ZLjnwy/flj1EAb7/w9UQ9aVHuADPgE=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=ZPuJIGsLwqekZRodOUntiwBxIrqFUvmRnfe5zpvXmtPmWKe+39Dpcim//HArU+qmV
-	 K+26qzGaqumats0m9Mr2jqaDh6Dci19Nj7Oyvtjh2sNlCOlM/K60gMn3M14vvdPpHq
-	 C/s/6xYQxeVq/XKe4kb69uNKQG8hjRM9H4xXXarPukcNsZ1pEaa34TLert1deFiZ5R
-	 HroOirTamRppm33Mm4CAgG4Uy9Suebt1/tGIuPXGtoI4JW0V+lp9YM/UHZiZXpRWvV
-	 ReE/Pr4eeRanQEd8sTSMwjBrcIrplT/wLF28lfNv1eyNYQaFXenrqeNS1kW4MFyd36
-	 +mAuVYtdJ4SQA==
-Date: Mon, 19 Sep 2022 15:42:57 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Jan Beulich <jbeulich@suse.com>
-cc: Carlo Nonato <carlo.nonato@minervasys.tech>, andrew.cooper3@citrix.com, 
-    george.dunlap@citrix.com, julien@xen.org, stefano.stabellini@amd.com, 
-    wl@xen.org, marco.solieri@unimore.it, andrea.bastoni@minervasys.tech, 
-    lucmiccio@gmail.com, Marco Solieri <marco.solieri@minervasys.tech>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 06/12] xen/common: add cache coloring allocator for
- domains
-In-Reply-To: <5e5ee6f1-a5fc-fcd4-5d61-7f1e4be6b630@suse.com>
-Message-ID: <alpine.DEB.2.22.394.2209191538240.65421@ubuntu-linux-20-04-desktop>
-References: <20220826125111.152261-1-carlo.nonato@minervasys.tech> <20220826125111.152261-7-carlo.nonato@minervasys.tech> <32e2a752-975f-baa6-8d6c-ba27cf516c64@suse.com> <CAG+AhRUJ0+CszWjSzO7=v4SmKtjG7VMpZ8P050s-rLz0rgXJBw@mail.gmail.com>
- <5e5ee6f1-a5fc-fcd4-5d61-7f1e4be6b630@suse.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 5affec36-3871-11ed-bad8-01ff208a15ba
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+        bh=Fjo518UYX1pucjz3VPXRbua9nNVIHRhAk9ua0pzX1XA=;
+        b=lbugUhiXpcHvVHxmNQCd7XhVHqDDxchx16Djox3J75B7ePDdncyCGse6eZA2NqPqFh
+         hr1ilTebkO5lbr+2+TZ5mEGLS4PtyKRFbfCqqAv12AEVAMkQWO0zrazSj3q2ZqeRKBT/
+         NbDJbiJXOnw+DznNgyjbvAx0+B4DavYnJ8efSi50qdYGRhMcVApJ9LYs+43cIJnPnFH9
+         p7WTSOkQVMZ/TBIgKfij+g6XFoQIUWCHughrTftkcd/1hY2CNeeMm/CAqplFQVur0kCT
+         P6Vi6hDAGyycMZR5ghfx4ycMPoY3eP4zAl+AtKcz4IBZGYhSpX7tdpCvm4nrUNQHxaPV
+         fQVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=Fjo518UYX1pucjz3VPXRbua9nNVIHRhAk9ua0pzX1XA=;
+        b=JZVvydJR8bFgKXJxRTpjmPA+aLxXk02b1DDdGISGpzrDNOYqcLJThpK63OGc9kBALf
+         KfOtv8oux9N3FJsBgKdh21P42gHl3eayJjoYl5dour4jr7Y/WAxUgi+1xEmTPhc8WnmE
+         rUTcAVMv6dXu4AhSGex8uv4N1Iub9RfkS4/JcJAX0rFXzkluYdc2ZmOPlyPl8YQgCC5Q
+         +mCjOn6qiv8Y3i8XR+pb70a+ZDVn29Evis8iiDEyqDO0lonSGAnC1jdtCQG4y0lSPWKB
+         chU1WXngTVHfm3Zj4DpXuGfDKjQlF+ZJVs3k9goFLynhSytBvt/hP9CU1zlIGuAky9DM
+         t3ew==
+X-Gm-Message-State: ACrzQf0gg9fjqcZEuIUPhoL0b7D3He9uLpkuuQyUFB3n8oeoxD9qss2o
+	IlhsiasTm/eG/i5TN32XnMc=
+X-Google-Smtp-Source: AMsMyM59+Un1+bbndkQl90bc+w6Ku/wLNzkfWCb5H+mf7flr0JF2IyQRo4Sr55rK2P8tkNt3yzBwMA==
+X-Received: by 2002:a50:fc9a:0:b0:454:6a56:7d27 with SMTP id f26-20020a50fc9a000000b004546a567d27mr470765edq.73.1663629502405;
+        Mon, 19 Sep 2022 16:18:22 -0700 (PDT)
+From: Bernhard Beschow <shentey@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	Bandan Das <bsd@redhat.com>,
+	Matthew Rosato <mjrosato@linux.ibm.com>,
+	Daniel Henrique Barboza <danielhb413@gmail.com>,
+	Sergio Lopez <slp@redhat.com>,
+	Alexey Kardashevskiy <aik@ozlabs.ru>,
+	Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+	Cameron Esfahani <dirty@apple.com>,
+	Michael Rolnik <mrolnik@gmail.com>,
+	Song Gao <gaosong@loongson.cn>,
+	Jagannathan Raman <jag.raman@oracle.com>,
+	Greg Kurz <groug@kaod.org>,
+	Kamil Rytarowski <kamil@netbsd.org>,
+	Peter Xu <peterx@redhat.com>,
+	Joel Stanley <joel@jms.id.au>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	haxm-team@intel.com,
+	Roman Bolshakov <r.bolshakov@yadro.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	qemu-block@nongnu.org,
+	Eduardo Habkost <eduardo@habkost.net>,
+	=?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+	qemu-ppc@nongnu.org,
+	Cornelia Huck <cohuck@redhat.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Helge Deller <deller@gmx.de>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+	qemu-riscv@nongnu.org,
+	Stafford Horne <shorne@gmail.com>,
+	Paul Durrant <paul@xen.org>,
+	Havard Skinnemoen <hskinnemoen@google.com>,
+	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+	Alexander Graf <agraf@csgraf.de>,
+	Thomas Huth <thuth@redhat.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Wenchao Wang <wenchao.wang@intel.com>,
+	Tony Krowiak <akrowiak@linux.ibm.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	qemu-s390x@nongnu.org,
+	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Eric Farman <farman@linux.ibm.com>,
+	Reinoud Zandijk <reinoud@netbsd.org>,
+	Alexander Bulekov <alxndr@bu.edu>,
+	Yanan Wang <wangyanan55@huawei.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Tyrone Ting <kfting@nuvoton.com>,
+	xen-devel@lists.xenproject.org,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	John Snow <jsnow@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Darren Kenny <darren.kenny@oracle.com>,
+	kvm@vger.kernel.org,
+	Qiuhao Li <Qiuhao.Li@outlook.com>,
+	John G Johnson <john.g.johnson@oracle.com>,
+	Bin Meng <bin.meng@windriver.com>,
+	Sunil Muthuswamy <sunilmut@microsoft.com>,
+	Max Filippov <jcmvbkbc@gmail.com>,
+	qemu-arm@nongnu.org,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Andrew Jeffery <andrew@aj.id.au>,
+	Artyom Tarasenko <atar4qemu@gmail.com>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	"Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+	Jason Wang <jasowang@redhat.com>,
+	David Hildenbrand <david@redhat.com>,
+	Laurent Vivier <laurent@vivier.eu>,
+	Alistair Francis <alistair@alistair23.me>,
+	Jason Herne <jjherne@linux.ibm.com>,
+	Bernhard Beschow <shentey@gmail.com>
+Subject: [PATCH 1/9] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
+Date: Tue, 20 Sep 2022 01:17:12 +0200
+Message-Id: <20220919231720.163121-2-shentey@gmail.com>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20220919231720.163121-1-shentey@gmail.com>
+References: <20220919231720.163121-1-shentey@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 
-On Mon, 19 Sep 2022, Jan Beulich wrote:
-> On 16.09.2022 18:05, Carlo Nonato wrote:
-> > On Thu, Sep 15, 2022 at 3:13 PM Jan Beulich <jbeulich@suse.com> wrote:
-> >> On 26.08.2022 14:51, Carlo Nonato wrote:
-> >>> --- a/xen/arch/arm/Kconfig
-> >>> +++ b/xen/arch/arm/Kconfig
-> >>> @@ -147,6 +147,18 @@ config MAX_CACHE_COLORS
-> >>>         colors at boot. Note that if, at any time, a color configuration with more
-> >>>         colors than the maximum will be employed an error will be produced.
-> >>>
-> >>> +config BUDDY_ALLOCATOR_SIZE
-> >>> +     string "Buddy allocator reserved memory size" if CACHE_COLORING
-> >>> +     default "64M" if CACHE_COLORING
-> >>> +     default "0M" if !CACHE_COLORING
-> >>
-> >> I don't understand the purpose of this last line, nor the two earlier
-> >> "if". Why not simply
-> >>
-> >> config BUDDY_ALLOCATOR_SIZE
-> >>         string "Buddy allocator reserved memory size"
-> >>         depend on CACHE_COLORING
-> >>         default "64M"
-> > 
-> > This was just to have a value for the config option even with cache coloring
-> > disabled. All those ifs emulate the "depends on" keyword, but let the
-> > CONFIG_BUDDY_ALLOCATOR_SIZE takes "0M" when coloring is disabled. With just
-> > the "depends on" the macro isn't defined at all. I know that this can be
-> > handled with some simple #ifdef, but I found this way to be more elegant.
-> > Not an expert here so if you prefer the other way or a whole different one
-> > (more readable/better fitted) please let me know.
-> 
-> As far as I saw, the sole use was already inside a suitable #ifdef. Hence
-> yes, I clearly would see "depends on" as the better fit. Please also don't
-> forget that if later cache coloring would be enabled for another
-> architecture, that default of zero (pre-recorded in a .config) would get
-> in the way; one would need to manually change it (and remember to do so).
-> 
-> >> Finally - how much of this is really Arm-specific? Shouldn't this be a
-> >> common config option, perhaps merely restricted to Arm by the top level
-> >> option (CACHE_COLORING?) depending on a further HAS_CACHE_COLORING,
-> >> which only Arm would select?
-> > 
-> > I'm sorry, but I don't understand your suggestion. BUDDY_ALLOCATOR_SIZE
-> > is Arm specific because CACHE_COLORING is. In fact it depends only on this
-> > last config value and not on Arm config directly. Why should someone limit
-> > the buddy allocator when coloring isn't enabled?
-> 
-> My comment wasn't on this on setting alone, but on the coloring ones as a
-> set.
-> 
-> > I've lost you on the HAS_CACHE_COLORING. Why should Arm config select this
-> > one? Cache coloring must remain optional. I'm probably missing something.
-> 
-> HAS_* settings only express what an arch is capable of; they don't replace
-> dependent options which actually are user-selectable. (That said, we have
-> a number where there's no user selection possible, but that's not of
-> interest here.)
-> 
-> >>> --- a/xen/arch/arm/coloring.c
-> >>> +++ b/xen/arch/arm/coloring.c
-> >>> @@ -300,6 +300,16 @@ void prepare_color_domain_config(struct xen_arch_domainconfig *config,
-> >>>      config->num_colors = (uint16_t)num;
-> >>>  }
-> >>>
-> >>> +unsigned int page_to_color(struct page_info *pg)
-> >>
-> >> The parameter will want to be pointer-to-const and I wonder whether ...
-> >>
-> >>> +{
-> >>> +    return addr_to_color(page_to_maddr(pg));
-> >>> +}
-> >>
-> >> ... the function as a whole wouldn't be a good candidate for being an
-> >> inline one (requiring addr_to_color() to be available in outside of
-> >> this file, of course).
-> > 
-> > You mean defining it as static inline in the coloring.h header?
-> 
-> That would seem preferable for a simple function like this one.
-> 
-> >>> +static void color_heap_insert_page(struct page_info *pg)
-> >>> +{
-> >>> +    struct page_info *pos;
-> >>> +    struct page_list_head *head = colored_pages(page_to_color(pg));
-> >>> +
-> >>> +    pg->count_info |= PGC_colored;
-> >>
-> >> The function isn't marked __init, so runtime correctness as to the
-> >> (non-atomic) update here wants clarifying.
-> > 
-> > Yes. I need to check and probably add a spin lock for the color heap.
-> 
-> I'm afraid a spin lock won't help. May I suggest you look at some of
-> the staticmem discussions that had happened, including a similar
-> topic. (Sorry, I don't have a link at hand to the exact mail.)
+SiFiveEState inherits from SysBusDevice while it's TypeInfo claims it to
+inherit from TYPE_MACHINE. This is an inconsistency which can cause
+undefined behavior such as memory corruption.
 
-I searched through the recent staticmem discussions to try to provide a
-helpful link for Carlo, but I don't think I managed to find what you had
-in mind. I found these two lock-related emails:
+Change SiFiveEState to inherit from MachineState since it is registered
+as a machine.
 
-https://marc.info/?l=xen-devel&m=165476642832402
-https://marc.info/?l=xen-devel&m=165632461420257
+Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+---
+ include/hw/riscv/sifive_e.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-If they are not relevant, could you please provide a few more details?
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index 83604da805..d738745925 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -22,6 +22,7 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/sifive_cpu.h"
+ #include "hw/gpio/sifive_gpio.h"
++#include "hw/boards.h"
+ 
+ #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
+ #define RISCV_E_SOC(obj) \
+@@ -41,7 +42,7 @@ typedef struct SiFiveESoCState {
+ 
+ typedef struct SiFiveEState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    MachineState parent_obj;
+ 
+     /*< public >*/
+     SiFiveESoCState soc;
+-- 
+2.37.3
+
 
