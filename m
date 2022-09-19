@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845D3C6FA91
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Sep 2022 08:53:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.408434.651314 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B43DC6FA90
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Sep 2022 09:13:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.408578.651363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oaCWX-0004ql-Q1; Mon, 19 Sep 2022 08:53:05 +0000
+	id 1oaCph-000889-0M; Mon, 19 Sep 2022 09:12:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 408434.651314; Mon, 19 Sep 2022 08:53:05 +0000
+Received: by outflank-mailman (output) from mailman id 408578.651363; Mon, 19 Sep 2022 09:12:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oaCWX-0004qe-Mc; Mon, 19 Sep 2022 08:53:05 +0000
-Received: by outflank-mailman (input) for mailman id 408434;
- Sun, 18 Sep 2022 19:18:54 +0000
+	id 1oaCpg-00087Y-QU; Mon, 19 Sep 2022 09:12:52 +0000
+Received: by outflank-mailman (input) for mailman id 408578;
+ Mon, 19 Sep 2022 09:12:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=udh/=ZV=stew.dk=stewart@srs-se1.protection.inumbo.net>)
- id 1oZzoc-0007t5-3e
- for xen-devel@lists.xenproject.org; Sun, 18 Sep 2022 19:18:54 +0000
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [2607:f8b0:4864:20::d2e])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3sJ0=ZW=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1oaCpf-0007Fl-TZ
+ for xen-devel@lists.xenproject.org; Mon, 19 Sep 2022 09:12:52 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ba8e3432-3786-11ed-9761-273f2230c3a0;
- Sun, 18 Sep 2022 21:18:52 +0200 (CEST)
-Received: by mail-io1-xd2e.google.com with SMTP id p3so11547573iof.13
- for <xen-devel@lists.xenproject.org>; Sun, 18 Sep 2022 12:18:52 -0700 (PDT)
-Received: from ?IPV6:2001:db8::165a:5551:20c6:ecaf?
- ([2607:fb91:1108:ae0:6e73:b13c:9e3e:3750])
- by smtp.gmail.com with ESMTPSA id
- x12-20020a92b00c000000b002f5d9f49852sm46044ilh.14.2022.09.18.12.18.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 18 Sep 2022 12:18:50 -0700 (PDT)
+ id 2fa1d8ae-37fb-11ed-bad8-01ff208a15ba;
+ Mon, 19 Sep 2022 11:12:29 +0200 (CEST)
+Received: by mail-lj1-x234.google.com with SMTP id a10so247609ljq.0
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Sep 2022 02:12:50 -0700 (PDT)
+Received: from jade.urgonet (h-79-136-84-253.A175.priv.bahnhof.se.
+ [79.136.84.253]) by smtp.gmail.com with ESMTPSA id
+ f3-20020a05651c02c300b0025fdf1af42asm4815394ljo.78.2022.09.19.02.12.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Sep 2022 02:12:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,93 +46,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba8e3432-3786-11ed-9761-273f2230c3a0
+X-Inumbo-ID: 2fa1d8ae-37fb-11ed-bad8-01ff208a15ba
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=stew.dk; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=lexXoQKidOKdhRihDMwjma87tp56OUQpeUHq174CHio=;
-        b=XefqwD8UH088hbVFvga6zGD4KEDEtR3H81gXPkB0J5j7n9nKzmYRso2oqzLzWqu0dU
-         oVCf7E4YuqH+gSF+nJiGRH1Tg8zhimQMnSCHtasSQTT0C8fyDP7vEFYP42ZXCXZky0Bt
-         1opcODbn2li/8fOVr5VRG9EOQG2pq1YXOLUMk=
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+        bh=6I3/XH3qPV3YutRTqfgDPkoEm9m6vnrvTMroZ0piAAQ=;
+        b=B3T/f6oj76QvIWRa+RhS/iC5bJ7/14WTEXrZwB53jAd8KlbG29+wHvozzIHA4flZat
+         H7XTfkHpIHTYDKdTEuQ4+zlZ7bceOSLVW7DtcUc7g4LYxSyY3NSNsnX04GaSTn/xFguW
+         RqthVJJkOWEpxHGoKn6Br1zlGMxFf6ENGfW6pMmuNg6CMk7B5FVk6U05DSPxkBoZLtOn
+         8vG9VCUEmd+eUAruqMLS6dJukku2gE2rhw6naNp4JeZdmgKTM8rnF4VT7tfCWqSfhvQk
+         oRVsVbEDoYn1kQfA7mbHdCxSy1qCaohGBX5gbqFHsevBBSzsXi6V/QHGi5AdJ1xl2Gfw
+         vV7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=lexXoQKidOKdhRihDMwjma87tp56OUQpeUHq174CHio=;
-        b=aF60ae14gDg2pEsYluGAIfONmfrzwSFqHkRWgkkbxnw3Ka0v7mLotSgyLm/dNZltG3
-         yj4oPoRIp/DPbBQoS96f266fLq1BL4TKwYh8EiobNASKJv7vzPPE8iyse3cEPSdjIoaH
-         Sae38ezrhJ+fxZvnwFmmP21/U/h3KSSR4z63Rxf+GMx8fOO7uVZGSf3AoUmHdRJAZocc
-         cvD1nvd3D5swBZ9pecv2I7CjRIAbbxRUevs3DUUFrOG9rXDNnhvxqGwaAzc5mNToiN10
-         hg9o5qNHZAw8xKdaP+psLqhT9M2L7DptG/JZ5Dy2QQcUn0mOJ/CqI2bOxAEjhbifmBuv
-         NWVQ==
-X-Gm-Message-State: ACrzQf10WSJOHuczp6314ffDKqUpcWqz8GTz5fSnO05HYuzKUFxcV7Bj
-	hwm+h/aBX6I3QmEgszHC/aoRmA==
-X-Google-Smtp-Source: AMsMyM5AkVMZzQA+6h69sO2EOknGNQt0Ip6n8W9jIZ9/YvEQdIXyAQbSbV22hrjqVaxuIl9ar0TluQ==
-X-Received: by 2002:a05:6602:1609:b0:6a1:899e:bf36 with SMTP id x9-20020a056602160900b006a1899ebf36mr5473711iow.121.1663528730811;
-        Sun, 18 Sep 2022 12:18:50 -0700 (PDT)
-Message-ID: <f7471c99-1e64-5549-b6f4-d3b14457a024@stew.dk>
-Date: Sun, 18 Sep 2022 15:18:47 -0400
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=6I3/XH3qPV3YutRTqfgDPkoEm9m6vnrvTMroZ0piAAQ=;
+        b=jEmO/kl32JoxjT3+MJey+QGiu716K+pn3vYzKLBags9QGTzlCQqWuo47bdjTMaBdqo
+         kDQ3+zMkwZIPpg44jFpKVkxs50vrIcIiqt/rpO7zCxBZ3lv6Q4+apZE5vOIuGgu8vh2E
+         9vZOpTBfIeypXKbUAz3XRyqIkA7s+UvX8Zm3iGyg+Px24A5Ee4ZddHskA4TkeP0EU7AF
+         aVWLyKrMSHO4eVSf+IWIzYyuK100P2K1430HnTnVaraeyZPdztKdLeCB7v7/D3G6YIXu
+         1p84w2U2r0UsDibzm8gc1s16iWhgt1xF3LSz/FlrG/nXegcYhtI+1aq8u6fUZDJqY5XW
+         GyuQ==
+X-Gm-Message-State: ACrzQf3keu/Zduhh3X7UDGC0Ve2+zdGkwiLYEj3262++Q8y5x/T7SFJQ
+	W9QzI6sY07eN3aMiowOOa76Lg0S1wyxf54d5
+X-Google-Smtp-Source: AMsMyM6CtZP4doffMlot6spC0CdCddbWHMTt7PwC8Yu/I60Kei1HUpWsLsqbeCSj9xasLrSgJ5N4jw==
+X-Received: by 2002:a2e:b5b5:0:b0:26a:c76d:145a with SMTP id f21-20020a2eb5b5000000b0026ac76d145amr5201438ljn.119.1663578769762;
+        Mon, 19 Sep 2022 02:12:49 -0700 (PDT)
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand.Marquis@arm.com,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Marc Bonnici <marc.bonnici@arm.com>,
+	Achin Gupta <achin.gupta@arm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>
+Subject: [PATCH v6 4/9] xen/arm: ffa: map SPMC rx/tx buffers
+Date: Mon, 19 Sep 2022 11:12:33 +0200
+Message-Id: <20220919091238.2068052-5-jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220919091238.2068052-1-jens.wiklander@linaro.org>
+References: <20220919091238.2068052-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] MAINTAINERS: change my email
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>,
- Stewart Hildebrand <stewart.hildebrand@dornerworks.com>,
- Henry Wang <Henry.Wang@arm.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Jeff Kubascik <jeff.kubascik@dornerworks.com>,
- Nathan Studer <nathan.studer@dornerworks.com>,
- Robbie VanVossen <robert.vanvossen@dornerworks.com>,
- xen-devel@dornerworks.com, xen-devel@lists.xenproject.org
-References: <20220915193027.3166-1-stewart.hildebrand@dornerworks.com>
- <a83ac46b-3db8-7770-6f24-041de84a3392@suse.com>
-From: Stewart Hildebrand <stewart@stew.dk>
-In-Reply-To: <a83ac46b-3db8-7770-6f24-041de84a3392@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 9/16/22 02:08, Jan Beulich wrote:
-> On 15.09.2022 21:30, Stewart Hildebrand wrote:
->> I am departing DornerWorks. I will still be working with Xen in my next
->> role, and I still have an interest in maintaining the ARINC 653
->> scheduler, so change to my personal email address. Also change status to
->> Maintained.
->>
->> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
->> ---
->>   MAINTAINERS | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index e12c499a28..f674b5f7ba 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -221,8 +221,8 @@ F:	xen/include/xen/argo.h
->>   F:	xen/common/argo.c
->>   
->>   ARINC653 SCHEDULER
->> -M:	Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
->> -S:	Supported
->> +M:	Stewart Hildebrand <stewart@stew.dk>
->> +S:	Maintained
->>   L:	xen-devel@dornerworks.com
->>   F:	xen/common/sched/arinc653.c
->>   F:	tools/libs/ctrl/xc_arinc653.c
-> 
-> If it was just for the email change, I would have said it can go in without
-> release manager approval. But the support level change I think wants a
-> release ack at this point. Just to not leave the question unasked: There's
-> no interest within DornerWorks to have someone else be (co)maintainer of
-> this code?
+When initializing the FF-A mediator map the RX and TX buffers shared with
+the SPMC.
 
-Yes, there is interest. Nathan Studer has expressed interest. I will 
-send out a v2.
+These buffer are later used to to transmit data that cannot be passed in
+registers only.
 
-Stewart
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+---
+ xen/arch/arm/ffa.c | 57 +++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 56 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/arm/ffa.c b/xen/arch/arm/ffa.c
+index 90b5aa10a1fa..8cb5c829a394 100644
+--- a/xen/arch/arm/ffa.c
++++ b/xen/arch/arm/ffa.c
+@@ -195,6 +195,15 @@ struct ffa_ctx {
+ /* Negotiated FF-A version to use with the SPMC */
+ static uint32_t ffa_version __ro_after_init;
+ 
++/*
++ * Our rx/tx buffers shared with the SPMC.
++ *
++ * ffa_page_count is the number of pages used in each of these buffers.
++ */
++static void *ffa_rx __read_mostly;
++static void *ffa_tx __read_mostly;
++static unsigned int ffa_page_count __read_mostly;
++
+ static bool ffa_get_version(uint32_t *vers)
+ {
+     const struct arm_smccc_1_2_regs arg = {
+@@ -264,6 +273,17 @@ static bool __init check_mandatory_feature(uint32_t id)
+     return !ret;
+ }
+ 
++static int32_t ffa_rxtx_map(register_t tx_addr, register_t rx_addr,
++                            uint32_t page_count)
++{
++    uint32_t fid = FFA_RXTX_MAP_32;
++
++    if ( IS_ENABLED(CONFIG_ARM_64) )
++        fid = FFA_RXTX_MAP_64;
++
++    return ffa_simple_call(fid, tx_addr, rx_addr, page_count, 0);
++}
++
+ static u16 get_vm_id(const struct domain *d)
+ {
+     /* +1 since 0 is reserved for the hypervisor in FF-A */
+@@ -447,6 +467,7 @@ int ffa_relinquish_resources(struct domain *d)
+ static int __init ffa_init(void)
+ {
+     uint32_t vers;
++    int e;
+     unsigned int major_vers;
+     unsigned int minor_vers;
+ 
+@@ -484,11 +505,45 @@ static int __init ffa_init(void)
+     printk(XENLOG_INFO "ARM FF-A Firmware version %u.%u\n",
+            major_vers, minor_vers);
+ 
+-    if ( !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
++    if (
++#ifdef CONFIG_ARM_64
++         !check_mandatory_feature(FFA_RXTX_MAP_64) ||
++#endif
++#ifdef CONFIG_ARM_32
++         !check_mandatory_feature(FFA_RXTX_MAP_32) ||
++#endif
++         !check_mandatory_feature(FFA_RXTX_UNMAP) ||
++         !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
++        return 0;
++
++    ffa_rx = alloc_xenheap_pages(0, 0);
++    if ( !ffa_rx )
+         return 0;
+ 
++    ffa_tx = alloc_xenheap_pages(0, 0);
++    if ( !ffa_tx )
++        goto err_free_ffa_rx;
++
++    e = ffa_rxtx_map(__pa(ffa_tx), __pa(ffa_rx), 1);
++    if ( e )
++    {
++        printk(XENLOG_ERR "ffa: Failed to map rxtx: error %d\n", e);
++        goto err_free_ffa_tx;
++    }
++    ffa_page_count = 1;
+     ffa_version = vers;
+ 
++    return 0;
++
++err_free_ffa_tx:
++    free_xenheap_pages(ffa_tx, 0);
++    ffa_tx = NULL;
++err_free_ffa_rx:
++    free_xenheap_pages(ffa_rx, 0);
++    ffa_rx = NULL;
++    ffa_page_count = 0;
++    ffa_version = 0;
++
+     return 0;
+ }
+ 
+-- 
+2.31.1
+
 
