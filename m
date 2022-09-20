@@ -4,33 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86713C54EE9
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Sep 2022 15:37:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.409508.652475 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3EAECAAD8
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Sep 2022 15:55:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.409519.652487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oafJP-0003WS-QM; Tue, 20 Sep 2022 15:37:27 +0000
+	id 1oafaJ-000630-EA; Tue, 20 Sep 2022 15:54:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 409508.652475; Tue, 20 Sep 2022 15:37:27 +0000
+Received: by outflank-mailman (output) from mailman id 409519.652487; Tue, 20 Sep 2022 15:54:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oafJP-0003WL-Nd; Tue, 20 Sep 2022 15:37:27 +0000
-Received: by outflank-mailman (input) for mailman id 409508;
- Tue, 20 Sep 2022 15:37:26 +0000
+	id 1oafaJ-00062t-A8; Tue, 20 Sep 2022 15:54:55 +0000
+Received: by outflank-mailman (input) for mailman id 409519;
+ Tue, 20 Sep 2022 15:54:53 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=v+PG=ZX=ilande.co.uk=mark.cave-ayland@srs-se1.protection.inumbo.net>)
- id 1oafJO-0003TC-7N
- for xen-devel@lists.xenproject.org; Tue, 20 Sep 2022 15:37:26 +0000
-Received: from mail.ilande.co.uk (mail.ilande.co.uk [2001:41c9:1:41f::167])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=V320=ZX=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1oafaH-00062n-Qf
+ for xen-devel@lists.xenproject.org; Tue, 20 Sep 2022 15:54:53 +0000
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr10049.outbound.protection.outlook.com [40.107.1.49])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1f92ac71-38fa-11ed-9647-05401a9f4f97;
- Tue, 20 Sep 2022 17:37:25 +0200 (CEST)
-Received: from [2a00:23c4:8ba7:8700:f0a2:2ba9:489e:6915]
- by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1oafGv-000Afu-Ct; Tue, 20 Sep 2022 16:34:53 +0100
+ id 9021c30e-38fc-11ed-9647-05401a9f4f97;
+ Tue, 20 Sep 2022 17:54:52 +0200 (CEST)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by DB9PR04MB8251.eurprd04.prod.outlook.com (2603:10a6:10:24f::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.21; Tue, 20 Sep
+ 2022 15:54:49 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::358f:58dc:c0c2:1155]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::358f:58dc:c0c2:1155%7]) with mapi id 15.20.5632.021; Tue, 20 Sep 2022
+ 15:54:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,157 +48,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f92ac71-38fa-11ed-9647-05401a9f4f97
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=DxUS2wc8S5XxDbYIITAjbCY/K9B97p0z/uIdsCi89f4=; b=q8dDxxpdwWDpHEVedTNp99huTl
-	ieOauNOwBFfYBDnKcDBqCHjuV4ahcE1blChUCvnn1ld2RsCLwnoBIq1ubUWjGD1XG+OipNXhMHYV3
-	A5UVDUPeFztTSqKs6X7P+cnq84CeGwoY32GoPxxVEEcm4T6W++H/W2qq+IUbg08VbaPZn2PpQhA6G
-	bLj5usr33B5oFZ1w1pzMsxXoWw5TqXPu+p5QK2QdWpGZxnhsfad6mIAO4emRZahrJpZli75qhfkPZ
-	JidI8Md/95Pa4BTPf6Cssb8yEiTDu6oS0+mepXs9cZhYwKX0GB+Wh3jWanOFKnNugdGBTJ2negqZ5
-	kQ5zkM8I3F09Yqn2tNuiF62sq4HjlfBTtNVHH/wu5YepzmsU+yGEiv75Er59M/E1rO+t7vI3zdHhL
-	K6EOXVatICRAGXSZ2pXGTOtCsdntXKmTpLa28j5QBqhUoCSVwaSj/dnxqdkPzCQwQsRXyL4b13OSS
-	pTWzfSYUZ3XA1cZjpzVW7U3+3jDQGahsb6BDRM7yMzynJF79hN3JliPwomVGl3TlmAF9ZXbgB6v8x
-	EdBv3RhbS9nnzMB0fMo8v8PRvu4ZQAqDHvVlI+IWDk4CDXNVEIO08YEfWVoJ8mVf99CP1R3I6tydJ
-	Gl7iS5zTOghPdk9mRJyFsq8Jqasp4a0Y+B74kjNoY=;
-Message-ID: <49325e7d-5020-23f7-4bce-c53d8d988c95@ilande.co.uk>
-Date: Tue, 20 Sep 2022 16:36:26 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
+X-Inumbo-ID: 9021c30e-38fc-11ed-9647-05401a9f4f97
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CGrB/c/q6xERibjOQPzcnwvP/OuzsWiW1Upj+j2MrhaDrvAts5ajO1n5eJ8dJKGlHs04/hRjwaSfXEF/J9k3mGHepyzitLkq9SJUhQBK959sd8WLxE8Zd8dydH6m31xVorHxV252BkySlzkjP5a6f7mX1hwdVzMKmxaoih4RLKneAGLYPg8l5b09//y2Dw8GhtSJFOHbapgX1P+clI9bGVKn7MsEkoM9L/m41zbDr8mxxoa9iKq3ZmBoky0t+hNQDIWxoeeHeGd2cnVbcOx5S80TaPPnTWQtjOyihQrd4mPZvEzHiwMrCHkXvuISjaBoJr16LJ27ENy8pGQe3wJhtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VYxFh3csbWKrYwY/oyUVWTvkUEBGLgZw9LoiVS9asAk=;
+ b=CkdlwCG+tWvRcQAVaFnIxH7OdhU4ty2USpEKAMg4e/ystd5iM5oQrMf7GxhxzyD6PakuR7NbrhR8KaIKqrc95B2Qa/HIKm7QHyo4eA/5onpnlopmV/YcmqL00vGSP6HZH0WKVLcvffepJbJDZqv29d11jeZh2ZdheVg32JqIFP/ZOONDncF4jJpK78srd1NlXLonH9DKwjGJZtbrvnJyL20g0q8tk9e43EUmZRtZqUIDyEE9fGJ33SLBfgERzaXy0bnwdEJPwClY7lhv8bsZwsDhaPq2UPDfDHGBq7fVze6nnIz8C3otbPfrMqPuzqvOMns3QWLtlXnGCH18tjsWnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VYxFh3csbWKrYwY/oyUVWTvkUEBGLgZw9LoiVS9asAk=;
+ b=zcP7KgnZ+SdGv9JgohBxIbeSoX/xuh7TGZv3UqH8pU6DDYqFVsjHgbSgdRsb+DG1xYmZ84IA3hK6dgfPv4Vwe0sdKcV49VTB5gv9RVMNIRBQRA3seZGW1WinoUqqxSj3rCmNEARVOwz7V3Z6XmeEUmsyw+wYMHnd/EMu+8qAiMttj4WMVQR+KIT5A5j5MCt0ITNlVYFbOXmVjPmlnKhgfN5G+7CR61cMqruHZsDTKRDTzAdtEWbpys87bO+gtg75+9FGs4M5H4hKoW2owwrnPKseYQ6KLMEsoZXaj1L/0BmpD7xpSbPeXhtJnUvoX6uXQh0VF3UUt9ait1zJEI5ztw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <7930b617-d473-94dd-c7e4-33ffa19da13e@suse.com>
+Date: Tue, 20 Sep 2022 17:54:45 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: [PATCH v3] Support ESRT in Xen dom0
 Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>
-Cc: qemu-devel@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
- Magnus Damm <magnus.damm@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Bandan Das
- <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Cameron Esfahani
- <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Jagannathan Raman <jag.raman@oracle.com>,
- Greg Kurz <groug@kaod.org>, Kamil Rytarowski <kamil@netbsd.org>,
- Peter Xu <peterx@redhat.com>, Joel Stanley <joel@jms.id.au>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com,
- Roman Bolshakov <r.bolshakov@yadro.com>,
- Markus Armbruster <armbru@redhat.com>, Eric Auger <eric.auger@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
- Eduardo Habkost <eduardo@habkost.net>,
- =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
- qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Helge Deller <deller@gmx.de>,
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-riscv@nongnu.org, Stafford Horne <shorne@gmail.com>,
- Paul Durrant <paul@xen.org>, Havard Skinnemoen <hskinnemoen@google.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Wenchao Wang <wenchao.wang@intel.com>, Tony Krowiak
- <akrowiak@linux.ibm.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- qemu-s390x@nongnu.org, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Reinoud Zandijk <reinoud@netbsd.org>, Alexander Bulekov <alxndr@bu.edu>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
- xen-devel@lists.xenproject.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
- John Snow <jsnow@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Darren Kenny <darren.kenny@oracle.com>, kvm@vger.kernel.org,
- Qiuhao Li <Qiuhao.Li@outlook.com>, John G Johnson
- <john.g.johnson@oracle.com>, Bin Meng <bin.meng@windriver.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov
- <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>, Andrew Jeffery
- <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
- Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>, Alistair Francis
- <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
-References: <20220919231720.163121-1-shentey@gmail.com>
- <CAFEAcA8GjXFO4WK=KybgSc8rMfqecwD9EXS0kZMKtqogNf1Tsg@mail.gmail.com>
-From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-In-Reply-To: <CAFEAcA8GjXFO4WK=KybgSc8rMfqecwD9EXS0kZMKtqogNf1Tsg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ linux-efi@vger.kernel.org, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org,
+ Demi Marie Obenour <demi@invisiblethingslab.com>
+References: <20220919193257.2031-1-demi@invisiblethingslab.com>
+ <CAMj1kXEBfJUfTQ3THqqKxsU09_S98B_TjTECKwGM0WAv_5tZaA@mail.gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <CAMj1kXEBfJUfTQ3THqqKxsU09_S98B_TjTECKwGM0WAv_5tZaA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a00:23c4:8ba7:8700:f0a2:2ba9:489e:6915
-X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [PATCH 0/9] Deprecate sysbus_get_default() and
- get_system_memory() et. al
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
+X-ClientProxiedBy: LO4P265CA0143.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c4::19) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DB9PR04MB8251:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9b5fb8b-0798-444d-1672-08da9b2072a8
+X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Eg3ZR6vjg7q+RMbtDt/PYcNu6lltKHnpBKHPdpKu28GgFrzg0MS7N8lUkgptBnR6YiGPg0Pwr985MfrXRSibXPCNrSFsrtKeykidDTwPHGSqireUp2VJ8UVqkQKtf3lZ78Dy8UKqagUgfIjbXKZr/+PDyujvnqBlbqh2AUCPo0Hvm60A3CHEkiSwEQaXJM8ukM7lJOFxVtdbbrAN5PWEQC50aTUGDN2Drvd/p3dlQVsAmpfFUYZowm6SKg+1hFoKXLXwRKGbFpCfbFdjY0ONOsbnzA4swYH9DZf4CzjCuWCEH6zlUbcNItytWmJM6KYru22Cv7gcy4jONjd6XKwq3DCn2V+oqdqx962tOjnGVAg22Jhw9zUJjLN/68Yh7diWvqGV0me2OXXRF3AptkMXQ6mDE5lLEp57MEWl10iCDSQ/p1NjjROam6FmgW+zam2kj+BrR8faevMOKKLFaaKOUOvDrJ88+TXX7MhgbY2Qtt1ps0PXzqPIj6MaRLxKb6sbzJ351TtqOnbzixS6ckP6ZJ3iioRaZX3lHDGf4WrwemBhZOEcd84RGaWihrsj70WYhpcsHi+eHVy2FobHsrRjaa6r6rVgVk6g4DOHldKpi5/T3qSMA+pb6NI9Kqh/UitPgRJiNcjSkgx7SXgub1Jy5u1GF1JlebvgLUwJHedkXKZ90/vwf8tspxA9DBZ36tCw9xtm/yWXnWN5VxBm/7ChZjhP480KQzKVeTiakh1ElrnSy/7oNzBmSu41awa91DxwNBx1EekfJQiz8WpdQaTK9M+6g+p7u5TKXHbZ6qH+avQ=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(396003)(366004)(39860400002)(136003)(346002)(376002)(451199015)(66476007)(8676002)(2906002)(36756003)(2616005)(38100700002)(66946007)(83380400001)(8936002)(6666004)(41300700001)(54906003)(66556008)(478600001)(186003)(31696002)(6512007)(86362001)(316002)(4326008)(6486002)(6916009)(6506007)(31686004)(53546011)(5660300002)(26005)(66899012)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NldpdHYvM0JWZnVmVFJLY2tOOWNtTk4wZ09jM2h3VEJudC9iQUY1bTJmNHFh?=
+ =?utf-8?B?VWtjRlpTYkZwVDd1dUR3THhGOEFDSHRNRlZOczYzTDNxTFZ5QS9UWk1pZHgy?=
+ =?utf-8?B?MDI4RXFxWU9NeWEyVXlYUkxFNFgrQ2ZLZGR4N0FTVmxISFdsdWY4ekNaNG1E?=
+ =?utf-8?B?WHJmVDRDTkdNQmpPaFNFR2FGMlB2RUsySFVWUE1MSVBVdnlvZ2lyNG82UUVG?=
+ =?utf-8?B?eDdUUWVaakhWVUVnRXZ5eGtZWU8zSkhQa2QvL08rMGUzUUZUTjd6RjIwWDdN?=
+ =?utf-8?B?Tm0yTTByVHBQOHduUUtNa1JyVVFjM3lBWDZZejVOT0tlTHk1R1UvTFd5OGYw?=
+ =?utf-8?B?RVFJWnJaZW5VSFY3cURneXgzRlU0bCsrNzBwZUh1cUNZYnlrZkNUNEZCY2g5?=
+ =?utf-8?B?QTdrVVpsbHN0NzRUN2dqY3FFbGgxRWNqb3ZSVndvN2dDRlJ5TElucDdRbExt?=
+ =?utf-8?B?NzFhbE03bEVqWHZGbC9QQTNlUVpGS3hqTm9vQXZpanE1aHYrVTFyd1VBMWJV?=
+ =?utf-8?B?bDg2a1hyK1BQTU1oRk03ckV2ZmNKSmJmRUhLVUNzN2NpdnZxdTNJOW1DR0Jx?=
+ =?utf-8?B?ajhkYUs2d3pXblJ2Q0ZjOVE1MHg3ZjV5TFR5VXBaZEVYVVg2NUZoTjVZN21m?=
+ =?utf-8?B?ZFd1amRZZ1JnSjFPQWcyZTBMZlk5eUxJL2FmYk92Vk9Hd2ZNaWpVSktrNWZp?=
+ =?utf-8?B?ajhzcUhNbnV6L0VITlpISVlwVWg5Rmt3aVZBZHRjdGl4T1hqQ011VnpiSk5H?=
+ =?utf-8?B?Q1pyQzIxNWhzaDJ2Y2lZWmM3eThwOVd5R29QekNJQUozUk5mWVpMT3l4ODFE?=
+ =?utf-8?B?bUZtbno3UHNoVm01VklsRHNpVExIakUzZVBWQUQ1YUMzc3VSa3RScVNWdDhs?=
+ =?utf-8?B?MU1SRGZvY0EvS3Ztd3NPR3Raa0tLRlBoNDR3VGEzNzdWYk9SMUIxVmpWdjFU?=
+ =?utf-8?B?M2VLZTlmRkJLSGo5bkNFRFA4VmZOZmxLQjB6Rmd2VzZwbGJkSWs5bk1FRWlL?=
+ =?utf-8?B?UUhLMkhTK1ZzL09keTdMM0NQdm5VUExBejVzOG5nMlBaS0xnZUJWQmNOamxN?=
+ =?utf-8?B?RHRXc2ZSY0pNSGl1WVppVEZLL1k1bDE4RXk3RUMrcFVZdmV1TktORFV4YWl2?=
+ =?utf-8?B?aXdZd3hiQ1drL2YzbUlsL2xWRTcwTFpJd1ZPeWN5QlZGYy9weWtUejlFamwy?=
+ =?utf-8?B?OWpDNFVUejQwelNrZkJhT3liSjhvQlNoaWZ6a0RzVEJhd3grRVZMaE8yNDJY?=
+ =?utf-8?B?SmVhZmszeVJhZ0puSFlRdUtLUVV5c2F4RDdYNGh3TTlqcW1OVkU2N20xVTQv?=
+ =?utf-8?B?eEZHZ0UrM3c5VW53clAxaGNaUWh3RUptY1lhSmtGdElnK2Nmb0N4SFVRZmh0?=
+ =?utf-8?B?RFc5K1J2QndzSHJqU2pnZm9OakFENy96TmUrQW9RaEYzSWJrR2ZlSjhUVEkx?=
+ =?utf-8?B?L0hTZUNmNktqWVlUU2VzQkVsYS9oYnZIZnJ5U0lDWXpvL2p0RWhzTVNNQitR?=
+ =?utf-8?B?ajljdDJXa1ZRSFhQam5OakZzY0pWVlVOS0Y4MjZuVVMreG5mUmZYbXFBekw5?=
+ =?utf-8?B?ZmpKOC9ORVIxbDU3MllYcWRCd1JTbW1qM2lLWDdBbWVNSUlvcG1jZ1pIbENx?=
+ =?utf-8?B?b2ZjbW9RZnJwUFFPNEFsMkRuRXFqck9JSUdEWHM0QnhkNEI1dVdxUzVkV0VK?=
+ =?utf-8?B?SVVVdXk0VUhxMzV1T3dwYWhJQVdMelc5VzRqR256M3RvVXM3SDZBaFFETkFF?=
+ =?utf-8?B?bENTRGxjeUpIU3dqVWwvWFVCdllESDRWeVVmbVVwQVlHMkdhUlR1VEhpbENj?=
+ =?utf-8?B?V25VOFVOOHJxZ2duRVBvb2FZK1dMeWdPejRMOFZwUThUT3loZ3JEUHBOZCtU?=
+ =?utf-8?B?dG9nakJYc2kweXlTd2lyenhJWW1FU0ZGeUhIY3VuUWxEMXE2VzY3Rkt2QWl6?=
+ =?utf-8?B?Z25MUEJCdE5UUkdvUkVjSkJjMy9lSWtRS2hoTlhma0pLam9QbFlrUWdyV01G?=
+ =?utf-8?B?QXVEWVNEYXBCcGIraTFoOHpmMmNkUWhLSlVLNWExODBVWERWMjA2aDBld0Vw?=
+ =?utf-8?B?Mm5vdjhYWGZFcjlXZUw0UFhMK2txbGFtZEVVcG9MWUx3OGg1MmFsdlN3bSt2?=
+ =?utf-8?Q?j60YHg9NPN1J+L+Bqn76RG0LE?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9b5fb8b-0798-444d-1672-08da9b2072a8
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2022 15:54:49.3098
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9QkCkoQr6QyAG65OrTFgBSPbqTwMVrrqCMJXFHjPwcko1Old0W9k6f+s5Ke6GEgbslTUR2Zv95uCay1/cSY59g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8251
 
-On 20/09/2022 10:55, Peter Maydell wrote:
-
-> On Tue, 20 Sept 2022 at 00:18, Bernhard Beschow <shentey@gmail.com> wrote:
+On 20.09.2022 17:36, Ard Biesheuvel wrote:
+> On Mon, 19 Sept 2022 at 21:33, Demi Marie Obenour
+> <demi@invisiblethingslab.com> wrote:
 >>
->> In address-spaces.h it can be read that get_system_memory() and
->> get_system_io() are temporary interfaces which "should only be used temporarily
->> until a proper bus interface is available". This statement certainly extends to
->> the address_space_memory and address_space_io singletons.
-> 
-> This is a long standing "we never really completed a cleanup"...
-> 
->> This series attempts
->> to stop further proliferation of their use by turning TYPE_SYSTEM_BUS into an
->> object-oriented, "proper bus interface" inspired by PCIBus.
+>> fwupd requires access to the EFI System Resource Table (ESRT) to
+>> discover which firmware can be updated by the OS.  Currently, Linux does
+>> not expose the ESRT when running as a Xen dom0.  Therefore, it is not
+>> possible to use fwupd in a Xen dom0, which is a serious problem for e.g.
+>> Qubes OS.
 >>
->> While at it, also the main_system_bus singleton is turned into an attribute of
->> MachineState. Together, this resolves five singletons in total, making the
->> ownership relations much more obvious which helps comprehension.
+>> Before Xen 4.16, this was not fixable due to hypervisor limitations.
+>> The UEFI specification requires the ESRT to be in EfiBootServicesData
+>> memory, which Xen will use for whatever purposes it likes.  Therefore,
+>> Linux cannot safely access the ESRT, as Xen may have overwritten it.
+>>
+>> Starting with Xen 4.17, Xen checks if the ESRT is in EfiBootServicesData
+>> or EfiRuntimeServicesData memory.  If the ESRT is in EfiBootServicesData
+>> memory, Xen allocates some memory of type EfiRuntimeServicesData, copies
+>> the ESRT to it, and finally replaces the ESRT pointer with a pointer to
+>> the copy.  Since Xen will not clobber EfiRuntimeServicesData memory,
+>> this ensures that the ESRT can safely be accessed by the OS.  It is safe
+>> to access the ESRT under Xen if, and only if, it is in memory of type
+>> EfiRuntimeServicesData.
+>>
 > 
-> ...but I don't think this is the direction we want to go.
-> Overall the reason that the "system memory" and "system IO"
-> singletons are weird is that in theory they should not be necessary
-> at all -- board code should create devices and map them into an
-> entirely arbitrary MemoryRegion or set of MemoryRegions corresponding
-> to address space(s) for the CPU and for DMA-capable devices. But we
-> keep them around because
->   (a) there is a ton of legacy code that assumes there's only one
->       address space in the system and this is it
->   (b) when modelling the kind of board where there really is only
->       one address space, having the 'system memory' global makes
->       the APIs for creating and connecting devices a lot simpler
+> Thanks for the elaborate explanation. This is really helpful.
 > 
-> Retaining the whole-system singleton but shoving it into MachineState
-> doesn't really change much, IMHO.
-> 
-> More generally, sysbus is rather weird because it isn't really a
-> bus. Every device in the system of TYPE_SYS_BUS_DEVICE is "on"
-> the unique TYPE_SYSTEM_BUS bus, but that doesn't mean they're
-> all in the same address space or that in real hardware they'd
-> all be on the same bus. sysbus has essentially degraded into a
-> hack for having devices get reset. I really really need to make
-> some time to have another look at reset handling. If we get that
-> right then I think it's probably possible to collapse the few
-> things TYPE_SYS_BUS_DEVICE does that TYPE_DEVICE does not down
-> into TYPE_DEVICE and get rid of sysbus altogether...
+> So here, you are explaining that the only way for Xen to prevent
+> itself from potentially clobbering the ESRT is by creating a
+> completely new allocation?
 
-Following on from one of the discussion points from Alex's KVM Forum BoF session: I 
-think longer term what we need to aim for is for QEMU machines to define their own 
-address spaces, and then bind those address spaces containing memory-mapped devices 
-to one or more CPUs.
+There are surely other ways, e.g. preserving BootServices* regions
+alongside RuntimeServices* ones. But as the maintainer of the EFI
+code in Xen I don't view this as a reasonable approach.
 
-Once this in place, as Peter notes above it just remains to solve the reset problem 
-and then it becomes possible to eliminate sysbus altogether as everything else can 
-already be managed by qdev/QOM.
+> What about other assets that may be passed
+> via EFI boot services data regions?
 
+These would need handling similarly then.
 
-ATB,
+> So first of all, EfiRuntimeServicesData has a special purpose: it is
+> used to carry data that is part of the EFI runtime service
+> implementations themselves. Therefore, it has to be mapped into the
+> EFI page tables by the OS kernel, and carved out of the linear map (to
+> prevent inadvertent access with mismatched attributes). So unless you
+> are writing the code that backs GetVariable() or SetVariable(), there
+> are never good reasons to use EfiRuntimeServicesData.
 
-Mark.
+That's a rather strict interpretation of the spec. Even back when
+I started dealing with EFI, when it was still quite new, I know
+RuntimeServices* was already used for similar purposes.
+
+> If you want to use a memory type that is suitable for firmware tables
+> that are intended for consumption by the OS only (and not by the
+> runtime services themselves), you might consider EfiAcpiReclaimMemory.
+
+Personally I consider this type less appropriate than the one we
+currently use. It's intended to be used by ACPI, which doesn't
+come into play here. It comes quite close to using e.g.
+EfiUnusableMemory here ... We might be able to (ab)use
+EfiLoaderData for this, but that would again require special
+casing (inside Xen) when deciding whether the memory can be used
+as general-purpose memory.
+
+> TBH I still don't think this is a scalable approach. There are other
+> configuration tables that may be passed in EFI boot services memory,
+> and MS especially were pushing back in the UEFI forum on adding table
+> types that were passed in anything other the EfiBootServicesData.
+
+Within Xen we might abstract the approach currently implemented in
+case more such pieces of data appear.
+
+While I can easily believe MS might be advocating for this model,
+I view it as problematic not only for Xen. How would you pass on
+this information across kexec, for example, without introducing
+further producer-consumer dependencies requiring separate protocols
+to be followed?
+
+Jan
 
