@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A2C4C6FA82
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Sep 2022 13:41:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.410151.653148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A9AAC54EE9
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Sep 2022 13:41:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.410155.653192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1obMS5-00041a-2p; Thu, 22 Sep 2022 13:41:17 +0000
+	id 1obMSB-00056z-AJ; Thu, 22 Sep 2022 13:41:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 410151.653148; Thu, 22 Sep 2022 13:41:17 +0000
+Received: by outflank-mailman (output) from mailman id 410155.653192; Thu, 22 Sep 2022 13:41:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1obMS4-00041T-Vs; Thu, 22 Sep 2022 13:41:16 +0000
-Received: by outflank-mailman (input) for mailman id 410151;
- Thu, 22 Sep 2022 13:41:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1obMSB-00056q-5x; Thu, 22 Sep 2022 13:41:23 +0000
+Received: by outflank-mailman (input) for mailman id 410155;
+ Thu, 22 Sep 2022 13:41:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eiOI=ZZ=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1obMS2-00041N-Uo
- for xen-devel@lists.xenproject.org; Thu, 22 Sep 2022 13:41:15 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2076.outbound.protection.outlook.com [40.107.237.76])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36f141c6-3a7c-11ed-9374-c1cf23e5d27e;
- Thu, 22 Sep 2022 15:41:09 +0200 (CEST)
-Received: from BN0PR08CA0016.namprd08.prod.outlook.com (2603:10b6:408:142::35)
- by MN0PR12MB5835.namprd12.prod.outlook.com (2603:10b6:208:37a::6)
+ id 1obMS8-0004DO-Vq
+ for xen-devel@lists.xenproject.org; Thu, 22 Sep 2022 13:41:21 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2045.outbound.protection.outlook.com [40.107.220.45])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3c14dbd5-3a7c-11ed-9647-05401a9f4f97;
+ Thu, 22 Sep 2022 15:41:19 +0200 (CEST)
+Received: from BN9PR03CA0190.namprd03.prod.outlook.com (2603:10b6:408:f9::15)
+ by CY5PR12MB6225.namprd12.prod.outlook.com (2603:10b6:930:23::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.17; Thu, 22 Sep
- 2022 13:41:10 +0000
-Received: from BN8NAM11FT013.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:142:cafe::f9) by BN0PR08CA0016.outlook.office365.com
- (2603:10b6:408:142::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.19; Thu, 22 Sep
+ 2022 13:41:15 +0000
+Received: from BN8NAM11FT088.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:f9:cafe::65) by BN9PR03CA0190.outlook.office365.com
+ (2603:10b6:408:f9::15) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.18 via Frontend
- Transport; Thu, 22 Sep 2022 13:41:10 +0000
+ Transport; Thu, 22 Sep 2022 13:41:15 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN8NAM11FT013.mail.protection.outlook.com (10.13.176.182) with Microsoft SMTP
+ BN8NAM11FT088.mail.protection.outlook.com (10.13.177.81) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5654.14 via Frontend Transport; Thu, 22 Sep 2022 13:41:09 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ 15.20.5654.14 via Frontend Transport; Thu, 22 Sep 2022 13:41:14 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 22 Sep
- 2022 08:41:09 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2022 08:41:14 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Thu, 22 Sep
- 2022 08:41:09 -0500
+ 2022 08:41:14 -0500
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.28
- via Frontend Transport; Thu, 22 Sep 2022 08:41:08 -0500
+ via Frontend Transport; Thu, 22 Sep 2022 08:41:13 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,22 +64,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36f141c6-3a7c-11ed-9374-c1cf23e5d27e
+X-Inumbo-ID: 3c14dbd5-3a7c-11ed-9647-05401a9f4f97
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Qf8UInUFkFmz86Dh6WSyuRFs+lOmcFz9DD2ahht6V/opJ9sY0Ng95R/crWSSrgjkQpAohFVwG6dg0A2mMonrhK0deJRJDNDtV3nxdh0Yi+XvKXjZDmtffUpJ53R7n/mdDsLTBJqlaDk/liOGiI8lx70y+iBHaMnOEEQ0493s9ikRjCVDxMQel2Nh6Md4cIu8sApw+C1V5ynmvO7dYaf0eUPcqy3NrOmYZjzl3lwhTH6mTGJB3EKLDIoeesTOw13VPjO+Ydt4rK3TNrDDQbjaGJc5/Pu1Mp35Y302eWqT7JwWZm4lPr9SqM+4wzytALUERe+bhPwOKjl+qZHP7u9GjQ==
+ b=DNpkkAz/BiqTXZsPbfiJ1Lj5EHooMz9h2Faw3mliwvKogbBO6pUlPtSORo6nM5RXZXeBbZn8alBPrA63ksrCX0mwpMwDr2E7WkfdJpoEeK1SlKU1jvXkQqS//Q3gkBhAJuFIBG+gmGnuajLvmRzjcQf1pRzZefujUDERuA+LtN4oM1HrFMTAq6y9+h3YDV4lkcZSWhleCGKLG4recWkV6GNGQe8Ul5BO2PXZX4qaqfcGX9y1ZTAeNP7ed927BNZ+bE0Dw5zJxH/tPjn2uecQs8hEkJv5vVUIXWWZRhen0NGdgJmnr2XaWzG87OMXgR84P24EalUDRm+wDyRIc07x8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eFd5gtYuyRgdB3UriWvj7k5JYO7DhSPqJ01SrsP14FU=;
- b=AgDhbQQjYGxam7fOz42M87syfgdwrbOf2mkUE/swE+O1eSyj83jiv1bq/HQ/6gO/vM0+6TL39RA0D9WWte/MkKn8tPJL2nDCuSil7Sx9z9PwjAAQoPaPX/Nrz0MRvkUw/i6Eom2rAEVsmfk42N2PN5lQ3DzwKwm9VW/Kn5qxA+J2VQfPnSRvjs54hpsAw43hpAJ7Mi0fHjAf6L9YpaUnVBnhY2gXEeDSkWhmnUKA8snsKVpZLI7yy5gkCKwP0SebRQRGHOKpEHZgLqrRwCZ67NxYUIYxf33fuqtUZ0jA4y4vV2bOn59VVGBoIb5ZBM+TToLmWPXSPnmpEqDkBz6ztQ==
+ bh=4r2IqG5noer3R27Px3k/yK/ec0pnYo0SQkuP5is3Mt4=;
+ b=X7KGUkr7avVzl6qe2wGWCbcZMCU9DIhbeRXff2syhi5hqVKsQQOBl7I0OHmJob4R6a08cruQ/DZy99I21UKFYy1kp95Q+KL0ayaOUlpZFb0gPsErshvdQLk+s0xMHPISsVAp7LnLqKp1ZBSbi1BnlKtX9SaLylfHLQO/DyHOYdiFZa47ZZpoInZZQ6Jq4ZNzzIZFWMk1BJgzjxxGYJ/wJcKiosceax9sebMc2nPCF39xTMZlEJbrfej2ujhOj3ZCCzcAQQWyJB+OYVBx1lGsSS+He8DcJZoBfvzrw+ljkybHjLMky4bv+FUSId/ACcPkFDfnQl1eV3LWjQKxxFsRkw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eFd5gtYuyRgdB3UriWvj7k5JYO7DhSPqJ01SrsP14FU=;
- b=jhC3sYkUNGVag5imYeP5G30TbfeY3QwAmBFXI5vN9bOJmZDyLRdWyEeSRAKlACzJVfCoIre/umltDmXJLfNfNPXJDqG+mGuYQ47TyLjwRm+mstwSex/PaIXSKcItuXt8U4EJNZOmo9E06zTaCCCgXSg3jFM0RqUAIZoviv16cec=
+ bh=4r2IqG5noer3R27Px3k/yK/ec0pnYo0SQkuP5is3Mt4=;
+ b=Q5D+HyiRXhgKhYTjqrVYBLriiG9UtWP64IIUzTFJ4kYIOYL8066iKaLRRP55ZLJIUV59+I9jn+NJyOmpIIZfhsmpCA8oZsQh6aRcVUecDokgL2KYq/gS1pzlHAx0aUjxqpMI5V7srvDDcrTtDtNNTdBOgZpQ6f9AqqNcf9FQ/XI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -90,68 +90,69 @@ From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/9] GitLab CI cleanup & improvements for Arm
-Date: Thu, 22 Sep 2022 15:40:49 +0200
-Message-ID: <20220922134058.1410-1-michal.orzel@amd.com>
+Subject: [PATCH 4/9] automation: Add Arm containers to containerize script
+Date: Thu, 22 Sep 2022 15:40:53 +0200
+Message-ID: <20220922134058.1410-5-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220922134058.1410-1-michal.orzel@amd.com>
+References: <20220922134058.1410-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT013:EE_|MN0PR12MB5835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85b6bce6-fa0f-47f5-ce80-08da9ca01ba8
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT088:EE_|CY5PR12MB6225:EE_
+X-MS-Office365-Filtering-Correlation-Id: ada0dd3b-f784-4ab6-7bd5-08da9ca01eb5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ASM88PlnmzkmxM+DDJ6kinykIEWtvlL8KECacYZNE/o4YT+KzgNC6wzfOFJYgBL730JsDYO0/5/TfG+Z/sl2U+x6Kh1i6Lym2FM8R7YFgeKFHhSR1HCFTQ7dA5qm4G9r4/l/3u6XONRPK6x3D3In7L0qhkfVbjM3eHqpOh45h/wjpkwiN0O619hI6DFYfZrZ56r96Y13y0NprHmI68lM8MTrUoln6zSWjPWfCKvFFgD0HF1XKWnVX/efyzsBZ8rCjOjh55aw2CJsH/PDHdARDmf102/ggPRF3tuyclBBjzY9o+JY1EEl+QHbRbmtxPaJA1ooEuHR6hpDS8Cv48Ak3WlL2ajk7eGAqG83Uh8Ge0ph5iccOcndBW0fFgl9wim3SzXUm7Pt3IRv9KjbMvDGlWixO+j3uMbafH0ghBf9hkDCQiWbbAy3cvw0hKCiOucUsm/C85sUXRjXX9DKrBPdvM2YA4l52Psc6d21y9+cqL1kInhp/gFZ/bp00Cuvu7sKAjzrekazmYeI0AgaNfoRype2MReisHH4+o8J+qBp44yMd7mLl6bgI4RiO6a8pUJqzdn8l027NHe+DV69CEmSBfYfROnWUNM1M7CfP0Rh0n1GEc25HmHdtskTxV0DFT1qV02ulgG+Nj3IdhJA9FpaSfE1Zp9X+82wNOAz6wMGxSTX7bCOU7RpbJLjo4O8TEgJaBgmdapHM7KvH/D7aSLpza3SBCNibd719BmmYTyLK5PjXFcouJ8Pg4zTNpAKJUMvzEutAmdYuzfOWn2BMu50HG0RWTSi1DxRN63/jIQiFifgeGJ9ibO5H7Smi+6i9USt
+	azcwZdwOPJYc5TPdwawEdEdb1tDuLeRDvywFi8pzc9eue2rbAfDcxPUIyB06pwLG4uhDYm/uIuZf2f8JshBQRadPEKR68Jz9h98dCFSzpyQfAB1oeZ0/r5M0aolF2BUVbE9DAudZxXfqpXGViBdMxu9WDkknNhYpmbLnE7V3DDCUsNHKTM+wY2KhtlHfQgZuExDcNnSmSvu7pGSU3UI+n1iwclN8iCVCDq/w3qntZ9xuJNMAyHrR5TP7XA6w3iIgPBFRBxSs5LfQs4mNknN3BuJyO9dRSO+btEWIeX6IdWA4oWEZ1vhFRO5pmkVVZGOd2IhV54bmbYvyjTuZJPWD1IMdLbGPdN1Bdoting5TiiUkyzfEGJirsWJ60eVziBlTxyK1nKgorxZwfbKItOgNlJuzqzyuHFOW2pzQr9ob8ED5njeehPKrImTgRNUxsueRg2dpBooXOO+fZ+4TfkPudJhpzU+7R9SlS9v7fRJlMJdNXIe4xYotM+r9g5qlINAbAO4sDiInJPMq/XkE2wz3SKGp8NWG4rpDcTjOD9+t1dNUbLNp1byChBBHdkJYP84b6vDYh4NtQNU8HX6Uig0tBLpKyiNlhEdrAz5bOxTQ3LbPjuoMVIjlCac4giP8nHDRL/if6fXj1DeTPirikpycHUho1TZ5D27n/gVDGOkCfYoyTm6ZztMzK3RH5UetSjkSgSJeO/afdx0Z3ZbIqTpm8kywx2cdVrPainwjEFDSrYD0zniBD6Gi58gy3d4GqQY/Z2jZ1P2kqUjzHSok2gGWcf1T3sUp9usG3G6azubweZYI0YRzteCAhlbEMk8W7Z0X
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(376002)(396003)(39860400002)(451199015)(40470700004)(46966006)(36840700001)(81166007)(86362001)(83380400001)(356005)(36756003)(36860700001)(70586007)(41300700001)(70206006)(2616005)(82310400005)(40460700003)(2906002)(40480700001)(82740400003)(336012)(186003)(47076005)(26005)(426003)(478600001)(6666004)(1076003)(8936002)(316002)(44832011)(54906003)(6916009)(4326008)(8676002)(5660300002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(376002)(396003)(346002)(39860400002)(451199015)(46966006)(40470700004)(36840700001)(36860700001)(44832011)(186003)(1076003)(82740400003)(54906003)(26005)(47076005)(6916009)(81166007)(356005)(82310400005)(2616005)(426003)(336012)(5660300002)(86362001)(40480700001)(8936002)(4326008)(8676002)(6666004)(41300700001)(70586007)(2906002)(36756003)(316002)(478600001)(40460700003)(70206006)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 13:41:09.8469
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 13:41:14.9632
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85b6bce6-fa0f-47f5-ce80-08da9ca01ba8
+X-MS-Exchange-CrossTenant-Network-Message-Id: ada0dd3b-f784-4ab6-7bd5-08da9ca01eb5
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT013.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT088.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5835
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6225
 
-This patch series performs necessary cleanup and improvements in our
-GitLab CI automation for Arm. This is crucial so that in the future
-we can focus on adding new tests instead of spending time to fix
-issues, making the behavior consistent, removing ambiguity, etc.
+Script automation/scripts/containerize makes it easy to build Xen within
+predefined containers from gitlab container registry. However, it is
+currently not possible to use it with Arm containers because they are not
+listed in the script. Populate the necessary entries.
 
-With the increased interest in gitlab-ci and using it locally, there
-is still some work to do mainly to improve documentation. This however,
-will be handled in the future series.
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
+ automation/scripts/containerize | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Michal Orzel (9):
-  automation: Use custom build jobs when extra config options are needed
-  automation: Add randconfig build jobs for arm64 alpine container
-  automation: Add debug versions of Arm tests
-  automation: Add Arm containers to containerize script
-  automation: qemu-smoke-arm32.sh: Modify script to use ImageBuilder
-  automation: qemu-alpine-arm64: Cleanup and fixes
-  automation: Rename qemu-smoke-arm64.sh to qemu-smoke-dom0less-arm64.sh
-  automation: Rename qemu-alpine-arm64.sh to qemu-smoke-dom0-arm64.sh
-  automation: Rename qemu-smoke-arm32.sh to qemu-smoke-dom0-arm32.sh
-
- automation/gitlab-ci/build.yaml               |  43 +++++++
- automation/gitlab-ci/test.yaml                | 117 ++++++++++++++++--
- automation/scripts/build                      |   8 +-
- automation/scripts/containerize               |   3 +
- ...moke-arm32.sh => qemu-smoke-dom0-arm32.sh} |  57 ++++-----
- ...pine-arm64.sh => qemu-smoke-dom0-arm64.sh} |  14 +--
- ...-arm64.sh => qemu-smoke-dom0less-arm64.sh} |   6 +-
- 7 files changed, 190 insertions(+), 58 deletions(-)
- rename automation/scripts/{qemu-smoke-arm32.sh => qemu-smoke-dom0-arm32.sh} (55%)
- rename automation/scripts/{qemu-alpine-arm64.sh => qemu-smoke-dom0-arm64.sh} (88%)
- rename automation/scripts/{qemu-smoke-arm64.sh => qemu-smoke-dom0less-arm64.sh} (97%)
-
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index 9d4beca4fa4b..0f4645c4cccb 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -25,6 +25,7 @@ die() {
+ BASE="registry.gitlab.com/xen-project/xen"
+ case "_${CONTAINER}" in
+     _alpine) CONTAINER="${BASE}/alpine:3.12" ;;
++    _alpine-arm64v8) CONTAINER="${BASE}/alpine:3.12-arm64v8" ;;
+     _archlinux|_arch) CONTAINER="${BASE}/archlinux:current" ;;
+     _riscv64) CONTAINER="${BASE}/archlinux:riscv64" ;;
+     _centos7) CONTAINER="${BASE}/centos:7" ;;
+@@ -35,6 +36,8 @@ case "_${CONTAINER}" in
+     _stretch|_) CONTAINER="${BASE}/debian:stretch" ;;
+     _buster-gcc-ibt) CONTAINER="${BASE}/debian:buster-gcc-ibt" ;;
+     _unstable|_) CONTAINER="${BASE}/debian:unstable" ;;
++    _unstable-arm32-gcc) CONTAINER="${BASE}/debian:unstable-arm32-gcc" ;;
++    _unstable-arm64v8) CONTAINER="${BASE}/debian:unstable-arm64v8" ;;
+     _trusty) CONTAINER="${BASE}/ubuntu:trusty" ;;
+     _xenial) CONTAINER="${BASE}/ubuntu:xenial" ;;
+     _opensuse-leap|_leap) CONTAINER="${BASE}/suse:opensuse-leap" ;;
 -- 
 2.25.1
 
