@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54768C32771
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B72DC07E9D
 	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 03:04:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.412195.655407 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.412197.655429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od0tJ-0002Wv-Ue; Tue, 27 Sep 2022 03:04:13 +0000
+	id 1od0tM-000322-Hs; Tue, 27 Sep 2022 03:04:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 412195.655407; Tue, 27 Sep 2022 03:04:13 +0000
+Received: by outflank-mailman (output) from mailman id 412197.655429; Tue, 27 Sep 2022 03:04:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od0tJ-0002Wo-RD; Tue, 27 Sep 2022 03:04:13 +0000
-Received: by outflank-mailman (input) for mailman id 412195;
- Tue, 27 Sep 2022 03:04:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1od0tM-00031v-Es; Tue, 27 Sep 2022 03:04:16 +0000
+Received: by outflank-mailman (input) for mailman id 412197;
+ Tue, 27 Sep 2022 03:04:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZci=Z6=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1od0tI-0002Wh-PX
- for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 03:04:13 +0000
+ id 1od0tK-0002Wn-Qx
+ for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 03:04:14 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0d942d05-3e11-11ed-9374-c1cf23e5d27e;
- Tue, 27 Sep 2022 05:04:10 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id C5FE15C0184;
- Mon, 26 Sep 2022 23:04:07 -0400 (EDT)
+ [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 108669a6-3e11-11ed-9648-05401a9f4f97;
+ Tue, 27 Sep 2022 05:04:13 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id DEFB95C0198;
+ Mon, 26 Sep 2022 23:04:12 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 26 Sep 2022 23:04:07 -0400
+ by compute5.internal (MEProxy); Mon, 26 Sep 2022 23:04:12 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 26 Sep 2022 23:04:06 -0400 (EDT)
+ 26 Sep 2022 23:04:12 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,47 +45,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d942d05-3e11-11ed-9374-c1cf23e5d27e
+X-Inumbo-ID: 108669a6-3e11-11ed-9648-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1664247847; x=1664334247; bh=4JBZUH33o80SQ6EzWzmNbNdJlNaQRG2DHCp
-	2h8NCN1E=; b=HoK+K0rYsM7JujYZvrdkZrM8PLlqf/Bhpkd3FdsEo5YSs9cS4tm
-	C8l44Co2N+5jRwpI+0G0aGwoLNJS7cy60wYwYPLV0ed4QRme58r3U4j+fBi5Sjr+
-	cbJ0tb+vAvIImeXfNbGxfNcvX6mW03EqWaiG0O8s+dtVslvp5kAQ/ggRAWIN0r3v
-	r7uWfC6u/5Ld5X+tB8cENXsZywm4dFiBAXT0LDjst5JPMOzvS1wm1r173Vc6jKZl
-	vvS/AWow5TWN4avYplR8aF5Cs37Ps52zQim9iwRna/hPkm6suyO8/xwBSrFqmLkx
-	bNyF9Pc1rpPbZhoDyz1FI0GdKycoaKNcMeg==
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1664247852; x=1664334252; bh=f6ZPHLSgD7XKJHqHB/XRr1A+xgGqvvyVHfV
+	9tK3yBF8=; b=stP9n8OLysaRZAgI0hVUO5K5vvWrV3KynONeqKpOch8rKi2SGrM
+	L8eJ2uKOWuK+29by+PEMGNMXhYhekWoT2P8brAIA3lEC04h09EnEFdI960dykbxW
+	CeBK130vOgnOiKt32buiQaq6aA06eebe5d6wziEZq1aw0W9Jamd32a8lsKLPG5vQ
+	A+NREmBzLlc60raErznpkvrzxRU3y916X+Z1oaLYH+tNNWsr25LQLUeRamxhojxi
+	paNdyueOV9DmyG0NajCQPEQKczfworoYUTGvuAjTyYEqtIEvr3+Qr9d1CHU1o09b
+	IBJfo/hATUdgCKKPdPJ3S+Ln7IfX/KhaS5g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1664247847; x=1664334247; bh=4JBZUH33o80SQ
-	6EzWzmNbNdJlNaQRG2DHCp2h8NCN1E=; b=EKZCLZq3LOSIJEFlSNUPqRVHbe3bH
-	No6N1JFJdc59Vn7h2QjB9crumLLB5ilXDmveBrJFUC5OsZvZnyvgIV1W1m7S2MOH
-	xY8gssMIqqa4LLsutLAgXF6AbcmxdJFFMLs+M46jyzrYSYCveI0C+GwGNIbCKvuT
-	M/hewWTG2dfcGZKuB4lcXhjWSiRNjNub/z+eXyc43e16+wfXANSQnKFvB+f7QIdu
-	mTJO8knuljnW9wR5YpTVKZ7ENGPM3ccbG5SHzeNX6DmtON0NegawSss+3L5MrD0F
-	cGrl9/hoDVI7gdC/B4YZeiBjLMmAvPP4WyPturr6s2ni0hVsjZwwM6iWQ==
-X-ME-Sender: <xms:J2gyY3bjz3lIhsEWVUw8KWAcxs0IoEXJ73mmR5PzSAhOViMJPNAYOw>
-    <xme:J2gyY2b5nfB5tVnPFzDWqxGsf9tbliKcygYlUnAMzKHgBnEbith3h5UCQa1f9tY2l
-    Fm0Bq504-BMuts>
-X-ME-Received: <xmr:J2gyY58svbZ2whR9nqKcFBfJQTSKOjsb5SYKb_p4cr0JdvmNCGvdZpZHzW6vO4EnNsOFBOkeNlmq>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegfedgieelucetufdoteggodetrfdotf
+	:x-sasl-enc; s=fm2; t=1664247852; x=1664334252; bh=f6ZPHLSgD7XKJ
+	HqHB/XRr1A+xgGqvvyVHfV9tK3yBF8=; b=L5QjJcMZbB5LyxexrgJcOojGggW8d
+	gR9NOT3QqReStJ3u53F6k24dtHVd/DOQhX/PxaahaQ7dluPEDYRJIBCHSHtDOSJS
+	z3T7B4I+x3+QydGnxdPlWwPL38RYnd6HPnk6WykynYj+XeYhLDNflG4985PsLomI
+	9z2zoKXEDCia+nnQtzRj9SGoSWTyOQQGTyuA+IBenTXM3yPFbnAPplBlAfyM0/Sf
+	AJv4Sfa9sxZOCYpMBMQuayjs6GUWKWhXrYQq9esdDVaWu5ttPKl+UNyxA1SKJbtG
+	UVLnBte6QmPa0oEL9AoPfpkl8wbDF9vq2BYE81ZWCwTDohoX3UQBtOdyA==
+X-ME-Sender: <xms:LGgyY5sqlHrIl5kn4D4tXcl0K8OgayYdbDKXvNoPT1gdMOND4vJwTA>
+    <xme:LGgyYyeCN0jMj-oB7tkRGy1SS7Eez0ozhrqCqjoceLnLdaufTehzw2Dw-Lv3KLUjd
+    77qVLmu94y1m3Y>
+X-ME-Received: <xmr:LGgyY8zM5WNkxuvriI7EDHb2UwtjqUhbGiEBV4bCp6VSaQ2K9BWBiWdIJ2L_dZLNqrRktdvCz0LX>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegfedgieekucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeffvghmihcu
-    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
-    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhgefgieeitdeijeeguddtkefgteeg
-    heehgeetkeevhfefgfduhedtveelgeeugeenucevlhhushhtvghrufhiiigvpedtnecurf
-    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
-    rggsrdgtohhm
-X-ME-Proxy: <xmx:J2gyY9pFGg4BLEKsTNaKAf8fjA9ZUsUW6vqg35IbQD8uxvAjI6_1OQ>
-    <xmx:J2gyYypeLUkC5oSPoCok3wIUZN4P5IPTL1XKQK_YwT-Idjgtc7H8rw>
-    <xmx:J2gyYzRwiabthcm4SF3rpu8gnu2-z9rCNjNpqBhJQ-P0FGxm1HCBWQ>
-    <xmx:J2gyY51GMgvaShWG_87D-nphRIUlavbMdq_tGsZVBagxvZIaEU9Y7Q>
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
+    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
+    lhgrsgdrtghomh
+X-ME-Proxy: <xmx:LGgyYwPnyvfQOfbThkQ-g4BsC6j412QG9-ElesGhKED2lg9m_b3zxg>
+    <xmx:LGgyY5_S-JmfCU2F3P2TxB8qSdcM4H_gaJoqUDfyFMl2nrGybwofVA>
+    <xmx:LGgyYwUkp6mwPPXdyKsGpkfeodgWyZiBNCmUam2aH2x-5PDtY5XtFQ>
+    <xmx:LGgyY7L0qVL2gKMr9AC89tCm4DTuGXHOGCy_9xpEO5eANKFEDY2MZg>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -93,38 +93,74 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 0/5] Suspend and resume stubdomains
-Date: Mon, 26 Sep 2022 23:03:56 -0400
-Message-Id: <cover.1664236600.git.demi@invisiblethingslab.com>
+Subject: [PATCH 2/5] libxl: Add utility function to check guest status
+Date: Mon, 26 Sep 2022 23:03:58 -0400
+Message-Id: <3bbc7f9038049815bc2af1e4d901347160e09f7b.1664236600.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.37.3
+In-Reply-To: <cover.1664236600.git.demi@invisiblethingslab.com>
+References: <cover.1664236600.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Currently, libxl neither pauses nor suspends a stubdomain when
-suspending the domain it serves.  Qubes OS has an out-of-tree patch that
-just pauses the stubdomain, but that is also insufficient: sys-net (an
-HVM with an attached PCI device) does not properly resume from suspend
-on some systems, and the stubdomain considers the TSC clocksource to be
-unstable after resume.
+This is used to check that a guest has not been destroyed and to obtain
+information about it.  It will be used in subsequent patches.
 
-The first two patches add utility functions that will be used later.
-The third patch is the one that actually suspends the stubdomain.  The
-fourth patch makes suspending slow-to-respond domains more robust, and
-the fifth patch adds extra logging.
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ tools/libs/light/libxl_dom_suspend.c | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
-Demi Marie Obenour (5):
-  libxl: Add a utility function for domain resume
-  libxl: Add utility function to check guest status
-  libxl: Properly suspend stubdomains
-  libxl: Fix race condition in domain suspension
-  libxl: Add additional domain suspend/resume logs
-
- tools/libxl/libxl_dom_suspend.c | 276 +++++++++++++++++++++++++-------
- tools/libxl/libxl_domain.c      |   1 +
- tools/libxl/libxl_internal.h    |   1 +
- 3 files changed, 218 insertions(+), 60 deletions(-)
-
+diff --git a/tools/libs/light/libxl_dom_suspend.c b/tools/libs/light/libxl_dom_suspend.c
+index fa50e8801f35d173a99ae5dd19eb941649e14019..d2a88ea34efb115a8f2b861daf5884d95f39e81d 100644
+--- a/tools/libs/light/libxl_dom_suspend.c
++++ b/tools/libs/light/libxl_dom_suspend.c
+@@ -321,27 +321,36 @@ static void suspend_common_wait_guest_watch(libxl__egc *egc,
+     suspend_common_wait_guest_check(egc, dsps);
+ }
+ 
++static int check_guest_status(libxl__gc *gc, const uint32_t domid,
++                              xc_domaininfo_t *info, const char *what)
++{
++    int ret = xc_domain_getinfolist(CTX->xch, domid, 1, info);
++
++    if (ret < 0) {
++        LOGED(ERROR, domid, "unable to check for status of guest");
++        return ERROR_FAIL;
++    }
++
++    if (!(ret == 1 && info->domain == domid)) {
++        LOGED(ERROR, domid, "guest we were %s has been destroyed", what);
++        return ERROR_FAIL;
++    }
++
++    return 0;
++}
++
+ static void suspend_common_wait_guest_check(libxl__egc *egc,
+         libxl__domain_suspend_state *dsps)
+ {
+     STATE_AO_GC(dsps->ao);
+     xc_domaininfo_t info;
+-    int ret;
+     int shutdown_reason;
+ 
+     /* Convenience aliases */
+     const uint32_t domid = dsps->domid;
+ 
+-    ret = xc_domain_getinfolist(CTX->xch, domid, 1, &info);
+-    if (ret < 0) {
+-        LOGED(ERROR, domid, "unable to check for status of guest");
++    if (check_guest_status(gc, domid, &info, "suspending"))
+         goto err;
+-    }
+-
+-    if (!(ret == 1 && info.domain == domid)) {
+-        LOGED(ERROR, domid, "guest we were suspending has been destroyed");
+-        goto err;
+-    }
+ 
+     if (!(info.flags & XEN_DOMINF_shutdown))
+         /* keep waiting */
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
