@@ -4,51 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C14CC6FA92
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80650C07E9D
 	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 09:47:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.412366.655643 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.412368.655665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od7Bp-00065D-GY; Tue, 27 Sep 2022 09:47:45 +0000
+	id 1od7Br-0006ZX-2M; Tue, 27 Sep 2022 09:47:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 412366.655643; Tue, 27 Sep 2022 09:47:45 +0000
+Received: by outflank-mailman (output) from mailman id 412368.655665; Tue, 27 Sep 2022 09:47:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od7Bp-000648-Ao; Tue, 27 Sep 2022 09:47:45 +0000
-Received: by outflank-mailman (input) for mailman id 412366;
- Tue, 27 Sep 2022 09:47:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1od7Bq-0006Yh-TR; Tue, 27 Sep 2022 09:47:46 +0000
+Received: by outflank-mailman (input) for mailman id 412368;
+ Tue, 27 Sep 2022 09:47:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yjFy=Z6=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1od7Bo-00061O-Mr
- for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 09:47:44 +0000
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2045.outbound.protection.outlook.com [40.107.244.45])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e73fb65-3e49-11ed-9648-05401a9f4f97;
- Tue, 27 Sep 2022 11:47:42 +0200 (CEST)
-Received: from BN0PR03CA0024.namprd03.prod.outlook.com (2603:10b6:408:e6::29)
- by CO6PR12MB5393.namprd12.prod.outlook.com (2603:10b6:5:356::9) with
+ id 1od7Bp-00061I-Qf
+ for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 09:47:45 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2062.outbound.protection.outlook.com [40.107.93.62])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6f4eed5d-3e49-11ed-9374-c1cf23e5d27e;
+ Tue, 27 Sep 2022 11:47:44 +0200 (CEST)
+Received: from BN9PR03CA0718.namprd03.prod.outlook.com (2603:10b6:408:ef::33)
+ by DM6PR12MB4202.namprd12.prod.outlook.com (2603:10b6:5:219::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.15; Tue, 27 Sep
- 2022 09:47:36 +0000
-Received: from BN8NAM11FT047.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:e6:cafe::5d) by BN0PR03CA0024.outlook.office365.com
- (2603:10b6:408:e6::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.26 via Frontend
- Transport; Tue, 27 Sep 2022 09:47:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Tue, 27 Sep
+ 2022 09:47:42 +0000
+Received: from BN8NAM11FT048.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:ef:cafe::5) by BN9PR03CA0718.outlook.office365.com
+ (2603:10b6:408:ef::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.27 via Frontend
+ Transport; Tue, 27 Sep 2022 09:47:42 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT047.mail.protection.outlook.com (10.13.177.220) with Microsoft SMTP
+ BN8NAM11FT048.mail.protection.outlook.com (10.13.177.117) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5654.14 via Frontend Transport; Tue, 27 Sep 2022 09:47:36 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ 15.20.5654.14 via Frontend Transport; Tue, 27 Sep 2022 09:47:41 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Tue, 27 Sep
- 2022 04:47:35 -0500
+ 2022 04:47:40 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Tue, 27 Sep
+ 2022 02:47:40 -0700
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.28
- via Frontend Transport; Tue, 27 Sep 2022 04:47:34 -0500
+ via Frontend Transport; Tue, 27 Sep 2022 04:47:39 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,22 +64,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e73fb65-3e49-11ed-9648-05401a9f4f97
+X-Inumbo-ID: 6f4eed5d-3e49-11ed-9374-c1cf23e5d27e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fasb06A/PZTFUZNfItDs3GAg6X5niKPL/WKfuuDVPVjGcwl9Ey5xGYQetwwTnXDiQ7GWMTuhBE605BpvYsDL90CWwLX8K4oCWcEGsow21LWXbYhrfWgQm9f5k292A8iQt1Xvf3AKzrvt3gfiKKDgPeT3Mz4H4sJY6pg+6eoj9BsD0RE6rq2zx7zJPb/oKn+2ESLRElhiqE9EJ19Dgy0W/XKphPJ1ZRtE31/oaffc0MgSrepLo6q/HgfaHgSs5Ud1PwZnn7SA/+ix1uehwb/G4X3siFfoFCfuMwYWmgLufpypVQ7/2nZS+TB8TvdW81lMOG0Xt3xI6rdvEorSneMLuw==
+ b=Ql16UGpPEA3xyGtwRFmtmbmCJqfgcBgKUVX5q+5/YHUSi74a0ny5dMWIErzMhc1/NnQY8zeoxaRlusygXC79MIWBfbqevqvIAfiW2NSahQcB14bWdVetIN79vJxXIWvkojs2WEjlNBY1X2rMDguX4XtevzM/eET1srBy/guIKYTL3Cz37pn5XKAsy+JJwzv59ct1fdmsWJh3gRwB/P1EXPRtoTx6Mq2MUeUO2A/5lK2xlXHhBBBIatb96u6LfwAs+1UuDRjInxMnrrLnPRchn6JRmCYDyRYLl5xQKyn+kYnirP+pF0X1AsnXnZjPQ6y7MnqGoXSHXU6ezAy8WFeVWQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DMRTS94bP5mzTyp0C3TVUX3OC0p29wzVci5VOZBrKaU=;
- b=BUU+cet6U020TPLzgUzpTImJiszwaWHPGTHvrL/CpdAANvFc1qMpwF0MjpDuMQxGoO5lG/0z1O6Th29SiZnzFnMlr2ulTv1M0/sManDN7fhIBoWXACN5MPOgvgdWYQ2h0zUaon9apmthTkr2pgSIH2N5XQ7u1aYrteUocftkAgpM1a9NmIfc9xZaUyKxMOZP7ZWPuJcYjgwFq201kQv/ydbyyDUlksYA5MP/+XF0gSrSxhxKw7x49ogvVNDyDHGIaL029nEAKptfHZGi5/7svCY9VTdh7m+pLa/MHEJOpjfxSxcd+1xDYkEYzm6Q0QNHjdi5A4QjiepXLSjwttLRsA==
+ bh=fY5JlIKf+ph5S89SuUOmRzi2nm3ceC5eVYCGsXFJMeo=;
+ b=bnI+N7MdzMDifH8u5/4XO8gI3V6tIQDrEVWESFX+/YPDn0pqyOZgcWF1iuIj95J0JdK0L4nafN7XnfmgZth/ip4NBNSoWfiUKeVOWSta8D+akVgGs1TpBDAy0IV3H62zaMdR5Phg8mHIFQbe5RrDlqgbqNpsoIjrCH0h2rntRElIYLFwACJsetDKWGEqxWCJUK5aE5lq6vW9RoLnr2eL2G57JgwJ0RRr2hHY/VW7gFSZklsX4MhbHFvqOjU5PbSUuQ5lsGJoiE2CT0TCTvBZpEBKGPqVwyAXAr2qcw4T8uiwApotUCGaerNAZLVYKk9j52nhFHCzf/fJiwj5Qn3vsQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DMRTS94bP5mzTyp0C3TVUX3OC0p29wzVci5VOZBrKaU=;
- b=WmnHfXxewfXz1KLHRO5UqEVneMgRhgYgiBb3/GcGISBAYv69cu2Wm8zU2UAhxyV5HGcb4rFSco/zOCyeks/EbyQ1BuvfPepodYedk4UPUwUh8uvELBkQ7JpKxHqatP5z5IMMMyUs1uCTTkuHYxdIENAwmJxhJE5xsQPBFxThTzU=
+ bh=fY5JlIKf+ph5S89SuUOmRzi2nm3ceC5eVYCGsXFJMeo=;
+ b=XIVCjx0z7b8jz5V3ANAaECA1c5TaJoheHFGOlcyyDSCnGy4TvvAAKbn6f7Cj7NCYl/cNhvizgkj26zWAVd43GJXzI/1Y29QzwmG7p3QiAzl3yPBAoBiFSC0zEUIXIRVY56RXIzrSTIIYnyKYG07iAJw878n9qV9mmULgJfklS6g=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,69 +89,89 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 00/10] GitLab CI cleanup & improvements for Arm
-Date: Tue, 27 Sep 2022 11:47:17 +0200
-Message-ID: <20220927094727.12762-1-michal.orzel@amd.com>
+	Stefano Stabellini <sstabellini@kernel.org>, Luca Fancellu
+	<luca.fancellu@arm.com>
+Subject: [PATCH v3 03/10] automation: qemu-smoke-arm64.sh: Increase RAM size
+Date: Tue, 27 Sep 2022 11:47:20 +0200
+Message-ID: <20220927094727.12762-4-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220927094727.12762-1-michal.orzel@amd.com>
+References: <20220927094727.12762-1-michal.orzel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT047:EE_|CO6PR12MB5393:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3985efc7-e83f-4ccf-456a-08daa06d4f05
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT048:EE_|DM6PR12MB4202:EE_
+X-MS-Office365-Filtering-Correlation-Id: 17234022-4544-45cc-193f-08daa06d5244
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ZETgDIUOiBhzjRSSjhMOwrdJeJ99ZG0xLZrgfWzmIQuidX9HZMfXmIaJGc1sD7GaHIYyRBHpeH1VRIit18f5cXsYyz7aThJsOy1t4exDMDWB2EU6erChj6qLEV8uusgNAClE5OjpDdItTPB02gS9grxRT75olaL5yYVW6kxGNKmPeOLXxFnyIVIvIFheHgk7RfibDRM7BMvaB0h4Xa2Xh4QdXm6mHMOQXUTbyT2vcgQppx4Paj/9joVx25n1CDKXw02CT5ADSI/biGjqZwOJ3Og4wDzQ4FyQv7YLqmEiWrAAYvL9vj7VNo3TsnAjZotcuSU0XJY7tRZlm2+z8fHrNcokvYMxRKXOBHgHxGW4XTEzfK1Zx7S9GWELGPhejL5VKirdUqctgzt9KgjuCcyeeR+0wS6INsICpZAYRtMdiJPwXh4T0AsKi32Nq0Wj0NVGCl7hEEfzHX0ceUBe5TEm+nWMPVHWhWJQmyNq/+fIuAMyEvKuMtjPnQEf86k1+Qe33c0T6xXVRtQxkojhCP7PJ4SNAMh8uDi3f8DoxD7G7Ghds2gI0/6lIpsAyiB+aIRQnxPwiYdel1UTogr1i/gS5WP5HmMLrw2NZwVAgZZ15HH3Ocqo89HPUrrlX2khKRTUXh35HQoRU+zoNMOF+uIkcdNe/lBWfD1MEeWmRuuVGwDHD/uu4/bXQvtXhR3VGpeqkQ7JIgu4AhbQt6R2FC9r3lcpgkQ0cz0I3b4huhRXvlw39QiWlcDz/GQ4uXKJ8A3/CKF71UenuxPtPT/Bar8XPrskOySqvT1f8TfDZCqORqN8LZH2fw6jWZa8lQgwgXny
+	vS07UslcptDDVnrgl9V/BBPAq9w6O+aD6su/2zIodvsXQnacfJDVcqYVi4BcbqfTT3rjvy+pjfV9vveh2HdJw42kUPCm33Dl5As04EVyaecCtdTwCsbADVBheQfeotwgYKdebEqoqGYcILRK7xG4YOwn/hGjm++pVLFmu7SebOQnZ2Jw9F8MXHcKQ1Rpqb2uvBEw4DaLofqJoRCaLt3Yq7eSo82KPTuPBJ7GBlGZM3ulNjH7iUttVIK1NZVr0e9x4d+BzTsWZAAa+KE8qb+s7qkb8ATeUcx6349q+xt7GxcaVydB4OTqyvEAWaNGOA7c3yeh+o2/Makcbw7WgwWUV9iPjTLO5UtGymCmv5vZZtj0eHbmIKFws3WoVRomlpIQVh/Ygv67C33ngNupwIrE9HUAK02X7nUTsV0sMgYKDziaEdzGvkQMn1X2B4iD5cZxgktfzFBCuVYYsGxInHAUmoL1cG3/4748RfERTlfXHRyyq8eZoYD5WxVYYrua1xqtWx+KhcDNFYf5iy8PoQnEF2QwffuRi9uJtSz5gCpvukfMvD0bcdJTYBkmNMTvUb+a9ffhT0jmybjqHYFOqcvZqEoS2DNJ8PTKQ6NvGB+JKJM17JfXdCIRJ18Nr657ontfvH+fMeB+AoXI1ywz5a5eiwcr5mqVQWsQi5apg05kd9vCO4drQu6c2EUlGcwcYd2iA6zvYG0LWIWYr0weo+DxyvAdXvnifS/FlP94FhDSpxYGB+qrjkz31MU7M8+/ZVoMmHJq1RFWURzw/8uLyna2s+Fsdwd5ZlksZ4rzy+FCQpQLQthBq3VLb0OKlTZG0RMcQCHsjZ9QlWU6r3MgmqdGOtPgjouFYnOX+qBe//4/iz4=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(376002)(346002)(39860400002)(396003)(451199015)(36840700001)(40470700004)(46966006)(36860700001)(5660300002)(47076005)(426003)(8936002)(83380400001)(70586007)(70206006)(4326008)(8676002)(54906003)(40460700003)(478600001)(316002)(86362001)(40480700001)(6916009)(36756003)(6666004)(356005)(82310400005)(81166007)(41300700001)(82740400003)(1076003)(186003)(44832011)(26005)(2616005)(2906002)(336012)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(136003)(39860400002)(396003)(451199015)(36840700001)(40470700004)(46966006)(82740400003)(70586007)(70206006)(8936002)(5660300002)(40460700003)(81166007)(36756003)(86362001)(44832011)(2906002)(356005)(8676002)(2616005)(336012)(186003)(478600001)(41300700001)(1076003)(26005)(6666004)(83380400001)(426003)(54906003)(4326008)(316002)(82310400005)(40480700001)(36860700001)(6916009)(966005)(47076005)(21314003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2022 09:47:36.3346
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2022 09:47:41.7639
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3985efc7-e83f-4ccf-456a-08daa06d4f05
+X-MS-Exchange-CrossTenant-Network-Message-Id: 17234022-4544-45cc-193f-08daa06d5244
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT047.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT048.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR12MB5393
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4202
 
-This patch series performs necessary cleanup and improvements in our
-GitLab CI automation for Arm. This is crucial so that in the future
-we can focus on adding new tests instead of spending time to fix
-issues, making the behavior consistent, removing ambiguity, etc.
+In the follow-up patch we will add new jobs using debug Xen builds.
+Because the debug builds take more space and we might end up in
+a situation when there is not enough free space (especially during
+a static memory test that reserves some region in the middle), increase
+RAM size for QEMU from 1GB to 2GB.
 
-With the increased interest in gitlab-ci and using it locally, there
-is still some work to do mainly to improve documentation. This however,
-will be handled in the future series.
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+Changes in v3:
+- none
+Changes in v2:
+- new patch carved out from previous v1 [3/9] patch
+---
+ automation/scripts/qemu-smoke-arm64.sh | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Michal Orzel (10):
-  automation: qemu-smoke-arm{32/64}.sh: Fix typo in DEBIAN_FRONTENT
-  automation: Add randconfig build jobs for arm64 alpine container
-  automation: qemu-smoke-arm64.sh: Increase RAM size
-  automation: Add debug versions of Arm tests
-  automation: Add Arm containers to containerize script
-  automation: qemu-smoke-arm32.sh: Modify script to use ImageBuilder
-  automation: qemu-alpine-arm64: Cleanup and fixes
-  automation: Rename qemu-smoke-arm64.sh to qemu-smoke-dom0less-arm64.sh
-  automation: Rename qemu-alpine-arm64.sh to qemu-smoke-dom0-arm64.sh
-  automation: Rename qemu-smoke-arm32.sh to qemu-smoke-dom0-arm32.sh
-
- automation/gitlab-ci/build.yaml               |  28 +++++
- automation/gitlab-ci/test.yaml                | 113 ++++++++++++++++--
- automation/scripts/containerize               |   3 +
- ...moke-arm32.sh => qemu-smoke-dom0-arm32.sh} |  59 +++++----
- ...pine-arm64.sh => qemu-smoke-dom0-arm64.sh} |  14 +--
- ...-arm64.sh => qemu-smoke-dom0less-arm64.sh} |   8 +-
- 6 files changed, 173 insertions(+), 52 deletions(-)
- rename automation/scripts/{qemu-smoke-arm32.sh => qemu-smoke-dom0-arm32.sh} (54%)
- rename automation/scripts/{qemu-alpine-arm64.sh => qemu-smoke-dom0-arm64.sh} (88%)
- rename automation/scripts/{qemu-smoke-arm64.sh => qemu-smoke-dom0less-arm64.sh} (96%)
-
+diff --git a/automation/scripts/qemu-smoke-arm64.sh b/automation/scripts/qemu-smoke-arm64.sh
+index 5b566072f72a..933209e2e01e 100755
+--- a/automation/scripts/qemu-smoke-arm64.sh
++++ b/automation/scripts/qemu-smoke-arm64.sh
+@@ -52,7 +52,7 @@ curl -fsSLO https://github.com/qemu/qemu/raw/v5.2.0/pc-bios/efi-virtio.rom
+ ./binaries/qemu-system-aarch64 \
+    -machine virtualization=true \
+    -cpu cortex-a57 -machine type=virt \
+-   -m 1024 -smp 2 -display none \
++   -m 2048 -smp 2 -display none \
+    -machine dumpdtb=binaries/virt-gicv2.dtb
+ 
+ # XXX disable pl061 to avoid Linux crash
+@@ -117,7 +117,7 @@ cd ..
+ 
+ # ImageBuilder
+ echo 'MEMORY_START="0x40000000"
+-MEMORY_END="0x80000000"
++MEMORY_END="0xC0000000"
+ 
+ DEVICE_TREE="virt-gicv2.dtb"
+ XEN="xen"
+@@ -158,7 +158,7 @@ timeout -k 1 240 \
+ ./binaries/qemu-system-aarch64 \
+     -machine virtualization=true \
+     -cpu cortex-a57 -machine type=virt \
+-    -m 1024 -monitor none -serial stdio \
++    -m 2048 -monitor none -serial stdio \
+     -smp 2 \
+     -no-reboot \
+     -device virtio-net-pci,netdev=n0 \
 -- 
 2.25.1
 
