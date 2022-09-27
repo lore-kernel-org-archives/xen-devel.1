@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E016FC6FA90
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 03:04:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.412200.655461 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753E1C6FA92
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 03:04:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.412196.655417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od0tQ-0003rX-NH; Tue, 27 Sep 2022 03:04:20 +0000
+	id 1od0tL-0002ma-8v; Tue, 27 Sep 2022 03:04:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 412200.655461; Tue, 27 Sep 2022 03:04:20 +0000
+Received: by outflank-mailman (output) from mailman id 412196.655417; Tue, 27 Sep 2022 03:04:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od0tQ-0003r4-Jp; Tue, 27 Sep 2022 03:04:20 +0000
-Received: by outflank-mailman (input) for mailman id 412200;
- Tue, 27 Sep 2022 03:04:19 +0000
+	id 1od0tL-0002mT-6A; Tue, 27 Sep 2022 03:04:15 +0000
+Received: by outflank-mailman (input) for mailman id 412196;
+ Tue, 27 Sep 2022 03:04:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zZci=Z6=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1od0tP-0002Wn-62
- for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 03:04:19 +0000
+ id 1od0tK-0002Wn-2U
+ for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 03:04:14 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
  [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 133b6b87-3e11-11ed-9648-05401a9f4f97;
- Tue, 27 Sep 2022 05:04:18 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 6AB235C018F;
- Mon, 26 Sep 2022 23:04:17 -0400 (EDT)
+ id 0fb06a2b-3e11-11ed-9648-05401a9f4f97;
+ Tue, 27 Sep 2022 05:04:12 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 7CDC15C0193;
+ Mon, 26 Sep 2022 23:04:11 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 26 Sep 2022 23:04:17 -0400
+ by compute3.internal (MEProxy); Mon, 26 Sep 2022 23:04:11 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 26 Sep 2022 23:04:16 -0400 (EDT)
+ 26 Sep 2022 23:04:10 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 133b6b87-3e11-11ed-9648-05401a9f4f97
+X-Inumbo-ID: 0fb06a2b-3e11-11ed-9648-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1664247857; x=1664334257; bh=e866Y8JCmjNsNcx13FdeVQqHWG+JkkDT0Yl
-	HuT4uoZM=; b=LDOyqebkTTqgORPbNfdQxFqwHefTI26vgpX2JbSvVp6oxxZcXH7
-	FA1Uq4cdVMW7py8Cygm7b7hP9Jscj5KJeV8ZJ+2MzdhLsGcoTkvzcQwv7FFw3e0L
-	CM3ZFAaPjQpRGi985FU8Rv9fkR9DMIIA+UeF7APBCH3Thb3Keu/DSSWV3QbLclM5
-	xl05QOFkITWf+d62nsBv0RzHvof8HPw08iOef8T0qW+gYMsQpnfusySVPm7uZVIN
-	qkkUF+3JF/tLfNBbW+1ndubolrsS3IyWAenERZjMWWAS8YyKCfJTKplsh7mh3Gyd
-	f69+wxpatDOBU7NkAQJusPBZXREhY6XtnOg==
+	1664247851; x=1664334251; bh=jh+Frhwmh5e9JCT1Ke46iLV+JdKVkMGqf4f
+	rllkpN/Q=; b=16v6Q6OYYkHyRXIFYk3fIXCc5kxp/x8ZzzFI9kCroshhXUCyFJG
+	U9kAtnvUVBp3uyiBdEjQ7fJRo0HwH5XsPwynrwQoK1gFtB52fgeeOpkCN6ZUwI1n
+	Ne4N1I2yJjieq3BgLyF10ziJP+Piktqug3ZRa0eyA8GkQl2giu4AoB/tHApDTiY4
+	KP40jNX07ugI1zo/XX4SqOal3opBFrMW8VAkpo3ytDn72vwtDSnIWWAmQ4SyGFVX
+	l8Jx46yJ5OhgRluDWPbF/ssOwqZbIKQA7qrANksfuiwA4LTj2R8h9b350N3Iz0py
+	MmKDcTldHKKTHI8zrOE7XkwI4p5IQgv26NA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1664247857; x=1664334257; bh=e866Y8JCmjNsN
-	cx13FdeVQqHWG+JkkDT0YlHuT4uoZM=; b=XU7Mdz1v/AlV79K/VMFk+HzFX3eDl
-	NK+/Ps0miTvN2XhIrBk9EitGPHkoOruLNPCNFS4hz7eJBi/04FSgjFJvDM9SeDVg
-	cxKnMsXN9FkVqdDR4JJRLKLt9Gb+EZutrdoiGCDyyOHpaSdOepudB7/knba2D2DC
-	ddoNvHY0eAYe1o3bXBYohFqFnbtOSdBpyaNjpLJHWILvResv4azSDNfSHDdul4U5
-	SW1Vs2thjpDJARivepKf2jAAsmMeXlc8pWn9KTHPrpb33Onq1tvJGED76a2Tt7U8
-	T85YOmESSd7CuHv53gNvfEdUiTCXRIWwm0OOv2jSF1lpE5qPtv/tIW0ZA==
-X-ME-Sender: <xms:MWgyYxIgiQON211bn5m_anNCtysYuKeE8dmjH1THXwHjaYxAPfBO_w>
-    <xme:MWgyY9LvwCjYcvKqQ-IJhJYsf3Hz6gg7jydFWWhYXehV7AvJ_mYt-AGTvuTpGWPZJ
-    R3PE5sXtNbOcq0>
-X-ME-Received: <xmr:MWgyY5sgldqcFn889qvA9BZpEv-kJ3MJNRF-0nyeXGO3JBy0ttLhnsxi2mfTv2eiqaPLK_hxaevC>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegfedgieelucetufdoteggodetrfdotf
+	:x-sasl-enc; s=fm2; t=1664247851; x=1664334251; bh=jh+Frhwmh5e9J
+	CT1Ke46iLV+JdKVkMGqf4frllkpN/Q=; b=gZ4D83zX/uTM0NwvNsn/VTSvBwumz
+	U1AFa+B9CcmlkwonHsDLRJBKlGavhiTuJ7waSOzO0cWA9kaKSEQTfHLd7ZdOWfId
+	Egx9aCN1UNhoua89qzl9dpkYkCc6/qMY30c4tmlL3KQtDh1XuFNpGw5v4rkUDJGJ
+	n95n8CUIlXAsFe0DI42y16Qk3HtgySRuklGSg2Lrckso9bDS0fFSf2Kt6x5q8wcr
+	iVWwJWhyP58ce5a/ctlEFb5dhZOXt9E8R/hz19y555NKJ+KOIX6TCQCn9KPyc5oP
+	UsEkmvMBIqOcocX1QwnEM6aOd5mK6ivaxXUpF80O44ufXUDe0OW2JQlag==
+X-ME-Sender: <xms:K2gyYzbyz1Gy87cP2SLtuYHXE46QSJPF8YQ91VqpN3DQ6wjqf4KKnw>
+    <xme:K2gyYybB5A7waP1_OgBOUx1kx2CFzMsulQSFI9k41hTB8vRPxj2Xehdu9gQbJ1VeI
+    GFYG50mtpGOt50>
+X-ME-Received: <xmr:K2gyY1-5VtfdIoBaNhlnmkH8Zs2r3CbxfSk3Zjf42ajCJZlJhV2MQy42I1qbAc6QHpgoxhep663H>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegfedgieekucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
@@ -82,10 +82,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegfedgieelucetufdoteggod
     gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
     frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
     lhgrsgdrtghomh
-X-ME-Proxy: <xmx:MWgyYyaQkco9BvwL2PI5znmqX_aL9L44BAAJRRn6ZiiSOhKUuAOOXw>
-    <xmx:MWgyY4ZIyBqDCd13HQlepixQI4D9vV4m3_P3M8xHM1jB3xPEykZoww>
-    <xmx:MWgyY2Dh3eiqR4ozXwvEkqTAXiAR7X9rvZD-x8MXbdPATdsL7Ups1w>
-    <xmx:MWgyY3mgBUtl54ELCxsZsJjI5ktLN7qdDENWoclfWa-2wKzYGvoB0Q>
+X-ME-Proxy: <xmx:K2gyY5qz7yQ4V4imHA0Dv1e9XoHhq4XdQgLCoEFI9plbA6AoTfwi-Q>
+    <xmx:K2gyY-qYp283S2OJS9W_Q5yq1eED9B3Z_YGtyY6nVM-032nzkQIhoQ>
+    <xmx:K2gyY_TzXIKPoV3ExBNJMfhzQrPRKCJ2iM6UEn0QufRMOmZFrPONIA>
+    <xmx:K2gyY10ZMamrPY6qVfiyCAxDkYLvTXYyN1ej5szvF-9RMoTb7jNF4g>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -93,125 +93,97 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 5/5] libxl: Add additional domain suspend/resume logs
-Date: Mon, 26 Sep 2022 23:04:01 -0400
-Message-Id: <39c0faac0978315e0c79b9a25bb83dc0f951fed9.1664236600.git.demi@invisiblethingslab.com>
+Subject: [PATCH 1/5] libxl: Add a utility function for domain resume
+Date: Mon, 26 Sep 2022 23:03:57 -0400
+Message-Id: <6fcc32dc0747a081eb4b182dae1a483c6d1258f4.1664236600.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <cover.1664236600.git.demi@invisiblethingslab.com>
 References: <cover.1664236600.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This was useful when debugging, but is not required.
+It is necessary to all xs_resume_domain after any successful call to
+xc_domain_resume, so that XenStore is notified of the resumption.
+However, it is also very easy to forget to call this.  This took me
+several days to debug.
+
+Fix this by adding a utility function to resume a domain and then notify
+XenStore of the resumption.  This function does not resume any device
+model, so it is still internal to libxl, but it makes future changes to
+libxl much less error-prone.  It also makes libxl itself smaller.
 
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
 ---
- tools/libs/light/libxl_dom_suspend.c | 20 ++++++++++++++++++--
- tools/libs/light/libxl_domain.c      |  1 +
- 2 files changed, 19 insertions(+), 2 deletions(-)
+ tools/libs/light/libxl_dom_suspend.c | 41 +++++++++++++++------------------
+ 1 file changed, 19 insertions(+), 22 deletions(-)
 
 diff --git a/tools/libs/light/libxl_dom_suspend.c b/tools/libs/light/libxl_dom_suspend.c
-index 42c0e0a152e04fab34152d711564ffe148f24a4c..55a172a46f8703661e696971bee07dce93117411 100644
+index 4fa22bb7391049f2ea4ac32f21660212053bd4bc..fa50e8801f35d173a99ae5dd19eb941649e14019 100644
 --- a/tools/libs/light/libxl_dom_suspend.c
 +++ b/tools/libs/light/libxl_dom_suspend.c
-@@ -321,9 +321,11 @@ static void domain_suspend_common_pvcontrol_suspending(libxl__egc *egc,
-     STATE_AO_GC(dsps->ao);
-     xs_transaction_t t = 0;
- 
--    if (!rc && !domain_suspend_pvcontrol_acked(state))
-+    if (!rc && !domain_suspend_pvcontrol_acked(state)) {
-         /* keep waiting */
-+        LOGD(DEBUG, dsps->domid, "PV control callback without ack");
-         return;
-+    }
- 
-     libxl__xswait_stop(gc, &dsps->pvcontrol);
- 
-@@ -405,7 +407,10 @@ static void domain_suspend_common_wait_guest(libxl__egc *egc,
- static void suspend_common_wait_guest_watch(libxl__egc *egc,
-       libxl__ev_xswatch *xsw, const char *watch_path, const char *event_path)
- {
-+    EGC_GC;
-     libxl__domain_suspend_state *dsps = CONTAINER_OF(xsw, *dsps, guest_watch);
-+
-+    LOGD(DEBUG, dsps->domid, "@releaseDomain watch fired, checking guest status");
-     suspend_common_wait_guest_check(egc, dsps);
+@@ -451,6 +451,22 @@ int libxl__domain_resume_device_model_deprecated(libxl__gc *gc, uint32_t domid)
+     return 0;
  }
  
-@@ -440,9 +445,11 @@ static bool suspend_common_wait_guest_check(libxl__egc *egc,
-     if (check_guest_status(gc, domid, &info, "suspending"))
-         goto err;
- 
--    if (!(info.flags & XEN_DOMINF_shutdown))
-+    if (!(info.flags & XEN_DOMINF_shutdown)) {
-+        LOGD(DEBUG, domid, "guest we were suspending has not shut down yet");
-         /* keep waiting */
-         return false;
++/* Just resumes the domain.  The device model must have been resumed already. */
++static int domain_resume_raw(libxl__gc *gc, uint32_t domid, int suspend_cancel)
++{
++    if (xc_domain_resume(CTX->xch, domid, suspend_cancel)) {
++        LOGED(ERROR, domid, "xc_domain_resume failed");
++        return ERROR_FAIL;
 +    }
- 
-     shutdown_reason = (info.flags >> XEN_DOMINF_shutdownshift)
-         & XEN_DOMINF_shutdownmask;
-@@ -469,11 +476,14 @@ static void suspend_common_wait_guest_timeout(libxl__egc *egc,
- {
-     libxl__domain_suspend_state *dsps = CONTAINER_OF(ev, *dsps, guest_timeout);
-     STATE_AO_GC(dsps->ao);
-+    LOGD(DEBUG, dsps->domid, "Timeout callback triggered");
-     if (suspend_common_wait_guest_check(egc, dsps))
-         return;
-     if (rc == ERROR_TIMEDOUT) {
-         LOGD(ERROR, dsps->domid, "guest did not suspend, timed out");
-         rc = ERROR_GUEST_TIMEDOUT;
-+    } else {
-+        LOGD(ERROR, dsps->domid, "error in timeout handler (code %d)", rc);
-     }
-     domain_suspend_common_done(egc, dsps, rc);
- }
-@@ -628,6 +638,8 @@ void libxl__dm_resume(libxl__egc *egc,
-     libxl_domid domid = dmrs->domid;
-     libxl__ev_qmp *qmp = &dmrs->qmp;
- 
-+    LOGD(DEBUG, domid, "Resuming device model");
 +
-     dm_resume_init(dmrs);
- 
-     rc = libxl__ev_time_register_rel(dmrs->ao,
-@@ -640,6 +652,7 @@ void libxl__dm_resume(libxl__egc *egc,
-     case LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL: {
-         const char *path, *state;
- 
-+        LOGD(DEBUG, domid, "Resuming legacy device model: stubdomain ID %" PRIu32, dm_domid);
-         path = DEVICE_MODEL_XS_PATH(gc, dm_domid, domid, "/state");
-         rc = libxl__xs_read_checked(gc, XBT_NULL, path, &state);
-         if (rc) goto out;
-@@ -706,6 +719,7 @@ void libxl__dm_resume(libxl__egc *egc,
-         goto out;
-     }
-     default:
-+        LOGD(ERROR, domid, "Invalid device model type, cannot resume");
-         rc = ERROR_INVAL;
-         goto out;
-     }
-@@ -782,6 +796,8 @@ void libxl__domain_resume(libxl__egc *egc,
++    if (!xs_resume_domain(CTX->xsh, domid)) {
++        LOGED(ERROR, domid, "xs_resume_domain failed");
++        return ERROR_FAIL;
++    }
++
++    return 0;
++}
++
+ int libxl__domain_resume_deprecated(libxl__gc *gc, uint32_t domid, int suspend_cancel)
+ {
      int rc = 0;
-     libxl_domain_type type = libxl__domain_type(gc, dmrs->domid);
+@@ -469,16 +485,7 @@ int libxl__domain_resume_deprecated(libxl__gc *gc, uint32_t domid, int suspend_c
+         }
+     }
  
-+    LOGD(DEBUG, dmrs->domid, "Resuming domain");
-+
-     if (type == LIBXL_DOMAIN_TYPE_INVALID) {
-         rc = ERROR_FAIL;
-         goto out;
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index a6b0b509cc04379e9d596a38644e3db5963011ea..e8e0894c8617a36f6fc13af73daa1ed290a466ce 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -566,6 +566,7 @@ int libxl_domain_suspend_only(libxl_ctx *ctx, uint32_t domid,
-     dsps->ao = ao;
-     dsps->domid = domid;
-     dsps->type = type;
-+    LOGD(DEBUG, domid, "Received request to suspend domain");
-     rc = libxl__domain_suspend_init(egc, dsps, type);
-     if (rc < 0) goto out_err;
-     dsps->callback_common_done = domain_suspend_empty_cb;
+-    if (xc_domain_resume(CTX->xch, domid, suspend_cancel)) {
+-        LOGED(ERROR, domid, "xc_domain_resume failed");
+-        rc = ERROR_FAIL;
+-        goto out;
+-    }
+-
+-    if (!xs_resume_domain(CTX->xsh, domid)) {
+-        LOGED(ERROR, domid, "xs_resume_domain failed");
+-        rc = ERROR_FAIL;
+-    }
++    rc = domain_resume_raw(gc, domid, suspend_cancel);
+ out:
+     return rc;
+ }
+@@ -660,19 +667,9 @@ static void domain_resume_done(libxl__egc *egc,
+     /* Convenience aliases */
+     libxl_domid domid = dmrs->domid;
+ 
+-    if (rc) goto out;
+-
+-    if (xc_domain_resume(CTX->xch, domid, dmrs->suspend_cancel)) {
+-        LOGED(ERROR, domid, "xc_domain_resume failed");
+-        rc = ERROR_FAIL;
+-        goto out;
+-    }
++    if (!rc)
++        rc = domain_resume_raw(gc, domid, dmrs->suspend_cancel);
+ 
+-    if (!xs_resume_domain(CTX->xsh, domid)) {
+-        LOGED(ERROR, domid, "xs_resume_domain failed");
+-        rc = ERROR_FAIL;
+-    }
+-out:
+     dmrs->callback(egc, dmrs, rc);
+ }
+ 
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
