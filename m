@@ -4,55 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964AFC6FA90
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4CC0C6FA94
 	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 09:47:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.412365.655638 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.412371.655703 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od7Bp-00061b-5a; Tue, 27 Sep 2022 09:47:45 +0000
+	id 1od7Bv-0007ZK-E5; Tue, 27 Sep 2022 09:47:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 412365.655638; Tue, 27 Sep 2022 09:47:45 +0000
+Received: by outflank-mailman (output) from mailman id 412371.655703; Tue, 27 Sep 2022 09:47:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1od7Bp-00061U-2k; Tue, 27 Sep 2022 09:47:45 +0000
-Received: by outflank-mailman (input) for mailman id 412365;
- Tue, 27 Sep 2022 09:47:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1od7Bv-0007YI-50; Tue, 27 Sep 2022 09:47:51 +0000
+Received: by outflank-mailman (input) for mailman id 412371;
+ Tue, 27 Sep 2022 09:47:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yjFy=Z6=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1od7Bn-00061I-Et
- for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 09:47:43 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2066.outbound.protection.outlook.com [40.107.93.66])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6d5ece49-3e49-11ed-9374-c1cf23e5d27e;
- Tue, 27 Sep 2022 11:47:41 +0200 (CEST)
-Received: from BN8PR04CA0032.namprd04.prod.outlook.com (2603:10b6:408:70::45)
- by DM4PR12MB5940.namprd12.prod.outlook.com (2603:10b6:8:6b::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Tue, 27 Sep
- 2022 09:47:38 +0000
-Received: from BN8NAM11FT115.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:70:cafe::f9) by BN8PR04CA0032.outlook.office365.com
- (2603:10b6:408:70::45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25 via Frontend
- Transport; Tue, 27 Sep 2022 09:47:38 +0000
+ id 1od7Bt-00061O-C4
+ for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 09:47:49 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on2081.outbound.protection.outlook.com [40.107.102.81])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 71d0adcd-3e49-11ed-9648-05401a9f4f97;
+ Tue, 27 Sep 2022 11:47:48 +0200 (CEST)
+Received: from BN9P221CA0021.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::15)
+ by SN7PR12MB6911.namprd12.prod.outlook.com (2603:10b6:806:261::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.26; Tue, 27 Sep
+ 2022 09:47:45 +0000
+Received: from BN8NAM11FT007.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:10a:cafe::a2) by BN9P221CA0021.outlook.office365.com
+ (2603:10b6:408:10a::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.15 via Frontend
+ Transport; Tue, 27 Sep 2022 09:47:45 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT115.mail.protection.outlook.com (10.13.177.151) with Microsoft SMTP
+ BN8NAM11FT007.mail.protection.outlook.com (10.13.177.109) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5654.14 via Frontend Transport; Tue, 27 Sep 2022 09:47:38 +0000
-Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
+ 15.20.5654.14 via Frontend Transport; Tue, 27 Sep 2022 09:47:44 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Tue, 27 Sep
- 2022 04:47:37 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB07.amd.com
- (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Tue, 27 Sep
- 2022 02:47:37 -0700
+ 2022 04:47:44 -0500
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.28
- via Frontend Transport; Tue, 27 Sep 2022 04:47:36 -0500
+ via Frontend Transport; Tue, 27 Sep 2022 04:47:43 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,22 +60,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d5ece49-3e49-11ed-9374-c1cf23e5d27e
+X-Inumbo-ID: 71d0adcd-3e49-11ed-9648-05401a9f4f97
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ebn6BkBmOuFfpg5WEtLL+Koz0Gcl8H0yZJfQw0g/nBcH2Sbid8DULn3ihwo30ZlE0qVELFZOwsIYCHNATet25pipIhGdulhutOTmVxTG/CbTTdS2aTH0DNXiJIiSjamOWCTU3vOrPG0Ov9Vt5Y7be+qsrZyRKQN4OIOqb5Kyvs3jpK4XjcL+s7r3iDXPbgIIVQtCCl1QsrQgPtDl0uqcwWKbWuCj6TBTvPR3mtw+wU1+lc+er6U6PEEiiJXefvOysj6NxLfxiFOQ3myq8k09RhdW/lLKtU3wSnZdDEl2EFm3x2ukYptVI40XX8D7GDkQBQyHkw+QGr2NrPDoGMRw2w==
+ b=GqBQ9EEvk3tft/KMnO5CZvplcC2/Jd5zXCoKqWLVQvIShjAQ1emym2xpykJukdK/YWuCyROCMh93VfSi7971yvNipj3LSUe7UNCOEoaXV6gG+hwjt6Xcnr7vyFNwb1qCE624nklHTrcYEI7knfyKAXdl3QTdNaoep46gtoXLZ9FFT8bIdXqmvZ2WfPcc3JnBzxars1n7Cy2piEoXqqg+brAR+9UUdrH7dyXN/myCw7T66T5QcMNUCr06Lhp2DmyFTQvmGYpm/IvoxCcLBjZJZitqczsAsJE6oxuLnIE1s8+IikrFpO3Fb0QpZK4gy2wvrDVUQyg4vwSZG+3VCzg1Xg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=62JB3de8FPX7JJGSCy3DTcwAGOHx6Y0JArP/iptZGcc=;
- b=byvIGWodI7s34W50JdzFiDteAakBdWwIJbffso25vo7oT4mnBk+5TZcdLw3H8z44XX4gqKNfcskpIYDddhr3Xkn/WrrYdjDvkyJoGp/KbfH99qgSFIeKhwNPNmhWVj/6w5aPElNjCq5h/tazboLDdmhWULW3bDRbWzQKAK8MPUgvN+bxs/hmYw7HRTI+0sU6V+sbO6PI/+5/m7Iq9bnaVKVdizvraVXh6e+FeozYvVy5NvAlEmLZt48uCelM7qUeXPXcbzUOv+KBK5zC+u+Z+rXcO5PtJKgUipd6MHNTT+1HReMjpcuNnI0NJ1rOAu5H5dpfiMiwPiSaTytV6LzkqA==
+ bh=Ax5+F8w1fPqztC0E47oipxuAnLpuQqKzKyegV6Abe7s=;
+ b=kV7u/2HtlUrERhaBjJcVIZEsgVSFWGIumJ7wkcUnAmaIithGfyPnefXHYyJRvT6XgWzWOc2ZJn7jUWzzy5qYgP1QHvGDPb6Tzf6QMTurmUDJInKbnQ5VXwgoEvYzTA36YJm/Gk6K8ISi93IwiJKNPDlGIA2AWDstrm3L89ANEwMloyAOI8Pd4+kPT+3Wuw9WaCMtOdT60naGxOvV+xuKZCdtTaFHmsKoItA2QsQe8jHQa79RQlHFhbX6pqg3jXBZ2PhZnY6ZmrmskqW/BEyrWbsZXfwqj1Ec5jWyB3NlgJ+0+YdfgRSDndwODula2QCFND5Tgd0w2Dds8HEZ5O4tFw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=62JB3de8FPX7JJGSCy3DTcwAGOHx6Y0JArP/iptZGcc=;
- b=kUALXBuAMA2PXfGv6igWawRHObyrXAh9DmM1yqJlyTZ9QZrLc0qTzqYdmjvGqXCODQ+1JkGhUJit6OYJ+2q7orkasTYvQ5dDhD5Q/lUa2/tlQuaXh2tqdc2J4q07M5F3h21FGMGyaLAY3V2/UWpTq6Hmdi7GwZr/JsKpN9prUFU=
+ bh=Ax5+F8w1fPqztC0E47oipxuAnLpuQqKzKyegV6Abe7s=;
+ b=Kt8sECp1nJgqOouRYs+n7wndk/J/aEth6B4PF+YK4r86mFxpiD2lDdaUXPo2aItA0Z1u0zvSKlEKD+3X8/XjAfxWmjhWaB/fxLhkXyPm3PrIeHfLRCnCsTRS9g6WS4i55wKiz9qN+9BbpE56DkSIAq3+VDmlMiQzAxa7YWhHmXs=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -89,10 +85,11 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Henry Wang <Henry.Wang@arm.com>
-Subject: [for-4.17,PATCH v3 01/10] automation: qemu-smoke-arm{32/64}.sh: Fix typo in DEBIAN_FRONTENT
-Date: Tue, 27 Sep 2022 11:47:18 +0200
-Message-ID: <20220927094727.12762-2-michal.orzel@amd.com>
+	Stefano Stabellini <sstabellini@kernel.org>, Luca Fancellu
+	<luca.fancellu@arm.com>
+Subject: [PATCH v3 06/10] automation: qemu-smoke-arm32.sh: Modify script to use ImageBuilder
+Date: Tue, 27 Sep 2022 11:47:23 +0200
+Message-ID: <20220927094727.12762-7-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220927094727.12762-1-michal.orzel@amd.com>
 References: <20220927094727.12762-1-michal.orzel@amd.com>
@@ -101,74 +98,143 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT115:EE_|DM4PR12MB5940:EE_
-X-MS-Office365-Filtering-Correlation-Id: d0fdd18c-61c6-4e1c-4c9e-08daa06d5006
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT007:EE_|SN7PR12MB6911:EE_
+X-MS-Office365-Filtering-Correlation-Id: db75d599-92b5-4539-1983-08daa06d5428
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	QPNifa2KJmnPRFyRrvkLfO4L90T7jD3ykAU4MjdtXfotJNr5RnljyS4RFjD8tWuBS78K2zNAWqLHN8SotzftnKJ2KAGNu8JF1AmBLUd3+3HmUXdTMUxdvQJh6zofIe6mQ9pGyPlaUOvXYvKYkpFyXWzPBvErIF/Sw7kUYVWwUD9d6XkCUyb3kfClj2198BGi4xUR57VrX2PyI8tzcyBsO18qNXUIPrx+l+R10YxXso3t4JLQfWo7KDC9kO2FdYRCfQZ54XKBhtZNZQOcLE4ZudAeQrEBmwUVBw5GNaTjxFkKs0OAl/rhgr2Z7qU5YQCfNot6dsJBPXtx7dcNomkpZFZ5m2LUHKArdAOkCT1uASGd/5W7F8WO+9pzutVlOSMy+2qkmg9IjjdfrGez7vpQV+8olt2J+/CCoj+GkeySTBQSrFvNBE5YjrqexUpxi+I9PFqHE7s9yeBYb/m69KPL56rYhtuUPYuqTBCwFArJTdmoWWYPdljSSW7ArdKYfOBbMXS8HC9/cBUlq/csbtfKN7LOfh4lmuYoBbouslGc/RuGZ7zX+7l3r7wJZYfTqReutd8xSw/gpmwSLST1AuPIBr45C/K6KyizhpY9w7iuUFEuzLmCpVgK2KjQsgX8OBy0i3Pmwqtard+ADSNJXJ02oYdJ9Wu0msd+vavTO3dixLBcSOcWCSm1JjUMkYV2LjOlqCi1poz4cdgrDHk3UtqNRfne/YjS2sPT4X/i1B26Aa36xSMMHzRJZ0pkAKxAyx4blNRGHW1Y48v4sBYAegFu6UgT+6Ojk9TI58n+ezhZZ+TZo+cOYNBUoPzv6aHdfJ1F
+	6uWk+GoJxrnyWZcMvQPfCkYIQlUMoUEOPi595HlVrZrbvjeyWiey5itYu7HfIrwXEvl408gpF5qRpjPu3Krigcg4x9ekB2vCFO9XorS5UweG74a9Hqc1o1XqEFXwj9Nw9oorC3p1vNxY07fzoIW/SYGIq0cadOzGPayEEtZwAgmfQi6mUn4VemTxOhep/2DiwXo2gs7f3OtoLfxQaA7cSxmlqEXxrlSMacEuOUIysdgF/Wry3eGAs8+38IvrcVUFmhUm4OQKbhQGvXMdv/HCSjHeud/Ft7WlrWcXWi0H9SBbk/rfr5XWoEqhGPht0obHb1AZ1N2hfjJlTHSpSqHmOmPgRZPuNRL391/zRpwJ2HnI3fYN9M2mQ5ZPuOmRA/P5T2fERkRYiayOcTY2uFId8fpOnlMUnKpYMJJyvfEMla17+yLAdexIBT4Jt9P91WIFLbgOBoe7W9HoSC8MRB6indL0Lby3PiLndzp5760D1y2dATTDE4Ur8usfbXbysCqyghaeNNdqLqeaqV96K7o4L0Aotmrwel1YdMD3PSrTgW7E9VwSODyxS34yMnrIvHNdY2rAf+rE1OFGQOQlNQ8/oqWw+hEs0U0tPoGEwIQHPP2/+iGwXNGJDXCNe1R3ZOQoLsBO5F3iJengg79KrBfw1beXCasEP81qMERFm/Qs/13Ll6Q5hVbSmTJnI203oYxBzgYbEzI2radPhtXqoEeQ6TDjZzt7IeJuUrvZPjOHZkRdznO+JkF5Jj2mr5C9fD9uSv0Ucs2jgdyaGORHKIydY7iYVuz2qh3BATw/dx758/f/jzvuvXptTeBipccNs3uQ27P5AnIBypyVMDXTBUXqHSFffebm3xXGaEQpqiJ46wbTrVGrwnO0DzeNrZTABVui8sGYgQvBvPSOxkUTxIbRM+FDhfzGrx0E/jHp3gla1Qo=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(346002)(396003)(136003)(39860400002)(451199015)(40470700004)(46966006)(36840700001)(44832011)(5660300002)(26005)(8936002)(6666004)(40460700003)(83380400001)(41300700001)(82740400003)(36860700001)(1076003)(36756003)(2616005)(186003)(2906002)(82310400005)(81166007)(336012)(426003)(47076005)(356005)(6916009)(54906003)(70586007)(70206006)(40480700001)(4326008)(86362001)(316002)(8676002)(478600001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(376002)(396003)(39860400002)(451199015)(40470700004)(46966006)(36840700001)(36756003)(40480700001)(82310400005)(966005)(426003)(47076005)(26005)(336012)(83380400001)(44832011)(8936002)(40460700003)(2906002)(1076003)(86362001)(5660300002)(54906003)(6916009)(186003)(82740400003)(316002)(36860700001)(81166007)(70206006)(2616005)(478600001)(6666004)(70586007)(41300700001)(4326008)(8676002)(356005)(21314003)(36900700001)(139555002);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2022 09:47:38.0034
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2022 09:47:44.9514
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d0fdd18c-61c6-4e1c-4c9e-08daa06d5006
+X-MS-Exchange-CrossTenant-Network-Message-Id: db75d599-92b5-4539-1983-08daa06d5428
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT115.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT007.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5940
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6911
 
-The correct variable name is DEBIAN_FRONTEND and not DEBIAN_FRONTENT.
+Take an example from arm64 qemu test scripts and use ImageBuilder
+to generate u-boot script automatically. Calculating the addresses
+manually is quite error prone and also we will be able to benefit
+from using ImageBuilder when adding domUs to this test in the future.
+
+Install and use u-boot from the debian package.
+Modify the script so that binaries are loaded from u-boot via tftp.
+Remove dtuart=/pl011@9000000 because stdout-path in QEMU dtb is always
+set to pl011 node path.
 
 Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-CC: Henry Wang <Henry.Wang@arm.com>
-
-Rationale for taking this patch for 4.17:
-Setting DEBIAN_FRONTEND to noninteractive menas that we need zero interaction
-while installing/upgrading the system via apt-get. It accepts the default
-answer to all the questions (using apt-get -y only works for "yes"/"no"
-prompts). With the typo not fixed, we might get stuck in CI jobs.
-The risk is very low as we perform pre-push testing using GitLab CI to make
-sure the changes will not break the pipeline.
-
 Changes in v3:
-- new patch
+- none
+Changes in v2:
+- add explanation in commit msg why we remove dtuart path
 ---
- automation/scripts/qemu-smoke-arm32.sh | 2 +-
- automation/scripts/qemu-smoke-arm64.sh | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ automation/scripts/qemu-smoke-arm32.sh | 57 ++++++++++++--------------
+ 1 file changed, 27 insertions(+), 30 deletions(-)
 
 diff --git a/automation/scripts/qemu-smoke-arm32.sh b/automation/scripts/qemu-smoke-arm32.sh
-index 530f3892fdd3..c8ae0bfb9b1c 100755
+index c8ae0bfb9b1c..ef19b988c2c4 100755
 --- a/automation/scripts/qemu-smoke-arm32.sh
 +++ b/automation/scripts/qemu-smoke-arm32.sh
-@@ -2,7 +2,7 @@
+@@ -4,7 +4,9 @@ set -ex
  
- set -ex
- 
--export DEBIAN_FRONTENT=noninteractive
-+export DEBIAN_FRONTEND=noninteractive
+ export DEBIAN_FRONTEND=noninteractive
  apt-get -qy update
- apt-get -qy install --no-install-recommends device-tree-compiler \
+-apt-get -qy install --no-install-recommends device-tree-compiler \
++apt-get -qy install --no-install-recommends u-boot-qemu \
++                                            u-boot-tools \
++                                            device-tree-compiler \
                                              curl \
-diff --git a/automation/scripts/qemu-smoke-arm64.sh b/automation/scripts/qemu-smoke-arm64.sh
-index f803835779f4..5b566072f72a 100755
---- a/automation/scripts/qemu-smoke-arm64.sh
-+++ b/automation/scripts/qemu-smoke-arm64.sh
-@@ -38,7 +38,7 @@ fi
- "
- fi
+                                             cpio
  
--export DEBIAN_FRONTENT=noninteractive
-+export DEBIAN_FRONTEND=noninteractive
- apt-get -qy update
- apt-get -qy install --no-install-recommends u-boot-qemu \
-                                             u-boot-tools \
+@@ -20,10 +22,6 @@ tar xvzf ../initrd.tar.gz
+ find . | cpio -H newc -o | gzip > ../initrd.gz
+ cd ..
+ 
+-kernel=`stat -L --printf="%s" vmlinuz`
+-initrd=`stat -L --printf="%s" initrd.gz`
+-
+-# For Xen, we need a couple of more node. Dump the DT from QEMU and add them
+ # XXX QEMU looks for "efi-virtio.rom" even if it is unneeded
+ curl -fsSLO https://github.com/qemu/qemu/raw/v5.2.0/pc-bios/efi-virtio.rom
+ ./qemu-system-arm \
+@@ -36,31 +34,31 @@ curl -fsSLO https://github.com/qemu/qemu/raw/v5.2.0/pc-bios/efi-virtio.rom
+    -display none \
+    -machine dumpdtb=virt.dtb
+ 
+-dtc -I dtb -O dts virt.dtb > virt.dts
++# ImageBuilder
++echo 'MEMORY_START="0x40000000"
++MEMORY_END="0x80000000"
++
++DEVICE_TREE="virt.dtb"
++XEN="xen"
++DOM0_KERNEL="vmlinuz"
++DOM0_RAMDISK="initrd.gz"
++DOM0_CMD="console=hvc0 earlyprintk clk_ignore_unused root=/dev/ram0 rdinit=/bin/sh"
++XEN_CMD="console=dtuart dom0_mem=512M bootscrub=0"
++
++NUM_DOMUS=0
++
++LOAD_CMD="tftpb"
++BOOT_CMD="bootm"
++UBOOT_SOURCE="boot.source"
++UBOOT_SCRIPT="boot.scr"' > config
+ 
+-cat >> virt.dts << EOF
+-/ {
+-	chosen {
+-		#address-cells = <0x2>;
+-		#size-cells = <0x2>;
+-		stdout-path = "/pl011@9000000";
+-        xen,xen-bootargs = "console=dtuart dtuart=/pl011@9000000 dom0_mem=512M bootscrub=0";
+-		xen,dom0-bootargs = "console=tty0 console=hvc0 earlyprintk clk_ignore_unused root=/dev/ram0 rdinit=/bin/sh";
+-		dom0 {
+-			compatible = "xen,linux-zimage", "xen,multiboot-module";
+-			reg = <0x0 0x1000000 0x0 $kernel>;
+-		};
+-        dom0-ramdisk {
+-			compatible = "xen,linux-initrd", "xen,multiboot-module";
+-			reg = <0x0 0x3200000 0x0 $initrd>;
+-		};
+-	};
+-};
+-EOF
+-dtc -I dts -O dtb virt.dts > virt.dtb
++rm -rf imagebuilder
++git clone https://gitlab.com/ViryaOS/imagebuilder
++bash imagebuilder/scripts/uboot-script-gen -t tftp -d . -c config
+ 
+ rm -f smoke.serial
+ set +e
++echo "  virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"| \
+ timeout -k 1 240 \
+ ./qemu-system-arm \
+    -machine virt \
+@@ -70,11 +68,10 @@ timeout -k 1 240 \
+    -serial stdio \
+    -monitor none \
+    -display none \
+-   -dtb virt.dtb \
+    -no-reboot \
+-   -kernel ./xen \
+-   -device loader,file=./vmlinuz,addr=0x1000000 \
+-   -device loader,file=./initrd.gz,addr=0x3200000 |& tee smoke.serial
++   -device virtio-net-pci,netdev=n0 \
++   -netdev user,id=n0,tftp=./ \
++   -bios /usr/lib/u-boot/qemu_arm/u-boot.bin |& tee smoke.serial
+ 
+ set -e
+ (grep -q "^/ #" smoke.serial) || exit 1
 -- 
 2.25.1
 
