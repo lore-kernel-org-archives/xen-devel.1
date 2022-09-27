@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C472EC6FA83
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 14:30:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.412659.656045 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2AFC6FA82
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Sep 2022 14:31:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.412667.656056 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1odBbD-0003n0-69; Tue, 27 Sep 2022 14:30:15 +0000
+	id 1odBcQ-0004Uj-Im; Tue, 27 Sep 2022 14:31:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 412659.656045; Tue, 27 Sep 2022 14:30:15 +0000
+Received: by outflank-mailman (output) from mailman id 412667.656056; Tue, 27 Sep 2022 14:31:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1odBbD-0003mt-3P; Tue, 27 Sep 2022 14:30:15 +0000
-Received: by outflank-mailman (input) for mailman id 412659;
- Tue, 27 Sep 2022 14:30:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1odBcQ-0004UZ-Dy; Tue, 27 Sep 2022 14:31:30 +0000
+Received: by outflank-mailman (input) for mailman id 412667;
+ Tue, 27 Sep 2022 14:31:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sZUN=Z6=gmail.com=asml.silence@srs-se1.protection.inumbo.net>)
- id 1odBbB-0003lE-Cv
- for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 14:30:13 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e4d071f9-3e70-11ed-9374-c1cf23e5d27e;
- Tue, 27 Sep 2022 16:30:11 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id n10so15247246wrw.12
- for <xen-devel@lists.xenproject.org>; Tue, 27 Sep 2022 07:30:12 -0700 (PDT)
-Received: from [192.168.8.100] (94.196.228.157.threembb.co.uk.
- [94.196.228.157]) by smtp.gmail.com with ESMTPSA id
- a5-20020a05600c224500b003b4fac020c8sm14022447wmm.16.2022.09.27.07.30.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Sep 2022 07:30:11 -0700 (PDT)
+ <SRS0=cdUW=Z6=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
+ id 1odBcO-0004UQ-IS
+ for xen-devel@lists.xenproject.org; Tue, 27 Sep 2022 14:31:28 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 118e6246-3e71-11ed-9648-05401a9f4f97;
+ Tue, 27 Sep 2022 16:31:26 +0200 (CEST)
+Received: by mail-ej1-x632.google.com with SMTP id z13so21130231ejp.6
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Sep 2022 07:31:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,114 +41,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4d071f9-3e70-11ed-9374-c1cf23e5d27e
+X-Inumbo-ID: 118e6246-3e71-11ed-9648-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=4qLPtvUWN+AfrLhyVfZ91N3yZnBEIddv2rouQHzCYLA=;
-        b=LSvdUNSjYwsgaB1ny7A29I06dZuPVvZasJ53PSj2IRqPVKq1ohmeHh9Z6CkkhwtJQf
-         85O+gH6Z/IdRrelbEU0k1mMXu+6fxxn2WMN9doOp+loYLAuRiKZyPsNuFdcRNJn8dsQ8
-         lRGEVEdnN3VzNzjA7sb4HgBPlDNeuOXWP9VvdICO7KXryKqpFA3ehg94nCKxwk0Gpl0X
-         I+5MDhB4PGTBCY6571kzJwU8c1BDIDcYu4PmD8hWvxk6btQMMwVeIkdHwp1kUu0xXGSI
-         v+WsS2ry+SxZHb8HRxtcqqy322vcXEZOmSjORm3FjfTCAcEhB2XwEz0Q5vPUPRONX/Nv
-         BdwA==
+        d=minervasys-tech.20210112.gappssmtp.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=USA12OvBqFFCug9e6pk0NZ0mYiTxVTCqTe5Cokwlj8Q=;
+        b=DgxxJIp0Ui+06Gdr05DgPM8araftPMFAWUPfRWhpipYyc8g/mVq+jMf9JuHnWrXbwD
+         Hwz2lTBs426Z+oRfum4leJiye8V/veDeoTjxrgGnfsoRmTW3Cvt8l5VlJgTPR5v21lDv
+         H2oA02TuXB4oPkkaeQAKbOQcb6MC2dkAx1uBcxjxplYz/ejLhE1OY7wbSXDDnvGYVvaD
+         yRHM8uwNXTdr6Irluj+yqvSqLsmZHJtJj8UXSyOtaWGXzYwC57XrzqQtwbFRYzCIKe28
+         fkolafbXId6dBTs/vq9Jfz6AUguKJ/ota+IrkvlGV+NvjEw0yGeFB9i4wESoc+YKoQ0B
+         PL1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=4qLPtvUWN+AfrLhyVfZ91N3yZnBEIddv2rouQHzCYLA=;
-        b=yKbPaVmI3ra8alejMA823aPQ0GoyAy+fW4kgd1y+MbwOgFvSX7Jaker6hl9nlH4/z+
-         i6L+U8TaqJ09rmQSx2WkedvMN4ovLoJctEPGJTCFBzDbjGNS4hr25ZB3QO1uiz6IEmax
-         VCbe0CvqE3h+kyp/fdeJKfcdTRVErK53Y/rYcg5AvFGEhpDT55ks//fgiOFO2UWRHH0g
-         dqhFoRmh+8+39ki1P4von0wz4zGOuMgmSy/xLQtQGTfOPWg4t63K1QnWDYWJJvb5/aMR
-         +TCYdLmfg4pd/ke33XwVD+pfy5z4F6ub8U5b4djJ8ThBlD66ArjEV4bBxPexHC9Fm9X0
-         5X6w==
-X-Gm-Message-State: ACrzQf3434KnLZpYDPQZ0qPfkgle62jqWJ/bMgNe/1oABtuc9a0xiHuo
-	2HhdNiJF9OsucapBGjsAgBkZbl+m8Zw=
-X-Google-Smtp-Source: AMsMyM7wIF7Q/yLHfL4qpto23LFzYlOodjB18WlyAhMXTZyo5ET7oeG7w+FroLjnnh5vWx2LP52ZzQ==
-X-Received: by 2002:adf:f347:0:b0:22c:be39:4e38 with SMTP id e7-20020adff347000000b0022cbe394e38mr2077945wrp.151.1664289011650;
-        Tue, 27 Sep 2022 07:30:11 -0700 (PDT)
-Message-ID: <021d8ea4-891c-237d-686e-64cecc2cc842@gmail.com>
-Date: Tue, 27 Sep 2022 15:28:34 +0100
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=USA12OvBqFFCug9e6pk0NZ0mYiTxVTCqTe5Cokwlj8Q=;
+        b=Xs11C2vjf6Whw3GwzHNu+RJKTHf3uJnu2cPH5RDY4XujuJjltGUHdabZrzQLC6mrAi
+         fbw6Qq3H5/qpFUSFdXnj2ngM+q+qP0BeV7AgLzgAAloPW0/gI9yMX708AXH1KjpET4pn
+         d/e3l57Kc3VzkF+b7YApjqA4Mv+V2wzHOexH8FjkFAHu5LjR2BLRkEPXSUdpbdaZCfUH
+         h2JtJOFIcnZlZyI0BTewnEwmdsXHgi/99TBEYX+ExDoW1xZIGW2xakOGN4Mv2QR6DPCm
+         QorR0Byf93DhWaxMM5iBDtbBFpu2aaTDd9520/KV3nNYqIxgye6HHDXZre8ETwMFgxxg
+         CF+A==
+X-Gm-Message-State: ACrzQf3g+QiTVh1W0icM5m2zsBCx2TUGGTUHvuMRw3/4nwgREU5aktPP
+	zKDDLrnGOHvMQJ6u+rLoxd86r6ptRl5AU9Ppih2ULQ==
+X-Google-Smtp-Source: AMsMyM4qPsnXgcfncnTEY5XpyE/BkKuc9LmQ718moFpYzsHHdyLxV5RHv6NB+RkEdx89hBEdLidyIUBHiPds0PgWJB8=
+X-Received: by 2002:a17:907:2d8e:b0:783:8d26:645 with SMTP id
+ gt14-20020a1709072d8e00b007838d260645mr8466512ejc.535.1664289086480; Tue, 27
+ Sep 2022 07:31:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Subject: Re: [PATCH net-next 0/4] shrink struct ubuf_info
-Content-Language: en-US
-To: Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org
-Cc: "David S . Miller" <davem@davemloft.net>, Jakub Kicinski
- <kuba@kernel.org>, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org, Wei Liu <wei.liu@kernel.org>,
- Paul Durrant <paul@xen.org>, kvm@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- "Michael S . Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>
-References: <cover.1663892211.git.asml.silence@gmail.com>
- <7fef56880d40b9d83cc99317df9060c4e7cdf919.camel@redhat.com>
-From: Pavel Begunkov <asml.silence@gmail.com>
-In-Reply-To: <7fef56880d40b9d83cc99317df9060c4e7cdf919.camel@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20220826125111.152261-1-carlo.nonato@minervasys.tech>
+ <20220826125111.152261-2-carlo.nonato@minervasys.tech> <1369a435-ad92-3bbd-60e4-27c1e49c1bc9@arm.com>
+ <467b204a-1aed-4cd7-b401-8ff01b8d343a@suse.com>
+In-Reply-To: <467b204a-1aed-4cd7-b401-8ff01b8d343a@suse.com>
+From: Carlo Nonato <carlo.nonato@minervasys.tech>
+Date: Tue, 27 Sep 2022 16:31:13 +0200
+Message-ID: <CAG+AhRVAmsFF5DOjAKkv8zsUn3fS+FqHroxscocYZFv0Uca_fw@mail.gmail.com>
+Subject: Re: [PATCH 01/12] xen/arm: add cache coloring initialization
+To: Jan Beulich <jbeulich@suse.com>, Wei Chen <wei.chen@arm.com>, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, george.dunlap@citrix.com, julien@xen.org, 
+	stefano.stabellini@amd.com, wl@xen.org, marco.solieri@unimore.it, 
+	andrea.bastoni@minervasys.tech, lucmiccio@gmail.com, 
+	Marco Solieri <marco.solieri@minervasys.tech>
+Content-Type: text/plain; charset="UTF-8"
 
-Hello Paolo,
+Hi Jan, Wei
 
-On 9/27/22 14:49, Paolo Abeni wrote:
-> Hello,
-> 
-> On Fri, 2022-09-23 at 17:39 +0100, Pavel Begunkov wrote:
->> struct ubuf_info is large but not all fields are needed for all
->> cases. We have limited space in io_uring for it and large ubuf_info
->> prevents some struct embedding, even though we use only a subset
->> of the fields. It's also not very clean trying to use this typeless
->> extra space.
->>
->> Shrink struct ubuf_info to only necessary fields used in generic paths,
->> namely ->callback, ->refcnt and ->flags, which take only 16 bytes. And
->> make MSG_ZEROCOPY and some other users to embed it into a larger struct
->> ubuf_info_msgzc mimicking the former ubuf_info.
->>
->> Note, xen/vhost may also have some cleaning on top by creating
->> new structs containing ubuf_info but with proper types.
-> 
-> That sounds a bit scaring to me. If I read correctly, every uarg user
-> should check 'uarg->callback == msg_zerocopy_callback' before accessing
-> any 'extend' fields.
+On Mon, Sep 26, 2022 at 9:42 AM Jan Beulich <jbeulich@suse.com> wrote:
+>
+> On 26.09.2022 08:20, Wei Chen wrote:
+> > On 2022/8/26 20:51, Carlo Nonato wrote:
+> >> --- a/xen/arch/arm/Kconfig
+> >> +++ b/xen/arch/arm/Kconfig
+> >> @@ -131,6 +131,22 @@ config ARM64_BTI
+> >>        Branch Target Identification support.
+> >>        This feature is not supported in Xen.
+> >>
+> >> +config CACHE_COLORING
+> >> +    bool "Last Level Cache (LLC) coloring" if EXPERT
+> >> +    default n
+>
+> No need for this line, btw.
+>
+> >> +    depends on ARM_64
+> >> +
+> >> +config MAX_CACHE_COLORS
+> >> +    int "Maximum number of cache colors"
+> >> +    default 128
+> >> +    range 0 65536
+> >
+> > Just curious. Why select 128 as default vaule here? Is it a classic
+> > implmenntation for Arm64 cache? And the same question for the upper
+> > bound 65536.
+>
+> Going beyond that: What is the meaning of the user picking 0 here?
+> And isn't 1 merely mapping to the allocator we have, i.e. the
+> CACHE_COLORING=n case? IOW shouldn't the lowe bound of the range
+> be (at least) 2?
 
-Providers of ubuf_info access those fields via callbacks and so already
-know the actual structure used. The net core, on the opposite, should
-keep it encapsulated and not touch them at all.
+To answer both: I used "range" for two reasons:
+ - to forbid negative numbers.
+ - struct xen_arch_domainconfig can't be modified freely since it must
+   respect some static build assertions on its size, which means that
+   I'm bound to uint16_t for the "num_colors" field (see patch #2).
+   Also, looking again at this, the range should end at 65535.
+0 and 1 maximum colors aren't really meaningful as Jan said.
+65536 is just a "big enough" number that shouldn't be possible to ever
+reach (it corresponds, in "common conditions", to 4 GiB of cache. See docs or
+below for the formula).
+128 is also a high value since using 4 KiB pages and 16-ways cache,
+it implies a 128 * 4 KiB * 16 = 8 MiB Last Level Cache.
+Remember that this isn't the actual number of colors of the platform. It just
+needs to be >= the actual value (which is computed from the probed LLC way
+size or the command line provided one).
 
-The series lists all places where we use extended fields just on the
-merit of stripping the structure of those fields and successfully
-building it. The only user in net/ipv{4,6}/* is MSG_ZEROCOPY, which
-again uses callbacks.
+> Jan
 
-Sounds like the right direction for me. There is a couple of
-places where it might get type safer, i.e. adding types instead
-of void* in for struct tun_msg_ctl and getting rid of one macro
-hiding types in xen. But seems more like TODO for later.
+Thanks.
 
-> AFAICS the current code sometimes don't do the
-> explicit test because the condition is somewhat implied, which in turn
-> is quite hard to track.
-> 
-> clearing uarg->zerocopy for the 'wrong' uarg was armless and undetected
-> before this series, and after will trigger an oops..
-
-And now we don't have this field at all to access, considering that
-nobody blindly casts it.
-
-> There is some noise due to uarg -> uarg_zc renaming which make the
-> series harder to review. Have you considered instead keeping the old
-> name and introducing a smaller 'struct ubuf_info_common'? the overall
-> code should be mostly the same, but it will avoid the above mentioned
-> noise.
-
-I don't think there will be less noise this way, but let me try
-and see if I can get rid of some churn.
-
--- 
-Pavel Begunkov
+- Carlo Nonato
 
