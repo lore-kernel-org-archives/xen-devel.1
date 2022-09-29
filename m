@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AAF9C4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Sep 2022 13:33:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.413797.657714 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14D4EC433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Sep 2022 14:29:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.413820.657725 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1odtfR-0006af-0U; Thu, 29 Sep 2022 13:33:33 +0000
+	id 1oduX9-0004hi-5j; Thu, 29 Sep 2022 14:29:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 413797.657714; Thu, 29 Sep 2022 13:33:32 +0000
+Received: by outflank-mailman (output) from mailman id 413820.657725; Thu, 29 Sep 2022 14:29:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1odtfQ-0006aU-T8; Thu, 29 Sep 2022 13:33:32 +0000
-Received: by outflank-mailman (input) for mailman id 413797;
- Thu, 29 Sep 2022 13:33:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oduX9-0004hb-2h; Thu, 29 Sep 2022 14:29:03 +0000
+Received: by outflank-mailman (input) for mailman id 413820;
+ Thu, 29 Sep 2022 14:29:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OnIM=2A=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1odtfP-0005tj-U0
- for xen-devel@lists.xenproject.org; Thu, 29 Sep 2022 13:33:32 +0000
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
- [66.111.4.27]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4bb8058c-3ffb-11ed-964a-05401a9f4f97;
- Thu, 29 Sep 2022 15:33:29 +0200 (CEST)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.nyi.internal (Postfix) with ESMTP id 8033C5C0178;
- Thu, 29 Sep 2022 09:33:25 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Thu, 29 Sep 2022 09:33:25 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 29 Sep 2022 09:33:23 -0400 (EDT)
+ <SRS0=s6gS=2A=gmail.com=tamas.k.lengyel@srs-se1.protection.inumbo.net>)
+ id 1oduX7-0004hU-0Q
+ for xen-devel@lists.xenproject.org; Thu, 29 Sep 2022 14:29:01 +0000
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [2607:f8b0:4864:20::b2c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0d8cbe33-4003-11ed-9374-c1cf23e5d27e;
+ Thu, 29 Sep 2022 16:28:58 +0200 (CEST)
+Received: by mail-yb1-xb2c.google.com with SMTP id e145so1734228yba.11
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Sep 2022 07:28:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,130 +41,282 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4bb8058c-3ffb-11ed-964a-05401a9f4f97
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1664458405; x=1664544805; bh=lGhOS0ndxVwarjq2rY27WoL7WTl8n59n9cj
-	/5HY9Z1o=; b=QQSD+yp65nFxY3MUHhLBrv3wiXopCJ8BhD5soRg8zQgethPmNSA
-	HWwBKMB5IfBZGM9V3ccC7hcVxgiYZ2uEOmUz3DsMifMbzhNptqbHqTH4d5JeyzXM
-	a0wBND0Kv7tORNIHiYpi3LMSYo+P5u82Pgrk3W0AVFJp0eVCtQMDZdUMg3NywHqz
-	BPQwF+GYagPQ9zWZ14ti7gCPo20nXcsAg08lknxZnGZO4RB7rAO/GFs7cwj4xvQx
-	SdmrVRQt0oRpl8rvHtjAf8PGMumZs/gRdoafVEzTDuu8qW48cM2+mByQp/RihHSh
-	pTlrKZ7ttYVBIS5y4M/Hpi5ttkkvBLfO37w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1664458405; x=1664544805; bh=lGhOS0ndxVwar
-	jq2rY27WoL7WTl8n59n9cj/5HY9Z1o=; b=mEsBP4usaqa1WAEHl5TDfMOXkzQb3
-	JEs8nByKn3UnGv2xpVSqFJ+pio15MOyitAiFYLWTe+AMLkelrtiH2wJndOC6mhrh
-	v0rZkIbb//eJBIz1BgyVekN5M3aHhNaRUs4ea+WY+wmDZNrFjISu1LyW8J3rsVQI
-	hU4MCavcpvsQi/gtVffraEe7ubN0hQX5HQ+fb8yF0imZnVpR7dhumqPSfQxk+Ork
-	p+4c2XNighWN810rJ72QNpqRKCEyn2g4dxGDg9ArkJUn21EID3viWRsOxPYuCn5S
-	/sLZA8GZuKwVU6sdIxtZWUazupXQ5KZC6fCLY0Uk9Cuf95PGPYVPppC5w==
-X-ME-Sender: <xms:pZ41Y00ESIGKrYdFub8sFxe_KKtXEVo43un-aLeD0JrxsUntgHRB1Q>
-    <xme:pZ41Y_EeecRIpjlU_9JcWZGfjFR5mFVvu5hojoY2VF1TRH-MLeGXoDck7okxa-Tp2
-    chdlh6T07AyPw>
-X-ME-Received: <xmr:pZ41Y84K6_Stw9smIeaBzdnyUtkAqmV5KVDdyPhTjsFSpvfIA14P943Vl8kLAJ7TrzcKIlF8M4QWi6bY3qF_JQMy9P8XQyq11pLu4AOI5kPig7RlF1RDog>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehtddgieeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghk
-    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeefgffg
-    geevhffggfetfefhffeuvefhvdevkeehkedttddtgeefkeduheevffduleenucffohhmrg
-    hinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
-    pehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslh
-    grsgdrtghomh
-X-ME-Proxy: <xmx:pZ41Y90ZlFJRD_w9Gh_hdD9KNFR0hmVNOXX5o1yypJLvKVhAKFZALg>
-    <xmx:pZ41Y3FVS_JuTe5UwjCEUrKDe79V8CbZIJ7TRj4akah6y5vFJXJr2Q>
-    <xmx:pZ41Y2-D6RsYKWA0Q6DNBezKdz3RCls5gZ8FVwZ9bLbbtCQs_eIizQ>
-    <xmx:pZ41Y-BrB9Uuw0Mhyc5zs7ZiGQrgS0JHgKIlOzGQ4gOcGuohI_GQNQ>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v8 0/2] Add Xue - console over USB 3 Debug Capability
-Date: Thu, 29 Sep 2022 15:33:11 +0200
-Message-Id: <cover.9762b1190a6fd8f0232c26cbace1b2c4f8555818.1664458360.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.35.3
+X-Inumbo-ID: 0d8cbe33-4003-11ed-9374-c1cf23e5d27e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=2XJDa8DBA7HGi039FsBbQeQ2BhJjxhBLQe2Bio1+Kqc=;
+        b=GWwRNwX/Z6et92Ckt7fyGExyf0V+SQ2iyhdgEGUEZ7X3yFUMx04bydYTgl8xyVPaOs
+         KE91zVfK/LKrVPmA1JTTv0oH/lJ1lEdjr+nuML4hzjUIL9F2UfaXWqTKOhSAkrP3ETYN
+         nsnbgKYjqaIu3EknSkNqiZOBTfTIbCkx/re8FpBcRUoiEJcQVslmkEyRaIF0qySpOUOS
+         IS5Vcmc59BSXMzJjbwVqOb/Z5Ll1w3e90hD/oqAmxucp9Xyts4hOHOpkC/kNFL8/9aqD
+         ChJAZOULj5SxdrkafgPgRRChtPpelYgS+E2b1IHglFSBkq16EGWCqGb152pHqkJxtOfP
+         cWSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=2XJDa8DBA7HGi039FsBbQeQ2BhJjxhBLQe2Bio1+Kqc=;
+        b=6XGO9t3fx13OTew4i+arfEQUmn08yBRE2khSPpCcvngGYxellHm5JdgJBoW+zyVNWz
+         WW4d9LLR92JS+R2BEy1hwrUEdcSsTo5cECrJsuR6QZcUH1cK+eau5pjr+ANPK4d3kV/e
+         Gl5HhT1ZTtV2MV5IeLZzy++qojthecrFUo4gkTMEZJsy4+4EpacJALtDebfQr63k3/FQ
+         vLNlt5mxSmkeez9cKcUZ39XO91pVm4d5vfqX44RYs2djegPB1bN8H8sbJMGpL2GpUNDU
+         97LtT+k1pQOoFvHAJj0B6M6e8t7xuia2hv5jdAlSzEaKrRjKV5dffnLaL/PGUzSB4Blx
+         7e7w==
+X-Gm-Message-State: ACrzQf3OlNxEG6R9rDQ0ydgCOXaE0uqXWA3fbvYvrpB6NwwhhjnivUAm
+	t4QzhZB/6FXPYEywjl1GnUJeTiKNhDci8lxBjbQ=
+X-Google-Smtp-Source: AMsMyM7CQ0lLy3HueYb2zHtqVG1+8vLYuqtefellxhA1KylXQJiOD+w43PJfsMhqOpZ0vNDmrixuLJKuGdtT5quEqxE=
+X-Received: by 2002:a25:2597:0:b0:6bc:c8a4:77bf with SMTP id
+ l145-20020a252597000000b006bcc8a477bfmr1962740ybl.213.1664461736975; Thu, 29
+ Sep 2022 07:28:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <86f8a095ff18e4dc41ecb9cef5153438158b91ce.1663878942.git.tamas.lengyel@intel.com>
+ <7a469ef7-5ad7-5abf-2c1f-fa29496fa2a5@suse.com> <CABfawhkJ1KSxmV=usLh9mKSyT+-_=PgQrhkGe8G0J_ZjqZ9siw@mail.gmail.com>
+ <1e9f75e3-c59c-e3a4-f26d-59a440d366aa@suse.com>
+In-Reply-To: <1e9f75e3-c59c-e3a4-f26d-59a440d366aa@suse.com>
+From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Date: Thu, 29 Sep 2022 10:28:20 -0400
+Message-ID: <CABfawhkT8PHOkNS_9+uXjN=6UANkayMf4UC0OuCr6Na-BOFdQw@mail.gmail.com>
+Subject: Re: [PATCH v2] x86/vpmu: Fix race-condition in vpmu_load
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Tamas K Lengyel <tamas.lengyel@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, 
+	xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Content-Type: multipart/alternative; boundary="0000000000009322e705e9d1b299"
 
-This is integration of https://github.com/connojd/xue into mainline Xen.
-This patch series includes several patches that I made in the process, some are
-very loosely related.
+--0000000000009322e705e9d1b299
+Content-Type: text/plain; charset="UTF-8"
 
-The driver developed by Connor supports console via USB3 debug capability. The
-capability is designed to operate mostly independently of normal XHCI driver,
-so this patch series allows dom0 to drive standard USB3 controller part, while
-Xen uses DbC for console output.
+On Thu, Sep 29, 2022 at 9:07 AM Jan Beulich <jbeulich@suse.com> wrote:
 
-Changes since RFC:
- - move the driver to xue.c, remove non-Xen parts, remove now unneeded abstraction
- - adjust for Xen code style
- - build for x86 only
- - drop patch hidding the device from dom0
-Changes since v1:
- - drop ehci patch - already applied
- - adjust for review comments from Jan (see changelogs in individual patches)
-Changes since v2:
- - add runtime option to share (or not) the controller with dom0 or other domains
- - add RX support
- - several smaller changes according to review comments
-Changes since v3:
- - put controller sharing behind experimental kconfig option
- - several other changes according to review comments
-Changes since v4:
- - drop first 4 patches - already applied to staging
- - split dbgp=xhci into dbc=xhci
-Changes since v5:
- - roll dbc=xhci back into dbgp=xhci, but make it work together with dbgp=ehci
-Changes since v6:
- - reorder patches - put acked ones early (I've put acked IOMMU ones early too,
-   even without VT-d, because they do make it work on AMD, and it's kind
-   of required to get the console work with IOMMU enabled)
- - drop barriers patch (at least for now)
- - new patches for suspend support and console=ehci alias
-Changes since v7:
- - drop commited already patches
- - drop "onsole: support multiple serial console simultaneously" as there is no interest in including it
- - adjust VT-d patch according to Kevin's request
+> On 26.09.2022 16:22, Tamas K Lengyel wrote:
+> > On Mon, Sep 26, 2022 at 10:12 AM Jan Beulich <jbeulich@suse.com> wrote:
+> >> On 22.09.2022 22:48, Tamas K Lengyel wrote:
+> >>> --- a/xen/arch/x86/cpu/vpmu.c
+> >>> +++ b/xen/arch/x86/cpu/vpmu.c
+> >>> @@ -376,57 +376,24 @@ void vpmu_save(struct vcpu *v)
+> >>>      vpmu->last_pcpu = pcpu;
+> >>>      per_cpu(last_vcpu, pcpu) = v;
+> >>>
+> >>> +    vpmu_set(vpmu, VPMU_CONTEXT_SAVE);
+> >>> +
+> >>>      if ( alternative_call(vpmu_ops.arch_vpmu_save, v, 0) )
+> >>>          vpmu_reset(vpmu, VPMU_CONTEXT_LOADED);
+> >>>
+> >>> +    vpmu_reset(vpmu, VPMU_CONTEXT_SAVE);
+> >>> +
+> >>>      apic_write(APIC_LVTPC, PMU_APIC_VECTOR | APIC_LVT_MASKED);
+> >>>  }
+> >>>
+> >>>  int vpmu_load(struct vcpu *v, bool_t from_guest)
+> >>>  {
+> >>>      struct vpmu_struct *vpmu = vcpu_vpmu(v);
+> >>> -    int pcpu = smp_processor_id(), ret;
+> >>> -    struct vcpu *prev = NULL;
+> >>> +    int ret;
+> >>>
+> >>>      if ( !vpmu_is_set(vpmu, VPMU_CONTEXT_ALLOCATED) )
+> >>>          return 0;
+> >>>
+> >>> -    /* First time this VCPU is running here */
+> >>> -    if ( vpmu->last_pcpu != pcpu )
+> >>> -    {
+> >>> -        /*
+> >>> -         * Get the context from last pcpu that we ran on. Note that if
+> >> another
+> >>> -         * VCPU is running there it must have saved this VPCU's
+> context
+> >> before
+> >>> -         * startig to run (see below).
+> >>> -         * There should be no race since remote pcpu will disable
+> >> interrupts
+> >>> -         * before saving the context.
+> >>> -         */
+> >>> -        if ( vpmu_is_set(vpmu, VPMU_CONTEXT_LOADED) )
+> >>> -        {
+> >>> -            on_selected_cpus(cpumask_of(vpmu->last_pcpu),
+> >>> -                             vpmu_save_force, (void *)v, 1);
+> >>> -            vpmu_reset(vpmu, VPMU_CONTEXT_LOADED);
+> >>> -        }
+> >>> -    }
+> >>> -
+> >>> -    /* Prevent forced context save from remote CPU */
+> >>> -    local_irq_disable();
+> >>> -
+> >>> -    prev = per_cpu(last_vcpu, pcpu);
+> >>> -
+> >>> -    if ( prev != v && prev )
+> >>> -    {
+> >>> -        vpmu = vcpu_vpmu(prev);
+> >>> -
+> >>> -        /* Someone ran here before us */
+> >>> -        vpmu_save_force(prev);
+> >>> -        vpmu_reset(vpmu, VPMU_CONTEXT_LOADED);
+> >>> -
+> >>> -        vpmu = vcpu_vpmu(v);
+> >>> -    }
+> >>> -
+> >>> -    local_irq_enable();
+> >>> -
+> >>>      /* Only when PMU is counting, we load PMU context immediately. */
+> >>>      if ( !vpmu_is_set(vpmu, VPMU_RUNNING) ||
+> >>>           (!has_vlapic(vpmu_vcpu(vpmu)->domain) &&
+> >>
+> >> What about the other two uses of vpmu_save_force() in this file? I looks
+> >> to me as if only the use in mem_sharing.c needs to be retained.
+> >
+> > I don't know, maybe. I rather focus this patch only on the issue and its
+> > fix as I don't want to introduce unintended side effects by doing a
+> > cleanup/consolidation at other code-paths when not strictly necessary.
+>
+> While I see your point, I'm afraid I don't think I can ack this
+> change without knowing whether the other uses don't expose a similar
+> issue. It would feel wrong to fix only one half of a problem. I may,
+> somewhat hesitantly, give an ack if e.g. Boris offered his R-b.
+> Else the only other option I see is that some other maintainer give
+> their ack.
+>
 
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-Cc: Paul Durrant <paul@xen.org>
-Cc: Kevin Tian <kevin.tian@intel.com>
-Cc: Connor Davis <connojdavis@gmail.com>
+I may have misunderstood what you are asking. I thought you were asking if
+the other two remaining users of vpmu_save_force could be switched over to
+vpmu_save as a generic cleanup, to which my answer is still maybe. From the
+perspective of this particular bug those use-cases are safe. On is acting
+on the current vcpu and doesn't try to run vpmu_save_force on a remote
+vcpu, the other one is being called when the domain is being shut down so
+the vcpu cannot be in a runnable state.
 
-Marek Marczykowski-Górecki (2):
-  IOMMU/VT-d: wire common device reserved memory API
-  drivers/char: suspend handling in XHCI console driver
+Tamas
 
- xen/drivers/char/xhci-dbc.c        |  55 +++++++-
- xen/drivers/passthrough/vtd/dmar.c | 196 +++++++++++++++++-------------
- 2 files changed, 163 insertions(+), 88 deletions(-)
+--0000000000009322e705e9d1b299
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-base-commit: b726541d94bd0a80b5864d17a2cd2e6d73a3fe0a
--- 
-git-series 0.9.1
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 29, 2022 at 9:07 AM Jan B=
+eulich &lt;<a href=3D"mailto:jbeulich@suse.com">jbeulich@suse.com</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 26.09.2=
+022 16:22, Tamas K Lengyel wrote:<br>
+&gt; On Mon, Sep 26, 2022 at 10:12 AM Jan Beulich &lt;<a href=3D"mailto:jbe=
+ulich@suse.com" target=3D"_blank">jbeulich@suse.com</a>&gt; wrote:<br>
+&gt;&gt; On 22.09.2022 22:48, Tamas K Lengyel wrote:<br>
+&gt;&gt;&gt; --- a/xen/arch/x86/cpu/vpmu.c<br>
+&gt;&gt;&gt; +++ b/xen/arch/x86/cpu/vpmu.c<br>
+&gt;&gt;&gt; @@ -376,57 +376,24 @@ void vpmu_save(struct vcpu *v)<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 vpmu-&gt;last_pcpu =3D pcpu;<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 per_cpu(last_vcpu, pcpu) =3D v;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; +=C2=A0 =C2=A0 vpmu_set(vpmu, VPMU_CONTEXT_SAVE);<br>
+&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 if ( alternative_call(vpmu_ops.arch_vpmu_s=
+ave, v, 0) )<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu_reset(vpmu, VPMU_CONTEX=
+T_LOADED);<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; +=C2=A0 =C2=A0 vpmu_reset(vpmu, VPMU_CONTEXT_SAVE);<br>
+&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 apic_write(APIC_LVTPC, PMU_APIC_VECTOR | A=
+PIC_LVT_MASKED);<br>
+&gt;&gt;&gt;=C2=A0 }<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;=C2=A0 int vpmu_load(struct vcpu *v, bool_t from_guest)<br>
+&gt;&gt;&gt;=C2=A0 {<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 struct vpmu_struct *vpmu =3D vcpu_vpmu(v);=
+<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 int pcpu =3D smp_processor_id(), ret;<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 struct vcpu *prev =3D NULL;<br>
+&gt;&gt;&gt; +=C2=A0 =C2=A0 int ret;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 if ( !vpmu_is_set(vpmu, VPMU_CONTEXT_ALLOC=
+ATED) )<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 /* First time this VCPU is running here */<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 if ( vpmu-&gt;last_pcpu !=3D pcpu )<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 {<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Get the context from last=
+ pcpu that we ran on. Note that if<br>
+&gt;&gt; another<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* VCPU is running there it =
+must have saved this VPCU&#39;s context<br>
+&gt;&gt; before<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* startig to run (see below=
+).<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* There should be no race s=
+ince remote pcpu will disable<br>
+&gt;&gt; interrupts<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* before saving the context=
+.<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ( vpmu_is_set(vpmu, VPMU_CONTE=
+XT_LOADED) )<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 on_selected_cpus(cp=
+umask_of(vpmu-&gt;last_pcpu),<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vpmu_save_force, (void *)v, 1)=
+;<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu_reset(vpmu, VP=
+MU_CONTEXT_LOADED);<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 }<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 /* Prevent forced context save from remote CPU =
+*/<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 local_irq_disable();<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 prev =3D per_cpu(last_vcpu, pcpu);<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 if ( prev !=3D v &amp;&amp; prev )<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 {<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu =3D vcpu_vpmu(prev);<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Someone ran here before us */<=
+br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu_save_force(prev);<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu_reset(vpmu, VPMU_CONTEXT_LOA=
+DED);<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 vpmu =3D vcpu_vpmu(v);<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 }<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt; -=C2=A0 =C2=A0 local_irq_enable();<br>
+&gt;&gt;&gt; -<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 /* Only when PMU is counting, we load PMU =
+context immediately. */<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 if ( !vpmu_is_set(vpmu, VPMU_RUNNING) ||<b=
+r>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(!has_vlapic(vpmu_vcpu=
+(vpmu)-&gt;domain) &amp;&amp;<br>
+&gt;&gt;<br>
+&gt;&gt; What about the other two uses of vpmu_save_force() in this file? I=
+ looks<br>
+&gt;&gt; to me as if only the use in mem_sharing.c needs to be retained.<br=
+>
+&gt; <br>
+&gt; I don&#39;t know, maybe. I rather focus this patch only on the issue a=
+nd its<br>
+&gt; fix as I don&#39;t want to introduce unintended side effects by doing =
+a<br>
+&gt; cleanup/consolidation at other code-paths when not strictly necessary.=
+<br>
+<br>
+While I see your point, I&#39;m afraid I don&#39;t think I can ack this<br>
+change without knowing whether the other uses don&#39;t expose a similar<br=
+>
+issue. It would feel wrong to fix only one half of a problem. I may,<br>
+somewhat hesitantly, give an ack if e.g. Boris offered his R-b.<br>
+Else the only other option I see is that some other maintainer give<br>
+their ack.<br></blockquote><div><br></div><div>I may have misunderstood wha=
+t you are asking. I thought you were asking if the other two remaining user=
+s of vpmu_save_force could be switched over to vpmu_save as a generic clean=
+up, to which my answer is still maybe. From the perspective of this particu=
+lar bug those use-cases are safe. On is acting on the current vcpu and does=
+n&#39;t try to run vpmu_save_force on a remote vcpu, the other one is being=
+ called when the domain is being shut down so the vcpu cannot be in a runna=
+ble state.</div><div><br></div><div>Tamas</div></div></div>
+
+--0000000000009322e705e9d1b299--
 
