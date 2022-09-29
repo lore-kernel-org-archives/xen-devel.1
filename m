@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C719BC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Sep 2022 22:38:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.413923.657902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9073FC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Sep 2022 23:03:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.413933.657935 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oe2AU-0001uT-26; Thu, 29 Sep 2022 22:38:10 +0000
+	id 1oe2YQ-0005rS-Fp; Thu, 29 Sep 2022 23:02:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 413923.657902; Thu, 29 Sep 2022 22:38:10 +0000
+Received: by outflank-mailman (output) from mailman id 413933.657935; Thu, 29 Sep 2022 23:02:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oe2AT-0001uM-VW; Thu, 29 Sep 2022 22:38:09 +0000
-Received: by outflank-mailman (input) for mailman id 413923;
- Thu, 29 Sep 2022 22:38:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oe2AS-0001uC-3W; Thu, 29 Sep 2022 22:38:08 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oe2AR-00026G-VO; Thu, 29 Sep 2022 22:38:08 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oe2AR-0005eR-JT; Thu, 29 Sep 2022 22:38:07 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oe2AR-0000K3-J1; Thu, 29 Sep 2022 22:38:07 +0000
+	id 1oe2YQ-0005rH-D3; Thu, 29 Sep 2022 23:02:54 +0000
+Received: by outflank-mailman (input) for mailman id 413933;
+ Thu, 29 Sep 2022 23:02:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=N23a=2A=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
+ id 1oe2YP-0005K5-Nz
+ for xen-devel@lists.xenproject.org; Thu, 29 Sep 2022 23:02:53 +0000
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+ [66.111.4.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d86dea90-404a-11ed-964a-05401a9f4f97;
+ Fri, 30 Sep 2022 01:02:52 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id E78175C00D0;
+ Thu, 29 Sep 2022 19:02:51 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Thu, 29 Sep 2022 19:02:51 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 29 Sep 2022 19:02:51 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,269 +45,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=ZQRCgaeKNOnQWBGwSPm8bHqGK4pd+Hohul0U9/cEEM0=; b=tq7LKatvrYTE98vpg1ZzjwfLu8
-	XDXXotOcNjUcc7FmuCeOHmTr5FHtt+VnSgk68jEzHdwQBXeaxn/LQEESsLTlfDcnbaTRxoykw6kiq
-	tV/koJFYZP7MEE/bdrF53ASgw+OBuLw3MmOr4WzxEFMXxhOXs9OEhTuAOmrTYWX2eX/Y=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-173370-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: d86dea90-404a-11ed-964a-05401a9f4f97
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1664492571; x=1664578971; bh=XZWfM4q7thLJRlIL5LnhobWSY3gDTnmsDKZ
+	GlT+eoxU=; b=CDfcAP8wxrv+yGaGY/hgh8nOq8xIjHWFytgIF58pO3FJayIaXxB
+	WeYKUZGE7d8fQfMSvaZuSFYKQ8fFxC4IdUIxWnKW9O4/ojiXtmTWTqS24+TzP35I
+	ofRbuBpkds4F0EslcpT0IXbD3wHJB7KN5lSGHt3P5/y17f8RKHyJBG8vWt22dlqC
+	FDmjfp6qqgtvBwDItPyFemGkb3w+xJo7DK2lEw444jsbfKaOoDcst8SEeMRg/Zkt
+	gPst1/tk7hVJ4SRB02ktkYfO1Br0ZR+rxwwUhUIHtl9V4mB8Qrsu9rChOcczf3l2
+	JkwrCMD+K2cq8kodNdqjD8BLNkWnbf9Gw+w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1664492571; x=1664578971; bh=XZWfM4q7thLJR
+	lIL5LnhobWSY3gDTnmsDKZGlT+eoxU=; b=Vl6NCdiZc+gz2Ku60HaxtUtPNiwBb
+	URRhV82z1PM/85XgMqFqjDLuGhS0OTCzjlkUzFphL515COHxZNNHMUshccNa3vSb
+	LQ5URwP15JvAS5TzO6MlkIFhncp9hoKnRwy8i6IDrRMpGltkqUbAAqlXNfhy7/5k
+	FccgNXMpJAd1A/fffa6p/pZiS+kh1jGAIINf2Uh+bA9UZYaE/3JbKuvjR6awcKgd
+	g3CLbVNm3IdpMRZ8sV4jdbb9Q/6SiIF/vKWk8sJT4qIFidKm+Grlo2b2wJ3JMYHZ
+	T+eQ5xzVkJSNtEku5+wnExs+PqBcH4fPaNNm5AesR/Y1jMQY1dlK1WdkA==
+X-ME-Sender: <xms:GyQ2Y_Ke_pIX-T7aIMKBcOu-StBD5rSKfDipWIO8b-dHOKKahEXibA>
+    <xme:GyQ2YzI1RQRTa5LJraKX5DLU07zOO766ikoQvdnQlY_WEYslEhq37MCcRKQGE4aid
+    CSNjFJUn-vGLuI>
+X-ME-Received: <xmr:GyQ2Y3vqulyPEulL9T8h2UbeTlj7So_ob4iM3Envh5kI5k0EirHMgJ-pHsv61J77EanrkpkX2bxv>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehuddgudeiucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
+    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
+    lhgrsgdrtghomh
+X-ME-Proxy: <xmx:GyQ2Y4bEh4IuZXk5E0UGCramJdK6sGdCmiW6y0mpX828czs8CY5CsA>
+    <xmx:GyQ2Y2bVKiq1NvDnyhopYp1DiENAuY7eMht2gFns59QjLcBt7XluSg>
+    <xmx:GyQ2Y8Ac5R4rT1-1LV_q1usGjI_YD4qZ-F8R3c5yl8qsWf074iCEAA>
+    <xmx:GyQ2YzSNKY0iWca7g-vLQMcF0au3cyS-Z4UXZAZCECfU0Q7O-vmPwQ>
+Feedback-ID: iac594737:Fastmail
+From: Demi Marie Obenour <demi@invisiblethingslab.com>
+To: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Kees Cook <keescook@chromium.org>,
+	Anton Vorontsov <anton@enomsg.org>,
+	Colin Cross <ccross@android.com>,
+	Tony Luck <tony.luck@intel.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	linux-efi@vger.kernel.org
+Subject: [PATCH v4 2/2] Support ESRT in Xen dom0
+Date: Thu, 29 Sep 2022 19:02:04 -0400
+Message-Id: <5649176eacda434267f68676f1733d06c572d19e.1664298147.git.demi@invisiblethingslab.com>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <cover.1664298147.git.demi@invisiblethingslab.com>
+References: <cover.1664298147.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 173370: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
-X-Osstest-Versions-That:
-    xen=211d8419ef8d8a237ff914fd8304b8fefc3ff2cc
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 29 Sep 2022 22:38:07 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 173370 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/173370/
+fwupd requires access to the EFI System Resource Table (ESRT) to
+discover which firmware can be updated by the OS.  Currently, Linux does
+not expose the ESRT when running as a Xen dom0.  Therefore, it is not
+possible to use fwupd in a Xen dom0, which is a serious problem for e.g.
+Qubes OS.
 
-Regressions :-(
+Before Xen 4.17, this was not fixable due to hypervisor limitations.
+The UEFI specification requires the ESRT to be in EfiBootServicesData
+memory, which Xen will use for whatever purposes it likes.  Therefore,
+Linux cannot safely access the ESRT, as Xen may have overwritten it.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 173347
+Starting with Xen 4.17, Xen checks if the ESRT is in EfiBootServicesData
+or EfiRuntimeServicesData memory.  If the ESRT is in EfiBootServicesData
+memory, Xen replaces the ESRT with a copy in memory that it has
+reserved.  Such memory is currently of type EFI_RUNTIME_SERVICES_DATA,
+but in the future it will be of type EFI_ACPI_RECLAIM_MEMORY.  This
+ensures that the ESRT can safely be accessed by the OS.
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+When running as a Xen dom0, use the new
+xen_config_table_memory_region_max() function to determine if Xen has
+reserved the ESRT and, if so, find the end of the memory region
+containing it.  This allows programs such as fwupd which require the
+ESRT to run under Xen, and so makes fwupd support in Qubes OS possible.
 
-version targeted for testing:
- xen                  fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
-baseline version:
- xen                  211d8419ef8d8a237ff914fd8304b8fefc3ff2cc
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ drivers/firmware/efi/esrt.c | 43 ++++++++++++++++++++++++++-----------
+ 1 file changed, 30 insertions(+), 13 deletions(-)
 
-Last test of basis   173347  2022-09-28 05:07:54 Z    1 days
-Failing since        173362  2022-09-29 13:03:03 Z    0 days    3 attempts
-Testing same since   173367  2022-09-29 17:01:55 Z    0 days    2 attempts
+diff --git a/drivers/firmware/efi/esrt.c b/drivers/firmware/efi/esrt.c
+index 2a2f52b017e736dd995c69e8aeb5fbd7761732e5..a0642bc161b4b1f94f818b8c9f46511fe2424bb2 100644
+--- a/drivers/firmware/efi/esrt.c
++++ b/drivers/firmware/efi/esrt.c
+@@ -243,27 +243,44 @@ void __init efi_esrt_init(void)
+ 	void *va;
+ 	struct efi_system_resource_table tmpesrt;
+ 	size_t size, max, entry_size, entries_size;
+-	efi_memory_desc_t md;
+-	int rc;
+ 	phys_addr_t end;
+-
+-	if (!efi_enabled(EFI_MEMMAP))
+-		return;
++	u32 type;
+ 
+ 	pr_debug("esrt-init: loading.\n");
+ 	if (!esrt_table_exists())
+ 		return;
+ 
+-	rc = efi_mem_desc_lookup(efi.esrt, &md);
+-	if (rc < 0 ||
+-	    (!(md.attribute & EFI_MEMORY_RUNTIME) &&
+-	     md.type != EFI_BOOT_SERVICES_DATA &&
+-	     md.type != EFI_RUNTIME_SERVICES_DATA)) {
+-		pr_warn("ESRT header is not in the memory map.\n");
++	if (efi_enabled(EFI_MEMMAP)) {
++		efi_memory_desc_t md;
++
++		if (efi_mem_desc_lookup(efi.esrt, &md) < 0 ||
++		    (!(md.attribute & EFI_MEMORY_RUNTIME) &&
++		     md.type != EFI_BOOT_SERVICES_DATA &&
++		     md.type != EFI_RUNTIME_SERVICES_DATA)) {
++			pr_warn("ESRT header is not in the memory map.\n");
++			return;
++		}
++
++		type = md.type;
++		max = efi_mem_desc_end(&md);
++#ifdef CONFIG_XEN_EFI
++	} else if (efi_enabled(EFI_PARAVIRT)) {
++		max = xen_config_table_memory_region_max(efi.esrt);
++		/*
++		 * This might be wrong, but it doesn't matter.
++		 * xen_config_table_memory_region_max() checks the type
++		 * of the memory region, and if it returns 0, the code
++		 * below will fail without looking at the type.  Choose
++		 * a value that will not cause * subsequent code to try
++		 * to reserve the memory containing the ESRT, as either
++		 * Xen or the firmware has done so already.
++		 */
++		type = EFI_RUNTIME_SERVICES_DATA;
++#endif
++	} else {
+ 		return;
+ 	}
+ 
+-	max = efi_mem_desc_end(&md);
+ 	if (max < efi.esrt) {
+ 		pr_err("EFI memory descriptor is invalid. (esrt: %p max: %p)\n",
+ 		       (void *)efi.esrt, (void *)max);
+@@ -333,7 +350,7 @@ void __init efi_esrt_init(void)
+ 
+ 	end = esrt_data + size;
+ 	pr_info("Reserving ESRT space from %pa to %pa.\n", &esrt_data, &end);
+-	if (md.type == EFI_BOOT_SERVICES_DATA)
++	if (type == EFI_BOOT_SERVICES_DATA)
+ 		efi_mem_reserve(esrt_data, esrt_data_size);
+ 
+ 	pr_debug("esrt-init: loaded.\n");
+-- 
+Sincerely,
+Demi Marie Obenour (she/her/hers)
+Invisible Things Lab
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Anthony PERARD <anthony.perard@citrix.com>
-  Dmytro Semenets <dmytro_semenets@epam.com>
-  Jan Beulich <jbeulich@suse.com>
-  Michal Orzel <michal.orzel@amd.com>
-  Nathan Studer <nathan.studer@dornerworks.com>
-  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
-Author: Anthony PERARD <anthony.perard@citrix.com>
-Date:   Thu Sep 29 10:51:31 2022 +0100
-
-    automation: Information about running containers for a different arch
-    
-    Adding pointer to 'qemu-user-static'.
-    
-    Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-    Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-    Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-    Release-acked-by: Henry Wang <Henry.Wang@arm.com>
-
-commit a210e94af38a957fcc99db01d2cfcc3039859445
-Author: Michal Orzel <michal.orzel@amd.com>
-Date:   Mon Sep 19 20:37:37 2022 +0200
-
-    xen/arm: domain_build: Always print the static shared memory region
-    
-    At the moment, the information about allocating static shared memory
-    region is only printed during the debug build. This information can also
-    be helpful for the end user (which may not be the same as the person
-    building the package), so switch to printk(). Also drop XENLOG_INFO to be
-    consistent with other printk() used to print the domain information.
-    
-    Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-    Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-    Release-acked-by: Henry Wang <Henry.Wang@arm.com>
-
-commit b726541d94bd0a80b5864d17a2cd2e6d73a3fe0a
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Thu Sep 29 14:47:45 2022 +0200
-
-    x86: wire up VCPUOP_register_vcpu_time_memory_area for 32-bit guests
-    
-    Forever sinced its introduction VCPUOP_register_vcpu_time_memory_area
-    was available only to native domains. Linux, for example, would attempt
-    to use it irrespective of guest bitness (including in its so called
-    PVHVM mode) as long as it finds XEN_PVCLOCK_TSC_STABLE_BIT set (which we
-    set only for clocksource=tsc, which in turn needs engaging via command
-    line option).
-    
-    Fixes: a5d39947cb89 ("Allow guests to register secondary vcpu_time_info")
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Roger Pau Monné <roger.pau@citrix.com>
-    Release-acked-by: Henry Wang <Henry.Wang@arm.com>
-
-commit 9214da34a3cb017ff0417900250bd6d18ca89e15
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Thu Sep 29 14:46:50 2022 +0200
-
-    x86: re-connect VCPUOP_send_nmi for 32-bit guests
-    
-    With the "inversion" of VCPUOP handling, processing arch-specific ones
-    first, the forwarding of this sub-op from the (common) compat handler to
-    (common) non-compat one did no longer have the intended effect. It now
-    needs forwarding between the arch-specific handlers.
-    
-    Fixes: 8a96c0ea7999 ("xen: move do_vcpu_op() to arch specific code")
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Release-acked-by: Henry Wang <Henry.Wang@arm.com>
-
-commit c4e5cc2ccc5b8274d02f7855c4769839989bb349
-Author: Roger Pau Monné <roger.pau@citrix.com>
-Date:   Thu Sep 29 14:44:10 2022 +0200
-
-    x86/ept: limit calls to memory_type_changed()
-    
-    memory_type_changed() is currently only implemented for Intel EPT, and
-    results in the invalidation of EMT attributes on all the entries in
-    the EPT page tables.  Such invalidation causes EPT_MISCONFIG vmexits
-    when the guest tries to access any gfns for the first time, which
-    results in the recalculation of the EMT for the accessed page.  The
-    vmexit and the recalculations are expensive, and as such should be
-    avoided when possible.
-    
-    Remove the call to memory_type_changed() from
-    XEN_DOMCTL_memory_mapping: there are no modifications of the
-    iomem_caps ranges anymore that could alter the return of
-    cache_flush_permitted() from that domctl.
-    
-    Encapsulate calls to memory_type_changed() resulting from changes to
-    the domain iomem_caps or ioport_caps ranges in the helpers themselves
-    (io{ports,mem}_{permit,deny}_access()), and add a note in
-    epte_get_entry_emt() to remind that changes to the logic there likely
-    need to be propagaed to the IO capabilities helpers.
-    
-    Note changes to the IO ports or memory ranges are not very common
-    during guest runtime, but Citrix Hypervisor has an use case for them
-    related to device passthrough.
-    
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit 9982fe275ba4ee1a749b6dde5602a5a79e42b543
-Author: Roger Pau Monné <roger.pau@citrix.com>
-Date:   Thu Sep 29 14:41:13 2022 +0200
-
-    arm/vgic: drop const attribute from gic_iomem_deny_access()
-    
-    While correct from a code point of view, the usage of the const
-    attribute for the domain parameter of gic_iomem_deny_access() is at
-    least partially bogus.  Contents of the domain structure (the iomem
-    rangeset) is modified by the function.  Such modifications succeed
-    because right now the iomem rangeset is allocated separately from
-    struct domain, and hence is not subject to the constness of struct
-    domain.
-    
-    Amend this by dropping the const attribute from the function
-    parameter.
-    
-    This is required by further changes that will convert
-    iomem_{permit,deny}_access into a function.
-    
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-
-commit 0db195c1a9947240b354abbefd2afac6c73ad6a8
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Thu Sep 29 14:39:52 2022 +0200
-
-    x86/NUMA: correct memnode_shift calculation for single node system
-    
-    SRAT may describe even a single node system (including such with
-    multiple nodes, but only one having any memory) using multiple ranges.
-    Hence simply counting the number of ranges (note that function
-    parameters are mis-named) is not an indication of the number of nodes in
-    use. Since we only care about knowing whether we're on a single node
-    system, accounting for this is easy: Increment the local variable only
-    when adjacent ranges are for different nodes. That way the count may
-    still end up larger than the number of nodes in use, but it won't be
-    larger than 1 when only a single node has any memory.
-    
-    To compensate populate_memnodemap() now needs to be prepared to find
-    the correct node ID already in place for a range. (This could of course
-    also happen when there's more than one node with memory, while at least
-    one node has multiple adjacent ranges, provided extract_lsb_from_nodes()
-    would also know to recognize this case.)
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Roger Pau Monné <roger.pau@citrix.com>
-
-commit e1de23b7c1bfa02447a79733e64184b3635e0587
-Author: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-Date:   Thu Sep 29 14:38:22 2022 +0200
-
-    MAINTAINERS: ARINC 653 scheduler maintainer updates
-    
-    Add Nathan Studer as co-maintainer.
-    
-    I am departing DornerWorks. I will still be working with Xen in my next
-    role, and I still have an interest in co-maintaining the ARINC 653
-    scheduler, so change to my personal email address.
-    
-    Signed-off-by: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-    Acked-by: Nathan Studer <nathan.studer@dornerworks.com>
-
-commit 3ab6ea992b0e5e1a332bdbc8ae56d72f1b66fcbd
-Author: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Date:   Thu Sep 29 14:38:02 2022 +0200
-
-    tools: remove xenstore entries on vchan server closure
-    
-    vchan server creates XenStore entries to advertise its event channel and
-    ring, but those are not removed after the server quits.
-    Add additional cleanup step, so those are removed, so clients do not try
-    to connect to a non-existing server.
-    
-    Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-    Signed-off-by: Dmytro Semenets <dmytro_semenets@epam.com>
-    Reviewed-by: Juergen Gross <jgross@suse.com>
-    Acked-by: Anthony PERARD <anthony.perard@citrix.com>
-(qemu changes not included)
 
