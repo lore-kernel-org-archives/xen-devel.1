@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0071AC43217
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Sep 2022 23:03:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.413932.657923 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FB8C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Sep 2022 00:06:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.413956.657957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oe2YP-0005bG-8k; Thu, 29 Sep 2022 23:02:53 +0000
+	id 1oe3Xk-0005UU-K7; Fri, 30 Sep 2022 00:06:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 413932.657923; Thu, 29 Sep 2022 23:02:53 +0000
+Received: by outflank-mailman (output) from mailman id 413956.657957; Fri, 30 Sep 2022 00:06:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oe2YP-0005b7-64; Thu, 29 Sep 2022 23:02:53 +0000
-Received: by outflank-mailman (input) for mailman id 413932;
- Thu, 29 Sep 2022 23:02:52 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=N23a=2A=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1oe2YO-0005ab-K4
- for xen-devel@lists.xenproject.org; Thu, 29 Sep 2022 23:02:52 +0000
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d69ee175-404a-11ed-9374-c1cf23e5d27e;
- Fri, 30 Sep 2022 01:02:50 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id E6E2C5C003D;
- Thu, 29 Sep 2022 19:02:48 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Thu, 29 Sep 2022 19:02:48 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 29 Sep 2022 19:02:47 -0400 (EDT)
+	id 1oe3Xk-0005UN-HM; Fri, 30 Sep 2022 00:06:16 +0000
+Received: by outflank-mailman (input) for mailman id 413956;
+ Fri, 30 Sep 2022 00:06:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oe3Xi-0005UD-Oq; Fri, 30 Sep 2022 00:06:14 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oe3Xi-0004Ic-MJ; Fri, 30 Sep 2022 00:06:14 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oe3Xi-0007tW-Dk; Fri, 30 Sep 2022 00:06:14 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1oe3Xi-00030R-DA; Fri, 30 Sep 2022 00:06:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,203 +44,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d69ee175-404a-11ed-9374-c1cf23e5d27e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1664492568; x=1664578968; bh=mbINTmtX+Y203Gs79+//9ThUmGM7WPRVX3Y
-	jlp+Pb+E=; b=vxd3Go1eRAYVPxf7nsO+YRDw1szNfJ8CzuPTeQNfwTfgiJlFIxI
-	VvgDFfpaW5wMgxgS3D83epM+1HAHUJZGhZ9SFUZ6SSMI5p3FME/rjK0D/8IA3fKw
-	0h1itKzOloZ7akksTAd+m2krDesB5O5VqO3fgQScFXQH4fJx9BabnCSoduDqk1Rc
-	wlMwY09jMfwZKKvn9dgSEDWudIqFS95I8JV6F4uUa/Sy+t8Cnwf4/xgHyy5dA9mI
-	SDyG+W+hB5cUxOfHHsUSxmb0ufoDyitGCSejg0L5Ys4fqF+XWfE9gsUKmrjQj4/d
-	lH1KjM+GJAqKXkWfwmN6bMcgnzekVLcfLWw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1664492568; x=1664578968; bh=mbINTmtX+Y203
-	Gs79+//9ThUmGM7WPRVX3Yjlp+Pb+E=; b=wG00Lo+VdSJSoiPuNxmPp/TGitdWe
-	6j6Ow3nEs7qDSSQ7r7av1J88lp+ABlJIKhc2EnPTKsgZ7fhYyaLqUgChpB4jVSJh
-	KqT5bJSBPUXdJ8OU4mROTF4/R40c6TB+DIurEaTILCPrNi1ml/lfXqa2X0rOGPYT
-	zHWU8M8zbXu6y5Benrbom8ZEEl6EN6nSer8C51hkr4bMuV37ii/QNDF+BJpAXjri
-	yP0qFq3x++pbVvWrG29YYhfD38sqt/j8yNekJY3Gomz0AXCrDLpwPx78RLGatbec
-	2BaXzhOenHhP/Ll7mISZtmKOz2W5kqNqaQlORr/nKD1gZU4M9K64HrlrA==
-X-ME-Sender: <xms:GCQ2Y-2tLyajOv6VpzJYzpDtKT6s8z_cCqQ_SajUEwrnot43rfZRIQ>
-    <xme:GCQ2YxEYAj2WlK-gVbH6UP2mI2RkOvtHpJWCsNXogJa0-K2U1NOwYBcjoa58VGZdx
-    SuPks3r4CmGETs>
-X-ME-Received: <xmr:GCQ2Y27dj8DYJAOVPaSy9tNzIUi9SKXfhzKncZMVxJ9D3Pl4Qqz_iVEx08jHeGFzQ9MNtAvvx92d>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehuddgudeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
-    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
-    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
-    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
-    lhgrsgdrtghomh
-X-ME-Proxy: <xmx:GCQ2Y_2HfQg7_eOxp0tSU_zGhJDwSMz0JQtm2yYA9M4mIbxF-_Qshw>
-    <xmx:GCQ2YxH5H2XiEzjpw6QXwPY8iWctDnyPoV_2mNH0q3oim0ZdGa7UiA>
-    <xmx:GCQ2Y4_u9KI85k_f7l4TIy0REYwDNZ-7PocmzE7NQky4pgPwZoEQMA>
-    <xmx:GCQ2Y5_xKrmDFQVlaBs7j1xCaDVpYkJYa0zZNARXeOmUr54H2X_Vgw>
-Feedback-ID: iac594737:Fastmail
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Kees Cook <keescook@chromium.org>,
-	Anton Vorontsov <anton@enomsg.org>,
-	Colin Cross <ccross@android.com>,
-	Tony Luck <tony.luck@intel.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	linux-efi@vger.kernel.org
-Subject: [PATCH v4 1/2] Avoid using EFI tables Xen may have clobbered
-Date: Thu, 29 Sep 2022 19:02:03 -0400
-Message-Id: <f3b624e99adfdbbfc1976a60a73a6b5950e1840d.1664298147.git.demi@invisiblethingslab.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <cover.1664298147.git.demi@invisiblethingslab.com>
-References: <cover.1664298147.git.demi@invisiblethingslab.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
+	bh=yy+dUFVMF/t5TsC8QgU58o0M7+ZireSy+nHw5HA/Rl8=; b=JWCRKiAoSB+dhWAisLjkzrkJik
+	2oUJGnghV8gnZ03el/L2miJv7F7QZ0C1Hb6FIYtMd9e2IdsL2Jnx225S2q1kdfv1nQ85xDOBTP70Y
+	tyJEPAfvFjJ65h2Do3oRFsNyJJoM/FcHgOaFQlOyxu70zGEOEtnIFfTQdHfJS22f/43Y=;
+To: xen-devel@lists.xenproject.org
+Subject: [xen-unstable-smoke bisection] complete build-arm64-xsm
+Message-Id: <E1oe3Xi-00030R-DA@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 30 Sep 2022 00:06:14 +0000
 
-Memory of type EFI_CONVENTIONAL_MEMORY, EFI_LOADER_CODE, EFI_LOADER_DATA,
-EFI_BOOT_SERVICES_CODE, and EFI_BOOT_SERVICES_DATA may be clobbered by
-Xen before Linux gets to start using it.  Therefore, Linux under Xen
-must not use EFI tables from such memory.  Most of the remaining EFI
-memory types are not suitable for EFI tables, leaving only
-EFI_ACPI_RECLAIM_MEMORY, EFI_RUNTIME_SERVICES_DATA, and
-EFI_RUNTIME_SERVICES_CODE.  When running under Xen, Linux should only
-use tables that are located in one of these types of memory.
+branch xen-unstable-smoke
+xenbranch xen-unstable-smoke
+job build-arm64-xsm
+testid xen-build
 
-This patch ensures this, and also adds a function
-(xen_config_table_memory_region_max()) that will be used later to
-replace the usage of the EFI memory map in esrt.c when running under
-Xen.  This function can also be used in mokvar-table.c and efi-bgrt.c,
-but I have not implemented this.
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
 
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
- drivers/firmware/efi/efi.c |  8 +++++---
- drivers/xen/efi.c          | 35 +++++++++++++++++++++++++++++++++++
- include/linux/efi.h        |  9 +++++++++
- 3 files changed, 49 insertions(+), 3 deletions(-)
+*** Found and reproduced problem changeset ***
 
-diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
-index e4080ad96089abd7f84745dd8461c548bcbb7685..d344f3ff73d1c5ed0c67e3251a9502e66719741d 100644
---- a/drivers/firmware/efi/efi.c
-+++ b/drivers/firmware/efi/efi.c
-@@ -574,7 +574,6 @@ int __init efi_config_parse_tables(const efi_config_table_t *config_tables,
- 	unsigned long table;
- 	int i;
- 
--	pr_info("");
- 	for (i = 0; i < count; i++) {
- 		if (!IS_ENABLED(CONFIG_X86)) {
- 			guid = &config_tables[i].guid;
-@@ -585,7 +584,6 @@ int __init efi_config_parse_tables(const efi_config_table_t *config_tables,
- 
- 			if (IS_ENABLED(CONFIG_X86_32) &&
- 			    tbl64[i].table > U32_MAX) {
--				pr_cont("\n");
- 				pr_err("Table located above 4GB, disabling EFI.\n");
- 				return -EINVAL;
- 			}
-@@ -594,10 +592,14 @@ int __init efi_config_parse_tables(const efi_config_table_t *config_tables,
- 			table = tbl32[i].table;
- 		}
- 
-+#ifdef CONFIG_XEN_EFI
-+		if (efi_enabled(EFI_PARAVIRT) && !xen_config_table_memory_region_max(table))
-+			continue;
-+#endif
-+
- 		if (!match_config_table(guid, table, common_tables) && arch_tables)
- 			match_config_table(guid, table, arch_tables);
- 	}
--	pr_cont("\n");
- 	set_bit(EFI_CONFIG_TABLES, &efi.flags);
- 
- 	if (efi_rng_seed != EFI_INVALID_TABLE_ADDR) {
-diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
-index d1ff2186ebb48a7c0981ecb6d4afcbbb25ffcea0..c2274ddfcc63304008ef0fd78fd9fa416f75d073 100644
---- a/drivers/xen/efi.c
-+++ b/drivers/xen/efi.c
-@@ -28,6 +28,7 @@
- #include <xen/interface/platform.h>
- #include <xen/xen.h>
- #include <xen/xen-ops.h>
-+#include <xen/page.h>
- 
- #include <asm/page.h>
- 
-@@ -271,6 +272,40 @@ static void xen_efi_reset_system(int reset_type, efi_status_t status,
- 	}
- }
- 
-+__init u64 xen_config_table_memory_region_max(u64 addr)
-+{
-+	static_assert(XEN_PAGE_SHIFT == EFI_PAGE_SHIFT,
-+		      "Mismatch between EFI_PAGE_SHIFT and XEN_PAGE_SHIFT");
-+	struct xen_platform_op op = {
-+		.cmd = XENPF_firmware_info,
-+		.u.firmware_info = {
-+			.type = XEN_FW_EFI_INFO,
-+			.index = XEN_FW_EFI_MEM_INFO,
-+			.u.efi_info.mem.addr = addr,
-+			.u.efi_info.mem.size = U64_MAX - addr,
-+		}
-+	};
-+	union xenpf_efi_info *info = &op.u.firmware_info.u.efi_info;
-+	int rc = HYPERVISOR_platform_op(&op);
-+
-+	if (rc) {
-+		pr_warn("Failed to lookup header %llu in Xen memory map: error %d\n",
-+			(unsigned long long)addr, rc);
-+		return 0;
-+	}
-+
-+	switch (info->mem.type) {
-+	case EFI_RUNTIME_SERVICES_CODE:
-+	case EFI_RUNTIME_SERVICES_DATA:
-+	case EFI_ACPI_RECLAIM_MEMORY:
-+		return info->mem.addr + info->mem.size;
-+	default:
-+		pr_warn("Table %llu is in memory of type %d, ignoring it\n",
-+			(unsigned long long)addr, info->mem.type);
-+		return 0;
-+	}
-+}
-+
- /*
-  * Set XEN EFI runtime services function pointers. Other fields of struct efi,
-  * e.g. efi.systab, will be set like normal EFI.
-diff --git a/include/linux/efi.h b/include/linux/efi.h
-index d2b84c2fec39f0268324d1a38a73ed67786973c9..fc81e4b984398cdb399e7886b2cae7f33bf91613 100644
---- a/include/linux/efi.h
-+++ b/include/linux/efi.h
-@@ -1324,4 +1324,13 @@ struct linux_efi_coco_secret_area {
- /* Header of a populated EFI secret area */
- #define EFI_SECRET_TABLE_HEADER_GUID	EFI_GUID(0x1e74f542, 0x71dd, 0x4d66,  0x96, 0x3e, 0xef, 0x42, 0x87, 0xff, 0x17, 0x3b)
- 
-+#ifdef CONFIG_XEN_EFI
-+/*
-+ * Returns the end of the memory region containing the given config table,
-+ * or 0 if the given address does not reside in memory that can validly
-+ * contain EFI configuration tables.
-+ */
-+__init u64 xen_config_table_memory_region_max(u64 addr);
-+#endif
-+
- #endif /* _LINUX_EFI_H */
--- 
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  c4e5cc2ccc5b8274d02f7855c4769839989bb349
+  Bug not present: 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/173377/
+
+
+  commit c4e5cc2ccc5b8274d02f7855c4769839989bb349
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Thu Sep 29 14:44:10 2022 +0200
+  
+      x86/ept: limit calls to memory_type_changed()
+      
+      memory_type_changed() is currently only implemented for Intel EPT, and
+      results in the invalidation of EMT attributes on all the entries in
+      the EPT page tables.  Such invalidation causes EPT_MISCONFIG vmexits
+      when the guest tries to access any gfns for the first time, which
+      results in the recalculation of the EMT for the accessed page.  The
+      vmexit and the recalculations are expensive, and as such should be
+      avoided when possible.
+      
+      Remove the call to memory_type_changed() from
+      XEN_DOMCTL_memory_mapping: there are no modifications of the
+      iomem_caps ranges anymore that could alter the return of
+      cache_flush_permitted() from that domctl.
+      
+      Encapsulate calls to memory_type_changed() resulting from changes to
+      the domain iomem_caps or ioport_caps ranges in the helpers themselves
+      (io{ports,mem}_{permit,deny}_access()), and add a note in
+      epte_get_entry_emt() to remind that changes to the logic there likely
+      need to be propagaed to the IO capabilities helpers.
+      
+      Note changes to the IO ports or memory ranges are not very common
+      during guest runtime, but Citrix Hypervisor has an use case for them
+      related to device passthrough.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build --summary-out=tmp/173377.bisection-summary --basis-template=173347 --blessings=real,real-bisect,real-retry xen-unstable-smoke build-arm64-xsm xen-build
+Searching for failure / basis pass:
+ 173370 fail [host=rochester0] / 173347 [host=rochester1] 173342 [host=rochester1] 173333 ok.
+Failure / basis pass flights: 173370 / 173333
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest b746458e1ce1bec85e58b458386f8b7a0bedfaa6 fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
+Basis pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 5e936d11b171793c174686268c9c1df8a4fa974c
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/qemu-xen.git#b746458e1ce1bec85e58b458386f8b7a0bedfaa6-b746458e1ce1bec85e58b458386f8b7a0bedfaa6 git://xenbits.xen.org/xen.git#5e936d11b171793c174686268c9c1df8a4fa974c-fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
+Loaded 5001 nodes in revision graph
+Searching for test results:
+ 173373 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+ 173362 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 b726541d94bd0a80b5864d17a2cd2e6d73a3fe0a
+ 173365 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 5e936d11b171793c174686268c9c1df8a4fa974c
+ 173366 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 b726541d94bd0a80b5864d17a2cd2e6d73a3fe0a
+ 173368 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 e1de23b7c1bfa02447a79733e64184b3635e0587
+ 173367 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
+ 173369 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+ 173372 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 c4e5cc2ccc5b8274d02f7855c4769839989bb349
+ 173370 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 fb7485788fd7db3b95f4e7fc9bfdfe9ef38e383f
+ 173374 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 c4e5cc2ccc5b8274d02f7855c4769839989bb349
+ 173376 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+ 173377 fail b746458e1ce1bec85e58b458386f8b7a0bedfaa6 c4e5cc2ccc5b8274d02f7855c4769839989bb349
+ 173333 pass b746458e1ce1bec85e58b458386f8b7a0bedfaa6 5e936d11b171793c174686268c9c1df8a4fa974c
+ 173342 [host=rochester1]
+ 173347 [host=rochester1]
+Searching for interesting versions
+ Result found: flight 173333 (pass), for basis pass
+ For basis failure, parent search stopping at b746458e1ce1bec85e58b458386f8b7a0bedfaa6 9982fe275ba4ee1a749b6dde5602a5a79e42b543, results HASH(0x55d736404278) HASH(0x55d736414c98) HASH(0x55d7364189a8) For basis failure, parent search stopping at b746458e1ce1bec85e58b458386f8b7a0bedfaa6 e1de23b7c1bfa02447a79733e64184b3635e0587, results HASH(0x55d73640b428) For basis failure, parent search stopping at b746458e1ce1bec85e58b458386f8b7a0bedfaa6 5e936d11b171793c174686268c9c1df8a4fa974c, results HASH(0x\
+ 55d73640c950) HASH(0x55d736421170) Result found: flight 173362 (fail), for basis failure (at ancestor ~575)
+ Repro found: flight 173365 (pass), for basis pass
+ Repro found: flight 173367 (fail), for basis failure
+ 0 revisions at b746458e1ce1bec85e58b458386f8b7a0bedfaa6 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+No revisions left to test, checking graph state.
+ Result found: flight 173369 (pass), for last pass
+ Result found: flight 173372 (fail), for first failure
+ Repro found: flight 173373 (pass), for last pass
+ Repro found: flight 173374 (fail), for first failure
+ Repro found: flight 173376 (pass), for last pass
+ Repro found: flight 173377 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  c4e5cc2ccc5b8274d02f7855c4769839989bb349
+  Bug not present: 9982fe275ba4ee1a749b6dde5602a5a79e42b543
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/173377/
+
+
+  commit c4e5cc2ccc5b8274d02f7855c4769839989bb349
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Thu Sep 29 14:44:10 2022 +0200
+  
+      x86/ept: limit calls to memory_type_changed()
+      
+      memory_type_changed() is currently only implemented for Intel EPT, and
+      results in the invalidation of EMT attributes on all the entries in
+      the EPT page tables.  Such invalidation causes EPT_MISCONFIG vmexits
+      when the guest tries to access any gfns for the first time, which
+      results in the recalculation of the EMT for the accessed page.  The
+      vmexit and the recalculations are expensive, and as such should be
+      avoided when possible.
+      
+      Remove the call to memory_type_changed() from
+      XEN_DOMCTL_memory_mapping: there are no modifications of the
+      iomem_caps ranges anymore that could alter the return of
+      cache_flush_permitted() from that domctl.
+      
+      Encapsulate calls to memory_type_changed() resulting from changes to
+      the domain iomem_caps or ioport_caps ranges in the helpers themselves
+      (io{ports,mem}_{permit,deny}_access()), and add a note in
+      epte_get_entry_emt() to remind that changes to the logic there likely
+      need to be propagaed to the IO capabilities helpers.
+      
+      Note changes to the IO ports or memory ranges are not very common
+      during guest runtime, but Citrix Hypervisor has an use case for them
+      related to device passthrough.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Revision graph left in /home/logs/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build.{dot,ps,png,html,svg}.
+----------------------------------------
+173377: tolerable ALL FAIL
+
+flight 173377 xen-unstable-smoke real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/173377/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build               fail baseline untested
+
+
+jobs:
+ build-arm64-xsm                                              fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
