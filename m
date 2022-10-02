@@ -4,41 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D56C4332F
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 22:20:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.414715.659093 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3369EC433F5
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 23:01:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.414729.659104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1of7KH-0006FU-4J; Sun, 02 Oct 2022 22:20:45 +0000
+	id 1of7wx-0002e8-81; Sun, 02 Oct 2022 23:00:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 414715.659093; Sun, 02 Oct 2022 22:20:45 +0000
+Received: by outflank-mailman (output) from mailman id 414729.659104; Sun, 02 Oct 2022 23:00:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1of7KH-0006FN-1c; Sun, 02 Oct 2022 22:20:45 +0000
-Received: by outflank-mailman (input) for mailman id 414715;
- Sun, 02 Oct 2022 22:20:43 +0000
+	id 1of7wx-0002e1-4G; Sun, 02 Oct 2022 23:00:43 +0000
+Received: by outflank-mailman (input) for mailman id 414729;
+ Sun, 02 Oct 2022 23:00:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=STlk=2D=runbox.com=m.v.b@srs-se1.protection.inumbo.net>)
- id 1of7KF-0005uq-JF
- for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 22:20:43 +0000
-Received: from mailtransmit05.runbox.com (mailtransmit05.runbox.com
- [2a0c:5a00:149::26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 73698cfa-42a0-11ed-9375-c1cf23e5d27e;
- Mon, 03 Oct 2022 00:20:41 +0200 (CEST)
-Received: from mailtransmit02.runbox ([10.9.9.162] helo=aibo.runbox.com)
- by mailtransmit05.runbox.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
- (envelope-from <m.v.b@runbox.com>)
- id 1of7KD-009uU3-JR; Mon, 03 Oct 2022 00:20:41 +0200
-Received: from [10.9.9.74] (helo=submission03.runbox)
- by mailtransmit02.runbox with esmtp (Exim 4.86_2)
- (envelope-from <m.v.b@runbox.com>)
- id 1of7K7-0006iK-RD; Mon, 03 Oct 2022 00:20:35 +0200
-Received: by submission03.runbox with esmtpsa [Authenticated ID (536975)]
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
- id 1of7Jy-00061b-Dp; Mon, 03 Oct 2022 00:20:26 +0200
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=9ZZD=2D=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
+ id 1of7wv-0002dv-KV
+ for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 23:00:42 +0000
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
+ [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 06c8d52d-42a6-11ed-9375-c1cf23e5d27e;
+ Mon, 03 Oct 2022 01:00:38 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 21E2F5C00C0;
+ Sun,  2 Oct 2022 19:00:36 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute3.internal (MEProxy); Sun, 02 Oct 2022 19:00:36 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
+ 2 Oct 2022 19:00:34 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,186 +45,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73698cfa-42a0-11ed-9375-c1cf23e5d27e
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=runbox.com;
-	 s=selector2; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To
-	:Message-Id:Date:Subject:Cc:To:From;
-	bh=+Vie5gCZlh7QnEM5LNxxIlolyHehCAwhUeGnQuCZCG0=; b=EZXHAHDS8IVNmG694ijMXgA1Pt
-	1z/7+aVAN/itRJpFoSIC1u6kfGApGr8EWO7gKXvlilauTHt8gJvXSoVojZorlGNOLBmmTYB6BR/tW
-	bDOFIOzeONac7Aat1QAEb6uflXvMkZs2qsGHdQsheYhXgcLlnm9jsMvQ0n6RKZq3RZ7RlGeDr+n3I
-	ldeKPtVtebOfP/clRJBtegyCYcJ0hS+mSHfHcaVYxhKFppc5JjN2B4uT3UkPqnaQJw/1ELMlotkdm
-	F+PEI/rQqnLpIwla60ZblaUxAlUf0uBBW3eG8SeYyeS4/4A+AAIdcPGdBuogG28RH46gSbE8mXdX2
-	+PTE01qA==;
-From: "M. Vefa Bicakci" <m.v.b@runbox.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: m.v.b@runbox.com,
-	Juergen Gross <jgross@suse.com>,
+X-Inumbo-ID: 06c8d52d-42a6-11ed-9375-c1cf23e5d27e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1664751636; x=
+	1664838036; bh=cNciw2J5Orp3JpPbWkHqpqGm5hUpKrl4SmiJ2KcbhH8=; b=S
+	tzowsnM8VUFP9jNA1d27nHp5QlrEviDhtKSxdP/MY6TEgnK0eo1T3cRCa3uUbiAp
+	LZ1O6BUmN6C4ekbVXueBFi6AjnkRFhPvxXrdAB9XaW2Y5sCtlvebHdGNns4UaR87
+	98i/+z6WvyBzUwjWQ8cil7CiyKb9ABrWpndfHtk6gFmyXjImddoCbmQluTyubJtX
+	5lZfLA+UApxRN8NOH/cm/exfR8iZXVCoaqXRqFpY8Ekc+VHymtgrMUeXUEVjMTrJ
+	fmae98hbjLeiiKG+5gHMs2zyrOPnyKSbHI3qLiaYubRW/XP9V89QkOeQ+GcMndnA
+	8I7SUTC4bB3I1Npn0SqKw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
+	:mime-version:references:reply-to:sender:subject:subject:to:to
+	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm2; t=1664751636; x=1664838036; bh=cNciw2J5Orp3JpPbWkHqpqGm5hUp
+	Krl4SmiJ2KcbhH8=; b=JdGnrZ+iLYBG6LzPmDP3jOJv64VEFip/hOipznNdeiUc
+	o1Jr+pN3OQR4ysJrt2y98O1kCDwbH7NCH+qQId8kJmKy0WUQZzgdPfo+5i7yx3+m
+	kq/eYIepJPiaJQzchG26RMIvQY1WVVi9GESPCCE1DKavHdkQlDR0BTYS86PHCB0C
+	xh+YJkgcnZMojUFJrB1zILldqNaLCXJX3TSrc1teEdcmxScZSYt1LTDUoq5x8VtV
+	4UuifB4kj8CM9fWzuiOuINWARyICq0ohDm24kAvjeUUkkAjBTykAUoWeY/Sj0b4a
+	qU+DfPJYWI8cPljqU3+FJHy5jm5uX9m4heWubMYhmQ==
+X-ME-Sender: <xms:Exg6YyCbz9sByCIIQljqFgkNCPeuxQmDhsaMWa6wGicvjRytAzNjZg>
+    <xme:Exg6Y8joOSZ5zzpJGsrYmbE6OgKkU77YXGXHirguXPjzIU9wxSsmPRMFtyRzZUj1-
+    deQU6-SJF0l2wo>
+X-ME-Received: <xmr:Exg6Y1kljE3_n27GmgMEjkJYhFGOwjkmF3RSb1z7zqcsL3TIETazcUH2zPpV>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehkedgudekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepvdejteegkefhteduhffgteffgeff
+    gfduvdfghfffieefieekkedtheegteehffelnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
+    lhgrsgdrtghomh
+X-ME-Proxy: <xmx:Exg6YwxJKc-wmkmNwhLsxE2oIxI-nZaKtEDu19BrP2dB9JI0x_1L0g>
+    <xmx:Exg6Y3SmiEcbMdqzdD3-2SdgO6W8Mq9hrs_m05kn1-FZ1jHUyqJsmw>
+    <xmx:Exg6Y7azkcapAbTvHYgcytdLYYZuTmVS2fr3YExZybs-YQTgV-CF1w>
+    <xmx:FBg6Y8_EkqLgAuteYDAfltj7vRVWKG2Qo7Dcaz-QTb_s47gjjlIv6w>
+Feedback-ID: iac594737:Fastmail
+Date: Sun, 2 Oct 2022 19:00:01 -0400
+From: Demi Marie Obenour <demi@invisiblethingslab.com>
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org,
+	Peter Jones <pjones@redhat.com>, Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Demi Marie Obenour <demi@invisiblethingslab.com>,
-	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH v2 1/2] xen/gntdev: Prevent leaking grants
-Date: Sun,  2 Oct 2022 18:20:05 -0400
-Message-Id: <20221002222006.2077-2-m.v.b@runbox.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20221002222006.2077-1-m.v.b@runbox.com>
-References: <20221002222006.2077-1-m.v.b@runbox.com>
+	Kees Cook <keescook@chromium.org>,
+	Anton Vorontsov <anton@enomsg.org>,
+	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH 4/5] efi: Apply allowlist to EFI configuration tables
+ when running under Xen
+Message-ID: <YzoYEewoSoj1a2Ss@itl-email>
+References: <20221002095626.484279-1-ardb@kernel.org>
+ <20221002095626.484279-5-ardb@kernel.org>
+ <Yzm8H3iS7ziWsh7E@itl-email>
+ <CAMj1kXFWS0kXp7f75x=BDYDyTHKNzMCTZ_bXg7v23Aw=pJtSzQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="PghubVJsF+8O07oQ"
+Content-Disposition: inline
+In-Reply-To: <CAMj1kXFWS0kXp7f75x=BDYDyTHKNzMCTZ_bXg7v23Aw=pJtSzQ@mail.gmail.com>
 
-Prior to this commit, if a grant mapping operation failed partially,
-some of the entries in the map_ops array would be invalid, whereas all
-of the entries in the kmap_ops array would be valid. This in turn would
-cause the following logic in gntdev_map_grant_pages to become invalid:
 
-  for (i = 0; i < map->count; i++) {
-    if (map->map_ops[i].status == GNTST_okay) {
-      map->unmap_ops[i].handle = map->map_ops[i].handle;
-      if (!use_ptemod)
-        alloced++;
-    }
-    if (use_ptemod) {
-      if (map->kmap_ops[i].status == GNTST_okay) {
-        if (map->map_ops[i].status == GNTST_okay)
-          alloced++;
-        map->kunmap_ops[i].handle = map->kmap_ops[i].handle;
-      }
-    }
-  }
-  ...
-  atomic_add(alloced, &map->live_grants);
+--PghubVJsF+8O07oQ
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 2 Oct 2022 19:00:01 -0400
+From: Demi Marie Obenour <demi@invisiblethingslab.com>
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org,
+	Peter Jones <pjones@redhat.com>, Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Kees Cook <keescook@chromium.org>,
+	Anton Vorontsov <anton@enomsg.org>,
+	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH 4/5] efi: Apply allowlist to EFI configuration tables
+ when running under Xen
 
-Assume that use_ptemod is true (i.e., the domain mapping the granted
-pages is a paravirtualized domain). In the code excerpt above, note that
-the "alloced" variable is only incremented when both kmap_ops[i].status
-and map_ops[i].status are set to GNTST_okay (i.e., both mapping
-operations are successful).  However, as also noted above, there are
-cases where a grant mapping operation fails partially, breaking the
-assumption of the code excerpt above.
+On Sun, Oct 02, 2022 at 11:22:58PM +0200, Ard Biesheuvel wrote:
+> On Sun, 2 Oct 2022 at 18:28, Demi Marie Obenour
+> <demi@invisiblethingslab.com> wrote:
+> >
+> > On Sun, Oct 02, 2022 at 11:56:25AM +0200, Ard Biesheuvel wrote:
+> > > As it turns out, Xen does not guarantee that EFI bootservices data
+> > > regions in memory are preserved, which means that EFI configuration
+> > > tables pointing into such memory regions may be corrupted before the
+> > > dom0 OS has had a chance to inspect them.
+> > >
+> > > Demi Marie reports that this is causing problems for Qubes OS when it
+> > > attempts to perform system firmware updates, which requires that the
+> > > contents of the ESRT configuration table are valid when the fwupd user
+> > > space program runs.
+> > >
+> > > However, other configuration tables such as the memory attributes
+> > > table or the runtime properties table are equally affected, and so we
+> > > need a comprehensive workaround that works for any table type.
+> > >
+> > > So let's first disregard all EFI configuration tables except the ones
+> > > that are known (or can be expected) to reside in memory regions of a
+> > > type that Xen preserves, i.e., ACPI tables (which are passed in
+> > > EfiAcpiReclaimMemory regions) and SMBIOS tables (which are usually
+> > > passed in EfiRuntimeServicesData regions, even though the UEFI spec o=
+nly
+> > > mentions this as a recommendation). Then, cross reference unknown tab=
+les
+> > > against either the EFI memory map (if available) or do a Xen hypercall
+> > > to determine the memory type, and allow the config table if the type =
+is
+> > > one that is guaranteed to be preserved.
+> > >
+> > > Future patches can augment the logic in this routine to allow other
+> > > table types based on the size of the allocation, or based on a table
+> > > specific header size field.
+> > >
+> > > Co-developed-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+> > > Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+> > > Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> > > ---
+> > >  drivers/firmware/efi/efi.c |  7 ++
+> > >  drivers/xen/efi.c          | 69 ++++++++++++++++++++
+> > >  include/linux/efi.h        |  2 +
+> > >  3 files changed, 78 insertions(+)
+> > >
+> > > diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
+> > > index 11857af72859..e8c0747011d7 100644
+> > > --- a/drivers/firmware/efi/efi.c
+> > > +++ b/drivers/firmware/efi/efi.c
+> > > @@ -556,6 +556,13 @@ static __init int match_config_table(const efi_g=
+uid_t *guid,
+> > >
+> > >       for (i =3D 0; efi_guidcmp(table_types[i].guid, NULL_GUID); i++)=
+ {
+> > >               if (!efi_guidcmp(*guid, table_types[i].guid)) {
+> > > +                     if (IS_ENABLED(CONFIG_XEN_EFI) &&
+> > > +                         !xen_efi_config_table_is_usable(guid, table=
+)) {
+> > > +                             if (table_types[i].name[0])
+> > > +                                     pr_cont("(%s=3D0x%lx) ",
+> > > +                                             table_types[i].name, ta=
+ble);
+> > > +                             return 1;
+> > > +                     }
+> > >                       *(table_types[i].ptr) =3D table;
+> > >                       if (table_types[i].name[0])
+> > >                               pr_cont("%s=3D0x%lx ",
+> > > diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
+> > > index d1ff2186ebb4..3f1f365b37d0 100644
+> > > --- a/drivers/xen/efi.c
+> > > +++ b/drivers/xen/efi.c
+> > > @@ -292,3 +292,72 @@ void __init xen_efi_runtime_setup(void)
+> > >       efi.get_next_high_mono_count    =3D xen_efi_get_next_high_mono_=
+count;
+> > >       efi.reset_system                =3D xen_efi_reset_system;
+> > >  }
+> > > +
+> > > +static const efi_guid_t cfg_table_allow_list[] __initconst =3D {
+> > > +     ACPI_20_TABLE_GUID,
+> > > +     ACPI_TABLE_GUID,
+> > > +     SMBIOS_TABLE_GUID,
+> > > +     SMBIOS3_TABLE_GUID,
+> > > +};
+> >
+> > This allowlist seems redundant.  Either the tables are already in memory
+> > that Xen will preserve or they aren=E2=80=99t.  In both cases the subse=
+quent
+> > code will do the right thing.
+>=20
+> Will it? Currently, Xen simply accepts all ACPI and SMBIOS tables,
+> regardless of what type of memory region they reside in (if any).
+>=20
+> So what will happen with buggy firmware where the ACPI or SMBIOS
+> tables are not covered by the memory map at all? Currently, this works
+> fine but now, it will be rejected. And without ACPI tables, the boot
+> will not get far enough to even inform the user what is wrong. And
+> SMBIOS tables are used for platform quirks, which means they might be
+> essential for a platform to boot as well.
 
-The aforementioned causes map->live_grants to be incorrectly set. In
-some cases, all of the map_ops mappings fail, but all of the kmap_ops
-mappings succeed, meaning that live_grants may remain zero. This in turn
-makes it impossible to unmap the successfully grant-mapped pages pointed
-to by kmap_ops, because unmap_grant_pages has the following snippet of
-code at its beginning:
+If the tables are not in the memory map at all, I recommend
+add_taint(TAINT_FIRMWARE_WORKAROUND) but otherwise continuing to boot.
+If the tables are somewhere nonsensical, then the platform is FUBAR
+anyway.  Linux alone might be able to work by reserving the memory, but
+under Xen that does not work.
+--=20
+Sincerely,
+Demi Marie Obenour (she/her/hers)
+Invisible Things Lab
 
-  if (atomic_read(&map->live_grants) == 0)
-    return; /* Nothing to do */
+--PghubVJsF+8O07oQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-In other cases where only some of the map_ops mappings fail but all
-kmap_ops mappings succeed, live_grants is made positive, but when the
-user requests unmapping the grant-mapped pages, __unmap_grant_pages_done
-will then make map->live_grants negative, because the latter function
-does not check if all of the pages that were requested to be unmapped
-were actually unmapped, and the same function unconditionally subtracts
-"data->count" (i.e., a value that can be greater than map->live_grants)
-from map->live_grants. The side effects of a negative live_grants value
-have not been studied.
+-----BEGIN PGP SIGNATURE-----
 
-The net effect of all of this is that grant references are leaked in one
-of the above conditions. In Qubes OS v4.1 (which uses Xen's grant
-mechanism extensively for X11 GUI isolation), this issue manifests
-itself with warning messages like the following to be printed out by the
-Linux kernel in the VM that had granted pages (that contain X11 GUI
-window data) to dom0: "g.e. 0x1234 still pending", especially after the
-user rapidly resizes GUI VM windows (causing some grant-mapping
-operations to partially or completely fail, due to the fact that the VM
-unshares some of the pages as part of the window resizing, making the
-pages impossible to grant-map from dom0).
+iQIzBAEBCgAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmM6GBAACgkQsoi1X/+c
+IsEE/A/+Ks8HuxLZxVxAaS7z+iHz3lOARj1WpxeoJRhXMQkVNeKQBniOhBUgxeGg
+D2njhATzF7PGa/c+JFDXMoNWxMk5XC2nmgSvOL6WIXezXIx/foZomlWTMkMkTECh
+Vc9qvu5xaRuGIj43UxxOsawMfS9mWEpv6HM56mpN26erPsm9uDqPzbWZLMVSh/tp
+bfH9ZmrLP8T+k+S+gqzyf4kUhpVEyMNw7lz30n7dqvq9Nzjg4cEZ95zzJimUdSMe
+MQWNTRFN1/OGLiDSn5JiUhfKboqfDMdBuFpGKD6xeP8Z3vl9ACDpPPZgYosKfil8
+LjzkV+2lThyeqwfVSv5v/PpIQs9ZJtzfhCunWEsUscWu0Ak76XIcUCnGDdOV7bAB
+ywAUl+KsrhCZeV+zvQugxUC2z/byEBFM0DxnI/VUbyo1gkaSurukIo54SMIerigy
+tXPgk+/hohb/2qW1kYie9EeL98hGLgLiy4hZZRoFl23iJLCJKdVp/rICCyxwgGTf
+iCBxekyikbYplQ5zOmsHzsJqeW79GxrzevS5HRxedrFCSHIseVGSD/g1G9+AkqBg
+kuK0uxl3VGg3jIIcOmyBOrMJXYSmj6CXmPFVA1Uo0ZEyiu6aNtWFJJ85KtAKRczH
+zAguzKPKMR5qR1/hcv4OKPFVIwBYdDbuATZfIf5D7WGIm/cx4sg=
+=vFGe
+-----END PGP SIGNATURE-----
 
-The fix for this issue involves counting all successful map_ops and
-kmap_ops mappings separately, and then adding the sum to live_grants.
-During unmapping, only the number of successfully unmapped grants is
-subtracted from live_grants. The code is also modified to check for
-negative live_grants values after the subtraction and warn the user.
-
-Link: https://github.com/QubesOS/qubes-issues/issues/7631
-Fixes: dbe97cff7dd9 ("xen/gntdev: Avoid blocking in unmap_grant_pages()")
-Cc: stable@vger.kernel.org
-Signed-off-by: M. Vefa Bicakci <m.v.b@runbox.com>
----
-
-Changes since v1:
-- To determine which unmap operations were successful, the previous
-  version of this patch set the "unmap_ops[i].status" and
-  "kunmap_ops[i].status" fields to the value "1" prior to passing these
-  data structures to the hypervisor. Instead of doing that, the code now
-  checks whether the "handle" fields in the same data structures were
-  *not* set to "INVALID_GRANT_HANDLE". (Suggested by Juergen Gross.)
----
- drivers/xen/gntdev.c | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-index 84b143eef395..eb0586b9767d 100644
---- a/drivers/xen/gntdev.c
-+++ b/drivers/xen/gntdev.c
-@@ -367,8 +367,7 @@ int gntdev_map_grant_pages(struct gntdev_grant_map *map)
- 	for (i = 0; i < map->count; i++) {
- 		if (map->map_ops[i].status == GNTST_okay) {
- 			map->unmap_ops[i].handle = map->map_ops[i].handle;
--			if (!use_ptemod)
--				alloced++;
-+			alloced++;
- 		} else if (!err)
- 			err = -EINVAL;
- 
-@@ -377,8 +376,7 @@ int gntdev_map_grant_pages(struct gntdev_grant_map *map)
- 
- 		if (use_ptemod) {
- 			if (map->kmap_ops[i].status == GNTST_okay) {
--				if (map->map_ops[i].status == GNTST_okay)
--					alloced++;
-+				alloced++;
- 				map->kunmap_ops[i].handle = map->kmap_ops[i].handle;
- 			} else if (!err)
- 				err = -EINVAL;
-@@ -394,8 +392,14 @@ static void __unmap_grant_pages_done(int result,
- 	unsigned int i;
- 	struct gntdev_grant_map *map = data->data;
- 	unsigned int offset = data->unmap_ops - map->unmap_ops;
-+	int successful_unmaps = 0;
-+	int live_grants;
- 
- 	for (i = 0; i < data->count; i++) {
-+		if (map->unmap_ops[offset + i].status == GNTST_okay &&
-+		    map->unmap_ops[offset + i].handle != INVALID_GRANT_HANDLE)
-+			successful_unmaps++;
-+
- 		WARN_ON(map->unmap_ops[offset + i].status != GNTST_okay &&
- 			map->unmap_ops[offset + i].handle != INVALID_GRANT_HANDLE);
- 		pr_debug("unmap handle=%d st=%d\n",
-@@ -403,6 +407,10 @@ static void __unmap_grant_pages_done(int result,
- 			map->unmap_ops[offset+i].status);
- 		map->unmap_ops[offset+i].handle = INVALID_GRANT_HANDLE;
- 		if (use_ptemod) {
-+			if (map->kunmap_ops[offset + i].status == GNTST_okay &&
-+			    map->kunmap_ops[offset + i].handle != INVALID_GRANT_HANDLE)
-+				successful_unmaps++;
-+
- 			WARN_ON(map->kunmap_ops[offset + i].status != GNTST_okay &&
- 				map->kunmap_ops[offset + i].handle != INVALID_GRANT_HANDLE);
- 			pr_debug("kunmap handle=%u st=%d\n",
-@@ -411,11 +419,15 @@ static void __unmap_grant_pages_done(int result,
- 			map->kunmap_ops[offset+i].handle = INVALID_GRANT_HANDLE;
- 		}
- 	}
-+
- 	/*
- 	 * Decrease the live-grant counter.  This must happen after the loop to
- 	 * prevent premature reuse of the grants by gnttab_mmap().
- 	 */
--	atomic_sub(data->count, &map->live_grants);
-+	live_grants = atomic_sub_return(successful_unmaps, &map->live_grants);
-+	if (WARN_ON(live_grants < 0))
-+		pr_err("%s: live_grants became negative (%d) after unmapping %d pages!\n",
-+		       __func__, live_grants, successful_unmaps);
- 
- 	/* Release reference taken by __unmap_grant_pages */
- 	gntdev_put_map(NULL, map);
--- 
-2.37.3
-
+--PghubVJsF+8O07oQ--
 
