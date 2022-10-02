@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DEBC433FE
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 16:28:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.414687.659027 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B61C433F5
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 21:23:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.414700.659049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1of1pJ-0004aP-Sb; Sun, 02 Oct 2022 16:28:25 +0000
+	id 1of6Qh-0007bH-Uj; Sun, 02 Oct 2022 21:23:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 414687.659027; Sun, 02 Oct 2022 16:28:25 +0000
+Received: by outflank-mailman (output) from mailman id 414700.659049; Sun, 02 Oct 2022 21:23:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1of1pJ-0004aI-PV; Sun, 02 Oct 2022 16:28:25 +0000
-Received: by outflank-mailman (input) for mailman id 414687;
- Sun, 02 Oct 2022 16:28:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9ZZD=2D=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1of1pI-0004a7-1H
- for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 16:28:24 +0000
-Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
- [64.147.123.19]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 38ac10e8-426f-11ed-964a-05401a9f4f97;
- Sun, 02 Oct 2022 18:28:21 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id BBD9F3200312;
- Sun,  2 Oct 2022 12:28:15 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Sun, 02 Oct 2022 12:28:16 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 2 Oct 2022 12:28:14 -0400 (EDT)
+	id 1of6Qh-0007bA-Rv; Sun, 02 Oct 2022 21:23:19 +0000
+Received: by outflank-mailman (input) for mailman id 414700;
+ Sun, 02 Oct 2022 21:23:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1gGO=2D=kernel.org=ardb@srs-se1.protection.inumbo.net>)
+ id 1of6Qg-0007b4-1j
+ for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 21:23:18 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6bff718d-4298-11ed-9375-c1cf23e5d27e;
+ Sun, 02 Oct 2022 23:23:14 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E870C60F49
+ for <xen-devel@lists.xenproject.org>; Sun,  2 Oct 2022 21:23:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA81CC43140
+ for <xen-devel@lists.xenproject.org>; Sun,  2 Oct 2022 21:23:11 +0000 (UTC)
+Received: by mail-lf1-f44.google.com with SMTP id o7so6833584lfk.7
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Oct 2022 14:23:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,158 +47,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38ac10e8-426f-11ed-964a-05401a9f4f97
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1664728095; x=
-	1664814495; bh=MiecNKyXd2mjQKvsiXXO7VUmoA5W7UHlKNcygluiYqQ=; b=d
-	IS0utWmebj985wLTUYcwtwPGdLb/rcuFhmqLL4Q/gW/kiEj5WKLtLLKgmztqiEAm
-	CUkVGzXH+ztEb1QecYfLoqcMHRJYBX4yKKKalT89gwS9WaTIV9GAeIAhoLuq1USh
-	t/jKBYsG86yfhCxGJ3kgUXOaseOK1OFJpDbkf35MfqEIIJqMXO0ybVSw3hB1gB3M
-	d1RDx/4+Ru0K2yWQGAXQvnJqd6dyZNhcWT760K3pwFfwPEJ8AHpt0QvXSRqG41va
-	iJsGUGFVbCNp1fuZJ1So2yzH+yjyWQ10mMWfKdK5gM+m668wjea45jh7aqC1vWVF
-	SF+Uu13kg0gLhB19gZ16Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
-	:mime-version:references:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; t=1664728095; x=1664814495; bh=MiecNKyXd2mjQKvsiXXO7VUmoA5W
-	7UHlKNcygluiYqQ=; b=wOZdpC3j8qBpb/YpaHsXpp1cVz4CLQJ1jlIgjmziRtnh
-	J+tmUA4dcgoq6E86tHV4Qn1FUZ1OAhN1M5Z5WosdbPcdHrx+UWAjhiwj9ZQyEsF5
-	pDemQSyJ9kyT1U6bdw5sfZHByiI1kjE3moiA5Frifhr9vAezX/z7rX4I4PjVnCyG
-	/k6kmQAp1t0vTf56gLGXUHiO0esOW7sZbLMWUXMsXgodW93+8YrncWWkWikPoqiU
-	OjUjtvHrquWOwhcFvAwgCdecBUBbRuPRfovNIM31RRqXdyI1TTderDmgQbgnhR/U
-	N9rz2vLmQiMImpELeNDw8rCv9xVHUhctkG4qU/Ak3w==
-X-ME-Sender: <xms:Hrw5Y1J49C4jmA53GcWuk7dtf2LN8dfTrPedyYhHj9ooDOn7jAAXmw>
-    <xme:Hrw5YxIDv_HF6ZhWP25CohWp91uf1FA4IQTWF1dovLPc6fOL8_WKwcv9I_K3uirPr
-    Lwe0UWkq0q134k>
-X-ME-Received: <xmr:Hrw5Y9vSDvP-7wY4IgaeW6bUwY9tRnNaVyXovEkntJL_0xxCU6FlNbDhZ1b5>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeehjedguddtudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeffvghm
-    ihcuofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinh
-    hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpedvjeetgeekhfetudfhgfetffeg
-    fffguddvgffhffeifeeikeektdehgeetheffleenucevlhhushhtvghrufhiiigvpedtne
-    curfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhg
-    shhlrggsrdgtohhm
-X-ME-Proxy: <xmx:Hrw5Y2b1h18k9DkfRUlh5XU_7Vat04XMHgsb2Fo9laHllyRj2zpAdQ>
-    <xmx:Hrw5Y8bkqL3K5OAVjumTnOzquydFVgYiohkqpZXNc9mgJVfJ5jNalQ>
-    <xmx:Hrw5Y6Do4ZmpspLh-PfUIdrJUDUUcAQy43hT5Oc_BsJY1Cg9SJsIyg>
-    <xmx:H7w5Y6k7veAW2bt3yGZlllmkjXHtrmhsjXPeBSg7hF2-hM_SydZD1Q>
-Feedback-ID: iac594737:Fastmail
-Date: Sun, 2 Oct 2022 12:27:45 -0400
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Ard Biesheuvel <ardb@kernel.org>, linux-efi@vger.kernel.org
-Cc: xen-devel@lists.xenproject.org, Peter Jones <pjones@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Kees Cook <keescook@chromium.org>,
-	Anton Vorontsov <anton@enomsg.org>,
-	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH 5/5] efi: esrt: Omit region sanity check when no
- memory map is available
-Message-ID: <Yzm8HIccvuxyicYx@itl-email>
-References: <20221002095626.484279-1-ardb@kernel.org>
- <20221002095626.484279-6-ardb@kernel.org>
+X-Inumbo-ID: 6bff718d-4298-11ed-9375-c1cf23e5d27e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1664745791;
+	bh=0nNY8bCYUKoCFv7L9DxhKWtTW9KM4y+517wmHIAOs58=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=NhOMyRznBbhA6BsLS63d0grbgr/ob9A1/EnJfFdIN2JJAnzrc71FV7Gy6Arty4L2T
+	 +LfGqx41AfuldsgDDesSwpT9MLGgJa1auhABxu+6/BS7MtGbcLCOPeYrD7v0l/PzeT
+	 3aVmZr4BpfZgJ+Svc89R6L+g4KFC/aSrChYtODfCDfWsnwppvFTZtt0xQ2gIYjlz0U
+	 ocVOiRwkR6Mw4xAnX5dIX2QpZ+FRxe4gT0Np/LbkHEeuPdq6d2ZJFotbit9mr4dXz9
+	 KBAK92Un0j/gIews+sWPBTF3zvF4JNT/GA4ts3kHym2bpJa5G3xfyfXFkL5o8+AGHn
+	 keVgfvHkUddSw==
+X-Gm-Message-State: ACrzQf3u1x7ugLdJw/NjzKpBwYAhFZarWNVfNo7Tc2fz02IFyfFdGEGn
+	lwc8sTkFhI4TgWOLRB+ceDJf4qRkATDm8WMjMww=
+X-Google-Smtp-Source: AMsMyM65/tOSFAGff3kubN/KRJEKo5eRy1SIh573DTKw2LTBa6vPYzy9QMui3K/FZnPpk1r072gHON+N+0xFncjh3MY=
+X-Received: by 2002:a05:6512:150e:b0:492:d9fd:9bdf with SMTP id
+ bq14-20020a056512150e00b00492d9fd9bdfmr6130056lfb.583.1664745789709; Sun, 02
+ Oct 2022 14:23:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="QQU1t/S22Mb/zn2F"
-Content-Disposition: inline
-In-Reply-To: <20221002095626.484279-6-ardb@kernel.org>
-
-
---QQU1t/S22Mb/zn2F
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
+References: <20221002095626.484279-1-ardb@kernel.org> <20221002095626.484279-5-ardb@kernel.org>
+ <Yzm8H3iS7ziWsh7E@itl-email>
+In-Reply-To: <Yzm8H3iS7ziWsh7E@itl-email>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sun, 2 Oct 2022 23:22:58 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXFWS0kXp7f75x=BDYDyTHKNzMCTZ_bXg7v23Aw=pJtSzQ@mail.gmail.com>
+Message-ID: <CAMj1kXFWS0kXp7f75x=BDYDyTHKNzMCTZ_bXg7v23Aw=pJtSzQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 4/5] efi: Apply allowlist to EFI configuration tables
+ when running under Xen
+To: Demi Marie Obenour <demi@invisiblethingslab.com>
+Cc: linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	Peter Jones <pjones@redhat.com>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Kees Cook <keescook@chromium.org>, 
+	Anton Vorontsov <anton@enomsg.org>, Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>, 
+	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 2 Oct 2022 12:27:45 -0400
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Ard Biesheuvel <ardb@kernel.org>, linux-efi@vger.kernel.org
-Cc: xen-devel@lists.xenproject.org, Peter Jones <pjones@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Kees Cook <keescook@chromium.org>,
-	Anton Vorontsov <anton@enomsg.org>,
-	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH 5/5] efi: esrt: Omit region sanity check when no
- memory map is available
 
-On Sun, Oct 02, 2022 at 11:56:26AM +0200, Ard Biesheuvel wrote:
-> In order to permit the ESRT to be used when doing pseudo-EFI boot
-> without a EFI memory map, e.g., when booting inside a Xen dom0 on x86,
-> make the sanity checks optional based on whether the memory map is
-> available.
->=20
-> If additional validation is needed, it is up to the Xen EFI glue code to
-> implement this in its xen_efi_config_table_is_valid() helper, or provide
-> a EFI memory map like it does on other architectures.
+On Sun, 2 Oct 2022 at 18:28, Demi Marie Obenour
+<demi@invisiblethingslab.com> wrote:
+>
+> On Sun, Oct 02, 2022 at 11:56:25AM +0200, Ard Biesheuvel wrote:
+> > As it turns out, Xen does not guarantee that EFI bootservices data
+> > regions in memory are preserved, which means that EFI configuration
+> > tables pointing into such memory regions may be corrupted before the
+> > dom0 OS has had a chance to inspect them.
+> >
+> > Demi Marie reports that this is causing problems for Qubes OS when it
+> > attempts to perform system firmware updates, which requires that the
+> > contents of the ESRT configuration table are valid when the fwupd user
+> > space program runs.
+> >
+> > However, other configuration tables such as the memory attributes
+> > table or the runtime properties table are equally affected, and so we
+> > need a comprehensive workaround that works for any table type.
+> >
+> > So let's first disregard all EFI configuration tables except the ones
+> > that are known (or can be expected) to reside in memory regions of a
+> > type that Xen preserves, i.e., ACPI tables (which are passed in
+> > EfiAcpiReclaimMemory regions) and SMBIOS tables (which are usually
+> > passed in EfiRuntimeServicesData regions, even though the UEFI spec onl=
+y
+> > mentions this as a recommendation). Then, cross reference unknown table=
+s
+> > against either the EFI memory map (if available) or do a Xen hypercall
+> > to determine the memory type, and allow the config table if the type is
+> > one that is guaranteed to be preserved.
+> >
+> > Future patches can augment the logic in this routine to allow other
+> > table types based on the size of the allocation, or based on a table
+> > specific header size field.
+> >
+> > Co-developed-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+> > Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+> > Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+> > ---
+> >  drivers/firmware/efi/efi.c |  7 ++
+> >  drivers/xen/efi.c          | 69 ++++++++++++++++++++
+> >  include/linux/efi.h        |  2 +
+> >  3 files changed, 78 insertions(+)
+> >
+> > diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
+> > index 11857af72859..e8c0747011d7 100644
+> > --- a/drivers/firmware/efi/efi.c
+> > +++ b/drivers/firmware/efi/efi.c
+> > @@ -556,6 +556,13 @@ static __init int match_config_table(const efi_gui=
+d_t *guid,
+> >
+> >       for (i =3D 0; efi_guidcmp(table_types[i].guid, NULL_GUID); i++) {
+> >               if (!efi_guidcmp(*guid, table_types[i].guid)) {
+> > +                     if (IS_ENABLED(CONFIG_XEN_EFI) &&
+> > +                         !xen_efi_config_table_is_usable(guid, table))=
+ {
+> > +                             if (table_types[i].name[0])
+> > +                                     pr_cont("(%s=3D0x%lx) ",
+> > +                                             table_types[i].name, tabl=
+e);
+> > +                             return 1;
+> > +                     }
+> >                       *(table_types[i].ptr) =3D table;
+> >                       if (table_types[i].name[0])
+> >                               pr_cont("%s=3D0x%lx ",
+> > diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
+> > index d1ff2186ebb4..3f1f365b37d0 100644
+> > --- a/drivers/xen/efi.c
+> > +++ b/drivers/xen/efi.c
+> > @@ -292,3 +292,72 @@ void __init xen_efi_runtime_setup(void)
+> >       efi.get_next_high_mono_count    =3D xen_efi_get_next_high_mono_co=
+unt;
+> >       efi.reset_system                =3D xen_efi_reset_system;
+> >  }
+> > +
+> > +static const efi_guid_t cfg_table_allow_list[] __initconst =3D {
+> > +     ACPI_20_TABLE_GUID,
+> > +     ACPI_TABLE_GUID,
+> > +     SMBIOS_TABLE_GUID,
+> > +     SMBIOS3_TABLE_GUID,
+> > +};
+>
+> This allowlist seems redundant.  Either the tables are already in memory
+> that Xen will preserve or they aren=E2=80=99t.  In both cases the subsequ=
+ent
+> code will do the right thing.
 
-I don=E2=80=99t like this.  It is easy to use a hypercall to get the end of=
- the
-memory region containing the config table, which is what my one of my
-previous patches actually does.  Skipping all of the validation could
-easily lead to a regression.  I understand wanting to get Xen-specific
-code out of esrt.c, but this isn=E2=80=99t the answer.  Some sort of abstra=
-ction
-over both cases would be a much better solution.
+Will it? Currently, Xen simply accepts all ACPI and SMBIOS tables,
+regardless of what type of memory region they reside in (if any).
 
-> Co-developed-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-> Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-> Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
-> ---
->  arch/x86/platform/efi/quirks.c |  3 +
->  drivers/firmware/efi/esrt.c    | 61 +++++++++++---------
->  2 files changed, 37 insertions(+), 27 deletions(-)
->=20
-> diff --git a/arch/x86/platform/efi/quirks.c b/arch/x86/platform/efi/quirk=
-s.c
-> index b0b848d6933a..9307be2f4afa 100644
-> --- a/arch/x86/platform/efi/quirks.c
-> +++ b/arch/x86/platform/efi/quirks.c
-> @@ -250,6 +250,9 @@ void __init efi_arch_mem_reserve(phys_addr_t addr, u6=
-4 size)
->  	int num_entries;
->  	void *new;
-> =20
-> +	if (!efi_enabled(EFI_MEMMAP))
-> +		return;
-> +
-
-This function does not actually work under Xen, even if EFI_MEMMAP is
-set.  When running under Xen, either this function must never be
-called (in which case there should be at least a WARN()), or it should
-return an error that callers must check for.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
-
---QQU1t/S22Mb/zn2F
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmM5vBwACgkQsoi1X/+c
-IsEwCxAAlyb5VQUqy3kjfzT9uVV2XGHHsFY5oUp2S1DOf2/vSL4zaWmqVB/AkYDt
-kavthj4HgkbYaZcwxMtxlwQ+W0dLDoTjRQrIVOmT09JmQptihevWVjOrCEqIxSt9
-BUw04yrgVUaG6GgkI0oierJOfgUpUfYSk2Le3kDR+KmparUv5zVHbVYmmERPOQnF
-zNYuYx9s+Vw8TeOXvO7a6uba41ebD6eLbd+pWtBT/qaP7+0tqUGbGSEemesC4/us
-XU/pHjJZAyyNc60c12xziMd+dCCcHD0SJ8iuevAOUD6dgXE2WAhiGxMeXH34tLGK
-cCEPwSYf34OW77qeOZLDuqzRUmidh5U87a57onxkcnYBsP2sWP/2INXcfP0LhZkI
-XRhO7xJQewPkAvAY7KYVByXarMmCEosSwSuwyu6FncBwrvrSEW6BaPmDmv2lW49A
-5+OUaLXuUPW9/9AHoaneIssBmd/f1cpnFE+6coHk0EakKyUtxLb+BAOzk3krT6Hd
-Og9qaOOrttTVwkTvegPcsAyElcJ23KJk6HbJDYeSvN/BIihyHkE3yUpYbD35qgM6
-xpdR/B7y5/+YDxi1NopNBZSha6VM24+THP9qVT6M2dzxdtG+HpwPq7mtP70vpI6j
-aR6qe3DIJWdbnI68PXWOtu8xLW7y5UIv7KIqblKYmXdTBXAKQhM=
-=za8l
------END PGP SIGNATURE-----
-
---QQU1t/S22Mb/zn2F--
+So what will happen with buggy firmware where the ACPI or SMBIOS
+tables are not covered by the memory map at all? Currently, this works
+fine but now, it will be rejected. And without ACPI tables, the boot
+will not get far enough to even inform the user what is wrong. And
+SMBIOS tables are used for platform quirks, which means they might be
+essential for a platform to boot as well.
 
