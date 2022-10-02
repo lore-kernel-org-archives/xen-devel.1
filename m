@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1215EC43217
-	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 09:56:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.414645.658961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D7FC433F5
+	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 09:57:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.414649.659005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oeviC-0007UI-4h; Sun, 02 Oct 2022 09:56:40 +0000
+	id 1oeviQ-0000G4-Du; Sun, 02 Oct 2022 09:56:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 414645.658961; Sun, 02 Oct 2022 09:56:40 +0000
+Received: by outflank-mailman (output) from mailman id 414649.659005; Sun, 02 Oct 2022 09:56:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oeviC-0007UB-1J; Sun, 02 Oct 2022 09:56:40 +0000
-Received: by outflank-mailman (input) for mailman id 414645;
- Sun, 02 Oct 2022 09:56:38 +0000
+	id 1oeviQ-0000Fp-AS; Sun, 02 Oct 2022 09:56:54 +0000
+Received: by outflank-mailman (input) for mailman id 414649;
+ Sun, 02 Oct 2022 09:56:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1gGO=2D=kernel.org=ardb@srs-se1.protection.inumbo.net>)
- id 1oeviA-0007U5-PW
- for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 09:56:38 +0000
+ id 1oeviO-0007U5-6V
+ for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 09:56:52 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 80a7726a-4238-11ed-964a-05401a9f4f97;
- Sun, 02 Oct 2022 11:56:37 +0200 (CEST)
+ id 890d9203-4238-11ed-964a-05401a9f4f97;
+ Sun, 02 Oct 2022 11:56:51 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id AC23E60EA2;
- Sun,  2 Oct 2022 09:56:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29E61C433D6;
- Sun,  2 Oct 2022 09:56:31 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 101F460EA5;
+ Sun,  2 Oct 2022 09:56:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 832B8C4347C;
+ Sun,  2 Oct 2022 09:56:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 80a7726a-4238-11ed-964a-05401a9f4f97
+X-Inumbo-ID: 890d9203-4238-11ed-964a-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1664704595;
-	bh=7esb6YPYkrd+cv3sS3o+s4EfXDusBD+g0wEqShG+32A=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Ss07N6JmrKfUNdOIENH6an0d3hWbHND736qLLMDXCxQM2oV4U1cDSRv6nJxu2LLEq
-	 Mk7qpOotNHug4RUHT4u9kC57w/LglOizLgvaOIUPvnmy477ScfkxZrR0kDD2LAR6cI
-	 LtpD0H8D1PQIpzPIMImjJ9t6yR/akd05lY4iDQwZnOVgP8nDkGmeSKX145fcXRZ0gG
-	 Zk3cKVHe+uonWMKGYcGLVT43hcoQmc106v+uVRfSods3/DldarES6io6joTfzUI+sq
-	 xYpePyNbazkr8V9aN7N6Dq5QUZrwPHIxBVDD0oHx/RY9WE4DV1NCHF2q4RHkmcRFmE
-	 QgTGDwUVsCBzg==
+	s=k20201202; t=1664704609;
+	bh=kklnL55pKWR1vQ/19hTjFP18KyqfhrdVX1+/k9SG5KE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=u30qGzyh+tD3uTA+5MwooaeSIG3R7K46GLISQHthQk0IPFp6wFEREKYfV4cAwZH4l
+	 29tBU8c+/EzhtdSavIkJUuL0yjTYoXoUcSIu11EcnRwAN2YvaCI+Q9KN9yPubwXNVc
+	 hH/2WplQPMDx8Kv6+oWcSd8JH3LbkW0DGUiiiicysD15n2DWcO4YnBcL9oGqGqot3j
+	 5SkWHBdHp1RWCWp+6O5NeWcP4KAIJiTffms0EEkZ/LLK9ZF+4SeWW0GpXzszzSMt4E
+	 n95nzqAy4sZimgR0qgb/cOd/54zjc2W5Gx209+l6ID9r+QsAhyawmZNFhDrHUqL/PC
+	 7UA5fBTSYWyJg==
 From: Ard Biesheuvel <ardb@kernel.org>
 To: linux-efi@vger.kernel.org
 Cc: xen-devel@lists.xenproject.org,
@@ -70,95 +70,160 @@ Cc: xen-devel@lists.xenproject.org,
 	Colin Cross <ccross@android.com>,
 	Tony Luck <tony.luck@intel.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [RFC PATCH 0/5] efi/x86: Avoid corrupted config tables under Xen
-Date: Sun,  2 Oct 2022 11:56:21 +0200
-Message-Id: <20221002095626.484279-1-ardb@kernel.org>
+Subject: [RFC PATCH 4/5] efi: Apply allowlist to EFI configuration tables when running under Xen
+Date: Sun,  2 Oct 2022 11:56:25 +0200
+Message-Id: <20221002095626.484279-5-ardb@kernel.org>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20221002095626.484279-1-ardb@kernel.org>
+References: <20221002095626.484279-1-ardb@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4408; i=ardb@kernel.org; h=from:subject; bh=7esb6YPYkrd+cv3sS3o+s4EfXDusBD+g0wEqShG+32A=; b=owEB7QES/pANAwAKAcNPIjmS2Y8kAcsmYgBjOWA6KKLbNxdyE3WYFUnkIoD4K2KMxMzVqnB/MmcB FkQw2BSJAbMEAAEKAB0WIQT72WJ8QGnJQhU3VynDTyI5ktmPJAUCYzlgOgAKCRDDTyI5ktmPJJY3DA CAD6udbDfm1DhJmdyq4SARqiM82Wf/BNTqMuN4SnN/W8hyK1eNLXIbdtLOGZlIuoRe+ZXTt+DOWT21 T7JZjSQV3RCEayhduxEVc10dD2b4ILPXhBQYZ4Exe38ieW66inG3Ce4WB2w/o5xx6w6GthtAk9ndQu LT7hDZymIoqNDFWxqq6qVfdTSGAgLPF35zZAMYOXT1RJ8RI4o0O9p4SsFBtaLFhunDZSrmmCkGZ5Kj FXwUQET3WbaQLR72VXK3H4izixs9JuWMEg6gi/JppvQvIhTpIjtw6fO1lLJm4LSBzdAEulZePxi1ch sEy9MiI42BFPJ1yphzQGD9OqVQiYck5F5UM3IrTCJFDrvlb8BcWsrbXAipOCZt0SBJkEEF+BzKfqS3 i2WnhhgDt/8MMEURMV2s+F7BzgwFv1ShoUXY03AstIYkIHOt6OTKf1S6GcKMA0dd6GE2WSbaplWkRd tFf+MQOdFpOKBDKn4rHpP2vXo/DsbpuHgD5U+H7xmMOyk=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4992; i=ardb@kernel.org; h=from:subject; bh=kklnL55pKWR1vQ/19hTjFP18KyqfhrdVX1+/k9SG5KE=; b=owEB7QES/pANAwAKAcNPIjmS2Y8kAcsmYgBjOWBDcjLC/XtL6TWD7SlqFc53BFZWSGH0tWLY5HiL Of+IqTeJAbMEAAEKAB0WIQT72WJ8QGnJQhU3VynDTyI5ktmPJAUCYzlgQwAKCRDDTyI5ktmPJBG+C/ 9n9inwyfpMFqxsvtl0IevAjclopZMTaAwU+rafEbqvQ2K9fxsY6k4Tuzs9y0I6HVaTCKQ+/e83E8Ut oQkrveg0sb6Etbd7qZ98homL8bG2F3tJcTXv/BXpl2FIhx2E7vgjTbYE5ixklJl/55Ix+0YyrwzOmj lms21xFGzlJqVG6QHauTZwp/lUHBFtsm/xApqCGl1U67X6M2WQayQ32iAGd2FKTcUjNpPmJ7dgUgV8 nQhD7d3tfyIUbyVlaXXdhwDbTqcFQFBC+8/IiO3y+PHfRtNlO2ow6r5l0YanlRBGTGSpDIpJNRcxuH +SXQs51/NIH8jSMDlx22/tQfTnUDh70rVwpuE0ymR4Hwydyh6Jt44AdNAK/ydXbAiPx22IwrigbRQG EDzCdjUdg5RvyYLAiSuqmNyxdAtslbqqiFHmEUNQXvFvtsDsUu2r+6Jn96kUMuCcYe94+YOgRUqE5c 8VancdiCM4aEwcFqGq9gsv/K8byblK2VJNzOvn19NodFQ=
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is an alternate approach to addressing the issue that Demi Marie is
-attempting to fix in [0] (i.e., ESRT config table exposed to a x86 dom0
-is corrupted because it resides in boot services memory as per the EFI
-spec, where it gets corrupted by Xen). My main objection to that approach
-is that it needs Xen-specific fixes in multiple different places, but we
-still end up only fixing the ESRT case specifically.
+As it turns out, Xen does not guarantee that EFI bootservices data
+regions in memory are preserved, which means that EFI configuration
+tables pointing into such memory regions may be corrupted before the
+dom0 OS has had a chance to inspect them.
 
-So instead, I am proposing this series as a more generic way to handle
-configuration tables that reside in boot services memory, and confining
-the Xen specific logic to the Xen EFI glue code.
+Demi Marie reports that this is causing problems for Qubes OS when it
+attempts to perform system firmware updates, which requires that the
+contents of the ESRT configuration table are valid when the fwupd user
+space program runs.
 
-Given that EFI boot without a memory map is only permitted on x86 and
-only when doing Xen boot, let's clear up some inconsistencies there
-first so we can set the EFI_PARAVIRT flag on all architectures that do
-pseudo-EFI boot straight into the core kernel (i.e., without going
-through the stub). This moves a good chunk of EFI memory map
-manipulation code into the x86 arch tree, where it arguably belongs as
-no other architectures rely on it. This is implemented in patches 1 - 3.
+However, other configuration tables such as the memory attributes
+table or the runtime properties table are equally affected, and so we
+need a comprehensive workaround that works for any table type.
 
-Patch #4 updates the configuration table iteration logic so that only
-ACPI and SMBIOS tables are exposed automatically when EFI_PARAVIRT is
-set, and other config tables only if they reside in a memory region of a
-EFI memory type that is guaranteed to be preserved. This effectively
-hides the ESRT, but also the memory attributes table and the runtime
-properties (and potentially others) when doing Xen dom0 boot unless they
-have been moved out of EFI boot services memory.
+So let's first disregard all EFI configuration tables except the ones
+that are known (or can be expected) to reside in memory regions of a
+type that Xen preserves, i.e., ACPI tables (which are passed in
+EfiAcpiReclaimMemory regions) and SMBIOS tables (which are usually
+passed in EfiRuntimeServicesData regions, even though the UEFI spec only
+mentions this as a recommendation). Then, cross reference unknown tables
+against either the EFI memory map (if available) or do a Xen hypercall
+to determine the memory type, and allow the config table if the type is
+one that is guaranteed to be preserved.
 
-The final patch relaxes the ESRT sanity check so that the ESRT is parsed
-and exposed even if EFI_MEMMAP is not set, which is the case with Xen
-dom0 on x86. If additional memory map checks are required in this code
-path, the best way to achieve this is for Xen to expose a EFI memory map
-on x86 just like it does on other architectures that support Xen (ARM
-and arm64)
+Future patches can augment the logic in this routine to allow other
+table types based on the size of the allocation, or based on a table
+specific header size field.
 
-[0] https://lore.kernel.org/all/cover.1664298147.git.demi@invisiblethingslab.com/
+Co-developed-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ drivers/firmware/efi/efi.c |  7 ++
+ drivers/xen/efi.c          | 69 ++++++++++++++++++++
+ include/linux/efi.h        |  2 +
+ 3 files changed, 78 insertions(+)
 
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>
-Cc: Peter Jones <pjones@redhat.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Anton Vorontsov <anton@enomsg.org>
-Cc: Colin Cross <ccross@android.com>
-Cc: Tony Luck <tony.luck@intel.com>
-Cc: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-
-Ard Biesheuvel (5):
-  efi: Move EFI fake memmap support into x86 arch tree
-  efi: memmap: Move manipulation routines into x86 arch tree
-  efi: xen: Set EFI_PARAVIRT for Xen dom0 boot on all architectures
-  efi: Apply allowlist to EFI configuration tables when running under
-    Xen
-  efi: esrt: Omit region sanity check when no memory map is available
-
- arch/x86/Kconfig                                       |  20 ++
- arch/x86/include/asm/efi.h                             |  16 ++
- arch/x86/kernel/setup.c                                |   1 +
- arch/x86/platform/efi/Makefile                         |   4 +-
- arch/x86/platform/efi/efi.c                            |   8 +-
- {drivers/firmware => arch/x86/platform}/efi/fake_mem.c |  79 ++++++-
- arch/x86/platform/efi/memmap.c                         | 238 ++++++++++++++++++++
- arch/x86/platform/efi/quirks.c                         |   3 +
- drivers/firmware/efi/Kconfig                           |  22 --
- drivers/firmware/efi/Makefile                          |   4 -
- drivers/firmware/efi/efi.c                             |   7 +
- drivers/firmware/efi/esrt.c                            |  61 ++---
- drivers/firmware/efi/fake_mem.h                        |  10 -
- drivers/firmware/efi/fdtparams.c                       |   4 +
- drivers/firmware/efi/memmap.c                          | 224 +-----------------
- drivers/firmware/efi/x86_fake_mem.c                    |  75 ------
- drivers/xen/efi.c                                      |  69 ++++++
- include/linux/efi.h                                    |  18 +-
- 18 files changed, 481 insertions(+), 382 deletions(-)
- rename {drivers/firmware => arch/x86/platform}/efi/fake_mem.c (58%)
- create mode 100644 arch/x86/platform/efi/memmap.c
- delete mode 100644 drivers/firmware/efi/fake_mem.h
- delete mode 100644 drivers/firmware/efi/x86_fake_mem.c
-
+diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
+index 11857af72859..e8c0747011d7 100644
+--- a/drivers/firmware/efi/efi.c
++++ b/drivers/firmware/efi/efi.c
+@@ -556,6 +556,13 @@ static __init int match_config_table(const efi_guid_t *guid,
+ 
+ 	for (i = 0; efi_guidcmp(table_types[i].guid, NULL_GUID); i++) {
+ 		if (!efi_guidcmp(*guid, table_types[i].guid)) {
++			if (IS_ENABLED(CONFIG_XEN_EFI) &&
++			    !xen_efi_config_table_is_usable(guid, table)) {
++				if (table_types[i].name[0])
++					pr_cont("(%s=0x%lx) ",
++						table_types[i].name, table);
++				return 1;
++			}
+ 			*(table_types[i].ptr) = table;
+ 			if (table_types[i].name[0])
+ 				pr_cont("%s=0x%lx ",
+diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
+index d1ff2186ebb4..3f1f365b37d0 100644
+--- a/drivers/xen/efi.c
++++ b/drivers/xen/efi.c
+@@ -292,3 +292,72 @@ void __init xen_efi_runtime_setup(void)
+ 	efi.get_next_high_mono_count	= xen_efi_get_next_high_mono_count;
+ 	efi.reset_system		= xen_efi_reset_system;
+ }
++
++static const efi_guid_t cfg_table_allow_list[] __initconst = {
++	ACPI_20_TABLE_GUID,
++	ACPI_TABLE_GUID,
++	SMBIOS_TABLE_GUID,
++	SMBIOS3_TABLE_GUID,
++};
++
++bool __init xen_efi_config_table_is_usable(const efi_guid_t *guid,
++					   unsigned long table)
++{
++	u32 memtype;
++	int i, rc;
++
++	if (!efi_enabled(EFI_PARAVIRT))
++		return true;
++
++	for (i = 0; i < ARRAY_SIZE(cfg_table_allow_list); i++) {
++		if (!efi_guidcmp(*guid, cfg_table_allow_list[i]))
++			return true;
++	}
++
++	if (efi_enabled(EFI_MEMMAP)) {
++		/* check against the EFI memory map */
++		efi_memory_desc_t md;
++
++		rc = efi_mem_desc_lookup(table, &md);
++		if (rc) {
++			pr_warn("Failed to lookup header 0x%lx in EFI memory map (%d)\n",
++				table, rc);
++			return false;
++		}
++		memtype = md.type;
++	} else {
++		/* check against the Xen hypercall */
++		struct xen_platform_op op = {
++			.cmd = XENPF_firmware_info,
++			.u.firmware_info = {
++				.type = XEN_FW_EFI_INFO,
++				.index = XEN_FW_EFI_MEM_INFO,
++				.u.efi_info.mem.addr = table,
++				.u.efi_info.mem.size = U64_MAX - table,
++			}
++		};
++		union xenpf_efi_info *info = &op.u.firmware_info.u.efi_info;
++
++		rc = HYPERVISOR_platform_op(&op);
++		if (rc) {
++			pr_warn("Failed to lookup header 0x%lx in Xen memory map (%d)\n",
++				table, rc);
++			return false;
++		}
++		memtype = info->mem.type;
++	}
++
++	switch (memtype) {
++	case EFI_RUNTIME_SERVICES_CODE:
++	case EFI_RUNTIME_SERVICES_DATA:
++	case EFI_ACPI_RECLAIM_MEMORY:
++	case EFI_RESERVED_TYPE:
++		return true;
++	case EFI_BOOT_SERVICES_DATA:
++		break;
++	default:
++		return false;
++	}
++
++	return false;
++}
+diff --git a/include/linux/efi.h b/include/linux/efi.h
+index 256e70e42114..6edc627798b6 100644
+--- a/include/linux/efi.h
++++ b/include/linux/efi.h
+@@ -1351,4 +1351,6 @@ struct linux_efi_initrd {
+ /* Header of a populated EFI secret area */
+ #define EFI_SECRET_TABLE_HEADER_GUID	EFI_GUID(0x1e74f542, 0x71dd, 0x4d66,  0x96, 0x3e, 0xef, 0x42, 0x87, 0xff, 0x17, 0x3b)
+ 
++bool xen_efi_config_table_is_usable(const efi_guid_t *, unsigned long table);
++
+ #endif /* _LINUX_EFI_H */
 -- 
 2.35.1
 
