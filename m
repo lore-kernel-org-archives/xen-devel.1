@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82059C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1215EC43217
 	for <xen-devel@archiver.kernel.org>; Sun,  2 Oct 2022 09:56:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.414648.658994 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.414645.658961 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oeviM-0008Kt-3d; Sun, 02 Oct 2022 09:56:50 +0000
+	id 1oeviC-0007UI-4h; Sun, 02 Oct 2022 09:56:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 414648.658994; Sun, 02 Oct 2022 09:56:50 +0000
+Received: by outflank-mailman (output) from mailman id 414645.658961; Sun, 02 Oct 2022 09:56:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oeviM-0008Ki-0B; Sun, 02 Oct 2022 09:56:50 +0000
-Received: by outflank-mailman (input) for mailman id 414648;
- Sun, 02 Oct 2022 09:56:48 +0000
+	id 1oeviC-0007UB-1J; Sun, 02 Oct 2022 09:56:40 +0000
+Received: by outflank-mailman (input) for mailman id 414645;
+ Sun, 02 Oct 2022 09:56:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1gGO=2D=kernel.org=ardb@srs-se1.protection.inumbo.net>)
- id 1oeviK-0007U5-MX
- for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 09:56:48 +0000
+ id 1oeviA-0007U5-PW
+ for xen-devel@lists.xenproject.org; Sun, 02 Oct 2022 09:56:38 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 87041ff0-4238-11ed-964a-05401a9f4f97;
- Sun, 02 Oct 2022 11:56:47 +0200 (CEST)
+ id 80a7726a-4238-11ed-964a-05401a9f4f97;
+ Sun, 02 Oct 2022 11:56:37 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9E33F60EA4;
- Sun,  2 Oct 2022 09:56:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15F90C433D6;
- Sun,  2 Oct 2022 09:56:42 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AC23E60EA2;
+ Sun,  2 Oct 2022 09:56:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29E61C433D6;
+ Sun,  2 Oct 2022 09:56:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87041ff0-4238-11ed-964a-05401a9f4f97
+X-Inumbo-ID: 80a7726a-4238-11ed-964a-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1664704606;
-	bh=naWVhxVJzgFHTYyzbP8aferDZudNO8L5WZJcvq28kz8=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=HJMy/vz6C1WPkgKcpbpoO/EQRrz6yAjgPpzrVFvMZ+walD/yM0Y0/LdUToEzYOP3e
-	 wUcz8Fmrta2nkGJSkkaAMVqgSnRvfmZmPgOh64OvJXPY22FVdCh2GBjdhDG4v1U+V+
-	 TaUklRaC8k0+i0H9PXGPupfBhktKg1OYLU/ocnnKIjMY9R8buaQcGOij3ETjE9/2Qt
-	 oY5U6tIueXURJFbXveR38cWmsqyll1PJbi+gTNKBGbJahbxp1vFmCekLGFIeShpnXs
-	 8e6DpsKFM2Oa/iyyEWtIilU9DcihAXqFelN6xor9DoI0MdNoHBhhhwi5wcZdRq3AZU
-	 1VazOsR6kr94g==
+	s=k20201202; t=1664704595;
+	bh=7esb6YPYkrd+cv3sS3o+s4EfXDusBD+g0wEqShG+32A=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Ss07N6JmrKfUNdOIENH6an0d3hWbHND736qLLMDXCxQM2oV4U1cDSRv6nJxu2LLEq
+	 Mk7qpOotNHug4RUHT4u9kC57w/LglOizLgvaOIUPvnmy477ScfkxZrR0kDD2LAR6cI
+	 LtpD0H8D1PQIpzPIMImjJ9t6yR/akd05lY4iDQwZnOVgP8nDkGmeSKX145fcXRZ0gG
+	 Zk3cKVHe+uonWMKGYcGLVT43hcoQmc106v+uVRfSods3/DldarES6io6joTfzUI+sq
+	 xYpePyNbazkr8V9aN7N6Dq5QUZrwPHIxBVDD0oHx/RY9WE4DV1NCHF2q4RHkmcRFmE
+	 QgTGDwUVsCBzg==
 From: Ard Biesheuvel <ardb@kernel.org>
 To: linux-efi@vger.kernel.org
 Cc: xen-devel@lists.xenproject.org,
@@ -70,110 +70,95 @@ Cc: xen-devel@lists.xenproject.org,
 	Colin Cross <ccross@android.com>,
 	Tony Luck <tony.luck@intel.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [RFC PATCH 3/5] efi: xen: Set EFI_PARAVIRT for Xen dom0 boot on all architectures
-Date: Sun,  2 Oct 2022 11:56:24 +0200
-Message-Id: <20221002095626.484279-4-ardb@kernel.org>
+Subject: [RFC PATCH 0/5] efi/x86: Avoid corrupted config tables under Xen
+Date: Sun,  2 Oct 2022 11:56:21 +0200
+Message-Id: <20221002095626.484279-1-ardb@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221002095626.484279-1-ardb@kernel.org>
-References: <20221002095626.484279-1-ardb@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3190; i=ardb@kernel.org; h=from:subject; bh=naWVhxVJzgFHTYyzbP8aferDZudNO8L5WZJcvq28kz8=; b=owEB7QES/pANAwAKAcNPIjmS2Y8kAcsmYgBjOWBBUImNh+oNISz7kaell7P1ADDK/YsLUV10IJbU Cm3Ms7iJAbMEAAEKAB0WIQT72WJ8QGnJQhU3VynDTyI5ktmPJAUCYzlgQQAKCRDDTyI5ktmPJL+CDA CI6goexpgFxPze+H/P1pGk+2TCSeapYidebHraqvYuivMVNgqTUEXJD0MTuefrzj2RYWLr8Z8Nl5F/ NW37j0Kc7I7UDApHt22+UHn2mgOpMu69tN7r+1EKj5j1AH7GTJ8RfzfLxMrKqPkr9JP4TAlfMSq6wr 2H4u2aITOj9clf0ga9hYyBm3uEKdK9sPATjTKKCKtknjUMPT5fp6mmrNw1qR2ZnWh/sAUexJ/eRIeH QlUEGEHPOPeWmBtJQC+QkGKRNKPT5186B/uDeeHtlgPnKDvLlKZF99n8nyHceFjUn6T8s/S7CFJUQ3 vQz7ohfix1KUdhAZ+b7u+2BJ11t4BiTfRE84Mrq9+xxPvMVwTBfEdkrc1qGDRIaHbQCkVSZOCKhYPo 5UvNVhJFzkfY/qc+sCyiEjw3IIkG2fYKSZyzeuDaM0lR1ukIud+LEqEodpxUEcEs+cEQcW2XGgl9yB nqsQmxUsIhyvMWKdmMgVeTi9+JDpm2Qczoo9bNk+ZQh4Y=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4408; i=ardb@kernel.org; h=from:subject; bh=7esb6YPYkrd+cv3sS3o+s4EfXDusBD+g0wEqShG+32A=; b=owEB7QES/pANAwAKAcNPIjmS2Y8kAcsmYgBjOWA6KKLbNxdyE3WYFUnkIoD4K2KMxMzVqnB/MmcB FkQw2BSJAbMEAAEKAB0WIQT72WJ8QGnJQhU3VynDTyI5ktmPJAUCYzlgOgAKCRDDTyI5ktmPJJY3DA CAD6udbDfm1DhJmdyq4SARqiM82Wf/BNTqMuN4SnN/W8hyK1eNLXIbdtLOGZlIuoRe+ZXTt+DOWT21 T7JZjSQV3RCEayhduxEVc10dD2b4ILPXhBQYZ4Exe38ieW66inG3Ce4WB2w/o5xx6w6GthtAk9ndQu LT7hDZymIoqNDFWxqq6qVfdTSGAgLPF35zZAMYOXT1RJ8RI4o0O9p4SsFBtaLFhunDZSrmmCkGZ5Kj FXwUQET3WbaQLR72VXK3H4izixs9JuWMEg6gi/JppvQvIhTpIjtw6fO1lLJm4LSBzdAEulZePxi1ch sEy9MiI42BFPJ1yphzQGD9OqVQiYck5F5UM3IrTCJFDrvlb8BcWsrbXAipOCZt0SBJkEEF+BzKfqS3 i2WnhhgDt/8MMEURMV2s+F7BzgwFv1ShoUXY03AstIYkIHOt6OTKf1S6GcKMA0dd6GE2WSbaplWkRd tFf+MQOdFpOKBDKn4rHpP2vXo/DsbpuHgD5U+H7xmMOyk=
 X-Developer-Key: i=ardb@kernel.org; a=openpgp; fpr=F43D03328115A198C90016883D200E9CA6329909
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Currently, the EFI_PARAVIRT flag is only used by x86, even though other
-architectures also support pseudo-EFI boot, where the core kernel is
-invoked directly and provided with a set of data tables that resemble
-the ones constructed by the EFI stub, which never actually runs in that
-case.
+This is an alternate approach to addressing the issue that Demi Marie is
+attempting to fix in [0] (i.e., ESRT config table exposed to a x86 dom0
+is corrupted because it resides in boot services memory as per the EFI
+spec, where it gets corrupted by Xen). My main objection to that approach
+is that it needs Xen-specific fixes in multiple different places, but we
+still end up only fixing the ESRT case specifically.
 
-Let's fix this inconsistency, and always set this flag when booting dom0
-via the EFI boot path. Note that Xen on x86 does not provide the EFI
-memory map in this case, whereas other architectures do, so move the
-associated EFI_PARAVIRT check into the x86 platform code.
+So instead, I am proposing this series as a more generic way to handle
+configuration tables that reside in boot services memory, and confining
+the Xen specific logic to the Xen EFI glue code.
 
-Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
----
- arch/x86/platform/efi/efi.c      | 8 +++++---
- arch/x86/platform/efi/memmap.c   | 3 +++
- drivers/firmware/efi/fdtparams.c | 4 ++++
- drivers/firmware/efi/memmap.c    | 3 ---
- 4 files changed, 12 insertions(+), 6 deletions(-)
+Given that EFI boot without a memory map is only permitted on x86 and
+only when doing Xen boot, let's clear up some inconsistencies there
+first so we can set the EFI_PARAVIRT flag on all architectures that do
+pseudo-EFI boot straight into the core kernel (i.e., without going
+through the stub). This moves a good chunk of EFI memory map
+manipulation code into the x86 arch tree, where it arguably belongs as
+no other architectures rely on it. This is implemented in patches 1 - 3.
 
-diff --git a/arch/x86/platform/efi/efi.c b/arch/x86/platform/efi/efi.c
-index 6e598bd78eef..6a6f2a585a3d 100644
---- a/arch/x86/platform/efi/efi.c
-+++ b/arch/x86/platform/efi/efi.c
-@@ -214,9 +214,11 @@ int __init efi_memblock_x86_reserve_range(void)
- 	data.desc_size		= e->efi_memdesc_size;
- 	data.desc_version	= e->efi_memdesc_version;
- 
--	rv = efi_memmap_init_early(&data);
--	if (rv)
--		return rv;
-+	if (!efi_enabled(EFI_PARAVIRT)) {
-+		rv = efi_memmap_init_early(&data);
-+		if (rv)
-+			return rv;
-+	}
- 
- 	if (add_efi_memmap || do_efi_soft_reserve())
- 		do_add_efi_memmap();
-diff --git a/arch/x86/platform/efi/memmap.c b/arch/x86/platform/efi/memmap.c
-index 44b886acf301..18e14ec16720 100644
---- a/arch/x86/platform/efi/memmap.c
-+++ b/arch/x86/platform/efi/memmap.c
-@@ -93,6 +93,9 @@ int __init efi_memmap_install(struct efi_memory_map_data *data)
- {
- 	efi_memmap_unmap();
- 
-+	if (efi_enabled(EFI_PARAVIRT))
-+		return 0;
-+
- 	return __efi_memmap_init(data);
- }
- 
-diff --git a/drivers/firmware/efi/fdtparams.c b/drivers/firmware/efi/fdtparams.c
-index e901f8564ca0..0ec83ba58097 100644
---- a/drivers/firmware/efi/fdtparams.c
-+++ b/drivers/firmware/efi/fdtparams.c
-@@ -30,11 +30,13 @@ static __initconst const char name[][22] = {
- 
- static __initconst const struct {
- 	const char	path[17];
-+	u8		paravirt;
- 	const char	params[PARAMCOUNT][26];
- } dt_params[] = {
- 	{
- #ifdef CONFIG_XEN    //  <-------17------>
- 		.path = "/hypervisor/uefi",
-+		.paravirt = 1,
- 		.params = {
- 			[SYSTAB] = "xen,uefi-system-table",
- 			[MMBASE] = "xen,uefi-mmap-start",
-@@ -121,6 +123,8 @@ u64 __init efi_get_fdt_params(struct efi_memory_map_data *mm)
- 			pr_err("Can't find property '%s' in DT!\n", pname);
- 			return 0;
- 		}
-+		if (dt_params[i].paravirt)
-+			set_bit(EFI_PARAVIRT, &efi.flags);
- 		return systab;
- 	}
- notfound:
-diff --git a/drivers/firmware/efi/memmap.c b/drivers/firmware/efi/memmap.c
-index 3501d3814f22..9508082af907 100644
---- a/drivers/firmware/efi/memmap.c
-+++ b/drivers/firmware/efi/memmap.c
-@@ -44,9 +44,6 @@ int __init __efi_memmap_init(struct efi_memory_map_data *data)
- 	struct efi_memory_map map;
- 	phys_addr_t phys_map;
- 
--	if (efi_enabled(EFI_PARAVIRT))
--		return 0;
--
- 	phys_map = data->phys_map;
- 
- 	if (data->flags & EFI_MEMMAP_LATE)
+Patch #4 updates the configuration table iteration logic so that only
+ACPI and SMBIOS tables are exposed automatically when EFI_PARAVIRT is
+set, and other config tables only if they reside in a memory region of a
+EFI memory type that is guaranteed to be preserved. This effectively
+hides the ESRT, but also the memory attributes table and the runtime
+properties (and potentially others) when doing Xen dom0 boot unless they
+have been moved out of EFI boot services memory.
+
+The final patch relaxes the ESRT sanity check so that the ESRT is parsed
+and exposed even if EFI_MEMMAP is not set, which is the case with Xen
+dom0 on x86. If additional memory map checks are required in this code
+path, the best way to achieve this is for Xen to expose a EFI memory map
+on x86 just like it does on other architectures that support Xen (ARM
+and arm64)
+
+[0] https://lore.kernel.org/all/cover.1664298147.git.demi@invisiblethingslab.com/
+
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>
+Cc: Peter Jones <pjones@redhat.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: Kees Cook <keescook@chromium.org>
+Cc: Anton Vorontsov <anton@enomsg.org>
+Cc: Colin Cross <ccross@android.com>
+Cc: Tony Luck <tony.luck@intel.com>
+Cc: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+
+Ard Biesheuvel (5):
+  efi: Move EFI fake memmap support into x86 arch tree
+  efi: memmap: Move manipulation routines into x86 arch tree
+  efi: xen: Set EFI_PARAVIRT for Xen dom0 boot on all architectures
+  efi: Apply allowlist to EFI configuration tables when running under
+    Xen
+  efi: esrt: Omit region sanity check when no memory map is available
+
+ arch/x86/Kconfig                                       |  20 ++
+ arch/x86/include/asm/efi.h                             |  16 ++
+ arch/x86/kernel/setup.c                                |   1 +
+ arch/x86/platform/efi/Makefile                         |   4 +-
+ arch/x86/platform/efi/efi.c                            |   8 +-
+ {drivers/firmware => arch/x86/platform}/efi/fake_mem.c |  79 ++++++-
+ arch/x86/platform/efi/memmap.c                         | 238 ++++++++++++++++++++
+ arch/x86/platform/efi/quirks.c                         |   3 +
+ drivers/firmware/efi/Kconfig                           |  22 --
+ drivers/firmware/efi/Makefile                          |   4 -
+ drivers/firmware/efi/efi.c                             |   7 +
+ drivers/firmware/efi/esrt.c                            |  61 ++---
+ drivers/firmware/efi/fake_mem.h                        |  10 -
+ drivers/firmware/efi/fdtparams.c                       |   4 +
+ drivers/firmware/efi/memmap.c                          | 224 +-----------------
+ drivers/firmware/efi/x86_fake_mem.c                    |  75 ------
+ drivers/xen/efi.c                                      |  69 ++++++
+ include/linux/efi.h                                    |  18 +-
+ 18 files changed, 481 insertions(+), 382 deletions(-)
+ rename {drivers/firmware => arch/x86/platform}/efi/fake_mem.c (58%)
+ create mode 100644 arch/x86/platform/efi/memmap.c
+ delete mode 100644 drivers/firmware/efi/fake_mem.h
+ delete mode 100644 drivers/firmware/efi/x86_fake_mem.c
+
 -- 
 2.35.1
 
