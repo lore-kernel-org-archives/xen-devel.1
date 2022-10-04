@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B423C43217
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Oct 2022 16:08:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.415696.660333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E1A6C433F5
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Oct 2022 16:09:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.415702.660355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ofkTJ-0006VM-Jc; Tue, 04 Oct 2022 16:08:41 +0000
+	id 1ofkTU-0007EH-3S; Tue, 04 Oct 2022 16:08:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 415696.660333; Tue, 04 Oct 2022 16:08:41 +0000
+Received: by outflank-mailman (output) from mailman id 415702.660355; Tue, 04 Oct 2022 16:08:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ofkTJ-0006VF-Go; Tue, 04 Oct 2022 16:08:41 +0000
-Received: by outflank-mailman (input) for mailman id 415696;
- Tue, 04 Oct 2022 16:08:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ofkTU-0007E6-0Z; Tue, 04 Oct 2022 16:08:52 +0000
+Received: by outflank-mailman (input) for mailman id 415702;
+ Tue, 04 Oct 2022 16:08:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YyPd=2F=citrix.com=prvs=269269faf=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1ofkTI-0006Sk-5J
- for xen-devel@lists.xenproject.org; Tue, 04 Oct 2022 16:08:40 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cdb6241d-43fe-11ed-9377-c1cf23e5d27e;
- Tue, 04 Oct 2022 18:08:38 +0200 (CEST)
+ id 1ofkTS-00067g-8I
+ for xen-devel@lists.xenproject.org; Tue, 04 Oct 2022 16:08:50 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d3de8937-43fe-11ed-964a-05401a9f4f97;
+ Tue, 04 Oct 2022 18:08:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,45 +38,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cdb6241d-43fe-11ed-9377-c1cf23e5d27e
+X-Inumbo-ID: d3de8937-43fe-11ed-964a-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1664899718;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Hrn5m8BVzCYhqL7ggmk787e3RGFAR22H9oUe1OsxCeU=;
-  b=e2WWaBpQ2seCo45SpT7z+aQzB7YrugPMRtweLCBOk5+Yix2CPCt/4WVp
-   nCsowqYQ6bW9Ale4X459drXvSggV8CRVhv5xsD2pKQlVJSb9EOklwcKQb
-   cefMCnS3lU7pP4ZROcN4zZBgpcW9gxty6GtAoGXQj5zgaq0BiEb/o0nBh
-   U=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1664899728;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=JBROCaFJ+EpzPToOVVp3gIBCu4A3D791xZNcgjLwDS4=;
+  b=IrPP8bLbJxnpqgEDOPzqh+ZTdrezlccb9QB3182MoC55RRmn0miofHNl
+   iIsReyvSE2lY8kBgSmmRv8RfYjkP3/wClAzrMQcBYixVizVbUc0mNhScx
+   KKtK4oVPqxE7Ehu5X1K6IucS8KwNHh5+Tyquw/mwSKECVfDiiS36Zo8+i
+   Y=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 84478270
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 81081088
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:3PMpLKpekRzX/TJEjGBpCM5qM9heBmLPZRIvgKrLsJaIsI4StFCzt
- garIBnVbKqJYmqhfYh0OdyyoE5Q65+Ey99gSgZtrC1kFnwU9puZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYGYpLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9VU+4ZwehBtC5gZkPKgT4AeF/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5mz
- dcEdRQXSBO6o82V66K+F9hJpucJFZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJU0UUrsUIMtWcOOAr3/zaTBH7nmSorI6+TP7xw1tyrn9dtHSf7RmQO0FwhrH9
- jiZpwwVBDkTD+G/+AjGq0nrj8HFuTvlfsENHZGno6sCbFq7mTVIVUx+uUGAidm0jFSvHe1WL
- UM88zAr66M18SSDS9DnWhSirX2svxgCWsFRGek39AGMzKXP5w+TQGMDS1ZpZNEjtec3QyIrz
- V6Dm971BT1pv6aRQHjb/bCRxRuiNC5QIWIcaCssSQoe/8KlsIw1lgjITNtoDOiylNKdMRPaz
- i2OrSM+r64OlsNN3KK+lXjYhxq8q56PSRQ6jjg7RUr8sFk/PtT8IdX1tx6Ltp6sMbp1UHG5l
- 2RZv9K479kqIrKmhCnQccAtP5uQsqPt3CLnvXZjGJwo9jKI8nGlfJxN7DwWGHqFIvroaheyP
- haN5Fo5CIt7eSLzMPQpO97Z59ECl/CIKDjzahzDgjOiiLBVfRTPwixhbFX4M4vFwBl1yvFX1
- Xt2nK+R4Zcm5UZPlmPeqwQ1i+VDKsUCKYT7GvjGI+yPi+b2WZJsYe5t3KGyRu449riYhw7e7
- sxSMcCHoz0GDrOiMnONqt5Dcw5VRZTeOXwRg5M/SwJ+ClA+RDFJ5wH5mNvNhLCJb4wKz7yVr
- xlRq2dTyUblhG2vFDhmnktLMeq3NauTWFphYkTAy370hCV4CWtuhY9DH6YKkU4PrbcylaEuH
- 6RaEyhCa9wWIgn6F/0mRcGVhORfmN6D2Wpi4wLNjOADQqNd
-IronPort-HdrOrdr: A9a23:Q/iyV6jWy7bGyOqhjXJnfMWbrXBQXtYji2hC6mlwRA09TySZ//
- rBoB19726StN9xYgBFpTnuAsm9qB/nmaKdgrNhWItKPjOW21dARbsKheCJrgEIcxeOkNK1vp
- 0AT0ERMrLN5CBB/KTH3DU=
+IronPort-Data: A9a23:1Li0NqmOm0B0AHdQVZ2OwLLo5gxWJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJKUGiAOqmDNjSke9wkOdy1p0oFup7Wn9dhSwU4pCkxHyMWpZLJC+rCIxarNUt+DCFhoGFPt
+ JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6UqicUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8tuTS9XuDgNyo4GlC5wRmOagQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfCzBK1
+ PAaGS03RQnSpvOc+pWja+NLr5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKkSbC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TaHJ0Fxx7I9
+ goq+UzSRTQQLdCE8QO842qBid3rwAT4RogNQejQGvlC3wTImz175ActfXu2p+OozHG3Xd13I
+ lYRvCEpqMAa8UWxS9DnUh6QoXiavwUdUd5dD+077g6WzqPepQ2eAwAsQjNEafQnstE3Xj0g0
+ lKVn9LvCidrubfTQnWYnp+EoDX3NSULIGsqYS4fURBD89TluJs0jB/EUpBkCqHdpv/fFCz0w
+ juKhDMjnLhVhskOv42k+XjXjjTqoYLGJjPZ/S2OADjjtFkgItf4Ocr4sjA38MqsMq6TH12gs
+ Ho1hvK19bEvHLu3szSsSsIkSeTBC+m+DBXQhltmHp8E/jur+mK+cY043AySNHuFIe5fJ2a3P
+ Ra7VRd5ocYKYSD0NfMfj5eZUZxC8ET2KTjyuhk4hPJqa4M5SgKI9ToGiaW4jzG0yxhEfU3S1
+ P6mnSeQ4ZQyU/0PINmeHb11PVoXKscWmgvuqWjTlUjP7FZnTCf9pU05GFWPdPsly6iPvR/Y9
+ d1SX+PTlUsDALekOXmHr9BMRbzvEZTcLc+eliCqXrTbfloO9J8JUpc9Po/Ni6Q6xv8Ix48kD
+ 1m2W1NCyUqXuEAr3T6iMyk7AI4DqL4l8hrXywRwYgvzs5XiCK7zhJoim2wfJOJ2rLM5naMrJ
+ xTHEu3Zaslypv3802x1RfHAQEZKL3xHWSrm0/KZXQUC
+IronPort-HdrOrdr: A9a23:vZ/Yj6Hy/eQKcB+2pLqE0seALOsnbusQ8zAXP0AYc31om6uj5r
+ iTdZUgpGbJYVkqKRIdcLy7V5VoBEmskaKdgrNhW4tKPjOW2ldARbsKheCJrlHd8m/Fh4lgPM
+ 9bAtND4bbLbWSS4/yV3ODBKadE/OW6
 X-IronPort-AV: E=Sophos;i="5.95,158,1661832000"; 
-   d="scan'208";a="84478270"
+   d="scan'208";a="81081088"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -85,27 +85,138 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<Henry.Wang@arm.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
 	<marmarek@invisiblethingslab.com>, Demi Marie Obenour
 	<demi@invisiblethingslab.com>
-Subject: [PATCH for-4.17 0/2] x86: Activate DOITM
-Date: Tue, 4 Oct 2022 17:08:08 +0100
-Message-ID: <20221004160810.25364-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/2] x86: Activate Data Operand Invariant Timing Mode by default
+Date: Tue, 4 Oct 2022 17:08:10 +0100
+Message-ID: <20221004160810.25364-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20221004160810.25364-1-andrew.cooper3@citrix.com>
+References: <20221004160810.25364-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Slightly RFC.  I'm a little uncertain about putting doitm into cpuid= but it's
-the least bad option I can think of.
+Intel IceLake and later CPUs have microarchitectural behaviours which cause
+data-dependent timing behaviour.  This is not an issue for 99% of software,
+but it is a problem for cryptography routines.  On these CPUs, a new
+architectural feature, DOITM, was retrofitted in microcode.
 
-Andrew Cooper (2):
-  x86/cpuid: Infrastructure to support pseudo feature identifiers
-  x86: Activate Data Operand Invariant Timing Mode by default
+For now, Xen can't enumerate DOITM to guest kernels; getting this working is
+still in progress.  The consequence is that guest kernels will incorrectly
+conclude that they are safe.
 
+To maintain the safety of current software, activate DOITM unilaterally.  This
+will be relaxed in the future when we can enumerate the feature properly to
+guests.
+
+As an emergency stopgap, this behaviour can be disabled by specifying
+`cpuid=no-doitm` on Xen's command line, but is not guaranteed ABI moving
+forward.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Henry Wang <Henry.Wang@arm.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+CC: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
  xen/arch/x86/cpu/common.c            | 29 +++++++++++++++++++++++++++++
- xen/arch/x86/cpuid.c                 | 22 ++++++++++++++++++----
+ xen/arch/x86/cpuid.c                 |  5 +++++
  xen/arch/x86/include/asm/processor.h |  2 ++
- xen/tools/gen-cpuid.py               | 15 +++++++++++++++
- 4 files changed, 64 insertions(+), 4 deletions(-)
+ xen/tools/gen-cpuid.py               |  2 ++
+ 4 files changed, 38 insertions(+)
 
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 0412dbc915e5..8c46a4db430a 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -209,6 +209,34 @@ void ctxt_switch_levelling(const struct vcpu *next)
+ 		alternative_vcall(ctxt_switch_masking, next);
+ }
+ 
++bool __ro_after_init opt_doitm = true;
++
++static void doitm_init(void)
++{
++    uint64_t val;
++
++    if ( !opt_doitm || !cpu_has_arch_caps )
++        return;
++
++    rdmsrl(MSR_ARCH_CAPABILITIES, val);
++    if ( !(val & ARCH_CAPS_DOITM) )
++        return;
++
++    /*
++     * We are currently unable to enumerate MSR_ARCH_CAPS to guest.  As a
++     * consequence, guest kernels will believe they're safe even when they are
++     * not.
++     *
++     * Until we can enumerate DOITM properly for guests, set it unilaterally.
++     * This prevents otherwise-correct crypto from becoming vulnerable to
++     * timing sidechannels.
++     */
++
++    rdmsrl(MSR_UARCH_MISC_CTRL, val);
++    val |= UARCH_CTRL_DOITM;
++    wrmsrl(MSR_UARCH_MISC_CTRL, val);
++}
++
+ bool_t opt_cpu_info;
+ boolean_param("cpuinfo", opt_cpu_info);
+ 
+@@ -532,6 +560,7 @@ void identify_cpu(struct cpuinfo_x86 *c)
+ 	/* Now the feature flags better reflect actual CPU features! */
+ 
+ 	xstate_init(c);
++	doitm_init();
+ 
+ #ifdef NOISY_CAPS
+ 	printk(KERN_DEBUG "CPU: After all inits, caps:");
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index 112ee63a9449..09c1ee18fd95 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -106,7 +106,12 @@ static void __init cf_check _parse_xen_cpuid(
+     const char *name, unsigned int feat, bool val)
+ {
+     if ( unlikely(feat == ~0u) )
++    {
++        if ( strcmp(name, "doitm") == 0 )
++            opt_doitm = val;
++
+         return;
++    }
+ 
+     if ( !val )
+         setup_clear_cpu_cap(feat);
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index 8e2816fae9b9..2978416e6c5b 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -637,6 +637,8 @@ enum ap_boot_method {
+ };
+ extern enum ap_boot_method ap_boot_method;
+ 
++extern bool opt_doitm;
++
+ #endif /* !__ASSEMBLY__ */
+ 
+ #endif /* __ASM_X86_PROCESSOR_H */
+diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
+index f3045b3bfd36..78a3a5c1941f 100755
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -303,6 +303,8 @@ def crunch_numbers(state):
+     # specially
+     #
+     pseduo_names = (
++        # Data Operand Invariant Timing Mode.  Lives in MSR_ARCH_CAPS
++        "doitm",
+     )
+ 
+     for n in pseduo_names:
 -- 
 2.11.0
 
