@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00DF1C433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Oct 2022 17:46:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.415746.660388 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D3E2C433FE
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Oct 2022 17:54:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.415756.660399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oflzl-0001lS-KE; Tue, 04 Oct 2022 17:46:17 +0000
+	id 1ofm76-0003D3-CU; Tue, 04 Oct 2022 17:53:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 415746.660388; Tue, 04 Oct 2022 17:46:17 +0000
+Received: by outflank-mailman (output) from mailman id 415756.660399; Tue, 04 Oct 2022 17:53:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oflzl-0001lL-H7; Tue, 04 Oct 2022 17:46:17 +0000
-Received: by outflank-mailman (input) for mailman id 415746;
- Tue, 04 Oct 2022 17:46:16 +0000
+	id 1ofm76-0003Cv-9b; Tue, 04 Oct 2022 17:53:52 +0000
+Received: by outflank-mailman (input) for mailman id 415756;
+ Tue, 04 Oct 2022 17:53:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IgJy=2F=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1oflzj-0001lF-Pj
- for xen-devel@lists.xenproject.org; Tue, 04 Oct 2022 17:46:16 +0000
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e7ebc26-440c-11ed-964a-05401a9f4f97;
- Tue, 04 Oct 2022 19:46:12 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id E91E85C0061;
- Tue,  4 Oct 2022 13:46:09 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Tue, 04 Oct 2022 13:46:09 -0400
+ id 1ofm75-0003Cp-8E
+ for xen-devel@lists.xenproject.org; Tue, 04 Oct 2022 17:53:51 +0000
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
+ [66.111.4.27]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7fccbb88-440d-11ed-964a-05401a9f4f97;
+ Tue, 04 Oct 2022 19:53:50 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 77C7A5C0113;
+ Tue,  4 Oct 2022 13:53:48 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute3.internal (MEProxy); Tue, 04 Oct 2022 13:53:48 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 4 Oct 2022 13:46:08 -0400 (EDT)
+ 4 Oct 2022 13:53:47 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e7ebc26-440c-11ed-964a-05401a9f4f97
+X-Inumbo-ID: 7fccbb88-440d-11ed-964a-05401a9f4f97
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1664905569; x=
-	1664991969; bh=j1co2OtJjD7/vRKiHmQIV5tJWRkOaG0PZ91t7wBXB08=; b=b
-	uVrn8e+X1yqcOFjSdZ2m0JtalxHee6ojtu6uxKe2dDP+PxZK0d4EdjiwOzV1qD4P
-	DRVAYGUMQ46TQC79a8IgLyHmrHkLVd2QC5Vh5U1sE6FSxORGTmm75y1OZPH4v3Vd
-	YOLDu2vqHupepX7WrjQlIbP64gbNo74NPBaE9ptLsTN4N/H6wPSoX22bYYkocbQQ
-	eBJdolRQRQ+gKVKXvoWTloGYDF96rStVcIi3tu6nLwCY7+e5cYf9AS6ic37tTWwB
-	OPGG3OG53Cp8Uk+VotAEbArlv+FOPRBZJyJbmdwdz7CeQ3B8je1pPvah42Ro7xAq
-	mdOcG7DJ4DYF4qSZTmcaA==
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1664906028; x=
+	1664992428; bh=crMLwkYrYFWOA1+VA0BUO688RPGUWzKTzdzfbu3JkkE=; b=2
+	MMOhyZHbORWatMaYrJCtVSYg0r0XHyaW0eNJY0z8ZTzVricK2fwqD2PeAIh/Cdo5
+	mP/c4bd/7fnTeRCN5GdvXpsugzgtKtIiUSamUPS3JZpKTMhVxq/XhFo6d38Udru1
+	+UxjarFIUmASO+6IZSWuQgAPs5lhwUquKHksNP9lklxcDpGkSdrDad34m5ep1J7t
+	zhi29mw3H1b2W0HtF2QVo50Dm9BYR62zqne0OHvaeEkycXfkvPLWcC0cx9r8YDwS
+	wf9PIHYoubtVbD1g8X5YqfYedJGV6YL2tKrRh9Y3NpuyaSxlNP5wknxD1gKIKdlh
+	fBahCbY24fY4tAGY60mSA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
 	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
 	:mime-version:references:reply-to:sender:subject:subject:to:to
 	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; t=1664905569; x=1664991969; bh=j1co2OtJjD7/vRKiHmQIV5tJWRkO
-	aG0PZ91t7wBXB08=; b=r4NdtuS3BOGr1usAHz1Iam2a95O9RnYq7uMZgqz6NPeC
-	nmMgdbtqLBMJnydm3qRndZlnAI3JbV9SfcpY8aOYVwUJAkvZ9kc6sVQzglGI2yhO
-	QmeBnPcU9NGkjl0yaJYbbzUTK490oMT9O3dRHta7GTJaJIAk4e6Kjse5jHVJUY/n
-	fPlp2xHEHi2pVd/ti0qIJSASo78Tq4DoB2X6G9Wk9/t6e2S7Asj84T4bUfXXxHmS
-	KhReL40qlqq/E5fWtontKTbYRpX42iVuQxjz3SikwRfvGUmaTgpduEcpwdsD2eoY
-	KuSYRzIidx4UXsGyaNuTZeBYOGE3wIjELfzfOpmR5A==
-X-ME-Sender: <xms:YXE8Y0_4RjLdTf4ZcV3fxbvSMSn51U_1XUAaIwoevXDni-ON5oKuIg>
-    <xme:YXE8Y8vPGN5s4wWa0od220jNPMKCiaoBRECXsL7M9GsxjZlKf6ebq3m8iy0TgcCec
-    0EqTyUiCBEXdAY>
-X-ME-Received: <xmr:YXE8Y6AzxWvyrFtxe7TD7bo8JZ4ZV9K8qRldsUwxoQmS5X1lUQ9yc7B5yusd>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeiuddguddujecutefuodetggdotefrod
+	fm2; t=1664906028; x=1664992428; bh=crMLwkYrYFWOA1+VA0BUO688RPGU
+	WzKTzdzfbu3JkkE=; b=AkTt3B8pmj7Ml2nZSgvgOsy/oWj/1LypjtTvL1IJhMwM
+	WZVackhTEinZ3ojHW1IhRqczLN1gUakhP0GeWj1WjnGSG1bHVdBZ4MT9JxtD8U6P
+	9+a/xvBpoJmF/4KGx/hJOkpoZECJOZjgpGlXAY5BOGlceJtcPyFfTz+dxRqLvlKV
+	6mxnsnBba50ERm43a5oVj19YcbcQ6xg6TLVKEXjngEKu59wFrkkMWFMOu3vnZlOy
+	yh+IERoWKg8OdGQ+Ko6EeHfzRosPvcCJPH8w4TJyKcg5/YHTWqKckz1HBqxdutht
+	em4qSGDuBhDXGDLOMCgYCUhZCDbv+6sD9Y8IzOLtnQ==
+X-ME-Sender: <xms:LHM8Y4GBfgG_KA7tDJUFRrGo8uH8hbrLXd-oE_10qTXae9gBBQW4QQ>
+    <xme:LHM8YxUmGdTS-D4eX4ZoSG6b-t4YUt1Ts33jQjSXVXYW5JN1sgZxp2Ewbvpw_4qjT
+    NMCJ_Z1w9hJ3yU>
+X-ME-Received: <xmr:LHM8YyJtqC_Q3f45_myOFkQ7-KeoZOE4Z-sAeUqigATWrQH9p_1RWqocHFGX>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeiuddguddukecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
     enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeffvghm
@@ -82,145 +82,206 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeiuddguddujecutefuodetgg
     fffguddvgffhffeifeeikeektdehgeetheffleenucevlhhushhtvghrufhiiigvpedtne
     curfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhg
     shhlrggsrdgtohhm
-X-ME-Proxy: <xmx:YXE8Y0cnvKuzY9DZ5FXWtpTEg2aicizrW0DVgeZ68EWorWDULA0Amg>
-    <xmx:YXE8Y5NHHi7xxVk1ilJLeztFNySAVGgT99HRbkiFBWa3Gi84A9QyFg>
-    <xmx:YXE8Y-knnc0OzmocImv-2pqZrzV2gA0TwN6wY7aPiktQ8QgGVy01Pw>
-    <xmx:YXE8Y6HkQRHwNpRt3pYXDU_S_MQHBaR7CF7e4NSV-pAhw9LOJGDbog>
+X-ME-Proxy: <xmx:LHM8Y6Fv_vgu392bpTx3N2pvr4OUP49VNCFut6gXn9MfUTToEcjk8g>
+    <xmx:LHM8Y-XxT18-IBZrtJOgfq5CYL2-CYGbFo2YLZVjvJP3qnMMAGM8rA>
+    <xmx:LHM8Y9NYYH66k3QJzrwbhU1BHX98AE_rcHwMuiwb_fhxeaCcwtSNDw>
+    <xmx:LHM8Y8zyWh_71Li2Tp9EYHRe5teOPFg3wn_ZCDucMMSjbTSPNtJ9kA>
 Feedback-ID: iac594737:Fastmail
-Date: Tue, 4 Oct 2022 11:46:59 -0400
+Date: Tue, 4 Oct 2022 13:53:31 -0400
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
-	linux-efi@vger.kernel.org, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Kees Cook <keescook@chromium.org>,
-	Anton Vorontsov <anton@enomsg.org>,
-	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Ard Biesheuvel <ardb@kernel.org>
-Subject: Re: [PATCH v4 1/2] Avoid using EFI tables Xen may have clobbered
-Message-ID: <YzxxXuovwQt3NskE@itl-email>
-References: <cover.1664298147.git.demi@invisiblethingslab.com>
- <f3b624e99adfdbbfc1976a60a73a6b5950e1840d.1664298147.git.demi@invisiblethingslab.com>
- <282a225d-8782-0321-6f0e-19dd4510dc42@suse.com>
- <CAMj1kXFQNqsW5RfHGac-eGbosJHBybu6+-Fap_bi_kVxWNpGeg@mail.gmail.com>
- <YzcjeiOW8+i2Zxsd@itl-email>
- <CAMj1kXHBBbCNV3CLesqZi7ttmmi8y4tZ1KO5vievy_CJrU2o3Q@mail.gmail.com>
- <YzeaKjmls1YI/3ox@itl-email>
- <01d22092-8292-8ed7-ece7-9ca32d15bbce@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <JBeulich@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>, Henry Wang <Henry.Wang@arm.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 2/2] x86: Activate Data Operand Invariant Timing Mode by
+ default
+Message-ID: <YzxzKY01r12OPyiR@itl-email>
+References: <20221004160810.25364-1-andrew.cooper3@citrix.com>
+ <20221004160810.25364-3-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="lgxbz4vBgheHS+D8"
+	protocol="application/pgp-signature"; boundary="SHDQr5c8XtikZYTS"
 Content-Disposition: inline
-In-Reply-To: <01d22092-8292-8ed7-ece7-9ca32d15bbce@suse.com>
+In-Reply-To: <20221004160810.25364-3-andrew.cooper3@citrix.com>
 
 
---lgxbz4vBgheHS+D8
+--SHDQr5c8XtikZYTS
 Content-Type: text/plain; protected-headers=v1; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 4 Oct 2022 11:46:59 -0400
+Date: Tue, 4 Oct 2022 13:53:31 -0400
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
-	linux-efi@vger.kernel.org, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Kees Cook <keescook@chromium.org>,
-	Anton Vorontsov <anton@enomsg.org>,
-	Colin Cross <ccross@android.com>, Tony Luck <tony.luck@intel.com>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Ard Biesheuvel <ardb@kernel.org>
-Subject: Re: [PATCH v4 1/2] Avoid using EFI tables Xen may have clobbered
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <JBeulich@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>, Henry Wang <Henry.Wang@arm.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 2/2] x86: Activate Data Operand Invariant Timing Mode by
+ default
 
-On Tue, Oct 04, 2022 at 10:22:13AM +0200, Jan Beulich wrote:
-> On 01.10.2022 02:30, Demi Marie Obenour wrote:
-> > On Fri, Sep 30, 2022 at 08:27:09PM +0200, Ard Biesheuvel wrote:
-> >> On Fri, 30 Sept 2022 at 19:12, Demi Marie Obenour wrote:
-> >>> On Fri, Sep 30, 2022 at 06:30:57PM +0200, Ard Biesheuvel wrote:
-> >>>> I know very little about Xen, but based on the context you provided =
-in
-> >>>> this thread, I'd say that the best approach from the Xen side is to
-> >>>> convert all EfiBootServicesData regions that have configuration tabl=
-es
-> >>>> pointing into them into EfiAcpiReclaimMemory.
-> >>>
-> >>> Should Xen convert the entire region, or should it try to reserve only
-> >>> the memory it needs?  The latter would require it to parse the
-> >>> configuration tables.  Is there a list of configuration tables that c=
-an
-> >>> legitimately be in EfiBootServicesData regions?
-> >>>
-> >>
-> >> Not really, no. So you would have to convert the entire region
-> >> /unless/ Xen knows the GUID, and therefore knows how to derive the
-> >> size of the table, allowing it to reserve memory more conservatively.
-> >> However, I doubt whether this is worth it: splitting entries implies
-> >> rewriting the memory map, which is a thing I'd rather avoid if I were
-> >> in your shoes.
-> >=20
-> > I actually wonder if Xen needs to reserve *all* of EfiBootServicesData.
-> > The reason is that some (probably buggy) firmware may store ACPI tables
-> > there, and Xen does not have an ACPI implementation.
+On Tue, Oct 04, 2022 at 05:08:10PM +0100, Andrew Cooper wrote:
+> Intel IceLake and later CPUs have microarchitectural behaviours which cau=
+se
+> data-dependent timing behaviour.  This is not an issue for 99% of softwar=
+e,
+> but it is a problem for cryptography routines.  On these CPUs, a new
+> architectural feature, DOITM, was retrofitted in microcode.
 >=20
-> We already have the -mapbs option as a workaround in such situations.
-
-The problem is that there is no way for the user to know when it is
-needed.  One option would be for dom0 to print a warning in the kernel
-log if it needs to ignore a table due to it being in EfiBootServicesData.
-
-> >  From my
-> > perspective, a much safer approach would be to pass all of
-> > EfiBootServicesData memory directly to dom0, and have dom0 give Xen back
-> > what it doesn=E2=80=99t wind up using.  That allows dom0=E2=80=99s memo=
-ry reservation
-> > code to work properly, which it currently does not.
+> For now, Xen can't enumerate DOITM to guest kernels; getting this working=
+ is
+> still in progress.  The consequence is that guest kernels will incorrectly
+> conclude that they are safe.
 >=20
-> As said already on a different thread: Giving memory to domains (incl
-> Dom0) isn't related to their original memory type (neither EFI's nor
-> E820's); the needed memory is taken from the general page allocator
-> (with one exception for initrd, to avoid unnecessary copying around of
-> data). Hence what you propose would end up as an (imo) awful hack in
-> Xen. I also don't see how this relates to "dom0=E2=80=99s memory reservat=
-ion
-> code", but I'm sure you can clarify that for me.
+> To maintain the safety of current software, activate DOITM unilaterally. =
+ This
+> will be relaxed in the future when we can enumerate the feature properly =
+to
+> guests.
+>=20
+> As an emergency stopgap, this behaviour can be disabled by specifying
+> `cpuid=3Dno-doitm` on Xen's command line, but is not guaranteed ABI moving
+> forward.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> CC: Wei Liu <wl@xen.org>
+> CC: Henry Wang <Henry.Wang@arm.com>
+> CC: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
+> CC: Demi Marie Obenour <demi@invisiblethingslab.com>
+> ---
+>  xen/arch/x86/cpu/common.c            | 29 +++++++++++++++++++++++++++++
+>  xen/arch/x86/cpuid.c                 |  5 +++++
+>  xen/arch/x86/include/asm/processor.h |  2 ++
+>  xen/tools/gen-cpuid.py               |  2 ++
+>  4 files changed, 38 insertions(+)
+>=20
+> diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+> index 0412dbc915e5..8c46a4db430a 100644
+> --- a/xen/arch/x86/cpu/common.c
+> +++ b/xen/arch/x86/cpu/common.c
+> @@ -209,6 +209,34 @@ void ctxt_switch_levelling(const struct vcpu *next)
+>  		alternative_vcall(ctxt_switch_masking, next);
+>  }
+> =20
+> +bool __ro_after_init opt_doitm =3D true;
+> +
+> +static void doitm_init(void)
+> +{
+> +    uint64_t val;
+> +
+> +    if ( !opt_doitm || !cpu_has_arch_caps )
+> +        return;
+> +
+> +    rdmsrl(MSR_ARCH_CAPABILITIES, val);
+> +    if ( !(val & ARCH_CAPS_DOITM) )
+> +        return;
+> +
+> +    /*
+> +     * We are currently unable to enumerate MSR_ARCH_CAPS to guest.  As a
+> +     * consequence, guest kernels will believe they're safe even when th=
+ey are
+> +     * not.
+> +     *
+> +     * Until we can enumerate DOITM properly for guests, set it unilater=
+ally.
+> +     * This prevents otherwise-correct crypto from becoming vulnerable to
+> +     * timing sidechannels.
+> +     */
+> +
+> +    rdmsrl(MSR_UARCH_MISC_CTRL, val);
+> +    val |=3D UARCH_CTRL_DOITM;
+> +    wrmsrl(MSR_UARCH_MISC_CTRL, val);
+> +}
+> +
+>  bool_t opt_cpu_info;
+>  boolean_param("cpuinfo", opt_cpu_info);
+> =20
+> @@ -532,6 +560,7 @@ void identify_cpu(struct cpuinfo_x86 *c)
+>  	/* Now the feature flags better reflect actual CPU features! */
+> =20
+>  	xstate_init(c);
+> +	doitm_init();
+> =20
+>  #ifdef NOISY_CAPS
+>  	printk(KERN_DEBUG "CPU: After all inits, caps:");
+> diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+> index 112ee63a9449..09c1ee18fd95 100644
+> --- a/xen/arch/x86/cpuid.c
+> +++ b/xen/arch/x86/cpuid.c
+> @@ -106,7 +106,12 @@ static void __init cf_check _parse_xen_cpuid(
+>      const char *name, unsigned int feat, bool val)
+>  {
+>      if ( unlikely(feat =3D=3D ~0u) )
+> +    {
+> +        if ( strcmp(name, "doitm") =3D=3D 0 )
+> +            opt_doitm =3D val;
+> +
+>          return;
+> +    }
+> =20
+>      if ( !val )
+>          setup_clear_cpu_cap(feat);
+> diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/=
+asm/processor.h
+> index 8e2816fae9b9..2978416e6c5b 100644
+> --- a/xen/arch/x86/include/asm/processor.h
+> +++ b/xen/arch/x86/include/asm/processor.h
+> @@ -637,6 +637,8 @@ enum ap_boot_method {
+>  };
+>  extern enum ap_boot_method ap_boot_method;
+> =20
+> +extern bool opt_doitm;
+> +
+>  #endif /* !__ASSEMBLY__ */
+> =20
+>  #endif /* __ASM_X86_PROCESSOR_H */
+> diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
+> index f3045b3bfd36..78a3a5c1941f 100755
+> --- a/xen/tools/gen-cpuid.py
+> +++ b/xen/tools/gen-cpuid.py
+> @@ -303,6 +303,8 @@ def crunch_numbers(state):
+>      # specially
+>      #
+>      pseduo_names =3D (
+> +        # Data Operand Invariant Timing Mode.  Lives in MSR_ARCH_CAPS
+> +        "doitm",
+>      )
+> =20
+>      for n in pseduo_names:
+> --=20
+> 2.11.0
 
-Linux has a function called efi_mem_reserve() that is used to reserve
-EfiBootServicesData memory that contains e.g. EFI configuration tables.
-This function does not work under Xen because Xen could have already
-clobbered the memory.  efi_mem_reserve() not working is the whole reason
-for this thread, as it prevents EFI tables that are in
-EfiBootServicesData from being used under Xen.
-
-A much nicer approach would be for Xen to reserve boot services memory
-unconditionally, but provide a hypercall that dom0 could used to free
-the parts of EfiBootServicesData memory that are no longer needed.  This
-would allow efi_mem_reserve() to work normally.
+I can=E2=80=99t review the actual implementation, but the idea looks good t=
+o me.
 --=20
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 Invisible Things Lab
 
---lgxbz4vBgheHS+D8
+--SHDQr5c8XtikZYTS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmM8VY8ACgkQsoi1X/+c
-IsHLdA/+LM4HOMK+UqW8ug41g4/DBfgbjzO9EIOgBAXcDsotBsE2hgv+29Nd8k2/
-x08K8YAFtt6tgef77/ZH2pFmtCbY3v9AbO+Y0AUn6TD8ownHkXRvQZcH4f+/q1qu
-I/eMEvBHn2+Tcl5NLk8JbIj+iufNcZsgvuPxO5Bn6L6cs3uLKey68T+iBN1djFNc
-LrhecxdhCSa1096qkvxAn6d7RRQcplv1//S4LXrCjt3q77T4Dg7y8sPcqDQw98W1
-QW+6l9GDwVr0EDWse00UkigGhQK+GP3bEv3ucJoxiDFYCAQy24sOTBL/m4wfcZmv
-t/43wgXv9010fUACW0Fl0kgKPWMKCMfUM1d7VLEj4GkWLaN41C8eZc5EBj5p37Df
-AR1xqfFhR3X50gACUUyoUVfLw2LbohUdzmqncPIAhFOYnrZ4/EfaQjHEq1EMHsPi
-X0ocJZhndjM12OXOgLpYdijTZ/1fl6LtYmEULzGdDP1ANinE85ihHsBmLOfUMF+R
-MOsy9XDSKzYpi1naZ0Pt+hJzEsEmzoxV7JytqBSxCKihGlnsFf6PPF+eKa3UnFyp
-ji4rdgWVtUqhrPa8SWHaxiNhTnNJSZ7VDYbj7hkwejS6dk08ZXmcfHmKDRo3FflR
-Y4PVJCITmoxzY63hLDFPN5bDwiEYqRAVlHpsix40rjxGDMDq7EM=
-=u0CQ
+iQIzBAEBCgAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmM8cykACgkQsoi1X/+c
+IsHbUhAAv4Rbj8vaccBO8kZW5hLFXlpTm3aY9wkKZsNV+CHHV6aXQCYWirYJfuSo
+r3PZnVSu7qZI46b8PHG7oYIObtAy1HNXcF93qA4y4MazrRKdf8UyJD35sIvCZ4iz
+Q0+BdZB+y+uvNeulfevKCss7bzn8YBFn8EW9g2AzouiEjG+mrtUzxMZ0UyQfDWdr
+GeSMgy30bJmCwQljOQzQ3Zflv9m8oajwaOFYTyLHJujeowwfJG3KjCSOMBN6g5ga
+hFtmYCdJ+0VVZ+6mNLB0hpvEJWsxN2nUW9HgZhLVgYSTT/2wZv2exKiE9vFsg1Bc
+GUisQkG6Wxa40RZzfcOSNp3s08jjzPB4dNWkiqFk33wserlqIhGkppvaDEaLvuCA
+9+bviE5QsrmkrVqkJ/+fI4H2vo4zmM7t9GKBTnuVlTEnc71CYtxTr+pCh3eXFRzn
+FKpgvTAX/KZyJ0xy9/E9eXO2gYJO8jLu85crXHImInDTffMrLliRhysAyf1pVDV3
+K//1+2GPu7fCoySer4dSSt/PDNb4uOUBIzXHNGzqq45CsNFsxJeogeCFU6BtxrvC
+qFdVBiplmVGyqAn949iYnjVs6XElTu5HH61HAaHbYiudsd5T1OKVE7nSnqrt2vtU
+y2mzJz6GNM/6g01rwMYItmCtNOOhw7dmL+nqmIRKyZP5daha8QQ=
+=oJP8
 -----END PGP SIGNATURE-----
 
---lgxbz4vBgheHS+D8--
+--SHDQr5c8XtikZYTS--
 
