@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCFEC43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3293C4332F
 	for <xen-devel@archiver.kernel.org>; Fri,  7 Oct 2022 10:33:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.417683.662409 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.417682.662396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ogkf9-0005PB-5f; Fri, 07 Oct 2022 10:33:03 +0000
+	id 1ogkf7-0005AA-Uq; Fri, 07 Oct 2022 10:33:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 417683.662409; Fri, 07 Oct 2022 10:33:02 +0000
+Received: by outflank-mailman (output) from mailman id 417682.662396; Fri, 07 Oct 2022 10:33:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ogkf8-0005Iy-C5; Fri, 07 Oct 2022 10:33:02 +0000
-Received: by outflank-mailman (input) for mailman id 417683;
- Fri, 07 Oct 2022 10:33:00 +0000
+	id 1ogkf7-00058M-Hf; Fri, 07 Oct 2022 10:33:01 +0000
+Received: by outflank-mailman (input) for mailman id 417682;
+ Fri, 07 Oct 2022 10:32:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uvLM=2I=epam.com=prvs=22797713c5=mykyta_poturai@srs-se1.protection.inumbo.net>)
- id 1ogkf6-0004P4-H8
- for xen-devel@lists.xenproject.org; Fri, 07 Oct 2022 10:33:00 +0000
+ id 1ogkf5-0004P4-H4
+ for xen-devel@lists.xenproject.org; Fri, 07 Oct 2022 10:32:59 +0000
 Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
  [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 681f8a81-462b-11ed-964a-05401a9f4f97;
+ id 6812d72b-462b-11ed-964a-05401a9f4f97;
  Fri, 07 Oct 2022 12:32:57 +0200 (CEST)
 Received: from pps.filterd (m0174678.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2978P173005817;
- Fri, 7 Oct 2022 10:32:53 GMT
+ by mx0a-0039f301.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2978P174005817;
+ Fri, 7 Oct 2022 10:32:54 GMT
 Received: from eur04-he1-obe.outbound.protection.outlook.com
  (mail-he1eur04lp2057.outbound.protection.outlook.com [104.47.13.57])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3k2a45sjk3-5
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3k2a45sjk3-6
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 07 Oct 2022 10:32:53 +0000
 Received: from VI1PR03MB3758.eurprd03.prod.outlook.com (2603:10a6:803:33::29)
@@ -55,21 +55,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 681f8a81-462b-11ed-964a-05401a9f4f97
+X-Inumbo-ID: 6812d72b-462b-11ed-964a-05401a9f4f97
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AAWF34F6/1Z5NFhIU92EsNIuKvAHCkW0l1ZAL3J9XHQzNKRfa/+eXBlOItUEu1EuNuHhqgLyYYpZZ0OPwWVamACto75Odu7V5Snc8lRqch0MFgZisrtZ6/vTAebVIrW7Mct2ZOPeuduiUFDXIxmpCXNLsC2q18GiR6ggMcEeLbEDanhyOs3cC5sOUan5AiSovel6icOwDHUdWD6WmWPPeqdRei9s9pQpszojji9kFALNUjo/8iOoH9JnLqk5xXytRctwA5IHoWAxQWuZ4lzVHoWLc2GDhnhjw02jMu+FloO1BMe7yKJvneTkh0lFi2xYBkdLBtBBn035Ekf5T8FMNg==
+ b=FOU5Aq74f7Et7kpU/iC+iUbECEoxq1J0mKXp8GRh6pLSp7b1+V9CBPx4JOEOE2iAyuOVenUN97eE2XUb3egMbdSgJhZTZ39xN9pyhzLJ64hFn7K42JN5aQSgvMIC2/PAcvx1OY+IGlehAghxr3VFRxsUEm9usk4Szih+zFjMrMI5ZLpitK/WLV47wCMMQAeqoOr27hxEsphqgiB9FBEE+IdZzL3CuessBDevMA9LHuIV72A/QF6q6MApxdCQZnU4pZXr7iZZAmabFpnFu79Z2Z0ccHImXjOScXfzzLyD1mj8ZQp+EIGP/PLqcucGu8SuMO/JN1zIOcNAD8A6ty5AXQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6liqUes5WMbS739XSwLeXIGXWML/GuvqIhUsXx7+7IM=;
- b=fP4JoQPQA2FccAwNm1b7qcOB70DU262DZcuZdnv/99lIJJGzJnO4P1mxx5LVWG7k8eA+9XwIko8Qd3agM4Hcfa3W57rgfhpGNXbpdgU2KGzDX1uhaJ6Ciq9hNurpsnJPpWImgIM9BbU3ujgP+d4kWV9e5pQIDmhdu1eU1demyHhoiU2euf3IqtP+6AtpEnPoUNtH7LmkmvXYqEkHkW02N9g8NBbRvW0rk+mCTGPABC98VZcmKcdM1hTnpyx0gUBaraqzgpltI9hXHn19FnBRuBgY94V//U8OHRJM51hNmSsrshOY4sTraX18oaTplEf4xqjwWFbpWCHhc/JBvDWIMg==
+ bh=P67wZi9wRvsTNIiKgd4NqFNYGAuUHcR/ii4CMj9fkQk=;
+ b=Q5Fo1lUabUqeX6lcHX5+UnsbgaW83W/DHpvNoQxvzUqClJ8j4OSVOokuXf/QkVbcmn1510feey6EVjd7fdm07rWNyQVTsjLQ3GqTvk98jWcKFJDSfvYqN7j8OQJ5G5dexHXaIoZyv/wmv34s2c4gGEkoNSOUmbFiq2qJhygm6/zDeadQ1q7S+IpJYoGyIFurWDiw/wScrX7VKnVIr2Dv74qKKZXJ/CkvaA2B5+ZbUfUqaRcXw/RnA3kpPqvZEd1YGzW68taKziM/fT8rSpHTOU0ttPl4GIfuLxHnRNtMvCakW5+DumYRbx4OJGv5ky9+PDUU41knqy4QLClqTTIRuA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6liqUes5WMbS739XSwLeXIGXWML/GuvqIhUsXx7+7IM=;
- b=nQhhycb2bTJVgqn9/BtPfUZBbRhsrTkvB4/4+i82Tgj0RJd6MjGalesKCqNNiP8f8Htz1hBFWc6x9/bZ5nuVAEEOKHRqM6lWTdyhmtr7d/vD4btpobSkbM3Ym2Yx7vzrFYpn6OXvlin7nxjgrgwiajONYAO+ZeNEjmgXKmIGkakUPL68ZRKUpbvn2bZ/mnRwJEm4YAuREtAi+oGngglqYL4RqSIArDEFIdU5KW7SOSeHbf326sIa9qfSbPdJyEnQlnwo4T0RGIJuhc3dvmzKug4TBLSufSHFe93TLj+TiBI0D6Q/ZDxil4EkrIWkRGMpolj9u8ezy4SD5cxNNBrrCg==
+ bh=P67wZi9wRvsTNIiKgd4NqFNYGAuUHcR/ii4CMj9fkQk=;
+ b=lLqN+gs2XLVIMAqnZw5fDXVtLt4f3pLDiNdCoG53nIadtF49Yq4OH1sNHqDNFUnwTVBM2R+YWWpmH/poI7aOhd8kQ6uXRVvc8Ek/DILnugZuKSMI4iTeu5SdrLibwmVsTkjfyJKn37MEMmAnQV5+jrCwWSsI4AImoSrjAJduXkhzm/PnnASoYB6B2d+6Cbps74SxIgs8tjLnOkU0Bma8gMpxKR4dqvLirpah97HQNmQ56G+HFR3sJEzDn2RHPOKILXRvKN8RzNVaETmzrPSkFNrW+/hbJv8nr4lK8wPHbEKINKWlfLQYLT/d2PVpypfPMAbuGoMIU+qJce8TLPFuYA==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Mirela Simonovic <mirela.simonovic@aggios.com>,
@@ -80,14 +80,14 @@ CC: Mirela Simonovic <mirela.simonovic@aggios.com>,
 	<Volodymyr_Babchuk@epam.com>,
         Bertrand Marquis <bertrand.marquis@arm.com>,
         Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-Subject: [PATCH 06/19] xen/arm: Freeze domains on suspend and thaw them on
- resume
-Thread-Topic: [PATCH 06/19] xen/arm: Freeze domains on suspend and thaw them
- on resume
-Thread-Index: AQHY2jgk49iXxKVTXku3T5cqXu57kw==
+Subject: [PATCH 07/19] xen/arm: Disable/enable non-boot physical CPUs on
+ suspend/resume
+Thread-Topic: [PATCH 07/19] xen/arm: Disable/enable non-boot physical CPUs on
+ suspend/resume
+Thread-Index: AQHY2jglFRIa/47fQkyi/IjVCOcpsw==
 Date: Fri, 7 Oct 2022 10:32:48 +0000
 Message-ID: 
- <4cbdda3b5c6cce54724a505da14ce968010d0958.1665137247.git.mykyta_poturai@epam.com>
+ <74bf02f1c6c5280f2d79b9cd60515895e8ba3319.1665137247.git.mykyta_poturai@epam.com>
 References: <cover.1665137247.git.mykyta_poturai@epam.com>
 In-Reply-To: <cover.1665137247.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
@@ -96,45 +96,45 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3758:EE_|AS8PR03MB7159:EE_
-x-ms-office365-filtering-correlation-id: 2949a854-bf23-4b54-6bf3-08daa84f4778
+x-ms-office365-filtering-correlation-id: dc1d985a-8b31-47c0-deae-08daa84f47ac
 x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- Yo4+mauDxamzVgxHBr+xLAWQ+aqsN5BKGsPYjH43zOREW92cyQsA/uCCRrgdW436NLBLDYVWcKEZQ0mWv+QPkrQR1tdJQParLFMQKcuGvT+XZZMvueGmWkvsmn1yfoc0b5srw659XlcMWdhcEjIKe+zQ5KJ5wK4tKRINh3JjIi/pZfamzjEQvAiNF4ueMoGccaE7MisU3txgDsIopu+7id0DbF45lCVgDSMeEcJ5s6VAOPAsTJ+yqLiS07EG+UPT/rQGYmn65+Le5UrwRHVtHcp2uh4lbrBRUt3hs5vIEYvS+FJJ0qyhpA4w0iQjZptrPvC/ED5GCR5jzUKV17/n1UEmcFJFqWKl1InQBgcgCfZ/fSZnKhjMNYPNNv0jlpjbdMZMoaj3CBGBE48ZuPs7SXw1Bne3qiBTqYTv8bRxumGU3i/2Q2saziKC2BEgSrb94c13JPTvQ28TDQ6WE9FfDNZxyE3srtUjUR5H/6uBdMPbsGCn5zupDQXj0yY2tCEY8XPrk2w+yoTp+zU3O8bapUWs/zUUSHqiMjJqLgcNJ3G1zbhJTMXB3Ejd06x1brMDusbghvC0QqSr9IaW55EpqM76kWqPWlvwghWcvyhIv+ZQlPUqT+IJKbU48KmuOa4mw0AySySieQvYIg0TTVCscqNwCJ6H3nOAPnE5v+EVQ6AhroDJmEdWs4Hy8U/ZADeJQfZoKBQQYtDyVlRg3bi4LcFEQaXhYwhQSbgnycPVabi5pVKm5lTK45I/9AjMulAA
+ HLDbf3Sz9TBZJU3alLbtm3k8z+gy0Ix/JNcEAmzvHU/fbAASF+fz7Bzw4Bs0sI77K2wi9Aws0Rk0RDsa9wTtcJCP0nwUOBZdbyRHe0R72C1Nceee7S4EHuyRgXG0s/w3ci2UmNc9NyZSzY6mPWKT3GKFWV8cQp3OFHA52uptZIIG0vxwY6JgyTGxcoa25EyWkJM7zJtHemNXYo3MYG0+lXEeHxln8gEEHuSetIdx1lEJrCJuKDxkYUPMS3dLDdwviRNQZEqPxH5Xsme01IAqGZfhYhT+SDuqYXlBNXfUcyLdiCRrnAVeSxi6RP6mT1Ms09KWse0pPYC9k6MD/XalP/Y1IwhlE76PUtuKlQIE2qzxRJSAC8qbPG0Ig1CdkjbKI1genh5/iKmOHURjEo3SRTVQ8jhjYrjPrjalqxPayUyLzEEUSzBwpS4D7zWixe+ia34uDbcSpeynopC2f2WxLd/fpIEZuLScpT6HrmeTlLNQZCIJVJkJCMGPtOOm5y/haFAeBBSZgPyQvVUg1jGsrnBor2NY5f/PAoa0xEKeQdp+1jIonZSchu2Gn/l/Hmteea8x9iUi40KU6AQzkq/bnAtPLdOfWxnxyKvhOvW5ur6LUHpV/FbpD9nrBckx1LcVlD3szL2mgLCaMSEonAvRfvyMi/AYeQumcs+cGLuty78SnPYFxtTEgEMG+rHJCXZ+F1/JlcyQNam0ytDa0zTI7/0DH2JW3VB3IO2H0+etCLD6L4qxU8V/ndneK7A3+FlCOoRP8phgjBBPnKVw7EOdAw==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3758.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(39860400002)(136003)(366004)(396003)(376002)(451199015)(2616005)(186003)(83380400001)(316002)(6916009)(2906002)(54906003)(86362001)(15650500001)(5660300002)(4744005)(8936002)(66446008)(41300700001)(66946007)(64756008)(76116006)(66556008)(91956017)(66476007)(8676002)(4326008)(71200400001)(478600001)(6486002)(6512007)(55236004)(6506007)(26005)(38100700002)(38070700005)(122000001)(36756003);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3758.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(39860400002)(136003)(366004)(396003)(376002)(451199015)(2616005)(186003)(83380400001)(316002)(6916009)(2906002)(54906003)(86362001)(15650500001)(5660300002)(8936002)(66446008)(41300700001)(66946007)(64756008)(76116006)(66556008)(91956017)(66476007)(8676002)(4326008)(71200400001)(478600001)(6486002)(6512007)(55236004)(6506007)(26005)(38100700002)(38070700005)(122000001)(36756003);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?45GfHVC/PYY/mvjWRUBeoe1tOGqCFX5Eg/IM6POszdXHzXmDRiAbHMx+8N?=
- =?iso-8859-1?Q?UUULPaauVs6dOLFF1qYGCqi5bwgoAoRwCSR3qL1muiOthPWzr/r0cjJ6ax?=
- =?iso-8859-1?Q?pSWbPtFpakv8LIxB3ez8zWwAHXVehZVZSf5PSeDGbU4oqrDoMv9MYt7DdP?=
- =?iso-8859-1?Q?2Rr4+xQGJl1taN7OuXqfX8fU3pgxqzyrA0eNQGA30kEZahMhiH18WSdVgh?=
- =?iso-8859-1?Q?jFUnqeS1GPCvcSxNJJXX6MVq+XbaJ864I62x1vHwGmUVH6OaLCymi2eQDP?=
- =?iso-8859-1?Q?wZ+piQebZdPcaT6bLsWhg0rAwk10RE+rho2gI1XsAFTUof8DMAByCezSoL?=
- =?iso-8859-1?Q?iPt/5D5MWf4ge338KqYDTJsc2qSyzS6jHLWtElC0nWqtcZnBP11rLtu8RL?=
- =?iso-8859-1?Q?WhwGK+qYxcYeKIwTLXOMr9vv9iFc70RJIi9GP2CJVWpGF3NihLEgrFNsuj?=
- =?iso-8859-1?Q?Jzd7z7+lgdmu6cbF0Kmt8KYkXt4w2Mwim7ZUZtmsnCrDj2pzPAS5Vs9O3w?=
- =?iso-8859-1?Q?gXCuiyG1LtvCIQ4WCq+J+Xs/I4JJiqE4/Pbv6UvpUaJVtOW8ud5tktO0Et?=
- =?iso-8859-1?Q?Okr1PSIXjHSN51z9rbgjcFtqmB+PujGEhW3SmmTXmYF01hTson6f687cl4?=
- =?iso-8859-1?Q?+iczfNayWZ/P0rlc2u525DGvpgZLC5gfdd6ng560XDSkpHbhNxqJO0MH+e?=
- =?iso-8859-1?Q?d9LvFy+vk2CdP9L7ZkhptM/RAXLeT49php9CcLsGuHnFWQo7e+++PkcVqX?=
- =?iso-8859-1?Q?QoTvfY99h2U3n0wuBi4Dk4eiJD0/rkg4ZFE6MPSUzNw8zEElvj2RjwxHQj?=
- =?iso-8859-1?Q?S6+cRAmkUpFxgjjWqZmIxy5IujMXKePZGrSyYAXBkZ40viBCx3WkN08iay?=
- =?iso-8859-1?Q?vga4Vt9G0+GNnDtqd1kVSPnCnAl97G7c1Qulq2jFdtUDE9NRTTJ1DdsC1u?=
- =?iso-8859-1?Q?nR5OlDbeXxU/frdGAv2DPDkJ4poE0fwBYEd3SLiSeIPPWbNa57L1kVHv9a?=
- =?iso-8859-1?Q?Xa5ze1vdqXuPz5ceeg2MbOclzVw5m+s4JH1NrQBbWofYEuvexfw3wG9hRo?=
- =?iso-8859-1?Q?uq4d247bFN1fAuimHPSUbxeNeX2RXzU60GJe6lZNQScOUSnz3fVsMdNSwW?=
- =?iso-8859-1?Q?986opIVXi2WQDRvU013c+JBVcAXn1hy+9iqIATEgomLUQRPu902iuq4cc/?=
- =?iso-8859-1?Q?wlH5JNrXtO22cktfiQ+qAmfpPRmzLlUbL5HqFsdnaXZuwqvAV6byOhc7IW?=
- =?iso-8859-1?Q?7xW0pxb6KyGAFH4cig4kTF6pbJPh8MT7SJsHep0869d5YHWPJfpC2bi4qH?=
- =?iso-8859-1?Q?pVCjssPyox6F77qosBcoNrrJTvimxGP6DCXq/holNGRG6rYK7M5PwKoRwd?=
- =?iso-8859-1?Q?lZrgC1BV+sKqu2+jfA9Krmp4YQNsKn4FbGo6yZCt372AQcFz8AciqWK/ot?=
- =?iso-8859-1?Q?nrgW5Fu47YxssdCHR7tsBR10VNFuuVR6KCGq9OdsinQ+2PTXQLswCdk55j?=
- =?iso-8859-1?Q?dyrka1gTwgx/lQyDruFYcfV35a5r9QZp733b4OFk5TnH+u9S8uaZviQsEp?=
- =?iso-8859-1?Q?8IO2sGI/1VBGjYFaSQA1Lra/6zL/L8btqptpUMCAVzpLv4ftQM0Gzd7m67?=
- =?iso-8859-1?Q?JhvbwpSLH3AUqYEvB94YYHCcaaS372fVNiOkjgyx+D7oCBpE0w59V+NA?=
+ =?iso-8859-1?Q?ekAGhs7Tw09gAl7jXa2f0W5XssVNYbexeFfiP3BgOYim37KCE8HK2dSeU2?=
+ =?iso-8859-1?Q?CQ8R2LVJqVjIxICOk8tUyxGucCKLNhi6bzLUgoghjieRNdvLI9fZtRT+Pn?=
+ =?iso-8859-1?Q?6dUA/BebEH4/iPWACf8ED7e8Akce20RVcFYboUEwAUDdj0PA07QWaDMMCT?=
+ =?iso-8859-1?Q?ZQj4IwLVN9Rr+paclZTBNWmzFGF6SL3XfoQj52bhyTufwHtlbO/K0T+j9t?=
+ =?iso-8859-1?Q?ADQF5yV9x+O8TqV5H+LOl95O2NJG7+OUky0w1ciZHWdlb4MseOwd+010go?=
+ =?iso-8859-1?Q?ZEfw639kLtoZB5TLEWoztoQ/4vnG3d99adGRKBu6VQav798QU7uS5ZETRx?=
+ =?iso-8859-1?Q?+V5klR5EyHhql8ibFxUb8riddMT5lqXFIAaXA7BRxhtakrUOHItA8wIMUy?=
+ =?iso-8859-1?Q?AESGECBiEk8czgMLUOusnbsTL0LCiBqAjAnFpd8i1TrJr8SkWhvYjXrPDp?=
+ =?iso-8859-1?Q?gRqZRvidD9xuJidmQRbXOG9tIs3Ln9B8Ik5BQlV0/eVQkUuCX6egcnJCiU?=
+ =?iso-8859-1?Q?B1ShI22IeIP/uFlz08MkBJIDaV3sy/o+lC1mlDedNdYWlp6co69oUvEerP?=
+ =?iso-8859-1?Q?tBnwUXClg/0O7yemw6fQQ5Z0Bw6S6sfnxoUE8K3kT4rsFR51pke21z+tY3?=
+ =?iso-8859-1?Q?QFZRN8RxMe5Sdvp8cmxbjX6yc83ypgY7374xn3LkeGzxf+sYDgfiMbaSMA?=
+ =?iso-8859-1?Q?2TH0/iUkazEcaGrlXt9TlHLfGRtfHz/y8KUx/ottt14rUSTeTSx3AYnQch?=
+ =?iso-8859-1?Q?Fy7K357QDp2k2gb7dXZNdad9WIUcaFQm0l4TuTtCrEkHzVU+jYdEWtbqdQ?=
+ =?iso-8859-1?Q?ltbMcs0sPzyLUrXoGZXJ+/EoeJl4pZlqdQ+nlsjQqXfdDPaoBwAvzJML11?=
+ =?iso-8859-1?Q?iuHyYV52isOaEUPlQSUQLAnHNAnz8BhXdVctJV8R8xGXACObrb2g4reV4R?=
+ =?iso-8859-1?Q?mpgG29Hh7MS9PDtnWi0KoD/xp0W0XLMlm4D1wcrR53pPHnWiJduy08Am5B?=
+ =?iso-8859-1?Q?YBmatHKLQrzbTuzg/ChAP7BtuLejEv6iPafKiy1zONhbct6XMPtU7Rzd3N?=
+ =?iso-8859-1?Q?yw8oi8n03Hc5OT3Um6BxqIeNLtdX8I4ZJ8j37gbvaTH/doWIDBVvarbxub?=
+ =?iso-8859-1?Q?cd5OxO51oytLSjJbD2gxFpRjtSYsIG2RI/GzR/17nFityu3EZM89whn2bK?=
+ =?iso-8859-1?Q?xPmvGBwpYUHCFb0uTNjJHt3vibmhaL6IIHm3mKA7HjKodFNCj5l9VfZ5lH?=
+ =?iso-8859-1?Q?JPl0N4po22wEyxtD0h9HUv2dpf2eCkE37e+jM8yW9dejduIPvQlI17cpxJ?=
+ =?iso-8859-1?Q?z918oOfABiXrxPOLb2la1jg9PGHMxbiNje2Y3LA7UJ+n62TQwPivTmht6X?=
+ =?iso-8859-1?Q?fb9G0Q/B8vx++inxMKxHba/k7rW/X84aILF/Bttdec1TWFQFDCJ/vfcKrQ?=
+ =?iso-8859-1?Q?plA7Qu/moS0AXdbt7/nomo+4JEyVBDuUCwlCTIi6HqkbIz9A+GKaCFbdGS?=
+ =?iso-8859-1?Q?P8eQLlTDnY+fCQuh4VPSNsdcBYGc8npaJl71Pl+UTq576cgS9x3780jTnP?=
+ =?iso-8859-1?Q?o5vkEQn81uHpuvi9FvepmLEDubBPsdQo7WcvconwTk1PjbS/DBzcunnWkd?=
+ =?iso-8859-1?Q?tXP+W/OpSz1fqJrwREZib6VGYP18rePzkiUz6dYYOsGqKqJr+MdCyjmg?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -142,56 +142,83 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3758.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2949a854-bf23-4b54-6bf3-08daa84f4778
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Oct 2022 10:32:48.0991
+X-MS-Exchange-CrossTenant-Network-Message-Id: dc1d985a-8b31-47c0-deae-08daa84f47ac
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Oct 2022 10:32:48.3490
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Z94UDmqPX3jwR/Jr4Ki3HHWHbGzd7jAQPBoRiY60jCX33bweElqYZS/42MJcrAcrvGD80VnJUilbwRh8cmO0RQ==
+X-MS-Exchange-CrossTenant-userprincipalname: 2bUT5wOJC/iQGxH5dBNbrTFzw45901mogBX1DGXOeGA2gSXY94G1MoIJ6W8zMv1L7mCvR6sheboqEhIUMN1QRA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7159
-X-Proofpoint-GUID: UrE49jw6OF5XZapyap_6tXY19TgLRAad
-X-Proofpoint-ORIG-GUID: UrE49jw6OF5XZapyap_6tXY19TgLRAad
+X-Proofpoint-GUID: yyx5z2NBX53xCa659FGs13DAOFgEbfZS
+X-Proofpoint-ORIG-GUID: yyx5z2NBX53xCa659FGs13DAOFgEbfZS
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
  definitions=2022-10-06_05,2022-10-07_01,2022-06-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1015
- mlxscore=0 priorityscore=1501 adultscore=0 mlxlogscore=632 impostorscore=0
+ mlxscore=0 priorityscore=1501 adultscore=0 mlxlogscore=772 impostorscore=0
  lowpriorityscore=0 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2209130000
  definitions=main-2210070064
 
 From: Mirela Simonovic <mirela.simonovic@aggios.com>
 
-Freeze and thaw of domains is reused as implemented for x86. In
-addition, system_state variable is updated to represent the actual
-state of the system.
+Non-boot CPUs have to be disabled on suspend and enabled on resume
+(hotplug-based mechanism). Disabling non-boot CPUs will lead to PSCI
+CPU_OFF to be called by each non-boot CPU. Depending on the underlying
+platform capabilities, this may lead to the physical powering down of
+CPUs. Tested on Xilinx Zynq Ultrascale+ MPSoC (including power down of
+each non-boot CPU).
 
 Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
 Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
 ---
- xen/arch/arm/suspend.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ xen/arch/arm/suspend.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-index b09bf319d0..2b94816b63 100644
+index 2b94816b63..0784979e4f 100644
 --- a/xen/arch/arm/suspend.c
 +++ b/xen/arch/arm/suspend.c
-@@ -137,6 +137,14 @@ static long system_suspend(void *data)
+@@ -13,6 +13,7 @@
+  */
+=20
+ #include <xen/sched.h>
++#include <xen/cpu.h>
+ #include <asm/cpufeature.h>
+ #include <asm/event.h>
+ #include <asm/psci.h>
+@@ -135,17 +136,29 @@ void vcpu_resume(struct vcpu *v)
+ /* Xen suspend. Note: data is not used (suspend is the suspend to RAM) */
+ static long system_suspend(void *data)
  {
++    int status;
++
      BUG_ON(system_state !=3D SYS_STATE_active);
 =20
-+    system_state =3D SYS_STATE_suspend;
-+    freeze_domains();
+     system_state =3D SYS_STATE_suspend;
+     freeze_domains();
+=20
++    status =3D disable_nonboot_cpus();
++    if ( status )
++    {
++        system_state =3D SYS_STATE_resume;
++        goto resume_nonboot_cpus;
++    }
 +
-+    system_state =3D SYS_STATE_resume;
-+
-+    thaw_domains();
-+    system_state =3D SYS_STATE_active;
-+
-     return -ENOSYS;
+     system_state =3D SYS_STATE_resume;
+=20
++resume_nonboot_cpus:
++    enable_nonboot_cpus();
+     thaw_domains();
+     system_state =3D SYS_STATE_active;
++    dsb(sy);
+=20
+-    return -ENOSYS;
++    return status;
  }
 =20
+ int32_t domain_suspend(register_t epoint, register_t cid)
 --=20
 2.37.1
 
