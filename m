@@ -4,37 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51EBC433FE
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Oct 2022 15:10:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.418538.663365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF16C433FE
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Oct 2022 15:13:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.418557.663399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ohBTH-0007H6-LV; Sat, 08 Oct 2022 15:10:35 +0000
+	id 1ohBVR-0000ZO-MN; Sat, 08 Oct 2022 15:12:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 418538.663365; Sat, 08 Oct 2022 15:10:35 +0000
+Received: by outflank-mailman (output) from mailman id 418557.663399; Sat, 08 Oct 2022 15:12:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ohBTH-0007Gz-Ir; Sat, 08 Oct 2022 15:10:35 +0000
-Received: by outflank-mailman (input) for mailman id 418538;
- Sat, 08 Oct 2022 15:10:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0eQj=2J=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1ohBTG-0007Gm-7Q
- for xen-devel@lists.xenproject.org; Sat, 08 Oct 2022 15:10:34 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5a58d888-471b-11ed-9377-c1cf23e5d27e;
- Sat, 08 Oct 2022 17:10:32 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id a26so16859015ejc.4
- for <xen-devel@lists.xenproject.org>; Sat, 08 Oct 2022 08:10:32 -0700 (PDT)
-Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id
- l25-20020a50d6d9000000b0045723aa48ccsm3523119edj.93.2022.10.08.08.10.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Oct 2022 08:10:30 -0700 (PDT)
+	id 1ohBVR-0000ZH-Jc; Sat, 08 Oct 2022 15:12:49 +0000
+Received: by outflank-mailman (input) for mailman id 418557;
+ Sat, 08 Oct 2022 15:12:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=x/cu=2J=alien8.de=bp@srs-se1.protection.inumbo.net>)
+ id 1ohBVG-0000Yd-5T
+ for xen-devel@lists.xenproject.org; Sat, 08 Oct 2022 15:12:48 +0000
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a3910ff0-471b-11ed-964a-05401a9f4f97;
+ Sat, 08 Oct 2022 17:12:35 +0200 (CEST)
+Received: from nazgul.tnic (unknown [46.183.103.8])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 4DFE01EC05B0;
+ Sat,  8 Oct 2022 17:12:30 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,68 +43,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a58d888-471b-11ed-9377-c1cf23e5d27e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=C5DKsFFe8GPmeoM51frqAs/ZJNFCYSbjNvK+URttuB0=;
-        b=YZEi5wYvmKc822x5qZvwjXOKD/IDcmbU98kIh5rLAX9WDSnrbVNe4M6BVGos4rdcpj
-         Uz88wSpTNaflbdEqvvyY3wvFvZLBP7L9iQJQPlz9ZhRBwyNaR3vEIX/KwWCZRNTUHk/J
-         KEK0QKfrljjuBE7L7cYhY3GzMXAPWeNEM6mrE11Ktq3m4EXJ/pko9Qb+IGcd5jtdAn7/
-         GPnCNELGQx/QfoACdZp8fSuHX4mo2dU0mbXQyipCgOKpJA6YMoFb7YzTGSJW27zuLSTt
-         RPwfByzsmEH8Gc25nVf7ImFxZ0n9t/tHYBnIJJ68S/hzi82LtUIkImEEuNSWh+yxnoxp
-         VHDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=C5DKsFFe8GPmeoM51frqAs/ZJNFCYSbjNvK+URttuB0=;
-        b=hDVtQJOudaTRl/vct9L210hV8+1DluBQGU9cw3oxoGUi6ipixgTUiFDCfyu3xXQNTx
-         vfghVG0GhIj0Ny2X7O8e2dZs9zyfWJ2h5SlO7gJauwx0O9lqg9EBE8F8DCQHsF4TDhlg
-         DTpz98H0lMGLIPMzlgeb0P0D6LzbvzRkPObgd86XBqgtr+KgVu7YL5Z2U09FJ35Do/xg
-         2TchwB5XvaNK1e0GsX87yzUWP1A3cUBg2X9K26MnGTc6SFpMV+gJvYTV30Lk5IG8+esV
-         +iZ7urNAyJ9BqY122qeqfyewY3SMeDATXdphqqACImnsl5sP1MUrOhBTLZM/pPUwoVE6
-         VxsQ==
-X-Gm-Message-State: ACrzQf3pcnLlIOIJD3r9IG3uGnR6x9o7j1B6MlA38cilJ27PMwM6V6Rb
-	0kEqRnFcQUXq4sEz94WjyQhEGgyCAtg=
-X-Google-Smtp-Source: AMsMyM6JPxbo4+cgHinL2jtWQLwIksmTxOnGzE4YG9CLtfRaECFGgMBAaRcIrMcuCErVSdbK35q2Qw==
-X-Received: by 2002:a17:906:cc56:b0:78d:98c3:8714 with SMTP id mm22-20020a170906cc5600b0078d98c38714mr2194404ejb.445.1665241831517;
-        Sat, 08 Oct 2022 08:10:31 -0700 (PDT)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Xenia Ragiadakou <burzalodowa@gmail.com>
-Subject: [PATCH V2 0/2] Other misc fixes for Xen grant DMA-mapping layer
-Date: Sat,  8 Oct 2022 18:10:11 +0300
-Message-Id: <20221008151013.2537826-1-olekstysh@gmail.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: a3910ff0-471b-11ed-964a-05401a9f4f97
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+	t=1665241950;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+	bh=DYgRImUlP5sBAB0m+Fi/O5fIFHatVYNoMS9h40YOHco=;
+	b=NkOfR/aWMdEV1z9XGZ2/WEYAky35KX2YfStKR//x78sVUpXeyC+sGuu3T9Zh09vBWI1C/X
+	A9AOyivIJDLtZgMOzooIcg120y6SnGXYZoWlzlWjzrevFMtmpWkjC/S7u2OSXlig/PKlIe
+	DfUmPNUpd3yffSBvtxuHwT3ZtoOVU2E=
+Date: Sat, 8 Oct 2022 17:12:35 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Ross Philipson <ross.philipson@oracle.com>
+Cc: linux-kernel@vger.kernel.org, x86@kernel.org,
+	dpsmith@apertussolutions.com, tglx@linutronix.de, mingo@redhat.com,
+	hpa@zytor.com, luto@amacapital.net, dave.hansen@linux.intel.com,
+	kanth.ghatraju@oracle.com, trenchboot-devel@googlegroups.com,
+	Jan Kiszka <jan.kiszka@siemens.com>, jailhouse-dev@googlegroups.com,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 1/2] x86: Check return values from early_memremap calls
+Message-ID: <Y0GTUg1ACpKZYMHY@nazgul.tnic>
+References: <1650035401-22855-1-git-send-email-ross.philipson@oracle.com>
+ <1650035401-22855-2-git-send-email-ross.philipson@oracle.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <1650035401-22855-2-git-send-email-ross.philipson@oracle.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Adding Xen and Jailhouse people and MLs to Cc.
 
-Hello all.
+Folks, thread starts here:
 
-These are other several fixes, which were identified and sent separately,
-but now they are put together in completeness here.
+https://lore.kernel.org/r/1650035401-22855-1-git-send-email-ross.philipson@oracle.com
 
-Current series depends on the series which has been already pushed
-to xen/tip.git for-linus-6.1:
-https://lore.kernel.org/xen-devel/20221005174823.1800761-1-olekstysh@gmail.com/
+On Fri, Apr 15, 2022 at 11:10:00AM -0400, Ross Philipson wrote:
+> There are a number of places where early_memremap is called
+> but the return pointer is not checked for NULL. The call
+> can result in a NULL being returned so the checks must
+> be added.
+> 
+> Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
+> ---
+>  arch/x86/kernel/devicetree.c | 10 ++++++++++
+>  arch/x86/kernel/e820.c       |  5 +++++
+>  arch/x86/kernel/jailhouse.c  |  6 ++++++
+>  arch/x86/kernel/mpparse.c    | 23 +++++++++++++++++++++++
+>  arch/x86/kernel/setup.c      |  5 +++++
+>  arch/x86/xen/enlighten_hvm.c |  2 ++
+>  arch/x86/xen/mmu_pv.c        |  8 ++++++++
+>  arch/x86/xen/setup.c         |  2 ++
+>  8 files changed, 61 insertions(+)
 
-Oleksandr Tyshchenko (2):
-  xen/virtio: Handle cases when page offset > PAGE_SIZE properly
-  xen/virtio: Convert PAGE_SIZE/PAGE_SHIFT/PFN_UP to Xen counterparts
+Ok, a couple of notes:
 
- drivers/xen/grant-dma-ops.c | 27 +++++++++++++++------------
- 1 file changed, 15 insertions(+), 12 deletions(-)
+1. the pr_*("<prefix>:" ... )
+
+thing is done using pr_fmt() - grep the tree for examples.
+
+2. I think you should not panic() the machine but issue a the
+warning/error and let the machine die a painful death anyway. But Xen
+folks will know better what would be the optimal thing to do.
+
+Thx.
 
 -- 
-2.25.1
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
 
