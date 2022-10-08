@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92648C433F5
-	for <xen-devel@archiver.kernel.org>; Sat,  8 Oct 2022 13:56:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.418529.663355 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC4AC433F5
+	for <xen-devel@archiver.kernel.org>; Sat,  8 Oct 2022 15:10:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.418539.663373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ohAJN-0007HS-Dx; Sat, 08 Oct 2022 13:56:17 +0000
+	id 1ohBTI-0007OY-5y; Sat, 08 Oct 2022 15:10:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 418529.663355; Sat, 08 Oct 2022 13:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 418539.663373; Sat, 08 Oct 2022 15:10:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ohAJN-0007HL-9b; Sat, 08 Oct 2022 13:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 418529;
- Sat, 08 Oct 2022 13:56:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ohAJL-0007HB-Pv; Sat, 08 Oct 2022 13:56:15 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ohAJL-0001j9-O4; Sat, 08 Oct 2022 13:56:15 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ohAJL-0000he-7H; Sat, 08 Oct 2022 13:56:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1ohAJL-0003ir-6q; Sat, 08 Oct 2022 13:56:15 +0000
+	id 1ohBTI-0007NU-0n; Sat, 08 Oct 2022 15:10:36 +0000
+Received: by outflank-mailman (input) for mailman id 418539;
+ Sat, 08 Oct 2022 15:10:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0eQj=2J=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1ohBTG-0007Gm-Pb
+ for xen-devel@lists.xenproject.org; Sat, 08 Oct 2022 15:10:34 +0000
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [2a00:1450:4864:20::62a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5b10c4a0-471b-11ed-9377-c1cf23e5d27e;
+ Sat, 08 Oct 2022 17:10:33 +0200 (CEST)
+Received: by mail-ej1-x62a.google.com with SMTP id k2so16891942ejr.2
+ for <xen-devel@lists.xenproject.org>; Sat, 08 Oct 2022 08:10:33 -0700 (PDT)
+Received: from otyshchenko.router ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id
+ l25-20020a50d6d9000000b0045723aa48ccsm3523119edj.93.2022.10.08.08.10.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Oct 2022 08:10:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,80 +46,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=XMsdfX9fs+MRL/rJ/JGJ1lgZgHX6GB9zPXHxrGpd30I=; b=4m5FvKBuhzlMylZhUaGnsFDLxy
-	IQsAHXNu0/XwPmwUTBUP0+saqNjvACSGTzGal07ly8CKRieWHkczdbV6i0Da6iCbnqz1fQpkZQpAH
-	ZGTT8803kuF5zJVYFW0Vpj+5X0ABQZ1BFPJLKOnKvxkivJ2dkr6/7fGa9FUkW+mFTUAA=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-173472-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 5b10c4a0-471b-11ed-9377-c1cf23e5d27e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=20FlK2f2Ao6in3DL/pE8fjcn0IFPQLl6lYsp91zsW/g=;
+        b=ROTHMsmP/hzHS74G5W9dubaxDxyjkONMkP12fjLSs7nXD77oMmyr0l2NmnTjHv1Hwy
+         zks7PaJdMSnEWoAwqOi4UUoC/kVKHQBEn96iD61c9+n+1FyW4sj89a410hBePPTvINK8
+         UuWofOk3ZZLRM2tvGpQmPVrNfKp7G6/wRNk4HT9KH4xo0vtnzi+/rXdpzu+0xabMtWhO
+         hEx800aqTYrse+VY0x4iY7CgkcjXyxeaVDfNM2f184zWPNkzqCHSrll/+0v7GeQThF7D
+         SXMJJswpnKdExgww62wuwncf+ygGRYHuTAZ3Ac37jBQBsTaDaL7waMhuE2VrE+7Fah4G
+         P/rA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=20FlK2f2Ao6in3DL/pE8fjcn0IFPQLl6lYsp91zsW/g=;
+        b=4ed9YuPVAcEQy1STFwnmcnX5T78Oefi+Yc5UisjZ1T9+Fbhnt7m2KjvpyaL/fDHOcR
+         67IZGKovM64QE2VFEMzcQH+ascqWT28qdHrOIIdv1amNjxcc1DYrIsBIw49qpXOqYEF/
+         9PJD0UeCmN84Wr+GE3bgTDYLW69YXvxrHV3ZX0uQvkNJ4koHYywu4tPSqhV17Tgl6GAl
+         hKz3gaJ7Cf2XM5r87c8QR62iWiLskG640TqKz5lzBwFJPqN9JvHZ7enhu9IRSD2qAPvo
+         Y6JhAdQBSL1iV2wrfuCZGfGH8MZfx5XwiPp+tHy6mZXm+0Ov86PUOY4/2EbmyXucBoYl
+         U2eQ==
+X-Gm-Message-State: ACrzQf365iqegQsk+kcAstCCy3jVy7EXPPsy1mXGuN/v1svFs9JZxU4p
+	fAZuk3eyymZJnsuJU6ClhEFpL7TnXwg=
+X-Google-Smtp-Source: AMsMyM5XtGDmusETEHuN4wJntwNBpo8Mn3TJU8DM8u6nC3r7GTulKyyiTrXMGTKfS0fnjt2h4eGUBQ==
+X-Received: by 2002:a17:906:974f:b0:780:4a3c:d179 with SMTP id o15-20020a170906974f00b007804a3cd179mr8378820ejy.289.1665241832708;
+        Sat, 08 Oct 2022 08:10:32 -0700 (PDT)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Xenia Ragiadakou <burzalodowa@gmail.com>
+Subject: [PATCH V2 1/2] xen/virtio: Handle cases when page offset > PAGE_SIZE properly
+Date: Sat,  8 Oct 2022 18:10:12 +0300
+Message-Id: <20221008151013.2537826-2-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221008151013.2537826-1-olekstysh@gmail.com>
+References: <20221008151013.2537826-1-olekstysh@gmail.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 173472: tolerable FAIL - PUSHED
-X-Osstest-Failures:
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:guest-start/debianhvm.repeat:fail:heisenbug
-X-Osstest-Versions-This:
-    ovmf=de103f1981cfca90dd19296d4b20449a2b93dc26
-X-Osstest-Versions-That:
-    ovmf=4364d661685d4806b8fb66ff76eaece7ea6a4426
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 08 Oct 2022 13:56:15 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 173472 ovmf real [real]
-flight 173473 ovmf real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/173472/
-http://logs.test-lab.xenproject.org/osstest/logs/173473/
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Failures :-/ but no regressions.
+Passed to xen_grant_dma_map_page() offset in the page
+can be > PAGE_SIZE even if the guest uses the same page granularity
+as Xen (4KB).
 
-Tests which are failing intermittently (not blocking):
- test-amd64-amd64-xl-qemuu-ovmf-amd64 20 guest-start/debianhvm.repeat fail pass in 173473-retest
+Before current patch, if such case happened we ended up providing
+grants for the whole region in xen_grant_dma_map_page() which
+was really unnecessary. The more, we ended up not releasing all
+grants which represented that region in xen_grant_dma_unmap_page().
 
-version targeted for testing:
- ovmf                 de103f1981cfca90dd19296d4b20449a2b93dc26
-baseline version:
- ovmf                 4364d661685d4806b8fb66ff76eaece7ea6a4426
+Current patch updates the code to be able to deal with such cases.
 
-Last test of basis   173471  2022-10-08 08:41:54 Z    0 days
-Testing same since   173472  2022-10-08 11:13:08 Z    0 days    1 attempts
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+---
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Xenia Ragiadakou <burzalodowa@gmail.com>
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Foster Nong <foster.nong@intel.com>
+Changes V1 -> V2:
+   - s/gfn_offset/pfn_offset
+   - clarify gfn calculation when granting a page
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+Previous discussion is at:
+https://lore.kernel.org/lkml/20221007132736.2275574-1-olekstysh@gmail.com/
+---
+ drivers/xen/grant-dma-ops.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.c
+index c66f56d24013..1d018e3a68a0 100644
+--- a/drivers/xen/grant-dma-ops.c
++++ b/drivers/xen/grant-dma-ops.c
+@@ -168,7 +168,9 @@ static dma_addr_t xen_grant_dma_map_page(struct device *dev, struct page *page,
+ 					 unsigned long attrs)
+ {
+ 	struct xen_grant_dma_data *data;
+-	unsigned int i, n_pages = PFN_UP(offset + size);
++	unsigned long dma_offset = offset_in_page(offset),
++			pfn_offset = PFN_DOWN(offset);
++	unsigned int i, n_pages = PFN_UP(dma_offset + size);
+ 	grant_ref_t grant;
+ 	dma_addr_t dma_handle;
+ 
+@@ -187,10 +189,11 @@ static dma_addr_t xen_grant_dma_map_page(struct device *dev, struct page *page,
+ 
+ 	for (i = 0; i < n_pages; i++) {
+ 		gnttab_grant_foreign_access_ref(grant + i, data->backend_domid,
+-				xen_page_to_gfn(page) + i, dir == DMA_TO_DEVICE);
++				pfn_to_gfn(page_to_xen_pfn(page) + i + pfn_offset),
++				dir == DMA_TO_DEVICE);
+ 	}
+ 
+-	dma_handle = grant_to_dma(grant) + offset;
++	dma_handle = grant_to_dma(grant) + dma_offset;
+ 
+ 	return dma_handle;
+ }
+-- 
+2.25.1
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   4364d66168..de103f1981  de103f1981cfca90dd19296d4b20449a2b93dc26 -> xen-tested-master
 
