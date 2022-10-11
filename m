@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18EEAC433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Oct 2022 12:03:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.419673.664491 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A7BC433FE
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Oct 2022 12:05:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.419689.664528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiDyh-0008OZ-I3; Tue, 11 Oct 2022 12:03:19 +0000
+	id 1oiE0u-0001Di-TA; Tue, 11 Oct 2022 12:05:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 419673.664491; Tue, 11 Oct 2022 12:03:19 +0000
+Received: by outflank-mailman (output) from mailman id 419689.664528; Tue, 11 Oct 2022 12:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiDyh-0008OS-E8; Tue, 11 Oct 2022 12:03:19 +0000
-Received: by outflank-mailman (input) for mailman id 419673;
- Tue, 11 Oct 2022 12:03:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oiE0u-0001Bp-OR; Tue, 11 Oct 2022 12:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 419689;
+ Tue, 11 Oct 2022 12:05:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dF7p=2M=linaro.org=leo.yan@srs-se1.protection.inumbo.net>)
- id 1oiDyg-0008O3-Bo
- for xen-devel@lists.xenproject.org; Tue, 11 Oct 2022 12:03:18 +0000
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [2607:f8b0:4864:20::1030])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b0262672-495c-11ed-8fd0-01056ac49cbb;
- Tue, 11 Oct 2022 14:03:16 +0200 (CEST)
-Received: by mail-pj1-x1030.google.com with SMTP id 70so12277038pjo.4
- for <xen-devel@lists.xenproject.org>; Tue, 11 Oct 2022 05:03:16 -0700 (PDT)
-Received: from leoy-yangtze.lan (211-75-219-202.hinet-ip.hinet.net.
- [211.75.219.202]) by smtp.gmail.com with ESMTPSA id
- e14-20020a17090301ce00b001782f94f8ebsm8555135plh.3.2022.10.11.05.03.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Oct 2022 05:03:14 -0700 (PDT)
+ <SRS0=4MZe=2M=xenbits.xen.org=julieng@srs-se1.protection.inumbo.net>)
+ id 1oiE0s-0000jT-S8
+ for xen-devel@lists.xen.org; Tue, 11 Oct 2022 12:05:35 +0000
+Received: from mail.xenproject.org (mail.xenproject.org [104.130.215.37])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id feebe960-495c-11ed-91b4-6bf2151ebd3b;
+ Tue, 11 Oct 2022 14:05:31 +0200 (CEST)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julieng@xenbits.xen.org>)
+ id 1oiE0a-0000i9-BB; Tue, 11 Oct 2022 12:05:16 +0000
+Received: from julieng by xenbits.xenproject.org with local (Exim 4.92)
+ (envelope-from <julieng@xenbits.xen.org>)
+ id 1oiE0a-0001d2-A6; Tue, 11 Oct 2022 12:05:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,234 +45,264 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0262672-495c-11ed-8fd0-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fw7xUTA3OfRm+ktROCFDpggksMcvBm0LHXupBoTitsY=;
-        b=poMvKA3x6D9ff95kRZ8DZsl5ank2XOKrIHHVLKunbMpuGI1s+KrEVhkrlUBU/spP4Z
-         xvoTJ84DLxi9uB2Dc2oQagO6lbLh97G6wCheyipMYakBW8edpa3qpkltpC8V3zV1S+m+
-         0ekmvjIR38mHHzdQgLs6VROY7MVi9/ttnozqIjZa3E5sBB47cpv0i7KlVF428VPgdixg
-         lfTAmvjYZDuPwAkoeCWSRasBq7R/4LCvB9fSkuFGsTWDjNACy0FvAXNpsVqNHOlGVPsI
-         StDfPDnfZrsftcD8YDJKTgI36lxqMmZ303r0vZ3veLN4Fw4MAnKcYYtYNSvD1UGuMBK2
-         geVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Fw7xUTA3OfRm+ktROCFDpggksMcvBm0LHXupBoTitsY=;
-        b=YEtswKg2xM+pIGtT1EOTOk+WwwPx9w1jJXGhGf0vnJyav6+Mac3/xq3oauTjMqfp9+
-         wRTI4VNM7oxqT47XURZ4fCSfgVSGnlDh8rO1nV7Uz+W8mskUmuPTCu3qRlw4wbyvGZGB
-         0lUoSaKWfHU6xcqkvzDCP/zkIgHGbfqUIzguzIjr9eIfcZHJoO/NyY5BdNwJsPqWSMyX
-         yMVYjTRuh6DhAeVfrZBfdu03voBx9hBvPcw1SJCgWZ4ts9gCZ0LLTTwpvN9eIimqf5qU
-         E6wwxXy5RZiVunGaHIlpKDCBJjWO/kVXELADN+7BW5bZg9HGtJFliqJ0wnMceSpIGeVF
-         ELTA==
-X-Gm-Message-State: ACrzQf33f5XGb9YEh2n0+PFvdARcsN+2V74q+nzRaG0Mwnu7/+bkbFh1
-	l49Rmt65oBYDJSS5XoBUOSi28Q==
-X-Google-Smtp-Source: AMsMyM6GO05Kc0vW+atcj6gu+28B8erR9r00BWvogZ8fs6Dqi1qW34KoEfcqD3l80eANs4ShanDTvw==
-X-Received: by 2002:a17:902:d4d2:b0:178:491b:40d with SMTP id o18-20020a170902d4d200b00178491b040dmr24592958plg.79.1665489795167;
-        Tue, 11 Oct 2022 05:03:15 -0700 (PDT)
-Date: Tue, 11 Oct 2022 20:03:06 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Xen Develop <xen-devel@lists.xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Kasper Ornstein Mecklenburg <Kasper.OrnsteinMecklenburg@arm.com>,
-	jgross@suse.com, oleksandr_tyshchenko@epam.com,
-	boris.ostrovsky@oracle.com, wei.liu@kernel.org, paul@xen.org
-Subject: Re: Issue: Networking performance in Xen VM on Arm64
-Message-ID: <Y0VbQ3esM8gucmqQ@leoy-yangtze.lan>
-References: <Y0QMQuAUKKSgrAAV@leoy-yangtze.lan>
- <alpine.DEB.2.22.394.2210101621480.3690179@ubuntu-linux-20-04-desktop>
+X-Inumbo-ID: feebe960-495c-11ed-91b4-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
+	Content-Transfer-Encoding:Content-Type;
+	bh=dFQV4fOhLMkdX0k3VkiIWqiku+NkHYyvSTpf1rTiHUA=; b=3J84H67nyFcg13Y/Kjm+Kj8uB7
+	RD3056F0ZucJIY7O5Vz60ewi4VUsUM7yKI9XjzvqHtMp246XSGXevP7F3vqIXVSH8OooApTrFm6Cl
+	4mygkEIEKdeGMwYJW+aM9Qd60jddiVLYJ0ii3JQREVdlt4fta1Ib+7J4Fv2irzDsR6Q0=;
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+X-Mailer: MIME-tools 5.509 (Entity 5.509)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 411 v3 (CVE-2022-33748) - lock order
+ inversion in transitive grant copy handling
+Message-Id: <E1oiE0a-0001d2-A6@xenbits.xenproject.org>
+Date: Tue, 11 Oct 2022 12:05:16 +0000
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.22.394.2210101621480.3690179@ubuntu-linux-20-04-desktop>
+Content-Transfer-Encoding: 7bit
 
-Hi Stefano,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-On Mon, Oct 10, 2022 at 04:50:46PM -0700, Stefano Stabellini wrote:
-> +Xen/Linux maintainers
+            Xen Security Advisory CVE-2022-33748 / XSA-411
+                               version 3
 
-Thanks for reviewing.
+        lock order inversion in transitive grant copy handling
 
-[...]
+UPDATES IN VERSION 3
+====================
 
-> >   Throughput result:
-> > 
-> >     Profile     netperf (Mbits/sec)    ddsperf (Mbits/sec)
-> >     Xen-Dom0    939.41                 > 620
-> >     Xen-DomU    107.73                 4~12
-> > 
-> >   Latency result:
-> > 
-> >     Profile     ddsperf's max ping/pong latency (us)
-> >     Xen-Dom0    200 ~ 1400
-> >     Xen-DomU    > 60,000
-> > 
-> > ## Analysis
-> > 
-> > The critical thing for the performance is low level network driver if
-> > it uses synchronous or asynchronous mode for skb transferring.
-> > 
-> > When we transfer data from my x86 machine to Xen DomU, the data flow is:
-> > 
-> >   bridge -> xenif (Xen network backend driver)               => Dom0
-> > 	      `> xennet driver (Xen net forend driver)       => DomU
-> > 
-> > In this flow, Xen network backend driver (in Dom0) copies skb into the
-> > mediate buffer (gnttab_batch_copy()) and notify Xen VM by sending rx
-> > irq, the key point is the backend driver doesn't wait for Xen VM to
-> > process the skb and directly return to user space, therefore, Xen Dom0
-> > and DomU work in asynchronous mode in this case (Dom0 doesn't need to
-> > wait for DomU), the duration for handling a skb is 30+ us.
-> > 
-> > Conversely, if transmit data from Xen DomU, the flow is:
-> > 
-> >            DomU                    |               Dom0
-> >   ---------------------------------+------------------------------------
-> >   xennet driver receives skb       |
-> >     `> send tx interrupt to Dom0   |
-> >                                    |  xenif respond tx interrupt
-> > 	                           |  Copy skb into mediate buffer
-> >                                    |  Notify DomU (send tx irq)
-> >   xennet driver handle tx irq      |
-> >   free skb                         |
-> > 
-> > So we can see when DomU sends out packets, it needs to wait for Dom0 to
-> > process the packets, until Dom0 notifies DomU that packet has been
-> > processed the net forend driver in DomU releases skb.
-> > 
-> > This means it's a long way to process skbs: Xen DomU and Dom0 work
-> > in synchronous mode, the forend driver in DomU sends out skb and
-> > notifies Dom0, Dom0 handles skb and notifies back to DomU, finally DomU
-> > knows the skb has been processed and releases it.  The duration between
-> > sendind and releasing a skb is about 180+ us.
-> 
-> 180us is not great but above you wrote > 60,000 us. In what ways the two
-> measurements differ?
+Public release.
 
-108us is measured by using ftrace events 'net_dev_queue' and
-'kfree_skb'.
+ISSUE DESCRIPTION
+=================
 
-60,000us is the measured maximum latency via ddsperf ping & pong [1],
-the latency is not only caused by low level driver and hypervisor, it
-also contains the latency caused by the test program itself.
+As part of XSA-226 a missing cleanup call was inserted on an error
+handling path.  While doing so, locking requirements were not paid
+attention to.  As a result two cooperating guests granting each
+other transitive grants can cause locks to be acquired nested within
+one another, but in respectively opposite order.  With suitable
+timing between the involved grant copy operations this may result in
+the locking up of a CPU.
 
-AFAIK, ddsperf monitors traffic from userspace and throttle data
-transferring when it detects tx rate is low, I think this is one main
-reason for the huge latency (60ms+) from ddsperf.
+IMPACT
+======
 
-[1] https://cyclonedds.io/docs/cyclonedds/latest/getting_started.html#measuring-latency
+Malicious or buggy guest kernels may be able to mount a Denial of
+Service (DoS) attack affecting the entire system.
 
-> > ## Questions
-> > 
-> > Given Xen network driver has been merged in Linux kernel 2.6 (back in
-> > 2007), it's very unlikely I am the first person to observe this issue.
-> > 
-> > I think this is a common issue and not specific to Arm64 arch, the
-> > reason is the long latency is mainly caused by Xen networking driver
-> > and I did't see the Xen context switching on Arm64 is abnormal (I saw
-> > it takes ~10us for context switching between Xen domains).
->  
-> Context switching between domains shouldn't come into the picture. For a
-> latency measurement like that I would make sure to:
-> 
-> - use the null scheduler, sched=null
-> - use vwfi=native
-> 
-> This way, we can be sure both domains are running and there are no
-> context switches. It should lead to the best latency measurements. Also
-> this is the configuration we use by default at Xilinx.
+VULNERABLE SYSTEMS
+==================
 
-Okay, will try these two options at my side and share back the testing
-result.
+Xen versions 4.0 and newer are vulnerable.  Xen versions 3.4 and older
+are not vulnerable.
 
-> > Could anyone confirm if this is a known issue?
-> 
-> This is not something that was discussed recently as far as I know.
+Only guests with access to transitive grants can exploit the
+vulnerability.  In particular, this means that:
 
-It is a bit worried me if I am the first one to report this issue.
+ * ARM systems which have taken the XSA-268 fix are not vulnerable, as
+   Grant Table v2 was disabled for other security reasons.
 
-Either it's because this is a specific issue for Arm64 since Xen is
-much less deployed on Arm64 than x86 platforms; or I must miss something
-for causing the poor network performance.
+ * All systems with the XSA-226 fixes, and booted with
+   `gnttab=max-ver:1` or `gnttab=no-transitive` are not vulnerable.
 
-> > The second question is how to mitigate the long latency when send data
-> > from DomU.  A possible solution is the Xen network forend driver copies
-> > skb into mediate (bounce) buffer, just like what does in Xen net
-> > backend driver with gnttab_batch_copy(), in this way the forend driver
-> > doesn't need to wait for backend driver response and directly return
-> > back.
-> 
-> About this, I am not super familiar with drivers/net/xen-netfront.c but
-> I take you are referring to xennet_tx_buf_gc? Is that the function that
-> is causing xennet_start_xmit to wait?
+ * From Xen 4.16, the maximum grant table version can be controlled on a
+   per-domain basis.  For the xl toolstack, the vulnerability does not
+   manifest if either:
 
-No.  We can take the whole flow in xen-netfront.c as:
+   1) Every guest has `max_grant_version=1` in their configuration file,
+      or
 
-  xennet_start_xmit()
-             ----------> notify Xen Dom0 to process skb
-             <---------  Dom0 copies skb and notify back to DomU
-  xennet_tx_buf_gc()
-  softirq/NET_TX : __kfree_skb()
+   2) The global xl.conf has `max_grant_version=1`, and no guests have
+      the default overridden by selecting `max_grant_version=2`.
 
-> I didn't think that waiting for the backend is actually required. I
-> mean, in theory xennet_start_xmit could return without calling
-> xennet_tx_buf_gc, it is just an optimization. But I am not sure about
-> this.
+Only multiple cooperating guests can exploit the vulnerability.
 
-The function xennet_start_xmit() will not wait and directly return
-back, but if we review the whole flow we can see the skb is freed until
-the softirq NET_TX.  In this whole flow, it needs DomU and Dom0 to work
-together (includes two context switches) to process skb.
+MITIGATION
+==========
 
-Here I mean the optimization is to allow Dom0 and DomU to work in
-parallel.  It could be something like blow, the key point is DomU
-doesn't need to wait for Dom0's notification.
+Disallowing the use of transitive grants either via the
+`gnttab=no-transitive` Xen command line option, or by disabling grant
+interface version 2 altogether via the `gnttab=max-ver:1` Xen command
+line option or the xl controls as mentioned above will avoid the
+vulnerability.
 
-       DomU                     |             Dom0
-  ------------------------------+-------------------------------
-  xennet_start_xmit()           |
-  copy skb in grant page        |
-  notify Xen Dom0               |
-                                |  fetch skb from grant page
-  xennet_tx_buf_gc()            |  deliver skb to bridge
-    kfree_skb()                 |
+CREDITS
+=======
 
-> > But here I am not clear for the mechanism for Xen grant table,
-> > especially if the Xen grant table is only writtable from Dom0, then it
-> > would be hard for us to optimize the forend driver in DomU by directly
-> > copying skb into the grant table.  Any thoughts for this?
-> 
-> The grant table is a mechanism for the frontend to "grant" access to a
-> specific page to the backend. It is used for dynamic memory sharing
-> between frontend and backend:
-> 
-> - frontend grants a page
-> - frontend copies grant reference to shared ring
-> - backend receives request and map granted page
-> - backend process request
-> - backend complete request and unmap granted page, send notification
-> - frontend un-grant the page
-> 
-> This is the regular process. In addition, for performance reason, it is
-> also possible to request Xen to copy a grant to the backend. This is
-> less common, but it is used by PV network, specifically by
-> gnttab_batch_copy. It is an alternative to mapping which is expected to
-> be faster for networking.
+This issue was discovered by Jan Beulich of SUSE.
 
-Thanks a lot for the shared info.
+RESOLUTION
+==========
 
-I saw both net frontend and backend drivers use gnttab_batch_copy(); I
-need a bit more time to understand ring and grant table and how these
-two parts co-work together.
+Applying the appropriate attached patch resolves this issue.
 
-Thanks,
-Leo
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
+
+xsa411.patch           xen-unstable - Xen 4.15.x
+xsa411-4.14.patch      Xen 4.14.x - 4.13.x
+
+$ sha256sum xsa411*
+0802e2e4e9d03c82429a710bbb783cee2fded52d29b1d969b97c680d30c3ac57  xsa411.patch
+8473f2ee34562298c5174f0a5b3c64c561a945333aab675845093ad23250d1cf  xsa411-4.14.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches described above (or others which are
+substantially similar) is permitted during the embargo, even on
+public-facing systems with untrusted guest users and administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+HOWEVER, deployment of the mitigations is NOT permitted (except where
+all the affected systems and VMs are administered and used only by
+organisations which are members of the Xen Project Security Issues
+Predisclosure List).  Specifically, deployment on public cloud systems
+is NOT permitted.
+
+This is because it is a guest visible change which will draw attention
+to the issue.
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmNFTAAMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZPsQH/1JCqscbx49QygGVEnq43C97HQpcoZcUNJGwGjBJ
+Li0SXejxd3iWsYsFlMAgmacHIjevEGv318JJLSM21hBULGe85cc6QatpWS0VWrBc
+tQVbDIgqNRv42gJCtf1dLF0TnlTZ6p3wiqfsxEYBn1zlEhe2ZEMpY8an4707O32d
+nQ90JFh44QJXx6HMZD3pEw2g1+4pMDu9yDUp/Yc3YmxYnXmPW6KE7iMmGkLLGigI
+GfiTI4FA/BDVIZkjPErwG7pyXmp2sdtVkv5o/cg7YTOrLzeBmegdyUvzuXkizJ2F
+PQnc1rgS/vXPkC62cy6fmLkeAf0dQhq6KBuxW3N8s2fXRXk=
+=/bRo
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa411.patch"
+Content-Disposition: attachment; filename="xsa411.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiBnbnR0YWI6IGNvcnJlY3QgbG9ja2luZyBvbiB0cmFuc2l0aXZlIGdyYW50
+IGNvcHkgZXJyb3IgcGF0aAoKV2hpbGUgdGhlIGNvbW1lbnQgbmV4dCB0byB0
+aGUgbG9jayBkcm9wcGluZyBpbiBwcmVwYXJhdGlvbiBvZgpyZWN1cnNpdmVs
+eSBjYWxsaW5nIGFjcXVpcmVfZ3JhbnRfZm9yX2NvcHkoKSBtaXN0YWtlbmx5
+IHRhbGtzIGFib3V0IHRoZQpyZCA9PSB0ZCBjYXNlIChleGNsdWRlZCBhIGZl
+dyBsaW5lcyBmdXJ0aGVyIHVwKSwgdGhlIHNhbWUgY29uY2VybnMgYXBwbHkK
+dG8gdGhlIGNhbGxpbmcgb2YgcmVsZWFzZV9ncmFudF9mb3JfY29weSgpIG9u
+IGEgc3Vic2VxdWVudCBlcnJvciBwYXRoLgoKVGhpcyBpcyBDVkUtMjAyMi0z
+Mzc0OCAvIFhTQS00MTEuCgpGaXhlczogYWQ0OGZiOTYzZGJmICgiZ250dGFi
+OiBmaXggdHJhbnNpdGl2ZSBncmFudCBoYW5kbGluZyIpClNpZ25lZC1vZmYt
+Ynk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCnYyOiBF
+eHRlbmQgY29kZSBjb21tZW50LgoKLS0tIGEveGVuL2NvbW1vbi9ncmFudF90
+YWJsZS5jCisrKyBiL3hlbi9jb21tb24vZ3JhbnRfdGFibGUuYwpAQCAtMjYy
+Miw5ICsyNjIyLDggQEAgYWNxdWlyZV9ncmFudF9mb3JfY29weSgKICAgICAg
+ICAgICAgICAgICAgICAgIHRyYW5zX2RvbWlkKTsKIAogICAgICAgICAvKgot
+ICAgICAgICAgKiBhY3F1aXJlX2dyYW50X2Zvcl9jb3B5KCkgY291bGQgdGFr
+ZSB0aGUgbG9jayBvbiB0aGUKLSAgICAgICAgICogcmVtb3RlIHRhYmxlIChp
+ZiByZCA9PSB0ZCksIHNvIHdlIGhhdmUgdG8gZHJvcCB0aGUgbG9jawotICAg
+ICAgICAgKiBoZXJlIGFuZCByZWFjcXVpcmUuCisgICAgICAgICAqIGFjcXVp
+cmVfZ3JhbnRfZm9yX2NvcHkoKSB3aWxsIHRha2UgdGhlIGxvY2sgb24gdGhl
+IHJlbW90ZSB0YWJsZSwKKyAgICAgICAgICogc28gd2UgaGF2ZSB0byBkcm9w
+IHRoZSBsb2NrIGhlcmUgYW5kIHJlYWNxdWlyZS4KICAgICAgICAgICovCiAg
+ICAgICAgIGFjdGl2ZV9lbnRyeV9yZWxlYXNlKGFjdCk7CiAgICAgICAgIGdy
+YW50X3JlYWRfdW5sb2NrKHJndCk7CkBAIC0yNjYxLDExICsyNjYwLDI1IEBA
+IGFjcXVpcmVfZ3JhbnRfZm9yX2NvcHkoCiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGFjdC0+dHJhbnNfZ3JlZiAhPSB0cmFuc19ncmVmIHx8CiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICFhY3QtPmlzX3N1Yl9wYWdlKSkgKQog
+ICAgICAgICB7CisgICAgICAgICAgICAvKgorICAgICAgICAgICAgICogTGlr
+ZSBhYm92ZSBmb3IgYWNxdWlyZV9ncmFudF9mb3JfY29weSgpIHdlIG5lZWQg
+dG8gZHJvcCBhbmQgdGhlbgorICAgICAgICAgICAgICogcmUtYWNxdWlyZSB0
+aGUgbG9ja3MgaGVyZSB0byBwcmV2ZW50IGxvY2sgb3JkZXIgaW52ZXJzaW9u
+IGlzc3Vlcy4KKyAgICAgICAgICAgICAqIFVubGlrZSBmb3IgYWNxdWlyZV9n
+cmFudF9mb3JfY29weSgpIHdlIGRvbid0IG5lZWQgdG8gcmUtY2hlY2sKKyAg
+ICAgICAgICAgICAqIGFueXRoaW5nLCBhcyByZWxlYXNlX2dyYW50X2Zvcl9j
+b3B5KCkgZG9lc24ndCBkZXBlbmQgb24gdGhlIGdyYW50CisgICAgICAgICAg
+ICAgKiB0YWJsZSBlbnRyeTogSXQgb25seSB1cGRhdGVzIGludGVybmFsIHN0
+YXRlIGFuZCB0aGUgc3RhdHVzIGZsYWdzLgorICAgICAgICAgICAgICovCisg
+ICAgICAgICAgICBhY3RpdmVfZW50cnlfcmVsZWFzZShhY3QpOworICAgICAg
+ICAgICAgZ3JhbnRfcmVhZF91bmxvY2socmd0KTsKKwogICAgICAgICAgICAg
+cmVsZWFzZV9ncmFudF9mb3JfY29weSh0ZCwgdHJhbnNfZ3JlZiwgcmVhZG9u
+bHkpOwogICAgICAgICAgICAgcmN1X3VubG9ja19kb21haW4odGQpOworCisg
+ICAgICAgICAgICBncmFudF9yZWFkX2xvY2socmd0KTsKKyAgICAgICAgICAg
+IGFjdCA9IGFjdGl2ZV9lbnRyeV9hY3F1aXJlKHJndCwgZ3JlZik7CiAgICAg
+ICAgICAgICByZWR1Y2Vfc3RhdHVzX2Zvcl9waW4ocmQsIGFjdCwgc3RhdHVz
+LCByZWFkb25seSk7CiAgICAgICAgICAgICBhY3RpdmVfZW50cnlfcmVsZWFz
+ZShhY3QpOwogICAgICAgICAgICAgZ3JhbnRfcmVhZF91bmxvY2socmd0KTsK
+KwogICAgICAgICAgICAgcHV0X3BhZ2UoKnBhZ2UpOwogICAgICAgICAgICAg
+KnBhZ2UgPSBOVUxMOwogICAgICAgICAgICAgcmV0dXJuIEVSRVNUQVJUOwo=
+
+--=separator
+Content-Type: application/octet-stream; name="xsa411-4.14.patch"
+Content-Disposition: attachment; filename="xsa411-4.14.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiBnbnR0YWI6IGNvcnJlY3QgbG9ja2luZyBvbiB0cmFuc2l0aXZlIGdyYW50
+IGNvcHkgZXJyb3IgcGF0aAoKV2hpbGUgdGhlIGNvbW1lbnQgbmV4dCB0byB0
+aGUgbG9jayBkcm9wcGluZyBpbiBwcmVwYXJhdGlvbiBvZgpyZWN1cnNpdmVs
+eSBjYWxsaW5nIGFjcXVpcmVfZ3JhbnRfZm9yX2NvcHkoKSBtaXN0YWtlbmx5
+IHRhbGtzIGFib3V0IHRoZQpyZCA9PSB0ZCBjYXNlIChleGNsdWRlZCBhIGZl
+dyBsaW5lcyBmdXJ0aGVyIHVwKSwgdGhlIHNhbWUgY29uY2VybnMgYXBwbHkK
+dG8gdGhlIGNhbGxpbmcgb2YgcmVsZWFzZV9ncmFudF9mb3JfY29weSgpIG9u
+IGEgc3Vic2VxdWVudCBlcnJvciBwYXRoLgoKVGhpcyBpcyBDVkUtMjAyMi0z
+Mzc0OCAvIFhTQS00MTEuCgpGaXhlczogYWQ0OGZiOTYzZGJmICgiZ250dGFi
+OiBmaXggdHJhbnNpdGl2ZSBncmFudCBoYW5kbGluZyIpClNpZ25lZC1vZmYt
+Ynk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCi0tLSBhL3hl
+bi9jb21tb24vZ3JhbnRfdGFibGUuYworKysgYi94ZW4vY29tbW9uL2dyYW50
+X3RhYmxlLmMKQEAgLTI2MTcsOSArMjYxNyw4IEBAIGFjcXVpcmVfZ3JhbnRf
+Zm9yX2NvcHkoCiAgICAgICAgICAgICAgICAgICAgICB0cmFuc19kb21pZCk7
+CiAKICAgICAgICAgLyoKLSAgICAgICAgICogYWNxdWlyZV9ncmFudF9mb3Jf
+Y29weSgpIGNvdWxkIHRha2UgdGhlIGxvY2sgb24gdGhlCi0gICAgICAgICAq
+IHJlbW90ZSB0YWJsZSAoaWYgcmQgPT0gdGQpLCBzbyB3ZSBoYXZlIHRvIGRy
+b3AgdGhlIGxvY2sKLSAgICAgICAgICogaGVyZSBhbmQgcmVhY3F1aXJlLgor
+ICAgICAgICAgKiBhY3F1aXJlX2dyYW50X2Zvcl9jb3B5KCkgd2lsbCB0YWtl
+IHRoZSBsb2NrIG9uIHRoZSByZW1vdGUgdGFibGUsCisgICAgICAgICAqIHNv
+IHdlIGhhdmUgdG8gZHJvcCB0aGUgbG9jayBoZXJlIGFuZCByZWFjcXVpcmUu
+CiAgICAgICAgICAqLwogICAgICAgICBhY3RpdmVfZW50cnlfcmVsZWFzZShh
+Y3QpOwogICAgICAgICBncmFudF9yZWFkX3VubG9jayhyZ3QpOwpAQCAtMjY1
+NiwxMSArMjY1NSwyNSBAQCBhY3F1aXJlX2dyYW50X2Zvcl9jb3B5KAogICAg
+ICAgICAgICAgICAgICAgICAgICAgICBhY3QtPnRyYW5zX2dyZWYgIT0gdHJh
+bnNfZ3JlZiB8fAogICAgICAgICAgICAgICAgICAgICAgICAgICAhYWN0LT5p
+c19zdWJfcGFnZSkpICkKICAgICAgICAgeworICAgICAgICAgICAgLyoKKyAg
+ICAgICAgICAgICAqIExpa2UgYWJvdmUgZm9yIGFjcXVpcmVfZ3JhbnRfZm9y
+X2NvcHkoKSB3ZSBuZWVkIHRvIGRyb3AgYW5kIHRoZW4KKyAgICAgICAgICAg
+ICAqIHJlLWFjcXVpcmUgdGhlIGxvY2tzIGhlcmUgdG8gcHJldmVudCBsb2Nr
+IG9yZGVyIGludmVyc2lvbiBpc3N1ZXMuCisgICAgICAgICAgICAgKiBVbmxp
+a2UgZm9yIGFjcXVpcmVfZ3JhbnRfZm9yX2NvcHkoKSB3ZSBkb24ndCBuZWVk
+IHRvIHJlLWNoZWNrCisgICAgICAgICAgICAgKiBhbnl0aGluZywgYXMgcmVs
+ZWFzZV9ncmFudF9mb3JfY29weSgpIGRvZXNuJ3QgZGVwZW5kIG9uIHRoZSBn
+cmFudAorICAgICAgICAgICAgICogdGFibGUgZW50cnk6IEl0IG9ubHkgdXBk
+YXRlcyBpbnRlcm5hbCBzdGF0ZSBhbmQgdGhlIHN0YXR1cyBmbGFncy4KKyAg
+ICAgICAgICAgICAqLworICAgICAgICAgICAgYWN0aXZlX2VudHJ5X3JlbGVh
+c2UoYWN0KTsKKyAgICAgICAgICAgIGdyYW50X3JlYWRfdW5sb2NrKHJndCk7
+CisKICAgICAgICAgICAgIHJlbGVhc2VfZ3JhbnRfZm9yX2NvcHkodGQsIHRy
+YW5zX2dyZWYsIHJlYWRvbmx5KTsKLSAgICAgICAgICAgIGZpeHVwX3N0YXR1
+c19mb3JfY29weV9waW4ocmQsIGFjdCwgc3RhdHVzKTsKICAgICAgICAgICAg
+IHJjdV91bmxvY2tfZG9tYWluKHRkKTsKKworICAgICAgICAgICAgZ3JhbnRf
+cmVhZF9sb2NrKHJndCk7CisgICAgICAgICAgICBhY3QgPSBhY3RpdmVfZW50
+cnlfYWNxdWlyZShyZ3QsIGdyZWYpOworICAgICAgICAgICAgZml4dXBfc3Rh
+dHVzX2Zvcl9jb3B5X3BpbihyZCwgYWN0LCBzdGF0dXMpOwogICAgICAgICAg
+ICAgYWN0aXZlX2VudHJ5X3JlbGVhc2UoYWN0KTsKICAgICAgICAgICAgIGdy
+YW50X3JlYWRfdW5sb2NrKHJndCk7CisKICAgICAgICAgICAgIHB1dF9wYWdl
+KCpwYWdlKTsKICAgICAgICAgICAgICpwYWdlID0gTlVMTDsKICAgICAgICAg
+ICAgIHJldHVybiBFUkVTVEFSVDsK
+
+--=separator--
 
