@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB04C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Oct 2022 16:16:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.420426.665251 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC96DC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Oct 2022 16:22:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.420433.665262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiHvB-00047A-N1; Tue, 11 Oct 2022 16:15:57 +0000
+	id 1oiI1U-0005eo-BY; Tue, 11 Oct 2022 16:22:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 420426.665251; Tue, 11 Oct 2022 16:15:57 +0000
+Received: by outflank-mailman (output) from mailman id 420433.665262; Tue, 11 Oct 2022 16:22:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiHvB-000473-K2; Tue, 11 Oct 2022 16:15:57 +0000
-Received: by outflank-mailman (input) for mailman id 420426;
- Tue, 11 Oct 2022 16:15:56 +0000
+	id 1oiI1U-0005eh-8m; Tue, 11 Oct 2022 16:22:28 +0000
+Received: by outflank-mailman (input) for mailman id 420433;
+ Tue, 11 Oct 2022 16:22:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qHIK=2M=citrix.com=prvs=2762267ab=roger.pau@srs-se1.protection.inumbo.net>)
- id 1oiHlL-0000OR-Uf
- for xen-devel@lists.xenproject.org; Tue, 11 Oct 2022 16:05:48 +0000
+ id 1oiI1S-0005eb-BD
+ for xen-devel@lists.xenproject.org; Tue, 11 Oct 2022 16:22:26 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8f27c28c-497e-11ed-91b4-6bf2151ebd3b;
- Tue, 11 Oct 2022 18:05:46 +0200 (CEST)
-Received: from mail-mw2nam12lp2048.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.48])
+ id e2dde4e1-4980-11ed-91b4-6bf2151ebd3b;
+ Tue, 11 Oct 2022 18:22:24 +0200 (CEST)
+Received: from mail-bn8nam04lp2041.outbound.protection.outlook.com (HELO
+ NAM04-BN8-obe.outbound.protection.outlook.com) ([104.47.74.41])
  by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 11 Oct 2022 12:04:08 -0400
+ 11 Oct 2022 12:22:21 -0400
 Received: from SJ0PR03MB6360.namprd03.prod.outlook.com (2603:10b6:a03:395::11)
- by SA2PR03MB5769.namprd03.prod.outlook.com (2603:10b6:806:11b::19)
+ by PH0PR03MB6723.namprd03.prod.outlook.com (2603:10b6:510:116::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.21; Tue, 11 Oct
- 2022 16:04:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.18; Tue, 11 Oct
+ 2022 16:22:16 +0000
 Received: from SJ0PR03MB6360.namprd03.prod.outlook.com
  ([fe80::861e:b46c:1acc:c576]) by SJ0PR03MB6360.namprd03.prod.outlook.com
  ([fe80::861e:b46c:1acc:c576%6]) with mapi id 15.20.5709.015; Tue, 11 Oct 2022
- 16:04:06 +0000
+ 16:22:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,400 +51,469 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f27c28c-497e-11ed-91b4-6bf2151ebd3b
+X-Inumbo-ID: e2dde4e1-4980-11ed-91b4-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1665504346;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=lgz/WGO6rZZcxY5NBE3oZRmF8PNamyCzYRjCRBsXCds=;
-  b=OuAF7PuJwEKfiJsHtCwhHS6ivkdEtHIpW2z1t5ssQimhVsXIjcpz6SJV
-   0uHGDep3uIG++r3i8tJLlfnID9vUsOGLSl2tQj0ih7xI4U8jzofX9aXyA
-   k846lJy0sbATagHDPLIfEu6+7HUAobd4rrUYezOsnJHS28h0BEWmiopkS
-   g=;
-X-IronPort-RemoteIP: 104.47.66.48
-X-IronPort-MID: 82907556
+  d=citrix.com; s=securemail; t=1665505344;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=w3ykRHEsqkgARQeFChrLO2Xs20bHdqLTH2B+EJCqL2g=;
+  b=XyaudOKAckWYcNDmcQejdmQs6KrdjZXpR2njRZvKybJYdiPRsPlVFAjJ
+   /Rd6DdAqh/9fpRRBJMW1yqlfMZ6GqekJfW6HC1MgXsmQw8UrcnrBNbcJF
+   Cr3dH5Hp6xixj79jD5dWJjaceU2l1ZbIM5vI5Qo1C+u9pSBslwMAIfx3Y
+   E=;
+X-IronPort-RemoteIP: 104.47.74.41
+X-IronPort-MID: 82909578
 X-IronPort-Reputation: None
 X-IronPort-Listener: OutboundMail
 X-IronPort-SenderGroup: RELAY_O365
 X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:ktAw06n/DiHhRdkyp22qL9Lo5gy3J0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xIfWDjSPvePNmGkKI10PYXg8hsB65CBmtQxTlFsrHwxHyMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6UqicUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS9XuDgNyo4GlC5wRnPKgR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfUGoJ3
- qYGdWAxXjfcgMaM+Y6bTPhVv5F2RCXrFNt3VnBI6xj8VKxjZK+ZBqLA6JlfwSs6gd1IEbDGf
- c0FZDFzbRPGJRpSJlMQD5F4l+Ct7pX9W2QA9BTJ+uxpvS6PnGSd05C0WDbRUsaNSshP2F6Ru
- 0rN/njjAwFcP9uaodaA2iL217eQwH6lMG4UPJGDzaZuhG+D/Tw0Ex9RD1a38PK6hmfrDrqzL
- GRRoELCt5Ma5EGtC9XwQRC8iHqFpQIHHcpdFfUg7wOAwbaS5ByWbkAkQzhbeZoZvck5bTUw0
- xmCmNaBLT5lvaCRSHmd3qyJtj70Mi8QRUcdYQcUQA1D5MPsyLzflTrKR9dnVauq1Nv8HGiqx
- yjQ9HRuwbIOkcQMyqO3u0jdhC6hrYTISQhz4RjLWmWi7UVyY4vNi5GU1GU3JM1odO6xJmRtd
- lBdypb2ADwmZX1VqBGwfQ==
-IronPort-HdrOrdr: A9a23:0R1vB6iDzAKgUfEjIkw6gO1V83BQX0F13DAbv31ZSRFFG/FwyP
- rCoB1L73XJYWgqM03I+eruBEBPewK/yXcT2/hqAV7CZnichILMFu1fBOTZslnd8kHFltK1kJ
- 0QCpSWa+eAcmSS8/yKhzVQeuxIqLfnzEnrv5an854Ed3AXV0gK1XYdNu/0KDwUeOEQbqBJaa
- Z0q/A30QaISDAyVICWF3MFV+/Mq5nik4/nWwcPA1oC5BOVhT2lxbbmG1zAty1uGw9n8PMHyy
- zoggb57qKsv7WSzQLd7Xba69BzlMH6wtVOKcSQgow+KynqiCyveIN9Mofy9QwdkaWK0hIHgd
- PMqxAvM4Ba7G7QRHi8pV/X1wzpwF8Vmgrf4G7dpUGmjd3yRTo8BcYEr5leaAHl500pu8w5+L
- 5X3kqC3qAnQS/orWDY3ZzlRhtqnk27rT4JiugIlUFSVoMYdft4sZEfxkVIC50NdRiKpbzPKN
- MeQv002cwmMG9zNxvizylSKZ2XLz4O9y69Mwc/Upf/6UkUoJh7p3FotvD30E1wtq7VcKM0l9
- gsAp4Y6o2mcfVmHJ6VfN1xJ/dfKla9NS4kY1jiVmjPJeUgB0/njaLRzfEc2NyKEaZ4v6fa3q
- 6xG29liQ==
+IronPort-Data: A9a23:n7CfxK2im0xOeqs2dvbD5ctwkn2cJEfYwER7XKvMYLTBsI5bpzMPy
+ WtKXDqPPq7YY2X0eYx/PoznoxxXvJ7Sm9I3TApvpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliefSAOKU5NfsYkhZXRVjRDoqlSVtkus4hp8AqdWiCkaGt
+ MiaT/f3YTdJ4BYpdDNJg06/gEk35q6r4GpB5gZWic1j5zcyqVFEVPrzGonpR5fIatE8NvK3Q
+ e/F0Ia48gvxl/v6Ior4+lpTWhRiro/6ZWBiuFIPM0SRqkEqShgJ+rQ6LJIhhXJ/0F1lqTzTJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXWV+ACQqflO1q8iCAn3aMqUZueJoBjBDr
+ sBfJWkIMxuujbm87p2kH7wEasQLdKEHPas5k1Q4kXTzK6ZjRprOBaLX+dVfwTE8wNhUGurTb
+ NYYbjwpawncZxpIOREcD5dWcOWA3yGjNWEH7g3J4/Zui4TQ5FUZPLzFKt3ad8bMXcxItk2Zu
+ njH7yLyBRRy2Nm3mWDUqiPx2b+ncSXTW40uCuOG6qZT3R6hynE+Kj0rSlykiKzs4qK5c5cFQ
+ 6AOwQIsp6Uv8E2gTvHmQga15nWDu3Y0S9dWVuE39gyJ4q7V+BqCQHgJSCZbb94rv9NwQiYlv
+ neWm/v5CDopt6eaIU9x7Z+RpDK2fCITfWkLYHdYSRNfu4W65oYukhjIU9BvVravicH4Ei3xx
+ DbMqzUig7IUjogA0KDTEU37vg9Ab6PhFmYdjjg7lEr8hu+lTOZJv7CV1GU=
+IronPort-HdrOrdr: A9a23:0ZdiNq077q3gx4yqLrbUkAqjBVdyeYIsimQD101hICG9Lfb0qy
+ n+pp4mPEHP4wr5OEtOpTlPAtjkfZr5z+8M3WBxB8baYOCCggeVxe5ZjbcKrweQeBEWs9Qtrp
+ uIEJIOdOEYb2IK6voSiTPQe7hA/DDEytHPuQ639QYRcegAUdAF0+4WMHf4LqUgLzM2f6bRWa
+ DskfZvln6FQzA6f867Dn4KU6zqoMDKrovvZVojCwQ84AeDoDu04PqieiLolys2Yndq+/MP4G
+ LFmwv26uGKtOy68AbV0yv2445NkNXs59NfDIini9QTKB/rlgG0Db4RLYGqjXQQmqWC+VwqmN
+ 7Dr1MJONly0WrYeiWPrR7ky2DboUQTwk6n7WXdrWrooMT/Sj5/IdFGn5hlfhzQ7FdllM1g0Y
+ pQtljp+qZ/PFflpmDQ9tLIXxZlmg6funw5i9MeiHRZTM83dKJRl4oC50lYea1wVh4S0LpXX9
+ WGMfusqsq/KTihHjHkVyhUsZeRt00Ib1u7qhNogL3U79BU9EoJvHfwivZv3Uvoz6hNOqWs19
+ 60TZiAq4s+MPP+TZgNcdvpEvHHflDlcFbrDF+4B2jBOeUuB0/twqSHkIndotvaMKA18A==
 X-IronPort-AV: E=Sophos;i="5.95,176,1661832000"; 
-   d="scan'208";a="82907556"
+   d="scan'208";a="82909578"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jl+buQGtwI2MurLh9L+YAB4FgDdkKLpt7Idxva4/91C5iP/jzbTBPzmWjCmVX1W9sZxdmDLfRLKS6GsXBZHlCSpuyjcmJw5BxoceYaiQP0+3bNcS6qrulUQO/W8BwhNJAqLKwu2Hev+PP8PQfNReTCQACwDM78W1c0lHEXM9sB4JDhs6mz5t7AZJPFqR4/dkBH2s6EvxI/lg4mhhYqVFKqGEpVMWRRZE5SefI3UHymKXcCn/mQY2Doc3u0d7FymF0o2sOptRVDvMtjdgfBbxS7GCLhU4zNlAztYcYQvhcGKDNmb27M0BsgrMh12fETSznSW86rns2PmdZVdE13OUUA==
+ b=fvCXc4Rc1wAV0srkO6xKEzsTN4wNzZktanKJ4ARks7hO0C3QaHkqQjT2ADe3OzxamnODEX66o9QWG8e1bgPSqKrkdxYu4KwwCh1zNFbHPWlkXzwMV2ko3QIIL3YHSTLv/VdUAuaZ+NJITOrJQQZeYUfIMO9sAbzUgcbu+kJQIhVhXkKCaAcHSNHjds7F6VyqdakTsmQAZ5v43LmgLZa/QG5Arvk6F7v5L0u2N/4ZbMNBz1htf683ITxTlJfBo1l9stgEjyn5ffVoGXdHFG16fH0RFVvzenFSBzua1LijdJPwjj/3WnqrXMHvfIDZpuh9hW8GBtkY147tj5j2iR51tQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bWS8sZqxQqNjj3kC11vQty6DTyEgLxdM96zPK2XwtGA=;
- b=T0OmC4qLDyG4mfYwW9S+IZbVgQNvaJNnh7Mb8fc1ED48DfaaSm4N2rfEAqVS5fXExecHuhXb3ChUHHtH78na1btNwho4neaUByzwz/lhNUaCfZbwDP6G3/dr9a3gx9ayWrmFefmMiTh6eivLahHxJEilBQxOxnWI3reqGvkKKfNxhPlBWtTHsSedvZf/ItvzwBYAHAdYdKdqSZywYWHOCmJpKYIk8ac98fLk8D/g0Q6alNg03GdVrUCboHKnQ+T3PJCTYfJQGlybl//aBJkKECA9iO7N/cXurHfY20qi5mK8J4dnO/WJq9hlEdu+fFiXQcG1ySKljsdBiUdW4KH/vA==
+ bh=MAqLP0bsxCz0hHWLie1B+857fbmoIn68UrorEMA+1SU=;
+ b=TvrFhTvGynMbUZFA8zAuGvS44NkGHiG0GuxFzMcCfyb/yFbASeMHX1OSaHkBL1bq2pJKJTkNNaJqtF8f8yTc02Em5/k3iS85VK/TZSlN3ZyAUWbWwC6qtWhDPU3zU2p9qC3heYCHfEYtxRxVrtK2u/W23c7VPPUKC2N10BSPH+dsI+1+U2t1owVcIz3iqz5xnyiYzkYAl7TvK6KRmLvcWQBOwJf/OGc6wmJfQfolfivUQjKHj7NblZbwXrQMuVQQE+gr0zvqckDHMfVobHlXemQP1r+NUzf1ezIOLHLesGnCo7E2UrcFdW8hDR8UP8VW3VTfyLHC7jpXi3wLx11XcQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bWS8sZqxQqNjj3kC11vQty6DTyEgLxdM96zPK2XwtGA=;
- b=m3+FNu4hSIpFjgw8tmc9XFFRN48UCUxnRmE8co5QEIlexOUscVmEpntloVI7wBSfG6ao3QH5iCUqxFkPiGGPx/fDajCTcUY00wzv8HowmOaLrs78sECT9PF6vN/S/kL5aqJ04qlKcXym3azEUJZduKJo1XthzPWgvFLT+JOWjqY=
+ bh=MAqLP0bsxCz0hHWLie1B+857fbmoIn68UrorEMA+1SU=;
+ b=QSlPevNY24xNn3ukVuHeET+OKfrVIZCXZCK6+tQu4+z/8sA2EXqkHWjaeXl3Bx/R/MbPTF5Gfk6u/JC5Rk0HPwBKI6Sku3ah88PHWSBS6N47kJO7xH1m2xWTFpZRRLqB3XDOuqUGcoQ4EYJmLuTsA2h00SqRtZuhRrGRdTUw1b8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Henry.Wang@arm.com,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH for-4.17 1/4] amd/virt_ssbd: set SSBD at vCPU context switch
-Date: Tue, 11 Oct 2022 18:02:42 +0200
-Message-Id: <20221011160245.56735-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20221011160245.56735-1-roger.pau@citrix.com>
-References: <20221011160245.56735-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO6P123CA0047.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:310::16) To SJ0PR03MB6360.namprd03.prod.outlook.com
+Date: Tue, 11 Oct 2022 18:22:11 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v3 1/5] x86/mwait-idle: add 'preferred-cstates' command
+ line option
+Message-ID: <Y0WYM/trMDVja61r@Air-de-Roger>
+References: <84200e9c-ee22-c240-826f-6c7006c0ef57@suse.com>
+ <0690742b-21c8-e5b6-e8ff-5d4709e0c3ee@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <0690742b-21c8-e5b6-e8ff-5d4709e0c3ee@suse.com>
+X-ClientProxiedBy: LNXP265CA0025.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:5c::13) To SJ0PR03MB6360.namprd03.prod.outlook.com
  (2603:10b6:a03:395::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|SA2PR03MB5769:EE_
-X-MS-Office365-Filtering-Correlation-Id: 690056f4-3f94-4648-57c9-08daaba2397b
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|PH0PR03MB6723:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea1bd29c-99ff-4495-eeb3-08daaba4c30b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	jb56XMXcBPBAObEpiAJjySbz14te1MQdqpf0IbZihkLqBA5Jo98RIr+vnfLaw0PkG8LU/gV9V2ftKkjzANRyuipsbdALytQSqjTx4zW0Sg32qmvRspB2KjH/qEieiKCT/I7grPXsk4LB8YtFSLuiqG3GQcUHZyHtDNdWWWmkitZyOZ9w/ZMEwvBY2A8u7wCjZ3ZTM/tLBFmXHN9BDE/qwvJUblLkG4VuiVgkztxOmMS7epJ9boE/1hMsIBDUy7y4CpeB9tP9vdCn9gstFY8sLRxsGzR25j1BzioyiIjEWs2hY6BEKJsoOkork6sDzQT47ObgqCqPw/Gje+3dYi+qiaz0xhXvtNmucDqdnFsJGi6TPFw8uuN21ICvK21Hz0GC7cmSbjZ1u1oKQoUTmA5atk4KJ6vVXTlek/AruXIwob6go23UUsON8I8LYgaxssRVibbHeppMogvHcKpHRUj54PaFE9CmIOm0gPYmQ62d+znptiTZvaZyYrm+I+kJHeo23Gn54eYcpNgISbtxwFBb0+WGc8btMFimerehO+U6uW8oNbGIp0EkGkX0PE8rFfvwW1fzU1tQWJOykwPtePec/XsdBt113wkTi8eWmWhGUJ1z9IKSPFyL0jSnNXflx/NNktV4ibjGzxdwXgtwxVESf+1ExBMm6YF0aqKhAgvYOXzQTL1G/+jK2cMBar+TjdcTxqgSriVqQ07mbOHbi/l8yg==
+	6KkcJ0Z2t7pxnCy5djYYt/60XLELoYwTc6V1nFIv0sblP7yePr4atFnY6iX5QUkdifoq/kWhgs1Wl2lVgqoO994ERWy2l3k68P9b9a4Smv2aQ+ZPKrtWDqWg7Md16g7AeBp9BSW39KHWpHjCh4UQVKsMaAf0oOqNyCI1TF7M+Y1eUB0xtH4IUFqHh6AvdpxX23Yzq3ZkWvezGn+16pkETt8x+Y1XBu4cPoE2Y43qEk8O/ASI27PS8nQ34uMjl2azQm2qLXoWh9MJZDdxKe2PKiWy69Z2vm5kFgNvJX7a4649IXqBgaUygSKCSeknLFZTT+4Bsd9KHd4UELc4KfP1j6mzrtvzNOtgNfTp5IwMen9/1R8Ue2eVv1xas1JOY527z257w+PR7lPxfqgAZolwFV8LcDGPtsMCHaSBvHS6GFOU26ZX9hJi6EKok8f1kcmrJ13UhGID3JAnUMXiojZyz/ZLm0cmtUbWUxihoyiUgnx3YLgUnYbJFvxJllCZHMQSTopEotf4czVmpkjFi9lvj3+05XVjNmQOFe7hstEoMKMNEm6XuMnkSkk3GO8kyo7LsGF//j5xkmhHrHd6M3HujwJmj9AGRAyLssK8tP4EqOqZT1E3r+qiVrCu/MqoxVqlyC3BMTZUEEX3rgR6d6AT0kVKeo9Izq+MFuzDB4hY18hi/XsXs9Ptfft4C6xLj/aP+BgyHMbjEekupcEOt5O4Ng==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(136003)(376002)(396003)(366004)(39860400002)(451199015)(36756003)(86362001)(83380400001)(5660300002)(38100700002)(82960400001)(2616005)(186003)(1076003)(6512007)(6506007)(6486002)(6666004)(26005)(478600001)(54906003)(6916009)(8676002)(66946007)(66556008)(66476007)(316002)(8936002)(41300700001)(2906002)(4326008);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(7916004)(346002)(376002)(366004)(396003)(39860400002)(136003)(451199015)(9686003)(6512007)(26005)(54906003)(316002)(6486002)(82960400001)(478600001)(38100700002)(85182001)(86362001)(66476007)(83380400001)(33716001)(186003)(6506007)(4326008)(6666004)(30864003)(6916009)(8676002)(66556008)(8936002)(5660300002)(66946007)(41300700001)(2906002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NExLOHNEc3ppdmJKMVdraGwySzVSQXN4RXI5cnNnRUpoeGVUM2pJZVo5Q0dx?=
- =?utf-8?B?SW5TbXZVVWV2TTlNQTBqQVpXWXRJTGpNVC9lQXBJbEVHTk5xUFV2bDJvUTFS?=
- =?utf-8?B?d3VLR0hTYUNlOGhLZ3E0RW52WHd3SmlJd1psUWtDL0hHVGREY3FxN3JlVS95?=
- =?utf-8?B?Ly85cWRSWTZvL0lxTEp0S1k4ODBVMDNaeThYRXU5NmxDNnhydE1SSkUyTThl?=
- =?utf-8?B?REdzckZxVk02Nm5ZTVBQSWU1UFRrWVBjcElaUXVGSlY3dWh0WmRqRUtZQU1Q?=
- =?utf-8?B?V0tVM1Zsa29KdVJDUGR6VHJ2Y3ltWGhSdHB4ZkZzdlBua2Y2VHlKWkQ0Q09O?=
- =?utf-8?B?OGlWakt6WDhyQXI1RFlFaGkzVm5ITnBnQjBzMHBXOCtsVUpkbTdzQWxzWkdv?=
- =?utf-8?B?Y01La3BQQzg0MlpoZkhFN08vUGhiSmJWajVkK2tyZDJMSHYwQ1ZndDUwVExt?=
- =?utf-8?B?ZmRML1Vxc3A2S1NLcXNWcFc4S2t1Z1JYVktvdzI3R2VUcmlJaEJsWGVObS9G?=
- =?utf-8?B?WlkrZC9jNUpidHVQQVl4cCs3cjdoQjNWZjRTc3dQZHVzNVdIRHExSDEzbWZp?=
- =?utf-8?B?WXFwVFNqaXZwcFlWVE9oYWI4aFlUR1hBMGNDUTRkbGtBcysxVFpNeGZCcnR5?=
- =?utf-8?B?L0YrVmdXajRNb2VSdDFXbG5zSENCMHdYSDIvR3QwRDJSdld3b2NYdGVMa2Y0?=
- =?utf-8?B?c2VLZ0U3UGJSNnZFTVlpbTJUT1lRMkdEa1E3OXYya0FWU0tDM3d0VmpSZHB0?=
- =?utf-8?B?aTlUNENHL2R6YXppQUNTMHhWTW1QNHF3UjQwNHJwS3ErK1pydE91VzU0ZU8y?=
- =?utf-8?B?N0F6ZmcrYVJ5Y3NTeGVBVFhpbTdUYWlGVCtOQWtNSGZZVXdSWVFCZUJKY3p5?=
- =?utf-8?B?cTlXaHUyWVRCMjY3OFhKYkM1Q3BBRC9Fc2hWRFVvVzhtZnZubzROUDBMSjNJ?=
- =?utf-8?B?UmRIc3pJclhuclU4a3VBbGU0blV4dHBSTlFLVi9KVFE4eWZvSXc4aVAyVW0w?=
- =?utf-8?B?VXhYUlIwcmxnaDREUE1VUzlENnEvdy9lM0tjdHIrcEt1YjFudDhOSUFVUlhx?=
- =?utf-8?B?VUZKbFBjbWxkdUtsNlVsdkxZbDZNYTB0aHdCUVpDeW15a2JvRmFHUlZ1UnVQ?=
- =?utf-8?B?MlliMkVpblR4TjhTeFVzL0Z0K29qVTMybWYzdFFmSCtBWWJnM0tpdmEzeEhr?=
- =?utf-8?B?U1VJekt2WmpMWVZtczl1ek0yVG1ocllQNVhPMk9QNkwzdzRBRDJrcEhBdldE?=
- =?utf-8?B?aERYMmNDYWJDYUVLTG90aG1pRHRRaFJLdnZzZXU5enF1ZFJneW9FYURMS21l?=
- =?utf-8?B?dWlwUVdRR2llOUhLaVo0Uk9CWWU0T1FhNlNUUnA5K0JvL3V5RFBwK1c5NTVL?=
- =?utf-8?B?b3NWejVSb3M3NDVxemg5eWxYcUlhVk5KcTQzVXJhZEh6aVUvaEEwUkdTekRo?=
- =?utf-8?B?M2VXM0RwaUdHOHpiK1p5WXlOQ3BNWWYwd2hPSUlPSW5iTndiVHBGdloySzAr?=
- =?utf-8?B?dnVKdHlzRzNQc1dEVDdSTGUvWkFUWldOOHZycDNGTHRCYTN3NTJyS2NRUTlU?=
- =?utf-8?B?M3lsL0pOVGJqR1NBelZtREM5UCtzaXVoMWlqOVBDbUU1UmN2ME5KWmZtRTRX?=
- =?utf-8?B?UUw4UE42RGU3ZUJxa3htK2kxNDdmMmpUMVdEeUtMODZLTEk2SFZLMHhGbzN3?=
- =?utf-8?B?NU04VWdmQ0hZSDFma2g0aXFRM2U4eHpRaTVJZ012SVZ1TGtlSmVhUUU5WXZk?=
- =?utf-8?B?NHBsbGNxSzF2OEhOUm9FUC95ZFRsUlJ0VDUzNXRvTHlwYnNIQ2E2cmN0blN3?=
- =?utf-8?B?RzZUMUdoNkNiSlpqZ2pyVk5RN1d5T29USHJLOCtaK1h0YzVpeHh2NWNBQUkz?=
- =?utf-8?B?V05zL3ltM3hIOEtwQ3p2dlVtUFgvZnV1bHVYVlRFck5BYjhOdzQ2YjlRT1I4?=
- =?utf-8?B?aUdjNndTa0UvNUhqUlB2bUM2UHJCSStZVExVTzI5SUxWUVFncWJXaDl4ZEk0?=
- =?utf-8?B?dnBYcjArRDhvYVdaOEpJdGZ4c293K0RhbCtKRmJKdnRIMUtjdjFiMzFYZW1m?=
- =?utf-8?B?T1lEUXUyMUE2cjJteityakpvM1h2ZmhVNVMxRWRrZEFDbTlUWXkzZDVtcnlK?=
- =?utf-8?Q?z7UVCKhPjHPr6EUrdxuSM/7bN?=
+	=?utf-8?B?Nys5empBcm9ZMFJrd2pPaDZ3MUUvTThIRUNXZjk3WVA0K1VZY1RsaVNxa1c0?=
+ =?utf-8?B?SE1HakkzZnI0cjZsb212QmcwNXRFenY1SnFoQS9TYlBZcEg3R3ZiVWVkZFNP?=
+ =?utf-8?B?eXEzV2xFSTBPV0FYUEV1Snp5SVRDRnpGTkxmREJlUVQ5K0hGcW1ubXp2K0lw?=
+ =?utf-8?B?Z0VQcWxPYnROQkRBS0ZhZncza3Z3Rk1KY1d1emo4Y0R4REowT25pSHFna0ZY?=
+ =?utf-8?B?QnpUSUhtTVRuRmhEcUdzOVAzYXIxbUg4QmFveHMyL2J6REVZcVJWa0hIZFVC?=
+ =?utf-8?B?NjV3R3d2R0x6aFZDbXV0eGE4TFJJMVRtRGhVd1JJTXBjZnpXeEpkTU11T2VR?=
+ =?utf-8?B?M255SDFld2hhT3hIUHJGM241K3FLbExSaktzN2RrRWVtdHR3bnpVNUNRbWIy?=
+ =?utf-8?B?aXRLZG90a2ZxbnMvZHVlWFVES0ZibUVjeHpZNnEwNGtNNmdTVTgwWERHTnl3?=
+ =?utf-8?B?MnVrRkt1eW84QllDdHpreXd3SUJTb3B6ZmdtOEQ4eXF2MDFOT1I0TkJNT0lE?=
+ =?utf-8?B?VWlKMkpCbFc0djBrYkQzd2tnZm9qaHdEMWN4ZUNkR1VDbGMrNnFIQjZqaFBF?=
+ =?utf-8?B?bWorWnNhbE1OU0NTYkhray9SdkFZanh1RCtLSmtjZjNrYkhhalg5REsrb3Np?=
+ =?utf-8?B?RGQ5L2QzVll3VU40dnE0ellZSmsva3BNSHlIa0VPQ2hkYTFVNFlpRVdReVor?=
+ =?utf-8?B?ZS8vSEdiMHRXeVFaVkhFMmhKTWl0RkhMZ0VsVGJMUG9qcHhRVVR3Z2I5d21r?=
+ =?utf-8?B?VVY1Mmw0elJPWk9sR3NjUVYwZG1ZMmVyaXVXTUl4UmhkbEwxS2s1QWhQa1dr?=
+ =?utf-8?B?dWd0YVlEa3YyU3ArWlFMVVNRd0txeDlacUtIaGtlNEZISzRsK0g0Q21zVjVU?=
+ =?utf-8?B?M2NTUUF4NzA4ZnZPVjhiQVlZbjRXaVZMUmxldWEwVHBpb2kxYjhVNlJYenZp?=
+ =?utf-8?B?NzVIdlpSamlzdGlnVWtTOXJUb3pKRUlIS2tobUhMNjhDaWpZWFpiYTZKMCtP?=
+ =?utf-8?B?Wm1SK0FkeGs2K0FDd25uSVJ6Y1hNN2M4QjdoNDBkeEhEZTd2VE5NV1dyOVZj?=
+ =?utf-8?B?UG1VZll1NnZhaGxsZ09kbW9aaGJ0cm5nekJ3NHZaNEpqYnFmaElFQ1pNR2tz?=
+ =?utf-8?B?SVlRaFFGV2FEcC9xOVdyZ2puWTNlZEJ6MHM4SGRRbmlpWWVaTGNuMjAvb2VX?=
+ =?utf-8?B?MkF5Y1ExVDBCeFQvbS9pbHVPTFZPaHFRMGFHMXY2U2ozRVlLTUJ0M2NTVmxv?=
+ =?utf-8?B?VWFnUTJZcXNvU3A1QnNqeHhrQTVwR1JvVGRLc3lsMmVtRmU3THZaNm5lbmNO?=
+ =?utf-8?B?RnRzci9hRmtybzlheVJwWHppLzdkSmNRZ2o4ZlhWV3ZsSzVQUzNLYy83OWZi?=
+ =?utf-8?B?cjdTV3Y1T3c3anVvOVhKb1dJblp4TFVpc2lxcWNtcGlrQzFzRTZNUkRJWUJt?=
+ =?utf-8?B?ajZqVFNITVR1RjdPRjR3K04wMXQ0ZUs3MkhjZ1pqR3NiZVhVYXlPMDdmZUln?=
+ =?utf-8?B?QTlXRFNzL3BTQStTRmJVcnRtNUJRYTlPc3FCT2tyWTF2cmlOREN6NXRWdE5l?=
+ =?utf-8?B?VmgvcEU2V1hBM3ZHUUZ4NTZ1b2xmbG1qK1ZyNEdTR3BQVVlIdFY5NFIwUEll?=
+ =?utf-8?B?MkRUTzZ5dEFuaDV4M3M1THRzY1N4bnZFWEF6TkNOakhOZC93ZDJ6L0JiRStR?=
+ =?utf-8?B?Y2dVVnVCTHJ4dUtpbnJoVkRWRDhTM3ptcDdYTkxmYXN6dThJc0paZ1h2anJh?=
+ =?utf-8?B?ZUYzcFU2TkY2a2JqQ3o2a05MLzU4bkFWYmJIL3RVZTBXME9nb0pGMmJUSEFi?=
+ =?utf-8?B?dmdBNUtZWWdPcmt4MnVvUmFQQjdRME00QVRqd295eHlGOWhBUXNyQWdJVkc0?=
+ =?utf-8?B?YU9ybzd4TXkrTzZYNWpZSW9US3ZxbVVTUDVOcmduanJhcDg5UXNPemdsNXFO?=
+ =?utf-8?B?eFd0UkJzTWxzWGdVTkduQ25jSStQbXVrc2RjMk1CWWF0bUZDMTdwWWI0QlI1?=
+ =?utf-8?B?Kzc0Rkw0Rk1MNGpSVEp6MW1GL0NzNFpyeEFRMXIyTnN6UTBHbDFvTlpUT1JY?=
+ =?utf-8?B?OVA2NFhva3Y2Q3QxQlZuM3ZMeEJVc2gzRzRyL3dFdnRsVmIxT2JRQzFyaVNV?=
+ =?utf-8?Q?Xx3Z7upPRxhBqmAkV0gP5OD1/?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 690056f4-3f94-4648-57c9-08daaba2397b
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea1bd29c-99ff-4495-eeb3-08daaba4c30b
 X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6360.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2022 16:04:06.7219
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2022 16:22:16.4327
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XY7WKD2QERFZtJupM8JqBZCtW/uoc6RgffHXNzEUPdN6I11KmsJsr6iNFBJ3Z48xufnZuYrX5MrvYXBxx/Y8jQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR03MB5769
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3NIbY2wZXjKlKFzlmdZFYFmFHSor9yvQZA4CO2vq2tthVW6AbYMAjTGAOOCDW8WKPaVOhgk5ZyWxeJP69sJOLw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6723
 
-The current logic for AMD SSBD context switches it on every
-vm{entry,exit} if the Xen and guest selections don't match.  This is
-expensive when not using SPEC_CTRL, and hence should be avoided as
-much as possible.
+On Thu, Aug 18, 2022 at 03:03:33PM +0200, Jan Beulich wrote:
+> From: Artem Bityutskiy <artem.bityutskiy@linux.intel.com>
+> 
+> On Sapphire Rapids Xeon (SPR) the C1 and C1E states are basically mutually
+> exclusive - only one of them can be enabled. By default, 'intel_idle' driver
+> enables C1 and disables C1E. However, some users prefer to use C1E instead of
+> C1, because it saves more energy.
+> 
+> This patch adds a new module parameter ('preferred_cstates') for enabling C1E
+> and disabling C1. Here is the idea behind it.
+> 
+> 1. This option has effect only for "mutually exclusive" C-states like C1 and
+>    C1E on SPR.
+> 2. It does not have any effect on independent C-states, which do not require
+>    other C-states to be disabled (most states on most platforms as of today).
+> 3. For mutually exclusive C-states, the 'intel_idle' driver always has a
+>    reasonable default, such as enabling C1 on SPR by default. On other
+>    platforms, the default may be different.
+> 4. Users can override the default using the 'preferred_cstates' parameter.
+> 5. The parameter accepts the preferred C-states bit-mask, similarly to the
+>    existing 'states_off' parameter.
+> 6. This parameter is not limited to C1/C1E, and leaves room for supporting
+>    other mutually exclusive C-states, if they come in the future.
+> 
+> Today 'intel_idle' can only be compiled-in, which means that on SPR, in order
+> to disable C1 and enable C1E, users should boot with the following kernel
+> argument: intel_idle.preferred_cstates=4
+> 
+> Signed-off-by: Artem Bityutskiy <artem.bityutskiy@linux.intel.com>
+> Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+> Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git da0e58c038e6
+> 
+> Enable C1E (if requested) not only on the BSP's socket / package. Alter
+> command line option to fit our model, and extend it to also accept
+> string form arguments.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> v2: Also accept string form arguments for command line option. Restore
+>     C1E-control related enum from Linux, despite our somewhat different
+>     use (and bigger code churn).
+> 
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -1912,6 +1912,12 @@ paging controls access to usermode addre
+>  ### ple_window (Intel)
+>  > `= <integer>`
+>  
+> +### preferred-cstates (x86)
+> +> `= ( <integer> | List of ( C1 | C1E | C2 | ... )`
+> +
+> +This is a mask of C-states which are to be used preferably.  This option is
+> +applicable only on hardware were certain C-states are exclusive of one another.
+> +
+>  ### psr (Intel)
+>  > `= List of ( cmt:<boolean> | rmid_max:<integer> | cat:<boolean> | cos_max:<integer> | cdp:<boolean> )`
+>  
+> --- a/xen/arch/x86/cpu/mwait-idle.c
+> +++ b/xen/arch/x86/cpu/mwait-idle.c
+> @@ -82,10 +82,29 @@ boolean_param("mwait-idle", opt_mwait_id
+>  
+>  static unsigned int mwait_substates;
+>  
+> +/*
+> + * Some platforms come with mutually exclusive C-states, so that if one is
+> + * enabled, the other C-states must not be used. Example: C1 and C1E on
+> + * Sapphire Rapids platform. This parameter allows for selecting the
+> + * preferred C-states among the groups of mutually exclusive C-states - the
+> + * selected C-states will be registered, the other C-states from the mutually
+> + * exclusive group won't be registered. If the platform has no mutually
+> + * exclusive C-states, this parameter has no effect.
+> + */
+> +static unsigned int __ro_after_init preferred_states_mask;
+> +static char __initdata preferred_states[64];
+> +string_param("preferred-cstates", preferred_states);
+> +
+>  #define LAPIC_TIMER_ALWAYS_RELIABLE 0xFFFFFFFF
+>  /* Reliable LAPIC Timer States, bit 1 for C1 etc. Default to only C1. */
+>  static unsigned int lapic_timer_reliable_states = (1 << 1);
+>  
+> +enum c1e_promotion {
+> +	C1E_PROMOTION_PRESERVE,
+> +	C1E_PROMOTION_ENABLE,
+> +	C1E_PROMOTION_DISABLE
+> +};
+> +
+>  struct idle_cpu {
+>  	const struct cpuidle_state *state_table;
+>  
+> @@ -95,7 +114,7 @@ struct idle_cpu {
+>  	 */
+>  	unsigned long auto_demotion_disable_flags;
+>  	bool byt_auto_demotion_disable_flag;
+> -	bool disable_promotion_to_c1e;
+> +	enum c1e_promotion c1e_promotion;
+>  };
+>  
+>  static const struct idle_cpu *icpu;
+> @@ -924,6 +943,15 @@ static void cf_check byt_auto_demotion_d
+>  	wrmsrl(MSR_MC6_DEMOTION_POLICY_CONFIG, 0);
+>  }
+>  
+> +static void cf_check c1e_promotion_enable(void *dummy)
+> +{
+> +	uint64_t msr_bits;
+> +
+> +	rdmsrl(MSR_IA32_POWER_CTL, msr_bits);
+> +	msr_bits |= 0x2;
+> +	wrmsrl(MSR_IA32_POWER_CTL, msr_bits);
+> +}
+> +
+>  static void cf_check c1e_promotion_disable(void *dummy)
+>  {
+>  	u64 msr_bits;
+> @@ -936,7 +964,7 @@ static void cf_check c1e_promotion_disab
+>  static const struct idle_cpu idle_cpu_nehalem = {
+>  	.state_table = nehalem_cstates,
+>  	.auto_demotion_disable_flags = NHM_C1_AUTO_DEMOTE | NHM_C3_AUTO_DEMOTE,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_atom = {
+> @@ -954,64 +982,64 @@ static const struct idle_cpu idle_cpu_li
+>  
+>  static const struct idle_cpu idle_cpu_snb = {
+>  	.state_table = snb_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_byt = {
+>  	.state_table = byt_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  	.byt_auto_demotion_disable_flag = true,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_cht = {
+>  	.state_table = cht_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  	.byt_auto_demotion_disable_flag = true,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_ivb = {
+>  	.state_table = ivb_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_ivt = {
+>  	.state_table = ivt_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_hsw = {
+>  	.state_table = hsw_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_bdw = {
+>  	.state_table = bdw_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_skl = {
+>  	.state_table = skl_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_skx = {
+>  	.state_table = skx_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_icx = {
+>         .state_table = icx_cstates,
+> -       .disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static struct idle_cpu __read_mostly idle_cpu_spr = {
+>  	.state_table = spr_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_avn = {
+>  	.state_table = avn_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_knl = {
+> @@ -1020,17 +1048,17 @@ static const struct idle_cpu idle_cpu_kn
+>  
+>  static const struct idle_cpu idle_cpu_bxt = {
+>  	.state_table = bxt_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_dnv = {
+>  	.state_table = dnv_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  static const struct idle_cpu idle_cpu_snr = {
+>  	.state_table = snr_cstates,
+> -	.disable_promotion_to_c1e = true,
+> +	.c1e_promotion = C1E_PROMOTION_DISABLE,
+>  };
+>  
+>  #define ICPU(model, cpu) \
+> @@ -1241,6 +1269,25 @@ static void __init skx_idle_state_table_
+>  }
+>  
+>  /*
+> + * spr_idle_state_table_update - Adjust Sapphire Rapids idle states table.
+> + */
+> +static void __init spr_idle_state_table_update(void)
+> +{
+> +	/* Check if user prefers C1E over C1. */
+> +	if (preferred_states_mask & BIT(2, U)) {
+> +		if (preferred_states_mask & BIT(1, U))
+> +			/* Both can't be enabled, stick to the defaults. */
+> +			return;
+> +
+> +		spr_cstates[0].flags |= CPUIDLE_FLAG_DISABLED;
+> +		spr_cstates[1].flags &= ~CPUIDLE_FLAG_DISABLED;
+> +
+> +		/* Request enabling C1E using the "C1E promotion" bit. */
+> +		idle_cpu_spr.c1e_promotion = C1E_PROMOTION_ENABLE;
+> +	}
+> +}
+> +
+> +/*
+>   * mwait_idle_state_table_update()
+>   *
+>   * Update the default state_table for this CPU-id
+> @@ -1261,6 +1308,9 @@ static void __init mwait_idle_state_tabl
+>  	case INTEL_FAM6_SKYLAKE_X:
+>  		skx_idle_state_table_update();
+>  		break;
+> +	case INTEL_FAM6_SAPPHIRERAPIDS_X:
+> +		spr_idle_state_table_update();
+> +		break;
+>  	}
+>  }
+>  
+> @@ -1268,6 +1318,7 @@ static int __init mwait_idle_probe(void)
+>  {
+>  	unsigned int eax, ebx, ecx;
+>  	const struct x86_cpu_id *id = x86_match_cpu(intel_idle_ids);
+> +	const char *str;
+>  
+>  	if (!id) {
+>  		pr_debug(PREFIX "does not run on family %d model %d\n",
+> @@ -1309,6 +1360,39 @@ static int __init mwait_idle_probe(void)
+>  	pr_debug(PREFIX "lapic_timer_reliable_states %#x\n",
+>  		 lapic_timer_reliable_states);
+>  
+> +	str = preferred_states;
+> +	if (isdigit(str[0]))
+> +		preferred_states_mask = simple_strtoul(str, &str, 0);
+> +	else if (str[0])
+> +	{
+> +		const char *ss;
+> +
+> +		do {
+> +			const struct cpuidle_state *state = icpu->state_table;
+> +			unsigned int bit = 1;
+> +
+> +			ss = strchr(str, ',');
+> +			if (!ss)
+> +				ss = strchr(str, '\0');
+> +
+> +			for (; state->name[0]; ++state) {
+> +				bit <<= 1;
+> +				if (!cmdline_strcmp(str, state->name)) {
+> +					preferred_states_mask |= bit;
+> +					break;
+> +				}
+> +			}
+> +			if (!state->name[0])
+> +				break;
+> +
+> +			str = ss + 1;
+> +	    } while (*ss);
+> +
+> +	    str -= str == ss + 1;
 
-When SSBD is not being set from SPEC_CTRL on AMD don't context switch
-at vm{entry,exit} and instead only context switch SSBD when switching
-vCPUs.  This has the side effect of running Xen code with the guest
-selection of SSBD, which renders the ssbd option without effect (in a
-similar way to what already happens on Intel hardware).
+I would add parentheses to the sum for clarity.
 
-This fixes an issue with running C code in a GIF=0 region, that's
-problematic when using UBSAN or other instrumentation techniques.
+> +	}
+> +	if (str[0])
+> +		printk("unrecognized \"preferred-cstates=%s\"\n", str);
+> +
+>  	mwait_idle_state_table_update();
+>  
+>  	return 0;
+> @@ -1400,8 +1484,18 @@ static int cf_check mwait_idle_cpu_init(
+>  	if (icpu->byt_auto_demotion_disable_flag)
+>  		on_selected_cpus(cpumask_of(cpu), byt_auto_demotion_disable, NULL, 1);
+>  
+> -	if (icpu->disable_promotion_to_c1e)
+> +	switch (icpu->c1e_promotion) {
+> +	case C1E_PROMOTION_DISABLE:
+>  		on_selected_cpus(cpumask_of(cpu), c1e_promotion_disable, NULL, 1);
+> +		break;
+> +
+> +	case C1E_PROMOTION_ENABLE:
+> +		on_selected_cpus(cpumask_of(cpu), c1e_promotion_enable, NULL, 1);
+> +		break;
+> +
+> +	case C1E_PROMOTION_PRESERVE:
+> +		break;
+> +	}
 
-As a result of no longer running the code to set SSBD in a GIF=0
-region the locking of amd_set_legacy_ssbd() can be done using normal
-spinlocks, and some more checks can be added to assure it works as
-intended.
+I find it kind of weird to user a notifier for this, won't it be
+easier to set the C1E promotion as part of the CPU bringup process?
 
-Finally it's also worth noticing that since the guest SSBD selection
-is no longer set on vmentry the VIRT_SPEC_MSR handling needs to
-propagate the value to the hardware as part of handling the wrmsr.
+I see we also set other bits in the same way.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/cpu/amd.c         | 50 ++++++++++++++++++----------------
- xen/arch/x86/hvm/svm/entry.S   |  6 +---
- xen/arch/x86/hvm/svm/svm.c     | 45 ++++++++++++------------------
- xen/arch/x86/include/asm/amd.h |  2 +-
- xen/arch/x86/msr.c             |  7 +++++
- 5 files changed, 52 insertions(+), 58 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 98c52d0686..a1582e1cc9 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -742,7 +742,7 @@ void amd_init_ssbd(const struct cpuinfo_x86 *c)
- }
- 
- static struct ssbd_ls_cfg {
--    bool locked;
-+    spinlock_t lock;
-     unsigned int count;
- } __cacheline_aligned *ssbd_ls_cfg;
- static unsigned int __ro_after_init ssbd_max_cores;
-@@ -776,46 +776,48 @@ bool __init amd_setup_legacy_ssbd(void)
- 	if (!ssbd_ls_cfg)
- 		return false;
- 
--	if (opt_ssbd)
--		for (i = 0; i < ssbd_max_cores * AMD_FAM17H_MAX_SOCKETS; i++)
--			/* Set initial state, applies to any (hotplug) CPU. */
--			ssbd_ls_cfg[i].count = boot_cpu_data.x86_num_siblings;
-+	for (i = 0; i < ssbd_max_cores * AMD_FAM17H_MAX_SOCKETS; i++) {
-+		/* Set initial state, applies to any (hotplug) CPU. */
-+		ssbd_ls_cfg[i].count = opt_ssbd ? boot_cpu_data.x86_num_siblings
-+		                                : 0;
-+		spin_lock_init(&ssbd_ls_cfg[i].lock);
-+	}
- 
- 	return true;
- }
- 
--/*
-- * Executed from GIF==0 context: avoid using BUG/ASSERT or other functionality
-- * that relies on exceptions as those are not expected to run in GIF==0
-- * context.
-- */
--void amd_set_legacy_ssbd(bool enable)
-+static void core_set_legacy_ssbd(bool enable)
- {
- 	const struct cpuinfo_x86 *c = &current_cpu_data;
- 	struct ssbd_ls_cfg *status;
-+	unsigned long flags;
- 
- 	if ((c->x86 != 0x17 && c->x86 != 0x18) || c->x86_num_siblings <= 1) {
--		set_legacy_ssbd(c, enable);
-+		BUG_ON(!set_legacy_ssbd(c, enable));
- 		return;
- 	}
- 
-+	BUG_ON(c->phys_proc_id >= AMD_FAM17H_MAX_SOCKETS);
-+	BUG_ON(c->cpu_core_id >= ssbd_max_cores);
- 	status = &ssbd_ls_cfg[c->phys_proc_id * ssbd_max_cores +
- 	                      c->cpu_core_id];
- 
--	/*
--	 * Open code a very simple spinlock: this function is used with GIF==0
--	 * and different IF values, so would trigger the checklock detector.
--	 * Instead of trying to workaround the detector, use a very simple lock
--	 * implementation: it's better to reduce the amount of code executed
--	 * with GIF==0.
--	 */
--	while (test_and_set_bool(status->locked))
--		cpu_relax();
-+	spin_lock_irqsave(&status->lock, flags);
- 	status->count += enable ? 1 : -1;
-+	ASSERT(status->count <= c->x86_num_siblings);
- 	if (enable ? status->count == 1 : !status->count)
--		set_legacy_ssbd(c, enable);
--	barrier();
--	write_atomic(&status->locked, false);
-+		BUG_ON(!set_legacy_ssbd(c, enable));
-+	spin_unlock_irqrestore(&status->lock, flags);
-+}
-+
-+void amd_set_ssbd(bool enable)
-+{
-+	if ( cpu_has_virt_ssbd )
-+		wrmsr(MSR_VIRT_SPEC_CTRL, enable ? SPEC_CTRL_SSBD : 0, 0);
-+	else if ( amd_legacy_ssbd )
-+		core_set_legacy_ssbd(enable);
-+	else
-+		ASSERT_UNREACHABLE();
- }
- 
- /*
-diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
-index a26589aa9a..94089e61bc 100644
---- a/xen/arch/x86/hvm/svm/entry.S
-+++ b/xen/arch/x86/hvm/svm/entry.S
-@@ -59,9 +59,6 @@ __UNLIKELY_END(nsvm_hap)
- 
-         clgi
- 
--        ALTERNATIVE "", STR(call vmentry_virt_spec_ctrl), \
--                        X86_FEATURE_VIRT_SC_MSR_HVM
--
-         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
-         /* SPEC_CTRL_EXIT_TO_SVM       Req: b=curr %rsp=regs/cpuinfo, Clob: acd */
-         .macro svm_vmentry_spec_ctrl
-@@ -131,8 +128,6 @@ __UNLIKELY_END(nsvm_hap)
-         ALTERNATIVE "", svm_vmexit_spec_ctrl, X86_FEATURE_SC_MSR_HVM
-         /* WARNING! `ret`, `call *`, `jmp *` not safe before this point. */
- 
--        ALTERNATIVE "", STR(call vmexit_virt_spec_ctrl), \
--                        X86_FEATURE_VIRT_SC_MSR_HVM
- 
-         /*
-          * STGI is executed unconditionally, and is sufficiently serialising
-@@ -140,6 +135,7 @@ __UNLIKELY_END(nsvm_hap)
-          */
-         stgi
- GLOBAL(svm_stgi_label)
-+
-         mov  %rsp,%rdi
-         call svm_vmexit_handler
-         jmp  .Lsvm_do_resume
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 1aeaabcb13..0c5ffad05d 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -973,6 +973,14 @@ static void cf_check svm_ctxt_switch_from(struct vcpu *v)
- 
-     /* Resume use of ISTs now that the host TR is reinstated. */
-     enable_each_ist(idt_tables[cpu]);
-+
-+    /*
-+     * Clear previous guest selection of SSBD if set.  Note that SPEC_CTRL.SSBD
-+     * is already cleared by svm_vmexit_spec_ctrl.
-+     */
-+    if ( v->domain->arch.cpuid->extd.virt_ssbd &&
-+         (v->arch.msrs->virt_spec_ctrl.raw & SPEC_CTRL_SSBD) )
-+        amd_set_ssbd(false);
- }
- 
- static void cf_check svm_ctxt_switch_to(struct vcpu *v)
-@@ -1000,6 +1008,11 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
- 
-     if ( cpu_has_msr_tsc_aux )
-         wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
-+
-+    /* Load SSBD if set by the guest. */
-+    if ( v->domain->arch.cpuid->extd.virt_ssbd &&
-+         (v->arch.msrs->virt_spec_ctrl.raw & SPEC_CTRL_SSBD) )
-+        amd_set_ssbd(true);
- }
- 
- static void noreturn cf_check svm_do_resume(void)
-@@ -2518,6 +2531,10 @@ static void cf_check svm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
-         vmcb->spec_ctrl = val;
-         break;
- 
-+    case MSR_VIRT_SPEC_CTRL:
-+        amd_set_ssbd(v->arch.msrs->virt_spec_ctrl.raw);
-+        break;
-+
-     default:
-         printk(XENLOG_G_ERR "%s(%pv, 0x%08x, 0x%016"PRIx64") Bad register\n",
-                __func__, v, reg, val);
-@@ -3116,34 +3133,6 @@ void svm_vmexit_handler(struct cpu_user_regs *regs)
-     vmcb_set_vintr(vmcb, intr);
- }
- 
--/* Called with GIF=0. */
--void vmexit_virt_spec_ctrl(void)
--{
--    unsigned int val = opt_ssbd ? SPEC_CTRL_SSBD : 0;
--
--    if ( val == current->arch.msrs->virt_spec_ctrl.raw )
--        return;
--
--    if ( cpu_has_virt_ssbd )
--        wrmsr(MSR_VIRT_SPEC_CTRL, val, 0);
--    else
--        amd_set_legacy_ssbd(val);
--}
--
--/* Called with GIF=0. */
--void vmentry_virt_spec_ctrl(void)
--{
--    unsigned int val = current->arch.msrs->virt_spec_ctrl.raw;
--
--    if ( val == (opt_ssbd ? SPEC_CTRL_SSBD : 0) )
--        return;
--
--    if ( cpu_has_virt_ssbd )
--        wrmsr(MSR_VIRT_SPEC_CTRL, val, 0);
--    else
--        amd_set_legacy_ssbd(val);
--}
--
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index 6a42f68542..81ed71710f 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -153,6 +153,6 @@ void amd_check_disable_c1e(unsigned int port, u8 value);
- 
- extern bool amd_legacy_ssbd;
- bool amd_setup_legacy_ssbd(void);
--void amd_set_legacy_ssbd(bool enable);
-+void amd_set_ssbd(bool enable);
- 
- #endif /* __AMD_H__ */
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 95416995a5..a4c28879bc 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -697,7 +697,14 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-                 msrs->spec_ctrl.raw &= ~SPEC_CTRL_SSBD;
-         }
-         else
-+        {
-             msrs->virt_spec_ctrl.raw = val & SPEC_CTRL_SSBD;
-+            /*
-+             * Propagate the value to hardware, as it won't be context switched
-+             * on vmentry.
-+             */
-+            goto set_reg;
-+        }
-         break;
- 
-     case MSR_AMD64_DE_CFG:
--- 
-2.37.3
-
+Thanks, Roger.
 
