@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D413DC43217
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Oct 2022 08:03:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.420830.665890 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E163BC4332F
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Oct 2022 08:03:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.420828.665874 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiWha-0005CV-OQ; Wed, 12 Oct 2022 08:02:54 +0000
+	id 1oiWhM-0004qb-4r; Wed, 12 Oct 2022 08:02:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 420830.665890; Wed, 12 Oct 2022 08:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 420828.665874; Wed, 12 Oct 2022 08:02:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiWha-0005Bn-IJ; Wed, 12 Oct 2022 08:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 420830;
- Wed, 12 Oct 2022 08:02:54 +0000
+	id 1oiWhM-0004qU-2F; Wed, 12 Oct 2022 08:02:40 +0000
+Received: by outflank-mailman (input) for mailman id 420828;
+ Wed, 12 Oct 2022 08:02:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jpGp=2N=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1oiWha-0004qO-4w
- for xen-devel@lists.xenproject.org; Wed, 12 Oct 2022 08:02:54 +0000
+ id 1oiWhK-0004qO-8Y
+ for xen-devel@lists.xenproject.org; Wed, 12 Oct 2022 08:02:38 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 4609e511-4a04-11ed-8fd0-01056ac49cbb;
- Wed, 12 Oct 2022 10:02:53 +0200 (CEST)
+ id 3b4dc483-4a04-11ed-8fd0-01056ac49cbb;
+ Wed, 12 Oct 2022 10:02:36 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 371F91713;
- Wed, 12 Oct 2022 01:02:59 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2D37815A1;
+ Wed, 12 Oct 2022 01:02:41 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6E3A43F67D;
- Wed, 12 Oct 2022 01:02:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6305E3F67D;
+ Wed, 12 Oct 2022 01:02:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,69 +45,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4609e511-4a04-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: 3b4dc483-4a04-11ed-8fd0-01056ac49cbb
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 3/3] automation: Add a clean rule for containers
-Date: Wed, 12 Oct 2022 09:02:25 +0100
-Message-Id: <357fcb93114840125a450acc9cf3ff7aa138a7bc.1665561024.git.bertrand.marquis@arm.com>
+Subject: [PATCH v2 0/3] Yocto Gitlab CI
+Date: Wed, 12 Oct 2022 09:02:22 +0100
+Message-Id: <cover.1665561024.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1665561024.git.bertrand.marquis@arm.com>
-References: <cover.1665561024.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add make clean support to remove the containers from the local docker
-registry:
-- make clean: remove all images
-- clean-yocto/kirkstone-qemuarm: remove yocto kirkstone for qemuarm
-image
+This patch series is a first attempt to check if we could use Yocto in
+gitlab ci to build and run xen on qemu for arm, arm64 and x86.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
+The first patch is creating a container with all elements required to
+build Yocto, a checkout of the yocto layers required and an helper
+script to build and run xen on qemu with yocto.
+
+The second patch is creating containers with a first build of yocto done
+so that susbsequent build with those containers would only rebuild what
+was changed and take the rest from the cache.
+
+The third patch is adding a way to easily clean locally created
+containers.
+
+This is is mainly for discussion and sharing as there are still some
+issues/problem to solve:
+- building the qemu* containers can take several hours depending on the
+  network bandwith and computing power of the machine where those are
+  created
+- produced containers containing the cache have a size between 8 and
+  12GB depending on the architecture. We might need to store the build
+  cache somewhere else to reduce the size. If we choose to have one
+  single image, the needed size is around 20GB and we need up to 40GB
+  during the build, which is why I splitted them.
+- during the build and run, we use a bit more then 20GB of disk which is
+  over the allowed size in gitlab
+
+Once all problems passed, this can be used to build and run dom0 on qemu
+with a modified Xen on the 3 archs in less than 10 minutes.
+
+This has been tested on a x86 host machine and on an arm host machine
+(with mk_dsdt.c fix).
+
 Changes in v2:
-- none
-Changes in v1:
-- patch added
----
- automation/build/Makefile | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+- remove gitignore patch which was merged
+- add a --dump-log support in build-yocto.sh script and use it during
+  container creation to see the error logs.
 
-diff --git a/automation/build/Makefile b/automation/build/Makefile
-index b0dc68f00b70..9fbb49c8717e 100644
---- a/automation/build/Makefile
-+++ b/automation/build/Makefile
-@@ -4,6 +4,17 @@ REGISTRY := registry.gitlab.com/xen-project/xen
- CONTAINERS = $(subst .dockerfile,,$(wildcard */*.dockerfile))
- DOCKER_CMD ?= docker
- 
-+define CLEAN_RULE
-+.PHONY: clean-$(1)
-+clean-$(1):
-+ifneq ($$(shell docker image ls -q $(REGISTRY)/$(subst /,:,$(1))),)
-+	docker image rm $(REGISTRY)/$(subst /,:,$(1))
-+endif
-+
-+clean: clean-$(1)
-+
-+endef
-+
- help:
- 	@echo "Builds containers for building Xen based on different distros"
- 	@echo "To build one run 'make DISTRO/VERSION'. Available containers:"
-@@ -18,5 +29,9 @@ help:
- 
- $(subst .dockerfile,,$(wildcard yocto/kirkstone-*)): yocto/kirkstone
- 
--.PHONY: all
-+.PHONY: all clean
- all: $(CONTAINERS)
-+
-+clean:
-+
-+$(eval $(foreach img,$(CONTAINERS),$(call CLEAN_RULE,$(img))))
+Bertrand Marquis (3):
+  automation: Add elements for Yocto test and run
+  automation: Add yocto containers with cache
+  automation: Add a clean rule for containers
+
+ automation/build/Makefile                     |  19 +-
+ automation/build/yocto/build-yocto.sh         | 340 ++++++++++++++++++
+ .../build/yocto/kirkstone-qemuarm.dockerfile  |  28 ++
+ .../yocto/kirkstone-qemuarm64.dockerfile      |  28 ++
+ .../yocto/kirkstone-qemux86-64.dockerfile     |  28 ++
+ automation/build/yocto/kirkstone.dockerfile   | 100 ++++++
+ 6 files changed, 542 insertions(+), 1 deletion(-)
+ create mode 100755 automation/build/yocto/build-yocto.sh
+ create mode 100644 automation/build/yocto/kirkstone-qemuarm.dockerfile
+ create mode 100644 automation/build/yocto/kirkstone-qemuarm64.dockerfile
+ create mode 100644 automation/build/yocto/kirkstone-qemux86-64.dockerfile
+ create mode 100644 automation/build/yocto/kirkstone.dockerfile
+
 -- 
 2.25.1
 
