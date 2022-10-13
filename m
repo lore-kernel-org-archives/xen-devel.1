@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F60AC4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:16:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.422134.667988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E65C43217
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:20:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.422173.668010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiy4O-00041g-9U; Thu, 13 Oct 2022 13:16:16 +0000
+	id 1oiy8G-0006U2-2B; Thu, 13 Oct 2022 13:20:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 422134.667988; Thu, 13 Oct 2022 13:16:16 +0000
+Received: by outflank-mailman (output) from mailman id 422173.668010; Thu, 13 Oct 2022 13:20:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiy4O-00041Y-6S; Thu, 13 Oct 2022 13:16:16 +0000
-Received: by outflank-mailman (input) for mailman id 422134;
- Thu, 13 Oct 2022 13:16:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d8dk=2O=citrix.com=prvs=278749026=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oixuT-0002ig-7w
- for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:06:01 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c4a10fd2-4af7-11ed-91b4-6bf2151ebd3b;
- Thu, 13 Oct 2022 15:05:55 +0200 (CEST)
+	id 1oiy8F-0006Tv-VN; Thu, 13 Oct 2022 13:20:15 +0000
+Received: by outflank-mailman (input) for mailman id 422173;
+ Thu, 13 Oct 2022 13:20:15 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1oiy8F-0006Tp-BV
+ for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:20:15 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oiy8E-0007xR-4u; Thu, 13 Oct 2022 13:20:14 +0000
+Received: from [15.248.2.148] (helo=[10.24.69.9])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oiy8D-0008AZ-VP; Thu, 13 Oct 2022 13:20:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,167 +41,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4a10fd2-4af7-11ed-91b4-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1665666354;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=xNKHGKv0xiseesErXwvSTNU3NRH6cY3P70E/A0khyJY=;
-  b=JKkLA/3JYRZ57DEFovQrgvxhRHuhWN83fhFNKB3SbqWS7ATffIxyIo0b
-   qdBQ4OL3Sl1egie0WwLmZdoiVsoGRf8tOF6PDPSl+Bmh1zvqRbqBT7Tct
-   3Pb4aWGMy/YGQwMN8aHOEdO2hwLlQUeL06O5yhmCDulStlX0BimWCpRXL
-   4=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 2.7
-X-MesageID: 83071582
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:z8VRha29XR4Hg1fS1fbD5dZxkn2cJEfYwER7XKvMYLTBsI5bpzECy
- mobXGyCMvmJNmOhfthxaIvj9htX7MTXnYUwSgZppC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefSAOKU5NfsYkhZXRVjRDoqlSVtkus4hp8AqdWiCkaGt
- MiaT/f3YTdJ4BYpdDNJg06/gEk35q6r4GpD5gVWic1j5zcyqVFEVPrzGonpR5fIatE8NvK3Q
- e/F0Ia48gvxl/v6Ior4+lpTWhRiro/6ZWBiuFIPM0SRqkEqShgJ+rQ6LJIhhXJ/0F1lqTzTJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXWV+ACQqflO1q8iCAn3aMqUeocxpUDl/2
- cc3EzAdKQiPrPK66+O0H7wEasQLdKEHPasas3BkizrYEewnUdbIRKCiCd1whWlqwJoURLCHO
- pRfOWEHgBfoOnWjPn8eDo4+m+G5wGHyaTRCpHqepLYt4niVxwt0uFToGIqOIoPTGJUP9qqej
- n3l7kfcUhcUDsa8+Bq/sW2jtuSMhwquDer+E5Xnr6U30TV/3Fc7BBQIWHOhrPK+i0r4XMhQQ
- 2QL/gI+oK5081akJvHtUhv9rHOasxo0X9tLD/Z8+AyL0rDT4QuSGi4DVDEpVTA9nJZoH3pwj
- AbPxo63Q2w02FGIdZ6D3rHPhy3jYRk5FkA5ZT9DVQcu89XI8Y5m23ojUe1fOKKyi9T0HxT5z
- DaLsDUyit0vsCIb60mo1QuZ2mzx//AlWiZwv1yKBTz9smuVcab/P+SVBU7nAeGsxWpzZn2Ip
- zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3Y1QvHNFBz3oRZPmLy8BxkvTHqFyu5eJVfUj
- Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27CK2KNoIWOsYuLVXvEMRSiam4hjmFraTRuftnZ
- cfznTiEVx729piLPBLpHrxAgNfHNwg1xH/JRICT8ilLJYG2PSfNIYrpxXPUMYjVGovY/1iOm
- zueXuPWoyhivBrWO3WHrNFCcw5QcBDWx/ne8qRqSwJKGSI+cElJNhMb6e9Jl1BN90iNqtr1w
- w==
-IronPort-HdrOrdr: A9a23:Y6OquKBfZlxZKZLlHelW55DYdb4zR+YMi2TDt3oddfWaSKylfq
- GV7ZAmPHrP4gr5N0tOpTntAse9qBDnhPtICOsqTNSftWDd0QPFEGgL1+DfKlbbak/DH4BmtJ
- uJc8JFeaDN5VoRt7eH3OFveexQv+Vu88qT9JnjJ28Gd3AMV0n5hT0JcTpyFCdNNW97LKt8Lr
- WwzOxdqQGtfHwGB/7LfEXsD4D41qT2fIuNW29/OyIa
-X-IronPort-AV: E=Sophos;i="5.95,180,1661832000"; 
-   d="scan'208";a="83071582"
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>
-Subject: [XEN PATCH for-4.17 v5 17/17] tools: Rework linking options for ocaml binding libraries
-Date: Thu, 13 Oct 2022 14:05:13 +0100
-Message-ID: <20221013130513.52440-18-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20221013130513.52440-1-anthony.perard@citrix.com>
-References: <20221013130513.52440-1-anthony.perard@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=nkPnIZvevJsTXW7wMoMvuCQk9ans1LbOAtfDtWjqam8=; b=GY4B8CGJn3Cv15/06fvodiPXN/
+	75Jfs75+wHGSlR+mAqhnOvkbqEJsnhTpES9oAe34B4l1V3iTXT8B6NQ4XG+MaNPcnqMwbMkW7d+wd
+	fNIvpZ6gWC0JwfgiTItNJlVq4KWaDZeihw5o4mbPmMH3siCjLFTwlMwRWGVC8lv6Psbw=;
+Message-ID: <9b4a9bbf-eb5c-3d13-f796-c6bf5704d85b@xen.org>
+Date: Thu, 13 Oct 2022 14:20:11 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.3.1
+Subject: Re: Need guidance to support reading GICR_TYPER (64 bit register) on
+ Aarch32_v8r
+Content-Language: en-US
+To: Ayan Kumar Halder <ayankuma@amd.com>,
+ "Stabellini, Stefano" <stefano.stabellini@amd.com>,
+ bertrand Marquis <Bertrand.Marquis@arm.com>,
+ "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>,
+ Henry Wang <Henry.Wang@arm.com>, Penny Zheng <Penny.Zheng@arm.com>
+Cc: Jaxson Han <jaxson.han@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <e2d041b2-3b38-f19b-2d8e-3a255b0ac07e@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <e2d041b2-3b38-f19b-2d8e-3a255b0ac07e@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Using a full path to the C libraries when preparing one of the ocaml
-binding for those libraries make the binding unusable by external
-project. The full path is somehow embedded and reused by the external
-project when linking against the binding.
+On 13/10/2022 12:47, Ayan Kumar Halder wrote:
+> Hi Arm mantainers/Folks,
 
-Instead, we will use the proper way to link a library, by using '-l'.
-For in-tree build, we also need to provide the search directory via
-'-L'.
+Hello,
 
-(The search path -L are still be embedded, but at least that doesn't
-prevent the ocaml binding from been used.)
+> Please refer to the discussion 
+> https://github.com/zephyrproject-rtos/zephyr/pull/51163 .
+> 
+> We intend to run Zephyr as a domU guest on Xen on Aarch32_v8R fixed 
+> virtual platform.
+> 
+> Zephyr is trying to read GICR_TYPER which is a 64 bit register using 
+> ldrd instruction.
+> 
+> As GICR is emulated by Xen, so this instruction gets trapped with HSR = 
+> 0x9200000c.
+> 
+> As ISV is 0, so Xen cannot emulate this instruction.
+> 
+> The proposed solution is to use two sys_read32() on GICR_TYPER to return 
+> the lower and upper 32 bits.
+> 
+> With this, HSR = 0x9383 000c, ISV=1 so ISS is valid.
+> 
+> Now, for Xen to emulate this read, I have proposed the modifications (in 
+> my last comment).
 
-Related-to: xen-project/xen#96
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
+I am confused. Looking at the emulation of GICR_TYPER in Xen 
+(arch/arm/vgic-v3.c), the code should already be able to handle 32-bit 
+access.
 
-Notes:
-    This patch only partially resolve xen-project/xen#96. At least with this
-    patch, the ocaml binding can be used by external project, but those
-    project will still "see" and try to use the rpath and lib search path as
-    the -L and -W,-rpath-link are still embedded in the ocaml binding.
-    
-    I'm working on a more involve series of patch which would remove the
-    unnecessary flags. (This would mean that oxenstored and the ocaml test
-    will need those ldflags, instead of the binding.)
-    
-    v5:
-    - new patch
+I doesn't look like we need to modify Xen. What did I miss?
 
- tools/ocaml/libs/eventchn/Makefile   | 2 +-
- tools/ocaml/libs/xc/Makefile         | 2 +-
- tools/ocaml/libs/xentoollog/Makefile | 2 +-
- tools/ocaml/libs/xl/Makefile         | 2 +-
- tools/Rules.mk                       | 8 ++++++++
- 5 files changed, 12 insertions(+), 4 deletions(-)
+Cheers,
 
-diff --git a/tools/ocaml/libs/eventchn/Makefile b/tools/ocaml/libs/eventchn/Makefile
-index 7362a28d9e..dc560ba49b 100644
---- a/tools/ocaml/libs/eventchn/Makefile
-+++ b/tools/ocaml/libs/eventchn/Makefile
-@@ -8,7 +8,7 @@ OBJS = xeneventchn
- INTF = $(foreach obj, $(OBJS),$(obj).cmi)
- LIBS = xeneventchn.cma xeneventchn.cmxa
- 
--LIBS_xeneventchn = $(LDLIBS_libxenevtchn)
-+LIBS_xeneventchn = $(call xenlibs-ldflags-ldlibs,evtchn)
- 
- all: $(INTF) $(LIBS) $(PROGRAMS)
- 
-diff --git a/tools/ocaml/libs/xc/Makefile b/tools/ocaml/libs/xc/Makefile
-index 67acc46bee..3b76e9ad7b 100644
---- a/tools/ocaml/libs/xc/Makefile
-+++ b/tools/ocaml/libs/xc/Makefile
-@@ -10,7 +10,7 @@ OBJS = xenctrl
- INTF = xenctrl.cmi
- LIBS = xenctrl.cma xenctrl.cmxa
- 
--LIBS_xenctrl = $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest)
-+LIBS_xenctrl = $(call xenlibs-ldflags-ldlibs,ctrl guest)
- 
- xenctrl_OBJS = $(OBJS)
- xenctrl_C_OBJS = xenctrl_stubs
-diff --git a/tools/ocaml/libs/xentoollog/Makefile b/tools/ocaml/libs/xentoollog/Makefile
-index 9ede2fd124..1645b40faf 100644
---- a/tools/ocaml/libs/xentoollog/Makefile
-+++ b/tools/ocaml/libs/xentoollog/Makefile
-@@ -13,7 +13,7 @@ OBJS = xentoollog
- INTF = xentoollog.cmi
- LIBS = xentoollog.cma xentoollog.cmxa
- 
--LIBS_xentoollog = $(LDLIBS_libxentoollog)
-+LIBS_xentoollog = $(call xenlibs-ldflags-ldlibs,toollog)
- 
- xentoollog_OBJS = $(OBJS)
- xentoollog_C_OBJS = xentoollog_stubs
-diff --git a/tools/ocaml/libs/xl/Makefile b/tools/ocaml/libs/xl/Makefile
-index 7c1c4edced..22d6c93aae 100644
---- a/tools/ocaml/libs/xl/Makefile
-+++ b/tools/ocaml/libs/xl/Makefile
-@@ -15,7 +15,7 @@ LIBS = xenlight.cma xenlight.cmxa
- 
- OCAMLINCLUDE += -I ../xentoollog
- 
--LIBS_xenlight = $(LDLIBS_libxenlight)
-+LIBS_xenlight = $(call xenlibs-ldflags-ldlibs,light)
- 
- xenlight_OBJS = $(OBJS)
- xenlight_C_OBJS = xenlight_stubs
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index a165dc4bda..34d495fff7 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -113,6 +113,14 @@ define xenlibs-ldflags
-     $(foreach lib,$(1),-L$(XEN_ROOT)/tools/libs/$(lib))
- endef
- 
-+# Flags for linking against all Xen libraries listed in $(1) but by making use
-+# of -L and -l instead of providing a path to the shared library.
-+define xenlibs-ldflags-ldlibs
-+    $(call xenlibs-ldflags,$(1)) \
-+    $(foreach lib,$(1), -l$(FILENAME_$(lib))) \
-+    $(foreach lib,$(1),$(xenlibs-ldlibs-$(lib)))
-+endef
-+
- define LIB_defs
-  FILENAME_$(1) ?= xen$(1)
-  XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
 -- 
-Anthony PERARD
-
+Julien Grall
 
