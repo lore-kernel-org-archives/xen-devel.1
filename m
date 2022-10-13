@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15F6DC43217
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:05:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.422020.667812 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FD42C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:05:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.422022.667834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oixty-0002Aq-S1; Thu, 13 Oct 2022 13:05:30 +0000
+	id 1oixu4-0002lI-Dm; Thu, 13 Oct 2022 13:05:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 422020.667812; Thu, 13 Oct 2022 13:05:30 +0000
+Received: by outflank-mailman (output) from mailman id 422022.667834; Thu, 13 Oct 2022 13:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oixty-0002Aj-Ow; Thu, 13 Oct 2022 13:05:30 +0000
-Received: by outflank-mailman (input) for mailman id 422020;
- Thu, 13 Oct 2022 13:05:29 +0000
+	id 1oixu4-0002l6-AD; Thu, 13 Oct 2022 13:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 422022;
+ Thu, 13 Oct 2022 13:05:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d8dk=2O=citrix.com=prvs=278749026=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oixtx-0001tl-1N
- for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:05:29 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a7653bf6-4af7-11ed-8fd0-01056ac49cbb;
- Thu, 13 Oct 2022 15:05:06 +0200 (CEST)
+ id 1oixu2-0001tl-A9
+ for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:05:34 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aaab2a2c-4af7-11ed-8fd0-01056ac49cbb;
+ Thu, 13 Oct 2022 15:05:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7653bf6-4af7-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: aaab2a2c-4af7-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1665666327;
+  d=citrix.com; s=securemail; t=1665666333;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=uMtbT9OvCCyn0S146BCICiBUUfTxeCiBwu/GDB4z7hw=;
-  b=Lssi63DSGjkrj0ROCCgtI1fB7YmXSPxdlFhArEI47GMJ9O3jgn9t02sb
-   9sUTB2jAbJDhKtBxBFoD0/ineNElZk24qYITcOrLJbI8MWGSUa6ZYu0JE
-   eicBxXlbB5G3OQ+QZTJdOHoqJkRmhvoIO9BAr3x7uFmuB00FXqDKwIrXm
-   M=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=T3wLDMvbCGyUm6GzXD79EfIEyV5ODCruMFeaxkCe9VE=;
+  b=WsZLPhToWjgrBCg3JpX+NIY3/fxBY3e5nr4mJlYZeT+/PF8aiYppnQiR
+   npM4SszcL3ml5VouJ7Fqke1z/U6qpCd9YisulX+7FIorfclxJeHHz8VEx
+   mdxogVyhP/0tpfK09uqN87QFk0JhzdXWjQ1IVwG02/Ds3J0cAmBnHEs/M
+   w=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 82660695
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 81760194
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: =?us-ascii?q?A9a23=3ALkY9Va7I9QmVYQHL/35oAAxR2vbMJQZQLiYv2?=
- =?us-ascii?q?9bIXmNSXhzvzPLM5wBkF31ARqiwpsLxTDuk2K5y4Fltw4rHtUhMcdOLQjwCb?=
- =?us-ascii?q?f3UD1utrioGJcIt4OZ/tjYNCi4ujkJMXCU9cPX3Q4OgGBMQFJQAlSrNy4hwQ?=
- =?us-ascii?q?vVPWB7Uzo4IImWWayClEksCRdi/DUdPCvCpCfAc403pIYIdttpLONV2N3mmN?=
- =?us-ascii?q?8/cWy26ntknqBcy/B1vtszfsWR/SfRGHYyHBNlXrldqDpDzSPa/1cgcP4Pne?=
- =?us-ascii?q?fU7Ee3D4eyjPzdc/eGRDowRIxyVcl+Vn0nY+PzCBs/JEBnOLiJgfa2bjfEJf?=
- =?us-ascii?q?NaqRSj3eoX6ehEQntN1XeRD6YFsMOie1hj0KmOCh2YdEVM/5jcg+YMARNIzC?=
- =?us-ascii?q?5LTR0sv2AdYFYZuf7EdjfMoV7KJQPaXVGmO+ddxBIweSIl3KD2BvzSDa9g69?=
- =?us-ascii?q?ij9bHEvgRUWMR2F9jYXKOEhKVgj/rBDSIL5QicT5J5q9RUWm7THJHov8CUlx?=
- =?us-ascii?q?SVEzC5uKaLok41jrHS5gaye/MmG/I/pitUNOG55Lc03ZalB1xLEicoFCzjUh?=
- =?us-ascii?q?JSzc8GUIVAfDyyDQjpnggMXgk6BJSWc+DPA8vKsekCJZRy8Ib9Zx/WnY/MXW?=
- =?us-ascii?q?NycMFpeUNS2ToLWHW1rJwCOojs8VVZ2uY/odHDqtQgwheS/gRl0Vcs0uw+OJ?=
- =?us-ascii?q?6rhaCGae0mpnrXzuy/zEMT5ffmfSNsV1vWksE26Lc4TQ4+VPOFALwbG/4VCW?=
- =?us-ascii?q?UWiZz8gAXp9LHEp+v5S0UbeI0fkZZ4r9WT+5EMDH/KUk1P/YJb89lL/LIMlj?=
- =?us-ascii?q?nAlLof5lRxYJ1qEnfNGP813Z4hZGaYtsziWn8INK9pZ+Pj0d7P3jZBkCwQ9c?=
- =?us-ascii?q?KcW0TIIIkoymCB+bsgXyhSL1t/HNnEt9XkT5N1tNlg1w7DVPKtRGO/yG5mNX?=
- =?us-ascii?q?RwbPTjQrqw1uwRbKdPQ7ffc6Qo7V27qbxBzvkEzHC3eX4e4jbDrCvktxHm5G?=
- =?us-ascii?q?umHE7uQeWcp9pwLl6DMHbHX+LHeIo7kSJVIwr0kamxjxLksxv8EvyDl5sQBJ?=
- =?us-ascii?q?tMHMk1eE2e1GMZMhbnoNRym3yMy6bxzY2s1S10SVfpui7AcK61csq+g6kbVh?=
- =?us-ascii?q?n1miSnr6aByUpn6Wqtff0S/gQQwxPnWtImFJU6ep0cRI4Y7WqRzCpJJq2uXg?=
- =?us-ascii?q?oMav4zoQftC07x0U4iAO2Gg/QO614Z7dIowH92mhVaaYU2ROgCANKhp1xtaK?=
- =?us-ascii?q?s0BK4J3D+7JuuCsj70Son9rJWx/dyM8PPy5W+wVJEm3D6TUyeCaIRO0LttQ+?=
- =?us-ascii?q?jetpcSK5N1fzukUaKZ/B/8qSxyP9uypx8NlsNtkhn/KvpGPCHoKp54nngGDO?=
- =?us-ascii?q?JQ7bElCz2JH2XwsinHpePzeRGkvEeXsFUK4++lC6pRJChW4b+stcquIo1ZNk?=
- =?us-ascii?q?YLvYewPZE8f+YruiLvByL6k0i7NUKRi1DapsFRM013HgnEGrqdUylvHio8jh?=
- =?us-ascii?q?B4rrxybBldOFK2ik/klXnDF7d5+l9e4tC1KLSX7LNN2kP8rMkepUpO7TYEcQ?=
- =?us-ascii?q?9DcD23G994np4Eln0puX21fpUINVkv7CfPzezp3/ZaBpNrbve2Ih/zVcRusn?=
- =?us-ascii?q?GXet0fsa9j1hve9PIZo9fMLnLvhcbybeqknBVKBF+jIl7dfFgZVMPWkCPhCn?=
- =?us-ascii?q?ObC/wzF8gxzXoN7nsOJOQl+34ZVm2uoRHImN0MuWsbDUrJ+5CbGXM9eou/QZ?=
- =?us-ascii?q?voo8XKwWXhMavDHbZnSrbJiK+bnwKw9ADVKP12rHYLdqKLK6HSRJDXvckEJ+?=
- =?us-ascii?q?v+oK1YN2Mm61d1psy+UH3N3xqUwgFkkyJqC0Ie1Q/oo/UA07Riu5vkbiVBMX?=
- =?us-ascii?q?hoApP1/lCJkHEsENUVcF/9y50Jv3BrZzAI4mwwUVzoJX8ug4ysNZrL+mg7cK?=
- =?us-ascii?q?Y/z/CbT33556+7uUKySmpbTWD8P8qM381v/vJtolUGp0iFs0SiKqiVUneSY+?=
- =?us-ascii?q?xfRKNFt8+t5cr9W0Yg5kkpne92cAdSo9lbkDBwOfgTDoeQo1nPFn2f0RuDxs?=
- =?us-ascii?q?556c9xBzmxTX2fKo61+Fzbd9UcEa8zJcYGDT61bbokThd+iYUtiIWd8i8stA?=
- =?us-ascii?q?SwrY5zR6xYTbaRtl2GfN1Ml3C/Nr+0PYUPkntFf99Sv40X5/nlyEseIPpTJE?=
- =?us-ascii?q?tqBjPVcGPfr/KhCIXiwoffGbEXvfYb0YwvJTHxO++dguS+5ZyXKdRzv2ys30?=
- =?us-ascii?q?O5ernjLgpowYARSm7QGNgGtRIMVR7DjPHGjpLy+P18BJlT3DeJ7Ftjehd7bk?=
- =?us-ascii?q?HJREX/2bJz4PTYl1jj7ZiyvUOT1YorRBAKufACs5KHl2Z0iHuvFsAh0OvDQB?=
- =?us-ascii?q?c0vysTksHAzQDAxzZXKnOlzQIuZWVoNADkx/ZLiSKfTDcs1cYoFHB+qDJc/s?=
- =?us-ascii?q?uMDJd5WRGqf2s9SM7DhiJFeCijT23Hj1xmwTFEhrM6qufmkqxOg+Chi377o4?=
- =?us-ascii?q?AkZhLWNVPyQ30RP69y8rp7+iBU3o+pW0vS0wxz65ikgWcCEV/AdqHu2dKlh/?=
- =?us-ascii?q?/RCon8ctUwwQdAyWwD9QqluGFfhXQVNEzpcfnZYbd3rKqt9YCDPlt9kvfUJF?=
- =?us-ascii?q?1n3Y4/AOQox56pMw/oztc7s5PH6JYHEOMP2JdtdbHdDI3dAyYDWp0P/2AC6I?=
- =?us-ascii?q?TACnr4jyL0jGrEVGd1/R4afWietbBXED/VPUbRTrPDoRntDQ4lsTRL6BrWYD?=
- =?us-ascii?q?/Z+CnD0bZFoH5IBilnPMY+Q2mB9JKGznGY3?=
+IronPort-Data: A9a23:ObRFwqrMkzW0IdVUJtHsmJ3ByXxeBmI/ZRIvgKrLsJaIsI4StFCzt
+ garIBnTaPnYZTf9eYgiYY2yoBhXv5LTnNcwTApo/iFkF3wW9JuZCYyVIHmrMnLJJKUvbq7FA
+ +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYGYpLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+4ZwehBtC5gZkPKgS5weH/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m6
+ qYqFXMpNBm6ldmkm56qSNldhNozBZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJU0UUrsUIMtWcOOAj3/jczpeuRSNqLA++WT7xw1tyrn9dtHSf7RmQO0FxxnG/
+ juXowwVBDkFKtrE5SCB9Ui8j+3jlyHeZIEWJr2Ro6sCbFq7mTVIVUx+uUGAifS9h0i3Hc9RK
+ kkI4ScwpIA17kWgStS7VBq9yFabujYMVtwWFPc1gCmdx6yR7wuHC2wsSj9adMdgpMIwXSYt1
+ FKCg5XuHzMHmLmIQnvb+L6Spj62PTU9JHUHIyQDSGM4D8LL+d9pyEiVF5A6TfDz3oad9SzML
+ y6is3IMuvY318cyxZ6ppnzWgQKdpIbZZ1tgjunIZV6N4gR8bY+jQoWn71nH8PpNRLqkokm9U
+ GsswJbHsr1XZX2ZvGnUGbhWQun1jxqQGGeE6WODCaXN4NhEF5SLWYlLqA9zK05yWirvUW+4O
+ RSD0e+9CXI6AZdLUUOVS9jsYyjJ5fK6fTgAahwzRosmX3SJXFXblByCnGbJt4wXrGAikLskJ
+ bCQetu2AHARBMxPlWToGrlFiedzmH9nnws/oKwXKDz+iNKjiIO9E+9ZYDNikMhjhE97nOkl2
+ 4kGbJbbo/mueOb/fjPW4eYuELz+FlBiXMieliCiXrTcSuaQMD1+VqS5LHJIU9ANopm5Yc+Ro
+ iHgBR4GlgCi7ZAFQC3TAk1ehHrUdc4XhRoG0eYEYz5EB1BLjV6T0Zoi
+IronPort-HdrOrdr: A9a23:rAEvH6zEZS6GO8WNncLpKrPwKr1zdoMgy1knxilNoRw8SKOlfq
+ eV7ZMmPH7P+U8ssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCFgguVxehZhOOIqQEIWReOk9K1vZ
+ 0QFZSWY+efMbEVt6rHCXGDYrUd/OU=
 X-IronPort-AV: E=Sophos;i="5.95,180,1661832000"; 
-   d="scan'208";a="82660695"
+   d="scan'208";a="81760194"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Luca Fancellu
-	<luca.fancellu@arm.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH for-4.17 v5 04/17] tools: Add -Werror by default to all tools/
-Date: Thu, 13 Oct 2022 14:05:00 +0100
-Message-ID: <20221013130513.52440-5-anthony.perard@citrix.com>
+	<luca.fancellu@arm.com>, Elena Ufimtseva <elena.ufimtseva@oracle.com>, "Wei
+ Liu" <wl@xen.org>
+Subject: [XEN PATCH for-4.17 v5 01/17] tools/debugger/gdbsx: Fix and cleanup makefiles
+Date: Thu, 13 Oct 2022 14:04:57 +0100
+Message-ID: <20221013130513.52440-2-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20221013130513.52440-1-anthony.perard@citrix.com>
 References: <20221013130513.52440-1-anthony.perard@citrix.com>
@@ -116,116 +91,164 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-And provide an option to ./configure to disable it.
+gdbsx/:
+  - Make use of subdir facility for the "clean" target.
+  - No need to remove the *.a, they aren't in this dir.
+  - Avoid calling "distclean" in subdirs as "distclean" targets do only
+    call "clean", and the "clean" also runs "clean" in subdirs.
+  - Avoid the need to make "gx_all.a" and "xg_all.a" in the "all"
+    recipe by forcing make to check for update of "xg/xg_all.a" and
+    "gx/gx_all.a" by having "FORCE" as prerequisite. Now, when making
+    "gdbsx", make will recurse even when both *.a already exist.
+  - List target in $(TARGETS).
 
-A follow-up patch will remove -Werror from every other Makefile in
-tools/. ("tools: Remove -Werror everywhere else")
+gdbsx/*/:
+  - Fix dependency on *.h.
+  - Remove some dead code.
+  - List targets in $(TARGETS).
+  - Remove "build" target.
+  - Cleanup "clean" targets.
+  - remove comments about the choice of "ar" instead of "ld"
+  - Use "$(AR)" instead of plain "ar".
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
- tools/configure.ac |  1 +
- tools/Rules.mk     |  4 ++++
- config/Tools.mk.in |  1 +
- tools/configure    | 26 ++++++++++++++++++++++++++
- 4 files changed, 32 insertions(+)
 
-diff --git a/tools/configure.ac b/tools/configure.ac
-index 32cbe6bd3c..09059bc569 100644
---- a/tools/configure.ac
-+++ b/tools/configure.ac
-@@ -81,6 +81,7 @@ m4_include([../m4/header.m4])
- AX_XEN_EXPAND_CONFIG()
+Notes:
+    missing-ack: GDBSX DEBUGGER
+    
+    v2:
+    - also replace plain "ar" by "$(AR)"
+
+ tools/debugger/gdbsx/Makefile    | 20 ++++++++++----------
+ tools/debugger/gdbsx/gx/Makefile | 15 +++++++--------
+ tools/debugger/gdbsx/xg/Makefile | 25 +++++++------------------
+ 3 files changed, 24 insertions(+), 36 deletions(-)
+
+diff --git a/tools/debugger/gdbsx/Makefile b/tools/debugger/gdbsx/Makefile
+index 5571450a89..4aaf427c45 100644
+--- a/tools/debugger/gdbsx/Makefile
++++ b/tools/debugger/gdbsx/Makefile
+@@ -1,20 +1,20 @@
+ XEN_ROOT = $(CURDIR)/../../..
+ include ./Rules.mk
  
- # Enable/disable options
-+AX_ARG_DEFAULT_ENABLE([werror], [Build tools without -Werror])
- AX_ARG_DEFAULT_DISABLE([rpath], [Build tools with -Wl,-rpath,LIBDIR])
- AX_ARG_DEFAULT_DISABLE([githttp], [Download GIT repositories via HTTP])
- AX_ARG_DEFAULT_ENABLE([monitors], [Disable xenstat and xentop monitoring tools])
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 26958b2948..a165dc4bda 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -133,6 +133,10 @@ endif
++SUBDIRS-y += gx
++SUBDIRS-y += xg
++
++TARGETS := gdbsx
++
+ .PHONY: all
+-all:
+-	$(MAKE) -C gx
+-	$(MAKE) -C xg
+-	$(MAKE) gdbsx
++all: $(TARGETS)
  
- CFLAGS_libxenlight += $(CFLAGS_libxenctrl)
+ .PHONY: clean
+-clean:
+-	rm -f xg_all.a gx_all.a gdbsx
+-	set -e; for d in xg gx; do $(MAKE) -C $$d clean; done
++clean: subdirs-clean
++	rm -f $(TARGETS)
  
-+ifeq ($(CONFIG_WERROR),y)
-+CFLAGS += -Werror
-+endif
-+
- ifeq ($(debug),y)
- # Use -Og if available, -O0 otherwise
- dbg_opt_level := $(call cc-option,$(CC),-Og,-O0)
-diff --git a/config/Tools.mk.in b/config/Tools.mk.in
-index 6c1a0a676f..d0d460f922 100644
---- a/config/Tools.mk.in
-+++ b/config/Tools.mk.in
-@@ -1,5 +1,6 @@
- -include $(XEN_ROOT)/config/Paths.mk
+ .PHONY: distclean
+ distclean: clean
+-	set -e; for d in xg gx; do $(MAKE) -C $$d distclean; done
  
-+CONFIG_WERROR       := @werror@
- CONFIG_RUMP         := @CONFIG_RUMP@
- ifeq ($(CONFIG_RUMP),y)
- XEN_OS              := NetBSDRump
-diff --git a/tools/configure b/tools/configure
-index 41deb7fb96..acd9a04c3b 100755
---- a/tools/configure
-+++ b/tools/configure
-@@ -716,6 +716,7 @@ ocamltools
- monitors
- githttp
- rpath
-+werror
- DEBUG_DIR
- XEN_DUMP_DIR
- XEN_PAGING_DIR
-@@ -805,6 +806,7 @@ with_xen_scriptdir
- with_xen_dumpdir
- with_rundir
- with_debugdir
-+enable_werror
- enable_rpath
- enable_githttp
- enable_monitors
-@@ -1490,6 +1492,7 @@ Optional Features:
-   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
-   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
-   --disable-largefile     omit support for large files
-+  --disable-werror        Build tools without -Werror (default is ENABLED)
-   --enable-rpath          Build tools with -Wl,-rpath,LIBDIR (default is
-                           DISABLED)
-   --enable-githttp        Download GIT repositories via HTTP (default is
-@@ -4111,6 +4114,29 @@ DEBUG_DIR=$debugdir_path
+ .PHONY: install
+ install: all
+@@ -28,7 +28,7 @@ uninstall:
+ gdbsx: gx/gx_all.a xg/xg_all.a 
+ 	$(CC) $(LDFLAGS) -o $@ $^
  
- # Enable/disable options
+-xg/xg_all.a:
++xg/xg_all.a: FORCE
+ 	$(MAKE) -C xg
+-gx/gx_all.a:
++gx/gx_all.a: FORCE
+ 	$(MAKE) -C gx
+diff --git a/tools/debugger/gdbsx/gx/Makefile b/tools/debugger/gdbsx/gx/Makefile
+index 3b8467f799..e9859aea9c 100644
+--- a/tools/debugger/gdbsx/gx/Makefile
++++ b/tools/debugger/gdbsx/gx/Makefile
+@@ -2,21 +2,20 @@ XEN_ROOT = $(CURDIR)/../../../..
+ include ../Rules.mk
  
-+# Check whether --enable-werror was given.
-+if test "${enable_werror+set}" = set; then :
-+  enableval=$enable_werror;
-+fi
+ GX_OBJS := gx_comm.o gx_main.o gx_utils.o gx_local.o
+-GX_HDRS := $(wildcard *.h)
 +
++TARGETS := gx_all.a
+ 
+ .PHONY: all
+-all: gx_all.a
++all: $(TARGETS)
+ 
+ .PHONY: clean
+ clean:
+-	rm -rf gx_all.a *.o .*.d
++	rm -f *.o $(TARGETS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
+ 
+-#%.o: %.c $(GX_HDRS) Makefile
+-#	$(CC) -c $(CFLAGS) -o $@ $<
+-
+-gx_all.a: $(GX_OBJS) Makefile $(GX_HDRS)
+-	ar cr $@ $(GX_OBJS)        # problem with ld using -m32 
++gx_all.a: $(GX_OBJS) Makefile
++	$(AR) cr $@ $(GX_OBJS)
+ 
++-include $(DEPS_INCLUDE)
+diff --git a/tools/debugger/gdbsx/xg/Makefile b/tools/debugger/gdbsx/xg/Makefile
+index acdcddf0d5..05325d6d81 100644
+--- a/tools/debugger/gdbsx/xg/Makefile
++++ b/tools/debugger/gdbsx/xg/Makefile
+@@ -1,35 +1,24 @@
+ XEN_ROOT = $(CURDIR)/../../../..
+ include ../Rules.mk
+ 
+-XG_HDRS := xg_public.h 
+ XG_OBJS := xg_main.o 
+ 
+ CFLAGS += -D__XEN_TOOLS__
+ CFLAGS += $(CFLAGS_xeninclude)
+ 
++TARGETS := xg_all.a
+ 
+ .PHONY: all
+-all: build
++all: $(TARGETS)
+ 
+-.PHONY: build
+-build: xg_all.a $(XG_HDRS) $(XG_OBJS) Makefile
+-# build: mk-symlinks xg_all.a $(XG_HDRS) $(XG_OBJS) Makefile
+-# build: mk-symlinks xg_all.a
+-
+-xg_all.a: $(XG_OBJS) Makefile $(XG_HDRS)
+-	ar cr $@ $(XG_OBJS)    # problems using -m32 in ld 
+-#	$(LD) -b elf32-i386 $(LDFLAGS) -r -o $@ $^
+-#	$(CC) -m32 -c -o $@ $^
+-
+-# xg_main.o: xg_main.c Makefile $(XG_HDRS)
+-#$(CC) -c $(CFLAGS) -o $@ $<
+-
+-# %.o: %.c $(XG_HDRS) Makefile  -- doesn't work as it won't overwrite Rules.mk
+-#%.o: %.c       -- doesn't recompile when .c changed
++xg_all.a: $(XG_OBJS) Makefile
++	$(AR) cr $@ $(XG_OBJS)
+ 
+ .PHONY: clean
+ clean:
+-	rm -rf xen xg_all.a $(XG_OBJS)  .*.d
++	rm -f $(TARGETS) $(XG_OBJS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
 +
-+if test "x$enable_werror" = "xno"; then :
-+
-+    ax_cv_werror="n"
-+
-+elif test "x$enable_werror" = "xyes"; then :
-+
-+    ax_cv_werror="y"
-+
-+elif test -z $ax_cv_werror; then :
-+
-+    ax_cv_werror="y"
-+
-+fi
-+werror=$ax_cv_werror
-+
-+
-+
- # Check whether --enable-rpath was given.
- if test "${enable_rpath+set}" = set; then :
-   enableval=$enable_rpath;
++-include $(DEPS_INCLUDE)
 -- 
 Anthony PERARD
 
