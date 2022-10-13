@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546A0C4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:15:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.422109.667955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F3C6C4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Oct 2022 13:16:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.422129.667977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiy3U-0002aV-Bf; Thu, 13 Oct 2022 13:15:20 +0000
+	id 1oiy49-0003RM-0u; Thu, 13 Oct 2022 13:16:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 422109.667955; Thu, 13 Oct 2022 13:15:20 +0000
+Received: by outflank-mailman (output) from mailman id 422129.667977; Thu, 13 Oct 2022 13:16:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oiy3U-0002aO-8c; Thu, 13 Oct 2022 13:15:20 +0000
-Received: by outflank-mailman (input) for mailman id 422109;
- Thu, 13 Oct 2022 13:15:19 +0000
+	id 1oiy48-0003RD-U0; Thu, 13 Oct 2022 13:16:00 +0000
+Received: by outflank-mailman (input) for mailman id 422129;
+ Thu, 13 Oct 2022 13:15:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=d8dk=2O=citrix.com=prvs=278749026=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oixuK-0001tl-Vq
- for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:05:53 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b5ed4008-4af7-11ed-8fd0-01056ac49cbb;
- Thu, 13 Oct 2022 15:05:30 +0200 (CEST)
+ id 1oixuK-0001tl-1f
+ for xen-devel@lists.xenproject.org; Thu, 13 Oct 2022 13:05:52 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b5eda9ad-4af7-11ed-8fd0-01056ac49cbb;
+ Thu, 13 Oct 2022 15:05:29 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b5ed4008-4af7-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: b5eda9ad-4af7-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1665666352;
+  d=citrix.com; s=securemail; t=1665666350;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=cMqBsfjjVcDOSywKpK4KZmm9RxQrPRiX94KjnGLwZeE=;
-  b=QrKiHGYZ92LDbGYz8shrZVkph82U/Sz3sFrq66uN3CeOodLg3seSDeOn
-   svXIqskoes0pwM+CUaI+HDzokBvIkgg4iVuNUo+xJxMJ0m3fmkDpapzoT
-   yOBJVYY0pheZOIQWKt70War33hHpZU5nwy6OXnqhGIs58a8TzBin53Mdq
-   U=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=Nc4WbeeXR+sXTmS5lu4Ec75pp9DLw9YmC4v+YNyuXWw=;
+  b=Tb3KCDrOjpiDjPo+MbrBEQaJW21cfgNCPLnMHJM9T8N/D2TTN6yeCW/d
+   Dcct4TzB/m7ZecTQ1bxIoQCnMLdPGd0Jn5UdLqaFhZ2xf4wUcaEE/z36U
+   gvfNq5ApbLiXlZ/Nlt2+4YdAR3dW/79jnPge5AjmULp4jzqD+CMVzJcDf
+   8=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 82281658
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 81760266
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:DAGtNqi4Qrx5uckmXImtJFX+X161ZRAKZh0ujC45NGQN5FlHY01je
- htvXz3XOfyKZDT2KYhwPImxpBkGsJDcmIBiHQc4/y48EXsb9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrSCYkidfCc8IA85kxVvhuUltYBhhNm9Emult
- Mj75sbSIzdJ4RYtWo4vw//F+U4HUMja4mtC5AVmPKsT5TcyqlFOZH4hDfDpR5fHatE88t6SH
- 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KT1Q0
- uUfGGkGUgLdtum08qyDWsdmmf12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKQOHWjOX9OYH46tO6umnn4dSwesF+PrLA7y2PS0BZwwP7mN9+9ltmiFZ8Pzh/G+
- zKuE2LRXhcwaM2mwjq+zlWvq/PqxSziXd8IC+jtnhJtqALKnTFCYPEMbnO5ruO+kVWWQM9EJ
- gof/S9Ghbc23FymSJ/6RRLQiG6JuFsQVsRdF8U+6RqR0ezE7gCBHG8GQzVdLts8u6cLqScCj
- wHT2YmzXHo27ePTGSn1GqqoQS2aZTYyNGgyPCQ4X1U06NvRvrkjoBjQd4M2eEKqteHdFTb1y
- jGMiSExgbQPkMIGv5mGEUD7byGE/caQEFNsjunDdif8t14iOtb5D2C9wQKDhcusOrp1WbVoU
- JIsv8GFpN4DApiW/MBmaLVcRer5jxpp3dC1vLKOI3XD327wk5JAVdoKiN2bGKuOGpdsRNMRS
- BWP0T69HbcKVJdQUYd5YpiqF+MhxrX6GNLuW5j8N4QQP8YpLFffon43PyZ8OlwBd2B1yMkC1
- WqzK57wXR7294w9pNZJewvt+eBynX1vrY8ibZv60w6mwdKjWZJhcp9caQPmUwzMxPnbyOkj2
- 4oAapDiJtQ2eLGWXxQ7BqZKcQBXcillW8qrwyGVH8baSjdb9KgaI6e56dscl0ZNxcy5Ss+gE
- qmBZ3Jl
-IronPort-HdrOrdr: A9a23:ZiwMNaFA3YzsrB6TpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5q
- aTdZUgpGfJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YYT0EUMrzN5DZB4voSmDPIceod/A==
+IronPort-Data: A9a23:X+7m3assN0pMYRB1t+4OpIHSbufnVFNeMUV32f8akzHdYApBsoF/q
+ tZmKW3QMvaMNmakf9B/a4y3oB8DsMTSyIU2TlZlq3xnF3tA+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiefHgZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ire7kIy1BjOkGlA5AZnPakQ5Aa2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkkU/
+ 84xFS5XdyrAiuGY/qyJY9k9qoMaeZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGM0Yn1lQ/UfrSmM+hgGX/dDtJ7kqYv6Mt70DYzRBr0airO93QEjCPbZUMwRjA/
+ DyYl4j/KhZEDIedkAqCy1jvmrD0mXLjeJkVCpTto5aGh3XMnzdOWXX6T2CTo/ajjVWlc8lCM
+ EFS8S0rxYAt8GS7Q9+7WAe3yFaUsxhZV9dOHukS7ACW1rGS8wufHnIDTDNKdJohrsBeeNAx/
+ gbXxZWzX2Up6eDLDyLGnluJkd+sEXIfH0Y/e3Udd0gI4PfdvrMavkPjCe82RcZZkebJMT33x
+ jmLqg03iLMSkdMH2s2HwLzXv96/jsOXF1Bov207Skrgt1okP9D9O+RE/HCBtZ59wJClok5tV
+ ZTus+yX96gwAJ6Ej0Rhq81dTejyt55p3NAx6GOD/qXNFRz3phZPnqgKulmSwXuF1e5VEQIFm
+ GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQPMUvLFffpH8xPBT4M4XRfK8EyPhXB
+ HtmWZz0USZy5VpPllJauNvxIZd0n3tjlAs/tLjwzgi90Kr2WUN5vYwtaQLWBt3VGYve/205B
+ f4DaJbRo/ieOcWiChTqHXk7dAxacCdqW86s9qS6tIere2JbJY3oMNeJqZtJRmCvt/09ejvgl
+ p1lZnJl9Q==
+IronPort-HdrOrdr: A9a23:c21tX6xptsK8G+jSPUx4KrPwFL1zdoMgy1knxilNoRw8SKKlfq
+ eV7ZImPH7P+U4ssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
+ 4JSdkGNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.95,180,1661832000"; 
-   d="scan'208";a="82281658"
+   d="scan'208";a="81760266"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>, "Juergen
  Gross" <jgross@suse.com>
-Subject: [XEN PATCH for-4.17 v5 13/17] libs/light: Rework generation of include/_libxl_*.h
-Date: Thu, 13 Oct 2022 14:05:09 +0100
-Message-ID: <20221013130513.52440-14-anthony.perard@citrix.com>
+Subject: [XEN PATCH for-4.17 v5 15/17] libs/light: Makefile cleanup
+Date: Thu, 13 Oct 2022 14:05:11 +0100
+Message-ID: <20221013130513.52440-16-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20221013130513.52440-1-anthony.perard@citrix.com>
 References: <20221013130513.52440-1-anthony.perard@citrix.com>
@@ -90,12 +90,13 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Instead of moving the public "_libxl_*.h" headers, we make a copy to
-the destination so that make doesn't try to remake the targets
-"_libxl_*.h" in libs/light/ again.
+Rework "libacpi.h" include in "libxl_x86_acpi.c" as to be more
+selective about the include path and only add "tools/libacpi/". Also
+"libxl_dom.c" don't use "libacpi.h" anymore. Use "-iquote" for libacpi
+headers.
 
-A new .PRECIOUS target is added to tell make to not deletes the
-intermediate targets generated by "gentypes.py".
+Get rid of the weird "$(eval stem =" in the middle of a recipe and use
+a make automatic variable "$(*F)" instead.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
@@ -104,35 +105,57 @@ Notes:
     v4:
     - new patch
 
- tools/libs/light/Makefile | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ tools/libs/light/Makefile         | 16 +++++++---------
+ tools/libs/light/libxl_x86_acpi.c |  2 +-
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index 4a8b0f7bcf..9329055c98 100644
+index 274e8350bb..250cc3bd2c 100644
 --- a/tools/libs/light/Makefile
 +++ b/tools/libs/light/Makefile
-@@ -215,6 +215,8 @@ libxl_internal_json.h: _libxl_types_internal_json.h
- $(OBJS-y) $(PIC_OBJS) $(LIBXL_TEST_OBJS) $(TEST_PROG_OBJS) $(SAVE_HELPER_OBJS): $(XEN_INCLUDE)/libxl.h
- $(OBJS-y) $(PIC_OBJS) $(LIBXL_TEST_OBJS): libxl_internal.h
+@@ -169,8 +169,7 @@ LDLIBS += $(LDLIBS-y)
+ $(OBJS-y) $(PIC_OBJS) $(LIBXL_TEST_OBJS): CFLAGS += $(CFLAGS_LIBXL) -include $(XEN_ROOT)/tools/config.h
+ $(ACPI_OBJS) $(ACPI_PIC_OBJS): CFLAGS += -I. -DLIBACPI_STDUTILS=\"$(CURDIR)/libxl_x86_acpi.h\"
+ $(TEST_PROG_OBJS) _libxl.api-for-check: CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxentoolcore)
+-libxl_dom.o libxl_dom.opic: CFLAGS += -I$(XEN_ROOT)/tools  # include libacpi/x86.h
+-libxl_x86_acpi.o libxl_x86_acpi.opic: CFLAGS += -I$(XEN_ROOT)/tools
++libxl_x86_acpi.o libxl_x86_acpi.opic: CFLAGS += -iquote $(ACPI_PATH)
+ $(SAVE_HELPER_OBJS): CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenguest)
  
-+# This exploits the 'multi-target pattern rule' trick.
-+# gentypes.py should be executed only once to make all the targets.
+ testidl.o: CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenlight)
+@@ -224,13 +223,12 @@ testidl.o: $(XEN_INCLUDE)/libxl.h
+ # This exploits the 'multi-target pattern rule' trick.
+ # gentypes.py should be executed only once to make all the targets.
  _libxl_type%.h _libxl_type%_json.h _libxl_type%_private.h _libxl_type%.c: libxl_type%.idl gentypes.py idl.py
- 	$(eval stem = $(notdir $*))
- 	$(PYTHON) gentypes.py libxl_type$(stem).idl __libxl_type$(stem).h __libxl_type$(stem)_private.h \
-@@ -224,8 +226,10 @@ _libxl_type%.h _libxl_type%_json.h _libxl_type%_private.h _libxl_type%.c: libxl_
- 	$(call move-if-changed,__libxl_type$(stem)_json.h,_libxl_type$(stem)_json.h)
- 	$(call move-if-changed,__libxl_type$(stem).c,_libxl_type$(stem).c)
+-	$(eval stem = $(notdir $*))
+-	$(PYTHON) gentypes.py libxl_type$(stem).idl __libxl_type$(stem).h __libxl_type$(stem)_private.h \
+-		__libxl_type$(stem)_json.h  __libxl_type$(stem).c
+-	$(call move-if-changed,__libxl_type$(stem).h,_libxl_type$(stem).h)
+-	$(call move-if-changed,__libxl_type$(stem)_private.h,_libxl_type$(stem)_private.h)
+-	$(call move-if-changed,__libxl_type$(stem)_json.h,_libxl_type$(stem)_json.h)
+-	$(call move-if-changed,__libxl_type$(stem).c,_libxl_type$(stem).c)
++	$(PYTHON) gentypes.py libxl_type$(*F).idl __libxl_type$(*F).h __libxl_type$(*F)_private.h \
++		__libxl_type$(*F)_json.h  __libxl_type$(*F).c
++	$(call move-if-changed,__libxl_type$(*F).h,_libxl_type$(*F).h)
++	$(call move-if-changed,__libxl_type$(*F)_private.h,_libxl_type$(*F)_private.h)
++	$(call move-if-changed,__libxl_type$(*F)_json.h,_libxl_type$(*F)_json.h)
++	$(call move-if-changed,__libxl_type$(*F).c,_libxl_type$(*F).c)
  
--$(XEN_INCLUDE)/_%.h: _%.h
--	$(call move-if-changed,_$*.h,$(XEN_INCLUDE)/_$*.h)
-+.PRECIOUS: _libxl_type%.h _libxl_type%.c
-+
-+$(XEN_INCLUDE)/_libxl_%.h: _libxl_%.h
-+	cp -f $< $@
+ .PRECIOUS: _libxl_type%.h _libxl_type%.c
  
- .PHONY: acpi
- acpi:
+diff --git a/tools/libs/light/libxl_x86_acpi.c b/tools/libs/light/libxl_x86_acpi.c
+index 57a6b63790..22eb160659 100644
+--- a/tools/libs/light/libxl_x86_acpi.c
++++ b/tools/libs/light/libxl_x86_acpi.c
+@@ -16,7 +16,7 @@
+ #include "libxl_arch.h"
+ #include <xen/hvm/hvm_info_table.h>
+ #include <xen/hvm/e820.h>
+-#include "libacpi/libacpi.h"
++#include "libacpi.h"
+ 
+  /* Number of pages holding ACPI tables */
+ #define NUM_ACPI_PAGES 16
 -- 
 Anthony PERARD
 
