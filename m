@@ -4,46 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EC5C4332F
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 10:44:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.425723.673733 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16CD0C4332F
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 10:54:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.425730.673756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ol6YJ-0001DP-Do; Wed, 19 Oct 2022 10:43:59 +0000
+	id 1ol6ht-00031b-OR; Wed, 19 Oct 2022 10:53:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 425723.673733; Wed, 19 Oct 2022 10:43:59 +0000
+Received: by outflank-mailman (output) from mailman id 425730.673756; Wed, 19 Oct 2022 10:53:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ol6YJ-0001DI-At; Wed, 19 Oct 2022 10:43:59 +0000
-Received: by outflank-mailman (input) for mailman id 425723;
- Wed, 19 Oct 2022 10:43:57 +0000
+	id 1ol6ht-00031Q-LP; Wed, 19 Oct 2022 10:53:53 +0000
+Received: by outflank-mailman (input) for mailman id 425730;
+ Wed, 19 Oct 2022 10:53:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/vg5=2U=epam.com=prvs=22912afb2d=oleksii_moisieiev@srs-se1.protection.inumbo.net>)
- id 1ol6YH-0001D8-Dc
- for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 10:43:57 +0000
-Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ed0e86d8-4f9a-11ed-8fd0-01056ac49cbb;
- Wed, 19 Oct 2022 12:43:55 +0200 (CEST)
-Received: from pps.filterd (m0174683.ppops.net [127.0.0.1])
- by mx0b-0039f301.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29JAJuTo012523;
- Wed, 19 Oct 2022 10:43:33 GMT
-Received: from eur04-db3-obe.outbound.protection.outlook.com
- (mail-db3eur04lp2054.outbound.protection.outlook.com [104.47.12.54])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3k9x3pkkgs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 19 Oct 2022 10:43:32 +0000
-Received: from PA4PR03MB7136.eurprd03.prod.outlook.com (2603:10a6:102:ea::23)
- by PA4PR03MB7392.eurprd03.prod.outlook.com (2603:10a6:102:106::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.26; Wed, 19 Oct
- 2022 10:43:30 +0000
-Received: from PA4PR03MB7136.eurprd03.prod.outlook.com
- ([fe80::551e:e1bc:b684:b7bb]) by PA4PR03MB7136.eurprd03.prod.outlook.com
- ([fe80::551e:e1bc:b684:b7bb%9]) with mapi id 15.20.5723.034; Wed, 19 Oct 2022
- 10:43:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=CpyO=2U=gmail.com=koct9i@srs-se1.protection.inumbo.net>)
+ id 1ol6hs-00030S-7k
+ for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 10:53:52 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 50863696-4f9c-11ed-8fd0-01056ac49cbb;
+ Wed, 19 Oct 2022 12:53:50 +0200 (CEST)
+Received: by mail-lj1-x229.google.com with SMTP id i21so18706852ljh.12
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Oct 2022 03:53:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,278 +41,317 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed0e86d8-4f9a-11ed-8fd0-01056ac49cbb
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QHvVz3lupSgLrfTfRvcD6hmOiM/TVoX4vAI+Rwy9poBadEjRPI0VIgR2isPLgkW0uzjjCKqbmHrNMhK0SChTgYMJ8NE7sO5v27qCK+If1sp3JnbOk3xkscuonn0FsT3oX/A8cKYag/hHvmgFIRz2kXoxPzcVXxllWeP7pjxZ3V7uH0KF79hUjUp5qndPQnEDx5YjY231rmVKqA1usKlb2yIU7+FP8d7HYdrd26Cb+57dgj8DAp8yz791PVMOl3eJVxJD9jEP4PJlbHBxOSgQZsDcFwwfgtlm643LycvWc/HvjaY9skRM2GsFNofvKT82/7mIBbFpoXchY0bDp0aX6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+TH18d6jJiu/VsRvpIH+0CdOUoQ76uMhOxlznj9gV4I=;
- b=MQI3HD2dJxJJOuY8bxuLWIAfvIDqs48egBy/K0k6iEgU6hvDWlfxhuoGiR/jNL1oA/KSZe3DLGSalgQ61CsvaJPtO0OZ8XKCUXbQMe7FikOme2rUOiTNYtZdACR7g8Ad5w+XUGkRAfYVzXm1UJq1h/46dttCmsMzuTvC9EMt44etkgbLJxdIGe416ZNdLv7SelVPeK6+6t/vK71WgubeRHIFxktnPrKX4i2yn31/8PfJA+Y95dWdS2KIDbKpOTObwSjJjCOzhB5yw6tUhGtHOzwWctOd5A6c5U50Bu/nlyabZBsDXo9u9RdZPB7aJ6Aq/4UY++x9aEVEd/uZNlFS8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+TH18d6jJiu/VsRvpIH+0CdOUoQ76uMhOxlznj9gV4I=;
- b=gMIwodgSRJBa5Vt4wCo7ARSqjFfFRAwaUQAq/CdrlTZ8DEvTUpbqPxeHSvfpIqTUwi7tcLdtzILWb1g/BE5w7xfSxyGZWoIoG+nJCVAKCPFk9uUj1ejQLHAZ1M3ft8HZY/Wtx7Ir9YjwJfL7HTTuUPajGwiIU4YoTXtKuKIV8gpDjVAC5lfmLfSwiHtsUKRVYUk2ga0ZTzQ6GKM9U3DXjI9031ZaSDrpLRK6+a2t9rtcGyB56hkywDB7whDtLjD/IADyo9xJWWPhd6Edh0b1/odSxO3MUi98Vtmr0TjybX78zii9oUcGI3XUHgaPbBsW4RcgsUePMHZF+Giif8cG2A==
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: "jennifer.herbert@citrix.com" <jennifer.herbert@citrix.com>
-CC: "jgross@suse.com" <jgross@suse.com>,
-        "sstabellini@kernel.org"
-	<sstabellini@kernel.org>,
-        "maarten.lankhorst@linux.intel.com"
-	<maarten.lankhorst@linux.intel.com>,
-        "mripard@kernel.org"
-	<mripard@kernel.org>,
-        "tzimmermann@suse.de" <tzimmermann@suse.de>,
-        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-        "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
-Subject: Issue on unmap_grant_pages before releasing dmabuf
-Thread-Topic: Issue on unmap_grant_pages before releasing dmabuf
-Thread-Index: AQHY46egGI7L6jjRBkOb9R/tnZLb7A==
-Date: Wed, 19 Oct 2022 10:43:30 +0000
-Message-ID: <Y0/U0RNDSRdV7bex@EPUAKYIW015D>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA4PR03MB7136:EE_|PA4PR03MB7392:EE_
-x-ms-office365-filtering-correlation-id: 248371b3-0c09-414a-9adf-08dab1bec33d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- 1ajmBmC2qHpjNru4mpKe2XQXhvN0PoX0vK94YZPHK+dtMn4b2XZxuquNSWpJuyRzh6xn916ikNz0XrHVxu3pFRgNJ8gFYxkfNeDCvIcUdIa7eWxhQxLBtOXTvAJgHS72SX/Oz6prHyOfrinjW58QFyb1RFu8Zpzd8uVUF9FUM3LkJ/7xD3MslIiqNI1kDLRLWKpRzSkb5ISbK2paO5dtm3UChSiEQsmGaJFJLvNxxHK/F8DnQsLIxp3VCPZ9q2Bie/KpMh9C5qKuY+ntf4EDhvBmRhliwO3GR6gcfKxoUjTvnEmh02GGlikwTrFNmmT3X9PHS7OKDGxYPyfzdEzGdiZH0lN65fz5t03RfjOB8/gB9pchff3N1Fy+ovlG8lcr0X2yfBwJHLQE/p11vgcMX4SYL5+DMYbQf/5p8JYDpeXir7iivysmMHhjmbCidJp2tGlSu6rJK6XipLXUrZm76xvDEEr8Fs292BeQiDhnb2ebF0XyZvntuoITNR/C7dZ6DKJLe9N3wpAfG1NfTGHwLjSnvx4i9oxtTftC3ZD9kjjNOYSSX86hKlxKsddr5li24NgMRghf36X/Afw7513SU4QBKMX6jbeb5hGbkqDUL+HfEfivjNk66sxZj46autZTiOeoktxb/BFvlg7sH+u9ctuiwxFy220I4EGN+m/hjYSiUmh+jAT+fwgHY3NyAcCn9MEOyy/fXQS05OYCooav4r96ZHJVYcTt/xsmdjxK/xgaUUDn3zlCpR7OfPEzVL7fMhWW6kH4f2VrFhXYYFStkkqDsECBCPwZjCyUMu3gYf9vxxB3nR/kHXWn4p5ITgq63wsOpnJPoLRessX80OyZ0g==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR03MB7136.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(7916004)(376002)(366004)(396003)(136003)(346002)(39860400002)(84040400005)(451199015)(6916009)(4326008)(5660300002)(54906003)(66446008)(66556008)(76116006)(66946007)(8676002)(91956017)(8936002)(6506007)(316002)(6512007)(9686003)(26005)(41300700001)(64756008)(66476007)(38100700002)(33716001)(38070700005)(122000001)(186003)(2906002)(86362001)(83380400001)(71200400001)(478600001)(45080400002)(966005)(6486002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?ZWJpOr8VAGPLJ0VxmIFDkoy317kfd4FigvoqSqVahNhPD4J4wg16bPD/fjnc?=
- =?us-ascii?Q?AAxe3qDLsSM9Rqf3FS2bN2Aa9CQ7eXgnXB9oFfsmkKkSFwlGWZGAT787CqBY?=
- =?us-ascii?Q?TrDuWHTwt/F8l8a0CoCFmsl6nvfTc1qEOZ7eZXRaTG/xSRnmxUOlpGRx0Jjq?=
- =?us-ascii?Q?rptDg8DUiWvhWr6rZyIzYX3R8Yfr2vK53sbqIIhmCZaA/YaTpinlJ+fjWNsU?=
- =?us-ascii?Q?rdM9wPNVJ2h1W0cV76uG5r/4MzuPEcRaj/8euqfJ0MuCQzFbczMlOtpZQ1CX?=
- =?us-ascii?Q?CGguEyRHAzUJZ4BSdmHGl02L6kxlS28hUZazpc18nvivVVw7OhMdnYZPECay?=
- =?us-ascii?Q?99SIuNcAjfg9NBs59dzqMO8nsRySf6aR+qPYdmOSrWLhHRxxMTEOX+Ckbjik?=
- =?us-ascii?Q?IyNqJJIjMJ+UCHRBvMDOtAHTul6qDeqJC+OM3mKidKEZVDZPhZun0UZlEQ0I?=
- =?us-ascii?Q?peEYsMZ49tOMquIql8wuOJUw2gQeqdbEklC+p0TILh6JkLAxwMYUygyTiCVM?=
- =?us-ascii?Q?HXCJrX03iQOKQU6RQDKIun4334aPuafYe6jB1SRJHN1WSENddegkLAXh+ZOa?=
- =?us-ascii?Q?7exVpRr/O3lyST5Rtb6Nt/h3og6dur1WH+TQY3kBSril+JJATiPjUzcmZea3?=
- =?us-ascii?Q?Q0L4f0HXncEsptP/KZ9uHIGmdg0ofhyBh4HVUJOipdEeNvYGh6/cc5+kMG0J?=
- =?us-ascii?Q?hCBXQAt/Ibmn2JWYKtTVK7V7K/DnlF1jwJm7g0kJABIVcIz98s5XzmLFbveq?=
- =?us-ascii?Q?xGAXNSDAM7sNEnsB7/sYJcnAlSpto23xU2XNCKZJz79Lu9FyoRR7gMSpQfDu?=
- =?us-ascii?Q?1l999pkfazv63NHwFgfUkri6kEOTuImzSxinHGkYeLtqqdZiA9lIu9FbWIcn?=
- =?us-ascii?Q?dFotNDr5TYBT7q+S778BPKWae3ttjRS2H2vjg5mGHfnO/v0NOdgURFNsCkIi?=
- =?us-ascii?Q?0M2I09wMBflCixt405Jtl0DPXujPejFoB0vD7rWL/lqVFMZAqWx5r4+S2tlQ?=
- =?us-ascii?Q?hpSRLATBzrMlhA4pZHVVTXJ7uhk8avYkk+NKHnue5t0wBEkQfzduwUumN+gV?=
- =?us-ascii?Q?Vw6Py6LprvR07+tc2OFZ3lCIyNSqRzuf05hahVehV9w/8isju8RgEwzavgos?=
- =?us-ascii?Q?sRTGOqQ3wxMq5Qu8OlXL5KDp6buHuB0SzFYNym93JX/c6tv5SfjbhM1eGlF9?=
- =?us-ascii?Q?r6l54KwL3BM75QcHu3r4jmUVRse3HpmxASqIh2/wokWAgVP0R48tTvE1q35/?=
- =?us-ascii?Q?gg+8+Qa2lrBk87xby2sfW4ejmIsH8ZjuWi7EHgH/NKECSBm7uYj9fowhjhZs?=
- =?us-ascii?Q?IEcxfVItWa7Bhl1XvqQ4Zj2CItvVO8watvc23XofvfMgPMuSFzBrhTJZ2UVF?=
- =?us-ascii?Q?nU5nS5MHP9duskfHWVEv+ARnzPeq+M0PGRlorwtO8ZDMmpV7MVblOm9qxhPN?=
- =?us-ascii?Q?3OaMte7WZKHsWLr9CqT5M6pWtASeZ3RLjaHVS+JMN7zW5WRIs73AzrIMjMYH?=
- =?us-ascii?Q?Xo3rXQAxdtYEeGi3Nf05/pnAY1uA0pK7869T7Unb/B+d0Zymf8HR/KnZzjyV?=
- =?us-ascii?Q?c8rX5/R8EsQkwlicF9PzGoQ6ZV4IEBW4N9CB5IPjwkf9yrccUQmyvpvhvuer?=
- =?us-ascii?Q?9A=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <BF063B05B28AF1498C3E5698FDCC3D90@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 50863696-4f9c-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=SLJhYMtLXgKI7Y17ZUIiMFD3J1dSMKzi0bGsbw5e7go=;
+        b=BIopzC1/zEhmwdduNBVA6swDAiJ/PaY8ch4dJ2rG5XuPIEphc4HpFIwENy/oXgcF77
+         g26f5vpGaEszcK++cCcUTKXnXewQJhMolM/QKzyYXNbX9xSmjD/h8CuNjZnIiz7Pow8u
+         9oViyTjYtEDviMMGlKH85v/Ws+BdAJzTCaIXgEvN2cQC8OYtO73LOuvgzZLgMf+F+rIG
+         mtckB/MCVPgD2rV3KUTEV82YQSZME3UNkpjhzr5nvBMLdEHKNnoKLk44gbindiuqP3++
+         9IOegW4jhF+LV2Vq5vqvc4+NLv43nVgJjixrVLu9Nl+mWgLbiiG+y5EemQvr99KzMTYQ
+         tpgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SLJhYMtLXgKI7Y17ZUIiMFD3J1dSMKzi0bGsbw5e7go=;
+        b=xV0S/2yb8Zn01SCLrXGGRr3ljRXG3XGf7zg3ZQN51G8XWbQOw205PS73GMh875T+mB
+         2UqIFaSDQHIWzl3nyw/MXA5mZtTuveyR7rLY9oopfmYQDOlyXXy3HGR5c5+DTYag5Yp2
+         da8YKF2ujTIgUimkcra6lOB0CW9ARom1cqJ1zAsqfHIf43FiKsfLlR9v0/Ctrgw/wxx8
+         Tg/+6yjovJU4LXW3X7BGa3zu609DZ1/fLRwosxOQhDkmdTGvQ3PDN0MMKb4ubwQcG1cn
+         jJ/MSwpWfUq34iCibM9nkbOX4G4jaEEZqjL2LtWQcpUGQFg1G5PmkpR79cDB/0qzm5Na
+         rcRw==
+X-Gm-Message-State: ACrzQf3qSUITs8nguRUCUGoMXLxZ8lMKuPfQztrlzMqwv4XsXw6WL3Q4
+	J8lPSLMRqFkmqVMW8fbKgOk+tzcZLRHt5VfLmvk=
+X-Google-Smtp-Source: AMsMyM56LTTzTKGc4F++LzICGIh8ple7Tae6Xn81CIYsoHyoaHlCwHgx+9D2SKe1qtnypzSnzS56crQyLn1GyeQTpJg=
+X-Received: by 2002:a05:651c:194c:b0:26f:ec78:6172 with SMTP id
+ bs12-20020a05651c194c00b0026fec786172mr2697844ljb.479.1666176829774; Wed, 19
+ Oct 2022 03:53:49 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR03MB7136.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 248371b3-0c09-414a-9adf-08dab1bec33d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2022 10:43:30.3374
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: NARB9CSUXii2WbH8W/x7zroh+CYY27tU2CbbfySBGmnPP+EY/tFK4v/dSeqdsKZaoAihmJe5njRYtPxGWuz1TYPqSQNGhMeZCGGXEQzQDDA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7392
-X-Proofpoint-ORIG-GUID: GMkuTjpDy9qh95K13P9QT05TQFhki3cI
-X-Proofpoint-GUID: GMkuTjpDy9qh95K13P9QT05TQFhki3cI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-19_06,2022-10-19_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 spamscore=0
- phishscore=0 lowpriorityscore=0 clxscore=1011 mlxlogscore=999
- priorityscore=1501 suspectscore=0 mlxscore=0 bulkscore=0 adultscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2210190059
+References: <20221019095620.124909-1-alexander.atanasov@virtuozzo.com>
+In-Reply-To: <20221019095620.124909-1-alexander.atanasov@virtuozzo.com>
+From: Konstantin Khlebnikov <koct9i@gmail.com>
+Date: Wed, 19 Oct 2022 13:53:38 +0300
+Message-ID: <CALYGNiONv3au6hbAva60jWurwkU5ancWo-o2v7tpSzwguqzD9g@mail.gmail.com>
+Subject: Re: [RFC PATCH v5 0/8] Make balloon drivers' memory changes known to
+ the rest of the kernel
+To: Alexander Atanasov <alexander.atanasov@virtuozzo.com>
+Cc: kernel@openvz.org, kernel test robot <lkp@intel.com>, 
+	"Michael S . Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>, Wei Liu <wei.liu@kernel.org>, 
+	Nadav Amit <namit@vmware.com>, pv-drivers@vmware.com, Jason Wang <jasowang@redhat.com>, 
+	virtualization@lists.linux-foundation.org, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
+	Stephen Hemminger <sthemmin@microsoft.com>, Dexuan Cui <decui@microsoft.com>, 
+	linux-hyperv@vger.kernel.org, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, xen-devel@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="00000000000012626105eb6106d0"
 
-Greetings.
+--00000000000012626105eb6106d0
+Content-Type: text/plain; charset="UTF-8"
 
-I need your advise about the problem I'm facing right now:
-I'm working on the new type of dmabuf export implementation. This=20
-is going to be new ioctl to the gntdev and it's purpose is to use
-external buffer, provided by file descriptor as the backing storage
-during export to grant refs.
-Few words about the functionality I'm working on right now:
-My setup is based on IMX8QM (please see PS below if you need
-configuration details)
+On Wed, 19 Oct 2022 at 12:57, Alexander Atanasov <
+alexander.atanasov@virtuozzo.com> wrote:
 
-When using dma-buf exporter to create dma-buf with backing storage and
-map it to the grant refs, provided from the domain, we've met a problem,
-that several HW (i.MX8 gpu in our case) do not support external buffer
-and requires backing storage to be created using it's native tools
-(eglCreateImageKHR returns EGL_NO_IMAGE_KHR for buffers, which were not
-created using gbm_bo_create).
-That's why new ioctls were added to be able to pass existing dma-buffer
-fd as input parameter and use it as backing storage to export to refs.
-Kernel version on IMX8QM board is 5.10.72 and itworks fine on this kernel
-version.
+> Currently balloon drivers (Virtio,XEN, HyperV, VMWare, ...)
+> inflate and deflate the guest memory size but there is no
+> way to know how much the memory size is changed by them.
+>
+> Make it possible for the drivers to report the values to mm core.
+>
+> Display reported InflatedTotal and InflatedFree in /proc/meminfo
+> and print these values on OOM and sysrq from show_mem().
+>
+> The two values are the result of the two modes the drivers work
+> with using adjust_managed_page_count or without.
+>
+> In earlier versions, there was a notifier for these changes
+> but after discussion - it is better to implement it in separate
+> patch series. Since it came out as larger work than initially expected.
+>
+> Amount of inflated memory can be used:
+>  - totalram_pages() users working with drivers not using
+>     adjust_managed_page_count
+>  - si_meminfo(..) users can improve calculations
+>  - by userspace software that monitors memory pressure
+>
 
-New ioctls source code can be found here:
- https://github.com/oleksiimoisieiev/linux/tree/gntdev_map_buf_upstr_for-li=
-nus-6.1_2
-   =20
-Now regarding the problem I've met when rebased those code on master:
-On my test stand I use DRM_IOCTL_MODE_CREATE_DUMB/DRM_IOCTL_MODE_DESTROY_DU=
-MB ioctls
-to allocate buffer and I'm observing the following backtrace on DRM_IOCTL_M=
-ODE_DESTROY_DUMB:
+Sorry, I see no reason for that series.
+Balloon inflation adjusts totalram_pages. That's enough.
 
-Unable to handle kernel paging request at virtual address 0000000387000098
-Mem abort info:
-  ESR =3D 0x0000000096000005
-  EC =3D 0x25: DABT (current EL), IL =3D 32 bits
-  SET =3D 0, FnV =3D 0
-  EA =3D 0, S1PTW =3D 0
-  FSC =3D 0x05: level 1 translation fault
-Data abort info:
-  ISV =3D 0, ISS =3D 0x00000005
-  CM =3D 0, WnR =3D 0
-user pgtable: 4k pages, 48-bit VAs, pgdp=3D000000006df98000
-[0000000387000098] pgd=3D0800000064f4f003, p4d=3D0800000064f4f003, pud=3D00=
-00000000000000
-Internal error: Oops: 96000005 [#1] PREEMPT SMP
-Modules linked in: xen_pciback overlay crct10dif_ce ip_tables x_tables ipv6
-PU: 0 PID: 34 Comm: kworker/0:1 Not tainted 6.0.0 #85
-Hardware name: linux,dummy-virt (DT)
-Workqueue: events virtio_gpu_dequeue_ctrl_func
-pstate: 000000c5 (nzcv daIF -PAN -UAO -TCO -DIT -SSBS BTYPE=3D--)
-pc : check_move_unevictable_folios+0xb8/0x4d0
-lr : check_move_unevictable_folios+0xb4/0x4d0
-sp : ffff8000081a3ad0
-x29: ffff8000081a3ad0 x28: ffff03856ac98800 x27: 0000000000000000
-x26: ffffde7b168ee9d8 x25: ffff03856ae26008 x24: 0000000000000000
-x23: ffffde7b1758d6c0 x22: 0000000000000001 x21: ffff8000081a3b68
-x20: 0000000000000001 x19: fffffc0e15935040 x18: ffffffffffffffff
-x17: ffff250a68e3d000 x16: 0000000000000012 x15: ffff8000881a38d7
-x14: 0000000000000000 x13: ffffde7b175a3150 x12: 0000000000002c55
-x11: 0000000000000ec7 x10: ffffde7b176113f8 x9 : ffffde7b175a3150
-x8 : 0000000100004ec7 x7 : ffffde7b175fb150 x6 : ffff8000081a3b70
-x5 : 0000000000000001 x4 : 0000000000000000 x3 : ffff03856ac98850
-x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000387000000
-Call trace:
- check_move_unevictable_folios+0xb8/0x4d0
- check_move_unevictable_pages+0x8c/0x110
- drm_gem_put_pages+0x118/0x198
- drm_gem_shmem_put_pages_locked+0x4c/0x70
- drm_gem_shmem_unpin+0x30/0x50
- virtio_gpu_cleanup_object+0x84/0x130
- virtio_gpu_cmd_unref_cb+0x18/0x2c
- virtio_gpu_dequeue_ctrl_func+0x124/0x290
- process_one_work+0x1d0/0x320
- worker_thread+0x14c/0x444
- kthread+0x10c/0x110
- ret_from_fork+0x10/0x20
-Code: 97fc3fe1 aa1303e0 94003ac7 b4000080 (f9404c00)=20
----[ end trace 0000000000000000 ]---
+There is no reason to know the amount of non-existent ballooned memory
+inside.
+Management software which works outside should care about that.
 
-After some investigation I think I've found the cause of the problem:
-This is the functionality, added in commit 3f9f1c67572f5e5e6dc84216d48d1480=
-f3c4fcf6 which
-introduces safe mechanism to unmap grant pages which is waiting until page_=
-count(page) =3D 1
-before doing unmap.
-The problem is that DRM_IOCTL_MODE_CREATE_DUMB creates buffer where page_co=
-unt(page) =3D 2.
+For debugging you could get current balloon size from /proc/vmstat
+(balloon_inflate - balloon_deflate).
+Also (I guess) /proc/kpageflags has a bit for that.
 
-On my QEMU test stand I'm using Xen 4.16 (aarch64) with debian based Dom0 +=
- DomU on the latest
-kernels.
-I've created some apps for testing:
-The first one is to allocate grant refs on DomU:
-https://github.com/oleksiimoisieiev/linux/tree/gntdev_map_buf_upstr_for-lin=
-us-6.1_2
-The name is test.ko and it can be built using command:
-cd ./test; make
-NOTE: makefile expects kernel build to be present on ../../test-build direc=
-tory.
+Anyway it's easy to monitor balloon inflation by seeing changes of total
+memory size.
 
-It should be run on DomU using command:
-insmod test.ko; echo "create" > /sys/kernel/etx_sysfs/etx_value
 
-Result will be the following:
-[  126.104903] test: loading out-of-tree module taints kernel.
-[  126.150586] Sysfs - Write!!!
-[  126.150773] create
-[  126.150773] =20
-[  126.150888] Hello, World!
-[  126.151203] Hello, World!
-[  126.151324] gref 301
-[  126.151376] addr ffff00000883d000
-[  126.151431] gref 302
-[  126.151454] addr ffff00000883e000
-[  126.151478] gref 303
-[  126.151497] addr ffff00000883f000
-[  126.151525] gref 304
-[  126.151546] addr ffff000008840000
-[  126.151573] gref 305
-[  126.151593] addr ffff000008841000
+>
+> Alexander Atanasov (8):
+>   mm: Make a place for a common balloon code
+>   mm: Enable balloon drivers to report inflated memory
+>   mm: Display inflated memory to users
+>   mm: Display inflated memory in logs
+>   drivers: virtio: balloon - report inflated memory
+>   drivers: vmware: balloon - report inflated memory
+>   drivers: hyperv: balloon - report inflated memory
+>   documentation: create a document about how balloon drivers operate
+>
+>  Documentation/filesystems/proc.rst            |   6 +
+>  Documentation/mm/balloon.rst                  | 138 ++++++++++++++++++
+>  MAINTAINERS                                   |   4 +-
+>  arch/powerpc/platforms/pseries/cmm.c          |   2 +-
+>  drivers/hv/hv_balloon.c                       |  12 ++
+>  drivers/misc/vmw_balloon.c                    |   3 +-
+>  drivers/virtio/virtio_balloon.c               |   7 +-
+>  fs/proc/meminfo.c                             |  10 ++
+>  .../linux/{balloon_compaction.h => balloon.h} |  18 ++-
+>  lib/show_mem.c                                |   8 +
+>  mm/Makefile                                   |   2 +-
+>  mm/{balloon_compaction.c => balloon.c}        |  19 ++-
+>  mm/migrate.c                                  |   1 -
+>  mm/vmscan.c                                   |   1 -
+>  14 files changed, 213 insertions(+), 18 deletions(-)
+>  create mode 100644 Documentation/mm/balloon.rst
+>  rename include/linux/{balloon_compaction.h => balloon.h} (91%)
+>  rename mm/{balloon_compaction.c => balloon.c} (94%)
+>
+> v4->v5:
+>  - removed notifier
+>  - added documentation
+>  - vmware update after op is done , outside of the mutex
+> v3->v4:
+>  - add support in hyperV and vmware balloon drivers
+>  - display balloon memory in show_mem so it is logged on OOM and on sysrq
+> v2->v3:
+>  - added missed EXPORT_SYMBOLS
+> Reported-by: kernel test robot <lkp@intel.com>
+>  - instead of balloon_common.h just use balloon.h (yes, naming is hard)
+>  - cleaned up balloon.h - remove from files that do not use it and
+>    remove externs from function declarations
+> v1->v2:
+>  - reworked from simple /proc/meminfo addition
+>
+> Cc: Michael S. Tsirkin <mst@redhat.com>
+> Cc: David Hildenbrand <david@redhat.com>
+> Cc: Wei Liu <wei.liu@kernel.org>
+> Cc: Nadav Amit <namit@vmware.com>
+> Cc: pv-drivers@vmware.com
+> Cc: Jason Wang <jasowang@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+> Cc: Haiyang Zhang <haiyangz@microsoft.com>
+> Cc: Stephen Hemminger <sthemmin@microsoft.com>
+> Cc: Dexuan Cui <decui@microsoft.com>
+> Cc: linux-hyperv@vger.kernel.org
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> Cc: xen-devel@lists.xenproject.org
+>
+> base-commit: 9abf2313adc1ca1b6180c508c25f22f9395cc780
+> --
+> 2.31.1
+>
+>
 
-The second is for dom0 and can be found here:
-https://github.com/oleksiimoisieiev/xen/tree/gntdev_fd
+--00000000000012626105eb6106d0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-How to build:
-make -C tools/console all
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, 19 Oct 2022 at 12:57, Alexander A=
+tanasov &lt;<a href=3D"mailto:alexander.atanasov@virtuozzo.com">alexander.a=
+tanasov@virtuozzo.com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
+ft:1px solid rgb(204,204,204);padding-left:1ex">Currently balloon drivers (=
+Virtio,XEN, HyperV, VMWare, ...)<br>
+inflate and deflate the guest memory size but there is no<br>
+way to know how much the memory size is changed by them.<br>
+<br>
+Make it possible for the drivers to report the values to mm core.<br>
+<br>
+Display reported InflatedTotal and InflatedFree in /proc/meminfo<br>
+and print these values on OOM and sysrq from show_mem().<br>
+<br>
+The two values are the result of the two modes the drivers work<br>
+with using adjust_managed_page_count or without.<br>
+<br>
+In earlier versions, there was a notifier for these changes<br>
+but after discussion - it is better to implement it in separate<br>
+patch series. Since it came out as larger work than initially expected.<br>
+<br>
+Amount of inflated memory can be used:<br>
+=C2=A0- totalram_pages() users working with drivers not using<br>
+=C2=A0 =C2=A0 adjust_managed_page_count<br>
+=C2=A0- si_meminfo(..) users can improve calculations<br>
+=C2=A0- by userspace software that monitors memory pressure<br></blockquote=
+><div><br></div><div>Sorry, I see no reason for that series.</div><div>Ball=
+oon inflation adjusts totalram_pages. That&#39;s enough.</div><div><br></di=
+v><div>There is no reason to know the amount of non-existent ballooned memo=
+ry inside.<br></div><div>Management software which works outside should car=
+e about that.</div><div><br></div><div>For debugging you could get current=
+=C2=A0balloon=C2=A0size from /proc/vmstat (balloon_inflate -=C2=A0balloon_d=
+eflate).</div><div>Also (I guess) /proc/kpageflags has a bit for that.</div=
+><div><br></div><div>Anyway it&#39;s easy to monitor balloon=C2=A0inflation=
+ by seeing changes of total memory size.</div><div>=C2=A0</div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">
+<br>
+Alexander Atanasov (8):<br>
+=C2=A0 mm: Make a place for a common balloon code<br>
+=C2=A0 mm: Enable balloon drivers to report inflated memory<br>
+=C2=A0 mm: Display inflated memory to users<br>
+=C2=A0 mm: Display inflated memory in logs<br>
+=C2=A0 drivers: virtio: balloon - report inflated memory<br>
+=C2=A0 drivers: vmware: balloon - report inflated memory<br>
+=C2=A0 drivers: hyperv: balloon - report inflated memory<br>
+=C2=A0 documentation: create a document about how balloon drivers operate<b=
+r>
+<br>
+=C2=A0Documentation/filesystems/proc.rst=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 =C2=A06 +<br>
+=C2=A0Documentation/mm/balloon.rst=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 | 138 ++++++++++++++++++<br>
+=C2=A0MAINTAINERS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A04 +-<br>
+=C2=A0arch/powerpc/platforms/pseries/cmm.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 =C2=A02 +-<br>
+=C2=A0drivers/hv/hv_balloon.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 12 ++<br>
+=C2=A0drivers/misc/vmw_balloon.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +-<br>
+=C2=A0drivers/virtio/virtio_balloon.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A07 +-<br>
+=C2=A0fs/proc/meminfo.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 10 ++<br>
+=C2=A0.../linux/{balloon_compaction.h =3D&gt; balloon.h} |=C2=A0 18 ++-<br>
+=C2=A0lib/show_mem.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A08 +<=
+br>
+=C2=A0mm/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0mm/{balloon_compaction.c =3D&gt; balloon.c}=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 19 ++-<br>
+=C2=A0mm/migrate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=
+=A01 -<br>
+=C2=A0mm/vmscan.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A01 -<br>
+=C2=A014 files changed, 213 insertions(+), 18 deletions(-)<br>
+=C2=A0create mode 100644 Documentation/mm/balloon.rst<br>
+=C2=A0rename include/linux/{balloon_compaction.h =3D&gt; balloon.h} (91%)<b=
+r>
+=C2=A0rename mm/{balloon_compaction.c =3D&gt; balloon.c} (94%)<br>
+<br>
+v4-&gt;v5:<br>
+=C2=A0- removed notifier<br>
+=C2=A0- added documentation<br>
+=C2=A0- vmware update after op is done , outside of the mutex<br>
+v3-&gt;v4:<br>
+=C2=A0- add support in hyperV and vmware balloon drivers<br>
+=C2=A0- display balloon memory in show_mem so it is logged on OOM and on sy=
+srq<br>
+v2-&gt;v3:<br>
+=C2=A0- added missed EXPORT_SYMBOLS<br>
+Reported-by: kernel test robot &lt;<a href=3D"mailto:lkp@intel.com" target=
+=3D"_blank">lkp@intel.com</a>&gt;<br>
+=C2=A0- instead of balloon_common.h just use balloon.h (yes, naming is hard=
+)<br>
+=C2=A0- cleaned up balloon.h - remove from files that do not use it and<br>
+=C2=A0 =C2=A0remove externs from function declarations<br>
+v1-&gt;v2:<br>
+=C2=A0- reworked from simple /proc/meminfo addition<br>
+<br>
+Cc: Michael S. Tsirkin &lt;<a href=3D"mailto:mst@redhat.com" target=3D"_bla=
+nk">mst@redhat.com</a>&gt;<br>
+Cc: David Hildenbrand &lt;<a href=3D"mailto:david@redhat.com" target=3D"_bl=
+ank">david@redhat.com</a>&gt;<br>
+Cc: Wei Liu &lt;<a href=3D"mailto:wei.liu@kernel.org" target=3D"_blank">wei=
+.liu@kernel.org</a>&gt;<br>
+Cc: Nadav Amit &lt;<a href=3D"mailto:namit@vmware.com" target=3D"_blank">na=
+mit@vmware.com</a>&gt;<br>
+Cc: <a href=3D"mailto:pv-drivers@vmware.com" target=3D"_blank">pv-drivers@v=
+mware.com</a><br>
+Cc: Jason Wang &lt;<a href=3D"mailto:jasowang@redhat.com" target=3D"_blank"=
+>jasowang@redhat.com</a>&gt;<br>
+Cc: <a href=3D"mailto:virtualization@lists.linux-foundation.org" target=3D"=
+_blank">virtualization@lists.linux-foundation.org</a><br>
+Cc: &quot;K. Y. Srinivasan&quot; &lt;<a href=3D"mailto:kys@microsoft.com" t=
+arget=3D"_blank">kys@microsoft.com</a>&gt;<br>
+Cc: Haiyang Zhang &lt;<a href=3D"mailto:haiyangz@microsoft.com" target=3D"_=
+blank">haiyangz@microsoft.com</a>&gt;<br>
+Cc: Stephen Hemminger &lt;<a href=3D"mailto:sthemmin@microsoft.com" target=
+=3D"_blank">sthemmin@microsoft.com</a>&gt;<br>
+Cc: Dexuan Cui &lt;<a href=3D"mailto:decui@microsoft.com" target=3D"_blank"=
+>decui@microsoft.com</a>&gt;<br>
+Cc: <a href=3D"mailto:linux-hyperv@vger.kernel.org" target=3D"_blank">linux=
+-hyperv@vger.kernel.org</a><br>
+Cc: Juergen Gross &lt;<a href=3D"mailto:jgross@suse.com" target=3D"_blank">=
+jgross@suse.com</a>&gt;<br>
+Cc: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" target=
+=3D"_blank">sstabellini@kernel.org</a>&gt;<br>
+Cc: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_tyshchenko@epam.co=
+m" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<br>
+Cc: <a href=3D"mailto:xen-devel@lists.xenproject.org" target=3D"_blank">xen=
+-devel@lists.xenproject.org</a><br>
+<br>
+base-commit: 9abf2313adc1ca1b6180c508c25f22f9395cc780<br>
+-- <br>
+2.31.1<br>
+<br>
+</blockquote></div></div>
 
-Result: ./tools/console/gnt_test should be uploaded to Dom0
-
-Start: sudo ./gnt_test_map 1 301 302 303 304 305
-Where 1 is DomU ID and 301 302 303 304 305 - grefs from test.ko output
-
-This will create buffer using ioctls DRM_IOCTL_MODE_CREATE_DUMB them passes=
- it as backing=20
-storage to gntdev and then destroys it using DRM_IOCTL_MODE_DESTROY_DUMB.
-The problem is that when dumb buffer is created we observe page_count(page)=
- =3D 2. So
-when before buffer release I'm trying to unmap grant refs using unmap_grant=
-_pages it is calling
-__gnttab_unmap_refs_async, which postpones actual unmapping to 5 ms because=
-=20
-page_count(page) > 1.
-Which causes drm_gem_get_pages to try to free pages, which are still mapped=
-.
-Also if I change in the following line:
-https://github.com/torvalds/linux/blob/bb1a1146467ad812bb65440696df0782e2bc=
-63c8/drivers/xen/grant-table.c#L1313
-change from page_count(item->pages[pc]) > 1 to page_count(item->pages[pc]) =
-> 2 - everything works fine.
-The obvious way for fix this issue I see is to make the expected page_count
-for __gnttab_unmap_refs_async configurable for each buffer, but I'm now sur=
-e
-if this is the
-best solution.
-
-I would be happy to hear your thoughts and advises about how to fix this si=
-tuation.
-
-PS: IMX8QM configuration details:
-IMX8QM board has XEN 4.16 with 2 domains:
-DomU, which has 1 gpu core passed through and graphics should start;
-Dom0, which has the second gpu core and weston.
-Weston is starting on DomU via xen drm frontend/backend and using=20
-zwp_linux_dmabuf_v1_interface to implement zerocopy support.
-Details of zerocopy initialization:=20
- https://github.com/xen-troops/displ_be/blob/782471533dc1e7b38099a5583256bf=
-e0c2be488c/src/displayBackend/wayland/WaylandZCopy.cpp#L410
-
-Best regards,
-Oleksii.
- =
+--00000000000012626105eb6106d0--
 
