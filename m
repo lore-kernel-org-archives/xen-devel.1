@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2D6C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 16:17:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.425920.674050 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF91C4332F
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 16:20:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.425929.674061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olBkN-0006qu-9H; Wed, 19 Oct 2022 16:16:47 +0000
+	id 1olBo1-0008Jm-0L; Wed, 19 Oct 2022 16:20:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 425920.674050; Wed, 19 Oct 2022 16:16:47 +0000
+Received: by outflank-mailman (output) from mailman id 425929.674061; Wed, 19 Oct 2022 16:20:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olBkN-0006qn-64; Wed, 19 Oct 2022 16:16:47 +0000
-Received: by outflank-mailman (input) for mailman id 425920;
- Wed, 19 Oct 2022 16:16:46 +0000
+	id 1olBo0-0008Jf-TC; Wed, 19 Oct 2022 16:20:32 +0000
+Received: by outflank-mailman (input) for mailman id 425929;
+ Wed, 19 Oct 2022 16:20:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=V6HZ=2U=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1olBkM-0006qh-48
- for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 16:16:46 +0000
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [2a00:1450:4864:20::42c])
+ id 1olBnz-0008JZ-Mj
+ for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 16:20:31 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6ca64eac-4fc9-11ed-91b4-6bf2151ebd3b;
- Wed, 19 Oct 2022 18:16:45 +0200 (CEST)
-Received: by mail-wr1-x42c.google.com with SMTP id a10so29885149wrm.12
- for <xen-devel@lists.xenproject.org>; Wed, 19 Oct 2022 09:16:45 -0700 (PDT)
+ id f31ad909-4fc9-11ed-91b4-6bf2151ebd3b;
+ Wed, 19 Oct 2022 18:20:30 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id v11so3254095wmd.1
+ for <xen-devel@lists.xenproject.org>; Wed, 19 Oct 2022 09:20:30 -0700 (PDT)
 Received: from [192.168.16.131] (54-240-197-232.amazon.com. [54.240.197.232])
  by smtp.gmail.com with ESMTPSA id
- h17-20020a05600c315100b003b4a68645e9sm323180wmo.34.2022.10.19.09.16.42
+ d9-20020adfe889000000b00223b8168b15sm14188174wrm.66.2022.10.19.09.20.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Oct 2022 09:16:43 -0700 (PDT)
+ Wed, 19 Oct 2022 09:20:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,81 +46,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ca64eac-4fc9-11ed-91b4-6bf2151ebd3b
+X-Inumbo-ID: f31ad909-4fc9-11ed-91b4-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:in-reply-to:organization:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WIgq7KUkYAZufLZT/vJOKCqP4ihn+JSpnSvPKstMd2Y=;
-        b=AOOTzFFJZ+yUIMjgdeHf1D7JPZg8t95Tpk6QQ128iQoHJYFSXGZ4qacujs2ESTOisC
-         A5QXDcD+360J+dV93ampTlklhgXeKHieLNMAz1Dg0irNgJENEsyPoVaSKP9J3xICpF94
-         1uWhLHMUt9oHnaJpDkFVEZefu7sGXaKLNDAyUZFO1rAx9u+jP34xnsalh59QQ9nxyltk
-         R69AbDDKwfaqwbKuEzlgY2QLdERmGfwQg4DtZZr1oeAR06ierQY1VXpit3aIvY1Mbj+R
-         B6b8Es/lh5tRjquy6f1+5vLnfQGlYD2dU2UNCcb1343tS+O8RXj6ZvVpumfnrbL7eeXE
-         tM2Q==
+        bh=Iwmw9PMnCNDtKtpfuQSnL7/aFDgNl4A9sE5A7TitH6M=;
+        b=cfwe++AiGE7jqAH8ujUv1LRlfnr91OEW85b2hJqJxKubegALAtGBYQHoXwYNqkvG5U
+         dr9osH3qXP/K19r41hRnNwYkMI5UOHBaQlZ6VClAq5+rG0EMPSz5tHaw/4ixEBDpsbvR
+         sg7W9/cMx462lV746LZUum7LAMZXp/6cbF0h3bRILiwzF5+nub9BVR9GwftOVG1V/9MW
+         0xroRkr1gc7+V/BCHyIxFJUm7If8jmkjI4DhaT5DexWIG1HpMQpfimG40ejemxXJtbIP
+         Dnz2btsel0Ip3P//ZJCMfyJZZ6QtCgyZnmLf/Lpmby5ePOBF+Vb9GJ/bMgFe45HSCQt9
+         Z8kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:organization:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WIgq7KUkYAZufLZT/vJOKCqP4ihn+JSpnSvPKstMd2Y=;
-        b=t/9sg1VJbsC7QEkqXQc0UPrk1Y6NbTrSd3fFalCrcsXIMcasCCtvT8N+j0ugJioLWb
-         IhNIeZEtd7JlNFZa72NIzUIK9C9LjRyNdQ3o7DwtlYPeFkyncAdOKo4qHbvRKVhXry4l
-         x59fA3BrAtlGw+g+rbXPBBnvxsCErfWCdRJQrqb96AEDxSqfV3Lg2Vinr46wwxs6Dc0h
-         nT42ap7nvQ5mftqdICgz06qXokTmfJ3YxHh0rf69zvSCdS+JALOjky48IHxI7kLKKbWm
-         ArFErzK89QtHjdQx90gTkxvpajolZOX/UrhZNJmtknoV3zeAEkaebWhtsW2m1B9BG3FA
-         aETA==
-X-Gm-Message-State: ACrzQf3U0ymMi1nadkNdIURGOPmuEVgg4m7hTbaaFHP2CIKMUYudxiUb
-	GKdDEbP54H9eVplX+mSY1bM=
-X-Google-Smtp-Source: AMsMyM70BAGn+ITDttNygqHII8IscaYNZml+iS8aG88q+Uj1/vKaPUkqZHfITZl9ve2GqS+zJReXkg==
-X-Received: by 2002:a05:6000:78a:b0:22e:4c41:9e36 with SMTP id bu10-20020a056000078a00b0022e4c419e36mr5641977wrb.160.1666196204511;
-        Wed, 19 Oct 2022 09:16:44 -0700 (PDT)
+        bh=Iwmw9PMnCNDtKtpfuQSnL7/aFDgNl4A9sE5A7TitH6M=;
+        b=jZlhtZnkVO7U5CJ5koj8TNhB+fsJwCDNpheEKaUH6/PAhxFAGjYBOMGE7g5PD5LGlM
+         SQcu7Sp1kF5uhnreBH0Eb+nEFmIGTYpC2Cu+84FwZtLimUa3EMLStxR5QcoxZKkIj2/c
+         zTg7564n+1F9XpqvG6pND24oq7KVkAUcFLu97ZHCgNw/eqsgBXrZSs9O0egf4+G5VTU2
+         q0v8nbbajKvYBzpXaLlK78RzGMjgieoLEI32YjniLYb9qt7arVjvZdm2qPXT3LUgPUl0
+         wDkhc78xX+ROhzhl+yPyXIXCX2Chh4sTknfS3opl2IC8yN/oAQqHjQjETc4+lJxRkIos
+         oLIg==
+X-Gm-Message-State: ACrzQf143nVK9dSLZ9qyd9yONLLHItcQlyqgpiFumAc+9RylK588afn/
+	23c1NVXXNtsqmw2VbyA8twrP5HeQPQMkSw==
+X-Google-Smtp-Source: AMsMyM56y348l/ISeOIYUF1NaaK8V1VIBgfBhdJf3+3om/ZwuaQWqDea3kef/AjLmL6gQvD8BjrdDw==
+X-Received: by 2002:a05:600c:3c84:b0:3b4:eff4:ab69 with SMTP id bg4-20020a05600c3c8400b003b4eff4ab69mr27107411wmb.104.1666196430326;
+        Wed, 19 Oct 2022 09:20:30 -0700 (PDT)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <7b8e645c-90c7-a4ff-4405-51df6df2e508@xen.org>
-Date: Wed, 19 Oct 2022 17:16:41 +0100
+Message-ID: <03aa5254-18f3-d8f0-edc9-7e8cfadaf434@xen.org>
+Date: Wed, 19 Oct 2022 17:20:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.3
-Subject: Re: [PATCH v1 06/12] xen-hvm: move common functions to
- hw/xen/xen-hvm-common.c
+Subject: Re: [PATCH v1 09/12] accel/xen/xen-all: export
+ xenstore_record_dm_state
 Content-Language: en-US
 To: Vikram Garhwal <vikram.garhwal@amd.com>, qemu-devel@nongnu.org
 Cc: stefano.stabellini@amd.com, Stefano Stabellini <sstabellini@kernel.org>,
  Anthony Perard <anthony.perard@citrix.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
  "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
 References: <20221015050750.4185-1-vikram.garhwal@amd.com>
- <20221015050750.4185-7-vikram.garhwal@amd.com>
+ <20221015050750.4185-10-vikram.garhwal@amd.com>
 Organization: Xen Project
-In-Reply-To: <20221015050750.4185-7-vikram.garhwal@amd.com>
+In-Reply-To: <20221015050750.4185-10-vikram.garhwal@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 15/10/2022 06:07, Vikram Garhwal wrote:
-[snip]
-> +    qemu_add_vm_change_state_handler(xen_hvm_change_state_handler, state);
-> +
-> +    state->memory_listener = xen_memory_listener;
-> +    memory_listener_register(&state->memory_listener, &address_space_memory);
-> +
-> +    state->io_listener = xen_io_listener;
-> +    memory_listener_register(&state->io_listener, &address_space_io);
-> +
-> +    state->device_listener = xen_device_listener;
-> +    QLIST_INIT(&state->dev_list);
-> +    device_listener_register(&state->device_listener);
-> +
+> xenstore_record_dm_state() will also be used in aarch64 xenpv machine.
+> 
+> Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 
-As Julien said, these do not belong here. These are the (current and 
-legacy) PV backend setup functions; they most certainly have nothing to 
-do with device emulation.
-
-   Paul
+Reviewed-by: Paul Durrant <paul@xen.org>
 
 
