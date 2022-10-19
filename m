@@ -4,51 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C114AC433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 10:54:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.425729.673744 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 484D0C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Oct 2022 11:22:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.425746.673773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ol6hk-0002jB-B3; Wed, 19 Oct 2022 10:53:44 +0000
+	id 1ol79Q-0006nj-5B; Wed, 19 Oct 2022 11:22:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 425729.673744; Wed, 19 Oct 2022 10:53:44 +0000
+Received: by outflank-mailman (output) from mailman id 425746.673773; Wed, 19 Oct 2022 11:22:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ol6hk-0002j4-8D; Wed, 19 Oct 2022 10:53:44 +0000
-Received: by outflank-mailman (input) for mailman id 425729;
- Wed, 19 Oct 2022 10:53:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ol79Q-0006nc-1D; Wed, 19 Oct 2022 11:22:20 +0000
+Received: by outflank-mailman (input) for mailman id 425746;
+ Wed, 19 Oct 2022 11:22:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rFyQ=2U=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1ol6hi-0002iy-5v
- for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 10:53:42 +0000
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2059.outbound.protection.outlook.com [40.107.101.59])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 491dd5d2-4f9c-11ed-91b4-6bf2151ebd3b;
- Wed, 19 Oct 2022 12:53:39 +0200 (CEST)
-Received: from DM6PR06CA0012.namprd06.prod.outlook.com (2603:10b6:5:120::25)
- by MN2PR12MB4190.namprd12.prod.outlook.com (2603:10b6:208:1dd::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Wed, 19 Oct
- 2022 10:53:35 +0000
-Received: from DM6NAM11FT091.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:120:cafe::12) by DM6PR06CA0012.outlook.office365.com
- (2603:10b6:5:120::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34 via Frontend
- Transport; Wed, 19 Oct 2022 10:53:35 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DM6NAM11FT091.mail.protection.outlook.com (10.13.173.108) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5746.16 via Frontend Transport; Wed, 19 Oct 2022 10:53:35 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Wed, 19 Oct
- 2022 05:53:34 -0500
-Received: from [10.71.192.110] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.31 via Frontend
- Transport; Wed, 19 Oct 2022 05:53:33 -0500
+ <SRS0=tQ2t=2U=citrix.com=prvs=28491fd06=George.Dunlap@srs-se1.protection.inumbo.net>)
+ id 1ol79P-0006nW-1r
+ for xen-devel@lists.xenproject.org; Wed, 19 Oct 2022 11:22:19 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 47dd838e-4fa0-11ed-8fd0-01056ac49cbb;
+ Wed, 19 Oct 2022 13:22:17 +0200 (CEST)
+Received: from mail-mw2nam10lp2104.outbound.protection.outlook.com (HELO
+ NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.104])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 19 Oct 2022 07:21:45 -0400
+Received: from PH0PR03MB5669.namprd03.prod.outlook.com (2603:10b6:510:33::16)
+ by CO1PR03MB5859.namprd03.prod.outlook.com (2603:10b6:303:98::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.33; Wed, 19 Oct
+ 2022 11:21:40 +0000
+Received: from PH0PR03MB5669.namprd03.prod.outlook.com
+ ([fe80::7131:3804:744b:d7cc]) by PH0PR03MB5669.namprd03.prod.outlook.com
+ ([fe80::7131:3804:744b:d7cc%6]) with mapi id 15.20.5723.034; Wed, 19 Oct 2022
+ 11:21:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,253 +51,271 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 491dd5d2-4f9c-11ed-91b4-6bf2151ebd3b
+X-Inumbo-ID: 47dd838e-4fa0-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1666178536;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:mime-version;
+  bh=6WBXppwj+sXpeKK0SJMJ07eAjAzaRK+57WPAOXAjyXo=;
+  b=gJpzaxBGJFsTHoXwl5V6VRui+zl2nTNYLioMl/7h9qHeH/8BaOdws58m
+   zI4SRoymS/Fz/6kNv2jhnqpWR2/RrTz/5xd7MJ5YteYczCvuj2SMbmxkn
+   d+WPN3EZjryHJrWpV+89R3oU4iHxdWMPXK/Nj4jVo3MfNSU6drsp8Aytd
+   E=;
+X-IronPort-RemoteIP: 104.47.55.104
+X-IronPort-MID: 85587839
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:JofiV6N7TBg7dY3vrR3ol8FynXyQoLVcMsEvi/8bNLWB5Y4Qp3Zem
+ TxOHSzEb+HbITHFz+oGOo2190sEv8fQz941SAo+ri88EykSp5fMVIvFIBetMynMfsHIFxJt5
+ p9CY4nKc8xuFyDXrx73YuC58iV3i63ZHtIQZAK81gVZHGeIHw992UILd5cFv7NVbfiF7yKl5
+ Yiv+JeBZwSsi24vPGlLsa/e+B03sPit4GMR5AIzPfsa4FOGm3crV59OfqvZw1kU4GV3NrXjG
+ 7ucluHREkfxpUpF5gaNy+6jGqEyaueOe1LI0hK6YoD66jBavCs+z60nA/QVbEZTml2hkst4j
+ d5ArvRccy9wVkH3sLlbAkQw/x1WZ/UcouafeCnn66R/8mWdG5fS66Q2ZK0JFdVwFtZfWQlm6
+ fEeITYRWRGP78reLGWTE7QEamwLdaEHDatH0p1S5Wix4cUOGPgvd57i995AtArcs+gVdRroi
+ 2j1XhI0BPjIS0Un1l76k/vSls/w7pX0W2UwRF54OcPbSoUcpeB8+OGFDTbbRjCFbZ58rB+3q
+ 174xUHkBlYjG/6R0DuK8m3504cjnQujMG4TPJuR06cyxXisnCkUAhBQUkanq/6kjEL4Q8hYN
+ 0Ef5ispq+416VCvSd7+GRa/pRZovDZFA4YWT7J8tVzLk/KIi+qaLjFsojppR9EhrsA7AxA30
+ FuAh/viBCB1sa3TQnWYnluRhWPvZHhKfTRTDcMCZRZcyeegjcYLtRXSEu5SC7WapYLeKy6ll
+ lhmqwB73d3/l/Uj1a+24FTGiDKEvYXSQ0g+4QC/dkKo6BloIrGsYYOA4ELeq/1HKe6xUV2pr
+ HUC3c+E44gmBpaIkTGLQfkcWrSg4f+KPSf0kVNpB4Mm9Tmm5zikZ484yCFzIgJlP9gJfRftY
+ VTPokVB6ZlLJnyoYKRrJYWrBKwXIbPIEN3kUrXRcYBIa50oLAufpng2OQiXwnznl1UqnecnI
+ 5CHfM2wDHEcT6N60D6xQORb2rgurswj+V7uqVnA50zP+dKjiLS9EN/p7HPmgjgF0Z65
+IronPort-HdrOrdr: A9a23:eGF6tK9arWyZAcHkFNpuk+Fudb1zdoMgy1knxilNoENuH/Bwxv
+ rFoB1E73TJYW4qKQodcdDpAtjifZquz+8O3WBxB8bpYOCCggeVxe5ZnOzfKlHbehEWs9QtrZ
+ uIEJIOReEYb2IK6/oSiTPQe7lP/DDEytHQuQ609QYOcegeUdAF0+4PMHf/LqQZfml7LKt8MK
+ DZyttMpjKmd3hSRN+8HGM5U+/KoMCOvI76YDYdbiRXpzWmvHeN0vrXAhKY1hARX3dk2rE561
+ XIlAT/++GKr+y78BnBzGXehq4m1ucJi+EzRfBkuPJlaQkEuTzYJriJnIfy+QzdldvfqGrCVu
+ O85yvIcf4DrE85NVvF3CcFkzOQrArGrUWShWNwyEGT3/DRVXY0DdFMipledQac4008vMtk2K
+ YOxG6BsYFLZCmw1RgUd7DzJm5Xf2eP0A0feNQo/gpieJpbbKUUoZ0U/UtTHptFFCXm6Jo/GO
+ 0rCM3H/v5ZfV6Tcnic5wBUsZeRd2V2Gg3DTlkJu8ST3TQTlHdlz1EAzMhamnsb7poyR5RN+u
+ yBOKV1k7NFSNMQcMtGda88aNryDnaITQPHMWqUL1iiHKYbO2jVo5qy+7kx7PHCQu198HLzou
+ W1bLp1jx9AR6u1M7z+4HRiyGG8fEytGTLw18pZ+591/rXhWbuDC1zwdGwT
+X-IronPort-AV: E=Sophos;i="5.95,196,1661832000"; 
+   d="asc'?scan'208,217";a="85587839"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Rnl3ClUJ/lpbAC3B6upya6zEz0LsslFVDEy3FANrwI6m9oAUggNUSXA0WjUNDG//MHmYSZW5tIzh1maxcE2eYZLYuJw2qXykv5EQzoV45TMnH62+LPYUHpEi18MvdV1FnJ7kyHcQuTuAVP7SNSGZw0h5mHxSBwdDtKpdGZpuSU2TJk9anOGA4PMuXpq0tmnnwfy6yZ8nsd6UsBSexA4lvarVpc+et82bZayw0hoA4qSd+fAfk38koHm8rOgZwOoq1qmbj9ihrh/qgWhFEqg1DxQiVU2h+f8050RFbWWLZ0PotmfJ80rOsqYrDE700Q9VMomEXmPDg5cbKxx+RUKHmA==
+ b=ilXuer1s2hilPR2EvCTGTre73twTC2Tt3N4JvQcQrS5EK6nrJucE9y3Ruz8ikk5WasaiL4Wdd4FwloNpoRnL2OTv9DIJKUrvgDKQ9mJH0zAFUn0uH1MnxtsaA0DTAWHO9lXm7XDUOm0XJSOPGG/bHo06hnsREqyWDgATQ2SZqQ/4yFDSGx9xcmLaMMU7Eh9LftLrbsiV9WXxduuzjDYSvOFYn+is/6b/BsSeKJuRh8z/LniESKHR8+SKgWtV3x6QcHfenF+A9ep5FjVlpMqLHjM+z1tRe402ICNRtJzyPeOF4MSvl7nwlJtwVxrp4j4mnt+9g9PBT7KMcco/QM52OA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HJEKRS8WmOl0dAIwJpZNbxPA3SHbecZxZanXz44Smps=;
- b=M6B8arCpdYhD78SGHCzYYhRJ1CdfhbdYFrftmrxnbrus6o3jy2t3KchIhSeNksSvauHK140/AQz/i3thtTI2zDGWseJmnY6yqYgS+Idw0eDl2R07HtXThFQAkk5MTdLwOjYRyyoncVeMQXxavrBo8g2adRsk85zCt9qgH+gMEGBnu30FqUYDyDAKHoBo0mjl7F5eu+L0OCOLzJGhQ07dbWdoBnc/EEP1QqdXelI/15JXeYoAgs2A+BkJvpLndopgyYddYo7jmlooz78qPF4o7iha+bXAvcGjuJ8fob3ISu0akn9bNcfvkoV/m3KsbiuepTrdi8QhKaFTaau+mRjEQw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=iSkTZjb1eo2iV4Ni3JTl84m6pfrasfAIVln131ZTn38=;
+ b=KJnKZhGPQf8F2wqUnCvgsR4YwBn6xU9csdMAQU+WZ8v7YzjBMtR5W0WfFuKmqBPHjWPc/vDg6opGEjdUZ/F7zl4tVX3lb63xTLiaSjBxZ3vzshKkpE+tsSTyTBUfgsX/Yh/wzPAaYZjwLQcq6d6V528DhNfwos46DnzOXhfoUh5EBg85z399lq6OjOJ+0GlRgo5wBCkjMYsCiM7tm35rFwGfGjvunmjISbUFyE89Kx4sh0O27X2/Ub7FKBJvWonMuR2lug9GxF+8GjF6oVVA9LHSsO6bz+FqBlu1JTKuMBlBVyLyn3AmvOmKz6ohyWcBbLsWl+IiQdphsWlM8wMjgg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HJEKRS8WmOl0dAIwJpZNbxPA3SHbecZxZanXz44Smps=;
- b=g8ODJo5/Fapx30MSXIzPlNUOEq/+8Weuv+UtrT8+g4AUNXsND83+hNjI6nGj2WiiwuGkb3P9zwHluP29uu9+j8jvbgP7UVYyi08PkXEhJJRHB15iDiwWiWqfQitzHBUK7BgUa+eFBM6Y/IuP2pBiTtRORqdFNA2OHUiA28N86rk=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <a1d2ab41-0d30-5d34-5a42-fb74b68d30f4@amd.com>
-Date: Wed, 19 Oct 2022 12:53:32 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.3
-Subject: Re: [PATCH v2 0/3] Yocto Gitlab CI
+ bh=iSkTZjb1eo2iV4Ni3JTl84m6pfrasfAIVln131ZTn38=;
+ b=QhC7iTVJ9JcRs0C0hArVYpP24y8Orp/IgCtE1lugmgkDt6QV7AwI8x3TtiENC+D2DwSz419pSfSwd4X4THsmGNSYmRDQxagNr8I/SpaKgy/oHjVvJQrAVrGK0u/hiyXPPEqzoqdzqB0AGGrq4q1Df4OdhJ/wuGLPg0DzjHzAKfo=
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <Andrew.Cooper3@citrix.com>, Henry Wang
+	<Henry.Wang@arm.com>, Wei Liu <wl@xen.org>, Community Manager
+	<community.manager@xenproject.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+Subject: Re: [PATCH v6 0/3] amd/msr: implement MSR_VIRT_SPEC_CTRL for HVM
+ guests
+Thread-Topic: [PATCH v6 0/3] amd/msr: implement MSR_VIRT_SPEC_CTRL for HVM
+ guests
+Thread-Index:
+ AQHYagNDrZ0UxO/94kuHn0c4ykfZPq2wJomAgAADuACAABCxAIAAoG4AgADJ4gCAZOCcgA==
+Date: Wed, 19 Oct 2022 11:21:39 +0000
+Message-ID: <A28D01E5-F7D1-4AC5-8A41-C03C77BF882E@citrix.com>
+References: <20220517153127.40276-1-roger.pau@citrix.com>
+ <53cc6a9f-5a4e-0716-fe08-ad86fc155cbf@suse.com>
+ <1dbab710-6d3c-a6cb-faa7-31558c04aab2@citrix.com>
+ <3a975638-9675-9a95-fead-91120edefee1@suse.com>
+ <07176f1c-2759-ddb0-1d59-38b4504d0ed4@citrix.com>
+ <bd319ac0-0f17-5461-5508-d383dfe07308@suse.com>
+In-Reply-To: <bd319ac0-0f17-5461-5508-d383dfe07308@suse.com>
+Accept-Language: en-US
 Content-Language: en-US
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Doug
- Goldstein <cardoe@cardoe.com>
-References: <cover.1665561024.git.bertrand.marquis@arm.com>
- <alpine.DEB.2.22.394.2210141325240.3690179@ubuntu-linux-20-04-desktop>
- <7DE7B34C-F6BD-42D9-83A3-AAA3A6A35B62@arm.com>
- <alpine.DEB.2.22.394.2210171651250.4587@ubuntu-linux-20-04-desktop>
- <alpine.DEB.2.22.394.2210181654170.4587@ubuntu-linux-20-04-desktop>
- <56155bff-6229-05a4-7221-cd6aa5a1de8b@amd.com>
- <0070D1D1-F579-4E11-8A27-62D3D92DE896@arm.com>
-From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <0070D1D1-F579-4E11-8A27-62D3D92DE896@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT091:EE_|MN2PR12MB4190:EE_
-X-MS-Office365-Filtering-Correlation-Id: 68d819a8-6d94-433c-3eb6-08dab1c02bc8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	imhg8S4KfChdi0TudOLpCW+JUURRYslmhc5rOQgQCZAx+c30GPM9DBtedfMCMabjU52iiVEajQtZXS0lSSKnM8awgVngHTwiu+y3jKmoHKvK7n7BmQnATuYNv2AMJicWH0fPo1hLjszPOLkMhELRJSPfng3fJNZdXepz7/ATkk6P7dPHrWJzLyRFZLgn9SkE33tumirGArJSG2Plh6vPV8moJENb1A8fPu4H+XRqMByXWV6N9piMkbKm3qOfQUZZxFJ5F5qwxiyfx4Qk7g53jmaS26SzyLV3k+mbQrs5MpNXPFS8DIk3KoRNfvNikvDa4yGpS/OYa6/2vNNHrGjvtt3cWuLoiCUBjzQCVxaEm+bOOPCsyeEtOUHFCachEMl+A9+ZF/OCE1mx+j7ng9a14RHphVA5y2aA73BgQcL/5lUH5fRTn8Az+FP++kVW7p34VuaQ4BVk18erf5JX/6vI7hBB0kpO8FKGYfMzCY+JuMgDJgTe34U59GQ5KIW1+1if2j7xeCdtSgZJFPnz0Y/bqi70AtHHJrprZQi5m4IkvwfW/EYwxbTIctSnFvGJYpNSUK7ZhYyN72YpDkI1QwVxFeHLPyqc8be6N54PysaeRSiZoL32VySDsPZwZxgSuxdtKzfqCO8yxF5Bn7SrWSu25ZUVRHxS5ebixh+TrbCECi2zPt74YrAFvbriGG+UKj4diEjBu1rAHcHiTOOMl5nk36K2LP7HQOX51opMlFjIsCGJrx7VLNuBg5Oe9r71k+iqORjgYvl3NWm3o0eYYixmy0DG6etzK7r4ri/SkDB2az1NKZ+VBGNx/QwE9XFRzN51Pvw2Pne3kDzka5s+KCe1ZBlEk6Z3cL9QIay+kJOizVKza7M4kJFwqFNcLsbXteQaMT0DFSabLsl8/KcOG+1UJQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(136003)(39860400002)(376002)(396003)(451199015)(40470700004)(36840700001)(46966006)(44832011)(4326008)(6916009)(5660300002)(54906003)(53546011)(8676002)(70586007)(70206006)(36756003)(16576012)(8936002)(316002)(26005)(41300700001)(36860700001)(81166007)(82740400003)(356005)(82310400005)(2616005)(40480700001)(426003)(47076005)(40460700003)(336012)(186003)(2906002)(31696002)(86362001)(83380400001)(478600001)(31686004)(45080400002)(966005)(84970400001)(36900700001)(43740500002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2022 10:53:35.1946
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3696.100.31)
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH0PR03MB5669:EE_|CO1PR03MB5859:EE_
+x-ms-office365-filtering-correlation-id: bfb303be-7498-4014-4f7a-08dab1c417f6
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ OJ6RmIsWZ9kTtUu89iOwatD+fEmAmMysYgIyfsONZS52GdQPuGrCrCg4bOyXMq3ZNjthZQWFfsfiAMoEePVlX0qmbzuSGMvWMDqJbRP0p7DM3GOW7rv6DS6w45nuzHrGq7jLGUqcAf7D8NqdQgePtzfUpv8man06DJT5AE0WE7vlQSVKBKXD/y0SNEh2rBTV9XWc0fZ1rDP7rEhyEZ5H1+wRFu/K6On5nrd6G0FLmtT2p2F7x/QFcBRYKMvKPK/caBj3U7Lcn597crKtqhLd00NYp4DEqMc8mDPnP47EnGREhQzU9/PD+qEzeoe+7N+9bi/tpUZElBiV44eNjg4cNHm6Sbdl/fA+TnAWWsef96Q/Di6WC14IBbbcWHX57QOBFOWbxky/PXQURtzikxVN7od8SL9LgsvR3LJwJq80/FuvDqG786CEeE3XGhMHTHpaNcOYQ0cwreB/ueYlRu01idOCQjnxeDJZWC1YixNUAxZ6OKz60bR7iV4X8hiLw//Fp12ZdA44meTI0xOOS3L9kVLmdsRlM/AXUHmHdLN5FuHvK95FbER6QJGcvlfUBfzbuCL7oRkDFLAKqVkQx7V/cLPSxrl9quizC0vw7T3wwIeAvFJYom4IX+z8552RhK+JmnckHDFpXyP3/0nenCvE1wIiDXorzDKJ/k5oH7V87s/z8qtalYwmVTR8Fc2r4zX/f+LwXO8Tsa9YTK0qkZBOyoNdkpO3542VJPEo6CFXr4z4nsq0owyZa84xFKRe+C6KNCyMLmUhmhNwtHoBtCKcV8AgG14rcZCQXWvO2vKGV5j19b+klJy3eUwok4mHX+Ai
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR03MB5669.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(376002)(396003)(346002)(39860400002)(366004)(451199015)(6916009)(54906003)(82960400001)(2616005)(316002)(38100700002)(2906002)(186003)(71200400001)(33656002)(122000001)(99936003)(6486002)(478600001)(38070700005)(36756003)(5660300002)(6506007)(6512007)(8936002)(41300700001)(86362001)(26005)(76116006)(66556008)(107886003)(8676002)(4326008)(66476007)(91956017)(66446008)(64756008)(66946007)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?VjZYTW5EQXhGZmgxZjFGNjh3aXcrR3BaWTRqUEtDQTZJYXVrejNKWVNnUWlD?=
+ =?utf-8?B?Mmt3WklGMTlpV0ZtZTE1MkRPVkdRcEJWMXpQd2VPQlVNcDFHSURSMXhNUnhC?=
+ =?utf-8?B?VjVubmpHeFAzVit6TW5PYjM5ZHdtbENER0lCVTFCZ1V1ampRRkE0MHYrTS9M?=
+ =?utf-8?B?cXVvNGtWWUJXdGpidENZeDlOQVZ3Z3BaM2hNZkVIR1lHaUdMbmU1blRwMjV5?=
+ =?utf-8?B?dnJDOHhpeUI5UE8yUGZTUjBXNkpqZDgzczNJVG8xVjZLeWh1ME0vRGxLcFBP?=
+ =?utf-8?B?UHlubzZlRTFiNGh1cGNLNnlwRVlxSzhGVVltMmIwSlhQQS9VR3V4TUQ3OVYy?=
+ =?utf-8?B?S0plc1RzckJjdUhOYTJGOWl6cHRLTW14RXozY0I5K0pZakpDdmRaUmMvbDNF?=
+ =?utf-8?B?ZlAxb2QxUjlDd2NKUnlETVVuSUNuMjllcm41N0lYVXAvSktLamp0TWpDcUNP?=
+ =?utf-8?B?Q2xnRG52L2NIZjNZbzdQc0w5MktlZ3Q1RDFtN2lOWjhySStiTnJGRlZianQy?=
+ =?utf-8?B?V1Rhb1N0dG14cTBLSVI4L1BGTVgzMG4xTURXT0FDOWRVZERMalM2UDNVTERH?=
+ =?utf-8?B?eWVoYmVhSHM2WjA3M3IvcmFVRDZwZW91akR3cnh3SkdPTU1URkM3NzRUelpu?=
+ =?utf-8?B?S1lHaEh3L0pxcEhjUHI4T2I2bjFTUVZiYU9BQ1ZwNytIQlh5bmQ4RVdRSTVB?=
+ =?utf-8?B?TFVFcG5UeE1mWUx2UFpXWTlNc2liTkRBbUpRVW85bHZBaDJzRFZnN2VibGNL?=
+ =?utf-8?B?aXdPWmtKWjRlUitqWm94NU1JejFlbkxBQW5ha05UcXN1dWRLWmJ3L0VLQkpq?=
+ =?utf-8?B?U0QyR2d0WFJvNEROQ2NCWWU1RDN2VHJGMmpkVzhFdXRsNDloNzZnNnA0RWJE?=
+ =?utf-8?B?L25DeDNHdHpFZkNoSFIzYmR3aUdoOWxqTXliWlladllvOE5HYWMyVllXYm43?=
+ =?utf-8?B?RXlianNNTFRpUWx3c2ZBK2lZK2Q2QlZEZER0TzBnSEd4a2ttSnowNm5yejhp?=
+ =?utf-8?B?c3pSSVVRS0xlMmMrWFVLWDRQNEU4L0RaeHNacjZIVGhYR3RYRGM0eUFJU3NN?=
+ =?utf-8?B?dVFXSEl3d3ZuaWdtVzNTK3V2OEgwd0lwdW40ZHA0OFYxVVUvKzZKdWtnMFFy?=
+ =?utf-8?B?NUF4aWg2WnZtV0MvS1JhQUZiSndKNWF6NHhSdEladVlvTWp4QjErWEZtTy8r?=
+ =?utf-8?B?cHltWTNFQXdVMnZZNVZpWFRHcDBGdThPOEFDSzd2QVlac05ZdkY0TzBFQjNn?=
+ =?utf-8?B?aHE0bTA1UW1wdEhuYm5XS0tBanMrem0zNVdLd1B0RFIyMU95d01NUTArOWZx?=
+ =?utf-8?B?NzR6aFh3ZkdlRWxOYXFUeXlDRHZOUHpnbHV1dTFoRFE5M3JnWGN5Wk10RjdI?=
+ =?utf-8?B?Z0ZxTFNIcTB5dmpOcytocW0vWVdRYXlTVEcvUlVGeVZSUXQvOVBYQ1IwWlRh?=
+ =?utf-8?B?OTBKaFc0YXlPQnpOUFdPOXNhMUhBVVU5NzBoNWRIZ0N4MTVDK1hMd1ZxaFV2?=
+ =?utf-8?B?RFgxMmZmTU5WNERjcTB3eVVXSU4reG5kTXlRcGdXN0gycXF6VmRuZFFLZkVa?=
+ =?utf-8?B?YjJuMVoveHNNN0kyM1pJdkhLTEx6UVk1cnlnNXR5Ykk2QWdJT2VwWVpISG9G?=
+ =?utf-8?B?elNheS9zcnJaOVFTZlQ5MUQ2eEYxL00wRU5iT1BTQ29veWZUZE10WDdHS1pY?=
+ =?utf-8?B?NG54M0Q0YnMvQjY2RTR4T0c0bTFETHlMdERyak1HNTZobkdjZFh5QlNwZXJP?=
+ =?utf-8?B?SHA3NC9hejNpZjVvYktmSVk2RkNaM3ZicWpzVFA0MTZ1b0l6M0ovQXpFU2Mz?=
+ =?utf-8?B?UFdtbVVYY0lQWklIMnVaeUlnTDlrL1lXK0tHSm5QK2VKVUozNHNpcFBXRmJm?=
+ =?utf-8?B?N3I1dWtyMVI2WW41R2tvUWEySW83UzgwNTJ2RkxySWpOT1V2NUxVZzRwMEJw?=
+ =?utf-8?B?ZTFybVZaUmJvRTV4SGU1K1FDbHpBQVg2YUR3YzNwNHhUZ3BFQWYzbnpiTzdR?=
+ =?utf-8?B?ZlFtcFVmOUZaY2FIdXdRVHNBOUNDaUk1Z29PK2VNUHVEUkxhVlpJQ0RHd1BE?=
+ =?utf-8?B?cE9SaVNxcXcrclZOUnc5NTkxZ25xaUQ3UlBYb2FZYmhoUEtaL2ozaWVRV3NK?=
+ =?utf-8?B?bzVlS2RPMUxWTlZQZkpoWVJYY21Xdjlkdm1jODRENE5sblJtNjl6RkFHb240?=
+ =?utf-8?B?dVE9PQ==?=
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_A97D27F9-52DA-4212-8F2D-A650CCD30534";
+	protocol="application/pgp-signature";
+	micalg=pgp-sha256
+MIME-Version: 1.0
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR03MB5669.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bfb303be-7498-4014-4f7a-08dab1c417f6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2022 11:21:39.9446
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 68d819a8-6d94-433c-3eb6-08dab1c02bc8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DM6NAM11FT091.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4190
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: MMAneFqisW+bOg2Qk+Q10Yf/I6of1O9Rm2a+vPFNSLpsdcdMIqs5/m+wY3h7JfLTxCT0rVLUVhm5LAuWJNesn1N75Gn1VHKXL+zA03gzWQY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5859
 
-Hi Bertrand,
+--Apple-Mail=_A97D27F9-52DA-4212-8F2D-A650CCD30534
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_AE78D5F4-4F3C-482D-B31E-5B1E51AF6CD7"
 
-On 19/10/2022 12:40, Bertrand Marquis wrote:
-> 
-> 
-> Hi Michal,
-> 
->> On 19 Oct 2022, at 10:06, Michal Orzel <michal.orzel@amd.com> wrote:
->>
->> Hi Stefano,
->>
->> On 19/10/2022 02:02, Stefano Stabellini wrote:
->>>
->>>
->>> On Mon, 17 Oct 2022, Stefano Stabellini wrote:
->>>> It should be
->>>>
->>>> BB_NUMBER_THREADS="2"
->>>>
->>>> but that worked! Let me a couple of more tests.
->>>
->>> I could run successfully a Yocto build test with qemuarm64 as target in
->>> gitlab-ci, hurray! No size issues, no build time issues, everything was
->>> fine. See:
->>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgitlab.com%2Fxen-project%2Fpeople%2Fsstabellini%2Fxen%2F-%2Fjobs%2F3193051236&amp;data=05%7C01%7Cmichal.orzel%40amd.com%7C5f7fc3a161fe44b5954808dab1be5c3a%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638017728406088513%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=2mb3N26wiz39RJNSA4KoIOt%2BG9X7EMDOWIpfKc2ZZOc%3D&amp;reserved=0
->>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgitlab.com%2Fxen-project%2Fpeople%2Fsstabellini%2Fxen%2F-%2Fjobs%2F3193083119&amp;data=05%7C01%7Cmichal.orzel%40amd.com%7C5f7fc3a161fe44b5954808dab1be5c3a%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638017728406088513%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=QhTFefS8NU1f7oLemB0Vtn%2BDCD%2BCnq1v1gEmlKCJt84%3D&amp;reserved=0
->>>
->>> I made the appended changes in top of this series.
->>>
->>> - I pushed registry.gitlab.com/xen-project/xen/yocto:kirkstone and
->>>  registry.gitlab.com/xen-project/xen/yocto:kirkstone-qemuarm64
->>> - for the gitlab-ci runs, we need to run build-yocto.sh from the copy in
->>>  xen.git, not from a copy stored inside a container
->>> - when building the kirkstone-qemuarm64 container the first time
->>>  (outside of gitlab-ci) I used COPY and took the script from the local
->>>  xen.git tree
->>> - after a number of tests, I settled on: BB_NUMBER_THREADS="8" more than
->>>  this and it breaks on some workstations, please add it
->>> - I am running the yocto build on arm64 so that we can use the arm64
->>>  hardware to do it in gitlab-ci
->>>
->>> Please feel free to incorporate these changes in your series, and add
->>> corresponding changes for the qemuarm32 and qemux86 targets.
->>>
->>> I am looking forward to it! Almost there!
->>>
->>> Cheers,
->>>
->>> Stefano
->>>
->>>
->>> diff --git a/automation/build/yocto/build-yocto.sh b/automation/build/yocto/build-yocto.sh
->>> index 0d31dad607..16f1dcc0a5 100755
->>> --- a/automation/build/yocto/build-yocto.sh
->>> +++ b/automation/build/yocto/build-yocto.sh
->>> @@ -107,6 +107,9 @@ IMAGE_INSTALL:append:pn-xen-image-minimal = " ssh-pregen-hostkeys"
->>> # Save some disk space
->>> INHERIT += "rm_work"
->>>
->>> +# Reduce number of jobs
->>> +BB_NUMBER_THREADS="8"
->>> +
->>> EOF
->>>
->>>     if [ "${do_localsrc}" = "y" ]; then
->>> diff --git a/automation/build/yocto/kirkstone-qemuarm64.dockerfile b/automation/build/yocto/kirkstone-qemuarm64.dockerfile
->>> index f279a7af92..aea3fc1f3e 100644
->>> --- a/automation/build/yocto/kirkstone-qemuarm64.dockerfile
->>> +++ b/automation/build/yocto/kirkstone-qemuarm64.dockerfile
->>> @@ -16,7 +16,8 @@ ARG target=qemuarm64
->>>
->>> # This step can take one to several hours depending on your download bandwith
->>> # and the speed of your computer
->>> -RUN /home/$USER_NAME/bin/build-yocto.sh --dump-log $target
->>> +COPY ./build-yocto.sh /
->>> +RUN /build-yocto.sh --dump-log $target
->>>
->>> FROM $from_image
->>>
->>> diff --git a/automation/build/yocto/kirkstone.dockerfile b/automation/build/yocto/kirkstone.dockerfile
->>> index 367a7863b6..ffbd91aa90 100644
->>> --- a/automation/build/yocto/kirkstone.dockerfile
->>> +++ b/automation/build/yocto/kirkstone.dockerfile
->>> @@ -84,9 +84,6 @@ RUN mkdir -p /home/$USER_NAME/yocto-layers \
->>>              /home/$USER_NAME/xen && \
->>>     chown $USER_NAME.$USER_NAME /home/$USER_NAME/*
->>>
->>> -# Copy the build script
->>> -COPY build-yocto.sh /home/$USER_NAME/bin/
->>> -
->>> # clone yocto repositories we need
->>> ARG yocto_version="kirkstone"
->>> RUN for rep in \
->>> diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
->>> index ddc2234faf..4b8bcde252 100644
->>> --- a/automation/gitlab-ci/build.yaml
->>> +++ b/automation/gitlab-ci/build.yaml
->>> @@ -584,6 +584,22 @@ alpine-3.12-gcc-arm64-boot-cpupools:
->>>     EXTRA_XEN_CONFIG: |
->>>       CONFIG_BOOT_TIME_CPUPOOLS=y
->>>
->>> +yocto-kirkstone-qemuarm64:
->>> +  stage: build
->>> +  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
->>> +  script:
->>> +    - ./automation/build/yocto/build-yocto.sh -v --log-dir=./logs --xen-dir=`pwd` qemuarm64
->>> +  variables:
->>> +    CONTAINER: yocto:kirkstone-qemuarm64
->>> +  artifacts:
->>> +    paths:
->>> +      - '*.log'
->>> +      - '*/*.log'
->> The above lines are not needed as the logs/* below will handle them all (logs are only stored in logs/).
-> 
-> Ack
-> 
->>
->>> +      - 'logs/*'
->>> +    when: always
->>> +  tags:
->>> +    - arm64
->>> +
->> build-yocto.sh performs both build and run actions. I think it'd be better to move this into test.yaml in that case.
->> The best would be to create one build job (specifying --no-run) in build.yaml and one test job (specifying --no-build) in test.yaml.
->> This however would probably require marking path build/tmp/deploy/***/qemuarm64 as an build artifact. The question then is
->> whether having this path would be enough for runqemu (Bertrand's opinion needed).
-> 
-> This will not be enough to run qemu as the qemu binary and its dependencies are in the build artifacts and not in deploy.
-> Splitting the build and run is not a good idea because the size of the artifact between the 2 will be huge.
-> 
->>
->> Apart from that there is an aspect of Yocto releases and the containers/tests names.
->> Yocto needs to be up-to-date in order to properly build Xen+tools.
->> This basically means that we will need to update the containers once
->> per Yocto release. The old containers would still need to be stored in our CI container registry
->> so that we can use CI for older versions of Xen. However, updating the containers would also require
->> modifying the existing tests (for now we have e.g. yocto-kirkstone-qemuarm64 but in a month we will have
->> to change them to yocto-langdale-qemuarm64). In a few years time this will result in several CI jobs
->> that are the same but differ only in name/container. I would thus suggest to name the CI jobs like this:
->> yocto-qemuarm64 (without yocto release name) and define the top-level YOCTO_CONTAINER variable to store
->> the current yocto release container. This will solve the issue I described above.
-> 
-> I think we have no other way around this and we will need to have one Yocto release supported by Xen officially so
-> we will have to keep old docker images for old releases of Xen and move to newer versions of Yocto in staging when
-> it is needed.
-> 
-> We have to find a way for gitlab-ci to use the build.yaml contained inside the tree that is to be tested somehow so that gitlab would automatically take the right one.
-> Which means that build.yaml will be different between branches and contain the right version for the current branch.
-> 
 
-What I suggest is that with each new yocto release, we add new docker container files and push them to registry.
-So we will end up in a registry having e.g. (arm64 as an example):
-- kirkstone-qemuarm64
-- langdale-qemuarm64
-We maintain only the one group of CI jobs whose names are generic (yocto-qemuarm64).
-After adding new containers for a new Yocto release, we modify the YOCTO_RELEASE variable
-to point to the latest yocto release containers.
+--Apple-Mail=_AE78D5F4-4F3C-482D-B31E-5B1E51AF6CD7
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-test.yaml:
-...
-# Yocto test jobs
-variables:
-  YOCTO_RELEASE: "kirkstone"
+Hello all,
 
-yocto-qemuarm64:
-  extends: .test-jobs-common
-  script:
-    - ./automation/build/yocto/build-yocto.sh -v --log-dir=./logs --xen-dir=`pwd` qemuarm64
-  variables:
-    CONTAINER: yocto:${YOCTO_RELEASE}-qemuarm64
-  artifacts:
-    paths:
-      - 'logs/*'
-    when: always
-  tags:
-    - arm64
+This thread was brought to the attention of the Code of Conduct team =
+because it contains some fairly serious accusations. Having looked into =
+the matter, and given the people involved a chance to respond, we=E2=80=99=
+d like to set the record straight (to the best of our current =
+knowledge).
 
-This means that:
-- on the current staging branch the YOCTO_RELEASE points to the latest containers (for the latest yocto release)
-- on the old stable branches the YOCTO_RELEASE points to the old containers (for the old yocto release).
+First of all, we=E2=80=99d like to acknowledge that the issue addressed =
+in this series has been a long-term source of frustration: Andrew first =
+mentioned the need for this functionality in 2018, and from then until =
+January 2022 repeatedly mentioned it as something critical to get in but =
+which he simply didn=E2=80=99t have time to personally address.
 
-~Michal
+That said, while his frustration is understandable, there were a number =
+of accusations made which, as far as we can tell, were unfounded; so we =
+want to set the record straight. In particular, having looked into the =
+history of this series and had discussions with all the parties, we have =
+concluded the following:
+
+* Roger attempted to address all of the feedback Andrew gave; and not =
+only was the minimum check-in process followed, but Jan and Roger made =
+every effort to get Andrew's feedback before checking in the patch.
+
+* The "Suggested-by" tags were reasonable for Roger to have put in, and =
+reasonable for Jan to have retained.
+
+This is not the kind of community we strive to be. In particular, we=E2=80=
+=99d like to exhort people to avoid charged language and attempt to lay =
+out the facts =E2=80=94 with references =E2=80=94 such that they speak =
+for themselves.
+
+We are also attempting to improve communication and shared =
+understanding, to hopefully keep frustration levels low in the future.
+
+Thanks,
+
+ -The Xen Project Conduct Team
+
+--Apple-Mail=_AE78D5F4-4F3C-482D-B31E-5B1E51AF6CD7
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; =
+-webkit-line-break: after-white-space;" class=3D""><p =
+style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);" class=3D"">Hello=
+ all,<br class=3D""><br class=3D"">This thread was brought to the =
+attention of the Code of Conduct team because it contains some fairly =
+serious accusations. Having looked into the matter, and given the people =
+involved a chance to respond, we=E2=80=99d like to set the record =
+straight (to the best of our current knowledge).<br class=3D""><br =
+class=3D"">First of all, we=E2=80=99d like to acknowledge that the issue =
+addressed in this series has been a long-term source of frustration: =
+Andrew first mentioned the need for this functionality in 2018, and from =
+then until January 2022 repeatedly mentioned it as something critical to =
+get in but which he simply didn=E2=80=99t have time to personally =
+address.<br class=3D""><br class=3D"">That said, while his frustration =
+is understandable, there were a number of accusations made which, as far =
+as we can tell, were unfounded; so we want to set the record straight. =
+In particular, having looked into the history of this series and had =
+discussions with all the parties, we have concluded the following:<br =
+class=3D""></p><p style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, =
+0);" class=3D"">* Roger attempted to address all of the feedback Andrew =
+gave; and not only was the minimum check-in process followed, but Jan =
+and Roger made every effort to get Andrew's feedback before checking in =
+the patch.<br class=3D""></p><p style=3D"caret-color: rgb(0, 0, 0); =
+color: rgb(0, 0, 0);" class=3D"">* The "Suggested-by" tags were =
+reasonable for Roger to have put in, and reasonable for Jan to have =
+retained.<br class=3D""></p><p style=3D"caret-color: rgb(0, 0, 0); =
+color: rgb(0, 0, 0);" class=3D"">This is not the kind of community we =
+strive to be. In particular, we=E2=80=99d like to exhort people to avoid =
+charged language and attempt to lay out the facts =E2=80=94 with =
+references =E2=80=94 such that they speak for themselves.<br =
+class=3D""></p><p style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, =
+0);" class=3D"">We are also attempting to improve communication and =
+shared understanding, to hopefully keep frustration levels low in the =
+future.</p><p style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);" =
+class=3D"">Thanks,</p><p style=3D"caret-color: rgb(0, 0, 0); color: =
+rgb(0, 0, 0);" class=3D"">&nbsp;-The Xen Project Conduct =
+Team</p></body></html>=
+
+--Apple-Mail=_AE78D5F4-4F3C-482D-B31E-5B1E51AF6CD7--
+
+--Apple-Mail=_A97D27F9-52DA-4212-8F2D-A650CCD30534
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEj3+7SZ4EDefWZFyCshXHp8eEG+0FAmNP3b8ACgkQshXHp8eE
+G+1D7Af+JqVw89ekgZQHN3IB40lAwUH8+U5Nkz0DCpimXY7ju96dftZEvUCPT2c1
+eXN3Cbo95K5ADpFJDIt9Up5kxitquPT97En916EfkCLbFMjOkmQ8aRUv47KnyLur
+kifNn7EnqnGOAx/XhWBWOeBY+exSS0S1HpGwfO1DZ6V/HwRR1iZrF+cV/+RdmTyl
+BwlbyLlz294cdzX9ecML3GzWJ1J6hqH8oAKNkLv3v9TlGIaHvU/gCzDSEG/1Q64/
+uxn1xr8SRQjok0GPVEXUku70Y3cjYKbPNpR+w4zlGa6DokELxW+iH/3Rz+TVzl1O
+y9H6wXzRPrD6dFckr8RDPucP8UD2dw==
+=8jZb
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_A97D27F9-52DA-4212-8F2D-A650CCD30534--
 
