@@ -4,44 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D40EEC3A5A1
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Oct 2022 10:38:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.426437.674985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE062C4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Oct 2022 10:42:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.426479.675039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olSwQ-0001bY-2a; Thu, 20 Oct 2022 10:38:22 +0000
+	id 1olSzu-0000GH-F5; Thu, 20 Oct 2022 10:41:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 426437.674985; Thu, 20 Oct 2022 10:38:21 +0000
+Received: by outflank-mailman (output) from mailman id 426479.675039; Thu, 20 Oct 2022 10:41:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olSwO-0001T5-O4; Thu, 20 Oct 2022 10:38:20 +0000
-Received: by outflank-mailman (input) for mailman id 426437;
- Thu, 20 Oct 2022 10:38:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1olSzu-0000GA-Bv; Thu, 20 Oct 2022 10:41:58 +0000
+Received: by outflank-mailman (input) for mailman id 426479;
+ Thu, 20 Oct 2022 10:41:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vz6S=2V=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1olSwB-0005Jb-Oh
- for xen-devel@lists.xenproject.org; Thu, 20 Oct 2022 10:38:08 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 48171e9b-5063-11ed-91b5-6bf2151ebd3b;
- Thu, 20 Oct 2022 12:38:06 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id DE9FE22B4B;
- Thu, 20 Oct 2022 10:38:05 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6EE9A13AF5;
- Thu, 20 Oct 2022 10:38:05 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 8HNZGg0lUWPPYwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Thu, 20 Oct 2022 10:38:05 +0000
+ <SRS0=Yb7k=2V=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1olSzs-0000G2-UQ
+ for xen-devel@lists.xenproject.org; Thu, 20 Oct 2022 10:41:57 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2042.outbound.protection.outlook.com [40.107.94.42])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cfdad687-5063-11ed-8fd0-01056ac49cbb;
+ Thu, 20 Oct 2022 12:41:55 +0200 (CEST)
+Received: from BN8PR04CA0015.namprd04.prod.outlook.com (2603:10b6:408:70::28)
+ by IA0PR12MB7774.namprd12.prod.outlook.com (2603:10b6:208:430::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.29; Thu, 20 Oct
+ 2022 10:41:51 +0000
+Received: from BN8NAM11FT085.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:70:cafe::61) by BN8PR04CA0015.outlook.office365.com
+ (2603:10b6:408:70::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.35 via Frontend
+ Transport; Thu, 20 Oct 2022 10:41:51 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT085.mail.protection.outlook.com (10.13.176.100) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5746.16 via Frontend Transport; Thu, 20 Oct 2022 10:41:51 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Thu, 20 Oct
+ 2022 05:41:50 -0500
+Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.31
+ via Frontend Transport; Thu, 20 Oct 2022 05:41:49 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,679 +60,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48171e9b-5063-11ed-91b5-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1666262285; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=8Be+tzsOVsbK7gq98qYnoedx5VlVHIs33U4RSar4iO4=;
-	b=tHP74gB+KrvtV1wO12GWLOb4TmmEQIramZWfi4MCH9EPqyClDEZDnYx4/CpIJQoIExDFkN
-	+26MMxzIs7Y9Z3pi5kUTcIIhh+rA71boAOAvkRBVTI0YzX1SBfDJaH6fqVbmd6N58wCYOW
-	hdPia0q1T1DoqR/lwn/O4n7/jwcL5eM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1666262285;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=8Be+tzsOVsbK7gq98qYnoedx5VlVHIs33U4RSar4iO4=;
-	b=MCER/5P8Lpe1m+NgskMCy0y/EoxXdAWnFSk07+eRPDCkJf4Ax3RHExol4mz6b/5FUtahvV
-	N47kiq4GVHWS9VAg==
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch,
-	airlied@gmail.com,
-	sam@ravnborg.org,
-	javierm@redhat.com,
-	mripard@kernel.org,
-	maarten.lankhorst@linux.intel.com
-Cc: dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-aspeed@lists.ozlabs.org,
-	linux-arm-kernel@lists.infradead.org,
-	etnaviv@lists.freedesktop.org,
-	linux-samsung-soc@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org,
-	linux-mips@vger.kernel.org,
-	linux-mediatek@lists.infradead.org,
-	linux-amlogic@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org,
-	spice-devel@lists.freedesktop.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-rockchip@lists.infradead.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-sunxi@lists.linux.dev,
-	linux-tegra@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 17/21] drm/fb-helper: Perform all fbdev I/O with the same implementation
-Date: Thu, 20 Oct 2022 12:37:51 +0200
-Message-Id: <20221020103755.24058-18-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.38.0
-In-Reply-To: <20221020103755.24058-1-tzimmermann@suse.de>
-References: <20221020103755.24058-1-tzimmermann@suse.de>
+X-Inumbo-ID: cfdad687-5063-11ed-8fd0-01056ac49cbb
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UK6iGYbj0hqqjhaZtE0kNjrVH8GZNPfUZKmlE88fSFDrUOQW1pfTvoNjs6WYj0VDL+sdKk3d7LPQXrCWM+fl+Ud8u6UQEv5bcYpuCR8lQMHEjb/s0IGn6eM4BXiLaFvxioVysfWligGKqCC9ZmRFr1qWJz1+tNLztfa8C0edxo1NTe2wLOppEFKoKApULBoB8wAFC8SRVssyrvuu20kmsFZ9wvFEeMchGu9BMgxIuyGesc0f9DQxaCQAxultAL9vJef4b3OdZsKIEQWV73uZqpFK+z3cLwpTDepN+zMPFgimFGd4bIt+nxCi+umE2XUYKinHfspU8ugGrCH3/ozRnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DijQhQr5b/k927xjMyy3lw0o6tSDAsYgZp7BGpv6mAQ=;
+ b=iaPVe+iWwgDKJ+ihD+jcSKuTo7NdRck9/8fAeEYvyPumVY8QFNwtoE88B68m1FyBY+hDIawqRuO8GRyiK83s8eTU2aNavwMaTszsgSwUdOeLsJbZosBR2dN9VkfWq7pO8CLOfhN8nAPeQVGG0SPBsB8+Duli7LeVhim0gM++AA8h2nl4P0kIeHwE2wydsntS+zAiyBiZ+7zuuJxNuYwkOHboSjvqGFBDhANu+GNbhLmgacPaGQI8osdE9BmQAsW49kr7rHj1KfKDWfLEUcRWW7BSJG/PmVc+K7j/V++SZEDi+NAP2u0GPRyfXijXJ3jAU3B/a36lVGi32U/NNfJ33A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DijQhQr5b/k927xjMyy3lw0o6tSDAsYgZp7BGpv6mAQ=;
+ b=tTwarEuOacQYQ6b2j4VExDZRybwRq8XYjMYTf07NkIbWK9hcjVxVc0UoVnWTxN7LVUNEqkXK3BUFAUCyLeBFWciq0t+43OpsFcVy1Mkei0AxcBgN2utOL7rTRifji+1UoqkNdAlTrCxaqh/UdXdzUSWMD27XDLU3tdF7O09s0pI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Ayan Kumar Halder <ayankuma@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
+	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>, Ayan Kumar Halder
+	<ayankuma@amd.com>
+Subject: [XEN v2] GICv3: Emulate GICD_IGRPMODR as RAZ / WI
+Date: Thu, 20 Oct 2022 11:41:46 +0100
+Message-ID: <20221020104146.29841-1-ayankuma@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT085:EE_|IA0PR12MB7774:EE_
+X-MS-Office365-Filtering-Correlation-Id: 58743017-b965-4616-6a6e-08dab287b2a7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	YUg5WHhGFJCDZqs1LpiEn6w/UzeFoYUOA6XIFQHkYULZ9fH4tPfFlz3zCRZh+DWXwwNjis4HHMNvnZ82UUzOLsxcJc/phY1fdSZfUffGljvups1OMULHvFd6Jnm8iAJDEaFsfQ9klhmMjInHydYAwdssyVVyaGbRgUzdr2HIj276U77+V7XvNgiIidWn2F071dHQO+oogh64DP+ZMY6fbOzFwunfzxavIRVwXH4TPS6PKvzPTefRtH3pvgqzY2nzPAGFfqp6ar3XDZZbo9b5D5Nvg83hTDVCLDjcXos4a9jvaGm8+9ELwoZa4xIoQVx5uSlsCRFsN3ys9r3G+Mb6KlJa2zGMuLqYTX84eLTuuCDQoyOkeMf5r2+GAbWFkskj3p6josVL0sYf95G35AwwgJOafSe9E+dHmovKzLsh47QGRDjKi7zzPzIE7AQkrAoLbKk+g0nqfWOkileZfn4QLVK4fMktasCJBcQWAtfkUh1lUu/YbxKKP8lYHeyMUO/NoR5nmFuKjk7hE4svaCzaBtkxCpqGzPEZJu4PeNPBtIZYm14BwMvlP/JK6qgp+INYY1e/50Nce0/c3+grvbPGEmoQvabt+a27hgYkXx49C3jAa9hblKZ5bwjFSUjvzg4YKUEfhXP8ns4Nrj2TpTP0M2xEKt8hQH0jkEgwEWjmuEmoRZ4fQtO+LcB66nBHbDCdsv58lT9LlPrFRj9yjUJreRTyepyfLnGkfExt6N6dGQygUsA7iVgFAOnWdk+AK2x6pESpDInIQq2JPwm6r4lA2yLUdHd98TrDVS/PEM0R6qQ=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(39860400002)(136003)(396003)(346002)(451199015)(46966006)(40470700004)(36840700001)(82740400003)(81166007)(356005)(6666004)(47076005)(70206006)(5660300002)(8676002)(8936002)(41300700001)(70586007)(26005)(40480700001)(40460700003)(6916009)(336012)(426003)(82310400005)(54906003)(4326008)(1076003)(186003)(316002)(2906002)(2616005)(36756003)(36860700001)(478600001)(83380400001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2022 10:41:51.3679
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 58743017-b965-4616-6a6e-08dab287b2a7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN8NAM11FT085.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7774
 
-Implement the fbdev's read/write helpers with the same functions. Use
-the generic fbdev's code as template. Convert all drivers.
+Refer GIC v3 specification (Arm IHI 0069H ID020922), IGRPMODR (similar to
+IGROUPR) is relevant only when the guests run in secure/non-secure mode.
+As Xen does not implement security extensions for guests, so the registers
+are emulated as read as zero/write ignore.
 
-DRM's fb helpers must implement regular I/O functionality in struct
-fb_ops and possibly perform a damage update. Handle all this in the
-same functions and convert drivers. The functionality has been used
-as part of the generic fbdev code for some time. The drivers don't
-set struct drm_fb_helper.fb_dirty, so they will not be affected by
-damage handling.
-
-For I/O memory, fb helpers now provide drm_fb_helper_cfb_read() and
-drm_fb_helper_cfb_write(). Several drivers require these. Until now
-tegra used I/O read and write, although the memory buffer appears to
-be in system memory. So use _sys_ helpers now.
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Signed-off-by: Ayan Kumar Halder <ayankuma@amd.com>
 ---
- drivers/gpu/drm/armada/armada_fbdev.c      |   2 +
- drivers/gpu/drm/drm_fb_helper.c            | 383 ++++++++++++---------
- drivers/gpu/drm/exynos/exynos_drm_fbdev.c  |   2 +
- drivers/gpu/drm/gma500/framebuffer.c       |   2 +
- drivers/gpu/drm/i915/display/intel_fbdev.c |   2 +
- drivers/gpu/drm/radeon/radeon_fb.c         |   2 +
- drivers/gpu/drm/tegra/fb.c                 |   2 +
- drivers/gpu/drm/vmwgfx/vmwgfx_fb.c         |   3 +
- include/drm/drm_fb_helper.h                |  17 +
- 9 files changed, 257 insertions(+), 158 deletions(-)
 
-diff --git a/drivers/gpu/drm/armada/armada_fbdev.c b/drivers/gpu/drm/armada/armada_fbdev.c
-index f02f6a5ba8320..584cee123bd8e 100644
---- a/drivers/gpu/drm/armada/armada_fbdev.c
-+++ b/drivers/gpu/drm/armada/armada_fbdev.c
-@@ -19,6 +19,8 @@
- static const struct fb_ops armada_fb_ops = {
- 	.owner		= THIS_MODULE,
- 	DRM_FB_HELPER_DEFAULT_OPS,
-+	.fb_read	= drm_fb_helper_cfb_read,
-+	.fb_write	= drm_fb_helper_cfb_write,
- 	.fb_fillrect	= drm_fb_helper_cfb_fillrect,
- 	.fb_copyarea	= drm_fb_helper_cfb_copyarea,
- 	.fb_imageblit	= drm_fb_helper_cfb_imageblit,
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 379e0d2f67198..836523aef6a27 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -747,30 +747,132 @@ void drm_fb_helper_deferred_io(struct fb_info *info, struct list_head *pagerefli
- }
- EXPORT_SYMBOL(drm_fb_helper_deferred_io);
+Observed the issue while running Zephyr on R52.
+Also, found that KVM has similar behaviour.
+
+Changes from:-
+v1 - Moved the definitions of GICD_IGRPMODR, GICD_IGRPMODRN to gic_v3
+specific header.
+
+ xen/arch/arm/include/asm/gic_v3_defs.h | 2 ++
+ xen/arch/arm/vgic-v3.c                 | 4 ++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/xen/arch/arm/include/asm/gic_v3_defs.h b/xen/arch/arm/include/asm/gic_v3_defs.h
+index 34ed5f857d..728e28d5e5 100644
+--- a/xen/arch/arm/include/asm/gic_v3_defs.h
++++ b/xen/arch/arm/include/asm/gic_v3_defs.h
+@@ -30,6 +30,8 @@
+ #define GICD_CLRSPI_NSR              (0x048)
+ #define GICD_SETSPI_SR               (0x050)
+ #define GICD_CLRSPI_SR               (0x058)
++#define GICD_IGRPMODR                (0xD00)
++#define GICD_IGRPMODRN               (0xD7C)
+ #define GICD_IROUTER                 (0x6000)
+ #define GICD_IROUTER32               (0x6100)
+ #define GICD_IROUTER1019             (0x7FD8)
+diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
+index 7fb99a9ff2..0c23f6df9d 100644
+--- a/xen/arch/arm/vgic-v3.c
++++ b/xen/arch/arm/vgic-v3.c
+@@ -685,6 +685,7 @@ static int __vgic_v3_distr_common_mmio_read(const char *name, struct vcpu *v,
+     switch ( reg )
+     {
+     case VRANGE32(GICD_IGROUPR, GICD_IGROUPRN):
++    case VRANGE32(GICD_IGRPMODR, GICD_IGRPMODRN):
+         /* We do not implement security extensions for guests, read zero */
+         if ( dabt.size != DABT_WORD ) goto bad_width;
+         goto read_as_zero;
+@@ -781,6 +782,7 @@ static int __vgic_v3_distr_common_mmio_write(const char *name, struct vcpu *v,
+     switch ( reg )
+     {
+     case VRANGE32(GICD_IGROUPR, GICD_IGROUPRN):
++    case VRANGE32(GICD_IGRPMODR, GICD_IGRPMODRN):
+         /* We do not implement security extensions for guests, write ignore */
+         goto write_ignore_32;
  
-+typedef ssize_t (*drm_fb_helper_read_screen)(struct fb_info *info, char __user *buf,
-+					     size_t count, loff_t pos);
-+
-+static ssize_t __drm_fb_helper_read(struct fb_info *info, char __user *buf, size_t count,
-+				    loff_t *ppos, drm_fb_helper_read_screen read_screen)
-+{
-+	loff_t pos = *ppos;
-+	size_t total_size;
-+	ssize_t ret;
-+
-+	if (info->screen_size)
-+		total_size = info->screen_size;
-+	else
-+		total_size = info->fix.smem_len;
-+
-+	if (pos >= total_size)
-+		return 0;
-+	if (count >= total_size)
-+		count = total_size;
-+	if (total_size - count < pos)
-+		count = total_size - pos;
-+
-+	if (info->fbops->fb_sync)
-+		info->fbops->fb_sync(info);
-+
-+	ret = read_screen(info, buf, count, pos);
-+	if (ret > 0)
-+		*ppos += ret;
-+
-+	return ret;
-+}
-+
-+typedef ssize_t (*drm_fb_helper_write_screen)(struct fb_info *info, const char __user *buf,
-+					      size_t count, loff_t pos);
-+
-+static ssize_t __drm_fb_helper_write(struct fb_info *info, const char __user *buf, size_t count,
-+				     loff_t *ppos, drm_fb_helper_write_screen write_screen)
-+{
-+	loff_t pos = *ppos;
-+	size_t total_size;
-+	ssize_t ret;
-+	int err = 0;
-+
-+	if (info->screen_size)
-+		total_size = info->screen_size;
-+	else
-+		total_size = info->fix.smem_len;
-+
-+	if (pos > total_size)
-+		return -EFBIG;
-+	if (count > total_size) {
-+		err = -EFBIG;
-+		count = total_size;
-+	}
-+	if (total_size - count < pos) {
-+		if (!err)
-+			err = -ENOSPC;
-+		count = total_size - pos;
-+	}
-+
-+	if (info->fbops->fb_sync)
-+		info->fbops->fb_sync(info);
-+
-+	/*
-+	 * Copy to framebuffer even if we already logged an error. Emulates
-+	 * the behavior of the original fbdev implementation.
-+	 */
-+	ret = write_screen(info, buf, count, pos);
-+	if (ret < 0)
-+		return ret; /* return last error, if any */
-+	else if (!ret)
-+		return err; /* return previous error, if any */
-+
-+	*ppos += ret;
-+
-+	return ret;
-+}
-+
-+static ssize_t drm_fb_helper_read_screen_buffer(struct fb_info *info, char __user *buf,
-+						size_t count, loff_t pos)
-+{
-+	const char *src = info->screen_buffer + pos;
-+
-+	if (copy_to_user(buf, src, count))
-+		return -EFAULT;
-+
-+	return count;
-+}
-+
- /**
-- * drm_fb_helper_sys_read - wrapper around fb_sys_read
-+ * drm_fb_helper_sys_read - Implements struct &fb_ops.fb_read for system memory
-  * @info: fb_info struct pointer
-  * @buf: userspace buffer to read from framebuffer memory
-  * @count: number of bytes to read from framebuffer memory
-  * @ppos: read offset within framebuffer memory
-  *
-- * A wrapper around fb_sys_read implemented by fbdev core
-+ * Returns:
-+ * The number of read bytes on success, or an error code otherwise.
-  */
- ssize_t drm_fb_helper_sys_read(struct fb_info *info, char __user *buf,
- 			       size_t count, loff_t *ppos)
- {
--	return fb_sys_read(info, buf, count, ppos);
-+	return __drm_fb_helper_read(info, buf, count, ppos, drm_fb_helper_read_screen_buffer);
- }
- EXPORT_SYMBOL(drm_fb_helper_sys_read);
- 
-+static ssize_t drm_fb_helper_write_screen_buffer(struct fb_info *info, const char __user *buf,
-+						 size_t count, loff_t pos)
-+{
-+	char *dst = info->screen_buffer + pos;
-+
-+	if (copy_from_user(dst, buf, count))
-+		return -EFAULT;
-+
-+	return count;
-+}
-+
- /**
-- * drm_fb_helper_sys_write - wrapper around fb_sys_write
-+ * drm_fb_helper_sys_write - Implements struct &fb_ops.fb_write for system memory
-  * @info: fb_info struct pointer
-  * @buf: userspace buffer to write to framebuffer memory
-  * @count: number of bytes to write to framebuffer memory
-  * @ppos: write offset within framebuffer memory
-  *
-- * A wrapper around fb_sys_write implemented by fbdev core
-+ * Returns:
-+ * The number of written bytes on success, or an error code otherwise.
-  */
- ssize_t drm_fb_helper_sys_write(struct fb_info *info, const char __user *buf,
- 				size_t count, loff_t *ppos)
-@@ -779,7 +881,7 @@ ssize_t drm_fb_helper_sys_write(struct fb_info *info, const char __user *buf,
- 	ssize_t ret;
- 	struct drm_rect damage_area;
- 
--	ret = fb_sys_write(info, buf, count, ppos);
-+	ret = __drm_fb_helper_write(info, buf, count, ppos, drm_fb_helper_write_screen_buffer);
- 	if (ret <= 0)
- 		return ret;
- 
-@@ -837,6 +939,119 @@ void drm_fb_helper_sys_imageblit(struct fb_info *info,
- }
- EXPORT_SYMBOL(drm_fb_helper_sys_imageblit);
- 
-+static ssize_t fb_read_screen_base(struct fb_info *info, char __user *buf, size_t count,
-+				   loff_t pos)
-+{
-+	const char __iomem *src = info->screen_base + pos;
-+	size_t alloc_size = min_t(size_t, count, PAGE_SIZE);
-+	ssize_t ret = 0;
-+	int err = 0;
-+	char *tmp;
-+
-+	tmp = kmalloc(alloc_size, GFP_KERNEL);
-+	if (!tmp)
-+		return -ENOMEM;
-+
-+	while (count) {
-+		size_t c = min_t(size_t, count, alloc_size);
-+
-+		memcpy_fromio(tmp, src, c);
-+		if (copy_to_user(buf, tmp, c)) {
-+			err = -EFAULT;
-+			break;
-+		}
-+
-+		src += c;
-+		buf += c;
-+		ret += c;
-+		count -= c;
-+	}
-+
-+	kfree(tmp);
-+
-+	return ret ? ret : err;
-+}
-+
-+/**
-+ * drm_fb_helper_cfb_read - Implements struct &fb_ops.fb_read for I/O memory
-+ * @info: fb_info struct pointer
-+ * @buf: userspace buffer to read from framebuffer memory
-+ * @count: number of bytes to read from framebuffer memory
-+ * @ppos: read offset within framebuffer memory
-+ *
-+ * Returns:
-+ * The number of read bytes on success, or an error code otherwise.
-+ */
-+ssize_t drm_fb_helper_cfb_read(struct fb_info *info, char __user *buf,
-+			       size_t count, loff_t *ppos)
-+{
-+	return __drm_fb_helper_read(info, buf, count, ppos, fb_read_screen_base);
-+}
-+EXPORT_SYMBOL(drm_fb_helper_cfb_read);
-+
-+static ssize_t fb_write_screen_base(struct fb_info *info, const char __user *buf, size_t count,
-+				    loff_t pos)
-+{
-+	char __iomem *dst = info->screen_base + pos;
-+	size_t alloc_size = min_t(size_t, count, PAGE_SIZE);
-+	ssize_t ret = 0;
-+	int err = 0;
-+	u8 *tmp;
-+
-+	tmp = kmalloc(alloc_size, GFP_KERNEL);
-+	if (!tmp)
-+		return -ENOMEM;
-+
-+	while (count) {
-+		size_t c = min_t(size_t, count, alloc_size);
-+
-+		if (copy_from_user(tmp, buf, c)) {
-+			err = -EFAULT;
-+			break;
-+		}
-+		memcpy_toio(dst, tmp, c);
-+
-+		dst += c;
-+		buf += c;
-+		ret += c;
-+		count -= c;
-+	}
-+
-+	kfree(tmp);
-+
-+	return ret ? ret : err;
-+}
-+
-+/**
-+ * drm_fb_helper_cfb_write - Implements struct &fb_ops.fb_write for I/O memory
-+ * @info: fb_info struct pointer
-+ * @buf: userspace buffer to write to framebuffer memory
-+ * @count: number of bytes to write to framebuffer memory
-+ * @ppos: write offset within framebuffer memory
-+ *
-+ * Returns:
-+ * The number of written bytes on success, or an error code otherwise.
-+ */
-+ssize_t drm_fb_helper_cfb_write(struct fb_info *info, const char __user *buf,
-+				size_t count, loff_t *ppos)
-+{
-+	loff_t pos = *ppos;
-+	ssize_t ret;
-+	struct drm_rect damage_area;
-+
-+	ret = __drm_fb_helper_write(info, buf, count, ppos, fb_write_screen_base);
-+	if (ret <= 0)
-+		return ret;
-+
-+	drm_fb_helper_memory_range_to_clip(info, pos, ret, &damage_area);
-+	drm_fb_helper_damage(info, damage_area.x1, damage_area.y1,
-+			     drm_rect_width(&damage_area),
-+			     drm_rect_height(&damage_area));
-+
-+	return ret;
-+}
-+EXPORT_SYMBOL(drm_fb_helper_cfb_write);
-+
- /**
-  * drm_fb_helper_cfb_fillrect - wrapper around cfb_fillrect
-  * @info: fbdev registered by the helper
-@@ -2183,176 +2398,28 @@ static bool drm_fbdev_use_iomem(struct fb_info *info)
- 	return !drm_fbdev_use_shadow_fb(fb_helper) && buffer->map.is_iomem;
- }
- 
--static ssize_t fb_read_screen_base(struct fb_info *info, char __user *buf, size_t count,
--				   loff_t pos)
--{
--	const char __iomem *src = info->screen_base + pos;
--	size_t alloc_size = min_t(size_t, count, PAGE_SIZE);
--	ssize_t ret = 0;
--	int err = 0;
--	char *tmp;
--
--	tmp = kmalloc(alloc_size, GFP_KERNEL);
--	if (!tmp)
--		return -ENOMEM;
--
--	while (count) {
--		size_t c = min_t(size_t, count, alloc_size);
--
--		memcpy_fromio(tmp, src, c);
--		if (copy_to_user(buf, tmp, c)) {
--			err = -EFAULT;
--			break;
--		}
--
--		src += c;
--		buf += c;
--		ret += c;
--		count -= c;
--	}
--
--	kfree(tmp);
--
--	return ret ? ret : err;
--}
--
--static ssize_t fb_read_screen_buffer(struct fb_info *info, char __user *buf, size_t count,
--				     loff_t pos)
--{
--	const char *src = info->screen_buffer + pos;
--
--	if (copy_to_user(buf, src, count))
--		return -EFAULT;
--
--	return count;
--}
--
- static ssize_t drm_fbdev_fb_read(struct fb_info *info, char __user *buf,
- 				 size_t count, loff_t *ppos)
- {
--	loff_t pos = *ppos;
--	size_t total_size;
- 	ssize_t ret;
- 
--	if (info->screen_size)
--		total_size = info->screen_size;
--	else
--		total_size = info->fix.smem_len;
--
--	if (pos >= total_size)
--		return 0;
--	if (count >= total_size)
--		count = total_size;
--	if (total_size - count < pos)
--		count = total_size - pos;
--
--	if (info->fbops->fb_sync)
--		info->fbops->fb_sync(info);
--
- 	if (drm_fbdev_use_iomem(info))
--		ret = fb_read_screen_base(info, buf, count, pos);
-+		ret = drm_fb_helper_cfb_read(info, buf, count, ppos);
- 	else
--		ret = fb_read_screen_buffer(info, buf, count, pos);
--
--	if (ret > 0)
--		*ppos += ret;
-+		ret = drm_fb_helper_sys_read(info, buf, count, ppos);
- 
- 	return ret;
- }
- 
--static ssize_t fb_write_screen_base(struct fb_info *info, const char __user *buf, size_t count,
--				    loff_t pos)
--{
--	char __iomem *dst = info->screen_base + pos;
--	size_t alloc_size = min_t(size_t, count, PAGE_SIZE);
--	ssize_t ret = 0;
--	int err = 0;
--	u8 *tmp;
--
--	tmp = kmalloc(alloc_size, GFP_KERNEL);
--	if (!tmp)
--		return -ENOMEM;
--
--	while (count) {
--		size_t c = min_t(size_t, count, alloc_size);
--
--		if (copy_from_user(tmp, buf, c)) {
--			err = -EFAULT;
--			break;
--		}
--		memcpy_toio(dst, tmp, c);
--
--		dst += c;
--		buf += c;
--		ret += c;
--		count -= c;
--	}
--
--	kfree(tmp);
--
--	return ret ? ret : err;
--}
--
--static ssize_t fb_write_screen_buffer(struct fb_info *info, const char __user *buf, size_t count,
--				      loff_t pos)
--{
--	char *dst = info->screen_buffer + pos;
--
--	if (copy_from_user(dst, buf, count))
--		return -EFAULT;
--
--	return count;
--}
--
- static ssize_t drm_fbdev_fb_write(struct fb_info *info, const char __user *buf,
- 				  size_t count, loff_t *ppos)
- {
--	loff_t pos = *ppos;
--	size_t total_size;
- 	ssize_t ret;
--	struct drm_rect damage_area;
--	int err = 0;
- 
--	if (info->screen_size)
--		total_size = info->screen_size;
--	else
--		total_size = info->fix.smem_len;
--
--	if (pos > total_size)
--		return -EFBIG;
--	if (count > total_size) {
--		err = -EFBIG;
--		count = total_size;
--	}
--	if (total_size - count < pos) {
--		if (!err)
--			err = -ENOSPC;
--		count = total_size - pos;
--	}
--
--	if (info->fbops->fb_sync)
--		info->fbops->fb_sync(info);
--
--	/*
--	 * Copy to framebuffer even if we already logged an error. Emulates
--	 * the behavior of the original fbdev implementation.
--	 */
- 	if (drm_fbdev_use_iomem(info))
--		ret = fb_write_screen_base(info, buf, count, pos);
-+		ret = drm_fb_helper_cfb_write(info, buf, count, ppos);
- 	else
--		ret = fb_write_screen_buffer(info, buf, count, pos);
--
--	if (ret < 0)
--		return ret; /* return last error, if any */
--	else if (!ret)
--		return err; /* return previous error, if any */
--
--	*ppos += ret;
--
--	drm_fb_helper_memory_range_to_clip(info, pos, ret, &damage_area);
--	drm_fb_helper_damage(info, damage_area.x1, damage_area.y1,
--			     drm_rect_width(&damage_area),
--			     drm_rect_height(&damage_area));
-+		ret = drm_fb_helper_sys_write(info, buf, count, ppos);
- 
- 	return ret;
- }
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-index 86c489d945849..55c92372fca04 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-@@ -49,6 +49,8 @@ static const struct fb_ops exynos_drm_fb_ops = {
- 	.owner		= THIS_MODULE,
- 	DRM_FB_HELPER_DEFAULT_OPS,
- 	.fb_mmap        = exynos_drm_fb_mmap,
-+	.fb_read	= drm_fb_helper_cfb_read,
-+	.fb_write	= drm_fb_helper_cfb_write,
- 	.fb_fillrect	= drm_fb_helper_cfb_fillrect,
- 	.fb_copyarea	= drm_fb_helper_cfb_copyarea,
- 	.fb_imageblit	= drm_fb_helper_cfb_imageblit,
-diff --git a/drivers/gpu/drm/gma500/framebuffer.c b/drivers/gpu/drm/gma500/framebuffer.c
-index bee4ce24904f6..53298674b7ed8 100644
---- a/drivers/gpu/drm/gma500/framebuffer.c
-+++ b/drivers/gpu/drm/gma500/framebuffer.c
-@@ -147,6 +147,8 @@ static const struct fb_ops psbfb_unaccel_ops = {
- 	.owner = THIS_MODULE,
- 	DRM_FB_HELPER_DEFAULT_OPS,
- 	.fb_setcolreg = psbfb_setcolreg,
-+	.fb_read = drm_fb_helper_cfb_read,
-+	.fb_write = drm_fb_helper_cfb_write,
- 	.fb_fillrect = drm_fb_helper_cfb_fillrect,
- 	.fb_copyarea = drm_fb_helper_cfb_copyarea,
- 	.fb_imageblit = drm_fb_helper_cfb_imageblit,
-diff --git a/drivers/gpu/drm/i915/display/intel_fbdev.c b/drivers/gpu/drm/i915/display/intel_fbdev.c
-index 0ac78b9718684..d63b066e8ac70 100644
---- a/drivers/gpu/drm/i915/display/intel_fbdev.c
-+++ b/drivers/gpu/drm/i915/display/intel_fbdev.c
-@@ -124,6 +124,8 @@ static const struct fb_ops intelfb_ops = {
- 	.owner = THIS_MODULE,
- 	DRM_FB_HELPER_DEFAULT_OPS,
- 	.fb_set_par = intel_fbdev_set_par,
-+	.fb_read = drm_fb_helper_cfb_read,
-+	.fb_write = drm_fb_helper_cfb_write,
- 	.fb_fillrect = drm_fb_helper_cfb_fillrect,
- 	.fb_copyarea = drm_fb_helper_cfb_copyarea,
- 	.fb_imageblit = drm_fb_helper_cfb_imageblit,
-diff --git a/drivers/gpu/drm/radeon/radeon_fb.c b/drivers/gpu/drm/radeon/radeon_fb.c
-index 936df79decc57..8717423195f4c 100644
---- a/drivers/gpu/drm/radeon/radeon_fb.c
-+++ b/drivers/gpu/drm/radeon/radeon_fb.c
-@@ -80,6 +80,8 @@ static const struct fb_ops radeonfb_ops = {
- 	DRM_FB_HELPER_DEFAULT_OPS,
- 	.fb_open = radeonfb_open,
- 	.fb_release = radeonfb_release,
-+	.fb_read = drm_fb_helper_cfb_read,
-+	.fb_write = drm_fb_helper_cfb_write,
- 	.fb_fillrect = drm_fb_helper_cfb_fillrect,
- 	.fb_copyarea = drm_fb_helper_cfb_copyarea,
- 	.fb_imageblit = drm_fb_helper_cfb_imageblit,
-diff --git a/drivers/gpu/drm/tegra/fb.c b/drivers/gpu/drm/tegra/fb.c
-index 30fac20665f4e..071be48390880 100644
---- a/drivers/gpu/drm/tegra/fb.c
-+++ b/drivers/gpu/drm/tegra/fb.c
-@@ -206,6 +206,8 @@ static int tegra_fb_mmap(struct fb_info *info, struct vm_area_struct *vma)
- static const struct fb_ops tegra_fb_ops = {
- 	.owner = THIS_MODULE,
- 	DRM_FB_HELPER_DEFAULT_OPS,
-+	.fb_read = drm_fb_helper_sys_read,
-+	.fb_write = drm_fb_helper_sys_write,
- 	.fb_fillrect = drm_fb_helper_sys_fillrect,
- 	.fb_copyarea = drm_fb_helper_sys_copyarea,
- 	.fb_imageblit = drm_fb_helper_sys_imageblit,
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_fb.c b/drivers/gpu/drm/vmwgfx/vmwgfx_fb.c
-index 5b85b477e4c69..0f2e3e6e97864 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_fb.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_fb.c
-@@ -29,6 +29,7 @@
- #include <linux/fb.h>
- #include <linux/pci.h>
- 
-+#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/ttm/ttm_placement.h>
- 
-@@ -611,6 +612,8 @@ static int vmw_fb_set_par(struct fb_info *info)
- 
- static const struct fb_ops vmw_fb_ops = {
- 	.owner = THIS_MODULE,
-+	.fb_read = drm_fb_helper_sys_read,
-+	.fb_write = drm_fb_helper_sys_write,
- 	.fb_check_var = vmw_fb_check_var,
- 	.fb_set_par = vmw_fb_set_par,
- 	.fb_setcolreg = vmw_fb_setcolreg,
-diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
-index 3d7a3d68dab8a..6581183618b89 100644
---- a/include/drm/drm_fb_helper.h
-+++ b/include/drm/drm_fb_helper.h
-@@ -257,6 +257,11 @@ void drm_fb_helper_sys_copyarea(struct fb_info *info,
- void drm_fb_helper_sys_imageblit(struct fb_info *info,
- 				 const struct fb_image *image);
- 
-+ssize_t drm_fb_helper_cfb_read(struct fb_info *info, char __user *buf,
-+			       size_t count, loff_t *ppos);
-+ssize_t drm_fb_helper_cfb_write(struct fb_info *info, const char __user *buf,
-+				size_t count, loff_t *ppos);
-+
- void drm_fb_helper_cfb_fillrect(struct fb_info *info,
- 				const struct fb_fillrect *rect);
- void drm_fb_helper_cfb_copyarea(struct fb_info *info,
-@@ -402,6 +407,18 @@ static inline void drm_fb_helper_sys_imageblit(struct fb_info *info,
- {
- }
- 
-+static inline ssize_t drm_fb_helper_cfb_read(struct fb_info *info, char __user *buf,
-+					     size_t count, loff_t *ppos)
-+{
-+	return -ENODEV;
-+}
-+
-+static inline ssize_t drm_fb_helper_cfb_write(struct fb_info *info, const char __user *buf,
-+					      size_t count, loff_t *ppos)
-+{
-+	return -ENODEV;
-+}
-+
- static inline void drm_fb_helper_cfb_fillrect(struct fb_info *info,
- 					      const struct fb_fillrect *rect)
- {
+@@ -1192,6 +1194,7 @@ static int vgic_v3_distr_mmio_read(struct vcpu *v, mmio_info_t *info,
+     case VRANGE32(GICD_ICACTIVER, GICD_ICACTIVERN):
+     case VRANGE32(GICD_IPRIORITYR, GICD_IPRIORITYRN):
+     case VRANGE32(GICD_ICFGR, GICD_ICFGRN):
++    case VRANGE32(GICD_IGRPMODR, GICD_IGRPMODRN):
+         /*
+          * Above all register are common with GICR and GICD
+          * Manage in common
+@@ -1379,6 +1382,7 @@ static int vgic_v3_distr_mmio_write(struct vcpu *v, mmio_info_t *info,
+     case VRANGE32(GICD_ICACTIVER, GICD_ICACTIVERN):
+     case VRANGE32(GICD_IPRIORITYR, GICD_IPRIORITYRN):
+     case VRANGE32(GICD_ICFGR, GICD_ICFGRN):
++    case VRANGE32(GICD_IGRPMODR, GICD_IGRPMODRN):
+         /* Above registers are common with GICR and GICD
+          * Manage in common */
+         return __vgic_v3_distr_common_mmio_write("vGICD", v, info,
 -- 
-2.38.0
+2.17.1
 
 
