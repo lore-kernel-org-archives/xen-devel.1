@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1537C63709
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Oct 2022 10:38:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.426427.674887 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89008C63718
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Oct 2022 10:38:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.426423.674843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olSw9-0006W7-Sz; Thu, 20 Oct 2022 10:38:05 +0000
+	id 1olSw6-0005Vm-82; Thu, 20 Oct 2022 10:38:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 426427.674887; Thu, 20 Oct 2022 10:38:05 +0000
+Received: by outflank-mailman (output) from mailman id 426423.674843; Thu, 20 Oct 2022 10:38:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olSw9-0006UF-EQ; Thu, 20 Oct 2022 10:38:05 +0000
-Received: by outflank-mailman (input) for mailman id 426427;
- Thu, 20 Oct 2022 10:38:02 +0000
+	id 1olSw6-0005V8-0U; Thu, 20 Oct 2022 10:38:02 +0000
+Received: by outflank-mailman (input) for mailman id 426423;
+ Thu, 20 Oct 2022 10:38:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vz6S=2V=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1olSw6-0005Jb-BD
- for xen-devel@lists.xenproject.org; Thu, 20 Oct 2022 10:38:02 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1olSw4-0005Jb-57
+ for xen-devel@lists.xenproject.org; Thu, 20 Oct 2022 10:38:00 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 45607161-5063-11ed-91b5-6bf2151ebd3b;
- Thu, 20 Oct 2022 12:38:01 +0200 (CEST)
+ id 43e2528e-5063-11ed-91b5-6bf2151ebd3b;
+ Thu, 20 Oct 2022 12:37:59 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 5A5941FA44;
- Thu, 20 Oct 2022 10:38:01 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B282722B42;
+ Thu, 20 Oct 2022 10:37:58 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D649613B72;
- Thu, 20 Oct 2022 10:38:00 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3F55713B72;
+ Thu, 20 Oct 2022 10:37:58 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id eOpuMwglUWPPYwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Thu, 20 Oct 2022 10:38:00 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id qG2kDgYlUWPPYwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Thu, 20 Oct 2022 10:37:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,25 +53,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45607161-5063-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: 43e2528e-5063-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1666262281; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1666262278; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=4LfKpOswsnembvGTw5A10DEjilDnUQNy6bx3ya4350M=;
-	b=tXd3IWYpE+AANm0xpi3Q23Tyutj9Sdq9yA9FR/7DcSNXy96WtXWQGzMt9IwfCYTCBAQamd
-	THr8pj7rjAn9jU+HaO5SQiMq017TXsYjJcjNLQX83/LJmys2bmCNMCVnK78mXNtDMQ+1z2
-	WEXzB3SfIEWpTepTzbB9H+x+1MnkEYc=
+	bh=dfNCfewKdF4qrRIFBcdy7kMwlQEEw/he+rN8lqzuO0c=;
+	b=sT2vIrk7gnJPmpN3+w8QkaaTa6QUjGrubtLOteaO8q4FcNJyLa4bQ5A3cJng6/bv4x1ZRW
+	Lz3p/ro9/w3xl+AVVT9FPWpjAMPcA8qn3cc/ebFvAESW96dJmzCi9Vt9UP6A/tQvx+rg4o
+	YGUKbfUA6e96QHnR/bkR596lb9w56ZA=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1666262281;
+	s=susede2_ed25519; t=1666262278;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=4LfKpOswsnembvGTw5A10DEjilDnUQNy6bx3ya4350M=;
-	b=hfPPG9Hoyh//3cunThx+JTGWBet+d79xGzcyxY6nrUqT7snss1g85BmKsTMqO7P/1BTPnG
-	RJfDSRgygYZyKVBw==
+	bh=dfNCfewKdF4qrRIFBcdy7kMwlQEEw/he+rN8lqzuO0c=;
+	b=R9wURktsZ4GUuQFrOAQNChz7Mxyve21ulKCwP98mDiqGdgQ9gW2RRTX44wOhGGfIABxhoh
+	cnNyRpZaMJHX9BCA==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch,
 	airlied@gmail.com,
@@ -102,38 +102,38 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-tegra@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 08/21] drm/vboxvideo: Don't set struct drm_driver.lastclose
-Date: Thu, 20 Oct 2022 12:37:42 +0200
-Message-Id: <20221020103755.24058-9-tzimmermann@suse.de>
+Subject: [PATCH 03/21] drm/ingenic: Don't set struct drm_driver.lastclose
+Date: Thu, 20 Oct 2022 12:37:37 +0200
+Message-Id: <20221020103755.24058-4-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.0
 In-Reply-To: <20221020103755.24058-1-tzimmermann@suse.de>
 References: <20221020103755.24058-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Don't set struct drm_driver.lastclose. It's used to restore the
-fbdev console. But as vboxvideo uses generic fbdev emulation, the
-console is being restored by the DRM client helpers already. See
-the call to drm_client_dev_restore() in drm_lastclose().
+Don't set struct drm_mode_config.output_poll_changed. It's used to
+inform the fbdev console about conncetor changes. But as ingenic
+uses generic fbdev emulation, the console is being informed by the
+DRM client helpers already. See the calls to drm_client_dev_hotplug()
+in drm_probe_helper.c.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/vboxvideo/vbox_drv.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-index f4f2bd79a7cb6..1cd716eb17a1c 100644
---- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
-+++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-@@ -178,8 +178,6 @@ static const struct drm_driver driver = {
- 	.driver_features =
- 	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
+diff --git a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+index ab0515d2c420a..99f86f1ba8bee 100644
+--- a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
++++ b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+@@ -1018,7 +1018,6 @@ static const struct drm_bridge_funcs ingenic_drm_bridge_funcs = {
  
--	.lastclose = drm_fb_helper_lastclose,
--
- 	.fops = &vbox_fops,
- 	.name = DRIVER_NAME,
- 	.desc = DRIVER_DESC,
+ static const struct drm_mode_config_funcs ingenic_drm_mode_config_funcs = {
+ 	.fb_create		= ingenic_drm_gem_fb_create,
+-	.output_poll_changed	= drm_fb_helper_output_poll_changed,
+ 	.atomic_check		= drm_atomic_helper_check,
+ 	.atomic_commit		= drm_atomic_helper_commit,
+ };
 -- 
 2.38.0
 
