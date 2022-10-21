@@ -4,51 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC73FC433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Oct 2022 15:35:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.427769.677191 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8FCFA373D
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Oct 2022 15:35:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.427787.677208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olu39-0005xE-0r; Fri, 21 Oct 2022 15:35:07 +0000
+	id 1olu3J-0006Xd-Sg; Fri, 21 Oct 2022 15:35:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 427769.677191; Fri, 21 Oct 2022 15:35:06 +0000
+Received: by outflank-mailman (output) from mailman id 427787.677208; Fri, 21 Oct 2022 15:35:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olu38-0005x7-UN; Fri, 21 Oct 2022 15:35:06 +0000
-Received: by outflank-mailman (input) for mailman id 427769;
- Fri, 21 Oct 2022 15:35:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1olu3J-0006VY-Pf; Fri, 21 Oct 2022 15:35:17 +0000
+Received: by outflank-mailman (input) for mailman id 427787;
+ Fri, 21 Oct 2022 15:35:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sJ2K=2W=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1olu0h-0000AU-BN
- for xen-devel@lists.xenproject.org; Fri, 21 Oct 2022 15:32:35 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2041.outbound.protection.outlook.com [40.107.223.41])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 94cc1aef-5155-11ed-91b5-6bf2151ebd3b;
- Fri, 21 Oct 2022 17:32:34 +0200 (CEST)
-Received: from CY5PR19CA0096.namprd19.prod.outlook.com (2603:10b6:930:83::24)
- by SA3PR12MB7951.namprd12.prod.outlook.com (2603:10b6:806:318::8)
+ id 1olu0s-0000nK-KO
+ for xen-devel@lists.xenproject.org; Fri, 21 Oct 2022 15:32:46 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2065.outbound.protection.outlook.com [40.107.92.65])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9b7cbddc-5155-11ed-8fd0-01056ac49cbb;
+ Fri, 21 Oct 2022 17:32:45 +0200 (CEST)
+Received: from BN9PR03CA0133.namprd03.prod.outlook.com (2603:10b6:408:fe::18)
+ by BY5PR12MB4934.namprd12.prod.outlook.com (2603:10b6:a03:1db::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.35; Fri, 21 Oct
- 2022 15:32:31 +0000
-Received: from CY4PEPF0000B8E8.namprd05.prod.outlook.com
- (2603:10b6:930:83:cafe::24) by CY5PR19CA0096.outlook.office365.com
- (2603:10b6:930:83::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Fri, 21 Oct
+ 2022 15:32:41 +0000
+Received: from BN8NAM11FT019.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:fe:cafe::26) by BN9PR03CA0133.outlook.office365.com
+ (2603:10b6:408:fe::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5746.21 via Frontend
- Transport; Fri, 21 Oct 2022 15:32:30 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000B8E8.mail.protection.outlook.com (10.167.241.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5723.20 via Frontend Transport; Fri, 21 Oct 2022 15:32:29 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ Transport; Fri, 21 Oct 2022 15:32:40 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT019.mail.protection.outlook.com (10.13.176.158) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5746.16 via Frontend Transport; Fri, 21 Oct 2022 15:32:38 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 21 Oct
- 2022 10:32:24 -0500
+ 2022 10:32:38 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 21 Oct
+ 2022 08:32:38 -0700
 Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
  SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.31
- via Frontend Transport; Fri, 21 Oct 2022 10:32:23 -0500
+ via Frontend Transport; Fri, 21 Oct 2022 10:32:37 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,36 +64,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94cc1aef-5155-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: 9b7cbddc-5155-11ed-8fd0-01056ac49cbb
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=klCJXEHjosTAKu7Dj7CGmuOFBwGJ8X5MSzpGwJwuAzMjPuYEIgdnHonT35WY0u6CUevfktSdEFDYd7s4xqkSUn2FDqQtCNBp8ShItH3YYjBrVXUVnNKIXFgmMCSk6BWVd246AcbIIixWjdKukAUlShg2QA06r43L9mcSTFTVSMcXdblMmcCx1phxR3HPybNh+Oi885RVP3oslU8Nx4XyoCS3T55w7AMr+fDciGSqnZYJWQSkY7xw7VZ14zzgvN+Fx/uy6aXPRs8mLEn9Q22/nS32upzgUgMB8t7L+rhNaQnljnZNt5QfIrB4eD4SF4reV3nrh8JG73+IwnXI67XylA==
+ b=nRxhGPFbxYDRO9zMl/lx+SHV4PWR848MqNciroSK5XAX6916Je4ksQVOcQP0oMqoH2mZ7QKo6lyUY8B3bCv+gV8LQRCJV00Il1s/zlH1jPuokASA7FH68fP/51T3tEI3qF42/URSe5s4vVg2CIdSmJIJ+LhHxDSMkDAJQ/NM+nbD5+OIy11XrM+zI2CoGoDNfNuK+yTR9kvA85SYqyEEzx5h+t8leO9+SqlOEQUIkO+/Hz20vDk+ww/45sqApa/73HlCSFfKeTZGof30KzEHbApCvkYQIkUmLbYRnWMfvYgoHP55H/hQb6VA7I3mE2PvtHlkZ/Mmfr+FSta8ZxlJYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wYaQtT0b/pESxMwe1f+rFfaaV2COA/hSqXIyQ3/U1lc=;
- b=FtKFr4e+9EDjN/IKfXrIfcrjMzcXw1SeP/qz7EYy0Im4piLWyU70dTH/VIUVd0/Br8NK916jsnm9Vf/hgDjtVkeiFeIa9x2GTdPfbhx25cy38Oiz4aQ1NodSIOVXycvi0CgsiJ/1pddAtwitlgxurLDvqugzOU9Hv/DgM3a/gTQkD/vtwZBQjoFVbbbCA7k9dFhswjuZGpDU4VMRUearZ9gkB+peIFpzuQ0V/hsbTxBuIbw16aW2TOJHEFTXOsPsbOiFXqD9MHWiKph5e/4QaIKu7eCy4eN5KYO/7rdVJrTwyuPsEiO5rez6Y5nboSmAw35wmAXHL9ibg1mfXdvDfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
+ bh=gaPWf9DnJA/XGQug9i0zfhmL9v2rXPG9m6XEPCJ3yPc=;
+ b=a7nbptSvZlhIMjiGWh2f1p2yR9lp83s/nO17HLYwrN+W8Mgy1M6gvrQIDj3XsYOrFGykD5eW3HiUL0AS5ZVFlkqPuZC2O/DE74uolm+M7uwHZoEr148RzjUYfuFgOi8OiAuvfPplEQj80RB2DZ9TWxCq24iR0X4hPVaZfV8se/2AZmmq5rhGZ/buQ4rW5y68nTwroVW0+F3r2Z15dYMRtMLXZyObFEIRDSY9LUVYQbe1jgEv6wMcJK50uWeGl8cpNnk0+maKlyUyouAleywaDQJ3x3WntHo+YIoJvOvObOe1k2u5OF6X06Lpug5jRQ4PaopQca4PwUnj72wWgi+LsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
+ is 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org
+ smtp.mailfrom=amd.com; dmarc=temperror action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wYaQtT0b/pESxMwe1f+rFfaaV2COA/hSqXIyQ3/U1lc=;
- b=cIXP9mrrPWPtjLSk3bbweMhUdrvzBisQp5zLVgJsxObmRw2jFolfWU5167boCBRCcSyuWQRNuYqvgzgeTViXHDfuhRxpLB0rEIH3vGxiLJA60T/xAGTEkXf8bx7K0bew1WyHl3HZVoMJCoGVJIeFYxr24uftjoaVG+uV3qMU5R4=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ bh=gaPWf9DnJA/XGQug9i0zfhmL9v2rXPG9m6XEPCJ3yPc=;
+ b=GPEVX+OhZAS3Dd4dNkt9pND2oXYMgO6EYNzKmHRX5930F4hN/6OzoF8xKw9zq6eS8OVL0EsLNjs5VCx3LyOra8cPdUqJlvmhAYH5UAFYfAE+o9e8l+MJkW+00cRZriMJHNFDBkag4HtHFN/2+kFC1AEzwKHZPJyW/eflnLbSh2s=
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=temperror action=none header.from=amd.com;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of amd.com: DNS Timeout)
 From: Ayan Kumar Halder <ayankuma@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
 	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>, Ayan Kumar Halder
 	<ayankuma@amd.com>
-Subject: [RFC PATCH v1 08/12] Arm: GICv3: Define ICH_AP0R<n> and ICH_AP1R<n> for AArch32
-Date: Fri, 21 Oct 2022 16:31:24 +0100
-Message-ID: <20221021153128.44226-9-ayankuma@amd.com>
+Subject: [RFC PATCH v1 12/12] Arm: GICv3: Enable GICv3 for AArch32
+Date: Fri, 21 Oct 2022 16:31:28 +0100
+Message-ID: <20221021153128.44226-13-ayankuma@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20221021153128.44226-1-ayankuma@amd.com>
 References: <20221021153128.44226-1-ayankuma@amd.com>
@@ -97,59 +100,66 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000B8E8:EE_|SA3PR12MB7951:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e145c3d-9219-480a-45fa-08dab379773b
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT019:EE_|BY5PR12MB4934:EE_
+X-MS-Office365-Filtering-Correlation-Id: a17336cc-1fcf-465b-2cc7-08dab3797cab
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	7FJqjnSe0FzfMuExIrH0jTmtfI6ezT4GfiHPDzOw43WDaVDM+n95anoMVTObwx+71lD67NYYhCfnVnSaFOJ1LHtVAufuAJOZaBFfZiwUZhqsJHF3GjrIl4CdCtYssHVRfvHjBRcnf/DkaPU3DMODiou61fHXxTPE+GA9WYk37ZaIKpQBYCD0U+z2/mUjzOn23U16eeY5q4F/wyzfKwQi8SRl6jvfT0wHBYtwAuLh8f/jKWPxPhaXxXmmhTiRjJF/knD9K/0f4Vg4J+JGZyTQ+T5c9YtoL3DeBH5ztE6E4UHmDfYG2dMtx+V+iM4KGummnUwnipzMxyn5Kke4V20aQBtQwo4ewfgJIAIUgglmtX9KCGQ1NjzIAj7rf71FJ7a/TixF6xrQhhuYVpSHSTavMQOWwSLFoOqGAPa4xyxYOMd97cR7Yl4yLz0/TzIzb72Dsf5TSqodMWaOlAxeKz/0nLo39O/qjBj50vhU73UOCfYzpa5SZnl14MPLgpQDhiAezxVHEjzL3ONF1GYmZLkQpyNW1NsV0FbJQliDUhPPY5h1RynsNsIOA+1aSJ5D8R/sCYzWrtfaPF6muohdtzwu5x4vv1pP7tyQxhpyD+s/gI9L0mYV3nSYCWXPnN/mf3IMSJ6NZ0d7eOw0xtCaS9KSAghBzEwtlJ8J6aOkFgo6B5NBNRLAJN4FGeN4WO2m6jnFWuevckHDU+9S39+IZF+OKAUBPG3XhZrzGHi+jAv5N60yJ3SRzr9m3QhF01igefCVT/ej2jcQO2Dj7W+diNylGRdSVS3LFuDNd9X6lvXQGPLOCvmSX6rRNhxXyG1AD8B5
+	bIBS/nvJCZDQrv5kEfuB4dPzwawjRwZ6mX4nruadHaHCHWGJxT0dWFV3+1oiS4IP48GhJpq3D7RjFrVy8Tm24OPLoshfAcbhn7Dv3o3PCk6sCYYpW+BuovZO1kcjcQ4BH47pnXNjX8cETiCfoSk6khKrHJN1IOCsKZrr3WvCcJEsBei6QpOBBSmL2NbTqliYHljnlUHwJdm6c32V2/zX71I6Wh1JZ1AsZqBiB1GnJnIA1l55vQc4TMHalIZq1g81dC4KuwHvg0kGuwwDbZyvl5ABqRLXMfU6j+zXSiIjXiOya1NbnCw6HG3tj3nEPC73peLmwzlBGxsyY2uxJ6dXnNZ3qgsXV1n+XTAeoFlYQvZoOqRUzfi8fEUjcpenmibdsK10wnkYFajp+ETjvqOB0q4TvW+OdXQGJgU8B3iwjNnfnpEprkkukT8WrGQQAcshGejDaC3IqyT1ipoLvZ0d6Oqdfp4WsfzXNANU0FAev9r2C9fT6TXxPQvyaEetqZdpft1OQVJllBF2GTqKU9luiMR7laSVzbjfKvvg4wMAciSiknVoE2cvzNnsLyZyc6BC8Lx2eiDA/TLjMzAQYU13f3Ya0Gh9kDlFqcg/+FvYCPVlAyKOLIdviITxSfL6kno6Ei2FtGsTk2gl6WYtxOe2iQewo9k4CxqJL8OQ4bQuR0dymT+fekO8IFjPau2ZvT7YwXt3QyJtxcNLsz6EzhPj0UDteoy8sS97C59MdSfDj238hlSbAGdwux+3LZzVMArTGJYzviALOEawnKlt9Gh+HB73kcQ+SHOUI+08m5bexcM=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(346002)(39860400002)(396003)(136003)(451199015)(36840700001)(46966006)(40470700004)(2906002)(478600001)(81166007)(1076003)(186003)(82740400003)(40460700003)(356005)(6916009)(316002)(36756003)(8676002)(41300700001)(54906003)(4326008)(82310400005)(70586007)(70206006)(5660300002)(8936002)(2616005)(36860700001)(336012)(47076005)(426003)(40480700001)(26005)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(136003)(376002)(39860400002)(396003)(451199015)(36840700001)(46966006)(40470700004)(1076003)(426003)(186003)(47076005)(2616005)(6666004)(63350400001)(26005)(336012)(40460700003)(83380400001)(5660300002)(40480700001)(36860700001)(2906002)(82310400005)(316002)(41300700001)(54906003)(478600001)(8936002)(8676002)(6916009)(4326008)(70586007)(70206006)(63370400001)(36756003)(356005)(82740400003)(81166007)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2022 15:32:29.6165
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2022 15:32:38.9885
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e145c3d-9219-480a-45fa-08dab379773b
+X-MS-Exchange-CrossTenant-Network-Message-Id: a17336cc-1fcf-465b-2cc7-08dab3797cab
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000B8E8.namprd05.prod.outlook.com
+	BN8NAM11FT019.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7951
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4934
 
-Refer "Arm IHI 0069H ID020922",
-12.7.1 - Interrupt Controller Hyp Active Priorities Group0 Registers 0-3
-12.7.2 - Interrupt Controller Hyp Active Priorities Group1 Registers 0-3
+Refer ARM DDI 0487G.b ID072021,
+D13.2.86 -
+ID_PFR1_EL1, AArch32 Processor Feature Register 1
+
+GIC, bits[31:28] == 0b0001 for GIC3.0 on Aarch32
+
+One can now enable GICv3 on AArch32 systems.
 
 Signed-off-by: Ayan Kumar Halder <ayankuma@amd.com>
 ---
- xen/arch/arm/include/asm/arm32/sysregs.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ xen/arch/arm/Kconfig                  | 2 +-
+ xen/arch/arm/include/asm/cpufeature.h | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/include/asm/arm32/sysregs.h b/xen/arch/arm/include/asm/arm32/sysregs.h
-index f3b4dfbca8..693da22324 100644
---- a/xen/arch/arm/include/asm/arm32/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm32/sysregs.h
-@@ -117,6 +117,18 @@
- #define ICH_LRC14_EL2              __LRC8_EL2(6)
- #define ICH_LRC15_EL2              __LRC8_EL2(7)
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 1fe5faf847..5eaf21b8e0 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -41,7 +41,7 @@ config ARM_EFI
  
-+#define __AP0Rx_EL2(x)            ___CP32(p15,4,c12,c8,x)
-+#define ICH_AP0R0_EL2             __AP0Rx_EL2(0)
-+#define ICH_AP0R1_EL2             __AP0Rx_EL2(1)
-+#define ICH_AP0R2_EL2             __AP0Rx_EL2(2)
-+#define ICH_AP0R3_EL2             __AP0Rx_EL2(3)
-+
-+#define __AP1Rx_EL2(x)            ___CP32(p15,4,c12,c9,x)
-+#define ICH_AP1R0_EL2             __AP1Rx_EL2(0)
-+#define ICH_AP1R1_EL2             __AP1Rx_EL2(1)
-+#define ICH_AP1R2_EL2             __AP1Rx_EL2(2)
-+#define ICH_AP1R3_EL2             __AP1Rx_EL2(3)
-+
- #endif /* __ASSEMBLY__ */
+ config GICV3
+ 	bool "GICv3 driver"
+-	depends on ARM_64 && !NEW_VGIC
++	depends on (ARM_64 || ARM_32) && !NEW_VGIC
+ 	default y
+ 	---help---
  
- #endif /* __ASM_ARM_ARM32_SYSREGS_H */
+diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+index c86a2e7f29..c8ca09d1c3 100644
+--- a/xen/arch/arm/include/asm/cpufeature.h
++++ b/xen/arch/arm/include/asm/cpufeature.h
+@@ -31,6 +31,7 @@
+ #define cpu_has_jazelle   (boot_cpu_feature32(jazelle) > 0)
+ #define cpu_has_thumbee   (boot_cpu_feature32(thumbee) == 1)
+ #define cpu_has_aarch32   (cpu_has_arm || cpu_has_thumb)
++#define cpu_has_gicv3     (boot_cpu_feature32(gic) >= 1)
+ 
+ #ifdef CONFIG_ARM_32
+ #define cpu_has_gentimer  (boot_cpu_feature32(gentimer) == 1)
 -- 
 2.17.1
 
