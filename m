@@ -4,45 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFDD7C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Oct 2022 05:49:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.427293.676197 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB4EC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Oct 2022 05:50:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.427299.676220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olku6-0003c6-ND; Fri, 21 Oct 2022 05:49:10 +0000
+	id 1olkuy-0004u0-9m; Fri, 21 Oct 2022 05:50:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 427293.676197; Fri, 21 Oct 2022 05:49:10 +0000
+Received: by outflank-mailman (output) from mailman id 427299.676220; Fri, 21 Oct 2022 05:50:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1olku6-0003bz-KM; Fri, 21 Oct 2022 05:49:10 +0000
-Received: by outflank-mailman (input) for mailman id 427293;
- Fri, 21 Oct 2022 05:49:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1olkuy-0004tt-4J; Fri, 21 Oct 2022 05:50:04 +0000
+Received: by outflank-mailman (input) for mailman id 427299;
+ Fri, 21 Oct 2022 05:50:02 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=i13X=2W=redhat.com=armbru@srs-se1.protection.inumbo.net>)
- id 1olku5-0003bt-7l
- for xen-devel@lists.xenproject.org; Fri, 21 Oct 2022 05:49:09 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 13120e88-5104-11ed-91b5-6bf2151ebd3b;
- Fri, 21 Oct 2022 07:49:07 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-477-4DTeeM-2PU2WpFpu9IYBjA-1; Fri, 21 Oct 2022 01:49:02 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 689EF1C09B80;
- Fri, 21 Oct 2022 05:49:01 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.195.118])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 100741121315;
- Fri, 21 Oct 2022 05:48:56 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id ACD4321E6686; Fri, 21 Oct 2022 07:48:55 +0200 (CEST)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1olkuw-0004kL-RK; Fri, 21 Oct 2022 05:50:02 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1olkuw-0002LU-O4; Fri, 21 Oct 2022 05:50:02 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1olkuw-0007sw-FK; Fri, 21 Oct 2022 05:50:02 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1olkuw-00019U-Eq; Fri, 21 Oct 2022 05:50:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,179 +44,225 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13120e88-5104-11ed-91b5-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1666331345;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QBX5KiLXbX7P8P3a+cVBh7Xtwe9pVLfUZQSamsMuzpw=;
-	b=LF0NIm/57hDEF+T7TVMxv+bKmkGY6rzVlVkSOf6eSWJCQu/RE3qZTfySGFHuC2BDQhIInO
-	NYMSKUGkG58G75RMsBplRqwN+uDMiuk4RSz/txZgga0EsYS6vJK7E5baJA5OtYf8UTdqH0
-	QDvnMhLhkJOV66KRcJ5U+aq8vDgVsTw=
-X-MC-Unique: 4DTeeM-2PU2WpFpu9IYBjA-1
-From: Markus Armbruster <armbru@redhat.com>
-To: Laurent Vivier <lvivier@redhat.com>
-Cc: qemu-devel@nongnu.org,  Paul Durrant <paul@xen.org>,  Thomas Huth
- <thuth@redhat.com>,  Daniel P. =?utf-8?Q?Berrang=C3=A9?=
- <berrange@redhat.com>,  "Dr. David
- Alan Gilbert" <dgilbert@redhat.com>,  Greg Kurz <groug@kaod.org>,  Stefano
- Stabellini <sstabellini@kernel.org>,  David Gibson
- <david@gibson.dropbear.id.au>,  Eric Blake <eblake@redhat.com>,
-  xen-devel@lists.xenproject.org,  "Michael S. Tsirkin" <mst@redhat.com>,
-  Stefan Weil <sw@weilnetz.de>,  Paolo Bonzini <pbonzini@redhat.com>,
-  Jason Wang <jasowang@redhat.com>,  Samuel Thibault
- <samuel.thibault@ens-lyon.org>,  Anthony Perard
- <anthony.perard@citrix.com>
-Subject: Re: [PATCH v13 17/17] net: stream: add QAPI events to report
- connection state
-References: <20221020162558.123284-1-lvivier@redhat.com>
-	<20221020162558.123284-18-lvivier@redhat.com>
-Date: Fri, 21 Oct 2022 07:48:55 +0200
-In-Reply-To: <20221020162558.123284-18-lvivier@redhat.com> (Laurent Vivier's
-	message of "Thu, 20 Oct 2022 18:25:58 +0200")
-Message-ID: <87pmel4th4.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=Jj4Mj5GqWnR7sRJrB6veFYvJ37yPRz3UZe4Ruo1Hp8g=; b=F+SXbOX5npSloc4qFOLr+yQwvJ
+	TK7j36fvF0vVBy5WfUNC6IyrH84Jy7d0M+9Xskh3Bh6HFmtRBCHx2KPuL5GKZR+DAZdaCNiCcm+JY
+	TWbNaEF8qZqOtKs6gnAnvKyDbt6QnIWQEXC9bgdy95lyavVzWBZTaPvIcpRWW1XnN+0k=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-174111-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Subject: [linux-linus test] 174111: regressions - trouble: broken/fail/pass
+X-Osstest-Failures:
+    linux-linus:test-armhf-armhf-libvirt-raw:<job status>:broken:regression
+    linux-linus:test-armhf-armhf-libvirt-raw:host-install(5):broken:regression
+    linux-linus:test-arm64-arm64-xl-seattle:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-examine:reboot:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-xsm:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-raw:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-examine:reboot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-qcow2:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-multivcpu:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-arndale:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-i386-xsm:debian-hvm-install:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-rtds:xen-boot:fail:allowable
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=aae703b02f92bde9264366c545e87cec451de471
+X-Osstest-Versions-That:
+    linux=9d84bb40bcb30a7fa16f33baa967aeb9953dda78
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 21 Oct 2022 05:50:02 +0000
 
-Laurent Vivier <lvivier@redhat.com> writes:
+flight 174111 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/174111/
 
-> The netdev reports NETDEV_STREAM_CONNECTED event when the backend
-> is connected, and NETDEV_STREAM_DISCONNECTED when it is disconnected.
+Regressions :-(
 
-Use cases?
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-libvirt-raw    <job status>                 broken
+ test-armhf-armhf-libvirt-raw  5 host-install(5)        broken REGR. vs. 173462
+ test-arm64-arm64-xl-seattle   8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-examine      8 reboot                   fail REGR. vs. 173462
+ test-arm64-arm64-xl-credit1   8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-libvirt-xsm  8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-xl           8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-xl-vhd       8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-libvirt-raw  8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-examine      8 reboot                   fail REGR. vs. 173462
+ test-armhf-armhf-libvirt-qcow2  8 xen-boot               fail REGR. vs. 173462
+ test-armhf-armhf-xl-multivcpu  8 xen-boot                fail REGR. vs. 173462
+ test-armhf-armhf-xl-credit1   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-libvirt      8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-arndale   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-credit2   8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 173462
+ test-arm64-arm64-xl-credit2   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-vhd       8 xen-boot                 fail REGR. vs. 173462
 
-Could similar event signalling be useful for other kinds of netdev
-backends?
+Regressions which are regarded as allowable (not blocking):
+ test-armhf-armhf-xl-rtds      8 xen-boot                 fail REGR. vs. 173462
 
-> The NETDEV_STREAM_CONNECTED event includes the URI of the destination
-> address.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 173462
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
 
-No more.  Easy fix: scratch "the URI of".
+version targeted for testing:
+ linux                aae703b02f92bde9264366c545e87cec451de471
+baseline version:
+ linux                9d84bb40bcb30a7fa16f33baa967aeb9953dda78
 
-> Signed-off-by: Laurent Vivier <lvivier@redhat.com>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> ---
->  net/stream.c  |  9 +++++++--
->  qapi/net.json | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 56 insertions(+), 2 deletions(-)
->
-> diff --git a/net/stream.c b/net/stream.c
-> index 95d6b910407d..cac01d4d792a 100644
-> --- a/net/stream.c
-> +++ b/net/stream.c
-> @@ -38,6 +38,7 @@
->  #include "io/channel.h"
->  #include "io/channel-socket.h"
->  #include "io/net-listener.h"
-> +#include "qapi/qapi-events-net.h"
->  
->  typedef struct NetStreamState {
->      NetClientState nc;
-> @@ -168,6 +169,8 @@ static gboolean net_stream_send(QIOChannel *ioc,
->          s->nc.link_down = true;
->          qemu_set_info_str(&s->nc, "");
->  
-> +        qapi_event_send_netdev_stream_disconnected(s->nc.name);
-> +
->          return G_SOURCE_REMOVE;
->      }
->      buf = buf1;
-> @@ -244,8 +247,8 @@ static void net_stream_listen(QIONetListener *listener,
->      uri = socket_uri(addr);
->      qemu_set_info_str(&s->nc, uri);
->      g_free(uri);
-> +    qapi_event_send_netdev_stream_connected(s->nc.name, addr);
->      qapi_free_SocketAddress(addr);
-> -
+Last test of basis   173462  2022-10-07 18:41:45 Z   13 days
+Failing since        173470  2022-10-08 06:21:34 Z   12 days   21 attempts
+Testing same since   174111  2022-10-20 01:26:57 Z    1 days    1 attempts
 
-Don't add this blank line in PATCH 15, please.
+------------------------------------------------------------
+1282 people touched revisions under test,
+not listing them all
 
->  }
->  
->  static void net_stream_server_listening(QIOTask *task, gpointer opaque)
-> @@ -327,7 +330,6 @@ static void net_stream_client_connected(QIOTask *task, gpointer opaque)
->          goto error;
->      }
->      g_assert(ret == 0);
-> -    qapi_free_SocketAddress(addr);
->  
->      net_socket_rs_init(&s->rs, net_stream_rs_finalize, false);
->  
-> @@ -338,6 +340,9 @@ static void net_stream_client_connected(QIOTask *task, gpointer opaque)
->                                              s, NULL);
->      s->nc.link_down = false;
->  
-> +    qapi_event_send_netdev_stream_connected(s->nc.name, addr);
-> +    qapi_free_SocketAddress(addr);
-> +
->      return;
->  error:
->      object_unref(OBJECT(s->ioc));
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-freebsd11-amd64                             pass    
+ test-amd64-amd64-freebsd12-amd64                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  fail    
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  fail    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     fail    
+ test-armhf-armhf-examine                                     fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     fail    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                fail    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               fail    
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 fail    
+ test-armhf-armhf-libvirt-raw                                 broken  
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-arm64-arm64-xl-seattle                                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      fail    
+ test-armhf-armhf-xl-vhd                                      fail    
 
-Could put the qapi_free_SocketAddress() in its final place in PATCH 15
-already to reduce churn.  Up to you.
 
-> diff --git a/qapi/net.json b/qapi/net.json
-> index 39388b1b6c41..c37b24717382 100644
-> --- a/qapi/net.json
-> +++ b/qapi/net.json
-> @@ -895,3 +895,52 @@
->  ##
->  { 'event': 'FAILOVER_NEGOTIATED',
->    'data': {'device-id': 'str'} }
-> +
-> +##
-> +# @NETDEV_STREAM_CONNECTED:
-> +#
-> +# Emitted when the netdev stream backend is connected
-> +#
-> +# @netdev-id: QEMU netdev id that is connected
-> +# @addr: The destination address
-> +#
-> +# Since: 7.2
-> +#
-> +# Example:
-> +#
-> +# <- { "event": "NETDEV_STREAM_CONNECTED",
-> +#      "data": { "netdev-id": "netdev0",
-> +#                "addr": { "port": "47666", "ipv6": true,
-> +#                          "host": "::1", "type": "inet" } },
-> +#      "timestamp": { "seconds": 1666269863, "microseconds": 311222 } }
-> +#
-> +# or
-> +#
-> +# <- { "event": "NETDEV_STREAM_CONNECTED",
-> +#      "data": { "netdev-id": "netdev0",
-> +#                "addr": { "path": "/tmp/qemu0", "type": "unix" } },
-> +#      "timestamp": { "seconds": 1666269706, "microseconds": 413651 } }
-> +#
-> +##
-> +{ 'event': 'NETDEV_STREAM_CONNECTED',
-> +  'data': { 'netdev-id': 'str',
-> +            'addr': 'SocketAddress' } }
-> +
-> +##
-> +# @NETDEV_STREAM_DISCONNECTED:
-> +#
-> +# Emitted when the netdev stream backend is disconnected
-> +#
-> +# @netdev-id: QEMU netdev id that is disconnected
-> +#
-> +# Since: 7.2
-> +#
-> +# Example:
-> +#
-> +# <- { 'event': 'NETDEV_STREAM_DISCONNECTED',
-> +#      'data': {'netdev-id': 'netdev0'},
-> +#      'timestamp': {'seconds': 1663330937, 'microseconds': 526695} }
-> +#
-> +##
-> +{ 'event': 'NETDEV_STREAM_DISCONNECTED',
-> +  'data': { 'netdev-id': 'str' } }
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Schema looks good to me.
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-armhf-armhf-libvirt-raw broken
+broken-step test-armhf-armhf-libvirt-raw host-install(5)
+
+Not pushing.
+
+(No revision log; it would be 121075 lines long.)
 
