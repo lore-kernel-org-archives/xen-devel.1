@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD84AC04A95
-	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:52:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.428412.678538 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFB04C04A95
+	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:52:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.428415.678571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omGms-0003lK-F7; Sat, 22 Oct 2022 15:51:50 +0000
+	id 1omGmw-0004fg-UH; Sat, 22 Oct 2022 15:51:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 428412.678538; Sat, 22 Oct 2022 15:51:50 +0000
+Received: by outflank-mailman (output) from mailman id 428415.678571; Sat, 22 Oct 2022 15:51:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omGms-0003l3-As; Sat, 22 Oct 2022 15:51:50 +0000
-Received: by outflank-mailman (input) for mailman id 428412;
- Sat, 22 Oct 2022 15:51:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1omGmw-0004en-NP; Sat, 22 Oct 2022 15:51:54 +0000
+Received: by outflank-mailman (input) for mailman id 428415;
+ Sat, 22 Oct 2022 15:51:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=U686=2X=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
- id 1omGmq-000237-VP
- for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:51:49 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6f4a21bc-5221-11ed-8fd0-01056ac49cbb;
- Sat, 22 Oct 2022 17:51:47 +0200 (CEST)
-Received: by mail-ed1-x52f.google.com with SMTP id w8so14079932edc.1
- for <xen-devel@lists.xenproject.org>; Sat, 22 Oct 2022 08:51:47 -0700 (PDT)
+ id 1omGmv-0002Ir-HI
+ for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:51:53 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 721860be-5221-11ed-91b5-6bf2151ebd3b;
+ Sat, 22 Oct 2022 17:51:52 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id m16so16266780edc.4
+ for <xen-devel@lists.xenproject.org>; Sat, 22 Oct 2022 08:51:52 -0700 (PDT)
 Received: from carlo-ubuntu.home (62-11-205-162.dialup.tiscali.it.
  [62.11.205.162]) by smtp.gmail.com with ESMTPSA id
- z61-20020a509e43000000b00461816beef9sm894623ede.14.2022.10.22.08.51.44
+ z61-20020a509e43000000b00461816beef9sm894623ede.14.2022.10.22.08.51.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Oct 2022 08:51:45 -0700 (PDT)
+ Sat, 22 Oct 2022 08:51:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,719 +46,671 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f4a21bc-5221-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: 721860be-5221-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=minervasys-tech.20210112.gappssmtp.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pm5NZV8ivNJJW7gXCvwFeNKDFFL/u9QvZuT7iBhn0cY=;
-        b=WPbIgg1doPwjYuKhOlGtc/aH2wgwy2ZV2CEVKTDP6YwXiF8Nydigs3jRl5R9ySgBKe
-         pgaavScDWQsgig3qvibbeMllwXemi2mzEipFRaErVqutLw2vONANBb/g82zyj2sBG9gl
-         +o3zHVIfpMmM0DWvDWMWCue4upt4aUeG0IjPPS5W6fSeFJZ2fJwYzf9Jf9kEjZahv66k
-         nmC2uWfzfdmTHPAfyodYkbZWxDaqV8MCeoyd7CkhhDS+7VVe1p65BgUwKI2UpRSj6H7a
-         asuXUKz6PXmwoM6Rmn58Kd0kJG4eEhay1IVpKl8jGknFeS19xU3pfHM++x0o0qZq5Lcy
-         dxgw==
+        bh=ZFHU6JLoOi1I0YfuDm34fjeeyfPVBZKSuGjuzgCHudY=;
+        b=V4QBmMQvl4H72FfQBamm+SgPnsEFHKKbQ9hb1KjqZ75bMEG5AA2dkLikxDHouFocM0
+         lH0UxPXCCDyJBvhDN2UbCQsrxbjUHTM3WwcVgvTS/gQCtQ1inVVVckkYiGKEEZTNqyY9
+         RCdQwDV70Vx24HPQusiR0pPv5EVDUULAmX+VyVAE3anhkQ3nlPnC9A6t+B4+txHkesvg
+         j+F72ItnBlZIcRE0nNdboGDLGhZXdMXT/aEgLZ2KFpFjofwZMjeDJ7/Zoj1jUEskvwmw
+         4X9qbSpXI1Brs+9fUM84NU6+VsdDhhnSXBpakC+dLvHRrX6SfxvqYSIPTZQWhlUaa4fW
+         LPew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pm5NZV8ivNJJW7gXCvwFeNKDFFL/u9QvZuT7iBhn0cY=;
-        b=wlGZvxTtZl/ieCbmouNMICjMSZmO66xvPESKPkebQrCDC8z5yK/KBmPKX06ioTAX77
-         FwoIKrDKBnE8B/QuV5K7b68bpeNPbuIMZc3QwIh4odJBq876thr24+M/0OJVCgmSIjzU
-         L3bFU9fFAv9JI/9UHnmEACekVN96P9+vwsXVGR54cWfCGWa3b8V+X3yFqa0SSov1CKb1
-         uaRsp9qxA15wEpwSCiZFD2H+s1JtxySlQyDnHFbKU53IOaVsC/bweu5YumMXkDpPC/Yu
-         dSAoeeUp3//Q93JQuiOjeJOVXJwzhtrg5mWnZew5tcreVfmz8YMPJdOsm1BK5mSXfGZZ
-         ANXQ==
-X-Gm-Message-State: ACrzQf2zZ79qtNA/twGTQnEp279RGdT1NmoaXcbreIWsJIkKVX5URRyG
-	n5NeMc/AQALzsdXNx42UtTsNQZNi9zgBaA==
-X-Google-Smtp-Source: AMsMyM4QsEmAhIsc/c6qFUJDWgdszNUuPr24Jg9tFKoIrRyZOdA/6zRVpZL/EhrKZDzjb+1We2vmOA==
-X-Received: by 2002:a17:907:d93:b0:78d:fe7a:f1fe with SMTP id go19-20020a1709070d9300b0078dfe7af1femr20970678ejc.721.1666453906124;
-        Sat, 22 Oct 2022 08:51:46 -0700 (PDT)
+        bh=ZFHU6JLoOi1I0YfuDm34fjeeyfPVBZKSuGjuzgCHudY=;
+        b=mlCgoOSCypLp+uqV/8laP6xG1hLgTAhXfB3Oj/bTXYH+J8uezfkUVhpX17MfXsVDlM
+         m+8xzPRGVPBByqnXhAGHwo1Zo+eRch0oBGhu/XCcktb69PQIzYF3SPq9uunfjeFsDtdF
+         2u/p6ty8XVfLLBkPdshuTDSwlpDxmwceqp0so110RgcA3usf93X+mmmpchpeqyBiBs2f
+         uq4qyV7leiVFxgQAEsl4PSiEtIHpiILksWmIbRufB0Mt0Gj5pHI5Vo4lNO5hYuiM4I1E
+         2LR7nSOhx5WNVYEOj4Wv7qYRuAnmGaqqTBnbVIRc+3xlBpwRocKjP28ah+AjFWCRRkKZ
+         zEow==
+X-Gm-Message-State: ACrzQf3dXZm5DdnPP+Bx7xEWjPrmIPtSuyrZanVC8kaEoE9s2QRrHLiX
+	KyM0A0qysHRzbS9VdwEJIcWmV6wpurBEYQ==
+X-Google-Smtp-Source: AMsMyM7MXEiV5in+yFRYTeR2PvQuRsyLJ2/ximIm+nzAuVzWY1nblZJrbtht2OvIaG2j8sizGnZD4A==
+X-Received: by 2002:a17:906:5dce:b0:78d:e71a:6e0 with SMTP id p14-20020a1709065dce00b0078de71a06e0mr20198391ejv.360.1666453911187;
+        Sat, 22 Oct 2022 08:51:51 -0700 (PDT)
 From: Carlo Nonato <carlo.nonato@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: marco.solieri@unimore.it,
 	andrea.bastoni@minervasys.tech,
 	lucmiccio@gmail.com,
+	Carlo Nonato <carlo.nonato@minervasys.tech>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Marco Solieri <marco.solieri@minervasys.tech>,
-	Carlo Nonato <carlo.nonato@minervasys.tech>
-Subject: [PATCH v3 6/9] xen/common: add cache coloring allocator for domains
-Date: Sat, 22 Oct 2022 17:51:17 +0200
-Message-Id: <20221022155120.7000-7-carlo.nonato@minervasys.tech>
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v3 9/9] xen/arm: add cache coloring support for Xen
+Date: Sat, 22 Oct 2022 17:51:20 +0200
+Message-Id: <20221022155120.7000-10-carlo.nonato@minervasys.tech>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221022155120.7000-1-carlo.nonato@minervasys.tech>
 References: <20221022155120.7000-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Miccio <lucmiccio@gmail.com>
+This commit adds the cache coloring support for Xen own physical space.
 
-This commit adds a new memory page allocator that implements the cache
-coloring mechanism. The allocation algorithm follows the given domain color
-configuration and maximizes contiguity in the page selection of multiple
-subsequent requests.
+It extends the implementation of setup_pagetables to make use of Xen cache
+coloring configuration. Page tables construction is essentially the same
+except for the fact that the physical addresses, in case of cache coloring,
+are taken from the translation of a new, temporary, virtual space that is
+physically colored.
 
-Pages are stored in a color-indexed array of lists, each one sorted by
-machine address, that is called the colored heap. A simple initialization
-function computes the color of any available page and inserts it in the
-corresponding list. When a domain requests a page, the allocator takes one
-from the subset of lists whose colors equals the domain configuration. It
-chooses the page with the highest machine address such that contiguous
-pages are sequentially allocated, if this is made possible by a color
-assignment which includes adjacent colors.
+The temporary mapping is also used to relocate Xen to the new physical
+space starting at the address taken from the old get_xen_paddr() function
+which is brought back for the occasion.
+The temporary mapping is finally converted to a mapping of the "old"
+(meaning the original physical space) Xen code, so that the boot CPU can
+actually address the variables and functions used by secondary CPUs.
+This happens when the boot CPU needs to bring up other CPUs (psci.c and
+smpboot.c) and when the TTBR value is passed to them
+(init_secondary_pagetables).
 
-The allocator can handle only requests with order equals to 0 since the
-single color granularity is represented in memory by one page.
+Finally, since the alternative framework needs to remap the Xen text and
+inittext sections, this operation must be done in a coloring-aware way.
+The function xen_remap_colored() is introduced for that.
 
-The buddy allocator must coexist with the colored one because the Xen heap
-isn't colored. For this reason a new Kconfig option and a command line
-parameter are added to let the user set the amount of memory reserved for
-the buddy allocator. Even when cache coloring is enabled, this memory isn't
-managed by the colored allocator.
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
-Colored heap information is dumped in the dump_heap() debug-key function.
-
-Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 ---
 v3:
-- fixed PGC_colored bits values
-- merged debug-key for dump_color_heap() with the one for dump_heap()
-- number of pages for each color in an array to easily dump color heap info
-- heap_lock in colored allocator to ensure atomicity and clarify it with a
-  comment
-- added page_list_add_{next|prev} to add pages in the middle of the list
-- p2m tables use pages of same colors as domain
-- CONFIG_BUDDY_ALLOCATOR_SIZE is now an int (MiB)
-- buddy allocator reserved size is now respected as configured in Kconfig
-- removed useless functions and refactored the code
-- fixed PGC_colored flag that was removed when a page was allocated
-- merged with #7 since it would have been too small
+- changed next_xen_colored() to xen_colored_mfn() to work with MFNs instead
+  of addresses
+- new macro for_each_xen_colored_mfn to iterate over Xen colored MFNs
+- new function xen_remap_colored() to remap colored Xen instead of
+  __vmap_colored()
+- use map_pages_to_xen() instead of custom mapping function during
+  setup_pagetables() (thanks to Julien)
+- reintroduce relocate_xen() to switch to colored space
+- removed useless virt_to_maddr_colored()
 ---
- docs/misc/arm/cache-coloring.rst    |  39 ++++-
- docs/misc/xen-command-line.pandoc   |  14 ++
- xen/arch/arm/Kconfig                |  12 ++
- xen/arch/arm/coloring.c             |  10 ++
- xen/arch/arm/include/asm/coloring.h |   6 +
- xen/arch/arm/include/asm/mm.h       |   3 +
- xen/arch/arm/p2m.c                  |   7 +-
- xen/common/page_alloc.c             | 259 +++++++++++++++++++++++++---
- xen/include/xen/mm.h                |  43 +++++
- 9 files changed, 371 insertions(+), 22 deletions(-)
+ xen/arch/arm/alternative.c          |  9 ++-
+ xen/arch/arm/arm64/head.S           | 48 +++++++++++++++
+ xen/arch/arm/coloring.c             | 38 ++++++++++++
+ xen/arch/arm/include/asm/coloring.h | 30 +++++++++
+ xen/arch/arm/include/asm/mm.h       | 16 ++++-
+ xen/arch/arm/mm.c                   | 94 ++++++++++++++++++++++++++---
+ xen/arch/arm/psci.c                 |  4 +-
+ xen/arch/arm/setup.c                | 74 ++++++++++++++++++++++-
+ xen/arch/arm/smpboot.c              |  3 +-
+ xen/arch/arm/xen.lds.S              |  2 +-
+ 10 files changed, 297 insertions(+), 21 deletions(-)
 
-diff --git a/docs/misc/arm/cache-coloring.rst b/docs/misc/arm/cache-coloring.rst
-index dd2e851a26..0c89278aee 100644
---- a/docs/misc/arm/cache-coloring.rst
-+++ b/docs/misc/arm/cache-coloring.rst
-@@ -16,6 +16,9 @@ In order to enable and use it, few steps are needed.
-   (refer to menuconfig help for value meaning and when it should be changed).
+diff --git a/xen/arch/arm/alternative.c b/xen/arch/arm/alternative.c
+index f03cd943c6..a795aeec98 100644
+--- a/xen/arch/arm/alternative.c
++++ b/xen/arch/arm/alternative.c
+@@ -28,6 +28,7 @@
+ #include <asm/alternative.h>
+ #include <asm/atomic.h>
+ #include <asm/byteorder.h>
++#include <asm/coloring.h>
+ #include <asm/cpufeature.h>
+ #include <asm/insn.h>
+ #include <asm/page.h>
+@@ -220,8 +221,12 @@ void __init apply_alternatives_all(void)
+      * The text and inittext section are read-only. So re-map Xen to
+      * be able to patch the code.
+      */
+-    xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
+-                    VMAP_DEFAULT);
++    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
++        xenmap = xen_remap_colored(xen_mfn, xen_size);
++    else
++        xenmap = __vmap(&xen_mfn, 1U << xen_order, 1, 1, PAGE_HYPERVISOR,
++                        VMAP_DEFAULT);
++
+     /* Re-mapping Xen is not expected to fail during boot. */
+     BUG_ON(!xenmap);
  
-         CONFIG_MAX_CACHE_COLORS=<n>
-+- If needed, change the amount of memory reserved for the buddy allocator either
-+  from the Xen configuration file, via the CONFIG_BUDDY_ALLOCATOR_SIZE value,
-+  or with the command line option. See `Colored allocator and buddy allocator`.
- - Assign colors to domains using the `Color selection format`_ (see
-   `Coloring parameters`_ for more documentation pointers).
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index ad014716db..71cffb54fe 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -813,6 +813,54 @@ ENDPROC(fail)
  
-@@ -162,6 +165,18 @@ Please refer to the relative documentation in
- Note that if no color configuration is provided for domains, they fallback to
- the default one, which corresponds simply to all available colors.
+ GLOBAL(_end_boot)
  
-+Colored allocator and buddy allocator
-+*************************************
++/* Copy Xen to new location and switch TTBR
++ * x0    ttbr
++ * x1    source address
++ * x2    destination address
++ * x3    length
++ *
++ * Source and destination must be word aligned, length is rounded up
++ * to a 16 byte boundary.
++ *
++ * MUST BE VERY CAREFUL when saving things to RAM over the copy */
++ENTRY(relocate_xen)
++        /* Copy 16 bytes at a time using:
++         *   x9: counter
++         *   x10: data
++         *   x11: data
++         *   x12: source
++         *   x13: destination
++         */
++        mov     x9, x3
++        mov     x12, x1
++        mov     x13, x2
 +
-+The colored allocator distributes pages based on color configurations of
-+domains so that each domains only gets pages of its own colors.
-+The colored allocator is meant as an alternative to the buddy allocator because
-+its allocation policy is by definition incompatible with the generic one. Since
-+the Xen heap is not colored yet, we need to support the coexistence of the two
-+allocators and some memory must be left for the buddy one.
-+The buddy allocator memory can be reserved from the Xen configuration file or
-+with the help of a command-line option.
++1:      ldp     x10, x11, [x12], #16
++        stp     x10, x11, [x13], #16
 +
- Known issues and limitations
- ****************************
- 
-@@ -182,7 +197,6 @@ configuration structure size used in domain creation. "uint16_t" is the biggest
- integer type that fit the constraint and 2^15 is the biggest power of 2 it can
- easily represent. This value is big enough for the generic case, though.
- 
--
- "xen,static-mem" isn't supported when coloring is enabled
- #########################################################
- 
-@@ -190,3 +204,26 @@ In the domain configuration, "xen,static-mem" allows memory to be statically
- allocated to the domain. This isn't possibile when cache coloring is enabled,
- because that memory can't be guaranteed to be of the same colors assigned to
- that domain.
++        subs    x9, x9, #16
++        bgt     1b
 +
-+Colored allocator can only make use of order-0 pages
-+####################################################
++        /* Flush destination from dcache using:
++         * x9: counter
++         * x10: step
++         * x11: vaddr
++         */
++        dsb   sy        /* So the CPU issues all writes to the range */
 +
-+The cache coloring technique relies on memory mappings and on the smallest
-+amount of memory that can be mapped to achieve the maximum number of colors
-+(cache partitions) possible. This amount is what is normally called a page and,
-+in Xen terminology, the order-0 page is the smallest one. The fairly simple
-+colored allocator currently implemented, makes use only of such pages.
-+It must be said that a more complex one could, in theory, adopt higher order
-+pages if the colors selection contained adjacent colors. Two subsequent colors,
-+for example, can be represented by an order-1 page, four colors correspond to
-+an order-2 page, etc.
++        mov   x9, x3
++        ldr   x10, =dcache_line_bytes /* x10 := step */
++        ldr   x10, [x10]
++        mov   x11, x2
 +
-+Fail to boot colored DomUs with large memory size
-+#################################################
++1:      dc    cvac, x11
 +
-+If the Linux kernel used for Dom0 does not contain the upstream commit
-+3941552aec1e04d63999988a057ae09a1c56ebeb and uses the hypercall buffer device,
-+colored DomUs with memory size larger then 127 MB cannot be created. This is
-+caused by the default limit of this buffer of 64 pages. The solution is to
-+manually apply the above patch, or to check if there is an updated version of
-+the kernel in use for Dom0 that contains this change.
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 3f04414134..25a59dd6a9 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -299,6 +299,20 @@ can be maintained with the pv-shim mechanism.
-     cause Xen not to use Indirect Branch Tracking even when support is
-     available in hardware.
- 
-+### buddy-alloc-size (arm64)
-+> `= <size>`
++        add   x11, x11, x10
++        subs  x9, x9, x10
++        bgt   1b
 +
-+> Default: `64M`
++        b switch_ttbr
 +
-+Amount of memory reserved for the buddy allocator when colored allocator is
-+active. This options is parsed only when cache coloring support is enabled.
-+The colored allocator is meant as an alternative to the buddy allocator,
-+because its allocation policy is by definition incompatible with the
-+generic one. Since the Xen heap systems is not colored yet, we need to
-+support the coexistence of the two allocators for now. This parameter, which is
-+optional and for expert only, it's used to set the amount of memory reserved to
-+the buddy allocator.
-+
- ### clocksource (x86)
- > `= pit | hpet | acpi | tsc`
- 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index c45a9c5917..4cfa75b2ef 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -153,6 +153,18 @@ config MAX_CACHE_COLORS
- 	  Note that if, at any time, a color configuration with more colors than the
- 	  maximum is employed, an error is produced.
- 
-+config BUDDY_ALLOCATOR_SIZE
-+	int "Buddy allocator reserved memory size (MiB)"
-+	default "64"
-+	depends on CACHE_COLORING
-+	help
-+	  Amount of memory reserved for the buddy allocator to work alongside
-+	  the colored one. The colored allocator is meant as an alternative to the
-+	  buddy allocator because its allocation policy is by definition
-+	  incompatible with the generic one. Since the Xen heap is not colored yet,
-+	  we need to support the coexistence of the two allocators and some memory
-+	  must be left for the buddy one.
-+
- config TEE
- 	bool "Enable TEE mediators support (UNSUPPORTED)" if UNSUPPORTED
- 	default n
+ /*
+  * Switch TTBR
+  *
 diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
-index 685a431c3d..2cae215cd2 100644
+index 80c76c057f..857a798d8a 100644
 --- a/xen/arch/arm/coloring.c
 +++ b/xen/arch/arm/coloring.c
-@@ -322,6 +322,16 @@ void prepare_color_domain_config(struct xen_arch_domainconfig *config,
-     config->num_colors = (uint16_t)num_colors;
+@@ -27,6 +27,7 @@
+ #include <xen/keyhandler.h>
+ #include <xen/param.h>
+ #include <xen/types.h>
++#include <xen/vmap.h>
+ 
+ #include <asm/coloring.h>
+ #include <asm/processor.h>
+@@ -362,6 +363,43 @@ unsigned int get_max_colors(void)
+     return max_colors;
  }
  
-+unsigned int page_to_color(const struct page_info *pg)
++mfn_t xen_colored_mfn(mfn_t mfn)
 +{
-+    return addr_to_color(page_to_maddr(pg));
++    paddr_t maddr = mfn_to_maddr(mfn);
++    unsigned int i, color = addr_to_color(maddr);
++
++    for( i = 0; i < xen_num_colors; i++ )
++    {
++        if ( color == xen_colors[i] )
++            return mfn;
++        else if ( color < xen_colors[i] )
++            return maddr_to_mfn(addr_set_color(maddr, xen_colors[i]));
++    }
++
++    /* Jump to next color space (llc_way_size bytes) and use the first color */
++    return maddr_to_mfn(addr_set_color(maddr + llc_way_size, xen_colors[0]));
 +}
 +
-+unsigned int get_max_colors(void)
++void *xen_remap_colored(mfn_t xen_mfn, paddr_t xen_size)
 +{
-+    return max_colors;
++    unsigned int i;
++    void *xenmap;
++    mfn_t *xen_colored_mfns = xmalloc_array(mfn_t, xen_size >> PAGE_SHIFT);
++
++    if ( !xen_colored_mfns )
++        panic("Can't allocate colored MFNs\n");
++
++    for_each_xen_colored_mfn( xen_mfn, i )
++    {
++        xen_colored_mfns[i] = xen_mfn;
++    }
++
++    xenmap = vmap(xen_colored_mfns, xen_size >> PAGE_SHIFT);
++    xfree(xen_colored_mfns);
++
++    return xenmap;
 +}
 +
  /*
   * Local variables:
   * mode: C
 diff --git a/xen/arch/arm/include/asm/coloring.h b/xen/arch/arm/include/asm/coloring.h
-index 549eb408a3..0147f95968 100644
+index 0147f95968..6e9c1212f5 100644
 --- a/xen/arch/arm/include/asm/coloring.h
 +++ b/xen/arch/arm/include/asm/coloring.h
-@@ -31,6 +31,8 @@
+@@ -27,10 +27,31 @@
+ #ifdef CONFIG_CACHE_COLORING
+ 
+ #include <xen/init.h>
++#include <xen/lib.h>
+ #include <xen/sched.h>
  
  #include <public/arch-arm.h>
  
-+struct page_info;
++/*
++ * Amount of memory that we need to map in order to color Xen. The value
++ * depends on the maximum number of available colors of the hardware. The
++ * memory size is pessimistically calculated assuming only one color is used,
++ * which means that any pages belonging to any other color has to be skipped.
++ */
++#define XEN_COLOR_MAP_SIZE \
++    ROUNDUP((_end - _start) * get_max_colors(), XEN_PADDR_ALIGN)
 +
++/**
++ * Iterate over each Xen mfn in the colored space.
++ * @mfn:    the current mfn. The first non colored mfn must be provided as the
++ *          starting point.
++ * @i:      loop index.
++ */
++#define for_each_xen_colored_mfn(mfn, i)        \
++    for ( i = 0, mfn = xen_colored_mfn(mfn);    \
++          i < (_end - _start) >> PAGE_SHIFT;    \
++          i++, mfn = xen_colored_mfn(mfn_add(mfn, 1)) )
++
+ struct page_info;
+ 
  bool __init coloring_init(void);
+@@ -47,8 +68,13 @@ unsigned int page_to_color(const struct page_info *pg);
  
- int domain_coloring_init(struct domain *d,
-@@ -41,6 +43,10 @@ void domain_dump_coloring_info(struct domain *d);
- void prepare_color_domain_config(struct xen_arch_domainconfig *config,
-                                  const char *colors_str);
+ unsigned int get_max_colors(void);
  
-+unsigned int page_to_color(const struct page_info *pg);
-+
-+unsigned int get_max_colors(void);
++mfn_t xen_colored_mfn(mfn_t mfn);
++void *xen_remap_colored(mfn_t xen_fn, paddr_t xen_size);
 +
  #else /* !CONFIG_CACHE_COLORING */
  
++#define XEN_COLOR_MAP_SIZE (_end - _start)
++
  static inline bool __init coloring_init(void) { return true; }
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 68adcac9fa..e848fa4adf 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -128,6 +128,9 @@ struct page_info
- #else
- #define PGC_static     0
- #endif
-+/* Page is cache colored */
-+#define _PGC_colored      PG_shift(4)
-+#define PGC_colored       PG_mask(1, 4)
- /* ... */
- /* Page is broken? */
- #define _PGC_broken       PG_shift(7)
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index 8449f97fe7..9ac7dc6216 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -661,7 +661,12 @@ static int p2m_create_table(struct p2m_domain *p2m, lpae_t *entry)
- 
-     ASSERT(!p2m_is_valid(*entry));
- 
--    page = alloc_domheap_page(NULL, 0);
-+    /* If cache coloring is enabled, p2m tables are allocated using the domain
-+     * coloring configuration to prevent cache interference. */
-+    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
-+        page = alloc_domheap_page(p2m->domain, MEMF_no_refcount);
-+    else
-+        page = alloc_domheap_page(NULL, 0);
-     if ( page == NULL )
-         return -ENOMEM;
- 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 62afb07bc6..fe214cd6ac 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -150,6 +150,9 @@
- #define p2m_pod_offline_or_broken_hit(pg) 0
- #define p2m_pod_offline_or_broken_replace(pg) BUG_ON(pg != NULL)
- #endif
-+#ifdef CONFIG_HAS_CACHE_COLORING
-+#include <asm/coloring.h>
-+#endif
- 
- #ifndef PGC_static
- #define PGC_static 0
-@@ -231,6 +234,14 @@ static bool __read_mostly scrub_debug;
- #define scrub_debug    false
- #endif
- 
-+/* Memory required for buddy allocator to work with colored one */
-+#ifdef CONFIG_BUDDY_ALLOCATOR_SIZE
-+static unsigned long __initdata buddy_alloc_size =
-+    CONFIG_BUDDY_ALLOCATOR_SIZE << 20;
-+#else
-+    static unsigned long __initdata buddy_alloc_size = 0;
-+#endif
-+
- /*
-  * Bit width of the DMA heap -- used to override NUMA-node-first.
-  * allocation strategy, which can otherwise exhaust low memory.
-@@ -440,7 +451,180 @@ mfn_t __init alloc_boot_pages(unsigned long nr_pfns, unsigned long pfn_align)
-     BUG();
- }
- 
-+static DEFINE_SPINLOCK(heap_lock);
- 
-+/* Initialise fields which have other uses for free pages. */
-+static void init_free_page_fields(struct page_info *pg)
-+{
-+    pg->u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
-+    page_set_owner(pg, NULL);
-+}
-+
-+#ifdef CONFIG_CACHE_COLORING
-+/*************************
-+ * COLORED SIDE-ALLOCATOR
-+ *
-+ * Pages are stored by their color in separate lists. Each list defines a color
-+ * and it is initialized during end_boot_allocator, where each page's color
-+ * is calculated and the page itself is put in the correct list.
-+ * After initialization there will be N lists where N is the number of
-+ * available colors on the platform.
-+ * The {free|alloc}_color_heap_page overwrite pg->count_info, but they do it in
-+ * the same way as the buddy allocator corresponding functions do:
-+ * protecting the access with a critical section using heap_lock.
-+ */
-+typedef struct page_list_head colored_pages_t;
-+static colored_pages_t *__ro_after_init _color_heap;
-+static unsigned long *__ro_after_init free_colored_pages;
-+
-+#define color_heap(color) (&_color_heap[color])
-+
-+static void free_color_heap_page(struct page_info *pg)
-+{
-+    struct page_info *pos;
-+    unsigned int color = page_to_color(pg);
-+    colored_pages_t *head = color_heap(color);
-+
-+    spin_lock(&heap_lock);
-+
-+    pg->count_info = PGC_state_free | PGC_colored;
-+    page_set_owner(pg, NULL);
-+    free_colored_pages[color]++;
-+
-+    page_list_for_each( pos, head )
-+    {
-+        if ( page_to_maddr(pos) < page_to_maddr(pg) )
-+            break;
-+    }
-+
-+    page_list_add_next(pg, pos, head);
-+
-+    spin_unlock(&heap_lock);
-+}
-+
-+static struct page_info *alloc_color_heap_page(unsigned int memflags,
-+                                               const unsigned int *colors,
-+                                               unsigned int num_colors)
-+{
-+    struct page_info *pg = NULL;
-+    unsigned int i, color;
-+    bool need_tlbflush = false;
-+    uint32_t tlbflush_timestamp = 0;
-+
-+    spin_lock(&heap_lock);
-+
-+    for ( i = 0; i < num_colors; i++ )
-+    {
-+        struct page_info *tmp;
-+
-+        if ( page_list_empty(color_heap(colors[i])) )
-+            continue;
-+
-+        tmp = page_list_first(color_heap(colors[i]));
-+        if ( !pg || page_to_maddr(tmp) > page_to_maddr(pg) )
-+            pg = tmp;
-+    }
-+
-+    if ( !pg )
-+    {
-+        spin_unlock(&heap_lock);
-+        return NULL;
-+    }
-+
-+    pg->count_info = PGC_state_inuse | PGC_colored;
-+
-+    if ( !(memflags & MEMF_no_tlbflush) )
-+        accumulate_tlbflush(&need_tlbflush, pg, &tlbflush_timestamp);
-+
-+    init_free_page_fields(pg);
-+    flush_page_to_ram(mfn_x(page_to_mfn(pg)),
-+                      !(memflags & MEMF_no_icache_flush));
-+
-+    color = page_to_color(pg);
-+    free_colored_pages[color]--;
-+    page_list_del(pg, color_heap(color));
-+
-+    spin_unlock(&heap_lock);
-+
-+    if ( need_tlbflush )
-+        filtered_flush_tlb_mask(tlbflush_timestamp);
-+
-+    return pg;
-+}
-+
-+static void __init init_color_heap_pages(struct page_info *pg,
-+                                         unsigned long nr_pages)
-+{
-+    unsigned int i;
-+
-+    if ( !_color_heap )
-+    {
-+        unsigned int max_colors = get_max_colors();
-+
-+        _color_heap = xmalloc_array(colored_pages_t, max_colors);
-+        BUG_ON(!_color_heap);
-+        free_colored_pages = xzalloc_array(unsigned long, max_colors);
-+        BUG_ON(!free_colored_pages);
-+
-+        for ( i = 0; i < max_colors; i++ )
-+            INIT_PAGE_LIST_HEAD(color_heap(i));
-+    }
-+
-+    printk(XENLOG_DEBUG
-+           "Init color heap with %lu pages starting from: %#"PRIx64"\n",
-+           nr_pages, page_to_maddr(pg));
-+
-+    for ( i = 0; i < nr_pages; i++ )
-+        free_color_heap_page(&pg[i]);
-+}
-+
-+static struct page_info *alloc_color_domheap_page(struct domain *d,
-+                                                  unsigned int memflags)
-+{
-+    struct page_info *pg;
-+
-+    pg = alloc_color_heap_page(memflags, d->arch.colors, d->arch.num_colors);
-+    if ( !pg )
-+        return NULL;
-+
-+    if ( !(memflags & MEMF_no_owner) )
-+    {
-+        if ( memflags & MEMF_no_refcount )
-+            pg->count_info |= PGC_extra;
-+        if ( assign_page(pg, 0, d, memflags) )
-+        {
-+            free_color_heap_page(pg);
-+            return NULL;
-+        }
-+    }
-+
-+    return pg;
-+}
-+
-+static void dump_color_heap(void)
-+{
-+    unsigned int color;
-+
-+    printk("Dumping coloring heap info\n");
-+    for ( color = 0; color < get_max_colors(); color++ )
-+        printk("Color heap[%u]: %lu pages\n", color, free_colored_pages[color]);
-+}
-+
-+integer_param("buddy-alloc-size", buddy_alloc_size);
-+
-+#else /* !CONFIG_CACHE_COLORING */
-+
-+static void __init init_color_heap_pages(struct page_info *pg,
-+                                         unsigned long nr_pages) {}
-+static struct page_info *alloc_color_domheap_page(struct domain *d,
-+                                                  unsigned int memflags)
+ static inline int domain_coloring_init(
+     struct domain *d, const struct xen_arch_domainconfig *config) { return 0; }
+@@ -56,6 +82,10 @@ static inline void domain_coloring_free(struct domain *d) {}
+ static inline void domain_dump_coloring_info(struct domain *d) {}
+ static inline void prepare_color_domain_config(
+     struct xen_arch_domainconfig *config, const char *colors_str) {}
++static inline void *xen_remap_colored(mfn_t xen_fn, paddr_t xen_size)
 +{
 +    return NULL;
 +}
-+static void free_color_heap_page(struct page_info *pg) {}
-+static void dump_color_heap(void) {}
+ 
+ #endif /* CONFIG_CACHE_COLORING */
+ #endif /* __ASM_ARM_COLORING_H__ */
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index e848fa4adf..f3f76a20b3 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -195,12 +195,26 @@ extern unsigned long total_pages;
+ 
+ #define PDX_GROUP_SHIFT SECOND_SHIFT
+ 
++#ifdef CONFIG_CACHE_COLORING
++#define virt_to_boot_virt(virt) (virt - XEN_VIRT_START + BOOT_RELOC_VIRT_START)
++#define set_value_for_secondary(var, val)                       \
++    *(typeof(var) *)(virt_to_boot_virt((vaddr_t)&var)) = val;   \
++    clean_dcache(var);
++#else
++#define virt_to_boot_virt(virt) (virt)
++#define set_value_for_secondary(var, val)   \
++    var = val;                              \
++    clean_dcache(var);
++#endif
 +
-+#endif /* CONFIG_CACHE_COLORING */
+ /* Boot-time pagetable setup */
+-extern void setup_pagetables(unsigned long boot_phys_offset);
++extern void setup_pagetables(unsigned long boot_phys_offset, paddr_t xen_paddr);
+ /* Map FDT in boot pagetable */
+ extern void *early_fdt_map(paddr_t fdt_paddr);
+ /* Remove early mappings */
+ extern void remove_early_mappings(void);
++/* Remove early coloring mappings */
++extern void remove_coloring_mappings(void);
+ /* Allocate and initialise pagetables for a secondary CPU. Sets init_ttbr to the
+  * new page table */
+ extern int init_secondary_pagetables(int cpu);
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index a81b8f9286..4721fd4a04 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -33,6 +33,7 @@
  
- /*************************
-  * BINARY BUDDY ALLOCATOR
-@@ -462,7 +646,6 @@ static unsigned long node_need_scrub[MAX_NUMNODES];
- static unsigned long *avail[MAX_NUMNODES];
- static long total_avail_pages;
+ #include <xsm/xsm.h>
  
--static DEFINE_SPINLOCK(heap_lock);
- static long outstanding_claims; /* total outstanding claims by all domains */
++#include <asm/coloring.h>
+ #include <asm/fixmap.h>
+ #include <asm/setup.h>
  
- unsigned long domain_adjust_tot_pages(struct domain *d, long pages)
-@@ -1027,10 +1210,7 @@ static struct page_info *alloc_heap_pages(
-             accumulate_tlbflush(&need_tlbflush, &pg[i],
-                                 &tlbflush_timestamp);
+@@ -105,6 +106,9 @@ DEFINE_BOOT_PAGE_TABLE(boot_third);
+ static DEFINE_PAGE_TABLE(xen_pgtable);
+ static DEFINE_PAGE_TABLE(xen_first);
+ #define THIS_CPU_PGTABLE xen_pgtable
++#ifdef CONFIG_CACHE_COLORING
++static DEFINE_PAGE_TABLE(xen_colored_temp);
++#endif
+ #else
+ #define HYP_PT_ROOT_LEVEL 1
+ /* Per-CPU pagetable pages */
+@@ -364,7 +368,11 @@ void flush_page_to_ram(unsigned long mfn, bool sync_icache)
  
--        /* Initialise fields which have other uses for free pages. */
--        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
--        page_set_owner(&pg[i], NULL);
--
-+        init_free_page_fields(&pg[i]);
-     }
- 
-     spin_unlock(&heap_lock);
-@@ -1926,24 +2106,49 @@ static unsigned long avail_heap_pages(
- void __init end_boot_allocator(void)
+ static inline lpae_t pte_of_xenaddr(vaddr_t va)
  {
-     unsigned int i;
-+    unsigned long buddy_pages;
++#ifdef CONFIG_CACHE_COLORING
++    paddr_t ma = virt_to_maddr(virt_to_boot_virt(va));
++#else
+     paddr_t ma = va + phys_offset;
++#endif
  
--    /* Pages that are free now go to the domain sub-allocator. */
--    for ( i = 0; i < nr_bootmem_regions; i++ )
-+    buddy_pages = PFN_DOWN(buddy_alloc_size);
+     return mfn_to_xen_entry(maddr_to_mfn(ma), MT_NORMAL);
+ }
+@@ -450,6 +458,7 @@ static void xen_pt_enforce_wnx(void)
+     flush_xen_tlb_local();
+ }
+ 
++extern void relocate_xen(uint64_t ttbr, void *src, void *dst, size_t len);
+ extern void switch_ttbr(uint64_t ttbr);
+ 
+ /* Clear a translation table and clean & invalidate the cache */
+@@ -459,9 +468,54 @@ static void clear_table(void *table)
+     clean_and_invalidate_dcache_va_range(table, PAGE_SIZE);
+ }
+ 
+-/* Boot-time pagetable setup.
+- * Changes here may need matching changes in head.S */
+-void __init setup_pagetables(unsigned long boot_phys_offset)
++#ifdef CONFIG_CACHE_COLORING
++static void __init create_coloring_temp_mappings(paddr_t xen_paddr)
++{
++    lpae_t pte;
++    unsigned int i;
++    mfn_t mfn = maddr_to_mfn(xen_paddr);
 +
-+    if ( !IS_ENABLED(CONFIG_CACHE_COLORING) )
-     {
--        struct bootmem_region *r = &bootmem_region_list[i];
--        if ( (r->s < r->e) &&
--             (phys_to_nid(pfn_to_paddr(r->s)) == cpu_to_node(0)) )
-+        /* Pages that are free now go to the domain sub-allocator. */
-+        for ( i = 0; i < nr_bootmem_regions; i++ )
-         {
--            init_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
--            r->e = r->s;
--            break;
-+            struct bootmem_region *r = &bootmem_region_list[i];
-+            if ( (r->s < r->e) &&
-+                (phys_to_nid(pfn_to_paddr(r->s)) == cpu_to_node(0)) )
-+            {
-+                init_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
-+                r->e = r->s;
-+                break;
-+            }
-         }
-     }
-+
-     for ( i = nr_bootmem_regions; i-- > 0; )
-     {
--        struct bootmem_region *r = &bootmem_region_list[i];
-+        struct bootmem_region *r;
-+
-+        if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
-+            r = &bootmem_region_list[nr_bootmem_regions - i - 1];
-+        else
-+            r = &bootmem_region_list[i];
-+
-+        if ( buddy_pages && (r->s < r->e) )
-+        {
-+            unsigned long pages = MIN(r->e - r->s, buddy_pages);
-+            init_heap_pages(mfn_to_page(_mfn(r->s)), pages);
-+            r->s += pages;
-+            buddy_pages -= pages;
-+        }
-         if ( r->s < r->e )
--            init_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
-+        {
-+            if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
-+                init_color_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
-+            else
-+                init_heap_pages(mfn_to_page(_mfn(r->s)), r->e - r->s);
-+        }
-     }
-     nr_bootmem_regions = 0;
- 
-@@ -2344,7 +2549,8 @@ int assign_pages(
- 
-         for ( i = 0; i < nr; i++ )
-         {
--            ASSERT(!(pg[i].count_info & ~(PGC_extra | PGC_static)));
-+            ASSERT(!(pg[i].count_info & ~(PGC_extra | PGC_static |
-+                                          PGC_colored)));
-             if ( pg[i].count_info & PGC_extra )
-                 extra_pages++;
-         }
-@@ -2429,6 +2635,15 @@ struct page_info *alloc_domheap_pages(
- 
-     ASSERT_ALLOC_CONTEXT();
- 
-+    /* Only domains are supported for coloring */
-+    if ( IS_ENABLED(CONFIG_CACHE_COLORING) && d )
++    for_each_xen_colored_mfn( mfn, i )
 +    {
-+        /* Colored allocation must be done on 0 order */
-+        if ( order )
-+            return NULL;
-+        return alloc_color_domheap_page(d, memflags);
++        pte = mfn_to_xen_entry(mfn, MT_NORMAL);
++        pte.pt.table = 1; /* level 3 mappings always have this bit set */
++        xen_colored_temp[i] = pte;
 +    }
 +
-     bits = domain_clamp_alloc_bitsize(memflags & MEMF_no_owner ? NULL : d,
-                                       bits ? : (BITS_PER_LONG+PAGE_SHIFT));
- 
-@@ -2546,7 +2761,10 @@ void free_domheap_pages(struct page_info *pg, unsigned int order)
-             scrub = 1;
-         }
- 
--        free_heap_pages(pg, order, scrub);
-+        if ( pg->count_info & PGC_colored )
-+            free_color_heap_page(pg);
-+        else
-+            free_heap_pages(pg, order, scrub);
-     }
- 
-     if ( drop_dom_ref )
-@@ -2653,6 +2871,9 @@ static void cf_check dump_heap(unsigned char key)
-             continue;
-         printk("Node %d has %lu unscrubbed pages\n", i, node_need_scrub[i]);
-     }
++    pte = mfn_to_xen_entry(virt_to_mfn(xen_colored_temp), MT_NORMAL);
++    pte.pt.table = 1;
++    write_pte(&boot_second[second_table_offset(BOOT_RELOC_VIRT_START)], pte);
++}
 +
-+    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
-+        dump_color_heap();
- }
- 
- static __init int cf_check register_heap_trigger(void)
-@@ -2785,9 +3006,7 @@ static bool prepare_staticmem_pages(struct page_info *pg, unsigned long nr_mfns,
-          * to PGC_state_inuse.
-          */
-         pg[i].count_info = PGC_static | PGC_state_inuse;
--        /* Initialise fields which have other uses for free pages. */
--        pg[i].u.inuse.type_info = PGT_TYPE_INFO_INITIALIZER;
--        page_set_owner(&pg[i], NULL);
-+        init_free_page_fields(&pg[i]);
-     }
- 
-     spin_unlock(&heap_lock);
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index a925028ab3..0d48502e75 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -297,6 +297,37 @@ page_list_add_tail(struct page_info *page, struct page_list_head *head)
-     }
-     head->tail = page;
- }
-+static inline void
-+_page_list_add(struct page_info *new, struct page_info *prev,
-+               struct page_info *next)
++void __init remove_coloring_mappings(void)
 +{
-+    new->list.prev = page_to_pdx(prev);
-+	new->list.next = page_to_pdx(next);
-+	prev->list.next = page_to_pdx(new);
-+	next->list.prev = page_to_pdx(new);
-+}
-+static inline void
-+page_list_add_next(struct page_info *new, struct page_info *prev,
-+                   struct page_list_head *head)
-+{
-+	struct page_info *next = page_list_next(prev, head);
++    int rc;
 +
-+    if ( !next )
-+        page_list_add_tail(new, head);
-+    else
-+        _page_list_add(new, prev, next);
++    /* destroy the _PAGE_BLOCK mapping */
++    rc = modify_xen_mappings(BOOT_RELOC_VIRT_START,
++                             BOOT_RELOC_VIRT_START + SZ_2M,
++                             _PAGE_BLOCK);
++    BUG_ON(rc);
 +}
-+static inline void
-+page_list_add_prev(struct page_info *new, struct page_info *next,
-+                   struct page_list_head *head)
-+{
-+	struct page_info *prev = page_list_prev(next, head);
++#else
++static void __init create_coloring_temp_mappings(paddr_t xen_paddr) {}
++void __init remove_coloring_mappings(void) {}
++#endif /* CONFIG_CACHE_COLORING */
 +
-+    if ( !prev )
-+        page_list_add(new, head);
-+    else
-+        _page_list_add(new, prev, next);
-+}
- static inline bool_t
- __page_list_del_head(struct page_info *page, struct page_list_head *head,
-                      struct page_info *next, struct page_info *prev)
-@@ -449,6 +480,18 @@ page_list_add_tail(struct page_info *page, struct page_list_head *head)
-     list_add_tail(&page->list, head);
- }
- static inline void
-+page_list_add_next(struct page_info *new, struct page_info *prev,
-+                   struct page_list_head *head)
-+{
-+	page_list_add_tail(new, &prev->list);
-+}
-+static inline void
-+page_list_add_prev(struct page_info *new, struct page_info *next,
-+                   struct page_list_head *head)
-+{
-+    page_list_add(new, &next->list);
-+}
-+static inline void
- page_list_del(struct page_info *page, struct page_list_head *head)
++/*
++ * Boot-time pagetable setup with coloring support
++ * Changes here may need matching changes in head.S
++ *
++ * The coloring support consists of:
++ * - Create a temporary colored mapping that conforms to Xen color selection.
++ * - pte_of_xenaddr takes care of translating the virtual addresses to the
++ *   new colored physical space and the returns the pte, so that the page table
++ *   initialization can remain the same.
++ * - Copy Xen to the new colored physical space by exploiting the temporary
++ *   mapping.
++ * - Update TTBR0_EL2 with the new root page table address.
++ */
++void __init setup_pagetables(unsigned long boot_phys_offset, paddr_t xen_paddr)
  {
-     list_del(&page->list);
+     uint64_t ttbr;
+     lpae_t pte, *p;
+@@ -469,6 +523,9 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+ 
+     phys_offset = boot_phys_offset;
+ 
++    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
++        create_coloring_temp_mappings(xen_paddr);
++
+ #ifdef CONFIG_ARM_64
+     p = (void *) xen_pgtable;
+     p[0] = pte_of_xenaddr((uintptr_t)xen_first);
+@@ -515,13 +572,30 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+     pte.pt.table = 1;
+     xen_second[second_table_offset(FIXMAP_ADDR(0))] = pte;
+ 
++    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
++    {
++        ttbr = virt_to_maddr(virt_to_boot_virt((vaddr_t)xen_pgtable));
++        relocate_xen(ttbr, _start, (void *)BOOT_RELOC_VIRT_START,
++                     _end - _start);
++        /*
++        * Keep original Xen memory mapped because secondary CPUs still point to it
++        * and a few variables needs to be accessed by the master CPU in order to
++        * let them boot. This mapping will also replace the one created at the
++        * beginning of setup_pagetables.
++        */
++        map_pages_to_xen(BOOT_RELOC_VIRT_START,
++                         maddr_to_mfn(XEN_VIRT_START + phys_offset),
++                         SZ_2M >> PAGE_SHIFT, PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
++    }
++    else
++    {
+ #ifdef CONFIG_ARM_64
+-    ttbr = (uintptr_t) xen_pgtable + phys_offset;
++        ttbr = (uintptr_t) xen_pgtable + phys_offset;
+ #else
+-    ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
++        ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
+ #endif
+-
+-    switch_ttbr(ttbr);
++        switch_ttbr(ttbr);
++    }
+ 
+     xen_pt_enforce_wnx();
+ 
+@@ -552,8 +626,8 @@ int init_secondary_pagetables(int cpu)
+ 
+     /* Set init_ttbr for this CPU coming up. All CPus share a single setof
+      * pagetables, but rewrite it each time for consistency with 32 bit. */
+-    init_ttbr = (uintptr_t) xen_pgtable + phys_offset;
+-    clean_dcache(init_ttbr);
++    set_value_for_secondary(init_ttbr, virt_to_maddr(xen_pgtable));
++
+     return 0;
+ }
+ #else
+@@ -1109,7 +1183,7 @@ static int xen_pt_update(unsigned long virt,
+      *
+      * XXX: Add a check.
+      */
+-    const mfn_t root = virt_to_mfn(THIS_CPU_PGTABLE);
++    const mfn_t root = maddr_to_mfn(READ_SYSREG64(TTBR0_EL2));
+ 
+     /*
+      * The hardware was configured to forbid mapping both writeable and
+diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+index 0c90c2305c..4782f64c17 100644
+--- a/xen/arch/arm/psci.c
++++ b/xen/arch/arm/psci.c
+@@ -49,8 +49,8 @@ int call_psci_cpu_on(int cpu)
+ {
+     struct arm_smccc_res res;
+ 
+-    arm_smccc_smc(psci_cpu_on_nr, cpu_logical_map(cpu), __pa(init_secondary),
+-                  &res);
++    arm_smccc_smc(psci_cpu_on_nr, cpu_logical_map(cpu),
++                  __pa(virt_to_boot_virt((vaddr_t)init_secondary)), &res);
+ 
+     return PSCI_RET(res);
+ }
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index acc3e4ad72..6ad68b7f7e 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -465,7 +465,7 @@ static void * __init relocate_fdt(paddr_t dtb_paddr, size_t dtb_size)
+     return fdt;
+ }
+ 
+-#ifdef CONFIG_ARM_32
++#if defined (CONFIG_ARM_32) || (CONFIG_CACHE_COLORING)
+ /*
+  * Returns the end address of the highest region in the range s..e
+  * with required size and alignment that does not conflict with the
+@@ -557,7 +557,9 @@ static paddr_t __init consider_modules(paddr_t s, paddr_t e,
+     }
+     return e;
+ }
++#endif
+ 
++#ifdef CONFIG_ARM_32
+ /*
+  * Find a contiguous region that fits in the static heap region with
+  * required size and alignment, and return the end address of the region
+@@ -631,6 +633,62 @@ static paddr_t __init next_module(paddr_t s, paddr_t *end)
+     return lowest;
+ }
+ 
++#ifdef CONFIG_CACHE_COLORING
++/**
++ * get_xen_paddr - get physical address to relocate Xen to
++ *
++ * Xen is relocated to as near to the top of RAM as possible and
++ * aligned to a XEN_PADDR_ALIGN boundary.
++ */
++static paddr_t __init get_xen_paddr(uint32_t xen_size)
++{
++    struct meminfo *mi = &bootinfo.mem;
++    paddr_t min_size;
++    paddr_t paddr = 0;
++    int i;
++
++    min_size = (xen_size + (XEN_PADDR_ALIGN-1)) & ~(XEN_PADDR_ALIGN-1);
++
++    /* Find the highest bank with enough space. */
++    for ( i = 0; i < mi->nr_banks; i++ )
++    {
++        const struct membank *bank = &mi->bank[i];
++        paddr_t s, e;
++
++        if ( bank->size >= min_size )
++        {
++            e = consider_modules(bank->start, bank->start + bank->size,
++                                 min_size, XEN_PADDR_ALIGN, 0);
++            if ( !e )
++                continue;
++
++#ifdef CONFIG_ARM_32
++            /* Xen must be under 4GB */
++            if ( e > 0x100000000ULL )
++                e = 0x100000000ULL;
++            if ( e < bank->start )
++                continue;
++#endif
++
++            s = e - min_size;
++
++            if ( s > paddr )
++                paddr = s;
++        }
++    }
++
++    if ( !paddr )
++        panic("Not enough memory to relocate Xen\n");
++
++    printk("Placing Xen at 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
++           paddr, paddr + min_size);
++
++    return paddr;
++}
++#else
++static paddr_t __init get_xen_paddr(uint32_t xen_size) { return 0; }
++#endif
++
+ static void __init init_pdx(void)
+ {
+     paddr_t bank_start, bank_size, bank_end;
+@@ -1013,8 +1071,6 @@ void __init start_xen(unsigned long boot_phys_offset,
+     /* Initialize traps early allow us to get backtrace when an error occurred */
+     init_traps();
+ 
+-    setup_pagetables(boot_phys_offset);
+-
+     smp_clear_cpu_maps();
+ 
+     device_tree_flattened = early_fdt_map(fdt_paddr);
+@@ -1040,8 +1096,13 @@ void __init start_xen(unsigned long boot_phys_offset,
+     {
+         if ( !coloring_init() )
+             panic("Xen cache coloring support: setup failed\n");
++        xen_bootmodule->size = XEN_COLOR_MAP_SIZE;
++        xen_bootmodule->start = get_xen_paddr(xen_bootmodule->size);
+     }
+ 
++    setup_pagetables(boot_phys_offset, xen_bootmodule->start);
++    device_tree_flattened = early_fdt_map(fdt_paddr);
++
+     setup_mm();
+ 
+     /* Parse the ACPI tables for possible boot-time configuration */
+@@ -1156,6 +1217,13 @@ void __init start_xen(unsigned long boot_phys_offset,
+ 
+     setup_virt_paging();
+ 
++    /*
++     * The removal is done earlier than discard_initial_modules beacuse the
++     * livepatch init uses a virtual address equal to BOOT_RELOC_VIRT_START.
++     * Remove coloring mappings to expose a clear state to the livepatch module.
++     */
++    if ( IS_ENABLED(CONFIG_CACHE_COLORING) )
++        remove_coloring_mappings();
+     do_initcalls();
+ 
+     /*
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index f7bda3a18b..e7166ad79b 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -470,8 +470,7 @@ int __cpu_up(unsigned int cpu)
+     init_data.cpuid = cpu;
+ 
+     /* Open the gate for this CPU */
+-    smp_up_cpu = cpu_logical_map(cpu);
+-    clean_dcache(smp_up_cpu);
++    set_value_for_secondary(smp_up_cpu, cpu_logical_map(cpu));
+ 
+     rc = arch_cpu_up(cpu);
+ 
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index 92c2984052..333589c344 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -210,7 +210,7 @@ SECTIONS
+        . = ALIGN(POINTER_ALIGN);
+        __bss_end = .;
+   } :text
+-  _end = . ;
++  _end = ALIGN(PAGE_SIZE);
+ 
+   /* Section for the device tree blob (if any). */
+   .dtb : { *(.dtb) } :text
 -- 
 2.34.1
 
