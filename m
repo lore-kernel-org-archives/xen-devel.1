@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE90C04A95
-	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:04:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.428303.678356 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C4F0C433FE
+	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:04:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.428305.678377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omG3B-0006oc-0g; Sat, 22 Oct 2022 15:04:37 +0000
+	id 1omG3D-0007M6-7S; Sat, 22 Oct 2022 15:04:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 428303.678356; Sat, 22 Oct 2022 15:04:36 +0000
+Received: by outflank-mailman (output) from mailman id 428305.678377; Sat, 22 Oct 2022 15:04:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omG3A-0006oC-SU; Sat, 22 Oct 2022 15:04:36 +0000
-Received: by outflank-mailman (input) for mailman id 428303;
- Sat, 22 Oct 2022 15:04:35 +0000
+	id 1omG3D-0007Je-1d; Sat, 22 Oct 2022 15:04:39 +0000
+Received: by outflank-mailman (input) for mailman id 428305;
+ Sat, 22 Oct 2022 15:04:37 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1omG39-0006dX-68
- for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:04:35 +0000
+ (envelope-from <julien@xen.org>) id 1omG3B-0006xc-OL
+ for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:04:37 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1omG38-0005Fe-PM; Sat, 22 Oct 2022 15:04:34 +0000
+ id 1omG3B-0005GJ-Fz; Sat, 22 Oct 2022 15:04:37 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1omG38-00023n-HR; Sat, 22 Oct 2022 15:04:34 +0000
+ id 1omG3B-00023n-86; Sat, 22 Oct 2022 15:04:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=U7Bs1tv4lv2AoxbGaVwYFTs7PIaGixTCOovZNTpsEgM=; b=kK2i5xvpxX4Nmrs+NH1/2f+vlF
-	R9lXFaAX6GoByLqMYcRmDC3Kch4F3R2zRMWAApxMuBofLeluTGCXpFYoW6dqUsGUcwJ5wsQwVXeYk
-	hn7odKv8glHnWN6+aNt+tvNzYf/GgL6hXIZ2SUtsciItctg04CgpSXONjBAymjX280rU=;
+	bh=0MRxjTuvfQiTLB/kIf7fSXALDQ1KnZVYj+vhcIohuOE=; b=rM7ghcJUdNowXvTueGCjJqyj5+
+	v9zPM4JYS0HUsH19D3efvdwXml/y22vUt55Do6WG0EzL0wG6/3so5RvFCbP5MaJUFD7+oBkWYVCG7
+	dVzCziZM8CsuOO2ZHBFUfNksBMY98pVi6X+FsyLialsEKeGspq8RUgd7pa/N/VQmkZY8=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: marco.solieri@minervasys.tech,
@@ -58,9 +58,9 @@ Cc: marco.solieri@minervasys.tech,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC v2 05/12] xen/arm32: head: Widen the use of the temporary mapping
-Date: Sat, 22 Oct 2022 16:04:15 +0100
-Message-Id: <20221022150422.17707-6-julien@xen.org>
+Subject: [RFC v2 07/12] xen/arm64: Rework the memory layout
+Date: Sat, 22 Oct 2022 16:04:17 +0100
+Message-Id: <20221022150422.17707-8-julien@xen.org>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20221022150422.17707-1-julien@xen.org>
 References: <20221022150422.17707-1-julien@xen.org>
@@ -69,167 +69,153 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-At the moment, the temporary mapping is only used when the virtual
-runtime region of Xen is clashing with the physical region.
+Xen is currently not fully compliant with the Arm Arm because it will
+switch the TTBR with the MMU on.
 
-In follow-up patches, we will rework how secondary CPU bring-up works
-and it will be convenient to use the fixmap area for accessing
-the root page-table (it is per-cpu).
+In order to be compliant, we need to disable the MMU before
+switching the TTBR. The implication is the page-tables should
+contain an identity mapping of the code switching the TTBR.
 
-Rework the code to use temporary mapping when the Xen physical address
-is not overlapping with the temporary mapping.
+In most of the case we expect Xen to be loaded in low memory. I am aware
+of one platform (i.e AMD Seattle) where the memory start above 512GB.
+To give us some slack, consider that Xen may be loaded in the first 2TB
+of the physical address space.
 
-This also has the advantage to simplify the logic to identity map
-Xen.
+The memory layout is reshuffled to keep the first two slots of the zeroeth
+level free. Xen will now be loaded at (2TB + 2MB). This requires a slight
+tweak of the boot code because XEN_VIRT_START cannot be used as an
+immediate.
+
+This reshuffle will make trivial to create a 1:1 mapping when Xen is
+loaded below 2TB.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
 ----
 
-Even if this patch is rewriting part of the previous patch, I decided
-to keep them separated to help the review.
-
-The "folow-up patches" are still in draft at the moment. I still haven't
-find a way to split them nicely and not require too much more work
-in the coloring side.
-
-I have provided some medium-term goal in the cover letter.
-
     Changes in v2:
-        - Patch added
+        - Reword the commit message
+        - Load Xen at 2TB + 2MB
+        - Update the documentation to reflect the new layout
 ---
- xen/arch/arm/arm32/head.S | 82 +++++++--------------------------------
- 1 file changed, 15 insertions(+), 67 deletions(-)
+ xen/arch/arm/arm64/head.S         |  3 ++-
+ xen/arch/arm/include/asm/config.h | 34 +++++++++++++++++++++----------
+ xen/arch/arm/mm.c                 | 11 +++++-----
+ 3 files changed, 31 insertions(+), 17 deletions(-)
 
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index 54725c90993c..e5df7cf757db 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -461,7 +461,6 @@ ENDPROC(cpu_init)
- create_page_tables:
-         /* Prepare the page-tables for mapping Xen */
-         ldr   r0, =XEN_VIRT_START
--        create_table_entry boot_pgtable, boot_second, r0, 1
-         create_table_entry boot_second, boot_third, r0, 2
- 
-         /* Setup boot_third: */
-@@ -481,67 +480,37 @@ create_page_tables:
-         cmp   r1, #(XEN_PT_LPAE_ENTRIES<<3) /* 512*8-byte entries per page */
-         blo   1b
- 
--        /*
--         * If Xen is loaded at exactly XEN_VIRT_START then we don't
--         * need an additional 1:1 mapping, the virtual mapping will
--         * suffice.
--         */
--        cmp   r9, #XEN_VIRT_START
--        moveq pc, lr
--
-         /*
-          * Setup the 1:1 mapping so we can turn the MMU on. Note that
-          * only the first page of Xen will be part of the 1:1 mapping.
--         *
--         * In all the cases, we will link boot_third_id. So create the
--         * mapping in advance.
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index ad014716db6f..23c2c7491db2 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -607,7 +607,8 @@ create_page_tables:
+          * need an additional 1:1 mapping, the virtual mapping will
+          * suffice.
           */
-+        create_table_entry boot_pgtable, boot_second_id, r9, 1
-+        create_table_entry boot_second_id, boot_third_id, r9, 2
-         create_mapping_entry boot_third_id, r9, r9
+-        cmp   x19, #XEN_VIRT_START
++        ldr   x0, =XEN_VIRT_START
++        cmp   x19, x0
+         bne   1f
+         ret
+ 1:
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index f381c471f67a..0ed9a0505080 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -72,15 +72,12 @@
+ #include <xen/page-size.h>
  
-         /*
--         * Find the first slot used. If the slot is not XEN_FIRST_SLOT,
--         * then the 1:1 mapping will use its own set of page-tables from
--         * the second level.
-+         * Find the first slot used. If the slot is not the same
-+         * as XEN_TMP_FIRST_SLOT, then we will want to switch
-+         * to the temporary mapping before jumping to the runtime
-+         * virtual mapping.
-          */
-         get_table_slot r1, r9, 1     /* r1 := first slot */
--        cmp   r1, #XEN_FIRST_SLOT
--        beq   1f
--        create_table_entry boot_pgtable, boot_second_id, r9, 1
--        b     link_from_second_id
+ /*
+- * Common ARM32 and ARM64 layout:
++ * ARM32 layout:
+  *   0  -   2M   Unmapped
+  *   2M -   4M   Xen text, data, bss
+  *   4M -   6M   Fixmap: special-purpose 4K mapping slots
+  *   6M -  10M   Early boot mapping of FDT
+- *   10M - 12M   Livepatch vmap (if compiled in)
+- *
+- * ARM32 layout:
+- *   0  -  12M   <COMMON>
++ *  10M -  12M   Livepatch vmap (if compiled in)
+  *
+  *  32M - 128M   Frametable: 24 bytes per page for 16GB of RAM
+  * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
+@@ -90,8 +87,17 @@
+  *   2G -   4G   Domheap: on-demand-mapped
+  *
+  * ARM64 layout:
+- * 0x0000000000000000 - 0x0000007fffffffff (512GB, L0 slot [0])
+- *   0  -  12M   <COMMON>
++ * 0x0000000000000000 - 0x00001fffffffffff (2TB, L0 slots [0..1])
++ *
++ *  Reserved to identity map Xen
++ *
++ * 0x0000020000000000 - 0x000028fffffffff (512TB, L0 slot [2]
++ *  (Relative offsets)
++ *   0  -   2M   Unmapped
++ *   2M -   4M   Xen text, data, bss
++ *   4M -   6M   Fixmap: special-purpose 4K mapping slots
++ *   6M -  10M   Early boot mapping of FDT
++ *  10M -  12M   Livepatch vmap (if compiled in)
+  *
+  *   1G -   2G   VMAP: ioremap and early_ioremap
+  *
+@@ -107,7 +113,17 @@
+  *  Unused
+  */
+ 
++#ifdef CONFIG_ARM_32
+ #define XEN_VIRT_START          _AT(vaddr_t, MB(2))
++#else
++
++#define SLOT0_ENTRY_BITS  39
++#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
++#define SLOT0_ENTRY_SIZE  SLOT0(1)
++
++#define XEN_VIRT_START          (SLOT0(2) + _AT(vaddr_t, MB(2)))
++#endif
++
+ #define XEN_VIRT_SIZE           _AT(vaddr_t, MB(2))
+ 
+ #define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
+@@ -164,10 +180,6 @@
+ 
+ #else /* ARM_64 */
+ 
+-#define SLOT0_ENTRY_BITS  39
+-#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
+-#define SLOT0_ENTRY_SIZE  SLOT0(1)
 -
--1:
--        /*
--         * Find the second slot used. If the slot is XEN_SECOND_SLOT, then the
--         * 1:1 mapping will use its own set of page-tables from the
--         * third level.
--         */
--        get_table_slot r1, r9, 2     /* r1 := second slot */
--        cmp   r1, #XEN_SECOND_SLOT
--        beq   virtphys_clash
--        create_table_entry boot_second, boot_third_id, r9, 2
--        b     link_from_third_id
-+        cmp   r1, #TEMPORARY_AREA_FIRST_SLOT
-+        bne   use_temporary_mapping
+ #define VMAP_VIRT_START  GB(1)
+ #define VMAP_VIRT_SIZE   GB(1)
  
--link_from_second_id:
--        create_table_entry boot_second_id, boot_third_id, r9, 2
--link_from_third_id:
--        /* Good news, we are not clashing with Xen virtual mapping */
-+        mov_w r0, XEN_VIRT_START
-+        create_table_entry boot_pgtable, boot_second, r0, 1
-         mov   r12, #0                /* r12 := temporary mapping not created */
-         mov   pc, lr
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 306507d7bced..2c6648a0dfe5 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -162,7 +162,7 @@ static void __init __maybe_unused build_assertions(void)
+ #endif
+     /* Page table structure constraints */
+ #ifdef CONFIG_ARM_64
+-    BUILD_BUG_ON(zeroeth_table_offset(XEN_VIRT_START));
++    BUILD_BUG_ON(zeroeth_table_offset(XEN_VIRT_START) < 2);
+ #endif
+     BUILD_BUG_ON(first_table_offset(XEN_VIRT_START));
+ #ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
+@@ -507,10 +507,11 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+     phys_offset = boot_phys_offset;
  
--virtphys_clash:
-+use_temporary_mapping:
-         /*
--         * The identity map clashes with boot_third. Link boot_first_id and
--         * map Xen to a temporary mapping. See switch_to_runtime_mapping
--         * for more details.
-+         * The identity mapping is not using the first slot
-+         * TEMPORARY_AREA_FIRST_SLOT. Create a temporary mapping.
-+         * See switch_to_runtime_mapping for more details.
-          */
--        PRINT("- Virt and Phys addresses clash  -\r\n")
-         PRINT("- Create temporary mapping -\r\n")
- 
--        /*
--         * This will override the link to boot_second in XEN_FIRST_SLOT.
--         * The page-tables are not live yet. So no need to use
--         * break-before-make.
--         */
-         create_table_entry boot_pgtable, boot_second_id, r9, 1
-         create_table_entry boot_second_id, boot_third_id, r9, 2
- 
-@@ -677,33 +646,12 @@ remove_identity_mapping:
-         /* r2:r3 := invalid page-table entry */
-         mov   r2, #0x0
-         mov   r3, #0x0
--        /*
--         * Find the first slot used. Remove the entry for the first
--         * table if the slot is not XEN_FIRST_SLOT.
--         */
-+        /* Find the first slot used and remove it */
-         get_table_slot r1, r9, 1     /* r1 := first slot */
--        cmp   r1, #XEN_FIRST_SLOT
--        beq   1f
--        /* It is not in slot 0, remove the entry */
-         ldr   r0, =boot_pgtable      /* r0 := root table */
-         lsl   r1, r1, #3             /* r1 := Slot offset */
-         strd  r2, r3, [r0, r1]
--        b     identity_mapping_removed
--
--1:
--        /*
--         * Find the second slot used. Remove the entry for the first
--         * table if the slot is not XEN_SECOND_SLOT.
--         */
--        get_table_slot r1, r9, 2     /* r1 := second slot */
--        cmp   r1, #XEN_SECOND_SLOT
--        beq   identity_mapping_removed
--        /* It is not in slot 1, remove the entry */
--        ldr   r0, =boot_second       /* r0 := second table */
--        lsl   r1, r1, #3             /* r1 := Slot offset */
--        strd  r2, r3, [r0, r1]
- 
--identity_mapping_removed:
-         flush_xen_tlb_local r0
-         mov   pc, lr
- ENDPROC(remove_identity_mapping)
+ #ifdef CONFIG_ARM_64
+-    p = (void *) xen_pgtable;
+-    p[0] = pte_of_xenaddr((uintptr_t)xen_first);
+-    p[0].pt.table = 1;
+-    p[0].pt.xn = 0;
++    pte = pte_of_xenaddr((uintptr_t)xen_first);
++    pte.pt.table = 1;
++    pte.pt.xn = 0;
++    xen_pgtable[zeroeth_table_offset(XEN_VIRT_START)] = pte;
++
+     p = (void *) xen_first;
+ #else
+     p = (void *) cpu0_pgtable;
 -- 
 2.37.1
 
