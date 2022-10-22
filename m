@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B90C433FE
-	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:31:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.428401.678461 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 452B4C04A95
+	for <xen-devel@archiver.kernel.org>; Sat, 22 Oct 2022 15:51:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.428411.678527 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omGSb-000823-LK; Sat, 22 Oct 2022 15:30:53 +0000
+	id 1omGmp-0003OT-31; Sat, 22 Oct 2022 15:51:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 428401.678461; Sat, 22 Oct 2022 15:30:53 +0000
+Received: by outflank-mailman (output) from mailman id 428411.678527; Sat, 22 Oct 2022 15:51:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omGSb-00081w-IV; Sat, 22 Oct 2022 15:30:53 +0000
-Received: by outflank-mailman (input) for mailman id 428401;
- Sat, 22 Oct 2022 15:30:52 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1omGSa-00081q-9H
- for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:30:52 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1omGSZ-0005lf-DQ; Sat, 22 Oct 2022 15:30:51 +0000
-Received: from 54-240-197-238.amazon.com ([54.240.197.238]
- helo=[192.168.29.245]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1omGSZ-00034O-3b; Sat, 22 Oct 2022 15:30:51 +0000
+	id 1omGmo-0003OK-VY; Sat, 22 Oct 2022 15:51:46 +0000
+Received: by outflank-mailman (input) for mailman id 428411;
+ Sat, 22 Oct 2022 15:51:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=U686=2X=minervasys.tech=carlo.nonato@srs-se1.protection.inumbo.net>)
+ id 1omGmn-000237-Na
+ for xen-devel@lists.xenproject.org; Sat, 22 Oct 2022 15:51:45 +0000
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [2a00:1450:4864:20::530])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6ddd540c-5221-11ed-8fd0-01056ac49cbb;
+ Sat, 22 Oct 2022 17:51:44 +0200 (CEST)
+Received: by mail-ed1-x530.google.com with SMTP id m15so16315002edb.13
+ for <xen-devel@lists.xenproject.org>; Sat, 22 Oct 2022 08:51:44 -0700 (PDT)
+Received: from carlo-ubuntu.home (62-11-205-162.dialup.tiscali.it.
+ [62.11.205.162]) by smtp.gmail.com with ESMTPSA id
+ z61-20020a509e43000000b00461816beef9sm894623ede.14.2022.10.22.08.51.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 22 Oct 2022 08:51:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,101 +46,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=sInZb5q0RfCvzurZG+VzUppWnv1M4vNyGRYuy5GGj9g=; b=K6S47xNImgaHkyEfKAq+Lvx6ka
-	hQzfZqMt+GDJ4xjhiZBpeQWnQNWOLN3XFiCyE/sriyBVtojV44Qh/EZpdaNzap235Ls6RJWFUQL/Z
-	aECGaqSmBpQejf2AqYGFXhh5Nazumg95m7v+2ubG+q2wohoTIjzESyyqZ63mqS6iM2r0=;
-Message-ID: <61e8475d-868d-3ff0-041f-8f6790990ce4@xen.org>
-Date: Sat, 22 Oct 2022 16:30:49 +0100
+X-Inumbo-ID: 6ddd540c-5221-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=minervasys-tech.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3IqxEd6ecjPYBOtLoN10L6xas1AQwaOpYMS5dlVn26c=;
+        b=AnibrlyVna0JrSAb+Wcx608MliwsWks84GNTUO3gu30o7DKgQLNyjjYMPpMdcVWfk8
+         dvd+CjWrZ+hH3VD8aIIEh/Vuk+I8wRj9n93vfsUDYUWsObo9orS1EpxSX4ONEJgdkB6i
+         8r+96FmkVCI4Zia20IHhdH8OO/hTK0BmunIay8Kx5n1OL8J/Rp/q5kMwZKwZTvTtPZbk
+         c6axh+eNWabSv+VkBWw+0k9B0J6j3uoy+RyBu116L4xzXBEJFLNyLDcT2zn9FDy1cn0f
+         pWQqtdFrD+fLM90dNR15b1KUZCQDi9+sLS+V38hiXf8oN9dtPtsRYDpbWoN3t2L6Q3dG
+         2Tpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3IqxEd6ecjPYBOtLoN10L6xas1AQwaOpYMS5dlVn26c=;
+        b=zzFTw+JWFKGnCEChIQk/PQn3BMegkvl4nPwP3KOYM1zRMGVWtVHmAjn75fPbq0Ed3g
+         Qfs0QyeMEUvWur7W+ByWg+o13f7tLNF6KAJnCqPQ9+Rp+Kahx1NCuBSRDScFQm4/66P9
+         zrEOKMcGZvVByLL8vlIszfbUYr5BIEylmtg9XsPWO8qj2ggO4UZUk4a35wP8MSZAd0kd
+         zezZGAl5WRr1yEALxjjZC1zQkrHB3uG95XEgqtwv5F8rK7wWXZGAD0aqkxc/N+84yJEe
+         Tj8JBY8D5/zOmLy9c/QiUlHiA4YTugPo4J9fbOX2g5mtF+mxVyQegq222SOg3W8fQKUt
+         JD7Q==
+X-Gm-Message-State: ACrzQf0RieeIULocoQlcajLJ2xu0M8rpqfHFRskEstUO06Oxp4GM3gnQ
+	G6Qo8rC6AD+mJlZMPz4jLQoRjZHluEae1g==
+X-Google-Smtp-Source: AMsMyM5kZAsF9pqs0EPB0QqBNlKxkIbAGyFH/lxOkA1oUz5eDfTOahALIsuwSHfCwkMqxwaJ5ad07Q==
+X-Received: by 2002:a17:907:2c4f:b0:78d:eebe:f413 with SMTP id hf15-20020a1709072c4f00b0078deebef413mr20626768ejc.221.1666453904210;
+        Sat, 22 Oct 2022 08:51:44 -0700 (PDT)
+From: Carlo Nonato <carlo.nonato@minervasys.tech>
+To: xen-devel@lists.xenproject.org
+Cc: marco.solieri@unimore.it,
+	andrea.bastoni@minervasys.tech,
+	lucmiccio@gmail.com,
+	Carlo Nonato <carlo.nonato@minervasys.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Marco Solieri <marco.solieri@minervasys.tech>
+Subject: [PATCH v3 5/9] xen/arm: add support for cache coloring configuration via device-tree
+Date: Sat, 22 Oct 2022 17:51:16 +0200
+Message-Id: <20221022155120.7000-6-carlo.nonato@minervasys.tech>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221022155120.7000-1-carlo.nonato@minervasys.tech>
+References: <20221022155120.7000-1-carlo.nonato@minervasys.tech>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.3.3
-Subject: Re: [PATCH v2] core-parking: fix build with gcc12 and NR_CPUS=1
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <3e72f386-7afa-84a5-54c5-14d17609dac7@suse.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <3e72f386-7afa-84a5-54c5-14d17609dac7@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Jan,
+This commit adds the "colors" Device Tree attribute that can be used for
+DomUs and Dom0less color configurations. The syntax is the same used
+for every color config.
 
-Is this intended for 4.17?
+Based on original work from: Luca Miccio <lucmiccio@gmail.com>
 
-On 09/09/2022 15:30, Jan Beulich wrote:
-> Gcc12 takes issue with core_parking_remove()'s
-> 
->      for ( ; i < cur_idle_nums; ++i )
->          core_parking_cpunum[i] = core_parking_cpunum[i + 1];
-> 
-> complaining that the right hand side array access is past the bounds of
-> 1. Clearly the compiler can't know that cur_idle_nums can only ever be
-> zero in this case (as the sole CPU cannot be parked).
-> 
-> Arrange for core_parking.c's contents to not be needed altogether, and
-> then disable its building when NR_CPUS == 1.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> v2: Disable building of core_parking.c altogether.
-> 
-> --- a/xen/arch/x86/Kconfig
-> +++ b/xen/arch/x86/Kconfig
-> @@ -10,7 +10,7 @@ config X86
->   	select ALTERNATIVE_CALL
->   	select ARCH_MAP_DOMAIN_PAGE
->   	select ARCH_SUPPORTS_INT128
-> -	select CORE_PARKING
-> +	select CORE_PARKING if NR_CPUS > 1
->   	select HAS_ALTERNATIVE
->   	select HAS_COMPAT
->   	select HAS_CPUFREQ
-> --- a/xen/arch/x86/platform_hypercall.c
-> +++ b/xen/arch/x86/platform_hypercall.c
-> @@ -727,12 +727,17 @@ ret_t do_platform_op(
->           case XEN_CORE_PARKING_SET:
->               idle_nums = min_t(uint32_t,
->                       op->u.core_parking.idle_nums, num_present_cpus() - 1);
-> -            ret = continue_hypercall_on_cpu(
-> -                    0, core_parking_helper, (void *)(unsigned long)idle_nums);
-> +            if ( CONFIG_NR_CPUS > 1 )
-> +                ret = continue_hypercall_on_cpu(
-> +                        0, core_parking_helper,
-> +                        (void *)(unsigned long)idle_nums);
-> +            else if ( idle_nums )
-> +                ret = -EINVAL;
->               break;
->   
->           case XEN_CORE_PARKING_GET:
-> -            op->u.core_parking.idle_nums = get_cur_idle_nums();
-> +            op->u.core_parking.idle_nums = CONFIG_NR_CPUS > 1
-> +                                           ? get_cur_idle_nums() : 0;
->               ret = __copy_field_to_guest(u_xenpf_op, op, u.core_parking) ?
->                     -EFAULT : 0;
->               break;
-> --- a/xen/arch/x86/sysctl.c
-> +++ b/xen/arch/x86/sysctl.c
-> @@ -157,7 +157,7 @@ long arch_do_sysctl(
->           long (*fn)(void *);
->           void *hcpu;
->   
-> -        switch ( op )
-> +        switch ( op | -(CONFIG_NR_CPUS == 1) )
-This code is quite confusing to read and potentially risky as you are 
-are relying the top bit of 'op' to never be 1. While I am expecting this 
-will ever be the case, this will be a "fun" issue to debug if this ever 
-happen. So I would suggest to check CONFIG_NR_CPUS == 1 separately.
+Signed-off-by: Carlo Nonato <carlo.nonato@minervasys.tech>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+---
+ docs/misc/arm/cache-coloring.rst      | 45 +++++++++++++++++++++++++++
+ docs/misc/arm/device-tree/booting.txt |  4 +++
+ xen/arch/arm/coloring.c               | 17 ++++++++++
+ xen/arch/arm/domain_build.c           | 13 ++++++++
+ xen/arch/arm/include/asm/coloring.h   |  5 +++
+ 5 files changed, 84 insertions(+)
 
-The rest of the changes looks fine to me.
-
-Cheers,
-
+diff --git a/docs/misc/arm/cache-coloring.rst b/docs/misc/arm/cache-coloring.rst
+index e8ee8fafde..dd2e851a26 100644
+--- a/docs/misc/arm/cache-coloring.rst
++++ b/docs/misc/arm/cache-coloring.rst
+@@ -114,6 +114,51 @@ LLC way size (as previously discussed) and Dom0 colors can be set using the
+ appropriate command line parameters. See the relevant documentation in
+ "docs/misc/xen-command-line.pandoc".
+ 
++DomUs colors can be set either in the xl configuration file (relative
++documentation at "docs/man/xl.cfg.pod.5.in") or via Device Tree, also for
++Dom0less configurations, as in the following example:
++
++.. raw:: html
++
++    <pre>
++        xen,xen-bootargs = "console=dtuart dtuart=serial0 dom0_mem=1G dom0_max_vcpus=1 sched=null llc-way-size=64K xen-colors=0-1 dom0-colors=2-6";
++        xen,dom0-bootargs "console=hvc0 earlycon=xen earlyprintk=xen root=/dev/ram0"
++
++        dom0 {
++            compatible = "xen,linux-zimage" "xen,multiboot-module";
++            reg = <0x0 0x1000000 0x0 15858176>;
++        };
++
++        dom0-ramdisk {
++            compatible = "xen,linux-initrd" "xen,multiboot-module";
++            reg = <0x0 0x2000000 0x0 20638062>;
++        };
++
++        domU0 {
++            #address-cells = <0x1>;
++            #size-cells = <0x1>;
++            compatible = "xen,domain";
++            memory = <0x0 0x40000>;
++            colors = "4-8,10,11,12";
++            cpus = <0x1>;
++            vpl011 = <0x1>;
++
++            module@2000000 {
++                compatible = "multiboot,kernel", "multiboot,module";
++                reg = <0x2000000 0xffffff>;
++                bootargs = "console=ttyAMA0";
++            };
++
++            module@30000000 {
++                compatible = "multiboot,ramdisk", "multiboot,module";
++                reg = <0x3000000 0xffffff>;
++            };
++        };
++    </pre>
++
++Please refer to the relative documentation in
++"docs/misc/arm/device-tree/booting.txt".
++
+ Note that if no color configuration is provided for domains, they fallback to
+ the default one, which corresponds simply to all available colors.
+ 
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index c47a05e0da..3aa493c66d 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -162,6 +162,10 @@ with the following properties:
+ 
+     An integer specifying the number of vcpus to allocate to the guest.
+ 
++- colors
++    A string specifying the color configuration for the guest. Refer to
++    "docs/misc/arm/cache_coloring.rst" for syntax.
++
+ - vpl011
+ 
+     An empty property to enable/disable a virtual pl011 for the guest to
+diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
+index cf8aa8a2ca..685a431c3d 100644
+--- a/xen/arch/arm/coloring.c
++++ b/xen/arch/arm/coloring.c
+@@ -273,8 +273,11 @@ int domain_coloring_init(struct domain *d,
+         if ( config->from_guest )
+             copy_from_guest(d->arch.colors, config->colors, config->num_colors);
+         else
++        {
+             memcpy(d->arch.colors, config->colors.p,
+                    sizeof(unsigned int) * config->num_colors);
++            xfree(config->colors.p);
++        }
+     }
+ 
+     if ( !d->arch.colors )
+@@ -305,6 +308,20 @@ void domain_dump_coloring_info(struct domain *d)
+     print_colors(d->arch.colors, d->arch.num_colors);
+ }
+ 
++void prepare_color_domain_config(struct xen_arch_domainconfig *config,
++                                 const char *colors_str)
++{
++    unsigned int num_colors;
++
++    config->colors.p = xzalloc_array(unsigned int, max_colors);
++    if ( !config->colors.p )
++        panic("Unable to allocate cache colors\n");
++
++    if ( parse_color_config(colors_str, config->colors.p, &num_colors) )
++        panic("Error parsing the color configuration\n");
++    config->num_colors = (uint16_t)num_colors;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 97f2060007..b95e655331 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -25,6 +25,7 @@
+ #include <asm/platform.h>
+ #include <asm/psci.h>
+ #include <asm/setup.h>
++#include <asm/coloring.h>
+ #include <asm/cpufeature.h>
+ #include <asm/domain_build.h>
+ #include <xen/event.h>
+@@ -3826,6 +3827,7 @@ void __init create_domUs(void)
+     struct dt_device_node *node;
+     const struct dt_device_node *cpupool_node,
+                                 *chosen = dt_find_node_by_path("/chosen");
++    const char *colors_str;
+ 
+     BUG_ON(chosen == NULL);
+     dt_for_each_child_node(chosen, node)
+@@ -3914,6 +3916,17 @@ void __init create_domUs(void)
+             d_cfg.cpupool_id = pool_id;
+         }
+ 
++        if ( !dt_property_read_string(node, "colors", &colors_str) )
++        {
++            if ( !IS_ENABLED(CONFIG_CACHE_COLORING) )
++                printk(XENLOG_WARNING
++                       "Property 'colors' found, but coloring is disabled\n");
++            else if ( dt_find_property(node, "xen,static-mem", NULL) )
++                panic("static-mem isn't allowed when coloring is enabled\n");
++            else
++                prepare_color_domain_config(&d_cfg.arch, colors_str);
++        }
++
+         /*
+          * The variable max_init_domid is initialized with zero, so here it's
+          * very important to use the pre-increment operator to call
+diff --git a/xen/arch/arm/include/asm/coloring.h b/xen/arch/arm/include/asm/coloring.h
+index a16736819e..549eb408a3 100644
+--- a/xen/arch/arm/include/asm/coloring.h
++++ b/xen/arch/arm/include/asm/coloring.h
+@@ -38,6 +38,9 @@ int domain_coloring_init(struct domain *d,
+ void domain_coloring_free(struct domain *d);
+ void domain_dump_coloring_info(struct domain *d);
+ 
++void prepare_color_domain_config(struct xen_arch_domainconfig *config,
++                                 const char *colors_str);
++
+ #else /* !CONFIG_CACHE_COLORING */
+ 
+ static inline bool __init coloring_init(void) { return true; }
+@@ -45,6 +48,8 @@ static inline int domain_coloring_init(
+     struct domain *d, const struct xen_arch_domainconfig *config) { return 0; }
+ static inline void domain_coloring_free(struct domain *d) {}
+ static inline void domain_dump_coloring_info(struct domain *d) {}
++static inline void prepare_color_domain_config(
++    struct xen_arch_domainconfig *config, const char *colors_str) {}
+ 
+ #endif /* CONFIG_CACHE_COLORING */
+ #endif /* __ASM_ARM_COLORING_H__ */
 -- 
-Julien Grall
+2.34.1
+
 
