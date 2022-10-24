@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E8AAFC618E
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Oct 2022 11:20:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.428908.679614 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4176EB6467
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Oct 2022 11:20:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.428910.679628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omvV8-0006Wd-1d; Mon, 24 Oct 2022 11:20:14 +0000
+	id 1omvVB-000790-14; Mon, 24 Oct 2022 11:20:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 428908.679614; Mon, 24 Oct 2022 11:20:13 +0000
+Received: by outflank-mailman (output) from mailman id 428910.679628; Mon, 24 Oct 2022 11:20:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omvV7-0006RJ-2R; Mon, 24 Oct 2022 11:20:13 +0000
-Received: by outflank-mailman (input) for mailman id 428908;
- Mon, 24 Oct 2022 11:20:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1omvV9-000720-RI; Mon, 24 Oct 2022 11:20:15 +0000
+Received: by outflank-mailman (input) for mailman id 428910;
+ Mon, 24 Oct 2022 11:20:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fxyk=2Z=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1omvV0-00036S-K9
- for xen-devel@lists.xenproject.org; Mon, 24 Oct 2022 11:20:06 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ce1d6738-538d-11ed-8fd0-01056ac49cbb;
- Mon, 24 Oct 2022 13:20:03 +0200 (CEST)
+ id 1omvV1-0003Yp-Ni
+ for xen-devel@lists.xenproject.org; Mon, 24 Oct 2022 11:20:07 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d00a2c37-538d-11ed-91b5-6bf2151ebd3b;
+ Mon, 24 Oct 2022 13:20:06 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1AA231FD8C;
- Mon, 24 Oct 2022 11:20:03 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B4276220DA;
+ Mon, 24 Oct 2022 11:20:06 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A06FC13B34;
- Mon, 24 Oct 2022 11:20:02 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 359A713A98;
+ Mon, 24 Oct 2022 11:20:06 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id YGlqJuJ0VmOYMgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 24 Oct 2022 11:20:02 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id UFgyDOZ0VmOYMgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 24 Oct 2022 11:20:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,25 +53,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce1d6738-538d-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: d00a2c37-538d-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1666610403; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1666610406; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TEgpl55AepC361EexBBEYuHLTFWdn6vIDOCsAIRAdbs=;
-	b=tTPj3Ajm/W7k4xAj/NjREnCuteNThvM5rK5/j9FGA2C7plkeoxu705D1SVfIq19i/Q8vDD
-	Hh3loR0GZWj+xZBF42TiFg+xablbQ5RsXgTm9VOzMNBL+zTUcHbC3i3JX1ZTLBaXTF7pMH
-	twjAUrF4GYnBD1Cb57pe2fKkGImYEhI=
+	bh=W2hXo1ZXw+fT7jNTQpjjai6MaQuUlFJ3x4yHM5t/NT8=;
+	b=NmK2JPY7erjfISSjJHyuZn3S9M4HE0QY2DX64ewIKQkqdV4YW55dIfYZUFwsucHgK8EJWo
+	9OqpMMbfSr3Sj4qTG661IHslL7dTlOf47A0qYZ/yUtPD5rYrjiqIr2/K1pI8y8YSUIBX7A
+	u/2NuQed3cKWK0fTF/Zshk2lHorpMOI=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1666610403;
+	s=susede2_ed25519; t=1666610406;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TEgpl55AepC361EexBBEYuHLTFWdn6vIDOCsAIRAdbs=;
-	b=XkLdHuGn9oWWLTzK+dldjiKNlN1DDYMycvmmFEG53dbzQ/rRcXmxp45qbnZbGAegvjt7UQ
-	gXwxSlh/nr53HABQ==
+	bh=W2hXo1ZXw+fT7jNTQpjjai6MaQuUlFJ3x4yHM5t/NT8=;
+	b=2HdzFY+hAc4IQyzPhbPzdnFAvNOMcpZCifG7L10kN4snoDQgnsRKjQRlxM4yHitxgDoIAD
+	6G6AQD9Zct0kBEBA==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch,
 	airlied@gmail.com,
@@ -102,34 +102,50 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-tegra@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 09/21] drm/panel-ili9341: Include <linux/backlight.h>
-Date: Mon, 24 Oct 2022 13:19:41 +0200
-Message-Id: <20221024111953.24307-10-tzimmermann@suse.de>
+Subject: [PATCH v2 16/21] drm/fb-helper: Call fb_sync in I/O functions
+Date: Mon, 24 Oct 2022 13:19:48 +0200
+Message-Id: <20221024111953.24307-17-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.0
 In-Reply-To: <20221024111953.24307-1-tzimmermann@suse.de>
 References: <20221024111953.24307-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Include <linux/backlight.h> for devm_of_find_backlight().
+Call struct fb_ops.fb_sync in drm_fbdev_{read,write}() to mimic the
+behavior of fbdev. Fbdev implementations of fb_read and fb_write in
+struct fb_ops invoke fb_sync to synchronize with outstanding operations
+before I/O. Doing the same in DRM implementations will allow us to use
+them throughout DRM drivers.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/panel/panel-ilitek-ili9341.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/drm_fb_helper.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
-index 39dc40cf681f0..b59472c29a40d 100644
---- a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
-+++ b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
-@@ -18,6 +18,7 @@
-  * Copyright 2018 David Lechner <david@lechnology.com>
-  */
+diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+index f6d22cc4cd876..379e0d2f67198 100644
+--- a/drivers/gpu/drm/drm_fb_helper.c
++++ b/drivers/gpu/drm/drm_fb_helper.c
+@@ -2246,6 +2246,9 @@ static ssize_t drm_fbdev_fb_read(struct fb_info *info, char __user *buf,
+ 	if (total_size - count < pos)
+ 		count = total_size - pos;
  
-+#include <linux/backlight.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
- #include <linux/gpio/consumer.h>
++	if (info->fbops->fb_sync)
++		info->fbops->fb_sync(info);
++
+ 	if (drm_fbdev_use_iomem(info))
+ 		ret = fb_read_screen_base(info, buf, count, pos);
+ 	else
+@@ -2327,6 +2330,9 @@ static ssize_t drm_fbdev_fb_write(struct fb_info *info, const char __user *buf,
+ 		count = total_size - pos;
+ 	}
+ 
++	if (info->fbops->fb_sync)
++		info->fbops->fb_sync(info);
++
+ 	/*
+ 	 * Copy to framebuffer even if we already logged an error. Emulates
+ 	 * the behavior of the original fbdev implementation.
 -- 
 2.38.0
 
