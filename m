@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E294EFA375A
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Oct 2022 11:20:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.428904.679556 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B6EFC6174
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Oct 2022 11:20:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.428905.679576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omvV1-0004wf-A6; Mon, 24 Oct 2022 11:20:07 +0000
+	id 1omvV3-0005N3-DM; Mon, 24 Oct 2022 11:20:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 428904.679556; Mon, 24 Oct 2022 11:20:07 +0000
+Received: by outflank-mailman (output) from mailman id 428905.679576; Mon, 24 Oct 2022 11:20:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1omvV0-0004tQ-NF; Mon, 24 Oct 2022 11:20:06 +0000
-Received: by outflank-mailman (input) for mailman id 428904;
- Mon, 24 Oct 2022 11:20:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1omvV2-0005KN-M1; Mon, 24 Oct 2022 11:20:08 +0000
+Received: by outflank-mailman (input) for mailman id 428905;
+ Mon, 24 Oct 2022 11:20:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fxyk=2Z=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1omvUy-00036S-JZ
- for xen-devel@lists.xenproject.org; Mon, 24 Oct 2022 11:20:04 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cda47f88-538d-11ed-8fd0-01056ac49cbb;
- Mon, 24 Oct 2022 13:20:02 +0200 (CEST)
+ id 1omvUz-0003Yp-0d
+ for xen-devel@lists.xenproject.org; Mon, 24 Oct 2022 11:20:05 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce7a9d98-538d-11ed-91b5-6bf2151ebd3b;
+ Mon, 24 Oct 2022 13:20:03 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 29EAE21EAA;
- Mon, 24 Oct 2022 11:20:02 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2A99A21E9E;
+ Mon, 24 Oct 2022 11:20:04 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B018613A98;
- Mon, 24 Oct 2022 11:20:01 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A51C113357;
+ Mon, 24 Oct 2022 11:20:03 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 0DQ1KuF0VmOYMgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 24 Oct 2022 11:20:01 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id MClwJ+N0VmOYMgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 24 Oct 2022 11:20:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,25 +53,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cda47f88-538d-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: ce7a9d98-538d-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1666610402; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1666610404; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1Wm7qKYcP3zcqB8vN6ctrVYh+kdKBx4YB6Ib1oO4WIs=;
-	b=xPkb3DU7zI67ZFwwt8i+2oIu3zEy8S+ECkGZtacr+DZXiIOzuTSjP8+cV+Kw0IQBdfXUo+
-	MJiMncM2IgAUUvxEIi39/XnXet5/F8YKawvYQ2EQjYeXe8iODcnDUmUI4PC7DJQDPYWDnX
-	J8V/1uqou8zKm0Tyycio1hC+zvbT5b8=
+	bh=YkMHENyFsh6/3SjkSTuYRYMbHc7R5XzWBBCbrwJgYhc=;
+	b=UL0Xm/SZ/boCID7H9JNHrmtRrt3jufekwWgojpJwcDZDOUJLVFxOogJl2v0+1qP4CEAeGU
+	fRM0GF4CApRdd83X31cW2Rzd2aSdlQtJf4S4YZtJ5sXZLrj58aqT6Gv8ztwFTV2hZcAoSy
+	t9VQtHXjrBPan1liZ0sZc/2fCWmDYDA=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1666610402;
+	s=susede2_ed25519; t=1666610404;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1Wm7qKYcP3zcqB8vN6ctrVYh+kdKBx4YB6Ib1oO4WIs=;
-	b=kIm2zNLE982JNr9RaYNRmUkTVKj1xJOWVyT/wZa+SNDh/UCrjkiXo7EdEAb/Myj9aL3fKn
-	1B5bUJdL74Je4xDw==
+	bh=YkMHENyFsh6/3SjkSTuYRYMbHc7R5XzWBBCbrwJgYhc=;
+	b=vDfrFs9N/fTxnSB8q3qlPxjXKDXlJR8QXIEAG/fSF+rYVJqcaIrdG6KxsnY74D6kAk8scf
+	1FIUDLCuQMoaGJDg==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch,
 	airlied@gmail.com,
@@ -102,49 +102,40 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-tegra@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 07/21] drm/logicvc: Don't set struct drm_driver.output_poll_changed
-Date: Mon, 24 Oct 2022 13:19:39 +0200
-Message-Id: <20221024111953.24307-8-tzimmermann@suse.de>
+Subject: [PATCH v2 11/21] drm/fb-helper: Cleanup include statements in header file
+Date: Mon, 24 Oct 2022 13:19:43 +0200
+Message-Id: <20221024111953.24307-12-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.0
 In-Reply-To: <20221024111953.24307-1-tzimmermann@suse.de>
 References: <20221024111953.24307-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Don't set struct drm_driver.output_poll_changed. It's used to restore
-the fbdev console. But as logicvc uses generic fbdev emulation, the
-console is being restored by the DRM client helpers already. See the
-functions drm_kms_helper_hotplug_event() and
-drm_kms_helper_connector_hotplug_event() in drm_probe_helper.c.
-
-v2:
-	* fix commit description (Christian)
+Only include what we have to.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/logicvc/logicvc_mode.c | 2 --
- 1 file changed, 2 deletions(-)
+ include/drm/drm_fb_helper.h | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/logicvc/logicvc_mode.c b/drivers/gpu/drm/logicvc/logicvc_mode.c
-index d8207ffda1af9..9971950ebd4ee 100644
---- a/drivers/gpu/drm/logicvc/logicvc_mode.c
-+++ b/drivers/gpu/drm/logicvc/logicvc_mode.c
-@@ -10,7 +10,6 @@
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_gem_dma_helper.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_mode_config.h>
-@@ -26,7 +25,6 @@
+diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
+index fddd0d1af6891..e923089522896 100644
+--- a/include/drm/drm_fb_helper.h
++++ b/include/drm/drm_fb_helper.h
+@@ -32,11 +32,9 @@
  
- static const struct drm_mode_config_funcs logicvc_mode_config_funcs = {
- 	.fb_create		= drm_gem_fb_create,
--	.output_poll_changed	= drm_fb_helper_output_poll_changed,
- 	.atomic_check		= drm_atomic_helper_check,
- 	.atomic_commit		= drm_atomic_helper_commit,
- };
+ struct drm_fb_helper;
+ 
+-#include <drm/drm_client.h>
+-#include <drm/drm_crtc.h>
+-#include <drm/drm_device.h>
+ #include <linux/fb.h>
+-#include <linux/kgdb.h>
++
++#include <drm/drm_client.h>
+ 
+ enum mode_set_atomic {
+ 	LEAVE_ATOMIC_MODE_SET,
 -- 
 2.38.0
 
