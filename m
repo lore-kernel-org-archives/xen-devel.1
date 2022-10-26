@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C216FA373D
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Oct 2022 06:47:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.430354.681949 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3777AC433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Oct 2022 08:07:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.430377.681999 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1onaCN-0000Sg-FK; Wed, 26 Oct 2022 06:47:35 +0000
+	id 1onbR0-0002zl-E9; Wed, 26 Oct 2022 08:06:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 430354.681949; Wed, 26 Oct 2022 06:47:35 +0000
+Received: by outflank-mailman (output) from mailman id 430377.681999; Wed, 26 Oct 2022 08:06:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1onaCN-0000S1-8G; Wed, 26 Oct 2022 06:47:35 +0000
-Received: by outflank-mailman (input) for mailman id 430354;
- Wed, 26 Oct 2022 06:47:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1onbR0-0002yV-8p; Wed, 26 Oct 2022 08:06:46 +0000
+Received: by outflank-mailman (input) for mailman id 430377;
+ Wed, 26 Oct 2022 08:06:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/gdy=23=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1onaCL-0000PX-85
- for xen-devel@lists.xenproject.org; Wed, 26 Oct 2022 06:47:33 +0000
-Received: from sonic306-19.consmr.mail.gq1.yahoo.com
- (sonic306-19.consmr.mail.gq1.yahoo.com [98.137.68.82])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f7882b8-54fa-11ed-8fd0-01056ac49cbb;
- Wed, 26 Oct 2022 08:47:31 +0200 (CEST)
+ id 1onbQy-0002gT-Po
+ for xen-devel@lists.xenproject.org; Wed, 26 Oct 2022 08:06:44 +0000
+Received: from sonic312-23.consmr.mail.gq1.yahoo.com
+ (sonic312-23.consmr.mail.gq1.yahoo.com [98.137.69.204])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1fc0f98f-5505-11ed-91b5-6bf2151ebd3b;
+ Wed, 26 Oct 2022 10:06:42 +0200 (CEST)
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic306.consmr.mail.gq1.yahoo.com with HTTP; Wed, 26 Oct 2022 06:47:28 +0000
+ sonic312.consmr.mail.gq1.yahoo.com with HTTP; Wed, 26 Oct 2022 08:06:40 +0000
 Received: by hermes--production-ne1-c47ffd5f5-kmjmv (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 636de0ff1881defd5f865b248e2c93fc; 
- Wed, 26 Oct 2022 06:47:26 +0000 (UTC)
+ Server) with ESMTPA ID 23da40615be2c6ee6a989747ca28211e; 
+ Wed, 26 Oct 2022 08:06:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,97 +44,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f7882b8-54fa-11ed-8fd0-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1666766848; bh=dLXrJkyiqsIYSywqKcL7l1Em1BNR45sfHEGx1oxqiGw=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=Lyg5OZaRttFnGNg/8bmNuJi3/0BI1FSHLxUoy212k4uVw3EMytYYX57pmxmjxb04ra8TQejVv2wVVgeAvZieBPtNADbv/cjV67Lqt9cYvIkr6V5y2yoAujMVwKZ/8yYCENFTSmsFEfYv0Ko8zbhdpFnOzd4SclsfQC6bvlRsWb0nOE0GBLvB6DMHbngGrpO3cqIlQJTatFUlcTtStWcV7nOCUUi+8/MMSmRS9gBl6PvKu2GjR0jWGafiVRAhwvOTw9JAhUi714GRG8FPg1g/ZEvLlc6N0IT+TQSYB9HbkqvCyEhOizIAIyX1QkUJNDF3xnGkKbpgZefMEnbtoY8Szg==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1666766848; bh=DZIOPkXCbwnwejG//h5zhhHCiMPr/e0DijlWUSFDkh3=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=HKaO0RPdCtti4skngDL5fhvvVcDLQMZ77m2sz1dbeVifY3PsboP6fWWqKEEs8jhh1Xo8viylKmlYeO6YE4sTMpsHfc5MoVnF6TarASEXxvWELxmwft8SkCKMqJQWM01TWlBMpxGED+2jBJxaneIm8uxm4/A2H3Uwq8moICJgfewZlemVaP1ZTeeaor32fzddfb8XlI9TInFz2lMKVbxiiRN/J4r7KwrxKSDhw1+foPyxR86Q1ZREq+F+8K0zU3y4Twdc4kuxEYjezejhjiVUuREGDCPwVvrs36Ypy8yA6zJNZbaGnjPyuPbAizGUXTIcxIEfk8EfeC4Al+8CeA6HlA==
-X-YMail-OSG: _iZutSEVM1k_8REuJyjNnB1PBvx8Y_BrUcP9ZE0sP6dy2yhL_on2SJVSbFHHzHt
- vuvFelI9Inu5a6iJFouc.OA6JsFTVJn6dQIpxjFC16qcJPgpqbzXnFW8my5ka8BhqlQ.nIBSZTvx
- su0B7mgyMyEkFU1wPbN3rFBMzN3XBs2WOP8oPuL9.1BySJk_C4lCCMKAwIEJxIpJzMuHhus8_tJ4
- l3RGCNoaP_OTxpyNCR4TrBCgU1tAyf.wjnOa32SlivgflXX.lTJASKpESynFtW6Q7pw2GCxQDJub
- oMpF1cqrDM5gJL89nlnJisbE_TauLvpLkn1f1Tlh_Lz10hOYKbNjNWbI8v5uUyClAkQwQ7wOCFMZ
- McBw7rFHgkrdcSW8xqqNS8IwEIt.UZodj_urta9rRJ77RY93UXsv3WuSZj8W059kReesOoCl.fei
- qEcnfLoV5cUVMqmuka0djhbasIIMtqFwKSx6pfpTF0U781aDBR9pqfOFlgC8PnCNnc3zAajM6Cr9
- lguStnZNLsEgHXzCtj9IAsCVpO3kynErllBccdB9z4Vinx5sycllTAGBcm4h0Fomkus27N5jLUeM
- l3ih0i9JLpz2PDH8m92h6qrrPJYSkNNOiTCJdQLwK3beNG.sM7K3qw027OJaMxg5N_8hH3X4JvMd
- JMSjR_y2I5kzvQ5g__Fw29.M2OCQAYkftaW9eFsqLZxYK6N1m_nyO5nKQVaAvZlAcXtLitAMepFr
- MDlnprWVBYASLdKunhM_h95SkH9iU9gmmancQNu70ATknBuek_qfZvV6eScZqIFi5134u_0yZL7E
- uaiJ_9M9w4UnLj8pHq79pDKRNU8p6UwxuQ.QZ3qhc5fT54r_aDt6jdgdGIgfPX4BGRjg1g8JfKKJ
- vW0comVOnqq.eWM.H1EHq7WXeMILh9aI1FZHI5SpC_onsz6wT7K4C6cEQ.vFI8W.A13B9vpoW64a
- DL5fk3uFe5TnHtRDf5ktC3XpqNpqa4YLjIIEk8vlrriXp2gptiBnMgZkh8OIxJbWkyERes24SPOg
- IBq2QNhvBgxfNKelqONpLjs0wiPmFTmXpfdtN.z_uUybmIDzCiACjST5r4YKsVYOWmOrIsadTOFl
- zlr6tSnp5BQy84jRkWGm2eJr6YklzXnQ4_4amYgBhb_0o0Gw8qHjDW3pXO8mAWnjGw5fhCLUk3wn
- 96xr5PrFx7mmK5Wc_cvBamTJ3BkkfNV7NLla9dTc40FnrX6cytJ0z3aGWV.H0Lnkuuvbscnhmtwt
- Cl4_IvzkYx.7V6cd8.cQA73D5ETtJubBAAEPeluARv.SqfJyc_1qtkHUdi62bgbtj_CiGLXi4QJ6
- FIUr8W.wF3qwCS4ckTteYPWXJ0NNnMPv4LW1riaxftxwFUOlfrpbSHwFfCRKoaMEqsCYlUnyaTJI
- m4Y5k9eDtdxQGWFxuloohedP.J7Gc0gy8AXXs4..cBGSYtCHC4VacJWrxuUcpkW2XBDpBjNuT6OC
- MTXzUShiV0L2E_mcvBkkXaxsafkmUHWVYtGKbiAjWR4uZjRI.pULSHoLb9iYTx1DEeJSWI2dsheA
- H_mU0lymNGXoCvXExwZyBIevxkl.q9_pEG261PqvXI2MwJSczCuSF4r7CjBhdVB087yJG.v0dAYU
- wUfAneAiqlpj.eSl29a4q0ye93L3wMzQz3XbwzLA5JK_57tRw2KefSiJzIEXflaDDB_GDDH7QooY
- C1md3WKuhQPi.sOva3Yj0ELU6NXGrTEfhB_gD9SCGwa8QRhy0PKi5BJotXQzlzhuiFDwtSW9f2jZ
- DxwOViF1QL8ckvYVtuUqXoyEJ76QsHqdNDy2PdQx.YINd6Tl_1Z63PAxPkiZvqnpe8_1jNMd2WUe
- 8v2HRz12dCDS0r.GweCr5T3vZnX9ax.SowAwfbOoOIBqkXlCnVCRKQGHFi_T9ZiVOcQrhhpZFi9k
- EnfNsSZkZzT9yiuo0PSYQN6g.8FKhVB0QjXzV1uUzDq2ssqie78uHKSGw6Zr_PTbt9aP4pOF7.2I
- K6R3_tmvmc.9Gxmstdifu82pepzxTqEZQ.6UP5GTcal5MytbsV2SWUntuPTQFJzRFj9xl25JcX59
- 8ErYxWl3aZKntC_F0rXnKV5ZxcdvBsdP4mr4NS_iSwanhhAkob9IbjaTVNjTey6P0gXDFXt5MEQ0
- pLbFMTKAEfm7elaw_BMLeEFTz2zCjv3LVKeaNay0P0sZtnsRrnWQMiEs9.ON1N7Rr3WY8M8Klf_c
- x
+X-Inumbo-ID: 1fc0f98f-5505-11ed-91b5-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1666771600; bh=u86QTm0cyxo38RdExErIu1L1spuQttzF9o1Vs1Vo7tg=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=ZR2T7Z41SlvXc+rN1mES7UY4Bb+Ycz65QSQGyKE3j2N9g9YvCoyDkX1lp/BczMULbtRqp3/m9Nzkhwo9CrqvMnML+T7P0LKZX879HeuuxS4ipo8Er1YP0gas6mJZypw89JBgo9yrZKGbj2tO9Ou1MWAwptJQ/SOZwI5SXHXX5Ckh4Ft2UwlA7QrLsSVtHUZ78/2i9RINnIwDke7vs4XUao1fSCUlywYDr7U/MQWPhyKngylsFOiXX/RDHwukASBhyDCfLx1sPgA3IVqJTnHRF5oosq4E+IiVu3XkUT40umiQD4h9mQhjkRKvK2Q6sqZqDSUc+PO6VeFeJt022pTgdQ==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1666771600; bh=1KYDCrNPU+/svpF5/W1oIG2nGvvX+6+8wbJ5ajoLPAa=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=CmMHkHepufn2Qll7JYXi01ukoER0p3TQJBYtcaEEOFoXdaNqIQR2FlmXg+V9V+MhMxVaz+Pf18Sy3AwPxhu3EUTc+tpfBeiBdFcUTMEI9mTBSmLWDPjIP+C4XYyltwJGOsfvSQQhx/I6CelrRiLTq4Q67imx6DjzFwJOuuN8mkCwUQurk979wEDbefGLqU4Gmsvjd9cduo/m+A00v6NBjMvrqPxW6wjs5qySlvUNzNAW/E7XLiE19NgQ15AHdrz27NntgHMtpCGd09yd63vvdIVWCALXewPEt1l91l//gIzWzNbr8vU5ci4SeZAb/7gFlmnjtaqR32Wkdtwkl/b58A==
+X-YMail-OSG: FapNKEYVM1lv1c4logrdi4PSEeumlxN3GcGS6oPcjD4QNjayXQlSGXC0ABtI00R
+ S8hAfLaiOZepETaAjHrZt5yZ0TZlhEsQSEtZN28JPchpaKZjo9KbHHhGKR5V6CCGjJyFu_RCtSjs
+ JeLCGwB.QEvK5MZXpqVY3AKucf_JoGQ3Kkih8mW2O1iJJZvbY.479NrhuOfwpDmve7lcD1wUaG5a
+ Ke0zSmxvlQ6myCrT2l_3fWCsJKHmAOmT0iXc4t2iq4ro4ephYNivT_Xlj_BlVVDexTtczgH6Lpq7
+ gCln7XTnK97gwAINXgK8joOBTZGwBMSP1cS3xIawApqH9QWHhEdOnxyDZjyNIchJooPNfI9aFESV
+ 7hplrDlG76Y9p_oWVoNNvx2KPNkfVl2oZrrgpUpIcpCBdSYX6qhuo4gnuuKiKPwo86_KtDn7PZ3N
+ eSPTEtlRV8lazRwgMi2bHo.ud8wfu9Bt.XFcDV_Ch5.xIiNEycB78igXsAJJa2xo0qYUbVXbsjkJ
+ 6z5o08OSXk4awNE28NVlg7f0AJrrpgIHElO6u7LdYyxYRllbIZunryZMGRXigUcmzjvS1_h10ZNd
+ nrNcOlT_oEY2HQMn4NYJx3bwbqgXbv72br5nj2ZChrgZEp31LS10xD55rAWyVgsZRmjMiv8jl10u
+ IRq3jgobevUxC75pvE69hwGmcuQSnwIHrLtntjRxbhNNQGxe6wJ27dNtswl5IzSJW_zX9xbId3tw
+ VIPUbH40mejBfPHx4em.cG5ZB4oCsQTpXhopbR3XO6kjyh1GoVhfCDuVTob1Fm4VhyNFpjSoWE3D
+ 6PJqMfZwnpSiIO8EdjO5BVIrunOlGjDBLcW1g0mMWUGUzx0.5_wkE4lJJm534vtEyK8jcTh_mELj
+ Jk5dm.NJ1isN8N5mxbtsl3sF9wJrsFho1.w.wKXjIwIHO14OQJUKHfgwgs1xwVRfohM9sxI3NnCi
+ jWCSfe6PNPCHG7.SpivTZc0fOcpmW9yOIueW6Mh7HWVfd16HFdfBY7tsNtUGQNlIJOiLwBHIpUuV
+ m3f.DrEeNctsM5ZeAhDYheii0xveqHRxgbi25Z7uC4QbWPn_7K3rbuOFe.XLsHCk0F.PNASiCII9
+ vehpK7j1ZLxqa8uMxhyXPoJ.QObszDqXdboZ8ju7cvNuDrB1aahl1ga4MjtOfW2hUqTQ5mK2IMIN
+ bY0JKypYhxbOZ.oSL_DtzGOMy6xlHH.qqopkqW3ZML7C85r4AkQzIobnnWzn8OXVEcA_AXRV9eiJ
+ Bqawf.Vn04qAC0M2cy6MEhkRICBIZuXLd9lepKKlugQUXv6Mt9TCB_JnTQZA.7k_FZ_s319LKLbM
+ 4uSNxbaQunnYTaBg0mI_PJN5bdDgJQ1_Qi5egCd0k8M1NFxiT5jOPUwIbX0HCW4iwJD9bf5K6o93
+ n.DqBkd9IaMozwg8BqUHCaYfd4DvHk7Ktq0lNcUyUtRtR5zxj_CY73kT6gcXxypGIZPYX_r9XSUv
+ cun4Av0DfMyNtTlBRa8PnLupA2hDKLDUpicfLzJRnVfAwkujtCVUoNx87k28TkSjLaHmakXgTD_h
+ vJl7nXv9f.zQd2T9osYa_zcTRLgL1a6FpS8SFxAay4Udpike.vWRW7g4BMVD6pV05Xr8BqckzM6w
+ 3rNFBvpK2sja8a_0QGqjk7jlhM2KE0kcPOTEp.Sjw68ZtUAb8Oy4ijw49o2gJbu2CfPBGuj4YNMq
+ vokZZorvKJ.fUmSrakN1DwW8SkAoo9k6tJqa8bIEyjduUZutijxjo18TyBzVpfi7vBfFoADo.LGg
+ DpSRb4W4TEysRf6e3QbB6RA8ggORrgIAw8cHdCacRsbebkE_acnJPYQqlKtHcgb2Un3RsTghntwO
+ aXZK3D95b6Rb9xVbVil2u1S4XKcWrwU79R.7oe18j5nXP61hdzBGv.P33.DlVji4pCUkIrYr3K2a
+ wWftXSkTI8JuELVzXrrbtF4CspjSfkYichlXgouH5IRfQL4vCT6lTyGqyyuYxUnNVC.hR.MkiAEB
+ duUUH3Xzo.eiujjAsh4cZWFUfaKRly06C2zgrL2f5s.pNliplKDAVXza6ixehxvYRqIvrivGgrdM
+ 6ohOlEUIvzcugW96JoH0RyuCMl8qO_GA9cPazBdFs832Tn1xu4JBd_M_YzHikxNQGw9ysp8L27OZ
+ fqYCrrCt2EZUyG1DA.jR9MiEgKsXeu.FWQf12i6uJiAcczytH4JLJsl1l6fKRlMKHo24oTEUDP6.
+ p5B3Vfw--
 X-Sonic-MF: <brchuckz@aim.com>
 From: Chuck Zmudzinski <brchuckz@aol.com>
 To: qemu-devel@nongnu.org
-Cc: Chuck Zmudzinski <brchuckz@netscape.net>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Paul Durrant <paul@xen.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 0/2] xen/pt: fix FTBFS and reserve PCI slot 2 for the Intel IGD
-Date: Wed, 26 Oct 2022 02:47:06 -0400
-Message-Id: <cover.1666764146.git.brchuckz@netscape.net>
+	xen-devel@lists.xenproject.org,
+	Chuck Zmudzinski <brchuckz@netscape.net>
+Subject: [PATCH v2 1/2] xen/pt: fix syntax error that causes FTBFS in some configurations
+Date: Wed, 26 Oct 2022 04:06:05 -0400
+Message-Id: <7a1fa15767e76155a4f78a1dd126c596bc24cd83.1666770888.git.brchuckz@netscape.net>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <cover.1666770887.git.brchuckz@netscape.net>
+References: <cover.1666770887.git.brchuckz@netscape.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <cover.1666764146.git.brchuckz.ref@netscape.net>
 
-From: Chuck Zmudzinski <brchuckz@netscape.net>
+When Qemu is built with --enable-xen and --disable-xen-pci-passthrough
+and the target os is linux, the build fails with:
 
-This is a series of two patches:
+meson.build:3477:2: ERROR: File xen_pt_stub.c does not exist.
 
-The first fixes FTBFS when --enable-xen and --disable-xen-pci-passthrough
-configure options are set with when building for the linux target os.
+Fixes: 582ea95f5f93 ("meson: convert hw/xen")
 
-The second fixes a regression that was introduced many years ago with the
-upgrade from the Qemu traditional device model that is still available
-from xenbits.xen.org and based on very old Qemu version 0.10.2.
+Signed-off-by: Chuck Zmudzinski <brchuckz@netscape.net>
+---
+v2: Remove From: <email address> tag at top of commit message
 
-The regression is that the Qemu traditional device model reserves slot 2
-for the Intel IGD on the PCI bus when the Intel IGD is passed through
-to a Xen HVM domain, but the current Qemu upsream device model does not
-and in fact results in a different slot assigned to the Intel IGD.
+ hw/xen/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This behavior does not conform to the requirement that the Intel IGD must
-be assigned to slot 2, as noted in docs/igd-assign.txt in the Qemu source
-code: "IGD must be given address 02.0 on the PCI root bus in the VM."
-
-I have used the second patch of the series for the past two years with
-no problems. Without the patch, the reliability of PCI passthrough of the
-Intel IGD to a Xen HVM guest is very poor, and in some cases the guest
-fails to start without the patch.
-
-Chuck Zmudzinski (2):
-  xen/pt: fix syntax error that causes FTBFS in some configurations
-  xen/pt: reserve PCI slot 2 for Intel igd-passthru
-
- hw/i386/pc_piix.c    |  3 +++
- hw/xen/meson.build   |  2 +-
- hw/xen/xen_pt.c      | 25 +++++++++++++++++++++++++
- hw/xen/xen_pt.h      | 16 ++++++++++++++++
- hw/xen/xen_pt_stub.c |  4 ++++
- 5 files changed, 49 insertions(+), 1 deletion(-)
-
+diff --git a/hw/xen/meson.build b/hw/xen/meson.build
+index 08dc1f6857..ae0ace3046 100644
+--- a/hw/xen/meson.build
++++ b/hw/xen/meson.build
+@@ -18,7 +18,7 @@ if have_xen_pci_passthrough
+     'xen_pt_msi.c',
+   ))
+ else
+-  xen_specific_ss.add('xen_pt_stub.c')
++  xen_specific_ss.add(files('xen_pt_stub.c'))
+ endif
+ 
+ specific_ss.add_all(when: ['CONFIG_XEN', xen], if_true: xen_specific_ss)
 -- 
 2.37.2
 
