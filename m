@@ -4,42 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67CAEECAAA1
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Oct 2022 13:24:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.431049.683535 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 776EDFA3740
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Oct 2022 13:39:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.431061.683557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oo2rO-0002Ne-Sd; Thu, 27 Oct 2022 13:23:50 +0000
+	id 1oo368-0005DH-I1; Thu, 27 Oct 2022 13:39:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 431049.683535; Thu, 27 Oct 2022 13:23:50 +0000
+Received: by outflank-mailman (output) from mailman id 431061.683557; Thu, 27 Oct 2022 13:39:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oo2rO-0002NX-PQ; Thu, 27 Oct 2022 13:23:50 +0000
-Received: by outflank-mailman (input) for mailman id 431049;
- Thu, 27 Oct 2022 13:23:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oo368-0005DA-Dm; Thu, 27 Oct 2022 13:39:04 +0000
+Received: by outflank-mailman (input) for mailman id 431061;
+ Thu, 27 Oct 2022 13:39:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i/85=24=citrix.com=prvs=2922bd7c1=roger.pau@srs-se1.protection.inumbo.net>)
- id 1oo2rN-0002NC-MV
- for xen-devel@lists.xenproject.org; Thu, 27 Oct 2022 13:23:49 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88e0cb3d-55fa-11ed-8fd0-01056ac49cbb;
- Thu, 27 Oct 2022 15:23:27 +0200 (CEST)
-Received: from mail-mw2nam10lp2109.outbound.protection.outlook.com (HELO
- NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.109])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Oct 2022 09:23:44 -0400
-Received: from SJ0PR03MB6360.namprd03.prod.outlook.com (2603:10b6:a03:395::11)
- by MW4PR03MB6377.namprd03.prod.outlook.com (2603:10b6:303:11c::16)
+ <SRS0=9cef=24=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1oo367-0005D4-Nu
+ for xen-devel@lists.xenproject.org; Thu, 27 Oct 2022 13:39:03 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on2059.outbound.protection.outlook.com [40.107.102.59])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b6d307b0-55fc-11ed-91b5-6bf2151ebd3b;
+ Thu, 27 Oct 2022 15:39:01 +0200 (CEST)
+Received: from SN6PR12MB2621.namprd12.prod.outlook.com (2603:10b6:805:73::15)
+ by BL1PR12MB5205.namprd12.prod.outlook.com (2603:10b6:208:308::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5746.23; Thu, 27 Oct
- 2022 13:23:43 +0000
-Received: from SJ0PR03MB6360.namprd03.prod.outlook.com
- ([fe80::9f90:6ba5:5b44:c254]) by SJ0PR03MB6360.namprd03.prod.outlook.com
- ([fe80::9f90:6ba5:5b44:c254%3]) with mapi id 15.20.5746.028; Thu, 27 Oct 2022
- 13:23:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.15; Thu, 27 Oct
+ 2022 13:38:58 +0000
+Received: from SN6PR12MB2621.namprd12.prod.outlook.com
+ ([fe80::901f:4652:83f:c3c2]) by SN6PR12MB2621.namprd12.prod.outlook.com
+ ([fe80::901f:4652:83f:c3c2%7]) with mapi id 15.20.5746.028; Thu, 27 Oct 2022
+ 13:38:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,327 +48,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88e0cb3d-55fa-11ed-8fd0-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1666877028;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=U/sFfRACaJY77fr7H33N73W/nGnZ1foREkrO0xbsYcw=;
-  b=AQDlK/WWKoguwTwvgYOQSev8b9mrPYLlJWjHJ47O9LFvDWMA5COgFCa2
-   rq/Wea/ZuyoS4A5+oOW1tr0piEZuHdC/Qfbtes7Zf+Xs8IlcNr/BJy9tz
-   Kcgb2bVHJBBPDnwcf4oOJ5GI611t60eYvFYZQprFHGTqkuL8+SWlBW20H
-   A=;
-X-IronPort-RemoteIP: 104.47.55.109
-X-IronPort-MID: 83623811
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:mVcLZ67jPFFH3V3oSgSrQwxRtAnGchMFZxGqfqrLsTDasY5as4F+v
- mNNUW7SO/6PamD0c4p+Odi/9kwAvpHXnNdiT1dqrSxkHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvymTras1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPewP9TlK6q4mlB5gZhPakjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5lW0UN/
- N0IbwsjaxK8pcyHmemZFPZV05FLwMnDZOvzu1lG5BSAVbMDfsqGRK/Ho9hFwD03m8ZCW+7EY
- NYUYiZuaxKGZABTPlAQC9Q1m+LAanvXKmUE7g7K4/dqpTGLnWSd05C0WDbRUsaNSshP2F6Ru
- 0rN/njjAwFcP9uaodaA2iL32LWUzXqiMG4UPIGBrMVGgHSe/E8KKy0TVXyGofS6mkHrDrqzL
- GRRoELCt5Ma5EGtC9XwQRC8iHqFpQIHHcpdFfUg7wOAwbaS5ByWbkAkQzhbeZoZvck5bTUw0
- xmCmNaBLT5lvaCRSHmd3qyJtj70Mi8QRUcabDIAZRsI5Z/kuo5bs/7UZtNqEarwi8KvHzj1m
- miOtHJn3+RVitMX3aKm+1yBmyirupXCUg8y4EPQQ36h6QR6IoWiYuRE9GTm0BqJF67BJnHpg
- ZTOs5H2ADwmZX1VqBGwfQ==
-IronPort-HdrOrdr: A9a23:VhsRKKA333MmKk/lHeg3sceALOsnbusQ8zAXPh9KJCC9I/bzqy
- nxpp8mPH/P5wr5lktQ++xoX5PwO080lKQFmrX5WI3PYOCIghrNEGgP1+vfKnjbalTDH41mpN
- hdmtZFebrN5DFB5K6VgTVQUexQuOVvmJrY+ds2pE0dKD2CBZsQjDuQXW2gYzBLrUR9dOwEPa
- vZwvACiyureHwRYMj+Ln4ZX9Lbr9mOsJ79exYJCzMu9QHL1FqTmfbHOind+i1bfyJEwL8k/2
- SAuwvl5p+7u/X+7hPHzWfc47lfhdOk4NpeA86njNQTN1zX+0+VTbUkf4fHkCE+oemp5lpvuN
- 7Qoy04N8A20H/VdnHdm2qZ5yDQlBIVr1Pyw16RhnXu5ebjQighNsZHjYVFNjPE9ksJprhHoe
- 529lPck6ASIQLLnSz76dSNfQptjFCIrX0rlvNWp2BDULEZdKRaoeUkjQ5o+a87bWzHAb0cYa
- hT5Jm23ocXTbraVQGSgoBX+q3iYpxpdS32AXTruaSuokprdT5CvgklLfck7wc9HaIGOud5Dt
- v/Q9VVfcl1P6krhIJGdZM8qJiMexvwaCOJFl6uCnLaM4xCE07xivfMkcYIDaeRCdc18Kc=
-X-IronPort-AV: E=Sophos;i="5.95,217,1661832000"; 
-   d="scan'208";a="83623811"
+X-Inumbo-ID: b6d307b0-55fc-11ed-91b5-6bf2151ebd3b
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PI51BFXkQ/fWwzzghTpKMQtPfY196xMt/RSSlTSCyKWAMbvwh9k06aPMklfQlL4nTnaGQk1F4/AHOpicDkeU11kSAwp3JL7YqcPBzk6GdS72ZNND29Lz/sigdDR48v6kr/nSfQSVsZyniRZEf6T0vF3g2vOfvFPt5t7+HpxWqzj/ogEijsJulasOld0W+NEblUTx6xsu8JfyfEU/QNwEKolN2BisM5kX6qg9aemcw64w9odg5kUfVoWPJF/Zy3CuVGYdVCgeHOjisF+i1V4smzXYkTxr/VHXGzmf77DocKdPmrlsQy5GxDuLvzqNF/vhqeI32x/YGJM9HbCiimTSXw==
+ b=MFRmNfY21KL4NazIxSQaX1MXKTsF1KFw9xYelgenO9KoOM9kbZEKToFnvszANZ8yyUlVSBqzhCUYig7NJnXJOqbbLFDYulmDrpMrwSxz5fEF9STKccyLPguqvpIZbpWicxlbJwFUwmWAxQc0eniOQfp/vAMMKJy/eTuHLsUE1dXKY+yr/vt0Zdt2ineQTuhW56iSJiyuxv/NHrvKYHkPHI2ITmKbJjLMsj+x0N4mZp7dNkcWcNZjO6W7xYuHmAE5+Dm0QtJGH4JoUAMkywf78pmMUP8Fm6Zj7fnZDZUevqgFemj8pRuUCSVeMcn1AKZSt2huWPt7MBeY8vImsHVYqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=igYZqg1x/g0JshDU5Yx+sFod6AtAlB0SWplM18oXcQY=;
- b=ePXEJWPUALfOAtr0jpMY8ar8PoBwM+cVeGx1G6egtPlxkggxdJGoXVS8573cy9sFNeCnn4riF2dDFXXWL1qFW9uc4le/ImD4Djn3yfZw5+6xh5bUVDswvMY//egfv0Uj+UxH/YiKec9nDPSIFHoaoly9Yyb9mr6cTCIuu/Ab8WWRSQ3jGw3DvIRCf8aOdhyNf12vzPVWEEgYwu8U6UxXyr5MK6m+FVFMVHxDttKH+dHVKJJb8WA5ugFykutm89iUFR8pdGDu0McPR+Lv8vK7r40GWxl3/9m3ogEJJlPhT9nTIGhu+ltAwmkU4dZjKpH2I4xJhQ5/dJqSOpc6LlvYLg==
+ bh=4ih4QiThEgWEnw+Z5gksqekf4rUZ0mkCZ5D35fwR/f4=;
+ b=g8ideGILa6X+eyTBCRNpx8lr+W/fvkWb1Swbb3sNyibbOSivHe2Ui9IAhxnSRmvcRIuORqJOmGa41vR2FqVSA2TKuD58NDwV1A9WddK6VT78V/H//JuHLdAhMHxZIZpslTEPlWwR4M6TzHWNn6tHgmjJk3fSDMSidDnbNVtbH1ZpBg1IrRj6TJ11CNwRq8Rj4RI96Ca1Up7q+KGuqjmD9d49r+HIywGrw6fFPEprICswsMFlGN6ocwsBR3V2JGQbu6vMBK+OulegOPW5B7Ij7aJ3SzlBiz0AgRTvWjf7/CSH2IH9lmI9U8i0uvL7HAGz06GVL6Pg2dfYSzz/h1qJCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=igYZqg1x/g0JshDU5Yx+sFod6AtAlB0SWplM18oXcQY=;
- b=w3cQV+vIadfMOTS7BjMsU5iZt5W918svDLOiNiqHL4UKoKSuyMfSkarcxQsf3rlaq67enNorVv+fj9/mo0GX89izFVM0ea24/+9FnFbfVA2lJSuOpfC/EcLt16GOkBCcFH8VXCQoEZF/46MrnWBQLnqb13OWLx0ZBoQvqlOlfGs=
+ bh=4ih4QiThEgWEnw+Z5gksqekf4rUZ0mkCZ5D35fwR/f4=;
+ b=3tm8Jvl2AkETJ6RxCZdgWLSwQx/Eex5XFCC+BfpD85Q/P8mWfrzyvxGRJWkM91t/IFwGzWrqDe4ArR0feX6447ZTHwwMbhS1nwiF9rzS5uogqYYEJsgD5UlJibXss4uVMWFxJxzlNrhc54yPhd2fTD6ZSArKbk9altjSuoN5ekg=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Henry.Wang@arm.com,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH for-4.17 v3 1/2] pci: do not disable memory decoding for devices
-Date: Thu, 27 Oct 2022 15:23:14 +0200
-Message-Id: <20221027132315.80592-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20221027132315.80592-1-roger.pau@citrix.com>
-References: <20221027132315.80592-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <7f1bdc88-da6b-9a0c-03d4-319e9d8966d4@amd.com>
+Date: Thu, 27 Oct 2022 14:38:52 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.0
+Subject: Re: GICv3: Aarch32: Need guidance on the atomic access of "union
+ host_lpi" or if ITS is supported on R52
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: "stefanos@xilinx.com" <stefanos@xilinx.com>, Julien Grall
+ <julien@xen.org>, bertrand Marquis <Bertrand.Marquis@arm.com>,
+ "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <bedc03b9-e6b9-c85b-27d6-33860ba7bdd7@amd.com>
+ <20221025145506.5708839c@donnerap.cambridge.arm.com>
+From: Ayan Kumar Halder <ayankuma@amd.com>
+In-Reply-To: <20221025145506.5708839c@donnerap.cambridge.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BN8PR12CA0002.namprd12.prod.outlook.com
- (2603:10b6:408:60::15) To SJ0PR03MB6360.namprd03.prod.outlook.com
- (2603:10b6:a03:395::11)
+X-ClientProxiedBy: LO2P265CA0188.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a::32) To SN6PR12MB2621.namprd12.prod.outlook.com
+ (2603:10b6:805:73::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|MW4PR03MB6377:EE_
-X-MS-Office365-Filtering-Correlation-Id: d7a7e494-5121-4657-c5a5-08dab81e7064
+X-MS-TrafficTypeDiagnostic: SN6PR12MB2621:EE_|BL1PR12MB5205:EE_
+X-MS-Office365-Filtering-Correlation-Id: d968d4e9-a9bd-4f86-4d3e-08dab8209949
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	/PjSTZePNQwqz5obKwcH9L5IQ67iJdKUw3K5CMmgGVSRgEGkkHdTD4xLxrxkXMV6BS0s/jE3P85ZZA951NyX/kaZo0cpt30JKeVF+csunYqj0taiSfF2XfE2sv32KSNfSKQxNdJ6NvvWOWRCTQjxptk11IlcqpgAN15+VpcScdXTAEKNjQWO9eKU91mXMiHwuqzlleJogY0TBd1ajhyRjiVo89SEC5I/Fbgmy1W11XkZsKqrXFOkzMExblinHAj8FhUYLee8a1773z0Xdtm3P+BqikeJfnDD4inNo1LIZhXlblVYUnI4DxeBN6Gl4YnBXKzurw5RQFXTJKyDMf1FiXaS9JdiL5Sldm46//neUBn8ejIJ3wUILYu/IGLNwJVVx7rNnsVeD/+Srg4fZwdK06ifBCtvHXldxUirFaeYYOOq0KZ3o0V/ga+Ef6QECzhds/vqp4NAkqV7kmJdmpUUTUSn0fTEQ5HTQmVRLL8fkAxYqrqgTVYLxDMK19+IzpKEpAiyuAC9KNJDHVHgTRlYQ0xkekBjgbqN1WUq6cPMllN/N/1/e/xhd6UjPjNTECsMwy3cmmXz1EV0oosuPI1Hg2pAJEc6fYxKR27Fq6xwQHVQ3RBA9xAE1a1q+iRKCKQnB/WrWlTZYlfTKkl7HN4jly37FpuG93J1py14bpYCuBF+LGcX/RwaJod41m4Gp+PmLKF7l3ab6SpkZ9kGCy0QDw==
+	hsYCkwX2k50+fY2eFVFkzix3f/8iVCf4V0Mo7DFwZ6eBrpqX7VeD93fb8iTbWo4Hgyl3SdsKMFFIB/8WWs+S1F/9xRPse3Sn6BYizJH1pJiWorJ39+zuCSQdb5bxnOeHCUEMYA7MUBnzMBFYX+0Qv1EGeOQw9B4a0y0KOYD8h4b1JiPk3agbbirasptXv6klHiJaxKvRV1IsbCtkMlfuN/sLNz+Z+ZJu3g6xCUkSaMFGpE9qFMgwPs/5fY3s5ENDCHRnRUY1U0fxRCbMP+6KkCHhzTzP5P1xetjB8VE0ksELylekygDbBCDr0LWhsK/z3TekcUxD2RcbRvrlCEqX9/Y9lIWCFgHzH9Y1iSodXPSQoewhKcTh3UldshmmsqX0wtE9gXTT7BJ3OJFzfFE57mTbZDz3eTSueHYC+i3YkzXU+gjsYGIQ/UT/NCyUq1cI5WhsZ7oyM+QwFNXoB/qd4uVBL0pmWMT5LvK2k2CJxz7eo9d3/dn4P/zuRsTa3GWDM6f4WH447IV5l/qpldx6HgKoeemFc9p/51AqNlRTiSme6CecAkegzuRNacz2gPyQtqhP+uLSBY/edhCsWtfPaEym816Aet275pokNTQvivhrgntiFMzZRpguLeHikG0Naya8NhxDa3gxS081sMj4hAbMcBhqIvPSe+VWSuD3SQB+VmP/4ucjpCvnj5X/fLWr3gn3GuPnKKVAjUOGUf1dxh6WrYQxh1yaZ1nW7tjFlHx0YBFbcvFSUmDF144Ry2zvjnQZ5MYdzS7qHBi/gVgOYVmfNqdXL6o8vAnlBad+l8w=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(376002)(346002)(39860400002)(136003)(396003)(366004)(451199015)(478600001)(83380400001)(6486002)(54906003)(6916009)(6666004)(82960400001)(1076003)(4326008)(8676002)(36756003)(186003)(66476007)(26005)(6506007)(8936002)(41300700001)(38100700002)(66946007)(66556008)(2906002)(316002)(6512007)(86362001)(5660300002)(2616005);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR12MB2621.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(376002)(136003)(39860400002)(346002)(366004)(396003)(451199015)(2906002)(8936002)(186003)(2616005)(5660300002)(54906003)(6916009)(41300700001)(36756003)(26005)(53546011)(6512007)(6666004)(316002)(8676002)(4326008)(6506007)(66556008)(66476007)(66946007)(38100700002)(31696002)(6486002)(478600001)(83380400001)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dVkzYzhIOGN5dWhMNDlCNlp1N3pTK0Vvb1RDM1c3cndGMm5TQTlYVm9HRm96?=
- =?utf-8?B?SENjRjZESzJNTFpzQUFZSjEyY0ltdVpCam5Cd2IrRGtLUDlqYVliRnFQUGU3?=
- =?utf-8?B?R2h2dTI5OW9hZndCUzBRZWZ0akYzUk16c3VRUzhHMG1uMlFPcEFxTm11bDdI?=
- =?utf-8?B?N1R2WjNSQjVCR1JnRDBLZGFIdmJMU1o4NUZGNG5xYWhPWkNOU211UWFXM0Rh?=
- =?utf-8?B?YkYyWVlqaklHdlZNSEE4NUY5TDJFVHlaTmtGbXFHY1VGeFRuL3JCRThaejR0?=
- =?utf-8?B?OXgyU2NPa1lJd3NZZU51d09iSFJPb2xrUGV4VVo3aEV5Q1EwTW52YUxLOWZx?=
- =?utf-8?B?WDQ2Q0pBc0wxQXArOFNlN0YzVksyQ1VOMVg0aWxVcnZoNnlxU3M3TzVtWGll?=
- =?utf-8?B?OVBRQlJsVkRDQUpUd1FRd3YzZE5JNjNaS2FDRlFQaFR0N3d6d2hRdXBXSzMr?=
- =?utf-8?B?OW54UFpFZCtnSnVHb05SV1JyRHpsMFRLVFFpZWZRUkhORDRFNnFnNGQ5bDcz?=
- =?utf-8?B?L0V4Q1FzTUZmbStrODU2M0hLcFJ2U0tqc3pBRjFtT01YSFN1STJVTVVoMjlU?=
- =?utf-8?B?Y0V0dTlOTERUK2pReUJsdXdwQzgzdExpTzcvTFVFOXExV3RQYTk2dFFIZEpt?=
- =?utf-8?B?RjVib1VBczUvN01JK21zSGgydWUxUUhwVkgxSWRmRlNsN3R1YUt0QjdEZEV3?=
- =?utf-8?B?cVZ0Z2xHa3dhR3B4cEdsWE5jY2lmYkZxSlFDSGl4RlZISXJPcFpJMUdVbks4?=
- =?utf-8?B?ZklNVjRLMEpRY01ZalJ2ZzBFd3ZudXJ4TGtKUnNCUmVrczdsSEI5NXh5R0pD?=
- =?utf-8?B?MDF1UUh3d0Q1S2NGZStFODIxZ0k0RTh4UHd2V3lBSWhjTUk3Y3RkUFlpbWNy?=
- =?utf-8?B?NXJ6TG1IaVFqMFJyZDlrdzA1TTlCdkEyQUJSeEZSZlFJVnAyVWhIVjlNS3hK?=
- =?utf-8?B?ZEJENDI1N3RlS0xpSXRSZW5qZHE5N3M1M1BFRDdMcjdIRGxaVDdGbUdNU3p1?=
- =?utf-8?B?U2FXampyODVxQkh1L3E0eGNJbDk4RGxTd0ZwQWQ3ZGJMWGcvSDErRi9pTEh2?=
- =?utf-8?B?MzRLUVdkWnhkQW80cHNITHQrL1N1T1Q5QXFzclFjSmN1ZmJ6dGhhWjBWcUNF?=
- =?utf-8?B?M0RXVy9aTVhtSndtdUhWWlZnczl5MWtKcDEzOVliOHBUTjIybXpoNUZyV3lK?=
- =?utf-8?B?a1JvVnRKaHZhTkRWSmVBdUdHZCtmd2l2bDBVOFdUU0ZROVNhanoySTg5OXMw?=
- =?utf-8?B?NEJGVnBGQkcrOVNocThQaHBxQ0hYa0pBQmlZaEpFM2pMV0JOc28wZVFsSTEv?=
- =?utf-8?B?b0R6VnVYTWF4VjJrU24wc3R2dU84dlJhTjlNc29IMGRvdzVzbkUvakc5Y1Jm?=
- =?utf-8?B?ZFFINnd6VXZxTDVibUs0OHRyaytDaW1zZS8vb3FHcFRzSkk2YzYzWGNSVTBD?=
- =?utf-8?B?Z0luamxjNFF1ZEwvSVVURHRvcWtRcHozM1RDdFVyNnpvSTdSSUlUamhyVWR1?=
- =?utf-8?B?VkJpR2lYNXA3YWhvSy9IemZSdHlkR2ZwWHd2NHBXZzJacDlUZEUzcHlGZ0ZU?=
- =?utf-8?B?MXpkZG1CYUJEZm9NVVp6QkJrZm5qSXlXMmZKZDhwRkRDUDJKTVpraG9mL0h3?=
- =?utf-8?B?SDFrczdseDVleGJXdWgzaFp4Tkl0K2o3UzZDN3VBRVRQenQ3U3Mxc2lNNmlN?=
- =?utf-8?B?ZTVvbnhCRnh3cUJuRnczNnZLTDE2cHhlaVY1SDdJYmZEZVhCdUdFQkNydVVD?=
- =?utf-8?B?eVlzeUVpZzJTenRyVTBxYk0zbHh3MUZWR2FISWJHaVVwTUVkaTJLVWpvK2FB?=
- =?utf-8?B?d0VTOVRqdm9jMVArWVIwcXpWY1pFc3RyQjAxeFZWMnQzYVBiNVc5VytJdW1o?=
- =?utf-8?B?RWY0RVgzdVZCY3dLcERQRVRuZG1HdHBTWDM1U3JKZFZvbXNaUVNmMWRCZzVN?=
- =?utf-8?B?OFc2U3p1cElreTVxNTBDYlhqRGxnVTNYdEQrL2pzejVndGJyME5oQ2dxcjNK?=
- =?utf-8?B?V1IvWHlINUV1czFaOFFIM1Vwbng0QmdndklJdGRvWURpSG9xVWkyV3JHb1dU?=
- =?utf-8?B?TnZlQzUzZU43TUtRbkRDVEsxeGlaeUxhUEVEY2tXS2ZvOHgwQ1Btb3ZxS0hj?=
- =?utf-8?Q?JdMJBJGX5TVkehB8DZuNQ6ayi?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d7a7e494-5121-4657-c5a5-08dab81e7064
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6360.namprd03.prod.outlook.com
+	=?utf-8?B?SmJMOUp3QzJLUXZlS0t3Zlo2RVEweGZBZEJDL2N6V1RNOUtseEN1T2RmRS9j?=
+ =?utf-8?B?M3RsbWNRbldVWmtxNEZ4M3ZBOWxydUg4dUJ0UjhSL3QxZjFXOEZBRUxRSWZZ?=
+ =?utf-8?B?alBsN3V1TTljem41OXZQR01IVExrN1A2L0hrTVJuMkROeVJBdGdnYVgwYk96?=
+ =?utf-8?B?cXc4OWNNSERBd0dUc2FQNkVYQVBEWnk4OURtWUhRSU9xYU9OU2hKcXEvNXY5?=
+ =?utf-8?B?amVHMWVRZ05FcXI2YUNrUjdlR0xiQStVaHhFZ1ZsMUd2RGVsbHJOOG5Td3No?=
+ =?utf-8?B?ekJaRWdVMGF2dzRwOWMzNUF1aU1SMmNoaUtBWDJoOGQvbnVCeWZBY0trNFgx?=
+ =?utf-8?B?Um9Canhwenh5VVFHRHhITDFqZnYvc2tHWFgzR20xN0dBNnlnd1VsMmVLSUNh?=
+ =?utf-8?B?Y2JValZDYzExekRxbXhjQVZqZ0ViR01FcnJrVGZNUlJNUFl1UXdhM2FORWYz?=
+ =?utf-8?B?YXBkYlNnNEFhQzZvUG8xajFzdkVIRU5wZFhIaW9LMFlOR2dmd25KZTJZSzg3?=
+ =?utf-8?B?bmNRdVRWSnAzMEEwWjlBWUt2WFBnWThNVDNvU0hHR2FjT3FEZGhRTkhmSWtV?=
+ =?utf-8?B?SUx5dC8xcTdhQ2N6RTBkUDVSTEJ0dGpmL05oQjN3azlESGRvY0M0REJLdXRx?=
+ =?utf-8?B?M2ZReUpCSExKWGFJTjM4R3c5ZXpMdjhndzRtRnNic0VveFZ4K1I1RVY1YVRK?=
+ =?utf-8?B?UnpqcnB4VFJLUGRSeU1Lb2l1NThmS3dWcFQ0S0U1VWsvMTh1NmhkRnMwMUs0?=
+ =?utf-8?B?c2wwd3RidmRabksrNDNkSTJ0TGo2RXBsdXdoYTJtUHJVcDRJQ1RETVI4Mnk4?=
+ =?utf-8?B?c0NFazdnN0d1eWJKOGc5RGdXSzNiK1kxSE9TdDhmUVNwUUk5dlVvdER5MEYw?=
+ =?utf-8?B?UWVFNHRuNlJYZmNmQXYwaWtXd3cwVGtySTVQa1hMS2NJcmlnZDNkR2x6cTlK?=
+ =?utf-8?B?WDkrWHgySHE1SzRybHd4dGNWemlRZmszNGpadkU4eUc1WnJDMm1NZWc3cHph?=
+ =?utf-8?B?bnNPL2pZTW5mZDBKOHRHc2NLVmwwMXVBYlhHNGw2dWFXM0dMbWdlY3pxTFo3?=
+ =?utf-8?B?MC9PaFVIR1ozUndLVWxrTTJBMFlxUTFic3orSWRvWko2TUx2WDVOODRkNmhn?=
+ =?utf-8?B?M2VEc29sMWp1aXpyRVh4YklGVzZGUitoajFiUmpHWVBJdHE5Z1FWZTliZVI4?=
+ =?utf-8?B?aTdDYnhDUjJMQ3Y1Z2I5akJMUjQzQTJKNzNPSmZVUmN1ZUV5aGVUUmZBN1J2?=
+ =?utf-8?B?U2dubEpCb3prMyt2RHVVcGVvUnduMUV6YUpqbmRENEgwcmJtV1pwekNVYnIv?=
+ =?utf-8?B?QkZKK0xyRWgrM1l6Yk8vRk5iR1hBcnVwd1NJdFZCSEt3czFtdU9nbzVna2NF?=
+ =?utf-8?B?UlJmY0J1MUJiRWtjcnRmekFkcDY3SHRRbHBiNFVKc2RsTGs2eC9KeDA0TDNp?=
+ =?utf-8?B?dUdsSFlwY3N1NWFjUTlacmlUbzZQMGRocjRWN05GUTRzKzB3TUtsOVNRbXhq?=
+ =?utf-8?B?bXg0dk9aSHIzcW5aNmJpYXQrLytCVzNZZDJQT1JVdUQwcktmZHNaR0hlR2tv?=
+ =?utf-8?B?aWp3TytWdUU5UHRjZkhmU05TMERESFIwdk5XdkZpSFk1TXMvK2Z1RXFQbXMx?=
+ =?utf-8?B?QjVNSnM4SGhsWFFab244OTRrRUNBalFLQklTbXJYMENMekV6cUNsS1BBOWp5?=
+ =?utf-8?B?YVU4eVE2SXVkclhzWHI1M0lvYUxKbTQ3MzJwdEMremlHKzdvekRLUjBGSGJ4?=
+ =?utf-8?B?TEZnaXF2OHZPZUgyMHRQYkFISU1PanpiRko2a1p6OEF3b3E5T1lUakRCUTdi?=
+ =?utf-8?B?ZDQwZ1l0YWRhS0NaVVY3d2x2ZkVSVlJMeHIzZDJxUGRqQXJzZmZyMEhSYWox?=
+ =?utf-8?B?Vncwb0JIMXNKdEJ5WWFhNXdZWEdvNXR2RkRRVXlQUWh6RngwTW1CYnhHU0ZW?=
+ =?utf-8?B?MWhLb0ZoNlF1WUM5T0M3NVhaUVZjU1RPZ0srakd1ejNWQUV3bmVaR2RSUGo4?=
+ =?utf-8?B?aGVVSXY3Szh0bjNpR3BZSzBIT3ZRL0h5Y2xqNGRkcFp0Y3pVMXh3ZnIwYjUx?=
+ =?utf-8?B?aC9CMzhEYTM1Y2ZEUm5BY0VaK1dTZEtMUmk3S1VUaUc5SHprSjhKNVhEQXhO?=
+ =?utf-8?Q?xCKMejhH9X6K/vxbe/27awokJ?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d968d4e9-a9bd-4f86-4d3e-08dab8209949
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR12MB2621.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2022 13:23:30.9433
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2022 13:38:57.8872
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Nct6zTIZ3s8McLRjy6ij7GbimV40vd/j0mCPwHOg+fAj669J+L+aDukV8CqDUFJUTDiwjQEHCNC2V2AJ0IlBZg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6377
+X-MS-Exchange-CrossTenant-UserPrincipalName: g4EPSzO+U5MnpclHDhIYpy/5oAGefUtNg6YqXMmB3obxwRAksWAq/W8t/0s1UP9qV2CbmHRjcTLor7qWRVF1Lw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5205
 
-Commit 75cc460a1b added checks to ensure the position of the BARs from
-PCI devices don't overlap with regions defined on the memory map.
-When there's a collision memory decoding is left disabled for the
-device, assuming that dom0 will reposition the BAR if necessary and
-enable memory decoding.
 
-While this would be the case for devices being used by dom0, devices
-being used by the firmware itself that have no driver would usually be
-left with memory decoding disabled by dom0 if that's the state dom0
-found them in, and thus firmware trying to make use of them will not
-function correctly.
+On 25/10/2022 14:55, Andre Przywara wrote:
+> On Tue, 25 Oct 2022 13:25:52 +0100
+> Ayan Kumar Halder <ayankuma@amd.com> wrote:
+>
+> Hi,
 
-The initial intent of 75cc460a1b was to prevent vPCI from creating
-MMIO mappings on the dom0 p2m over regions that would otherwise
-already have mappings established.  It's my view now that we likely
-went too far with 75cc460a1b, and Xen disabling memory decoding of
-devices (as buggy as they might be) is harmful, and reduces the set of
-hardware on which Xen works.
+Hi Andre,
 
-This commits reverts most of 75cc460a1b, and instead adds checks to
-vPCI in order to prevent misplaced BARs from being added to the
-hardware domain p2m.  Signaling on whether BARs are mapped is tracked
-in the vpci structure, so that misplaced BARs are not mapped, and thus
-Xen won't attempt to unmap them when memory decoding is disabled.
+Many thanks for the explanation.
 
-This restores the behavior of Xen for PV dom0 to the state it was
-previous to 75cc460a1b, while also introducing a more contained fix
-for the vPCI BAR mapping issues.
+I need a clarification on the issue of atomic access to 64bit normal 
+memory on R52.
 
-Fixes: 75cc460a1b ('xen/pci: detect when BARs are not suitably positioned')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - Also check ROM in modify_decoding.
- - Do the checks for all domains, regardless of their privilege.
----
- xen/drivers/passthrough/pci.c | 69 -----------------------------------
- xen/drivers/vpci/header.c     | 21 +++++++++--
- 2 files changed, 18 insertions(+), 72 deletions(-)
+>
+>> Hi Andre/All,
+>>
+>> This came up while porting Xen on R52.
+>>
+>> Refer "ARM DDI 0568A.cID110520", B1.3.1
+>>
+>> "A Generic Interrupt Controller (GIC) implemented with an Armv8-R PE
+>> must not implement LPI support. "
+>>
+>> Does this mean ITS is not supported on R52 ? I am assuming yes, please
+>> correct me if mistaken.
+> An ITS relies on LPIs, so yes: no ITS on a v8-R32 system. I cannot find
+> this restriction anymore in the v8-R64 supplement, so it would only apply
+> to the R52/AArch32.
+>
+>> If the answer is no, then my next query is follows :-
+> Answering to that anyway ...
+>
+>> diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+>> index 9ca74bc321..dea60aac0d 100644
+>> --- a/xen/arch/arm/gic-v3-lpi.c
+>> +++ b/xen/arch/arm/gic-v3-lpi.c
+>> @@ -423,7 +423,7 @@ int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
+>>        int rc;
+>>
+>>        /* We rely on the data structure being atomically accessible. */
+>> -    BUILD_BUG_ON(sizeof(union host_lpi) > sizeof(unsigned long));
+>> +    BUILD_BUG_ON(sizeof(union host_lpi) > sizeof(uint64_t));
+>>
+>> "unsigned long" on Aarch32 is 32 bits. So this bug gets triggered.
+>>
+>> Is it fine to change it as above ?
+>>
+>> Reading"ARM DDI 0487G.bID07202", E2.2.1, "Requirements for single-copy
+>> atomicity".
+>>
+>> "LDRD and STRD accesses to 64-bit aligned locations are 64-bit
+>> single-copy atomic as seen by translation table walks and accesses to
+>> translation tables"
+> This (and the explaining paragraph) indeed suggests that this should
+> work architecturally, if you use normal system memory (where you would
+> hold page tables). It would be confined to ARMv8 AArch32 and ARMv7 w/
+> LPAE, which matches Xen's requirements.
 
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 149f68bb6e..b42acb8d7c 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -233,9 +233,6 @@ static void check_pdev(const struct pci_dev *pdev)
-      PCI_STATUS_REC_TARGET_ABORT | PCI_STATUS_REC_MASTER_ABORT | \
-      PCI_STATUS_SIG_SYSTEM_ERROR | PCI_STATUS_DETECTED_PARITY)
-     u16 val;
--    unsigned int nbars = 0, rom_pos = 0, i;
--    static const char warn[] = XENLOG_WARNING
--        "%pp disabled: %sBAR [%#lx, %#lx] overlaps with memory map\n";
- 
-     if ( command_mask )
-     {
-@@ -254,8 +251,6 @@ static void check_pdev(const struct pci_dev *pdev)
-     switch ( pci_conf_read8(pdev->sbdf, PCI_HEADER_TYPE) & 0x7f )
-     {
-     case PCI_HEADER_TYPE_BRIDGE:
--        nbars = PCI_HEADER_BRIDGE_NR_BARS;
--        rom_pos = PCI_ROM_ADDRESS1;
-         if ( !bridge_ctl_mask )
-             break;
-         val = pci_conf_read16(pdev->sbdf, PCI_BRIDGE_CONTROL);
-@@ -272,75 +267,11 @@ static void check_pdev(const struct pci_dev *pdev)
-         }
-         break;
- 
--    case PCI_HEADER_TYPE_NORMAL:
--        nbars = PCI_HEADER_NORMAL_NR_BARS;
--        rom_pos = PCI_ROM_ADDRESS;
--        break;
--
-     case PCI_HEADER_TYPE_CARDBUS:
-         /* TODO */
-         break;
-     }
- #undef PCI_STATUS_CHECK
--
--    /* Check if BARs overlap with other memory regions. */
--    val = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
--    if ( !(val & PCI_COMMAND_MEMORY) || pdev->ignore_bars )
--        return;
--
--    pci_conf_write16(pdev->sbdf, PCI_COMMAND, val & ~PCI_COMMAND_MEMORY);
--    for ( i = 0; i < nbars; )
--    {
--        uint64_t addr, size;
--        unsigned int reg = PCI_BASE_ADDRESS_0 + i * 4;
--        int rc = 1;
--
--        if ( (pci_conf_read32(pdev->sbdf, reg) & PCI_BASE_ADDRESS_SPACE) !=
--             PCI_BASE_ADDRESS_SPACE_MEMORY )
--            goto next;
--
--        rc = pci_size_mem_bar(pdev->sbdf, reg, &addr, &size,
--                              (i == nbars - 1) ? PCI_BAR_LAST : 0);
--        if ( rc < 0 )
--            /* Unable to size, better leave memory decoding disabled. */
--            return;
--        if ( size && !pci_check_bar(pdev, maddr_to_mfn(addr),
--                                    maddr_to_mfn(addr + size - 1)) )
--        {
--            /*
--             * Return without enabling memory decoding if BAR position is not
--             * in IO suitable memory. Let the hardware domain re-position the
--             * BAR.
--             */
--            printk(warn,
--                   &pdev->sbdf, "", PFN_DOWN(addr), PFN_DOWN(addr + size - 1));
--            return;
--        }
--
-- next:
--        ASSERT(rc > 0);
--        i += rc;
--    }
--
--    if ( rom_pos &&
--         (pci_conf_read32(pdev->sbdf, rom_pos) & PCI_ROM_ADDRESS_ENABLE) )
--    {
--        uint64_t addr, size;
--        int rc = pci_size_mem_bar(pdev->sbdf, rom_pos, &addr, &size,
--                                  PCI_BAR_ROM);
--
--        if ( rc < 0 )
--            return;
--        if ( size && !pci_check_bar(pdev, maddr_to_mfn(addr),
--                                    maddr_to_mfn(addr + size - 1)) )
--        {
--            printk(warn, &pdev->sbdf, "ROM ", PFN_DOWN(addr),
--                   PFN_DOWN(addr + size - 1));
--            return;
--        }
--    }
--
--    pci_conf_write16(pdev->sbdf, PCI_COMMAND, val);
- }
- 
- static void apply_quirks(struct pci_dev *pdev)
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index eb9219a49a..d272b3f343 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -115,13 +115,18 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
-             uint32_t val = bar->addr |
-                            (map ? PCI_ROM_ADDRESS_ENABLE : 0);
- 
--            bar->enabled = header->rom_enabled = map;
-+            if ( pci_check_bar(pdev, _mfn(PFN_DOWN(bar->addr)),
-+                               _mfn(PFN_DOWN(bar->addr + bar->size - 1))) )
-+                bar->enabled = map;
-+            header->rom_enabled = map;
-             pci_conf_write32(pdev->sbdf, rom_pos, val);
-             return;
-         }
- 
-         if ( !rom_only &&
--             (bar->type != VPCI_BAR_ROM || header->rom_enabled) )
-+             (bar->type != VPCI_BAR_ROM || header->rom_enabled) &&
-+             pci_check_bar(pdev, _mfn(PFN_DOWN(bar->addr)),
-+                           _mfn(PFN_DOWN(bar->addr + bar->size - 1))) )
-             bar->enabled = map;
-     }
- 
-@@ -234,9 +239,19 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
- 
-         if ( !MAPPABLE_BAR(bar) ||
-              (rom_only ? bar->type != VPCI_BAR_ROM
--                       : (bar->type == VPCI_BAR_ROM && !header->rom_enabled)) )
-+                       : (bar->type == VPCI_BAR_ROM && !header->rom_enabled)) ||
-+             /* Skip BARs already in the requested state. */
-+             bar->enabled == !!(cmd & PCI_COMMAND_MEMORY) )
-             continue;
- 
-+        if ( !pci_check_bar(pdev, _mfn(start), _mfn(end)) )
-+        {
-+            printk(XENLOG_G_WARNING
-+                   "%pp: not mapping BAR [%lx, %lx] invalid position\n",
-+                   &pdev->sbdf, start, end);
-+            continue;
-+        }
-+
-         rc = rangeset_add_range(mem, start, end);
-         if ( rc )
-         {
--- 
-2.37.3
+Does it mean that ldrd/strd will not work atomically on AArch32-v8R as 
+it uses MPU (not MMU, so no page tables) ?
 
+If so, then is using ldrexd/strexd the solution for this ?
+
+IIUC "Memory accesses caused by LDREXD and STREXD instructions to 
+doubleword-aligned locations.", then the answer seems yes.
+
+- Ayan
+
+>
+> But it's only atomic if you are using ldrd/strd, which you cannot know for
+> sure in C, because it's up to the compiler to generate the instructions.
+>
+> This is why we have that test. Changing the unsigned long to uint64_t
+> would make the check pointless, since the data structure is 64-bits long,
+> so it would always be true.
+>
+> So given that you don't seem to need it, right now, it would leave the
+> test alone.
+>
+> If you need that on AArch32 anyway, you would need to replace accesses to
+> the host_lpis array with inline assembly accessors, to ensure ldrd/strd
+> instructions. This seems doable (there are only so many places which
+> directly access the array members), but would need a good use case.
+>
+> Cheers,
+> Andre
+>
+>> Does this imply that atomicity will be retained (with the above change)
+>> ? Os will this require ldrexd/strexd as R52 supports MPU (not MMU, so
+>> translation tables are irrelevant).
+>> Kind regards,
+>> Ayan
+>>
 
