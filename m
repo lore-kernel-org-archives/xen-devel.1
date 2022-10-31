@@ -4,36 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB1BFA3741
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 14:01:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.432887.685581 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B396FA3741
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 14:06:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.432766.685634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opVM5-0004dU-2V; Mon, 31 Oct 2022 14:01:33 +0000
+	id 1opVQX-0007bz-Sx; Mon, 31 Oct 2022 14:06:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 432887.685581; Mon, 31 Oct 2022 14:01:33 +0000
+Received: by outflank-mailman (output) from mailman id 432766.685634; Mon, 31 Oct 2022 14:06:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opVM4-0004cv-Ro; Mon, 31 Oct 2022 14:01:32 +0000
-Received: by outflank-mailman (input) for mailman id 432887;
- Mon, 31 Oct 2022 14:01:31 +0000
+	id 1opVQX-0007bP-PC; Mon, 31 Oct 2022 14:06:09 +0000
+Received: by outflank-mailman (input) for mailman id 432766;
+ Mon, 31 Oct 2022 11:59:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=X+oh=3A=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1opVM3-0004Zq-19
- for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 14:01:31 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 84240b00-5924-11ed-91b5-6bf2151ebd3b;
- Mon, 31 Oct 2022 15:01:29 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C5D811FB;
- Mon, 31 Oct 2022 07:01:34 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B71723F5A1;
- Mon, 31 Oct 2022 07:01:27 -0700 (PDT)
+ <SRS0=a9QX=3A=redhat.com=javierm@srs-se1.protection.inumbo.net>)
+ id 1opTS9-00043u-Ah
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 11:59:41 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7f6b87cb-5913-11ed-91b5-6bf2151ebd3b;
+ Mon, 31 Oct 2022 12:59:40 +0100 (CET)
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-671-EsYKBKFfPXqhcOhuIYqi3A-1; Mon, 31 Oct 2022 07:59:38 -0400
+Received: by mail-wm1-f72.google.com with SMTP id
+ az11-20020a05600c600b00b003c6e3d4d5b1so5200866wmb.7
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Oct 2022 04:59:37 -0700 (PDT)
+Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ 123-20020a1c1981000000b003c6c182bef9sm7774720wmz.36.2022.10.31.04.59.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Oct 2022 04:59:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,519 +51,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84240b00-5924-11ed-91b5-6bf2151ebd3b
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: michal.orzel@amd.com,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 1/4] automation: Add elements for Yocto test and run
-Date: Mon, 31 Oct 2022 14:00:53 +0000
-Message-Id: <447141266843aeb30cf08507183e06815e957dfe.1667224593.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1667224593.git.bertrand.marquis@arm.com>
-References: <cover.1667224593.git.bertrand.marquis@arm.com>
+X-Inumbo-ID: 7f6b87cb-5913-11ed-91b5-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1667217579;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ypYZqoZTsptEoKYiFoPm/p19rfXtb3oU3pAWnCNe+WI=;
+	b=g4jMqAp8hrGRUSmI2Hc4CZvOW0ebl46D4m3RfmyoWgCmf2lrlh3KOdMx6WKwy6Wms7BBpu
+	9oFmNSmJ1GNJ0f9OwMeNqOTKRyvkNNdkJOzaaR8FxeKcNNwJnA1wtKNxvfiBk4dKz+vhjf
+	7Gxvj1aF3r85fgbNn4qnVwdUj3RxF6Y=
+X-MC-Unique: EsYKBKFfPXqhcOhuIYqi3A-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ypYZqoZTsptEoKYiFoPm/p19rfXtb3oU3pAWnCNe+WI=;
+        b=i4gZlIq+ez6HmZMw5eYUcUU9R/B8MHCOgCfR+zSAO88/NyAzQza9s4CXDFdAUSbATa
+         OzCql76Ui7ISdAW22xYALDt4j3Wjo7EqA7wj5Uz3BzByCfccAuzxdDkR7WzMG7+78Nf5
+         IBJ6+5X2FteKPZEyaCpgnGZVwNRyv9DnZ1xOWbgXEMrXZiA4SGIAcW2oU3sV0j6ud9rn
+         CLLj7o5p8GO4xdCOGoUswYJ3R6ex1E9nBi7b6YifaX3aCiHuk5IeZtikpAVFye/wQ8Ze
+         b4TdwebtX3MRpr9ghoWn1b2iO03rIbEilyNGFdK9idvI/B1NYCtR+KXR8YzTeYk5ilb+
+         LWVQ==
+X-Gm-Message-State: ACrzQf0RmTicD7gqoXk8Qp78xaAmGTe2fMXZYPuxTYgSUkvgoOgKc4eF
+	RUYF6Hd6KZcJKC0uENKGPRiqWd9o4ACqN9pPudacaPr/mfFwSqF7fBs8/XQBa8RFx+aTkz3pKuA
+	4BahCayrg0IhMvqCpY0W1L5NUWmQ=
+X-Received: by 2002:a05:600c:468e:b0:3c6:f510:735c with SMTP id p14-20020a05600c468e00b003c6f510735cmr7602948wmo.179.1667217577126;
+        Mon, 31 Oct 2022 04:59:37 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6EBETLSD4MBJxdnzTxR3FGu4hBbX2SQFUCrJloOPK1q2LF0w1HzUkYOXWVOI9w84+cugepvA==
+X-Received: by 2002:a05:600c:468e:b0:3c6:f510:735c with SMTP id p14-20020a05600c468e00b003c6f510735cmr7602924wmo.179.1667217576945;
+        Mon, 31 Oct 2022 04:59:36 -0700 (PDT)
+Message-ID: <ae69e0c5-05ee-f0ef-a333-53bbaff5c3e8@redhat.com>
+Date: Mon, 31 Oct 2022 12:59:34 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [PATCH v2 02/21] drm/mcde: Don't set struct drm_driver.lastclose
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
+ etnaviv@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev,
+ linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org
+References: <20221024111953.24307-1-tzimmermann@suse.de>
+ <20221024111953.24307-3-tzimmermann@suse.de>
+From: Javier Martinez Canillas <javierm@redhat.com>
+In-Reply-To: <20221024111953.24307-3-tzimmermann@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add a container suitable to run yocto kirkstone build based on ubuntu
-22.04. It contains all packages required by Yocto and a checkout of the
-layers required to build Xen with Yocto.
+On 10/24/22 13:19, Thomas Zimmermann wrote:
+> Don't set struct drm_driver.lastclose. It's used to restore the
+> fbdev console. But as mcde uses generic fbdev emulation, the
+> console is being restored by the DRM client helpers already. See
+> the call to drm_client_dev_restore() in drm_lastclose().
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
 
-Add a build script to build and run xen on qemu using Yocto.
-The script supports arm32, arm64 and x86_64 and checks that dom0 is
-properly booting. At this stage this does not run any guest on top of
-dom0.
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
-The build script is currently in the same directory than the docker
-files so that it can be included directly in the image. This is required
-for the next step which creates images with an initial cache content to
-speed up testing.
-
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
-Changes in v3:
-- limit number of jobs in yocto by default to 8 and add --num-jobs
-option to the script to set a custom number of jobs
-- do not copy anymore the build-yocto.sh script inside the main image so
-that the current one in the repository is used when running
-Changes in v2:
-- add a --dump-log command line option to build-yocto.sh script to dump
-the logs if an error occurs.
-Changes in v1:
-- add --image command line argument to build-yocto.sh to allow building
-something different than xen-image-minimal.
-- modify dockerfile to have one layer per line and make it easier to add
-other. I kept the for loop to keep the number of docker steps lower
-- update commit message to warn that no guest are tested.
-- fix build-yocto script to properly return with an error if expect
-script ends up in timeout or EOF.
----
- automation/build/yocto/build-yocto.sh       | 349 ++++++++++++++++++++
- automation/build/yocto/kirkstone.dockerfile |  97 ++++++
- 2 files changed, 446 insertions(+)
- create mode 100755 automation/build/yocto/build-yocto.sh
- create mode 100644 automation/build/yocto/kirkstone.dockerfile
-
-diff --git a/automation/build/yocto/build-yocto.sh b/automation/build/yocto/build-yocto.sh
-new file mode 100755
-index 000000000000..d0c93dfaffe0
---- /dev/null
-+++ b/automation/build/yocto/build-yocto.sh
-@@ -0,0 +1,349 @@
-+#!/bin/bash
-+#
-+# Yocto meta virtualization build and run script
-+#
-+# This script is building Yocto xen-image-minimal for qemu targets and run
-+# them using runqemu inside yocto to check that dom0 is booting properly
-+# The build is using a local xen source tree so that specific patches can be
-+# tested.
-+# In order to optimize the build time, a build cache is used so that only xen
-+# packages and its dependencies are rebuilt (qemu and final image mainly).
-+#
-+
-+# Directories
-+YOCTODIR="$HOME/yocto-layers"
-+CACHEDIR="$HOME/yocto-cache"
-+LOGDIR="$HOME/logs"
-+XENDIR="$HOME/xen"
-+BUILDDIR="$HOME/build"
-+
-+# what yocto bsp we support
-+TARGET_SUPPORTED="qemuarm qemuarm64 qemux86-64"
-+VERBOSE="n"
-+TARGETLIST=""
-+BUILDJOBS="8"
-+
-+# actions to do
-+do_clean="n"
-+do_build="y"
-+do_run="y"
-+do_localsrc="n"
-+do_dump="n"
-+build_result=0
-+
-+# layers to include in the project
-+build_layerlist="poky/meta poky/meta-poky poky/meta-yocto-bsp \
-+                 meta-openembedded/meta-oe meta-openembedded/meta-python \
-+                 meta-openembedded/meta-filesystems \
-+                 meta-openembedded/meta-networking meta-virtualization"
-+
-+# yocto image to build
-+build_image="xen-image-minimal"
-+
-+function print_progress() {
-+    echo -n "$(date +%T) $*"
-+}
-+
-+function run_task() {
-+    local task_name="$1"
-+    local task_target="$2"
-+
-+    task_log="${task_name//project_}-${task_target}"
-+
-+    mkdir -p "${LOGDIR}"
-+    print_progress
-+    echo -n "${task_name//project_} ${task_target}: "
-+    if [ "${VERBOSE}" = "n" ]; then
-+        $@ > "${LOGDIR}/${task_log}.log" 2>&1
-+    else
-+        $@ 2>&1 | tee "${LOGDIR}/${task_log}.log"
-+    fi
-+
-+    if [ ${?} -ne 0 ]; then
-+        echo "Error"
-+        build_result=$((build_result+1))
-+        if [ "${do_dump}" = "y" ]; then
-+            echo
-+            echo "############ LOGS-START ############"
-+            cat "${LOGDIR}/${task_log}.log"
-+            echo "############  LOGS-END  ############"
-+            echo
-+        fi
-+        return 1
-+    else
-+        echo "OK"
-+        return 0
-+    fi
-+}
-+
-+function project_create() {
-+    target="${1:?}"
-+    destdir="${BUILDDIR}/${target}"
-+
-+    (
-+        # init yocto project
-+        source ${YOCTODIR}/poky/oe-init-build-env "${destdir}"
-+
-+        # add needed layers
-+        for layer in ${build_layerlist}; do
-+            bitbake-layers add-layer ${YOCTODIR}/${layer} || exit 1
-+        done
-+    ) || return 1
-+
-+    # customize project configuration
-+    cat <<EOF >> "${destdir}/conf/local.conf"
-+# Yocto BSP
-+MACHINE = "${target}"
-+
-+# Use local cache to reuse previous builds results
-+SSTATE_DIR = "${CACHEDIR}/sstate-cache"
-+DL_DIR = "${CACHEDIR}/downloads"
-+
-+# Enable xen and virtualization
-+DISTRO_FEATURES = " virtualization xen ipv4"
-+
-+# Speed up run by not generating ssh host keys
-+IMAGE_INSTALL:append:pn-xen-image-minimal = " ssh-pregen-hostkeys"
-+
-+# Save some disk space
-+INHERIT += "rm_work"
-+
-+# Reduce number of jobs
-+BB_NUMBER_THREADS="${BUILDJOBS}"
-+
-+EOF
-+
-+    if [ "${do_localsrc}" = "y" ]; then
-+        XENVERS=$(grep -e "^XEN_REL" \
-+            "${YOCTODIR}"/meta-virtualization/recipes-extended/xen/xen_*.bb \
-+            2> /dev/null | tr -d ' ' | tr -d '?' | tr -d '"' \
-+            | sed -e "s/.*=//" | sort -V | tail -n 1)
-+
-+        XENBASE=$(dirname "$(realpath -m "${XENDIR}")")
-+        XENSUB=$(basename "$(realpath -m "${XENDIR}")")
-+
-+        cat <<EOF >> "${destdir}/conf/local.conf"
-+# Use local sources for xen and xen-tools
-+FILESEXTRAPATHS:prepend:pn-xen := "${XENBASE}:"
-+FILESEXTRAPATHS:prepend:pn-xen-tools := "${XENBASE}:"
-+
-+SRC_URI:pn-xen = "file://${XENSUB}/;subdir=local-xen/"
-+SRC_URI:pn-xen-tools = "file://${XENSUB}/;subdir=local-xen/"
-+
-+PREFERRED_VERSION:pn-xen = "${XENVERS}%"
-+PREFERRED_VERSION:pn-xen-tools = "${XENVERS}%"
-+
-+S:pn-xen = "\${WORKDIR}/local-xen/${XENSUB}"
-+S:pn-xen-tools = "\${WORKDIR}/local-xen/${XENSUB}"
-+
-+SRCREV:pn-xen = "\${AUTOREV}"
-+SRCREV:pn-xen-tools = "\${AUTOREV}"
-+
-+SRCPV:pn-xen = "1"
-+SRCPV:pn-xen-tools = "1"
-+
-+# Disable all QA errors as the recipe is not up to date with changes in Xen
-+# when we use local sources
-+ERROR_QA:pn-xen = "arch"
-+ERROR_QA:pn-xen-tools = "arch"
-+
-+EOF
-+    fi
-+}
-+
-+function project_build() {
-+    target="${1:?}"
-+    destdir="${BUILDDIR}/${target}"
-+
-+    (
-+        source ${YOCTODIR}/poky/oe-init-build-env "${destdir}"
-+
-+        bitbake "${build_image}" || exit 1
-+    ) || return 1
-+}
-+
-+function project_clean() {
-+    target="${1:?}"
-+    destdir="${BUILDDIR}/${target}"
-+
-+    rm -rf "${destdir}"
-+}
-+
-+function project_run() {
-+    target="${1:?}"
-+    destdir="${BUILDDIR}/${target}"
-+    (
-+        source ${YOCTODIR}/poky/oe-init-build-env "${destdir}" > /dev/null 2>&1
-+
-+        /usr/bin/expect <<EOF
-+set timeout 100
-+spawn bash -c "runqemu serialstdio nographic slirp"
-+
-+expect_after {
-+    -re "(.*)\r" {
-+        exp_continue
-+    }
-+    timeout {send_user "ERROR-Timeout!\n"; exit 1}
-+    eof {send_user "ERROR-EOF!\n"; exit 1}
-+}
-+
-+# wait initial login
-+expect -re ".* login: "
-+send "root\r"
-+expect -re "root@.*# "
-+
-+EOF
-+    exit $?
-+    ) || return 1
-+}
-+
-+function help() {
-+    cat <<EOF
-+Usage: ${0} [TARGET1] [TARGET2]
-+
-+This script is build the yocto xen-image-minimal for different qemu targets
-+and is running it after.
-+Without any target specified, all supported targets are done.
-+
-+Options:
-+  -h, --help       Print this help
-+  -v, --verbose    Verbose build
-+  --list-target    List supported targets
-+  --clean          Clean existing project before starting
-+  --no-build       Do not build (to run an already built project)
-+  --no-run         Do not run
-+  --num-jobs=NUM   Define the number of parallel jobs in Yocto.
-+                   Default: ${BUILDJOBS}
-+  --dump-log       On error, dump the logs on the console
-+  --image=IMG      Yocto image or package to build
-+                   Default: xen-image-minimal
-+  --xen-dir=DIR    path to xen hypervisor source tree
-+                   if not provide, normal yocto version of xen is built
-+                   Default: ${XENDIR}
-+  --out-dir=DIR    directory where to create the projectss
-+                   Default: ${BUILDDIR}
-+  --log-dir=DIR    directory to store logs
-+                   Default: ${LOGDIR}
-+  --cache-dir=DIR  directory where to take and store build cache
-+                   Default: ${CACHEDIR}
-+  --layer-dir=DIR  directory containing the checkout of yocto layers
-+                   Default: ${YOCTODIR}
-+EOF
-+}
-+
-+for OPTION in "$@"
-+do
-+    case ${OPTION} in
-+        -h|--help)
-+            help
-+            exit 0
-+            ;;
-+        -v|--verbose)
-+            VERBOSE="y"
-+            ;;
-+        --list-targets)
-+            echo "${TARGET_SUPPORTED}"
-+            exit 0
-+            ;;
-+        --clean)
-+            do_clean="y"
-+            ;;
-+        --no-build)
-+            do_build="n"
-+            ;;
-+        --no-run)
-+            do_run="n"
-+            ;;
-+        --dump-log)
-+            do_dump="y"
-+            ;;
-+        --num-jobs=*)
-+            BUILDJOBS="${OPTION#*=}"
-+            ;;
-+        --image=*)
-+            build_image="${OPTION#*=}"
-+            ;;
-+        --xen-dir=*)
-+            XENDIR="${OPTION#*=}"
-+            if [ ! -e "${XENDIR}/xen/Makefile" ]; then
-+                echo "No Xen source tree in ${XENDIR}"
-+                exit 1
-+            fi
-+            do_localsrc="y"
-+            ;;
-+        --out-dir=*)
-+            BUILDDIR="${OPTION#*=}"
-+            ;;
-+        --log-dir=*)
-+            LOGDIR="${OPTION#*=}"
-+            ;;
-+        --cache-dir=*)
-+            CACHEDIR="${OPTION#*=}"
-+            ;;
-+        --layer-dir=*)
-+            YOCTODIR="${OPTION#*=}"
-+            ;;
-+        --*)
-+            echo "Invalid option ${OPTION}"
-+            help
-+            exit 1
-+            ;;
-+        *)
-+            if echo "${TARGET_SUPPORTED}" | grep -q -w "${OPTION}"; then
-+                TARGETLIST="${TARGETLIST} ${OPTION}"
-+            else
-+                echo "Unsupported target ${OPTION}"
-+                exit 1
-+            fi
-+            ;;
-+    esac
-+done
-+
-+# if no target is specified build all targets
-+if [ -z "${TARGETLIST}" ]; then
-+    TARGETLIST="${TARGET_SUPPORTED}"
-+fi
-+
-+mkdir -p "${CACHEDIR}"
-+mkdir -p "${LOGDIR}"
-+mkdir -p "${BUILDDIR}"
-+
-+# Make sure we have an absolute path
-+YOCTODIR=$(realpath -m "${YOCTODIR}")
-+CACHEDIR=$(realpath -m "${CACHEDIR}")
-+BUILDDIR=$(realpath -m "${BUILDDIR}")
-+LOGDIR=$(realpath -m "${LOGDIR}")
-+if [ "${do_localsrc}" = "y" ]; then
-+    XENDIR=$(realpath -m "${XENDIR}")
-+fi
-+
-+# Check that we have all the layers we need
-+for f in ${build_layerlist}; do
-+    if [ ! -f "${YOCTODIR}/${f}/conf/layer.conf" ]; then
-+        echo "Layer ${f} missing in ${YOCTODIR}"
-+        exit 1
-+    fi
-+done
-+
-+for f in ${TARGETLIST}; do
-+    if [ "${do_clean}" = "y" ]; then
-+        run_task project_clean ${f}
-+    fi
-+    if [ ! -f ${BUILDDIR}/${f}/conf/local.conf ]; then
-+        run_task project_create ${f}
-+    fi
-+    if [ -f ${BUILDDIR}/${f}/conf/local.conf ]; then
-+        if [ "${do_build}" = "y" ]; then
-+            run_task project_build ${f}
-+        fi
-+        if [ "${do_run}" = "y" ]; then
-+            run_task project_run ${f}
-+        fi
-+
-+    fi
-+done
-+
-+print_progress "Build Complete (${build_result} errors)"
-+echo
-+exit ${build_result}
-+
-diff --git a/automation/build/yocto/kirkstone.dockerfile b/automation/build/yocto/kirkstone.dockerfile
-new file mode 100644
-index 000000000000..ffbd91aa90cc
---- /dev/null
-+++ b/automation/build/yocto/kirkstone.dockerfile
-@@ -0,0 +1,97 @@
-+# Docker file to create an environment to build yocto with virtualization
-+#
-+# Arguments that can be passed during image creation using --build-arg:
-+# "host_uid=$(id -u)": to use current user uid for build user in the image
-+# "host_gid=$(id -g)": to use current user gid for build user in the image
-+# "yocto_version=VERS": to select the Yocto version (branch name)
-+
-+# Use standard ubuntu minimal
-+From ubuntu:22.04
-+LABEL maintainer.name="The Xen Project " \
-+      maintainer.email="xen-devel@lists.xenproject.org"
-+
-+ENV DEBIAN_FRONTEND=noninteractive
-+
-+# Install minimal ubuntu requirements for yocto and other tools we need
-+# See https://docs.yoctoproject.org/4.0.1/brief-yoctoprojectqs/index.html#build-host-packages
-+RUN apt-get update && \
-+    apt-get --quiet --yes install \
-+        gawk \
-+        wget \
-+        git \
-+        diffstat \
-+        unzip \
-+        texinfo \
-+        gcc \
-+        build-essential \
-+        chrpath \
-+        socat \
-+        cpio \
-+        python3 \
-+        python3-pip \
-+        python3-pexpect \
-+        xz-utils \
-+        debianutils \
-+        iputils-ping \
-+        python3-git \
-+        python3-jinja2 \
-+        libegl1-mesa \
-+        libsdl1.2-dev \
-+        python3-subunit \
-+        mesa-common-dev \
-+        zstd \
-+        liblz4-tool \
-+        file \
-+        vim \
-+        bison \
-+        expect \
-+        locales \
-+        liblz4-tool \
-+        zstd \
-+        openssl \
-+        libssl3 \
-+        ca-certificates \
-+        && \
-+        apt-get autoremove -y && \
-+        apt-get clean && \
-+        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
-+
-+# Use bash as shell
-+RUN rm /bin/sh && ln -s bash /bin/sh
-+
-+# Fix local for yocto
-+RUN locale-gen en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8 \
-+    LANG=en_US.UTF-8
-+ENV LANG en_US.UTF-8
-+ENV LC_ALL en_US.UTF-8
-+
-+# Create a user for the build (we don't want to build as root)
-+ENV USER_NAME docker-build
-+ARG host_uid=1000
-+ARG host_gid=1000
-+RUN groupadd -g $host_gid $USER_NAME && \
-+    useradd -g $host_gid -m -s /bin/bash -u $host_uid $USER_NAME
-+
-+# Switch to our user instead of root and start in its home
-+USER $USER_NAME
-+WORKDIR /home/$USER_NAME
-+
-+# Create needed directories
-+RUN mkdir -p /home/$USER_NAME/yocto-layers \
-+             /home/$USER_NAME/yocto-cache \
-+             /home/$USER_NAME/logs \
-+             /home/$USER_NAME/bin \
-+             /home/$USER_NAME/xen && \
-+    chown $USER_NAME.$USER_NAME /home/$USER_NAME/*
-+
-+# clone yocto repositories we need
-+ARG yocto_version="kirkstone"
-+RUN for rep in \
-+                https://github.com/openembedded/meta-openembedded \
-+                https://git.yoctoproject.org/poky \
-+                https://git.yoctoproject.org/meta-virtualization \
-+            ; do \
-+        git -C /home/$USER_NAME/yocto-layers \
-+            clone -b $yocto_version --single-branch $rep; \
-+    done
-+
 -- 
-2.25.1
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
 
