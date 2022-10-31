@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB23FA3744
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 14:06:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.432764.685628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 140C5FA3746
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 14:06:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.432773.685645 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opVQX-0007Yc-Kg; Mon, 31 Oct 2022 14:06:09 +0000
+	id 1opVQY-0007lt-J0; Mon, 31 Oct 2022 14:06:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 432764.685628; Mon, 31 Oct 2022 14:06:09 +0000
+Received: by outflank-mailman (output) from mailman id 432773.685645; Mon, 31 Oct 2022 14:06:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opVQX-0007YV-I5; Mon, 31 Oct 2022 14:06:09 +0000
-Received: by outflank-mailman (input) for mailman id 432764;
- Mon, 31 Oct 2022 11:58:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1opVQY-0007k6-Cr; Mon, 31 Oct 2022 14:06:10 +0000
+Received: by outflank-mailman (input) for mailman id 432773;
+ Mon, 31 Oct 2022 12:08:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=a9QX=3A=redhat.com=javierm@srs-se1.protection.inumbo.net>)
- id 1opTRR-000432-6C
- for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 11:58:57 +0000
+ id 1opTaZ-0005Dc-GP
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 12:08:23 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 648f52f1-5913-11ed-91b5-6bf2151ebd3b;
- Mon, 31 Oct 2022 12:58:55 +0100 (CET)
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b68c087b-5914-11ed-8fd0-01056ac49cbb;
+ Mon, 31 Oct 2022 13:08:22 +0100 (CET)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-513-39d5fIbEO5ehtIvHPTtDXQ-1; Mon, 31 Oct 2022 07:58:52 -0400
-Received: by mail-wm1-f72.google.com with SMTP id
- p9-20020a1c7409000000b003cf670dad6eso662744wmc.7
- for <xen-devel@lists.xenproject.org>; Mon, 31 Oct 2022 04:58:52 -0700 (PDT)
+ us-mta-222-1Jzp8XYrMiqLEg4pn2ZSXg-1; Mon, 31 Oct 2022 08:08:19 -0400
+Received: by mail-wm1-f70.google.com with SMTP id
+ l1-20020a7bc341000000b003bfe1273d6cso2534925wmj.4
+ for <xen-devel@lists.xenproject.org>; Mon, 31 Oct 2022 05:08:19 -0700 (PDT)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- cc14-20020a5d5c0e000000b00228d67db06esm7103664wrb.21.2022.10.31.04.58.49
+ bn26-20020a056000061a00b0022cd0c8c696sm6948033wrb.103.2022.10.31.05.08.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Oct 2022 04:58:50 -0700 (PDT)
+ Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,45 +51,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 648f52f1-5913-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: b68c087b-5914-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1667217534;
+	s=mimecast20190719; t=1667218101;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=NYUZwRg+lRYohe3+hrEekpmCQsb4LiBLuZ4BzJljYVc=;
-	b=Aq4ZBF4ZVamQvcwUjGrWN6SbfFODTTStAp6SHUNgwxI69310k/oVrQ32aVwOqmNcHvkD1S
-	NyA9Fv8isKswEA8UZ/oD88DxiBN2xKrAfsSn3loxs2qbJ8LfM6hGrcQbXNDBhAuPMxfsEf
-	JjQTBAQhaVEmZ7nv/LS1cRv9Wn/bw3s=
-X-MC-Unique: 39d5fIbEO5ehtIvHPTtDXQ-1
+	bh=UzviKTRQBMSKwIl6kvNWZgMaFQwic4ec30sKv7m652k=;
+	b=HVwgxIFnTQWShJIbAp+p3yMHeOQrB6J5obh03OwUqlJlXbm90w49w/nPJiu98HKGScM9Uj
+	vcR2K1W6wwdh1fa05SHdk+3fuL31eun9CsHTnQBBPzXgM2GVsUWvjC59Qd/0aT4EbN9Vql
+	WRS4q8gCbvbwjjBXqhS0GpswFgCgaLQ=
+X-MC-Unique: 1Jzp8XYrMiqLEg4pn2ZSXg-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NYUZwRg+lRYohe3+hrEekpmCQsb4LiBLuZ4BzJljYVc=;
-        b=zK2iwSKAmW+0SGj5D471oxKENoFhqfPXxL/73QI9belifgZwoShz7Qzp5B1qpKfBpy
-         FH71CIElqFmrZittnEha5cwg3fHUVStryZZv3gKEqOCs0sD3X1CR7Dxx+Kbw/pq3pb+9
-         DjC+WP8YGifQ5MYPUqV9maJvq+gSzI3Kw/b1uXjpuplkTVeZF9bA6Q1fDZtq9FBIQ0E9
-         tFaXpUUw7uypW8djR7SlzHafWx5xrSfnocJ6BpRD66zgB7CLPkXXu2AEkIUiqp6PJHxS
-         Mwet2eaUlCBZe9mHRx7UIr5GMNNlHl4M5rV8fgHfWgVLVhwD2riLDl5CaYd4ISTkaGnf
-         tPPQ==
-X-Gm-Message-State: ACrzQf3mg6SdyQXsDfzOieWuj88JAmXLOB/3pcffLUOQffMeOXrqcr+h
-	/hEZBLxBDbXGN8bCV54p86+c7pg0vOuERBFDRNV0qYbLrcRX/l0v+9E6vFoh8e5te1hgam/qOjL
-	QYcTE4C6sem4enlcmJkMXIMYObqI=
-X-Received: by 2002:adf:ee46:0:b0:236:57e4:60d9 with SMTP id w6-20020adfee46000000b0023657e460d9mr7712402wro.208.1667217531291;
-        Mon, 31 Oct 2022 04:58:51 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM5NlG/EcNgth7sygR/Y2wmF3YkVg5o1INpxQYpcg5X49eIhA0omsq50HY00GhqtS98H3T4hUQ==
-X-Received: by 2002:adf:ee46:0:b0:236:57e4:60d9 with SMTP id w6-20020adfee46000000b0023657e460d9mr7712386wro.208.1667217531117;
-        Mon, 31 Oct 2022 04:58:51 -0700 (PDT)
-Message-ID: <365e1467-7dc2-42b4-b985-53323741dea8@redhat.com>
-Date: Mon, 31 Oct 2022 12:58:48 +0100
+        bh=UzviKTRQBMSKwIl6kvNWZgMaFQwic4ec30sKv7m652k=;
+        b=5IzmLwy4KUG3NsyiHeRuGK9sPwZZHjVCgbe2MZhk7VB9yMMjyhqtK0MkAqEtd4AmCg
+         vGAWlJ3YIxJYqr7g6Qho5GUawO7gCLUO+CSFXxOoXaAyyeF1M1bBuJn6WAchMjV0hDC6
+         QhqiirdnCIOvzK8B4BpD99VIahkkrRXJ9ABHlHZ0LgPUsC5wwqn/TmhnLnGopsGvzOMj
+         cIJ0lfNhuYJKp/rBh5KXVufkQruhXIX92jtCu8BGGNvuzYDfgU6oxxa89DpZyeptR2Ni
+         Buzs3LwBJeN2KDoHyLPytu28skqXCgEBUAyCE9iK6o/Qb8njVApc0CfmU2apTEojfFVi
+         3jtg==
+X-Gm-Message-State: ACrzQf3Tqro5srQZNyh2V2Gih2uZW47wmYrBny25Wfq8QHXZ4rJgrQv3
+	R3gPqOiTjOnc2kShT95kSqrtG1hP3SahjE8nLmTYbIjAp9eJWNDnGc7DdivaQItCyNAAL1n5a+v
+	jF7C9z01m+HDcbUsgabZChQHqhyE=
+X-Received: by 2002:a05:6000:15cd:b0:236:9701:7939 with SMTP id y13-20020a05600015cd00b0023697017939mr7691181wry.248.1667218098865;
+        Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6Xfc/ao13H30KX93ABjLq4iUJ6oQF+1EOXF8gvz+3LvWSBMjjIijdjEWsEsBBK0GpYNHL8UA==
+X-Received: by 2002:a05:6000:15cd:b0:236:9701:7939 with SMTP id y13-20020a05600015cd00b0023697017939mr7691171wry.248.1667218098682;
+        Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
+Message-ID: <fd53a4f9-34a8-f5f3-1b1f-baf4a456bcc9@redhat.com>
+Date: Mon, 31 Oct 2022 13:08:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
-Subject: Re: [PATCH v2 01/21] drm/komeda: Don't set struct
- drm_driver.lastclose
+Subject: Re: [PATCH v2 04/21] drm/amdgpu: Don't set struct
+ drm_driver.output_poll_changed
 To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
@@ -106,9 +106,9 @@ Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev,
  linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org
 References: <20221024111953.24307-1-tzimmermann@suse.de>
- <20221024111953.24307-2-tzimmermann@suse.de>
+ <20221024111953.24307-5-tzimmermann@suse.de>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221024111953.24307-2-tzimmermann@suse.de>
+In-Reply-To: <20221024111953.24307-5-tzimmermann@suse.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -116,15 +116,26 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 10/24/22 13:19, Thomas Zimmermann wrote:
-> Don't set struct drm_driver.lastclose. It's used to restore the
-> fbdev console. But as komeda uses generic fbdev emulation, the
-> console is being restored by the DRM client helpers already. See
-> the call to drm_client_dev_restore() in drm_lastclose().
+> Don't set struct drm_driver.output_poll_changed. It's used to restore
+> the fbdev console. But as amdgpu uses generic fbdev emulation, the
+> console is being restored by the DRM client helpers already. See the
+> functions drm_kms_helper_hotplug_event() and
+> drm_kms_helper_connector_hotplug_event() in drm_probe_helper.c.
+> 
+> v2:
+> 	* fix commit description (Christian)
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
 
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+
+Do you think that the fbdev helpers kernel doc has to be updated to mention
+that drm_fb_helper_lastclose() and drm_fb_helper_output_poll_changed() are
+not needed when generic fbdev emulation is used? Because by reading that is
+not clear that's the case:
+
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_fb_helper.c#L86
 
 -- 
 Best regards,
