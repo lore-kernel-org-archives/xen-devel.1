@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B92ECAAA1
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 15:14:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.433034.685927 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 855FEFA3743
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 15:14:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.433035.685938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opWUX-0002ll-KW; Mon, 31 Oct 2022 15:14:21 +0000
+	id 1opWUa-0003Lf-Uc; Mon, 31 Oct 2022 15:14:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 433034.685927; Mon, 31 Oct 2022 15:14:21 +0000
+Received: by outflank-mailman (output) from mailman id 433035.685938; Mon, 31 Oct 2022 15:14:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opWUX-0002lQ-Dn; Mon, 31 Oct 2022 15:14:21 +0000
-Received: by outflank-mailman (input) for mailman id 433034;
- Mon, 31 Oct 2022 15:14:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1opWUa-0003LU-RR; Mon, 31 Oct 2022 15:14:24 +0000
+Received: by outflank-mailman (input) for mailman id 433035;
+ Mon, 31 Oct 2022 15:14:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7CAU=3A=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1opWUV-0008Dn-Sd
- for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 15:14:19 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2043.outbound.protection.outlook.com [40.107.94.43])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id afa5b701-592e-11ed-8fd0-01056ac49cbb;
- Mon, 31 Oct 2022 16:14:18 +0100 (CET)
-Received: from BN9PR03CA0865.namprd03.prod.outlook.com (2603:10b6:408:13d::30)
- by SA0PR12MB4445.namprd12.prod.outlook.com (2603:10b6:806:95::15)
+ id 1opWUZ-0001KF-M2
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 15:14:23 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2080.outbound.protection.outlook.com [40.107.237.80])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b2b33758-592e-11ed-91b5-6bf2151ebd3b;
+ Mon, 31 Oct 2022 16:14:23 +0100 (CET)
+Received: from BN8PR03CA0029.namprd03.prod.outlook.com (2603:10b6:408:94::42)
+ by SJ1PR12MB6219.namprd12.prod.outlook.com (2603:10b6:a03:456::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.19; Mon, 31 Oct
- 2022 15:14:14 +0000
-Received: from BN8NAM11FT058.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:13d:cafe::e3) by BN9PR03CA0865.outlook.office365.com
- (2603:10b6:408:13d::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.15 via Frontend
- Transport; Mon, 31 Oct 2022 15:14:14 +0000
+ 2022 15:14:20 +0000
+Received: from BN8NAM11FT114.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:94:cafe::af) by BN8PR03CA0029.outlook.office365.com
+ (2603:10b6:408:94::42) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.19 via Frontend
+ Transport; Mon, 31 Oct 2022 15:14:19 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT058.mail.protection.outlook.com (10.13.177.58) with Microsoft SMTP
+ BN8NAM11FT114.mail.protection.outlook.com (10.13.177.46) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5769.14 via Frontend Transport; Mon, 31 Oct 2022 15:14:14 +0000
+ 15.20.5769.14 via Frontend Transport; Mon, 31 Oct 2022 15:14:19 +0000
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Mon, 31 Oct
- 2022 10:14:14 -0500
+ 2022 10:14:18 -0500
 Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.31
- via Frontend Transport; Mon, 31 Oct 2022 10:14:12 -0500
+ via Frontend Transport; Mon, 31 Oct 2022 10:14:17 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,22 +60,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afa5b701-592e-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: b2b33758-592e-11ed-91b5-6bf2151ebd3b
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WkOKEKyXVKYXDOzx/YhjjaD/xQ2ZqNNtuWIZ+6K9xNnfsiMAJfN2ElTcyhrTvsMbnCJxKWWWbBP3W1eweQEvpx5ZJOgSBf9AgTrWaTXwBj+iuzEoIMz8JJYM7K/FPeM/cnBJToCmQCCu93GuOcBbsjWOW4gYUoBmwynBtZ9bUW1aD8T57VXNLIvx76zpWnQeiUb2k06e0CTjVMO4IH5DXATL812Ee7dBjn0Unz0rADWW/pQ3UKJvIYEK7Hs6qaeo7/Mh2ARUv5hwHWoO+TPEgefTzJzD7PNdGRsbt5jT3HXDNVd50YLf6aHzcuBKf+6uyEDsBbWxTx/9iuMljN5E5w==
+ b=eNFufZ3uYA95z5tMniuK6MgVCrzABkjx0bI3JozzpL+fABa2pcd22E01oM4FXLXhctsxTfkx2oPDvmBwwHF9C1rA8tsRZK+HCd4bjWlFNKRfHIWeph0sE8tPKgKOQInaUNyqQq38cIbLow3e6eMCH7DJLnS2aWeMPw0iKiIUyRmO56CfC0NXNgOfzdBWqRTHunS5/JQzDCc48BnMMvc+Ht3CQDNdfM181mG4302cGlX6d3R6S7km6gX+v+iyXd10cqF757bWQbQLxsfH2rS/wl+G8Ehg73mTuaa1RZidfxc4apMKZm6AIf/MXvLo9/Kw7tSiV2w2Lr7ugjncZpqZoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ao6qIVyVbVJ+PXnUTss4wnvdQgwpAL4Cyg3ESb6Dh/4=;
- b=SadsscYPwyteA5kvGJioADb8Roo7LZXHWKRzOoYx5ksqJUg1HP/nEhUx9wNtpvqLDQQij+99+RMxyzNJEMNaAcuVUKP45cU4zBUrgs7lj4osTHAIr8+2M0J2WLWGoQLv+KFZAlcXvOfaxvKXpv6/5L6PQaWmLIm4Gv2sQy2qzja6OY59jo2U1lCcCO5K4D1PRBVlkZaAYqWjeAqm5TgEnt/SvE8vIPcmgqKt652urw//PhTCAs3Tif7ICgTPbhRdsk5q6zweX2B+M5VLa+DwPynrlEFAosEiNKRoFPFdSNkO7EGjpK+HFs+xWrKFRmuffGtkodgFlQKJ84MiFV5ofw==
+ bh=ssqD6eDVxRSMIkTCVK1fqChl6nBTtHT7TooGtjeWbYQ=;
+ b=AHQ9BwiBrtLXD4Par8Ov/NxBF46Gq7qIQqAVXDaeI+b2m/OcXkzxjU8ebjzlycPW3d79uqokO9/ib7hCuR40iApG6hV+fVWBikQ5ydW//6Cj3dkGxjOAU367qnGJeyHgPJACAoub0QOhOqxU/eLHdTIuT36pk+Jkg+d5KET2plpSKV+yK92Jdvp4V5Bxh8APDOS90dWynfmceaQzlLrev6wONYSMQEpjhxuWJUCvuQeuCh6ZN4i7cf3oOOcXnsN/p29BEvgPXdOZoiayYcbV3l15RX19FdC/HEf/0lPxZDtGlHM+G+a6mYzdzSVJbLjDfY1gaxiCcPP8pobhgi0nlw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ao6qIVyVbVJ+PXnUTss4wnvdQgwpAL4Cyg3ESb6Dh/4=;
- b=ewThn8O7nX+nFQdCdPkAfTDLG39AqxwpDvczZu5PAwlF5Omb+RASdx5w1GD/srM1BsWw5yH+iUlJKZReD5O7zZ6YcbDs5jPryYWELxsji640MHvUhuU/kc5PLYR5lKPNX5T9Daa3DQeLlvRfKlilCc2ihTXUFewKv1chiPxTc98=
+ bh=ssqD6eDVxRSMIkTCVK1fqChl6nBTtHT7TooGtjeWbYQ=;
+ b=hJ3UsfOE72xPkF5jbTBmX4nVQYDdF8SxPgtacMWTrmCto0JBzXD/sWvshtqllF7h1jABVvecCqLE9Ur2f+k9ueI3JxDMjWB6U8r9EMC6p+4TmPO+hBYTPWcYz0ekPEyGU3cNZp1GIo1JNnqV+xfuXwt7d73Re3gFIFy8d2Xur9Q=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -87,9 +87,9 @@ To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
 	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>,
 	<burzalodowa@gmail.com>, Ayan Kumar Halder <ayankuma@amd.com>
-Subject: [XEN v2 09/12] xen/Arm: GICv3: Define GIC registers for AArch32
-Date: Mon, 31 Oct 2022 15:13:23 +0000
-Message-ID: <20221031151326.22634-10-ayankuma@amd.com>
+Subject: [XEN v2 11/12] xen/Arm: GICv3: Define macros to read/write 64 bit
+Date: Mon, 31 Oct 2022 15:13:25 +0000
+Message-ID: <20221031151326.22634-12-ayankuma@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20221031151326.22634-1-ayankuma@amd.com>
 References: <20221031151326.22634-1-ayankuma@amd.com>
@@ -97,79 +97,91 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT058:EE_|SA0PR12MB4445:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15361d85-abd4-4b4a-d8c0-08dabb529286
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT114:EE_|SJ1PR12MB6219:EE_
+X-MS-Office365-Filtering-Correlation-Id: 817997c4-64d5-4f93-355f-08dabb529557
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	Rtzy1kiD28sIrq5SEZteyYBkdydYraRp38SewTdraALTgVkpVHygHuQOyBWDFbYkpxDU/YOEUO56bHZp0qKO7JEDQS5eL0No7MIabba1uXDcsLXpzIev+juHqODKHzwc9CgOZ/5FxuSEnhRv4hDDNyZECBs2G6bmVJsPFQhkWLtdS9NlG46XevHYdEx/kvhlxS3yVOhKSm96GSYYYcyi0rO9xCVHz+JtaD8waNH6XGnzaxRp4p6YCm3WF05wuEElxwbpO2SB68tE5s7umekUgNIivOvHZhczT6Hpr0HKMzlQ1nGaxQBZTUkFGjDGxCRzXEW6avr7SSsd32GBBSYBQpuni4SO03fZ+AWTeFq+067EC8x0CLT6EbPtL/SX8r0QtHg9nqSFFTG7gsqtyNsYtchiCbootIGZsmQ5IKbnqY5YRdzDLpQI56znvxp7sTFa1VsIqF2sClycndosuHEJvd8xzftOODZhWAiWGeqegdTl2tNxqRynQbRp8AtoQHU8pQx5tO7i2d7mkM3SO2jeJj7O1tzNQuSDEeZtCQzu+5eSYE2IPyPqojivHyEo9wxqLS15+Ui+bhZxVlAf/3sCLWiWvL4Y5mSnWCwoN8kYvuvAhFYoRuH6d7Ar1mukL09OPeh4Ep1uC6KGnfxykV7qi13I2KB6FTgDzPXT0Pj0yflNCFGQH1vmj1aA5Kxjapyr83nGXVLS9suzuy3R4eO8oYIGYEoUaJlCxbMxIETR0iSc5/etP2x9L4ulJFWoKxcPnrluBU9C2VxkOmoitk2+uG7TgJgeaUoGM1PoVutIuSKeikqSb00OzJTsd7bah/eB
+	m4PCC5K6hhyznZfO+zO0ygAnQgAt+px1ZRTWOx9cBxJVifT8n2rD7kBxROJbNlNFE15FiBBfXLKiPfLEnkUGS0mI8O0z5YQPA7c6SvaBYZ58gsF39ZWAROquTF6YG5igIZE2NgGvlUz5TskZwY9ZnFbZALIk3QK20+NjqHQuu7VT7BdU/XTCi65uVwT9QY4YXYlXzTlTIP0WEwjxMAY7HxLwMr+rSEcTgE5hi7iQ30ZB/PD2bQiQKuCyppUi/lasgHgSqq1lRP1PAMXLba7eC8F+GcNuo52HvYcq8EzjJIGQdVEz3k767SMuK7x83Mh7PZ5M7A0PfJFPwe5iV3uqfwXQ+VREzUdqQjz96Hf2CcC0fxxqytoxNyCYcelGeXQ0keySbCxPEZACPyUNEYCEvnhkN+yro0oQt2uZCJisreC6Baapx1BvFiD2TKiP+qT1qJwmFbtzZEJDyFeN2G2RNcJ2opdGZd7fbzrTN76fxMGKDwmXrA5DmJoLB9fLelZchI8MPb4AAI2skk8DMnSGP0D6B1NSzPqmn4tBeY1Y/SFnOABBaMKk36fRs65qage2R9UrUxay8T33UHoih60zj1ZqdzfvhLOKhb6hBIJUPy6wEpRPnmkywbXLHqKl0MERf+8JH9zjMAM4lARYAEFXhGkTyKfMpp43VyxS9EiWYZablWCWv/1k3XpNNWzPnJF8iJJQ29FYR28aP4PlT+g+Qohc8XdPjAArOY99N4FydatLl8z0TL92yACfceR5SIuYFdM1TXSeYVFLt0dTl8x5ESPyiWLhaO5x+SqenP6jof7WjTb4uLWRPlv0aUXZdzP6
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(346002)(376002)(136003)(396003)(451199015)(36840700001)(40470700004)(46966006)(83380400001)(82740400003)(478600001)(426003)(47076005)(2906002)(336012)(36860700001)(356005)(70206006)(70586007)(8676002)(40480700001)(81166007)(4326008)(82310400005)(2616005)(1076003)(186003)(36756003)(41300700001)(26005)(54906003)(40460700003)(6916009)(316002)(5660300002)(8936002)(6666004)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(346002)(376002)(396003)(136003)(451199015)(36840700001)(46966006)(40470700004)(82310400005)(70586007)(70206006)(8676002)(54906003)(316002)(6916009)(36860700001)(356005)(81166007)(83380400001)(2906002)(36756003)(478600001)(1076003)(8936002)(40480700001)(41300700001)(5660300002)(4326008)(336012)(2616005)(186003)(40460700003)(82740400003)(426003)(6666004)(47076005)(26005)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2022 15:14:14.5901
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2022 15:14:19.3110
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15361d85-abd4-4b4a-d8c0-08dabb529286
+X-MS-Exchange-CrossTenant-Network-Message-Id: 817997c4-64d5-4f93-355f-08dabb529557
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT058.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT114.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4445
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6219
 
-Refer "Arm IHI 0069H ID020922"
-12.5.23 ICC_SGI1R, Interrupt Controller Software Generated Interrupt
-Group 1 Register
-12.5.12 ICC_HSRE, Interrupt Controller Hyp System Register Enable register
-12.7.10 ICH_VTR, Interrupt Controller VGIC Type Register
-12.7.5 ICH_HCR, Interrupt Controller Hyp Control Register
-12.5.20 ICC_PMR, Interrupt Controller Interrupt Priority Mask Register
-12.5.24 ICC_SRE, Interrupt Controller System Register Enable register
-12.5.7 ICC_DIR, Interrupt Controller Deactivate Interrupt Register
-12.5.9 ICC_EOIR1, Interrupt Controller End Of Interrupt Register 1
-12.5.14 ICC_IAR1, Interrupt Controller Interrupt Acknowledge Register 1
-12.5.5 ICC_BPR1, Interrupt Controller Binary Point Register 1
-12.5.6 ICC_CTLR, Interrupt Controller Control Register
-12.5.16 ICC_IGRPEN1, Interrupt Controller Interrupt Group 1 Enable register
-12.7.9 ICH_VMCR, Interrupt Controller Virtual Machine Control Register
+Defined readq_relaxed()/writeq_relaxed() to read and write 64 bit regs.
+This uses ldrd/strd instructions.
 
 Signed-off-by: Ayan Kumar Halder <ayankuma@amd.com>
 ---
 
 Changes from :-
-v1 - 1. Moved coproc regs definition to asm/cpregs.h
+v1 - 1. Use ldrd/strd for readq_relaxed()/writeq_relaxed().
+2. No need to use le64_to_cpu() as the returned byte order is already in cpu
+endianess.
 
- xen/arch/arm/include/asm/cpregs.h | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ xen/arch/arm/include/asm/arm32/io.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/cpregs.h b/xen/arch/arm/include/asm/cpregs.h
-index bfabee0bc3..62b63f4cef 100644
---- a/xen/arch/arm/include/asm/cpregs.h
-+++ b/xen/arch/arm/include/asm/cpregs.h
-@@ -415,6 +415,22 @@
- #define ICH_AP1R1_EL2             __AP1Rx_EL2(1)
- #define ICH_AP1R2_EL2             __AP1Rx_EL2(2)
- #define ICH_AP1R3_EL2             __AP1Rx_EL2(3)
-+
-+#define ICC_SGI1R_EL1             p15,0,c12
-+
-+#define ICC_SRE_EL2               p15,4,c12,c9,5
-+#define ICH_VTR_EL2               p15,4,c12,c11,1
-+#define ICH_HCR_EL2               p15,4,c12,c11,0
-+
-+#define ICC_PMR_EL1               p15,0,c4,c6,0
-+#define ICC_SRE_EL1               p15,0,c12,c12,5
-+#define ICC_DIR_EL1               p15,0,c12,c11,1
-+#define ICC_EOIR1_EL1             p15,0,c12,c12,1
-+#define ICC_IAR1_EL1              p15,0,c12,c12,0
-+#define ICC_BPR1_EL1              p15,0,c12,c12,3
-+#define ICC_CTLR_EL1              p15,0,c12,c12,4
-+#define ICC_IGRPEN1_EL1           p15,0,c12,c12,7
-+#define ICH_VMCR_EL2              p15,4,c12,c11,7
- #endif
+diff --git a/xen/arch/arm/include/asm/arm32/io.h b/xen/arch/arm/include/asm/arm32/io.h
+index 73a879e9fb..d9d19ad764 100644
+--- a/xen/arch/arm/include/asm/arm32/io.h
++++ b/xen/arch/arm/include/asm/arm32/io.h
+@@ -72,6 +72,22 @@ static inline u32 __raw_readl(const volatile void __iomem *addr)
+         return val;
+ }
  
- #endif
++static inline u64 __raw_readq(const volatile void __iomem *addr)
++{
++        u64 val;
++        asm volatile("ldrd %Q1, %R1, %0"
++                     : "+Qo" (*(volatile u64 __force *)addr),
++                       "=r" (val));
++        return val;
++}
++
++static inline void __raw_writeq(u64 val, const volatile void __iomem *addr)
++{
++    asm volatile("strd %Q1, %R1, %0"
++                 : "+Q" (*(volatile u64 __force *)addr)
++                 : "r" (val));
++}
++
+ #define __iormb()               rmb()
+ #define __iowmb()               wmb()
+ 
+@@ -80,17 +96,22 @@ static inline u32 __raw_readl(const volatile void __iomem *addr)
+                                         __raw_readw(c)); __r; })
+ #define readl_relaxed(c) ({ u32 __r = le32_to_cpu((__force __le32) \
+                                         __raw_readl(c)); __r; })
++#define readq_relaxed(c) ({ u64 __r = le64_to_cpu((__force __le64) \
++                                        __raw_readq(c)); __r; })
+ 
+ #define writeb_relaxed(v,c)     __raw_writeb(v,c)
+ #define writew_relaxed(v,c)     __raw_writew((__force u16) cpu_to_le16(v),c)
+ #define writel_relaxed(v,c)     __raw_writel((__force u32) cpu_to_le32(v),c)
++#define writeq_relaxed(v,c)     __raw_writeq((__force u64) cpu_to_le64(v),c)
+ 
+ #define readb(c)                ({ u8  __v = readb_relaxed(c); __iormb(); __v; })
+ #define readw(c)                ({ u16 __v = readw_relaxed(c); __iormb(); __v; })
+ #define readl(c)                ({ u32 __v = readl_relaxed(c); __iormb(); __v; })
++#define readq(c)                ({ u64 __v = readq_relaxed(c); __iormb(); __v; })
+ 
+ #define writeb(v,c)             ({ __iowmb(); writeb_relaxed(v,c); })
+ #define writew(v,c)             ({ __iowmb(); writew_relaxed(v,c); })
+ #define writel(v,c)             ({ __iowmb(); writel_relaxed(v,c); })
++#define writeq(v,c)             ({ __iowmb(); writeq_relaxed(v,c); })
+ 
+ #endif /* _ARM_ARM32_IO_H */
 -- 
 2.17.1
 
