@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CBBECAAA1
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 20:27:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.433202.686089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01FFFA3741
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 21:36:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.433214.686110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opbNU-0006R9-RI; Mon, 31 Oct 2022 20:27:24 +0000
+	id 1opcS7-0006Pd-0B; Mon, 31 Oct 2022 21:36:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 433202.686089; Mon, 31 Oct 2022 20:27:24 +0000
+Received: by outflank-mailman (output) from mailman id 433214.686110; Mon, 31 Oct 2022 21:36:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opbNU-0006R2-Mj; Mon, 31 Oct 2022 20:27:24 +0000
-Received: by outflank-mailman (input) for mailman id 433202;
- Mon, 31 Oct 2022 20:27:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=grsl=3A=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1opbNU-0006Qw-1M
- for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 20:27:24 +0000
-Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
- [64.147.123.20]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6a314de3-595a-11ed-8fd0-01056ac49cbb;
- Mon, 31 Oct 2022 21:27:21 +0100 (CET)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.west.internal (Postfix) with ESMTP id 1281E320092F;
- Mon, 31 Oct 2022 16:27:17 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Mon, 31 Oct 2022 16:27:17 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 31 Oct 2022 16:27:15 -0400 (EDT)
+	id 1opcS6-0006PW-TG; Mon, 31 Oct 2022 21:36:14 +0000
+Received: by outflank-mailman (input) for mailman id 433214;
+ Mon, 31 Oct 2022 21:36:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2TDv=3A=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
+ id 1opcS4-0006AC-Ta
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 21:36:13 +0000
+Received: from sonic308-55.consmr.mail.gq1.yahoo.com
+ (sonic308-55.consmr.mail.gq1.yahoo.com [98.137.68.31])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 07bcad9e-5964-11ed-91b5-6bf2151ebd3b;
+ Mon, 31 Oct 2022 22:36:09 +0100 (CET)
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic308.consmr.mail.gq1.yahoo.com with HTTP; Mon, 31 Oct 2022 21:36:07 +0000
+Received: by hermes--production-ne1-c47ffd5f5-2l5gs (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 1d450870d12d3f727fe97841ca3633d5; 
+ Mon, 31 Oct 2022 21:36:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,123 +44,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a314de3-595a-11ed-8fd0-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm3; t=1667248036; x=
-	1667334436; bh=CcVMZSWC/nZz2RRW6ULZLxYdjPK/WNorJkNgpb/0MSg=; b=C
-	Gqe8P3s1OnS3MpKKEyK/EcOoEb/6y0mt9jXOHEvcFXF/+dU/J26LNa/oFluM3iWf
-	OZ3xnON9X9EIHoYm16gz0duEftEJykSuz40PxmmUteo2VOVYZWuE50P26r1oNY8t
-	eSsqoAZ/7gGM2AZfgS42rncxqJrX+zO9qc9a5BfkLvNb7Hc1vwbGTK7byOIq8tfA
-	V+LxuVjPKYKB4K9jruH/SZECvzU5mxIsXKhcKffpbdUyweGf5DQmFL94FD84sAEh
-	EFFMA8JPShUSXhrhSp3y62VHYIPvt8K72ubkn2vGJPROjFbaZ0K/JlIr/72G1sdF
-	2JXMZCVzVEQPz8St0YkdA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
-	:mime-version:references:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm3; t=1667248036; x=1667334436; bh=CcVMZSWC/nZz2RRW6ULZLxYdjPK/
-	WNorJkNgpb/0MSg=; b=q/yhZmbJNTvMkqsnpNCo1kfNcj3AQY91oM4/gF0MOV8T
-	DbCqI74sn8KTitSOp4Rvl9l0Z/tlL3pZ8QbcFtodCjvhjk193XxqTNc7fdpN4wN9
-	v3XMgJehVOE19na7ZX3h4tR/M+xtgOsdGdWODvHBHlSZD0T9IHV3jKRmQs2hQp8j
-	X1QT//lpptQZN90uZiOhuWykdeqbO/ZWHpQV3SUp/b1Uam82qhrix4QFv/MwGqPY
-	JJbr+ZZE6P/DWrjliGpY+KuY6atsXegNz+FC/ALh9HylVGV0jzDVZOe51yBXk1cO
-	uaWhP3WwLI/4boZJWRkp8Vurm8Gw+V36jVXEi2zEKA==
-X-ME-Sender: <xms:pC9gYxYMyP657TPxStEIB_6Pyp9G7g_ZryXmd2TxajONM2ilbJje4Q>
-    <xme:pC9gY4YFR7buTuoN__xZFExWmASV8TVf7-2aEfk2UW8r__7QpkLlgQWAyP3TvyLNj
-    LliYWDAXm9agN8>
-X-ME-Received: <xmr:pC9gYz8WHK7PfPtYAa85brbj_PmP5Q8p9OUwDYDoEk7GXGLNpfakjT8ukzAP>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrudefgddufeeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepffgvmhhi
-    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepvdejteegkefhteduhffgteffgeff
-    gfduvdfghfffieefieekkedtheegteehffelnecuvehluhhsthgvrhfuihiivgeptdenuc
-    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
-    lhgrsgdrtghomh
-X-ME-Proxy: <xmx:pC9gY_p-6cbaduINnB_fOB3-wDQUWl7NFeKj5y910g5qQQj7YX4TWg>
-    <xmx:pC9gY8pwO5BdjWE47SqpX7XU0i4xFMXvsp3CFJaDlUEdXr84iuRdKA>
-    <xmx:pC9gY1Qew3dyGMkrdsupcRBtpS2beaqnp0fqCaDu69VefAiRHsfdgw>
-    <xmx:pC9gY0L9NIn90O9S19LWluB33xAuDV7hh4r9e8lVOFwYnaBsPuav7g>
-Feedback-ID: iac594737:Fastmail
-Date: Mon, 31 Oct 2022 16:27:13 -0400
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Sasha Levin <sashal@kernel.org>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	"M. Vefa Bicakci" <m.v.b@runbox.com>,
-	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH 3/3] xen/gntdev: Accommodate VMA splitting
-Message-ID: <Y2AvojXJ5IAGJyL8@itl-email>
-References: <20221030071243.1580-1-demi@invisiblethingslab.com>
- <20221030071243.1580-4-demi@invisiblethingslab.com>
- <Y194M/6GboCwWiZX@kroah.com>
+X-Inumbo-ID: 07bcad9e-5964-11ed-91b5-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1667252167; bh=IGznKk12GJy9mx+cAyxhAXw1kam3mqzoP8wC6G/UoSU=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=VfBFhH/IiUAMeyrtK6L++FniV0n17rJw2PDlx9wTqxSzCGXqld/wx3ZCHuYv4EB3chl8DM2EfZ7lGLmWR7YsHxj8o4S9a5gyq4fqslyVgaMYhYqhbb+sbnhgaRw+CMmvZ84iwssmV3QGMnqFX6new1EdpJSDsSrIbIWgkaLi+hL3szsFILOh9fBnZ6yRIUgk4CpsPJ8Sm1s5p+/wW8oaqrZkQz2/+jcOSKSZDj3DfVuphHBDEJavXJ8qZAgAAxsJ3W3qmyajWdDYd+xF6UW4Ia6XionhUi06HMWV/2mkxIs6+6nAPf40q/1+gfEyS+efJHYupXOKCZD9LyJEBTZjkg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1667252167; bh=s1nJndFclxPJHpwkBlsE/zVpQGSKg5nGaHWBSiMCA8a=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=Cp5PvtCcXALvHl5fwKJQ/Y1ZWz5Q/k1wYOZTgsPKpNpUiSLQOfPqpsK3J8DIo+aMmJWWyXqp1LoOPlg2zbMpi0rmXo5HsWDnNMJYSQWtr2tsh6VYl21FlRYEFT04Et3TEMR6NezF5q33Kg3NPbtIff+o9vR1gPGm6Rr6sXPRnKVAlZg5lCzROfWEAWjzzRPX+kq2N+WzDYwBraZKj80boW1XzFsVw5uROvDG/S3FFnrxoh6HC6V69uBRVO8VHUJUMoCa2hkc5DHcN8iMnqAJUbv6CWxFq5A0h2WLd/RbN1aQP24YltoKhSEoOwA2CUPXwe0daZZxV9a7xLN10rlF0Q==
+X-YMail-OSG: xoK7.TAVM1nXfkqSkAXJsWIxt6aE3NfKJZ3GktAXsLafXoHi2CeRa8MEJ7hPomh
+ B2GFQ8hoEa7NTLB2L7O4ROJpJVG96s10Z4TilyZznGUVJloj_2wnrCk5CdEu9Q2i4IJYc8MWEi8s
+ XwB.1OyC1.VsjXU_GMrQlSQhLQ8ucr6R645zSAS_Nmj5_2uMbo4vp4g_0k5CF4t_AIEDwwtcw7Ow
+ AAqJLiWQ11f50O0P2EgiWGzJEm.oRM.z14bKd7qjmHLUjdKFl0LC3B1wPEDTYX7TulqwOZwYPPNY
+ VCdsxsvy50KHwQvtEluHvTqBdphz4G2zw9jb9bLySx3N60o7PARz8qI4E6daqDFbwK3eCJMNP6Vp
+ yzj32037kX8D5cMcYBP6i1CBOzOLnpIbxi.t2XqjNwnz5n6wE6Jhps3SWovEfTKxugATkyZXdXwM
+ 4cYaEcMUfOOGE5SD5uAB3aLBl4exJBbgBgxPC_e5eW0qMWXYaBTxWBtPX0x40ea.UcfsUoEIXheG
+ 9NK_w2oqBNdnUV_FcY.u3m9yJGcXK9wmGTjDgByCytjs0y2sItAyIfQlQnw_bjF1qyI1rZN3u7nv
+ BE6ZQmmvX7pUX__63pSd1SegWPXCdzaksVBRrXaEhm1hlZsSSKK7cljdw3bw15Go4UPJkUYftZQ6
+ lT0nEHQ2WPO0YenbOh6_BeBLR6MFIEAAKFDHuuaXJMTfEraHx8hogw77FT34fX3G7olC7FZKZEKI
+ 4pR_DbA8PDysJoRpC3vXBmTQUTEKZ6_OlblbfK4XX0CO67LxYtdZI7mueSSZBoaCwV8wWdKBPAdu
+ 86MvRQWywf956GlEPipGMS.qn1_N63OCygcow5E2HIMSujS9egilINlBwvio9GPU7If.ywSjd8vk
+ LNr3hICQstkUkXvNAYSNEafjP5TfmR6fnRFQq14EVyQ_pDX3AloLOVRWjeQprA_D4G1FOqQ3NDt4
+ e_jk.U12tiY2g.IqeusMGQESGUFoMYVSDFtJe9OtCgIpJG.TMAwOCF_gKcyJsOjKXBjKANaz7MuG
+ bRVBnOCsC6Mtj4cIpbZgl9hoE5cSLOezlDELq0jvy2yZTYRNP.MZ93wETl.bys3yyXsOr2w.iOHw
+ ZkOHt1OSPstlHnm.mmwyPM51e.s1n0cQ6N5kE7mHwwyQZWGAWvn6PD2fLfm.qPX7VEKnsMts386J
+ OmDuhxRx4zYFXFQwQgGgZWwhn9IwUZJI6yKm6Z99mqtkkygh2RNB2hbDBbJOuBz4mMdf0nVdceFW
+ 9lk_5H_h15z0UmZq._iXMIuORsBkcxTIxKN4RohKfuMcigyLR2U3lku8nqYvE1T3WM6r3G.SQ2sc
+ D2O_VSl53Ku_yxzS3Z5Wnn.4aF2xYwJtP_OJjRV2agK6IlPhQ2J6BoNAiEZj4MZTG09wvwdZbuoT
+ LUB0QzzzhpiG05KMkj.dI5DN1U6OMCfWLSNTjqTDt4R1pXb8yNL6TImOFssdIYaqch4f1._QdnLv
+ rRXfEpRCsvFzj0RRsz3AICtomHLvabL.p8JMSimJYOanZxLZwV4zXKUMiFuN09G_b3mcvol30Luk
+ LjNBesKDlKs4P2PZBzv53N31x_RuOgiRhCIV7Ob9M8ClcimvGLw38Lhg_1Klw69Ld6W3fy3U9XZE
+ 2MZAS.Mpn7LA1d.2P06ZhwMt8PD3S9mjOTw43uZbola6anOtpwFDAata28Sxvq08t2ZkcR_kY6Al
+ gLyqPeOuc1Z7xbKcQfeQ8aB8FN.JHsuSH7Mqj.wPl8nOC7oqo1mv8amKs3Sgtm7m5TnD0jo7ByNi
+ 3DciyiaGtKSp4O.rsVxe15KorsEDPqf96Bh5vlZFB9tELRhGGg8AkKzFD3BrZNbE.ydCMm7GKrO.
+ GaTSzbrSsfEz1mm9xRmpbE_Ira4AawFfWwJi5ng6xKH.J7rlj871dLfmUGtPx0H3LgkHlJJDcxKI
+ yKoMuqe3_o1EcI423JSfLJ_1rvhEcxZ9wlYZkySmcpv1.FKD2EWuaRy_a7sIT87fyvvHaVmDZ74X
+ JqJnfuv2zIb22mkpX5RgTG8JfMMCDJqK6vGm5ywTDxBQXlZTOM6qvoggX163tXEbP1lSL2MVCUhY
+ 3cdi_kSxAYT9xjDUDKo_zD.OokNoaE12D42kt1Pp7ohapba5HtmfTqNbfKnlhdRaZ8CMhVHaYBzK
+ M9a6I2E0oyvpRP5lGYDDsmvax9kxBto0g6ash5ejR0s_0LdWv1TmvEb.jmrwGf3eWS_eBxDeCy1E
+ GPGd.a6uK
+X-Sonic-MF: <brchuckz@aim.com>
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: qemu-devel@nongnu.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v4 1/2] xen/pt: fix syntax error that causes FTBFS in some configurations
+Date: Mon, 31 Oct 2022 17:35:52 -0400
+Message-Id: <5f1342a13c09af77b1a7b0aeaba5955bcea89731.1667242033.git.brchuckz@aol.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <cover.1667242033.git.brchuckz@aol.com>
+References: <cover.1667242033.git.brchuckz@aol.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="/fr8i7DH4beEBrSo"
-Content-Disposition: inline
-In-Reply-To: <Y194M/6GboCwWiZX@kroah.com>
+Content-Transfer-Encoding: 8bit
 
+When Qemu is built with --enable-xen and --disable-xen-pci-passthrough
+and the target os is linux, the build fails with:
 
---/fr8i7DH4beEBrSo
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 31 Oct 2022 16:27:13 -0400
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Sasha Levin <sashal@kernel.org>,
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	"M. Vefa Bicakci" <m.v.b@runbox.com>,
-	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH 3/3] xen/gntdev: Accommodate VMA splitting
+meson.build:3477:2: ERROR: File xen_pt_stub.c does not exist.
 
-On Mon, Oct 31, 2022 at 08:24:35AM +0100, Greg Kroah-Hartman wrote:
-> On Sun, Oct 30, 2022 at 03:12:43AM -0400, Demi Marie Obenour wrote:
-> > From: "M. Vefa Bicakci" <m.v.b@runbox.com>
-> >=20
-> > Prior to this commit, the gntdev driver code did not handle the
-> > following scenario correctly with paravirtualized (PV) Xen domains:
->=20
-> This is already in 5.10.152, do we need to add it again?
+Fixes: 582ea95f5f93 ("meson: convert hw/xen")
 
-Not as far as I can tell.  I was looking at the linux-5.10.y branch and
-didn=E2=80=99t think to check the patch queue.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+v2: Remove From: <email address> tag at top of commit message
 
---/fr8i7DH4beEBrSo
-Content-Type: application/pgp-signature; name="signature.asc"
+v3: No change to this patch since v2
 
------BEGIN PGP SIGNATURE-----
+v4: Use brchuckz@aol.com instead of brchuckz@netscape.net for the author's
+    email address to match the address used by the same author in commits
+    be9c61da and c0e86b76
 
-iQIzBAEBCgAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmNgL6IACgkQsoi1X/+c
-IsEagA//Z0ru2SlxozIFeWNgC4gI9vchMR6d6fW/3iSKqQGB3wASQpAkDs/af/3b
-0kUm20Gurees1D+b9yxy0FuRoCSZoL7Ukwypu2TFkMdYwrl1+xQnNINyWxXTx5dq
-Mf1wuz5KdzGlzYsaktqzxdgkQGaelTWEJLrBoyNgLbbhKkAF6TDuv3h2SezybRPv
-+H+mJi+6MVliKiRV55KbRh62FN2ZsU0jMzHRlCpm+XGtbXROYpF/ldyF3srXmVjp
-4qvr77r1UpOYGJlRfdIhdAihhq3/yA4h2DLvE7tWjE0ySwev+tUkbF8y5p4QbPho
-ZUrZUoRI/XX1/Bnqbgx37d0kIp1QctWkIokutQhoSIfsLZm2AX6kFVtv/9lKNzsl
-cdX5U3aiUvPrjf3W8OIil/cVf4l/mjPBJH6kmkc1pZPr53ssxNAw9goeWqmGAKce
-IYtx3eKzwPZV20euUCX+LR/+Ii+zWuMifI+iF3eWPc0qJhBp/N/9DrDXDP4dl3VC
-g/+MYviZFbYsVn3xeW3x23JfxYUool3ztkvjM71pcQgUdQytpJj/R9PoDEpcC8Ax
-4S4Arg99ghR2XrAjhsTAXgtbNXyXplZDwALfiFoEGnqZxxmuEaBVycyY775ak3vA
-qLIJqdVSUtQhlhT2AjmCFCq38nvmzkQDQAQTMNkFbxNtF0BaLKI=
-=4xEt
------END PGP SIGNATURE-----
+ hw/xen/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---/fr8i7DH4beEBrSo--
+diff --git a/hw/xen/meson.build b/hw/xen/meson.build
+index 08dc1f6857..ae0ace3046 100644
+--- a/hw/xen/meson.build
++++ b/hw/xen/meson.build
+@@ -18,7 +18,7 @@ if have_xen_pci_passthrough
+     'xen_pt_msi.c',
+   ))
+ else
+-  xen_specific_ss.add('xen_pt_stub.c')
++  xen_specific_ss.add(files('xen_pt_stub.c'))
+ endif
+ 
+ specific_ss.add_all(when: ['CONFIG_XEN', xen], if_true: xen_specific_ss)
+-- 
+2.37.2
+
 
