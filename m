@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C52BDFA3740
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 06:34:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.432666.685331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7698FA3740
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 07:24:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.432679.685354 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opON7-0006i7-Hn; Mon, 31 Oct 2022 06:34:09 +0000
+	id 1opP9M-0004d6-GW; Mon, 31 Oct 2022 07:24:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 432666.685331; Mon, 31 Oct 2022 06:34:09 +0000
+Received: by outflank-mailman (output) from mailman id 432679.685354; Mon, 31 Oct 2022 07:24:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opON7-0006i0-FF; Mon, 31 Oct 2022 06:34:09 +0000
-Received: by outflank-mailman (input) for mailman id 432666;
- Mon, 31 Oct 2022 06:34:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1opON6-0006hq-5O; Mon, 31 Oct 2022 06:34:08 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1opON6-0002wp-1U; Mon, 31 Oct 2022 06:34:08 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1opON5-0003qp-Li; Mon, 31 Oct 2022 06:34:07 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1opON5-00020U-LE; Mon, 31 Oct 2022 06:34:07 +0000
+	id 1opP9M-0004cz-Dv; Mon, 31 Oct 2022 07:24:00 +0000
+Received: by outflank-mailman (input) for mailman id 432679;
+ Mon, 31 Oct 2022 07:23:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eVFZ=3A=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
+ id 1opP9L-0004cg-DZ
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 07:23:59 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fb22addb-58ec-11ed-8fd0-01056ac49cbb;
+ Mon, 31 Oct 2022 08:23:57 +0100 (CET)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6B15C60FF8;
+ Mon, 31 Oct 2022 07:23:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79924C433C1;
+ Mon, 31 Oct 2022 07:23:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +46,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=xWGZ5eDKVcsOwwYKkWKBkQwOP01b2FmdJearP2Oy6H4=; b=5LGyB57/oEm7aD1XmMx1Egaf5W
-	M41d47nGVXwxf9XqmyisBJODEjIbZjEv3sE0faIRu4zsj8+US5reW+vusRkfaV3XvcKP1eaigyWnx
-	i9+zbOEhSnckUG/BuCGD01wXKavKdrdRC8qQ8/vlwImokQfQu0/uLe72ZlByVefR6Y+4=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-174548-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: fb22addb-58ec-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1667201035;
+	bh=/l+bnPa+QpO2aKJ1A1iRYqzj0CbaaJY5jam4oQUCoSc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=uRkFDgMKqIQ4lED1kKnYIKCcFBuVk1Zi0YPILaM1iY5qbtHyYN3ri3myorYz7IcQu
+	 wvMWiZgVCgHAxcJVbOmuFF9ZVhve3VJ3O04Luq6l+RPJsNhrG1WDS5CUO5xHA4svuj
+	 G5WWNLvDlTguUdrqyOBSaCZSE9cZyQu5ymYMZNgY=
+Date: Mon, 31 Oct 2022 08:24:51 +0100
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Demi Marie Obenour <demi@invisiblethingslab.com>
+Cc: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Sasha Levin <sashal@kernel.org>,
+	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH 0/3] Stable backports of gntdev fixes
+Message-ID: <Y194Q9lH3ye4jJOU@kroah.com>
+References: <20221030071243.1580-1-demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 174548: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=52199bf5326a8355d28b2d395db483f7c77d5a4d
-X-Osstest-Versions-That:
-    ovmf=d98efb468211ab508710eac91761238e1f5c1d51
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 31 Oct 2022 06:34:07 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221030071243.1580-1-demi@invisiblethingslab.com>
 
-flight 174548 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/174548/
+On Sun, Oct 30, 2022 at 03:12:40AM -0400, Demi Marie Obenour wrote:
+> I backported the recent gntdev patches to stable branches before 5.15.
+> The first patch is a prerequisite for the other backports.  The second
+> patch should apply cleanly to all stable branches, but the third only
+> applies to 5.10 as it requires mmu_interval_notifier_insert_locked().
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 52199bf5326a8355d28b2d395db483f7c77d5a4d
-baseline version:
- ovmf                 d98efb468211ab508710eac91761238e1f5c1d51
+Patches 1 and 2 now queued up, see my comments on 3.
 
-Last test of basis   174528  2022-10-28 09:11:52 Z    2 days
-Testing same since   174548  2022-10-31 03:12:04 Z    0 days    1 attempts
+thanks,
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Cheripally Gopi <gopic@ami.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   d98efb4682..52199bf532  52199bf5326a8355d28b2d395db483f7c77d5a4d -> xen-tested-master
+greg k-h
 
