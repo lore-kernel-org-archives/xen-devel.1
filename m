@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACEB8ECAAA1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41B6FA3746
 	for <xen-devel@archiver.kernel.org>; Mon, 31 Oct 2022 21:36:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.433213.686099 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.433215.686121 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opcS5-0006AU-Ow; Mon, 31 Oct 2022 21:36:13 +0000
+	id 1opcSB-0006gB-9M; Mon, 31 Oct 2022 21:36:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 433213.686099; Mon, 31 Oct 2022 21:36:13 +0000
+Received: by outflank-mailman (output) from mailman id 433215.686121; Mon, 31 Oct 2022 21:36:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opcS5-0006AN-M3; Mon, 31 Oct 2022 21:36:13 +0000
-Received: by outflank-mailman (input) for mailman id 433213;
- Mon, 31 Oct 2022 21:36:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1opcSB-0006g2-5G; Mon, 31 Oct 2022 21:36:19 +0000
+Received: by outflank-mailman (input) for mailman id 433215;
+ Mon, 31 Oct 2022 21:36:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2TDv=3A=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1opcS3-0006AC-Kx
- for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 21:36:12 +0000
-Received: from sonic311-24.consmr.mail.gq1.yahoo.com
- (sonic311-24.consmr.mail.gq1.yahoo.com [98.137.65.205])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 07312e52-5964-11ed-91b5-6bf2151ebd3b;
- Mon, 31 Oct 2022 22:36:08 +0100 (CET)
+ id 1opcS8-0006bP-WF
+ for xen-devel@lists.xenproject.org; Mon, 31 Oct 2022 21:36:17 +0000
+Received: from sonic306-21.consmr.mail.gq1.yahoo.com
+ (sonic306-21.consmr.mail.gq1.yahoo.com [98.137.68.84])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0a7917e4-5964-11ed-8fd0-01056ac49cbb;
+ Mon, 31 Oct 2022 22:36:14 +0100 (CET)
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.gq1.yahoo.com with HTTP; Mon, 31 Oct 2022 21:36:06 +0000
+ sonic306.consmr.mail.gq1.yahoo.com with HTTP; Mon, 31 Oct 2022 21:36:11 +0000
 Received: by hermes--production-ne1-c47ffd5f5-2l5gs (Yahoo Inc. Hermes SMTP
  Server) with ESMTPA ID 1d450870d12d3f727fe97841ca3633d5; 
- Mon, 31 Oct 2022 21:36:03 +0000 (UTC)
+ Mon, 31 Oct 2022 21:36:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,40 +44,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 07312e52-5964-11ed-91b5-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1667252166; bh=uxOwrD0U0H546e379z6pIj7ishCHeKXz2cYS+K7ZCSA=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=t4PsUBVbL+tFKr+SCIjGYKBa8LZKNdOhXiAlD8Ly2GVIw9xKKr7GAb6WLl8nkGWlL9rdNykimQXvuey826Pa902P/J+FkhDiPMR8A7yagH3KB2HywKVEc2YKSBHVehmvz3F7xcGkQnDXmp/Jc+0/izPD+GctV5hyPFJsMXGC5SV/MX6leP/eGcEhfahXzR5uoM9ojxit7mD9uSuh99+SYGUhuuS+dxHhgrO6pGQfoCH9bFoKy4NoFksxRYVc20PrSsWwXydXXXi4kdPe6/azfT8a5TuQDdoXQG9YnqIpFSdPefMnP09w8JstPUX8iMASOrXJKDnk2qaSz9jPJXUcmw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1667252166; bh=LRLXbF/s7/ITJbULB0qtJPEFf5qS9irXKOaTvElYx3I=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=QQqxT1+t3wWPEZ2YuPMqeG2lGig4FKsOxCc7iSM9SioH2/08Bri9fGMg0QMvnpo9jYMRhD5u7RCGJrbUq1FnZrVyHS6JsIMf/UbF1G2mtDBxOfkMU40FdBg5O3dZaqq4NZ6HAB5TTM/k0Zu7PxEyeyUi851bTcfkt178HNSU5CnltRmT10j+A8+On8/su50CwENmzIhYlyhW20bySUAX3bvxeKuZRTSqzeC5OUMZPMXIpfIn8JDBmTu8wer/FAsUcdKFvQe26ikGjQj4KXPfxG7W32lxgo2rLmsMrunrJctLBjV1AKXqL5LRX6KLrXQnbUWVMgFL9Prq5DNHk6lZ3g==
-X-YMail-OSG: TrYy9g4VM1lWmXA0S3_Txh3IolAWizPT4cc1wBKX7DrboJBnewHToGBPbqJPiPo
- LXMUjBKN5dm.y1mMxLx9T2IGrHqRf3SqMpk9y6rvyTQFmJA8B41Z_DFJYaZW1rHhXKS9.L8pvtMS
- Kkoiv4BozHwDZZQmccnwgSaxoNyTGE0rqPFJzHbi2xThVJjb4byFJuafxtCqPV5OqxtwL9fvnQrL
- sTJ8zX2ymlG7.XouBq3yacHDhNiy.tFsMxjVvNzyJf4JAQCWGbKID4qrYHDMay7NFu5h1.4Cb4ga
- 0psVCajKZyyf44HNZK0kC2ade4VSY4_tugvos_pxPkiOW3vaZyswY0Uq8BnEMozX3_phlA3yGJCv
- 8yPybUXO5m4UHWmAO7PA8cOIFZ9XMzs2QbGrL.qm9H759_qFoajVGY6WiJ0.s.ydWDCg.HORmg27
- mBV7ZMeP0Q4750mJ9wLnnDcsSSEu.rwUOYgjjUzdkBeYyfTk6Bbe0OHwTglbUrjio3ETGIFJiXeD
- xTHm022rg7ZwKUnFeej1WZm18egsamcIB5_WVrvgrwfGURLCy8kAV7a3H3W5KH09Rkw.PVtRVovU
- GqPioWEuCEaBIWRc1aQgn_ZEaq15.dcGdwHa.qv298TQh6_MjHWIkQpp7XU6C0T.sm.aHh5Lyqdl
- C20.D54OoO0QSONrV8iXWza8n2wRys04kfknXiTqvpCp0.eYShKOMFoziAfWnjGsXe86cvlfyXUc
- odxYs6Xyy59JPo.G0z4SQYh6freIDjoVHxOaeMWYMN90eBYviYHozk_k29lv.KAptbL_LUFpH0L4
- bAIwDI9SR5CEaHS8jwKgCazVYg4ikOwsT4nu_h5gPJpmqeCfc6cpI.GVjZyzhWpXcdbZEXrPlxZN
- _qiQEh4xC21.VX7HhTvZZplbAF1eYT1j5j_NgW7vFg8RM5p7Q2oJud6hZl2_6v28OaIJhsDOv8sL
- Q446JpUE4klxwh9SxmGKEML_XeI5nZq2An3EuqYcGEIeZA8pNrheJxkcRWAF.mNSMDW7U2MdEQaS
- j.ZV1VLD9rIdfpM0xLiR8kIzYbYuetma6LuMzjkJScWwCcycCZygchycab4qsyNJ4mffmV9mmu7F
- qm8ooHzGqKFwpJU465pOc8u1gq40A1.BULOaYPMl9GRGRzr6uDQemUv8ohh5BGNi1DWj_l3zT8jB
- toKO8L__YcHil8ozB6vs4vRJEPgZTEf9qfOhmyxhqPniaKVzRRiTk5C4C0FhUmsoYxTQLJdVTLqV
- 5cNzrNcntCMZKWFf_kiyqFzfxTgZ0yPgKM59L6alBoJUYEMlVwVQG5YWX7WekrTJyQ9uYWgWPpR3
- jLuE6x1AR8eCh_mN8uScWvTOIPd3I0FMTve8palMJNu0CMfkE.39yXp3QaFgeWlFSTYVoCaywAlv
- Wse2_IpIorDjOaqntZKad2_rD5aHknHNk0va96TLeisApzPCr4ncGMfZ_d_M68WlH.3lWzMkt1o_
- hNK1G40PYdvZdQh3XTOGVeQ1GcZtdtgvaHnkhiIrP8alfI5Wwa6RdxJEpeqbKCWJDtIvHwMaZE3l
- MdBzCfeZSLhwIfpHt.X2oYMNJU5SKPUh3xEqtn6T_IDLSkgu090iMUttM7tOnM_XRCAuctKqBEAr
- CnZauTtEeAh4yaqsLbfhy7058VL.L0fxbHp2tRNH4ROxc49.3orrEa1VPxppwtxqvm5Kdj1wJDkO
- SC3tKXYb25Kd8Netz5e7XEkqvgmArlgywyY1GH7ssOqZy.4cnyVstaI_4WEqR4ORvLDtKfzGO7Cr
- _b5ivGFcn8Bh9UI0mxDU33YlraZmWDSumETmG012Bu2iiILcOilXBAANYjKehG9h2GZSIYVNra21
- ovQelIX6fsXibhAXFvhulszrRAEc4RHKHFsipYcAa0VlwcUhAMQF9HecxOboBmJ.WyW34YqIhC.Q
- uEghrocvcRGcqCVNHbQRyEPZDXq7TksBpUZak_xTNYQLDxch.4gT3fUCfSWr3CzodhAWpoEOsGpJ
- q2qXPOFfRpy_t8DgB5mj35appz66z1SOgk4j7KO8M0PJZrfizhBnDUG9RtwOJnp.wkrkVVgTcA8B
- qwcwgYvq3mGi5BTl.bBZP0F.nmyaZz7LUGdvvU9me9lercry3L2sMLzYGIeYzWwLWDMsOBPTfCfk
- 3Tr3f6FIEJHFKkfFdl9cE_.CeKJUogSbzcanBSVPIru89S6BkQ8OP4UcUMuqfPeidrs1uXpitkQg
- ftLSUzf0-
+X-Inumbo-ID: 0a7917e4-5964-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1667252171; bh=lUp3HSP1TAIWIvem3keOMtwYZCq25W+DMpaMWizwQ7o=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=NoGQygL4UHhKlwiW+SVvwQKD4IhNC1iniRVPGMuosQiVwzedgpi3nSTsrapsFpjzz71xayZaZDhqP+t72BuS+XSfIDkAjsfVhb2/rrI03pMJHY7lUMIzHdGl/UHHV9ZIvf3/mCwAPLdXbk8IrNvCFb9F32vafI4odYpQY1wCM/E2Rq2kt9alo8oOe/8b4CM94BmiUtQ0aJ3wUf7WIjdknl6NBBpWV/is4SK6xAEic5A22vND6G3hCa7igkJ29e2QdNLaaPc1RHoUFtmbdtQ+0TS6MwxGpN6pqX0Y4/uTNUO7Zu1V/GWw7QWsJDfUk+oQDND0H0Ygw6ZqgqMClbZCIQ==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1667252171; bh=lhYpS8kXk/l9ipGQjwGSK6jo6Jo0+l9WeUuGiT4eAyV=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=HQxPjhR0+gRN0vZ5kYsnd3tQNqcorKUJjnygvO+DLLxVXBM5C5oAY8zUqLTtCsC9fKGe6emW5GKa2YVHOm39rXFTeAnJpB4uyqd7yRq2c3qKJTHSEGJ/3BoeiATuGcdpNVmVu8zJToIk+dG5kLIEVbPXxZIsXl1DnqTMK46mCHSyV/1nHv1IaWKkZpaw6hmOM+l7kk6SiGslIMKbS923skpWPUC4YNqdk1yDwiL07iz75x9YCrZFfLgo02RSXK+EeRyWOgsZA1ICPF2la5GBGgePy4lbzS9b7J2mybZiBCVMtWwvElVhyCGk2/u+QPhyo821wifcF3k0hzctSfHmIw==
+X-YMail-OSG: RxpTOHUVM1l6UrAaCLg6FTbh7xX3D2u1rQyx6sDqhc1HssSb0N373gH_9z5VOjp
+ vn3avlq_olm8k.kvC3QPBzjn4fgY.MipCt65w8hLRf_d5co6jUshXAOd8kvcZqWKdLcnI_xopgdm
+ Gt9XlnVIqWdeqNRYbFwWXAnCq2cSreKxqSyNsV4X81Y4QeP8yezgr80.YeL9jmeUvYKlvkmqmEEI
+ CgchAN2cbEE5ydOvartSXyZKrNToIWMHay42ASDyeEowMLie1WvHWMypajVotqj6W2TNfLTffnwf
+ I992uHbq5zpzEmQmpsHh4baHXe6Wr2gzmrqJAQymBlVn_uBVwnVxRs2ST83mhSoLRILgV11eZ797
+ hzZCpmsH3br_tD66DEATlD_qIrb59K1Io6Ixko2xQJohIpUBVQFXnJ5.S.1ocDjs3rgEQmGGE9TL
+ fHhUR79Lszow.SGGXsD6Co7ulHwSdGm06oLR5GppsPSYy2DdXNXm4JO__p0slmgGD.9lwC5vzGuW
+ vvecQmbyOlYxho51VBoJSakq9gwoW.3.Hs025KBsY.jGRJkDGl_u1oMcSZ7jO0nn83yesIX.pWzJ
+ GSN5mxXMVoO59ls29gzMAxKIniEwBVNGTtJsMm08hBot5TSxcdrxq7vsVn7._0Ib7X.9gddNkVmU
+ ms4TeGUHubaVC0ZwGIHwQTj4vVdrUHscn52ZlghNtjOuicufGkC42kwovRLE9OVIjmnv.5D7X3wn
+ sZHrrO_vzm5hWSijXnr7Yi0uG1QlSzoB6dDv3KpmBn2qBeOmrMww2oVbavtZ5aF8VMNyt33mXdg8
+ nrT_I2P7SZzIzBe_whX3IJsvF2Mbd74v5TNokOu6TCokHwsaf5bYfAdzw_3goMQOjeCCx7.oCmcM
+ y6b8gJ20eZugCqjZJznRyboXbTEezaBNvR4E55aTxC17yhdzkpZn4v1t53BsHedQkcYJ7.GWbHZi
+ 9.g6JxEIAUDpePmbj.971XADLnWwEDEH7LqtvGvjS31jq7kyfcF00MlaaFl2Vbz.6i4Qiw2pv42a
+ s6pv5A1jHAxjN1M0Kxj__t1QfZfUfOUXrRirW2XJTjCkEtclMBWy_hJu1jyhk.1ZphaiTztwCuHe
+ T6ivKZ50Lmm63SdA71nFehhsue1iultH0NvQa3mUue8BhtQIqcnICozlulkjjvjVzmPqDXq8lgSG
+ Kb1kfPv6R3d6CNqU.IHYjzb7nkSSgxB3WUBzAkszozovlo_bsPIwq3w15KS7VzAd71vhVnUG56eZ
+ pdKwlpo0bm06rsMkUI0aytaxMJKaPWEvPJAqn7v1I6eGRQYAj8EJOrqgYNM07hfaYPC.oJ78Wc2D
+ 6jCoMYmJ6L.Fis9dLoZgliMtDjMbj9DIETXIVOPIv8Rtmwadrfu0SsmLwFEBmU3V4yLCTGByJeX9
+ ETSpwlcCZIrAUcnTUQ.nStTzT6k9RplToRna_LhPV0YRN6rGdCEjkweprdzv0D1rb53PYP7bZns0
+ Qkp0MDQQms2n4nciTP1agLT9D0kBu77_biIXJLoVSCwy4gAGQtLBxLUg7Y02Tbl91rsHyl02PUf1
+ iWe1pJKdTdLDuhjFpUFxudKH8nN8lQ8BKbpLQe8adQYa03MUAuFxSvGZb7GgIEEPeHDiimsZrcFw
+ aiHH.1pPOv1bta2UkxPoiAqM3.Gw4NiIIaWs_1NzYieqQkQAqFiX.cFlDSDsfWuH_WFpL.NPTLYr
+ kaw5UUHDLMGBzihMU0_zR7J3ODMeZwg9FeLpZUkIOgC03TsnKe2mdZVGKpXjndPkM2pofjt_Npps
+ T0aWDMT8E77oNXT7gFYgEpSyfUPuAjBEXCUJ8GKzlxchWPJP2iTrz3n55v5rn_Dwcy8gq7MH49f0
+ Sh3ewmXSasF_wzhVSvnkz.weJDK2NK9uUf3LhJYUOAyFlk_C2VtFjQWQQxs_Mnk.YszQUo_4nQGD
+ 8vZaPqJSNJ55F0E1S.8AESKwjbJ8L4jeEGnUT23AoH40cyu3pCDoLrpt4qfqdO8raOclim_H8Kbb
+ O6hpUOONhgeDjtPq3I03zw2Pj.hIn6ZyYrLGxJPq4Kh8MZ28nlIgORhJu2Sy0y1J.dj5b.0zdk1o
+ icjEGfT1ZENqvv7sVadH5dauVuedHTTSWB_jYkXkJghehEWKK8V.9Ri0Ir4PEpRZ8CByoq9swjB8
+ HYmDD_HrTVVYw6UViuKAQ.k4a4RSbUATwFns8JsjNwkiyGa4vD0noRzKylKTRB_IBfiQWILC34jz
+ C.9yy01UHU29Xwg--
 X-Sonic-MF: <brchuckz@aim.com>
 From: Chuck Zmudzinski <brchuckz@aol.com>
 To: qemu-devel@nongnu.org
@@ -90,56 +90,215 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Richard Henderson <richard.henderson@linaro.org>,
 	Eduardo Habkost <eduardo@habkost.net>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v4 0/2] xen/pt: fix FTBFS and reserve PCI slot 2 for the Intel IGD
-Date: Mon, 31 Oct 2022 17:35:51 -0400
-Message-Id: <cover.1667242033.git.brchuckz@aol.com>
+Subject: [PATCH v4 2/2] xen/pt: reserve PCI slot 2 for Intel igd-passthru
+Date: Mon, 31 Oct 2022 17:35:53 -0400
+Message-Id: <f51e326fd82a31535730644a73e8bb41c496e4fc.1667242033.git.brchuckz@aol.com>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <cover.1667242033.git.brchuckz@aol.com>
+References: <cover.1667242033.git.brchuckz@aol.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <cover.1667242033.git.brchuckz.ref@aol.com>
 
-This is a series of two patches:
+Intel specifies that the Intel IGD must occupy slot 2 on the PCI bus,
+as noted in docs/igd-assign.txt in the Qemu source code.
 
-The first fixes FTBFS when --enable-xen and --disable-xen-pci-passthrough
-configure options are set with when building for the linux target os.
+Currently, when the xl toolstack is used to configure a Xen HVM guest with
+Intel IGD passthrough to the guest with the Qemu upstream device model,
+a Qemu emulated PCI device will occupy slot 2 and the Intel IGD will occupy
+a different slot. This problem often prevents the guest from booting.
 
-The second fixes a regression that was introduced many years ago with the
-upgrade from the Qemu traditional device model that is still available
-from xenbits.xen.org and based on very old Qemu version 0.10.2.
+The only available workaround is not good: Configure Xen HVM guests to use
+the old and no longer maintained Qemu traditional device model available
+from xenbits.xen.org which does reserve slot 2 for the Intel IGD.
 
-The regression is that the Qemu traditional device model reserves slot 2
-for the Intel IGD on the PCI bus when the Intel IGD is passed through
-to a Xen HVM domain, but the current Qemu upsream device model does not
-and in fact results in a different slot assigned to the Intel IGD.
+To implement this feature in the Qemu upstream device model for Xen HVM
+guests, introduce the following new class, functions, types, and macros:
 
-This behavior does not conform to the requirement that the Intel IGD must
-be assigned to slot 2, as noted in docs/igd-assign.txt in the Qemu source
-code: "IGD must be given address 02.0 on the PCI root bus in the VM."
+* XEN_PT_DEVICE_CLASS declaration, based on the existing TYPE_XEN_PT_DEVICE
+* XEN_PT_DEVICE_GET_CLASS macro helper function for XEN_PT_DEVICE_CLASS
+* typedef XenPTQdevRealize function pointer
+* XEN_PCI_IGD_SLOT_MASK, the value of slot_reserved_mask to reserve slot 2
+* xen_igd_reserve_slot and xen_igd_clear_slot functions
 
-I have used the second patch of the series for the past two years with
-no problems. Without the patch, the reliability of PCI passthrough of the
-Intel IGD to a Xen HVM guest is very poor, and in some cases the guest
-fails to start without the patch.
+The new xen_igd_reserve_slot function uses the existing slot_reserved_mask
+member of PCIBus to reserve PCI slot 2 for Xen HVM guests configured using
+the xl toolstack with the gfx_passthru option enabled, which sets the
+igd-passthru=on option to Qemu for the Xen HVM machine type.
 
-v2: Remove From: <email address> tag at top of message
+The new xen_igd_reserve_slot function also needs to be implemented in
+hw/xen/xen_pt_stub.c to prevent FTBFS during the link stage for the case
+when Qemu is configured with --enable-xen and --disable-xen-pci-passthrough,
+in which case it does nothing.
 
-v3: No change to this cover letter since v2
+The new xen_igd_clear_slot function overrides qdev->realize of the parent
+PCI device class to enable the Intel IGD to occupy slot 2 on the PCI bus
+since slot 2 was reserved by xen_igd_reserve_slot when the PCI bus was
+created in hw/i386/pc_piix.c for the case when igd-passthru=on.
+
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+Notes that might be helpful to reviewers of patched code in hw/xen:
+
+The new functions and types are based on recommendations from Qemu docs:
+https://qemu.readthedocs.io/en/latest/devel/qom.html
+
+Notes that might be helpful to reviewers of patched code in hw/i386:
+
+The small patch to hw/i386/pc_piix.c is protected by CONFIG_XEN so it does
+not affect builds that do not have CONFIG_XEN defined.
+
+xen_igd_gfx_pt_enabled() in the patched hw/i386/pc_piix.c file is an
+existing function that is only true when Qemu is built with
+xen-pci-passthrough enabled and the administrator has configured the Xen
+HVM guest with Qemu's igd-passthru=on option.
+
+v2: Remove From: <email address> tag at top of commit message
+
+v3: Changed the test for the Intel IGD in xen_igd_clear_slot:
+
+    if (is_igd_vga_passthrough(&s->real_device) &&
+        (s->real_device.vendor_id == PCI_VENDOR_ID_INTEL)) {
+
+    is changed to
+
+    if (xen_igd_gfx_pt_enabled() && (s->hostaddr.slot == 2)
+        && (s->hostaddr.function == 0)) {
+
+    I hoped that I could use the test in v2, since it matches the
+    other tests for the Intel IGD in Qemu and Xen, but those tests
+    do not work because the necessary data structures are not set with
+    their values yet. So instead use the test that the administrator
+    has enabled gfx_passthru and the device address on the host is
+    02.0. This test does detect the Intel IGD correctly.
 
 v4: Use brchuckz@aol.com instead of brchuckz@netscape.net for the author's
     email address to match the address used by the same author in commits
-    be9c61da and c0e86b76 
-
-Chuck Zmudzinski (2):
-  xen/pt: fix syntax error that causes FTBFS in some configurations
-  xen/pt: reserve PCI slot 2 for Intel igd-passthru
+    be9c61da and c0e86b76
+    
+    Change variable for XEN_PT_DEVICE_CLASS: xptc changed to xpdc
 
  hw/i386/pc_piix.c    |  3 +++
- hw/xen/meson.build   |  2 +-
  hw/xen/xen_pt.c      | 25 +++++++++++++++++++++++++
  hw/xen/xen_pt.h      | 16 ++++++++++++++++
  hw/xen/xen_pt_stub.c |  4 ++++
- 5 files changed, 49 insertions(+), 1 deletion(-)
+ 4 files changed, 48 insertions(+)
 
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 0b1a79c0fa..a0f04ad62e 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -402,6 +402,9 @@ static void pc_xen_hvm_init(MachineState *machine)
+     }
+ 
+     pc_xen_hvm_init_pci(machine);
++    if (xen_igd_gfx_pt_enabled()) {
++        xen_igd_reserve_slot(pcms->bus);
++    }
+     pci_create_simple(pcms->bus, -1, "xen-platform");
+ }
+ #endif
+diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
+index 0ec7e52183..50a63fe12e 100644
+--- a/hw/xen/xen_pt.c
++++ b/hw/xen/xen_pt.c
+@@ -950,11 +950,35 @@ static void xen_pci_passthrough_instance_init(Object *obj)
+     PCI_DEVICE(obj)->cap_present |= QEMU_PCI_CAP_EXPRESS;
+ }
+ 
++void xen_igd_reserve_slot(PCIBus *pci_bus)
++{
++    XEN_PT_LOG(0, "Reserving PCI slot 2 for IGD\n");
++    pci_bus->slot_reserved_mask |= XEN_PCI_IGD_SLOT_MASK;
++}
++
++static void xen_igd_clear_slot(DeviceState *qdev, Error **errp)
++{
++    PCIDevice *pci_dev = (PCIDevice *)qdev;
++    XenPCIPassthroughState *s = XEN_PT_DEVICE(pci_dev);
++    XenPTDeviceClass *xpdc = XEN_PT_DEVICE_GET_CLASS(s);
++    PCIBus *pci_bus = pci_get_bus(pci_dev);
++
++    if (xen_igd_gfx_pt_enabled() && (s->hostaddr.slot == 2)
++        && (s->hostaddr.function == 0)) {
++        pci_bus->slot_reserved_mask &= ~XEN_PCI_IGD_SLOT_MASK;
++        XEN_PT_LOG(pci_dev, "Intel IGD found, using slot 2\n");
++    }
++    xpdc->pci_qdev_realize(qdev, errp);
++}
++
+ static void xen_pci_passthrough_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+     PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
+ 
++    XenPTDeviceClass *xpdc = XEN_PT_DEVICE_CLASS(klass);
++    xpdc->pci_qdev_realize = dc->realize;
++    dc->realize = xen_igd_clear_slot;
+     k->realize = xen_pt_realize;
+     k->exit = xen_pt_unregister_device;
+     k->config_read = xen_pt_pci_read_config;
+@@ -977,6 +1001,7 @@ static const TypeInfo xen_pci_passthrough_info = {
+     .instance_size = sizeof(XenPCIPassthroughState),
+     .instance_finalize = xen_pci_passthrough_finalize,
+     .class_init = xen_pci_passthrough_class_init,
++    .class_size = sizeof(XenPTDeviceClass),
+     .instance_init = xen_pci_passthrough_instance_init,
+     .interfaces = (InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+diff --git a/hw/xen/xen_pt.h b/hw/xen/xen_pt.h
+index e7c4316a7d..40b31b5263 100644
+--- a/hw/xen/xen_pt.h
++++ b/hw/xen/xen_pt.h
+@@ -3,6 +3,7 @@
+ 
+ #include "hw/xen/xen_common.h"
+ #include "hw/pci/pci.h"
++#include "hw/pci/pci_bus.h"
+ #include "xen-host-pci-device.h"
+ #include "qom/object.h"
+ 
+@@ -41,7 +42,20 @@ typedef struct XenPTReg XenPTReg;
+ #define TYPE_XEN_PT_DEVICE "xen-pci-passthrough"
+ OBJECT_DECLARE_SIMPLE_TYPE(XenPCIPassthroughState, XEN_PT_DEVICE)
+ 
++#define XEN_PT_DEVICE_CLASS(klass) \
++    OBJECT_CLASS_CHECK(XenPTDeviceClass, klass, TYPE_XEN_PT_DEVICE)
++#define XEN_PT_DEVICE_GET_CLASS(obj) \
++    OBJECT_GET_CLASS(XenPTDeviceClass, obj, TYPE_XEN_PT_DEVICE)
++
++typedef void (*XenPTQdevRealize)(DeviceState *qdev, Error **errp);
++
++typedef struct XenPTDeviceClass {
++    PCIDeviceClass parent_class;
++    XenPTQdevRealize pci_qdev_realize;
++} XenPTDeviceClass;
++
+ uint32_t igd_read_opregion(XenPCIPassthroughState *s);
++void xen_igd_reserve_slot(PCIBus *pci_bus);
+ void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val);
+ void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+                                            XenHostPCIDevice *dev);
+@@ -76,6 +90,8 @@ typedef int (*xen_pt_conf_byte_read)
+ 
+ #define XEN_PCI_INTEL_OPREGION 0xfc
+ 
++#define XEN_PCI_IGD_SLOT_MASK 0x4UL /* Intel IGD slot_reserved_mask */
++
+ typedef enum {
+     XEN_PT_GRP_TYPE_HARDWIRED = 0,  /* 0 Hardwired reg group */
+     XEN_PT_GRP_TYPE_EMU,            /* emul reg group */
+diff --git a/hw/xen/xen_pt_stub.c b/hw/xen/xen_pt_stub.c
+index 2d8cac8d54..5c108446a8 100644
+--- a/hw/xen/xen_pt_stub.c
++++ b/hw/xen/xen_pt_stub.c
+@@ -20,3 +20,7 @@ void xen_igd_gfx_pt_set(bool value, Error **errp)
+         error_setg(errp, "Xen PCI passthrough support not built in");
+     }
+ }
++
++void xen_igd_reserve_slot(PCIBus *pci_bus)
++{
++}
 -- 
 2.37.2
 
