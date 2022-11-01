@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 362B9C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435071.688118 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AED9C433FE
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435076.688135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optuy-0001Rh-9n; Tue, 01 Nov 2022 16:15:12 +0000
+	id 1optv0-0001qA-6y; Tue, 01 Nov 2022 16:15:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435071.688118; Tue, 01 Nov 2022 16:15:12 +0000
+Received: by outflank-mailman (output) from mailman id 435076.688135; Tue, 01 Nov 2022 16:15:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optuy-0001RW-5v; Tue, 01 Nov 2022 16:15:12 +0000
-Received: by outflank-mailman (input) for mailman id 435071;
- Tue, 01 Nov 2022 16:15:11 +0000
+	id 1optuz-0001pC-VV; Tue, 01 Nov 2022 16:15:13 +0000
+Received: by outflank-mailman (input) for mailman id 435076;
+ Tue, 01 Nov 2022 16:15:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optlS-0003qE-Ba
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:05:22 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1optuy-0000i5-AU
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:15:12 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc7b1ad5-59fe-11ed-8fd0-01056ac49cbb;
- Tue, 01 Nov 2022 17:05:21 +0100 (CET)
+ id 5c3528f9-5a00-11ed-8fd0-01056ac49cbb;
+ Tue, 01 Nov 2022 17:15:11 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 05F921F8CA;
- Tue,  1 Nov 2022 16:05:21 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 202503382E;
+ Tue,  1 Nov 2022 16:15:11 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B58871346F;
- Tue,  1 Nov 2022 16:05:20 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E69B71346F;
+ Tue,  1 Nov 2022 16:15:10 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 73wIK8BDYWOYcgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:05:20 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id QVjxNg5GYWMedwAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:15:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,323 +53,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc7b1ad5-59fe-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: 5c3528f9-5a00-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667318721; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1667319311; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2q+bzKJwqxVNaXxCMgH7XK7Vg2XGJN/yW7eJYqIUWtA=;
-	b=kY9fUxff56SHHUTCsUXg+fjZsQukQrKVZpMqHwqzdq8HqER9E7HL3At5QCPyST88IXUfjo
-	O33Af+MmYBz/w+Tkmqq25S/0X7Fb7NtA7tMs9TFuQ0dRBY9RsOjDd6sS8VsCrHaiP+FWsH
-	/PMee7RLt/5ql+Kfq1I7Ydh19dVxTl4=
+	bh=pIb0/mYGQ+HwHEptI7zIsqWzXRU1CQBKgofF97fLAvs=;
+	b=Mux+Oyeny1sk2ahF5isrQx7yM9meirOsLaQ2iXfYQm8Hn1AuqztnbpMJ8yiumFWQ9a70lW
+	N1tKEZ/nKhEY9+oNc+JLe+Wm7x2xRa9yH4Zw8AGCvj7jQFA2ZRkGCY79FYlxIMS2upluMZ
+	DsqP0sR1byMe9zu2wfI69MyLzeDBJwI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 10/12] tools/xenstore: remember global and per domain max accounting values
-Date: Tue,  1 Nov 2022 17:04:20 +0100
-Message-Id: <20221101160422.7212-11-jgross@suse.com>
+Subject: [PATCH 02/10] tools/xenstore: do some cleanup of hashtable.c
+Date: Tue,  1 Nov 2022 17:14:49 +0100
+Message-Id: <20221101161457.8470-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221101160422.7212-1-jgross@suse.com>
-References: <20221101160422.7212-1-jgross@suse.com>
+In-Reply-To: <20221101161457.8470-1-jgross@suse.com>
+References: <20221101161457.8470-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add saving the maximum values of the different accounting data seen
-per domain and (for unprivileged domains) globally, and print those
-values via the xenstore-control quota command. Add a sub-command for
-resetting the global maximum values seen.
-
-This should help for a decision how to set the related quotas.
+Do the following cleanups:
+- hashtable_count() isn't used at all, so remove it
+- replace prime_table_length and max_load_factor with macros
+- make hash() static
+- add a loadlimit() helper function
+- remove the /***/ lines between functions
+- do some style corrections
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- docs/misc/xenstore.txt             |   5 +-
- tools/xenstore/xenstored_control.c |  22 ++++++-
- tools/xenstore/xenstored_domain.c  | 102 +++++++++++++++++++++++------
- tools/xenstore/xenstored_domain.h  |   2 +
- 4 files changed, 109 insertions(+), 22 deletions(-)
+ tools/xenstore/hashtable.c | 74 ++++++++++++++------------------------
+ tools/xenstore/hashtable.h | 10 ------
+ 2 files changed, 27 insertions(+), 57 deletions(-)
 
-diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
-index 9db0385120..da47d7bb16 100644
---- a/docs/misc/xenstore.txt
-+++ b/docs/misc/xenstore.txt
-@@ -415,7 +415,7 @@ CONTROL			<command>|[<parameters>|]
- 	print|<string>
- 		print <string> to syslog (xenstore runs as daemon) or
- 		to console (xenstore runs as stubdom)
--	quota|[set <name> <val>|<domid>]
-+	quota|[set <name> <val>|<domid>|max [-r]]
- 		without parameters: print the current quota settings
- 		with "set <name> <val>": set the quota <name> to new value
- 		<val> (The admin should make sure all the domain usage is
-@@ -424,6 +424,9 @@ CONTROL			<command>|[<parameters>|]
- 		violating the new quota setting isn't increased further)
- 		with "<domid>": print quota related accounting data for
- 		the domain <domid>
-+		with "max [-r]": show global per-domain maximum values of all
-+		unprivileged domains, optionally reset the values by adding
-+		"-r"
- 	quota-soft|[set <name> <val>]
- 		like the "quota" command, but for soft-quota.
- 	trace|[+|-<switch>]
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 0a985a1faa..23098917ec 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -306,6 +306,22 @@ static int quota_get(const void *ctx, struct connection *conn,
- 	return domain_get_quota(ctx, conn, atoi(vec[0]));
- }
- 
-+static int quota_max(const void *ctx, struct connection *conn,
-+		     char **vec, int num)
-+{
-+	if (num > 1)
-+		return EINVAL;
-+
-+	if (num == 1) {
-+		if (!strcmp(vec[0], "-r"))
-+			domain_reset_global_acc();
-+		else
-+			return EINVAL;
-+	}
-+
-+	return domain_max_global_acc(ctx, conn);
-+}
-+
- static int do_control_quota(const void *ctx, struct connection *conn,
- 			    char **vec, int num)
- {
-@@ -315,6 +331,9 @@ static int do_control_quota(const void *ctx, struct connection *conn,
- 	if (!strcmp(vec[0], "set"))
- 		return quota_set(ctx, conn, vec + 1, num - 1, hard_quotas);
- 
-+	if (!strcmp(vec[0], "max"))
-+		return quota_max(ctx, conn, vec + 1, num - 1);
-+
- 	return quota_get(ctx, conn, vec, num);
- }
- 
-@@ -978,7 +997,8 @@ static struct cmd_s cmds[] = {
- 	{ "memreport", do_control_memreport, "[<file>]" },
- #endif
- 	{ "print", do_control_print, "<string>" },
--	{ "quota", do_control_quota, "[set <name> <val>|<domid>]" },
-+	{ "quota", do_control_quota,
-+		"[set <name> <val>|<domid>|max [-r]]" },
- 	{ "quota-soft", do_control_quota_s, "[set <name> <val>]" },
- 	{ "help", do_control_help, "" },
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 1c8656e016..d312004d70 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -40,22 +40,25 @@ static const unsigned int primes[] = {
+ 50331653, 100663319, 201326611, 402653189,
+ 805306457, 1610612741
  };
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 274ea72741..6464362299 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -43,6 +43,8 @@ static evtchn_port_t virq_port;
+-const unsigned int prime_table_length = sizeof(primes)/sizeof(primes[0]);
+-const unsigned int max_load_factor = 65; /* percentage */
  
- xenevtchn_handle *xce_handle = NULL;
- 
-+static unsigned int acc_global_max[ACC_N];
+-/*****************************************************************************/
+-/* indexFor */
+-static inline unsigned int
+-indexFor(unsigned int tablelength, unsigned int hashvalue) {
++#define PRIME_TABLE_LEN   ARRAY_SIZE(primes)
++#define MAX_LOAD_PERCENT  65
 +
- struct domain
- {
- 	/* The id of this domain */
-@@ -70,7 +72,10 @@ struct domain
- 	bool introduced;
- 
- 	/* Accounting data for this domain. */
--	unsigned int acc[ACC_N];
-+	struct acc {
-+		unsigned int val;
-+		unsigned int max;
-+	} acc[ACC_N];
- 
- 	/* Memory quota data for this domain. */
- 	bool soft_quota_reported;
-@@ -199,9 +204,9 @@ static bool domain_can_read(struct connection *conn)
- 	if (domain_is_unprivileged(conn)) {
- 		if (domain->wrl_credit < 0)
- 			return false;
--		if (domain->acc[ACC_OUTST] >= quota_req_outstanding)
-+		if (domain->acc[ACC_OUTST].val >= quota_req_outstanding)
- 			return false;
--		if (domain->acc[ACC_MEM] >= quota_memory_per_domain_hard &&
-+		if (domain->acc[ACC_MEM].val >= quota_memory_per_domain_hard &&
- 		    quota_memory_per_domain_hard)
- 			return false;
- 	}
-@@ -264,7 +269,7 @@ static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
- 		ret = WALK_TREE_SKIP_CHILDREN;
- 	}
- 
--	return domain->acc[ACC_NODES] ? ret : WALK_TREE_SUCCESS_STOP;
-+	return domain->acc[ACC_NODES].val ? ret : WALK_TREE_SUCCESS_STOP;
++static inline unsigned int indexFor(unsigned int tablelength,
++                                    unsigned int hashvalue)
++{
+     return (hashvalue % tablelength);
  }
  
- static void domain_tree_remove(struct domain *domain)
-@@ -272,7 +277,7 @@ static void domain_tree_remove(struct domain *domain)
- 	int ret;
- 	struct walk_funcs walkfuncs = { .enter = domain_tree_remove_sub };
- 
--	if (domain->acc[ACC_NODES]) {
-+	if (domain->acc[ACC_NODES].val) {
- 		ret = walk_node_tree(domain, NULL, "/", &walkfuncs, domain);
- 		if (ret == WALK_TREE_ERROR_STOP)
- 			syslog(LOG_ERR,
-@@ -430,14 +435,41 @@ int domain_get_quota(const void *ctx, struct connection *conn,
- 		return ENOMEM;
- 
- #define ent(t, e) \
--	resp = talloc_asprintf_append(resp, "%-16s: %8d\n", #t, e); \
-+	resp = talloc_asprintf_append(resp, "%-16s: %8u (max: %8u\n", #t, \
-+				      d->acc[e].val, d->acc[e].max); \
-+	if (!resp) return ENOMEM
-+
-+	ent(nodes, ACC_NODES);
-+	ent(watches, ACC_WATCH);
-+	ent(transactions, ACC_TRANS);
-+	ent(outstanding, ACC_OUTST);
-+	ent(memory, ACC_MEM);
-+
-+#undef ent
-+
-+	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
-+
-+	return 0;
+-/*****************************************************************************/
+-struct hashtable *
+-create_hashtable(const void *ctx, unsigned int minsize,
+-                 unsigned int (*hashf) (void*),
+-                 int (*eqf) (void*,void*),
+-                 unsigned int flags)
++static unsigned int loadlimit(unsigned int pindex)
++{
++    return ((uint64_t)primes[pindex] * MAX_LOAD_PERCENT) / 100;
 +}
 +
-+int domain_max_global_acc(const void *ctx, struct connection *conn)
-+{
-+	char *resp;
-+
-+	resp = talloc_asprintf(ctx, "Max. seen accounting values:\n");
-+	if (!resp)
-+		return ENOMEM;
-+
-+#define ent(t, e) \
-+	resp = talloc_asprintf_append(resp, "%-16s: %8u\n", #t,   \
-+				      acc_global_max[e]);         \
- 	if (!resp) return ENOMEM
- 
--	ent(nodes, d->acc[ACC_NODES]);
--	ent(watches, d->acc[ACC_WATCH]);
--	ent(transactions, d->acc[ACC_TRANS]);
--	ent(outstanding, d->acc[ACC_OUTST]);
--	ent(memory, d->acc[ACC_MEM]);
-+	ent(nodes, ACC_NODES);
-+	ent(watches, ACC_WATCH);
-+	ent(transactions, ACC_TRANS);
-+	ent(outstanding, ACC_OUTST);
-+	ent(memory, ACC_MEM);
- 
- #undef ent
- 
-@@ -1055,14 +1087,22 @@ int domain_adjust_node_perms(struct node *node)
- static int domain_acc_add_chk(struct domain *d, unsigned int what, int add,
- 			      unsigned int domid)
++struct hashtable *create_hashtable(const void *ctx, unsigned int minsize,
++                                   unsigned int (*hashf) (void *),
++                                   int (*eqf) (void *,void *),
++                                   unsigned int flags)
  {
--	if ((add < 0 && -add > d->acc[what]) ||
--	    (d->acc[what] + add) > INT_MAX) {
-+	unsigned int val;
-+
-+	if ((add < 0 && -add > d->acc[what].val) ||
-+	    (d->acc[what].val + add) > INT_MAX) {
- 		syslog(LOG_ERR, "Accounting error: domain %u type %u val %u\n",
--		       domid, what, d->acc[what] + add);
-+		       domid, what, d->acc[what].val + add);
- 		return (add < 0) ? 0 : INT_MAX;
- 	}
+     struct hashtable *h;
+     unsigned int pindex, size = primes[0];
+@@ -64,7 +67,7 @@ create_hashtable(const void *ctx, unsigned int minsize,
+     if (minsize > (1u << 30)) return NULL;
  
--	return d->acc[what] + add;
-+	val = d->acc[what].val + add;
-+	if (val > d->acc[what].max)
-+		d->acc[what].max = val;
-+	if (val > acc_global_max[what] && domid_is_unprivileged(domid))
-+		acc_global_max[what] = val;
-+
-+	return val;
+     /* Enforce size as prime */
+-    for (pindex=0; pindex < prime_table_length; pindex++) {
++    for (pindex=0; pindex < PRIME_TABLE_LEN; pindex++) {
+         if (primes[pindex] > minsize) { size = primes[pindex]; break; }
+     }
+ 
+@@ -81,7 +84,7 @@ create_hashtable(const void *ctx, unsigned int minsize,
+     h->entrycount   = 0;
+     h->hashfn       = hashf;
+     h->eqfn         = eqf;
+-    h->loadlimit    = (unsigned int)(((uint64_t)size * max_load_factor) / 100);
++    h->loadlimit    = loadlimit(pindex);
+     return h;
+ 
+ err1:
+@@ -90,9 +93,7 @@ err0:
+    return NULL;
  }
  
- static int domain_acc_add(struct connection *conn, unsigned int domid,
-@@ -1118,10 +1158,10 @@ static int domain_acc_add(struct connection *conn, unsigned int domid,
- 	}
- 
- 	trace_acc("global change domid %u: what=%u %u add %d\n", domid, what,
--		  d->acc[what], add);
--	d->acc[what] = domain_acc_add_chk(d, what, add, domid);
-+		  d->acc[what].val, add);
-+	d->acc[what].val = domain_acc_add_chk(d, what, add, domid);
- 
--	return d->acc[what];
-+	return d->acc[what].val;
- }
- 
- void acc_drop(struct connection *conn)
-@@ -1154,6 +1194,28 @@ void acc_commit(struct connection *conn)
- 	conn->in = in;
- }
- 
-+static int domain_reset_global_acc_sub(void *k, void *v, void *arg)
-+{
-+	struct domain *d = v;
-+	unsigned int i;
-+
-+	for (i = 0; i < ACC_N; i++)
-+		d->acc[i].max = d->acc[i].val;
-+
-+	return 0;
-+}
-+
-+void domain_reset_global_acc(void)
-+{
-+	unsigned int i;
-+
-+	for (i = 0; i < ACC_N; i++)
-+		acc_global_max[i] = 0;
-+
-+	/* Set current max values seen. */
-+	hashtable_iterate(domhash, domain_reset_global_acc_sub, NULL);
-+}
-+
- int domain_nbentry_inc(struct connection *conn, unsigned int domid)
+-/*****************************************************************************/
+-unsigned int
+-hash(struct hashtable *h, void *k)
++static unsigned int hash(struct hashtable *h, void *k)
  {
- 	return (domain_acc_add(conn, domid, ACC_NODES, 1, false) < 0)
-@@ -1654,7 +1716,7 @@ static int domain_check_acc_init_sub(void *k, void *v, void *arg)
- 	 * If everything is correct incrementing the value for each node will
- 	 * result in dom->nodes being 0 at the end.
- 	 */
--	dom->nodes = -d->acc[ACC_NODES];
-+	dom->nodes = -d->acc[ACC_NODES].val;
- 
- 	if (!hashtable_insert(domains, &dom->domid, dom)) {
- 		talloc_free(dom);
-@@ -1709,7 +1771,7 @@ static int domain_check_acc_sub(void *k, void *v, void *arg)
- 	if (!d)
- 		return 0;
- 
--	d->acc[ACC_NODES] += dom->nodes;
-+	d->acc[ACC_NODES].val += dom->nodes;
- 
- 	return 0;
+     /* Aim to protect against poor hash functions by adding logic here
+      * - logic taken from java 1.4 hashtable source */
+@@ -104,9 +105,7 @@ hash(struct hashtable *h, void *k)
+     return i;
  }
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 5005850dd3..b5f0b9a591 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -116,6 +116,8 @@ int domain_get_quota(const void *ctx, struct connection *conn,
- int acc_fix_domains(struct list_head *head, bool update);
- void acc_drop(struct connection *conn);
- void acc_commit(struct connection *conn);
-+int domain_max_global_acc(const void *ctx, struct connection *conn);
-+void domain_reset_global_acc(void);
  
- /* Write rate limiting */
+-/*****************************************************************************/
+-static int
+-hashtable_expand(struct hashtable *h)
++static int hashtable_expand(struct hashtable *h)
+ {
+     /* Double the size of the table to accomodate more entries */
+     struct entry **newtable;
+@@ -114,7 +113,7 @@ hashtable_expand(struct hashtable *h)
+     struct entry **pE;
+     unsigned int newsize, i, index;
+     /* Check we're not hitting max capacity */
+-    if (h->primeindex == (prime_table_length - 1)) return 0;
++    if (h->primeindex == (PRIME_TABLE_LEN - 1)) return 0;
+     newsize = primes[++(h->primeindex)];
+ 
+     newtable = talloc_realloc(h, h->table, struct entry *, newsize);
+@@ -144,21 +143,11 @@ hashtable_expand(struct hashtable *h)
+     }
+ 
+     h->tablelength = newsize;
+-    h->loadlimit   = (unsigned int)
+-        (((uint64_t)newsize * max_load_factor) / 100);
++    h->loadlimit   = loadlimit(h->primeindex);
+     return -1;
+ }
+ 
+-/*****************************************************************************/
+-unsigned int
+-hashtable_count(struct hashtable *h)
+-{
+-    return h->entrycount;
+-}
+-
+-/*****************************************************************************/
+-int
+-hashtable_insert(struct hashtable *h, void *k, void *v)
++int hashtable_insert(struct hashtable *h, void *k, void *v)
+ {
+     /* This method allows duplicate keys - but they shouldn't be used */
+     unsigned int index;
+@@ -182,9 +171,7 @@ hashtable_insert(struct hashtable *h, void *k, void *v)
+     return -1;
+ }
+ 
+-/*****************************************************************************/
+-void * /* returns value associated with key */
+-hashtable_search(struct hashtable *h, void *k)
++void *hashtable_search(struct hashtable *h, void *k)
+ {
+     struct entry *e;
+     unsigned int hashvalue, index;
+@@ -200,9 +187,7 @@ hashtable_search(struct hashtable *h, void *k)
+     return NULL;
+ }
+ 
+-/*****************************************************************************/
+-void * /* returns value associated with key */
+-hashtable_remove(struct hashtable *h, void *k)
++void *hashtable_remove(struct hashtable *h, void *k)
+ {
+     /* TODO: consider compacting the table when the load factor drops enough,
+      *       or provide a 'compact' method. */
+@@ -235,10 +220,8 @@ hashtable_remove(struct hashtable *h, void *k)
+     return NULL;
+ }
+ 
+-/*****************************************************************************/
+-int
+-hashtable_iterate(struct hashtable *h,
+-                  int (*func)(void *k, void *v, void *arg), void *arg)
++int hashtable_iterate(struct hashtable *h,
++                      int (*func)(void *k, void *v, void *arg), void *arg)
+ {
+     int ret;
+     unsigned int i;
+@@ -261,10 +244,7 @@ hashtable_iterate(struct hashtable *h,
+     return 0;
+ }
+ 
+-/*****************************************************************************/
+-/* destroy */
+-void
+-hashtable_destroy(struct hashtable *h)
++void hashtable_destroy(struct hashtable *h)
+ {
+     unsigned int i;
+     struct entry *e;
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index 07fdc1a82b..f1caef0d4f 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -75,16 +75,6 @@ hashtable_search(struct hashtable *h, void *k);
+ void * /* returns value */
+ hashtable_remove(struct hashtable *h, void *k);
+ 
+-/*****************************************************************************
+- * hashtable_count
+-   
+- * @name        hashtable_count
+- * @param   h   the hashtable
+- * @return      the number of items stored in the hashtable
+- */
+-unsigned int
+-hashtable_count(struct hashtable *h);
+-
+ /*****************************************************************************
+  * hashtable_iterate
  
 -- 
 2.35.3
