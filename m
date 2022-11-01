@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6D9DC433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:05:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435051.688086 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C2FC4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435064.688097 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optlC-0006AS-Sf; Tue, 01 Nov 2022 16:05:06 +0000
+	id 1optuo-0000iI-PB; Tue, 01 Nov 2022 16:15:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435051.688086; Tue, 01 Nov 2022 16:05:06 +0000
+Received: by outflank-mailman (output) from mailman id 435064.688097; Tue, 01 Nov 2022 16:15:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optlC-0006AH-OV; Tue, 01 Nov 2022 16:05:06 +0000
-Received: by outflank-mailman (input) for mailman id 435051;
- Tue, 01 Nov 2022 16:05:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1optuo-0000iB-Ls; Tue, 01 Nov 2022 16:15:02 +0000
+Received: by outflank-mailman (input) for mailman id 435064;
+ Tue, 01 Nov 2022 16:15:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optlB-0003Iv-3U
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:05:05 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f272fb8f-59fe-11ed-91b5-6bf2151ebd3b;
- Tue, 01 Nov 2022 17:05:04 +0100 (CET)
+ id 1optun-0000i5-EW
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:15:01 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 55b01a07-5a00-11ed-8fd0-01056ac49cbb;
+ Tue, 01 Nov 2022 17:15:00 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 32067225A4;
- Tue,  1 Nov 2022 16:05:04 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0596D1F8CA;
+ Tue,  1 Nov 2022 16:15:00 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 09D721346F;
- Tue,  1 Nov 2022 16:05:04 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CA3621346F;
+ Tue,  1 Nov 2022 16:14:59 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id wBs4AbBDYWNscgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:05:04 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id c2X4LwNGYWPndgAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:14:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,102 +53,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f272fb8f-59fe-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: 55b01a07-5a00-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667318704; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pLiRR0HBtiamzqwHIKj4WOLeWu1RXT2UzX7ss3KrLTA=;
-	b=nuqhTHY6cfBGrDX1oNGxGEioxVSe59cEhTzjpZyRyj647EtN9moepmFnXlUcFvwV3zbSPr
-	8pLi6DXUvjiycifxvRsy39jxSf0Xs7dOjvL3wAbaHVGUgX9IEdr5jeTpuYXgyWyXvrrmZF
-	61S8l7QC8vFF5r34cLi0tTppF8/n3oU=
+	t=1667319300; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=3vvEwjmy3y2freXdh/Vxr98T44RB5swrhH94wA9YUTQ=;
+	b=WEt0KZ68IRo5Lo00mV0sHSFbbeOhYgJsrJvmrKer9qNjr12hHIYf5mrhVtgCP1NvJIqWP+
+	VF4sEQFkK5C7+/9eDjd66o6dgXk/Zsr9gtsmlgSz6nrt5pSTjewC30JMQPetzYIm9AV3LT
+	srxsWGCWMvoPoiILYurVA4RezMahSQ8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 07/12] tools/xenstore: add accounting trace support
-Date: Tue,  1 Nov 2022 17:04:17 +0100
-Message-Id: <20221101160422.7212-8-jgross@suse.com>
+Subject: [PATCH 00/10] tools/xenstore: more cleanups
+Date: Tue,  1 Nov 2022 17:14:47 +0100
+Message-Id: <20221101161457.8470-1-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221101160422.7212-1-jgross@suse.com>
-References: <20221101160422.7212-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new trace switch "acc" and the related trace calls.
+Some more cleanups of Xenstore.
 
-The "acc" switch is off per default.
+Based on top of the previous 2 Xenstore series "tools/xenstore: do some
+cleanup and fixes" and the accounting rework series (sorry for the
+cut off series header).
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/xenstore/xenstored_core.c   |  2 +-
- tools/xenstore/xenstored_core.h   |  1 +
- tools/xenstore/xenstored_domain.c | 10 ++++++++++
- 3 files changed, 12 insertions(+), 1 deletion(-)
+Juergen Gross (10):
+  tools/xenstore: verify command line parameters better
+  tools/xenstore: do some cleanup of hashtable.c
+  tools/xenstore: modify interface of create_hashtable()
+  tools/xenstore: let hashtable_insert() return 0 on success
+  tools/xenstore: make some write limit functions static
+  tools/xenstore: switch write limiting to use millisecond time base
+  tools/xenstore: remove stale TODO file
+  tools/xenstore: remove unused events list
+  tools/xenstore: remove support of file backed data base
+  tools/xenstore: remove no longer needed functions from xs_lib.c
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 7bd83a0eaf..be3c2aba77 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2737,7 +2737,7 @@ static void set_quota(const char *arg, bool soft)
- 
- /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
- const char *trace_switches[] = {
--	"obj", "io", "wrl",
-+	"obj", "io", "wrl", "acc",
- 	NULL
- };
- 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 8223a49354..e17bd4c268 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -294,6 +294,7 @@ extern unsigned int trace_flags;
- #define TRACE_OBJ	0x00000001
- #define TRACE_IO	0x00000002
- #define TRACE_WRL	0x00000004
-+#define TRACE_ACC	0x00000008
- extern const char *trace_switches[];
- int set_trace_switch(const char *arg);
- 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index cb2a78b597..2420fbff31 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -546,6 +546,12 @@ static struct domain *find_domain_by_domid(unsigned int domid)
- 	return (d && d->introduced) ? d : NULL;
- }
- 
-+#define trace_acc(...)				\
-+do {						\
-+	if (trace_flags & TRACE_ACC)		\
-+		trace("acc: " __VA_ARGS__);	\
-+} while (0)
-+
- int acc_fix_domains(struct list_head *head, bool update)
- {
- 	struct changed_domain *cd;
-@@ -609,6 +615,8 @@ static int acc_add_changed_dom(const void *ctx, struct list_head *head,
- 		return 0;
- 
- 	errno = 0;
-+	trace_acc("local change domid %u: what=%u %d add %d\n", domid, what,
-+		  cd->acc[what], val);
- 	cd->acc[what] += val;
- 
- 	return cd->acc[what];
-@@ -1111,6 +1119,8 @@ static int domain_acc_add(struct connection *conn, unsigned int domid,
- 		return domain_acc_add_chk(d, what, ret, domid);
- 	}
- 
-+	trace_acc("global change domid %u: what=%u %u add %d\n", domid, what,
-+		  d->acc[what], add);
- 	d->acc[what] = domain_acc_add_chk(d, what, add, domid);
- 
- 	return d->acc[what];
+ tools/libs/store/xs.c                  |  20 ++
+ tools/xenstore/Makefile                |   5 +-
+ tools/xenstore/TODO                    |  10 -
+ tools/xenstore/hashtable.c             | 101 +++---
+ tools/xenstore/hashtable.h             |  16 +-
+ tools/xenstore/xenstore_client.c       | 129 +++++++
+ tools/xenstore/xenstored_core.c        |  51 +--
+ tools/xenstore/xenstored_core.h        |   7 +-
+ tools/xenstore/xenstored_domain.c      | 458 ++++++++++++-------------
+ tools/xenstore/xenstored_domain.h      |  24 +-
+ tools/xenstore/xenstored_transaction.c |   4 +-
+ tools/xenstore/xenstored_watch.c       |   5 -
+ tools/xenstore/xs_lib.c                | 138 --------
+ tools/xenstore/xs_lib.h                |  17 -
+ tools/xenstore/xs_tdb_dump.c           |  86 -----
+ 15 files changed, 442 insertions(+), 629 deletions(-)
+ delete mode 100644 tools/xenstore/TODO
+ delete mode 100644 tools/xenstore/xs_tdb_dump.c
+
 -- 
 2.35.3
 
