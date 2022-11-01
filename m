@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5187C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 18:00:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435179.688306 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7650CC4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 18:30:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435195.688328 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opvYG-00074g-Mi; Tue, 01 Nov 2022 17:59:52 +0000
+	id 1opw1t-0004YR-BQ; Tue, 01 Nov 2022 18:30:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435179.688306; Tue, 01 Nov 2022 17:59:52 +0000
+Received: by outflank-mailman (output) from mailman id 435195.688328; Tue, 01 Nov 2022 18:30:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1opvYG-00074Z-Jl; Tue, 01 Nov 2022 17:59:52 +0000
-Received: by outflank-mailman (input) for mailman id 435179;
- Tue, 01 Nov 2022 17:59:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=l9Gt=3B=citrix.com=prvs=297828b18=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1opvYF-0006ou-3H
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 17:59:51 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f987485f-5a0e-11ed-8fd0-01056ac49cbb;
- Tue, 01 Nov 2022 18:59:49 +0100 (CET)
+	id 1opw1t-0004YK-8X; Tue, 01 Nov 2022 18:30:29 +0000
+Received: by outflank-mailman (input) for mailman id 435195;
+ Tue, 01 Nov 2022 18:30:27 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1opw1r-0004YA-Pg; Tue, 01 Nov 2022 18:30:27 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1opw1r-0005H4-N0; Tue, 01 Nov 2022 18:30:27 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1opw1r-0005S0-9w; Tue, 01 Nov 2022 18:30:27 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1opw1r-0003bs-8C; Tue, 01 Nov 2022 18:30:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,119 +44,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f987485f-5a0e-11ed-8fd0-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1667325589;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=GczOI6dOgGkSiOucAzErsvhWg4FDt4sWmOiy0PcUCiw=;
-  b=eHIMTdmh2hTYoHE/V+EdBpAfArYXaERD995BdvnQJsVlpWP81GrpbUpf
-   IXDZjrgp9yQBOKTv6mRJuBllf3qCdR8vl1gzugCnJmQ5YlfLTZW9I8Ftf
-   zTCh9rgZ8UsUGaCna9w5Ue8+YFdsKKnizsw9mceYDU/l1qQ5xalq2HXWx
-   s=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 2.7
-X-MesageID: 86481058
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:CqrAvK6HpKl6A7m5+udmkQxRtDrHchMFZxGqfqrLsTDasY5as4F+v
- jcZWmmCaKqCMTH1LYpyOoi0pxkFuMSEmtVmQQRlqHtmHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9VU+4ZwehBtC5gZkPKkT5QeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m9
- c0hcRs3QFO4xKGU253kSLNFpsgcBZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJU0UUrsUIMtWcOOAi3XhcjsetFWPoqkf6GnP1g1hlrPqNbI5f/TaG5kFxx7F9
- goq+UynX0kXMdyV2wCDrGuHl8PvnCXdSZ4dQejQGvlC3wTImz175ActfUS/iem0jAi5Qd03A
- 0Ad5CcGt6U5802vCN7nUHWQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3PLaXhRzi
- AXPxYmwQ2Uy7vvFEhpx64t4sxuyCBFMBlUsJhRHDikezIbh+qgTgi3mG4ML/LGOsvX5HjT5w
- javpSc4hqkOgcNj65hX7WwrkBr3+MGXE1ddChH/Gzv8s1gnPNLNi5mAswCz0BpWEGqOorBtV
- lAgktPW0u0BBIrleMelELRUR+HBCxpo3VThbb9T83sJrWrFF52LJ9o4DNRCyKBBa59sRNMRS
- BWP0T69HbcKVJdQUYd5YpiqF+MhxrX6GNLuW5j8N4QQPcItLVTdp3AzOCZ8OlwBd2B1z8kC1
- WqzK57wXR7294w6pNZJewvt+eBynX1vrY8ibZv60w6mwdKjiI29EN843K+1RrlgtMu5TPD9q
- Yk32z2il0oCC4UTo0D/reYuELz9BSNgXs2q9JcHL7Drz8gPMDhJNsI9CIgJI+RN95m5XM+Sl
- p1hcie0EGbCuEA=
-IronPort-HdrOrdr: A9a23:TUFdLqG+5LsUrrVgpLqEGMeALOsnbusQ8zAXPiBKJCC9E/bo8P
- xG+c5w6faaslkssR0b9+xofZPwIk80lqQFhbX5X43DYOCOggLBQL2Kr7GSoQEIcxeUygc379
- YET0ERMrzN5VgRt7eH3OG7eexQv+VuJsqT9JnjJ3QGd3AaV0l5hT0JbDpyiidNNXN77ZxSLu
- vk2uN34wCOVF4wdcqBCnwMT4H41qD2fMKPW29/O/Y/gjP+9g+V1A==
-X-IronPort-AV: E=Sophos;i="5.95,231,1661832000"; 
-   d="scan'208";a="86481058"
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <pau.safont@citrix.com>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?=
-	<edvin.torok@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>
-Subject: [PATCH for-4.17 v1 1/2] xenctrl.ml: make domain_getinfolist tail recursive
-Date: Tue, 1 Nov 2022 17:59:16 +0000
-Message-ID: <6e9ee150c5f393f2d403a71ac540ff0d621100ab.1667324874.git.edvin.torok@citrix.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1667324874.git.edvin.torok@citrix.com>
-References: <cover.1667324874.git.edvin.torok@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=fzl88BAJz1ng2xyQLrxom8l3zzjo1vkw5F5zKv7o8b8=; b=O6IYvYNpGnp/8sC8SLNQKr7gFf
+	i/bnX6x+got/5a7Tn5WR5ThjEefz4EKkViBNa28CnC5DSFmlT5ik/FLE9d4xvT6DIHBQwMGmoRxpZ
+	4JiK8671ScC7HQuhz5M2coW/yA/k+FGt+GTbnvP2ghk0Bm9viQ9pWYwZP9eh4g5vjYTo=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-174567-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 174567: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=2dd823ca7237e7fb90c890642d6a3b357a26fcff
+X-Osstest-Versions-That:
+    xen=1d7fbc535d1d37bdc2cc53ede360b0f6651f7de1
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 01 Nov 2022 18:30:27 +0000
 
-On a host with ~1000 VMs (the support limit for XAPI) domain_getinfolist
-took O(n^2) time (n=number of domains).
-This couples with xenopsd making inefficient calls to
-domain_getinfolist(1 call/VM) resulted in visibly bad performance of
-XAPI.
+flight 174567 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/174567/
 
-It was calling the Xen domainfolist hypercall N/2 times.
-Optimize this such that it is called at most 2 times during normal use.
+Failures :-/ but no regressions.
 
-Implement a tail recursive `rev_concat` equivalent to `concat |> rev`,
-and use it instead of calling `@` multiple times.
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
 
-The added benefit is that the list of domains should now actually be in
-increasing order instead of having pairs of 2 changing direction every time.
+version targeted for testing:
+ xen                  2dd823ca7237e7fb90c890642d6a3b357a26fcff
+baseline version:
+ xen                  1d7fbc535d1d37bdc2cc53ede360b0f6651f7de1
 
-Signed-off-by: Edwin Török <edvin.torok@citrix.com>
-Tested-by: Pau Ruiz Safont <pau.safont@citrix.com>
----
- tools/ocaml/libs/xc/xenctrl.ml | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
+Last test of basis   174532  2022-10-28 15:03:22 Z    4 days
+Testing same since   174567  2022-11-01 14:00:28 Z    0 days    1 attempts
 
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 28ed642231..3ebedffdc7 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -226,14 +226,25 @@ external domain_shutdown: handle -> domid -> shutdown_reason -> unit
- external _domain_getinfolist: handle -> domid -> int -> domaininfo list
-        = "stub_xc_domain_getinfolist"
- 
-+let rev_append_fold acc e = List.rev_append e acc
-+
-+(**
-+	[rev_concat lst] is equivalent to [lst |> List.concat |> List.rev]
-+	except it is tail recursive, whereas [List.concat] isn't.
-+	Example:
-+	rev_concat [[10;9;8];[7;6];[5]]] = [5; 6; 7; 8; 9; 10]
-+*)
-+let rev_concat lst = List.fold_left rev_append_fold [] lst
-+
- let domain_getinfolist handle first_domain =
- 	let nb = 2 in
--	let last_domid l = (List.hd l).domid + 1 in
--	let rec __getlist from =
--		let l = _domain_getinfolist handle from nb in
--		(if List.length l = nb then __getlist (last_domid l) else []) @ l
--		in
--	List.rev (__getlist first_domain)
-+	let rec __getlist lst from =
-+		(* _domain_getinfolist returns domains in reverse order, largest first *)
-+		match _domain_getinfolist handle from nb with
-+		| [] -> rev_concat lst
-+		| (hd :: _) as l -> __getlist (l :: lst) (hd.domid + 1)
-+	in
-+	__getlist [] first_domain
- 
- external domain_getinfo: handle -> domid -> domaininfo= "stub_xc_domain_getinfo"
- 
--- 
-2.34.1
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  Edwin Török <edvin.torok@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <jgrall@amazon.com>
 
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   1d7fbc535d..2dd823ca72  2dd823ca7237e7fb90c890642d6a3b357a26fcff -> smoke
 
