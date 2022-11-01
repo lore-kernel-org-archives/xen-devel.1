@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1500C43217
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 15:43:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.434984.687976 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E423C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:04:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435037.688019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optQX-0004qd-3Z; Tue, 01 Nov 2022 15:43:45 +0000
+	id 1optkf-0003Ys-Sj; Tue, 01 Nov 2022 16:04:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 434984.687976; Tue, 01 Nov 2022 15:43:45 +0000
+Received: by outflank-mailman (output) from mailman id 435037.688019; Tue, 01 Nov 2022 16:04:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optQW-0004o0-Sv; Tue, 01 Nov 2022 15:43:44 +0000
-Received: by outflank-mailman (input) for mailman id 434984;
- Tue, 01 Nov 2022 15:43:43 +0000
+	id 1optkf-0003Yl-QB; Tue, 01 Nov 2022 16:04:33 +0000
+Received: by outflank-mailman (input) for mailman id 435037;
+ Tue, 01 Nov 2022 16:04:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optCh-0007Tl-J1
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 15:29:27 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1optkd-0003Iv-R5
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:04:31 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f792a4f8-59f9-11ed-91b5-6bf2151ebd3b;
- Tue, 01 Nov 2022 16:29:25 +0100 (CET)
+ id de8dce0d-59fe-11ed-91b5-6bf2151ebd3b;
+ Tue, 01 Nov 2022 17:04:31 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4C0581F8E3;
- Tue,  1 Nov 2022 15:29:25 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C8C1822566;
+ Tue,  1 Nov 2022 16:04:30 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 201DC1346F;
- Tue,  1 Nov 2022 15:29:25 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 99B781346F;
+ Tue,  1 Nov 2022 16:04:30 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 5smIBlU7YWPPYAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 15:29:25 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id yt4pJI5DYWMlcgAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:04:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,271 +53,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f792a4f8-59f9-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: de8dce0d-59fe-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667316565; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1667318670; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=jhFlAl8E/ZVxI2AuUFyhPfvdnWASnzhuJ0AtRWUI/hQ=;
-	b=bGuDis76nzl50gDl8gQleQdWKLKz16tCHn071OCHWJCPe60hDOgaxI0a4BBznOO058Xf7p
-	Nxk4FmR38xb+m7BclrF1Oek4rMkrawdd5C98mCqE31GIIkycd7Wa6P24fc2zpdKzOtyyxM
-	+sSqPJyb71vIzsGSrrBOVUysY64bZpE=
+	bh=ClK+S4fe5XoEXGnmTytfGm/UdGaWd4a4uXnR/ciAATo=;
+	b=WMGNJh12bIYiZ3wI7cv2gXwEYFjkKcD1gXNtYdWxfxaXL/kQI0nRODknx7zA9E/mJNMdWw
+	AbYTfI8vpU9MlilXn7mveQ2OoEBHanYIDRq60xbbXbcQVTsV+HNrzd/AVWCfnPwYBicJr7
+	oLOfTYleBpgd/t4E6+CAHPOFD71dXfk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 07/20] tools/xenstore: enhance hashtable implementation
-Date: Tue,  1 Nov 2022 16:28:29 +0100
-Message-Id: <20221101152842.4257-8-jgross@suse.com>
+Subject: [PATCH 01/12] tools/xenstore: manage per-transaction domain accounting data in an array
+Date: Tue,  1 Nov 2022 17:04:11 +0100
+Message-Id: <20221101160422.7212-2-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221101152842.4257-1-jgross@suse.com>
-References: <20221101152842.4257-1-jgross@suse.com>
+In-Reply-To: <20221101160422.7212-1-jgross@suse.com>
+References: <20221101160422.7212-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today it is possible to set a flag when calling hashtable_destroy() in
-order to specify whether the data associated with the hashtable entries
-should be freed or not. The keys of the entries will always be freed.
+In order to prepare keeping accounting data in an array instead of
+using independent fields, switch the struct changed_domain accounting
+data to that scheme, for now only using an array with one element.
 
-Change that by replacing the flag of hashtable_destroy() by two flags
-for create_hashtable() which will specify whether the data and/or the
-key of each entry should be freed or not.
-
-This will enable users to have the key e.g. as part of the data.
-
-Add a new function hashtable_iterate() to call a user specified
-function for each entry in the hashtable.
-
-Add new primes to the primetable in order to support smaller sizes of
-the hashtable. The primes are selected according to:
-
-https://planetmath.org/goodhashtableprimes
+In order to be able to extend this scheme add the needed indexing enum
+to xenstored_domain.h.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/hashtable.c      | 66 +++++++++++++++++++++++----------
- tools/xenstore/hashtable.h      | 35 +++++++++++++++--
- tools/xenstore/xenstored_core.c |  7 ++--
- 3 files changed, 82 insertions(+), 26 deletions(-)
+ tools/xenstore/xenstored_domain.c | 17 +++++++++--------
+ tools/xenstore/xenstored_domain.h |  5 +++++
+ 2 files changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
-index 6ac336eff1..7a1548c490 100644
---- a/tools/xenstore/hashtable.c
-+++ b/tools/xenstore/hashtable.c
-@@ -16,6 +16,7 @@ struct entry
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 582b78b0ee..399fc920bb 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -99,8 +99,8 @@ struct changed_domain
+ 	/* Identifier of the changed domain. */
+ 	unsigned int domid;
  
- struct hashtable {
-     unsigned int tablelength;
-+    unsigned int flags;
-     struct entry **table;
-     unsigned int entrycount;
-     unsigned int loadlimit;
-@@ -25,12 +26,11 @@ struct hashtable {
+-	/* Amount by which this domain's nbentry field has changed. */
+-	int nbentry;
++	/* Accounting data. */
++	int acc[ACC_TR_N];
  };
  
- /*
--Credit for primes table: Aaron Krowne
-- http://br.endernet.org/~akrowne/
-- http://planetmath.org/encyclopedia/GoodHashTablePrimes.html
--*/
-+ * Credit for primes table: Aaron Krowne
-+ * https://planetmath.org/goodhashtableprimes
-+ */
- static const unsigned int primes[] = {
--53, 97, 193, 389,
-+11, 23, 53, 97, 193, 389,
- 769, 1543, 3079, 6151,
- 12289, 24593, 49157, 98317,
- 196613, 393241, 786433, 1572869,
-@@ -52,7 +52,8 @@ indexFor(unsigned int tablelength, unsigned int hashvalue) {
- struct hashtable *
- create_hashtable(unsigned int minsize,
-                  unsigned int (*hashf) (void*),
--                 int (*eqf) (void*,void*))
-+                 int (*eqf) (void*,void*),
-+                 unsigned int flags)
- {
-     struct hashtable *h;
-     unsigned int pindex, size = primes[0];
-@@ -73,6 +74,7 @@ create_hashtable(unsigned int minsize,
-         goto err1;
+ static struct hashtable *domhash;
+@@ -558,7 +558,7 @@ int acc_fix_domains(struct list_head *head, bool update)
+ 	int cnt;
  
-     h->tablelength  = size;
-+    h->flags        = flags;
-     h->primeindex   = pindex;
-     h->entrycount   = 0;
-     h->hashfn       = hashf;
-@@ -235,7 +237,8 @@ hashtable_remove(struct hashtable *h, void *k)
-             *pE = e->next;
-             h->entrycount--;
-             v = e->v;
--            free(e->k);
-+            if (h->flags & HASHTABLE_FREE_KEY)
-+                free(e->k);
-             free(e);
-             return v;
-         }
-@@ -246,29 +249,52 @@ hashtable_remove(struct hashtable *h, void *k)
+ 	list_for_each_entry(cd, head, list) {
+-		cnt = domain_nbentry_fix(cd->domid, cd->nbentry, update);
++		cnt = domain_nbentry_fix(cd->domid, cd->acc[ACC_NODES], update);
+ 		if (!update) {
+ 			if (cnt >= quota_nb_entry_per_domain)
+ 				return ENOSPC;
+@@ -603,8 +603,8 @@ static struct changed_domain *acc_get_changed_domain(const void *ctx,
+ 	return cd;
  }
  
- /*****************************************************************************/
--/* destroy */
--void
--hashtable_destroy(struct hashtable *h, int free_values)
-+int
-+hashtable_iterate(struct hashtable *h,
-+                  int (*func)(void *k, void *v, void *arg), void *arg)
+-static int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
+-			       unsigned int domid)
++static int acc_add_changed_dom(const void *ctx, struct list_head *head,
++			       unsigned int what, int val, unsigned int domid)
  {
-+    int ret;
-     unsigned int i;
-     struct entry *e, *f;
-     struct entry **table = h->table;
--    if (free_values)
-+
-+    for (i = 0; i < h->tablelength; i++)
-     {
--        for (i = 0; i < h->tablelength; i++)
-+        e = table[i];
-+        while (e)
-         {
--            e = table[i];
--            while (NULL != e)
--            { f = e; e = e->next; free(f->k); free(f->v); free(f); }
-+            f = e;
-+            e = e->next;
-+            ret = func(f->k, f->v, arg);
-+            if (ret)
-+                return ret;
-         }
-     }
--    else
-+
-+    return 0;
-+}
-+
-+/*****************************************************************************/
-+/* destroy */
-+void
-+hashtable_destroy(struct hashtable *h)
-+{
-+    unsigned int i;
-+    struct entry *e, *f;
-+    struct entry **table = h->table;
-+
-+    for (i = 0; i < h->tablelength; i++)
-     {
--        for (i = 0; i < h->tablelength; i++)
-+        e = table[i];
-+        while (NULL != e)
-         {
--            e = table[i];
--            while (NULL != e)
--            { f = e; e = e->next; free(f->k); free(f); }
-+            f = e;
-+            e = e->next;
-+            if (h->flags & HASHTABLE_FREE_KEY)
-+                free(f->k);
-+            if (h->flags & HASHTABLE_FREE_VALUE)
-+                free(f->v);
-+            free(f);
-         }
-     }
-     free(h->table);
-diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
-index 62fef6081a..b31eeaea26 100644
---- a/tools/xenstore/hashtable.h
-+++ b/tools/xenstore/hashtable.h
-@@ -12,13 +12,21 @@ struct hashtable;
-  * @param   minsize         minimum initial size of hashtable
-  * @param   hashfunction    function for hashing keys
-  * @param   key_eq_fn       function for determining key equality
-+ * @param   flags           flags HASHTABLE_*
-  * @return                  newly created hashtable or NULL on failure
-  */
+ 	struct changed_domain *cd;
  
-+/* Let hashtable_destroy() free the entries' values. */
-+#define HASHTABLE_FREE_VALUE (1U << 0)
-+/* Let hashtable_remove() and hashtable_destroy() free the entries' keys. */
-+#define HASHTABLE_FREE_KEY   (1U << 1)
-+
- struct hashtable *
- create_hashtable(unsigned int minsize,
-                  unsigned int (*hashfunction) (void*),
--                 int (*key_eq_fn) (void*,void*));
-+                 int (*key_eq_fn) (void*,void*),
-+                 unsigned int flags
-+);
+@@ -613,9 +613,9 @@ static int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
+ 		return 0;
  
- /*****************************************************************************
-  * hashtable_insert
-@@ -76,16 +84,37 @@ hashtable_remove(struct hashtable *h, void *k);
- unsigned int
- hashtable_count(struct hashtable *h);
+ 	errno = 0;
+-	cd->nbentry += val;
++	cd->acc[what] += val;
  
-+/*****************************************************************************
-+ * hashtable_iterate
-+
-+ * @name           hashtable_iterate
-+ * @param   h      the hashtable
-+ * @param   func   function to call for each entry
-+ * @param   arg    user supplied parameter for func
-+ * @return         0 if okay, non-zero return value of func (and iteration
-+ *                 was aborted)
-+ *
-+ * Iterates over all entries in the hashtable and calls func with the
-+ * key, value, and the user supplied parameter.
-+ * func returning a non-zero value will abort the iteration. In case func is
-+ * removing an entry other than itself from the hashtable, it must return a
-+ * non-zero value in order to abort the iteration. Inserting entries is
-+ * allowed, but it is undefined whether func will be called for those new
-+ * entries during this iteration.
-+ */
-+int
-+hashtable_iterate(struct hashtable *h,
-+                  int (*func)(void *k, void *v, void *arg), void *arg);
-+
- /*****************************************************************************
-  * hashtable_destroy
-    
-  * @name        hashtable_destroy
-  * @param   h   the hashtable
-- * @param       free_values     whether to call 'free' on the remaining values
-  */
- 
- void
--hashtable_destroy(struct hashtable *h, int free_values);
-+hashtable_destroy(struct hashtable *h);
- 
- #endif /* __HASHTABLE_CWC22_H__ */
- 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 8c2cca62b7..1650821922 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2512,7 +2512,9 @@ void check_store(void)
- 		.enoent = check_store_enoent,
- 	};
- 
--	reachable = create_hashtable(16, hash_from_key_fn, keys_equal_fn);
-+	/* Don't free values (they are all void *1) */
-+	reachable = create_hashtable(16, hash_from_key_fn, keys_equal_fn,
-+				     HASHTABLE_FREE_KEY);
- 	if (!reachable) {
- 		log("check_store: ENOMEM");
- 		return;
-@@ -2526,8 +2528,7 @@ void check_store(void)
- 		clean_store(reachable);
- 	log("Checking store complete.");
- 
--	hashtable_destroy(reachable, 0 /* Don't free values (they are all
--					  (void *)1) */);
-+	hashtable_destroy(reachable);
+-	return cd->nbentry;
++	return cd->acc[what];
  }
  
+ static void domain_conn_reset(struct domain *domain)
+@@ -1076,7 +1076,8 @@ static int domain_nbentry_add(struct connection *conn, unsigned int domid,
  
+ 	if (conn && conn->transaction) {
+ 		head = transaction_get_changed_domains(conn->transaction);
+-		ret = acc_add_dom_nbentry(conn->transaction, head, add, domid);
++		ret = acc_add_changed_dom(conn->transaction, head, ACC_NODES,
++					  add, domid);
+ 		if (errno) {
+ 			fail_transaction(conn->transaction);
+ 			return -1;
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index dc4660861e..124b9e1b1e 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -19,6 +19,11 @@
+ #ifndef _XENSTORED_DOMAIN_H
+ #define _XENSTORED_DOMAIN_H
+ 
++enum {
++	ACC_NODES,
++	ACC_TR_N	/* Number of elements per transaction and domain. */
++};
++
+ void handle_event(void);
+ 
+ void check_domains(void);
 -- 
 2.35.3
 
