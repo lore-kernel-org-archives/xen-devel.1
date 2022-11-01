@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0B3C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435080.688143 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0B5C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435084.688163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optv0-0001wV-Ls; Tue, 01 Nov 2022 16:15:14 +0000
+	id 1optv5-0002vo-Uw; Tue, 01 Nov 2022 16:15:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435080.688143; Tue, 01 Nov 2022 16:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 435084.688163; Tue, 01 Nov 2022 16:15:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optv0-0001ue-D9; Tue, 01 Nov 2022 16:15:14 +0000
-Received: by outflank-mailman (input) for mailman id 435080;
- Tue, 01 Nov 2022 16:15:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1optv5-0002vU-S0; Tue, 01 Nov 2022 16:15:19 +0000
+Received: by outflank-mailman (input) for mailman id 435084;
+ Tue, 01 Nov 2022 16:15:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optlM-0003Iv-CR
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:05:16 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f918903b-59fe-11ed-91b5-6bf2151ebd3b;
- Tue, 01 Nov 2022 17:05:15 +0100 (CET)
+ id 1optv4-0000i5-0L
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:15:18 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5f893797-5a00-11ed-8fd0-01056ac49cbb;
+ Tue, 01 Nov 2022 17:15:17 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 5201822350;
- Tue,  1 Nov 2022 16:05:15 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id AE73D1F90F;
+ Tue,  1 Nov 2022 16:15:16 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 242691346F;
- Tue,  1 Nov 2022 16:05:15 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7EDF41346F;
+ Tue,  1 Nov 2022 16:15:16 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id cuN+B7tDYWOJcgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:05:15 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id PHilHRRGYWMtdwAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:15:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,193 +53,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f918903b-59fe-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: 5f893797-5a00-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667318715; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1667319316; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=zlr1bEVW5zM00uivxYgahU2VVqHYofX1SXVVdA6eJyo=;
-	b=PonLWqrEzh/61QWbp7+LdC4rt+JYU/gOL/wCJ+WSpOQQ7MS0UwzaLyZWEl8QS2Cec1Lnli
-	s8ZJSKP1Mwp2isKS03VYfcaOXqqLXskRXqLe8hqecz0MQyKElcCmssD6pcvtkmBkPRUww2
-	J8vTE8YLaOEmvmuTqB/AEpSTxNpPRuk=
+	bh=ePljyH5jlUhgLAg8XDkia2Vo0lFqj2Qpdrf2FB4EPzU=;
+	b=KGxM5llsacI35uOqsmNhcEZhS/uWRSdQhPmi6hi/EOUtXVNP6dTXi/+gv9A516MZo3uqat
+	HDKcN7WyMEqmUvXEGFJyQPbC9oBIEvoRjKo+Cxix4Bd/ItrzMO7SsJqcqycf7FJx6TwsIS
+	V4d+xVt278CTw05khGNw+C4W/BywrZg=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 09/12] tools/xenstore: switch transaction accounting to generic accounting
-Date: Tue,  1 Nov 2022 17:04:19 +0100
-Message-Id: <20221101160422.7212-10-jgross@suse.com>
+Subject: [PATCH 03/10] tools/xenstore: modify interface of create_hashtable()
+Date: Tue,  1 Nov 2022 17:14:50 +0100
+Message-Id: <20221101161457.8470-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221101160422.7212-1-jgross@suse.com>
-References: <20221101160422.7212-1-jgross@suse.com>
+In-Reply-To: <20221101161457.8470-1-jgross@suse.com>
+References: <20221101161457.8470-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As transaction accounting is active for unprivileged domains only, it
-can easily be added to the generic per-domain accounting.
+The minsize parameter of create_hashtable() doesn't have any real use
+case for Xenstore, so drop it.
+
+For better talloc_report_full() diagnostic output add a name parameter
+to create_hashtable().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_core.c        |  3 +--
- tools/xenstore/xenstored_core.h        |  1 -
- tools/xenstore/xenstored_domain.c      | 21 ++++++++++++++++++---
- tools/xenstore/xenstored_domain.h      |  4 ++++
- tools/xenstore/xenstored_transaction.c | 12 +++++-------
- 5 files changed, 28 insertions(+), 13 deletions(-)
+ tools/xenstore/hashtable.c        | 24 ++++++++----------------
+ tools/xenstore/hashtable.h        |  4 ++--
+ tools/xenstore/xenstored_core.c   |  2 +-
+ tools/xenstore/xenstored_domain.c |  4 ++--
+ 4 files changed, 13 insertions(+), 21 deletions(-)
 
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index d312004d70..43a8caab82 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -55,36 +55,28 @@ static unsigned int loadlimit(unsigned int pindex)
+     return ((uint64_t)primes[pindex] * MAX_LOAD_PERCENT) / 100;
+ }
+ 
+-struct hashtable *create_hashtable(const void *ctx, unsigned int minsize,
+-                                   unsigned int (*hashf) (void *),
+-                                   int (*eqf) (void *,void *),
++struct hashtable *create_hashtable(const void *ctx, const char *name,
++                                   unsigned int (*hashf) (void*),
++                                   int (*eqf) (void*,void*),
+                                    unsigned int flags)
+ {
+     struct hashtable *h;
+-    unsigned int pindex, size = primes[0];
+-
+-    /* Check requested hashtable isn't too large */
+-    if (minsize > (1u << 30)) return NULL;
+-
+-    /* Enforce size as prime */
+-    for (pindex=0; pindex < PRIME_TABLE_LEN; pindex++) {
+-        if (primes[pindex] > minsize) { size = primes[pindex]; break; }
+-    }
+ 
+     h = talloc_zero(ctx, struct hashtable);
+     if (NULL == h)
+         goto err0;
+-    h->table = talloc_zero_array(h, struct entry *, size);
++    talloc_set_name_const(h, name);
++    h->table = talloc_zero_array(h, struct entry *, primes[0]);
+     if (NULL == h->table)
+         goto err1;
+ 
+-    h->tablelength  = size;
++    h->tablelength  = primes[0];
+     h->flags        = flags;
+-    h->primeindex   = pindex;
++    h->primeindex   = 0;
+     h->entrycount   = 0;
+     h->hashfn       = hashf;
+     h->eqfn         = eqf;
+-    h->loadlimit    = loadlimit(pindex);
++    h->loadlimit    = loadlimit(0);
+     return h;
+ 
+ err1:
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index f1caef0d4f..5575f6c1dd 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -10,7 +10,7 @@ struct hashtable;
+    
+  * @name                    create_hashtable
+  * @param   ctx             talloc context to use for allocations
+- * @param   minsize         minimum initial size of hashtable
++ * @param   name            talloc name of the hashtable
+  * @param   hashfunction    function for hashing keys
+  * @param   key_eq_fn       function for determining key equality
+  * @param   flags           flags HASHTABLE_*
+@@ -23,7 +23,7 @@ struct hashtable;
+ #define HASHTABLE_FREE_KEY   (1U << 1)
+ 
+ struct hashtable *
+-create_hashtable(const void *ctx, unsigned int minsize,
++create_hashtable(const void *ctx, const char *name,
+                  unsigned int (*hashfunction) (void*),
+                  int (*key_eq_fn) (void*,void*),
+                  unsigned int flags
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index f07398e2cf..f5933a900a 100644
+index 714841d9ca..c4d9d275be 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -2074,7 +2074,7 @@ static void consider_message(struct connection *conn)
- 	 * stalled. This will ignore new requests until Live-Update happened
- 	 * or it was aborted.
- 	 */
--	if (lu_is_pending() && conn->transaction_started == 0 &&
-+	if (lu_is_pending() && conn->ta_start_time == 0 &&
- 	    conn->in->hdr.msg.type == XS_TRANSACTION_START) {
- 		trace("Delaying transaction start for connection %p req_id %u\n",
- 		      conn, conn->in->hdr.msg.req_id);
-@@ -2181,7 +2181,6 @@ struct connection *new_connection(const struct interface_funcs *funcs)
- 	new->funcs = funcs;
- 	new->is_ignored = false;
- 	new->is_stalled = false;
--	new->transaction_started = 0;
- 	INIT_LIST_HEAD(&new->out_list);
- 	INIT_LIST_HEAD(&new->acc_list);
- 	INIT_LIST_HEAD(&new->ref_list);
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index d3a17a6ce1..f51b8d1839 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -151,7 +151,6 @@ struct connection
- 	/* List of in-progress transactions. */
- 	struct list_head transaction_list;
- 	uint32_t next_transaction_id;
--	unsigned int transaction_started;
- 	time_t ta_start_time;
+@@ -2502,7 +2502,7 @@ void check_store(void)
+ 	struct check_store_data data;
  
- 	/* List of delayed requests. */
+ 	/* Don't free values (they are all void *1) */
+-	data.reachable = create_hashtable(NULL, 16, hash_from_key_fn,
++	data.reachable = create_hashtable(NULL, "checkstore", hash_from_key_fn,
+ 					  keys_equal_fn, HASHTABLE_FREE_KEY);
+ 	if (!data.reachable) {
+ 		log("check_store: ENOMEM");
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 2420fbff31..274ea72741 100644
+index 1f746afd70..b3c288bf40 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -421,12 +421,10 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+@@ -1020,7 +1020,7 @@ void domain_init(int evtfd)
+ 	int rc;
+ 
+ 	/* Start with a random rather low domain count for the hashtable. */
+-	domhash = create_hashtable(NULL, 8, domhash_fn, domeq_fn, 0);
++	domhash = create_hashtable(NULL, "domains", domhash_fn, domeq_fn, 0);
+ 	if (!domhash)
+ 		barf_perror("Failed to allocate domain hashtable");
+ 
+@@ -1798,7 +1798,7 @@ struct hashtable *domain_check_acc_init(void)
  {
- 	struct domain *d = find_domain_struct(domid);
- 	char *resp;
--	int ta;
+ 	struct hashtable *domains;
  
- 	if (!d)
- 		return ENOENT;
- 
--	ta = d->conn ? d->conn->transaction_started : 0;
- 	resp = talloc_asprintf(ctx, "Domain %u:\n", domid);
- 	if (!resp)
- 		return ENOMEM;
-@@ -437,7 +435,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
- 
- 	ent(nodes, d->acc[ACC_NODES]);
- 	ent(watches, d->acc[ACC_WATCH]);
--	ent(transactions, ta);
-+	ent(transactions, d->acc[ACC_TRANS]);
- 	ent(outstanding, d->acc[ACC_OUTST]);
- 	ent(memory, d->acc[ACC_MEM]);
- 
-@@ -1292,6 +1290,23 @@ void domain_outstanding_dec(struct connection *conn, unsigned int domid)
- 	domain_acc_add(conn, domid, ACC_OUTST, -1, true);
- }
- 
-+void domain_transaction_inc(struct connection *conn)
-+{
-+	domain_acc_add(conn, conn->id, ACC_TRANS, 1, true);
-+}
-+
-+void domain_transaction_dec(struct connection *conn)
-+{
-+	domain_acc_add(conn, conn->id, ACC_TRANS, -1, true);
-+}
-+
-+unsigned int domain_transaction_get(struct connection *conn)
-+{
-+	return (domain_is_unprivileged(conn))
-+		? domain_acc_add(conn, conn->id, ACC_TRANS, 0, true)
-+		: 0;
-+}
-+
- static wrl_creditt wrl_config_writecost      = WRL_FACTOR;
- static wrl_creditt wrl_config_rate           = WRL_RATE   * WRL_FACTOR;
- static wrl_creditt wrl_config_dburst         = WRL_DBURST * WRL_FACTOR;
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 91db3342c4..5005850dd3 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -26,6 +26,7 @@ enum {
- 	ACC_WATCH = ACC_TR_N,
- 	ACC_OUTST,
- 	ACC_MEM,
-+	ACC_TRANS,
- 	ACC_N            /* Number of elements per domain. */
- };
- 
-@@ -107,6 +108,9 @@ void domain_watch_dec(struct connection *conn);
- int domain_watch(struct connection *conn);
- void domain_outstanding_inc(struct connection *conn, unsigned int domid);
- void domain_outstanding_dec(struct connection *conn, unsigned int domid);
-+void domain_transaction_inc(struct connection *conn);
-+void domain_transaction_dec(struct connection *conn);
-+unsigned int domain_transaction_get(struct connection *conn);
- int domain_get_quota(const void *ctx, struct connection *conn,
- 		     unsigned int domid);
- int acc_fix_domains(struct list_head *head, bool update);
-diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
-index 19a1175d1b..ce6a12b576 100644
---- a/tools/xenstore/xenstored_transaction.c
-+++ b/tools/xenstore/xenstored_transaction.c
-@@ -471,8 +471,7 @@ int do_transaction_start(const void *ctx, struct connection *conn,
- 	if (conn->transaction)
- 		return EBUSY;
- 
--	if (domain_is_unprivileged(conn) &&
--	    conn->transaction_started > quota_max_transaction)
-+	if (domain_transaction_get(conn) > quota_max_transaction)
- 		return ENOSPC;
- 
- 	/* Attach transaction to ctx for autofree until it's complete */
-@@ -497,9 +496,9 @@ int do_transaction_start(const void *ctx, struct connection *conn,
- 	list_add_tail(&trans->list, &conn->transaction_list);
- 	talloc_steal(conn, trans);
- 	talloc_set_destructor(trans, destroy_transaction);
--	if (!conn->transaction_started)
-+	if (!conn->ta_start_time)
- 		conn->ta_start_time = time(NULL);
--	conn->transaction_started++;
-+	domain_transaction_inc(conn);
- 	wrl_ntransactions++;
- 
- 	snprintf(id_str, sizeof(id_str), "%u", trans->id);
-@@ -524,8 +523,8 @@ int do_transaction_end(const void *ctx, struct connection *conn,
- 
- 	conn->transaction = NULL;
- 	list_del(&trans->list);
--	conn->transaction_started--;
--	if (!conn->transaction_started)
-+	domain_transaction_dec(conn);
-+	if (list_empty(&conn->transaction_list))
- 		conn->ta_start_time = 0;
- 
- 	/* Attach transaction to ctx for auto-cleanup */
-@@ -576,7 +575,6 @@ void conn_delete_all_transactions(struct connection *conn)
- 
- 	assert(conn->transaction == NULL);
- 
--	conn->transaction_started = 0;
- 	conn->ta_start_time = 0;
- }
- 
+-	domains = create_hashtable(NULL, 8, domhash_fn, domeq_fn,
++	domains = create_hashtable(NULL, "domain_check", domhash_fn, domeq_fn,
+ 				   HASHTABLE_FREE_VALUE);
+ 	if (!domains)
+ 		return NULL;
 -- 
 2.35.3
 
