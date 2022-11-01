@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AED9C433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435076.688135 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF85C43217
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 16:15:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435075.688130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optv0-0001qA-6y; Tue, 01 Nov 2022 16:15:14 +0000
+	id 1optuz-0001mY-Oi; Tue, 01 Nov 2022 16:15:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435076.688135; Tue, 01 Nov 2022 16:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 435075.688130; Tue, 01 Nov 2022 16:15:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optuz-0001pC-VV; Tue, 01 Nov 2022 16:15:13 +0000
-Received: by outflank-mailman (input) for mailman id 435076;
+	id 1optuz-0001mR-LO; Tue, 01 Nov 2022 16:15:13 +0000
+Received: by outflank-mailman (input) for mailman id 435075;
  Tue, 01 Nov 2022 16:15:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optuy-0000i5-AU
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:15:12 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1optlG-0003qE-OW
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 16:05:10 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5c3528f9-5a00-11ed-8fd0-01056ac49cbb;
- Tue, 01 Nov 2022 17:15:11 +0100 (CET)
+ id f5c39eb7-59fe-11ed-8fd0-01056ac49cbb;
+ Tue, 01 Nov 2022 17:05:10 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 202503382E;
- Tue,  1 Nov 2022 16:15:11 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id BA5F31F8CA;
+ Tue,  1 Nov 2022 16:05:09 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E69B71346F;
- Tue,  1 Nov 2022 16:15:10 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8DBAA1346F;
+ Tue,  1 Nov 2022 16:05:09 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id QVjxNg5GYWMedwAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:15:10 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 2go9IbVDYWN/cgAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 16:05:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,228 +53,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c3528f9-5a00-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: f5c39eb7-59fe-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667319311; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1667318709; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=pIb0/mYGQ+HwHEptI7zIsqWzXRU1CQBKgofF97fLAvs=;
-	b=Mux+Oyeny1sk2ahF5isrQx7yM9meirOsLaQ2iXfYQm8Hn1AuqztnbpMJ8yiumFWQ9a70lW
-	N1tKEZ/nKhEY9+oNc+JLe+Wm7x2xRa9yH4Zw8AGCvj7jQFA2ZRkGCY79FYlxIMS2upluMZ
-	DsqP0sR1byMe9zu2wfI69MyLzeDBJwI=
+	bh=Ex16tXxYUWTa8wrIuGo+oPYlqG5C+9YpA2AwG1Rpfyo=;
+	b=nAw8jCn3lUB78s8xN/MoFeZL168qrdvi58IqMzzBHtTRXHhYLxtvbatvLdAKqR9tR0BHtE
+	lK1tK/LEfJoB893kvzMcdn1/5jqwfiVaOBv8nbik6SdPv74yvepZQ/FUAZyK6F08DV8e9T
+	ASWkrIEbIbZl2/ULG09qwkASkcwtqRM=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 02/10] tools/xenstore: do some cleanup of hashtable.c
-Date: Tue,  1 Nov 2022 17:14:49 +0100
-Message-Id: <20221101161457.8470-3-jgross@suse.com>
+Subject: [PATCH 08/12] tools/xenstore: add TDB access trace support
+Date: Tue,  1 Nov 2022 17:04:18 +0100
+Message-Id: <20221101160422.7212-9-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221101161457.8470-1-jgross@suse.com>
-References: <20221101161457.8470-1-jgross@suse.com>
+In-Reply-To: <20221101160422.7212-1-jgross@suse.com>
+References: <20221101160422.7212-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Do the following cleanups:
-- hashtable_count() isn't used at all, so remove it
-- replace prime_table_length and max_load_factor with macros
-- make hash() static
-- add a loadlimit() helper function
-- remove the /***/ lines between functions
-- do some style corrections
+Add a new trace switch "tdb" and the related trace calls.
+
+The "tdb" switch is off per default.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/hashtable.c | 74 ++++++++++++++------------------------
- tools/xenstore/hashtable.h | 10 ------
- 2 files changed, 27 insertions(+), 57 deletions(-)
+ tools/xenstore/xenstored_core.c        | 8 +++++++-
+ tools/xenstore/xenstored_core.h        | 6 ++++++
+ tools/xenstore/xenstored_transaction.c | 7 ++++++-
+ 3 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
-index 1c8656e016..d312004d70 100644
---- a/tools/xenstore/hashtable.c
-+++ b/tools/xenstore/hashtable.c
-@@ -40,22 +40,25 @@ static const unsigned int primes[] = {
- 50331653, 100663319, 201326611, 402653189,
- 805306457, 1610612741
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index be3c2aba77..f07398e2cf 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -589,6 +589,8 @@ static void get_acc_data(TDB_DATA *key, struct node_account_data *acc)
+ 		if (old_data.dptr == NULL) {
+ 			acc->memory = 0;
+ 		} else {
++			trace_tdb("read %s size %zu\n", key->dptr,
++				  old_data.dsize + key->dsize);
+ 			hdr = (void *)old_data.dptr;
+ 			acc->memory = old_data.dsize;
+ 			acc->domid = hdr->perms[0].id;
+@@ -655,6 +657,7 @@ int do_tdb_write(struct connection *conn, TDB_DATA *key, TDB_DATA *data,
+ 		errno = EIO;
+ 		return errno;
+ 	}
++	trace_tdb("store %s size %zu\n", key->dptr, data->dsize + key->dsize);
+ 
+ 	if (acc) {
+ 		/* Don't use new_domid, as it might be a transaction node. */
+@@ -682,6 +685,7 @@ int do_tdb_delete(struct connection *conn, TDB_DATA *key,
+ 		errno = EIO;
+ 		return errno;
+ 	}
++	trace_tdb("delete %s\n", key->dptr);
+ 
+ 	if (acc->memory) {
+ 		domid = get_acc_domid(conn, key, acc->domid);
+@@ -731,6 +735,8 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 		goto error;
+ 	}
+ 
++	trace_tdb("read %s size %zu\n", key.dptr, data.dsize + key.dsize);
++
+ 	node->parent = NULL;
+ 	talloc_steal(node, data.dptr);
+ 
+@@ -2737,7 +2743,7 @@ static void set_quota(const char *arg, bool soft)
+ 
+ /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
+ const char *trace_switches[] = {
+-	"obj", "io", "wrl", "acc",
++	"obj", "io", "wrl", "acc", "tdb",
+ 	NULL
  };
--const unsigned int prime_table_length = sizeof(primes)/sizeof(primes[0]);
--const unsigned int max_load_factor = 65; /* percentage */
  
--/*****************************************************************************/
--/* indexFor */
--static inline unsigned int
--indexFor(unsigned int tablelength, unsigned int hashvalue) {
-+#define PRIME_TABLE_LEN   ARRAY_SIZE(primes)
-+#define MAX_LOAD_PERCENT  65
-+
-+static inline unsigned int indexFor(unsigned int tablelength,
-+                                    unsigned int hashvalue)
-+{
-     return (hashvalue % tablelength);
- }
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index e17bd4c268..d3a17a6ce1 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -295,8 +295,14 @@ extern unsigned int trace_flags;
+ #define TRACE_IO	0x00000002
+ #define TRACE_WRL	0x00000004
+ #define TRACE_ACC	0x00000008
++#define TRACE_TDB	0x00000010
+ extern const char *trace_switches[];
+ int set_trace_switch(const char *arg);
++#define trace_tdb(...)				\
++do {						\
++	if (trace_flags & TRACE_TDB)		\
++		trace("tdb: " __VA_ARGS__);	\
++} while (0)
  
--/*****************************************************************************/
--struct hashtable *
--create_hashtable(const void *ctx, unsigned int minsize,
--                 unsigned int (*hashf) (void*),
--                 int (*eqf) (void*,void*),
--                 unsigned int flags)
-+static unsigned int loadlimit(unsigned int pindex)
-+{
-+    return ((uint64_t)primes[pindex] * MAX_LOAD_PERCENT) / 100;
-+}
-+
-+struct hashtable *create_hashtable(const void *ctx, unsigned int minsize,
-+                                   unsigned int (*hashf) (void *),
-+                                   int (*eqf) (void *,void *),
-+                                   unsigned int flags)
- {
-     struct hashtable *h;
-     unsigned int pindex, size = primes[0];
-@@ -64,7 +67,7 @@ create_hashtable(const void *ctx, unsigned int minsize,
-     if (minsize > (1u << 30)) return NULL;
- 
-     /* Enforce size as prime */
--    for (pindex=0; pindex < prime_table_length; pindex++) {
-+    for (pindex=0; pindex < PRIME_TABLE_LEN; pindex++) {
-         if (primes[pindex] > minsize) { size = primes[pindex]; break; }
-     }
- 
-@@ -81,7 +84,7 @@ create_hashtable(const void *ctx, unsigned int minsize,
-     h->entrycount   = 0;
-     h->hashfn       = hashf;
-     h->eqfn         = eqf;
--    h->loadlimit    = (unsigned int)(((uint64_t)size * max_load_factor) / 100);
-+    h->loadlimit    = loadlimit(pindex);
-     return h;
- 
- err1:
-@@ -90,9 +93,7 @@ err0:
-    return NULL;
- }
- 
--/*****************************************************************************/
--unsigned int
--hash(struct hashtable *h, void *k)
-+static unsigned int hash(struct hashtable *h, void *k)
- {
-     /* Aim to protect against poor hash functions by adding logic here
-      * - logic taken from java 1.4 hashtable source */
-@@ -104,9 +105,7 @@ hash(struct hashtable *h, void *k)
-     return i;
- }
- 
--/*****************************************************************************/
--static int
--hashtable_expand(struct hashtable *h)
-+static int hashtable_expand(struct hashtable *h)
- {
-     /* Double the size of the table to accomodate more entries */
-     struct entry **newtable;
-@@ -114,7 +113,7 @@ hashtable_expand(struct hashtable *h)
-     struct entry **pE;
-     unsigned int newsize, i, index;
-     /* Check we're not hitting max capacity */
--    if (h->primeindex == (prime_table_length - 1)) return 0;
-+    if (h->primeindex == (PRIME_TABLE_LEN - 1)) return 0;
-     newsize = primes[++(h->primeindex)];
- 
-     newtable = talloc_realloc(h, h->table, struct entry *, newsize);
-@@ -144,21 +143,11 @@ hashtable_expand(struct hashtable *h)
-     }
- 
-     h->tablelength = newsize;
--    h->loadlimit   = (unsigned int)
--        (((uint64_t)newsize * max_load_factor) / 100);
-+    h->loadlimit   = loadlimit(h->primeindex);
-     return -1;
- }
- 
--/*****************************************************************************/
--unsigned int
--hashtable_count(struct hashtable *h)
--{
--    return h->entrycount;
--}
--
--/*****************************************************************************/
--int
--hashtable_insert(struct hashtable *h, void *k, void *v)
-+int hashtable_insert(struct hashtable *h, void *k, void *v)
- {
-     /* This method allows duplicate keys - but they shouldn't be used */
-     unsigned int index;
-@@ -182,9 +171,7 @@ hashtable_insert(struct hashtable *h, void *k, void *v)
-     return -1;
- }
- 
--/*****************************************************************************/
--void * /* returns value associated with key */
--hashtable_search(struct hashtable *h, void *k)
-+void *hashtable_search(struct hashtable *h, void *k)
- {
-     struct entry *e;
-     unsigned int hashvalue, index;
-@@ -200,9 +187,7 @@ hashtable_search(struct hashtable *h, void *k)
-     return NULL;
- }
- 
--/*****************************************************************************/
--void * /* returns value associated with key */
--hashtable_remove(struct hashtable *h, void *k)
-+void *hashtable_remove(struct hashtable *h, void *k)
- {
-     /* TODO: consider compacting the table when the load factor drops enough,
-      *       or provide a 'compact' method. */
-@@ -235,10 +220,8 @@ hashtable_remove(struct hashtable *h, void *k)
-     return NULL;
- }
- 
--/*****************************************************************************/
--int
--hashtable_iterate(struct hashtable *h,
--                  int (*func)(void *k, void *v, void *arg), void *arg)
-+int hashtable_iterate(struct hashtable *h,
-+                      int (*func)(void *k, void *v, void *arg), void *arg)
- {
-     int ret;
-     unsigned int i;
-@@ -261,10 +244,7 @@ hashtable_iterate(struct hashtable *h,
-     return 0;
- }
- 
--/*****************************************************************************/
--/* destroy */
--void
--hashtable_destroy(struct hashtable *h)
-+void hashtable_destroy(struct hashtable *h)
- {
-     unsigned int i;
-     struct entry *e;
-diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
-index 07fdc1a82b..f1caef0d4f 100644
---- a/tools/xenstore/hashtable.h
-+++ b/tools/xenstore/hashtable.h
-@@ -75,16 +75,6 @@ hashtable_search(struct hashtable *h, void *k);
- void * /* returns value */
- hashtable_remove(struct hashtable *h, void *k);
- 
--/*****************************************************************************
-- * hashtable_count
--   
-- * @name        hashtable_count
-- * @param   h   the hashtable
-- * @return      the number of items stored in the hashtable
-- */
--unsigned int
--hashtable_count(struct hashtable *h);
--
- /*****************************************************************************
-  * hashtable_iterate
- 
+ extern TDB_CONTEXT *tdb_ctx;
+ extern int dom0_domid;
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index 1aa9d3cb3d..19a1175d1b 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -366,8 +366,11 @@ static int finalize_transaction(struct connection *conn,
+ 				if (tdb_error(tdb_ctx) != TDB_ERR_NOEXIST)
+ 					return EIO;
+ 				gen = NO_GENERATION;
+-			} else
++			} else {
++				trace_tdb("read %s size %zu\n", key.dptr,
++					  key.dsize + data.dsize);
+ 				gen = hdr->generation;
++			}
+ 			talloc_free(data.dptr);
+ 			if (i->generation != gen)
+ 				return EAGAIN;
+@@ -391,6 +394,8 @@ static int finalize_transaction(struct connection *conn,
+ 			set_tdb_key(i->trans_name, &ta_key);
+ 			data = tdb_fetch(tdb_ctx, ta_key);
+ 			if (data.dptr) {
++				trace_tdb("read %s size %zu\n", ta_key.dptr,
++					  ta_key.dsize + data.dsize);
+ 				hdr = (void *)data.dptr;
+ 				hdr->generation = ++generation;
+ 				*is_corrupt |= do_tdb_write(conn, &key, &data,
 -- 
 2.35.3
 
