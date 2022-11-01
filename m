@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCEF2C43219
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 15:43:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.434970.687904 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B4D6C4321E
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Nov 2022 15:43:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.434967.687899 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optQO-0002pO-6b; Tue, 01 Nov 2022 15:43:36 +0000
+	id 1optQN-0002mm-UM; Tue, 01 Nov 2022 15:43:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 434970.687904; Tue, 01 Nov 2022 15:43:36 +0000
+Received: by outflank-mailman (output) from mailman id 434967.687899; Tue, 01 Nov 2022 15:43:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1optQO-0002p3-21; Tue, 01 Nov 2022 15:43:36 +0000
-Received: by outflank-mailman (input) for mailman id 434970;
+	id 1optQN-0002mf-QQ; Tue, 01 Nov 2022 15:43:35 +0000
+Received: by outflank-mailman (input) for mailman id 434967;
  Tue, 01 Nov 2022 15:43:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PfM8=3B=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1optDq-0007Bd-SB
- for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 15:30:38 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1optDO-0007Bd-QY
+ for xen-devel@lists.xenproject.org; Tue, 01 Nov 2022 15:30:10 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 22c7567f-59fa-11ed-8fd0-01056ac49cbb;
- Tue, 01 Nov 2022 16:30:38 +0100 (CET)
+ id 1221cb66-59fa-11ed-8fd0-01056ac49cbb;
+ Tue, 01 Nov 2022 16:30:10 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C4FED1F8CA;
- Tue,  1 Nov 2022 15:30:37 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D61673385D;
+ Tue,  1 Nov 2022 15:30:09 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9490E1346F;
- Tue,  1 Nov 2022 15:30:37 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A94561346F;
+ Tue,  1 Nov 2022 15:30:09 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mFb7Ip07YWONYQAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 15:30:37 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id ryH+J4E7YWNRYQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 01 Nov 2022 15:30:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,282 +53,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22c7567f-59fa-11ed-8fd0-01056ac49cbb
+X-Inumbo-ID: 1221cb66-59fa-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667316637; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1667316609; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=/+Sd+O8DwggSngPmK/S4X0Rtl1nPCQzxh+jG+tl/sB8=;
-	b=OZi+DTTliQy3mYT5OtMAMeO6qOucSYwr5MUNVeNgg2oypDwI8JKcFeZv2xvHG00kTNxpaI
-	98EQ5FftHfze3iM/f9hoP/P1J5BgG7+HjCF9IC7c9GsowoAGf+STae0SE9AnLfaV6elaQK
-	N9lYVW8IlIaWMDKzuJQsWeoxfERjHeo=
+	bh=vs7tzrOYBYmkzYl4ReCdb5HC0Yd5c99GD/sLiCRSObs=;
+	b=JyayYnxYUI0yFc9zniEKm81TdEP1b/ntvCh06rddcmY1ci4r4xDwFisg+YxZctujASetHc
+	KGj17238bpgMoSPs87kJ6y1pbGQ7iSmIuNYw2uXTRJ+hK5CQA9nRZw626TbTd3J88cGR/g
+	HLlAZbTFJSeiacENHkHtB2xy+bRZFJ4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 20/20] tools/xenstore: let check_store() check the accounting data
-Date: Tue,  1 Nov 2022 16:28:42 +0100
-Message-Id: <20221101152842.4257-21-jgross@suse.com>
+Subject: [PATCH 15/20] tools/xenstore: make domain_is_unprivileged() an inline function
+Date: Tue,  1 Nov 2022 16:28:37 +0100
+Message-Id: <20221101152842.4257-16-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20221101152842.4257-1-jgross@suse.com>
 References: <20221101152842.4257-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today check_store() is only testing the correctness of the node tree.
+clang is complaining about a NULL dereference for constructs like:
 
-Add verification of the accounting data (number of nodes)  and correct
-the data if it is wrong.
+  domain_is_unprivileged(conn) ? conn->in : NULL
 
-Do the initial check_store() call only after Xenstore entries of a
-live update have been read.
+as it can't know that domain_is_unprivileged(conn) will return false
+if conn is NULL.
+
+Fix that by making domain_is_unprivileged() an inline function (and
+related to that domid_is_unprivileged(), too).
+
+In order not having to make struct domain public, use conn->id instead
+of conn->domain->domid for the test.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_core.c   | 62 ++++++++++++++++------
- tools/xenstore/xenstored_domain.c | 86 +++++++++++++++++++++++++++++++
- tools/xenstore/xenstored_domain.h |  4 ++
- 3 files changed, 137 insertions(+), 15 deletions(-)
+ tools/xenstore/xenstored_core.h   | 10 ++++++++++
+ tools/xenstore/xenstored_domain.c | 11 -----------
+ tools/xenstore/xenstored_domain.h |  2 --
+ 3 files changed, 10 insertions(+), 13 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 86ef511ac0..ea0e6292d3 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2375,8 +2375,6 @@ void setup_structure(bool live_update)
- 		manual_node("@introduceDomain", NULL);
- 		domain_nbentry_fix(dom0_domid, 5, true);
- 	}
--
--	check_store();
- }
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 37006d508d..3c4e27d0dd 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -297,6 +297,16 @@ void unmap_xenbus(void *interface);
  
- static unsigned int hash_from_key_fn(void *k)
-@@ -2419,20 +2417,28 @@ int remember_string(struct hashtable *hash, const char *str)
-  * As we go, we record each node in the given reachable hashtable.  These
-  * entries will be used later in clean_store.
-  */
-+
-+struct check_store_data {
-+	struct hashtable *reachable;
-+	struct hashtable *domains;
-+};
-+
- static int check_store_step(const void *ctx, struct connection *conn,
- 			    struct node *node, void *arg)
- {
--	struct hashtable *reachable = arg;
-+	struct check_store_data *data = arg;
+ static inline int xenbus_master_domid(void) { return dom0_domid; }
  
--	if (hashtable_search(reachable, (void *)node->name)) {
-+	if (hashtable_search(data->reachable, (void *)node->name)) {
- 		log("check_store: '%s' is duplicated!", node->name);
- 		return recovery ? WALK_TREE_RM_CHILDENTRY
- 				: WALK_TREE_SKIP_CHILDREN;
- 	}
- 
--	if (!remember_string(reachable, node->name))
-+	if (!remember_string(data->reachable, node->name))
- 		return WALK_TREE_ERROR_STOP;
- 
-+	domain_check_acc_add(node, data->domains);
-+
- 	return WALK_TREE_OK;
- }
- 
-@@ -2482,37 +2488,61 @@ static int clean_store_(TDB_CONTEXT *tdb, TDB_DATA key, TDB_DATA val,
-  * Given the list of reachable nodes, iterate over the whole store, and
-  * remove any that were not reached.
-  */
--static void clean_store(struct hashtable *reachable)
-+static void clean_store(struct check_store_data *data)
- {
--	tdb_traverse(tdb_ctx, &clean_store_, reachable);
-+	tdb_traverse(tdb_ctx, &clean_store_, data->reachable);
-+	domain_check_acc(data->domains);
- }
- 
-+int check_store_path(const char *name, struct check_store_data *data)
++static inline bool domid_is_unprivileged(unsigned int domid)
 +{
-+	struct node *node;
-+
-+	node = read_node(NULL, NULL, name);
-+	if (!node) {
-+		log("check_store: error %d reading special node '%s'", errno,
-+		    name);
-+		return errno;
-+	}
-+
-+	return check_store_step(NULL, NULL, node, data);
++	return domid != dom0_domid && domid != priv_domid;
 +}
- 
- void check_store(void)
- {
--	struct hashtable *reachable;
- 	struct walk_funcs walkfuncs = {
- 		.enter = check_store_step,
- 		.enoent = check_store_enoent,
- 	};
-+	struct check_store_data data;
- 
- 	/* Don't free values (they are all void *1) */
--	reachable = create_hashtable(NULL, 16, hash_from_key_fn, keys_equal_fn,
--				     HASHTABLE_FREE_KEY);
--	if (!reachable) {
-+	data.reachable = create_hashtable(NULL, 16, hash_from_key_fn,
-+					  keys_equal_fn, HASHTABLE_FREE_KEY);
-+	if (!data.reachable) {
- 		log("check_store: ENOMEM");
- 		return;
- 	}
- 
-+	data.domains = domain_check_acc_init();
-+	if (!data.domains) {
-+		log("check_store: ENOMEM");
-+		goto out_hash;
-+	}
 +
- 	log("Checking store ...");
--	if (walk_node_tree(NULL, NULL, "/", &walkfuncs, reachable)) {
-+	if (walk_node_tree(NULL, NULL, "/", &walkfuncs, &data)) {
- 		if (errno == ENOMEM)
- 			log("check_store: ENOMEM");
--	} else if (!check_transactions(reachable))
--		clean_store(reachable);
-+	} else if (!check_store_path("@introduceDomain", &data) &&
-+		   !check_store_path("@releaseDomain", &data) &&
-+		   !check_transactions(data.reachable))
-+		clean_store(&data);
- 	log("Checking store complete.");
- 
--	hashtable_destroy(reachable);
-+	hashtable_destroy(data.domains);
-+ out_hash:
-+	hashtable_destroy(data.reachable);
- }
- 
- 
-@@ -2900,6 +2930,8 @@ int main(int argc, char *argv[])
- 		lu_read_state();
- #endif
- 
-+	check_store();
++static inline bool domain_is_unprivileged(const struct connection *conn)
++{
++	return conn && domid_is_unprivileged(conn->id);
++}
 +
- 	/* Get ready to listen to the tools. */
- 	initialize_fds(&sock_pollfd_idx, &timeout);
+ /* Return the event channel used by xenbus. */
+ evtchn_port_t xenbus_evtchn(void);
  
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 70d9e9572d..582b78b0ee 100644
+index 0f1c903ee6..368b9bc2b7 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -1569,6 +1569,92 @@ void read_state_connection(const void *ctx, const void *state)
- 	read_state_buffered_data(ctx, conn, sc);
+@@ -412,17 +412,6 @@ void handle_event(void)
+ 		barf_perror("Failed to write to event fd");
  }
  
-+struct domain_acc {
-+	unsigned int domid;
-+	int nodes;
-+};
-+
-+static int domain_check_acc_init_sub(void *k, void *v, void *arg)
-+{
-+	struct hashtable *domains = arg;
-+	struct domain *d = v;
-+	struct domain_acc *dom;
-+
-+	dom = talloc_zero(NULL, struct domain_acc);
-+	if (!dom)
-+		return -1;
-+
-+	dom->domid = d->domid;
-+	/*
-+	 * Set the initial value to the negative one of the current domain.
-+	 * If everything is correct incrementing the value for each node will
-+	 * result in dom->nodes being 0 at the end.
-+	 */
-+	dom->nodes = -d->nbentry;
-+
-+	if (!hashtable_insert(domains, &dom->domid, dom)) {
-+		talloc_free(dom);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+struct hashtable *domain_check_acc_init(void)
-+{
-+	struct hashtable *domains;
-+
-+	domains = create_hashtable(NULL, 8, domhash_fn, domeq_fn,
-+				   HASHTABLE_FREE_VALUE);
-+	if (!domains)
-+		return NULL;
-+
-+	if (hashtable_iterate(domhash, domain_check_acc_init_sub, domains)) {
-+		hashtable_destroy(domains);
-+		return NULL;
-+	}
-+
-+	return domains;
-+}
-+
-+void domain_check_acc_add(const struct node *node, struct hashtable *domains)
-+{
-+	struct domain_acc *dom;
-+	unsigned int domid;
-+
-+	domid = node->perms.p[0].id;
-+	dom = hashtable_search(domains, &domid);
-+	if (!dom)
-+		log("Node %s owned by unknown domain %u", node->name, domid);
-+	else
-+		dom->nodes++;
-+}
-+
-+static int domain_check_acc_sub(void *k, void *v, void *arg)
-+{
-+	struct domain_acc *dom = v;
-+	struct domain *d;
-+
-+	if (!dom->nodes)
-+		return 0;
-+
-+	log("Correct accounting data for domain %u: nodes are %d off",
-+	    dom->domid, dom->nodes);
-+
-+	d = find_domain_struct(dom->domid);
-+	if (!d)
-+		return 0;
-+
-+	d->nbentry += dom->nodes;
-+
-+	return 0;
-+}
-+
-+void domain_check_acc(struct hashtable *domains)
-+{
-+	hashtable_iterate(domains, domain_check_acc_sub, NULL);
-+}
-+
- /*
-  * Local variables:
-  *  mode: C
+-static bool domid_is_unprivileged(unsigned int domid)
+-{
+-	return domid != dom0_domid && domid != priv_domid;
+-}
+-
+-bool domain_is_unprivileged(struct connection *conn)
+-{
+-	return conn && conn->domain &&
+-	       domid_is_unprivileged(conn->domain->domid);
+-}
+-
+ static char *talloc_domain_path(const void *context, unsigned int domid)
+ {
+ 	return talloc_asprintf(context, "/local/domain/%u", domid);
 diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 22996e2576..dc4660861e 100644
+index 1e402f2609..22996e2576 100644
 --- a/tools/xenstore/xenstored_domain.h
 +++ b/tools/xenstore/xenstored_domain.h
-@@ -129,4 +129,8 @@ const char *dump_state_connections(FILE *fp);
+@@ -59,8 +59,6 @@ void ignore_connection(struct connection *conn, unsigned int err);
+ /* Returns the implicit path of a connection (only domains have this) */
+ const char *get_implicit_path(const struct connection *conn);
  
- void read_state_connection(const void *ctx, const void *state);
- 
-+struct hashtable *domain_check_acc_init(void);
-+void domain_check_acc_add(const struct node *node, struct hashtable *domains);
-+void domain_check_acc(struct hashtable *domains);
-+
- #endif /* _XENSTORED_DOMAIN_H */
+-bool domain_is_unprivileged(struct connection *conn);
+-
+ /* Remove node permissions for no longer existing domains. */
+ int domain_adjust_node_perms(struct node *node);
+ int domain_alloc_permrefs(struct node_perms *perms);
 -- 
 2.35.3
 
