@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAF85C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Nov 2022 11:29:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.435804.689598 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65575C43219
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Nov 2022 11:29:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.435806.689620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqBvc-0001lo-2U; Wed, 02 Nov 2022 11:29:04 +0000
+	id 1oqBvq-0002M0-ER; Wed, 02 Nov 2022 11:29:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 435804.689598; Wed, 02 Nov 2022 11:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 435806.689620; Wed, 02 Nov 2022 11:29:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqBvb-0001lg-Qn; Wed, 02 Nov 2022 11:29:03 +0000
-Received: by outflank-mailman (input) for mailman id 435804;
- Wed, 02 Nov 2022 11:29:02 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oqBvq-0002Lo-9W; Wed, 02 Nov 2022 11:29:18 +0000
+Received: by outflank-mailman (input) for mailman id 435806;
+ Wed, 02 Nov 2022 11:29:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2cji=3C=citrix.com=prvs=298722737=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oqBva-0001la-Ks
- for xen-devel@lists.xenproject.org; Wed, 02 Nov 2022 11:29:02 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8adafbb8-5aa1-11ed-91b5-6bf2151ebd3b;
- Wed, 02 Nov 2022 12:29:00 +0100 (CET)
+ id 1oqBvo-00021c-N6
+ for xen-devel@lists.xenproject.org; Wed, 02 Nov 2022 11:29:16 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 944c0787-5aa1-11ed-8fd0-01056ac49cbb;
+ Wed, 02 Nov 2022 12:29:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,91 +38,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8adafbb8-5aa1-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: 944c0787-5aa1-11ed-8fd0-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1667388539;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Q3hcdcZDvwBPZ68PKud/zS5YU2lxoxIAcF5oBaqlgss=;
-  b=QPu4AzWy4kEJ23UeXVL8wCm60H6ufkzQvR1xAeLZd6TxuADB+PTA1Wo3
-   ECN/dOql63fSviwh/+1jbt7KY7+hjAiqafHe3O0Z+UMsEs3Hqn+aztWaZ
-   QG4jYOnuLcbbXtfnZb6Wd6QmYAMt4swvVTesjReBtdtsJrG2BdVRBNS98
-   M=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1667388555;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=pr0JfmwP5/FWVhK0t5YQqcQll6KmEYKssZtRV/z9j94=;
+  b=UMMiSzEnIy3yybdqtVAE/goJXOZnIS4g04N/vpLt77TZjbNKqpwlKJBf
+   8W82RDZira55YRqW1wvl35l+m5V4pt0/d8k+IYJeGlfT5dko6oqgwz2ed
+   0ErxmmXiJ9VvmOmbLrBB1CeeZqSpZgVT1iIgPAw4rBa59MDS7CdaTu3Pv
+   g=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 84426188
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 84016409
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:GUflZqg/eEi4awlmjgryQet/X161rRAKZh0ujC45NGQN5FlHY01je
- htvD2vXafyKM2H2f9ojboW+/U5VvZ7cnNUxSAJqrys3QyMb9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmUpH1QMpB4J0XpLg/Q+jpNjne+3CgaMv
- cKai8DEMRqu1iUc3lg8sspvkzsy+qWv0N8klgZmP6oS5QeEzyB94K83fsldEVOpGuG4IcbiL
- wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
- OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
- tQnBBsyYRq8m96L3b3lT8ByqpsnJ+T0adZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
- pRDL2A1NVKZPkMJagx/5JEWxY9EglH2dSFYr1SE47I6+WHJwCR60aT3McqTcduPLSlQthbE+
- jiYpjSpav0cHIa11COBo0yPvN3exQb/YZwPHeCTxMc/1TV/wURMUUZLBDNXu8KRiESzRtZeI
- Ew84Tc1oO4580nDZsb5dw21pjiDpBF0c9hNF+w37imdx6yS5ByWbkAkQzhbeZoZvck5bTUw0
- xmCmNaBLSxitviZRGyQ8p+QrCiuIm4FIGkafygGQAAZpd75r+kblQnTR9xuFKq0iNzdGjzqx
- T2O6i8kiN0uYdUjjvvhuwqd2nT1+8aPHlVdChjrsnyN0S9SW4GvWJCU1EXUs/NpMqrGSlKso
- y1R8ySB19wmAZaInS2LZewCGrC1+vqIWAHhbU5T84oJrGr0pSP6FWxEyHQnfRoybJ5YEdP8S
- BWL0T698qO/K5dDgUVfR4uqQ/onwqH7fTgOfqCFN4EeCnSdmeLuwc2PWaJy9zqz+KTPuftlU
- Xt+TSpLJS9DYZmLNBLsG48gPUYDn0jSP1/7S5Hh1AiA2rGDfnOTQrptGALQML9itvzb+FSEq
- oo32y62J/J3CbOWX8Uq2dRLcQBiwYYTWPgaVPC7hsbce1E7SQnN+tfawK87epwNokimvr6gw
- 51JYWcBkQKXuJEyAV/VApyVQO+wAM0XQLNSFXBEAGtELFB6P9j/t/9PJsVpFVTlncQ6pcNJo
- zA+U53oKpxypv7volzxsbGVQFReSSmW
-IronPort-HdrOrdr: A9a23:2H7z9q4RJyP/TY5rugPXwMLXdLJyesId70hD6qhwISY7TiX+rb
- HKoB17726StN9/YhAdcLy7VZVoIkmsl6Kdg7NwAV7KZmCP0wGVxelZnO/fKlbbdREWmNQw6U
- 4ZSdkcNOHN
+IronPort-Data: A9a23:aRFRLKC8Hj8+IhVW/+Tjw5YqxClBgxIJ4kV8jS/XYbTApD9xhDIHz
+ GMXWGjQOK3eZTP8fd93Yd7n8x5XucKHmIVlQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nNHuCnYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFtspvlDs15K6o4WpA5ARnDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwxeV7OERI2
+ sUjDTkOLUzSgumcwZicVbw57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
+ pdHL2o0BPjDS0Qn1lM/AZQinOCulz/nfidRsl69rqsr+WnDigd21dABNfKFJoTTG5kNzy50o
+ Ere43TYBSwYGuW11GGOyTGMmevJtzH0Ddd6+LqQqacx3Qz7KnYoIB8LUVq2p9Gph0j4XMhQQ
+ 2QP4TYnp6U28E2tT/H+Uge+rXrCuQQTM/JPF8Uq5QfLzbDbiy6JC25BQjNfZdgOsM4tWSdsx
+ lKPh8nuBzFkrPuSU3313peZqymjfxccK2AqbDUBCwAC5rHLoos+kxbORdZLC7Oug5v+HjSY/
+ tyRhHFg3fNJ15dNjvjluwCc696xmnTXZjE26jzyWE2c1SZwZ835Nomjw1nxyukVee51UWK9l
+ HQDnsGf6sUHApeMiDGBTY0xIV252xqWGGaC2AAyRvHN4xzooif+Jt4IvFmSMW8zaq45lSnVj
+ Fg/UO+7zLtaJzOUYKB+eOpd4Ox6nPG7RbwJuh05B+eig6SdlifdokmChmbKhQgBdXTAdolmY
+ P+mnT6EVypyNEie5GPeqx0h+bEq3Dsi4mjYWIr2yR+quZLHOiDKEu1abwPfP7llhE9hnOky2
+ 48BX/ZmNj0FCLGuCsUp2dN7wa82wYgTWsmt9p0/mh+rKQt6AmAxY8I9Mpt4E7GJa599z76Ql
+ kxRr2cClzITc1WbdljRAp2iAZuzNatCQYUTZHJybQ3wiyl9P+5CLs43LvMKQFXuz8Q7pdYcc
+ hXPU5zo7ihnItgfxwkgUA==
+IronPort-HdrOrdr: A9a23:Nf8BuKhH4RKMi8ondNUPty3BtXBQXuIji2hC6mlwRA09TySZ//
+ rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
+ 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
 X-IronPort-AV: E=Sophos;i="5.95,232,1661832000"; 
-   d="scan'208";a="84426188"
+   d="scan'208";a="84016409"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Henry Wang <Henry.Wang@arm.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall
-	<julien@xen.org>
-Subject: [XEN PATCH for-4.17 0/4] Fixing some licences issue in public headers
-Date: Wed, 2 Nov 2022 11:28:50 +0000
-Message-ID: <20221102112854.49020-1-anthony.perard@citrix.com>
+	<anthony.perard@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>, Andrew Cooper <Andrew.Cooper3@citrix.com>
+Subject: [XEN PATCH for-4.17 2/4] tools/include/xen-foreign: Capture licences from the input headers
+Date: Wed, 2 Nov 2022 11:28:52 +0000
+Message-ID: <20221102112854.49020-3-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20221102112854.49020-1-anthony.perard@citrix.com>
+References: <20221102112854.49020-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Patch series available in this git branch:
-https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.licences-fix-public-headers-v1
+The headers install in "/usr/include/xen/foreign/" are missing a
+licence.
 
-Hi,
+While we could probably just add the MIT licence to the generated
+file, this patch instead try to grab the licence from the original
+input file.
 
-Andrew pointed out some licences issue:
+Since licences are in the first multiline C comments, we just look for
+that. Also with this patch, the possible licences will not be in the
+"input" variable anymore, but it should be unnecessary to generate the
+foreign header.
 
-https://lore.kernel.org/xen-devel/b58f5340-d4fa-df9d-89de-6137005add77@citrix.com/T/#u
-tracked here: https://gitlab.com/xen-project/xen/-/issues/35
+With this change, the licence will be copied 2 or 3 time in the
+install headers depending on the number of input headers.
 
-So I attempt to fix them with this series.
+Reported-by: Andrew Cooper <Andrew.Cooper3@citrix.com>
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
 
-For 4.17:
-    This mostly change "documentation" so little risk for those patch, except
-    "xen-foreign: Capture licences from the input headers" which changes
-    "mkheader.py" which could generate broken headers.
+Notes:
+    Maybe instead of this, we should just stamp this on the generated header
+        /* SPDX-License-Identifier: MIT */
+    
+    but we would be missing the "Copyright" informations. I guess we could
+    look for those line with Copyright and copy them.
+    
+    Or, we could replace the licence in the input header by a SPDX and have
+    the script parse that. (Probably still need to grab the Copyright lines)
+    
+    CC: Andrew Cooper <andrew.cooper3@citrix.com>
+    CC: George Dunlap <george.dunlap@citrix.com>
+    CC: Jan Beulich <jbeulich@suse.com>
+    CC: Julien Grall <julien@xen.org>
+    CC: Stefano Stabellini <sstabellini@kernel.org>
+    CC: Wei Liu <wl@xen.org>
 
-Anthony PERARD (4):
-  xen: Add licence information to public/errno.h
-  tools/include/xen-foreign: Capture licences from the input headers
-  xen: Add licence header to device_tree_defs.h
-  Rework COPYING installed in /usr/include/xen/, due to several licences
-
- tools/include/Makefile                |  1 -
- xen/include/public/device_tree_defs.h |  6 ++++++
- xen/include/public/errno.h            |  2 ++
  tools/include/xen-foreign/mkheader.py | 15 +++++++++++++--
- tools/include/xen/COPYING             | 26 ++++++++++++++++++++++++++
- 5 files changed, 47 insertions(+), 3 deletions(-)
- create mode 100644 tools/include/xen/COPYING
+ 1 file changed, 13 insertions(+), 2 deletions(-)
 
+diff --git a/tools/include/xen-foreign/mkheader.py b/tools/include/xen-foreign/mkheader.py
+index fb268f0dce..07a9bcbd01 100644
+--- a/tools/include/xen-foreign/mkheader.py
++++ b/tools/include/xen-foreign/mkheader.py
+@@ -114,9 +114,19 @@ input  = "";
+ output = "";
+ fileid = re.sub("[-.]", "_", "__FOREIGN_%s__" % outfile.upper());
+ 
+-# read input header files
++# Try to captures licences headers from original files.
++# heuristic: just look for the end of the first multiline comment.
++licence_headers = "";
++
+ for name in infiles:
+     f = open(name, "r");
++    while True:
++        line = f.readline()
++        if not line:
++            break
++        licence_headers += line
++        if line == " */\n":
++            break
+     input += f.read();
+     f.close();
+ 
+@@ -126,11 +136,12 @@ output += """
+  * public xen defines and struct for %s
+  * generated by %s -- DO NOT EDIT
+  */
++%s
+ 
+ #ifndef %s
+ #define %s 1
+ 
+-""" % (arch, sys.argv[0], fileid, fileid)
++""" % (arch, sys.argv[0], licence_headers, fileid, fileid)
+ 
+ if arch in header:
+     output += header[arch];
 -- 
 Anthony PERARD
 
