@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7CDFC4321E
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Nov 2022 11:37:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.436347.690392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C0FC433FE
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Nov 2022 11:37:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.436349.690414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqYWf-0003D6-U9; Thu, 03 Nov 2022 11:36:49 +0000
+	id 1oqYWp-0003ma-IM; Thu, 03 Nov 2022 11:36:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 436347.690392; Thu, 03 Nov 2022 11:36:49 +0000
+Received: by outflank-mailman (output) from mailman id 436349.690414; Thu, 03 Nov 2022 11:36:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqYWf-0003Cz-R2; Thu, 03 Nov 2022 11:36:49 +0000
-Received: by outflank-mailman (input) for mailman id 436347;
- Thu, 03 Nov 2022 11:36:48 +0000
+	id 1oqYWp-0003mQ-EJ; Thu, 03 Nov 2022 11:36:59 +0000
+Received: by outflank-mailman (input) for mailman id 436349;
+ Thu, 03 Nov 2022 11:36:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2XF3=3D=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oqYWe-0003Ct-Cd
- for xen-devel@lists.xenproject.org; Thu, 03 Nov 2022 11:36:48 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ id 1oqYWn-0003Ct-Cu
+ for xen-devel@lists.xenproject.org; Thu, 03 Nov 2022 11:36:57 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cc1e893f-5b6b-11ed-91b5-6bf2151ebd3b;
- Thu, 03 Nov 2022 12:36:46 +0100 (CET)
+ id d23708ba-5b6b-11ed-91b5-6bf2151ebd3b;
+ Thu, 03 Nov 2022 12:36:56 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0B6971F88C;
- Thu,  3 Nov 2022 11:36:45 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 64E041F385;
+ Thu,  3 Nov 2022 11:36:56 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A806913480;
- Thu,  3 Nov 2022 11:36:44 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2225213480;
+ Thu,  3 Nov 2022 11:36:56 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id zT6jJ8ynY2PoHgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 03 Nov 2022 11:36:44 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 5ETtBtinY2MEHwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 03 Nov 2022 11:36:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,14 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc1e893f-5b6b-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: d23708ba-5b6b-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1667475405; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=R2jqME7F+qdUftTzWR72PDDjTzwv0qCQjs1xhw+ZdsU=;
-	b=lMyg6ETc97azzoW47K210vpzsQEyM8fTV4c+5WVVzcj+0lcLDHxabMpcsuQMWDFQvtAZN4
-	0hHPII4l8tRuDyGpgjP5TscidSmhQjiCJvhdysgX8my9WIWoEW2vGXjt+IpIi1/24B0r9O
-	Dk7aO6PBwgzOCy9oygMAKvYkeLf/lvk=
+	t=1667475416; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=mK6Yb+HDZYey+MdThM5vOztF2LsAJko2NCXxRRCzJLc=;
+	b=kXqfwiKMdh9juEVxLq/XwrPXmX7SB2cxef3a31IZCdP9dQWBaNfSqFJxrMjZHT4Z9ML6rG
+	pVIF8wHcHue8M1//i+/XCN0IhieNQ20fbVOJsCKv5zlarDyZcQQnAH0zAxIADInsArD5tT
+	8T43gbRaTSNsxxlmazfgdFihOv9Swfw=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
@@ -70,38 +72,41 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Pu Wen <puwen@hygon.cn>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH 0/4] Switch X86_FEATURE_XENPV to cpu_feature_enabled() use
-Date: Thu,  3 Nov 2022 12:36:32 +0100
-Message-Id: <20221103113636.25543-1-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH 2/4] x86: remove unneeded 64-bit dependency in arch_enter_from_user_mode()
+Date: Thu,  3 Nov 2022 12:36:34 +0100
+Message-Id: <20221103113636.25543-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20221103113636.25543-1-jgross@suse.com>
+References: <20221103113636.25543-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Make especially kernels without CONFIG_XEN_PV more efficient by
-using cpu_feature_enabled(X86_FEATURE_XENPV) instead of boot_cpu_has()
-and friends.
+The check for 64-bit mode when testing X86_FEATURE_XENPV isn't needed,
+as Xen PV guests are no longer supported in 32-bit mode.
 
-Juergen Gross (4):
-  x86: add X86_FEATURE_XENPV to disabled-features.h
-  x86: remove unneeded 64-bit dependency in arch_enter_from_user_mode()
-  x86: drop 32-bit Xen PV guest code in update_task_stack()
-  x86: switch to cpu_feature_enabled() for X86_FEATURE_XENPV
+While at it switch from boot_cpu_has() to cpu_feature_enabled().
 
- arch/x86/include/asm/disabled-features.h | 8 +++++++-
- arch/x86/include/asm/entry-common.h      | 4 ++--
- arch/x86/include/asm/switch_to.h         | 7 ++-----
- arch/x86/kernel/cpu/amd.c                | 2 +-
- arch/x86/kernel/cpu/bugs.c               | 2 +-
- arch/x86/kernel/cpu/hygon.c              | 2 +-
- arch/x86/kernel/process_64.c             | 4 ++--
- arch/x86/kernel/topology.c               | 2 +-
- arch/x86/mm/cpu_entry_area.c             | 2 +-
- 9 files changed, 18 insertions(+), 15 deletions(-)
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/entry-common.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/arch/x86/include/asm/entry-common.h b/arch/x86/include/asm/entry-common.h
+index 674ed46d3ced..117903881fe4 100644
+--- a/arch/x86/include/asm/entry-common.h
++++ b/arch/x86/include/asm/entry-common.h
+@@ -24,8 +24,8 @@ static __always_inline void arch_enter_from_user_mode(struct pt_regs *regs)
+ 		/*
+ 		 * For !SMAP hardware we patch out CLAC on entry.
+ 		 */
+-		if (boot_cpu_has(X86_FEATURE_SMAP) ||
+-		    (IS_ENABLED(CONFIG_64BIT) && boot_cpu_has(X86_FEATURE_XENPV)))
++		if (cpu_feature_enabled(X86_FEATURE_SMAP) ||
++		    cpu_feature_enabled(X86_FEATURE_XENPV))
+ 			mask |= X86_EFLAGS_AC;
+ 
+ 		WARN_ON_ONCE(flags & mask);
 -- 
 2.35.3
 
