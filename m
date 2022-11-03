@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA01C4332F
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Nov 2022 15:22:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.436681.690974 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EA8C4332F
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Nov 2022 15:25:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.436721.690989 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqc2r-0007Tr-81; Thu, 03 Nov 2022 15:22:17 +0000
+	id 1oqc5w-0008SR-QG; Thu, 03 Nov 2022 15:25:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 436681.690974; Thu, 03 Nov 2022 15:22:17 +0000
+Received: by outflank-mailman (output) from mailman id 436721.690989; Thu, 03 Nov 2022 15:25:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oqc2r-0007Tk-3I; Thu, 03 Nov 2022 15:22:17 +0000
-Received: by outflank-mailman (input) for mailman id 436681;
- Thu, 03 Nov 2022 15:22:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oqc2q-0007Ta-1e; Thu, 03 Nov 2022 15:22:16 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oqc2p-0006G9-Ub; Thu, 03 Nov 2022 15:22:15 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oqc2p-0000p1-Jl; Thu, 03 Nov 2022 15:22:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oqc2p-00030H-Iq; Thu, 03 Nov 2022 15:22:15 +0000
+	id 1oqc5w-0008SK-KN; Thu, 03 Nov 2022 15:25:28 +0000
+Received: by outflank-mailman (input) for mailman id 436721;
+ Thu, 03 Nov 2022 15:25:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Yy4e=3D=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
+ id 1oqbvv-0001nI-3J
+ for xen-devel@lists.xenproject.org; Thu, 03 Nov 2022 15:15:07 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 48546afb-5b8a-11ed-8fd0-01056ac49cbb;
+ Thu, 03 Nov 2022 16:14:59 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id ADBCA21E0F;
+ Thu,  3 Nov 2022 15:15:01 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2463D13ADB;
+ Thu,  3 Nov 2022 15:15:01 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id sNoICPXaY2PBGgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Thu, 03 Nov 2022 15:15:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,146 +53,511 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=8xkgavQ85CNBFtnBncncO4jBKsy8P36yEgb3Br8wSwo=; b=zIRNc0tvlrg9NA4Kc6vNQmSdtP
-	FkhjRvKwAMC5kCtMpePvadxbFDw/8kGySD8/UtPmlPe/gO2FV3+p9gxtIJRq0AVG7z7he52eTyYUI
-	IYIgmGJpp0ziNzNYjl8OtJmBCoUS+LZ/moNTAJoY1GVUltrHI+UDhKAzWRBCa3djHBbE=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-174598-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 48546afb-5b8a-11ed-8fd0-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1667488501; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=tKKDgnAGRekThl+Kef4OIp3bhWwiXQhMBkwOIt4sJLE=;
+	b=qcoaEe5YDt/TSoDF9LlZD6Ng+7gD76PPx58VoLgyC2ai3047WiYzO6VG3UqAQIKy3YKHXg
+	REz70h7mZR412dIJJPtt6KeG1I2HUyUb1PBRsZuXjXfuKD9CPq7uVKM+mBw35lKrclD5/3
+	d/CmcLsUtt54A7ePpp2jBuYDLUuRSlM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1667488501;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=tKKDgnAGRekThl+Kef4OIp3bhWwiXQhMBkwOIt4sJLE=;
+	b=vNkdqKAyelvn3nPdMe6vc+09jji6Lk7jXBt2wG5SEJu98SaBJt2CYv2mNsp1sZeqm7L53F
+	HQNJ4nEa4KQxHwDA==
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: daniel@ffwll.ch,
+	airlied@gmail.com,
+	sam@ravnborg.org,
+	javierm@redhat.com,
+	mripard@kernel.org,
+	maarten.lankhorst@linux.intel.com
+Cc: "linux-hyperv@vger.kernel.orglinux-hyperv"@vger.kernel.org,
+	linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-samsung-soc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org, xen-devel@lists.xenproject.org,
+	linux-sunxi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org,
+	spice-devel@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+	linux-amlogic@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
+	linux-renesas-soc@vger.kernel.org, freedreno@lists.freedesktop.org,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v3 22/23] drm/fb-helper: Remove unnecessary include statements
+Date: Thu,  3 Nov 2022 16:14:45 +0100
+Message-Id: <20221103151446.2638-23-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.38.0
+In-Reply-To: <20221103151446.2638-1-tzimmermann@suse.de>
+References: <20221103151446.2638-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Subject: [libvirt test] 174598: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    libvirt=a607baf65a66491d5bcbca1e3fa4e672a9ec8611
-X-Osstest-Versions-That:
-    libvirt=72d4709ab901dd3699d342f15ca3aff9bffddf96
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 03 Nov 2022 15:22:15 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 174598 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/174598/
+Remove include statements for <drm/drm_fb_helper.h> where it is not
+required (i.e., most of them). In a few places include other header
+files that are required by the source code.
 
-Failures :-/ but no regressions.
+v3:
+	* fix amdgpu include statements
+	* fix rockchip include statements
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 174549
- test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 174549
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 174549
- test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c  | 1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c      | 1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c     | 2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c         | 1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h        | 1 -
+ drivers/gpu/drm/amd/amdgpu/dce_v10_0.c          | 1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v11_0.c          | 1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v6_0.c           | 1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v8_0.c           | 1 +
+ drivers/gpu/drm/arm/hdlcd_crtc.c                | 1 -
+ drivers/gpu/drm/ast/ast_drv.h                   | 1 -
+ drivers/gpu/drm/bridge/tc358762.c               | 2 +-
+ drivers/gpu/drm/drm_crtc_helper.c               | 1 -
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c    | 1 -
+ drivers/gpu/drm/drm_probe_helper.c              | 1 -
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h           | 3 ++-
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h | 1 -
+ drivers/gpu/drm/hyperv/hyperv_drm_modeset.c     | 1 -
+ drivers/gpu/drm/imx/imx-ldb.c                   | 2 +-
+ drivers/gpu/drm/imx/imx-tve.c                   | 1 -
+ drivers/gpu/drm/imx/parallel-display.c          | 2 +-
+ drivers/gpu/drm/kmb/kmb_plane.c                 | 1 -
+ drivers/gpu/drm/mgag200/mgag200_drv.h           | 1 -
+ drivers/gpu/drm/qxl/qxl_drv.h                   | 1 -
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.h     | 2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c     | 1 +
+ drivers/gpu/drm/tidss/tidss_kms.c               | 1 -
+ drivers/gpu/drm/v3d/v3d_drv.c                   | 1 -
+ drivers/gpu/drm/vboxvideo/vbox_main.c           | 1 -
+ drivers/gpu/drm/virtio/virtgpu_drv.h            | 1 -
+ drivers/gpu/drm/xen/xen_drm_front_gem.c         | 1 -
+ 31 files changed, 14 insertions(+), 24 deletions(-)
 
-version targeted for testing:
- libvirt              a607baf65a66491d5bcbca1e3fa4e672a9ec8611
-baseline version:
- libvirt              72d4709ab901dd3699d342f15ca3aff9bffddf96
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+index 491d4846fc02c..e1320edfc5274 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+@@ -26,7 +26,6 @@
+ 
+ #include <drm/display/drm_dp_helper.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/amdgpu_drm.h>
+ #include "amdgpu.h"
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+index ddaecb2610c94..56a031a2e087e 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+@@ -37,6 +37,7 @@
+ #include <linux/pci-p2pdma.h>
+ 
+ #include <drm/drm_atomic_helper.h>
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/amdgpu_drm.h>
+ #include <linux/vgaarb.h>
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+index dd6f9ae6fbe9f..311a8ea6f0654 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+@@ -39,8 +39,8 @@
+ #include <linux/pm_runtime.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_fb_helper.h>
++#include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_vblank.h>
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+index bf1ff8f0e7120..e3a18f069ce5e 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+@@ -29,6 +29,7 @@
+ #include "amdgpu.h"
+ #include <drm/amdgpu_drm.h>
+ #include <drm/drm_drv.h>
++#include <drm/drm_fb_helper.h>
+ #include "amdgpu_uvd.h"
+ #include "amdgpu_vce.h"
+ #include "atom.h"
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h
+index 37322550d7508..8a39300b1a845 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h
+@@ -36,7 +36,6 @@
+ #include <drm/drm_encoder.h>
+ #include <drm/drm_fixed.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_probe_helper.h>
+ #include <linux/i2c.h>
+diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c b/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c
+index 05051d5d2ec31..90f87b2d985b5 100644
+--- a/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c
+@@ -21,6 +21,7 @@
+  *
+  */
+ 
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_vblank.h>
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c b/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
+index c928bc9eb2026..0352de72c886a 100644
+--- a/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
+@@ -21,6 +21,7 @@
+  *
+  */
+ 
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_vblank.h>
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c b/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c
+index 62315fd5a05f2..07bd16e820461 100644
+--- a/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c
+@@ -23,6 +23,7 @@
+ 
+ #include <linux/pci.h>
+ 
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_vblank.h>
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c b/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c
+index 87d5e4c21cb37..d73df100f2b3b 100644
+--- a/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c
+@@ -21,6 +21,7 @@
+  *
+  */
+ 
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_vblank.h>
+ 
+diff --git a/drivers/gpu/drm/arm/hdlcd_crtc.c b/drivers/gpu/drm/arm/hdlcd_crtc.c
+index 7030339fa2323..ddbe1dd2d44ef 100644
+--- a/drivers/gpu/drm/arm/hdlcd_crtc.c
++++ b/drivers/gpu/drm/arm/hdlcd_crtc.c
+@@ -19,7 +19,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_fb_dma_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_dma_helper.h>
+ #include <drm/drm_of.h>
+diff --git a/drivers/gpu/drm/ast/ast_drv.h b/drivers/gpu/drm/ast/ast_drv.h
+index 74f41282444f6..d51b81fea9c80 100644
+--- a/drivers/gpu/drm/ast/ast_drv.h
++++ b/drivers/gpu/drm/ast/ast_drv.h
+@@ -38,7 +38,6 @@
+ #include <drm/drm_encoder.h>
+ #include <drm/drm_mode.h>
+ #include <drm/drm_framebuffer.h>
+-#include <drm/drm_fb_helper.h>
+ 
+ #define DRIVER_AUTHOR		"Dave Airlie"
+ 
+diff --git a/drivers/gpu/drm/bridge/tc358762.c b/drivers/gpu/drm/bridge/tc358762.c
+index 7f4fce1aa9988..0b6a284368859 100644
+--- a/drivers/gpu/drm/bridge/tc358762.c
++++ b/drivers/gpu/drm/bridge/tc358762.c
+@@ -11,6 +11,7 @@
+  */
+ 
+ #include <linux/delay.h>
++#include <linux/mod_devicetable.h>
+ #include <linux/module.h>
+ #include <linux/of_graph.h>
+ #include <linux/regulator/consumer.h>
+@@ -19,7 +20,6 @@
+ 
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_crtc.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_mipi_dsi.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
+diff --git a/drivers/gpu/drm/drm_crtc_helper.c b/drivers/gpu/drm/drm_crtc_helper.c
+index f5fb22e0d0337..a209659a996c7 100644
+--- a/drivers/gpu/drm/drm_crtc_helper.c
++++ b/drivers/gpu/drm/drm_crtc_helper.c
+@@ -43,7 +43,6 @@
+ #include <drm/drm_drv.h>
+ #include <drm/drm_edid.h>
+ #include <drm/drm_encoder.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_print.h>
+diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+index e35e224e6303a..e93533b86037f 100644
+--- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
++++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+@@ -9,7 +9,6 @@
+ #include <linux/module.h>
+ 
+ #include <drm/drm_damage_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem.h>
+diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
+index 2fc21df709bcb..bcd9611dabfd9 100644
+--- a/drivers/gpu/drm/drm_probe_helper.c
++++ b/drivers/gpu/drm/drm_probe_helper.c
+@@ -36,7 +36,6 @@
+ #include <drm/drm_client.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_modeset_helper_vtables.h>
+ #include <drm/drm_print.h>
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+index f32f4771dada7..2bb4c25565dcb 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
++++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+@@ -6,13 +6,14 @@
+ #ifndef __ETNAVIV_DRV_H__
+ #define __ETNAVIV_DRV_H__
+ 
++#include <linux/io.h>
+ #include <linux/list.h>
+ #include <linux/mm_types.h>
+ #include <linux/sizes.h>
+ #include <linux/time64.h>
+ #include <linux/types.h>
+ 
+-#include <drm/drm_fb_helper.h>
++#include <drm/drm_drv.h>
+ #include <drm/drm_gem.h>
+ #include <drm/etnaviv_drm.h>
+ #include <drm/gpu_scheduler.h>
+diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h
+index 4a0cd22c10e21..f957552c6c507 100644
+--- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h
++++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h
+@@ -19,7 +19,6 @@
+ #include <linux/i2c.h>
+ 
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ 
+ struct hibmc_connector {
+diff --git a/drivers/gpu/drm/hyperv/hyperv_drm_modeset.c b/drivers/gpu/drm/hyperv/hyperv_drm_modeset.c
+index 28e732f94bf2f..6c6b572987973 100644
+--- a/drivers/gpu/drm/hyperv/hyperv_drm_modeset.c
++++ b/drivers/gpu/drm/hyperv/hyperv_drm_modeset.c
+@@ -8,7 +8,6 @@
+ #include <drm/drm_damage_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_format_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+diff --git a/drivers/gpu/drm/imx/imx-ldb.c b/drivers/gpu/drm/imx/imx-ldb.c
+index 41799011f73b6..c45fc8f4744d0 100644
+--- a/drivers/gpu/drm/imx/imx-ldb.c
++++ b/drivers/gpu/drm/imx/imx-ldb.c
+@@ -7,6 +7,7 @@
+ 
+ #include <linux/clk.h>
+ #include <linux/component.h>
++#include <linux/i2c.h>
+ #include <linux/media-bus-format.h>
+ #include <linux/mfd/syscon.h>
+ #include <linux/mfd/syscon/imx6q-iomuxc-gpr.h>
+@@ -23,7 +24,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_bridge.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_managed.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
+diff --git a/drivers/gpu/drm/imx/imx-tve.c b/drivers/gpu/drm/imx/imx-tve.c
+index 6b34fac3f73a0..d64ebd2cf15e8 100644
+--- a/drivers/gpu/drm/imx/imx-tve.c
++++ b/drivers/gpu/drm/imx/imx-tve.c
+@@ -19,7 +19,6 @@
+ 
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
+diff --git a/drivers/gpu/drm/imx/parallel-display.c b/drivers/gpu/drm/imx/parallel-display.c
+index 06723b2e9b847..0fa0b590830b6 100644
+--- a/drivers/gpu/drm/imx/parallel-display.c
++++ b/drivers/gpu/drm/imx/parallel-display.c
+@@ -8,6 +8,7 @@
+ #include <linux/component.h>
+ #include <linux/media-bus-format.h>
+ #include <linux/module.h>
++#include <linux/of.h>
+ #include <linux/platform_device.h>
+ #include <linux/videodev2.h>
+ 
+@@ -16,7 +17,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_bridge.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_managed.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
+diff --git a/drivers/gpu/drm/kmb/kmb_plane.c b/drivers/gpu/drm/kmb/kmb_plane.c
+index a42f63f6f9573..d172a302f9024 100644
+--- a/drivers/gpu/drm/kmb/kmb_plane.c
++++ b/drivers/gpu/drm/kmb/kmb_plane.c
+@@ -9,7 +9,6 @@
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_fb_dma_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_dma_helper.h>
+diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
+index f0c2349404b46..9e604dbb8e448 100644
+--- a/drivers/gpu/drm/mgag200/mgag200_drv.h
++++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+@@ -18,7 +18,6 @@
+ #include <drm/drm_connector.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_encoder.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_gem_shmem_helper.h>
+ #include <drm/drm_plane.h>
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index 432758ad39a35..76f060810f634 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -38,7 +38,6 @@
+ 
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_encoder.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem_ttm_helper.h>
+ #include <drm/drm_ioctl.h>
+ #include <drm/drm_gem.h>
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.h b/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
+index 1641440837af5..aeb03a57240fd 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
+@@ -9,10 +9,10 @@
+ #ifndef _ROCKCHIP_DRM_DRV_H
+ #define _ROCKCHIP_DRM_DRV_H
+ 
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_gem.h>
+ 
++#include <linux/i2c.h>
+ #include <linux/module.h>
+ #include <linux/component.h>
+ 
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+index da8a69953706d..6edb7c52cb3dc 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+@@ -9,6 +9,7 @@
+ #include <linux/vmalloc.h>
+ 
+ #include <drm/drm.h>
++#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_gem_dma_helper.h>
+ #include <drm/drm_prime.h>
+diff --git a/drivers/gpu/drm/tidss/tidss_kms.c b/drivers/gpu/drm/tidss/tidss_kms.c
+index afb2879980c6c..345bcc3011e4f 100644
+--- a/drivers/gpu/drm/tidss/tidss_kms.c
++++ b/drivers/gpu/drm/tidss/tidss_kms.c
+@@ -10,7 +10,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_bridge.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
+diff --git a/drivers/gpu/drm/v3d/v3d_drv.c b/drivers/gpu/drm/v3d/v3d_drv.c
+index e8c975b815859..478f1f0f60dec 100644
+--- a/drivers/gpu/drm/v3d/v3d_drv.c
++++ b/drivers/gpu/drm/v3d/v3d_drv.c
+@@ -22,7 +22,6 @@
+ #include <linux/reset.h>
+ 
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_managed.h>
+ #include <uapi/drm/v3d_drm.h>
+ 
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_main.c b/drivers/gpu/drm/vboxvideo/vbox_main.c
+index c9e8b3a63c621..3b83e550f4df5 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_main.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_main.c
+@@ -11,7 +11,6 @@
+ #include <linux/pci.h>
+ #include <linux/vbox_err.h>
+ 
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_damage_helper.h>
+ 
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virtio/virtgpu_drv.h
+index 9b98470593b06..b7a64c7dcc2c9 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.h
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
+@@ -35,7 +35,6 @@
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_encoder.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem.h>
+diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
+index e31554d7139f1..4c95ebcdcc2d3 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
++++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
+@@ -12,7 +12,6 @@
+ #include <linux/scatterlist.h>
+ #include <linux/shmem_fs.h>
+ 
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_prime.h>
+ #include <drm/drm_probe_helper.h>
+-- 
+2.38.0
 
-Last test of basis   174549  2022-10-31 04:18:59 Z    3 days
-Failing since        174578  2022-11-02 04:20:17 Z    1 days    2 attempts
-Testing same since   174598  2022-11-03 04:18:49 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Han Han <hhan@redhat.com>
-  Jiri Denemark <jdenemar@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-qcow2                               pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-libvirt-raw                                  pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   72d4709ab9..a607baf65a  a607baf65a66491d5bcbca1e3fa4e672a9ec8611 -> xen-tested-master
 
