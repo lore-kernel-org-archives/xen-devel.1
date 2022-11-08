@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08CA2C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA9DC43219
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Nov 2022 15:34:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.440118.694169 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.440120.694192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQcb-0001Rq-7w; Tue, 08 Nov 2022 15:34:41 +0000
+	id 1osQcd-0001wz-1u; Tue, 08 Nov 2022 15:34:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 440118.694169; Tue, 08 Nov 2022 15:34:41 +0000
+Received: by outflank-mailman (output) from mailman id 440120.694192; Tue, 08 Nov 2022 15:34:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQcb-0001Rj-4i; Tue, 08 Nov 2022 15:34:41 +0000
-Received: by outflank-mailman (input) for mailman id 440118;
- Tue, 08 Nov 2022 15:34:39 +0000
+	id 1osQcc-0001wo-S4; Tue, 08 Nov 2022 15:34:42 +0000
+Received: by outflank-mailman (input) for mailman id 440120;
+ Tue, 08 Nov 2022 15:34:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OwR=3I=citrix.com=prvs=304cef38d=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1osQcZ-0001RY-RG
- for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:34:39 +0000
+ id 1osQcb-0001RY-Im
+ for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:34:41 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d97f9394-5f7a-11ed-91b5-6bf2151ebd3b;
- Tue, 08 Nov 2022 16:34:38 +0100 (CET)
+ id db8e61fb-5f7a-11ed-91b5-6bf2151ebd3b;
+ Tue, 08 Nov 2022 16:34:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d97f9394-5f7a-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: db8e61fb-5f7a-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1667921678;
+  d=citrix.com; s=securemail; t=1667921679;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=fcGVjUlcEVSXL3s0Xxex/3prCjVc7v5RHdmr3hXRWPM=;
-  b=X20A+Z8UbcnnlgUnC8rSSi2+HFCrDg/bKckj02rB2ImH+OI1yDy+n4rN
-   ePSr9G5W/DAFu+VYWEkSdJCGhPT2rBwqHorYsv1+3+6In48nnpaMiT2NH
-   xrk8eLpZGT+OBNF4IKB9khC9XjbFV/Dqwy3ibpVs3mXrfQn71bFM99oZ5
-   c=;
+  bh=pDZRvWvsQxrzElkdZ92H76eH11jyJymBHtOb1jyOElc=;
+  b=AwzhyVmwrh+xJ/s558SZMuTamdfqoH3pR+82m5jC4nGvwqjb0eRP6EYy
+   atPRCUxlWLMXmcjMjAkkzOWgK+eYdmMZVkhnSm1G4j2AiA//AkkTmqwuK
+   3wqFBS+AxK1Kd4B22/LefVuSztHqoNpxUPccLec4z/SRmO09auQkj/ZiP
+   E=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: None
-X-MesageID: 84828529
+X-MesageID: 84828530
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:LztBQa6viFvAWBW3r8pWsAxRtDTHchMFZxGqfqrLsTDasY5as4F+v
- jQcW2iFOKyMYGv3L48ibIu19hkC6JWHx4cyQAY+rSwzHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9VU+4pwehBtC5gZkPKkT7AeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5mr
- tcHLQscb1e6hMGw6q++UPA2nJ97I5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJU0UUrsUIMtWcOOAi3XhcjsetFWPoqkf6GnP1g1hlrPqNbI5f/TaGZUPzhvC9
- woq+Uz2Iy8jDM6YwgC5rCO3q8+fpSj3SLk7QejQGvlC3wTImz175ActfUS/iem0jAi5Qd03A
- 1wZ/G8ioLY/8GSvT8LhRFuorXicpBkeVtFMVeog52ml6qfS+RffOWECQRZIctlgv8gzLRQm3
- 0GEt8nkDjtutPuSU331y1uPhWrsY25PdzZEPHJaC1teizX+nG0tpknkUdNYAa/yt97WHxvtx
- iqT9jJl37pG2KbnyJ6H1VzAhjutoL3AQQg0+hjbUwqZ0+9pWGK2T9f2sAaGtJ6sOK7cFwDc5
- yZcx6By+chUVfmweDqxrPLh9V1Dz9KMK3XijFFmBPHNHBz9qif4Lei8DNyTTXqF0/romxezP
- ic/WisLvve/2UdGiocmC79d8+xwkcDd+S3ND5g5rrNmO/CdjjOv8iB0flK31GvwikUqmqxXE
- c7FL5n8UShDUfw9kmreqwIhPVgDn35W+I8ubcqjk0TPPUS2OBZ5tovpwHPRN7tkvctoUS3e8
- spFNtvi9vmseLSWX8QWmKZNRW03wY8TXMGr9JYMLbbTe2KL2ggJUpfs/F/oQKQ994w9qwsC1
- irVtpNwoLYnuUD6FA==
-IronPort-HdrOrdr: A9a23:0TZpM63zPs9sUgU7U5WuoQqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-Data: A9a23:N9NzlqhGNLRZr61w5N2t2kM2X161bBAKZh0ujC45NGQN5FlHY01je
+ htvWTqFMvyOamX3c91yb97j8U8F68XUytFgQAZrqilhQiIb9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmUpH1QMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsy+qWs0N8klgZmP6oS5QeOzyN94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tRDAy8IVQGCwNu147SRV+x2n545d5HkadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
+ pRDL2A1NVKZPkMJagx/5JEWxY9EglHyfyNZrhSJorAw4EDYzRBr0airO93QEjCPbZUJzhzI+
+ zmel4j/Khc4LvjDyxeHzlCHhbD2szj6Q6wCLqLto5aGh3XMnzdOWXX6T2CTrfCnh2akVtlYK
+ khS/TAhxYAt8GS7Q9+7WAe3yFaUsxhZV9dOHukS7ACW1rGS8wufHnIDTDNKdJohrsBebRwn0
+ EWY2ezgAzNHuaeQD3ma89+pQSiaYHZPazVYPGldEFVDs4KLTJwPYgznFf18FZWkj5rMGhL26
+ S2PtjFkne5Lgptev0mkxmzvjzWpr5nPawc64ATLQ26ohj9EiJ6Zi5+AsgaCs6sZRGqNZhzY5
+ SVfxZDChAwbJcvV/BFhVtnhC11ACxytFDTHyWBiEJA6n9hG0y7yJNsAiN2SyaoADyrlRdMLS
+ BWN0e+yzMUJVJdPUUOQS9PZNijS5fK8fekJr9iNBjeOC7AoHON9wAlgZFSLw0fmm1U2nKc0N
+ P+zKJjyUiZGV/0/lGDoF4/xNIPHIQhnmwvuqW3TlUz7gdJymlbJIVv6DLd+Rr9gt/7VyOkk2
+ 91eK9GL231ivB7WO0HqHE96BQ5iEEXX8riv+pEILLXYelo/cIzjYteIqY4cl0Vet/w9vo/1E
+ ruVASe0FHKXaaX7FDi3
+IronPort-HdrOrdr: A9a23:hPv71KumwRaMD36XMnDJhnwK7skDTNV00zEX/kB9WHVpmszxra
+ GTdZMgpGfJYVcqKQgdcL+7Scq9qB/nmqKdpLNhWYtKPzOW3ldATrsSj7cKqgeIc0aVm4JgPO
+ VbAs9D4bXLfCNHZK3BgDVQfexP/DD+ytHMudvj
 X-IronPort-AV: E=Sophos;i="5.96,148,1665460800"; 
-   d="scan'208";a="84828529"
+   d="scan'208";a="84828530"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Henry Wang <Henry.Wang@arm.com>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?=
 	<edvin.torok@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
 	David Scott <dave@recoil.org>, Wei Liu <wl@xen.org>, Anthony PERARD
 	<anthony.perard@citrix.com>
-Subject: [PATCH for-4.17 v3 06/15] tools/ocaml/Makefile.rules: hide -include on *clean
-Date: Tue, 8 Nov 2022 15:33:58 +0000
-Message-ID: <2a584406ee8cc1fce5175ad04feee6fdb18b6844.1667920496.git.edvin.torok@citrix.com>
+Subject: [PATCH for-4.17 v3 04/15] tools/ocaml/xenstored/Makefile: use ocamldep -sort for linking order
+Date: Tue, 8 Nov 2022 15:33:56 +0000
+Message-ID: <2acb17a3046dad442ef0e14c84c7aa5930e69e93.1667920496.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1667920496.git.edvin.torok@citrix.com>
 References: <cover.1667920496.git.edvin.torok@citrix.com>
@@ -92,45 +92,49 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Fixes: 2f2b76d47c5bcd9 ("tools/ocaml: do not run ocamldep during make clean")
+A better solution is being worked on for master,
+but for now use ocamldep -sort instead of a manually established link
+order.
+The manually established link order will be wrong when (security)
+patches introduce new dependencies between files that would require
+changing the link order.
+
+If dune was used as a build system this wouldn't be a problem, but we
+can't use Dune yet due to OSSTest, which is stuck on Debian oldstable.
+
+No functional change.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
 Reason for inclusion in 4.17:
-- addresses review comments received post commit
+
+Avoids having to put this patch as a prerequisite into a security update.
+Earlier versions of XSA-326 needed this, and although latest version
+didn't we don't know whether it might be needed again in the future or not.
 
 Changes since v2:
-- add Fixes line
-- add 4.17 reason
+- new in v3 (was previously emailed to security team though)
 ---
- tools/ocaml/Makefile.rules | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/ocaml/xenstored/Makefile | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/tools/ocaml/Makefile.rules b/tools/ocaml/Makefile.rules
-index e0b9de34e4..39ac260a4d 100644
---- a/tools/ocaml/Makefile.rules
-+++ b/tools/ocaml/Makefile.rules
-@@ -44,10 +44,8 @@ META: META.in
+diff --git a/tools/ocaml/xenstored/Makefile b/tools/ocaml/xenstored/Makefile
+index 6f7333926e..e8aaecf2e6 100644
+--- a/tools/ocaml/xenstored/Makefile
++++ b/tools/ocaml/xenstored/Makefile
+@@ -72,7 +72,11 @@ XENSTOREDLIBS = \
+ PROGRAMS = oxenstored
  
- ALL_OCAML_OBJ_SOURCES=$(addsuffix .ml, $(ALL_OCAML_OBJS))
+ oxenstored_LIBS = $(XENSTOREDLIBS)
+-oxenstored_OBJS = $(OBJS)
++# use ocamldep to figure out link order, otherwise the Makefile would have
++# to be continously adjusted for security patches that introduce new
++# dependencies between files
++oxenstored_MLSORTED = $(shell $(OCAMLDEP) -sort $(OBJS:=.ml))
++oxenstored_OBJS = $(oxenstored_MLSORTED:.ml=)
  
--ifeq (,$(findstring clean,$(MAKECMDGOALS)))
- .ocamldep.make: $(ALL_OCAML_OBJ_SOURCES) Makefile $(OCAML_TOPLEVEL)/Makefile.rules
- 	$(call quiet-command, $(OCAMLDEP) $(ALL_OCAML_OBJ_SOURCES) *.mli $o,MLDEP,)
--endif
+ OCAML_PROGRAM = oxenstored
  
- clean: $(CLEAN_HOOKS)
- 	$(Q)rm -f .*.d *.o *.so *.a *.cmo *.cmi *.cma *.cmx *.cmxa *.annot *.spot *.spit $(LIBS) $(PROGRAMS) $(GENERATED_FILES) .ocamldep.make META
-@@ -94,7 +92,9 @@ define C_PROGRAM_template
- 	$(call quiet-command, $(CC) $(LDFLAGS) -o $$@ $$+,BIN,$$@)
- endef
- 
-+ifeq (,$(findstring clean,$(MAKECMDGOALS)))
- -include .ocamldep.make
-+endif
- 
- $(foreach lib,$(OCAML_LIBRARY),$(eval $(call OCAML_LIBRARY_template,$(lib))))
- $(foreach lib,$(OCAML_NOC_LIBRARY),$(eval $(call OCAML_NOC_LIBRARY_template,$(lib))))
 -- 
 2.34.1
 
