@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C418C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Nov 2022 15:39:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.440161.694268 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4F4C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Nov 2022 15:39:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.440162.694279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQhN-0006zR-BE; Tue, 08 Nov 2022 15:39:37 +0000
+	id 1osQhR-0007Gu-M6; Tue, 08 Nov 2022 15:39:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 440161.694268; Tue, 08 Nov 2022 15:39:37 +0000
+Received: by outflank-mailman (output) from mailman id 440162.694279; Tue, 08 Nov 2022 15:39:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQhN-0006zK-8X; Tue, 08 Nov 2022 15:39:37 +0000
-Received: by outflank-mailman (input) for mailman id 440161;
- Tue, 08 Nov 2022 15:39:36 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1osQhR-0007Gn-JC; Tue, 08 Nov 2022 15:39:41 +0000
+Received: by outflank-mailman (input) for mailman id 440162;
+ Tue, 08 Nov 2022 15:39:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OwR=3I=citrix.com=prvs=304cef38d=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1osQhM-0006zE-C1
- for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:39:36 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8a6a5574-5f7b-11ed-8fd1-01056ac49cbb;
- Tue, 08 Nov 2022 16:39:34 +0100 (CET)
+ id 1osQhQ-0007Fx-Dg
+ for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:39:40 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8d4e3290-5f7b-11ed-91b5-6bf2151ebd3b;
+ Tue, 08 Nov 2022 16:39:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a6a5574-5f7b-11ed-8fd1-01056ac49cbb
+X-Inumbo-ID: 8d4e3290-5f7b-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1667921974;
+  d=citrix.com; s=securemail; t=1667921978;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8ePR03hmluMvOGGTEiWLD/HCh/fqyWBWHQzlfAz9mW4=;
-  b=Qlcd397j3Ty8M+5IqATEqYp0rPtYrPoe8MZJdlElZuxS230FIAnLReTo
-   7gnD4aujZiNUxzGJqFa5hD5B8NOQ5OP/Msg5IZ9sz0K6Mo3Q9N4KCL6qu
-   IDsbV4q1NkwnOvte+7GEdvwT87lZhkznBURNu6M5YlfoVbKuY/sCNMB3d
-   8=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=hQno2BG9QzWV381/kBdkjocEF/Hky2yAxo4hwyxhbW8=;
+  b=JiG3Z1Flq52+kfeCl1udaItI2Lijp/awhDhrsN6iQfsZ03wLHs/mvsYi
+   EupEGgSRKMiz/iMr9hCRP9AUFTQtRQPGVgp/ZYMmEYJ1ExLlJN3+HgUd6
+   LaMY4hw8vVArcV2hipHLPuLMOeTTdqWeGp/kM1nR3v/n5Awb8Ohm1b6sr
+   c=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: None
-X-MesageID: 84417005
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 83478170
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:9knbNquqGW13lrMKgnEn17uSP+fnVFpeMUV32f8akzHdYApBsoF/q
- tZmKTvUM/3YNGvwcox3bYq+8UkFsMPTzN5lTwVkqS01FCwT+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg0HVU/IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj5lv0gnRkPaoR5QaGxyFPZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwEyoUQQijp8uMmpmhU9lzl50hI/KzI9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
- 5NHM3w1Nk2GOkARfAdMYH49tL7Aan3XfjFGqVTTua0t5Gv7xw1tyrn9dtHSf7RmQO0FwhrB+
- TqeogwVBDk+LdbAkhSP8UiNxcbQwHnpBIUwLLqBo6sCbFq7mTVIVUx+uUGAiea9ol6zXZRYM
- UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL8wwufHHlCcTdHZ/QvrspwTjsvv
- neFls3kLSZiu7qUTTSa7Lj8kN+pEXFLdylYP3ZCFFZbpYm4yG0usv7RZu15CYGtrv3cI2vb2
- Sm6szlnhboo1dFegs1X4mv7qz6ro5HISCs86QPWQn+p42tFWWK1W2C7wQOFtKgdde51WnHE5
- SFZwJbGsIjiGLnXzESwrPMx8KZFDhpvGBnVmhZREpYo7FxBEFbzLNkLsFmSyKqEW/vomAMFg
- meJ52u9B7cJZhNGiJObhKrgY/nGNYC6SbzYugn8N7KjovFZLWdrBh1Ga0+KxHzKm0Mxi6w5M
- przWZ/yUylKVfo+lGLsGbd1PVoXKscWnD27eHwG507/jer2iIC9Fd/pz2dinshmtfjZ8W05A
- v5UNteQygU3bQENSnC/zGPSRHhURUUG6Wfe8p0KKbTYeVI2QQnMyZb5mNscRmCspIwN/s+gw
- 513chMwJIbX7ZEfFTi3Vw==
-IronPort-HdrOrdr: A9a23:wVwiwa5FANW47TynjwPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:sesTT64v/yz9bk3iZOQfzgxRtDTHchMFZxGqfqrLsTDasY5as4F+v
+ mdLUTrQOPyMN2LxKI1+bIiwp0sE6p6Byd8ySQZkpSo8Hi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+4pwehBtC5gZkPKkT7AeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5my
+ NY0JmA3NBO5nvuRw7eZQcMxhZhkBZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJU0UUrsUIMtWcOOAi3XhcjsetFWPoqkf6GnP1g1hlrPqNbI5f/TaHpkKzh/H/
+ goq+Uz5KUsVaeetywGl0W3zmebPmwrqd40rQejQGvlC3wTImz175ActfVeyv/SRkEO1XNNbb
+ UsO9UIGsqwa5EGtCN7nUHWQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3OcWSDowx
+ xm2ltXmLTV1tfueTnf1y1uPhWrsY25PdzZEPHJaC1teizX+nG0tpi/lYtgzKvS2tMTsPjL14
+ Tug8StiwJxG2KbnyJ6H1VzAhjutoL3AQQg0+hjbUwqZ0+9pWGK2T9f2sAaGtJ6sOK7cFwDc5
+ yZcx6By+chUVfmweDqxrPLh9V1Dz9KMK3XijFFmBPHNHBz9qif4Lei8DNyTTXqF0/romxezP
+ ic/WisLvve/2UdGiocmC79d8+xwkcDd+S3ND5g5rrNmO/CdjjOv8iB0flK31GvwikUqmqxXE
+ c7FL5n8UShDUfw9kmreqwIhPVgDn35W+I8ubcqjk0TPPUS2OBZ5tovpwHPRN7tkvctoUS3e8
+ spFNtvi9vmseLSWX8QWmKZNRW03wY8TXMGr9JYMLbbTe2KL2ggJUpfs/F/oQKQ994w9qwsC1
+ ijVtpNwoLYnuUD6FA==
+IronPort-HdrOrdr: A9a23:aepYbK7oWaexfs/5UgPXwPLXdLJyesId70hD6qhwISY1TiX+rb
+ HXoB17726MtN9/YgBCpTntAsa9qDbnhPpICOoqTNGftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
+ 4JSdkENDSaNzhHZKjBjjVQa+xQpeW6zA==
 X-IronPort-AV: E=Sophos;i="5.96,148,1665460800"; 
-   d="scan'208";a="84417005"
+   d="scan'208";a="83478170"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Henry Wang <Henry.Wang@arm.com>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?=
 	<edvin.torok@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
 	David Scott <dave@recoil.org>, Wei Liu <wl@xen.org>, Anthony PERARD
 	<anthony.perard@citrix.com>
-Subject: [PATCH for-4.17 v3 15/15] tools/ocaml/libs/xc: fix use of uninitialized memory in shadow_allocation_get
-Date: Tue, 8 Nov 2022 15:34:07 +0000
-Message-ID: <94f93ee61a4d0bd2fac3f5a753cb935962be20bb.1667920496.git.edvin.torok@citrix.com>
+Subject: [PATCH for-4.17 v3 13/15] tools/ocaml/xenstored: set uncaught exception handler
+Date: Tue, 8 Nov 2022 15:34:05 +0000
+Message-ID: <a370618057664382fe9e6e503e0dc0be8818e5ce.1667920496.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1667920496.git.edvin.torok@citrix.com>
 References: <cover.1667920496.git.edvin.torok@citrix.com>
@@ -92,74 +92,86 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-It has been noticed in 2013 that shadow allocation sometimes returns the
-wrong value, which got worked around by adding a limit to the shadow
-multiplier of 1000 and ignoring the value from Xen in that case
-to avoid a shadow multiplier causing a VM to request 6PB of memory for
-example:
-https://github.com/xapi-project/xen-api/pull/1215/commits/be55a8c30b41d1cd7596fc100ab1cfd3539f74eb
+Helps debug fatal errors during live update
 
-However that is just a workaround, and I've just reproduced this by
-killing a VM mid migration, which resulted in a shadow multiplier of
-629.42, rendering the VM unbootable even after a host reboot.
+Previously this would've just gone to /dev/null, because:
+* daemonize reopens stderr as /dev/null
+* systemd redirects stderr to /dev/null too
 
-The real bug is in Xen: when a VM is dying it will return '0' for paging
-op domctls and log a message at info level
-'Ignoring paging op on dying domain', which leaves the 'mb' parameter
-uninitialized upon return from the domctl.
-
-The binding also doesn't initialize the 'c->mb' parameter (it is meant
-to be used only when setting, not when querying the allocation),
-which results in the VM getting a shadow allocation (and thus multiplier)
-set based on what value happened to be currently on the stack.
-
-Explicitly initialize the value passed to the domctl, and detect the uninitialized
-case (shadow allocation of 0), and raise an exception in that case.
-The exception will cause xenopsd to skip setting the shadow multiplier.
-
-Note that the behaviour of Xen here is inconsistent between x86 and ARM:
-ARM would return EINVAL when it gets a paging op on a dying domain,
-and X86-64 would return 0 with possibly uninitialized data.
-
-It might be desirable to change the x86 path in the hypervisor to return
-EINVAL, although that would require more testing in case it breaks
-somethig.
-But the bindings should be defensive anyway against bugs like this.
+Previously the only way to debug this was to manually run oxenstored with
+--no-fork, but when you have a fatal error and oxenstored just
+disappears you'd want to know why.
+There has been at least one observed instance of a bug where oxenstored
+just disappeared inexplicably (it was believed due to an OOM exception).
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
 Reason for inclusion in 4.17:
-- fixes a long-standing (>9y old) bug that is still happening today
+- avoids losing crucial information during a fatal error (e.g. during
+  live update)
 
 Changes since v2:
 - new in v3
 ---
- tools/ocaml/libs/xc/xenctrl_stubs.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ tools/ocaml/xenstored/logging.ml   | 33 ++++++++++++++++++++++++++++++
+ tools/ocaml/xenstored/xenstored.ml |  3 ++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
 
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index e2d897581f..9681a74e40 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -1019,7 +1019,7 @@ CAMLprim value stub_shadow_allocation_get(value xch, value domid)
- {
-     CAMLparam2(xch, domid);
-     CAMLlocal1(mb);
--    unsigned int c_mb;
-+    unsigned int c_mb = 0;
-     int ret;
+diff --git a/tools/ocaml/xenstored/logging.ml b/tools/ocaml/xenstored/logging.ml
+index 021ebc465b..cced038c48 100644
+--- a/tools/ocaml/xenstored/logging.ml
++++ b/tools/ocaml/xenstored/logging.ml
+@@ -342,3 +342,36 @@ let xb_answer ~tid ~con ~ty data =
+ let watch_not_fired ~con perms path =
+   let data = Printf.sprintf "EPERM perms=[%s] path=%s" perms path in
+   access_logging ~tid:0 ~con ~data Watch_not_fired ~level:Info
++
++let print_flush msg =
++  prerr_endline msg;
++  flush stderr
++
++let msg_of exn bt =
++  Printf.sprintf "Fatal exception: %s\n%s\n" (Printexc.to_string exn)
++    (Printexc.raw_backtrace_to_string bt)
++
++let fallback_exception_handler exn bt =
++  (* stderr goes to /dev/null, so use the logger where possible,
++     but always print to stderr too, in case everything else fails,
++     e.g. this can be used to debug with --no-fork
++
++     this function should try not to raise exceptions, but if it does
++     the ocaml runtime should still print the exception, both the original,
++     and the one from this function, but to stderr this time
++  *)
++  let msg = msg_of exn bt in
++  print_flush msg;
++  (* See Printexc.set_uncaught_exception_handler, need to flush,
++     so has to call stop and flush *)
++  match !xenstored_logger with
++  | Some l -> error "xenstored-fallback" "%s" msg; l.stop ()
++  | None ->
++    (* Too early, no logger set yet.
++       We normally try to use the configured logger so we don't flood syslog
++       during development for example, or if the user has a file set
++    *)
++    try Syslog.log Syslog.Daemon Syslog.Err msg
++    with e ->
++      let bt = Printexc.get_raw_backtrace () in
++      print_flush @@ msg_of e bt
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index 78177b116f..6828764f92 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -357,7 +357,8 @@ let tweak_gc () =
+   Gc.set { (Gc.get ()) with Gc.max_overhead = !Define.gc_max_overhead }
  
-     caml_enter_blocking_section();
-@@ -1029,6 +1029,9 @@ CAMLprim value stub_shadow_allocation_get(value xch, value domid)
-     caml_leave_blocking_section();
-     if (ret != 0)
-         failwith_xc(_H(xch));
-+    if ( !c_mb )
-+        caml_failwith("domctl returned uninitialized data for shadow "
-+                      "allocation, dying domain?");
  
-     mb = Val_int(c_mb);
-     CAMLreturn(mb);
+-let _ =
++let () =
++  Printexc.set_uncaught_exception_handler Logging.fallback_exception_handler;
+   let cf = do_argv in
+   let pidfile =
+     if Sys.file_exists (config_filename cf) then
 -- 
 2.34.1
 
