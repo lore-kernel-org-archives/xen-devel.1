@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C2EC4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Nov 2022 15:34:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.440122.694213 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE96C433FE
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Nov 2022 15:35:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.440126.694252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQcg-0002VX-GO; Tue, 08 Nov 2022 15:34:46 +0000
+	id 1osQcn-0003Yw-GV; Tue, 08 Nov 2022 15:34:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 440122.694213; Tue, 08 Nov 2022 15:34:46 +0000
+Received: by outflank-mailman (output) from mailman id 440126.694252; Tue, 08 Nov 2022 15:34:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1osQcg-0002V0-CC; Tue, 08 Nov 2022 15:34:46 +0000
-Received: by outflank-mailman (input) for mailman id 440122;
- Tue, 08 Nov 2022 15:34:44 +0000
+	id 1osQcn-0003Xi-8e; Tue, 08 Nov 2022 15:34:53 +0000
+Received: by outflank-mailman (input) for mailman id 440126;
+ Tue, 08 Nov 2022 15:34:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5OwR=3I=citrix.com=prvs=304cef38d=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1osQce-0001RY-Mn
- for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:34:44 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ddb18ef8-5f7a-11ed-91b5-6bf2151ebd3b;
- Tue, 08 Nov 2022 16:34:43 +0100 (CET)
+ id 1osQcl-0001RY-Gs
+ for xen-devel@lists.xenproject.org; Tue, 08 Nov 2022 15:34:51 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e0ef84aa-5f7a-11ed-91b5-6bf2151ebd3b;
+ Tue, 08 Nov 2022 16:34:49 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,206 +38,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ddb18ef8-5f7a-11ed-91b5-6bf2151ebd3b
+X-Inumbo-ID: e0ef84aa-5f7a-11ed-91b5-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1667921683;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=DOGFJCdrDDATd+X1NcZtCSbYvFjIMcP3itquODoYrYY=;
-  b=FAt7iuunw/9dFQatGT7lDnBV0uqh+tnTIYZouh4k0f1g0invcaZ4f4CK
-   VJexcNNLjcc88oULPo+iuvf0kFCvdstZCm2PQtJpYcxUuXmLkw4cz9QEq
-   YiRE+OwUqu8Wh2t1Ng7Ogdf1mCBZE55ezWeLOamrSWBXRXY9KshH5qGwt
-   A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1667921689;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=8ZXiX9ItGs2cbrZyrTgiP7zufiQzcqMjhU4Bz6aA7bo=;
+  b=QCdChhoGm43hsmE+1+edlUuHhyNoKL7Rgghp7jpV/rATFoOk4ckvePYu
+   j/unOBHLxXr/ghnpIGfOggmcS4yATolVulgSSn7URVVn+ASJCeZyGs5RR
+   9X37WRB1dsz6feCU76wItMEcuU247pmf0pU0s2ml7RUIE0ZFB8st28F9O
+   s=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: None
-X-MesageID: 83996681
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 84416530
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:YsiNjaoJwYcjGQZpZfOl8OB5F2NeBmIUZRIvgKrLsJaIsI4StFCzt
- garIBnSaPjYYWP2ctwkPd/n8koF6pbUzIVgSgJt+yA1EyoVopuZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpAFc+E0/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKm06W1wUmAWP6gR5gaHzylNVvrzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXABkrbzSoi/yN+q2cZcpy2sJ+N5DgJIxK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFHU/rSn8/x7pX7WzBUtlOT47Yw+W/Q5AdwzKLsIJzefdniqcB9zh3J9
- zyYrz2R7hcyKoa86QHVzEuVhczyjwDxaL8JEv6m36s/6LGU7jNKU0BHPbehmtG1g1Czc8hSI
- EsV/mwpt6da3FOvZsnwWVu/unHslg4RXZ9cHvM37CmJy7HI+ECJC24cVDlDZdc68sgsSlQC9
- lKPhcKvOjVpv5WcU3fb/bCRxQ5eIgBMczVEP3VdC1JYvZ+z++nfky4jUP5KNq+RpdHrIgvv5
- B+psnQ42q5KhtYEgvDTEU/8vxqgoZ3ATwgQ7wrRX3644g4RWLNJd7BE+nCAs68ecd/xok2p+
- SFdxpPAtLxm4YSlznTlfQkbIF2+Cx9p2hX4iEUnIZQu/i/FF5WLLdEJu2EWyKuE3685ld7Vj
- K374105CHx7ZiHCgUpLj2WZWqwXIVDIT4iNaxwtRoMmj1gYXFbvENtSTUCRxXvxt0MnjLsyP
- 5yWGe71UyhFWfg5lWLuHblNuVPO+szZ7TqNLa0XMjz9iebODJJrYett3KSyghARs/rf/VS9H
- yd3PMqW0RRPONASkQGOmbP+7DkicxAGOHwBg5UGK7HZeVE+SDhJ5j246epJRrGJVp99zo/gl
- kxRkGcDoLYjrRUr8Tm3V00=
-IronPort-HdrOrdr: A9a23:xhcxfK0Q5yoo+c3/taXBPwqjBLwkLtp133Aq2lEZdPRUGvb4qy
- nIpoV86faUskd3ZJhOo6HiBEDtexzhHP1OkO0s1NWZLWvbUQKTRekIh+aP/9SJIVyGygc378
- ddmsZFZuEYdWIK6PrH3A==
+IronPort-Data: A9a23:QJrAg68xziy/qLbiSl7tDrUDjH6TJUtcMsCJ2f8bNWPcYEJGY0x3y
+ mtKWG6HPa6KajCjeYx0PYq28E5X6pWDytdrS1Nuq388E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
+ 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKucYHsZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ire7kIx1BjOkGlA5AZnPKgb5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklRq
+ dkbdBsWfiu8iuSU7p2nUPs1uO08eZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGM0Yn1lQ/UfrSmM+limf+dXtEr0iSpoI84nTJzRw327/oWDbQUozWGZwLwx3Az
+ o7A12vHJD8/bP+89WuMzVaLhM/KpXzxZJ1HQdVU8dY12QbOlwT/EiY+Sl+TsfS/zEmkVLp3O
+ 0ESvyYjs6U23EiqVcXmGQ21pmaeuRwRUMYWFPc1gCmtx6zO8kCmD24LZjdbbZots8pebTAjy
+ FKhhd7iAj1r9rqPRhqgGqy89G3of3JPdClbOHFCHVBtD8TfTJ8bkU7qTYpIC76OsdDzOx/f3
+ yqY9RYXmOBG5SIU7JmT8VfCijOqg5HGSA8p+wnaNl6YAhNFiJ2NPNLxtwWChRpUBMPAFwTa4
+ iBY8ySLxLpWZaxhghBhVwnk8FuBw/+eeAPRjld0d3XK32T8oiXzFWy8DdwXGauIDirmUWW3C
+ KMwkVkLjHO2AJdNRf4fXm5JI552pZUM7Py8Ph0UB/IXCnSLSCeJ/Tt1eWmb1H33nU4nnMkXY
+ MnFLpbwUy9CUf45nFJaotvxNpdymEgDKZ77H8inn3xLL5LCDJJqdVv1GATXNb1ohE91iA7U7
+ 8xeJ6O3J+Z3CYXDj+i+2dB7EG3m2lBiVM2p8ZcMLr7aSuekcUl4Y8LsLXoaU9QNt8xoei3gp
+ xlRhmcwJILDuED6
+IronPort-HdrOrdr: A9a23:H+TIP6HUiUxyFGElpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
+ mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YZT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.96,148,1665460800"; 
-   d="scan'208";a="83996681"
+   d="scan'208";a="84416530"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Henry Wang <Henry.Wang@arm.com>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?=
 	<edvin.torok@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
 	David Scott <dave@recoil.org>, Wei Liu <wl@xen.org>, Anthony PERARD
 	<anthony.perard@citrix.com>
-Subject: [PATCH for-4.17 v3 00/15] OCaml fixes for Xen 4.17
-Date: Tue, 8 Nov 2022 15:33:52 +0000
-Message-ID: <cover.1667920496.git.edvin.torok@citrix.com>
+Subject: [PATCH for-4.17 v3 08/15] tools/ocaml/libs/evtchn: add xenevtchn_fdopen bindings
+Date: Tue, 8 Nov 2022 15:34:00 +0000
+Message-ID: <3e7f15778ffb5d5d7adde8567c4d50197607f7b2.1667920496.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1667920496.git.edvin.torok@citrix.com>
+References: <cover.1667920496.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-These are the patches that I have outstanding for Xen 4.17.
-I have included a reason why I'm requesting them to be included in 4.17
-after the --- line in each individual patch, see also a summary below.
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+Reason for inclusion in 4.17:
+- needed for a bugfix in a followup commit
 
-For convenience the patches are also available in a git repo:
-```
-git remote add edwintorok https://github.com/edwintorok/xen.git
-git fetch edwintorok private/edvint/for-4.17
-git log -p origin/master..private/edvint/for-4.17
-```
-And viewable with a browser too:
-https://github.com/edwintorok/xen/compare/private/edvint/for-4.17
+Changes since v2:
+- new in v3
+---
+ tools/ocaml/libs/eventchn/xeneventchn.ml      |  6 +++-
+ tools/ocaml/libs/eventchn/xeneventchn.mli     |  9 +++++-
+ tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 28 +++++++++++++++++--
+ 3 files changed, 38 insertions(+), 5 deletions(-)
 
-* 3 patches related to OCaml 5 support
-https://patchwork.kernel.org/project/xen-devel/list/?series=680975
-These have already been posted to the list previously, but not
-yet committed to master (I probably didn't use the correct subject and
-CC line for patches meant for 4.17, I think I've fixed that now)
-
-* Makefile.rules followup
-Also part of https://patchwork.kernel.org/project/xen-devel/list/?series=680975
-these address some review feedback that I received after patches got
-committed
-
-* oxenstored live update bugfixes
-Testing of oxenstored live update has revealed some bugs (some of which
-got discovered on the C side too and fixed during one of the previous
-XSAs, but unfortunately none of that discussion is public, and we've
-ended up rediscovering the issue in the OCaml implementation too,
-which reminded me of the XSA discussions at the time).
-This brings the OCaml live update handling of event channels closer to
-the C xenstored version.
-It also fixes a few more bugs regarding logging and exception handling
-during live update, and during out of memory situations (theoretical now
-after XSA-326 fix).
-
-* a bugfix for a xenctrl binding
-Xen returns uninitialized data as part of a paging op domctl when a
-domain is dying. Workaround in the C stub by always initializing the
-domctl arguments to detect this.
-Xen fix in hypervisor side will be done separately, but even then having
-this is useful defensive coding.
-This is a 9 year old bug that still happens today, I've encountered it
-while testing this very series, hence the inclusion here.
-
-I expect most of these to be straight forward bugfixes, the only one
-slightly controversial might be the indentation one: changing tabs to
-spaces to match Xen coding style.
-
-I was unsure whether to include it here,
-but I think it is best to have it in 4.17 to simplify future
-(security) backports from master to 4.17, and avoid having to deal with
-whitespace issues all the time when writing patches.
-The code here used a style that was different from Xen's, and also
-different from every other piece of code that I work on, and OCaml indentation
-tools also only support spaces, not tabs, so there really is no reason
-to keep the code as is (initially I thought it uses tabs to follow Xen
-style, but after reading CODING_STYLE I realized that is not true).
-It is very easy to verify that the patch changes nothing with `git diff
--w`, or `git log -p -1`.
-
-Edwin Török (15):
-  tools/ocaml/libs/eventchn: do not leak event channels and OCaml 5.0
-    compat
-  tools/ocaml/libs/xc: OCaml 5.0 compatibility
-  tools/ocaml/libs/{xb, mmap}: use Data_abstract_val wrapper
-  tools/ocaml/xenstored/Makefile: use ocamldep -sort for linking order
-  tools/ocaml/Makefile.rules: do not run ocamldep on distclean
-  tools/ocaml/Makefile.rules: hide -include on *clean
-  CODING_STYLE(tools/ocaml): add 'make format' and remove tabs
-  tools/ocaml/libs/evtchn: add xenevtchn_fdopen bindings
-  tools/ocaml/xenstored/store.ml: fix build error
-  tools/ocaml/xenstored: keep eventchn FD open across live update
-  tools/ocaml/xenstored: do not rebind event channels after live update
-  tools/ocaml/xenstored: log live update issues at warning level
-  tools/ocaml/xenstored: set uncaught exception handler
-  tools/ocaml/xenstored/syslog_stubs.c: avoid potential NULL dereference
-  tools/ocaml/libs/xc: fix use of uninitialized memory in
-    shadow_allocation_get
-
- tools/ocaml/Makefile                          |    5 +
- tools/ocaml/Makefile.rules                    |    4 +-
- tools/ocaml/libs/eventchn/xeneventchn.ml      |   11 +-
- tools/ocaml/libs/eventchn/xeneventchn.mli     |   14 +-
- tools/ocaml/libs/eventchn/xeneventchn_stubs.c |  199 +-
- tools/ocaml/libs/mmap/mmap_stubs.h            |    9 +-
- tools/ocaml/libs/mmap/xenmmap.ml              |    2 +-
- tools/ocaml/libs/mmap/xenmmap.mli             |    4 +-
- tools/ocaml/libs/mmap/xenmmap_stubs.c         |  114 +-
- tools/ocaml/libs/xb/op.ml                     |   76 +-
- tools/ocaml/libs/xb/packet.ml                 |   30 +-
- tools/ocaml/libs/xb/partial.ml                |   48 +-
- tools/ocaml/libs/xb/xb.ml                     |  422 ++--
- tools/ocaml/libs/xb/xb.mli                    |  106 +-
- tools/ocaml/libs/xb/xenbus_stubs.c            |   50 +-
- tools/ocaml/libs/xb/xs_ring.ml                |   28 +-
- tools/ocaml/libs/xb/xs_ring_stubs.c           |  216 +-
- tools/ocaml/libs/xc/abi-check                 |    2 +-
- tools/ocaml/libs/xc/xenctrl.ml                |  330 +--
- tools/ocaml/libs/xc/xenctrl.mli               |   12 +-
- tools/ocaml/libs/xc/xenctrl_stubs.c           | 1428 ++++++------
- tools/ocaml/libs/xentoollog/caml_xentoollog.h |    6 +-
- .../ocaml/libs/xentoollog/xentoollog_stubs.c  |  196 +-
- tools/ocaml/libs/xl/xenlight_stubs.c          | 2022 ++++++++---------
- tools/ocaml/libs/xs/queueop.ml                |   48 +-
- tools/ocaml/libs/xs/xs.ml                     |  220 +-
- tools/ocaml/libs/xs/xs.mli                    |   46 +-
- tools/ocaml/libs/xs/xsraw.ml                  |  300 +--
- tools/ocaml/libs/xs/xst.ml                    |   76 +-
- tools/ocaml/libs/xs/xst.mli                   |   20 +-
- tools/ocaml/test/dmesg.ml                     |   26 +-
- tools/ocaml/test/list_domains.ml              |    4 +-
- tools/ocaml/test/raise_exception.ml           |    4 +-
- tools/ocaml/test/xtl.ml                       |   28 +-
- tools/ocaml/xenstored/Makefile                |    6 +-
- tools/ocaml/xenstored/config.ml               |  156 +-
- tools/ocaml/xenstored/connection.ml           |  594 ++---
- tools/ocaml/xenstored/connections.ml          |  304 +--
- tools/ocaml/xenstored/define.ml               |    6 +-
- tools/ocaml/xenstored/disk.ml                 |  218 +-
- tools/ocaml/xenstored/domain.ml               |  104 +-
- tools/ocaml/xenstored/domains.ml              |  320 +--
- tools/ocaml/xenstored/event.ml                |   12 +-
- tools/ocaml/xenstored/history.ml              |   62 +-
- tools/ocaml/xenstored/logging.ml              |  467 ++--
- tools/ocaml/xenstored/packet.ml               |   20 +-
- tools/ocaml/xenstored/parse_arg.ml            |  106 +-
- tools/ocaml/xenstored/perms.ml                |  216 +-
- tools/ocaml/xenstored/poll.ml                 |   68 +-
- tools/ocaml/xenstored/poll.mli                |    4 +-
- tools/ocaml/xenstored/process.ml              | 1212 +++++-----
- tools/ocaml/xenstored/quota.ml                |   74 +-
- tools/ocaml/xenstored/select_stubs.c          |   62 +-
- tools/ocaml/xenstored/stdext.ml               |  190 +-
- tools/ocaml/xenstored/store.ml                |  752 +++---
- tools/ocaml/xenstored/symbol.ml               |    2 +-
- tools/ocaml/xenstored/syslog.ml               |   48 +-
- tools/ocaml/xenstored/syslog_stubs.c          |   33 +-
- tools/ocaml/xenstored/systemd_stubs.c         |   10 +-
- tools/ocaml/xenstored/transaction.ml          |  352 +--
- tools/ocaml/xenstored/trie.ml                 |  222 +-
- tools/ocaml/xenstored/trie.mli                |   22 +-
- tools/ocaml/xenstored/utils.ml                |  146 +-
- tools/ocaml/xenstored/xenstored.ml            | 1051 ++++-----
- 64 files changed, 6557 insertions(+), 6388 deletions(-)
-
-
-base-commit: e61a78981364925a43c9cc24dc77b62ff7b93c9f
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.ml b/tools/ocaml/libs/eventchn/xeneventchn.ml
+index dd00a1f0ea..34f7391f5e 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.ml
++++ b/tools/ocaml/libs/eventchn/xeneventchn.ml
+@@ -16,7 +16,11 @@
+ 
+ type handle
+ 
+-external init: unit -> handle = "stub_eventchn_init"
++external init_cloexec: bool -> handle = "stub_eventchn_init"
++
++let init ?(cloexec=true) () = init_cloexec cloexec
++
++external fdopen: Unix.file_descr -> handle = "stub_eventchn_fdopen"
+ external fd: handle -> Unix.file_descr = "stub_eventchn_fd"
+ 
+ type t = int
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.mli b/tools/ocaml/libs/eventchn/xeneventchn.mli
+index 08c7337643..3965b29621 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.mli
++++ b/tools/ocaml/libs/eventchn/xeneventchn.mli
+@@ -43,7 +43,14 @@ val to_int: t -> int
+ 
+ val of_int: int -> t
+ 
+-val init: unit -> handle
++val init: ?cloexec:bool -> unit -> handle
++(** [init ?cloexec ()]
++    Return an initialised event channel interface.
++    The default is to close the underlying file descriptor
++    on [execve], which can be overriden with [~cloexec:false].
++    On error it will throw a Failure exception. *)
++
++val fdopen: Unix.file_descr -> handle
+ (** Return an initialised event channel interface. On error it
+     will throw a Failure exception. *)
+ 
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+index 2263c4caa1..92092ca31e 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
++++ b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+@@ -58,14 +58,36 @@ static struct custom_operations xenevtchn_ops = {
+     custom_compare_ext_default /* raises Failure */
+ };
+ 
+-CAMLprim value stub_eventchn_init(void)
++CAMLprim value stub_eventchn_init(value cloexec)
+ {
+-    CAMLparam0();
++    CAMLparam1(cloexec);
+     CAMLlocal1(result);
+     xenevtchn_handle *xce;
+ 
+     caml_enter_blocking_section();
+-    xce = xenevtchn_open(NULL, 0);
++    xce = xenevtchn_open(NULL, Bool_val(cloexec) ? 0 : XENEVTCHN_NO_CLOEXEC);
++    caml_leave_blocking_section();
++
++    if ( xce == NULL )
++        caml_failwith("open failed");
++
++    /* contains file descriptors, trigger full GC at least every 128
++     * allocations
++     */
++    result = caml_alloc_custom(&xenevtchn_ops, sizeof(xce), 0, 1);
++    _H(result) = xce;
++    CAMLreturn(result);
++}
++
++CAMLprim value stub_eventchn_fdopen(value fdval)
++{
++    CAMLparam1(fdval);
++    CAMLlocal1(result);
++    xenevtchn_handle *xce;
++
++    caml_enter_blocking_section();
++    /* having any flags here would raise EINVAL */
++    xce = xenevtchn_fdopen(NULL, Int_val(fdval), 0);
+     caml_leave_blocking_section();
+ 
+     if (xce == NULL)
 -- 
 2.34.1
 
