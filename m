@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20091C4321E
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Nov 2022 02:53:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.443639.698350 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBEAFC4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Nov 2022 02:53:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.443637.698327 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oum4S-0001WB-FT; Tue, 15 Nov 2022 02:53:08 +0000
+	id 1oum4M-0000se-Rs; Tue, 15 Nov 2022 02:53:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 443639.698350; Tue, 15 Nov 2022 02:53:08 +0000
+Received: by outflank-mailman (output) from mailman id 443637.698327; Tue, 15 Nov 2022 02:53:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oum4S-0001Vm-B3; Tue, 15 Nov 2022 02:53:08 +0000
-Received: by outflank-mailman (input) for mailman id 443639;
- Tue, 15 Nov 2022 02:53:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oum4M-0000sV-Oi; Tue, 15 Nov 2022 02:53:02 +0000
+Received: by outflank-mailman (input) for mailman id 443637;
+ Tue, 15 Nov 2022 02:53:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pkVF=3P=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1oum4R-0008Vs-Mu
- for xen-devel@lists.xenproject.org; Tue, 15 Nov 2022 02:53:07 +0000
+ id 1oum4L-0000BJ-F9
+ for xen-devel@lists.xenproject.org; Tue, 15 Nov 2022 02:53:01 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a15477b6-6490-11ed-8fd2-01056ac49cbb;
- Tue, 15 Nov 2022 03:53:06 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 9da6ccbd-6490-11ed-91b6-6bf2151ebd3b;
+ Tue, 15 Nov 2022 03:53:00 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B75611FB;
- Mon, 14 Nov 2022 18:53:12 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0F65211FB;
+ Mon, 14 Nov 2022 18:53:06 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5DBA03F73B;
- Mon, 14 Nov 2022 18:53:03 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2E60E3F73B;
+ Mon, 14 Nov 2022 18:52:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a15477b6-6490-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 9da6ccbd-6490-11ed-91b6-6bf2151ebd3b
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,133 +55,151 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v1 05/13] xen/arm: allocate shared memory from heap when host address not provided
-Date: Tue, 15 Nov 2022 10:52:27 +0800
-Message-Id: <20221115025235.1378931-6-Penny.Zheng@arm.com>
+Subject: [PATCH v1 03/13] xen/arm: introduce allocate_domheap_memory and guest_physmap_memory
+Date: Tue, 15 Nov 2022 10:52:25 +0800
+Message-Id: <20221115025235.1378931-4-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221115025235.1378931-1-Penny.Zheng@arm.com>
 References: <20221115025235.1378931-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-when host address is not provided in "xen,shared-mem", we let Xen
-allocate requested shared memory from heap, and once the shared memory is
-allocated, it will be marked as static(PGC_static), which means that it will be
-reserved as static memory, and will not go back to heap even on freeing.
+We split the codes of allocate_bank_memory into two parts,
+allocate_domheap_memory and guest_physmap_memory.
+
+One is about allocating guest RAM from heap, which could be re-used later for
+allocating static shared memory from heap when host address is not provided.
+
+The other is building up guest P2M mapping.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
- xen/arch/arm/domain_build.c | 83 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 82 insertions(+), 1 deletion(-)
+ xen/arch/arm/domain_build.c | 93 +++++++++++++++++++++++++++----------
+ 1 file changed, 68 insertions(+), 25 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index fbb196d8a4..3de96882a5 100644
+index d2b9e60b5c..92763e96fc 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -835,6 +835,72 @@ static bool __init is_shm_allocated_to_domio(struct shm_membank *shm_membank)
-     return true;
+@@ -390,34 +390,18 @@ static void __init allocate_memory_11(struct domain *d,
+     }
  }
  
-+static int __init mark_shared_memory_static(struct shm_membank *shm_membank)
-+{
-+    unsigned int bank;
-+    unsigned long i, nr_mfns;
-+    struct page_info *pg;
-+    struct meminfo *meminfo;
-+
-+    BUG_ON(!shm_membank->mem.banks.meminfo);
-+    meminfo = shm_membank->mem.banks.meminfo;
-+    for ( bank = 0; bank < meminfo->nr_banks; bank++ )
-+    {
-+        pg = mfn_to_page(maddr_to_mfn(meminfo->bank[bank].start));
-+        nr_mfns = PFN_DOWN(meminfo->bank[bank].size);
-+
-+        for ( i = 0; i < nr_mfns; i++ )
-+        {
-+            /* The page should be already allocated from heap. */
-+            if ( !pg[i].count_info & PGC_state_inuse )
-+            {
-+                printk(XENLOG_ERR
-+                       "pg[%lu] MFN %"PRI_mfn" c=%#lx\n",
-+                       i, mfn_x(page_to_mfn(pg)) + i, pg[i].count_info);
-+                goto fail;
-+            }
-+
-+           pg[i].count_info |= PGC_static;
-+        }
-+    }
-+
-+    return 0;
-+
-+ fail:
-+    while ( bank >= 0 )
-+    {
-+        while ( --i >= 0 )
-+            pg[i].count_info &= ~PGC_static;
-+        i = PFN_DOWN(meminfo->bank[--bank].size);
-+    }
-+
-+    return -EINVAL;
-+}
-+
-+static int __init allocate_shared_memory(struct shm_membank *shm_membank,
-+                                         paddr_t psize)
-+{
-+    struct meminfo *banks;
-+    int ret;
-+
-+    BUG_ON(shm_membank->mem.banks.meminfo != NULL);
-+
-+    banks = xmalloc_bytes(sizeof(struct meminfo));
-+    if ( banks == NULL )
-+        return -ENOMEM;
-+    shm_membank->mem.banks.meminfo = banks;
-+    memset(shm_membank->mem.banks.meminfo, 0, sizeof(struct meminfo));
-+
-+    if ( !allocate_domheap_memory(NULL, psize, shm_membank->mem.banks.meminfo) )
-+        return -EINVAL;
-+
-+    ret = mark_shared_memory_static(shm_membank);
-+    if ( ret )
-+        return ret;
-+
-+    return 0;
-+}
-+
- static mfn_t __init acquire_shared_memory_bank(struct domain *d,
-                                                paddr_t pbase, paddr_t psize)
+-static bool __init allocate_bank_memory(struct domain *d,
+-                                        struct kernel_info *kinfo,
+-                                        gfn_t sgfn,
+-                                        paddr_t tot_size)
++static bool __init allocate_domheap_memory(struct domain *d,
++                                           paddr_t tot_size,
++                                           struct meminfo *mem)
  {
-@@ -975,7 +1041,7 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-         unsigned int i;
-         const char *role_str;
-         const char *shm_id;
--        bool owner_dom_io = true;
-+        bool owner_dom_io = true, paddr_assigned = true;
-         struct shm_membank *shm_membank;
+-    int res;
+     struct page_info *pg;
+-    struct membank *bank;
+     unsigned int max_order = ~0;
  
-         if ( !dt_device_is_compatible(shm_node, "xen,domain-shared-memory-v1") )
-@@ -1035,6 +1101,21 @@ static int __init process_shm(struct domain *d, struct kernel_info *kinfo,
-             return -ENOENT;
+-    /*
+-     * allocate_bank_memory can be called with a tot_size of zero for
+-     * the second memory bank. It is not an error and we can safely
+-     * avoid creating a zero-size memory bank.
+-     */
+-    if ( tot_size == 0 )
+-        return true;
+-
+-    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
+-    bank->start = gfn_to_gaddr(sgfn);
+-    bank->size = tot_size;
+-
+     while ( tot_size > 0 )
+     {
+         unsigned int order = get_allocation_size(tot_size);
+ 
+         order = min(max_order, order);
+-
+         pg = alloc_domheap_pages(d, order, 0);
+         if ( !pg )
+         {
+@@ -437,15 +421,74 @@ static bool __init allocate_bank_memory(struct domain *d,
+             continue;
          }
  
-+        /*
-+         * When host address is not provided in "xen,shared-mem",
-+         * we let Xen allocate requested memory from heap at first domain.
-+         */
-+        if ( !paddr_assigned && !shm_membank->mem.banks.meminfo )
-+        {
-+            ret = allocate_shared_memory(shm_membank, psize);
-+            if ( ret )
-+            {
-+                printk("%pd: failed to allocate shared memory bank(%"PRIpaddr"MB) from heap: %d\n",
-+                       d, psize >> 20, ret);
-+                return ret;
-+            }
-+        }
+-        res = guest_physmap_add_page(d, sgfn, page_to_mfn(pg), order);
+-        if ( res )
+-        {
+-            dprintk(XENLOG_ERR, "Failed map pages to DOMU: %d", res);
++        if ( mem->nr_banks == NR_MEM_BANKS )
+             return false;
+-        }
 +
-         /*
-          * DOMID_IO is a fake domain and is not described in the Device-Tree.
-          * Therefore when the owner of the shared region is DOMID_IO, we will
++        mem->bank[mem->nr_banks].start = mfn_to_maddr(page_to_mfn(pg));
++        mem->bank[mem->nr_banks].size = 1UL << (PAGE_SHIFT + order);
++        mem->nr_banks++;
++        tot_size -= (1UL << (PAGE_SHIFT + order));
++    }
++
++    return true;
++}
++
++static int __init guest_physmap_memory(struct domain *d,
++                                       const struct meminfo *mem, gfn_t sgfn)
++{
++    unsigned int i;
++    int res;
++
++    for ( i = 0; i < mem->nr_banks; i++ )
++    {
++        paddr_t size = mem->bank[i].size;
++        unsigned int order = get_order_from_bytes(size);
++
++        /* Size must be power of two */
++        BUG_ON(!size || (size & (size - 1)));
++        res = guest_physmap_add_page(d, sgfn, maddr_to_mfn(mem->bank[i].start),
++                                     order);
++        if ( res )
++            return res;
+ 
+         sgfn = gfn_add(sgfn, 1UL << order);
+-        tot_size -= (1ULL << (PAGE_SHIFT + order));
++    }
++
++    return 0;
++}
++
++static bool __init allocate_bank_memory(struct domain *d,
++                                        struct kernel_info *kinfo,
++                                        gfn_t sgfn,
++                                        paddr_t total_size)
++{
++    struct membank *bank;
++    struct meminfo host = {0};
++
++    /*
++     * allocate_bank_memory can be called with a total_size of zero for
++     * the second memory bank. It is not an error and we can safely
++     * avoid creating a zero-size memory bank.
++     */
++    if ( total_size == 0 )
++        return true;
++
++    bank = &kinfo->mem.bank[kinfo->mem.nr_banks];
++    bank->start = gfn_to_gaddr(sgfn);
++    bank->size = total_size;
++
++    if ( !allocate_domheap_memory(d, total_size, &host) )
++    {
++        printk(XENLOG_ERR "Failed to allocate (%"PRIpaddr"MB) pages to %pd\n",
++               total_size >> 20, d);
++        return false;
++    }
++
++    if ( guest_physmap_memory(d, &host, sgfn) )
++    {
++        printk(XENLOG_ERR "Failed to map (%"PRIpaddr"MB) pages to %pd\n",
++               total_size >> 20, d);
++        return false;
+     }
+ 
+     kinfo->mem.nr_banks++;
 -- 
 2.25.1
 
