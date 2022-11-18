@@ -4,77 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28917C43219
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Nov 2022 10:46:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.445568.700840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EB57C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Nov 2022 11:45:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.445612.700851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ovysh-0008BN-LT; Fri, 18 Nov 2022 10:45:59 +0000
+	id 1ovznp-0008VH-CK; Fri, 18 Nov 2022 11:45:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 445568.700840; Fri, 18 Nov 2022 10:45:59 +0000
+Received: by outflank-mailman (output) from mailman id 445612.700851; Fri, 18 Nov 2022 11:45:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ovysh-0008B5-Gr; Fri, 18 Nov 2022 10:45:59 +0000
-Received: by outflank-mailman (input) for mailman id 445568;
- Fri, 18 Nov 2022 10:45:58 +0000
+	id 1ovznp-0008VA-8s; Fri, 18 Nov 2022 11:45:01 +0000
+Received: by outflank-mailman (input) for mailman id 445612;
+ Fri, 18 Nov 2022 11:45:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Nf+F=3S=arm.com=Wei.Chen@srs-se1.protection.inumbo.net>)
- id 1ovysf-0006R2-H0
- for xen-devel@lists.xenproject.org; Fri, 18 Nov 2022 10:45:58 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20602.outbound.protection.outlook.com
- [2a01:111:f400:7e1a::602])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=pIy2=3S=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1ovzno-0008V4-37
+ for xen-devel@lists.xenproject.org; Fri, 18 Nov 2022 11:45:00 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70082.outbound.protection.outlook.com [40.107.7.82])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 28845b50-672e-11ed-8fd2-01056ac49cbb;
- Fri, 18 Nov 2022 11:45:46 +0100 (CET)
-Received: from AM6P191CA0034.EURP191.PROD.OUTLOOK.COM (2603:10a6:209:8b::47)
- by AM9PR08MB6164.eurprd08.prod.outlook.com (2603:10a6:20b:287::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.8; Fri, 18 Nov
- 2022 10:45:49 +0000
-Received: from AM7EUR03FT041.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:209:8b:cafe::89) by AM6P191CA0034.outlook.office365.com
- (2603:10a6:209:8b::47) with Microsoft SMTP Server (version=TLS1_2,
+ id 691a1e63-6736-11ed-8fd2-01056ac49cbb;
+ Fri, 18 Nov 2022 12:44:51 +0100 (CET)
+Received: from AS9PR06CA0515.eurprd06.prod.outlook.com (2603:10a6:20b:49d::7)
+ by VE1PR08MB5824.eurprd08.prod.outlook.com (2603:10a6:800:1a8::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.8; Fri, 18 Nov
+ 2022 11:44:28 +0000
+Received: from AM7EUR03FT031.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:49d:cafe::b2) by AS9PR06CA0515.outlook.office365.com
+ (2603:10a6:20b:49d::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.20 via Frontend
- Transport; Fri, 18 Nov 2022 10:45:49 +0000
+ Transport; Fri, 18 Nov 2022 11:44:27 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM7EUR03FT041.mail.protection.outlook.com (100.127.140.233) with
+ AM7EUR03FT031.mail.protection.outlook.com (100.127.140.84) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5834.8 via Frontend Transport; Fri, 18 Nov 2022 10:45:49 +0000
+ 15.20.5834.8 via Frontend Transport; Fri, 18 Nov 2022 11:44:27 +0000
 Received: ("Tessian outbound f394866f3f2b:v130");
- Fri, 18 Nov 2022 10:45:48 +0000
-Received: from a36fd8b09b5b.1
+ Fri, 18 Nov 2022 11:44:27 +0000
+Received: from 951bd58bf012.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 78C014BE-4453-40A7-974F-8BAE98B7C0D3.1; 
- Fri, 18 Nov 2022 10:45:41 +0000
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id a36fd8b09b5b.1
+ 6629B0DE-B02A-4891-8A66-72F2F3299746.1; 
+ Fri, 18 Nov 2022 11:44:20 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 951bd58bf012.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Fri, 18 Nov 2022 10:45:41 +0000
-Received: from FR3P281CA0146.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:95::18)
- by AM8PR08MB6449.eurprd08.prod.outlook.com (2603:10a6:20b:364::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.8; Fri, 18 Nov
- 2022 10:45:30 +0000
-Received: from VI1EUR03FT015.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:d10:95:cafe::a5) by FR3P281CA0146.outlook.office365.com
- (2603:10a6:d10:95::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.18 via Frontend
- Transport; Fri, 18 Nov 2022 10:45:30 +0000
-Received: from nebula.arm.com (40.67.248.234) by
- VI1EUR03FT015.mail.protection.outlook.com (100.127.144.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5834.8 via Frontend Transport; Fri, 18 Nov 2022 10:45:30 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX04.Arm.com
- (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.16; Fri, 18 Nov
- 2022 10:45:20 +0000
-Received: from ais-wip-ds.shanghai.arm.com (10.169.190.86) by mail.arm.com
- (10.251.24.32) with Microsoft SMTP Server id 15.1.2507.16 via Frontend
- Transport; Fri, 18 Nov 2022 10:45:17 +0000
+ Fri, 18 Nov 2022 11:44:20 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by AS8PR08MB8825.eurprd08.prod.outlook.com (2603:10a6:20b:5bc::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.6; Fri, 18 Nov
+ 2022 11:44:17 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::58db:2a7f:e8f5:92ad]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::58db:2a7f:e8f5:92ad%7]) with mapi id 15.20.5834.007; Fri, 18 Nov 2022
+ 11:44:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -86,12 +73,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28845b50-672e-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 691a1e63-6736-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TvHCs77zTKjeJCRttCK5jTM1WRW48h5RjGDiyWGaZqM=;
- b=D8WHmA9BcFu+Tlt5sILvC2wDqGxDUrNfNr6b+Dy+z2WckjKsyZlTzaZK6arz3PjGlz6mvWF1FNerc63VShxOpBWdq3zykzDJ8+MoQRb7kal+TD/6IZgh5qWf3jiB/aC/APlOdVMdBN/E+EgyKEhX03RVpjVysyOwyVbsm4Dtl2Q=
+ bh=VDPKGLZmllVr3pElvD+q+zqHx8J57C5DchCRyEh/0+U=;
+ b=JfMrXTcFI8NSr5reph2IBkCAKVoZtYljSq4JO9VtdzdLjc9ToFvoecL5qWVqYV5pGSjJmcxz8McgUPAJV0oJJaR+OFHIbhFpkv9bzi0jvwvnIvvZOBCqea4GL8urDbjzgBefAHiPmOTz4WlYZScdw36QL+fI7JlJ8pfvsJCscF0=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -100,1374 +87,499 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 55a5b162c61f6222
+X-CR-MTA-CID: c71a98d436106409
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=inHTS0E1ROt4ix3wImrljxvDQpsHWO4cugzuKHxm8ABjL9roXhcpua5FtsoJ9508BCa8wIkSLLzRAj93rS2C4SiWqM6DMi8LTTQewEdvrMARXwkfS17UwtQsdQ+UmL6N9mwDW1tDkR7CIYNEh19IlWQbALRKWXpqhay8u8IQUWhpphdqSTSW8W8HwEasii+vFXGOXqHLyc8zKaeAbBkje8ct8BsKLfuVpNnb1wbLIFMdl0JF2+wXjOn+pzMTWpXSL26v0qDCR7rc13rL3MrbIPwDbEbaeT8hthXQlgLVmAvA9G7llj5iFI/qKU6a4VBgagHogidla6ZdefrzBO7SDQ==
+ b=mfXf7j+zY/I0QPf5WXrZO1A9alg7k6/oclFrx18h4ErjUI/BBJRMZ7PuvA41LYNTpaloFpQHPZV5qAb7YTV7oI5tA9RRr5WpxUdl1nssinqH3crL/od5f3IiFjYVjpa9SaAR4fHjSt7YgBbuEHWHWi7JeK4HEvkov7gHCKjMpMsebO2MF5G+lgLB6fR/j1kgDBsB56i6nos5Vagb82Z7qR3AScp0fIbg5oOxNCF22n+m/mVJITfsD5SXjyB7vyw6sg417cfY+fPHTHp46LebKKF9l2Xzl7uiGmHyuZ6WqUJA3wUoz/PqWk8KWKwugjv3AB7e1Mz+kup1tQ6R745qEw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TvHCs77zTKjeJCRttCK5jTM1WRW48h5RjGDiyWGaZqM=;
- b=LQJ4YBSqnsDU8HCg/lVfQwF2axAd9F9s+FXL1mUBb3ypbmICKR4P03eOx13uwTRUSzXZJQexoZTm8+zleKni6GFKhALf2jTG47ZE/Yk6TugN9oAQKt2eaM3FO6gluTHxdXF9qd3aq2/Ljd95gsDCqN5GYh8BImGr/5/ffEeusuL0dW3eLx79LvEG39yfqhnEMXEGoK0tlV/axjxf+KpBYXl4jHQqN9ZYJm6ASjQBfyCkHRod7g0X7s93IpfjSr4gWC/0QyCbdVPjyTyYk5Yq9Rscj2oPDGK8GYm95p/rSJqOlFuK176sAswvic6h3VqDUOk5qkiuah1drNjJDx/FMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=none (message not signed); arc=none
+ bh=VDPKGLZmllVr3pElvD+q+zqHx8J57C5DchCRyEh/0+U=;
+ b=eZfMbDG5DKsfjYpD+PefDjb+EHjCiZgGIRtX/5F2UZb01cXVss+mZEwjSQXS6HvkBleuiXF7Lo476LWBLgNbXxr44ivBN/k+SGTwEWLmxXTBi1FHI76JgU4cdMbd7jrZl4u31iBakeNrlQni/+FzgT7b3LtxmiorI6OeZ/ZMnL2592ZJNnC2gvEjl3+b4qAHjQVFPIf18XfQtnAgmvM8oicocCX7+sxTmdokS139meG6XeQ6ZShWRoLwOYExkCeCCPFvGnqzF8mLbwObi+Thxty7NzwnGbyGKjanvNHT8GUDL5ltKPf1hUwKMFD/u1pgues8ymmYWeYsU1gDwvFYUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TvHCs77zTKjeJCRttCK5jTM1WRW48h5RjGDiyWGaZqM=;
- b=D8WHmA9BcFu+Tlt5sILvC2wDqGxDUrNfNr6b+Dy+z2WckjKsyZlTzaZK6arz3PjGlz6mvWF1FNerc63VShxOpBWdq3zykzDJ8+MoQRb7kal+TD/6IZgh5qWf3jiB/aC/APlOdVMdBN/E+EgyKEhX03RVpjVysyOwyVbsm4Dtl2Q=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
- smtp.mailfrom=arm.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.67.248.234; helo=nebula.arm.com; pr=C
-From: Wei Chen <wei.chen@arm.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <nd@arm.com>, Wei Chen <wei.chen@arm.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v9 2/6] xen/x86: move generically usable NUMA code from x86 to common
-Date: Fri, 18 Nov 2022 18:45:04 +0800
-Message-ID: <20221118104508.768274-3-wei.chen@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221118104508.768274-1-wei.chen@arm.com>
-References: <20221118104508.768274-1-wei.chen@arm.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 1
-X-MS-TrafficTypeDiagnostic:
-	VI1EUR03FT015:EE_|AM8PR08MB6449:EE_|AM7EUR03FT041:EE_|AM9PR08MB6164:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3472fa8b-54ee-4ec2-2a04-08dac9520e5c
+ bh=VDPKGLZmllVr3pElvD+q+zqHx8J57C5DchCRyEh/0+U=;
+ b=JfMrXTcFI8NSr5reph2IBkCAKVoZtYljSq4JO9VtdzdLjc9ToFvoecL5qWVqYV5pGSjJmcxz8McgUPAJV0oJJaR+OFHIbhFpkv9bzi0jvwvnIvvZOBCqea4GL8urDbjzgBefAHiPmOTz4WlYZScdw36QL+fI7JlJ8pfvsJCscF0=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Michal Orzel <michal.orzel@amd.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Doug
+ Goldstein <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v4 1/3] automation: Create Yocto docker images
+Thread-Topic: [PATCH v4 1/3] automation: Create Yocto docker images
+Thread-Index: AQHY+mjC+0nxqx9t9k+ZuMYOtPDJka5EYYoAgAAv0YA=
+Date: Fri, 18 Nov 2022 11:44:17 +0000
+Message-ID: <F2C4748A-016F-4434-A760-7703D31777CB@arm.com>
+References: <cover.1668677493.git.bertrand.marquis@arm.com>
+ <6d48a0f83324d2f42597d43c41ce72d6d80150e6.1668677493.git.bertrand.marquis@arm.com>
+ <60ff35c3-0b3a-7c9f-edf5-0639056570d7@amd.com>
+In-Reply-To: <60ff35c3-0b3a-7c9f-edf5-0639056570d7@amd.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3696.120.41.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AM6PR08MB3784:EE_|AS8PR08MB8825:EE_|AM7EUR03FT031:EE_|VE1PR08MB5824:EE_
+X-MS-Office365-Filtering-Correlation-Id: 85cbb1ea-4081-4885-9c06-08dac95a3f7e
 x-checkrecipientrouted: true
-NoDisclaimer: true
+nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- orCV2S6pIt1+SlDo1gxet6kHJGCoMfSflOGKJS/M9b6wVqL9wYTOeKDQOiXzaA3pQES9++Vho5zMh2q5gH/DUJgM26yHHTdgQSU0Lfmv6kP+lzorVMo27C4DI+4696OjnSkqnJG6w6Ruv5TMZRpbhddpvjnzo+NrSDxBn3FNb4nYxMBHoETnXsl9NPTSi0pxNMT1B6Sy4NbgEXX20QCCNcKYG1J0RGpUOah1mAIHo2N6KN1XFlfcY2MmLn6IdpSqIgBsKb8loHk5p2ruBnQa/k5gK8CbWYWRW8t7URbgwVgrSNv1vTrECXYglbH9KHhXWFHyZFcdkDbIZAU4ZAkL0cm4na6ECUdTM05WqJlGXv0DbfM+qPbdJ8w6GVk0damTmpmp4Smp6SVHUhFi37Rc5Fr8Ed0eQ7cy6lLfm/NAdEJg+F20s+n2ipbVw5MTo1abFytF3XXdG3iYR4Vol0F+RJfe3g6s25pGvqF5N+CuIqQPwSD39aAE6daU3tx9CSKSOwS8fR2cI1vABXjiJzvKmYnK3SogP3+02TnsZL+RnhxydhH2Yf5uDiLQ2Ur+0GJuyaha5ENj0it9yJcCAdXHqg/sqwlyFJkFr14kbOMXD6KueXHeVFAjeBQC4NCVpNH1kkSfTJXvFdFxNjodLJbEKSJ3HwAHjRSBhAMIysp7PDn5m21jeiSpxh31Bv8i1t68/YP89iIAP8MV2Wj4+3cQFx51QSUDGMTV8gjCLZJnQbpTrMnZRu1mOVM8V+ogv78S
+ UitSPTdggz1Wdp6Gdz5PCm29Zu4EK7PDT7qZS1cmEmlLKaWAQP+Gzot04asuas60LY8BYQiGnDX49+9QBHFBMtcTviniNNAncXCs1nzGGmm1LQEQr8DVN/B6aaYxec68DoJmYw/qHYvXNisiDcI0Cr1a7RP15AgEms8sBKq5nsFq5+tdL56/uJntL6Tgi+iMGMHn1gP4nMpSVJ72VgfIIfnZKhb7+eypHMFm+ywzHLflD+kTL8T4xlAcBlzqb7epKOJThgYDRXLj79G10jYuXrToTkaXVQpqbmGD5Lu+EhBrjGgiG0lixUT3uQ+6azCKj00woWHGdghBnfSonlNL/iQJ38mgdIZWP0cusx2hkN+TJq5bTjwIi2llZYa+jXJUbOFIP2xh5xG2BisRwKq2B0i7iWLPjXAAM+v1XenAKwE86jWv2RGMf7ozX4qXvrFT67ABJO7I3u99/rQ7pGaEOv6AKpxvG7ay9qq2iuDuIH8W6Po177mudgvgJqAtB14zes82KJhh3hVjtfmPBOCK2MbvoQmEFPhXkNN91oMDyB7SC3Gwz2IIFVVBoweffZ+xroEo6THracv2R9vdz7nqE4LOpkmcUVQWpparG6DwZ7gaoreA6JJoV2JEKaCoxmeHjFcg2pPUHz1W/E/5IJyWzYmpfY3/hKGZPaJ/uKCvRPBbiF+z5iDXBJLyJRaeCdzINJ1eOYzYRXHid5n7gS54KCc9AZiHixqZeufL6Mxoyg8plcgwXVFJuyyjqz8YShWaKCWASFuNxQ/PFHdsBGFB7LGWjZb8OF78/NdglIy3AXk=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(39860400002)(346002)(376002)(396003)(451199015)(40470700004)(46966006)(36840700001)(40460700003)(36756003)(2616005)(81166007)(6916009)(356005)(316002)(54906003)(40480700001)(6666004)(41300700001)(7696005)(82310400005)(26005)(70206006)(8676002)(4326008)(426003)(86362001)(70586007)(47076005)(83380400001)(2906002)(30864003)(186003)(5660300002)(44832011)(336012)(82740400003)(8936002)(1076003)(36860700001)(478600001)(21314003)(36900700001)(579004);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6449
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(346002)(366004)(376002)(396003)(136003)(451199015)(66946007)(76116006)(64756008)(66446008)(66476007)(53546011)(38100700002)(6506007)(2906002)(26005)(6512007)(36756003)(66556008)(4326008)(8676002)(122000001)(966005)(91956017)(86362001)(6916009)(33656002)(6486002)(54906003)(38070700005)(186003)(83380400001)(478600001)(30864003)(8936002)(84970400001)(316002)(41300700001)(71200400001)(2616005)(5660300002)(45980500001)(579004);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <4EBC7E03D3639242B924C9F19A9F758F@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8825
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM7EUR03FT041.eop-EUR03.prod.protection.outlook.com
+ AM7EUR03FT031.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	05dc9b1d-d8f2-4f75-c127-08dac952031a
+	76bd50d4-56d5-43cd-bd38-08dac95a3964
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	2GcICMKnxLqeI47rCADDgF+OSuBJ9J2RNaS4ogZ5Uwh5HbMRP+6KtBIlHVFF/VgvSXJwWESK47EBpsQHcxH+sqHUwDLjHiOPE6X+MyvwQYsQ27FZQfoKOk/YApzkI1bwe7OqH0L5UuHH0c3UfgCI8g1W7/tx6FLw1LnC5+Z/DEkdSieXnurBtCOZlYI2hal+4nJyYBCLtOxy55cGBH8vfoMrFspglctDYOcV3Gn81bS9m8aAyq7/3Q6GP6M6IiTdWG2TbCxaIC47FD+75fhaXCtsbDnpPXATbPh7n4cIe/+uoPZrQ9uIH7V75W+xJy7L8hI3cqkhulEm67J3ZfL8R0A8Q8bCJS0SWzd/Cm+iriE0sjGk7YMdXRzGO/A71I84sdW3BgMjpHCNhmFLQ1ePjYonWeUxIWvG53EnrH0ei3gs2wU+A8adQlXVR04dAwCxduZV4K1LZp0K+Nft4Hk7gY+8fIP1dGhO5sUVFauh91aveNbHdV8otAX8a6T3H3CfQ0LX0NKPXLdJzV1e3ubBn7IiAW7dp2Q00A0nCCMHNSvosXNf7Z4b3Dlf41R928twzA0j5Zr12AIGs7BHwardORP+k7er+k06YeDv9+5165eeF1DaCmFfttSXVf36C8KRyzVZ4WxmKHK994iH1eaulK0eM8GtPpLn3Mx63Ax7Se/8JSb+88yKN1NoroJvXVbY9pzXK+53vO6R4x4n0g658YWcr9yw0rvm/xLr4CWg37DCrKt9Xy7SU9+9+YoeHrJA+1+p3lW8N6AIjQbijcAq9g==
+	JmicZCD9s/a/lAKCezrGnHXnDkyH956wqSDo6JQRwYeiO/rD+VojYJTGyQn90KTqxgpyUshKcvZo9dZy7NG+JqZg2WeGUq66MU8n3YpZEixlN54KegqwAmHtMtz+tuICMtoPxkqo7BHzdpllcz4d8WrH2zwLea+z4kA85sVoJERrIY5fIBLGa1HcDkojrIn9fqW5VqiUCimWflHImT/oj1Q2EuVS/nJ8GQq80f9T9MFVm9M0QqwK/jLoVIn7PjMJ9hSRI9DSGlO693vEbNYyUVhjJjrTlqU/W3HKG96yrNrTI3pn+whg8YUhk/YDSsx2Jm5sUPgZXYo+VzWusOlWF96z26gXpR5gJDnZ0cAQ13HKjkwKrB7P/yuQY6wd104pDqPCqoZ4wrAsXza6SZ2TeaZli3BJc+wCK0pdVGNy+Z3dJJbmY1noRDUdoG0IZmX8IRwIhNibYC9XUtiZ5PDZOUcabXgBH352qcqEXd+yE26Dd5pCOcbnCg1H4Hks61g3805KBnKQKrslVDFGbIHajXUw8Lrz+PH+uOk2epSdkE0DSTL8xLEsTrHG4TpGOvcTnyHCn1iUXK4M3p3+61P0uBnTiIIPR0VXcuCX/xRuDt847cdqgQ34a+dfsmGv3AQeMgQOruPT4MH26n8TbMv/LcYZpTvXuKrp/BrJ0dt8gykiliu5TkZbyx6MkXcJfLxEKnYVVjXoDekZM/ofAg62tmriSAix/pDeMNc5o2x98SlzxTG5w5rT0Q6Ift0c+cWwPOdo+ZH2AjWOdSE6ysh/Qg==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(346002)(396003)(39860400002)(136003)(376002)(451199015)(40470700004)(46966006)(36840700001)(8936002)(44832011)(30864003)(5660300002)(4326008)(8676002)(70586007)(41300700001)(54906003)(70206006)(316002)(6916009)(26005)(2906002)(478600001)(36756003)(186003)(1076003)(2616005)(47076005)(6666004)(7696005)(336012)(426003)(107886003)(36860700001)(82310400005)(40480700001)(40460700003)(83380400001)(81166007)(82740400003)(86362001)(21314003)(579004);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(396003)(39860400002)(376002)(136003)(346002)(451199015)(40470700004)(46966006)(36840700001)(83380400001)(70206006)(86362001)(8676002)(36756003)(81166007)(70586007)(5660300002)(41300700001)(316002)(356005)(33656002)(40480700001)(4326008)(478600001)(54906003)(82740400003)(36860700001)(40460700003)(53546011)(6486002)(186003)(336012)(2616005)(966005)(6512007)(107886003)(26005)(6506007)(82310400005)(47076005)(6862004)(8936002)(2906002)(30864003)(84970400001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2022 10:45:49.0987
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2022 11:44:27.5067
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3472fa8b-54ee-4ec2-2a04-08dac9520e5c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85cbb1ea-4081-4885-9c06-08dac95a3f7e
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	AM7EUR03FT041.eop-EUR03.prod.protection.outlook.com
+	AM7EUR03FT031.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6164
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5824
 
-There are some codes in x86/numa.c can be shared by common
-architectures to implememnt NUMA support. Just like some
-variables and functions to check and store NUMA memory map.
-And some variables and functions to do NUMA initialization.
-
-In this patch, we move them to common/numa.c and xen/numa.h
-and use the CONFIG_NUMA to gate them for non-NUMA supported
-architectures. As the target header file is Xen-style, so
-we trim some spaces and replace tabs for the codes that has
-been moved to xen/numa.h at the same time.
-
-As acpi_scan_nodes has been used in a common function, it
-doesn't make sense to use acpi_xxx in common code, so we
-rename it to numa_process_nodes in this patch too. After that
-if we still use CONFIG_ACPI_NUMA in to gate numa_process_nodes
-in numa_initmem_init, that doesn't make sense. As CONFIG_NUMA
-will be selected by CONFIG_ACPI_NUMA for x86. So, we replace
-CONFIG_ACPI_NUMA by CONFIG_NUMA to gate numa_process_nodes.
-
-As arch_numa_disabled has been implememnted for ACPI NUMA,
-we can rename srat_disabled to numa_disabled and move it
-to common code as well.
-
-The macro node_to_first_cpu(node) hasn't been used anywhere,
-so we drop it in this patch too.
-
-Because some architectures allow to use all 64 physical address
-bits, but some architectures are not (like Arm64 allows 52, 48
-bits). In this case, we use min(PADDR_BITS, BITS_PER_LONG - 1)
-to calculate the shift when only one node is in the system in
-this patch too.
-
-Signed-off-by: Wei Chen <wei.chen@arm.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-v8 -> v9:
- 1. No change.
-v7 -> v8:
- 1. Add Rb.
- 2. Change "of shift too small" to "or shift too small".
-v6 -> v7:
- 1. Restore %d for nodeid_t in dump_numa.
- 2. Use sizeof(page_num_node) for page_num_node size in memset.
- 3. Add description for using min(PADDR_BITS, BITS_PER_LONG - 1)
-    to calculate the shift when only one node is in the system.
- 4. Use %pd for domain print.
-v5 -> v6:
- 1. Replace numa_scan_node to numa_process_nodes in commit log.
- 2. Limit the scope of page_num_node, vnuma and page of numa_setup
-    function.
- 3. Use memset to init page_num_node instead of for_each_online_node.
- 4. Use %u instead of %d for nodeid_t and j in numa_setup print
-    messages.
- 5. Use min(PADDR_BITS, BITS_PER_LONG - 1) to calculate the shift
-    when only one node is in the system.
- 6. Drop the marco: node_to_first_cpu(node)
-v4 -> v5:
- 1. Use nodeid_t instead of uint8_t for memnodemap.
- 2. Restore to use typeof(*memnodemap) for _memnodemap, this will avoid the
-    further adjustments for _memnodemap's type.
- 3. Use __ro_after_init for numa_off.
- 4. Use pointer-to-const for proper function parameters.
- 5. Use unsigned int for variables that are not realy used for node ID.
- 6. Fix code comments code-style and adjust the length.
- 7. Fix code-styles.
- 8. Rename numa_scan_nodes to numa_process_nodes.
- 9. Use a plain "int ret" to record compute_hash_shift return value.
-v3 -> v4:
- 1. Restore compute_hash_shift's return value to int.
- 2. Remove unnecessary parentheses for macros.
- 3. Use unsigned int for proper variables.
- 4. Fix some code-style.
-v2 -> v3:
- 1. Remove acpi.h from common/numa.c.
- 2. Rename acpi_scan_nodes to numa_scan_nodes.
- 3. Replace u8 by uint8_t for memnodemap.
- 4. Use unsigned int for memnode_shift and adjust related functions
-    (compute_hash_shift, populate_memnodemap) to use correct types for
-    return values or parameters.
- 5. Use nodeid_t for nodeid and node numbers.
- 6. Use __read_mostly and __ro_after_init for appropriate variables.
- 7. Adjust the __read_mostly and __initdata location for some variables.
- 8. convert from plain int to unsigned for cpuid and other proper variables.
- 9. Use __attribute_pure__ instead of __attribute__((pure)).
-10. Replace CONFIG_ACPI_NUMA by CONFIG_NUMA in numa_initmem_init.
-11. Add const for some functions' parameters.
-12. Move srat_disabled to common code with new name numa_disabled.
-13. Fix some spaces code-style for numa_emulation.
-14. Change from int to unsigned int for numa_fake.
-v1 -> v2:
-1. New patch in v2.
----
- xen/arch/x86/include/asm/acpi.h  |   1 -
- xen/arch/x86/include/asm/numa.h  |  57 +---
- xen/arch/x86/include/asm/setup.h |   1 -
- xen/arch/x86/numa.c              | 433 +---------------------------
- xen/arch/x86/smpboot.c           |   2 +-
- xen/arch/x86/srat.c              |  10 +-
- xen/common/Makefile              |   1 +
- xen/common/numa.c                | 464 +++++++++++++++++++++++++++++++
- xen/include/xen/numa.h           |  66 +++++
- 9 files changed, 539 insertions(+), 496 deletions(-)
- create mode 100644 xen/common/numa.c
-
-diff --git a/xen/arch/x86/include/asm/acpi.h b/xen/arch/x86/include/asm/acpi.h
-index 9a9cc4c240..5c2dd5da2d 100644
---- a/xen/arch/x86/include/asm/acpi.h
-+++ b/xen/arch/x86/include/asm/acpi.h
-@@ -102,7 +102,6 @@ extern unsigned long acpi_wakeup_address;
- #define ARCH_HAS_POWER_INIT	1
- 
- extern s8 acpi_numa;
--extern int acpi_scan_nodes(u64 start, u64 end);
- #define NR_NODE_MEMBLKS (MAX_NUMNODES*2)
- 
- extern struct acpi_sleep_info acpi_sinfo;
-diff --git a/xen/arch/x86/include/asm/numa.h b/xen/arch/x86/include/asm/numa.h
-index 237f2c6dbf..6c87942d43 100644
---- a/xen/arch/x86/include/asm/numa.h
-+++ b/xen/arch/x86/include/asm/numa.h
-@@ -9,72 +9,17 @@ typedef u8 nodeid_t;
- 
- extern int srat_rev;
- 
--extern nodeid_t      cpu_to_node[NR_CPUS];
--extern cpumask_t     node_to_cpumask[];
--
--#define cpu_to_node(cpu)		(cpu_to_node[cpu])
--#define parent_node(node)		(node)
--#define node_to_first_cpu(node)  (__ffs(node_to_cpumask[node]))
--#define node_to_cpumask(node)    (node_to_cpumask[node])
--
--struct node { 
--	paddr_t start, end;
--};
--
--extern int compute_hash_shift(struct node *nodes, int numnodes,
--			      nodeid_t *nodeids);
- extern nodeid_t pxm_to_node(unsigned int pxm);
- 
- #define ZONE_ALIGN (1UL << (MAX_ORDER+PAGE_SHIFT))
--#define VIRTUAL_BUG_ON(x) 
- 
--extern void numa_add_cpu(int cpu);
--extern void numa_init_array(void);
--extern bool numa_off;
--
--extern int arch_numa_setup(const char *opt);
--extern bool arch_numa_disabled(void);
--extern bool srat_disabled(void);
--extern void numa_set_node(int cpu, nodeid_t node);
-+extern bool numa_disabled(void);
- extern nodeid_t setup_node(unsigned int pxm);
- extern void srat_detect_node(int cpu);
- 
--extern void setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end);
- extern nodeid_t apicid_to_node[];
- extern void init_cpu_to_node(void);
- 
--static inline void clear_node_cpumask(int cpu)
--{
--	cpumask_clear_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
--}
--
--/* Simple perfect hash to map pdx to node numbers */
--extern int memnode_shift; 
--extern unsigned long memnodemapsize;
--extern u8 *memnodemap;
--
--struct node_data {
--    unsigned long node_start_pfn;
--    unsigned long node_spanned_pages;
--};
--
--extern struct node_data node_data[];
--
--static inline __attribute__((pure)) nodeid_t phys_to_nid(paddr_t addr)
--{ 
--	nodeid_t nid;
--	VIRTUAL_BUG_ON((paddr_to_pdx(addr) >> memnode_shift) >= memnodemapsize);
--	nid = memnodemap[paddr_to_pdx(addr) >> memnode_shift]; 
--	VIRTUAL_BUG_ON(nid >= MAX_NUMNODES || !node_data[nid]); 
--	return nid; 
--} 
--
--#define NODE_DATA(nid)		(&(node_data[nid]))
--
--#define node_start_pfn(nid)	(NODE_DATA(nid)->node_start_pfn)
--#define node_spanned_pages(nid)	(NODE_DATA(nid)->node_spanned_pages)
--#define node_end_pfn(nid)       (NODE_DATA(nid)->node_start_pfn + \
--				 NODE_DATA(nid)->node_spanned_pages)
- #define arch_want_default_dmazone() (num_online_nodes() > 1)
- 
- extern int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node);
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index 21037b7f31..ae470ea12f 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -20,7 +20,6 @@ void early_time_init(void);
- 
- void set_nr_cpu_ids(unsigned int max_cpus);
- 
--void numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn);
- void arch_init_memory(void);
- void subarch_init_memory(void);
- 
-diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
-index 1c3198445d..90b2a22591 100644
---- a/xen/arch/x86/numa.c
-+++ b/xen/arch/x86/numa.c
-@@ -4,20 +4,11 @@
-  * Adapted for Xen: Ryan Harper <ryanh@us.ibm.com>
-  */ 
- 
--#include <xen/mm.h>
--#include <xen/string.h>
- #include <xen/init.h>
--#include <xen/ctype.h>
-+#include <xen/mm.h>
- #include <xen/nodemask.h>
- #include <xen/numa.h>
--#include <xen/keyhandler.h>
--#include <xen/param.h>
--#include <xen/time.h>
--#include <xen/smp.h>
--#include <xen/pfn.h>
- #include <asm/acpi.h>
--#include <xen/sched.h>
--#include <xen/softirq.h>
- 
- #ifndef Dprintk
- #define Dprintk(x...)
-@@ -26,28 +17,13 @@
- /* from proto.h */
- #define round_up(x,y) ((((x)+(y))-1) & (~((y)-1)))
- 
--struct node_data node_data[MAX_NUMNODES];
--
--/* Mapping from pdx to node id */
--int memnode_shift;
--static typeof(*memnodemap) _memnodemap[64];
--unsigned long memnodemapsize;
--u8 *memnodemap;
--
--nodeid_t cpu_to_node[NR_CPUS] __read_mostly = {
--    [0 ... NR_CPUS-1] = NUMA_NO_NODE
--};
- /*
-  * Keep BIOS's CPU2node information, should not be used for memory allocaion
-  */
- nodeid_t apicid_to_node[MAX_LOCAL_APIC] = {
-     [0 ... MAX_LOCAL_APIC-1] = NUMA_NO_NODE
- };
--cpumask_t node_to_cpumask[MAX_NUMNODES] __read_mostly;
- 
--nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
--
--bool numa_off;
- s8 acpi_numa = 0;
- 
- int __init arch_numa_setup(const char *opt)
-@@ -69,270 +45,6 @@ bool arch_numa_disabled(void)
-     return acpi_numa < 0;
- }
- 
--bool srat_disabled(void)
--{
--    return numa_off || arch_numa_disabled();
--}
--
--/*
-- * Given a shift value, try to populate memnodemap[]
-- * Returns :
-- * 1 if OK
-- * 0 if memnodmap[] too small (of shift too small)
-- * -1 if node overlap or lost ram (shift too big)
-- */
--static int __init populate_memnodemap(const struct node *nodes,
--                                      int numnodes, int shift, nodeid_t *nodeids)
--{
--    int i, res = -1;
--
--    memset(memnodemap, NUMA_NO_NODE, memnodemapsize * sizeof(*memnodemap));
--    for ( i = 0; i < numnodes; i++ )
--    {
--        unsigned long spdx = paddr_to_pdx(nodes[i].start);
--        unsigned long epdx = paddr_to_pdx(nodes[i].end - 1);
--
--        if ( spdx > epdx )
--            continue;
--        if ( (epdx >> shift) >= memnodemapsize )
--            return 0;
--        do {
--            if ( memnodemap[spdx >> shift] != NUMA_NO_NODE &&
--                 (!nodeids || memnodemap[spdx >> shift] != nodeids[i]) )
--                return -1;
--
--            if ( !nodeids )
--                memnodemap[spdx >> shift] = i;
--            else
--                memnodemap[spdx >> shift] = nodeids[i];
--
--            spdx += (1UL << shift);
--        } while ( spdx <= epdx );
--        res = 1;
--    }
--
--    return res;
--}
--
--static int __init allocate_cachealigned_memnodemap(void)
--{
--    unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
--    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
--
--    memnodemap = mfn_to_virt(mfn);
--    mfn <<= PAGE_SHIFT;
--    size <<= PAGE_SHIFT;
--    printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
--           mfn, mfn + size);
--    memnodemapsize = size / sizeof(*memnodemap);
--
--    return 0;
--}
--
--/*
-- * The LSB of all start addresses in the node map is the value of the
-- * maximum possible shift.
-- */
--static int __init extract_lsb_from_nodes(const struct node *nodes,
--                                         int numnodes, const nodeid_t *nodeids)
--{
--    int i, nodes_used = 0;
--    unsigned long spdx, epdx;
--    unsigned long bitfield = 0, memtop = 0;
--
--    for ( i = 0; i < numnodes; i++ )
--    {
--        spdx = paddr_to_pdx(nodes[i].start);
--        epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
--        if ( spdx >= epdx )
--            continue;
--        if ( i && (!nodeids || nodeids[i - 1] != nodeids[i]) )
--            bitfield |= spdx;
--        if ( !i || !nodeids || nodeids[i - 1] != nodeids[i] )
--            nodes_used++;
--        if ( epdx > memtop )
--            memtop = epdx;
--    }
--    if ( nodes_used <= 1 )
--        i = BITS_PER_LONG - 1;
--    else
--        i = find_first_bit(&bitfield, sizeof(unsigned long)*8);
--    memnodemapsize = ((memtop - 1) >> i) + 1;
--    return i;
--}
--
--int __init compute_hash_shift(struct node *nodes, int numnodes,
--                              nodeid_t *nodeids)
--{
--    int shift;
--
--    shift = extract_lsb_from_nodes(nodes, numnodes, nodeids);
--    if ( memnodemapsize <= ARRAY_SIZE(_memnodemap) )
--        memnodemap = _memnodemap;
--    else if ( allocate_cachealigned_memnodemap() )
--        return -1;
--    printk(KERN_DEBUG "NUMA: Using %d for the hash shift.\n", shift);
--
--    if ( populate_memnodemap(nodes, numnodes, shift, nodeids) != 1 )
--    {
--        printk(KERN_INFO "Your memory is not aligned you need to "
--               "rebuild your hypervisor with a bigger NODEMAPSIZE "
--               "shift=%d\n", shift);
--        return -1;
--    }
--
--    return shift;
--}
--/* initialize NODE_DATA given nodeid and start/end */
--void __init setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end)
--{
--    unsigned long start_pfn = paddr_to_pfn(start);
--    unsigned long end_pfn = paddr_to_pfn(end);
--
--    NODE_DATA(nodeid)->node_start_pfn = start_pfn;
--    NODE_DATA(nodeid)->node_spanned_pages = end_pfn - start_pfn;
--
--    node_set_online(nodeid);
--} 
--
--void __init numa_init_array(void)
--{
--    int rr, i;
--
--    /* There are unfortunately some poorly designed mainboards around
--       that only connect memory to a single CPU. This breaks the 1:1 cpu->node
--       mapping. To avoid this fill in the mapping for all possible
--       CPUs, as the number of CPUs is not known yet.
--       We round robin the existing nodes. */
--    rr = first_node(node_online_map);
--    for ( i = 0; i < nr_cpu_ids; i++ )
--    {
--        if ( cpu_to_node[i] != NUMA_NO_NODE )
--            continue;
--        numa_set_node(i, rr);
--        rr = cycle_node(rr, node_online_map);
--    }
--}
--
--#ifdef CONFIG_NUMA_EMU
--static int numa_fake __initdata = 0;
--
--/* Numa emulation */
--static int __init numa_emulation(unsigned long start_pfn,
--                                 unsigned long end_pfn)
--{
--    int i;
--    struct node nodes[MAX_NUMNODES];
--    uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
--
--    /* Kludge needed for the hash function */
--    if ( hweight64(sz) > 1 )
--    {
--        u64 x = 1;
--        while ( (x << 1) < sz )
--            x <<= 1;
--        if ( x < sz/2 )
--            printk(KERN_ERR "Numa emulation unbalanced. Complain to maintainer\n");
--        sz = x;
--    }
--
--    memset(&nodes,0,sizeof(nodes));
--    for ( i = 0; i < numa_fake; i++ )
--    {
--        nodes[i].start = pfn_to_paddr(start_pfn) + i * sz;
--        if ( i == numa_fake - 1 )
--            sz = pfn_to_paddr(end_pfn) - nodes[i].start;
--        nodes[i].end = nodes[i].start + sz;
--        printk(KERN_INFO "Faking node %d at %"PRIx64"-%"PRIx64" (%"PRIu64"MB)\n",
--               i,
--               nodes[i].start, nodes[i].end,
--               (nodes[i].end - nodes[i].start) >> 20);
--        node_set_online(i);
--    }
--    memnode_shift = compute_hash_shift(nodes, numa_fake, NULL);
--    if ( memnode_shift < 0 )
--    {
--        memnode_shift = 0;
--        printk(KERN_ERR "No NUMA hash function found. Emulation disabled.\n");
--        return -1;
--    }
--    for_each_online_node ( i )
--        setup_node_bootmem(i, nodes[i].start, nodes[i].end);
--    numa_init_array();
--
--    return 0;
--}
--#endif
--
--void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
--{ 
--    int i;
--    paddr_t start = pfn_to_paddr(start_pfn);
--    paddr_t end = pfn_to_paddr(end_pfn);
--
--#ifdef CONFIG_NUMA_EMU
--    if ( numa_fake && !numa_emulation(start_pfn, end_pfn) )
--        return;
--#endif
--
--#ifdef CONFIG_ACPI_NUMA
--    if ( !numa_off && !acpi_scan_nodes(start, end) )
--        return;
--#endif
--
--    printk(KERN_INFO "%s\n",
--           numa_off ? "NUMA turned off" : "No NUMA configuration found");
--
--    printk(KERN_INFO "Faking a node at %"PRIpaddr"-%"PRIpaddr"\n",
--           start, end);
--    /* setup dummy node covering all memory */
--    memnode_shift = BITS_PER_LONG - 1;
--    memnodemap = _memnodemap;
--    /* Dummy node only uses 1 slot in reality */
--    memnodemap[0] = 0;
--    memnodemapsize = 1;
--
--    nodes_clear(node_online_map);
--    node_set_online(0);
--    for ( i = 0; i < nr_cpu_ids; i++ )
--        numa_set_node(i, 0);
--    cpumask_copy(&node_to_cpumask[0], cpumask_of(0));
--    setup_node_bootmem(0, start, end);
--}
--
--void numa_add_cpu(int cpu)
--{
--    cpumask_set_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
--} 
--
--void numa_set_node(int cpu, nodeid_t node)
--{
--    cpu_to_node[cpu] = node;
--}
--
--/* [numa=off] */
--static int __init cf_check numa_setup(const char *opt)
--{
--    if ( !strncmp(opt, "off", 3) )
--        numa_off = true;
--    else if ( !strncmp(opt, "on", 2) )
--        numa_off = false;
--#ifdef CONFIG_NUMA_EMU
--    else if ( !strncmp(opt, "fake=", 5) )
--    {
--        numa_off = false;
--        numa_fake = simple_strtoul(opt + 5, NULL, 0);
--        if ( numa_fake >= MAX_NUMNODES )
--            numa_fake = MAX_NUMNODES;
--    }
--#endif
--    else
--        return arch_numa_setup(opt);
--
--    return 0;
--} 
--custom_param("numa", numa_setup);
--
- /*
-  * Setup early cpu_to_node.
-  *
-@@ -381,146 +93,3 @@ unsigned int __init arch_get_dma_bitsize(void)
-                  flsl(node_start_pfn(node) + node_spanned_pages(node) / 4 - 1)
-                  + PAGE_SHIFT, 32);
- }
--
--static void cf_check dump_numa(unsigned char key)
--{
--    s_time_t now = NOW();
--    unsigned int i, j, n;
--    struct domain *d;
--    struct page_info *page;
--    unsigned int page_num_node[MAX_NUMNODES];
--    const struct vnuma_info *vnuma;
--
--    printk("'%c' pressed -> dumping numa info (now = %"PRI_stime")\n", key,
--           now);
--
--    for_each_online_node ( i )
--    {
--        paddr_t pa = pfn_to_paddr(node_start_pfn(i) + 1);
--
--        printk("NODE%u start->%lu size->%lu free->%lu\n",
--               i, node_start_pfn(i), node_spanned_pages(i),
--               avail_node_heap_pages(i));
--        /* sanity check phys_to_nid() */
--        if ( phys_to_nid(pa) != i )
--            printk("phys_to_nid(%"PRIpaddr") -> %d should be %u\n",
--                   pa, phys_to_nid(pa), i);
--    }
--
--    j = cpumask_first(&cpu_online_map);
--    n = 0;
--    for_each_online_cpu ( i )
--    {
--        if ( i != j + n || cpu_to_node[j] != cpu_to_node[i] )
--        {
--            if ( n > 1 )
--                printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
--            else
--                printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
--            j = i;
--            n = 1;
--        }
--        else
--            ++n;
--    }
--    if ( n > 1 )
--        printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
--    else
--        printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
--
--    rcu_read_lock(&domlist_read_lock);
--
--    printk("Memory location of each domain:\n");
--    for_each_domain ( d )
--    {
--        process_pending_softirqs();
--
--        printk("Domain %u (total: %u):\n", d->domain_id, domain_tot_pages(d));
--
--        for_each_online_node ( i )
--            page_num_node[i] = 0;
--
--        spin_lock(&d->page_alloc_lock);
--        page_list_for_each(page, &d->page_list)
--        {
--            i = phys_to_nid(page_to_maddr(page));
--            page_num_node[i]++;
--        }
--        spin_unlock(&d->page_alloc_lock);
--
--        for_each_online_node ( i )
--            printk("    Node %u: %u\n", i, page_num_node[i]);
--
--        if ( !read_trylock(&d->vnuma_rwlock) )
--            continue;
--
--        if ( !d->vnuma )
--        {
--            read_unlock(&d->vnuma_rwlock);
--            continue;
--        }
--
--        vnuma = d->vnuma;
--        printk("     %u vnodes, %u vcpus, guest physical layout:\n",
--               vnuma->nr_vnodes, d->max_vcpus);
--        for ( i = 0; i < vnuma->nr_vnodes; i++ )
--        {
--            unsigned int start_cpu = ~0U;
--
--            if ( vnuma->vnode_to_pnode[i] == NUMA_NO_NODE )
--                printk("       %3u: pnode ???,", i);
--            else
--                printk("       %3u: pnode %3u,", i, vnuma->vnode_to_pnode[i]);
--
--            printk(" vcpus ");
--
--            for ( j = 0; j < d->max_vcpus; j++ )
--            {
--                if ( !(j & 0x3f) )
--                    process_pending_softirqs();
--
--                if ( vnuma->vcpu_to_vnode[j] == i )
--                {
--                    if ( start_cpu == ~0U )
--                    {
--                        printk("%d", j);
--                        start_cpu = j;
--                    }
--                }
--                else if ( start_cpu != ~0U )
--                {
--                    if ( j - 1 != start_cpu )
--                        printk("-%d ", j - 1);
--                    else
--                        printk(" ");
--                    start_cpu = ~0U;
--                }
--            }
--
--            if ( start_cpu != ~0U  && start_cpu != j - 1 )
--                printk("-%d", j - 1);
--
--            printk("\n");
--
--            for ( j = 0; j < vnuma->nr_vmemranges; j++ )
--            {
--                if ( vnuma->vmemrange[j].nid == i )
--                    printk("           %016"PRIx64" - %016"PRIx64"\n",
--                           vnuma->vmemrange[j].start,
--                           vnuma->vmemrange[j].end);
--            }
--        }
--
--        read_unlock(&d->vnuma_rwlock);
--    }
--
--    rcu_read_unlock(&domlist_read_lock);
--}
--
--static int __init cf_check register_numa_trigger(void)
--{
--    register_keyhandler('u', dump_numa, "dump NUMA info", 1);
--    return 0;
--}
--__initcall(register_numa_trigger);
--
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index b46fd9ab18..9df08e9366 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1350,7 +1350,7 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm)
- 
-     x86_acpiid_to_apicid[acpi_id] = apic_id;
- 
--    if ( !srat_disabled() )
-+    if ( !numa_disabled() )
-     {
-         nodeid_t node = setup_node(pxm);
- 
-diff --git a/xen/arch/x86/srat.c b/xen/arch/x86/srat.c
-index fbcd8749c4..ce507dac9e 100644
---- a/xen/arch/x86/srat.c
-+++ b/xen/arch/x86/srat.c
-@@ -238,7 +238,7 @@ acpi_numa_x2apic_affinity_init(const struct acpi_srat_x2apic_cpu_affinity *pa)
- 	unsigned pxm;
- 	nodeid_t node;
- 
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (pa->header.length < sizeof(struct acpi_srat_x2apic_cpu_affinity)) {
- 		bad_srat();
-@@ -274,7 +274,7 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
- 	unsigned pxm;
- 	nodeid_t node;
- 
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (pa->header.length != sizeof(struct acpi_srat_cpu_affinity)) {
- 		bad_srat();
-@@ -314,7 +314,7 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
- 	unsigned int i;
- 	bool next = false;
- 
--	if (srat_disabled())
-+	if (numa_disabled())
- 		return;
- 	if (ma->header.length != sizeof(struct acpi_srat_mem_affinity)) {
- 		bad_srat();
-@@ -543,8 +543,8 @@ void __init srat_parse_regions(paddr_t addr)
- 	pfn_pdx_hole_setup(mask >> PAGE_SHIFT);
- }
- 
--/* Use the information discovered above to actually set up the nodes. */
--int __init acpi_scan_nodes(paddr_t start, paddr_t end)
-+/* Use discovered information to actually set up the nodes. */
-+int __init numa_process_nodes(paddr_t start, paddr_t end)
- {
- 	int i;
- 	nodemask_t all_nodes_parsed;
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 3baf83d527..9a3a12b12d 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_MEM_ACCESS) += mem_access.o
- obj-y += memory.o
- obj-y += multicall.o
- obj-y += notifier.o
-+obj-$(CONFIG_NUMA) += numa.o
- obj-y += page_alloc.o
- obj-$(CONFIG_HAS_PDX) += pdx.o
- obj-$(CONFIG_PERF_COUNTERS) += perfc.o
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-new file mode 100644
-index 0000000000..a135154c3e
---- /dev/null
-+++ b/xen/common/numa.c
-@@ -0,0 +1,464 @@
-+/*
-+ * Generic VM initialization for NUMA setups.
-+ * Copyright 2002,2003 Andi Kleen, SuSE Labs.
-+ * Adapted for Xen: Ryan Harper <ryanh@us.ibm.com>
-+ */
-+
-+#include <xen/init.h>
-+#include <xen/keyhandler.h>
-+#include <xen/mm.h>
-+#include <xen/nodemask.h>
-+#include <xen/numa.h>
-+#include <xen/param.h>
-+#include <xen/sched.h>
-+#include <xen/softirq.h>
-+
-+struct node_data __ro_after_init node_data[MAX_NUMNODES];
-+
-+/* Mapping from pdx to node id */
-+unsigned int __ro_after_init memnode_shift;
-+unsigned long __ro_after_init memnodemapsize;
-+nodeid_t *__ro_after_init memnodemap;
-+static typeof(*memnodemap) __ro_after_init _memnodemap[64];
-+
-+nodeid_t __read_mostly cpu_to_node[NR_CPUS] = {
-+    [0 ... NR_CPUS-1] = NUMA_NO_NODE
-+};
-+
-+cpumask_t __read_mostly node_to_cpumask[MAX_NUMNODES];
-+
-+nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
-+
-+bool __ro_after_init numa_off;
-+
-+bool numa_disabled(void)
-+{
-+    return numa_off || arch_numa_disabled();
-+}
-+
-+/*
-+ * Given a shift value, try to populate memnodemap[]
-+ * Returns :
-+ * 1 if OK
-+ * 0 if memnodmap[] too small (or shift too small)
-+ * -1 if node overlap or lost ram (shift too big)
-+ */
-+static int __init populate_memnodemap(const struct node *nodes,
-+                                      unsigned int numnodes, unsigned int shift,
-+                                      const nodeid_t *nodeids)
-+{
-+    unsigned int i;
-+    int res = -1;
-+
-+    memset(memnodemap, NUMA_NO_NODE, memnodemapsize * sizeof(*memnodemap));
-+
-+    for ( i = 0; i < numnodes; i++ )
-+    {
-+        unsigned long spdx = paddr_to_pdx(nodes[i].start);
-+        unsigned long epdx = paddr_to_pdx(nodes[i].end - 1);
-+
-+        if ( spdx > epdx )
-+            continue;
-+
-+        if ( (epdx >> shift) >= memnodemapsize )
-+            return 0;
-+
-+        do {
-+            if ( memnodemap[spdx >> shift] != NUMA_NO_NODE &&
-+                 (!nodeids || memnodemap[spdx >> shift] != nodeids[i]) )
-+                return -1;
-+
-+            if ( !nodeids )
-+                memnodemap[spdx >> shift] = i;
-+            else
-+                memnodemap[spdx >> shift] = nodeids[i];
-+
-+            spdx += (1UL << shift);
-+        } while ( spdx <= epdx );
-+
-+        res = 1;
-+    }
-+
-+    return res;
-+}
-+
-+static int __init allocate_cachealigned_memnodemap(void)
-+{
-+    unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
-+    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
-+
-+    memnodemap = mfn_to_virt(mfn);
-+    mfn <<= PAGE_SHIFT;
-+    size <<= PAGE_SHIFT;
-+    printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
-+           mfn, mfn + size);
-+    memnodemapsize = size / sizeof(*memnodemap);
-+
-+    return 0;
-+}
-+
-+/*
-+ * The LSB of all start addresses in the node map is the value of the
-+ * maximum possible shift.
-+ */
-+static unsigned int __init extract_lsb_from_nodes(const struct node *nodes,
-+                                                  nodeid_t numnodes,
-+                                                  const nodeid_t *nodeids)
-+{
-+    unsigned int i, nodes_used = 0;
-+    unsigned long bitfield = 0, memtop = 0;
-+
-+    for ( i = 0; i < numnodes; i++ )
-+    {
-+        unsigned long spdx = paddr_to_pdx(nodes[i].start);
-+        unsigned long epdx = paddr_to_pdx(nodes[i].end - 1) + 1;
-+
-+        if ( spdx >= epdx )
-+            continue;
-+
-+        if ( i && (!nodeids || nodeids[i - 1] != nodeids[i]) )
-+            bitfield |= spdx;
-+
-+        if ( !i || !nodeids || nodeids[i - 1] != nodeids[i] )
-+            nodes_used++;
-+
-+        if ( epdx > memtop )
-+            memtop = epdx;
-+    }
-+
-+    if ( nodes_used <= 1 )
-+        i = min(PADDR_BITS, BITS_PER_LONG - 1);
-+    else
-+        i = find_first_bit(&bitfield, sizeof(unsigned long) * 8);
-+
-+    memnodemapsize = ((memtop - 1) >> i) + 1;
-+
-+    return i;
-+}
-+
-+int __init compute_hash_shift(const struct node *nodes,
-+                              unsigned int numnodes, const nodeid_t *nodeids)
-+{
-+    unsigned int shift = extract_lsb_from_nodes(nodes, numnodes, nodeids);
-+
-+    if ( memnodemapsize <= ARRAY_SIZE(_memnodemap) )
-+        memnodemap = _memnodemap;
-+    else if ( allocate_cachealigned_memnodemap() )
-+        return -1;
-+
-+    printk(KERN_DEBUG "NUMA: Using %u for the hash shift\n", shift);
-+
-+    if ( populate_memnodemap(nodes, numnodes, shift, nodeids) != 1 )
-+    {
-+        printk(KERN_INFO "Your memory is not aligned you need to "
-+               "rebuild your hypervisor with a bigger NODEMAPSIZE "
-+               "shift=%u\n", shift);
-+        return -1;
-+    }
-+
-+    return shift;
-+}
-+
-+/* Initialize NODE_DATA given nodeid and start/end */
-+void __init setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end)
-+{
-+    unsigned long start_pfn = paddr_to_pfn(start);
-+    unsigned long end_pfn = paddr_to_pfn(end);
-+
-+    NODE_DATA(nodeid)->node_start_pfn = start_pfn;
-+    NODE_DATA(nodeid)->node_spanned_pages = end_pfn - start_pfn;
-+
-+    node_set_online(nodeid);
-+}
-+
-+void __init numa_init_array(void)
-+{
-+    unsigned int i;
-+    nodeid_t rr;
-+
-+    /*
-+     * There are unfortunately some poorly designed mainboards
-+     * around that only connect memory to a single CPU. This
-+     * breaks the 1:1 cpu->node mapping. To avoid this fill in
-+     * the mapping for all possible CPUs, as the number of CPUs
-+     * is not known yet. We round robin the existing nodes.
-+     */
-+    rr = first_node(node_online_map);
-+    for ( i = 0; i < nr_cpu_ids; i++ )
-+    {
-+        if ( cpu_to_node[i] != NUMA_NO_NODE )
-+            continue;
-+        numa_set_node(i, rr);
-+        rr = cycle_node(rr, node_online_map);
-+    }
-+}
-+
-+#ifdef CONFIG_NUMA_EMU
-+static unsigned int __initdata numa_fake;
-+
-+/* Numa emulation */
-+static int __init numa_emulation(unsigned long start_pfn,
-+                                 unsigned long end_pfn)
-+{
-+    int ret;
-+    unsigned int i;
-+    struct node nodes[MAX_NUMNODES];
-+    uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
-+
-+    /* Kludge needed for the hash function */
-+    if ( hweight64(sz) > 1 )
-+    {
-+        uint64_t x = 1;
-+
-+        while ( (x << 1) < sz )
-+            x <<= 1;
-+        if ( x < sz / 2 )
-+            printk(KERN_ERR "Numa emulation unbalanced. Complain to maintainer\n");
-+        sz = x;
-+    }
-+
-+    memset(&nodes, 0, sizeof(nodes));
-+    for ( i = 0; i < numa_fake; i++ )
-+    {
-+        nodes[i].start = pfn_to_paddr(start_pfn) + i * sz;
-+
-+        if ( i == numa_fake - 1 )
-+            sz = pfn_to_paddr(end_pfn) - nodes[i].start;
-+
-+        nodes[i].end = nodes[i].start + sz;
-+        printk(KERN_INFO "Faking node %u at %"PRIx64"-%"PRIx64" (%"PRIu64"MB)\n",
-+               i, nodes[i].start, nodes[i].end,
-+               (nodes[i].end - nodes[i].start) >> 20);
-+        node_set_online(i);
-+    }
-+
-+    ret = compute_hash_shift(nodes, numa_fake, NULL);
-+    if ( ret < 0 )
-+    {
-+        printk(KERN_ERR "No NUMA hash function found. Emulation disabled.\n");
-+        return -1;
-+    }
-+    memnode_shift = ret;
-+
-+    for_each_online_node ( i )
-+        setup_node_bootmem(i, nodes[i].start, nodes[i].end);
-+
-+    numa_init_array();
-+
-+    return 0;
-+}
-+#endif
-+
-+void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
-+{
-+    unsigned int i;
-+    paddr_t start = pfn_to_paddr(start_pfn);
-+    paddr_t end = pfn_to_paddr(end_pfn);
-+
-+#ifdef CONFIG_NUMA_EMU
-+    if ( numa_fake && !numa_emulation(start_pfn, end_pfn) )
-+        return;
-+#endif
-+
-+#ifdef CONFIG_NUMA
-+    if ( !numa_off && !numa_process_nodes(start, end) )
-+        return;
-+#endif
-+
-+    printk(KERN_INFO "%s\n",
-+           numa_off ? "NUMA turned off" : "No NUMA configuration found");
-+
-+    printk(KERN_INFO "Faking a node at %"PRIpaddr"-%"PRIpaddr"\n",
-+           start, end);
-+
-+    /* Setup dummy node covering all memory */
-+    memnode_shift = BITS_PER_LONG - 1;
-+    memnodemap = _memnodemap;
-+
-+    /* Dummy node only uses 1 slot in reality */
-+    memnodemap[0] = 0;
-+    memnodemapsize = 1;
-+
-+    nodes_clear(node_online_map);
-+    node_set_online(0);
-+    for ( i = 0; i < nr_cpu_ids; i++ )
-+        numa_set_node(i, 0);
-+
-+    cpumask_copy(&node_to_cpumask[0], cpumask_of(0));
-+    setup_node_bootmem(0, start, end);
-+}
-+
-+void numa_add_cpu(unsigned int cpu)
-+{
-+    cpumask_set_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
-+}
-+
-+void numa_set_node(unsigned int cpu, nodeid_t node)
-+{
-+    cpu_to_node[cpu] = node;
-+}
-+
-+/* [numa=off] */
-+static int __init cf_check numa_setup(const char *opt)
-+{
-+    if ( !strncmp(opt, "off", 3) )
-+        numa_off = true;
-+    else if ( !strncmp(opt, "on", 2) )
-+        numa_off = false;
-+#ifdef CONFIG_NUMA_EMU
-+    else if ( !strncmp(opt, "fake=", 5) )
-+    {
-+        numa_off = false;
-+        numa_fake = simple_strtoul(opt + 5, NULL, 0);
-+        if ( numa_fake >= MAX_NUMNODES )
-+            numa_fake = MAX_NUMNODES;
-+    }
-+#endif
-+    else
-+        return arch_numa_setup(opt);
-+
-+    return 0;
-+}
-+custom_param("numa", numa_setup);
-+
-+static void cf_check dump_numa(unsigned char key)
-+{
-+    s_time_t now = NOW();
-+    unsigned int i, j, n;
-+    struct domain *d;
-+
-+    printk("'%c' pressed -> dumping numa info (now = %"PRI_stime")\n", key,
-+           now);
-+
-+    for_each_online_node ( i )
-+    {
-+        paddr_t pa = pfn_to_paddr(node_start_pfn(i) + 1);
-+
-+        printk("NODE%u start->%lu size->%lu free->%lu\n",
-+               i, node_start_pfn(i), node_spanned_pages(i),
-+               avail_node_heap_pages(i));
-+        /* Sanity check phys_to_nid() */
-+        if ( phys_to_nid(pa) != i )
-+            printk("phys_to_nid(%"PRIpaddr") -> %d should be %u\n",
-+                   pa, phys_to_nid(pa), i);
-+    }
-+
-+    j = cpumask_first(&cpu_online_map);
-+    n = 0;
-+    for_each_online_cpu ( i )
-+    {
-+        if ( i != j + n || cpu_to_node[j] != cpu_to_node[i] )
-+        {
-+            if ( n > 1 )
-+                printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
-+            else
-+                printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
-+            j = i;
-+            n = 1;
-+        }
-+        else
-+            ++n;
-+    }
-+    if ( n > 1 )
-+        printk("CPU%u...%u -> NODE%d\n", j, j + n - 1, cpu_to_node[j]);
-+    else
-+        printk("CPU%u -> NODE%d\n", j, cpu_to_node[j]);
-+
-+    rcu_read_lock(&domlist_read_lock);
-+
-+    printk("Memory location of each domain:\n");
-+    for_each_domain ( d )
-+    {
-+        const struct page_info *page;
-+        unsigned int page_num_node[MAX_NUMNODES];
-+        const struct vnuma_info *vnuma;
-+
-+        process_pending_softirqs();
-+
-+        printk("%pd (total: %u):\n", d, domain_tot_pages(d));
-+
-+        memset(page_num_node, 0, sizeof(page_num_node));
-+
-+        spin_lock(&d->page_alloc_lock);
-+        page_list_for_each ( page, &d->page_list )
-+        {
-+            i = phys_to_nid(page_to_maddr(page));
-+            page_num_node[i]++;
-+        }
-+        spin_unlock(&d->page_alloc_lock);
-+
-+        for_each_online_node ( i )
-+            printk("    Node %u: %u\n", i, page_num_node[i]);
-+
-+        if ( !read_trylock(&d->vnuma_rwlock) )
-+            continue;
-+
-+        if ( !d->vnuma )
-+        {
-+            read_unlock(&d->vnuma_rwlock);
-+            continue;
-+        }
-+
-+        vnuma = d->vnuma;
-+        printk("     %u vnodes, %u vcpus, guest physical layout:\n",
-+               vnuma->nr_vnodes, d->max_vcpus);
-+        for ( i = 0; i < vnuma->nr_vnodes; i++ )
-+        {
-+            unsigned int start_cpu = ~0U;
-+
-+            if ( vnuma->vnode_to_pnode[i] == NUMA_NO_NODE )
-+                printk("       %3u: pnode ???,", i);
-+            else
-+                printk("       %3u: pnode %3u,", i, vnuma->vnode_to_pnode[i]);
-+
-+            printk(" vcpus ");
-+
-+            for ( j = 0; j < d->max_vcpus; j++ )
-+            {
-+                if ( !(j & 0x3f) )
-+                    process_pending_softirqs();
-+
-+                if ( vnuma->vcpu_to_vnode[j] == i )
-+                {
-+                    if ( start_cpu == ~0U )
-+                    {
-+                        printk("%u", j);
-+                        start_cpu = j;
-+                    }
-+                }
-+                else if ( start_cpu != ~0U )
-+                {
-+                    if ( j - 1 != start_cpu )
-+                        printk("-%u ", j - 1);
-+                    else
-+                        printk(" ");
-+                    start_cpu = ~0U;
-+                }
-+            }
-+
-+            if ( start_cpu != ~0U  && start_cpu != j - 1 )
-+                printk("-%u", j - 1);
-+
-+            printk("\n");
-+
-+            for ( j = 0; j < vnuma->nr_vmemranges; j++ )
-+            {
-+                if ( vnuma->vmemrange[j].nid == i )
-+                    printk("           %016"PRIx64" - %016"PRIx64"\n",
-+                           vnuma->vmemrange[j].start,
-+                           vnuma->vmemrange[j].end);
-+            }
-+        }
-+
-+        read_unlock(&d->vnuma_rwlock);
-+    }
-+
-+    rcu_read_unlock(&domlist_read_lock);
-+}
-+
-+static int __init cf_check register_numa_trigger(void)
-+{
-+    register_keyhandler('u', dump_numa, "dump NUMA info", 1);
-+    return 0;
-+}
-+__initcall(register_numa_trigger);
-diff --git a/xen/include/xen/numa.h b/xen/include/xen/numa.h
-index 7aef1a88dc..5b3877344b 100644
---- a/xen/include/xen/numa.h
-+++ b/xen/include/xen/numa.h
-@@ -18,4 +18,70 @@
-   (((d)->vcpu != NULL && (d)->vcpu[0] != NULL) \
-    ? vcpu_to_node((d)->vcpu[0]) : NUMA_NO_NODE)
- 
-+/* The following content can be used when NUMA feature is enabled */
-+#ifdef CONFIG_NUMA
-+
-+extern nodeid_t      cpu_to_node[NR_CPUS];
-+extern cpumask_t     node_to_cpumask[];
-+
-+#define cpu_to_node(cpu)        cpu_to_node[cpu]
-+#define parent_node(node)       (node)
-+#define node_to_cpumask(node)   node_to_cpumask[node]
-+
-+struct node {
-+    paddr_t start, end;
-+};
-+
-+extern int compute_hash_shift(const struct node *nodes,
-+                              unsigned int numnodes, const nodeid_t *nodeids);
-+
-+#define VIRTUAL_BUG_ON(x)
-+
-+extern bool numa_off;
-+
-+extern void numa_add_cpu(unsigned int cpu);
-+extern void numa_init_array(void);
-+extern void numa_set_node(unsigned int cpu, nodeid_t node);
-+extern void numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn);
-+extern int numa_process_nodes(paddr_t start, paddr_t end);
-+
-+extern int arch_numa_setup(const char *opt);
-+extern bool arch_numa_disabled(void);
-+extern void setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end);
-+
-+static inline void clear_node_cpumask(unsigned int cpu)
-+{
-+    cpumask_clear_cpu(cpu, &node_to_cpumask[cpu_to_node(cpu)]);
-+}
-+
-+/* Simple perfect hash to map pdx to node numbers */
-+extern unsigned int memnode_shift;
-+extern unsigned long memnodemapsize;
-+extern uint8_t *memnodemap;
-+
-+struct node_data {
-+    unsigned long node_start_pfn;
-+    unsigned long node_spanned_pages;
-+};
-+
-+extern struct node_data node_data[];
-+
-+static inline nodeid_t __attribute_pure__ phys_to_nid(paddr_t addr)
-+{
-+    nodeid_t nid;
-+    VIRTUAL_BUG_ON((paddr_to_pdx(addr) >> memnode_shift) >= memnodemapsize);
-+    nid = memnodemap[paddr_to_pdx(addr) >> memnode_shift];
-+    VIRTUAL_BUG_ON(nid >= MAX_NUMNODES || !node_data[nid]);
-+    return nid;
-+}
-+
-+#define NODE_DATA(nid)          (&node_data[nid])
-+
-+#define node_start_pfn(nid)     (NODE_DATA(nid)->node_start_pfn)
-+#define node_spanned_pages(nid) (NODE_DATA(nid)->node_spanned_pages)
-+#define node_end_pfn(nid)       (NODE_DATA(nid)->node_start_pfn + \
-+                                 NODE_DATA(nid)->node_spanned_pages)
-+
-+#endif
-+
- #endif /* _XEN_NUMA_H */
--- 
-2.25.1
-
+SGkgTWljaGFsLA0KDQo+IE9uIDE4IE5vdiAyMDIyLCBhdCAwODo1MywgTWljaGFsIE9yemVsIDxt
+aWNoYWwub3J6ZWxAYW1kLmNvbT4gd3JvdGU6DQo+IA0KPiBIaSBCZXJ0cmFuZCwNCj4gDQo+IEp1
+c3QsIHNvbWUgbWlub3IgY29tbWVudHMuDQo+IA0KPiBPbiAxNy8xMS8yMDIyIDEwOjM5LCBCZXJ0
+cmFuZCBNYXJxdWlzIHdyb3RlOg0KPj4gDQo+PiANCj4+IEFkZCBjb250YWluZXJzIHN1aXRhYmxl
+IHRvIHJ1biB5b2N0byBraXJrc3RvbmUgYnVpbGQgYmFzZWQgb24gdWJ1bnR1DQo+PiAyMi4wNC4g
+SXQgY29udGFpbnMgYWxsIHBhY2thZ2VzIHJlcXVpcmVkIGJ5IFlvY3RvIGFuZCBhIGNoZWNrb3V0
+IG9mIHRoZQ0KPj4gbGF5ZXJzIHJlcXVpcmVkIHRvIGJ1aWxkIFhlbiB3aXRoIFlvY3RvLg0KPj4g
+DQo+PiBBZGQgYSBnZW5lcmljIGRvY2tlciBpbWFnZSB0ZW1wbGF0ZSB0byBiZSB1c2VkIHRvIGF1
+dG9tYXRpY2FsbHkgZ2VuZXJhdGUNCj4+IGRvY2tlciBmaWxlcyBmb3IgZGlmZmVyZW50IGNvbmZp
+Z3VyYXRpb25zOg0KPj4gLSBzcGVjaWZpYyB5b2N0byB2ZXJzaW9uDQo+PiAtIGRpZmZlcmVudCB0
+YXJnZXRzIChxZW11IGFybSwgYXJtNjQgYW5kIHg4NikNCj4+IC0gZGlmZmVyZW50IGhvc3QgcGxh
+dGZvcm1zICh4ODYgb3IgYXJtNjQpDQo+PiANCj4+IER1cmluZyBhIGNhbGwgdG8gJ21ha2UgYWxs
+Jywgb25seSB0aGUgaW1hZ2VzIGZvciB0aGUgY3VycmVudCBob3N0DQo+PiBwbGF0Zm9ybSB3aWxs
+IGJlIGdlbmVyYXRlZC4NCj4gVGhpcyBsb29rcyBsaWtlIGEgc3RhbGUgY29tbWVudC4gVGhlIHJl
+YXNvbiBiZWluZywgaW4gdGhlIG5ldyB2ZXJzaW9uLCBieSBkZWZhdWx0DQo+IHdlIGJ1aWxkIHRo
+ZSBpbWFnZXMgZm9yIHRoZSBhcmNoaXRlY3R1cmVzIGV4cGVjdGVkIGJ5IHRoZSBDSSBhbmQgaXRz
+IHJ1bm5lcnMNCj4gdG8gbWF0Y2ggdGhlIGN1cnJlbnQgd29ya2Zsb3cuDQoNClJpZ2h0IEkgd2ls
+bCBmaXggdGhlIGNvbW1pdCBtZXNzYWdlLg0KDQo+IA0KPj4gSWYgbmVlZGVkLCBpbWFnZXMgZm9y
+IGFuIG90aGVyIGhvc3QgcGxhdGZvcm0gY2FuIGJlIGdlbmVyYXRlZCBtYW51YWxseQ0KPj4gYnkg
+Y2FsbGluZyB0aGUgcmlnaHQgbWFrZSB0YXJnZXQgKHNlZSBtYWtlIGhlbHApLg0KPj4gDQo+PiBB
+ZGQgYSBidWlsZCBzY3JpcHQgdG8gYnVpbGQgYW5kIHJ1biB4ZW4gb24gcWVtdSB1c2luZyBZb2N0
+by4NCj4+IFRoZSBzY3JpcHQgc3VwcG9ydHMgYXJtMzIsIGFybTY0IGFuZCB4ODZfNjQgYW5kIGNo
+ZWNrcyB0aGF0IGRvbTAgaXMNCj4+IHByb3Blcmx5IGJvb3RpbmcuIEF0IHRoaXMgc3RhZ2UgdGhp
+cyBkb2VzIG5vdCBydW4gYW55IGd1ZXN0IG9uIHRvcCBvZg0KPj4gZG9tMC4gVGhlIHNjcmlwdCBp
+cyB0byBiZSBleGVjdXRlZCBpbiBvbmUgb2YgdGhlIGRvY2tlciBpbWFnZXMgdG8gYnVpbGQNCj4+
+IGFuZCBydW4gYSBzeXN0ZW0gdXNpbmcgYSBYZW4gc291cmNlIHRyZWUuDQo+PiANCj4+IFNpZ25l
+ZC1vZmYtYnk6IEJlcnRyYW5kIE1hcnF1aXMgPGJlcnRyYW5kLm1hcnF1aXNAYXJtLmNvbT4NCj4+
+IC0tLQ0KPj4gQ2hhbmdlcyBpbiB2NDoNCj4+IC0gUmV3b3JrIHRoZSBzeXN0ZW0gdG8gaGF2ZSBv
+bmUgZG9ja2VyZmlsZSB0ZW1wbGF0ZSBmcm9tIHdoaWNoIG1ha2Ugd2lsbA0KPj4gZ2VuZXJhdGUg
+dGhlIHJlcXVpcmVkIGRvY2tlcmZpbGVzIGZvciB0aGUgd2FudGVkIGNvbmZpZ3VyYXRpb24NCj4g
+VGhhdCBpcyBncmVhdC4NCg0KVGhhbmtzIDotKQ0KPiANCj4+IC0gYWRkIHN1cHBvcnQgZm9yIGRp
+ZmZlcmVudCBob3N0IGFyY2hpdGVjdHVyZXMNCj4+IC0gTWVyZ2UgdGhlIGdlbmVyYXRpb24gc3lz
+dGVtIGludG8gb25lIHNpbmdsZSBkb2NrZXJmaWxlDQo+PiAtIE1lcmdlIHBhdGNoZXMgMSBhbmQg
+MiBpbiBhIHNpbmdsZSBwYXRjaA0KPj4gLSBJbnRyb2R1Y2UgQ09OVEFJTkVSU19FWFRSQSB0byBo
+YXZlIGV4dHJhIGNvbnRhaW5lcnMgbm90IGJ1aWx0IGJ5DQo+PiBkZWZhdWx0IChmb3IgdGhvc2Ug
+bm90IHVzZWQgYnkgQ0kgYnV0IHVzZWZ1bCB0byB1c2VycykNCj4+IENoYW5nZXMgaW4gdjM6DQo+
+PiAtIGxpbWl0IG51bWJlciBvZiBqb2JzIGluIHlvY3RvIGJ5IGRlZmF1bHQgdG8gOCBhbmQgYWRk
+IC0tbnVtLWpvYnMNCj4+IG9wdGlvbiB0byB0aGUgc2NyaXB0IHRvIHNldCBhIGN1c3RvbSBudW1i
+ZXIgb2Ygam9icw0KPj4gLSBkbyBub3QgY29weSBhbnltb3JlIHRoZSBidWlsZC15b2N0by5zaCBz
+Y3JpcHQgaW5zaWRlIHRoZSBtYWluIGltYWdlIHNvDQo+PiB0aGF0IHRoZSBjdXJyZW50IG9uZSBp
+biB0aGUgcmVwb3NpdG9yeSBpcyB1c2VkIHdoZW4gcnVubmluZw0KPj4gQ2hhbmdlcyBpbiB2MjoN
+Cj4+IC0gYWRkIGEgLS1kdW1wLWxvZyBjb21tYW5kIGxpbmUgb3B0aW9uIHRvIGJ1aWxkLXlvY3Rv
+LnNoIHNjcmlwdCB0byBkdW1wDQo+PiB0aGUgbG9ncyBpZiBhbiBlcnJvciBvY2N1cnMuDQo+PiBD
+aGFuZ2VzIGluIHYxOg0KPj4gLSBhZGQgLS1pbWFnZSBjb21tYW5kIGxpbmUgYXJndW1lbnQgdG8g
+YnVpbGQteW9jdG8uc2ggdG8gYWxsb3cgYnVpbGRpbmcNCj4+IHNvbWV0aGluZyBkaWZmZXJlbnQg
+dGhhbiB4ZW4taW1hZ2UtbWluaW1hbC4NCj4+IC0gbW9kaWZ5IGRvY2tlcmZpbGUgdG8gaGF2ZSBv
+bmUgbGF5ZXIgcGVyIGxpbmUgYW5kIG1ha2UgaXQgZWFzaWVyIHRvIGFkZA0KPj4gb3RoZXIuIEkg
+a2VwdCB0aGUgZm9yIGxvb3AgdG8ga2VlcCB0aGUgbnVtYmVyIG9mIGRvY2tlciBzdGVwcyBsb3dl
+cg0KPj4gLSB1cGRhdGUgY29tbWl0IG1lc3NhZ2UgdG8gd2FybiB0aGF0IG5vIGd1ZXN0IGFyZSB0
+ZXN0ZWQuDQo+PiAtIGZpeCBidWlsZC15b2N0byBzY3JpcHQgdG8gcHJvcGVybHkgcmV0dXJuIHdp
+dGggYW4gZXJyb3IgaWYgZXhwZWN0DQo+PiBzY3JpcHQgZW5kcyB1cCBpbiB0aW1lb3V0IG9yIEVP
+Ri4NCj4+IC0tLQ0KPj4gYXV0b21hdGlvbi9idWlsZC9NYWtlZmlsZSAgICAgICAgICAgICAgICAg
+IHwgIDE0ICstDQo+PiBhdXRvbWF0aW9uL2J1aWxkL3lvY3RvL2J1aWxkLXlvY3RvLnNoICAgICAg
+fCAzNDkgKysrKysrKysrKysrKysrKysrKysrDQo+PiBhdXRvbWF0aW9uL2J1aWxkL3lvY3RvL3lv
+Y3RvLmRvY2tlcmZpbGUuaW4gfCAxMTQgKysrKysrKw0KPj4gYXV0b21hdGlvbi9idWlsZC95b2N0
+by95b2N0by5pbmMgICAgICAgICAgIHwgIDQxICsrKw0KPj4gNCBmaWxlcyBjaGFuZ2VkLCA1MTYg
+aW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4+IGNyZWF0ZSBtb2RlIDEwMDc1NSBhdXRv
+bWF0aW9uL2J1aWxkL3lvY3RvL2J1aWxkLXlvY3RvLnNoDQo+PiBjcmVhdGUgbW9kZSAxMDA2NDQg
+YXV0b21hdGlvbi9idWlsZC95b2N0by95b2N0by5kb2NrZXJmaWxlLmluDQo+PiBjcmVhdGUgbW9k
+ZSAxMDA2NDQgYXV0b21hdGlvbi9idWlsZC95b2N0by95b2N0by5pbmMNCj4+IA0KPj4gZGlmZiAt
+LWdpdCBhL2F1dG9tYXRpb24vYnVpbGQvTWFrZWZpbGUgYi9hdXRvbWF0aW9uL2J1aWxkL01ha2Vm
+aWxlDQo+PiBpbmRleCBhNGIyYjg1MTc4Y2YuLjcyYTUzMzViYWVjMSAxMDA2NDQNCj4+IC0tLSBh
+L2F1dG9tYXRpb24vYnVpbGQvTWFrZWZpbGUNCj4+ICsrKyBiL2F1dG9tYXRpb24vYnVpbGQvTWFr
+ZWZpbGUNCj4+IEBAIC0xLDEzICsxLDE4IEBADQo+PiANCj4+ICMgdGhlIGJhc2Ugb2Ygd2hlcmUg
+dGhlc2UgY29udGFpbmVycyB3aWxsIGFwcGVhcg0KPj4gUkVHSVNUUlkgOj0gcmVnaXN0cnkuZ2l0
+bGFiLmNvbS94ZW4tcHJvamVjdC94ZW4NCj4+IC1DT05UQUlORVJTID0gJChzdWJzdCAuZG9ja2Vy
+ZmlsZSwsJCh3aWxkY2FyZCAqLyouZG9ja2VyZmlsZSkpDQo+PiArQ09OVEFJTkVSUyA9ICQoZmls
+dGVyLW91dCB5b2N0by8lLCQoc3Vic3QgLmRvY2tlcmZpbGUsLCQod2lsZGNhcmQgKi8qLmRvY2tl
+cmZpbGUpKSkNCj4+ICtDT05UQUlORVJTX0VYVFJBID0NCj4+IERPQ0tFUl9DTUQgPz0gZG9ja2Vy
+DQo+PiANCj4+ICtpbmNsdWRlIHlvY3RvL3lvY3RvLmluYw0KPj4gKw0KPj4gaGVscDoNCj4+ICAg
+ICAgICBAZWNobyAiQnVpbGRzIGNvbnRhaW5lcnMgZm9yIGJ1aWxkaW5nIFhlbiBiYXNlZCBvbiBk
+aWZmZXJlbnQgZGlzdHJvcyINCj4+ICAgICAgICBAZWNobyAiVG8gYnVpbGQgb25lIHJ1biAnbWFr
+ZSBESVNUUk8vVkVSU0lPTicuIEF2YWlsYWJsZSBjb250YWluZXJzOiINCj4+ICAgICAgICBAJChm
+b3JlYWNoIGZpbGUsJChzb3J0ICQoQ09OVEFJTkVSUykpLGVjaG8gJHtmaWxlfTspDQo+PiArICAg
+ICAgIEBlY2hvICJFeHRyYSBjb250YWluZXJzIChub3QgYnVpbHQgdXNpbmcgbWFrZSBhbGwpOiIN
+Cj4+ICsgICAgICAgQCQoZm9yZWFjaCBmaWxlLCQoc29ydCAkKENPTlRBSU5FUlNfRVhUUkEpKSxl
+Y2hvICR7ZmlsZX07KQ0KPj4gICAgICAgIEBlY2hvICJUbyBwdXNoIGNvbnRhaW5lciBidWlsZHMs
+IHNldCB0aGUgZW52IHZhciBQVVNIIg0KPj4gDQo+PiAlOiAlLmRvY2tlcmZpbGUgIyMgQnVpbGRz
+IGNvbnRhaW5lcnMNCj4+IEBAIC0xNiw1ICsyMSwxMCBAQCBoZWxwOg0KPj4gICAgICAgICAgICAg
+ICAgJChET0NLRVJfQ01EKSBwdXNoICQoUkVHSVNUUlkpLyQoQEQpOiQoQEYpOyBcDQo+PiAgICAg
+ICAgZmkNCj4+IA0KPj4gLS5QSE9OWTogYWxsDQo+PiArLlBIT05ZOiBhbGwgY2xlYW4NCj4+IGFs
+bDogJChDT05UQUlORVJTKQ0KPj4gKw0KPj4gKyMgUmVtb3ZlIGdlbmVyYXRlZCBkb2NrZXJmaWxl
+cyBmb3IgeW9jdG8NCj4+ICtjbGVhbjoNCj4+ICsgICAgICAgcm0gLWYgeW9jdG8vKi5kb2NrZXJm
+aWxlcw0KPiBBcmUgdGhlc2UgZmlsZXMgbmVlZGVkIGFmdGVyIG1ha2UgaXMgY29tcGxldGVkPw0K
+PiBJZiBub3QsIG1heWJlIHRvIGF2b2lkIGhhdmluZyBzb21lIHVudHJhY2tlZCBmaWxlcyBpbiB0
+aGUgdHJlZSwgdGhleSBjb3VsZCBiZSByZW1vdmVkIGFmdGVyIG1ha2UgaXMgZG9uZT8NCg0KSSBk
+byBub3QgYWdyZWUgaGVyZSwgb24gbWlnaHQgd2FudCB0byBpbnNwZWN0IHRob3NlIGZpbGVzIHRv
+IGNoZWNrLg0KQ2xlYW5pbmcgZHVyaW5nIG1ha2UgY2xlYW4gaXMgbW9yZSBzdGFuZGFyZC4NCg0K
+QWxzbyB0aG9zZSBhcmUgaW50ZXJtZWRpYXRlIGZpbGVzIHNvIG1ha2Ugc2hvdWxkL2NvdWxkIGNs
+ZWFuIHRoZW0gYXV0b21hdGljYWxseS4NCkkgd2lsbCBtYWtlIGEgdHJ5IHRvIGZsYWcgdGhlbSBp
+bnRlcm1lZGlhdGUgaWYgbm90IGhhbmRsZWQgYXV0b21hdGljYWxseSBhbHJlYWR5IGJ1dCBJIHdp
+bGwgc3RpbGwga2VlcCB0aGlzIGhlcmUuDQoNCj4gDQo+PiArDQo+PiBkaWZmIC0tZ2l0IGEvYXV0
+b21hdGlvbi9idWlsZC95b2N0by9idWlsZC15b2N0by5zaCBiL2F1dG9tYXRpb24vYnVpbGQveW9j
+dG8vYnVpbGQteW9jdG8uc2gNCj4+IG5ldyBmaWxlIG1vZGUgMTAwNzU1DQo+PiBpbmRleCAwMDAw
+MDAwMDAwMDAuLmQwYzkzZGZhZmZlMA0KPj4gLS0tIC9kZXYvbnVsbA0KPj4gKysrIGIvYXV0b21h
+dGlvbi9idWlsZC95b2N0by9idWlsZC15b2N0by5zaA0KPj4gQEAgLTAsMCArMSwzNDkgQEANCj4+
+ICsjIS9iaW4vYmFzaA0KPj4gKyMNCj4+ICsjIFlvY3RvIG1ldGEgdmlydHVhbGl6YXRpb24gYnVp
+bGQgYW5kIHJ1biBzY3JpcHQNCj4+ICsjDQo+PiArIyBUaGlzIHNjcmlwdCBpcyBidWlsZGluZyBZ
+b2N0byB4ZW4taW1hZ2UtbWluaW1hbCBmb3IgcWVtdSB0YXJnZXRzIGFuZCBydW4NCj4+ICsjIHRo
+ZW0gdXNpbmcgcnVucWVtdSBpbnNpZGUgeW9jdG8gdG8gY2hlY2sgdGhhdCBkb20wIGlzIGJvb3Rp
+bmcgcHJvcGVybHkNCj4gTWlzc2luZyBkb3QgYXQgdGhlIGVuZCBvZiBhIHNlbnRlbmNlLg0KDQpX
+aWxsIGZpeA0KDQo+IA0KPj4gKyMgVGhlIGJ1aWxkIGlzIHVzaW5nIGEgbG9jYWwgeGVuIHNvdXJj
+ZSB0cmVlIHNvIHRoYXQgc3BlY2lmaWMgcGF0Y2hlcyBjYW4gYmUNCj4+ICsjIHRlc3RlZC4NCj4+
+ICsjIEluIG9yZGVyIHRvIG9wdGltaXplIHRoZSBidWlsZCB0aW1lLCBhIGJ1aWxkIGNhY2hlIGlz
+IHVzZWQgc28gdGhhdCBvbmx5IHhlbg0KPj4gKyMgcGFja2FnZXMgYW5kIGl0cyBkZXBlbmRlbmNp
+ZXMgYXJlIHJlYnVpbHQgKHFlbXUgYW5kIGZpbmFsIGltYWdlIG1haW5seSkuDQo+PiArIw0KPj4g
+Kw0KPj4gKyMgRGlyZWN0b3JpZXMNCj4+ICtZT0NUT0RJUj0iJEhPTUUveW9jdG8tbGF5ZXJzIg0K
+Pj4gK0NBQ0hFRElSPSIkSE9NRS95b2N0by1jYWNoZSINCj4+ICtMT0dESVI9IiRIT01FL2xvZ3Mi
+DQo+PiArWEVORElSPSIkSE9NRS94ZW4iDQo+PiArQlVJTERESVI9IiRIT01FL2J1aWxkIg0KPj4g
+Kw0KPj4gKyMgd2hhdCB5b2N0byBic3Agd2Ugc3VwcG9ydA0KPj4gK1RBUkdFVF9TVVBQT1JURUQ9
+InFlbXVhcm0gcWVtdWFybTY0IHFlbXV4ODYtNjQiDQo+PiArVkVSQk9TRT0ibiINCj4+ICtUQVJH
+RVRMSVNUPSIiDQo+PiArQlVJTERKT0JTPSI4Ig0KPj4gKw0KPj4gKyMgYWN0aW9ucyB0byBkbw0K
+Pj4gK2RvX2NsZWFuPSJuIg0KPj4gK2RvX2J1aWxkPSJ5Ig0KPj4gK2RvX3J1bj0ieSINCj4+ICtk
+b19sb2NhbHNyYz0ibiINCj4+ICtkb19kdW1wPSJuIg0KPj4gK2J1aWxkX3Jlc3VsdD0wDQo+PiAr
+DQo+PiArIyBsYXllcnMgdG8gaW5jbHVkZSBpbiB0aGUgcHJvamVjdA0KPj4gK2J1aWxkX2xheWVy
+bGlzdD0icG9reS9tZXRhIHBva3kvbWV0YS1wb2t5IHBva3kvbWV0YS15b2N0by1ic3AgXA0KPj4g
+KyAgICAgICAgICAgICAgICAgbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZSBtZXRhLW9wZW5lbWJl
+ZGRlZC9tZXRhLXB5dGhvbiBcDQo+PiArICAgICAgICAgICAgICAgICBtZXRhLW9wZW5lbWJlZGRl
+ZC9tZXRhLWZpbGVzeXN0ZW1zIFwNCj4+ICsgICAgICAgICAgICAgICAgIG1ldGEtb3BlbmVtYmVk
+ZGVkL21ldGEtbmV0d29ya2luZyBtZXRhLXZpcnR1YWxpemF0aW9uIg0KPj4gKw0KPj4gKyMgeW9j
+dG8gaW1hZ2UgdG8gYnVpbGQNCj4+ICtidWlsZF9pbWFnZT0ieGVuLWltYWdlLW1pbmltYWwiDQo+
+PiArDQo+PiArZnVuY3Rpb24gcHJpbnRfcHJvZ3Jlc3MoKSB7DQo+PiArICAgIGVjaG8gLW4gIiQo
+ZGF0ZSArJVQpICQqIg0KPj4gK30NCj4+ICsNCj4+ICtmdW5jdGlvbiBydW5fdGFzaygpIHsNCj4+
+ICsgICAgbG9jYWwgdGFza19uYW1lPSIkMSINCj4+ICsgICAgbG9jYWwgdGFza190YXJnZXQ9IiQy
+Ig0KPj4gKw0KPj4gKyAgICB0YXNrX2xvZz0iJHt0YXNrX25hbWUvL3Byb2plY3RffS0ke3Rhc2tf
+dGFyZ2V0fSINCj4+ICsNCj4+ICsgICAgbWtkaXIgLXAgIiR7TE9HRElSfSINCj4+ICsgICAgcHJp
+bnRfcHJvZ3Jlc3MNCj4+ICsgICAgZWNobyAtbiAiJHt0YXNrX25hbWUvL3Byb2plY3RffSAke3Rh
+c2tfdGFyZ2V0fTogIg0KPj4gKyAgICBpZiBbICIke1ZFUkJPU0V9IiA9ICJuIiBdOyB0aGVuDQo+
+PiArICAgICAgICAkQCA+ICIke0xPR0RJUn0vJHt0YXNrX2xvZ30ubG9nIiAyPiYxDQo+PiArICAg
+IGVsc2UNCj4+ICsgICAgICAgICRAIDI+JjEgfCB0ZWUgIiR7TE9HRElSfS8ke3Rhc2tfbG9nfS5s
+b2ciDQo+PiArICAgIGZpDQo+PiArDQo+PiArICAgIGlmIFsgJHs/fSAtbmUgMCBdOyB0aGVuDQo+
+PiArICAgICAgICBlY2hvICJFcnJvciINCj4+ICsgICAgICAgIGJ1aWxkX3Jlc3VsdD0kKChidWls
+ZF9yZXN1bHQrMSkpDQo+PiArICAgICAgICBpZiBbICIke2RvX2R1bXB9IiA9ICJ5IiBdOyB0aGVu
+DQo+PiArICAgICAgICAgICAgZWNobw0KPj4gKyAgICAgICAgICAgIGVjaG8gIiMjIyMjIyMjIyMj
+IyBMT0dTLVNUQVJUICMjIyMjIyMjIyMjIyINCj4+ICsgICAgICAgICAgICBjYXQgIiR7TE9HRElS
+fS8ke3Rhc2tfbG9nfS5sb2ciDQo+PiArICAgICAgICAgICAgZWNobyAiIyMjIyMjIyMjIyMjICBM
+T0dTLUVORCAgIyMjIyMjIyMjIyMjIg0KPj4gKyAgICAgICAgICAgIGVjaG8NCj4+ICsgICAgICAg
+IGZpDQo+PiArICAgICAgICByZXR1cm4gMQ0KPj4gKyAgICBlbHNlDQo+PiArICAgICAgICBlY2hv
+ICJPSyINCj4+ICsgICAgICAgIHJldHVybiAwDQo+PiArICAgIGZpDQo+PiArfQ0KPj4gKw0KPj4g
+K2Z1bmN0aW9uIHByb2plY3RfY3JlYXRlKCkgew0KPj4gKyAgICB0YXJnZXQ9IiR7MTo/fSINCj4+
+ICsgICAgZGVzdGRpcj0iJHtCVUlMRERJUn0vJHt0YXJnZXR9Ig0KPj4gKw0KPj4gKyAgICAoDQo+
+PiArICAgICAgICAjIGluaXQgeW9jdG8gcHJvamVjdA0KPj4gKyAgICAgICAgc291cmNlICR7WU9D
+VE9ESVJ9L3Bva3kvb2UtaW5pdC1idWlsZC1lbnYgIiR7ZGVzdGRpcn0iDQo+PiArDQo+PiArICAg
+ICAgICAjIGFkZCBuZWVkZWQgbGF5ZXJzDQo+PiArICAgICAgICBmb3IgbGF5ZXIgaW4gJHtidWls
+ZF9sYXllcmxpc3R9OyBkbw0KPj4gKyAgICAgICAgICAgIGJpdGJha2UtbGF5ZXJzIGFkZC1sYXll
+ciAke1lPQ1RPRElSfS8ke2xheWVyfSB8fCBleGl0IDENCj4+ICsgICAgICAgIGRvbmUNCj4+ICsg
+ICAgKSB8fCByZXR1cm4gMQ0KPj4gKw0KPj4gKyAgICAjIGN1c3RvbWl6ZSBwcm9qZWN0IGNvbmZp
+Z3VyYXRpb24NCj4+ICsgICAgY2F0IDw8RU9GID4+ICIke2Rlc3RkaXJ9L2NvbmYvbG9jYWwuY29u
+ZiINCj4+ICsjIFlvY3RvIEJTUA0KPj4gK01BQ0hJTkUgPSAiJHt0YXJnZXR9Ig0KPj4gKw0KPj4g
+KyMgVXNlIGxvY2FsIGNhY2hlIHRvIHJldXNlIHByZXZpb3VzIGJ1aWxkcyByZXN1bHRzDQo+PiAr
+U1NUQVRFX0RJUiA9ICIke0NBQ0hFRElSfS9zc3RhdGUtY2FjaGUiDQo+PiArRExfRElSID0gIiR7
+Q0FDSEVESVJ9L2Rvd25sb2FkcyINCj4+ICsNCj4+ICsjIEVuYWJsZSB4ZW4gYW5kIHZpcnR1YWxp
+emF0aW9uDQo+PiArRElTVFJPX0ZFQVRVUkVTID0gIiB2aXJ0dWFsaXphdGlvbiB4ZW4gaXB2NCIN
+Cj4+ICsNCj4+ICsjIFNwZWVkIHVwIHJ1biBieSBub3QgZ2VuZXJhdGluZyBzc2ggaG9zdCBrZXlz
+DQo+PiArSU1BR0VfSU5TVEFMTDphcHBlbmQ6cG4teGVuLWltYWdlLW1pbmltYWwgPSAiIHNzaC1w
+cmVnZW4taG9zdGtleXMiDQo+PiArDQo+PiArIyBTYXZlIHNvbWUgZGlzayBzcGFjZQ0KPj4gK0lO
+SEVSSVQgKz0gInJtX3dvcmsiDQo+PiArDQo+PiArIyBSZWR1Y2UgbnVtYmVyIG9mIGpvYnMNCj4+
+ICtCQl9OVU1CRVJfVEhSRUFEUz0iJHtCVUlMREpPQlN9Ig0KPj4gKw0KPj4gK0VPRg0KPj4gKw0K
+Pj4gKyAgICBpZiBbICIke2RvX2xvY2Fsc3JjfSIgPSAieSIgXTsgdGhlbg0KPj4gKyAgICAgICAg
+WEVOVkVSUz0kKGdyZXAgLWUgIl5YRU5fUkVMIiBcDQo+PiArICAgICAgICAgICAgIiR7WU9DVE9E
+SVJ9Ii9tZXRhLXZpcnR1YWxpemF0aW9uL3JlY2lwZXMtZXh0ZW5kZWQveGVuL3hlbl8qLmJiIFwN
+Cj4+ICsgICAgICAgICAgICAyPiAvZGV2L251bGwgfCB0ciAtZCAnICcgfCB0ciAtZCAnPycgfCB0
+ciAtZCAnIicgXA0KPj4gKyAgICAgICAgICAgIHwgc2VkIC1lICJzLy4qPS8vIiB8IHNvcnQgLVYg
+fCB0YWlsIC1uIDEpDQo+PiArDQo+PiArICAgICAgICBYRU5CQVNFPSQoZGlybmFtZSAiJChyZWFs
+cGF0aCAtbSAiJHtYRU5ESVJ9IikiKQ0KPj4gKyAgICAgICAgWEVOU1VCPSQoYmFzZW5hbWUgIiQo
+cmVhbHBhdGggLW0gIiR7WEVORElSfSIpIikNCj4+ICsNCj4+ICsgICAgICAgIGNhdCA8PEVPRiA+
+PiAiJHtkZXN0ZGlyfS9jb25mL2xvY2FsLmNvbmYiDQo+PiArIyBVc2UgbG9jYWwgc291cmNlcyBm
+b3IgeGVuIGFuZCB4ZW4tdG9vbHMNCj4+ICtGSUxFU0VYVFJBUEFUSFM6cHJlcGVuZDpwbi14ZW4g
+Oj0gIiR7WEVOQkFTRX06Ig0KPj4gK0ZJTEVTRVhUUkFQQVRIUzpwcmVwZW5kOnBuLXhlbi10b29s
+cyA6PSAiJHtYRU5CQVNFfToiDQo+PiArDQo+PiArU1JDX1VSSTpwbi14ZW4gPSAiZmlsZTovLyR7
+WEVOU1VCfS87c3ViZGlyPWxvY2FsLXhlbi8iDQo+PiArU1JDX1VSSTpwbi14ZW4tdG9vbHMgPSAi
+ZmlsZTovLyR7WEVOU1VCfS87c3ViZGlyPWxvY2FsLXhlbi8iDQo+PiArDQo+PiArUFJFRkVSUkVE
+X1ZFUlNJT046cG4teGVuID0gIiR7WEVOVkVSU30lIg0KPj4gK1BSRUZFUlJFRF9WRVJTSU9OOnBu
+LXhlbi10b29scyA9ICIke1hFTlZFUlN9JSINCj4+ICsNCj4+ICtTOnBuLXhlbiA9ICJcJHtXT1JL
+RElSfS9sb2NhbC14ZW4vJHtYRU5TVUJ9Ig0KPj4gK1M6cG4teGVuLXRvb2xzID0gIlwke1dPUktE
+SVJ9L2xvY2FsLXhlbi8ke1hFTlNVQn0iDQo+PiArDQo+PiArU1JDUkVWOnBuLXhlbiA9ICJcJHtB
+VVRPUkVWfSINCj4+ICtTUkNSRVY6cG4teGVuLXRvb2xzID0gIlwke0FVVE9SRVZ9Ig0KPj4gKw0K
+Pj4gK1NSQ1BWOnBuLXhlbiA9ICIxIg0KPj4gK1NSQ1BWOnBuLXhlbi10b29scyA9ICIxIg0KPj4g
+Kw0KPj4gKyMgRGlzYWJsZSBhbGwgUUEgZXJyb3JzIGFzIHRoZSByZWNpcGUgaXMgbm90IHVwIHRv
+IGRhdGUgd2l0aCBjaGFuZ2VzIGluIFhlbg0KPj4gKyMgd2hlbiB3ZSB1c2UgbG9jYWwgc291cmNl
+cw0KPj4gK0VSUk9SX1FBOnBuLXhlbiA9ICJhcmNoIg0KPj4gK0VSUk9SX1FBOnBuLXhlbi10b29s
+cyA9ICJhcmNoIg0KPj4gKw0KPj4gK0VPRg0KPj4gKyAgICBmaQ0KPj4gK30NCj4+ICsNCj4+ICtm
+dW5jdGlvbiBwcm9qZWN0X2J1aWxkKCkgew0KPj4gKyAgICB0YXJnZXQ9IiR7MTo/fSINCj4+ICsg
+ICAgZGVzdGRpcj0iJHtCVUlMRERJUn0vJHt0YXJnZXR9Ig0KPj4gKw0KPj4gKyAgICAoDQo+PiAr
+ICAgICAgICBzb3VyY2UgJHtZT0NUT0RJUn0vcG9reS9vZS1pbml0LWJ1aWxkLWVudiAiJHtkZXN0
+ZGlyfSINCj4+ICsNCj4+ICsgICAgICAgIGJpdGJha2UgIiR7YnVpbGRfaW1hZ2V9IiB8fCBleGl0
+IDENCj4+ICsgICAgKSB8fCByZXR1cm4gMQ0KPj4gK30NCj4+ICsNCj4+ICtmdW5jdGlvbiBwcm9q
+ZWN0X2NsZWFuKCkgew0KPj4gKyAgICB0YXJnZXQ9IiR7MTo/fSINCj4+ICsgICAgZGVzdGRpcj0i
+JHtCVUlMRERJUn0vJHt0YXJnZXR9Ig0KPj4gKw0KPj4gKyAgICBybSAtcmYgIiR7ZGVzdGRpcn0i
+DQo+PiArfQ0KPj4gKw0KPj4gK2Z1bmN0aW9uIHByb2plY3RfcnVuKCkgew0KPj4gKyAgICB0YXJn
+ZXQ9IiR7MTo/fSINCj4+ICsgICAgZGVzdGRpcj0iJHtCVUlMRERJUn0vJHt0YXJnZXR9Ig0KPj4g
+KyAgICAoDQo+PiArICAgICAgICBzb3VyY2UgJHtZT0NUT0RJUn0vcG9reS9vZS1pbml0LWJ1aWxk
+LWVudiAiJHtkZXN0ZGlyfSIgPiAvZGV2L251bGwgMj4mMQ0KPj4gKw0KPj4gKyAgICAgICAgL3Vz
+ci9iaW4vZXhwZWN0IDw8RU9GDQo+PiArc2V0IHRpbWVvdXQgMTAwDQo+PiArc3Bhd24gYmFzaCAt
+YyAicnVucWVtdSBzZXJpYWxzdGRpbyBub2dyYXBoaWMgc2xpcnAiDQo+PiArDQo+PiArZXhwZWN0
+X2FmdGVyIHsNCj4+ICsgICAgLXJlICIoLiopXHIiIHsNCj4+ICsgICAgICAgIGV4cF9jb250aW51
+ZQ0KPj4gKyAgICB9DQo+PiArICAgIHRpbWVvdXQge3NlbmRfdXNlciAiRVJST1ItVGltZW91dCFc
+biI7IGV4aXQgMX0NCj4+ICsgICAgZW9mIHtzZW5kX3VzZXIgIkVSUk9SLUVPRiFcbiI7IGV4aXQg
+MX0NCj4+ICt9DQo+PiArDQo+PiArIyB3YWl0IGluaXRpYWwgbG9naW4NCj4+ICtleHBlY3QgLXJl
+ICIuKiBsb2dpbjogIg0KPj4gK3NlbmQgInJvb3RcciINCj4+ICtleHBlY3QgLXJlICJyb290QC4q
+IyAiDQo+PiArDQo+PiArRU9GDQo+PiArICAgIGV4aXQgJD8NCj4+ICsgICAgKSB8fCByZXR1cm4g
+MQ0KPj4gK30NCj4+ICsNCj4+ICtmdW5jdGlvbiBoZWxwKCkgew0KPj4gKyAgICBjYXQgPDxFT0YN
+Cj4+ICtVc2FnZTogJHswfSBbVEFSR0VUMV0gW1RBUkdFVDJdDQo+PiArDQo+PiArVGhpcyBzY3Jp
+cHQgaXMgYnVpbGQgdGhlIHlvY3RvIHhlbi1pbWFnZS1taW5pbWFsIGZvciBkaWZmZXJlbnQgcWVt
+dSB0YXJnZXRzDQo+PiArYW5kIGlzIHJ1bm5pbmcgaXQgYWZ0ZXIuDQo+PiArV2l0aG91dCBhbnkg
+dGFyZ2V0IHNwZWNpZmllZCwgYWxsIHN1cHBvcnRlZCB0YXJnZXRzIGFyZSBkb25lLg0KPj4gKw0K
+Pj4gK09wdGlvbnM6DQo+PiArICAtaCwgLS1oZWxwICAgICAgIFByaW50IHRoaXMgaGVscA0KPj4g
+KyAgLXYsIC0tdmVyYm9zZSAgICBWZXJib3NlIGJ1aWxkDQo+PiArICAtLWxpc3QtdGFyZ2V0ICAg
+IExpc3Qgc3VwcG9ydGVkIHRhcmdldHMNCj4+ICsgIC0tY2xlYW4gICAgICAgICAgQ2xlYW4gZXhp
+c3RpbmcgcHJvamVjdCBiZWZvcmUgc3RhcnRpbmcNCj4+ICsgIC0tbm8tYnVpbGQgICAgICAgRG8g
+bm90IGJ1aWxkICh0byBydW4gYW4gYWxyZWFkeSBidWlsdCBwcm9qZWN0KQ0KPj4gKyAgLS1uby1y
+dW4gICAgICAgICBEbyBub3QgcnVuDQo+PiArICAtLW51bS1qb2JzPU5VTSAgIERlZmluZSB0aGUg
+bnVtYmVyIG9mIHBhcmFsbGVsIGpvYnMgaW4gWW9jdG8uDQo+PiArICAgICAgICAgICAgICAgICAg
+IERlZmF1bHQ6ICR7QlVJTERKT0JTfQ0KPj4gKyAgLS1kdW1wLWxvZyAgICAgICBPbiBlcnJvciwg
+ZHVtcCB0aGUgbG9ncyBvbiB0aGUgY29uc29sZQ0KPj4gKyAgLS1pbWFnZT1JTUcgICAgICBZb2N0
+byBpbWFnZSBvciBwYWNrYWdlIHRvIGJ1aWxkDQo+PiArICAgICAgICAgICAgICAgICAgIERlZmF1
+bHQ6IHhlbi1pbWFnZS1taW5pbWFsDQo+PiArICAtLXhlbi1kaXI9RElSICAgIHBhdGggdG8geGVu
+IGh5cGVydmlzb3Igc291cmNlIHRyZWUNCj4+ICsgICAgICAgICAgICAgICAgICAgaWYgbm90IHBy
+b3ZpZGUsIG5vcm1hbCB5b2N0byB2ZXJzaW9uIG9mIHhlbiBpcyBidWlsdA0KPj4gKyAgICAgICAg
+ICAgICAgICAgICBEZWZhdWx0OiAke1hFTkRJUn0NCj4+ICsgIC0tb3V0LWRpcj1ESVIgICAgZGly
+ZWN0b3J5IHdoZXJlIHRvIGNyZWF0ZSB0aGUgcHJvamVjdHNzDQo+PiArICAgICAgICAgICAgICAg
+ICAgIERlZmF1bHQ6ICR7QlVJTERESVJ9DQo+PiArICAtLWxvZy1kaXI9RElSICAgIGRpcmVjdG9y
+eSB0byBzdG9yZSBsb2dzDQo+PiArICAgICAgICAgICAgICAgICAgIERlZmF1bHQ6ICR7TE9HRElS
+fQ0KPj4gKyAgLS1jYWNoZS1kaXI9RElSICBkaXJlY3Rvcnkgd2hlcmUgdG8gdGFrZSBhbmQgc3Rv
+cmUgYnVpbGQgY2FjaGUNCj4+ICsgICAgICAgICAgICAgICAgICAgRGVmYXVsdDogJHtDQUNIRURJ
+Un0NCj4+ICsgIC0tbGF5ZXItZGlyPURJUiAgZGlyZWN0b3J5IGNvbnRhaW5pbmcgdGhlIGNoZWNr
+b3V0IG9mIHlvY3RvIGxheWVycw0KPj4gKyAgICAgICAgICAgICAgICAgICBEZWZhdWx0OiAke1lP
+Q1RPRElSfQ0KPj4gK0VPRg0KPj4gK30NCj4+ICsNCj4+ICtmb3IgT1BUSU9OIGluICIkQCINCj4+
+ICtkbw0KPj4gKyAgICBjYXNlICR7T1BUSU9OfSBpbg0KPj4gKyAgICAgICAgLWh8LS1oZWxwKQ0K
+Pj4gKyAgICAgICAgICAgIGhlbHANCj4+ICsgICAgICAgICAgICBleGl0IDANCj4+ICsgICAgICAg
+ICAgICA7Ow0KPj4gKyAgICAgICAgLXZ8LS12ZXJib3NlKQ0KPj4gKyAgICAgICAgICAgIFZFUkJP
+U0U9InkiDQo+PiArICAgICAgICAgICAgOzsNCj4+ICsgICAgICAgIC0tbGlzdC10YXJnZXRzKQ0K
+Pj4gKyAgICAgICAgICAgIGVjaG8gIiR7VEFSR0VUX1NVUFBPUlRFRH0iDQo+PiArICAgICAgICAg
+ICAgZXhpdCAwDQo+PiArICAgICAgICAgICAgOzsNCj4+ICsgICAgICAgIC0tY2xlYW4pDQo+PiAr
+ICAgICAgICAgICAgZG9fY2xlYW49InkiDQo+PiArICAgICAgICAgICAgOzsNCj4+ICsgICAgICAg
+IC0tbm8tYnVpbGQpDQo+PiArICAgICAgICAgICAgZG9fYnVpbGQ9Im4iDQo+PiArICAgICAgICAg
+ICAgOzsNCj4+ICsgICAgICAgIC0tbm8tcnVuKQ0KPj4gKyAgICAgICAgICAgIGRvX3J1bj0ibiIN
+Cj4+ICsgICAgICAgICAgICA7Ow0KPj4gKyAgICAgICAgLS1kdW1wLWxvZykNCj4+ICsgICAgICAg
+ICAgICBkb19kdW1wPSJ5Ig0KPj4gKyAgICAgICAgICAgIDs7DQo+PiArICAgICAgICAtLW51bS1q
+b2JzPSopDQo+PiArICAgICAgICAgICAgQlVJTERKT0JTPSIke09QVElPTiMqPX0iDQo+PiArICAg
+ICAgICAgICAgOzsNCj4+ICsgICAgICAgIC0taW1hZ2U9KikNCj4+ICsgICAgICAgICAgICBidWls
+ZF9pbWFnZT0iJHtPUFRJT04jKj19Ig0KPj4gKyAgICAgICAgICAgIDs7DQo+PiArICAgICAgICAt
+LXhlbi1kaXI9KikNCj4+ICsgICAgICAgICAgICBYRU5ESVI9IiR7T1BUSU9OIyo9fSINCj4+ICsg
+ICAgICAgICAgICBpZiBbICEgLWUgIiR7WEVORElSfS94ZW4vTWFrZWZpbGUiIF07IHRoZW4NCj4+
+ICsgICAgICAgICAgICAgICAgZWNobyAiTm8gWGVuIHNvdXJjZSB0cmVlIGluICR7WEVORElSfSIN
+Cj4+ICsgICAgICAgICAgICAgICAgZXhpdCAxDQo+PiArICAgICAgICAgICAgZmkNCj4+ICsgICAg
+ICAgICAgICBkb19sb2NhbHNyYz0ieSINCj4+ICsgICAgICAgICAgICA7Ow0KPj4gKyAgICAgICAg
+LS1vdXQtZGlyPSopDQo+PiArICAgICAgICAgICAgQlVJTERESVI9IiR7T1BUSU9OIyo9fSINCj4+
+ICsgICAgICAgICAgICA7Ow0KPj4gKyAgICAgICAgLS1sb2ctZGlyPSopDQo+PiArICAgICAgICAg
+ICAgTE9HRElSPSIke09QVElPTiMqPX0iDQo+PiArICAgICAgICAgICAgOzsNCj4+ICsgICAgICAg
+IC0tY2FjaGUtZGlyPSopDQo+PiArICAgICAgICAgICAgQ0FDSEVESVI9IiR7T1BUSU9OIyo9fSIN
+Cj4+ICsgICAgICAgICAgICA7Ow0KPj4gKyAgICAgICAgLS1sYXllci1kaXI9KikNCj4+ICsgICAg
+ICAgICAgICBZT0NUT0RJUj0iJHtPUFRJT04jKj19Ig0KPj4gKyAgICAgICAgICAgIDs7DQo+PiAr
+ICAgICAgICAtLSopDQo+PiArICAgICAgICAgICAgZWNobyAiSW52YWxpZCBvcHRpb24gJHtPUFRJ
+T059Ig0KPj4gKyAgICAgICAgICAgIGhlbHANCj4+ICsgICAgICAgICAgICBleGl0IDENCj4+ICsg
+ICAgICAgICAgICA7Ow0KPj4gKyAgICAgICAgKikNCj4+ICsgICAgICAgICAgICBpZiBlY2hvICIk
+e1RBUkdFVF9TVVBQT1JURUR9IiB8IGdyZXAgLXEgLXcgIiR7T1BUSU9OfSI7IHRoZW4NCj4+ICsg
+ICAgICAgICAgICAgICAgVEFSR0VUTElTVD0iJHtUQVJHRVRMSVNUfSAke09QVElPTn0iDQo+PiAr
+ICAgICAgICAgICAgZWxzZQ0KPj4gKyAgICAgICAgICAgICAgICBlY2hvICJVbnN1cHBvcnRlZCB0
+YXJnZXQgJHtPUFRJT059Ig0KPj4gKyAgICAgICAgICAgICAgICBleGl0IDENCj4+ICsgICAgICAg
+ICAgICBmaQ0KPj4gKyAgICAgICAgICAgIDs7DQo+PiArICAgIGVzYWMNCj4+ICtkb25lDQo+PiAr
+DQo+PiArIyBpZiBubyB0YXJnZXQgaXMgc3BlY2lmaWVkIGJ1aWxkIGFsbCB0YXJnZXRzDQo+PiAr
+aWYgWyAteiAiJHtUQVJHRVRMSVNUfSIgXTsgdGhlbg0KPj4gKyAgICBUQVJHRVRMSVNUPSIke1RB
+UkdFVF9TVVBQT1JURUR9Ig0KPj4gK2ZpDQo+PiArDQo+PiArbWtkaXIgLXAgIiR7Q0FDSEVESVJ9
+Ig0KPj4gK21rZGlyIC1wICIke0xPR0RJUn0iDQo+PiArbWtkaXIgLXAgIiR7QlVJTERESVJ9Ig0K
+Pj4gKw0KPj4gKyMgTWFrZSBzdXJlIHdlIGhhdmUgYW4gYWJzb2x1dGUgcGF0aA0KPj4gK1lPQ1RP
+RElSPSQocmVhbHBhdGggLW0gIiR7WU9DVE9ESVJ9IikNCj4+ICtDQUNIRURJUj0kKHJlYWxwYXRo
+IC1tICIke0NBQ0hFRElSfSIpDQo+PiArQlVJTERESVI9JChyZWFscGF0aCAtbSAiJHtCVUlMRERJ
+Un0iKQ0KPj4gK0xPR0RJUj0kKHJlYWxwYXRoIC1tICIke0xPR0RJUn0iKQ0KPj4gK2lmIFsgIiR7
+ZG9fbG9jYWxzcmN9IiA9ICJ5IiBdOyB0aGVuDQo+PiArICAgIFhFTkRJUj0kKHJlYWxwYXRoIC1t
+ICIke1hFTkRJUn0iKQ0KPj4gK2ZpDQo+PiArDQo+PiArIyBDaGVjayB0aGF0IHdlIGhhdmUgYWxs
+IHRoZSBsYXllcnMgd2UgbmVlZA0KPj4gK2ZvciBmIGluICR7YnVpbGRfbGF5ZXJsaXN0fTsgZG8N
+Cj4+ICsgICAgaWYgWyAhIC1mICIke1lPQ1RPRElSfS8ke2Z9L2NvbmYvbGF5ZXIuY29uZiIgXTsg
+dGhlbg0KPj4gKyAgICAgICAgZWNobyAiTGF5ZXIgJHtmfSBtaXNzaW5nIGluICR7WU9DVE9ESVJ9
+Ig0KPj4gKyAgICAgICAgZXhpdCAxDQo+PiArICAgIGZpDQo+PiArZG9uZQ0KPj4gKw0KPj4gK2Zv
+ciBmIGluICR7VEFSR0VUTElTVH07IGRvDQo+PiArICAgIGlmIFsgIiR7ZG9fY2xlYW59IiA9ICJ5
+IiBdOyB0aGVuDQo+PiArICAgICAgICBydW5fdGFzayBwcm9qZWN0X2NsZWFuICR7Zn0NCj4+ICsg
+ICAgZmkNCj4+ICsgICAgaWYgWyAhIC1mICR7QlVJTERESVJ9LyR7Zn0vY29uZi9sb2NhbC5jb25m
+IF07IHRoZW4NCj4+ICsgICAgICAgIHJ1bl90YXNrIHByb2plY3RfY3JlYXRlICR7Zn0NCj4+ICsg
+ICAgZmkNCj4+ICsgICAgaWYgWyAtZiAke0JVSUxERElSfS8ke2Z9L2NvbmYvbG9jYWwuY29uZiBd
+OyB0aGVuDQo+PiArICAgICAgICBpZiBbICIke2RvX2J1aWxkfSIgPSAieSIgXTsgdGhlbg0KPj4g
+KyAgICAgICAgICAgIHJ1bl90YXNrIHByb2plY3RfYnVpbGQgJHtmfQ0KPj4gKyAgICAgICAgZmkN
+Cj4+ICsgICAgICAgIGlmIFsgIiR7ZG9fcnVufSIgPSAieSIgXTsgdGhlbg0KPj4gKyAgICAgICAg
+ICAgIHJ1bl90YXNrIHByb2plY3RfcnVuICR7Zn0NCj4+ICsgICAgICAgIGZpDQo+PiArDQo+PiAr
+ICAgIGZpDQo+PiArZG9uZQ0KPj4gKw0KPj4gK3ByaW50X3Byb2dyZXNzICJCdWlsZCBDb21wbGV0
+ZSAoJHtidWlsZF9yZXN1bHR9IGVycm9ycykiDQo+PiArZWNobw0KPj4gK2V4aXQgJHtidWlsZF9y
+ZXN1bHR9DQo+PiArDQo+PiBkaWZmIC0tZ2l0IGEvYXV0b21hdGlvbi9idWlsZC95b2N0by95b2N0
+by5kb2NrZXJmaWxlLmluIGIvYXV0b21hdGlvbi9idWlsZC95b2N0by95b2N0by5kb2NrZXJmaWxl
+LmluDQo+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4gaW5kZXggMDAwMDAwMDAwMDAwLi41MzUw
+YmIyYjg3YjcNCj4+IC0tLSAvZGV2L251bGwNCj4+ICsrKyBiL2F1dG9tYXRpb24vYnVpbGQveW9j
+dG8veW9jdG8uZG9ja2VyZmlsZS5pbg0KPj4gQEAgLTAsMCArMSwxMTQgQEANCj4+ICsjIERvY2tl
+ciBmaWxlIHRvIGNyZWF0ZSBhbiBlbnZpcm9ubWVudCB0byBidWlsZCB5b2N0byB3aXRoIHZpcnR1
+YWxpemF0aW9uDQo+PiArIw0KPj4gKyMgQXJndW1lbnRzIHRoYXQgY2FuIGJlIHBhc3NlZCBkdXJp
+bmcgaW1hZ2UgY3JlYXRpb24gdXNpbmcgLS1idWlsZC1hcmc6DQo+PiArIyAiaG9zdF91aWQ9JChp
+ZCAtdSkiOiB0byB1c2UgY3VycmVudCB1c2VyIHVpZCBmb3IgYnVpbGQgdXNlciBpbiB0aGUgaW1h
+Z2UNCj4+ICsjICJob3N0X2dpZD0kKGlkIC1nKSI6IHRvIHVzZSBjdXJyZW50IHVzZXIgZ2lkIGZv
+ciBidWlsZCB1c2VyIGluIHRoZSBpbWFnZQ0KPj4gKyMgInVidW50dV92ZXJzaW9uPVZFUlMiOiB0
+byBzZWxlY3QgdGhlIHVidW50dSB2ZXJzaW9uIG51bWJlcg0KPiBJcyBpcyB0aGUgY2FzZSwgdGhh
+dCB0aGlzIGRvY2tlcmZpbGUgYW5kIHRoZSBwYWNrYWdlcyBpbnN0YWxsZWQgd2lsbCB3b3JrIG9u
+IGFueQ0KPiB2ZXJzaW9uIG9mIHVidW50dSB3ZSB3aWxsIHBhc3MgaGVyZT8gSWYgbm90LCBtYXli
+ZSB3ZSBzaG91bGQganVzdCBzdGljayB0byAyMi4wNCBhbmQNCj4gbm90IGdpdmUgdGhlIHVzZXIg
+dGhlIG9wcG9ydHVuaXR5IHRvIGNoYW5nZSB0aGlzLg0KDQpUaGVyZSBpcyBubyBzdXBwb3J0IHJp
+Z2h0IG5vdyB0byBidWlsZCBmb3IgYSBkaWZmZXJlbnQgdmVyc2lvbiBvZiB1YnVudHUgd2l0aG91
+dA0KbW9kaWZ5aW5nIHRoZSBkb2NrZXIgZmlsZS4gSSBrZXB0IHRoYXQgYXMgYXJndW1lbnQgaGVy
+ZSBiZWNhdXNlIHRoZSBnZW5lcmF0ZWQNCmZpbGUvY29udGFpbmVyIGRvZXMgbm90IGNvbnRhaW4g
+YW4gdWJ1bnR1IHZlcnNpb24gaW4gaXRzIG5hbWUgc28gY2hhbmdpbmcgdGhlDQp2YWx1ZSBoZXJl
+IGluIHRoZSBmdXR1cmUgd2lsbCBtYWtlIGl0IGNsZWFyZXIuDQoNCkkgYW0gb2sgdG8gcmVtb3Zl
+IHRoZSB2YXJpYWJsZSBhbmQgZGlyZWN0bHkgdXNlIHRoZSB2YWx1ZSBpZiB5b3UgdGhpbmsgdGhp
+cyBpcyBuZWNlc3NhcnkuDQoNCj4gDQo+PiArDQo+PiArIyBVc2Ugc3RhbmRhcmQgdWJ1bnR1IG1p
+bmltYWwNCj4+ICtBUkcgdWJ1bnR1X3ZlcnNpb249MjIuMDQNCj4+ICtGcm9tICMjRE9DS0VSUExB
+VCMjdWJ1bnR1OiR1YnVudHVfdmVyc2lvbiBBUyBiYXNlDQo+PiArTEFCRUwgbWFpbnRhaW5lci5u
+YW1lPSJUaGUgWGVuIFByb2plY3QgIiBcDQo+PiArICAgICAgbWFpbnRhaW5lci5lbWFpbD0ieGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnIg0KPj4gKw0KPj4gK0VOViBERUJJQU5fRlJPTlRF
+TkQ9bm9uaW50ZXJhY3RpdmUNCj4+ICsNCj4+ICsjIEluc3RhbGwgbWluaW1hbCB1YnVudHUgcmVx
+dWlyZW1lbnRzIGZvciB5b2N0byBhbmQgb3RoZXIgdG9vbHMgd2UgbmVlZA0KPj4gKyMgU2VlIGh0
+dHBzOi8vZG9jcy55b2N0b3Byb2plY3Qub3JnLzQuMC4xL2JyaWVmLXlvY3RvcHJvamVjdHFzL2lu
+ZGV4Lmh0bWwjYnVpbGQtaG9zdC1wYWNrYWdlcw0KPj4gK1JVTiBhcHQtZ2V0IHVwZGF0ZSAmJiBc
+DQo+PiArICAgIGFwdC1nZXQgLS1xdWlldCAtLXllcyBpbnN0YWxsIFwNCj4+ICsgICAgICAgIGdh
+d2sgXA0KPj4gKyAgICAgICAgd2dldCBcDQo+PiArICAgICAgICBnaXQgXA0KPj4gKyAgICAgICAg
+ZGlmZnN0YXQgXA0KPj4gKyAgICAgICAgdW56aXAgXA0KPj4gKyAgICAgICAgdGV4aW5mbyBcDQo+
+PiArICAgICAgICBnY2MgXA0KPj4gKyAgICAgICAgYnVpbGQtZXNzZW50aWFsIFwNCj4+ICsgICAg
+ICAgIGNocnBhdGggXA0KPj4gKyAgICAgICAgc29jYXQgXA0KPj4gKyAgICAgICAgY3BpbyBcDQo+
+PiArICAgICAgICBweXRob24zIFwNCj4+ICsgICAgICAgIHB5dGhvbjMtcGlwIFwNCj4+ICsgICAg
+ICAgIHB5dGhvbjMtcGV4cGVjdCBcDQo+PiArICAgICAgICB4ei11dGlscyBcDQo+PiArICAgICAg
+ICBkZWJpYW51dGlscyBcDQo+PiArICAgICAgICBpcHV0aWxzLXBpbmcgXA0KPj4gKyAgICAgICAg
+cHl0aG9uMy1naXQgXA0KPj4gKyAgICAgICAgcHl0aG9uMy1qaW5qYTIgXA0KPj4gKyAgICAgICAg
+bGliZWdsMS1tZXNhIFwNCj4+ICsgICAgICAgIGxpYnNkbDEuMi1kZXYgXA0KPj4gKyAgICAgICAg
+cHl0aG9uMy1zdWJ1bml0IFwNCj4+ICsgICAgICAgIG1lc2EtY29tbW9uLWRldiBcDQo+PiArICAg
+ICAgICB6c3RkIFwNCj4+ICsgICAgICAgIGxpYmx6NC10b29sIFwNCj4+ICsgICAgICAgIGZpbGUg
+XA0KPj4gKyAgICAgICAgdmltIFwNCj4+ICsgICAgICAgIGJpc29uIFwNCj4+ICsgICAgICAgIGV4
+cGVjdCBcDQo+PiArICAgICAgICBsb2NhbGVzIFwNCj4+ICsgICAgICAgIGxpYmx6NC10b29sIFwN
+Cj4+ICsgICAgICAgIHpzdGQgXA0KPj4gKyAgICAgICAgb3BlbnNzbCBcDQo+PiArICAgICAgICBs
+aWJzc2wzIFwNCj4+ICsgICAgICAgIGNhLWNlcnRpZmljYXRlcyBcDQo+PiArICAgICAgICAmJiBc
+DQo+PiArICAgICAgICBhcHQtZ2V0IGF1dG9yZW1vdmUgLXkgJiYgXA0KPj4gKyAgICAgICAgYXB0
+LWdldCBjbGVhbiAmJiBcDQo+PiArICAgICAgICBybSAtcmYgL3Zhci9saWIvYXB0L2xpc3RzKiAv
+dG1wLyogL3Zhci90bXAvKg0KPj4gKw0KPj4gKyMgVXNlIGJhc2ggYXMgc2hlbGwNCj4+ICtSVU4g
+cm0gL2Jpbi9zaCAmJiBsbiAtcyBiYXNoIC9iaW4vc2gNCj4+ICsNCj4+ICsjIEZpeCBsb2NhbCBm
+b3IgeW9jdG8NCj4+ICtSVU4gbG9jYWxlLWdlbiBlbl9VUy5VVEYtOCAmJiB1cGRhdGUtbG9jYWxl
+IExDX0FMTD1lbl9VUy5VVEYtOCBcDQo+PiArICAgIExBTkc9ZW5fVVMuVVRGLTgNCj4+ICtFTlYg
+TEFORyBlbl9VUy5VVEYtOA0KPj4gK0VOViBMQ19BTEwgZW5fVVMuVVRGLTgNCj4+ICsNCj4+ICsj
+IENyZWF0ZSBhIHVzZXIgZm9yIHRoZSBidWlsZCAod2UgZG9uJ3Qgd2FudCB0byBidWlsZCBhcyBy
+b290KQ0KPj4gK0VOViBVU0VSX05BTUUgZG9ja2VyLWJ1aWxkDQo+PiArQVJHIGhvc3RfdWlkPTEw
+MDANCj4+ICtBUkcgaG9zdF9naWQ9MTAwMA0KPj4gK1JVTiBncm91cGFkZCAtZyAkaG9zdF9naWQg
+JFVTRVJfTkFNRSAmJiBcDQo+PiArICAgIHVzZXJhZGQgLWcgJGhvc3RfZ2lkIC1tIC1zIC9iaW4v
+YmFzaCAtdSAkaG9zdF91aWQgJFVTRVJfTkFNRQ0KPj4gKw0KPj4gKyMgU3dpdGNoIHRvIG91ciB1
+c2VyIGluc3RlYWQgb2Ygcm9vdCBhbmQgc3RhcnQgaW4gaXRzIGhvbWUNCj4+ICtVU0VSICRVU0VS
+X05BTUUNCj4+ICtXT1JLRElSIC9ob21lLyRVU0VSX05BTUUNCj4+ICsNCj4+ICsjIENyZWF0ZSBu
+ZWVkZWQgZGlyZWN0b3JpZXMNCj4+ICtSVU4gbWtkaXIgLXAgL2hvbWUvJFVTRVJfTkFNRS95b2N0
+by1sYXllcnMgXA0KPj4gKyAgICAgICAgICAgICAvaG9tZS8kVVNFUl9OQU1FL3lvY3RvLWNhY2hl
+IFwNCj4+ICsgICAgICAgICAgICAgL2hvbWUvJFVTRVJfTkFNRS9sb2dzIFwNCj4+ICsgICAgICAg
+ICAgICAgL2hvbWUvJFVTRVJfTkFNRS9iaW4gXA0KPj4gKyAgICAgICAgICAgICAvaG9tZS8kVVNF
+Ul9OQU1FL3hlbiAmJiBcDQo+PiArICAgIGNob3duICRVU0VSX05BTUUuJFVTRVJfTkFNRSAvaG9t
+ZS8kVVNFUl9OQU1FLyoNCj4+ICsNCj4+ICsjIGNsb25lIHlvY3RvIHJlcG9zaXRvcmllcyB3ZSBu
+ZWVkDQo+PiArUlVOIGZvciByZXAgaW4gXA0KPj4gKyAgICAgICAgICAgICAgICBodHRwczovL2dp
+dGh1Yi5jb20vb3BlbmVtYmVkZGVkL21ldGEtb3BlbmVtYmVkZGVkIFwNCj4+ICsgICAgICAgICAg
+ICAgICAgaHR0cHM6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9wb2t5IFwNCj4+ICsgICAgICAgICAg
+ICAgICAgaHR0cHM6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9tZXRhLXZpcnR1YWxpemF0aW9uIFwN
+Cj4+ICsgICAgICAgICAgICA7IGRvIFwNCj4+ICsgICAgICAgIGdpdCAtQyAvaG9tZS8kVVNFUl9O
+QU1FL3lvY3RvLWxheWVycyBcDQo+PiArICAgICAgICAgICAgY2xvbmUgLWIgIyNZT0NUT1ZFUlNJ
+T04jIyAtLXNpbmdsZS1icmFuY2ggJHJlcDsgXA0KPj4gKyAgICBkb25lDQo+PiArDQo+PiArIyBU
+aGUgYnVpbGRlciBzdGFnZSBpcyBidWlsZGluZyBhbiBpbml0aWFsIGNhY2hlIHN0YXRlIHRoYXQg
+d2UgaW5jbHVkZSBpbiB0aGUNCj4+ICsjIGZpbmFsIGltYWdlDQo+PiArRnJvbSBiYXNlIEFTIGJ1
+aWxkZXINCj4+ICsNCj4+ICsjIFRoaXMgc3RlcCBjYW4gdGFrZSBvbmUgdG8gc2V2ZXJhbCBob3Vy
+cyBkZXBlbmRpbmcgb24geW91ciBkb3dubG9hZCBiYW5kd2l0aA0KPj4gKyMgYW5kIHRoZSBzcGVl
+ZCBvZiB5b3VyIGNvbXB1dGVyDQo+PiArQ09QWSAuL2J1aWxkLXlvY3RvLnNoIC8NCj4+ICtSVU4g
+L2J1aWxkLXlvY3RvLnNoIC0tZHVtcC1sb2cgIyNZT0NUT1RBUkdFVCMjDQo+PiArDQo+PiArRnJv
+bSBiYXNlDQo+PiArDQo+PiArIyBPbmx5IGNvcHkgdGhlIGNhY2hlIHN0YXR1cw0KPj4gK0NPUFkg
+LS1mcm9tPWJ1aWxkZXIgL2hvbWUvJFVTRVJfTkFNRS95b2N0by1jYWNoZSAvaG9tZS8kVVNFUl9O
+QU1FL3lvY3RvLWNhY2hlLy4NCj4+ICsNCj4+ICtMQUJFTCBtYWludGFpbmVyLm5hbWU9IlRoZSBY
+ZW4gUHJvamVjdCAiIFwNCj4+ICsgICAgICBtYWludGFpbmVyLmVtYWlsPSJ4ZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmciDQo+PiArDQo+PiBkaWZmIC0tZ2l0IGEvYXV0b21hdGlvbi9idWls
+ZC95b2N0by95b2N0by5pbmMgYi9hdXRvbWF0aW9uL2J1aWxkL3lvY3RvL3lvY3RvLmluYw0KPj4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4+IGluZGV4IDAwMDAwMDAwMDAwMC4uMDQwNzZiYzhkMTc0
+DQo+PiAtLS0gL2Rldi9udWxsDQo+PiArKysgYi9hdXRvbWF0aW9uL2J1aWxkL3lvY3RvL3lvY3Rv
+LmluYw0KPj4gQEAgLTAsMCArMSw0MSBAQA0KPj4gKyMgVGhpcyBtYWtlZmlsZSBnZW5lcmF0ZXMg
+dGhlIGRvY2tlciBmaWxlcyBmb3IgWW9jdG8gYnVpbGRzDQo+PiArIyBUaGUgY29udGFpbmVycyBm
+b3IgdGhlIGN1cnJlbnQgYXJjaGl0ZWN0dXJlIGFyZSB0aGUgb25lIGJ1aWx0IHVzaW5nIG1ha2Ug
+YWxsDQo+PiArIyBUbyBidWlsZCBjb250YWluZXJzIGZvciBhIGRpZmZlcmVudCBhcmNoaXRlY3R1
+cmUsIHlvdSBuZWVkIHRvIGNhbGwgbWFrZSBmb3INCj4+ICsjIHRoZSBpbWFnZSB5b3Ugd2FudCBl
+eHBsaWNpdGVseQ0KPiBDb3VsZCB5b3UgcGxlYXNlIGFkZCBhIGRvdCBhdCB0aGUgZW5kIG9mIGVh
+Y2ggc2VudGVuY2UgYWJvdmUuIFRoaXMgd2lsbCBpbXByb3ZlIHJlYWRhYmlsaXR5Lg0KDQpZZXMg
+d2lsbCBkby4NCg0KPiANCj4+ICsjIFRoZSBjb250YWluZXJzIGFyZSBuYW1lZCB0aGlzIHdheToN
+Cj4+ICsjIFlPQ1RPVkVSU0lPTi1UQVJHRVQgZm9yIHg4Nl82NCBob3N0cw0KPj4gKyMgWU9DVE9W
+RVJTSU9OLVRBUkdFVC1hcm02NHY4IGZvciBhcm02NCBob3N0cw0KPj4gKw0KPj4gKyMgWW9jdG8g
+dmVyc2lvbnMgd2UgYXJlIGN1cnJlbnRseSB1c2luZw0KPj4gK1lPQ1RPX1ZFUlNJT04gPSBraXJr
+c3RvbmUNCj4+ICsNCj4+ICsjIFlvY3RvIEJTUHMgd2Ugd2FudCB0byBidWlsZCBmb3INCj4+ICtZ
+T0NUT19UQVJHRVRTID0gcWVtdWFybTY0IHFlbXVhcm0gcWVtdXg4Ni02NA0KPj4gKw0KPj4gKyMg
+U3VwcG9ydGVkIEhvc3QgcGxhdGZvcm1zIChob3N0IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBvbmVz
+KQ0KPiBUbyBhdm9pZCBtaXNtYXRjaCBcd3J0IHBsYXRmb3JtIHZzIGFyY2hpdGVjdHVyZSBJIHdv
+dWxkIHN0aWNrIHRvIHRoZSBsYXR0ZXIgb25lLg0KPiBJbiB0aGUgZG9ja2VyIHdvcmxkLCBhcm02
+NHY4IGlzIGFuIGFyY2hpdGVjdHVyZSB3aGVyZWFzIGxpbnV4L2FybTY0L3Y4IGlzIGEgcGxhdGZv
+cm0uDQoNClNvICJ5b2N0byB0YXJnZXTigJ0gYW5kIOKAnGNvbnRhaW5lciBwbGF0Zm9ybeKAnSA/
+DQoNCj4gDQo+PiArWU9DVE9fSE9TVFMgPSBhbWQ2NCBhcm02NHY4DQo+PiArDQo+PiArIyBBcmNo
+aXRlY3R1cmUgd2Ugd2FudCB0byB1c2UgaW4gZ2l0bGFiIENJIChkZXBlbmRzIG9uIHJ1bm5lcnMg
+YXJjaCkNCj4+ICtDSV9BUkNIID0gYXJtNjR2OA0KPj4gKw0KPj4gK2RlZmluZSBHRU5fRE9DS0VS
+DQo+PiArIyBNYWtlIGFsbCBpcyBnZW5lcmF0aW5nIHdoYXQgd2Ugd2FudCBpbiB0aGUgQ0kNCj4+
+ICtpZmVxICgkKENJX0FSQ0gpLCQoMykpDQo+PiArQ09OVEFJTkVSUyArPSB5b2N0by8kKDEpLSQo
+MikkKDQpDQo+PiArZWxzZQ0KPj4gK0NPTlRBSU5FUlNfRVhUUkEgKz0geW9jdG8vJCgxKS0kKDIp
+JCg0KQ0KPj4gK2VuZGlmDQo+PiArDQo+PiAreW9jdG8vJCgxKS0kKDIpJCg0KS5kb2NrZXJmaWxl
+OiB5b2N0by95b2N0by5kb2NrZXJmaWxlLmluDQo+PiArICAgICAgIGVjaG8gPiAkJEANCj4+ICsg
+ICAgICAgY2F0ICQkPCB8IFwNCj4+ICsgICAgICAgICAgIHNlZCAtZSAicywjI1lPQ1RPVkVSU0lP
+TiMjLCQoMSksZyIgfCBcDQo+PiArICAgICAgICAgICBzZWQgLWUgInMsIyNZT0NUT1RBUkdFVCMj
+LCQoMiksZyIgfCBcDQo+PiArICAgICAgICAgICBzZWQgLWUgInMsIyNET0NLRVJQTEFUIyMsJCgz
+KS8sZyIgPiAkJEANCj4+ICsNCj4+ICtlbmRlZg0KPj4gKw0KPj4gKyQoZXZhbCAkKGZvcmVhY2gg
+dmVycywkKFlPQ1RPX1ZFUlNJT04pLFwNCj4+ICsgICAgJChmb3JlYWNoIHRhciwkKFlPQ1RPX1RB
+UkdFVFMpLFwNCj4+ICsgICAgJChmb3JlYWNoIGhzdCwkKFlPQ1RPX0hPU1RTKSxcDQo+PiArICAg
+ICQoY2FsbCBHRU5fRE9DS0VSLCQodmVycyksJCh0YXIpLCQoaHN0KSwkKGlmICQoZmlsdGVyIGFt
+ZDY0LCQoaHN0KSksLC0kKGhzdCkpKSkpKSkNCj4gVGhpcyBjb3VsZCBiZSBhbGlnbmVkIHVuZGVy
+IGZpcnN0IGZvcmVhY2guIEFsc28gSSB0aGluayB0aGVyZSBpcyBubyBuZWVkIHRvIHRyeSB0byBz
+aG9ydGVuIHRoZSB2ZXJzaW9uLHRhcmdldCxob3N0Lg0KDQpUaGlzIGlzIHNvbWV0aGluZyB5b3Ug
+cmVxdWVzdGVkIG1lIGluIG9yZGVyIHRvIGhhdmUgY29udGFpbmVyIG5hbWVzIGZvciB5b2N0byBj
+b2hlcmVudA0Kd2l0aCBvdGhlciB4ZW4gY29udGFpbmVycyAoaWUgb25seSBoYXZlIHRoZSAtYXJt
+NjR2OCBzdWZmaXggZm9yIGFybSkuDQoNCkRvIHlvdSB3YW50IG1lIHRvIHJldmVydCB0aGlzIGFu
+ZCBoYXZlIG5hbWVzIGNvbnRhaW5pbmcgdGhlIGFtZDY0IHN1ZmZpeCA/DQoNClRoYW5rcyBmb3Ig
+dGhlIHJldmlldw0KDQpDaGVlcnMNCkJlcnRyYW5kDQoNCj4gDQo+PiAtLQ0KPj4gMi4yNS4xDQo+
+PiANCj4gDQo+IH5NaWNoYWwNCg0K
 
