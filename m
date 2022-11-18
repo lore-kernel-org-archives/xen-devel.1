@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D9D6C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Nov 2022 11:47:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.445618.700873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87CEC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Nov 2022 11:47:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.445629.700905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ovzpc-0000yK-4S; Fri, 18 Nov 2022 11:46:52 +0000
+	id 1ovzq4-0002jQ-6A; Fri, 18 Nov 2022 11:47:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 445618.700873; Fri, 18 Nov 2022 11:46:52 +0000
+Received: by outflank-mailman (output) from mailman id 445629.700905; Fri, 18 Nov 2022 11:47:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ovzpc-0000yD-15; Fri, 18 Nov 2022 11:46:52 +0000
-Received: by outflank-mailman (input) for mailman id 445618;
- Fri, 18 Nov 2022 11:46:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ovzq4-0002jJ-2g; Fri, 18 Nov 2022 11:47:20 +0000
+Received: by outflank-mailman (input) for mailman id 445629;
+ Fri, 18 Nov 2022 11:47:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jn0n=3S=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1ovzpa-0000h4-Us
- for xen-devel@lists.xenproject.org; Fri, 18 Nov 2022 11:46:51 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20630.outbound.protection.outlook.com
- [2a01:111:f400:fe5b::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aa95d275-6736-11ed-8fd2-01056ac49cbb;
- Fri, 18 Nov 2022 12:46:42 +0100 (CET)
-Received: from BN9PR03CA0169.namprd03.prod.outlook.com (2603:10b6:408:f4::24)
- by PH8PR12MB6723.namprd12.prod.outlook.com (2603:10b6:510:1ce::12)
+ id 1ovzq2-0000xU-Oh
+ for xen-devel@lists.xenproject.org; Fri, 18 Nov 2022 11:47:18 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20603.outbound.protection.outlook.com
+ [2a01:111:f400:7eab::603])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bf4cae0c-6736-11ed-91b6-6bf2151ebd3b;
+ Fri, 18 Nov 2022 12:47:17 +0100 (CET)
+Received: from BN0PR04CA0167.namprd04.prod.outlook.com (2603:10b6:408:eb::22)
+ by BL1PR12MB5126.namprd12.prod.outlook.com (2603:10b6:208:312::8)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.20; Fri, 18 Nov
- 2022 11:46:46 +0000
-Received: from BN8NAM11FT005.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:f4:cafe::3e) by BN9PR03CA0169.outlook.office365.com
- (2603:10b6:408:f4::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.9 via Frontend
- Transport; Fri, 18 Nov 2022 11:46:45 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN8NAM11FT005.mail.protection.outlook.com (10.13.176.69) with Microsoft SMTP
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.9; Fri, 18 Nov
+ 2022 11:47:14 +0000
+Received: from BN8NAM11FT095.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:eb:cafe::1e) by BN0PR04CA0167.outlook.office365.com
+ (2603:10b6:408:eb::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.20 via Frontend
+ Transport; Fri, 18 Nov 2022 11:47:13 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT095.mail.protection.outlook.com (10.13.176.206) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5834.8 via Frontend Transport; Fri, 18 Nov 2022 11:46:45 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.5834.8 via Frontend Transport; Fri, 18 Nov 2022 11:47:13 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 18 Nov
- 2022 05:46:44 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ 2022 05:46:45 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 18 Nov
- 2022 03:46:37 -0800
+ 2022 05:46:41 -0600
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34
- via Frontend Transport; Fri, 18 Nov 2022 05:46:36 -0600
+ via Frontend Transport; Fri, 18 Nov 2022 05:46:40 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,36 +65,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aa95d275-6736-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: bf4cae0c-6736-11ed-91b6-6bf2151ebd3b
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=U7e/q7N9E6KrBG5KRZAtP6ajhNCSnEA4vVie7Hlrdc2UWhAw8MQPaWBLGElTjN3xtTNU8sTdm6STP0af5/H1Z+QWzWlf+68CZxpoUsE0Q8QW7GP60lb+MyluSOFzWFJsleuXPZf9RvZSEyBPDGjm+1x5giW3rqkDU0rCOl4Tx9umeKDY0Ffuwr5imntY6EmLBEbhoLbd+G68s6S2GsSFtP2xd8ihnIdQEgMrv4bZExAEHwP7dOM9rUD7FCTwDe9XYzSHhakmIEe6PMwSj5Gd8y9kOK2/ByaU6ZiEgu5KnBj4LgYW/J1MZO9+TfUcPmmpgM4xwjIAuZEkwmWOd6IAxw==
+ b=DNslExaHwLxCIlRRrIFAKZ+bOJn4Hpf+eBD+YsBKEhvDji2q7K+u2l9ita1Ndex5n1KBttfFkWKisg2Mzpqbj1jzoOwog2xXNTDC6rQ+wid/pJpUa6plE2V281Kbk6+IAXFFooD23WC/CcX+6Q+KB3hdZI3Y70a+vWsWX67fe5nXHOWdo1+rKQhBEngnsr2eE8xG8GejgRFTjEuTcWAnakdf/DKjbM7DVJKJQHexm4jijAtl6+lwReCKIJRJC03lkwheYL42b96DvIGUvtOjht3FIDca4KXFJinOzeLjpEqfHawSnPfEAOOymGgnLKR9o+UsH/3YFKvSB3bb1FFjIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mljmr6w6YFyY1nsQNJffwUBvk7mfAY2MBuN66UsplmA=;
- b=H+B5SP9mUXEGN2H3I5nuKPdAmfxdPGdoy5ctMx0l+g3EATDWezeQdu/JlR9DjW4eYybzBPpm+yEJhkBPrbe4fBUD/v3JRZIqflmjupys8eWUcoxEP5srzIEKdYkYWrAvuzKmL4PAJm57xBosuRQuEgW785BPek907f8tfkR93DQxeX3fVMJW5OnSWlajV6P9yQSD+SJ98feFUIPB+SacWQmCf4SkDX7z+xcQOOF06Qd/wwqDnmX61sGaDaUO9G3xKSeU8mtOSwiMNnWvWlHSrJOkNuK1V135ofnrI7UrxJGSzbKN0g0zZ6K3sSKEoOSrmNGSohxnyutxcejiz8OHdw==
+ bh=BLyLFkVOT6VDwHO40q+5e8h3AFqIk0VudNJgD0mykWM=;
+ b=XZuUah50qEbm4QeldakUYzzKCQqa56wNge18j0Bb5/nYQqXWr3KszLEdTcF2bUsDbTqw+ODTig8liViSWl+51xtg+fjB9WhdA63ZxVCjQrvD3rPUOdqKlUl4rcjUMWVv6aKs1293ilWVuA8/byh8STC7fzlSdopHkdX6eICBJVPKdyAJW0jTA0aBxMNPFDciA/nr8QOeeoZ4eNyqgy/FADoAJPBOuSC2J9uRRSK+opotKZzjoMpWZDcHar8VikRgXNFyjt2m28P47dJyGy0BZDo4rFOcUR4KSs6IcDlNI9cUcACCTTaQ3Yq0zziPmQCV2RHP2sgnSPxfnaia8cN0UA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mljmr6w6YFyY1nsQNJffwUBvk7mfAY2MBuN66UsplmA=;
- b=G1/1bZRrUg+ZI7LpOY5FGIENu03rkRW5bJSZp2WBl/Fx328p0hjTpLT6nVfuRQ3IjFiGl1EQYEgx17lw0LzyUOxd0JI2AYWc1lx4S6DGI+fI3U4Uu+EauOuXB+BPYBrQ6jggnz2x2/vmAvLtEcVBMc5J7LE41K4JNj65xxvR4lU=
+ bh=BLyLFkVOT6VDwHO40q+5e8h3AFqIk0VudNJgD0mykWM=;
+ b=T8dZRVKMp/Sy1P5Mb0g3zDY2qYxxoD/zzHc2shJLTLiF8AZxfndRIKEBKAKdTNTQgqxwO9khZ/ecZ8isi8LqJYSnemYefhKCHUKjJ52FuITt7P+PBP0aclSFIOmhfFXr44TnkdZUzngL7T5Rj0AUoSZJclinXSSfkLDEsQbnU2U=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/3] xen/arm: Drop early_uart_init macro from debug-meson.inc
-Date: Fri, 18 Nov 2022 12:46:16 +0100
-Message-ID: <20221118114618.20754-2-michal.orzel@amd.com>
+Subject: [PATCH 3/3] xen/arm: Define WLEN_8 macro and use it in debug-pl011
+Date: Fri, 18 Nov 2022 12:46:18 +0100
+Message-ID: <20221118114618.20754-4-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221118114618.20754-1-michal.orzel@amd.com>
 References: <20221118114618.20754-1-michal.orzel@amd.com>
@@ -103,55 +103,76 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT005:EE_|PH8PR12MB6723:EE_
-X-MS-Office365-Filtering-Correlation-Id: 88f6f17a-6641-4e71-4d5c-08dac95a91c7
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT095:EE_|BL1PR12MB5126:EE_
+X-MS-Office365-Filtering-Correlation-Id: 85675678-a091-4d4a-4e0d-08dac95aa2a6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	HSsOzed7LukJXNSRm1HmxGogaM08uhyORH4nUeb7I+okBxTtuGbnJfNJhJOOJGvUG3tGFR1xxYRkOBpV2QPBZOwu461Yo6e2mS+lhNGuoawskSH4/j0lekoSgFJ9/k4pEaYEV77ZHp6kr4CjqlJ2hI+lRWBclyZXMkg1ddcbjFqeBsZ5cHdKPIlnWOyCZ/IA9WTG9+jlyy5X74i6ucsKW8oZ+ZpVzJLLK3symBflX8n6au4KhfRKllrlJ2wI1psDeNHI+syq6ScHNggRfkw7F1yczoggy++tOX/XaXp45hUtQ9En2G/rr6JBdnk6L+mmO2cUaILY4MNiZrosCXYahccSOrI0shw3eoGS9NnTQNiaiRfATo58i9wqvXeS5DXCqcXcTEa0A5mGpOw2d0U+GI7tWyI9uRITrckF6px8CnVJTFYRQHCe+WaK3l1lLFa55sMH41MIBabQuc/kVv8wMcTlS4R4HeUiLD0aSo2+grA5Gyrct7SXUjq0hTv0vJApx1jE80ptMANxVk1d6y9j0/KjhKhZKglFGunHwhmhfLX/3sxxijQ3zY5eNrRxgWoDe/GcQolSbJHg7n8J3aKM+lkOYZROjVqN5HfoXGEbWGtjd68jkPZj1jWJBTw9lvlvf0lvqQj109mA5G/THWjsRMkEvHgUv2gvAUGwFhHmP+DqS6Z6R+DBSNUlCp1n0iJdK83P6tsJ3pXCRROretVOUwDEal0QyIDqDLtUQfxr/bE=
+	pNksFMQiXPYjvVMFm33YJBM7/WKHf8VoBaEal+lXK6vZ1h9PHbeSs+xTVZ+U1+CfnwYBpkccvRw3nLx9yd9I/ieHA9NHtIcsF8tBuIOPjZpTt0Cz5qN/H84JnTWDt3OSR5GxShWZ/VLEsunKeSUNLtXL+ho/gdT0DtXDIs7sY2bE0FyQby2AxV27lgDjNyxCORd1pL06a741OBgONz/JZOhLH6jTe47S7BL85gnV0+6KPCs+u/vQHNjwVhSDThD2c7KKZ2QrIVhAMltwTjXXTBNIY9IMQOY8sVOkwIojGOtO6VdEv1zKS//uxYHwwDeRQX0I+UzGDovrpxozZMMNUbWn95lYWC2N/xPGApDvXTmNNpnC9PSWwHGAHn9mutjOOhu2c4L0K12+fv1G23TXtB7aYKog41USGwIHC268GVCfZVD6NBUNpRsJ4gfncfI7271mcg5gbBHgQuFNUDxWdwtWNoP0fcoJZBjnmZADcyZXVPQQqoxAONIqgAEQpEyALW5zjc9Tgbgcf/E1q1sdSxrAd3l53OyFs8fgOV8F4/RdibCvzbpfd2QzTL8lD93yC7VPfHOlCSE0TmtS6wmZh+9r1OfrvXntzHRl3UTDSjzyqhNkXPVrea92In0aurIy/p0pH+JcRlL9OoyEOSIiwX48zy0JVgoT1/SoDAkmn2p2cwdHOE2XBb/q8CRglyS6REK+MHY8R/dIA90gEQwC6rgQsQQxZ+P16laihcD+06E=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(136003)(376002)(396003)(346002)(39860400002)(451199015)(36840700001)(40470700004)(46966006)(36860700001)(40480700001)(86362001)(36756003)(40460700003)(81166007)(356005)(82740400003)(82310400005)(26005)(6666004)(6916009)(54906003)(44832011)(4744005)(8936002)(336012)(47076005)(186003)(1076003)(5660300002)(83380400001)(426003)(2906002)(8676002)(4326008)(70586007)(316002)(478600001)(2616005)(70206006)(41300700001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(396003)(39860400002)(376002)(136003)(451199015)(46966006)(36840700001)(40470700004)(41300700001)(36756003)(2616005)(36860700001)(1076003)(86362001)(2906002)(5660300002)(44832011)(336012)(426003)(83380400001)(186003)(8936002)(82740400003)(40460700003)(82310400005)(40480700001)(356005)(81166007)(47076005)(26005)(316002)(54906003)(6916009)(478600001)(6666004)(70586007)(70206006)(4326008)(8676002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2022 11:46:45.5875
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2022 11:47:13.8769
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88f6f17a-6641-4e71-4d5c-08dac95a91c7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85675678-a091-4d4a-4e0d-08dac95aa2a6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT005.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT095.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6723
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5126
 
-early_uart_init macro is only used if CONFIG_EARLY_UART_INIT is set.
-This config option depends on EARLY_UART_PL011, so there is no point
-in defining it for MESON, especially if it is empty. Remove it and adapt
-the existing comment.
+At the moment, early printk code for pl011 uses a hardcoded value
+for 8n1 LCR configuration. Define and use macro WLEN_8 for that purpose
+(no parity and 1 stop bit are defined as 0).
 
 Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
- xen/arch/arm/arm64/debug-meson.inc | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ xen/arch/arm/arm32/debug-pl011.inc    | 2 +-
+ xen/arch/arm/arm64/debug-pl011.inc    | 2 +-
+ xen/arch/arm/include/asm/pl011-uart.h | 1 +
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/debug-meson.inc b/xen/arch/arm/arm64/debug-meson.inc
-index e1a8fa8ab9c4..e65e1ccde482 100644
---- a/xen/arch/arm/arm64/debug-meson.inc
-+++ b/xen/arch/arm/arm64/debug-meson.inc
-@@ -23,9 +23,10 @@
+diff --git a/xen/arch/arm/arm32/debug-pl011.inc b/xen/arch/arm/arm32/debug-pl011.inc
+index 214f68dc95bd..c527f1d4424d 100644
+--- a/xen/arch/arm/arm32/debug-pl011.inc
++++ b/xen/arch/arm/arm32/debug-pl011.inc
+@@ -29,7 +29,7 @@
+         str   \rc, [\rb, #FBRD]     /* -> UARTFBRD (Baud divisor fraction) */
+         mov   \rc, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE / 16)
+         str   \rc, [\rb, #IBRD]     /* -> UARTIBRD (Baud divisor integer) */
+-        mov   \rc, #0x60            /* 8n1 */
++        mov   \rc, #WLEN_8          /* 8n1 */
+         str   \rc, [\rb, #LCR_H]     /* -> UARTLCR_H (Line control) */
+         ldr   \rc, =(RXE | TXE | UARTEN)      /* RXE | TXE | UARTEN */
+         str   \rc, [\rb, #CR]     /* -> UARTCR (Control Register) */
+diff --git a/xen/arch/arm/arm64/debug-pl011.inc b/xen/arch/arm/arm64/debug-pl011.inc
+index d82f2f1de197..6d60e78c8ba3 100644
+--- a/xen/arch/arm/arm64/debug-pl011.inc
++++ b/xen/arch/arm/arm64/debug-pl011.inc
+@@ -28,7 +28,7 @@
+         strh  w\c, [\xb, #FBRD]      /* -> UARTFBRD (Baud divisor fraction) */
+         mov   x\c, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE / 16)
+         strh  w\c, [\xb, #IBRD]      /* -> UARTIBRD (Baud divisor integer) */
+-        mov   x\c, #0x60             /* 8n1 */
++        mov   x\c, #WLEN_8           /* 8n1 */
+         str   w\c, [\xb, #LCR_H]     /* -> UARTLCR_H (Line control) */
+         ldr   x\c, =(RXE | TXE | UARTEN)
+         str   w\c, [\xb, #CR]        /* -> UARTCR (Control Register) */
+diff --git a/xen/arch/arm/include/asm/pl011-uart.h b/xen/arch/arm/include/asm/pl011-uart.h
+index 57e9ec73ac19..5bb563ec0814 100644
+--- a/xen/arch/arm/include/asm/pl011-uart.h
++++ b/xen/arch/arm/include/asm/pl011-uart.h
+@@ -55,6 +55,7 @@
  
- #define AML_UART_TX_FIFO_FULL   21
- 
--.macro early_uart_init xb, c
--/* Uart has already been initialized by Firmware, for instance by TF-A */
--.endm
-+/*
-+ * No need for early_uart_init, as UART has already been initialized
-+ * by Firmware, for instance by TF-A.
-+ */
- 
- /*
-  * MESON UART wait UART to be ready to transmit
+ /* LCR_H bits */
+ #define SPS    (1<<7) /* Stick parity select */
++#define WLEN_8 (_AC(0x3, U) << 5) /* 8 bits word length */
+ #define FEN    (1<<4) /* FIFO enable */
+ #define STP2   (1<<3) /* Two stop bits select */
+ #define EPS    (1<<2) /* Even parity select */
 -- 
 2.25.1
 
