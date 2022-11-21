@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 528A2C433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Nov 2022 08:34:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.446439.702013 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 040F0C433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Nov 2022 08:56:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.446452.702035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ox2G1-0003b0-4V; Mon, 21 Nov 2022 08:34:25 +0000
+	id 1ox2bQ-0006qi-9Q; Mon, 21 Nov 2022 08:56:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 446439.702013; Mon, 21 Nov 2022 08:34:25 +0000
+Received: by outflank-mailman (output) from mailman id 446452.702035; Mon, 21 Nov 2022 08:56:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ox2G1-0003at-0P; Mon, 21 Nov 2022 08:34:25 +0000
-Received: by outflank-mailman (input) for mailman id 446439;
- Mon, 21 Nov 2022 08:34:23 +0000
+	id 1ox2bQ-0006qb-6S; Mon, 21 Nov 2022 08:56:32 +0000
+Received: by outflank-mailman (input) for mailman id 446452;
+ Mon, 21 Nov 2022 08:56:31 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8l2o=3V=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1ox2Fz-0003an-80
- for xen-devel@lists.xenproject.org; Mon, 21 Nov 2022 08:34:23 +0000
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr130059.outbound.protection.outlook.com [40.107.13.59])
+ id 1ox2bP-0006qV-4v
+ for xen-devel@lists.xenproject.org; Mon, 21 Nov 2022 08:56:31 +0000
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on2062e.outbound.protection.outlook.com
+ [2a01:111:f400:fe1b::62e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4bf3532f-6977-11ed-91b6-6bf2151ebd3b;
- Mon, 21 Nov 2022 09:34:21 +0100 (CET)
+ id 6359e3ae-697a-11ed-91b6-6bf2151ebd3b;
+ Mon, 21 Nov 2022 09:56:29 +0100 (CET)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AM9PR04MB8273.eurprd04.prod.outlook.com (2603:10a6:20b:3e5::23)
+ by DU2PR04MB8773.eurprd04.prod.outlook.com (2603:10a6:10:2e0::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.9; Mon, 21 Nov
- 2022 08:33:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.13; Mon, 21 Nov
+ 2022 08:56:26 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::4da2:ea8b:e71e:b8d8]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::4da2:ea8b:e71e:b8d8%4]) with mapi id 15.20.5834.011; Mon, 21 Nov 2022
- 08:33:52 +0000
+ 08:56:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,169 +49,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4bf3532f-6977-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 6359e3ae-697a-11ed-91b6-6bf2151ebd3b
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fjG7QIyISG1RuCEKsXUOBY6f9EBN8MGUPEFO0eENjMDoTgkZoZIztv1b5N+KwJdGjbkguw6zYs4bemVvkyqjGrgB+ncgncVJV/oQAMEFK+fiftl21DVWW41bTxVGIJg3KRQh9FzbJeCq+SXsqRa3QOihzJupx35XSjIlv3EC+I3HUVgCRV4V4ZovjYTpzVx1aAAXswAam2xx1n7NezuNXJ/Jikab2WFQ+2wV/5HmUyBq3apMo9ZX/oenqtP/KdIQZfwZ+L2fFAFoHx+i2/SW/l3uuurZ+QmbBxOg+dAaqT+RtOrNQdBgisPuAlk7PWP2G4B9ZUyaJOQctSSe7ZWNcg==
+ b=dAYtz5GmFPeJX8NfmmqNjVbI1bSAZiQqPpvwnx4E2C6VXtMALcjce2M0lhg1U3kqS9hqufXe/4jLXOFl/zOZyBhRNvbiuQSJc+chArgGUdgIc7pOGJ9VVa1X3aOnyEK7rD20RePyfTj9icJVnLVuQRuUccf/FJQYywWZgIQq6OTiKg6wsuyALHCEUxe4NJmFYeHjtt73ekD7d086CdQMMnCtYjWFUbftaxP6gQ0n5pk7o/83PTIxvuVEj/rwPQUAxzkxMV79r4lUDTrNKKTRRE+qSoI8S0byaXMvtuG/uRfUSTSjBE2XB6VRxzqA8KeTCnDtHep4/MXY+EFUOzgExw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6/ZsOhRYGx9QcVg/XJaeGGZ4mApFDuRwmnp8U76S0wg=;
- b=BFoKZnwb17+ILd6NE5WbmUAC+FXziIU2IS5P9Vd+PBkEuQg2t/cn+fOCxxWrOcsaaB6+ymRSqF3BnQCiWFkHMO2Z10fkx4/e4FelmjBBnR6Z/b8e7I1SH1i1jYuCoH8lAKDkI1694qlDinLtM5VFEXXpXezDaXee4ZyeEruc0uwztocI50VtBM77Eq5HBV4r8eu7a+7ujs+k6Fb0wyewKAJADoC5XLqB+fvJ6CuzShp+e4p22R/Wy4n4kw7griF5dfEDtWBAuLTudEMNHtrIdY79voDz5VDnf2g0Pq+8XXbLgFA2IJaOpbqaRAi6MBthkzW2KQ0KpOh0cES4X3dPKQ==
+ bh=6SUCM6cVplr9ffzTzczI0ukj1ZqakVMnRlVhKFc90rY=;
+ b=iqi4IyuRrW/PhOu+asOZD6NYv2jH6RF/3ohrrX9u7ifEXqYWDg2me1exyDDgsJT+WvGHicplP8+bRXE23njIHfzSeTN2MeaqBDDNvoyaGItatPKCmc83kTGkB5zakXiPm2oAhxVlCpffeyK2A0XjGL8nxZwb2Owx4ZPwAECjU3udiS4phBwt+wrXnWP0DSW+EL7rGVzGEvf7eIsGDdsMLDVlYi+bHFHbNur/wAbMpfZMZlYgpy5d2Rrno0gAPhPzsGVVJng4Wusf3j+NwBOkPAyYwjvuybybWEmkuaC+7jfY14kwv4dJAQR928KxG9rj4XQweyXKzCthocvY9MZudA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6/ZsOhRYGx9QcVg/XJaeGGZ4mApFDuRwmnp8U76S0wg=;
- b=zyIEVuTXpnWCT00qzXB8y8aYFkO5NGnb4Ejpt0gwx/+ra7slR2G8rXok+NwTTFiPhCfJqCWAqXF9PF27c3DfmMaC6QSe6wJ3pJQF/KK7sAdZSp8ZP0rwT1ZpKWttrvw72Qj3N+V5rhTw9Vf/V7UHTiHNzxfFgDOwp3qUXz6CikGzRBWHioVyLC1OjouXBwuiArHp8+23jki3620srjZulftnoA+Gv7DEJtiiXbDLf24vwAlsXtLhRGlDv/KHWlBLjCX+Yy+Cx0k8c1CIiZao53qnzoEYSPToPFSmutc8cxuyjmn2U5a3AkHkO51+FWOJxxdQOOIP6VsDA29y7dF5Tw==
+ bh=6SUCM6cVplr9ffzTzczI0ukj1ZqakVMnRlVhKFc90rY=;
+ b=S5x02++1BxXa7PF0oDOKs0HpR4Y53MNEMUafwLZfTjJY5Q6aN3a9lWDPDBCwv9rhZ9sBIjnAqjf+VviMbltFBitPwV3pgUJ6HnQcOnYt+HrFAqRh7AG+GkNcofZKc+NapFb+G/k/QVIhLV6GHhz501ANUtv5w8ZwVNgWF6kGJL68UtPFlJ7IP4x6bu4zPO7acq91SDdL7/oK/IgwZby088o/1TmjtQarUYtSvchJbwQ1GxhcnT6XSBfUC6Ntmi1d2yjkJ/g1+vtlQfv9/nGLJdTqAzyO6AHwzUP6TxNk7hVHowbZL6w/cIEst/JRXyP2Qo8QHaeOthin7ype/SV5Tw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <3add150d-ab4d-9147-005e-3f3160ec9667@suse.com>
-Date: Mon, 21 Nov 2022 09:33:53 +0100
+Message-ID: <878e635f-b116-3580-945f-f8acb711a5bc@suse.com>
+Date: Mon, 21 Nov 2022 09:56:27 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.5.0
 Subject: Re: [PATCH] x86/HVM: don't mark evtchn upcall vector as pending when
  vLAPIC is disabled
 Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Paul Durrant <paul@xen.org>
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>, Roger Pau Monne <roger.pau@citrix.com>,
+ Paul Durrant <paul@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <f0d73fa7-8fe3-3810-f4e7-ddb654ac0afd@suse.com>
- <Y3eWISfCCW/ktjB+@Air-de-Roger>
+ <eebc4393-c322-0a2e-f600-18d384fe2647@citrix.com>
+ <9a1e9336-a3b4-530e-5ef5-abf193492380@suse.com>
+ <5a2df843-1acd-ad78-baff-e47befd0703c@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <Y3eWISfCCW/ktjB+@Air-de-Roger>
+In-Reply-To: <5a2df843-1acd-ad78-baff-e47befd0703c@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0130.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:94::11) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-ClientProxiedBy: FRYP281CA0007.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::17)
+ To VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|AM9PR04MB8273:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5660669-5dec-451f-00c5-08dacb9b1f09
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DU2PR04MB8773:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73141bf2-b115-49c4-49d0-08dacb9e4611
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	WzG12CwahfLN7vnOkDp9C+j9QcctkhqK4yL3xtQNsr7BwrFFFBc8PtoJrkYXf9iMV0iXUge+FBKvMPQNHZPeEwaPF3imyFpngqPrx/Bsr9LTbi9krHX6oexRchVHQNga7YWgM1Z+RWvnGnGoFzV+uyoJsczcrA9FSEOOYtTjE90mlE8DgSGZzlUgVg5M9603HBkkoKnGw6/vmd1AaRnZMz3ZRcFbvUxU6nljC7MDeVLH9PszzvO/BTc4+s3a80xWuboDbil1teHDuYxaP5RiUB9/XF4Y9Xm5HlQx72V6I9sTFFk0RplKix3takvPMd2Ol3H8MMYVgQsQYJ1ra8kL2MmQUwk7dQLyFVNxGZyu+QzGyKSBUz3xgT2pHPt8Hsd423JGiLFJ2Q7qyg+TaaU0seVURFEX7vlV9Q72tmSLQJxLFxTKyilXhh79j4+gnbrz9FyyrOAmSO9zPlttyV3C+XSX/SY5pfWWi10tMCqrpKk3VxKZtQ+g/lCKj2S6+WuY0JgPhHpFgTNkaIkSe5vur+W5AoVAsBTE+OS5bDFMBk9AIpliFBO9xgYUbysvZ9gbxXiDPn/3P+8KbKTeIn3Qc979f8jlIWAVRdXdjvWfgmMr6UpdPip2BKnWnUFv3ySlGA6ylCODDobbjV2tBLpeKW60fB4P5GF89RJtsW76hJ4V2+wVS2pnQprQMNirux1JBrSLJZrE4fB+IQ3PHE+Q/nbbn9SeOx8oH+YTG41/agY=
+	/M+BAIVc7cd2GjN2ZRCHI44mqgOUISRsdeXUT1DBhoHzIOSgrFoesqGqu28epKIKSHsaTDJKriiGa44mkMydCio0+aZDf2C/vsGYTiW0YSHDN1Gjmy+6OwnNM1R2MR4zoNpzecgh18LPiEPj2ytUIlYtkRwTDgmuxh+8//2+r0haRHGurQ86E80XDqi3k4oeys4rIvZMqP3T0yJzPUa4YSVmKe9SpZIusGHMm18KkxBlS8ATHYqnJOtajHCHqybr14kuxqCSmpu13wjEC8LXuE31Cd51RRr5V82v35p17RHjAnqhAq/o6RYE0+FASxPBcu/8yFfbnfQ/TJU92dtMb3SnimwS1lkfnFGVryKTPT0xG3S9656CiULvKLgxbgmFrWfoOHyS7k7NH+2QX4lk8cRyWz5/M0dOwoV1LaXPSqp3GfOfY0+fFHQjK4hPZIaWNkROkOnXvnCBX4AlMpqIVxKE2iNpd4Klar9tooOImJmCl85R1Y4pnSijGAh3qi2+DY95FVCzHrcc1e8V0C3F8kXRIFsGmMxT4CDf/Ic4w2/V4MTgw2ZTWcq7Modlv40mu0qAw8MjALwEWK6S814OGUEbhsClkmxBHd7UegefRh/xU2A4RvhkANoTAlU0mxwmVf+WUVFDGa8Yiy7ae7UvJY1/YuuKE+/WqawFCTHx8B2AYaIo9kK1fZnt5Ev9c7i4b9KIgS7FAxyqzjsWOl/Vw706rP/rzMlM06qY2K0oy9g=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(376002)(136003)(346002)(366004)(396003)(39860400002)(451199015)(86362001)(31696002)(36756003)(41300700001)(2616005)(66946007)(66476007)(4326008)(8676002)(186003)(8936002)(5660300002)(6486002)(478600001)(6512007)(26005)(316002)(53546011)(54906003)(6506007)(38100700002)(6916009)(66556008)(83380400001)(2906002)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(376002)(136003)(39860400002)(396003)(346002)(366004)(451199015)(83380400001)(36756003)(8936002)(186003)(41300700001)(38100700002)(2616005)(5660300002)(2906002)(31696002)(86362001)(53546011)(6916009)(31686004)(6506007)(54906003)(6486002)(316002)(478600001)(6512007)(26005)(4326008)(66556008)(8676002)(66476007)(66946007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dzMrc2FhZUNXaG1lY2ZBRytuTWlvbjRRd1RlWmxqNlB6YTJjRTgzNk1IWG8v?=
- =?utf-8?B?V1oveUVuMW9pdWZBNXI3T2V1amNHRU4yTlNRUGlMTjlVZm0wT0RDbzFUUzVt?=
- =?utf-8?B?NmxLbHhvRVo0MGkwVHY3d2NRekJnTWc3RjNpalhLUHZFdEtzcTBqY3o5dFNn?=
- =?utf-8?B?ZFd5bmRCanJnbHJxMzNLay9nWWljNjRGbDVDYVZQdnQ2MldQV2JLY2lVV0ZM?=
- =?utf-8?B?RGNvNVVIYlVCNlY3dldjVUtHQ2hVa2x1STNtUEVRSytzbHY5bTE3WjhkVXRH?=
- =?utf-8?B?eGdnYW9SSVdVclpxcE1WMnBxWGlLZTZaTy8zUDdzUUxpeEVUY2laWlVuV25Q?=
- =?utf-8?B?UTJJL3hvMUFWQndoOVV2UHNSd1p5bGhyb21ySTJrRnVOVWdENHFJaGxnL3Mz?=
- =?utf-8?B?NXBVUFh5WHMxVE0rRG8xVjFVTklWUWphVWhZWElNYUNaQ1AzUDZMZzZ0aytN?=
- =?utf-8?B?Sks2NmFQSC9CUWJjWnlIMGNYdE04V1JsVEFFMFlyVmtCdWgrRXR6d3AvTkNl?=
- =?utf-8?B?S04yQ2Q0S0t4OFdPNXBETC9qR3FYa3VLcnhnZzRla2tNK2o1ZWZGSkNVQzQy?=
- =?utf-8?B?MlJoNEtLdVlLQ1Z0cDBOV09LT1BONlZsZlllNjFQU3JrUWJvT1FxSzNVSmUz?=
- =?utf-8?B?WjAxamh4d2tSUGZKQkQ1Nit2WFpTdkMyR3BrQ0x1VjFzaHN0YXVzK0tBcVZC?=
- =?utf-8?B?cUttVXNmdkgvYm8yOHBLUzRGQUhhWmt6UTRublcvblFEdi9EMkpJYnIvZEhR?=
- =?utf-8?B?anR1aER3bkg5cFFZZjBCN080Tkd4WTlTSENFVUxlTCs4c0Z3VmNGclZoZ0tK?=
- =?utf-8?B?STBoV0g2bFpRbi8zaEFHdUM0Q3RYQ1luRW54Q3FYQmwyNTAxTVZCOHh3NmRQ?=
- =?utf-8?B?ZHZaeEp4NGZaUUcwNS9QdGhYeXI4Nkc3dEpPUDh6SzV1cVVUdUQ1aXB5ekNk?=
- =?utf-8?B?eE5XMTlSckU2WFRuVmVnMXFRV0srUC9NYVhVSHJmQjN2S0pOaHRWYVdkUWxr?=
- =?utf-8?B?OWlzS2tTNlBXY1JLc002b0dSTFV5c051TXBPUm1acnBxTklTKzhPTGVDRHND?=
- =?utf-8?B?N0xsZzJ2TktNUVdIc1J0UytrcTdiUjNzSTlyVEh2UkZXQlhTWDNsTUFNenhi?=
- =?utf-8?B?UFZBekF3TGc4WkwzQ3llMngzcHk2b3d3M0gvSjZlL085UjBSamp2ZGRXWHBr?=
- =?utf-8?B?UmNKU0xWNS8xTFhnUlFtMm44aFdzQWUvSWVKdS91M1NaUzNjS1FuVy9OMk10?=
- =?utf-8?B?ZVJyM1FQTm5PY0g5OHRtUFgxbUhLbHB5RTFYc2plSWFiRVBaNzhhUFFOU2pE?=
- =?utf-8?B?VTZkcDh3SXM5eksyWmhua2U5VXl5a1VTOXdVVE5WR29pNEpSeDEwQ2JRL2JY?=
- =?utf-8?B?M0NiMENFUTJRdll4aHNxSjZjLzIvZ3pxbjk1UnpMalZqSS92SUNGNzlZNU5q?=
- =?utf-8?B?MDNOTW0yVTlJUHNpMElYdEJYb3liNjRreVRQVDFCcThuS0dwQkd4QTRaQnRw?=
- =?utf-8?B?TURkNGQ3TVFHK1Jmb01rRlpoZTRtTEEzVGZqQXhuY2I0bUN3cDdaZVlpYmVQ?=
- =?utf-8?B?SjJKWjZaUVc1WnRMZDkyVVVORC9uOFhFOVRpQklITUcxQnJvVk1hbEh4OStp?=
- =?utf-8?B?ZFJGQXdsZzVXYW1ZdnNLbE96ZTg4bmZPRGpkTnNvTnJlSTU2bHNtV00xTnN4?=
- =?utf-8?B?cDdYQmtpditIQzlaRXU2cGtyWVRMeWd2SlUwdTNoY1EvUUVSa3BpazFtYTBG?=
- =?utf-8?B?cDdoeFdQRkRZVStEMEJMWUhCa0E2T3E4WUhFKzB0ZmpRTXB3dGs3QjF5V0sx?=
- =?utf-8?B?K3hMVHNzMjlRVVkvZ1ZkRzB1NUtWNnQrZFFZOFhtemZWQmtXK1dob0d0TGJy?=
- =?utf-8?B?OWkxRTNMTk1GWkFJcUluNml0aDFKdnJWQWE4TE4zeUh1MXd6UHA4RHJpd01N?=
- =?utf-8?B?MHcxdDFmSWVkQ2hQQVFVaDBNWmZJL0s1THdYVXExc2FRbUtjOEtpL2FDZnJV?=
- =?utf-8?B?eHBmN3N4QVRmQ3J1RzdFYkNwMy8rMEVlM0duMms0TnF2V0JxbXBKWEtCYjk3?=
- =?utf-8?B?SjFXelRvUk1qd1NUa0k4d2xnMDN6cStveGVscWl5bFdTb2pVZjJzVkQwZGor?=
- =?utf-8?Q?hZxKUwn+IOI/MaPspu2xTDrQk?=
+	=?utf-8?B?d3E0NXo4WnBMTUQrczJuQk8xRzZDL0VTV0Zsb2s5VnU0TUNXYk13N2RndkE1?=
+ =?utf-8?B?Y1JlMUJndDhaWmYrU1pNN3lRZElnKzAxMkVNMzAyUFduNzU3Q2xHdXQwMjM4?=
+ =?utf-8?B?SEdVb0p1YmFiNjZ2VkRua2tRWjlNcTBVTXdLdEk1ODhZaDJJRE9VRlNvR2pY?=
+ =?utf-8?B?OTkwTllzRW5XY3hXT01FZmNRaHJ6Qlp4RXlaWVo0YTJpNWduY2JkdFNoZmMr?=
+ =?utf-8?B?RDBqZlk3Vmtaa3VsSldDN3pXVWlsMWVvU3hvTEZoNE10a3BwczZxWDdERkJE?=
+ =?utf-8?B?QVQzSUo3Q1lNZWQ0dndIRjgwQk1VOTZrZnhBczUwL01JYy9aVkRJSjV6bWhz?=
+ =?utf-8?B?TWl2YnRFa2QrK0dZWThvQnRlT2huT29Hblk5a2dYWHFad0dNY2Q3UmdDVlNN?=
+ =?utf-8?B?YjZxYUxKWHI3VWoraXQ5TllVcGRFMmFwNU9sNFB0eGluR1JreUd1WWJpQUZl?=
+ =?utf-8?B?MmZWZnY2bi9OVndWbXJxZ2JOUlNubFAzTkRVZDVDZ29pN2EzMmplRVZ1QWg5?=
+ =?utf-8?B?Vm03eXhmc2IzT0FEK1VZOEFSUm9FYWg4UW1US2tJRnBYTE0xSlkwckNEQmRr?=
+ =?utf-8?B?N1B0U0pNY2dYYmVnak4xZ0NkNDN4dThFcHZ1d0kwVGpadENYQ2pxSzUrcTlv?=
+ =?utf-8?B?TGROdlh0VWhNeU1lNTB1Q2QxNVRPaDJ1RnhOUzd1SVdmc3VNdkJRYU1rT3Nh?=
+ =?utf-8?B?aExzTm4zTDRmQ3Y5dUpsdXdHZnlEL29aMy9CSS85bE5pK1c1bm01dkE0ZDA4?=
+ =?utf-8?B?dXQzdEdQeHRCcUNMYjhGQ2JpdFZOYmdrdk8ra1pkcmdtYXJTYmFQaVJqNHdO?=
+ =?utf-8?B?UXlCbkhhdEhyZytsOFliSEo3L2NVSXJSWWJLcUlSZlJ1U1lJTHArMEhyN3FL?=
+ =?utf-8?B?aUVmRmVGQzBTNStvZzlnS3IwVkRqaTFJUVVSSmdZdExKV1J1UU4ybTlBeU1L?=
+ =?utf-8?B?TUM3b1RnYWpBOUdTMDkzNVVBR1dIU1kwanB0OGdkM0duNnJqRFNZNXZEOVMr?=
+ =?utf-8?B?UmJ1ZjRodzVadUFnMUlPQm1tQVc2L0ozMDRaVzAzTDl6VW9aYTV6Snh1cDhZ?=
+ =?utf-8?B?bnRvdGI4M0ZJN2hiWVpCN3YzQ3VYWXlCS3oydXM0Sitnc2R0THQ2REZEam0y?=
+ =?utf-8?B?MWhZUHBjYkFxcm9zYktZRkk2alY0L2tmTmQvSkI5S3ZXbldIaHpIcFluRVli?=
+ =?utf-8?B?dTBPbkQ2MXUxdWxnS2dSNXRyNzh4dWwzZDFHRjZzTjl1SVRKS21sSXFzZFE5?=
+ =?utf-8?B?SFFvaFl4NGUwV3F5Yi9BZ2FjcVpyZ2dPMFNBTy9QTW9NUnBuejFDanA4cjlO?=
+ =?utf-8?B?KzVoMzJFYm9qZEx0cjZVdjFTZWw1ajhyNGgwN2k3UE44UGl0Tlk2azBIUFZl?=
+ =?utf-8?B?UVVQRGFaYWJVTHp0WDU1b2pMTkdTRDRISEhkRU9hVW4rbFJ0eFRvdHozR0Vq?=
+ =?utf-8?B?ekN0S2FBMHJUSmpCWDlIczhHcy83REg2czV2VWcyVUY4bS8rQnRTcXcyVUYv?=
+ =?utf-8?B?Q1pzV05WYUQ3TGlKUXNYaHdVbjkzZ0NFQTQ3WVJYeW5vTWhtY2Y2eDFENkFO?=
+ =?utf-8?B?RitqMWRVM3oyRUJ6VnJEWm02KzVlVzZ0VU5XTHBWV1hqbXFMUG1WdjJFMUlM?=
+ =?utf-8?B?VjVsdXdZZ0owYmMrMExUNldkSmJqOUFmMU9RekkrQWtvamNDSWcrbmtja1FR?=
+ =?utf-8?B?MTY4RUdEWk9pL3Vpdm9VMFNtV3g1YWxQR0MxLzd0WTdJUjlXTnFucTl3V0ht?=
+ =?utf-8?B?VnFhdlVqQ0NsQmx1VFF4NXQ5TXlCRitMS0NrZ3FlbzZIMjJ5bVIvUFVjZ3Ir?=
+ =?utf-8?B?NnUrWmtJalBXdlJMYlZMUjkxczVENXhNRmpTYkRtOEpqeDJpUStWMDFEd1Rm?=
+ =?utf-8?B?ZFhVR1pybnFLSHVKNVJGbUVjaDk0SDZJL1pSR1JsKzRUWC96Rkd2MklINTMv?=
+ =?utf-8?B?OVE3TjFZQUFsVTdaZFBRRXdLckJDNlhVVkwvNkZRaEEvWkxCOGRET1hWL0FP?=
+ =?utf-8?B?WkhJdGRNczRUcU5MTnoyTXBkUy9kT05LZmJWcnVXRXVWSXRSK2hoTDlCTVlp?=
+ =?utf-8?B?VjJYR3QvWjYvNXVBTC90MEhwU0VOSzRINmRWdkM3ZjFnKzRkUnVVYW45a1p6?=
+ =?utf-8?Q?aYlK9yl6T7ni4ScUkdje55NhR?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5660669-5dec-451f-00c5-08dacb9b1f09
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73141bf2-b115-49c4-49d0-08dacb9e4611
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2022 08:33:52.8962
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2022 08:56:26.8249
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 59jKmPE8h9rpq/2a/EjoG9ecgPU5UcIoVveoHI6qz2YVDR5OzuGpnTGetg1Q/rNOp85CntAHHQCWUiac8ZwtKg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8273
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6m4MkU6n7EV9s/5c6gTSxYs14umem1Ej5ulLIIc1QMV0QU0TtETvgKfpWtzs8ZD9sku244jPn66mQU7rLQJcfQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8773
 
-On 18.11.2022 15:26, Roger Pau Monné wrote:
-> On Fri, Nov 18, 2022 at 11:31:28AM +0100, Jan Beulich wrote:
->> Linux'es relatively new use of HVMOP_set_evtchn_upcall_vector has
->> exposed a problem with the marking of the respective vector as
->> pending: For quite some time Linux has been checking whether any stale
->> ISR or IRR bits would still be set while preparing the LAPIC for use.
->> This check is now triggering on the upcall vector, as the registration,
->> at least for APs, happens before the LAPIC is actually enabled.
->>
->> In software-disabled state an LAPIC would not accept any interrupt
->> requests and hence no IRR bit would newly become set while in this
->> state. As a result it is also wrong for us to mark the upcall vector as
->> having a pending request when the vLAPIC is in this state.
->>
->> To compensate for the "enabled" check added to the assertion logic, add
->> logic to (conditionally) mark the upcall vector as having a request
->> pending at the time the LAPIC is being software-enabled by the guest.
->>
->> Fixes: 7b5b8ca7dffd ("x86/upcall: inject a spurious event after setting upcall vector")
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> Don't one or both of the Viridian uses of vlapic_set_irq() need similar
->> guarding?
->>
->> Is it actually necessary for hvmop_set_evtchn_upcall_vector() and
->> hvm_set_callback_via() to call hvm_assert_evtchn_irq() when
->> evtchn_upcall_pending is false?
->>
->> --- a/xen/arch/x86/hvm/irq.c
->> +++ b/xen/arch/x86/hvm/irq.c
->> @@ -321,9 +321,10 @@ void hvm_assert_evtchn_irq(struct vcpu *
->>  
->>      if ( v->arch.hvm.evtchn_upcall_vector != 0 )
->>      {
->> -        uint8_t vector = v->arch.hvm.evtchn_upcall_vector;
->> +        struct vlapic *vlapic = vcpu_vlapic(v);
->>  
->> -        vlapic_set_irq(vcpu_vlapic(v), vector, 0);
->> +        if ( vlapic_enabled(vlapic) )
->> +           vlapic_set_irq(vlapic, v->arch.hvm.evtchn_upcall_vector, 0);
+On 18.11.2022 15:27, Andrew Cooper wrote:
+> On 18/11/2022 12:54, Jan Beulich wrote:
+>> On 18.11.2022 13:33, Andrew Cooper wrote:
+>>> On 18/11/2022 10:31, Jan Beulich wrote:
+>>>> Linux'es relatively new use of HVMOP_set_evtchn_upcall_vector has
+>>>> exposed a problem with the marking of the respective vector as
+>>>> pending: For quite some time Linux has been checking whether any stale
+>>>> ISR or IRR bits would still be set while preparing the LAPIC for use.
+>>>> This check is now triggering on the upcall vector, as the registration,
+>>>> at least for APs, happens before the LAPIC is actually enabled.
+>>>>
+>>>> In software-disabled state an LAPIC would not accept any interrupt
+>>>> requests and hence no IRR bit would newly become set while in this
+>>>> state. As a result it is also wrong for us to mark the upcall vector as
+>>>> having a pending request when the vLAPIC is in this state.
+>>> I agree with this.
+>>>
+>>>> To compensate for the "enabled" check added to the assertion logic, add
+>>>> logic to (conditionally) mark the upcall vector as having a request
+>>>> pending at the time the LAPIC is being software-enabled by the guest.
+>>> But this, I don't think is appropriate.
+>>>
+>>> The point of raising on enable is allegedly to work around setup race
+>>> conditions.  I'm unconvinced by this reasoning, but it is what it is,
+>>> and the stated behaviour is to raise there and then.
+>>>
+>>> If a guest enables evtchn while the LAPIC is disabled, then the
+>>> interrupt is lost.  Like every other interrupt in an x86 system.
+>> Edge triggered ones you mean, I suppose, but yes.
 > 
-> Shouldn't the vlapic_enabled() check itself be in vlapic_set_irq()? We
-> certainly don't want any vectors set until the vlapic is enabled, be
-> it event channel upcalls or any other sources.
+> For IO-APIC systems, you mostly lose line interrupts too, don't you?
+> 
+> The line will remain pending at the IO-APIC, but nothing in the system
+> will unwedge until someone polls the IO-APIC.
+> 
+> Either way...
+> 
+>>
+>>> I don't think there is any credible way a guest kernel author can expect
+>>> the weird evtchn edgecase to wait for an arbitrary point in the future,
+>>> and it's a corner case that I think is worth not keeping.
+>> Well - did you look at 7b5b8ca7dffd ("x86/upcall: inject a spurious event
+>> after setting upcall vector"), referenced by the Fixes: tag? The issue is
+>> that with evtchn_upcall_pending once set, there would never again be a
+>> notification.
+> 
+> Ok, so we do need to do something.
+> 
+>>  So if what you say is to be the model we follow, then that
+>> earlier change was perhaps wrong as well. Instead it should then have
+>> been a guest change (as also implicit from your reply) to clear
+>> evtchn_upcall_pending after vCPU info registration (there) or LAPIC
+>> enabling (here), perhaps by way of "manually" invoking the handling of
+>> that pending event, or by issuing a self-IPI with that vector.
+>> Especially the LAPIC enabling case would then be yet another Xen-specific
+>> on a guest code path which better wouldn't have to be aware of Xen. 
+> 
+> Without trying to prescribe how to fix this specific issue, wherever
+> possible we should be trying to limit the Xen-isms from non-Xen areas. 
+> There's a whole lot of poorly described and surprising behaviours which
+> have not stood the test of time.
+> 
+> In this case, it seems that we have yet another x86 PV-ism which hasn't
+> translated well x86 HVM.  Specifically, we're trying to overlay an
+> entirely shared-memory (and delayed return-to-guest) interrupt
+> controller onto one which is properly constructed to handle events in
+> realtime.
+> 
+> 
+> I even got as far as writing that maybe leaving it as-is was the best
+> option (principle of least surprise for Xen developers), but our
+> "friend" apic acceleration strikes again.
+> 
+> Xen doesn't always get a VMExit when the guest clears SW_DISABLE,
+> because microcode may have accelerated it.
 
-In principle yes, and I did consider doing so, but for several callers
-(potentially used frequently) this would be redundant with other
-checking they do already (first and foremost callers using
-vlapic_lowest_prio()). However, looking again I think vioapic_deliver()
-and vmsi_deliver() violate this as well in their dest_Fixed handling.
-(In both cases I'm actually inclined to also remove the odd *_inj_irq()
-helper functions.)
+But as per "APIC-Write Emulation" in the SDM we'd still get an APIC-write
+VM exit. If we didn't, how would our internal accounting of APIC enabled
+state (VLAPIC_SW_DISABLED) work? And the neighboring (to where I'm adding
+the new code) pt_may_unmask_irq() call then also wouldn't occur.
 
-> Maybe best to add an ASSERT in vlapic_set_irq() to be sure the lapic is
-> enabled, as other callers already check this before trying to inject?
-
-Perhaps, yes (once we've fixed paths where the check is presently
-missing).
-
-> Also, and not strictly related to your change, isn't this possibly
-> racy, as by the time you evaluate the return of vlapic_enabled() it is
-> already stale, as there's no lock to protect it from changing?
-
-Wouldn't this simply match a signal arriving to a physical LAPIC just
-the moment before it is enabled?
+I'm actually pretty sure we do too much in this case - in particular none
+of the vlapic_set_reg() should be necessary. But we certainly can't get
+away with doing nothing, and hence we depend on that VM exit to actually
+occur. Plus simply making the vlapic_set_reg() conditional also likely
+wouldn't do any good, so if anything we may want to split
+vlapic_reg_write() and invoke only the "2nd half" from
+vlapic_apicv_write().
 
 Jan
+
+> A consequence of this observation is that Xen cannot have
+> non-LAPIC-archtiectural behaviour in the vlapic emulation.  So I think
+> we need to find a solution to this problem that doesn't hook APIC_SPIV.
+> 
+> ~Andrew
+
 
