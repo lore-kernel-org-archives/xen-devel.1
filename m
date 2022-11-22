@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CAD5C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Nov 2022 15:21:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.447228.703250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BB1C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Nov 2022 15:21:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.447229.703264 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxV5E-0001IY-Sb; Tue, 22 Nov 2022 15:21:12 +0000
+	id 1oxV5G-0001l2-CZ; Tue, 22 Nov 2022 15:21:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 447228.703250; Tue, 22 Nov 2022 15:21:12 +0000
+Received: by outflank-mailman (output) from mailman id 447229.703264; Tue, 22 Nov 2022 15:21:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxV5E-0001Fk-Gz; Tue, 22 Nov 2022 15:21:12 +0000
-Received: by outflank-mailman (input) for mailman id 447228;
- Tue, 22 Nov 2022 15:21:11 +0000
+	id 1oxV5G-0001jW-5W; Tue, 22 Nov 2022 15:21:14 +0000
+Received: by outflank-mailman (input) for mailman id 447229;
+ Tue, 22 Nov 2022 15:21:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ahN6=3W=citrix.com=prvs=318e6c854=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1oxV5D-0000Pt-Hj
- for xen-devel@lists.xenproject.org; Tue, 22 Nov 2022 15:21:11 +0000
+ id 1oxV5E-0000Pt-Hn
+ for xen-devel@lists.xenproject.org; Tue, 22 Nov 2022 15:21:12 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4975d2f2-6a79-11ed-8fd2-01056ac49cbb;
- Tue, 22 Nov 2022 16:21:07 +0100 (CET)
+ id 4a1b946e-6a79-11ed-8fd2-01056ac49cbb;
+ Tue, 22 Nov 2022 16:21:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4975d2f2-6a79-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 4a1b946e-6a79-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1669130467;
+  d=citrix.com; s=securemail; t=1669130468;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ftaqE+uJKqGeClk6offLXZjZa6ryJgP18AvrDuvBHds=;
-  b=g2fmZ/SMKNZI3AztpnsMDKDOsT0r7X331qoTTfFC9ESLV5sZcFx/pPQB
-   r81fkaZtpb+DnJwnRIqGoKnNn1FqcghxcsxWd1KD0JlLuwlOgc1cSxuby
-   TsAs0mknAQoppXI7RQhhqIQBvHTxXsZvxGFIHYrr/3IbRsKJlfvayUWqf
-   g=;
+  bh=0EP93NE9oZj0G/r8F641xXDztqVUJkqAFbkxrSBRCso=;
+  b=FuUUYDEyZqu4ivHK7Yw/6WCpzlerdU5WmyhRVq+YM0MBcbWCTPRhYFlU
+   eBgwohKLX1zgzoVNwxMPbdtqW6FuhjWF9Mbv7OjitS8xUcGwr3JX62nCW
+   XpoFaShNyLhXyn6GIsg/JL9sj4c+rFrb5ndHVHBKOkIwWeOvxgGrlqqhG
+   4=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: None
-X-MesageID: 84920460
+X-MesageID: 84920461
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:4ifm4KNFDFveuKrvrR33l8FynXyQoLVcMsEvi/4bfWQNrUpxhWMBn
- DBJXDrSPveCMDf8KYt+atm+/ExSv8eHmN5mHAto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CU6jufQA+KmU4YoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGj9SuvzrRC9H5qyo4mpB5AZmOZingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0rsmPnNP8
- /EfFD4ESRW5lrrn5ryHVPY506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w/N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9KoDbH50JwB7wS
- mTu3VvZWxAlF96k4yeV2Wuyp/bszR7+YddHfFG/3qEz2wDCroAJMzUaXEW2ieO0gUm/X5RYM
- UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcLpDx2xXzZeCGQbMZp/6ZFwFWdCO
- kK1c83BWG1QoryTRHWh+L6zqAmjYXkzI1McenpRJeca2OUPsL3fnzqWEIgySP7u14ykcd3j6
- 2vU9XZj3t3/meZOjvzmpg6f3lpAs7CTFmYIChPrsnVJB++TTKqsfMSW5FfS9p6sx67JHwDa7
- BDodyVzhd3i7K1hdwTXGo3h5Jnzu5643MT02DaC3/AJrlxBAUKLc4FK+y1ZL0x0KMsCcjKBS
- BaN51IJucINYyH0M/Afj2eN5yMClPiIKDgYfqqMMoomjmZZKWdrAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMJrpIf0P8dd3Ls9DuYIWKtcWnz6PFcuilk7/uVdcDVbMIYo43JK1RrhRxMu5TM/9q
- L6z6+PiJ81jbdDD
-IronPort-HdrOrdr: A9a23:YXERXaPQhTruqcBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3gqy
- nOpoV86faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrZ
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:/m1Og6wtyNzAYIc9EMN6t+dlxirEfRIJ4+MujC+fZmUNrF6WrkUGz
+ mceWGzSPa7YNjT8fIglYIWwoB4CsJPSzdJiGQU4rCAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTbaeYUidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw//F+U0HUMja4mtC5AVnP6oT4DcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KTwfy
+ u4ZLj0KUh6KoOeM0erqbOdQmNt2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKQOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiFZkExB7E+
+ DuuE2LRMhcdNPmv5Rm81U2229HxrAarBLovLejtnhJtqALKnTFCYPEMbnO3qOe0olSzUNVeL
+ woT4CVGhbg/8gmnQ8fwWzW8oWWYpVgMVtxICeo45QqRjK3O7G6k6nMsF2AbLoZ87YlvGGJsh
+ gThc87V6SJH7eyqW3Ob+7CoozqVPBIEdT4kaxMaUl5QizX8m73fni4jX/46TvDk1o2uQGChq
+ 9yZhHNg3utO1Kbnw43+pAma2Gz0+/AlWyZvvm3qsnSZAhSVjWJPT6ih8hDl4PlJN+51pXHR7
+ SFfy6ByAA3jZKxhdRBho81XRtlFH97fbFXhbadHRvHMN12FohZPh7x47jBkP1tOOc0ZYzLva
+ 0K7kVoPus4LYSb0MvUpPd3Z5yEWIU/ITISNaxwpRoAWPsgZmPGvoUmCmnJ8L0iyyRNxwMnTy
+ L+QcNq2DGZyNEiU5GPeegrcuJd1rh0DKZT7H82nn0/+iODGDJNXIJ9cWGazgikCxPvsiG3oH
+ xx3baNmFz03vDXCXxTq
+IronPort-HdrOrdr: A9a23:wxi1dKDj1Ql8FhDlHemq55DYdb4zR+YMi2TC1yhKJiC9Ffbo8f
+ xG/c5rsiMc5wxxZJhNo7290ey7MBHhHP1OkO0s1NWZPDUO0VHAROoJ0WKh+UyEJ8SXzJ8l6U
+ 4KScZD4bPLYWSS9fyKgzWFLw==
 X-IronPort-AV: E=Sophos;i="5.96,184,1665460800"; 
-   d="scan'208";a="84920460"
+   d="scan'208";a="84920461"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Christian Lindig
-	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Edwin Torok
-	<edvin.torok@citrix.com>, Rob Hoes <Rob.Hoes@citrix.com>
-Subject: [PATCH 1/8] tools/oxenstored: Fix incorrect scope after an if statement
-Date: Tue, 22 Nov 2022 15:20:36 +0000
-Message-ID: <20221122152043.8518-2-andrew.cooper3@citrix.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Christian Lindig
+	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Rob Hoes
+	<Rob.Hoes@citrix.com>
+Subject: [PATCH 3/8] tools/ocaml/evtchn: Add binding for xenevtchn_fdopen()
+Date: Tue, 22 Nov 2022 15:20:38 +0000
+Message-ID: <20221122152043.8518-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20221122152043.8518-1-andrew.cooper3@citrix.com>
 References: <20221122152043.8518-1-andrew.cooper3@citrix.com>
@@ -90,49 +91,84 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-A debug statement got inserted into a single-expression if statement.
+From: Edwin Török <edvin.torok@citrix.com>
 
-Insert brackets to give the intended meaning, rather than the actual meaning
-where the "let con = Connections..." is outside and executed unconditionally.
+For live update, the new oxenstored needs to reconstruct an evtchn object
+around an existing file descriptor.
 
-This results in some unnecessary ring checks for domains which otherwise have
-IO credit.
-
-Fixes: 42f0581a91d4 ("tools/oxenstored: Implement live update for socket connections")
-Reported-by: Edwin Török <edvin.torok@citrix.com>
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Christian Lindig <christian.lindig@citrix.com>
 ---
 CC: Christian Lindig <christian.lindig@citrix.com>
 CC: David Scott <dave@recoil.org>
 CC: Edwin Torok <edvin.torok@citrix.com>
 CC: Rob Hoes <Rob.Hoes@citrix.com>
----
- tools/ocaml/xenstored/xenstored.ml | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
-index ffd43a4eee64..c5dc7a28d082 100644
---- a/tools/ocaml/xenstored/xenstored.ml
-+++ b/tools/ocaml/xenstored/xenstored.ml
-@@ -475,7 +475,7 @@ let _ =
+Split out of combined patch
+---
+ tools/ocaml/libs/eventchn/xeneventchn.ml      |  1 +
+ tools/ocaml/libs/eventchn/xeneventchn.mli     |  4 ++++
+ tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 19 +++++++++++++++++++
+ 3 files changed, 24 insertions(+)
+
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.ml b/tools/ocaml/libs/eventchn/xeneventchn.ml
+index dd00a1f0ead5..be4de82f46b9 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.ml
++++ b/tools/ocaml/libs/eventchn/xeneventchn.ml
+@@ -17,6 +17,7 @@
+ type handle
  
- 	let ring_scan_checker dom =
- 		(* no need to scan domains already marked as for processing *)
--		if not (Domain.get_io_credit dom > 0) then
-+		if not (Domain.get_io_credit dom > 0) then (
- 			debug "Looking up domid %d" (Domain.get_id dom);
- 			let con = Connections.find_domain cons (Domain.get_id dom) in
- 			if not (Connection.has_more_work con) then (
-@@ -490,7 +490,8 @@ let _ =
- 					let n = 32 + 2 * (Domains.number domains) in
- 					info "found lazy domain %d, credit %d" (Domain.get_id dom) n;
- 					Domain.set_io_credit ~n dom
--			) in
-+			)
-+		) in
+ external init: unit -> handle = "stub_eventchn_init"
++external fdopen: Unix.file_descr -> handle = "stub_eventchn_fdopen"
+ external fd: handle -> Unix.file_descr = "stub_eventchn_fd"
  
- 	let last_stat_time = ref 0. in
- 	let last_scan_time = ref 0. in
+ type t = int
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.mli b/tools/ocaml/libs/eventchn/xeneventchn.mli
+index 08c73376438e..98b3c86f3702 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.mli
++++ b/tools/ocaml/libs/eventchn/xeneventchn.mli
+@@ -47,6 +47,10 @@ val init: unit -> handle
+ (** Return an initialised event channel interface. On error it
+     will throw a Failure exception. *)
+ 
++val fdopen: Unix.file_descr -> handle
++(** Return an initialised event channel interface, from an already open evtchn
++    file descriptor.  On error it will throw a Failure exception. *)
++
+ val fd: handle -> Unix.file_descr
+ (** Return a file descriptor suitable for Unix.select. When
+     the descriptor becomes readable, it is safe to call 'pending'.
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+index 37f1cc4e1478..7bdf711bc150 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
++++ b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+@@ -69,6 +69,25 @@ CAMLprim value stub_eventchn_init(void)
+ 	CAMLreturn(result);
+ }
+ 
++CAMLprim value stub_eventchn_fdopen(value fdval)
++{
++	CAMLparam1(fdval);
++	CAMLlocal1(result);
++	xenevtchn_handle *xce;
++
++	caml_enter_blocking_section();
++	xce = xenevtchn_fdopen(NULL, Int_val(fdval), 0);
++	caml_leave_blocking_section();
++
++	if (xce == NULL)
++		caml_failwith("evtchn fdopen failed");
++
++	result = caml_alloc_custom(&xenevtchn_ops, sizeof(xce), 0, 1);
++	_H(result) = xce;
++
++	CAMLreturn(result);
++}
++
+ CAMLprim value stub_eventchn_fd(value xce)
+ {
+ 	CAMLparam1(xce);
 -- 
 2.11.0
 
