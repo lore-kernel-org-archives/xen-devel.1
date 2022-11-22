@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1926C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Nov 2022 15:21:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.447221.703178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B8EC433FE
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Nov 2022 15:21:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.447222.703190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxV54-00083F-C9; Tue, 22 Nov 2022 15:21:02 +0000
+	id 1oxV55-0008IX-La; Tue, 22 Nov 2022 15:21:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 447221.703178; Tue, 22 Nov 2022 15:21:02 +0000
+Received: by outflank-mailman (output) from mailman id 447222.703190; Tue, 22 Nov 2022 15:21:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxV54-000838-9Q; Tue, 22 Nov 2022 15:21:02 +0000
-Received: by outflank-mailman (input) for mailman id 447221;
- Tue, 22 Nov 2022 15:21:00 +0000
+	id 1oxV55-0008IO-HC; Tue, 22 Nov 2022 15:21:03 +0000
+Received: by outflank-mailman (input) for mailman id 447222;
+ Tue, 22 Nov 2022 15:21:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ahN6=3W=citrix.com=prvs=318e6c854=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1oxV52-00082v-QP
- for xen-devel@lists.xenproject.org; Tue, 22 Nov 2022 15:21:00 +0000
+ id 1oxV53-00082v-T5
+ for xen-devel@lists.xenproject.org; Tue, 22 Nov 2022 15:21:02 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 42fb11d6-6a79-11ed-91b6-6bf2151ebd3b;
- Tue, 22 Nov 2022 16:20:58 +0100 (CET)
+ id 453674ee-6a79-11ed-91b6-6bf2151ebd3b;
+ Tue, 22 Nov 2022 16:21:00 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42fb11d6-6a79-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 453674ee-6a79-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1669130458;
+  d=citrix.com; s=securemail; t=1669130460;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1BYJug4YTOsoAI8ImSgHkkpV3S64Z2EdA3k2jZuilTM=;
-  b=H2bLllQTlb4Rdou4xjz4HBpRYkzsLP9S1/L7bOJmr2bIf4XrkWwsKjq9
-   eoVkoH/W0c3W08DuLm+hiwWP7kbAdpJskQ1jlEl7gEbxK138Sg5gvAQlB
-   syaBHSUC9KweU5moHXSaAuB5hO8hZtFob/dPOOAijvoxw2LXS4ck2BNiC
-   Y=;
+  bh=U8Mtv4XJ0/V7GDXCKpr+dmKQ2P2iVaWXqmopORRTpv8=;
+  b=XqtljNjkrgSEWkZba8m12/Fm83Jy19xqetAP/d2hZ+P2QnCMgsZ8cHGd
+   0JhP1v2EeSXR14k+Lkkj26fERMcZdd5FmfrlqO5K+fvvxDl30E4mY8g2j
+   grMjpqOyA3r4O7+sJToMVVzBnoqjekVfZFtZ3QB/2gM2jYWUmIp4FFDTj
+   U=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: None
-X-MesageID: 85763990
+X-MesageID: 85763998
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:xhKYfqlZGOeppPb1VSwL6bno5gzTJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIdCD+BbK2NYzD8LdAiPInl8UoFvJXWztAwS1Bkrig1QSMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icf3grHmeIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE4p7aqaVA8w5ARkP6kS5gWGyxH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- d88BxY9MxOOvuSv5qm0V8p13cU5MNa+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsfYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9zhvH+
- DmXrjyR7hcyEtuOyGCm/SKXoKzkwjnBYK89Nv6Bz6s/6LGU7jNKU0BHPbehmtG1g1Czc8hSI
- EsV/mwpt6da3FymSJzxUgO1pFaAvwUAQJxAHusi8gaPx6HIpQGDCQA5oiVpMYJ88pVsHHpzi
- wHPz4iB6SFTXKO9alay0IfJrj6LPzEzNmAfRjZfTBEZ/Iy2yG0stS4jXuqPAYbs0IOkQWGrm
- mHbxMQtr+5N1JBWjs1X6XiC2mvx/caRE2bZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/5nzvZ5pyBWG3TZS82AJrlxAOxeLJOi8Gg1WKkZzKdojcjT0e
- kLVsg45zMYNYiryMPIpPNjvVZtCIU3c+TPND6C8UzazSsIpKF/vEN9GOCZ8IFwBYGBzyPpia
- P93gO6nDGoACLQP8dZFb7517FLqrwhgrV7uqWfTlUn7geHHPSTNIVrHWXPXBt0EAGq/iF292
- 75i2wGikX2zjMWWjvHrzLMu
-IronPort-HdrOrdr: A9a23:Oa0BY6kf0R2FyhxsXLoZZDJhUbPpDfIq3DAbv31ZSRFFG/Fxl6
- iV88jzsiWE7gr5OUtQ/uxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
- YET0EXMqyIMbEQt6jHCWeDf+rIuOP3k5yVuQ==
+IronPort-Data: A9a23:hTo2yKt7nX/mPVa7uVC3M74eeefnVAReMUV32f8akzHdYApBsoF/q
+ tZmKWqPaf+ON2ChfNklbdzloRkGvZSAn4JjTwBkrSBjQShH+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg0HVU/IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj5lv0gnRkPaoR5QaEzSFJZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwMm5dcw+EnMiP/rfqZbhuqpk+NJbkBdZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkARfAdMYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27I+
+ z2YpDWoUnn2MvTB4yie9Umj1tbhujHDVpgwL+K176Zl1Qj7Kms7V0RNCArTTeOCokK3Rd93M
+ UEf/Ssq668o+ySDXtT7GhG1vnOAlhodQMZLVf037hmXzajZ6BrfAXILJgOtc/R/6pVwH2Zzk
+ AbUwZW5XlSDrYF5V1qHqOeJsjSpExErKD4tNC0oEBYdvNba9dRbYg30cjpzLEKkpoSrR2Cok
+ 2vT/XlWa6Y71pBSifjilbzTq3f1/8WSEFZojunCdjj9hj6VcrJJcGBBBbLzyf9bZLiUQVCa1
+ JTvs5jPtbteZX1hecHkfQnsIF1Kz6zfWNEkqQQzd6TNDhz0k5NjFKgJiN2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSX0PPcqPtzuUZp0ksAM8OgJsdiNPrJzjmVZLlfbrEmCm2bNt4wSrKTcuf5mY
+ srKGSpdJX0bFb5m3FKLqxQ1iNcWK+FX7T27eK0XODz9jObOPyfME+9t3ZnnRrlR0Z5oaT79q
+ 753X/ZmAT0GOAEiSkE7KbIuEG0=
+IronPort-HdrOrdr: A9a23:DuguTqnm83TML+DVJOEj+peXo6TpDfIU3DAbv31ZSRFFG/Fxl6
+ iV8sjzsiWE8Qr5OUtQ/+xoV5PhfZqxz/JICMwqTNKftWrdyQyVxeNZnOjfKlTbckWUnINgPO
+ VbAsxD4bXLfCBHZK3BgTVQfexO/DD+ytHLudvj
 X-IronPort-AV: E=Sophos;i="5.96,184,1665460800"; 
-   d="scan'208";a="85763990"
+   d="scan'208";a="85763998"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Christian Lindig
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Christian Lindig
 	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Rob Hoes
 	<Rob.Hoes@citrix.com>
-Subject: [PATCH 2/8] tools/ocaml/evtchn: OCaml 5 support, fix potential resource leak
-Date: Tue, 22 Nov 2022 15:20:37 +0000
-Message-ID: <20221122152043.8518-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/8] tools/ocaml/evtchn: Extend the init() binding with a cloexec flag
+Date: Tue, 22 Nov 2022 15:20:39 +0000
+Message-ID: <20221122152043.8518-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20221122152043.8518-1-andrew.cooper3@citrix.com>
 References: <20221122152043.8518-1-andrew.cooper3@citrix.com>
@@ -93,14 +93,11 @@ Content-Transfer-Encoding: 8bit
 
 From: Edwin Török <edvin.torok@citrix.com>
 
-There is no binding for xenevtchn_close().  In principle, this is a resource
-leak, but the typical usage is as a singleton that lives for the lifetime of
-the program.
+For live update, oxenstored wants to clear CLOEXEC on the evtchn handle, so it
+survives the execve() into the new oxenstored.
 
-Ocaml 5 no longer permits storing a naked C pointer in an Ocaml value.
-
-Therefore, use a Custom block.  This allows us to use the finaliser callback
-to call xenevtchn_close(), if the Ocaml object goes out of scope.
+Have the new interface match how cloexec works in other Ocaml standard
+libraries.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -110,49 +107,76 @@ CC: Christian Lindig <christian.lindig@citrix.com>
 CC: David Scott <dave@recoil.org>
 CC: Edwin Torok <edvin.torok@citrix.com>
 CC: Rob Hoes <Rob.Hoes@citrix.com>
----
- tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 21 +++++++++++++++++++--
- 1 file changed, 19 insertions(+), 2 deletions(-)
 
+Split out of combined patch
+---
+ tools/ocaml/libs/eventchn/xeneventchn.ml      |  5 ++++-
+ tools/ocaml/libs/eventchn/xeneventchn.mli     |  9 ++++++---
+ tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 10 +++++++---
+ 3 files changed, 17 insertions(+), 7 deletions(-)
+
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.ml b/tools/ocaml/libs/eventchn/xeneventchn.ml
+index be4de82f46b9..c16fdd4674f7 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.ml
++++ b/tools/ocaml/libs/eventchn/xeneventchn.ml
+@@ -16,7 +16,10 @@
+ 
+ type handle
+ 
+-external init: unit -> handle = "stub_eventchn_init"
++external _init: bool -> handle = "stub_eventchn_init"
++
++let init ?(cloexec=true) () = _init cloexec
++
+ external fdopen: Unix.file_descr -> handle = "stub_eventchn_fdopen"
+ external fd: handle -> Unix.file_descr = "stub_eventchn_fd"
+ 
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn.mli b/tools/ocaml/libs/eventchn/xeneventchn.mli
+index 98b3c86f3702..870429b6b53a 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn.mli
++++ b/tools/ocaml/libs/eventchn/xeneventchn.mli
+@@ -43,9 +43,12 @@ val to_int: t -> int
+ 
+ val of_int: int -> t
+ 
+-val init: unit -> handle
+-(** Return an initialised event channel interface. On error it
+-    will throw a Failure exception. *)
++val init: ?cloexec:bool -> unit -> handle
++(** [init ?cloexec ()]
++    Return an initialised event channel interface.
++    The default is to close the underlying file descriptor
++    on [execve], which can be overriden with [~cloexec:false].
++    On error it will throw a Failure exception. *)
+ 
+ val fdopen: Unix.file_descr -> handle
+ (** Return an initialised event channel interface, from an already open evtchn
 diff --git a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
-index f889a7a2e4a1..37f1cc4e1478 100644
+index 7bdf711bc150..aa8a69cc1ecb 100644
 --- a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
 +++ b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
-@@ -33,7 +33,22 @@
- #include <caml/fail.h>
- #include <caml/signals.h>
+@@ -50,14 +50,18 @@ static struct custom_operations xenevtchn_ops = {
+ 	.compare_ext = custom_compare_ext_default, /* Can't compare     */
+ };
  
--#define _H(__h) ((xenevtchn_handle *)(__h))
-+#define _H(__h) (*((xenevtchn_handle **)Data_custom_val(__h)))
-+
-+static void stub_evtchn_finalize(value v)
-+{
-+	xenevtchn_close(_H(v));
-+}
-+
-+static struct custom_operations xenevtchn_ops = {
-+	.identifier  = "xenevtchn",
-+	.finalize    = stub_evtchn_finalize,
-+	.compare     = custom_compare_default,     /* Can't compare     */
-+	.hash        = custom_hash_default,        /* Can't hash        */
-+	.serialize   = custom_serialize_default,   /* Can't serialize   */
-+	.deserialize = custom_deserialize_default, /* Can't deserialize */
-+	.compare_ext = custom_compare_ext_default, /* Can't compare     */
-+};
- 
- CAMLprim value stub_eventchn_init(void)
+-CAMLprim value stub_eventchn_init(void)
++CAMLprim value stub_eventchn_init(value cloexec)
  {
-@@ -48,7 +63,9 @@ CAMLprim value stub_eventchn_init(void)
- 	if (xce == NULL)
- 		caml_failwith("open failed");
- 
--	result = (value)xce;
-+	result = caml_alloc_custom(&xenevtchn_ops, sizeof(xce), 0, 1);
-+	_H(result) = xce;
+-	CAMLparam0();
++	CAMLparam1(cloexec);
+ 	CAMLlocal1(result);
+ 	xenevtchn_handle *xce;
++	unsigned int flags = 0;
 +
- 	CAMLreturn(result);
- }
++	if ( !Bool_val(cloexec) )
++		flags |= XENEVTCHN_NO_CLOEXEC;
  
+ 	caml_enter_blocking_section();
+-	xce = xenevtchn_open(NULL, 0);
++	xce = xenevtchn_open(NULL, flags);
+ 	caml_leave_blocking_section();
+ 
+ 	if (xce == NULL)
 -- 
 2.11.0
 
