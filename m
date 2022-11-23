@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7292C46467
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Nov 2022 12:43:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.447548.703906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D3FC433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Nov 2022 12:44:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.447553.703917 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxp5v-0005Xu-Qn; Wed, 23 Nov 2022 12:43:15 +0000
+	id 1oxp6r-0006MK-3F; Wed, 23 Nov 2022 12:44:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 447548.703906; Wed, 23 Nov 2022 12:43:15 +0000
+Received: by outflank-mailman (output) from mailman id 447553.703917; Wed, 23 Nov 2022 12:44:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oxp5v-0005Xn-Nm; Wed, 23 Nov 2022 12:43:15 +0000
-Received: by outflank-mailman (input) for mailman id 447548;
- Wed, 23 Nov 2022 12:43:14 +0000
+	id 1oxp6r-0006M9-0C; Wed, 23 Nov 2022 12:44:13 +0000
+Received: by outflank-mailman (input) for mailman id 447553;
+ Wed, 23 Nov 2022 12:44:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hZVx=3X=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1oxp5u-0005Hq-7y
- for xen-devel@lists.xenproject.org; Wed, 23 Nov 2022 12:43:14 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1oxp6o-0005Hq-R4
+ for xen-devel@lists.xenproject.org; Wed, 23 Nov 2022 12:44:10 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 632d6ccc-6b2c-11ed-8fd2-01056ac49cbb;
- Wed, 23 Nov 2022 13:43:12 +0100 (CET)
+ id 86099b34-6b2c-11ed-8fd2-01056ac49cbb;
+ Wed, 23 Nov 2022 13:44:09 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3741861CAE;
- Wed, 23 Nov 2022 12:43:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 094C4C433C1;
- Wed, 23 Nov 2022 12:43:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B524361CAD;
+ Wed, 23 Nov 2022 12:44:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0B17C433D6;
+ Wed, 23 Nov 2022 12:44:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 632d6ccc-6b2c-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 86099b34-6b2c-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1669207389;
+	s=k20201202; t=1669207447;
 	bh=RW4HlKrC8HJ1IjGXRBDcvUafv7RxhxgfYV7vWL5KbOg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QK2zB+gHR4+h9XhfKkMLLNszNfc15wiSUlVRPPvnVU54dtWOPTeS91lrVPgCWLeYe
-	 LvtlVSfWgDCG/MLDYu0mmwkV0NE22KenT4qVUx0aLkamRWY8f8u5TPNqagOdeKUh6f
-	 +xe47da3M9R+1xbAYs23vsb3BxHsaspyxAkYnbEPUnzvCcHhskvycRNff1rQ7rx8df
-	 RGLc6X3YY82wsnEF2GShhLRjQ+MaLSClmrQStP0zQKEBwHw2mlGZ3zEo14bblSPyj/
-	 iqBnKE4pE6WLkZrK/2UoaPUj/jLjFAIXlPxqYWQx/hPAwJayjXQWZA0s+vbJJ9GBWB
-	 kcgr0tKJ2Zh+w==
+	b=YKwsxoTfPXwjYPOAfpkBSTZ7MjKUFdJ38TGWkamu32/BWNk0lLY52sAjFRklqx+IE
+	 2aFDlfqpZPc1k8lZjQptvza74vC5203tVRgMm9vZfQ7RT7Dhp6pjaUVFhs/iQ5JKH1
+	 P2fR6m8kF9YnpRSduZUDHcVjIAyhsvIdbNXxWwLp2ljyeUqf3fN5lvldXQAs8Tlibf
+	 aSvgGRtxZ3y5T1C6v8Tltq0p07ma4jpE0J6n6Xrg62clmsUGzuMqCikgcjUEfGltTk
+	 +NsSl9aeWcfBQ+F/SO1GTln6t9IOa/YnPBIWhPTgVzKh7r9rhekcOOhti+qSyjK3YJ
+	 PPMk9Vy+XzPFQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -66,12 +65,12 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Sasha Levin <sashal@kernel.org>,
 	sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.15 13/31] xen-pciback: Allow setting PCI_MSIX_FLAGS_MASKALL too
-Date: Wed, 23 Nov 2022 07:42:14 -0500
-Message-Id: <20221123124234.265396-13-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.10 09/22] xen-pciback: Allow setting PCI_MSIX_FLAGS_MASKALL too
+Date: Wed, 23 Nov 2022 07:43:24 -0500
+Message-Id: <20221123124339.265912-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221123124234.265396-1-sashal@kernel.org>
-References: <20221123124234.265396-1-sashal@kernel.org>
+In-Reply-To: <20221123124339.265912-1-sashal@kernel.org>
+References: <20221123124339.265912-1-sashal@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
