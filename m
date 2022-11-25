@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73954C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A4DC433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 25 Nov 2022 06:33:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.448073.704923 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.448071.704901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oySGn-0006YS-4g; Fri, 25 Nov 2022 06:33:05 +0000
+	id 1oySGb-00060L-K9; Fri, 25 Nov 2022 06:32:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 448073.704923; Fri, 25 Nov 2022 06:33:05 +0000
+Received: by outflank-mailman (output) from mailman id 448071.704901; Fri, 25 Nov 2022 06:32:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oySGn-0006YL-1K; Fri, 25 Nov 2022 06:33:05 +0000
-Received: by outflank-mailman (input) for mailman id 448073;
- Fri, 25 Nov 2022 06:33:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oySGb-00060E-HM; Fri, 25 Nov 2022 06:32:53 +0000
+Received: by outflank-mailman (input) for mailman id 448071;
+ Fri, 25 Nov 2022 06:32:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lMay=3Z=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oySGl-0006Fz-C8
- for xen-devel@lists.xenproject.org; Fri, 25 Nov 2022 06:33:03 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 02f2b2db-6c8b-11ed-8fd2-01056ac49cbb;
- Fri, 25 Nov 2022 07:33:02 +0100 (CET)
+ id 1oySGb-000608-3r
+ for xen-devel@lists.xenproject.org; Fri, 25 Nov 2022 06:32:53 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fc4e32b2-6c8a-11ed-91b6-6bf2151ebd3b;
+ Fri, 25 Nov 2022 07:32:51 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4FA8421ABF;
- Fri, 25 Nov 2022 06:33:02 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D2DD61FD6A;
+ Fri, 25 Nov 2022 06:32:50 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E857813A08;
- Fri, 25 Nov 2022 06:33:01 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6DC2B13A08;
+ Fri, 25 Nov 2022 06:32:50 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id pwBBN51hgGNAcgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 25 Nov 2022 06:33:01 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id fllnGZJhgGMicgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 25 Nov 2022 06:32:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02f2b2db-6c8b-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: fc4e32b2-6c8a-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1669357982; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sjhgFpq3nYstNjfYRzieZLbVirxwSh2gasV8m6EaAKQ=;
-	b=WDct/+NCNMhDQE3uXaBL1eSMquJ+aAJ6SOdEfs5IVwH8j5P+SVyd/tSR+tBqNwQ3iidDPA
-	qPLL8VKJZ6WUWyuleQ3KgkLtaxQHEHncfn9DIQ4xJeQ4EfmNCi9HqoUZ/c1BxcyVk5gkh2
-	WQGx86OgKF1EFuwnDxgcDw86HtASnuk=
+	t=1669357970; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=fZrAaP9FxcQcpFDkMAFfQgOSXJ+0iWC8i07BQBQ2SXo=;
+	b=qAMYWpJANmBzfUWnws2e+o51bVKp5OfZVCLdN1sqq6oUe7plzRkRxFH7v1ti+YPOfKqDij
+	DeqpeP5zWgrZ+zlIuvzVqn/rGFayVzBoQ8uHZB36Zy2RxspaDt63/0Ry37qukLJfQslZGt
+	m/vD0GB7HhzRyhYNuyATnQ0xKCggbNQ=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org
@@ -73,75 +71,31 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
+	xen-devel@lists.xenproject.org,
 	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 2/2] x86/xen: mark xen_pv_play_dead() as __noreturn
-Date: Fri, 25 Nov 2022 07:32:48 +0100
-Message-Id: <20221125063248.30256-3-jgross@suse.com>
+	Peter Zijlstra <peterz@infradead.org>
+Subject: [PATCH 0/2] x86/xen: don't return from xen_pv_play_dead()
+Date: Fri, 25 Nov 2022 07:32:46 +0100
+Message-Id: <20221125063248.30256-1-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221125063248.30256-1-jgross@suse.com>
-References: <20221125063248.30256-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Mark xen_pv_play_dead() and related to that xen_cpu_bringup_again()
-as "__noreturn".
+All play_dead() functions but xen_pv_play_dead() don't return to the
+caller.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/smp.h    | 2 +-
- arch/x86/xen/smp_pv.c | 4 ++--
- tools/objtool/check.c | 1 +
- 3 files changed, 4 insertions(+), 3 deletions(-)
+Adapt xen_pv_play_dead() to behave like the other play_dead() variants.
 
-diff --git a/arch/x86/xen/smp.h b/arch/x86/xen/smp.h
-index 6e90a312067b..22fb982ff971 100644
---- a/arch/x86/xen/smp.h
-+++ b/arch/x86/xen/smp.h
-@@ -21,7 +21,7 @@ void xen_smp_send_reschedule(int cpu);
- void xen_smp_send_call_function_ipi(const struct cpumask *mask);
- void xen_smp_send_call_function_single_ipi(int cpu);
- 
--void xen_cpu_bringup_again(unsigned long stack);
-+void __noreturn xen_cpu_bringup_again(unsigned long stack);
- 
- struct xen_common_irq {
- 	int irq;
-diff --git a/arch/x86/xen/smp_pv.c b/arch/x86/xen/smp_pv.c
-index b40b24382fe3..5801f93d567c 100644
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -381,7 +381,7 @@ static void xen_pv_cpu_die(unsigned int cpu)
- 	}
- }
- 
--static void xen_pv_play_dead(void) /* used only with HOTPLUG_CPU */
-+static void __noreturn xen_pv_play_dead(void) /* used only with HOTPLUG_CPU */
- {
- 	play_dead_common();
- 	HYPERVISOR_vcpu_op(VCPUOP_down, xen_vcpu_nr(smp_processor_id()), NULL);
-@@ -400,7 +400,7 @@ static void xen_pv_cpu_die(unsigned int cpu)
- 	BUG();
- }
- 
--static void xen_pv_play_dead(void)
-+static void __noreturn xen_pv_play_dead(void)
- {
- 	BUG();
- }
-diff --git a/tools/objtool/check.c b/tools/objtool/check.c
-index 43ec14c29a60..becdedc2de99 100644
---- a/tools/objtool/check.c
-+++ b/tools/objtool/check.c
-@@ -189,6 +189,7 @@ static bool __dead_end_function(struct objtool_file *file, struct symbol *func,
- 		"snp_abort",
- 		"stop_this_cpu",
- 		"usercopy_abort",
-+		"xen_cpu_bringup_again",
- 		"xen_start_kernel",
- 	};
- 
+Juergen Gross (2):
+  x86/xen: don't let xen_pv_play_dead() return
+  x86/xen: mark xen_pv_play_dead() as __noreturn
+
+ arch/x86/xen/smp.h      |  2 ++
+ arch/x86/xen/smp_pv.c   | 17 ++++-------------
+ arch/x86/xen/xen-head.S |  7 +++++++
+ tools/objtool/check.c   |  1 +
+ 4 files changed, 14 insertions(+), 13 deletions(-)
+
 -- 
 2.35.3
 
