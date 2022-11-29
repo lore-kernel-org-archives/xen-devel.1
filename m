@@ -4,29 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB767C4167B
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Nov 2022 15:12:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.449480.706247 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB75CC4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Nov 2022 15:15:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.449485.706258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p02HA-0005TP-VS; Tue, 29 Nov 2022 15:12:00 +0000
+	id 1p02KO-00068R-G5; Tue, 29 Nov 2022 15:15:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 449480.706247; Tue, 29 Nov 2022 15:12:00 +0000
+Received: by outflank-mailman (output) from mailman id 449485.706258; Tue, 29 Nov 2022 15:15:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p02HA-0005TI-S3; Tue, 29 Nov 2022 15:12:00 +0000
-Received: by outflank-mailman (input) for mailman id 449480;
- Tue, 29 Nov 2022 15:12:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p02KO-00068K-DH; Tue, 29 Nov 2022 15:15:20 +0000
+Received: by outflank-mailman (input) for mailman id 449485;
+ Tue, 29 Nov 2022 15:15:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lf4Y=35=citrix.com=prvs=3251faa97=Per.Bilse@srs-se1.protection.inumbo.net>)
- id 1p02HA-0005TC-Ac
- for xen-devel@lists.xenproject.org; Tue, 29 Nov 2022 15:12:00 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 29caf6a0-6ff8-11ed-91b6-6bf2151ebd3b;
- Tue, 29 Nov 2022 16:11:58 +0100 (CET)
+ <SRS0=YVFN=35=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1p02KN-00068E-2z
+ for xen-devel@lists.xenproject.org; Tue, 29 Nov 2022 15:15:19 +0000
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+ [66.111.4.29]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a0ba39c5-6ff8-11ed-8fd2-01056ac49cbb;
+ Tue, 29 Nov 2022 16:15:16 +0100 (CET)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id 66EC55C00CF;
+ Tue, 29 Nov 2022 10:15:15 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Tue, 29 Nov 2022 10:15:15 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 29 Nov 2022 10:15:12 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,152 +45,203 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29caf6a0-6ff8-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1669734718;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=FKAcdCfqcGrJYFfhNECxRdqUbzNbMUCLFKQUQIe3/uU=;
-  b=OXU0NGo4VmiLgzd+iZwLE5+GDf2eu/yfHdmL0deZymzf6WCFogQE6Zkn
-   3TfJ2mo8QRCJuJSdZdqowRGx8qtwwFkrGy6CdsGhz8yQjqxjTIKLxc9NZ
-   oceRq4Agy9nJd15tQZHqe9Lrpnzn06CyPPjeMqPMJYi9KUL9kfbNnBj9x
-   I=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 88308420
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:sWt9j6354+v2TVIF5/bD5VVxkn2cJEfYwER7XKvMYLTBsI5bp2ZTy
- TMcDWqHb6zZNGb8Lot/bd6zo0MFvZXcmtNnTQtkpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefTAOK5ULSfUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS9nuDgNyo4GlC5wVkNKgQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfJnl/+
- +AaDA43SwGC3dqKg4iCGulRv5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKkSbC/FMEg5/5JYWpOqywFP+dyZVgFmUubA28y7YywkZPL3FYIqOIozWH509ckCwq
- Wno8WX7WC0hNsHEyn3Y3nyPvtHItHauMG4VPOLhraM76LGJ/UQZDwcXTh28uuWjjVClWMN3L
- FYd8S4j66M18SSDTNPwQhm5q36spQMHVpxbFOhSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
- 1SV2dTzClRHt7mYSmmU8LuOmi+jIigeLWIEZigsQBMM5p/op4RbphbOSMtzVa24lNv4HRnuz
- D2Q6isznbMeiYgMzarT1VLImTW3vbDSUxU4oA7QWwqN9RhlbYSoY4ip71nz7vtaKoudCF6bs
- xA5d9O2tb5US8vXzWrUHbtLTOrBC+u53CP0pkZeEYUj0wqX3m+iJ7hsowtHdEdUC5NREdP2W
- 3P7tQRU7Z5VGXKla65rfo68Y/gXIbjc+cfNDa6NMIcXCnRlXErepXw1OxbMt4z4uBJ0+ZzTL
- 6t3ZipF4ZwyLa18hAS7SO4GuVPA7nBvnDiDLXwXIvnO7FZ/WJJ3Ye1dWLdtRrpjhE9hnOky2
- 4g3Cidy408DONASmwGOmWLpEXgELGIgGbf9oNFNe+iIL2JOQT9/WqGPmehwK9M6wcy5c9skG
- VnkCidlJKfX3yWbeW1mlFg8AF8QYXqPhS1iZnF9VbpZ83MifZyu/M8im2gfJNEaGBhY5acsF
- ZEtIpzQasmjvxybo1zxm7Gh9t09HPlq7CrSVxeYjM8XJcQ6GlSXpI+8I2MCNkAmV0KKiCf3m
- JX4viuzfHbJb1QzV646tNrHI4uNgEUg
-IronPort-HdrOrdr: A9a23:2/a/mqlzZccVWZBw3+DcwPBe/xjpDfIg3DAbv31ZSRFFG/Fxl6
- iV8sjzsiWE7Ar5OUtQ/+xoV5PhfZqxz/JICOoqTNKftWvdyQiVxehZhOOIqVDd8kXFh4lgPM
- xbEpSWZueeMbEDt7eZ3DWF
-X-IronPort-AV: E=Sophos;i="5.96,203,1665460800"; 
-   d="scan'208";a="88308420"
-From: Per Bilse <per.bilse@citrix.com>
-To: <linux-kernel@vger.kernel.org>
-CC: Per Bilse <per.bilse@citrix.com>, Juergen Gross <jgross@suse.com>,
-	"Stefano Stabellini" <sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>, Boris Ostrovsky
-	<boris.ostrovsky@oracle.com>, Jan Beulich <jbeulich@suse.com>, "moderated
- list:XEN HYPERVISOR INTERFACE" <xen-devel@lists.xenproject.org>
-Subject: [PATCH] drivers/xen/hypervisor: Expose VM SIF flags to userspace
-Date: Tue, 29 Nov 2022 15:00:57 +0000
-Message-ID: <20221129150058.266943-1-per.bilse@citrix.com>
-X-Mailer: git-send-email 2.31.1
+X-Inumbo-ID: a0ba39c5-6ff8-11ed-8fd2-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm1; t=1669734915; x=
+	1669821315; bh=Sselh9PMPp+YXx0b/8C6fFInUaOfP3jD6verSMjxhVM=; b=D
+	SbZ+WdKDRP/8Ypqbx8RaSRttN5rGOWO/bLOlkeUbmzjI8JMMdgkk9WBc5xuFGmin
+	dMUt0C/5vW3ZOkPLapoxIHRKZD6KVz9LXx3L5UKnQEDLx7HfsWB1VcBndcHVf9dH
+	H4lXZPp0LrunYuxuaAkTvg/PLAXs441upTNf0cC9o7GT7EVqI5AS2RhxMyNt3RCO
+	sgg5vTtt2DoBO4sPieGeVlxmwJB29PLkMY7SVDfocT4styC6lsXIT9Ngko9XeJxl
+	PVMai/wQ+ikjL3RIflAX6GunDAd0qIlXj2dMha+DlsSiLCRl57xfB+2vzXLPCvGc
+	ZM8rRMeCgGMi5sck4j2Qw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
+	:mime-version:references:reply-to:sender:subject:subject:to:to
+	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm1; t=1669734915; x=1669821315; bh=Sselh9PMPp+YXx0b/8C6fFInUaOf
+	P3jD6verSMjxhVM=; b=NQu39eszLsMlTbbZhV5nP6SPUjLTkF7cqZm3BjAcH9yA
+	qx89mT1+eh3XNBPr3AHrkBncoJVrM1H2K7rxbnbP4V17uJNVJffDKuBtsuop9Aul
+	dXpq3ozSWfbENecyWH1Btm78kVHbU1u1Bor9clnIKSq6LUMQnqfMJnjV2sQCHVto
+	7suWA2+qdkqDIRQ9lmYwugbfUDADCHsCujHzodkRCEETV7GZ0QpcMqX0PI0Hc17d
+	FhNS/+O4+wzxX3Cku1iWLrMcKAdHvKF+yIyKlZcm/+Aew/VBMC2BBku8cvHgUhHJ
+	jgIjTr0NHjqt0rUIpgUddBP46LpooqnwbRR9hM/cXw==
+X-ME-Sender: <xms:ASKGY0c_VQUEd80G-qdjJTURCmAJfzV0k_X0JEzrAn1sOWxyLHDL2g>
+    <xme:ASKGY2PXjwuX3tGNCi8iMCL6lBfZ-AN1B0SOSBTlWHa2KbHLlEZRRP_IFSAZylv1n
+    rd-BxY4wWhfYA>
+X-ME-Received: <xmr:ASKGY1j_ZYix7HKg0n-Q0HHXo5S_QOTQo6ovfzBs0qGdcdtf3ELcvWdUBIai1IZGP2iwxJUyrIBtLEMk1ji4A4bKvxLgDsPfzg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrtddtgdegfecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
+    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeetueeg
+    fefhffdvffetleeltdelkedvlefhkeehgfehhffhheehudeitdegheejleenucffohhmrg
+    hinhepkhgvrhhnvghlrdhorhhgpdhgihhthhhusgdrtghomhenucevlhhushhtvghrufhi
+    iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhish
+    hisghlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:AiKGY5802rBC-FmyHJMBKAsxHpVRHv57Shb4X1JPunnjVCHn3CtATA>
+    <xmx:AiKGYwsGB_mHWDvOM6HNoe2fYZAABoAsoPaxrnutQVkZyx2vciX08w>
+    <xmx:AiKGYwERdvQueWfSZ53vUphekMqtLND5N57nI4n2DOaDG9qYEp_ILg>
+    <xmx:AyKGY8I1ldEJtPL-GeMehBMyJU5b9S8xQN4qJBQ0uGCGjuEx80MRQg>
+Feedback-ID: i1568416f:Fastmail
+Date: Tue, 29 Nov 2022 16:15:10 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Alex Deucher <alexdeucher@gmail.com>
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
+	christian.koenig@amd.com,
+	Xen developer discussion <xen-devel@lists.xenproject.org>,
+	dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
+Subject: Re: AMD GPU problems under Xen
+Message-ID: <Y4Yh/gyt48zoIOyL@mail-itl>
+References: <Y4Mz0glMNwDPaFPO@itl-email>
+ <CADnq5_NfupG-DzNDJfntg+uSWH2m_8mLfj=ddkMdnNYNRhXWUw@mail.gmail.com>
+ <Y4Vngz5tTA74Qr8L@itl-email>
+ <CADnq5_P8kuSsSFatMq4g0r2yE3TW0Rqzm07+Kpv9wKTi0GGS-Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ldwT7sa60O/uU5QD"
+Content-Disposition: inline
+In-Reply-To: <CADnq5_P8kuSsSFatMq4g0r2yE3TW0Rqzm07+Kpv9wKTi0GGS-Q@mail.gmail.com>
 
-/proc/xen is a legacy pseudo filesystem which predates Xen support
-getting merged into Linux.  It has largely been replaced with more
-normal locations for data (/sys/hypervisor/ for info, /dev/xen/ for
-user devices).  We want to compile xenfs support out of the dom0 kernel.
 
-There is one item which only exists in /proc/xen, namely
-/proc/xen/capabilities with "control_d" being the signal of "you're in
-the control domain".  This ultimately comes from the SIF flags provided
-at VM start.
+--ldwT7sa60O/uU5QD
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 29 Nov 2022 16:15:10 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Alex Deucher <alexdeucher@gmail.com>
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
+	christian.koenig@amd.com,
+	Xen developer discussion <xen-devel@lists.xenproject.org>,
+	dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
+Subject: Re: AMD GPU problems under Xen
 
-This patch exposes all SIF flags in /sys/hypervisor/properties/flags,
-which will coexist with /proc/xen while dependencies are being migrated.
-Possible values are "privileged", "initdomain", "multiboot",
-"mod_start_pfn", and "virtmap", with "initdomain" being the equivalent
-of "control_d".
+On Tue, Nov 29, 2022 at 09:32:54AM -0500, Alex Deucher wrote:
+> On Mon, Nov 28, 2022 at 8:59 PM Demi Marie Obenour
+> <demi@invisiblethingslab.com> wrote:
+> >
+> > On Mon, Nov 28, 2022 at 11:18:00AM -0500, Alex Deucher wrote:
+> > > On Mon, Nov 28, 2022 at 2:18 AM Demi Marie Obenour
+> > > <demi@invisiblethingslab.com> wrote:
+> > > >
+> > > > Dear Christian:
+> > > >
+> > > > What is the status of the AMDGPU work for Xen dom0?  That was menti=
+oned in
+> > > > https://lore.kernel.org/dri-devel/b2dec9b3-03a7-e7ac-306e-1da024af8=
+982@amd.com/
+> > > > and there have been bug reports to Qubes OS about problems with AMD=
+GPU
+> > > > under Xen (such as https://github.com/QubesOS/qubes-issues/issues/7=
+648).
+> > >
+> > > I would say it's a work in progress.  It depends what GPU  you have
+> > > and what type of xen setup you are using (PV vs PVH, etc.).
+> >
+> > The current situation is:
+> >
+> > - dom0 is PV.
+> > - VMs with assigned PCI devices are HVM and use a Linux-based stubdomain
+> >   QEMU does not run in dom0.
+> > - Everything else is PVH.
+> >
+> > In the future, I believe the goal is to move away from PV and HVM in
+> > favor of PVH, though HVM support will remain for compatibility with
+> > guests (such as Windows) that need emulated devices.
+> >
+> > > In general, your best bet currently is dGPU add in boards because they
+> > > are largely self contained.
+> >
+> > The main problem is that for the trusted GUI to work, there needs to
+> > be at least one GPU attached to a trusted VM, such as the host or a
+> > dedicated GUI VM.  That VM will typically not be running graphics-
+> > intensive workloads, so the compute power of a dGPU is largely wasted.
+> > SR-IOV support would help with that, but the only GPU vendor with open
+> > source SR-IOV support is Intel and it is still not upstream.  I am also
+> > not certain if the support extends to Arc dGPUs.
+>=20
+> Can you elaborate on this?  Why wouldn't you just want to pass-through
+> a dGPU to a domU to use directly in the guest?
 
-Signed-off-by: Per Bilse <per.bilse@citrix.com>
----
- drivers/xen/sys-hypervisor.c | 26 ++++++++++++++++++++++++++
- include/xen/interface/xen.h  | 13 ++++++++-----
- 2 files changed, 34 insertions(+), 5 deletions(-)
+You can do that, but if that's your only GPU in the system, you'll lose
+graphical interface for other guests.
+But yes, simply pass-through of a dGPU is enough in some setups.
 
-diff --git a/drivers/xen/sys-hypervisor.c b/drivers/xen/sys-hypervisor.c
-index fcb0792f090e..7393e04bdb6d 100644
---- a/drivers/xen/sys-hypervisor.c
-+++ b/drivers/xen/sys-hypervisor.c
-@@ -379,6 +379,31 @@ static ssize_t buildid_show(struct hyp_sysfs_attr *attr, char *buffer)
- 
- HYPERVISOR_ATTR_RO(buildid);
- 
-+static ssize_t flags_show(struct hyp_sysfs_attr *attr, char *buffer)
-+{
-+	static char const *const sifstr[SIFN_NUM_SIFN] = {
-+		[SIFN_PRIV]  = "privileged",
-+		[SIFN_INIT]  = "initdomain",
-+		[SIFN_MULTI] = "multiboot",
-+		[SIFN_PFN]   = "mod_start_pfn",
-+		[SIFN_VIRT]  = "virtmap"
-+	};
-+	unsigned sifnum, sifmask;
-+	ssize_t ret = 0;
-+
-+	sifmask = ~(~0U << SIFN_NUM_SIFN);  // ...0000111...
-+	if (xen_domain() && (xen_start_flags & sifmask) != 0) {
-+		for (sifnum = 0; sifnum != SIFN_NUM_SIFN; sifnum++) {
-+			if ((xen_start_flags & (1<<sifnum)) != 0)
-+				ret += sprintf(buffer+ret, "%s ", sifstr[sifnum]);
-+		}
-+		buffer[ret-1] = '\n';
-+	}
-+	return ret;
-+}
-+
-+HYPERVISOR_ATTR_RO(flags);
-+
- static struct attribute *xen_properties_attrs[] = {
- 	&capabilities_attr.attr,
- 	&changeset_attr.attr,
-@@ -386,6 +411,7 @@ static struct attribute *xen_properties_attrs[] = {
- 	&pagesize_attr.attr,
- 	&features_attr.attr,
- 	&buildid_attr.attr,
-+	&flags_attr.attr,
- 	NULL
- };
- 
-diff --git a/include/xen/interface/xen.h b/include/xen/interface/xen.h
-index 0ca23eca2a9c..762a348abe3e 100644
---- a/include/xen/interface/xen.h
-+++ b/include/xen/interface/xen.h
-@@ -648,11 +648,14 @@ struct start_info {
- };
- 
- /* These flags are passed in the 'flags' field of start_info_t. */
--#define SIF_PRIVILEGED      (1<<0)  /* Is the domain privileged? */
--#define SIF_INITDOMAIN      (1<<1)  /* Is this the initial control domain? */
--#define SIF_MULTIBOOT_MOD   (1<<2)  /* Is mod_start a multiboot module? */
--#define SIF_MOD_START_PFN   (1<<3)  /* Is mod_start a PFN? */
--#define SIF_VIRT_P2M_4TOOLS (1<<4)  /* Do Xen tools understand a virt. mapped */
-+/* Text strings are printed out in sys-hypervisor.c, we guard   */
-+/* against mix-ups and errors by enumerating the flags.         */
-+enum { SIFN_PRIV, SIFN_INIT, SIFN_MULTI, SIFN_PFN, SIFN_VIRT, SIFN_NUM_SIFN };
-+#define SIF_PRIVILEGED      (1<<SIFN_PRIV)  /* Is the domain privileged? */
-+#define SIF_INITDOMAIN      (1<<SIFN_INIT)  /* Is this the initial control domain? */
-+#define SIF_MULTIBOOT_MOD   (1<<SIFN_MULTI) /* Is mod_start a multiboot module? */
-+#define SIF_MOD_START_PFN   (1<<SIFN_PFN)   /* Is mod_start a PFN? */
-+#define SIF_VIRT_P2M_4TOOLS (1<<SIFN_VIRT)  /* Do Xen tools understand a virt. mapped */
- 				    /* P->M making the 3 level tree obsolete? */
- #define SIF_PM_MASK       (0xFF<<8) /* reserve 1 byte for xen-pm options */
- 
--- 
-2.31.1
+> Are you sure?  I didn't think intel's GVT solution was actually
+> SR-IOV.  I think GVT is just a paravirtualized solution.
 
+Yes, it's a paravirtualized solution, with device emulation done in dom0
+kernel. This, besides being rather unusual approach in Xen world
+(emulators, aka IOREQ servers usually live in userspace) puts rather
+complex piece of code that interacts with untrusted data (instructions
+=66rom guests) in almost the most privileged system component, without
+ability to sandbox it in any way. We consider it too risky for Qubes OS,
+especially since the kernel patches were never accepted upstream and the
+Xen support is not maintained anymore.
+
+The SR-IOV approach Demi is talking about is newer development,
+supported since Adler Lake (technically, IGD in Tiger Lake presents
+SR-IOV capability too, but officially it's supported since ADL). The driver
+for managing it is in the process of upstreaming. Some links here:
+https://github.com/intel/linux-intel-lts/issues/33
+(I have not tried it, yet)
+
+>  That aside,
+> we are working on enabling virtio gpu with our GPUs on xen in addition
+> to domU passthrough.
+
+That's interesting development. Please note, Linux recently (part of
+6.1) gained support to use grant tables with virtio. This allows having
+backends without full access to guest's memory. The work is done in
+generic way, so a driver using proper APIs (including DMA) should work
+out in such setup out of the box. Please try to not break it :)
+
+> >
+> > > APUs and platforms with integrated dGPUs
+> > > are a bit more complicated as they tend to have more platform
+> > > dependencies like ACPI tables and methods in order for the driver to
+> > > be able to initialize the hardware properly.
+> >
+> > Is Xen dom0/domU support for such GPUs being worked on?  Is there an
+> > estimate as to when the needed support will be available upstream?  This
+> > is mostly directed at Christian and other people who work for hardware
+> > vendors.
+>=20
+> Yes, there are some minor fixes in the driver required which we'll be
+> sending out soon and we had to add some ACPI tables to the whitelist
+> in xen, but unfortunately the ACPI tables are AMD platform specific so
+> there has been pushback from the xen maintainers on accepting them
+> because they are not an official part of the ACPI spec.
+
+Can the driver work without them? Such dependency, as you noted above,
+make things rather complicated for pass-through (specific ACPI tables
+can probably be made available to the guest, but usually guest wouldn't
+see all the resources they talk about anyway).
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--ldwT7sa60O/uU5QD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmOGIf0ACgkQ24/THMrX
+1ywEbQf+PEElPPxfmzpsF7KCl9us8eI4hUgwXur7ALf7DdhApavQOMgYmyMp47lO
+shMbFQygjqSJ4YCTvtRCWmEDIqmUduv/q6M69Hxv5bldxDx2qe/2/wwcUcQ4jKQB
+34BJNGeLyuuxtgJ1Fw7EvmUVVm3TKTa57r5YqVpxmXkQ28or+2vbHmY8BGeQgYmn
+k6rJ24EDNfTs/fINw68+Rigvdt8tNKRvl69aHpwGMO1F6/k4EfBmqYUB6Al19xrY
+SIXSRI9skw/5UGR7fJ6ST7Cmm1FSOKWWkq/gmTMNy7qWbtSbelUouNPa+WAorBHr
+xBAtDguDGYb4pWCilHWOxHrC05G7Zw==
+=qLiG
+-----END PGP SIGNATURE-----
+
+--ldwT7sa60O/uU5QD--
 
