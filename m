@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB311C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Nov 2022 17:33:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.450102.707299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0085AC47089
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Nov 2022 17:33:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.450104.707316 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0Qxj-00066g-Ov; Wed, 30 Nov 2022 17:33:35 +0000
+	id 1p0Qxl-0006Y0-5e; Wed, 30 Nov 2022 17:33:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 450102.707299; Wed, 30 Nov 2022 17:33:35 +0000
+Received: by outflank-mailman (output) from mailman id 450104.707316; Wed, 30 Nov 2022 17:33:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0Qxj-00065O-J0; Wed, 30 Nov 2022 17:33:35 +0000
-Received: by outflank-mailman (input) for mailman id 450102;
- Wed, 30 Nov 2022 17:33:34 +0000
+	id 1p0Qxk-0006Wx-Ve; Wed, 30 Nov 2022 17:33:36 +0000
+Received: by outflank-mailman (input) for mailman id 450104;
+ Wed, 30 Nov 2022 17:33:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7pd0=36=citrix.com=prvs=3269fc642=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1p0Qxi-00053d-OK
- for xen-devel@lists.xenproject.org; Wed, 30 Nov 2022 17:33:34 +0000
+ id 1p0Qxj-00053d-OM
+ for xen-devel@lists.xenproject.org; Wed, 30 Nov 2022 17:33:35 +0000
 Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
  [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1be97799-70d5-11ed-91b6-6bf2151ebd3b;
+ id 1cf9c908-70d5-11ed-91b6-6bf2151ebd3b;
  Wed, 30 Nov 2022 18:33:33 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,80 +38,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1be97799-70d5-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 1cf9c908-70d5-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1669829613;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=nRNYjN3h3CCOcy1einFYCiePqE0uvjAOH9wR0gDEFwk=;
-  b=L8Fy8iTrQkDNdIthMQhwTx5EjiLbnU5vGWHMYkVElTqvwOx49SA6yIT5
-   JUwZvrDzr6nSoEMY0w/2wEh8Krx9800ba1gP0gqh6mvUZ1LmGaWrNettm
-   YbWYiPuyZjb7FYiBjGwOYBR6QBMJONZa5vYW9NArFNcNpfd3JciS88U9x
-   8=;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=1DtJVEJDuLs3FUpxmGPE7DJyqdoBc05y8Jvs9j/LnvE=;
+  b=fMZ9hJ1QkRo8MZM28UC277p+pvl1EpZI5sz1aAkdhgzP/BJvNz3hAGjM
+   ZkqMhYIEAgMe678iuARGqgS3EEX0WcEoruxnmqG2JFifm2ZMJ8VOUS6no
+   Gpq9NYc9vZmQpVD+E3OnEkvtMdV4jA48j5aMIyRfAEv8bna4/x0Lo0pH6
+   0=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 84930607
+X-MesageID: 84930632
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:VRU5qKLn40two+x+FE+RxpUlxSXFcZb7ZxGr2PjKsXjdYENSg2cOz
- GMWC2rXOKyLNDCnKYp/atjko0sBvJbRndVrSAdlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPdwP9TlK6q4mlB5wdmPasjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c59OUwSx
- aQ7dAwXYzCN3biTwJGSGu5z05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpPE+ojx5nYz/7DLozkPmpgD/jdCdfq3qepLYt4niVxwt0uFToGIqJK4fSG50K9qqej
- mfXzlTJIB0FDuCkyjq9tVmDmOSVzRquDer+E5Xnr6U30TV/3Fc7Fxk+RVa95/6jhSaWV9tBJ
- mQO9yEprKx081akJvHtUhv9rHOasxo0X9tLD/Z8+AyL0rDT4QuSGi4DVDEpVTA9nJZoH3pwj
- AbPxo63Q2w02FGIdZ6D3r2sgG+CYQtJEXUPRSFeFy4FwPCzp55m23ojUe1fOKKyi9T0HxT5z
- DaLsDUyit0vsCIb60mo1QuZ2mzx//AlWiZwv1yKBTz9smuVcab/P+SVBU7nAeGsxWpzZn2Ip
- zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3Y1R/HNFBz3oRZPmLy8BxkgTHqFyu5eJVfUj
- Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27CKGLMoQQP8YtKFHvEMRSiai4hTiFfK8EyPFXB
- HtmWZz0USZy5VpPk1JauNvxIZd0n3tjlAs/tLjwzgi90Kr2WZJmYe5tDbd6VchgtPnsiFyMo
- 75i2z6il003vBvWPnOGrub+7DkicRAGOHwBg5UMJ7TafVo7QDhJ5j246epJRrGJVp99zo/gl
- kxRkGcDlzITWVWvxd22V01e
-IronPort-HdrOrdr: A9a23:4k4Kzqq9ZxEBJIM7mHsaWaUaV5oReYIsimQD101hICG8cqSj9v
- xG+85rrCMc6QxhI03I9urwW5VoLUmyyXcx2/h0AV7AZniBhILLFvAB0WKK+VSJcEeSmtK1l5
- 0QFJSWYOeAdWSS5vyb3ODXKbgdKaG8gcWVuds=
+IronPort-Data: A9a23:g3UpkaAHq4F/ixVW/+Hjw5YqxClBgxIJ4kV8jS/XYbTApDJ30WEEz
+ jYWXD2EPa2DM2X0eI8jPt+39x9TvZ+BxoJmQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nNHuCnYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFtcpvlDs15K6o4WpD5gRlDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIw3+NKDDt1y
+ 80hLHMTNxG7nfyn6r2iY7w57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
+ pdHL2o0BPjDS0Qn1lM/BZ4gneHumn7ldD5wo1OJv6snpWPUyWSd1ZC9bIuOIoLRH625mG7Gh
+ SHZvE6nWysxNYaB1gqf7W2CxermyHaTtIU6S+Tjq68CbEeo7mAaFhA+T1awpvi9zEmkVLp3K
+ UYZ5y4vpqga71GwQ5/2WBjQiG6JuFsQVsRdF8U+6RqR0ezE7gCBHG8GQzVdLts8u6ceXic23
+ 1WEm9foAz1Hs7CPT3+ZsLCOoluaJiw9PWIEIygeQmMt4cTnoYw1pgLCSJBkCqHdszHuMWium
+ XbQ9nF43uhNy55Qv0mmwbzZqxepm5WTdTAE3wGUQDuk1hlndaSqfqX9vDA38s18BIqeS1CAu
+ l0NlM6f8P0CAPmxqcCdfAkeNOr3vqjYaVUwlXYqRsB8rGr1pxZPaKgKuFlDyFFV3tHokNMDS
+ Gvaoktv6ZBaJxNGhocnMtvqW6zGIUUNfOkJt8w4jPIUOvCdlyfdpkmCgHJ8OEiz+HXAaYllZ
+ f+mnT+EVB7285hPwjusXPs62rQ23C04zm67bcmlkUX4jeTAOSDJFelt3L6yggYRtvvsTOL9q
+ oY3Cid3408HDL2Wjtf/rub/0mzm3VBkXMur+qS7h8aIIxZ8GXFJNhMi6epJRmCRpIwMzr2g1
+ ijkCidlJK/X2SWvxfOiNioyN9sCnP9X8RoGAMDbFQ/ziiJ6PtbytP53mlleVeBPydGPBMVcF
+ 5EtE/hsyNweFFwrJxx1gUHBkbFf
+IronPort-HdrOrdr: A9a23:dVHzEa9bABD2WhQuQeluk+AcI+orL9Y04lQ7vn2ZKSY5TiX4rb
+ HKoB1/73XJYVkqN03I9ervBEDiewK/yXcW2+ks1N6ZNWGLhILBFupfBODZsl7d8kPFl9K01c
+ 1bAtJD4N+bNykGsS4tijPIb+rJw7O8gd+Vbf+19QYIcenzAZsQlzuQDGygYypLbTgDP7UVPr
+ yG6PFKojKxEE5nFfhSVhE+Lo7+T8SgruOeXSI7
 X-IronPort-AV: E=Sophos;i="5.96,207,1665460800"; 
-   d="scan'208";a="84930607"
+   d="scan'208";a="84930632"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
- Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 4/5] tools/ocaml/libs/xb: add missing stdint.h
-Date: Wed, 30 Nov 2022 17:32:36 +0000
-Message-ID: <dc5a5277881e2121b86ac544050ad6d2e94e747b.1669829264.git.edvin.torok@citrix.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Christian Lindig
+	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Anthony PERARD
+	<anthony.perard@citrix.com>
+Subject: [PATCH v1 0/5] OCaml bindings for hvm_param_get and xc_evtchn_status
+Date: Wed, 30 Nov 2022 17:32:32 +0000
+Message-ID: <cover.1669829264.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1669829264.git.edvin.torok@citrix.com>
-References: <cover.1669829264.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-xs_wire.h fails to compile without this, and a slight rearrangement of
-header includes (e.g. by clang-format) could cause the file to fail to
-compile.
+Add bindings to xc_evtchn_status and hvm_param_get, useful for xenopsd
+and for recovery from failed live updates.
 
-Be more robust and include the needed header file.
----
- tools/ocaml/libs/xb/xenbus_stubs.c | 1 +
- 1 file changed, 1 insertion(+)
+.editorconfig helps me format the source code with the desired Xen
+coding style (now that the reindent patch has switched it to spaces as
+desired by the Xen project).
+If you don't have an editor set up to use editorconfig this is a no-op.
 
-diff --git a/tools/ocaml/libs/xb/xenbus_stubs.c b/tools/ocaml/libs/xb/xenbus_stubs.c
-index e5206f64d4..ce6d33b23e 100644
---- a/tools/ocaml/libs/xb/xenbus_stubs.c
-+++ b/tools/ocaml/libs/xb/xenbus_stubs.c
-@@ -15,6 +15,7 @@
-  */
- 
- #include <unistd.h>
-+#include <stdint.h>
- #include <stdlib.h>
- #include <sys/mman.h>
- #include <string.h>
+.clang-format is an experiment for the OCaml subtree in slowly moving
+its code to be closer to the Xen coding style. There is no Xen coding
+style as such in clang-format, this takes GNU as a base and tweaks it to
+be as close to CODING_STYLE as possible (there is just one different in
+handling of do/while as far as I can tell).
+It should be an improvement over the current situation where the OCaml C
+bindings do not follow Xen coding style, and further bindings added that
+follow the style of the code around them would not follow it either.
+It doesn't yet reformat anything with it, just allows someone that
+submits patches to use it if desired (e.g. on new code).
+
+Edwin Török (5):
+  CODING-STYLE: add .editorconfig to clarify indentation uses spaces
+  tools/ocaml/libs/xc: add binding to xc_evtchn_status
+  tools/ocaml/libs/xc: add hvm_param_get binding
+  tools/ocaml/libs/xb: add missing stdint.h
+  CODING_STYLE: add .clang-format
+
+ .editorconfig                       | 20 +++++++
+ tools/ocaml/.clang-format           |  9 ++++
+ tools/ocaml/libs/xb/xenbus_stubs.c  |  1 +
+ tools/ocaml/libs/xc/xenctrl.ml      | 58 +++++++++++++++++++++
+ tools/ocaml/libs/xc/xenctrl.mli     | 60 +++++++++++++++++++++
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 81 +++++++++++++++++++++++++++++
+ 6 files changed, 229 insertions(+)
+ create mode 100644 .editorconfig
+ create mode 100644 tools/ocaml/.clang-format
+
 -- 
 2.34.1
 
