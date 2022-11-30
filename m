@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6D19C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Nov 2022 12:15:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.449845.706830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC9E6C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Nov 2022 12:16:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.449847.706852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0M04-0005Ox-RX; Wed, 30 Nov 2022 12:15:40 +0000
+	id 1p0M0G-0005xO-C7; Wed, 30 Nov 2022 12:15:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 449845.706830; Wed, 30 Nov 2022 12:15:40 +0000
+Received: by outflank-mailman (output) from mailman id 449847.706852; Wed, 30 Nov 2022 12:15:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0M04-0005Oq-Oq; Wed, 30 Nov 2022 12:15:40 +0000
-Received: by outflank-mailman (input) for mailman id 449845;
- Wed, 30 Nov 2022 12:15:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1p0M0G-0005xD-97; Wed, 30 Nov 2022 12:15:52 +0000
+Received: by outflank-mailman (input) for mailman id 449847;
+ Wed, 30 Nov 2022 12:15:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Jz7r=36=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1p0M04-0005Ok-Bz
- for xen-devel@lists.xenproject.org; Wed, 30 Nov 2022 12:15:40 +0000
+ id 1p0M0F-0005h2-Gx
+ for xen-devel@lists.xenproject.org; Wed, 30 Nov 2022 12:15:51 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id b0933d39-70a8-11ed-8fd2-01056ac49cbb;
- Wed, 30 Nov 2022 13:15:34 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id ba6cb99f-70a8-11ed-91b6-6bf2151ebd3b;
+ Wed, 30 Nov 2022 13:15:50 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B68F4D6E;
- Wed, 30 Nov 2022 04:15:44 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75BCB12FC;
+ Wed, 30 Nov 2022 04:15:56 -0800 (PST)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 740693F73D;
- Wed, 30 Nov 2022 04:15:37 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 348A93F73D;
+ Wed, 30 Nov 2022 04:15:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,76 +45,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0933d39-70a8-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: ba6cb99f-70a8-11ed-91b6-6bf2151ebd3b
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: michal.orzel@amd.com,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 0/3] Yocto Gitlab CI
-Date: Wed, 30 Nov 2022 12:15:06 +0000
-Message-Id: <cover.1669810269.git.bertrand.marquis@arm.com>
+Subject: [PATCH v5 3/3] automation: Add CI test jobs for Yocto
+Date: Wed, 30 Nov 2022 12:15:09 +0000
+Message-Id: <e64015d3e8682d068223e94f3bfc8ad823b27a65.1669810269.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1669810269.git.bertrand.marquis@arm.com>
+References: <cover.1669810269.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series is a first attempt to check if we could use Yocto in
-gitlab ci to build and run xen on qemu for arm, arm64 and x86.
+From: Michal Orzel <michal.orzel@amd.com>
 
-The first patch is introducing a container template from which container
-files can be generated for all combinations we want to support (qemu
-arm, arm64 and x86 targets and hosts x86_64 and arm64).
-It is also introducing a generic build script (build-yocto.sh) that is
-used to create, build and run a Yocto project.
+Populate test jobs for Yocto based tests using the provided containers.
+Due to the size restrictions, it is currently not possible to split the
+build and run tasks, therefore everything is done in a single step.
 
-The second patch is adding a way to easily clean locally created
-containers.
+Test jobs for the supported Yocto targets are generic to avoid the
+necessity to add new ones after each Yocto release. The only thing
+required to be changed after updating the containers is the variable
+YOCTO_VERSION stored in a .yocto-test template.
 
-The third patch is introducing some gitlab CI templates and jobs so that
-we can test a Xen source tree in gitlab-CI using Yocto.
-
-This has been tested on a x86 host machine and on an arm host machine
-(with mk_dsdt.c fix).
-
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
 Changes in v5:
-- automatic cleanup of generated docker files using INTERMEDIATE
-- typo fixes
-- rebase on Stefano's next branch
-- remove clean rule cleaning all containers
-
+- none
 Changes in v4:
-- rework the container generation to support multiple hosts
-- rework the container generation to use a single template for all
-  docker files (make process is generating the docker files).
-
+- add .yocto-test for arm64 and x86
+- make yocto jobs use arm64 version
 Changes in v3:
-- limit number of jobs in yocto
-- do not copy build script inside container
-- add patch from Michal to create gitlab jobs
+- patch added
+---
+ automation/gitlab-ci/test.yaml | 43 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
-Changes in v2:
-- remove gitignore patch which was merged
-- add a --dump-log support in build-yocto.sh script and use it during
-  container creation to see the error logs.
-
-
-Bertrand Marquis (2):
-  automation: Create Yocto docker images
-  automation: Add a clean rule for containers
-
-Michal Orzel (1):
-  automation: Add CI test jobs for Yocto
-
- automation/build/Makefile                  |  24 +-
- automation/build/yocto/build-yocto.sh      | 351 +++++++++++++++++++++
- automation/build/yocto/yocto.dockerfile.in | 114 +++++++
- automation/build/yocto/yocto.inc           |  42 +++
- automation/gitlab-ci/test.yaml             |  43 +++
- 5 files changed, 572 insertions(+), 2 deletions(-)
- create mode 100755 automation/build/yocto/build-yocto.sh
- create mode 100644 automation/build/yocto/yocto.dockerfile.in
- create mode 100644 automation/build/yocto/yocto.inc
-
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index c7e0078e04f1..6ce2fd63eee6 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -54,6 +54,33 @@
+   tags:
+     - x86_64
+ 
++.yocto-test:
++  extends: .test-jobs-common
++  script:
++    - ./automation/build/yocto/build-yocto.sh -v --log-dir=./logs --xen-dir=`pwd` ${YOCTO_BOARD}
++  variables:
++    YOCTO_VERSION: kirkstone
++    CONTAINER: yocto:${YOCTO_VERSION}-${YOCTO_BOARD}-${YOCTO_HOST}
++  artifacts:
++    paths:
++      - 'logs/*'
++    when: always
++  needs: []
++
++.yocto-test-arm64:
++  extends: .yocto-test
++  variables:
++    YOCTO_HOST: arm64v8
++  tags:
++    - arm64
++
++.yocto-test-x86-64:
++  extends: .yocto-test
++  variables:
++    YOCTO_HOST: amd64
++  tags:
++    - x86_64
++
+ # Test jobs
+ build-each-commit-gcc:
+   extends: .test-jobs-common
+@@ -188,3 +215,19 @@ qemu-smoke-x86-64-clang-pvh:
+     - ./automation/scripts/qemu-smoke-x86-64.sh pvh 2>&1 | tee ${LOGFILE}
+   needs:
+     - debian-unstable-clang-debug
++
++# Yocto test jobs
++yocto-qemuarm64:
++  extends: .yocto-test-arm64
++  variables:
++    YOCTO_BOARD: qemuarm64
++
++yocto-qemuarm:
++  extends: .yocto-test-arm64
++  variables:
++    YOCTO_BOARD: qemuarm
++
++yocto-qemux86-64:
++  extends: .yocto-test-arm64
++  variables:
++    YOCTO_BOARD: qemux86-64
 -- 
 2.25.1
 
