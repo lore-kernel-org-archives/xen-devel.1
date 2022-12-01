@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89544C47088
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Dec 2022 11:17:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.450503.707816 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED73FC43217
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Dec 2022 11:20:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.450527.707840 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0hZ8-0006Hz-N9; Thu, 01 Dec 2022 11:17:18 +0000
+	id 1p0hc7-0000v1-FT; Thu, 01 Dec 2022 11:20:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 450503.707816; Thu, 01 Dec 2022 11:17:18 +0000
+Received: by outflank-mailman (output) from mailman id 450527.707840; Thu, 01 Dec 2022 11:20:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0hZ8-0006G8-DK; Thu, 01 Dec 2022 11:17:18 +0000
-Received: by outflank-mailman (input) for mailman id 450503;
- Thu, 01 Dec 2022 11:08:54 +0000
+	id 1p0hc7-0000uE-CO; Thu, 01 Dec 2022 11:20:23 +0000
+Received: by outflank-mailman (input) for mailman id 450527;
+ Thu, 01 Dec 2022 11:20:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ED7C=37=chromium.org=ribalda@srs-se1.protection.inumbo.net>)
- id 1p0hR0-0004EZ-13
- for xen-devel@lists.xenproject.org; Thu, 01 Dec 2022 11:08:54 +0000
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [2a00:1450:4864:20::62f])
+ <SRS0=Yxuz=37=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
+ id 1p0ha1-0007Jm-F1
+ for xen-devel@lists.xenproject.org; Thu, 01 Dec 2022 11:18:13 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2062f.outbound.protection.outlook.com
+ [2a01:111:f400:7e1b::62f])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8a67b819-7168-11ed-91b6-6bf2151ebd3b;
- Thu, 01 Dec 2022 12:08:53 +0100 (CET)
-Received: by mail-ej1-x62f.google.com with SMTP id n20so3439231ejh.0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Dec 2022 03:08:53 -0800 (PST)
-Received: from alco.roam.corp.google.com ([2620:0:1059:10:f554:724a:f89a:73db])
- by smtp.gmail.com with ESMTPSA id
- v17-20020a170906293100b0078e0973d1f5sm1663824ejd.0.2022.12.01.03.08.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Dec 2022 03:08:52 -0800 (PST)
+ id d767aa69-7169-11ed-91b6-6bf2151ebd3b;
+ Thu, 01 Dec 2022 12:18:12 +0100 (CET)
+Received: from AM6PR08MB3749.eurprd08.prod.outlook.com (2603:10a6:20b:8f::22)
+ by PA4PR08MB6287.eurprd08.prod.outlook.com (2603:10a6:102:ef::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.8; Thu, 1 Dec
+ 2022 11:18:09 +0000
+Received: from AM6PR08MB3749.eurprd08.prod.outlook.com
+ ([fe80::b14f:1c13:afa:4eda]) by AM6PR08MB3749.eurprd08.prod.outlook.com
+ ([fe80::b14f:1c13:afa:4eda%3]) with mapi id 15.20.5880.008; Thu, 1 Dec 2022
+ 11:18:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,157 +49,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a67b819-7168-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SFyJfR2WUZBDHeWemxJgoKouNxxtAGHlmHCCEO9QQfg=;
-        b=ihhHeh07lyLQ9+bLJAT02xtbEUUwBhwmY6NbvI/an2JMfUbxhGOKl7udb7lLh5mId9
-         jw5dKTuvmRP+w2K8ZYng51eJLaluDUotqflfy43/10yqWgw/yG+fgTeB0ukeRPMWa9sh
-         dgPYzjd9Y05h6Utm7j5Kxf9v/xCIYLObtVbqg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SFyJfR2WUZBDHeWemxJgoKouNxxtAGHlmHCCEO9QQfg=;
-        b=flGJvpQqvdr0T2OxZ+cW+JXWnfCJwN0vyPAVb9k7lPtYp6WI4IKZ2THWqogK6lAMLE
-         +t91A0gkpsbCbrR5G2Ar5Eh1iGtknoH/vkYvBCuF+clU5+WqII4gTdIEco77gSIlxsig
-         n6ETrchpM2S1eIb0j8lLHSEvgbSF+/4ZF3zd818RSKjcsVbPqzYH5bCiL7PVLWf9QN/f
-         ShO8WGX1Gd3BKBGnWxlaI3BhBeHVag8x+CSEdkRLr0sea6IhilV32c+sQOCMJdIoaGyG
-         o7cDRH2hy0Cg4wDpAi1Z+tXTncIFswM9GKBj7McVJhSIekj7lQuJz7hdECvzeZNuoZTK
-         iKTg==
-X-Gm-Message-State: ANoB5pkotkGdPFN7+F+OzhbCUcpF3Y4BYCq5rGCvuzNMesjx0Sx1GjBD
-	PwOpl+St+jQ3JwlJo7ZGgpcFMw==
-X-Google-Smtp-Source: AA0mqf5n8q8ZMG+bv3DehJEYX5ANkxpTsyIzmCnCUsZmiYp8gdzbFTHhMnsW4dhR0VzoX//sUAQsMg==
-X-Received: by 2002:a17:906:7f09:b0:7c0:b3a8:a5f9 with SMTP id d9-20020a1709067f0900b007c0b3a8a5f9mr1338546ejr.154.1669892932820;
-        Thu, 01 Dec 2022 03:08:52 -0800 (PST)
-From: Ricardo Ribalda <ribalda@chromium.org>
-Date: Thu, 01 Dec 2022 12:08:23 +0100
-Subject:
- [PATCH v8 3/3] ASoC: SOF: Fix deadlock when shutdown a frozen userspace
+X-Inumbo-ID: d767aa69-7169-11ed-91b6-6bf2151ebd3b
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nOGR5c5A3Jd49KM4BIrrrfWhCMW6vWOYVF+UwANqFf92XqRQtTGY5S5nK0KLFPSGpXISpNGSsVrr2qSh5GYGT6BPSuTvK5KWCwEOE54ml53FlSJ/8f98oHboKVxPCExtmd1rPzuYW4+tdNa4dr8+z0s31ziLf9GEP4CXPrmxfs34Yc/S8O2SbGPqb1WtrAZ4BBfYgODU9iNGxoj6TzqiArLfkDMcGbvcH+awFJO6i++LguyUr+fCl2IejcS/hDY1og96oT1NNC7BfAvxjsgi/NLKdRbePeKkwj8bb0W2tg48nFpYDOzhVjFhzwo3HxQr45CYzwKBXKQIhs3ukfxAhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A4AD/L8jR3RsJl4Pm02+iy8R79Zif1fOuANwHiiO+f8=;
+ b=X8EBHQ/MFs6AvOAtSOMbfd/OvgOE0fayJ3WjGurCnksmvXPXh9PRzdgzgir/grYniOL4LzXSUe0PL6/e2JQ1WZK2RNrP96o5MycrQGtV7BrpM/0LXt1K1wm+zkmsfgdWu1BWSTJGtWqkskOexwaGoEQFNcVoe+8YTmXZz/gXQ6Mshs/Oz5HS9aBYQ8rixJpgLaPAxZzwggURTo1IRNO3fZFjN3NPaqKVVshfbG5fg0ToOAqFWHIvdQgclCIAwIHm5iQBi9bwARvoHg2Quqv1eoRQ23+/3jZdZtNllhimEFOrSvFTdib7dqlpsvwWsNDW0ApTcW+lbcHlxJs7ZriPdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A4AD/L8jR3RsJl4Pm02+iy8R79Zif1fOuANwHiiO+f8=;
+ b=Q9Hh+w8pttvdj1menmsVyGAoL+OpJHfBQ3Pi0O0digFmXPydeTMv+zRlEDvUtQaCoHajOEBA807Th13ROgRGDLZM8cTqoHv+HV0LsN6dxX4nrmU/5lj6JR96ZlpC87oEoixyiG/69+wm2dvdg2TGwLtZrgkMAxgu+rYbY/uRuUI=
+From: Luca Fancellu <Luca.Fancellu@arm.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Xen-devel
+	<xen-devel@lists.xenproject.org>, Bertrand Marquis
+	<Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 2/4] xen/scripts: add cppcheck tool to the xen-analysis.py
+ script
+Thread-Topic: [PATCH 2/4] xen/scripts: add cppcheck tool to the
+ xen-analysis.py script
+Thread-Index: AQHZAzNLrQ+cdSzeJ02hq/RTLwHjha5WqVKAgAC2sICAAI2ugIAAyymAgAAt7YA=
+Date: Thu, 1 Dec 2022 11:18:08 +0000
+Message-ID: <3FE8EBB1-B565-4257-B966-BD1E97E32451@arm.com>
+References: <20221128141006.8719-1-luca.fancellu@arm.com>
+ <20221128141006.8719-3-luca.fancellu@arm.com>
+ <alpine.DEB.2.22.394.2211291607280.4039@ubuntu-linux-20-04-desktop>
+ <CD8C2F1A-B321-4E3D-907C-E6DBB1A5E2CD@arm.com>
+ <alpine.DEB.2.22.394.2211301145132.4039@ubuntu-linux-20-04-desktop>
+ <471b6470-b0b7-a97d-2114-a1871e237a89@suse.com>
+In-Reply-To: <471b6470-b0b7-a97d-2114-a1871e237a89@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3696.120.41.1.1)
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM6PR08MB3749:EE_|PA4PR08MB6287:EE_
+x-ms-office365-filtering-correlation-id: ea485b57-593e-44c8-a262-08dad38db970
+nodisclaimer: true
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ 09BxsB/ui7/I0ZqRjcOMXOHUWTI4QCSS2iSf8Vj426CCnwVOnv2npPLD1x/zI8rrY2KTZH8X1lX0LlVHfEHQ5+SD52Pc21OlhTAOnoOXbAeS+nidJzZbbQXCPcsopgfcgrSquf+WMptnoQLfjNyzZ+fzfB+URDbQLV8Mb7Rji2KYrNiJF0JF6Mr3tkpCaCR0zwDO7YCV0xOTYPHHOzMTmNiSZgxl77leKQ+3SaBrZ58bROqMSdHzOGSG/8F6Gu2AVhkqSUoXiKTj0AzMaMo6oIwGfSNOjDuIUtn4S/1NohE7RYjYh9Wy3YiS7nprlKWL1jp94iTBV91Nm/wGT9OTbh4eWFvlu/Fmy9M05hcyrAKdtN76l35C5LPkXHrujXypsDSxTSQxtsHXV3uXfSPzCT29739jKK5Ki+gjAgjx2O8CT4T22Ql1iEkBvPUIF0kownf96zscGjca0YlKOVGqAAzeOZ1BJDeI1p6GZrrP7rNAG3qBQMJ2/EdcvLlCrbt/IuWtPgYXXLgIG5yEfTytxgdwfLdsRReRFOMG2jQaVbTEizrQSkHAhHebH6RNO3RlmTSEFRU6K4Mp4tmkDhocktCL2IIgNYUtrZo4CXimW4kgqRW0eHAftHYDUH1+cfmgJeMeiu6Gon2YbEE4lY35lnzpUcx+ylrrJd44MGvgyMrCBsm/NBc2SXrfcZoHIB9gxox1yKjcEfdJQh5exgydiTTC/VM1ro4q7dh6RY4hJu4=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3749.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(366004)(376002)(136003)(346002)(396003)(451199015)(53546011)(5660300002)(6506007)(86362001)(316002)(36756003)(186003)(8936002)(91956017)(76116006)(4326008)(41300700001)(2616005)(66446008)(66946007)(66556008)(8676002)(66476007)(6916009)(54906003)(2906002)(478600001)(6512007)(26005)(33656002)(38100700002)(38070700005)(64756008)(122000001)(71200400001)(6486002)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?OfI7jIVYW37mJ1uehcRi7dFXYl792SeeAI4efZWWhmS0b2PI8TgWTL19K/TE?=
+ =?us-ascii?Q?yb1oRfMgcR7cthJ5Gzk7TfWzK1xeo5W7JNgwj5rr+X4jX9+v8kw24FfxInI4?=
+ =?us-ascii?Q?FDtIiEsjtANSlvrjtBDftoorf/oYo5KZAQu8F4CtPf1JBhCM3bHOW3rOKYfJ?=
+ =?us-ascii?Q?EUqYO0Zl0luG1ZwutxZSZUGSbzSzGucEnQVSb9gGfka3JqAPIO/qD0GPin+k?=
+ =?us-ascii?Q?OvKQaHS+TICRdpXG+E6FIPi6LygCfn/2I3MpiwapC+o9LOPFOc48V60lQVWR?=
+ =?us-ascii?Q?UIH5iV6o33Zs6H7cAEQkbgprUTL+niu3aCjL0ofRLAomZ25qPdGz33scn2in?=
+ =?us-ascii?Q?doWhZZKwTIR8qxJUnkljepx/KYKiJQ+dmJPRQfRPNrxzknKzmYUC85csJfNw?=
+ =?us-ascii?Q?OMkGcFy2ySgAEe0Wb3dN9Dsh9ilsuMFofP/+eEcJSo9mG67NQ/qLbPmkPtG2?=
+ =?us-ascii?Q?4TkRLNBFU9xMG1D7bIzDsZyLb5yS0fMjfcGJ46lU3cYgbxETjn/yJJU8F9dU?=
+ =?us-ascii?Q?+SzW8PlT2vXOhI4ewclgVfvGLYmROOry0F5DXNec1YKToNC8a7fXQRfto665?=
+ =?us-ascii?Q?o297SOow/KbYpYux0pTZwNnPs3L0lZPn0irx6LXmH+ZPmKuqYcg/G6yae4EZ?=
+ =?us-ascii?Q?SyvAp8UP5bbF6O5f0xAaprT8kZNk1nJUYgMbHDMoDMrO8Zn89FOaBO6m6PJC?=
+ =?us-ascii?Q?gyuMdfUm5IyGRmKV/paQPCP3UFae3iVZlDctkHV6DYXHHu/AidGRvS6iiJbh?=
+ =?us-ascii?Q?VH/FW4g+fcRgt/ozGs1PRjqZx+K7nBEIDDPdCxEHSVJv/8COQMWohHuSm32y?=
+ =?us-ascii?Q?1E0PBcaRwKWSxIZD2ErUyxtxcCNNMT63kYBHQJa3M2JlxFnLabH4PpJevbM4?=
+ =?us-ascii?Q?11RG8Ljro53xDWZFzqPe3ZW2v9UaUZTQGd3EANihxyTvKJMeaclMOqz0hWXT?=
+ =?us-ascii?Q?PAm6yKC7DSc9OP8NX3FwJTeTstKAdWjI2XLNz/kkTP/FqLe8aGByGSsFMRxT?=
+ =?us-ascii?Q?XJWBOp/dRuKiSgwMy0J3+R0tyX3qF4m/AnwCpPmKa1n8LL+hTnUYsByWwW0P?=
+ =?us-ascii?Q?KRpRuD6DfjHYv+uB1zXZcZFJkCqxFn9IuNl6W5YR4StYvwB+TfWlD0PC8DaQ?=
+ =?us-ascii?Q?9Ut1nMCrNOtE2V/3QbmCWzjK65E4MHCUGhhZz7Ck6S15T0s3mjSQZ5Ixi3d9?=
+ =?us-ascii?Q?U4I2E7vBq7cOsaZS92DdOMPgCyWiQxRJXEP/tdPzZHSmrqevSYMNpPjydg9I?=
+ =?us-ascii?Q?I+PFBd1NQHYalujh7hLfiUhooT+wWK/9SdXo9KkQGZjxqOj/jI28GyMwHMfb?=
+ =?us-ascii?Q?bZRqjeeNah5savDhIq7dSDn3EfaaKJvxCOtKDkyxnQLkSGK5OkXCf3a0vy+N?=
+ =?us-ascii?Q?lRp4msq4wXLV7FaM4fPrS9X8YJCfnpARa5pvulfjHeRXDBlUYmLveV3LqJK0?=
+ =?us-ascii?Q?dXIrtp2aVmR+nQ++vyOI+T2hvarsUxwkXcC3lLK9R9WlraMlh3aF9IfLP0x+?=
+ =?us-ascii?Q?s6GLvfXexT3IVW3fmSe1UtCDuEchkLn5OmsKrTNuhUgv52yv4F7wSIv4iRka?=
+ =?us-ascii?Q?EN3h1r91epzd3ce7d5JwNGDVr2fxkJtmwn5QzDzgfZxBxDwN8itaCceXHqTZ?=
+ =?us-ascii?Q?Jw=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <5AF8BDC5AB0B834FB7821208A4876C2F@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20221127-snd-freeze-v8-3-3bc02d09f2ce@chromium.org>
-References: <20221127-snd-freeze-v8-0-3bc02d09f2ce@chromium.org>
-In-Reply-To: <20221127-snd-freeze-v8-0-3bc02d09f2ce@chromium.org>
-To: Juergen Gross <jgross@suse.com>, Mark Brown <broonie@kernel.org>,
- Chromeos Kdump <chromeos-kdump@google.com>,
- Daniel Baluta <daniel.baluta@nxp.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Len Brown <len.brown@intel.com>, Ard Biesheuvel <ardb@kernel.org>,
- Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
- Eric Biederman <ebiederm@xmission.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, Jaroslav Kysela <perex@perex.cz>,
- Joel Fernandes <joel@joelfernandes.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Peter Ujfalusi <peter.ujfalusi@linux.intel.com>, Pavel Machek <pavel@ucw.cz>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Steven Rostedt <rostedt@goodmis.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Ingo Molnar <mingo@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Dexuan Cui <decui@microsoft.com>, Takashi Iwai <tiwai@suse.com>,
- "H. Peter Anvin" <hpa@zytor.com>, Bard Liao <yung-chuan.liao@linux.intel.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Borislav Petkov <bp@alien8.de>,
- x86@kernel.org
-Cc: kexec@lists.infradead.org, alsa-devel@alsa-project.org,
- Ricardo Ribalda <ribalda@chromium.org>, stable@vger.kernel.org,
- sound-open-firmware@alsa-project.org, linuxppc-dev@lists.ozlabs.org,
- linux-hyperv@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org
-X-Mailer: b4 0.11.0-dev-696ae
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2398; i=ribalda@chromium.org;
- h=from:subject:message-id; bh=GWM+B74HgZm8hg965LkIrG7utJXhrwWC6OA28kyyUjA=;
- b=owEBbQKS/ZANAwAKAdE30T7POsSIAcsmYgBjiIs5X8qunJcdzh4yNadWVeViZgDn3gq/06nr8kdj
- kdUAnBmJAjMEAAEKAB0WIQREDzjr+/4oCDLSsx7RN9E+zzrEiAUCY4iLOQAKCRDRN9E+zzrEiBePD/
- 4n9U/k8s8PcSMHwaDWquOwoHUGMa1OTSXQAeS+zkfPMUpMhgcoTNo49nWa43GN+Y810XaYiML51562
- eLirizXRSalXPpYVLlUge+rUD8YTV54zGi5OoX528K7lwHG8z+THm4BSy0/gmpmwdgB3GttlQH5Xh0
- P4IRFzzQUndzF5+V+rD7ZDsOIqsqHLEl2xVrPlelt3OtQTf7xzm+FTwEgxz8fg42kpdkTUjKNidLBa
- PVVihXzxaPSrNmIcrlXDWrTscOrbX2UGlosoMD4NyfKwacu0juZk+QLlYCoIBu78E/d04Top6bsU/I
- uqQOeIB3UrGvmdWb9fO9H/WX4GIFLG+w7VCfaLbEd22SI+WITCvp/dDA/ZO8fzX1wgQBHvFZRLIuM4
- 0mqtOEszlCVB4pMNrAVJcSULhKWOxrKI7MkUyf/otZRJ67hrWlDDaOmlBsOkJTF1T5obHSRoblMSSE
- UwMVB1vp64JD4LAxJGmFWSPjZ3BMJJK0mblOTi/qOiMm2QR7iraSkhMsUcpx9HI4IeSwbTJszKQ1Hb
- BgqjW0c2l0BpHzIlEvkoUHxIGQdKJLMfmy8GbTMKne5zBzPRx9+b+cGgNvRa/zWp72+v9Fm0r2l8rk
- 2c1+78340GIwSb9Ffj750Evz1ISy6b5FAAiC5q+SWoZEFW2mWMAN+3crcCZw==
-X-Developer-Key: i=ribalda@chromium.org; a=openpgp;
- fpr=9EC3BB66E2FC129A6F90B39556A0D81F9F782DA9
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM6PR08MB3749.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea485b57-593e-44c8-a262-08dad38db970
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Dec 2022 11:18:08.0737
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2SHD4JYKVvCOMuMGoMxm2G1B+I+fehJtCVY8Jl8E3C7pMtzu3xVhbbVWPQRwC/M9HZLnSu2DHfiD1brNIyoZvQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6287
 
-If we are shutting down due to kexec and the userspace is frozen, the
-system will stall forever waiting for userspace to complete.
 
-Do not wait for the clients to complete in that case.
 
-This fixes:
+> On 1 Dec 2022, at 08:33, Jan Beulich <jbeulich@suse.com> wrote:
+>=20
+> On 30.11.2022 21:26, Stefano Stabellini wrote:
+>> On Wed, 30 Nov 2022, Luca Fancellu wrote:
+>>>> I think the revert of the cppcheck integration in xen/Makefile and
+>>>> xen/tools/merge_cppcheck_reports.py could be a separate patch. There i=
+s
+>>>> no need to make sure cppcheck support in the xen Makefile is
+>>>> "bisectable". That patch could have my acked-by already.
+>>>=20
+>>> Ok I will split these changes in a following patch
+>>>=20
+>>>>=20
+>>>> Also the document changes introduced in this patch have my reviewed-by=
+:
+>>>> - docs/misra/cppcheck.txt
+>>>> - docs/misra/documenting-violations.rst
+>>>> - docs/misra/false-positive-cppcheck.json
+>>>> - docs/misra/xen-static-analysis.rst
+>>>=20
+>>> Thank you, should I put those files in a separate patch with your rev-b=
+y before
+>>> this patch or this is just a comment for you to remember which file you=
+ already
+>>> reviewed?
+>>=20
+>> If Jan and the other reviewers are OK, I think you could split them out
+>> in a separate patch and add my reviewed-by. If Jan prefers to keep it
+>> all together in one patch, then I wrote it down so that I remember what
+>> I have already acked :-)
+>=20
+> Docs changes being split off and going in first is okay as long as what
+> is being documented is present behavior. If other changes are needed to
+> make (parts of) new documentation actually correct, then it should imo
+> go together. If new documentation describes future behavior (e.g.
+> design docs), then of course it's fine as well to go in early, as then
+> there simply is no code anywhere which this would (temporarily) not
+> describe correctly.
 
-[   84.943749] Freezing user space processes ... (elapsed 0.111 seconds) done.
-[  246.784446] INFO: task kexec-lite:5123 blocked for more than 122 seconds.
-[  246.819035] Call Trace:
-[  246.821782]  <TASK>
-[  246.824186]  __schedule+0x5f9/0x1263
-[  246.828231]  schedule+0x87/0xc5
-[  246.831779]  snd_card_disconnect_sync+0xb5/0x127
-...
-[  246.889249]  snd_sof_device_shutdown+0xb4/0x150
-[  246.899317]  pci_device_shutdown+0x37/0x61
-[  246.903990]  device_shutdown+0x14c/0x1d6
-[  246.908391]  kernel_kexec+0x45/0xb9
+Yeah I thought so, I would prefer to keep these files here otherwise I woul=
+d need to
+change them somehow and I would lose the r-by anyway.
 
-And:
+Regarding the revert of cppcheck from makefile and xen/tools/merge_cppcheck=
+_reports.py,
+are you ok if I send a patch with only those changes? Would it be ok for yo=
+u if the new patch
+is after this one?
 
-[  246.893222] INFO: task kexec-lite:4891 blocked for more than 122 seconds.
-[  246.927709] Call Trace:
-[  246.930461]  <TASK>
-[  246.932819]  __schedule+0x5f9/0x1263
-[  246.936855]  ? fsnotify_grab_connector+0x5c/0x70
-[  246.942045]  schedule+0x87/0xc5
-[  246.945567]  schedule_timeout+0x49/0xf3
-[  246.949877]  wait_for_completion+0x86/0xe8
-[  246.954463]  snd_card_free+0x68/0x89
-...
-[  247.001080]  platform_device_unregister+0x12/0x35
+Just asking to prevent back and forth.
 
-Cc: stable@vger.kernel.org
-Fixes: 83bfc7e793b5 ("ASoC: SOF: core: unregister clients and machine drivers in .shutdown")
-Signed-off-by: Ricardo Ribalda <ribalda@chromium.org>
----
- sound/soc/sof/core.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+Thank you
 
-diff --git a/sound/soc/sof/core.c b/sound/soc/sof/core.c
-index 3e6141d03770..9587b6a85103 100644
---- a/sound/soc/sof/core.c
-+++ b/sound/soc/sof/core.c
-@@ -9,6 +9,8 @@
- //
- 
- #include <linux/firmware.h>
-+#include <linux/kexec.h>
-+#include <linux/freezer.h>
- #include <linux/module.h>
- #include <sound/soc.h>
- #include <sound/sof.h>
-@@ -484,9 +486,10 @@ int snd_sof_device_shutdown(struct device *dev)
- 	 * make sure clients and machine driver(s) are unregistered to force
- 	 * all userspace devices to be closed prior to the DSP shutdown sequence
- 	 */
--	sof_unregister_clients(sdev);
--
--	snd_sof_machine_unregister(sdev, pdata);
-+	if (!(kexec_in_progress() && pm_freezing())) {
-+		sof_unregister_clients(sdev);
-+		snd_sof_machine_unregister(sdev, pdata);
-+	}
- 
- 	if (sdev->fw_state == SOF_FW_BOOT_COMPLETE)
- 		return snd_sof_shutdown(sdev);
+>=20
+> Jan
 
--- 
-2.39.0.rc0.267.gcb52ba06e7-goog-b4-0.11.0-dev-696ae
 
