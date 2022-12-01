@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8DD3C43217
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Dec 2022 16:06:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.450937.708473 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3362C47088
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Dec 2022 16:07:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.450942.708484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0m4m-0003E5-Bq; Thu, 01 Dec 2022 16:06:16 +0000
+	id 1p0m5c-0003pd-M2; Thu, 01 Dec 2022 16:07:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 450937.708473; Thu, 01 Dec 2022 16:06:16 +0000
+Received: by outflank-mailman (output) from mailman id 450942.708484; Thu, 01 Dec 2022 16:07:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p0m4m-0003Du-8z; Thu, 01 Dec 2022 16:06:16 +0000
-Received: by outflank-mailman (input) for mailman id 450937;
- Thu, 01 Dec 2022 16:06:14 +0000
+	id 1p0m5c-0003pW-IT; Thu, 01 Dec 2022 16:07:08 +0000
+Received: by outflank-mailman (input) for mailman id 450942;
+ Thu, 01 Dec 2022 16:07:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ShmB=37=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1p0m4k-0001UO-80
- for xen-devel@lists.xenproject.org; Thu, 01 Dec 2022 16:06:14 +0000
+ id 1p0m5b-0003mC-Lv
+ for xen-devel@lists.xenproject.org; Thu, 01 Dec 2022 16:07:07 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 13b66383-7192-11ed-91b6-6bf2151ebd3b;
- Thu, 01 Dec 2022 17:06:13 +0100 (CET)
+ id 3397a7d0-7192-11ed-91b6-6bf2151ebd3b;
+ Thu, 01 Dec 2022 17:07:06 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A3EDED1;
- Thu,  1 Dec 2022 08:06:19 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9EC0DED1;
+ Thu,  1 Dec 2022 08:07:12 -0800 (PST)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 37B9B3F73B;
- Thu,  1 Dec 2022 08:06:11 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 214B03F73B;
+ Thu,  1 Dec 2022 08:07:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,299 +45,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13b66383-7192-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 3397a7d0-7192-11ed-91b6-6bf2151ebd3b
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC PATCH 04/21] xen/arm: vIOMMU: add generic vIOMMU framework
-Date: Thu,  1 Dec 2022 16:02:28 +0000
-Message-Id: <505b4566579b65afa0696c3a8772416a4c7cf59f.1669888522.git.rahul.singh@arm.com>
+Cc: Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Nick Rosbrook <rosbrookn@gmail.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [RFC PATCH 06/21] xen/domctl: Add XEN_DOMCTL_CONFIG_VIOMMU_* and viommu config param
+Date: Thu,  1 Dec 2022 16:02:30 +0000
+Message-Id: <fc259a3c780aeb312ea1043703add9e9bca1a7e1.1669888522.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1669888522.git.rahul.singh@arm.com>
 References: <cover.1669888522.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch adds basic framework for vIOMMU.
+Add new viommu_type field and field values XEN_DOMCTL_CONFIG_VIOMMU_NONE
+XEN_DOMCTL_CONFIG_VIOMMU_SMMUV3 in xen_arch_domainconfig to
+enable/disable vIOMMU support for domains.
+
+Also add viommu="N" parameter to xl domain configuration to enable the
+vIOMMU for the domains. Currently, only the "smmuv3" type is supported
+for ARM.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
- xen/arch/arm/domain.c                | 17 +++++++
- xen/arch/arm/domain_build.c          |  3 ++
- xen/arch/arm/include/asm/viommu.h    | 70 ++++++++++++++++++++++++++++
- xen/drivers/passthrough/Kconfig      |  6 +++
- xen/drivers/passthrough/arm/Makefile |  1 +
- xen/drivers/passthrough/arm/viommu.c | 48 +++++++++++++++++++
- xen/include/public/arch-arm.h        |  4 ++
- 7 files changed, 149 insertions(+)
- create mode 100644 xen/arch/arm/include/asm/viommu.h
- create mode 100644 xen/drivers/passthrough/arm/viommu.c
+ docs/man/xl.cfg.5.pod.in             | 11 +++++++++++
+ tools/golang/xenlight/helpers.gen.go |  2 ++
+ tools/golang/xenlight/types.gen.go   |  1 +
+ tools/include/libxl.h                |  5 +++++
+ tools/libs/light/libxl_arm.c         | 13 +++++++++++++
+ tools/libs/light/libxl_types.idl     |  6 ++++++
+ tools/xl/xl_parse.c                  |  9 +++++++++
+ 7 files changed, 47 insertions(+)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 38e22f12af..2a85209736 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -37,6 +37,7 @@
- #include <asm/tee/tee.h>
- #include <asm/vfp.h>
- #include <asm/vgic.h>
-+#include <asm/viommu.h>
- #include <asm/vtimer.h>
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index ec444fb2ba..5854d777ed 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -2870,6 +2870,17 @@ Currently, only the "sbsa_uart" model is supported for ARM.
  
- #include "vpci.h"
-@@ -691,6 +692,13 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-         return -EINVAL;
+ =back
+ 
++=item B<viommu="N">
++
++To enable viommu, user must specify the following option in the VM
++config file:
++
++viommu = "smmuv3"
++
++Currently, only the "smmuv3" type is supported for ARM.
++
++=back
++
+ =head3 x86
+ 
+ =over 4
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index cb1bdf9bdf..8b6d771fc7 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -1117,6 +1117,7 @@ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
+ x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
++x.ArchArm.Viommu = ViommuType(xc.arch_arm.viommu)
+ if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+@@ -1602,6 +1603,7 @@ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
+ xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
++xc.arch_arm.viommu = C.libxl_viommu_type(x.ArchArm.Viommu)
+ if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
+ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
+ }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index 871576fb0e..16c835ebeb 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -531,6 +531,7 @@ TypeUnion DomainBuildInfoTypeUnion
+ ArchArm struct {
+ GicVersion GicVersion
+ Vuart VuartType
++Viommu ViommuType
+ }
+ ArchX86 struct {
+ MsrRelaxed Defbool
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index d652895075..49563f57bd 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -278,6 +278,11 @@
+  */
+ #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE 1
+ 
++/*
++ * libxl_domain_build_info has the arch_arm.viommu_type field.
++ */
++#define LIBXL_HAVE_BUILDINFO_ARM_VIOMMU 1
++
+ /*
+  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
+  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index cd84a7c66e..b8eff10a41 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -179,6 +179,19 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         return ERROR_FAIL;
      }
  
-+    if ( config->arch.viommu_type != XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-+    {
-+        dprintk(XENLOG_INFO,
-+                "vIOMMU type requested not supported by the platform or Xen\n");
-+        return -EINVAL;
++    switch (d_config->b_info.arch_arm.viommu_type) {
++    case LIBXL_VIOMMU_TYPE_NONE:
++        config->arch.viommu_type = XEN_DOMCTL_CONFIG_VIOMMU_NONE;
++        break;
++    case LIBXL_VIOMMU_TYPE_SMMUV3:
++        config->arch.viommu_type = XEN_DOMCTL_CONFIG_VIOMMU_SMMUV3;
++        break;
++    default:
++        LOG(ERROR, "Unknown vIOMMU type %d",
++            d_config->b_info.arch_arm.viommu_type);
++        return ERROR_FAIL;
 +    }
 +
      return 0;
  }
  
-@@ -783,6 +791,9 @@ int arch_domain_create(struct domain *d,
-     if ( (rc = domain_vpci_init(d)) != 0 )
-         goto fail;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 9e3d33cb5a..06ee5ac6ba 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -492,6 +492,11 @@ libxl_tee_type = Enumeration("tee_type", [
+     (1, "optee")
+     ], init_val = "LIBXL_TEE_TYPE_NONE")
  
-+    if ( (rc = domain_viommu_init(d, config->arch.viommu_type)) != 0 )
-+        goto fail;
++libxl_viommu_type = Enumeration("viommu_type", [
++    (0, "none"),
++    (1, "smmuv3")
++    ], init_val = "LIBXL_VIOMMU_TYPE_NONE")
 +
-     return 0;
+ libxl_rdm_reserve = Struct("rdm_reserve", [
+     ("strategy",    libxl_rdm_reserve_strategy),
+     ("policy",      libxl_rdm_reserve_policy),
+@@ -658,6 +663,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
  
- fail:
-@@ -998,6 +1009,7 @@ static int relinquish_memory(struct domain *d, struct page_list_head *list)
- enum {
-     PROG_pci = 1,
-     PROG_tee,
-+    PROG_viommu,
-     PROG_xen,
-     PROG_page,
-     PROG_mapping,
-@@ -1048,6 +1060,11 @@ int domain_relinquish_resources(struct domain *d)
-         if (ret )
-             return ret;
+     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
+                                ("vuart", libxl_vuart_type),
++                               ("viommu_type", libxl_viommu_type),
+                               ])),
+     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
+                               ])),
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 644ab8f8fd..ef6d8bb3f7 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -2751,6 +2751,15 @@ skip_usbdev:
+         }
+     }
  
-+    PROGRESS(viommu):
-+        ret = viommu_relinquish_resources(d);
-+        if (ret )
-+            return ret;
++    if (!xlu_cfg_get_string (config, "viommu", &buf, 1)) {
++        e = libxl_viommu_type_from_string(buf, &b_info->arch_arm.viommu_type);
++        if (e) {
++            fprintf(stderr,
++                    "Unknown vIOMMU type \"%s\" specified\n", buf);
++            exit(-ERROR_FAIL);
++        }
++    }
 +
-     PROGRESS(xen):
-         ret = relinquish_memory(d, &d->xenpage_list);
-         if ( ret )
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index bd30d3798c..abbaf37a2e 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -27,6 +27,7 @@
- #include <asm/setup.h>
- #include <asm/cpufeature.h>
- #include <asm/domain_build.h>
-+#include <asm/viommu.h>
- #include <xen/event.h>
+     parse_vkb_list(config, d_config);
  
- #include <xen/irq.h>
-@@ -3858,6 +3859,7 @@ void __init create_domUs(void)
-         struct domain *d;
-         struct xen_domctl_createdomain d_cfg = {
-             .arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE,
-+            .arch.viommu_type = viommu_get_type(),
-             .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap,
-             /*
-              * The default of 1023 should be sufficient for guests because
-@@ -4052,6 +4054,7 @@ void __init create_dom0(void)
-         printk(XENLOG_WARNING "Maximum number of vGIC IRQs exceeded.\n");
-     dom0_cfg.arch.tee_type = tee_get_type();
-     dom0_cfg.max_vcpus = dom0_max_vcpus();
-+    dom0_cfg.arch.viommu_type = viommu_get_type();
- 
-     if ( iommu_enabled )
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
-new file mode 100644
-index 0000000000..7cd3818a12
---- /dev/null
-+++ b/xen/arch/arm/include/asm/viommu.h
-@@ -0,0 +1,70 @@
-+/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
-+#ifndef __ARCH_ARM_VIOMMU_H__
-+#define __ARCH_ARM_VIOMMU_H__
-+
-+#ifdef CONFIG_VIRTUAL_IOMMU
-+
-+#include <xen/lib.h>
-+#include <xen/types.h>
-+#include <public/xen.h>
-+
-+struct viommu_ops {
-+    /*
-+     * Called during domain construction if toolstack requests to enable
-+     * vIOMMU support.
-+     */
-+    int (*domain_init)(struct domain *d);
-+
-+    /*
-+     * Called during domain destruction to free resources used by vIOMMU.
-+     */
-+    int (*relinquish_resources)(struct domain *d);
-+};
-+
-+struct viommu_desc {
-+    /* vIOMMU domains init/free operations described above. */
-+    const struct viommu_ops *ops;
-+
-+    /*
-+     * ID of vIOMMU. Corresponds to xen_arch_domainconfig.viommu_type.
-+     * Should be one of XEN_DOMCTL_CONFIG_VIOMMU_xxx
-+     */
-+    uint16_t viommu_type;
-+};
-+
-+int domain_viommu_init(struct domain *d, uint16_t viommu_type);
-+int viommu_relinquish_resources(struct domain *d);
-+uint16_t viommu_get_type(void);
-+
-+#else
-+
-+static inline uint8_t viommu_get_type(void)
-+{
-+    return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
-+}
-+
-+static inline int domain_viommu_init(struct domain *d, uint16_t viommu_type)
-+{
-+    if ( likely(viommu_type == XEN_DOMCTL_CONFIG_VIOMMU_NONE) )
-+        return 0;
-+
-+    return -ENODEV;
-+}
-+
-+static inline int viommu_relinquish_resources(struct domain *d)
-+{
-+    return 0;
-+}
-+
-+#endif /* CONFIG_VIRTUAL_IOMMU */
-+
-+#endif /* __ARCH_ARM_VIOMMU_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kconfig
-index 479d7de57a..19924fa2de 100644
---- a/xen/drivers/passthrough/Kconfig
-+++ b/xen/drivers/passthrough/Kconfig
-@@ -35,6 +35,12 @@ config IPMMU_VMSA
- 	  (H3 ES3.0, M3-W+, etc) or Gen4 SoCs which IPMMU hardware supports stage 2
- 	  translation table format and is able to use CPU's P2M table as is.
- 
-+config VIRTUAL_IOMMU
-+	bool "Virtual IOMMU Support (UNSUPPORTED)" if UNSUPPORTED
-+	default n
-+	help
-+	 Support virtual IOMMU infrastructure to implement vIOMMU.
-+
- endif
- 
- config IOMMU_FORCE_PT_SHARE
-diff --git a/xen/drivers/passthrough/arm/Makefile b/xen/drivers/passthrough/arm/Makefile
-index c5fb3b58a5..4cc54f3f4d 100644
---- a/xen/drivers/passthrough/arm/Makefile
-+++ b/xen/drivers/passthrough/arm/Makefile
-@@ -2,3 +2,4 @@ obj-y += iommu.o iommu_helpers.o iommu_fwspec.o
- obj-$(CONFIG_ARM_SMMU) += smmu.o
- obj-$(CONFIG_IPMMU_VMSA) += ipmmu-vmsa.o
- obj-$(CONFIG_ARM_SMMU_V3) += smmu-v3.o
-+obj-$(CONFIG_VIRTUAL_IOMMU) += viommu.o
-diff --git a/xen/drivers/passthrough/arm/viommu.c b/xen/drivers/passthrough/arm/viommu.c
-new file mode 100644
-index 0000000000..7ab6061e34
---- /dev/null
-+++ b/xen/drivers/passthrough/arm/viommu.c
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
-+
-+#include <xen/errno.h>
-+#include <xen/init.h>
-+#include <xen/types.h>
-+
-+#include <asm/viommu.h>
-+
-+const struct viommu_desc __read_mostly *cur_viommu;
-+
-+int domain_viommu_init(struct domain *d, uint16_t viommu_type)
-+{
-+    if ( viommu_type == XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-+        return 0;
-+
-+    if ( !cur_viommu )
-+        return -ENODEV;
-+
-+    if ( cur_viommu->viommu_type != viommu_type )
-+        return -EINVAL;
-+
-+    return cur_viommu->ops->domain_init(d);
-+}
-+
-+int viommu_relinquish_resources(struct domain *d)
-+{
-+    if ( !cur_viommu )
-+        return 0;
-+
-+    return cur_viommu->ops->relinquish_resources(d);
-+}
-+
-+uint16_t viommu_get_type(void)
-+{
-+    if ( !cur_viommu )
-+        return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
-+
-+    return cur_viommu->viommu_type;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index 1528ced509..33d32835e7 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -297,10 +297,14 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
- #define XEN_DOMCTL_CONFIG_TEE_NONE      0
- #define XEN_DOMCTL_CONFIG_TEE_OPTEE     1
- 
-+#define XEN_DOMCTL_CONFIG_VIOMMU_NONE   0
-+
- struct xen_arch_domainconfig {
-     /* IN/OUT */
-     uint8_t gic_version;
-     /* IN */
-+    uint8_t viommu_type;
-+    /* IN */
-     uint16_t tee_type;
-     /* IN */
-     uint32_t nr_spis;
+     xlu_cfg_get_defbool(config, "xend_suspend_evtchn_compat",
 -- 
 2.25.1
 
