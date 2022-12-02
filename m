@@ -4,36 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13560C4332F
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Dec 2022 10:38:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.451781.709547 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E85C4321E
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Dec 2022 10:57:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.451790.709569 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p13RB-0000HP-Sg; Fri, 02 Dec 2022 10:38:33 +0000
+	id 1p13io-00047F-Ow; Fri, 02 Dec 2022 10:56:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 451781.709547; Fri, 02 Dec 2022 10:38:33 +0000
+Received: by outflank-mailman (output) from mailman id 451790.709569; Fri, 02 Dec 2022 10:56:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p13RB-0000HI-Pw; Fri, 02 Dec 2022 10:38:33 +0000
-Received: by outflank-mailman (input) for mailman id 451781;
- Fri, 02 Dec 2022 10:38:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6g/C=4A=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1p13RA-0000HC-Nf
- for xen-devel@lists.xenproject.org; Fri, 02 Dec 2022 10:38:33 +0000
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [2a00:1450:4864:20::42e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 721bff61-722d-11ed-8fd2-01056ac49cbb;
- Fri, 02 Dec 2022 11:38:23 +0100 (CET)
-Received: by mail-wr1-x42e.google.com with SMTP id bx10so7229261wrb.0
- for <xen-devel@lists.xenproject.org>; Fri, 02 Dec 2022 02:38:30 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- h17-20020a05600c315100b003cfd64b6be1sm16259832wmo.27.2022.12.02.02.38.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Dec 2022 02:38:28 -0800 (PST)
+	id 1p13io-000478-M9; Fri, 02 Dec 2022 10:56:46 +0000
+Received: by outflank-mailman (input) for mailman id 451790;
+ Fri, 02 Dec 2022 10:56:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3Iy3=4A=citrix.com=prvs=3285f5271=edvin.torok@srs-se1.protection.inumbo.net>)
+ id 1p13im-0003rQ-RP
+ for xen-devel@lists.xenproject.org; Fri, 02 Dec 2022 10:56:44 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ffb426cf-722f-11ed-91b6-6bf2151ebd3b;
+ Fri, 02 Dec 2022 11:56:42 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,126 +38,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 721bff61-722d-11ed-8fd2-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:references:cc:to:from
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=RY4sGq6ms1+IlvCLmkZ3BI4/p6p+Ce/MbN+cfQweZ90=;
-        b=pS7z7pezHrvyn5/JviuMr0kL2oOS52dkR+Wrc7O5IcpqzPyPUZ2MyuDNHDkTE1xMyh
-         U9rS6SXngowOBNAzwyiOVfb0b0r6ZVAVCv74c4Bq9jH6JUlo2hB0t4FCfWlUZFrrvFZT
-         NkEP/anpN433kaXL1xyZFdXDHJkFzjg53GGumb+otB1QDYZyElWDUap0eBzbhlVeIxEq
-         1Wj539iyBkBRTaocfqYX9g3UJTbz1eOyco+2/lFxyUPLZzEuLwE0DFbxnaPjiiRNKKZ2
-         bU0KG9fbwldlHieMr2TzRqiD1dODRuryW04UoaC56HuGGGkSyyLC8saWcBOjrKsqzMu7
-         ddUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:references:cc:to:from
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=RY4sGq6ms1+IlvCLmkZ3BI4/p6p+Ce/MbN+cfQweZ90=;
-        b=HzlwP5M9Vd5HI2EakuYLIQ0QVI4mn3vH1y2Vij3iDogZzrlqH+YjwKPK8LeXIkjDTd
-         PZlf+xfSYd4i/77Gn6M09IlYiFUqW/26huicYvcebDN3lS55d/1+7h0tsc2ETt51VL2r
-         8zYSqvbIb/9js5wcoABx1hIgnYKY8ZUPFUIVp3+q0rn1TnIV2c3Tsr5jJy6U/7Ld+v5i
-         Ct21xFVZ7i9Gv1+FTXvqMqR7EPic1SQXFgaSAgqqM3mNFrzsIwbtQ/YA7DJqEdskUf+1
-         Y5zaz3I6QkDfZxN1cJpWP94/TfMwD0fcm7+b0pmnnPz2Jbp/wo4TlvsN2P5H4w7mTyix
-         MzPg==
-X-Gm-Message-State: ANoB5pkQDl6eeVf3z2361YmJWEsw87Hnr4hr/fW/ftRb9a7zNt4GtT7T
-	1/5DlQL7OoM6uPLAzvVjljj0ig==
-X-Google-Smtp-Source: AA0mqf7eWXPIAFKiqlfqPTpidg+6qjtk2JWxrrXDDZf2ZR7bVc3fGCL1p2h2E5ovVnhsiqZXZ1QPOw==
-X-Received: by 2002:adf:fb4c:0:b0:236:5270:735e with SMTP id c12-20020adffb4c000000b002365270735emr32213783wrs.659.1669977509372;
-        Fri, 02 Dec 2022 02:38:29 -0800 (PST)
-Message-ID: <4b143736-d5a4-ac75-3671-9566a00707af@linaro.org>
-Date: Fri, 2 Dec 2022 11:38:27 +0100
+X-Inumbo-ID: ffb426cf-722f-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1669978602;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Kvmroc4UWt6I3gO1OX/SxhaVKAh4s5W8paVaKox+rwU=;
+  b=dMxxnxDUCjAVTg1Cj8joz8HqRCzIc0D14BjacK8ijsDzblSTyUf8PuG9
+   DrRyyM9iW0HmH5F7eX7L6ZpLjEw7Lwp0mAkTyRkdQo4SZpOJQIocajy0B
+   3Js/s+r3TRngq5VsbjsmShdkGhqviFQ+jM181qnBRGeZZHGLFFUp+2jkC
+   o=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 86240592
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:lyG66qJ526X53XfKFE+R4pUlxSXFcZb7ZxGr2PjKsXjdYENS0DZTx
+ zMZWj/TMvaCamOjcth2YNmx9hkGvJ+Ey4MyTQVlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
+ ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
+ Jb5rta31GWNglaYCUpJrfPdwP9TlK6q4mlB5ARkPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
+ /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
+ jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c4nOzgWt
+ q0iDwkUVRqlnvmWx7GqV/Zj05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
+ oxANGQpPE+ojx5nYz/7DLozkPmpgD/jdCdfq3qepLYt4niVxwt0uFToGIqLIIDSGJQP9qqej
+ nn9p1/AXg8TDcC8mWSL3kqPn8HSuQquDer+E5Xnr6U30TV/3Fc7CgASVFa9iem0jAi5Qd03A
+ 1MQ0jojq+417kPDZsLmQxSyrXqAvxgdc9ldCes37EeK0KW8yxaUAC0IQyBMbPQitdQqXno62
+ 1mRhdTrCDdz9rqPRhq19L2ZsDezMig9NnIZaGkPSg5t3jX4iNht1FSVFI8lSfPryI2ucd3t/
+ 9yUhHgE3u1Q3PQs7ryA93bemBKrpYnUUQFgs207QVmZxg9+YYekYamh5l7a8etMIe6lc7WRg
+ JQXs5PAtb5TVPlhgATIGbxQR+/xu55pJRWG2TZS848dGyNBEpJJVaRZ+3lAKUhgKa7okhe5M
+ RaI6Wu9CHK+VUZGjJObgarrU6zGLoC6T7wJs8w4ifIQCqWdjCfdoElTibe4hggBanQEn6AlI
+ ou8es2xF3scAqkP5GPoGbZMiO51n3tgnD67qXXHI/OPiOr2WZJoYe1dbAvmgh4Rs8toXzk5A
+ /4AbpDXmn2zocX1YzXN8J57ELz5BSFTOHwCkOQOLrTrClM/SAkc5wr5netJl3pNw/4EyY8lP
+ xiVBidl9bYIrSaYc1jaMC04NumHsFQWhStTABHA9G2AgxALCbtDJo9OKvPboZFPGDRf8MNJ
+IronPort-HdrOrdr: A9a23:7IxO8qo6e8hvFRPCEtX1cZQaV5rveYIsimQD101hICG9Evb0qy
+ nOpoV/6faQslwssR4b9uxoVJPvfZq+z+8W3WByB9eftWDd0QPFEGgL1+DfKlbbak7DH4BmtJ
+ uJc8JFeafN5VoRt7eG3OFveexQvOVu88qT9JjjJ28Gd3APV0n5hT0JcjpyFCdNNW57LKt8Lr
+ WwzOxdqQGtfHwGB/7LfUXsD4D41rv2fIuNW29+OyIa
+X-IronPort-AV: E=Sophos;i="5.96,212,1665460800"; 
+   d="scan'208";a="86240592"
+From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH v2 1/4] CODING-STYLE: add .editorconfig to clarify indentation uses spaces
+Date: Fri, 2 Dec 2022 10:55:56 +0000
+Message-ID: <01afbbbc15332aedcdccba75cb1f5edd538c4492.1669978356.git.edvin.torok@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1669978356.git.edvin.torok@citrix.com>
+References: <cover.1669978356.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.0
-Subject: Re: [QEMU][PATCH v2 05/11] include/hw/xen/xen_common: return error
- from xen_create_ioreq_server
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-To: Vikram Garhwal <vikram.garhwal@amd.com>, qemu-dev@xilinx.com,
- Paolo Bonzini <pbonzini@redhat.com>
-Cc: stefano.stabellini@amd.com, alex.bennee@linaro.org,
- xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Thomas Huth <thuth@redhat.com>
-References: <20221202030003.11441-1-vikram.garhwal@amd.com>
- <20221202030003.11441-6-vikram.garhwal@amd.com>
- <a45c902a-043d-5256-7961-40c8aabd89b4@linaro.org>
-In-Reply-To: <a45c902a-043d-5256-7961-40c8aabd89b4@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-On 2/12/22 08:19, Philippe Mathieu-Daudé wrote:
-> Hi Stefano and Vikram,
-> 
-> On 2/12/22 03:59, Vikram Garhwal wrote:
->> From: Stefano Stabellini <stefano.stabellini@amd.com>
->>
->> This is done to prepare for enabling xenpv support for ARM architecture.
->> On ARM it is possible to have a functioning xenpv machine with only the
->> PV backends and no IOREQ server. If the IOREQ server creation fails,
->> continue to the PV backends initialization.
->>
->> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
->> Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
->> ---
->>   include/hw/xen/xen_common.h | 13 ++++++++-----
->>   1 file changed, 8 insertions(+), 5 deletions(-)
->>
->> diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
->> index 77ce17d8a4..6510ac15e0 100644
->> --- a/include/hw/xen/xen_common.h
->> +++ b/include/hw/xen/xen_common.h
->> @@ -467,9 +467,10 @@ static inline void xen_unmap_pcidev(domid_t dom,
->>   {
->>   }
->> -static inline void xen_create_ioreq_server(domid_t dom,
->> -                                           ioservid_t *ioservid)
-> 
-> How long are we supposed to maintain this code? Per [*]:
-> 
->    In general XenProject.org supports stable branches for 18 months full
->    support plus 18 months security fixes. When a new X.Y.0 release is
->    made there is usually one more release on the to-be-retired stable
->    branch to mop up any loose patches sitting in the repository at which
->    point the branch is retired.
-> 
-> 4.17 was just released. 4.5 was 7 years ago. IIUC EOL'ed 4 years ago.
-> 
-> [*] 
-> https://wiki.xenproject.org/wiki/Xen_Project_Maintenance_Releases#Stable_Maintenance_Branches
+Add an .editorconfig to make it easier to keep patches compatible with
+Xen's coding style, and to reemphasize what Xen's coding style is.
 
-+Paolo for commit 14efd8d3b5 ("meson, configure: move Xen detection to 
-meson"):
+I thought that Xen demands tabs rather than spaces (which is more
+difficult with OCaml because indentation tools use spaces,
+and the use of tabs requires changing editor settings),
+however CODING-STYLE says it is spaces.
 
-     xen_libs = {
-       '4.11.0': [ 'xenstore', 'xenctrl', 'xendevicemodel', 
-'xenforeignmemory', 'xengnttab', 'xenevtchn', 'xentoolcore' ],
-       '4.10.0': [ 'xenstore', 'xenctrl', 'xendevicemodel', 
-'xenforeignmemory', 'xengnttab', 'xenevtchn', 'xentoolcore' ],
-       '4.9.0': [ 'xenstore', 'xenctrl', 'xendevicemodel', 
-'xenforeignmemory', 'xengnttab', 'xenevtchn' ],
-       '4.8.0': [ 'xenstore', 'xenctrl', 'xenforeignmemory', 
-'xengnttab', 'xenevtchn' ],
-       '4.7.1': [ 'xenstore', 'xenctrl', 'xenforeignmemory', 
-'xengnttab', 'xenevtchn' ],
-       '4.6.0': [ 'xenstore', 'xenctrl' ],
-       '4.5.0': [ 'xenstore', 'xenctrl' ],
-       '4.2.0': [ 'xenstore', 'xenctrl' ],
-     }
+Document this explicitly by adding a .editorconfig file (see editorconfig.org),
+which is an editor agnostic format for specifying basic style properties like
+indentation, either with native support in editors or via plugins.
 
-According to repology for the 'xen' package:
+It is safer than modelines because it only supports controlling a
+restricted set of editor properties and not arbitrary commands as Vim
+modelines would have, and works with editors other than Vim too.
+(Vim has a deny list for modeline sandboxing, which is error-prone
+because every time a new command gets added it needs to be added to the
+deny list, which has been the source of a few CVEs in the past
+and I disable Vim modelines everywhere as a precaution).
 
-    FreeBSD (ports):    4.16
-    Debian 11:          4.14.5
-    Fedora 35:          4.16.2
-    Ubuntu 20.04:       4.11.3
-    OpenSUSE Leap 15.3: 4.14.1
-    RHEL 8:             ?
+This file is added as a convenience for those who might have an editor
+that supports it, and its presence should have no impact on those that
+do not (want to) use it.
+It also won't cause re-indentation of existing files when edited, only
+newly added lines would follow the convention.
+
+No functional change.
+
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+ .editorconfig | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 .editorconfig
+
+diff --git a/.editorconfig b/.editorconfig
+new file mode 100644
+index 0000000000..cb2f27c581
+--- /dev/null
++++ b/.editorconfig
+@@ -0,0 +1,20 @@
++# See ./CODING_STYLE
++root = true
++
++[*]
++end_of_line = lf
++indent_style = space
++charset = utf-8
++max_line_length = 79
++trim_trailing_whitespace = true
++insert_final_newline = true
++
++# Makefiles must use tabs, otherwise they don't work
++[{Makefile,*.mk,Makefile.rules}]
++indent_style = tabs
++
++[*.{c,h}]
++indent_size = 4
++
++[*.{ml,mli}]
++indent_size = 2
+-- 
+2.34.1
 
 
