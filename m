@@ -4,29 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C23C4321E
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Dec 2022 10:57:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.451792.709591 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF70CC4167B
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Dec 2022 10:59:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.451811.709602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p13j0-0004ms-Dj; Fri, 02 Dec 2022 10:56:58 +0000
+	id 1p13lC-00066b-SP; Fri, 02 Dec 2022 10:59:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 451792.709591; Fri, 02 Dec 2022 10:56:58 +0000
+Received: by outflank-mailman (output) from mailman id 451811.709602; Fri, 02 Dec 2022 10:59:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p13j0-0004mj-A8; Fri, 02 Dec 2022 10:56:58 +0000
-Received: by outflank-mailman (input) for mailman id 451792;
- Fri, 02 Dec 2022 10:56:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p13lC-00066U-P3; Fri, 02 Dec 2022 10:59:14 +0000
+Received: by outflank-mailman (input) for mailman id 451811;
+ Fri, 02 Dec 2022 10:59:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3Iy3=4A=citrix.com=prvs=3285f5271=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1p13iz-0003rQ-0F
- for xen-devel@lists.xenproject.org; Fri, 02 Dec 2022 10:56:57 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 07415175-7230-11ed-91b6-6bf2151ebd3b;
- Fri, 02 Dec 2022 11:56:55 +0100 (CET)
+ <SRS0=NC9X=4A=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1p13lB-00066O-7S
+ for xen-devel@lists.xenproject.org; Fri, 02 Dec 2022 10:59:13 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2061e.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::61e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 55fb8ec8-7230-11ed-8fd2-01056ac49cbb;
+ Fri, 02 Dec 2022 11:59:04 +0100 (CET)
+Received: from BN0PR04CA0130.namprd04.prod.outlook.com (2603:10b6:408:ed::15)
+ by PH8PR12MB7025.namprd12.prod.outlook.com (2603:10b6:510:1bc::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.23; Fri, 2 Dec
+ 2022 10:59:07 +0000
+Received: from BN8NAM11FT088.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:ed:cafe::5f) by BN0PR04CA0130.outlook.office365.com
+ (2603:10b6:408:ed::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.10 via Frontend
+ Transport; Fri, 2 Dec 2022 10:59:07 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT088.mail.protection.outlook.com (10.13.177.81) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5857.18 via Frontend Transport; Fri, 2 Dec 2022 10:59:07 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 2 Dec
+ 2022 04:59:07 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 2 Dec
+ 2022 02:59:06 -0800
+Received: from [10.71.193.33] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Fri, 2 Dec 2022 04:59:04 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,262 +65,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 07415175-7230-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1669978615;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=bOQ3oRol1JrYqAer48HmKkncGmJC2gDM4u9fgjLBE4w=;
-  b=PwUcsH1Sd6ese38RgEAqgl/itElvM4QLSH4HKAtEliMYWLKWPdrVVhlh
-   HLUZOLiPJFYh5G1/u6BIqo8yyJLNK6a5f3dPMG6LGzUvdGhDwDAqoxbfv
-   dbn97ijudYO7ZG2IpfpLQ02f+iwsM7orI3VPJkHPIhPHb6OTCnMbL6tqY
-   U=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 86249443
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:9+w8H60VYJD1MzPDD/bD5cBxkn2cJEfYwER7XKvMYLTBsI5bpzdSz
- jcZDTrSb/aDa2umc48iPITl8UoP78KDmIcwTQM6pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefTAOK5ULSfUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS9nuDgNyo4GlC5wZmP6gR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfJ1Nq5
- KYydg80dDufpbyn6rfrTMNiiZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKkSbC/FMEg5/5JYWkeu2h3+5bzpCr1G9rqsr+WnDigd21dABNfKFJIbWFJkJxS50o
- Erq3XyoMBJLLeWF2BaA0nOju8zUzTnkDdd6+LqQqacx3Qz7KnYoIA0bUx63rOe0jma6WslDM
- AoE9yw2t68w+Ue3CN7nUHWQrHeaszYGVtFXEul87xuCooLL5y6JC25CSSROAOHKr+dvG2Zsj
- AXQ2Yq0W3o/69V5VE5x6J+ynxejYwJLElYYTjMmExov5onlio8820enoslYLIa5idj8GDfVy
- j+MrTQji7h7sfPnx5lX7nic3Wvy+8Ghohodo1yOAzn7tl8RiJuNPdTA1LTN0RpXwG91pHGlt
- WNMpcWR5ftm4XqlxH3UG7Vl8F1ECp+43NzgbbxHRcFJG9eFoSTLkWVsDNZWei9U3j4sI2OBX
- aMphStf5YVIIFyhZrJtboS6BqwClPa+RIW8B66NNYQXP/CdkTNrGwk3NSatM53FyhBwwcnTx
- 7/EGSpTMZrqIfs+l2fnLwvs+bQq2jo/1QvuqWPTlnyaPU6lTCfNE98taQLeBt3VGYvY+G396
- chEDcKWxn13CaumCsUh2dJJfA9iwLlSLcyelvG7gcbYfVA7SDt8UKGLqV7jEqQ895loei7z1
- inVcidlJJDX3yScQelWQhiPsI/SYKs=
-IronPort-HdrOrdr: A9a23:fTToYqNaVxtv/sBcTvWjsMiBIKoaSvp037BL7TEXdfUxSKelfq
- +V8sjzuSWUtN9uYgBDpTnwAtjlfVr67tpO7Y4deZ2iVA7gtG7AFvAF0WKK+VSJdxEWkNQ86U
- 5OScdD4bbLfD1HZKjBkWqF+55J+rO6GOrBv4rj80s=
-X-IronPort-AV: E=Sophos;i="5.96,212,1665460800"; 
-   d="scan'208";a="86249443"
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Christian
- Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 2/4] tools/ocaml/libs/xc: add binding to xc_evtchn_status
-Date: Fri, 2 Dec 2022 10:55:57 +0000
-Message-ID: <c43ff9e8a95a73dadcd5db6ad10340a45592dd01.1669978356.git.edvin.torok@citrix.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1669978356.git.edvin.torok@citrix.com>
-References: <cover.1669978356.git.edvin.torok@citrix.com>
+X-Inumbo-ID: 55fb8ec8-7230-11ed-8fd2-01056ac49cbb
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RXSbY+pJSm/RWIpWqvJAAWrlrsCH7b8R33QOEqMsJgbVrllCl45FVAj6+fmkOAPt2w3trCWQr5WBv2Qa2/Zln6A4Q0jLFY4WJpgP8/XK4Ek44WldbCU50C0/IKfsS8fYxSXe08PjTfIG1+W+RilVkek43FnX76XatbB8OzKJwtrMWgl/nrdQgZKFPsMaz1UG7u8nfXXOpDSHJ1GZcxwr68ANTXRQvl7hluDAfCa4DZbGv66bC1vkV+QHJBb1XsdsXz8Qh9Ex93tDUKujKlt2Bt3LlniuJV2iPpHTRSioUDIo0IGQdXSDT0hWTd7qGftNIGwIfzPWqR2IiAa4M4Kcyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FD76rEScKD8WF7yPTfiKGh1X1erIEL2q1R//zu3Uheg=;
+ b=dm5xKbG00UYyLvFgVjCfGaRnL0gFtGUTjHEB00X8S5qLiWEzwNj91Q8u2G4386Jp9R8xvImVMjlrUFZuc2wvRlIdR0JX6hZvtvyMQqWX7aDtFCPhPMRVxf3oNfBBAysIANPfJ/1lNudZgp1ROZ1ffJMEtGo5pz8jcBqb/yUHINSyrJP1Z6A2ABbtbE7ixnD6AP4W5ddB2coH1lIBdN5toy/TFzUS/lsk6h1dSeoO6/5ydUqU6K9ax3OsSiJJ0pa7xJ2kvsL4Z4az2PpX/5btIp+nXXr1MInGlXa8+8Kobbtx5t8yCPv2VT44nx5tcFf6mbvPGh2hGgPE/yrb4NIoQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FD76rEScKD8WF7yPTfiKGh1X1erIEL2q1R//zu3Uheg=;
+ b=vo0aNxpdmAv9a1i+L5RA63YcvCRY7tBherZk9i8oiRF/sF8P8chyRCWzVgFBV9eASGeVUmFedajKR9cgNtcPTUjWfAFWFl0xJVwTOVzo3RqPOYXBGgL8V6G2CpRuiZ2ZwLoeioeSH2hb6Rk3IsPy68D3N+07C2vQkF7x85WMF5o=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <ede99a96-cbf8-f388-0484-7b176d07742e@amd.com>
+Date: Fri, 2 Dec 2022 11:59:03 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.1
+Subject: Re: [RFC PATCH 00/21] Add SMMUv3 Stage 1 Support for XEN guests
+Content-Language: en-US
+To: Rahul Singh <rahul.singh@arm.com>, <xen-devel@lists.xenproject.org>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Jan Beulich <jbeulich@suse.com>, Paul Durrant
+	<paul@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, "Wei
+ Liu" <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>, "Juergen
+ Gross" <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+References: <cover.1669888522.git.rahul.singh@arm.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <cover.1669888522.git.rahul.singh@arm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT088:EE_|PH8PR12MB7025:EE_
+X-MS-Office365-Filtering-Correlation-Id: 388fef10-1f68-498f-23b2-08dad4543bfc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	vgAdJ0Y6ltqpuLJIhiw3TbH6BCFyw8q0EZakgLu4pKUhx5mwzj8GHE/CR9Evufe8ds/GhN50Ax/ap6s4xHPxkA2mHUBWapbH8zvnYU19+8cXdVFfEpJiQwFi0AV7atIOimFz7LcirxjtU/SZcyCWHE13nGCR+mRbgj/7W21e5NuYStmleCsRGUbGOhKVpeUbiCAQfulkBk4bdjAckheZLfjx5qXwwdsCiJyfBXJUnlDyYkHPhT1Hy2qCS15RrrNIVXPp8lYzLKcy7IzJ4uR+OGf/CX1MZPVLM2ATpA4OoyeejOI3Vn8wj1u8WvxFAmD6MXnxYNxwBBQl3e2kYxuw2HH9AdaZAUJhyOzYXtnzXLhVQhTOsc9uailuQvnM5Oxic2Xo41pbhHyhUWVfvzxfY3j6JGC9ideJtA17zzNdyJAipWRleaHMngiZuSKRFRS9r8wtITajUf8PrDmlf+/hhxZ/YOfnaoadacxcjGA2OLdJWKWbjKy1aVTP4UA0v6yCWNYcAX2E1Dupm6ruhk2gVq+hBDg0mtu1B+a1Rbmbw38VVsO9CaGGGI4Zoqv8sKF3RJP4a13Xcq5gNqp5bvJOKrw9VTiUYbB1AYrR1usDrjWuVCQqHLZhAYKotJnVaSe21wIYtGYimeKIrlVdDrcZiF0fDTApOKN4BwYHkRW6S8RFdo/avyHWFunt1Rgu2hCAwFjVB1R/rm/dYiDxDzBNpyV16DVH02+Y3s3bAaS3LQlFboc6nqrZq9/fYpCSKcTSaOSYCpOeh6OQkQPYsMJT8XLtOB6GMTRc3cUnnAkZg8b43aDXhtpLp+THKSN1eFM9G/JYAchV3ACthgsTnXGWtQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(396003)(136003)(376002)(346002)(451199015)(46966006)(36840700001)(40470700004)(81166007)(2906002)(7416002)(426003)(44832011)(54906003)(966005)(110136005)(5660300002)(316002)(186003)(70586007)(45080400002)(16576012)(70206006)(40480700001)(336012)(47076005)(40460700003)(8936002)(82740400003)(36756003)(4326008)(2616005)(86362001)(26005)(82310400005)(8676002)(31696002)(41300700001)(356005)(478600001)(31686004)(36860700001)(83380400001)(53546011)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2022 10:59:07.4599
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 388fef10-1f68-498f-23b2-08dad4543bfc
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN8NAM11FT088.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7025
 
-There is no API or ioctl to query event channel status, it is only
-present in xenctrl.h
+Hi Rahul,
 
-The C union is mapped to an OCaml variant exposing just the value from the
-correct union tag.
+On 01/12/2022 17:02, Rahul Singh wrote:
+> 
+> 
+> The SMMUv3 supports two stages of translation. Each stage of translation can be
+> independently enabled. An incoming address is logically translated from VA to
+> IPA in stage 1, then the IPA is input to stage 2 which translates the IPA to
+> the output PA.
+> 
+> Stage 1 is intended to be used by a software entity to provide isolation or
+> translation to buffers within the entity, for example DMA isolation within an
+> OS. Stage 2 is intended to be available in systems supporting the
+> Virtualization Extensions and is intended to virtualize device DMA to guest VM
+> address spaces. When both stage 1 and stage 2 are enabled, the translation
+> configuration is called nested.
+> 
+> Stage 1 translation support is required to provide isolation between different
+> devices within OS. XEN already supports Stage 2 translation but there is no
+> support for Stage 1 translation. The goal of this work is to support Stage 1
+> translation for XEN guests. Stage 1 has to be configured within the guest to
+> provide isolation.
+> 
+> We cannot trust the guest OS to control the SMMUv3 hardware directly as
+> compromised guest OS can corrupt the SMMUv3 configuration and make the system
+> vulnerable. The guest gets the ownership of the stage 1 page tables and also
+> owns stage 1 configuration structures. The XEN handles the root configuration
+> structure (for security reasons), including the stage 2 configuration.
+> 
+> XEN will emulate the SMMUv3 hardware and exposes the virtual SMMUv3 to the
+> guest. Guest can use the native SMMUv3 driver to configure the stage 1
+> translation. When the guest configures the SMMUv3 for Stage 1, XEN will trap
+> the access and configure hardware.
+> 
+> SMMUv3 Driver(Guest OS) -> Configure the Stage-1 translation ->
+> XEN trap access -> XEN SMMUv3 driver configure the HW.
+> 
+> SMMUv3 driver has to be updated to support the Stage-1 translation support
+> based on work done by the KVM team to support Nested Stage translation:
+> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Feauger%2Flinux%2Fcommits%2Fv5.11-stallv12-2stage-v14&amp;data=05%7C01%7Cmichal.orzel%40amd.com%7Cecb9075a29974c8f5ad608dad3b5916f%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638055074068482160%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=PdK4%2Bsps3%2FdXYJUDv3iCy%2Byaqbh1bOVb1AFzTtx1nts%3D&amp;reserved=0
+> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flwn.net%2FArticles%2F852299%2F&amp;data=05%7C01%7Cmichal.orzel%40amd.com%7Cecb9075a29974c8f5ad608dad3b5916f%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638055074068482160%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=5Kp7023HiA4Qbfi28wcPL20JyC2xLwwiyEUZcxTSCOA%3D&amp;reserved=0
+> 
+> As the stage 1 translation is configured by XEN on behalf of the guest,
+> translation faults encountered during the translation process need to be
+> propagated up to the guest and re-injected into the guest. When the guest
+> invalidates stage 1 related caches, invalidations must be forwarded to the
+> SMMUv3 hardware.
+> 
+> This patch series is sent as RFC to get the initial feedback from the
+> community. This patch series consists of 21 patches which is a big number for
+> the reviewer to review the patches but to understand the feature end-to-end we
+> thought of sending this as a big series. Once we will get initial feedback, we
+> will divide the series into a small number of patches for review.
 
-The information provided here is similar to 'lsevtchn', but rather than
-parsing its output it queries the underlying API directly.
+Due to the very limited availability of the board we have, that is equipped with
+DMA platform devices and SMMUv3 (I know that you tested PCI use case thoroughly),
+I managed for now to do the testing on dom0 only.
 
-Signed-off-by: Edwin Török <edvin.torok@citrix.com>
----
-Changes since v1:
-* drop paragraph about where this is used
-* add comment about max port
-* use Xeneventchn.virq_t instead of int, add a dependency: xc -> eventchn
-* initialize struct without memset-ing first
-* use 2 CAMLreturn, I found an example in the OCaml stdlib that does that so should be future-proof https://github.com/ocaml/ocaml/blob/663e8d219f566095e3a9497c5bae07b6a95cae39/otherlibs/unix/dup_win32.c#L52-L77
-* use Tag_some, defining it if needed
-* fix typo on failwith
----
- tools/ocaml/libs/Makefile           |  2 +-
- tools/ocaml/libs/xc/META.in         |  2 +-
- tools/ocaml/libs/xc/Makefile        |  2 +-
- tools/ocaml/libs/xc/xenctrl.ml      | 15 +++++++
- tools/ocaml/libs/xc/xenctrl.mli     | 15 +++++++
- tools/ocaml/libs/xc/xenctrl_stubs.c | 67 +++++++++++++++++++++++++++++
- 6 files changed, 100 insertions(+), 3 deletions(-)
+By commenting out the code in Linux responsible for setting up Xen SWIOTLB DMA ops, I was able
+to successfully verify the nested SMMU working properly for DMA platform devices on the
+example of using ZDMA. Both the upstream dmatest client app as well as the VFIO user space driver
+that I wrote for ZDMA passed the test!
 
-diff --git a/tools/ocaml/libs/Makefile b/tools/ocaml/libs/Makefile
-index 7e7c27e2d5..15f45a6d66 100644
---- a/tools/ocaml/libs/Makefile
-+++ b/tools/ocaml/libs/Makefile
-@@ -4,7 +4,7 @@ include $(XEN_ROOT)/tools/Rules.mk
- SUBDIRS= \
- 	mmap \
- 	xentoollog \
--	xc eventchn \
-+	eventchn xc\
- 	xb xs xl
- 
- .PHONY: all
-diff --git a/tools/ocaml/libs/xc/META.in b/tools/ocaml/libs/xc/META.in
-index 2ff4dcb6bf..6a273936a3 100644
---- a/tools/ocaml/libs/xc/META.in
-+++ b/tools/ocaml/libs/xc/META.in
-@@ -1,5 +1,5 @@
- version = "@VERSION@"
- description = "Xen Control Interface"
--requires = "unix,xenmmap"
-+requires = "unix,xenmmap,xeneventchn"
- archive(byte) = "xenctrl.cma"
- archive(native) = "xenctrl.cmxa"
-diff --git a/tools/ocaml/libs/xc/Makefile b/tools/ocaml/libs/xc/Makefile
-index 3b76e9ad7b..1d9fecb06e 100644
---- a/tools/ocaml/libs/xc/Makefile
-+++ b/tools/ocaml/libs/xc/Makefile
-@@ -4,7 +4,7 @@ include $(OCAML_TOPLEVEL)/common.make
- 
- CFLAGS += -I../mmap $(CFLAGS_libxenctrl) $(CFLAGS_libxenguest)
- CFLAGS += $(APPEND_CFLAGS)
--OCAMLINCLUDE += -I ../mmap
-+OCAMLINCLUDE += -I ../mmap -I ../eventchn
- 
- OBJS = xenctrl
- INTF = xenctrl.cmi
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 2ed7454b16..5dac47991e 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -267,6 +267,21 @@ external evtchn_alloc_unbound: handle -> domid -> domid -> int
-   = "stub_xc_evtchn_alloc_unbound"
- external evtchn_reset: handle -> domid -> unit = "stub_xc_evtchn_reset"
- 
-+(* FIFO has theoretical maximum of 2^28 ports, fits in an int *)
-+type evtchn_interdomain = { dom: domid; port: int}
-+
-+type evtchn_stat =
-+  | EVTCHNSTAT_unbound of domid
-+  | EVTCHNSTAT_interdomain of evtchn_interdomain
-+  | EVTCHNSTAT_pirq of int
-+  | EVTCHNSTAT_virq of Xeneventchn.virq_t
-+  | EVTCHNSTAT_ipi
-+
-+type evtchn_status = { vcpu: int; status: evtchn_stat }
-+
-+external evtchn_status: handle -> domid -> int -> evtchn_status option =
-+  "stub_xc_evtchn_status"
-+
- external readconsolering: handle -> string = "stub_xc_readconsolering"
- 
- external send_debug_keys: handle -> string -> unit = "stub_xc_send_debug_keys"
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index 0f80aafea0..6c9206bc74 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -206,6 +206,21 @@ external shadow_allocation_get : handle -> domid -> int
- external evtchn_alloc_unbound : handle -> domid -> domid -> int
-   = "stub_xc_evtchn_alloc_unbound"
- external evtchn_reset : handle -> domid -> unit = "stub_xc_evtchn_reset"
-+
-+type evtchn_interdomain = { dom: domid; port: int}
-+
-+type evtchn_stat =
-+  | EVTCHNSTAT_unbound of domid
-+  | EVTCHNSTAT_interdomain of evtchn_interdomain
-+  | EVTCHNSTAT_pirq of int
-+  | EVTCHNSTAT_virq of Xeneventchn.virq_t
-+  | EVTCHNSTAT_ipi
-+
-+type evtchn_status = { vcpu: int; status: evtchn_stat }
-+
-+external evtchn_status: handle -> domid -> int -> evtchn_status option =
-+  "stub_xc_evtchn_status"
-+
- external readconsolering : handle -> string = "stub_xc_readconsolering"
- external send_debug_keys : handle -> string -> unit = "stub_xc_send_debug_keys"
- external physinfo : handle -> physinfo = "stub_xc_physinfo"
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index d30585f21c..a492ea17fd 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -44,6 +44,10 @@
- #define Val_none (Val_int(0))
- #endif
- 
-+#ifndef Tag_some
-+#define Tag_some 0
-+#endif
-+
- #define string_of_option_array(array, index) \
-     ((Field(array, index) == Val_none) ? NULL : String_val(Field(Field(array, index), 0)))
- 
-@@ -641,6 +645,69 @@ CAMLprim value stub_xc_evtchn_reset(value xch, value domid)
-     CAMLreturn(Val_unit);
- }
- 
-+CAMLprim value stub_xc_evtchn_status(value xch, value domid, value port)
-+{
-+    CAMLparam3(xch, domid, port);
-+    CAMLlocal4(result, result_status, stat, interdomain);
-+    xc_evtchn_status_t status = {
-+        .dom = _D(domid),
-+        .port = Int_val(port),
-+    };
-+    int rc;
-+
-+    caml_enter_blocking_section();
-+    rc = xc_evtchn_status(_H(xch), &status);
-+    caml_leave_blocking_section();
-+
-+    if ( rc < 0 )
-+        failwith_xc(_H(xch));
-+
-+    if ( status.status == EVTCHNSTAT_closed )
-+        CAMLreturn(Val_none);
-+
-+    switch ( status.status )
-+    {
-+    case EVTCHNSTAT_unbound:
-+        stat = caml_alloc(1, 0); /* 1st non-constant constructor */
-+        Store_field(stat, 0, Val_int(status.u.unbound.dom));
-+        break;
-+
-+    case EVTCHNSTAT_interdomain:
-+        interdomain = caml_alloc_tuple(2);
-+        Store_field(interdomain, 0, Val_int(status.u.interdomain.dom));
-+        Store_field(interdomain, 1, Val_int(status.u.interdomain.port));
-+        stat = caml_alloc(1, 1); /*  2nd non-constant constructor */
-+        Store_field(stat, 0, interdomain);
-+        break;
-+    case EVTCHNSTAT_pirq:
-+        stat = caml_alloc(1, 2); /* 3rd non-constant constructor */
-+        Store_field(stat, 0, Val_int(status.u.pirq));
-+        break;
-+
-+    case EVTCHNSTAT_virq:
-+        stat = caml_alloc(1, 3); /* 4th non-constant constructor */
-+        Store_field(stat, 0, Val_int(status.u.virq));
-+        break;
-+
-+    case EVTCHNSTAT_ipi:
-+        stat = Val_int(0); /* 1st constant constructor */
-+        break;
-+
-+    default:
-+        caml_failwith("Unknown evtchn status");
-+
-+    }
-+    result_status = caml_alloc_tuple(2);
-+    Store_field(result_status, 0, Val_int(status.vcpu));
-+    Store_field(result_status, 1, stat);
-+
-+    /* caml_alloc_some is missing in older versions of OCaml
-+     */
-+    result = caml_alloc_small(1, Tag_some);
-+    Store_field(result, 0, result_status);
-+
-+    CAMLreturn(result);
-+}
- 
- CAMLprim value stub_xc_readconsolering(value xch)
- {
--- 
-2.34.1
+I added some logs to verify the sync up between Linux and Xen during a VFIO test:
 
+LINUX: SMMUv3: Setting the STE S1 Config 0x1405c000 for SID=0x210
+XEN: vSMMUv3: guest config=ARM_SMMU_DOMAIN_NESTED
+XEN: SMMUv3: Setting the STE S1 Config 0x1405c000 for SID=0x210
+
+Before transfer example:
+ src value: 0xdb71faf
+ dst value: 0
+Waiting for transfer completion...
+After transfer example:
+ src value: 0xdb71faf
+ dst value: 0xdb71faf
+TEST RESULT: PASS
+
+LINUX: SMMUv3: Setting the STE S1 Config 0x12502000 for SID=0x210
+XEN: vSMMUv3: guest config=ARM_SMMU_DOMAIN_NESTED
+XEN: SMMUv3: Setting the STE S1 Config 0x12502000 for SID=0x210
+
+~Michal
 
