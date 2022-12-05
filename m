@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D59C4321E
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Dec 2022 11:03:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.453417.711028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B7CEC4321E
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Dec 2022 11:17:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.453433.711039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p29FQ-0000rd-QN; Mon, 05 Dec 2022 11:02:56 +0000
+	id 1p29Su-0003A2-0W; Mon, 05 Dec 2022 11:16:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 453417.711028; Mon, 05 Dec 2022 11:02:56 +0000
+Received: by outflank-mailman (output) from mailman id 453433.711039; Mon, 05 Dec 2022 11:16:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p29FQ-0000rT-Nb; Mon, 05 Dec 2022 11:02:56 +0000
-Received: by outflank-mailman (input) for mailman id 453417;
- Mon, 05 Dec 2022 11:02:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p29St-00039v-To; Mon, 05 Dec 2022 11:16:51 +0000
+Received: by outflank-mailman (input) for mailman id 453433;
+ Mon, 05 Dec 2022 11:16:50 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/ZPr=4D=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
- id 1p29Ed-0000W9-5w
- for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 11:02:07 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 417e48a6-748c-11ed-91b6-6bf2151ebd3b;
- Mon, 05 Dec 2022 12:02:06 +0100 (CET)
-Received: by mail-ej1-x62c.google.com with SMTP id qk9so9083567ejc.3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Dec 2022 03:02:06 -0800 (PST)
+ (envelope-from <julien@xen.org>) id 1p29Ss-00039p-FP
+ for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 11:16:50 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1p29Sl-0004xL-2r; Mon, 05 Dec 2022 11:16:43 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=[192.168.30.208]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1p29Sk-0006Sx-S3; Mon, 05 Dec 2022 11:16:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,79 +41,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 417e48a6-748c-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BEvzQObdwllKYzf1rM0gn5NgqqBSYsrZXBQG4nClVRg=;
-        b=Henub+u71ZoilZJfObgvjoWnQZE/h5gVGeWW0mU+OWNgAEYdvO5kJDePgUEoUcD76r
-         VHsYDHgW8cTwaa0obT8vpJk+3G1FZeXg0GNxu7IoV9ivld3W+CrwZAL9bQ3p8j7H7CMs
-         Id0mnOS1b0vXAIyIEBN+pStduBH/OjTRkNEqE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BEvzQObdwllKYzf1rM0gn5NgqqBSYsrZXBQG4nClVRg=;
-        b=dYSZYffjzbcduDZJOg1yJCjhT1YTUPwmcwI78eq4dE6IBZwtEcrruw7gsdkKCFmy/5
-         5G2XtHKm1ahS/DxfjPytgIe/SNd6vCdt+8vzErkbVv0YziOVXSa3u8zeuFXo8dUoz+oO
-         zPx39bM8+0qKyWdYMoUS0tC4aU1bAgJsTPYJ7sNzTUTYzm0h2nDY2H0wyuoXg2JiiYlJ
-         tjwEXk4i8d8HNk80VXPobJOa7RxGg6EnkfEhSbFT2Lrxb2jurPHp46Ib0FJpT45b1xKL
-         1vO+k+u0FPUFAUfDQBw/NVRU5Ssx+Ccovdh83GWWbiidSPOHmRitGLYIBSUNgIC2Nzz/
-         fpnw==
-X-Gm-Message-State: ANoB5plFr4MNvekNfuK7rmpUiP1TTOp15z2x5xSkqVPVMPb+1x106HPV
-	+PaBIsZupTX2wHfXOG24pOTJiUMZmR/Uh/jbtdNu9jJqG9g/Iw==
-X-Google-Smtp-Source: AA0mqf6PzWGm9WW7vcnADJSVzftDJAZHPVoa+o3w71Z1tlQt1jikCvfz/G46wFAsRzSEregII96NrdMS2EYMgPfC/mQ=
-X-Received: by 2002:a17:906:7f16:b0:7c0:f2cf:8e09 with SMTP id
- d22-20020a1709067f1600b007c0f2cf8e09mr3583924ejr.257.1670238125623; Mon, 05
- Dec 2022 03:02:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=QNVnad72U7xzKCA0asYb6mqx0ml/GyneFyBQtTBDxek=; b=XIO7qipqKH4MrPLAvwcwhwF38M
+	C1CYpiBXdpEiwBB1Z6zY+4b4vJxGxZIn+e9vXcqzJ28ZsAuJUnhr+XET0DTApQJ+o+tfciWaCcB0M
+	ADZlGQ6RRwfqXWR3Fsf/CXWYuGe0MH1Gufqw0TqX21hcukM1SzNEx2d4h1i4HtIZ7Zvo=;
+Message-ID: <e68c068c-d648-7915-8709-0367d7f0c48f@xen.org>
+Date: Mon, 5 Dec 2022 11:16:40 +0000
 MIME-Version: 1.0
-References: <a7d3fc3dfe6fb8dfb75c7b35a78a299bee9685f9.1670172466.git.demi@invisiblethingslab.com>
-In-Reply-To: <a7d3fc3dfe6fb8dfb75c7b35a78a299bee9685f9.1670172466.git.demi@invisiblethingslab.com>
-From: George Dunlap <george.dunlap@cloud.com>
-Date: Mon, 5 Dec 2022 11:01:54 +0000
-Message-ID: <CA+zSX=bKN3cqCMKzR+5Xp9LOUw=38VzTp4BoN1-Qmn0-dZ7Zyg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] Reduce hard-coding of PAT value
-To: xen-devel@lists.xenproject.org
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Wei Liu <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Tim Deegan <tim@xen.org>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Content-Type: multipart/alternative; boundary="0000000000002b316905ef129ed0"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.5.1
+Subject: Re: [PATCH v2] process/release-technician-checklist: Explain how the
+ banner in README is generated
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <jgrall@amazon.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20221124190850.35344-1-julien@xen.org>
+ <6819d05e-d1ab-fc3e-7795-bac650df3bc4@suse.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <6819d05e-d1ab-fc3e-7795-bac650df3bc4@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---0000000000002b316905ef129ed0
-Content-Type: text/plain; charset="UTF-8"
+Hi Jan,
 
-On Sun, Dec 4, 2022 at 5:14 PM Demi Marie Obenour <
-demi@invisiblethingslab.com> wrote:
+On 25/11/2022 09:17, Jan Beulich wrote:
+> On 24.11.2022 20:08, Julien Grall wrote:
+>> From: Julien Grall <jgrall@amazon.com>
+>>
+>> Explain how the banner in README is generated and take the opportunity
+>> to mention what it should look like for RC.
+>>
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> 
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> albeit with a couple of nits:
+> 
+>> --- a/docs/process/release-technician-checklist.txt
+>> +++ b/docs/process/release-technician-checklist.txt
+>> @@ -48,7 +48,12 @@ t=RELEASE-$r
+>>   
+>>   * consider bumping sonames of shlibs
+>>   
+>> -* change xen-unstable README (should say "Xen 4.5" in releases and on stable branches, "Xen 4.5-unstable" on unstable)
+>> +* change xen-unstable README. Should say:
+>> +    - "Xen 4.5" in releases and on stable branches
+>> +    - "Xen 4.5-unstable" on unstable
+>> +    - "Xen 4.5-rc" for release candidate
+>> +
+>> +*   The banner is generated using figlet
+>>   * change xen-unstable Config.mk
+> 
+> Perhaps insert another blank line between these two bullet points?
+> Or, if they're deemed to belong together, remove the one you insert?
 
-> This makes the code easier to read and more robust against any future
-> changes to this value.  No change in behavior (modulo bugs).
->
+I will add another blank line.
 
-Minor tweak: We generally say something like "No functional change
-intended."  No need to respin just for this, but handy to keep in your
-back pocket for future patches.
+> 
+> The new bullet point you add also would likely want to match the
+> others in style, both for the number of spaces after * and for not
+> using a capital first letter (maybe "generate banner using figlet").
 
- -George
+Sure. I will address them before committing.
 
---0000000000002b316905ef129ed0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cheers,
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sun, Dec 4, 2022 at 5:14 PM Demi M=
-arie Obenour &lt;<a href=3D"mailto:demi@invisiblethingslab.com">demi@invisi=
-blethingslab.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">This makes the code easier to read and more robust against =
-any future<br>
-changes to this value.=C2=A0 No change in behavior (modulo bugs).<br></bloc=
-kquote><div><br></div><div>Minor tweak: We generally say something like &qu=
-ot;No functional change intended.&quot;=C2=A0 No need to respin just for th=
-is, but handy to keep in your back=C2=A0pocket for future patches.</div><di=
-v><br></div><div>=C2=A0-George</div></div></div>
-
---0000000000002b316905ef129ed0--
+-- 
+Julien Grall
 
