@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F4FC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B613DC4321E
 	for <xen-devel@archiver.kernel.org>; Mon,  5 Dec 2022 15:38:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.453902.711535 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.453893.711502 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2DXp-0006qz-Qb; Mon, 05 Dec 2022 15:38:13 +0000
+	id 1p2DXo-0006IN-3H; Mon, 05 Dec 2022 15:38:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 453902.711535; Mon, 05 Dec 2022 15:38:13 +0000
+Received: by outflank-mailman (output) from mailman id 453893.711502; Mon, 05 Dec 2022 15:38:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2DXp-0006o2-EV; Mon, 05 Dec 2022 15:38:13 +0000
-Received: by outflank-mailman (input) for mailman id 453902;
- Mon, 05 Dec 2022 15:37:25 +0000
+	id 1p2DXn-0006IG-Uf; Mon, 05 Dec 2022 15:38:11 +0000
+Received: by outflank-mailman (input) for mailman id 453893;
+ Mon, 05 Dec 2022 15:37:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Yaz+=4D=outlook.com=set_pte_at@srs-se1.protection.inumbo.net>)
- id 1p2DX3-0006Dh-0u
- for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 15:37:25 +0000
+ id 1p2DWn-0006Dh-78
+ for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 15:37:09 +0000
 Received: from JPN01-OS0-obe.outbound.protection.outlook.com
- (mail-os0jpn01olkn2080d.outbound.protection.outlook.com
- [2a01:111:f403:700c::80d])
+ (mail-os0jpn01olkn20812.outbound.protection.outlook.com
+ [2a01:111:f403:700c::812])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b6d392af-74b2-11ed-91b6-6bf2151ebd3b;
- Mon, 05 Dec 2022 16:37:24 +0100 (CET)
+ id ac0c35b4-74b2-11ed-91b6-6bf2151ebd3b;
+ Mon, 05 Dec 2022 16:37:07 +0100 (CET)
 Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:152::9)
  by TYYP286MB1787.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:f9::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.14; Mon, 5 Dec
- 2022 15:37:19 +0000
+ 2022 15:37:00 +0000
 Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
  ([fe80::ff96:9cb6:e047:c605]) by TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
  ([fe80::ff96:9cb6:e047:c605%5]) with mapi id 15.20.5880.014; Mon, 5 Dec 2022
- 15:37:19 +0000
+ 15:37:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b6d392af-74b2-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: ac0c35b4-74b2-11ed-91b6-6bf2151ebd3b
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fVFuG8KEV06Q9/bUKNS94klVApzADe8K2amMONTpCNpCEKlpHBoHWO8ufYHoiiUw4iugyXFYztUUApnnkqJkfdx9o02X4enaaGGg4ebmM5kZ7rSz8lB0vqv5o9/HcBv/ku3JmplzlSpSr9t1DVesPdIkwOnMsPfeMH4fKBzivJEkbX6Bc88Ip8920xCd9NwrstUCl7zp7z67l1k+3gec8FdnSl3dckU5xGrdk4YGvcN0s1zBVb8VU0rbMPzTrk4cBIeS/7ajwkvRJ0bKvY88wPITxQJiAm1Bf40jhhjW9yXbp2fzJZ1J69WKTsZyN3GsbUF9Vh3B1wYil4MQUvWK/A==
+ b=aYyNM5umB/YlYyZFjHHO83Nsk29pNBut/O3cYc6qwQImzDXea5JAaDwaiA5JyYfxifWl1vwR5/6+g8puQUU7FljDX3Z8Jji/Jxm5J0eGNI0TLnxGtNJVMaQ51wmllQRgBHWWQp1Oa7lPbo6JanngWlg8hw9RTIuz2qXJ9q6zbCNN1CMRCrjsFhjiRxZS6pcAUsf2jDq1yAVDWDk96bTN09aaCCFgQ0qQNQW+vse0oaa3YF/CA13Bd8bRICjgKw0hhr09oPetcgae2pFLvqtuGPSgxRhN0SUDtkt+L4ibeGP1/qnawhEhB9ouCZbMgukGUo0vLEBHabfy+jE9TBMYQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ef9m7v0KqeWEipkEBUhacHcNHd3dIeyAM4W2j/cgC88=;
- b=BO+VBkEHU4K/JhS1QBgqQ+vKgeINVwd//PlsVt2pSd0rMNxDeH44NbuMmHD3dA6ql5feyDNeDTxks9fq6eSu6qPgWymUoYKS9GHaPm9T6/1x9qYXkrSBesUvg4yCXPr/Hb6VTIg1RhhVnhBnFR6A9w5umzM972s1Z0mutQaoXL5OYPAoWwz12WOGmyhaCMuPGxYEDcjIkFhgTDMh8R7VnTu4ho58WVPafeWuWTFdpTVX1GH3g47UcAUoGvjwy+Mu61wowC6c5365GLxvmfifLKPFpJpss7jVzf1NEL2sSUc5wy0Iz92Edbe9vnrAFmhjgO7ZUWnlFCyXBCmquIddEg==
+ bh=idjo0qiw5FRuENJqgeM1GJb0xhD361R10FEVg+6EwgI=;
+ b=grQV9OBfNncScimeEqcCsVRnAKQKBpUbGR6clhTSMxy9GeKRV8CSIJsp4KSYtBc6xkHAi6dYM66J3SQbstkTITdY8XgdgKWUHK9fJ8xmSmmY1e/2zWoeCdbSZ0rSTXdqYlTyNh+wBEYUgwGL5dW2wFLc7pnxnk1tcZjdy1fRNGmR042c0JAYJvzIBHnRhudhu0dn/uBPrt9P8yb8oL0N/7S5fZZxId25hOK2asTvWRoI3tEtkYEmWNX35yZp8f4zIXtU8pUZ5wkkIkt9Cnfp540PIs//rUN11X6sc4paa14pU4fua3wK98xuHD/0bE7I7ywSAvD9ScbfOyBP3xS2RQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ef9m7v0KqeWEipkEBUhacHcNHd3dIeyAM4W2j/cgC88=;
- b=XIb65QYpPUxtuHrWdAaTVsmisxE7ZK66EtaL7DFQu7WQYYx12FCL8PlustnwXQXvJDC8oAl/vhcHRnBxbX+luFKcUTh6SwokpWwttmfCMHL7XFmX93ck/u3BFf7OL26gPp2qoijVPmVUczzUEzGojxH00DAv1p2KpXAjTEt0PDHhYZm6JAjmaRJH1IwA71owid2EHu+P+cAs8FgdQsxxzbag/l41abXPke8dhEwjEeTMGxDI4ypM2BfUUhbyBX65/nBvPm0y1B3hy4E6sLUosuLr4JSuNLBeWR2jaoeXh3trnLs0QI0fckXLBhYMBI32wFwAsuDIXzv/ePfIyWMSvw==
+ bh=idjo0qiw5FRuENJqgeM1GJb0xhD361R10FEVg+6EwgI=;
+ b=vDsXVUhltjwMXORD4KVdUt1GOkZIu1tdiTJ3BOgVzx0KMEzqjh89CWCetQMV0MyTgCdA4wqLphkA1XWc/fFVnzvb6Ukt73yun15vq31uj16L0Cw5UPaLcIgKKnG4q4IWeqsDWZLFD+BLe1Ar40HJNZHWLPg3XS+AlEx6q7oOZui11xUUYuW8yuUfiKWViATafCUJJdXOOMElIGRjuEwmcPD9ehhqfpXkyzE7Rl6KYHLSQ4qDjQj0PNyy0krIL4e2Hss6nM9F4xaEzaWaFI390C+m6/16s80jUO4zf2u7nrIS4wR6c9IlV55VjNMvv1SOkA6xx7IZ8n4mZVHUMPVuxg==
 From: Dawei Li <set_pte_at@outlook.com>
 To: gregkh@linuxfoundation.org
 Cc: johannes@sipsolutions.net,
@@ -87,60 +87,58 @@ Cc: johannes@sipsolutions.net,
 	linux-hyperv@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Dawei Li <set_pte_at@outlook.com>
-Subject: [PATCH 5/6] ac97: make remove callback of ac97 driver void returned
-Date: Mon,  5 Dec 2022 23:36:43 +0800
+Subject: [PATCH 0/6] Make remove() of any bus based driver void returned
+Date: Mon,  5 Dec 2022 23:36:38 +0800
 Message-ID:
- <TYCP286MB2323207367F2D39D0D725828CA189@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+ <TYCP286MB23234ABCCF40E3FC42FD09A4CA189@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221205153644.60909-1-set_pte_at@outlook.com>
-References: <20221205153644.60909-1-set_pte_at@outlook.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-TMN: [eT6UZtVbikemNKsMQYsxpGdTloi1/Wuv]
+X-TMN: [UNXCpyl4RA3GK+ciwc5f+GWb8JB5tMkE]
 X-ClientProxiedBy: SG2PR02CA0046.apcprd02.prod.outlook.com
  (2603:1096:3:18::34) To TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:152::9)
 X-Microsoft-Original-Message-ID:
- <20221205153644.60909-6-set_pte_at@outlook.com>
+ <20221205153644.60909-1-set_pte_at@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TYCP286MB2323:EE_|TYYP286MB1787:EE_
-X-MS-Office365-Filtering-Correlation-Id: f06a4cf5-cbb3-4a5a-a430-08dad6d69804
+X-MS-Office365-Filtering-Correlation-Id: aedce035-d51e-41c8-6e4b-08dad6d68b90
 X-MS-Exchange-SLBlob-MailProps:
-	/OoUGmN/RpVKD6y7RJd2fRTadJ6Pq1ot2iys40AI0qYlu8Rnx0ofoD/I1pH32T+1L2pz3NVWO8fqqVhxKi6WLWu7Gs1R5ep4Fa4CkDLgQtUQyojJERaA+Z7VKh0ucvIaG2AjU2H+tSfil3cpIYJbFulYrzkUNmBaq8jaE0fgqPPgL9YwRyoP3T59IQ3p78fVfgbOVturEdduTvl5Ri4a7ZmQ7DQnt41p5cjJwyx1/sgrEYTFG+gIdXr39UXlv7+oe4NSDeC9inv5fWM+8mCvUHAvJ+Y4Pg83Q9q0KGDdI93n3JP7KSVBcGKipBzvotUCFMHX9NVrjzZMBAsN2VtqxqbF3zJ4akpts+Se6kob278WfeogJYpVsVllGF12eGQj2nzF5ejV+Xc6rmuedy5zgPsbLBzhRP/gsVEaNVpoch9Xjyw2bmTHDrQx+D9JXbHwRROpUjI56/IUlg63HXguM8c+/gWONMvV4Gi9tzEXdVAA9/s8aAVXvQYEYDp0RV8SK1FzdLiNdVSL0A6fairCJ+LhWJ2uID5sKrmtho9EjTLgeWZ10lGfHpAzGaOpyXiuLQPOv+9OQ9bYXoyHmbcYLT0SCRAR7r1qkhi13sWtrdizljs5bL6ZFWIzKFnZ7vN1st2AEGW6++H0iSdQ4IdcsMgDlRzj2wWeyV5Qsz1os92D/FpXhYBPtiq5o6xLsP1KeOQtAquZK0jRzMfvUaAjEvboyc82I3OccWaoW7HslQcNPnZGZQtZThTkmw9mjfEX
+	ZRuQdVKRmYsFuMRaXb5//B01o/cN+noGWrg39EjfTQXunQwIDnBNGuuug4/KoHir8EFf0cr6w6gPVExnXvsev3xsuBD1BIaekqlE/uEzcar4E7aoIN5bHHWITdhmJaYXDpd2HhJ3IAFOHLAbqtmiSvinQwUiPLaEyPm9vT8zZrNiqCMSBC05XKFo/uDKXwjVjxlkFEK3e3rg5N0Q5L22vuMhcTe2EGhHqtDomBhXjX30qXqKLq9J4g3VEqSgx4zLmuOhQPIy2VO4rtZz4M11WAswWRGLfW0APpfqcV3IN0LtccA9TptjLTABsB47yWZVdyb7o+tCgAb5NeEb0Oo7kQg0ULtoR4+qLRx0KU12DgccklSt38OPJhKFa3PnXjLhpAI4jcHDXHqx3NIE8jdq2C4HS7igGHXO5B3CnXCzCx1EWhidysbyP4K2A9hc1ENARed57QK31bHvb5BH+6ZeBNCI8OmnbRJt6bG9PSe1L34f55RGXCGqqhwV7m41Se6ysolhquogekoWbDLZH5bSRxifpbdEEIxU/sCcMFxvqtAWR+AiQCmwaR72ottkjxbIM4BXPAAhrIXF+USAlrCJOqOzSxuMu1U/clROYqxwUV6vFyLMGp7Muxm2z689tT2K9HlaJRkAJxH47uUfpOL2WrUl3IxDEQzCNppe+yCIJihgwsZu+Hhj3RF9OLwPnELMuGJyZNC3zhLga7o7wYdGT2v2H4fcm1bH
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	LLM0c2GdH9795iyGzY8p4Y7Z1S89NsFMRFuBznQNFarpu8WG34BF/uAFjXow4c0NluqYVo1AyVT/2gdDnzKKNtDYMGKl031XHR0CpetAONYmC/TJ8qhGamE5OZ7fyFJuXXBmA7UFVwQyPa3u8wBAVFR6w4dFqsHLcbgPkjD23Ejo99ZfB8/MdaZ9zKjZdUWAYVd5O0rmuV5xEuDGqFvkHk65EBd3+wgI2mgB9hf5sV550ofIGsw3KTgd6ZVJhkblZ8QZG4o/eOXoD6PM3O5wSsfV3bLpCk47a2GxtbxuUWUaiKrFw65P/8OH+f2uEZhi5UDiTaCrskFAUQ5p5eSjiOZFuWuKP6Y5z9aXB7L4IN1vT1rev0QRcIOHWJMdMzI/yAXTUrSpNxZY5iXkMDLmbvn4Yl2ejdkaSRgBIkjSB4Co8Kssn4P1WOCnCeSmiW9nrpeWZZ+mJWtUGyEwnK3ZmZLtzDjJ5BvOn6vf8fC4ZdLd+C+mQxhXRicatj7697tlRwtLa/OfN01dS+xewf719YqZxSboJj8LJmI9mPgak067AdfHPKWR9BUOhTv61i84L/68i6US9Bibb1TCjdexP8wGoJ6S22MPP+bOKgx169di72AdjcUUBTCIm9WM4+i+pnk7KSn77P22Xs0ffhKeJA==
+	zGLnvyXv0fD6CDEHBIolniphzNkSmzBHMpXSdaYDHfiFUo506g9rEVf1fEJ45TUnM2aq5pjVIx3FKoZ94IhH2ranBQWlRiuxF6NRlH/kB+N8GAiLLbyIFD9qyrv5C8bk2h/i6ZV9yeENrY1e2SbZU4RXurxXaUZ1i9Amsq5tKmrEl8RSzcZ1r24MIF1p6zI+BjZSgokOZUunPrY5cDtq/PJzxD1EYVZnaq8o4t2+4xNvWJ/86jo/NspBOHOt7Wr355BVQabP5xU5CuXst41Z8ABPti/kmb0IS8urxRTboYB9r+Kc5K/4MdqDaKeB7YTQUgcBX2AQ7P4kmSaEPgQ5dKJJ6KIRSoQC3m8a5kt8k4wSYdCoDOJbMO5mDtQFaZo6xCvqiPoA6cWo5sQtY9j/F1croiOQFteX9Cn1AhTCyzRWkhnoY3swt5SP//843zbfYdpmfOoXHQ/pBJUs7k+BxKnPZi2svhH73cm+LujSUcje5baRUWtQm9gffSjivZR+yEtCVVckjYmf71iJnMfcWTs01Gog8SFAmOzGjOlXFjdUWs1IL3rp9XNbNDpvqUj6nDcAIXVYqzH6GwnPZa7qdtqZ7mCGJR2xzrhQ4C4XgrCj80grl2tkzk24fwQLgiYx91LCWm112cCSMBXC6gwrRQ==
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?lGl4IuJDRspmKFHRAn8iLOG31lJGKLL4YbiN7fKudj2wU6GXpZnw9jttp1jM?=
- =?us-ascii?Q?P/tpWgYq7EGMmyIhgfGEMzs1D4tHkzFt6dOF+pvZ0saQJLJFBV0e5zTOxtRR?=
- =?us-ascii?Q?fj51okDUX1Z8wbYZSM0Za0GQu2qa6Yl3oNGHUwdgZxw/MaFpPpA6b2OiKc8H?=
- =?us-ascii?Q?sqddYY6aEFDuKHk/0sN9w3cMUWUyXk+rSCos/W4eXdCKSytjmEMHpmyXnYL5?=
- =?us-ascii?Q?ejDsvhvd5p6XnRgi9LtVRMx1UdwqDE1g6PUhJi6E2vossfVgTEh/5VpTzb0s?=
- =?us-ascii?Q?MYF2PHhJWl906/umGfPBdMIegsdoG8mnkNhJW9h9cfUpYOa9kUDHYujLqS6g?=
- =?us-ascii?Q?dyRJK7sN7KISqCdkjiISjt70xPLEIASW24VAmsv1aIXfo5P20R/04co7MM7G?=
- =?us-ascii?Q?QzrjcNl1I7PxNvsT0iYSf9eKv4rozBQP+3RoMvKnwbalZFDcBqsOdMiCodBe?=
- =?us-ascii?Q?ADNjnQxq/m6ducojQiqLRERQFf7EY2qQUFh+XMg5Fwy2l7N8SmFVV0PztKXK?=
- =?us-ascii?Q?BhzW5iP3SfYudi+mY8hSz1W2hGbPvmyw8ntAXXaZo42A2tuRf1FET0OvCFnn?=
- =?us-ascii?Q?CJ6C2O+SchlgadyGtgxiEqdf4pMcMaTIIUOn6NF70/prylaJ2CHUYaTVFMp9?=
- =?us-ascii?Q?xVeP/ouWdE+nw33ZH9580na3GbAtw2x/HfxJLVBqggOYnNqHGPG5CSFh9G4o?=
- =?us-ascii?Q?QCAwl0K/GrMKvyp/nr3owjybNAwVMhMFnUb5z64UIXikXROd6WB8Ggz1TABs?=
- =?us-ascii?Q?gynPhRFgDX+zWmwFc5giR1wCXFOz4cXwuxJcuo9090aljaYunIocLplvjIBW?=
- =?us-ascii?Q?JVzLNxlVODP+QHTa6Oo6GjBp3DYccsIR7LV1M/btNpln2q9W1Ih9w+f3osyA?=
- =?us-ascii?Q?0nVSDpZVatbXHxxO1aYSj936yX0Hp6esKHGlYIXvQInHFI91yKYGwZdD+vTt?=
- =?us-ascii?Q?bdMp9z8xJnOgeKr/YGHGio7MFABNwQjIx/iNg5Wpzkxh9OsGh0TpJsyGwlLK?=
- =?us-ascii?Q?Q7HQbwuq60i8D7E9BcgwPkvUnvAAF9z7EfoA4jgpiJzN7gAXRTnXe2DtwJPC?=
- =?us-ascii?Q?pWTyu+0REV2b6YQnvuQSb8Lebgcz8YYGJVDe8GmRglN62qZJL5ufXuS423k4?=
- =?us-ascii?Q?kOdmd0uAL1zlY8CXOgNeMCYALRL4HQYprhSHr/J5ikG/PF5JpJm6aceuAu40?=
- =?us-ascii?Q?NbKuzzVNAcz23wRQioK+Lc/Xf16hyUFZyHs8QZCrJvahN6dsilHOCyaP4YBh?=
- =?us-ascii?Q?KLZ6665BFkc/Sn7pbPZ+GyjRnVRlckDiZ9p1hvh06g=3D=3D?=
+	=?us-ascii?Q?QRBTP8FnMx9BraTxM3xGIeujBWDR1n1+I3fxhWoTJSykREz6EqHLu90Zidj+?=
+ =?us-ascii?Q?6UOogrOop8rfehSZb1RqSN5+dqjHmo0ByE3kyOrpY9T8UQGYAvXdOBPzv2BM?=
+ =?us-ascii?Q?iyUiOESAAGutorftWnaH6GFJPdCjantLSBEyUXH+oNOnurQJv65ds6gzcGgc?=
+ =?us-ascii?Q?p2OS6DCPFzLBsYgm42evehpZVjWh/5MBX8CGjtveguaxihJD94Vld7p1rBY3?=
+ =?us-ascii?Q?6K3tzfEZYtFWnoiCUhYSkdJoNmwoo1zzx4d40kQy+dAyn2HVsmDGxQIVutO9?=
+ =?us-ascii?Q?xEplfkhbLDdZcgSYqEXcJvSJOQU2BYXBrUmWAPqeNNd7lz/XMe8N3u22kAWZ?=
+ =?us-ascii?Q?EeK2EtBbEznK4IhILxnb5rMS6pNjicdH2RpenTnLT7y2IrwG7K+nkFVRtCbs?=
+ =?us-ascii?Q?RtEhltW46OZkxIFsAsUd5kZpffYoPjYEKdCTVOodl46+4dReg26gO0KFAp3t?=
+ =?us-ascii?Q?vvjzoWow6VIBfWXUD/ftguEJPfLeLA9TSVDUKbtwivzKrnxDlnrgyYzqtl96?=
+ =?us-ascii?Q?FbGnPqXNJufWQIBCESeiHYKpWW10OB0R7+tobIPI72Dgcw1dVfPy9uxjSVpd?=
+ =?us-ascii?Q?aM0L9r8/ikA4aOLLzzAw5u87v9MmWN0wvvmAO80pMb5eefKlTYH9AVhXzgX/?=
+ =?us-ascii?Q?qy+iM4b3xo0WFVRljQ0wzA/514sxeOOyauGNJxa0OrLo2dsBQP5KUSY4rpp0?=
+ =?us-ascii?Q?yySYPsbsP92rBnryZSgHLzRclhq3Dr5LoFNHQlvfNG0YQWvo5XSUr/z/3Lju?=
+ =?us-ascii?Q?yLTaFgHlFOCXXzB611uLgcQz2SdI0ZctPCC1jRG5A7Xu4nzW7pkT1Tr7Dtz9?=
+ =?us-ascii?Q?AZ/T3JMRN5fvG5KJNg4wiTTXBIOsHasT7+shJIN0VAbdf63EQo/iHQWXDWY+?=
+ =?us-ascii?Q?QuoIuURBpTxW34FpEQyMDUNrhluNKmrc1Hg2/Bs2zcJDlU1iVRyZNkQjqPvX?=
+ =?us-ascii?Q?BgO+W0BY1IIu6V3mrEyc9J0Qjkbk7UeX1iavS+2rGLHeYzjKhiJkiazDilMR?=
+ =?us-ascii?Q?EeYsJxiHj4+K7PPru7RYrtYnghs2RsrSzzxFA18VihfPgqKsPaWp5t3cXdpU?=
+ =?us-ascii?Q?pEGR9UxdUuw67b7kLXZ1ncKkcHcrIPN5/6wYuC/5eON0mmxLIkcK6WbXfXrP?=
+ =?us-ascii?Q?/Qvo7nzmjz7SO/ItZhpOEOx6xoaH/mUB6E3uE4MPjc9RYUTLmqv6WNx1+sds?=
+ =?us-ascii?Q?DDTliP/mBqgvUQeM7pYBzyo40XQzuL3Ppq0XJIHDj9tK6b4zJHaewNFWXnjH?=
+ =?us-ascii?Q?ojHK1SmW45QnQOaPqs1nZafLveMIfUwNN+ITvqj+gw=3D=3D?=
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f06a4cf5-cbb3-4a5a-a430-08dad6d69804
+X-MS-Exchange-CrossTenant-Network-Message-Id: aedce035-d51e-41c8-6e4b-08dad6d68b90
 X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2022 15:37:19.0632
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2022 15:37:00.2471
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
@@ -148,73 +146,89 @@ X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
 	00000000-0000-0000-0000-000000000000
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB1787
 
-Since commit fc7a6209d571 ("bus: Make remove callback return
-void") forces bus_type::remove be void-returned, it doesn't
-make much sense for any bus based driver implementing remove
-callbalk to return non-void to its caller.
+For bus-based driver, device removal is implemented as:
+device_remove() => bus->remove() => driver->remove()
 
-This change is for ac97 bus based drivers.
+Driver core needs no feedback from bus driver about the result of
+remove callback. In which case, commit fc7a6209d571 ("bus: Make
+remove callback return void") forces bus_type::remove be void-returned.
 
-Signed-off-by: Dawei Li <set_pte_at@outlook.com>
----
- drivers/mfd/wm97xx-core.c  | 4 +---
- include/sound/ac97/codec.h | 6 +++---
- sound/ac97/bus.c           | 5 ++---
- 3 files changed, 6 insertions(+), 9 deletions(-)
+Now we have the situation that both 1st & 2nd part of calling chain
+are void returned, so it does not make much sense for the last one
+(driver->remove) to return non-void to its caller.
 
-diff --git a/drivers/mfd/wm97xx-core.c b/drivers/mfd/wm97xx-core.c
-index 9a2331eb1bfa..663acbb1854c 100644
---- a/drivers/mfd/wm97xx-core.c
-+++ b/drivers/mfd/wm97xx-core.c
-@@ -319,13 +319,11 @@ static int wm97xx_ac97_probe(struct ac97_codec_device *adev)
- 	return ret;
- }
- 
--static int wm97xx_ac97_remove(struct ac97_codec_device *adev)
-+static void wm97xx_ac97_remove(struct ac97_codec_device *adev)
- {
- 	struct wm97xx_priv *wm97xx = ac97_get_drvdata(adev);
- 
- 	snd_ac97_compat_release(wm97xx->ac97);
--
--	return 0;
- }
- 
- static const struct ac97_id wm97xx_ac97_ids[] = {
-diff --git a/include/sound/ac97/codec.h b/include/sound/ac97/codec.h
-index 9792d25fa369..a26e9e0082f6 100644
---- a/include/sound/ac97/codec.h
-+++ b/include/sound/ac97/codec.h
-@@ -62,9 +62,9 @@ struct ac97_codec_device {
-  */
- struct ac97_codec_driver {
- 	struct device_driver	driver;
--	int			(*probe)(struct ac97_codec_device *);
--	int			(*remove)(struct ac97_codec_device *);
--	void			(*shutdown)(struct ac97_codec_device *);
-+	int			(*probe)(struct ac97_codec_device *dev);
-+	void			(*remove)(struct ac97_codec_device *dev);
-+	void			(*shutdown)(struct ac97_codec_device *dev);
- 	const struct ac97_id	*id_table;
- };
- 
-diff --git a/sound/ac97/bus.c b/sound/ac97/bus.c
-index 045330883a96..6067c04ce4c0 100644
---- a/sound/ac97/bus.c
-+++ b/sound/ac97/bus.c
-@@ -524,10 +524,9 @@ static void ac97_bus_remove(struct device *dev)
- 	if (ret < 0)
- 		return;
- 
--	ret = adrv->remove(adev);
-+	adrv->remove(adev);
- 	pm_runtime_put_noidle(dev);
--	if (ret == 0)
--		ac97_put_disable_clk(adev);
-+	ac97_put_disable_clk(adev);
- 
- 	pm_runtime_disable(dev);
- }
+So the basic idea behind this patchset is making remove() callback of
+any bus-based driver to be void returned.
+
+This patchset includes changes for drivers below:
+1. hyperv
+2. macio
+3. apr
+4. xen
+5. ac87
+6. soundbus
+
+Q: Why not platform drivers?
+A: Too many of them.(maybe 4K+)
+
+Dawei Li (6):
+  hyperv: Make remove callback of hyperv driver void returned
+  macio: Make remove callback of macio driver void returned
+  apr: make remove callback of apr driver void returned
+  xen: make remove callback of xen driver void returned
+  ac97: make remove callback of ac97 driver void returned
+  soundbus: make remove callback of soundbus driver void returned
+
+ arch/powerpc/include/asm/macio.h                | 12 ++++++------
+ drivers/ata/pata_macio.c                        |  4 +---
+ drivers/block/xen-blkback/xenbus.c              |  4 +---
+ drivers/block/xen-blkfront.c                    |  3 +--
+ drivers/char/tpm/xen-tpmfront.c                 |  3 +--
+ drivers/gpu/drm/hyperv/hyperv_drm_drv.c         |  4 +---
+ drivers/gpu/drm/xen/xen_drm_front.c             |  3 +--
+ drivers/hid/hid-hyperv.c                        |  4 +---
+ drivers/hv/hv_balloon.c                         |  5 +----
+ drivers/hv/hv_util.c                            |  4 +---
+ drivers/input/misc/xen-kbdfront.c               |  5 ++---
+ drivers/input/serio/hyperv-keyboard.c           |  4 +---
+ drivers/macintosh/rack-meter.c                  |  4 +---
+ drivers/mfd/wm97xx-core.c                       |  4 +---
+ drivers/net/ethernet/apple/bmac.c               |  4 +---
+ drivers/net/ethernet/apple/mace.c               |  4 +---
+ drivers/net/hyperv/netvsc_drv.c                 |  4 +---
+ drivers/net/wireless/intersil/orinoco/airport.c |  4 +---
+ drivers/net/xen-netback/xenbus.c                |  3 +--
+ drivers/net/xen-netfront.c                      |  4 +---
+ drivers/pci/controller/pci-hyperv.c             |  3 +--
+ drivers/pci/xen-pcifront.c                      |  4 +---
+ drivers/scsi/mac53c94.c                         |  5 +----
+ drivers/scsi/mesh.c                             |  5 +----
+ drivers/scsi/storvsc_drv.c                      |  4 +---
+ drivers/scsi/xen-scsifront.c                    |  4 +---
+ drivers/tty/hvc/hvc_xen.c                       |  4 ++--
+ drivers/tty/serial/pmac_zilog.c                 |  7 ++-----
+ drivers/uio/uio_hv_generic.c                    |  5 ++---
+ drivers/usb/host/xen-hcd.c                      |  4 +---
+ drivers/video/fbdev/hyperv_fb.c                 |  5 +----
+ drivers/video/fbdev/xen-fbfront.c               |  6 ++----
+ drivers/xen/pvcalls-back.c                      |  3 +--
+ drivers/xen/pvcalls-front.c                     |  3 +--
+ drivers/xen/xen-pciback/xenbus.c                |  4 +---
+ drivers/xen/xen-scsiback.c                      |  4 +---
+ include/linux/hyperv.h                          |  2 +-
+ include/linux/soc/qcom/apr.h                    |  2 +-
+ include/sound/ac97/codec.h                      |  6 +++---
+ include/xen/xenbus.h                            |  2 +-
+ net/9p/trans_xen.c                              |  3 +--
+ net/vmw_vsock/hyperv_transport.c                |  4 +---
+ sound/ac97/bus.c                                |  5 ++---
+ sound/aoa/fabrics/layout.c                      |  3 +--
+ sound/aoa/soundbus/i2sbus/core.c                |  4 +---
+ sound/aoa/soundbus/soundbus.h                   |  6 +++---
+ sound/soc/qcom/qdsp6/q6core.c                   |  4 +---
+ sound/xen/xen_snd_front.c                       |  3 +--
+ 48 files changed, 63 insertions(+), 137 deletions(-)
+
 -- 
 2.25.1
 
