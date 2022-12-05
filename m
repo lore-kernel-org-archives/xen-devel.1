@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB841C4321E
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Dec 2022 14:52:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.453818.711425 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 390FFC4321E
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Dec 2022 14:53:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.453827.711441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2CpU-0004Wp-IR; Mon, 05 Dec 2022 14:52:24 +0000
+	id 1p2Cqf-0005Dw-80; Mon, 05 Dec 2022 14:53:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 453818.711425; Mon, 05 Dec 2022 14:52:24 +0000
+Received: by outflank-mailman (output) from mailman id 453827.711441; Mon, 05 Dec 2022 14:53:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2CpU-0004Wi-EA; Mon, 05 Dec 2022 14:52:24 +0000
-Received: by outflank-mailman (input) for mailman id 453818;
- Mon, 05 Dec 2022 14:52:23 +0000
+	id 1p2Cqf-0005DV-4B; Mon, 05 Dec 2022 14:53:37 +0000
+Received: by outflank-mailman (input) for mailman id 453827;
+ Mon, 05 Dec 2022 14:53:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2q+k=4D=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1p2CpT-0003zH-0w
- for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 14:52:23 +0000
+ <SRS0=NO0Y=4D=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1p2Cqe-0005AC-Di
+ for xen-devel@lists.xenproject.org; Mon, 05 Dec 2022 14:53:36 +0000
 Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2060c.outbound.protection.outlook.com
- [2a01:111:f400:fe59::60c])
+ (mail-dm6nam12on20605.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::605])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6ba8eb32-74ac-11ed-8fd2-01056ac49cbb;
- Mon, 05 Dec 2022 15:52:22 +0100 (CET)
-Received: from DS7PR03CA0131.namprd03.prod.outlook.com (2603:10b6:5:3b4::16)
- by PH7PR12MB6418.namprd12.prod.outlook.com (2603:10b6:510:1fe::18) with
+ id 972fd834-74ac-11ed-8fd2-01056ac49cbb;
+ Mon, 05 Dec 2022 15:53:35 +0100 (CET)
+Received: from DM6PR03CA0071.namprd03.prod.outlook.com (2603:10b6:5:100::48)
+ by CH0PR12MB5219.namprd12.prod.outlook.com (2603:10b6:610:d2::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.13; Mon, 5 Dec
- 2022 14:52:18 +0000
-Received: from DS1PEPF0000E63F.namprd02.prod.outlook.com
- (2603:10b6:5:3b4:cafe::49) by DS7PR03CA0131.outlook.office365.com
- (2603:10b6:5:3b4::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.14; Mon, 5 Dec
+ 2022 14:53:32 +0000
+Received: from DS1PEPF0000E631.namprd02.prod.outlook.com
+ (2603:10b6:5:100:cafe::d3) by DM6PR03CA0071.outlook.office365.com
+ (2603:10b6:5:100::48) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.14 via Frontend
- Transport; Mon, 5 Dec 2022 14:52:18 +0000
+ Transport; Mon, 5 Dec 2022 14:53:32 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0000E63F.mail.protection.outlook.com (10.167.17.199) with Microsoft
+ DS1PEPF0000E631.mail.protection.outlook.com (10.167.17.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5880.8 via Frontend Transport; Mon, 5 Dec 2022 14:52:17 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ 15.20.5880.8 via Frontend Transport; Mon, 5 Dec 2022 14:53:31 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 5 Dec
- 2022 08:52:17 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ 2022 07:30:01 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 5 Dec
- 2022 08:52:17 -0600
-Received: from [10.71.193.33] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Mon, 5 Dec 2022 08:52:15 -0600
+ 2022 05:29:59 -0800
+Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
+ via Frontend Transport; Mon, 5 Dec 2022 07:29:58 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,114 +65,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ba8eb32-74ac-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 972fd834-74ac-11ed-8fd2-01056ac49cbb
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dQC05+3DnBFlkoWL3Mm7vwi3QsC9Q8CjvZkvV3XzpPSpOo6uBm4RZKw8/nIBcgNSFydzlQkPGnNI5WAOLBZatVlc8q5rlUyP/+e3wf2pjgSUQpmrqAl4m7tNd4ejD9XzDx/jinm3UKaXZ3aVz7MhAeiuj8OkZZ1VpnxXLrwoE0AnjLIuoczAG1qdnGk+oBMLevwE6a0XmyJOINXL6jjCeAG257SBvF76zBVzu9uggl2HsBAsmOIDxIC0jzDvPzMqPDjOaepY8OCTzhXcnM4gudJq+YsWatHvj2Yb7a85b/iC0/7GhV2/LqTfHaGOedArAd2OT5SZahjjKaqyCr0RXQ==
+ b=iAQAdLU26zmxe102BZwnjzzvkYKXZ8J465eHsHC6cUq7/DJI4yOKx0+uWb2uCGN+VD2uP/IBgwv1PBHSuIlUjMmL7iWpwQTt4z2VAfLYmQWGGzCHvFA7INNB5mK3jicBZOkAsNLg206cSEiP40EWl/Epsr+eaAxdA4bkRmgz2knkYzvLlEsJEGY7uRsB2fbVEIeJqyu+ssyLEGQQkR44GSp4RTRtNciIciKaw/ijCxkSuadagob0ZZXWhV8B8UUmsiTfMpyOtmXM2TTMgsJuTVjPqbjCr88ODDrrTh4yIU8pFrENql9YYc80GjkjzOZxVCM7PUqZWL3vYEWGHuBWiw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BwYDCdTQmlaT4cABBh+BZCRn/4CMeZJ4WWqXKQRAkoM=;
- b=HbnAz/A39vAy8OlALq3+JjUkovFJxeIc5+zTEhd7YH+XZTifRXBQurQwJNVj3T4+LQBsyXWrtNfpLfyoOAjbaAYcb7CLowIsnKJ7iquIoIJaLz5a5YCwd6NbvF8UR6z1YDJEs88PnESqAHrv30LXGN+2Yu8zHC37AxbX4vUXpLllfY7IKID2B34p0bVGCAz8d612PBSMxPkAj4aoFDC0CAMhFCDz2S1PFE6zS1Y10f71gWOSZ0wt0K4xDhEVaArRNEKKGjhyVkqlRxLOhp/aciT+ooUD5LNxHr+QrAB7rR93aNUQP2bR3CneafT0zKPrsX6Bcbw3JmQBPjbKZp/z9g==
+ bh=VTKYXoGyAgkPR5zIiQZmjQ3vxNlnyj3UelY+os3E+uM=;
+ b=L9LKkvSrvjYAYk9da6QFbDai1iEikNO0ej6917bbokxN6k/b0uEYMfzfIxZRXXGpDHrQtXLGd5h/dHK3jTtk8NoXaPy0D/++OzwQUq1A+ILEPXWCNNvDOglZc/oQoDvrwF6MpQycL5MMLlCg4ayUFy4AvDE7Qv7k2YfWw6PkoGFMVi7VNS1k1PIDe7o1QuLmdACVygtxafCKQ4zpZBjZai35ohwAmSjPmpGcIgkLppoI5LNvGjcrLse64h/CD7ApypuJQ2v7frHxTL1EcGcJjfgnNKjFT0KlhAczs72G3v0PTnHcBmifVP0D30k4BK0YraMM0RFW0/UHixVVQ+V/iQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BwYDCdTQmlaT4cABBh+BZCRn/4CMeZJ4WWqXKQRAkoM=;
- b=4fZq10g0qXoCRsGsBz4zoG6SZK/iXdMcCXf3IQmucyS3R/1rjKefp+/l4HnpZ+bn4d7ofmlvGrQ37ILbNngsWJcI2BpcQcyYlexYTrIXp0kTXkgJD9xJeC/qXFSzGdDLMOBFWSTe/U2FWmq14Y8T4LEY8YSIHCWm3FTyITzIqGM=
+ bh=VTKYXoGyAgkPR5zIiQZmjQ3vxNlnyj3UelY+os3E+uM=;
+ b=iIWX9p+gXLY2YgmB+2ePmtH2XvGKyintclYB0VGmW8Y9pUlM3IDgMZFEO5sAMrg/I9gShhHwLYGf30hx9j7h4AB5a5UTrBdRQ0XW443ggi1IEWIXivZD/ZrCSdcT/cIvZPOHEHZKq6JUONof1P7zWa7whSGFWSBfQpY/FFuir/A=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <8c44fb93-1c36-4a03-a784-f74ae6122dfa@amd.com>
-Date: Mon, 5 Dec 2022 15:52:15 +0100
+From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
+	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>,
+	<michal.orzel@amd.com>, <jgrall@amazon.com>, <burzalodowa@gmail.com>, "Ayan
+ Kumar Halder" <ayan.kumar.halder@amd.com>
+Subject: [XEN v5 11/11] xen/Arm: GICv3: Enable GICv3 for AArch32
+Date: Mon, 5 Dec 2022 13:26:37 +0000
+Message-ID: <20221205132637.26775-12-ayan.kumar.halder@amd.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20221205132637.26775-1-ayan.kumar.halder@amd.com>
+References: <20221205132637.26775-1-ayan.kumar.halder@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Subject: Re: [RFC PATCH 06/21] xen/domctl: Add XEN_DOMCTL_CONFIG_VIOMMU_* and
- viommu config param
-Content-Language: en-US
-To: Rahul Singh <rahul.singh@arm.com>, <xen-devel@lists.xenproject.org>
-CC: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, "George
- Dunlap" <george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>,
-	Juergen Gross <jgross@suse.com>
-References: <cover.1669888522.git.rahul.singh@arm.com>
- <fc259a3c780aeb312ea1043703add9e9bca1a7e1.1669888522.git.rahul.singh@arm.com>
-From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <fc259a3c780aeb312ea1043703add9e9bca1a7e1.1669888522.git.rahul.singh@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0000E63F:EE_|PH7PR12MB6418:EE_
-X-MS-Office365-Filtering-Correlation-Id: 88e4c628-4a42-496a-9e65-08dad6d04e17
+X-MS-TrafficTypeDiagnostic: DS1PEPF0000E631:EE_|CH0PR12MB5219:EE_
+X-MS-Office365-Filtering-Correlation-Id: 452f5bd8-0cc1-4595-c4f6-08dad6d07a1c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	wenGf9ZT0PKD8PTGveBMa9qoMCQIJHi06BUg9v2y/96xmGQ4Gu53QtKD9g5ketFjWyQwAplm3/axycNnPs07AYM2U5R9S0/iusePzQg922cQJDlHCuoUKwN/n3Yct+x5DfMAsyywUTAlY/OW5kyqWPMdw1IpuIWrNNi5pbgsiT6r6hNppmJt0pwftu3p5yh2e6uECInuJXwD5I/hJcFqL5CnyyNcfdSrwUHEepj2AccGyxHBlCyyGnyLUbIppUrP2KNDvVxxTrCLskjuQkNF8PLueUUdADLkSZfX+zu2HKEoHqSyRLp5ImrCp4M6Bq9BjQNqgHlPinBqTxUlZy2ZHXEvqtB0jN9oDVIfHeHgTFR7KcWa71ZgB175mvBzluf9r5sxSxvXrw49LQLpa6yqMf7bjAIwAzUET3R/5SK8RL1jynjMuxNE1fx8ASJoh1hImwG3a8CGoNAy6ppK6qX5JKFKq/aLxXaLIbQA9qCGdeTp0sekn4xRimnTQRsJ/XUFyliFjnNi1dkmJbKxfeWqmE3Ih8EmuAtkD7uDE0T5RfI/LhROh3IYl73Ti85Cj2LSniNNv5i6c4EHuRfoiGnmgiPLxc1zo4zhA3GJhLXnfegbeDsfniHBmzTd9ZjV5T42VMbIJfAt3vbKxgZ2q69t/gYDQzfCbC4YWjwCIywq9uAQedsezgk4XHRu7WeCKepQSmUlaFjnxy/JsW4/dpKsg/S/dioxZg8owIL6bq8gWXtWNiF90nNsG8JvbTYwSD9WStTYo+LDf36zAiJLUf96Sw==
+	BwNWk3zIIyeBRgo+cBkIwlyf3aIS/gQTZxQatgKh6Nz8yqvr1rTDwkZHgiFCIGKEQRKHZotzSx4r21FEt8VvY07YEJbEhIvsfAyyr7Hnu+PEB/pzXqnzXksKXQhadAke4xQAnv52Ye7XU5KNmKI5ASHVRNU69IVCC6NAbsYOUTy7jh2iYLpr7/svHeSIwi4Hxka2xtUIEfUnzx2ciQ7+k2W5/SK43vwr+Vw3i2qPqhDQr3vRL5J/1heP7U34ikRKVS2WNm8bc4yJvwbApo+oyzlUMEqziLFGAyt6BC/cUHlQpmAODO5a35OVqnjOmuSjLL7j8dIiVszahg5nwgu2Sq56Sa4aJiI6fLjDwizKw/Wc0F9QWnsv6KJAssal+oq/A1Y84U45awJTURH8lj179PhwrHt8LjdOKbU22k+HBXLMWwJloeBUFjz9OqNPBzboluMNYagdE9hj/hIvVwNoS8rK9afF6xr7wGvE3wWHDyKDbffeAC7cxQgGanWVUmowstHKrf0xHg1YQnVUikBeVc8CsIinquFVNF6mNUTvBE4fmeP94vrYySM6VdAlW7Pof7jI5njTpG3H/zzCon+YaRRmEdgTCNY/mHDWBa0WYjrkZV6xS223VNZHPwK1n6/+S6t6YiXz0gOBGPpl78SaG2kYwvPBrHAShOqDNXfZKWAXwANBLy1W1Wjly0LkaULVsrfZ2m2UsgK1yz+9mXU+nJHlFcoJcg5oiAj1K3T+Anc=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(39860400002)(136003)(396003)(346002)(451199015)(40470700004)(36840700001)(46966006)(47076005)(5660300002)(426003)(53546011)(36860700001)(478600001)(70206006)(70586007)(2616005)(186003)(41300700001)(336012)(8936002)(4326008)(44832011)(8676002)(2906002)(82740400003)(36756003)(40480700001)(81166007)(356005)(26005)(31686004)(110136005)(316002)(82310400005)(54906003)(16576012)(40460700003)(86362001)(31696002)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(396003)(39860400002)(346002)(136003)(376002)(451199015)(46966006)(40470700004)(36840700001)(83380400001)(36860700001)(103116003)(356005)(86362001)(81166007)(82740400003)(5660300002)(41300700001)(40460700003)(8936002)(2906002)(4326008)(82310400005)(8676002)(40480700001)(186003)(26005)(336012)(47076005)(426003)(1076003)(6666004)(54906003)(316002)(2616005)(6916009)(70586007)(478600001)(70206006)(36756003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2022 14:52:17.7121
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2022 14:53:31.5812
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88e4c628-4a42-496a-9e65-08dad6d04e17
+X-MS-Exchange-CrossTenant-Network-Message-Id: 452f5bd8-0cc1-4595-c4f6-08dad6d07a1c
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DS1PEPF0000E63F.namprd02.prod.outlook.com
+	DS1PEPF0000E631.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6418
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5219
 
-Hi Rahul,
+One can now use GICv3 on AArch32 systems. However, ITS is not supported.
+The reason being currently we are trying to validate GICv3 on an AArch32_v8R
+system. Refer ARM DDI 0568A.c ID110520, B1.3.1,
+"A Generic Interrupt Controller (GIC) implemented with an Armv8-R PE must not
+implement LPI support."
 
-On 01/12/2022 17:02, Rahul Singh wrote:
-> 
-> 
-> Add new viommu_type field and field values XEN_DOMCTL_CONFIG_VIOMMU_NONE
-> XEN_DOMCTL_CONFIG_VIOMMU_SMMUV3 in xen_arch_domainconfig to
-> enable/disable vIOMMU support for domains.
-> 
-> Also add viommu="N" parameter to xl domain configuration to enable the
-> vIOMMU for the domains. Currently, only the "smmuv3" type is supported
-> for ARM.
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> ---
->  docs/man/xl.cfg.5.pod.in             | 11 +++++++++++
->  tools/golang/xenlight/helpers.gen.go |  2 ++
->  tools/golang/xenlight/types.gen.go   |  1 +
->  tools/include/libxl.h                |  5 +++++
->  tools/libs/light/libxl_arm.c         | 13 +++++++++++++
->  tools/libs/light/libxl_types.idl     |  6 ++++++
->  tools/xl/xl_parse.c                  |  9 +++++++++
->  7 files changed, 47 insertions(+)
-> 
-> diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-> index ec444fb2ba..5854d777ed 100644
-> --- a/docs/man/xl.cfg.5.pod.in
-> +++ b/docs/man/xl.cfg.5.pod.in
-> @@ -2870,6 +2870,17 @@ Currently, only the "sbsa_uart" model is supported for ARM.
-> 
->  =back
-> 
-> +=item B<viommu="N">
-> +
-> +To enable viommu, user must specify the following option in the VM
-> +config file:
-> +
-> +viommu = "smmuv3"
-> +
-> +Currently, only the "smmuv3" type is supported for ARM.
-> +
-> +=back
-You need to remove this "=back" or the one before your new section, because currently
-the build of docs fails with error:
-man/xl.cfg.5.pod around line 2873: '=item' outside of any '=over'
+By default GICv3 is disabled on AArch32 and enabled on AArch64.
 
-~Michal
+Updated SUPPORT.md to state that GICv3 on Arm32 is not security supported.
+
+Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changed from :-
+v1 - 1. Remove "ARM_64 || ARM_32" as it is always true.
+2. Updated SUPPORT.md.
+
+v2 - 1. GICv3 is enabled by default only on ARM_64.
+2. Updated SUPPORT.md.
+
+v3 - 1. GICv3 is not selected by ARM_64. Rather, it is optionally
+enabled. 
+2. GICv3 is disabled by default on ARM_32.
+
+v4 - 1. Updated the help message for GICV3.
+2. I have kept the Rb given on v4 as the change looks trivial.
+
+ SUPPORT.md                            | 7 +++++++
+ xen/arch/arm/Kconfig                  | 9 +++++----
+ xen/arch/arm/include/asm/cpufeature.h | 1 +
+ 3 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/SUPPORT.md b/SUPPORT.md
+index ab71464cf6..295369998e 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -76,6 +76,13 @@ For the Cortex A57 r0p0 - r1p1, see Errata 832075.
+     Status, ARM SMMUv3: Tech Preview
+     Status, Renesas IPMMU-VMSA: Supported, not security supported
+ 
++### ARM/GICv3
++
++GICv3 is an interrupt controller specification designed by Arm.
++
++    Status, Arm64: Security supported
++    Status, Arm32: Supported, not security supported
++
+ ### ARM/GICv3 ITS
+ 
+ Extension to the GICv3 interrupt controller to support MSI.
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 52a05f704d..239d3aed3c 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -41,16 +41,17 @@ config ARM_EFI
+ 
+ config GICV3
+ 	bool "GICv3 driver"
+-	depends on ARM_64 && !NEW_VGIC
+-	default y
++	depends on !NEW_VGIC
++	default n if ARM_32
++	default y if ARM_64
+ 	---help---
+ 
+ 	  Driver for the ARM Generic Interrupt Controller v3.
+-	  If unsure, say Y
++	  If unsure, use the default setting.
+ 
+ config HAS_ITS
+         bool "GICv3 ITS MSI controller support (UNSUPPORTED)" if UNSUPPORTED
+-        depends on GICV3 && !NEW_VGIC
++        depends on GICV3 && !NEW_VGIC && !ARM_32
+ 
+ config HVM
+         def_bool y
+diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+index c86a2e7f29..c62cf6293f 100644
+--- a/xen/arch/arm/include/asm/cpufeature.h
++++ b/xen/arch/arm/include/asm/cpufeature.h
+@@ -33,6 +33,7 @@
+ #define cpu_has_aarch32   (cpu_has_arm || cpu_has_thumb)
+ 
+ #ifdef CONFIG_ARM_32
++#define cpu_has_gicv3     (boot_cpu_feature32(gic) >= 1)
+ #define cpu_has_gentimer  (boot_cpu_feature32(gentimer) == 1)
+ /*
+  * On Armv7, the value 0 is used to indicate that PMUv2 is not
+-- 
+2.17.1
+
 
