@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E58BC636F9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69833C63705
 	for <xen-devel@archiver.kernel.org>; Tue,  6 Dec 2022 04:34:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.454333.711866 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.454336.711899 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2Pf2-0005cy-9Z; Tue, 06 Dec 2022 04:34:28 +0000
+	id 1p2Pf8-0006VT-8D; Tue, 06 Dec 2022 04:34:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 454333.711866; Tue, 06 Dec 2022 04:34:28 +0000
+Received: by outflank-mailman (output) from mailman id 454336.711899; Tue, 06 Dec 2022 04:34:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2Pf2-0005cp-4k; Tue, 06 Dec 2022 04:34:28 +0000
-Received: by outflank-mailman (input) for mailman id 454333;
- Tue, 06 Dec 2022 04:34:27 +0000
+	id 1p2Pf8-0006VG-4H; Tue, 06 Dec 2022 04:34:34 +0000
+Received: by outflank-mailman (input) for mailman id 454336;
+ Tue, 06 Dec 2022 04:34:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7Feu=4E=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1p2Pf0-0005MV-W5
- for xen-devel@lists.xenproject.org; Tue, 06 Dec 2022 04:34:26 +0000
+ id 1p2Pf6-0005MV-NJ
+ for xen-devel@lists.xenproject.org; Tue, 06 Dec 2022 04:34:32 +0000
 Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com
  [64.147.123.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 40728b0f-751f-11ed-91b6-6bf2151ebd3b;
- Tue, 06 Dec 2022 05:34:24 +0100 (CET)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 33F2132009EC;
- Mon,  5 Dec 2022 23:34:19 -0500 (EST)
+ id 46925a2f-751f-11ed-91b6-6bf2151ebd3b;
+ Tue, 06 Dec 2022 05:34:31 +0100 (CET)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.west.internal (Postfix) with ESMTP id 7636E32009ED;
+ Mon,  5 Dec 2022 23:34:29 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 05 Dec 2022 23:34:20 -0500
+ by compute4.internal (MEProxy); Mon, 05 Dec 2022 23:34:30 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Dec 2022 23:34:17 -0500 (EST)
+ 5 Dec 2022 23:34:28 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40728b0f-751f-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 46925a2f-751f-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1670301258; x=1670387658; bh=zlnhba+jqrzVDvS+quM/AmBMchrjFNcXxGL
-	gLEattQI=; b=nFaQ5l1IWz9DxPJTn5JP8Hs7JoaTE5YO3TXoSVCvC8kG+CsxIkG
-	UH3MIXlrob/dE4Xn2XJBxBntU1fjUY/Rbb/z2txaMCl05jN2fzVCSX2CEmgWrYAk
-	0dWL02Ab/Z4ZyyjT0MB/vjl6lj9g7DGiTIiep5FROjfAXU8RXot8XY5pB65u7ozP
-	EkBburedsDc8qX7V1P+cvQrQDhIzlHKIsC3U3y6ExOaidYlGsdQUrEE/u5qqOtvz
-	tDAFc+5/4SmWqOiIJJiTOSrs5cT2KK8/Eg4FBdotBFubRH8Kc0J5GbxlswqXh5b7
-	mBgT23P4t+Tmy8rz8jsqecevI7bPUpywgIQ==
+	1670301269; x=1670387669; bh=78iOTcLznyqVPzoEL9+P1QeIqoDr0D4mDgx
+	uOJLHvyA=; b=mb+ZKJoBLlLQBUZp7OYLSBpBR50HvPmg/rxtbJyjmd41Wsl7290
+	+6ZSXrsjfu4ms8u6jOVsqOa10kWfy6TkRdh/FDFKfPy3WrT6NEDeqMYZbYGanPNS
+	Dcb74+ahLONwoEDI6uhsg4tjiUAPKFLwfIWdTiHw4bE0vvpHtnCKGYCCqWGJGK15
+	MYtjgqDrzoSt2PKNej70oONKCZXIe92Z3vMu7TuTM0ZSMRmgSF/xludl4ZCKxYvM
+	PYK1Yqk9/sC+SK83qnVaFIA8stvLyhMOpUZS2CwmihCooXchGVl87mAoXvn6zm+R
+	PR4nsoojQfnF9tJiW78wYYmptBGTeyG83Kg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1670301258; x=1670387658; bh=zlnhba+jqrzVD
-	vS+quM/AmBMchrjFNcXxGLgLEattQI=; b=F7rEKa4oJCZrWhn1UuwJRc9zBEMau
-	f3sCGZjh+OHA/9Butny+yuM6ja+V2/AuUNKdvtrkDISlL3jrASJgmXcfIF66mpZP
-	Wcrf5V+gd4gc0pao8wIPki8YrD6yuWzWK5bEqvdGHZJGgPzlMzLx1qpNcw6P81Fu
-	hF7feGcuSvSHqlE/kcXbyTUwGPcR4VB76WcyblwKWy+pCKnILahukNg2WVmc/gY6
-	laO6xCod7gOP+dhwiVVNlRUBawbZeC/3PS2J6JXGySEDHOWXvRV6+7Kvw2p4FBdL
-	GelVc4POd3JjfLUveOdrg676UfH6EpCxjmyvzbi4TMFyrrR6sI6tO/LwQ==
-X-ME-Sender: <xms:SsaOYznOy5KmyaEcv87F541o70-iF3CcShGg-p_vJHcMP8T0GEEKwQ>
-    <xme:SsaOY20gkG7yrqAbdzEQhsD0lHbDwCjTxRJpRntSgSxaycwk37ZfeXTQzV9xFlxLd
-    TqWvM3VzUdFiK0>
-X-ME-Received: <xmr:SsaOY5oUXPIUT-r5Z6QL0hBKDBcGBuhxjtTNdh-4TP5FZG876WET9h_kYm6s7Y6InWwJhPf8eFG7>
+	:x-sasl-enc; s=fm1; t=1670301269; x=1670387669; bh=78iOTcLznyqVP
+	zoEL9+P1QeIqoDr0D4mDgxuOJLHvyA=; b=OvWfbvRkBEGn+zvGrNGEUNi+eH01S
+	te6mERJm3kOGumqu5wEoLdGSIf5EqF4m6LC58nh6/TproNyCY8NhsSsEzGAG3G/M
+	yMBaWvTDQKYXax7A06t1HVaXkoGdemfw4sHlWDYNSPGIgaXG+u62H7T2m3w0xhH+
+	fAqjL1HD+zOHGfa2bVbiSBEzmIIQA9zLoQ41UuT2j3tB/s1TpymXvZ/WLIrlvcfn
+	Dlr/EOjKDFtqGI4b8uKH8mmIT9uhB2+1OT58xLdifDmuYQ/uRWxkqRsU5W1TyMYl
+	XCs5J9hA+D+p2kPPauLilP0ktGYsaDh2JpLuMeT4Tq4OdQCrbl0L4a7Ig==
+X-ME-Sender: <xms:VMaOY2rH1AwEE-VnUHkNslY8FDc2ydkjxGF9HL-PyQBUQAdjJKci5w>
+    <xme:VMaOY0pAcKtBLEkCin7aTZBTBFVFMalSus8lkHvyjks8N9hsEeF8_NOf4Tut6g0hv
+    Dc3OKTPP5b4_XI>
+X-ME-Received: <xmr:VMaOY7MzJkALhGhOxcmA3eznWHZnrY2LsuPXUVL4bMyOfUEgU1jr6rwJf1HMNwxf7uXiwwVGAIFq>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudehgdejgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
@@ -82,10 +82,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudehgdejgecutefuodetggdote
     hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtnecurf
     grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
     rggsrdgtohhm
-X-ME-Proxy: <xmx:SsaOY7mNkrq7f0RSsOqMxiLyegPIjPCbFxboWxnq6viNiajmIZLSVQ>
-    <xmx:SsaOYx1SimwO1LuAFSy-fzHr9SXv058t4YjYcRlj-KQMV-q78hCprg>
-    <xmx:SsaOY6ugTdZQvyYShhl5Narj5jwgzbC_3yu8m0EK3vhqTbuA9PY8pg>
-    <xmx:SsaOY7oznVo-HyQS5ypqFnDp-Qh5zvQHSPe7w8EMRP_KcFg-cv7TeQ>
+X-ME-Proxy: <xmx:VMaOY15Bnsq5befxFIuqqKmX5KnXpDw43wHqJXmo-U0-4JmeQOx0LA>
+    <xmx:VMaOY14NCHdf35SCloh5iEVLvl2xMn3CzoCUhRASoOYDNH1y8-ZBKQ>
+    <xmx:VMaOY1jB_kEnMk3JXfBGkQWrTvrqjk6utgcRfim14Z9xrqr3dsOv5Q>
+    <xmx:VcaOYyvbCrNRTULLimBSdjiu8Ds3b1cFyZW1cCLCZDCXCspk7_wBYw>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,46 +97,44 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Wei Liu <wl@xen.org>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Tim Deegan <tim@xen.org>
-Subject: [PATCH 1/8] x86/mm: Avoid hard-coding PAT in get_page_from_l1e()
-Date: Mon,  5 Dec 2022 23:33:30 -0500
-Message-Id: <c70f4c4584cf28ff1da8f56e08d61ad0c406a4fd.1670300446.git.demi@invisiblethingslab.com>
+Subject: [PATCH 5/8] x86/mm/shadow: do not open-code PAGE_CACHE_ATTRS
+Date: Mon,  5 Dec 2022 23:33:34 -0500
+Message-Id: <52d04f14daca91597f78f60e3a16cce4069bf32f.1670300446.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <cover.1670300446.git.demi@invisiblethingslab.com>
 References: <cover.1670300446.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This still hard-codes the assumption that the two spare values are
-mapped to UC.  Removing this assumption would require a more complex
-patch.
+This makes the code easier to understand.
 
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
 ---
- xen/arch/x86/mm.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+ xen/arch/x86/mm/shadow/multi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 78b1972e4170cacccc9c37c6e64e76e66a7da87f..5d05399c3a841bf03991a3bed63df9a815c1e891 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -961,13 +961,10 @@ get_page_from_l1e(
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 4e94fec3d50cde0e5a26ecb62ff4d00dd00f759d..6bb564b0145285afc93b72a60b7797fcfe8696dc 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -535,7 +535,7 @@ _sh_propagate(struct vcpu *v,
+     if ( guest_nx_enabled(v) )
+         pass_thru_flags |= _PAGE_NX_BIT;
+     if ( level == 1 && !shadow_mode_refcounts(d) && mmio_mfn )
+-        pass_thru_flags |= _PAGE_PAT | _PAGE_PCD | _PAGE_PWT;
++        pass_thru_flags |= PAGE_CACHE_ATTRS;
+     sflags = gflags & pass_thru_flags;
  
-         switch ( l1f & PAGE_CACHE_ATTRS )
-         {
--        case 0: /* WB */
--            flip |= _PAGE_PWT | _PAGE_PCD;
--            break;
--        case _PAGE_PWT: /* WT */
--        case _PAGE_PWT | _PAGE_PAT: /* WP */
--            flip |= _PAGE_PCD | (l1f & _PAGE_PAT);
--            break;
-+        case _PAGE_WB:
-+        case _PAGE_WT:
-+        case _PAGE_WP:
-+            flip |= (l1f & PAGE_CACHE_ATTRS) ^ _PAGE_UC;
-         }
+     /*
+@@ -548,7 +548,7 @@ _sh_propagate(struct vcpu *v,
+     {
+         int type;
  
-         return flip;
+-        ASSERT(!(sflags & (_PAGE_PAT | _PAGE_PCD | _PAGE_PWT)));
++        ASSERT(!(sflags & PAGE_CACHE_ATTRS));
+ 
+         /* compute the PAT index for shadow page entry when VT-d is enabled
+          * and device assigned.
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
