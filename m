@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84382C63706
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Dec 2022 04:34:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.454331.711844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF8DC3A5A7
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Dec 2022 04:34:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.454337.711910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2Peu-00055x-Q4; Tue, 06 Dec 2022 04:34:20 +0000
+	id 1p2PfA-0006ou-FR; Tue, 06 Dec 2022 04:34:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 454331.711844; Tue, 06 Dec 2022 04:34:20 +0000
+Received: by outflank-mailman (output) from mailman id 454337.711910; Tue, 06 Dec 2022 04:34:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p2Peu-00055p-LI; Tue, 06 Dec 2022 04:34:20 +0000
-Received: by outflank-mailman (input) for mailman id 454331;
- Tue, 06 Dec 2022 04:34:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1p2PfA-0006of-C4; Tue, 06 Dec 2022 04:34:36 +0000
+Received: by outflank-mailman (input) for mailman id 454337;
+ Tue, 06 Dec 2022 04:34:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7Feu=4E=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1p2Pet-00055j-6A
- for xen-devel@lists.xenproject.org; Tue, 06 Dec 2022 04:34:19 +0000
+ id 1p2Pf9-0005MV-37
+ for xen-devel@lists.xenproject.org; Tue, 06 Dec 2022 04:34:35 +0000
 Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com
- [64.147.123.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3b4e7b0d-751f-11ed-8fd2-01056ac49cbb;
- Tue, 06 Dec 2022 05:34:17 +0100 (CET)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.west.internal (Postfix) with ESMTP id 1C9EB32009F0;
- Mon,  5 Dec 2022 23:34:10 -0500 (EST)
+ [64.147.123.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4801db77-751f-11ed-91b6-6bf2151ebd3b;
+ Tue, 06 Dec 2022 05:34:34 +0100 (CET)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id DCE3232009F0;
+ Mon,  5 Dec 2022 23:34:31 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Mon, 05 Dec 2022 23:34:10 -0500
+ by compute5.internal (MEProxy); Mon, 05 Dec 2022 23:34:32 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Dec 2022 23:34:08 -0500 (EST)
+ 5 Dec 2022 23:34:30 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,47 +45,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b4e7b0d-751f-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: 4801db77-751f-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1670301249; x=1670387649; bh=sDIVsyhTHVkyAU/+B/rKbDWZZDFGzrBj2hs
-	PmB7MdLs=; b=PP7hXNbYj6YB8yBuOP8NB+PY5sWvCA8dpJM2CVRcfgkkxVitACS
-	eGRTSvJTjHbNfDjJ2V8/iXRRWfmsZmfcXtCMsdB0rYzrpgXtMOPwmiSS59l6zUz0
-	9n3VUX/Ti+6Ki26pXjK0GjQwuiXhm0G8VDwVQ/YIL1xRGdo4dQv7KSAruGcWuY9D
-	NV4l+s2sL5WUVppgyx+VspcIsGxFrHodCiXu63Lmh+lYUMG6bO48Mv4xp/imzC8Z
-	+bgvL0AUFEjohEFofCgqod3xYaCm/YCA0fK8qbLnjzxsJUXS9+uWo4qkUp8ioLH/
-	Mw+D2WhHU5crKmLyjKPUKjGYOnzZ0zCbnRQ==
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
+	1670301271; x=1670387671; bh=7lJWDKXrQS1OHkVX4MNh9xF7acm6KU1f8nX
+	60aLC2AY=; b=FXoGyWGbu8ukOOMXW7SDT6Zp4wfM7Wz0PjvmGgudbPZL8WuF2Lk
+	hFNlf/xqUD2RXkc4Ma0T/AX87VFdXudmCg5IEknWURFAYhcS8G5l63kycRCDxTuM
+	sIW5jjKa7TAjhyNPPib6KlYjWIsXJBcVRqqeI9/T6rW8V9oVySKrRXbNitlR+9A9
+	UKgtwICXA2HZVqjaZEfFkWDNFpFegnF179PbWJ1vKioangaVRFZYCBU2aZkshPsI
+	lNZdQDpidWr0b0bpFESSWihvm6+L89cdtnReOclxAAPL5tSBvyJNdMw/7kstC+oW
+	9yz3j7MYRAzh6HI2yO5xU23Znwxaz2mYc6w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1670301249; x=1670387649; bh=sDIVsyhTHVkyA
-	U/+B/rKbDWZZDFGzrBj2hsPmB7MdLs=; b=fyzY2ZDbdSaEeMsBUarpVQ7LLACtW
-	YkcabzqBX/2pOnbjAVFDsmhlx9jl/A2o9U9934TeLi8iA1ztaybuwUy1msbhtN+W
-	amSYEJyWtcloNMa55ZPbnD+40h02mF54k2F2Z/tAmjR5QCoV4eJ30plz/ITKcNFa
-	Lh5gDBekc9avIS883WczmFZGwVz0NefUTF//BVkjbTlVmiptm+y85cscgOgsPTFP
-	YWyzzFkt2Rb58/+rb6Unubvkz7wVc3cr6lZP6nPpmtTKCp7D+QLpxf6Jh6bbbw4z
-	XJLbeOYgtQ1XHH+IMvzQyAveRnwDUXVj08NpuB4Kzlc2JhltjS7j1iVAQ==
-X-ME-Sender: <xms:QcaOY4qVyiy93iZksLKylrcRXeLRBpoPenWLAdyanYuD9wZDoKknMA>
-    <xme:QcaOY-rDyeP1tI3C8jwOnpUVvDbL5_hifFCbckecZrIOLl_28xd0uM16gEq4bHo7b
-    657xFAzKEFOGTg>
-X-ME-Received: <xmr:QcaOY9P-BMIJ2kyvW75OZjyKkh4DqKNTG03d_mj7zTunjNYAE9b4PnDKH3OOuXchgzyKUx_tMGdD>
+	:x-sasl-enc; s=fm1; t=1670301271; x=1670387671; bh=7lJWDKXrQS1OH
+	kVX4MNh9xF7acm6KU1f8nX60aLC2AY=; b=SXcYAt2A2Lw3XEMWMyxyHFgyfSI7O
+	TejRkzGRaY2rMGexP5FqCUGr0Fns4aJ+fk6pwX+V5QTv3V19vi5s+KUqL18DaI+t
+	BEOC4li7JvUR/7ys4pIJFzuloD/ouYnKugI2AnxMj8cLTPgS0MjWCjMBDGjnDgNO
+	YvmsKSRwA5Pobh7383QRh1URp/RileedV0d/lJvsJD75gRPjrABnTwnd4o1EdHnB
+	8L3J99vA2HMvughqN8FloSVwTvc55+3mPk2qjYvh3uhS8xXrOeeLD/rQrCxwYuhj
+	ZHWgUyvvA2a967MAkLmgryj3zvmk/Rmq7tmA3uUxF0u4+/LxqmOyWbxzw==
+X-ME-Sender: <xms:V8aOY02fFj7WBZ9F0akv__sQA6UBxg9GGuJkzzTssJdDlxw1V2u7_g>
+    <xme:V8aOY_Eds6t8R0WK2u16uLnwbA5kXdfgQ2Txf-g3K9zwBqmIgk9uHK02-nbixwEgh
+    LT_4mggg1Lvbm4>
+X-ME-Received: <xmr:V8aOY86dtpdfxPyoGakSQIeV_B7iBi7BH6mJ1srp92yuXc-8uufHqguBlRasSLtN4_iPWiD3Tk7t>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudehgdejgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepffgvmhhiucfo
-    rghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhnghhslh
-    grsgdrtghomheqnecuggftrfgrthhtvghrnhephfeggfeiiedtieejgedutdekgfetgeeh
-    heegteekvefhfefgudehtdevleegueegnecuvehluhhsthgvrhfuihiivgeptdenucfrrg
-    hrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhslhgr
-    sgdrtghomh
-X-ME-Proxy: <xmx:QcaOY_59eUL5txSEFEn1jyQEFKCtBLgru9qwkS0hqM3hWXh_i3pkLQ>
-    <xmx:QcaOY36dWBvNKHb80WLs-4Xhv-rLp6IKueqQofrwRwaH1qANuigOuQ>
-    <xmx:QcaOY_jeSDcV5KktgCHsVwqBWDuTg0lNWNBvsZ7vQvqiNMQkSGR1Sw>
-    <xmx:QcaOY0txkCLQL-Pi9yOu8GZFKc8ZnlRG01ZsfNCGAA-YazT8RudUYA>
+    fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghmihcu
+    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefghefg
+    hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtnecurf
+    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
+    rggsrdgtohhm
+X-ME-Proxy: <xmx:V8aOY92wUw0ICP1_Gj85rinu0i7Pb6AB7aXy2UiFwl6BTz3rJtQevg>
+    <xmx:V8aOY3GgiMvurMh1YVR1aj7_CC6_9iCOLOT0g-saogfasp9CBUqa4A>
+    <xmx:V8aOY29yZNAvbzSsoV3f_3gjoccZQLqTbwZ0sc37NUrV1aK6khaodg>
+    <xmx:V8aOY85xTqvJTMIxKaDTsyngtUbVccVlwOd-3gilD0V6TAtHXrZjRw>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,48 +97,66 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Wei Liu <wl@xen.org>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Tim Deegan <tim@xen.org>
-Subject: [PATCH 0/8] Make PAT handling less brittle
-Date: Mon,  5 Dec 2022 23:33:29 -0500
-Message-Id: <cover.1670300446.git.demi@invisiblethingslab.com>
+Subject: [PATCH 6/8] x86: Derive XEN_MSR_PAT from its individual entries
+Date: Mon,  5 Dec 2022 23:33:35 -0500
+Message-Id: <5ddd32a453b098f277f2d4aa9e044a40183d4bff.1670300446.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <cover.1670300446.git.demi@invisiblethingslab.com>
+References: <cover.1670300446.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-While working on Qubes OS Marek found out that there were some PAT hacks
-in the Linux i915 driver.  I decided to make Xen use Linux’s PAT to see
-if it solved the graphics glitches that were observed; it did.  This
-required a substantial amount of preliminary work that is useful even
-without using Linux’s PAT.
+This avoids it being a magic constant that is difficult for humans to
+decode.  Use a _Static_assert to check that the old and new values are
+identical.
 
-Patches 1 through 7 are the preliminary work and I would like them to be
-accepted into upstream Xen.  Patch 7 does technically break ABI by
-rejecting the unused PAT entries in debug builds, but as release builds
-are not impacted I suspect it is not a serious concern.  Patch 8
-actually switches to Linux’s PAT and is NOT intended to be merged (at
-least for now) as it would at a minimum break migration of PV guests
-from hosts that do not have the patch.
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ xen/arch/x86/include/asm/processor.h | 22 +++++++++++++++++++++-
+ 1 file changed, 21 insertions(+), 1 deletion(-)
 
-Demi Marie Obenour (8):
-  x86/mm: Avoid hard-coding PAT in get_page_from_l1e()
-  p2m-pt: Avoid hard-coding Xen's PAT
-  x86/mm/shadow: avoid assuming a specific Xen PAT
-  efi: Avoid hard-coding the various PAT constants
-  x86/mm/shadow: do not open-code PAGE_CACHE_ATTRS
-  x86: Derive XEN_MSR_PAT from its individual entries
-  x86/mm: make code robust to future PAT changes
-  Use Linux's PAT
-
- xen/arch/x86/include/asm/page.h      |  4 +-
- xen/arch/x86/include/asm/processor.h | 22 +++++++++-
- xen/arch/x86/mm.c                    | 65 ++++++++++++++++++++++++----
- xen/arch/x86/mm/p2m-pt.c             |  6 +--
- xen/arch/x86/mm/shadow/multi.c       |  8 ++--
- xen/common/efi/boot.c                | 10 ++---
- 6 files changed, 91 insertions(+), 24 deletions(-)
-
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index 8e2816fae9b97bd4e153a30cc3802971fe0355af..64b75e444947c64e2e5eba457deec92a873d7a63 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -92,13 +92,33 @@
+                           X86_EFLAGS_NT|X86_EFLAGS_DF|X86_EFLAGS_IF|    \
+                           X86_EFLAGS_TF)
+ 
++/* Individual entries in IA32_CR_PAT */
++#define MSR_PAT_UC  _AC(0x00, ULL)
++#define MSR_PAT_WC  _AC(0x01, ULL)
++#define MSR_PAT_RESERVED_1  _AC(0x02, ULL)
++#define MSR_PAT_RESERVED_2  _AC(0x03, ULL)
++#define MSR_PAT_WT  _AC(0x04, ULL)
++#define MSR_PAT_WP  _AC(0x05, ULL)
++#define MSR_PAT_WB  _AC(0x06, ULL)
++#define MSR_PAT_UCM _AC(0x07, ULL)
++
+ /*
+  * Host IA32_CR_PAT value to cover all memory types.  This is not the default
+  * MSR_PAT value, and is an ABI with PV guests.
+  */
+-#define XEN_MSR_PAT _AC(0x050100070406, ULL)
++#define XEN_MSR_PAT (MSR_PAT_WB  << 0x00 | \
++                     MSR_PAT_WT  << 0x08 | \
++                     MSR_PAT_UCM << 0x10 | \
++                     MSR_PAT_UC  << 0x18 | \
++                     MSR_PAT_WC  << 0x20 | \
++                     MSR_PAT_WP  << 0x28 | \
++                     MSR_PAT_UC  << 0x30 | \
++                     MSR_PAT_UC  << 0x38 | \
++                     0)
+ 
+ #ifndef __ASSEMBLY__
++_Static_assert(XEN_MSR_PAT == 0x050100070406ULL,
++               "wrong XEN_MSR_PAT breaks PV guests");
+ 
+ struct domain;
+ struct vcpu;
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 Invisible Things Lab
+
 
