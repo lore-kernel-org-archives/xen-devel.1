@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33819C4332F
-	for <xen-devel@archiver.kernel.org>; Sun, 11 Dec 2022 02:10:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.458707.716510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F34C4167B
+	for <xen-devel@archiver.kernel.org>; Sun, 11 Dec 2022 02:10:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.458708.716518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4BnT-0002eD-RN; Sun, 11 Dec 2022 02:10:31 +0000
+	id 1p4BnU-0002mV-AO; Sun, 11 Dec 2022 02:10:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 458707.716510; Sun, 11 Dec 2022 02:10:31 +0000
+Received: by outflank-mailman (output) from mailman id 458708.716518; Sun, 11 Dec 2022 02:10:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4BnT-0002dJ-NR; Sun, 11 Dec 2022 02:10:31 +0000
-Received: by outflank-mailman (input) for mailman id 458707;
+	id 1p4BnU-0002l6-5B; Sun, 11 Dec 2022 02:10:32 +0000
+Received: by outflank-mailman (input) for mailman id 458708;
  Sun, 11 Dec 2022 02:10:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=97oD=4J=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1p4BnS-0002cH-2T
+ id 1p4BnS-0002cH-Jv
  for xen-devel@lists.xenproject.org; Sun, 11 Dec 2022 02:10:30 +0000
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f8f35360-78f8-11ed-8fd2-01056ac49cbb;
- Sun, 11 Dec 2022 03:10:26 +0100 (CET)
+ id fbe4a1da-78f8-11ed-8fd2-01056ac49cbb;
+ Sun, 11 Dec 2022 03:10:29 +0100 (CET)
 Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id CD8705C00AB;
- Sat, 10 Dec 2022 21:10:23 -0500 (EST)
+ by mailout.nyi.internal (Postfix) with ESMTP id 02FE35C00B3;
+ Sat, 10 Dec 2022 21:10:29 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Sat, 10 Dec 2022 21:10:23 -0500
+ by compute3.internal (MEProxy); Sat, 10 Dec 2022 21:10:29 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 10 Dec 2022 21:10:22 -0500 (EST)
+ 10 Dec 2022 21:10:27 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,158 +45,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8f35360-78f8-11ed-8fd2-01056ac49cbb
+X-Inumbo-ID: fbe4a1da-78f8-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1670724623; x=1670811023; bh=CbI6DnKTlZiBh+WyyenklvldjcWlzpgpmYP
-	gqCb7f/o=; b=aHJXcmE2DVVext2/+fpOY+Fmy52qA0OJkjLYpK8UG/H7HR1Vg7j
-	fK/+Z8YrFZ+1wTpeASuoTjQcmq2HxxBsJm4Y2YCgS1JwNMFvW9u3uVnH2aDvEHOT
-	e4LltikmGP6fgX+Jc59ZXjQdSqbIdDc6022ay2ZeGgH/coydZMsgTjydxKHkbUVL
-	grGVPggs61MaN9TAzQLFqE8fP1YclUQ92vjDxxcSpTI0OTvEJMiaKz1bME+m9fN4
-	tmZD/dB1jEAm6HbIFbwwl4oLO0J1YpnoN4PvlhzNzJsBAQjo6nW5tL+JRDXFDWfH
-	+smUM7Stb+gOTGbuHQYjKI7RsHVFcUB71wQ==
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to; s=fm1; t=1670724628; x=1670811028; bh=of27AYkTAg
+	+gV39hHVFtMa/D9CLpVwIBhoS3TGwZ7fc=; b=TU3Gd7HHM9eaLznkoXXzD9Pyoz
+	icKaP5MlSCu/xjyyvQeXuV0pUiHNXqZM3G3znHyIAyeY10HQ30Q918Ui+T+btq1n
+	z8bXduZuPd/LJ3nKFb27B0hxIegrcdqNVDocIrjHWB0kbBbYf/Vwh3XjrV62Xrnh
+	SZZ3Iko5qWeFE1H51dOM23kom6Cle8JEYlgeRO4fAozZKJNQ15nW3PZOxhZxVSkT
+	yLbkV/7ruV7vVUgAR+QsT30cUS19K6S0gn3DFWnl7gkzsIsBY/Imen+lM79WstzJ
+	Bl8v8iBmX/N66ElOK5cDHeFiRxOrt+zzI6ug1yONCgHmFTZYy7MAB5K782cg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1670724623; x=1670811023; bh=CbI6DnKTlZiBh
-	+WyyenklvldjcWlzpgpmYPgqCb7f/o=; b=q8Iq6GV4XVBFpB+IU9SgY65XS0Nr7
-	TKnNuD5bjaN3URIWP1Edn65zI4wL2NIjqKOEkeWn9EEacbZkX1RcK+f99Yy+CV7b
-	WTwxkLiom5VHPL+jniWffxzIbovYXknY47pOGdX4H4b7L15mxc6x/H3MxznUf+/c
-	u83HKL59C3lMqdS39O5AtJlCgTmbkuNoN4mSoNv4teZq0DvgfQnOOrFql7ThMmje
-	bs32kijTH27BtHs9btyiTz5Js/P7xiHc9BXfz0Z384oIhiEujabo3mIxTFYr6VaQ
-	+epWiWNh1T6NOrqW4sISqWL1Q1GYc3J7IpQdK9lYh1R6ce2OEM0+CRScQ==
-X-ME-Sender: <xms:DzyVYycUjYPLyGVQHRmiYN0S-CE1onU13FSZtL6CMK4v5V0DDeg_Og>
-    <xme:DzyVY8O6FnFFcuEUMIgz35bDYm-ajLnh75UMxbs8ZomnoSfs13GysfjiBG2Mm8lLN
-    yDRHfZj-dqi3Q>
-X-ME-Received: <xmr:DzyVYzgPnc9-Jc85VYM7D6aVieYR9pe5SPP4rLzFOQft1Ah4bJTrJWt7gFblL-7SbWy3ZZ59LZWAEWmN9rSkGwORkJTyABah6gfAj3mgblUxA36X1us>
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1670724628; x=
+	1670811028; bh=of27AYkTAg+gV39hHVFtMa/D9CLpVwIBhoS3TGwZ7fc=; b=k
+	e+oi1Q8Xp9XYjNBLsdk8u/ZWSRREbdxYQ2FyfVLd+0mCytqzMXmfdFa0TvMt3pTs
+	J5v+8kIDEDj0K6iNbnNKTy3sXnVaFUxhBgQXD9FTbHT13ZcHPCHPV74Uz6FSrvEw
+	7TO4v11COCQRdawHYHQT4gybR7l8paHkfrHsbDqXiTIV/HAGJv9VZ4S+Kr4am0n+
+	11BRSfTv582DS58eaxNjAV0DFrzAgbHP2yqKnUk7iWCfziX6Kmv9iiuaQUoeXtbg
+	IhW7j1R6PXIna45HgcupGvfK/cm0sQtnY8Denap0Cv1M2oaAUyvvy3hodzInT6El
+	VyXXdvCvSEUn6qbFZ8+xQ==
+X-ME-Sender: <xms:FDyVYwYIKIHfGEJGeULSdwMgDcGAH6ivQ2GQBsMuHYbgtdDzBw6xBQ>
+    <xme:FDyVY7bqvtZaK4bui1y9fzFNoZKBDK-44n7M8rJl_U3xIyRGx7GTuLZmIHdZvkIBx
+    gXfsh51ujUm_w>
+X-ME-Received: <xmr:FDyVY6_LUSGrtlqcv8_2HzoABk0msu9kuMINNmxi0HzxtRENaRK4vxUMqRF58I1CxqzBxGcoBpchlWqlhzRAUhbp16pkdRJjDBMakfhwu7tuWGZPEJw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdehgdeggecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepteelhedv
-    vddtvdetfeeileeftdduteefgeetuedukeffledvjedtveetvefftdeknecuffhomhgrih
-    hnpehinhhtvghlrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehm
-    rghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsg
-    drtghomh
-X-ME-Proxy: <xmx:DzyVY_82D16x19JUh1DBGPCJ1dBz-fcUX-JvGDYj36tKupD2GGHa7g>
-    <xmx:DzyVY-tIO8lyGAn9kBinzfdjlmTYGVsb6pfG-Krq8FUXH1xfhqFGkw>
-    <xmx:DzyVY2HKS3V6EZ1AtBWCgttIB6WJJsxx_BYJgYPj02z96HIPsaay_A>
-    <xmx:DzyVY03bF3Oru4uLnYuX9Wjhm6fPW0K6ShFE79naXt5-KEwJrfxlEA>
+    fjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgv
+    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeu
+    udehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluh
+    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
+    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:FDyVY6pfCnkW_EFX8XvBjgHkMtz9G5H-PCPD_7LP6ozGI19Fu1k30A>
+    <xmx:FDyVY7o7WbQlXF9Tov5-akNstL8jb6L39HGqiFJOXV7Oa6trU65x7Q>
+    <xmx:FDyVY4QmBtJc58HeZioGsyoSZpLSK2kVkVgNxfjvodAPoFT9HVWo2g>
+    <xmx:FDyVY8Dgfa-1r7yhzGgyvykGaDCIbDC3i_-rsPz4lz1terY2Do6Hcg>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [RFC PATCH 0/3] Try to fix XHCI console on AMD systems (help needed)
-Date: Sun, 11 Dec 2022 03:10:03 +0100
-Message-Id: <cover.932f486c1b08268190342f8918b09fa6a7c3f149.1670724490.git-series.marmarek@invisiblethingslab.com>
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [RFC PATCH 3/3] DEBUG: dump xhci state on connection timeout
+Date: Sun, 11 Dec 2022 03:10:06 +0100
+Message-Id: <823ad3165bbcfa61561ff4aac17f41d08e1e91f8.1670724490.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.37.3
+In-Reply-To: <cover.932f486c1b08268190342f8918b09fa6a7c3f149.1670724490.git-series.marmarek@invisiblethingslab.com>
+References: <cover.932f486c1b08268190342f8918b09fa6a7c3f149.1670724490.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This series has two fixes to the xhci console for AMD systems. But it isn't
-enough to get it working. The third patch allows collecting some debug info.
+Debug patch that shows xhci state after some arbitrary (and not very
+smart) timeout.
 
-It got me this:
+DO NOT MERGE.
+The timeout doesn't actually prevent registering the console.
 
-    (XEN) dbc error: timeout 2
-    (XEN) dbc debug: XHCI DBC DUMP:
-    (XEN) dbc debug:     ctrl: 0x800f0000 stat: 0x6000000 psc: 0x621063
-    (XEN) dbc debug:     id: 0xf000a, db: 0x0
-    (XEN) dbc debug:     erstsz: 1, erstba: 0xcbebb000
-    (XEN) dbc debug:     erdp: 0xcbe7b000, cp: 0xcbebb010
-    (XEN) dbc debug:     ddi1: 0x1d6b0000, ddi2: 0x10
-    (XEN) dbc debug:     erstba == virt_to_dma(erst): 1
-    (XEN) dbc debug:     erdp == virt_to_dma(erst[0].base): 1
-    (XEN) dbc debug:     cp == virt_to_dma(ctx): 1
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ xen/drivers/char/xhci-dbc.c | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
 
-On the other side of the cable I got:
-
-    usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: device not accepting address 92, error -71
-    usb usb2-port2: attempt power cycle
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: device not accepting address 93, error -71
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: Device not responding to setup address.
-    usb 2-2: device not accepting address 94, error -71
-    usb usb2-port2: unable to enumerate USB device
-
-Linux seems to reset the port only for Intel, so I tried to disable that part,
-but it still didn't work - I got this instead:
-
-    (XEN) dbc error: timeout 2
-    (XEN) dbc debug: XHCI DBC DUMP:
-    (XEN) dbc debug:     ctrl: 0x800f0000 stat: 0x0 psc: 0xa0
-    (XEN) dbc debug:     id: 0xf000a, db: 0x0
-    (XEN) dbc debug:     erstsz: 1, erstba: 0xcbebb000
-    (XEN) dbc debug:     erdp: 0xcbe7b000, cp: 0xcbebb010
-    (XEN) dbc debug:     ddi1: 0x1d6b0000, ddi2: 0x10
-    (XEN) dbc debug:     erstba == virt_to_dma(erst): 1
-    (XEN) dbc debug:     erdp == virt_to_dma(erst[0].base): 1
-    (XEN) dbc debug:     cp == virt_to_dma(ctx): 1
-
-And then on the other side of the cable, I got:
-
-    [16773160.618004] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773164.850055] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773168.938085] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773168.938380] usb usb2-port2: attempt power cycle
-    [16773173.102097] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773177.190139] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773177.190431] usb usb2-port2: unable to enumerate USB device
-    [16773181.262176] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773185.494221] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773189.582247] usb usb2-port2: Cannot enable. Maybe the USB cable is bad?
-    [16773189.582542] usb usb2-port2: attempt power cycle
-
-The xhci console works fine from within native Linux, when enabled with:
-
-    echo enable > /sys/bus/pci/devices/0000:04:00.3/dbc
-
-I did not managed to get it working via earlyprintk=xhci (but I'm not sure if
-that's specific to this hardware, or something else - haven't tried
-earlyprintk=xhci anywhere else).
-
-Info about the xhci from native linux:
-    04:00.3 USB controller: Advanced Micro Devices, Inc. [AMD] Renoir USB 3.1 (prog-if 30 [XHCI])
-        Subsystem: Hewlett-Packard Company Device 8730
-        Flags: bus master, fast devsel, latency 0, IRQ 44, IOMMU group 5
-        Memory at e0300000 (64-bit, non-prefetchable) [size=1M]
-        Capabilities: [48] Vendor Specific Information: Len=08 <?>
-        Capabilities: [50] Power Management version 3
-        Capabilities: [64] Express Endpoint, MSI 00
-        Capabilities: [a0] MSI: Enable- Count=1/8 Maskable- 64bit+
-        Capabilities: [c0] MSI-X: Enable+ Count=8 Masked-
-        Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
-        Kernel driver in use: xhci_hcd
-
-I tried to find AMD's equivalet of
-https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/extensible-host-controler-interface-usb-xhci.pdf
-to see if there are any differences (shouldn't be...), but I haven't found
-anything like this.
-
-Any ideas what is wrong?
-
-Marek Marczykowski-Górecki (3):
-  drivers/char: support up to 1M BAR0 of xhci
-  drivers/char: search all buses for xhci
-  DEBUG: dump xhci state on connection timeout
-
- xen/arch/x86/include/asm/fixmap.h |   4 +-
- xen/drivers/char/xhci-dbc.c       | 116 +++++++++++++++++++++++++------
- 2 files changed, 98 insertions(+), 22 deletions(-)
-
-base-commit: f86d0a1ff200264aaf80b65d7d200a3ba19c7845
+diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
+index 62b0ce88b6bf..cb209332a4be 100644
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -33,7 +33,7 @@
+ #include <asm/system.h>
+ 
+ /* uncomment to have dbc_uart_dump() debug function */
+-/* #define DBC_DEBUG 1 */
++#define DBC_DEBUG 1
+ 
+ #define DBC_POLL_INTERVAL 100 /* us */
+ 
+@@ -264,6 +264,10 @@ struct dbc {
+     uint16_t pci_cr;
+ };
+ 
++#ifdef DBC_DEBUG
++static void dbc_uart_dump(void);
++#endif
++
+ static void *dbc_sys_map_xhc(uint64_t phys, size_t size)
+ {
+     size_t i;
+@@ -900,13 +904,23 @@ static void dbc_reset_debug_port(struct dbc *dbc)
+ static void dbc_enable_dbc(struct dbc *dbc)
+ {
+     struct dbc_reg *reg = dbc->dbc_reg;
++    unsigned long timeout = 10000000;
+ 
+     wmb();
+     writel(readl(&reg->ctrl) | (1U << DBC_CTRL_DCE), &reg->ctrl);
+     wmb();
+ 
+     while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCE)) == 0 )
++    {
+         cpu_relax();
++        if (!--timeout)
++            break;
++    }
++    if (!timeout)
++    {
++        dbc_error("timeout 1\n");
++        dbc_uart_dump();
++    }
+ 
+     /* reset ports on initial open, to force re-enumerating by the host */
+     if ( !dbc->open )
+@@ -916,8 +930,18 @@ static void dbc_enable_dbc(struct dbc *dbc)
+     writel(readl(&reg->portsc) | (1U << DBC_PSC_PED), &reg->portsc);
+     wmb();
+ 
++    timeout = 1000000;
+     while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 )
++    {
+         cpu_relax();
++        if (!--timeout)
++            break;
++    }
++    if (!timeout)
++    {
++        dbc_error("timeout 2\n");
++        dbc_uart_dump();
++    }
+ }
+ 
+ static void dbc_disable_dbc(struct dbc *dbc)
 -- 
 git-series 0.9.1
 
