@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B03C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 06:00:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459059.716727 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B9EC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 06:24:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459071.716738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4bqz-0001Er-S9; Mon, 12 Dec 2022 05:59:53 +0000
+	id 1p4cEs-0004yP-VO; Mon, 12 Dec 2022 06:24:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459059.716727; Mon, 12 Dec 2022 05:59:53 +0000
+Received: by outflank-mailman (output) from mailman id 459071.716738; Mon, 12 Dec 2022 06:24:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4bqz-0001Ek-PS; Mon, 12 Dec 2022 05:59:53 +0000
-Received: by outflank-mailman (input) for mailman id 459059;
- Mon, 12 Dec 2022 05:59:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zalI=4K=zlw.email=sisyphean@srs-se1.protection.inumbo.net>)
- id 1p4bqy-0001Eb-21
- for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 05:59:53 +0000
-Received: from mail.zlw.email (unknown [112.49.95.49])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29451767-79e2-11ed-8fd2-01056ac49cbb;
- Mon, 12 Dec 2022 06:59:47 +0100 (CET)
-Received: from localhost (unknown [127.0.0.1])
- by mail.zlw.email (Postfix) with ESMTP id 2E9C0174161;
- Mon, 12 Dec 2022 06:00:00 +0000 (UTC)
-Received: from mail.zlw.email ([127.0.0.1])
- by localhost (mail.zlw.email [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5wFCEGbdjmc0; Mon, 12 Dec 2022 13:59:55 +0800 (CST)
-Received: from [192.168.66.233] (OpenWrt.lan [192.168.66.1])
- by mail.zlw.email (Postfix) with ESMTPSA id 3050C173BFD;
- Mon, 12 Dec 2022 13:59:55 +0800 (CST)
+	id 1p4cEs-0004yI-Sa; Mon, 12 Dec 2022 06:24:34 +0000
+Received: by outflank-mailman (input) for mailman id 459071;
+ Mon, 12 Dec 2022 06:24:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=/A98=4K=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1p4cEr-0004yC-83
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 06:24:33 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a33bc605-79e5-11ed-91b6-6bf2151ebd3b;
+ Mon, 12 Dec 2022 07:24:31 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D084333895;
+ Mon, 12 Dec 2022 06:24:30 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A8DED13456;
+ Mon, 12 Dec 2022 06:24:30 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id jEviJx7JlmNdVwAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 12 Dec 2022 06:24:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,383 +53,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29451767-79e2-11ed-8fd2-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zlw.email; h=
-	in-reply-to:from:from:references:to:content-language:subject
-	:subject:user-agent:mime-version:date:date:message-id
-	:content-type:content-type; s=dkim; t=1670824795; x=1673416796;
-	 bh=3iJAT9mEMpl/tOLUEg1sRfP85jeYQy6CU25idGQmavg=; b=FR4OinYCeF6M
-	UB8OEDOeG8uS4vYig5XdphwlYtedgXLSLy02UUwoWWaWaok0f8TNztFoiMgk6LTK
-	X+2f/9Fml69Ls7oz/tBARkvFeWSogGPQfWMmrDfTgkq2AmCK/wMH5fhsmLUkuH0K
-	JmU5u2PjA9DCi9BDXSXLkqDFJt09gww=
-X-Virus-Scanned: amavisd-new at zlw.email
-Content-Type: multipart/alternative;
- boundary="------------twmZYvIWUWAfqTa7A2RDV568"
-Message-ID: <75bbfc8c-b89f-9478-63af-c37fda0ad3c0@zlw.email>
-Date: Mon, 12 Dec 2022 13:49:07 +0800
+X-Inumbo-ID: a33bc605-79e5-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1670826270; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=PDleQvRrvX4MednzmZMOBosn/u+w5VLSU4we6Gr6Rpg=;
+	b=JeOvlfdVQ0v0I9dzki2wi4tBTPrtVnpfK7fhFEf5ZClAg8Gc2aRgtHIna2pcEnPFObuod7
+	R86VxHPkycHHJpEM324Vo3EnvroKux4P7x7kgFVis2Rbi0fa3RHfAxX4DXFokOp8EJs7DK
+	W2dmF+T2I3R0t2KMkA00IxcaVxp+Fcw=
+From: Juergen Gross <jgross@suse.com>
+To: torvalds@linux-foundation.org
+Cc: linux-kernel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	sstabellini@kernel.org
+Subject: [GIT PULL] xen: branch for v6.2-rc1
+Date: Mon, 12 Dec 2022 07:24:30 +0100
+Message-Id: <20221212062430.10263-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Subject: Re: [BUG]Add PCIE devie to SMMUv3 fail
-Content-Language: en-US
-To: Rahul Singh <Rahul.Singh@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <793eb471-e68b-c3ff-52e8-20d77252c0bf@zlw.email>
- <A9FCD688-3CA2-484A-ADC1-F1235F18890F@arm.com>
-From: sisyphean <sisyphean@zlw.email>
-In-Reply-To: <A9FCD688-3CA2-484A-ADC1-F1235F18890F@arm.com>
-
-This is a multi-part message in MIME format.
---------------twmZYvIWUWAfqTa7A2RDV568
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Linus,
 
-在 2022/12/9 17:50, Rahul Singh 写道:
-> Hi Sisyphean,
->
-> > On 9 Dec 2022, at 6:15 am, sisyphean <sisyphean@zlw.email> wrote:
-> >
-> > Hi,
-> >
-> > I try to run XEN on my ARM board(Sorry, for some commercial reasons, 
-> I can't tell you
-> > on which platform I run XEN)  and add PCIE device passthrough to 
-> DomU.But an error
-> > occurred while adding the PCIE device to SMMUv3.
->
-> PCI passthrough support is not fully upstream to Xen on ARM. We have 
-> working
-> PCI passthrough branch that you can use to test it.
->
-> https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough
->
-> >
-> > Through reading the code and tracing debugging, the error is found 
-> in the function
-> > arm_smmu_add_device, which will obtain and determine whether the 
-> fwspec of the
-> > device to be added to SMMU exists.But for the XEN of arm, the fwspec 
-> of the device is
-> > created and added by judging whether the iommu field exists in the 
-> device node when
-> > XEN parses the device tree.However, the PCIE device does not appear 
-> in the device tree,
-> > so there will be no fwspec for all PCIE devices. When attempting to 
-> add a PCIE device to
-> > SMMU, a ENODEV error will be returned.
->
-> As of now Xen doesn’t support to add PCI device to IOMMU on ARM.
-> >
-> > In addition, the code at xen/drivers/passthrough/pci.c also verifies 
-> the above view.
-> > For PCIE devices, pdev is alloc in function pci_add_device by 
-> alloc_pdev.However,
-> > the function alloc_pdev does not create and add fwspec to the PCIE 
-> device.Therefore,
-> > when function pci_add_device executes to iommu_add_device,it will 
-> get the error
-> > return of ENODEV.
-> >
-> > How can I resolve the above errors?
->
-> If you want to test the PCI passthrough please follow below steps.
->
-> Xen setup:
->     • A checkout of the “integration/pci-passthrough” branch from the  
-> gitlab 
-> https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough
->     • Pass iommu=yes  and pci-passthrough=on to Xen command line to 
-> enable PCI passthrough.
->
->  Linux Kernel setup:
->
->     • Some changes are required for the kernel to work with PCI 
-> passthrough. First are some configuration options, enable them in 
-> kernel config.
->          CONFIG_XEN=y
->          CONFIG_XEN_BACKEND=y
->          CONFIG_XEN_PCIDEV_BACKEND=y
->     • Then a patch needs to be applied for enabling the pciback 
-> driver. Patch is attached in this email.
->
-> Using PCI passthrough:
->
->     • In order to pass a device to a guest, you first need its PCI 
-> address(SBDF). You can either get it from a bare-metal
->       Linux running on the platform or by having pciutils installed 
-> (if you are using a yocto-based dom0 or have apt available), which 
-> provides lspci.
->
->      For example, let's pass one ethernet interface to the guest. 
-> Running lspci gives us this output (truncated) :
->        0000:00:00.0 Host bridge: Ampere Computing, LLC Device e100
->        0000:00:01.0 PCI bridge: Ampere Computing, LLC Device e101 (rev 04)
->        0000:01:00.0 Ethernet controller: Intel Corporation Ethernet 
-> Controller X710/X557-AT 10GBASE-T (rev 01)
->                [...]
->
->      We will pass one of the ethernet from the PCI network card : 
-> 0000:01:00.0 .
->
->     • Add the following line to the guest configuration file :
->           pci = ['0000:01:00.0']
->
->     • Run the following command before starting the guest :
->            xl pci-assignable-add 0000:01:00.0
->     • Start the guest. The network interface should appear as 00:00.0  
-> in the guest and be usable.
->
-> Please let me know if you need more info.
->
->
->
-> Regards,
-> Rahul
->
-Thank you for your reply.
+Please git pull the following tag:
 
-After setting XEN and kernel as above, I tried the following two methods 
-to add a PCIE device passthrough:
+ git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-6.2-rc1-tag
 
-1. According to your suggestion, use the command xl pci-assignable-add 
-0002:21:00.0 to set in the Dom0. But in function
-iommu_do_pci_domctl,  after device_assigned is called, ENODEV error is 
-obtained.
+xen: branch for v6.2-rc1
 
-2. Add xen-pciback.hide=(0002:21:00.0) to dom0-bootargs in the device 
-tree, I encountered the same problem as before
-when initializing the kernel. In function pci_add_device, PCIE devices 
-cannot be added to SMMUv3.
+It contains:
 
-The kernel version I use is 5.10. Does this have an impact?
+- 2 small minor fixes
+- a small series fixing memory leaks in error paths
+- a small series adding support for virtio PCI-devices in Xen guests on
+  Arm
 
-In addition, an error was encountered after XEN enabling ITS:
 
-In function gicv3_cpu_init, gicv3_its_setup_collection return 
--ETIMEDOUT. This problem was solved after I made the
-following changes:
+Thanks.
 
-diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 9558bad..a12c0d1 100644
---- a/xen/arch/arm/gic-v3-its.c
-+++ b/xen/arch/arm/gic-v3-its.c
-@@ -118,11 +118,11 @@ static int its_send_command(struct host_its 
-*hw_its, const void *its_cmd)
-      }
+Juergen
 
-      memcpy(hw_its->cmd_buf + writep, its_cmd, ITS_CMD_SIZE);
--    if ( hw_its->flags & HOST_ITS_FLUSH_CMD_QUEUE )
-+    // if ( hw_its->flags & HOST_ITS_FLUSH_CMD_QUEUE )
-          clean_and_invalidate_dcache_va_range(hw_its->cmd_buf + writep,
-                                               ITS_CMD_SIZE);
--    else
--        dsb(ishst);
-+    // else
-+    //     dsb(ishst);
+ arch/arm/xen/enlighten.c    |   2 +-
+ arch/x86/xen/smp.c          |  24 +++++-----
+ arch/x86/xen/smp_pv.c       |  12 ++---
+ arch/x86/xen/spinlock.c     |   6 +--
+ drivers/xen/grant-dma-ops.c | 105 ++++++++++++++++++++++++--------------------
+ drivers/xen/privcmd.c       |   2 +-
+ include/xen/arm/xen-ops.h   |   4 +-
+ include/xen/xen-ops.h       |  16 -------
+ include/xen/xen.h           |   4 +-
+ 9 files changed, 84 insertions(+), 91 deletions(-)
 
-      writep = (writep + ITS_CMD_SIZE) % ITS_CMD_QUEUE_SZ;
-      writeq_relaxed(writep & BUFPTR_MASK, hw_its->its_base + GITS_CWRITER);
+Harshit Mogalapalli (1):
+      xen/privcmd: Fix a possible warning in privcmd_ioctl_mmap_resource()
 
-Cheers,
+Jani Nikula (1):
+      xen: fix xen.h build for CONFIG_XEN_PVH=y
 
---
-Sisyphean
+Oleksandr Tyshchenko (2):
+      xen/virtio: Optimize the setup of "xen-grant-dma" devices
+      xen/virtio: Handle PCI devices which Host controller is described in DT
 
---------------twmZYvIWUWAfqTa7A2RDV568
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Hi,<br>
-    </p>
-    <div class="moz-cite-prefix">在 2022/12/9 17:50, Rahul Singh 写道:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:A9FCD688-3CA2-484A-ADC1-F1235F18890F@arm.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <div class="BodyFragment"><font size="2"><span
-            style="font-size:11pt;">
-            <div class="PlainText">Hi Sisyphean,<br>
-              <br>
-              &gt; On 9 Dec 2022, at 6:15 am, sisyphean
-              <a class="moz-txt-link-rfc2396E" href="mailto:sisyphean@zlw.email">&lt;sisyphean@zlw.email&gt;</a> wrote:<br>
-              &gt; <br>
-              &gt; Hi,<br>
-              &gt; <br>
-              &gt; I try to run XEN on my ARM board(Sorry, for some
-              commercial reasons, I can't tell you<br>
-              &gt; on which platform I run XEN)  and add PCIE device
-              passthrough to DomU.But an error<br>
-              &gt; occurred while adding the PCIE device to SMMUv3.<br>
-              <br>
-              PCI passthrough support is not fully upstream to Xen on
-              ARM. We have working<br>
-              PCI passthrough branch that you can use to test it. <br>
-              <br>
-              <a
-href="https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough"
-                moz-do-not-send="true" class="moz-txt-link-freetext">https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough</a><br>
-              <br>
-              &gt; <br>
-              &gt; Through reading the code and tracing debugging, the
-              error is found in the function<br>
-              &gt; arm_smmu_add_device, which will obtain and determine
-              whether the fwspec of the<br>
-              &gt; device to be added to SMMU exists.But for the XEN of
-              arm, the fwspec of the device is<br>
-              &gt; created and added by judging whether the iommu field
-              exists in the device node when<br>
-              &gt; XEN parses the device tree.However, the PCIE device
-              does not appear in the device tree,<br>
-              &gt; so there will be no fwspec for all PCIE devices. When
-              attempting to add a PCIE device to<br>
-              &gt; SMMU, a ENODEV error will be returned.<br>
-              <br>
-              As of now Xen doesn’t support to add PCI device to IOMMU
-              on ARM. <br>
-              &gt; <br>
-              &gt; In addition, the code at
-              xen/drivers/passthrough/pci.c also verifies the above
-              view.<br>
-              &gt; For PCIE devices, pdev is alloc in function
-              pci_add_device by alloc_pdev.However,<br>
-              &gt; the function alloc_pdev does not create and add
-              fwspec to the PCIE device.Therefore,<br>
-              &gt; when function pci_add_device executes to
-              iommu_add_device,it will get the error<br>
-              &gt; return of ENODEV.<br>
-              &gt; <br>
-              &gt; How can I resolve the above errors?<br>
-              <br>
-              If you want to test the PCI passthrough please follow
-              below steps.<br>
-              <br>
-              Xen setup:<br>
-                  • A checkout of the “integration/pci-passthrough”
-              branch from the  gitlab <a
-href="https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough"
-                moz-do-not-send="true" class="moz-txt-link-freetext">
-https://gitlab.com/xen-project/fusa/xen-integration/-/commits/integration/pci-passthrough</a><br>
-                  • Pass iommu=yes  and pci-passthrough=on to Xen
-              command line to enable PCI passthrough.<br>
-              <br>
-               Linux Kernel setup:<br>
-               <br>
-                  • Some changes are required for the kernel to work
-              with PCI passthrough. First are some configuration
-              options, enable them in kernel config.<br>
-                       CONFIG_XEN=y<br>
-                       CONFIG_XEN_BACKEND=y<br>
-                       CONFIG_XEN_PCIDEV_BACKEND=y<br>
-                  • Then a patch needs to be applied for enabling the
-              pciback driver. Patch is attached in this email.<br>
-               <br>
-              Using PCI passthrough:<br>
-               <br>
-                  • In order to pass a device to a guest, you first need
-              its PCI address(SBDF). You can either get it from a
-              bare-metal<br>
-                    Linux running on the platform or by having pciutils 
-              installed (if you are using a yocto-based dom0 or have apt
-              available), which provides lspci.<br>
-               <br>
-                   For example, let's pass one ethernet interface to the
-              guest. Running lspci gives us this output (truncated) :<br>
-                     0000:00:00.0 Host bridge: Ampere Computing, LLC
-              Device e100<br>
-                     0000:00:01.0 PCI bridge: Ampere Computing, LLC
-              Device e101 (rev 04)<br>
-                     0000:01:00.0 Ethernet controller: Intel Corporation
-              Ethernet Controller X710/X557-AT 10GBASE-T (rev 01)<br>
-                             [...]<br>
-               <br>
-                   We will pass one of the ethernet from the PCI network
-              card : 0000:01:00.0 .<br>
-               <br>
-                  • Add the following line to the guest configuration
-              file :<br>
-                        pci = ['0000:01:00.0']<br>
-               <br>
-                  • Run the following command before starting the guest
-              :<br>
-                         xl pci-assignable-add 0000:01:00.0<br>
-                  • Start the guest. The network interface should appear
-              as 00:00.0  in the guest and be usable.<br>
-               <br>
-              Please let me know if you need more info.<br>
-              <br>
-            </div>
-          </span></font></div>
-      <div class="BodyFragment"><font size="2"><span
-            style="font-size:11pt;">
-            <div class="PlainText"><br>
-              <br>
-              Regards,<br>
-              Rahul<br>
-              <br>
-            </div>
-          </span></font></div>
-    </blockquote>
-    <p><font size="2">Thank you for your reply.</font></p>
-    <p><font size="2">After setting XEN and kernel as above, I tried the
-        following two methods to add a PCIE device passthrough:</font></p>
-    <p><font size="2">1. According to your suggestion, use the command
-        xl pci-assignable-add 0002:21:00.0 to set in the Dom0. But in
-        function<br>
-        iommu_do_pci_domctl,  after device_assigned is called, ENODEV
-        error is obtained.<br>
-      </font></p>
-    <p><font size="2">2. Add xen-pciback.hide=(0002:21:00.0) to
-        dom0-bootargs in the device tree, I encountered the same problem
-        as before <br>
-        when initializing the kernel. In function pci_add_device, PCIE
-        devices cannot be added to SMMUv3.<br>
-      </font></p>
-    <p><font size="2">The kernel version I use is 5.10. Does this have
-        an impact?<br>
-      </font></p>
-    <p><font size="2">In addition, an error was encountered after XEN
-        enabling ITS:</font></p>
-    <p><font size="2">In function gicv3_cpu_init,
-        gicv3_its_setup_collection return -ETIMEDOUT. This problem was
-        solved after I made the<br>
-        following changes:</font></p>
-    <p><font size="2">diff --git a/xen/arch/arm/gic-v3-its.c
-        b/xen/arch/arm/gic-v3-its.c<br>
-        index 9558bad..a12c0d1 100644<br>
-        --- a/xen/arch/arm/gic-v3-its.c<br>
-        +++ b/xen/arch/arm/gic-v3-its.c<br>
-        @@ -118,11 +118,11 @@ static int its_send_command(struct
-        host_its *hw_its, const void *its_cmd)<br>
-             }<br>
-         <br>
-             memcpy(hw_its-&gt;cmd_buf + writep, its_cmd, ITS_CMD_SIZE);<br>
-        -    if ( hw_its-&gt;flags &amp; HOST_ITS_FLUSH_CMD_QUEUE )<br>
-        +    // if ( hw_its-&gt;flags &amp; HOST_ITS_FLUSH_CMD_QUEUE )<br>
-                 clean_and_invalidate_dcache_va_range(hw_its-&gt;cmd_buf
-        + writep,<br>
-                                                      ITS_CMD_SIZE);<br>
-        -    else<br>
-        -        dsb(ishst);<br>
-        +    // else<br>
-        +    //     dsb(ishst);<br>
-         <br>
-             writep = (writep + ITS_CMD_SIZE) % ITS_CMD_QUEUE_SZ;<br>
-             writeq_relaxed(writep &amp; BUFPTR_MASK,
-        hw_its-&gt;its_base + GITS_CWRITER);<br>
-      </font></p>
-    <p><font size="2">Cheers,</font></p>
-    <p><font size="2">--<br>
-        Sisyphean<br>
-      </font></p>
-  </body>
-</html>
-
---------------twmZYvIWUWAfqTa7A2RDV568--
+Xiu Jianfeng (2):
+      x86/xen: Fix memory leak in xen_smp_intr_init{_pv}()
+      x86/xen: Fix memory leak in xen_init_lock_cpu()
 
