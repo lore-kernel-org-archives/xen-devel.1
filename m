@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E8E8C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:55:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459258.716993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85446C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:55:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459262.717012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fX4-0004G3-D7; Mon, 12 Dec 2022 09:55:34 +0000
+	id 1p4fX6-0004nK-F1; Mon, 12 Dec 2022 09:55:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459258.716993; Mon, 12 Dec 2022 09:55:34 +0000
+Received: by outflank-mailman (output) from mailman id 459262.717012; Mon, 12 Dec 2022 09:55:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fX4-0004Em-8Y; Mon, 12 Dec 2022 09:55:34 +0000
-Received: by outflank-mailman (input) for mailman id 459258;
- Mon, 12 Dec 2022 09:55:32 +0000
+	id 1p4fX6-0004lz-A0; Mon, 12 Dec 2022 09:55:36 +0000
+Received: by outflank-mailman (input) for mailman id 459262;
+ Mon, 12 Dec 2022 09:55:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p4fX2-0003pM-IE
- for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:55:32 +0000
+ (envelope-from <julien@xen.org>) id 1p4fX4-0004Oi-Tm
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:55:34 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fX2-0001SX-CK; Mon, 12 Dec 2022 09:55:32 +0000
+ id 1p4fX4-0001TB-Ns; Mon, 12 Dec 2022 09:55:34 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fX2-0001lz-4x; Mon, 12 Dec 2022 09:55:32 +0000
+ id 1p4fX4-0001lz-GZ; Mon, 12 Dec 2022 09:55:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=4gf7OGmCVTPIad+5gHH9EbUJ/Y2Mpf2evxa74D/Bu6g=; b=vKmbKzPt6HLBrhHXL56pzDRdO7
-	02rW7Wm0ZQxyS+V8WoSvH8sylIwt/iUR2xk3jH731iLkNrjEORwfLQbKKGb52Fp0CmA1oLQd+fuo2
-	lyrIXPq8h7pTuB25cDL9UZJqcKZFYmCxr3N4a3K34tr1Q800MK85iP6v1EE2PnkRHfyI=;
+	bh=eVOr8yy1F+4wZ14jGK/bPFFivuW+5kEZ2mVl4i9yBOc=; b=D3lBEoGk3MdzcrnyJEBrgU9Kp1
+	edM1ZYS1s9I/LUtL/6mIbfgJer/wwAeC1OSdjx+OJVQ8S0ScsUw+HImc1jgWkqVL3nSg2JuHhLm6G
+	EAmzrSuiR3mYVCSIUIBfDv3jn8jhNliKdT3xHqUJMMGU6TjNxiH0TpCCmkq2WFhCv3Ks=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: michal.orzel@amd.com,
@@ -57,9 +57,9 @@ Cc: michal.orzel@amd.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 05/18] xen/arm: Clean-up the memory layout
-Date: Mon, 12 Dec 2022 09:55:10 +0000
-Message-Id: <20221212095523.52683-6-julien@xen.org>
+Subject: [PATCH v3 07/18] xen/arm32: head: Jump to the runtime mapping in enable_mmu()
+Date: Mon, 12 Dec 2022 09:55:12 +0000
+Message-Id: <20221212095523.52683-8-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221212095523.52683-1-julien@xen.org>
 References: <20221212095523.52683-1-julien@xen.org>
@@ -68,80 +68,113 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-In a follow-up patch, the base address for the common mappings will
-vary between arm32 and arm64. To avoid any duplication, define
-every mapping in the common region from the previous one.
+At the moment, enable_mmu() will return to an address in the 1:1 mapping
+and each path is responsible to switch to the runtime mapping.
 
-Take the opportunity to:
-    * add missing *_SIZE for FIXMAP_VIRT_* and XEN_VIRT_*
-    * switch to MB()/GB() to be avoid hexadecimal (easier to read)
+In a follow-up patch, the behavior to switch to the runtime mapping
+will become more complex. So to avoid more code/comment duplication,
+move the switch in enable_mmu().
+
+Lastly, take the opportunity to replace load from literal pool with
+mov_w.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
     Changes in v3:
-        - Switch more macros to use MB()/GB()
-        - Remove duplicated sentence in the commit message
+        - Fix typo in the commit message
 
     Changes in v2:
-        - Use _AT(vaddr_t, ...) to build on 32-bit.
-        - Drop COMMON_VIRT_START
+        - Patch added
 ---
- xen/arch/arm/include/asm/config.h | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ xen/arch/arm/arm32/head.S | 50 +++++++++++++++++++++++----------------
+ 1 file changed, 30 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
-index 0fefed1b8aa9..87851e677701 100644
---- a/xen/arch/arm/include/asm/config.h
-+++ b/xen/arch/arm/include/asm/config.h
-@@ -107,14 +107,19 @@
-  *  Unused
+diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+index ce680be91be1..40c1d7502007 100644
+--- a/xen/arch/arm/arm32/head.S
++++ b/xen/arch/arm/arm32/head.S
+@@ -167,19 +167,11 @@ past_zImage:
+         bl    check_cpu_mode
+         bl    cpu_init
+         bl    create_page_tables
+-        bl    enable_mmu
+ 
+-        /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
+-        mov_w r0, primary_switched
+-        mov   pc, r0
++        /* Address in the runtime mapping to jump to after the MMU is enabled */
++        mov_w lr, primary_switched
++        b     enable_mmu
+ primary_switched:
+-        /*
+-         * The 1:1 map may clash with other parts of the Xen virtual memory
+-         * layout. As it is not used anymore, remove it completely to
+-         * avoid having to worry about replacing existing mapping
+-         * afterwards.
+-         */
+-        bl    remove_identity_mapping
+         bl    setup_fixmap
+ #ifdef CONFIG_EARLY_PRINTK
+         /* Use a virtual address to access the UART. */
+@@ -223,12 +215,10 @@ GLOBAL(init_secondary)
+         bl    check_cpu_mode
+         bl    cpu_init
+         bl    create_page_tables
+-        bl    enable_mmu
+ 
+-
+-        /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
+-        mov_w r0, secondary_switched
+-        mov   pc, r0
++        /* Address in the runtime mapping to jump to after the MMU is enabled */
++        mov_w lr, secondary_switched
++        b     enable_mmu
+ secondary_switched:
+         /*
+          * Non-boot CPUs need to move on to the proper pagetables, which were
+@@ -523,9 +513,12 @@ virtphys_clash:
+ ENDPROC(create_page_tables)
+ 
+ /*
+- * Turn on the Data Cache and the MMU. The function will return on the 1:1
+- * mapping. In other word, the caller is responsible to switch to the runtime
+- * mapping.
++ * Turn on the Data Cache and the MMU. The function will return
++ * to the virtual address provided in LR (e.g. the runtime mapping).
++ *
++ * Inputs:
++ *   r9 : paddr(start)
++ *   lr : Virtual address to return to
+  *
+  * Clobbers r0 - r3
   */
- 
--#define XEN_VIRT_START         _AT(vaddr_t,0x00200000)
--#define FIXMAP_ADDR(n)        (_AT(vaddr_t,0x00400000) + (n) * PAGE_SIZE)
-+#define XEN_VIRT_START          _AT(vaddr_t, MB(2))
-+#define XEN_VIRT_SIZE           _AT(vaddr_t, MB(2))
- 
--#define BOOT_FDT_VIRT_START    _AT(vaddr_t,0x00600000)
--#define BOOT_FDT_VIRT_SIZE     _AT(vaddr_t, MB(4))
-+#define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
-+#define FIXMAP_VIRT_SIZE        _AT(vaddr_t, MB(2))
+@@ -551,7 +544,24 @@ enable_mmu:
+         dsb                          /* Flush PTE writes and finish reads */
+         mcr   CP32(r0, HSCTLR)       /* now paging is enabled */
+         isb                          /* Now, flush the icache */
+-        mov   pc, lr
 +
-+#define FIXMAP_ADDR(n)          (FIXMAP_VIRT_START + (n) * PAGE_SIZE)
-+
-+#define BOOT_FDT_VIRT_START     (FIXMAP_VIRT_START + FIXMAP_VIRT_SIZE)
-+#define BOOT_FDT_VIRT_SIZE      _AT(vaddr_t, MB(4))
++        /*
++         * The MMU is turned on and we are in the 1:1 mapping. Switch
++         * to the runtime mapping.
++         */
++        mov_w r0, 1f
++        mov   pc, r0
++1:
++        /*
++         * The 1:1 map may clash with other parts of the Xen virtual memory
++         * layout. As it is not used anymore, remove it completely to
++         * avoid having to worry about replacing existing mapping
++         * afterwards.
++         *
++         * On return this will jump to the virtual address requested by
++         * the caller.
++         */
++        b     remove_identity_mapping
+ ENDPROC(enable_mmu)
  
- #ifdef CONFIG_LIVEPATCH
--#define LIVEPATCH_VMAP_START   _AT(vaddr_t,0x00a00000)
-+#define LIVEPATCH_VMAP_START    (BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE)
- #define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
- #endif
- 
-@@ -124,18 +129,18 @@
- 
- #define CONFIG_SEPARATE_XENHEAP 1
- 
--#define FRAMETABLE_VIRT_START  _AT(vaddr_t,0x02000000)
-+#define FRAMETABLE_VIRT_START  _AT(vaddr_t, MB(32))
- #define FRAMETABLE_SIZE        MB(128-32)
- #define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
- #define FRAMETABLE_VIRT_END    (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
- 
--#define VMAP_VIRT_START        _AT(vaddr_t,0x10000000)
-+#define VMAP_VIRT_START        _AT(vaddr_t, MB(256))
- #define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
- 
--#define XENHEAP_VIRT_START     _AT(vaddr_t,0x40000000)
-+#define XENHEAP_VIRT_START     _AT(vaddr_t, GB(1))
- #define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
- 
--#define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
-+#define DOMHEAP_VIRT_START     _AT(vaddr_t, GB(2))
- #define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
- 
- #define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
+ /*
 -- 
 2.38.1
 
