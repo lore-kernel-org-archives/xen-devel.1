@@ -4,55 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D2CC4167B
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 16:01:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459770.717542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91428C00145
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 16:04:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459786.717564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4lEX-0000xI-Ld; Mon, 12 Dec 2022 16:00:49 +0000
+	id 1p4lI1-00029h-Dh; Mon, 12 Dec 2022 16:04:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459770.717542; Mon, 12 Dec 2022 16:00:49 +0000
+Received: by outflank-mailman (output) from mailman id 459786.717564; Mon, 12 Dec 2022 16:04:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4lEX-0000xB-If; Mon, 12 Dec 2022 16:00:49 +0000
-Received: by outflank-mailman (input) for mailman id 459770;
- Mon, 12 Dec 2022 16:00:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Sjdt=4K=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
- id 1p4lEW-0000x3-GT
- for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 16:00:48 +0000
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2078.outbound.protection.outlook.com [40.107.212.78])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 23745ced-7a36-11ed-91b6-6bf2151ebd3b;
- Mon, 12 Dec 2022 17:00:46 +0100 (CET)
-Received: from DM6PR17CA0016.namprd17.prod.outlook.com (2603:10b6:5:1b3::29)
- by DM8PR12MB5462.namprd12.prod.outlook.com (2603:10b6:8:24::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.19; Mon, 12 Dec
- 2022 16:00:42 +0000
-Received: from DM6NAM11FT071.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:1b3:cafe::66) by DM6PR17CA0016.outlook.office365.com
- (2603:10b6:5:1b3::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.10 via Frontend
- Transport; Mon, 12 Dec 2022 16:00:42 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT071.mail.protection.outlook.com (10.13.173.48) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5901.21 via Frontend Transport; Mon, 12 Dec 2022 16:00:41 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 12 Dec
- 2022 10:00:40 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 12 Dec
- 2022 10:00:34 -0600
-Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Mon, 12 Dec 2022 10:00:33 -0600
+	id 1p4lI1-00029a-Am; Mon, 12 Dec 2022 16:04:25 +0000
+Received: by outflank-mailman (input) for mailman id 459786;
+ Mon, 12 Dec 2022 16:04:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8fsB=4K=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1p4lHz-00029S-Co
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 16:04:23 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2049.outbound.protection.outlook.com [40.107.21.49])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a3ba8490-7a36-11ed-8fd2-01056ac49cbb;
+ Mon, 12 Dec 2022 17:04:21 +0100 (CET)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by AS4PR04MB9575.eurprd04.prod.outlook.com (2603:10a6:20b:4fd::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.8; Mon, 12 Dec
+ 2022 16:04:20 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::4da2:ea8b:e71e:b8d8]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::4da2:ea8b:e71e:b8d8%4]) with mapi id 15.20.5880.019; Mon, 12 Dec 2022
+ 16:04:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,101 +48,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23745ced-7a36-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: a3ba8490-7a36-11ed-8fd2-01056ac49cbb
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iHhKskPEFEnNNQiCKIOUjgNNN+tdHBEG2NIH4gtMZD3NxaTaeYnD3ojOAiTihu67oYYdctHPhV6nR9rpEknXkkLvtBFh7FyLAHtLde/NKqnADWSo5lnc2JluRes+ZczWz4BcAHZqzBsiW/y2g3fCXo9/Zq9TES9hQdWEkjd20ovaKU/4IFg8DnV0IwoTrv83wkNEn28ne1pmcbAbloJ5zU+QN/ffpGVBS/aC7JSqyX9DR//SoYZCfRq5l+qZcbBtcedoWFV4i/RvOndKLl2/0rsfUwk1JgU1WadrccXSy5ofEakprT0nS0OaUynXlI1Lwc9RbA33YkkmEtqqPDx6qQ==
+ b=DOLH4dLQ5yTg2jb9+JxzvEGQXAJYc1SG9d7Up18EYikqHaiRPJ14lJnkNbVYt5szomCIG9EA2a5pcNGR2dNPXhntPRau5ggv/M1Qyn7+3BJIsPgC1MdtFygs9uQbBeVMfnlhNvQxo+OEEwKHpxho79/68L4ZAIepZSZ37Hqb7Zgb6t2Hojz9aQjzpnufHD7saLkcgHXw3lb/51aYsYNB+D0t4HNCR0baei/dggftmV4mvFI0LR48M/mJg4YvqEyh/osqR9g6DPoKWpg+vwmVJu/t9qMJiVnSxHwsHA82wG+kX3XcfOimG9q/vF0zW8Ml08J8GvThmaonGRLbfnxz/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cwR3TvcwiCf5uSnerTtdKAUsWBq8IxQW7OLe1vZOurE=;
- b=AfEsFFt6Q+6TAHnH7Ex4wnmoZlWZU0wGs8UX5t8sQtPO2tyCyC9+D/ixzJJzywFqBGLuBM3+1saJ4m4NNOhrbvc4IfsWf58MG4+cxZ9PCPxC89AgO6ifaaUoDF+fNjqDuOt6/BoZ2OvVmCoONTTKg7P7ZRx0xzrFF9gTKJb/xORKRxtfyiSUFv8wNLgBI9i5gfQY1v/O+pjz83j1JUV1EtKihSPc3OfrERX2lTSvXpmlSa0rEAUQTudi55FW6V8anqMJvhEi/AcbYqGYyIScLJvueQGnAU2eiu4Ywehb2nXDGxKuIcjV+qEaFJhFfGhIZ07+w6ddn5nZMG/naheM0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=g2/D0Klcfmma0bx72GJde9Wxyl0C9StOThGNh4A0o8U=;
+ b=K31VsWgRIufTFj5QZDBlZ312bAQWeuq/Jf7A6KhaxlB4UjnqSmKSPd9InlbBFQUVVcPqOO6D81QXLtj4VmocUstvlXtMSxJyiy13WmwSItT6ELiH8gsriqfaZCnuKF0J7BCI7MZPDNlWCmoGW1UD1zokxZ+QB+byjPLsTbRuJVBYfDjaWysCh7VXQp+reZZTjHq9MizLGhFZp1pOIQd9LXWVwzvX1gh9wTvfntW1PbLurOPYnHq+CdiyIb5R1pW5NB8h1+NlgjDGKNYsdPlBtXk83mB3N3S3irZ+cQfDJlr7CUrTlqO+K863PBsuGygLVZaKbLD6wGrFpQ6FyUzeqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cwR3TvcwiCf5uSnerTtdKAUsWBq8IxQW7OLe1vZOurE=;
- b=fIHN0DE9Bj4za66ap+cYQOwiM2xkDjMuI+83NZPi8gUKaiR30N3ygnxbSj4NGYxgXFl69Bw0i7sU2hIcclvFqV851iPu8iONn1MaHVAWPpZqCXbFlmAUbCtZGLpaZSoHdWFWBSBDZbJPnPTrkUmqq6AIvqgrlUpJWeZ0NRbKiuc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Stewart Hildebrand <stewart.hildebrand@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Rahul Singh <rahul.singh@arm.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH] xen/arm: smmuv3: remove unused function
-Date: Mon, 12 Dec 2022 11:00:31 -0500
-Message-ID: <20221212160031.31590-1-stewart.hildebrand@amd.com>
-X-Mailer: git-send-email 2.38.2
+ bh=g2/D0Klcfmma0bx72GJde9Wxyl0C9StOThGNh4A0o8U=;
+ b=tIbPIu2ZcRzlYKew7exd9fYT6MrK1AM4W7LtNI0rpd93Axw3SRQO1rTM3dFvE/R1RXk/fWYLouxCL6hqgA1SzbXWpVhaNYBsAfpsbXDHe6nF0CMAiI2nOiJGB7x8P8SBuE+cTxQRa9b1Qd+3Rcj7snK/NbpaPHq0YDZapo1ooP64k1mm1StYX0eFAKj/C6hUVroRUD9eDKcAOOKsPrpBw+BUyS0ji58K+sbwXExhs+lbgtjbeOwlMUOK7v3xrDvtLWUdqV+3WykwatD7z1kZwAHSi3E/c+IHhuYfpaenfSxUHTs+PdK5mQtP7ltqXwhmbggDA+6X8ThDkwwcUktLBA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <e15114b3-d30b-14ad-ab73-6a9cbf5767d4@suse.com>
+Date: Mon, 12 Dec 2022 17:04:18 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.1
+Subject: Re: [PATCH 1/2] x86/ucode: allow cpu_request_microcode() to skip
+ memory allocation
+Content-Language: en-US
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>
+Cc: Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Sergey Dyasli <sergey.dyasli@cloud.com>
+References: <20221208132639.29942-1-sergey.dyasli@citrix.com>
+ <c6676171-8cab-dfbc-4b18-d9c724588398@citrix.com>
+ <35f9e529-35b9-0432-8e98-8b0100953856@suse.com>
+ <CAPRVcuccXaLNX3suy1t+xD_kptnV2yLxoCN_193PF6Gj_FBD1w@mail.gmail.com>
+ <b610b461-4c77-66da-c930-10def3138e5d@suse.com>
+ <f980e5c9-b175-2741-ed95-43bbc643baf7@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <f980e5c9-b175-2741-ed95-43bbc643baf7@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0205.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a5::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT071:EE_|DM8PR12MB5462:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d88866c-feab-4cf0-a5c5-08dadc5a053a
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|AS4PR04MB9575:EE_
+X-MS-Office365-Filtering-Correlation-Id: 298722e0-c01c-41e1-d038-08dadc5a8757
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ecBFuaoJdPs9jSuP4ZsD4Q+6dwDK90Uc7jdQv0khpbA/MoWc2k4dBmHs9w77Tn5TYoODiD2h2ALszOcuScjGdQATJOr6eWS2r+dDp7/I8l1hXRoWhAazVzAreOcduHynfbm859dkPm2jQ6zun4wf3aH8o1K77oLoq/y+59fi0kchGfT5Zapu+MpTG1ok16tj4BNajUkQ2tWrf9kKSSUuyQg5+VGL5rg6o0+cUDtcBjDDnjNR/MjgItU6zwoYU6Lu2wPH//eFpCh61aY6ZVCbwf1BYu9pia6aU42fM670w9LWcbYhZXQJDT0XaE6w+ytKjIcBF0AxZk7U3Xld88LYQu1tIXjm3Zqwe0kknFX/FSJHJnyAEZ1v5+8OTQaIuyMn4dlthHW+NxKcDBl9R91A9BE07dFcyQHvOHm24N5g875AE5xu8fkLsZ9qXIgpCjyP00IRwE3mzvSQFLxRQt5l/8fJfAy2/IP6/lWCakvvxICkIdvnlXOPoDmUYVsumJ8z7CB52SnHJ9+BVZYlsLgNLdkC0ffSZ9S0Z6G5s2hJ0neHG05Z31kBqxuOgL6SB4hri1EQUbSk2JG8ZfaMIewPhZV6s9+rNdIKGKi8pz1EQqZ2rKUF4v1swcgiSqZsYE0Tc6ripVLYF8Amhq+tyySgcvlw8funEwgIuQAm/Uwjccmw9tBHlnpvzG/05BNF0kEn6kNT5mdvI36w5h7kmb++M/dsnjBNCBMhKCF4RIfERvY=
+	F06Nx4gVCiDUsuRCGrQeWh8EQAUiBBePYKuyZWkhevzTeuJZgdsj1ZWmhWMtF0mnrSqnUZ6U6AbvYK/w13JDAUh5na/KlO5WjrAS8KNXEJzhEy/WCHKAzO4dwLn4iOC8+nwfrtPqmDAKbf4EeqgB2HrFyBCjFttb4lwl0QGLH8tXK4CV+tHg2s1BJLLnKf5uWS1zCSeacpw2ER0BNbokLviTIAi6d+lVq74iivyN5fViDu6Zh+THrEO29vIx3OoCPg4S78zffKfJ7GT37+o2yrZSzl0LFh4vydLnd584AbBClMT76lfCOdKc7FBkLKyu1plXbGr22R9eTDkVl4xYhO5FehzZk8VBcfnd6CL7rY4AtQhRLOq/YENZDpZV+j+m22YF88bexK2r7inhbQi3dAHipN56tEHh5QXxQrFtpKLBdcyQELFk9ktseTqC/8hT0CLO+Ob+5xc5hjB7EkkIm2CCirfsmoxFzSzA6s2r/qLxiP4/JMQEu5HzUSlIc1COFQQRP/eUfD8YaOA6XrdpTIYxHsgZ6CyD8bKmaOSn6gR/+5h9yj/3HxGBDFThMWti1W90k2YuBHQUQaTx0iK+pTEu3wzZQ6NVYy/DSmN63yOwO+ZYHxMAtO6dnFC2FMl+UaOEJo/wZ48jU1wdJw2Qbpbz0j4A4XbUcVAhYd5KyNk9x5gCp/I4ngFBPo/L2qF2QUiqJ/tlv/RXWztzV+FaWIEFPtkUPQwjrGYCLX2cRJM=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:CA;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(396003)(376002)(136003)(346002)(451199015)(36840700001)(40470700004)(46966006)(2906002)(81166007)(82740400003)(44832011)(356005)(40480700001)(26005)(70586007)(8936002)(36756003)(36860700001)(41300700001)(8676002)(70206006)(82310400005)(86362001)(5660300002)(6916009)(54906003)(316002)(4326008)(336012)(478600001)(426003)(40460700003)(1076003)(186003)(83380400001)(47076005)(2616005)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2022 16:00:41.8464
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(366004)(396003)(136003)(376002)(39860400002)(346002)(451199015)(36756003)(186003)(54906003)(2906002)(316002)(6916009)(83380400001)(6506007)(31696002)(86362001)(2616005)(6486002)(478600001)(53546011)(26005)(6512007)(66556008)(38100700002)(41300700001)(66476007)(4326008)(8676002)(66946007)(31686004)(5660300002)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Uko0M1hXa0tLQmlJMXloS1hXS2NzZ2dxQ0t0RXBwbFRjTk1vRU9QWVh4NnJx?=
+ =?utf-8?B?UWtPWGdjQWdobkFLVWpXcjhBT1ZYWG96N3NKVHBqN3d0b0tuZ2FlVHVIV0di?=
+ =?utf-8?B?cHdHbnNPV0tKd291QjZkQnJPZGJhZHRVTWhKd25aUzRlUXBFUkJOam5QNE8w?=
+ =?utf-8?B?M0EvOGZHZXFUUVNsL3RucitYQU9hRzJwM2tONGg4Qld1VU5oVC9RT2Eva2xw?=
+ =?utf-8?B?ZkVvQ3FqQTFDcW83d05lQ3A2WDJyajBaa1V6R3IzbGUxYVdNaDBCeXN5S3dh?=
+ =?utf-8?B?NXNzT21xUXpaazlra09MYkJQZEZsUCt3OEQ4STBhSlJqd3N3RTd1QnRXYlRV?=
+ =?utf-8?B?STZ3ZndBRkdUM3ZkaWFIT2RMQ1RXY3J0WEtnakQwUmM5RGd3MnZEQS9xVkxn?=
+ =?utf-8?B?cDR0MHdSRlpKWnFnbWFxSlN6ZUc5TVRyeUNkTTJ2SWthWkdTKzJJQ3BzVENI?=
+ =?utf-8?B?SHhVS1lzOFJMNlhrU3ZmZG1VMEZ6U3VXcGZOTmVOMmgveVNzNUFLSitkTW1u?=
+ =?utf-8?B?SDN5b05xeitjNGR0YUhZaDFwMEVyVnV0Y3B4Zzk3SHIwMk40L2ltWDFkeFZC?=
+ =?utf-8?B?RnBpNmh3SlBTbk16bDRDYkcwN3AxUEJMTVhjNEtEejVyMjNiR0R4bnk0WXNV?=
+ =?utf-8?B?ZXVrOWpMNGtMZmJYRnJVMkFyWlY2MnJkYkJobGU3ZkpYaUpsbEdOMHY0bE9I?=
+ =?utf-8?B?SEgraGZrNE15T0VRL2FHaFJBUFkrU2ZTeGt4WnY0UTB6bmN5UzJkM0lZMVFp?=
+ =?utf-8?B?T1BMSWVPYTRSOGdteWRqWDJ4YmV0NEVJc1l4bjUxZUoxanU1bDJWdUhDOElN?=
+ =?utf-8?B?Sm1XSzJEZ3dka09aU0psSFJnaW5XdHNLZG9ackpHL01rVHRIT0pZMGZOOTRE?=
+ =?utf-8?B?U2FiMCs5bUx4V1pWMFNqSFNvN1ZzbE01NGYzM0FyMVhvSHhpL3lSTmVUSXc2?=
+ =?utf-8?B?OFFtNlZ0QmJrSk91Z0Z5Qy8zNjRncitOOGd0MjVmckU4UG13SXJuKzJ5VDRK?=
+ =?utf-8?B?bWR6cHRRWDZQVkRvSlpOVVZXTzM5dDlsNWtrWHlKektlRmVoT1luNzV1UHB5?=
+ =?utf-8?B?MG4xYmM4S3hZK1l4RHJjQ2JTek1tTUJMU1JPd09FMjI3TVgvVDJuZmovWEZ3?=
+ =?utf-8?B?VUZidHZQRmhvYktTYWcrTlUvblRlN3VxTkR0YTRpdXFpUHlFOUZHMTZOR3I5?=
+ =?utf-8?B?dG9YYUplQzRUYUgwK2U2cnNJYjRPdjViSEI3RTFydHV6V3h3NjREdXNOZ2oy?=
+ =?utf-8?B?TERPZ1hZcnBVeVVsSEhnMk01WVNYRkwxOTRkS05acy80L2FLZHE0SGNkdkRI?=
+ =?utf-8?B?b0ROcUVEWHgvR0tXRjl3SUdxaUMwRVdNMnZ0RTZ5eFlsMGxiL0NkUmZxL1Jw?=
+ =?utf-8?B?Wlp2ZU5BVHJhYWlTZDZGQWVvK1V1NHdGOVJSN1FJOStFMTIrV3J3K2FzSm4w?=
+ =?utf-8?B?Q044azhuVTEzU2VIOWFlKzVnc29RTDBFdy9EV1dWMlJRWHROa1BsR3dYV3NU?=
+ =?utf-8?B?Umx4R1hJc2VlRkJ3V2dSdUgwRUZLNVpUaEhkYVVnTks4Y29CQ2E1bXZnMW9W?=
+ =?utf-8?B?a2hXbHJnNDVaeWFlUjFLVUx6b2xjYldEcmE3R2YyL0dFR3U5Mm9FY3dBZ0o4?=
+ =?utf-8?B?SlNCK2FQNGROV3BXTUE0VytHWERGK0hFV2hpVGV6MkRGSE82eEovNjRFWGp5?=
+ =?utf-8?B?MlV2OE00U2ZZbUl1TXZRQUtrRGR6QlZ6RERpdzR3YlRFU3dHZWZhN0tZdXFy?=
+ =?utf-8?B?MEswckxxMmJVY1kwbitNR0hEb1cySEl5ZDJxNXNpejgzTFdBa3laSVJPdVht?=
+ =?utf-8?B?cmhNZDRQNFhwWlJRR3VSM3BGR3N5WVprcUhVcXRjYndUdmxnbXRlc2h5cnJT?=
+ =?utf-8?B?aUNRM3pzc3pybi9XeXlOclp1LzVaOWpSN3k4YTF0a1ppN2VHU3lyRC96aW9a?=
+ =?utf-8?B?cFdVWkNKNG1HRWpzd3ZNbG9SMXVtVVhEVHJxL2x3a204THpQMHVGb1JTT3Vv?=
+ =?utf-8?B?S0VOcWNITVNnY2x6R0Z3SHB2YXhBbWpINlNOL0ZZZ2ZRZGMwclhveWtETThu?=
+ =?utf-8?B?VCt4QzdmbWhad0FtNXIwR0I1MnBqVlhiZVV3ZnZNRG5BZ1BIUWY4UU1Jd3hQ?=
+ =?utf-8?Q?btQzuK7tsgopO6w5fVmV1QvYc?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 298722e0-c01c-41e1-d038-08dadc5a8757
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2022 16:04:20.3599
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d88866c-feab-4cf0-a5c5-08dadc5a053a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DM6NAM11FT071.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM8PR12MB5462
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /bC8izyTWHVFOiqM9UdGOfDjCT+xgx4dIsYTv8F7YQbNfvPA6z6dl/RPKflWh2fcniujQgrvQiS9Ea0cZ9/cVQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9575
 
-When building with clang 12 and CONFIG_ARM_SMMU_V3=y, we observe the
-following build error:
+On 12.12.2022 16:18, Andrew Cooper wrote:
+> On 12/12/2022 14:59, Jan Beulich wrote:
+>> On 12.12.2022 15:27, Sergey Dyasli wrote:
+>>> On Thu, Dec 8, 2022 at 3:34 PM Jan Beulich <jbeulich@suse.com> wrote:
+>>>> On 08.12.2022 14:59, Andrew Cooper wrote:
+>>>>> On 08/12/2022 13:26, Sergey Dyasli wrote:
+>>>>>> @@ -240,20 +240,20 @@ static const struct microcode_patch *nmi_patch = ZERO_BLOCK_PTR;
+>>>>>>   * patch is found and an error occurs during the parsing process. Otherwise
+>>>>>>   * return NULL.
+>>>>>>   */
+>>>>>> -static struct microcode_patch *parse_blob(const char *buf, size_t len)
+>>>>>> +static const struct microcode_patch *parse_blob(const char *buf, size_t len)
+>>>>>>  {
+>>>>>>      alternative_vcall(ucode_ops.collect_cpu_info);
+>>>>>>
+>>>>>> -    return alternative_call(ucode_ops.cpu_request_microcode, buf, len);
+>>>>>> +    return alternative_call(ucode_ops.cpu_request_microcode, buf, len, true);
+>>>>>>  }
+>>>>>>
+>>>>>> -static void microcode_free_patch(struct microcode_patch *patch)
+>>>>>> +static void microcode_free_patch(const struct microcode_patch *patch)
+>>>>>>  {
+>>>>>> -    xfree(patch);
+>>>>>> +    xfree((void *)patch);
+>>>>> This hunk demonstrates why the hook wants to return a non-const
+>>>>> pointer.  Keeping it non-const will shrink this patch quite a bit.
+>>>> Alternatively it demonstrates why xfree() should take const void *,
+>>>> just like e.g. unmap_domain_page() or vunmap() already do. We've
+>>>> talked about this before, and the argument hasn't changed: Neither
+>>>> unmapping nor freeing really alters the contents of the pointed to
+>>>> area from the perspective of the caller, as the contents simply
+>>>> disappears altogether.
+>>> Despite my love of const, const correctness in C is quite a pain. I've
+>>> tried to make xfree() take a const pointer but then issues began with
+>>> add/strip_padding() functions and I couldn't overcome those without
+>>> further (void *) casts which just takes the problem to a different
+>>> layer.
+>> There is exactly one such cast needed according to my attempt, and that's
+>> in an internal (static) helper function. See below (and feel free to use).
+>>
+>> Jan
+>>
+>> mm: make a couple of freeing functions take const void*
+>>
+>> freeing functions, from the perspective of their callers, don't alter
+>> contents of the freed block; the block simply disappears. Plus it is not
+>> uncommon that some piece of memory is allocated, filled, and henceforth
+>> supposed to only be read from. In such cases, with the parameters of the
+>> freeing functions not being pointer-to-const, callers have to either
+>> omit the use of const where it would be indicated or add risky casts.
+>>
+>> The goal being to make xfree() fit the intended pattern, alter other
+>> functions at the same time to limit the number of casts needed to just
+>> one. strip_padding() necessarily has to have a such a cast, as it's
+>> effectively strchr()- or memchr()-like: Input may be pointer-to-const,
+>> bot for its output to also be usable when the input isn't, const needs
+>> to be cast away. Note that the risk with such a cast is quite a bit
+>> lower when it's an internal (static) function wich is affected.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> If you can persuade the C standards committee that your interpretation
+> of how to use const is more correct than theirs, and get them to change
+> free() to take const void, then we can continue discussing this patch.
+> 
+> Until then, there's a damn good reason why free() takes a non-const
+> pointer (nothing handed out by a memory allocator can ever be const, and
+> it is never acceptable to free via a const alias), and contorted
+> arguments about how its "technically fine" are missing the point.
 
-drivers/passthrough/arm/smmu-v3.c:1408:20: error: unused function 'arm_smmu_disable_pasid' [-Werror,-Wunused-function]
-static inline void arm_smmu_disable_pasid(struct arm_smmu_master *master) { }
-                   ^
+"damn good" and "never acceptable" are strong statements, which will want
+accompanying by actual technical content. It's not like I've invented
+this "interpretation". But when I saw it elsewhere (I don't recall which
+project(s) this was) I found it very reasonable, and hence I picked it up
+to at least consider for stuff I'm working on.
 
-Remove the function.
-
-Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
----
-There is also a definition of arm_smmu_disable_pasid() just above,
-guarded by #ifdef CONFIG_PCI_ATS. Should this one be removed too? It
-might be nice to keep this definition for ease of backporting patches
-from Linux, but if we ever plan on supporting PCI_ATS in Xen this may
-need to be re-visited.
-
-This is a candidate for backport to 4.17, 4.16, and possibly 4.15,
-although 4.15 has other issues with clang 12.
----
- xen/drivers/passthrough/arm/smmu-v3.c | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index 9c9f4630090e..f54d85cb4b70 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1404,8 +1404,6 @@ static inline int arm_smmu_enable_pasid(struct arm_smmu_master *master)
- {
- 	return 0;
- }
--
--static inline void arm_smmu_disable_pasid(struct arm_smmu_master *master) { }
- #endif /* CONFIG_PCI_ATS */
- 
- static void arm_smmu_detach_dev(struct arm_smmu_master *master)
--- 
-2.38.2
-
+Jan
 
