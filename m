@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A17C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:55:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459255.716961 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DFB1C4167B
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:55:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459261.716999 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fX1-0003O0-3B; Mon, 12 Dec 2022 09:55:31 +0000
+	id 1p4fX5-0004OF-1K; Mon, 12 Dec 2022 09:55:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459255.716961; Mon, 12 Dec 2022 09:55:31 +0000
+Received: by outflank-mailman (output) from mailman id 459261.716999; Mon, 12 Dec 2022 09:55:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fX0-0003Nt-Vk; Mon, 12 Dec 2022 09:55:30 +0000
-Received: by outflank-mailman (input) for mailman id 459255;
- Mon, 12 Dec 2022 09:55:29 +0000
+	id 1p4fX4-0004ND-QV; Mon, 12 Dec 2022 09:55:34 +0000
+Received: by outflank-mailman (input) for mailman id 459261;
+ Mon, 12 Dec 2022 09:55:33 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p4fWz-00036f-8A
- for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:55:29 +0000
+ (envelope-from <julien@xen.org>) id 1p4fX3-0004Ae-R9
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:55:33 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fWy-0001Rj-S0; Mon, 12 Dec 2022 09:55:28 +0000
+ id 1p4fX3-0001Ss-ID; Mon, 12 Dec 2022 09:55:33 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fWy-0001lz-Jn; Mon, 12 Dec 2022 09:55:28 +0000
+ id 1p4fX3-0001lz-Am; Mon, 12 Dec 2022 09:55:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=9FlTAYz8wbZf3SBofaH+7s9IZ0eMB5jewpGKvz0pYMo=; b=qMt4WMfMTDElJq+s+WDQRMgPTC
-	IcyZgM7qGuaAA1RiHJ1/I1SIXYYKZ9xMFWB3H1uDdaV21Mjq82GH5cMCGNntWIVv8fXhDZTpKFssC
-	IjK6HsEzWD0+VrTo3rdD3o59C1k3Sl+iYWXfLtQ0lyDpHuNbBErrtG/Svo8wDrChwwAs=;
+	bh=8XTTu/Hz4Y+O0ljKPi9Gp8h5CZ8CZj743R2YHfvL9wM=; b=U367eq51tXzXTpAIBNPLuA4+7/
+	u9Z/Cp11p4d6pLtN1uA3J5bOk7fj/l+/xsp1tYVcYmESN7dG9A03uM//V7tQvgReTZTD8oHh3AHIL
+	/6HhxU3CIObSbHlxTBw2PAnoF/8LWo//cGHy+vcvZj3dq1DELbq1OqPEFOwMKhpYKbvA=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: michal.orzel@amd.com,
@@ -57,9 +57,9 @@ Cc: michal.orzel@amd.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 02/18] xen/arm64: flushtlb: Implement the TLBI repeat workaround for TLB flush by VA
-Date: Mon, 12 Dec 2022 09:55:07 +0000
-Message-Id: <20221212095523.52683-3-julien@xen.org>
+Subject: [PATCH v3 06/18] xen/arm32: head: Replace "ldr rX, =<label>" with "mov_w rX, <label>"
+Date: Mon, 12 Dec 2022 09:55:11 +0000
+Message-Id: <20221212095523.52683-7-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221212095523.52683-1-julien@xen.org>
 References: <20221212095523.52683-1-julien@xen.org>
@@ -68,81 +68,182 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Looking at the Neoverse N1 errata document, it is not clear to me
-why the TLBI repeat workaround is not applied for TLB flush by VA.
+"ldr rX, =<label>" is used to load a value from the literal pool. This
+implies a memory access.
 
-The TBL flush by VA helpers are used in flush_xen_tlb_range_va_local()
-and flush_xen_tlb_range_va(). So if the range size if a fixed size smaller
-than a PAGE_SIZE, it would be possible that the compiler remove the loop
-and therefore replicate the sequence described in the erratum 1286807.
+This can be avoided by using the macro mov_w which encode the value in
+the immediate of two instructions.
 
-So the TLBI repeat workaround should also be applied for the TLB flush
-by VA helpers.
+So replace all "ldr rX, =<label>" with "mov_w rX, <label>".
 
-Fixes: 22e323d115d8 ("xen/arm: Add workaround for Cortex-A76/Neoverse-N1 erratum #1286807")
+No functional changes intended.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
-    This was spotted while looking at reducing the scope of the memory
-    barriers. I don't have any HW affected.
 
     Changes in v3:
-        - Patch added
+        * Patch added
 ---
- xen/arch/arm/include/asm/arm64/flushtlb.h | 31 +++++++++++++++++------
- 1 file changed, 23 insertions(+), 8 deletions(-)
+ xen/arch/arm/arm32/head.S | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/arm64/flushtlb.h b/xen/arch/arm/include/asm/arm64/flushtlb.h
-index 39d429ace552..5b033c0cb980 100644
---- a/xen/arch/arm/include/asm/arm64/flushtlb.h
-+++ b/xen/arch/arm/include/asm/arm64/flushtlb.h
-@@ -44,6 +44,27 @@ static inline void name(void)                    \
-         : : : "memory");                         \
- }
+diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+index a558c2a6876e..ce680be91be1 100644
+--- a/xen/arch/arm/arm32/head.S
++++ b/xen/arch/arm/arm32/head.S
+@@ -62,7 +62,7 @@
+ .endm
  
-+/*
-+ * FLush TLB by VA. This will likely be used in a loop, so the caller
-+ * is responsible to use the appropriate memory barriers before/after
-+ * the sequence.
-+ *
-+ * See above about the ARM64_WORKAROUND_REPEAT_TLBI sequence.
-+ */
-+#define TLB_HELPER_VA(name, tlbop)               \
-+static inline void name(vaddr_t va)              \
-+{                                                \
-+    asm volatile(                                \
-+        "tlbi "  # tlbop  ", %0;"                \
-+        ALTERNATIVE(                             \
-+            "nop; nop;",                         \
-+            "dsb  ish;"                          \
-+            "tlbi "  # tlbop  ", %0;",           \
-+            ARM64_WORKAROUND_REPEAT_TLBI,        \
-+            CONFIG_ARM64_WORKAROUND_REPEAT_TLBI) \
-+        : : "r" (va >> PAGE_SHIFT) : "memory");  \
-+}
-+
- /* Flush local TLBs, current VMID only. */
- TLB_HELPER(flush_guest_tlb_local, vmalls12e1, nsh);
+ .macro load_paddr rb, sym
+-        ldr   \rb, =\sym
++        mov_w \rb, \sym
+         add   \rb, \rb, r10
+ .endm
  
-@@ -60,16 +81,10 @@ TLB_HELPER(flush_all_guests_tlb, alle1is, ish);
- TLB_HELPER(flush_xen_tlb_local, alle2, nsh);
+@@ -149,7 +149,7 @@ past_zImage:
+         mov   r8, r2                 /* r8 := DTB base address */
  
- /* Flush TLB of local processor for address va. */
--static inline void  __flush_xen_tlb_one_local(vaddr_t va)
--{
--    asm volatile("tlbi vae2, %0;" : : "r" (va>>PAGE_SHIFT) : "memory");
--}
-+TLB_HELPER_VA(__flush_xen_tlb_one_local, vae2);
+         /* Find out where we are */
+-        ldr   r0, =start
++        mov_w r0, start
+         adr   r9, start              /* r9  := paddr (start) */
+         sub   r10, r9, r0            /* r10 := phys-offset */
  
- /* Flush TLB of all processors in the inner-shareable domain for address va. */
--static inline void __flush_xen_tlb_one(vaddr_t va)
--{
--    asm volatile("tlbi vae2is, %0;" : : "r" (va>>PAGE_SHIFT) : "memory");
--}
-+TLB_HELPER_VA(__flush_xen_tlb_one, vae2is);
+@@ -170,7 +170,7 @@ past_zImage:
+         bl    enable_mmu
  
- #endif /* __ASM_ARM_ARM64_FLUSHTLB_H__ */
- /*
+         /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
+-        ldr   r0, =primary_switched
++        mov_w r0, primary_switched
+         mov   pc, r0
+ primary_switched:
+         /*
+@@ -190,7 +190,7 @@ primary_switched:
+         /* Setup the arguments for start_xen and jump to C world */
+         mov   r0, r10                /* r0 := Physical offset */
+         mov   r1, r8                 /* r1 := paddr(FDT) */
+-        ldr   r2, =start_xen
++        mov_w r2, start_xen
+         b     launch
+ ENDPROC(start)
+ 
+@@ -198,7 +198,7 @@ GLOBAL(init_secondary)
+         cpsid aif                    /* Disable all interrupts */
+ 
+         /* Find out where we are */
+-        ldr   r0, =start
++        mov_w r0, start
+         adr   r9, start              /* r9  := paddr (start) */
+         sub   r10, r9, r0            /* r10 := phys-offset */
+ 
+@@ -227,7 +227,7 @@ GLOBAL(init_secondary)
+ 
+ 
+         /* We are still in the 1:1 mapping. Jump to the runtime Virtual Address. */
+-        ldr   r0, =secondary_switched
++        mov_w r0, secondary_switched
+         mov   pc, r0
+ secondary_switched:
+         /*
+@@ -236,7 +236,7 @@ secondary_switched:
+          *
+          * XXX: This is not compliant with the Arm Arm.
+          */
+-        ldr   r4, =init_ttbr         /* VA of HTTBR value stashed by CPU 0 */
++        mov_w r4, init_ttbr          /* VA of HTTBR value stashed by CPU 0 */
+         ldrd  r4, r5, [r4]           /* Actual value */
+         dsb
+         mcrr  CP64(r4, r5, HTTBR)
+@@ -254,7 +254,7 @@ secondary_switched:
+ #endif
+         PRINT("- Ready -\r\n")
+         /* Jump to C world */
+-        ldr   r2, =start_secondary
++        mov_w r2, start_secondary
+         b     launch
+ ENDPROC(init_secondary)
+ 
+@@ -297,8 +297,8 @@ ENDPROC(check_cpu_mode)
+  */
+ zero_bss:
+         PRINT("- Zero BSS -\r\n")
+-        ldr   r0, =__bss_start       /* r0 := vaddr(__bss_start) */
+-        ldr   r1, =__bss_end         /* r1 := vaddr(__bss_start) */
++        mov_w r0, __bss_start        /* r0 := vaddr(__bss_start) */
++        mov_w r1, __bss_end          /* r1 := vaddr(__bss_start) */
+ 
+         mov   r2, #0
+ 1:      str   r2, [r0], #4
+@@ -330,8 +330,8 @@ cpu_init:
+ 
+ cpu_init_done:
+         /* Set up memory attribute type tables */
+-        ldr   r0, =MAIR0VAL
+-        ldr   r1, =MAIR1VAL
++        mov_w r0, MAIR0VAL
++        mov_w r1,MAIR1VAL
+         mcr   CP32(r0, HMAIR0)
+         mcr   CP32(r1, HMAIR1)
+ 
+@@ -341,10 +341,10 @@ cpu_init_done:
+          * PT walks are write-back, write-allocate in both cache levels,
+          * Full 32-bit address space goes through this table.
+          */
+-        ldr   r0, =(TCR_RES1|TCR_SH0_IS|TCR_ORGN0_WBWA|TCR_IRGN0_WBWA|TCR_T0SZ(0))
++        mov_w r0, (TCR_RES1|TCR_SH0_IS|TCR_ORGN0_WBWA|TCR_IRGN0_WBWA|TCR_T0SZ(0))
+         mcr   CP32(r0, HTCR)
+ 
+-        ldr   r0, =HSCTLR_SET
++        mov_w r0, HSCTLR_SET
+         mcr   CP32(r0, HSCTLR)
+         isb
+ 
+@@ -452,7 +452,7 @@ ENDPROC(cpu_init)
+  */
+ create_page_tables:
+         /* Prepare the page-tables for mapping Xen */
+-        ldr   r0, =XEN_VIRT_START
++        mov_w r0, XEN_VIRT_START
+         create_table_entry boot_pgtable, boot_second, r0, 1
+         create_table_entry boot_second, boot_third, r0, 2
+ 
+@@ -576,7 +576,7 @@ remove_identity_mapping:
+         cmp   r1, #XEN_FIRST_SLOT
+         beq   1f
+         /* It is not in slot 0, remove the entry */
+-        ldr   r0, =boot_pgtable      /* r0 := root table */
++        mov_w r0, boot_pgtable       /* r0 := root table */
+         lsl   r1, r1, #3             /* r1 := Slot offset */
+         strd  r2, r3, [r0, r1]
+         b     identity_mapping_removed
+@@ -590,7 +590,7 @@ remove_identity_mapping:
+         cmp   r1, #XEN_SECOND_SLOT
+         beq   identity_mapping_removed
+         /* It is not in slot 1, remove the entry */
+-        ldr   r0, =boot_second       /* r0 := second table */
++        mov_w r0, boot_second        /* r0 := second table */
+         lsl   r1, r1, #3             /* r1 := Slot offset */
+         strd  r2, r3, [r0, r1]
+ 
+@@ -620,7 +620,7 @@ ENDPROC(remove_identity_mapping)
+ setup_fixmap:
+ #if defined(CONFIG_EARLY_PRINTK)
+         /* Add UART to the fixmap table */
+-        ldr   r0, =EARLY_UART_VIRTUAL_ADDRESS
++        mov_w r0, EARLY_UART_VIRTUAL_ADDRESS
+         create_mapping_entry xen_fixmap, r0, r11, type=PT_DEV_L3
+ #endif
+         /* Map fixmap into boot_second */
+@@ -643,7 +643,7 @@ ENDPROC(setup_fixmap)
+  * Clobbers r3
+  */
+ launch:
+-        ldr   r3, =init_data
++        mov_w r3, init_data
+         add   r3, #INITINFO_stack    /* Find the boot-time stack */
+         ldr   sp, [r3]
+         add   sp, #STACK_SIZE        /* (which grows down from the top). */
 -- 
 2.38.1
 
