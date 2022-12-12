@@ -4,35 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D52EC4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 08:48:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459134.716793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD157C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:34:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459168.716889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4eU3-0006T1-0R; Mon, 12 Dec 2022 08:48:23 +0000
+	id 1p4fCb-0004Kt-0T; Mon, 12 Dec 2022 09:34:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459134.716793; Mon, 12 Dec 2022 08:48:22 +0000
+Received: by outflank-mailman (output) from mailman id 459168.716889; Mon, 12 Dec 2022 09:34:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4eU2-0006Su-Tk; Mon, 12 Dec 2022 08:48:22 +0000
-Received: by outflank-mailman (input) for mailman id 459134;
- Mon, 12 Dec 2022 08:48:21 +0000
+	id 1p4fCa-0004JU-PU; Mon, 12 Dec 2022 09:34:24 +0000
+Received: by outflank-mailman (input) for mailman id 459168;
+ Mon, 12 Dec 2022 09:34:24 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p4eU1-0006Sk-Ka; Mon, 12 Dec 2022 08:48:21 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1p4fCZ-0004BO-VQ
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:34:23 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p4eU1-0005TV-Fe; Mon, 12 Dec 2022 08:48:21 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p4eU1-00016i-0S; Mon, 12 Dec 2022 08:48:21 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1p4eU0-0004W2-WF; Mon, 12 Dec 2022 08:48:21 +0000
+ (envelope-from <julien@xen.org>)
+ id 1p4fCZ-0000om-Nr; Mon, 12 Dec 2022 09:34:23 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1p4fCZ-0000rv-G6; Mon, 12 Dec 2022 09:34:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,74 +42,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=xe0eWfvhQK7rGR5MGX/zsvNisBkl5XZ63OpBp6i8qvI=; b=ZiJ0/iLuVIfUCeBavKLxf5s28T
-	Zhrs7/ei5XcJ/L0B7gQ5fYdw03H7w82gfcoiEarPJovprKWkuUszdUgzrvkTQGO0eWTHgOTa5R9gF
-	S6JIdVUoPUn82jxdNqfoxRIYS2+4hESaZgcdT2rAuo+aYiM/DP7lPvgsNNSRLRb8/ShE=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=pSl7LQSyjMeFHx4mklTwYzQi38y7YYr8at610vl4uCk=; b=aQT7Nxtj3zIaKWxFbJgbl2bMl8
+	iR1eOfCzkJCPA/EpIbUQHSjTpOXV0pW7K/xOk+i4xCvB2mOWJGUpzFTuqukHrjfR3KQU3gPgoS++X
+	iPdbjYN2/1j26Ol1Fk8+tCctIh/LyW3bJ172Evv3MCm4zyfS/p3k9F8stxBZAvIyghXA=;
+From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-175151-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Henry.Wang@arm.com,
+	Julien Grall <jgrall@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 8/8] docs/process: branching-checklist: Add a list of accounts at the beginning
+Date: Mon, 12 Dec 2022 09:34:10 +0000
+Message-Id: <20221212093410.36289-9-julien@xen.org>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20221212093410.36289-1-julien@xen.org>
+References: <20221212093410.36289-1-julien@xen.org>
 MIME-Version: 1.0
-Subject: [ovmf test] 175151: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=5890a18409a0e67a491c600b930e6c904ad3b3fd
-X-Osstest-Versions-That:
-    ovmf=a6542894391bae58b7704b2624b541a2b8b9ed93
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 12 Dec 2022 08:48:20 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 175151 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/175151/
+From: Julien Grall <jgrall@amazon.com>
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 5890a18409a0e67a491c600b930e6c904ad3b3fd
-baseline version:
- ovmf                 a6542894391bae58b7704b2624b541a2b8b9ed93
+The checklist requires to have access to several accounts on both
+xenbits and osstest. List those accounts at the beginning of the file
+so it is easier to check if one has the permissions before starting
+the branching process.
 
-Last test of basis   175149  2022-12-12 01:55:58 Z    0 days
-Testing same since   175151  2022-12-12 06:42:41 Z    0 days    1 attempts
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+---
+ docs/process/branching-checklist.txt | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Chevron Li (WH) <chevron.li@bayhubtech.com>
-  Chevron Li <chevron.li@bayhubtech.com>
+diff --git a/docs/process/branching-checklist.txt b/docs/process/branching-checklist.txt
+index 9f385f137386..798e78a3fefe 100644
+--- a/docs/process/branching-checklist.txt
++++ b/docs/process/branching-checklist.txt
+@@ -1,3 +1,11 @@
++=== Before starting ===
++
++Access to the following accounts is necessary:
++    * xenbits.xen.org: xen, xendocs
++    * osstest.osstest-test-lab: osstest
++
++=== Check list ===
++
+ v=4.1
+ ov=4.0
+ 
+-- 
+2.38.1
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   a654289439..5890a18409  5890a18409a0e67a491c600b930e6c904ad3b3fd -> xen-tested-master
 
