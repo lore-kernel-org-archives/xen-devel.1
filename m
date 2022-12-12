@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 198CDC2D0CD
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:34:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.459165.716862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E15DBC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Dec 2022 09:36:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.459220.716906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fCX-0003eK-OJ; Mon, 12 Dec 2022 09:34:21 +0000
+	id 1p4fEj-0007Te-H6; Mon, 12 Dec 2022 09:36:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 459165.716862; Mon, 12 Dec 2022 09:34:21 +0000
+Received: by outflank-mailman (output) from mailman id 459220.716906; Mon, 12 Dec 2022 09:36:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p4fCX-0003dA-I9; Mon, 12 Dec 2022 09:34:21 +0000
-Received: by outflank-mailman (input) for mailman id 459165;
- Mon, 12 Dec 2022 09:34:20 +0000
+	id 1p4fEj-0007TX-D9; Mon, 12 Dec 2022 09:36:37 +0000
+Received: by outflank-mailman (input) for mailman id 459220;
+ Mon, 12 Dec 2022 09:36:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p4fCW-0003CV-5J
- for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:34:20 +0000
+ (envelope-from <julien@xen.org>) id 1p4fEi-0007TR-DI
+ for xen-devel@lists.xenproject.org; Mon, 12 Dec 2022 09:36:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fCV-0000nm-UX; Mon, 12 Dec 2022 09:34:19 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ id 1p4fEi-0000tf-9Z; Mon, 12 Dec 2022 09:36:36 +0000
+Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p4fCV-0000rv-N3; Mon, 12 Dec 2022 09:34:19 +0000
+ id 1p4fEi-00011G-2E; Mon, 12 Dec 2022 09:36:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,60 +43,47 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=Cl3ZwB9XtYS6ogy7SQmgRKK0ZidCfoFSJ0o+zkfxHVo=; b=PswlWnlgRcwnH5ezcvYnEXZftp
-	JWdHjSeI7hQ4PERN6fkx+2hRR9tvxOCp9BNNZML0F2/+uqzYN1Vz23aL2gaDT/1zuBZfG37KWhcLs
-	WbRUKD+DTEaWW9ylYxQ1VRGylIJ5f4Q8K6q3vbJiecDVhnJZOghTbMCmYDRJ/l6ruKo0=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:Cc:To:From; bh=q21+FN/Druaud6mHLUDtg+EOGLKbhzpPwJktNab/lu8=; b=fMi879
+	xtLYCeBAtNESqcHvngEd+GXkxlupI7/kiz75SdRZlQ8JdhWNd37/JWgWkv4PfDY+ZOmJ9AHD3FO+d
+	Mm9OFNK8SE0/pSuxWMTNgl6W+VNbNsUQQYsOV0bPW2sZF6rWHNp2SSlMUPrVCAq0hrkDlgII9cpXL
+	bRvIqzqFh7Q=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Henry.Wang@arm.com,
+Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 5/8] docs/process: branching-checklist: Reword the section about Config.mk
-Date: Mon, 12 Dec 2022 09:34:07 +0000
-Message-Id: <20221212093410.36289-6-julien@xen.org>
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH] xsm/flask: mkflash.sh: Use const when generating initial_sid_to_string[]
+Date: Mon, 12 Dec 2022 09:36:31 +0000
+Message-Id: <20221212093631.38018-1-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221212093410.36289-1-julien@xen.org>
-References: <20221212093410.36289-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Since at least Xen 4.12, the revision for external trees don't contain
-the word "unstable". So explicitely list the *_REVISION variables that
-need to be updated as part of the branching process.
+The array initial_sid_to_string is storing pointer to literal strings
+and is not meant to be modified. So change the type of the variable
+to "const char * const ...[]".
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- docs/process/branching-checklist.txt | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ xen/xsm/flask/policy/mkflask.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/docs/process/branching-checklist.txt b/docs/process/branching-checklist.txt
-index d1550385c96e..7004f16e8311 100644
---- a/docs/process/branching-checklist.txt
-+++ b/docs/process/branching-checklist.txt
-@@ -69,11 +69,9 @@ ov=4.0
-     git add versions
-     git commit -m "Branch for $v"
- 
--Ensure references to qemu trees in xen.git's Config.mk are updated.
--Check this with
--    grep unstable Config.mk
--which should produce no output.  Replace as necessary.
--(There may well be none.)
-+Ensure references to qemu trees and Mini-OS in xen.git's Config.mk are updated.
-+The variables are QEMU_UPSTREAM_REVISION, QEMU_TRADITIONAL_REVISION and
-+MINIOS_UPSTREAM_REVISION.
- 
- Update newly diverging staging (unstable) according to
- release-technician-checklist.txt section re README etc.
+diff --git a/xen/xsm/flask/policy/mkflask.sh b/xen/xsm/flask/policy/mkflask.sh
+index 591ce832a1d1..611689768167 100755
+--- a/xen/xsm/flask/policy/mkflask.sh
++++ b/xen/xsm/flask/policy/mkflask.sh
+@@ -34,7 +34,7 @@ BEGIN	{
+ 		printf("/*\n * Security object class definitions\n */\n") > debugfile;
+ 		printf("    S_(\"null\")\n") > debugfile;
+ 		printf("/* This file is automatically generated.  Do not edit. */\n") > debugfile2;
+-		printf("static char *initial_sid_to_string[] =\n{\n") > debugfile2;
++		printf("static const char * const initial_sid_to_string[] =\n{\n") > debugfile2;
+ 		printf("    \"null\",\n") > debugfile2;
+ 	}
+ /^[ \t]*#/	{
 -- 
 2.38.1
 
