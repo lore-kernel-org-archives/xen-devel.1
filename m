@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9FEC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 23:01:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.461456.719540 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C48C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 23:06:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.461463.719551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5EGn-000307-PD; Tue, 13 Dec 2022 23:01:05 +0000
+	id 1p5ELT-0003lS-Bm; Tue, 13 Dec 2022 23:05:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 461456.719540; Tue, 13 Dec 2022 23:01:05 +0000
+Received: by outflank-mailman (output) from mailman id 461463.719551; Tue, 13 Dec 2022 23:05:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5EGn-000300-MJ; Tue, 13 Dec 2022 23:01:05 +0000
-Received: by outflank-mailman (input) for mailman id 461456;
- Tue, 13 Dec 2022 23:01:03 +0000
+	id 1p5ELT-0003lL-90; Tue, 13 Dec 2022 23:05:55 +0000
+Received: by outflank-mailman (input) for mailman id 461463;
+ Tue, 13 Dec 2022 23:05:54 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p5EGl-0002zq-JE
- for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 23:01:03 +0000
+ (envelope-from <julien@xen.org>) id 1p5ELS-0003lF-K6
+ for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 23:05:54 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p5EGl-00061B-7K; Tue, 13 Dec 2022 23:01:03 +0000
+ id 1p5ELQ-00066D-8M; Tue, 13 Dec 2022 23:05:52 +0000
 Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.102])
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p5EGl-0004OQ-0v; Tue, 13 Dec 2022 23:01:03 +0000
+ id 1p5ELQ-0004bH-2W; Tue, 13 Dec 2022 23:05:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,159 +44,91 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=5iJa+5WTYXSRmeHJJsAJNHl5tiuJAE11GRxeprfRpWQ=; b=DBNinOxF3MBfPShAfXEs5A25c7
-	b3UP1SBQlcFHnXzZXWuAUtdcPSrFYusTuoVJMMdmjzP4W8DUiKvs5W3WgsWFJcqHZNgbN3umBn2KD
-	Y3JzvfV98j1sxOOuzJT3Oi+7nsXnkMjTwMW6cqq4m5vTgvjWoxt6/zmc2lqqRqNz1D3M=;
-Message-ID: <523c5e55-4c34-f67b-1d00-f54b01c609c2@xen.org>
-Date: Tue, 13 Dec 2022 23:01:01 +0000
+	bh=0QsfKQ+pjRM5GbdxX0yFfXBfTml6diznF3ClEYq9GmU=; b=mqgPc0Za90mqOTtcBGr1DBdMHX
+	lqBwS1/hpfgf/vXRRpHtBBfQvxrdjlJ1LkQi4/ef/oRZ4LcIu3YrSasW06cYjvzeOl0QnltLdsFIZ
+	zkyXlR1cxN2FvPqLNZsZJasCyz/SCktO3XEdcBE0Prz9LP7FOWn2HLjbYm9AE1/sCc0Q=;
+Message-ID: <901d2088-49e7-634f-f55b-e4ea2e706fed@xen.org>
+Date: Tue, 13 Dec 2022 23:05:49 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH v3 18/18] xen/arm64: mm: Rework switch_ttbr()
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, michal.orzel@amd.com,
- Luca.Fancellu@arm.com, Julien Grall <jgrall@amazon.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20221212095523.52683-1-julien@xen.org>
- <20221212095523.52683-19-julien@xen.org>
- <alpine.DEB.2.22.394.2212121748560.3075842@ubuntu-linux-20-04-desktop>
- <aa82a916-5c2b-83eb-328d-ac234eabc77c@xen.org>
- <alpine.DEB.2.22.394.2212131456450.315094@ubuntu-linux-20-04-desktop>
+Subject: Re: [RFC 0/4] Adding Virtual Memory Fuses to Xen
+To: Demi Marie Obenour <demi@invisiblethingslab.com>,
+ "Smith, Jackson" <rsmith@riversideresearch.org>
+Cc: "Brookes, Scott" <sbrookes@riversideresearch.org>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "bertrand.marquis@arm.com" <bertrand.marquis@arm.com>,
+ "jbeulich@suse.com" <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ "christopher.w.clark@gmail.com" <christopher.w.clark@gmail.com>
+References: <BN0P110MB1642835E0DE845205B5EA59CCFE39@BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM>
+ <b7a367d4-a9df-0733-5a11-6ba11043c6b5@xen.org> <Y5j7KQ9g5Yb/ufn+@itl-email>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <alpine.DEB.2.22.394.2212131456450.315094@ubuntu-linux-20-04-desktop>
+In-Reply-To: <Y5j7KQ9g5Yb/ufn+@itl-email>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Stefano,
+Hi Demi,
 
-On 13/12/2022 22:56, Stefano Stabellini wrote:
-> On Tue, 13 Dec 2022, Julien Grall wrote:
->> Hi Stefano,
+On 13/12/2022 22:22, Demi Marie Obenour wrote:
+> On Tue, Dec 13, 2022 at 08:55:28PM +0000, Julien Grall wrote:
+>> On 13/12/2022 19:48, Smith, Jackson wrote:
+>>> Hi Xen Developers,
 >>
->> On 13/12/2022 02:00, Stefano Stabellini wrote:
->>> On Mon, 12 Dec 2022, Julien Grall wrote:
->>>> From: Julien Grall <jgrall@amazon.com>
->>>>
->>>> At the moment, switch_ttbr() is switching the TTBR whilst the MMU is
->>>> still on.
->>>>
->>>> Switching TTBR is like replacing existing mappings with new ones. So
->>>> we need to follow the break-before-make sequence.
->>>>
->>>> In this case, it means the MMU needs to be switched off while the
->>>> TTBR is updated. In order to disable the MMU, we need to first
->>>> jump to an identity mapping.
->>>>
->>>> Rename switch_ttbr() to switch_ttbr_id() and create an helper on
->>>> top to temporary map the identity mapping and call switch_ttbr()
->>>> via the identity address.
->>>>
->>>> switch_ttbr_id() is now reworked to temporarily turn off the MMU
->>>> before updating the TTBR.
->>>>
->>>> We also need to make sure the helper switch_ttbr() is part of the
->>>> identity mapping. So move _end_boot past it.
->>>>
->>>> The arm32 code will use a different approach. So this issue is for now
->>>> only resolved on arm64.
->>>>
->>>> Signed-off-by: Julien Grall <jgrall@amazon.com>
->>>
->>> This patch looks overall good to me, aside from the few minor comments
->>> below. I would love for someone else, maybe from ARM, reviewing steps
->>> 1-6 making sure they are the right sequence.
->>>
->>>
->>>> ---
->>>>
->>>>       Changes in v2:
->>>>           - Remove the arm32 changes. This will be addressed differently
->>>>           - Re-instate the instruct cache flush. This is not strictly
->>>>             necessary but kept it for safety.
->>>>           - Use "dsb ish"  rather than "dsb sy".
->>>>
->>>>       TODO:
->>>>           * Handle the case where the runtime Xen is loaded at a different
->>>>             position for cache coloring. This will be dealt separately.
->>>> ---
->>>>    xen/arch/arm/arm64/head.S     | 50 +++++++++++++++++++++++------------
->>>>    xen/arch/arm/arm64/mm.c       | 39 +++++++++++++++++++++++++++
->>>>    xen/arch/arm/include/asm/mm.h |  2 ++
->>>>    xen/arch/arm/mm.c             | 14 +++++-----
->>>>    4 files changed, 82 insertions(+), 23 deletions(-)
->>>>
->>>> diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
->>>> index 663f5813b12e..1f69864492b6 100644
->>>> --- a/xen/arch/arm/arm64/head.S
->>>> +++ b/xen/arch/arm/arm64/head.S
->>>> @@ -816,30 +816,46 @@ ENDPROC(fail)
->>>>     * Switch TTBR
->>>>     *
->>>>     * x0    ttbr
->>>> - *
->>>> - * TODO: This code does not comply with break-before-make.
->>>>     */
->>>> -ENTRY(switch_ttbr)
->>>> -        dsb   sy                     /* Ensure the flushes happen before
->>>> -                                      * continuing */
->>>> -        isb                          /* Ensure synchronization with
->>>> previous
->>>> -                                      * changes to text */
->>>> -        tlbi   alle2                 /* Flush hypervisor TLB */
->>>> -        ic     iallu                 /* Flush I-cache */
->>>> -        dsb    sy                    /* Ensure completion of TLB flush */
->>>> +ENTRY(switch_ttbr_id)
->>>> +        /* 1) Ensure any previous read/write have completed */
->>>> +        dsb    ish
->>>> +        isb
->>>> +
->>>> +        /* 2) Turn off MMU */
->>>> +        mrs    x1, SCTLR_EL2
->>>> +        bic    x1, x1, #SCTLR_Axx_ELx_M
->>>
->>> do we need a "dsb   sy" here? we have in enable_mmu
+>> Hi Jackson,
 >>
->> Hmmm... The explanation of the dsb + isb in enable_mmu makes no sense. The isb
->> doesn't flush the I-cache, it just flushes the pipeline.
->>
->> For the dsb, I am not convinced it is necessary because we already have the
->> 'dsb nsh' above and in any case the barrier seems to be too strong.
->>
->> I guess that will be another patch... (probably at a lower priority).
->>
->> Now back to your question of the 'dsb' here. There is already a 'dsb ish'
->> above. So memory access before turning off the MMU should be completed.
->> Also...
->>
->>>
->>>
->>>> +        msr    SCTLR_EL2, x1
->>>> +        isb
->>
->> ... this isb will ensure the completion of SCTLR before the TLBs are flushed
->> before. And there should be no memory access (or than instructions here). So I
->> don't think the a dsb is needed.
->>
->> Would you mind to explain why you think there is one needed?
+>> Thanks for sharing the prototype with the community. Some questions/remarks
+>> below.
 > 
-> I am not at all sure whether it is needed or not, I was just noticing
-> that we have the "dsb sy" in enable_mmu and here we don't.
+> [snip]
 > 
-> Thinking about it, the only reason for the additional dsb would be to
-> make sure that the two operations:
+>>> With this technique, we protect the integrity and confidentiality of
+>>> guest memory. However, a compromised hypervisor can still read/write
+>>> register state during traps, or refuse to schedule a guest, denying
+>>> service. We also recognize that because this technique precludes
+>>> modifying Xen's page tables after startup, it may not be compatible
+>>> with all of Xen's potential use cases. On the other hand, there are
+>>> some uses cases (in particular statically defined embedded systems)
+>>> where our technique could be adopted with minimal friction.
+>>
+>>  From what you wrote, this sounds very much like the project Citrix and
+>> Amazon worked on called "Secret-free hypervisor" with a twist. In your case,
+>> you want to prevent the hypervisor to map/unmap the guest memory.
+>>
+>> You can find some details in [1]. The code is x86 only, but I don't see any
+>> major blocker to port it on arm64.
 > 
->    mrs    x1, SCTLR_EL2
->    bic    x1, x1, #SCTLR_Axx_ELx_M
-> 
-> are completed before disabling the MMU:
+> Is there any way the secret-free hypervisor code could be upstreamed?
+This has been in my todo list for more than year but didn't yet find 
+anyone to finish the work.
 
-That's not what a 'dsb' is for. It is used for memory ordering there are 
-are no memory access involved here.
+I need to have a look how much left the original work it is left to do. 
+Would you be interested to contribute?
 
-If you want the operations to be completed, then this would be an 'isb'. 
-Yet, this would not be necessary here as the next instruction cannot be 
-re-ordered because of the register dependency.
+> My understanding is that it would enable guests to use SMT without
+> risking the host, which would be amazing.
+> 
+>>> 	Virtualized MMIO on arm needs to decode certain load/store
+>>> 	instructions
+>>
+>> On Arm, this can be avoided of the guest OS is not using such instruction.
+>> In fact they were only added to cater "broken" guest OS.
+>>
+>> Also, this will probably be a lot more difficult on x86 as, AFAIK, there is
+>> no instruction syndrome. So you will need to decode the instruction in order
+>> to emulate the access.
+> 
+> Is requiring the guest to emulate such instructions itself an option?
+> μXen, SEV-SNP, and TDX all do this.
+
+
+I am not very familiar with this. So a few questions:
+  * Does this mean the OS needs to be modified?
+  * What happen for emulated device?
 
 Cheers,
 
