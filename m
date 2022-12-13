@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7131AC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 22:35:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.461345.719501 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC61C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 22:57:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.461445.719529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5Drh-0003uB-Rm; Tue, 13 Dec 2022 22:35:09 +0000
+	id 1p5ECx-0001G5-6D; Tue, 13 Dec 2022 22:57:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 461345.719501; Tue, 13 Dec 2022 22:35:09 +0000
+Received: by outflank-mailman (output) from mailman id 461445.719529; Tue, 13 Dec 2022 22:57:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5Drh-0003tu-OQ; Tue, 13 Dec 2022 22:35:09 +0000
-Received: by outflank-mailman (input) for mailman id 461345;
- Tue, 13 Dec 2022 22:35:07 +0000
+	id 1p5ECx-0001Fh-1w; Tue, 13 Dec 2022 22:57:07 +0000
+Received: by outflank-mailman (input) for mailman id 461445;
+ Tue, 13 Dec 2022 22:57:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mJcE=4L=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1p5DlR-000519-FP
- for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 22:28:41 +0000
-Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
- [64.147.123.24]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7b930665-7b35-11ed-8fd2-01056ac49cbb;
- Tue, 13 Dec 2022 23:28:36 +0100 (CET)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 557AB3200921;
- Tue, 13 Dec 2022 17:28:34 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Tue, 13 Dec 2022 17:28:35 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 13 Dec 2022 17:28:33 -0500 (EST)
+ <SRS0=TuKI=4L=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1p5ECw-0001Ds-2L
+ for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 22:57:06 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 762f9b1b-7b39-11ed-8fd2-01056ac49cbb;
+ Tue, 13 Dec 2022 23:57:04 +0100 (CET)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id C3D46B81240;
+ Tue, 13 Dec 2022 22:57:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74DD5C433D2;
+ Tue, 13 Dec 2022 22:57:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,119 +45,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7b930665-7b35-11ed-8fd2-01056ac49cbb
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1670970513; x=1671056913; bh=87eKmhvdtfrb1isW/t1MA2+ANFEQ1h0ZL33
-	QPdjF+bA=; b=fYrqb9W2l1VBOPO7O/EYfNHg2sWG4WZjnXiC8OjDVfOyhUDsfEt
-	fN5l+sGSUm8QtFmkNI4YmCQnBoUjSlVM6rMcgqFrodehqliYuvWtVU/69SywlDpm
-	F0TdFWgaqtsIYaBy1gnFwRvJfbKSic94fvtZJR9AXuWITbpNvWdeRIuZ/G8KAQx0
-	tCCRaXuD2uxQzeYR9xHzi8ob1sIOiSpdqJDrDgc1F7os5oJoP2L+s8jP9cRPloOn
-	ktDdFd7BtL2HNlWumoJ/6gs1C/1jhFImHhrCjZ1ww6XT67lDsBTUxRGZTYVz/PXo
-	9F3AW+pNxME+KHW2P+VATIuLeKuD5e2dbmA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1670970513; x=1671056913; bh=87eKmhvdtfrb1
-	isW/t1MA2+ANFEQ1h0ZL33QPdjF+bA=; b=A/uzdRVFDMh5HMBL1S7CcRd1MBWHG
-	TjXVc3RF4uxPS/IoBphNrHjwXXXGSyCiomLvO4F6/+h0dLZgNxCYhhbH2j7wTD3Q
-	9n8ALMFaRcguqg6CY7mL0u1znXzpbN7ZMRMMgZeuwCvfsdDiC/1Szb7SYmz23PSW
-	kDXrkVDOlXQq0ZCOyvZVZv9PcwlqUbVAojPNf19V6dF5QQWv3sq0dQvGZj533qUs
-	/uDXLg14AmMNM8a/NGDgpcWSmbaNPcxbcJAaizrtRXOPsH8C0Xdy9dfMyzRRBc3L
-	3MvWGKA8dCLAO1GeE3piU2tdZwZY6x3wTHnRAmBonykqhdl1uG+xXlzUw==
-X-ME-Sender: <xms:kfyYY_thb4-ia1XXJcA3n4gGixQzXW6R0IMwa2cAZhubN4A2U4rFTg>
-    <xme:kfyYYwdWzmnWkRm2B1yUyEi2quHHS7RTn4uWj73pwm9FFuAOouxpeeW3I5okiyfUs
-    li9d0Rq01VdQ4E>
-X-ME-Received: <xmr:kfyYYyxD-cVrEhALXwSHya8aYfN2f6yFxc9dbGVffuUrw16NwELoSGzePCN22cE0WOFXNoLj5MYI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfedugdekjecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghmihcu
-    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
-    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefghefg
-    hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtnecurf
-    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
-    rggsrdgtohhm
-X-ME-Proxy: <xmx:kfyYY-ON7pYTUNkLiKqHpfxeuyFiRVR6Kmh5YZuhnsI9lJ0f_YAMdQ>
-    <xmx:kfyYY_8flHq3sSArv9D3gttrni7qffGVE5HHyV18qGdM7DragJbHSg>
-    <xmx:kfyYY-VVy2cbEvbQ_9qH_eTculd9X4v0Hu4dS4j64MpRUP5M1-PfFA>
-    <xmx:kfyYY7ROb14R3CfYCzBdBtSxlwwPHN0Euf5dM-X2---43f24-1fNjQ>
-Feedback-ID: iac594737:Fastmail
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Tim Deegan <tim@xen.org>
-Subject: [PATCH v2 11/14] x86: Derive XEN_MSR_PAT from its individual entries
-Date: Tue, 13 Dec 2022 17:26:52 -0500
-Message-Id: <5088d6bada42380948bcee333a3b347307888b17.1670948141.git.demi@invisiblethingslab.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <71482430c20a701b1d577e87dc72e7c2661e69de.1670948141.git.demi@invisiblethingslab.com>
-References: <71482430c20a701b1d577e87dc72e7c2661e69de.1670948141.git.demi@invisiblethingslab.com>
+X-Inumbo-ID: 762f9b1b-7b39-11ed-8fd2-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1670972222;
+	bh=RZF7YxK9C6fEgXEoXwg7SW0/uTk3r5OCdO1nma8FaRI=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=ES+3TkobSpNzhjHnBM8KzrgGtuhffCyh57yLxEo2Pi8UxcR6tgUg9BkR7ssaD2cgo
+	 k39CvC9aDA80c383xiW4VoTXd8RqL58gwu5Qz2cpuTU6EBXw7oa3JzgquwWKugGrT7
+	 9MJRBdCv9hsufdZGBpEdJAdW8YTyLWwPSyqM0EEvmn8d/3VBh9Xn4+6DH3OmJ0qlVX
+	 JSXZiafmwR/2lvArmMNyYtfvzxAwhXc86kwEkPhr8+I3UqWG2Tdv1rz3XKH5L4B3HU
+	 0mO0xZG1TDB7C+zeiRxkKe12MeA2as3G89rTw1aTKh6ko4ktTUfCg+4C1bwoXwgXYd
+	 x1U9t3Kgp+5Nw==
+Date: Tue, 13 Dec 2022 14:56:51 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org, michal.orzel@amd.com, 
+    Luca.Fancellu@arm.com, Julien Grall <jgrall@amazon.com>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v3 18/18] xen/arm64: mm: Rework switch_ttbr()
+In-Reply-To: <aa82a916-5c2b-83eb-328d-ac234eabc77c@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2212131456450.315094@ubuntu-linux-20-04-desktop>
+References: <20221212095523.52683-1-julien@xen.org> <20221212095523.52683-19-julien@xen.org> <alpine.DEB.2.22.394.2212121748560.3075842@ubuntu-linux-20-04-desktop> <aa82a916-5c2b-83eb-328d-ac234eabc77c@xen.org>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-This avoids it being a magic constant that is difficult for humans to
-decode.  Use BUILD_BUG_ON to check that the old and new values are
-identical.
+On Tue, 13 Dec 2022, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 13/12/2022 02:00, Stefano Stabellini wrote:
+> > On Mon, 12 Dec 2022, Julien Grall wrote:
+> > > From: Julien Grall <jgrall@amazon.com>
+> > > 
+> > > At the moment, switch_ttbr() is switching the TTBR whilst the MMU is
+> > > still on.
+> > > 
+> > > Switching TTBR is like replacing existing mappings with new ones. So
+> > > we need to follow the break-before-make sequence.
+> > > 
+> > > In this case, it means the MMU needs to be switched off while the
+> > > TTBR is updated. In order to disable the MMU, we need to first
+> > > jump to an identity mapping.
+> > > 
+> > > Rename switch_ttbr() to switch_ttbr_id() and create an helper on
+> > > top to temporary map the identity mapping and call switch_ttbr()
+> > > via the identity address.
+> > > 
+> > > switch_ttbr_id() is now reworked to temporarily turn off the MMU
+> > > before updating the TTBR.
+> > > 
+> > > We also need to make sure the helper switch_ttbr() is part of the
+> > > identity mapping. So move _end_boot past it.
+> > > 
+> > > The arm32 code will use a different approach. So this issue is for now
+> > > only resolved on arm64.
+> > > 
+> > > Signed-off-by: Julien Grall <jgrall@amazon.com>
+> > 
+> > This patch looks overall good to me, aside from the few minor comments
+> > below. I would love for someone else, maybe from ARM, reviewing steps
+> > 1-6 making sure they are the right sequence.
+> > 
+> > 
+> > > ---
+> > > 
+> > >      Changes in v2:
+> > >          - Remove the arm32 changes. This will be addressed differently
+> > >          - Re-instate the instruct cache flush. This is not strictly
+> > >            necessary but kept it for safety.
+> > >          - Use "dsb ish"  rather than "dsb sy".
+> > > 
+> > >      TODO:
+> > >          * Handle the case where the runtime Xen is loaded at a different
+> > >            position for cache coloring. This will be dealt separately.
+> > > ---
+> > >   xen/arch/arm/arm64/head.S     | 50 +++++++++++++++++++++++------------
+> > >   xen/arch/arm/arm64/mm.c       | 39 +++++++++++++++++++++++++++
+> > >   xen/arch/arm/include/asm/mm.h |  2 ++
+> > >   xen/arch/arm/mm.c             | 14 +++++-----
+> > >   4 files changed, 82 insertions(+), 23 deletions(-)
+> > > 
+> > > diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+> > > index 663f5813b12e..1f69864492b6 100644
+> > > --- a/xen/arch/arm/arm64/head.S
+> > > +++ b/xen/arch/arm/arm64/head.S
+> > > @@ -816,30 +816,46 @@ ENDPROC(fail)
+> > >    * Switch TTBR
+> > >    *
+> > >    * x0    ttbr
+> > > - *
+> > > - * TODO: This code does not comply with break-before-make.
+> > >    */
+> > > -ENTRY(switch_ttbr)
+> > > -        dsb   sy                     /* Ensure the flushes happen before
+> > > -                                      * continuing */
+> > > -        isb                          /* Ensure synchronization with
+> > > previous
+> > > -                                      * changes to text */
+> > > -        tlbi   alle2                 /* Flush hypervisor TLB */
+> > > -        ic     iallu                 /* Flush I-cache */
+> > > -        dsb    sy                    /* Ensure completion of TLB flush */
+> > > +ENTRY(switch_ttbr_id)
+> > > +        /* 1) Ensure any previous read/write have completed */
+> > > +        dsb    ish
+> > > +        isb
+> > > +
+> > > +        /* 2) Turn off MMU */
+> > > +        mrs    x1, SCTLR_EL2
+> > > +        bic    x1, x1, #SCTLR_Axx_ELx_M
+> > 
+> > do we need a "dsb   sy" here? we have in enable_mmu
+> 
+> Hmmm... The explanation of the dsb + isb in enable_mmu makes no sense. The isb
+> doesn't flush the I-cache, it just flushes the pipeline.
+> 
+> For the dsb, I am not convinced it is necessary because we already have the
+> 'dsb nsh' above and in any case the barrier seems to be too strong.
+> 
+> I guess that will be another patch... (probably at a lower priority).
+> 
+> Now back to your question of the 'dsb' here. There is already a 'dsb ish'
+> above. So memory access before turning off the MMU should be completed.
+> Also...
+> 
+> > 
+> > 
+> > > +        msr    SCTLR_EL2, x1
+> > > +        isb
+> 
+> ... this isb will ensure the completion of SCTLR before the TLBs are flushed
+> before. And there should be no memory access (or than instructions here). So I
+> don't think the a dsb is needed.
+> 
+> Would you mind to explain why you think there is one needed?
 
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
- xen/arch/x86/include/asm/processor.h | 10 +++++++++-
- xen/arch/x86/mm.c                    |  6 ++++++
- 2 files changed, 15 insertions(+), 1 deletion(-)
+I am not at all sure whether it is needed or not, I was just noticing
+that we have the "dsb sy" in enable_mmu and here we don't.
 
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index 8e2816fae9b97bd4e153a30cc3802971fe0355af..9535b1f7f49d75e6853365e6109a33359c740f4f 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -96,7 +96,15 @@
-  * Host IA32_CR_PAT value to cover all memory types.  This is not the default
-  * MSR_PAT value, and is an ABI with PV guests.
-  */
--#define XEN_MSR_PAT _AC(0x050100070406, ULL)
-+#define XEN_MSR_PAT (X86_MT_WB  << 0x00 | \
-+                     X86_MT_WT  << 0x08 | \
-+                     X86_MT_UCM << 0x10 | \
-+                     X86_MT_UC  << 0x18 | \
-+                     X86_MT_WC  << 0x20 | \
-+                     X86_MT_WP  << 0x28 | \
-+                     X86_MT_UC  << 0x30 | \
-+                     X86_MT_UC  << 0x38 | \
-+                     0)
- 
- #ifndef __ASSEMBLY__
- 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index b73cb29327ba49703673886d09d79f2f8928a6c0..a8def47aa3bf9770576c62a190032d45d63dd86e 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6355,6 +6355,12 @@ unsigned long get_upper_mfn_bound(void)
-     return min(max_mfn, 1UL << (paddr_bits - PAGE_SHIFT)) - 1;
- }
- 
-+static void __init __maybe_unused build_assertions(void)
-+{
-+    BUILD_BUG_ON(XEN_MSR_PAT != 0x050100070406ULL &&
-+                 "wrong XEN_MSR_PAT breaks PV guests");
-+}
-+
- /*
-  * Local variables:
-  * mode: C
--- 
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
+Thinking about it, the only reason for the additional dsb would be to
+make sure that the two operations:
+
+  mrs    x1, SCTLR_EL2
+  bic    x1, x1, #SCTLR_Axx_ELx_M
+
+are completed before disabling the MMU:
+
+  msr    SCTLR_EL2, x1
+
+Is that actually a requirement? I don't know.
+
+
+> > > +
+> > > +        /*
+> > > +         * 3) Flush the TLBs.
+> > > +         * See asm/arm64/flushtlb.h for the explanation of the sequence.
+> > > +         */
+> > > +        dsb   nshst
+> > > +        tlbi  alle2
+> > > +        dsb   nsh
+> > > +        isb
+> > > +
+> > > +        /* 4) Update the TTBR */
+> > > +        msr   TTBR0_EL2, x0
+> > >           isb
+> > >   -        msr    TTBR0_EL2, x0
+> > > +        /*
+> > > +         * 5) Flush I-cache
+> > > +         * This should not be necessary but it is kept for safety.
+> > > +         */
+> > > +        ic     iallu
+> > > +        isb
+> > >   -        isb                          /* Ensure synchronization with
+> > > previous
+> > > -                                      * changes to text */
+> > > -        tlbi   alle2                 /* Flush hypervisor TLB */
+> > > -        ic     iallu                 /* Flush I-cache */
+> > > -        dsb    sy                    /* Ensure completion of TLB flush */
+> > > +        /* 5) Turn on the MMU */
+> > 
+> > This should be 6)
+> 
+> I will update it.
+> 
+> > 
+> > 
+> > > +        mrs   x1, SCTLR_EL2
+> > > +        orr   x1, x1, #SCTLR_Axx_ELx_M  /* Enable MMU */
+> > > +        msr   SCTLR_EL2, x1
+> > >           isb
+> > >             ret
+> > > -ENDPROC(switch_ttbr)
+> > > +ENDPROC(switch_ttbr_id)
+> > >     #ifdef CONFIG_EARLY_PRINTK
+> > >   /*
+> > > diff --git a/xen/arch/arm/arm64/mm.c b/xen/arch/arm/arm64/mm.c
+> > > index 9eaf545ea9dd..2ede4e75ae33 100644
+> > > --- a/xen/arch/arm/arm64/mm.c
+> > > +++ b/xen/arch/arm/arm64/mm.c
+> > > @@ -31,6 +31,15 @@ static void __init prepare_boot_identity_mapping(void)
+> > >       lpae_t pte;
+> > >       DECLARE_OFFSETS(id_offsets, id_addr);
+> > >   +    /*
+> > > +     * We will be re-using the boot ID tables. They may not have been
+> > > +     * zeroed but they should be unlinked. So it is fine to use
+> > > +     * clear_page().
+> > > +     */
+> > > +    clear_page(boot_first_id);
+> > > +    clear_page(boot_second_id);
+> > > +    clear_page(boot_third_id);
+> > 
+> > Could this code be in patch #15?
+> 
+> Yes, I can't remember why I decided to clear them in patch #18.
+> 
+> > >       if ( id_offsets[0] != 0 )
+> > >           panic("Cannot handled ID mapping above 512GB\n");
+> > >   @@ -111,6 +120,36 @@ void update_identity_mapping(bool enable)
+> > >       BUG_ON(rc);
+> > >   }
+> > >   +extern void switch_ttbr_id(uint64_t ttbr);
+> > > +
+> > > +typedef void (switch_ttbr_fn)(uint64_t ttbr);
+> > > +
+> > > +void __init switch_ttbr(uint64_t ttbr)
+> > > +{
+> > > +    vaddr_t id_addr = virt_to_maddr(switch_ttbr_id);
+> > > +    switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
+> > > +    lpae_t pte;
+> > > +
+> > > +    /* Enable the identity mapping in the boot page tables */
+> > 
+> > See below...
+> > 
+> > > +    update_identity_mapping(true);
+> > > +    /* Enable the identity mapping in the runtime page tables */
+> > > +    pte = pte_of_xenaddr((vaddr_t)switch_ttbr_id);
+> > > +    pte.pt.table = 1;
+> > > +    pte.pt.xn = 0;
+> > > +    pte.pt.ro = 1;
+> > > +    write_pte(&xen_third_id[third_table_offset(id_addr)], pte);
+> > > +
+> > > +    /* Switch TTBR */
+> > > +    fn(ttbr);
+> > > +
+> > > +    /*
+> > > +     * Disable the identity mapping in the runtime page tables.
+> > > +     * Note it is not necessary to disable it in the boot page tables
+> > > +     * because they are not going to be used by this CPU anymore.
+> > > +     */
+> > 
+> > ...is update_identity_mapping acting on the boot pagetables or the
+> > runtime pagetables? The two comments make me think that
+> > update_identity_mapping is enabling mapping in the boot pagetables and
+> > removing them from the runtime pagetable, which would be strangely
+> > inconsistent.
+> 
+> update_identity_mapping() is acting on the live page-tables (i.e. the one
+> pointed by TTBR_EL2).
+> 
+> Before switch_ttbr(), this will be the boot page-tables. But after, this will
+> be the runtime page-tables.
+> 
+> Would the following comment on top of the declaration of
+> update_identity_mapping() clarifies it:
+> 
+> "Enable/disable the identity mapping in the live page-tables (i.e. the one
+> pointed by TTBR_EL2)."
+
+Thank you!
 
