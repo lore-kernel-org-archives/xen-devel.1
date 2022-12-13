@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49076C25B04
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 16:05:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.460768.718797 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE3CC10F1D
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Dec 2022 16:05:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.460761.718758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p57mF-0006Gr-B2; Tue, 13 Dec 2022 16:05:07 +0000
+	id 1p57mC-0005Vj-1s; Tue, 13 Dec 2022 16:05:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 460768.718797; Tue, 13 Dec 2022 16:05:07 +0000
+Received: by outflank-mailman (output) from mailman id 460761.718758; Tue, 13 Dec 2022 16:05:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p57mE-0006By-Sd; Tue, 13 Dec 2022 16:05:06 +0000
-Received: by outflank-mailman (input) for mailman id 460768;
- Tue, 13 Dec 2022 16:05:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p57mB-0005Va-Ul; Tue, 13 Dec 2022 16:05:03 +0000
+Received: by outflank-mailman (input) for mailman id 460761;
+ Tue, 13 Dec 2022 16:05:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7Djt=4L=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1p57jK-0001dt-Ud
- for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 16:02:06 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7d9edf47-7aff-11ed-91b6-6bf2151ebd3b;
- Tue, 13 Dec 2022 17:02:06 +0100 (CET)
+ id 1p57j4-0001ta-9X
+ for xen-devel@lists.xenproject.org; Tue, 13 Dec 2022 16:01:50 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 73a6837e-7aff-11ed-8fd2-01056ac49cbb;
+ Tue, 13 Dec 2022 17:01:49 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1423A1FDAE;
- Tue, 13 Dec 2022 16:02:06 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4CFFA1FDAE;
+ Tue, 13 Dec 2022 16:01:49 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D7809138EE;
- Tue, 13 Dec 2022 16:02:05 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 21963138EE;
+ Tue, 13 Dec 2022 16:01:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id dERXM/2hmGMfKgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 13 Dec 2022 16:02:05 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id yFLaBu2hmGPyKQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 13 Dec 2022 16:01:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,91 +53,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7d9edf47-7aff-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 73a6837e-7aff-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1670947326; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1670947309; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=JdgZ1VuZvqNGh5getUJSQZgnrcQ2jyvptjdFRbrPjw4=;
-	b=GpEsvWQy3SoCa9waloGggwBG82cl58uECCxZ+kAUvCqZA7TFvgmltanbkVtAgW1tZibY2x
-	CHojaVNLmxjkdNpOsbr54U+RpaffMZiBoi/GJLW1YmT3oWaqfXr4WE0UhkbWlZvcIUWVWS
-	hckQM5B4apb/mxBF683Lu7Wz2vp1k9o=
+	bh=wTUWj5ykTPwfIHjTYHUnZ+eNs/GAKQHItmGrRO3n/AA=;
+	b=cZBHJkGxhDHKy0rtA26FhFzuEEtjsLoow0RmLdDNhELNrYqIz0PFsKDNg/3KCVfIL9kwHX
+	8Jptgffyy0XDFRGMV8K5kgQFSBybL93p6YX5KkGqjozgUV6eAGkeYP+OM1vm0EIwSqIj0H
+	T+1O0Iz3PqwJ9Whj0J0AbJi7hnogYH8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2 14/19] tools/xenstore: let chk_domain_generation() return a bool
-Date: Tue, 13 Dec 2022 17:00:40 +0100
-Message-Id: <20221213160045.28170-15-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 11/19] tools/xenstore: don't allow creating too many nodes in a transaction
+Date: Tue, 13 Dec 2022 17:00:37 +0100
+Message-Id: <20221213160045.28170-12-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20221213160045.28170-1-jgross@suse.com>
 References: <20221213160045.28170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of returning 0 or 1 let chk_domain_generation() return a
-boolean value.
-
-Simplify the only caller by removing the ret variable.
+The accounting for the number of nodes of a domain in an active
+transaction is not working correctly, as it allows to create arbitrary
+number of nodes. The transaction will finally fail due to exceeding
+the number of nodes quota, but before closing the transaction an
+unprivileged guest could cause Xenstore to use a lot of memory.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_domain.c | 18 ++++++++----------
- 1 file changed, 8 insertions(+), 10 deletions(-)
+ tools/xenstore/xenstored_domain.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index a3ecdb382f..65e94e3822 100644
+index 40b24056c5..1ae79b5b54 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -983,20 +983,20 @@ void domain_deinit(void)
-  * count (used for testing whether a node permission is older than a domain).
-  *
-  * Return values:
-- *  0: domain has higher generation count (it is younger than a node with the
-- *     given count), or domain isn't existing any longer
-- *  1: domain is older than the node
-+ *  false: domain has higher generation count (it is younger than a node with
-+ *     the given count), or domain isn't existing any longer
-+ *  true: domain is older than the node
-  */
--static int chk_domain_generation(unsigned int domid, uint64_t gen)
-+static bool chk_domain_generation(unsigned int domid, uint64_t gen)
+@@ -1118,9 +1118,8 @@ int domain_nbentry_fix(unsigned int domid, int num, bool update)
+ 
+ int domain_nbentry(struct connection *conn)
  {
- 	struct domain *d;
- 
- 	if (!xc_handle && domid == dom0_domid)
--		return 1;
-+		return true;
- 
- 	d = find_domain_struct(domid);
- 
--	return (d && d->generation <= gen) ? 1 : 0;
-+	return d && d->generation <= gen;
+-	return (domain_is_unprivileged(conn))
+-		? conn->domain->nbentry
+-		: 0;
++	return domain_is_unprivileged(conn)
++	       ? domain_nbentry_add(conn, conn->id, 0, true) : 0;
  }
  
- /*
-@@ -1031,14 +1031,12 @@ int domain_alloc_permrefs(struct node_perms *perms)
- int domain_adjust_node_perms(struct node *node)
- {
- 	unsigned int i;
--	int ret;
- 
- 	for (i = 1; i < node->perms.num; i++) {
- 		if (node->perms.p[i].perms & XS_PERM_IGNORE)
- 			continue;
--		ret = chk_domain_generation(node->perms.p[i].id,
--					    node->generation);
--		if (!ret)
-+		if (!chk_domain_generation(node->perms.p[i].id,
-+					   node->generation))
- 			node->perms.p[i].perms |= XS_PERM_IGNORE;
- 	}
- 
+ static bool domain_chk_quota(struct domain *domain, int mem)
 -- 
 2.35.3
 
