@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C46C4167B
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Dec 2022 05:15:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.461508.719785 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DEBC4332F
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Dec 2022 05:20:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.461678.719805 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5K6b-0008Sc-QK; Wed, 14 Dec 2022 05:14:57 +0000
+	id 1p5KBM-0001qK-GS; Wed, 14 Dec 2022 05:19:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 461508.719785; Wed, 14 Dec 2022 05:14:57 +0000
+Received: by outflank-mailman (output) from mailman id 461678.719805; Wed, 14 Dec 2022 05:19:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5K6b-0008Pz-Jq; Wed, 14 Dec 2022 05:14:57 +0000
-Received: by outflank-mailman (input) for mailman id 461508;
- Wed, 14 Dec 2022 00:51:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p5KBM-0001qD-Dg; Wed, 14 Dec 2022 05:19:52 +0000
+Received: by outflank-mailman (input) for mailman id 461678;
+ Wed, 14 Dec 2022 05:19:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KWmA=4M=gmail.com=doremylover123@srs-se1.protection.inumbo.net>)
- id 1p5G06-0002wf-7F
- for xen-devel@lists.xenproject.org; Wed, 14 Dec 2022 00:51:58 +0000
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [2607:f8b0:4864:20::82f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 81993c3c-7b49-11ed-91b6-6bf2151ebd3b;
- Wed, 14 Dec 2022 01:51:56 +0100 (CET)
-Received: by mail-qt1-x82f.google.com with SMTP id a16so1342111qtw.10
- for <xen-devel@lists.xenproject.org>; Tue, 13 Dec 2022 16:51:56 -0800 (PST)
-Received: from ?IPV6:2603:7080:a33a:d95d:20:71fc:7eaf:858a?
- (2603-7080-a33a-d95d-0020-71fc-7eaf-858a.res6.spectrum.com.
- [2603:7080:a33a:d95d:20:71fc:7eaf:858a])
- by smtp.gmail.com with ESMTPSA id
- p20-20020ac84614000000b003a611cb2a95sm833107qtn.9.2022.12.13.16.51.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Dec 2022 16:51:54 -0800 (PST)
+ <SRS0=XtkE=4M=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
+ id 1p5KBK-0001q7-Qg
+ for xen-devel@lists.xen.org; Wed, 14 Dec 2022 05:19:50 +0000
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [2607:f8b0:4864:20::1031])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id edb919ce-7b6e-11ed-8fd2-01056ac49cbb;
+ Wed, 14 Dec 2022 06:19:49 +0100 (CET)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ b13-20020a17090a5a0d00b0021906102d05so5865576pjd.5
+ for <xen-devel@lists.xen.org>; Tue, 13 Dec 2022 21:19:49 -0800 (PST)
+Received: from localhost ([122.172.87.149]) by smtp.gmail.com with ESMTPSA id
+ 3-20020a17090a08c300b0021937b2118bsm395935pjn.54.2022.12.13.21.19.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Dec 2022 21:19:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,367 +46,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 81993c3c-7b49-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: edb919ce-7b6e-11ed-8fd2-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=agc2D5uYmPBhslvrwBFEjc9DPi+bA6UTLkfJdzaASJc=;
-        b=IRmaO3gTkbp/3ZHH3PwmQ3dcmX2tUXE9ATSXJYxd82SbVNdvwyCcKiVtkLpVFdmZda
-         3iZRMHIc9o9FPGD+hJroEnSNWflBT6bu1WlCsgF2mLuja5Sw0OqtjXeHjV1fYMkQ+DMT
-         WZDWp9MUQmkDm3ZysJxKeY/5dL4CfSD3bVYiqPLRMapFDGcHGnaL9sUT2YkABzYNDrpK
-         jCrgiGxeycHPgimneAiL6B9nvf8I0nrDH9bYVsJ11popj2wYHO/TEuboSecLf0DE08L6
-         lRrIoyR8T/B/55eMQDEDtpgyBxBo1w+3NN/5Nf4ZY/Vj2NFEOH0fPvO8ifu2eQUxhCwY
-         mIOA==
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=k9S/I5H56OQfUtRRUB+uh1kRSu48OPEPKhm4BNOTasE=;
+        b=FVIMjHJEap/07K1ESAvavwHEl5dK5kB2XpHslc/awSoiNXKs37VzUHISOmjRKJ1nQB
+         X7iQwenOKxGTe8qn6b7Lsy6f24jLQvzo10qhhNPSW62eatbpXstLzN1r/gWTktjS1h1P
+         lbTa2YC4D3mXKpYxk4/Mb5ZGW0hNW4rdknTgW/juKEwPUxGhiGCIODSA+DlU+F3XcABs
+         Z6gDubR5phHt5FlhjgES9aWmpB35zXD0KtweN/RBRUmgoZ0Wm1oUfLqXWCtCxpyv8IWJ
+         XSa0ZnNMcJ4stMfM28rDgLD47DOaUdvGMz/5enoburENJaeirX/dJqaOtxfsgxP5nPJY
+         cC9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=agc2D5uYmPBhslvrwBFEjc9DPi+bA6UTLkfJdzaASJc=;
-        b=58dwbdEfvCixbFdx/FaGOAJ28qD8W7X8H2yMYj9im5wKXKHxlvL563GB6i6FSE0gvD
-         B7wcYiNkprswK2KUNUrJjEnm0egPiocL03GvnTmXzrZDFtKkE6O4XPxM7xH6OPln3XLr
-         o2vF0Xu0qR+Kv7CVjinT2N0BJVXk7fjzIAdgkJyXcHXLphsuSIMT8fvArisbpA3gh2m/
-         P1YyUaFt8hLMYyDVsLzeTLaVfXWmtrPKUMRyCE/FwEnRE0DwkVtLT54LtNmRYj6YFXq8
-         K5eQv2mehO6Ql3uxOJ7h15Tuabk+pW26aHZtPE+7+BCtSdGa1UQcRwmetYildvJJ6V2h
-         ainw==
-X-Gm-Message-State: ANoB5pl3h5QG3QqFrvX52kWjZKP0p+puTW0UNeK2c97kJzEd4zdOy+0o
-	fS9blgi1oFmRbJ4O0v0FvA==
-X-Google-Smtp-Source: AA0mqf6xtw54xm0GMZdLZAEzR7nsKOAr/4XmlduLF8bSU3of4o7NGfBAgtwAq1Nc4Ln6pTf7X8o1FA==
-X-Received: by 2002:ac8:1118:0:b0:3a5:fef7:dfe5 with SMTP id c24-20020ac81118000000b003a5fef7dfe5mr26533804qtj.12.1670979114961;
-        Tue, 13 Dec 2022 16:51:54 -0800 (PST)
-Message-ID: <b2ada465-8eec-a7e3-0265-df9d0e8492d2@gmail.com>
-Date: Tue, 13 Dec 2022 19:51:53 -0500
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=k9S/I5H56OQfUtRRUB+uh1kRSu48OPEPKhm4BNOTasE=;
+        b=4jsh0dvlx+UmOHkXTFGR9/dHABVLXKQBIr5KrPQBbHakNJJ6wgG+4Hsos8TcgKMRV4
+         1NTSv3O1dddqIKaD+r1i48sN0yYr/ssw9PhdtNVqLsZAsa4zcVJfMq3gItaErgD1DZi8
+         aG2mG2fnMb/vyCD+4fWCIFphh46+XrdDAUtUDyMGzSydEM5piNaGuXvq2xud4IMkyMHR
+         4HaRYYSuHD6Zo4Ccg4yIzCNbqYRvbHNmmnFUFak/KMmE6GZmYrr0BFsfq21mqNqMXGXG
+         TnDYxe5qOVFxp1u7yq43FDth2vjC8c8IDE06uDAKqV2M6eP0FX3ElP806Ths9LtzkG1r
+         eJIw==
+X-Gm-Message-State: ANoB5pmTKyfGIH9/8R/h63kRxlGwtF3qEeolIdoDg1ySgYRY1gK2zmUe
+	sf/8Gp4ODLJ1buFB7PWt2rgjMUbdBW6E/zwD
+X-Google-Smtp-Source: AA0mqf6P1nJKn8c3Ys2Jse0scUjnMOELsQioU6D5lAv/hgsGdIoRvBu5qRoLyyDDEmELm6bGpL30tA==
+X-Received: by 2002:a17:90a:17e8:b0:21a:2306:a9bc with SMTP id q95-20020a17090a17e800b0021a2306a9bcmr23173134pja.7.1670995187682;
+        Tue, 13 Dec 2022 21:19:47 -0800 (PST)
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: xen-devel@lists.xen.org,
+	Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	stratos-dev@op-lists.linaro.org,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.com>,
+	Mike Holmes <mike.holmes@linaro.org>,
+	Oleksandr Tyshchenko <olekstysh@gmail.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH V10 0/3] toolstack support for generic virtio devices on Arm
+Date: Wed, 14 Dec 2022 10:49:39 +0530
+Message-Id: <cover.1670994930.git.viresh.kumar@linaro.org>
+X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.0
-Content-Language: en-US
-To: sstabellini@kernel.org, tsbogend@alpha.franken.de, chris@zankel.net,
- jcmvbkbc@gmail.com
-Cc: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org
-From: Seija Kijin <doremylover123@gmail.com>
-Subject: [PATCH] arch: change variable types to match those of what is
- assigned to them
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-There are many places where "int len = strlen(foo);" is written, just for len to be passed as a parameter of size_t. This causes truncation and then expansion back from int to size_t. Not to mention this is poor logic and needless truncations can add extra unneeded instructions.
+Hello,
 
-This patch aims to fix the worst offenders.
+This patchset adds toolstack support for I2C, GPIO and generic virtio devices.
+This is inspired from the work done by Oleksandr for the Disk device.
 
-Signed-off-by: Seija Kijin <doremylover123@gmail.com>
----
-  arch/arm/mm/mmu.c                      | 30 +++++++++++++-------------
-  arch/arm/probes/kprobes/test-core.c    |  8 +++----
-  arch/arm/vfp/vfpmodule.c               |  4 ++--
-  arch/arm/xen/p2m.c                     |  4 ++--
-  arch/mips/alchemy/common/irq.c         |  2 +-
-  arch/mips/alchemy/common/prom.c        |  2 +-
-  arch/mips/alchemy/devboards/bcsr.c     |  2 +-
-  arch/mips/alchemy/devboards/platform.c |  8 +++----
-  arch/mips/ar7/prom.c                   |  4 ++--
-  arch/mips/boot/compressed/dbg.c        | 14 +++++-------
-  arch/mips/fw/arc/cmdline.c             |  4 ++--
-  arch/xtensa/platforms/iss/console.c    |  4 ++--
-  12 files changed, 41 insertions(+), 45 deletions(-)
+This is developed as part of Linaro's Project Stratos, where we are working
+towards Hypervisor agnostic Rust based backends [1].
 
-diff --git a/arch/arm/mm/mmu.c b/arch/arm/mm/mmu.c
-index 463fc2a8448f..27f5acb69c3b 100644
---- a/arch/arm/mm/mmu.c
-+++ b/arch/arm/mm/mmu.c
-@@ -117,7 +117,7 @@ static unsigned long initial_pmd_value __initdata = 0;
-   */
-  void __init init_default_cache_policy(unsigned long pmd)
-  {
--    int i;
-+    unsigned i;
+This is based of Xen's master branch.
 
-      initial_pmd_value = pmd;
+V9->V10:
+- Swap I2C/GPIO compatible strings, they were wrongly added earlier.
+- Arrange tags in timely order and add new ones.
 
-@@ -140,20 +140,22 @@ void __init init_default_cache_policy(unsigned long pmd)
-   */
-  static int __init early_cachepolicy(char *p)
-  {
--    int i, selected = -1;
-+    size_t i, selected = 0;
+V8->V9:
+- Drop changes to tools/ocaml/libs/xl/genwrap.py file.
+- Replace GPIO with I2C in a comment.
+- Add Reviewed-by tags.
 
-      for (i = 0; i < ARRAY_SIZE(cache_policies); i++) {
--        int len = strlen(cache_policies[i].policy);
-+        size_t len = strlen(cache_policies[i].policy);
+V7->V8:
+- Use macros for compatible string names.
+- Use strcmp() instead of strncmp() at several places.
+- Rename "virtio,devices" to "virtio,device" in commit log.
+- Remove extra call to fdt_end_node().
+- Disallow "unknown" in xenstore transport.
+- Use libxl__strdup().
+- Update documentation.
+- Remove DEVICE_ADDREMOVE(virtio).
 
-          if (memcmp(p, cache_policies[i].policy, len) == 0) {
-              selected = i;
--            break;
-+            goto no_err;
-          }
-      }
+V6->V7:
+- Support generic virtio devices too. They are passed with type=virtio,device,
+  and we only create the MMIO DT node for them.
+- Add links to DT bindings of I2C and GPIO, in code and documentation.
+- Call libxl__device_add() for all hypervisor types.
+- Add (0, "UNKNOWN") for libxl_virtio_transport.
+- Removed libxl_virtio_backend and libxl_virtioinfo, as they were unused.
+- Remove unnecessary stuff from libxl__virtio_from_xenstore() and add support
+  for type and transport.
+- Add backend=domid in documentation and replace compatible with type.
+- Improved commit logs.
 
--    if (selected == -1)
--        pr_err("ERROR: unknown or unsupported cache policy\n");
-+    pr_err("ERROR: unknown or unsupported cache policy\n");
+V5->V6:
+- The cleanup patches are sent separately [2].
+- We don't add I2C or GPIO specific device changes anymore, rather we create
+  generic "virtio" devices. The "type" of a virtio devices helps us identify the
+  right device, and create an entry in the DT node. The same can be used for all
+  Virtio devices now.
+- Update man page xl.cfg.
 
-+no_err:
-+    if (selected != cachepolicy) {
-+        unsigned long cr;
-      /*
-       * This restriction is partly to do with the way we boot; it is
-       * unpredictable to have memory mapped using two different sets of
-@@ -161,14 +163,12 @@ static int __init early_cachepolicy(char *p)
-       * change these attributes once the initial assembly has setup the
-       * page tables.
-       */
--    if (cpu_architecture() >= CPU_ARCH_ARMv6 && selected != cachepolicy) {
--        pr_warn("Only cachepolicy=%s supported on ARMv6 and later\n",
--            cache_policies[cachepolicy].policy);
--        return 0;
--    }
--
--    if (selected != cachepolicy) {
--        unsigned long cr = __clear_cr(cache_policies[selected].cr_mask);
-+        if (cpu_architecture() >= CPU_ARCH_ARMv6) {
-+            pr_warn("Only cachepolicy=%s supported on ARMv6 and later\n",
-+                cache_policies[cachepolicy].policy);
-+            return 0;
-+        }
-+        cr = __clear_cr(cache_policies[selected].cr_mask);
-          cachepolicy = selected;
-          flush_cache_all();
-          set_cr(cr);
-@@ -445,7 +445,7 @@ static void __init build_mem_type_table(void)
-      unsigned int cr = get_cr();
-      pteval_t user_pgprot, kern_pgprot, vecs_pgprot;
-      int cpu_arch = cpu_architecture();
--    int i;
-+    size_t i;
+V4->V5:
+- Fixed indentation at few places.
+- Removed/added blank lines.
+- Added few comments.
+- Added review tags from Oleksandr.
+- Rebased over latest staging branch.
 
-      if (cpu_arch < CPU_ARCH_ARMv6) {
-  #if defined(CONFIG_CPU_DCACHE_DISABLE)
-diff --git a/arch/arm/probes/kprobes/test-core.c b/arch/arm/probes/kprobes/test-core.c
-index c562832b8627..7e8694eb772c 100644
---- a/arch/arm/probes/kprobes/test-core.c
-+++ b/arch/arm/probes/kprobes/test-core.c
-@@ -723,9 +723,9 @@ static const char coverage_register_lookup[16] = {
-  unsigned coverage_start_registers(const struct decode_header *h)
-  {
-      unsigned regs = 0;
--    int i;
-+    unsigned i;
-      for (i = 0; i < 20; i += 4) {
--        int r = (h->type_regs.bits >> (DECODE_TYPE_BITS + i)) & 0xf;
-+        unsigned r = (h->type_regs.bits >> (DECODE_TYPE_BITS + i)) & 0xf;
-          regs |= coverage_register_lookup[r] << i;
-      }
-      return regs;
-@@ -774,12 +774,12 @@ static int coverage_start(const union decode_item *table)
-  static void
-  coverage_add_registers(struct coverage_entry *entry, kprobe_opcode_t insn)
-  {
--    int regs = entry->header->type_regs.bits >> DECODE_TYPE_BITS;
-+    u32 regs = entry->header->type_regs.bits >> DECODE_TYPE_BITS;
-      int i;
-      for (i = 0; i < 20; i += 4) {
-          enum decode_reg_type reg_type = (regs >> i) & 0xf;
-          int reg = (insn >> i) & 0xf;
--        int flag;
-+        unsigned flag;
+V3->V4:
+- Update virtio_enabled independently of all devices, so we don't miss setting
+  it to true.
 
-          if (!reg_type)
-              continue;
-diff --git a/arch/arm/vfp/vfpmodule.c b/arch/arm/vfp/vfpmodule.c
-index 2cb355c1b5b7..c491ed8e5cf2 100644
---- a/arch/arm/vfp/vfpmodule.c
-+++ b/arch/arm/vfp/vfpmodule.c
-@@ -227,7 +227,7 @@ static void vfp_raise_sigfpe(unsigned int sicode, struct pt_regs *regs)
+- Add iommu handling for i2c/gpio and move it as part of
+  make_virtio_mmio_node_common(), which gets backend_domid parameter as a
+  result.
 
-  static void vfp_panic(char *reason, u32 inst)
-  {
--    int i;
-+    unsigned i;
+V2->V3:
+- Rebased over latest tree and made changes according to changes in Oleksandr's
+  patches from sometime back.
+- Minor cleanups.
 
-      pr_err("VFP: Error: %s\n", reason);
-      pr_err("VFP: EXC 0x%08x SCR 0x%08x INST 0x%08x\n",
-@@ -700,7 +700,7 @@ static struct undef_hook vfp_kmode_exception_hook[] = {{
+V1->V2:
+- Patches 3/6 and 4/6 are new.
+- Patches 5/6 and 6/6 updated based on the above two patches.
+- Added link to the bindings for I2C and GPIO.
+- Rebased over latest master branch.
 
-  static int __init vfp_kmode_exception_hook_init(void)
-  {
--    int i;
-+    size_t i;
 
-      for (i = 0; i < ARRAY_SIZE(vfp_kmode_exception_hook); i++)
-          register_undef_hook(&vfp_kmode_exception_hook[i]);
-diff --git a/arch/arm/xen/p2m.c b/arch/arm/xen/p2m.c
-index 309648c17f48..7417da4d1236 100644
---- a/arch/arm/xen/p2m.c
-+++ b/arch/arm/xen/p2m.c
-@@ -92,7 +92,7 @@ int set_foreign_p2m_mapping(struct gnttab_map_grant_ref *map_ops,
-                  struct gnttab_map_grant_ref *kmap_ops,
-                  struct page **pages, unsigned int count)
-  {
--    int i;
-+    unsigned i;
+Thanks.
 
-      for (i = 0; i < count; i++) {
-          struct gnttab_unmap_grant_ref unmap;
-@@ -137,7 +137,7 @@ int clear_foreign_p2m_mapping(struct gnttab_unmap_grant_ref *unmap_ops,
-                    struct gnttab_unmap_grant_ref *kunmap_ops,
-                    struct page **pages, unsigned int count)
-  {
--    int i;
-+    unsigned i;
+--
+Viresh
 
-      for (i = 0; i < count; i++) {
-          set_phys_to_machine(unmap_ops[i].host_addr >> XEN_PAGE_SHIFT,
-diff --git a/arch/mips/alchemy/common/irq.c b/arch/mips/alchemy/common/irq.c
-index da9f9220048f..83f73ae7d225 100644
---- a/arch/mips/alchemy/common/irq.c
-+++ b/arch/mips/alchemy/common/irq.c
-@@ -809,7 +809,7 @@ static int alchemy_gpic_suspend(void)
-  static void alchemy_gpic_resume(void)
-  {
-      void __iomem *base = (void __iomem *)KSEG1ADDR(AU1300_GPIC_PHYS_ADDR);
--    int i;
-+    u32 i;
+[1] https://lore.kernel.org/xen-devel/20220414092358.kepxbmnrtycz7mhe@vireshk-i7/
 
-      /* disable all first */
-      __raw_writel(~0UL, base + AU1300_GPIC_IDIS + 0x0);
-diff --git a/arch/mips/alchemy/common/prom.c b/arch/mips/alchemy/common/prom.c
-index b13d8adf3be4..7b28b9ce1d3a 100644
---- a/arch/mips/alchemy/common/prom.c
-+++ b/arch/mips/alchemy/common/prom.c
-@@ -111,7 +111,7 @@ static inline unsigned char str2hexnum(unsigned char c)
+Viresh Kumar (3):
+  libxl: Add support for generic virtio device
+  xl: Add support to parse generic virtio device
+  docs: Add documentation for generic virtio devices
 
-  static inline void str2eaddr(unsigned char *ea, unsigned char *str)
-  {
--    int i;
-+    unsigned i;
+ docs/man/xl.cfg.5.pod.in                  |  33 +++++
+ tools/libs/light/Makefile                 |   1 +
+ tools/libs/light/libxl_arm.c              | 100 +++++++++++++++
+ tools/libs/light/libxl_create.c           |   4 +
+ tools/libs/light/libxl_internal.h         |   6 +
+ tools/libs/light/libxl_types.idl          |  18 +++
+ tools/libs/light/libxl_types_internal.idl |   1 +
+ tools/libs/light/libxl_virtio.c           | 144 ++++++++++++++++++++++
+ tools/xl/xl_parse.c                       |  81 ++++++++++++
+ 9 files changed, 388 insertions(+)
+ create mode 100644 tools/libs/light/libxl_virtio.c
 
-      for (i = 0; i < 6; i++) {
-          unsigned char num;
-diff --git a/arch/mips/alchemy/devboards/bcsr.c b/arch/mips/alchemy/devboards/bcsr.c
-index 8df0ccdc9287..894916e95ff6 100644
---- a/arch/mips/alchemy/devboards/bcsr.c
-+++ b/arch/mips/alchemy/devboards/bcsr.c
-@@ -28,7 +28,7 @@ static int bcsr_csc_base;    /* linux-irq of first cascaded irq */
-
-  void __init bcsr_init(unsigned long bcsr1_phys, unsigned long bcsr2_phys)
-  {
--    int i;
-+    unsigned i;
-
-      bcsr1_phys = KSEG1ADDR(CPHYSADDR(bcsr1_phys));
-      bcsr2_phys = KSEG1ADDR(CPHYSADDR(bcsr2_phys));
-diff --git a/arch/mips/alchemy/devboards/platform.c b/arch/mips/alchemy/devboards/platform.c
-index 754bdd2ca630..a69d9d56f130 100644
---- a/arch/mips/alchemy/devboards/platform.c
-+++ b/arch/mips/alchemy/devboards/platform.c
-@@ -122,10 +122,10 @@ int __init db1x_register_pcmcia_socket(phys_addr_t pcmcia_attr_start,
-
-      i = 5;
-      if (stschg_irq) {
--        sr[i].name    = "stschg";
--        sr[i].flags    = IORESOURCE_IRQ;
--        sr[i].start = sr[i].end = stschg_irq;
--        i++;
-+        sr[5].name    = "stschg";
-+        sr[5].flags    = IORESOURCE_IRQ;
-+        sr[5].start = sr[5].end = stschg_irq;
-+        i = 6;
-      }
-      if (eject_irq) {
-          sr[i].name    = "eject";
-diff --git a/arch/mips/ar7/prom.c b/arch/mips/ar7/prom.c
-index 5810d3993fc6..dda3ed6934ac 100644
---- a/arch/mips/ar7/prom.c
-+++ b/arch/mips/ar7/prom.c
-@@ -144,7 +144,7 @@ static void __init add_adam2_var(char *name, char *value)
-
-  static int __init parse_psp_env(void *psp_env_base)
-  {
--    int i, n;
-+    unsigned i, n;
-      char *name, *value;
-      struct psp_env_chunk *chunks = (struct psp_env_chunk *)psp_env_data;
-
-@@ -171,7 +171,7 @@ static int __init parse_psp_env(void *psp_env_base)
-
-  static void __init ar7_init_env(struct env_var *env)
-  {
--    int i;
-+    unsigned i;
-      struct psbl_rec *psbl = (struct psbl_rec *)(KSEG1ADDR(0x14000300));
-      void *psp_env = (void *)KSEG1ADDR(psbl->env_base);
-
-diff --git a/arch/mips/boot/compressed/dbg.c b/arch/mips/boot/compressed/dbg.c
-index f6728a8fd1c3..5957f9030e0c 100644
---- a/arch/mips/boot/compressed/dbg.c
-+++ b/arch/mips/boot/compressed/dbg.c
-@@ -25,13 +25,9 @@ void puts(const char *s)
-
-  void puthex(unsigned long long val)
-  {
--
--    unsigned char buf[10];
--    int i;
--    for (i = 7; i >= 0; i--) {
--        buf[i] = "0123456789ABCDEF"[val & 0x0F];
--        val >>= 4;
--    }
--    buf[8] = '\0';
--    puts(buf);
-+    char buf[9];
-+    size_t i = sizeof(buf) - 1;
-+    for (buf[i] = '\0'; i; val >>= 4)
-+        buf[--i] = "0123456789ABCDEF"[val & 0xF];
-+    puts(buf);
-  }
-diff --git a/arch/mips/fw/arc/cmdline.c b/arch/mips/fw/arc/cmdline.c
-index 155c5e911723..5b05069fec8f 100644
---- a/arch/mips/fw/arc/cmdline.c
-+++ b/arch/mips/fw/arc/cmdline.c
-@@ -47,7 +47,7 @@ static char __init *move_firmware_args(int argc, LONG *argv, char *cp)
-
-      while (actr < argc) {
-          for(i = 0; i < ARRAY_SIZE(used_arc); i++) {
--            int len = strlen(used_arc[i][0]);
-+            size_t len = strlen(used_arc[i][0]);
-
-              if (!strncmp(prom_argv(actr), used_arc[i][0], len)) {
-              /* Ok, we want it. First append the replacement... */
-@@ -86,7 +86,7 @@ void __init prom_init_cmdline(int argc, LONG *argv)
-
-      while (actr < argc) {
-          for (i = 0; i < ARRAY_SIZE(ignored); i++) {
--            int len = strlen(ignored[i]);
-+            size_t len = strlen(ignored[i]);
-
-              if (!strncmp(prom_argv(actr), ignored[i], len))
-                  goto pic_cont;
-diff --git a/arch/xtensa/platforms/iss/console.c b/arch/xtensa/platforms/iss/console.c
-index 10b79d3c74e0..3159917ffd2f 100644
---- a/arch/xtensa/platforms/iss/console.c
-+++ b/arch/xtensa/platforms/iss/console.c
-@@ -64,7 +64,7 @@ static int rs_write(struct tty_struct * tty,
-  static void rs_poll(struct timer_list *unused)
-  {
-      struct tty_port *port = &serial_port;
--    int i = 0;
-+    size_t i = 0;
-      int rd = 1;
-      unsigned char c;
-
-@@ -192,7 +192,7 @@ late_initcall(rs_init);
-  static void iss_console_write(struct console *co, const char *s, unsigned count)
-  {
-      if (s && *s != 0) {
--        int len = strlen(s);
-+        size_t len = strlen(s);
-          simc_write(1, s, count < len ? count : len);
-      }
-  }
 -- 
-2.38.2
-
+2.31.1.272.g89b43f80a514
 
 
