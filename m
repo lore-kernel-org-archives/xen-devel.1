@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F68C10F1E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Dec 2022 23:58:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.463946.722288 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BED9CC10F1E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Dec 2022 23:58:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.463951.722320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5y7G-0002IA-Hi; Thu, 15 Dec 2022 23:58:18 +0000
+	id 1p5y7M-0003I5-NF; Thu, 15 Dec 2022 23:58:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 463946.722288; Thu, 15 Dec 2022 23:58:18 +0000
+Received: by outflank-mailman (output) from mailman id 463951.722320; Thu, 15 Dec 2022 23:58:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5y7G-0002Hz-EZ; Thu, 15 Dec 2022 23:58:18 +0000
-Received: by outflank-mailman (input) for mailman id 463946;
- Thu, 15 Dec 2022 23:58:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1p5y7M-0003Hw-Io; Thu, 15 Dec 2022 23:58:24 +0000
+Received: by outflank-mailman (input) for mailman id 463951;
+ Thu, 15 Dec 2022 23:58:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=t+b5=4N=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1p5y7E-0001B1-BD
- for xen-devel@lists.xenproject.org; Thu, 15 Dec 2022 23:58:16 +0000
+ id 1p5y7K-0001Aq-Qw
+ for xen-devel@lists.xenproject.org; Thu, 15 Dec 2022 23:58:22 +0000
 Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
- [64.147.123.21]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5618f8a4-7cd4-11ed-8fd3-01056ac49cbb;
- Fri, 16 Dec 2022 00:58:14 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id 8A4B1320090F;
- Thu, 15 Dec 2022 18:58:12 -0500 (EST)
+ [64.147.123.21]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5a6010d0-7cd4-11ed-91b6-6bf2151ebd3b;
+ Fri, 16 Dec 2022 00:58:22 +0100 (CET)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.west.internal (Postfix) with ESMTP id B06A9320090D;
+ Thu, 15 Dec 2022 18:58:19 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Thu, 15 Dec 2022 18:58:13 -0500
+ by compute6.internal (MEProxy); Thu, 15 Dec 2022 18:58:20 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 15 Dec 2022 18:58:11 -0500 (EST)
+ 15 Dec 2022 18:58:18 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5618f8a4-7cd4-11ed-8fd3-01056ac49cbb
+X-Inumbo-ID: 5a6010d0-7cd4-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1671148692; x=1671235092; bh=bgytBg0d5kZ/2u9oOHlePhKhWAPvt5pdQvy
-	Ccbzuwv0=; b=WpiHokujY3y5r6t7ReMt0DuApSb7xFY5jrLoJapkXx1ulrwgjIq
-	Bu3uYfkPKtMfgrgToEFXYI7+ygoOYhbRLnh3P3DzQ9772HJ0bfCL59m5fI+z6QHD
-	V+XDDO4NQD0Wxjdx6oUf+VunBjmi2BgC4rK840gRBArjoh44IdaRSmjw1SV5urn9
-	yF4i144vNAAXcGWurBLHCxazy7O3F+9KICEXzIwBoeLCP/RF3n/iBEVkCe0gVu/8
-	aRN5sPWfgQaryUJirn4eyYSMI/XjFxTOnBhoc52Bcm0nHzn7fBWT1qu6CvvDC2FB
-	evgPM1YtbOU49609ZWgaPRrD/hz4pi9t1/g==
+	1671148699; x=1671235099; bh=yqRlGUBA8627Pg2d0cE4nb/6aUtrRUpvVX5
+	2JKIQ1P8=; b=TAQpiv9oOYJyht0OIGpKZL+VCQG2hPFXvJuT+Oh/YiASQKximOY
+	oqty2/omdQ2yMJlBy9A2HTjJl9C1L0EH1t5xmWDo8AUXIgynCVbuZ1x8+Mfa9+t5
+	KDoms/af+Z0KIA0YG7J/VfEG/Mbu4NJR/F4icVU7KAAPy0hpX1po4YKLcZWmv3iT
+	PRj4cn4tfxNzX4Hto+hZpUISmXBbneu7CTQ6OZpgBFHuB9oUSHyspsI9rheoohnm
+	27edWLvBYRbc/YMAr0Rps882g67Nulcf1UjNxGwzMb8IuKlvRHgfXN8bRcAOUQdq
+	G+jBuIWruTQwoavxlL5G/hCrN5QcAxJyFUA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1671148692; x=1671235092; bh=bgytBg0d5kZ/2
-	u9oOHlePhKhWAPvt5pdQvyCcbzuwv0=; b=ibV04gGisSZe0hwXI1p7OrMGCePbn
-	25esBH4vpOmgsMBKKXJ2NYcz63QMOF5aIB97rUnJs2+I/iQqTGP0znhpRoo6YIan
-	uvC1KJ/eu1O4VYab4tsuKBXU5MMrI3mbs17RPA6eCySkIuWwCewAD2oo1uLiQCVg
-	roLgSgzMxS8Q+X67KGX9SfHRMhGMLG8vD1RDQTPEm1TrESYY8dw+JyDG2ZFPG+PT
-	D9nm8WkhKkElgYCyEG2eot8H6JInLQ6yI++65ssgSzVmYYbPqBoeREys+gS25nSE
-	4xwVf/IU+pBPfCBvdLVMiN6KUz1dIqK2utjO3ye0bOQ/7a3aplZpEtyCw==
-X-ME-Sender: <xms:k7SbY_oIwaFyGhNsmckl2LDMGaTiBDW5W_5hK1mLu3A5XDA0qYp8Xw>
-    <xme:k7SbY5qKr6dZKCQ2HbxFm7-CaOkMCH53lYOsZkOvWTGxI-CObjmNccz_MOpQEn03a
-    8T5d2TgbQ95aYs>
-X-ME-Received: <xmr:k7SbY8O3nGWsyeEo7W_R-q7uIxpl0VzrDZmXjHGYv4CBzOK-ndMidmunTPCYu1fqSX8EYaYz6B7z>
+	:x-sasl-enc; s=fm2; t=1671148699; x=1671235099; bh=yqRlGUBA8627P
+	g2d0cE4nb/6aUtrRUpvVX52JKIQ1P8=; b=xP7t8sq9ZJ+ItJvilk1ofkmiULvLg
+	0hrBeQH/m7WwckdgmARnlaXkXlytbLk1w3Ph4jp8CXh7E39dBOda0MvrjqRJwOn2
+	GtYT9KFs+/ewBpy7dz+KQvpe7UZsutUfbQUw8VQ0tQJ76Q+UIwiUuK6Ldnmt6cQV
+	Tym8fUlHz4WSZ4D5WAoylcXIplnNtpvmjxQNL0RVAC7NUw+xIHdB1qz0cuD1w8dc
+	HemSmnlU75G5KS0Eclgsfs9CAH1pgBdlZoXUF4CMewQ5OHNNieb7X4ZFZhjH1rVP
+	7VkgzCWYYplC5VEgTtMgG0Hh/+xgSqlud8LNqXPMUeqNRNg/IrG5Zfr1Q==
+X-ME-Sender: <xms:m7SbY4Jgq3TM4sy62u-FcrHYn9XG0uwWP_8lTFMBwlb8RhaeGPWXnA>
+    <xme:m7SbY4L_eqHF1NebVFvQSTtCkXmR9l9_sopvIuISVHsm20RhpK1Dsw6ps_rbvMmf-
+    0Sr9nxyllPPHco>
+X-ME-Received: <xmr:m7SbY4vuJYK0fpNhOHFQ6BqamwSq-QLFMgW9qWVwkf8XZaJAkv-5LGyxTsNml3uQ9AEaZRpIoL_s>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeeigddugecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
@@ -82,10 +82,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeeigddugecutefuodetggdote
     hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedunecurf
     grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
     rggsrdgtohhm
-X-ME-Proxy: <xmx:lLSbYy7cetd5VDlvBc2601AB_WW_XgTK_FRFddz1thHji_jHRy-D3w>
-    <xmx:lLSbY-7XzDu6Fc60hGa3iKnakoSLgW5UXk3vtkyg_FcBWO12CqrrKA>
-    <xmx:lLSbY6hghnRuVHM53_hvDIy3tom7laKxi1ejkjwgwEOCfRzNVvmc0w>
-    <xmx:lLSbYwsXRaL0_KUa-nrZ_wt8eG1zXA75I8pzXHsj_B2dNFgxKy2Zfw>
+X-ME-Proxy: <xmx:m7SbY1bffjWeNUCn14HTe_gddaPsq_Jk-LRCtZ3IopP0DdpuTlSvvw>
+    <xmx:m7SbY_YfOHeDwQTP36QmNpDrkSTsp2sLRw-7UMDDDbWRjtfB2aud7g>
+    <xmx:m7SbYxA8S3tuyVmFo1VoBozV191LAr1V--jn7w2KnPHLS4Z0HaCC0g>
+    <xmx:m7SbY9OPKcaxMIqCzg9xo3P9cCDbtm8BsdOJZWDQOsQzO1YhWVPysQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -99,422 +99,68 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Kevin Tian <kevin.tian@intel.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Tim Deegan <tim@xen.org>
-Subject: [PATCH v4 04/10] x86: Replace MTRR_* constants with X86_MT_* constants
-Date: Thu, 15 Dec 2022 18:57:46 -0500
-Message-Id: <5448b3dcea888ac66544e0dba2bc16dc6dc8e1fa.1671139149.git.demi@invisiblethingslab.com>
+Subject: [PATCH v4 07/10] x86: Derive XEN_MSR_PAT from its individual entries
+Date: Thu, 15 Dec 2022 18:57:49 -0500
+Message-Id: <2d6b2f875f023e9f57a93e31e82f8eb908a36d36.1671139149.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <cover.1671139149.git.demi@invisiblethingslab.com>
 References: <cover.1671139149.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This allows eliminating of the former, with the exception of
-MTRR_NUM_TYPES.  MTRR_NUM_TYPES is kept, as due to a quirk of the x86
-architecture X86_MT_UCM (7) is not valid in an MTRR.
+This avoids it being a magic constant that is difficult for humans to
+decode.  Use BUILD_BUG_ON to check that the old and new values are
+identical.
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes since v2:
+ xen/arch/x86/include/asm/processor.h | 9 ++++++++-
+ xen/arch/x86/mm.c                    | 9 +++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
-- Improve commit message
-- Do not replace MTRR_NUM_TYPES with X86_MT_UCM
-- State explicitly that MTRR_NUM_TYPES is kept
----
- xen/arch/x86/cpu/mtrr/generic.c         | 10 ++---
- xen/arch/x86/cpu/mtrr/main.c            | 26 ++++++-------
- xen/arch/x86/e820.c                     |  4 +-
- xen/arch/x86/hvm/mtrr.c                 | 30 +++++++--------
- xen/arch/x86/hvm/vmx/vmcs.c             |  2 +-
- xen/arch/x86/hvm/vmx/vmx.c              |  2 +-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  2 +-
- xen/arch/x86/include/asm/mtrr.h         | 10 +----
- xen/arch/x86/mm/p2m-ept.c               | 51 ++++++++++++-------------
- xen/arch/x86/mm/shadow/multi.c          |  2 +-
- 10 files changed, 66 insertions(+), 73 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
-index 47aaf76226e0a8a0712b7211ed339a4a032ab3f3..660ae26c2350b3436a471155fc0426699ba8ac1d 100644
---- a/xen/arch/x86/cpu/mtrr/generic.c
-+++ b/xen/arch/x86/cpu/mtrr/generic.c
-@@ -127,11 +127,11 @@ static const char *__init mtrr_attrib_to_str(mtrr_type x)
- {
- 	static const char __initconst strings[MTRR_NUM_TYPES][16] =
- 	{
--		[MTRR_TYPE_UNCACHABLE]     = "uncachable",
--		[MTRR_TYPE_WRCOMB]         = "write-combining",
--		[MTRR_TYPE_WRTHROUGH]      = "write-through",
--		[MTRR_TYPE_WRPROT]         = "write-protect",
--		[MTRR_TYPE_WRBACK]         = "write-back",
-+		[X86_MT_UC] = "uncachable",
-+		[X86_MT_WC] = "write-combining",
-+		[X86_MT_WT] = "write-through",
-+		[X86_MT_WP] = "write-protect",
-+		[X86_MT_WB] = "write-back",
- 	};
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index c3205ed9e10c1a57d23c5ecead66bebd82d87d06..ed71c9c975d56687eb126ec4ca7b271788e5f1d8 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -96,7 +96,14 @@
+  * Host IA32_CR_PAT value to cover all memory types.  This is not the default
+  * MSR_PAT value, and is an ABI with PV guests.
+  */
+-#define XEN_MSR_PAT _AC(0x050100070406, ULL)
++#define XEN_MSR_PAT ((_AC(X86_MT_WB,  ULL) << 0x00) | \
++                     (_AC(X86_MT_WT,  ULL) << 0x08) | \
++                     (_AC(X86_MT_UCM, ULL) << 0x10) | \
++                     (_AC(X86_MT_UC,  ULL) << 0x18) | \
++                     (_AC(X86_MT_WC,  ULL) << 0x20) | \
++                     (_AC(X86_MT_WP,  ULL) << 0x28) | \
++                     (_AC(X86_MT_UC,  ULL) << 0x30) | \
++                     (_AC(X86_MT_UC,  ULL) << 0x38))
  
- 	return (x < ARRAY_SIZE(strings) && strings[x][0]) ? strings[x] : "?";
-diff --git a/xen/arch/x86/cpu/mtrr/main.c b/xen/arch/x86/cpu/mtrr/main.c
-index 4e01c8d6f9df6562b94438f265d79a0a6fca8de6..2946003b84938f3b83c98b62dfaa3ace90822983 100644
---- a/xen/arch/x86/cpu/mtrr/main.c
-+++ b/xen/arch/x86/cpu/mtrr/main.c
-@@ -163,10 +163,10 @@ static void cf_check ipi_handler(void *info)
+ #ifndef __ASSEMBLY__
+ 
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 802073a01c5cf4dc3cf1d58d28ea4d4e9e8149c7..eeaa9760d2aa38b5efa2cbf9d99290e7c432ddfe 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -6357,6 +6357,15 @@ unsigned long get_upper_mfn_bound(void)
+     return min(max_mfn, 1UL << (paddr_bits - PAGE_SHIFT)) - 1;
  }
  
- static inline int types_compatible(mtrr_type type1, mtrr_type type2) {
--	return type1 == MTRR_TYPE_UNCACHABLE ||
--	       type2 == MTRR_TYPE_UNCACHABLE ||
--	       (type1 == MTRR_TYPE_WRTHROUGH && type2 == MTRR_TYPE_WRBACK) ||
--	       (type1 == MTRR_TYPE_WRBACK && type2 == MTRR_TYPE_WRTHROUGH);
-+	return type1 == X86_MT_UC ||
-+	       type2 == X86_MT_UC ||
-+	       (type1 == X86_MT_WT && type2 == X86_MT_WB) ||
-+	       (type1 == X86_MT_WB && type2 == X86_MT_WT);
- }
- 
- /**
-@@ -297,13 +297,13 @@ static void set_mtrr(unsigned int reg, unsigned long base,
-  *
-  *	The available types are
-  *
-- *	%MTRR_TYPE_UNCACHABLE	-	No caching
-+ *	%X86_MT_UC	-	No caching
-  *
-- *	%MTRR_TYPE_WRBACK	-	Write data back in bursts whenever
-+ *	%X86_MT_WB	-	Write data back in bursts whenever
-  *
-- *	%MTRR_TYPE_WRCOMB	-	Write data back soon but allow bursts
-+ *	%X86_MT_WC	-	Write data back soon but allow bursts
-  *
-- *	%MTRR_TYPE_WRTHROUGH	-	Cache reads but not writes
-+ *	%X86_MT_WT	-	Cache reads but not writes
-  *
-  *	BUGS: Needs a quiet flag for the cases where drivers do not mind
-  *	failures and do not wish system log messages to be sent.
-@@ -328,7 +328,7 @@ int mtrr_add_page(unsigned long base, unsigned long size,
- 	}
- 
- 	/*  If the type is WC, check that this processor supports it  */
--	if ((type == MTRR_TYPE_WRCOMB) && !have_wrcomb()) {
-+	if ((type == X86_MT_WC) && !have_wrcomb()) {
- 		printk(KERN_WARNING
- 		       "mtrr: your processor doesn't support write-combining\n");
- 		return -EOPNOTSUPP;
-@@ -442,13 +442,13 @@ static int mtrr_check(unsigned long base, unsigned long size)
-  *
-  *	The available types are
-  *
-- *	%MTRR_TYPE_UNCACHABLE	-	No caching
-+ *	%X86_MT_UC	-	No caching
-  *
-- *	%MTRR_TYPE_WRBACK	-	Write data back in bursts whenever
-+ *	%X86_MT_WB	-	Write data back in bursts whenever
-  *
-- *	%MTRR_TYPE_WRCOMB	-	Write data back soon but allow bursts
-+ *	%X86_MT_WC	-	Write data back soon but allow bursts
-  *
-- *	%MTRR_TYPE_WRTHROUGH	-	Cache reads but not writes
-+ *	%X86_MT_WT	-	Cache reads but not writes
-  *
-  *	BUGS: Needs a quiet flag for the cases where drivers do not mind
-  *	failures and do not wish system log messages to be sent.
-diff --git a/xen/arch/x86/e820.c b/xen/arch/x86/e820.c
-index b653a19c93afb98c2d64330384cb4fa7b4d2e1ec..c5911cf48dc4a281c03ddef35f23b19bc7af42eb 100644
---- a/xen/arch/x86/e820.c
-+++ b/xen/arch/x86/e820.c
-@@ -459,7 +459,7 @@ static uint64_t __init mtrr_top_of_ram(void)
-         printk(" MTRR cap: %"PRIx64" type: %"PRIx64"\n", mtrr_cap, mtrr_def);
- 
-     /* MTRRs enabled, and default memory type is not writeback? */
--    if ( !test_bit(11, &mtrr_def) || ((uint8_t)mtrr_def == MTRR_TYPE_WRBACK) )
-+    if ( !test_bit(11, &mtrr_def) || ((uint8_t)mtrr_def == X86_MT_WB) )
-         return 0;
- 
-     /*
-@@ -476,7 +476,7 @@ static uint64_t __init mtrr_top_of_ram(void)
-             printk(" MTRR[%d]: base %"PRIx64" mask %"PRIx64"\n",
-                    i, base, mask);
- 
--        if ( !test_bit(11, &mask) || ((uint8_t)base != MTRR_TYPE_WRBACK) )
-+        if ( !test_bit(11, &mask) || ((uint8_t)base != X86_MT_WB) )
-             continue;
-         base &= addr_mask;
-         mask &= addr_mask;
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index 242623f3c239ee18a44f882ecb3910a00c615825..093103f6c768cf64f880d1b20e1c14f5918c1250 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -39,11 +39,11 @@ static const uint8_t pat_entry_2_pte_flags[8] = {
- /* Effective mm type lookup table, according to MTRR and PAT. */
- static const uint8_t mm_type_tbl[MTRR_NUM_TYPES][X86_NUM_MT] = {
- #define RS MEMORY_NUM_TYPES
--#define UC MTRR_TYPE_UNCACHABLE
--#define WB MTRR_TYPE_WRBACK
--#define WC MTRR_TYPE_WRCOMB
--#define WP MTRR_TYPE_WRPROT
--#define WT MTRR_TYPE_WRTHROUGH
-+#define UC X86_MT_UC
-+#define WB X86_MT_WB
-+#define WC X86_MT_WC
-+#define WP X86_MT_WP
-+#define WT X86_MT_WT
- 
- /*          PAT(UC, WC, RS, RS, WT, WP, WB, UC-) */
- /* MTRR(UC) */ {UC, WC, RS, RS, UC, UC, UC, UC},
-@@ -202,7 +202,7 @@ int mtrr_get_type(const struct mtrr_state *m, paddr_t pa, unsigned int order)
-    unsigned int seg, num_var_ranges = MASK_EXTR(m->mtrr_cap, MTRRcap_VCNT);
- 
-    if ( unlikely(!m->enabled) )
--       return MTRR_TYPE_UNCACHABLE;
-+       return X86_MT_UC;
- 
-    pa &= mask;
-    if ( (pa < 0x100000) && m->fixed_enabled )
-@@ -277,13 +277,13 @@ int mtrr_get_type(const struct mtrr_state *m, paddr_t pa, unsigned int order)
-        return -1;
- 
-    /* Two or more matches, one being UC? */
--   if ( overlap_mtrr & (1 << MTRR_TYPE_UNCACHABLE) )
--       return MTRR_TYPE_UNCACHABLE;
-+   if ( overlap_mtrr & (1 << X86_MT_UC) )
-+       return X86_MT_UC;
- 
-    /* Two or more matches, all of them WT and WB? */
-    if ( overlap_mtrr ==
--        ((1 << MTRR_TYPE_WRTHROUGH) | (1 << MTRR_TYPE_WRBACK)) )
--       return MTRR_TYPE_WRTHROUGH;
-+        ((1 << X86_MT_WT) | (1 << X86_MT_WB)) )
-+       return X86_MT_WT;
- 
-    /* Behaviour is undefined, but return the last overlapped type. */
-    return overlap_mtrr_pos;
-@@ -381,11 +381,11 @@ static inline bool_t valid_mtrr_type(uint8_t type)
- {
-     switch ( type )
-     {
--    case MTRR_TYPE_UNCACHABLE:
--    case MTRR_TYPE_WRBACK:
--    case MTRR_TYPE_WRCOMB:
--    case MTRR_TYPE_WRPROT:
--    case MTRR_TYPE_WRTHROUGH:
-+    case X86_MT_UC:
-+    case X86_MT_WB:
-+    case X86_MT_WC:
-+    case X86_MT_WP:
-+    case X86_MT_WT:
-         return 1;
-     }
-     return 0;
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 84dbb88d33b76111833a37339186199f8bc03b5e..f0825216d722d978f221bb34a797d8de5505cb80 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -555,7 +555,7 @@ static int vmx_init_vmcs_config(bool bsp)
-     /* Require Write-Back (WB) memory type for VMCS accesses. */
-     opt = (vmx_basic_msr_high & (VMX_BASIC_MEMORY_TYPE_MASK >> 32)) /
-           ((VMX_BASIC_MEMORY_TYPE_MASK & -VMX_BASIC_MEMORY_TYPE_MASK) >> 32);
--    if ( opt != MTRR_TYPE_WRBACK )
-+    if ( opt != X86_MT_WB )
-     {
-         printk("VMX: CPU%d has unexpected VMCS access type %u\n",
-                smp_processor_id(), opt);
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index b543c3983d77ae807e8bd97330691a79d8d39bae..4ae7dd56c9981d32ac545d6e7b7c126b15f68969 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -434,7 +434,7 @@ static void cf_check domain_creation_finished(struct domain *d)
-         return;
- 
-     ASSERT(epte_get_entry_emt(d, gfn, apic_access_mfn, 0, &ipat,
--                              p2m_mmio_direct) == MTRR_TYPE_WRBACK);
-+                              p2m_mmio_direct) == X86_MT_WB);
-     ASSERT(ipat);
- 
-     if ( set_mmio_p2m_entry(d, gfn, apic_access_mfn, PAGE_ORDER_4K) )
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-index 75f9928abfad28e3895fe3dd4058b2b0a6e145c3..65e9e27b5437adff59abc46976f73a9f2cc587da 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -38,7 +38,7 @@ struct vmx_msr_entry {
-     u64 data;
- };
- 
--#define EPT_DEFAULT_MT      MTRR_TYPE_WRBACK
-+#define EPT_DEFAULT_MT      X86_MT_WB
- 
- struct ept_data {
-     union {
-diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtrr.h
-index 92fc930c692039b6c709d6a04f6553593f40aa55..e4f6ca6048334b2094a1836cc2f298453641232f 100644
---- a/xen/arch/x86/include/asm/mtrr.h
-+++ b/xen/arch/x86/include/asm/mtrr.h
-@@ -3,15 +3,9 @@
- 
- #include <xen/mm.h>
- 
--/* These are the region types. They match the architectural specification. */
--#define MTRR_TYPE_UNCACHABLE 0
--#define MTRR_TYPE_WRCOMB     1
--#define MTRR_TYPE_WRTHROUGH  4
--#define MTRR_TYPE_WRPROT     5
--#define MTRR_TYPE_WRBACK     6
--#define MTRR_NUM_TYPES       7
-+#define MTRR_NUM_TYPES       X86_MT_UCM
- #define MEMORY_NUM_TYPES     MTRR_NUM_TYPES
--#define NO_HARDCODE_MEM_TYPE    MTRR_NUM_TYPES
-+#define NO_HARDCODE_MEM_TYPE MTRR_NUM_TYPES
- 
- #define NORMAL_CACHE_MODE          0
- #define NO_FILL_CACHE_MODE         2
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index 126437285d8a9f222fca6a7b6ff4434b60637847..bb143c6c42c69db4e054b9156aad9a18ea0b2378 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -506,7 +506,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-                                                mfn_x(mfn) | ((1UL << order) - 1)) )
-         {
-             *ipat = true;
--            return MTRR_TYPE_UNCACHABLE;
-+            return X86_MT_UC;
-         }
-         /* Force invalid memory type so resolve_misconfig() will split it */
-         return -1;
-@@ -515,7 +515,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-     if ( !mfn_valid(mfn) )
-     {
-         *ipat = true;
--        return MTRR_TYPE_UNCACHABLE;
-+        return X86_MT_UC;
-     }
- 
-     /*
-@@ -526,7 +526,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-          !cache_flush_permitted(d) )
-     {
-         *ipat = true;
--        return MTRR_TYPE_WRBACK;
-+        return X86_MT_WB;
-     }
- 
-     for ( special_pgs = i = 0; i < (1ul << order); i++ )
-@@ -539,13 +539,13 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-             return -1;
- 
-         *ipat = true;
--        return MTRR_TYPE_WRBACK;
-+        return X86_MT_WB;
-     }
- 
-     switch ( type )
-     {
-     case p2m_mmio_direct:
--        return MTRR_TYPE_UNCACHABLE;
-+        return X86_MT_UC;
- 
-     case p2m_grant_map_ro:
-     case p2m_grant_map_rw:
-@@ -563,7 +563,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-          * diverges. See p2m_type_to_flags for the AMD attributes.
-          */
-         *ipat = true;
--        return MTRR_TYPE_WRBACK;
-+        return X86_MT_WB;
- 
-     default:
-         break;
-@@ -573,15 +573,14 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-     if ( gmtrr_mtype >= 0 )
-     {
-         *ipat = true;
--        return gmtrr_mtype != X86_MT_UCM ? gmtrr_mtype
--                                         : MTRR_TYPE_UNCACHABLE;
-+        return gmtrr_mtype != X86_MT_UCM ? gmtrr_mtype : X86_MT_UC;
-     }
-     if ( gmtrr_mtype == -EADDRNOTAVAIL )
-         return -1;
- 
-     gmtrr_mtype = v ? mtrr_get_type(&v->arch.hvm.mtrr,
-                                     gfn_x(gfn) << PAGE_SHIFT, order)
--                    : MTRR_TYPE_WRBACK;
-+                    : X86_MT_WB;
-     hmtrr_mtype = mtrr_get_type(&mtrr_state, mfn_x(mfn) << PAGE_SHIFT,
-                                 order);
-     if ( gmtrr_mtype < 0 || hmtrr_mtype < 0 )
-@@ -592,14 +591,14 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-         return hmtrr_mtype;
- 
-     /* If either type is UC, we have to go with that one. */
--    if ( gmtrr_mtype == MTRR_TYPE_UNCACHABLE ||
--         hmtrr_mtype == MTRR_TYPE_UNCACHABLE )
--        return MTRR_TYPE_UNCACHABLE;
-+    if ( gmtrr_mtype == X86_MT_UC ||
-+         hmtrr_mtype == X86_MT_UC )
-+        return X86_MT_UC;
- 
-     /* If either type is WB, we have to go with the other one. */
--    if ( gmtrr_mtype == MTRR_TYPE_WRBACK )
-+    if ( gmtrr_mtype == X86_MT_WB )
-         return hmtrr_mtype;
--    if ( hmtrr_mtype == MTRR_TYPE_WRBACK )
-+    if ( hmtrr_mtype == X86_MT_WB )
-         return gmtrr_mtype;
- 
-     /*
-@@ -610,13 +609,13 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
-      * permit this), while WT and WP require writes to go straight to memory
-      * (WC can buffer them).
-      */
--    if ( (gmtrr_mtype == MTRR_TYPE_WRTHROUGH &&
--          hmtrr_mtype == MTRR_TYPE_WRPROT) ||
--         (gmtrr_mtype == MTRR_TYPE_WRPROT &&
--          hmtrr_mtype == MTRR_TYPE_WRTHROUGH) )
--        return MTRR_TYPE_WRPROT;
-+    if ( (gmtrr_mtype == X86_MT_WT &&
-+          hmtrr_mtype == X86_MT_WP) ||
-+         (gmtrr_mtype == X86_MT_WP &&
-+          hmtrr_mtype == X86_MT_WT) )
-+        return X86_MT_WP;
- 
--    return MTRR_TYPE_UNCACHABLE;
-+    return X86_MT_UC;
- }
- 
++static void __init __maybe_unused build_assertions(void)
++{
++    /*
++     * If this trips, live migration of PV guests to and from this Xen is
++     * broken.
++     */
++    BUILD_BUG_ON(XEN_MSR_PAT != 0x050100070406ULL);
++}
++
  /*
-@@ -1426,12 +1425,12 @@ void ept_p2m_uninit(struct p2m_domain *p2m)
- static const char *memory_type_to_str(unsigned int x)
- {
-     static const char memory_types[8][3] = {
--        [MTRR_TYPE_UNCACHABLE]     = "UC",
--        [MTRR_TYPE_WRCOMB]         = "WC",
--        [MTRR_TYPE_WRTHROUGH]      = "WT",
--        [MTRR_TYPE_WRPROT]         = "WP",
--        [MTRR_TYPE_WRBACK]         = "WB",
--        [MTRR_NUM_TYPES]           = "??"
-+        [X86_MT_UC]      = "UC",
-+        [X86_MT_WC]      = "WC",
-+        [X86_MT_WT]      = "WT",
-+        [X86_MT_WP]      = "WP",
-+        [X86_MT_WB]      = "WB",
-+        [MTRR_NUM_TYPES] = "??",
-     };
- 
-     ASSERT(x < ARRAY_SIZE(memory_types));
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index b64bba70fc17906236872a017ad48ce91fd30803..f5f7ff021bd9e057c5b6f6329de7acb5ef05d58f 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -570,7 +570,7 @@ _sh_propagate(struct vcpu *v,
-                             gflags,
-                             gfn_to_paddr(target_gfn),
-                             mfn_to_maddr(target_mfn),
--                            MTRR_TYPE_UNCACHABLE);
-+                            X86_MT_UC);
-                 else if ( iommu_snoop )
-                     sflags |= pat_type_2_pte_flags(X86_MT_WB);
-                 else
+  * Local variables:
+  * mode: C
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 Invisible Things Lab
+
 
