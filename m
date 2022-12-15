@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50867C4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Dec 2022 23:45:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.463932.722234 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD1EC10F1E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Dec 2022 23:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.463942.722244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5xu8-00080K-0G; Thu, 15 Dec 2022 23:44:44 +0000
+	id 1p5y7A-0001BE-6a; Thu, 15 Dec 2022 23:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 463932.722234; Thu, 15 Dec 2022 23:44:43 +0000
+Received: by outflank-mailman (output) from mailman id 463942.722244; Thu, 15 Dec 2022 23:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p5xu7-00080D-Rq; Thu, 15 Dec 2022 23:44:43 +0000
-Received: by outflank-mailman (input) for mailman id 463932;
- Thu, 15 Dec 2022 23:44:42 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p5xu6-000803-Mk; Thu, 15 Dec 2022 23:44:42 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p5xu6-0001LH-KP; Thu, 15 Dec 2022 23:44:42 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1p5xu6-0000ta-AU; Thu, 15 Dec 2022 23:44:42 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1p5xu6-00066x-86; Thu, 15 Dec 2022 23:44:42 +0000
+	id 1p5y7A-0001B7-2q; Thu, 15 Dec 2022 23:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 463942;
+ Thu, 15 Dec 2022 23:58:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=t+b5=4N=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
+ id 1p5y78-0001Aq-3U
+ for xen-devel@lists.xenproject.org; Thu, 15 Dec 2022 23:58:10 +0000
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
+ [64.147.123.21]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 51fa24a7-7cd4-11ed-91b6-6bf2151ebd3b;
+ Fri, 16 Dec 2022 00:58:08 +0100 (CET)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.west.internal (Postfix) with ESMTP id 98039320092E;
+ Thu, 15 Dec 2022 18:58:05 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute3.internal (MEProxy); Thu, 15 Dec 2022 18:58:06 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 15 Dec 2022 18:58:04 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,95 +45,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=BdsooQbYcZ+kx8Gj0FhJsaiWaC9vW4V5UuKvfweoOAA=; b=18GdniqMZcfUrWHlHbHFt8t9LZ
-	PRvMb+/DM4/DVhNNmte7u6vdVv9PiiYqpZfWVw01U6rFmCLQh4uROKOsEA2JJYhXGfl+FsfE3uVd0
-	u59wz5BfjtThbdHd85q805h9j2kzLlSpGlzdMMjStTWVX8+F/vNsTHssCAIui7fAOFc8=;
+X-Inumbo-ID: 51fa24a7-7cd4-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1671148685; x=1671235085; bh=OqxRQgedI1lUNXYrN3Idtsly6m9/XwYk1xQ
+	JUvCAU3w=; b=qtCDg/XAZjbK1qyQ45A8qy4GEhWpquznmr08pS1Cp2enFSg4RKO
+	SFAeHMP64vRn2xENZCOQo7jLdZMNL0EC2FHtCLemMaRe6z5mEaXywVuQjMqVgj2e
+	rafRwrjRGaYuelAZHVVDZtGv3oDcJNO5P7CHL1DrpGATBcEhSRy9NQ0M0K9ViALi
+	4bHakB2twrGGLuPssKEslfB0cKMfMtzE6gvH3sergE+tADSlmJJNqlsheJTAURwp
+	ccstUAPOVJ5ctLcFwqKxv49PAw9i54K6CYTp2d3tpLZpxUXw/CmOAg+CXVI+gGD8
+	Al3BxQQk9savKMfU9tQ419NfDE7JyYuQoXQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1671148685; x=1671235085; bh=OqxRQgedI1lUN
+	XYrN3Idtsly6m9/XwYk1xQJUvCAU3w=; b=FxdYMSDdrz22AIMURH9AdJQMJsHs0
+	Q7QzNQmnJ34+EV2xp9xjQR38Y6HA/LES7lm4lripvfY4qbuF/lvYRuwmJM8UcJlz
+	BuM5dZvjGg4ILMx+aEixZ0UIqgEPZJl6A+ebUzEQS7ijNFSClQj8whA2PWTxJsEj
+	bokSNO2yedp1Bx2L6/LI/GQYl2UCfzjYMLQ9SqflI9ChUnTKLSQp06q2GMoJFTnI
+	5eiiHepeHrqv/EtRhv2e+BkXYAQPWS1Ng9AQrvXd4e/pmf2YU9m6b3gQczaRsOI6
+	7yM3gqQPNByYvtZnkNq11XocMCB6JMKkHTovnwkhPaSo6w9gsE/EXmx9g==
+X-ME-Sender: <xms:jbSbYxDLElVX7DBFrfZvk1kXzj5jm7bbYeKBO5OMWpbNmtYTh9xlOg>
+    <xme:jbSbY_jxJnYSmQkyK3_vzC0-PiVMWVmFv5loF2MihE9FD0MxCWt08KJd0vgqkJ1uw
+    pgIW8MefxSF39Y>
+X-ME-Received: <xmr:jbSbY8ku-mMFseuVfazoarWKnGpDGka8nJNbXVPldHc2OUdlgXrznDYU8aI20EbimhAFc8SVB41J>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeeigddugecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghmihcu
+    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefghefg
+    hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtnecurf
+    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
+    rggsrdgtohhm
+X-ME-Proxy: <xmx:jbSbY7ztvQsr0M3rhuXN4SGV8FO_q-CWkYY_NUgKlX7xVaTfWn93WQ>
+    <xmx:jbSbY2TlCBFGr97pvrDeZFwfOeMeQ5Y-5sJKpy9P9CMOSm4k6kf_4g>
+    <xmx:jbSbY-Yf-O_U07zhzO3-pOAwSzE0XjbtaGzmS-upq3NvF5BOnhEdDA>
+    <xmx:jbSbY5FbpiHytMAMSyp5xJThCmo2FwDZUUGB_QZ3fl4v6AptSG7WEA>
+Feedback-ID: iac594737:Fastmail
+From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-175292-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Tim Deegan <tim@xen.org>
+Subject: [PATCH v4 01/10] x86: Add memory type constants
+Date: Thu, 15 Dec 2022 18:57:43 -0500
+Message-Id: <6d1135e58cbc12f47d144252d6e80c3a6f76a5f7.1671139149.git.demi@invisiblethingslab.com>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <cover.1671139149.git.demi@invisiblethingslab.com>
+References: <cover.1671139149.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 175292: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=c8aaebccc8e8fb5d90080e664202b0011ce4d0bd
-X-Osstest-Versions-That:
-    xen=630dc3798e1d0d1b95f7be8b176563eb40e866e5
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 15 Dec 2022 23:44:42 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 175292 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/175292/
+These are not currently used, so there is no functional change.  Future
+patches will use these constants.
 
-Failures :-/ but no regressions.
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+Changes since v3:
+- Name the reserved values X86_MT_RSVD_2 and X86_MT_RSVD_3, to
+  match the architectural values of 0x02 and 0x03.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Changes since v2:
 
-version targeted for testing:
- xen                  c8aaebccc8e8fb5d90080e664202b0011ce4d0bd
-baseline version:
- xen                  630dc3798e1d0d1b95f7be8b176563eb40e866e5
+- Avoid using _AC where not required.
+- Define reserved memory types inline
+---
+ xen/arch/x86/include/asm/x86-defns.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-Last test of basis   175173  2022-12-13 15:00:27 Z    2 days
-Failing since        175199  2022-12-14 12:01:52 Z    1 days   16 attempts
-Testing same since   175292  2022-12-15 20:00:29 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-  Demi Marie Obenour <demi@invisiblethingslab.com>
-  Jan Beulich <jbeulich@suse.com>
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Julien Grall <julien@xen.org>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Stefano Stabellini <stefano.stabellini@amd.com>
-  Viresh Kumar <viresh.kumar@linaro.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   630dc3798e..c8aaebccc8  c8aaebccc8e8fb5d90080e664202b0011ce4d0bd -> smoke
+diff --git a/xen/arch/x86/include/asm/x86-defns.h b/xen/arch/x86/include/asm/x86-defns.h
+index 28628807cb9897cf6fa8e266f71f5f220813984d..42b5f382d438d21ac97b6438e8c810c7b964cf6d 100644
+--- a/xen/arch/x86/include/asm/x86-defns.h
++++ b/xen/arch/x86/include/asm/x86-defns.h
+@@ -153,4 +153,15 @@
+      (1u << X86_EXC_AC) | (1u << X86_EXC_CP) |                      \
+      (1u << X86_EXC_VC) | (1u << X86_EXC_SX))
+ 
++/* Memory types */
++#define X86_MT_UC     0x00 /* uncachable */
++#define X86_MT_WC     0x01 /* write-combined */
++#define X86_MT_RSVD_2 0x02 /* reserved */
++#define X86_MT_RSVD_3 0x03 /* reserved */
++#define X86_MT_WT     0x04 /* write-through */
++#define X86_MT_WP     0x05 /* write-protect */
++#define X86_MT_WB     0x06 /* write-back */
++#define X86_MT_UCM    0x07 /* UC- */
++#define X86_NUM_MT    0x08
++
+ #endif	/* __XEN_X86_DEFNS_H__ */
+-- 
+Sincerely,
+Demi Marie Obenour (she/her/hers)
+Invisible Things Lab
 
