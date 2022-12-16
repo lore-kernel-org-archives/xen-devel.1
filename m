@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C32D6C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 12:07:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464554.722976 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E9FBC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 12:17:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464566.723010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69Ug-0005n7-LH; Fri, 16 Dec 2022 12:07:14 +0000
+	id 1p69em-0007fz-Mf; Fri, 16 Dec 2022 12:17:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464554.722976; Fri, 16 Dec 2022 12:07:14 +0000
+Received: by outflank-mailman (output) from mailman id 464566.723010; Fri, 16 Dec 2022 12:17:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69Ug-0005n0-IX; Fri, 16 Dec 2022 12:07:14 +0000
-Received: by outflank-mailman (input) for mailman id 464554;
- Fri, 16 Dec 2022 12:07:13 +0000
+	id 1p69em-0007eX-Eq; Fri, 16 Dec 2022 12:17:40 +0000
+Received: by outflank-mailman (input) for mailman id 464566;
+ Fri, 16 Dec 2022 12:17:37 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69Uf-0005mr-NJ
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 12:07:13 +0000
+ (envelope-from <julien@xen.org>) id 1p69ej-0007LM-RB
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 12:17:37 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69Uf-0002gE-D3; Fri, 16 Dec 2022 12:07:13 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=[192.168.4.243]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ id 1p69ej-00034C-MR; Fri, 16 Dec 2022 12:17:37 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69Uf-0005qf-6s; Fri, 16 Dec 2022 12:07:13 +0000
+ id 1p69DL-0004sN-Rc; Fri, 16 Dec 2022 11:49:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,56 +43,121 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=jwhWCfplLIKLSijcEjeZDs3YoIntFJjexeGwJv84qOI=; b=3+klEv7L0FKzv+deyLp7sOH5pr
-	VjD9fyOwggkJGJaL1Z7BHD/Qz95A0+pOLuElclr3D5a22BSI0X3z9B9MBCeo5Z+IrfUhYujTpm+YG
-	0vFPkrj5VQGB8mpBFdfz300FeGM7dtTaT/fDrZ3JmedgZth6W3T/KOYt79R21ialzrec=;
-Message-ID: <a0d8e33d-027f-dc34-31cc-3a425a12a041@xen.org>
-Date: Fri, 16 Dec 2022 12:07:10 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.0
-Subject: Re: [PATCH 03/22] acpi: vmap pages in acpi_os_alloc_memory
-Content-Language: en-US
-To: xen-devel@lists.xenproject.org
-Cc: Hongyan Xia <hongyxia@amazon.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Julien Grall <jgrall@amazon.com>
-References: <20221216114853.8227-1-julien@xen.org>
- <20221216114853.8227-4-julien@xen.org>
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=C7J11PdwQAWvXzpUfaG/t5NjyOIfJIe9L9M+iZjsZ88=; b=SjoRoA2TbEg5ZKtGJx/cWUhwP1
+	OxQuQW4yTon8/KGxTK021Utu+jR4S/+tJec27zz7oMMUVsmUOlBHP+EbpLSALUsVqW9xIMpdHODH/
+	jPZfchwzSmpEg2nmk67/EWmD1nbmKRmZVNzgRYuyxdPzNfjjmabszsvWgf6eK4h8qmuc=;
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <20221216114853.8227-4-julien@xen.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: xen-devel@lists.xenproject.org
+Cc: julien@xen.org,
+	Hongyan Xia <hongyxia@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH 17/22] x86/setup: vmap heap nodes when they are outside the direct map
+Date: Fri, 16 Dec 2022 11:48:48 +0000
+Message-Id: <20221216114853.8227-18-julien@xen.org>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20221216114853.8227-1-julien@xen.org>
+References: <20221216114853.8227-1-julien@xen.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Hi,
+From: Hongyan Xia <hongyxia@amazon.com>
 
-On 16/12/2022 11:48, Julien Grall wrote:
-> From: Hongyan Xia <hongyxia@amazon.com>
-> 
-> Also, introduce a wrapper around vmap that maps a contiguous range for
-> boot allocations. Unfortunately, the new helper cannot be a static inline
-> because the dependences are a mess. We would need to re-include
-> asm/page.h (was removed in aa4b9d1ee653 "include: don't use asm/page.h
-> from common headers") and it doesn't look to be enough anymore
-> because bits from asm/cpufeature.h is used in the definition of PAGE_NX.
-> 
-> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> 
-> ----
+When we do not have a direct map, archs_mfn_in_direct_map() will always
+return false, thus init_node_heap() will allocate xenheap pages from an
+existing node for the metadata of a new node. This means that the
+metadata of a new node is in a different node, slowing down heap
+allocation.
 
-Sorry I sent this patch (and the others) with 4 dashes rather than 3. 
-This is my way to workaround an issue with the patchqueue tools I am 
-using (it would strip the text after the --- otherwise).
+Since we now have early vmap, vmap the metadata locally in the new node.
 
-I will try to remember to remove the extra dash in the next version.
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-Cheers,
+----
 
+    Changes from Hongyan's version:
+        * arch_mfn_in_direct_map() was renamed to
+          arch_mfns_in_direct_map()
+        * Use vmap_contig_pages() rather than __vmap(...).
+        * Add missing include (xen/vmap.h) so it compiles on Arm
+---
+ xen/common/page_alloc.c | 42 +++++++++++++++++++++++++++++++----------
+ 1 file changed, 32 insertions(+), 10 deletions(-)
+
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 0c4af5a71407..581c15d74dfb 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -136,6 +136,7 @@
+ #include <xen/sched.h>
+ #include <xen/softirq.h>
+ #include <xen/spinlock.h>
++#include <xen/vmap.h>
+ 
+ #include <asm/flushtlb.h>
+ #include <asm/numa.h>
+@@ -597,22 +598,43 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
+         needed = 0;
+     }
+     else if ( *use_tail && nr >= needed &&
+-              arch_mfns_in_directmap(mfn + nr - needed, needed) &&
+               (!xenheap_bits ||
+                !((mfn + nr - 1) >> (xenheap_bits - PAGE_SHIFT))) )
+     {
+-        _heap[node] = mfn_to_virt(mfn + nr - needed);
+-        avail[node] = mfn_to_virt(mfn + nr - 1) +
+-                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
+-    }
+-    else if ( nr >= needed &&
+-              arch_mfns_in_directmap(mfn, needed) &&
++        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
++        {
++            _heap[node] = mfn_to_virt(mfn + nr - needed);
++            avail[node] = mfn_to_virt(mfn + nr - 1) +
++                          PAGE_SIZE - sizeof(**avail) * NR_ZONES;
++        }
++        else
++        {
++            mfn_t needed_start = _mfn(mfn + nr - needed);
++
++            _heap[node] = vmap_contig_pages(needed_start, needed);
++            BUG_ON(!_heap[node]);
++            avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
++                          sizeof(**avail) * NR_ZONES;
++        }
++    } else if ( nr >= needed &&
+               (!xenheap_bits ||
+                !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
+     {
+-        _heap[node] = mfn_to_virt(mfn);
+-        avail[node] = mfn_to_virt(mfn + needed - 1) +
+-                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
++        if ( arch_mfns_in_directmap(mfn, needed) )
++        {
++            _heap[node] = mfn_to_virt(mfn);
++            avail[node] = mfn_to_virt(mfn + needed - 1) +
++                          PAGE_SIZE - sizeof(**avail) * NR_ZONES;
++        }
++        else
++        {
++            mfn_t needed_start = _mfn(mfn);
++
++            _heap[node] = vmap_contig_pages(needed_start, needed);
++            BUG_ON(!_heap[node]);
++            avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
++                          sizeof(**avail) * NR_ZONES;
++        }
+         *use_tail = false;
+     }
+     else if ( get_order_from_bytes(sizeof(**_heap)) ==
 -- 
-Julien Grall
+2.38.1
+
 
