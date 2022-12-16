@@ -4,37 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D188C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 18:17:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464874.723403 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D3EC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 18:25:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464885.723434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FGp-0005Gk-Rn; Fri, 16 Dec 2022 18:17:19 +0000
+	id 1p6FP3-0007Gz-Aw; Fri, 16 Dec 2022 18:25:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464874.723403; Fri, 16 Dec 2022 18:17:19 +0000
+Received: by outflank-mailman (output) from mailman id 464885.723434; Fri, 16 Dec 2022 18:25:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FGp-0005Gd-OU; Fri, 16 Dec 2022 18:17:19 +0000
-Received: by outflank-mailman (input) for mailman id 464874;
- Fri, 16 Dec 2022 18:17:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p6FP3-0007Ey-7O; Fri, 16 Dec 2022 18:25:49 +0000
+Received: by outflank-mailman (input) for mailman id 464885;
+ Fri, 16 Dec 2022 18:25:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=12d2=4O=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1p6FGo-0005GW-SA
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:17:18 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [2604:1380:4601:e00::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id df3e80ab-7d6d-11ed-91b6-6bf2151ebd3b;
- Fri, 16 Dec 2022 19:17:17 +0100 (CET)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 8E6CDB81DE3;
- Fri, 16 Dec 2022 18:17:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38D38C433D2;
- Fri, 16 Dec 2022 18:17:14 +0000 (UTC)
+ <SRS0=CdjE=4O=citrix.com=prvs=342889366=edvin.torok@srs-se1.protection.inumbo.net>)
+ id 1p6FP2-0006tv-7M
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:25:48 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0e10201a-7d6f-11ed-8fd4-01056ac49cbb;
+ Fri, 16 Dec 2022 19:25:46 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,156 +38,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: df3e80ab-7d6d-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1671214635;
-	bh=KPm82mVTCr1jpMCDY0Q3mmkPxn/rELDRoWOUjMIBLM8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=JkS9kCPW0+iyxVHqf3QNMXZ0eQl6ZMT1MBPtenTPsvbz+HLQVypazm2ziSZE+z5Jb
-	 RlMy3McjNi8LgvFj0asWriL5tlR//9vFsElQoMa9VIuAhObN4abYdKkrgee5088k0V
-	 phGYo8/JRjBm99PVVS6ujF2Nr7tRYw/KN52ZsHUejtQzaOVTTTrZGPZxFNsi2q4zRv
-	 jRe1DDcT8JQQz3E1f7B1Y3p9OrO5fZc7TYU4GksW64vqmh4TqNv9CuVPY6eYEYEIix
-	 lOigiSBiOWcqkQuLDFrcro4e+5xXQknZp7SFJJuxlkhbzfNkyEQetcgceB7M0MKJzr
-	 JplNfaQe878lg==
-Date: Fri, 16 Dec 2022 10:17:12 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Michal Orzel <michal.orzel@amd.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH] xen/arm: Allow to set grant table related limits for
- dom0less domUs
-In-Reply-To: <ac21d0f7-0441-8da8-6370-b9fd9ae159b7@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2212161017050.315094@ubuntu-linux-20-04-desktop>
-References: <20221214130833.543-1-michal.orzel@amd.com> <alpine.DEB.2.22.394.2212151335020.315094@ubuntu-linux-20-04-desktop> <ac21d0f7-0441-8da8-6370-b9fd9ae159b7@amd.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 0e10201a-7d6f-11ed-8fd4-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1671215146;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=JzedIushnEAoBB/aqG3wzgKioYrhoToXkaMaNhgUGsU=;
+  b=PhbKH+WU6J653zQepTGHCW8os6EfYriOwaSd3Nkz7UwawKu8CRVCVCoB
+   E4dWsHhGlfqrqXD3/fB8cDuKTsk6ntVXwAOGXiNwamdwVKrNFmPUxQX/t
+   y6BJDCpmNhF35wssHdD8jOtiP4TKEO/kfyNeJ+vQIT0AKpVKABtdX8HmQ
+   Q=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 89196122
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:MG65u6+5bRtEDdps0tCBDrUDjn6TJUtcMsCJ2f8bNWPcYEJGY0x3m
+ jcXXW6EOvzbY2XxfI0lb4iy8hlUv8LXndJnSldqrS88E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
+ 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKucYHsZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ire7kIx1BjOkGlA5AZnP6kV5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklMy
+ MZbFQsPZSu7rOmtz6zrT8dSuJkseZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGM0Yn1lQ/UfrSmM+limf+dXtEr0iSpoI84nTJzRw327/oWDbQUozbHJQLxxzCz
+ o7A12/QGgkXFPqv8gWq/WyroObKhH7Dd6tHQdVU8dY12QbOlwT/EiY+Sl+TsfS/zEmkVLp3J
+ 0UK9wI0oKM19UjtScPyNzWorXjBshMCVt54F+wh9BrL2qfS+xyeBGUPUnhGctNOiSMtbWV0j
+ BnTxYqvXGEx9u3OIZ6AyluKhTGPA2soFm0JXhcvRhAK/Ynmjr8N0x2aG76PD5WJptHyHDjxx
+ RWDoy4/m6gfgKY36kmrwbzUq2ny/8aUF2bZ8i2SBzv4tV0hOOZJcqTysTDmAeB8wJF1p7Vrl
+ FwNgICg4e8HFvlhfwTdEbxWTNlFCxtoWQAwYGKD/bF7r1xBGFb5J+i8BQ2Sw283WvvogRezP
+ CfuVfp5vfe/xkeCY65teJ6WAM8316XmHtmNfqmKMYMXOMkoJV/foH8GiausM4fFyRhErE3CE
+ c3DLZbE4YgyV8yLMwZat89CiOR2l0jSNEvYRIzhzgTP7FZtTCf9dFvxC3PXNrpRxPrd8G3oH
+ yN3a5PiJ+N3DLevPUE6MOc7cTg3EJTMLcyu+pEKKrPdfVoO9aNII6a5/I7NsrdNx8x9/tokN
+ FnkMqOE4DITXUH6FDg=
+IronPort-HdrOrdr: A9a23:XxpKRaq5cSRJb2ZpIQOLyakaV5oleYIsimQD101hICG9E/b1qy
+ nKpp8mPHDP5wr5NEtPpTnjAsm9qALnlKKdiLN5Vd3OYOCMghrKEGgN1/qG/xTQXwH46+5Bxe
+ NBXsFFebnN5IFB/KTH3DU=
+X-IronPort-AV: E=Sophos;i="5.96,249,1665460800"; 
+   d="scan'208";a="89196122"
+From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 09/11] tools/ocaml/libs/xb: check for unmapped ring before accessing it
+Date: Fri, 16 Dec 2022 18:25:18 +0000
+Message-ID: <828df3206de4f956498a46e41b2a3472fd9bac9e.1671214525.git.edwin.torok@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1671214525.git.edwin.torok@cloud.com>
+References: <cover.1671214525.git.edwin.torok@cloud.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, 16 Dec 2022, Michal Orzel wrote:
-> On 15/12/2022 22:38, Stefano Stabellini wrote:
-> > On Wed, 14 Dec 2022, Michal Orzel wrote:
-> >> At the moment, for dom0less domUs, we do not have a way to specify
-> >> per domain grant table related limits (unlike when using xl), namely
-> >> max version, max number of grant frames, max number of maptrack frames.
-> >> This means that such domains always use the values specified by the Xen
-> >> command line parameters or their default values if unspecified.
-> >>
-> >> In order to have more control over dom0less domUs, introduce the
-> >> following device-tree properties that can be set under domUs nodes:
-> >>  - max_grant_version to set the maximum grant table version the domain
-> >>    is allowed to use,
-> >>  - max_grant_frames to set the maximum number of grant frames the domain
-> >>    is allowed to have,
-> >>  - max_maptrack_frames to set the maximum number of grant maptrack frames
-> >>    the domain is allowed to have.
-> >>
-> >> Update documentation accordingly.
-> >>
-> >> Note that the sanity checks regarding the passed values are already
-> >> there in grant_table_init() resulting in panic in case of errors,
-> >> therefore no need to repeat them in create_domUs().
-> >>
-> >> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> >> ---
-> >>  docs/misc/arm/device-tree/booting.txt | 21 +++++++++++++++++++++
-> >>  xen/arch/arm/domain_build.c           | 11 ++++++++++-
-> >>  2 files changed, 31 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-> >> index 87eaa3e25491..3879340b5e0a 100644
-> >> --- a/docs/misc/arm/device-tree/booting.txt
-> >> +++ b/docs/misc/arm/device-tree/booting.txt
-> >> @@ -223,6 +223,27 @@ with the following properties:
-> >>      the default size of domain P2M pool, i.e. 1MB per guest vCPU plus 4KB
-> >>      per MB of guest RAM plus 512KB for guest extended regions.
-> >>
-> >> +- max_grant_version
-> >> +
-> >> +    Optional. A 32-bit integer specifying the maximum grant table version
-> >> +    the domain is allowed to use (valid values are 1 or 2). If this property
-> >> +    is missing, the value specified by Xen command line parameter gnttab=max-ver
-> >> +    (or its default value if unspecified, i.e. 1) is used.
-> >> +
-> >> +- max_grant_frames
-> >> +
-> >> +    Optional. A 32-bit integer specifying the maximum number of grant frames
-> >> +    the domain is allowed to have. If this property is missing, the value
-> >> +    specified by Xen command line parameter gnttab_max_frames (or its default
-> >> +    value if unspecified, i.e. 64) is used.
-> >> +
-> >> +- max_maptrack_frames
-> >> +
-> >> +    Optional. A 32-bit integer specifying the maximum number of grant maptrack
-> >> +    frames the domain is allowed to have. If this property is missing, the
-> >> +    value specified by Xen command line parameter gnttab_max_maptrack_frames
-> >> +    (or its default value if unspecified, i.e. 1024) is used.
-> >> +
-> >>  Under the "xen,domain" compatible node, one or more sub-nodes are present
-> >>  for the DomU kernel and ramdisk.
-> >>
-> >> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> >> index bef5e905a73c..29b2f3e1faa2 100644
-> >> --- a/xen/arch/arm/domain_build.c
-> >> +++ b/xen/arch/arm/domain_build.c
-> >> @@ -3871,7 +3871,7 @@ void __init create_domUs(void)
-> >>              .max_maptrack_frames = -1,
-> >>              .grant_opts = XEN_DOMCTL_GRANT_version(opt_gnttab_max_version),
-> >>          };
-> >> -        unsigned int flags = 0U;
-> >> +        unsigned int flags = 0U, val;
-> > 
-> > val should be uint32_t
-> ok
-> 
-> > 
-> > 
-> >>          if ( !dt_device_is_compatible(node, "xen,domain") )
-> >>              continue;
-> >> @@ -3940,6 +3940,15 @@ void __init create_domUs(void)
-> >>              d_cfg.cpupool_id = pool_id;
-> >>          }
-> >>
-> >> +        if ( dt_property_read_u32(node, "max_grant_version", &val) )
-> >> +            d_cfg.grant_opts = XEN_DOMCTL_GRANT_version(val);
-> >> +
-> >> +        if ( dt_property_read_u32(node, "max_grant_frames", &val) )
-> >> +            d_cfg.max_grant_frames = val;
-> >> +
-> >> +        if ( dt_property_read_u32(node, "max_maptrack_frames", &val) )
-> >> +            d_cfg.max_maptrack_frames = val;
-> > 
-> > We need to be careful here because max_grant_frames and
-> > max_maptrack_frames are defined as int32_t (signed):
-> > 
-> >     int32_t max_grant_frames;
-> >     int32_t max_maptrack_frames;
-> > 
-> > I think we should have a check to make sure we don't cause an overflow.
-> > For instance:
-> > 
-> > if ( val >= INT32_MAX ) {
-> >     error;
-> > }
-> > d_cfg.max_grant_frames = val;
-> 
-> Is following ok for you?
-> 
-> if ( dt_property_read_u32(node, "max_grant_frames", &val) )
-> {
->     if ( val > INT32_MAX )
->         panic("max_grant_frames (%"PRIu32") overflow\n", val);
->     d_cfg.max_grant_frames = val;
-> }
-> 
-> if ( dt_property_read_u32(node, "max_maptrack_frames", &val) )
-> {
->     if ( val > INT32_MAX )
->         panic("max_maptrack_frames (%"PRIu32") overflow\n", val);
->     d_cfg.max_maptrack_frames = val;
-> }
+Xenmmap can unmap the ring, check for this condition before accessing it
+to avoid crashing on an unmapped page.
 
-Yes, looks good
+Note that we cannot use the usual OCaml finalizers (like bigarray would) to
+perform the unmap, because that might keep a reference count to a foreign
+domain's memory that we want to release before destroying the domain.
+
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+Changes:
+* new patch
+---
+ tools/ocaml/libs/xb/xs_ring_stubs.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/tools/ocaml/libs/xb/xs_ring_stubs.c b/tools/ocaml/libs/xb/xs_ring_stubs.c
+index 1e472d0bbf..28c79ee139 100644
+--- a/tools/ocaml/libs/xb/xs_ring_stubs.c
++++ b/tools/ocaml/libs/xb/xs_ring_stubs.c
+@@ -35,7 +35,14 @@
+ #include <sys/mman.h>
+ #include "mmap_stubs.h"
+ 
+-#define GET_C_STRUCT(a) ((struct mmap_interface *) Data_abstract_val(a))
++static struct mmap_interface* check_addr(struct mmap_interface *interface)
++{
++    if (!interface->addr || interface->addr == MAP_FAILED)
++        caml_failwith("ring is not mapped");
++    return interface;
++}
++
++#define GET_C_STRUCT(a) check_addr((struct mmap_interface *) Data_abstract_val(a))
+ 
+ /*
+  * Bytes_val has been introduced by Ocaml 4.06.1. So define our own version
+@@ -167,8 +174,6 @@ CAMLprim value ml_interface_set_server_features(value interface, value v)
+ {
+     CAMLparam2(interface, v);
+     struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
+-    if (intf == (void*)MAP_FAILED)
+-        caml_failwith("Interface closed");
+ 
+     intf->server_features = Int_val(v);
+ 
+-- 
+2.34.1
+
 
