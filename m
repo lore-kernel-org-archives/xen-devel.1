@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2243C3DA78
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464428.722849 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71FEC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464434.722886 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D7-0004ND-DD; Fri, 16 Dec 2022 11:49:05 +0000
+	id 1p69DB-0005Ng-7O; Fri, 16 Dec 2022 11:49:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464428.722849; Fri, 16 Dec 2022 11:49:05 +0000
+Received: by outflank-mailman (output) from mailman id 464434.722886; Fri, 16 Dec 2022 11:49:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D7-0004Mg-6T; Fri, 16 Dec 2022 11:49:05 +0000
-Received: by outflank-mailman (input) for mailman id 464428;
- Fri, 16 Dec 2022 11:49:04 +0000
+	id 1p69DB-0005MW-1B; Fri, 16 Dec 2022 11:49:09 +0000
+Received: by outflank-mailman (input) for mailman id 464434;
+ Fri, 16 Dec 2022 11:49:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69D6-0004IQ-1V
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:04 +0000
+ (envelope-from <julien@xen.org>) id 1p69D9-0004u8-Fl
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D5-0002Dj-RC; Fri, 16 Dec 2022 11:49:03 +0000
+ id 1p69D9-0002Er-E8; Fri, 16 Dec 2022 11:49:07 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D5-0004sN-Je; Fri, 16 Dec 2022 11:49:03 +0000
+ id 1p69D9-0004sN-6k; Fri, 16 Dec 2022 11:49:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,69 +45,84 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ZLdocJInFCY/LVnGw1j5HFKUJpFld4Nm6D1TB3zFoFs=; b=kpUoDQTpOqZ2oeUr+0YruDlA5R
-	+9X+I0qjhfLukkQQwY8weaTAUl2Nl3fQGJ/YKVV/I3ZlZyl+1nxWkn3fLTr/G6T++f27r113LV0au
-	nZHlDrqQQUXHfrnkzyPOGxy/WpLSpu5Qh+pYRcl7gixXkluuHZ4DDeZz4ybaJ9tFWa/M=;
+	bh=vmtNA9XdH0srZ9asaGnjFiuLx3yBtd0BVtqXIukQgjM=; b=SUa3z5qrtpvwTyqxU4268rECt/
+	19/D/bc/kCdXMUWX4leTRpnP8ZIRVdrg+c0wyUEWzO4e01rpd3ocb58eTi0CIcxumiM/fF0YWiub2
+	bRuT7xnU51KnTe1WDHfThSfMNJSBM/D9tJmjWmL+WcPOSEKJq2t4N1gUDMIuuMFD2oA0=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Hongyan Xia <hongyxia@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wei.liu2@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
+	Wei Wang <wawei@amazon.de>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 04/22] xen/numa: vmap the pages for memnodemap
-Date: Fri, 16 Dec 2022 11:48:35 +0000
-Message-Id: <20221216114853.8227-5-julien@xen.org>
+Subject: [PATCH 07/22] x86/pv: domheap pages should be mapped while relocating initrd
+Date: Fri, 16 Dec 2022 11:48:38 +0000
+Message-Id: <20221216114853.8227-8-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216114853.8227-1-julien@xen.org>
 References: <20221216114853.8227-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Hongyan Xia <hongyxia@amazon.com>
+From: Wei Liu <wei.liu2@citrix.com>
 
-This avoids the assumption that there is a direct map and boot pages
-fall inside the direct map.
+Xen shouldn't use domheap page as if they were xenheap pages. Map and
+unmap pages accordingly.
 
-Clean up the variables so that mfn actually stores a type-safe mfn.
-
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Wei Wang <wawei@amazon.de>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ----
 
-    Changes compare to Hongyan's version:
-        * The function modified was moved to common code. So rebase it
-        * vmap_boot_pages() was renamed to vmap_contig_pages()
+    Changes since Hongyan's version:
+        * Add missing newline after the variable declaration
 ---
- xen/common/numa.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ xen/arch/x86/pv/dom0_build.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/xen/common/numa.c b/xen/common/numa.c
-index 4948b21fbe66..2040b3d974e5 100644
---- a/xen/common/numa.c
-+++ b/xen/common/numa.c
-@@ -424,13 +424,13 @@ static int __init populate_memnodemap(const struct node *nodes,
- static int __init allocate_cachealigned_memnodemap(void)
- {
-     unsigned long size = PFN_UP(memnodemapsize * sizeof(*memnodemap));
--    unsigned long mfn = mfn_x(alloc_boot_pages(size, 1));
-+    mfn_t mfn = alloc_boot_pages(size, 1);
- 
--    memnodemap = mfn_to_virt(mfn);
--    mfn <<= PAGE_SHIFT;
-+    memnodemap = vmap_contig_pages(mfn, size);
-+    BUG_ON(!memnodemap);
-     size <<= PAGE_SHIFT;
-     printk(KERN_DEBUG "NUMA: Allocated memnodemap from %lx - %lx\n",
--           mfn, mfn + size);
-+           mfn_to_maddr(mfn), mfn_to_maddr(mfn) + size);
-     memnodemapsize = size / sizeof(*memnodemap);
- 
-     return 0;
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index a62f0fa2ef29..c837b2d96f89 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -611,18 +611,32 @@ int __init dom0_construct_pv(struct domain *d,
+         if ( d->arch.physaddr_bitsize &&
+              ((mfn + count - 1) >> (d->arch.physaddr_bitsize - PAGE_SHIFT)) )
+         {
++            unsigned long nr_pages;
++            unsigned long len = initrd_len;
++
+             order = get_order_from_pages(count);
+             page = alloc_domheap_pages(d, order, MEMF_no_scrub);
+             if ( !page )
+                 panic("Not enough RAM for domain 0 initrd\n");
++
++            nr_pages = 1UL << order;
+             for ( count = -count; order--; )
+                 if ( count & (1UL << order) )
+                 {
+                     free_domheap_pages(page, order);
+                     page += 1UL << order;
++                    nr_pages -= 1UL << order;
+                 }
+-            memcpy(page_to_virt(page), mfn_to_virt(initrd->mod_start),
+-                   initrd_len);
++
++            for ( i = 0; i < nr_pages; i++, len -= PAGE_SIZE )
++            {
++                void *p = __map_domain_page(page + i);
++
++                memcpy(p, mfn_to_virt(initrd_mfn + i),
++                       min(len, (unsigned long)PAGE_SIZE));
++                unmap_domain_page(p);
++            }
++
+             mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
+             init_domheap_pages(mpt_alloc,
+                                mpt_alloc + PAGE_ALIGN(initrd_len));
 -- 
 2.38.1
 
