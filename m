@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3919FC001B2
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 18:26:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464889.723483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B578C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 18:35:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464940.723508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FPC-0000Ca-Jp; Fri, 16 Dec 2022 18:25:58 +0000
+	id 1p6FY9-0003oT-3i; Fri, 16 Dec 2022 18:35:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464889.723483; Fri, 16 Dec 2022 18:25:58 +0000
+Received: by outflank-mailman (output) from mailman id 464940.723508; Fri, 16 Dec 2022 18:35:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FPC-0000Bm-B1; Fri, 16 Dec 2022 18:25:58 +0000
-Received: by outflank-mailman (input) for mailman id 464889;
- Fri, 16 Dec 2022 18:25:56 +0000
+	id 1p6FY8-0003oC-Vu; Fri, 16 Dec 2022 18:35:12 +0000
+Received: by outflank-mailman (input) for mailman id 464940;
+ Fri, 16 Dec 2022 18:35:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CdjE=4O=citrix.com=prvs=342889366=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1p6FPA-0008JE-Go
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:25:56 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14374b3e-7d6f-11ed-91b6-6bf2151ebd3b;
- Fri, 16 Dec 2022 19:25:55 +0100 (CET)
+ id 1p6FPY-0008JE-DX
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:26:20 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1f08731b-7d6f-11ed-91b6-6bf2151ebd3b;
+ Fri, 16 Dec 2022 19:26:13 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14374b3e-7d6f-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 1f08731b-7d6f-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1671215155;
+  d=citrix.com; s=securemail; t=1671215173;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=671yWeRPfk0fUsd0ZZw8sPwYTi3Pa9dmLi7mGVUNfHg=;
-  b=WyVKpnfLT6VZcv0O1X5oiswfAYtjVFq+qNShSsIi2P1eergdTIjF9mq2
-   w0BG/pfYZrTrWAGOIL3OGb1LB0UIgfhoxUQiMo2o6NXmHZViu45nbRVhY
-   3kUR6Xf9ty2vjkIY7wiCXg1YmqBCgGyafo2l+tnV+pUqs6dzsAnv98R+J
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=Sp2/iZsmo7dZyO9wo4dG7BuWjwTi9pk8mLkgWUOPpfw=;
+  b=QJBy3CIIuAUMrPqTXpocjQpzpCxblVNeTL7yzNgoUOoec8F+NEOOuiKe
+   Xkb4elczB8XBjWT/7fwAnGwZht8ktkv79oeSijJwDPeqhZXlfJdURSGX2
+   Zvm2HfTBL0bXbU089dQpvlwr1T7nIATtCLtMVGq9cY6P7zZKgTheLaKV2
+   s=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 91288387
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 87767484
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:L181mqLfMTS7DoSlFE+R35UlxSXFcZb7ZxGr2PjKsXjdYENS12ZRz
- zcbWj2Pb/aDM2D0c91yOY+y8E0C7ZPcn4RiTgZlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPdwP9TlK6q4mlB5AVgPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5pIEMe6
- K0ALAwXRRHend+6z5G2TdtF05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpPE+ojx5nYz/7DLozkPmpgD/jdCdfq3qepLYt4niVxwt0uFToGIuMIIzaHpUK9qqej
- kec7k3rAxtDDdOwl2Ci3G+Pu/bkxAquDer+E5Xnr6U30TV/3Fc7GBAQEFe2v/S9okq/QM5Eb
- VwZ/DI0qqo//1DtScPyNzW0qWCJlgQRUN1RF6s98g7l4rXQyxaUAC4DVDEpVTA9nJZoH3pwj
- AbPxo63Q2w02FGIdZ6D3qm1j2OvaDAREXUpZHIecAcKwNTkkqhm23ojUe1fOKKyi9T0HxT5z
- DaLsDUyit0vsCIb60mo1QuZ2mzx//AlWiZwv1yKBTz9smuVcab/P+SVBU7nAeGsxWpzZn2Ip
- zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3Y1R/HNFBz3oRZPmLy8BxkgTHqFyu5eJVfUj
- Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27CamNNIsXM8gpKFHvEMRSiam4hjCFraTRuftnZ
- cfznTiEUx729piLPBLpHrxAgNfHNwg1xH/JRICT8vhU+eP2WZJhcp9caAHmRrlgvMu5TPD9r
- 4432z2il08OD4UTo0D/reYuELz9BSRjVM2r95EJKb7rz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
- p1hcie0EGbCuEA=
-IronPort-HdrOrdr: A9a23:cE5k8amlqTf1MuUs0MvLeLX20dDpDfLL3DAbv31ZSRFFG/Fwwf
- re+sjztCWatN91YhsdcL+7VJVoLUmsjqKdpLNhRYtKPzOJhILLFvAE0WK4+UyDJ8SWzIc06U
- 4jSdkcNDSXNykesS+Q2njALz9P+rS62ZHtrfrai09wQR1nS4wI1XYCNi+rVmVqQQFdH5owE9
- 657spD4x6tY24eYMj+JnRtZYn+juyOvI/iaQQdBxYhrC2HjTbt1aXzFAKR1AofVTQK4bpKyw
- j4ewKQ3NTGjxjq8HTh61M=
+IronPort-Data: A9a23:eeUt1qzEodpZS+qJ4P16t+c+xirEfRIJ4+MujC+fZmUNrF6WrkUBn
+ zMeC2uPO/+IZjb8LY90PI/j8U4GvZPTyt9lHlE+rSAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTbaeYUidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw//F+U0HUMja4mtC5AVkPK4T5jcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KUEfy
+ t0UNBQpVCy8xO+pmZL8ba42htt2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKQOHWjOX9OYH46tOqkmHj5NSFfslWWjaE2/3LS3Ep6172F3N/9KoPVG5oJzhrwS
+ mTuwmPhKxcKbdyj9nmv6k323sPl3n3acddHfFG/3qEz2wDCroAJMzUaXEW2ieO0gUm/X5RYM
+ UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL8/AKxFmUCCDlbZ7QbWNQeHGJwk
+ AXTxpWwWGIp4Ob9pW+hGqm8jWKNGCQJCUs4WRBHQBRcw57E59szkUeaJjp8K5KdgtrwEDD25
+ jmFqikimrke5fI2O7WHEUPv2Gz1+MWQJuIhzkCOBz/+sFslDGKwT9bwgWU3+8qsO2pworOpm
+ HEf0/aT4+kVZX1mvHzcGb5ddF1FChvsDdE9vbKNN8N5n9hO0yT5FWy13N2ZDBkBDyr8UWW1C
+ HI/QCsIjHOpAFOkbLVsf6W6ANkwwK7rGLzND66LN4MUM8EgJFfbokmCgHJ8OEi0wCARfVwXY
+ 8/HIa5A815EYUiY8NZGb7hEiuJ6rszP7WjSWYr633yaPUm2PRaopUM+GALWNIgRtfrUyDg5B
+ v4Db6NmPT0DCryhCsQWmKZPRW03wY8TWcin9pELK7DccmKL2ggJUpfs/F/oQKQ994w9qwsC1
+ irnMqOE4DITXUH6FDg=
+IronPort-HdrOrdr: A9a23:ivo+k6h5tFRsNc8qa/o4nKGTHXBQXtQji2hC6mlwRA09TyX4ra
+ yTdZEgviMc5wx/ZJhNo7690cu7IU80hKQV3WB5B97LNmTbUQCTXeJfBOXZsljdMhy72ulB1b
+ pxN4hSYeeAaWSSVPyKgjWFLw==
 X-IronPort-AV: E=Sophos;i="5.96,249,1665460800"; 
-   d="scan'208";a="91288387"
+   d="scan'208";a="87767484"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, David Scott
-	<dave@recoil.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Christian Lindig <christian.lindig@citrix.com>
-Subject: [PATCH v4 03/11] CODING_STYLE(tools/ocaml): add 'make format' and remove tabs
-Date: Fri, 16 Dec 2022 18:25:12 +0000
-Message-ID: <81d621cea5975fdd9698992b968dcd7528c637af.1671214525.git.edwin.torok@cloud.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Christian
+ Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
+	=?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>
+Subject: [PATCH v4 07/11] fixup! tools/ocaml/xenctrl: OCaml 5 support, fix use-after-free
+Date: Fri, 16 Dec 2022 18:25:16 +0000
+Message-ID: <c0fab282ed4decc3375ef2abb8fe1e3591fb5508.1671214525.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1671214525.git.edwin.torok@cloud.com>
 References: <cover.1671214525.git.edwin.torok@cloud.com>
@@ -93,61 +93,32 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-See CODING_STYLE: Xen uses spaces, not tabs.
+Fix unused value warning.
 
-* OCaml code:
+Fixes: 8b3c06a3e5 ("tools/ocaml/xenctrl: OCaml 5 support, fix use-after-free")
+Signed-off-by: Edwin Török <edwin.torok@cloud.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Using `ocp-indent` for now to just make minimal modifications in
-tabs vs spaces and get the right indentation.
-We can introduce `ocamlformat` later.
-
-* C stubs:
-
-just replace tabs with spaces now, using `indent` or `clang-format`
-would change code too much for 4.17.
-
-This avoids perpetuating a formatting style that is inconsistent with
-the rest of Xen, and that makes preparing and submitting patches more
-difficult (OCaml indentation tools usually only support spaces, not tabs).
-
-No functional change.
-
-Signed-off-by: Edwin Török <edvin.torok@citrix.com>
-
---
-Reason for inclusion:
-- avoid perpetuating a different coding style (I thought tabs were
-  mandated by Xen, and was about to fix up my editor config to match
-  when I realized Xen already mandates the use of spaces)
-- should make submitting patches for OCaml easier (OCaml indentation
-  tools know only about spaces, so I either can't use them, or have to
-  manually adjust indentation every time I submit a patch)
-- it can be verified that the only change here is the Makefile change
-  for the new rule, 'git log -p -1 -w' should be otherwise empty
-
-Changes since v3:
-- this didn't make it into 4.17.0, we'll reconsider for 4.17.1, for now
-  apply just to master which is open again
-- separate introducing the rule from actual reformatting
-
-Cc: Christian Lindig <christian.lindig@citrix.com>
 ---
- tools/ocaml/Makefile | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes:
+* new patch
+---
+ tools/ocaml/libs/xc/xenctrl.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/ocaml/Makefile b/tools/ocaml/Makefile
-index a7c04b6546..274ba15d75 100644
---- a/tools/ocaml/Makefile
-+++ b/tools/ocaml/Makefile
-@@ -34,3 +34,8 @@ build-tools-oxenstored:
- 	$(MAKE) -s -C libs/xb
- 	$(MAKE) -s -C libs/xc
- 	$(MAKE) -C xenstored
-+
-+.PHONY: format
-+format:
-+	git ls-files '*.ml' '*.mli' | xargs -n1 ocp-indent -i
-+	git ls-files '*.c' '*.h' | xargs -n1 sed -ie 's/\t/    /g'
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index b02be07429..a59dee0938 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -182,7 +182,7 @@ let get_handle () = !handle
+ 
+ let close_handle () =
+   match !handle with
+-  | Some h -> handle := None
++  | Some _ -> handle := None
+   | None -> ()
+ 
+ let with_intf f =
 -- 
 2.34.1
 
