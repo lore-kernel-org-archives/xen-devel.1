@@ -4,33 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F15C4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 12:17:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464573.723071 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E53C001B2
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 12:21:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464619.723133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69er-0000bJ-7S; Fri, 16 Dec 2022 12:17:45 +0000
+	id 1p69hv-0007DD-7B; Fri, 16 Dec 2022 12:20:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464573.723071; Fri, 16 Dec 2022 12:17:44 +0000
+Received: by outflank-mailman (output) from mailman id 464619.723133; Fri, 16 Dec 2022 12:20:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69eq-0000Xg-GC; Fri, 16 Dec 2022 12:17:44 +0000
-Received: by outflank-mailman (input) for mailman id 464573;
- Fri, 16 Dec 2022 12:17:38 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69ek-0007Lv-2J
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 12:17:38 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1p69ej-00034i-Ua; Fri, 16 Dec 2022 12:17:37 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1p69DO-0004sN-VG; Fri, 16 Dec 2022 11:49:23 +0000
+	id 1p69hv-0007D6-4P; Fri, 16 Dec 2022 12:20:55 +0000
+Received: by outflank-mailman (input) for mailman id 464619;
+ Fri, 16 Dec 2022 12:20:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=PP9E=4O=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1p69ht-0007Cc-TT
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 12:20:54 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2069.outbound.protection.outlook.com [40.107.94.69])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 141c5ed4-7d3c-11ed-8fd4-01056ac49cbb;
+ Fri, 16 Dec 2022 13:20:52 +0100 (CET)
+Received: from MW4PR03CA0339.namprd03.prod.outlook.com (2603:10b6:303:dc::14)
+ by CH3PR12MB7668.namprd12.prod.outlook.com (2603:10b6:610:14d::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.19; Fri, 16 Dec
+ 2022 12:20:48 +0000
+Received: from CO1NAM11FT033.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:dc:cafe::39) by MW4PR03CA0339.outlook.office365.com
+ (2603:10b6:303:dc::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5924.12 via Frontend
+ Transport; Fri, 16 Dec 2022 12:20:48 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1NAM11FT033.mail.protection.outlook.com (10.13.174.247) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5924.15 via Frontend Transport; Fri, 16 Dec 2022 12:20:48 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 16 Dec
+ 2022 06:20:47 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 16 Dec
+ 2022 04:20:47 -0800
+Received: from [10.71.193.33] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Fri, 16 Dec 2022 06:20:46 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,270 +64,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=4AXKHSNyisU3EQXQfz0D6DbkivTeO0uHrc0fyYfL7V4=; b=lDKyHO+sTxwjLuN3Q6Kc8Xa7S7
-	+YPdzM8WDKXk8C46CCwsBPRoKnDPB+zal//UAvoNsug6nRAoEtycDPqEveWdDVnBcXVlfn9kBBVaq
-	LopHfeGX2eiI/VGGvQLhRv/FR88fmuPeOdGDkvE4xwpOm64d/RridrcBKcMLZWHKp6iE=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Julien Grall <jgrall@amazon.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 20/22] xen/arm64: mm: Use per-pCPU page-tables
-Date: Fri, 16 Dec 2022 11:48:51 +0000
-Message-Id: <20221216114853.8227-21-julien@xen.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221216114853.8227-1-julien@xen.org>
-References: <20221216114853.8227-1-julien@xen.org>
+X-Inumbo-ID: 141c5ed4-7d3c-11ed-8fd4-01056ac49cbb
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PX9OiHWhYPXAegAogcfioGxteoXPH+Gv7Pwt3f7AfI9YEQN2bvL8iG82mjEhHvkekQmdVK3BjBXewGZ5EXWmTISbqJnU1LcNeeetmVsnpm3qpdXV1eSKJKLuqK0kx3Uc+S3rXfgI3e/dfCSAl/7/2YVnyRd3ARWASQm7erAYLXC80kkKLKeQuY+sfkzE5lgg2RDF+oi/9XaYh0362OGzrDuPkymjH7wLT27lRbUtJDQs+0Ykl8k8VeP/RqIgqaA1OyVY575rvERPpQU/XWpridK5DqZzeiumXhcntG8BhbLF34heJ6iUsXFzfTROMhFsQYHR9Yj2PwqHN8x/cd46HQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OQiDSFj7omp6bhjE/8x7XebSk9Oz6RiFXDJuXKJCTB0=;
+ b=ELWvJjmUSzxyTad+3NQBZOyYWi1SG3/f7YhUJMHgMfXExC4/7tzVy/gm0nOjBXQpu6kzyEqEOgDaBUziJxy2QfWzcRPLOimbrVwOnv2C4LS9g8+bca2UQCvQI4CbrOeSInMWDPR7Gc5S2/QRBuziosJuL9Ua1X2wX0Oa+YkpR/mllRuJwi8gOIJ8AAjAwYsyDV/rbfxeJbmq3oW/Ev4Pc2Fp6X40OiQ+V86PvIKzVqtLwvBvb8y4x1rIxvdKsDWam5C0PgrqKC57hHVaHWXD/kNlv+xLmKpaTjBB6CbAIDsg47AOVakijbjhQrMscIghQQJCJokWDORTl7BleF2AAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OQiDSFj7omp6bhjE/8x7XebSk9Oz6RiFXDJuXKJCTB0=;
+ b=uNxfcdN469L0KRGv+klrf5tZ+NpITa97lssXsdh1S6FGGSL0TqCT84ZnVOHL0pLkxbXsAAdDEtEbIjK24pr8nGThJUptjOx4T/X8wPwIRWlojrm8pQ3P7pJFPG8qpKVbhbf+3Mr1u1HVnGRiWVnT043OB5oIn2vQkLQY/m8UyAA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <95d7eed5-e528-b83e-9129-d36de4cc863f@amd.com>
+Date: Fri, 16 Dec 2022 13:20:45 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH 2/2] automation: Add test jobs to run XTF hypercall
+ xen_version test
+Content-Language: en-US
+From: Michal Orzel <michal.orzel@amd.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+CC: <xen-devel@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
+References: <20221215152538.10266-1-michal.orzel@amd.com>
+ <20221215152538.10266-3-michal.orzel@amd.com>
+ <alpine.DEB.2.22.394.2212151307390.315094@ubuntu-linux-20-04-desktop>
+ <73d3dd85-2801-c0a4-7314-84738542eeeb@amd.com>
+In-Reply-To: <73d3dd85-2801-c0a4-7314-84738542eeeb@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT033:EE_|CH3PR12MB7668:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e1021e2-f584-42ba-2fc1-08dadf5ff6d5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	27XFrERiZahzadMX6c8PgzGt0jcBjDwUpoU7r16cu8tB4wPigtxiOgpIhIgTHdSNz7RFW5Lhdv+knTfR1eaW7trhada0Dw7ys/0f6VHAmij+jx5OU09TvIjzDqoCjQYFTwMC5P1vcfhF63hWA1vI1yseE9NCtQtkjLhaWj7BcBMO3vby168embBY4c9kEdYZKy4e72SNblue2F4NjdXBU8lamHjKhPNtX3aczGzLNP/UaHhAa/ukH5pvgHU6eq04ko7UdU/zOdW9mwSfkArXJzYaSgqHtzkQXSdE7W8q+Ddw+G82a/6S1Te+ggHLB27rYmHI5POKuTmJzbmd9q6KU1bTPdP8EdvvunTTXxRuZzQnvEOYCy7l76tiJqzhjD4So17DHLznBJSQK9loa5ntKQIiJU+5GlY6gXJ7PbHxfhJVCsVfGrcJKjIM3mRtz8c3fvpgnoGxzTVpqq3awofFkW9irawGWHZWkgTnzSbS1EiFJOS4Zv8XnbKP29iO9ZPgt8u8VHk52Pm9az2Q0y8Wru/5J2Pt5V5oWM12TKSbUZrZD5pavbETrNaOWNXygyNr47xNVfG9elGH+FoES9kog5F6CYweBHRvTFIbNmOVJg0DdJqyLjjaB1vlxaxs1Hqc9rV+n+VzK5mQPAo+EK1VO0zg1qTKdDvdQThB9QGCSqMTHS5ij9vymtsYMp+Vagko1s6s4LrA7UMwJMinYQHDgv6/qP+wwOfertSevKPJdbPozfUSZgM0Wxul1BDIY2xoogDubh/vQKJpUTUrf/4TDA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(39860400002)(376002)(136003)(396003)(451199015)(46966006)(36840700001)(40470700004)(36860700001)(316002)(36756003)(40480700001)(356005)(81166007)(82310400005)(26005)(31696002)(40460700003)(86362001)(82740400003)(16576012)(54906003)(8936002)(478600001)(6916009)(47076005)(426003)(83380400001)(53546011)(5660300002)(2906002)(31686004)(336012)(4326008)(70206006)(70586007)(8676002)(186003)(41300700001)(2616005)(44832011)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2022 12:20:48.0994
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e1021e2-f584-42ba-2fc1-08dadf5ff6d5
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1NAM11FT033.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7668
 
-From: Julien Grall <jgrall@amazon.com>
 
-At the moment, on Arm64, every pCPU are sharing the same page-tables.
 
-In a follow-up patch, we will allow the possibility to remove the
-direct map and therefore it will be necessary to have a mapcache.
+On 16/12/2022 10:33, Michal Orzel wrote:
+> 
+> 
+> Hi Stefano,
+> 
+> On 15/12/2022 22:08, Stefano Stabellini wrote:
+>>
+>>
+>> On Thu, 15 Dec 2022, Michal Orzel wrote:
+>>> Add test jobs in both debug and non-debug versions to run hyp-xen-version
+>>> XTF test as a dom0less domU on arm64. The purpose of this test is to
+>>> validate the functional behavior of xen_version hypercall.
+>>>
+>>> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+>>> ---
+>>>  automation/gitlab-ci/test.yaml | 16 ++++++++++++++++
+>>>  1 file changed, 16 insertions(+)
+>>>
+>>> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+>>> index 2d57f4feb74a..9d4b5315e710 100644
+>>> --- a/automation/gitlab-ci/test.yaml
+>>> +++ b/automation/gitlab-ci/test.yaml
+>>> @@ -165,6 +165,22 @@ qemu-smoke-dom0less-arm64-gcc-debug-boot-cpupools:
+>>>      - *arm64-test-needs
+>>>      - alpine-3.12-gcc-debug-arm64-boot-cpupools
+>>>
+>>> +qemu-xtf-dom0less-arm64-gcc-hyp-xen-version:
+>>> +    extends: .qemu-arm64
+>>> +    script:
+>>> +      - ./automation/scripts/qemu-xtf-dom0less-arm64.sh hyp-xen-version 2>&1 | tee ${LOGFILE}
+>>> +    needs:
+>>> +      - *arm64-test-needs
+>>> +      - alpine-3.12-gcc-arm64
+>>
+>> I think this test only needs qemu-system-aarch64-6.0.0-arm64-export
+> In case of pure dom0less configuration - yes.
+I take back my words. We obviously need Xen binary as well so apart from qemu
+we also need alpine-3.12-gcc-arm64 (debug/non-debug). For the pure dom0less, we do not
+need toolstack, but these jobs are already being built for other test jobs so we will
+not benefit from e.g. adding new build jobs and variable to specify the hypervisor only build.
 
-While we have plenty of spare virtual address space to have
-to reserve part for each pCPU, it means that temporary mappings
-(e.g. guest memory) could be accessible by every pCPU.
-
-In order to increase our security posture, it would be better if
-those mappings are only accessible by the pCPU doing the temporary
-mapping.
-
-In addition to that, a per-pCPU page-tables opens the way to have
-per-domain mapping area.
-
-Arm32 is already using per-pCPU page-tables so most of the code
-can be re-used. Arm64 doesn't yet have support for the mapcache,
-so a stub is provided (moved to its own header asm/domain_page.h).
-
-Take the opportunity to fix a typo in a comment that is modified.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/arch/arm/domain_page.c             |  2 ++
- xen/arch/arm/include/asm/arm32/mm.h    |  8 -----
- xen/arch/arm/include/asm/domain_page.h | 13 ++++++++
- xen/arch/arm/include/asm/mm.h          |  5 +++
- xen/arch/arm/mm.c                      | 42 +++++++-------------------
- xen/arch/arm/setup.c                   |  1 +
- 6 files changed, 32 insertions(+), 39 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/domain_page.h
-
-diff --git a/xen/arch/arm/domain_page.c b/xen/arch/arm/domain_page.c
-index b7c02c919064..4540b3c5f24c 100644
---- a/xen/arch/arm/domain_page.c
-+++ b/xen/arch/arm/domain_page.c
-@@ -3,6 +3,8 @@
- #include <xen/pmap.h>
- #include <xen/vmap.h>
- 
-+#include <asm/domain_page.h>
-+
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
-index 8bfc906e7178..6b039d9ceaa2 100644
---- a/xen/arch/arm/include/asm/arm32/mm.h
-+++ b/xen/arch/arm/include/asm/arm32/mm.h
-@@ -1,12 +1,6 @@
- #ifndef __ARM_ARM32_MM_H__
- #define __ARM_ARM32_MM_H__
- 
--#include <xen/percpu.h>
--
--#include <asm/lpae.h>
--
--DECLARE_PER_CPU(lpae_t *, xen_pgtable);
--
- /*
-  * Only a limited amount of RAM, called xenheap, is always mapped on ARM32.
-  * For convenience always return false.
-@@ -16,8 +10,6 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
-     return false;
- }
- 
--bool init_domheap_mappings(unsigned int cpu);
--
- #endif /* __ARM_ARM32_MM_H__ */
- 
- /*
-diff --git a/xen/arch/arm/include/asm/domain_page.h b/xen/arch/arm/include/asm/domain_page.h
-new file mode 100644
-index 000000000000..e9f52685e2ec
---- /dev/null
-+++ b/xen/arch/arm/include/asm/domain_page.h
-@@ -0,0 +1,13 @@
-+#ifndef __ASM_ARM_DOMAIN_PAGE_H__
-+#define __ASM_ARM_DOMAIN_PAGE_H__
-+
-+#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
-+bool init_domheap_mappings(unsigned int cpu);
-+#else
-+static inline bool init_domheap_mappings(unsigned int cpu)
-+{
-+    return true;
-+}
-+#endif
-+
-+#endif /* __ASM_ARM_DOMAIN_PAGE_H__ */
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 2366928d71aa..7a2c775f9562 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -2,6 +2,9 @@
- #define __ARCH_ARM_MM__
- 
- #include <xen/kernel.h>
-+#include <xen/percpu.h>
-+
-+#include <asm/lpae.h>
- #include <asm/page.h>
- #include <public/xen.h>
- #include <xen/pdx.h>
-@@ -14,6 +17,8 @@
- # error "unknown ARM variant"
- #endif
- 
-+DECLARE_PER_CPU(lpae_t *, xen_pgtable);
-+
- /* Align Xen to a 2 MiB boundary. */
- #define XEN_PADDR_ALIGN (1 << 21)
- 
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 4e208f7d20c8..2af751af9003 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -24,6 +24,7 @@
- 
- #include <xsm/xsm.h>
- 
-+#include <asm/domain_page.h>
- #include <asm/fixmap.h>
- #include <asm/setup.h>
- 
-@@ -90,20 +91,19 @@ DEFINE_BOOT_PAGE_TABLE(boot_third);
-  * xen_second, xen_fixmap and xen_xenmap are always shared between all
-  * PCPUs.
-  */
-+/* Per-CPU pagetable pages */
-+/* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
-+DEFINE_PER_CPU(lpae_t *, xen_pgtable);
-+
-+/* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
-+static DEFINE_PAGE_TABLE(cpu0_pgtable);
-+#define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
- 
- #ifdef CONFIG_ARM_64
- #define HYP_PT_ROOT_LEVEL 0
--static DEFINE_PAGE_TABLE(xen_pgtable);
- static DEFINE_PAGE_TABLE(xen_first);
--#define THIS_CPU_PGTABLE xen_pgtable
- #else
- #define HYP_PT_ROOT_LEVEL 1
--/* Per-CPU pagetable pages */
--/* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
--DEFINE_PER_CPU(lpae_t *, xen_pgtable);
--#define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
--/* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
--static DEFINE_PAGE_TABLE(cpu0_pgtable);
- #endif
- 
- /* Common pagetable leaves */
-@@ -481,14 +481,13 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
- 
-     phys_offset = boot_phys_offset;
- 
-+    p = cpu0_pgtable;
-+
- #ifdef CONFIG_ARM_64
--    p = (void *) xen_pgtable;
-     p[0] = pte_of_xenaddr((uintptr_t)xen_first);
-     p[0].pt.table = 1;
-     p[0].pt.xn = 0;
-     p = (void *) xen_first;
--#else
--    p = (void *) cpu0_pgtable;
- #endif
- 
-     /* Map xen second level page-table */
-@@ -527,19 +526,13 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
-     pte.pt.table = 1;
-     xen_second[second_table_offset(FIXMAP_ADDR(0))] = pte;
- 
--#ifdef CONFIG_ARM_64
--    ttbr = (uintptr_t) xen_pgtable + phys_offset;
--#else
-     ttbr = (uintptr_t) cpu0_pgtable + phys_offset;
--#endif
- 
-     switch_ttbr(ttbr);
- 
-     xen_pt_enforce_wnx();
- 
--#ifdef CONFIG_ARM_32
-     per_cpu(xen_pgtable, 0) = cpu0_pgtable;
--#endif
- }
- 
- static void clear_boot_pagetables(void)
-@@ -557,18 +550,6 @@ static void clear_boot_pagetables(void)
-     clear_table(boot_third);
- }
- 
--#ifdef CONFIG_ARM_64
--int init_secondary_pagetables(int cpu)
--{
--    clear_boot_pagetables();
--
--    /* Set init_ttbr for this CPU coming up. All CPus share a single setof
--     * pagetables, but rewrite it each time for consistency with 32 bit. */
--    init_ttbr = (uintptr_t) xen_pgtable + phys_offset;
--    clean_dcache(init_ttbr);
--    return 0;
--}
--#else
- int init_secondary_pagetables(int cpu)
- {
-     lpae_t *root = alloc_xenheap_page();
-@@ -599,7 +580,6 @@ int init_secondary_pagetables(int cpu)
- 
-     return 0;
- }
--#endif
- 
- /* MMU setup for secondary CPUS (which already have paging enabled) */
- void mmu_init_secondary_cpu(void)
-@@ -1089,7 +1069,7 @@ static int xen_pt_update(unsigned long virt,
-     unsigned long left = nr_mfns;
- 
-     /*
--     * For arm32, page-tables are different on each CPUs. Yet, they share
-+     * Page-tables are different on each CPU. Yet, they share
-      * some common mappings. It is assumed that only common mappings
-      * will be modified with this function.
-      *
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 2311726f5ddd..88d9d90fb5ad 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -39,6 +39,7 @@
- #include <asm/gic.h>
- #include <asm/cpuerrata.h>
- #include <asm/cpufeature.h>
-+#include <asm/domain_page.h>
- #include <asm/platform.h>
- #include <asm/procinfo.h>
- #include <asm/setup.h>
--- 
-2.38.1
+~Michal
 
 
