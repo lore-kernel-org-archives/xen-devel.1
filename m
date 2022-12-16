@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E9FBC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A08C001B2
 	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 12:17:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464566.723010 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.464570.723040 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69em-0007fz-Mf; Fri, 16 Dec 2022 12:17:40 +0000
+	id 1p69eo-0008Kq-HJ; Fri, 16 Dec 2022 12:17:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464566.723010; Fri, 16 Dec 2022 12:17:40 +0000
+Received: by outflank-mailman (output) from mailman id 464570.723040; Fri, 16 Dec 2022 12:17:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69em-0007eX-Eq; Fri, 16 Dec 2022 12:17:40 +0000
-Received: by outflank-mailman (input) for mailman id 464566;
- Fri, 16 Dec 2022 12:17:37 +0000
+	id 1p69eo-0008Ha-8s; Fri, 16 Dec 2022 12:17:42 +0000
+Received: by outflank-mailman (input) for mailman id 464570;
+ Fri, 16 Dec 2022 12:17:38 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69ej-0007LM-RB
+ (envelope-from <julien@xen.org>) id 1p69ej-0007Ld-W0
  for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 12:17:37 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69ej-00034C-MR; Fri, 16 Dec 2022 12:17:37 +0000
+ id 1p69ej-00034R-RI; Fri, 16 Dec 2022 12:17:37 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69DL-0004sN-Rc; Fri, 16 Dec 2022 11:49:20 +0000
+ id 1p69DN-0004sN-W7; Fri, 16 Dec 2022 11:49:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,118 +45,81 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=C7J11PdwQAWvXzpUfaG/t5NjyOIfJIe9L9M+iZjsZ88=; b=SjoRoA2TbEg5ZKtGJx/cWUhwP1
-	OxQuQW4yTon8/KGxTK021Utu+jR4S/+tJec27zz7oMMUVsmUOlBHP+EbpLSALUsVqW9xIMpdHODH/
-	jPZfchwzSmpEg2nmk67/EWmD1nbmKRmZVNzgRYuyxdPzNfjjmabszsvWgf6eK4h8qmuc=;
+	bh=NkfwiZGHGUT9aDZPQ52XaRpLx0pc2E+yXE3Z0GACfGA=; b=tL1r1SSswrEWuqPOR8MX6COqIE
+	aQZQIFzsUy4F/Gqk6/uu6XGHjPee0wjsy6yrgb+G+9EPS5xeXh9aZlTksVJX7NXw5KDlr8C3lq5jW
+	spLEzj5WxpO3H+RBDjdqcWGJQImjavd0tGHBgzfadMFnTThQ644wQUFsXx2ZZF5Q1MwE=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Hongyan Xia <hongyxia@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 17/22] x86/setup: vmap heap nodes when they are outside the direct map
-Date: Fri, 16 Dec 2022 11:48:48 +0000
-Message-Id: <20221216114853.8227-18-julien@xen.org>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 19/22] xen/arm32: mm: Rename 'first' to 'root' in init_secondary_pagetables()
+Date: Fri, 16 Dec 2022 11:48:50 +0000
+Message-Id: <20221216114853.8227-20-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216114853.8227-1-julien@xen.org>
 References: <20221216114853.8227-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Hongyan Xia <hongyxia@amazon.com>
+From: Julien Grall <jgrall@amazon.com>
 
-When we do not have a direct map, archs_mfn_in_direct_map() will always
-return false, thus init_node_heap() will allocate xenheap pages from an
-existing node for the metadata of a new node. This means that the
-metadata of a new node is in a different node, slowing down heap
-allocation.
+The arm32 version of init_secondary_pagetables() will soon be re-used
+for arm64 as well where the root table start at level 0 rather than level 1.
 
-Since we now have early vmap, vmap the metadata locally in the new node.
+So rename 'first' to 'root'.
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-----
-
-    Changes from Hongyan's version:
-        * arch_mfn_in_direct_map() was renamed to
-          arch_mfns_in_direct_map()
-        * Use vmap_contig_pages() rather than __vmap(...).
-        * Add missing include (xen/vmap.h) so it compiles on Arm
 ---
- xen/common/page_alloc.c | 42 +++++++++++++++++++++++++++++++----------
- 1 file changed, 32 insertions(+), 10 deletions(-)
+ xen/arch/arm/mm.c | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 0c4af5a71407..581c15d74dfb 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -136,6 +136,7 @@
- #include <xen/sched.h>
- #include <xen/softirq.h>
- #include <xen/spinlock.h>
-+#include <xen/vmap.h>
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 0fc6f2992dd1..4e208f7d20c8 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -571,32 +571,30 @@ int init_secondary_pagetables(int cpu)
+ #else
+ int init_secondary_pagetables(int cpu)
+ {
+-    lpae_t *first;
++    lpae_t *root = alloc_xenheap_page();
  
- #include <asm/flushtlb.h>
- #include <asm/numa.h>
-@@ -597,22 +598,43 @@ static unsigned long init_node_heap(int node, unsigned long mfn,
-         needed = 0;
-     }
-     else if ( *use_tail && nr >= needed &&
--              arch_mfns_in_directmap(mfn + nr - needed, needed) &&
-               (!xenheap_bits ||
-                !((mfn + nr - 1) >> (xenheap_bits - PAGE_SHIFT))) )
+-    first = alloc_xenheap_page(); /* root == first level on 32-bit 3-level trie */
+-
+-    if ( !first )
++    if ( !root )
      {
--        _heap[node] = mfn_to_virt(mfn + nr - needed);
--        avail[node] = mfn_to_virt(mfn + nr - 1) +
--                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
--    }
--    else if ( nr >= needed &&
--              arch_mfns_in_directmap(mfn, needed) &&
-+        if ( arch_mfns_in_directmap(mfn + nr - needed, needed) )
-+        {
-+            _heap[node] = mfn_to_virt(mfn + nr - needed);
-+            avail[node] = mfn_to_virt(mfn + nr - 1) +
-+                          PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-+        }
-+        else
-+        {
-+            mfn_t needed_start = _mfn(mfn + nr - needed);
-+
-+            _heap[node] = vmap_contig_pages(needed_start, needed);
-+            BUG_ON(!_heap[node]);
-+            avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-+                          sizeof(**avail) * NR_ZONES;
-+        }
-+    } else if ( nr >= needed &&
-               (!xenheap_bits ||
-                !((mfn + needed - 1) >> (xenheap_bits - PAGE_SHIFT))) )
-     {
--        _heap[node] = mfn_to_virt(mfn);
--        avail[node] = mfn_to_virt(mfn + needed - 1) +
--                      PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-+        if ( arch_mfns_in_directmap(mfn, needed) )
-+        {
-+            _heap[node] = mfn_to_virt(mfn);
-+            avail[node] = mfn_to_virt(mfn + needed - 1) +
-+                          PAGE_SIZE - sizeof(**avail) * NR_ZONES;
-+        }
-+        else
-+        {
-+            mfn_t needed_start = _mfn(mfn);
-+
-+            _heap[node] = vmap_contig_pages(needed_start, needed);
-+            BUG_ON(!_heap[node]);
-+            avail[node] = (void *)(_heap[node]) + (needed << PAGE_SHIFT) -
-+                          sizeof(**avail) * NR_ZONES;
-+        }
-         *use_tail = false;
+-        printk("CPU%u: Unable to allocate the first page-table\n", cpu);
++        printk("CPU%u: Unable to allocate the root page-table\n", cpu);
+         return -ENOMEM;
      }
-     else if ( get_order_from_bytes(sizeof(**_heap)) ==
+ 
+     /* Initialise root pagetable from root of boot tables */
+-    memcpy(first, cpu0_pgtable, PAGE_SIZE);
+-    per_cpu(xen_pgtable, cpu) = first;
++    memcpy(root, cpu0_pgtable, PAGE_SIZE);
++    per_cpu(xen_pgtable, cpu) = root;
+ 
+     if ( !init_domheap_mappings(cpu) )
+     {
+         printk("CPU%u: Unable to prepare the domheap page-tables\n", cpu);
+         per_cpu(xen_pgtable, cpu) = NULL;
+-        free_xenheap_page(first);
++        free_xenheap_page(root);
+         return -ENOMEM;
+     }
+ 
+     clear_boot_pagetables();
+ 
+     /* Set init_ttbr for this CPU coming up */
+-    init_ttbr = __pa(first);
++    init_ttbr = __pa(root);
+     clean_dcache(init_ttbr);
+ 
+     return 0;
 -- 
 2.38.1
 
