@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B578C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E74C6C001B2
 	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 18:35:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464940.723508 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.464943.723518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FY9-0003oT-3i; Fri, 16 Dec 2022 18:35:13 +0000
+	id 1p6FYA-00046I-Ds; Fri, 16 Dec 2022 18:35:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464940.723508; Fri, 16 Dec 2022 18:35:13 +0000
+Received: by outflank-mailman (output) from mailman id 464943.723518; Fri, 16 Dec 2022 18:35:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p6FY8-0003oC-Vu; Fri, 16 Dec 2022 18:35:12 +0000
-Received: by outflank-mailman (input) for mailman id 464940;
- Fri, 16 Dec 2022 18:35:11 +0000
+	id 1p6FYA-00045z-Ah; Fri, 16 Dec 2022 18:35:14 +0000
+Received: by outflank-mailman (input) for mailman id 464943;
+ Fri, 16 Dec 2022 18:35:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CdjE=4O=citrix.com=prvs=342889366=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1p6FPY-0008JE-DX
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:26:20 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1f08731b-7d6f-11ed-91b6-6bf2151ebd3b;
- Fri, 16 Dec 2022 19:26:13 +0100 (CET)
+ id 1p6FPv-0008JE-R8
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 18:26:43 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2faf6d38-7d6f-11ed-91b6-6bf2151ebd3b;
+ Fri, 16 Dec 2022 19:26:42 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f08731b-7d6f-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 2faf6d38-7d6f-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1671215173;
+  d=citrix.com; s=securemail; t=1671215202;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Sp2/iZsmo7dZyO9wo4dG7BuWjwTi9pk8mLkgWUOPpfw=;
-  b=QJBy3CIIuAUMrPqTXpocjQpzpCxblVNeTL7yzNgoUOoec8F+NEOOuiKe
-   Xkb4elczB8XBjWT/7fwAnGwZht8ktkv79oeSijJwDPeqhZXlfJdURSGX2
-   Zvm2HfTBL0bXbU089dQpvlwr1T7nIATtCLtMVGq9cY6P7zZKgTheLaKV2
-   s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=CG01Ym3JdeGOajBJXCwb2DSCwADHqYLVBH4PspSY8t4=;
+  b=PumSt9ei+qFPWVzDw35nxAlZ6t7V5CXNURLdHtyGOTd7COgtN4uFVuLH
+   vuJ/Hkn1AtrbXnMbiCxaOQ+sYpJ6bRJ2useHR1h6z1u3w0JvcrYz8Lrkr
+   N0oclHfF17ce6QrBx107H6d8zSUzLQ9ov8E95tF+pZBMv2GUQUU1YCkRs
+   c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 87767484
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 89196238
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:eeUt1qzEodpZS+qJ4P16t+c+xirEfRIJ4+MujC+fZmUNrF6WrkUBn
- zMeC2uPO/+IZjb8LY90PI/j8U4GvZPTyt9lHlE+rSAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
- ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTbaeYUidfCc8IA85kxVvhuUltYBhhNm9Emult
- Mj75sbSIzdJ4RYtWo4vw//F+U0HUMja4mtC5AVkPK4T5jcyqlFOZH4hDfDpR5fHatE88t6SH
- 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KUEfy
- t0UNBQpVCy8xO+pmZL8ba42htt2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKQOHWjOX9OYH46tOqkmHj5NSFfslWWjaE2/3LS3Ep6172F3N/9KoPVG5oJzhrwS
- mTuwmPhKxcKbdyj9nmv6k323sPl3n3acddHfFG/3qEz2wDCroAJMzUaXEW2ieO0gUm/X5RYM
- UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL8/AKxFmUCCDlbZ7QbWNQeHGJwk
- AXTxpWwWGIp4Ob9pW+hGqm8jWKNGCQJCUs4WRBHQBRcw57E59szkUeaJjp8K5KdgtrwEDD25
- jmFqikimrke5fI2O7WHEUPv2Gz1+MWQJuIhzkCOBz/+sFslDGKwT9bwgWU3+8qsO2pworOpm
- HEf0/aT4+kVZX1mvHzcGb5ddF1FChvsDdE9vbKNN8N5n9hO0yT5FWy13N2ZDBkBDyr8UWW1C
- HI/QCsIjHOpAFOkbLVsf6W6ANkwwK7rGLzND66LN4MUM8EgJFfbokmCgHJ8OEi0wCARfVwXY
- 8/HIa5A815EYUiY8NZGb7hEiuJ6rszP7WjSWYr633yaPUm2PRaopUM+GALWNIgRtfrUyDg5B
- v4Db6NmPT0DCryhCsQWmKZPRW03wY8TWcin9pELK7DccmKL2ggJUpfs/F/oQKQ994w9qwsC1
- irnMqOE4DITXUH6FDg=
-IronPort-HdrOrdr: A9a23:ivo+k6h5tFRsNc8qa/o4nKGTHXBQXtQji2hC6mlwRA09TyX4ra
- yTdZEgviMc5wx/ZJhNo7690cu7IU80hKQV3WB5B97LNmTbUQCTXeJfBOXZsljdMhy72ulB1b
- pxN4hSYeeAaWSSVPyKgjWFLw==
+IronPort-Data: A9a23:eOu/0qsLfcxAOp4K2gFheW1dIufnVFheMUV32f8akzHdYApBsoF/q
+ tZmKWyFOq7bYWTxf9l/YInnpkNVvMeAmIBhTFY4qS40FyJB+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg0HVU/IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj5lv0gnRkPaoR5QWHySFPZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwNDQdXDq9rOWP8om2Fe5+q55zPvTXBdZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkARfAdMYH49tL7Aan3XfjFGqVTTua0t5Gv7xw1tyrn9dtHSf7RmQO0Fzx/J+
+ DidrwwVBDlHLdGd8R/d0E6woeXUxyW4Ut0+KIeRo6sCbFq7mTVIVUx+uUGAiea9ol6zXZRYM
+ UN80iYns6Ua7kGgSdj5GRqirxasrhMaHtZdDeA+wAWM0bbPpRaUAHAeSTxMY8Bgs9U5LQHGz
+ XfQwYmvX2Y29uTIFzTNrd94sA9eJwAJKX8wTxEvSjI32NS8p5Me1ELdc+paRfvdYsLOJRn8x
+ DWDrS4bjroVjNIW26jTwW0rkw5AtbCSEFdru1y/snaNq1ogOdX7P9DABU3zt64oEWqPcrWWU
+ JHoceC65ftGM5yCnTflrA4lTODwvKbt3NExbDdS83gdG9aFoSbLkWN4umsWyKJV3iEsJ1fUj
+ Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMcoLVXWpXA+PRLOt4wIrKTLufhvU
+ ap3jO72VSpKYUiZ5GTeqxghPU8DmXllmDK7qWHTxBW7y7uODEN5up9cWGZimtsRtfveyC2Mq
+ oY3Cid/40kHOAEISnWNoNF7wJFjBSRTOK0aXOQLLr/ef1Y7Rj5xYxITqJt4E7FYc21uvr+g1
+ hmAtoVwmTITWVWvxd22V01e
+IronPort-HdrOrdr: A9a23:c7rWG6wBgPE0eKs+LT7gKrPwy71zdoMgy1knxilNoEpuA6qlfq
+ GV88jzsCWftN9/Yh0dcLy7SdK9qDbnhOZICOoqU4tKPjOW31dAd7sSj7cKqgeIcxEWtNQttp
+ uIFZIObeEYZmIK9PoSjjPUL/8QhPGb9eSRmevDw1dBJDsaEZ1I3kNQFwOSCFd3TA4DIZI4Ed
+ 656tBcrzStPVQbB/7bOlA1G8DfotXQjpLvZlojDx4jrDSUhTSz4LTmEx6emjcSOgku/V8tmV
+ K19zARtp/Jj82G
 X-IronPort-AV: E=Sophos;i="5.96,249,1665460800"; 
-   d="scan'208";a="87767484"
+   d="scan'208";a="89196238"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Christian
- Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
-	=?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>
-Subject: [PATCH v4 07/11] fixup! tools/ocaml/xenctrl: OCaml 5 support, fix use-after-free
-Date: Fri, 16 Dec 2022 18:25:16 +0000
-Message-ID: <c0fab282ed4decc3375ef2abb8fe1e3591fb5508.1671214525.git.edwin.torok@cloud.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 11/11] tools/ocaml/libs/xb: drop Xs_ring.write
+Date: Fri, 16 Dec 2022 18:25:20 +0000
+Message-ID: <ce0700a52e79eaa265f7044007d469369cacf4fe.1671214525.git.edwin.torok@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1671214525.git.edwin.torok@cloud.com>
 References: <cover.1671214525.git.edwin.torok@cloud.com>
@@ -93,32 +93,58 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Fix unused value warning.
+Unused, only Xs_ring.write_substring is used.
+Also the bytes/string conversion here is backwards: the C stub implements the
+bytes version and then we use a Bytes.unsafe_of_string to convert a string into
+bytes.
 
-Fixes: 8b3c06a3e5 ("tools/ocaml/xenctrl: OCaml 5 support, fix use-after-free")
-Signed-off-by: Edwin Török <edwin.torok@cloud.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+However the operation here really is read-only: we read from the string and
+write it to the ring, so the C stub should implement the read-only string
+version, and if needed we could use Bytes.unsafe_to_string to be able to send
+'bytes'. However that is not necessary as the 'bytes' version is dropped above.
 
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
 Changes:
 * new patch
 ---
- tools/ocaml/libs/xc/xenctrl.ml | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/ocaml/libs/xb/xs_ring.ml      | 5 +----
+ tools/ocaml/libs/xb/xs_ring_stubs.c | 2 +-
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index b02be07429..a59dee0938 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -182,7 +182,7 @@ let get_handle () = !handle
+diff --git a/tools/ocaml/libs/xb/xs_ring.ml b/tools/ocaml/libs/xb/xs_ring.ml
+index 2a27aa56c2..87c6b243e4 100644
+--- a/tools/ocaml/libs/xb/xs_ring.ml
++++ b/tools/ocaml/libs/xb/xs_ring.ml
+@@ -25,14 +25,11 @@ module Server_features = Set.Make(struct
+   end)
  
- let close_handle () =
-   match !handle with
--  | Some h -> handle := None
-+  | Some _ -> handle := None
-   | None -> ()
+ external read: Xenmmap.mmap_interface -> bytes -> int -> int = "ml_interface_read"
+-external write: Xenmmap.mmap_interface -> bytes -> int -> int = "ml_interface_write"
++external write_substring: Xenmmap.mmap_interface -> string -> int -> int = "ml_interface_write"
  
- let with_intf f =
+ external _internal_set_server_features: Xenmmap.mmap_interface -> int -> unit = "ml_interface_set_server_features" [@@noalloc]
+ external _internal_get_server_features: Xenmmap.mmap_interface -> int = "ml_interface_get_server_features" [@@noalloc]
+ 
+-let write_substring mmap buff len =
+-  write mmap (Bytes.unsafe_of_string buff) len
+-
+ let get_server_features mmap =
+   (* NB only one feature currently defined above *)
+   let x = _internal_get_server_features mmap in
+diff --git a/tools/ocaml/libs/xb/xs_ring_stubs.c b/tools/ocaml/libs/xb/xs_ring_stubs.c
+index 28c79ee139..dca6059b0d 100644
+--- a/tools/ocaml/libs/xb/xs_ring_stubs.c
++++ b/tools/ocaml/libs/xb/xs_ring_stubs.c
+@@ -119,7 +119,7 @@ CAMLprim value ml_interface_write(value ml_interface,
+     CAMLlocal1(ml_result);
+ 
+     struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
+-    const unsigned char *buffer = Bytes_val(ml_buffer);
++    const char *buffer = String_val(ml_buffer);
+     int len = Int_val(ml_len);
+     int result;
+ 
 -- 
 2.34.1
 
