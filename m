@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC6FC3DA6E
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464432.722871 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C229EC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464436.722892 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D9-0004uN-Li; Fri, 16 Dec 2022 11:49:07 +0000
+	id 1p69DB-0005UT-Qy; Fri, 16 Dec 2022 11:49:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464432.722871; Fri, 16 Dec 2022 11:49:07 +0000
+Received: by outflank-mailman (output) from mailman id 464436.722892; Fri, 16 Dec 2022 11:49:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D9-0004tC-E6; Fri, 16 Dec 2022 11:49:07 +0000
-Received: by outflank-mailman (input) for mailman id 464432;
- Fri, 16 Dec 2022 11:49:06 +0000
+	id 1p69DB-0005Rw-Hn; Fri, 16 Dec 2022 11:49:09 +0000
+Received: by outflank-mailman (input) for mailman id 464436;
+ Fri, 16 Dec 2022 11:49:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69D8-0004b9-7Y
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:06 +0000
+ (envelope-from <julien@xen.org>) id 1p69DA-0005H5-K8
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1p69D8-0002ET-5Z; Fri, 16 Dec 2022 11:49:06 +0000
+ (envelope-from <julien@xen.org>) id 1p69DA-0002FH-JS
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:08 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D7-0004sN-US; Fri, 16 Dec 2022 11:49:06 +0000
+ id 1p69DA-0004sN-CE; Fri, 16 Dec 2022 11:49:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=FDnn4j9oos7o0Yst//etF30Yzyr3SCCSdb3Qh8o9mlo=; b=fHd51aNXlHLmKnuzS89FCVrVMv
-	6yxymS4djo7spaS62B+LYP5kO4zqErtz5FVtozvvW0CftDT7ElgEMFpbhc3CRx2lNd74u823ed3Y0
-	2ygOzpZZ9Hbci4Q7zxwpwOG4K/JG5ibUf88FCbaP7uRZ5jBeVRf2nw8X3shrWO8zo+Mk=;
+	bh=I796InQwp8GJ7wl8yn2SnJLasp1DLu8CI/8eIrqjbEo=; b=G3ocwq2f+UdE70Au4tGaHIKKiL
+	UnMPqJfwBzJtirFdxcw08AvdAHC3MGXpc/BIoRFsd9HNxPyUXfOY+KR/lP0J0XTcXjmwACt5RlQ8B
+	FyOqw5evHPepZDsub1Qd0y8p80o66DUg3nZY2gRwrtyO8L3lFgmUutzzNu334GKoHo1w=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -57,9 +57,9 @@ Cc: julien@xen.org,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 06/22] x86: map/unmap pages in restore_all_guests
-Date: Fri, 16 Dec 2022 11:48:37 +0000
-Message-Id: <20221216114853.8227-7-julien@xen.org>
+Subject: [PATCH 08/22] x86/pv: rewrite how building PV dom0 handles domheap mappings
+Date: Fri, 16 Dec 2022 11:48:39 +0000
+Message-Id: <20221216114853.8227-9-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216114853.8227-1-julien@xen.org>
 References: <20221216114853.8227-1-julien@xen.org>
@@ -68,11 +68,8 @@ Content-Transfer-Encoding: 8bit
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-Before, it assumed the pv cr3 could be accessed via a direct map. This
-is no longer true.
-
-Note that we do not map and unmap root_pgt for now since it is still a
-xenheap page.
+Building a PV dom0 is allocating from the domheap but uses it like the
+xenheap. This is clearly wrong. Fix.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
@@ -80,56 +77,152 @@ Signed-off-by: Julien Grall <jgrall@amazon.com>
 ----
 
     Changes since Hongyan's version:
-        * Remove the final dot in the commit title
+        * Rebase
+        * Remove spurious newline
 ---
- xen/arch/x86/x86_64/entry.S | 27 ++++++++++++++++++++++++++-
- 1 file changed, 26 insertions(+), 1 deletion(-)
+ xen/arch/x86/pv/dom0_build.c | 56 +++++++++++++++++++++++++++---------
+ 1 file changed, 42 insertions(+), 14 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index ae012851819a..b72abf923d9c 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -165,7 +165,24 @@ restore_all_guest:
-         and   %rsi, %rdi
-         and   %r9, %rsi
-         add   %rcx, %rdi
--        add   %rcx, %rsi
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index c837b2d96f89..cd60f259d1b7 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -383,6 +383,10 @@ int __init dom0_construct_pv(struct domain *d,
+     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
+     l2_pgentry_t *l2tab = NULL, *l2start = NULL;
+     l1_pgentry_t *l1tab = NULL, *l1start = NULL;
++    mfn_t l4start_mfn = INVALID_MFN;
++    mfn_t l3start_mfn = INVALID_MFN;
++    mfn_t l2start_mfn = INVALID_MFN;
++    mfn_t l1start_mfn = INVALID_MFN;
+ 
+     /*
+      * This fully describes the memory layout of the initial domain. All
+@@ -711,22 +715,32 @@ int __init dom0_construct_pv(struct domain *d,
+         v->arch.pv.event_callback_cs    = FLAT_COMPAT_KERNEL_CS;
+     }
+ 
++#define UNMAP_MAP_AND_ADVANCE(mfn_var, virt_var, maddr) \
++do {                                                    \
++    UNMAP_DOMAIN_PAGE(virt_var);                        \
++    mfn_var = maddr_to_mfn(maddr);                      \
++    maddr += PAGE_SIZE;                                 \
++    virt_var = map_domain_page(mfn_var);                \
++} while ( false )
 +
-+         /*
-+          * Without a direct map, we have to map first before copying. We only
-+          * need to map the guest root table but not the per-CPU root_pgt,
-+          * because the latter is still a xenheap page.
-+          */
-+        pushq %r9
-+        pushq %rdx
-+        pushq %rax
-+        pushq %rdi
-+        mov   %rsi, %rdi
-+        shr   $PAGE_SHIFT, %rdi
-+        callq map_domain_page
-+        mov   %rax, %rsi
-+        popq  %rdi
-+        /* Stash the pointer for unmapping later. */
-+        pushq %rax
+     if ( !compat )
+     {
+         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
+-        l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
++        UNMAP_MAP_AND_ADVANCE(l4start_mfn, l4start, mpt_alloc);
++        l4tab = l4start;
+         clear_page(l4tab);
+-        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
+-                          d, INVALID_MFN, true);
+-        v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
++        init_xen_l4_slots(l4tab, l4start_mfn, d, INVALID_MFN, true);
++        v->arch.guest_table = pagetable_from_mfn(l4start_mfn);
+     }
+     else
+     {
+         /* Monitor table already created by switch_compat(). */
+-        l4start = l4tab = __va(pagetable_get_paddr(v->arch.guest_table));
++        l4start_mfn = pagetable_get_mfn(v->arch.guest_table);
++        l4start = l4tab = map_domain_page(l4start_mfn);
+         /* See public/xen.h on why the following is needed. */
+         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l3_page_table;
+         l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
++        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
+     }
+ 
+     l4tab += l4_table_offset(v_start);
+@@ -736,14 +750,16 @@ int __init dom0_construct_pv(struct domain *d,
+         if ( !((unsigned long)l1tab & (PAGE_SIZE-1)) )
+         {
+             maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l1_page_table;
+-            l1start = l1tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
++            UNMAP_MAP_AND_ADVANCE(l1start_mfn, l1start, mpt_alloc);
++            l1tab = l1start;
+             clear_page(l1tab);
+             if ( count == 0 )
+                 l1tab += l1_table_offset(v_start);
+             if ( !((unsigned long)l2tab & (PAGE_SIZE-1)) )
+             {
+                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
+-                l2start = l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
++                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
++                l2tab = l2start;
+                 clear_page(l2tab);
+                 if ( count == 0 )
+                     l2tab += l2_table_offset(v_start);
+@@ -753,19 +769,19 @@ int __init dom0_construct_pv(struct domain *d,
+                     {
+                         maddr_to_page(mpt_alloc)->u.inuse.type_info =
+                             PGT_l3_page_table;
+-                        l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
++                        UNMAP_MAP_AND_ADVANCE(l3start_mfn, l3start, mpt_alloc);
+                     }
+                     l3tab = l3start;
+                     clear_page(l3tab);
+                     if ( count == 0 )
+                         l3tab += l3_table_offset(v_start);
+-                    *l4tab = l4e_from_paddr(__pa(l3start), L4_PROT);
++                    *l4tab = l4e_from_mfn(l3start_mfn, L4_PROT);
+                     l4tab++;
+                 }
+-                *l3tab = l3e_from_paddr(__pa(l2start), L3_PROT);
++                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
+                 l3tab++;
+             }
+-            *l2tab = l2e_from_paddr(__pa(l1start), L2_PROT);
++            *l2tab = l2e_from_mfn(l1start_mfn, L2_PROT);
+             l2tab++;
+         }
+         if ( count < initrd_pfn || count >= initrd_pfn + PFN_UP(initrd_len) )
+@@ -792,9 +808,9 @@ int __init dom0_construct_pv(struct domain *d,
+             if ( !l3e_get_intpte(*l3tab) )
+             {
+                 maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l2_page_table;
+-                l2tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
+-                clear_page(l2tab);
+-                *l3tab = l3e_from_paddr(__pa(l2tab), L3_PROT);
++                UNMAP_MAP_AND_ADVANCE(l2start_mfn, l2start, mpt_alloc);
++                clear_page(l2start);
++                *l3tab = l3e_from_mfn(l2start_mfn, L3_PROT);
+             }
+             if ( i == 3 )
+                 l3e_get_page(*l3tab)->u.inuse.type_info |= PGT_pae_xen_l2;
+@@ -805,9 +821,17 @@ int __init dom0_construct_pv(struct domain *d,
+         unmap_domain_page(l2t);
+     }
+ 
++#undef UNMAP_MAP_AND_ADVANCE
 +
-         mov   $ROOT_PAGETABLE_FIRST_XEN_SLOT, %ecx
-         mov   root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rsi), %r8
-         mov   %r8, root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rdi)
-@@ -177,6 +194,14 @@ restore_all_guest:
-         sub   $(ROOT_PAGETABLE_FIRST_XEN_SLOT - \
-                 ROOT_PAGETABLE_LAST_XEN_SLOT - 1) * 8, %rdi
-         rep movsq
++    UNMAP_DOMAIN_PAGE(l1start);
++    UNMAP_DOMAIN_PAGE(l2start);
++    UNMAP_DOMAIN_PAGE(l3start);
 +
-+        /* Unmap the page. */
-+        popq  %rdi
-+        callq unmap_domain_page
-+        popq  %rax
-+        popq  %rdx
-+        popq  %r9
+     /* Pages that are part of page tables must be read only. */
+     mark_pv_pt_pages_rdonly(d, l4start, vpt_start, nr_pt_pages, &flush_flags);
+ 
++    UNMAP_DOMAIN_PAGE(l4start);
 +
- .Lrag_copy_done:
-         mov   %r9, STACK_CPUINFO_FIELD(xen_cr3)(%rdx)
-         movb  $1, STACK_CPUINFO_FIELD(use_pv_cr3)(%rdx)
+     /* Mask all upcalls... */
+     for ( i = 0; i < XEN_LEGACY_MAX_VCPUS; i++ )
+         shared_info(d, vcpu_info[i].evtchn_upcall_mask) = 1;
+@@ -977,8 +1001,12 @@ int __init dom0_construct_pv(struct domain *d,
+      * !CONFIG_VIDEO case so the logic here can be simplified.
+      */
+     if ( pv_shim )
++    {
++        l4start = map_domain_page(l4start_mfn);
+         pv_shim_setup_dom(d, l4start, v_start, vxenstore_start, vconsole_start,
+                           vphysmap_start, si);
++        UNMAP_DOMAIN_PAGE(l4start);
++    }
+ 
+ #ifdef CONFIG_COMPAT
+     if ( compat )
 -- 
 2.38.1
 
