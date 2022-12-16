@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71FEC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC6FC3DA6E
 	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464434.722886 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.464432.722871 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69DB-0005Ng-7O; Fri, 16 Dec 2022 11:49:09 +0000
+	id 1p69D9-0004uN-Li; Fri, 16 Dec 2022 11:49:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464434.722886; Fri, 16 Dec 2022 11:49:09 +0000
+Received: by outflank-mailman (output) from mailman id 464432.722871; Fri, 16 Dec 2022 11:49:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69DB-0005MW-1B; Fri, 16 Dec 2022 11:49:09 +0000
-Received: by outflank-mailman (input) for mailman id 464434;
- Fri, 16 Dec 2022 11:49:07 +0000
+	id 1p69D9-0004tC-E6; Fri, 16 Dec 2022 11:49:07 +0000
+Received: by outflank-mailman (input) for mailman id 464432;
+ Fri, 16 Dec 2022 11:49:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69D9-0004u8-Fl
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:07 +0000
+ (envelope-from <julien@xen.org>) id 1p69D8-0004b9-7Y
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:06 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D9-0002Er-E8; Fri, 16 Dec 2022 11:49:07 +0000
+ id 1p69D8-0002ET-5Z; Fri, 16 Dec 2022 11:49:06 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D9-0004sN-6k; Fri, 16 Dec 2022 11:49:07 +0000
+ id 1p69D7-0004sN-US; Fri, 16 Dec 2022 11:49:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,84 +45,91 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=vmtNA9XdH0srZ9asaGnjFiuLx3yBtd0BVtqXIukQgjM=; b=SUa3z5qrtpvwTyqxU4268rECt/
-	19/D/bc/kCdXMUWX4leTRpnP8ZIRVdrg+c0wyUEWzO4e01rpd3ocb58eTi0CIcxumiM/fF0YWiub2
-	bRuT7xnU51KnTe1WDHfThSfMNJSBM/D9tJmjWmL+WcPOSEKJq2t4N1gUDMIuuMFD2oA0=;
+	bh=FDnn4j9oos7o0Yst//etF30Yzyr3SCCSdb3Qh8o9mlo=; b=fHd51aNXlHLmKnuzS89FCVrVMv
+	6yxymS4djo7spaS62B+LYP5kO4zqErtz5FVtozvvW0CftDT7ElgEMFpbhc3CRx2lNd74u823ed3Y0
+	2ygOzpZZ9Hbci4Q7zxwpwOG4K/JG5ibUf88FCbaP7uRZ5jBeVRf2nw8X3shrWO8zo+Mk=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Wei Liu <wei.liu2@citrix.com>,
+	Hongyan Xia <hongyxia@amazon.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	Wei Wang <wawei@amazon.de>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 07/22] x86/pv: domheap pages should be mapped while relocating initrd
-Date: Fri, 16 Dec 2022 11:48:38 +0000
-Message-Id: <20221216114853.8227-8-julien@xen.org>
+Subject: [PATCH 06/22] x86: map/unmap pages in restore_all_guests
+Date: Fri, 16 Dec 2022 11:48:37 +0000
+Message-Id: <20221216114853.8227-7-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216114853.8227-1-julien@xen.org>
 References: <20221216114853.8227-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Wei Liu <wei.liu2@citrix.com>
+From: Hongyan Xia <hongyxia@amazon.com>
 
-Xen shouldn't use domheap page as if they were xenheap pages. Map and
-unmap pages accordingly.
+Before, it assumed the pv cr3 could be accessed via a direct map. This
+is no longer true.
 
-Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-Signed-off-by: Wei Wang <wawei@amazon.de>
+Note that we do not map and unmap root_pgt for now since it is still a
+xenheap page.
+
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ----
 
     Changes since Hongyan's version:
-        * Add missing newline after the variable declaration
+        * Remove the final dot in the commit title
 ---
- xen/arch/x86/pv/dom0_build.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ xen/arch/x86/x86_64/entry.S | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index a62f0fa2ef29..c837b2d96f89 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -611,18 +611,32 @@ int __init dom0_construct_pv(struct domain *d,
-         if ( d->arch.physaddr_bitsize &&
-              ((mfn + count - 1) >> (d->arch.physaddr_bitsize - PAGE_SHIFT)) )
-         {
-+            unsigned long nr_pages;
-+            unsigned long len = initrd_len;
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index ae012851819a..b72abf923d9c 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -165,7 +165,24 @@ restore_all_guest:
+         and   %rsi, %rdi
+         and   %r9, %rsi
+         add   %rcx, %rdi
+-        add   %rcx, %rsi
 +
-             order = get_order_from_pages(count);
-             page = alloc_domheap_pages(d, order, MEMF_no_scrub);
-             if ( !page )
-                 panic("Not enough RAM for domain 0 initrd\n");
++         /*
++          * Without a direct map, we have to map first before copying. We only
++          * need to map the guest root table but not the per-CPU root_pgt,
++          * because the latter is still a xenheap page.
++          */
++        pushq %r9
++        pushq %rdx
++        pushq %rax
++        pushq %rdi
++        mov   %rsi, %rdi
++        shr   $PAGE_SHIFT, %rdi
++        callq map_domain_page
++        mov   %rax, %rsi
++        popq  %rdi
++        /* Stash the pointer for unmapping later. */
++        pushq %rax
 +
-+            nr_pages = 1UL << order;
-             for ( count = -count; order--; )
-                 if ( count & (1UL << order) )
-                 {
-                     free_domheap_pages(page, order);
-                     page += 1UL << order;
-+                    nr_pages -= 1UL << order;
-                 }
--            memcpy(page_to_virt(page), mfn_to_virt(initrd->mod_start),
--                   initrd_len);
+         mov   $ROOT_PAGETABLE_FIRST_XEN_SLOT, %ecx
+         mov   root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rsi), %r8
+         mov   %r8, root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rdi)
+@@ -177,6 +194,14 @@ restore_all_guest:
+         sub   $(ROOT_PAGETABLE_FIRST_XEN_SLOT - \
+                 ROOT_PAGETABLE_LAST_XEN_SLOT - 1) * 8, %rdi
+         rep movsq
 +
-+            for ( i = 0; i < nr_pages; i++, len -= PAGE_SIZE )
-+            {
-+                void *p = __map_domain_page(page + i);
++        /* Unmap the page. */
++        popq  %rdi
++        callq unmap_domain_page
++        popq  %rax
++        popq  %rdx
++        popq  %r9
 +
-+                memcpy(p, mfn_to_virt(initrd_mfn + i),
-+                       min(len, (unsigned long)PAGE_SIZE));
-+                unmap_domain_page(p);
-+            }
-+
-             mpt_alloc = (paddr_t)initrd->mod_start << PAGE_SHIFT;
-             init_domheap_pages(mpt_alloc,
-                                mpt_alloc + PAGE_ALIGN(initrd_len));
+ .Lrag_copy_done:
+         mov   %r9, STACK_CPUINFO_FIELD(xen_cr3)(%rdx)
+         movb  $1, STACK_CPUINFO_FIELD(use_pv_cr3)(%rdx)
 -- 
 2.38.1
 
