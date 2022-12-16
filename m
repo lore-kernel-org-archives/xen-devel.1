@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E861DC4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.464427.722844 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD02C4167B
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Dec 2022 11:49:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.464430.722865 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D7-0004Jp-0a; Fri, 16 Dec 2022 11:49:05 +0000
+	id 1p69D9-0004oz-8C; Fri, 16 Dec 2022 11:49:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 464427.722844; Fri, 16 Dec 2022 11:49:04 +0000
+Received: by outflank-mailman (output) from mailman id 464430.722865; Fri, 16 Dec 2022 11:49:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p69D6-0004JZ-Si; Fri, 16 Dec 2022 11:49:04 +0000
-Received: by outflank-mailman (input) for mailman id 464427;
- Fri, 16 Dec 2022 11:49:02 +0000
+	id 1p69D9-0004nY-1i; Fri, 16 Dec 2022 11:49:07 +0000
+Received: by outflank-mailman (input) for mailman id 464430;
+ Fri, 16 Dec 2022 11:49:05 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p69D4-000442-S3
- for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:02 +0000
+ (envelope-from <julien@xen.org>) id 1p69D7-0004Mt-6w
+ for xen-devel@lists.xenproject.org; Fri, 16 Dec 2022 11:49:05 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D4-0002DR-KG; Fri, 16 Dec 2022 11:49:02 +0000
+ id 1p69D7-0002E2-0I; Fri, 16 Dec 2022 11:49:05 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1p69D4-0004sN-B6; Fri, 16 Dec 2022 11:49:02 +0000
+ id 1p69D6-0004sN-P3; Fri, 16 Dec 2022 11:49:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,22 +45,21 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=E2zSWaWXXVlSavKpNugaiSnQ/IiR0BYoL62Rayvr/MY=; b=hKNcTKSNOrOaCq5PJc51xa0GS0
-	7Z2F/tvGmQk737a6n+KjVlBXyrhVnOGfdgSVgQcX38/YimhTrbQlJEYqXoJ5mj8PtGFkckLYkOIj5
-	PSYkSyi0xhPCap+6jsN0Iu5iVOgSimT7ZiDWjmuJS4k1QGzJtrbo4+AKBSySghMl8mU0=;
+	bh=5oXMYhVrHa49EzlJyprSVvBAT8KPYfOFRwrMrA+Sn68=; b=cozlDAIvwTjD7N7KnGv9QUb1tK
+	RwpSbCKYNRGaLSAwm1RH81K6v1OQRWDNz50vS5jiFMSZ7gaBC4IJSX72+xq8eQSN74nGX7o4FXLis
+	vgi2fp7BbNeQO032Dw7wgX1vazlY4k215QZO1/kmKWTxmVfNhSW5Q2afmlqeB49atO/8=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Hongyan Xia <hongyxia@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 03/22] acpi: vmap pages in acpi_os_alloc_memory
-Date: Fri, 16 Dec 2022 11:48:34 +0000
-Message-Id: <20221216114853.8227-4-julien@xen.org>
+Subject: [PATCH 05/22] x86/srat: vmap the pages for acpi_slit
+Date: Fri, 16 Dec 2022 11:48:36 +0000
+Message-Id: <20221216114853.8227-6-julien@xen.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216114853.8227-1-julien@xen.org>
 References: <20221216114853.8227-1-julien@xen.org>
@@ -69,12 +68,7 @@ Content-Transfer-Encoding: 8bit
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-Also, introduce a wrapper around vmap that maps a contiguous range for
-boot allocations. Unfortunately, the new helper cannot be a static inline
-because the dependences are a mess. We would need to re-include
-asm/page.h (was removed in aa4b9d1ee653 "include: don't use asm/page.h
-from common headers") and it doesn't look to be enough anymore
-because bits from asm/cpufeature.h is used in the definition of PAGE_NX.
+This avoids the assumption that boot pages are in the direct map.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
@@ -82,73 +76,25 @@ Signed-off-by: Julien Grall <jgrall@amazon.com>
 ----
 
     Changes since Hongyan's version:
-        * Rename vmap_boot_pages() to vmap_contig_pages()
-        * Move the new helper in vmap.c to avoid compilation issue
-        * Don't use __pa() to translate the virtual address
+        * vmap_boot_pages() was renamed to vmap_contig_pages()
 ---
- xen/common/vmap.c      |  5 +++++
- xen/drivers/acpi/osl.c | 13 +++++++++++--
- xen/include/xen/vmap.h |  2 ++
- 3 files changed, 18 insertions(+), 2 deletions(-)
+ xen/arch/x86/srat.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/vmap.c b/xen/common/vmap.c
-index 1340c7c6faf6..78f051a67682 100644
---- a/xen/common/vmap.c
-+++ b/xen/common/vmap.c
-@@ -244,6 +244,11 @@ void *vmap(const mfn_t *mfn, unsigned int nr)
-     return __vmap(mfn, 1, nr, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
+diff --git a/xen/arch/x86/srat.c b/xen/arch/x86/srat.c
+index 56749ddca526..1fd178e89d28 100644
+--- a/xen/arch/x86/srat.c
++++ b/xen/arch/x86/srat.c
+@@ -139,7 +139,8 @@ void __init acpi_numa_slit_init(struct acpi_table_slit *slit)
+ 		return;
+ 	}
+ 	mfn = alloc_boot_pages(PFN_UP(slit->header.length), 1);
+-	acpi_slit = mfn_to_virt(mfn_x(mfn));
++	acpi_slit = vmap_contig_pages(mfn, PFN_UP(slit->header.length));
++	BUG_ON(!acpi_slit);
+ 	memcpy(acpi_slit, slit, slit->header.length);
  }
  
-+void *vmap_contig_pages(mfn_t mfn, unsigned int nr_pages)
-+{
-+    return __vmap(&mfn, nr_pages, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
-+}
-+
- void vunmap(const void *va)
- {
-     unsigned long addr = (unsigned long)va;
-diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
-index 389505f78666..44a9719b0dcf 100644
---- a/xen/drivers/acpi/osl.c
-+++ b/xen/drivers/acpi/osl.c
-@@ -221,7 +221,11 @@ void *__init acpi_os_alloc_memory(size_t sz)
- 	void *ptr;
- 
- 	if (system_state == SYS_STATE_early_boot)
--		return mfn_to_virt(mfn_x(alloc_boot_pages(PFN_UP(sz), 1)));
-+	{
-+		mfn_t mfn = alloc_boot_pages(PFN_UP(sz), 1);
-+
-+		return vmap_contig_pages(mfn, PFN_UP(sz));
-+	}
- 
- 	ptr = xmalloc_bytes(sz);
- 	ASSERT(!ptr || is_xmalloc_memory(ptr));
-@@ -246,5 +250,10 @@ void __init acpi_os_free_memory(void *ptr)
- 	if (is_xmalloc_memory(ptr))
- 		xfree(ptr);
- 	else if (ptr && system_state == SYS_STATE_early_boot)
--		init_boot_pages(__pa(ptr), __pa(ptr) + PAGE_SIZE);
-+	{
-+		paddr_t addr = mfn_to_maddr(vmap_to_mfn(ptr));
-+
-+		vunmap(ptr);
-+		init_boot_pages(addr, addr + PAGE_SIZE);
-+	}
- }
-diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-index b0f7632e8985..3c06c7c3ba30 100644
---- a/xen/include/xen/vmap.h
-+++ b/xen/include/xen/vmap.h
-@@ -23,6 +23,8 @@ void *vmalloc_xen(size_t size);
- void *vzalloc(size_t size);
- void vfree(void *va);
- 
-+void *vmap_contig_pages(mfn_t mfn, unsigned int nr_pages);
-+
- void __iomem *ioremap(paddr_t, size_t);
- 
- static inline void iounmap(void __iomem *va)
 -- 
 2.38.1
 
