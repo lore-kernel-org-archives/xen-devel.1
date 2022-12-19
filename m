@@ -4,36 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01BCC4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Dec 2022 14:14:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.466135.724987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0A4C4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Dec 2022 14:46:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.466150.724998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7Gtx-0003Al-PB; Mon, 19 Dec 2022 14:13:57 +0000
+	id 1p7HOr-0006it-JU; Mon, 19 Dec 2022 14:45:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 466135.724987; Mon, 19 Dec 2022 14:13:57 +0000
+Received: by outflank-mailman (output) from mailman id 466150.724998; Mon, 19 Dec 2022 14:45:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7Gtx-0003Ae-LP; Mon, 19 Dec 2022 14:13:57 +0000
-Received: by outflank-mailman (input) for mailman id 466135;
- Mon, 19 Dec 2022 14:13:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=u+i/=4R=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1p7Gtv-0003AQ-Vr
- for xen-devel@lists.xenproject.org; Mon, 19 Dec 2022 14:13:56 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5ef9fc8e-7fa7-11ed-91b6-6bf2151ebd3b;
- Mon, 19 Dec 2022 15:13:55 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id h7so8764375wrs.6
- for <xen-devel@lists.xenproject.org>; Mon, 19 Dec 2022 06:13:55 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- u18-20020adfeb52000000b002423dc3b1a9sm10072017wrn.52.2022.12.19.06.13.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Dec 2022 06:13:54 -0800 (PST)
+	id 1p7HOr-0006im-Gl; Mon, 19 Dec 2022 14:45:53 +0000
+Received: by outflank-mailman (input) for mailman id 466150;
+ Mon, 19 Dec 2022 14:45:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EUwz=4R=citrix.com=prvs=345b0463a=sergey.dyasli@srs-se1.protection.inumbo.net>)
+ id 1p7HOq-0006ib-0N
+ for xen-devel@lists.xenproject.org; Mon, 19 Dec 2022 14:45:52 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d38237bf-7fab-11ed-8fd4-01056ac49cbb;
+ Mon, 19 Dec 2022 15:45:50 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,74 +38,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ef9fc8e-7fa7-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Nl4BGj1PyLBerZrWWS1NwXWllkrPCT7tq7b1VOTopDg=;
-        b=Qoq1oc3WR/h+dr5nNxVF0P7U/ZkhFAEPkpf+fYnizATJ+5xL7j35kQRZlFPbDPYY6c
-         xJ87qjQrF4tMPIewqjhAqQrO83nQpxuUaIk8jNhy/p3QqhwSRIlWhzki+GNhGPPoG5C0
-         CNYt5ZkwEwcQIgYOHRqOtrZ+AXFqI9J/6J5r+RJ4DODPoxNNmlTVzRYWOtbR3RO7h6dH
-         arAMC6XqWrhiNElK5I5Y8veR6sltuaZK3dnQXQHLIaG+vT7nPYnivs1S3YALat+eBHQf
-         ZANg1H+/TYJ3rRMn24mhTyfWr76k9AvneEMnhGGVK7lIH9aqaGPda+t73IjSWL2d4qQa
-         eNqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Nl4BGj1PyLBerZrWWS1NwXWllkrPCT7tq7b1VOTopDg=;
-        b=XldZxe+gVHJgnYnumStCDD0xYPJXISXWJLlHxuILeVKwZEdYpVUCUfuZMlPWPu/Xc9
-         YUlnCgowN0NW3kWJEPi4DedRVszNMiEjQG6w+y5lxoY9Ksgre/iuFWG+Cvxos5yMYcLb
-         MOZHkcb0H+97xxyZ808cjj8om1Ks9WCf6qdCCjxhVR97Ee/9z4khhwDLOxBNa0s7KDJV
-         nlgKtqM1yS7pob2iAHtTwAuAe5wtaubpgW0z4Yv5fVHIPkmLblaoaXN0hGZPf1zyJEpa
-         Hz/oHyu4Su4YHDbkS6iFSPM09iuB1OIv6AhJ0IAU58KqytuDEB6WjpmgFDznTrWaubjr
-         2qWg==
-X-Gm-Message-State: ANoB5pm/nXJled6KvxJBn5k5CF1g30zLPV9WIDEbnpzZS0Dw7lOZH6ZD
-	poLaCKxXiSQUEWB18vXCf+DXiQ==
-X-Google-Smtp-Source: AA0mqf5JZ3r27fj5zYU0NkvBmgVgehhQjiBRs8UlsMH+e7JchlrgCR43+KyfXv8Tqx1/1uR9NmQ+jw==
-X-Received: by 2002:adf:e992:0:b0:242:4035:622 with SMTP id h18-20020adfe992000000b0024240350622mr28575482wrm.31.1671459234482;
-        Mon, 19 Dec 2022 06:13:54 -0800 (PST)
-Message-ID: <542d86b6-3ca7-a1c4-51b1-af73d5434f57@linaro.org>
-Date: Mon, 19 Dec 2022 15:13:51 +0100
+X-Inumbo-ID: d38237bf-7fab-11ed-8fd4-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1671461150;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=uvIXRaTqrfksdn5R9FNqNHnkqsEC5sXLQq/zpghTvps=;
+  b=OAjhERoncBfgMWNNvYT8dKAHu9ILesoKeI/Kpsu+u9A/nwYQn9s7WkdI
+   2eIv8gXnI7JKPeYxyhjS4nN76QqIVil/ybOC0aKbIYPbcc6l6y+SLsNRS
+   nGcg9F4nR5H0Zj6el2aTTI3mA847TkH3suPLEREnkinrvrC0zCWym20xP
+   U=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 88063303
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:S9mOIa5fnEFmGqrKgwKYGwxRtDfHchMFZxGqfqrLsTDasY5as4F+v
+ jNLWDuCbPmPYWKjKNknaonk8hhUuZPWndRmSgZu/CAyHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+4pwehBtC5gZkPKoS7QeH/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m0
+ fxAIWwidjC6tuuGh+yYF+5ypZoqI5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJU0UUrsUIMtWcOOAnXTlfDBJ7l6ErLEz4kDYzRBr0airO93QEjCPbZUFxhjD/
+ Tqdl4j/KhVBaeCh02KYyW+pnMnJxTzFAr8eGqLto5aGh3XMnzdOWXX6T2CTvv2RmkO4HdVFJ
+ CQ8+CAjsKwz/0yDVcTmUluzp3vslg4RXZ9cHvM37CmJy7HI+ECJC24cVDlDZdc68sgsSlQXO
+ kShxo2zQ2Y16fvMFCzbpuz8QS6O1TY9CW9abHMrVSs80tDT598Q0xXRbYhqH/vg5jHqIg3Yz
+ zePpSk4orwci88Xyqm2lWz6byKQSovhFVBsuFiONo6xxkYgPdP+OdT0gbTOxawYRLt1WGVtq
+ 5TtdyK2yOkVRa+AmyWWKAnmNOH4vq3VWNEwbLMGInXAy9hP0yT4FWyzyGskTKuMDirjUWGBX
+ aMrkVkNjKK/xVPzBUONX6q/Ct4x0Y/rHsn/W/bfY7JmO8YuLVTXrHowOx7BjggBdXTAdolmZ
+ f+mnTuEVy5GWcyLMhLtLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaodFvxC3PXNrpRxPrd8G3oH
+ yN3a5PiJ+N3DLevPUE6MOc7cTg3EJTMLcut+pEIKLLef1IO9aNII6a5/I7NsrdNx8x9/tokN
+ FnkMqOE4DITXUH6FDg=
+IronPort-HdrOrdr: A9a23:QWuVGqqDL3pCMkDW0nWOkdwaV5rveYIsimQD101hICG9Evb0qy
+ nOpoV/6faQslwssR4b9uxoVJPvfZq+z+8W3WByB9eftWDd0QPFEGgL1+DfKlbbak7DH4BmtJ
+ uJc8JFeafN5VoRt7eG3OFveexQvOVu88qT9JjjJ28Gd3APV0n5hT0JcjpyFCdNNW57LKt8Lr
+ WwzOxdqQGtfHwGB/7LfUXsD4D41rv2fIuNW29+OyIa
+X-IronPort-AV: E=Sophos;i="5.96,255,1665460800"; 
+   d="scan'208";a="88063303"
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Sergey Dyasli
+	<sergey.dyasli@citrix.com>
+Subject: [PATCH v2 0/3] x86: load microcode earlier on boot CPU
+Date: Mon, 19 Dec 2022 14:45:30 +0000
+Message-ID: <20221219144533.19836-1-sergey.dyasli@citrix.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH 4/6] util/error: add G_GNUC_PRINTF for various functions
-Content-Language: en-US
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: "Dr. David Alan Gilbert" <dgilbert@redhat.com>, qemu-ppc@nongnu.org,
- xen-devel@lists.xenproject.org, Laurent Vivier <lvivier@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, virtio-fs@redhat.com,
- Michael Roth <michael.roth@amd.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, qemu-block@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- Paul Durrant <paul@xen.org>, Anthony Perard <anthony.perard@citrix.com>,
- David Gibson <david@gibson.dropbear.id.au>, =?UTF-8?Q?C=c3=a9dric_Le_Goater?=
- <clg@kaod.org>, John Snow <jsnow@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Greg Kurz <groug@kaod.org>,
- Thomas Huth <thuth@redhat.com>
-References: <20221219130205.687815-1-berrange@redhat.com>
- <20221219130205.687815-5-berrange@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221219130205.687815-5-berrange@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On 19/12/22 14:02, Daniel P. Berrangé wrote:
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->   util/error-report.c | 1 +
->   util/error.c        | 1 +
->   2 files changed, 2 insertions(+)
+The second version of patches. Changelog is available in each patch.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Sergey Dyasli (3):
+  xen/multiboot: add proper struct definitions to typedefs
+  x86/ucode: allow cpu_request_microcode() to skip memory allocation
+  x86/ucode: load microcode earlier on boot CPU
 
+ xen/arch/x86/cpu/microcode/amd.c     | 13 ++++--
+ xen/arch/x86/cpu/microcode/core.c    | 70 +++++++++++++++++++++++-----
+ xen/arch/x86/cpu/microcode/intel.c   | 13 ++++--
+ xen/arch/x86/cpu/microcode/private.h | 15 ++++--
+ xen/arch/x86/include/asm/microcode.h |  7 ++-
+ xen/arch/x86/include/asm/setup.h     |  3 --
+ xen/arch/x86/setup.c                 | 10 ++--
+ xen/include/xen/multiboot.h          | 25 ++++++----
+ 8 files changed, 115 insertions(+), 41 deletions(-)
+
+-- 
+2.17.1
 
 
