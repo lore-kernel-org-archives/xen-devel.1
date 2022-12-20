@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C87C10F1D
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Dec 2022 01:10:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.466403.725328 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F07DC3DA78
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Dec 2022 01:10:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.466398.725274 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7R9Q-0005s2-Oe; Tue, 20 Dec 2022 01:10:36 +0000
+	id 1p7R9G-0004TK-7r; Tue, 20 Dec 2022 01:10:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 466403.725328; Tue, 20 Dec 2022 01:10:36 +0000
+Received: by outflank-mailman (output) from mailman id 466398.725274; Tue, 20 Dec 2022 01:10:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7R9Q-0005rv-Jr; Tue, 20 Dec 2022 01:10:36 +0000
-Received: by outflank-mailman (input) for mailman id 466403;
- Tue, 20 Dec 2022 01:10:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1p7R9G-0004TD-2g; Tue, 20 Dec 2022 01:10:26 +0000
+Received: by outflank-mailman (input) for mailman id 466398;
+ Tue, 20 Dec 2022 01:10:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tFeQ=4S=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1p7R9P-0004iO-O2
- for xen-devel@lists.xenproject.org; Tue, 20 Dec 2022 01:10:35 +0000
+ id 1p7R9F-0004T7-6t
+ for xen-devel@lists.xenproject.org; Tue, 20 Dec 2022 01:10:25 +0000
 Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com
- [64.147.123.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a9807f8-8003-11ed-91b6-6bf2151ebd3b;
- Tue, 20 Dec 2022 02:10:34 +0100 (CET)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 4E0C3320095B;
- Mon, 19 Dec 2022 20:10:32 -0500 (EST)
+ [64.147.123.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1286c6a8-8003-11ed-8fd4-01056ac49cbb;
+ Tue, 20 Dec 2022 02:10:22 +0100 (CET)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.west.internal (Postfix) with ESMTP id 321923200957;
+ Mon, 19 Dec 2022 20:10:18 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Mon, 19 Dec 2022 20:10:33 -0500
+ by compute2.internal (MEProxy); Mon, 19 Dec 2022 20:10:19 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 19 Dec 2022 20:10:30 -0500 (EST)
+ 19 Dec 2022 20:10:16 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,47 +45,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a9807f8-8003-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 1286c6a8-8003-11ed-8fd4-01056ac49cbb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1671498631; x=1671585031; bh=uxmdOs+lCg3lNRcLgLV7XD5izHM7UdEv5Kn
-	bujPlCxE=; b=dedffQ5lwM/nq4YhPhfB4flTbftjq38/ex3njQi6prBsfMhUcCm
-	tAgeCU6n+25b0Bi6xgamQilfesd6EMsBtpQ4YrQkZhSGPpdx5tOCCH29DHs2x7Fm
-	8T/7CLw5+1oqj3jP0VgZnXWPQUWcqMjLWL9GCnP5An0gOMaZpQWbLBDl1Kg9UM0C
-	S1e1d5tsOhmMGXG61UcrF6rV7SeJeTJY8yxz5fwIPpPjxf97NQKk48NF/XJNisdu
-	SznWVd/jwAUeA6Wihb8IILeL63d023powN38W2s3tJdnD0RyyIoa5E7inwTXq7gk
-	5HgnmwCnR2Xz6l55urKlZTRgZbEFks98/Mw==
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1671498617; x=1671585017; bh=HxKwu1yHvQE4t0B7JD3h8oXtLX1A8wBvk77
+	m47Pevgo=; b=zTQrknzF1f7ibjycA25oDFa97HGSjXrr+S3G0dYFYBWrQWOCV1X
+	G6aFu4bfwPbyKVQWMJ9HvXYFaxxE/Uym/HBid0gU91kvimqyb25A/Xr7FnWzSFGX
+	HHqNVVu1ZFwKcebxY3+hhnO+JX6CSs7oQeyH9S3PtSO6Z3g8O4rAH7hm2R0DeY30
+	FpXwOVGfZSGsY7jgHOob3asL5JIXkzSYEdV5F332cCtRF3FCy8O5XUuhmCx+/P6t
+	h804kKEG1ZPaAee+KxjttXksVlnlgKgE9wMv0HsAY7Cje8OJfqnpacCsy+QAr3VI
+	ucZBZtLS35I/RhIzVpmMGFME79n3wsYmDrA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1671498631; x=1671585031; bh=uxmdOs+lCg3lN
-	RcLgLV7XD5izHM7UdEv5KnbujPlCxE=; b=j9o81iF0qvmDWFXXMig8tGbyLlftU
-	BTh+lQcviJX07WBuVDFA/oLY6135P6l64E+2Ak9yL6H/45xn7rEPfEVFS1rzueW0
-	kmCxBj6Vi7l9O1cAwMXL1MJlNgJIptIFOBHYMOaHtQe9G3By4gdPmdv5B8fl4PzU
-	dNtU3brZPwoSjWqWcRsvgEi4PEzlvB2ynLWXqLuthnHgg3RnwQ9rO2LHCChXaZUl
-	X0VNI0/fLP1zazon5hxQZSaDOctr7ikj/U35BqUD4UgXCJL47i6qxPeAnSK707/X
-	t6UbdeOjQqHwhVUhgMT16DhVXfD3Ypy4Ux7BK4UUbwhm7cpPjCirh0ACA==
-X-ME-Sender: <xms:hwuhYwQViDPyv3Hl2HuEVn5oY-HfRK8Rwzczs4ln1fnmDpAAy-Gr9A>
-    <xme:hwuhY9ymeFOrPncBccFoahWgaQXTy6ckzk6nUqI2yC0yBlBR4CGWhpqDq_Wr0XPNP
-    QUSUWpZi_In1Q8>
-X-ME-Received: <xmr:hwuhY90LeYLOfKC_xQvn25gP0ffTyQYfrhF-BmyKYngGvLfnMDJpMlguxNhr586B1Ixw8eXiDuph>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrgeeggdefudcutefuodetggdotefrodftvf
+	:x-sasl-enc; s=fm2; t=1671498617; x=1671585017; bh=HxKwu1yHvQE4t
+	0B7JD3h8oXtLX1A8wBvk77m47Pevgo=; b=s9LPDfcWgLFhWgpZuYe/22aHJ6DM3
+	Fop0eGs9BJmOVA4qn1xWrFd1jQV8JjeQB85gwQHbqF8zLWEAAWFKh2Eth3B2Dptv
+	C3SsIJgH60NENgp6auVCqhFdidIxxLwsEME/B0h0t30uSe0CXTXM/eqokg+PmZja
+	77O7VpYfNQPB56SXsI6q5Dupwjzaio2PNcScCX+dYwXSCSoaHOBojlzt7kBLzX7C
+	nq1OtxafvLzBrOM5T86ioiNC6n6KOhpGpPxvTIlEhbFSFiaz8WkNJfdzr2tKmzXK
+	EbfDlMJE+aKerqYXJSosWsJlIzmzCsOEuvhcfZKKcZj82yqbUWKr2eGLw==
+X-ME-Sender: <xms:eQuhYxO-rqPPEf4qmdMPzMadZc8PE9DwSIQcH9-AkG5ps4Zq0t4sHA>
+    <xme:eQuhYz8cpqsuGG8HrEoqvc79tgCyerJJLCHp2qwWOgqUqPwOVfZp7Lsyvbf5Wb48W
+    TXH_ak9oNFp2as>
+X-ME-Received: <xmr:eQuhYwT5jvYGgnvi6Oyobq6JOqZo0L6R_xDaXrrVPYhfS5o6iaTUg06RS3ouF-LBH_n0ycW-hyAu>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrgeeggdefvdcutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghmihcu
-    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
-    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefghefg
-    hffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedunecurf
-    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
-    rggsrdgtohhm
-X-ME-Proxy: <xmx:hwuhY0AH0iipBaUxAITIjqa2YtEEG2EUdhNIDZiXbXug9bWByNhNZw>
-    <xmx:hwuhY5haNH91dkh7eCRufUtiVRY3vxz_66AMylmAf7l5d5A8aw_vZw>
-    <xmx:hwuhYwq_tQfdWPpM1q-5pFk9Y1KcfzNx85NorLBW34pmIQQa8xSvzQ>
-    <xmx:hwuhY6WlpoqXpaFXHTJVYH3AopMW3AWeWefV-XLYkHnp6xRdBBS3VA>
+    fjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepffgvmhhiucfo
+    rghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhnghhslh
+    grsgdrtghomheqnecuggftrfgrthhtvghrnhephfeggfeiiedtieejgedutdekgfetgeeh
+    heegteekvefhfefgudehtdevleegueegnecuvehluhhsthgvrhfuihiivgeptdenucfrrg
+    hrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhslhgr
+    sgdrtghomh
+X-ME-Proxy: <xmx:eQuhY9sKLbvoqCbP9oWTTy14opVDak03vS3bIvrDyAcmkG_Qm5gmCA>
+    <xmx:eQuhY5clFlIm14detihn7HavY2DQDfua3U8bGoXXXoc1oXPnnIFymQ>
+    <xmx:eQuhY51HTvMsTeGIsUrJjHSuRAjVm1Bqx_VSFaIS5ygt1PQKYtnlCA>
+    <xmx:eQuhY4wqvkUR0QEjmRfP_r-N5lVTLY4XXZOdBfRc2tQTocK-rnryVQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -99,61 +99,68 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Kevin Tian <kevin.tian@intel.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Tim Deegan <tim@xen.org>
-Subject: [PATCH v5 05/10] x86: Replace EPT_EMT_* constants with X86_MT_*
-Date: Mon, 19 Dec 2022 20:07:07 -0500
-Message-Id: <4b5f6b6bcc4ed00db6b5f4c6def68606c190a74e.1671497984.git.demi@invisiblethingslab.com>
+Subject: [PATCH v5 00/10] Make PAT handling less brittle
+Date: Mon, 19 Dec 2022 20:07:02 -0500
+Message-Id: <cover.1671497984.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.38.1
-In-Reply-To: <cover.1671497984.git.demi@invisiblethingslab.com>
-References: <cover.1671497984.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This allows eliminating the former.  No functional change intended.
+While working on Qubes OS Marek found out that there were some PAT hacks
+in the Linux i195 driver.  I decided to make Xen use Linux’s PAT to see
+if it solved the graphics glitches that were observed; it did.  This
+required a substantial amount of preliminary work that is useful even
+without using Linux’s PAT.
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
- xen/arch/x86/include/asm/hvm/vmx/vmx.h | 9 ---------
- xen/arch/x86/mm/hap/nested_ept.c       | 4 ++--
- 2 files changed, 2 insertions(+), 11 deletions(-)
+Patches 1 through 9 are the preliminary work and I would like them to be
+accepted into upstream Xen.  Patch 9 does break ABI by rejecting the
+unused PAT entries, but this will only impact buggy PV guests and can be
+disabled with a Xen command-line option.  Patch 10 actually switches to
+Linux’s PAT and is NOT intended to be merged (at least for now) as it
+would at a minimum break migration of PV guests from hosts that do not
+have the patch.
 
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-index 8eedf59155e01ec1ca84dcc6b30961f9c884cb3b..49fe9822fac5eae15b67f0cfd3d0cb96347dc7ed 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -80,15 +80,6 @@ typedef enum {
- #define EPTE_RWX_MASK           0x7
- #define EPTE_FLAG_MASK          0x7f
- 
--#define EPT_EMT_UC              0
--#define EPT_EMT_WC              1
--#define EPT_EMT_RSV0            2
--#define EPT_EMT_RSV1            3
--#define EPT_EMT_WT              4
--#define EPT_EMT_WP              5
--#define EPT_EMT_WB              6
--#define EPT_EMT_RSV2            7
--
- #define PI_xAPIC_NDST_MASK      0xFF00
- 
- void vmx_asm_vmexit_handler(struct cpu_user_regs);
-diff --git a/xen/arch/x86/mm/hap/nested_ept.c b/xen/arch/x86/mm/hap/nested_ept.c
-index 1cb7fefc37091bf7d92a277203e652add5611871..23fb3889b7605be62805731218c314819d5027b5 100644
---- a/xen/arch/x86/mm/hap/nested_ept.c
-+++ b/xen/arch/x86/mm/hap/nested_ept.c
-@@ -84,8 +84,8 @@ static bool_t nept_emt_bits_check(ept_entry_t e, uint32_t level)
- {
-     if ( e.sp || level == 1 )
-     {
--        if ( e.emt == EPT_EMT_RSV0 || e.emt == EPT_EMT_RSV1 ||
--             e.emt == EPT_EMT_RSV2 )
-+        if ( e.emt == X86_MT_RSVD_2 || e.emt == X86_MT_RSVD_3 ||
-+             e.emt == X86_MT_UCM )
-             return 1;
-     }
-     return 0;
+Only patches 9 and 10 actually change Xen’s observable behavior.
+Patches 1, 2, and 7 are prerequisites, and patches 3 through 6 are
+cleanups.  Patch 8 makes changing the PAT much less error-prone, as
+problems with the PAT or with the associated _PAGE_* constants will
+be detected at compile time.
+
+Demi Marie Obenour (10):
+  x86: Add memory type constants
+  x86/mm: Avoid hard-coding PAT in get_page_from_l1e()
+  x86: Replace PAT_* with X86_MT_*
+  x86: Replace MTRR_* constants with X86_MT_* constants
+  x86: Replace EPT_EMT_* constants with X86_MT_*
+  x86: Remove MEMORY_NUM_TYPES and NO_HARDCODE_MEM_TYPE
+  x86: Derive XEN_MSR_PAT from its individual entries
+  x86/mm: make code robust to future PAT changes
+  x86/mm: Reject invalid cacheability in PV guests by default
+  x86: Use Linux's PAT
+
+ xen/arch/x86/cpu/mtrr/generic.c         |  10 +-
+ xen/arch/x86/cpu/mtrr/main.c            |  26 +++---
+ xen/arch/x86/e820.c                     |   4 +-
+ xen/arch/x86/hvm/hvm.c                  |  12 +--
+ xen/arch/x86/hvm/mtrr.c                 | 100 ++++++++++----------
+ xen/arch/x86/hvm/vmx/vmcs.c             |   2 +-
+ xen/arch/x86/hvm/vmx/vmx.c              |  18 ++--
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |   2 +-
+ xen/arch/x86/include/asm/hvm/vmx/vmx.h  |   9 --
+ xen/arch/x86/include/asm/mtrr.h         |  22 +----
+ xen/arch/x86/include/asm/page.h         |   4 +-
+ xen/arch/x86/include/asm/processor.h    |  11 ++-
+ xen/arch/x86/include/asm/x86-defns.h    |  11 +++
+ xen/arch/x86/mm.c                       | 118 ++++++++++++++++++++++--
+ xen/arch/x86/mm/hap/nested_ept.c        |   4 +-
+ xen/arch/x86/mm/p2m-ept.c               |  51 +++++-----
+ xen/arch/x86/mm/shadow/multi.c          |   8 +-
+ 17 files changed, 253 insertions(+), 159 deletions(-)
+
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 Invisible Things Lab
+
 
