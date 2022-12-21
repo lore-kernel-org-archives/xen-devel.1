@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E5AC10F1B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3CB9C4167B
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Dec 2022 09:58:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.467687.726714 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.467689.726736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7vrI-0006Fx-67; Wed, 21 Dec 2022 09:57:56 +0000
+	id 1p7vrK-0006lw-KU; Wed, 21 Dec 2022 09:57:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 467687.726714; Wed, 21 Dec 2022 09:57:56 +0000
+Received: by outflank-mailman (output) from mailman id 467689.726736; Wed, 21 Dec 2022 09:57:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p7vrI-0006Fq-30; Wed, 21 Dec 2022 09:57:56 +0000
-Received: by outflank-mailman (input) for mailman id 467687;
- Wed, 21 Dec 2022 09:57:54 +0000
+	id 1p7vrK-0006lp-HD; Wed, 21 Dec 2022 09:57:58 +0000
+Received: by outflank-mailman (input) for mailman id 467689;
+ Wed, 21 Dec 2022 09:57:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VCPi=4T=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1p7vrG-0006Ds-RB
- for xen-devel@lists.xenproject.org; Wed, 21 Dec 2022 09:57:54 +0000
+ id 1p7vrJ-0006Ds-6c
+ for xen-devel@lists.xenproject.org; Wed, 21 Dec 2022 09:57:57 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id efcef5d0-8115-11ed-91b6-6bf2151ebd3b;
- Wed, 21 Dec 2022 10:57:54 +0100 (CET)
+ id f164a077-8115-11ed-91b6-6bf2151ebd3b;
+ Wed, 21 Dec 2022 10:57:56 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F281AD7;
- Wed, 21 Dec 2022 01:58:34 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CAFBCAD7;
+ Wed, 21 Dec 2022 01:58:36 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0D6C03F71E;
- Wed, 21 Dec 2022 01:57:51 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B3BD13F71E;
+ Wed, 21 Dec 2022 01:57:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: efcef5d0-8115-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: f164a077-8115-11ed-91b6-6bf2151ebd3b
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,26 +55,37 @@ Cc: wei.chen@arm.com,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 0/2] cppcheck rule 20.7 fixes
-Date: Wed, 21 Dec 2022 09:57:40 +0000
-Message-Id: <20221221095742.54859-1-luca.fancellu@arm.com>
+Subject: [PATCH 2/2] public: misra rule 20.7 fix on memory.h
+Date: Wed, 21 Dec 2022 09:57:42 +0000
+Message-Id: <20221221095742.54859-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20221221095742.54859-1-luca.fancellu@arm.com>
+References: <20221221095742.54859-1-luca.fancellu@arm.com>
 
-In this serie there are some fixes for the rule 20.7.
+Cppcheck has found a violation of rule 20.7 for the macro
+XENMEM_SHARING_OP_FIELD_MAKE_GREF, the argument "val" is used in an
+expression, hence add parenthesis to the argument "val" to fix the
+violation.
 
-The analysed build is arm64, to reproduce the reports here the command:
-
-./xen/scripts/xen-analysis.py --cppcheck-misra --run-cppcheck -- CROSS_COMPILE="aarch64-linux-gnu-" XEN_TARGET_ARCH="arm64" O=/path/to/artifacts_folder
-
-
-Luca Fancellu (2):
-  public: misra rule 20.7 fix on errno.h
-  public: misra rule 20.7 fix on memory.h
-
- xen/include/public/errno.h  | 2 +-
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
  xen/include/public/memory.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index 29cf5c823902..c5f0d31e235d 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -485,7 +485,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_mem_access_op_t);
+ #define XENMEM_SHARING_OP_FIELD_IS_GREF_FLAG   (xen_mk_ullong(1) << 62)
+ 
+ #define XENMEM_SHARING_OP_FIELD_MAKE_GREF(field, val)  \
+-    (field) = (XENMEM_SHARING_OP_FIELD_IS_GREF_FLAG | val)
++    (field) = (XENMEM_SHARING_OP_FIELD_IS_GREF_FLAG | (val))
+ #define XENMEM_SHARING_OP_FIELD_IS_GREF(field)         \
+     ((field) & XENMEM_SHARING_OP_FIELD_IS_GREF_FLAG)
+ #define XENMEM_SHARING_OP_FIELD_GET_GREF(field)        \
 -- 
 2.17.1
 
