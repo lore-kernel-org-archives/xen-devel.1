@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E25C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Dec 2022 10:17:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.468879.728069 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02CC0C41535
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Dec 2022 11:16:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.468888.728102 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p8f7Q-0004Al-Em; Fri, 23 Dec 2022 10:17:36 +0000
+	id 1p8g2c-0002TA-G1; Fri, 23 Dec 2022 11:16:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 468879.728069; Fri, 23 Dec 2022 10:17:36 +0000
+Received: by outflank-mailman (output) from mailman id 468888.728102; Fri, 23 Dec 2022 11:16:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1p8f7Q-0004Ae-Bs; Fri, 23 Dec 2022 10:17:36 +0000
-Received: by outflank-mailman (input) for mailman id 468879;
- Fri, 23 Dec 2022 10:17:34 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1p8f7O-0004AY-SC
- for xen-devel@lists.xenproject.org; Fri, 23 Dec 2022 10:17:34 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1p8f7O-0001KP-IC; Fri, 23 Dec 2022 10:17:34 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=[192.168.3.230]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1p8f7O-00064t-Bg; Fri, 23 Dec 2022 10:17:34 +0000
+	id 1p8g2c-0002T3-CL; Fri, 23 Dec 2022 11:16:42 +0000
+Received: by outflank-mailman (input) for mailman id 468888;
+ Fri, 23 Dec 2022 11:16:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2p1Y=4V=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1p8g2a-0001vi-Qj
+ for xen-devel@lists.xenproject.org; Fri, 23 Dec 2022 11:16:40 +0000
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [2a00:1450:4864:20::32a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 45bb3902-82b3-11ed-8fd4-01056ac49cbb;
+ Fri, 23 Dec 2022 12:16:40 +0100 (CET)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ f13-20020a1cc90d000000b003d08c4cf679so3302598wmb.5
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Dec 2022 03:16:40 -0800 (PST)
+Received: from fedora.. ([195.234.76.149]) by smtp.gmail.com with ESMTPSA id
+ bi20-20020a05600c3d9400b003c6c5a5a651sm4015400wmb.28.2022.12.23.03.16.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Dec 2022 03:16:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,151 +46,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=mP5Zatn0GhS00G365a127hXliLkJQRwx/hNEjClqEIs=; b=xWIqk/8RaBNUZS4i4k6+7Es86p
-	sEJAE56fK5wfzg0O/3RLzgViqTMedVBEeud+uxCdfLDKPWbu/xXyO7So8yq68NKYkq60EOLexf7il
-	/Eyc80aSssSEZx9khUN+BL5pGET72Pyf2JkFEemxgcl3uUG53NbYUliOLNiojcbM/L4g=;
-Message-ID: <5898da03-9947-1540-f424-d76c715619f4@xen.org>
-Date: Fri, 23 Dec 2022 10:17:32 +0000
+X-Inumbo-ID: 45bb3902-82b3-11ed-8fd4-01056ac49cbb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nMA9GaAKAwvSkcExFphr9K3QaVLSpIpDAhw9a6cKCNM=;
+        b=gvDJniLm2Mwmt9UtGRo1qDm1eyfvbRTxTF7X14YgiSadYAvDfwBaHIvL7jIj9rGYM3
+         /hfMut0w2TTznEBZkRQX3+ZRP1yyDl0eORZUiXTLlekq9MPzU3KvWpIZH8oNa1bfUkoB
+         6IiI4VpsQhqXr96ceeDacK+Poc5JgMn1xwSYCY8T6Kibd66sId8nL+MqMXNPAaKEmZtU
+         0RwHXZUKqA0z5OlGdLw2tcxJzGWTRHfMf4ATwiU0cAlO6DLdlgVZyUHNUD70ItvLlaW4
+         jYRz3Tyd9I7yOtFrsHVTotAQBAvd6PXrdm1IKRadrI0pFrwicLEckMm+kce43jpgUZ2e
+         CiXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=nMA9GaAKAwvSkcExFphr9K3QaVLSpIpDAhw9a6cKCNM=;
+        b=Ce/Ujh8uB0c7PxxckbFvh06arHCFsmmvYXOjYTDFGnyROdUi/g+L4ql6UlU3lknmEl
+         Audmh0k1S0145XecJCbLfHIZ+YjzQ+l7cRd3fZkVaHCxULJLbcM5BFfjQrdLQOSpSqBJ
+         Y7dj5HA9jTtlionH7WrkYatyp8o8rm31OoixZ5GJ8j27y1RuY2+bm+GsmzIkdB17GjtD
+         w6xTXM1XLUxRZ7IvXm4jxXv3no3aad8QZ52InNpYllePPprpT9tFMrA94jcMGY2sVuH+
+         LXNK03ohZ/kawgRQJNGwwSBDQ2nULwRNTv87D8BQyjf++3EY7/MKdV7zNkdZkTGZXZbt
+         tnlQ==
+X-Gm-Message-State: AFqh2krTUWeuSKpdtuoNXuanmfPV3Ak/sz/P+yvh2Pl6fP/wY6CXcEbz
+	x3iXSzdQWBTFvb7GTlH1hBpfGME1MBYo0v72
+X-Google-Smtp-Source: AMrXdXuuVKaWn+IuwicpenQafiKLQF6LsbpNCUjVJGrjAmGfmmCVzkEE+PMkHdhowPaYOp1MkAtpzw==
+X-Received: by 2002:a1c:6a16:0:b0:3c6:f732:bf6f with SMTP id f22-20020a1c6a16000000b003c6f732bf6fmr6821962wmc.13.1671794199369;
+        Fri, 23 Dec 2022 03:16:39 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [XEN PATCH v1 2/4] automation: add cross-compiler support for the build script
+Date: Fri, 23 Dec 2022 13:16:21 +0200
+Message-Id: <3c926f637c4738bd14db10e8fe8f72a6eae2dfd4.1671789736.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <cover.1671789736.git.oleksii.kurochko@gmail.com>
+References: <cover.1671789736.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [XEN v1 2/9] xen/arm: Define translate_dt_address_size() for the
- translation between u64 and paddr_t
-Content-Language: en-US
-To: Ayan Kumar Halder <ayankuma@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
- xen-devel@lists.xenproject.org, stefano.stabellini@amd.com,
- Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com
-References: <20221215193245.48314-1-ayan.kumar.halder@amd.com>
- <20221215193245.48314-3-ayan.kumar.halder@amd.com>
- <b58c6548-9e70-0ed9-07a9-e35084620c36@xen.org>
- <alpine.DEB.2.22.394.2212161643400.315094@ubuntu-linux-20-04-desktop>
- <74786a57-d99a-6cfe-f475-df11c0d93afa@xen.org>
- <alpine.DEB.2.22.394.2212221520020.4079@ubuntu-linux-20-04-desktop>
- <5bc9435e-aee9-006c-a35a-ee9c7f946f91@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <5bc9435e-aee9-006c-a35a-ee9c7f946f91@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Docker images that are currently available and used for
+cross-compilation is additionally installed GCC/Binutils
+which is why the build script doesn't crash.
 
+RISC-V docker image doesn't have native GCC only          
+cross-compiler which will lead to the fact  that the build
+script will fail.
 
-On 23/12/2022 10:01, Ayan Kumar Halder wrote:
-> Hi Julien/Stefano,
-> 
-> I want to make sure I understand correctly.
-> 
-> On 22/12/2022 23:20, Stefano Stabellini wrote:
->> On Sat, 17 Dec 2022, Julien Grall wrote:
->>> On 17/12/2022 00:46, Stefano Stabellini wrote:
->>>> On Fri, 16 Dec 2022, Julien Grall wrote:
->>>>> Hi Ayan,
->>>>>
->>>>> On 15/12/2022 19:32, Ayan Kumar Halder wrote:
->>>>>> paddr_t may be u64 or u32 depending of the type of architecture.
->>>>>> Thus, while translating between u64 and paddr_t, one should check 
->>>>>> that
->>>>>> the
->>>>>> truncated bits are 0. If not, then raise an appropriate error.
->>>>> I am not entirely convinced this extra helper is worth it. If the user
->>>>> can't
->>>>> provide 32-bit address in the DT, then there are also a lot of 
->>>>> other part
->>>>> that
->>>>> can go wrong.
->>>>>
->>>>> Bertrand, Stefano, what do you think?
->>>> In general, it is not Xen's job to protect itself against bugs in 
->>>> device
->>>> tree. However, if Xen spots a problem in DT and prints a helpful 
->>>> message
->>>> that is better than just crashing because it gives a hint to the
->>>> developer about what the problem is.
->>> I agree with the principle. In practice this needs to be weight out 
->>> with the
->>> long-term maintenance.
->>>
->>>> In this case, I think a BUG_ON would be sufficient.
->>> BUG_ON() is the same as panic(). They both should be used only when 
->>> there are
->>> no way to recover (see CODING_STYLE).
->>>
->>> If we parse the device-tree at boot, then BUG_ON() is ok. However, if 
->>> we need
->>> to parse it after boot (e.g. the DT overlay from Vikram), then we should
->>> definitely not call BUG_ON() for checking DT input.
->> yeah, I wasn't thinking of that series
->>
->>
->>> The correct way is like Ayan did by checking returning an error and let
->>> the caller deciding what to do.
->>>
->>> My concern with his approach is the extra amount of code in each 
->>> caller to
->>> check it (even with a new helper).
->>>
->>> I am not fully convinced that checking the addresses in the DT is 
->>> that useful.
->> I am also happy not to do it to be honest
-> 
-> So are you suggesting that we do the truncation, but do not check if any 
-> non zero bits have been truncated.
-> 
-> As an example, currently with this patch :-
-> 
-> -        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, 
-> &gbase);
-> -        psize = dt_read_number(cells, size_cells);
-> +        device_tree_get_reg(&cells, addr_cells, addr_cells, &dt_pbase, 
-> &dt_gbase);
-> +        ret = translate_dt_address_size(&dt_pbase, &dt_gbase, &pbase, 
-> &gbase);
-> +        if ( ret )
-> +            return ret;
-> +        dt_psize = dt_read_number(cells, size_cells);
-> +        ret = translate_dt_address_size(NULL, &dt_psize, NULL, &psize);
-> 
-> 
-> With your proposed change, it should be
-> 
-> -        device_tree_get_reg(&cells, addr_cells, addr_cells, &pbase, 
-> &gbase);
-> -        psize = dt_read_number(cells, size_cells);
-> +        device_tree_get_reg(&cells, addr_cells, addr_cells, &dt_pbase, 
-> &dt_gbase);
-> +        dt_psize = dt_read_number(cells, size_cells);
-> +        pbase = (paddr_t) dt_pbase;
-> +        gbase = (paddr_t) dt_gbase;
-> +        psize = (paddr_t) dt_psize;
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ automation/scripts/build | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
--ETOOMANY cast and lines (the more if this is expected to be 
-duplicated). But the last one seems unnecessary as the only reason you 
-need separate variable for pbase and gbase is because the function are 
-taking a reference rather than returning the value.
-
-> 
-> Because, we still need some way to convert u64 dt address/size to 
-> paddr_t (u64/u32) address/size. 
-How about following the approach I suggested in my previous e-mail to 
-Stefano:
-   - Convert device_tree_get_reg() to use paddr_t.
-   - Introduce dt_device_get_address_checked() (Assuming you want to 
-still add the check)
-
-We may need an helper to wrap around dt_read_number() but I don't have a 
-good idea for a name. There are only a couple of use. So I think it is 
-fine to open-code. But you would not need a separate local variable. For 
-the cast, I am in two mind. In one way, I don't like unnecessary 
-explicit cast, but on the other way it serves as documentation.
-
-Stefano, any opinions?
-
-Cheers,
-
+diff --git a/automation/scripts/build b/automation/scripts/build
+index a593419063..026f480e76 100755
+--- a/automation/scripts/build
++++ b/automation/scripts/build
+@@ -2,12 +2,12 @@
+ 
+ test -f /etc/os-release && cat "$_"
+ 
+-$CC --version
++${CROSS_COMPILE}${CC} --version
+ 
+ # Express the compiler version as an integer.  e.g. GCC 4.9.2 => 0x040902
+ cc-ver()
+ {
+-    $CC -dumpversion | awk -F. '{ printf "0x%02x%02x%02x", $1, $2, $3 }'
++    ${CROSS_COMPILE}${CC} -dumpversion | awk -F. '{ printf "0x%02x%02x%02x", $1, $2, $3 }'
+ }
+ 
+ # random config or default config
+@@ -66,7 +66,7 @@ if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); ex
+ fi
+ 
+ # SeaBIOS requires GCC 4.6 or later
+-if [[ "${CC}" == "gcc" && `cc-ver` -lt 0x040600 ]]; then
++if [[ "${CROSS_COMPILE}${CC}" == "gcc" && `cc-ver` -lt 0x040600 ]]; then
+     cfgargs+=("--with-system-seabios=/bin/false")
+ fi
+ 
 -- 
-Julien Grall
+2.38.1
+
 
