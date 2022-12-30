@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B73C4708E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33150C53210
 	for <xen-devel@archiver.kernel.org>; Fri, 30 Dec 2022 00:39:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.469768.729240 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.469766.729201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pB3QW-0004dO-FR; Fri, 30 Dec 2022 00:39:12 +0000
+	id 1pB3QM-0003L0-ME; Fri, 30 Dec 2022 00:39:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 469768.729240; Fri, 30 Dec 2022 00:39:12 +0000
+Received: by outflank-mailman (output) from mailman id 469766.729201; Fri, 30 Dec 2022 00:39:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pB3QW-0004cy-9Z; Fri, 30 Dec 2022 00:39:12 +0000
-Received: by outflank-mailman (input) for mailman id 469768;
- Fri, 30 Dec 2022 00:39:10 +0000
+	id 1pB3QM-0003Jf-CH; Fri, 30 Dec 2022 00:39:02 +0000
+Received: by outflank-mailman (input) for mailman id 469766;
+ Fri, 30 Dec 2022 00:39:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3dJX=44=citrix.com=prvs=35664f79d=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pB3QU-0002si-3V
- for xen-devel@lists.xenproject.org; Fri, 30 Dec 2022 00:39:10 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e4a6674-87da-11ed-91b6-6bf2151ebd3b;
- Fri, 30 Dec 2022 01:39:08 +0100 (CET)
+ id 1pB3QL-0002si-AQ
+ for xen-devel@lists.xenproject.org; Fri, 30 Dec 2022 00:39:01 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5876866a-87da-11ed-91b6-6bf2151ebd3b;
+ Fri, 30 Dec 2022 01:38:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,68 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e4a6674-87da-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 5876866a-87da-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1672360748;
+  d=citrix.com; s=securemail; t=1672360737;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=aKBSwtrERlqBbqeZ2HPJFw1NuINA10Vqqd2ET7c3vXU=;
-  b=fgvlXL5U14S7BcM5AqAA+dn3U5jK6YqZizM6NCOH8vP7tJfMjJCCoUvw
-   /x0k/u5KvczWWfKLERmxyH0adizFXFpfDWNTTDiZJ8nMsb4nfCYnX7FAr
-   pXUe0yxBnt9C30jjz4jW9xSSxpZAyGX+/OpSWm8A5Xz3HLXBVL3aSCWHe
-   8=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=3uvwBZDagvMzDqVYqDkSVs+tyCn4o/+n0Up/1fWJMJA=;
+  b=RJ3IvMhoOmGh9XVXK50pNezjxw34z9Od4E3VRtlsBIOlBHEE8/qV2ajL
+   Gt5gSsvxKR28g80xlyie807NdVpvjO4sqwQHPrW7WsNnVGHWzRwW7yYyx
+   1jNqqF6JFoakmAG91+Cd5fpHXsiKuh0aKuI1EEE5d8ciR10Z3tAqfp/7E
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 93013913
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 90529779
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:d2vpd6q3hVBABqR93SnWUaJyJPNeBmLUZRIvgKrLsJaIsI4StFCzt
- garIBmGM/mCamb1eY8kbYW0oU4Pv5fQn4UxTAdu/H8zECwbpZuZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpAFc+E0/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKm06W1wUmAWP6gR5gaEzShNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXADkKahSMvbiq+bD4b9Zxnv4pb/jhHpxK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFHU/rSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw9
- zmepj+oW0py2Nq3+wKs/zGMvM/2pCLdW4gPV5Sjq99jqQjGroAUIEJPDgbqyRWjsWa7WtlfI
- khS/TA8oKwa/UmnCNL6WnWQp3qJvQUdWpxTDvc94wGOzYLb5g+YAi4PSTspQMwrsoo6SCIn0
- neNnsj1Hnp/vbuNU3Wf+7yI6zSoNkA9JmYYaSgJZQAM+dXkrcc4iRenZs14DKe/g9nxGDfx6
- zOHti4zg/MUl8Fj6kmg1QmZ2XT2/MGPF1NroFWMNo640u9nTIeiY4in0wLH1PQDCbmEVmOL/
- 0kOudfLuYjiEqqxvCCKRewMGpSg6PCELCDQjDZTInUxy9i+0yX9JN4NuVmSMG8sa59ZImGxP
- Cc/rCsLvPdu0G2Wgbibim5bI+Aj1uDeGNvsTZg4hfIeM8EqJGdrEMyDDHN8PlwBcmB2ysnT2
- r/BK65A6Er27ow5pAdav89HjdcWKtkWnAs/v6zTwRW9yqa5b3WIU7oDO1bmRrlns/nf+1WFr
- YcFZpDiJ/BjvArWO3O/zGLuBQpScShT6W7e8KS7idJv0iI5QTp8Wpc9MJsqepB/nrQ9q9okC
- kqVAxcCoHKm3C2vFOl/Qiw7AF8Zdcol/C1T0O1FFQrA5kXPlq71vfpCKcpvLeJPGS4K5accc
- sTpsv6oWpxnIgkrMRxEMPERcKQKmMyXuD+z
-IronPort-HdrOrdr: A9a23:zATn666erD3MrE5NVgPXwMrXdLJyesId70hD6qhwISY6TiX4rb
- HWoB1173/JYVoqNE3I3OrwXZVoIkmsk6Kdg7NhXotKNTOO0ADDQb2Kr7GSpwEIcxeOkdK1vp
- 0AT0ERMrLN5CBB/KTH3DU=
+IronPort-Data: A9a23:0jPNZ6/m/rYZNxCqjT4jDrUDTX6TJUtcMsCJ2f8bNWPcYEJGY0x3z
+ DYYDGnTOamMNmv9eIt0Oom/phgBvJLUnNFmHgNu+Cs8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
+ 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKucYHsZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ire7kIx1BjOkGlA5AZnP6oa5AS2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkkS/
+ /gBDT1cXyuhhuGM3beeZLh015sseZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGM0Yn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZQNwxzJ+
+ T2Xl4j/Khs6O+KR6iSCznmDpf7Bhz72ca0bSoTto5aGh3XMnzdOWXX6T2CTpPiyike6HdVFO
+ UEQ0iMroe4580nDZt75Uh6joX/CvQMGXNFQEOoS5wSEy66S6AGcbkAUQzgEZNE4ucseQT0xy
+ kTPj97vHSZosrCeVTSa7Lj8hTi7IyQSIEcJbDUISgZD6N7myKkolQ7GRNtnFK+zj/X2FCv2z
+ jTMqzIx74j/luZSif/9pwqexWvx+N6ZFWbZ+zk7QEr55AdgQYP0VreK6Fvh8PNlAteBHwaO6
+ S1sd9el0MgCCpSElSqoSeoLHa206/vtDAAwkWKDDLF6qW3zpifLkZR4pWgneRw3appslSrBO
+ he7hO9H2HNE0JJGh4dTapn5NcklxLOI+T/NBqGNNYomjnScmWa6EMBSiay4hTuFfKsEy/tX1
+ XKnnSGEUx4n5VxPlmbeegvk+eZDKtoC7W3SX4vn6B+szKCTYnWYIZ9cbgTUNbtpvP3V+lSOm
+ zq6Cydt40wFONASnwGNqdJDRbz0BSNT6W/KRzx/KbfYf1sO9JAJAP7N27IxE7FYc1Buvr6Qp
+ BmVAxYIoGcTcFWbcW1mnFg/MuKwNXu+xFpnVRER0aGAgSl+PNj+tPdEH3b1FJF+nNFeITdPZ
+ 6FtU6297j5nE1wrJxx1gUHBkbFf
+IronPort-HdrOrdr: A9a23:TZcQsqpl7CA6urnqftXFdEIaV5oleYIsimQD101hICG9E/b1qy
+ nKpp8mPHDP5wr5NEtPpTnjAsm9qALnlKKdiLN5Vd3OYOCMghrKEGgN1/qG/xTQXwH46+5Bxe
+ NBXsFFebnN5IFB/KTH3DU=
 X-IronPort-AV: E=Sophos;i="5.96,285,1665460800"; 
-   d="scan'208";a="93013913"
+   d="scan'208";a="90529779"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein
 	<cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, Anthony
  PERARD <anthony.perard@citrix.com>, Michal Orzel <michal.orzel@amd.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH 1/6] CI: Drop automation/configs/
-Date: Fri, 30 Dec 2022 00:38:43 +0000
-Message-ID: <20221230003848.3241-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/6] CI: Only calculate ./configure args if needed
+Date: Fri, 30 Dec 2022 00:38:45 +0000
+Message-ID: <20221230003848.3241-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20221230003848.3241-1-andrew.cooper3@citrix.com>
 References: <20221230003848.3241-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Having 3 extra hypervisor builds on the end of a full build is deeply
-confusing to debug if one of them fails, because the .config file presented in
-the artefacts is not the one which caused a build failure.  Also, the log
-tends to be truncated in the UI.
+This is purely code motion of the cfgargs construction, into the case where it
+is used.
 
-PV-only is tested as part of PV-Shim in a full build anyway, so doesn't need
-repeating.  HVM-only and neither will come up frequently in randconfig, so
-drop all the logic here to simplify things.
+No practical change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -109,71 +105,90 @@ CC: Anthony PERARD <anthony.perard@citrix.com>
 CC: Michal Orzel <michal.orzel@amd.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- automation/configs/x86/hvm_only_config  |  3 ---
- automation/configs/x86/no_hvm_pv_config |  3 ---
- automation/configs/x86/pv_only_config   |  3 ---
- automation/scripts/build                | 21 ---------------------
- 4 files changed, 30 deletions(-)
- delete mode 100644 automation/configs/x86/hvm_only_config
- delete mode 100644 automation/configs/x86/no_hvm_pv_config
- delete mode 100644 automation/configs/x86/pv_only_config
+ automation/scripts/build | 63 ++++++++++++++++++++++++------------------------
+ 1 file changed, 31 insertions(+), 32 deletions(-)
 
-diff --git a/automation/configs/x86/hvm_only_config b/automation/configs/x86/hvm_only_config
-deleted file mode 100644
-index 9efbddd5353b..000000000000
---- a/automation/configs/x86/hvm_only_config
-+++ /dev/null
-@@ -1,3 +0,0 @@
--CONFIG_HVM=y
--# CONFIG_PV is not set
--# CONFIG_DEBUG is not set
-diff --git a/automation/configs/x86/no_hvm_pv_config b/automation/configs/x86/no_hvm_pv_config
-deleted file mode 100644
-index 0bf6a8e46818..000000000000
---- a/automation/configs/x86/no_hvm_pv_config
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# CONFIG_HVM is not set
--# CONFIG_PV is not set
--# CONFIG_DEBUG is not set
-diff --git a/automation/configs/x86/pv_only_config b/automation/configs/x86/pv_only_config
-deleted file mode 100644
-index e9d8b4a7c753..000000000000
---- a/automation/configs/x86/pv_only_config
-+++ /dev/null
-@@ -1,3 +0,0 @@
--CONFIG_PV=y
--# CONFIG_HVM is not set
--# CONFIG_DEBUG is not set
 diff --git a/automation/scripts/build b/automation/scripts/build
-index a5934190634b..5dafa72ba540 100755
+index 8dee1cbbc251..f2301d08789d 100755
 --- a/automation/scripts/build
 +++ b/automation/scripts/build
-@@ -85,24 +85,3 @@ if [[ "${XEN_TARGET_ARCH}" != "x86_32" ]]; then
-         cp -r dist binaries/
-     fi
+@@ -39,37 +39,6 @@ if [[ "${XEN_TARGET_ARCH}" = "arm32" ]]; then
+     hypervisor_only="y"
  fi
+ 
+-# build up our configure options
+-cfgargs=()
+-cfgargs+=("--enable-docs")
 -
--if [[ "${hypervisor_only}" == "y" ]]; then
--    # If we are build testing a specific Kconfig exit now, there's no point in
--    # testing all the possible configs.
--    exit 0
+-if [[ "${CC}" == "clang"* ]]; then
+-    # SeaBIOS cannot be built with clang
+-    cfgargs+=("--with-system-seabios=/usr/share/seabios/bios.bin")
+-    # iPXE cannot be built with clang
+-    cfgargs+=("--with-system-ipxe=/usr/lib/ipxe/ipxe.pxe")
+-    # newlib cannot be built with clang so we cannot build stubdoms
+-    cfgargs+=("--disable-stubdom")
 -fi
 -
--# Build all the configs we care about
--case ${XEN_TARGET_ARCH} in
--    x86_64) arch=x86 ;;
--    *) exit 0 ;;
--esac
+-if ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
+-    # disable --disable-werror for QEMUU when building with MUSL
+-    cfgargs+=("--with-extra-qemuu-configure-args=\"--disable-werror\"")
+-    # SeaBIOS doesn't build on MUSL systems
+-    cfgargs+=("--with-system-seabios=/bin/false")
+-fi
 -
--cfg_dir="automation/configs/${arch}"
--for cfg in `ls ${cfg_dir}`; do
--    echo "Building $cfg"
--    make -j$(nproc) -C xen clean
--    rm -f xen/.config
--    make -C xen KBUILD_DEFCONFIG=../../../../${cfg_dir}/${cfg} defconfig
--    make -j$(nproc) -C xen
--done
+-# Qemu requires Python 3.5 or later, and ninja
+-if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))" \
+-        || ! type ninja; then
+-    cfgargs+=("--with-system-qemu=/bin/false")
+-fi
+-
+-# SeaBIOS requires GCC 4.6 or later
+-if [[ "${CC}" == "gcc" && `cc-ver` -lt 0x040600 ]]; then
+-    cfgargs+=("--with-system-seabios=/bin/false")
+-fi
+-
+ # Directory for the artefacts to be dumped into
+ mkdir binaries
+ 
+@@ -80,7 +49,37 @@ if [[ "${hypervisor_only}" == "y" ]]; then
+     # Preserve artefacts
+     cp xen/xen binaries/xen
+ else
+-    # Full build
++    # Full build.  Figure out our ./configure options
++    cfgargs=()
++    cfgargs+=("--enable-docs")
++
++    if [[ "${CC}" == "clang"* ]]; then
++        # SeaBIOS cannot be built with clang
++        cfgargs+=("--with-system-seabios=/usr/share/seabios/bios.bin")
++        # iPXE cannot be built with clang
++        cfgargs+=("--with-system-ipxe=/usr/lib/ipxe/ipxe.pxe")
++        # newlib cannot be built with clang so we cannot build stubdoms
++        cfgargs+=("--disable-stubdom")
++    fi
++
++    if  ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
++        # disable --disable-werror for QEMUU when building with MUSL
++        cfgargs+=("--with-extra-qemuu-configure-args=\"--disable-werror\"")
++        # SeaBIOS doesn't build on MUSL systems
++        cfgargs+=("--with-system-seabios=/bin/false")
++    fi
++
++    # Qemu requires Python 3.5 or later, and ninja
++    if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))" \
++            || ! type ninja; then
++        cfgargs+=("--with-system-qemu=/bin/false")
++    fi
++
++    # SeaBIOS requires GCC 4.6 or later
++    if [[ "${CC}" == "gcc" && `cc-ver` -lt 0x040600 ]]; then
++        cfgargs+=("--with-system-seabios=/bin/false")
++    fi
++
+     ./configure "${cfgargs[@]}"
+     make -j$(nproc) dist
+ 
 -- 
 2.11.0
 
