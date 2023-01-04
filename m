@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE31C54EBD
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Jan 2023 14:45:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.471202.730950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADCD1C54EF0
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Jan 2023 14:45:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.471208.731016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD51C-00079t-OE; Wed, 04 Jan 2023 14:45:26 +0000
+	id 1pD51J-0000NY-AF; Wed, 04 Jan 2023 14:45:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 471202.730950; Wed, 04 Jan 2023 14:45:26 +0000
+Received: by outflank-mailman (output) from mailman id 471208.731016; Wed, 04 Jan 2023 14:45:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD51C-00079m-L2; Wed, 04 Jan 2023 14:45:26 +0000
-Received: by outflank-mailman (input) for mailman id 471202;
- Wed, 04 Jan 2023 14:45:25 +0000
+	id 1pD51J-0000NJ-5i; Wed, 04 Jan 2023 14:45:33 +0000
+Received: by outflank-mailman (input) for mailman id 471208;
+ Wed, 04 Jan 2023 14:45:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=bCSi=5B=gmail.com=shentey@srs-se1.protection.inumbo.net>)
- id 1pD51B-00079V-BY
- for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 14:45:25 +0000
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [2a00:1450:4864:20::42f])
+ id 1pD51H-00079V-HU
+ for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 14:45:31 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6b14eac9-8c3e-11ed-b8d0-410ff93cb8f0;
- Wed, 04 Jan 2023 15:45:23 +0100 (CET)
-Received: by mail-wr1-x42f.google.com with SMTP id w1so21082853wrt.8
- for <xen-devel@lists.xenproject.org>; Wed, 04 Jan 2023 06:45:23 -0800 (PST)
+ id 6ede4b6e-8c3e-11ed-b8d0-410ff93cb8f0;
+ Wed, 04 Jan 2023 15:45:29 +0100 (CET)
+Received: by mail-wm1-x335.google.com with SMTP id m3so16838999wmq.0
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Jan 2023 06:45:29 -0800 (PST)
 Received: from osoxes.fritz.box
  (p200300faaf0bb2009c4947838afc41b6.dip0.t-ipconnect.de.
  [2003:fa:af0b:b200:9c49:4783:8afc:41b6])
  by smtp.gmail.com with ESMTPSA id
- e10-20020a5d594a000000b0028663fc8f4csm21168241wri.30.2023.01.04.06.45.21
+ e10-20020a5d594a000000b0028663fc8f4csm21168241wri.30.2023.01.04.06.45.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jan 2023 06:45:22 -0800 (PST)
+ Wed, 04 Jan 2023 06:45:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,35 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b14eac9-8c3e-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 6ede4b6e-8c3e-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8AWtfe719mk9eM2p93lKeuen7Jx5n1pIewca97MBqdc=;
-        b=OwFsjrcMxKj1s4H/fotfYoCBwsygaVEcANDEtkGKlRyfBhRTz2OCJEfvXLHdpvGD7x
-         1UEQXKL/fkPiuknoLjoM5DN7aY70nsceK2OJjfdaAgw9ncTN9zqwANYNKuVh9/VYPIav
-         Gxa5DzQLOhl4wRP4fdUdJRo0/0J+NooIx+ufMBgihzp8h8ReOBqkfcMdo5OIuU7w6C1T
-         xeIFvIeZUCH0v04IqmRX6RWe7b9aT6myshNL5uBQppaZzdT6fjevlsqcM0Ali9GqYGyM
-         3aA5vHjcTLoKc3+eO5xe3fGq8g9ZH0qb1jafzvK3ILB8i4T2FQ5zM5m/u/LZkPbBN/GS
-         +UMg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=E4FebSrd6qw4EtXuaelySJNjsiB1Oj70YbVnrwvN8/I=;
+        b=lMKvYCGOWYmnaT84GaMb23/VAi195oDQudE1wLzcerQEkKvvtsHLGjOSg3Wp4GFafE
+         XEtBgvv3xHIUWKKXmH1Ae9427VzyfEBA7cUKnYZSZvXPXSBefmryW+xa2Iv6VyKgWZfs
+         r85U50UOY19i1THGPSpmLtkLrbogJ7ind85Uxcyqly4kLwW+iIYVU0SFYWcvUyE/B88b
+         LnK2tJgHA8CffJ4VpAQZujNkJQGRaVtif+jOh2hKIW0Htmy+z0Ns9XHX5CwsqjO/ECtm
+         2O5VciXS7zNEcI+bZMOyLKHtdkcj+Ej/CLxWUUVLE1r7h5cOkCZL6K1xhBFqGNEijOdc
+         pK5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8AWtfe719mk9eM2p93lKeuen7Jx5n1pIewca97MBqdc=;
-        b=Y+BI5Lx0ljBGFGeV01i+XvUq18IBuXCIzgOikKUY5CTWVKZ5eN1rQwNuOyL5/N5/mj
-         pwgwec873LDLleg5xtmK420SbNUBb+7XTPmD9zQdwoeqGc0ggFMk7mq2xSy+MOiNsJlo
-         fdwap9bmVJLFp5Qr0qcX6SZb9gxPPb03fCQSJjiJ9IxPMKDV7fPuXFv4RXhsGWQjDDwN
-         lFxKLxfjsxF58VmbSGy1sModkypnlygJll4KSvuDBGCMwMV+vxR6eypfFsQlJmt9dFQ3
-         b/ArioVeZJEbqiM18IdYP4bXocxprc8HlzAoiTrPhn78GCPrkJeQLgQlA4KcR6lwUInO
-         A63g==
-X-Gm-Message-State: AFqh2korvb/y1hK+QB8RwuTWj3WabA+qKQ5+2Om5tPdtsg0MAXTjGKMW
-	jfIVJJmtiAKRlP8SE0mR8SE=
-X-Google-Smtp-Source: AMrXdXvIETTxnaRaRvm9hcFDe31cy8g3McWj56E8OyCHBH1xc4SjLtjj5azN8me5MaQQNXaIHCKkjw==
-X-Received: by 2002:a5d:5e81:0:b0:244:e704:df2c with SMTP id ck1-20020a5d5e81000000b00244e704df2cmr34565713wrb.57.1672843522692;
-        Wed, 04 Jan 2023 06:45:22 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=E4FebSrd6qw4EtXuaelySJNjsiB1Oj70YbVnrwvN8/I=;
+        b=VubhW56+2sC0a3puKqULFdv9Gkm+LnINfZRaYDMOi0Xf36oRRGzZ5oxbP5vOFaIKPz
+         K5VZMTTvKUMw/UjLrT/dzw9ezOfiiF7BsE+7YbRxtzgrb4kZdxcf2Ep8w2LLae++qCb2
+         mAzA3tXm6WPI4uhfFDnLwlG9gOb2RK9QueK0+n3Zh+8t707IuA08cZZpWwRC1uz7fOqz
+         MlRocXKzkaYepwoZOWA8Ea2jgIU1dXQSDZGPeG0zBDvyyO1JnP6ctzXs1sAtOqZ+HakC
+         AQPbFW9yItVag7P6D7x1rHyTn29FflavWIgAtahJ6jB6Z8alHwXZSqttBrVjajR0D8TQ
+         RonA==
+X-Gm-Message-State: AFqh2koIjQC6wfGpSqX8+uTIVeEI+t/aMYT0VvHWpPVWkBg1AVxapUcD
+	zGS8z2ua3K/2ATz1s7DXO/Y=
+X-Google-Smtp-Source: AMrXdXsYGgxoZWnwVZ7yR7arNry46fXICAla5+IdicOq5hbJrnHe2MpsGju5mZBACJ42RwflZH2L8w==
+X-Received: by 2002:a05:600c:54cb:b0:3cf:d0be:1231 with SMTP id iw11-20020a05600c54cb00b003cfd0be1231mr41547624wmb.13.1672843529178;
+        Wed, 04 Jan 2023 06:45:29 -0800 (PST)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -93,49 +94,105 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	Chuck Zmudzinski <brchuckz@aol.com>,
 	Bernhard Beschow <shentey@gmail.com>
-Subject: [PATCH v2 0/6] Resolve TYPE_PIIX3_XEN_DEVICE
-Date: Wed,  4 Jan 2023 15:44:31 +0100
-Message-Id: <20230104144437.27479-1-shentey@gmail.com>
+Subject: [PATCH v2 6/6] hw/isa/piix: Resolve redundant TYPE_PIIX3_XEN_DEVICE
+Date: Wed,  4 Jan 2023 15:44:37 +0100
+Message-Id: <20230104144437.27479-7-shentey@gmail.com>
 X-Mailer: git-send-email 2.39.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20230104144437.27479-1-shentey@gmail.com>
+References: <20230104144437.27479-1-shentey@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-This series first renders TYPE_PIIX3_XEN_DEVICE redundant and finally remov=
-es=0D
-it. The motivation is to 1/ decouple PIIX from Xen and 2/ to make Xen in th=
-e PC=0D
-machine agnostic to the precise southbridge being used. 2/ will become=0D
-particularily interesting once PIIX4 becomes usable in the PC machine, avoi=
-ding=0D
-the "Frankenstein" use of PIIX4_ACPI in PIIX3.=0D
-=0D
-v2:=0D
-- xen_piix3_set_irq() is already generic. Just rename it. (Chuck)=0D
-=0D
-Testing done:=0D
-None, because I don't know how to conduct this properly :(=0D
-=0D
-Based-on: <20221221170003.2929-1-shentey@gmail.com>=0D
-          "[PATCH v4 00/30] Consolidate PIIX south bridges"=0D
-=0D
-Bernhard Beschow (6):=0D
-  include/hw/xen/xen: Rename xen_piix3_set_irq() to xen_intx_set_irq()=0D
-  hw/isa/piix: Reuse piix3_realize() in piix3_xen_realize()=0D
-  hw/isa/piix: Wire up Xen PCI IRQ handling outside of PIIX3=0D
-  hw/isa/piix: Avoid Xen-specific variant of piix_write_config()=0D
-  hw/isa/piix: Resolve redundant k->config_write assignments=0D
-  hw/isa/piix: Resolve redundant TYPE_PIIX3_XEN_DEVICE=0D
-=0D
- hw/i386/pc_piix.c             | 34 ++++++++++++++++--=0D
- hw/i386/xen/xen-hvm.c         |  2 +-=0D
- hw/isa/piix.c                 | 66 +----------------------------------=0D
- include/hw/southbridge/piix.h |  1 -=0D
- include/hw/xen/xen.h          |  2 +-=0D
- stubs/xen-hw-stub.c           |  2 +-=0D
- 6 files changed, 35 insertions(+), 72 deletions(-)=0D
-=0D
--- =0D
-2.39.0=0D
-=0D
+During the last patches, TYPE_PIIX3_XEN_DEVICE turned into a clone of
+TYPE_PIIX3_DEVICE. Remove this redundancy.
+
+Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+---
+ hw/i386/pc_piix.c             |  4 +---
+ hw/isa/piix.c                 | 20 --------------------
+ include/hw/southbridge/piix.h |  1 -
+ 3 files changed, 1 insertion(+), 24 deletions(-)
+
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 5738d9cdca..6b8de3d59d 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -235,8 +235,6 @@ static void pc_init1(MachineState *machine,
+     if (pcmc->pci_enabled) {
+         DeviceState *dev;
+         PCIDevice *pci_dev;
+-        const char *type = xen_enabled() ? TYPE_PIIX3_XEN_DEVICE
+-                                         : TYPE_PIIX3_DEVICE;
+         int i;
+ 
+         pci_bus = i440fx_init(pci_type,
+@@ -250,7 +248,7 @@ static void pc_init1(MachineState *machine,
+                                        : pci_slot_get_pirq);
+         pcms->bus = pci_bus;
+ 
+-        pci_dev = pci_new_multifunction(-1, true, type);
++        pci_dev = pci_new_multifunction(-1, true, TYPE_PIIX3_DEVICE);
+         object_property_set_bool(OBJECT(pci_dev), "has-usb",
+                                  machine_usb(machine), &error_abort);
+         object_property_set_bool(OBJECT(pci_dev), "has-acpi",
+diff --git a/hw/isa/piix.c b/hw/isa/piix.c
+index 98e9b12661..e4587352c9 100644
+--- a/hw/isa/piix.c
++++ b/hw/isa/piix.c
+@@ -33,7 +33,6 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/ide/piix.h"
+ #include "hw/isa/isa.h"
+-#include "hw/xen/xen.h"
+ #include "sysemu/runstate.h"
+ #include "migration/vmstate.h"
+ #include "hw/acpi/acpi_aml_interface.h"
+@@ -465,24 +464,6 @@ static const TypeInfo piix3_info = {
+     .class_init    = piix3_class_init,
+ };
+ 
+-static void piix3_xen_class_init(ObjectClass *klass, void *data)
+-{
+-    DeviceClass *dc = DEVICE_CLASS(klass);
+-    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
+-
+-    k->realize = piix3_realize;
+-    /* 82371SB PIIX3 PCI-to-ISA bridge (Step A1) */
+-    k->device_id = PCI_DEVICE_ID_INTEL_82371SB_0;
+-    dc->vmsd = &vmstate_piix3;
+-}
+-
+-static const TypeInfo piix3_xen_info = {
+-    .name          = TYPE_PIIX3_XEN_DEVICE,
+-    .parent        = TYPE_PIIX_PCI_DEVICE,
+-    .instance_init = piix3_init,
+-    .class_init    = piix3_xen_class_init,
+-};
+-
+ static void piix4_realize(PCIDevice *dev, Error **errp)
+ {
+     ERRP_GUARD();
+@@ -534,7 +515,6 @@ static void piix3_register_types(void)
+ {
+     type_register_static(&piix_pci_type_info);
+     type_register_static(&piix3_info);
+-    type_register_static(&piix3_xen_info);
+     type_register_static(&piix4_info);
+ }
+ 
+diff --git a/include/hw/southbridge/piix.h b/include/hw/southbridge/piix.h
+index 65ad8569da..b1fc94a742 100644
+--- a/include/hw/southbridge/piix.h
++++ b/include/hw/southbridge/piix.h
+@@ -77,7 +77,6 @@ struct PIIXState {
+ OBJECT_DECLARE_SIMPLE_TYPE(PIIXState, PIIX_PCI_DEVICE)
+ 
+ #define TYPE_PIIX3_DEVICE "PIIX3"
+-#define TYPE_PIIX3_XEN_DEVICE "PIIX3-xen"
+ #define TYPE_PIIX4_PCI_DEVICE "piix4-isa"
+ 
+ #endif
+-- 
+2.39.0
+
 
