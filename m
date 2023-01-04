@@ -4,39 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46313C46467
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Jan 2023 10:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.471101.730808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1BFC4708E
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Jan 2023 11:12:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.471110.730841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD0zB-0000ck-4w; Wed, 04 Jan 2023 10:27:05 +0000
+	id 1pD1gm-0006I7-2i; Wed, 04 Jan 2023 11:12:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 471101.730808; Wed, 04 Jan 2023 10:27:05 +0000
+Received: by outflank-mailman (output) from mailman id 471110.730841; Wed, 04 Jan 2023 11:12:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD0zB-0000cd-21; Wed, 04 Jan 2023 10:27:05 +0000
-Received: by outflank-mailman (input) for mailman id 471101;
- Wed, 04 Jan 2023 10:27:03 +0000
+	id 1pD1gl-0006I0-Vz; Wed, 04 Jan 2023 11:12:07 +0000
+Received: by outflank-mailman (input) for mailman id 471110;
+ Wed, 04 Jan 2023 11:12:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+XhT=5B=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1pD0z9-0000cS-SM
- for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 10:27:03 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2054.outbound.protection.outlook.com [40.107.20.54])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 542d4b2a-8c1a-11ed-91b6-6bf2151ebd3b;
- Wed, 04 Jan 2023 11:27:02 +0100 (CET)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by DB9PR04MB8074.eurprd04.prod.outlook.com (2603:10a6:10:24a::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Wed, 4 Jan
- 2023 10:27:01 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::2991:58a4:e308:4389]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::2991:58a4:e308:4389%7]) with mapi id 15.20.5944.019; Wed, 4 Jan 2023
- 10:27:01 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=tpAs=5B=citrix.com=prvs=3612a7559=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1pD1gk-0005kw-GW
+ for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 11:12:06 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9ee64cf1-8c20-11ed-91b6-6bf2151ebd3b;
+ Wed, 04 Jan 2023 12:12:05 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,170 +38,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 542d4b2a-8c1a-11ed-91b6-6bf2151ebd3b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mslr9fnSh/7Xy49QUClU2PK1DtCoL+fyNGTnyc3WBjM4CazDLIfG5q8k7EqquoC043UoixidCnHlCNDC3QQZcGwHuiqN99Xx4TYvdmyl+0qjYC1nRUXhlQzqxaA9fiYr76uEE4yn+WF7iLl+jKmnJlOFmcxG2e9PXrEhmV6a7Y1lx1IG8Y/cmdBQ7wYT7tIEgBcPGRQzsRM2lmtv/6SQIIRCkyD8U1e9L9YXP1fh1RivI1c4AmbCuXcIYXVp9hnlJOu4hapIrjSV4VInoTm+++IZwnTAidneYfL9whOw8vTd3h69cxkKQI7C/um/DGed2UxQ+5BvApUuXA3TPkUzdg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tx015fr3bjIhPCp331DUzfxXuxihO+fi9PQYrtpxUYk=;
- b=btmbypBYR+HPRjanODVX7MV6/8K4CUqg9ST+eVHpol9qCKipmW/Hn+Iyk8zIBU7T6DDCl8H6tPem1c5EktjMhn+EnLvjgTf7uppRT5ZvdRxP/raaVEFkl7/D1Fab3Ap5yvYLXKxG7zjD7NgNUUdSAdFzkwoaqV/K3yTSio9gFSOPjMyhO1mkgWf1QDZeIS/hUWWzeeh+PBwp+BDuL5Evnsn4rmR6in2s2QO8fBK4ogcVp3IOrYcWIJCuN/sSICqAdpGs0Omi+Hp7mBQ358kNR1Kx5hRbqIiMIozp5S9I6GDnVUgwu5g/YWPDEBnWFYyXVJBCdDJLjfDD95BJIP1XmA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tx015fr3bjIhPCp331DUzfxXuxihO+fi9PQYrtpxUYk=;
- b=5jTSAepkHFrBJXxUZjb4a1iM44PJAXD+7iIrku5nIyN4SygtTuXeXSXsWtPZqy1SOWi391CIf+oIqt7EfQITFQnF+gCXT5FCcWRBFsxIPmnAo/UzQodS+1Gv3aioFse/VhiI/FOH5UPyRbggWUBFDLWSmRyi+B95G0cxlDC5BnJKoSB6LPSm2Lgm4iTcGXMazFJXeO1DaclAWdwZEW61El2TcEMh00GHjkKrrIqcEcYuXJCE3ykd0/yutgcomOLwGbpZcwMEeC0WhKmIrBtMP+w8l0rxrtsDqU0vMUljQtnZMZxOCC5pO6XWOtjSZGSopbiVMTgCBZVtVxNGhbWAig==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <01584e11-36ca-7836-85ad-bba9351af46e@suse.com>
-Date: Wed, 4 Jan 2023 11:27:09 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [PATCH 06/22] x86: map/unmap pages in restore_all_guests
-Content-Language: en-US
-To: Julien Grall <julien@xen.org>
-Cc: Hongyan Xia <hongyxia@amazon.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Julien Grall <jgrall@amazon.com>,
- xen-devel@lists.xenproject.org
-References: <20221216114853.8227-1-julien@xen.org>
- <20221216114853.8227-7-julien@xen.org>
- <478e04bc-6ff7-de01-dfb9-55d579228152@suse.com>
- <f84d30cb-e743-60f8-a496-603323b79f37@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <f84d30cb-e743-60f8-a496-603323b79f37@xen.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0171.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::16) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-Inumbo-ID: 9ee64cf1-8c20-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1672830725;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=UAKOXtp3MBtKPheGYD3/xlv27YzzrN4rSPgxLhvD/Gw=;
+  b=gsmztJ5C15L7xl8g1EBQWbQHx3f7E+sRte6/Ie2UVzZ0mnXeGwEqIBZ2
+   8Q8R4Aoy8MRxnI/ptxIzVfMfyimU1plmfMeJl4VqzGCC9oe2PhayoXbzz
+   p68ax8G9BKYci/UN8HEeq18cwqqoSOm8OjM4QZa8JoHgp2nttozNI0KpD
+   4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 93590518
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:/saynqt14HnKlcVzlDMXqR6G8OfnVFheMUV32f8akzHdYApBsoF/q
+ tZmKWDVbqyOZWHzKYt/bN/npxgH756AxoNqHgZr+3g9EypH+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg0HVU/IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj5lv0gnRkPaoQ5AaGyyFMZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwBjQVTS+7luWM8pmHDehGh5oGLMTlI9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkARfAdMYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27J/
+ T+XpzmgUnn2MvS8zRuZ23apm9bPvnLyfJwvGuW3ytV11Qj7Kms7V0RNCArTTeOColG6c8JSL
+ QoT4CVGhYoY+VGvT9L9dwalu3PCtRkZM/JAHut/5AyTx6785weCGnNCXjNHcMYhtsI9WXotz
+ FDhoj/yLWUx6vvPEyvbr+rK62PpUcQIEYMcTQEAVSg628jkmrMYslXOZNc9Na64gMKgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7DFjG8U
+ G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gKu1mSx28zaK7onAMFh
+ 2eN0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZo3sxOhbAjzi0zBhEfUQD1
+ XCzKJ/EMJrnIf4/kGreqxk1i9fHORzSNUuMHMumnnxLIJKVZWKPSKdtDWZimtsRtfveyC2Mq
+ oY3Cid/40kHOAEISnWNoNF7wJFjBSRTOK0aXOQOLLbSelA/RzhxYxITqJt4E7FYc21uvr+g1
+ hmAtoVwkTITWVWvxd22V01e
+IronPort-HdrOrdr: A9a23:Enyza6labInGAmMNtvOt8hz+WEXpDfIi3DAbv31ZSRFFG/Fw9v
+ rDoB1/73TJYVkqN03I9ervBEDjexPhHO9OgLX5VI3KNGOKhILCFvAA0WKN+UyEJwTOssJbyK
+ d8Y+xfJbTLfDxHZB/BkWuFL+o=
+X-IronPort-AV: E=Sophos;i="5.96,299,1665460800"; 
+   d="scan'208";a="93590518"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 1/2] x86/cpuid: Infrastructure for leaves 7:1{ecx,edx}
+Date: Wed, 4 Jan 2023 11:11:45 +0000
+Message-ID: <20230104111146.2094-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20230104111146.2094-1-andrew.cooper3@citrix.com>
+References: <20230104111146.2094-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DB9PR04MB8074:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f95ef90-8dd0-497e-51d9-08daee3e3784
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	T+1yW+o7Qnjt+lVjetaPFSzisAz8qBiQDidy1G0vpDD/eRo7poUU2Z4K/hNCWAhTxF73b/Zl91YZNYlDxruEwmxecrt4cNUhrNR54Oic4zk9o8LLkbH3iRIdI48EODsq5hqnrLm/A4rahEmpEvlz6p8bGfNsWxemA/nodo8Di7qt8re8bf9DNCBOIq0XNOowRSAPEQiehDggBlvtPUZuAzUspmIeGaxOds/tEW02r/WYMT6/io8ao4zikMBusE4TthwTBaSKZ8dNjivQEBM+tfzCSPLp4Z9rjddOBL7Blp1QkUzkWyKtJsMOwp4TAiqsyfJbB1AemxUO9/44+uh32ceBKJ7awlbvtHLmKONRJqu6aNChEpLHxPwd6SyHsOpC7in34zGKxmdRl36D/6EqngDzytyJ7G+MZsv9Irh/ZgONnCPRFs1yg83UKmPt7kDUbmK/uCCESvZrPBh7ZfUIZsPA1SQEVG3Ln7hn0qzmYlR9d2sZBVbOMtTtbSmYslgXwQB/FY96/OO1HWgN8jLkozoiz12mKlqRcDlIVTSEwp2K4J2e6UxT70IJxe0WU4E02dI3SnWUURubu9uz23u0N/Kfo7YyelcOZDRd3GNcF2Q+0h6Vp2+ICLkc84hzJNcVxHnm+l+4FiXb4MIEcyF7MMjHQn5mxnReHXRzM8V2ObK02KzNX0aL1P3R4BcNPmPG9haQPdJkI2al+PCwk4Uwj798xA96ewCSwpMR/foT1tk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(39860400002)(376002)(346002)(136003)(396003)(366004)(451199015)(83380400001)(53546011)(26005)(2616005)(6506007)(6512007)(186003)(31696002)(36756003)(86362001)(38100700002)(8676002)(4326008)(41300700001)(2906002)(5660300002)(8936002)(31686004)(6486002)(478600001)(66946007)(316002)(66556008)(66476007)(54906003)(6916009)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MlpldnlueFo2WktUcGQwMGdYWHJoK2xIcVhhemFQSzh5TndNRWZoY281cldF?=
- =?utf-8?B?S05BS0xYeTg5ZEp3cUlxeld6d3Q0blBFalZZK2JhRCtHaHRUdlczRnZmcXdk?=
- =?utf-8?B?ekFpbnpaUXQyU3RIeU1jZGF5WmN5bTRVZVg0NzlwMklSQlVpeThTRVdYWDU3?=
- =?utf-8?B?Rm5lTWF5cVl3aFZ5L3ZFOGZSK1ZiWVJQNTBzc2lQUFZWeW5zTzlCV3FMU242?=
- =?utf-8?B?ZEVmbnNmR1N3RWJQY2FpU3U3RUlIS3pYYWVGWi9uWGJ3SkoyYWp4VUg1UHVr?=
- =?utf-8?B?cjc2akJsN3oreUlzampQOE5sUGYvSS9PWmhnUlRIVkI5emtrZHhJU0xaeWk1?=
- =?utf-8?B?ejVRUEZveGRLUGw1TGloUzJpb20yV1NJWVVEUUFsOVhzRi9OcUwyUE5EUDZr?=
- =?utf-8?B?QTIwbFB0OHpFTkkxczlCdFd5SEd3d2hXNCs1dWpCRHAxNWRRVVNkVENmYWZl?=
- =?utf-8?B?aDVtVWpYWVNoaWRySVl5a2lOYlZMRnhHUFFCcHhpYjhiSkMvV1dvTzdxV3d0?=
- =?utf-8?B?c3lsbnhWdDljdGlvZncvOVEySTZqZ1hOUTJmSTh1QlVCY2RKWjkyQUFLL1NX?=
- =?utf-8?B?eEp3QWdBUkNOVGQyRUxhL09MQjFSWUJiQXVFY2Y0bkhLVzR4Qk5ZTXR5dXJh?=
- =?utf-8?B?aFNJMHlVb3Bxb1M1VkZSL2c2Nlg1K2M1a2Y3OEc5UWYvSHhUbGxxSktVNlR1?=
- =?utf-8?B?a3JKVkxQaFFWYzdDNVhtMTJ0eEhaYjdJc09pb05yZnZkZ0l0OWpYVG9mQ1ZQ?=
- =?utf-8?B?b1lDVVpIeW5aWVcvbFU2WFRLbm5DSmNDNUIrUzd6T3BlR09TWU1tOGZWOFlY?=
- =?utf-8?B?cHNJU2NjL1lUS3FFVjVVNzFBMEkwV2l3V2RxSlZWMVUxVUNyZkptUm5zckk2?=
- =?utf-8?B?elNtdjFiQTRSZWVaRzFqYTZLYkgrdXJhSmRuK2lqRjREZGhNemszWUZZSmls?=
- =?utf-8?B?MWMwL3FQUEQ2ZVFTeXNPclFtNUVKOTNEcmVTYVlDQTVVYzByUTB4R0J4dDFG?=
- =?utf-8?B?NVNZMzlHc05QY2pGNDlnTU9LTGZQQjB2enFaVHVDdGx6Ly9zOFhFQ3QvT0Jo?=
- =?utf-8?B?Z1QxU3l3cTBueVlqS2xZWm1rUlJ3eEs5UTk5aHZEaTAvY2c2NlZKbk1XSFc4?=
- =?utf-8?B?M0Q0MUVqcGdPUVBQSkdCWE5WeTRiWDIyazJiU1VxOElaalJFbnVSSTFpV0xv?=
- =?utf-8?B?U3FQODNRTEFvRVZJb1FrSHo4SllFbFFzVkh0WjVIVTNBWnRUVkw5WmpGY3dl?=
- =?utf-8?B?OVZXWUNzOFBrMDhua2x2Y2xiWnBuZTRkcVQzdzlLS2k0bEEzYTcraEpIcDFz?=
- =?utf-8?B?VU01S0hTbkF5Z0JwTHRzckxka0NyR2FpWE5UemxFd3ZjKzdFUzJKQUp0cUdq?=
- =?utf-8?B?amxnRERSOXo1K2k1aTFZUHVja3FyY2NSbTRZMjRibGNUa0JDNktMUDd0L2tS?=
- =?utf-8?B?WkFVazBoQTFaMU9YQTV5QjlucmxqSWZwa1NIMVZEeWVzeGlIZ0Z3K1VHOW9r?=
- =?utf-8?B?ejR2K0x0eFFieUlpTFh5c3pmRnBrb0lkbEMvNEtmOWpNT3ZrcUxYUlJxRFBP?=
- =?utf-8?B?eFRmcGJSQkZYcHIrUUZsUVNOcGlJbWhjQzJQZlZPSHh4OXVVLzNNNTBid2Q1?=
- =?utf-8?B?MlBwVXpDRHBKTXhwb01vUWxyQnFsa0wyUWVRSU1zaEEzeGdkelNQb2tsZU9m?=
- =?utf-8?B?bkJPdW42Vzh5Mm1UaHNIZVpIYmZpbDFucEtGTXc1U3JZemNrWmtvR054Y01P?=
- =?utf-8?B?YTBtREwzU0xBWnZFcnlsYWI1TTBpYWt6RUFpZHB1ZE81aU5XZllNOUxxZ01G?=
- =?utf-8?B?UUM1eVNaME8vRTdkdG1OanFlYzVuM1R0MSsvWjRwZno5NnZkenVIV1Y2N3RM?=
- =?utf-8?B?Uks0RlZPbXF0ZXptWXJaVzlCSEY0bzIwalZJWldleXRLcmMvS1ZjeWJTaWRZ?=
- =?utf-8?B?eWx1b3UrMEY3VVBJNWlzbWFlNFFheFdIVUlhVG9IQy9mSnVWanRZRkw1S3ZY?=
- =?utf-8?B?ZURtSktucGI2dmdtYXF2NVBESTdxL2JyOHZxWW9TWUNZcnVad3hwRmlaRWhi?=
- =?utf-8?B?NGswRjRFcEs5QnB4SWlIcWVqVGNXcDBXeE1MQjA1aXdiTGI5a00razZvNXNm?=
- =?utf-8?Q?kK2ew9qPQzqhfvlNL8ZUWwoF2?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f95ef90-8dd0-497e-51d9-08daee3e3784
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jan 2023 10:27:01.4241
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: p2vgT1tWJOGUkUJou7l9W4T6VnhB2tFoQlaAmvc6CJXjSgwOHCAkCP4l53SYaNJOv+Pph592ydMm4TaAlmRmWw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8074
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On 23.12.2022 13:22, Julien Grall wrote:
-> Hi,
-> 
-> On 22/12/2022 11:12, Jan Beulich wrote:
->> On 16.12.2022 12:48, Julien Grall wrote:
->>> --- a/xen/arch/x86/x86_64/entry.S
->>> +++ b/xen/arch/x86/x86_64/entry.S
->>> @@ -165,7 +165,24 @@ restore_all_guest:
->>>           and   %rsi, %rdi
->>>           and   %r9, %rsi
->>>           add   %rcx, %rdi
->>> -        add   %rcx, %rsi
->>> +
->>> +         /*
->>> +          * Without a direct map, we have to map first before copying. We only
->>> +          * need to map the guest root table but not the per-CPU root_pgt,
->>> +          * because the latter is still a xenheap page.
->>> +          */
->>> +        pushq %r9
->>> +        pushq %rdx
->>> +        pushq %rax
->>> +        pushq %rdi
->>> +        mov   %rsi, %rdi
->>> +        shr   $PAGE_SHIFT, %rdi
->>> +        callq map_domain_page
->>> +        mov   %rax, %rsi
->>> +        popq  %rdi
->>> +        /* Stash the pointer for unmapping later. */
->>> +        pushq %rax
->>> +
->>>           mov   $ROOT_PAGETABLE_FIRST_XEN_SLOT, %ecx
->>>           mov   root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rsi), %r8
->>>           mov   %r8, root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rdi)
->>> @@ -177,6 +194,14 @@ restore_all_guest:
->>>           sub   $(ROOT_PAGETABLE_FIRST_XEN_SLOT - \
->>>                   ROOT_PAGETABLE_LAST_XEN_SLOT - 1) * 8, %rdi
->>>           rep movsq
->>> +
->>> +        /* Unmap the page. */
->>> +        popq  %rdi
->>> +        callq unmap_domain_page
->>> +        popq  %rax
->>> +        popq  %rdx
->>> +        popq  %r9
->>
->> While the PUSH/POP are part of what I dislike here, I think this wants
->> doing differently: Establish a mapping when putting in place a new guest
->> page table, and use the pointer here. This could be a new per-domain
->> mapping, to limit its visibility.
-> 
-> I have looked at a per-domain approach and this looks way more complex 
-> than the few concise lines here (not mentioning the extra amount of 
-> memory).
+We don't actually need ecx yet, but adding it in now will reduce the amount to
+which leaf 7 is out of order in a featureset.
 
-Yes, I do understand that would be a more intrusive change.
+cpufeatureset.h remains in leaf architectrual order for the sanity of anyone
+trying to locate where to insert new rows.
 
-> So I am not convinced this is worth the effort here.
-> 
-> I don't have an other approach in mind. So are you disliking this 
-> approach to the point this will be nacked?
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-I guess I wouldn't nack it, but I also wouldn't provide an ack. I'm curious
-what Andrew or Roger think here...
+v2:
+ * Fix decodes[] short string
+---
+ tools/misc/xen-cpuid.c                      | 10 ++++++++++
+ xen/arch/x86/cpu/common.c                   |  3 ++-
+ xen/include/public/arch-x86/cpufeatureset.h |  3 +++
+ xen/include/xen/lib/x86/cpuid.h             | 15 ++++++++++++++-
+ 4 files changed, 29 insertions(+), 2 deletions(-)
 
-Jan
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index d5833e9ce879..addb3a39a11a 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -202,6 +202,14 @@ static const char *const str_7b1[32] =
+     [ 0] = "ppin",
+ };
+ 
++static const char *const str_7c1[32] =
++{
++};
++
++static const char *const str_7d1[32] =
++{
++};
++
+ static const char *const str_7d2[32] =
+ {
+     [ 0] = "intel-psfd",
+@@ -229,6 +237,8 @@ static const struct {
+     { "0x80000021.eax",  "e21a", str_e21a },
+     { "0x00000007:1.ebx", "7b1", str_7b1 },
+     { "0x00000007:2.edx", "7d2", str_7d2 },
++    { "0x00000007:1.ecx", "7c1", str_7c1 },
++    { "0x00000007:1.edx", "7d1", str_7d1 },
+ };
+ 
+ #define COL_ALIGN "18"
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 0412dbc915e5..b3fcf4680f3a 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -450,7 +450,8 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ 			cpuid_count(7, 1,
+ 				    &c->x86_capability[FEATURESET_7a1],
+ 				    &c->x86_capability[FEATURESET_7b1],
+-				    &tmp, &tmp);
++				    &c->x86_capability[FEATURESET_7c1],
++				    &c->x86_capability[FEATURESET_7d1]);
+ 		if (max_subleaf >= 2)
+ 			cpuid_count(7, 2,
+ 				    &tmp, &tmp, &tmp,
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 7915f5826f57..7a896f0e2d92 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -288,6 +288,9 @@ XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and
+ /* Intel-defined CPU features, CPUID level 0x00000007:1.ebx, word 12 */
+ XEN_CPUFEATURE(INTEL_PPIN,         12*32+ 0) /*   Protected Processor Inventory Number */
+ 
++/* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
++/* Intel-defined CPU features, CPUID level 0x00000007:1.edx, word 15 */
++
+ /* Intel-defined CPU features, CPUID level 0x00000007:2.edx, word 13 */
+ XEN_CPUFEATURE(INTEL_PSFD,         13*32+ 0) /*A  MSR_SPEC_CTRL.PSFD */
+ XEN_CPUFEATURE(IPRED_CTRL,         13*32+ 1) /*   MSR_SPEC_CTRL.IPRED_DIS_* */
+diff --git a/xen/include/xen/lib/x86/cpuid.h b/xen/include/xen/lib/x86/cpuid.h
+index 73a5c330365e..fa98b371eef4 100644
+--- a/xen/include/xen/lib/x86/cpuid.h
++++ b/xen/include/xen/lib/x86/cpuid.h
+@@ -18,6 +18,8 @@
+ #define FEATURESET_e21a  11 /* 0x80000021.eax      */
+ #define FEATURESET_7b1   12 /* 0x00000007:1.ebx    */
+ #define FEATURESET_7d2   13 /* 0x00000007:2.edx    */
++#define FEATURESET_7c1   14 /* 0x00000007:1.ecx    */
++#define FEATURESET_7d1   15 /* 0x00000007:1.edx    */
+ 
+ struct cpuid_leaf
+ {
+@@ -194,7 +196,14 @@ struct cpuid_policy
+                 uint32_t _7b1;
+                 struct { DECL_BITFIELD(7b1); };
+             };
+-            uint32_t /* c */:32, /* d */:32;
++            union {
++                uint32_t _7c1;
++                struct { DECL_BITFIELD(7c1); };
++            };
++            union {
++                uint32_t _7d1;
++                struct { DECL_BITFIELD(7d1); };
++            };
+ 
+             /* Subleaf 2. */
+             uint32_t /* a */:32, /* b */:32, /* c */:32;
+@@ -343,6 +352,8 @@ static inline void cpuid_policy_to_featureset(
+     fs[FEATURESET_e21a] = p->extd.e21a;
+     fs[FEATURESET_7b1] = p->feat._7b1;
+     fs[FEATURESET_7d2] = p->feat._7d2;
++    fs[FEATURESET_7c1] = p->feat._7c1;
++    fs[FEATURESET_7d1] = p->feat._7d1;
+ }
+ 
+ /* Fill in a CPUID policy from a featureset bitmap. */
+@@ -363,6 +374,8 @@ static inline void cpuid_featureset_to_policy(
+     p->extd.e21a  = fs[FEATURESET_e21a];
+     p->feat._7b1  = fs[FEATURESET_7b1];
+     p->feat._7d2  = fs[FEATURESET_7d2];
++    p->feat._7c1  = fs[FEATURESET_7c1];
++    p->feat._7d1  = fs[FEATURESET_7d1];
+ }
+ 
+ static inline uint64_t cpuid_policy_xcr0_max(const struct cpuid_policy *p)
+-- 
+2.11.0
+
 
