@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6CBEC54EBE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79629C4708E
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Jan 2023 14:45:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.471207.730996 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.471203.730961 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD51G-00086j-Ki; Wed, 04 Jan 2023 14:45:30 +0000
+	id 1pD51E-0007PI-45; Wed, 04 Jan 2023 14:45:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 471207.730996; Wed, 04 Jan 2023 14:45:30 +0000
+Received: by outflank-mailman (output) from mailman id 471203.730961; Wed, 04 Jan 2023 14:45:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pD51G-000842-BR; Wed, 04 Jan 2023 14:45:30 +0000
-Received: by outflank-mailman (input) for mailman id 471207;
- Wed, 04 Jan 2023 14:45:29 +0000
+	id 1pD51E-0007P7-0i; Wed, 04 Jan 2023 14:45:28 +0000
+Received: by outflank-mailman (input) for mailman id 471203;
+ Wed, 04 Jan 2023 14:45:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=bCSi=5B=gmail.com=shentey@srs-se1.protection.inumbo.net>)
- id 1pD51E-00079b-O1
- for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 14:45:28 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
+ id 1pD51C-00079b-56
+ for xen-devel@lists.xenproject.org; Wed, 04 Jan 2023 14:45:26 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6dea74b4-8c3e-11ed-91b6-6bf2151ebd3b;
- Wed, 04 Jan 2023 15:45:28 +0100 (CET)
-Received: by mail-wr1-x42b.google.com with SMTP id az7so8799947wrb.5
- for <xen-devel@lists.xenproject.org>; Wed, 04 Jan 2023 06:45:28 -0800 (PST)
+ id 6c262db5-8c3e-11ed-91b6-6bf2151ebd3b;
+ Wed, 04 Jan 2023 15:45:25 +0100 (CET)
+Received: by mail-wr1-x42a.google.com with SMTP id s9so1187925wru.13
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Jan 2023 06:45:25 -0800 (PST)
 Received: from osoxes.fritz.box
  (p200300faaf0bb2009c4947838afc41b6.dip0.t-ipconnect.de.
  [2003:fa:af0b:b200:9c49:4783:8afc:41b6])
  by smtp.gmail.com with ESMTPSA id
- e10-20020a5d594a000000b0028663fc8f4csm21168241wri.30.2023.01.04.06.45.26
+ e10-20020a5d594a000000b0028663fc8f4csm21168241wri.30.2023.01.04.06.45.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jan 2023 06:45:27 -0800 (PST)
+ Wed, 04 Jan 2023 06:45:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,36 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6dea74b4-8c3e-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 6c262db5-8c3e-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZTbz96Fg6rdZNkQF03buq3nvArFrt1X2bnXBL/QETy8=;
-        b=W9Un76kfIXX71algBT3MUyLCUiN80OFK1EUd0YbCe6wUItAP0Luda8qEceYXzOUdFw
-         jY1QLBi8eG0gW8dCgOjygcJ+fp4QbyzP8Ye4eARwBnC9y0DkgijILW6lYwfh0Jwvet2r
-         4qrOldpBtix87pTunJpR5Hzs+5mBOue2wekAGVrS5ABa97Ub9oHHVlIjCdGw8E/QrMWt
-         uF7+vwGjO6ufN4oR16pm29afZxpgs19LCt554cFbOcBl4NTLEdn0+fh7sb0bkFYX/Qy3
-         /7j2qYCvOrtcFrstpMIW3NJQlCJzKvvJDPW6GJrhHDp8NV6E0rozu/tgN7PiVc9LxJ4d
-         rJkA==
+        bh=skngD2C07lkAR57VFiC9hSpSkRXE8QLpJkhdrtzHaoE=;
+        b=fglIPWzWe7OF+ReYiVQjbIlqvtMvTu/HBo031zXX2Dmr6PoRqVzCCMudfgPYd4aGRi
+         ZzXHYC+LUG8aYoxMQ2QopDZUsHWe8+I3MBPfz33YHbBlA0wpSiPunpMSxDNEQu3gic8o
+         tjY9LXxtHVjsr5RFAPk3J091DyzHz40da+k0hi4YR2NRpwGdMpmrPobxn+rII4pfszR+
+         ABmHKixdWzp6dCP+vGUOG1X6vLOHELWO4oX1VeVkM5l0HNpdBbKdWd/OSHzgbTTCC2Ov
+         ZZVVZUIoXft/7/vDq3sRETSoVxCTNiDIkVm5XL0QJYkZbABRQHyxfDTifj0y4vNNeuN2
+         dMvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ZTbz96Fg6rdZNkQF03buq3nvArFrt1X2bnXBL/QETy8=;
-        b=hAnboLlHOS5i/VMcaI6yf68aOHJr0usBmCb06vuVRan5avil1+ldzlNf8eXIMIQg+l
-         4Deg6DYtiB0rLKw+6ctJXTWNvG0swLwt9S+h5CDOWnUZAwhVLSOpkz1zE5Z5n/0LIKdT
-         lzpyzrvy0KBG2YW2cZ2s+BT+VA9AYOqK1IoIveKkec3kCjekl+/A2pMs9DOyCwa/QLS0
-         39aPNGn9Y7tpc8wO2jYD/0pVxmUoQKSSL1q+vuuDHquid8MnmNF3Z7+UOUBqvg434CiL
-         Ao4jFao6FGw75Z/bM95D0vaEkZCvrImVlrhT6CulONXKUOxrfID+8HcsSwlOdKfY0hiw
-         R6qA==
-X-Gm-Message-State: AFqh2krX0egy/g06wqU8ZS7NXEYaDE4gG1YDueJEapnq8Uqu3VUz+/+W
-	N3Oef5fU7Ea3x6GYH+kWGl4=
-X-Google-Smtp-Source: AMrXdXuqwFIIXGumdoGoKi2S2o1kZi2sGwiXEGMwUaQU6kBeT44weD6z/UJouVJiTGdquTAHfyXG3g==
-X-Received: by 2002:a5d:640c:0:b0:2a3:1c13:2888 with SMTP id z12-20020a5d640c000000b002a31c132888mr2471851wru.60.1672843527498;
-        Wed, 04 Jan 2023 06:45:27 -0800 (PST)
+        bh=skngD2C07lkAR57VFiC9hSpSkRXE8QLpJkhdrtzHaoE=;
+        b=kg0lubPSIw99ddQbqcMxO2UKuAKQ487UQqg1qktYtMniSR30oTmTs6q81N4JP3eI0i
+         yFw91Zu6sCl2XRa9ZFvPZ18DHKcsprpvXjsrmryo8kvWMKXUI5ou/U0cd3G7qUxd9JpH
+         ZGmouFnqsOi62gtiFCCMUnmBLW8OoFovgUYsU1UI4xBVD50mlseRbgp0acqoIJ0MfqiG
+         loIRgnik8o6qPN7piuSN7sTDXdy7HEUZmdfoynvAdPrpX8g/aRexww5q/5W25s1SL6hT
+         P0OwQmVUxJvx/RjpTYnQMfT81mJN7SwcJI33tn1MJ5vwbNnO+ArJWRhMXNG8Nn77on6l
+         O2fw==
+X-Gm-Message-State: AFqh2kpk7jXHU7ldk5yEkqrkdWIhooaAqwZc42X8ny+AtmfkiQjkJ2jn
+	NKmD4AgHlgHcPMoGb3fg2Io=
+X-Google-Smtp-Source: AMrXdXsN3egZuow7sNDCctPG+VunNJGlKj4E12ZlT9Um1FBGzDz97HrRjJAVFxuMN8+oPIQ6UyZajQ==
+X-Received: by 2002:adf:fa0f:0:b0:28f:b480:f4 with SMTP id m15-20020adffa0f000000b0028fb48000f4mr12954011wrr.12.1672843524496;
+        Wed, 04 Jan 2023 06:45:24 -0800 (PST)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -94,60 +94,41 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	Chuck Zmudzinski <brchuckz@aol.com>,
 	Bernhard Beschow <shentey@gmail.com>
-Subject: [PATCH v2 5/6] hw/isa/piix: Resolve redundant k->config_write assignments
-Date: Wed,  4 Jan 2023 15:44:36 +0100
-Message-Id: <20230104144437.27479-6-shentey@gmail.com>
+Subject: [PATCH v2 2/6] hw/isa/piix: Reuse piix3_realize() in piix3_xen_realize()
+Date: Wed,  4 Jan 2023 15:44:33 +0100
+Message-Id: <20230104144437.27479-3-shentey@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230104144437.27479-1-shentey@gmail.com>
 References: <20230104144437.27479-1-shentey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The previous patch unified handling of piix_write_config() accross all
-PIIX device models which allows for assigning k->config_write once in the
-base class.
+This is a preparational patch for the next one to make the following
+more obvious:
+
+First, pci_bus_irqs() is now called twice in case of Xen where the
+second call overrides the pci_set_irq_fn with the Xen variant.
+
+Second, pci_bus_set_route_irq_fn() is now also called in Xen mode.
 
 Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 ---
- hw/isa/piix.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/isa/piix.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/hw/isa/piix.c b/hw/isa/piix.c
-index d4cdb3dadb..98e9b12661 100644
+index a7a4eec206..25707479eb 100644
 --- a/hw/isa/piix.c
 +++ b/hw/isa/piix.c
-@@ -396,6 +396,7 @@ static void pci_piix_class_init(ObjectClass *klass, void *data)
-     PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
-     AcpiDevAmlIfClass *adevc = ACPI_DEV_AML_IF_CLASS(klass);
+@@ -493,7 +493,7 @@ static void piix3_xen_realize(PCIDevice *dev, Error **errp)
+     PIIXState *piix3 = PIIX_PCI_DEVICE(dev);
+     PCIBus *pci_bus = pci_get_bus(dev);
  
-+    k->config_write = piix_write_config;
-     dc->reset       = piix_reset;
-     dc->desc        = "ISA bridge";
-     dc->hotpluggable   = false;
-@@ -451,7 +452,6 @@ static void piix3_class_init(ObjectClass *klass, void *data)
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
- 
--    k->config_write = piix_write_config;
-     k->realize = piix3_realize;
-     /* 82371SB PIIX3 PCI-to-ISA bridge (Step A1) */
-     k->device_id = PCI_DEVICE_ID_INTEL_82371SB_0;
-@@ -470,7 +470,6 @@ static void piix3_xen_class_init(ObjectClass *klass, void *data)
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
- 
--    k->config_write = piix_write_config;
-     k->realize = piix3_realize;
-     /* 82371SB PIIX3 PCI-to-ISA bridge (Step A1) */
-     k->device_id = PCI_DEVICE_ID_INTEL_82371SB_0;
-@@ -519,7 +518,6 @@ static void piix4_class_init(ObjectClass *klass, void *data)
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
- 
--    k->config_write = piix_write_config;
-     k->realize = piix4_realize;
-     k->device_id = PCI_DEVICE_ID_INTEL_82371AB_0;
-     dc->vmsd = &vmstate_piix4;
+-    pci_piix_realize(dev, TYPE_PIIX3_USB_UHCI, errp);
++    piix3_realize(dev, errp);
+     if (*errp) {
+         return;
+     }
 -- 
 2.39.0
 
