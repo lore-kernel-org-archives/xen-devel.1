@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B800C3DA7D
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Jan 2023 12:02:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.471846.731854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4A2C3DA7A
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Jan 2023 12:02:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.471848.731876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDOwU-00072F-IO; Thu, 05 Jan 2023 12:01:54 +0000
+	id 1pDOwY-0007Xa-17; Thu, 05 Jan 2023 12:01:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 471846.731854; Thu, 05 Jan 2023 12:01:54 +0000
+Received: by outflank-mailman (output) from mailman id 471848.731876; Thu, 05 Jan 2023 12:01:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDOwU-000728-Dt; Thu, 05 Jan 2023 12:01:54 +0000
-Received: by outflank-mailman (input) for mailman id 471846;
- Thu, 05 Jan 2023 12:01:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pDOwX-0007XQ-TP; Thu, 05 Jan 2023 12:01:57 +0000
+Received: by outflank-mailman (input) for mailman id 471848;
+ Thu, 05 Jan 2023 12:01:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aZA+=5C=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pDOwT-0006u7-2X
- for xen-devel@lists.xenproject.org; Thu, 05 Jan 2023 12:01:53 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bdc2f18e-8cf0-11ed-91b6-6bf2151ebd3b;
- Thu, 05 Jan 2023 13:01:52 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id ja17so27834038wmb.3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Jan 2023 04:01:52 -0800 (PST)
+ id 1pDOwW-00071H-ES
+ for xen-devel@lists.xenproject.org; Thu, 05 Jan 2023 12:01:56 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bf1eaf22-8cf0-11ed-b8d0-410ff93cb8f0;
+ Thu, 05 Jan 2023 13:01:54 +0100 (CET)
+Received: by mail-wm1-x329.google.com with SMTP id
+ k26-20020a05600c1c9a00b003d972646a7dso1115571wms.5
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Jan 2023 04:01:54 -0800 (PST)
 Received: from fedora.. ([195.234.76.149]) by smtp.gmail.com with ESMTPSA id
- x5-20020a05600c21c500b003d9b89a39b2sm2159826wmj.10.2023.01.05.04.01.50
+ x5-20020a05600c21c500b003d9b89a39b2sm2159826wmj.10.2023.01.05.04.01.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Jan 2023 04:01:51 -0800 (PST)
+ Thu, 05 Jan 2023 04:01:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,94 +46,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bdc2f18e-8cf0-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: bf1eaf22-8cf0-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SlLZPNoeJrg9cCvwh4LLybSVlr8nbBmVdnfp1y+ineg=;
-        b=hzRcx6YBiRcm4FokAjkbrcKpadrRq2GwCMqX7mJssJXf+av4F1cwWTYDYof9ohOX0E
-         QHgcn4c/eLYPFWKqfhCqQc+Ykp9kePrrxl/AMqDFaoZPULpGq7mIeKsHEl7ro1P+PGUK
-         FGMzNL0ZvmJgpvRNdSJ75CaQteR7AZ1J/OjvyNObec5xt56Syz/1MpfyGmiy7XMM9kPO
-         HUrS2E7ShbrxBzPhl3XVT6V1ojlxFDAM/wBuYC8cGNl4kLeGot/MhWuq+AKbsm0kgoGB
-         Xzv3Wg95Qr2kIrKs7MjsTN2v9TSS5/AT/PbnN0VO9RGTyn2gQJLJrW4PjeuEwKmmqqsp
-         /fEA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HEdE610llDLMp8O4DeyVRrmQCHhD1SKsTN47twxNoiI=;
+        b=QFErldNCO2mrk5LL8zlYwXziQNBpOK+PphWvyCkUgYROLNMOs7C9I4qr/uDXg5kYhj
+         8kqTI4rfGYYbB32LMUgGcX/Sx5/zHTuOYtvFe5kGHfwxbkswYskCJmkRk3h2RF4G3LfN
+         A6gNjbSnsFpr7RValUIU12j34ckg6WaXbdMa0R0yZeeXPv24mhxvhY1avQsi5lGDKdLz
+         H35Up31QgjmueDcNvKW+BIB9KjYx3MqtmyN8P/sqJLapiXBz0f4RTSy8YOkyTHcFXBWr
+         O6LmVK76Ww0wRoiFONMqNSm3C2i539AjjvecNwt5f+LnsONlBxDAdkIhGJ7LHQjimAHe
+         crrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SlLZPNoeJrg9cCvwh4LLybSVlr8nbBmVdnfp1y+ineg=;
-        b=yyAy/80HCFbkys9mSLXzkCL7lOle4CeiV8tGsFiVloqW+XC35tCWBDqTqiRkWU4BZg
-         FaJJts5iLfShXLD4NtwTklyo12V0L/Emz9pqdGXoG7wk4o2QpLsOkdeW+LN0PvOQ0Krb
-         DqbF1lcNwrbhAy6AzdEd7MOWS7rCyvvxUzQ8TEkIE4ytErb7gU65VAizOUJCUvwR+GZs
-         KYXWxFOLFFJcN7Q35p06vxpl11gyIoQFRyGASXgEpErC0O5IwM2Zhe+DPWGaVQosvzil
-         QBX433OvGQqswA4YEbo1SfamMLsID95lYsOpIt2hfNXhvIsC1JLVJAQE3T4LOhYGON83
-         lVGw==
-X-Gm-Message-State: AFqh2kpYZajz9b7jXzsZ6Q26iqiUceudNc86bSeyRnaX2SqP9N1D/and
-	EmKhip8HAwLwcGugU1s/n6TOc0C6s8bQHab+
-X-Google-Smtp-Source: AMrXdXvODMR5TZzDvOc65KDrVwjTNQu+GioNqH2BQd8eEEciG1Bvmi3YA5DM+yUlGniuo0fV8xbKIA==
-X-Received: by 2002:a1c:7c0f:0:b0:3d5:816e:2fb2 with SMTP id x15-20020a1c7c0f000000b003d5816e2fb2mr39008747wmc.14.1672920111508;
-        Thu, 05 Jan 2023 04:01:51 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HEdE610llDLMp8O4DeyVRrmQCHhD1SKsTN47twxNoiI=;
+        b=c0waLa+KnFc3tPsXKrXG/AToea9LFdoLugrYQuOufxRqM7bQdhKfTZRqHLddlj8n9Y
+         ZlAH2M5dqLKcejVX92vyz8wyZMiC6qAtHE6VzhY6eNbr4zSZySQA8DSi9w0H8sFg4sMm
+         c1jMfHJhjHWktZJSQUuTwg1+mH1DWxoC4hjA5drJ5sKnrYZYumfAoQ15jSPbRVypBC3U
+         MPkS/0jlVCPLy/BgOzK0YwkJePL9/mlCKSN7oUi18lOsV/2vHeTibFLkWq+igtwCvkME
+         MYmN1xxkKjA/4u9pI+UCMg69q6WYgk8MB4xaPfTmDfcMQq2X2H4UflHgxgh8LtLSm9CE
+         1dJQ==
+X-Gm-Message-State: AFqh2krEUHOMb6CLH8JcQ3aQvAbx/urSTSS/IvhWKoriwrI7aeRmXcbl
+	aO4caCaw1i3OQ8EIKotaLoQvrFI63mcV7zK+
+X-Google-Smtp-Source: AMrXdXtCSkkQJPSIaON/PqlUvKP0j+OCC8GRjx3CUMUnB0kYwufcQ54q3I7Z7/HiR3oPi6kFNsMgNQ==
+X-Received: by 2002:a05:600c:3ac3:b0:3d1:cfcb:7d19 with SMTP id d3-20020a05600c3ac300b003d1cfcb7d19mr43668618wms.32.1672920113643;
+        Thu, 05 Jan 2023 04:01:53 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Gianluca Guida <gianluca@rivosinc.com>
-Subject: [PATCH v4 0/2] Add minimal RISC-V Xen build and build testing
-Date: Thu,  5 Jan 2023 14:01:44 +0200
-Message-Id: <cover.1672912316.git.oleksii.kurochko@gmail.com>
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v4 2/2] automation: add RISC-V 64 cross-build tests for Xen
+Date: Thu,  5 Jan 2023 14:01:46 +0200
+Message-Id: <7d9bf454d056180376031aaf862963036a46d1e5.1672912316.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <cover.1672912316.git.oleksii.kurochko@gmail.com>
+References: <cover.1672912316.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch series introduces the following:
-- provide a minimal amount of changes to add initial RISC-V support
-  to make Xen binary buildable and runnable for RISC-V architecture
-  which can be used for future development and testing.
-- add RISC-V 64 cross-compile build jobs to check if any new changes
-  break RISC-V build.
+Add build jobs to cross-compile Xen-only for RISC-V 64.
 
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
 Changes in V4:
-- Rebase on mainline 'staging'.
-- Code style fixes and commit message updates.
-- Minor changes of riscv/Makefile and build.yaml
-
-Changes in V3:
-- Remove include of <asm/config.h> from head.S.
-
+- Add RISCV RANDCONFIG jobs
+- Remove unnecessary comments
+---
 Changes in V2:
-- Remove the patch "automation: add cross-compiler support
-  for the build script" because it was reworked as a part of the patch
-  series "CI: Fixes/cleanup in preparation for RISCV".
-- Remove the patch "automation: add python3 package for riscv64.dockerfile"
-  because it is not necessary for RISCV Xen binary build now.
-- Rework the patch "arch/riscv: initial RISC-V support to build/run
-  minimal Xen" according to the comments about v1 of the patch series.
-- Add HYPERVISOR_ONLY to RISCV jobs in build.yaml after rebasing on
-  "CI: Fixes/cleanup in preparation for RISCV" patch series.
+- Add HYPERVISOR_ONLY to RISCV jobs because after rebase on
+  top of the patch series "CI: Fixes/cleanup in preparation for RISCV"
+  it is required to set HYPERVISOR_ONLY in build.yaml
+---
+ automation/gitlab-ci/build.yaml | 56 +++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
 
-Oleksii Kurochko (2):
-  arch/riscv: initial RISC-V support to build/run minimal Xen
-  automation: add RISC-V 64 cross-build tests for Xen
-
- automation/gitlab-ci/build.yaml     |  56 ++++++++++
- xen/arch/riscv/Makefile             |  14 +++
- xen/arch/riscv/arch.mk              |   4 +
- xen/arch/riscv/include/asm/config.h |   9 +-
- xen/arch/riscv/riscv64/Makefile     |   2 +-
- xen/arch/riscv/riscv64/head.S       |   4 +-
- xen/arch/riscv/xen.lds.S            | 158 ++++++++++++++++++++++++++++
- 7 files changed, 242 insertions(+), 5 deletions(-)
- create mode 100644 xen/arch/riscv/xen.lds.S
-
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 43dbef8aba..6784974619 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -172,6 +172,33 @@
+   variables:
+     <<: *gcc
+ 
++.riscv64-cross-build-tmpl:
++  <<: *build
++  variables:
++    XEN_TARGET_ARCH: riscv64
++  tags:
++    - x86_64
++
++.riscv64-cross-build:
++  extends: .riscv64-cross-build-tmpl
++  variables:
++    debug: n
++
++.riscv64-cross-build-debug:
++  extends: .riscv64-cross-build-tmpl
++  variables:
++    debug: y
++
++.gcc-riscv64-cross-build:
++  extends: .riscv64-cross-build
++  variables:
++    <<: *gcc
++
++.gcc-riscv64-cross-build-debug:
++  extends: .riscv64-cross-build-debug
++  variables:
++    <<: *gcc
++
+ # Jobs below this line
+ 
+ archlinux-gcc:
+@@ -619,6 +646,35 @@ alpine-3.12-gcc-debug-arm64-boot-cpupools:
+     EXTRA_XEN_CONFIG: |
+       CONFIG_BOOT_TIME_CPUPOOLS=y
+ 
++# RISC-V 64 cross-build
++riscv64-cross-gcc:
++  extends: .gcc-riscv64-cross-build
++  variables:
++    CONTAINER: archlinux:riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
++    HYPERVISOR_ONLY: y
++
++riscv64-cross-gcc-debug:
++  extends: .gcc-riscv64-cross-build-debug
++  variables:
++    CONTAINER: archlinux:riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
++    HYPERVISOR_ONLY: y
++
++riscv64-cross-gcc-randconfig:
++  extends: .gcc-riscv64-cross-build
++  variables:
++    CONTAINER: archlinux:riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
++    RANDCONFIG: y
++
++riscv64-cross-gcc-debug-randconfig:
++  extends: .gcc-riscv64-cross-build-debug
++  variables:
++    CONTAINER: archlinux:riscv64
++    KBUILD_DEFCONFIG: tiny64_defconfig
++    RANDCONFIG: y
++
+ ## Test artifacts common
+ 
+ .test-jobs-artifact-common:
 -- 
 2.38.1
 
