@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B509DC54E76
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Jan 2023 17:24:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.472830.733209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B5AC3DA7A
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Jan 2023 17:36:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.472837.733221 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDqS6-00079y-3E; Fri, 06 Jan 2023 17:24:22 +0000
+	id 1pDqd5-0000DB-4N; Fri, 06 Jan 2023 17:35:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 472830.733209; Fri, 06 Jan 2023 17:24:22 +0000
+Received: by outflank-mailman (output) from mailman id 472837.733221; Fri, 06 Jan 2023 17:35:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDqS6-00079r-0W; Fri, 06 Jan 2023 17:24:22 +0000
-Received: by outflank-mailman (input) for mailman id 472830;
- Fri, 06 Jan 2023 17:24:20 +0000
+	id 1pDqd5-0000D4-1S; Fri, 06 Jan 2023 17:35:43 +0000
+Received: by outflank-mailman (input) for mailman id 472837;
+ Fri, 06 Jan 2023 17:35:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CnAh=5D=gmail.com=bobbyeshleman@srs-se1.protection.inumbo.net>)
- id 1pDqS4-00079l-Bp
- for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 17:24:20 +0000
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [2607:f8b0:4864:20::62c])
+ <SRS0=XdSJ=5D=casper.srs.infradead.org=BATV+47733503048e2e898d5f+7075+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pDqd1-0000Cy-K3
+ for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 17:35:41 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f38434da-8de6-11ed-91b6-6bf2151ebd3b;
- Fri, 06 Jan 2023 18:24:19 +0100 (CET)
-Received: by mail-pl1-x62c.google.com with SMTP id d15so2305571pls.6
- for <xen-devel@lists.xenproject.org>; Fri, 06 Jan 2023 09:24:19 -0800 (PST)
-Received: from localhost (c-73-164-155-12.hsd1.wa.comcast.net. [73.164.155.12])
- by smtp.gmail.com with ESMTPSA id
- e1-20020a170902784100b0017f74cab9eesm1198776pln.128.2023.01.06.09.24.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jan 2023 09:24:17 -0800 (PST)
+ id 86f42156-8de8-11ed-91b6-6bf2151ebd3b;
+ Fri, 06 Jan 2023 18:35:38 +0100 (CET)
+Received: from [2001:8b0:10b:5::bb3] (helo=u3832b3a9db3152.infradead.org)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pDqct-00HMLI-DX; Fri, 06 Jan 2023 17:35:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,88 +42,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f38434da-8de6-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=S2NFXzGo9zbhDvyYpgSdnlq0/2Qb+GtlNnT0u3EMLTM=;
-        b=DiSL6l2MsSAryJG7j0Z37LD17gArmltOyGPinT3NjqJv7lftzxLhm9IZXzrJkYHUDI
-         BtipZeoVabBIAJAejC1MghunCM6HY4RIpjybcgIjhhZk0hEyQGcxke5XgPvKgpN50WOW
-         QwjHYG3CU7gNCevU8jDJS3w7o5diAj8UP8u54p6Y5sP2Cpx+mVfLBgqk+yRdWWRb/5ty
-         7NhWBQspkLacfubNTcOhegRsW2dpua7UpmDhM95Jqp1AF61AdjI06e9Sr/RTKf0mW2Gy
-         bim3LBTTEsTWLMFQwf0M5I98KGza1Zq62zg9CQ4nkCs+vLs56M++PXc6NJb5cKN4lZxg
-         5sAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=S2NFXzGo9zbhDvyYpgSdnlq0/2Qb+GtlNnT0u3EMLTM=;
-        b=U8PjYgyICUeEjwoB598hlf4Q9JbWeBLAFpooXKPMJ/6TA7FvimBSqYmyMdck1wZxzm
-         /oTiiPr2QQjnaOGMJFVKYj63tR5dlUE5n8NTF0xy4K/oZU2xBR2jMpNO4stQIMlLFTA8
-         U5Vx0FW7PIDV+JyFFM8X4h7cTtCHmL9Uudkbd9Bo1vsJc/ML8xufgPzK1kNAnZxi4cBg
-         9us/npu4v7HlvzLxyPRZrO1cR4CAttvRZstVktwXI6KscO4caSO4mbwppc9wgR2u7qHr
-         p/uz87jVd+vHnz2C3m9NuI0Lgmi71T4wTwVI7nCjfmChJ72V7TEj7c0dg/0OcYnsyN+G
-         DL2Q==
-X-Gm-Message-State: AFqh2koqQPrJnukFeBZJL88bcPi8CKXaMhrUTSdHVH2VdvLjJzv90ipw
-	w1nrvbPhYor8WquGKBEmvLk=
-X-Google-Smtp-Source: AMrXdXsj7xV3yYdlyIF55ed/UL9hxZ2u0HQTV+FoImGHqTzFNiUJDr/MsyFpLaVnRy4S08wcgY0y8g==
-X-Received: by 2002:a17:902:c643:b0:192:b6ca:200 with SMTP id s3-20020a170902c64300b00192b6ca0200mr22606994pls.3.1673025858004;
-        Fri, 06 Jan 2023 09:24:18 -0800 (PST)
-Date: Tue, 20 Dec 2022 06:50:04 +0000
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-To: Andrew Cooper <Andrew.Cooper3@citrix.com>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: Re: [PATCH v1 4/8] xen/riscv: introduce sbi call to putchar to
- console
-Message-ID: <Y6FbHB74Y6D3kvjH@bullseye>
-References: <cover.1673009740.git.oleksii.kurochko@gmail.com>
- <09da5a3184242152af6af060720a007738a55d6e.1673009740.git.oleksii.kurochko@gmail.com>
- <Y6FUy/F0mbrvRP3e@bullseye>
- <320cc1b3-f03f-ad87-205f-d3c5db446f7d@citrix.com>
+X-Inumbo-ID: 86f42156-8de8-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=j5SJjOVUWB6bIzEcIGazxSgaPhnqoJFI6j1SWoTN3y0=; b=eLneMP0+lyMm7EmYyw8wlZhQij
+	nOzOoIcwVYy/a4kyBXMQ4Y2XzSwmxE8uorOKLivjNneYDuJLGOiqA/Di32Qlj9dP77EY/cjSg/yim
+	3LgxAXqM4XA1lRdX/aCPKM74JUduIRgAwfQF6aZNVKPleRtG/PdMhRhLQfpx0pkohPaPKSCcdqwsH
+	Q9TxkfDIgT8sl42HW2yXtiVlxHXjThdIBy9JU8f3upn48TO6iuLQUH8J6aetTIDDG+Tt7zTpsbp/g
+	hU9acEpR/g8ouV9xDYk+g04QITRBiOIJPxPetqRxMX5C3Fl8WwPyCaErM8Nkoln1zQIJ2aSa4JhOn
+	DLvSxipw==;
+Message-ID: <b80c0bb26d8539899f53b91deb48f748e2495d23.camel@infradead.org>
+Subject: Re: [PATCH v2 3/6] hw/isa/piix: Wire up Xen PCI IRQ handling
+ outside of PIIX3
+From: David Woodhouse <dwmw2@infradead.org>
+To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, xen-devel@lists.xenproject.org, 
+ =?ISO-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>, Aurelien Jarno
+ <aurelien@aurel32.net>, Paul Durrant <paul@xen.org>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Anthony Perard <anthony.perard@citrix.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Philippe
+ =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Chuck Zmudzinski
+ <brchuckz@aol.com>
+Date: Fri, 06 Jan 2023 17:35:18 +0000
+In-Reply-To: <20230104144437.27479-4-shentey@gmail.com>
+References: <20230104144437.27479-1-shentey@gmail.com>
+	 <20230104144437.27479-4-shentey@gmail.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-1GDoUcmA+YFZPkTfypSI"
+User-Agent: Evolution 3.44.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <320cc1b3-f03f-ad87-205f-d3c5db446f7d@citrix.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-On Fri, Jan 06, 2023 at 05:16:31PM +0000, Andrew Cooper wrote:
-> On 20/12/2022 6:23 am, Bobby Eshleman wrote:
-> > On Fri, Jan 06, 2023 at 03:14:25PM +0200, Oleksii Kurochko wrote:
-> >> The patch introduce sbi_putchar() SBI call which is necessary
-> >> to implement initial early_printk
-> >>
-> > I think that it might be wise to start off with an alternative to
-> > sbi_putchar() since it is already planned for deprecation. I realize
-> > that this will require rework, but it is almost guaranteed that
-> > early_printk() will break on future SBI implementations if using this
-> > SBI call. IIRC, Xen/ARM's early printk looked like a reasonable analogy
-> > for how it could work on RISC-V, IMHO.
-> 
-> Hmm, we're using it as a stopgap right now in CI so we can break
-> "upstream RISC-V support" into manageable chunks.
-> 
-> So perhaps we want to forgo plumbing sbi_putchar() into early_printk() 
-> (to avoid giving the impression that this will stay around in the
-> future) and use sbi_putchar() directly for the hello world print.
-> 
-> Next, we focus on getting the real uart driver working along with real
-> printk (rather than focusing on exceptions which was going to be the
-> next task), and we can drop sbi_putchar() entirely.
-> 
-> Thoughts?
-> 
-> ~Andrew
 
-That sounds like a reasonable approach to me.
+--=-1GDoUcmA+YFZPkTfypSI
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Best,
-Bobby
+On Wed, 2023-01-04 at 15:44 +0100, Bernhard Beschow wrote:
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (xen_enabled()) {
+
+Could this perhaps be if (xen_mode !=3D XEN_DISABLED) once we merge the
+Xen-on-KVM series?
+
+--=-1GDoUcmA+YFZPkTfypSI
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
+ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
+EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
+FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
+aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
+EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
+VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
+aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
+ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
+QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
+rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
+ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
+U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
+DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
+BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
+dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
+BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
+QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
+CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
+xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
+IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
+kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
+eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
+KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
+1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
+OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
+x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
+5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
+DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
+VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
+UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
+MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
+ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
+oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
+SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
+xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
+RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
+bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
+NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
+KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
+5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
+C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
+gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
+VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
+by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
+b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
+BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
+QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
+c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
+AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
+qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
+v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
+Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
+tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
+Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
+YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
+ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
+IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
+ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
+GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
+h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
+9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
+P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
+2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
+BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
+7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
+lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
+lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
+AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
+Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
+FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
+BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
+cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
+aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
+LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
+BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
+cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
+Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
+lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
+WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
+hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
+IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
+dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
+NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
+xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwMTA2MTczNTE4WjAvBgkqhkiG9w0BCQQxIgQg91B2jFp1
+PMQtGaFyS4i9Up5i5gJoNToNZs0En054QjIwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
+A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
+dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
+DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
+MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
+Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAXuoNJktsTX1LWKHjCdT9hwq9O8vm027u2
+KKGDTtG+iZP2vdPw620FjeyjdMm8lcu8DPVxJK6Su8AgaMU7MK7QUdfyJuOXDjDYEJjIJIb92LQq
+DXzxxH2+Iy/yXz/ti8XiL/BpNfDtMrwbMg+u23XVsumO5mXmyyeSgpcWAmzpwdikgkh2jVc3khlS
+P1XOSz3BadQPWlm7K8h7Ttqk5fsqutmPn1+Sti2UUGCNoVXVa9RPWaNqdRu9voaYwcCGnmtAC+pW
+pDXGQjpQsib6n93mqvnAXXbzmi9/HSBPIp24dbP6l6OD6LxSF2EezyFWt/JvLXZxr2Bv3SfStgr8
+5583QlbPrWA+feXpA33ylNy4TlZj3U0ZpcjeNUelpAh0Zlbthqd2x/oIKahn4ZuXCqBadTiFTJoI
+vePPKOuQ5QW0CTCXydMeyuFjhrcDtKnLqYObo6ZbSzZJPn921Wdb0Q08LGd/D4dXuT0P3/ZzAOf+
+vH1WjQAaY2zIPDq2msbubNACCdcGzFNaYVAQABzFWVPYTq42XI2nawvjLScYLPAcqqXjZ3P44Bst
+Ot0Y6GQi3/9F2yAEzdAj7nFcdYKPVIoqBi7eFZVQlUEWZy8k4MMDCIw/yNE8ANIXlyEOAynLkDIf
+yyeeFihY2CvVVdb8aKZKfMDhQ+XD9fa/lfgXtliwygAAAAAAAA==
+
+
+--=-1GDoUcmA+YFZPkTfypSI--
 
