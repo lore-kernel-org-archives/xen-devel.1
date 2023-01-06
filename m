@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA850C54EBF
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Jan 2023 13:14:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.472545.732830 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7C7C54EF0
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Jan 2023 13:14:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.472543.732815 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDmYa-00049s-Qr; Fri, 06 Jan 2023 13:14:48 +0000
+	id 1pDmYX-0003kP-4n; Fri, 06 Jan 2023 13:14:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 472545.732830; Fri, 06 Jan 2023 13:14:48 +0000
+Received: by outflank-mailman (output) from mailman id 472543.732815; Fri, 06 Jan 2023 13:14:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDmYa-00049H-K4; Fri, 06 Jan 2023 13:14:48 +0000
-Received: by outflank-mailman (input) for mailman id 472545;
- Fri, 06 Jan 2023 13:14:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pDmYW-0003kH-VJ; Fri, 06 Jan 2023 13:14:44 +0000
+Received: by outflank-mailman (input) for mailman id 472543;
+ Fri, 06 Jan 2023 13:14:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QRQJ=5D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pDmYZ-0003zy-CT
- for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 13:14:47 +0000
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [2a00:1450:4864:20::12d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 16d71d02-8dc4-11ed-b8d0-410ff93cb8f0;
- Fri, 06 Jan 2023 14:14:45 +0100 (CET)
-Received: by mail-lf1-x12d.google.com with SMTP id z26so1886263lfu.8
- for <xen-devel@lists.xenproject.org>; Fri, 06 Jan 2023 05:14:45 -0800 (PST)
+ id 1pDmYV-0002z5-E9
+ for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 13:14:43 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 154670af-8dc4-11ed-91b6-6bf2151ebd3b;
+ Fri, 06 Jan 2023 14:14:42 +0100 (CET)
+Received: by mail-lf1-x12f.google.com with SMTP id cf42so1913857lfb.1
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Jan 2023 05:14:42 -0800 (PST)
 Received: from fedora.. ([195.234.76.149]) by smtp.gmail.com with ESMTPSA id
- f14-20020a0565123b0e00b004b7033da2d7sm150221lfv.128.2023.01.06.05.14.43
+ f14-20020a0565123b0e00b004b7033da2d7sm150221lfv.128.2023.01.06.05.14.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jan 2023 05:14:44 -0800 (PST)
+ Fri, 06 Jan 2023 05:14:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,76 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16d71d02-8dc4-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 154670af-8dc4-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=V/C7mq9n+LLhC4Y4ZbcEJdqsm6p7eqTbyDE7iupd4oI=;
-        b=DmPgp211+8J2th3XIdLG7IFTx4S08FyDzOd2EKY33xrDl/G3AFncyIEwd9hidIynjW
-         My5wV8H1swatr8xVCeu/nA4fhbDyYXH215UKAkYHa/zjrp9Gws+38Z0SsYUN1qcFFlVS
-         rbuwrpYwBVF7X3vdf8bKHyA62wshCC0L+uXcVvoBk/Rr8XdlqLdoiJCiSiST7hPNYHVG
-         bwBJ1t1ISSHFQfFYPJ9W79L+cI51pnkYJ0WQScbMrNDxRYFC9gaAJUsN5oAuuwX10gj6
-         VJ+sERai9LxYoUtqqt3lpvj1a3yeLGGtY+m4VUcEfkRPxvXvNfUJ5SmYw0VU59TpGiu8
-         vevg==
+        bh=WNxlUh9Ka9jPjJlnMEMMefixCKNIhgCiXW1ZWCXQV/k=;
+        b=Cmp2WrBPADxtPoiKL4ZCWZjbwolz9CwJgGbJPD1rMDDiI4pZKxyKs8tIFpSVx7xZph
+         Zcr/Wt6lvg3FkgxLGPbYrF4RjLh+MGPOl10al8e9P5VIfsaWmG7qfqwCr0gDRlmbkAfz
+         CO6Ru90aBDKMmqCyBvUnfKTZ59ad/qLzNaERvfFpq6tS0plPuFGbhtSTcZgJkNcphG7/
+         lPwDSreK1qoe1UVY5EEgEN8gA9fHaUCF8UDtd1r6OC2Dyo1tcmf6wdE+qUhpO9dKCZ/u
+         AR6XI3Uh00paOLb9LVgKW81uqYPOwtEkeq9LK9r8uTmgKaMjbvQUwNO/eMCW375itLxT
+         /Wmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=V/C7mq9n+LLhC4Y4ZbcEJdqsm6p7eqTbyDE7iupd4oI=;
-        b=NnkWNNRrOhmeW9ToyNCn7stmnwK2/uLmmA2pUXs4BQzMTP+qb0vuO3bJ76tfXOwC4A
-         nD4ioATkBrNxHEWERPXobYdVR+QkDLa5Y+23oZKGHJTrYaMQZFvppysDvrH6Hqt6jp9V
-         Hx/vCtfxDQX1bPD3J1V/qInD0QL482p5YXYYuMihOi/rifWPaoyHk+n75RsnDlcrID08
-         QFUbj1RVeiu9cenpbfWCx9gHzOoQw3U5vlJKCyJcZnmBrUetzGU3qurpvSTqzFdeUa8l
-         d14rkFt2/Dz8WEneNpt9FwPquKLOra1YZoHUpjZEbBYxl/VCbrjj/eKA80PEwydiOMbZ
-         QGaQ==
-X-Gm-Message-State: AFqh2kpQm1xgce9MP5LoGvanJpv00kkSmKBAX96JBrCOcyKqVzSkHOK4
-	jCDGqYQrvpr8sYL1dBh6P8xyJfzL61IzToK6
-X-Google-Smtp-Source: AMrXdXuzdj7/0NVCbmFTZQ7fqbaayzfjRYlIo5wrF/b9HwI6nUYbU6E3dM8LqLQZDIL0pVc1/Rrufg==
-X-Received: by 2002:a05:6512:16a8:b0:4b5:b7ba:cae with SMTP id bu40-20020a05651216a800b004b5b7ba0caemr16054266lfb.48.1673010884899;
-        Fri, 06 Jan 2023 05:14:44 -0800 (PST)
+        bh=WNxlUh9Ka9jPjJlnMEMMefixCKNIhgCiXW1ZWCXQV/k=;
+        b=ujdg131bgkDNS3qAHK/yHdeARCfT6Gj+cHjplIlO4XNknz8yGVkhbyBx3HluqPEz1T
+         /RJmQCwgxUVUDUZnYNwX0JW53//D1T/2E7QDUyDdU58ktV3XSrokah9aVxM19fxiq1rB
+         uWCXBLK19ZmHoAs8V0zaxMfgpucQnkR6zBTgTFTt3XTh87d5cHnMrN1pYyuoQd5Okaap
+         U4aQGT14qXm8yayUpL2kYv/b8LLT79qT7uYKfSOHwntgqzoR+OQr2j2CHN/ikZIHnDCy
+         6b/HMN+P2Tev0od2jf60jAGIS8aIe7uQvBiQmNgU+PXK4YkvcY6lAxoWlQ/FendQiOh1
+         B8Qw==
+X-Gm-Message-State: AFqh2kpRjTK+rKIz6o+3fwT73Gd5hIN9KMZWW2jQhsyZHkEQepBrLSj4
+	fu73Q2D9zyY9feCAmQ5OiKWGp5c9exjV3cpW
+X-Google-Smtp-Source: AMrXdXvor3i3sFq+rVboLeo1F3I7ZDy57MwxwjjT77+SwrslgXm0lEQNqBGQktwp9LJBw0V3e91aUw==
+X-Received: by 2002:ac2:4f13:0:b0:4b5:5da1:4bcb with SMTP id k19-20020ac24f13000000b004b55da14bcbmr20144859lfr.13.1673010882425;
+        Fri, 06 Jan 2023 05:14:42 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gianluca Guida <gianluca@rivosinc.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 5/8] xen/include: include <asm/types.h> in <xen/early_printk.h>
-Date: Fri,  6 Jan 2023 15:14:26 +0200
-Message-Id: <940bf18969634564fa5d206d02eb2a116c9e0ea0.1673009740.git.oleksii.kurochko@gmail.com>
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v1 3/8] xen/riscv: introduce stack stuff
+Date: Fri,  6 Jan 2023 15:14:24 +0200
+Message-Id: <e8f65c43d20ebdaba61738200360b14152531321.1673009740.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <cover.1673009740.git.oleksii.kurochko@gmail.com>
 References: <cover.1673009740.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-<asm/types.h> should be included because second argument of
-early_puts has type 'size_t' which is defined in <asm/types.h>
+The patch introduces and sets up a stack in order to go to C environment
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/include/xen/early_printk.h | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/riscv/Makefile       | 1 +
+ xen/arch/riscv/riscv64/head.S | 8 +++++++-
+ xen/arch/riscv/setup.c        | 6 ++++++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/riscv/setup.c
 
-diff --git a/xen/include/xen/early_printk.h b/xen/include/xen/early_printk.h
-index 0f76c3a74f..abb34687da 100644
---- a/xen/include/xen/early_printk.h
-+++ b/xen/include/xen/early_printk.h
-@@ -4,6 +4,8 @@
- #ifndef __XEN_EARLY_PRINTK_H__
- #define __XEN_EARLY_PRINTK_H__
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 248f2cbb3e..5a67a3f493 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -1,4 +1,5 @@
+ obj-$(CONFIG_RISCV_64) += riscv64/
++obj-y += setup.o
  
-+#include <asm/types.h>
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+index 990edb70a0..ddc7104701 100644
+--- a/xen/arch/riscv/riscv64/head.S
++++ b/xen/arch/riscv/riscv64/head.S
+@@ -1,4 +1,10 @@
+         .section .text.header, "ax", %progbits
+ 
+ ENTRY(start)
+-        j  start
++        la      sp, cpu0_boot_stack
++        li      t0, PAGE_SIZE
++        add     sp, sp, t0
 +
- #ifdef CONFIG_EARLY_PRINTK
- void early_puts(const char *s, size_t nr);
- #else
++_start_hang:
++        wfi
++        j  _start_hang
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+new file mode 100644
+index 0000000000..2c7dca1daa
+--- /dev/null
++++ b/xen/arch/riscv/setup.c
+@@ -0,0 +1,6 @@
++#include <xen/init.h>
++#include <xen/compile.h>
++
++/* Xen stack for bringing up the first CPU. */
++unsigned char __initdata cpu0_boot_stack[PAGE_SIZE]
++    __aligned(PAGE_SIZE);
 -- 
 2.38.1
 
