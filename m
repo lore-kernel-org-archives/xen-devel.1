@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59700C3DA7A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA850C54EBF
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Jan 2023 13:14:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.472542.732803 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.472545.732830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDmYV-0003TR-Qd; Fri, 06 Jan 2023 13:14:43 +0000
+	id 1pDmYa-00049s-Qr; Fri, 06 Jan 2023 13:14:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 472542.732803; Fri, 06 Jan 2023 13:14:43 +0000
+Received: by outflank-mailman (output) from mailman id 472545.732830; Fri, 06 Jan 2023 13:14:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pDmYV-0003Sw-Kp; Fri, 06 Jan 2023 13:14:43 +0000
-Received: by outflank-mailman (input) for mailman id 472542;
- Fri, 06 Jan 2023 13:14:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pDmYa-00049H-K4; Fri, 06 Jan 2023 13:14:48 +0000
+Received: by outflank-mailman (input) for mailman id 472545;
+ Fri, 06 Jan 2023 13:14:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=QRQJ=5D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pDmYU-0002z5-Dm
- for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 13:14:42 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 149870ba-8dc4-11ed-91b6-6bf2151ebd3b;
- Fri, 06 Jan 2023 14:14:41 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id cf42so1913806lfb.1
- for <xen-devel@lists.xenproject.org>; Fri, 06 Jan 2023 05:14:41 -0800 (PST)
+ id 1pDmYZ-0003zy-CT
+ for xen-devel@lists.xenproject.org; Fri, 06 Jan 2023 13:14:47 +0000
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [2a00:1450:4864:20::12d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 16d71d02-8dc4-11ed-b8d0-410ff93cb8f0;
+ Fri, 06 Jan 2023 14:14:45 +0100 (CET)
+Received: by mail-lf1-x12d.google.com with SMTP id z26so1886263lfu.8
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Jan 2023 05:14:45 -0800 (PST)
 Received: from fedora.. ([195.234.76.149]) by smtp.gmail.com with ESMTPSA id
- f14-20020a0565123b0e00b004b7033da2d7sm150221lfv.128.2023.01.06.05.14.40
+ f14-20020a0565123b0e00b004b7033da2d7sm150221lfv.128.2023.01.06.05.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jan 2023 05:14:40 -0800 (PST)
+ Fri, 06 Jan 2023 05:14:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,139 +45,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 149870ba-8dc4-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 16d71d02-8dc4-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MB3mP3saGY5zi4vniFjN+fb62F0tD8zzx/q/eV6PI4g=;
-        b=dHhG0y7E8/G36jeTb3kkFqbhUorGTTD1mCXTlEOCv5nLd0t6yij8q6f2XhSvjbCHSz
-         4LzUKh/1RbdJJ7qgeiImwk3EztRh9oPbpX+iJqmQgCuJY2xHs3Jqb3giU9uM6FDa+cFP
-         gutliizUf4Wg24ZwSqNd3yN/cKX5mUXHtkje923o2AaxnnfaLMYg/53aRm+WB7XV95bC
-         0ND1IglLWaPtvyWmqxjBvmnsy29uP6OkLA6ELEAiogGUwyvDU08UIx8tU6BBSVrsHKUk
-         bOfrfqyRVJhfSD4VpvorITmB1PTLQxhnzj9KYF7wEyyyEBYF+qQXyj7s8YOnkkMMQZ1g
-         5ufQ==
+        bh=V/C7mq9n+LLhC4Y4ZbcEJdqsm6p7eqTbyDE7iupd4oI=;
+        b=DmPgp211+8J2th3XIdLG7IFTx4S08FyDzOd2EKY33xrDl/G3AFncyIEwd9hidIynjW
+         My5wV8H1swatr8xVCeu/nA4fhbDyYXH215UKAkYHa/zjrp9Gws+38Z0SsYUN1qcFFlVS
+         rbuwrpYwBVF7X3vdf8bKHyA62wshCC0L+uXcVvoBk/Rr8XdlqLdoiJCiSiST7hPNYHVG
+         bwBJ1t1ISSHFQfFYPJ9W79L+cI51pnkYJ0WQScbMrNDxRYFC9gaAJUsN5oAuuwX10gj6
+         VJ+sERai9LxYoUtqqt3lpvj1a3yeLGGtY+m4VUcEfkRPxvXvNfUJ5SmYw0VU59TpGiu8
+         vevg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MB3mP3saGY5zi4vniFjN+fb62F0tD8zzx/q/eV6PI4g=;
-        b=H8EkbD5Bs3MyPAC5+0dBnv88GLV9kVuGS3+EXnaXKhG5Pgecjjb3x37di/aiUJNgBB
-         rxDWUjO3Up91Nq49mLD5129Q0AVtnE+kzn8KkAjwOxTT6GlIvdVedEfbpCVRf/zRGpcT
-         zk4eeBgrTqh+qHATHSEQbfxdl50tjvM1qS1rf40v8xG83jYcnogGZu1kx3ObenzkfOph
-         VHc20MK5z+OsEemOL1rYr/1QYc9wCAIsPOsfruHPjtxX2RtifUrPriQZ7ur1jjn8Y19X
-         1hooJ0kr6kGSmpurlv2lffmnuzxwNtEIfezuQSLKrnKEL1vBTHW7tLQnPTHQd5+Rc/4V
-         mJ2Q==
-X-Gm-Message-State: AFqh2kpCRf64iCbwrcO5crNNwEPYOFNnTun2nMD6SosStHjyz+yn4p7c
-	ObeJvLWYrjtkfDYfkk021kmDFVDgaeMX0rv0
-X-Google-Smtp-Source: AMrXdXtja92B/6NXyi/klzTpbEH82FEmrjFVVSWx/83yonduRUFATBxzf42E31lSTN70xqAB7n1C+w==
-X-Received: by 2002:a05:6512:1513:b0:4a4:a7d7:4769 with SMTP id bq19-20020a056512151300b004a4a7d74769mr17352068lfb.8.1673010881180;
-        Fri, 06 Jan 2023 05:14:41 -0800 (PST)
+        bh=V/C7mq9n+LLhC4Y4ZbcEJdqsm6p7eqTbyDE7iupd4oI=;
+        b=NnkWNNRrOhmeW9ToyNCn7stmnwK2/uLmmA2pUXs4BQzMTP+qb0vuO3bJ76tfXOwC4A
+         nD4ioATkBrNxHEWERPXobYdVR+QkDLa5Y+23oZKGHJTrYaMQZFvppysDvrH6Hqt6jp9V
+         Hx/vCtfxDQX1bPD3J1V/qInD0QL482p5YXYYuMihOi/rifWPaoyHk+n75RsnDlcrID08
+         QFUbj1RVeiu9cenpbfWCx9gHzOoQw3U5vlJKCyJcZnmBrUetzGU3qurpvSTqzFdeUa8l
+         d14rkFt2/Dz8WEneNpt9FwPquKLOra1YZoHUpjZEbBYxl/VCbrjj/eKA80PEwydiOMbZ
+         QGaQ==
+X-Gm-Message-State: AFqh2kpQm1xgce9MP5LoGvanJpv00kkSmKBAX96JBrCOcyKqVzSkHOK4
+	jCDGqYQrvpr8sYL1dBh6P8xyJfzL61IzToK6
+X-Google-Smtp-Source: AMrXdXuzdj7/0NVCbmFTZQ7fqbaayzfjRYlIo5wrF/b9HwI6nUYbU6E3dM8LqLQZDIL0pVc1/Rrufg==
+X-Received: by 2002:a05:6512:16a8:b0:4b5:b7ba:cae with SMTP id bu40-20020a05651216a800b004b5b7ba0caemr16054266lfb.48.1673010884899;
+        Fri, 06 Jan 2023 05:14:44 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gianluca Guida <gianluca@rivosinc.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 2/8] xen/riscv: introduce asm/types.h header file
-Date: Fri,  6 Jan 2023 15:14:23 +0200
-Message-Id: <ce66a86285e966700acb13521851aca5b764a56e.1673009740.git.oleksii.kurochko@gmail.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v1 5/8] xen/include: include <asm/types.h> in <xen/early_printk.h>
+Date: Fri,  6 Jan 2023 15:14:26 +0200
+Message-Id: <940bf18969634564fa5d206d02eb2a116c9e0ea0.1673009740.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <cover.1673009740.git.oleksii.kurochko@gmail.com>
 References: <cover.1673009740.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+<asm/types.h> should be included because second argument of
+early_puts has type 'size_t' which is defined in <asm/types.h>
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/types.h | 73 ++++++++++++++++++++++++++++++
- 1 file changed, 73 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/types.h
+ xen/include/xen/early_printk.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/types.h b/xen/arch/riscv/include/asm/types.h
-new file mode 100644
-index 0000000000..48f27f97ba
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/types.h
-@@ -0,0 +1,73 @@
-+#ifndef __RISCV_TYPES_H__
-+#define __RISCV_TYPES_H__
+diff --git a/xen/include/xen/early_printk.h b/xen/include/xen/early_printk.h
+index 0f76c3a74f..abb34687da 100644
+--- a/xen/include/xen/early_printk.h
++++ b/xen/include/xen/early_printk.h
+@@ -4,6 +4,8 @@
+ #ifndef __XEN_EARLY_PRINTK_H__
+ #define __XEN_EARLY_PRINTK_H__
+ 
++#include <asm/types.h>
 +
-+#ifndef __ASSEMBLY__
-+
-+typedef __signed__ char __s8;
-+typedef unsigned char __u8;
-+
-+typedef __signed__ short __s16;
-+typedef unsigned short __u16;
-+
-+typedef __signed__ int __s32;
-+typedef unsigned int __u32;
-+
-+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
-+#if defined(CONFIG_RISCV_32)
-+typedef __signed__ long long __s64;
-+typedef unsigned long long __u64;
-+#elif defined (CONFIG_RISCV_64)
-+typedef __signed__ long __s64;
-+typedef unsigned long __u64;
-+#endif
-+#endif
-+
-+typedef signed char s8;
-+typedef unsigned char u8;
-+
-+typedef signed short s16;
-+typedef unsigned short u16;
-+
-+typedef signed int s32;
-+typedef unsigned int u32;
-+
-+#if defined(CONFIG_RISCV_32)
-+typedef signed long long s64;
-+typedef unsigned long long u64;
-+typedef u32 vaddr_t;
-+#define PRIvaddr PRIx32
-+typedef u64 paddr_t;
-+#define INVALID_PADDR (~0ULL)
-+#define PRIpaddr "016llx"
-+typedef u32 register_t;
-+#define PRIregister "x"
-+#elif defined (CONFIG_RISCV_64)
-+typedef signed long s64;
-+typedef unsigned long u64;
-+typedef u64 vaddr_t;
-+#define PRIvaddr PRIx64
-+typedef u64 paddr_t;
-+#define INVALID_PADDR (~0UL)
-+#define PRIpaddr "016lx"
-+typedef u64 register_t;
-+#define PRIregister "lx"
-+#endif
-+
-+#if defined(__SIZE_TYPE__)
-+typedef __SIZE_TYPE__ size_t;
-+#else
-+typedef unsigned long size_t;
-+#endif
-+typedef signed long ssize_t;
-+
-+#endif /* __ASSEMBLY__ */
-+
-+#endif /* __RISCV_TYPES_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #ifdef CONFIG_EARLY_PRINTK
+ void early_puts(const char *s, size_t nr);
+ #else
 -- 
 2.38.1
 
