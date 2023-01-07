@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E91C6379F
-	for <xen-devel@archiver.kernel.org>; Sat,  7 Jan 2023 22:07:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.473026.733509 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DC2C54EBC
+	for <xen-devel@archiver.kernel.org>; Sat,  7 Jan 2023 22:20:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.473064.733531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pEHLa-0008Ku-EG; Sat, 07 Jan 2023 22:07:26 +0000
+	id 1pEHYD-0003nZ-Sm; Sat, 07 Jan 2023 22:20:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 473026.733509; Sat, 07 Jan 2023 22:07:26 +0000
+Received: by outflank-mailman (output) from mailman id 473064.733531; Sat, 07 Jan 2023 22:20:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pEHLa-0008Kl-BE; Sat, 07 Jan 2023 22:07:26 +0000
-Received: by outflank-mailman (input) for mailman id 473026;
- Sat, 07 Jan 2023 22:07:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TYdO=5E=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pEHLY-0007Zv-9Q
- for xen-devel@lists.xenproject.org; Sat, 07 Jan 2023 22:07:24 +0000
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7a36bb3-8ed7-11ed-91b6-6bf2151ebd3b;
- Sat, 07 Jan 2023 23:07:20 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id CCA885C00A3;
- Sat,  7 Jan 2023 17:07:19 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Sat, 07 Jan 2023 17:07:19 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 7 Jan 2023 17:07:18 -0500 (EST)
+	id 1pEHYD-0003nS-PZ; Sat, 07 Jan 2023 22:20:29 +0000
+Received: by outflank-mailman (input) for mailman id 473064;
+ Sat, 07 Jan 2023 22:20:29 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pEHYC-0003nI-Ud; Sat, 07 Jan 2023 22:20:28 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pEHYC-0007RO-S8; Sat, 07 Jan 2023 22:20:28 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pEHYC-0003aY-7S; Sat, 07 Jan 2023 22:20:28 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1pEHYC-0001Mw-6x; Sat, 07 Jan 2023 22:20:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,236 +44,283 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7a36bb3-8ed7-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1673129239; x=1673215639; bh=KY3VkgyHYk1MHJ+JHUtQDqXke9gx/LY5Hil
-	UBmVJC3E=; b=q0My5TYPQPe18oQO9hEvLKwKW4d5zSqUxAmpDHBGYJTZbjLsdMg
-	d54+OrM2pLEeGZNx2T/uxC+8c7DyQtEQWx0q9G2yeTCMAlx+Fbjp3e0KyOSVm5YM
-	LYsCVHOKrclVDK9FSuCJ71FjhNK5AjDQkqOfs3m2WNrU8ksXdVEyYIsnTnR3WJV2
-	nxi8dKxqAU+6FM0giP6m+8XWdoLF9TWTykok7WExRdx96/sfSb3gBltJiLXC20B7
-	BkQCdraxZqWqhf4OQUsm/Q5DyPtvxKyYg8vN46fuAAeq1dbqXAHUGqeNDnJ/qq/P
-	+oBGQob73HEH9a2loAS6w/CAT04SIO7QOOQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1673129239; x=1673215639; bh=KY3VkgyHYk1MH
-	J+JHUtQDqXke9gx/LY5HilUBmVJC3E=; b=AjOHpAmEwZB3gnpwa+jDY1P8wlWzL
-	ropOlFa9K5T58Pl3kZi4eArD1izpdCbYooGZ6aLg3pDtuhSpNfZGdogbINRVkjb6
-	wz7Ghm7nN2qUSB1c0MqLQT8B2RL4tvYJzjG8kLJdaYKCB8rAtKb6W8QMCd1O3Vf0
-	5Be2CJ7i9qffwvMFtO+nvi0ROjkXh+A5cgGb2QoRL/0ebG74ozA8oFSX6J3pSx1L
-	WMjrH7aSYCPa0iulETHO/STnVx/dPqkKg8hlduV0gKl9CiHHfdcCDkAOUHJYXXaO
-	diQwrCrPsPyd0Ja1eI0jQD6jvJfiDvZQevHpXB1Dk8reMUqo2h+KAs3IA==
-X-ME-Sender: <xms:F-25Y5mQVMLNNZilFqi5Oh921MVKPSJIytdoVLFMmxosv60Of7jEcw>
-    <xme:F-25Y00j7foDT-878D8gn0aiQFI9pHPirq74oCa2abnMRr-6C1t0tWhZL2M8dH5Ut
-    NF1dLu0MvHyOvU>
-X-ME-Received: <xmr:F-25Y_qNCy2q17TegT6_fWNAVIcu_gZZBG1w8LqCqHIODOuDbfO3rUBUUX7lD6oD8tA5hG0VPEd2>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrkedvgdduheegucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
-    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
-    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
-    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
-    lhgrsgdrtghomh
-X-ME-Proxy: <xmx:F-25Y5l71YLa0apdx4Hx2xbOfcNQjYiQlXhkVzgEfIu5T_YN6H3Y9w>
-    <xmx:F-25Y33aQF1hZE_sHYNKRQFFCc37cDeSqGSQNV8w_0EFVtRW_I_cvg>
-    <xmx:F-25Y4vxC0uJSc0Bav-8AkfezIt0SICo8ubjwLs-ZR4ZmilDSWzWSg>
-    <xmx:F-25YwLpAdRkRGPwoFEMnspu1D01E08LFaazgm4baAxamxYYBaSFbA>
-Feedback-ID: iac594737:Fastmail
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=QBvnUNJmuDURAaJUNMjWW66DzyjdVfCotKeNP//3YfE=; b=sv3pv5EFc6dvMFSJXwkRn86evc
+	gz80xjOiNwuBCr6iL0BrBXq1CjpNJojuA5HwIApNAsOnQHWkm+dRjS0PjZ4h4n5L27LTNYzQFUW3s
+	EsOC2D2zseskt+GnchKmCkpuqbPR0GRVRxIT6nZAA3Ue184Z1dz8Y97InLSmK1aZPpPw=;
 To: xen-devel@lists.xenproject.org
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Tim Deegan <tim@xen.org>
-Subject: [PATCH v7 3/4] x86/mm: make code robust to future PAT changes
-Date: Sat,  7 Jan 2023 17:07:05 -0500
-Message-Id: <89201c66b0261b2f5ee83e7672830317fde21dfa.1673123823.git.demi@invisiblethingslab.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <cover.1673123823.git.demi@invisiblethingslab.com>
-References: <cover.1673123823.git.demi@invisiblethingslab.com>
-MIME-Version: 1.0
+Message-ID: <osstest-175616-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 175616: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-amd64-amd64-libvirt-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-qcow2:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-pair:xen-boot/src_host:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-pair:xen-boot/dst_host:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-raw:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-qemuu-nested-intel:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-dom0pvh-xl-intel:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-pair:xen-boot/src_host:fail:regression
+    linux-linus:test-amd64-amd64-pair:xen-boot/dst_host:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-i386-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvhv2-intel:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-examine-bios:reboot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-dom0pvh-xl-amd:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvhv2-amd:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-freebsd12-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-examine-uefi:reboot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-freebsd11-amd64:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-xsm:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-pygrub:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-multivcpu:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-shadow:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-libvirt:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-seattle:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvshim:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-qcow2:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-ovmf-amd64:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-xl:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-examine:reboot:fail:regression
+    linux-linus:test-amd64-coresched-amd64-xl:xen-boot:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-examine:reboot:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-raw:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-multivcpu:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-arndale:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-raw:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-examine:reboot:fail:regression
+    linux-linus:test-amd64-amd64-xl-rtds:xen-boot:fail:allowable
+    linux-linus:test-armhf-armhf-xl-rtds:xen-boot:fail:allowable
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=0a71553536d270e988580a3daa9fc87535908221
+X-Osstest-Versions-That:
+    linux=9d84bb40bcb30a7fa16f33baa967aeb9953dda78
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sat, 07 Jan 2023 22:20:28 +0000
 
-It may be desirable to change Xen's PAT for various reasons.  This
-requires changes to several _PAGE_* macros as well.  Add static
-assertions to check that XEN_MSR_PAT is consistent with the _PAGE_*
-macros, and that _PAGE_WB is 0 as required by Linux.
+flight 175616 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/175616/
 
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
-Changes since v6:
-- Remove overly-specific comment.
-- Remove double blank line.
-- Check that unused entries are distinct from higher entries that are
-  used.
-- Have PTE_FLAGS_TO_CACHEATTR validate its argument.
-- Do not check if an unsigned number is negative.
-- Expand comment explaining why _PAGE_WB must be zero.
+Regressions :-(
 
-Changes since v5:
-- Remove unhelpful comment.
-- Move a BUILD_BUG_ON.
-- Use fewer hardcoded constants in PTE_FLAGS_TO_CACHEATTR.
-- Fix coding style.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-libvirt-xsm  8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-libvirt-qcow2  8 xen-boot               fail REGR. vs. 173462
+ test-amd64-amd64-libvirt-pair 12 xen-boot/src_host       fail REGR. vs. 173462
+ test-amd64-amd64-libvirt-pair 13 xen-boot/dst_host       fail REGR. vs. 173462
+ test-amd64-amd64-libvirt-raw  8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-credit1   8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-qemuu-nested-intel  8 xen-boot          fail REGR. vs. 173462
+ test-amd64-amd64-dom0pvh-xl-intel 14 guest-start         fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-ws16-amd64  8 xen-boot         fail REGR. vs. 173462
+ test-amd64-amd64-pair        12 xen-boot/src_host        fail REGR. vs. 173462
+ test-amd64-amd64-pair        13 xen-boot/dst_host        fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm  8 xen-boot fail REGR. vs. 173462
+ test-amd64-amd64-xl-pvhv2-intel  8 xen-boot              fail REGR. vs. 173462
+ test-amd64-amd64-examine-bios  8 reboot                  fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm 8 xen-boot fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-win7-amd64  8 xen-boot         fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-win7-amd64  8 xen-boot         fail REGR. vs. 173462
+ test-amd64-amd64-dom0pvh-xl-amd 14 guest-start           fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict 8 xen-boot fail REGR. vs. 173462
+ test-amd64-amd64-xl-vhd       8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-qemuu-nested-amd  8 xen-boot            fail REGR. vs. 173462
+ test-amd64-amd64-xl-xsm       8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm  8 xen-boot fail REGR. vs. 173462
+ test-amd64-amd64-xl-pvhv2-amd  8 xen-boot                fail REGR. vs. 173462
+ test-amd64-amd64-freebsd12-amd64  8 xen-boot             fail REGR. vs. 173462
+ test-amd64-amd64-examine-uefi  8 reboot                  fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-ws16-amd64  8 xen-boot         fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemut-debianhvm-amd64  8 xen-boot    fail REGR. vs. 173462
+ test-amd64-amd64-xl-credit2   8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-freebsd11-amd64  8 xen-boot             fail REGR. vs. 173462
+ test-arm64-arm64-xl-credit2   8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-libvirt-xsm  8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-pygrub       8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-multivcpu  8 xen-boot                fail REGR. vs. 173462
+ test-arm64-arm64-xl           8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-shadow    8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-libvirt      8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-xl-seattle   8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-pvshim    8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-vhd       8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64  8 xen-boot    fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow 8 xen-boot fail REGR. vs. 173462
+ test-armhf-armhf-libvirt      8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-libvirt-qcow2  8 xen-boot               fail REGR. vs. 173462
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  8 xen-boot         fail REGR. vs. 173462
+ test-amd64-amd64-xl           8 xen-boot                 fail REGR. vs. 173462
+ test-amd64-amd64-examine      8 reboot                   fail REGR. vs. 173462
+ test-amd64-coresched-amd64-xl  8 xen-boot                fail REGR. vs. 173462
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 8 xen-boot fail REGR. vs. 173462
+ test-arm64-arm64-examine      8 reboot                   fail REGR. vs. 173462
+ test-arm64-arm64-xl-credit1   8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-xl-vhd       8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-libvirt-raw  8 xen-boot                 fail REGR. vs. 173462
+ test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-multivcpu  8 xen-boot                fail REGR. vs. 173462
+ test-armhf-armhf-xl-arndale   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-credit1   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-libvirt-raw  8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-credit2   8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-examine      8 reboot                   fail REGR. vs. 173462
 
-Changes since v4:
-- Add lots of comments explaining what the various BUILD_BUG_ON()s mean.
+Regressions which are regarded as allowable (not blocking):
+ test-amd64-amd64-xl-rtds      8 xen-boot                 fail REGR. vs. 173462
+ test-armhf-armhf-xl-rtds      8 xen-boot                 fail REGR. vs. 173462
 
-Changes since v3:
-- Refactor some macros
-- Avoid including a string literal in BUILD_BUG_ON
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
 
-Additional checks on PAT values
+version targeted for testing:
+ linux                0a71553536d270e988580a3daa9fc87535908221
+baseline version:
+ linux                9d84bb40bcb30a7fa16f33baa967aeb9953dda78
 
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
- xen/arch/x86/include/asm/page.h |  2 +
- xen/arch/x86/mm.c               | 96 +++++++++++++++++++++++++++++++++
- 2 files changed, 98 insertions(+)
+Last test of basis   173462  2022-10-07 18:41:45 Z   92 days
+Failing since        173470  2022-10-08 06:21:34 Z   91 days  191 attempts
+Testing same since   175613  2023-01-07 02:22:17 Z    0 days    2 attempts
 
-diff --git a/xen/arch/x86/include/asm/page.h b/xen/arch/x86/include/asm/page.h
-index b585235d064a567082582c8e92a4e8283fd949ca..c7d77ab2901aa5bdb03a719af810c6f8d8ba9d4e 100644
---- a/xen/arch/x86/include/asm/page.h
-+++ b/xen/arch/x86/include/asm/page.h
-@@ -338,6 +338,8 @@ void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t);
- #define _PAGE_UC         (            _PAGE_PCD | _PAGE_PWT)
- #define _PAGE_WC         (_PAGE_PAT                        )
- #define _PAGE_WP         (_PAGE_PAT |             _PAGE_PWT)
-+#define _PAGE_RSVD_1     (_PAGE_PAT | _PAGE_PCD            )
-+#define _PAGE_RSVD_2     (_PAGE_PAT | _PAGE_PCD | _PAGE_PWT)
- 
- /*
-  * Debug option: Ensure that granted mappings are not implicitly unmapped.
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index a8f137925cba1846b97aee9321df6427f4dd1a94..d69e9bea6c30bc782ab4c331f42502f6e61a028a 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -890,6 +890,8 @@ get_page_from_l1e(
-         case _PAGE_WT:
-         case _PAGE_WP:
-             break;
-+        case _PAGE_RSVD_1:
-+        case _PAGE_RSVD_2:
-         default:
-             /*
-              * If we get here, a PV guest tried to use one of the
-@@ -6412,6 +6414,100 @@ static void __init __maybe_unused build_assertions(void)
-      * using different PATs will not work.
-      */
-     BUILD_BUG_ON(XEN_MSR_PAT != 0x050100070406ULL);
-+
-+    /*
-+     * _PAGE_WB must be zero.  Linux PV guests assume that _PAGE_WB will be
-+     * zero, and indeed Linux has a BUILD_BUG_ON validating that their version
-+     * of _PAGE_WB *is* zero.  Furthermore, since _PAGE_WB is zero, it is quite
-+     * likely to be omitted from various parts of Xen, and indeed L1 PTE
-+     * validation code checks that ((l1f & PAGE_CACHE_ATTRs) == 0), not
-+     * ((l1f & PAGE_CACHE_ATTRs) == _PAGE_WB).
-+     */
-+    BUILD_BUG_ON(_PAGE_WB);
-+
-+    /* _PAGE_RSVD_1 must be less than _PAGE_RSVD_2 */
-+    BUILD_BUG_ON(_PAGE_RSVD_1 >= _PAGE_RSVD_2);
-+
-+#define PAT_ENTRY(v)                                                           \
-+    (BUILD_BUG_ON_ZERO(((v) < 0) || ((v) > 7)) +                               \
-+     (0xFF & (XEN_MSR_PAT >> (8 * (v)))))
-+
-+    /* Validate at compile-time that v is a valid value for a PAT entry */
-+#define CHECK_PAT_ENTRY_VALUE(v)                                               \
-+    BUILD_BUG_ON((v) > X86_NUM_MT || (v) == X86_MT_RSVD_2 ||                   \
-+                 (v) == X86_MT_RSVD_3)
-+
-+    /* Validate at compile-time that PAT entry v is valid */
-+#define CHECK_PAT_ENTRY(v) CHECK_PAT_ENTRY_VALUE(PAT_ENTRY(v))
-+
-+    /*
-+     * If one of these trips, the corresponding entry in XEN_MSR_PAT is invalid.
-+     * This would cause Xen to crash (with #GP) at startup.
-+     */
-+    CHECK_PAT_ENTRY(0);
-+    CHECK_PAT_ENTRY(1);
-+    CHECK_PAT_ENTRY(2);
-+    CHECK_PAT_ENTRY(3);
-+    CHECK_PAT_ENTRY(4);
-+    CHECK_PAT_ENTRY(5);
-+    CHECK_PAT_ENTRY(6);
-+    CHECK_PAT_ENTRY(7);
-+
-+    /* Macro version of pte_flags_to_cacheattr(), for use in BUILD_BUG_ON()s */
-+#define PTE_FLAGS_TO_CACHEATTR(pte_value)                                      \
-+    /* Check that the _PAGE_* macros only use bits from PAGE_CACHE_ATTRS */    \
-+    (BUILD_BUG_ON_ZERO(((pte_value) & PAGE_CACHE_ATTRS) != (pte_value)) |      \
-+     (((pte_value) & _PAGE_PAT) >> 5) |                                        \
-+     (((pte_value) & (_PAGE_PCD | _PAGE_PWT)) >> 3))
-+
-+    CHECK_PAT_ENTRY(PTE_FLAGS_TO_CACHEATTR(_PAGE_RSVD_1));
-+    CHECK_PAT_ENTRY(PTE_FLAGS_TO_CACHEATTR(_PAGE_RSVD_2));
-+#define PAT_ENTRY_FROM_FLAGS(x) PAT_ENTRY(PTE_FLAGS_TO_CACHEATTR(x))
-+
-+    /* Validate at compile time that X does not duplicate a smaller PAT entry */
-+#define CHECK_DUPLICATE_ENTRY(x, y)                                            \
-+    BUILD_BUG_ON((x) >= (y) &&                                                 \
-+                 (PAT_ENTRY_FROM_FLAGS(x) == PAT_ENTRY_FROM_FLAGS(y)))
-+
-+    /* Check that a PAT-related _PAGE_* macro is correct */
-+#define CHECK_PAGE_VALUE(page_value) do {                                      \
-+    /* Check that the _PAGE_* macros only use bits from PAGE_CACHE_ATTRS */    \
-+    BUILD_BUG_ON(((_PAGE_ ## page_value) & PAGE_CACHE_ATTRS) !=                \
-+                 (_PAGE_ ## page_value));                                      \
-+    /* Check that the _PAGE_* are consistent with XEN_MSR_PAT */               \
-+    BUILD_BUG_ON(PAT_ENTRY(PTE_FLAGS_TO_CACHEATTR(_PAGE_ ## page_value)) !=    \
-+                 (X86_MT_ ## page_value));                                     \
-+    case _PAGE_ ## page_value:; /* ensure no duplicate values */               \
-+    /*                                                                         \
-+     * Check that the _PAGE_* entries do not duplicate a smaller reserved      \
-+     * entry.                                                                  \
-+     */                                                                        \
-+    CHECK_DUPLICATE_ENTRY(_PAGE_ ## page_value, _PAGE_RSVD_1);                 \
-+    CHECK_DUPLICATE_ENTRY(_PAGE_ ## page_value, _PAGE_RSVD_2);                 \
-+    CHECK_PAT_ENTRY(PTE_FLAGS_TO_CACHEATTR(_PAGE_ ## page_value));             \
-+} while ( false )
-+
-+    /*
-+     * If one of these trips, the corresponding _PAGE_* macro is inconsistent
-+     * with XEN_MSR_PAT.  This would cause Xen to use incorrect cacheability
-+     * flags, with results that are unknown and possibly harmful.
-+     */
-+    switch (0) {
-+    CHECK_PAGE_VALUE(WT);
-+    CHECK_PAGE_VALUE(WB);
-+    CHECK_PAGE_VALUE(WC);
-+    CHECK_PAGE_VALUE(UC);
-+    CHECK_PAGE_VALUE(UCM);
-+    CHECK_PAGE_VALUE(WP);
-+    case _PAGE_RSVD_1:
-+    case _PAGE_RSVD_2:
-+        break;
-+    }
-+#undef CHECK_PAT_ENTRY
-+#undef CHECK_PAT_ENTRY_VALUE
-+#undef CHECK_PAGE_VALUE
-+#undef PAGE_FLAGS_TO_CACHEATTR
-+#undef PAT_ENTRY
- }
- 
- /*
--- 
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
+------------------------------------------------------------
+3305 people touched revisions under test,
+not listing them all
 
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          fail    
+ test-amd64-coresched-amd64-xl                                fail    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           fail    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        fail    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 fail    
+ test-amd64-amd64-libvirt-xsm                                 fail    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-amd64-xl-xsm                                      fail    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-amd64-dom0pvh-xl-amd                              fail    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    fail    
+ test-amd64-amd64-freebsd11-amd64                             fail    
+ test-amd64-amd64-freebsd12-amd64                             fail    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  fail    
+ test-amd64-amd64-examine-bios                                fail    
+ test-amd64-amd64-xl-credit1                                  fail    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  fail    
+ test-amd64-amd64-xl-credit2                                  fail    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        fail    
+ test-amd64-amd64-examine                                     fail    
+ test-arm64-arm64-examine                                     fail    
+ test-armhf-armhf-examine                                     fail    
+ test-amd64-amd64-qemuu-nested-intel                          fail    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-amd64-dom0pvh-xl-intel                            fail    
+ test-amd64-amd64-libvirt                                     fail    
+ test-armhf-armhf-libvirt                                     fail    
+ test-amd64-amd64-xl-multivcpu                                fail    
+ test-armhf-armhf-xl-multivcpu                                fail    
+ test-amd64-amd64-pair                                        fail    
+ test-amd64-amd64-libvirt-pair                                fail    
+ test-amd64-amd64-xl-pvshim                                   fail    
+ test-amd64-amd64-pygrub                                      fail    
+ test-amd64-amd64-libvirt-qcow2                               fail    
+ test-armhf-armhf-libvirt-qcow2                               fail    
+ test-amd64-amd64-libvirt-raw                                 fail    
+ test-arm64-arm64-libvirt-raw                                 fail    
+ test-armhf-armhf-libvirt-raw                                 fail    
+ test-amd64-amd64-xl-rtds                                     fail    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-arm64-arm64-xl-seattle                                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             fail    
+ test-amd64-amd64-xl-shadow                                   fail    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-examine-uefi                                fail    
+ test-amd64-amd64-xl-vhd                                      fail    
+ test-arm64-arm64-xl-vhd                                      fail    
+ test-armhf-armhf-xl-vhd                                      fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 504416 lines long.)
 
