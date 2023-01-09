@@ -4,29 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C51DC5479D
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Jan 2023 12:08:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.473585.734280 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE05BC54EBE
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Jan 2023 12:08:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.473583.734257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pEqxC-0002M1-V5; Mon, 09 Jan 2023 12:08:38 +0000
+	id 1pEqx7-0001pn-Df; Mon, 09 Jan 2023 12:08:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 473585.734280; Mon, 09 Jan 2023 12:08:38 +0000
+Received: by outflank-mailman (output) from mailman id 473583.734257; Mon, 09 Jan 2023 12:08:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pEqxC-0002Lu-QY; Mon, 09 Jan 2023 12:08:38 +0000
-Received: by outflank-mailman (input) for mailman id 473585;
- Mon, 09 Jan 2023 12:08:37 +0000
+	id 1pEqx7-0001pg-B7; Mon, 09 Jan 2023 12:08:33 +0000
+Received: by outflank-mailman (input) for mailman id 473583;
+ Mon, 09 Jan 2023 12:08:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OPNl=5G=citrix.com=prvs=36677a302=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pEqxB-0001pa-35
- for xen-devel@lists.xenproject.org; Mon, 09 Jan 2023 12:08:37 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 57ecce77-9016-11ed-91b6-6bf2151ebd3b;
- Mon, 09 Jan 2023 13:08:36 +0100 (CET)
+ <SRS0=TjmM=5G=desiato.srs.infradead.org=BATV+c4f4c0a351f3f62582fc+7078+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pEqx5-0001pa-Es
+ for xen-devel@lists.xenproject.org; Mon, 09 Jan 2023 12:08:32 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 51dc7caa-9016-11ed-91b6-6bf2151ebd3b;
+ Mon, 09 Jan 2023 13:08:29 +0100 (CET)
+Received: from [2001:8b0:10b:1:b916:482e:69fd:b8ad] (helo=[IPv6:::1])
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pEqwq-002iBc-0V; Mon, 09 Jan 2023 12:08:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,139 +42,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57ecce77-9016-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1673266116;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=8U+oMbjFcnCWKV1GHRn181dRulE+W90T2RctIPLLxek=;
-  b=iEvuOkm38xhLg8CC9uODx5ELqS16A68TvM18bHfSTo1i6WgGPr6HwmY4
-   BfIg73wcQkpshyJ9QddV3THqckAaMtbYZDwfQDBmO2llR4hIKLLS9eLqq
-   27yhkvUvv0VxUEGFqarik2TREkH/q3ApD613PtIKEcuW0hQ4tMUKnJpck
-   4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 91779491
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:b+85kq0sNJ2BzgzCevbD5RJxkn2cJEfYwER7XKvMYLTBsI5bp2YCy
- 2QWWj3UOf6PN2b8eox/OYu/oxkOvZSHyN9jHQc9pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefTAOK5ULSfUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS9nuDgNyo4GlD5gVmNKgR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfJjkR1
- eE+KSg3MgmnoeCy27S5dOJeiZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKkSbC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TbHJoKzxrJ/
- woq+UzGIiMLMM2T0wGq73yni+zgvQflf5orQejQGvlC3wTImz175ActfVmmp7+/g023WdNaI
- mQV/DYjqe4580nDZtrwQRy+5mKFtxg0WtxMHul84waIooLL5y6JC25CSSROAPQ2uclzSTE02
- 1uhm9LyGScpoLCTUWia9LqfsXW1Iyd9BU0oaDIATAAFy8L+u4x1hRXKJuuPC4bs0IezQ2uph
- WnX8m5u3N3/kPLnyY2cpQ/nnhStvqKVVyoT5AHMWGCb5TF2MdvNi5OT1XDX6vNJLYC8R1aHv
- WQZl8X20N3iHa1hhwTWHrxTQejBC+KtdWSF3AUxR8VJGyGFoSbLQGxG3N1pyK6F2O4gcCShX
- kLcsBg5CHR7bCrzNv8fj25c5q0XIUnc+TbNDK28gjlmOMIZmOq7EMZGOyatM5jFyhRErE3GE
- c7znTyQJXgbE7976zG9Wv0Q17QmrghnmzyIH8ihkEj8geXCDJJwdVvjGAHUBgzexPrayDg5D
- v4Fb5fao/mheLGWjtbrHX47cglRcClT6WHeoM1LbO+TSjeK60l4Y8I9NYgJItQ/94wMz7egw
- 51IchMAoLYJrSGdeFrih7EKQO+HYKuTWlpnZ3d9ZQb5hSd+CWtthY9GH6YKkXAc3LQL5ZZJo
- zMtIq1s3twnpuz7xgkg
-IronPort-HdrOrdr: A9a23:hjsV8KM0FOT0JcBcTgijsMiBIKoaSvp037BN7TETdfU1SKylfq
- WV98jzuiWftN98YhwdcPq7SdW9qArnhOZICOoqXItKPjOIhILAFugL0WKI+VPd8kPFmtK0/8
- 9bAsxD4dfLfCdHZJbBkXCF+/pJ+qjjzEiE7d2uqEuEYmlRGsNdByYQMHf8LqUsLDM2fqbQRv
- Knl7B6T2zJQwVrUviG
-X-IronPort-AV: E=Sophos;i="5.96,311,1665460800"; 
-   d="scan'208";a="91779491"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jun Nakajima
-	<jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH 2/2] x86/vmx: Support for CPUs without model-specific LBR
-Date: Mon, 9 Jan 2023 12:08:28 +0000
-Message-ID: <20230109120828.344-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20230109120828.344-1-andrew.cooper3@citrix.com>
-References: <20230109120828.344-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 51dc7caa-9016-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
+	:MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:From:Date:
+	Sender:Reply-To:Content-ID:Content-Description;
+	bh=9a7cthhMBn+fiERgH4CK4Ki4YEtD9TG5jpHvDi/tOEo=; b=Fo9zpnpI7UBzufJvu5HcNTrO/D
+	6QBdJtaAOHdTslw5o6E0XWsT6VMss13MKp6+ADHiDU6VpOky+qlQ0VkjwwFL6/SDwDwrGD7YWY4LU
+	sjQ2AUV+O3lRkYjw8pLWpZAPzojaPGee6H3i7sr0WjVCYZ5C1SGH7CJYqb0o66y8+g+IzenxGOkTY
+	TqNSuDjjgltdWDqlv1NgC0LiUNWk4K7JqWl33rjR9Fae5PSHYtQNXbDEhSYV21iUc/8kubRoXd13U
+	LKLGQdNJabdRlaRBycKKqZ0qJdQv38HLZmX5liwpUNn5DK02NFuta37DrNTcGTm/Dj4FE4AmZrvAT
+	RQXRdNgw==;
+Date: Mon, 09 Jan 2023 12:08:19 +0000
+From: David Woodhouse <dwmw2@infradead.org>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+CC: Julien Grall <jgrall@amazon.com>
+Subject: Re: (Ab)using xenstored without Xen
+User-Agent: K-9 Mail for Android
+In-Reply-To: <a1ee03ca-1304-17c8-d075-9a235aa02fee@suse.com>
+References: <22a2352464be2df92dc0d30a955034c59fdf3927.camel@infradead.org> <a1ee03ca-1304-17c8-d075-9a235aa02fee@suse.com>
+Message-ID: <60DDB54B-41CC-4DE9-83C9-FA20AEEAA9E8@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-Ice Lake (server at least) has both Arch LBR and model-specific LBR.  Sapphire
-Rapids does not have model-specific LBR at all.  I.e. On SPR and later,
-model_specific_lbr will always be NULL, so we must make changes to avoid
-reliably hitting the domain_crash().
 
-The Arch LBR spec states that CPUs without model-specific LBR implement
-MSR_DBG_CTL.LBR by discarding writes and always returning 0.
 
-Do this for any CPU for which we lack model-specific LBR information.
+On 9 January 2023 07:40:06 GMT, Juergen Gross <jgross@suse=2Ecom> wrote:
+>Sorry for the late answer, but I was pretty busy before my 3 week time of=
+f=2E :-)
 
-Adjust the now-stale comment, now that the Arch LBR spec has created a way to
-signal "no model specific LBR" to guests.
+No problem, I had lots of other things to work on, including my own time o=
+ff=2E Hope you enjoyed it!
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
----
- xen/arch/x86/hvm/vmx/vmx.c | 31 ++++++++++++++++---------------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+>On 20=2E12=2E22 13:02, David Woodhouse wrote:
+>> I've been working on getting qemu to support Xen HVM guests 'natively'
+>> under KVM:
+>> https://lore=2Ekernel=2Eorg/qemu-devel/20221216004117=2E862106-1-dwmw2@=
+infradead=2Eorg/T/
+>>=20
+>> The basic platform is mostly working and I can start XTF tests with
+>> 'qemu -kernel'=2E Now it really needs a xenstore=2E
+>>=20
+>> I'm thinking of implementing the basic shared ring support on the qemu
+>> side, then communicating with the real xenstored over its socket
+>> interface=2E It would need a 'SU' command in the xenstored protocol to
+>> make it treat that connection as an unprivileged connection from a
+>> specific domid, analogous to 'INTRODUCE' but over the existing
+>> connection=2E
+>
+>Wouldn't an "unprivileged" socket make more sense?
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 17320f9fb267..c76b09391c76 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3555,17 +3555,25 @@ static int cf_check vmx_msr_write_intercept(
-             goto gp_fault;
- 
-         /*
-+         * The Arch LBR spec (new in Ice Lake) states that CPUs with no
-+         * model-specific LBRs implement MSR_DBG_CTL.LBR by discarding writes
-+         * and always returning 0.
-+         *
-+         * Use this property in all cases where we don't know any
-+         * model-specific LBR information, as it matches real hardware
-+         * behaviour on post-Ice Lake systems.
-+         */
-+        if ( !model_specific_lbr )
-+            msr_content &= ~IA32_DEBUGCTLMSR_LBR;
-+
-+        /*
-          * When a guest first enables LBR, arrange to save and restore the LBR
-          * MSRs and allow the guest direct access.
-          *
--         * MSR_DEBUGCTL and LBR has existed almost as long as MSRs have
--         * existed, and there is no architectural way to hide the feature, or
--         * fail the attempt to enable LBR.
--         *
--         * Unknown host LBR MSRs or hitting -ENOSPC with the guest load/save
--         * list are definitely hypervisor bugs, whereas -ENOMEM for allocating
--         * the load/save list is simply unlucky (and shouldn't occur with
--         * sensible management by the toolstack).
-+         * Hitting -ENOSPC with the guest load/save list is definitely a
-+         * hypervisor bug, whereas -ENOMEM for allocating the load/save list
-+         * is simply unlucky (and shouldn't occur with sensible management by
-+         * the toolstack).
-          *
-          * Either way, there is nothing we can do right now to recover, and
-          * the guest won't execute correctly either.  Simply crash the domain
-@@ -3576,13 +3584,6 @@ static int cf_check vmx_msr_write_intercept(
-         {
-             const struct lbr_info *lbr = model_specific_lbr;
- 
--            if ( unlikely(!lbr) )
--            {
--                gprintk(XENLOG_ERR, "Unknown Host LBR MSRs\n");
--                domain_crash(v->domain);
--                return X86EMUL_OKAY;
--            }
--
-             for ( ; lbr->count; lbr++ )
-             {
-                 unsigned int i;
--- 
-2.11.0
+Not sure=2E I think we still need a privileged operation to "introduce" th=
+e client domain anyway, don't we?
 
+>> However, there might be a bit of work to do first=2E At first, it seeme=
+d
+>> like xenstored did start up OK and qemu could even connect to it when
+>> not running under Xen=2E But that was a checkout from a few months ago,
+>> and even then it would segfault the first time we try to actually
+>> *write* any nodes=2E
+>>=20
+>> Newer xenstored breaks even sooner because since commit 60e2f6020
+>> ("tools/xenstore: move the call of setup_structure() to dom0
+>> introduction") it doesn't even have a tdb_ctx if you start it with the
+>> -D option, so it segfaults even on running xenstore-ls=2E And if I move
+>> the tdb part of setup_structure() back to be called from where it was,
+>> we get a later crash in get_domain_info() because the xc_handle is
+>> NULL=2E
+>>=20
+>> Which is kind of fair enough, because xenstored is designed to run
+>> under Xen :)
+>>=20
+>> But what *is* the -D option for? It goes back to commit bddd41366 in
+>> 2005 whch talks about allowing multiple concurrent transactions, and
+>> doesn't mention the new option at all=2E It seems to be fairly hosed at
+>> the moment=2E
+>
+>I guess this was some debugging add-on which hasn't been used for ages=2E
+>
+>I'm inclined to just remove the -D option=2E
+
+Or use it for the new Xenless behaviour perhaps?
+
+>> Is it reasonable to attempt "fixing" xenstored to run without actual
+>> Xen, so that we can use it for virtual Xen support?
+>
+>I don't see a major problem with that=2E
+>
+>The result shouldn't be too ugly, of course, and I don't see any effort
+>on Xen side to test any changes for not breaking your use case=2E
+
+If anything it possibly makes some test cases a lot easier to run?
 
