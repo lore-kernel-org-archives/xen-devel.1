@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03FF8C67871
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Jan 2023 23:08:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474081.735006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE161C63797
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Jan 2023 23:08:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.474082.735022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pF1Fu-0008IQ-Gt; Mon, 09 Jan 2023 23:08:38 +0000
+	id 1pF1Fx-0000KR-U2; Mon, 09 Jan 2023 23:08:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474081.735006; Mon, 09 Jan 2023 23:08:38 +0000
+Received: by outflank-mailman (output) from mailman id 474082.735022; Mon, 09 Jan 2023 23:08:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pF1Fu-0008I1-AN; Mon, 09 Jan 2023 23:08:38 +0000
-Received: by outflank-mailman (input) for mailman id 474081;
- Mon, 09 Jan 2023 23:08:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pF1Fx-0000KE-P5; Mon, 09 Jan 2023 23:08:41 +0000
+Received: by outflank-mailman (input) for mailman id 474082;
+ Mon, 09 Jan 2023 23:08:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=szyx=5G=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1pF1Ft-0008EZ-2c
- for xen-devel@lists.xenproject.org; Mon, 09 Jan 2023 23:08:37 +0000
-Received: from sonic314-20.consmr.mail.gq1.yahoo.com
- (sonic314-20.consmr.mail.gq1.yahoo.com [98.137.69.83])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 88dcb11c-9072-11ed-91b6-6bf2151ebd3b;
- Tue, 10 Jan 2023 00:08:34 +0100 (CET)
+ id 1pF1Fx-0000Gp-3m
+ for xen-devel@lists.xenproject.org; Mon, 09 Jan 2023 23:08:41 +0000
+Received: from sonic315-55.consmr.mail.gq1.yahoo.com
+ (sonic315-55.consmr.mail.gq1.yahoo.com [98.137.65.31])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b4624a4-9072-11ed-b8d0-410ff93cb8f0;
+ Tue, 10 Jan 2023 00:08:37 +0100 (CET)
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.gq1.yahoo.com with HTTP; Mon, 9 Jan 2023 23:08:30 +0000
+ sonic315.consmr.mail.gq1.yahoo.com with HTTP; Mon, 9 Jan 2023 23:08:34 +0000
 Received: by hermes--production-ne1-7b69748c4d-bgkrh (Yahoo Inc. Hermes SMTP
  Server) with ESMTPA ID 21a3ec8339abfccbadeaea4f5ef812e7; 
- Mon, 09 Jan 2023 23:08:28 +0000 (UTC)
+ Mon, 09 Jan 2023 23:08:30 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,40 +44,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88dcb11c-9072-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1673305710; bh=H7TDF5iwsM6S2zN42hlPdvBls2tMhLzS10FXdEhr034=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=WyvKkHyI9WmtiUVWL7RhhUB2bUuuMOWtxhbuujprdUVNbGvFlmrbWeQzZtBVFRXQgzXd6YnHv2TQS2sBLkRMwIgDa5aqK9SvPrToX4Y/17QGKsWYCSxkt0OayOddFM1WABQUulp7lITjKI4gkwjR7nOSBzwba+7aDqNLtAdjgSs5z/A8iZ49bCblGt1VtS4X2uZQlAkW32/oIhW9JTQcaNpYKJLxJkKkeKg56uwCLNkgUd8poCFD8cuQgr6nvgkzMRMW8Q8mKelbtkN9JSaD/XnBt5U0pLPQFK+W5d0dPDriK7c6AYbSs42yCWMAlqzdioTBUl3yZhdHpjO1g+6MQw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1673305710; bh=PrWJ3S59N3HCaCyYCnpa2+rJpwHbO8m3Bitt+4YB6Pl=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=fqOl1PKOUnvafKXce0G+T+Z4srjLJB9XxRyHnUQ8MGKq2fMTtlJXVK0YJ1vdp1lizY5OKQYfenBVE4QrbjmJRKdxe+GB/DEloJKCfLtlNCJCfS8wYZRZVffSNqWQFz2M+cvlzVMAhbdnGVarD8ejTY1oRd829SubqXoo9z3mfbD2WkHgUwoU+otrn3GcgFYXgsQp0Biw2jld9+O1ok//129gr4jAB0IYMRW0JPzupP1qTCV23XrnBNk6pOb1ybmV9I0jMgOhnnFPoUmcb5fsf4DlFeZzcfV3eGnFPsormfBeH2R9KoTMOvO8hbz4FDS0AP+kmqFRVLSbt7EyAR386A==
-X-YMail-OSG: mLmWokQVM1nd4ulBj7SEMVyO0AKJcP1LGJB6Lv13bPdjONFUJyA758Q9z_tDvsH
- EaDw22J.X0QvmLKE_mEjNj7qxrjMsyecS4dHtX887JN2s.F67n2v6gtN5hfAonv9_Hh_FFvgp8oQ
- jS3_wxawPyqqes6WtJD_LEyj5cp062RlelUHhwDNAOfvO0wJvAK5gddv1jPCBOp2k3qsnFAwXDJy
- bIdrF5ZVGqj0EY7zMNO1L217sOJG7C0ce93pPqq8ZN8wmWddaobqSE5to5qU1VPwgmx_whKvc0W0
- 3OuPoBxEJlmoFWcxmxldRkuZ3iMRN_m_ulxeifYEFWvwRhKYpCW3iKqiN4WUXQiJnD7YSA9lM.w8
- wU117bcrPFaefV2usS6GwtsS00yMXb5wXHt36QdZEcEOOIsdyA6w37V4Y6OnhCJTTTn2UP.KCWT9
- xUBmMfOQhpY66zDS7ueObfX4zUKYVfiPIiCsb8a1KME0yM9DUn9gN94hLBLudRF7Ff.XJvHqz0Dk
- 0AIafvTAmrnWG6TGE_YRk_NXBET5Z.1QfHGUMFrb44Ja46mnvG9AGkxF7aR1kI6tqAacEmSv11xi
- hHYNH.lNLG8zOTHJp3bK5qhcjL2ddwF5TCWJG5.oGI__XD8fY8NH3r5s0nwaVBwzQyO5LG9JJ1vr
- vNEHIEdpfA7bGrJQmpBBCR0PZc5EPJk8FLtK97R98mloQkpHLj2voIX3X.mzIuq1_SbTELlFWq5_
- yOlnlGPtsQ.NZFnp7GgM1eT0Ctzu9_o6gnZXThutfUlIjFSWGyqrUTblPwnkkj_RgKZJFNJlfS5x
- ooB6jC_rl_jqPAoyQfGwXGe8vVXoqfcDi0KY59SPa3fMKM47UcYKFcP2kyYAwfEk7wO6iAVXESht
- 66ZEJ3QwpIpDyb50sKrmeoHq8HRG1mVy0M4Ehrrj_TsSCmr_Dh2TJofZa5BOIWTUr76XoyTxX2E_
- o55GdOJzZelXPoA3LwyyPqTCfgMFK_h4PBsP26t5pdqgMTeDZJMqL55_ZAplg1RRXbN5hMK1lE1O
- oJx1XuMIo6rXqfacFyuL2QRNC1LS.f2tdptbb5MJZAztcv3HAuL6MWktNQE2nw_mOzy0vxBb7x.G
- 29JDig4Ewv.chBkitUygFDVDaq9_HlTH9AST8pfIcJvU.covWzj1kj_41bmOKYWodw9mCz3s9h_O
- 8ki1eEWd7jWlikN2HXovImwVRDKHArsGADRRUp_aN5Zf2wTCvlxFNXkv5clU2Cl1TOhepa7M9ahp
- s2TUzlijxNCugcBwdjA1Wtm3Rk4MK0aO_AkAEZNRVYQbYcckAv3hcAFCpW3caKDhaj0jtesM38sv
- Frf9JiWkGaJ8T6OhzIoyOzRZh07qV_7g9V9GDiNk1cQCXsUwg7Tpl0dHoTonAkx13KeeEqRHg9Dm
- YyhOQY2OdWZqrHBWY3eGvfOcSSeyX8sryJu3SYP57D7xeBfXaXBdFAL3_Wh7nT1sVnTFoYr3.Jhx
- zWOpuLZaJMoFWglaYK9hj37HxgmUz0.3p3ZYNrVSp.uNHaVFj2EwnYFiOqL0PEOYhWmInLx79iV0
- lej49k1a.ZuL3JW.OXeX34kc1bR8JSXDRdetiN2Z4wW3UuMtcfWsHWtCEkNk2S3C2e1hQZeiZU.O
- w1qQSI8tNFVpm53pRrDaGkcdvvm0FZQzx_VldD43HZ9wryrfhZf7hQwnK0DV.F4bNJqdXClUgKt5
- tZfM5wr0LWLxnBiEi2Mw.72n1ts2Osm2nCpApGhndNcsOqX70TITAjq_HATkcUYhboyPyBicquz9
- Mg1xNs3r0yTPmLUGqXfewaGWWnk_zP5GGqkl4tUzlMBhpk6YAD8wJRcR0P6RvFaq3vPDCFs9wxWh
- 6.Ua7Y375zpt39PjJM7Qgf3Wot0DOzjzJtjRjYEQQiIqLtY9GXvBxk_YEYf2kU2C68L46TyipzRb
- jFmFcx2ftRjxPbwvYGRDtlfI1IQ4nmPzBpddLhnwreQv4Hl3_mehcKQ8NOrDz159BFn8y7dItGt0
- EuHt4B5jtFCcih2nxvqMPgrewfuenVk309ZkY3wJ1RTEUzCU7Evb6vi3Lrpx.24Fti30A1bHZkZd
- MTNfK6XGF22HHvR9aUDEbs0L1pLES8jSkMrULYY4310P0OmJdkSzmvGqqXt3b6cadjxv2Frq7Kso
- 99hfHXfW9npPnBprkYHbO5HAC5tMc5LtX9SfMUpfFDbU6GKp6pDCeIJxVJyzbpaZbyD0JhRwZwhE
- X_w--
+X-Inumbo-ID: 8b4624a4-9072-11ed-b8d0-410ff93cb8f0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1673305714; bh=6KQQVKXjX5bPI5/yTS20Ov1Ty8T7qISVmf3UrSeOprM=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=PEM0aNGEXQPaqvoOKMU9QyD96JQr5zHZqkD3XdTeUDsr8UOaeO2eUCcfQC8eUzj6YvlHwhREB8BQeTAA/fQhhnLV0bKpwkosy3XaDR0++D6Wq93pLvBsp+lRLNsFhCuWe3S83y3GIsiZEoApYIhP38XFQgkU+V+71RWck/3sk4kRGGMqtlH6sKiY363PxXu0Pp6blaUbHk86dzsEIsJFAniHkUC4t6o9EUP0FenDRBc96qq8e1/py4lFl3kNKV8Uqbxi+kTSq/tFpbRpA7+M1GnZe1jb8gvYAevKFVGgBhSszHjhIDGF8HSfj4sU+V0J9DwCKKpmQ016z3jZHkau7Q==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1673305714; bh=TWHL1z/CiE8ohTN0zQTQknjD74chjKnA+HPUBhabmew=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=I437GwK+vEuJyjpv7CsRTSm8h0S7JdolI9aSALXd3nUkdhdF0+9Rw+S3/c17bfn02+Y5ASvsOvQtH3sCGgDN5YQui32Fwk2uF4YB7bwAHB5oBhaYbLqJSIIWY+tf527R72vhgT8WtiEXzgFI/fBkgXYzw7oQtnd6Ol627Da5KIO5w23DDfeK6CIGwR1BWaFCoRVXVV/6MZjS+vVeyk9rYAAcDUKK1iWBX2HbRAFODD0C3RbeKWslcXDmab4ENB9jJ3WKua2B4tKlT9787hAHNbi3rANRTgSvQ+DU7jxNLxMtocnfpavdKqWTUA+PNkNwUZZMttoQXtgD9tHKNa8sqg==
+X-YMail-OSG: TbIfoPMVM1nDGed1NwkTCQurEHl4PZPKruQylL5Hfy_lsaQ34xXGdbcXGGcz8am
+ 8KJ3zw1NlRjxXHSr1eJ2CCCcc8cQXw9nuJOxp.Y4tDdG9CilO4rrYXGde8Dfq1reHiJI_i.yqRCx
+ XH6.YOOuxme2R5T.xbG0cSV.Tumu_kxNn9.WFFwc.TSc.29n0butPjuBbKl3.txxAnvr4sDB62h2
+ 3C7eLySTsMLflK5qUt.kXrUVnHscxQP5tuInMo3Va6QDqqaL6I2O9pP8kZmLQg8NHETXfDmfNsyE
+ NoMlZ2bInDyLN83vRWmC.fjInk6BU6f7eIsBe0OimYgnJEDZr8rv8VSTdi4rZspZNKQ9pX8P7Vjd
+ d26N6Eoq4q_SvEgRukC4zGKG3w4.0pwgDOGAm73WrglGtDStfxu1jIH.G0zlp.IK_6JT6d6ScOxA
+ qBCDD2crReqSBoNN_TzI6kWyaOdFEzEsMb.8gSrdmllucEwAIQ.fPLAgG262ujb6dOR84CwPygqX
+ XjGFubEyFEWcmqiCADQ1FNwfWatojDAkTExNRDXdUxzb.Xlxnd_sXWRaukLy9MFuKN5SeKlGta85
+ KsHUJtjeC6azaYF2f0UpwaQCgunfxGsKdWgIeSTfBOp0mv.laMaeWZIpyrHsKJMbMzRdmAZDPkK6
+ tetP.YQw0kFRdANd_dr.._hfKRwQNDMvcA9QpL6Fs2elpdZb5iOLD7yZKa2rGIjhUwdLP.ctmqXB
+ pIVDGknG5jbjwWtkJ9eHu5vImPnyYrRosnL.bv6KYZ10UbhQvOis2r14LSOmYG9QGg8crk4DCX0J
+ YpU6RQlIDSb9rYQfrZ1.47Al3y7xSUPJjGZNxBdwF6NvpbbxM_v3N8ke2r_HEDuLqw9xxbmV3bfk
+ Lj1N7rit_LaGiBkEJ.fVR5leLuFP.3bhp35g3PErXf_3ZkQcsu3mMjHbr0JXPCuOIkc4rhha4yBj
+ 08LJUWfGhkWbtunQ6sEroWoB6QksKPI9ONH6y7e9btZE0dkzcXylmSFec8Y22Rm0d.kM0aJzd0yH
+ wpyq.aNkTmKVyu394N17gULzDAHnO23jRsss6c5BN6AVZyrnxnYn._HJItmMaW5BrOSiebL4mlFa
+ rs4zckGkbgNP8tfoc1ox6fSKVqB3ss9r8aW4OpXTgviIfLtQOda85apY02DCIq_lgukBHdNocZKC
+ WM2fw8XlHdgm.vOTjHZGqmXbOPL27Mdw7HdyxGRHZMHIDpSRFhrH8JuFdJ_L.nc8kIFaBponEOAV
+ OLbC_jieWUmMdKXlWv7j1bJnl84nPcawtY6T4ajxMdnBOtEy6QfBF.dNM1mHTeZdKm4xUtevFTec
+ ntLNdcVkRs1SFJH6S5KjAiIFQbgSUSdSJ14FN2H9PyeYUGgHTddjB6pQ27KfnR5z1gupN8WN.esE
+ UCY098ePhnithkcajn.c_tABPP4HIe_jNXZXH0PDLDEEVeQS95xIsEPIzyxfYizHF56kuq60KYe4
+ h9WcjhSXPLtidm_fyK0dbdKhiimScIsrirgxSy6WZ8sHYFJ0IX1SsjYiMeq7lox.lNEk8CREHM92
+ bgcOG88uyw.KsK2cFD.lj0TFlfG2Rpb2s0UJwrco7Nnpr.lCpn.ByvGSr.C6HVRCT530cLhI_vUs
+ EqdwmNCasN.zcYmqUVH4LD7_zM07vZju7CkxHfP__3pWP.Q8bcX4oRWUgTxlZOQuK5e9iVzPElLO
+ bzTHZzlbLc.0v7dX5dV95Zba9M395Yo0HdgyKGR7NUnF1VGd7Y0qFlC5tJ7ei5c_vkq6fGvP6E04
+ s2b7n7IgIMZgq_WJ2_kFQ1i5t7tmpqNjOsqn5.yQz3KL1d555sYEuku.aqF1sbBwDQNF9M.Tfjkw
+ UsW1h6xASufEA_XmYbd4eQuRz3UJF551d.qvx.DiWZyXxP39hJhXnk_IGsArpAsI2MGxd_CngflA
+ o8b4LEfjVUjev696HkHyZD0UG_Ydm.58C8_5km2VzkCOdKQM8Ula61X.ld84oFv83N3Gxcf82MXW
+ mN0lwv9_y8DoWZoL6Kq5AtcAEjx5CNQRD2vz2GFNd8D5XgsxqZrV3JaR0B6RAG84OKk1v4.6FVvT
+ EDyCdVXuhrqTy7RWME1YAyMfWQHxrhOqZ4dpxw7uTBG367fnglB1.JdIKvdS6C9EC3wXmBolmi1y
+ XEwACp5xf8ktCagD_XZauILSdQ7gL46G_f2W3EDrW9EcleRLg083XsJAc6sxAYSNMy5yKEanA3rc
+ -
 X-Sonic-MF: <brchuckz@aim.com>
 From: Chuck Zmudzinski <brchuckz@aol.com>
 To: anthony.perard@citrix.com
@@ -85,188 +85,321 @@ Cc: xen-devel@lists.xenproject.org,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	qemu-devel@nongnu.org
-Subject: [XEN PATCH 0/3] Configure qemu upstream correctly by default for igd-passthru
-Date: Mon,  9 Jan 2023 18:08:10 -0500
-Message-Id: <cover.1673300848.git.brchuckz@aol.com>
+Subject: [XEN PATCH 2/3] libxl/dm: Manage pci slot assignment for Intel IGD passthrough
+Date: Mon,  9 Jan 2023 18:08:12 -0500
+Message-Id: <76d06f5d01e01df316230def4f31037695f11c1a.1673300848.git.brchuckz@aol.com>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1673300848.git.brchuckz@aol.com>
+References: <cover.1673300848.git.brchuckz@aol.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <cover.1673300848.git.brchuckz.ref@aol.com>
 
-Sorry for the length of this cover letter but it is helpful to put all
-the pros and cons of the two different approaches to solving the problem
-of configuring the Intel IGD with qemu upstream and libxl in one place,
-which I attempt to do here. Of course the other approach involves a
-patch to qemu [1] instead of using this patch series for libxl.
+By default, except for the ich9-usb-uhci device which libxl assigns to
+slot 29 (0xid), libxl defers to qemu upstream's automatic slot assignment
+process, which is simply to assign each emulated device to the next
+available slot on the pci bus. With this default behavior, libxl and
+qemu will not configure the Intel IGD correctly. Specifically, the Intel
+IGD must be assigned to slot 2, but the current default behavior is to
+assign one of the emulated devices to slot 2.
 
-The quick answer:
+With this patch libxl uses qemu command line options to specify the slot
+address of each pci device in the guest when gfx_passthru is enabled
+for the Intel IGD. It uses the same simple algorithm of assigning the
+next available slot, except that it starts with slot 3 instead of slot 2
+for the emulated devices. This process of slot assignment aims to
+simulate the behavior of existing machines as much as possible.
 
-I think the other patch to qemu is the better option, but I would be OK
-if you use this patch series instead.
+The default behavior (when igd gfx_passthru is disabled) of letting qemu
+manage the slot addresses of emulated pci devices is preserved. The
+patch also preserves the special treatment for the ich9 usb2 controller
+(ich9-usb-ehci1) that libxl currently assigns to slot.function 29.7 and
+the associated ich9-usb-uhciN devices to slot 29 (0x1d).
 
-Details with my reasons for preferring the other patch to qemu over this
-patch series to libxl: 
+For future maintainance of this code, it is important that pci devices
+that are managed by the libxl__build_device_model_args_new function
+follow the logic of this patch and use the new local counter next_slot
+to assign the slot address instead of letting upstream qemu assign the
+slot if the guest is configured for Intel IGD passthrough, and preserve
+the current behavior of letting qemu assign the slot address otherwise.
 
-I call attention to the commit message of the first patch which points
-out that using the "pc" machine and adding the xen platform device on
-the qemu upstream command line is not functionally equivalent to using
-the "xenfv" machine which automatically adds the xen platform device
-earlier in the guest creation process. As a result, there is a noticeable
-reduction in the performance of the guest during startup with the "pc"
-machne type even if the xen platform device is added via the qemu
-command line options, although eventually both Linux and Windows guests
-perform equally well once the guest operating system is fully loaded.
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+The diff of this patch is easier to review if it is generated using
+the -b (aka --ignore-space-change) option of diff/git-diff to filter
+out some of the changes that are only due to white space.
 
-Specifically, startup time is longer and neither the grub vga drivers
-nor the windows vga drivers in early startup perform as well when the
-xen platform device is added via the qemu command line instead of being
-added immediately after the other emulated i440fx pci devices when the
-"xenfv" machine type is used.
+This patch is difficult to verify for correctness without testing all
+the devices that could be added by the libxl__build_device_model_args_new
+function. There are 12 places where the addr=%x option needed to be
+added to the arguments of the "-device" qemu option that adds an
+emulated pci device which corresponds to at least 12 different devices
+that could be affected by this patch if the patch contains mistakes
+that the compiler did not notice. One mistake the compiler would not
+notice is a missing next_slot++; statement that would result in qemu
+trying to assign a device to a slot that is already assigned, which
+is an error in qemu. I did enough tests to find some mistakes in the
+patch which of course I fixed before submitting the patch. So I cannot
+guarantee that there are not any other mistakes in the patch because
+I don't have the resources to do the necessary testing of the many
+possible configurations that could be affected by this patch.
 
-For example, when using the "pc" machine, which adds the xen platform
-device using a command line option, the Linux guest could not display
-the grub boot menu at the native resolution of the monitor, but with the
-"xenfv" machine, the grub menu is displayed at the full 1920x1080
-native resolution of the monitor for testing. So improved startup
-performance is an advantage for the patch for qemu.
+ tools/libs/light/libxl_dm.c | 168 ++++++++++++++++++++++++++++++------
+ 1 file changed, 141 insertions(+), 27 deletions(-)
 
-I also call attention to the last point of the commit message of the
-second patch and the comments for reviewers section of the second patch.
-This approach, as opposed to fixing this in qemu upstream, makes
-maintaining the code in libxl__build_device_model_args_new more
-difficult and therefore increases the chances of problems caused by
-coding errors and typos for users of libxl. So that is another advantage
-of the patch for qemu.
-
-OTOH, fixing this in qemu causes newer qemu versions to behave
-differently than previous versions of qemu, which the qemu community
-does not like, although they seem OK with the other patch since it only
-affects qemu "xenfv" machine types, but they do not want the patch to
-affect toolstacks like libvirt that do not use qemu upstream's
-autoconfiguration options as much as libxl does, and, of course, libvirt
-can manage qemu "xenfv" machines so exising "xenfv" guests configured
-manually by libvirt could be adversely affected by the patch to qemu,
-but only if those same guests are also configured for igd-passthrough,
-which is likely a very small number of possibly affected libvirt users
-of qemu.
-
-A year or two ago I tried to configure guests for pci passthrough on xen
-using libvirt's tool to convert a libxl xl.cfg file to libvirt xml. It
-could not convert an xl.cfg file with a configuration item
-pci = [ "PCI_SPEC_STRING", "PCI_SPEC_STRING", ...] for pci passthrough.
-So it is unlikely there are any users out there using libvirt to
-configure xen hvm guests for igd passthrough on xen, and those are the
-only users that could be adversely affected by the simpler patch to qemu
-to fix this.
-
-The only advantage of this patch series over the qemu patch is that
-this patch series does not need any patches to qemu to make Intel IGD
-configuration easier with libxl so the risk of affecting other qemu
-users is entirely eliminated if we use this patch instead of patching
-qemu. The cost of patching libxl instead of qemu is reduced startup
-performance compared to what could be achieved by patching qemu instead
-and an increased risk that the tedious process of manually managing the
-slot addresses of all the emulated devices will make it more difficult
-to keep the libxl code free of bugs.
-
-I will leave it to the maintainer of the code in both qemu and libxl
-(Anthony) to decide which, if any, of the patches to apply. I am OK with
-either this patch series to libxl or the proposed patch to qemu to fix
-this problem, but I do recommend the other patch to qemu over this patch
-series because of the improved performance during startup with that
-patch and the relatively low risk that any libvirt users will be
-adversely affected by that patch.
-
-Brief statement of the problem this patch series solves:
-
-Currently only the qemu traditional device model reserves slot 2 for the
-Intel Integrated Graphics Device (IGD) with default settings. Assigning
-the Intel IGD to slot 2 is necessary for the device to operate properly
-when passed through as the primary graphics adapter. The qemu
-traditional device model takes care of this by reserving slot 2 for the
-Intel IGD, but the upstream qemu device model currently does not reserve
-slot 2 for the Intel IGD.
-
-This patch series modifies libxl so the upstream qemu device model will
-also, with default settings, assign slot 2 for the Intel IGD.
-
-There are three reasons why it is difficult to configure the guest
-so the Intel IGD is assigned to slot 2 in the guest using libxl and the
-upstream device model, so the patch series is logically organized in
-three separate patches; each patch resolves one of the three reasons
-that cause problems:
-
-The description of what each of the three libxl patches do:
-
-1. With the default "xenfv" machine type, qemu upstream is hard-coded
-   to assign the xen platform device to slot 2. The first patch fixes
-   that by using the "pc" machine instead when gfx_passthru type is igd
-   and, if xen_platform_pci is set in the guest config, libxl now assigns
-   the xen platform device to slot 3, making it possible to assign the
-   IGD to slot 2. The patch only affects guests with the gfx_passthru
-   option enabled. The default behavior (xen_platform_pci is enabled
-   but gfx_passthru option is disabled) of using the "xenfv" machine
-   type is preserved. Another way to describe what the patch does is
-   to say that it adds a second exception to the default choice of the
-   "xenfv" machine type, with the first exception being that the "pc"
-   machine type is also used instead of "xenfv" if the xen platform pci
-   device is disabled in the guest xl.cfg file.
-
-2. Currently, with libxl and qemu upstream, most emulated pci devices
-   are by default automatically assigned a pci slot, and the emulated
-   ones are assigned before the passed through ones, which means that
-   even if libxl is patched so the xen platform device will not be
-   assigned to slot 2, any other emulated device will be assigned slot 2
-   unless libxl explicitly assigns the slot address of each emulated pci
-   device in such a way that the IGD will be assigned slot 2. The second
-   patch fixes this by hard coding the slot assignment for the emulated
-   devices instead of deferring to qemu upstream's auto-assignment which
-   does not do what is necessary to configure the Intel IGD correctly.
-   With the second patch applied, it is possible to configure the Intel
-   IGD correctly by using the @VSLOT parameter in xl.cfg to specify the
-   slot address of each passed through pci device in the guest. The
-   second patch is also designed to not change the default behavior of
-   letting qemu autoconfigure the pci slot addresses when igd
-   gfx_pasthru is disabled in xl.cfg.  
-
-3. For convenience, the third patch automatically assigns slot 2 to the
-   Intel IGD when the gfx_passthru type is igd so with the third patch
-   appled it is not necessary to set the @VSLOT parameter to configure
-   the Intel IGD correctly.
-
-Testing:
-
-I tested a system with Intel IGD passthrough and two other pci devices
-passed through, with and without the xen platform device. I also did
-tests on guests without any pci passthrough configured. In all cases
-tested, libxl behaved as expected. For example, the device model
-arguments are only changed if gfx_passthru is set for the IGD, libxl
-respected administrator settings such as @VSLOT and xen_platform_pci
-with the patch series applied, and not adding the xen platform device to
-the guest caused reduced performance because in that case the guest
-could not take advantage of the improvements offered by the Xen PV
-drivers in the guest. I tested the following emulated devices on my
-setup: xen-platform, e1000, and VGA. I also verified the device that is
-added by the "hdtype = 'ahci'" xl.cfg option is configured correctly
-with the patch applied. I did not test all 12 devices that could be
-affected by patch 2 of the series. These include the intel-hda high
-definition audio device, a virtio-serial, device, etc. Once can look
-at the second patch for the full list of qemu emulated devices whose
-behavior is affected by the second patch of the series when the guest
-is configured for igd gfx_passthru. These devices are also subject
-to mistakes in the patch not discovered by the compiler, as mentioned
-in the comments for reviewers section of the second patch. 
-
-[1] https://lore.kernel.org/qemu-devel/8349506149de6d81b0762f17623552c248439e93.1673297742.git.brchuckz@aol.com/
-
-Chuck Zmudzinski (3):
-  libxl/dm: Use "pc" machine type for Intel IGD passthrough
-  libxl/dm: Manage pci slot assignment for Intel IGD passthrough
-  libxl/dm: Assign slot 2 by default for Intel IGD passthrough
-
- tools/libs/light/libxl_dm.c | 227 +++++++++++++++++++++++++++++-------
- 1 file changed, 183 insertions(+), 44 deletions(-)
-
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index 2048815611..2720b5d4d0 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -1205,6 +1205,20 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+     const char *path, *chardev;
+     bool is_stubdom = libxl_defbool_val(b_info->device_model_stubdomain);
+     int rc;
++    int next_slot;
++    bool configure_pci_for_igd = false;
++    /*
++     * next_slot is only used when we need to configure the pci
++     * slots for the Intel IGD. Slot 2 will be for the Intel IGD.
++     */
++    next_slot = 3;
++    if (libxl_defbool_val(b_info->u.hvm.gfx_passthru)) {
++        enum libxl_gfx_passthru_kind gfx_passthru_kind =
++                        libxl__detect_gfx_passthru_kind(gc, guest_config);
++        if (gfx_passthru_kind == LIBXL_GFX_PASSTHRU_KIND_IGD) {
++            configure_pci_for_igd = true;
++        }
++    }
+ 
+     dm_args = flexarray_make(gc, 16, 1);
+     dm_envs = flexarray_make(gc, 16, 1);
+@@ -1372,6 +1386,20 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+ 
+         if (b_info->cmdline)
+             flexarray_vappend(dm_args, "-append", b_info->cmdline, NULL);
++        /*
++         * When the Intel IGD is configured for primary graphics
++         * passthrough, we need to manually add the xen platform
++         * device because the QEMU machine type is "pc". Add it first to
++         * simulate the behavior of the "xenfv" QEMU machine type which
++         * always adds the xen platform device first. But in this case it
++         * will be at slot 3 because we are reserving slot 2 for the IGD.
++         */
++        if (configure_pci_for_igd &&
++            libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
++            flexarray_append_pair(dm_args, "-device",
++                        GCSPRINTF("xen-platform,addr=%x", next_slot));
++            next_slot++;
++        }
+ 
+         /* Find out early if one of the disk is on the scsi bus and add a scsi
+          * controller. This is done ahead to keep the same behavior as previous
+@@ -1381,7 +1409,14 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+                 continue;
+             }
+             if (strncmp(disks[i].vdev, "sd", 2) == 0) {
+-                flexarray_vappend(dm_args, "-device", "lsi53c895a", NULL);
++                if (configure_pci_for_igd) {
++                    flexarray_vappend(dm_args, "-device",
++                        GCSPRINTF("lsi53c895a,addr=%x", next_slot), NULL);
++                    next_slot++;
++                } else {
++                    flexarray_vappend(dm_args, "-device", "lsi53c895a",
++                                      NULL);
++                }
+                 break;
+             }
+         }
+@@ -1436,31 +1471,67 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+             flexarray_append(dm_args, "-spice");
+             flexarray_append(dm_args, spiceoptions);
+             if (libxl_defbool_val(b_info->u.hvm.spice.vdagent)) {
+-                flexarray_vappend(dm_args, "-device", "virtio-serial",
+-                    "-chardev", "spicevmc,id=vdagent,name=vdagent", "-device",
+-                    "virtserialport,chardev=vdagent,name=com.redhat.spice.0",
+-                    NULL);
++                if (configure_pci_for_igd) {
++                    flexarray_vappend(dm_args, "-device",
++                        GCSPRINTF("virtio-serial,addr=%x", next_slot),
++                        "-chardev", "spicevmc,id=vdagent,name=vdagent",
++                        "-device",
++                        "virtserialport,chardev=vdagent,name=com.redhat.spice.0",
++                        NULL);
++                next_slot++;
++                } else {
++                    flexarray_vappend(dm_args, "-device", "virtio-serial",
++                        "-chardev", "spicevmc,id=vdagent,name=vdagent",
++                        "-device",
++                        "virtserialport,chardev=vdagent,name=com.redhat.spice.0",
++                        NULL);
++                }
+             }
+         }
+ 
+         switch (b_info->u.hvm.vga.kind) {
+         case LIBXL_VGA_INTERFACE_TYPE_STD:
+-            flexarray_append_pair(dm_args, "-device",
+-                GCSPRINTF("VGA,vgamem_mb=%d",
+-                libxl__sizekb_to_mb(b_info->video_memkb)));
++            if (configure_pci_for_igd) {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("VGA,addr=%x,vgamem_mb=%d", next_slot,
++                    libxl__sizekb_to_mb(b_info->video_memkb)));
++                next_slot++;
++            } else {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("VGA,vgamem_mb=%d",
++                    libxl__sizekb_to_mb(b_info->video_memkb)));
++            }
+             break;
+         case LIBXL_VGA_INTERFACE_TYPE_CIRRUS:
+-            flexarray_append_pair(dm_args, "-device",
+-                GCSPRINTF("cirrus-vga,vgamem_mb=%d",
+-                libxl__sizekb_to_mb(b_info->video_memkb)));
++            if (configure_pci_for_igd) {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("cirrus-vga,addr=%x,vgamem_mb=%d", next_slot,
++                    libxl__sizekb_to_mb(b_info->video_memkb)));
++                next_slot++;
++            } else {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("cirrus-vga,vgamem_mb=%d",
++                    libxl__sizekb_to_mb(b_info->video_memkb)));
++            }
+             break;
+         case LIBXL_VGA_INTERFACE_TYPE_NONE:
+             break;
+         case LIBXL_VGA_INTERFACE_TYPE_QXL:
+             /* QXL have 2 ram regions, ram and vram */
+-            flexarray_append_pair(dm_args, "-device",
+-                GCSPRINTF("qxl-vga,vram_size_mb=%"PRIu64",ram_size_mb=%"PRIu64,
+-                (b_info->video_memkb/2/1024), (b_info->video_memkb/2/1024) ) );
++            if (configure_pci_for_igd) {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("qxl-vga,addr=%x,vram_size_mb=%"PRIu64
++                    ",ram_size_mb=%"PRIu64, next_slot,
++                    (b_info->video_memkb/2/1024),
++                    (b_info->video_memkb/2/1024) ) );
++                next_slot++;
++            } else {
++                flexarray_append_pair(dm_args, "-device",
++                    GCSPRINTF("qxl-vga,vram_size_mb=%"PRIu64
++                    ",ram_size_mb=%"PRIu64,
++                    (b_info->video_memkb/2/1024),
++                    (b_info->video_memkb/2/1024) ) );
++            }
+             break;
+         default:
+             LOGD(ERROR, guest_domid, "Invalid emulated video card specified");
+@@ -1496,8 +1567,15 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         } else if (b_info->u.hvm.usbversion) {
+             switch (b_info->u.hvm.usbversion) {
+             case 1:
+-                flexarray_vappend(dm_args,
+-                    "-device", "piix3-usb-uhci,id=usb", NULL);
++                if (configure_pci_for_igd) {
++                    flexarray_vappend(dm_args, "-device",
++                        GCSPRINTF("piix3-usb-uhci,addr=%x,id=usb",
++                                  next_slot), NULL);
++                    next_slot++;
++                } else {
++                    flexarray_vappend(dm_args,
++                        "-device", "piix3-usb-uhci,id=usb", NULL);
++                }
+                 break;
+             case 2:
+                 flexarray_append_pair(dm_args, "-device",
+@@ -1509,8 +1587,15 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+                         i, 2*(i-1), i-1));
+                 break;
+             case 3:
+-                flexarray_vappend(dm_args,
+-                    "-device", "nec-usb-xhci,id=usb", NULL);
++                if (configure_pci_for_igd) {
++                    flexarray_vappend(dm_args, "-device",
++                        GCSPRINTF("nec-usb-xhci,addr=%x,id=usb",
++                                  next_slot), NULL);
++                    next_slot++;
++                } else {
++                    flexarray_vappend(dm_args,
++                        "-device", "nec-usb-xhci,id=usb", NULL);
++                }
+                 break;
+             default:
+                 LOGD(ERROR, guest_domid, "usbversion parameter is invalid, "
+@@ -1542,8 +1627,15 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+ 
+             switch (soundhw) {
+             case LIBXL__QEMU_SOUNDHW_HDA:
+-                flexarray_vappend(dm_args, "-device", "intel-hda",
+-                                  "-device", "hda-duplex", NULL);
++                if (configure_pci_for_igd) {
++                    flexarray_vappend(dm_args, "-device",
++                        GCSPRINTF("intel-hda,addr=%x", next_slot),
++                                   "-device", "hda-duplex", NULL);
++                    next_slot++;
++                } else {
++                    flexarray_vappend(dm_args, "-device", "intel-hda",
++                                      "-device", "hda-duplex", NULL);
++                }
+                 break;
+             default:
+                 flexarray_append_pair(dm_args, "-device",
+@@ -1573,10 +1665,18 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+                                                 guest_domid, nics[i].devid,
+                                                 LIBXL_NIC_TYPE_VIF_IOEMU);
+                 flexarray_append(dm_args, "-device");
+-                flexarray_append(dm_args,
+-                   GCSPRINTF("%s,id=nic%d,netdev=net%d,mac=%s",
+-                             nics[i].model, nics[i].devid,
+-                             nics[i].devid, smac));
++                if (configure_pci_for_igd) {
++                    flexarray_append(dm_args,
++                        GCSPRINTF("%s,addr=%x,id=nic%d,netdev=net%d,mac=%s",
++                                  nics[i].model, next_slot, nics[i].devid,
++                                  nics[i].devid, smac));
++                    next_slot++;
++                } else {
++                    flexarray_append(dm_args,
++                        GCSPRINTF("%s,id=nic%d,netdev=net%d,mac=%s",
++                                  nics[i].model, nics[i].devid,
++                                  nics[i].devid, smac));
++                }
+                 flexarray_append(dm_args, "-netdev");
+                 flexarray_append(dm_args,
+                                  GCSPRINTF("type=tap,id=net%d,ifname=%s,"
+@@ -1865,8 +1965,15 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+     if (b_info->type == LIBXL_DOMAIN_TYPE_HVM) {
+         flexarray_append_pair(dm_envs, "XEN_DOMAIN_ID", GCSPRINTF("%d", guest_domid));
+ 
+-        if (b_info->u.hvm.hdtype == LIBXL_HDTYPE_AHCI)
+-            flexarray_append_pair(dm_args, "-device", "ahci,id=ahci0");
++        if (b_info->u.hvm.hdtype == LIBXL_HDTYPE_AHCI) {
++            if (configure_pci_for_igd) {
++                flexarray_append_pair(dm_args, "-device",
++                            GCSPRINTF("ahci,addr=%x,id=ahci0", next_slot));
++                next_slot++;
++            } else {
++                flexarray_append_pair(dm_args, "-device", "ahci,id=ahci0");
++            }
++        }
+         for (i = 0; i < num_disks; i++) {
+             int disk, part;
+             int dev_number =
+@@ -2043,7 +2150,14 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         switch (b_info->u.hvm.vendor_device) {
+         case LIBXL_VENDOR_DEVICE_XENSERVER:
+             flexarray_append(dm_args, "-device");
+-            flexarray_append(dm_args, "xen-pvdevice,device-id=0xc000");
++            if (configure_pci_for_igd) {
++                flexarray_append(dm_args,
++                GCSPRINTF("xen-pvdevice,addr=%x,device-id=0xc000",
++                           next_slot));
++                next_slot++;
++            } else {
++                flexarray_append(dm_args, "xen-pvdevice,device-id=0xc000");
++            }
+             break;
+         default:
+             break;
 -- 
 2.39.0
 
