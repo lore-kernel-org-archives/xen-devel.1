@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00383C677F1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E87C54EBE
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 17:19:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474877.736310 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.474874.736278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFIH4-0004By-1o; Tue, 10 Jan 2023 17:18:58 +0000
+	id 1pFIH2-0003SN-5B; Tue, 10 Jan 2023 17:18:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474877.736310; Tue, 10 Jan 2023 17:18:58 +0000
+Received: by outflank-mailman (output) from mailman id 474874.736278; Tue, 10 Jan 2023 17:18:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFIH3-0004AN-Tt; Tue, 10 Jan 2023 17:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 474877;
- Tue, 10 Jan 2023 17:18:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pFIH2-0003SG-2G; Tue, 10 Jan 2023 17:18:56 +0000
+Received: by outflank-mailman (input) for mailman id 474874;
+ Tue, 10 Jan 2023 17:18:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dQxz=5H=citrix.com=prvs=367c7493a=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pFIH2-0003S0-Pd
- for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 17:18:56 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc0f24b7-910a-11ed-91b6-6bf2151ebd3b;
- Tue, 10 Jan 2023 18:18:54 +0100 (CET)
+ id 1pFIH0-0003Rz-Lx
+ for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 17:18:54 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d99b1fde-910a-11ed-b8d0-410ff93cb8f0;
+ Tue, 10 Jan 2023 18:18:52 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,121 +38,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc0f24b7-910a-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: d99b1fde-910a-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1673371134;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=mz05xHRr3qRTB02QoQaO+mfrlV8+T4q/+0C/A1xaNc4=;
-  b=WCMh4zFl/PlKETTmaZaTzzCqqUISfUDIWTgdYv6Wc3UHoVjC2MZrlF2X
-   OKwuN+6zoErEtRoWe+73iGe6L7KJzQWjLwcakiwXyTUYMni30IKi8Yrrx
-   gi/HAdNQm1+ULJ1P6VpXvlhxxHo/Sg8CfHialbIaCedQioL1BJABR6zUT
-   Q=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1673371131;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=nlcu1l1czYrvkQ6yAjB0ab/hxX/LNf+c8nxTwGFVhRM=;
+  b=arkGuz02Y/TSqhJka3P0D7BPkhsPmZs/BAcU4ELfx/tMfyrNSAYwtAH+
+   mXEiN9eQtMeNPCPEYSHLQIlBuVbnSthuw50vp8dc3IKpPcK+mncDFmETz
+   x1y4EObzV/TGWZcgj5NTNIqtSxLkl+ka6NYRMftbZt9Tce9sGQhh+OUD/
+   I=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 90908185
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 92390969
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:28nkk6wk8XHfTO+NWwV6t+cexirEfRIJ4+MujC+fZmUNrF6WrkUAm
- zcZWm2AMv2IZzDxedF/bYyx/EoD7MTXztdiHgZoqCAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
- ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTbaeYUidfCc8IA85kxVvhuUltYBhhNm9Emult
- Mj75sbSIzdJ4RYtWo4vw//F+U0HUMja4mtC5QRnPKgT5zcyqlFOZH4hDfDpR5fHatE88t6SH
- 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KV5F1
- P0feC8rUhvAxOCI/ZWgFKppq+12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKQOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiFJ0ExhbB9
- j+uE2LRJywELsyD8zi5+VWegeTAwAnGep9PLejtnhJtqALKnTFCYPEMbnOkpdGph0j4XMhQQ
- 2QX9zQvq+4u9UWtZtj7QxC85nWDu3Y0S9dWVuE39gyJ4q7V+BqCQHgJSCZbb94rv9NwQiYlv
- nertd70AT1ksJWOVGmQsLyTqFuP1TM9dDFYI3VeFE1cvoel8NpbYg/zoshLL6WUj9qlBhfMy
- HPJrhYDoK5Nzssm/vDulbzYuA6Eqp/MRw8zwwzYWGO58w90DLKYi5yUBUvztqgZctvAJrWVl
- D1dwpXFsrhSZX2YvHbVKNjhCo1F8Bps3Nf0pVd0V6cs+D22k5JIVdABuWouTKuF3yttRNMIX
- KMxkVkKjHOwFCHwBUOSX25WI5pC8EQYPY65Ps04l/IXCnSLSCeJ/Tt1eWmb1H33nU4nnMkXY
- MnEKpz8XC5FVPk+llJaotvxN5dxnkjSIkuKG/jGI+mPi+LCNBZ5t59ZWLdxUgzJxPzd+1iEm
- zquH8CL1w9eQIXDjtr/qOYuwaQxBSFjX/je8pUHHtNv1yI6QAnN/deNm+J+E2Gk9owJ/tr1E
- oaVARMEmQuu2CCZcm1nqBlLMdvSYHq2llpjVQREALpi8yRLjVqHhEvHS6YKQA==
-IronPort-HdrOrdr: A9a23:Ts+48qvM/T/hIseqttiTepL+7skDeNV00zEX/kB9WHVpm62j+/
- xG+c5x6faaslkssR0b9+xoWpPhfZqsz/9ICOAqVN/JMTUO01HYT72Kg7GSpgHIKmnT8fNcyL
- clU4UWMqyVMbGit7eZ3DWF
+IronPort-Data: A9a23:MnqQCa2gwGaBC4Zd3vbD5cBxkn2cJEfYwER7XKvMYLTBsI5bp2QGy
+ WEfCDiCMq2JZzP1L9siPo6z/ENU78fcndRmSVNlpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliefTAOK5ULSfUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8tuTS9nuDgNyo4GlD5gVnPagQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfDX112
+ tcoER00TxmDgfu9y5eUT8pHr5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKkSbC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TbH54ExhfG9
+ woq+UzFJAxEHtu5xQGdsW+pg8LQuRK4eKM7QejQGvlC3wTImz175ActfUS/iem0jAi5Qd03A
+ 24+9zcqrKMy3Fe2VdS7VBq9yFaUsxhZV9dOHukS7ACW1rGS8wufHnIDTDNKdJohrsBeeNAx/
+ gbXxZWzX2Up6eDLDyLGnluJkd+sESQJFkApVRYpdCoM49/6q4oWoRfsZf82RcZZkebJMT33x
+ jmLqg03iLMSkdMH2s2HwLzXv96/jsOXF1Bov207Skrgt1okP9D9O+RE/HCBtZ59wJClok5tV
+ ZTus+yX96gwAJ6Ej0Rhq81dTejyt55p3NAx6GOD/qXNFRz3oBZPnqgKulmSwXuF1e5aEQIFm
+ GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQPcMrJF7fo3wzPBT4M4XRfK4Ey/lX1
+ XCzKJjEMJrnIf4/kGreqxk1jdfHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrlR0U9wmy2Mq
+ 4w3H5LTm31ivBjWPnG/HXg7cQpbchDWxPne96RqSwJ0ClE6RDBwWqKMn+hJlk4Mt/09q9okN
+ 0qVAidwoGcTT1WeQelWQhiPsI/SYKs=
+IronPort-HdrOrdr: A9a23:Xj6syKk04uxO5DNMXQHtoTXZa7XpDfIi3DAbv31ZSRFFG/Fw9v
+ rDoB1/73TJYVkqN03I9ervBEDjexPhHO9OgLX5VI3KNGOKhILCFvAA0WKN+UyEJwTOssJbyK
+ d8Y+xfJbTLfDxHZB/BkWuFL+o=
 X-IronPort-AV: E=Sophos;i="5.96,315,1665460800"; 
-   d="scan'208";a="90908185"
+   d="scan'208";a="92390969"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH v2 0/8] x86: Protection Key Supervisor support
-Date: Tue, 10 Jan 2023 17:18:37 +0000
-Message-ID: <20230110171845.20542-1-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 4/8] x86: Initial support for WRMSRNS
+Date: Tue, 10 Jan 2023 17:18:41 +0000
+Message-ID: <20230110171845.20542-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20230110171845.20542-1-andrew.cooper3@citrix.com>
+References: <20230110171845.20542-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Only 14 months after v1...  This time with testing on real hardware (not that
-any bugs were found) and against an updated XTF comprehensive pagewalk test.
+WRMSR Non-Serialising is an optimisation intended for cases where an MSR needs
+updating, but architectural serialising properties are not needed.
 
-  # time ./xtf-runner hvm64 pagetable-emulation~hap
-  --- Xen Test Framework ---
-  Environment: HVM 64bit (Long mode 4 levels)
-  Test pagetable-emulation
-    Info: Intel, Fam 6, Model 143, Stepping 3, paddr 46, vaddr 48
-    Features: PSE PAE PGE PAT PSE36 PCID NX PAGE1G SMEP SMAP PKU PKS
-    Paging mode heuristic: Hap
-    Using physical addresses 0000000040000000 and 0000200000000000
-  Test L1e
-  Test L2e
-  Test L2e Superpage
-  Test L3e
-  Test L3e Superpage
-  Test L4e
-  Test L4e Superpage
-  Completed 28835840 tests
-  Test result: SUCCESS
+In is anticipated that this will apply to most if not all MSRs modified on
+context switch paths.
 
-  Combined test results:
-  test-hvm64-pagetable-emulation~hap       SUCCESS
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-  real                                     1m26.315s
-  user                                     0m0.039s
-  sys                                      0m0.086s
+v2:
+ * New
+---
+ tools/libs/light/libxl_cpuid.c              |  1 +
+ tools/misc/xen-cpuid.c                      |  1 +
+ xen/arch/x86/include/asm/msr.h              | 12 ++++++++++++
+ xen/include/public/arch-x86/cpufeatureset.h |  1 +
+ 4 files changed, 15 insertions(+)
 
-This test is going to get even more silly when CET-SS becomes supported.
-
-Andrew Cooper (8):
-  x86/boot: Sanitise PKRU on boot
-  x86/prot-key: Enumeration for Protection Key Supervisor
-  x86/prot-key: Split PKRU infrastructure out of asm/processor.h
-  x86: Initial support for WRMSRNS
-  x86/hvm: Context switch MSR_PKRS
-  x86/hvm: Enable guest access to MSR_PKRS
-  x86/pagewalk: Support PKS
-  x86/hvm: Support PKS for HAP guests
-
- tools/libs/light/libxl_cpuid.c              |  2 +
- tools/misc/xen-cpuid.c                      |  3 +-
- xen/arch/x86/cpu/common.c                   |  6 ++
- xen/arch/x86/cpuid.c                        |  9 +++
- xen/arch/x86/hvm/hvm.c                      |  5 +-
- xen/arch/x86/hvm/vmx/vmx.c                  | 26 +++++++++
- xen/arch/x86/include/asm/cpufeature.h       |  2 +
- xen/arch/x86/include/asm/guest_pt.h         |  5 ++
- xen/arch/x86/include/asm/hvm/hvm.h          |  3 +
- xen/arch/x86/include/asm/msr-index.h        |  2 +
- xen/arch/x86/include/asm/msr.h              | 21 +++++++
- xen/arch/x86/include/asm/processor.h        | 38 -------------
- xen/arch/x86/include/asm/prot-key.h         | 85 +++++++++++++++++++++++++++++
- xen/arch/x86/include/asm/x86-defns.h        |  1 +
- xen/arch/x86/mm/guest_walk.c                | 16 ++++--
- xen/arch/x86/msr.c                          | 10 ++++
- xen/arch/x86/setup.c                        |  6 +-
- xen/arch/x86/smpboot.c                      |  4 ++
- xen/arch/x86/x86_emulate.c                  |  2 +
- xen/include/public/arch-x86/cpufeatureset.h |  2 +
- 20 files changed, 201 insertions(+), 47 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/prot-key.h
-
+diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
+index cbd4e511e8ab..8da78773a886 100644
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -235,6 +235,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
+         {"fzrm",         0x00000007,  1, CPUID_REG_EAX, 10,  1},
+         {"fsrs",         0x00000007,  1, CPUID_REG_EAX, 11,  1},
+         {"fsrcs",        0x00000007,  1, CPUID_REG_EAX, 12,  1},
++        {"wrmsrns",      0x00000007,  1, CPUID_REG_EAX, 19,  1},
+ 
+         {"intel-psfd",   0x00000007,  2, CPUID_REG_EDX,  0,  1},
+         {"mcdt-no",      0x00000007,  2, CPUID_REG_EDX,  5,  1},
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index ea7ff320e0e4..f482c4e28f30 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -189,6 +189,7 @@ static const char *const str_7a1[32] =
+ 
+     [10] = "fzrm",          [11] = "fsrs",
+     [12] = "fsrcs",
++    /* 18 */                [19] = "wrmsrns",
+ };
+ 
+ static const char *const str_e21a[32] =
+diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
+index dd1eee04a637..191e54068856 100644
+--- a/xen/arch/x86/include/asm/msr.h
++++ b/xen/arch/x86/include/asm/msr.h
+@@ -38,6 +38,18 @@ static inline void wrmsrl(unsigned int msr, __u64 val)
+         wrmsr(msr, lo, hi);
+ }
+ 
++/* Non-serialising WRMSR, when available.  Falls back to a serialising WRMSR. */
++static inline void wrmsr_ns(uint32_t msr, uint32_t lo, uint32_t hi)
++{
++    /*
++     * WRMSR is 2 bytes.  WRMSRNS is 3 bytes.  Pad WRMSR with a redundant CS
++     * prefix to avoid a trailing NOP.
++     */
++    alternative_input(".byte 0x2e; wrmsr",
++                      ".byte 0x0f,0x01,0xc6", X86_FEATURE_WRMSRNS,
++                      "c" (msr), "a" (lo), "d" (hi));
++}
++
+ /* rdmsr with exception handling */
+ #define rdmsr_safe(msr,val) ({\
+     int rc_; \
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index ad7e89dd4c40..5444bc5d8374 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -281,6 +281,7 @@ XEN_CPUFEATURE(AVX512_BF16,  10*32+ 5) /*A  AVX512 BFloat16 Instructions */
+ XEN_CPUFEATURE(FZRM,         10*32+10) /*A  Fast Zero-length REP MOVSB */
+ XEN_CPUFEATURE(FSRS,         10*32+11) /*A  Fast Short REP STOSB */
+ XEN_CPUFEATURE(FSRCS,        10*32+12) /*A  Fast Short REP CMPSB/SCASB */
++XEN_CPUFEATURE(WRMSRNS,      10*32+19) /*   WRMSR Non-Serialising */
+ 
+ /* AMD-defined CPU features, CPUID level 0x80000021.eax, word 11 */
+ XEN_CPUFEATURE(LFENCE_DISPATCH,    11*32+ 2) /*A  LFENCE always serializing */
 -- 
 2.11.0
 
