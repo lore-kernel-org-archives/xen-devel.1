@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24D5CC61DB3
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 08:54:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474438.735664 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9BBC54EBE
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 08:54:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.474443.735675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFAOm-0007vw-F3; Tue, 10 Jan 2023 08:54:24 +0000
+	id 1pFAOo-0008Lv-O9; Tue, 10 Jan 2023 08:54:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474438.735664; Tue, 10 Jan 2023 08:54:24 +0000
+Received: by outflank-mailman (output) from mailman id 474443.735675; Tue, 10 Jan 2023 08:54:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFAOm-0007v2-AD; Tue, 10 Jan 2023 08:54:24 +0000
-Received: by outflank-mailman (input) for mailman id 474438;
- Tue, 10 Jan 2023 08:54:22 +0000
+	id 1pFAOo-0008Ll-K6; Tue, 10 Jan 2023 08:54:26 +0000
+Received: by outflank-mailman (input) for mailman id 474443;
+ Tue, 10 Jan 2023 08:54:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=K1Mu=5H=arm.com=Wei.Chen@srs-se1.protection.inumbo.net>)
- id 1pFAOk-0005oC-ED
- for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 08:54:22 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2051.outbound.protection.outlook.com [40.107.20.51])
+ id 1pFAOn-0005oC-LN
+ for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 08:54:25 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on2074.outbound.protection.outlook.com [40.107.7.74])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5eadc0bb-90c4-11ed-b8d0-410ff93cb8f0;
- Tue, 10 Jan 2023 09:54:19 +0100 (CET)
-Received: from AS9P251CA0024.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:50f::26)
- by AS8PR08MB10272.eurprd08.prod.outlook.com (2603:10a6:20b:62b::7)
+ id 610301df-90c4-11ed-b8d0-410ff93cb8f0;
+ Tue, 10 Jan 2023 09:54:23 +0100 (CET)
+Received: from AS9P251CA0012.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:50f::14)
+ by AS8PR08MB6023.eurprd08.prod.outlook.com (2603:10a6:20b:291::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.18; Tue, 10 Jan
- 2023 08:54:17 +0000
+ 2023 08:54:21 +0000
 Received: from AM7EUR03FT020.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:50f:cafe::a0) by AS9P251CA0024.outlook.office365.com
- (2603:10a6:20b:50f::26) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:20b:50f:cafe::a0) by AS9P251CA0012.outlook.office365.com
+ (2603:10a6:20b:50f::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.18 via Frontend
- Transport; Tue, 10 Jan 2023 08:54:17 +0000
+ Transport; Tue, 10 Jan 2023 08:54:20 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
  AM7EUR03FT020.mail.protection.outlook.com (100.127.140.196) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5986.18 via Frontend Transport; Tue, 10 Jan 2023 08:54:17 +0000
+ 15.20.5986.18 via Frontend Transport; Tue, 10 Jan 2023 08:54:20 +0000
 Received: ("Tessian outbound 43b0faad5a68:v132");
- Tue, 10 Jan 2023 08:54:17 +0000
-Received: from ce7d68c79393.1
+ Tue, 10 Jan 2023 08:54:20 +0000
+Received: from 6c9be4230c91.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- DCA68D6C-84A1-4841-B4DA-AE16FA9E8149.1; 
- Tue, 10 Jan 2023 08:54:10 +0000
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ce7d68c79393.1
+ B72E062C-9E7F-45B2-933D-CA866276CC5D.1; 
+ Tue, 10 Jan 2023 08:54:13 +0000
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 6c9be4230c91.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 10 Jan 2023 08:54:10 +0000
-Received: from AS9PR04CA0143.eurprd04.prod.outlook.com (2603:10a6:20b:48a::24)
- by AS4PR08MB8021.eurprd08.prod.outlook.com (2603:10a6:20b:584::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 10 Jan 2023 08:54:13 +0000
+Received: from AM6PR01CA0063.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:e0::40) by GV2PR08MB7956.eurprd08.prod.outlook.com
+ (2603:10a6:150:a9::5) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.18; Tue, 10 Jan
- 2023 08:54:07 +0000
-Received: from AM7EUR03FT045.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:48a:cafe::74) by AS9PR04CA0143.outlook.office365.com
- (2603:10a6:20b:48a::24) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 08:54:09 +0000
+Received: from VI1EUR03FT017.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:e0:cafe::f4) by AM6PR01CA0063.outlook.office365.com
+ (2603:10a6:20b:e0::40) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.18 via Frontend
- Transport; Tue, 10 Jan 2023 08:54:07 +0000
+ Transport; Tue, 10 Jan 2023 08:54:08 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- AM7EUR03FT045.mail.protection.outlook.com (100.127.140.150) with Microsoft
+ VI1EUR03FT017.mail.protection.outlook.com (100.127.145.12) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5986.18 via Frontend Transport; Tue, 10 Jan 2023 08:54:07 +0000
-Received: from AZ-NEU-EX02.Emea.Arm.com (10.251.26.5) by AZ-NEU-EX03.Arm.com
- (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.5986.18 via Frontend Transport; Tue, 10 Jan 2023 08:54:08 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX04.Arm.com
+ (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.16; Tue, 10 Jan
- 2023 08:54:07 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX02.Emea.Arm.com
- (10.251.26.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.16; Tue, 10 Jan
- 2023 08:54:06 +0000
+ 2023 08:54:00 +0000
 Received: from ais-wip-ds.shanghai.arm.com (10.169.190.86) by mail.arm.com
  (10.251.24.32) with Microsoft SMTP Server id 15.1.2507.16 via Frontend
- Transport; Tue, 10 Jan 2023 08:54:04 +0000
+ Transport; Tue, 10 Jan 2023 08:53:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -89,12 +85,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5eadc0bb-90c4-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 610301df-90c4-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OKOqbwKgR3BpQXq2D8GZb/uo0PrVqRyZlKb7VkWKCUg=;
- b=AXnC8dht/q3saI6VzXewmyQIF1ygQWApxX737ntEYgSF1qsK0vD6c2sA1RwMWmPf+SCr2xHX2aP0c+uPjVufXv4LGxXiZicbyTVPFVLFUqb8Bi6zbndNDBHYEpua9CfhXTpHhIgEvgs3u4qmS9b9dp6XsAV4wrltkq/IVBZcCDg=
+ bh=DetB4lMCYSGFHbQ+S23R1nmvP6AkNk5bezLoeuNo2NQ=;
+ b=CjYW9OA5MiITfPRLeAQJdBtRhIIzXkoXUeLTsylRqosW0eZ5fT1/96spS8RcdECNGzla6LAu1pnAvPEJws6jZTKutIQh25/plhP6g5Q+g2qq6lLH30tl6Z2xbjAY2McqQ7OhYemVvH39LQAyf05iqCUlnd9hdLqPZ2TydNKt76c=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -103,15 +99,15 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 7cb5e6b944ac46a3
+X-CR-MTA-CID: 138f2759a09173da
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZVvzccwh/3zGxJOsUbts1FUGLsjFolK0rMjB/BlvVlK//6wTHke8+1th5q8ij6DxZrh/QsjLpR+UxOmunx6+PQQKD9jCt1L8M5j+wGeKlEXn62p6SFRn+yg0GB0Q6dnIwdD+axbqn5aWghkmlOu/oSr9Bvz/ktJ3HdFcnCCyiBSotmaLi5a9MSTrZ1lk1g/IuqNL+PwnLNz7Wu8heDRJxTLoKj6eLD83N6gVYby2iBKosPeRz0E4l3xwI6TPGUT0qMiGdBh8Wcq37uUHA69z/rQbQ/4EXT5/xMxX5vHgk1fmI6iNPM6WBQbMG61c5719+PL+lXOg5NAAtgQDZpj8Sg==
+ b=k/UZejh/sDhmr1GIIVrikmdsspgU0j0oko0y7Pq0nmGe9UN8Uju5V0Y3Fr0TF7F9NAoQGYHx+b9EO7YznfB0lyAKduICwGn+nyydzUSSeEOtlEW7KTjN/s3SbqpAzCI8Mka+g0jAOePvva6uok91EkDqRIkdO/LFo3u4tSK4G05vq2GdhABgAMGDvMRDpGDXwLV4tTda2s5fiRvbxGKES6BeJhD22w500pY64ERUjqjAIgeYU5Rv1ynzVjP58WlCOGOPo2f9W3dbAHymnBTheeMQHF+Vp48S9S8aeTU2NVHLa5ZrmirPaGOUaX4mLRf5zObTfw9Ll0xDlhK7DY1lWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OKOqbwKgR3BpQXq2D8GZb/uo0PrVqRyZlKb7VkWKCUg=;
- b=XfnTSQv3AhqoRJm55lqZgy4/BvOzddIojFoX+9svsbb+3WTmYzyinyeIH2vhOZ9sfDN9WSGWmztDbj2Fo0LNX9tSDIRqQ27J9eWAyursULHI+BL/iJRZfhDZftRgiPIu3NcuH2ElxbjWmrg2VO+MLqDyydvMztkaWDFng4CEjce4l9EjXBkik4sakk6afa3vePd1o2AnuW4Dw68Ac4BF9O2AqZTFn9l3RWeD1gKrxGf6RviO3N/Kn12TgLV18uc6sTgoyYIpI14n5eKrvCL/bMxYuF9CFT7m1CSRDN8iwUGpN6uFuyoqcuDQXkzgUqYSMYjsEInmV4W1QEo51z/3tA==
+ bh=DetB4lMCYSGFHbQ+S23R1nmvP6AkNk5bezLoeuNo2NQ=;
+ b=h81WCsFZthOa9TZtRLQfeHFDvD/QJEonb5RqdioAp6nVhSMKyWiatu3BlTi/uQvSvnT1EbG9ce9uFGuHFZzbby4gHzIOXEkez4g2lnCmH7DO6YiNkd4caR9mDBDpNqaOKKaxzihBqrcEbIw6udJdjl7AM65kkHtHiTZxscFMUAgnfmgSlJTaP8axt49B7MhvErq/L4TakHSXMcxo3K2pHkzs1YYSHh0mlY5Dv6PijnnubTp2WyXAIm9d4jtIt9TQA5tgHPSLzzVl4Fg2ucDC9ECMbPIUfM8mmEH3+qIwWyD2iJK9NVtZBCt9cpwhBGoVJVatuEbVGdQdlbS9x63lVQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -119,8 +115,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OKOqbwKgR3BpQXq2D8GZb/uo0PrVqRyZlKb7VkWKCUg=;
- b=AXnC8dht/q3saI6VzXewmyQIF1ygQWApxX737ntEYgSF1qsK0vD6c2sA1RwMWmPf+SCr2xHX2aP0c+uPjVufXv4LGxXiZicbyTVPFVLFUqb8Bi6zbndNDBHYEpua9CfhXTpHhIgEvgs3u4qmS9b9dp6XsAV4wrltkq/IVBZcCDg=
+ bh=DetB4lMCYSGFHbQ+S23R1nmvP6AkNk5bezLoeuNo2NQ=;
+ b=CjYW9OA5MiITfPRLeAQJdBtRhIIzXkoXUeLTsylRqosW0eZ5fT1/96spS8RcdECNGzla6LAu1pnAvPEJws6jZTKutIQh25/plhP6g5Q+g2qq6lLH30tl6Z2xbjAY2McqQ7OhYemVvH39LQAyf05iqCUlnd9hdLqPZ2TydNKt76c=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=arm.com;
@@ -132,9 +128,9 @@ To: <xen-devel@lists.xenproject.org>
 CC: <nd@arm.com>, Wei Chen <wei.chen@arm.com>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
 	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 08/17] xen/arm: introduce a helper to parse device tree memory node
-Date: Tue, 10 Jan 2023 16:49:21 +0800
-Message-ID: <20230110084930.1095203-9-wei.chen@arm.com>
+Subject: [PATCH v2 06/17] xen/arm: Add boot and secondary CPU to NUMA system
+Date: Tue, 10 Jan 2023 16:49:19 +0800
+Message-ID: <20230110084930.1095203-7-wei.chen@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230110084930.1095203-1-wei.chen@arm.com>
 References: <20230110084930.1095203-1-wei.chen@arm.com>
@@ -143,168 +139,128 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 1
 X-MS-TrafficTypeDiagnostic:
-	AM7EUR03FT045:EE_|AS4PR08MB8021:EE_|AM7EUR03FT020:EE_|AS8PR08MB10272:EE_
-X-MS-Office365-Filtering-Correlation-Id: 804971e2-82c8-4155-85b5-08daf2e841d4
+	VI1EUR03FT017:EE_|GV2PR08MB7956:EE_|AM7EUR03FT020:EE_|AS8PR08MB6023:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6f6f6376-5ef1-4973-1930-08daf2e84397
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- cYC1f+ENHyJAnlqwLMSVrd/QKZpp8bFQw/NYKKG7PF23sg5hOcL8aXy9meIimpkmkmoX0f108tkj+WLiA8zoksBm92kundWXXBtANT3EFsrL05GmUeibh+Rb6td7vJf1lZOnIhC5NvpF6u8h76EadVhTDTNS9nrHyMH04Z3tzFRI7jefglp/b7ZvgJTnBqWXCNzxWtsGkQHP0eX8+RFvzhblIsgg8j5if/EPGHbXA01umoe9wYjjaQeQBcxwbbNoN3cioqZMGPkYQaPL7/OqC3EwheIoyucUdgNtMWD50gK+5T33/aDVPITtDE/HPYR+0lGkHM2hLbj2Af5mRvnlRDXWRpY5qfz0Gr4JwjAGyF9TcANP53AAD2scNH/pbhgOQYlQCVyrYQmU2p4OXHPKxHrF307cQ064ST5RmCnxdx0F9HUjDrTjGRD1L6ax/P3dhi9cZkw6YKPRXvql9F7jeI/OflVpXCAQuzHMQJ3VmNzHvrAVUFDiJu1V9XCClHQ0DkMj1jLCnQg/j+bqX7FhHj3FWkPr2gBUaixh+wHECaPQo4wrZDnY4f44BqbUUe2+xXwuqQ0DmGGQ7f+XjmakcNq9gvYAAQp+Cg4yOtkyatSPpm0n6cy+NG5v/RXg/mSpeuRfFTy/QRVYhORYWOJIkHgOrqgANSi2YG/F9tDR+x42xwGZ7DQFN3WniF3oZHjkwiOi8SgirOb2EzSYyS8vSw==
+ aS+J3UKHWPXZoOTlJwyBHwOsVJ8zE3h4K0qY36ZEiw2IY+Pf0ED6kCVnVdrfC3unMz2KM62mpTtbZGeTF2tO844Xu5iSI77dqUiNvIcDSksnfQm4W5a54jG2UWxMUqRhN/8y2cbCOO7KzZgxsUYw2OTODNt2KxKSW1GL/dd8BXbVfeWLfkBaYRx1GsyTx3fRSnP0vliGuhPOfm6Uj90dzBoK5WXhM6jK8xHkNp6I/3GkF8FBT2+8LVWzT6V5L7/BdWt5tgkT+NF8lO/XqMsMCzGAcYHBulTSI9sMpTL1WlJq8vq21WNnH6O382DhiAxKjDms9TEI0cVbHKYvAlMXgw5xZKE0MhfvYAB0ehXEJEf+kGwocVHSKRmC+JmALb7HgclQc0zOpr0Y4wK7Z6J47zig7oH9BNc6za4jUITLZS80c41auYKQGMM+hz6vsVPrATH3uWlTn6jSBXUQLEKlneWG/RfUcBmQ42/wumqIqFcQFIxdN3LkROU3Ia/Hm/wOrXTE9n/5MXq17US2Z/fSvC8enSE8W8TaehuJZwu+GH1HHGFGxFFRDer+1e27bxQk3VCzf0xW1TuXpMUUcHKFMzhgAzCss6iuLiwryEdEQxcaENeVT+T6JW7P32ihYAWTNNRO/XJwrbD5IiiQ9jEjesuG9BujlpUW0yoiy0Dd/XrNI23Qro0pJgJD75sZ7dZ0HCEw+/Gtz1XSyi6IeH8GzQ==
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(396003)(136003)(39860400002)(376002)(346002)(451199015)(36840700001)(46966006)(36756003)(82740400003)(81166007)(356005)(86362001)(2906002)(44832011)(8676002)(70206006)(70586007)(4326008)(5660300002)(8936002)(83380400001)(36860700001)(7696005)(316002)(54906003)(6666004)(6916009)(40480700001)(82310400005)(41300700001)(1076003)(47076005)(336012)(426003)(478600001)(186003)(2616005)(26005)(36900700001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB8021
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(39860400002)(396003)(136003)(346002)(451199015)(46966006)(36840700001)(83380400001)(426003)(82310400005)(47076005)(316002)(86362001)(54906003)(6916009)(40480700001)(36756003)(7696005)(356005)(81166007)(82740400003)(186003)(336012)(26005)(2616005)(1076003)(2906002)(44832011)(478600001)(6666004)(5660300002)(8936002)(36860700001)(70206006)(41300700001)(4326008)(70586007)(8676002)(36900700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB7956
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
  AM7EUR03FT020.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	ed89b6d8-b1b3-4969-9475-08daf2e83bcb
+	aa82329a-87e4-4135-0f00-08daf2e83c93
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	tASn4v6OG2BoFMYZF9AgW2RWMlFlKpGv9j/M0edEIiWzE4w4kB/48VYlPsavsFGiSwzxeXl4GGIMqH7P53um9SQqgoag6SyOikYCnS/WuzPqQ1YsVnFTf6yVE8icJiU4zANRc5hkkCeM+HlGN0MBGUUersvOKdyJOg98t872jSEdCgv9P5Bn9uRbC6ekrKg6UOM/RGUD2QvG4UoHuK99HMhVl+1GAxWxX/JcJU26h38nSX5PEz1FJFqkz8umipHIPG/wGhvnn7k9vYKkIMmMuJ2zKMcrneVyXiTEJ697+Y6r71RV8ETCltuKwSfyqZg8IzEC+AwJejMd/AvjE83dufsElbdhf7myh2z9yNHCFwzc3OM3xs5om7Jd7Zlvu4o2AWLvcyhm9ozRrEJn9Rj3SSUj/79yBbMh/BvkbPOYQ8IrRSzMnPKYddZCuTIHH8JIi8AylqPAcMJmzBTZvjFb1Zd/rwAAuMWIYnqKMa2IYxQ+boHa+56k9KyIB+MbAgquPy7BhZK2BYwcryI7u1rDO7YWjQrDQnX120qxht6DJs1VkUHTXyB6f4q1B+eHPUFQSCXkAiI0n51KEyVtUUvFmPFak4FieMd+InFxlZ2SYnK9330M39OHbJHbF51/2l/1suyWYMC2WI/I9GmSThjdoTnNuSxgCrvwzfDQ74g/3T7j+qHkZ/LGoS+wRxQCAzRL2wen8cE2/iHQ3OPyHwfnyw==
+	GVNyi/5bICXOl0fQBUzMg1x3cmPpCFtJw1r5zASEgFs6re1mKVZzDYlPhnlISFnO20hcGGp9WdGRpt8cBiN5mqbxMTbnibjBg5+A3doKjH7phhCZUAN3EMUTHCGLeiGa37yCYgz9jVIADZHeNS/mCWtZHXV9DcsN220hgGwBG1PbJfvJ6YoUwG5NSZU7JAT4dRQQmENeYUCTtyubhYZ86YOuA4vv68LL+suzLAuLLQzt2SrpTPzWUJKxqlsUOvDEJzxgjkIkiilEHW+DM+PR7vS0e37UGHU2qTL3uL3Mr0cadlgJUqntvn2Xfr/m3CQgzRBh9pfsh/JmwIkRmzMltqFAWablQ2BECaoWBfd7Mtf9BKPm3JCCGJIhbtKC4Jykh/b2j1I+0Xt9pdehD5hNrOzZJl3Rz/NyJcdcUKg/YmSvV5TmVBnwHPum+RE6+FJncXSSfi2yZPej0K685FI3AWGBX+TUSllKkBKvOQ45FV7jp76hiDRQozKq0iTOcRDTSF9/OSN8RvSy1g06dNvf7mGqll1QYiFWXRZAVJNf7zwc8MMEmcWeh8499mhp/Gb2nHCQ+QmtoDIe9CSpROXuRytyWUbhHBZDtSg+CrHT4ITNGbzjlVFUirAgpVRE8VpAVHpVIBobu39YZear4q+wcuzpyfcTqO8AxPdYFNvqxdJRSdfV4KBPN2SPMtcEo74pSs+ya6tk1yQxao1DJwwhYw==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(396003)(136003)(376002)(346002)(39860400002)(451199015)(46966006)(36840700001)(40470700004)(82740400003)(81166007)(36860700001)(54906003)(41300700001)(70586007)(86362001)(8676002)(40460700003)(6916009)(70206006)(6666004)(5660300002)(316002)(40480700001)(2906002)(44832011)(2616005)(1076003)(426003)(336012)(47076005)(83380400001)(7696005)(82310400005)(26005)(107886003)(186003)(8936002)(478600001)(4326008)(36756003);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(136003)(39860400002)(396003)(451199015)(46966006)(40470700004)(36840700001)(5660300002)(44832011)(8936002)(41300700001)(2906002)(36756003)(54906003)(83380400001)(8676002)(70586007)(70206006)(4326008)(316002)(6916009)(7696005)(26005)(81166007)(186003)(6666004)(86362001)(478600001)(107886003)(336012)(1076003)(2616005)(40480700001)(47076005)(82740400003)(426003)(82310400005)(36860700001)(40460700003);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2023 08:54:17.6502
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2023 08:54:20.6031
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 804971e2-82c8-4155-85b5-08daf2e841d4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f6f6376-5ef1-4973-1930-08daf2e84397
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	AM7EUR03FT020.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB10272
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6023
 
-Memory blocks' NUMA ID information is stored in device tree's
-memory nodes as "numa-node-id". We need a new helper to parse
-and verify this ID from memory nodes.
+In this patch, we make NUMA node online and add cpu to
+its NUMA node. This will make NUMA-aware components
+have NUMA affinity data to support their work.
+
+To keep the mostly the same behavior of x86, we use
+numa_detect_cpu_node to online node. The difference is that,
+we have prepared cpu_to_node in dt_smp_init_cpus, so we don't
+need to setup cpu_to_node in numa_detect_cpu_node.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
-v1->v2:
-1. Move numa_disabled check to fdt_parse_numa_memory_node.
-2. Use numa_bad to replace bad_srat.
-3. Replace tabs by spaces.
-4. Align parameters.
-5. return ENODATA for a normal dtb without numa info.
-6. Un-addressed comment:
-   "Why not parse numa-node-id and call fdt_numa_memory_affinity_init
-   from xen/arch/arm/bootfdt.c:device_tree_get_meminfo. Is it because
-   device_tree_get_meminfo is called too early?"
-   I checked the device_tree_get_meminfo code and I think the answer
-   is similar as I reply in RFC. I prefer a unify numa initialization
-   entry. Don't want to make numa parse code in different places.
-7. Use node id as dummy PXM for numa_update_node_memblks.
+v2 -> v3:
+1. Use unsigned int instead of int for cpu id.
+2. Use static inline for stub to do type check.
+v1 -> v2:
+1. Use numa_detect_cpu_node to online node.
+2. Use macros instead of static inline functions to stub
+   numa_detect_cpu_node.
 ---
- xen/arch/arm/numa_device_tree.c | 89 +++++++++++++++++++++++++++++++++
- 1 file changed, 89 insertions(+)
+ xen/arch/arm/include/asm/numa.h |  9 +++++++++
+ xen/arch/arm/numa.c             | 10 ++++++++++
+ xen/arch/arm/setup.c            |  5 +++++
+ 3 files changed, 24 insertions(+)
 
-diff --git a/xen/arch/arm/numa_device_tree.c b/xen/arch/arm/numa_device_tree.c
-index c031053d24..793a410fd4 100644
---- a/xen/arch/arm/numa_device_tree.c
-+++ b/xen/arch/arm/numa_device_tree.c
-@@ -34,6 +34,26 @@ static int __init fdt_numa_processor_affinity_init(nodeid_t node)
-     return 0;
- }
+diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
+index 3bc28416b4..e0c909cbb7 100644
+--- a/xen/arch/arm/include/asm/numa.h
++++ b/xen/arch/arm/include/asm/numa.h
+@@ -41,6 +41,7 @@ enum dt_numa_status {
  
-+/* Callback for parsing of the memory regions affinity */
-+static int __init fdt_numa_memory_affinity_init(nodeid_t node,
-+                                                paddr_t start, paddr_t size)
-+{
-+    if ( !numa_memblks_available() )
-+    {
-+        dprintk(XENLOG_WARNING,
-+                "Too many numa entry, try bigger NR_NODE_MEMBLKS\n");
-+        return -EINVAL;
-+    }
-+
-+    numa_fw_nid_name = "numa-node-id";
-+    if ( !numa_update_node_memblks(node, node, start, size, false) )
-+        return -EINVAL;
-+
-+    device_tree_numa = DT_NUMA_ON;
-+
-+    return 0;
-+}
-+
- /* Parse CPU NUMA node info */
- static int __init fdt_parse_numa_cpu_node(const void *fdt, int node)
+ extern void numa_set_distance(nodeid_t from, nodeid_t to,
+                               unsigned int distance);
++extern void numa_detect_cpu_node(unsigned int cpu);
+ 
+ #else
+ 
+@@ -74,6 +75,14 @@ static inline void numa_set_node(unsigned int cpu, nodeid_t node)
  {
-@@ -62,3 +82,72 @@ static int __init fdt_parse_numa_cpu_node(const void *fdt, int node)
- 
-     return fdt_numa_processor_affinity_init(nid);
  }
-+
-+/* Parse memory node NUMA info */
-+static int __init fdt_parse_numa_memory_node(const void *fdt, int node,
-+                                             const char *name,
-+                                             unsigned int addr_cells,
-+                                             unsigned int size_cells)
+ 
++static inline void numa_add_cpu(unsigned int cpu)
 +{
-+    unsigned int nid;
-+    int ret = 0, len;
-+    paddr_t addr, size;
-+    const struct fdt_property *prop;
-+    unsigned int idx, ranges;
-+    const __be32 *addresses;
-+
-+    if ( numa_disabled() )
-+        return -EINVAL;
-+
-+    /*
-+     * device_tree_get_u32 will return NUMA_NO_NODE when this memory
-+     * DT node doesn't have numa-node-id. This can help us to
-+     * distinguish a bad DTB and a normal DTB without NUMA info.
-+     */
-+    nid = device_tree_get_u32(fdt, node, "numa-node-id", NUMA_NO_NODE);
-+    if ( node == NUMA_NO_NODE )
-+    {
-+        numa_fw_bad();
-+        return -ENODATA;
-+    }
-+    else if ( nid >= MAX_NUMNODES )
-+    {
-+        printk(XENLOG_WARNING "Node id %u exceeds maximum value\n", nid);
-+        goto invalid_data;
-+    }
-+
-+    prop = fdt_get_property(fdt, node, "reg", &len);
-+    if ( !prop )
-+    {
-+        printk(XENLOG_WARNING
-+               "fdt: node `%s': missing `reg' property\n", name);
-+        goto invalid_data;
-+    }
-+
-+    addresses = (const __be32 *)prop->data;
-+    ranges = len / (sizeof(__be32)* (addr_cells + size_cells));
-+    for ( idx = 0; idx < ranges; idx++ )
-+    {
-+        device_tree_get_reg(&addresses, addr_cells, size_cells, &addr, &size);
-+        /* Skip zero size ranges */
-+        if ( !size )
-+            continue;
-+
-+        ret = fdt_numa_memory_affinity_init(nid, addr, size);
-+        if ( ret )
-+            goto invalid_data;
-+    }
-+
-+    if ( idx == 0 )
-+    {
-+        printk(XENLOG_ERR
-+               "bad property in memory node, idx=%d ret=%d\n", idx, ret);
-+        goto invalid_data;
-+    }
-+
-+    return 0;
-+
-+invalid_data:
-+    numa_fw_bad();
-+    return -EINVAL;
 +}
++
++static inline void numa_detect_cpu_node(unsigned int cpu)
++{
++}
++
+ #endif
+ 
+ #define arch_want_default_dmazone() (false)
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+index dcfcd85fcf..4dd7cf10ba 100644
+--- a/xen/arch/arm/numa.c
++++ b/xen/arch/arm/numa.c
+@@ -74,6 +74,16 @@ void __init numa_set_distance(nodeid_t from, nodeid_t to,
+     node_distance_map[from][to] = distance;
+ }
+ 
++void numa_detect_cpu_node(unsigned int cpu)
++{
++    nodeid_t node = cpu_to_node[cpu];
++
++    if ( node == NUMA_NO_NODE )
++        node = 0;
++
++    node_set_online(node);
++}
++
+ unsigned char __node_distance(nodeid_t from, nodeid_t to)
+ {
+     /* When NUMA is off, any distance will be treated as remote. */
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 1f26f67b90..8c02cf6cd4 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -1115,6 +1115,11 @@ void __init start_xen(unsigned long boot_phys_offset,
+ 
+     for_each_present_cpu ( i )
+     {
++        /* Detect and online node based on cpu_to_node[]. */
++        numa_detect_cpu_node(i);
++        /* Set up node_to_cpumask based on cpu_to_node[]. */
++        numa_add_cpu(i);
++
+         if ( (num_online_cpus() < nr_cpu_ids) && !cpu_online(i) )
+         {
+             int ret = cpu_up(i);
 -- 
 2.25.1
 
