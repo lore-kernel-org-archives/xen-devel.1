@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911C1C46467
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 07:29:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474302.735399 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF0DC46467
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 07:32:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.474310.735417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pF94K-0003ZL-QV; Tue, 10 Jan 2023 07:29:12 +0000
+	id 1pF97Z-0005Po-PN; Tue, 10 Jan 2023 07:32:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474302.735399; Tue, 10 Jan 2023 07:29:12 +0000
+Received: by outflank-mailman (output) from mailman id 474310.735417; Tue, 10 Jan 2023 07:32:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pF94K-0003ZE-My; Tue, 10 Jan 2023 07:29:12 +0000
-Received: by outflank-mailman (input) for mailman id 474302;
- Tue, 10 Jan 2023 07:29:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qhNV=5H=gmail.com=bobbyeshleman@srs-se1.protection.inumbo.net>)
- id 1pF94I-0003Z8-Fc
- for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 07:29:10 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 77ef4fcd-90b8-11ed-b8d0-410ff93cb8f0;
- Tue, 10 Jan 2023 08:29:08 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id fc4so26233009ejc.12
- for <xen-devel@lists.xenproject.org>; Mon, 09 Jan 2023 23:29:07 -0800 (PST)
+	id 1pF97Z-0005PV-HW; Tue, 10 Jan 2023 07:32:33 +0000
+Received: by outflank-mailman (input) for mailman id 474310;
+ Tue, 10 Jan 2023 07:32:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=tiyo=5H=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
+ id 1pF97X-0005Lt-Rx
+ for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 07:32:32 +0000
+Received: from sonic314-21.consmr.mail.gq1.yahoo.com
+ (sonic314-21.consmr.mail.gq1.yahoo.com [98.137.69.84])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id eee044ef-90b8-11ed-91b6-6bf2151ebd3b;
+ Tue, 10 Jan 2023 08:32:29 +0100 (CET)
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic314.consmr.mail.gq1.yahoo.com with HTTP; Tue, 10 Jan 2023 07:32:26 +0000
+Received: by hermes--production-ne1-7b69748c4d-bxfkx (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 00995f78f0d4fd001b9b8f1699ee7ed7; 
+ Tue, 10 Jan 2023 07:32:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,368 +44,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 77ef4fcd-90b8-11ed-b8d0-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=9ssIX2bpuLjHtHr5+BBTQqOChORvzTDNQnsLLcvt2qg=;
-        b=e7oCwnl55++94Q2FyIhXiOCmNMMWEE7hSeTcjnM0OwwZ7iZMByeN4dDjGkAaCzTSN+
-         A+tUo3V6c6bqBLWWMJUZKKcPp79cNKGBrQ/1KRKyIb2mTPooruC9hx4w2QXm17FKfmmw
-         eh3F0FZD4LFseycTQZF/n9uSMZqPRBU+oGrHj786Tx4tJSs9CWPLu9Ds6Iu0wjVGa0LU
-         MQTmmPR0ka59gBy23Q6qvq4hRs7BvqTCWGUenKwuvKl/RhDtqGxEP2zBgLStq/e+/4VW
-         dFAptn70skTjRrbIBGhG7AsqzPbMZN0IQklb2gZkFprPDWo7Il1U0/peARTjzbWAoAog
-         dJ6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9ssIX2bpuLjHtHr5+BBTQqOChORvzTDNQnsLLcvt2qg=;
-        b=xA52JBM/GRL5wQkKmCkdRRSGrsHILgb04CVfeZDz8P6R+t81NZ/TI19BffyHGQU2BI
-         W25O1P48NhipYuyZshkv16gDyvTOUuWHMWLHA44BU9vPqMhaoO/L4NdUaQBmLzpaQodr
-         M+ba9LNiGR8dOryw13TL3mwJAtguLHSAVRuutGywdDSPyeRxGz/TYU9pEPl4Wyb6rmcy
-         DqY/teP0cT64fnu6qP5gafBjYkXch0OraGTVhksOpV0AceT5RPLxFvFYVQxIzg3/WKIF
-         zXvR9Cm+g7tamzH0dHTELXyE2ZdyfVvady+O3DsFNExgMTwzadEaV1D+iYGAriywgkW0
-         HZ1w==
-X-Gm-Message-State: AFqh2koK3fa8pGmnEFXFgtPugHVvDjLF9TFkwRxcb//h7HPB9dqqrfR9
-	xXBQg053xeC2AiZlYJKQf1CKLYgrwKDezCJIdx8=
-X-Google-Smtp-Source: AMrXdXs0ZjD9l52k6wjoRYK84dhQ5fuBp/z+R2mnzmEK3FIS0kye8yaVmQ+EiNEJQKbIhhqMW3V/y85D2ea9g8InJlM=
-X-Received: by 2002:a17:906:ac2:b0:78d:dddb:3974 with SMTP id
- z2-20020a1709060ac200b0078ddddb3974mr6322536ejf.411.1673335747386; Mon, 09
- Jan 2023 23:29:07 -0800 (PST)
+X-Inumbo-ID: eee044ef-90b8-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1673335946; bh=MlYqfxn4vwPKUpewBFfsPqn045LoqxLP6nhibRvkmMQ=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=E/1qai2PiOIqbUTF+XBOHFQuXUBMbVzW1ho8Ij2gjZ27xRD1dwjXCtNrNQ4E0unkmGIUM3s8WmahRg0TmTsyf4yQMF2t1SpFRc3gh5fUOS6Mijgvqp4JcPgWC/3Uw/0puNm2BNIrF26KL/OwkwKFiwnWU29U9Or0WK1uj75QiHplwK8ho9cMZiFmmi5Jko0yavTTPJa3jHOY3KFr5sZoyLo2LY4CH4jllmRO0630p210u+u2NSTbj7atbAJAM0dseG9/9MGkWMRqwYhC37K4NB7tUvweCDC/cKsQ5Kif53rXB/aQIV5VV+B+iidUvyby/jUEV/l3ysCP3mMmsbaf3Q==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1673335946; bh=LQMlvZQo4JgVkUeUOy2EtUHA3/Ts7yg0JQfMLc1ODBG=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=beDqLG/dZStPkhBKkGVBGhI6zDoDXQyqQKA8cmNBIWiB9Omm6MFO/BIE63xINC/+2lowa2lyXFhXBVaR9pvEm45TmpGaZJlgdonwD4LggH3kdzy+ji5+M+keoV0WS0ABPIX3YR79EUq4M+Y//skWtGKY+WDiaQfImZMkUhYE4/u9U+GJImKG+0gCm8RpdraoON62pKwrfgm9j/rf/roST/Z5BypVOR2kuzaxeIaMjglqaZyoHifWYf68zNB9bDvbSSI0I4wUVy3aWM6BFF6/TRRvbX7PlMQHDv/7KJRS90ZR1J8IaSW4k+ns0Qo6uTw9NqRDtQ+3rdYPTkZ3mQjQMA==
+X-YMail-OSG: NoXoiVwVM1kCuc.PBP0ELv0IIHyBv1HK6yJ2Lb_Fz4clgpQN0YG76Zddmac7_wE
+ gpkPS9B_wOnXL8pAzvaCN.zNUKJP8cB6x0aW9l1HF1isRiT8qqQnue2kFc_lRJ5mTteg.y48E9Aq
+ GYBT29zIY7VV7kW1o32BWktJpw7WeCla6YHPvbgh.2Nn5ZM0GDr3ndaVJmE0vWlHLJrgfcuYv0.L
+ HsU2SKoU400M5oJFNdlYhMHTyroMhWjsnYeHbM1sct8bahMzUkcyaYAZmUdYkwukPMo0svsgg6AS
+ RUbq_sWRLmRSixhUP1MwuIzniBITSnImNcyCbtt_roM9ghP3bStEolgGKXTZvpztFPMo8UOaXM7Y
+ E.5StQWhJzLDg8Oip0zZG6bH3XJ8j3ECh07NkVAjkuDxR72Nt4KkTXrd2YypaW4N5lzi5uMr5F3a
+ OoZy7Qn.PZHHdPX_6vq6mnRz1tNe05lm8TBU.OcUCnonIpaztC8aXIHKgmIQA2Xiw8iVQLNtM9C2
+ 28zX41nMJXB.JNbPJ94Q6YGq.D_U5HyBArYs63x8M3FyIohVkSiAbWJrQ4jEzO.cb.UESZM5LfrX
+ alBUsclrwrmJRV1LvSJwVyglIhmMrt04YUF0LOcdtGrvX9cdqGFO4QuTVjdBTcXn7RgstJjwVfSB
+ kiJd7r6a2lWUDfgar6s7YVYwHJ0pk20R0zeVUnuwTcQsI7rSu4xS0VL2JI00vpPXsLpXoKGbKPVn
+ q_1zKTpQfq9n3D1ES9HSQD_3XuEgI3Upj123ZaCRgV1mrpalLR9NBfsUPUYSfA.L8Cl_aGa8uGxc
+ OMAPtIFDY9efAPC3Zp_HlHvWmW78HCxg4DK07Q7HvLS_BHcMm_ci3zhgXZrrle7XpagyMYLOtOsx
+ m18kjlhJSRhPB30I8i8ENOKx7j9HoarE2vq_Xl_11S4LJObtjJhuoJpIa3k19BzJqLV9tLLHNsMx
+ i_IPHj3oQzhW3Jf8xf0LNnk8JdIhEU5w07FRDDM_6VimJPwqo3E_HWpTk3yDvPQWQ.7lb0pLJlvt
+ 0sAjTrep.pQn.giv_Hmd89zC72hk_4hZ9af9oaVeyQ8dXuctLkcAQRR5x51dlSU2vPY2uPSZNt5.
+ B2kDGecbM9epAIDdLDgrDAC8haTbZn4vyYW_zrhYDyCC3VwxmiX4Fi2V6PQ.l2gXDH5x80V7NM1P
+ 3hrsXFqUgFtu_cOYiQ3a3JbIIb59LZQydW0QQ4CwQ2umXq8.0.EsR4ij1mm.2hUR9I.cHSo.IOzF
+ rOa.dFPnYnhStCVBnG1MLhouPMisnYTuBLcKcrTy0yzYRRaoBpq8dRwTOXze4njJm2wSiDxrzSfX
+ r8qk_TyNN1kB6h.cdkIwMxzFbtQF7bKp4xNdk_ECLFwq2lUZETLfTO89K1Avi1TxVGPagXHkJKLv
+ _UpNNamE48S7i58YRPeOdwCzxm831xnjrTsBF8xz5s0VSxx8NM5dV9TDI16131NsYBPY6RUeW4.b
+ eRWDNK96BUZ1R5lYze7x2F3sG7OuzXCIWbuvmzbbHBOr9lbWbdrxugDIj08qoFbFdB_38mZvxhYz
+ 93vUjhUXEosfadOst79puBRaSOm0pTTNXe2myi.RbO2jIPfF9upgFPkSUQljgmNCEYBBFFsBTrtY
+ so96vfCP71FeP5c6kevt0_FhRjUCRjGJEcU1rzxlI.jaCo6Oj6LiGF_c5s9647dm9PAVHWrePYH4
+ oNTV98kNV1CsB76YWAI8bS1Q1oLiqZVPjxjX8aCm2yn4RXc82SqNJwe2n9Z.1F2EHQ.HCUcfQmNE
+ fK5Bsw3_twAjydKfRgpHWCnCeA.eKLDwF9_KR1RP15av78qzqgq8rRZkFoTONYn6fEXJoMja8O4C
+ ItrN.NM1y72uYwIwiHH84SGjP.V0kVyYPLIrnyOngIyX5Fe3gUIaZZ4XExVwQ2KcWLR4GHiXyicB
+ TmvoTVH04sRXtrq3SXEjl4khM1tyz0xXpXONjoxQmD.JXsRgy01l8zLeowf32n7ACsGCn8nMc4LB
+ cJlSgeKNgzjTtJbidSO5tuGBlp2qARmzPYLcVavbUL3noLUPDsdEuzAYzmkPcS37ANV0hAcFsRtH
+ KJVt3WeZoDSM.MghiRdv01.NZRsLVtO148we1u6dT12SdC9QmMz8B0zza8ht383rutR9W2eY_WWK
+ s2xAYRSQp7AciLUKiNHfO9Vpe6hXALoz5N3Kh2L51YNzKvGVUeZAsuTGjd5kHt7CSqyy4arVRclg
+ -
+X-Sonic-MF: <brchuckz@aim.com>
+From: Chuck Zmudzinski <brchuckz@aol.com>
+To: anthony.perard@citrix.com
+Cc: xen-devel@lists.xenproject.org,
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	qemu-devel@nongnu.org
+Subject: [XEN PATCH v2 1/3] libxl/dm: Use "pc" machine type for Intel IGD passthrough
+Date: Tue, 10 Jan 2023 02:32:02 -0500
+Message-ID: <a38db9a2b829add5612e1bce44ae54ecd96e96b7.1673300848.git.brchuckz@aol.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1673300848.git.brchuckz@aol.com>
+References: <cover.1673300848.git.brchuckz@aol.com>
 MIME-Version: 1.0
-References: <cover.1673278109.git.oleksii.kurochko@gmail.com>
- <527727b2c9e26e6ef7714fe9a3fbe580caf1ae13.1673278109.git.oleksii.kurochko@gmail.com>
- <CAKmqyKNyRfAhyP-3uZwEf3OZEv5be4KNdGvNjUiQGu8w-vf_8g@mail.gmail.com>
-In-Reply-To: <CAKmqyKNyRfAhyP-3uZwEf3OZEv5be4KNdGvNjUiQGu8w-vf_8g@mail.gmail.com>
-From: Bobby Eshleman <bobby.eshleman@gmail.com>
-Date: Mon, 9 Jan 2023 23:28:56 -0800
-Message-ID: <CAKB00G3nVtcBppt2TJa-dFzz4TKqVT6B-1swjzkZwqsRkFxwsA@mail.gmail.com>
-Subject: Re: [PATCH v2 6/8] xen/riscv: introduce early_printk basic stuff
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Connor Davis <connojdavis@gmail.com>, Gianluca Guida <gianluca@rivosinc.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="000000000000d0230205f1e3d6f0"
+Content-Transfer-Encoding: 8bit
+Message-ID: <20230110073202.FBIw-gS3MMqBoNYNnOH4amuGQ_oYp4J7YQt2FIhEeXA@z>
 
---000000000000d0230205f1e3d6f0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The default qemu upstream "xenfv" machine type that is used when an HVM
+guest is configured for Intel IGD passthrough assigns slot 2 to the
+xen platform pci device. It is a requirement that slot 2 be assigned to
+the Intel IGD when it is passed through as the primary graphics adapter.
+Using the "pc" machine type instead of the "xenfv" machine type in that
+case makes it possible for qemu upstream to assign slot 2 to the IGD.
 
-On Mon, Jan 9, 2023 at 4:28 PM Alistair Francis <alistair23@gmail.com>
-wrote:
+Using the qemu "pc" machine and adding the xen platform device on the
+qemu command line instead of using the qemu "xenfv" machine which
+automatically adds the xen platform device earlier in the guest creation
+process does come with some degredation of startup performance: startup
+is slower and some vga drivers in use during early boot are unable to
+display the screen at the native resolution of the monitor, but once
+the guest operating system (Windows or Linux) is fully loaded, there
+is no noticeable difference in the performance of the guest when using
+the "pc" machine type instead of the "xenfv" machine type.
 
-> On Tue, Jan 10, 2023 at 1:47 AM Oleksii Kurochko
-> <oleksii.kurochko@gmail.com> wrote:
-> >
-> > The patch introduces a basic stuff of early_printk functionality
-> > which will be enough to print 'hello from C environment".
-> > early_printk() function was changed in comparison with original as
-> > common isn't being built now so there is no vscnprintf.
-> >
-> > Because printk() relies on a serial driver (like the ns16550 driver)
-> > and drivers require working virtual memory (ioremap()) there is not
-> > print functionality early in Xen boot.
-> >
-> > This commit adds early printk implementation built on the putc SBI call=
-.
-> >
-> > As sbi_console_putchar() is being already planned for deprecation
-> > it is used temporary now and will be removed or reworked after
-> > real uart will be ready.
->
-> There was a discussion to add a new SBI putchar replacement. It
-> doesn't seem to be completed yet, but there might be an SBI
-> replacement for this in the future as well.
->
-> Alistair
->
+With this patch, libxl continues to use default "xenfv" machine type
+with the default settings of xen_platform_pci enabled and igd
+gfx_passthru disabled. The patch only affects machines configured with
+gfx_passthru enabled.
 
-Are you referring to the Debug Console Extension (EID #0x4442434E "DBCN")=
-=E2=80=9D?
+Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+---
+Reviewers might find this patch easier to review by looking at the
+resulting code in the patched file instead of looking at the diff because
+it is hard to follow the logical flow of the resulting code in the diff
+because the patch moves the check for igd gfx_passthru before the check
+for disabling the xen platform device. That change was made because it
+results in a more simplified logical flow in the resulting code.
 
-https://lists.riscv.org/g/tech-prs/topic/96051183#84
+v2: No changes to this patch since v1
 
-Best,
-Bobby
+ tools/libs/light/libxl_dm.c | 37 ++++++++++++++++++++-----------------
+ 1 file changed, 20 insertions(+), 17 deletions(-)
 
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index fc264a3a13..2048815611 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -1809,7 +1809,26 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+             flexarray_append(dm_args, b_info->extra_pv[i]);
+         break;
+     case LIBXL_DOMAIN_TYPE_HVM:
+-        if (!libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
++        if (libxl_defbool_val(b_info->u.hvm.gfx_passthru)) {
++            enum libxl_gfx_passthru_kind gfx_passthru_kind =
++                            libxl__detect_gfx_passthru_kind(gc, guest_config);
++            switch (gfx_passthru_kind) {
++            case LIBXL_GFX_PASSTHRU_KIND_IGD:
++                /*
++                 * Using the machine "pc" because with the default machine "xenfv"
++                 * the xen-platform device will be assigned to slot 2, but with
++                 * GFX_PASSTHRU_KIND_IGD, slot 2 needs to be reserved for the Intel IGD.
++                 */
++                machinearg = libxl__strdup(gc, "pc,accel=xen,suppress-vmdesc=on,igd-passthru=on");
++                break;
++            case LIBXL_GFX_PASSTHRU_KIND_DEFAULT:
++                LOGD(ERROR, guest_domid, "unable to detect required gfx_passthru_kind");
++                return ERROR_FAIL;
++            default:
++                LOGD(ERROR, guest_domid, "invalid value for gfx_passthru_kind");
++                return ERROR_INVAL;
++            }
++        } else if (!libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
+             /* Switching here to the machine "pc" which does not add
+              * the xen-platform device instead of the default "xenfv" machine.
+              */
+@@ -1831,22 +1850,6 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+             }
+         }
+ 
+-        if (libxl_defbool_val(b_info->u.hvm.gfx_passthru)) {
+-            enum libxl_gfx_passthru_kind gfx_passthru_kind =
+-                            libxl__detect_gfx_passthru_kind(gc, guest_config);
+-            switch (gfx_passthru_kind) {
+-            case LIBXL_GFX_PASSTHRU_KIND_IGD:
+-                machinearg = GCSPRINTF("%s,igd-passthru=on", machinearg);
+-                break;
+-            case LIBXL_GFX_PASSTHRU_KIND_DEFAULT:
+-                LOGD(ERROR, guest_domid, "unable to detect required gfx_passthru_kind");
+-                return ERROR_FAIL;
+-            default:
+-                LOGD(ERROR, guest_domid, "invalid value for gfx_passthru_kind");
+-                return ERROR_INVAL;
+-            }
+-        }
+-
+         flexarray_append(dm_args, machinearg);
+         for (i = 0; b_info->extra_hvm && b_info->extra_hvm[i] != NULL; i++)
+             flexarray_append(dm_args, b_info->extra_hvm[i]);
+-- 
+2.39.0
 
-> >
-> > Signed-off-by: Bobby Eshleman <bobby.eshleman@gmail.com>
-> > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> > ---
-> > Changes in V2:
-> >     - add license to early_printk.c
-> >     - add signed-off-by Bobby
-> >     - add RISCV_32 to Kconfig.debug to EARLY_PRINTK config
-> >     - update commit message
-> >     - order the files alphabetically in Makefile
-> > ---
-> >  xen/arch/riscv/Kconfig.debug              |  7 +++++
-> >  xen/arch/riscv/Makefile                   |  1 +
-> >  xen/arch/riscv/early_printk.c             | 33 +++++++++++++++++++++++
-> >  xen/arch/riscv/include/asm/early_printk.h | 12 +++++++++
-> >  4 files changed, 53 insertions(+)
-> >  create mode 100644 xen/arch/riscv/early_printk.c
-> >  create mode 100644 xen/arch/riscv/include/asm/early_printk.h
-> >
-> > diff --git a/xen/arch/riscv/Kconfig.debug b/xen/arch/riscv/Kconfig.debu=
-g
-> > index e69de29bb2..6ba0bd1e5a 100644
-> > --- a/xen/arch/riscv/Kconfig.debug
-> > +++ b/xen/arch/riscv/Kconfig.debug
-> > @@ -0,0 +1,7 @@
-> > +config EARLY_PRINTK
-> > +    bool "Enable early printk config"
-> > +    default DEBUG
-> > +    depends on RISCV_64 || RISCV_32
-> > +    help
-> > +
-> > +      Enables early printk debug messages
-> > diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-> > index fd916e1004..1a4f1a6015 100644
-> > --- a/xen/arch/riscv/Makefile
-> > +++ b/xen/arch/riscv/Makefile
-> > @@ -1,3 +1,4 @@
-> > +obj-$(CONFIG_EARLY_PRINTK) +=3D early_printk.o
-> >  obj-$(CONFIG_RISCV_64) +=3D riscv64/
-> >  obj-y +=3D sbi.o
-> >  obj-y +=3D setup.o
-> > diff --git a/xen/arch/riscv/early_printk.c
-> b/xen/arch/riscv/early_printk.c
-> > new file mode 100644
-> > index 0000000000..88da5169ed
-> > --- /dev/null
-> > +++ b/xen/arch/riscv/early_printk.c
-> > @@ -0,0 +1,33 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 */
-> > +/*
-> > + * RISC-V early printk using SBI
-> > + *
-> > + * Copyright (C) 2021 Bobby Eshleman <bobbyeshleman@gmail.com>
-> > + */
-> > +#include <asm/sbi.h>
-> > +#include <asm/early_printk.h>
-> > +
-> > +/*
-> > + * TODO:
-> > + *   sbi_console_putchar is already planned for deprication
-> > + *   so it should be reworked to use UART directly.
-> > +*/
-> > +void early_puts(const char *s, size_t nr)
-> > +{
-> > +    while ( nr-- > 0 )
-> > +    {
-> > +        if (*s =3D=3D '\n')
-> > +            sbi_console_putchar('\r');
-> > +        sbi_console_putchar(*s);
-> > +        s++;
-> > +    }
-> > +}
-> > +
-> > +void early_printk(const char *str)
-> > +{
-> > +    while (*str)
-> > +    {
-> > +        early_puts(str, 1);
-> > +        str++;
-> > +    }
-> > +}
-> > diff --git a/xen/arch/riscv/include/asm/early_printk.h
-> b/xen/arch/riscv/include/asm/early_printk.h
-> > new file mode 100644
-> > index 0000000000..05106e160d
-> > --- /dev/null
-> > +++ b/xen/arch/riscv/include/asm/early_printk.h
-> > @@ -0,0 +1,12 @@
-> > +#ifndef __EARLY_PRINTK_H__
-> > +#define __EARLY_PRINTK_H__
-> > +
-> > +#include <xen/early_printk.h>
-> > +
-> > +#ifdef CONFIG_EARLY_PRINTK
-> > +void early_printk(const char *str);
-> > +#else
-> > +static inline void early_printk(const char *s) {};
-> > +#endif
-> > +
-> > +#endif /* __EARLY_PRINTK_H__ */
-> > --
-> > 2.38.1
-> >
-> >
->
-
---000000000000d0230205f1e3d6f0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div style=3D"background-color:rgba(0,0,0,0)!important;borde=
-r-color:rgb(0,0,0)!important"><br><div class=3D"gmail_quote" style=3D"backg=
-round-color:rgba(0,0,0,0)!important;border-color:rgb(0,0,0)!important"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan 9, 2023 at 4:28 PM Alistair F=
-rancis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1e=
-x;border-left-color:rgb(204,204,204)">On Tue, Jan 10, 2023 at 1:47 AM Oleks=
-ii Kurochko<br>
-&lt;<a href=3D"mailto:oleksii.kurochko@gmail.com" target=3D"_blank">oleksii=
-.kurochko@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; The patch introduces a basic stuff of early_printk functionality<br>
-&gt; which will be enough to print &#39;hello from C environment&quot;.<br>
-&gt; early_printk() function was changed in comparison with original as<br>
-&gt; common isn&#39;t being built now so there is no vscnprintf.<br>
-&gt;<br>
-&gt; Because printk() relies on a serial driver (like the ns16550 driver)<b=
-r>
-&gt; and drivers require working virtual memory (ioremap()) there is not<br=
->
-&gt; print functionality early in Xen boot.<br>
-&gt;<br>
-&gt; This commit adds early printk implementation built on the putc SBI cal=
-l.<br>
-&gt;<br>
-&gt; As sbi_console_putchar() is being already planned for deprecation<br>
-&gt; it is used temporary now and will be removed or reworked after<br>
-&gt; real uart will be ready.<br>
-<br>
-There was a discussion to add a new SBI putchar replacement. It<br>
-doesn&#39;t seem to be completed yet, but there might be an SBI<br>
-replacement for this in the future as well.<br>
-<br>
-Alistair<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto" style=3D"backgro=
-und-color:rgba(0,0,0,0)!important;border-color:rgb(0,0,0)!important"><span =
-style=3D"background-color:rgba(0,0,0,0);border-color:rgb(49,49,49)">Are you=
- referring to the=C2=A0</span><span style=3D"word-spacing:1px;color:rgb(49,=
-49,49)">Debug Console Extension (EID #0x4442434E &quot;DBCN&quot;)=E2=80=9D=
-?</span></div><div dir=3D"auto" style=3D"background-color:rgba(0,0,0,0);bor=
-der-color:rgb(0,0,0)"><font style=3D"color:rgb(49,49,49)"><span style=3D"wo=
-rd-spacing:1px"><br></span></font><span style=3D"word-spacing:1px;color:rgb=
-(49,49,49)"><div><a href=3D"https://lists.riscv.org/g/tech-prs/topic/960511=
-83#84">https://lists.riscv.org/g/tech-prs/topic/96051183#84</a></div><div d=
-ir=3D"auto"><br></div><div dir=3D"auto">Best,</div><div dir=3D"auto">Bobby<=
-/div></span></div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
-yle:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"><br>
-&gt;<br>
-&gt; Signed-off-by: Bobby Eshleman &lt;<a href=3D"mailto:bobby.eshleman@gma=
-il.com" target=3D"_blank">bobby.eshleman@gmail.com</a>&gt;<br>
-&gt; Signed-off-by: Oleksii Kurochko &lt;<a href=3D"mailto:oleksii.kurochko=
-@gmail.com" target=3D"_blank">oleksii.kurochko@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt; Changes in V2:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- add license to early_printk.c<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- add signed-off-by Bobby<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- add RISCV_32 to Kconfig.debug to EARLY_PRINTK con=
-fig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- update commit message<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- order the files alphabetically in Makefile<br>
-&gt; ---<br>
-&gt;=C2=A0 xen/arch/riscv/Kconfig.debug=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 7 +++++<br>
-&gt;=C2=A0 xen/arch/riscv/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
-&gt;=C2=A0 xen/arch/riscv/early_printk.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0| 33 +++++++++++++++++++++++<br>
-&gt;=C2=A0 xen/arch/riscv/include/asm/early_printk.h | 12 +++++++++<br>
-&gt;=C2=A0 4 files changed, 53 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 xen/arch/riscv/early_printk.c<br>
-&gt;=C2=A0 create mode 100644 xen/arch/riscv/include/asm/early_printk.h<br>
-&gt;<br>
-&gt; diff --git a/xen/arch/riscv/Kconfig.debug b/xen/arch/riscv/Kconfig.deb=
-ug<br>
-&gt; index e69de29bb2..6ba0bd1e5a 100644<br>
-&gt; --- a/xen/arch/riscv/Kconfig.debug<br>
-&gt; +++ b/xen/arch/riscv/Kconfig.debug<br>
-&gt; @@ -0,0 +1,7 @@<br>
-&gt; +config EARLY_PRINTK<br>
-&gt; +=C2=A0 =C2=A0 bool &quot;Enable early printk config&quot;<br>
-&gt; +=C2=A0 =C2=A0 default DEBUG<br>
-&gt; +=C2=A0 =C2=A0 depends on RISCV_64 || RISCV_32<br>
-&gt; +=C2=A0 =C2=A0 help<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 Enables early printk debug messages<br>
-&gt; diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile<br>
-&gt; index fd916e1004..1a4f1a6015 100644<br>
-&gt; --- a/xen/arch/riscv/Makefile<br>
-&gt; +++ b/xen/arch/riscv/Makefile<br>
-&gt; @@ -1,3 +1,4 @@<br>
-&gt; +obj-$(CONFIG_EARLY_PRINTK) +=3D early_printk.o<br>
-&gt;=C2=A0 obj-$(CONFIG_RISCV_64) +=3D riscv64/<br>
-&gt;=C2=A0 obj-y +=3D sbi.o<br>
-&gt;=C2=A0 obj-y +=3D setup.o<br>
-&gt; diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_prin=
-tk.c<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..88da5169ed<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/xen/arch/riscv/early_printk.c<br>
-&gt; @@ -0,0 +1,33 @@<br>
-&gt; +/* SPDX-License-Identifier: GPL-2.0 */<br>
-&gt; +/*<br>
-&gt; + * RISC-V early printk using SBI<br>
-&gt; + *<br>
-&gt; + * Copyright (C) 2021 Bobby Eshleman &lt;<a href=3D"mailto:bobbyeshle=
-man@gmail.com" target=3D"_blank">bobbyeshleman@gmail.com</a>&gt;<br>
-&gt; + */<br>
-&gt; +#include &lt;asm/sbi.h&gt;<br>
-&gt; +#include &lt;asm/early_printk.h&gt;<br>
-&gt; +<br>
-&gt; +/*<br>
-&gt; + * TODO:<br>
-&gt; + *=C2=A0 =C2=A0sbi_console_putchar is already planned for deprication=
-<br>
-&gt; + *=C2=A0 =C2=A0so it should be reworked to use UART directly.<br>
-&gt; +*/<br>
-&gt; +void early_puts(const char *s, size_t nr)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 while ( nr-- &gt; 0 )<br>
-&gt; +=C2=A0 =C2=A0 {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*s =3D=3D &#39;\n&#39;)<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sbi_console_putchar(&#39;\r=
-&#39;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 sbi_console_putchar(*s);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 s++;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +void early_printk(const char *str)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 while (*str)<br>
-&gt; +=C2=A0 =C2=A0 {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 early_puts(str, 1);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 str++;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +}<br>
-&gt; diff --git a/xen/arch/riscv/include/asm/early_printk.h b/xen/arch/risc=
-v/include/asm/early_printk.h<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..05106e160d<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/xen/arch/riscv/include/asm/early_printk.h<br>
-&gt; @@ -0,0 +1,12 @@<br>
-&gt; +#ifndef __EARLY_PRINTK_H__<br>
-&gt; +#define __EARLY_PRINTK_H__<br>
-&gt; +<br>
-&gt; +#include &lt;xen/early_printk.h&gt;<br>
-&gt; +<br>
-&gt; +#ifdef CONFIG_EARLY_PRINTK<br>
-&gt; +void early_printk(const char *str);<br>
-&gt; +#else<br>
-&gt; +static inline void early_printk(const char *s) {};<br>
-&gt; +#endif<br>
-&gt; +<br>
-&gt; +#endif /* __EARLY_PRINTK_H__ */<br>
-&gt; --<br>
-&gt; 2.38.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div></div>
-
---000000000000d0230205f1e3d6f0--
 
