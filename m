@@ -4,36 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D043CC678D7
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 15:18:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474743.736064 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612A6C46467
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 15:25:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.474783.736129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFGO9-0005Re-7W; Tue, 10 Jan 2023 15:18:09 +0000
+	id 1pFGV9-0001mX-MZ; Tue, 10 Jan 2023 15:25:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474743.736064; Tue, 10 Jan 2023 15:18:09 +0000
+Received: by outflank-mailman (output) from mailman id 474783.736129; Tue, 10 Jan 2023 15:25:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFGO9-0005Qw-2b; Tue, 10 Jan 2023 15:18:09 +0000
-Received: by outflank-mailman (input) for mailman id 474743;
- Tue, 10 Jan 2023 15:18:08 +0000
+	id 1pFGV9-0001mQ-IP; Tue, 10 Jan 2023 15:25:23 +0000
+Received: by outflank-mailman (input) for mailman id 474783;
+ Tue, 10 Jan 2023 15:25:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ek+I=5H=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pFGO8-0005Fu-CU
- for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 15:18:08 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fba76ff9-90f9-11ed-b8d0-410ff93cb8f0;
- Tue, 10 Jan 2023 16:18:06 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id m6so18937020lfj.11
- for <xen-devel@lists.xenproject.org>; Tue, 10 Jan 2023 07:18:06 -0800 (PST)
-Received: from fedora.. ([195.234.76.149]) by smtp.gmail.com with ESMTPSA id
- y19-20020a0565123f1300b00498fc3d4cfdsm2203396lfa.189.2023.01.10.07.18.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jan 2023 07:18:05 -0800 (PST)
+ <SRS0=7Y9r=5H=citrix.com=prvs=367aabe44=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1pFGPK-0005Fu-9l
+ for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 15:19:22 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2648f661-90fa-11ed-b8d0-410ff93cb8f0;
+ Tue, 10 Jan 2023 16:19:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,97 +38,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fba76ff9-90f9-11ed-b8d0-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GDdmAaTmfRPA7/hoydJZPcOqFW6WO2Afa2sA0FosFio=;
-        b=NEM8j9tyoYg5poO13W2TCJj3Us3bcZztoSFaeK51xO9v2vjzt/4x/SAKmRlJDzpp6J
-         wD7Ws/2wnbVb8EYWs1Hn1RE9SPTb/mKzgWwvtZs814huxoBRsBgBvQsrrjxYUAXfzb4t
-         o028CXIN+4Ofa4UM8B6PhJFmnIme18puLhWbYEmOMHbR97mTwtrmkBRIczssJEFhRO2s
-         0QqzKSA+1r+qYq0W16LsB8Ou0hJ7lkXdjb9dYGdV9QBc319Uzz7TglhmqKn5z8gpc/t1
-         FQKkFXRiRlWxpcCurzLJxbIkeUxR15z9QtlmUCA1lRKihUMUBoVkGSPyWBhO/oMZWJPw
-         itXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GDdmAaTmfRPA7/hoydJZPcOqFW6WO2Afa2sA0FosFio=;
-        b=bNUBWrFyWg1L0KawxXVYPn8CPmT6v89FiA1Q+1sqgIiuiAt3L7HMhbt+jKJdi4Sn86
-         YqXRWiWKaFKtJZMXX1P860x+bufJfwq1B/NbtK6knXsOmjhPeIGjYQhq7RXLSsygQIEp
-         b9ypry9Mc9qD1aDS8oRiaCGwsfzR5oH5JvaKCVG2xmjSdPeJQO82c0rVNN6l8kyz0DB5
-         kFCFLfN78JoZPCSikzyQKn4kfXdzzAoq8noCZe48mHYX0dUDwJS6rKOPzJTmGSvuMFZ3
-         4jV6euxS900YAQXDjEOIXJYLITbaaWUDi/OefFvWrz+CemExP1xfiozBqDRPwxPpSmHt
-         1qYQ==
-X-Gm-Message-State: AFqh2kq7p4NqOS7OPN62x3U7V3r3ob3j6ELD/lC5Irz1iZuTFJIztu6m
-	Mkk71k9451NlZtlWHvOX4h33pwhv5mb6wj6T
-X-Google-Smtp-Source: AMrXdXvWG7xcUGOUpgh3YFTt+CPFUf7TwcKA+mL7/QGv6LAVJKwcJ5XHoU93PSXd60PvcRq90rS7Bw==
-X-Received: by 2002:ac2:5dce:0:b0:4b5:b988:b409 with SMTP id x14-20020ac25dce000000b004b5b988b409mr18504737lfq.21.1673363885739;
-        Tue, 10 Jan 2023 07:18:05 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v3 2/6] xen/riscv: introduce asm/types.h header file
-Date: Tue, 10 Jan 2023 17:17:55 +0200
-Message-Id: <ca2674739cfa71cae0bf084a7b471ad4518026d3.1673362493.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <cover.1673362493.git.oleksii.kurochko@gmail.com>
-References: <cover.1673362493.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 2648f661-90fa-11ed-b8d0-410ff93cb8f0
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1673363960;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=1vxXrw+ay3HT99goYjfDAu2oDeD/VzXJvgzuA0z439k=;
+  b=BFjmJjSMMtyf2feYHUvQz3HVeZR8VZDgt75a1kIiXvkjmXLdAsSpEHGB
+   DicRcv+pzhLsE76AzSAtRbldUGJXTMlXiBh/TNqEGzihp4b3fYlEhuQKw
+   sFuylNQhPT6kNkKWq7t5/iAV5g0yZzUrj8rNnxr3Buo7Zgiq3OFiTZZcu
+   k=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 92366405
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:CRPCiaqOfry98Q54OLmzdnqhhyNeBmIeZRIvgKrLsJaIsI4StFCzt
+ garIBmEaf3ZZjH0KdpxOtvj/U4DuJ7Ry4cxHAZrrXg9ESIaopuZCYyVIHmrMnLJJKUvbq7FA
+ +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpAFc+E0/NsDo788YhmIlknNOlNA2Ev
+ NL2sqX3NUSsnjV5KQr40YrawP9UlKm06W1wUmAWP6gR5weHziFNV/rzGInqR5fGatgMdgKFb
+ 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
+ OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
+ RAXAGkiTw6bnufu+rT4WNllpMMNd86xGIxK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
+ eJAN2ApNk6ZJUQSZBFHU/rSn8/x7pX7WzRetFKSo7tx+2XJxRZ9+LPsLMDUapqBQsA9ckOw9
+ zidoTqlWkxy2Nq32AGU3Cur2df0nCbVCbMWGbyc2aNRuQjGroAUIEJPDgbqyRWjsWahX/pPJ
+ kpS/TAhxYAi+UruQtTjUhmQpH+fogVaS9dWC/c96gyG1uzT+QnxO4QfZmcfMpp87pZwHGF0k
+ A/S9z/0OdBxmOS6aGyF77LMlzXxKxgcD2gsPiheaQRQtrEPv7oPph7IS99iFou8gdv0BSz8z
+ li2kcQuu1kApZVVjvvmpDgrlxrp/8GUFVBtum07S0r/tmtEiJiZi5tEALQxxdJJN86nQ1aIp
+ xDocODOvblVXflheMFgKdjh/Y1FBd7fa1UwYnY1RfHNEghBHFb9Fb28GBkkeC9U3j8sIFcFm
+ nP7twJL/4N0N3C3d6JxaI/ZI510kvO6RYW9Ca2JN4Amjn1NmOmvpnkGiam4hj6FraTRuftnZ
+ cfznTiEUR729piLPBLpHrxAgNfHNwg1xH/JRICT8vhU+eP2WZJhcp9caAHmRrlgvMu5TPD9r
+ 4432z2il08OD4UTo0D/reYuELz9BSFnXsir9pUKL7brz8gPMDhJNsI9CIgJI+RN95m5XM+Sl
+ p1hcie0EGbCuEA=
+IronPort-HdrOrdr: A9a23:dJU/Y634c0bgCnZ56wzLpwqjBAkkLtp133Aq2lEZdPWaSK2lfq
+ eV7ZImPH7P+VEssRQb8+xoV5PsfZqxz/JICMwqTNSftOePghrVEGgg1/qe/9XYcxeOidK1rJ
+ 0QDZSWaueRMbEKt7ef3ODiKadY/DDvysnB7ts2jU0dLz2CDZsO0+4TMHf/LqQZfmd77LMCZe
+ uhz/sCiTq8WGgdKv+2DmMCWIH41qf2vaOjTx4aJgItrDKDhzOw6LL8DnGjr2wjegIK77c+0H
+ TP1zf07KW7s/2911v12mLJ445N8eGRuudrNYijitU1Nj6psAquaYh7MofyxAwInA==
+X-IronPort-AV: E=Sophos;i="5.96,315,1665460800"; 
+   d="scan'208";a="92366405"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH] tools: Fix build with recent QEMU, use "--enable-trace-backends"
+Date: Tue, 10 Jan 2023 15:18:54 +0000
+Message-ID: <20230110151854.50746-1-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V3:
-    - Nothing changed
----
-Changes in V2:
-    - Remove unneeded now types from <asm/types.h>
----
- xen/arch/riscv/include/asm/types.h | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/types.h
+The configure option "--enable-trace-backend" isn't accepted anymore
+and we should use "--enable-trace-backends" instead which was
+introduce in 2014 and allow multiple backends.
 
-diff --git a/xen/arch/riscv/include/asm/types.h b/xen/arch/riscv/include/asm/types.h
-new file mode 100644
-index 0000000000..fbe352ef20
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/types.h
-@@ -0,0 +1,22 @@
-+#ifndef __RISCV_TYPES_H__
-+#define __RISCV_TYPES_H__
-+
-+#ifndef __ASSEMBLY__
-+
-+#if defined(__SIZE_TYPE__)
-+typedef __SIZE_TYPE__ size_t;
-+#else
-+typedef unsigned long size_t;
-+#endif
-+
-+#endif /* __ASSEMBLY__ */
-+
-+#endif /* __RISCV_TYPES_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+"--enable-trace-backends" was introduced by:
+    5b808275f3bb ("trace: Multi-backend tracing")
+The backward compatible option "--enable-trace-backend" is removed by
+    10229ec3b0ff ("configure: remove backwards-compatibility and obsolete options")
+
+As we already use ./configure options that wouldn't be accepted by
+older version of QEMU's configure, we will simply use the new spelling
+for the option and avoid trying to detect which spelling to use.
+
+We already make use if "--firmwarepath=" which was introduced by
+    3d5eecab4a5a ("Add --firmwarepath to configure")
+which already include the new spelling for "--enable-trace-backends".
+
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/Makefile b/tools/Makefile
+index 9e28027835..4906fdbc23 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -218,9 +218,9 @@ subdir-all-qemu-xen-dir: qemu-xen-dir-find
+ 	mkdir -p qemu-xen-build; \
+ 	cd qemu-xen-build; \
+ 	if $$source/scripts/tracetool.py --check-backend --backend log ; then \
+-		enable_trace_backend='--enable-trace-backend=log'; \
++		enable_trace_backend="--enable-trace-backends=log"; \
+ 	elif $$source/scripts/tracetool.py --check-backend --backend stderr ; then \
+-		enable_trace_backend='--enable-trace-backend=stderr'; \
++		enable_trace_backend='--enable-trace-backends=stderr'; \
+ 	else \
+ 		enable_trace_backend='' ; \
+ 	fi ; \
 -- 
-2.38.1
+Anthony PERARD
 
 
