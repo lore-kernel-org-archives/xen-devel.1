@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D683C678D6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B68DAC678D7
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Jan 2023 17:19:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.474880.736344 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.474882.736363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFIH8-00054l-8N; Tue, 10 Jan 2023 17:19:02 +0000
+	id 1pFIHA-0005XK-6d; Tue, 10 Jan 2023 17:19:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 474880.736344; Tue, 10 Jan 2023 17:19:02 +0000
+Received: by outflank-mailman (output) from mailman id 474882.736363; Tue, 10 Jan 2023 17:19:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFIH8-00054T-1o; Tue, 10 Jan 2023 17:19:02 +0000
-Received: by outflank-mailman (input) for mailman id 474880;
- Tue, 10 Jan 2023 17:19:00 +0000
+	id 1pFIH9-0005VV-UW; Tue, 10 Jan 2023 17:19:03 +0000
+Received: by outflank-mailman (input) for mailman id 474882;
+ Tue, 10 Jan 2023 17:19:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dQxz=5H=citrix.com=prvs=367c7493a=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pFIH5-0003S0-QM
- for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 17:18:59 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc27791f-910a-11ed-91b6-6bf2151ebd3b;
- Tue, 10 Jan 2023 18:18:56 +0100 (CET)
+ id 1pFIH7-0003S0-Qg
+ for xen-devel@lists.xenproject.org; Tue, 10 Jan 2023 17:19:01 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dc65418a-910a-11ed-91b6-6bf2151ebd3b;
+ Tue, 10 Jan 2023 18:18:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc27791f-910a-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: dc65418a-910a-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1673371136;
+  d=citrix.com; s=securemail; t=1673371137;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=nq9rxCSKOSFBwm6aWpKwYZFwQDRPg+/dlW9R5ZTrDnU=;
-  b=f3zU8CdTxfe1VDbWjgv1M/n1ISXt4fe0NTFDgM9gE5MStm3U/n75NAwu
-   uYYujmpeJKHSQpshSWyrRt1PFYzxKFj0CRZdUlsoOzJf6dIdqm8OWsFlP
-   ydJwQF+39MnP+dkfs3U7e+cqLulfWC5VDhEYVDmJ9QZMTzzcqMc3hUDBc
-   A=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=C9gSfgX+9i+r0YwgaULSxlIhX07TJ2xDDOE7SZdYeBY=;
+  b=NcvoAQWciyRAbIkLgnVc9iNEg66rZ8SSLjF+pZfL9Jrh7hkPNp6lxqUY
+   bYP+y1xr8nUp/gEAkT41lPMFLhjhROGEj1HDBlIs6O1msHSW/mE//WDif
+   MLY3PPmyM3n7ftk0GMRlrPawHgfYBEMU2+Wc/Ao0xPPGmMUFbfiFRf1n9
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 90908188
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 91967753
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:58OJS6qHUup8gnBYIg57y4Gp9bdeBmIxZRIvgKrLsJaIsI4StFCzt
- garIBmHOK2LNjDxc4wkYNm2oB8Dv8CGzYIxTAc5/HsxES4Qp5uZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpAFc+E0/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKm06W1wUmAWP6gR5weHziFNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXADoqVkCypc3s+72Ed7FGqdocF9S0EapK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFHU/rSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw9
- zqXpzSgUkFy2Nq3kDmB0H+jmLD2hirZBN09C562yuJRjwjGroAUIEJPDgbqyRWjsWahX/pPJ
- kpS/TAhxYAx+VKqSJ/hXhS+iH+CohMYHdFXFoUS+AyLj6bZ/QudLmwFVSJaLswrstcsQj4n3
- UPPmMnmbRRNmrCITXOW9p+PsCi/fyMSKAc/iTQsFFVfpYO5+cdq00yJHo0L/LOJYsPdExbIk
- wGog3IFiIou1eQkyZqA4A/qqmf5znTWdTId6gLSV2Ojywp2Yo+5eoClgWTmAeZ8wJWxFQfY4
- iVd8ySKxKVXVMzWynTRKAkYNOvxj8tpJgEwlrKG83MJ0z22s0CucolLiN2VDBc4a51UEdMFj
- aK6hO+w2HOxFCHxBUOUS9jrYyjP8UQHPYqNaxwsRoASCqWdjSfelM2UWWae3nr2jG8nmrwlN
- JGQfK6EVChFUv43nWLpGrpEi9fHIxzSI0uJHfgXKDz+j9KjiIO9E+9ZYDNikMhlhE97nOkl2
- 4kGbJbbo/mueOb/fjPW4eYuwaMidBAG6WTNg5UPLIare1M2cFzN/teNmdvNjaQ5xfUK/goJl
- 1nhMnJlJK3X3iGbeFTbNy09M9sCn/9X9BoGAMDlBn7ws1BLXGplxPl3m0cfFVX/yNFe8A==
-IronPort-HdrOrdr: A9a23:ZLPzHar/LmCAuSlV/CUVsGkaV5rveYIsimQD101hICG9Evb0qy
- nOpoV/6faQslwssR4b9uxoVJPvfZq+z+8W3WByB9eftWDd0QPFEGgL1+DfKlbbak7DH4BmtJ
- uJc8JFeafN5VoRt7eG3OFveexQvOVu88qT9JjjJ28Gd3APV0n5hT0JcjpyFCdNNW57LKt8Lr
- WwzOxdqQGtfHwGB/7LfUXsD4D41rv2fIuNW29+OyIa
+IronPort-Data: A9a23:YwnKM6zuo4bG75SfPt16t+ckxirEfRIJ4+MujC+fZmUNrF6WrkUPz
+ mRKUWzXPK2MajSnet0lYY7k8ktS6MDUxoNjG1ZvqCAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTbaeYUidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw//F+U0HUMja4mtC5QRnPKgT5zcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KW1y8
+ 985EjkAUhfdhPm38ZGfYM9Fpct2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKQOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiFJwEwBnH+
+ zmuE2LRWw9HLfnHxCK8o1mR3/bFsgy8A49CG+jtnhJtqALKnTFCYPEMbnOkpdGph0j4XMhQQ
+ 2QE9yxroaUs+UiDStjmQwb+sHOCpgQbWddbD6s98g7l4oj+7hudB2MEZiVcc9Fgv8gzLQHGz
+ XfQwYmvX2Y29uTIFzTNrd94sA9eJwAZEWkhRBUNQDcCvdr4obAQqjjpZ/VsRfvdYsLOJRn8x
+ DWDrS4bjroVjNIW26jTwW0rkw5AtbCSEFdru1y/snaNq1ogOdX7P9DABU3zt64oEWqPcrWWU
+ JHoceC65ftGM5yCnTflrA4lTODwvKbt3NExbDdS83gdG9aFoSXLkWN4umsWyKJV3iEsJ1fUj
+ Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMcqLl/WpH4zOBfKt4wIrKTKuftnU
+ Xt8WZ/yZUv29Iw9lGbmLwvj+eNDKt8CKZP7GsmgkkXPPUu2b3+JU7YVWGZinchghJ5oVD79q
+ o4FX+PTkkU3bQELSnWPmWLlBQxQfCdT6FGfg5A/S9Nv1SI9RD1wWq6MnO16E2Gn9owM/tr1E
+ riGchcw4DLCabfvcG1mtlgLhGvTYKtC
+IronPort-HdrOrdr: A9a23:H2/ClqFyTJLFRUOopLqELMeALOsnbusQ8zAXPiBKJCC9E/bo8v
+ xG+c5w6faaslkssR0b9+xoW5PwI080l6QU3WB5B97LMDUO0FHCEGgI1/qA/9SPIUzDHu4279
+ YbT0B9YueAcGSTW6zBkXWF+9VL+qj5zEix792uq0uE1WtRGtldBwESMHf9LmRGADNoKLAeD5
+ Sm6s9Ot1ObCA8qhpTSPAhiYwDbzee77a7bXQ==
 X-IronPort-AV: E=Sophos;i="5.96,315,1665460800"; 
-   d="scan'208";a="90908188"
+   d="scan'208";a="91967753"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH v2 5/8] x86/hvm: Context switch MSR_PKRS
-Date: Tue, 10 Jan 2023 17:18:42 +0000
-Message-ID: <20230110171845.20542-6-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 8/8] x86/hvm: Support PKS for HAP guests
+Date: Tue, 10 Jan 2023 17:18:45 +0000
+Message-ID: <20230110171845.20542-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20230110171845.20542-1-andrew.cooper3@citrix.com>
 References: <20230110171845.20542-1-andrew.cooper3@citrix.com>
@@ -93,231 +92,75 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Under PKS, MSR_PKRS is available and based on the CPUID policy alone, and
-usable independently of CR4.PKS.  See the large comment in prot-key.h for
-details of the context switching arrangement.
+With all infrastructure in place, advertise the PKS CPUID bit to HAP guests,
+and let them set CR4.PKS.
 
-Use WRMSRNS right away, as we don't care about serialsing properties for
-context switching this MSR.
+Experiment with a tweak to the layout of hvm_cr4_guest_valid_bits() so future
+additions will be just a single added line.
 
-Sanitise MSR_PKRS on boot.  In anticipation of wanting to use PKS for Xen in
-the future, arrange for the sanitisation to occur prior to potentially setting
-CR4.PKS; if PKEY0.{AD,WD} leak in from a previous context, we will triple
-fault immediately on setting CR4.PKS.
+The current context switching behaviour is tied to how VT-x works, so leave a
+safety check in the short term.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Kevin Tian <kevin.tian@intel.com>
-
-v2:
- * Use WRMSRNS
- * Sanitise MSR_PKS on boot.
 ---
- xen/arch/x86/cpu/common.c           |  2 ++
- xen/arch/x86/hvm/vmx/vmx.c          |  9 +++++++
- xen/arch/x86/include/asm/msr.h      |  9 +++++++
- xen/arch/x86/include/asm/prot-key.h | 54 +++++++++++++++++++++++++++++++++++++
- xen/arch/x86/setup.c                |  4 +++
- xen/arch/x86/smpboot.c              |  4 +++
- 6 files changed, 82 insertions(+)
+ xen/arch/x86/cpuid.c                        | 9 +++++++++
+ xen/arch/x86/hvm/hvm.c                      | 4 +++-
+ xen/include/public/arch-x86/cpufeatureset.h | 2 +-
+ 3 files changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 2bcdd08b2fb5..f44c907e8a43 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -58,6 +58,8 @@ static unsigned int forced_caps[NCAPINTS];
- 
- DEFINE_PER_CPU(bool, full_gdt_loaded);
- 
-+DEFINE_PER_CPU(uint32_t, pkrs);
-+
- void __init setup_clear_cpu_cap(unsigned int cap)
- {
- 	const uint32_t *dfs;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 43a4865d1c76..b1f493f009fd 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -58,6 +58,7 @@
- #include <asm/event.h>
- #include <asm/mce.h>
- #include <asm/monitor.h>
-+#include <asm/prot-key.h>
- #include <public/arch-x86/cpuid.h>
- 
- static bool_t __initdata opt_force_ept;
-@@ -536,6 +537,7 @@ static void vmx_restore_host_msrs(void)
- 
- static void vmx_save_guest_msrs(struct vcpu *v)
- {
-+    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-     struct vcpu_msrs *msrs = v->arch.msrs;
- 
-     /*
-@@ -549,10 +551,14 @@ static void vmx_save_guest_msrs(struct vcpu *v)
-         rdmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-         rdmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index acc2f606cea8..b22725c492e7 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -579,6 +579,15 @@ static void __init calculate_hvm_max_policy(void)
+             __clear_bit(X86_FEATURE_XSAVES, hvm_featureset);
      }
-+
-+    if ( cp->feat.pks )
-+        msrs->pkrs = rdpkrs_and_cache();
- }
- 
- static void vmx_restore_guest_msrs(struct vcpu *v)
- {
-+    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-     const struct vcpu_msrs *msrs = v->arch.msrs;
- 
-     write_gs_shadow(v->arch.hvm.vmx.shadow_gs);
-@@ -569,6 +575,9 @@ static void vmx_restore_guest_msrs(struct vcpu *v)
-         wrmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-         wrmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
-     }
-+
-+    if ( cp->feat.pks )
-+        wrpkrs(msrs->pkrs);
- }
- 
- void vmx_update_cpu_exec_control(struct vcpu *v)
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 191e54068856..7946b6b24c11 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -373,6 +373,15 @@ struct vcpu_msrs
-         };
-     } rtit;
  
 +    /*
-+     * 0x000006e1 - MSR_PKRS - Protection Key Supervisor.
-+     *
-+     * Exposed R/W to guests.  Xen doesn't use PKS yet, so only context
-+     * switched per vcpu.  When in current context, live value is in hardware,
-+     * and this value is stale.
++     * Xen doesn't use PKS, so the guest support for it has opted to not use
++     * the VMCS load/save controls for efficiency reasons.  This depends on
++     * the exact vmentry/exit behaviour, so don't expose PKS in other
++     * situations until someone has cross-checked the behaviour for safety.
 +     */
-+    uint32_t pkrs;
++    if ( !cpu_has_vmx )
++        __clear_bit(X86_FEATURE_PKS, hvm_featureset);
 +
-     /* 0x00000da0 - MSR_IA32_XSS */
-     struct {
-         uint64_t raw;
-diff --git a/xen/arch/x86/include/asm/prot-key.h b/xen/arch/x86/include/asm/prot-key.h
-index 63a2e22f3fa0..0dcd31b7ea68 100644
---- a/xen/arch/x86/include/asm/prot-key.h
-+++ b/xen/arch/x86/include/asm/prot-key.h
-@@ -5,8 +5,11 @@
- #ifndef ASM_PROT_KEY_H
- #define ASM_PROT_KEY_H
+     guest_common_feature_adjustments(hvm_featureset);
  
-+#include <xen/percpu.h>
- #include <xen/types.h>
- 
-+#include <asm/msr.h>
-+
- #define PKEY_AD 1 /* Access Disable */
- #define PKEY_WD 2 /* Write Disable */
- 
-@@ -28,4 +31,55 @@ static inline void wrpkru(uint32_t pkru)
-                    :: "a" (pkru), "d" (0), "c" (0) );
+     sanitise_featureset(hvm_featureset);
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index c6c1eea18003..606f0e864981 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -969,7 +969,9 @@ unsigned long hvm_cr4_guest_valid_bits(const struct domain *d)
+             (p->feat.smep     ? X86_CR4_SMEP              : 0) |
+             (p->feat.smap     ? X86_CR4_SMAP              : 0) |
+             (p->feat.pku      ? X86_CR4_PKE               : 0) |
+-            (cet              ? X86_CR4_CET               : 0));
++            (cet              ? X86_CR4_CET               : 0) |
++            (p->feat.pks      ? X86_CR4_PKS               : 0) |
++            0);
  }
  
-+/*
-+ * Xen does not use PKS.
-+ *
-+ * Guest kernel use is expected to be one default key, except for tiny windows
-+ * with a double write to switch to a non-default key in a permitted critical
-+ * section.
-+ *
-+ * As such, we want MSR_PKRS un-intercepted.  Furthermore, as we only need it
-+ * in Xen for emulation or migration purposes (i.e. possibly never in a
-+ * domain's lifetime), we don't want to re-sync the hardware value on every
-+ * vmexit.
-+ *
-+ * Therefore, we read and cache the guest value in ctxt_switch_from(), in the
-+ * expectation that we can short-circuit the write in ctxt_switch_to().
-+ * During regular operations in current context, the guest value is in
-+ * hardware and the per-cpu cache is stale.
-+ */
-+DECLARE_PER_CPU(uint32_t, pkrs);
-+
-+static inline uint32_t rdpkrs(void)
-+{
-+    uint32_t pkrs, tmp;
-+
-+    rdmsr(MSR_PKRS, pkrs, tmp);
-+
-+    return pkrs;
-+}
-+
-+static inline uint32_t rdpkrs_and_cache(void)
-+{
-+    return this_cpu(pkrs) = rdpkrs();
-+}
-+
-+static inline void wrpkrs(uint32_t pkrs)
-+{
-+    uint32_t *this_pkrs = &this_cpu(pkrs);
-+
-+    if ( *this_pkrs != pkrs )
-+    {
-+        *this_pkrs = pkrs;
-+
-+        wrmsr_ns(MSR_PKRS, pkrs, 0);
-+    }
-+}
-+
-+static inline void wrpkrs_and_cache(uint32_t pkrs)
-+{
-+    this_cpu(pkrs) = pkrs;
-+    wrmsr_ns(MSR_PKRS, pkrs, 0);
-+}
-+
- #endif /* ASM_PROT_KEY_H */
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 6deadcf74763..567a0a42ac50 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -54,6 +54,7 @@
- #include <asm/spec_ctrl.h>
- #include <asm/guest.h>
- #include <asm/microcode.h>
-+#include <asm/prot-key.h>
- #include <asm/pv/domain.h>
+ static int cf_check hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 5444bc5d8374..3b85bcca1537 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -227,7 +227,7 @@ XEN_CPUFEATURE(CLDEMOTE,      6*32+25) /*A  CLDEMOTE instruction */
+ XEN_CPUFEATURE(MOVDIRI,       6*32+27) /*a  MOVDIRI instruction */
+ XEN_CPUFEATURE(MOVDIR64B,     6*32+28) /*a  MOVDIR64B instruction */
+ XEN_CPUFEATURE(ENQCMD,        6*32+29) /*   ENQCMD{,S} instructions */
+-XEN_CPUFEATURE(PKS,           6*32+31) /*   Protection Key for Supervisor */
++XEN_CPUFEATURE(PKS,           6*32+31) /*H  Protection Key for Supervisor */
  
- /* opt_nosmp: If true, secondary processors are ignored. */
-@@ -1804,6 +1805,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-     if ( opt_invpcid && cpu_has_invpcid )
-         use_invpcid = true;
- 
-+    if ( cpu_has_pks )
-+        wrpkrs_and_cache(0); /* Must be before setting CR4.PKS */
-+
-     init_speculation_mitigations();
- 
-     init_idle_domain();
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 52beed9d8d6d..b26758c2c89f 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -42,6 +42,7 @@
- #include <asm/microcode.h>
- #include <asm/msr.h>
- #include <asm/mtrr.h>
-+#include <asm/prot-key.h>
- #include <asm/setup.h>
- #include <asm/spec_ctrl.h>
- #include <asm/time.h>
-@@ -364,6 +365,9 @@ void start_secondary(void *unused)
- 
-     /* Full exception support from here on in. */
- 
-+    if ( cpu_has_pks )
-+        wrpkrs_and_cache(0); /* Must be before setting CR4.PKS */
-+
-     /* Safe to enable feature such as CR4.MCE with the IDT set up now. */
-     write_cr4(mmu_cr4_features);
- 
+ /* AMD-defined CPU features, CPUID level 0x80000007.edx, word 7 */
+ XEN_CPUFEATURE(HW_PSTATE,     7*32+ 7) /*   Hardware Pstates */
 -- 
 2.11.0
 
