@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FDB8C5479D
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Jan 2023 14:24:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.475402.737110 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16380C5479D
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Jan 2023 14:29:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.475411.737121 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFc1U-0004xC-U1; Wed, 11 Jan 2023 14:24:12 +0000
+	id 1pFc6R-0005mU-IV; Wed, 11 Jan 2023 14:29:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 475402.737110; Wed, 11 Jan 2023 14:24:12 +0000
+Received: by outflank-mailman (output) from mailman id 475411.737121; Wed, 11 Jan 2023 14:29:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFc1U-0004x5-R2; Wed, 11 Jan 2023 14:24:12 +0000
-Received: by outflank-mailman (input) for mailman id 475402;
- Wed, 11 Jan 2023 14:24:11 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ffGs=5I=citrix.com=prvs=36809819d=sergey.dyasli@srs-se1.protection.inumbo.net>)
- id 1pFc1T-0004X2-MV
- for xen-devel@lists.xenproject.org; Wed, 11 Jan 2023 14:24:11 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9abdd617-91bb-11ed-b8d0-410ff93cb8f0;
- Wed, 11 Jan 2023 15:24:08 +0100 (CET)
+	id 1pFc6R-0005mN-F3; Wed, 11 Jan 2023 14:29:19 +0000
+Received: by outflank-mailman (input) for mailman id 475411;
+ Wed, 11 Jan 2023 14:29:18 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pFc6Q-0005mD-7z; Wed, 11 Jan 2023 14:29:18 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pFc6Q-0001A4-5Q; Wed, 11 Jan 2023 14:29:18 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pFc6P-0004qZ-Pz; Wed, 11 Jan 2023 14:29:17 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1pFc6P-0008Lr-PT; Wed, 11 Jan 2023 14:29:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,168 +44,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9abdd617-91bb-11ed-b8d0-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1673447048;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=w8iJbWumWsWSLAQupGB9uR+XhDb3DO8D3MIfiJPhdz8=;
-  b=fvF4BX+LPrQIrY2PpHtLmmLlik6LfxTjvMHH0utzI0BqD0bxqb/oUMd5
-   N3ynSJFBX6ODR5lUKO0xlFzG1LltL/LlsRiGuVjiAB81lItJuZvtYlSwB
-   A1eMWha8DWiO/+SqxstiXRfd8Z2ybKbHaE2mP176YByTOrzifXjKxz0u7
-   U=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 92126493
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:MaYA86LOzuKiLSf/FE+R25UlxSXFcZb7ZxGr2PjKsXjdYENS12dVz
- 2sbDG/VO6yNZGCnctAibd/g/E1XsMeBz4AwQFFlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPdwP9TlK6q4mhA5wVnPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5WKEVx3
- 84CcQsyZ066nOKv0qmWE+NF05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpPE+ojx5nYz/7DLolkf2ni2i5fyxRs1aUjaE2/3LS3Ep6172F3N/9K4bTH5sJzx3wS
- mTuvEPDXA9HF9WjwyOV81Sq3NfrxS3pYddHfFG/3qEz2wDCroAJMzUJUXOrrP//jVSxM/pPJ
- kpR9icwoKwa8E2wUsK7TxC+uGSDvBMXR5xXCeJSwAOHx7fQ4g2ZLnMZVTMHY9sj3PLaXhRzi
- AXPxYmwQ2Uy7vvFEhpx64t4sxuTEAwqB10YPBQ7RFU8+Nn6spoe1xjmG4ML/LGOsvX5HjT5w
- javpSc4hqkOgcNj65hX7WwrkBr3+MGXE1ddChH/Gzv8s1gnPNLNi5mAswCz0BpWEGqOorBtV
- lAgktPW0u0BBIrleMelELRUR+HBCxpo3VThbb9T83sJrW/FF52LJ9o4DNRCyKBBbK45lcfBO
- hO7hO+ozMY70IGWRaF2eZmtLM8h0LLtE9/oPtiNMIUVOccsKl/ao38+DaJ144wKuBFy+ZzTx
- L/BKZr8ZZrkIfkPIMWKqxc1juZwm3FWKZL7TpHn1RW3uYdyl1bMIYrpxGCmN7hjhIvd+VW9z
- jqqH5fSo/mpeLGkM3a/HE96BQxiEEXX8rit9ZcMK7LTc1c4cIzjYteIqY4cl0Vet/w9vo/1E
- ruVACe0FHKXaaX7FDi3
-IronPort-HdrOrdr: A9a23:McqUha8+FRcEno35IkFuk+D2I+orL9Y04lQ7vn2ZESYlFfBxl6
- iV88jzpiWE7gr5OUtQ4+xoV5PwIk80maQZ3WBVB8bHYOCEghrUEGgB1/qB/9SIIUSXnYRgPO
- VbAs1D4bbLY2SS+Pyb3ODOKbcdKbe8nJxAzt2utkuFBTsaE52IwT0JcTqmLg==
-X-IronPort-AV: E=Sophos;i="5.96,317,1665460800"; 
-   d="scan'208";a="92126493"
-From: Sergey Dyasli <sergey.dyasli@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Sergey Dyasli <sergey.dyasli@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH v2] x86/ucode/AMD: apply the patch early on every logical thread
-Date: Wed, 11 Jan 2023 14:23:29 +0000
-Message-ID: <20230111142329.4379-1-sergey.dyasli@citrix.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=+Vo5v3yU7TBDaCEYl+KLk7kGe7EGqUw64Budd18tvRs=; b=GKZBhFX48Z1x0nehXuSP8J2VBB
+	xaZ/70mrePvHmfBx7YjWKOlpbJlwMtelUS01p8YIrYBvlWTwoYojQwN7Me699ZDxICAbnPmvJWADp
+	qY85RWrjVMDS+tw4wK30V+3yCsTPRLqICZScy6ii7Sq2jGPYDRMYEwlq5zfHrmMR8xXk=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-175718-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [libvirt test] 175718: tolerable FAIL - PUSHED
+X-Osstest-Failures:
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:guest-start/debian.repeat:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    libvirt=a5738ab74c2ab449522ddf661808262fc92e28d7
+X-Osstest-Versions-That:
+    libvirt=49ff47269b71a762ca5de4595f6ec915043e05ce
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 11 Jan 2023 14:29:17 +0000
 
-The original issue has been reported on AMD Bulldozer-based CPUs where
-ucode loading loses the LWP feature bit in order to gain the IBPB bit.
-LWP disabling is per-SMT/CMT core modification and needs to happen on
-each sibling thread despite the shared microcode engine. Otherwise,
-logical CPUs will end up with different cpuid capabilities.
-Link: https://bugzilla.kernel.org/show_bug.cgi?id=216211
+flight 175718 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/175718/
 
-Guests running under Xen happen to be not affected because of levelling
-logic for the feature masking/override MSRs which causes the LWP bit to
-fall out and hides the issue. The latest recommendation from AMD, after
-discussing this bug, is to load ucode on every logical CPU.
+Failures :-/ but no regressions.
 
-In Linux kernel this issue has been addressed by e7ad18d1169c
-("x86/microcode/AMD: Apply the patch early on every logical thread").
-Follow the same approach in Xen.
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 175684
+ test-amd64-amd64-libvirt-vhd 19 guest-start/debian.repeat    fail  like 175684
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 175684
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 175684
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
 
-Introduce SAME_UCODE match result and use it for early AMD ucode
-loading. Late loading is still performed only on the first of SMT/CMT
-siblings and only if a newer ucode revision has been provided (unless
-allow_same option is specified).
+version targeted for testing:
+ libvirt              a5738ab74c2ab449522ddf661808262fc92e28d7
+baseline version:
+ libvirt              49ff47269b71a762ca5de4595f6ec915043e05ce
 
-Intel's side of things is modified for consistency but provides no
-functional change.
+Last test of basis   175684  2023-01-10 04:18:53 Z    1 days
+Testing same since   175718  2023-01-11 04:20:41 Z    0 days    1 attempts
 
-Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>
----
-v1 --> v2:
-- Expanded the commit message with the levelling section
-- Adjusted comment for OLD_UCODE
+------------------------------------------------------------
+People who touched revisions under test:
+  Daniel P. Berrangé <berrange@redhat.com>
+  Jiri Denemark <jdenemar@redhat.com>
+  Laine Stump <laine@redhat.com>
+  Martin Kletzander <mkletzan@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
 
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: "Roger Pau Monné" <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/cpu/microcode/amd.c     | 16 +++++++++++++---
- xen/arch/x86/cpu/microcode/intel.c   |  9 +++++++--
- xen/arch/x86/cpu/microcode/private.h |  3 ++-
- 3 files changed, 22 insertions(+), 6 deletions(-)
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-libvirt-raw                                  pass    
+ test-amd64-amd64-libvirt-vhd                                 fail    
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 4b097187a0..96db10a2e0 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -176,8 +176,13 @@ static enum microcode_match_result compare_revisions(
-     if ( new_rev > old_rev )
-         return NEW_UCODE;
- 
--    if ( opt_ucode_allow_same && new_rev == old_rev )
--        return NEW_UCODE;
-+    if ( new_rev == old_rev )
-+    {
-+        if ( opt_ucode_allow_same )
-+            return NEW_UCODE;
-+        else
-+            return SAME_UCODE;
-+    }
- 
-     return OLD_UCODE;
- }
-@@ -220,8 +225,13 @@ static int cf_check apply_microcode(const struct microcode_patch *patch)
-     unsigned int cpu = smp_processor_id();
-     struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
-     uint32_t rev, old_rev = sig->rev;
-+    enum microcode_match_result result = microcode_fits(patch);
- 
--    if ( microcode_fits(patch) != NEW_UCODE )
-+    /*
-+     * Allow application of the same revision to pick up SMT-specific changes
-+     * even if the revision of the other SMT thread is already up-to-date.
-+     */
-+    if ( result != NEW_UCODE && result != SAME_UCODE )
-         return -EINVAL;
- 
-     if ( check_final_patch_levels(sig) )
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index f7fec4b4ed..59a99eee4e 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -232,8 +232,13 @@ static enum microcode_match_result compare_revisions(
-     if ( new_rev > old_rev )
-         return NEW_UCODE;
- 
--    if ( opt_ucode_allow_same && new_rev == old_rev )
--        return NEW_UCODE;
-+    if ( new_rev == old_rev )
-+    {
-+        if ( opt_ucode_allow_same )
-+            return NEW_UCODE;
-+        else
-+            return SAME_UCODE;
-+    }
- 
-     /*
-      * Treat pre-production as always applicable - anyone using pre-production
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index 73b095d5bf..626aeb4d08 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -6,7 +6,8 @@
- extern bool opt_ucode_allow_same;
- 
- enum microcode_match_result {
--    OLD_UCODE, /* signature matched, but revision id is older or equal */
-+    OLD_UCODE, /* signature matched, but revision id is older */
-+    SAME_UCODE, /* signature matched, but revision id is the same */
-     NEW_UCODE, /* signature matched, but revision id is newer */
-     MIS_UCODE, /* signature mismatched */
- };
--- 
-2.17.1
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   49ff47269b..a5738ab74c  a5738ab74c2ab449522ddf661808262fc92e28d7 -> xen-tested-master
 
