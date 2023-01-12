@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F47C677F1
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Jan 2023 14:39:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476205.738298 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA3DC61DB3
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Jan 2023 14:39:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476202.738262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFyjr-0003UZ-H2; Thu, 12 Jan 2023 14:39:31 +0000
+	id 1pFyjp-0002el-LJ; Thu, 12 Jan 2023 14:39:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476205.738298; Thu, 12 Jan 2023 14:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 476202.738262; Thu, 12 Jan 2023 14:39:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pFyjr-0003T0-C2; Thu, 12 Jan 2023 14:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 476205;
- Thu, 12 Jan 2023 14:39:29 +0000
+	id 1pFyjp-0002dz-GL; Thu, 12 Jan 2023 14:39:29 +0000
+Received: by outflank-mailman (input) for mailman id 476202;
+ Thu, 12 Jan 2023 14:39:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CdGT=5J=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1pFyjp-0002av-Ir
- for xen-devel@lists.xenproject.org; Thu, 12 Jan 2023 14:39:29 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ id 1pFyjm-0002av-PO
+ for xen-devel@lists.xenproject.org; Thu, 12 Jan 2023 14:39:28 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e7f83730-9286-11ed-b8d0-410ff93cb8f0;
- Thu, 12 Jan 2023 15:39:25 +0100 (CET)
+ id e7f3caf7-9286-11ed-b8d0-410ff93cb8f0;
+ Thu, 12 Jan 2023 15:39:23 +0100 (CET)
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pFyjS-0040tE-0z; Thu, 12 Jan 2023 14:39:06 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pFyjn-0057zf-Vo; Thu, 12 Jan 2023 14:39:28 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id EA5E2300C50;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E8514300C22;
  Thu, 12 Jan 2023 15:39:12 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id B77922CC949A1; Thu, 12 Jan 2023 15:39:12 +0100 (CET)
+ id AF0012C539AAE; Thu, 12 Jan 2023 15:39:12 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e7f83730-9286-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: e7f3caf7-9286-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
-	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
-	Content-ID:Content-Description:In-Reply-To;
-	bh=+hVGbhW+kq8WeUTnRFVIQ4y6xF6mTUDTY1iojLvcO/Q=; b=VD2YCgkTmE2CQ4Y8uw29qiC2TE
-	R80ib0ot/jJ/vDVx1nc81VA/UdFYRNG0RCJX9If+JwIwax/MdSzvs+229sqAm51rlqFP4ZtmBL6KE
-	ZGwzJaeaNt97uYlCPg3WWmvJH6/Qc2TRui52REAxdkfvawrPGc1AlBYy8r3QDtkibYhajuP5B7DDl
-	e4VUHACu7Phw+gAfdvDwUrseQHxbEogW6ZFrf4DGNzODQW73kd/B4Gn8iBVxRaIIdPZwruHvk8R/J
-	U+pz1lXQCECLx95TWt3y1l8JrPMkbqVDOu1nEJOjWfQjLPnHBvOtaLz8Bxx4rBAruF+c4Yb+M8UAF
-	+VcR5hIg==;
-Message-ID: <20230112143825.644480983@infradead.org>
+	d=infradead.org; s=casper.20170209; h=Subject:Cc:To:From:Date:Message-ID:
+	Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=dxKp4F/ZypynYhxVQrwpFBE7F8I1udIiZ+qCB0euLH8=; b=Qw76boxsic6bAdPZ+sbUQ2gqH+
+	toujE3QAL7Ysrb/kR6kbNWK8+/9lcxeR5snVxN72gLXv54orCAYheJOMSUJTxsIOq6nlVdd9M05yx
+	xzAl7+DGS02CDXkNHHjeh7e9nMs5aY0qzl9lI/Ybug1C2cN+L9cUSAyH9scpEzK8O5SsQgYiCg6Y5
+	jAK6oY9jXCznsqioTj6bpA+gfUlBJJaabAP8t+fNLnSC0fudkg27IKcOz4kzbhxN1B+GtqFgHO05t
+	iG2Tq/6Nx3QTZSzkBCmPsHHW89g1u9fdQigJA6ONkHFfsmbKlG6YcpbLdRrHDBiKoAXxjMOx3j3S3
+	79pDM38g==;
+Message-ID: <20230112143141.645645775@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 15:31:43 +0100
+Date: Thu, 12 Jan 2023 15:31:41 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: x86@kernel.org,
  Joan Bruguera <joanbrugueram@gmail.com>
@@ -78,35 +78,15 @@ Cc: linux-kernel@vger.kernel.org,
  Roger Pau Monne <roger.pau@citrix.com>,
  Kees Cook <keescook@chromium.org>,
  mark.rutland@arm.com
-Subject: [RFC][PATCH 2/6] x86/power: Inline write_cr[04]()
-References: <20230112143141.645645775@infradead.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: [RFC][PATCH 0/6] x86: Fix suspend vs retbleed=stuff
 
-Since we can't do CALL/RET until GS is restored and CR[04] pinning is
-of dubious value in this code path, simply write the stored values.
+Hi,
 
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
----
- arch/x86/power/cpu.c |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I'm thinking these few patches should do the trick -- but I've only compiled
+them and looked at the resulting asm output, I've not actually ran them.
 
---- a/arch/x86/power/cpu.c
-+++ b/arch/x86/power/cpu.c
-@@ -208,11 +208,11 @@ static void notrace __restore_processor_
- #else
- /* CONFIG X86_64 */
- 	native_wrmsrl(MSR_EFER, ctxt->efer);
--	native_write_cr4(ctxt->cr4);
-+	asm volatile("mov %0,%%cr4": "+r" (ctxt->cr4) : : "memory");
- #endif
- 	native_write_cr3(ctxt->cr3);
- 	native_write_cr2(ctxt->cr2);
--	native_write_cr0(ctxt->cr0);
-+	asm volatile("mov %0,%%cr0": "+r" (ctxt->cr0) : : "memory");
- 
- 	/* Restore the IDT. */
- 	native_load_idt(&ctxt->idt);
+Joan, could you kindly test?
 
+The last (two) patches are optional fixes and should probably not go into /urgent.
 
 
