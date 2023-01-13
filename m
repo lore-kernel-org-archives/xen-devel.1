@@ -4,33 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B596DC61DB3
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 10:11:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.477055.739651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D24C54EBD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 10:21:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.477107.739668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGH2O-0005y5-4V; Fri, 13 Jan 2023 10:11:52 +0000
+	id 1pGHBL-0001se-6T; Fri, 13 Jan 2023 10:21:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 477055.739651; Fri, 13 Jan 2023 10:11:52 +0000
+Received: by outflank-mailman (output) from mailman id 477107.739668; Fri, 13 Jan 2023 10:21:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGH2N-0005vn-MO; Fri, 13 Jan 2023 10:11:51 +0000
-Received: by outflank-mailman (input) for mailman id 477055;
- Fri, 13 Jan 2023 10:11:50 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pGH2M-0005kJ-Qu
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 10:11:50 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pGH2M-0006f1-Od; Fri, 13 Jan 2023 10:11:50 +0000
-Received: from 54-240-197-224.amazon.com ([54.240.197.224]
- helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pGH2M-0005Ty-DI; Fri, 13 Jan 2023 10:11:50 +0000
+	id 1pGHBL-0001sX-3g; Fri, 13 Jan 2023 10:21:07 +0000
+Received: by outflank-mailman (input) for mailman id 477107;
+ Fri, 13 Jan 2023 10:21:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=bX0/=5K=citrix.com=prvs=37021d3d6=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1pGHBJ-0001sR-C3
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 10:21:05 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fa90b132-932b-11ed-91b6-6bf2151ebd3b;
+ Fri, 13 Jan 2023 11:21:03 +0100 (CET)
+Received: from mail-dm6nam12lp2173.outbound.protection.outlook.com (HELO
+ NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.173])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 13 Jan 2023 05:20:53 -0500
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
+ by SN4PR03MB6797.namprd03.prod.outlook.com (2603:10b6:806:215::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.18; Fri, 13 Jan
+ 2023 10:20:50 +0000
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::c679:226f:52fa:4c19]) by BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::c679:226f:52fa:4c19%6]) with mapi id 15.20.5986.019; Fri, 13 Jan 2023
+ 10:20:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,355 +51,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=NC2ekxnVww5wg4SYyZ+ZoYGc9aeqnQEz5JZ2U/1m/VM=; b=N8m9sAtxqZPbFvAI9ThWmffC/t
-	WGk+5ykLdBpoKsZ1JhTePi1n/rE0HYYbXj3b76eqca/GLEU6DrIQkWHQ7s3qGz79fGKdv0ECQUZlL
-	oB0Teq27B2bfp4avx+fGhWLiGdV5fmf0XKLpt6RC1efFEv9PyoNMjJ2s20OKn0eVcZN4=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Luca.Fancellu@arm.com,
-	Julien Grall <jgrall@amazon.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v4 09/14] xen/arm32: head: Remove restriction where to load Xen
-Date: Fri, 13 Jan 2023 10:11:31 +0000
-Message-Id: <20230113101136.479-10-julien@xen.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230113101136.479-1-julien@xen.org>
-References: <20230113101136.479-1-julien@xen.org>
+X-Inumbo-ID: fa90b132-932b-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1673605262;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=W54dHoJM9P0PkAPwS0dPAtnXs0fXxsIPDOTFPoKcC3k=;
+  b=fghC/TZxRourLR8R/MDPh4XXZHIx7iyce9fHbS9c7L8AqawxVSEubpim
+   krMfncziELSrX6Xu9+/eZr/qj5+l90BlLIXascLCm2UqCFiYrfutfPoVt
+   4iYq5x8fvNTx3mJuT/qlhXaBtpi0zZtXNdJr2zlWkwTkQNfh0iQooMK2T
+   M=;
+X-IronPort-RemoteIP: 104.47.59.173
+X-IronPort-MID: 94931465
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:HSj84aDGr26sUBVW/+fiw5YqxClBgxIJ4kV8jS/XYbTApGh20zwCn
+ 2JNWmmHMquLN2PxeN0kbYW1phsEsJ+GydFmQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nNHuCnYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFtMpvlDs15K6p4GpB5QRnDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwxeovC18W/
+ KQjE2oXcRqxocyo7ZahRbw57igjBJGD0II3nFhFlGucIdN4BJfJTuPN+MNS2yo2ioZWB/HCa
+ sEFaD1pKhPdfxlIPVRRA5U79AuqriCnL3sE9xTI9OxuvDO7IA9ZidABNPL8fNCQSNoTtUGfv
+ m/cpEzyAw0ANczZwj2Amp6prr6TzHiiBNxPfFG+3thNmHafxEUZMx8xC3a1isuIsXa0SfsKf
+ iT4/QJr98De7neDTNPwQhm5q36spQMHVpxbFOhSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
+ 1SV2dTzClRHr7m9WX+bsLCOoluaJSkQBX8PY2kDVwRty9P+upM6ihXDSclqOKGwh9zxXzr3x
+ li3QDMWgrwSiYsH0vu99FWe2Ta0/MGWFUgy+xndWX+j4kVhfom5aoe06F/dq/FdMIKeSVrHt
+ 38B8ySD0N0z4Vi2vHTlaI0w8HuBvZ5p7BW0bYZTIqQc
+IronPort-HdrOrdr: A9a23:OM9PramWlvha6JR2rSvLpztwW67pDfIi3DAbv31ZSRFFG/Fw9v
+ rDoB1/73TJYVkqN03I9ervBEDjexPhHO9OgLX5VI3KNGOKhILCFvAA0WKN+UyEJwTOssJbyK
+ d8Y+xfJbTLfDxHZB/BkWuFL+o=
+X-IronPort-AV: E=Sophos;i="5.97,213,1669093200"; 
+   d="scan'208";a="94931465"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GNTVRAtYLu8EH8Ey/dfwWM2tA4ZN2fJ/A7aRQJb8dg1Mkvi8G2rtPssdkqG9W/uC1uDxqgf2Sr1ciDsYc8XLTuzvSlUNQBjnt3lmALgcgZGAjvTNLoqeoihPKwqRd7N2iG5cPva/Chy+wTlipV4yVjbM9VGUIkBko3nVAx61xSmRTniPFxffsJul+K90SvBo2NAug70ZPzZ9BZVqFTU2YzsskDTGDu4EbR0MvmBUVYzZRvFGqMztKUxMTqBoPvIEewmIifm+X8H48CSXBuejDcEPUWm96/lcIRtMEsgyPBTZxcynp1qC9KNq9HfB9PrgFBAvLxFUTvEYFP4qVTH7Mw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W54dHoJM9P0PkAPwS0dPAtnXs0fXxsIPDOTFPoKcC3k=;
+ b=l8iYpImEG1u8ky9G7vxjBAh/nK8DSF1uQQPcaLGosaQhiDCXq/54NIMd8rd9YQwd/9zP8Hmt4l8sxhhYhN8cDxa47GGHalOMbWDyfUuQAIFJ5xcwnAm9fz5uGd17sCz8QsfpWVuft2KCvI46HKeAQwgT/D5CmF4ioX/HkNADTCJluh4qfnxDPkuwlQMwiq2Sub6T2qQgiJrZuwkFb/RG2StN3nexgtG6zt0DyFky52b4B0nZifck1MqXByRf/AmUr6YM6TUyjI81N4tAJEHqaPUkia7IaI7tW5ZwEIk8XLb3dz4izkbyjkFpXDOf7vCm9cesmmA7qHt4LWI9xD9UlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W54dHoJM9P0PkAPwS0dPAtnXs0fXxsIPDOTFPoKcC3k=;
+ b=iPOJvJdM2wids4KnfLFnqDlziJd48OXBM5za5DuWilVZuAkv674wAjnN5k3OuyZWMc6bmP6OCNLw/LcAsWJjU+HFBglUIT1nZ9jJ9i2ay2EoqnCEmxTIt4Ac9sVAJe/hQwX+PDnR7uBCrwTcZ9VRSXq0GIaG3fLgVQPqMxjgvNQ=
+From: Andrew Cooper <Andrew.Cooper3@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Wei Liu <wl@xen.org>, Roger Pau Monne <roger.pau@citrix.com>, "Tim
+ (Xen.org)" <tim@xen.org>, Xenia Ragiadakou <burzalodowa@gmail.com>, George
+ Dunlap <George.Dunlap@citrix.com>
+Subject: Re: [PATCH 2/2] x86/shadow: further correct MMIO handling in
+ _sh_propagate()
+Thread-Topic: [PATCH 2/2] x86/shadow: further correct MMIO handling in
+ _sh_propagate()
+Thread-Index: AQHZJyvN3vLgdA26WkC1mtdAvOV/WK6cIxKA
+Date: Fri, 13 Jan 2023 10:20:50 +0000
+Message-ID: <18b606fd-e354-b43a-fa5c-bbdede7b7091@citrix.com>
+References: <01756703-efc8-e342-295c-a40a286ad5f1@suse.com>
+ <b05d3911-a6c7-68f1-0e48-255630ab6516@suse.com>
+In-Reply-To: <b05d3911-a6c7-68f1-0e48-255630ab6516@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BYAPR03MB3623:EE_|SN4PR03MB6797:EE_
+x-ms-office365-filtering-correlation-id: 8a0f6c1f-172a-4f05-5bc2-08daf54fd804
+x-ld-processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ mt57nCfPR2bLBeeFcgrKysw2a7PnGCtxr2vSbbDkzmFKlWX8Jjh1owsELENkVxOBp20ZCAHkOLmdLkSG4VLIFpB/qJeP3saVw1pxikHFj6zqKmz/bdQBWnf+RCapx3aoR9wtpWOgA99uUggiYCp3yK1Ltw8XlRATO4mfstCBZAq4B87EDtuN79RUVF4kGuuuPX1zqst+xFLgx7c3mL5fE6FEfEDQ0k90lp0sZV5E+UfE0qfqEWZoIJQ7Fd6krrKKqPz6717Y/XKTuA2kJLINkIBH4dJeG4IZ6ukoacNPxkmaDbD2vLOtK98ctjelBS6gexEE6jgrJJjy0umuQbzLEdGb7oUahIS1SB0SHFwVtzCPEPB39zGp528gJSbII1G7ADleDFK67mxIK5HjxZfOMwEzAYmSt0EiyTLheSAJi050UWKwlE4lOtbMSfxY75atzxVOUk93RMdgGNaVAb8aEGEh9sR+cuECQQeQ+iiEVN2uf90DRpXnnm+/7mKCBM0Sfsicvur66wHt4TlPDJ/LT94A+MEITm0RbizXp+DQYVFuXOCMFpfRP4RX9+3cdiC8w/OvZtgah/GHNBSkstMc3qMpPp4OS+6Y2OpoXL81KN/BkTWQKVnEwfEAyN6c9ePByxNVUrPlm5PSmw1Un9BnWAVC7u6ZOGqVo177JqoUHan6SATUHdDG7Q0r6DD4SSLbYtXq5w2/CltWX9s1Cwj/5TzIMhWDawHSL35xvL89lRTOIyRz813vNAqPe1qcbuxRGtHr0ugmCK/pHOEG1q/Hmg==
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(396003)(346002)(39860400002)(366004)(136003)(376002)(451199015)(6506007)(38100700002)(122000001)(82960400001)(107886003)(31686004)(53546011)(2906002)(6486002)(478600001)(5660300002)(2616005)(4744005)(86362001)(6512007)(186003)(316002)(26005)(71200400001)(8936002)(38070700005)(36756003)(8676002)(31696002)(41300700001)(91956017)(64756008)(110136005)(66556008)(76116006)(66946007)(54906003)(66476007)(66446008)(4326008)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?dDBhTkFadEdhMXFjVUIxWmNvT2xLVTJiKzdVTWRYVWZ2ZnZ6V2huc25UbkYy?=
+ =?utf-8?B?QnJINFZGQVZPOG4vVFJDM2VmM3V3SWIxd1p0NnQvUUFFZEdlTmxmaUs4V3lm?=
+ =?utf-8?B?MWpZZEZHVks5YllNN21KYVVmSVZFcTZSMmFQR3l4N0RiTFVjeDBPRGJYSGRC?=
+ =?utf-8?B?MlB2TFlaSXVCbXozY2o4blkwMXRmRW5GUGo3dGRRVTJPbGNoR1FIclBRZDVV?=
+ =?utf-8?B?cy91QWN4dDFqUXZ3WGtDeGI5VnlxdDBnaGVtSG8rNVRMOEtWTldkQ1Jiall6?=
+ =?utf-8?B?SnpKZnRvRG1CSmZMWlg4QTlxVkdqUnpaMk1PUjQwcEJCZktzOHdwcEVEM0FM?=
+ =?utf-8?B?Rkd0b0VpT081R0l2R3MxWkVibERadWFVYU1YeVZ4ZWtNdFUxcTllWGloZDhx?=
+ =?utf-8?B?RjVJUUZOUWNIQ1p4SVBvOU1sbVlMZUFDaGppM0c4ZGhtSVFmNE1VVlEyRURZ?=
+ =?utf-8?B?Tlp0bjBwU0VoSzJqR2daOVlZd1M1OE5TdTZOc2FPeHNlZnIyazFheXhyci9R?=
+ =?utf-8?B?cUFVb2ozZzBrb1h3SGhzS0VLVGxCenY3ZGlROEE3aTVWSkNOZU9rL3c1VzRK?=
+ =?utf-8?B?LzUxakh6eWlaaHIrazI0dUUxL1U5SFBEVmwrSVVvNkg2a0FUYi9RRTV0MHVo?=
+ =?utf-8?B?SzNtUWtBeWJoRTR5NVpqWnJFdFB1TnNqN0dJV3JaRlprU09RTHdjeVlxMkhw?=
+ =?utf-8?B?RUMyV1A1S0Q5UzdzQjlNMVRzQll4VjVLUzFYeVpTWGJYUTFSZjJ2UXJHZTJ1?=
+ =?utf-8?B?Mkd4alVUMU1wbUNtQXpIRmxQVFNiK0MrSW4zRjBDQ0IvcUludUwvN3V2cXBW?=
+ =?utf-8?B?OEFneHhmVTFlcXF0amdTc2l0cFpGWVNsYTdiWTdpWjdCbXU4a1Ixa3oxTFRv?=
+ =?utf-8?B?VG9PK0l6QVorZDVjN3lJRWc2SGJNaEhQb0xkZ3VTUmhzRGt3WXdjSzNLMjNP?=
+ =?utf-8?B?ZnBQcnplbEFWQmN6U0kxNXVkV1VBbGhMWXVjclpxSnNOYms4ZmZWMkZtWTJq?=
+ =?utf-8?B?T2J1VEk5cW85Rk9iNnRUWnJJL3QrSVdDQi9lWVNhZVcyY2xodkV1WWZZVWdl?=
+ =?utf-8?B?ZVRMSU1sVld3RHloM1YwdzNxOS93L3VVVlp3V2hRYnRINVl1YzVkQTM5dEIy?=
+ =?utf-8?B?VjFIVmVzZWg1czB3TVRkVmw4aTN4TUppZXY0aUFLSE1LTndOSG42dVg4dmNi?=
+ =?utf-8?B?ZmR5RGl6NXNuTENDYUhhWmsrNTVPV1R4MjErZllBcG1rTU5NSE5Uc0xoYXhi?=
+ =?utf-8?B?WmQyeTJPdTFZd3BjTUtBQkZvU0FwQjlDSUtTSTlQWWlyUVBBbkJxOWE5RjVX?=
+ =?utf-8?B?aUE4M1paalhSVmhMZ25rUWJrNVdJVjhwZzN0NGJTQ2RIMjhMQmxYR3dwQ2xR?=
+ =?utf-8?B?dWhiejh4Q1dYRnhxdW9WenFudlZDdTgxcUZBL1R5MmpLWTJNOG5hbi9xZUYv?=
+ =?utf-8?B?Qkppa3FFK2RhbTlEQk95eE1RKzBNR2E3aG9xY0dpR0VvODVEN29UVThTWnFj?=
+ =?utf-8?B?ZjRaY0N4Y2FuNHh4VHZsYkpIZUpzbDBFVmg1emVsY1Y4V3czejFmZkpqN0NY?=
+ =?utf-8?B?ampJejdPc1puQUtJblgxM1AzN1dYeFRNWi9PV3doT2hpR3cvVGQ0aEpLR1BY?=
+ =?utf-8?B?czRRZC9Ma0dsREZHajlTZzVhdWRURzBXMXVXMWs0ZXdYdEhuS21wbDd3b3Q1?=
+ =?utf-8?B?TUt5dWhFcEdNMmFTeVB1TERCZVRvVkdCZlEveE1VN2o5KzZnOHZBRjBuZ2gx?=
+ =?utf-8?B?aGtmVDdKZ0Q0Q2FGT0p6Q0M5enNXRk5CSmN3UDdVR2ozOE5xRG5tNHNTRDJE?=
+ =?utf-8?B?M1hncUhUK1NKbUk0cGsxRGVlWVNqbkM4TTc4Vk1Nek1FdEU0MDRJNkNuRHVH?=
+ =?utf-8?B?Z0liaXB4UDI4MldZd3NRaTBTM0Q5YzNuS2NvQUE4b24xV2oxRlFTMEQwVEsy?=
+ =?utf-8?B?TnBCSnlOYk1oeE1vZHQ2Y3BkUEk0dTNYaHJlTk1kTHhOT1JYN2E1WGFJMG40?=
+ =?utf-8?B?SnJ6UEYyczRRcS9iZzh3TnduT2hqSjRSd0pYZEdodlNYb0tHRS9VNDMxZDV1?=
+ =?utf-8?B?SWMrVW1zQ3gvUXdDaUJVbnB1eHhaNy90L2lsd1pXOWx1NTdXeGM3NVlhaXFQ?=
+ =?utf-8?Q?rmG0qI8t09b8Lc6I3yA8sD+gT?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <FD56D441B254994AB99AFB3AF1A8F01F@namprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	tY1dnEjlqOo49f0MoknQhKzYysgZRFO4+lQqXOKwb9m6TxmiuaH6zyQg/52wkvQa9Np6/jHVToZV0vq1ylhXEntV8q5Y7x+N3dX/uBoatyi0QZGsdUkpx8mGegQRpKOBPmALzzvi0XZfpRiVk1eHissTA80D9eD6sGsUyHUK+2vl34e1bf6SgVT4cr2v85nq3OOdFfaNTEnoIomCJWd5jumVaxW1ChJ1y95YMogsOc8vVl5HVcCCBwmrrPOlzqDahHPpvC15w8GIlcHXBf8Gk1xfn7E2GyJ+o84q2qferIXfK7RVp2HIUYrxpfsP0w1qZyC386MDB0pORisXpfGcusUwFuq12Jjb4GJgKB/dkN3tQG41A4G2HcnSpJ/BKSOQL8smwMyRzER/O0n+GC4P6J/5jBzym2vcZXixaj9gsmRjOTsUKA1qSsQH25trcNZ5BupgCQJWE8NVFZ4IeYDh5mhHVGRdDFnv6I/5A6TMeY6MISzs8Aef5472u3EWaWJuCddHEGSk4fkMFjRYBIKm8tavYNou5N0s22mbj3BOOLdxfwZNGcQxMH7E1MSo6i8nnHSO7GPLiaeGTfTn1HfOpLEgJQgnKN79W5j+wCTDZTepgkENoVQzixSursrpMO6DFAevBYfiNVGqNSKr7mPLfmmlmfyq7wsiIAwOgksagbDLwbZC0rkahKA3LG+3loyl31tNWO6OkvepzIw3akt8oXyclrWH5ZywGAfJpNbZpiy2IqtKPNzB8YhVjBPUVJaB6dDfaRZodak90LaBZFu1+d31NsUzQLxe1JyHeZ8Z8tGLI9110BAvyz2vCu7W31+SX0PULntkITubgm341HEAvmE6002HqfkuYjRP205ynDs=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a0f6c1f-172a-4f05-5bc2-08daf54fd804
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jan 2023 10:20:50.1419
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DjpU6snos1HtxLDrrlNdX2/OlDx0gzuZWVeQ51C3GqdYv/H6QvkZwnXf1Hr4WihuV9nR8XdYE3lSx7TdoXv3VfXAu81sY1bfiNZ6i/zwfWo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR03MB6797
 
-From: Julien Grall <jgrall@amazon.com>
-
-At the moment, bootloaders can load Xen anywhere in memory but the
-region 2MB - 4MB. While I am not aware of any issue, we have no way
-to tell the bootloader to avoid that region.
-
-In addition to that, in the future, Xen may grow over 2MB if we
-enable feature like UBSAN or GCOV. To avoid widening the restriction
-on the load address, it would be better to get rid of it.
-
-When the identity mapping is clashing with the Xen runtime mapping,
-we need an extra indirection to be able to replace the identity
-mapping with the Xen runtime mapping.
-
-Reserve a new memory region that will be used to temporarily map Xen.
-For convenience, the new area is re-using the same first slot as the
-domheap which is used for per-cpu temporary mapping after a CPU has
-booted.
-
-Furthermore, directly map boot_second (which cover Xen and more)
-to the temporary area. This will avoid to allocate an extra page-table
-for the second-level and will helpful for follow-up patches (we will
-want to use the fixmap whilst in the temporary mapping).
-
-Lastly, some part of the code now needs to know whether the temporary
-mapping was created. So reserve r12 to store this information.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-----
-    Changes in v4:
-        - Remove spurious newline
-
-    Changes in v3:
-        - Remove the ASSERT() in init_domheap_mappings() because it was
-          bogus (secondary CPU root tables are initialized to the CPU0
-          root table so the entry will be valid). Also, it is not
-          related to this patch as the CPU0 root table are rebuilt
-          during boot. The ASSERT() will be re-introduced later.
-
-    Changes in v2:
-        - Patch added
----
- xen/arch/arm/arm32/head.S         | 139 ++++++++++++++++++++++++++----
- xen/arch/arm/include/asm/config.h |  14 +++
- xen/arch/arm/mm.c                 |  14 +++
- 3 files changed, 152 insertions(+), 15 deletions(-)
-
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index 67b910808b74..3800efb44169 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -35,6 +35,9 @@
- #define XEN_FIRST_SLOT      first_table_offset(XEN_VIRT_START)
- #define XEN_SECOND_SLOT     second_table_offset(XEN_VIRT_START)
- 
-+/* Offset between the early boot xen mapping and the runtime xen mapping */
-+#define XEN_TEMPORARY_OFFSET      (TEMPORARY_XEN_VIRT_START - XEN_VIRT_START)
-+
- #if defined(CONFIG_EARLY_PRINTK) && defined(CONFIG_EARLY_PRINTK_INC)
- #include CONFIG_EARLY_PRINTK_INC
- #endif
-@@ -94,7 +97,7 @@
-  *   r9  - paddr(start)
-  *   r10 - phys offset
-  *   r11 - UART address
-- *   r12 -
-+ *   r12 - Temporary mapping created
-  *   r13 - SP
-  *   r14 - LR
-  *   r15 - PC
-@@ -445,6 +448,9 @@ ENDPROC(cpu_init)
-  *   r9 : paddr(start)
-  *   r10: phys offset
-  *
-+ * Output:
-+ *   r12: Was a temporary mapping created?
-+ *
-  * Clobbers r0 - r4, r6
-  *
-  * Register usage within this function:
-@@ -484,7 +490,11 @@ create_page_tables:
-         /*
-          * Setup the 1:1 mapping so we can turn the MMU on. Note that
-          * only the first page of Xen will be part of the 1:1 mapping.
-+         *
-+         * In all the cases, we will link boot_third_id. So create the
-+         * mapping in advance.
-          */
-+        create_mapping_entry boot_third_id, r9, r9
- 
-         /*
-          * Find the first slot used. If the slot is not XEN_FIRST_SLOT,
-@@ -501,8 +511,7 @@ create_page_tables:
-         /*
-          * Find the second slot used. If the slot is XEN_SECOND_SLOT, then the
-          * 1:1 mapping will use its own set of page-tables from the
--         * third level. For slot XEN_SECOND_SLOT, Xen is not yet able to handle
--         * it.
-+         * third level.
-          */
-         get_table_slot r1, r9, 2     /* r1 := second slot */
-         cmp   r1, #XEN_SECOND_SLOT
-@@ -513,13 +522,33 @@ create_page_tables:
- link_from_second_id:
-         create_table_entry boot_second_id, boot_third_id, r9, 2
- link_from_third_id:
--        create_mapping_entry boot_third_id, r9, r9
-+        /* Good news, we are not clashing with Xen virtual mapping */
-+        mov   r12, #0                /* r12 := temporary mapping not created */
-         mov   pc, lr
- 
- virtphys_clash:
--        /* Identity map clashes with boot_third, which we cannot handle yet */
--        PRINT("- Unable to build boot page tables - virt and phys addresses clash. -\r\n")
--        b     fail
-+        /*
-+         * The identity map clashes with boot_third. Link boot_first_id and
-+         * map Xen to a temporary mapping. See switch_to_runtime_mapping
-+         * for more details.
-+         */
-+        PRINT("- Virt and Phys addresses clash  -\r\n")
-+        PRINT("- Create temporary mapping -\r\n")
-+
-+        /*
-+         * This will override the link to boot_second in XEN_FIRST_SLOT.
-+         * The page-tables are not live yet. So no need to use
-+         * break-before-make.
-+         */
-+        create_table_entry boot_pgtable, boot_second_id, r9, 1
-+        create_table_entry boot_second_id, boot_third_id, r9, 2
-+
-+        /* Map boot_second (cover Xen mappings) to the temporary 1st slot */
-+        mov_w r0, TEMPORARY_XEN_VIRT_START
-+        create_table_entry boot_pgtable, boot_second, r0, 1
-+
-+        mov   r12, #1                /* r12 := temporary mapping created */
-+        mov   pc, lr
- ENDPROC(create_page_tables)
- 
- /*
-@@ -528,9 +557,10 @@ ENDPROC(create_page_tables)
-  *
-  * Inputs:
-  *   r9 : paddr(start)
-+ *  r12 : Was the temporary mapping created?
-  *   lr : Virtual address to return to
-  *
-- * Clobbers r0 - r3
-+ * Clobbers r0 - r5
-  */
- enable_mmu:
-         PRINT("- Turning on paging -\r\n")
-@@ -558,21 +588,79 @@ enable_mmu:
-          * The MMU is turned on and we are in the 1:1 mapping. Switch
-          * to the runtime mapping.
-          */
--        mov_w r0, 1f
--        mov   pc, r0
-+        mov   r5, lr                /* Save LR before overwritting it */
-+        mov_w lr, 1f                /* Virtual address in the runtime mapping */
-+        b     switch_to_runtime_mapping
- 1:
-+        mov   lr, r5                /* Restore LR */
-         /*
--         * The 1:1 map may clash with other parts of the Xen virtual memory
--         * layout. As it is not used anymore, remove it completely to
--         * avoid having to worry about replacing existing mapping
--         * afterwards.
-+         * At this point, either the 1:1 map or the temporary mapping
-+         * will be present. The former may clash with other parts of the
-+         * Xen virtual memory layout. As both of them are not used
-+         * anymore, remove them completely to avoid having to worry
-+         * about replacing existing mapping afterwards.
-          *
-          * On return this will jump to the virtual address requested by
-          * the caller.
-          */
--        b     remove_identity_mapping
-+        teq   r12, #0
-+        beq   remove_identity_mapping
-+        b     remove_temporary_mapping
- ENDPROC(enable_mmu)
- 
-+/*
-+ * Switch to the runtime mapping. The logic depends on whether the
-+ * runtime virtual region is clashing with the physical address
-+ *
-+ *  - If it is not clashing, we can directly jump to the address in
-+ *    the runtime mapping.
-+ *  - If it is clashing, create_page_tables() would have mapped Xen to
-+ *    a temporary virtual address. We need to switch to the temporary
-+ *    mapping so we can remove the identity mapping and map Xen at the
-+ *    correct position.
-+ *
-+ * Inputs
-+ *    r9: paddr(start)
-+ *   r12: Was a temporary mapping created?
-+ *    lr: Address in the runtime mapping to jump to
-+ *
-+ * Clobbers r0 - r4
-+ */
-+switch_to_runtime_mapping:
-+        /*
-+         * Jump to the runtime mapping if the virt and phys are not
-+         * clashing
-+         */
-+        teq   r12, #0
-+        beq   ready_to_switch
-+
-+        /* We are still in the 1:1 mapping. Jump to the temporary Virtual address. */
-+        mov_w r0, 1f
-+        add   r0, r0, #XEN_TEMPORARY_OFFSET /* r0 := address in temporary mapping */
-+        mov   pc, r0
-+
-+1:
-+        /* Remove boot_second_id */
-+        mov   r2, #0
-+        mov   r3, #0
-+        adr_l r0, boot_pgtable
-+        get_table_slot r1, r9, 1            /* r1 := first slot */
-+        lsl   r1, r1, #3                    /* r1 := first slot offset */
-+        strd  r2, r3, [r0, r1]
-+
-+        flush_xen_tlb_local r0
-+
-+        /* Map boot_second into boot_pgtable */
-+        mov_w r0, XEN_VIRT_START
-+        create_table_entry boot_pgtable, boot_second, r0, 1
-+
-+        /* Ensure any page table updates are visible before continuing */
-+        dsb   nsh
-+
-+ready_to_switch:
-+        mov   pc, lr
-+ENDPROC(switch_to_runtime_mapping)
-+
- /*
-  * Remove the 1:1 map from the page-tables. It is not easy to keep track
-  * where the 1:1 map was mapped, so we will look for the top-level entry
-@@ -618,6 +706,27 @@ identity_mapping_removed:
-         mov   pc, lr
- ENDPROC(remove_identity_mapping)
- 
-+/*
-+ * Remove the temporary mapping of Xen starting at TEMPORARY_XEN_VIRT_START.
-+ *
-+ * Clobbers r0 - r1
-+ */
-+remove_temporary_mapping:
-+        /* r2:r3 := invalid page-table entry */
-+        mov   r2, #0
-+        mov   r3, #0
-+
-+        adr_l r0, boot_pgtable
-+        mov_w r1, TEMPORARY_XEN_VIRT_START
-+        get_table_slot r1, r1, 1     /* r1 := first slot */
-+        lsl   r1, r1, #3             /* r1 := first slot offset */
-+        strd  r2, r3, [r0, r1]
-+
-+        flush_xen_tlb_local r0
-+
-+        mov  pc, lr
-+ENDPROC(remove_temporary_mapping)
-+
- /*
-  * Map the UART in the fixmap (when earlyprintk is used) and hook the
-  * fixmap table in the page tables.
-diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
-index 87851e677701..6c1b762e976d 100644
---- a/xen/arch/arm/include/asm/config.h
-+++ b/xen/arch/arm/include/asm/config.h
-@@ -148,6 +148,20 @@
- /* Number of domheap pagetable pages required at the second level (2MB mappings) */
- #define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
- 
-+/*
-+ * The temporary area is overlapping with the domheap area. This may
-+ * be used to create an alias of the first slot containing Xen mappings
-+ * when turning on/off the MMU.
-+ */
-+#define TEMPORARY_AREA_FIRST_SLOT    (first_table_offset(DOMHEAP_VIRT_START))
-+
-+/* Calculate the address in the temporary area */
-+#define TEMPORARY_AREA_ADDR(addr)                           \
-+     (((addr) & ~XEN_PT_LEVEL_MASK(1)) |                    \
-+      (TEMPORARY_AREA_FIRST_SLOT << XEN_PT_LEVEL_SHIFT(1)))
-+
-+#define TEMPORARY_XEN_VIRT_START    TEMPORARY_AREA_ADDR(XEN_VIRT_START)
-+
- #else /* ARM_64 */
- 
- #define SLOT0_ENTRY_BITS  39
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 0fc6f2992dd1..9ebc2d0f609e 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -167,6 +167,9 @@ static void __init __maybe_unused build_assertions(void)
- #define CHECK_SAME_SLOT(level, virt1, virt2) \
-     BUILD_BUG_ON(level##_table_offset(virt1) != level##_table_offset(virt2))
- 
-+#define CHECK_DIFFERENT_SLOT(level, virt1, virt2) \
-+    BUILD_BUG_ON(level##_table_offset(virt1) == level##_table_offset(virt2))
-+
- #ifdef CONFIG_ARM_64
-     CHECK_SAME_SLOT(zeroeth, XEN_VIRT_START, FIXMAP_ADDR(0));
-     CHECK_SAME_SLOT(zeroeth, XEN_VIRT_START, BOOT_FDT_VIRT_START);
-@@ -174,7 +177,18 @@ static void __init __maybe_unused build_assertions(void)
-     CHECK_SAME_SLOT(first, XEN_VIRT_START, FIXMAP_ADDR(0));
-     CHECK_SAME_SLOT(first, XEN_VIRT_START, BOOT_FDT_VIRT_START);
- 
-+    /*
-+     * For arm32, the temporary mapping will re-use the domheap
-+     * first slot and the second slots will match.
-+     */
-+#ifdef CONFIG_ARM_32
-+    CHECK_SAME_SLOT(first, TEMPORARY_XEN_VIRT_START, DOMHEAP_VIRT_START);
-+    CHECK_DIFFERENT_SLOT(first, XEN_VIRT_START, TEMPORARY_XEN_VIRT_START);
-+    CHECK_SAME_SLOT(second, XEN_VIRT_START, TEMPORARY_XEN_VIRT_START);
-+#endif
-+
- #undef CHECK_SAME_SLOT
-+#undef CHECK_DIFFERENT_SLOT
- }
- 
- static lpae_t *xen_map_table(mfn_t mfn)
--- 
-2.38.1
-
+T24gMTMvMDEvMjAyMyA4OjQ4IGFtLCBKYW4gQmV1bGljaCB3cm90ZToNCj4gV2hpbGUgYzYxYTZm
+NzRmODBlICgieDg2OiBlbmZvcmNlIGNvbnNpc3RlbnQgY2FjaGFiaWxpdHkgb2YgTU1JTw0KPiBt
+YXBwaW5ncyIpIGNvcnJlY3RseSBjb252ZXJ0ZWQgb25lICFtZm5fdmFsaWQoKSBjaGVjayB0aGVy
+ZSwgdHdvIG90aGVycw0KPiB3ZXJlIHdyb25nbHkgbGVmdCB1bnRvdWNoZWQ6IEJvdGggY2FjaGFi
+aWxpdHkgY29udHJvbCBhbmQgbG9nLWRpcnR5DQo+IHRyYWNraW5nIG91Z2h0IHRvIGJlIHVuaWZv
+cm1seSBoYW5kbGVkL2V4Y2x1ZGVkIGZvciBhbGwgKG5vbi0pTU1JTw0KPiByYW5nZXMsIG5vdCBq
+dXN0IG9uZXMgcXVhbGlmaWFibGUgYnkgbWZuX3ZhbGlkKCkuDQo+DQo+IFNpZ25lZC1vZmYtYnk6
+IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCg0KQWNrZWQtYnk6IEFuZHJldyBDb29w
+ZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+DQo=
 
