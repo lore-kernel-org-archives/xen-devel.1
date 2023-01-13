@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7AA7C54EBE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476620.739037 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4BBC54EBD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476623.739042 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjj-0005JM-0U; Fri, 13 Jan 2023 05:36:19 +0000
+	id 1pGCjj-0005S6-Gb; Fri, 13 Jan 2023 05:36:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476620.739037; Fri, 13 Jan 2023 05:36:18 +0000
+Received: by outflank-mailman (output) from mailman id 476623.739042; Fri, 13 Jan 2023 05:36:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCji-0005HE-7S; Fri, 13 Jan 2023 05:36:18 +0000
-Received: by outflank-mailman (input) for mailman id 476620;
- Fri, 13 Jan 2023 05:36:16 +0000
+	id 1pGCji-0005OI-QJ; Fri, 13 Jan 2023 05:36:18 +0000
+Received: by outflank-mailman (input) for mailman id 476623;
+ Fri, 13 Jan 2023 05:36:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1pGCej-0005sP-Nm
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:09 +0000
+ id 1pGCfI-0005sP-BQ
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:44 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 7ad5d262-9303-11ed-b8d0-410ff93cb8f0;
- Fri, 13 Jan 2023 06:31:07 +0100 (CET)
+ id 8f4ed25c-9303-11ed-b8d0-410ff93cb8f0;
+ Fri, 13 Jan 2023 06:31:41 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34C54FEC;
- Thu, 12 Jan 2023 21:31:49 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9D68D13D5;
+ Thu, 12 Jan 2023 21:32:23 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7676F3F587;
- Thu, 12 Jan 2023 21:31:04 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DF3EB3F587;
+ Thu, 12 Jan 2023 21:31:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ad5d262-9303-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 8f4ed25c-9303-11ed-b8d0-410ff93cb8f0
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,135 +55,299 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 29/40] xen/mpu: introduce mpu_memory_section_contains for address range check
-Date: Fri, 13 Jan 2023 13:29:02 +0800
-Message-Id: <20230113052914.3845596-30-Penny.Zheng@arm.com>
+Subject: [PATCH v2 39/40] xen/mpu: re-order xen_mpumap in arch_init_finialize
+Date: Fri, 13 Jan 2023 13:29:12 +0800
+Message-Id: <20230113052914.3845596-40-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We have already introduced "mpu,xxx-memory-section" to limit system/domain
-configuration, so we shall add check to verfify user's configuration.
+In function init_done, we have finished the booting and we do the final
+clean-up working, including marking the section .data.ro_after_init
+read-only, free init text and init data section, etc.
 
-We shall check if any guest boot module is within the boot module section,
-including kernel module(BOOTMOD_KERNEL), device tree
-passthrough module(BOOTMOD_GUEST_DTB), and ramdisk module(BOOTMOD_RAMDISK).
+In MPU system, other than above operations, we also need to re-order
+Xen MPU memory region mapping table(xen_mpumap).
 
-We also shall check if any guest RAM through "xen,static-mem" is within
-the guest memory section.
+In xen_mpumap, we have two type MPU memory region: fixed memory region
+and switching memory region.
+Fixed memory region are referring to the regions which won't change
+since birth, like Xen .text section, while switching region(i.e. device memory)
+are regions that gets switched out when idle vcpu leaving hypervisor mode,
+and gets switched in when idle vcpu entering hypervisor mode. They were added
+at tail during the boot stage.
+To save the trouble of hunting down each switching region in time-sensitive
+context switch, we re-order xen_mpumap to keep fixed regions still in the
+front, and switching ones in the heels of them.
 
-Function mpu_memory_section_contains is introduced to do above check.
+We define a MPU memory region mapping table(sw_mpumap) to store all
+switching regions. After disabling them at its original position, we
+re-enable them at re-ordering position.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
- xen/arch/arm/domain_build.c      |  4 ++++
- xen/arch/arm/include/asm/setup.h |  2 ++
- xen/arch/arm/kernel.c            | 18 ++++++++++++++++++
- xen/arch/arm/setup_mpu.c         | 22 ++++++++++++++++++++++
- 4 files changed, 46 insertions(+)
+ xen/arch/arm/include/asm/arm64/mpu.h |   5 ++
+ xen/arch/arm/include/asm/mm_mpu.h    |   1 +
+ xen/arch/arm/include/asm/setup.h     |   2 +
+ xen/arch/arm/mm_mpu.c                | 110 +++++++++++++++++++++++++++
+ xen/arch/arm/setup.c                 |  13 +---
+ xen/arch/arm/setup_mmu.c             |  16 ++++
+ xen/arch/arm/setup_mpu.c             |  20 +++++
+ 7 files changed, 155 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 829cea8de8..f48a3f679f 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -546,6 +546,10 @@ static mfn_t __init acquire_static_memory_bank(struct domain *d,
-                d, *psize);
-         return INVALID_MFN;
-     }
-+#ifdef CONFIG_HAS_MPU
-+    if ( !mpu_memory_section_contains(*pbase, *pbase + *psize, MSINFO_GUEST) )
-+        return INVALID_MFN;
-+#endif
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index b4e50a9a0e..e058f36435 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -155,6 +155,11 @@ typedef struct {
+     (uint64_t)((_pr->prlar.reg.limit << MPU_REGION_SHIFT) | 0x3f); \
+ })
  
-     smfn = maddr_to_mfn(*pbase);
-     res = acquire_domstatic_pages(d, smfn, PFN_DOWN(*psize), 0);
++#define region_needs_switching_on_ctxt(pr) ({               \
++    pr_t *_pr = pr;                                         \
++    _pr->prlar.reg.sw;                                      \
++})
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* __ARM64_MPU_H__ */
+diff --git a/xen/arch/arm/include/asm/mm_mpu.h b/xen/arch/arm/include/asm/mm_mpu.h
+index 5aa61c43b6..f8f54eb901 100644
+--- a/xen/arch/arm/include/asm/mm_mpu.h
++++ b/xen/arch/arm/include/asm/mm_mpu.h
+@@ -10,6 +10,7 @@
+  * section by section based on static configuration in Device Tree.
+  */
+ extern void setup_static_mappings(void);
++extern int reorder_xen_mpumap(void);
+ 
+ extern struct page_info *frame_table;
+ 
 diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 61f24b5848..d4c1336597 100644
+index d4c1336597..39cd95553d 100644
 --- a/xen/arch/arm/include/asm/setup.h
 +++ b/xen/arch/arm/include/asm/setup.h
-@@ -209,6 +209,8 @@ extern struct mpuinfo mpuinfo;
+@@ -182,6 +182,8 @@ int map_range_to_domain(const struct dt_device_node *dev,
  
- extern int process_mpuinfo(const void *fdt, int node, uint32_t address_cells,
-                            uint32_t size_cells);
-+extern bool mpu_memory_section_contains(paddr_t s, paddr_t e,
-+                                        enum mpu_section_info type);
- #endif /* CONFIG_HAS_MPU */
+ extern const char __ro_after_init_start[], __ro_after_init_end[];
  
- #endif
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index 0475d8fae7..ee7144ec13 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -467,6 +467,12 @@ int __init kernel_probe(struct kernel_info *info,
-                 mod = boot_module_find_by_addr_and_kind(
-                         BOOTMOD_KERNEL, kernel_addr);
-                 info->kernel_bootmodule = mod;
-+#ifdef CONFIG_HAS_MPU
-+                if ( !mpu_memory_section_contains(mod->start,
-+                                                  mod->start + mod->size,
-+                                                  MSINFO_BOOTMODULE) )
-+                    return -EINVAL;
-+#endif
-             }
-             else if ( dt_device_is_compatible(node, "multiboot,ramdisk") )
-             {
-@@ -477,6 +483,12 @@ int __init kernel_probe(struct kernel_info *info,
-                 dt_get_range(&val, node, &initrd_addr, &size);
-                 info->initrd_bootmodule = boot_module_find_by_addr_and_kind(
-                         BOOTMOD_RAMDISK, initrd_addr);
-+#ifdef CONFIG_HAS_MPU
-+                if ( !mpu_memory_section_contains(mod->start,
-+                                                  mod->start + mod->size,
-+                                                  MSINFO_BOOTMODULE) )
-+                    return -EINVAL;
-+#endif
-             }
-             else if ( dt_device_is_compatible(node, "multiboot,device-tree") )
-             {
-@@ -489,6 +501,12 @@ int __init kernel_probe(struct kernel_info *info,
-                 dt_get_range(&val, node, &dtb_addr, &size);
-                 info->dtb_bootmodule = boot_module_find_by_addr_and_kind(
-                         BOOTMOD_GUEST_DTB, dtb_addr);
-+#ifdef CONFIG_HAS_MPU
-+                if ( !mpu_memory_section_contains(mod->start,
-+                                                  mod->start + mod->size,
-+                                                  MSINFO_BOOTMODULE) )
-+                    return -EINVAL;
-+#endif
-             }
-             else
-                 continue;
-diff --git a/xen/arch/arm/setup_mpu.c b/xen/arch/arm/setup_mpu.c
-index 160934bf86..f7d74ea604 100644
---- a/xen/arch/arm/setup_mpu.c
-+++ b/xen/arch/arm/setup_mpu.c
-@@ -130,6 +130,28 @@ void __init setup_mm(void)
-     init_staticmem_pages();
++extern void arch_init_finialize(void);
++
+ struct init_info
+ {
+     /* Pointer to the stack, used by head.S when entering in C */
+diff --git a/xen/arch/arm/mm_mpu.c b/xen/arch/arm/mm_mpu.c
+index 118bb11d1a..434ed872c1 100644
+--- a/xen/arch/arm/mm_mpu.c
++++ b/xen/arch/arm/mm_mpu.c
+@@ -80,6 +80,25 @@ static const unsigned int mpu_section_mattr[MSINFO_MAX] = {
+ 
+ extern char __init_data_begin[], __init_end[];
+ 
++/*
++ * MPU memory mapping table records regions that needs switching in/out
++ * during vcpu context switch
++ */
++static pr_t *sw_mpumap;
++static uint64_t nr_sw_mpumap;
++
++/*
++ * After reordering, nr_xen_mpumap records number of regions for Xen fixed
++ * memory mapping
++ */
++static uint64_t nr_xen_mpumap;
++
++/*
++ * After reordering, nr_cpu_mpumap records number of EL2 valid
++ * MPU memory regions
++ */
++static uint64_t nr_cpu_mpumap;
++
+ /* Write a MPU protection region */
+ #define WRITE_PROTECTION_REGION(sel, pr, prbar_el2, prlar_el2) ({       \
+     uint64_t _sel = sel;                                                \
+@@ -847,6 +866,97 @@ void unmap_page_from_xen_misc(void)
+ {
  }
  
-+bool __init mpu_memory_section_contains(paddr_t s, paddr_t e,
-+                                        enum mpu_section_info type)
++void dump_hyp_mapping(void)
 +{
-+    unsigned int i = 0;
++    uint64_t i = 0;
++    pr_t region;
 +
-+    for ( ; i < mpuinfo.sections[type].nr_banks; i++ )
++    for ( i = 0; i < nr_cpu_mpumap; i++ )
 +    {
-+        paddr_t section_start = mpuinfo.sections[type].bank[i].start;
-+        paddr_t section_size = mpuinfo.sections[type].bank[i].size;
-+        paddr_t section_end = section_start + section_size;
++        access_protection_region(true, &region, NULL, i);
++        printk(XENLOG_INFO
++               "MPU memory region [%lu]: 0x%"PRIpaddr" - 0x%"PRIpaddr".\n",
++               i, pr_get_base(&region), pr_get_limit(&region));
++    }
++}
 +
-+        /* range inclusive */
-+        if ( s >= section_start && e <= section_end )
-+            return true;
++/* Standard entry to dynamically allocate MPU memory region mapping table. */
++static pr_t *alloc_mpumap(void)
++{
++    pr_t *map;
++
++    /*
++     * A MPU memory region structure(pr_t) takes 16 bytes, even with maximum
++     * supported MPU protection regions in EL2, 255, MPU table at most takes up
++     * less than 4KB(PAGE_SIZE).
++     */
++    map = alloc_xenheap_pages(0, 0);
++    if ( map == NULL )
++        return NULL;
++
++    clear_page(map);
++    return map;
++}
++
++/*
++ * Switching region(i.e. device memory) are regions that gets switched out
++ * when idle vcpu leaving hypervisor mode, and gets switched in when idle vcpu
++ * entering hypervisor mode. They're added at tail during the boot stage.
++ * To save the trouble of hunting down each switching region in time-sensitive
++ * context switch, we re-order xen_mpumap to keep fixed regions still in the
++ * front, and switching ones in the heels of them.
++ */
++int reorder_xen_mpumap(void)
++{
++    uint64_t i;
++
++    sw_mpumap = alloc_mpumap();
++    if ( !sw_mpumap )
++        return -ENOMEM;
++
++    /* Record the switching regions in sw_mpumap. */
++    for ( i = next_transient_region_idx - 1; i < max_xen_mpumap; i++ )
++    {
++        pr_t *region;
++
++        region = &xen_mpumap[i];
++        if ( region_is_valid(region) && region_needs_switching_on_ctxt(region) )
++        {
++            sw_mpumap[nr_sw_mpumap++] = xen_mpumap[i];
++
++            /*
++             * Disable it temporarily for later enabling it in the
++             * new reordered position
++             * WARNING: since device memory section, as switching region,
++             * will get disabled temporarily, console will become inaccessible
++             * in a short time.
++             */
++            control_mpu_region_from_index(i, false);
++            memset(&xen_mpumap[i], 0, sizeof(pr_t));
++        }
 +    }
 +
-+    printk(XENLOG_ERR
-+           "mpu: invalid range configuration 0x%"PRIpaddr" - 0x%"PRIpaddr", and it shall be within %s\n",
-+           s, e, mpu_section_info_str[i]);
-+    return false;
++    /* Put switching regions after fixed regions */
++    i = 0;
++    nr_cpu_mpumap = nr_xen_mpumap = next_fixed_region_idx;
++    do
++    {
++        access_protection_region(false, NULL,
++                                 (const pr_t*)(&sw_mpumap[i]),
++                                 nr_cpu_mpumap);
++        nr_cpu_mpumap++;
++    } while ( ++i < nr_sw_mpumap );
++
++    /*
++     * Now, xen_mpumap becomes a tight mapping, with fixed region at front and
++     * switching ones after fixed ones.
++     */
++    printk(XENLOG_INFO "Xen EL2 MPU memory region mapping after re-order.\n");
++    dump_hyp_mapping();
++
++    return 0;
++}
++
+ /* TODO: Implementation on the first usage */
+ void dump_hyp_walk(vaddr_t addr)
+ {
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 49ba998f68..b21fc4b8e2 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -61,23 +61,12 @@ domid_t __read_mostly max_init_domid;
+ 
+ static __used void init_done(void)
+ {
+-    int rc;
+-
+     /* Must be done past setting system_state. */
+     unregister_init_virtual_region();
+ 
+     free_init_memory();
+ 
+-    /*
+-     * We have finished booting. Mark the section .data.ro_after_init
+-     * read-only.
+-     */
+-    rc = modify_xen_mappings((unsigned long)&__ro_after_init_start,
+-                             (unsigned long)&__ro_after_init_end,
+-                             PAGE_HYPERVISOR_RO);
+-    if ( rc )
+-        panic("Unable to mark the .data.ro_after_init section read-only (rc = %d)\n",
+-              rc);
++    arch_init_finialize();
+ 
+     startup_cpu_idle_loop();
+ }
+diff --git a/xen/arch/arm/setup_mmu.c b/xen/arch/arm/setup_mmu.c
+index 611a60633e..5b7a5de086 100644
+--- a/xen/arch/arm/setup_mmu.c
++++ b/xen/arch/arm/setup_mmu.c
+@@ -365,6 +365,22 @@ void __init discard_initial_modules(void)
+     remove_early_mappings();
+ }
+ 
++void arch_init_finialize(void)
++{
++    int rc;
++
++    /*
++     * We have finished booting. Mark the section .data.ro_after_init
++     * read-only.
++     */
++    rc = modify_xen_mappings((unsigned long)&__ro_after_init_start,
++                             (unsigned long)&__ro_after_init_end,
++                             PAGE_HYPERVISOR_RO);
++    if ( rc )
++        panic("Unable to mark the .data.ro_after_init section read-only (rc = %d)\n",
++              rc);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/setup_mpu.c b/xen/arch/arm/setup_mpu.c
+index f47f1f39ee..b510780cde 100644
+--- a/xen/arch/arm/setup_mpu.c
++++ b/xen/arch/arm/setup_mpu.c
+@@ -178,6 +178,26 @@ void __init discard_initial_modules(void)
+     remove_early_mappings();
+ }
+ 
++void arch_init_finialize(void)
++{
++    int rc;
++
++    /*
++     * We have finished booting. Mark the section .data.ro_after_init
++     * read-only.
++     */
++    rc = modify_xen_mappings((unsigned long)&__ro_after_init_start,
++                             (unsigned long)&__ro_after_init_end,
++                             REGION_HYPERVISOR_RO);
++    if ( rc )
++        panic("mpu: Unable to mark the .data.ro_after_init section read-only (rc = %d)\n",
++              rc);
++
++    rc = reorder_xen_mpumap();
++    if ( rc )
++        panic("mpu: Failed to reorder Xen MPU memory mapping (rc = %d)\n", rc);
 +}
 +
  /*
