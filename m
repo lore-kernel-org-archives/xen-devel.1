@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB6AC54EBE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 04:15:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476489.738683 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AD7CC54EBE
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:30:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476499.738738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGBSi-0006g2-Hp; Fri, 13 Jan 2023 04:14:40 +0000
+	id 1pGCdZ-0006zY-1g; Fri, 13 Jan 2023 05:29:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476489.738683; Fri, 13 Jan 2023 04:14:40 +0000
+Received: by outflank-mailman (output) from mailman id 476499.738738; Fri, 13 Jan 2023 05:29:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGBSi-0006fv-DU; Fri, 13 Jan 2023 04:14:40 +0000
-Received: by outflank-mailman (input) for mailman id 476489;
- Fri, 13 Jan 2023 04:14:39 +0000
+	id 1pGCdY-0006zP-Sq; Fri, 13 Jan 2023 05:29:56 +0000
+Received: by outflank-mailman (input) for mailman id 476499;
+ Fri, 13 Jan 2023 05:29:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2WVX=5K=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1pGBSg-0006fn-Ee
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 04:14:39 +0000
-Received: from sonic305-19.consmr.mail.gq1.yahoo.com
- (sonic305-19.consmr.mail.gq1.yahoo.com [98.137.64.82])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c7fbf237-92f8-11ed-b8d0-410ff93cb8f0;
- Fri, 13 Jan 2023 05:14:34 +0100 (CET)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic305.consmr.mail.gq1.yahoo.com with HTTP; Fri, 13 Jan 2023 04:14:31 +0000
-Received: by hermes--production-ne1-5648bd7666-x5zv9 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 90236039d2e62b2abb2e002068f6b7b4; 
- Fri, 13 Jan 2023 04:14:28 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
+ id 1pGCdW-0005sP-M0
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:29:54 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 4e16b03c-9303-11ed-b8d0-410ff93cb8f0;
+ Fri, 13 Jan 2023 06:29:52 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 07767FEC;
+ Thu, 12 Jan 2023 21:30:34 -0800 (PST)
+Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
+ [10.169.190.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 884413F587;
+ Thu, 12 Jan 2023 21:29:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,85 +45,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7fbf237-92f8-11ed-b8d0-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1673583271; bh=4hASBuEGunDT4zjWth2rvDl2Y4xCmYLJ9R5aycKiqec=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=tONNFQpBv6sDKV/ugSmglztfJJL0yYEkcO0dJcg4BFyP/xJY9NduoRr9Hn34HBoWNnbJbxJvJzsaT6waPYcUHbDFwd1ZqYfdcmQ6HuhbyE4g3Xm1iHjCIf6WzXznonLD6A9PGVBKs7eeYc+jNpRFAEeeqSIU/k6/2+2q/YsGs4RhTx8BPvanyUxqNehnaVvxLPPrlRe02kbt2hYGGB7R0a9+je1pij9eoX8PZoFZ+HkqocB0tB6zUmLq+xMyjHDOH8LxETQC0GSLUhnjYfP5hjbbyf4hqNUrc6zjsMHSSJUPnbVN16BOFi0MA58igCZAuxIe+WvoWscyxoAy1o/8Yw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1673583271; bh=Tv4gbSx1lQwSkmBRYj+8e9bM3qtZfTwV2DimFH6eZWy=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=UlFlx8AdCnY9gXRLo+jltAqKbwiOFsksnU2zXen6M1DCZ686j8CIDK8hck9ltidKZVXRkLIH4zGWTR4mYF92gq7HDcHKyFpJ80W52RZBv1LaXOUbGMdF3m0O5UfaXcsa9ZQL94s23cxFeyY6jCv+qViH2gFbhjuR7/ThJ03xm0iFvYM8BWqqAA8lOQrZvn6rKqekMGenaixoYQsJtctmguxtibHEnvP/kUf7xkermgFlWLR5sno3IFSDQibYgmdjXYxIFZ4yU0PcqiAzJhTV4p3f6+1arbzi7LUQJJ5l/PN6AqyeIaBsDUdmuTTR/LtiGG8yrgTaNt7J1R1OAolE3w==
-X-YMail-OSG: ttEldBMVM1nVeFTo_.eAWkkRTsqhuLa7Om2EKLB_l73WR5n3MGc_a9YbOHmGONy
- E3DkD0H0flRzYy.Sy60BO21eGNYMrQHhiEnxxx7jq8t5kWnX20Sa.WOYI4dzYitvZxqWFfN2tgVu
- ivgRIYummAvragH44oo5jFD.5BRQM4pbHrw.yJmMv_2dkCO_zUjVwwEwSQcBpRVbrCbsLRnaGJQx
- R6d3jnETZBF1n40M2oHkz7rZbr2IGLNyHUlWxGkTWGU4QccvzSQLzqqCCWQgEXavfuMUMnispzMP
- 63knsXk7zhPiFETn9RAHqLzpFpB93hQ.6vJQRwRaMTNjC8_J4SBbo5lHWXwflLidB.yaLT.FLuGg
- TOyCQO.LedKHqqDjsIVIH285OdngrmYwUm06RIwv2m9.KocCCJMlZzTunS_rniJ_A6yWRD7QkRcI
- 4XPxWY3wdIzUvEVXvJn6b7EJdBktenWWUBzjYtBkNFZkGrTTPdMsBH4Yds9csE0ZjAQy5MG3V.nN
- YYz4angnODQTV4aIQAVXKKsE0647PWOEwSZoUUUkgVz3e_QIEavRV2NTB62r9VDLcABa6EhPddrD
- jC11GJxHiLxuYkUqeqgYr8E9QI494gTd1iLPNl48NZ0TrQIIGzko_z.evZYCXZgbv0nv8JxnMKhX
- s0AFYuS5Q1U_xDAnCuinEBk9t2bNIEAjpg9t3FeJnEBGx6SCftNAS2jAaivTCYTs8aCMWu79QXeI
- sm8gfsKrxuD6dRXcmuWFI46B4qOUN_WZhe7KvUtFnN2R_rkfkDCdg4JKlYVvBDBvuKBd9PVUntUK
- EZeeGL77Wu7mm4pVg8BgaKlX88M2ONVCjIRO0i8I4qOVcmsQNMzWHB.B4P3a3N57krzpVLfNLi3n
- bVg_OX6B4yH0sAMj_sX2rr3ncAKOAYukSLaqpVuzYz0fTXovWfFbrmn7dHxXlCP5ge0cXk7_lbV9
- ubU6GPYOGB8NhwOK27gusL7TmKBH2ijhefApbiQuh_T9833DcGRqTyIUG78UrYw9Y.k1AnZZ2n9Z
- LL299tV.os4jWgEpaPA8edPh2yyOaVIUWebUY2rUaKtVbTe6ki9Wtq8jTJ8Yz2gd9x40c8YqqshG
- B6dNeM3HQ6bKxd4tEpOthYSFtrvCb2gNknTtetkTkP_5CDjsajXDZO244f22TRrtOVSw3j2Zbm5F
- m53nFDGhay9HVeAY2N.kUobffp0hH4OYL2oyd7.t72JkOix73iW5Wd8CZT9dLLHk1hpxv0gD7vgE
- We8K_k7zNtkNAE3DhCXp4dySJXaVwlufbdQf4smHnbnVWDP2.b6rZg8Tibl.LJFqgalLKBkDSjEe
- mSi0ic5ugnz_P9VGPDkZkuha4OitXVDoXjLHykZe6RQccZswk17EilxjeYkkzM7g_X5c_GO1l9iw
- gZ4f6CbN8pstqhst94cnWmxp6zJvNdC_TzyRE_Zps71EZArFniuCxz0Y5p6nAP933AQT7CMti.7x
- mVFpH1j0Ug4BkW4j96vN48_6o9jSapVZ0TkTC4fKqSN62JuSrsRQwRpDk6aLVhymuIOWbgoU7v3q
- ZacOVwjoyfJKr7zbuFTmDNNzlII_IVQ.4DF5cLNCc.CI5uj6Z6ZylLNkBUCO1JaAQbtggJjJ7e2W
- Y1r.FeSK20kCmC3b7qhVeAJlpN43o.IJfwYr8eV_ZnT3mt6b.QdoB28_jxpnJbAfA4X3SQRp6qln
- kcOL_FaPXk5v2caniSZEVaJT4TmiHhE8MfEDR.fCAjIj6CK7flzKgctdU8KCV4kC7G5Y4X9IJcLT
- rIhM9XJUi4XKkC0xAldVbz3oNXeZekQgqLS1HjTX9JfaqDn1ZaCr9c1V_rA0UQlRstf8.Vc3GwDL
- CDb9wtYqmvEDJs9k4_6.yHlFoz.D0g54u3bddkhahRDhyefIGUjcVq8tQnb2nj6ewDJ.6diY2jvR
- UP74pcW28nUPp.VveXif76.s.ud56DUw1tv5jvI.75wGbTIGbx4QeX0RDiCd8R.HP1P6IFppe7GW
- sD1.hR7LMdRHxyw_DviAqJaJMSGPjMn079JtlpVhd3i6XjmF5WbZOpqTSF975TXHSeRldBnIacC1
- 0J0zl_d1weRGnWBOPOd_vGWLb8y0qRMneHURuhrHChlpapeFpL4dbnb6WR6suMFGvPPft09FLp6O
- LQ71q1lFRb5Rhd5Lrx1fb_NAxJ1rD.YO5Fm.jWvNxoIheGobmEqjIQwRPND.VF0_6M1TZoqgtgfw
- Jbm9Hbo7t2SHMDfH0jzV8Iw--
-X-Sonic-MF: <brchuckz@aim.com>
-Message-ID: <128d8ee2-8ee9-0a76-10de-af4c1b364179@aol.com>
-Date: Thu, 12 Jan 2023 23:14:26 -0500
+X-Inumbo-ID: 4e16b03c-9303-11ed-b8d0-410ff93cb8f0
+From: Penny Zheng <Penny.Zheng@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	"Jiamei . Xie" <jiamei.xie@arm.com>
+Subject: [PATCH v2 04/40] xen/arm: add an option to define Xen start address for Armv8-R
+Date: Fri, 13 Jan 2023 13:28:37 +0800
+Message-Id: <20230113052914.3845596-5-Penny.Zheng@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
+References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH v8] xen/pt: reserve PCI slot 2 for Intel igd-passthru
-Content-Language: en-US
-To: "Michael S. Tsirkin" <mst@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>
-Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- xen-devel@lists.xenproject.org, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <philmd@linaro.org>
-References: <a09d2427397621eaecee4c46b33507a99cc5f161.1673334040.git.brchuckz.ref@aol.com>
- <a09d2427397621eaecee4c46b33507a99cc5f161.1673334040.git.brchuckz@aol.com>
- <20230110030331-mutt-send-email-mst@kernel.org>
- <a6994521-68d5-a05b-7be2-a8c605733467@aol.com>
- <D785501E-F95D-4A22-AFD0-85133F8CE56D@gmail.com>
- <9f63e7a6-e434-64b4-f082-7f5a0ab8d5bf@aol.com>
- <7208A064-2A25-4DBB-BF19-6797E96AB00C@gmail.com>
- <20230112180314-mutt-send-email-mst@kernel.org>
-From: Chuck Zmudzinski <brchuckz@aol.com>
-In-Reply-To: <20230112180314-mutt-send-email-mst@kernel.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailer: WebService/1.1.21062 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
 
-On 1/12/23 6:03 PM, Michael S. Tsirkin wrote:
-> On Thu, Jan 12, 2023 at 10:55:25PM +0000, Bernhard Beschow wrote:
->> I think the change Michael suggests is very minimalistic: Move the if
->> condition around xen_igd_reserve_slot() into the function itself and
->> always call it there unconditionally -- basically turning three lines
->> into one. Since xen_igd_reserve_slot() seems very problem specific,
->> Michael further suggests to rename it to something more general. All
->> in all no big changes required.
-> 
-> yes, exactly.
-> 
+From: Wei Chen <wei.chen@arm.com>
 
-OK, got it. I can do that along with the other suggestions.
+On Armv8-A, Xen has a fixed virtual start address (link address
+too) for all Armv8-A platforms. In an MMU based system, Xen can
+map its loaded address to this virtual start address. So, on
+Armv8-A platforms, the Xen start address does not need to be
+configurable. But on Armv8-R platforms, there is no MMU to map
+loaded address to a fixed virtual address and different platforms
+will have very different address space layout. So Xen cannot use
+a fixed physical address on MPU based system and need to have it
+configurable.
 
-Thanks.
+In this patch we introduce one Kconfig option for users to define
+the default Xen start address for Armv8-R. Users can enter the
+address in config time, or select the tailored platform config
+file from arch/arm/configs.
+
+And as we introduced Armv8-R platforms to Xen, that means the
+existed Arm64 platforms should not be listed in Armv8-R platform
+list, so we add !ARM_V8R dependency for these platforms.
+
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Jiamei.Xie <jiamei.xie@arm.com>
+---
+v1 -> v2:
+1. Remove the platform header fvp_baser.h.
+2. Remove the default start address for fvp_baser64.
+3. Remove the description of default address from commit log.
+4. Change HAS_MPU to ARM_V8R for Xen start address dependency.
+   No matter Arm-v8r board has MPU or not, it always need to
+   specify the start address.
+---
+ xen/arch/arm/Kconfig           |  8 ++++++++
+ xen/arch/arm/platforms/Kconfig | 16 +++++++++++++---
+ 2 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index ace7178c9a..c6b6b612d1 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -145,6 +145,14 @@ config TEE
+ 	  This option enables generic TEE mediators support. It allows guests
+ 	  to access real TEE via one of TEE mediators implemented in XEN.
+ 
++config XEN_START_ADDRESS
++	hex "Xen start address: keep default to use platform defined address"
++	default 0
++	depends on ARM_V8R
++	help
++	  This option allows to set the customized address at which Xen will be
++	  linked on MPU systems. This address must be aligned to a page size.
++
+ source "arch/arm/tee/Kconfig"
+ 
+ config STATIC_SHM
+diff --git a/xen/arch/arm/platforms/Kconfig b/xen/arch/arm/platforms/Kconfig
+index c93a6b2756..0904793a0b 100644
+--- a/xen/arch/arm/platforms/Kconfig
++++ b/xen/arch/arm/platforms/Kconfig
+@@ -1,6 +1,7 @@
+ choice
+ 	prompt "Platform Support"
+ 	default ALL_PLAT
++	default FVP_BASER if ARM_V8R
+ 	---help---
+ 	Choose which hardware platform to enable in Xen.
+ 
+@@ -8,13 +9,14 @@ choice
+ 
+ config ALL_PLAT
+ 	bool "All Platforms"
++	depends on !ARM_V8R
+ 	---help---
+ 	Enable support for all available hardware platforms. It doesn't
+ 	automatically select any of the related drivers.
+ 
+ config QEMU
+ 	bool "QEMU aarch virt machine support"
+-	depends on ARM_64
++	depends on ARM_64 && !ARM_V8R
+ 	select GICV3
+ 	select HAS_PL011
+ 	---help---
+@@ -23,7 +25,7 @@ config QEMU
+ 
+ config RCAR3
+ 	bool "Renesas RCar3 support"
+-	depends on ARM_64
++	depends on ARM_64 && !ARM_V8R
+ 	select HAS_SCIF
+ 	select IPMMU_VMSA
+ 	---help---
+@@ -31,14 +33,22 @@ config RCAR3
+ 
+ config MPSOC
+ 	bool "Xilinx Ultrascale+ MPSoC support"
+-	depends on ARM_64
++	depends on ARM_64 && !ARM_V8R
+ 	select HAS_CADENCE_UART
+ 	select ARM_SMMU
+ 	---help---
+ 	Enable all the required drivers for Xilinx Ultrascale+ MPSoC
+ 
++config FVP_BASER
++	bool "Fixed Virtual Platform BaseR support"
++	depends on ARM_V8R
++	help
++	  Enable platform specific configurations for Fixed Virtual
++	  Platform BaseR
++
+ config NO_PLAT
+ 	bool "No Platforms"
++	depends on !ARM_V8R
+ 	---help---
+ 	Do not enable specific support for any platform.
+ 
+-- 
+2.25.1
+
 
