@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB97C54EBE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476650.739133 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CEBC54EBD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476652.739139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCk2-0001aL-3K; Fri, 13 Jan 2023 05:36:38 +0000
+	id 1pGCk2-0001if-T2; Fri, 13 Jan 2023 05:36:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476650.739133; Fri, 13 Jan 2023 05:36:38 +0000
+Received: by outflank-mailman (output) from mailman id 476652.739139; Fri, 13 Jan 2023 05:36:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCk1-0001YR-Ub; Fri, 13 Jan 2023 05:36:37 +0000
-Received: by outflank-mailman (input) for mailman id 476650;
- Fri, 13 Jan 2023 05:36:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pGCk2-0001gS-Ip; Fri, 13 Jan 2023 05:36:38 +0000
+Received: by outflank-mailman (input) for mailman id 476652;
+ Fri, 13 Jan 2023 05:36:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1pGCeT-0005sJ-63
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:30:53 +0000
+ id 1pGCeg-0005sP-Hr
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:06 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 71a1f7f5-9303-11ed-91b6-6bf2151ebd3b;
- Fri, 13 Jan 2023 06:30:52 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 78f4a527-9303-11ed-b8d0-410ff93cb8f0;
+ Fri, 13 Jan 2023 06:31:04 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A77B5FEC;
- Thu, 12 Jan 2023 21:31:33 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1B20FFEC;
+ Thu, 12 Jan 2023 21:31:46 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E97423F587;
- Thu, 12 Jan 2023 21:30:48 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5C9923F587;
+ Thu, 12 Jan 2023 21:31:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71a1f7f5-9303-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 78f4a527-9303-11ed-b8d0-410ff93cb8f0
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,189 +55,90 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 24/40] xen/mpu: introduce "mpu,xxx-memory-section"
-Date: Fri, 13 Jan 2023 13:28:57 +0800
-Message-Id: <20230113052914.3845596-25-Penny.Zheng@arm.com>
+Subject: [PATCH v2 28/40] xen/mpu: map boot module section in MPU system
+Date: Fri, 13 Jan 2023 13:29:01 +0800
+Message-Id: <20230113052914.3845596-29-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In MPU system, all kinds of resources, including system resource and
-domain resource must be statically configured in Device Tree, i.e,
-guest RAM must be statically allocated through "xen,static-mem" property
-under domain node.
+In MPU system, we could not afford mapping a new MPU memory region
+with each new guest boot module, it will exhaust limited MPU memory regions
+very quickly.
 
-However, due to limited MPU protection regions and a wide variety of resource,
-we could easily exhaust all MPU protection regions very quickly.
-So we want to introduce a set of new property, "#mpu,xxx-memory-section"
-to mitigate the impact.
-Each property limits the available host address range of one kind of
-system/domain resource.
-
-This commit also introduces "#mpu,guest-memory-section" as an example, for
-limiting the scattering of static memory as guest RAM.
-Guest RAM shall be not only statically configured through "xen,static-mem"
-property in MPU system, but also shall be defined inside
-outside "mpu,guest-memory-section".
+So we introduce `mpu,boot-module-section` for users to statically configure
+one big memory section or very few memory sections for all guests' boot mudules.
+Users shall make sure that any guest boot module defined in Device Tree is
+within the section, including kernel module(BOOTMOD_KERNEL), device tree
+passthrough module(BOOTMOD_GUEST_DTB), and ramdisk module(BOOTMOD_RAMDISK).
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
- xen/arch/arm/bootfdt.c           | 13 ++++---
- xen/arch/arm/include/asm/setup.h | 24 +++++++++++++
- xen/arch/arm/setup_mpu.c         | 58 ++++++++++++++++++++++++++++++++
- 3 files changed, 91 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/setup.h | 1 +
+ xen/arch/arm/mm_mpu.c            | 2 +-
+ xen/arch/arm/setup_mpu.c         | 7 +++++++
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index 0085c28d74..d7a5dd0ede 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -59,10 +59,10 @@ void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
-     *size = dt_next_cell(size_cells, cell);
- }
- 
--static int __init device_tree_get_meminfo(const void *fdt, int node,
--                                          const char *prop_name,
--                                          u32 address_cells, u32 size_cells,
--                                          void *data, enum membank_type type)
-+int __init device_tree_get_meminfo(const void *fdt, int node,
-+                                   const char *prop_name,
-+                                   u32 address_cells, u32 size_cells,
-+                                   void *data, enum membank_type type)
- {
-     const struct fdt_property *prop;
-     unsigned int i, banks;
-@@ -315,6 +315,11 @@ static int __init process_chosen_node(const void *fdt, int node,
-         bootinfo.static_heap = true;
-     }
- 
-+#ifdef CONFIG_HAS_MPU
-+    if ( process_mpuinfo(fdt, node, address_cells, size_cells) )
-+        return -EINVAL;
-+#endif
-+
-     printk("Checking for initrd in /chosen\n");
- 
-     prop = fdt_get_property(fdt, node, "linux,initrd-start", &len);
 diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 8f353b67f8..3581f8f990 100644
+index b7a2225c25..61f24b5848 100644
 --- a/xen/arch/arm/include/asm/setup.h
 +++ b/xen/arch/arm/include/asm/setup.h
-@@ -172,6 +172,11 @@ void device_tree_get_reg(const __be32 **cell, u32 address_cells,
- u32 device_tree_get_u32(const void *fdt, int node,
-                         const char *prop_name, u32 dflt);
- 
-+int device_tree_get_meminfo(const void *fdt, int node,
-+                            const char *prop_name,
-+                            u32 address_cells, u32 size_cells,
-+                            void *data, enum membank_type type);
-+
- int map_range_to_domain(const struct dt_device_node *dev,
-                         u64 addr, u64 len, void *data);
- 
-@@ -185,6 +190,25 @@ struct init_info
-     unsigned int cpuid;
+@@ -195,6 +195,7 @@ struct init_info
+ enum mpu_section_info {
+     MSINFO_GUEST,
+     MSINFO_DEVICE,
++    MSINFO_BOOTMODULE,
+     MSINFO_MAX
  };
  
-+#ifdef CONFIG_HAS_MPU
-+/* Index of MPU memory section */
-+enum mpu_section_info {
-+    MSINFO_GUEST,
-+    MSINFO_MAX
-+};
-+
-+extern const char *mpu_section_info_str[MSINFO_MAX];
-+
-+struct mpuinfo {
-+    struct meminfo sections[MSINFO_MAX];
-+};
-+
-+extern struct mpuinfo mpuinfo;
-+
-+extern int process_mpuinfo(const void *fdt, int node, uint32_t address_cells,
-+                           uint32_t size_cells);
-+#endif /* CONFIG_HAS_MPU */
-+
+diff --git a/xen/arch/arm/mm_mpu.c b/xen/arch/arm/mm_mpu.c
+index 1566ba60af..ea64aa38e4 100644
+--- a/xen/arch/arm/mm_mpu.c
++++ b/xen/arch/arm/mm_mpu.c
+@@ -74,6 +74,7 @@ struct page_info *frame_table;
+ static const unsigned int mpu_section_mattr[MSINFO_MAX] = {
+     REGION_HYPERVISOR_SWITCH,
+     REGION_HYPERVISOR_NOCACHE,
++    REGION_HYPERVISOR_BOOT,
+ };
+ 
+ /* Write a MPU protection region */
+@@ -686,7 +687,6 @@ void __init setup_static_mappings(void)
  #endif
- /*
-  * Local variables:
+         map_mpu_memory_section_on_boot(i, mpu_section_mattr[i]);
+     }
+-    /* TODO: boot-module section, etc */
+ }
+ 
+ /* Map a frame table to cover physical addresses ps through pe */
 diff --git a/xen/arch/arm/setup_mpu.c b/xen/arch/arm/setup_mpu.c
-index ca0d8237d5..09a38a34a4 100644
+index ec05542f68..160934bf86 100644
 --- a/xen/arch/arm/setup_mpu.c
 +++ b/xen/arch/arm/setup_mpu.c
-@@ -20,12 +20,70 @@
-  */
+@@ -30,6 +30,7 @@
+ const char *mpu_section_info_str[MSINFO_MAX] = {
+     "mpu,guest-memory-section",
+     "mpu,device-memory-section",
++    "mpu,boot-module-section",
+ };
  
- #include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
- #include <xen/mm.h>
- #include <xen/pfn.h>
- #include <asm/mm_mpu.h>
- #include <asm/page.h>
- #include <asm/setup.h>
- 
-+const char *mpu_section_info_str[MSINFO_MAX] = {
-+    "mpu,guest-memory-section",
-+};
-+
-+/*
-+ * mpuinfo stores mpu memory section info, which is configured under
-+ * "mpu,xxx-memory-section" in Device Tree.
-+ */
-+struct mpuinfo __initdata mpuinfo;
-+
-+/*
-+ * Due to limited MPU protection regions and a wide variety of resource,
-+ * "#mpu,xxx-memory-section" is introduced to mitigate the impact.
-+ * Each property limits the available host address range of one kind of
-+ * system/domain resource.
+ /*
+@@ -52,6 +53,12 @@ struct mpuinfo __initdata mpuinfo;
+  * "mpu,device-memory-section": this section draws the device memory layout
+  * with the least number of memory regions for all devices in system that will
+  * be used in Xen, like `UART`, `GIC`, etc.
 + *
-+ * "mpu,guest-memory-section": guest RAM must be statically allocated
-+ * through "xen,static-mem" property in MPU system. "mpu,guest-memory-section"
-+ * limits the scattering of "xen,static-mem", as users could not define
-+ * a "xen,static-mem" outside "mpu,guest-memory-section".
-+ */
-+static int __init process_mpu_memory_section(const void *fdt, int node,
-+                                             const char *name, void *data,
-+                                             uint32_t address_cells,
-+                                             uint32_t size_cells)
-+{
-+    if ( !fdt_get_property(fdt, node, name, NULL) )
-+        return -EINVAL;
-+
-+    return device_tree_get_meminfo(fdt, node, name, address_cells, size_cells,
-+                                   data, MEMBANK_DEFAULT);
-+}
-+
-+int __init process_mpuinfo(const void *fdt, int node,
-+                           uint32_t address_cells, uint32_t size_cells)
-+{
-+    uint8_t idx = 0;
-+    const char *prop_name;
-+
-+    for ( ; idx < MSINFO_MAX; idx++ )
-+    {
-+        prop_name = mpu_section_info_str[idx];
-+
-+        printk("Checking for %s in /chosen\n", prop_name);
-+
-+        if ( process_mpu_memory_section(fdt, node, prop_name,
-+                                        &mpuinfo.sections[idx],
-+                                        address_cells, size_cells) )
-+        {
-+            printk(XENLOG_ERR "fdt: failed to process %s\n", prop_name);
-+            return -EINVAL;
-+        }
-+    }
-+
-+    return 0;
-+}
-+
- void __init setup_mm(void)
- {
-     paddr_t ram_start = ~0, ram_end = 0, ram_size = 0;
++ * "mpu,boot-module-section": this property uses one big memory section or
++ * very few memory sections to describe all guests' boot mudules. Users shall
++ * make sure that any guest boot module defined in Device Tree is within
++ * the section, including kernel module(BOOTMOD_KERNEL), device tree
++ * passthrough module(BOOTMOD_GUEST_DTB), and ramdisk module(BOOTMOD_RAMDISK).
+  */
+ static int __init process_mpu_memory_section(const void *fdt, int node,
+                                              const char *name, void *data,
 -- 
 2.25.1
 
