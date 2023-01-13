@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C51C54EBE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 07:47:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476806.739178 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2EC1C61DB3
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 08:08:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476823.739189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGEmu-0002tM-SU; Fri, 13 Jan 2023 07:47:44 +0000
+	id 1pGF7A-00061T-20; Fri, 13 Jan 2023 08:08:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476806.739178; Fri, 13 Jan 2023 07:47:44 +0000
+Received: by outflank-mailman (output) from mailman id 476823.739189; Fri, 13 Jan 2023 08:08:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGEmu-0002tF-NT; Fri, 13 Jan 2023 07:47:44 +0000
-Received: by outflank-mailman (input) for mailman id 476806;
- Fri, 13 Jan 2023 07:39:43 +0000
+	id 1pGF79-00061M-V3; Fri, 13 Jan 2023 08:08:39 +0000
+Received: by outflank-mailman (input) for mailman id 476823;
+ Fri, 13 Jan 2023 08:08:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=E9J+=5K=gmail.com=joanbrugueram@srs-se1.protection.inumbo.net>)
- id 1pGEf9-0001P9-DM
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 07:39:43 +0000
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [2a00:1450:4864:20::329])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=O/z9=5K=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1pGF78-00061G-NB
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 08:08:38 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 706c3330-9315-11ed-91b6-6bf2151ebd3b;
- Fri, 13 Jan 2023 08:39:41 +0100 (CET)
-Received: by mail-wm1-x329.google.com with SMTP id
- bg13-20020a05600c3c8d00b003d9712b29d2so18166471wmb.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Jan 2023 23:39:40 -0800 (PST)
-Received: from solpc.. (67.pool90-171-92.dynamic.orange.es. [90.171.92.67])
- by smtp.gmail.com with ESMTPSA id
- h19-20020a05600c351300b003d9a86a13bfsm26207681wmq.28.2023.01.12.23.39.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jan 2023 23:39:39 -0800 (PST)
+ id 7add2999-9319-11ed-91b6-6bf2151ebd3b;
+ Fri, 13 Jan 2023 09:08:37 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E56295F986;
+ Fri, 13 Jan 2023 08:08:35 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C182E13913;
+ Fri, 13 Jan 2023 08:08:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 7oPDLYMRwWNaSwAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 13 Jan 2023 08:08:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,446 +53,357 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 706c3330-9315-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3M4PJa8bRUQ4Sc+Wzz/wLpc5Oc/26l8w9l+YmujHJ60=;
-        b=P1LDNQgqNtOTOXUgMU4kngFnoQqhy9Oq7QtZJYVR4R8y3LYth3y7NREJn0SEQjzIpt
-         Y9vIhsduHpDGCLyv9tAMdFmQ4j/dh5+D1JbS+VYHbQaThnd4MoacI8qcpGg/4l1gOW2/
-         lQrabY4P5iQTl0yf1gv9Y2/MwMldp7MEwXewivv1y4ZenzLvn0tSTfIwYpnphHcVWJ9o
-         LgTArCu7JAcefSAtZYvgnHmnLGcJRBDBWePUwVhXgAQZ0yfJ9mjGeoNyp8CQcP2qCdqL
-         NQ/rs73ktpBLscWTNQE4C8ddF4lzEPDW27yBO0IKttw+AhYeje1S34W4z4dieZeoD7PI
-         saKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3M4PJa8bRUQ4Sc+Wzz/wLpc5Oc/26l8w9l+YmujHJ60=;
-        b=J3KptU6qbcXUxcVzzQY50SLyC+dvTptdi35cmyGSLqo+z2wfg94aaxFZl9G/cclAvh
-         5yZfRfEEWAYsPiDFPfnzMA3F5Zd/ld0X1gStAipWrSVV950BkQrrB8k8F1C2+j3sATTZ
-         +B4tfie7KIH7rFBDdu+0Y7mvYc7QQJJhTQDMEVktU6nwyF6R44DMsjcKScpstsumEKo+
-         6A/WrCnAreUo7F6soJJ9htDcQgO4UIYpj/IuDJDE9ZmBGRsIfktzceEmGZZdQAZpi9wh
-         L3VMpTxJj2R/3fL+Yj5QUgAaCXs4tTLd2JY+VaScS92SFGXE8OGmdXJNnvQkiF6oSzlN
-         /u5Q==
-X-Gm-Message-State: AFqh2kpgieYZAeBiWgYVImTuXdRT8TkKyVQISRvwO1BG/iUO4CeUkfaQ
-	Dtzq2hVgvpcDvWJWYwhp0G8=
-X-Google-Smtp-Source: AMrXdXs3tLo1GHegPJMdV9HWu8qZmoNTQpGBWl1/Ydv1V8mjdLCceMWAUbQlN+gWfV6Ebj/DmKEHOw==
-X-Received: by 2002:a05:600c:500e:b0:3cf:88c3:d008 with SMTP id n14-20020a05600c500e00b003cf88c3d008mr61730943wmr.28.1673595580235;
-        Thu, 12 Jan 2023 23:39:40 -0800 (PST)
-From: Joan Bruguera <joanbrugueram@gmail.com>
-To: Peter Zijlstra <peterz@infradead.org>
-Cc: linux-kernel@vger.kernel.org,
-	Juergen Gross <jgross@suse.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	xen-devel <xen-devel@lists.xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Roger Pau Monne <roger.pau@citrix.com>,
-	Kees Cook <keescook@chromium.org>,
-	mark.rutland@arm.com,
-	x86@kernel.org
-Subject: Re: [RFC][PATCH 0/6] x86: Fix suspend vs retbleed=stuff
-Date: Fri, 13 Jan 2023 07:39:38 +0000
-Message-Id: <20230113073938.1066227-1-joanbrugueram@gmail.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230112143141.645645775@infradead.org>
-References: <20230112143141.645645775@infradead.org>
+X-Inumbo-ID: 7add2999-9319-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1673597315; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=m4sELtLR4erGC6Nt+c21AO/Z8JBEn7P+96bMsRdB8wQ=;
+	b=CJ8UhLWnNyD8jGmtMk023GJAiIicP6C8Z5knrrklLdTD9RU1kAOi5K01zM0Kwotiv1EC7h
+	RgUXeE1OlbvVzL+1ymvzbzCSMmvn5cyNT1v7PXuYfcw9lsFMiCMeKSWqBExVL/1WR0oZsY
+	mrtsmsCQayAtWrVoAfjMi1p9ACM9tWI=
+Message-ID: <bdea54df-59dc-3d4d-dd0c-8c45403dea24@suse.com>
+Date: Fri, 13 Jan 2023 09:08:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Content-Language: en-US
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: regressions@lists.linux.dev
+References: <Y8DIodWQGm99RA+E@mail-itl>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: S3 under Xen regression between 6.1.1 and 6.1.3
+In-Reply-To: <Y8DIodWQGm99RA+E@mail-itl>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------78E4ABhTHO0B4lG8jyzNTay2"
 
-Hi Peter,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------78E4ABhTHO0B4lG8jyzNTay2
+Content-Type: multipart/mixed; boundary="------------LaTlo7JDqFZbSkQGkk2AzUwV";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: regressions@lists.linux.dev
+Message-ID: <bdea54df-59dc-3d4d-dd0c-8c45403dea24@suse.com>
+Subject: Re: S3 under Xen regression between 6.1.1 and 6.1.3
+References: <Y8DIodWQGm99RA+E@mail-itl>
+In-Reply-To: <Y8DIodWQGm99RA+E@mail-itl>
 
-I tried your patches on both QEMU and my two (real) computers where
-s2ram with `retbleed=stuff` was failing and they wake up fine now.
+--------------LaTlo7JDqFZbSkQGkk2AzUwV
+Content-Type: multipart/mixed; boundary="------------JTCEnxmZjr8uUX0QsykuUQXk"
 
-However, I think some minor reviews are needed:
+--------------JTCEnxmZjr8uUX0QsykuUQXk
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-(1) I got a build error due to a symbol conflict between the
-    `restore_registers` in `arch/x86/include/asm/suspend_64.h` and the
-    one in `drivers/gpu/drm/amd/display/dc/gpio/hw_gpio.c`.
+T24gMTMuMDEuMjMgMDM6NTcsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToN
+Cj4gSGksDQo+IA0KPiA2LjEuMyBhcyBQViBkb20wIGNyYXNoZXMgd2hlbiBhdHRlbXB0aW5n
+IHRvIHN1c3BlbmQuIDYuMS4xIHdvcmtzLiBUaGUNCj4gY3Jhc2g6DQo+IA0KPiAgICAgIFsg
+IDM0OC4yODQwMDRdIFBNOiBzdXNwZW5kIGVudHJ5IChkZWVwKQ0KPiAgICAgIFsgIDM0OC4y
+ODk1MzJdIEZpbGVzeXN0ZW1zIHN5bmM6IDAuMDA1IHNlY29uZHMNCj4gICAgICBbICAzNDgu
+MjkxNTQ1XSBGcmVlemluZyB1c2VyIHNwYWNlIHByb2Nlc3NlcyAuLi4gKGVsYXBzZWQgMC4w
+MDAgc2Vjb25kcykgZG9uZS4NCj4gICAgICBbICAzNDguMjkyNDU3XSBPT00ga2lsbGVyIGRp
+c2FibGVkLg0KPiAgICAgIFsgIDM0OC4yOTI0NjJdIEZyZWV6aW5nIHJlbWFpbmluZyBmcmVl
+emFibGUgdGFza3MgLi4uIChlbGFwc2VkIDAuMTA0IHNlY29uZHMpIGRvbmUuDQo+ICAgICAg
+WyAgMzQ4LjM5NjYxMl0gcHJpbnRrOiBTdXNwZW5kaW5nIGNvbnNvbGUocykgKHVzZSBub19j
+b25zb2xlX3N1c3BlbmQgdG8gZGVidWcpDQo+ICAgICAgWyAgMzQ4Ljc0OTIyOF0gUE06IHN1
+c3BlbmQgZGV2aWNlcyB0b29rIDAuMzUyIHNlY29uZHMNCj4gICAgICBbICAzNDguNzY5NzEz
+XSBBQ1BJOiBFQzogaW50ZXJydXB0IGJsb2NrZWQNCj4gICAgICBbICAzNDguODE2MDc3XSBC
+VUc6IGtlcm5lbCBOVUxMIHBvaW50ZXIgZGVyZWZlcmVuY2UsIGFkZHJlc3M6IDAwMDAwMDAw
+MDAwMDAwMWMNCj4gICAgICBbICAzNDguODE2MDgwXSAjUEY6IHN1cGVydmlzb3IgcmVhZCBh
+Y2Nlc3MgaW4ga2VybmVsIG1vZGUNCj4gICAgICBbICAzNDguODE2MDgxXSAjUEY6IGVycm9y
+X2NvZGUoMHgwMDAwKSAtIG5vdC1wcmVzZW50IHBhZ2UNCj4gICAgICBbICAzNDguODE2MDgz
+XSBQR0QgMCBQNEQgMA0KPiAgICAgIFsgIDM0OC44MTYwODZdIE9vcHM6IDAwMDAgWyMxXSBQ
+UkVFTVBUIFNNUCBOT1BUSQ0KPiAgICAgIFsgIDM0OC44MTYwODldIENQVTogMCBQSUQ6IDY3
+NjQgQ29tbTogc3lzdGVtZC1zbGVlcCBOb3QgdGFpbnRlZCA2LjEuMy0xLmZjMzIucXViZXMu
+eDg2XzY0ICMxDQo+ICAgICAgWyAgMzQ4LjgxNjA5Ml0gSGFyZHdhcmUgbmFtZTogU3RhciBM
+YWJzIFN0YXJCb29rL1N0YXJCb29rLCBCSU9TIDguMDEgMDcvMDMvMjAyMg0KPiAgICAgIFsg
+IDM0OC44MTYwOTNdIFJJUDogZTAzMDphY3BpX2dldF93YWtldXBfYWRkcmVzcysweGMvMHgy
+MA0KPiAgICAgIFsgIDM0OC44MTYxMDBdIENvZGU6IDQ0IDAwIDAwIDQ4IDhiIDA1IDA0IGEz
+IDgyIDAyIGMzIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNjIGNj
+IGNjIGNjIGNjIGNjIDBmIDFmIDQ0IDAwIDAwIDQ4IDhiIDA1IGZjIDlkIDgyIDAyIDw4Yj4g
+NDAgMWMgYzMgY2MgY2MgY2MgY2MgNjYgNjYgMmUgMGYgMWYgODQgMDAgMDAgMDAgMDAgMDAg
+OTAgMGYgMWYNCj4gICAgICBbICAzNDguODE2MTAzXSBSU1A6IGUwMmI6ZmZmZmM5MDA0MjUz
+N2QwOCBFRkxBR1M6IDAwMDEwMjQ2DQo+ICAgICAgWyAgMzQ4LjgxNjEwNV0gUkFYOiAwMDAw
+MDAwMDAwMDAwMDAwIFJCWDogMDAwMDAwMDAwMDAwMDAwMyBSQ1g6IDIwYzQ5YmE1ZTM1M2Y3
+Y2YNCj4gICAgICBbICAzNDguODE2MTA2XSBSRFg6IDAwMDAwMDAwMDAwMGNkMTkgUlNJOiAw
+MDAwMDAwMDAwMDJlZTlhIFJESTogMDAyYTA1MWVkNDJkNzY5NA0KPiAgICAgIFsgIDM0OC44
+MTYxMDhdIFJCUDogMDAwMDAwMDAwMDAwMDAwMyBSMDg6IGZmZmZjOTAwNDI1MzdjYTAgUjA5
+OiBmZmZmZmZmZjgyYzVlNDY4DQo+ICAgICAgWyAgMzQ4LjgxNjExMF0gUjEwOiAwMDAwMDAw
+MDAwMDA3ZmYwIFIxMTogMDAwMDAwMDAwMDAwMDAwMCBSMTI6IDAwMDAwMDAwMDAwMDAwMDAN
+Cj4gICAgICBbICAzNDguODE2MTExXSBSMTM6IGZmZmZmZmZmZmZmZmZmZjIgUjE0OiBmZmZm
+ODg4MTIyMDZlNmMwIFIxNTogZmZmZjg4ODEyMjA2ZTZlMA0KPiAgICAgIFsgIDM0OC44MTYx
+MjFdIEZTOiAgMDAwMDdjYjQ5YjAxZWI4MCgwMDAwKSBHUzpmZmZmODg4MTg5NDAwMDAwKDAw
+MDApIGtubEdTOjAwMDAwMDAwMDAwMDAwMDANCj4gICAgICBbICAzNDguODE2MTIzXSBDUzog
+IGUwMzAgRFM6IDAwMDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAwMDgwMDUwMDMzDQo+ICAgICAg
+WyAgMzQ4LjgxNjEyNF0gQ1IyOiAwMDAwMDAwMDAwMDAwMDFjIENSMzogMDAwMDAwMDEyMjMx
+YTAwMCBDUjQ6IDAwMDAwMDAwMDAwNTA2NjANCj4gICAgICBbICAzNDguODE2MTMxXSBDYWxs
+IFRyYWNlOg0KPiAgICAgIFsgIDM0OC44MTYxMzNdICA8VEFTSz4NCj4gICAgICBbICAzNDgu
+ODE2MTM0XSAgYWNwaV9wbV9wcmVwYXJlKzB4MWEvMHg1MA0KPiAgICAgIFsgIDM0OC44MTYx
+NDFdICBzdXNwZW5kX2VudGVyKzB4OTQvMHgzNjANCj4gICAgICBbICAzNDguODE2MTQ2XSAg
+c3VzcGVuZF9kZXZpY2VzX2FuZF9lbnRlcisweDE5OC8weDJiMA0KPiAgICAgIFsgIDM0OC44
+MTYxNTBdICBlbnRlcl9zdGF0ZSsweDE4ZC8weDFmNQ0KPiAgICAgIFsgIDM0OC44MTYxNTVd
+ICBwbV9zdXNwZW5kLmNvbGQrMHgyMC8weDZiDQo+ICAgICAgWyAgMzQ4LjgxNjE1OV0gIHN0
+YXRlX3N0b3JlKzB4MjcvMHg2MA0KPiAgICAgIFsgIDM0OC44MTYxNjNdICBrZXJuZnNfZm9w
+X3dyaXRlX2l0ZXIrMHgxMjUvMHgxYzANCj4gICAgICBbICAzNDguODE2MTY5XSAgbmV3X3N5
+bmNfd3JpdGUrMHgxMDUvMHgxOTANCj4gICAgICBbICAzNDguODE2MTc2XSAgdmZzX3dyaXRl
+KzB4MjExLzB4MmEwDQo+ICAgICAgWyAgMzQ4LjgxNjE4MF0gIGtzeXNfd3JpdGUrMHg2Ny8w
+eGUwDQo+ICAgICAgWyAgMzQ4LjgxNjE4M10gIGRvX3N5c2NhbGxfNjQrMHg1OS8weDkwDQo+
+ICAgICAgWyAgMzQ4LjgxNjE4OF0gID8gZG9fc3lzY2FsbF82NCsweDY5LzB4OTANCj4gICAg
+ICBbICAzNDguODE2MTkyXSAgPyBleGNfcGFnZV9mYXVsdCsweDc2LzB4MTcwDQo+ICAgICAg
+WyAgMzQ4LjgxNjE5NV0gIGVudHJ5X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDYzLzB4
+Y2QNCj4gICAgICBbICAzNDguODE2MjAwXSBSSVA6IDAwMzM6MHg3Y2I0OWMxNDEyZjcNCj4g
+ICAgICBbICAzNDguODE2MjAzXSBDb2RlOiAwZCAwMCBmNyBkOCA2NCA4OSAwMiA0OCBjNyBj
+MCBmZiBmZiBmZiBmZiBlYiBiNyAwZiAxZiAwMCBmMyAwZiAxZSBmYSA2NCA4YiAwNCAyNSAx
+OCAwMCAwMCAwMCA4NSBjMCA3NSAxMCBiOCAwMSAwMCAwMCAwMCAwZiAwNSA8NDg+IDNkIDAw
+IGYwIGZmIGZmIDc3IDUxIGMzIDQ4IDgzIGVjIDI4IDQ4IDg5IDU0IDI0IDE4IDQ4IDg5IDc0
+IDI0DQo+ICAgICAgWyAgMzQ4LjgxNjIwNF0gUlNQOiAwMDJiOjAwMDA3ZmZjMTI1ZjYzZjgg
+RUZMQUdTOiAwMDAwMDI0NiBPUklHX1JBWDogMDAwMDAwMDAwMDAwMDAwMQ0KPiAgICAgIFsg
+IDM0OC44MTYyMDZdIFJBWDogZmZmZmZmZmZmZmZmZmZkYSBSQlg6IDAwMDAwMDAwMDAwMDAw
+MDQgUkNYOiAwMDAwN2NiNDljMTQxMmY3DQo+ICAgICAgWyAgMzQ4LjgxNjIwOF0gUkRYOiAw
+MDAwMDAwMDAwMDAwMDA0IFJTSTogMDAwMDdmZmMxMjVmNjRlMCBSREk6IDAwMDAwMDAwMDAw
+MDAwMDQNCj4gICAgICBbICAzNDguODE2MjA5XSBSQlA6IDAwMDA3ZmZjMTI1ZjY0ZTAgUjA4
+OiAwMDAwNWM4M2Q3NzJiY2EwIFIwOTogMDAwMDAwMDAwMDAwMDAwZA0KPiAgICAgIFsgIDM0
+OC44MTYyMTBdIFIxMDogMDAwMDVjODNkNzcyN2ViMCBSMTE6IDAwMDAwMDAwMDAwMDAyNDYg
+UjEyOiAwMDAwMDAwMDAwMDAwMDA0DQo+ICAgICAgWyAgMzQ4LjgxNjIxMV0gUjEzOiAwMDAw
+NWM4M2Q3NzI3MmQwIFIxNDogMDAwMDAwMDAwMDAwMDAwNCBSMTU6IDAwMDA3Y2I0OWMyMTM3
+MDANCj4gICAgICBbICAzNDguODE2MjEzXSAgPC9UQVNLPg0KPiAgICAgIFsgIDM0OC44MTYy
+MTRdIE1vZHVsZXMgbGlua2VkIGluOiBsb29wIHZmYXQgZmF0IHNuZF9oZGFfY29kZWNfaGRt
+aSBzbmRfc29mX3BjaV9pbnRlbF90Z2wgc25kX3NvZl9pbnRlbF9oZGFfY29tbW9uIHNvdW5k
+d2lyZV9pbnRlbCBzb3VuZHdpcmVfZ2VuZXJpY19hbGxvY2F0aW9uIHNvdW5kd2lyZV9jYWRl
+bmNlIHNuZF9zb2ZfaW50ZWxfaGRhIHNuZF9zb2ZfcGNpIHNuZF9zb2ZfeHRlbnNhX2RzcCBz
+bmRfc29mIHNuZF9zb2ZfdXRpbHMgc25kX3NvY19oZGFjX2hkYSBzbmRfaGRhX2V4dF9jb3Jl
+IHNuZF9zb2NfYWNwaV9pbnRlbF9tYXRjaCBzbmRfc29jX2FjcGkgc291bmR3aXJlX2J1cyBz
+bmRfaGRhX2NvZGVjX3JlYWx0ZWsgc25kX2hkYV9jb2RlY19nZW5lcmljIGxlZHRyaWdfYXVk
+aW8gc25kX3NvY19jb3JlIHNuZF9jb21wcmVzcyBhYzk3X2J1cyBzbmRfcGNtX2RtYWVuZ2lu
+ZSBzbmRfaGRhX2ludGVsIHNuZF9pbnRlbF9kc3BjZmcgc25kX2ludGVsX3Nkd19hY3BpIGlU
+Q09fd2R0IGludGVsX3BtY19ieHQgZWUxMDA0IGlUQ09fdmVuZG9yX3N1cHBvcnQgaW50ZWxf
+cmFwbF9tc3Igc25kX2hkYV9jb2RlYyBzbmRfaGRhX2NvcmUgc25kX2h3ZGVwIHNuZF9zZXEg
+c25kX3NlcV9kZXZpY2UgaXdsd2lmaSBzbmRfcGNtIHBjc3BrciBqb3lkZXYgcHJvY2Vzc29y
+X3RoZXJtYWxfZGV2aWNlX3BjaV9sZWdhY3kgcHJvY2Vzc29yX3RoZXJtYWxfZGV2aWNlIHNu
+ZF90aW1lciBzbmQgY2ZnODAyMTEgcHJvY2Vzc29yX3RoZXJtYWxfcmZpbSBpMmNfaTgwMSBw
+cm9jZXNzb3JfdGhlcm1hbF9tYm94IGkyY19zbWJ1cyBpZG1hNjQgcmZraWxsIHByb2Nlc3Nv
+cl90aGVybWFsX3JhcGwgc291bmRjb3JlIGludGVsX3JhcGxfY29tbW9uIGludDM0MHhfdGhl
+cm1hbF96b25lIGludGVsX3NvY19kdHNfaW9zZiBpZ2VuNl9lZGFjIGludGVsX2hpZCBpbnRl
+bF9wbWNfY29yZSBpbnRlbF9zY3VfcGx0ZHJ2IHNwYXJzZV9rZXltYXAgZnVzZSB4ZW5mcyBp
+cF90YWJsZXMgZG1fdGhpbl9wb29sDQo+ICAgICAgaWMjMiBQYXJ0MQ0KPiAgICAgIFsgIDM0
+OC44MTYyNTldICBkbV9wZXJzaXN0ZW50X2RhdGEgZG1fYmlvX3ByaXNvbiBkbV9jcnlwdCBp
+OTE1IGNyY3QxMGRpZl9wY2xtdWwgY3JjMzJfcGNsbXVsIGNyYzMyY19pbnRlbCBwb2x5dmFs
+X2NsbXVsbmkgcG9seXZhbF9nZW5lcmljIGRybV9idWRkeSBudm1lIHZpZGVvIHdtaSBkcm1f
+ZGlzcGxheV9oZWxwZXIgbnZtZV9jb3JlIHhoY2lfcGNpIHhoY2lfcGNpX3JlbmVzYXMgZ2hh
+c2hfY2xtdWxuaV9pbnRlbCBoaWRfbXVsdGl0b3VjaCBzaGE1MTJfc3NzZTMgc2VyaW9fcmF3
+IG52bWVfY29tbW9uIGNlYyB4aGNpX2hjZCB0dG0gaTJjX2hpZF9hY3BpIGkyY19oaWQgcGlu
+Y3RybF90aWdlcmxha2UgeGVuX2FjcGlfcHJvY2Vzc29yIHhlbl9wcml2Y21kIHhlbl9wY2li
+YWNrIHhlbl9ibGtiYWNrIHhlbl9nbnRhbGxvYyB4ZW5fZ250ZGV2IHhlbl9ldnRjaG4gdWlu
+cHV0DQo+ICAgICAgWyAgMzQ4LjgxNjI4MV0gQ1IyOiAwMDAwMDAwMDAwMDAwMDFjDQo+ICAg
+ICAgWyAgMzQ4LjgxNjI4M10gLS0tWyBlbmQgdHJhY2UgMDAwMDAwMDAwMDAwMDAwMCBdLS0t
+DQo+ICAgICAgWyAgMzQ4Ljg2Nzk5MV0gUklQOiBlMDMwOmFjcGlfZ2V0X3dha2V1cF9hZGRy
+ZXNzKzB4Yy8weDIwDQo+ICAgICAgWyAgMzQ4Ljg2Nzk5Nl0gQ29kZTogNDQgMDAgMDAgNDgg
+OGIgMDUgMDQgYTMgODIgMDIgYzMgY2MgY2MgY2MgY2MgY2MgY2MgY2MgY2MgY2MgY2MgY2Mg
+Y2MgY2MgY2MgY2MgY2MgY2MgY2MgY2MgMGYgMWYgNDQgMDAgMDAgNDggOGIgMDUgZmMgOWQg
+ODIgMDIgPDhiPiA0MCAxYyBjMyBjYyBjYyBjYyBjYyA2NiA2NiAyZSAwZiAxZiA4NCAwMCAw
+MCAwMCAwMCAwMCA5MCAwZiAxZg0KPiAgICAgIFsgIDM0OC44Njc5OThdIFJTUDogZTAyYjpm
+ZmZmYzkwMDQyNTM3ZDA4IEVGTEFHUzogMDAwMTAyNDYNCj4gICAgICBbICAzNDguODY3OTk5
+XSBSQVg6IDAwMDAwMDAwMDAwMDAwMDAgUkJYOiAwMDAwMDAwMDAwMDAwMDAzIFJDWDogMjBj
+NDliYTVlMzUzZjdjZg0KPiAgICAgIFsgIDM0OC44NjgwMDBdIFJEWDogMDAwMDAwMDAwMDAw
+Y2QxOSBSU0k6IDAwMDAwMDAwMDAwMmVlOWEgUkRJOiAwMDJhMDUxZWQ0MmQ3Njk0DQo+ICAg
+ICAgWyAgMzQ4Ljg2ODAwMV0gUkJQOiAwMDAwMDAwMDAwMDAwMDAzIFIwODogZmZmZmM5MDA0
+MjUzN2NhMCBSMDk6IGZmZmZmZmZmODJjNWU0NjgNCj4gICAgICBbICAzNDguODY4MDAxXSBS
+MTA6IDAwMDAwMDAwMDAwMDdmZjAgUjExOiAwMDAwMDAwMDAwMDAwMDAwIFIxMjogMDAwMDAw
+MDAwMDAwMDAwMA0KPiAgICAgIFsgIDM0OC44NjgwMDJdIFIxMzogZmZmZmZmZmZmZmZmZmZm
+MiBSMTQ6IGZmZmY4ODgxMjIwNmU2YzAgUjE1OiBmZmZmODg4MTIyMDZlNmUwDQo+ICAgICAg
+WyAgMzQ4Ljg2ODAwOF0gRlM6ICAwMDAwN2NiNDliMDFlYjgwKDAwMDApIEdTOmZmZmY4ODgx
+ODk0MDAwMDAoMDAwMCkga25sR1M6MDAwMDAwMDAwMDAwMDAwMA0KPiAgICAgIFsgIDM0OC44
+NjgwMDldIENTOiAgZTAzMCBEUzogMDAwMCBFUzogMDAwMCBDUjA6IDAwMDAwMDAwODAwNTAw
+MzMNCj4gICAgICBbICAzNDguODY4MDA5XSBDUjI6IDAwMDAwMDAwMDAwMDAwMWMgQ1IzOiAw
+MDAwMDAwMTIyMzFhMDAwIENSNDogMDAwMDAwMDAwMDA1MDY2MA0KPiAgICAgIFsgIDM0OC44
+NjgwMTRdIEtlcm5lbCBwYW5pYyAtIG5vdCBzeW5jaW5nOiBGYXRhbCBleGNlcHRpb24NCj4g
+ICAgICBbICAzNDguODY4MDMxXSBLZXJuZWwgT2Zmc2V0OiBkaXNhYmxlZA0KPiANCj4gTG9v
+a2luZyBhdCBnaXQgbG9nIGJldHdlZW4gdGhvc2UgdHdvIHZlcnNpb25zLCBhbmQgdGhlDQo+
+IGFjcGlfZ2V0X3dha2V1cF9hZGRyZXNzKCkgZnVuY3Rpb24sIEkgc3VzcGVjdCBpdCdzIHRo
+aXMgY2hhbmdlIChidXQgSQ0KPiBoYXZlIF9ub3RfIHRlc3RlZCBpdCk6DQo+IA0KPiBjb21t
+aXQgYjE4OTg3OTM3NzdmZTEwYTMxYzE2MGJiOGJjMzg1ZDZlZWE2NDBjNg0KPiBBdXRob3I6
+IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCj4gRGF0ZTogICBXZWQgTm92IDIz
+IDEyOjQ1OjIzIDIwMjIgKzAxMDANCj4gDQo+ICAgICAgeDg2L2Jvb3Q6IFNraXAgcmVhbG1v
+ZGUgaW5pdCBjb2RlIHdoZW4gcnVubmluZyBhcyBYZW4gUFYgZ3Vlc3QNCj4gICAgICANCj4g
+ICAgICBbIFVwc3RyZWFtIGNvbW1pdCBmMWU1MjUwMDk0OTNjYmQ1NjllN2M4ZGQ3ZDU4MTU3
+ODU1Zjg2NThkIF0NCg0KWWVzLCB5b3UgYXJlIHJpZ2h0Lg0KDQpDb3VsZCB5b3UgcGxlYXNl
+IHRlc3QgdGhlIGF0dGFjaGVkIHBhdGNoPyBJdCBpcyBmb3IgdXBzdHJlYW0sIGJ1dCBJIHRo
+aW5rIGl0DQpzaG91bGQgYXBwbHkgdG8gNi4xLjMsIHRvby4NCg0KDQpKdWVyZ2VuDQoNCg0K
 
-    (I fixed by renaming the one in `hw_gpio.c`, but it's worth
-     an `allmodconfig` just in case there's something else)
+--------------JTCEnxmZjr8uUX0QsykuUQXk
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-x86-acpi-fix-suspend-with-Xen.patch"
+Content-Disposition: attachment;
+ filename="0001-x86-acpi-fix-suspend-with-Xen.patch"
+Content-Transfer-Encoding: base64
 
-(2) Tracing with QEMU I still see two `sarq $5, %gs:0x1337B33F` before
-    `%gs` is restored. Those correspond to the calls from
-    `secondary_startup_64` in `arch/x86/kernel/head_64.S` to
-    `verify_cpu` and `sev_verify_cbit`.
-    Those don't cause a crash but look suspicious, are they correct?
+RnJvbSA0MDgzM2I2NzAxMDI2YTM3MjQzYmRhOTBiYmQwNTNjNTg5NjM4NDRkIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+
+ClRvOiB4ODZAa2VybmVsLm9yZwpUbzogbGludXgta2VybmVsQHZnZXIua2VybmVsLm9yZwpU
+bzogbGludXgtcG1Admdlci5rZXJuZWwub3JnCkNjOiBUaG9tYXMgR2xlaXhuZXIgPHRnbHhA
+bGludXRyb25peC5kZT4KQ2M6IEluZ28gTW9sbmFyIDxtaW5nb0ByZWRoYXQuY29tPgpDYzog
+Qm9yaXNsYXYgUGV0a292IDxicEBhbGllbjguZGU+CkNjOiBEYXZlIEhhbnNlbiA8ZGF2ZS5o
+YW5zZW5AbGludXguaW50ZWwuY29tPgpDYzogIkguIFBldGVyIEFudmluIiA8aHBhQHp5dG9y
+LmNvbT4KQ2M6ICJSYWZhZWwgSi4gV3lzb2NraSIgPHJhZmFlbEBrZXJuZWwub3JnPgpDYzog
+TGVuIEJyb3duIDxsZW4uYnJvd25AaW50ZWwuY29tPgpDYzogUGF2ZWwgTWFjaGVrIDxwYXZl
+bEB1Y3cuY3o+CkNjOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkNjOiBTdGVm
+YW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNjOiBPbGVrc2FuZHIg
+VHlzaGNoZW5rbyA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20+CkNjOiB4ZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKRGF0ZTogRnJpLCAxMyBKYW4gMjAyMyAwODozNzo0
+NSArMDEwMApTdWJqZWN0OiBbUEFUQ0hdIHg4Ni9hY3BpOiBmaXggc3VzcGVuZCB3aXRoIFhl
+bgpNSU1FLVZlcnNpb246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9
+VVRGLTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAoKQ29tbWl0IGYxZTUyNTAw
+OTQ5MyAoIng4Ni9ib290OiBTa2lwIHJlYWxtb2RlIGluaXQgY29kZSB3aGVuIHJ1bm5pbmcg
+YXMKWGVuIFBWIGd1ZXN0IikgbWlzc2VkIG9uZSBjb2RlIHBhdGggYWNjZXNzaW5nIHJlYWxf
+bW9kZV9oZWFkZXIsIGxlYWRpbmcKdG8gZGVyZWZlcmVuY2luZyBOVUxMIHdoZW4gc3VzcGVu
+ZGluZyB0aGUgc3lzdGVtIHVuZGVyIFhlbjoKCiAgICBbICAzNDguMjg0MDA0XSBQTTogc3Vz
+cGVuZCBlbnRyeSAoZGVlcCkKICAgIFsgIDM0OC4yODk1MzJdIEZpbGVzeXN0ZW1zIHN5bmM6
+IDAuMDA1IHNlY29uZHMKICAgIFsgIDM0OC4yOTE1NDVdIEZyZWV6aW5nIHVzZXIgc3BhY2Ug
+cHJvY2Vzc2VzIC4uLiAoZWxhcHNlZCAwLjAwMCBzZWNvbmRzKSBkb25lLgogICAgWyAgMzQ4
+LjI5MjQ1N10gT09NIGtpbGxlciBkaXNhYmxlZC4KICAgIFsgIDM0OC4yOTI0NjJdIEZyZWV6
+aW5nIHJlbWFpbmluZyBmcmVlemFibGUgdGFza3MgLi4uIChlbGFwc2VkIDAuMTA0IHNlY29u
+ZHMpIGRvbmUuCiAgICBbICAzNDguMzk2NjEyXSBwcmludGs6IFN1c3BlbmRpbmcgY29uc29s
+ZShzKSAodXNlIG5vX2NvbnNvbGVfc3VzcGVuZCB0byBkZWJ1ZykKICAgIFsgIDM0OC43NDky
+MjhdIFBNOiBzdXNwZW5kIGRldmljZXMgdG9vayAwLjM1MiBzZWNvbmRzCiAgICBbICAzNDgu
+NzY5NzEzXSBBQ1BJOiBFQzogaW50ZXJydXB0IGJsb2NrZWQKICAgIFsgIDM0OC44MTYwNzdd
+IEJVRzoga2VybmVsIE5VTEwgcG9pbnRlciBkZXJlZmVyZW5jZSwgYWRkcmVzczogMDAwMDAw
+MDAwMDAwMDAxYwogICAgWyAgMzQ4LjgxNjA4MF0gI1BGOiBzdXBlcnZpc29yIHJlYWQgYWNj
+ZXNzIGluIGtlcm5lbCBtb2RlCiAgICBbICAzNDguODE2MDgxXSAjUEY6IGVycm9yX2NvZGUo
+MHgwMDAwKSAtIG5vdC1wcmVzZW50IHBhZ2UKICAgIFsgIDM0OC44MTYwODNdIFBHRCAwIFA0
+RCAwCiAgICBbICAzNDguODE2MDg2XSBPb3BzOiAwMDAwIFsjMV0gUFJFRU1QVCBTTVAgTk9Q
+VEkKICAgIFsgIDM0OC44MTYwODldIENQVTogMCBQSUQ6IDY3NjQgQ29tbTogc3lzdGVtZC1z
+bGVlcCBOb3QgdGFpbnRlZCA2LjEuMy0xLmZjMzIucXViZXMueDg2XzY0ICMxCiAgICBbICAz
+NDguODE2MDkyXSBIYXJkd2FyZSBuYW1lOiBTdGFyIExhYnMgU3RhckJvb2svU3RhckJvb2ss
+IEJJT1MgOC4wMSAwNy8wMy8yMDIyCiAgICBbICAzNDguODE2MDkzXSBSSVA6IGUwMzA6YWNw
+aV9nZXRfd2FrZXVwX2FkZHJlc3MrMHhjLzB4MjAKCkZpeCB0aGF0IGJ5IGFkZGluZyBhbiBp
+bmRpcmVjdGlvbiBmb3IgYWNwaV9nZXRfd2FrZXVwX2FkZHJlc3MoKSB3aGljaApYZW4gUFYg
+ZG9tMCBjYW4gdXNlIHRvIHJldHVybiBhIGR1bW15IG5vbi16ZXJvIHdha2V1cCBhZGRyZXNz
+ICh0aGlzCmFkZHJlc3Mgd29uJ3QgZXZlciBiZSB1c2VkLCBhcyB0aGUgcmVhbCBzdXNwZW5k
+IGhhbmRsaW5nIGlzIGRvbmUgYnkgdGhlCmh5cGVydmlzb3IpLgoKRml4ZXM6IGYxZTUyNTAw
+OTQ5MyAoIng4Ni9ib290OiBTa2lwIHJlYWxtb2RlIGluaXQgY29kZSB3aGVuIHJ1bm5pbmcg
+YXMgWGVuIFBWIGd1ZXN0IikKUmVwb3J0ZWQtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7Ny
+ZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KU2lnbmVkLW9mZi1ieTog
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGFyY2gveDg2L2luY2x1ZGUv
+YXNtL2FjcGkuaCAgfCAyICstCiBhcmNoL3g4Ni9rZXJuZWwvYWNwaS9zbGVlcC5jIHwgMyAr
+Ky0KIGluY2x1ZGUveGVuL2FjcGkuaCAgICAgICAgICAgfCA5ICsrKysrKysrKwogMyBmaWxl
+cyBjaGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdp
+dCBhL2FyY2gveDg2L2luY2x1ZGUvYXNtL2FjcGkuaCBiL2FyY2gveDg2L2luY2x1ZGUvYXNt
+L2FjcGkuaAppbmRleCA2NTA2NGQ5ZjdmYTYuLjEzNzI1OWZmOGYwMyAxMDA2NDQKLS0tIGEv
+YXJjaC94ODYvaW5jbHVkZS9hc20vYWNwaS5oCisrKyBiL2FyY2gveDg2L2luY2x1ZGUvYXNt
+L2FjcGkuaApAQCAtNjEsNyArNjEsNyBAQCBzdGF0aWMgaW5saW5lIHZvaWQgYWNwaV9kaXNh
+YmxlX3BjaSh2b2lkKQogZXh0ZXJuIGludCAoKmFjcGlfc3VzcGVuZF9sb3dsZXZlbCkodm9p
+ZCk7CiAKIC8qIFBoeXNpY2FsIGFkZHJlc3MgdG8gcmVzdW1lIGFmdGVyIHdha2V1cCAqLwot
+dW5zaWduZWQgbG9uZyBhY3BpX2dldF93YWtldXBfYWRkcmVzcyh2b2lkKTsKK2V4dGVybiB1
+bnNpZ25lZCBsb25nICgqYWNwaV9nZXRfd2FrZXVwX2FkZHJlc3MpKHZvaWQpOwogCiAvKgog
+ICogQ2hlY2sgaWYgdGhlIENQVSBjYW4gaGFuZGxlIEMyIGFuZCBkZWVwZXIKZGlmZiAtLWdp
+dCBhL2FyY2gveDg2L2tlcm5lbC9hY3BpL3NsZWVwLmMgYi9hcmNoL3g4Ni9rZXJuZWwvYWNw
+aS9zbGVlcC5jCmluZGV4IDNiN2Y0Y2RiZjJlMC4uMWEzY2Q1ZTI0Y2QwIDEwMDY0NAotLS0g
+YS9hcmNoL3g4Ni9rZXJuZWwvYWNwaS9zbGVlcC5jCisrKyBiL2FyY2gveDg2L2tlcm5lbC9h
+Y3BpL3NsZWVwLmMKQEAgLTMzLDEwICszMywxMSBAQCBzdGF0aWMgY2hhciB0ZW1wX3N0YWNr
+WzQwOTZdOwogICogUmV0dXJucyB0aGUgcGh5c2ljYWwgYWRkcmVzcyB3aGVyZSB0aGUga2Vy
+bmVsIHNob3VsZCBiZSByZXN1bWVkIGFmdGVyIHRoZQogICogc3lzdGVtIGF3YWtlcyBmcm9t
+IFMzLCBlLmcuIGZvciBwcm9ncmFtbWluZyBpbnRvIHRoZSBmaXJtd2FyZSB3YWtpbmcgdmVj
+dG9yLgogICovCi11bnNpZ25lZCBsb25nIGFjcGlfZ2V0X3dha2V1cF9hZGRyZXNzKHZvaWQp
+CitzdGF0aWMgdW5zaWduZWQgbG9uZyB4ODZfYWNwaV9nZXRfd2FrZXVwX2FkZHJlc3Modm9p
+ZCkKIHsKIAlyZXR1cm4gKCh1bnNpZ25lZCBsb25nKShyZWFsX21vZGVfaGVhZGVyLT53YWtl
+dXBfc3RhcnQpKTsKIH0KK3Vuc2lnbmVkIGxvbmcgKCphY3BpX2dldF93YWtldXBfYWRkcmVz
+cykodm9pZCkgPSB4ODZfYWNwaV9nZXRfd2FrZXVwX2FkZHJlc3M7CiAKIC8qKgogICogeDg2
+X2FjcGlfZW50ZXJfc2xlZXBfc3RhdGUgLSBlbnRlciBzbGVlcCBzdGF0ZQpkaWZmIC0tZ2l0
+IGEvaW5jbHVkZS94ZW4vYWNwaS5oIGIvaW5jbHVkZS94ZW4vYWNwaS5oCmluZGV4IGIxZTEx
+ODYzMTQ0ZC4uN2UxZTVkYmZiNzdjIDEwMDY0NAotLS0gYS9pbmNsdWRlL3hlbi9hY3BpLmgK
+KysrIGIvaW5jbHVkZS94ZW4vYWNwaS5oCkBAIC01Niw2ICs1NiwxMiBAQCBzdGF0aWMgaW5s
+aW5lIGludCB4ZW5fYWNwaV9zdXNwZW5kX2xvd2xldmVsKHZvaWQpCiAJcmV0dXJuIDA7CiB9
+CiAKK3N0YXRpYyBpbmxpbmUgdW5zaWduZWQgbG9uZyB4ZW5fYWNwaV9nZXRfd2FrZXVwX2Fk
+ZHJlc3Modm9pZCkKK3sKKwkvKiBKdXN0IHJldHVybiBhIGR1bW15IG5vbi16ZXJvIHZhbHVl
+LCBpdCB3aWxsIG5ldmVyIGJlIHVzZWQuICovCisJcmV0dXJuIDE7Cit9CisKIHN0YXRpYyBp
+bmxpbmUgdm9pZCB4ZW5fYWNwaV9zbGVlcF9yZWdpc3Rlcih2b2lkKQogewogCWlmICh4ZW5f
+aW5pdGlhbF9kb21haW4oKSkgewpAQCAtNjUsNiArNzEsOSBAQCBzdGF0aWMgaW5saW5lIHZv
+aWQgeGVuX2FjcGlfc2xlZXBfcmVnaXN0ZXIodm9pZCkKIAkJCSZ4ZW5fYWNwaV9ub3RpZnlf
+aHlwZXJ2aXNvcl9leHRlbmRlZF9zbGVlcCk7CiAKIAkJYWNwaV9zdXNwZW5kX2xvd2xldmVs
+ID0geGVuX2FjcGlfc3VzcGVuZF9sb3dsZXZlbDsKKyNpZmRlZiBDT05GSUdfQUNQSV9TTEVF
+UAorCQlhY3BpX2dldF93YWtldXBfYWRkcmVzcyA9IHhlbl9hY3BpX2dldF93YWtldXBfYWRk
+cmVzczsKKyNlbmRpZgogCX0KIH0KICNlbHNlCi0tIAoyLjM1LjMKCg==
+--------------JTCEnxmZjr8uUX0QsykuUQXk
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-    (There are also some `sarq`s in the call to `early_setup_idt` from
-    `secondary_startup_64`, but `%gs` is restored immediately before)
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-    I attach an annotated QEMU log for those if it is useful.
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
 
-Regards,
-- Joan
+--------------JTCEnxmZjr8uUX0QsykuUQXk--
 
-QEMU wakeup log:
+--------------LaTlo7JDqFZbSkQGkk2AzUwV--
 
-# 32-bit code ellided. Next line calls `secondary_startup_64` from `startup_64`
-0x0009a0d0:  ff 25 2a 2f 00 00        jmpq     *0x2f2a(%rip)
-# Next line is `call verify_cpu` from `secondary_startup_64`
-0xffffffff9a800070:  e8 f1 00 00 00           callq    0xffffffff9a800166
-# This next `sarq` does not have the correct GS set?
-#     RAX=0000000080050033 RBX=0000000000000800 RCX=00000000c0000080 RDX=0000000000000000
-#     RSI=0000000000000000 RDI=0000000000000001 RBP=0000000000000000 RSP=000000000009e018
-#     R8 =0000000000000000 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000
-#     R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-#     RIP=ffffffff9a800166 RFL=00200097 [--S-APC] CPL=0 II=0 A20=1 SMM=0 HLT=0
-#     ES =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     CS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]
-#     SS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     DS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     FS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     GS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     LDT=0000 0000000000000000 0000ffff 00008200 DPL=0 LDT
-#     TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-#     GDT=     0000000000098030 0000001f
-#     IDT=     0000000000000000 00000000
-#     CR0=80050033 CR2=0000000000000000 CR3=000000000009c000 CR4=000006b0
-#     DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-#     DR6=00000000ffff0ff0 DR7=0000000000000400
-#     CCS=0000000000000095 CCD=fffffffffffff6ff CCO=EFLAGS
-#     EFER=0000000000000d01
-0xffffffff9a800166:  65 48 c1 3c 25 90 29 03  sarq     $5, %gs:0x32990
-0xffffffff9a80016e:  00 05
-0xffffffff9a800170:  66 0f 1f 00              nopw     (%rax)
-0xffffffff9a800174:  9c                       pushfq   
-0xffffffff9a800175:  6a 00                    pushq    $0
-0xffffffff9a800177:  9d                       popfq    
-0xffffffff9a800178:  b8 00 00 00 00           movl     $0, %eax
-0xffffffff9a80017d:  0f a2                    cpuid    
-0xffffffff9a80017f:  83 f8 01                 cmpl     $1, %eax
-0xffffffff9a800182:  0f 82 d2 00 00 00        jb       0xffffffff9a80025a
-0xffffffff9a800188:  66 31 ff                 xorw     %di, %di
-0xffffffff9a80018b:  81 fb 41 75 74 68        cmpl     $0x68747541, %ebx
-0xffffffff9a800191:  75 16                    jne      0xffffffff9a8001a9
-0xffffffff9a800193:  81 fa 65 6e 74 69        cmpl     $0x69746e65, %edx
-0xffffffff9a800199:  75 0e                    jne      0xffffffff9a8001a9
-0xffffffff9a80019b:  81 f9 63 41 4d 44        cmpl     $0x444d4163, %ecx
-0xffffffff9a8001a1:  75 06                    jne      0xffffffff9a8001a9
-0xffffffff9a8001a3:  66 bf 01 00              movw     $1, %di
-0xffffffff9a8001a7:  eb 4d                    jmp      0xffffffff9a8001f6
-0xffffffff9a8001f6:  b8 01 00 00 00           movl     $1, %eax
-0xffffffff9a8001fb:  0f a2                    cpuid    
-0xffffffff9a8001fd:  81 e2 61 81 00 07        andl     $0x7008161, %edx
-0xffffffff9a800203:  81 f2 61 81 00 07        xorl     $0x7008161, %edx
-0xffffffff9a800209:  75 4f                    jne      0xffffffff9a80025a
-0xffffffff9a80020b:  b8 00 00 00 80           movl     $0x80000000, %eax
-0xffffffff9a800210:  0f a2                    cpuid    
-0xffffffff9a800212:  3d 01 00 00 80           cmpl     $0x80000001, %eax
-0xffffffff9a800217:  72 41                    jb       0xffffffff9a80025a
-0xffffffff9a800219:  b8 01 00 00 80           movl     $0x80000001, %eax
-0xffffffff9a80021e:  0f a2                    cpuid    
-0xffffffff9a800220:  81 e2 00 00 00 20        andl     $0x20000000, %edx
-0xffffffff9a800226:  81 f2 00 00 00 20        xorl     $0x20000000, %edx
-0xffffffff9a80022c:  75 2c                    jne      0xffffffff9a80025a
-0xffffffff9a80022e:  b8 01 00 00 00           movl     $1, %eax
-0xffffffff9a800233:  0f a2                    cpuid    
-0xffffffff9a800235:  81 e2 00 00 00 06        andl     $0x6000000, %edx
-0xffffffff9a80023b:  81 fa 00 00 00 06        cmpl     $0x6000000, %edx
-0xffffffff9a800241:  74 22                    je       0xffffffff9a800265
-0xffffffff9a800265:  9d                       popfq    
-0xffffffff9a800266:  31 c0                    xorl     %eax, %eax
-0xffffffff9a800268:  e9 23 24 d4 00           jmp      0xffffffff9b542690
-0xffffffff9b542690:  f3 0f 1e fa              endbr64  
-0xffffffff9b542694:  65 48 c1 24 25 90 29 03  shlq     $5, %gs:0x32990
-0xffffffff9b54269c:  00 05
-0xffffffff9b54269e:  74 02                    je       0xffffffff9b5426a2
-0xffffffff9b5426a2:  e8 01 00 00 00           callq    0xffffffff9b5426a8
-0xffffffff9b5426a8:  e8 01 00 00 00           callq    0xffffffff9b5426ae
-0xffffffff9b5426ae:  e8 01 00 00 00           callq    0xffffffff9b5426b4
-0xffffffff9b5426b4:  e8 01 00 00 00           callq    0xffffffff9b5426ba
-0xffffffff9b5426ba:  e8 01 00 00 00           callq    0xffffffff9b5426c0
-0xffffffff9b5426c0:  e8 01 00 00 00           callq    0xffffffff9b5426c6
-0xffffffff9b5426c6:  e8 01 00 00 00           callq    0xffffffff9b5426cc
-0xffffffff9b5426cc:  e8 01 00 00 00           callq    0xffffffff9b5426d2
-0xffffffff9b5426d2:  e8 01 00 00 00           callq    0xffffffff9b5426d8
-0xffffffff9b5426d8:  e8 01 00 00 00           callq    0xffffffff9b5426de
-0xffffffff9b5426de:  e8 01 00 00 00           callq    0xffffffff9b5426e4
-0xffffffff9b5426e4:  e8 01 00 00 00           callq    0xffffffff9b5426ea
-0xffffffff9b5426ea:  e8 01 00 00 00           callq    0xffffffff9b5426f0
-0xffffffff9b5426f0:  e8 01 00 00 00           callq    0xffffffff9b5426f6
-0xffffffff9b5426f6:  e8 01 00 00 00           callq    0xffffffff9b5426fc
-0xffffffff9b5426fc:  e8 01 00 00 00           callq    0xffffffff9b542702
-0xffffffff9b542702:  48 81 c4 80 00 00 00     addq     $0x80, %rsp
-0xffffffff9b542709:  65 48 c7 04 25 90 29 03  movq     $-1, %gs:0x32990
-0xffffffff9b542711:  00 ff ff ff ff
-# Returns from `verify_cpu`
-0xffffffff9b542716:  c3                       retq     
-0xffffffff9a800075:  48 8b 04 25 38 2e 64 9c  movq     0xffffffff9c642e38, %rax
-0xffffffff9a80007d:  48 05 00 00 61 1c        addq     $0x1c610000, %rax
-0xffffffff9a800083:  0f 20 e1                 movq     %cr4, %rcx
-0xffffffff9a800086:  83 e1 40                 andl     $0x40, %ecx
-0xffffffff9a800089:  81 c9 a0 00 00 00        orl      $0xa0, %ecx
-0xffffffff9a80008f:  f7 05 87 bf 6c 01 01 00  testl    $1, 0x16cbf87(%rip)
-0xffffffff9a800097:  00 00
-0xffffffff9a800099:  74 06                    je       0xffffffff9a8000a1
-0xffffffff9a8000a1:  0f 22 e1                 movq     %rcx, %cr4
-0xffffffff9a8000a4:  48 03 05 65 9f e1 01     addq     0x1e19f65(%rip), %rax
-0xffffffff9a8000ab:  56                       pushq    %rsi
-0xffffffff9a8000ac:  48 89 c7                 movq     %rax, %rdi
-# Next line is `call sev_verify_cbit` from `secondary_startup_64`
-0xffffffff9a8000af:  e8 c2 01 00 00           callq    0xffffffff9a800276
-# This next `sarq` does not have the correct GS set?
-#     RAX=0000000002e10000 RBX=0000000000000800 RCX=00000000000000a0 RDX=0000000006000000
-#     RSI=0000000000000000 RDI=0000000002e10000 RBP=0000000000000000 RSP=000000000009e018
-#     R8 =0000000000000000 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000
-#     R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-#     RIP=ffffffff9a8000af RFL=00200007 [-----PC] CPL=0 II=0 A20=1 SMM=0 HLT=0
-#     ES =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     CS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]
-#     SS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     DS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     FS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     GS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     LDT=0000 0000000000000000 0000ffff 00008200 DPL=0 LDT
-#     TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-#     GDT=     0000000000098030 0000001f
-#     IDT=     0000000000000000 00000000
-#     CR0=80050033 CR2=0000000000000000 CR3=000000000009c000 CR4=000000a0
-#     DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-#     DR6=00000000ffff0ff0 DR7=0000000000000400
-#     CCS=ffffffffe6800000 CCD=0000000002e10000 CCO=ADDQ
-#     EFER=0000000000000d01
-0xffffffff9a800276:  65 48 c1 3c 25 90 29 03  sarq     $5, %gs:0x32990
-0xffffffff9a80027e:  00 05
-0xffffffff9a800280:  66 0f 1f 00              nopw     (%rax)
-0xffffffff9a800284:  48 8b 35 ad 2b e4 01     movq     0x1e42bad(%rip), %rsi
-0xffffffff9a80028b:  48 85 f6                 testq    %rsi, %rsi
-0xffffffff9a80028e:  74 4b                    je       0xffffffff9a8002db
-0xffffffff9a8002db:  48 89 f8                 movq     %rdi, %rax
-0xffffffff9a8002de:  e9 ad 23 d4 00           jmp      0xffffffff9b542690
-0xffffffff9b542690:  f3 0f 1e fa              endbr64  
-0xffffffff9b542694:  65 48 c1 24 25 90 29 03  shlq     $5, %gs:0x32990
-0xffffffff9b54269c:  00 05
-0xffffffff9b54269e:  74 02                    je       0xffffffff9b5426a2
-# Returns from `sev_verify_cbit`
-0xffffffff9b5426a0:  c3                       retq     
-0xffffffff9a8000b4:  5e                       popq     %rsi
-0xffffffff9a8000b5:  0f 22 d8                 movq     %rax, %cr3
-0xffffffff9a8000b8:  0f 20 e1                 movq     %cr4, %rcx
-0xffffffff9a8000bb:  48 89 c8                 movq     %rcx, %rax
-0xffffffff9a8000be:  48 81 f1 80 00 00 00     xorq     $0x80, %rcx
-0xffffffff9a8000c5:  0f 22 e1                 movq     %rcx, %cr4
-0xffffffff9a8000c8:  0f 22 e0                 movq     %rax, %cr4
-0xffffffff9a8000cb:  48 c7 c0 d4 00 80 9a     movq     $-0x657fff2c, %rax
-0xffffffff9a8000d2:  ff e0                    jmpq     *%rax
-0xffffffff9a8000d4:  0f 01 15 25 9f e1 01     lgdtq    0x1e19f25(%rip)
-0xffffffff9a8000db:  31 c0                    xorl     %eax, %eax
-0xffffffff9a8000dd:  8e d8                    movl     %eax, %ds
-0xffffffff9a8000df:  8e d0                    movl     %eax, %ss
-0xffffffff9a8000e1:  8e c0                    movl     %eax, %es
-0xffffffff9a8000e3:  8e e0                    movl     %eax, %fs
-0xffffffff9a8000e5:  8e e8                    movl     %eax, %gs
-0xffffffff9a8000e7:  b9 01 01 00 c0           movl     $0xc0000101, %ecx
-0xffffffff9a8000ec:  8b 05 36 e5 fa 01        movl     0x1fae536(%rip), %eax
-0xffffffff9a8000f2:  8b 15 34 e5 fa 01        movl     0x1fae534(%rip), %edx
-# Restores GS in `secondary_startup_64`
-0xffffffff9a8000f8:  0f 30                    wrmsr    
-# Processor state after is:
-#     RAX=00000000c7a00000 RBX=0000000000000800 RCX=00000000c0000101 RDX=00000000ffff97b9
-#     RSI=0000000000000000 RDI=0000000002e10000 RBP=0000000000000000 RSP=000000000009e020
-#     R8 =0000000000000000 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000
-#     R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-#     RIP=ffffffff9a8000fa RFL=00200046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
-#     ES =0000 0000000000000000 00000000 00000000
-#     CS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]
-#     SS =0000 0000000000000000 00000000 00000000
-#     DS =0000 0000000000000000 00000000 00000000
-#     FS =0000 0000000000000000 00000000 00000000
-#     GS =0000 ffff97b9c7a00000 00000000 00000000
-#     LDT=0000 0000000000000000 0000ffff 00008200 DPL=0 LDT
-#     TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-#     GDT=     ffff97b9c7a0b000 0000007f
-#     IDT=     0000000000000000 00000000
-#     CR0=80050033 CR2=0000000000000000 CR3=0000000002e10000 CR4=000000a0
-#     DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-#     DR6=00000000ffff0ff0 DR7=0000000000000400
-#     CCS=0000000000000081 CCD=0000000000000020 CCO=CLR
-#     EFER=0000000000000d01
-0xffffffff9a8000fa:  48 8b 25 37 e5 fa 01     movq     0x1fae537(%rip), %rsp
-0xffffffff9a800101:  56                       pushq    %rsi
-# Next line is `call early_setup_idt` from `secondary_startup_64`
-0xffffffff9a800102:  e8 9f 0f 00 00           callq    0xffffffff9a8010a6
-0xffffffff9a8010a6:  65 48 c1 3c 25 90 29 03  sarq     $5, %gs:0x32990
-0xffffffff9a8010ae:  00 05
-0xffffffff9a8010b0:  66 0f 1f 00              nopw     (%rax)
-0xffffffff9a8010b4:  e8 2d af 08 00           callq    0xffffffff9a88bfe6
-0xffffffff9a88bfe6:  65 48 c1 3c 25 90 29 03  sarq     $5, %gs:0x32990
-0xffffffff9a88bfee:  00 05
-0xffffffff9a88bff0:  66 0f 1f 00              nopw     (%rax)
-0xffffffff9a88bff4:  bf 03 00 00 00           movl     $3, %edi
-0xffffffff9a88bff9:  e8 18 68 f7 ff           callq    0xffffffff9a802816
-0xffffffff9a802816:  65 48 c1 3c 25 90 29 03  sarq     $5, %gs:0x32990
-0xffffffff9a80281e:  00 05
-0xffffffff9a802820:  f3 0f 1e fa              endbr64  
-0xffffffff9a802824:  8b 15 3e 98 6c 01        movl     0x16c983e(%rip), %edx
-# ... more stuff inside `early_setup_idt` ellided
-0xffffffff9a800107:  5e                       popq     %rsi
-0xffffffff9a800108:  b8 01 00 00 80           movl     $0x80000001, %eax
-0xffffffff9a80010d:  0f a2                    cpuid    
-0xffffffff9a80010f:  89 d7                    movl     %edx, %edi
-0xffffffff9a800111:  b9 80 00 00 c0           movl     $0xc0000080, %ecx
-0xffffffff9a800116:  0f 32                    rdmsr    
-0xffffffff9a800118:  89 c2                    movl     %eax, %edx
-0xffffffff9a80011a:  0f ba e8 00              btsl     $0, %eax
-0xffffffff9a80011e:  0f ba e7 14              btl      $0x14, %edi
-0xffffffff9a800122:  73 0d                    jae      0xffffffff9a800131
-0xffffffff9a800124:  0f ba e8 0b              btsl     $0xb, %eax
-0xffffffff9a800128:  48 0f ba 2d 8f 9f e1 01  btsq     $0x3f, 0x1e19f8f(%rip)
-0xffffffff9a800130:  3f
-0xffffffff9a800131:  39 d0                    cmpl     %edx, %eax
-0xffffffff9a800133:  74 04                    je       0xffffffff9a800139
-0xffffffff9a800139:  b8 33 00 05 80           movl     $0x80050033, %eax
-0xffffffff9a80013e:  0f 22 c0                 movq     %rax, %cr0
-0xffffffff9a800141:  6a 00                    pushq    $0
-0xffffffff9a800143:  9d                       popfq    
-0xffffffff9a800144:  48 89 f7                 movq     %rsi, %rdi
-0xffffffff9a800147:  68 5a 01 80 9a           pushq    $-0x657ffea6
-0xffffffff9a80014c:  31 ed                    xorl     %ebp, %ebp
-0xffffffff9a80014e:  48 8b 05 cb e4 fa 01     movq     0x1fae4cb(%rip), %rax
-0xffffffff9a800155:  6a 10                    pushq    $0x10
-0xffffffff9a800157:  50                       pushq    %rax
-0xffffffff9a800158:  48 cb                    lretq    
-0xffffffff9a86db70:  f3 0f 1e fa              endbr64  
-# START wakeup_long64
-0xffffffff9a86db74:  48 8b 04 25 90 0a 63 9c  movq     0xffffffff9c630a90, %rax
-0xffffffff9a86db7c:  48 ba f0 de bc 9a 78 56  movabsq  $0x123456789abcdef0, %rdx
-0xffffffff9a86db84:  34 12
-0xffffffff9a86db86:  48 39 d0                 cmpq     %rdx, %rax
-0xffffffff9a86db89:  74 0c                    je       0xffffffff9a86db97
-0xffffffff9a86db97:  66 b8 18 00              movw     $0x18, %ax
-0xffffffff9a86db9b:  8e d0                    movl     %eax, %ss
-0xffffffff9a86db9d:  8e d8                    movl     %eax, %ds
-0xffffffff9a86db9f:  8e c0                    movl     %eax, %es
-0xffffffff9a86dba1:  8e e0                    movl     %eax, %fs
-# This clears GS again
-0xffffffff9a86dba3:  8e e8                    movl     %eax, %gs
-# Processor state after is:
-#     RAX=123456789abc0018 RBX=0000000000000000 RCX=00000000c0000080 RDX=123456789abcdef0
-#     RSI=0000000000000000 RDI=0000000000000000 RBP=0000000000000000 RSP=ffffffff9cff3fd8
-#     R8 =0000000000000000 R9 =0000000000000000 R10=0000000000000000 R11=0000000000000000
-#     R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-#     RIP=ffffffff9a86dba5 RFL=00000046 [---Z-P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
-#     ES =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     CS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]
-#     SS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     DS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     FS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     GS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     LDT=0000 0000000000000000 0000ffff 00008200 DPL=0 LDT
-#     TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-#     GDT=     ffff97b9c7a0b000 0000007f
-#     IDT=     ffffffff9c604000 000001ff
-#     CR0=80050033 CR2=0000000000000000 CR3=0000000002e10000 CR4=000000a0
-#     DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-#     DR6=00000000ffff0ff0 DR7=0000000000000400
-#     CCS=0000000000000044 CCD=0000000000000000 CCO=EFLAGS
-#     EFER=0000000000000d01
-0xffffffff9a86dba5:  48 8b 24 25 88 0a 63 9c  movq     0xffffffff9c630a88, %rsp
-0xffffffff9a86dbad:  48 8b 1c 25 78 0a 63 9c  movq     0xffffffff9c630a78, %rbx
-0xffffffff9a86dbb5:  48 8b 3c 25 70 0a 63 9c  movq     0xffffffff9c630a70, %rdi
-0xffffffff9a86dbbd:  48 8b 34 25 68 0a 63 9c  movq     0xffffffff9c630a68, %rsi
-0xffffffff9a86dbc5:  48 8b 2c 25 60 0a 63 9c  movq     0xffffffff9c630a60, %rbp
-0xffffffff9a86dbcd:  48 8b 04 25 80 0a 63 9c  movq     0xffffffff9c630a80, %rax
-0xffffffff9a86dbd5:  ff e0                    jmpq     *%rax
-# START `.Lresume_point` in `do_suspend_lowlevel`
-0xffffffff9a86dc90:  48 c7 c0 e0 53 0e 9d     movq     $-0x62f1ac20, %rax
-0xffffffff9a86dc97:  48 8b 98 e0 00 00 00     movq     0xe0(%rax), %rbx
-0xffffffff9a86dc9e:  0f 22 e3                 movq     %rbx, %cr4
-0xffffffff9a86dca1:  48 8b 98 d8 00 00 00     movq     0xd8(%rax), %rbx
-0xffffffff9a86dca8:  0f 22 db                 movq     %rbx, %cr3
-0xffffffff9a86dcab:  48 8b 98 d0 00 00 00     movq     0xd0(%rax), %rbx
-0xffffffff9a86dcb2:  0f 22 d3                 movq     %rbx, %cr2
-0xffffffff9a86dcb5:  48 8b 98 c8 00 00 00     movq     0xc8(%rax), %rbx
-0xffffffff9a86dcbc:  0f 22 c3                 movq     %rbx, %cr0
-0xffffffff9a86dcbf:  ff b0 90 00 00 00        pushq    0x90(%rax)
-0xffffffff9a86dcc5:  9d                       popfq    
-0xffffffff9a86dcc6:  48 8b a0 98 00 00 00     movq     0x98(%rax), %rsp
-0xffffffff9a86dccd:  48 8b 68 20              movq     0x20(%rax), %rbp
-0xffffffff9a86dcd1:  48 8b 70 68              movq     0x68(%rax), %rsi
-0xffffffff9a86dcd5:  48 8b 78 70              movq     0x70(%rax), %rdi
-0xffffffff9a86dcd9:  48 8b 58 28              movq     0x28(%rax), %rbx
-0xffffffff9a86dcdd:  48 8b 48 58              movq     0x58(%rax), %rcx
-0xffffffff9a86dce1:  48 8b 50 60              movq     0x60(%rax), %rdx
-0xffffffff9a86dce5:  4c 8b 40 48              movq     0x48(%rax), %r8
-0xffffffff9a86dce9:  4c 8b 48 40              movq     0x40(%rax), %r9
-0xffffffff9a86dced:  4c 8b 50 38              movq     0x38(%rax), %r10
-0xffffffff9a86dcf1:  4c 8b 58 30              movq     0x30(%rax), %r11
-0xffffffff9a86dcf5:  4c 8b 60 18              movq     0x18(%rax), %r12
-0xffffffff9a86dcf9:  4c 8b 68 10              movq     0x10(%rax), %r13
-0xffffffff9a86dcfd:  4c 8b 70 08              movq     8(%rax), %r14
-0xffffffff9a86dd01:  4c 8b 38                 movq     (%rax), %r15
-0xffffffff9a86dd04:  31 c0                    xorl     %eax, %eax
-0xffffffff9a86dd06:  48 83 c4 08              addq     $8, %rsp
-# Jumps to `restore_processor_state`
-0xffffffff9a86dd0a:  e9 31 ed cb 00           jmp      0xffffffff9b52ca40
-0xffffffff9b52ca40:  55                       pushq    %rbp
-0xffffffff9b52ca41:  48 89 e5                 movq     %rsp, %rbp
-0xffffffff9b52ca44:  41 57                    pushq    %r15
-0xffffffff9b52ca46:  41 56                    pushq    %r14
-0xffffffff9b52ca48:  41 55                    pushq    %r13
-0xffffffff9b52ca4a:  41 54                    pushq    %r12
-0xffffffff9b52ca4c:  53                       pushq    %rbx
-0xffffffff9b52ca4d:  48 83 ec 20              subq     $0x20, %rsp
-0xffffffff9b52ca51:  80 3d c4 8a bb 01 00     cmpb     $0, 0x1bb8ac4(%rip)
-0xffffffff9b52ca58:  74 15                    je       0xffffffff9b52ca6f
-0xffffffff9b52ca5a:  48 8b 05 67 8a bb 01     movq     0x1bb8a67(%rip), %rax
-0xffffffff9b52ca61:  b9 a0 01 00 00           movl     $0x1a0, %ecx
-0xffffffff9b52ca66:  48 89 c2                 movq     %rax, %rdx
-0xffffffff9b52ca69:  48 c1 ea 20              shrq     $0x20, %rdx
-0xffffffff9b52ca6d:  0f 30                    wrmsr    
-0xffffffff9b52ca6f:  48 8b 05 6a 8a bb 01     movq     0x1bb8a6a(%rip), %rax
-0xffffffff9b52ca76:  b9 80 00 00 c0           movl     $0xc0000080, %ecx
-0xffffffff9b52ca7b:  48 89 c2                 movq     %rax, %rdx
-0xffffffff9b52ca7e:  48 c1 ea 20              shrq     $0x20, %rdx
-0xffffffff9b52ca82:  0f 30                    wrmsr    
-0xffffffff9b52ca84:  48 8b 05 35 8a bb 01     movq     0x1bb8a35(%rip), %rax
-0xffffffff9b52ca8b:  0f 22 e0                 movq     %rax, %cr4
-0xffffffff9b52ca8e:  48 89 05 2b 8a bb 01     movq     %rax, 0x1bb8a2b(%rip)
-0xffffffff9b52ca95:  48 8b 05 1c 8a bb 01     movq     0x1bb8a1c(%rip), %rax
-0xffffffff9b52ca9c:  0f 22 d8                 movq     %rax, %cr3
-0xffffffff9b52ca9f:  48 8b 05 0a 8a bb 01     movq     0x1bb8a0a(%rip), %rax
-0xffffffff9b52caa6:  0f 22 d0                 movq     %rax, %cr2
-0xffffffff9b52caa9:  48 8b 05 f8 89 bb 01     movq     0x1bb89f8(%rip), %rax
-0xffffffff9b52cab0:  0f 22 c0                 movq     %rax, %cr0
-0xffffffff9b52cab3:  48 89 05 ee 89 bb 01     movq     %rax, 0x1bb89ee(%rip)
-0xffffffff9b52caba:  0f 01 1d 35 8a bb 01     lidtq    0x1bb8a35(%rip)
-0xffffffff9b52cac1:  b8 18 00 00 00           movl     $0x18, %eax
-0xffffffff9b52cac6:  8e d0                    movl     %eax, %ss
-0xffffffff9b52cac8:  b8 2b 00 00 00           movl     $0x2b, %eax
-0xffffffff9b52cacd:  89 c2                    movl     %eax, %edx
-0xffffffff9b52cacf:  8e da                    movl     %edx, %ds
-0xffffffff9b52cad1:  8e c0                    movl     %eax, %es
-0xffffffff9b52cad3:  48 8b 05 b6 89 bb 01     movq     0x1bb89b6(%rip), %rax
-0xffffffff9b52cada:  b9 01 01 00 c0           movl     $0xc0000101, %ecx
-0xffffffff9b52cadf:  48 89 c2                 movq     %rax, %rdx
-0xffffffff9b52cae2:  48 c1 ea 20              shrq     $0x20, %rdx
-# Restores GS inside `__restore_processor_state`. Processor state after is:
-#     RAX=ffff97b9c7a00000 RBX=ffff97b9c5b6be00 RCX=00000000c0000101 RDX=00000000ffff97b9
-#     RSI=ffffffffd43c95f9 RDI=0000000000000004 RBP=ffffad4e8062fca0 RSP=ffffad4e8062fc58
-#     R8 =0000000000000004 R9 =0000000021bee048 R10=00000000aaaaaaab R11=0000000000000005
-#     R12=0000000000000000 R13=0000000000000000 R14=0000000000000004 R15=ffff97b9c5929020
-#     RIP=ffffffff9b52cae8 RFL=00000003 [------C] CPL=0 II=0 A20=1 SMM=0 HLT=0
-#     ES =002b 0000000000000000 ffffffff 00cff300 DPL=3 DS   [-WA]
-#     CS =0010 0000000000000000 ffffffff 00af9b00 DPL=0 CS64 [-RA]
-#     SS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     DS =002b 0000000000000000 ffffffff 00cff300 DPL=3 DS   [-WA]
-#     FS =0018 0000000000000000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     GS =0018 ffff97b9c7a00000 ffffffff 00cf9300 DPL=0 DS   [-WA]
-#     LDT=0000 0000000000000000 0000ffff 00008200 DPL=0 LDT
-#     TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-#     GDT=     ffff97b9c7a0b000 0000007f
-#     IDT=     fffffe0000000000 00000fff
-#     CR0=80050033 CR2=000000000049304a CR3=0000000005b58000 CR4=000006f0
-#     DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-#     DR6=00000000ffff0ff0 DR7=0000000000000400
-#     CCS=00000001ffff2f73 CCD=00000000ffff97b9 CCO=SARQ
-#     EFER=0000000000000d01
-0xffffffff9b52cae6:  0f 30                    wrmsr    
+--------------78E4ABhTHO0B4lG8jyzNTay2
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmPBEYMFAwAAAAAACgkQsN6d1ii/Ey/1
+igf9FogeEHwsEjMohtO440DwmpQMGvUnv4pOEMrtP6NkUzx7UuOD//OrqK54yAPU4/assRZWBqB2
+Er6qVknG6D4n5TEJ79znvPedLcmsQtxuRC2BRZBUpIDYxaf1lpc23mvPEsur5BQNvBVR18i3ERb+
+GCI11aRyqVXcdk4/TMHKrrlB73TEw3ZbD2dSa9+9E3P3M4nuR89jVvgGR/tawSg6gcWXjJcP4WkA
+toQByX0NloIqCMydj+lgnAwPxrWoMwDDsGWb6ntcNBiURbjH0JLcPyxE+LoweLUUdWlviRB4CJ0k
+Vk1D9e+Q0VtE2+8AArEunaErMPsRYpVb+AYIC3TClQ==
+=4rhg
+-----END PGP SIGNATURE-----
+
+--------------78E4ABhTHO0B4lG8jyzNTay2--
 
