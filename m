@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8902CC677F1
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476589.738958 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A91C54EBD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476601.738969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjM-0001nx-IH; Fri, 13 Jan 2023 05:35:56 +0000
+	id 1pGCjW-0002wE-TN; Fri, 13 Jan 2023 05:36:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476589.738958; Fri, 13 Jan 2023 05:35:56 +0000
+Received: by outflank-mailman (output) from mailman id 476601.738969; Fri, 13 Jan 2023 05:36:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjM-0001nk-CM; Fri, 13 Jan 2023 05:35:56 +0000
-Received: by outflank-mailman (input) for mailman id 476589;
- Fri, 13 Jan 2023 05:35:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pGCjW-0002w3-Ny; Fri, 13 Jan 2023 05:36:06 +0000
+Received: by outflank-mailman (input) for mailman id 476601;
+ Fri, 13 Jan 2023 05:36:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1pGCf2-0005sP-AO
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:28 +0000
+ id 1pGCeQ-0005sJ-1W
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:30:50 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 85e3d938-9303-11ed-b8d0-410ff93cb8f0;
- Fri, 13 Jan 2023 06:31:26 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 6fbbe079-9303-11ed-91b6-6bf2151ebd3b;
+ Fri, 13 Jan 2023 06:30:48 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CE16FFEC;
- Thu, 12 Jan 2023 21:32:07 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8DBB513D5;
+ Thu, 12 Jan 2023 21:31:30 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1BACD3F587;
- Thu, 12 Jan 2023 21:31:22 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CFA2A3F587;
+ Thu, 12 Jan 2023 21:30:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 85e3d938-9303-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 6fbbe079-9303-11ed-91b6-6bf2151ebd3b
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,157 +55,184 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 34/40] xen/mpu: free init memory in MPU system
-Date: Fri, 13 Jan 2023 13:29:07 +0800
-Message-Id: <20230113052914.3845596-35-Penny.Zheng@arm.com>
+Subject: [PATCH v2 23/40] xen/mpu: initialize frametable in MPU system
+Date: Fri, 13 Jan 2023 13:28:56 +0800
+Message-Id: <20230113052914.3845596-24-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This commit implements free_init_memory in MPU system, trying to keep
-the same strategy with MMU system.
+Xen is using page as the smallest granularity for memory managment.
+And we want to follow the same concept in MPU system.
+That is, structure page_info and the frametable which is used for storing
+and managing page_info is also required in MPU system.
 
-In order to inserting BRK instruction into init code section, which
-aims to provok a fault on purpose, we should change init code section
-permission to RW at first.
-Function modify_xen_mappings is introduced to modify permission of the
-existing valid MPU memory region.
+In MPU system, since there is no virtual address translation (VA == PA),
+we can not use a fixed VA address(FRAMETABLE_VIRT_START) to map frametable
+like MMU system does.
+Instead, we define a variable "struct page_info *frame_table" as frametable
+pointer, and ask boot allocator to allocate memory for frametable.
 
-Then we nuke the instruction cache to remove entries related to init
-text.
-At last, we destroy these two MPU memory regions referring init text and
-init data using destroy_xen_mappings.
+As frametable is successfully initialized, the convertion between machine frame
+number/machine address/"virtual address" and page-info structure is
+ready too, like mfn_to_page/maddr_to_page/virt_to_page, etc
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
- xen/arch/arm/mm_mpu.c | 85 ++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 83 insertions(+), 2 deletions(-)
+ xen/arch/arm/include/asm/mm.h     | 15 ---------------
+ xen/arch/arm/include/asm/mm_mmu.h | 16 ++++++++++++++++
+ xen/arch/arm/include/asm/mm_mpu.h | 17 +++++++++++++++++
+ xen/arch/arm/mm_mpu.c             | 25 +++++++++++++++++++++++++
+ 4 files changed, 58 insertions(+), 15 deletions(-)
 
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index e29158028a..7969ec9f98 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -176,7 +176,6 @@ struct page_info
+ 
+ #define maddr_get_owner(ma)   (page_get_owner(maddr_to_page((ma))))
+ 
+-#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
+ /* PDX of the first page in the frame table. */
+ extern unsigned long frametable_base_pdx;
+ 
+@@ -280,20 +279,6 @@ static inline uint64_t gvirt_to_maddr(vaddr_t va, paddr_t *pa,
+ #define virt_to_mfn(va)     __virt_to_mfn(va)
+ #define mfn_to_virt(mfn)    __mfn_to_virt(mfn)
+ 
+-/* Convert between Xen-heap virtual addresses and page-info structures. */
+-static inline struct page_info *virt_to_page(const void *v)
+-{
+-    unsigned long va = (unsigned long)v;
+-    unsigned long pdx;
+-
+-    ASSERT(va >= XENHEAP_VIRT_START);
+-    ASSERT(va < directmap_virt_end);
+-
+-    pdx = (va - XENHEAP_VIRT_START) >> PAGE_SHIFT;
+-    pdx += mfn_to_pdx(directmap_mfn_start);
+-    return frame_table + pdx - frametable_base_pdx;
+-}
+-
+ static inline void *page_to_virt(const struct page_info *pg)
+ {
+     return mfn_to_virt(mfn_x(page_to_mfn(pg)));
+diff --git a/xen/arch/arm/include/asm/mm_mmu.h b/xen/arch/arm/include/asm/mm_mmu.h
+index 6d7e5ddde7..bc1b04c4c7 100644
+--- a/xen/arch/arm/include/asm/mm_mmu.h
++++ b/xen/arch/arm/include/asm/mm_mmu.h
+@@ -23,6 +23,8 @@ extern uint64_t init_ttbr;
+ extern void setup_directmap_mappings(unsigned long base_mfn,
+                                      unsigned long nr_mfns);
+ 
++#define frame_table ((struct page_info *)FRAMETABLE_VIRT_START)
++
+ static inline paddr_t __virt_to_maddr(vaddr_t va)
+ {
+     uint64_t par = va_to_par(va);
+@@ -49,6 +51,20 @@ static inline void *maddr_to_virt(paddr_t ma)
+ }
+ #endif
+ 
++/* Convert between Xen-heap virtual addresses and page-info structures. */
++static inline struct page_info *virt_to_page(const void *v)
++{
++    unsigned long va = (unsigned long)v;
++    unsigned long pdx;
++
++    ASSERT(va >= XENHEAP_VIRT_START);
++    ASSERT(va < directmap_virt_end);
++
++    pdx = (va - XENHEAP_VIRT_START) >> PAGE_SHIFT;
++    pdx += mfn_to_pdx(directmap_mfn_start);
++    return frame_table + pdx - frametable_base_pdx;
++}
++
+ #endif /* __ARCH_ARM_MM_MMU__ */
+ 
+ /*
+diff --git a/xen/arch/arm/include/asm/mm_mpu.h b/xen/arch/arm/include/asm/mm_mpu.h
+index fe6a828a50..eebd5b5d35 100644
+--- a/xen/arch/arm/include/asm/mm_mpu.h
++++ b/xen/arch/arm/include/asm/mm_mpu.h
+@@ -9,6 +9,8 @@
+  */
+ extern void setup_static_mappings(void);
+ 
++extern struct page_info *frame_table;
++
+ static inline paddr_t __virt_to_maddr(vaddr_t va)
+ {
+     /* In MPU system, VA == PA. */
+@@ -22,6 +24,21 @@ static inline void *maddr_to_virt(paddr_t ma)
+     return (void *)ma;
+ }
+ 
++/* Convert between virtual address to page-info structure. */
++static inline struct page_info *virt_to_page(const void *v)
++{
++    unsigned long va = (unsigned long)v;
++    unsigned long pdx;
++
++    /*
++     * In MPU system, VA == PA, virt_to_maddr() outputs the
++     * exact input address.
++     */
++    pdx = mfn_to_pdx(maddr_to_mfn(virt_to_maddr(va)));
++
++    return frame_table + pdx - frametable_base_pdx;
++}
++
+ #endif /* __ARCH_ARM_MM_MPU__ */
+ 
+ /*
 diff --git a/xen/arch/arm/mm_mpu.c b/xen/arch/arm/mm_mpu.c
-index 0b720004ee..de0c7d919a 100644
+index f057ee26df..7b282be4fb 100644
 --- a/xen/arch/arm/mm_mpu.c
 +++ b/xen/arch/arm/mm_mpu.c
-@@ -20,6 +20,7 @@
-  */
+@@ -69,6 +69,8 @@ static DEFINE_SPINLOCK(xen_mpumap_lock);
  
- #include <xen/init.h>
-+#include <xen/kernel.h>
- #include <xen/libfdt/libfdt.h>
- #include <xen/mm.h>
- #include <xen/page-size.h>
-@@ -77,6 +78,8 @@ static const unsigned int mpu_section_mattr[MSINFO_MAX] = {
-     REGION_HYPERVISOR_BOOT,
- };
+ static paddr_t dtb_paddr;
  
-+extern char __init_data_begin[], __init_end[];
++struct page_info *frame_table;
 +
  /* Write a MPU protection region */
  #define WRITE_PROTECTION_REGION(sel, pr, prbar_el2, prlar_el2) ({       \
      uint64_t _sel = sel;                                                \
-@@ -443,8 +446,41 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
-     if ( rc == MPUMAP_REGION_OVERLAP )
-         return -EINVAL;
- 
-+    /* We are updating the permission. */
-+    if ( (flags & _REGION_PRESENT) && (rc == MPUMAP_REGION_FOUND ||
-+                                       rc == MPUMAP_REGION_INCLUSIVE) )
-+    {
-+
-+        /*
-+         * Currently, we only support modifying a *WHOLE* MPU memory region,
-+         * part-region modification is not supported, as in worst case, it will
-+         * lead to three fragments in result after modification.
-+         * part-region modification will be introduced only when actual usage
-+         * come
-+         */
-+        if ( rc == MPUMAP_REGION_INCLUSIVE )
-+        {
-+            region_printk("mpu: part-region modification is not supported\n");
-+            return -EINVAL;
-+        }
-+
-+        /* We don't allow changing memory attributes. */
-+        if (xen_mpumap[idx].prlar.reg.ai != REGION_AI_MASK(flags) )
-+        {
-+            region_printk("Modifying memory attributes is not allowed (0x%x -> 0x%x).\n",
-+                          xen_mpumap[idx].prlar.reg.ai, REGION_AI_MASK(flags));
-+            return -EINVAL;
-+        }
-+
-+        /* Set new permission */
-+        xen_mpumap[idx].prbar.reg.ap = REGION_AP_MASK(flags);
-+        xen_mpumap[idx].prbar.reg.xn = REGION_XN_MASK(flags);
-+
-+        access_protection_region(false, NULL, (const pr_t*)(&xen_mpumap[idx]),
-+                                 idx);
-+    }
-     /* We are inserting a mapping => Create new region. */
--    if ( flags & _REGION_PRESENT )
-+    else if ( flags & _REGION_PRESENT )
-     {
-         if ( rc != MPUMAP_REGION_FAILED )
-             return -EINVAL;
-@@ -831,11 +867,56 @@ void mmu_init_secondary_cpu(void)
- 
- int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int flags)
- {
--    return -ENOSYS;
-+    ASSERT(IS_ALIGNED(s, PAGE_SIZE));
-+    ASSERT(IS_ALIGNED(e, PAGE_SIZE));
-+    ASSERT(s <= e);
-+    return xen_mpumap_update(s, e, flags);
+@@ -564,6 +566,29 @@ void __init setup_static_mappings(void)
+     /* TODO: guest memory section, device memory section, boot-module section, etc */
  }
  
- void free_init_memory(void)
- {
-+    /* Kernel init text section. */
-+    paddr_t init_text = virt_to_maddr(_sinittext);
-+    paddr_t init_text_end = round_pgup(virt_to_maddr(_einittext));
-+    /* Kernel init data. */
-+    paddr_t init_data = virt_to_maddr(__init_data_begin);
-+    paddr_t init_data_end = round_pgup(virt_to_maddr(__init_end));
-+    unsigned long init_section[4] = {(unsigned long)init_text,
-+                                     (unsigned long)init_text_end,
-+                                     (unsigned long)init_data,
-+                                     (unsigned long)init_data_end};
-+    unsigned int nr_init = 2;
-+    uint32_t insn = AARCH64_BREAK_FAULT;
-+    unsigned int i = 0, j = 0;
++/* Map a frame table to cover physical addresses ps through pe */
++void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
++{
++    mfn_t base_mfn;
++    unsigned long nr_pdxs = mfn_to_pdx(mfn_add(maddr_to_mfn(pe), -1)) -
++                            mfn_to_pdx(maddr_to_mfn(ps)) + 1;
++    unsigned long frametable_size = nr_pdxs * sizeof(struct page_info);
 +
-+    /* Change kernel init text section to RW. */
-+    modify_xen_mappings((unsigned long)init_text,
-+                        (unsigned long)init_text_end, REGION_HYPERVISOR_RW);
-+
++    frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ps));
++    frametable_size = ROUNDUP(frametable_size, PAGE_SIZE);
 +    /*
-+     * From now on, init will not be used for execution anymore,
-+     * so nuke the instruction cache to remove entries related to init.
++     * Since VA == PA in MPU and we've already setup Xenheap mapping
++     * in setup_staticheap_mappings(), we could easily deduce the
++     * "virtual address" of frame table.
 +     */
-+    invalidate_icache_local();
++    base_mfn = alloc_boot_pages(frametable_size >> PAGE_SHIFT, 1);
++    frame_table = (struct page_info*)mfn_to_virt(base_mfn);
 +
-+    /* Destroy two MPU memory regions referring init text and init data. */
-+    for ( ; i < nr_init; i++ )
-+    {
-+        uint32_t *p;
-+        unsigned int nr;
-+        int rc;
++    memset(&frame_table[0], 0, nr_pdxs * sizeof(struct page_info));
++    memset(&frame_table[nr_pdxs], -1,
++           frametable_size - (nr_pdxs * sizeof(struct page_info)));
++}
 +
-+        i = 2 * i;
-+        p = (uint32_t *)init_section[i];
-+        nr = (init_section[i + 1] - init_section[i]) / sizeof(uint32_t);
-+
-+        for ( ; j < nr ; j++ )
-+            *(p + j) = insn;
-+
-+        rc = destroy_xen_mappings(init_section[i], init_section[i + 1]);
-+        if ( rc < 0 )
-+            panic("Unable to remove the init section (rc = %d)\n", rc);
-+    }
- }
- 
- int xenmem_add_to_physmap_one(
+ /* TODO: Implementation on the first usage */
+ void dump_hyp_walk(vaddr_t addr)
+ {
 -- 
 2.25.1
 
