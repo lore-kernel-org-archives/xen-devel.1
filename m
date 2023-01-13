@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A2DC61DB3
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:35:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476579.738914 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C1AC54EBE
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:35:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476583.738936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjF-0000Gf-0s; Fri, 13 Jan 2023 05:35:49 +0000
+	id 1pGCjI-00012a-TB; Fri, 13 Jan 2023 05:35:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476579.738914; Fri, 13 Jan 2023 05:35:48 +0000
+Received: by outflank-mailman (output) from mailman id 476583.738936; Fri, 13 Jan 2023 05:35:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjE-0000GW-Rv; Fri, 13 Jan 2023 05:35:48 +0000
-Received: by outflank-mailman (input) for mailman id 476579;
- Fri, 13 Jan 2023 05:35:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pGCjI-00011m-Mm; Fri, 13 Jan 2023 05:35:52 +0000
+Received: by outflank-mailman (input) for mailman id 476583;
+ Fri, 13 Jan 2023 05:35:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1pGCev-0005sJ-GW
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:21 +0000
+ id 1pGCdo-0005sP-8g
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:30:12 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 8277fd1c-9303-11ed-91b6-6bf2151ebd3b;
- Fri, 13 Jan 2023 06:31:20 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 5795f1c1-9303-11ed-b8d0-410ff93cb8f0;
+ Fri, 13 Jan 2023 06:30:08 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D92BBFEC;
- Thu, 12 Jan 2023 21:32:01 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F580FEC;
+ Thu, 12 Jan 2023 21:30:50 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1F50D3F587;
- Thu, 12 Jan 2023 21:31:15 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DF3163F587;
+ Thu, 12 Jan 2023 21:30:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,267 +45,322 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8277fd1c-9303-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 5795f1c1-9303-11ed-b8d0-410ff93cb8f0
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 32/40] xen/mpu: implement MPU version of ioremap_xxx
-Date: Fri, 13 Jan 2023 13:29:05 +0800
-Message-Id: <20230113052914.3845596-33-Penny.Zheng@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 10/40] xen/arm: split MMU and MPU config files from config.h
+Date: Fri, 13 Jan 2023 13:28:43 +0800
+Message-Id: <20230113052914.3845596-11-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Function ioremap_xxx is normally being used to remap device address ranges
-in MMU system during device driver initialization.
+From: Wei Chen <wei.chen@arm.com>
 
-However, in MPU system, virtual translation is not supported and
-device memory layout is statically configured in Device Tree, and being mapped
-at very early stage.
-So here we only add a check to verify this assumption.
+Xen defines some global configuration macros for Arm in
+config.h. We still want to use it for Armv8-R systems, but
+there are some address related macros that are defined for
+MMU systems. These macros will not be used by MPU systems,
+Adding ifdefery with CONFIG_HAS_MPU to gate these macros
+will result in a messy and hard-to-read/maintain code.
 
-But for tolerating a few cases where the function is called to map for
-temporary copy and paste, like ioremap_wc in kernel image loading, the
-region attribute mismatch will be treated as warning than error.
+So we keep some common definitions still in config.h, but
+move virtual address related definitions to a new file -
+config_mmu.h. And use a new file config_mpu.h to store
+definitions for MPU systems. To avoid spreading #ifdef
+everywhere, we keep the same definition names for MPU
+systems, like XEN_VIRT_START and HYPERVISOR_VIRT_START,
+but the definition contents are MPU specific.
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
- xen/arch/arm/include/asm/arm64/mpu.h |  1 +
- xen/arch/arm/include/asm/mm.h        | 16 ++++-
- xen/arch/arm/include/asm/mm_mpu.h    |  2 +
- xen/arch/arm/mm_mpu.c                | 88 ++++++++++++++++++++++++----
- xen/include/xen/vmap.h               | 12 ++++
- 5 files changed, 106 insertions(+), 13 deletions(-)
+v1 -> v2:
+1. Remove duplicated FIXMAP definitions from config_mmu.h
+---
+ xen/arch/arm/include/asm/config.h     | 103 +++--------------------
+ xen/arch/arm/include/asm/config_mmu.h | 112 ++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/config_mpu.h |  25 ++++++
+ 3 files changed, 147 insertions(+), 93 deletions(-)
+ create mode 100644 xen/arch/arm/include/asm/config_mmu.h
+ create mode 100644 xen/arch/arm/include/asm/config_mpu.h
 
-diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
-index 8e8679bc82..b4e50a9a0e 100644
---- a/xen/arch/arm/include/asm/arm64/mpu.h
-+++ b/xen/arch/arm/include/asm/arm64/mpu.h
-@@ -82,6 +82,7 @@
- #define REGION_HYPERVISOR_BOOT    (REGION_HYPERVISOR_RW|_REGION_BOOTONLY)
- #define REGION_HYPERVISOR_SWITCH  (REGION_HYPERVISOR_RW|_REGION_SWITCH)
- #define REGION_HYPERVISOR_NOCACHE (_REGION_DEVICE|MT_DEVICE_nGnRE|_REGION_SWITCH)
-+#define REGION_HYPERVISOR_WC      (_REGION_DEVICE|MT_NORMAL_NC)
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index 25a625ff08..86d8142959 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -48,6 +48,12 @@
  
- #define INVALID_REGION            (~0UL)
+ #define INVALID_VCPU_ID MAX_VIRT_CPUS
  
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 7969ec9f98..fa44cfc50d 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -14,6 +14,10 @@
- # error "unknown ARM variant"
++/* Used for calculating PDX */
++#ifdef CONFIG_ARM_64
++#define FRAMETABLE_SIZE        GB(32)
++#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
++#endif
++
+ #define __LINUX_ARM_ARCH__ 7
+ #define CONFIG_AEABI
+ 
+@@ -71,99 +77,10 @@
+ #include <xen/const.h>
+ #include <xen/page-size.h>
+ 
+-/*
+- * Common ARM32 and ARM64 layout:
+- *   0  -   2M   Unmapped
+- *   2M -   4M   Xen text, data, bss
+- *   4M -   6M   Fixmap: special-purpose 4K mapping slots
+- *   6M -  10M   Early boot mapping of FDT
+- *   10M - 12M   Livepatch vmap (if compiled in)
+- *
+- * ARM32 layout:
+- *   0  -  12M   <COMMON>
+- *
+- *  32M - 128M   Frametable: 24 bytes per page for 16GB of RAM
+- * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
+- *                    space
+- *
+- *   1G -   2G   Xenheap: always-mapped memory
+- *   2G -   4G   Domheap: on-demand-mapped
+- *
+- * ARM64 layout:
+- * 0x0000000000000000 - 0x0000007fffffffff (512GB, L0 slot [0])
+- *   0  -  12M   <COMMON>
+- *
+- *   1G -   2G   VMAP: ioremap and early_ioremap
+- *
+- *  32G -  64G   Frametable: 24 bytes per page for 5.3TB of RAM
+- *
+- * 0x0000008000000000 - 0x00007fffffffffff (127.5TB, L0 slots [1..255])
+- *  Unused
+- *
+- * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
+- *  1:1 mapping of RAM
+- *
+- * 0x0000850000000000 - 0x0000ffffffffffff (123TB, L0 slots [266..511])
+- *  Unused
+- */
+-
+-#define XEN_VIRT_START         _AT(vaddr_t,0x00200000)
+-#define FIXMAP_ADDR(n)        (_AT(vaddr_t,0x00400000) + (n) * PAGE_SIZE)
+-
+-#define BOOT_FDT_VIRT_START    _AT(vaddr_t,0x00600000)
+-#define BOOT_FDT_VIRT_SIZE     _AT(vaddr_t, MB(4))
+-
+-#ifdef CONFIG_LIVEPATCH
+-#define LIVEPATCH_VMAP_START   _AT(vaddr_t,0x00a00000)
+-#define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
+-#endif
+-
+-#define HYPERVISOR_VIRT_START  XEN_VIRT_START
+-
+-#ifdef CONFIG_ARM_32
+-
+-#define CONFIG_SEPARATE_XENHEAP 1
+-
+-#define FRAMETABLE_VIRT_START  _AT(vaddr_t,0x02000000)
+-#define FRAMETABLE_SIZE        MB(128-32)
+-#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
+-#define FRAMETABLE_VIRT_END    (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
+-
+-#define VMAP_VIRT_START        _AT(vaddr_t,0x10000000)
+-#define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
+-
+-#define XENHEAP_VIRT_START     _AT(vaddr_t,0x40000000)
+-#define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
+-
+-#define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
+-#define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
+-
+-#define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
+-
+-/* Number of domheap pagetable pages required at the second level (2MB mappings) */
+-#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
+-
+-#else /* ARM_64 */
+-
+-#define SLOT0_ENTRY_BITS  39
+-#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
+-#define SLOT0_ENTRY_SIZE  SLOT0(1)
+-
+-#define VMAP_VIRT_START  GB(1)
+-#define VMAP_VIRT_SIZE   GB(1)
+-
+-#define FRAMETABLE_VIRT_START  GB(32)
+-#define FRAMETABLE_SIZE        GB(32)
+-#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
+-
+-#define DIRECTMAP_VIRT_START   SLOT0(256)
+-#define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (265-256))
+-#define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
+-
+-#define XENHEAP_VIRT_START     directmap_virt_start
+-
+-#define HYPERVISOR_VIRT_END    DIRECTMAP_VIRT_END
+-
++#ifdef CONFIG_HAS_MPU
++#include <asm/config_mpu.h>
++#else
++#include <asm/config_mmu.h>
  #endif
  
-+#if defined(CONFIG_HAS_MPU)
-+# include <asm/arm64/mpu.h>
-+#endif
+ #define NR_hypercalls 64
+diff --git a/xen/arch/arm/include/asm/config_mmu.h b/xen/arch/arm/include/asm/config_mmu.h
+new file mode 100644
+index 0000000000..c12ff25cf4
+--- /dev/null
++++ b/xen/arch/arm/include/asm/config_mmu.h
+@@ -0,0 +1,112 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/******************************************************************************
++ * config_mmu.h
++ *
++ * A Linux-style configuration list, only can be included by config.h
++ */
 +
- /* Align Xen to a 2 MiB boundary. */
- #define XEN_PADDR_ALIGN (1 << 21)
- 
-@@ -198,19 +202,25 @@ extern void setup_frametable_mappings(paddr_t ps, paddr_t pe);
- /* map a physical range in virtual memory */
- void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int attributes);
- 
-+#ifndef CONFIG_HAS_MPU
-+#define DEFINE_ATTRIBUTE(var)   (PAGE_##var)
-+#else
-+#define DEFINE_ATTRIBUTE(var)   (REGION_##var)
-+#endif
-+
- static inline void __iomem *ioremap_nocache(paddr_t start, size_t len)
- {
--    return ioremap_attr(start, len, PAGE_HYPERVISOR_NOCACHE);
-+    return ioremap_attr(start, len, DEFINE_ATTRIBUTE(HYPERVISOR_NOCACHE));
- }
- 
- static inline void __iomem *ioremap_cache(paddr_t start, size_t len)
- {
--    return ioremap_attr(start, len, PAGE_HYPERVISOR);
-+    return ioremap_attr(start, len, DEFINE_ATTRIBUTE(HYPERVISOR));
- }
- 
- static inline void __iomem *ioremap_wc(paddr_t start, size_t len)
- {
--    return ioremap_attr(start, len, PAGE_HYPERVISOR_WC);
-+    return ioremap_attr(start, len, DEFINE_ATTRIBUTE(HYPERVISOR_WC));
- }
- 
- /* XXX -- account for base */
-diff --git a/xen/arch/arm/include/asm/mm_mpu.h b/xen/arch/arm/include/asm/mm_mpu.h
-index eebd5b5d35..5aa61c43b6 100644
---- a/xen/arch/arm/include/asm/mm_mpu.h
-+++ b/xen/arch/arm/include/asm/mm_mpu.h
-@@ -2,6 +2,8 @@
- #ifndef __ARCH_ARM_MM_MPU__
- #define __ARCH_ARM_MM_MPU__
- 
-+#include <asm/arm64/mpu.h>
-+
- #define setup_mm_mappings(boot_phys_offset) ((void)(boot_phys_offset))
- /*
-  * Function setup_static_mappings() sets up MPU memory region mapping
-diff --git a/xen/arch/arm/mm_mpu.c b/xen/arch/arm/mm_mpu.c
-index ea64aa38e4..7b54c87acf 100644
---- a/xen/arch/arm/mm_mpu.c
-+++ b/xen/arch/arm/mm_mpu.c
-@@ -712,32 +712,100 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
-            frametable_size - (nr_pdxs * sizeof(struct page_info)));
- }
- 
--/* TODO: Implementation on the first usage */
--void dump_hyp_walk(vaddr_t addr)
-+static bool region_attribute_match(pr_t *region, unsigned int attributes)
- {
-+    if ( region->prbar.reg.ap != REGION_AP_MASK(attributes) )
-+    {
-+        printk(XENLOG_ERR "region permission is not matched (0x%x -> 0x%x)\n",
-+               region->prbar.reg.ap, REGION_AP_MASK(attributes));
-+        return false;
-+    }
-+
-+    if ( region->prbar.reg.xn != REGION_XN_MASK(attributes) )
-+    {
-+        printk(XENLOG_ERR "region execution permission is not matched (0x%x -> 0x%x)\n",
-+               region->prbar.reg.xn, REGION_XN_MASK(attributes));
-+        return false;
-+    }
-+
-+    if ( region->prlar.reg.ai != REGION_AI_MASK(attributes) )
-+    {
-+        printk(XENLOG_ERR "region memory attributes is not matched (0x%x -> 0x%x)\n",
-+               region->prlar.reg.ai, REGION_AI_MASK(attributes));
-+        return false;
-+    }
-+
-+    return true;
- }
- 
--void __init remove_early_mappings(void)
-+static bool check_region_and_attributes(paddr_t pa, size_t len,
-+                                        unsigned int attributes,
-+                                        const char *prefix)
-+{
-+    pr_t *region;
-+    int rc;
-+    uint64_t idx;
-+
-+    rc = mpumap_contain_region(xen_mpumap, max_xen_mpumap, pa, pa + len - 1,
-+                               &idx);
-+    if ( rc != MPUMAP_REGION_FOUND && rc != MPUMAP_REGION_INCLUSIVE )
-+    {
-+        region_printk("%s: range 0x%"PRIpaddr" - 0x%"PRIpaddr" has not been properly mapped\n",
-+                      prefix, pa, pa + len - 1);
-+        return false;
-+    }
-+
-+    region = &xen_mpumap[idx];
-+    /*
-+     * For tolerating a few cases where the function is called to remap for
-+     * temporary copy and paste, like ioremap_wc in kernel image loading, the
-+     * permission mismatch will be treated as warning than error.
-+     */
-+    if ( !region_attribute_match(region, attributes) )
-+        printk(XENLOG_WARNING
-+               "mpu: %s: range 0x%"PRIpaddr" - 0x%"PRIpaddr" attributes mismatched\n",
-+               prefix, pa, pa + len - 1);
-+
-+    return true;
-+}
++#ifndef __ARM_CONFIG_MMU_H__
++#define __ARM_CONFIG_MMU_H__
 +
 +/*
-+ * This function is normally being used to remap device address ranges
-+ * in MMU system.
-+ * However, in MPU system, virtual translation is not supported and
-+ * device memory is statically configured in FDT, while being mapped at very
-+ * early stage.
-+ * So here we only add a check to verify this assumption.
++ * Common ARM32 and ARM64 layout:
++ *   0  -   2M   Unmapped
++ *   2M -   4M   Xen text, data, bss
++ *   4M -   6M   Fixmap: special-purpose 4K mapping slots
++ *   6M -  10M   Early boot mapping of FDT
++ *   10M - 12M   Livepatch vmap (if compiled in)
++ *
++ * ARM32 layout:
++ *   0  -  12M   <COMMON>
++ *
++ *  32M - 128M   Frametable: 24 bytes per page for 16GB of RAM
++ * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
++ *                    space
++ *
++ *   1G -   2G   Xenheap: always-mapped memory
++ *   2G -   4G   Domheap: on-demand-mapped
++ *
++ * ARM64 layout:
++ * 0x0000000000000000 - 0x0000007fffffffff (512GB, L0 slot [0])
++ *   0  -  12M   <COMMON>
++ *
++ *   1G -   2G   VMAP: ioremap and early_ioremap
++ *
++ *  32G -  64G   Frametable: 24 bytes per page for 5.3TB of RAM
++ *
++ * 0x0000008000000000 - 0x00007fffffffffff (127.5TB, L0 slots [1..255])
++ *  Unused
++ *
++ * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
++ *  1:1 mapping of RAM
++ *
++ * 0x0000850000000000 - 0x0000ffffffffffff (123TB, L0 slots [266..511])
++ *  Unused
 + */
-+void *ioremap_attr(paddr_t pa, size_t len, unsigned int attributes)
- {
-+    if ( !check_region_and_attributes(pa, len, attributes, "ioremap") )
-+        return NULL;
 +
-+    return maddr_to_virt(pa);
- }
- 
--int init_secondary_pagetables(int cpu)
-+void *ioremap(paddr_t pa, size_t len)
- {
--    return -ENOSYS;
-+    return ioremap_attr(pa, len, REGION_HYPERVISOR_NOCACHE);
- }
- 
--void mmu_init_secondary_cpu(void)
-+/* TODO: Implementation on the first usage */
-+void dump_hyp_walk(vaddr_t addr)
- {
- }
- 
--void *ioremap_attr(paddr_t pa, size_t len, unsigned int attributes)
-+void __init remove_early_mappings(void)
- {
--    return NULL;
- }
- 
--void *ioremap(paddr_t pa, size_t len)
-+int init_secondary_pagetables(int cpu)
-+{
-+    return -ENOSYS;
-+}
++#define XEN_VIRT_START         _AT(vaddr_t,0x00200000)
++#define FIXMAP_ADDR(n)        (_AT(vaddr_t,0x00400000) + (n) * PAGE_SIZE)
 +
-+void mmu_init_secondary_cpu(void)
- {
--    return NULL;
- }
- 
- int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int flags)
-diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
-index 2e3ae0ca6a..fc56d02fc8 100644
---- a/xen/include/xen/vmap.h
-+++ b/xen/include/xen/vmap.h
-@@ -89,15 +89,27 @@ static inline void vfree(void *va)
-     ASSERT_UNREACHABLE();
- }
- 
-+#ifdef CONFIG_HAS_MPU
-+void __iomem *ioremap(paddr_t, size_t);
-+#else
- void __iomem *ioremap(paddr_t, size_t)
- {
-     ASSERT_UNREACHABLE();
-     return NULL;
- }
++#define BOOT_FDT_VIRT_START    _AT(vaddr_t,0x00600000)
++#define BOOT_FDT_VIRT_SIZE     _AT(vaddr_t, MB(4))
++
++#ifdef CONFIG_LIVEPATCH
++#define LIVEPATCH_VMAP_START   _AT(vaddr_t,0x00a00000)
++#define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
 +#endif
- 
- static inline void iounmap(void __iomem *va)
- {
-+#ifdef CONFIG_HAS_MPU
-+    /*
-+     * iounmap and ioremap are a couple, and as ioremap is only doing
-+     * checking in MPU system, we do nothing and just return in iounmap
-+     */
-+    return;
-+#else
-     ASSERT_UNREACHABLE();
++
++#define HYPERVISOR_VIRT_START  XEN_VIRT_START
++
++#ifdef CONFIG_ARM_32
++
++#define CONFIG_SEPARATE_XENHEAP 1
++
++#define FRAMETABLE_VIRT_START  _AT(vaddr_t,0x02000000)
++#define FRAMETABLE_SIZE        MB(128-32)
++#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
++#define FRAMETABLE_VIRT_END    (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
++
++#define VMAP_VIRT_START        _AT(vaddr_t,0x10000000)
++#define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
++
++#define XENHEAP_VIRT_START     _AT(vaddr_t,0x40000000)
++#define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
++
++#define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
++#define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
++
++#define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
++
++/* Number of domheap pagetable pages required at the second level (2MB mappings) */
++#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
++
++#else /* ARM_64 */
++
++#define SLOT0_ENTRY_BITS  39
++#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
++#define SLOT0_ENTRY_SIZE  SLOT0(1)
++
++#define VMAP_VIRT_START  GB(1)
++#define VMAP_VIRT_SIZE   GB(1)
++
++#define FRAMETABLE_VIRT_START  GB(32)
++
++#define DIRECTMAP_VIRT_START   SLOT0(256)
++#define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (265-256))
++#define DIRECTMAP_VIRT_END     (DIRECTMAP_VIRT_START + DIRECTMAP_SIZE - 1)
++
++#define XENHEAP_VIRT_START     directmap_virt_start
++
++#define HYPERVISOR_VIRT_END    DIRECTMAP_VIRT_END
++
 +#endif
- }
- 
- static inline void *arch_vmap_virt_end(void)
++
++#endif /* __ARM_CONFIG_MMU_H__ */
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/include/asm/config_mpu.h b/xen/arch/arm/include/asm/config_mpu.h
+new file mode 100644
+index 0000000000..6b52b11ef7
+--- /dev/null
++++ b/xen/arch/arm/include/asm/config_mpu.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * config_mpu.h: A Linux-style configuration list for Arm MPU systems,
++ *               only can be included by config.h
++ */
++
++#ifndef __ARM_CONFIG_MPU_H__
++#define __ARM_CONFIG_MPU_H__
++
++#define XEN_START_ADDRESS CONFIG_XEN_START_ADDRESS
++
++/*
++ * All MPU platforms need to provide a XEN_START_ADDRESS for linker. This
++ * address indicates where Xen image will be loaded and run from. This
++ * address must be aligned to a PAGE_SIZE.
++ */
++#if (XEN_START_ADDRESS % PAGE_SIZE) != 0
++#error "XEN_START_ADDRESS must be aligned to PAGE_SIZE"
++#endif
++
++#define XEN_VIRT_START         _AT(paddr_t, XEN_START_ADDRESS)
++
++#define HYPERVISOR_VIRT_START  XEN_VIRT_START
++
++#endif /* __ARM_CONFIG_MPU_H__ */
 -- 
 2.25.1
 
