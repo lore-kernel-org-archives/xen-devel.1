@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD72C54EBE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.476608.739002 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7113DC54EBD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Jan 2023 05:36:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.476616.739019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjc-00047g-6P; Fri, 13 Jan 2023 05:36:12 +0000
+	id 1pGCjg-0004rw-Bw; Fri, 13 Jan 2023 05:36:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 476608.739002; Fri, 13 Jan 2023 05:36:12 +0000
+Received: by outflank-mailman (output) from mailman id 476616.739019; Fri, 13 Jan 2023 05:36:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pGCjc-00047Q-0Z; Fri, 13 Jan 2023 05:36:12 +0000
-Received: by outflank-mailman (input) for mailman id 476608;
- Fri, 13 Jan 2023 05:36:10 +0000
+	id 1pGCjg-0004pb-5Y; Fri, 13 Jan 2023 05:36:16 +0000
+Received: by outflank-mailman (input) for mailman id 476616;
+ Fri, 13 Jan 2023 05:36:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f25I=5K=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1pGCeC-0005sP-4U
- for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:30:36 +0000
+ id 1pGCer-0005sP-Th
+ for xen-devel@lists.xenproject.org; Fri, 13 Jan 2023 05:31:17 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 66628c11-9303-11ed-b8d0-410ff93cb8f0;
- Fri, 13 Jan 2023 06:30:33 +0100 (CET)
+ id 7fe06f02-9303-11ed-b8d0-410ff93cb8f0;
+ Fri, 13 Jan 2023 06:31:16 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F12CCFEC;
- Thu, 12 Jan 2023 21:31:14 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B7A0CFEC;
+ Thu, 12 Jan 2023 21:31:57 -0800 (PST)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 3E9B43F587;
- Thu, 12 Jan 2023 21:30:29 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F18763F587;
+ Thu, 12 Jan 2023 21:31:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 66628c11-9303-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 7fe06f02-9303-11ed-b8d0-410ff93cb8f0
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -54,202 +54,118 @@ Cc: wei.chen@arm.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 18/40] xen/mpu: introduce helper access_protection_region
-Date: Fri, 13 Jan 2023 13:28:51 +0800
-Message-Id: <20230113052914.3845596-19-Penny.Zheng@arm.com>
+Subject: [PATCH v2 31/40] xen/mpu: disable FIXMAP in MPU system
+Date: Fri, 13 Jan 2023 13:29:04 +0800
+Message-Id: <20230113052914.3845596-32-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Each EL2 MPU protection region could be configured using PRBAR<n>_EL2 and
-PRLAR<n>_EL2.
+FIXMAP in MMU system is used to do special-purpose 4K mapping, like
+mapping early UART, temporarily mapping source codes for copy and paste
+(copy_from_paddr), ect. As there is no VMSA in MPU system, we do not
+support FIXMAP in MPU system.
 
-This commit introduces a new helper access_protection_region() to access
-EL2 MPU protection region, including both read/write operations.
-
-As explained in section G1.3.18 of the reference manual for AArch64v8R,
-a set of system register PRBAR<n>_EL2 and PRLAR<n>_EL2 provide access to
-the EL2 MPU region which is determined by the value of 'n' and
-PRSELR_EL2.REGION as PRSELR_EL2.REGION<7:4>:n.(n = 0, 1, 2, ... , 15)
-For example to access regions from 16 to 31:
-- Set PRSELR_EL2 to 0b1xxxx
-- Region 16 configuration is accessible through PRBAR0_EL2 and PRLAR0_EL2
-- Region 17 configuration is accessible through PRBAR1_EL2 and PRLAR1_EL2
-- Region 18 configuration is accessible through PRBAR2_EL2 and PRLAR2_EL2
-- ...
-- Region 31 configuration is accessible through PRBAR15_EL2 and PRLAR15_EL2
+We deine !CONFIG_HAS_FIXMAP to provide empty stubbers for MPU system
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
- xen/arch/arm/mm_mpu.c | 151 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 151 insertions(+)
+ xen/arch/arm/Kconfig              |  3 ++-
+ xen/arch/arm/include/asm/fixmap.h | 28 +++++++++++++++++++++++++---
+ xen/common/Kconfig                |  3 +++
+ 3 files changed, 30 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/arm/mm_mpu.c b/xen/arch/arm/mm_mpu.c
-index c9e17ab6da..f2b494449c 100644
---- a/xen/arch/arm/mm_mpu.c
-+++ b/xen/arch/arm/mm_mpu.c
-@@ -46,6 +46,157 @@ uint64_t __ro_after_init next_transient_region_idx;
- /* Maximum number of supported MPU memory regions by the EL2 MPU. */
- uint64_t __ro_after_init max_xen_mpumap;
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 9230c8b885..91491341c4 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -13,9 +13,10 @@ config ARM
+ 	def_bool y
+ 	select HAS_ALTERNATIVE if !ARM_V8R
+ 	select HAS_DEVICE_TREE
++	select HAS_FIXMAP if !ARM_V8R
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PDX
+-	select HAS_PMAP
++	select HAS_PMAP if !ARM_V8R
+ 	select IOMMU_FORCE_PT_SHARE
+ 	select HAS_VMAP if !ARM_V8R
  
-+/* Write a MPU protection region */
-+#define WRITE_PROTECTION_REGION(sel, pr, prbar_el2, prlar_el2) ({       \
-+    uint64_t _sel = sel;                                                \
-+    const pr_t *_pr = pr;                                               \
-+    asm volatile(                                                       \
-+        "msr "__stringify(PRSELR_EL2)", %0;" /* Selects the region */   \
-+        "dsb sy;"                                                       \
-+        "msr "__stringify(prbar_el2)", %1;" /* Write PRBAR<n>_EL2 */    \
-+        "msr "__stringify(prlar_el2)", %2;" /* Write PRLAR<n>_EL2 */    \
-+        "dsb sy;"                                                       \
-+        : : "r" (_sel), "r" (_pr->prbar.bits), "r" (_pr->prlar.bits));  \
-+})
+diff --git a/xen/arch/arm/include/asm/fixmap.h b/xen/arch/arm/include/asm/fixmap.h
+index d0c9a52c8c..f0f4eb57ac 100644
+--- a/xen/arch/arm/include/asm/fixmap.h
++++ b/xen/arch/arm/include/asm/fixmap.h
+@@ -4,9 +4,6 @@
+ #ifndef __ASM_FIXMAP_H
+ #define __ASM_FIXMAP_H
+ 
+-#include <xen/acpi.h>
+-#include <xen/pmap.h>
+-
+ /* Fixmap slots */
+ #define FIXMAP_CONSOLE  0  /* The primary UART */
+ #define FIXMAP_MISC     1  /* Ephemeral mappings of hardware */
+@@ -22,6 +19,11 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++#ifdef CONFIG_HAS_FIXMAP
 +
-+/* Read a MPU protection region */
-+#define READ_PROTECTION_REGION(sel, prbar_el2, prlar_el2) ({            \
-+    uint64_t _sel = sel;                                                \
-+    pr_t _pr;                                                           \
-+    asm volatile(                                                       \
-+        "msr "__stringify(PRSELR_EL2)", %2;" /* Selects the region */   \
-+        "dsb sy;"                                                       \
-+        "mrs %0, "__stringify(prbar_el2)";" /* Read PRBAR<n>_EL2 */     \
-+        "mrs %1, "__stringify(prlar_el2)";" /* Read PRLAR<n>_EL2 */     \
-+        "dsb sy;"                                                       \
-+        : "=r" (_pr.prbar.bits), "=r" (_pr.prlar.bits) : "r" (_sel));   \
-+    _pr;                                                                \
-+})
++#include <xen/acpi.h>
++#include <xen/pmap.h>
 +
-+/*
-+ * Access MPU protection region, including both read/write operations.
-+ * Armv8-R AArch64 at most supports 255 MPU protection regions.
-+ * See section G1.3.18 of the reference manual for Armv8-R AArch64,
-+ * PRBAR<n>_EL2 and PRLAR<n>_EL2 provide access to the EL2 MPU region
-+ * determined by the value of 'n' and PRSELR_EL2.REGION as
-+ * PRSELR_EL2.REGION<7:4>:n(n = 0, 1, 2, ... , 15)
-+ * For example to access regions from 16 to 31 (0b10000 to 0b11111):
-+ * - Set PRSELR_EL2 to 0b1xxxx
-+ * - Region 16 configuration is accessible through PRBAR0_ELx and PRLAR0_ELx
-+ * - Region 17 configuration is accessible through PRBAR1_ELx and PRLAR1_ELx
-+ * - Region 18 configuration is accessible through PRBAR2_ELx and PRLAR2_ELx
-+ * - ...
-+ * - Region 31 configuration is accessible through PRBAR15_ELx and PRLAR15_ELx
-+ *
-+ * @read: if it is read operation.
-+ * @pr_read: mpu protection region returned by read op.
-+ * @pr_write: const mpu protection region passed through write op.
-+ * @sel: mpu protection region selector
-+ */
-+static void access_protection_region(bool read, pr_t *pr_read,
-+                                     const pr_t *pr_write, uint64_t sel)
+ /*
+  * Direct access to xen_fixmap[] should only happen when {set,
+  * clear}_fixmap() is unusable (e.g. where we would end up to
+@@ -43,6 +45,26 @@ static inline unsigned int virt_to_fix(vaddr_t vaddr)
+     return ((vaddr - FIXADDR_START) >> PAGE_SHIFT);
+ }
+ 
++#else /* !CONFIG_HAS_FIXMAP */
++
++static inline void set_fixmap(unsigned int map, mfn_t mfn,
++                              unsigned int attributes)
 +{
-+    switch ( sel & 0xf )
-+    {
-+    case 0:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR0_EL2, PRLAR0_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR0_EL2, PRLAR0_EL2);
-+        break;
-+    case 1:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR1_EL2, PRLAR1_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR1_EL2, PRLAR1_EL2);
-+        break;
-+    case 2:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR2_EL2, PRLAR2_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR2_EL2, PRLAR2_EL2);
-+        break;
-+    case 3:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR3_EL2, PRLAR3_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR3_EL2, PRLAR3_EL2);
-+        break;
-+    case 4:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR4_EL2, PRLAR4_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR4_EL2, PRLAR4_EL2);
-+        break;
-+    case 5:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR5_EL2, PRLAR5_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR5_EL2, PRLAR5_EL2);
-+        break;
-+    case 6:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR6_EL2, PRLAR6_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR6_EL2, PRLAR6_EL2);
-+        break;
-+    case 7:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR7_EL2, PRLAR7_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR7_EL2, PRLAR7_EL2);
-+        break;
-+    case 8:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR8_EL2, PRLAR8_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR8_EL2, PRLAR8_EL2);
-+        break;
-+    case 9:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR9_EL2, PRLAR9_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR9_EL2, PRLAR9_EL2);
-+        break;
-+    case 10:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR10_EL2, PRLAR10_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR10_EL2, PRLAR10_EL2);
-+        break;
-+    case 11:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR11_EL2, PRLAR11_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR11_EL2, PRLAR11_EL2);
-+        break;
-+    case 12:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR12_EL2, PRLAR12_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR12_EL2, PRLAR12_EL2);
-+        break;
-+    case 13:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR13_EL2, PRLAR13_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR13_EL2, PRLAR13_EL2);
-+        break;
-+    case 14:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR14_EL2, PRLAR14_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR14_EL2, PRLAR14_EL2);
-+        break;
-+    case 15:
-+        if ( read )
-+            *pr_read = READ_PROTECTION_REGION(sel, PRBAR15_EL2, PRLAR15_EL2);
-+        else
-+            WRITE_PROTECTION_REGION(sel, pr_write, PRBAR15_EL2, PRLAR15_EL2);
-+        break;
-+    }
++    ASSERT_UNREACHABLE();
 +}
 +
- /* TODO: Implementation on the first usage */
- void dump_hyp_walk(vaddr_t addr)
- {
++static inline void clear_fixmap(unsigned int map)
++{
++    ASSERT_UNREACHABLE();
++}
++
++static inline unsigned int virt_to_fix(vaddr_t vaddr)
++{
++    ASSERT_UNREACHABLE();
++    return -EINVAL;
++}
++#endif /* !CONFIG_HAS_FIXMAP */
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* __ASM_FIXMAP_H */
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index ba16366a4b..680dc6f59c 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -43,6 +43,9 @@ config HAS_EX_TABLE
+ config HAS_FAST_MULTIPLY
+ 	bool
+ 
++config HAS_FIXMAP
++	bool
++
+ config HAS_IOPORTS
+ 	bool
+ 
 -- 
 2.25.1
 
