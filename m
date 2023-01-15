@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785E1C678D8
-	for <xen-devel@archiver.kernel.org>; Sun, 15 Jan 2023 11:31:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.477862.740790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A262CC63797
+	for <xen-devel@archiver.kernel.org>; Sun, 15 Jan 2023 11:31:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.477858.740753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pH1ES-0005cC-EJ; Sun, 15 Jan 2023 11:31:24 +0000
+	id 1pH1EN-0004jp-QG; Sun, 15 Jan 2023 11:31:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 477862.740790; Sun, 15 Jan 2023 11:31:24 +0000
+Received: by outflank-mailman (output) from mailman id 477858.740753; Sun, 15 Jan 2023 11:31:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pH1ES-0005aq-7m; Sun, 15 Jan 2023 11:31:24 +0000
-Received: by outflank-mailman (input) for mailman id 477862;
- Sun, 15 Jan 2023 11:31:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pH1EN-0004j8-Lz; Sun, 15 Jan 2023 11:31:19 +0000
+Received: by outflank-mailman (input) for mailman id 477858;
+ Sun, 15 Jan 2023 11:31:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ytYW=5M=gmail.com=dmitry.semenets@srs-se1.protection.inumbo.net>)
- id 1pH1EQ-0004ci-BW
- for xen-devel@lists.xenproject.org; Sun, 15 Jan 2023 11:31:22 +0000
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [2a00:1450:4864:20::633])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 22474e46-94c8-11ed-91b6-6bf2151ebd3b;
- Sun, 15 Jan 2023 12:31:20 +0100 (CET)
-Received: by mail-ej1-x633.google.com with SMTP id cf18so55655629ejb.5
- for <xen-devel@lists.xenproject.org>; Sun, 15 Jan 2023 03:31:20 -0800 (PST)
+ id 1pH1EM-0004co-En
+ for xen-devel@lists.xenproject.org; Sun, 15 Jan 2023 11:31:18 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1f70f17e-94c8-11ed-b8d0-410ff93cb8f0;
+ Sun, 15 Jan 2023 12:31:16 +0100 (CET)
+Received: by mail-ej1-x636.google.com with SMTP id u19so61973708ejm.8
+ for <xen-devel@lists.xenproject.org>; Sun, 15 Jan 2023 03:31:16 -0800 (PST)
 Received: from dsemenets-HP-EliteBook-850-G8-Notebook-PC.. ([91.219.254.73])
  by smtp.gmail.com with ESMTPSA id
- uj42-20020a170907c9aa00b0084d4e612a22sm7459961ejc.67.2023.01.15.03.31.19
+ uj42-20020a170907c9aa00b0084d4e612a22sm7459961ejc.67.2023.01.15.03.31.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Jan 2023 03:31:19 -0800 (PST)
+ Sun, 15 Jan 2023 03:31:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,109 +46,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22474e46-94c8-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 1f70f17e-94c8-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RBd+hmBQgXZkrJPkk2A6G6FhZeqNtc7f2zf0tt6B+Y4=;
-        b=A6g4LBmvHkUjz9gzJSTm8njOCHRcxbwKot/vnTJEsRj2KBagbqA4nLR7ENR61+Kv4K
-         ZIaflMDApL5DvuJO865GIau25biBL5Vle+LSr0/P4rFK26j6uZjVEXxKXk7QMVie6doB
-         t4Ope3jJK+eVqWJV9chTrR0/uH6lQFQge1zkxtIGKHib7vofe6zcBuG2xPN9B4rVAc2R
-         uQ8RE/JmllneEKwOVLzxc8/cUL4lYQnrKx4sgs3InX07lSkxZfL9Wrw0FtEwa7v495If
-         Z+Vcc7/ibHupzF0hurL4mpfEbWcWTYny7mz841/j/rEimBsv4tMCJA5SpjDEeZQNUXoq
-         qwfA==
+        bh=TBqwkdTRqUwsY27EiP5YbesMgj7n7qTjOsQBFo8GYrE=;
+        b=QwaIpJdnEWMrDV9ZVxPKuUyl7Pi8ECOWt8hyB4G2cSC+mNK0H+LMpIrDm2cl90+hbU
+         FFJOD2E7WpDSliUnmb/Dno2Af+sHkwT7PBW0UjtFKHQBC6b/twmJ4C9M1A5JqRUsAu5l
+         TRJJ4MGHYIiCRTZCKsT/2ueklyDo5xRdUHW4dGQgrAOxcqYckEAqT+oFDYbtZpkHJPyU
+         +ppjHBSSKJzCM6T4WY74pT6ivefE3azDHm1XOqDF96/RcwYPNnbE10fS6L39V8gSbUrC
+         t35/J+zp1j4PHLmdh2isTy1sLJ6LpQRrP7kySnCnHmBmGQw07ag6qnzT6r3S2fuRbX8O
+         gnqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RBd+hmBQgXZkrJPkk2A6G6FhZeqNtc7f2zf0tt6B+Y4=;
-        b=B+cumoEnK7mJ6mVDrDOJtSlG58sqvfHNR0NB5W9OQPDa53JcnAKMFwHAMlV2CSLUoQ
-         IUxYkd4jj2Vw7jadY3/7k0UxHH/UG+eJi6WF5zW+lZsMwqC2qmtaUtjyUJal4pQQpmAD
-         OtFNuhgfC//rjNbS0sgzv6n3s5AI6CUiVxtayTF2534sjHiVkMWYe0y2sT+bGA55k+Q/
-         UZXF1espRGPvhe5xT0um1almIHXyYvlCAYGAptaIWJit7wSQxJfNywf9gtU667bjEZLC
-         NqgCZhbr4TnpWiWj5LWOp08kLrZrmDLB0A0AppjlD4PySwu5mw9q6ncGS+O86a97O6YA
-         m+pQ==
-X-Gm-Message-State: AFqh2koabTYkHHIohMNP0MCHU9Jrp87IfKm1vcMqs92UamVGpJY2ODXT
-	ol3AlwsnqiDKbDpVfBLVoNDOz4RvGV0QPeqx
-X-Google-Smtp-Source: AMrXdXszUm9sdvZugQmrnDnG84ZBeP8VU310ltdSm5Vq5MqV8JhaKIifUaao3soTTYzNSyY9yBG+jg==
-X-Received: by 2002:a17:906:2813:b0:829:59d5:e661 with SMTP id r19-20020a170906281300b0082959d5e661mr74258838ejc.29.1673782280151;
-        Sun, 15 Jan 2023 03:31:20 -0800 (PST)
+        bh=TBqwkdTRqUwsY27EiP5YbesMgj7n7qTjOsQBFo8GYrE=;
+        b=mlwivffz3BUF05TY7GwQYHoOK1EFyknsEHzrmZkOGEmmHQzF9I3rz+oFylMAvF6g3Q
+         Sdv7Crn0GITZt8dXp4cw/sYcdy5kjbXZgDAqWThe/s6q9FclEsnBYhJSK2SWiQEKR7w/
+         jxayyi403g9mnK8FFCkEV532/IC913lsifyIY2R+DRgs342TWo3C0Qq1imhy3aWZt64g
+         fr6gQzI9pFn6CTK7P8iwqqbFUqR1DC0bzaYFDLM/ZtmG4Gsse5BzpVxJ9DvoQCqxyFN7
+         v807fx4FEO1zfsJwYkpxO9cUfDO+EBCuY77ZP+GbihL3YIN4OZg9iwZRE4Nd9cLPHtab
+         J2jA==
+X-Gm-Message-State: AFqh2kpvFdx4piZ1C8JBS7V6pNM/yR7X+i8HO4F9w4wwpZwIgP2wmMxK
+	HVrf3wiWbtmTEDNeTV0SWkhRrT9LaX0d+2bQ
+X-Google-Smtp-Source: AMrXdXvZ32YsPLgOdTO+otsGGHFp+YCDuOV+0rKNF6of4w6hnrg24wnd22SuHOKktSTOClOxf4TYPw==
+X-Received: by 2002:a17:906:2816:b0:7c0:d452:2e74 with SMTP id r22-20020a170906281600b007c0d4522e74mr75892077ejc.4.1673782275466;
+        Sun, 15 Jan 2023 03:31:15 -0800 (PST)
 From: Dmytro Semenets <dmitry.semenets@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [RFC PATCH v3 05/10] tools/light: pci: describe [MAKE|REVERT]_ASSIGNABLE commands
-Date: Sun, 15 Jan 2023 13:31:06 +0200
-Message-Id: <20230115113111.1207605-6-dmitry.semenets@gmail.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Dmytro Semenets <dmytro_semenets@epam.com>
+Subject: [RFC PATCH v3 01/10] tools: allow vchan XenStore paths more then 64 bytes long
+Date: Sun, 15 Jan 2023 13:31:02 +0200
+Message-Id: <20230115113111.1207605-2-dmitry.semenets@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230115113111.1207605-1-dmitry.semenets@gmail.com>
 References: <20230115113111.1207605-1-dmitry.semenets@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Add protocol for two more commands, one to make a PCI device
-assignable, and other - to revert its state back.
+Current vchan implementation, while dealing with XenStore paths,
+allocates 64 bytes buffer on the stack which may not be enough for
+some use-cases. Make the buffer longer to respect maximum allowed
+XenStore path of XENSTORE_ABS_PATH_MAX.
 
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Signed-off-by: Dmytro Semenets <dmytro_semenets@epam.com>
 ---
- tools/include/pcid.h | 38 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ tools/libs/vchan/init.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
 
-diff --git a/tools/include/pcid.h b/tools/include/pcid.h
-index 452bdc11cf..118f8105cf 100644
---- a/tools/include/pcid.h
-+++ b/tools/include/pcid.h
-@@ -98,6 +98,44 @@
- #define PCID_CMD_LIST_ASSIGNABLE        "list_assignable"
- #define PCID_MSG_FIELD_DEVICES          "devices"
+diff --git a/tools/libs/vchan/init.c b/tools/libs/vchan/init.c
+index 9195bd3b98..fec650dc32 100644
+--- a/tools/libs/vchan/init.c
++++ b/tools/libs/vchan/init.c
+@@ -249,7 +249,7 @@ static int init_xs_srv(struct libxenvchan *ctrl, int domain, const char* xs_base
+ 	int ret = -1;
+ 	struct xs_handle *xs;
+ 	struct xs_permissions perms[2];
+-	char buf[64];
++	char *buf;
+ 	char ref[16];
+ 	char* domid_str = NULL;
+ 	xs_transaction_t xs_trans = XBT_NULL;
+@@ -259,6 +259,10 @@ static int init_xs_srv(struct libxenvchan *ctrl, int domain, const char* xs_base
+ 	if (!ctrl->xs_path)
+ 		return -1; 
  
-+/*
-+ *******************************************************************************
-+ * Make device assignable
-+ *
-+ * This command makes given device assignable by ensuring that OS
-+ * will not try to access it.
-+ *
-+ * Request (see other mandatory fields above):
-+ *  - "cmd" field of the request must be set to "make_assignable".
-+ *  - "sbdf" SBDF of the device in format defined by PCID_SBDF_FMT.
-+ *  - "rebind" = true if daemon needs to save original driver name,
-+ *    so device later can be rebound back.
-+ *
-+ * Response (see other mandatory fields above):
-+ *  - "resp" field of the response must be set to "make_assignable".
-+ */
-+#define PCID_CMD_MAKE_ASSIGNABLE        "make_assignable"
-+#define PCID_MSG_FIELD_REBIND           "rebind"
++	buf = malloc(XENSTORE_ABS_PATH_MAX);
++	if (!buf)
++		return -1;
 +
-+/*
-+ *******************************************************************************
-+ * Revert device from assignable state
-+ *
-+ * This command reverts effect of "make_assignable" command. Basically,
-+ * now device can be used by OS again.
-+ *
-+ * Request (see other mandatory fields above):
-+ *  - "cmd" field of the request must be set to "revert_assignable".
-+ *  - "sbdf" SBDF of the device in format defined by PCID_SBDF_FMT.
-+ *  - "rebind" = true if daemon needs to rebind device back to it's
-+ *    original driver, which name was saved by "make_assignable" command
-+ *
-+ * Response (see other mandatory fields above):
-+ *  - "resp" field of the response must be set to "revert_assignable".
-+ */
-+#define PCID_CMD_REVERT_ASSIGNABLE      "revert_assignable"
-+
-+
- int libxl_pcid_process(libxl_ctx *ctx);
+ 	xs = xs_open(0);
+ 	if (!xs)
+ 		goto fail;
+@@ -280,14 +284,14 @@ retry_transaction:
+ 		goto fail_xs_open;
  
- #endif /* PCID_H */
+ 	snprintf(ref, sizeof ref, "%d", ring_ref);
+-	snprintf(buf, sizeof buf, "%s/ring-ref", xs_base);
++	snprintf(buf, XENSTORE_ABS_PATH_MAX, "%s/ring-ref", xs_base);
+ 	if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
+ 		goto fail_xs_open;
+ 	if (!xs_set_permissions(xs, xs_trans, buf, perms, 2))
+ 		goto fail_xs_open;
+ 
+ 	snprintf(ref, sizeof ref, "%d", ctrl->event_port);
+-	snprintf(buf, sizeof buf, "%s/event-channel", xs_base);
++	snprintf(buf, XENSTORE_ABS_PATH_MAX, "%s/event-channel", xs_base);
+ 	if (!xs_write(xs, xs_trans, buf, ref, strlen(ref)))
+ 		goto fail_xs_open;
+ 	if (!xs_set_permissions(xs, xs_trans, buf, perms, 2))
+@@ -303,6 +307,7 @@ retry_transaction:
+ 	free(domid_str);
+ 	xs_close(xs);
+  fail:
++	free(buf);
+ 	return ret;
+ }
+ 
+@@ -419,13 +424,20 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
+ {
+ 	struct libxenvchan *ctrl = malloc(sizeof(struct libxenvchan));
+ 	struct xs_handle *xs = NULL;
+-	char buf[64];
++	char *buf;
+ 	char *ref;
+ 	int ring_ref;
+ 	unsigned int len;
+ 
+ 	if (!ctrl)
+-		return 0;
++		return NULL;
++
++	buf = malloc(XENSTORE_ABS_PATH_MAX);
++	if (!buf) {
++		free(ctrl);
++		return NULL;
++	}
++
+ 	ctrl->ring = NULL;
+ 	ctrl->event = NULL;
+ 	ctrl->gnttab = NULL;
+@@ -436,8 +448,9 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
+ 	if (!xs)
+ 		goto fail;
+ 
++
+ // find xenstore entry
+-	snprintf(buf, sizeof buf, "%s/ring-ref", xs_path);
++	snprintf(buf, XENSTORE_ABS_PATH_MAX, "%s/ring-ref", xs_path);
+ 	ref = xs_read(xs, 0, buf, &len);
+ 	if (!ref)
+ 		goto fail;
+@@ -445,7 +458,7 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
+ 	free(ref);
+ 	if (!ring_ref)
+ 		goto fail;
+-	snprintf(buf, sizeof buf, "%s/event-channel", xs_path);
++	snprintf(buf, XENSTORE_ABS_PATH_MAX, "%s/event-channel", xs_path);
+ 	ref = xs_read(xs, 0, buf, &len);
+ 	if (!ref)
+ 		goto fail;
+@@ -475,6 +488,7 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
+  out:
+ 	if (xs)
+ 		xs_close(xs);
++	free(buf);
+ 	return ctrl;
+  fail:
+ 	libxenvchan_close(ctrl);
 -- 
 2.34.1
 
