@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1901AC46467
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Jan 2023 14:38:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.478649.741988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC77BC54EBE
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Jan 2023 14:38:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.478650.742006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHQca-0003JE-L0; Mon, 16 Jan 2023 14:38:00 +0000
+	id 1pHQcc-0003n1-25; Mon, 16 Jan 2023 14:38:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 478649.741988; Mon, 16 Jan 2023 14:38:00 +0000
+Received: by outflank-mailman (output) from mailman id 478650.742006; Mon, 16 Jan 2023 14:38:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHQca-0003EQ-BN; Mon, 16 Jan 2023 14:38:00 +0000
-Received: by outflank-mailman (input) for mailman id 478649;
- Mon, 16 Jan 2023 14:37:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pHQcb-0003kj-Pq; Mon, 16 Jan 2023 14:38:01 +0000
+Received: by outflank-mailman (input) for mailman id 478650;
+ Mon, 16 Jan 2023 14:38:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jLMM=5N=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1pHQcY-0002Pk-T6
- for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 14:37:58 +0000
+ id 1pHQca-0002Pl-Ex
+ for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 14:38:00 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5cfbc166-95ab-11ed-b8d0-410ff93cb8f0;
- Mon, 16 Jan 2023 15:37:55 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5f9efc28-95ab-11ed-91b6-6bf2151ebd3b;
+ Mon, 16 Jan 2023 15:37:59 +0100 (CET)
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pHQcU-008oZF-RG; Mon, 16 Jan 2023 14:37:55 +0000
+ id 1pHQcT-008oZ5-S7; Mon, 16 Jan 2023 14:37:54 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 56162300C6F;
- Mon, 16 Jan 2023 15:37:39 +0100 (CET)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E59A8300C0C;
+ Mon, 16 Jan 2023 15:37:38 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id B9FA620EF0A23; Mon, 16 Jan 2023 15:37:38 +0100 (CET)
+ id ADBD820B75F3D; Mon, 16 Jan 2023 15:37:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5cfbc166-95ab-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 5f9efc28-95ab-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=Mc6JE/lSqhoI08ZCOd1MO1vmLEzmsp/ETRSpv4hRS+8=; b=T1nrQTJttu/3Jnm9EJrYVDiMxC
-	s34Y8QKh6Os9ywtC1Z1w2DiWPN6Xf9K5GkRtu6DtxWWsA8ej0VDBcu9iVcitzgXSTWCKMPsZsT/yv
-	UyAjSANcObXIQvCe1J1cb2ZFm0PgpHHKh22ywjkdRZY49ET7hYiwVX9R/AkWzL156Ux4u1mcKbpW3
-	wubPrTdQVa+IM+KQkoM2pcN0SQ8YrHNTvKlSQpXlxOMZ0Z7Y2ts9qxviLI1ZgAHkTz7oQ5Z95SZu9
-	jTowvNgMdlt4jqLsw2QD7LpDyIe1S1Qwn8XSQdU41tuNFe9PXsjS6ESqii8W89Nd11lkxG5d+ERsF
-	kQkbM/9A==;
-Message-ID: <20230116143645.829076358@infradead.org>
+	bh=rHjspetb6Sj1qMw4IETTuTuaCFumb5EYx3riiNCTYv8=; b=cxz2ZJ+y57FVH0axH7GJ3/SDvk
+	SfIli5aMNXUCBqSZ5s0hpQ541ETtZeXdeKeGN56Ebrzzk0C4N9eLXGVlRGHVrQ5JzV49oWAUTb+Qe
+	Kn4rI0WMLi8kkdccgmv96vW1qIQzU99aMQ1+XNeo6itRotmYQ0j8+xlhlEUBQ0ztiZvuG2cxAChr6
+	22QxIhtpXZ6ZvAkrMLo5HT7ZYfsHVWzIJ2yKMB5H3w81SPg3IvAOF/XqgpTenKxT3AR/Anre1jbBa
+	5T4FbzmfMt67wCGdvro8HFHivVFFtpRbdX2x3wnviudr35z2uOGNZgbxfcNisa/ZFz7Fzu5vDAznP
+	UN6EINCw==;
+Message-ID: <20230116143645.589522290@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 16 Jan 2023 15:25:38 +0100
+Date: Mon, 16 Jan 2023 15:25:34 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: x86@kernel.org,
  Joan Bruguera <joanbrugueram@gmail.com>
@@ -80,47 +80,98 @@ Cc: linux-kernel@vger.kernel.org,
  mark.rutland@arm.com,
  Andrew Cooper <Andrew.Cooper3@citrix.com>,
  =?UTF-8?q?J=C3=B6rg=20R=C3=B6del?= <joro@8bytes.org>,
- "H. Peter Anvin" <hpa@zytor.com>
-Subject: [PATCH v2 5/7] x86/callthunk: No callthunk for restore_processor_state()
+ "H. Peter Anvin" <hpa@zytor.com>,
+ jroedel@suse.de
+Subject: [PATCH v2 1/7] x86/boot: Remove verify_cpu() from secondary_startup_64()
 References: <20230116142533.905102512@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-From: Joan Bruguera <joanbrugueram@gmail.com>
+The boot trampolines from trampoline_64.S have code flow like:
 
-When resuming from suspend we don't have coherent CPU state, trying to
-do callthunks here isn't going to work. Specifically GS isn't set yet.
+  16bit BIOS			SEV-ES				64bit EFI
 
+  trampoline_start()		sev_es_trampoline_start()	trampoline_start_64()
+    verify_cpu()			  |				|
+  switch_to_protected:    <---------------'				v
+       |							pa_trampoline_compat()
+       v								|
+  startup_32()		<-----------------------------------------------'
+       |
+       v
+  startup_64()
+       |
+       v
+  tr_start() := head_64.S:secondary_startup_64()
+
+Since AP bringup always goes through the 16bit BIOS path (EFI doesn't
+touch the APs), there is already a verify_cpu() invocation.
+
+Removing the verify_cpu() invocation from secondary_startup_64()
+renders the whole secondary_startup_64_no_verify() thing moot, so
+remove that too.
+
+Cc: jroedel@suse.de
+Cc: hpa@zytor.com
 Fixes: e81dc127ef69 ("x86/callthunks: Add call patching for call depth tracking")
-Signed-off-by: Joan Bruguera <joanbrugueram@gmail.com>
+Reported-by: Joan Bruguera <joanbrugueram@gmail.com>
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Link: https://lkml.kernel.org/r/20230109040531.7888-1-joanbrugueram@gmail.com
 ---
- arch/x86/kernel/callthunks.c |    5 +++++
- arch/x86/power/cpu.c         |    3 +++
- 2 files changed, 8 insertions(+)
+ arch/x86/include/asm/realmode.h |    1 -
+ arch/x86/kernel/head_64.S       |   16 ----------------
+ arch/x86/realmode/init.c        |    6 ------
+ 3 files changed, 23 deletions(-)
 
---- a/arch/x86/kernel/callthunks.c
-+++ b/arch/x86/kernel/callthunks.c
-@@ -7,6 +7,7 @@
- #include <linux/memory.h>
- #include <linux/moduleloader.h>
- #include <linux/static_call.h>
-+#include <linux/suspend.h>
- 
- #include <asm/alternative.h>
- #include <asm/asm-offsets.h>
-@@ -151,6 +152,10 @@ static bool skip_addr(void *dest)
- 	    dest < (void*)hypercall_page + PAGE_SIZE)
- 		return true;
+--- a/arch/x86/include/asm/realmode.h
++++ b/arch/x86/include/asm/realmode.h
+@@ -73,7 +73,6 @@ extern unsigned char startup_32_smp[];
+ extern unsigned char boot_gdt[];
+ #else
+ extern unsigned char secondary_startup_64[];
+-extern unsigned char secondary_startup_64_no_verify[];
  #endif
-+#ifdef CONFIG_PM_SLEEP
-+	if (dest == restore_processor_state)
-+		return true;
-+#endif
- 	return false;
- }
  
+ static inline size_t real_mode_size_needed(void)
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -143,22 +143,6 @@ SYM_CODE_START(secondary_startup_64)
+ 	 * after the boot processor executes this code.
+ 	 */
+ 
+-	/* Sanitize CPU configuration */
+-	call verify_cpu
+-
+-	/*
+-	 * The secondary_startup_64_no_verify entry point is only used by
+-	 * SEV-ES guests. In those guests the call to verify_cpu() would cause
+-	 * #VC exceptions which can not be handled at this stage of secondary
+-	 * CPU bringup.
+-	 *
+-	 * All non SEV-ES systems, especially Intel systems, need to execute
+-	 * verify_cpu() above to make sure NX is enabled.
+-	 */
+-SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
+-	UNWIND_HINT_EMPTY
+-	ANNOTATE_NOENDBR
+-
+ 	/*
+ 	 * Retrieve the modifier (SME encryption mask if SME is active) to be
+ 	 * added to the initial pgdir entry that will be programmed into CR3.
+--- a/arch/x86/realmode/init.c
++++ b/arch/x86/realmode/init.c
+@@ -74,12 +74,6 @@ static void __init sme_sev_setup_real_mo
+ 		th->flags |= TH_FLAGS_SME_ACTIVE;
+ 
+ 	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
+-		/*
+-		 * Skip the call to verify_cpu() in secondary_startup_64 as it
+-		 * will cause #VC exceptions when the AP can't handle them yet.
+-		 */
+-		th->start = (u64) secondary_startup_64_no_verify;
+-
+ 		if (sev_es_setup_ap_jump_table(real_mode_header))
+ 			panic("Failed to get/update SEV-ES AP Jump Table");
+ 	}
 
 
 
