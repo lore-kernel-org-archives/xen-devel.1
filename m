@@ -4,43 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC77BC54EBE
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Jan 2023 14:38:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.478650.742006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1FF0C46467
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Jan 2023 14:39:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.478687.742049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHQcc-0003n1-25; Mon, 16 Jan 2023 14:38:02 +0000
+	id 1pHQeF-0007EW-RO; Mon, 16 Jan 2023 14:39:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 478650.742006; Mon, 16 Jan 2023 14:38:02 +0000
+Received: by outflank-mailman (output) from mailman id 478687.742049; Mon, 16 Jan 2023 14:39:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHQcb-0003kj-Pq; Mon, 16 Jan 2023 14:38:01 +0000
-Received: by outflank-mailman (input) for mailman id 478650;
- Mon, 16 Jan 2023 14:38:00 +0000
+	id 1pHQeF-0007EP-OH; Mon, 16 Jan 2023 14:39:43 +0000
+Received: by outflank-mailman (input) for mailman id 478687;
+ Mon, 16 Jan 2023 14:39:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jLMM=5N=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1pHQca-0002Pl-Ex
- for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 14:38:00 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=fQBk=5N=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pHQeE-0006p7-7J
+ for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 14:39:42 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5f9efc28-95ab-11ed-91b6-6bf2151ebd3b;
- Mon, 16 Jan 2023 15:37:59 +0100 (CET)
-Received: from j130084.upc-j.chello.nl ([24.132.130.84]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pHQcT-008oZ5-S7; Mon, 16 Jan 2023 14:37:54 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E59A8300C0C;
- Mon, 16 Jan 2023 15:37:38 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id ADBD820B75F3D; Mon, 16 Jan 2023 15:37:38 +0100 (CET)
+ id 9c3b18c8-95ab-11ed-91b6-6bf2151ebd3b;
+ Mon, 16 Jan 2023 15:39:41 +0100 (CET)
+Received: by mail-wr1-x430.google.com with SMTP id b5so6514212wrn.0
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Jan 2023 06:39:41 -0800 (PST)
+Received: from localhost.localdomain
+ (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
+ by smtp.gmail.com with ESMTPSA id
+ m13-20020adfe94d000000b002714b3d2348sm26543406wrn.25.2023.01.16.06.39.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Jan 2023 06:39:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,126 +47,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f9efc28-95ab-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
-	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
-	Content-ID:Content-Description:In-Reply-To;
-	bh=rHjspetb6Sj1qMw4IETTuTuaCFumb5EYx3riiNCTYv8=; b=cxz2ZJ+y57FVH0axH7GJ3/SDvk
-	SfIli5aMNXUCBqSZ5s0hpQ541ETtZeXdeKeGN56Ebrzzk0C4N9eLXGVlRGHVrQ5JzV49oWAUTb+Qe
-	Kn4rI0WMLi8kkdccgmv96vW1qIQzU99aMQ1+XNeo6itRotmYQ0j8+xlhlEUBQ0ztiZvuG2cxAChr6
-	22QxIhtpXZ6ZvAkrMLo5HT7ZYfsHVWzIJ2yKMB5H3w81SPg3IvAOF/XqgpTenKxT3AR/Anre1jbBa
-	5T4FbzmfMt67wCGdvro8HFHivVFFtpRbdX2x3wnviudr35z2uOGNZgbxfcNisa/ZFz7Fzu5vDAznP
-	UN6EINCw==;
-Message-ID: <20230116143645.589522290@infradead.org>
-User-Agent: quilt/0.66
-Date: Mon, 16 Jan 2023 15:25:34 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: x86@kernel.org,
- Joan Bruguera <joanbrugueram@gmail.com>
-Cc: linux-kernel@vger.kernel.org,
- peterz@infradead.org,
- Juergen Gross <jgross@suse.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Jan Beulich <jbeulich@suse.com>,
- Roger Pau Monne <roger.pau@citrix.com>,
- Kees Cook <keescook@chromium.org>,
- mark.rutland@arm.com,
- Andrew Cooper <Andrew.Cooper3@citrix.com>,
- =?UTF-8?q?J=C3=B6rg=20R=C3=B6del?= <joro@8bytes.org>,
- "H. Peter Anvin" <hpa@zytor.com>,
- jroedel@suse.de
-Subject: [PATCH v2 1/7] x86/boot: Remove verify_cpu() from secondary_startup_64()
-References: <20230116142533.905102512@infradead.org>
+X-Inumbo-ID: 9c3b18c8-95ab-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aBZQnz4OW8tkz12qH7i/lg43hEmXqjuUvrMmu6ORg7s=;
+        b=E03jcfzb97n8CNYtCugxiyQBH8BoE+MGGHugTO4YW9E5stDPbiv5+WQHcbclBpFhpX
+         3lqvMtSAooiLKmoZi2bYseizcbk0bpuXvUYkdj1j0Jbqtm/gcaeFbJH7aAFIGKHAlLy0
+         9O1NOYK/JcAopliuS298RT8Cgf4SUxzV0+QdaejlbxKlmS2jAh0iDIPkuVlxqja2V2pS
+         zphEGhy0jXA/5PkX6QbhfCIFYvqBVFdC3Bvv+imMFswtKOdos8hsgpzVUrBZ33x1G5E7
+         kBQKoMQ5WbslBG6bDAGbZDRcEZ5MADIdotW+VZEBx0KVmejNWfOAY6GIdNzkXzdK6XNP
+         E6mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aBZQnz4OW8tkz12qH7i/lg43hEmXqjuUvrMmu6ORg7s=;
+        b=wTyn8gDodKYgM4l+R25X5ycskgjM9T6fx2C86RFrldK/jOC3tf194Xx3YcM7XfJR2o
+         GPQP/4VZPnlmWpqpM4ck/e3ySYkFLOJwpZb/XyCdoeLa0ic3I9YebakxfVj83aLzBpIO
+         1KkANwFWki812STatVGG7z6sUb2U6+/d7mHuXAJnFqMYgjRtXssKh08IwPaR2vXg2/xQ
+         +WJo789YPINC63QkbcCII1w0ELEyVFVH9lBaLYRDQiqU+rkLWHEVNFNe9AjaGzxJYyqQ
+         ThL5h5x5x0pd+RdVfaq4nUb3QQPEdLpPl0/TlsiKCP+XmmZJxt8BdUy4sTc/NqKHEhru
+         tFeg==
+X-Gm-Message-State: AFqh2krORt7Ik+px36826QAYsveGyyBTs/O7hAZTZ7XszuFULTNQt/cw
+	sRXRIBZKFuVZaYsyVyCTJvAzk/8DBjGmCQ==
+X-Google-Smtp-Source: AMrXdXsoS07ykbSfghKT2t9ZmXHf738/KZleqti/mvoBBFR32Y5TwSK07k40Yqep2ZxrZRnOpJKm5w==
+X-Received: by 2002:a5d:480f:0:b0:2bd:bc57:3c5b with SMTP id l15-20020a5d480f000000b002bdbc573c5bmr15387306wrq.33.1673879980409;
+        Mon, 16 Jan 2023 06:39:40 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v4 0/4] The patch series introduces the following:
+Date: Mon, 16 Jan 2023 16:39:28 +0200
+Message-Id: <cover.1673877778.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The boot trampolines from trampoline_64.S have code flow like:
-
-  16bit BIOS			SEV-ES				64bit EFI
-
-  trampoline_start()		sev_es_trampoline_start()	trampoline_start_64()
-    verify_cpu()			  |				|
-  switch_to_protected:    <---------------'				v
-       |							pa_trampoline_compat()
-       v								|
-  startup_32()		<-----------------------------------------------'
-       |
-       v
-  startup_64()
-       |
-       v
-  tr_start() := head_64.S:secondary_startup_64()
-
-Since AP bringup always goes through the 16bit BIOS path (EFI doesn't
-touch the APs), there is already a verify_cpu() invocation.
-
-Removing the verify_cpu() invocation from secondary_startup_64()
-renders the whole secondary_startup_64_no_verify() thing moot, so
-remove that too.
-
-Cc: jroedel@suse.de
-Cc: hpa@zytor.com
-Fixes: e81dc127ef69 ("x86/callthunks: Add call patching for call depth tracking")
-Reported-by: Joan Bruguera <joanbrugueram@gmail.com>
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/include/asm/realmode.h |    1 -
- arch/x86/kernel/head_64.S       |   16 ----------------
- arch/x86/realmode/init.c        |    6 ------
- 3 files changed, 23 deletions(-)
+Changes in V4:
+    - Patches "xen/riscv: introduce dummy asm/init.h" and "xen/riscv: introduce
+      stack stuff" were removed from the patch series as they were merged separately
+      into staging.
+    - Remove "depends on RISCV*" from Kconfig.debug as Kconfig.debug is located
+      in arch specific folder.
+    - fix code style.
+    - Add "ifdef __riscv_cmodel_medany" to early_printk.c.  
+---
+Changes in V3:
+    - Most of "[PATCH v2 7/8] xen/riscv: print hello message from C env"
+      was merged with [PATCH v2 3/6] xen/riscv: introduce stack stuff.
+    - "[PATCH v2 7/8] xen/riscv: print hello message from C env" was
+      merged with "[PATCH v2 6/8] xen/riscv: introduce early_printk basic
+      stuff".
+    - "[PATCH v2 5/8] xen/include: include <asm/types.h> in
+      <xen/early_printk.h>" was removed as it has been already merged to
+      mainline staging.
+    - code style fixes.
+---
+Changes in V2:
+    - update commit patches commit messages according to the mailing
+      list comments
+    - Remove unneeded types in <asm/types.h>
+    - Introduce definition of STACK_SIZE
+    - order the files alphabetically in Makefile
+    - Add license to early_printk.c
+    - Add RISCV_32 dependecy to config EARLY_PRINTK in Kconfig.debug
+    - Move dockerfile changes to separate config and sent them as
+      separate patch to mailing list.
+    - Update test.yaml to wire up smoke test
+---
 
---- a/arch/x86/include/asm/realmode.h
-+++ b/arch/x86/include/asm/realmode.h
-@@ -73,7 +73,6 @@ extern unsigned char startup_32_smp[];
- extern unsigned char boot_gdt[];
- #else
- extern unsigned char secondary_startup_64[];
--extern unsigned char secondary_startup_64_no_verify[];
- #endif
- 
- static inline size_t real_mode_size_needed(void)
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -143,22 +143,6 @@ SYM_CODE_START(secondary_startup_64)
- 	 * after the boot processor executes this code.
- 	 */
- 
--	/* Sanitize CPU configuration */
--	call verify_cpu
--
--	/*
--	 * The secondary_startup_64_no_verify entry point is only used by
--	 * SEV-ES guests. In those guests the call to verify_cpu() would cause
--	 * #VC exceptions which can not be handled at this stage of secondary
--	 * CPU bringup.
--	 *
--	 * All non SEV-ES systems, especially Intel systems, need to execute
--	 * verify_cpu() above to make sure NX is enabled.
--	 */
--SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
--	UNWIND_HINT_EMPTY
--	ANNOTATE_NOENDBR
--
- 	/*
- 	 * Retrieve the modifier (SME encryption mask if SME is active) to be
- 	 * added to the initial pgdir entry that will be programmed into CR3.
---- a/arch/x86/realmode/init.c
-+++ b/arch/x86/realmode/init.c
-@@ -74,12 +74,6 @@ static void __init sme_sev_setup_real_mo
- 		th->flags |= TH_FLAGS_SME_ACTIVE;
- 
- 	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
--		/*
--		 * Skip the call to verify_cpu() in secondary_startup_64 as it
--		 * will cause #VC exceptions when the AP can't handle them yet.
--		 */
--		th->start = (u64) secondary_startup_64_no_verify;
--
- 		if (sev_es_setup_ap_jump_table(real_mode_header))
- 			panic("Failed to get/update SEV-ES AP Jump Table");
- 	}
 
+Bobby Eshleman (1):
+  xen/riscv: introduce sbi call to putchar to console
+
+Oleksii Kurochko (3):
+  xen/riscv: introduce asm/types.h header file
+  xen/riscv: introduce early_printk basic stuff
+  automation: add RISC-V smoke test
+
+ automation/gitlab-ci/test.yaml            | 20 ++++++++++
+ automation/scripts/qemu-smoke-riscv64.sh  | 20 ++++++++++
+ xen/arch/riscv/Kconfig.debug              |  6 +++
+ xen/arch/riscv/Makefile                   |  2 +
+ xen/arch/riscv/early_printk.c             | 45 +++++++++++++++++++++++
+ xen/arch/riscv/include/asm/early_printk.h | 12 ++++++
+ xen/arch/riscv/include/asm/sbi.h          | 34 +++++++++++++++++
+ xen/arch/riscv/include/asm/types.h        | 43 ++++++++++++++++++++++
+ xen/arch/riscv/sbi.c                      | 45 +++++++++++++++++++++++
+ xen/arch/riscv/setup.c                    |  6 ++-
+ 10 files changed, 232 insertions(+), 1 deletion(-)
+ create mode 100755 automation/scripts/qemu-smoke-riscv64.sh
+ create mode 100644 xen/arch/riscv/early_printk.c
+ create mode 100644 xen/arch/riscv/include/asm/early_printk.h
+ create mode 100644 xen/arch/riscv/include/asm/sbi.h
+ create mode 100644 xen/arch/riscv/include/asm/types.h
+ create mode 100644 xen/arch/riscv/sbi.c
+
+-- 
+2.39.0
 
 
