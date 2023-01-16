@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E55C46467
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCAC7C67871
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Jan 2023 07:05:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.478335.741455 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.478339.741494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHJY9-00077n-F4; Mon, 16 Jan 2023 07:04:57 +0000
+	id 1pHJYI-0008IF-Iq; Mon, 16 Jan 2023 07:05:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 478335.741455; Mon, 16 Jan 2023 07:04:57 +0000
+Received: by outflank-mailman (output) from mailman id 478339.741494; Mon, 16 Jan 2023 07:05:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHJY9-00077g-Bg; Mon, 16 Jan 2023 07:04:57 +0000
-Received: by outflank-mailman (input) for mailman id 478335;
- Mon, 16 Jan 2023 07:04:56 +0000
+	id 1pHJYI-0008I6-EW; Mon, 16 Jan 2023 07:05:06 +0000
+Received: by outflank-mailman (input) for mailman id 478339;
+ Mon, 16 Jan 2023 07:05:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=W85+=5N=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1pHJY8-0006sD-22
- for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 07:04:56 +0000
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [2a00:1450:4864:20::62b])
+ id 1pHJYH-0006sD-G2
+ for xen-devel@lists.xenproject.org; Mon, 16 Jan 2023 07:05:05 +0000
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 13e88359-956c-11ed-b8d0-410ff93cb8f0;
- Mon, 16 Jan 2023 08:04:54 +0100 (CET)
-Received: by mail-ej1-x62b.google.com with SMTP id bk15so8323180ejb.9
- for <xen-devel@lists.xenproject.org>; Sun, 15 Jan 2023 23:04:54 -0800 (PST)
+ id 19843c94-956c-11ed-b8d0-410ff93cb8f0;
+ Mon, 16 Jan 2023 08:05:03 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id x10so36565834edd.10
+ for <xen-devel@lists.xenproject.org>; Sun, 15 Jan 2023 23:05:03 -0800 (PST)
 Received: from uni.router.wind (adsl-67.109.242.224.tellas.gr.
  [109.242.224.67]) by smtp.googlemail.com with ESMTPSA id
- v15-20020a056402184f00b0046c5baa1f58sm10990824edy.97.2023.01.15.23.04.52
+ v15-20020a056402184f00b0046c5baa1f58sm10990824edy.97.2023.01.15.23.05.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Jan 2023 23:04:53 -0800 (PST)
+ Sun, 15 Jan 2023 23:05:02 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,55 +46,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13e88359-956c-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 19843c94-956c-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=53CNedcl2LpaLrX+og6xiNzpDo61T+Xa5G/+nq0djig=;
-        b=MNH32xpmk7O4JRawfjj/7+WeXgb4/eJew9BrD/cd8foYWnF0gDYh8WQ8C3uRq5AYtk
-         Qfav2j+zCsIOEpVnwniTyBOWWr74Z7+9OtWaUIeq2RjbV7hX9nD5ICoQ75YPwkLu3pJi
-         xJMrTMjPQqBVU/6rloVRHTMKx7nCFUaOl+8h7GJF1dRxLHZ1RHdLZ/HVBcw1AS6+CDKN
-         63cT+jWdAg6jwsdTUL2Yu8RVUOUWauvqPWf/3u9JA6VXHf2Bluryq49fGSuQcYCLwAuM
-         kBdlSya9+z6pR81KUkAWbI3oQjVVv/D+7t/PiNyY4UsB1YsXH24zJbKNtsJmqO4Ffxs4
-         UGog==
+        bh=7dy2BgTNKVXOkcEoPRHI+Qc+RIk111AGiSJu7FgSGxM=;
+        b=JavYjN879rVFqWYTMfx5K7T7u+VhhAZtIXkySIIz3B+qj6EJzd+Nzv34MpCwey9i5M
+         ZZ7w3kI9WnYByK1t1wC3JITstU/8mIyys9/jlHrXaUscW155uUIIQpSSc7eRcd3rnMBi
+         Vu+YyQhjpdDMqB1OwDPuS/ycjiBxIoHu1aqoNPD4W7GjJLGNOzhRwy/54TStKoK6BTMb
+         PLD9fAFgyU8x/jf6YUUPhx6xRw2wo0m/TUFMZNKsx9oHQsXdNUr/H45H2XnegiuzM4jB
+         2cg74rgunfLVgnjCMAyAHW67rYG3GGBvHWxh50h8xs5xnSI8cMTKoSLKFBxSWP2T37Pg
+         AWXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=53CNedcl2LpaLrX+og6xiNzpDo61T+Xa5G/+nq0djig=;
-        b=CGyeaM5168WHWwKH1TiKizHBZNfUKN0RQhChrj4A+riRwW94QLx76B/F+iuREbR4b5
-         rZ+Dd3xcF7Om9NoE036Eo/1M0MachzeTx5q7JAzWlB45Fk9XYJ3iQmo2ey0uIIbK1tyS
-         nTES96qETAXFPTvZArgbRsYoe6Bq/9xShM41ZSKgYQUKzxM3vy4nF1vvZI1f2IxX7emo
-         7wV3hSVPstuqNSHC2JJh9TKIRgcWt5g27D85xqbN3F2CjgODo9Wb+S5Yelb8MWkIE1re
-         w39WpXmiisrg3Wp4pjBDm4rGxV7i0XLYVofO/sgucStPR6US50GEM9J9VFtVlZqTgbvV
-         6XKQ==
-X-Gm-Message-State: AFqh2kpw5YsWbDRNMFbCB1iArIvHfGKXlf0/A6a4VoUKHOSRHRlCLxIs
-	CLuYwoMaKx1bUPmNT6oJ1qwOyzvzM7I=
-X-Google-Smtp-Source: AMrXdXvYHQUxlrIBRDsIC5Fy1aNpHLbbszebpSlbeaCjwNkQKFFzRNI23dtm/XQgoBdr9Tuia50AsA==
-X-Received: by 2002:a17:907:1316:b0:863:e08e:2ac3 with SMTP id vj22-20020a170907131600b00863e08e2ac3mr10398478ejb.63.1673852693562;
-        Sun, 15 Jan 2023 23:04:53 -0800 (PST)
+        bh=7dy2BgTNKVXOkcEoPRHI+Qc+RIk111AGiSJu7FgSGxM=;
+        b=i/AyL56Wt+aacBTWWt6s+MVQVJo7j8EOK6MQ4r4cKmVIyAXw1F0TkpCjzc3U/fzha9
+         vqgBkYC6lhyFT2HZgO9ypcJf9TZMcUl30kXTrobBzGsixofMEIyvO5u/1l3OzMuiTUHU
+         FuF9PKLE3smDh6JpJCVv6Z6c/nWYcbPY+yd08zNsV68FMlopv0IAU5yvuEjUmreG0VoZ
+         1kVwnM5XRjmKCUCvumuBCBVuirnkADbmyZ9GiDo8YcNuOvxCiH7AY9zJAZ2Mrb6QKjzs
+         vXVThq6ut6MD2T0wlBddGrmY8siYqKZ/oyY0J4C1LLgs2sPAk9oAMT2dkg+JmCOtoNL7
+         ZfwQ==
+X-Gm-Message-State: AFqh2kqFHhZv8xnHpebKtNSJGWV0DUlXvAfSWMGrm1f/bFWmOG5uOIDo
+	C1Rmr/dc1U03bHJdFLOdK4h5rk/V2iY=
+X-Google-Smtp-Source: AMrXdXsD39gY8491njMzdZaxfuDf6M6qULTZ1eY93Aw31t7bwSMmoksTT7XyzW2FArG1yunOZoa3nQ==
+X-Received: by 2002:a05:6402:b55:b0:49d:d8ec:cbd3 with SMTP id bx21-20020a0564020b5500b0049dd8eccbd3mr6984361edb.16.1673852702961;
+        Sun, 15 Jan 2023 23:05:02 -0800 (PST)
 From: Xenia Ragiadakou <burzalodowa@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Kevin Tian <kevin.tian@intel.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Paul Durrant <paul@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 1/8] x86/iommu: amd_iommu_perdev_intremap is AMD-Vi specific
-Date: Mon, 16 Jan 2023 09:04:24 +0200
-Message-Id: <20230116070431.905594-2-burzalodowa@gmail.com>
+Subject: [PATCH v3 5/8] x86/iommu: make code addressing CVE-2011-1898 no VT-d specific
+Date: Mon, 16 Jan 2023 09:04:28 +0200
+Message-Id: <20230116070431.905594-6-burzalodowa@gmail.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20230116070431.905594-1-burzalodowa@gmail.com>
 References: <20230116070431.905594-1-burzalodowa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move its definition to the AMD-Vi driver and use CONFIG_AMD_IOMMU
-to guard its usage in common code.
+The variable untrusted_msi indicates whether the system is vulnerable to
+CVE-2011-1898 due to the absence of interrupt remapping  support.
+AMD iommus with interrupt remapping disabled are also exposed.
+Therefore move the definition of the variable to the common x86 iommu code.
 
-Take the opportunity to replace bool_t with bool and 1 with true.
+Also, since the current implementation assumes that only PV guests are prone
+to this attack, take the opportunity to define untrusted_msi only when PV is
+enabled.
 
 No functional change intended.
 
@@ -102,50 +106,44 @@ Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
 ---
 
 Changes in v3:
-  - the second arg of no_config_param() should have been the parameter name,
-    i.e "iommu", and not the boolean suboption "amd-iommu-perdev-intremap"
+  - change untrusted_msi from being VT-d specific to PV specific and
+    update commit log accordingly
+  - remove unnecessary #ifdef guard from its declaration
 
- xen/drivers/passthrough/amd/iommu_init.c | 2 ++
- xen/drivers/passthrough/iommu.c          | 5 ++++-
- 2 files changed, 6 insertions(+), 1 deletion(-)
+ xen/drivers/passthrough/vtd/iommu.c | 3 ---
+ xen/drivers/passthrough/x86/iommu.c | 5 +++++
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index 1f14aaf49e..9773ccfcb4 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -36,6 +36,8 @@ static struct radix_tree_root ivrs_maps;
- LIST_HEAD_READ_MOSTLY(amd_iommu_head);
- bool_t iommuv2_enabled;
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 62e143125d..dae2426cb9 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -54,9 +54,6 @@
+                                  ? dom_iommu(d)->arch.vtd.pgd_maddr \
+                                  : (pdev)->arch.vtd.pgd_maddr)
  
-+bool __ro_after_init amd_iommu_perdev_intremap = true;
-+
- static bool iommu_has_ht_flag(struct amd_iommu *iommu, u8 mask)
- {
-     return iommu->ht_flags & mask;
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 5e2a720d29..9d95fb27d0 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -58,7 +58,6 @@ bool __read_mostly iommu_hap_pt_share = true;
- #endif
+-/* Possible unfiltered LAPIC/MSI messages from untrusted sources? */
+-bool __read_mostly untrusted_msi;
+-
+ bool __read_mostly iommu_igfx = true;
+ bool __read_mostly iommu_qinval = true;
+ #ifndef iommu_snoop
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index f671b0f2bb..c5021ea023 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -36,6 +36,11 @@ bool __initdata iommu_superpages = true;
  
- bool_t __read_mostly iommu_debug;
--bool_t __read_mostly amd_iommu_perdev_intremap = 1;
+ enum iommu_intremap __read_mostly iommu_intremap = iommu_intremap_full;
  
- DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
- 
-@@ -116,7 +115,11 @@ static int __init cf_check parse_iommu_param(const char *s)
-                 iommu_verbose = 1;
-         }
-         else if ( (val = parse_boolean("amd-iommu-perdev-intremap", s, ss)) >= 0 )
-+#ifdef CONFIG_AMD_IOMMU
-             amd_iommu_perdev_intremap = val;
-+#else
-+            no_config_param("AMD_IOMMU", "iommu", s, ss);
++#ifdef CONFIG_PV
++/* Possible unfiltered LAPIC/MSI messages from untrusted sources? */
++bool __read_mostly untrusted_msi;
 +#endif
-         else if ( (val = parse_boolean("dom0-passthrough", s, ss)) >= 0 )
-             iommu_hwdom_passthrough = val;
-         else if ( (val = parse_boolean("dom0-strict", s, ss)) >= 0 )
++
+ #ifndef iommu_intpost
+ /*
+  * In the current implementation of VT-d posted interrupts, in some extreme
 -- 
 2.37.2
 
