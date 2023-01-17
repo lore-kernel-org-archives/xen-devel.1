@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9921C3DA78
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:15:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.479178.742875 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E701C3DA78
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:15:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.479190.742910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi3m-0004Nn-4x; Tue, 17 Jan 2023 09:15:14 +0000
+	id 1pHi3q-0005Mp-Dq; Tue, 17 Jan 2023 09:15:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 479178.742875; Tue, 17 Jan 2023 09:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 479190.742910; Tue, 17 Jan 2023 09:15:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi3l-0004N3-Uq; Tue, 17 Jan 2023 09:15:13 +0000
-Received: by outflank-mailman (input) for mailman id 479178;
- Tue, 17 Jan 2023 09:15:12 +0000
+	id 1pHi3q-0005MT-A1; Tue, 17 Jan 2023 09:15:18 +0000
+Received: by outflank-mailman (input) for mailman id 479190;
+ Tue, 17 Jan 2023 09:15:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uRIs=5O=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pHi12-0007bs-UW
- for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:25 +0000
+ id 1pHi1E-0007bs-5S
+ for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:36 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0d64c23f-9647-11ed-b8d0-410ff93cb8f0;
- Tue, 17 Jan 2023 10:12:23 +0100 (CET)
+ id 140e5eab-9647-11ed-b8d0-410ff93cb8f0;
+ Tue, 17 Jan 2023 10:12:34 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id DC45F38222;
- Tue, 17 Jan 2023 09:12:22 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1402138222;
+ Tue, 17 Jan 2023 09:12:34 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AEEB21390C;
- Tue, 17 Jan 2023 09:12:22 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DC1FB1390C;
+ Tue, 17 Jan 2023 09:12:33 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id U1Z4KXZmxmNmcAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:22 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cIJtNIFmxmN3cAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,109 +53,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d64c23f-9647-11ed-b8d0-410ff93cb8f0
+X-Inumbo-ID: 140e5eab-9647-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1673946742; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1673946754; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=yXucUqowhnBeO9Jn8o0sdHo0YPTusLdpuVGmf+Cjy/o=;
-	b=vPjfHsTvKEqoIJzRAJxJriG6q+gyHoY+FpIIl7mKaBHRGmcBmtQSiuW1j4FIahaVDp2Dpr
-	PlKDky6dYGZyu9dgd4cOi7rOpeCCtD+RCLVAchXHIjwPoTKf4qhw9R5DHf46LoCJBGoPYj
-	N6ivMdA3/11lyVBcoJWwulNI9RfLWks=
+	bh=bQqweqSwYnhQCXgkJ+GuoRH/j2JjRdq9d6DeU3NphTE=;
+	b=pcb31h6yJWKzfEqmpCfESS8Z7el38BnEmqY9QrafiMwrSxiiVuPp1JFDx1K1yQO7bjbxqZ
+	6adNigUvH2LXZiE+t8buwGaWDmfyFJtfD1dWIJzNc4Kyg62/fqMVoCc2Q+Pc1MakRNCyii
+	AzFh3Ec4pz3TQLPLCpgomVEJXW8HVoQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 10/17] tools/xenstore: make domain_is_unprivileged() an inline function
-Date: Tue, 17 Jan 2023 10:11:17 +0100
-Message-Id: <20230117091124.22170-11-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 12/17] tools/xenstore: don't let hashtable_remove() return the removed value
+Date: Tue, 17 Jan 2023 10:11:19 +0100
+Message-Id: <20230117091124.22170-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230117091124.22170-1-jgross@suse.com>
 References: <20230117091124.22170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-clang 14 is complaining about a NULL dereference for constructs like:
+Letting hashtable_remove() return the value of the removed element is
+not used anywhere in Xenstore, and it conflicts with a hashtable
+created specifying the HASHTABLE_FREE_VALUE flag.
 
-  domain_is_unprivileged(conn) ? conn->in : NULL
-
-as it can't know that domain_is_unprivileged(conn) will return false
-if conn is NULL.
-
-Fix that by making domain_is_unprivileged() an inline function (and
-related to that domid_is_unprivileged(), too).
-
-In order not having to make struct domain public, use conn->id instead
-of conn->domain->domid for the test.
+So just drop returning the value.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.h   | 10 ++++++++++
- tools/xenstore/xenstored_domain.c | 11 -----------
- tools/xenstore/xenstored_domain.h |  2 --
- 3 files changed, 10 insertions(+), 13 deletions(-)
+V3:
+- new patch
+---
+ tools/xenstore/hashtable.c | 10 +++++-----
+ tools/xenstore/hashtable.h |  4 ++--
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 37006d508d..3c4e27d0dd 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -297,6 +297,16 @@ void unmap_xenbus(void *interface);
- 
- static inline int xenbus_master_domid(void) { return dom0_domid; }
- 
-+static inline bool domid_is_unprivileged(unsigned int domid)
-+{
-+	return domid != dom0_domid && domid != priv_domid;
-+}
-+
-+static inline bool domain_is_unprivileged(const struct connection *conn)
-+{
-+	return conn && domid_is_unprivileged(conn->id);
-+}
-+
- /* Return the event channel used by xenbus. */
- evtchn_port_t xenbus_evtchn(void);
- 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index b7777b2afd..55a93eccdb 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -408,17 +408,6 @@ void handle_event(void)
- 		barf_perror("Failed to write to event fd");
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 299549c51e..6738719e47 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -214,7 +214,7 @@ hashtable_search(struct hashtable *h, void *k)
  }
  
--static bool domid_is_unprivileged(unsigned int domid)
--{
--	return domid != dom0_domid && domid != priv_domid;
--}
--
--bool domain_is_unprivileged(struct connection *conn)
--{
--	return conn && conn->domain &&
--	       domid_is_unprivileged(conn->domain->domid);
--}
--
- static char *talloc_domain_path(const void *context, unsigned int domid)
+ /*****************************************************************************/
+-void * /* returns value associated with key */
++int
+ hashtable_remove(struct hashtable *h, void *k)
  {
- 	return talloc_asprintf(context, "/local/domain/%u", domid);
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 1e402f2609..22996e2576 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -59,8 +59,6 @@ void ignore_connection(struct connection *conn, unsigned int err);
- /* Returns the implicit path of a connection (only domains have this) */
- const char *get_implicit_path(const struct connection *conn);
+     /* TODO: consider compacting the table when the load factor drops enough,
+@@ -222,7 +222,6 @@ hashtable_remove(struct hashtable *h, void *k)
  
--bool domain_is_unprivileged(struct connection *conn);
--
- /* Remove node permissions for no longer existing domains. */
- int domain_adjust_node_perms(struct node *node);
- int domain_alloc_permrefs(struct node_perms *perms);
+     struct entry *e;
+     struct entry **pE;
+-    void *v;
+     unsigned int hashvalue, index;
+ 
+     hashvalue = hash(h,k);
+@@ -236,16 +235,17 @@ hashtable_remove(struct hashtable *h, void *k)
+         {
+             *pE = e->next;
+             h->entrycount--;
+-            v = e->v;
+             if (h->flags & HASHTABLE_FREE_KEY)
+                 free(e->k);
++            if (h->flags & HASHTABLE_FREE_VALUE)
++                free(e->v);
+             free(e);
+-            return v;
++            return 1;
+         }
+         pE = &(e->next);
+         e = e->next;
+     }
+-    return NULL;
++    return 0;
+ }
+ 
+ /*****************************************************************************/
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index 6d65431f96..d6feb1b038 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -68,10 +68,10 @@ hashtable_search(struct hashtable *h, void *k);
+  * @name        hashtable_remove
+  * @param   h   the hashtable to remove the item from
+  * @param   k   the key to search for  - does not claim ownership
+- * @return      the value associated with the key, or NULL if none found
++ * @return      0 if element not found
+  */
+ 
+-void * /* returns value */
++int
+ hashtable_remove(struct hashtable *h, void *k);
+ 
+ /*****************************************************************************
 -- 
 2.35.3
 
