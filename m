@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603F0C63797
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:12:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.479162.742852 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78BE0C678D4
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:15:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.479175.742868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi1P-0003K0-4l; Tue, 17 Jan 2023 09:12:47 +0000
+	id 1pHi3l-0004G5-QO; Tue, 17 Jan 2023 09:15:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 479162.742852; Tue, 17 Jan 2023 09:12:47 +0000
+Received: by outflank-mailman (output) from mailman id 479175.742868; Tue, 17 Jan 2023 09:15:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi1P-0003Jr-0V; Tue, 17 Jan 2023 09:12:47 +0000
-Received: by outflank-mailman (input) for mailman id 479162;
- Tue, 17 Jan 2023 09:12:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pHi3l-0004FM-KR; Tue, 17 Jan 2023 09:15:13 +0000
+Received: by outflank-mailman (input) for mailman id 479175;
+ Tue, 17 Jan 2023 09:15:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uRIs=5O=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pHi1O-000725-62
- for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:46 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1abc3174-9647-11ed-91b6-6bf2151ebd3b;
- Tue, 17 Jan 2023 10:12:45 +0100 (CET)
+ id 1pHi0z-0007bs-AY
+ for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:21 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0a0e5259-9647-11ed-b8d0-410ff93cb8f0;
+ Tue, 17 Jan 2023 10:12:17 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 492A6683D9;
- Tue, 17 Jan 2023 09:12:45 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 4A47B3821E;
+ Tue, 17 Jan 2023 09:12:17 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 172B31390C;
- Tue, 17 Jan 2023 09:12:45 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1CFA91390C;
+ Tue, 17 Jan 2023 09:12:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id cThQBI1mxmOVcAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:45 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id P+7HBXFmxmNRcAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1abc3174-9647-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 0a0e5259-9647-11ed-b8d0-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1673946765; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1673946737; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Qhi92MnwPX7iSr8FlA4GN57x5a7k0yJyoHyO3b0J4k8=;
-	b=ssmAxIkTO8DrjjidJyOflboV3TnbOo/57/H5yXzuG+jkF/NF0wzbLP/UCglJnQg+USYdB4
-	C7IYOp23Yi1Ri5Uskc6AzPWlxYqkmEneCYRmqe2JGtaDXJZaTEv0NtnWxTa+6YGGFAGBfE
-	UklUgj8W8afevKKjnpjvN3NNkG6e9F8=
+	bh=HhYKz+Oi7NXGdn9eIooP5S2YyA3D/bV21hS8CpK2wqk=;
+	b=ALO1TvRobgMJ1AorCZaEgQY0wUZ9fDndL3T46npH/zyLE7xIWsfMfSAI7C1J9oSg1upGnO
+	YsOAXkz+ouc5mFTkW2ljb14Pz04Hou6Cgikuyn2qUmS3rwB+HUo9u+GdH6PUvtXMEmVZzw
+	JYHY0y7DYI/BPxaF6k8Mra5td28tIjI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -70,78 +70,83 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 14/17] tools/xenstore: make log macro globally available
-Date: Tue, 17 Jan 2023 10:11:21 +0100
-Message-Id: <20230117091124.22170-15-jgross@suse.com>
+Subject: [PATCH v3 09/17] tools/xenstore: replace literal domid 0 with dom0_domid
+Date: Tue, 17 Jan 2023 10:11:16 +0100
+Message-Id: <20230117091124.22170-10-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230117091124.22170-1-jgross@suse.com>
 References: <20230117091124.22170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move the definition of the log() macro to xenstored_core.h in order
-to make it usable from other source files, too.
+There are some places left where dom0 is associated with domid 0.
 
-While at it preserve errno from being modified.
+Use dom0_domid instead.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.c | 14 --------------
- tools/xenstore/xenstored_core.h | 15 +++++++++++++++
- 2 files changed, 15 insertions(+), 14 deletions(-)
+ tools/xenstore/xenstored_core.c   | 5 +++--
+ tools/xenstore/xenstored_domain.c | 8 ++++----
+ 2 files changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index f27209dec8..d55ce632d8 100644
+index 561fb121d3..3336e65c97 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -88,20 +88,6 @@ TDB_CONTEXT *tdb_ctx = NULL;
+@@ -2316,9 +2316,10 @@ static void accept_connection(int sock)
+ 		return;
  
- static const char *sockmsg_string(enum xsd_sockmsg_type type);
+ 	conn = new_connection(&socket_funcs);
+-	if (conn)
++	if (conn) {
+ 		conn->fd = fd;
+-	else
++		conn->id = dom0_domid;
++	} else
+ 		close(fd);
+ }
+ #endif
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 07d91eb50c..b7777b2afd 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -326,7 +326,7 @@ static int destroy_domain(void *_domain)
+ 	if (domain->interface) {
+ 		/* Domain 0 was mapped by dom0_init, so it must be unmapped
+ 		   using munmap() and not the grant unmap call. */
+-		if (domain->domid == 0)
++		if (domain->domid == dom0_domid)
+ 			unmap_xenbus(domain->interface);
+ 		else
+ 			unmap_interface(domain->interface);
+@@ -410,7 +410,7 @@ void handle_event(void)
  
--#define log(...)							\
--	do {								\
--		char *s = talloc_asprintf(NULL, __VA_ARGS__);		\
--		if (s) {						\
--			trace("%s\n", s);				\
--			syslog(LOG_ERR, "%s\n",  s);			\
--			talloc_free(s);					\
--		} else {						\
--			trace("talloc failure during logging\n");	\
--			syslog(LOG_ERR, "talloc failure during logging\n"); \
--		}							\
--	} while (0)
--
--
- int quota_nb_entry_per_domain = 1000;
- int quota_nb_watch_per_domain = 128;
- int quota_max_entry_size = 2048; /* 2K */
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 3c4e27d0dd..3b96ecd018 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -267,6 +267,21 @@ void trace(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
- void reopen_log(void);
- void close_log(void);
+ static bool domid_is_unprivileged(unsigned int domid)
+ {
+-	return domid != 0 && domid != priv_domid;
++	return domid != dom0_domid && domid != priv_domid;
+ }
  
-+#define log(...)							\
-+	do {								\
-+		int _saved_errno = errno;				\
-+		char *s = talloc_asprintf(NULL, __VA_ARGS__);		\
-+		if (s) {						\
-+			trace("%s\n", s);				\
-+			syslog(LOG_ERR, "%s\n",	s);			\
-+			talloc_free(s);					\
-+		} else {						\
-+			trace("talloc failure during logging\n");	\
-+			syslog(LOG_ERR, "talloc failure during logging\n"); \
-+		}							\
-+		errno = _saved_errno;					\
-+	} while (0)
-+
- extern int orig_argc;
- extern char **orig_argv;
+ bool domain_is_unprivileged(struct connection *conn)
+@@ -798,7 +798,7 @@ static struct domain *onearg_domain(struct connection *conn,
+ 		return ERR_PTR(-EINVAL);
  
+ 	domid = atoi(domid_str);
+-	if (!domid)
++	if (domid == dom0_domid)
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	return find_connected_domain(domid);
+@@ -1004,7 +1004,7 @@ static int chk_domain_generation(unsigned int domid, uint64_t gen)
+ {
+ 	struct domain *d;
+ 
+-	if (!xc_handle && domid == 0)
++	if (!xc_handle && domid == dom0_domid)
+ 		return 1;
+ 
+ 	d = find_domain_struct(domid);
 -- 
 2.35.3
 
