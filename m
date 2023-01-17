@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33507C6379F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:12:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.479157.742841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603F0C63797
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 09:12:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.479162.742852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi17-0002iZ-RB; Tue, 17 Jan 2023 09:12:29 +0000
+	id 1pHi1P-0003K0-4l; Tue, 17 Jan 2023 09:12:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 479157.742841; Tue, 17 Jan 2023 09:12:29 +0000
+Received: by outflank-mailman (output) from mailman id 479162.742852; Tue, 17 Jan 2023 09:12:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHi17-0002iS-NB; Tue, 17 Jan 2023 09:12:29 +0000
-Received: by outflank-mailman (input) for mailman id 479157;
- Tue, 17 Jan 2023 09:12:29 +0000
+	id 1pHi1P-0003Jr-0V; Tue, 17 Jan 2023 09:12:47 +0000
+Received: by outflank-mailman (input) for mailman id 479162;
+ Tue, 17 Jan 2023 09:12:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uRIs=5O=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pHi17-000725-CK
- for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:29 +0000
+ id 1pHi1O-000725-62
+ for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 09:12:46 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 10b7f7da-9647-11ed-91b6-6bf2151ebd3b;
- Tue, 17 Jan 2023 10:12:28 +0100 (CET)
+ id 1abc3174-9647-11ed-91b6-6bf2151ebd3b;
+ Tue, 17 Jan 2023 10:12:45 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 79FA7683D9;
- Tue, 17 Jan 2023 09:12:28 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 492A6683D9;
+ Tue, 17 Jan 2023 09:12:45 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 493381390C;
- Tue, 17 Jan 2023 09:12:28 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 172B31390C;
+ Tue, 17 Jan 2023 09:12:45 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id B+WyEHxmxmNvcAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:28 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cThQBI1mxmOVcAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 17 Jan 2023 09:12:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10b7f7da-9647-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 1abc3174-9647-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1673946748; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1673946765; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=qxN+8k08vTt0nMXkeJr8ru9QvmOMBTZNPN5l16ahebE=;
-	b=P/WKj3ov4+KtXochZB1lePMqmyq2VdvkXDHVrF7Ukb5Z8pdCVPkL5S78vRf479Q1V3/jPG
-	nl2xTTR9/ookdhP4zN+OVj7VEYqdOlZWlAK2Dy6nz2vj+dHTdCQ85pP+cbWwd1whyOTDJE
-	mYfSGxwCj6LxETmyoKoyBLaG7m9FiS0=
+	bh=Qhi92MnwPX7iSr8FlA4GN57x5a7k0yJyoHyO3b0J4k8=;
+	b=ssmAxIkTO8DrjjidJyOflboV3TnbOo/57/H5yXzuG+jkF/NF0wzbLP/UCglJnQg+USYdB4
+	C7IYOp23Yi1Ri5Uskc6AzPWlxYqkmEneCYRmqe2JGtaDXJZaTEv0NtnWxTa+6YGGFAGBfE
+	UklUgj8W8afevKKjnpjvN3NNkG6e9F8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -70,73 +70,77 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 11/17] tools/xenstore: let chk_domain_generation() return a bool
-Date: Tue, 17 Jan 2023 10:11:18 +0100
-Message-Id: <20230117091124.22170-12-jgross@suse.com>
+Subject: [PATCH v3 14/17] tools/xenstore: make log macro globally available
+Date: Tue, 17 Jan 2023 10:11:21 +0100
+Message-Id: <20230117091124.22170-15-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230117091124.22170-1-jgross@suse.com>
 References: <20230117091124.22170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of returning 0 or 1 let chk_domain_generation() return a
-boolean value.
+Move the definition of the log() macro to xenstored_core.h in order
+to make it usable from other source files, too.
 
-Simplify the only caller by removing the ret variable.
+While at it preserve errno from being modified.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_domain.c | 18 ++++++++----------
- 1 file changed, 8 insertions(+), 10 deletions(-)
+ tools/xenstore/xenstored_core.c | 14 --------------
+ tools/xenstore/xenstored_core.h | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 55a93eccdb..1723c9804a 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -985,20 +985,20 @@ void domain_deinit(void)
-  * count (used for testing whether a node permission is older than a domain).
-  *
-  * Return values:
-- *  0: domain has higher generation count (it is younger than a node with the
-- *     given count), or domain isn't existing any longer
-- *  1: domain is older than the node
-+ *  false: domain has higher generation count (it is younger than a node with
-+ *     the given count), or domain isn't existing any longer
-+ *  true: domain is older than the node
-  */
--static int chk_domain_generation(unsigned int domid, uint64_t gen)
-+static bool chk_domain_generation(unsigned int domid, uint64_t gen)
- {
- 	struct domain *d;
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index f27209dec8..d55ce632d8 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -88,20 +88,6 @@ TDB_CONTEXT *tdb_ctx = NULL;
  
- 	if (!xc_handle && domid == dom0_domid)
--		return 1;
-+		return true;
+ static const char *sockmsg_string(enum xsd_sockmsg_type type);
  
- 	d = find_domain_struct(domid);
+-#define log(...)							\
+-	do {								\
+-		char *s = talloc_asprintf(NULL, __VA_ARGS__);		\
+-		if (s) {						\
+-			trace("%s\n", s);				\
+-			syslog(LOG_ERR, "%s\n",  s);			\
+-			talloc_free(s);					\
+-		} else {						\
+-			trace("talloc failure during logging\n");	\
+-			syslog(LOG_ERR, "talloc failure during logging\n"); \
+-		}							\
+-	} while (0)
+-
+-
+ int quota_nb_entry_per_domain = 1000;
+ int quota_nb_watch_per_domain = 128;
+ int quota_max_entry_size = 2048; /* 2K */
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 3c4e27d0dd..3b96ecd018 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -267,6 +267,21 @@ void trace(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+ void reopen_log(void);
+ void close_log(void);
  
--	return (d && d->generation <= gen) ? 1 : 0;
-+	return d && d->generation <= gen;
- }
- 
- /*
-@@ -1033,14 +1033,12 @@ int domain_alloc_permrefs(struct node_perms *perms)
- int domain_adjust_node_perms(struct node *node)
- {
- 	unsigned int i;
--	int ret;
- 
- 	for (i = 1; i < node->perms.num; i++) {
- 		if (node->perms.p[i].perms & XS_PERM_IGNORE)
- 			continue;
--		ret = chk_domain_generation(node->perms.p[i].id,
--					    node->generation);
--		if (!ret)
-+		if (!chk_domain_generation(node->perms.p[i].id,
-+					   node->generation))
- 			node->perms.p[i].perms |= XS_PERM_IGNORE;
- 	}
++#define log(...)							\
++	do {								\
++		int _saved_errno = errno;				\
++		char *s = talloc_asprintf(NULL, __VA_ARGS__);		\
++		if (s) {						\
++			trace("%s\n", s);				\
++			syslog(LOG_ERR, "%s\n",	s);			\
++			talloc_free(s);					\
++		} else {						\
++			trace("talloc failure during logging\n");	\
++			syslog(LOG_ERR, "talloc failure during logging\n"); \
++		}							\
++		errno = _saved_errno;					\
++	} while (0)
++
+ extern int orig_argc;
+ extern char **orig_argv;
  
 -- 
 2.35.3
