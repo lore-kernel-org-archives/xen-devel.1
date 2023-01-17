@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F13D1C677F1
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 13:54:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.479425.743302 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09810C63797
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Jan 2023 13:54:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.479426.743313 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHmPp-0001a0-1W; Tue, 17 Jan 2023 13:54:17 +0000
+	id 1pHmPq-0001sa-CQ; Tue, 17 Jan 2023 13:54:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 479425.743302; Tue, 17 Jan 2023 13:54:17 +0000
+Received: by outflank-mailman (output) from mailman id 479426.743313; Tue, 17 Jan 2023 13:54:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pHmPo-0001Xp-TU; Tue, 17 Jan 2023 13:54:16 +0000
-Received: by outflank-mailman (input) for mailman id 479425;
- Tue, 17 Jan 2023 13:54:16 +0000
+	id 1pHmPq-0001rO-7m; Tue, 17 Jan 2023 13:54:18 +0000
+Received: by outflank-mailman (input) for mailman id 479426;
+ Tue, 17 Jan 2023 13:54:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kjsf=5O=citrix.com=prvs=374a1453b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pHmPo-0000XC-0g
- for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 13:54:16 +0000
+ id 1pHmPp-0000XC-0l
+ for xen-devel@lists.xenproject.org; Tue, 17 Jan 2023 13:54:17 +0000
 Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
  [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6be8b0f7-966e-11ed-91b6-6bf2151ebd3b;
- Tue, 17 Jan 2023 14:54:13 +0100 (CET)
+ id 6d1a7f45-966e-11ed-91b6-6bf2151ebd3b;
+ Tue, 17 Jan 2023 14:54:14 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,155 +38,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6be8b0f7-966e-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 6d1a7f45-966e-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1673963653;
+  d=citrix.com; s=securemail; t=1673963654;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=mE/iBXFwyWDQLAcCnVIU+5UD6GpcaO2CE3H3XDadFrA=;
-  b=CIyhQRxXWhoJHJ1OBMCv2KtAvqV6vX2X9RjeOpet/5ot9cUAtMQQ/WHT
-   xmUnI0hIqQUwxnyA5rQ6Yus7tMncpb4I/DiFbTPZM0yjxUq/1z+qrUdiO
-   b8NogMY6LV+YrndYtzCxeLgA7KY1EQXA4Pfc6Mh60msM6femd7hvqWCyi
+  bh=ZeZpvUYtzSln2z+je77HpdVO31fBudqozIWZgnYM4bM=;
+  b=fyZo0hd8H4zT9vNvABqWnUP+qlDrMJBpinIK6YhrTbQPpb2EkRpUK2LU
+   /uZW3sbC40/NXHm8HJz3koONVHv/5bWnjX2uJgcply1gQ1yC2WAy6Faa9
+   5G/eGdftyAeooAyNQwCjPmvMPWFcLoycTAkNGM3n+9Opr1u2/ANZflMI2
    w=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 91898371
+X-MesageID: 91898372
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:veBvuakiVdH2uTlxDxxP/yLo5gyKJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xJNWzjVPP2NYWqhe4h/a4+1oRtQvcXSzNdhSQdl+Xo3EyMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icf3grHmeIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE4p7auaVA8w5ARkPqgS5QCGzRH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- eYDKhRdSDCtvLKnnLKaUtNpqtslCda+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQthfB9
- jOWpDugav0cHPW/zQrdzW/9uqjooyr8XtwdBqa6r9c/1TV/wURMUUZLBDNXu8KRlUqWS99Zb
- UsO9UIGvaU0sUCmUNT5dxm5u2Kf+A4RXcJKFO834x3LzbDbiy6VD3YJZiRMY9snsIkxXzNC/
- l2GhdTyHhR0raaYD3ma89+pQSiaYHZPazVYPGldEFVDuoO4yG0usv7RZsx4EorlqP3bImHhn
- zCrtBI7q6oVqNFegs1X4mv7byKQSonhF1BqvVSNBDr6vmuVd6b+OdX2tAGzAeJoad/AEwLf5
- CVsd922trhmMH2bqMCarAzh9pmN7u3NDjDTiEUH83IJp2X0oC7LkWy9DVhDyKZV3iUsI2WBj
- Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMcqJF7bpHE/PB/Lt4wIrKTLufhvU
- ap3jO72VSpKYUiZ5GfeqxghPU8DmXllmDK7qWHTxBW7y7uODEN5up9cWGZimtsRtfveyC2Mq
- oY3Cid/40kHOAEISnWNoNF7wJFjBSRTOK0aXOQMJ77TeFQ4Rjt/YxITqJt4E7FYc21uvr+g1
- hmAtoVwkwWXaaHvQelSVk1eVQ==
-IronPort-HdrOrdr: A9a23:5gipqqMnNqAtUMBcTgejsMiBIKoaSvp037BK7S1MoH1uA6ilfq
- WV9sjzuiWatN98Yh8dcLO7Scy9qBHnhP1ICOAqVN/PYOCBggqVxelZhrcKqAeQeREWmNQ86U
- 9hGZIOdeHYPBxBouvRpCODNL8bsb66GKLDv5aj85+6JzsaFJ2J7G1Ce3im+lUdfnghOXKgfq
- DsnPauoVCbCA0qhpTSPAh8YwDbzee7767bXQ==
+IronPort-Data: A9a23:Jw6Dq6BIcP9mURVW/1Hjw5YqxClBgxIJ4kV8jS/XYbTApD4q3jBWz
+ 2IaX2GDPfnZYjH8ed0iPI3j8kIHvJHUnNY2QQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nNHuCnYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFtMpvlDs15K6p4GpB4QRkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIw4P11JTFo1
+ dIjeCFRbjGbveea37SeVbw57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
+ pdHL2M1N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9K4XaFJUOwRzwS
+ mTu40X9LRoXMcalzSve0FG0vu/rhQzHYddHfFG/3qEz2wDCroAJMzUUWkG8uuKRkVOlVpRUL
+ El80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL8/AKxFmUCCDlbZ7QbWNQeHGJwk
+ AXTxpWwWGIp6efOIZ6AyluKhSmpOwxFC08sXn8VEQsk++PmjJ41qw2aG76PD5WJYs3J9SDYm
+ m7V93lk3e1M3abnxI3gowmZ3mvESozhC1dsu16JBj/NAhZRPtbNWmC+1bTMAR+sxq69R0LJg
+ nULktP2AAsmXcDUz3zlrAng8diUCxe53N702wQH82EJrWjFxpJaVdk4DMtCDEloKN0YXjTif
+ VXevwhcjLcKYiTxPf4rO9LgUpVxpUQFKTgCfqmEBuein7ArLFPXlM2QTRP4M5/RfLgEzvhkZ
+ MbznTeEBncGE6V3pAdatM9EuYLHMhsWnDuJLbiilkTP7FZrTCLNIVvzGAfUP79RAWLtiFm9z
+ uuzwOPRmkUPCrOgPHOJmWPRRHhTRUUG6VnNg5Q/Xoa+zsBOQz5J5yP5qV/5R7FYog==
+IronPort-HdrOrdr: A9a23:uzWFFq3bOauASq+PY8E6YwqjBHQkLtp133Aq2lEZdPU0SKGlfq
+ GV7ZAmPHrP4gr5N0tOpTntAse9qBDnhPtICOsqTNSftWDd0QPFEGgF1+rfKlXbcBEWndQtt5
+ uIHZIfNDXxZ2IK8PrS0U2DPPsLhPO818mT9IDjJ3UGd3AXV0m3hT0JdTpyESdNNXd77YJSLu
+ v72iLezQDQA0j+aK6AdwA4t7iqnayyqHr+CyR2fCIa1A==
 X-IronPort-AV: E=Sophos;i="5.97,224,1669093200"; 
-   d="scan'208";a="91898371"
+   d="scan'208";a="91898372"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
- PERARD" <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>,
-	Christian Lindig <christian.lindig@citrix.com>, David Scott
-	<dave@recoil.org>, Edwin Torok <edvin.torok@citrix.com>, Rob Hoes
-	<Rob.Hoes@citrix.com>
-Subject: [PATCH 3/6] tools: Introduce a non-truncating xc_xenver_capabilities()
-Date: Tue, 17 Jan 2023 13:53:33 +0000
-Message-ID: <20230117135336.11662-4-andrew.cooper3@citrix.com>
+ PERARD" <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH 6/6] tools: Introduce a xc_xenver_buildid() wrapper
+Date: Tue, 17 Jan 2023 13:53:36 +0000
+Message-ID: <20230117135336.11662-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20230117135336.11662-1-andrew.cooper3@citrix.com>
 References: <20230117135336.11662-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Update libxl and the ocaml stubs to match.  No API/ABI change in either.
+... which converts binary content to hex automatically.
+
+Update libxl to match.  No API/ABI change.
+
+This removes a latent bug for cases when the buildid is longer than 4092
+bytes.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Wei Liu <wl@xen.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>
 CC: Juergen Gross <jgross@suse.com>
-CC: Christian Lindig <christian.lindig@citrix.com>
-CC: David Scott <dave@recoil.org>
-CC: Edwin Torok <edvin.torok@citrix.com>
-CC: Rob Hoes <Rob.Hoes@citrix.com>
 ---
- tools/include/xenctrl.h             |  1 +
- tools/libs/ctrl/xc_version.c        |  5 +++++
- tools/libs/light/libxl.c            |  4 +---
- tools/ocaml/libs/xc/xenctrl_stubs.c | 17 +++++++++++++++--
- 4 files changed, 22 insertions(+), 5 deletions(-)
+ tools/include/xenctrl.h      |  1 +
+ tools/libs/ctrl/xc_version.c | 33 +++++++++++++++++++++++++++++++++
+ tools/libs/light/libxl.c     | 44 +-------------------------------------------
+ 3 files changed, 35 insertions(+), 43 deletions(-)
 
 diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 1e88d49371a4..279dc17d67d4 100644
+index fd80a509197d..48296930b892 100644
 --- a/tools/include/xenctrl.h
 +++ b/tools/include/xenctrl.h
-@@ -1609,6 +1609,7 @@ int xc_version(xc_interface *xch, int cmd, void *arg);
-  * free().
-  */
- char *xc_xenver_extraversion(xc_interface *xch);
-+char *xc_xenver_capabilities(xc_interface *xch);
+@@ -1612,6 +1612,7 @@ char *xc_xenver_extraversion(xc_interface *xch);
+ char *xc_xenver_capabilities(xc_interface *xch);
+ char *xc_xenver_changeset(xc_interface *xch);
+ char *xc_xenver_commandline(xc_interface *xch);
++char *xc_xenver_buildid(xc_interface *xch);
  
  int xc_flask_op(xc_interface *xch, xen_flask_op_t *op);
  
 diff --git a/tools/libs/ctrl/xc_version.c b/tools/libs/ctrl/xc_version.c
-index 2c14474feec5..512302a393ea 100644
+index 02f6e9551b57..54d1b9296696 100644
 --- a/tools/libs/ctrl/xc_version.c
 +++ b/tools/libs/ctrl/xc_version.c
-@@ -156,3 +156,8 @@ char *xc_xenver_extraversion(xc_interface *xch)
+@@ -171,3 +171,36 @@ char *xc_xenver_commandline(xc_interface *xch)
  {
-     return varbuf_simple_string(xch, XENVER_extraversion2);
+     return varbuf_simple_string(xch, XENVER_commandline2);
  }
 +
-+char *xc_xenver_capabilities(xc_interface *xch)
++static void str2hex(char *dst, const unsigned char *src, size_t n)
 +{
-+    return varbuf_simple_string(xch, XENVER_capabilities2);
++    static const unsigned char hex[] = "0123456789abcdef";
++
++    for ( ; n; n-- )
++    {
++        unsigned char c = *src++;
++
++        *dst++ = hex[c >> 4];
++        *dst++ = hex[c & 0xf];
++    }
++}
++
++char *xc_xenver_buildid(xc_interface *xch)
++{
++    xen_varbuf_t *hbuf = varbuf_op(xch, XENVER_build_id);
++    char *res;
++
++    if ( !hbuf )
++        return NULL;
++
++    res = malloc((hbuf->len * 2) + 1);
++    if ( res )
++    {
++        str2hex(res, hbuf->buf, hbuf->len);
++        res[hbuf->len * 2] = '\0';
++    }
++
++    xencall_free_buffer(xch->xcall, hbuf);
++
++    return res;
 +}
 diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
-index 3e16e568839c..139e838d1407 100644
+index 3f906a47148b..5512f444aca2 100644
 --- a/tools/libs/light/libxl.c
 +++ b/tools/libs/light/libxl.c
-@@ -583,7 +583,6 @@ const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx)
-     union {
-         xen_compile_info_t xen_cc;
-         xen_changeset_info_t xen_chgset;
--        xen_capabilities_info_t xen_caps;
-         xen_platform_parameters_t p_parms;
-         xen_commandline_t xen_commandline;
-         xen_build_id_t build_id;
-@@ -607,8 +606,7 @@ const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx)
-     info->compile_domain = libxl__strdup(NOGC, u.xen_cc.compile_domain);
-     info->compile_date = libxl__strdup(NOGC, u.xen_cc.compile_date);
- 
--    xc_version(ctx->xch, XENVER_capabilities, &u.xen_caps);
--    info->capabilities = libxl__strdup(NOGC, u.xen_caps);
-+    info->capabilities = xc_xenver_capabilities(ctx->xch);
- 
-     xc_version(ctx->xch, XENVER_changeset, &u.xen_chgset);
-     info->changeset = libxl__strdup(NOGC, u.xen_chgset);
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index f3ce12dd8683..368f4727f0a0 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -1009,9 +1009,22 @@ CAMLprim value stub_xc_version_changeset(value xch)
- 
- CAMLprim value stub_xc_version_capabilities(value xch)
- {
--	xen_capabilities_info_t ci;
-+	CAMLparam1(xch);
-+	CAMLlocal1(result);
-+	char *capabilities;
-+
-+	caml_enter_blocking_section();
-+	retval = xc_xenver_capabilities(_H(xch));
-+	caml_leave_blocking_section();
- 
--	return xc_version_single_string(xch, XENVER_capabilities, &ci);
-+	if (!capabilities)
-+		failwith_xc(_H(xch));
-+
-+	result = caml_copy_string(capabilities);
-+
-+	free(capabilities);
-+
-+	CAMLreturn(result);
+@@ -545,38 +545,6 @@ libxl_numainfo *libxl_get_numainfo(libxl_ctx *ctx, int *nr)
+     return ret;
  }
  
+-static int libxl__xc_version_wrap(libxl__gc *gc, libxl_version_info *info,
+-                                  xen_build_id_t *build)
+-{
+-    int r;
+-
+-    r = xc_version(CTX->xch, XENVER_build_id, build);
+-    switch (r) {
+-    case -EPERM:
+-    case -ENODATA:
+-    case 0:
+-        info->build_id = libxl__strdup(NOGC, "");
+-        break;
+-
+-    case -ENOBUFS:
+-        break;
+-
+-    default:
+-        if (r > 0) {
+-            unsigned int i;
+-
+-            info->build_id = libxl__zalloc(NOGC, (r * 2) + 1);
+-
+-            for (i = 0; i < r ; i++)
+-                snprintf(&info->build_id[i * 2], 3, "%02hhx", build->buf[i]);
+-
+-            r = 0;
+-        }
+-        break;
+-    }
+-    return r;
+-}
+-
+ const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx)
+ {
+     GC_INIT(ctx);
+@@ -586,7 +554,6 @@ const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx)
+         xen_build_id_t build_id;
+     } u;
+     long xen_version;
+-    int r;
+     libxl_version_info *info = &ctx->version_info;
  
+     if (info->xen_version_extra != NULL)
+@@ -613,17 +580,8 @@ const libxl_version_info* libxl_get_version_info(libxl_ctx *ctx)
+     info->pagesize = xc_version(ctx->xch, XENVER_pagesize, NULL);
+ 
+     info->commandline = xc_xenver_commandline(ctx->xch);
++    info->build_id = xc_xenver_buildid(ctx->xch);
+ 
+-    u.build_id.len = sizeof(u) - sizeof(u.build_id);
+-    r = libxl__xc_version_wrap(gc, info, &u.build_id);
+-    if (r == -ENOBUFS) {
+-            xen_build_id_t *build_id;
+-
+-            build_id = libxl__zalloc(gc, info->pagesize);
+-            build_id->len = info->pagesize - sizeof(*build_id);
+-            r = libxl__xc_version_wrap(gc, info, build_id);
+-            if (r) LOGEV(ERROR, r, "getting build_id");
+-    }
+  out:
+     GC_FREE;
+     return info;
 -- 
 2.11.0
 
