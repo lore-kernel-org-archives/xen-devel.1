@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793D2C32793
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.480370.744798 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC2A4C38159
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.480371.744806 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A7-0007jn-EI; Wed, 18 Jan 2023 09:55:19 +0000
+	id 1pI5A8-0007sk-46; Wed, 18 Jan 2023 09:55:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 480370.744798; Wed, 18 Jan 2023 09:55:19 +0000
+Received: by outflank-mailman (output) from mailman id 480371.744806; Wed, 18 Jan 2023 09:55:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A6-0007fy-W8; Wed, 18 Jan 2023 09:55:19 +0000
-Received: by outflank-mailman (input) for mailman id 480370;
- Wed, 18 Jan 2023 09:55:16 +0000
+	id 1pI5A7-0007p7-HW; Wed, 18 Jan 2023 09:55:19 +0000
+Received: by outflank-mailman (input) for mailman id 480371;
+ Wed, 18 Jan 2023 09:55:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ov7m=5P=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pI56f-0001BV-Nf
- for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:45 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1pI56U-0001BV-Hs
+ for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:34 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 82748998-9715-11ed-b8d1-410ff93cb8f0;
- Wed, 18 Jan 2023 10:50:15 +0100 (CET)
+ id 7bb8bd32-9715-11ed-b8d1-410ff93cb8f0;
+ Wed, 18 Jan 2023 10:50:04 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8AB523EA5D;
- Wed, 18 Jan 2023 09:51:43 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 42FE020D6A;
+ Wed, 18 Jan 2023 09:51:32 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5E712139D2;
- Wed, 18 Jan 2023 09:51:43 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 111C5139D2;
+ Wed, 18 Jan 2023 09:51:32 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id NqC3FS/Bx2MGRAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:43 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Um3AAiTBx2PtQwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,287 +53,281 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82748998-9715-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 7bb8bd32-9715-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674035503; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1674035492; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vOAF1RrQQxMUan4XdO2o/kCgbt3Qc3Bo/f4cCx9Mp4Q=;
-	b=eUJYjJ+Fa5Sx/aSQBZ/PxvCkxVZxCoA6jIIAnm2Bo016k16GKdty6YT/wStiFHeNvxv4eU
-	YfqyRDxNtsKOP1so5eAF3kztNIqrV6YHFxmK2ERMlUO5vUoqrK2VmbWii9Mt6Wk58hXxuJ
-	XExRGrOq0DI/bFuE/NNgiX0n4mGfbs4=
+	bh=9xr3XDR0lnAcLZVwe7SbDNgcb70DTfqFJY2CcMlXwhM=;
+	b=nGd7aTH7CkPAeVkvRL8PVcp0qRzINcHi8y3X0BL1fF4/E455VF1rqpsgjTg4vFU/Tgn3mU
+	TrraDprG29Pf39R9TsK4xqtyUxxcZ6Mh7oC+1nMqb76SuCoZIGYUOpp+PJt0How0OjAcW3
+	zK9cu2Tb8lsMob+SF7rFx6aTtMXLJDE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 15/17] tools/xenstore: let check_store() check the accounting data
-Date: Wed, 18 Jan 2023 10:50:14 +0100
-Message-Id: <20230118095016.13091-16-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v4 13/17] tools/xenstore: switch hashtable to use the talloc framework
+Date: Wed, 18 Jan 2023 10:50:12 +0100
+Message-Id: <20230118095016.13091-14-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230118095016.13091-1-jgross@suse.com>
 References: <20230118095016.13091-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today check_store() is only testing the correctness of the node tree.
+Instead of using malloc() and friends, let the hashtable implementation
+use the talloc framework.
 
-Add verification of the accounting data (number of nodes) and correct
-the data if it is wrong.
-
-Do the initial check_store() call only after Xenstore entries of a
-live update have been read. This is wanted to make sure the accounting
-data is correct after a live update.
+This is more consistent with the rest of xenstored and it allows to
+track memory usage via "xenstore-control memreport".
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- use get_node_owner() (Julien Grall)
-- rename callback (Julien Grall)
+V3:
+- make key and value children of element (if flagged)
 ---
- tools/xenstore/xenstored_core.c   | 62 ++++++++++++++++------
- tools/xenstore/xenstored_domain.c | 86 +++++++++++++++++++++++++++++++
- tools/xenstore/xenstored_domain.h |  4 ++
- 3 files changed, 137 insertions(+), 15 deletions(-)
+ tools/xenstore/hashtable.c        | 98 +++++++++++--------------------
+ tools/xenstore/hashtable.h        |  3 +-
+ tools/xenstore/xenstored_core.c   |  5 +-
+ tools/xenstore/xenstored_domain.c |  2 +-
+ 4 files changed, 38 insertions(+), 70 deletions(-)
 
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index ddca1591a2..30eb9f21d2 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -6,6 +6,8 @@
+ #include <string.h>
+ #include <math.h>
+ #include <stdint.h>
++#include <stdarg.h>
++#include "talloc.h"
+ 
+ struct entry
+ {
+@@ -50,7 +52,7 @@ indexFor(unsigned int tablelength, unsigned int hashvalue) {
+ 
+ /*****************************************************************************/
+ struct hashtable *
+-create_hashtable(unsigned int minsize,
++create_hashtable(const void *ctx, unsigned int minsize,
+                  unsigned int (*hashf) (void*),
+                  int (*eqf) (void*,void*),
+                  unsigned int flags)
+@@ -66,10 +68,10 @@ create_hashtable(unsigned int minsize,
+         if (primes[pindex] > minsize) { size = primes[pindex]; break; }
+     }
+ 
+-    h = (struct hashtable *)calloc(1, sizeof(struct hashtable));
++    h = talloc_zero(ctx, struct hashtable);
+     if (NULL == h)
+         goto err0;
+-    h->table = (struct entry **)calloc(size, sizeof(struct entry *));
++    h->table = talloc_zero_array(h, struct entry *, size);
+     if (NULL == h->table)
+         goto err1;
+ 
+@@ -83,7 +85,7 @@ create_hashtable(unsigned int minsize,
+     return h;
+ 
+ err1:
+-   free(h);
++   talloc_free(h);
+ err0:
+    return NULL;
+ }
+@@ -115,47 +117,32 @@ hashtable_expand(struct hashtable *h)
+     if (h->primeindex == (prime_table_length - 1)) return 0;
+     newsize = primes[++(h->primeindex)];
+ 
+-    newtable = (struct entry **)calloc(newsize, sizeof(struct entry*));
+-    if (NULL != newtable)
++    newtable = talloc_realloc(h, h->table, struct entry *, newsize);
++    if (!newtable)
+     {
+-        /* This algorithm is not 'stable'. ie. it reverses the list
+-         * when it transfers entries between the tables */
+-        for (i = 0; i < h->tablelength; i++) {
+-            while (NULL != (e = h->table[i])) {
+-                h->table[i] = e->next;
+-                index = indexFor(newsize,e->h);
++        h->primeindex--;
++        return 0;
++    }
++
++    h->table = newtable;
++    memset(newtable + h->tablelength, 0,
++           (newsize - h->tablelength) * sizeof(*newtable));
++    for (i = 0; i < h->tablelength; i++) {
++        for (pE = &(newtable[i]), e = *pE; e != NULL; e = *pE) {
++            index = indexFor(newsize, e->h);
++            if (index == i)
++            {
++                pE = &(e->next);
++            }
++            else
++            {
++                *pE = e->next;
+                 e->next = newtable[index];
+                 newtable[index] = e;
+             }
+         }
+-        free(h->table);
+-        h->table = newtable;
+-    }
+-    /* Plan B: realloc instead */
+-    else 
+-    {
+-        newtable = (struct entry **)
+-                   realloc(h->table, newsize * sizeof(struct entry *));
+-        if (NULL == newtable) { (h->primeindex)--; return 0; }
+-        h->table = newtable;
+-        memset(newtable + h->tablelength, 0,
+-               (newsize - h->tablelength) * sizeof(*newtable));
+-        for (i = 0; i < h->tablelength; i++) {
+-            for (pE = &(newtable[i]), e = *pE; e != NULL; e = *pE) {
+-                index = indexFor(newsize,e->h);
+-                if (index == i)
+-                {
+-                    pE = &(e->next);
+-                }
+-                else
+-                {
+-                    *pE = e->next;
+-                    e->next = newtable[index];
+-                    newtable[index] = e;
+-                }
+-            }
+-        }
+     }
++
+     h->tablelength = newsize;
+     h->loadlimit   = (unsigned int)
+         (((uint64_t)newsize * max_load_factor) / 100);
+@@ -184,12 +171,16 @@ hashtable_insert(struct hashtable *h, void *k, void *v)
+          * element may be ok. Next time we insert, we'll try expanding again.*/
+         hashtable_expand(h);
+     }
+-    e = (struct entry *)calloc(1, sizeof(struct entry));
++    e = talloc_zero(h, struct entry);
+     if (NULL == e) { --(h->entrycount); return 0; } /*oom*/
+     e->h = hash(h,k);
+     index = indexFor(h->tablelength,e->h);
+     e->k = k;
++    if (h->flags & HASHTABLE_FREE_KEY)
++        talloc_steal(e, k);
+     e->v = v;
++    if (h->flags & HASHTABLE_FREE_VALUE)
++        talloc_steal(e, v);
+     e->next = h->table[index];
+     h->table[index] = e;
+     return -1;
+@@ -235,11 +226,7 @@ hashtable_remove(struct hashtable *h, void *k)
+         {
+             *pE = e->next;
+             h->entrycount--;
+-            if (h->flags & HASHTABLE_FREE_KEY)
+-                free(e->k);
+-            if (h->flags & HASHTABLE_FREE_VALUE)
+-                free(e->v);
+-            free(e);
++            talloc_free(e);
+             return;
+         }
+         pE = &(e->next);
+@@ -278,26 +265,7 @@ hashtable_iterate(struct hashtable *h,
+ void
+ hashtable_destroy(struct hashtable *h)
+ {
+-    unsigned int i;
+-    struct entry *e, *f;
+-    struct entry **table = h->table;
+-
+-    for (i = 0; i < h->tablelength; i++)
+-    {
+-        e = table[i];
+-        while (NULL != e)
+-        {
+-            f = e;
+-            e = e->next;
+-            if (h->flags & HASHTABLE_FREE_KEY)
+-                free(f->k);
+-            if (h->flags & HASHTABLE_FREE_VALUE)
+-                free(f->v);
+-            free(f);
+-        }
+-    }
+-    free(h->table);
+-    free(h);
++    talloc_free(h);
+ }
+ 
+ /*
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index 780ad3c8f7..4e2823134e 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -9,6 +9,7 @@ struct hashtable;
+  * create_hashtable
+    
+  * @name                    create_hashtable
++ * @param   ctx             talloc context to use for allocations
+  * @param   minsize         minimum initial size of hashtable
+  * @param   hashfunction    function for hashing keys
+  * @param   key_eq_fn       function for determining key equality
+@@ -22,7 +23,7 @@ struct hashtable;
+ #define HASHTABLE_FREE_KEY   (1U << 1)
+ 
+ struct hashtable *
+-create_hashtable(unsigned int minsize,
++create_hashtable(const void *ctx, unsigned int minsize,
+                  unsigned int (*hashfunction) (void*),
+                  int (*key_eq_fn) (void*,void*),
+                  unsigned int flags
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index c2c2c342de..27dfbe9593 100644
+index 9cfde76898..17e678256e 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -2384,8 +2384,6 @@ void setup_structure(bool live_update)
- 		manual_node("@introduceDomain", NULL);
- 		domain_nbentry_fix(dom0_domid, 5, true);
- 	}
--
--	check_store();
+@@ -2405,11 +2405,10 @@ static int keys_equal_fn(void *key1, void *key2)
+ 
+ int remember_string(struct hashtable *hash, const char *str)
+ {
+-	char *k = malloc(strlen(str) + 1);
++	char *k = talloc_strdup(NULL, str);
+ 
+ 	if (!k)
+ 		return 0;
+-	strcpy(k, str);
+ 	return hashtable_insert(hash, k, (void *)1);
  }
  
- static unsigned int hash_from_key_fn(void *k)
-@@ -2428,20 +2426,28 @@ int remember_string(struct hashtable *hash, const char *str)
-  * As we go, we record each node in the given reachable hashtable.  These
-  * entries will be used later in clean_store.
-  */
-+
-+struct check_store_data {
-+	struct hashtable *reachable;
-+	struct hashtable *domains;
-+};
-+
- static int check_store_step(const void *ctx, struct connection *conn,
- 			    struct node *node, void *arg)
- {
--	struct hashtable *reachable = arg;
-+	struct check_store_data *data = arg;
- 
--	if (hashtable_search(reachable, (void *)node->name)) {
-+	if (hashtable_search(data->reachable, (void *)node->name)) {
- 		log("check_store: '%s' is duplicated!", node->name);
- 		return recovery ? WALK_TREE_RM_CHILDENTRY
- 				: WALK_TREE_SKIP_CHILDREN;
- 	}
- 
--	if (!remember_string(reachable, node->name))
-+	if (!remember_string(data->reachable, node->name))
- 		return WALK_TREE_ERROR_STOP;
- 
-+	domain_check_acc_add(node, data->domains);
-+
- 	return WALK_TREE_OK;
- }
- 
-@@ -2491,37 +2497,61 @@ static int clean_store_(TDB_CONTEXT *tdb, TDB_DATA key, TDB_DATA val,
-  * Given the list of reachable nodes, iterate over the whole store, and
-  * remove any that were not reached.
-  */
--static void clean_store(struct hashtable *reachable)
-+static void clean_store(struct check_store_data *data)
- {
--	tdb_traverse(tdb_ctx, &clean_store_, reachable);
-+	tdb_traverse(tdb_ctx, &clean_store_, data->reachable);
-+	domain_check_acc(data->domains);
- }
- 
-+int check_store_path(const char *name, struct check_store_data *data)
-+{
-+	struct node *node;
-+
-+	node = read_node(NULL, NULL, name);
-+	if (!node) {
-+		log("check_store: error %d reading special node '%s'", errno,
-+		    name);
-+		return errno;
-+	}
-+
-+	return check_store_step(NULL, NULL, node, data);
-+}
- 
- void check_store(void)
- {
--	struct hashtable *reachable;
- 	struct walk_funcs walkfuncs = {
- 		.enter = check_store_step,
- 		.enoent = check_store_enoent,
+@@ -2504,7 +2503,7 @@ void check_store(void)
  	};
-+	struct check_store_data data;
  
  	/* Don't free values (they are all void *1) */
--	reachable = create_hashtable(NULL, 16, hash_from_key_fn, keys_equal_fn,
--				     HASHTABLE_FREE_KEY);
--	if (!reachable) {
-+	data.reachable = create_hashtable(NULL, 16, hash_from_key_fn,
-+					  keys_equal_fn, HASHTABLE_FREE_KEY);
-+	if (!data.reachable) {
+-	reachable = create_hashtable(16, hash_from_key_fn, keys_equal_fn,
++	reachable = create_hashtable(NULL, 16, hash_from_key_fn, keys_equal_fn,
+ 				     HASHTABLE_FREE_KEY);
+ 	if (!reachable) {
  		log("check_store: ENOMEM");
- 		return;
- 	}
- 
-+	data.domains = domain_check_acc_init();
-+	if (!data.domains) {
-+		log("check_store: ENOMEM");
-+		goto out_hash;
-+	}
-+
- 	log("Checking store ...");
--	if (walk_node_tree(NULL, NULL, "/", &walkfuncs, reachable)) {
-+	if (walk_node_tree(NULL, NULL, "/", &walkfuncs, &data)) {
- 		if (errno == ENOMEM)
- 			log("check_store: ENOMEM");
--	} else if (!check_transactions(reachable))
--		clean_store(reachable);
-+	} else if (!check_store_path("@introduceDomain", &data) &&
-+		   !check_store_path("@releaseDomain", &data) &&
-+		   !check_transactions(data.reachable))
-+		clean_store(&data);
- 	log("Checking store complete.");
- 
--	hashtable_destroy(reachable);
-+	hashtable_destroy(data.domains);
-+ out_hash:
-+	hashtable_destroy(data.reachable);
- }
- 
- 
-@@ -2920,6 +2950,8 @@ int main(int argc, char *argv[])
- 		lu_read_state();
- #endif
- 
-+	check_store();
-+
- 	/* Get ready to listen to the tools. */
- 	initialize_fds(&sock_pollfd_idx, &timeout);
- 
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index e9d84d7c24..9ef41ede03 100644
+index 391395060e..4f4c0a727c 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -1574,6 +1574,92 @@ void read_state_connection(const void *ctx, const void *state)
- 	read_state_buffered_data(ctx, conn, sc);
- }
+@@ -931,7 +931,7 @@ void domain_init(int evtfd)
+ 	int rc;
  
-+struct domain_acc {
-+	unsigned int domid;
-+	int nodes;
-+};
-+
-+static int domain_check_acc_init_sub(const void *k, void *v, void *arg)
-+{
-+	struct hashtable *domains = arg;
-+	struct domain *d = v;
-+	struct domain_acc *dom;
-+
-+	dom = talloc_zero(NULL, struct domain_acc);
-+	if (!dom)
-+		return -1;
-+
-+	dom->domid = d->domid;
-+	/*
-+	 * Set the initial value to the negative one of the current domain.
-+	 * If everything is correct incrementing the value for each node will
-+	 * result in dom->nodes being 0 at the end.
-+	 */
-+	dom->nodes = -d->nbentry;
-+
-+	if (!hashtable_insert(domains, &dom->domid, dom)) {
-+		talloc_free(dom);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+struct hashtable *domain_check_acc_init(void)
-+{
-+	struct hashtable *domains;
-+
-+	domains = create_hashtable(NULL, 8, domhash_fn, domeq_fn,
-+				   HASHTABLE_FREE_VALUE);
-+	if (!domains)
-+		return NULL;
-+
-+	if (hashtable_iterate(domhash, domain_check_acc_init_sub, domains)) {
-+		hashtable_destroy(domains);
-+		return NULL;
-+	}
-+
-+	return domains;
-+}
-+
-+void domain_check_acc_add(const struct node *node, struct hashtable *domains)
-+{
-+	struct domain_acc *dom;
-+	unsigned int domid;
-+
-+	domid = get_node_owner(node);
-+	dom = hashtable_search(domains, &domid);
-+	if (!dom)
-+		log("Node %s owned by unknown domain %u", node->name, domid);
-+	else
-+		dom->nodes++;
-+}
-+
-+static int domain_check_acc_cb(const void *k, void *v, void *arg)
-+{
-+	struct domain_acc *dom = v;
-+	struct domain *d;
-+
-+	if (!dom->nodes)
-+		return 0;
-+
-+	log("Correct accounting data for domain %u: nodes are %d off",
-+	    dom->domid, dom->nodes);
-+
-+	d = find_domain_struct(dom->domid);
-+	if (!d)
-+		return 0;
-+
-+	d->nbentry += dom->nodes;
-+
-+	return 0;
-+}
-+
-+void domain_check_acc(struct hashtable *domains)
-+{
-+	hashtable_iterate(domains, domain_check_acc_cb, NULL);
-+}
-+
- /*
-  * Local variables:
-  *  mode: C
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 22996e2576..dc4660861e 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -129,4 +129,8 @@ const char *dump_state_connections(FILE *fp);
+ 	/* Start with a random rather low domain count for the hashtable. */
+-	domhash = create_hashtable(8, domhash_fn, domeq_fn, 0);
++	domhash = create_hashtable(NULL, 8, domhash_fn, domeq_fn, 0);
+ 	if (!domhash)
+ 		barf_perror("Failed to allocate domain hashtable");
  
- void read_state_connection(const void *ctx, const void *state);
- 
-+struct hashtable *domain_check_acc_init(void);
-+void domain_check_acc_add(const struct node *node, struct hashtable *domains);
-+void domain_check_acc(struct hashtable *domains);
-+
- #endif /* _XENSTORED_DOMAIN_H */
 -- 
 2.35.3
 
