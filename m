@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9208DC678DB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418E1C678D4
 	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.480358.744734 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.480369.744778 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A3-0006KE-1u; Wed, 18 Jan 2023 09:55:15 +0000
+	id 1pI5A5-00079l-Nk; Wed, 18 Jan 2023 09:55:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 480358.744734; Wed, 18 Jan 2023 09:55:15 +0000
+Received: by outflank-mailman (output) from mailman id 480369.744778; Wed, 18 Jan 2023 09:55:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A2-0006Iv-Rd; Wed, 18 Jan 2023 09:55:14 +0000
-Received: by outflank-mailman (input) for mailman id 480358;
- Wed, 18 Jan 2023 09:55:13 +0000
+	id 1pI5A5-00075w-BQ; Wed, 18 Jan 2023 09:55:17 +0000
+Received: by outflank-mailman (input) for mailman id 480369;
+ Wed, 18 Jan 2023 09:55:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ov7m=5P=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pI56E-0001BV-8S
- for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:18 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1pI562-0001BV-VN
+ for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:07 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 71b3e24a-9715-11ed-b8d1-410ff93cb8f0;
- Wed, 18 Jan 2023 10:49:47 +0100 (CET)
+ id 6b087800-9715-11ed-b8d1-410ff93cb8f0;
+ Wed, 18 Jan 2023 10:49:36 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 726DE20D6A;
- Wed, 18 Jan 2023 09:51:15 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 412E6340AE;
+ Wed, 18 Jan 2023 09:51:04 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4413B139D2;
- Wed, 18 Jan 2023 09:51:15 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 15668139D2;
+ Wed, 18 Jan 2023 09:51:04 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ol1MDxPBx2O9QwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:15 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id aY17AwjBx2OrQwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,109 +53,451 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71b3e24a-9715-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 6b087800-9715-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674035475; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1674035464; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2l4RL275hmrR3HRBC+1HNH4pI7STyKqFIjdegf4upCU=;
-	b=C9tiOcR4l7QScl6Zgbbm6K9Qn84mvRidpF+HZt7+UhiQg61ccnkmL0XY5gLSuCbsUo34sy
-	dgn5oGqBVaMgaODtHF41uMmxiYHtA0zG+0cAJjfIV73uUvf5Z+Y5+gRP3E+Cj8j1ua6Der
-	0HykYByn0V50ZjromoUS09vK8g7H7+s=
+	bh=UVU2p+c8txVUI24FAKxzeXD4L5boxXW/hUAgXWxAShI=;
+	b=gsVyF3gQ1Dumq+OU6saj7iIiCskw7e94KAt7KuJDi9Hgf4dTCHSOr26C04/hVZrlwEGMxh
+	fdbr3ECHco+17JKZGlOhmOijCHyJWnT3YxvSHd+rRHDtg40cpbf8iPlOPFBZMMpd/vIeYW
+	9+Q07yVCRA7LW8gRgYkILBkVys2c+ik=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 10/17] tools/xenstore: make domain_is_unprivileged() an inline function
-Date: Wed, 18 Jan 2023 10:50:09 +0100
-Message-Id: <20230118095016.13091-11-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 08/17] tools/xenstore: change per-domain node accounting interface
+Date: Wed, 18 Jan 2023 10:50:07 +0100
+Message-Id: <20230118095016.13091-9-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230118095016.13091-1-jgross@suse.com>
 References: <20230118095016.13091-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-clang 14 is complaining about a NULL dereference for constructs like:
+Rework the interface and the internals of the per-domain node
+accounting:
 
-  domain_is_unprivileged(conn) ? conn->in : NULL
+- rename the functions to domain_nbentry_*() in order to better match
+  the related counter name
 
-as it can't know that domain_is_unprivileged(conn) will return false
-if conn is NULL.
+- switch from node pointer to domid as interface, as all nodes have the
+  owner filled in
 
-Fix that by making domain_is_unprivileged() an inline function (and
-related to that domid_is_unprivileged(), too).
+- use a common internal function for adding a value to the counter
 
-In order not having to make struct domain public, use conn->id instead
-of conn->domain->domid for the test.
+For the transaction case add a helper function to get the list head
+of the per-transaction changed domains, enabling to eliminate the
+transaction_entry_*() functions.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.h   | 10 ++++++++++
- tools/xenstore/xenstored_domain.c | 11 -----------
- tools/xenstore/xenstored_domain.h |  2 --
- 3 files changed, 10 insertions(+), 13 deletions(-)
+V3:
+- add get_node_owner() (Julien Grall)
+- rename domain_nbentry_add() parameter (Julien Grall)
+- avoid negative entry count (Julien Grall)
+V4:
+- make get_node_owner() an inline function
+---
+ tools/xenstore/xenstored_core.c        |  28 +++---
+ tools/xenstore/xenstored_core.h        |   6 ++
+ tools/xenstore/xenstored_domain.c      | 126 ++++++++++++-------------
+ tools/xenstore/xenstored_domain.h      |  10 +-
+ tools/xenstore/xenstored_transaction.c |  15 +--
+ tools/xenstore/xenstored_transaction.h |   7 +-
+ 6 files changed, 87 insertions(+), 105 deletions(-)
 
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index c82fb6e3d5..4582ee39e1 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -738,13 +738,13 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 
+ 	/* Permissions are struct xs_permissions. */
+ 	node->perms.p = hdr->perms;
+-	node->acc.domid = node->perms.p[0].id;
++	node->acc.domid = get_node_owner(node);
+ 	node->acc.memory = data.dsize;
+ 	if (domain_adjust_node_perms(node))
+ 		goto error;
+ 
+ 	/* If owner is gone reset currently accounted memory size. */
+-	if (node->acc.domid != node->perms.p[0].id)
++	if (node->acc.domid != get_node_owner(node))
+ 		node->acc.memory = 0;
+ 
+ 	/* Data is binary blob (usually ascii, no nul). */
+@@ -1445,7 +1445,7 @@ static void destroy_node_rm(struct connection *conn, struct node *node)
+ static int destroy_node(struct connection *conn, struct node *node)
+ {
+ 	destroy_node_rm(conn, node);
+-	domain_entry_dec(conn, node);
++	domain_nbentry_dec(conn, get_node_owner(node));
+ 
+ 	/*
+ 	 * It is not possible to easily revert the changes in a transaction.
+@@ -1484,7 +1484,7 @@ static struct node *create_node(struct connection *conn, const void *ctx,
+ 	for (i = node; i; i = i->parent) {
+ 		/* i->parent is set for each new node, so check quota. */
+ 		if (i->parent &&
+-		    domain_entry(conn) >= quota_nb_entry_per_domain) {
++		    domain_nbentry(conn) >= quota_nb_entry_per_domain) {
+ 			ret = ENOSPC;
+ 			goto err;
+ 		}
+@@ -1495,7 +1495,7 @@ static struct node *create_node(struct connection *conn, const void *ctx,
+ 
+ 		/* Account for new node */
+ 		if (i->parent) {
+-			if (domain_entry_inc(conn, i)) {
++			if (domain_nbentry_inc(conn, get_node_owner(i))) {
+ 				destroy_node_rm(conn, i);
+ 				return NULL;
+ 			}
+@@ -1648,7 +1648,7 @@ static int delnode_sub(const void *ctx, struct connection *conn,
+ 	watch_exact = strcmp(root, node->name);
+ 	fire_watches(conn, ctx, node->name, node, watch_exact, NULL);
+ 
+-	domain_entry_dec(conn, node);
++	domain_nbentry_dec(conn, get_node_owner(node));
+ 
+ 	return WALK_TREE_RM_CHILDENTRY;
+ }
+@@ -1784,29 +1784,29 @@ static int do_set_perms(const void *ctx, struct connection *conn,
+ 
+ 	/* Unprivileged domains may not change the owner. */
+ 	if (domain_is_unprivileged(conn) &&
+-	    perms.p[0].id != node->perms.p[0].id)
++	    perms.p[0].id != get_node_owner(node))
+ 		return EPERM;
+ 
+ 	old_perms = node->perms;
+-	domain_entry_dec(conn, node);
++	domain_nbentry_dec(conn, get_node_owner(node));
+ 	node->perms = perms;
+-	if (domain_entry_inc(conn, node)) {
++	if (domain_nbentry_inc(conn, get_node_owner(node))) {
+ 		node->perms = old_perms;
+ 		/*
+ 		 * This should never fail because we had a reference on the
+ 		 * domain before and Xenstored is single-threaded.
+ 		 */
+-		domain_entry_inc(conn, node);
++		domain_nbentry_inc(conn, get_node_owner(node));
+ 		return ENOMEM;
+ 	}
+ 
+ 	if (write_node(conn, node, false)) {
+ 		int saved_errno = errno;
+ 
+-		domain_entry_dec(conn, node);
++		domain_nbentry_dec(conn, get_node_owner(node));
+ 		node->perms = old_perms;
+ 		/* No failure possible as above. */
+-		domain_entry_inc(conn, node);
++		domain_nbentry_inc(conn, get_node_owner(node));
+ 
+ 		errno = saved_errno;
+ 		return errno;
+@@ -2378,7 +2378,7 @@ void setup_structure(bool live_update)
+ 		manual_node("/tool/xenstored", NULL);
+ 		manual_node("@releaseDomain", NULL);
+ 		manual_node("@introduceDomain", NULL);
+-		domain_entry_fix(dom0_domid, 5, true);
++		domain_nbentry_fix(dom0_domid, 5, true);
+ 	}
+ 
+ 	check_store();
+@@ -3386,7 +3386,7 @@ void read_state_node(const void *ctx, const void *state)
+ 	if (write_node_raw(NULL, &key, node, true))
+ 		barf("write node error restoring node");
+ 
+-	if (domain_entry_inc(&conn, node))
++	if (domain_nbentry_inc(&conn, get_node_owner(node)))
+ 		barf("node accounting error restoring node");
+ 
+ 	talloc_free(node);
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 62d8ee96bd..6548200d8e 100644
+index 89055cbb21..62d8ee96bd 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -318,6 +318,16 @@ void unmap_xenbus(void *interface);
+@@ -232,6 +232,12 @@ char *canonicalize(struct connection *conn, const void *ctx, const char *node);
+ unsigned int perm_for_conn(struct connection *conn,
+ 			   const struct node_perms *perms);
  
- static inline int xenbus_master_domid(void) { return dom0_domid; }
- 
-+static inline bool domid_is_unprivileged(unsigned int domid)
++/* Get owner of a node. */
++static inline unsigned int get_node_owner(const struct node *node)
 +{
-+	return domid != dom0_domid && domid != priv_domid;
++	return node->perms.p[0].id;
 +}
 +
-+static inline bool domain_is_unprivileged(const struct connection *conn)
-+{
-+	return conn && domid_is_unprivileged(conn->id);
-+}
-+
- /* Return the event channel used by xenbus. */
- evtchn_port_t xenbus_evtchn(void);
- 
+ /* Write a node to the tdb data base. */
+ int write_node_raw(struct connection *conn, TDB_DATA *key, struct node *node,
+ 		   bool no_quota_check);
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index a703c0ef47..10880a32d9 100644
+index 1d765ceffa..703ddeec4e 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -408,17 +408,6 @@ void handle_event(void)
- 		barf_perror("Failed to write to event fd");
+@@ -249,7 +249,7 @@ static int domain_tree_remove_sub(const void *ctx, struct connection *conn,
+ 		domain->nbentry--;
+ 		node->perms.p[0].id = priv_domid;
+ 		node->acc.memory = 0;
+-		domain_entry_inc(NULL, node);
++		domain_nbentry_inc(NULL, priv_domid);
+ 		if (write_node_raw(NULL, &key, node, true)) {
+ 			/* That's unfortunate. We only can try to continue. */
+ 			syslog(LOG_ERR,
+@@ -561,7 +561,7 @@ int acc_fix_domains(struct list_head *head, bool update)
+ 	int cnt;
+ 
+ 	list_for_each_entry(cd, head, list) {
+-		cnt = domain_entry_fix(cd->domid, cd->nbentry, update);
++		cnt = domain_nbentry_fix(cd->domid, cd->nbentry, update);
+ 		if (!update) {
+ 			if (cnt >= quota_nb_entry_per_domain)
+ 				return ENOSPC;
+@@ -606,8 +606,8 @@ static struct changed_domain *acc_get_changed_domain(const void *ctx,
+ 	return cd;
  }
  
--static bool domid_is_unprivileged(unsigned int domid)
--{
--	return domid != dom0_domid && domid != priv_domid;
--}
--
--bool domain_is_unprivileged(struct connection *conn)
--{
--	return conn && conn->domain &&
--	       domid_is_unprivileged(conn->domain->domid);
--}
--
- static char *talloc_domain_path(const void *context, unsigned int domid)
+-int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
+-			unsigned int domid)
++static int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
++			       unsigned int domid)
  {
- 	return talloc_asprintf(context, "/local/domain/%u", domid);
+ 	struct changed_domain *cd;
+ 
+@@ -991,30 +991,6 @@ void domain_deinit(void)
+ 		xenevtchn_unbind(xce_handle, virq_port);
+ }
+ 
+-int domain_entry_inc(struct connection *conn, struct node *node)
+-{
+-	struct domain *d;
+-	unsigned int domid;
+-
+-	if (!node->perms.p)
+-		return 0;
+-
+-	domid = node->perms.p[0].id;
+-
+-	if (conn && conn->transaction) {
+-		transaction_entry_inc(conn->transaction, domid);
+-	} else {
+-		d = (conn && domid == conn->id && conn->domain) ? conn->domain
+-		    : find_or_alloc_existing_domain(domid);
+-		if (d)
+-			d->nbentry++;
+-		else
+-			return ENOMEM;
+-	}
+-
+-	return 0;
+-}
+-
+ /*
+  * Check whether a domain was created before or after a specific generation
+  * count (used for testing whether a node permission is older than a domain).
+@@ -1082,62 +1058,76 @@ int domain_adjust_node_perms(struct node *node)
+ 	return 0;
+ }
+ 
+-void domain_entry_dec(struct connection *conn, struct node *node)
++static int domain_nbentry_add(struct connection *conn, unsigned int domid,
++			      int add, bool no_dom_alloc)
+ {
+ 	struct domain *d;
+-	unsigned int domid;
+-
+-	if (!node->perms.p)
+-		return;
++	struct list_head *head;
++	int ret;
+ 
+-	domid = node->perms.p ? node->perms.p[0].id : conn->id;
++	if (conn && domid == conn->id && conn->domain)
++		d = conn->domain;
++	else if (no_dom_alloc) {
++		d = find_domain_struct(domid);
++		if (!d) {
++			errno = ENOENT;
++			corrupt(conn, "Missing domain %u\n", domid);
++			return -1;
++		}
++	} else {
++		d = find_or_alloc_existing_domain(domid);
++		if (!d) {
++			errno = ENOMEM;
++			return -1;
++		}
++	}
+ 
+ 	if (conn && conn->transaction) {
+-		transaction_entry_dec(conn->transaction, domid);
+-	} else {
+-		d = (conn && domid == conn->id && conn->domain) ? conn->domain
+-		    : find_domain_struct(domid);
+-		if (d) {
+-			d->nbentry--;
+-		} else {
+-			errno = ENOENT;
+-			corrupt(conn,
+-				"Node \"%s\" owned by non-existing domain %u\n",
+-				node->name, domid);
++		head = transaction_get_changed_domains(conn->transaction);
++		ret = acc_add_dom_nbentry(conn->transaction, head, add, domid);
++		if (errno) {
++			fail_transaction(conn->transaction);
++			return -1;
+ 		}
++		/*
++		 * In a transaction when a node is being added/removed AND the
++		 * same node has been added/removed outside the transaction in
++		 * parallel, the resulting number of nodes will be wrong. This
++		 * is no problem, as the transaction will fail due to the
++		 * resulting conflict.
++		 * In the node remove case the resulting number can be even
++		 * negative, which should be avoided.
++		 */
++		return max(d->nbentry + ret, 0);
+ 	}
++
++	d->nbentry += add;
++
++	return d->nbentry;
+ }
+ 
+-int domain_entry_fix(unsigned int domid, int num, bool update)
++int domain_nbentry_inc(struct connection *conn, unsigned int domid)
+ {
+-	struct domain *d;
+-	int cnt;
++	return (domain_nbentry_add(conn, domid, 1, false) < 0) ? errno : 0;
++}
+ 
+-	if (update) {
+-		d = find_domain_struct(domid);
+-		assert(d);
+-	} else {
+-		/*
+-		 * We are called first with update == false in order to catch
+-		 * any error. So do a possible allocation and check for error
+-		 * only in this case, as in the case of update == true nothing
+-		 * can go wrong anymore as the allocation already happened.
+-		 */
+-		d = find_or_alloc_existing_domain(domid);
+-		if (!d)
+-			return -1;
+-	}
++int domain_nbentry_dec(struct connection *conn, unsigned int domid)
++{
++	return (domain_nbentry_add(conn, domid, -1, true) < 0) ? errno : 0;
++}
+ 
+-	cnt = d->nbentry + num;
+-	assert(cnt >= 0);
++int domain_nbentry_fix(unsigned int domid, int num, bool update)
++{
++	int ret;
+ 
+-	if (update)
+-		d->nbentry = cnt;
++	ret = domain_nbentry_add(NULL, domid, update ? num : 0, update);
++	if (ret < 0 || update)
++		return ret;
+ 
+-	return domid_is_unprivileged(domid) ? cnt : 0;
++	return domid_is_unprivileged(domid) ? ret + num : 0;
+ }
+ 
+-int domain_entry(struct connection *conn)
++int domain_nbentry(struct connection *conn)
+ {
+ 	return (domain_is_unprivileged(conn))
+ 		? conn->domain->nbentry
 diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 1e402f2609..22996e2576 100644
+index 9e20d2b17d..1e402f2609 100644
 --- a/tools/xenstore/xenstored_domain.h
 +++ b/tools/xenstore/xenstored_domain.h
-@@ -59,8 +59,6 @@ void ignore_connection(struct connection *conn, unsigned int err);
- /* Returns the implicit path of a connection (only domains have this) */
- const char *get_implicit_path(const struct connection *conn);
- 
--bool domain_is_unprivileged(struct connection *conn);
--
- /* Remove node permissions for no longer existing domains. */
- int domain_adjust_node_perms(struct node *node);
+@@ -66,10 +66,10 @@ int domain_adjust_node_perms(struct node *node);
  int domain_alloc_permrefs(struct node_perms *perms);
+ 
+ /* Quota manipulation */
+-int domain_entry_inc(struct connection *conn, struct node *);
+-void domain_entry_dec(struct connection *conn, struct node *);
+-int domain_entry_fix(unsigned int domid, int num, bool update);
+-int domain_entry(struct connection *conn);
++int domain_nbentry_inc(struct connection *conn, unsigned int domid);
++int domain_nbentry_dec(struct connection *conn, unsigned int domid);
++int domain_nbentry_fix(unsigned int domid, int num, bool update);
++int domain_nbentry(struct connection *conn);
+ int domain_memory_add(unsigned int domid, int mem, bool no_quota_check);
+ 
+ /*
+@@ -99,8 +99,6 @@ void domain_outstanding_domid_dec(unsigned int domid);
+ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		     unsigned int domid);
+ int acc_fix_domains(struct list_head *head, bool update);
+-int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
+-			unsigned int domid);
+ 
+ /* Write rate limiting */
+ 
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index c009c67989..82e5e66c18 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -548,20 +548,9 @@ int do_transaction_end(const void *ctx, struct connection *conn,
+ 	return 0;
+ }
+ 
+-void transaction_entry_inc(struct transaction *trans, unsigned int domid)
++struct list_head *transaction_get_changed_domains(struct transaction *trans)
+ {
+-	if (!acc_add_dom_nbentry(trans, &trans->changed_domains, 1, domid)) {
+-		/* Let the transaction fail. */
+-		trans->fail = true;
+-	}
+-}
+-
+-void transaction_entry_dec(struct transaction *trans, unsigned int domid)
+-{
+-	if (!acc_add_dom_nbentry(trans, &trans->changed_domains, -1, domid)) {
+-		/* Let the transaction fail. */
+-		trans->fail = true;
+-	}
++	return &trans->changed_domains;
+ }
+ 
+ void fail_transaction(struct transaction *trans)
+diff --git a/tools/xenstore/xenstored_transaction.h b/tools/xenstore/xenstored_transaction.h
+index 3417303f94..b6f8cb7d0a 100644
+--- a/tools/xenstore/xenstored_transaction.h
++++ b/tools/xenstore/xenstored_transaction.h
+@@ -36,10 +36,6 @@ int do_transaction_end(const void *ctx, struct connection *conn,
+ 
+ struct transaction *transaction_lookup(struct connection *conn, uint32_t id);
+ 
+-/* inc/dec entry number local to trans while changing a node */
+-void transaction_entry_inc(struct transaction *trans, unsigned int domid);
+-void transaction_entry_dec(struct transaction *trans, unsigned int domid);
+-
+ /* This node was accessed. */
+ int __must_check access_node(struct connection *conn, struct node *node,
+                              enum node_access_type type, TDB_DATA *key);
+@@ -54,6 +50,9 @@ void transaction_prepend(struct connection *conn, const char *name,
+ /* Mark the transaction as failed. This will prevent it to be committed. */
+ void fail_transaction(struct transaction *trans);
+ 
++/* Get the list head of the changed domains. */
++struct list_head *transaction_get_changed_domains(struct transaction *trans);
++
+ void conn_delete_all_transactions(struct connection *conn);
+ int check_transactions(struct hashtable *hash);
+ 
 -- 
 2.35.3
 
