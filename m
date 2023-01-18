@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32E4C38159
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.480363.744749 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC00C6379F
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.480367.744766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A4-0006a0-2T; Wed, 18 Jan 2023 09:55:16 +0000
+	id 1pI5A5-0006tg-2l; Wed, 18 Jan 2023 09:55:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 480363.744749; Wed, 18 Jan 2023 09:55:15 +0000
+Received: by outflank-mailman (output) from mailman id 480367.744766; Wed, 18 Jan 2023 09:55:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A3-0006Z4-K0; Wed, 18 Jan 2023 09:55:15 +0000
-Received: by outflank-mailman (input) for mailman id 480363;
- Wed, 18 Jan 2023 09:55:13 +0000
+	id 1pI5A4-0006oW-JJ; Wed, 18 Jan 2023 09:55:16 +0000
+Received: by outflank-mailman (input) for mailman id 480367;
+ Wed, 18 Jan 2023 09:55:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ov7m=5P=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pI567-0001BV-TY
- for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:11 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
+ id 1pI56J-0001BV-1g
+ for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:23 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6e60f847-9715-11ed-b8d1-410ff93cb8f0;
- Wed, 18 Jan 2023 10:49:42 +0100 (CET)
+ id 750c1099-9715-11ed-b8d1-410ff93cb8f0;
+ Wed, 18 Jan 2023 10:49:53 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D8D8A38943;
- Wed, 18 Jan 2023 09:51:09 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 129CB38943;
+ Wed, 18 Jan 2023 09:51:21 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AA50B139D2;
- Wed, 18 Jan 2023 09:51:09 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D8982139D2;
+ Wed, 18 Jan 2023 09:51:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id CGJnKA3Bx2O1QwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:09 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id MpKXMxjBx2PGQwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e60f847-9715-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 750c1099-9715-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674035469; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1674035481; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=JygJ73dFwifI6ssavbJqcYd36Sd+BW/DYAxzWFIM7/E=;
-	b=EWH3SMhILww2gpd7hcJIBv6pnJY5T6DNSm6IluXhNmNvXorOLLMoyhpVgslfea9FYh7kFl
-	tkz8S6AnDa8gbXiqSJb8dvX4WFRx0d3YT8UmGkIxAzB0t5X+mccVv4wPDU86m3OWF1Mpkd
-	amtqAPLq9mM3QUDZoWYlWoB2+LIEgxs=
+	bh=2z17Fy8IKw0wJOQh7mD0U1wwu980af840nk2P0cdMiQ=;
+	b=Ogm0rr4+ZBh+pjO1bVJmCsaFnBqSuWQs7+Uecg3aCdeRbDOj65q3gvs0rU1mpRhJTi8yUq
+	sOdFOEONydKLBYW4UPh2WCSgGKlcaihgIMtRjh3kFnxN+RaleDumdbTW/d4YkziP0iTKa5
+	IEb3YRWlgRHxCRhNJb/E+7bCPQlB/Hs=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -70,83 +70,74 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 09/17] tools/xenstore: replace literal domid 0 with dom0_domid
-Date: Wed, 18 Jan 2023 10:50:08 +0100
-Message-Id: <20230118095016.13091-10-jgross@suse.com>
+Subject: [PATCH v4 11/17] tools/xenstore: let chk_domain_generation() return a bool
+Date: Wed, 18 Jan 2023 10:50:10 +0100
+Message-Id: <20230118095016.13091-12-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230118095016.13091-1-jgross@suse.com>
 References: <20230118095016.13091-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are some places left where dom0 is associated with domid 0.
+Instead of returning 0 or 1 let chk_domain_generation() return a
+boolean value.
 
-Use dom0_domid instead.
+Simplify the only caller by removing the ret variable.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.c   | 5 +++--
- tools/xenstore/xenstored_domain.c | 8 ++++----
- 2 files changed, 7 insertions(+), 6 deletions(-)
+ tools/xenstore/xenstored_domain.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 4582ee39e1..9cfde76898 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2297,9 +2297,10 @@ static void accept_connection(int sock)
- 		return;
- 
- 	conn = new_connection(&socket_funcs);
--	if (conn)
-+	if (conn) {
- 		conn->fd = fd;
--	else
-+		conn->id = dom0_domid;
-+	} else
- 		close(fd);
- }
- #endif
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 703ddeec4e..a703c0ef47 100644
+index 10880a32d9..391395060e 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -326,7 +326,7 @@ static int destroy_domain(void *_domain)
- 	if (domain->interface) {
- 		/* Domain 0 was mapped by dom0_init, so it must be unmapped
- 		   using munmap() and not the grant unmap call. */
--		if (domain->domid == 0)
-+		if (domain->domid == dom0_domid)
- 			unmap_xenbus(domain->interface);
- 		else
- 			unmap_interface(domain->interface);
-@@ -410,7 +410,7 @@ void handle_event(void)
- 
- static bool domid_is_unprivileged(unsigned int domid)
- {
--	return domid != 0 && domid != priv_domid;
-+	return domid != dom0_domid && domid != priv_domid;
- }
- 
- bool domain_is_unprivileged(struct connection *conn)
-@@ -798,7 +798,7 @@ static struct domain *onearg_domain(struct connection *conn,
- 		return ERR_PTR(-EINVAL);
- 
- 	domid = atoi(domid_str);
--	if (!domid)
-+	if (domid == dom0_domid)
- 		return ERR_PTR(-EINVAL);
- 
- 	return find_connected_domain(domid);
-@@ -1004,7 +1004,7 @@ static int chk_domain_generation(unsigned int domid, uint64_t gen)
+@@ -985,20 +985,20 @@ void domain_deinit(void)
+  * count (used for testing whether a node permission is older than a domain).
+  *
+  * Return values:
+- *  0: domain has higher generation count (it is younger than a node with the
+- *     given count), or domain isn't existing any longer
+- *  1: domain is older than the node
++ *  false: domain has higher generation count (it is younger than a node with
++ *     the given count), or domain isn't existing any longer
++ *  true: domain is older than the node
+  */
+-static int chk_domain_generation(unsigned int domid, uint64_t gen)
++static bool chk_domain_generation(unsigned int domid, uint64_t gen)
  {
  	struct domain *d;
  
--	if (!xc_handle && domid == 0)
-+	if (!xc_handle && domid == dom0_domid)
- 		return 1;
+ 	if (!xc_handle && domid == dom0_domid)
+-		return 1;
++		return true;
  
  	d = find_domain_struct(domid);
+ 
+-	return (d && d->generation <= gen) ? 1 : 0;
++	return d && d->generation <= gen;
+ }
+ 
+ /*
+@@ -1033,14 +1033,12 @@ int domain_alloc_permrefs(struct node_perms *perms)
+ int domain_adjust_node_perms(struct node *node)
+ {
+ 	unsigned int i;
+-	int ret;
+ 
+ 	for (i = 1; i < node->perms.num; i++) {
+ 		if (node->perms.p[i].perms & XS_PERM_IGNORE)
+ 			continue;
+-		ret = chk_domain_generation(node->perms.p[i].id,
+-					    node->generation);
+-		if (!ret)
++		if (!chk_domain_generation(node->perms.p[i].id,
++					   node->generation))
+ 			node->perms.p[i].perms |= XS_PERM_IGNORE;
+ 	}
+ 
 -- 
 2.35.3
 
