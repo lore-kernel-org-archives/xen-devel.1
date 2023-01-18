@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E84AC004D4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96046C32793
 	for <xen-devel@archiver.kernel.org>; Wed, 18 Jan 2023 09:55:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.480362.744741 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.480364.744759 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A3-0006Py-D3; Wed, 18 Jan 2023 09:55:15 +0000
+	id 1pI5A4-0006fe-Ft; Wed, 18 Jan 2023 09:55:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 480362.744741; Wed, 18 Jan 2023 09:55:15 +0000
+Received: by outflank-mailman (output) from mailman id 480364.744759; Wed, 18 Jan 2023 09:55:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pI5A3-0006Oz-5r; Wed, 18 Jan 2023 09:55:15 +0000
-Received: by outflank-mailman (input) for mailman id 480362;
- Wed, 18 Jan 2023 09:55:13 +0000
+	id 1pI5A4-0006eA-0f; Wed, 18 Jan 2023 09:55:16 +0000
+Received: by outflank-mailman (input) for mailman id 480364;
+ Wed, 18 Jan 2023 09:55:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ov7m=5P=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pI56p-0001v4-L2
- for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:55 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
+ id 1pI56O-0001v4-24
+ for xen-devel@lists.xenproject.org; Wed, 18 Jan 2023 09:51:28 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bd8568b3-9715-11ed-91b6-6bf2151ebd3b;
- Wed, 18 Jan 2023 10:51:54 +0100 (CET)
+ id acc8bcbe-9715-11ed-91b6-6bf2151ebd3b;
+ Wed, 18 Jan 2023 10:51:26 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B727B3EAA9;
- Wed, 18 Jan 2023 09:51:54 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A2B9920D6A;
+ Wed, 18 Jan 2023 09:51:26 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8A7C7139D2;
- Wed, 18 Jan 2023 09:51:54 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7587B139D2;
+ Wed, 18 Jan 2023 09:51:26 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id BY56IDrBx2MZRAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:54 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id pZtYGx7Bx2PaQwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 18 Jan 2023 09:51:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,58 +53,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd8568b3-9715-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: acc8bcbe-9715-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674035514; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1674035486; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=oOWWalZWNgxUmz2EcuOumPLWbSmCnLaSwu6nlgaH5og=;
-	b=MnBYQ9rCSeBrpPsHd0awpeK2iE9dO+VVk+UHKc1jbPAbC/tVx88sj6j55NHfvUJA3ae+GF
-	3ONWFIJKVj2I9Hl23kCiQCkPfOnYzIOGNiNmXz5stRxUCLr641M+DfciV4Zyhi0WF7/ocZ
-	f7DbrcOyCyM5IGAhEBHGjVLB/7QiHfE=
+	bh=/4zRIhlp3wD8TB5xvSbPznnaw1mQSoEynNQAxtEv3zI=;
+	b=lmzH1f6y07vvYLyy1pjGwj/56F7ZUrMw7O0DXdZCaLMLVUyBNRPk2nxwkCwKgdMRwehcDT
+	e9kEyggT7/2A4o4OBi9MmOyt1zH9KrvX/socrcLJ9SRaGOaQb+vYSziABLB+9AfaCUcvQ7
+	TiUGHH3OcKSsDei+AFF8IGUfBCg6g0g=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 17/17] tools/xenstore: don't allow creating too many nodes in a transaction
-Date: Wed, 18 Jan 2023 10:50:16 +0100
-Message-Id: <20230118095016.13091-18-jgross@suse.com>
+Subject: [PATCH v4 12/17] tools/xenstore: don't let hashtable_remove() return the removed value
+Date: Wed, 18 Jan 2023 10:50:11 +0100
+Message-Id: <20230118095016.13091-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230118095016.13091-1-jgross@suse.com>
 References: <20230118095016.13091-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The accounting for the number of nodes of a domain in an active
-transaction is not working correctly, as it allows to create arbitrary
-number of nodes. The transaction will finally fail due to exceeding
-the number of nodes quota, but before closing the transaction an
-unprivileged guest could cause Xenstore to use a lot of memory.
+Letting hashtable_remove() return the value of the removed element is
+not used anywhere in Xenstore, and it conflicts with a hashtable
+created specifying the HASHTABLE_FREE_VALUE flag.
+
+So just drop returning the value.
+
+This of course requires to free the value if the HASHTABLE_FREE_VALUE
+was specified, as otherwise it would be a memory leak.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_domain.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+V3:
+- new patch
+V4:
+- make return type void (Julien Grall)
+---
+ tools/xenstore/hashtable.c | 9 ++++-----
+ tools/xenstore/hashtable.h | 3 +--
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 9ef41ede03..7eb9cd077b 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -1116,9 +1116,8 @@ int domain_nbentry_fix(unsigned int domid, int num, bool update)
- 
- int domain_nbentry(struct connection *conn)
- {
--	return (domain_is_unprivileged(conn))
--		? conn->domain->nbentry
--		: 0;
-+	return domain_is_unprivileged(conn)
-+	       ? domain_nbentry_add(conn, conn->id, 0, true) : 0;
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 299549c51e..ddca1591a2 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -214,7 +214,7 @@ hashtable_search(struct hashtable *h, void *k)
  }
  
- static bool domain_chk_quota(struct domain *domain, int mem)
+ /*****************************************************************************/
+-void * /* returns value associated with key */
++void
+ hashtable_remove(struct hashtable *h, void *k)
+ {
+     /* TODO: consider compacting the table when the load factor drops enough,
+@@ -222,7 +222,6 @@ hashtable_remove(struct hashtable *h, void *k)
+ 
+     struct entry *e;
+     struct entry **pE;
+-    void *v;
+     unsigned int hashvalue, index;
+ 
+     hashvalue = hash(h,k);
+@@ -236,16 +235,16 @@ hashtable_remove(struct hashtable *h, void *k)
+         {
+             *pE = e->next;
+             h->entrycount--;
+-            v = e->v;
+             if (h->flags & HASHTABLE_FREE_KEY)
+                 free(e->k);
++            if (h->flags & HASHTABLE_FREE_VALUE)
++                free(e->v);
+             free(e);
+-            return v;
++            return;
+         }
+         pE = &(e->next);
+         e = e->next;
+     }
+-    return NULL;
+ }
+ 
+ /*****************************************************************************/
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index 6d65431f96..780ad3c8f7 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -68,10 +68,9 @@ hashtable_search(struct hashtable *h, void *k);
+  * @name        hashtable_remove
+  * @param   h   the hashtable to remove the item from
+  * @param   k   the key to search for  - does not claim ownership
+- * @return      the value associated with the key, or NULL if none found
+  */
+ 
+-void * /* returns value */
++void
+ hashtable_remove(struct hashtable *h, void *k);
+ 
+ /*****************************************************************************
 -- 
 2.35.3
 
