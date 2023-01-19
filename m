@@ -4,36 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DEFDC6379F
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:04:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481280.746084 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF97C46467
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:36:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481312.746099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaDD-0003PE-S0; Thu, 19 Jan 2023 19:04:35 +0000
+	id 1pIahZ-00081H-Fl; Thu, 19 Jan 2023 19:35:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481280.746084; Thu, 19 Jan 2023 19:04:35 +0000
+Received: by outflank-mailman (output) from mailman id 481312.746099; Thu, 19 Jan 2023 19:35:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaDD-0003Oz-O9; Thu, 19 Jan 2023 19:04:35 +0000
-Received: by outflank-mailman (input) for mailman id 481280;
- Thu, 19 Jan 2023 19:04:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Tmj6=5Q=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pIaDB-0002YR-Jt
- for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 19:04:33 +0000
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 181c29a1-982c-11ed-91b6-6bf2151ebd3b;
- Thu, 19 Jan 2023 20:04:27 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id B288E5C00D8;
- Thu, 19 Jan 2023 14:04:26 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Thu, 19 Jan 2023 14:04:26 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Jan 2023 14:04:25 -0500 (EST)
+	id 1pIahZ-00081A-DB; Thu, 19 Jan 2023 19:35:57 +0000
+Received: by outflank-mailman (input) for mailman id 481312;
+ Thu, 19 Jan 2023 19:35:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=vhZF=5Q=zytor.com=hpa@srs-se1.protection.inumbo.net>)
+ id 1pIahY-000812-83
+ for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 19:35:56 +0000
+Received: from mail.zytor.com (unknown [2607:7c80:54:3::138])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7af6aad2-9830-11ed-b8d1-410ff93cb8f0;
+ Thu, 19 Jan 2023 20:35:52 +0100 (CET)
+Received: from [127.0.0.1] ([73.223.250.219]) (authenticated bits=0)
+ by mail.zytor.com (8.17.1/8.17.1) with ESMTPSA id 30JJZ95D909956
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Thu, 19 Jan 2023 11:35:09 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,180 +42,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 181c29a1-982c-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm3; t=1674155066; x=1674241466; bh=JNxIP18FJG
-	MNUYBP65b84d6ync2Tzl5LK9xIO36ews4=; b=V9s7TGR9vSl2qHXadvBQ5jANqT
-	YsH5gcQlEJ4qUFFblcTOwTDCkjYBGMTnhzWrvyP4wUxzF9P6ReX071u7Zb48fNln
-	9F+erC7wwWxgelTnZ45UxgcZXeIT+nRxk0JHttjDPwkpt3l5oqb7nbPi3WYNE/1F
-	yFd76iqa2KtykXVk3IhbB08edyNj7SA1wavzMY3Kwckjvzo+dCdCsMYrcRETWzWE
-	cSw+wqGejNlAcusrsPK1S1xXsN3HhKiXHa7JGxPmHDyruZJibrhV/bXcPk1vUcRe
-	IJcBMsAFnb/w50ABar0rBJv0QFRh4M012F+pACaYSzQi9qNQClxGy7Y0pYFQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1674155066; x=
-	1674241466; bh=JNxIP18FJGMNUYBP65b84d6ync2Tzl5LK9xIO36ews4=; b=J
-	yFsovdtn/rPqbJClnCW1NgOy8ebOXt8SCkihjpMPPf9x7G9ZOQk+5xgZw8Ebed32
-	nzn2Izk8PB9HN0hf4zwIiqi3L8W2cRDiYfye1ed8QadLqMbq4eIXkFg+GUJu2DCH
-	Sy9IDdfOM3FgggnNEIOfoe9xdvEEGhcV2ATpZD4y/L/sWF7PYfOeiVohtYaCXR+H
-	Kjm/7xuK3iAe1xGkjKdkqx2O3FkokQw//hA7Q2breO9MP4A8rzxTbopzdY/7GGB2
-	B/WRxIk2PnP2Q6kaDkwhGeeyEfXf0cZAxobx/IfCGbQeZcd4ws8JRirIv8xHkMXi
-	NWWMcKT0h8WiQfokCsQvQ==
-X-ME-Sender: <xms:OpTJYz5DUUpMrz1Dur0MLyDT7uTJawS8WOL6m-vcG-RiIiYAsN-QLg>
-    <xme:OpTJY45xIbDMttCiDuEBGEK2fjnPzOaInVP4TWcbUqxjyJO3-hCa-BzQ40ItovfrP
-    zJUXnLoqKScpqs>
-X-ME-Received: <xmr:OpTJY6dFi9QhhR-44F7nQFulDsjlpbg6vVy7IQNKk9oB4kGJL26iqdEdfLrPPTbwdNOOHIwpG7BX>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddutddguddvudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepffgv
-    mhhiucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhih
-    hnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepledukeelleejkeevkeefgefh
-    ffegvdeigeelieegjefffeeiveeivdejgeevteeinecuvehluhhsthgvrhfuihiivgeptd
-    enucfrrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhn
-    ghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:OpTJY0IeuOz5X_yZJp5w-lcaawIxfTKO7JmMMJmyeR55YjylT27NFQ>
-    <xmx:OpTJY3Lyr5JflduQ8P-HoNIqNk7HEfTG7s9A6i3HPN5wLO3OKCcnGQ>
-    <xmx:OpTJY9xCu2ZAZkumpUAKi3ghISqHIYYf3GLWM6DegJlVrTloAbCyzA>
-    <xmx:OpTJY__zreQyAQfy1-bsR7NGxJqlrTH4k20OEKYvOGQNYBWgRLtcSA>
-Feedback-ID: iac594737:Fastmail
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Ard Biesheuvel <ardb@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	linux-efi@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 2/5] efi: xen: Implement memory descriptor lookup based on hypercall
-Date: Thu, 19 Jan 2023 14:03:57 -0500
-Message-Id: <cca4ad8a7d034e207bf1cb1f0571c6491eae9faf.1669264419.git.demi@invisiblethingslab.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
-References: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
+X-Inumbo-ID: 7af6aad2-9830-11ed-b8d1-410ff93cb8f0
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 30JJZ95D909956
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2023010601; t=1674156911;
+	bh=KFNC6n5tjG56AZ6QGCCnA813vxZPvPdVzmseUKYQm/I=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=TfwjDirpObGhbZuqhQo/OjXlYctFSVNIqq7knSM29fRDfZ2tQke+RwtNnj4zfQlUu
+	 Bq7qw2iSUSh4dJSDm7i/EaoS584mAtH8JI0HxllkzWt3z0T8MZU4Yg0NjdsZBw+YZK
+	 ZfM4pgmJ0Ook31LrNi0G4ZIduvwtcQZqBqp0unnHdEG7AuhbJIo+R1m0AcjiUZ0cRr
+	 NKhVSWrU3s9CUZaUwpuO6d8p7hTU5Lu7doD4erJ735/nqwxXHrIi/r4/iUAE4IvqIK
+	 0aAr/sWn86woN3PLoEzLyYRrgoztLvaP7svvxfNwZ4ItddpzPXF3KsA96J5mrIBTMy
+	 XnFHIg1J9H7Nw==
+Date: Thu, 19 Jan 2023 11:35:06 -0800
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
+        Joan Bruguera <joanbrugueram@gmail.com>
+CC: linux-kernel@vger.kernel.org, Juergen Gross <jgross@suse.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        xen-devel <xen-devel@lists.xenproject.org>,
+        Jan Beulich <jbeulich@suse.com>,
+        Roger Pau Monne <roger.pau@citrix.com>,
+        Kees Cook <keescook@chromium.org>, mark.rutland@arm.com,
+        Andrew Cooper <Andrew.Cooper3@citrix.com>,
+        =?ISO-8859-1?Q?J=F6rg_R=F6del?= <joro@8bytes.org>, jroedel@suse.de,
+        kirill.shutemov@linux.intel.com, dave.hansen@intel.com,
+        kai.huang@intel.com
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_1/7=5D_x86/boot=3A_Remove_ve?= =?US-ASCII?Q?rify=5Fcpu=28=29_from_secondary=5Fstartup=5F64=28=29?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <Y8e/yKgVZgbqgvAG@hirez.programming.kicks-ass.net>
+References: <20230116142533.905102512@infradead.org> <20230116143645.589522290@infradead.org> <Y8e/yKgVZgbqgvAG@hirez.programming.kicks-ass.net>
+Message-ID: <5718C98C-C07A-4BD1-9182-7F3A8BDBC605@zytor.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Xen on x86 boots dom0 in EFI mode but without providing a memory map.
-This means that some consistency checks we would like to perform on
-configuration tables or other data structures in memory are not
-currently possible.  Xen does, however, expose EFI memory descriptor
-info via a Xen hypercall, so let's wire that up instead.  It turns out
-that the returned information is not identical to what Linux's
-efi_mem_desc_lookup would return: the address returned is the address
-passed to the hypercall, and the size returned is the number of bytes
-remaining in the configuration table.  However, none of the callers of
-efi_mem_desc_lookup() currently care about this.  In the future, Xen may
-gain a hypercall that returns the actual start address, which can be
-used instead.
+On January 18, 2023 1:45:44 AM PST, Peter Zijlstra <peterz@infradead=2Eorg>=
+ wrote:
+>On Mon, Jan 16, 2023 at 03:25:34PM +0100, Peter Zijlstra wrote:
+>> The boot trampolines from trampoline_64=2ES have code flow like:
+>>=20
+>>   16bit BIOS			SEV-ES				64bit EFI
+>>=20
+>>   trampoline_start()		sev_es_trampoline_start()	trampoline_start_64()
+>>     verify_cpu()			  |				|
+>>   switch_to_protected:    <---------------'				v
+>>        |							pa_trampoline_compat()
+>>        v								|
+>>   startup_32()		<-----------------------------------------------'
+>>        |
+>>        v
+>>   startup_64()
+>>        |
+>>        v
+>>   tr_start() :=3D head_64=2ES:secondary_startup_64()
+>>=20
+>> Since AP bringup always goes through the 16bit BIOS path (EFI doesn't
+>> touch the APs), there is already a verify_cpu() invocation=2E
+>
+>So supposedly TDX/ACPI-6=2E4 comes in on trampoline_startup64() for APs -=
+-
+>can any of the TDX capable folks tell me if we need verify_cpu() on
+>these?
+>
+>Aside from checking for LM, it seems to clear XD_DISABLE on Intel and
+>force enable SSE on AMD/K7=2E Surely none of that is needed for these
+>shiny new chips?
+>
+>I mean, I can hack up a patch that adds verify_cpu() to the 64bit entry
+>point, but it seems really sad to need that on modern systems=2E
 
-Co-developed-by: Ard Biesheuvel <ardb@kernel.org>
-Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
- drivers/firmware/efi/efi.c |  5 ++++-
- drivers/xen/efi.c          | 36 ++++++++++++++++++++++++++++++++++++
- include/linux/efi.h        |  1 +
- 3 files changed, 41 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
-index 780caea594e0ffce30abb69bddcccf3bacf25382..bcb848e44e7b1350b10b7c0479c0b38d980fe37d 100644
---- a/drivers/firmware/efi/efi.c
-+++ b/drivers/firmware/efi/efi.c
-@@ -456,7 +456,7 @@ void __init efi_find_mirror(void)
-  * and if so, populate the supplied memory descriptor with the appropriate
-  * data.
-  */
--int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
-+int __efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
- {
- 	efi_memory_desc_t *md;
- 
-@@ -490,6 +490,9 @@ int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
- 	return -ENOENT;
- }
- 
-+extern int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
-+	__weak __alias(__efi_mem_desc_lookup);
-+
- /*
-  * Calculate the highest address of an efi memory descriptor.
-  */
-diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
-index d1ff2186ebb48a7c0981ecb6d4afcbbb25ffcea0..3c792353b7308f9c2bf0a888eda9f827aa9177f8 100644
---- a/drivers/xen/efi.c
-+++ b/drivers/xen/efi.c
-@@ -26,6 +26,7 @@
- 
- #include <xen/interface/xen.h>
- #include <xen/interface/platform.h>
-+#include <xen/page.h>
- #include <xen/xen.h>
- #include <xen/xen-ops.h>
- 
-@@ -292,3 +293,38 @@ void __init xen_efi_runtime_setup(void)
- 	efi.get_next_high_mono_count	= xen_efi_get_next_high_mono_count;
- 	efi.reset_system		= xen_efi_reset_system;
- }
-+
-+int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
-+{
-+	static_assert(XEN_PAGE_SHIFT == EFI_PAGE_SHIFT,
-+	              "Mismatch between EFI_PAGE_SHIFT and XEN_PAGE_SHIFT");
-+	struct xen_platform_op op;
-+	union xenpf_efi_info *info = &op.u.firmware_info.u.efi_info;
-+	int rc;
-+
-+	if (!efi_enabled(EFI_PARAVIRT) || efi_enabled(EFI_MEMMAP))
-+		return __efi_mem_desc_lookup(phys_addr, out_md);
-+	phys_addr &= ~(u64)(EFI_PAGE_SIZE - 1);
-+	op = (struct xen_platform_op) {
-+		.cmd = XENPF_firmware_info,
-+		.u.firmware_info = {
-+			.type = XEN_FW_EFI_INFO,
-+			.index = XEN_FW_EFI_MEM_INFO,
-+			.u.efi_info.mem.addr = phys_addr,
-+			.u.efi_info.mem.size = U64_MAX - phys_addr,
-+		},
-+	};
-+
-+	rc = HYPERVISOR_platform_op(&op);
-+	if (rc) {
-+		pr_warn("Failed to lookup header 0x%llx in Xen memory map: error %d\n",
-+		        phys_addr, rc);
-+	}
-+
-+	out_md->phys_addr	= info->mem.addr;
-+	out_md->num_pages	= info->mem.size >> EFI_PAGE_SHIFT;
-+	out_md->type    	= info->mem.type;
-+	out_md->attribute	= info->mem.attr;
-+
-+	return 0;
-+}
-diff --git a/include/linux/efi.h b/include/linux/efi.h
-index f87b2f5db9f83db6f7488648fe99a8f8fc4fdf04..b407a302b730a6cc7481afa0f582360e59faf1e0 100644
---- a/include/linux/efi.h
-+++ b/include/linux/efi.h
-@@ -724,6 +724,7 @@ extern u64 efi_mem_attribute (unsigned long phys_addr, unsigned long size);
- extern int __init efi_uart_console_only (void);
- extern u64 efi_mem_desc_end(efi_memory_desc_t *md);
- extern int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md);
-+extern int __efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md);
- extern void efi_mem_reserve(phys_addr_t addr, u64 size);
- extern int efi_mem_reserve_persistent(phys_addr_t addr, u64 size);
- extern void efi_initialize_iomem_resources(struct resource *code_resource,
--- 
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
+Sad, perhaps, but really better for orthogonality =E2=80=93 fewer special =
+cases=2E
 
