@@ -4,39 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FFDBC004D4
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 14:07:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481129.745821 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB6AC004D4
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 14:20:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481164.745883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIVZo-0002xf-QF; Thu, 19 Jan 2023 14:07:36 +0000
+	id 1pIVmA-0008GG-PE; Thu, 19 Jan 2023 14:20:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481129.745821; Thu, 19 Jan 2023 14:07:36 +0000
+Received: by outflank-mailman (output) from mailman id 481164.745883; Thu, 19 Jan 2023 14:20:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIVZo-0002xY-N2; Thu, 19 Jan 2023 14:07:36 +0000
-Received: by outflank-mailman (input) for mailman id 481129;
- Thu, 19 Jan 2023 14:07:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qz+V=5Q=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pIVZn-0002xN-7c
- for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 14:07:35 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9ea73882-9802-11ed-91b6-6bf2151ebd3b;
- Thu, 19 Jan 2023 15:07:33 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- q10-20020a1cf30a000000b003db0edfdb74so2861033wmq.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Jan 2023 06:07:33 -0800 (PST)
-Received: from localhost.localdomain
- (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
- by smtp.gmail.com with ESMTPSA id
- m27-20020a05600c3b1b00b003db012d49b7sm7710178wms.2.2023.01.19.06.07.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Jan 2023 06:07:32 -0800 (PST)
+	id 1pIVmA-0008G9-Mm; Thu, 19 Jan 2023 14:20:22 +0000
+Received: by outflank-mailman (input) for mailman id 481164;
+ Thu, 19 Jan 2023 14:20:22 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1pIVmA-0008G3-Bb
+ for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 14:20:22 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pIVmA-0004Ju-2f; Thu, 19 Jan 2023 14:20:22 +0000
+Received: from 54-240-197-239.amazon.com ([54.240.197.239]
+ helo=[192.168.13.107]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pIVm9-0006jp-SJ; Thu, 19 Jan 2023 14:20:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,144 +41,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ea73882-9802-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xpr2uf8npxwXpcyJBFnTtrCJsIs2f2Gz+5f3ThRTvss=;
-        b=fGEadkPpLrWopmV8jAeLgieIRkOkzcOXNzVDAeFWDFU3tzfEF4oMGuISb6Qqp+3O+Y
-         9GSMbsgdpCLs+7C2/saNzNF9ZGhdZTYIaZTmKi2O8NfPm/WA1O+43ynX4s+eUKvP36RC
-         vondfMTSTFgVyo72kZSZLbdgEIxUt7kMg7CYijFvxlHy5GKSbNIO9+J7f+k/Q9dZBkZT
-         7zLFrwpVGETpoIPCTyxxhVdc0wE4QrDTIRgCZ8ipJQ4YBDem9bcY5BRfhYoeUwi6GkWx
-         3Qx2n13Q0l0g90lNhjXYS9NBJOSx5RUAiHU7IAeBDWEyMzMeGvIfjfvzlddDWfGMt2Uq
-         A1zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xpr2uf8npxwXpcyJBFnTtrCJsIs2f2Gz+5f3ThRTvss=;
-        b=NJj5f+pSUBjLWiUFp/XokfxdCatG/dYMl9bZyU0C8fJ6ek8PvEQZZhUaMMp6WkQASu
-         hutQag1A2p9GmguWCwQbzhK9xRyIptTQmrgTR/pOE6sLvCixGNLxgY9qYDCbQv4E6kpM
-         EQUzHWYigAQFqKWQXa6LL4E7C0Sc1n/QPiasfVsD/zHh585yAcfZWGB1DFUx6WwsdFg4
-         iQq3TRVgKOCWCtkYQQySaFnSIRsnQzowgIscUNQhuArPtBtHHEsMrNpkVy2R9q4rkhFH
-         sIJBhtJfqyKiNdFdqEhvMXnQCsuhcEvmJklSxLxCNT8Mbyg0cGraRAPJ353p+zbp51mB
-         eojg==
-X-Gm-Message-State: AFqh2kpDuQj3YAmyBiE2ZEK39f/t00kORRKch7bUXXHVtaQNEQN2sA+X
-	z2Q7UmFT+6MMCET4vqJf8vDajh2RsRqKnbVk
-X-Google-Smtp-Source: AMrXdXtRJwAkOtx/qVNfyL9WXQMOg8KfxHeU+1sAFlqO4pUmTiEZ9Kt8H7bHUzuSaqixcgVJnO49ng==
-X-Received: by 2002:a7b:c4ca:0:b0:3da:17f5:57b9 with SMTP id g10-20020a7bc4ca000000b003da17f557b9mr10744380wmk.5.1674137253027;
-        Thu, 19 Jan 2023 06:07:33 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v5 0/5]  Basic early_printk and smoke test implementation
-Date: Thu, 19 Jan 2023 16:07:17 +0200
-Message-Id: <cover.1674131459.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.39.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=amZswHTQjsYeHewrevFLzhZrNwSS5O/8T/WGMeSpCI0=; b=2oJX94asqNNDyDZeCWivruVNr7
+	+Dad3hiYB+qLnn8BM2WvIoWC38ECoBsOLotUiGkSZwO+zhP7kcHJWxOq/DrDvbu5WmWVP81EsY6EH
+	J7TDtYY4gkFfYfCtWaSc3HDQI+4uHqI5/JezEUeg3QBgH7euLSlDL5PMeI3SI0zTW9AE=;
+Message-ID: <f42681d3-c08f-24bd-8f10-aa53930081b0@xen.org>
+Date: Thu, 19 Jan 2023 14:20:20 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH v2 10/40] xen/arm: split MMU and MPU config files from
+ config.h
+Content-Language: en-US
+To: Penny Zheng <Penny.Zheng@arm.com>, xen-devel@lists.xenproject.org
+Cc: wei.chen@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230113052914.3845596-1-Penny.Zheng@arm.com>
+ <20230113052914.3845596-11-Penny.Zheng@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20230113052914.3845596-11-Penny.Zheng@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The patch series introduces the following:
-- the minimal set of headers and changes inside them.
-- SBI (RISC-V Supervisor Binary Interface) things necessary for basic
-  early_printk implementation.
-- things needed to set up the stack.
-- early_printk() function to print only strings.
-- RISC-V smoke test which checks if  "Hello from C env" message is
-  present in serial.tmp
+Hi,
 
-The patch series is rebased on top of the patch "include/types: move
-stddef.h-kind types to common header" [1]
+On 13/01/2023 05:28, Penny Zheng wrote:
+> From: Wei Chen <wei.chen@arm.com>
+> 
+> Xen defines some global configuration macros for Arm in
+> config.h. We still want to use it for Armv8-R systems, but
+> there are some address related macros that are defined for
+> MMU systems. These macros will not be used by MPU systems,
+> Adding ifdefery with CONFIG_HAS_MPU to gate these macros
+> will result in a messy and hard-to-read/maintain code.
+> 
+> So we keep some common definitions still in config.h, but
+> move virtual address related definitions to a new file -
+> config_mmu.h. And use a new file config_mpu.h to store
+> definitions for MPU systems. To avoid spreading #ifdef
+> everywhere, we keep the same definition names for MPU
+> systems, like XEN_VIRT_START and HYPERVISOR_VIRT_START,
+> but the definition contents are MPU specific.
+> 
+> Signed-off-by: Wei Chen <wei.chen@arm.com>
+> ---
+> v1 -> v2:
+> 1. Remove duplicated FIXMAP definitions from config_mmu.h
+> ---
+>   xen/arch/arm/include/asm/config.h     | 103 +++--------------------
+>   xen/arch/arm/include/asm/config_mmu.h | 112 ++++++++++++++++++++++++++
+>   xen/arch/arm/include/asm/config_mpu.h |  25 ++++++
 
-[1] https://lore.kernel.org/xen-devel/5a0a9e2a-c116-21b5-8081-db75fe4178d7@suse.com/
+I think this patch wants to be split in two. So we keep code movement 
+separate from the introduction of new feature (e.g. MPU).
 
----
-Changes in V5:
-  - Code style fixes
-  - Remove size_t from asm/types after rebase on top of the patch
-    "include/types: move stddef.h-kind types to common header". [1]
+Furthermore, I think it would be better to name the new header layout_* 
+(or similar).
 
-    All other types were back as they are used in <xen/types.h>
-  - Update <xen/early_printk.h> after rebase on top of [1] as size_t was moved from
-    <asm/types.h> to <xen/types.h>
-  - Remove unneeded <xen/errno.h> from sbi.c
-  - Change an error message of #error in case of __riscv_cmodel_medany isn't defined
----
-Changes in V4:
-    - Patches "xen/riscv: introduce dummy asm/init.h" and "xen/riscv: introduce
-      stack stuff" were removed from the patch series as they were merged separately
-      into staging.
-    - Remove "depends on RISCV*" from Kconfig.debug as Kconfig.debug is located
-      in arch specific folder.
-    - fix code style.
-    - Add "ifdef __riscv_cmodel_medany" to early_printk.c.  
----
-Changes in V3:
-    - Most of "[PATCH v2 7/8] xen/riscv: print hello message from C env"
-      was merged with [PATCH v2 3/6] xen/riscv: introduce stack stuff.
-    - "[PATCH v2 7/8] xen/riscv: print hello message from C env" was
-      merged with "[PATCH v2 6/8] xen/riscv: introduce early_printk basic
-      stuff".
-    - "[PATCH v2 5/8] xen/include: include <asm/types.h> in
-      <xen/early_printk.h>" was removed as it has been already merged to
-      mainline staging.
-    - code style fixes.
----
-Changes in V2:
-    - update commit patches commit messages according to the mailing
-      list comments
-    - Remove unneeded types in <asm/types.h>
-    - Introduce definition of STACK_SIZE
-    - order the files alphabetically in Makefile
-    - Add license to early_printk.c
-    - Add RISCV_32 dependecy to config EARLY_PRINTK in Kconfig.debug
-    - Move dockerfile changes to separate config and sent them as
-      separate patch to mailing list.
-    - Update test.yaml to wire up smoke test
----
+Lastly, you are going to introduce several file with _mmu or _mpu. I 
+would rather prefer if we create directory instead.
 
-Bobby Eshleman (1):
-  xen/riscv: introduce sbi call to putchar to console
 
-Oleksii Kurochko (4):
-  xen/include: Change <asm/types.h> to <xen/types.h>
-  xen/riscv: introduce asm/types.h header file
-  xen/riscv: introduce early_printk basic stuff
-  automation: add RISC-V smoke test
+>   3 files changed, 147 insertions(+), 93 deletions(-)
+>   create mode 100644 xen/arch/arm/include/asm/config_mmu.h
+>   create mode 100644 xen/arch/arm/include/asm/config_mpu.h
+> 
+> diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+> index 25a625ff08..86d8142959 100644
+> --- a/xen/arch/arm/include/asm/config.h
+> +++ b/xen/arch/arm/include/asm/config.h
+> @@ -48,6 +48,12 @@
+>   
+>   #define INVALID_VCPU_ID MAX_VIRT_CPUS
+>   
+> +/* Used for calculating PDX */
 
- automation/gitlab-ci/test.yaml            | 20 +++++++
- automation/scripts/qemu-smoke-riscv64.sh  | 20 +++++++
- xen/arch/riscv/Kconfig.debug              |  5 ++
- xen/arch/riscv/Makefile                   |  2 +
- xen/arch/riscv/early_printk.c             | 45 +++++++++++++++
- xen/arch/riscv/include/asm/early_printk.h | 12 ++++
- xen/arch/riscv/include/asm/sbi.h          | 34 +++++++++++
- xen/arch/riscv/include/asm/types.h        | 70 +++++++++++++++++++++++
- xen/arch/riscv/sbi.c                      | 44 ++++++++++++++
- xen/arch/riscv/setup.c                    |  4 ++
- xen/include/xen/early_printk.h            |  2 +-
- 11 files changed, 257 insertions(+), 1 deletion(-)
- create mode 100755 automation/scripts/qemu-smoke-riscv64.sh
- create mode 100644 xen/arch/riscv/early_printk.c
- create mode 100644 xen/arch/riscv/include/asm/early_printk.h
- create mode 100644 xen/arch/riscv/include/asm/sbi.h
- create mode 100644 xen/arch/riscv/include/asm/types.h
- create mode 100644 xen/arch/riscv/sbi.c
+I am not entirely sure to understand the purpose of this comment.
+
+> +#ifdef CONFIG_ARM_64
+> +#define FRAMETABLE_SIZE        GB(32)
+> +#define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
+> +#endif
+> +
+
+Why do you only keep the 64-bit version in config.h?
+
+However... the frametable size is limited by the space we reserve in the 
+virtual address space. This would not be the case for the MPU.
+
+So having the limit in common seems a bit odd. In fact, I think we 
+should look at getting rid of the limit for the MPU.
+
+[...]
+
+> diff --git a/xen/arch/arm/include/asm/config_mmu.h b/xen/arch/arm/include/asm/config_mmu.h
+> new file mode 100644
+> index 0000000000..c12ff25cf4
+> --- /dev/null
+> +++ b/xen/arch/arm/include/asm/config_mmu.h
+> @@ -0,0 +1,112 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/******************************************************************************
+> + * config_mmu.h
+> + *
+> + * A Linux-style configuration list, only can be included by config.h
+
+Why do you need to restrict where this is included? And if you really 
+need it, then you should check it.
+
+Cheers,
 
 -- 
-2.39.0
-
+Julien Grall
 
