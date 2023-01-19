@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECC9C6379F
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:04:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481275.746044 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C3BC6379F
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:04:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481276.746054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaCv-0002F8-Op; Thu, 19 Jan 2023 19:04:17 +0000
+	id 1pIaDB-0002bd-0t; Thu, 19 Jan 2023 19:04:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481275.746044; Thu, 19 Jan 2023 19:04:17 +0000
+Received: by outflank-mailman (output) from mailman id 481276.746054; Thu, 19 Jan 2023 19:04:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaCv-0002F1-LG; Thu, 19 Jan 2023 19:04:17 +0000
-Received: by outflank-mailman (input) for mailman id 481275;
- Thu, 19 Jan 2023 19:04:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pIaDA-0002bV-TE; Thu, 19 Jan 2023 19:04:32 +0000
+Received: by outflank-mailman (input) for mailman id 481276;
+ Thu, 19 Jan 2023 19:04:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Tmj6=5Q=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pIaCu-0002Ev-3p
- for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 19:04:16 +0000
+ id 1pIaD9-0002YR-Qf
+ for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 19:04:31 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0e529f3a-982c-11ed-b8d1-410ff93cb8f0;
- Thu, 19 Jan 2023 20:04:11 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id 2CAD05C0164;
- Thu, 19 Jan 2023 14:04:10 -0500 (EST)
+ [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1943d3c7-982c-11ed-91b6-6bf2151ebd3b;
+ Thu, 19 Jan 2023 20:04:29 +0100 (CET)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id A24985C0127;
+ Thu, 19 Jan 2023 14:04:28 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Thu, 19 Jan 2023 14:04:10 -0500
+ by compute5.internal (MEProxy); Thu, 19 Jan 2023 14:04:28 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Jan 2023 14:04:09 -0500 (EST)
+ 19 Jan 2023 14:04:27 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,47 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e529f3a-982c-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 1943d3c7-982c-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1674155050; x=1674241450; bh=DWSmhiY53c1fCxHo8+QDF152rmPtSJZJfbo
-	sjDMfwaA=; b=mIINDxvzEWW1TOvsfQmK1217TTk1+rcauO+ev2im7SruFDL9Z+x
-	I55qi7LfuGXU580EJe6mvU4RT7u0J3pg94ZMtAuJIISKsDjBgGYHm/1qUR0H4mpD
-	WM4Jwzgadwn5ZNCtd7cLSP4GryJwgDS5tcqiZ2WuF0VFHlEmP0H12XXwgw/bA2VM
-	D+ORqlOnF1PXQlBxQpvla9356m5aUhMW3cuir7ViyU9szXwO4+XtoqBT5aEiz5Z7
-	ql0MnXUoqLcmdaq7T/SdfozkryrUH03Gdwqm8AVPB3xW7HVRnQ1y36b9h4dUJvWi
-	8I5N/bGK0y223R25ysBur+t/EufqWCdd5Kw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1674155050; x=1674241450; bh=DWSmhiY53c1fC
-	xHo8+QDF152rmPtSJZJfbosjDMfwaA=; b=UoYj+qtsnWGUKKUdT4zCotFPuyjZs
-	ve1NZ2BaZwMeJ+xH9VClymTkxYMPmU8X6ky3uNjs14U7UyKqCuY0gNGW2nslmRFU
-	JUOc0SzGRsxNmQZaJICDHvnanyJeSIJyq4qJkHvlVH3rsKnzOV1ip8oWbCSaK/G8
-	ZY9p2YKLdoisEOPKoIY3YBttNmwp4onjcG0Dc/YQgOE8g5iwuzNH4KQRhZ8Ndq46
-	AQQxtVI952u5yMcNOzkWIpTc5U6zwE7GrpHabea+8R2Jb14xo/lgRPS8yRNckDYK
-	xqsdEcZAaBe7PJvXkRN6eOLjM/CMAUiJKFHP4rsN0Aq6KfFvwaO0XFURQ==
-X-ME-Sender: <xms:KZTJY5kxRBbHsi58SSGXG0thzHypBrE0ywzVyRgSh8rhyiH1g3VK-Q>
-    <xme:KZTJY02wmm7OwC6JqVT4x2pEI4Ek4GZ_RtIfkFVT9Ul4nJWPrkyIHH2DV1qStLBgB
-    vFQ4VZUBhJmX9k>
-X-ME-Received: <xmr:KZTJY_qWnlZnCAO0qq42vjpQRJ6z44snfew9zof9wJiNHQBaEyRhIAAcj6RftpriZbTjj9YNVRJD>
+	:subject:to:to; s=fm3; t=1674155068; x=1674241468; bh=iAve/Gqvno
+	UrklJx76JsPi9tOXPhkOndFsIm/wBRVc0=; b=B9VLgkfAr/7249QjOT39QtxfRv
+	APPspvfWvL6fuDe6zW3+pifMYFXwfEI+IGcd6gUisGfx3fFR6zwpKDMaFcGsDYjd
+	E313x+xuAnRGczFIKTKMOChtctBXqmc7KzKo3eKA+re/WmlYCYEzxZMxfdJMugF7
+	L6E5Oue7bH6z436+4IafefMY9ZYIdXrm0a0pjGxxf0FPEakxFQctWRIES4eWxWu2
+	Yf1bT/5jTCGixgfl+wcrkXCnFrY+jh+29T2rd3PMNmGcXJAPEtDpj/vYpx7p38Kx
+	Av4Co/J/ZoABgjw6cChO5T5eVpQcHljE6yFPj5cg52HtU5FY7DpLpMkBhwug==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1674155068; x=
+	1674241468; bh=iAve/GqvnoUrklJx76JsPi9tOXPhkOndFsIm/wBRVc0=; b=Z
+	udXHlylSgOZXsETO57hjNC/qoXFauOzCK1dNKjA2XSqYPrBllsHZT6ntMGWz2V8u
+	BelrZMZiHOMJQ0s3hJEJLbFbg+ykRhWquY4QvBAisG5ELnH/6GAlzN7+u2BVTbjR
+	FbQLjKCRdbVKbpASVWSl/TuT2wrbynC0GVo/e2T6+3ochP6KfXKvdw834ANEN9Xq
+	wCuAdFe0k7K1XJVZSm6u9yL9wmGhdEj6s7F4PIkR3tc3qMjyZFxzQckvE2JnmyCM
+	P7CYrNEsfzLupOPL+ruGD75A8cP8an4BLDTbCfW7i70MXTQ03Q7sxs/OCKAcrkPE
+	yMSHDZ9+TMNlllnRUou0g==
+X-ME-Sender: <xms:PJTJY_zuzXYRodxycES-1yHCoQVY_E-n56Ft67-UXy6yk7-4piKsaA>
+    <xme:PJTJY3RFq7qLgmAgHECoOEaGwjpJBfDw_SbU9rNm24aRQ6dZ69wOZYuKP_xdQZkaE
+    rrL9IpbHdjQruQ>
+X-ME-Received: <xmr:PJTJY5Uio_FtDb9GTvtKgmylTuWFjOJiaCwVVMgFuKmUM1usPVb3MqzeMdVuYzlbrwsLhRLqk_uT>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddutddguddvudcutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghm
-    ihcuofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinh
-    hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefg
-    hefghffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtne
-    curfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhg
-    shhlrggsrdgtohhm
-X-ME-Proxy: <xmx:KZTJY5lQhpx0TLu1FIedmKRxrwKBKNsirPTu2rgwc81AdXdowggaqg>
-    <xmx:KZTJY32L6Yg4VlAjM-EBSUH6sB3f_BMV-kTrynK3dmsKf0fx3Dgh9Q>
-    <xmx:KZTJY4tO5ZxrmnCj9Or9SivEJ5tQP29NyVj_9NIaj9B3vSUHZDyRhg>
-    <xmx:KpTJYxovdbTDQlMID3b5Xe01VE9uVnvHDQo-ibZJhp2YeqNeyiGVzQ>
+    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepffgv
+    mhhiucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhih
+    hnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepledukeelleejkeevkeefgefh
+    ffegvdeigeelieegjefffeeiveeivdejgeevteeinecuvehluhhsthgvrhfuihiivgeptd
+    enucfrrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhn
+    ghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:PJTJY5gDx88SFiFrhr4xC9pF-OoySYrpDeD9-o3p2ucJHNZP1FjgrA>
+    <xmx:PJTJYxDcWqEH881XZ1H_C2JAhcqVC1tNqsaXSkFyN3L019FCxApJ1A>
+    <xmx:PJTJYyKvDJWKAQEoQYNWHJOx-6BqdbdWtwsDzUG8FiRHYpwbEaJ8bQ>
+    <xmx:PJTJYz0LxTt6btYPWmix9P1j-8Yckpu9atABFe-bV4wfbMe21L12wA>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Ard Biesheuvel <ardb@kernel.org>,
@@ -97,33 +98,51 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	linux-efi@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 0/5] efi: Support ESRT under Xen
-Date: Thu, 19 Jan 2023 14:03:55 -0500
-Message-Id: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
+Subject: [PATCH v3 4/5] efi: Actually enable the ESRT under Xen
+Date: Thu, 19 Jan 2023 14:03:59 -0500
+Message-Id: <26938d59bb398bea7e8f43d03a9c75189fa3b4cc.1669264419.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20221003112625.972646-1-ardb@kernel.org>
-References: <20221003112625.972646-1-ardb@kernel.org>
+In-Reply-To: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
+References: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This patch series fixes handling of EFI tables when running under Xen.
-These fixes allow the ESRT to be loaded when running paravirtualized in
-dom0, making the use of EFI capsule updates possible.
+The ESRT can be parsed if EFI_PARAVIRT is enabled, even if EFI_MEMMAP is
+not.  Also allow the ESRT to be in reclaimable memory, as that is where
+future Xen versions will put it.
 
-Demi Marie Obenour (5):
-  efi: memmap: Disregard bogus entries instead of returning them
-  efi: xen: Implement memory descriptor lookup based on hypercall
-  efi: Apply allowlist to EFI configuration tables when running under
-    Xen
-  efi: Actually enable the ESRT under Xen
-  efi: Warn if trying to reserve memory under Xen
+Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ drivers/firmware/efi/esrt.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
- drivers/firmware/efi/efi.c  | 22 ++++++++++++-
- drivers/firmware/efi/esrt.c | 15 +++------
- drivers/xen/efi.c           | 61 +++++++++++++++++++++++++++++++++++++
- include/linux/efi.h         |  3 ++
- 4 files changed, 90 insertions(+), 11 deletions(-)
-
+diff --git a/drivers/firmware/efi/esrt.c b/drivers/firmware/efi/esrt.c
+index fb9fb70e1004132eff50c712c6fca05f7aeb1d57..87729c365be1a804bb84e0b1ab874042848327b4 100644
+--- a/drivers/firmware/efi/esrt.c
++++ b/drivers/firmware/efi/esrt.c
+@@ -247,7 +247,7 @@ void __init efi_esrt_init(void)
+ 	int rc;
+ 	phys_addr_t end;
+ 
+-	if (!efi_enabled(EFI_MEMMAP))
++	if (!efi_enabled(EFI_MEMMAP) && !efi_enabled(EFI_PARAVIRT))
+ 		return;
+ 
+ 	pr_debug("esrt-init: loading.\n");
+@@ -258,7 +258,9 @@ void __init efi_esrt_init(void)
+ 	if (rc < 0 ||
+ 	    (!(md.attribute & EFI_MEMORY_RUNTIME) &&
+ 	     md.type != EFI_BOOT_SERVICES_DATA &&
+-	     md.type != EFI_RUNTIME_SERVICES_DATA)) {
++	     md.type != EFI_RUNTIME_SERVICES_DATA &&
++	     md.type != EFI_ACPI_RECLAIM_MEMORY &&
++	     md.type != EFI_ACPI_MEMORY_NVS)) {
+ 		pr_warn("ESRT header is not in the memory map.\n");
+ 		return;
+ 	}
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
