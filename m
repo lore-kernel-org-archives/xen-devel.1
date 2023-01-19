@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C35C004D4
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:04:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481277.746060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB08C678D6
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 19:04:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481278.746064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaDB-0002eG-AB; Thu, 19 Jan 2023 19:04:33 +0000
+	id 1pIaDB-0002kh-KP; Thu, 19 Jan 2023 19:04:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481277.746060; Thu, 19 Jan 2023 19:04:33 +0000
+Received: by outflank-mailman (output) from mailman id 481278.746064; Thu, 19 Jan 2023 19:04:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIaDB-0002dP-3c; Thu, 19 Jan 2023 19:04:33 +0000
-Received: by outflank-mailman (input) for mailman id 481277;
+	id 1pIaDB-0002hr-Cn; Thu, 19 Jan 2023 19:04:33 +0000
+Received: by outflank-mailman (input) for mailman id 481278;
  Thu, 19 Jan 2023 19:04:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Tmj6=5Q=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pIaDA-0002Ev-9A
+ id 1pIaDA-0002YR-Jo
  for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 19:04:32 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 19ea16b0-982c-11ed-b8d1-410ff93cb8f0;
- Thu, 19 Jan 2023 20:04:30 +0100 (CET)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id AEF315C011B;
- Thu, 19 Jan 2023 14:04:29 -0500 (EST)
+ [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 18b41409-982c-11ed-91b6-6bf2151ebd3b;
+ Thu, 19 Jan 2023 20:04:28 +0100 (CET)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.nyi.internal (Postfix) with ESMTP id B0BC15C0113;
+ Thu, 19 Jan 2023 14:04:27 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Thu, 19 Jan 2023 14:04:29 -0500
+ by compute1.internal (MEProxy); Thu, 19 Jan 2023 14:04:27 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Jan 2023 14:04:28 -0500 (EST)
+ 19 Jan 2023 14:04:26 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19ea16b0-982c-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 18b41409-982c-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm3; t=1674155069; x=1674241469; bh=xD2qxTwi/N
-	WHKFJGn9LwYuXdkJ4R6DAu/R1nUg2IBG0=; b=ecpOATQXTQt1OzoFqAbAKuwXQ0
-	P3/N3pE/0VHkO79vVJS3N2J/Rd4OQ2EYsI/8JxXuur6kDGkZ6YVocJ3ySEUWk9sC
-	K3u1L8gMGZBo+8OxBCdShJo0RDA5nrICMOoSEOaa0IxOduZBwf0q3IapL+OfngmB
-	qq68kfN1SIuWl2sPQqLNmvwmLM5M8tKqLAQw1dPgLuhAXER+We9ER2vT/0rFHt6v
-	VPvkPbqobs1C0lFmmpD5kzpb7eKPmgN/VbMHV3WrKL6sYlN6EnWMOoKCcGUnJf3D
-	xIgcJQBzGbgxqP2O6HsGOPlUUUUy8A4uRmxNbK/CJUhgFUalagYHzy6T171A==
+	:subject:to:to; s=fm3; t=1674155067; x=1674241467; bh=SFELFhRBDG
+	wxzbzozrOmTJ4SoxpryGpr1CzrXd0rbww=; b=dyikPYdTJzsJDOgvNb4fSLgmtt
+	qnJsfvjF/c45Rr4UTsnxxyzyK69GemoA40vz4QqytzeVPkG9oDYl2du1BGRjmFpc
+	XPEJiivlyIq4zuvnu+kLj+45UtBx6LDaDnk+o7jRjzsmZ2YPp7Eowyxyf1qdLoHC
+	5hEQH164NUO+Yl0ANLWO52jmpC1ohoUtSTH+BSn05+CIhS793scPMOcbzRjS3OS6
+	izj3OSXzEP0uuFdUQzi5fo4c567VcoRvDIb83wjS8Vu9S6drGXgfnhqEECBzEygm
+	GuUPiWn9fB1spgReRKh+X2fTI+9+oEXdzOPREiKxWYQsADbXepd36tdo2T1Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1674155069; x=
-	1674241469; bh=xD2qxTwi/NWHKFJGn9LwYuXdkJ4R6DAu/R1nUg2IBG0=; b=o
-	68ZJd58KoLnxfMYqNc6GW6TyohkNX2AMV+/mm2cYVWNaKKPdY9GDHZ0q/dF/ON7Q
-	zpIs0v6T4J5JkJ5uH1uv5oqEaQw+leGy9yKPN/xZH2zFKj3Aq/l/+rgq3oi6pZDE
-	sFI3UGAEbys/g6nPMWkE85PsnD0EzDp0coYn/p4D98AyZjySp4PfbCtxDvdHLEQF
-	47dfxn+ZiV9fqBKYXfpZz/bD310keEUiL0R8An8YPF8pw6MzxLwJQmXx5lQw4TGK
-	PcLN/eD1pFZ6aO724/Kn+u1OjpY+U+8t+ZWykaElOSiHzxTywZuxdSjQzRwrwMvH
-	HAeU5i7XO/EgLLO+/x6aA==
-X-ME-Sender: <xms:PZTJYywVRv9e_jPD1JlUeYUEogg99S1ZlWfrcCHtckcBlCRT1Qapcw>
-    <xme:PZTJY-SnYpx5gtA7aZaJVmkSuuvP9a2WIwuNhoIqKDkhSUKmytjl5hi9ctSh1TdHW
-    1k8aYXGFGEmtOs>
-X-ME-Received: <xmr:PZTJY0WsaK4q1u3vPbOZwE7_m_7s213-yq67z4tJYWD6dtAxXe3j1jNDM2Jngv0LbAOjybKeNoPy>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1674155067; x=
+	1674241467; bh=SFELFhRBDGwxzbzozrOmTJ4SoxpryGpr1CzrXd0rbww=; b=a
+	l6RegSqim7BFs3FrE6J+49XSBvpNwX107t4zIBAZYjFzk9u+s67kzoA4Bauuo7Ge
+	IIEK16MmU7GO29hW92WRmVMKMhxJxXR/GN5dUo/lOkKUsqT9fQ0OoUOsOiJPSGpc
+	bJLKg3oogEWdQutNk7u7FBaave353Dxka+9g/rxf23+un0kyLOTFk4qqh61iBh1A
+	hanHl0u1JpY+Pkx6rdE4JW/qPuKX2ws2LfEaquCn95HO0K0W1papQ7uUXMRrkHGP
+	Lyc8TmPo9RqiZumXOldUgbDvwsfqjzcIlKhNHVO4RGTk1+ns/Z7npumPRZCbuXPz
+	8ZdUMHlYEJhttiDx7mFjw==
+X-ME-Sender: <xms:O5TJY1jZ9piu1WNItg0aow2pXfm6utsa6VIHtnhx1YTXflwiqnzVWg>
+    <xme:O5TJY6C2dd1SA5EpGory50TmMuhcX7xqz5EzJiMI3bfRMoOZIphkx50HTSojsM09S
+    Lh1IwCbZi9vvW0>
+X-ME-Received: <xmr:O5TJY1HaEiBDNV1qHQKgCBA8wGc2yUlwS9iTLarOCcvgbj3KMjHbyvMoiSxc04uezUr6pKMUgFWZ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddutddguddvudcutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
@@ -83,10 +83,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddutddguddvudcutefuodetgg
     ffegvdeigeelieegjefffeeiveeivdejgeevteeinecuvehluhhsthgvrhfuihiivgeptd
     enucfrrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhn
     ghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:PZTJY4jD1jeiU98W-4CXzhlO7tUA2SEQitukbTA72xPHi3FJXH-l6Q>
-    <xmx:PZTJY0A1wSfRmLo0RYo23Hb7239yMW_5XQNIVfSBrcsjr2ADN5C9HA>
-    <xmx:PZTJY5LIAZuI10qYrPS-w7Cmn8v-_uqg30qoUOAumWQFPHMsjWsuGQ>
-    <xmx:PZTJY20dUyD8JdS0XJ9HZ7AvUxJF4-HZfkwMQqw848OERA03DOX8Bg>
+X-ME-Proxy: <xmx:O5TJY6Qmu13I_ZwhaTSyhuoejvaSujw2-RuKgJZPR0qbsDuOLCvbsg>
+    <xmx:O5TJYyyQ2iCppONNYFvhvSQA0Dwg9UM9GxhE2yfnydGW9HKakK44sw>
+    <xmx:O5TJYw6HDewiFdSEZxHeB2Vo-52Yy8kD4RoT6GVBR-pFYdkp42tnOg>
+    <xmx:O5TJY5lErevuhruCBDzETh-eOtL7NcHj1DKQseLRP2z-2NWCnKS7rw>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Ard Biesheuvel <ardb@kernel.org>,
@@ -98,9 +98,9 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	linux-efi@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 5/5] efi: Warn if trying to reserve memory under Xen
-Date: Thu, 19 Jan 2023 14:04:00 -0500
-Message-Id: <e51d5abde5c5dfd122cb96f71d0dd8acc0cd358d.1669264419.git.demi@invisiblethingslab.com>
+Subject: [PATCH v3 3/5] efi: Apply allowlist to EFI configuration tables when running under Xen
+Date: Thu, 19 Jan 2023 14:03:58 -0500
+Message-Id: <ae86554a2846cd3732316405f10bce5ea9bf7f3d.1669264419.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
 References: <b18879e0329c785d35f2aa2164413bb56419c684.1674153153.git.demi@invisiblethingslab.com>
@@ -108,29 +108,95 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Doing so cannot work and should never happen.
+As it turns out, Xen does not guarantee that EFI boot services data
+regions in memory are preserved, which means that EFI configuration
+tables pointing into such memory regions may be corrupted before the
+dom0 OS has had a chance to inspect them.
 
+This is causing problems for Qubes OS when it attempts to perform system
+firmware updates, which requires that the contents of the EFI System
+Resource Table are valid when the fwupd userspace program runs.
+
+However, other configuration tables such as the memory attributes table
+or the runtime properties table are equally affected, and so we need a
+comprehensive workaround that works for any table type.
+
+So when running under Xen, check the EFI memory descriptor covering the
+start of the table, and disregard the table if it does not reside in
+memory that is preserved by Xen.
+
+Co-developed-by: Ard Biesheuvel <ardb@kernel.org>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
 Tested-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- drivers/firmware/efi/efi.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/firmware/efi/efi.c |  7 +++++++
+ drivers/xen/efi.c          | 25 +++++++++++++++++++++++++
+ include/linux/efi.h        |  2 ++
+ 3 files changed, 34 insertions(+)
 
 diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
-index b49fcde06ca0ff5347047666f38b9309bd9cfe26..902f323499d8acc4f2b846a78993eb201448acad 100644
+index bcb848e44e7b1350b10b7c0479c0b38d980fe37d..b49fcde06ca0ff5347047666f38b9309bd9cfe26 100644
 --- a/drivers/firmware/efi/efi.c
 +++ b/drivers/firmware/efi/efi.c
-@@ -519,6 +519,10 @@ void __init __weak efi_arch_mem_reserve(phys_addr_t addr, u64 size) {}
-  */
- void __init efi_mem_reserve(phys_addr_t addr, u64 size)
- {
-+	/* efi_mem_reserve() does not work under Xen */
-+	if (WARN_ON_ONCE(efi_enabled(EFI_PARAVIRT)))
-+		return;
-+
- 	if (!memblock_is_region_reserved(addr, size))
- 		memblock_reserve(addr, size);
+@@ -564,6 +564,13 @@ static __init int match_config_table(const efi_guid_t *guid,
  
+ 	for (i = 0; efi_guidcmp(table_types[i].guid, NULL_GUID); i++) {
+ 		if (!efi_guidcmp(*guid, table_types[i].guid)) {
++			if (IS_ENABLED(CONFIG_XEN_EFI) &&
++			    !xen_efi_config_table_is_usable(guid, table)) {
++				if (table_types[i].name[0])
++					pr_cont("(%s=0x%lx) may have been clobbered by Xen ",
++					        table_types[i].name, table);
++				return 1;
++			}
+ 			*(table_types[i].ptr) = table;
+ 			if (table_types[i].name[0])
+ 				pr_cont("%s=0x%lx ",
+diff --git a/drivers/xen/efi.c b/drivers/xen/efi.c
+index 3c792353b7308f9c2bf0a888eda9f827aa9177f8..fb321cd6415a40e8c4d0ad940611adcabe20ab97 100644
+--- a/drivers/xen/efi.c
++++ b/drivers/xen/efi.c
+@@ -328,3 +328,28 @@ int efi_mem_desc_lookup(u64 phys_addr, efi_memory_desc_t *out_md)
+ 
+ 	return 0;
+ }
++
++bool __init xen_efi_config_table_is_usable(const efi_guid_t *guid,
++                                           unsigned long table)
++{
++	efi_memory_desc_t md;
++	int rc;
++
++	if (!efi_enabled(EFI_PARAVIRT))
++		return true;
++
++	rc = efi_mem_desc_lookup(table, &md);
++	if (rc)
++		return false;
++
++	switch (md.type) {
++	case EFI_RUNTIME_SERVICES_CODE:
++	case EFI_RUNTIME_SERVICES_DATA:
++	case EFI_ACPI_RECLAIM_MEMORY:
++	case EFI_ACPI_MEMORY_NVS:
++	case EFI_RESERVED_TYPE:
++		return true;
++	default:
++		return false;
++	}
++}
+diff --git a/include/linux/efi.h b/include/linux/efi.h
+index b407a302b730a6cc7481afa0f582360e59faf1e0..b210b50c4bdedaafcce6f63d44f57ff8329d1cfd 100644
+--- a/include/linux/efi.h
++++ b/include/linux/efi.h
+@@ -1322,4 +1322,6 @@ struct linux_efi_coco_secret_area {
+ /* Header of a populated EFI secret area */
+ #define EFI_SECRET_TABLE_HEADER_GUID	EFI_GUID(0x1e74f542, 0x71dd, 0x4d66,  0x96, 0x3e, 0xef, 0x42, 0x87, 0xff, 0x17, 0x3b)
+ 
++bool xen_efi_config_table_is_usable(const efi_guid_t *guid, unsigned long table);
++
+ #endif /* _LINUX_EFI_H */
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
