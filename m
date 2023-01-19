@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024D6C004D4
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 15:23:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481200.745948 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5289AC00A5A
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Jan 2023 15:23:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481198.745934 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIWky-0000Tw-Un; Thu, 19 Jan 2023 15:23:12 +0000
+	id 1pIWkw-0000CH-Ey; Thu, 19 Jan 2023 15:23:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481200.745948; Thu, 19 Jan 2023 15:23:12 +0000
+Received: by outflank-mailman (output) from mailman id 481198.745934; Thu, 19 Jan 2023 15:23:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIWky-0000TZ-R0; Thu, 19 Jan 2023 15:23:12 +0000
-Received: by outflank-mailman (input) for mailman id 481200;
- Thu, 19 Jan 2023 15:23:11 +0000
+	id 1pIWkw-0000CA-C0; Thu, 19 Jan 2023 15:23:10 +0000
+Received: by outflank-mailman (input) for mailman id 481198;
+ Thu, 19 Jan 2023 15:23:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RBPQ=5Q=citrix.com=prvs=3763d7854=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1pIWkx-0000C1-Gf
- for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 15:23:11 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2a4d8cb2-980d-11ed-b8d1-410ff93cb8f0;
- Thu, 19 Jan 2023 16:23:04 +0100 (CET)
+ id 1pIWkv-0000C1-9W
+ for xen-devel@lists.xenproject.org; Thu, 19 Jan 2023 15:23:09 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 28e0564d-980d-11ed-b8d1-410ff93cb8f0;
+ Thu, 19 Jan 2023 16:23:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,91 +38,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a4d8cb2-980d-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 28e0564d-980d-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1674141788;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=xn/IxrW5V76kot9CBVjdkzIoSE64b8psdGUefGXif2Q=;
-  b=Zl6tYApfV4dYZIzl/yAxvUrcDAQepnslwt8PlTsh03YqQt3F42hA2l+n
-   cNblds2662MS2yxYDCaVuSLQBqYpML4W5YsF6vDUC9mr+hNJWURPLlLXR
-   Rf8zhEHuPq/pcWIh//RC2IJBINjt0lNgFjkp3zCtHUCl3cXI0Quh4mdSv
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1674141786;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=GSkTDl1mMIYyDF4Fu8QPO73Ju/CNKuXMuVUvJ5T5Aoo=;
+  b=cem6om21JFj1vD9uLPxSjwhY7Z9V2uRhAC1GJpy+X47zotaduYe9KaBJ
+   tJjiTbgiKOKHMQEbqpzFEdcsq8TDPyE1nK/WXxriGSN/jwCiZlmCxYAmD
+   1q3Wnsb66NFqWwm27EEnHsQJErVHy0AiJdjx1pU0XRN07H3DIt8yv7Aa3
+   M=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 93399569
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 92268585
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:MDORKaJV4m0sXmLGFE+R/5UlxSXFcZb7ZxGr2PjKsXjdYENShmQDy
- WoZDW/TPPaNMGTwed9+OoviphlU65GDztM1SVRlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPcwP9TlK6q4mhA5wVvPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c59K010y
- tgSNwsnLRWE17vszrulbcVV05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpNU6bC/FMEg5/5JYWleG0hn75YntApUicv6Yf6GnP1g1hlrPqNbI5f/TbHp4EzxvG9
- woq+Uz5CzEHaNKV0QHdrHicuOz/uiXEctINQejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasvBQRRt5RGO0S8xyWx+zf5APxLmoZSj9MbvQ2uclwQiYlv
- neShM/gDzFrtLyTSFqe+62SoDf0PjIaRUcdYQcUQA1D5MPsyLzflTqWEIwlSvTsyISoR3epm
- WviQDUCa6s7h+Qn7Zqf90/8qXGpociQFAA8+CL7Zzfwhu9mX7JJd7BE+HCCs6kbfdzDFgbR1
- JQXs5PAtb5TVPlhgATIGbxQR+/xup5pJRWG2TZS848dGyNBEpJJVaRZ+3lAKUhgKa7okhe5M
- RaI6Wu9CHK+VUZGjJObgKrrUazGNYC6SbzYugn8N7KimKRZeg6d5z1JbkWNxW3rm0VEufhhZ
- svDL5jyVidLWfQPIN+KqwE1i+dDKscWnDO7eHwG507/jer2iIC9F9/pz2dinshmtfjZ8W05A
- v5UNteQygU3bQENSnC/zGLnFnhTdSJTLcmv+6RqmhurflIO9JcJV6WAntvMuuVNw8xoqws/1
- izsBBEGkwKl2BUq62yiMxheVV8mZr4nxVpTAMDmFQ/AN6QLCWp30JoiSg==
-IronPort-HdrOrdr: A9a23:7JwMX6FyMZLCHDtppLqE5seALOsnbusQ8zAXPiFKJSC9F/byqy
- nAppsmPHPP5gr5OktBpTnwAsi9qBrnnPYejLX5Vo3SPzUO1lHYSb1K3M/PxCDhBj271sM179
- YFT0GmMqyTMWRH
+IronPort-Data: A9a23:gt1jHq6tRSA5agqOGQ/BlAxRtBbHchMFZxGqfqrLsTDasY5as4F+v
+ mAdX2uPO6qMZ2P1c911Poi19EkOuJTWndY3TANs/39nHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+45wehBtC5gZlPakS7QeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5mr
+ 8MRFCtSQBa4mOeInKyLTM893JQsM5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrnD5bz1frkPTvact6nLf5AdwzKLsIJzefdniqcB9zxzC+
+ DKbrzmR7hcyJY28yCiuzHeVoKzQlnOnBK4RKLmZ6as/6LGU7jNKU0BHPbehmtGph0j7V99BJ
+ kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c8FLD+Qw5QWJy6zVywWUHG4JSnhGctNOnM0rQT0n0
+ HeZktWvAiZg2JWXQ3+A8rafrRupJDMYa2QFYEcsUg8t89Tl5oYpgXryos1LSfDvyIevQHepn
+ m7M9XJl71kOsSIV//+E9Gzc3ByqnYfMcFIr1gPxDzj14RwsMeZJeLeUBUjnAedoddjGFQjb5
+ iBby6By/8hVU8jTyXXlrPElWejwuq3baGC0bUtHRcFJyti7x5K0kWm8ChlaLVwhDMsLcCSBj
+ KT76VIIv8870JdHgMZKj2ON5ycCl/KI+SzNDKy8Uza3SsEZmPW71C9vf1WM+GvmjVIhl6oyU
+ b/CL5nwVShEV/82nWrmLwv47VPN7npmrY80bcmrpylLLJLEPCLFIVv7GAXmgh8FAFOs/1yOr
+ oc32zqiwBRDSuzuChQ7AqZKRW3m2UMTXMisw+QOL77rH+aTMD15YxMn6e97KtMNcmU8vrugw
+ 0xRrWcFmQSh2yafc1jih7IKQOqHYKuTZEkTZUQEVWtEEVB6CWpzxM/zr6cKQIQ=
+IronPort-HdrOrdr: A9a23:EGQu4q9a+KFuxk89SHZuk+DWI+orL9Y04lQ7vn2ZKCY4TiX8ra
+ uTdZsguiMc5Ax+ZJhDo7C90di7IE80nKQdieN9AV7IZniEhILHFvAG0aLShxHmBi3i5qp8+M
+ 5bAsxD4QTLfDpHsfo=
 X-IronPort-AV: E=Sophos;i="5.97,229,1669093200"; 
-   d="scan'208";a="93399569"
+   d="scan'208";a="92268585"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan
- Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v4 3/3] build: compat-xlat-header.py: optimisation to search for just '{' instead of [{}]
-Date: Thu, 19 Jan 2023 15:22:56 +0000
-Message-ID: <20230119152256.15832-4-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu
+	<wl@xen.org>, George Dunlap <george.dunlap@citrix.com>
+Subject: [XEN PATCH v4 0/3] xen: rework compat headers generation
+Date: Thu, 19 Jan 2023 15:22:53 +0000
+Message-ID: <20230119152256.15832-1-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230119152256.15832-1-anthony.perard@citrix.com>
-References: <20230119152256.15832-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-`fields` and `extrafields` always all the parts of a sub-struct, so
-when there is '}', there is always a '{' before it. Also, both are
-lists.
+Patch series available in this git branch:
+https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.build-system-xen-include-rework-v4
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/tools/compat-xlat-header.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+v4:
+- new patch removing get_typedefs() from the existing script
+  (and thus also removing it from the new script)
+- Adding some optimisation, mainly pre-compile regex
+  It's slightly faster.
 
-diff --git a/xen/tools/compat-xlat-header.py b/xen/tools/compat-xlat-header.py
-index ae5c9f11c9..d0a864b68e 100644
---- a/xen/tools/compat-xlat-header.py
-+++ b/xen/tools/compat-xlat-header.py
-@@ -105,7 +105,7 @@ def handle_field(prefix, name, id, type, fields):
-         else:
-             k = id.replace('.', '_')
-             print("%sXLAT_%s_HNDL_%s(_d_, _s_);" % (prefix, name, k), end='')
--    elif not re_brackets.search(' '.join(fields)):
-+    elif not '{' in fields:
-         tag = ' '.join(fields)
-         tag = re.sub(r'\s*(struct|union)\s+(compat_)?(\w+)\s.*', '\\3', tag)
-         print(" \\")
-@@ -290,7 +290,7 @@ def build_body(name, tokens):
-     print(" \\\n} while (0)")
- 
- def check_field(kind, name, field, extrafields):
--    if not re_brackets.search(' '.join(extrafields)):
-+    if not '{' in extrafields:
-         print("; \\")
-         if len(extrafields) != 0:
-             for token in extrafields:
+v3:
+- Rewrite script into python instead of perl.
+  (last patch of the series)
+
+v2:
+- new patch [1/4] to fix issue with command line that can be way too long
+- other small changes, and reorder patches
+
+Hi,
+
+This patch series is about 2 improvement. First one is to use $(if_changed, )
+in "include/Makefile" to make the generation of the compat headers less verbose
+and to have the command line part of the decision to rebuild the headers.
+Second one is to replace one slow script by a much faster one, and save time
+when generating the headers.
+
+Thanks.
+
+Anthony PERARD (3):
+  build: include/compat, remove typedefs handling
+  build: replace get-fields.sh by a python script
+  build: compat-xlat-header.py: optimisation to search for just '{'
+    instead of [{}]
+
+ xen/include/Makefile            |   6 +-
+ xen/tools/compat-xlat-header.py | 432 ++++++++++++++++++++++++++
+ xen/tools/get-fields.sh         | 528 --------------------------------
+ 3 files changed, 434 insertions(+), 532 deletions(-)
+ create mode 100644 xen/tools/compat-xlat-header.py
+ delete mode 100644 xen/tools/get-fields.sh
+
 -- 
 Anthony PERARD
 
