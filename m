@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD8DC25B4E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83467C38A23
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 15:00:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481852.747020 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.481858.747067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssB-0006R7-81; Fri, 20 Jan 2023 15:00:07 +0000
+	id 1pIssH-0007X6-BI; Fri, 20 Jan 2023 15:00:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481852.747020; Fri, 20 Jan 2023 15:00:07 +0000
+Received: by outflank-mailman (output) from mailman id 481858.747067; Fri, 20 Jan 2023 15:00:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssB-0006Qa-3R; Fri, 20 Jan 2023 15:00:07 +0000
-Received: by outflank-mailman (input) for mailman id 481852;
- Fri, 20 Jan 2023 15:00:06 +0000
+	id 1pIssH-0007T6-2B; Fri, 20 Jan 2023 15:00:13 +0000
+Received: by outflank-mailman (input) for mailman id 481858;
+ Fri, 20 Jan 2023 15:00:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RVut=5R=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pIssA-0006Kg-Kp
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:06 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1pIssF-0006Kg-GE
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:11 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1f2c6d41-98d3-11ed-91b6-6bf2151ebd3b;
- Fri, 20 Jan 2023 16:00:04 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id q5so446762wrv.0
- for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:04 -0800 (PST)
+ id 229ae9d3-98d3-11ed-91b6-6bf2151ebd3b;
+ Fri, 20 Jan 2023 16:00:10 +0100 (CET)
+Received: by mail-wr1-x436.google.com with SMTP id r2so5090823wrv.7
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:10 -0800 (PST)
 Received: from localhost.localdomain
  (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
  by smtp.gmail.com with ESMTPSA id
- o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.03
+ o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jan 2023 07:00:03 -0800 (PST)
+ Fri, 20 Jan 2023 07:00:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f2c6d41-98d3-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 229ae9d3-98d3-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NdJWy2GyyPMWYYMwJzkpPQcfarYfLa10k8GzdHzPycE=;
-        b=Er9zoaiiNyWIWfHDMD470bbi4Zz3tdV8DN05fsuan8dbyx78bKtmVTTo4bU1Cg1awG
-         T7fZydsXNEkQ3kJ0nldnW1FVrCtWmqDD2Q2NU/oUvbcOhzjckPaRi2CAU4MtPas4vWgj
-         NxRYyzD2LUmZThsbQbKK/DEWrcrAOAWJi15HL7edUeHNcnA8lvzB9AInzaowADJ0G87h
-         KUL8vodHoOoksVXC3/ZxopmY2SgKL5RJ+tnjrEMBh5IzLrCB6E06ymL4IJsn7+UMXgvX
-         ySw3uPCNJpxOoVwfPjeHcvzUOUlXLer9Z/eVGLlxjusFklGaOR7HHR7AMBNJtG9lMfmt
-         kAQQ==
+        bh=5On9Ljb8od/hZFXAUMkhhR6b6lBaYm3tiocvPuOanJo=;
+        b=pDhH7j2TPsx7enpELQT3c9yjlF6JakH1voO/6HzAr1AnpbCtuB8xtmohCX50LHYd9J
+         nShRQkrBDx+z9L74wDnzNvtardP8lLtdWWoTWe5Cz5EfvvO351iXoI0BYmOlFy2s8v5p
+         oeKTSapJuc/lEDWDsDapTg9Lbdzo/oyKIVCKpVoDGcba+L0fVGP8heeV0G4sAGW3D8k9
+         wmoVO57V3yLUJAJz89DupuOhmL5fnyId+d7JRVU+UvvNqKeoRqD/mRwaum/L9Fq2WwSX
+         oGlz8Z/Q5HuXbU6t0I6X2KIZlcb7dftlKsyxlHrSQX2oVaweZvF0Xhf5cnvdaA7k5bTV
+         ZHiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NdJWy2GyyPMWYYMwJzkpPQcfarYfLa10k8GzdHzPycE=;
-        b=4f1BAzpK5cWYr72FIVLYkUCwjulp76EPev7GntLIPzjmkcFFoV6AJg2oUPxOhWc3LU
-         iTXoeWTJiLeJ7YHthTGasuFPZ2IsMbEq0Merh90hvbDglJ+p2nJF6TpZavZyxJVsfGSA
-         xRffv1IksIsAVyURnXxSK3z2RA3Ey+7E50NcaHNPU9y//c2i/xp1F3p0MPR6yHd8wG4M
-         8T0JfHRaQ6WeB8UgM0UTNtKnE8f7G980CbUdaoKKcn70v1UxoEK1bf3FhED3jCV2RUnP
-         nFYcryMWeLW9yd36lux3D/hN8f4ZyubHqDgRGoV0MJ+E5vkkd8CiezmRIf7M/kZRgmrC
-         7Urg==
-X-Gm-Message-State: AFqh2ko/g7h7E+8UckCPETjUNrKDSdyDHZCzt03nWX3p5HrGlJ73uXb1
-	LEjpUFZyrhwA0Z5BnINPv/2kmuM13rlcjg==
-X-Google-Smtp-Source: AMrXdXshJNbFI2XKD0qvr5w1+/CBeJPMSxuJJi9X/3yY5cbivt3jq88eV9wQsfvXjtkP2JvcExQyyg==
-X-Received: by 2002:a5d:688a:0:b0:2be:51a2:c6e2 with SMTP id h10-20020a5d688a000000b002be51a2c6e2mr3573756wru.39.1674226803908;
-        Fri, 20 Jan 2023 07:00:03 -0800 (PST)
+        bh=5On9Ljb8od/hZFXAUMkhhR6b6lBaYm3tiocvPuOanJo=;
+        b=ggVBx6IaRBXONhtjZgaVRXh88xF3V7gvKGRfpa6eIwtVjJymBEmERGeZ/+mncBa4Ib
+         ChzPZw9IxOp0qiQ2/yDKT7VmyoYTWaB/5lF3pCaej58k+K0J0pnOVrkAvG+Y5t2Yf/gZ
+         /6l6tklzzBqK6kpdw82ejT6txn2iT03fUdsCC54oUblozumPJAUuXIMD2pUMdAVa+zGT
+         uiSznHH4+/BPJIeBxg92vij/7qrGGcnfftYAe135eLQhx+LwpAKndUoRXyZ+EemcOfKr
+         uT5iU2T9fh29MyPHbree2xIRDLM0+KwjuRBjMfVgbjjBWlmutggARv2g9aBlB2G+InAn
+         o65w==
+X-Gm-Message-State: AFqh2kquFLtOKbIiNJGeUb/DyXeOtbRJh5S3gEZm14y8FErZKivFG6Tw
+	RAr9Da/cK8r8QnQ03EO9CDWs4sN48SH5zw==
+X-Google-Smtp-Source: AMrXdXu4zBsqjxfCKndCaQ8TRBozx/7/N8JgZeecljxPkjZZzt4PdmgjucuapdmrIiLbLvapLMX2HA==
+X-Received: by 2002:adf:eb43:0:b0:2bd:d542:e010 with SMTP id u3-20020adfeb43000000b002bdd542e010mr12250630wrn.46.1674226809884;
+        Fri, 20 Jan 2023 07:00:09 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -86,36 +86,186 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 01/14] xen/riscv: add _zicsr to CFLAGS
-Date: Fri, 20 Jan 2023 16:59:41 +0200
-Message-Id: <3617dc882193166580ae7e5d122447e924cab524.1674226563.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 07/14] xen/riscv: introduce exception handlers implementation
+Date: Fri, 20 Jan 2023 16:59:47 +0200
+Message-Id: <7a459ea843d5823ee2c50b0e44dded5bdb554ca6.1674226563.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 References: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Work with some registers requires csr command which is part of
-Zicsr.
+The patch introduces an implementation of basic exception handlers:
+- to save/restore context
+- to handle an exception itself. The handler calls wait_for_interrupt
+  now, nothing more.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/arch.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/riscv/Makefile            |  2 +
+ xen/arch/riscv/entry.S             | 97 ++++++++++++++++++++++++++++++
+ xen/arch/riscv/include/asm/traps.h | 13 ++++
+ xen/arch/riscv/traps.c             | 13 ++++
+ 4 files changed, 125 insertions(+)
+ create mode 100644 xen/arch/riscv/entry.S
+ create mode 100644 xen/arch/riscv/include/asm/traps.h
+ create mode 100644 xen/arch/riscv/traps.c
 
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 012dc677c3..95b41d9f3e 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -10,7 +10,7 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
- # into the upper half _or_ the lower half of the address space.
- # -mcmodel=medlow would force Xen into the lower half.
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 1a4f1a6015..443f6bf15f 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -1,7 +1,9 @@
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
++obj-y += entry.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
++obj-y += traps.o
  
--CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
-+CFLAGS += -march=$(riscv-march-y)_zicsr -mstrict-align -mcmodel=medany
- 
- # TODO: Drop override when more of the build is working
- override ALL_OBJS-y = arch/$(TARGET_ARCH)/built_in.o
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+diff --git a/xen/arch/riscv/entry.S b/xen/arch/riscv/entry.S
+new file mode 100644
+index 0000000000..f7d46f42bb
+--- /dev/null
++++ b/xen/arch/riscv/entry.S
+@@ -0,0 +1,97 @@
++#include <asm/asm.h>
++#include <asm/processor.h>
++#include <asm/riscv_encoding.h>
++#include <asm/traps.h>
++
++        .global handle_exception
++        .align 4
++
++handle_exception:
++
++    /* Exceptions from xen */
++save_to_stack:
++        /* Save context to stack */
++        REG_S   sp, (RISCV_CPU_USER_REGS_OFFSET(sp) - RISCV_CPU_USER_REGS_SIZE) (sp)
++        addi    sp, sp, -RISCV_CPU_USER_REGS_SIZE
++        REG_S   t0, RISCV_CPU_USER_REGS_OFFSET(t0)(sp)
++        j       save_context
++
++save_context:
++        /* Save registers */
++        REG_S   ra, RISCV_CPU_USER_REGS_OFFSET(ra)(sp)
++        REG_S   gp, RISCV_CPU_USER_REGS_OFFSET(gp)(sp)
++        REG_S   t1, RISCV_CPU_USER_REGS_OFFSET(t1)(sp)
++        REG_S   t2, RISCV_CPU_USER_REGS_OFFSET(t2)(sp)
++        REG_S   s0, RISCV_CPU_USER_REGS_OFFSET(s0)(sp)
++        REG_S   s1, RISCV_CPU_USER_REGS_OFFSET(s1)(sp)
++        REG_S   a0, RISCV_CPU_USER_REGS_OFFSET(a0)(sp)
++        REG_S   a1, RISCV_CPU_USER_REGS_OFFSET(a1)(sp)
++        REG_S   a2, RISCV_CPU_USER_REGS_OFFSET(a2)(sp)
++        REG_S   a3, RISCV_CPU_USER_REGS_OFFSET(a3)(sp)
++        REG_S   a4, RISCV_CPU_USER_REGS_OFFSET(a4)(sp)
++        REG_S   a5, RISCV_CPU_USER_REGS_OFFSET(a5)(sp)
++        REG_S   a6, RISCV_CPU_USER_REGS_OFFSET(a6)(sp)
++        REG_S   a7, RISCV_CPU_USER_REGS_OFFSET(a7)(sp)
++        REG_S   s2, RISCV_CPU_USER_REGS_OFFSET(s2)(sp)
++        REG_S   s3, RISCV_CPU_USER_REGS_OFFSET(s3)(sp)
++        REG_S   s4, RISCV_CPU_USER_REGS_OFFSET(s4)(sp)
++        REG_S   s5, RISCV_CPU_USER_REGS_OFFSET(s5)(sp)
++        REG_S   s6, RISCV_CPU_USER_REGS_OFFSET(s6)(sp)
++        REG_S   s7, RISCV_CPU_USER_REGS_OFFSET(s7)(sp)
++        REG_S   s8, RISCV_CPU_USER_REGS_OFFSET(s8)(sp)
++        REG_S   s9, RISCV_CPU_USER_REGS_OFFSET(s9)(sp)
++        REG_S   s10, RISCV_CPU_USER_REGS_OFFSET(s10)(sp)
++        REG_S   s11, RISCV_CPU_USER_REGS_OFFSET(s11)(sp)
++        REG_S   t3, RISCV_CPU_USER_REGS_OFFSET(t3)(sp)
++        REG_S   t4, RISCV_CPU_USER_REGS_OFFSET(t4)(sp)
++        REG_S   t5, RISCV_CPU_USER_REGS_OFFSET(t5)(sp)
++        REG_S   t6, RISCV_CPU_USER_REGS_OFFSET(t6)(sp)
++        csrr    t0, CSR_SEPC
++        REG_S   t0, RISCV_CPU_USER_REGS_OFFSET(sepc)(sp)
++        csrr    t0, CSR_SSTATUS
++        REG_S   t0, RISCV_CPU_USER_REGS_OFFSET(sstatus)(sp)
++
++        mv      a0, sp
++        jal     __handle_exception
++
++restore_registers:
++        /* Restore stack_cpu_regs */
++        REG_L   t0, RISCV_CPU_USER_REGS_OFFSET(sepc)(sp)
++        csrw    CSR_SEPC, t0
++        REG_L   t0, RISCV_CPU_USER_REGS_OFFSET(sstatus)(sp)
++        csrw    CSR_SSTATUS, t0
++
++        REG_L   ra, RISCV_CPU_USER_REGS_OFFSET(ra)(sp)
++        REG_L   gp, RISCV_CPU_USER_REGS_OFFSET(gp)(sp)
++        REG_L   t0, RISCV_CPU_USER_REGS_OFFSET(t0)(sp)
++        REG_L   t1, RISCV_CPU_USER_REGS_OFFSET(t1)(sp)
++        REG_L   t2, RISCV_CPU_USER_REGS_OFFSET(t2)(sp)
++        REG_L   s0, RISCV_CPU_USER_REGS_OFFSET(s0)(sp)
++        REG_L   s1, RISCV_CPU_USER_REGS_OFFSET(s1)(sp)
++        REG_L   a0, RISCV_CPU_USER_REGS_OFFSET(a0)(sp)
++        REG_L   a1, RISCV_CPU_USER_REGS_OFFSET(a1)(sp)
++        REG_L   a2, RISCV_CPU_USER_REGS_OFFSET(a2)(sp)
++        REG_L   a3, RISCV_CPU_USER_REGS_OFFSET(a3)(sp)
++        REG_L   a4, RISCV_CPU_USER_REGS_OFFSET(a4)(sp)
++        REG_L   a5, RISCV_CPU_USER_REGS_OFFSET(a5)(sp)
++        REG_L   a6, RISCV_CPU_USER_REGS_OFFSET(a6)(sp)
++        REG_L   a7, RISCV_CPU_USER_REGS_OFFSET(a7)(sp)
++        REG_L   s2, RISCV_CPU_USER_REGS_OFFSET(s2)(sp)
++        REG_L   s3, RISCV_CPU_USER_REGS_OFFSET(s3)(sp)
++        REG_L   s4, RISCV_CPU_USER_REGS_OFFSET(s4)(sp)
++        REG_L   s5, RISCV_CPU_USER_REGS_OFFSET(s5)(sp)
++        REG_L   s6, RISCV_CPU_USER_REGS_OFFSET(s6)(sp)
++        REG_L   s7, RISCV_CPU_USER_REGS_OFFSET(s7)(sp)
++        REG_L   s8, RISCV_CPU_USER_REGS_OFFSET(s8)(sp)
++        REG_L   s9, RISCV_CPU_USER_REGS_OFFSET(s9)(sp)
++        REG_L   s10, RISCV_CPU_USER_REGS_OFFSET(s10)(sp)
++        REG_L   s11, RISCV_CPU_USER_REGS_OFFSET(s11)(sp)
++        REG_L   t3, RISCV_CPU_USER_REGS_OFFSET(t3)(sp)
++        REG_L   t4, RISCV_CPU_USER_REGS_OFFSET(t4)(sp)
++        REG_L   t5, RISCV_CPU_USER_REGS_OFFSET(t5)(sp)
++        REG_L   t6, RISCV_CPU_USER_REGS_OFFSET(t6)(sp)
++
++        /* Restore sp */
++        REG_L   sp, RISCV_CPU_USER_REGS_OFFSET(sp)(sp)
++
++        sret
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+new file mode 100644
+index 0000000000..816ab1178a
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -0,0 +1,13 @@
++#ifndef __ASM_TRAPS_H__
++#define __ASM_TRAPS_H__
++
++#include <asm/processor.h>
++
++#ifndef __ASSEMBLY__
++
++void __handle_exception(struct cpu_user_regs *cpu_regs);
++void handle_exception(void);
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* __ASM_TRAPS_H__ */
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+new file mode 100644
+index 0000000000..3201b851ef
+--- /dev/null
++++ b/xen/arch/riscv/traps.c
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) 2023 Vates
++ *
++ * RISC-V Trap handlers
++ */
++#include <asm/processor.h>
++#include <asm/traps.h>
++
++void __handle_exception(struct cpu_user_regs *cpu_regs)
++{
++    wait_for_interrupt();
++}
 -- 
 2.39.0
 
