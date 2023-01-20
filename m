@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0010C05027
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 10:05:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481618.746667 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D18C25B50
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 10:17:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481644.746676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoH8-0007kx-UE; Fri, 20 Jan 2023 10:05:34 +0000
+	id 1pIoS3-0001wi-25; Fri, 20 Jan 2023 10:16:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481618.746667; Fri, 20 Jan 2023 10:05:34 +0000
+Received: by outflank-mailman (output) from mailman id 481644.746676; Fri, 20 Jan 2023 10:16:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoH8-0007k0-Oq; Fri, 20 Jan 2023 10:05:34 +0000
-Received: by outflank-mailman (input) for mailman id 481618;
- Fri, 20 Jan 2023 10:05:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pIoS2-0001wb-Vk; Fri, 20 Jan 2023 10:16:50 +0000
+Received: by outflank-mailman (input) for mailman id 481644;
+ Fri, 20 Jan 2023 10:16:49 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=NYwS=5R=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pIoD1-0001Kj-MT
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:01:19 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 628fb316-98a9-11ed-91b6-6bf2151ebd3b;
- Fri, 20 Jan 2023 11:01:19 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CBE995BD75;
- Fri, 20 Jan 2023 10:01:18 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9F2B41390C;
- Fri, 20 Jan 2023 10:01:18 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id O8yqJG5mymNdRQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 20 Jan 2023 10:01:18 +0000
+ (envelope-from <julien@xen.org>) id 1pIoS1-0001wV-F1
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:16:49 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pIoS0-0001gi-Uf; Fri, 20 Jan 2023 10:16:48 +0000
+Received: from 54-240-197-230.amazon.com ([54.240.197.230]
+ helo=[10.95.149.154]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pIoS0-0006eF-Mw; Fri, 20 Jan 2023 10:16:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,103 +41,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 628fb316-98a9-11ed-91b6-6bf2151ebd3b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674208878; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jwgihKBtb88XLTKE+8ZXuKP1VlqF7Soz5OY23zelXsM=;
-	b=WaemiO2+n3R3rlqGhAU8eXdxvAFxtLyXcwOCqoQtNqFrdOQQbD9sssM6Ac2yISLvaqmMe9
-	SxgBoveehE6oLChJsSKANk/0rLoMmwPoHFrcYumbr3Lt0i/tOlI9Q120a2UhSlE399Gz5c
-	mOP6AMTscORgoGqSvCvUZxli1YmakDU=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 08/13] tools/xenstore: add accounting trace support
-Date: Fri, 20 Jan 2023 11:00:23 +0100
-Message-Id: <20230120100028.11142-9-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230120100028.11142-1-jgross@suse.com>
-References: <20230120100028.11142-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=idRSzmn58grgYyX7Dgqdd23kJOqbfAkKfv9jJU0eF3U=; b=k8ylPo7mljherSg481ZUyJx6l1
+	9IblSgRzdgcaIeylHu6aeXsXJb35j7KgwG0XZrlN0x4x6lb8gU2MY3Qo0c/JEDqX4jhnBsDFe52RY
+	eH1LCD4kEPZw/FYtPTuFwzDLYNM9jFRc4Z2fAdKyE9gZTAwx6pRl0qUL9bw8w2/9DuK8=;
+Message-ID: <1a227f76-005d-0307-5161-2e8432171eb7@xen.org>
+Date: Fri, 20 Jan 2023 10:16:46 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [XEN v2 04/11] xen/arm: Typecast the DT values into paddr_t
+Content-Language: en-US
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
+ xen-devel@lists.xenproject.org, stefano.stabellini@amd.com,
+ Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com
+References: <20230117174358.15344-1-ayan.kumar.halder@amd.com>
+ <20230117174358.15344-5-ayan.kumar.halder@amd.com>
+ <alpine.DEB.2.22.394.2301191514240.731018@ubuntu-linux-20-04-desktop>
+ <alpine.DEB.2.22.394.2301191532370.731018@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <alpine.DEB.2.22.394.2301191532370.731018@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add a new trace switch "acc" and the related trace calls.
+Hi,
 
-The "acc" switch is off per default.
+I am answering to multiple e-mails at the same time.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/xenstore/xenstored_core.c   |  2 +-
- tools/xenstore/xenstored_core.h   |  1 +
- tools/xenstore/xenstored_domain.c | 10 ++++++++++
- 3 files changed, 12 insertions(+), 1 deletion(-)
+On 19/01/2023 23:34, Stefano Stabellini wrote:
+> On Thu, 19 Jan 2023, Stefano Stabellini wrote:
+>> On Tue, 17 Jan 2023, Ayan Kumar Halder wrote:
+>>> In future, we wish to support 32 bit physical address.
+>>> However, one can only read u64 values from the DT. Thus, we need to
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 6ef60179fa..558ef491b1 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2746,7 +2746,7 @@ static void set_quota(const char *arg, bool soft)
- 
- /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
- const char *const trace_switches[] = {
--	"obj", "io", "wrl",
-+	"obj", "io", "wrl", "acc",
- 	NULL
- };
- 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 1f811f38cb..3e0734a6c6 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -302,6 +302,7 @@ extern unsigned int trace_flags;
- #define TRACE_OBJ	0x00000001
- #define TRACE_IO	0x00000002
- #define TRACE_WRL	0x00000004
-+#define TRACE_ACC	0x00000008
- extern const char *const trace_switches[];
- int set_trace_switch(const char *arg);
- 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index b1e29edb7e..d461fd8cc8 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -538,6 +538,12 @@ static struct domain *find_domain_by_domid(unsigned int domid)
- 	return (d && d->introduced) ? d : NULL;
- }
- 
-+#define trace_acc(...)				\
-+do {						\
-+	if (trace_flags & TRACE_ACC)		\
-+		trace("acc: " __VA_ARGS__);	\
-+} while (0)
-+
- int acc_fix_domains(struct list_head *head, bool update)
- {
- 	struct changed_domain *cd;
-@@ -602,6 +608,8 @@ static int acc_add_changed_dom(const void *ctx, struct list_head *head,
- 		return 0;
- 
- 	errno = 0;
-+	trace_acc("local change domid %u: what=%u %d add %d\n", domid, what,
-+		  cd->acc[what], val);
- 	cd->acc[what] += val;
- 
- 	return cd->acc[what];
-@@ -1114,6 +1122,8 @@ static int domain_acc_add(struct connection *conn, unsigned int domid,
- 		return domain_acc_add_chk(d, what, ret, domid);
- 	}
- 
-+	trace_acc("global change domid %u: what=%u %u add %d\n", domid, what,
-+		  d->acc[what], add);
- 	d->acc[what] = domain_acc_add_chk(d, what, add, domid);
- 
- 	return d->acc[what];
+A cell in the DT is a 32-bit value. So you could read 32-bit value 
+(address-size could be #1). It is just that our wrapper return 64-bit 
+values because this is how we use the most.
+
+>>> typecast the values appropriately from u64 to paddr_t.
+
+C will perfectly be able to truncate a 64-bit to 32-bit value. So this 
+is not a very good argument to explain why all of this is necessary.
+
+>>>
+>>> device_tree_get_reg() should now be able to return paddr_t. This is
+>>> invoked by various callers to get DT address and size.
+>>> Similarly, dt_read_number() is invoked as well to get DT address and
+>>> size. The return value is typecasted to paddr_t.
+>>> fdt_get_mem_rsv() can only accept u64 values. So, we provide a warpper
+
+Typo: s/warpper/wrapper/
+
+>>> for this called fdt_get_mem_rsv_paddr() which will do the necessary
+>>> typecasting before invoking fdt_get_mem_rsv() and while returning.
+>>>
+>>> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+>>
+>> I know we discussed this before and you implemented exactly what we
+>> suggested, but now looking at this patch I think we should do the
+>> following:
+>>
+>> - also add a wrapper for dt_read_number, something like
+>>    dt_read_number_paddr that returns paddr
+
+"number" and "paddr" pretty much means the same. I think it would be 
+better to name it "dt_read_paddr".
+
+>> - add a check for the top 32-bit being zero in all the wrappers
+>>    (dt_read_number_paddr, device_tree_get_reg, fdt_get_mem_rsv_paddr)
+>>    when paddr!=uint64_t. In case the top 32-bit are != zero I think we
+>>    should print an error
+>>
+>> Julien, I remember you were concerned about BUG_ON/panic/ASSERT and I
+>> agree with you there (especially considering Vikram's device tree
+>> overlay series). So here I am only suggesting to check truncation and
+>> printk a message, not panic. Would you be OK with that?
+
+Aside dt_read_number(), I would expect that most of the helper can 
+return an error. So if you want to check the truncation, then we should 
+propagate the error.
+
+>>
+>> Last comment, maybe we could add fdt_get_mem_rsv_paddr to setup.h
+>> instead of introducing xen/arch/arm/include/asm/device_tree.h, given
+>> that we already have device tree definitions there
+>> (device_tree_get_reg). I am OK either way.
+>   
+> Actually I noticed you also add dt_device_get_paddr to
+> xen/arch/arm/include/asm/device_tree.h. So it sounds like it is a good
+> idea to introduce xen/arch/arm/include/asm/device_tree.h, and we could
+> also move the declarations of device_tree_get_reg, device_tree_get_u32
+> there.
+
+None of the helpers you mention sounds arm specific. So why should the 
+be move an arch specific headers?
+
+[...]
+
+>>> diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+>>> index 0085c28d74..f536a3f3ab 100644
+>>> --- a/xen/arch/arm/bootfdt.c
+>>> +++ b/xen/arch/arm/bootfdt.c
+>>> @@ -11,9 +11,9 @@
+>>>   #include <xen/efi.h>
+>>>   #include <xen/device_tree.h>
+>>>   #include <xen/lib.h>
+>>> -#include <xen/libfdt/libfdt.h>
+>>>   #include <xen/sort.h>
+>>>   #include <xsm/xsm.h>
+>>> +#include <asm/device_tree.h>
+>>>   #include <asm/setup.h>
+>>>   
+>>>   static bool __init device_tree_node_matches(const void *fdt, int node,
+>>> @@ -53,10 +53,15 @@ static bool __init device_tree_node_compatible(const void *fdt, int node,
+>>>   }
+>>>   
+>>>   void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
+>>> -                                u32 size_cells, u64 *start, u64 *size)
+>>> +                                u32 size_cells, paddr_t *start, paddr_t *size)
+>>>   {
+>>> -    *start = dt_next_cell(address_cells, cell);
+>>> -    *size = dt_next_cell(size_cells, cell);
+>>> +    /*
+>>> +     * dt_next_cell will return u64 whereas paddr_t may be u64 or u32. Thus, one
+>>> +     * needs to cast paddr_t to u32. Note that we do not check for truncation as
+>>> +     * it is user's responsibility to provide the correct values in the DT.
+>>> +     */
+>>> +    *start = (paddr_t) dt_next_cell(address_cells, cell);
+>>> +    *size = (paddr_t) dt_next_cell(size_cells, cell);
+
+There is no need for explicit cast here.
+
+Cheers,
+
 -- 
-2.35.3
-
+Julien Grall
 
