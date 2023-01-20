@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7EBC05027
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 15:00:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481861.747102 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D457C38159
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 15:00:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481856.747057 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssK-0008RJ-MF; Fri, 20 Jan 2023 15:00:16 +0000
+	id 1pIssG-0007Ky-Ij; Fri, 20 Jan 2023 15:00:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481861.747102; Fri, 20 Jan 2023 15:00:16 +0000
+Received: by outflank-mailman (output) from mailman id 481856.747057; Fri, 20 Jan 2023 15:00:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssK-0008PA-82; Fri, 20 Jan 2023 15:00:16 +0000
-Received: by outflank-mailman (input) for mailman id 481861;
- Fri, 20 Jan 2023 15:00:13 +0000
+	id 1pIssG-0007JX-8u; Fri, 20 Jan 2023 15:00:12 +0000
+Received: by outflank-mailman (input) for mailman id 481856;
+ Fri, 20 Jan 2023 15:00:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RVut=5R=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pIssH-0006SQ-Dq
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:13 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1pIssF-0006SQ-4y
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:11 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 23371b36-98d3-11ed-b8d1-410ff93cb8f0;
- Fri, 20 Jan 2023 16:00:11 +0100 (CET)
-Received: by mail-wr1-x429.google.com with SMTP id t5so5117565wrq.1
- for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:11 -0800 (PST)
+ id 2113fc1c-98d3-11ed-b8d1-410ff93cb8f0;
+ Fri, 20 Jan 2023 16:00:08 +0100 (CET)
+Received: by mail-wr1-x432.google.com with SMTP id bk16so5076090wrb.11
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:08 -0800 (PST)
 Received: from localhost.localdomain
  (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
  by smtp.gmail.com with ESMTPSA id
- o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.09
+ o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jan 2023 07:00:10 -0800 (PST)
+ Fri, 20 Jan 2023 07:00:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 23371b36-98d3-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 2113fc1c-98d3-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Oa0wgdXnZxM249MLdfrJG7qfiY3SAdUUZ8LhXWtM0Ic=;
-        b=ZABVCYsyUwKcpQX/0rzLULBtNWpkV9f4/4PXMYrYkEgKk+mKZn/DNDloFJKUDTrixv
-         Po36LgKBFSxolnriU06W0pe/TW3yjv8dxO0RLkHDxLXKyfcwtwFYfZ7aTYKt0eD95p6T
-         7MINqvik3DYun61yVCym92uqCPZfh/fVQtS/HKpqV8TpkUCMBbtef+r4cHS6Ko8i5qef
-         ukUJ1HY6Pti6D0kGKBKsCsCgiHtUS+FzSR6JEtntdKA4SsLCb7HONIDZfSYceVGi0/TV
-         wASdlX+wR+hAOEs4Acc28rWr915dBjeqzLqvf0emA8noZjE1s91x7Bxq7DpuJb00pl3a
-         VG3A==
+        bh=opQz8gCT9iZSR+WTMArSNrtKt78jXvFW2kTnX4DfyVc=;
+        b=WOtan2LjZ2jfOwtlK8bLlMIwol9pKEn7hPN/TZFTpNHBzRMlBhKC/czgmoEFpzncDu
+         a5FlIBHjy+DeXabFmAxMAg7CtIy5EByiam7FBsv39XjVD8cb7u0nIN4pNA4wbCf0D0PV
+         g+NbtZqC3xroIZIMYI8RFEQcHIwZH9TVGweOOeJ826qcdzVBo5xCdPmvpyuTqxGizpUA
+         ThLdu/eAllPPuDi9esG5XNywIvo/bdwo3+Xf2lGcK9a1UpKSKgz6FqFG/oM+aQlf2ori
+         tc+rsxpzrXes37X+12Md2eQ35jYikvimz0gFyhA99DPEeh/EXCnABrEvdFtYzi9q/GPN
+         yjGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Oa0wgdXnZxM249MLdfrJG7qfiY3SAdUUZ8LhXWtM0Ic=;
-        b=yZCeN4MmUps7HohmDwzlNSRffXoCVYC7CFwYlL8jpk5/rC7hXfHW0tww+wWhp7t7ru
-         mJnpwF8qZsoCXq5M59EYWqEaKjM4eYmSsA/pOCELhPp2zNcxkEnIuIGSIO1+NA9PeGSG
-         YtFcXQjmv/GJJmcbrARTATJMOfB1k5Y4HuuuoRPhXcUGsxDwvYmzn43ZGMRjw6kZgn46
-         S4iI8DFTcdpsTTVN8Q7w7nQhgTonx/5gLfM2Xp3YXBfK3ZlVN0JhJtePiBEhEzl9XOYg
-         JQkqJOoFZrq+FLbuQfEXmk3jZDacb4lNUqegUVvkNkzON4vCfPF9LB+rIKmoqkUP/+C1
-         8fzA==
-X-Gm-Message-State: AFqh2komjlIdxNS2IDsBiAjZVSS6B9SFoTr5mnWSQ40EZ99+TNnD6J7w
-	taCCJBWhtohJQUKPf5Pty/dGMPAhBwAAUw==
-X-Google-Smtp-Source: AMrXdXuEs6tkrKfGNgQJxeUkzovrnpB0U2Hqnxd8SMBOuezNI2Q2tP5yjGlQzzQTreLtSGeScTUsOg==
-X-Received: by 2002:a5d:4526:0:b0:2bc:839c:134d with SMTP id j6-20020a5d4526000000b002bc839c134dmr13159877wra.4.1674226810899;
-        Fri, 20 Jan 2023 07:00:10 -0800 (PST)
+        bh=opQz8gCT9iZSR+WTMArSNrtKt78jXvFW2kTnX4DfyVc=;
+        b=gg7KpFLJ5vd+XG/Yr4aV/dRS479cI+bmd8f9awMrctzaSYr0zetqvGPy4HfTR4Fbkl
+         rgcvGLQTk8R3dUvkPpzyRDR9X2hq3hfY36J3Yxp9DAM3xTgmPuBiA0DLXL3UXktqDg4X
+         upHrB3IPa6OLYF7ApU+M8hQnWOe4/RmjKV+PRPJQTl14VUaUf5k89k2EF8emnutonfgF
+         U90BPXPvRpVoMbkovhyahS940ZC1tJ1lcmuaM5j7lphP3dRyfLP/3wFEt462nRqSYyE6
+         G8egU7F9bd/c8GayagvND93MgZzW5ge5EKVgHdU/smfn6LuffTURyzJS0Vt/vnK9oG9n
+         o0Sw==
+X-Gm-Message-State: AFqh2kqWME1KAJ9y+cuqdTNoIVQMjcT7zGXXMkGfYLUeXqbCePfjo4N7
+	SvYDDtRda93LqZtk5m8QCW2CzaMy0zxL9w==
+X-Google-Smtp-Source: AMrXdXuScvj5uQgGPJ3XTwgT2aMxFJsoyM1b85V3S9fi5MqBWbFJc4rQb6iymVthAIGhVLhFI2P7IQ==
+X-Received: by 2002:a05:6000:10d:b0:2be:bfc5:c2ef with SMTP id o13-20020a056000010d00b002bebfc5c2efmr1738675wrx.49.1674226807202;
+        Fri, 20 Jan 2023 07:00:07 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -86,124 +86,109 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 08/14] xen/riscv: introduce decode_cause() stuff
-Date: Fri, 20 Jan 2023 16:59:48 +0200
-Message-Id: <c798832ec19cb94c0a27e8cff8f5bd6d1aa6ae7e.1674226563.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 04/14] xen/riscv: add <asm/csr.h> header
+Date: Fri, 20 Jan 2023 16:59:44 +0200
+Message-Id: <afc53b9bee58b5d386f105ee8f23a411d5a15bed.1674226563.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 References: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch introduces stuff needed to decode a reason of an
-exception.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/traps.c | 88 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 88 insertions(+)
+ xen/arch/riscv/include/asm/csr.h | 82 ++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/csr.h
 
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 3201b851ef..dd64f053a5 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -4,8 +4,96 @@
-  *
-  * RISC-V Trap handlers
-  */
-+#include <asm/csr.h>
-+#include <asm/early_printk.h>
- #include <asm/processor.h>
- #include <asm/traps.h>
-+#include <xen/errno.h>
+diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+new file mode 100644
+index 0000000000..1a879c6c4d
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/csr.h
+@@ -0,0 +1,82 @@
++/*
++ * Take from Linux.
++ *
++ * SPDX-License-Identifier: GPL-2.0-only
++ *
++ * Copyright (C) 2015 Regents of the University of California
++ */
 +
-+const char *decode_trap_cause(unsigned long cause)
-+{
-+    switch ( cause )
-+    {
-+    case CAUSE_MISALIGNED_FETCH:
-+        return "Instruction Address Misaligned";
-+    case CAUSE_FETCH_ACCESS:
-+        return "Instruction Access Fault";
-+    case CAUSE_ILLEGAL_INSTRUCTION:
-+        return "Illegal Instruction";
-+    case CAUSE_BREAKPOINT:
-+        return "Breakpoint";
-+    case CAUSE_MISALIGNED_LOAD:
-+        return "Load Address Misaligned";
-+    case CAUSE_LOAD_ACCESS:
-+        return "Load Access Fault";
-+    case CAUSE_MISALIGNED_STORE:
-+        return "Store/AMO Address Misaligned";
-+    case CAUSE_STORE_ACCESS:
-+        return "Store/AMO Access Fault";
-+    case CAUSE_USER_ECALL:
-+        return "Environment Call from U-Mode";
-+    case CAUSE_SUPERVISOR_ECALL:
-+        return "Environment Call from S-Mode";
-+    case CAUSE_MACHINE_ECALL:
-+        return "Environment Call from M-Mode";
-+    case CAUSE_FETCH_PAGE_FAULT:
-+        return "Instruction Page Fault";
-+    case CAUSE_LOAD_PAGE_FAULT:
-+        return "Load Page Fault";
-+    case CAUSE_STORE_PAGE_FAULT:
-+        return "Store/AMO Page Fault";
-+    case CAUSE_FETCH_GUEST_PAGE_FAULT:
-+        return "Instruction Guest Page Fault";
-+    case CAUSE_LOAD_GUEST_PAGE_FAULT:
-+        return "Load Guest Page Fault";
-+    case CAUSE_VIRTUAL_INST_FAULT:
-+        return "Virtualized Instruction Fault";
-+    case CAUSE_STORE_GUEST_PAGE_FAULT:
-+        return "Guest Store/AMO Page Fault";
-+    default:
-+        return "UNKNOWN";
-+    }
-+}
++#ifndef _ASM_RISCV_CSR_H
++#define _ASM_RISCV_CSR_H
 +
-+const char *decode_reserved_interrupt_cause(unsigned long irq_cause)
-+{
-+    switch ( irq_cause )
-+    {
-+    case IRQ_M_SOFT:
-+        return "M-mode Software Interrupt";
-+    case IRQ_M_TIMER:
-+        return "M-mode TIMER Interrupt";
-+    case IRQ_M_EXT:
-+        return "M-mode TIMER Interrupt";
-+    default:
-+        return "UNKNOWN IRQ type";
-+    }
-+}
++#include <asm/asm.h>
++#include <xen/const.h>
++#include <asm/riscv_encoding.h>
 +
-+const char *decode_interrupt_cause(unsigned long cause)
-+{
-+    unsigned long irq_cause = cause & ~CAUSE_IRQ_FLAG;
++#ifndef __ASSEMBLY__
 +
-+    switch ( irq_cause )
-+    {
-+    case IRQ_S_SOFT:
-+        return "Supervisor Software Interrupt";
-+    case IRQ_S_TIMER:
-+        return "Supervisor Timer Interrupt";
-+    case IRQ_S_EXT:
-+        return "Supervisor External Interrupt";
-+    default:
-+        return decode_reserved_interrupt_cause(irq_cause);
-+    }
-+}
++#define csr_read(csr)						\
++({								\
++	register unsigned long __v;				\
++	__asm__ __volatile__ ("csrr %0, " __ASM_STR(csr)	\
++			      : "=r" (__v) :			\
++			      : "memory");			\
++	__v;							\
++})
 +
-+const char *decode_cause(unsigned long cause)
-+{
-+    if ( cause & CAUSE_IRQ_FLAG )
-+        return decode_interrupt_cause(cause);
++#define csr_write(csr, val)					\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrw " __ASM_STR(csr) ", %0"	\
++			      : : "rK" (__v)			\
++			      : "memory");			\
++})
 +
-+    return decode_trap_cause(cause);
-+}
- 
- void __handle_exception(struct cpu_user_regs *cpu_regs)
- {
++/*
++#define csr_swap(csr, val)					\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrrw %0, " __ASM_STR(csr) ", %1"\
++			      : "=r" (__v) : "rK" (__v)		\
++			      : "memory");			\
++	__v;							\
++})
++
++#define csr_read_set(csr, val)					\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrrs %0, " __ASM_STR(csr) ", %1"\
++			      : "=r" (__v) : "rK" (__v)		\
++			      : "memory");			\
++	__v;							\
++})
++
++#define csr_set(csr, val)					\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrs " __ASM_STR(csr) ", %0"	\
++			      : : "rK" (__v)			\
++			      : "memory");			\
++})
++
++#define csr_read_clear(csr, val)				\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrrc %0, " __ASM_STR(csr) ", %1"\
++			      : "=r" (__v) : "rK" (__v)		\
++			      : "memory");			\
++	__v;							\
++})
++
++#define csr_clear(csr, val)					\
++({								\
++	unsigned long __v = (unsigned long)(val);		\
++	__asm__ __volatile__ ("csrc " __ASM_STR(csr) ", %0"	\
++			      : : "rK" (__v)			\
++			      : "memory");			\
++})
++*/
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* _ASM_RISCV_CSR_H */
 -- 
 2.39.0
 
