@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 656DEC54E94
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 15:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481866.747142 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E90A6C5320B
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 15:00:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481855.747050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssP-0001AI-Mp; Fri, 20 Jan 2023 15:00:21 +0000
+	id 1pIssF-0007Fa-TS; Fri, 20 Jan 2023 15:00:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481866.747142; Fri, 20 Jan 2023 15:00:21 +0000
+Received: by outflank-mailman (output) from mailman id 481855.747050; Fri, 20 Jan 2023 15:00:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIssP-00015Y-5x; Fri, 20 Jan 2023 15:00:21 +0000
-Received: by outflank-mailman (input) for mailman id 481866;
- Fri, 20 Jan 2023 15:00:18 +0000
+	id 1pIssF-0007FQ-QU; Fri, 20 Jan 2023 15:00:11 +0000
+Received: by outflank-mailman (input) for mailman id 481855;
+ Fri, 20 Jan 2023 15:00:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RVut=5R=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pIssL-0006SQ-VA
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:18 +0000
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [2a00:1450:4864:20::32b])
+ id 1pIssE-0006SQ-D7
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 15:00:10 +0000
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [2a00:1450:4864:20::429])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25b2fbdd-98d3-11ed-b8d1-410ff93cb8f0;
- Fri, 20 Jan 2023 16:00:15 +0100 (CET)
-Received: by mail-wm1-x32b.google.com with SMTP id
- f19-20020a1c6a13000000b003db0ef4dedcso6017950wmc.4
- for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:15 -0800 (PST)
+ id 208d18a5-98d3-11ed-b8d1-410ff93cb8f0;
+ Fri, 20 Jan 2023 16:00:07 +0100 (CET)
+Received: by mail-wr1-x429.google.com with SMTP id b7so5106741wrt.3
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Jan 2023 07:00:07 -0800 (PST)
 Received: from localhost.localdomain
  (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
  by smtp.gmail.com with ESMTPSA id
- o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.14
+ o2-20020a5d58c2000000b002bdbead763csm25349811wrf.95.2023.01.20.07.00.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jan 2023 07:00:14 -0800 (PST)
+ Fri, 20 Jan 2023 07:00:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25b2fbdd-98d3-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 208d18a5-98d3-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=AohNoimI/yhgb0o3Ba+qV4NmjlQD+20RTtBoHbVgDJ4=;
-        b=bClvr+doJ8sqt0dhmwoLUhRQBOzD8FJ7aRNEBI6Lv8lroNqFp83vN0+aZkwzAAGnyv
-         PsjzBDdAKuwANCTy9kcY2OTYwAoVlTOLHVdC0ztrggwBCemzVM3Qh8xLP4dHcBDu6rHa
-         HQN4dQKAwdOQOwZR3b9HcRcE1hPx0k39kFIdK0NDDg1zmu22xmDnMniQFV/OK6yfQrwe
-         ZQ7pyDOrI1q8TDa6Gtmfk6RBr7UhJj2uSKbX1AbaquU8IuemxnICfBUCTX0/X1ab8cjr
-         dX5jmwJVL0BIiTaxNo33agKTbKqKcDZiNOWp8T3VG5cDdEj3J8IRLg+Y1OdOMJNJg9un
-         4eHw==
+        bh=gAB4r87bId7kPWzpHKqbdZA0XSGkJtE2emLrpTBI6C0=;
+        b=lE/9F+HYPmOykIusBzDKTtxNxkcxeNrUaaw5tRf93DHa8TSeybpBoP4ifdzoV/KVva
+         BRmS6SX3EkGknm+DW9t42+BeUspDBNP2a7RE8QoRKW+JWQ2q9XDJeUSxdJVaUwStZTv0
+         xhthC6MUdZTAjhlb33e7y+ygrJhYpEfrxKzKxz+55oMNaboIKiEfM1E6JgH33ZPKCnkz
+         JFDhrv7FWiK3QzTDRiZTAVBF1uk0bRVepwbGY0dN+VYgOQdJv71W/7wZ+Q4ru3/ky6rp
+         g1F1c3eO3P5PaMjbgu3kCa1wX8gS+STdS2+tb6jxBqwQv1oAc2ZzMMoce7smD9TdK0L2
+         FEZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=AohNoimI/yhgb0o3Ba+qV4NmjlQD+20RTtBoHbVgDJ4=;
-        b=ZQdoXABo3zcRd722L+77sSvfw/eeHKaInDc00cSabW5IvNhZ1HXr9CWl86YGZj+Zwd
-         eDUvkZcJUtUJwMo9Yi4zzQDOad91wERX3/2JpAyJjprMLF7r+EheMIcVD2lBEtot3+48
-         I4AXHwd5w/EdjlnaK8ZKwR737UNGZmVRtc4Iys+zkx6RGU/C0k84U9Vgbg0/mDcEa2w2
-         M1XcJV9Ps59hcpbSre/2WRQfepGh/vadn4NCSavTDyLxnSAIq1MOC+mrLm0UQ/aN5cOp
-         Fgu/pFv8o+CSVN78H75LRK3PGpcS82+XocWq3cKpkrFbF9pmFaDztG4mmjLwOtOIlJYV
-         KHOA==
-X-Gm-Message-State: AFqh2kp6avAJDMrm7FqDTk1XfZC81l+a+g3F9YL6P6o58Pw4+NaZRD9h
-	pRirFsOImyIjSlddhzRFxbyVJV0k2vDhfw==
-X-Google-Smtp-Source: AMrXdXsk5FWNrQr7OBANffsAgrKjctoT/969G1bCCgqUY2ooV3Ha4IY073V3hCu8uwOxhKSpwhz3ew==
-X-Received: by 2002:a05:600c:1c1a:b0:3da:fbd2:a324 with SMTP id j26-20020a05600c1c1a00b003dafbd2a324mr14582175wms.36.1674226814825;
-        Fri, 20 Jan 2023 07:00:14 -0800 (PST)
+        bh=gAB4r87bId7kPWzpHKqbdZA0XSGkJtE2emLrpTBI6C0=;
+        b=O9B3YuWBuM++ckIEHrThMfkVYUh3YrSfEExzRVxPKDJDIP/qJSvOCfQLKXRfIhOCFe
+         F1Jhd+GM2x4/f3Ag+/ncTwqjwf46cE/VX2CkhOktnSvOvbMP0ZQwUjZu+cuW+uaJkTH1
+         cpdrqYp8DqYSpEGx8QVqPJBEGxo/V/YTvi7y+S1uq2fDM7gYYh/JXBheQ5qfqjUHEJt5
+         nbvcAePusayDSWajG647br2gxrviI+3N30oj4tbb3i69eVzzF1HT9UjlplSlfQ0hMfZw
+         mzdUjtKmiTW64TaVOxOjIrbpdnSB2ZcU1mBM0ofgGHhWNXRRKNl82izAenhFcwbBON7M
+         /mrQ==
+X-Gm-Message-State: AFqh2kocACVoBnztdbk/g09L4YBR0FXdnR12Xq3MhIdgc13jpGP0SUK3
+	qryYaKV6MMJIjNgXz6A3dHJ8ixrCaXXrkA==
+X-Google-Smtp-Source: AMrXdXu0H2fPI3Bfazs+LJValHir7JaXA3B7NTQ5TUidTAfsG8MKC4c53iFH9rsENi/AiioZMMbccQ==
+X-Received: by 2002:adf:cd06:0:b0:2be:34f5:1050 with SMTP id w6-20020adfcd06000000b002be34f51050mr8831094wrm.39.1674226806108;
+        Fri, 20 Jan 2023 07:00:06 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -87,312 +86,972 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 12/14] xen/riscv: introduce an implementation of macros from <asm/bug.h>
-Date: Fri, 20 Jan 2023 16:59:52 +0200
-Message-Id: <a0788e4744b04597fbd3e71c2bef0bd76843a066.1674226563.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 03/14] xen/riscv: add <asm/riscv_encoding.h header
+Date: Fri, 20 Jan 2023 16:59:43 +0200
+Message-Id: <fe153cbeffd4ba4e158271ccd2449628f4973481.1674226563.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 References: <cover.1674226563.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch introduces macros: BUG(), WARN(), run_in_exception(),
-assert_failed.
-
-The implementation uses "ebreak" instruction in combination with
-diffrent bug frame tables (for each type) which contains useful
-information.
-
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/bug.h | 120 +++++++++++++++++++++++++++++++
- xen/arch/riscv/traps.c           | 116 ++++++++++++++++++++++++++++++
- xen/arch/riscv/xen.lds.S         |  10 +++
- 3 files changed, 246 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/bug.h
+ xen/arch/riscv/include/asm/riscv_encoding.h | 945 ++++++++++++++++++++
+ 1 file changed, 945 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/riscv_encoding.h
 
-diff --git a/xen/arch/riscv/include/asm/bug.h b/xen/arch/riscv/include/asm/bug.h
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
 new file mode 100644
-index 0000000000..d17ffdcc4d
+index 0000000000..8a43d49f7a
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/bug.h
-@@ -0,0 +1,120 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -0,0 +1,945 @@
++/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
 +/*
-+ * Copyright (C) 2012 Regents of the University of California
-+ * Copyright (C) 2021-2023 Vates
++ * Copyright (c) 2019 Western Digital Corporation or its affiliates.
 + *
++ * Authors:
++ *   Anup Patel <anup.patel@wdc.com>
++ * 
++ * The source has been largely adapted from OpenSBI:
++ * include/sbi/riscv_encodnig.h
++ * 
 + */
 +
-+#ifndef _ASM_RISCV_BUG_H
-+#define _ASM_RISCV_BUG_H
++#ifndef __RISCV_ENCODING_H__
++#define __RISCV_ENCODING_H__
 +
-+#include <xen/stringify.h>
-+#include <xen/types.h>
++#define _UL(X) _AC(X, UL)
++#define _ULL(X) _AC(X, ULL)
 +
-+#ifndef __ASSEMBLY__
++/* clang-format off */
++#define MSTATUS_SIE			_UL(0x00000002)
++#define MSTATUS_MIE			_UL(0x00000008)
++#define MSTATUS_SPIE_SHIFT		5
++#define MSTATUS_SPIE			(_UL(1) << MSTATUS_SPIE_SHIFT)
++#define MSTATUS_UBE			_UL(0x00000040)
++#define MSTATUS_MPIE			_UL(0x00000080)
++#define MSTATUS_SPP_SHIFT		8
++#define MSTATUS_SPP			(_UL(1) << MSTATUS_SPP_SHIFT)
++#define MSTATUS_MPP_SHIFT		11
++#define MSTATUS_MPP			(_UL(3) << MSTATUS_MPP_SHIFT)
++#define MSTATUS_FS			_UL(0x00006000)
++#define MSTATUS_FS_OFF			_UL(0x00000000)
++#define MSTATUS_FS_INITIAL		_UL(0x00002000)
++#define MSTATUS_FS_CLEAN		_UL(0x00004000)
++#define MSTATUS_FS_DIRTY		_UL(0x00006000)
++#define MSTATUS_XS			_UL(0x00018000)
++#define MSTATUS_XS_OFF			_UL(0x00000000)
++#define MSTATUS_XS_INITIAL		_UL(0x00008000)
++#define MSTATUS_XS_CLEAN		_UL(0x00010000)
++#define MSTATUS_XS_DIRTY		_UL(0x00018000)
++#define MSTATUS_VS			_UL(0x01800000)
++#define MSTATUS_VS_OFF			_UL(0x00000000)
++#define MSTATUS_VS_INITIAL		_UL(0x00800000)
++#define MSTATUS_VS_CLEAN		_UL(0x01000000)
++#define MSTATUS_VS_DIRTY		_UL(0x01800000)
++#define MSTATUS_MPRV			_UL(0x00020000)
++#define MSTATUS_SUM			_UL(0x00040000)
++#define MSTATUS_MXR			_UL(0x00080000)
++#define MSTATUS_TVM			_UL(0x00100000)
++#define MSTATUS_TW			_UL(0x00200000)
++#define MSTATUS_TSR			_UL(0x00400000)
++#define MSTATUS32_SD			_UL(0x80000000)
++#if __riscv_xlen == 64
++#define MSTATUS_UXL			_ULL(0x0000000300000000)
++#define MSTATUS_SXL			_ULL(0x0000000C00000000)
++#define MSTATUS_SBE			_ULL(0x0000001000000000)
++#define MSTATUS_MBE			_ULL(0x0000002000000000)
++#define MSTATUS_MPV			_ULL(0x0000008000000000)
++#else
++#define MSTATUSH_SBE			_UL(0x00000010)
++#define MSTATUSH_MBE			_UL(0x00000020)
++#define MSTATUSH_MPV			_UL(0x00000080)
++#endif
++#define MSTATUS32_SD			_UL(0x80000000)
++#define MSTATUS64_SD			_ULL(0x8000000000000000)
 +
-+struct bug_frame {
-+    signed int loc_disp;    /* Relative address to the bug address */
-+    signed int file_disp;   /* Relative address to the filename */
-+    signed int msg_disp;    /* Relative address to the predicate (for ASSERT) */
-+    uint16_t line;          /* Line number */
-+    uint32_t pad0:16;       /* Padding for 8-bytes align */
-+};
++#define SSTATUS_SIE			MSTATUS_SIE
++#define SSTATUS_SPIE_SHIFT		MSTATUS_SPIE_SHIFT
++#define SSTATUS_SPIE			MSTATUS_SPIE
++#define SSTATUS_SPP_SHIFT		MSTATUS_SPP_SHIFT
++#define SSTATUS_SPP			MSTATUS_SPP
++#define SSTATUS_FS			MSTATUS_FS
++#define SSTATUS_FS_OFF			MSTATUS_FS_OFF
++#define SSTATUS_FS_INITIAL		MSTATUS_FS_INITIAL
++#define SSTATUS_FS_CLEAN		MSTATUS_FS_CLEAN
++#define SSTATUS_FS_DIRTY		MSTATUS_FS_DIRTY
++#define SSTATUS_XS			MSTATUS_XS
++#define SSTATUS_XS_OFF			MSTATUS_XS_OFF
++#define SSTATUS_XS_INITIAL		MSTATUS_XS_INITIAL
++#define SSTATUS_XS_CLEAN		MSTATUS_XS_CLEAN
++#define SSTATUS_XS_DIRTY		MSTATUS_XS_DIRTY
++#define SSTATUS_VS			MSTATUS_VS
++#define SSTATUS_VS_OFF			MSTATUS_VS_OFF
++#define SSTATUS_VS_INITIAL		MSTATUS_VS_INITIAL
++#define SSTATUS_VS_CLEAN		MSTATUS_VS_CLEAN
++#define SSTATUS_VS_DIRTY		MSTATUS_VS_DIRTY
++#define SSTATUS_SUM			MSTATUS_SUM
++#define SSTATUS_MXR			MSTATUS_MXR
++#define SSTATUS32_SD			MSTATUS32_SD
++#define SSTATUS64_UXL			MSTATUS_UXL
++#define SSTATUS64_SD			MSTATUS64_SD
 +
-+#define bug_loc(b) ((const void *)(b) + (b)->loc_disp)
-+#define bug_file(b) ((const void *)(b) + (b)->file_disp);
-+#define bug_line(b) ((b)->line)
-+#define bug_msg(b) ((const char *)(b) + (b)->msg_disp)
++#if __riscv_xlen == 64
++#define HSTATUS_VSXL			_UL(0x300000000)
++#define HSTATUS_VSXL_SHIFT		32
++#endif
++#define HSTATUS_VTSR			_UL(0x00400000)
++#define HSTATUS_VTW			_UL(0x00200000)
++#define HSTATUS_VTVM			_UL(0x00100000)
++#define HSTATUS_VGEIN			_UL(0x0003f000)
++#define HSTATUS_VGEIN_SHIFT		12
++#define HSTATUS_HU			_UL(0x00000200)
++#define HSTATUS_SPVP			_UL(0x00000100)
++#define HSTATUS_SPV			_UL(0x00000080)
++#define HSTATUS_GVA			_UL(0x00000040)
++#define HSTATUS_VSBE			_UL(0x00000020)
 +
-+#define BUGFRAME_run_fn 0
-+#define BUGFRAME_warn   1
-+#define BUGFRAME_bug    2
-+#define BUGFRAME_assert 3
++#define IRQ_S_SOFT			1
++#define IRQ_VS_SOFT			2
++#define IRQ_M_SOFT			3
++#define IRQ_S_TIMER			5
++#define IRQ_VS_TIMER			6
++#define IRQ_M_TIMER			7
++#define IRQ_S_EXT			9
++#define IRQ_VS_EXT			10
++#define IRQ_M_EXT			11
++#define IRQ_S_GEXT			12
++#define IRQ_PMU_OVF			13
 +
-+#define BUGFRAME_NR     4
++#define MIP_SSIP			(_UL(1) << IRQ_S_SOFT)
++#define MIP_VSSIP			(_UL(1) << IRQ_VS_SOFT)
++#define MIP_MSIP			(_UL(1) << IRQ_M_SOFT)
++#define MIP_STIP			(_UL(1) << IRQ_S_TIMER)
++#define MIP_VSTIP			(_UL(1) << IRQ_VS_TIMER)
++#define MIP_MTIP			(_UL(1) << IRQ_M_TIMER)
++#define MIP_SEIP			(_UL(1) << IRQ_S_EXT)
++#define MIP_VSEIP			(_UL(1) << IRQ_VS_EXT)
++#define MIP_MEIP			(_UL(1) << IRQ_M_EXT)
++#define MIP_SGEIP			(_UL(1) << IRQ_S_GEXT)
++#define MIP_LCOFIP			(_UL(1) << IRQ_PMU_OVF)
 +
-+#define __INSN_LENGTH_MASK  _UL(0x3)
-+#define __INSN_LENGTH_32    _UL(0x3)
-+#define __COMPRESSED_INSN_MASK	_UL(0xffff)
++#define SIP_SSIP			MIP_SSIP
++#define SIP_STIP			MIP_STIP
 +
-+#define __BUG_INSN_32	_UL(0x00100073) /* ebreak */
-+#define __BUG_INSN_16	_UL(0x9002) /* c.ebreak */
++#define PRV_U				_UL(0)
++#define PRV_S				_UL(1)
++#define PRV_M				_UL(3)
 +
-+#define GET_INSN_LENGTH(insn)						\
-+({									\
-+	unsigned long __len;						\
-+	__len = ((insn & __INSN_LENGTH_MASK) == __INSN_LENGTH_32) ?	\
-+		4UL : 2UL;						\
-+	__len;								\
-+})
++#define SATP32_MODE			_UL(0x80000000)
++#define SATP32_MODE_SHIFT		31
++#define SATP32_ASID			_UL(0x7FC00000)
++#define SATP32_ASID_SHIFT		22
++#define SATP32_PPN			_UL(0x003FFFFF)
++#define SATP64_MODE			_ULL(0xF000000000000000)
++#define SATP64_MODE_SHIFT		60
++#define SATP64_ASID			_ULL(0x0FFFF00000000000)
++#define SATP64_ASID_SHIFT		44
++#define SATP64_PPN			_ULL(0x00000FFFFFFFFFFF)
 +
-+typedef u32 bug_insn_t;
++#define SATP_MODE_OFF			_UL(0)
++#define SATP_MODE_SV32			_UL(1)
++#define SATP_MODE_SV39			_UL(8)
++#define SATP_MODE_SV48			_UL(9)
++#define SATP_MODE_SV57			_UL(10)
++#define SATP_MODE_SV64			_UL(11)
 +
-+/* These are defined by the architecture */
-+int is_valid_bugaddr(bug_insn_t addr);
++#define HGATP_MODE_OFF			_UL(0)
++#define HGATP_MODE_SV32X4		_UL(1)
++#define HGATP_MODE_SV39X4		_UL(8)
++#define HGATP_MODE_SV48X4		_UL(9)
 +
-+#define BUG_FN_REG t0
++#define HGATP32_MODE_SHIFT		31
++#define HGATP32_VMID_SHIFT		22
++#define HGATP32_VMID_MASK		_UL(0x1FC00000)
++#define HGATP32_PPN			_UL(0x003FFFFF)
 +
-+/* Many versions of GCC doesn't support the asm %c parameter which would
-+ * be preferable to this unpleasantness. We use mergeable string
-+ * sections to avoid multiple copies of the string appearing in the
-+ * Xen image. BUGFRAME_run_fn needs to be handled separately.
-+ */
-+#define BUG_FRAME(type, line, file, has_msg, msg) do {                      \
-+    asm ("1:ebreak\n"														\
-+         ".pushsection .rodata.str, \"aMS\", %progbits, 1\n"                \
-+         "2:\t.asciz " __stringify(file) "\n"                               \
-+         "3:\n"                                                             \
-+         ".if " #has_msg "\n"                                               \
-+         "\t.asciz " #msg "\n"                                              \
-+         ".endif\n"                                                         \
-+         ".popsection\n"                                                    \
-+         ".pushsection .bug_frames." __stringify(type) ", \"a\", %progbits\n"\
-+         "4:\n"                                                             \
-+         ".p2align 2\n"                                                     \
-+         ".long (1b - 4b)\n"                                                \
-+         ".long (2b - 4b)\n"                                                \
-+         ".long (3b - 4b)\n"                                                \
-+         ".hword " __stringify(line) ", 0\n"                                \
-+         ".popsection");                                                    \
-+} while (0)
++#define HGATP64_MODE_SHIFT		60
++#define HGATP64_VMID_SHIFT		44
++#define HGATP64_VMID_MASK		_ULL(0x03FFF00000000000)
++#define HGATP64_PPN			_ULL(0x00000FFFFFFFFFFF)
 +
-+/*
-+ * GCC will not allow to use "i"  when PIE is enabled (Xen doesn't set the
-+ * flag but instead rely on the default value from the compiler). So the
-+ * easiest way to implement run_in_exception_handler() is to pass the to
-+ * be called function in a fixed register.
-+ */
-+#define  run_in_exception_handler(fn) do {                                  \
-+    asm ("mv " __stringify(BUG_FN_REG) ", %0\n"                            	\
-+         "1:ebreak\n"                                                  		\
-+         ".pushsection .bug_frames." __stringify(BUGFRAME_run_fn) ","       \
-+         "             \"a\", %%progbits\n"                                 \
-+         "2:\n"                                                             \
-+         ".p2align 2\n"                                                     \
-+         ".long (1b - 2b)\n"                                                \
-+         ".long 0, 0, 0\n"                                                  \
-+         ".popsection" :: "r" (fn) : __stringify(BUG_FN_REG) );             \
-+} while (0)
++#define PMP_R				_UL(0x01)
++#define PMP_W				_UL(0x02)
++#define PMP_X				_UL(0x04)
++#define PMP_A				_UL(0x18)
++#define PMP_A_TOR			_UL(0x08)
++#define PMP_A_NA4			_UL(0x10)
++#define PMP_A_NAPOT			_UL(0x18)
++#define PMP_L				_UL(0x80)
 +
-+#define WARN() BUG_FRAME(BUGFRAME_warn, __LINE__, __FILE__, 0, "")
++#define PMP_SHIFT			2
++#define PMP_COUNT			64
++#if __riscv_xlen == 64
++#define PMP_ADDR_MASK			((_ULL(0x1) << 54) - 1)
++#else
++#define PMP_ADDR_MASK			_UL(0xFFFFFFFF)
++#endif
 +
-+#define BUG() do {                                              \
-+    BUG_FRAME(BUGFRAME_bug,  __LINE__, __FILE__, 0, "");        \
-+    unreachable();                                              \
-+} while (0)
++#if __riscv_xlen == 64
++#define MSTATUS_SD			MSTATUS64_SD
++#define SSTATUS_SD			SSTATUS64_SD
++#define SATP_MODE			SATP64_MODE
++#define SATP_MODE_SHIFT			SATP64_MODE_SHIFT
 +
-+#define assert_failed(msg) do {                                 \
-+    BUG_FRAME(BUGFRAME_assert, __LINE__, __FILE__, 1, msg);     \
-+    unreachable();                                              \
-+} while (0)
++#define HGATP_PPN			HGATP64_PPN
++#define HGATP_VMID_SHIFT		HGATP64_VMID_SHIFT
++#define HGATP_VMID_MASK			HGATP64_VMID_MASK
++#define HGATP_MODE_SHIFT		HGATP64_MODE_SHIFT
++#else
++#define MSTATUS_SD			MSTATUS32_SD
++#define SSTATUS_SD			SSTATUS32_SD
++#define SATP_MODE			SATP32_MODE
++#define SATP_MODE_SHIFT			SATP32_MODE_SHIFT
 +
-+extern const struct bug_frame __start_bug_frames[],
-+                              __stop_bug_frames_0[],
-+                              __stop_bug_frames_1[],
-+                              __stop_bug_frames_2[],
-+                              __stop_bug_frames_3[];
++#define HGATP_PPN			HGATP32_PPN
++#define HGATP_VMID_SHIFT		HGATP32_VMID_SHIFT
++#define HGATP_VMID_MASK			HGATP32_VMID_MASK
++#define HGATP_MODE_SHIFT		HGATP32_MODE_SHIFT
++#endif
 +
-+#endif /* !__ASSEMBLY__ */
++#define TOPI_IID_SHIFT			16
++#define TOPI_IID_MASK			0xfff
++#define TOPI_IPRIO_MASK		0xff
 +
-+#endif /* _ASM_RISCV_BUG_H */
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index fc25138a4b..8b719a5ef5 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -4,6 +4,7 @@
-  *
-  * RISC-V Trap handlers
-  */
-+#include <asm/bug.h>
- #include <asm/csr.h>
- #include <asm/early_printk.h>
- #include <asm/processor.h>
-@@ -107,7 +108,122 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
-     wait_for_interrupt();
- }
- 
-+void show_execution_state(const struct cpu_user_regs *regs)
-+{
-+    early_printk("implement show_execution_state(regs)\n");
-+}
++#if __riscv_xlen == 64
++#define MHPMEVENT_OF			(_UL(1) << 63)
++#define MHPMEVENT_MINH			(_UL(1) << 62)
++#define MHPMEVENT_SINH			(_UL(1) << 61)
++#define MHPMEVENT_UINH			(_UL(1) << 60)
++#define MHPMEVENT_VSINH			(_UL(1) << 59)
++#define MHPMEVENT_VUINH			(_UL(1) << 58)
++#else
++#define MHPMEVENTH_OF			(_ULL(1) << 31)
++#define MHPMEVENTH_MINH			(_ULL(1) << 30)
++#define MHPMEVENTH_SINH			(_ULL(1) << 29)
++#define MHPMEVENTH_UINH			(_ULL(1) << 28)
++#define MHPMEVENTH_VSINH		(_ULL(1) << 27)
++#define MHPMEVENTH_VUINH		(_ULL(1) << 26)
 +
-+int do_bug_frame(struct cpu_user_regs *regs, vaddr_t pc)
-+{
-+    struct bug_frame *start, *end;
-+    struct bug_frame *bug = NULL;
-+    unsigned int id = 0;
-+    const char *filename, *predicate;
-+    int lineno;
++#define MHPMEVENT_OF			(MHPMEVENTH_OF << 32)
++#define MHPMEVENT_MINH			(MHPMEVENTH_MINH << 32)
++#define MHPMEVENT_SINH			(MHPMEVENTH_SINH << 32)
++#define MHPMEVENT_UINH			(MHPMEVENTH_UINH << 32)
++#define MHPMEVENT_VSINH			(MHPMEVENTH_VSINH << 32)
++#define MHPMEVENT_VUINH			(MHPMEVENTH_VUINH << 32)
 +
-+    unsigned long bug_frames[] = {
-+        (unsigned long)&__start_bug_frames[0],
-+        (unsigned long)&__stop_bug_frames_0[0],
-+        (unsigned long)&__stop_bug_frames_1[0],
-+        (unsigned long)&__stop_bug_frames_2[0],
-+        (unsigned long)&__stop_bug_frames_3[0],
-+    };
++#endif
 +
-+    for ( id = 0; id < BUGFRAME_NR; id++ )
-+    {
-+        start = (struct  bug_frame *)bug_frames[id];
-+        end = (struct  bug_frame *)bug_frames[id + 1];
++#define MHPMEVENT_SSCOF_MASK		_ULL(0xFFFF000000000000)
 +
-+        while ( start != end )
-+        {
-+            if ( (vaddr_t)bug_loc(start) == pc )
-+            {
-+                bug = start;
-+                goto found;
-+            }
++#if __riscv_xlen > 32
++#define ENVCFG_STCE			(_ULL(1) << 63)
++#define ENVCFG_PBMTE			(_ULL(1) << 62)
++#else
++#define ENVCFGH_STCE			(_UL(1) << 31)
++#define ENVCFGH_PBMTE			(_UL(1) << 30)
++#endif
++#define ENVCFG_CBZE			(_UL(1) << 7)
++#define ENVCFG_CBCFE			(_UL(1) << 6)
++#define ENVCFG_CBIE_SHIFT		4
++#define ENVCFG_CBIE			(_UL(0x3) << ENVCFG_CBIE_SHIFT)
++#define ENVCFG_CBIE_ILL			_UL(0x0)
++#define ENVCFG_CBIE_FLUSH		_UL(0x1)
++#define ENVCFG_CBIE_INV			_UL(0x3)
++#define ENVCFG_FIOM			_UL(0x1)
 +
-+            start++;
-+        }
-+    }
++/* ===== User-level CSRs ===== */
 +
-+found:
-+    if ( bug == NULL )
-+        return -ENOENT;
++/* User Trap Setup (N-extension) */
++#define CSR_USTATUS			0x000
++#define CSR_UIE				0x004
++#define CSR_UTVEC			0x005
 +
-+    if ( id == BUGFRAME_run_fn )
-+    {
-+        void (*fn)(const struct cpu_user_regs *) = (void *)regs->BUG_FN_REG;
++/* User Trap Handling (N-extension) */
++#define CSR_USCRATCH			0x040
++#define CSR_UEPC			0x041
++#define CSR_UCAUSE			0x042
++#define CSR_UTVAL			0x043
++#define CSR_UIP				0x044
 +
-+        fn(regs);
++/* User Floating-point CSRs */
++#define CSR_FFLAGS			0x001
++#define CSR_FRM				0x002
++#define CSR_FCSR			0x003
 +
-+        goto end;
-+    }
++/* User Counters/Timers */
++#define CSR_CYCLE			0xc00
++#define CSR_TIME			0xc01
++#define CSR_INSTRET			0xc02
++#define CSR_HPMCOUNTER3			0xc03
++#define CSR_HPMCOUNTER4			0xc04
++#define CSR_HPMCOUNTER5			0xc05
++#define CSR_HPMCOUNTER6			0xc06
++#define CSR_HPMCOUNTER7			0xc07
++#define CSR_HPMCOUNTER8			0xc08
++#define CSR_HPMCOUNTER9			0xc09
++#define CSR_HPMCOUNTER10		0xc0a
++#define CSR_HPMCOUNTER11		0xc0b
++#define CSR_HPMCOUNTER12		0xc0c
++#define CSR_HPMCOUNTER13		0xc0d
++#define CSR_HPMCOUNTER14		0xc0e
++#define CSR_HPMCOUNTER15		0xc0f
++#define CSR_HPMCOUNTER16		0xc10
++#define CSR_HPMCOUNTER17		0xc11
++#define CSR_HPMCOUNTER18		0xc12
++#define CSR_HPMCOUNTER19		0xc13
++#define CSR_HPMCOUNTER20		0xc14
++#define CSR_HPMCOUNTER21		0xc15
++#define CSR_HPMCOUNTER22		0xc16
++#define CSR_HPMCOUNTER23		0xc17
++#define CSR_HPMCOUNTER24		0xc18
++#define CSR_HPMCOUNTER25		0xc19
++#define CSR_HPMCOUNTER26		0xc1a
++#define CSR_HPMCOUNTER27		0xc1b
++#define CSR_HPMCOUNTER28		0xc1c
++#define CSR_HPMCOUNTER29		0xc1d
++#define CSR_HPMCOUNTER30		0xc1e
++#define CSR_HPMCOUNTER31		0xc1f
++#define CSR_CYCLEH			0xc80
++#define CSR_TIMEH			0xc81
++#define CSR_INSTRETH			0xc82
++#define CSR_HPMCOUNTER3H		0xc83
++#define CSR_HPMCOUNTER4H		0xc84
++#define CSR_HPMCOUNTER5H		0xc85
++#define CSR_HPMCOUNTER6H		0xc86
++#define CSR_HPMCOUNTER7H		0xc87
++#define CSR_HPMCOUNTER8H		0xc88
++#define CSR_HPMCOUNTER9H		0xc89
++#define CSR_HPMCOUNTER10H		0xc8a
++#define CSR_HPMCOUNTER11H		0xc8b
++#define CSR_HPMCOUNTER12H		0xc8c
++#define CSR_HPMCOUNTER13H		0xc8d
++#define CSR_HPMCOUNTER14H		0xc8e
++#define CSR_HPMCOUNTER15H		0xc8f
++#define CSR_HPMCOUNTER16H		0xc90
++#define CSR_HPMCOUNTER17H		0xc91
++#define CSR_HPMCOUNTER18H		0xc92
++#define CSR_HPMCOUNTER19H		0xc93
++#define CSR_HPMCOUNTER20H		0xc94
++#define CSR_HPMCOUNTER21H		0xc95
++#define CSR_HPMCOUNTER22H		0xc96
++#define CSR_HPMCOUNTER23H		0xc97
++#define CSR_HPMCOUNTER24H		0xc98
++#define CSR_HPMCOUNTER25H		0xc99
++#define CSR_HPMCOUNTER26H		0xc9a
++#define CSR_HPMCOUNTER27H		0xc9b
++#define CSR_HPMCOUNTER28H		0xc9c
++#define CSR_HPMCOUNTER29H		0xc9d
++#define CSR_HPMCOUNTER30H		0xc9e
++#define CSR_HPMCOUNTER31H		0xc9f
 +
-+    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
-+    filename = bug_file(bug);
-+    lineno = bug_line(bug);
++/* ===== Supervisor-level CSRs ===== */
 +
-+    switch ( id )
-+    {
-+    case BUGFRAME_warn:
-+        early_printk("Xen WARN at ");
-+        early_printk(filename);
-+        early_printk(":");
-+        early_printk_hnum(lineno);
++/* Supervisor Trap Setup */
++#define CSR_SSTATUS			0x100
++#define CSR_SEDELEG			0x102
++#define CSR_SIDELEG			0x103
++#define CSR_SIE				0x104
++#define CSR_STVEC			0x105
++#define CSR_SCOUNTEREN			0x106
 +
-+        show_execution_state(regs);
++/* Supervisor Configuration */
++#define CSR_SENVCFG			0x10a
 +
-+        goto end;
++/* Supervisor Trap Handling */
++#define CSR_SSCRATCH			0x140
++#define CSR_SEPC			0x141
++#define CSR_SCAUSE			0x142
++#define CSR_STVAL			0x143
++#define CSR_SIP				0x144
 +
-+    case BUGFRAME_bug:
-+        early_printk("Xen BUG at ");
-+        early_printk(filename);
-+        early_printk(":");
-+        early_printk_hnum(lineno);
++/* Supervisor Protection and Translation */
++#define CSR_SATP			0x180
 +
-+        show_execution_state(regs);
-+        early_printk("change wait_for_interrupt to panic() when common is available\n");
-+        wait_for_interrupt();
++/* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
++#define CSR_SISELECT			0x150
++#define CSR_SIREG			0x151
 +
-+    case BUGFRAME_assert:
-+        /* ASSERT: decode the predicate string pointer. */
-+        predicate = bug_msg(bug);
++/* Supervisor-Level Interrupts (AIA) */
++#define CSR_STOPI			0xdb0
 +
-+        early_printk("Assertion \'");
-+        early_printk(predicate);
-+        early_printk("\' failed at ");
-+        early_printk(filename);
-+        early_printk(":");
-+        early_printk_hnum(lineno);
++/* Supervisor-Level IMSIC Interface (AIA) */
++#define CSR_SSETEIPNUM			0x158
++#define CSR_SCLREIPNUM			0x159
++#define CSR_SSETEIENUM			0x15a
++#define CSR_SCLREIENUM			0x15b
++#define CSR_STOPEI			0x15c
 +
-+        show_execution_state(regs);
-+        early_printk("change wait_for_interrupt to panic() when common is available\n");
-+        wait_for_interrupt();
-+    }
++/* Supervisor-Level High-Half CSRs (AIA) */
++#define CSR_SIEH			0x114
++#define CSR_SIPH			0x154
 +
-+    return -EINVAL;
-+end:
-+    regs->sepc += GET_INSN_LENGTH(*(bug_insn_t *)pc);
++/* Supervisor stateen CSRs */
++#define CSR_SSTATEEN0			0x10C
++#define CSR_SSTATEEN1			0x10D
++#define CSR_SSTATEEN2			0x10E
++#define CSR_SSTATEEN3			0x10F
 +
-+    return 0;
-+}
++/* ===== Hypervisor-level CSRs ===== */
 +
-+int is_valid_bugaddr(bug_insn_t insn)
-+{
-+    if ((insn & __INSN_LENGTH_MASK) == __INSN_LENGTH_32)
-+        return (insn == __BUG_INSN_32);
-+    else
-+        return ((insn & __COMPRESSED_INSN_MASK) == __BUG_INSN_16);
-+}
++/* Hypervisor Trap Setup (H-extension) */
++#define CSR_HSTATUS			0x600
++#define CSR_HEDELEG			0x602
++#define CSR_HIDELEG			0x603
++#define CSR_HIE				0x604
++#define CSR_HCOUNTEREN			0x606
++#define CSR_HGEIE			0x607
 +
- void __handle_exception(struct cpu_user_regs *cpu_regs)
- {
-+    register_t pc = cpu_regs->sepc;
-+    uint32_t instr = *(bug_insn_t *)pc;
++/* Hypervisor Configuration */
++#define CSR_HENVCFG			0x60a
++#define CSR_HENVCFGH			0x61a
 +
-+    if (is_valid_bugaddr(instr))
-+        if (!do_bug_frame(cpu_regs, pc)) return;
++/* Hypervisor Trap Handling (H-extension) */
++#define CSR_HTVAL			0x643
++#define CSR_HIP				0x644
++#define CSR_HVIP			0x645
++#define CSR_HTINST			0x64a
++#define CSR_HGEIP			0xe12
 +
-+// die:
-     do_unexpected_trap(cpu_regs);
- }
-diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-index ca57cce75c..139e2d04cb 100644
---- a/xen/arch/riscv/xen.lds.S
-+++ b/xen/arch/riscv/xen.lds.S
-@@ -39,6 +39,16 @@ SECTIONS
-     . = ALIGN(PAGE_SIZE);
-     .rodata : {
-         _srodata = .;          /* Read-only data */
-+        /* Bug frames table */
-+       __start_bug_frames = .;
-+       *(.bug_frames.0)
-+       __stop_bug_frames_0 = .;
-+       *(.bug_frames.1)
-+       __stop_bug_frames_1 = .;
-+       *(.bug_frames.2)
-+       __stop_bug_frames_2 = .;
-+       *(.bug_frames.3)
-+       __stop_bug_frames_3 = .;
-         *(.rodata)
-         *(.rodata.*)
-         *(.data.rel.ro)
++/* Hypervisor Protection and Translation (H-extension) */
++#define CSR_HGATP			0x680
++
++/* Hypervisor Counter/Timer Virtualization Registers (H-extension) */
++#define CSR_HTIMEDELTA			0x605
++#define CSR_HTIMEDELTAH			0x615
++
++/* Virtual Supervisor Registers (H-extension) */
++#define CSR_VSSTATUS			0x200
++#define CSR_VSIE			0x204
++#define CSR_VSTVEC			0x205
++#define CSR_VSSCRATCH			0x240
++#define CSR_VSEPC			0x241
++#define CSR_VSCAUSE			0x242
++#define CSR_VSTVAL			0x243
++#define CSR_VSIP			0x244
++#define CSR_VSATP			0x280
++
++/* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
++#define CSR_HVIEN			0x608
++#define CSR_HVICTL			0x609
++#define CSR_HVIPRIO1			0x646
++#define CSR_HVIPRIO2			0x647
++
++/* VS-Level Window to Indirectly Accessed Registers (H-extension with AIA) */
++#define CSR_VSISELECT			0x250
++#define CSR_VSIREG			0x251
++
++/* VS-Level Interrupts (H-extension with AIA) */
++#define CSR_VSTOPI			0xeb0
++
++/* VS-Level IMSIC Interface (H-extension with AIA) */
++#define CSR_VSSETEIPNUM		0x258
++#define CSR_VSCLREIPNUM		0x259
++#define CSR_VSSETEIENUM		0x25a
++#define CSR_VSCLREIENUM		0x25b
++#define CSR_VSTOPEI			0x25c
++
++/* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
++#define CSR_HIDELEGH			0x613
++#define CSR_HVIENH			0x618
++#define CSR_HVIPH			0x655
++#define CSR_HVIPRIO1H			0x656
++#define CSR_HVIPRIO2H			0x657
++#define CSR_VSIEH			0x214
++#define CSR_VSIPH			0x254
++
++/* Hypervisor stateen CSRs */
++#define CSR_HSTATEEN0			0x60C
++#define CSR_HSTATEEN0H			0x61C
++#define CSR_HSTATEEN1			0x60D
++#define CSR_HSTATEEN1H			0x61D
++#define CSR_HSTATEEN2			0x60E
++#define CSR_HSTATEEN2H			0x61E
++#define CSR_HSTATEEN3			0x60F
++#define CSR_HSTATEEN3H			0x61F
++
++/* ===== Machine-level CSRs ===== */
++
++/* Machine Information Registers */
++#define CSR_MVENDORID			0xf11
++#define CSR_MARCHID			0xf12
++#define CSR_MIMPID			0xf13
++#define CSR_MHARTID			0xf14
++
++/* Machine Trap Setup */
++#define CSR_MSTATUS			0x300
++#define CSR_MISA			0x301
++#define CSR_MEDELEG			0x302
++#define CSR_MIDELEG			0x303
++#define CSR_MIE				0x304
++#define CSR_MTVEC			0x305
++#define CSR_MCOUNTEREN			0x306
++#define CSR_MSTATUSH			0x310
++
++/* Machine Configuration */
++#define CSR_MENVCFG			0x30a
++#define CSR_MENVCFGH			0x31a
++
++/* Machine Trap Handling */
++#define CSR_MSCRATCH			0x340
++#define CSR_MEPC			0x341
++#define CSR_MCAUSE			0x342
++#define CSR_MTVAL			0x343
++#define CSR_MIP				0x344
++#define CSR_MTINST			0x34a
++#define CSR_MTVAL2			0x34b
++
++/* Machine Memory Protection */
++#define CSR_PMPCFG0			0x3a0
++#define CSR_PMPCFG1			0x3a1
++#define CSR_PMPCFG2			0x3a2
++#define CSR_PMPCFG3			0x3a3
++#define CSR_PMPCFG4			0x3a4
++#define CSR_PMPCFG5			0x3a5
++#define CSR_PMPCFG6			0x3a6
++#define CSR_PMPCFG7			0x3a7
++#define CSR_PMPCFG8			0x3a8
++#define CSR_PMPCFG9			0x3a9
++#define CSR_PMPCFG10			0x3aa
++#define CSR_PMPCFG11			0x3ab
++#define CSR_PMPCFG12			0x3ac
++#define CSR_PMPCFG13			0x3ad
++#define CSR_PMPCFG14			0x3ae
++#define CSR_PMPCFG15			0x3af
++#define CSR_PMPADDR0			0x3b0
++#define CSR_PMPADDR1			0x3b1
++#define CSR_PMPADDR2			0x3b2
++#define CSR_PMPADDR3			0x3b3
++#define CSR_PMPADDR4			0x3b4
++#define CSR_PMPADDR5			0x3b5
++#define CSR_PMPADDR6			0x3b6
++#define CSR_PMPADDR7			0x3b7
++#define CSR_PMPADDR8			0x3b8
++#define CSR_PMPADDR9			0x3b9
++#define CSR_PMPADDR10			0x3ba
++#define CSR_PMPADDR11			0x3bb
++#define CSR_PMPADDR12			0x3bc
++#define CSR_PMPADDR13			0x3bd
++#define CSR_PMPADDR14			0x3be
++#define CSR_PMPADDR15			0x3bf
++#define CSR_PMPADDR16			0x3c0
++#define CSR_PMPADDR17			0x3c1
++#define CSR_PMPADDR18			0x3c2
++#define CSR_PMPADDR19			0x3c3
++#define CSR_PMPADDR20			0x3c4
++#define CSR_PMPADDR21			0x3c5
++#define CSR_PMPADDR22			0x3c6
++#define CSR_PMPADDR23			0x3c7
++#define CSR_PMPADDR24			0x3c8
++#define CSR_PMPADDR25			0x3c9
++#define CSR_PMPADDR26			0x3ca
++#define CSR_PMPADDR27			0x3cb
++#define CSR_PMPADDR28			0x3cc
++#define CSR_PMPADDR29			0x3cd
++#define CSR_PMPADDR30			0x3ce
++#define CSR_PMPADDR31			0x3cf
++#define CSR_PMPADDR32			0x3d0
++#define CSR_PMPADDR33			0x3d1
++#define CSR_PMPADDR34			0x3d2
++#define CSR_PMPADDR35			0x3d3
++#define CSR_PMPADDR36			0x3d4
++#define CSR_PMPADDR37			0x3d5
++#define CSR_PMPADDR38			0x3d6
++#define CSR_PMPADDR39			0x3d7
++#define CSR_PMPADDR40			0x3d8
++#define CSR_PMPADDR41			0x3d9
++#define CSR_PMPADDR42			0x3da
++#define CSR_PMPADDR43			0x3db
++#define CSR_PMPADDR44			0x3dc
++#define CSR_PMPADDR45			0x3dd
++#define CSR_PMPADDR46			0x3de
++#define CSR_PMPADDR47			0x3df
++#define CSR_PMPADDR48			0x3e0
++#define CSR_PMPADDR49			0x3e1
++#define CSR_PMPADDR50			0x3e2
++#define CSR_PMPADDR51			0x3e3
++#define CSR_PMPADDR52			0x3e4
++#define CSR_PMPADDR53			0x3e5
++#define CSR_PMPADDR54			0x3e6
++#define CSR_PMPADDR55			0x3e7
++#define CSR_PMPADDR56			0x3e8
++#define CSR_PMPADDR57			0x3e9
++#define CSR_PMPADDR58			0x3ea
++#define CSR_PMPADDR59			0x3eb
++#define CSR_PMPADDR60			0x3ec
++#define CSR_PMPADDR61			0x3ed
++#define CSR_PMPADDR62			0x3ee
++#define CSR_PMPADDR63			0x3ef
++
++/* Machine Counters/Timers */
++#define CSR_MCYCLE			0xb00
++#define CSR_MINSTRET			0xb02
++#define CSR_MHPMCOUNTER3		0xb03
++#define CSR_MHPMCOUNTER4		0xb04
++#define CSR_MHPMCOUNTER5		0xb05
++#define CSR_MHPMCOUNTER6		0xb06
++#define CSR_MHPMCOUNTER7		0xb07
++#define CSR_MHPMCOUNTER8		0xb08
++#define CSR_MHPMCOUNTER9		0xb09
++#define CSR_MHPMCOUNTER10		0xb0a
++#define CSR_MHPMCOUNTER11		0xb0b
++#define CSR_MHPMCOUNTER12		0xb0c
++#define CSR_MHPMCOUNTER13		0xb0d
++#define CSR_MHPMCOUNTER14		0xb0e
++#define CSR_MHPMCOUNTER15		0xb0f
++#define CSR_MHPMCOUNTER16		0xb10
++#define CSR_MHPMCOUNTER17		0xb11
++#define CSR_MHPMCOUNTER18		0xb12
++#define CSR_MHPMCOUNTER19		0xb13
++#define CSR_MHPMCOUNTER20		0xb14
++#define CSR_MHPMCOUNTER21		0xb15
++#define CSR_MHPMCOUNTER22		0xb16
++#define CSR_MHPMCOUNTER23		0xb17
++#define CSR_MHPMCOUNTER24		0xb18
++#define CSR_MHPMCOUNTER25		0xb19
++#define CSR_MHPMCOUNTER26		0xb1a
++#define CSR_MHPMCOUNTER27		0xb1b
++#define CSR_MHPMCOUNTER28		0xb1c
++#define CSR_MHPMCOUNTER29		0xb1d
++#define CSR_MHPMCOUNTER30		0xb1e
++#define CSR_MHPMCOUNTER31		0xb1f
++#define CSR_MCYCLEH			0xb80
++#define CSR_MINSTRETH			0xb82
++#define CSR_MHPMCOUNTER3H		0xb83
++#define CSR_MHPMCOUNTER4H		0xb84
++#define CSR_MHPMCOUNTER5H		0xb85
++#define CSR_MHPMCOUNTER6H		0xb86
++#define CSR_MHPMCOUNTER7H		0xb87
++#define CSR_MHPMCOUNTER8H		0xb88
++#define CSR_MHPMCOUNTER9H		0xb89
++#define CSR_MHPMCOUNTER10H		0xb8a
++#define CSR_MHPMCOUNTER11H		0xb8b
++#define CSR_MHPMCOUNTER12H		0xb8c
++#define CSR_MHPMCOUNTER13H		0xb8d
++#define CSR_MHPMCOUNTER14H		0xb8e
++#define CSR_MHPMCOUNTER15H		0xb8f
++#define CSR_MHPMCOUNTER16H		0xb90
++#define CSR_MHPMCOUNTER17H		0xb91
++#define CSR_MHPMCOUNTER18H		0xb92
++#define CSR_MHPMCOUNTER19H		0xb93
++#define CSR_MHPMCOUNTER20H		0xb94
++#define CSR_MHPMCOUNTER21H		0xb95
++#define CSR_MHPMCOUNTER22H		0xb96
++#define CSR_MHPMCOUNTER23H		0xb97
++#define CSR_MHPMCOUNTER24H		0xb98
++#define CSR_MHPMCOUNTER25H		0xb99
++#define CSR_MHPMCOUNTER26H		0xb9a
++#define CSR_MHPMCOUNTER27H		0xb9b
++#define CSR_MHPMCOUNTER28H		0xb9c
++#define CSR_MHPMCOUNTER29H		0xb9d
++#define CSR_MHPMCOUNTER30H		0xb9e
++#define CSR_MHPMCOUNTER31H		0xb9f
++
++/* Machine Counter Setup */
++#define CSR_MCOUNTINHIBIT		0x320
++#define CSR_MHPMEVENT3			0x323
++#define CSR_MHPMEVENT4			0x324
++#define CSR_MHPMEVENT5			0x325
++#define CSR_MHPMEVENT6			0x326
++#define CSR_MHPMEVENT7			0x327
++#define CSR_MHPMEVENT8			0x328
++#define CSR_MHPMEVENT9			0x329
++#define CSR_MHPMEVENT10			0x32a
++#define CSR_MHPMEVENT11			0x32b
++#define CSR_MHPMEVENT12			0x32c
++#define CSR_MHPMEVENT13			0x32d
++#define CSR_MHPMEVENT14			0x32e
++#define CSR_MHPMEVENT15			0x32f
++#define CSR_MHPMEVENT16			0x330
++#define CSR_MHPMEVENT17			0x331
++#define CSR_MHPMEVENT18			0x332
++#define CSR_MHPMEVENT19			0x333
++#define CSR_MHPMEVENT20			0x334
++#define CSR_MHPMEVENT21			0x335
++#define CSR_MHPMEVENT22			0x336
++#define CSR_MHPMEVENT23			0x337
++#define CSR_MHPMEVENT24			0x338
++#define CSR_MHPMEVENT25			0x339
++#define CSR_MHPMEVENT26			0x33a
++#define CSR_MHPMEVENT27			0x33b
++#define CSR_MHPMEVENT28			0x33c
++#define CSR_MHPMEVENT29			0x33d
++#define CSR_MHPMEVENT30			0x33e
++#define CSR_MHPMEVENT31			0x33f
++
++/* For RV32 */
++#define CSR_MHPMEVENT3H			0x723
++#define CSR_MHPMEVENT4H			0x724
++#define CSR_MHPMEVENT5H			0x725
++#define CSR_MHPMEVENT6H			0x726
++#define CSR_MHPMEVENT7H			0x727
++#define CSR_MHPMEVENT8H			0x728
++#define CSR_MHPMEVENT9H			0x729
++#define CSR_MHPMEVENT10H		0x72a
++#define CSR_MHPMEVENT11H		0x72b
++#define CSR_MHPMEVENT12H		0x72c
++#define CSR_MHPMEVENT13H		0x72d
++#define CSR_MHPMEVENT14H		0x72e
++#define CSR_MHPMEVENT15H		0x72f
++#define CSR_MHPMEVENT16H		0x730
++#define CSR_MHPMEVENT17H		0x731
++#define CSR_MHPMEVENT18H		0x732
++#define CSR_MHPMEVENT19H		0x733
++#define CSR_MHPMEVENT20H		0x734
++#define CSR_MHPMEVENT21H		0x735
++#define CSR_MHPMEVENT22H		0x736
++#define CSR_MHPMEVENT23H		0x737
++#define CSR_MHPMEVENT24H		0x738
++#define CSR_MHPMEVENT25H		0x739
++#define CSR_MHPMEVENT26H		0x73a
++#define CSR_MHPMEVENT27H		0x73b
++#define CSR_MHPMEVENT28H		0x73c
++#define CSR_MHPMEVENT29H		0x73d
++#define CSR_MHPMEVENT30H		0x73e
++#define CSR_MHPMEVENT31H		0x73f
++
++/* Counter Overflow CSR */
++#define CSR_SCOUNTOVF			0xda0
++
++/* Debug/Trace Registers */
++#define CSR_TSELECT			0x7a0
++#define CSR_TDATA1			0x7a1
++#define CSR_TDATA2			0x7a2
++#define CSR_TDATA3			0x7a3
++
++/* Debug Mode Registers */
++#define CSR_DCSR			0x7b0
++#define CSR_DPC				0x7b1
++#define CSR_DSCRATCH0			0x7b2
++#define CSR_DSCRATCH1			0x7b3
++
++/* Machine-Level Window to Indirectly Accessed Registers (AIA) */
++#define CSR_MISELECT			0x350
++#define CSR_MIREG			0x351
++
++/* Machine-Level Interrupts (AIA) */
++#define CSR_MTOPI			0xfb0
++
++/* Machine-Level IMSIC Interface (AIA) */
++#define CSR_MSETEIPNUM			0x358
++#define CSR_MCLREIPNUM			0x359
++#define CSR_MSETEIENUM			0x35a
++#define CSR_MCLREIENUM			0x35b
++#define CSR_MTOPEI			0x35c
++
++/* Virtual Interrupts for Supervisor Level (AIA) */
++#define CSR_MVIEN			0x308
++#define CSR_MVIP			0x309
++
++/* Smstateen extension registers */
++/* Machine stateen CSRs */
++#define CSR_MSTATEEN0			0x30C
++#define CSR_MSTATEEN0H			0x31C
++#define CSR_MSTATEEN1			0x30D
++#define CSR_MSTATEEN1H			0x31D
++#define CSR_MSTATEEN2			0x30E
++#define CSR_MSTATEEN2H			0x31E
++#define CSR_MSTATEEN3			0x30F
++#define CSR_MSTATEEN3H			0x31F
++
++/* Machine-Level High-Half CSRs (AIA) */
++#define CSR_MIDELEGH			0x313
++#define CSR_MIEH			0x314
++#define CSR_MVIENH			0x318
++#define CSR_MVIPH			0x319
++#define CSR_MIPH			0x354
++
++/* ===== Trap/Exception Causes ===== */
++
++/* Exception cause high bit - is an interrupt if set */
++#define CAUSE_IRQ_FLAG			(_UL(1) << (__riscv_xlen - 1))
++
++#define CAUSE_MISALIGNED_FETCH		0x0
++#define CAUSE_FETCH_ACCESS		0x1
++#define CAUSE_ILLEGAL_INSTRUCTION	0x2
++#define CAUSE_BREAKPOINT		0x3
++#define CAUSE_MISALIGNED_LOAD		0x4
++#define CAUSE_LOAD_ACCESS		0x5
++#define CAUSE_MISALIGNED_STORE		0x6
++#define CAUSE_STORE_ACCESS		0x7
++#define CAUSE_USER_ECALL		0x8
++#define CAUSE_SUPERVISOR_ECALL		0x9
++#define CAUSE_VIRTUAL_SUPERVISOR_ECALL	0xa
++#define CAUSE_MACHINE_ECALL		0xb
++#define CAUSE_FETCH_PAGE_FAULT		0xc
++#define CAUSE_LOAD_PAGE_FAULT		0xd
++#define CAUSE_STORE_PAGE_FAULT		0xf
++#define CAUSE_FETCH_GUEST_PAGE_FAULT	0x14
++#define CAUSE_LOAD_GUEST_PAGE_FAULT	0x15
++#define CAUSE_VIRTUAL_INST_FAULT	0x16
++#define CAUSE_STORE_GUEST_PAGE_FAULT	0x17
++
++/* Common defines for all smstateen */
++#define SMSTATEEN_MAX_COUNT		4
++#define SMSTATEEN0_CS_SHIFT		0
++#define SMSTATEEN0_CS			(_ULL(1) << SMSTATEEN0_CS_SHIFT)
++#define SMSTATEEN0_FCSR_SHIFT		1
++#define SMSTATEEN0_FCSR			(_ULL(1) << SMSTATEEN0_FCSR_SHIFT)
++#define SMSTATEEN0_IMSIC_SHIFT		58
++#define SMSTATEEN0_IMSIC		(_ULL(1) << SMSTATEEN0_IMSIC_SHIFT)
++#define SMSTATEEN0_AIA_SHIFT		59
++#define SMSTATEEN0_AIA			(_ULL(1) << SMSTATEEN0_AIA_SHIFT)
++#define SMSTATEEN0_SVSLCT_SHIFT		60
++#define SMSTATEEN0_SVSLCT		(_ULL(1) << SMSTATEEN0_SVSLCT_SHIFT)
++#define SMSTATEEN0_HSENVCFG_SHIFT	62
++#define SMSTATEEN0_HSENVCFG		(_ULL(1) << SMSTATEEN0_HSENVCFG_SHIFT)
++#define SMSTATEEN_STATEN_SHIFT		63
++#define SMSTATEEN_STATEN		(_ULL(1) << SMSTATEEN_STATEN_SHIFT)
++
++/* ===== Instruction Encodings ===== */
++
++#define INSN_MATCH_LB			0x3
++#define INSN_MASK_LB			0x707f
++#define INSN_MATCH_LH			0x1003
++#define INSN_MASK_LH			0x707f
++#define INSN_MATCH_LW			0x2003
++#define INSN_MASK_LW			0x707f
++#define INSN_MATCH_LD			0x3003
++#define INSN_MASK_LD			0x707f
++#define INSN_MATCH_LBU			0x4003
++#define INSN_MASK_LBU			0x707f
++#define INSN_MATCH_LHU			0x5003
++#define INSN_MASK_LHU			0x707f
++#define INSN_MATCH_LWU			0x6003
++#define INSN_MASK_LWU			0x707f
++#define INSN_MATCH_SB			0x23
++#define INSN_MASK_SB			0x707f
++#define INSN_MATCH_SH			0x1023
++#define INSN_MASK_SH			0x707f
++#define INSN_MATCH_SW			0x2023
++#define INSN_MASK_SW			0x707f
++#define INSN_MATCH_SD			0x3023
++#define INSN_MASK_SD			0x707f
++
++#define INSN_MATCH_FLW			0x2007
++#define INSN_MASK_FLW			0x707f
++#define INSN_MATCH_FLD			0x3007
++#define INSN_MASK_FLD			0x707f
++#define INSN_MATCH_FLQ			0x4007
++#define INSN_MASK_FLQ			0x707f
++#define INSN_MATCH_FSW			0x2027
++#define INSN_MASK_FSW			0x707f
++#define INSN_MATCH_FSD			0x3027
++#define INSN_MASK_FSD			0x707f
++#define INSN_MATCH_FSQ			0x4027
++#define INSN_MASK_FSQ			0x707f
++
++#define INSN_MATCH_C_LD			0x6000
++#define INSN_MASK_C_LD			0xe003
++#define INSN_MATCH_C_SD			0xe000
++#define INSN_MASK_C_SD			0xe003
++#define INSN_MATCH_C_LW			0x4000
++#define INSN_MASK_C_LW			0xe003
++#define INSN_MATCH_C_SW			0xc000
++#define INSN_MASK_C_SW			0xe003
++#define INSN_MATCH_C_LDSP		0x6002
++#define INSN_MASK_C_LDSP		0xe003
++#define INSN_MATCH_C_SDSP		0xe002
++#define INSN_MASK_C_SDSP		0xe003
++#define INSN_MATCH_C_LWSP		0x4002
++#define INSN_MASK_C_LWSP		0xe003
++#define INSN_MATCH_C_SWSP		0xc002
++#define INSN_MASK_C_SWSP		0xe003
++
++#define INSN_MATCH_C_FLD		0x2000
++#define INSN_MASK_C_FLD			0xe003
++#define INSN_MATCH_C_FLW		0x6000
++#define INSN_MASK_C_FLW			0xe003
++#define INSN_MATCH_C_FSD		0xa000
++#define INSN_MASK_C_FSD			0xe003
++#define INSN_MATCH_C_FSW		0xe000
++#define INSN_MASK_C_FSW			0xe003
++#define INSN_MATCH_C_FLDSP		0x2002
++#define INSN_MASK_C_FLDSP		0xe003
++#define INSN_MATCH_C_FSDSP		0xa002
++#define INSN_MASK_C_FSDSP		0xe003
++#define INSN_MATCH_C_FLWSP		0x6002
++#define INSN_MASK_C_FLWSP		0xe003
++#define INSN_MATCH_C_FSWSP		0xe002
++#define INSN_MASK_C_FSWSP		0xe003
++
++#define INSN_MASK_WFI			0xffffff00
++#define INSN_MATCH_WFI			0x10500000
++
++#define INSN_16BIT_MASK			0x3
++#define INSN_32BIT_MASK			0x1c
++
++#define INSN_IS_16BIT(insn)		\
++	(((insn) & INSN_16BIT_MASK) != INSN_16BIT_MASK)
++#define INSN_IS_32BIT(insn)		\
++	(((insn) & INSN_16BIT_MASK) == INSN_16BIT_MASK && \
++	 ((insn) & INSN_32BIT_MASK) != INSN_32BIT_MASK)
++
++#define INSN_LEN(insn)			(INSN_IS_16BIT(insn) ? 2 : 4)
++
++#if __riscv_xlen == 64
++#define LOG_REGBYTES			3
++#else
++#define LOG_REGBYTES			2
++#endif
++#define REGBYTES			(1 << LOG_REGBYTES)
++
++#define SH_RD				7
++#define SH_RS1				15
++#define SH_RS2				20
++#define SH_RS2C				2
++
++#define RV_X(x, s, n)			(((x) >> (s)) & ((1 << (n)) - 1))
++#define RVC_LW_IMM(x)			((RV_X(x, 6, 1) << 2) | \
++					 (RV_X(x, 10, 3) << 3) | \
++					 (RV_X(x, 5, 1) << 6))
++#define RVC_LD_IMM(x)			((RV_X(x, 10, 3) << 3) | \
++					 (RV_X(x, 5, 2) << 6))
++#define RVC_LWSP_IMM(x)			((RV_X(x, 4, 3) << 2) | \
++					 (RV_X(x, 12, 1) << 5) | \
++					 (RV_X(x, 2, 2) << 6))
++#define RVC_LDSP_IMM(x)			((RV_X(x, 5, 2) << 3) | \
++					 (RV_X(x, 12, 1) << 5) | \
++					 (RV_X(x, 2, 3) << 6))
++#define RVC_SWSP_IMM(x)			((RV_X(x, 9, 4) << 2) | \
++					 (RV_X(x, 7, 2) << 6))
++#define RVC_SDSP_IMM(x)			((RV_X(x, 10, 3) << 3) | \
++					 (RV_X(x, 7, 3) << 6))
++#define RVC_RS1S(insn)			(8 + RV_X(insn, SH_RD, 3))
++#define RVC_RS2S(insn)			(8 + RV_X(insn, SH_RS2C, 3))
++#define RVC_RS2(insn)			RV_X(insn, SH_RS2C, 5)
++
++#define SHIFT_RIGHT(x, y)		\
++	((y) < 0 ? ((x) << -(y)) : ((x) >> (y)))
++
++#define REG_MASK			\
++	((1 << (5 + LOG_REGBYTES)) - (1 << LOG_REGBYTES))
++
++#define REG_OFFSET(insn, pos)		\
++	(SHIFT_RIGHT((insn), (pos) - LOG_REGBYTES) & REG_MASK)
++
++#define REG_PTR(insn, pos, regs)	\
++	(unsigned long *)((unsigned long)(regs) + REG_OFFSET(insn, pos))
++
++#define GET_RM(insn)			(((insn) >> 12) & 7)
++
++#define GET_RS1(insn, regs)		(*REG_PTR(insn, SH_RS1, regs))
++#define GET_RS2(insn, regs)		(*REG_PTR(insn, SH_RS2, regs))
++#define GET_RS1S(insn, regs)		(*REG_PTR(RVC_RS1S(insn), 0, regs))
++#define GET_RS2S(insn, regs)		(*REG_PTR(RVC_RS2S(insn), 0, regs))
++#define GET_RS2C(insn, regs)		(*REG_PTR(insn, SH_RS2C, regs))
++#define GET_SP(regs)			(*REG_PTR(2, 0, regs))
++#define SET_RD(insn, regs, val)		(*REG_PTR(insn, SH_RD, regs) = (val))
++#define IMM_I(insn)			((s32)(insn) >> 20)
++#define IMM_S(insn)			(((s32)(insn) >> 25 << 5) | \
++					 (s32)(((insn) >> 7) & 0x1f))
++#define MASK_FUNCT3			0x7000
++
++/* clang-format on */
++
++#endif
 -- 
 2.39.0
 
