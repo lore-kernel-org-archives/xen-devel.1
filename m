@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05619C25B4E
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 10:05:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481598.746627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B02C05027
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 10:05:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.481601.746637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoGq-0006BM-HN; Fri, 20 Jan 2023 10:05:16 +0000
+	id 1pIoGs-0006Sb-PW; Fri, 20 Jan 2023 10:05:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481598.746627; Fri, 20 Jan 2023 10:05:16 +0000
+Received: by outflank-mailman (output) from mailman id 481601.746637; Fri, 20 Jan 2023 10:05:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoGq-0006BD-EO; Fri, 20 Jan 2023 10:05:16 +0000
-Received: by outflank-mailman (input) for mailman id 481598;
- Fri, 20 Jan 2023 10:05:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pIoGs-0006SQ-L5; Fri, 20 Jan 2023 10:05:18 +0000
+Received: by outflank-mailman (input) for mailman id 481601;
+ Fri, 20 Jan 2023 10:05:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NYwS=5R=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pIoDV-0001Kj-Dc
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:01:49 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 734a4554-98a9-11ed-91b6-6bf2151ebd3b;
- Fri, 20 Jan 2023 11:01:47 +0100 (CET)
+ id 1pIoDE-0001b3-Bs
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:01:32 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 694b41c5-98a9-11ed-b8d1-410ff93cb8f0;
+ Fri, 20 Jan 2023 11:01:30 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id DA4FE22A09;
- Fri, 20 Jan 2023 10:01:46 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 100C05BD75;
+ Fri, 20 Jan 2023 10:01:30 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AD1571390C;
- Fri, 20 Jan 2023 10:01:46 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DB9821390C;
+ Fri, 20 Jan 2023 10:01:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id /cDhKIpmymOqRQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 20 Jan 2023 10:01:46 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id yE5oNHlmymN/RQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 20 Jan 2023 10:01:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,643 +53,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 734a4554-98a9-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 694b41c5-98a9-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674208906; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1674208890; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=JJSfuNILKcRkQDqI4XTWSKAohkvwxo/7nLNUOQBwvSI=;
-	b=cJCwuxjlNNqoOJ2gBa6O0851P8a5V531LqvLKnZ5P8pjVt9mKlCe1ww4Sxihl4cf5p8Jy2
-	jwI2AdBbvfnPrTyiZwTNGk3WSGBy4TQ7yQrVY0FsNx5LS1zR2+xmbdw4fJSDXK4ORhugCb
-	5isdLZD95h+szi9cykVkdVu2o3XMroU=
+	bh=7EWkkJhQCjKSg7MUGlJAvzZ4VfhKHOcbcgmv3aDpL24=;
+	b=XB0P0p7jCjOaqjvgDeSGfjSYknn0SlPX5sXw/vClGkBgoZ6sYCjchxMr5YBQy0JT9NV3Ud
+	lHU79laTjsL4ruBowvFRLEyZBZDPRzmeaSwXHrnyt5AGNh6qKZCHdMjYFWWZlO3fuOOxih
+	7PcUkijUgdfxXsI+EYniWxVZ4QyPFhU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 13/13] tools/xenstore: switch quota management to be table based
-Date: Fri, 20 Jan 2023 11:00:28 +0100
-Message-Id: <20230120100028.11142-14-jgross@suse.com>
+Subject: [PATCH v2 10/13] tools/xenstore: switch transaction accounting to generic accounting
+Date: Fri, 20 Jan 2023 11:00:25 +0100
+Message-Id: <20230120100028.11142-11-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230120100028.11142-1-jgross@suse.com>
 References: <20230120100028.11142-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of having individual quota variables switch to a table based
-approach like the generic accounting. Include all the related data in
-the same table and add accessor functions.
-
-This enables to use the command line --quota parameter for setting all
-possible quota values, keeping the previous parameters for
-compatibility.
+As transaction accounting is active for unprivileged domains only, it
+can easily be added to the generic per-domain accounting.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V2:
-- new patch
-One further remark: it would be rather easy to add soft-quota for all
-the other quotas (similar to the memory one). This could be used as
-an early warning for the need to raise global quota.
----
- tools/xenstore/xenstored_control.c     |  43 ++------
- tools/xenstore/xenstored_core.c        |  85 ++++++++--------
- tools/xenstore/xenstored_core.h        |  10 --
- tools/xenstore/xenstored_domain.c      | 132 +++++++++++++++++--------
- tools/xenstore/xenstored_domain.h      |  12 ++-
- tools/xenstore/xenstored_transaction.c |   5 +-
- tools/xenstore/xenstored_watch.c       |   2 +-
- 7 files changed, 155 insertions(+), 134 deletions(-)
+ tools/xenstore/xenstored_core.c        |  3 +--
+ tools/xenstore/xenstored_core.h        |  1 -
+ tools/xenstore/xenstored_domain.c      | 21 ++++++++++++++++++---
+ tools/xenstore/xenstored_domain.h      |  4 ++++
+ tools/xenstore/xenstored_transaction.c | 12 +++++-------
+ 5 files changed, 28 insertions(+), 13 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index a2ba64a15c..75f51a80db 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -221,35 +221,6 @@ static int do_control_log(const void *ctx, struct connection *conn,
- 	return 0;
- }
- 
--struct quota {
--	const char *name;
--	int *quota;
--	const char *descr;
--};
--
--static const struct quota hard_quotas[] = {
--	{ "nodes", &quota_nb_entry_per_domain, "Nodes per domain" },
--	{ "watches", &quota_nb_watch_per_domain, "Watches per domain" },
--	{ "transactions", &quota_max_transaction, "Transactions per domain" },
--	{ "outstanding", &quota_req_outstanding,
--		"Outstanding requests per domain" },
--	{ "transaction-nodes", &quota_trans_nodes,
--		"Max. number of accessed nodes per transaction" },
--	{ "memory", &quota_memory_per_domain_hard,
--		"Total Xenstore memory per domain (error level)" },
--	{ "node-size", &quota_max_entry_size, "Max. size of a node" },
--	{ "path-max", &quota_max_path_len, "Max. length of a node path" },
--	{ "permissions", &quota_nb_perms_per_node,
--		"Max. number of permissions per node" },
--	{ NULL, NULL, NULL }
--};
--
--static const struct quota soft_quotas[] = {
--	{ "memory", &quota_memory_per_domain_soft,
--		"Total Xenstore memory per domain (warning level)" },
--	{ NULL, NULL, NULL }
--};
--
- static int quota_show_current(const void *ctx, struct connection *conn,
- 			      const struct quota *quotas)
- {
-@@ -260,9 +231,11 @@ static int quota_show_current(const void *ctx, struct connection *conn,
- 	if (!resp)
- 		return ENOMEM;
- 
--	for (i = 0; quotas[i].quota; i++) {
-+	for (i = 0; i < ACC_N; i++) {
-+		if (!quotas[i].name)
-+			continue;
- 		resp = talloc_asprintf_append(resp, "%-17s: %8d %s\n",
--					      quotas[i].name, *quotas[i].quota,
-+					      quotas[i].name, quotas[i].val,
- 					      quotas[i].descr);
- 		if (!resp)
- 			return ENOMEM;
-@@ -274,7 +247,7 @@ static int quota_show_current(const void *ctx, struct connection *conn,
- }
- 
- static int quota_set(const void *ctx, struct connection *conn,
--		     char **vec, int num, const struct quota *quotas)
-+		     char **vec, int num, struct quota *quotas)
- {
- 	unsigned int i;
- 	int val;
-@@ -286,9 +259,9 @@ static int quota_set(const void *ctx, struct connection *conn,
- 	if (val < 1)
- 		return EINVAL;
- 
--	for (i = 0; quotas[i].quota; i++) {
--		if (!strcmp(vec[0], quotas[i].name)) {
--			*quotas[i].quota = val;
-+	for (i = 0; i < ACC_N; i++) {
-+		if (quotas[i].name && !strcmp(vec[0], quotas[i].name)) {
-+			quotas[i].val = val;
- 			send_ack(conn, XS_CONTROL);
- 			return 0;
- 		}
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index c34de5ca3a..6d71cb5a2c 100644
+index 49e196e7ae..5b85b69eb2 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -89,17 +89,6 @@ unsigned int trace_flags = TRACE_OBJ | TRACE_IO;
- 
- static const char *sockmsg_string(enum xsd_sockmsg_type type);
- 
--int quota_nb_entry_per_domain = 1000;
--int quota_nb_watch_per_domain = 128;
--int quota_max_entry_size = 2048; /* 2K */
--int quota_max_transaction = 10;
--int quota_nb_perms_per_node = 5;
--int quota_trans_nodes = 1024;
--int quota_max_path_len = XENSTORE_REL_PATH_MAX;
--int quota_req_outstanding = 20;
--int quota_memory_per_domain_soft = 2 * 1024 * 1024; /* 2 MB */
--int quota_memory_per_domain_hard = 2 * 1024 * 1024 + 512 * 1024; /* 2.5 MB */
--
- unsigned int timeout_watch_event_msec = 20000;
- 
- void trace(const char *fmt, ...)
-@@ -799,7 +788,7 @@ int write_node_raw(struct connection *conn, TDB_DATA *key, struct node *node,
- 		+ node->perms.num * sizeof(node->perms.p[0])
- 		+ node->datalen + node->childlen;
- 
--	if (domain_max_chk(conn, ACC_NODESZ, data.dsize, quota_max_entry_size)
-+	if (domain_max_chk(conn, ACC_NODESZ, data.dsize)
- 	    && !no_quota_check) {
- 		errno = ENOSPC;
- 		return errno;
-@@ -1188,8 +1177,7 @@ bool is_valid_nodename(const struct connection *conn, const char *node)
- 	if (sscanf(node, "/local/domain/%5u/%n", &domid, &local_off) != 1)
- 		local_off = 0;
- 
--	if (domain_max_chk(conn, ACC_PATHLEN, strlen(node) - local_off,
--			   quota_max_path_len))
-+	if (domain_max_chk(conn, ACC_PATHLEN, strlen(node) - local_off))
- 		return false;
- 
- 	return valid_chars(node);
-@@ -1501,7 +1489,7 @@ static struct node *create_node(struct connection *conn, const void *ctx,
- 	for (i = node; i; i = i->parent) {
- 		/* i->parent is set for each new node, so check quota. */
- 		if (i->parent &&
--		    domain_nbentry(conn) >= quota_nb_entry_per_domain) {
-+		    domain_nbentry(conn) >= hard_quotas[ACC_NODES].val) {
- 			ret = ENOSPC;
- 			goto err;
- 		}
-@@ -1776,7 +1764,7 @@ static int do_set_perms(const void *ctx, struct connection *conn,
- 		return EINVAL;
- 
- 	perms.num--;
--	if (domain_max_chk(conn, ACC_NPERM, perms.num, quota_nb_perms_per_node))
-+	if (domain_max_chk(conn, ACC_NPERM, perms.num))
- 		return ENOSPC;
- 
- 	permstr = in->buffer + strlen(in->buffer) + 1;
-@@ -2644,7 +2632,16 @@ static void usage(void)
- "                          memory: total used memory per domain for nodes,\n"
- "                                  transactions, watches and requests, above\n"
- "                                  which Xenstore will stop talking to domain\n"
-+"                          nodes: number nodes owned by a domain\n"
-+"                          node-permissions: number of access permissions per\n"
-+"                                            node\n"
-+"                          node-size: total size of a node (permissions +\n"
-+"                                     children names + content)\n"
- "                          outstanding: number of outstanding requests\n"
-+"                          path-length: length of a node path\n"
-+"                          transactions: number of concurrent transactions\n"
-+"                                        per domain\n"
-+"                          watches: number of watches per domain"
- "  -q, --quota-soft <what>=<nb> set a soft quota <what> to the value <nb>,\n"
- "                          causing a warning to be issued via syslog() if the\n"
- "                          limit is violated, allowed quotas are:\n"
-@@ -2695,12 +2692,12 @@ int dom0_domid = 0;
- int dom0_event = 0;
- int priv_domid = 0;
- 
--static int get_optval_int(const char *arg)
-+static unsigned int get_optval_int(const char *arg)
- {
- 	char *end;
--	long val;
-+	unsigned long val;
- 
--	val = strtol(arg, &end, 10);
-+	val = strtoul(arg, &end, 10);
- 	if (!*arg || *end || val < 0 || val > INT_MAX)
- 		barf("invalid parameter value \"%s\"\n", arg);
- 
-@@ -2709,15 +2706,19 @@ static int get_optval_int(const char *arg)
- 
- static bool what_matches(const char *arg, const char *what)
- {
--	unsigned int what_len = strlen(what);
-+	unsigned int what_len;
-+
-+	if (!what)
-+		false;
- 
-+	what_len = strlen(what);
- 	return !strncmp(arg, what, what_len) && arg[what_len] == '=';
- }
- 
- static void set_timeout(const char *arg)
- {
- 	const char *eq = strchr(arg, '=');
--	int val;
-+	unsigned int val;
- 
- 	if (!eq)
- 		barf("quotas must be specified via <what>=<seconds>\n");
-@@ -2731,22 +2732,22 @@ static void set_timeout(const char *arg)
- static void set_quota(const char *arg, bool soft)
- {
- 	const char *eq = strchr(arg, '=');
--	int val;
-+	struct quota *q = soft ? soft_quotas : hard_quotas;
-+	unsigned int val;
-+	unsigned int i;
- 
- 	if (!eq)
- 		barf("quotas must be specified via <what>=<nb>\n");
- 	val = get_optval_int(eq + 1);
--	if (what_matches(arg, "outstanding") && !soft)
--		quota_req_outstanding = val;
--	else if (what_matches(arg, "transaction-nodes") && !soft)
--		quota_trans_nodes = val;
--	else if (what_matches(arg, "memory")) {
--		if (soft)
--			quota_memory_per_domain_soft = val;
--		else
--			quota_memory_per_domain_hard = val;
--	} else
--		barf("unknown quota \"%s\"\n", arg);
-+
-+	for (i = 0; i < ACC_N; i++) {
-+		if (what_matches(arg, q[i].name)) {
-+			q[i].val = val;
-+			return;
-+		}
-+	}
-+
-+	barf("unknown quota \"%s\"\n", arg);
- }
- 
- /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
-@@ -2808,7 +2809,7 @@ int main(int argc, char *argv[])
- 			no_domain_init = true;
- 			break;
- 		case 'E':
--			quota_nb_entry_per_domain = strtol(optarg, NULL, 10);
-+			hard_quotas[ACC_NODES].val = strtoul(optarg, NULL, 10);
- 			break;
- 		case 'F':
- 			pidfile = optarg;
-@@ -2826,10 +2827,10 @@ int main(int argc, char *argv[])
- 			recovery = false;
- 			break;
- 		case 'S':
--			quota_max_entry_size = strtol(optarg, NULL, 10);
-+			hard_quotas[ACC_NODESZ].val = strtoul(optarg, NULL, 10);
- 			break;
- 		case 't':
--			quota_max_transaction = strtol(optarg, NULL, 10);
-+			hard_quotas[ACC_TRANS].val = strtoul(optarg, NULL, 10);
- 			break;
- 		case 'T':
- 			tracefile = optarg;
-@@ -2849,15 +2850,17 @@ int main(int argc, char *argv[])
- 			verbose = true;
- 			break;
- 		case 'W':
--			quota_nb_watch_per_domain = strtol(optarg, NULL, 10);
-+			hard_quotas[ACC_WATCH].val = strtoul(optarg, NULL, 10);
- 			break;
- 		case 'A':
--			quota_nb_perms_per_node = strtol(optarg, NULL, 10);
-+			hard_quotas[ACC_NPERM].val = strtoul(optarg, NULL, 10);
- 			break;
- 		case 'M':
--			quota_max_path_len = strtol(optarg, NULL, 10);
--			quota_max_path_len = min(XENSTORE_REL_PATH_MAX,
--						 quota_max_path_len);
-+			hard_quotas[ACC_PATHLEN].val =
-+				strtoul(optarg, NULL, 10);
-+			hard_quotas[ACC_PATHLEN].val =
-+				 min((unsigned int)XENSTORE_REL_PATH_MAX,
-+				     hard_quotas[ACC_PATHLEN].val);
- 			break;
- 		case 'Q':
- 			set_quota(optarg, false);
+@@ -2083,7 +2083,7 @@ static void consider_message(struct connection *conn)
+ 	 * stalled. This will ignore new requests until Live-Update happened
+ 	 * or it was aborted.
+ 	 */
+-	if (lu_is_pending() && conn->transaction_started == 0 &&
++	if (lu_is_pending() && conn->ta_start_time == 0 &&
+ 	    conn->in->hdr.msg.type == XS_TRANSACTION_START) {
+ 		trace("Delaying transaction start for connection %p req_id %u\n",
+ 		      conn, conn->in->hdr.msg.req_id);
+@@ -2190,7 +2190,6 @@ struct connection *new_connection(const struct interface_funcs *funcs)
+ 	new->funcs = funcs;
+ 	new->is_ignored = false;
+ 	new->is_stalled = false;
+-	new->transaction_started = 0;
+ 	INIT_LIST_HEAD(&new->out_list);
+ 	INIT_LIST_HEAD(&new->acc_list);
+ 	INIT_LIST_HEAD(&new->ref_list);
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 0140c25880..693622ec68 100644
+index 419a144396..6465105b4d 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -315,16 +315,6 @@ extern TDB_CONTEXT *tdb_ctx;
- extern int dom0_domid;
- extern int dom0_event;
- extern int priv_domid;
--extern int quota_nb_watch_per_domain;
--extern int quota_max_transaction;
--extern int quota_max_entry_size;
--extern int quota_nb_perms_per_node;
--extern int quota_max_path_len;
--extern int quota_nb_entry_per_domain;
--extern int quota_req_outstanding;
--extern int quota_trans_nodes;
--extern int quota_memory_per_domain_soft;
--extern int quota_memory_per_domain_hard;
- extern bool keep_orphans;
+@@ -151,7 +151,6 @@ struct connection
+ 	/* List of in-progress transactions. */
+ 	struct list_head transaction_list;
+ 	uint32_t next_transaction_id;
+-	unsigned int transaction_started;
+ 	time_t ta_start_time;
  
- extern unsigned int timeout_watch_event_msec;
+ 	/* List of delayed requests. */
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index f431076505..3906047e6b 100644
+index d461fd8cc8..4d48e7a9f4 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -43,7 +43,61 @@ static evtchn_port_t virq_port;
- 
- xenevtchn_handle *xce_handle = NULL;
- 
--static unsigned int acc_global_max[ACC_N];
-+struct quota hard_quotas[ACC_N] = {
-+	[ACC_NODES] = {
-+		.name = "nodes",
-+		.descr = "Nodes per domain",
-+		.val = 1000,
-+	},
-+	[ACC_WATCH] = {
-+		.name = "watches",
-+		.descr = "Watches per domain",
-+		.val = 128,
-+	},
-+	[ACC_OUTST] = {
-+		.name = "outstanding",
-+		.descr = "Outstanding requests per domain",
-+		.val = 20,
-+	},
-+	[ACC_MEM] = {
-+		.name = "memory",
-+		.descr = "Total Xenstore memory per domain (error level)",
-+		.val = 2 * 1024 * 1024 + 512 * 1024,	/* 2.5 MB */
-+	},
-+	[ACC_TRANS] = {
-+		.name = "transactions",
-+		.descr = "Active transactions per domain",
-+		.val = 10,
-+	},
-+	[ACC_TRANSNODES] = {
-+		.name = "transaction-nodes",
-+		.descr = "Max. number of accessed nodes per transaction",
-+		.val = 1024,
-+	},
-+	[ACC_NPERM] = {
-+		.name = "node-permissions",
-+		.descr = "Max. number of permissions per node",
-+		.val = 5,
-+	},
-+	[ACC_PATHLEN] = {
-+		.name = "path-max",
-+		.descr = "Max. length of a node path",
-+		.val = XENSTORE_REL_PATH_MAX,
-+	},
-+	[ACC_NODESZ] = {
-+		.name = "node-size",
-+		.descr = "Max. size of a node",
-+		.val = 2048,
-+	},
-+};
-+
-+struct quota soft_quotas[ACC_N] = {
-+	[ACC_MEM] = {
-+		.name = "memory",
-+		.descr = "Total Xenstore memory per domain (warning level)",
-+		.val = 2 * 1024 * 1024,			/* 2.0 MB */
-+	},
-+};
- 
- struct domain
- {
-@@ -204,10 +258,10 @@ static bool domain_can_read(struct connection *conn)
- 	if (domain_is_unprivileged(conn)) {
- 		if (domain->wrl_credit < 0)
- 			return false;
--		if (domain->acc[ACC_OUTST].val >= quota_req_outstanding)
-+		if (domain->acc[ACC_OUTST].val >= hard_quotas[ACC_OUTST].val)
- 			return false;
--		if (domain->acc[ACC_MEM].val >= quota_memory_per_domain_hard &&
--		    quota_memory_per_domain_hard)
-+		if (domain->acc[ACC_MEM].val >= hard_quotas[ACC_MEM].val &&
-+		    hard_quotas[ACC_MEM].val)
- 			return false;
- 	}
- 
-@@ -422,6 +476,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+@@ -417,12 +417,10 @@ int domain_get_quota(const void *ctx, struct connection *conn,
  {
  	struct domain *d = find_domain_struct(domid);
  	char *resp;
-+	unsigned int i;
+-	int ta;
  
  	if (!d)
  		return ENOENT;
-@@ -430,19 +485,15 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+ 
+-	ta = d->conn ? d->conn->transaction_started : 0;
+ 	resp = talloc_asprintf(ctx, "Domain %u:\n", domid);
  	if (!resp)
  		return ENOMEM;
+@@ -433,7 +431,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
  
--#define ent(t, e) \
--	resp = talloc_asprintf_append(resp, "%-17s: %8u (max: %8u\n", #t, \
--				      d->acc[e].val, d->acc[e].max); \
--	if (!resp) return ENOMEM
--
--	ent(nodes, ACC_NODES);
--	ent(watches, ACC_WATCH);
--	ent(transactions, ACC_TRANS);
--	ent(outstanding, ACC_OUTST);
--	ent(memory, ACC_MEM);
--	ent(transaction-nodes, ACC_TRANSNODES);
--
--#undef ent
-+	for (i = 0; i < ACC_N; i++) {
-+		if (!hard_quotas[i].name)
-+			continue;
-+		resp = talloc_asprintf_append(resp, "%-17s: %8u (max %8u)\n",
-+					      hard_quotas[i].name,
-+					      d->acc[i].val, d->acc[i].max);
-+		if (!resp)
-+			return ENOMEM;
-+	}
+ 	ent(nodes, d->acc[ACC_NODES]);
+ 	ent(watches, d->acc[ACC_WATCH]);
+-	ent(transactions, ta);
++	ent(transactions, d->acc[ACC_TRANS]);
+ 	ent(outstanding, d->acc[ACC_OUTST]);
+ 	ent(memory, d->acc[ACC_MEM]);
  
- 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
- 
-@@ -452,24 +503,21 @@ int domain_get_quota(const void *ctx, struct connection *conn,
- int domain_max_global_acc(const void *ctx, struct connection *conn)
- {
- 	char *resp;
-+	unsigned int i;
- 
- 	resp = talloc_asprintf(ctx, "Max. seen accounting values:\n");
- 	if (!resp)
- 		return ENOMEM;
- 
--#define ent(t, e) \
--	resp = talloc_asprintf_append(resp, "%-17s: %8u\n", #t,   \
--				      acc_global_max[e]);         \
--	if (!resp) return ENOMEM
--
--	ent(nodes, ACC_NODES);
--	ent(watches, ACC_WATCH);
--	ent(transactions, ACC_TRANS);
--	ent(outstanding, ACC_OUTST);
--	ent(memory, ACC_MEM);
--	ent(transaction-nodes, ACC_TRANSNODES);
--
--#undef ent
-+	for (i = 0; i < ACC_N; i++) {
-+		if (!hard_quotas[i].name)
-+			continue;
-+		resp = talloc_asprintf_append(resp, "%-17s: %8u\n",
-+					      hard_quotas[i].name,
-+					      hard_quotas[i].max);
-+		if (!resp)
-+			return ENOMEM;
-+	}
- 
- 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
- 
-@@ -584,7 +632,7 @@ int acc_fix_domains(struct list_head *head, bool update)
- 	list_for_each_entry(cd, head, list) {
- 		cnt = domain_nbentry_fix(cd->domid, cd->acc[ACC_NODES], update);
- 		if (!update) {
--			if (cnt >= quota_nb_entry_per_domain)
-+			if (cnt >= hard_quotas[ACC_NODES].val)
- 				return ENOSPC;
- 			if (cnt < 0)
- 				return ENOMEM;
-@@ -1086,12 +1134,12 @@ static void domain_acc_chk_max(struct domain *d, enum accitem what,
- 			       unsigned int val, unsigned int domid)
- {
- 	assert(what < ARRAY_SIZE(d->acc));
--	assert(what < ARRAY_SIZE(acc_global_max));
-+	assert(what < ARRAY_SIZE(hard_quotas));
- 
- 	if (val > d->acc[what].max)
- 		d->acc[what].max = val;
--	if (val > acc_global_max[what] && domid_is_unprivileged(domid))
--		acc_global_max[what] = val;
-+	if (val > hard_quotas[what].max && domid_is_unprivileged(domid))
-+		hard_quotas[what].max = val;
+@@ -1295,6 +1293,23 @@ void domain_outstanding_dec(struct connection *conn, unsigned int domid)
+ 	domain_acc_add(conn, domid, ACC_OUTST, -1, true);
  }
  
- static int domain_acc_add_chk(struct domain *d, enum accitem what, int add,
-@@ -1222,19 +1270,19 @@ void domain_reset_global_acc(void)
- 	unsigned int i;
- 
- 	for (i = 0; i < ACC_N; i++)
--		acc_global_max[i] = 0;
-+		hard_quotas[i].max = 0;
- 
- 	/* Set current max values seen. */
- 	hashtable_iterate(domhash, domain_reset_global_acc_sub, NULL);
- }
- 
- bool domain_max_chk(const struct connection *conn, enum accitem what,
--		    unsigned int val, unsigned int quota)
-+		    unsigned int val)
- {
- 	if (!conn || !conn->domain)
- 		return false;
- 
--	if (domain_is_unprivileged(conn) && val > quota)
-+	if (domain_is_unprivileged(conn) && val > hard_quotas[what].val)
- 		return true;
- 
- 	domain_acc_chk_max(conn->domain, what, val, conn->id);
-@@ -1283,8 +1331,7 @@ static bool domain_chk_quota(struct connection *conn, unsigned int mem)
- 	domain = conn->domain;
- 	now = time(NULL);
- 
--	if (mem >= quota_memory_per_domain_hard &&
--	    quota_memory_per_domain_hard) {
-+	if (mem >= hard_quotas[ACC_MEM].val && hard_quotas[ACC_MEM].val) {
- 		if (domain->hard_quota_reported)
- 			return true;
- 		syslog(LOG_ERR, "Domain %u exceeds hard memory quota, Xenstore interface to domain stalled\n",
-@@ -1301,15 +1348,14 @@ static bool domain_chk_quota(struct connection *conn, unsigned int mem)
- 			syslog(LOG_INFO, "Domain %u below hard memory quota again\n",
- 			       domain->domid);
- 		}
--		if (mem >= quota_memory_per_domain_soft &&
--		    quota_memory_per_domain_soft &&
--		    !domain->soft_quota_reported) {
-+		if (mem >= soft_quotas[ACC_MEM].val &&
-+		    soft_quotas[ACC_MEM].val && !domain->soft_quota_reported) {
- 			domain->mem_last_msg = now;
- 			domain->soft_quota_reported = true;
- 			syslog(LOG_WARNING, "Domain %u exceeds soft memory quota\n",
- 			       domain->domid);
- 		}
--		if (mem < quota_memory_per_domain_soft &&
-+		if (mem < soft_quotas[ACC_MEM].val &&
- 		    domain->soft_quota_reported) {
- 			domain->mem_last_msg = now;
- 			domain->soft_quota_reported = false;
++void domain_transaction_inc(struct connection *conn)
++{
++	domain_acc_add(conn, conn->id, ACC_TRANS, 1, true);
++}
++
++void domain_transaction_dec(struct connection *conn)
++{
++	domain_acc_add(conn, conn->id, ACC_TRANS, -1, true);
++}
++
++unsigned int domain_transaction_get(struct connection *conn)
++{
++	return (domain_is_unprivileged(conn))
++		? domain_acc_add(conn, conn->id, ACC_TRANS, 0, true)
++		: 0;
++}
++
+ static wrl_creditt wrl_config_writecost      = WRL_FACTOR;
+ static wrl_creditt wrl_config_rate           = WRL_RATE   * WRL_FACTOR;
+ static wrl_creditt wrl_config_dburst         = WRL_DBURST * WRL_FACTOR;
 diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index ff341dd8bf..3989d4a038 100644
+index 37e14d1c8c..e0562b0b4d 100644
 --- a/tools/xenstore/xenstored_domain.h
 +++ b/tools/xenstore/xenstored_domain.h
-@@ -34,6 +34,16 @@ enum accitem {
+@@ -26,6 +26,7 @@ enum accitem {
+ 	ACC_WATCH = ACC_TR_N,
+ 	ACC_OUTST,
+ 	ACC_MEM,
++	ACC_TRANS,
  	ACC_N            /* Number of elements per domain. */
  };
  
-+struct quota {
-+	const char *name;
-+	const char *descr;
-+	unsigned int val;
-+	unsigned int max;
-+};
-+
-+extern struct quota hard_quotas[ACC_N];
-+extern struct quota soft_quotas[ACC_N];
-+
- void handle_event(void);
- 
- void check_domains(void);
-@@ -123,7 +133,7 @@ void acc_commit(struct connection *conn);
- int domain_max_global_acc(const void *ctx, struct connection *conn);
- void domain_reset_global_acc(void);
- bool domain_max_chk(const struct connection *conn, unsigned int what,
--		    unsigned int val, unsigned int quota);
-+		    unsigned int val);
- 
- /* Write rate limiting */
- 
+@@ -107,6 +108,9 @@ void domain_watch_dec(struct connection *conn);
+ int domain_watch(struct connection *conn);
+ void domain_outstanding_inc(struct connection *conn, unsigned int domid);
+ void domain_outstanding_dec(struct connection *conn, unsigned int domid);
++void domain_transaction_inc(struct connection *conn);
++void domain_transaction_dec(struct connection *conn);
++unsigned int domain_transaction_get(struct connection *conn);
+ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		     unsigned int domid);
+ int acc_fix_domains(struct list_head *head, bool update);
 diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
-index 7967770ca2..13fabe030d 100644
+index 19a1175d1b..ce6a12b576 100644
 --- a/tools/xenstore/xenstored_transaction.c
 +++ b/tools/xenstore/xenstored_transaction.c
-@@ -244,8 +244,7 @@ int access_node(struct connection *conn, struct node *node,
- 
- 	i = find_accessed_node(trans, node->name);
- 	if (!i) {
--		if (domain_max_chk(conn, ACC_TRANSNODES, trans->nodes + 1,
--				   quota_trans_nodes)) {
-+		if (domain_max_chk(conn, ACC_TRANSNODES, trans->nodes + 1)) {
- 			ret = ENOSPC;
- 			goto err;
- 		}
-@@ -471,7 +470,7 @@ int do_transaction_start(const void *ctx, struct connection *conn,
+@@ -471,8 +471,7 @@ int do_transaction_start(const void *ctx, struct connection *conn,
  	if (conn->transaction)
  		return EBUSY;
  
--	if (domain_transaction_get(conn) > quota_max_transaction)
-+	if (domain_transaction_get(conn) > hard_quotas[ACC_TRANS].val)
+-	if (domain_is_unprivileged(conn) &&
+-	    conn->transaction_started > quota_max_transaction)
++	if (domain_transaction_get(conn) > quota_max_transaction)
  		return ENOSPC;
  
  	/* Attach transaction to ctx for autofree until it's complete */
-diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
-index 61b1e3421e..e8eb35de02 100644
---- a/tools/xenstore/xenstored_watch.c
-+++ b/tools/xenstore/xenstored_watch.c
-@@ -239,7 +239,7 @@ int do_watch(const void *ctx, struct connection *conn, struct buffered_data *in)
- 			return EEXIST;
- 	}
+@@ -497,9 +496,9 @@ int do_transaction_start(const void *ctx, struct connection *conn,
+ 	list_add_tail(&trans->list, &conn->transaction_list);
+ 	talloc_steal(conn, trans);
+ 	talloc_set_destructor(trans, destroy_transaction);
+-	if (!conn->transaction_started)
++	if (!conn->ta_start_time)
+ 		conn->ta_start_time = time(NULL);
+-	conn->transaction_started++;
++	domain_transaction_inc(conn);
+ 	wrl_ntransactions++;
  
--	if (domain_watch(conn) > quota_nb_watch_per_domain)
-+	if (domain_watch(conn) > hard_quotas[ACC_WATCH].val)
- 		return E2BIG;
+ 	snprintf(id_str, sizeof(id_str), "%u", trans->id);
+@@ -524,8 +523,8 @@ int do_transaction_end(const void *ctx, struct connection *conn,
  
- 	watch = add_watch(conn, vec[0], vec[1], relative, false);
+ 	conn->transaction = NULL;
+ 	list_del(&trans->list);
+-	conn->transaction_started--;
+-	if (!conn->transaction_started)
++	domain_transaction_dec(conn);
++	if (list_empty(&conn->transaction_list))
+ 		conn->ta_start_time = 0;
+ 
+ 	/* Attach transaction to ctx for auto-cleanup */
+@@ -576,7 +575,6 @@ void conn_delete_all_transactions(struct connection *conn)
+ 
+ 	assert(conn->transaction == NULL);
+ 
+-	conn->transaction_started = 0;
+ 	conn->ta_start_time = 0;
+ }
+ 
 -- 
 2.35.3
 
