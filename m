@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE90AC05027
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0ED1C25B50
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Jan 2023 10:00:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.481561.746537 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.481563.746557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoCK-0001Kw-G2; Fri, 20 Jan 2023 10:00:36 +0000
+	id 1pIoCV-0001u5-5M; Fri, 20 Jan 2023 10:00:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 481561.746537; Fri, 20 Jan 2023 10:00:36 +0000
+Received: by outflank-mailman (output) from mailman id 481563.746557; Fri, 20 Jan 2023 10:00:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pIoCK-0001Kp-DC; Fri, 20 Jan 2023 10:00:36 +0000
-Received: by outflank-mailman (input) for mailman id 481561;
- Fri, 20 Jan 2023 10:00:35 +0000
+	id 1pIoCV-0001tp-1p; Fri, 20 Jan 2023 10:00:47 +0000
+Received: by outflank-mailman (input) for mailman id 481563;
+ Fri, 20 Jan 2023 10:00:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NYwS=5R=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pIoCJ-0001Kj-H3
- for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:00:35 +0000
+ id 1pIoCU-0001Kj-7l
+ for xen-devel@lists.xenproject.org; Fri, 20 Jan 2023 10:00:46 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 47fb4d70-98a9-11ed-91b6-6bf2151ebd3b;
- Fri, 20 Jan 2023 11:00:34 +0100 (CET)
+ id 4e963540-98a9-11ed-91b6-6bf2151ebd3b;
+ Fri, 20 Jan 2023 11:00:45 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 22F5122A04;
- Fri, 20 Jan 2023 10:00:34 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 4E07222A05;
+ Fri, 20 Jan 2023 10:00:45 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D0ACA1390C;
- Fri, 20 Jan 2023 10:00:33 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 206721390C;
+ Fri, 20 Jan 2023 10:00:45 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id NthvMUFmymPvRAAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 20 Jan 2023 10:00:33 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Il6JBk1mymMJRQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 20 Jan 2023 10:00:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,68 +53,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47fb4d70-98a9-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: 4e963540-98a9-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1674208834; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=BP2Ghnh4lJv6QN3DkwdB0Xdmy7oy5X0QBXuC3leED8Q=;
-	b=f4Rq3o9pbCpc+uXh3oFQ6x+6OdFH4+ok8jJoISu7YorWjME1Whd4mY7dTlBVWsAWbRdfx4
-	ER3NXWydAw1G0bRLNaJi2GTJrfdPM/+LBax9p/DoMmZlBjo1EPhKveiVwE5/Nx1wsGTOqg
-	8dQrpRn/av6SYjXNk8A1mqaxq1WyOjM=
+	t=1674208845; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=hxLPEC5sKQgZtz5rlLvxKLZpRKYHDJAhBxz2WqBzjA4=;
+	b=Vg3oEfgUnsDQokH4I9VcSnxhPu8rc5LFCJFO/PShVwybyUbjWauy5obgnLvACzVWhqp6QK
+	M8KWTfdejnuPsrI8ElPPiI9Du/DRuq8tOMnlOMUQTl5AtICEJ+ELbInXOUu2OiUx5YZ1U0
+	gBLn+9aA3jCC+gkGr5bEC7+TOs604nk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 00/13] tools/xenstore: rework internal accounting
-Date: Fri, 20 Jan 2023 11:00:15 +0100
-Message-Id: <20230120100028.11142-1-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 02/13] tools/xenstore: manage per-transaction domain accounting data in an array
+Date: Fri, 20 Jan 2023 11:00:17 +0100
+Message-Id: <20230120100028.11142-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230120100028.11142-1-jgross@suse.com>
+References: <20230120100028.11142-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series reworks the Xenstore internal accounting to use a uniform
-generic framework. It is adding some additional useful diagnostic
-information, like accounting trace and max. per-domain and global quota
-values seen.
+In order to prepare keeping accounting data in an array instead of
+using independent fields, switch the struct changed_domain accounting
+data to that scheme, for now only using an array with one element.
 
-Changes in V2:
-- added patch 1 (leftover from previous series)
-- rebase
+In order to be able to extend this scheme add the needed indexing enum
+to xenstored_domain.h.
 
-Juergen Gross (13):
-  tools/xenstore: don't allow creating too many nodes in a transaction
-  tools/xenstore: manage per-transaction domain accounting data in an
-    array
-  tools/xenstore: introduce accounting data array for per-domain values
-  tools/xenstore: add framework to commit accounting data on success
-    only
-  tools/xenstore: use accounting buffering for node accounting
-  tools/xenstore: add current connection to domain_memory_add()
-    parameters
-  tools/xenstore: use accounting data array for per-domain values
-  tools/xenstore: add accounting trace support
-  tools/xenstore: add TDB access trace support
-  tools/xenstore: switch transaction accounting to generic accounting
-  tools/xenstore: remember global and per domain max accounting values
-  tools/xenstore: use generic accounting for remaining quotas
-  tools/xenstore: switch quota management to be table based
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- make "what" parameter of acc_add_changed_dom() an enum type, and
+  assert() that it won't exceed the accounting array (Julien Grall)
+---
+ tools/xenstore/xenstored_domain.c | 19 +++++++++++--------
+ tools/xenstore/xenstored_domain.h |  5 +++++
+ 2 files changed, 16 insertions(+), 8 deletions(-)
 
- docs/misc/xenstore.txt                 |   5 +-
- tools/xenstore/xenstored_control.c     |  65 ++--
- tools/xenstore/xenstored_core.c        | 164 +++++-----
- tools/xenstore/xenstored_core.h        |  23 +-
- tools/xenstore/xenstored_domain.c      | 435 ++++++++++++++++++-------
- tools/xenstore/xenstored_domain.h      |  55 +++-
- tools/xenstore/xenstored_transaction.c |  22 +-
- tools/xenstore/xenstored_watch.c       |  15 +-
- 8 files changed, 506 insertions(+), 278 deletions(-)
-
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 7eb9cd077b..44e72937fa 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -99,8 +99,8 @@ struct changed_domain
+ 	/* Identifier of the changed domain. */
+ 	unsigned int domid;
+ 
+-	/* Amount by which this domain's nbentry field has changed. */
+-	int nbentry;
++	/* Accounting data. */
++	int acc[ACC_TR_N];
+ };
+ 
+ static struct hashtable *domhash;
+@@ -550,7 +550,7 @@ int acc_fix_domains(struct list_head *head, bool update)
+ 	int cnt;
+ 
+ 	list_for_each_entry(cd, head, list) {
+-		cnt = domain_nbentry_fix(cd->domid, cd->nbentry, update);
++		cnt = domain_nbentry_fix(cd->domid, cd->acc[ACC_NODES], update);
+ 		if (!update) {
+ 			if (cnt >= quota_nb_entry_per_domain)
+ 				return ENOSPC;
+@@ -595,19 +595,21 @@ static struct changed_domain *acc_get_changed_domain(const void *ctx,
+ 	return cd;
+ }
+ 
+-static int acc_add_dom_nbentry(const void *ctx, struct list_head *head, int val,
+-			       unsigned int domid)
++static int acc_add_changed_dom(const void *ctx, struct list_head *head,
++			       enum accitem what, int val, unsigned int domid)
+ {
+ 	struct changed_domain *cd;
+ 
++	assert(what < ARRAY_SIZE(cd->acc));
++
+ 	cd = acc_get_changed_domain(ctx, head, domid);
+ 	if (!cd)
+ 		return 0;
+ 
+ 	errno = 0;
+-	cd->nbentry += val;
++	cd->acc[what] += val;
+ 
+-	return cd->nbentry;
++	return cd->acc[what];
+ }
+ 
+ static void domain_conn_reset(struct domain *domain)
+@@ -1071,7 +1073,8 @@ static int domain_nbentry_add(struct connection *conn, unsigned int domid,
+ 
+ 	if (conn && conn->transaction) {
+ 		head = transaction_get_changed_domains(conn->transaction);
+-		ret = acc_add_dom_nbentry(conn->transaction, head, add, domid);
++		ret = acc_add_changed_dom(conn->transaction, head, ACC_NODES,
++					  add, domid);
+ 		if (errno) {
+ 			fail_transaction(conn->transaction);
+ 			return -1;
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index dc4660861e..6a2b76a85b 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -19,6 +19,11 @@
+ #ifndef _XENSTORED_DOMAIN_H
+ #define _XENSTORED_DOMAIN_H
+ 
++enum accitem {
++	ACC_NODES,
++	ACC_TR_N	/* Number of elements per transaction and domain. */
++};
++
+ void handle_event(void);
+ 
+ void check_domains(void);
 -- 
 2.35.3
 
