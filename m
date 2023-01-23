@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACADAC25B50
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Jan 2023 21:18:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.483219.749236 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE35CC25B50
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Jan 2023 21:19:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.483223.749246 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pK4D6-0008Ha-RU; Mon, 23 Jan 2023 21:18:36 +0000
+	id 1pK4Dq-0000Mi-49; Mon, 23 Jan 2023 21:19:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 483219.749236; Mon, 23 Jan 2023 21:18:36 +0000
+Received: by outflank-mailman (output) from mailman id 483223.749246; Mon, 23 Jan 2023 21:19:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pK4D6-0008HT-O1; Mon, 23 Jan 2023 21:18:36 +0000
-Received: by outflank-mailman (input) for mailman id 483219;
- Mon, 23 Jan 2023 21:18:34 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pK4Dq-0000MZ-1Q; Mon, 23 Jan 2023 21:19:22 +0000
+Received: by outflank-mailman (input) for mailman id 483223;
+ Mon, 23 Jan 2023 21:19:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fbAi=5U=gmail.com=bobbyeshleman@srs-se1.protection.inumbo.net>)
- id 1pK4D4-0008HL-RP
- for xen-devel@lists.xenproject.org; Mon, 23 Jan 2023 21:18:34 +0000
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [2607:f8b0:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7c99bd64-9b63-11ed-b8d1-410ff93cb8f0;
- Mon, 23 Jan 2023 22:18:32 +0100 (CET)
-Received: by mail-pl1-x634.google.com with SMTP id jl3so12738928plb.8
- for <xen-devel@lists.xenproject.org>; Mon, 23 Jan 2023 13:18:32 -0800 (PST)
-Received: from localhost (c-73-164-155-12.hsd1.wa.comcast.net. [73.164.155.12])
- by smtp.gmail.com with ESMTPSA id
- s20-20020a056a00179400b0058dbd7a5e0esm41148pfg.89.2023.01.23.13.18.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jan 2023 13:18:29 -0800 (PST)
+ <SRS0=QMpG=5U=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1pK4Dp-0000K1-5U
+ for xen-devel@lists.xenproject.org; Mon, 23 Jan 2023 21:19:21 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9934eb3f-9b63-11ed-91b6-6bf2151ebd3b;
+ Mon, 23 Jan 2023 22:19:20 +0100 (CET)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A512460F2E;
+ Mon, 23 Jan 2023 21:19:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EEDCC433EF;
+ Mon, 23 Jan 2023 21:19:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,95 +46,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7c99bd64-9b63-11ed-b8d1-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=FvP9ePGiLeIZbacBX9f8fdS0Vg9jpqMmwkb1uVgjCts=;
-        b=UDNpBpONiaB9zcbgLJizT2LLfBkdM91UiNorkXXmdm2ov6CsWj8AEoq3IplXmSuw0R
-         HQpPDhIIWI5wmAtVLCt9irzNLHnuRXJ5EJ72jAQXN79NXb2bvEpJy6ONHKbddwdNZGVF
-         socue5HfVuhHf65wjhKM/vfz9eXVZyGwGV6OWBLdrMQ5fBYA2IsuX3rnKz+07dpyIbpV
-         FLG2DB9gqyMRguVIunopxVF/vNTDCyOp2B3WeFGZ5iZWzYoZNeD3TCTZQkyelgNsquOA
-         PMt+u9qaJxOpcMpKirEHunELchXB8qs7lEHAd5bgpXXcbAj5nnYTL8vfrkY88uB5W3Rj
-         lOIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FvP9ePGiLeIZbacBX9f8fdS0Vg9jpqMmwkb1uVgjCts=;
-        b=VfYa9TX38vbRD2jVunaq9CEbw/bQCY7BHzBw+QjB8hQAYRpPDO2Wo6OL6DGeBxhWBz
-         XTKNjjut1aIc/lgBwW/rZkHGiIhPeEGavwigQ8EJOEntSBAqV1CuV1Y66jFZR/gUD1Uq
-         TzS1p0PrnrXBVcwUSlLlkCpO+kz0VD0DhsZdhxgALLEdLpfVArreUjpfM34gnvgAU33u
-         4rngciuO7hh0Fygk2b5rSE9KvyMDj6OpbrZbvAUOW3Fet/MBsXu4YgjpdpGBLRT7GgU9
-         /3unj3xU5umLcP17APZpkY/Me3xReQRMgJIS3Ypnt6KGEQE3i2xFPntToc+jv++a0W/g
-         eZBg==
-X-Gm-Message-State: AFqh2kq456nanPClrvuPp0+mX7C5hbcoaDYYkc/KyPdJGaDY4dg3T+x8
-	QMDqReqk1McbADx4w4Ky96C0rUJ7Zsykc0fT
-X-Google-Smtp-Source: AMrXdXtIsVq55xFM1TXfauRZ0Olcu8Fh2eUd4zV2fCWxhsPdeK/jj/SDi8p/SzbMV25wS+yjJqEoiQ==
-X-Received: by 2002:a05:6a20:1611:b0:b4:6f9:ef7d with SMTP id l17-20020a056a20161100b000b406f9ef7dmr33569889pzj.35.1674508710356;
-        Mon, 23 Jan 2023 13:18:30 -0800 (PST)
-Date: Thu, 19 Jan 2023 13:05:09 +0000
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-To: Oleksii <oleksii.kurochko@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
-	xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>
-Subject: Re: [RISC-V] Switch  to H-mode
-Message-ID: <Y8lABYJoQ5Qt4DAt@bullseye>
-References: <18aa47afaebce70b00c3b5866a4809605240e619.camel@gmail.com>
+X-Inumbo-ID: 9934eb3f-9b63-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1674508758;
+	bh=cqCtiK4ukFa/0TkCKXPnG484yhJtk7LDq13c08g11Vg=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=pS8ibk1ZZt8GC0ocWk5XVf29YuTsCO/kKEIM6wMtmsqytwZwahW+NYCq0y5AQ7+qq
+	 rzWkKm9cNBFmzImy4HZ3k0BZ55J4QgpiAvtuP8oxhavV/xQHayE63vR453za2s66Di
+	 3jp45qmciluE42hL6niGZvdyZX/lBdkdQMY4/u0HTV/z7sbzFxgTpOVw8rEytXRPL3
+	 3aJ7IXT+2IzkNP90SmxVEdq6j6FD4a7NtGKibi+IjVDpWGPXTo6wqFh4aKMc48p7X+
+	 NsgesAZ47JT/ITBCyAOTbmnGwfKX8nCcyNAMlrDaIoYhlyJ5SuUAJzyeZesQDJ6cHL
+	 5cg3gdvWnohPQ==
+Date: Mon, 23 Jan 2023 13:19:14 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, 
+    stefano.stabellini@amd.com, julien@xen.org, Volodymyr_Babchuk@epam.com, 
+    bertrand.marquis@arm.com, andrew.cooper3@citrix.com, 
+    george.dunlap@citrix.com, jbeulich@suse.com, wl@xen.org, 
+    xuwei5@hisilicon.com
+Subject: Re: [XEN v3 1/3] xen/arm: Use the correct format specifier
+In-Reply-To: <20230123134451.47185-2-ayan.kumar.halder@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2301231313370.1978264@ubuntu-linux-20-04-desktop>
+References: <20230123134451.47185-1-ayan.kumar.halder@amd.com> <20230123134451.47185-2-ayan.kumar.halder@amd.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <18aa47afaebce70b00c3b5866a4809605240e619.camel@gmail.com>
+Content-Type: text/plain; charset=US-ASCII
 
-On Mon, Jan 23, 2023 at 06:56:19PM +0200, Oleksii wrote:
-> Hi Alistair and community,
+On Mon, 23 Jan 2023, Ayan Kumar Halder wrote:
+> 1. One should use 'PRIpaddr' to display 'paddr_t' variables. However,
+> while creating nodes in fdt, the address (if present in the node name)
+> should be represented using 'PRIx64'. This is to be in conformance
+> with the following rule present in https://elinux.org/Device_Tree_Linux
 > 
-> I am working on RISC-V support upstream for Xen based on your and Bobby
-> patches.
+> . node names
+> "unit-address does not have leading zeros"
 > 
-> Adding the RISC-V support I realized that Xen is ran in S-mode. Output
-> of OpenSBI:
->     ...
->     Domain0 Next Mode         : S-mode
->     ...
-> So the first my question is shouldn't it be in H-mode?
+> As 'PRIpaddr' introduces leading zeros, we cannot use it.
 > 
-> If I am right than it looks like we have to do a patch to OpenSBI to
-> add support of H-mode as it is not supported now:
-> [1]
-> https://github.com/riscv-software-src/opensbi/blob/master/lib/sbi/sbi_domain.c#L380
-> [2]
-> https://github.com/riscv-software-src/opensbi/blob/master/include/sbi/riscv_encoding.h#L110
-> Please correct me if I am wrong.
+> So, we have introduced a wrapper ie domain_fdt_begin_node() which will
+> represent physical address using 'PRIx64'.
 > 
-> The other option I see is to switch to H-mode in U-boot as I understand
-> the classical boot flow is:
->     OpenSBI -> U-boot -> Xen -> Domain{0,...}
-> If it is at all possible since U-boot will be in S mode after OpenSBI.
+> 2. One should use 'PRIx64' to display 'u64' in hex format. The current
+> use of 'PRIpaddr' for printing PTE is buggy as this is not a physical
+> address.
 > 
-> Thanks in advance.
+> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+> ---
 > 
-> ~ Oleksii
+> Changes from -
 > 
+> v1 - 1. Moved the patch earlier.
+> 2. Moved a part of change from "[XEN v1 8/9] xen/arm: Other adaptations required to support 32bit paddr"
+> into this patch.
+> 
+> v2 - 1. Use PRIx64 for appending addresses to fdt node names. This fixes the CI failure.
+> 
+>  xen/arch/arm/domain_build.c | 45 +++++++++++++++++--------------------
+>  xen/arch/arm/gic-v2.c       |  6 ++---
+>  xen/arch/arm/mm.c           |  2 +-
 
-Ah, what you are seeing there is that the openSBI's Next Mode excludes
-the virtualization mode (it treats HS and S synonymously) and it is only
-used for setting the mstatus MPP. The code also has next_virt for
-setting the MPV but I don't think that is exposed via the device tree
-yet. For Xen, you'd want next_mode = PRIV_S and next_virt = 0 (HS mode,
-not VS mode). The relevant setup prior to mret is here for interested
-readers:
-https://github.com/riscv-software-src/opensbi/blob/001106d19b21cd6443ae7f7f6d4d048d80e9ecac/lib/sbi/sbi_hart.c#L759
+The changes to mm.c and gic-v2.c look OK and I'd ack them already. One
+question on the changes to domain_build.c below.
 
-As long as the next_mode and next_virt are set correctly, then Xen
-should be launching in HS mode. I do believe this should be default for
-the stock build too for Domain0, unless something has changed.
 
-Thanks,
-Bobby
+>  3 files changed, 25 insertions(+), 28 deletions(-)
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index f35f4d2456..97c2395f9a 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -1288,6 +1288,20 @@ static int __init fdt_property_interrupts(const struct kernel_info *kinfo,
+>      return res;
+>  }
+>  
+> +static int __init domain_fdt_begin_node(void *fdt, const char *name,
+> +                                        uint64_t unit)
+> +{
+> +    /*
+> +     * The size of the buffer to hold the longest possible string ie
+> +     * interrupt-controller@ + a 64-bit number + \0
+> +     */
+> +    char buf[38];
+> +
+> +    /* ePAPR 3.4 */
+> +    snprintf(buf, sizeof(buf), "%s@%"PRIx64, name, unit);
+> +    return fdt_begin_node(fdt, buf);
+> +}
+> +
+>  static int __init make_memory_node(const struct domain *d,
+>                                     void *fdt,
+>                                     int addrcells, int sizecells,
+> @@ -1296,8 +1310,6 @@ static int __init make_memory_node(const struct domain *d,
+>      unsigned int i;
+>      int res, reg_size = addrcells + sizecells;
+>      int nr_cells = 0;
+> -    /* Placeholder for memory@ + a 64-bit number + \0 */
+> -    char buf[24];
+>      __be32 reg[NR_MEM_BANKS * 4 /* Worst case addrcells + sizecells */];
+>      __be32 *cells;
+>  
+> @@ -1314,9 +1326,7 @@ static int __init make_memory_node(const struct domain *d,
+>  
+>      dt_dprintk("Create memory node\n");
+>  
+> -    /* ePAPR 3.4 */
+> -    snprintf(buf, sizeof(buf), "memory@%"PRIx64, mem->bank[i].start);
+> -    res = fdt_begin_node(fdt, buf);
+> +    res = domain_fdt_begin_node(fdt, "memory", mem->bank[i].start);
+
+Basically this "hides" the paddr_t->uint64_t cast because it happens
+implicitly when passing mem->bank[i].start as an argument to
+domain_fdt_begin_node.
+
+To be honest, I don't know if it is necessary. Also a normal cast would
+be fine:
+
+    snprintf(buf, sizeof(buf), "memory@%"PRIx64, (uint64_t)mem->bank[i].start);
+    res = fdt_begin_node(fdt, buf);
+
+Julien, what do you prefer?
 
