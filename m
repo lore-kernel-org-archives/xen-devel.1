@@ -4,51 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A67C54EED
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Jan 2023 12:25:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.483531.749739 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C83CC25B4E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Jan 2023 12:42:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.483549.749772 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKILy-00059C-UZ; Tue, 24 Jan 2023 12:24:42 +0000
+	id 1pKIcd-0000Nl-UJ; Tue, 24 Jan 2023 12:41:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 483531.749739; Tue, 24 Jan 2023 12:24:42 +0000
+Received: by outflank-mailman (output) from mailman id 483549.749772; Tue, 24 Jan 2023 12:41:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKILy-00058w-Qt; Tue, 24 Jan 2023 12:24:42 +0000
-Received: by outflank-mailman (input) for mailman id 483531;
- Tue, 24 Jan 2023 12:24:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pKIcd-0000Nc-Qw; Tue, 24 Jan 2023 12:41:55 +0000
+Received: by outflank-mailman (input) for mailman id 483549;
+ Tue, 24 Jan 2023 12:41:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KMs4=5V=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1pKILx-0004Vt-SC
- for xen-devel@lists.xenproject.org; Tue, 24 Jan 2023 12:24:41 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2080.outbound.protection.outlook.com [40.107.243.80])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12d5bbbb-9be2-11ed-91b6-6bf2151ebd3b;
- Tue, 24 Jan 2023 13:24:41 +0100 (CET)
-Received: from DM6PR05CA0065.namprd05.prod.outlook.com (2603:10b6:5:335::34)
- by MN0PR12MB5882.namprd12.prod.outlook.com (2603:10b6:208:37a::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33; Tue, 24 Jan
- 2023 12:24:38 +0000
-Received: from CY4PEPF0000C973.namprd02.prod.outlook.com
- (2603:10b6:5:335:cafe::a0) by DM6PR05CA0065.outlook.office365.com
- (2603:10b6:5:335::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.16 via Frontend
- Transport; Tue, 24 Jan 2023 12:24:37 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000C973.mail.protection.outlook.com (10.167.242.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6043.14 via Frontend Transport; Tue, 24 Jan 2023 12:24:36 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 24 Jan
- 2023 06:24:36 -0600
-Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
- SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
- via Frontend Transport; Tue, 24 Jan 2023 06:24:34 -0600
+ <SRS0=jOcK=5V=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
+ id 1pKIcc-0008Um-FQ
+ for xen-devel@lists.xenproject.org; Tue, 24 Jan 2023 12:41:54 +0000
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [2a00:1450:4864:20::62d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7a554de8-9be4-11ed-b8d1-410ff93cb8f0;
+ Tue, 24 Jan 2023 13:41:52 +0100 (CET)
+Received: by mail-ej1-x62d.google.com with SMTP id kt14so38689985ejc.3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Jan 2023 04:41:52 -0800 (PST)
+Received: from uni.router.wind (adsl-208.109.242.227.tellas.gr.
+ [109.242.227.208]) by smtp.googlemail.com with ESMTPSA id
+ bj10-20020a170906b04a00b0086b0d53cde2sm825419ejb.201.2023.01.24.04.41.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Jan 2023 04:41:51 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,98 +46,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12d5bbbb-9be2-11ed-91b6-6bf2151ebd3b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CqCmN4op8+KBFwNOy5VK+5EJxoGcsCTuQCyakfyh/MehtmCpxTGYE03XuFiq3nzsU7f3z8AmYBc4hfOadY2N0b6AygyuuwGVIkJn6IRVMLmNBKv6ntOYWJH5Aqqz+ZaIY87epZpRuiHYJZO+6GZPYgw3E0Szg0sYMMRiTr+c2ssXVLN1R8b4rq66qmKXztxxtCEWP4azXaw5bfrIOFrabfHnH0yzyPKu/+66kMXmLWmsTI5PrH8DZBmp9L58iISCcs5MCKPBJSPCNFvhvMxEnWA+EqGZdtgt1ASwtabunY3sFX0dxdL3b4l7OcjkUGSOauT6JKtNjkwVxGTB7B8KAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xYkmJ/OdKUndVT1CuPr9J8refiPRMUq7ilyeAaA5ma8=;
- b=YmAgGG+17SjCNW82QeyVPWml+YBWZy3s5jVsy5AtbXIXJZoo3e9X9EhKO3fGOP/fFG3huUInGvor3MgwQ8Mvxzj6UUUDQiq8dpuqleUD+og2T4Rb0BbyeijTuHkgLbyT63c3nIme14UZCkGbnLe9ck4TdfSCgVG8eTKLPNylFUCC4pVbFPaXcdYR7Oy80bp4Udg1/xtdyQrMZ2nuv9wyU5UbGnqQXcWkCOxaKwcoTGReE7iMjvU1lA+1QHLbHyuKZmcxBl6KqnWTRokqDIJ7d4XRqWvzuxoN9DkunAJ2cYwKCecMxHpdY//rsuu67dDisFAkv1XFXa8BzhqWbM0AjQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xYkmJ/OdKUndVT1CuPr9J8refiPRMUq7ilyeAaA5ma8=;
- b=h9MgXR/zNNjYmYAeodUvrt3UgOjnQJf3KTBwvr3M2r/4k1qeH3hBV/uh45Slmk0uWgGe2DAsf/5HHL6dPiqd0Wx9GAdOnStc28FjrDvhyzZSjLu0tY8SKK1rmnk0Fh78alK+JEZwwPN/DGcxEBzLEuPuVpOPLDKKhgbIF+30TX4=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, <stefano.stabellini@amd.com>, <julien@xen.org>,
-	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>,
-	<andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>, <jbeulich@suse.com>,
-	<wl@xen.org>, <xuwei5@hisilicon.com>, Ayan Kumar Halder
-	<ayan.kumar.halder@amd.com>
-Subject: [XEN v4 3/3] xen/drivers: ns16550: Fix an incorrect assignment to uart->io_size
-Date: Tue, 24 Jan 2023 12:23:36 +0000
-Message-ID: <20230124122336.40993-4-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230124122336.40993-1-ayan.kumar.halder@amd.com>
-References: <20230124122336.40993-1-ayan.kumar.halder@amd.com>
+X-Inumbo-ID: 7a554de8-9be4-11ed-b8d1-410ff93cb8f0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=w2olX0nzQBjitvSin0uiejmf+7loZKGT4TX0YsAFXQ0=;
+        b=WXd780q1ocBcbk6sCNzF6Xey6SZmr18KWI+2TiUMqD3MK3Smf3q7iku4p7K+kUGgHU
+         CjkjZf248ClmEFSAhMA63gEUAcOyL2+yvG4XlRLuIRMODcMtebpNvez7gV/+2XTA6ZYW
+         2VGlerwlLet7vqZyh0enwE2RjGhubyeOggTp3uAyQ35WYi+jxSFxa6ys5QLy8opFKC9h
+         0JPKwd4X62elZPmnUccB/dXc8I9zY5SHsvhL9Ii7hjUTQDobLqXg0dV+tFA38K+Zxl0S
+         X6tAdUGC30ndH+2ahdZtAgekYpf7alUYP97U/dwk2vtnWmCnbGtfBCQ9JMV83XjpvPpa
+         DDQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=w2olX0nzQBjitvSin0uiejmf+7loZKGT4TX0YsAFXQ0=;
+        b=xvMQOLOyFr4rAnNEhWjiF52IAqb1lIdhaFHXgLh7c4Wtnmw2WGjt41ye/pmKv/55J3
+         bbzRnmc9nXM6MzhhDy/6qijhhxNx+2+VxZMk/Py8D0OeHl+2U+bG2RMFjsRiMPq4NE9/
+         8pzLN/PVUJEs3KJ8egQiZp/cYv6Jjom89nX0XPPzUyw++T1Uj7WCLc1wRchqX1+VJ8zj
+         Z2unpDImMWT0arFSHXFGdskR8skccm1BN+epC674ZMG0jlHWPvy5084sDya7kLWnnhwj
+         H6fzuQXRYRqjMF0dEO7WTb6mDZmxeUSV8VnCPQH6guG3baeVHRYBdEBQbcNwK/UyeYha
+         ec2Q==
+X-Gm-Message-State: AFqh2koYLLYYXI9bhItxYziIQ+JjIyMABC04ju4x/FQMhWyBSC1OoV1e
+	o4UvpO+U07i9ghaZo02+BiiyghVnsB4=
+X-Google-Smtp-Source: AMrXdXuoIBMj013AoW65KBsYxEJXpnwAVaZyigFL3YJLPK2E8PyP0ab2oH+ARij84GXj+pgKmauWyQ==
+X-Received: by 2002:a17:907:3ad0:b0:870:7c88:4668 with SMTP id fi16-20020a1709073ad000b008707c884668mr25029985ejc.68.1674564111992;
+        Tue, 24 Jan 2023 04:41:51 -0800 (PST)
+From: Xenia Ragiadakou <burzalodowa@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Kevin Tian <kevin.tian@intel.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Paul Durrant <paul@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v4 2/5] x86/iommu: make code addressing CVE-2011-1898 no VT-d specific
+Date: Tue, 24 Jan 2023 14:41:39 +0200
+Message-Id: <20230124124142.38500-3-burzalodowa@gmail.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20230124124142.38500-1-burzalodowa@gmail.com>
+References: <20230124124142.38500-1-burzalodowa@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000C973:EE_|MN0PR12MB5882:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6139d27d-a81e-49cd-c9e0-08dafe05f557
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	kG+zs+z5V4QE6umXtsi1ccsDnE99BjO/4xR8nbjQ39LFWlBsUdu5ZW7oTaVmtZxW6fnrM+lv+jtLmYaxWk3pnicOBW+RuR6GsOI8b5vsC9OSrigtVRZxMnvMJBXOijDIO0E5XVs5PZkbCcemrwat/eNWXCOBOpa/7I4aaoDdQiO5raSWfdBEo+kPjg9BhsC9pSS9AMBZZ1uueiifygdfTI7MuU0WfPvujdJ1cjLtwctTYJyH1PTRXQiPCbpBl8EpsOC2CqBL8oRa8vYRltDqaQvzfbUtSXnXx7rx36DFg6KSfOIORR5fyYfOmk3gN8XnY0S/uSrDRV1IhLlLkeiFCW6EZLyDzkESdgSQFcHOgbrLqT9Xi0lQU2W0in9U9Ak+gVB7nuhe8VKj4faCf/5NTAF1MH9QXluUPuxgxAHys4YiAPsQYz0UhfELtqBRSmsy8ZelU/U1AdN81of1vYKez31UdshdGvQYInafr7orjjUGoJeihBQJ2hJcP1E3DnpZ5gdTRhBrDP7K2vOzcjZ1jHuu2CsiN92g/1YEv/BkiT/ZSc5Hdvz1WfN9z+sn6STkM2kZdme5SF5r/og6nIaKip6A/yr1VM6s9IjVrn/4GAjrUJ5sjfHsSFYzBRpYo/seBPfE6egyrjxRQb0v88aw9omI5ZScjoL6YxmBSqgPyZGJBgt8azqjO6dCPQf73frEtyxkGuWDbYEtWfcl7N/qlKAJq1Z11MaKDeK0R1fVNGY=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(396003)(346002)(376002)(136003)(451199015)(40470700004)(36840700001)(46966006)(36860700001)(36756003)(316002)(8676002)(86362001)(70586007)(4326008)(70206006)(6916009)(54906003)(186003)(26005)(40480700001)(83380400001)(356005)(478600001)(336012)(81166007)(2616005)(103116003)(1076003)(7416002)(5660300002)(47076005)(8936002)(40460700003)(41300700001)(426003)(2906002)(82740400003)(82310400005)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2023 12:24:36.9715
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6139d27d-a81e-49cd-c9e0-08dafe05f557
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000C973.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5882
+Content-Transfer-Encoding: 8bit
 
-uart->io_size represents the size in bytes. Thus, when serial_port.bit_width
-is assigned to it, it should be converted to size in bytes.
+The variable untrusted_msi indicates whether the system is vulnerable to
+CVE-2011-1898 due to the absence of interrupt remapping support.
+Although AMD iommus with interrupt remapping disabled are also affected,
+this case is not handled yet. Given that the issue is not VT-d specific,
+and to accommodate future use of the flag for covering also the AMD iommu
+case, move the definition of the flag out of the VT-d specific code to the
+common x86 iommu code.
 
-Fixes: 17b516196c ("ns16550: add ACPI support for ARM only")
-Reported-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Also, since the current implementation assumes that only PV guests are prone
+to this attack, take the opportunity to define untrusted_msi only when PV is
+enabled.
+
+No functional change intended.
+
+Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 
-Changes from -
+Changes in v4:
+  - in vtd code, guard with CONFIG_PV the use of untrusted_msi
+  - mention in commit log that CVE-2011-1898 currently is not addressed for
+    AMD iommus with disabled intremap
+  - add Jan's Reviewed-by tag
 
-v1, v2 - NA (New patch introduced in v3).
+ xen/drivers/passthrough/vtd/iommu.c | 5 ++---
+ xen/drivers/passthrough/x86/iommu.c | 5 +++++
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-v3 - Added Reviewed-by and Reported-by tags.
-
- xen/drivers/char/ns16550.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 43e1f971ab..092f6b9c4b 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -1870,7 +1870,7 @@ static int __init ns16550_acpi_uart_init(const void *data)
-     uart->parity = spcr->parity;
-     uart->stop_bits = spcr->stop_bits;
-     uart->io_base = spcr->serial_port.address;
--    uart->io_size = spcr->serial_port.bit_width;
-+    uart->io_size = DIV_ROUND_UP(spcr->serial_port.bit_width, BITS_PER_BYTE);
-     uart->reg_shift = spcr->serial_port.bit_offset;
-     uart->reg_width = spcr->serial_port.access_width;
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 62e143125d..e97b1fe8cd 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -54,9 +54,6 @@
+                                  ? dom_iommu(d)->arch.vtd.pgd_maddr \
+                                  : (pdev)->arch.vtd.pgd_maddr)
  
+-/* Possible unfiltered LAPIC/MSI messages from untrusted sources? */
+-bool __read_mostly untrusted_msi;
+-
+ bool __read_mostly iommu_igfx = true;
+ bool __read_mostly iommu_qinval = true;
+ #ifndef iommu_snoop
+@@ -2770,6 +2767,7 @@ static int cf_check reassign_device_ownership(
+         if ( !has_arch_pdevs(target) )
+             vmx_pi_hooks_assign(target);
+ 
++#ifdef CONFIG_PV
+         /*
+          * Devices assigned to untrusted domains (here assumed to be any domU)
+          * can attempt to send arbitrary LAPIC/MSI messages. We are unprotected
+@@ -2778,6 +2776,7 @@ static int cf_check reassign_device_ownership(
+         if ( !iommu_intremap && !is_hardware_domain(target) &&
+              !is_system_domain(target) )
+             untrusted_msi = true;
++#endif
+ 
+         ret = domain_context_mapping(target, devfn, pdev);
+ 
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index f671b0f2bb..c5021ea023 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -36,6 +36,11 @@ bool __initdata iommu_superpages = true;
+ 
+ enum iommu_intremap __read_mostly iommu_intremap = iommu_intremap_full;
+ 
++#ifdef CONFIG_PV
++/* Possible unfiltered LAPIC/MSI messages from untrusted sources? */
++bool __read_mostly untrusted_msi;
++#endif
++
+ #ifndef iommu_intpost
+ /*
+  * In the current implementation of VT-d posted interrupts, in some extreme
 -- 
-2.17.1
+2.37.2
 
 
