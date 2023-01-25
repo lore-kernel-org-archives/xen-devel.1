@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 485AEC54E94
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCAEC61D9D
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:27:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.483882.750533 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.483889.750567 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3F-0001XS-7N; Wed, 25 Jan 2023 09:26:41 +0000
+	id 1pKc3H-0002BV-1X; Wed, 25 Jan 2023 09:26:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 483882.750533; Wed, 25 Jan 2023 09:26:41 +0000
+Received: by outflank-mailman (output) from mailman id 483889.750567; Wed, 25 Jan 2023 09:26:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3F-0001Vg-2x; Wed, 25 Jan 2023 09:26:41 +0000
-Received: by outflank-mailman (input) for mailman id 483882;
- Wed, 25 Jan 2023 08:39:03 +0000
+	id 1pKc3G-0002A6-KL; Wed, 25 Jan 2023 09:26:42 +0000
+Received: by outflank-mailman (input) for mailman id 483889;
+ Wed, 25 Jan 2023 08:39:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+ALF=5W=flex--surenb.bounces.google.com=3pOrQYwYKCeEVXUHQEJRRJOH.FRPaHQ-GHYHOOLVWV.aHQSURMHFW.RUJ@srs-se1.protection.inumbo.net>)
- id 1pKbJ8-00083W-RP
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:39:02 +0000
-Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
- [2607:f8b0:4864:20::b4a])
+ <SRS0=5DRb=5W=flex--surenb.bounces.google.com=3rurQYwYKCesfheRaOTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@srs-se1.protection.inumbo.net>)
+ id 1pKbJI-00083W-9K
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:39:12 +0000
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [2607:f8b0:4864:20::114a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b7a3fc2b-9c8b-11ed-91b6-6bf2151ebd3b;
- Wed, 25 Jan 2023 09:39:02 +0100 (CET)
-Received: by mail-yb1-xb4a.google.com with SMTP id
- a62-20020a25ca41000000b0080b838a5199so3259467ybg.6
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 00:39:01 -0800 (PST)
+ id bd5e0aa4-9c8b-11ed-91b6-6bf2151ebd3b;
+ Wed, 25 Jan 2023 09:39:11 +0100 (CET)
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-506466c484fso43568687b3.13
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 00:39:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,43 +42,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7a3fc2b-9c8b-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: bd5e0aa4-9c8b-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=lALTt0Cs0OJR7OUarHpyHJwBeXB89z2/3DAseSYxnFw=;
-        b=n8rHaHJ5xFxeipCQlmXzBA+dLl0Q/zQ/7gpJayuWnen6FrB+fqCbvqlW8MPEXS4yhs
-         bSL1pYwp+yfHB69Hp8M4s6QhrR4Bh+owtXwR86TSKSSBvXCHkuElvnXJB2pYl2OH40Sk
-         6JqqQAtuTJiqmWpETSSPHy8wmwcbh6uJm29hqrWWlo46flaJs7O8ixI8LA96LhuTgZ3K
-         6bp3GycG9gG7sxo2rAWEXyc1+zeJtRrm7H/AIZ+tvA74dyl+qbdsA4sZuPo2ibgOOxUJ
-         sgArwf+v4A/cnZMkh1Y6cHQmLN0WEk5ISpsmps7k3RlDvYj2gT49VkTmf7cSvZeX/37U
-         drJg==
+        bh=J7ancMifNNyjJiTof8bzSGdh+LvtuOAZ/yhUxoIZ6EY=;
+        b=l/hcCYqvcIly8bHSP154OLa3geKFmW7WOJHtqW6QP0WOiQCkjUgO6NFBclTznfTfXd
+         q/KZ4uqcFfz6e/A7WhMCPvMZlY7cpI5ZXPygAYrMACNGYIbdZdn2/wrvbiLbPFMi0EJU
+         e2xhTpttA9V49soY/4kK5pbOiY/jtu7/UBbsL9M2oZElpThGo5ueYxij1daBdATn/U6J
+         lFgz4QPoUTVqu2tO2Jv29c+EKfKlUr82uf6j5jrJG0K4kH7t4tXslYBl2iUfCiGyJg2L
+         sa2ZzT9fi8Nbfwma/h4EwurZmwhJrp5hy3f2wiTWrdCgSBqaWH+IxEwCQ2mYpS41PmTz
+         ZJ5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=lALTt0Cs0OJR7OUarHpyHJwBeXB89z2/3DAseSYxnFw=;
-        b=EqneT7Krabjd8D2KjospDR4qxPB7O28v8b//w9JWKxTjNQCTmuWALYX4qG3Uxg0+3K
-         aewb0dErl5vXMiNd9KwvEm1gUR61Ez6fpQxsMFD6ftgSL1dZNtJDAdrzCQDZbxetQ1C1
-         hg9hlINh1SrDr4PUWd7zca5ouTK0/2X1PKh9C5SLzKYWbFcR+6N318IlJ8CnLL++wK7T
-         Yv61X4swbvdfFkuWGknW0J2Cyi6mH54lBwDTzx5djuzDd98i0KsM25gut2qeooVezR5+
-         fbPNdBlwJtCh5ig7b5PABFSJTEoTCYxBi0Zo7prFnERWYk5BsoNWfUVU7cGhlG4ELIOj
-         WE0g==
-X-Gm-Message-State: AFqh2kpK/e5DrGDXFN2kiTKjZljKzqYfswYQ2mKZhWoBIjJy/yBrSayQ
-	93OtZq4ozJ5SNrUTEhnhtPZH1Vh1tEI=
-X-Google-Smtp-Source: AMrXdXtyE3jRCV+tlQlIzUhs3264UUIvOIjga3fyBI7LKMqSD9M/fdJ0aCCVUOrfvnEcBmXTcpHYPERTKZU=
+        bh=J7ancMifNNyjJiTof8bzSGdh+LvtuOAZ/yhUxoIZ6EY=;
+        b=4aDsLxXHwgk9u7LiQu+YW5XR+doG+eTFElwdSy66t9UNWsY/twtC7J0XLGePhEgxh+
+         Ik06KSQq/iLAS3WlfUoWvQWi4sNK2wSrTXnenUTCfRpWWcO5VcYGZ+aTUU+88+L5CMtt
+         Pk4G4baebNSOhgLXXRyCQJBDY7G4E48z8/i0eUwvpry3goPsYchJJx5/wrHLxulENb/A
+         GX0fmrRCv1erAGKCLGPB+UO3AVTPgbyeNEmAntwTv3UHaiPBBYfjltrLutTtCjdxJy+Q
+         V5JOejZ+GKDt8k5OhxI83316HgDXEJK0l0Xi+Cpi977QqZUSi6e5rmk8AmFo8M+9iOIi
+         6fMg==
+X-Gm-Message-State: AFqh2kpTZq3MMTwWXhp1zdC90kzszpRHcXWrX9Tx5pEs4bG1lTA9qm5D
+	F0PTcoAsKlpFgUytnnR++yfa4zQiVxY=
+X-Google-Smtp-Source: AMrXdXslOvF1txeQ7QJk1q8MehIUDQnhzGgaj+Ckxm4gdtDkml40uAzU8COPOn8c5wwtHui85E8JZje3JZk=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:f7b0:20e8:ce66:f98])
- (user=surenb job=sendgmr) by 2002:a25:c057:0:b0:802:898f:6e73 with SMTP id
- c84-20020a25c057000000b00802898f6e73mr2020239ybf.411.1674635940754; Wed, 25
- Jan 2023 00:39:00 -0800 (PST)
-Date: Wed, 25 Jan 2023 00:38:47 -0800
+ (user=surenb job=sendgmr) by 2002:a0d:ca88:0:b0:501:80db:3eca with SMTP id
+ m130-20020a0dca88000000b0050180db3ecamr2010555ywd.100.1674635950405; Wed, 25
+ Jan 2023 00:39:10 -0800 (PST)
+Date: Wed, 25 Jan 2023 00:38:51 -0800
 In-Reply-To: <20230125083851.27759-1-surenb@google.com>
 Mime-Version: 1.0
 References: <20230125083851.27759-1-surenb@google.com>
 X-Mailer: git-send-email 2.39.1.405.gd4c25cc71f-goog
-Message-ID: <20230125083851.27759-3-surenb@google.com>
-Subject: [PATCH v2 2/6] mm: replace VM_LOCKED_CLEAR_MASK with VM_LOCKED_MASK
+Message-ID: <20230125083851.27759-7-surenb@google.com>
+Subject: [PATCH v2 6/6] mm: export dump_mm()
 From: Suren Baghdasaryan <surenb@google.com>
 To: akpm@linux-foundation.org
 Cc: michel@lespinasse.org, jglisse@google.com, mhocko@suse.com, vbabka@suse.cz, 
@@ -142,130 +142,28 @@ Cc: michel@lespinasse.org, jglisse@google.com, mhocko@suse.com, vbabka@suse.cz,
 	surenb@google.com
 Content-Type: text/plain; charset="UTF-8"
 
-To simplify the usage of VM_LOCKED_CLEAR_MASK in clear_vm_flags(),
-replace it with VM_LOCKED_MASK bitmask and convert all users.
+mmap_assert_write_locked() is used in vm_flags modifiers. Because
+mmap_assert_write_locked() uses dump_mm() and vm_flags are sometimes
+modified from from inside a module, it's necessary to export
+dump_mm() function.
 
 Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 ---
- include/linux/mm.h | 4 ++--
- kernel/fork.c      | 2 +-
- mm/hugetlb.c       | 4 ++--
- mm/mlock.c         | 6 +++---
- mm/mmap.c          | 6 +++---
- mm/mremap.c        | 2 +-
- 6 files changed, 12 insertions(+), 12 deletions(-)
+ mm/debug.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index b71f2809caac..da62bdd627bf 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -421,8 +421,8 @@ extern unsigned int kobjsize(const void *objp);
- /* This mask defines which mm->def_flags a process can inherit its parent */
- #define VM_INIT_DEF_MASK	VM_NOHUGEPAGE
+diff --git a/mm/debug.c b/mm/debug.c
+index 9d3d893dc7f4..96d594e16292 100644
+--- a/mm/debug.c
++++ b/mm/debug.c
+@@ -215,6 +215,7 @@ void dump_mm(const struct mm_struct *mm)
+ 		mm->def_flags, &mm->def_flags
+ 	);
+ }
++EXPORT_SYMBOL(dump_mm);
  
--/* This mask is used to clear all the VMA flags used by mlock */
--#define VM_LOCKED_CLEAR_MASK	(~(VM_LOCKED | VM_LOCKONFAULT))
-+/* This mask represents all the VMA flag bits used by mlock */
-+#define VM_LOCKED_MASK	(VM_LOCKED | VM_LOCKONFAULT)
+ static bool page_init_poisoning __read_mostly = true;
  
- /* Arch-specific flags to clear when updating VM flags on protection change */
- #ifndef VM_ARCH_CLEAR
-diff --git a/kernel/fork.c b/kernel/fork.c
-index 6683c1b0f460..03d472051236 100644
---- a/kernel/fork.c
-+++ b/kernel/fork.c
-@@ -669,7 +669,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
- 			tmp->anon_vma = NULL;
- 		} else if (anon_vma_fork(tmp, mpnt))
- 			goto fail_nomem_anon_vma_fork;
--		tmp->vm_flags &= ~(VM_LOCKED | VM_LOCKONFAULT);
-+		clear_vm_flags(tmp, VM_LOCKED_MASK);
- 		file = tmp->vm_file;
- 		if (file) {
- 			struct address_space *mapping = file->f_mapping;
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index d20c8b09890e..4ecdbad9a451 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -6973,8 +6973,8 @@ static unsigned long page_table_shareable(struct vm_area_struct *svma,
- 	unsigned long s_end = sbase + PUD_SIZE;
- 
- 	/* Allow segments to share if only one is marked locked */
--	unsigned long vm_flags = vma->vm_flags & VM_LOCKED_CLEAR_MASK;
--	unsigned long svm_flags = svma->vm_flags & VM_LOCKED_CLEAR_MASK;
-+	unsigned long vm_flags = vma->vm_flags & ~VM_LOCKED_MASK;
-+	unsigned long svm_flags = svma->vm_flags & ~VM_LOCKED_MASK;
- 
- 	/*
- 	 * match the virtual addresses, permission and the alignment of the
-diff --git a/mm/mlock.c b/mm/mlock.c
-index 0336f52e03d7..5c4fff93cd6b 100644
---- a/mm/mlock.c
-+++ b/mm/mlock.c
-@@ -497,7 +497,7 @@ static int apply_vma_lock_flags(unsigned long start, size_t len,
- 		if (vma->vm_start != tmp)
- 			return -ENOMEM;
- 
--		newflags = vma->vm_flags & VM_LOCKED_CLEAR_MASK;
-+		newflags = vma->vm_flags & ~VM_LOCKED_MASK;
- 		newflags |= flags;
- 		/* Here we know that  vma->vm_start <= nstart < vma->vm_end. */
- 		tmp = vma->vm_end;
-@@ -661,7 +661,7 @@ static int apply_mlockall_flags(int flags)
- 	struct vm_area_struct *vma, *prev = NULL;
- 	vm_flags_t to_add = 0;
- 
--	current->mm->def_flags &= VM_LOCKED_CLEAR_MASK;
-+	current->mm->def_flags &= ~VM_LOCKED_MASK;
- 	if (flags & MCL_FUTURE) {
- 		current->mm->def_flags |= VM_LOCKED;
- 
-@@ -681,7 +681,7 @@ static int apply_mlockall_flags(int flags)
- 	for_each_vma(vmi, vma) {
- 		vm_flags_t newflags;
- 
--		newflags = vma->vm_flags & VM_LOCKED_CLEAR_MASK;
-+		newflags = vma->vm_flags & ~VM_LOCKED_MASK;
- 		newflags |= to_add;
- 
- 		/* Ignore errors */
-diff --git a/mm/mmap.c b/mm/mmap.c
-index d4abc6feced1..323bd253b25a 100644
---- a/mm/mmap.c
-+++ b/mm/mmap.c
-@@ -2671,7 +2671,7 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
- 		if ((vm_flags & VM_SPECIAL) || vma_is_dax(vma) ||
- 					is_vm_hugetlb_page(vma) ||
- 					vma == get_gate_vma(current->mm))
--			vma->vm_flags &= VM_LOCKED_CLEAR_MASK;
-+			clear_vm_flags(vma, VM_LOCKED_MASK);
- 		else
- 			mm->locked_vm += (len >> PAGE_SHIFT);
- 	}
-@@ -3340,8 +3340,8 @@ static struct vm_area_struct *__install_special_mapping(
- 	vma->vm_start = addr;
- 	vma->vm_end = addr + len;
- 
--	vma->vm_flags = vm_flags | mm->def_flags | VM_DONTEXPAND | VM_SOFTDIRTY;
--	vma->vm_flags &= VM_LOCKED_CLEAR_MASK;
-+	init_vm_flags(vma, (vm_flags | mm->def_flags |
-+		      VM_DONTEXPAND | VM_SOFTDIRTY) & ~VM_LOCKED_MASK);
- 	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
- 
- 	vma->vm_ops = ops;
-diff --git a/mm/mremap.c b/mm/mremap.c
-index 1b3ee02bead7..35db9752cb6a 100644
---- a/mm/mremap.c
-+++ b/mm/mremap.c
-@@ -687,7 +687,7 @@ static unsigned long move_vma(struct vm_area_struct *vma,
- 
- 	if (unlikely(!err && (flags & MREMAP_DONTUNMAP))) {
- 		/* We always clear VM_LOCKED[ONFAULT] on the old vma */
--		vma->vm_flags &= VM_LOCKED_CLEAR_MASK;
-+		clear_vm_flags(vma, VM_LOCKED_MASK);
- 
- 		/*
- 		 * anon_vma links of the old vma is no longer needed after its page
 -- 
 2.39.1
 
