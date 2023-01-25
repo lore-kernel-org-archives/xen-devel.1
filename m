@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D476EC54E94
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 18:32:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484517.751124 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C39CEC54E94
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 18:34:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.484521.751133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKkZ6-0004IW-PQ; Wed, 25 Jan 2023 18:32:08 +0000
+	id 1pKkaf-0004s4-47; Wed, 25 Jan 2023 18:33:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484517.751124; Wed, 25 Jan 2023 18:32:08 +0000
+Received: by outflank-mailman (output) from mailman id 484521.751133; Wed, 25 Jan 2023 18:33:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKkZ6-0004IP-MS; Wed, 25 Jan 2023 18:32:08 +0000
-Received: by outflank-mailman (input) for mailman id 484517;
- Wed, 25 Jan 2023 18:32:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pKkaf-0004rx-18; Wed, 25 Jan 2023 18:33:45 +0000
+Received: by outflank-mailman (input) for mailman id 484521;
+ Wed, 25 Jan 2023 18:33:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dnVv=5W=templeofstupid.com=kjlx@srs-se1.protection.inumbo.net>)
- id 1pKkZ5-0004IJ-Jn
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 18:32:07 +0000
-Received: from caracal.birch.relay.mailchannels.net
- (caracal.birch.relay.mailchannels.net [23.83.209.30])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8f97e226-9cde-11ed-b8d1-410ff93cb8f0;
- Wed, 25 Jan 2023 19:32:04 +0100 (CET)
+ id 1pKkad-0004rn-Uo
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 18:33:43 +0000
+Received: from crocodile.elm.relay.mailchannels.net
+ (crocodile.elm.relay.mailchannels.net [23.83.212.45])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c98d1fd9-9cde-11ed-91b6-6bf2151ebd3b;
+ Wed, 25 Jan 2023 19:33:41 +0100 (CET)
 Received: from relay.mailchannels.net (localhost [127.0.0.1])
- by relay.mailchannels.net (Postfix) with ESMTP id 07950500ED2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 18:32:02 +0000 (UTC)
+ by relay.mailchannels.net (Postfix) with ESMTP id 25BFC881D46
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 18:33:39 +0000 (UTC)
 Received: from pdx1-sub0-mail-a306.dreamhost.com (unknown [127.0.0.6])
  (Authenticated sender: dreamhost)
- by relay.mailchannels.net (Postfix) with ESMTPA id 8034F50144E
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 18:32:01 +0000 (UTC)
+ by relay.mailchannels.net (Postfix) with ESMTPA id 8EC9C881C5C
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 18:33:38 +0000 (UTC)
 Received: from pdx1-sub0-mail-a306.dreamhost.com (pop.dreamhost.com
  [64.90.62.162]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
- by 100.97.74.44 (trex/6.7.1); Wed, 25 Jan 2023 18:32:01 +0000
+ by 100.126.30.49 (trex/6.7.1); Wed, 25 Jan 2023 18:33:38 +0000
 Received: from kmjvbox (c-76-102-200-71.hsd1.ca.comcast.net [76.102.200.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: kjlx@templeofstupid.com)
- by pdx1-sub0-mail-a306.dreamhost.com (Postfix) with ESMTPSA id 4P2C9X4Xh6zTR
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 10:32:00 -0800 (PST)
+ by pdx1-sub0-mail-a306.dreamhost.com (Postfix) with ESMTPSA id 4P2CCQ1YPDzK3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 10:33:38 -0800 (PST)
 Received: from johansen (uid 1000) (envelope-from kjlx@templeofstupid.com)
  id e00e2 by kmjvbox (DragonFly Mail Agent v0.12);
- Wed, 25 Jan 2023 10:31:59 -0800
+ Wed, 25 Jan 2023 10:33:37 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,87 +59,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f97e226-9cde-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: c98d1fd9-9cde-11ed-91b6-6bf2151ebd3b
 X-Sender-Id: dreamhost|x-authsender|kjlx@templeofstupid.com
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1674671521; a=rsa-sha256;
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1674671618; a=rsa-sha256;
 	cv=none;
-	b=kr8jnzAkaLLX580X7SPq7SzTh9zUL60gexwnpSocbZxRcvjgvYA3b4PMom9MHspUiPF/4g
-	k6USz/RVwpEQoe4uNBmzGsq34Gru36ePqs6TLrWhUeZXfXcMW0/wsCQVv/ZVbkln5TuGif
-	ZKQjtkHj9lQUqWSy6k4IjGIHdG4eyki9HcYmavHSeBiELg1jNzN+zojfC6qfdTf8cV4Agk
-	i2nIHBGngGDypOERCxwWTC8Ra+f27+54Md/WLXoscM9Kg7AgRMoOffcjE4CImt15kuw9+y
-	5VPKc+uVa8w5A5jjEC9gXAtRPVLDWE8kua4f2xL1HBZ+ZO8IiVq8JL/j2OCPpA==
+	b=0RcDVdnfrfpZO++0fp/wERntWG6DUztZnG2iq28H16d12M7DJEGQQoj1QheyUuXcgnMhPA
+	nkv+xt4MRVjEIEKg+t6WaZfh14lmJj0isg1S1dI8RbMD813+1d4iJoOZaZ2cPdzfmW66ea
+	4OE6hO/TowJHfI5vo+cI9M9QMg1MUAV8ank6MUmpIeU6M4HfxYuJL45dZUZGd5ZQxbVm2Z
+	QsL4MnEa5PaNVUoFMAIeW41ZuJkdvRe4kP3c7QuV+LHqxhb2F/9gHOt5FQ8G1lPQFTaajb
+	zPIfHEilx2e4rMdPOab3CleXm6o15uVgEBEZS7hJGY3lrIMRiDEViUaHXYqo+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailchannels.net;
-	s=arc-2022; t=1674671521;
+	s=arc-2022; t=1674671618;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=qxwJU1KGPHSbufcjGUiRlF4u7gN7908PHDzD9oDlrkU=;
-	b=C/QeFOk5WBEiEMplgSWwzOvwqxU/Wwa+U+hbKhBZa1mv66NkCAh4NMGaB2zGz6l5U9q1jH
-	U7n2A9VJKHHoJRQlSU4SHDlZGCpvmeH/JRTxr6kiMn3Onlx+/1LcMdgAo+uS0z9odW1G+O
-	ECE11cp0k0rz3V+2BNrZgSJbQSdERyO1dDsyhgFulVeQG+ic+jWBMEIIUG6pV64GzTBHHz
-	LSlXAs5TprSKuw/VBGRjtn6m/FXqgPhgjuDo0+kkexS79MQNTQsKIdVszRDKVYW1O7l7SH
-	bLRrHRFkXL84JUT10v9QmzlOmKZQhRR3Osr2Tqbb+JFzxrM6P+6PtsPqWkF39g==
+	bh=eqyFtuln9teDjnwVY8VK7WjssFBHkmh8oTKDG+ZK2Dg=;
+	b=iooMJgKXGkqohds3FAEuulD2ymWzfGD8M8Q/jP9FiKGctDuiUS1NE+CdwS4Tf4u1fMWHiT
+	FnAxR06uOCsFohEA/nc8YjyI/puk0ctlmOTHEvBuqvY60N2oX8F9j6pG0d8flTkP66WcIz
+	UZafvLARpFUMbVO9HwRPtngvctong+lJ5dl3VaZF+0BX2GtfODy7DUuE4P621DNw/LHjfw
+	u+I0A702GgqNvuaulE/f0vPBAKdJffyqG0qXLA+NKWL8P0IJmk6Ic7CS5bTfobaEP6+1OX
+	Fr/sPuV8WoMBf+7R3d580dR55eHnBstUCYXqGEvk3saIsKhh/a6wyurhMiOCbA==
 ARC-Authentication-Results: i=1;
-	rspamd-6989874cc5-vfcqp;
+	rspamd-65f5b7cf85-z6rsq;
 	auth=pass smtp.auth=dreamhost smtp.mailfrom=kjlx@templeofstupid.com
 X-Sender-Id: dreamhost|x-authsender|kjlx@templeofstupid.com
 X-MC-Relay: Neutral
 X-MailChannels-SenderId: dreamhost|x-authsender|kjlx@templeofstupid.com
 X-MailChannels-Auth-Id: dreamhost
-X-Spill-Average: 0bdc106079f3d167_1674671521842_3279774127
-X-MC-Loop-Signature: 1674671521842:647148034
-X-MC-Ingress-Time: 1674671521841
+X-Cure-Gusty: 65b9a5b53bc53093_1674671618808_1379431902
+X-MC-Loop-Signature: 1674671618808:1002556764
+X-MC-Ingress-Time: 1674671618808
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=templeofstupid.com;
-	s=dreamhost; t=1674671520;
-	bh=qxwJU1KGPHSbufcjGUiRlF4u7gN7908PHDzD9oDlrkU=;
+	s=dreamhost; t=1674671618;
+	bh=eqyFtuln9teDjnwVY8VK7WjssFBHkmh8oTKDG+ZK2Dg=;
 	h=Date:From:To:Cc:Subject:Content-Type;
-	b=Rw2OFdLCEOwAbp/1i7CZHRg8P+T2J8WuPv8M3Nn8kxUho5cxbHkJxVO4LW+hvULCo
-	 SjQ2s5aDxaGy6ZFOp06CAKr0KvPLDL4oZI3WPSagoLBxznOSl3EhSLKui8vx7D8QqJ
-	 XcNQqtkuHSd/9sSNyNabeAAcYMr0H6AINrbanQ6c=
-Date: Wed, 25 Jan 2023 10:31:59 -0800
+	b=jTYoayBwAJyox93l/wMGptzqafXCYrPR9Oascr3rXA8ynmDNqiGto3CJNq1wd80ic
+	 fEZEVmdZtOW06CnMG4XZFajP6M+zd341nk89Nb+q0GyISCnGfzx4lc4uiwut3n734C
+	 Blo3ouPHsd60YXfSE+Rlas1IaH1a2b8Blg/z4zu8=
+Date: Wed, 25 Jan 2023 10:33:37 -0800
 From: Krister Johansen <kjlx@templeofstupid.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	David Reaver <me@davidreaver.com>,
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] xen/x86: public: add TSC defines for cpuid leaf 4
-Message-ID: <20230125183159.GA1963@templeofstupid.com>
-References: <20230124223516.GA1962@templeofstupid.com>
- <145a827e-4b09-5a85-cb12-eb8f3e0c4f2a@suse.com>
+	Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	David Reaver <me@davidreaver.com>
+Subject: [PATCH v2] xen/x86: public: add TSC defines for cpuid leaf 4
+Message-ID: <20230125183337.GC1963@templeofstupid.com>
+References: <20230124223531.GB1962@templeofstupid.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <145a827e-4b09-5a85-cb12-eb8f3e0c4f2a@suse.com>
+In-Reply-To: <20230124223531.GB1962@templeofstupid.com>
 
-On Wed, Jan 25, 2023 at 07:57:16AM +0100, Jan Beulich wrote:
-> On 24.01.2023 23:35, Krister Johansen wrote:
-> > --- a/xen/include/public/arch-x86/cpuid.h
-> > +++ b/xen/include/public/arch-x86/cpuid.h
-> > @@ -71,6 +71,12 @@
-> >   *             EDX: shift amount for tsc->ns conversion
-> >   * Sub-leaf 2: EAX: host tsc frequency in kHz
-> >   */
-> > +#define XEN_CPUID_TSC_EMULATED       (1u << 0)
-> > +#define XEN_CPUID_HOST_TSC_RELIABLE  (1u << 1)
-> > +#define XEN_CPUID_RDTSCP_INSTR_AVAIL (1u << 2)
-> > +#define XEN_CPUID_TSC_MODE_DEFAULT   (0)
-> > +#define XEN_CPUID_TSC_MODE_EMULATE   (1u)
-> > +#define XEN_CPUID_TSC_MODE_NOEMULATE (2u)
-> 
-> This could do with a blank line between the two groups. You're also
-> missing mode 3. Plus, as a formal remark, please follow patch
-> submission rules: They are sent To: the list, with maintainers on
-> Cc:.
+Cpuid leaf 4 contains information about how the state of the tsc, its
+mode, and some additional information.  A commit that is queued for
+linux would like to use this to determine whether the tsc mode has been
+set to 'no emulation' in order to make some decisions about which
+clocksource is more reliable.
 
-Thanks for the feedback.  I'll make those changes.
+Expose this information in the public API headers so that they can
+subsequently be imported into linux and used there.
 
-My apologies for the breach etiquette, and thank you for the reminder
-about the norms.  I'll correct the To: and CC: headers on the next go
-around.
+Link: https://lore.kernel.org/xen-devel/eda8d9f2-3013-1b68-0df8-64d7f13ee35e@suse.com/
+Link: https://lore.kernel.org/xen-devel/0835453d-9617-48d5-b2dc-77a2ac298bad@oracle.com/
+Signed-off-by: Krister Johansen <kjlx@templeofstupid.com>
+---
+v2:
+  - Fix whitespace between comment and #defines (feedback from Jan Beulich)
+  - Add tsc mode 3: no emulate TSC_AUX (feedback from Jan Beulich)
+---
+ xen/include/public/arch-x86/cpuid.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
--K
+diff --git a/xen/include/public/arch-x86/cpuid.h b/xen/include/public/arch-x86/cpuid.h
+index 7ecd16ae05..090f7f0034 100644
+--- a/xen/include/public/arch-x86/cpuid.h
++++ b/xen/include/public/arch-x86/cpuid.h
+@@ -72,6 +72,14 @@
+  * Sub-leaf 2: EAX: host tsc frequency in kHz
+  */
+ 
++#define XEN_CPUID_TSC_EMULATED               (1u << 0)
++#define XEN_CPUID_HOST_TSC_RELIABLE          (1u << 1)
++#define XEN_CPUID_RDTSCP_INSTR_AVAIL         (1u << 2)
++#define XEN_CPUID_TSC_MODE_DEFAULT           (0)
++#define XEN_CPUID_TSC_MODE_EMULATE           (1u)
++#define XEN_CPUID_TSC_MODE_NOEMULATE         (2u)
++#define XEN_CPUID_TSC_MODE_NOEMULATE_TSC_AUX (3u)
++
+ /*
+  * Leaf 5 (0x40000x04)
+  * HVM-specific features
+-- 
+2.25.1
+
 
