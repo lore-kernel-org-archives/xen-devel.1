@@ -4,55 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13353C54E94
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:07:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484013.750509 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5503FC54EED
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:27:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.483967.750576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKbks-0006qR-3l; Wed, 25 Jan 2023 09:07:42 +0000
+	id 1pKc3H-0002Q3-Hj; Wed, 25 Jan 2023 09:26:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484013.750509; Wed, 25 Jan 2023 09:07:42 +0000
+Received: by outflank-mailman (output) from mailman id 483967.750576; Wed, 25 Jan 2023 09:26:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKbks-0006qI-0z; Wed, 25 Jan 2023 09:07:42 +0000
-Received: by outflank-mailman (input) for mailman id 484013;
- Wed, 25 Jan 2023 09:07:41 +0000
+	id 1pKc3H-0002P4-6Y; Wed, 25 Jan 2023 09:26:43 +0000
+Received: by outflank-mailman (input) for mailman id 483967;
+ Wed, 25 Jan 2023 08:56:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6g1N=5W=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1pKbaQ-00012q-VX
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:56:55 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (unknown
- [2a01:111:f400:7eaa::62e])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=FU6P=5W=suse.com=mhocko@srs-se1.protection.inumbo.net>)
+ id 1pKbZw-00012q-Jb
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:56:24 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 16ed3462-9c8e-11ed-91b6-6bf2151ebd3b;
- Wed, 25 Jan 2023 09:56:48 +0100 (CET)
-Received: from MW4P223CA0021.NAMP223.PROD.OUTLOOK.COM (2603:10b6:303:80::26)
- by MN0PR12MB5836.namprd12.prod.outlook.com (2603:10b6:208:37b::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.20; Wed, 25 Jan
- 2023 08:54:50 +0000
-Received: from CO1NAM11FT011.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:80:cafe::da) by MW4P223CA0021.outlook.office365.com
- (2603:10b6:303:80::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33 via Frontend
- Transport; Wed, 25 Jan 2023 08:54:50 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT011.mail.protection.outlook.com (10.13.175.186) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6043.21 via Frontend Transport; Wed, 25 Jan 2023 08:54:49 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 25 Jan
- 2023 02:54:48 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 25 Jan
- 2023 00:54:48 -0800
-Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Wed, 25 Jan 2023 02:54:47 -0600
+ id 24b4fb1c-9c8e-11ed-91b6-6bf2151ebd3b;
+ Wed, 25 Jan 2023 09:56:23 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0BC6721B0A;
+ Wed, 25 Jan 2023 08:56:23 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B78841339E;
+ Wed, 25 Jan 2023 08:56:22 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id ZJ2WLLbu0GN/CQAAMHmgww
+ (envelope-from <mhocko@suse.com>); Wed, 25 Jan 2023 08:56:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,92 +53,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16ed3462-9c8e-11ed-91b6-6bf2151ebd3b
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kBr7wPoI9gyrbG/Lls5evEW14t00tRtwoX2TDDfOxEzCLOtGXQihdXSTeq3cgwiHNdGz9rPb4RHYMAqJ6SEArSUBo3908fXz53DYJTqUrSu+ZghrJbASeGI+7h64nBC1A3czsVTlegfNCDxAaiS36ZbO/cH+3FKSLPc6GHaNNPbtJivHmsPcsaQINQfYjZ0Od9Fd2PkgE4Xrjs8bvUgSgYeXEgkARskt9GJjPKBsZVgURcDMCtrnS1VMjWBpTCFyGvCOtszJVD7obAoOgM4nW1qbc1pI2482gPOVVNgPf26QQRqvR9szm6CaQ0Pt3VoewjWHksWaExvva6qSfxQwSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hmpuP41Ztn/lKlMcuw44+3sOiW4TYVQ+KI34gBksLz8=;
- b=TBld6471/HQGm7V0G/POxlUjS9XAXjpca2gLogIJ/1C4iIJRZrxzQ6K6DNOup2GaSLCE0KjN7LWqKlWTHT2ub33SWqbKus11bp1tjNlt4XmGnfMzKrOg58UbSALALPP8ixSrQraYWCa8v/33P1o2W0b8gvbJXMjGz+5WB/0v0QwTp6cbuamdhQETBKcwya9EmRv+P2yvz3yI4ZoIVcHfR343kdOi+m+b0iUc1p5G49AMit+8xB7IhxBeUqL4jl9IJ5r/Imq77yIrjNABFRYvkqk2+JtZ97Rv/ilplIz3spKKO+QPMjnYm7Nt3Ri/E3Sb7hZ1YNvp5GS6ZizkeYtrnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hmpuP41Ztn/lKlMcuw44+3sOiW4TYVQ+KI34gBksLz8=;
- b=xMW7ZuxoqDm7ruV8kMuNoAwdLg4q9yMzU4S0PUpd1mPzrxABlzgt/e/ElDUDeYNdct0jiJcpnntG3Ae8a1ZBHY6SWzlmQJ9CzlriJ+3P2FFXa9UFk6WWgClYO4lFud8jYE1e7PjTxdFFXoRzzXeqjwTPBJ8snzhIhoG41jL1sbk=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Vikram Garhwal <vikram.garhwal@amd.com>
-To: <qemu-devel@nongnu.org>
-CC: <xen-devel@lists.xenproject.org>, <vikram.garhwal@amd.com>,
-	<stefano.stabellini@amd.com>, <alex.bennee@linaro.org>, Paolo Bonzini
-	<pbonzini@redhat.com>, =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?=
-	<marcandre.lureau@redhat.com>, =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?=
-	<berrange@redhat.com>, Thomas Huth <thuth@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [QEMU][PATCH v4 08/10] meson.build: do not set have_xen_pci_passthrough for aarch64 targets
-Date: Wed, 25 Jan 2023 00:54:05 -0800
-Message-ID: <20230125085407.7144-9-vikram.garhwal@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230125085407.7144-1-vikram.garhwal@amd.com>
-References: <20230125085407.7144-1-vikram.garhwal@amd.com>
+X-Inumbo-ID: 24b4fb1c-9c8e-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1674636983; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HlfVezvAjFmKLztHMOaZ+yji8Nsqp9vLwu4LVliFLNo=;
+	b=sP3k2vbL/TMjnnanRjZuUO51OPKL7NCAE7wor1COt2s99RKg6YGTByegVuny2bFzwE3+s6
+	UutXKdgKZ+JCm3/zcJc6jOoDAopdP55BVOpdwrjI4e178jvtCsfm11DvfUjHyJJs6l60Lo
+	ZwU2a8676f0/M9W0HO3obY7BVSmDGjU=
+Date: Wed, 25 Jan 2023 09:56:22 +0100
+From: Michal Hocko <mhocko@suse.com>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, michel@lespinasse.org, jglisse@google.com,
+	vbabka@suse.cz, hannes@cmpxchg.org, mgorman@techsingularity.net,
+	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com,
+	peterz@infradead.org, ldufour@linux.ibm.com, paulmck@kernel.org,
+	luto@kernel.org, songliubraving@fb.com, peterx@redhat.com,
+	david@redhat.com, dhowells@redhat.com, hughd@google.com,
+	bigeasy@linutronix.de, kent.overstreet@linux.dev,
+	punit.agrawal@bytedance.com, lstoakes@gmail.com,
+	peterjung1337@gmail.com, rientjes@google.com,
+	axelrasmussen@google.com, joelaf@google.com, minchan@google.com,
+	jannh@google.com, shakeelb@google.com, tatashin@google.com,
+	edumazet@google.com, gthelen@google.com, gurua@google.com,
+	arjunroy@google.com, soheil@google.com, hughlynch@google.com,
+	leewalsh@google.com, posk@google.com, will@kernel.org,
+	aneesh.kumar@linux.ibm.com, npiggin@gmail.com,
+	chenhuacai@kernel.org, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, richard@nod.at,
+	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
+	qianweili@huawei.com, wangzhou1@hisilicon.com,
+	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org,
+	airlied@gmail.com, daniel@ffwll.ch,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	tzimmermann@suse.de, l.stach@pengutronix.de,
+	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com,
+	matthias.bgg@gmail.com, robdclark@gmail.com,
+	quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
+	tomba@kernel.org, hjc@rock-chips.com, heiko@sntech.de,
+	ray.huang@amd.com, kraxel@redhat.com, sre@kernel.org,
+	mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
+	tfiga@chromium.org, m.szyprowski@samsung.com, mchehab@kernel.org,
+	dimitri.sivanich@hpe.com, zhangfei.gao@linaro.org,
+	jejb@linux.ibm.com, martin.petersen@oracle.com,
+	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com,
+	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de,
+	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net,
+	xiang@kernel.org, chao@kernel.org, tytso@mit.edu,
+	adilger.kernel@dilger.ca, miklos@szeredi.hu,
+	mike.kravetz@oracle.com, muchun.song@linux.dev, bhe@redhat.com,
+	andrii@kernel.org, yoshfuji@linux-ipv6.org, dsahern@kernel.org,
+	kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, tiwai@suse.com,
+	haojian.zhuang@gmail.com, robert.jarzmik@free.fr,
+	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org, x86@kernel.org,
+	linux-kernel@vger.kernel.org, linux-graphics-maintainer@vmware.com,
+	linux-ia64@vger.kernel.org, linux-arch@vger.kernel.org,
+	loongarch@lists.linux.dev, kvm@vger.kernel.org,
+	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org,
+	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org,
+	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev,
+	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
+	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
+	target-devel@vger.kernel.org, linux-usb@vger.kernel.org,
+	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org,
+	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+	devel@lists.orangefs.org, kexec@lists.infradead.org,
+	linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
+	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com,
+	selinux@vger.kernel.org, alsa-devel@alsa-project.org,
+	kernel-team@android.com
+Subject: Re: [PATCH v2 1/6] mm: introduce vma->vm_flags modifier functions
+Message-ID: <Y9DuttqjdKSRCVYh@dhcp22.suse.cz>
+References: <20230125083851.27759-1-surenb@google.com>
+ <20230125083851.27759-2-surenb@google.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT011:EE_|MN0PR12MB5836:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3e33193-298d-4928-0a9b-08dafeb1d136
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	JrU+L8fHBezUmbiy8yLf6TqoYHDBgtn2b8vkCyyZy6Cw7RyRyOj1eynGgBhTiJXoHZExtTbeCH4DW5DMM2l/8C20VVlsoh9SKysux2HmfHwq9pwDbBO1OqbJoaIwg0HXxNvCWJAb4W5OgCt/4Uzjv0hNKCzSFXODa1zLmOMc6WtSeNkGYRdAFEpLY9L1IhPUxRXQIL8Dm7JFO7vZanKQG3VhZLZgQwfpeH3Eo5NcwJ+JsIs0Veb2uj6+Xa6y2SOx+h5KYMuo/EUFB7INnb3Anx+s4V0PyVBwiRyHPUAhVmvM7FkAWy5TcBQovaWvHD4P8TLEqribioPtdeqqm9dMUK0iJPd/zGxNOd0Ytz110aIKlyEcpGsM1Tl5LpuoQykOOJeAS+yf5SYSMehkn5U/9WG1DQw1NOymkQa4JFN1FqqF1Md9N51pfC+GVwlKKn9HJ7pj4zN1ZjGVkL7SdNp9epGWwoHxg7RFvR64GTN48ZmPlAACbb5dZF0YY+BxVXTcvoDHJei8bVVYu57V1kItxZLc983OaqG227guANXDrRlp6tBfg2F1vm7jBwEEZqAyboA9nEHmBnbsDiKPEiMKLgbdhhsGyfncKF/91I7HUIwg8g9W0UJbiSKbaFsCsWr/TbMShen5Je1/yN2MdLuHRbTO3MUc/uJI8i/DOhyyBFwIHo7+Lr6S+lcmGl6h3zDwnajPDVwtJpvAVkYt3SHNQoPhSOTYFafa8CpSKGZbtFA=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(396003)(346002)(376002)(136003)(39860400002)(451199018)(46966006)(36840700001)(40470700004)(5660300002)(8936002)(2906002)(70206006)(6916009)(70586007)(4326008)(8676002)(41300700001)(478600001)(1076003)(6666004)(186003)(26005)(2616005)(336012)(426003)(83380400001)(82310400005)(47076005)(82740400003)(316002)(44832011)(54906003)(4744005)(81166007)(356005)(86362001)(36756003)(40480700001)(40460700003)(36860700001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2023 08:54:49.7274
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3e33193-298d-4928-0a9b-08dafeb1d136
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT011.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5836
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230125083851.27759-2-surenb@google.com>
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+On Wed 25-01-23 00:38:46, Suren Baghdasaryan wrote:
+> vm_flags are among VMA attributes which affect decisions like VMA merging
+> and splitting. Therefore all vm_flags modifications are performed after
+> taking exclusive mmap_lock to prevent vm_flags updates racing with such
+> operations. Introduce modifier functions for vm_flags to be used whenever
+> flags are updated. This way we can better check and control correct
+> locking behavior during these updates.
+> 
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 
-have_xen_pci_passthrough is only used for Xen x86 VMs.
+Acked-by: Michal Hocko <mhocko@suse.com>
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
----
- meson.build | 2 ++
- 1 file changed, 2 insertions(+)
+> ---
+>  include/linux/mm.h       | 37 +++++++++++++++++++++++++++++++++++++
+>  include/linux/mm_types.h |  8 +++++++-
+>  2 files changed, 44 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/mm.h b/include/linux/mm.h
+> index c2f62bdce134..b71f2809caac 100644
+> --- a/include/linux/mm.h
+> +++ b/include/linux/mm.h
+> @@ -627,6 +627,43 @@ static inline void vma_init(struct vm_area_struct *vma, struct mm_struct *mm)
+>  	INIT_LIST_HEAD(&vma->anon_vma_chain);
+>  }
+>  
+> +/* Use when VMA is not part of the VMA tree and needs no locking */
+> +static inline void init_vm_flags(struct vm_area_struct *vma,
+> +				 unsigned long flags)
+> +{
+> +	vma->vm_flags = flags;
+> +}
+> +
+> +/* Use when VMA is part of the VMA tree and modifications need coordination */
+> +static inline void reset_vm_flags(struct vm_area_struct *vma,
+> +				  unsigned long flags)
+> +{
+> +	mmap_assert_write_locked(vma->vm_mm);
+> +	init_vm_flags(vma, flags);
+> +}
+> +
+> +static inline void set_vm_flags(struct vm_area_struct *vma,
+> +				unsigned long flags)
+> +{
+> +	mmap_assert_write_locked(vma->vm_mm);
+> +	vma->vm_flags |= flags;
+> +}
+> +
+> +static inline void clear_vm_flags(struct vm_area_struct *vma,
+> +				  unsigned long flags)
+> +{
+> +	mmap_assert_write_locked(vma->vm_mm);
+> +	vma->vm_flags &= ~flags;
+> +}
+> +
+> +static inline void mod_vm_flags(struct vm_area_struct *vma,
+> +				unsigned long set, unsigned long clear)
+> +{
+> +	mmap_assert_write_locked(vma->vm_mm);
+> +	vma->vm_flags |= set;
+> +	vma->vm_flags &= ~clear;
+> +}
+> +
+>  static inline void vma_set_anonymous(struct vm_area_struct *vma)
+>  {
+>  	vma->vm_ops = NULL;
+> diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
+> index 2d6d790d9bed..6c7c70bf50dd 100644
+> --- a/include/linux/mm_types.h
+> +++ b/include/linux/mm_types.h
+> @@ -491,7 +491,13 @@ struct vm_area_struct {
+>  	 * See vmf_insert_mixed_prot() for discussion.
+>  	 */
+>  	pgprot_t vm_page_prot;
+> -	unsigned long vm_flags;		/* Flags, see mm.h. */
+> +
+> +	/*
+> +	 * Flags, see mm.h.
+> +	 * WARNING! Do not modify directly.
+> +	 * Use {init|reset|set|clear|mod}_vm_flags() functions instead.
+> +	 */
+> +	unsigned long vm_flags;
+>  
+>  	/*
+>  	 * For areas with an address space and backing store,
+> -- 
+> 2.39.1
 
-diff --git a/meson.build b/meson.build
-index 6d3b665629..693802adb2 100644
---- a/meson.build
-+++ b/meson.build
-@@ -1471,6 +1471,8 @@ have_xen_pci_passthrough = get_option('xen_pci_passthrough') \
-            error_message: 'Xen PCI passthrough requested but Xen not enabled') \
-   .require(targetos == 'linux',
-            error_message: 'Xen PCI passthrough not available on this platform') \
-+  .require(cpu == 'x86'  or cpu == 'x86_64',
-+           error_message: 'Xen PCI passthrough not available on this platform') \
-   .allowed()
- 
- 
 -- 
-2.17.0
-
+Michal Hocko
+SUSE Labs
 
