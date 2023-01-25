@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E557C61D97
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 03:34:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484690.751433 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CBE0C61D97
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 05:08:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.484502.751477 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKt1u-0000dk-DO; Thu, 26 Jan 2023 03:34:26 +0000
+	id 1pKuUw-0004rg-6G; Thu, 26 Jan 2023 05:08:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484690.751433; Thu, 26 Jan 2023 03:34:26 +0000
+Received: by outflank-mailman (output) from mailman id 484502.751477; Thu, 26 Jan 2023 05:08:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKt1u-0000dZ-AT; Thu, 26 Jan 2023 03:34:26 +0000
-Received: by outflank-mailman (input) for mailman id 484690;
- Thu, 26 Jan 2023 03:34:24 +0000
+	id 1pKuUv-0004oq-VQ; Thu, 26 Jan 2023 05:08:29 +0000
+Received: by outflank-mailman (input) for mailman id 484502;
+ Wed, 25 Jan 2023 17:22:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Q4q1=5X=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pKt1s-0008Fc-Cy
- for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 03:34:24 +0000
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
- [66.111.4.27]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 52ae7c33-9d2a-11ed-b8d1-410ff93cb8f0;
- Thu, 26 Jan 2023 04:34:22 +0100 (CET)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id CBD635C0153;
- Wed, 25 Jan 2023 22:34:21 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Wed, 25 Jan 2023 22:34:21 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 25 Jan 2023 22:34:21 -0500 (EST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=EtGL=5W=google.com=surenb@srs-se1.protection.inumbo.net>)
+ id 1pKjTr-0004CI-Ir
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 17:22:39 +0000
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [2607:f8b0:4864:20::b2d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id dc229028-9cd4-11ed-b8d1-410ff93cb8f0;
+ Wed, 25 Jan 2023 18:22:36 +0100 (CET)
+Received: by mail-yb1-xb2d.google.com with SMTP id m199so8144629ybm.4
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 09:22:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,138 +41,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52ae7c33-9d2a-11ed-b8d1-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1674704061; x=1674790461; bh=V4qU6xBczXYBxuAJBBtWt5596TfV6Bd4Dyk
-	+YpmwRl4=; b=CuRQlVlIShgx+Q3OebmHVhmoUi/3WbvG8C7kvnQPwXe1QU0tnFD
-	XmXhEOq6gJBc6ipUhy7jKIip+gM3ffn5Znohlz62xTB8F1yHGTtB13fNiydmxq8e
-	2NjBisXqiKFl0vK9uPtshH9lj1xhj6MDUbOxxBL4KbfXVOMP7KwQ4DrSGSnoqz5v
-	d6dv73iHBERop8YVJX5LqtEdHvUdr0xm4S09J7FjPLp5bR7H52os2QZqiFTm67i9
-	WSyDDhKmA7AG5cp7E0sqeAwVvYFz7eBL5YnZTmc2OuyQSug0g4Q6R7UsbbvzwEBp
-	VBXdD9UALLDVFotjfYSfUvP34A7I/PNUiFw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1674704061; x=1674790461; bh=V4qU6xBczXYBx
-	uAJBBtWt5596TfV6Bd4Dyk+YpmwRl4=; b=G9bxwKaZXTcN/J3Y2b7exagftg8il
-	c5jEtm6ch7lOIR5yCje41RguRYT6IRbn7gpcD3VHhIl+gCjLBkRtp4h/UAu98A0e
-	7H98igegXsNN79gnXc7QzoSxLZLguaUyAYegjyRxUITnysoDIeVqdrWD/iyE9DUJ
-	01Hj38zqEP6unZz26qbaMVQ0cu7ymak7KVLI3QeEssr7vVUZp21eJAhutlVu6KV/
-	KL9QJ9/r/Mba6IKukxPiuLInp9TnFA58SK240NHNIxaXY2vb4wxe4pklBQI9NGVt
-	5avPzNEuaIKk0yRBDDkmAc1gSsTYrCTxsk0OSevDGJ1k8LPKZX83qcDtw==
-X-ME-Sender: <xms:vfTRYxA6-Mngv9kVvNeKYFelujd9X3hxqrxnsQQgQoRXnx4akNDqMA>
-    <xme:vfTRY_g0kbEZ2GK9NWaXaIW2jukfJa_e8DoKuK0Qs1K8To3jRJqmKJfnAJm8He6OV
-    OClK6S6edNa1b0>
-X-ME-Received: <xmr:vfTRY8m1auzzdb8jSU39w5zp7FT0b4qePSogOj96JXeuvMIR8ldPIDUslbahgUZ95JUqh_QZYJQn>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddvfedgheekucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
-    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
-    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgepudenuc
-    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
-    lhgrsgdrtghomh
-X-ME-Proxy: <xmx:vfTRY7xo8bC9Gr4gUIjDd84JXD5A1aGSZY1WcD3a0S1k6pWQFfviyg>
-    <xmx:vfTRY2REdgxnXQkrWOt5bdeY1R2H8D3OLGT6Jgnwvyz-LF6f9vLeNg>
-    <xmx:vfTRY-aS49RRI1jZpvQNiqfXM3wRVucZ3oNnZ3i3OTk5w4kJRrQnCg>
-    <xmx:vfTRYzI9BQbkoretVj3UW_QFpClo_dTyXivnEBXZLbRkgvC5qIZA_A>
-Feedback-ID: iac594737:Fastmail
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: Jens Axboe <axboe@kernel.dk>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 7/7] xen/blkback: Inform userspace that device has been opened
-Date: Wed, 25 Jan 2023 22:33:58 -0500
-Message-Id: <20230126033358.1880-7-demi@invisiblethingslab.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230126033358.1880-1-demi@invisiblethingslab.com>
-References: <20230126033358.1880-1-demi@invisiblethingslab.com>
+X-Inumbo-ID: dc229028-9cd4-11ed-b8d1-410ff93cb8f0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=IqJXv+IInDU1mKTOWecSjx46uIp9RhIiEah7PjvPLrg=;
+        b=QlZyecSvRJAlH7daZiVbTmdMCDJawwIkjqybbPcYd50INvCOOFwycJjGFsDCENBvPF
+         JeBM9yeOQDknmaZC6LT0p7wlzLAJo3QYgAn7K1xQNCTJjPrh6oinOxgRNGwGedAqUfeH
+         4EF6oknHwKU0N6BIZOc0CJi1hrgM4W0zxm3gicvvOuEGF7JC9HCNICDdMPEAz6Lz/B5y
+         FN2dpyuojKkpe3r7ipsFxRIyHaJ4nJmkiiUGkQy6aOsuBhBZ3WzwUsGkq0uXDlGTKFEH
+         iRh4N/trPN148wcbBUC1DmqB3ErHQLF9n9pkmMXooLK6oXyXf0aS41iIJv2buhnN7zSu
+         X8Bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=IqJXv+IInDU1mKTOWecSjx46uIp9RhIiEah7PjvPLrg=;
+        b=5rp6rkzmt/hqEXkXuMpnrN2x6AKRB+XmjPEuuyid7mrDOZ1zb14sl9RPqY6BsoPU9/
+         fkdnT6U8pNbtNJ9PLPLRzWPCtvGgVXG2mqXsWlK5VnQceSzSFXM/CM82kClXbH0vjJhG
+         6u597nSC2rERBk8uvR2UOjsgswJPyX8lVqIkcaLvv15ioHit+FzgNKcroOQrEPu+Fmhe
+         Wcs1d4bG/UU0ae9xN2zOU6PYf4UMjW5QjdB3gHFEUnBMIr8y2uYOVK67OP34vI4SYOWw
+         9tGg99sGawD/0VQsLyOPZia/xpr1VeVk5e+lN/+Qk7x7Bk3iWAZq+jUbFaCRce0et2ns
+         6ykw==
+X-Gm-Message-State: AFqh2korhaMmUd/+j9j54B2bPYLaaGbSFCbv7TYfWA47ukEp43OwxPXt
+	IovmCFb2aYyjKg8rRgAOS/aVErA57xwbnv9y5t4Z+Q==
+X-Google-Smtp-Source: AMrXdXv634nY3BrnZ3PlTUGlyUi8i7L3YenO2gMgxW5qJ4tF6Xha6yZp+2FFeWeU8OQrXrCFeHpomo5nr++haHZW7UI=
+X-Received: by 2002:a25:a408:0:b0:800:28d4:6936 with SMTP id
+ f8-20020a25a408000000b0080028d46936mr2303639ybi.431.1674667354997; Wed, 25
+ Jan 2023 09:22:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230125083851.27759-1-surenb@google.com> <20230125083851.27759-5-surenb@google.com>
+ <Y9D4rWEsajV/WfNx@dhcp22.suse.cz> <CAJuCfpGd2eG0RSMte9OVgsRVWPo+Sj7+t8EOo8o_iKzZoh1MXA@mail.gmail.com>
+ <Y9Fh9joU3vTCwYbX@dhcp22.suse.cz>
+In-Reply-To: <Y9Fh9joU3vTCwYbX@dhcp22.suse.cz>
+From: Suren Baghdasaryan <surenb@google.com>
+Date: Wed, 25 Jan 2023 09:22:23 -0800
+Message-ID: <CAJuCfpEJ1U2UHBNhLx4gggN3PLZKP5RejiZL_U5ZLxU_wdviVg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] mm: replace vma->vm_flags indirect modification in ksm_madvise
+To: Michal Hocko <mhocko@suse.com>
+Cc: akpm@linux-foundation.org, michel@lespinasse.org, jglisse@google.com, 
+	vbabka@suse.cz, hannes@cmpxchg.org, mgorman@techsingularity.net, 
+	dave@stgolabs.net, willy@infradead.org, liam.howlett@oracle.com, 
+	peterz@infradead.org, ldufour@linux.ibm.com, paulmck@kernel.org, 
+	luto@kernel.org, songliubraving@fb.com, peterx@redhat.com, david@redhat.com, 
+	dhowells@redhat.com, hughd@google.com, bigeasy@linutronix.de, 
+	kent.overstreet@linux.dev, punit.agrawal@bytedance.com, lstoakes@gmail.com, 
+	peterjung1337@gmail.com, rientjes@google.com, axelrasmussen@google.com, 
+	joelaf@google.com, minchan@google.com, jannh@google.com, shakeelb@google.com, 
+	tatashin@google.com, edumazet@google.com, gthelen@google.com, 
+	gurua@google.com, arjunroy@google.com, soheil@google.com, 
+	hughlynch@google.com, leewalsh@google.com, posk@google.com, will@kernel.org, 
+	aneesh.kumar@linux.ibm.com, npiggin@gmail.com, chenhuacai@kernel.org, 
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
+	dave.hansen@linux.intel.com, richard@nod.at, anton.ivanov@cambridgegreys.com, 
+	johannes@sipsolutions.net, qianweili@huawei.com, wangzhou1@hisilicon.com, 
+	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org, 
+	airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, 
+	mripard@kernel.org, tzimmermann@suse.de, l.stach@pengutronix.de, 
+	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com, 
+	matthias.bgg@gmail.com, robdclark@gmail.com, quic_abhinavk@quicinc.com, 
+	dmitry.baryshkov@linaro.org, tomba@kernel.org, hjc@rock-chips.com, 
+	heiko@sntech.de, ray.huang@amd.com, kraxel@redhat.com, sre@kernel.org, 
+	mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com, tfiga@chromium.org, 
+	m.szyprowski@samsung.com, mchehab@kernel.org, dimitri.sivanich@hpe.com, 
+	zhangfei.gao@linaro.org, jejb@linux.ibm.com, martin.petersen@oracle.com, 
+	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com, 
+	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de, 
+	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net, 
+	xiang@kernel.org, chao@kernel.org, tytso@mit.edu, adilger.kernel@dilger.ca, 
+	miklos@szeredi.hu, mike.kravetz@oracle.com, muchun.song@linux.dev, 
+	bhe@redhat.com, andrii@kernel.org, yoshfuji@linux-ipv6.org, 
+	dsahern@kernel.org, kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, 
+	tiwai@suse.com, haojian.zhuang@gmail.com, robert.jarzmik@free.fr, 
+	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org, 
+	linuxppc-dev@lists.ozlabs.org, x86@kernel.org, linux-kernel@vger.kernel.org, 
+	linux-graphics-maintainer@vmware.com, linux-ia64@vger.kernel.org, 
+	linux-arch@vger.kernel.org, loongarch@lists.linux.dev, kvm@vger.kernel.org, 
+	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org, 
+	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev, 
+	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
+	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org, 
+	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
+	linux-tegra@vger.kernel.org, virtualization@lists.linux-foundation.org, 
+	xen-devel@lists.xenproject.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org, 
+	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org, 
+	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev, 
+	target-devel@vger.kernel.org, linux-usb@vger.kernel.org, 
+	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org, linux-aio@kvack.org, 
+	linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org, 
+	linux-ext4@vger.kernel.org, devel@lists.orangefs.org, 
+	kexec@lists.infradead.org, linux-xfs@vger.kernel.org, bpf@vger.kernel.org, 
+	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com, 
+	selinux@vger.kernel.org, alsa-devel@alsa-project.org, kernel-team@android.com
+Content-Type: text/plain; charset="UTF-8"
 
-This allows userspace to use block devices with delete-on-close
-behavior, which is necessary to ensure virtual devices (such as loop or
-device-mapper devices) are cleaned up automatically.  Protocol details
-are included in comments.
+On Wed, Jan 25, 2023 at 9:08 AM Michal Hocko <mhocko@suse.com> wrote:
+>
+> On Wed 25-01-23 08:57:48, Suren Baghdasaryan wrote:
+> > On Wed, Jan 25, 2023 at 1:38 AM 'Michal Hocko' via kernel-team
+> > <kernel-team@android.com> wrote:
+> > >
+> > > On Wed 25-01-23 00:38:49, Suren Baghdasaryan wrote:
+> > > > Replace indirect modifications to vma->vm_flags with calls to modifier
+> > > > functions to be able to track flag changes and to keep vma locking
+> > > > correctness. Add a BUG_ON check in ksm_madvise() to catch indirect
+> > > > vm_flags modification attempts.
+> > >
+> > > Those BUG_ONs scream to much IMHO. KSM is an MM internal code so I
+> > > gueess we should be willing to trust it.
+> >
+> > Yes, but I really want to prevent an indirect misuse since it was not
+> > easy to find these. If you feel strongly about it I will remove them
+> > or if you have a better suggestion I'm all for it.
+>
+> You can avoid that by making flags inaccesible directly, right?
 
-Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
----
- drivers/block/xen-blkback/xenbus.c | 34 ++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
+Ah, you mean Peter's suggestion of using __private? I guess that would
+cover it. I'll drop these BUG_ONs in the next version. Thanks!
 
-diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
-index 2c43bfc7ab5ba6954f11d4b949a5668660dbd290..ca8dae05985038da490c5ac93364509913f6b4c7 100644
---- a/drivers/block/xen-blkback/xenbus.c
-+++ b/drivers/block/xen-blkback/xenbus.c
-@@ -3,6 +3,19 @@
-     Copyright (C) 2005 Rusty Russell <rusty@rustcorp.com.au>
-     Copyright (C) 2005 XenSource Ltd
- 
-+In addition to the XenStore nodes required by the Xen block device
-+specification, this implementation of blkback uses a new XenStore
-+node: "opened".  blkback sets "opened" to "0" before the hotplug script
-+is called.  Once the device node has been opened, blkback sets "opened"
-+to "1".
-+
-+"opened" is used exclusively by userspace.  It serves two purposes:
-+
-+1. It tells userspace that diskseq@major:minor syntax for "physical-device" is
-+   supported.
-+2. It tells userspace that it can wait for "opened" to be set to 1.  Once
-+   "opened" is 1, blkback has a reference to the device, so userspace doesn't
-+   need to keep one.
- 
- */
- 
-@@ -698,6 +711,14 @@ static int xen_blkbk_probe(struct xenbus_device *dev,
- 	if (err)
- 		pr_warn("%s write out 'max-ring-page-order' failed\n", __func__);
- 
-+	/*
-+	 * This informs userspace that the "opened" node will be set to "1" when
-+	 * the device has been opened successfully.
-+	 */
-+	err = xenbus_write(XBT_NIL, dev->nodename, "opened", "0");
-+	if (err)
-+		goto fail;
-+
- 	err = xenbus_switch_state(dev, XenbusStateInitWait);
- 	if (err)
- 		goto fail;
-@@ -824,6 +845,19 @@ static void backend_changed(struct xenbus_watch *watch,
- 		goto fail;
- 	}
- 
-+	/*
-+	 * Tell userspace that the device has been opened and that blkback has a
-+	 * reference to it.  Userspace can then close the device or mark it as
-+	 * delete-on-close, knowing that blkback will keep the device open as
-+	 * long as necessary.
-+	 */
-+	err = xenbus_write(XBT_NIL, dev->nodename, "opened", "1");
-+	if (err) {
-+		xenbus_dev_fatal(dev, err, "%s: notifying userspace device has been opened",
-+				 dev->nodename);
-+		goto free_vbd;
-+	}
-+
- 	err = xenvbd_sysfs_addif(dev);
- 	if (err) {
- 		xenbus_dev_fatal(dev, err, "creating sysfs entries");
--- 
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-Invisible Things Lab
-
+>
+> --
+> Michal Hocko
+> SUSE Labs
 
