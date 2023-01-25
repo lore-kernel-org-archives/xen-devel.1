@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCAEC61D9D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCF6C61DA0
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:27:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.483889.750567 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.483879.750528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3H-0002BV-1X; Wed, 25 Jan 2023 09:26:43 +0000
+	id 1pKc3E-0001Qz-Uh; Wed, 25 Jan 2023 09:26:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 483889.750567; Wed, 25 Jan 2023 09:26:42 +0000
+Received: by outflank-mailman (output) from mailman id 483879.750528; Wed, 25 Jan 2023 09:26:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3G-0002A6-KL; Wed, 25 Jan 2023 09:26:42 +0000
-Received: by outflank-mailman (input) for mailman id 483889;
- Wed, 25 Jan 2023 08:39:12 +0000
+	id 1pKc3E-0001QA-Qq; Wed, 25 Jan 2023 09:26:40 +0000
+Received: by outflank-mailman (input) for mailman id 483879;
+ Wed, 25 Jan 2023 08:39:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5DRb=5W=flex--surenb.bounces.google.com=3rurQYwYKCesfheRaOTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@srs-se1.protection.inumbo.net>)
- id 1pKbJI-00083W-9K
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:39:12 +0000
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [2607:f8b0:4864:20::114a])
+ <SRS0=GHF1=5W=flex--surenb.bounces.google.com=3ourQYwYKCd8TVSFOCHPPHMF.DPNYFO-EFWFMMJTUT.YFOQSPKFDU.PSH@srs-se1.protection.inumbo.net>)
+ id 1pKbJ7-00083W-3Q
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:39:01 +0000
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
+ [2607:f8b0:4864:20::b4a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bd5e0aa4-9c8b-11ed-91b6-6bf2151ebd3b;
- Wed, 25 Jan 2023 09:39:11 +0100 (CET)
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-506466c484fso43568687b3.13
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 00:39:11 -0800 (PST)
+ id b63d7c55-9c8b-11ed-91b6-6bf2151ebd3b;
+ Wed, 25 Jan 2023 09:38:59 +0100 (CET)
+Received: by mail-yb1-xb4a.google.com with SMTP id
+ x188-20020a2531c5000000b00716de19d76bso19183731ybx.19
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 00:38:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,43 +42,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd5e0aa4-9c8b-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: b63d7c55-9c8b-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=J7ancMifNNyjJiTof8bzSGdh+LvtuOAZ/yhUxoIZ6EY=;
-        b=l/hcCYqvcIly8bHSP154OLa3geKFmW7WOJHtqW6QP0WOiQCkjUgO6NFBclTznfTfXd
-         q/KZ4uqcFfz6e/A7WhMCPvMZlY7cpI5ZXPygAYrMACNGYIbdZdn2/wrvbiLbPFMi0EJU
-         e2xhTpttA9V49soY/4kK5pbOiY/jtu7/UBbsL9M2oZElpThGo5ueYxij1daBdATn/U6J
-         lFgz4QPoUTVqu2tO2Jv29c+EKfKlUr82uf6j5jrJG0K4kH7t4tXslYBl2iUfCiGyJg2L
-         sa2ZzT9fi8Nbfwma/h4EwurZmwhJrp5hy3f2wiTWrdCgSBqaWH+IxEwCQ2mYpS41PmTz
-         ZJ5g==
+        bh=ralp0YsbeintaJ1+3rV0BJxcsbdnu/jVKuNhvnt0T5Y=;
+        b=FpW3ZfeoZ58NaZWfySIfB+f4+MM7GrKuq9uCXe+gfhjrC0bvKaL2kAypJ/pJdIrezU
+         Ru0cU0KNklRfuYrJ3SKXkdPgNjMfodaxcsFUMH2z2VP+LqiGmmBZi4WNjYcaaYQLe2mC
+         v6uAPWcErh2g6vXcpQB3pwh9XmkkPfWLDi2bI5mgZlrfFBGfjeQ9Wv8iIQeddGuuYJGy
+         vGYSJIu//+24XGZjzB+Q3VYOxZ5pJZ/HCGoJ5h7l6e1K0sxINKIjiYRXApyFQ3GXR7xJ
+         ZclVjCWVjm/7Pu3pZxJbkPLxrnDwpix1sMzuU+AEqB9vICm+UZCWtOUOt5GLju8+nccL
+         rTTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=J7ancMifNNyjJiTof8bzSGdh+LvtuOAZ/yhUxoIZ6EY=;
-        b=4aDsLxXHwgk9u7LiQu+YW5XR+doG+eTFElwdSy66t9UNWsY/twtC7J0XLGePhEgxh+
-         Ik06KSQq/iLAS3WlfUoWvQWi4sNK2wSrTXnenUTCfRpWWcO5VcYGZ+aTUU+88+L5CMtt
-         Pk4G4baebNSOhgLXXRyCQJBDY7G4E48z8/i0eUwvpry3goPsYchJJx5/wrHLxulENb/A
-         GX0fmrRCv1erAGKCLGPB+UO3AVTPgbyeNEmAntwTv3UHaiPBBYfjltrLutTtCjdxJy+Q
-         V5JOejZ+GKDt8k5OhxI83316HgDXEJK0l0Xi+Cpi977QqZUSi6e5rmk8AmFo8M+9iOIi
-         6fMg==
-X-Gm-Message-State: AFqh2kpTZq3MMTwWXhp1zdC90kzszpRHcXWrX9Tx5pEs4bG1lTA9qm5D
-	F0PTcoAsKlpFgUytnnR++yfa4zQiVxY=
-X-Google-Smtp-Source: AMrXdXslOvF1txeQ7QJk1q8MehIUDQnhzGgaj+Ckxm4gdtDkml40uAzU8COPOn8c5wwtHui85E8JZje3JZk=
+        bh=ralp0YsbeintaJ1+3rV0BJxcsbdnu/jVKuNhvnt0T5Y=;
+        b=b0sr59lcMqogSZObj147Kf+cvhZr515XgFw0Q9R9h/KKb66ss1RD6RODLRkiLeRxY7
+         uMcayOKPICG6MLt6ER4Q2N3rrzT9ibTMAcsNSfozPaiQlvUKLG73PLzcuVVPPuyTmqSK
+         k8tcTsEaEKITKrE6uSbuLFI2RMNjVXHt903z82dbqIbQWpks58vcn2uBgRhD5oKQxawo
+         hxFFq9LX7jJgUdXvnl15xUcaodwKJaRUAeOTMUcA6DSuIiO1SD4WKYYCD0k4IFMEW3VD
+         DmQZ3Dx3vvDvzJDjl7nCsEkKVuhvvKIuXAmyDACyFMzAMiOeNb6y+c8vayzoJaQ3f2G4
+         DbJg==
+X-Gm-Message-State: AO0yUKUr8P6HCBIgnRYEOsTwDLEXZZ1c+qr6m5DcnOt0jiavQ/iHN5sn
+	p2uNo5AL/FUbnUdMZ+iWzA6ADSAuT6c=
+X-Google-Smtp-Source: AK7set8/stQqnGGz4OB/vqyDOBLoBX54VTTeagu3mMK0HzymWEEvjI0ujOzPLr/zvAsu1DJMDE0YK80W9/s=
 X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:f7b0:20e8:ce66:f98])
- (user=surenb job=sendgmr) by 2002:a0d:ca88:0:b0:501:80db:3eca with SMTP id
- m130-20020a0dca88000000b0050180db3ecamr2010555ywd.100.1674635950405; Wed, 25
- Jan 2023 00:39:10 -0800 (PST)
-Date: Wed, 25 Jan 2023 00:38:51 -0800
+ (user=surenb job=sendgmr) by 2002:a81:3e07:0:b0:506:6185:4fad with SMTP id
+ l7-20020a813e07000000b0050661854fadmr450398ywa.451.1674635938431; Wed, 25 Jan
+ 2023 00:38:58 -0800 (PST)
+Date: Wed, 25 Jan 2023 00:38:46 -0800
 In-Reply-To: <20230125083851.27759-1-surenb@google.com>
 Mime-Version: 1.0
 References: <20230125083851.27759-1-surenb@google.com>
 X-Mailer: git-send-email 2.39.1.405.gd4c25cc71f-goog
-Message-ID: <20230125083851.27759-7-surenb@google.com>
-Subject: [PATCH v2 6/6] mm: export dump_mm()
+Message-ID: <20230125083851.27759-2-surenb@google.com>
+Subject: [PATCH v2 1/6] mm: introduce vma->vm_flags modifier functions
 From: Suren Baghdasaryan <surenb@google.com>
 To: akpm@linux-foundation.org
 Cc: michel@lespinasse.org, jglisse@google.com, mhocko@suse.com, vbabka@suse.cz, 
@@ -142,28 +142,86 @@ Cc: michel@lespinasse.org, jglisse@google.com, mhocko@suse.com, vbabka@suse.cz,
 	surenb@google.com
 Content-Type: text/plain; charset="UTF-8"
 
-mmap_assert_write_locked() is used in vm_flags modifiers. Because
-mmap_assert_write_locked() uses dump_mm() and vm_flags are sometimes
-modified from from inside a module, it's necessary to export
-dump_mm() function.
+vm_flags are among VMA attributes which affect decisions like VMA merging
+and splitting. Therefore all vm_flags modifications are performed after
+taking exclusive mmap_lock to prevent vm_flags updates racing with such
+operations. Introduce modifier functions for vm_flags to be used whenever
+flags are updated. This way we can better check and control correct
+locking behavior during these updates.
 
 Signed-off-by: Suren Baghdasaryan <surenb@google.com>
 ---
- mm/debug.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/linux/mm.h       | 37 +++++++++++++++++++++++++++++++++++++
+ include/linux/mm_types.h |  8 +++++++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
 
-diff --git a/mm/debug.c b/mm/debug.c
-index 9d3d893dc7f4..96d594e16292 100644
---- a/mm/debug.c
-+++ b/mm/debug.c
-@@ -215,6 +215,7 @@ void dump_mm(const struct mm_struct *mm)
- 		mm->def_flags, &mm->def_flags
- 	);
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index c2f62bdce134..b71f2809caac 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -627,6 +627,43 @@ static inline void vma_init(struct vm_area_struct *vma, struct mm_struct *mm)
+ 	INIT_LIST_HEAD(&vma->anon_vma_chain);
  }
-+EXPORT_SYMBOL(dump_mm);
  
- static bool page_init_poisoning __read_mostly = true;
++/* Use when VMA is not part of the VMA tree and needs no locking */
++static inline void init_vm_flags(struct vm_area_struct *vma,
++				 unsigned long flags)
++{
++	vma->vm_flags = flags;
++}
++
++/* Use when VMA is part of the VMA tree and modifications need coordination */
++static inline void reset_vm_flags(struct vm_area_struct *vma,
++				  unsigned long flags)
++{
++	mmap_assert_write_locked(vma->vm_mm);
++	init_vm_flags(vma, flags);
++}
++
++static inline void set_vm_flags(struct vm_area_struct *vma,
++				unsigned long flags)
++{
++	mmap_assert_write_locked(vma->vm_mm);
++	vma->vm_flags |= flags;
++}
++
++static inline void clear_vm_flags(struct vm_area_struct *vma,
++				  unsigned long flags)
++{
++	mmap_assert_write_locked(vma->vm_mm);
++	vma->vm_flags &= ~flags;
++}
++
++static inline void mod_vm_flags(struct vm_area_struct *vma,
++				unsigned long set, unsigned long clear)
++{
++	mmap_assert_write_locked(vma->vm_mm);
++	vma->vm_flags |= set;
++	vma->vm_flags &= ~clear;
++}
++
+ static inline void vma_set_anonymous(struct vm_area_struct *vma)
+ {
+ 	vma->vm_ops = NULL;
+diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
+index 2d6d790d9bed..6c7c70bf50dd 100644
+--- a/include/linux/mm_types.h
++++ b/include/linux/mm_types.h
+@@ -491,7 +491,13 @@ struct vm_area_struct {
+ 	 * See vmf_insert_mixed_prot() for discussion.
+ 	 */
+ 	pgprot_t vm_page_prot;
+-	unsigned long vm_flags;		/* Flags, see mm.h. */
++
++	/*
++	 * Flags, see mm.h.
++	 * WARNING! Do not modify directly.
++	 * Use {init|reset|set|clear|mod}_vm_flags() functions instead.
++	 */
++	unsigned long vm_flags;
  
+ 	/*
+ 	 * For areas with an address space and backing store,
 -- 
 2.39.1
 
