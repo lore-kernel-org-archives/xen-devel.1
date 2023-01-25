@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688E6C27C76
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 17:15:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484496.751088 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C68C54E94
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 17:50:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.484506.751104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKjMb-0002d0-Ne; Wed, 25 Jan 2023 17:15:09 +0000
+	id 1pKjuI-0006Y9-GM; Wed, 25 Jan 2023 17:49:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484496.751088; Wed, 25 Jan 2023 17:15:09 +0000
+Received: by outflank-mailman (output) from mailman id 484506.751104; Wed, 25 Jan 2023 17:49:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKjMb-0002ct-JR; Wed, 25 Jan 2023 17:15:09 +0000
-Received: by outflank-mailman (input) for mailman id 484496;
- Wed, 25 Jan 2023 17:15:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pKjuI-0006Y2-By; Wed, 25 Jan 2023 17:49:58 +0000
+Received: by outflank-mailman (input) for mailman id 484506;
+ Wed, 25 Jan 2023 17:49:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ToUz=5W=srcf.net=amc96@srs-se1.protection.inumbo.net>)
- id 1pKjMa-0002cg-9H
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 17:15:08 +0000
+ id 1pKjuH-0006Xw-Ml
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 17:49:57 +0000
 Received: from ppsw-43.srv.uis.cam.ac.uk (ppsw-43.srv.uis.cam.ac.uk
- [131.111.8.143]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d04ab1f3-9cd3-11ed-91b6-6bf2151ebd3b;
- Wed, 25 Jan 2023 18:15:07 +0100 (CET)
-Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:35168)
+ [131.111.8.143]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ac85d094-9cd8-11ed-b8d1-410ff93cb8f0;
+ Wed, 25 Jan 2023 18:49:54 +0100 (CET)
+Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:39600)
  by ppsw-43.srv.uis.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.139]:25)
  with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- id 1pKjMT-000KrU-Ux (Exim 4.96) (return-path <amc96@srcf.net>);
- Wed, 25 Jan 2023 17:15:01 +0000
+ id 1pKjuD-000T2l-V4 (Exim 4.96) (return-path <amc96@srcf.net>);
+ Wed, 25 Jan 2023 17:49:53 +0000
 Received: from [10.80.2.8] (default-46-102-197-194.interdsl.co.uk
  [46.102.197.194]) (Authenticated sender: amc96)
- by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id 534AE1FBD8;
- Wed, 25 Jan 2023 17:15:01 +0000 (GMT)
+ by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id 713F61FA26;
+ Wed, 25 Jan 2023 17:49:53 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,77 +47,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d04ab1f3-9cd3-11ed-91b6-6bf2151ebd3b
+X-Inumbo-ID: ac85d094-9cd8-11ed-b8d1-410ff93cb8f0
 X-Cam-AntiVirus: no malware found
 X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
-Message-ID: <c12689b9-950c-94f5-e54b-490eea19b066@srcf.net>
-Date: Wed, 25 Jan 2023 17:15:01 +0000
+Message-ID: <a4e9272b-6110-e041-13d0-6746f721135e@srcf.net>
+Date: Wed, 25 Jan 2023 17:49:53 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
 Content-Language: en-GB
-To: Oleksii <oleksii.kurochko@gmail.com>,
- Alistair Francis <alistair23@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Gianluca Guida <gianluca@rivosinc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>
-References: <cover.1674226563.git.oleksii.kurochko@gmail.com>
- <74ca10d9be1dfc3aed4b3b21a79eae88c9df26a4.1674226563.git.oleksii.kurochko@gmail.com>
- <CAKmqyKNtFGoXmF1SJWO+JBJQvPSyDYEfpaYn2YBMQ=BsCk6VPQ@mail.gmail.com>
- <df6bd499b06c2e4997a3b647624aa2163e7f23d6.camel@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <930254a6-d0c8-4910-982a-bfd227187240@suse.com>
 From: Andrew Cooper <amc96@srcf.net>
-Subject: Re: [PATCH v1 09/14] xen/riscv: introduce do_unexpected_trap()
-In-Reply-To: <df6bd499b06c2e4997a3b647624aa2163e7f23d6.camel@gmail.com>
+Subject: Re: [PATCH v3 0/4] x86/spec-ctrl: IPBP improvements
+In-Reply-To: <930254a6-d0c8-4910-982a-bfd227187240@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 25/01/2023 5:01 pm, Oleksii wrote:
-> On Mon, 2023-01-23 at 09:39 +1000, Alistair Francis wrote:
->> On Sat, Jan 21, 2023 at 1:00 AM Oleksii Kurochko
->> <oleksii.kurochko@gmail.com> wrote:
->>> The patch introduces the function the purpose of which is to print
->>> a cause of an exception and call "wfi" instruction.
->>>
->>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->>> ---
->>>  xen/arch/riscv/traps.c | 14 +++++++++++++-
->>>  1 file changed, 13 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
->>> index dd64f053a5..fc25138a4b 100644
->>> --- a/xen/arch/riscv/traps.c
->>> +++ b/xen/arch/riscv/traps.c
->>> @@ -95,7 +95,19 @@ const char *decode_cause(unsigned long cause)
->>>      return decode_trap_cause(cause);
->>>  }
->>>
->>> -void __handle_exception(struct cpu_user_regs *cpu_regs)
->>> +static void do_unexpected_trap(const struct cpu_user_regs *regs)
->>>  {
->>> +    unsigned long cause = csr_read(CSR_SCAUSE);
->>> +
->>> +    early_printk("Unhandled exception: ");
->>> +    early_printk(decode_cause(cause));
->>> +    early_printk("\n");
->>> +
->>> +    // kind of die...
->>>      wait_for_interrupt();
->> We could put this in a loop, to ensure we never progress
->>
-> I think that right now there is no big difference how to stop
-> because we have only 1 CPU, interrupts are disabled and we are in
-> exception so it looks like anything can interrupt us.
-> And in future it will be changed to panic() so we won't need here wfi()
-> any more.
+On 25/01/2023 3:24 pm, Jan Beulich wrote:
+> Versions of the two final patches were submitted standalone earlier
+> on. The series here tries to carry out a suggestion from Andrew,
+> which the two of us have been discussing. Then said previously posted
+> patches are re-based on top, utilizing the new functionality.
+>
+> 1: spec-ctrl: add logic to issue IBPB on exit to guest
+> 2: spec-ctrl: defer context-switch IBPB until guest entry
+> 3: limit issuing of IBPB during context switch
+> 4: PV: issue branch prediction barrier when switching 64-bit guest to kernel mode
 
-WFI is permitted to be implemented as a NOP by hardware.  Furthermore,
-WFI with interrupts already disabled is a supported usecase, and will
-resume execution without taking the interrupt that became pending.
+In the subject, you mean IBPB.  I think all the individual patches are fine.
 
-You need an infinite loop of WFI's for execution to halt here.
+Do you have an implementation of VMASST_TYPE_mode_switch_no_ibpb for
+Linux yet?  The thing I'd like to avoid is that we commit this perf it
+to Xen, without lining Linux up to be able to skip it.
 
 ~Andrew
 
