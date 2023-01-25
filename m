@@ -4,33 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C67C61DA3
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:27:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.483888.750558 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 429CAC61DA7
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Jan 2023 09:27:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.484022.750595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3G-00022f-HC; Wed, 25 Jan 2023 09:26:42 +0000
+	id 1pKc3I-0002qC-Qz; Wed, 25 Jan 2023 09:26:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 483888.750558; Wed, 25 Jan 2023 09:26:42 +0000
+Received: by outflank-mailman (output) from mailman id 484022.750595; Wed, 25 Jan 2023 09:26:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKc3G-00020l-6X; Wed, 25 Jan 2023 09:26:42 +0000
-Received: by outflank-mailman (input) for mailman id 483888;
- Wed, 25 Jan 2023 08:39:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pKc3I-0002nI-9O; Wed, 25 Jan 2023 09:26:44 +0000
+Received: by outflank-mailman (input) for mailman id 484022;
+ Wed, 25 Jan 2023 09:10:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mP3z=5W=flex--surenb.bounces.google.com=3rOrQYwYKCekdfcPYMRZZRWP.NZXiPY-OPgPWWTded.iPYacZUPNe.ZcR@srs-se1.protection.inumbo.net>)
- id 1pKbJI-00083Q-30
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 08:39:12 +0000
-Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
- [2607:f8b0:4864:20::b4a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a25a9aec-9c8b-11ed-b8d1-410ff93cb8f0;
- Wed, 25 Jan 2023 09:38:26 +0100 (CET)
-Received: by mail-yb1-xb4a.google.com with SMTP id
- k15-20020a5b0a0f000000b007eba3f8e3baso18992171ybq.4
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jan 2023 00:39:09 -0800 (PST)
+ <SRS0=gP5O=5W=infradead.org=peterz@srs-se1.protection.inumbo.net>)
+ id 1pKbnD-0008Ov-TD
+ for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 09:10:08 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0df2acd9-9c90-11ed-91b6-6bf2151ebd3b;
+ Wed, 25 Jan 2023 10:10:05 +0100 (CET)
+Received: from j130084.upc-j.chello.nl ([24.132.130.84]
+ helo=noisy.programming.kicks-ass.net)
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pKbmI-0026lz-24; Wed, 25 Jan 2023 09:09:11 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id B63953006C4;
+ Wed, 25 Jan 2023 10:09:37 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 673382C247607; Wed, 25 Jan 2023 10:09:37 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,351 +52,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a25a9aec-9c8b-11ed-b8d1-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=sj271avprjKe1me6H/esP7A1ES+jGLLWBsFdbdzx2Jg=;
-        b=MF4o67HHEg6wxxFaPI24vOvqDdgAsiiopj9Jmjd6uvJHKoN0cmyBguf/551h9iDvbU
-         uB2NKUhC7RaYIEm/9caYoWPUTANnNVHWS2xJdXDx/lcI6GcWgigCfEEbTlZGTMQBSsWX
-         k8/CWZcxcb/BySg6e3+h9eb7w5trNFt42RvDvxcst6OfmLoa5MBI2SAUfqwKLEaTxaEa
-         G0NocmVo14Y7xttJ2elLfQ94AxICUs5RwP447wA4tGne6++mYjvSxMX72QvUUwshvmYz
-         3fNi++tbSZXqk3zPkMLsMlUogcx8otyfqKt95XXSqoizVnjCimFLvFXHXbaOzmHhXyvI
-         XWuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sj271avprjKe1me6H/esP7A1ES+jGLLWBsFdbdzx2Jg=;
-        b=RwoslFzHhc+MbXj01AZ/xfe6MryakSJB51TZjijA8X1ZfPJLzusn8QtaFNkHymdGrJ
-         CYTjHag9vnv4URLJ47Gz2jIGWvv+50VqN7NePxpRXLUaYwPaZjFhvfWUEf3GkWkIggk9
-         wioaTtTkcHAsSkOkh2OawlFolZD0MDIY5WsQPn+gfxit7an2XmnvMkgTcR7AZIQ5u4bw
-         V6YFdgYYKPRJc0KN0ds6BrRsts+STgzCb/aDkUvWDH/CrneYGcLxpWB8Ub/fEwN9d4aJ
-         WYjfN5TF5d7Oy8Hx7V54eelK0Qn0m3Q7VoXC051ceMjwBaCY9rHAhqyJudeHOnUaM20s
-         XYWQ==
-X-Gm-Message-State: AFqh2kqUFOmBgQywW4pD7D9oIsYwpP66KkXoLWxJtpYG+c6oyXSerpjs
-	gtybj5sA2ImBwiKv8G78v7Oq/uWxAfU=
-X-Google-Smtp-Source: AMrXdXuvyVzp2fB0Stt6K1hitZVrUldY7217lrubuFDE2XAwfP/Qm87P8hidNk4h8aVCYNlJLm5UfURoDHY=
-X-Received: from surenb-desktop.mtv.corp.google.com ([2620:15c:211:200:f7b0:20e8:ce66:f98])
- (user=surenb job=sendgmr) by 2002:a25:2bc1:0:b0:7fe:35ff:fddb with SMTP id
- r184-20020a252bc1000000b007fe35fffddbmr2303833ybr.466.1674635948201; Wed, 25
- Jan 2023 00:39:08 -0800 (PST)
-Date: Wed, 25 Jan 2023 00:38:50 -0800
-In-Reply-To: <20230125083851.27759-1-surenb@google.com>
-Mime-Version: 1.0
+X-Inumbo-ID: 0df2acd9-9c90-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=hk+0OseVD3OO+ksIzhtEU5LrZV8KXEqXC3zpbOGn/ls=; b=qsa+lu0U9mwFGWjutATG/A9iym
+	F+d7IIQowgNB15FNtA53/QA/RcEQKz2NQMKXkkpiUFb08vzCFWx/JFLhZ0br08C5Ckzefhutl3QCt
+	ceW/0pGOVnNMXlzdiPZkUHL2edRHXWt902QL7eOXJMDQBzbzHfjVb3six/mnj0Lwks7UYNitCDD/a
+	WjH6Y7VU5VmGXuLCLjlq1cs0p/QmTHDQxmy7G6T6M9gy021CLYFDOBZwIb0ILx+d/MfDO2qH3S0mE
+	cy+gKIGp5mQPEgu/vJHsyE3Wju/jlQ1l3hOGxA/ErAiDF4zG2A5eFJiQUeMaQql9LtlJhR0gyt8F5
+	77Iz0wbQ==;
+Date: Wed, 25 Jan 2023 10:09:37 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, michel@lespinasse.org, jglisse@google.com,
+	mhocko@suse.com, vbabka@suse.cz, hannes@cmpxchg.org,
+	mgorman@techsingularity.net, dave@stgolabs.net, willy@infradead.org,
+	liam.howlett@oracle.com, ldufour@linux.ibm.com, paulmck@kernel.org,
+	luto@kernel.org, songliubraving@fb.com, peterx@redhat.com,
+	david@redhat.com, dhowells@redhat.com, hughd@google.com,
+	bigeasy@linutronix.de, kent.overstreet@linux.dev,
+	punit.agrawal@bytedance.com, lstoakes@gmail.com,
+	peterjung1337@gmail.com, rientjes@google.com,
+	axelrasmussen@google.com, joelaf@google.com, minchan@google.com,
+	jannh@google.com, shakeelb@google.com, tatashin@google.com,
+	edumazet@google.com, gthelen@google.com, gurua@google.com,
+	arjunroy@google.com, soheil@google.com, hughlynch@google.com,
+	leewalsh@google.com, posk@google.com, will@kernel.org,
+	aneesh.kumar@linux.ibm.com, npiggin@gmail.com,
+	chenhuacai@kernel.org, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, richard@nod.at,
+	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
+	qianweili@huawei.com, wangzhou1@hisilicon.com,
+	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org,
+	airlied@gmail.com, daniel@ffwll.ch,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	tzimmermann@suse.de, l.stach@pengutronix.de,
+	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com,
+	matthias.bgg@gmail.com, robdclark@gmail.com,
+	quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
+	tomba@kernel.org, hjc@rock-chips.com, heiko@sntech.de,
+	ray.huang@amd.com, kraxel@redhat.com, sre@kernel.org,
+	mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
+	tfiga@chromium.org, m.szyprowski@samsung.com, mchehab@kernel.org,
+	dimitri.sivanich@hpe.com, zhangfei.gao@linaro.org,
+	jejb@linux.ibm.com, martin.petersen@oracle.com,
+	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com,
+	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de,
+	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net,
+	xiang@kernel.org, chao@kernel.org, tytso@mit.edu,
+	adilger.kernel@dilger.ca, miklos@szeredi.hu,
+	mike.kravetz@oracle.com, muchun.song@linux.dev, bhe@redhat.com,
+	andrii@kernel.org, yoshfuji@linux-ipv6.org, dsahern@kernel.org,
+	kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, tiwai@suse.com,
+	haojian.zhuang@gmail.com, robert.jarzmik@free.fr,
+	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org, x86@kernel.org,
+	linux-kernel@vger.kernel.org, linux-graphics-maintainer@vmware.com,
+	linux-ia64@vger.kernel.org, linux-arch@vger.kernel.org,
+	loongarch@lists.linux.dev, kvm@vger.kernel.org,
+	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org,
+	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org,
+	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev,
+	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
+	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
+	target-devel@vger.kernel.org, linux-usb@vger.kernel.org,
+	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org,
+	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+	devel@lists.orangefs.org, kexec@lists.infradead.org,
+	linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
+	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com,
+	selinux@vger.kernel.org, alsa-devel@alsa-project.org,
+	kernel-team@android.com
+Subject: Re: [PATCH v2 1/6] mm: introduce vma->vm_flags modifier functions
+Message-ID: <Y9Dx0cPXF2yoLwww@hirez.programming.kicks-ass.net>
 References: <20230125083851.27759-1-surenb@google.com>
-X-Mailer: git-send-email 2.39.1.405.gd4c25cc71f-goog
-Message-ID: <20230125083851.27759-6-surenb@google.com>
-Subject: [PATCH v2 5/6] mm: introduce mod_vm_flags_nolock and use it in untrack_pfn
-From: Suren Baghdasaryan <surenb@google.com>
-To: akpm@linux-foundation.org
-Cc: michel@lespinasse.org, jglisse@google.com, mhocko@suse.com, vbabka@suse.cz, 
-	hannes@cmpxchg.org, mgorman@techsingularity.net, dave@stgolabs.net, 
-	willy@infradead.org, liam.howlett@oracle.com, peterz@infradead.org, 
-	ldufour@linux.ibm.com, paulmck@kernel.org, luto@kernel.org, 
-	songliubraving@fb.com, peterx@redhat.com, david@redhat.com, 
-	dhowells@redhat.com, hughd@google.com, bigeasy@linutronix.de, 
-	kent.overstreet@linux.dev, punit.agrawal@bytedance.com, lstoakes@gmail.com, 
-	peterjung1337@gmail.com, rientjes@google.com, axelrasmussen@google.com, 
-	joelaf@google.com, minchan@google.com, jannh@google.com, shakeelb@google.com, 
-	tatashin@google.com, edumazet@google.com, gthelen@google.com, 
-	gurua@google.com, arjunroy@google.com, soheil@google.com, 
-	hughlynch@google.com, leewalsh@google.com, posk@google.com, will@kernel.org, 
-	aneesh.kumar@linux.ibm.com, npiggin@gmail.com, chenhuacai@kernel.org, 
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
-	dave.hansen@linux.intel.com, richard@nod.at, anton.ivanov@cambridgegreys.com, 
-	johannes@sipsolutions.net, qianweili@huawei.com, wangzhou1@hisilicon.com, 
-	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org, 
-	airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, 
-	mripard@kernel.org, tzimmermann@suse.de, l.stach@pengutronix.de, 
-	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com, 
-	matthias.bgg@gmail.com, robdclark@gmail.com, quic_abhinavk@quicinc.com, 
-	dmitry.baryshkov@linaro.org, tomba@kernel.org, hjc@rock-chips.com, 
-	heiko@sntech.de, ray.huang@amd.com, kraxel@redhat.com, sre@kernel.org, 
-	mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com, tfiga@chromium.org, 
-	m.szyprowski@samsung.com, mchehab@kernel.org, dimitri.sivanich@hpe.com, 
-	zhangfei.gao@linaro.org, jejb@linux.ibm.com, martin.petersen@oracle.com, 
-	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com, 
-	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de, 
-	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net, 
-	xiang@kernel.org, chao@kernel.org, tytso@mit.edu, adilger.kernel@dilger.ca, 
-	miklos@szeredi.hu, mike.kravetz@oracle.com, muchun.song@linux.dev, 
-	bhe@redhat.com, andrii@kernel.org, yoshfuji@linux-ipv6.org, 
-	dsahern@kernel.org, kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, 
-	tiwai@suse.com, haojian.zhuang@gmail.com, robert.jarzmik@free.fr, 
-	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org, 
-	linuxppc-dev@lists.ozlabs.org, x86@kernel.org, linux-kernel@vger.kernel.org, 
-	linux-graphics-maintainer@vmware.com, linux-ia64@vger.kernel.org, 
-	linux-arch@vger.kernel.org, loongarch@lists.linux.dev, kvm@vger.kernel.org, 
-	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org, 
-	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev, 
-	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org, 
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, 
-	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
-	linux-tegra@vger.kernel.org, virtualization@lists.linux-foundation.org, 
-	xen-devel@lists.xenproject.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org, 
-	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org, 
-	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev, 
-	target-devel@vger.kernel.org, linux-usb@vger.kernel.org, 
-	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org, linux-aio@kvack.org, 
-	linux-fsdevel@vger.kernel.org, linux-erofs@lists.ozlabs.org, 
-	linux-ext4@vger.kernel.org, devel@lists.orangefs.org, 
-	kexec@lists.infradead.org, linux-xfs@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com, 
-	selinux@vger.kernel.org, alsa-devel@alsa-project.org, kernel-team@android.com, 
-	surenb@google.com
-Content-Type: text/plain; charset="UTF-8"
+ <20230125083851.27759-2-surenb@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230125083851.27759-2-surenb@google.com>
 
-In cases when VMA flags are modified after VMA was isolated and mmap_lock
-was downgraded, flags modifications would result in an assertion because
-mmap write lock is not held.
-Introduce mod_vm_flags_nolock to be used in such situation.
-Pass a hint to untrack_pfn to conditionally use mod_vm_flags_nolock for
-flags modification and to avoid assertion.
+On Wed, Jan 25, 2023 at 12:38:46AM -0800, Suren Baghdasaryan wrote:
 
-Signed-off-by: Suren Baghdasaryan <surenb@google.com>
----
- arch/x86/mm/pat/memtype.c | 10 +++++++---
- include/linux/mm.h        | 12 +++++++++---
- include/linux/pgtable.h   |  5 +++--
- mm/memory.c               | 13 +++++++------
- mm/memremap.c             |  4 ++--
- mm/mmap.c                 | 16 ++++++++++------
- 6 files changed, 38 insertions(+), 22 deletions(-)
+> diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
+> index 2d6d790d9bed..6c7c70bf50dd 100644
+> --- a/include/linux/mm_types.h
+> +++ b/include/linux/mm_types.h
+> @@ -491,7 +491,13 @@ struct vm_area_struct {
+>  	 * See vmf_insert_mixed_prot() for discussion.
+>  	 */
+>  	pgprot_t vm_page_prot;
+> -	unsigned long vm_flags;		/* Flags, see mm.h. */
+> +
+> +	/*
+> +	 * Flags, see mm.h.
+> +	 * WARNING! Do not modify directly.
+> +	 * Use {init|reset|set|clear|mod}_vm_flags() functions instead.
+> +	 */
+> +	unsigned long vm_flags;
 
-diff --git a/arch/x86/mm/pat/memtype.c b/arch/x86/mm/pat/memtype.c
-index ae9645c900fa..d8adc0b42cf2 100644
---- a/arch/x86/mm/pat/memtype.c
-+++ b/arch/x86/mm/pat/memtype.c
-@@ -1046,7 +1046,7 @@ void track_pfn_insert(struct vm_area_struct *vma, pgprot_t *prot, pfn_t pfn)
-  * can be for the entire vma (in which case pfn, size are zero).
-  */
- void untrack_pfn(struct vm_area_struct *vma, unsigned long pfn,
--		 unsigned long size)
-+		 unsigned long size, bool mm_wr_locked)
- {
- 	resource_size_t paddr;
- 	unsigned long prot;
-@@ -1065,8 +1065,12 @@ void untrack_pfn(struct vm_area_struct *vma, unsigned long pfn,
- 		size = vma->vm_end - vma->vm_start;
- 	}
- 	free_pfn_range(paddr, size);
--	if (vma)
--		clear_vm_flags(vma, VM_PAT);
-+	if (vma) {
-+		if (mm_wr_locked)
-+			clear_vm_flags(vma, VM_PAT);
-+		else
-+			mod_vm_flags_nolock(vma, 0, VM_PAT);
-+	}
- }
- 
- /*
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 55335edd1373..48d49930c411 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -656,12 +656,18 @@ static inline void clear_vm_flags(struct vm_area_struct *vma,
- 	vma->vm_flags &= ~flags;
- }
- 
-+static inline void mod_vm_flags_nolock(struct vm_area_struct *vma,
-+				       unsigned long set, unsigned long clear)
-+{
-+	vma->vm_flags |= set;
-+	vma->vm_flags &= ~clear;
-+}
-+
- static inline void mod_vm_flags(struct vm_area_struct *vma,
- 				unsigned long set, unsigned long clear)
- {
- 	mmap_assert_write_locked(vma->vm_mm);
--	vma->vm_flags |= set;
--	vma->vm_flags &= ~clear;
-+	mod_vm_flags_nolock(vma, set, clear);
- }
- 
- static inline void vma_set_anonymous(struct vm_area_struct *vma)
-@@ -2087,7 +2093,7 @@ static inline void zap_vma_pages(struct vm_area_struct *vma)
- }
- void unmap_vmas(struct mmu_gather *tlb, struct maple_tree *mt,
- 		struct vm_area_struct *start_vma, unsigned long start,
--		unsigned long end);
-+		unsigned long end, bool mm_wr_locked);
- 
- struct mmu_notifier_range;
- 
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 5fd45454c073..c63cd44777ec 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -1185,7 +1185,8 @@ static inline int track_pfn_copy(struct vm_area_struct *vma)
-  * can be for the entire vma (in which case pfn, size are zero).
-  */
- static inline void untrack_pfn(struct vm_area_struct *vma,
--			       unsigned long pfn, unsigned long size)
-+			       unsigned long pfn, unsigned long size,
-+			       bool mm_wr_locked)
- {
- }
- 
-@@ -1203,7 +1204,7 @@ extern void track_pfn_insert(struct vm_area_struct *vma, pgprot_t *prot,
- 			     pfn_t pfn);
- extern int track_pfn_copy(struct vm_area_struct *vma);
- extern void untrack_pfn(struct vm_area_struct *vma, unsigned long pfn,
--			unsigned long size);
-+			unsigned long size, bool mm_wr_locked);
- extern void untrack_pfn_moved(struct vm_area_struct *vma);
- #endif
- 
-diff --git a/mm/memory.c b/mm/memory.c
-index d6902065e558..5b11b50e2c4a 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -1613,7 +1613,7 @@ void unmap_page_range(struct mmu_gather *tlb,
- static void unmap_single_vma(struct mmu_gather *tlb,
- 		struct vm_area_struct *vma, unsigned long start_addr,
- 		unsigned long end_addr,
--		struct zap_details *details)
-+		struct zap_details *details, bool mm_wr_locked)
- {
- 	unsigned long start = max(vma->vm_start, start_addr);
- 	unsigned long end;
-@@ -1628,7 +1628,7 @@ static void unmap_single_vma(struct mmu_gather *tlb,
- 		uprobe_munmap(vma, start, end);
- 
- 	if (unlikely(vma->vm_flags & VM_PFNMAP))
--		untrack_pfn(vma, 0, 0);
-+		untrack_pfn(vma, 0, 0, mm_wr_locked);
- 
- 	if (start != end) {
- 		if (unlikely(is_vm_hugetlb_page(vma))) {
-@@ -1675,7 +1675,7 @@ static void unmap_single_vma(struct mmu_gather *tlb,
-  */
- void unmap_vmas(struct mmu_gather *tlb, struct maple_tree *mt,
- 		struct vm_area_struct *vma, unsigned long start_addr,
--		unsigned long end_addr)
-+		unsigned long end_addr, bool mm_wr_locked)
- {
- 	struct mmu_notifier_range range;
- 	struct zap_details details = {
-@@ -1689,7 +1689,8 @@ void unmap_vmas(struct mmu_gather *tlb, struct maple_tree *mt,
- 				start_addr, end_addr);
- 	mmu_notifier_invalidate_range_start(&range);
- 	do {
--		unmap_single_vma(tlb, vma, start_addr, end_addr, &details);
-+		unmap_single_vma(tlb, vma, start_addr, end_addr, &details,
-+				 mm_wr_locked);
- 	} while ((vma = mas_find(&mas, end_addr - 1)) != NULL);
- 	mmu_notifier_invalidate_range_end(&range);
- }
-@@ -1723,7 +1724,7 @@ void zap_page_range_single(struct vm_area_struct *vma, unsigned long address,
- 	 * unmap 'address-end' not 'range.start-range.end' as range
- 	 * could have been expanded for hugetlb pmd sharing.
- 	 */
--	unmap_single_vma(&tlb, vma, address, end, details);
-+	unmap_single_vma(&tlb, vma, address, end, details, false);
- 	mmu_notifier_invalidate_range_end(&range);
- 	tlb_finish_mmu(&tlb);
- }
-@@ -2492,7 +2493,7 @@ int remap_pfn_range(struct vm_area_struct *vma, unsigned long addr,
- 
- 	err = remap_pfn_range_notrack(vma, addr, pfn, size, prot);
- 	if (err)
--		untrack_pfn(vma, pfn, PAGE_ALIGN(size));
-+		untrack_pfn(vma, pfn, PAGE_ALIGN(size), true);
- 	return err;
- }
- EXPORT_SYMBOL(remap_pfn_range);
-diff --git a/mm/memremap.c b/mm/memremap.c
-index 08cbf54fe037..2f88f43d4a01 100644
---- a/mm/memremap.c
-+++ b/mm/memremap.c
-@@ -129,7 +129,7 @@ static void pageunmap_range(struct dev_pagemap *pgmap, int range_id)
- 	}
- 	mem_hotplug_done();
- 
--	untrack_pfn(NULL, PHYS_PFN(range->start), range_len(range));
-+	untrack_pfn(NULL, PHYS_PFN(range->start), range_len(range), true);
- 	pgmap_array_delete(range);
- }
- 
-@@ -276,7 +276,7 @@ static int pagemap_range(struct dev_pagemap *pgmap, struct mhp_params *params,
- 	if (!is_private)
- 		kasan_remove_zero_shadow(__va(range->start), range_len(range));
- err_kasan:
--	untrack_pfn(NULL, PHYS_PFN(range->start), range_len(range));
-+	untrack_pfn(NULL, PHYS_PFN(range->start), range_len(range), true);
- err_pfn_remap:
- 	pgmap_array_delete(range);
- 	return error;
-diff --git a/mm/mmap.c b/mm/mmap.c
-index 2c6e9072e6a8..69d440997648 100644
---- a/mm/mmap.c
-+++ b/mm/mmap.c
-@@ -78,7 +78,7 @@ core_param(ignore_rlimit_data, ignore_rlimit_data, bool, 0644);
- static void unmap_region(struct mm_struct *mm, struct maple_tree *mt,
- 		struct vm_area_struct *vma, struct vm_area_struct *prev,
- 		struct vm_area_struct *next, unsigned long start,
--		unsigned long end);
-+		unsigned long end, bool mm_wr_locked);
- 
- static pgprot_t vm_pgprot_modify(pgprot_t oldprot, unsigned long vm_flags)
- {
-@@ -2136,14 +2136,14 @@ static inline void remove_mt(struct mm_struct *mm, struct ma_state *mas)
- static void unmap_region(struct mm_struct *mm, struct maple_tree *mt,
- 		struct vm_area_struct *vma, struct vm_area_struct *prev,
- 		struct vm_area_struct *next,
--		unsigned long start, unsigned long end)
-+		unsigned long start, unsigned long end, bool mm_wr_locked)
- {
- 	struct mmu_gather tlb;
- 
- 	lru_add_drain();
- 	tlb_gather_mmu(&tlb, mm);
- 	update_hiwater_rss(mm);
--	unmap_vmas(&tlb, mt, vma, start, end);
-+	unmap_vmas(&tlb, mt, vma, start, end, mm_wr_locked);
- 	free_pgtables(&tlb, mt, vma, prev ? prev->vm_end : FIRST_USER_ADDRESS,
- 				 next ? next->vm_start : USER_PGTABLES_CEILING);
- 	tlb_finish_mmu(&tlb);
-@@ -2391,7 +2391,11 @@ do_vmi_align_munmap(struct vma_iterator *vmi, struct vm_area_struct *vma,
- 			mmap_write_downgrade(mm);
- 	}
- 
--	unmap_region(mm, &mt_detach, vma, prev, next, start, end);
-+	/*
-+	 * We can free page tables without write-locking mmap_lock because VMAs
-+	 * were isolated before we downgraded mmap_lock.
-+	 */
-+	unmap_region(mm, &mt_detach, vma, prev, next, start, end, !downgrade);
- 	/* Statistics and freeing VMAs */
- 	mas_set(&mas_detach, start);
- 	remove_mt(mm, &mas_detach);
-@@ -2704,7 +2708,7 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
- 
- 		/* Undo any partial mapping done by a device driver. */
- 		unmap_region(mm, &mm->mm_mt, vma, prev, next, vma->vm_start,
--			     vma->vm_end);
-+			     vma->vm_end, true);
- 	}
- 	if (file && (vm_flags & VM_SHARED))
- 		mapping_unmap_writable(file->f_mapping);
-@@ -3031,7 +3035,7 @@ void exit_mmap(struct mm_struct *mm)
- 	tlb_gather_mmu_fullmm(&tlb, mm);
- 	/* update_hiwater_rss(mm) here? but nobody should be looking */
- 	/* Use ULONG_MAX here to ensure all VMAs in the mm are unmapped */
--	unmap_vmas(&tlb, &mm->mm_mt, vma, 0, ULONG_MAX);
-+	unmap_vmas(&tlb, &mm->mm_mt, vma, 0, ULONG_MAX, false);
- 	mmap_read_unlock(mm);
- 
- 	/*
--- 
-2.39.1
-
+We have __private and ACCESS_PRIVATE() to help with enforcing this.
 
