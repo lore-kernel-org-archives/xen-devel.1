@@ -4,35 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296CCC05027
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 17:25:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.485159.752165 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D87EC54E94
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 17:31:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.485150.752175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pL5zh-0007e5-Qw; Thu, 26 Jan 2023 17:25:01 +0000
+	id 1pL665-0000t4-LP; Thu, 26 Jan 2023 17:31:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 485159.752165; Thu, 26 Jan 2023 17:25:01 +0000
+Received: by outflank-mailman (output) from mailman id 485150.752175; Thu, 26 Jan 2023 17:31:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pL5zh-0007dw-MV; Thu, 26 Jan 2023 17:25:01 +0000
-Received: by outflank-mailman (input) for mailman id 485159;
- Thu, 26 Jan 2023 17:25:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pL665-0000sx-HP; Thu, 26 Jan 2023 17:31:37 +0000
+Received: by outflank-mailman (input) for mailman id 485150;
+ Thu, 26 Jan 2023 17:07:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=b5Fb=5X=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-se1.protection.inumbo.net>)
- id 1pL5zf-0007do-TN
- for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 17:25:00 +0000
-Received: from rs227.mailgun.us (rs227.mailgun.us [209.61.151.227])
- by se1-gles-sth1.inumbo.com (Halon) with UTF8SMTPS
- id 5a9123ef-9d9e-11ed-a5d9-ddcf98b90cbd;
- Thu, 26 Jan 2023 18:24:57 +0100 (CET)
-Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com
- [209.85.219.181]) by
- 8b0d0d3a25e8 with SMTP id 63d2b76782f0767c3ece081d (version=TLS1.3,
- cipher=TLS_AES_128_GCM_SHA256); Thu, 26 Jan 2023 17:24:55 GMT
-Received: by mail-yb1-f181.google.com with SMTP id e15so2827103ybn.10
- for <xen-devel@lists.xenproject.org>; Thu, 26 Jan 2023 09:24:55 -0800 (PST)
+ <SRS0=KraK=5X=collabora.com=sebastian.reichel@srs-se1.protection.inumbo.net>)
+ id 1pL5iz-00055K-Gf
+ for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 17:07:45 +0000
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f1989b4a-9d9b-11ed-b8d1-410ff93cb8f0;
+ Thu, 26 Jan 2023 18:07:42 +0100 (CET)
+Received: from mercury (dyndsl-037-138-191-219.ewe-ip-backbone.de
+ [37.138.191.219])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: sre)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 7FE346602E7E;
+ Thu, 26 Jan 2023 17:07:41 +0000 (GMT)
+Received: by mercury (Postfix, from userid 1000)
+ id 8DAD710609C7; Thu, 26 Jan 2023 18:07:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,343 +46,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 5a9123ef-9d9e-11ed-a5d9-ddcf98b90cbd
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=tklengyel.com;
- q=dns/txt; s=mailo; t=1674753895; x=1674761095; h=Content-Type: Cc: To: To:
- Subject: Subject: Message-ID: Date: From: From: In-Reply-To: References:
- MIME-Version: Sender: Sender;
- bh=oWmW0uMkRjvQW4Jx9crNRfjROinoQ8/2XaMKFAATFnc=;
- b=IJb0E3a012sACQ9mtw29ajMWmEUEVZGZ3FkU0yeFXzbQDq32ylg8qX/MMw+wq/sx0g68YtF2JMVAWANfT78eZHYh0i+yBJPIkyRWGxgR+nlZatoqhvtoEX6Mm1uaslkMcixzKIOluuTUHk9LpWQ8x/T7EDgiRvsRS+OuiJd42G+nZLlkWsE5h3sySRLk2HujitBfL3WpaP7Plfjp9aWp2lShFthJUvrrv14pKQNe5q/ZjwXXPqWHzP/YXBB0yKubdtPFBp2n/JPE+N8+6d5Ioo3ul8Uqzic/NzLQTXiPCNmUPwaSRbWKIKZT/WUDQ+9TBL9vAbnDrK3/Zy6FTzvVmQ==
-X-Mailgun-Sending-Ip: 209.61.151.227
-X-Mailgun-Sid: WyIyYTNmOCIsInhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyIsImNkODQwIl0=
-Sender: tamas@tklengyel.com
-X-Gm-Message-State: AO0yUKUNhsNHp010vQgiNUV2MaKmHrUr/ac8nos9EGVHQkJNTFE3nNYS
-	ImsHd38G63eoQ33UQtxboK8qYRXljk2uL3Q2Kqw=
-X-Google-Smtp-Source: AK7set8rESRTIvWHaUTBKPZsAsAOp52Y+oMzYBVC/fYc8FMvr27JSWFt+lI0Kaln3nk0sMbr2WVHaoTdxflDxuYaNxg=
-X-Received: by 2002:a05:6902:1345:b0:80b:9496:2179 with SMTP id
- g5-20020a056902134500b0080b94962179mr993222ybu.31.1674753895273; Thu, 26 Jan
- 2023 09:24:55 -0800 (PST)
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: f1989b4a-9d9b-11ed-b8d1-410ff93cb8f0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1674752861;
+	bh=TJwB9xWefUtenAJhobcnuA3/dr44yh/1qZH05naV3dA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HIAeawkSMl4wLK9atphFO2PYIuQtn0mXWrQTGJkp27Vvwen4RmNJXIKy0KOcMN2qu
+	 MGji/BoqRh//5quIKkg+7Jg9a4rlT6zYnOxKnHRve8IRt32uZ0O2J9C6ByA7KSG9ni
+	 ooI+f+xDzdj/4Xv/XqAW1ZMOqMbxlnaE69Ns4AaVsCb09DHvVD+xjXrJ7HkcJ65ZDs
+	 0FKkR9qOOchTbFQKw+Lbe8GJsd/K96q/WWSPWtyPUY4G0yRJ/G34tsJUBI/vL5q95x
+	 a6dIJ/I/0Glk/75yhzfiBv6PLPN/HUTuWOcS4vpdAGRdicde5HTb77Vj3shLRE2rZN
+	 snAuQFm3yL5CQ==
+Date: Thu, 26 Jan 2023 18:07:39 +0100
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: akpm@linux-foundation.org, michel@lespinasse.org, jglisse@google.com,
+	mhocko@suse.com, vbabka@suse.cz, hannes@cmpxchg.org,
+	mgorman@techsingularity.net, dave@stgolabs.net, willy@infradead.org,
+	liam.howlett@oracle.com, peterz@infradead.org,
+	ldufour@linux.ibm.com, paulmck@kernel.org, luto@kernel.org,
+	songliubraving@fb.com, peterx@redhat.com, david@redhat.com,
+	dhowells@redhat.com, hughd@google.com, bigeasy@linutronix.de,
+	kent.overstreet@linux.dev, punit.agrawal@bytedance.com,
+	lstoakes@gmail.com, peterjung1337@gmail.com, rientjes@google.com,
+	axelrasmussen@google.com, joelaf@google.com, minchan@google.com,
+	jannh@google.com, shakeelb@google.com, tatashin@google.com,
+	edumazet@google.com, gthelen@google.com, gurua@google.com,
+	arjunroy@google.com, soheil@google.com, hughlynch@google.com,
+	leewalsh@google.com, posk@google.com, will@kernel.org,
+	aneesh.kumar@linux.ibm.com, npiggin@gmail.com,
+	chenhuacai@kernel.org, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, richard@nod.at,
+	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
+	qianweili@huawei.com, wangzhou1@hisilicon.com,
+	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org,
+	airlied@gmail.com, daniel@ffwll.ch,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	tzimmermann@suse.de, l.stach@pengutronix.de,
+	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com,
+	matthias.bgg@gmail.com, robdclark@gmail.com,
+	quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
+	tomba@kernel.org, hjc@rock-chips.com, heiko@sntech.de,
+	ray.huang@amd.com, kraxel@redhat.com, mcoquelin.stm32@gmail.com,
+	alexandre.torgue@foss.st.com, tfiga@chromium.org,
+	m.szyprowski@samsung.com, mchehab@kernel.org,
+	dimitri.sivanich@hpe.com, zhangfei.gao@linaro.org,
+	jejb@linux.ibm.com, martin.petersen@oracle.com,
+	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com,
+	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de,
+	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net,
+	xiang@kernel.org, chao@kernel.org, tytso@mit.edu,
+	adilger.kernel@dilger.ca, miklos@szeredi.hu,
+	mike.kravetz@oracle.com, muchun.song@linux.dev, bhe@redhat.com,
+	andrii@kernel.org, yoshfuji@linux-ipv6.org, dsahern@kernel.org,
+	kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, tiwai@suse.com,
+	haojian.zhuang@gmail.com, robert.jarzmik@free.fr,
+	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
+	linuxppc-dev@lists.ozlabs.org, x86@kernel.org,
+	linux-kernel@vger.kernel.org, linux-graphics-maintainer@vmware.com,
+	linux-ia64@vger.kernel.org, linux-arch@vger.kernel.org,
+	loongarch@lists.linux.dev, kvm@vger.kernel.org,
+	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org,
+	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org,
+	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev,
+	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
+	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org,
+	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
+	target-devel@vger.kernel.org, linux-usb@vger.kernel.org,
+	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org,
+	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+	devel@lists.orangefs.org, kexec@lists.infradead.org,
+	linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
+	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com,
+	selinux@vger.kernel.org, alsa-devel@alsa-project.org,
+	kernel-team@android.com
+Subject: Re: [PATCH v2 3/6] mm: replace vma->vm_flags direct modifications
+ with modifier calls
+Message-ID: <20230126170739.mlka2jivn3mfstyf@mercury.elektranox.org>
+References: <20230125083851.27759-1-surenb@google.com>
+ <20230125083851.27759-4-surenb@google.com>
 MIME-Version: 1.0
-References: <33cd2aba-73fc-6dfe-d0f2-f41883e7cdfa@suse.com>
- <dad36e4c-4529-6836-c50e-7c5febb8eea4@suse.com> <CABfawhmTe3Rxwo54gR5-4KGv=K0Ai7o9g6i=1nkb=XdES1CrcQ@mail.gmail.com>
- <a92b9714-5e29-146f-3b68-b44692c56de1@suse.com> <CABfawhkiaheQPJhtG7fupHcbfYPUy+BJgvbVoQ+FJUnev5bowQ@mail.gmail.com>
- <6099e6fb-0a3e-c6da-2766-d61c2c3d1e96@suse.com> <CABfawh=1XUWbeRJJZQsYVLyZX-Ez8=D2YYCgBYvDGQemHeJkzA@mail.gmail.com>
- <cfffcf15-c2fa-6529-d1ff-a71a7571bfe2@suse.com> <CABfawhm_b=MskQN_zZsuKz0FDtZzZNvBMa8bXtxxUZU9rXbUCA@mail.gmail.com>
- <151a70b0-fcb6-9b0f-7834-d2cc15b5d9b0@suse.com>
-In-Reply-To: <151a70b0-fcb6-9b0f-7834-d2cc15b5d9b0@suse.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Thu, 26 Jan 2023 12:24:18 -0500
-X-Gmail-Original-Message-ID: <CABfawh=Q7b9NVEn7YXZ3Bgu+N1tY4_o-_HqhbVH0tn5GjXVpew@mail.gmail.com>
-Message-ID: <CABfawh=Q7b9NVEn7YXZ3Bgu+N1tY4_o-_HqhbVH0tn5GjXVpew@mail.gmail.com>
-Subject: Re: [PATCH v2 4/8] x86/mem-sharing: copy GADDR based shared guest areas
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: multipart/alternative; boundary="000000000000039b2705f32e07cd"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="qcyccrleajamxo75"
+Content-Disposition: inline
+In-Reply-To: <20230125083851.27759-4-surenb@google.com>
 
---000000000000039b2705f32e07cd
-Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jan 26, 2023 at 11:48 AM Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 26.01.2023 16:41, Tamas K Lengyel wrote:
-> > On Thu, Jan 26, 2023 at 3:14 AM Jan Beulich <jbeulich@suse.com> wrote:
-> >>
-> >> On 25.01.2023 16:34, Tamas K Lengyel wrote:
-> >>> On Tue, Jan 24, 2023 at 6:19 AM Jan Beulich <jbeulich@suse.com> wrote:
-> >>>>
-> >>>> On 23.01.2023 19:32, Tamas K Lengyel wrote:
-> >>>>> On Mon, Jan 23, 2023 at 11:24 AM Jan Beulich <jbeulich@suse.com>
-> > wrote:
-> >>>>>> On 23.01.2023 17:09, Tamas K Lengyel wrote:
-> >>>>>>> On Mon, Jan 23, 2023 at 9:55 AM Jan Beulich <jbeulich@suse.com>
-> > wrote:
-> >>>>>>>> --- a/xen/arch/x86/mm/mem_sharing.c
-> >>>>>>>> +++ b/xen/arch/x86/mm/mem_sharing.c
-> >>>>>>>> @@ -1653,6 +1653,65 @@ static void copy_vcpu_nonreg_state(struc
-> >>>>>>>>      hvm_set_nonreg_state(cd_vcpu, &nrs);
-> >>>>>>>>  }
-> >>>>>>>>
-> >>>>>>>> +static int copy_guest_area(struct guest_area *cd_area,
-> >>>>>>>> +                           const struct guest_area *d_area,
-> >>>>>>>> +                           struct vcpu *cd_vcpu,
-> >>>>>>>> +                           const struct domain *d)
-> >>>>>>>> +{
-> >>>>>>>> +    mfn_t d_mfn, cd_mfn;
-> >>>>>>>> +
-> >>>>>>>> +    if ( !d_area->pg )
-> >>>>>>>> +        return 0;
-> >>>>>>>> +
-> >>>>>>>> +    d_mfn = page_to_mfn(d_area->pg);
-> >>>>>>>> +
-> >>>>>>>> +    /* Allocate & map a page for the area if it hasn't been
-> > already.
-> >>>>> */
-> >>>>>>>> +    if ( !cd_area->pg )
-> >>>>>>>> +    {
-> >>>>>>>> +        gfn_t gfn = mfn_to_gfn(d, d_mfn);
-> >>>>>>>> +        struct p2m_domain *p2m =
-p2m_get_hostp2m(cd_vcpu->domain);
-> >>>>>>>> +        p2m_type_t p2mt;
-> >>>>>>>> +        p2m_access_t p2ma;
-> >>>>>>>> +        unsigned int offset;
-> >>>>>>>> +        int ret;
-> >>>>>>>> +
-> >>>>>>>> +        cd_mfn = p2m->get_entry(p2m, gfn, &p2mt, &p2ma, 0, NULL,
-> >>>>> NULL);
-> >>>>>>>> +        if ( mfn_eq(cd_mfn, INVALID_MFN) )
-> >>>>>>>> +        {
-> >>>>>>>> +            struct page_info *pg =
-> >>> alloc_domheap_page(cd_vcpu->domain,
-> >>>>>>> 0);
-> >>>>>>>> +
-> >>>>>>>> +            if ( !pg )
-> >>>>>>>> +                return -ENOMEM;
-> >>>>>>>> +
-> >>>>>>>> +            cd_mfn = page_to_mfn(pg);
-> >>>>>>>> +            set_gpfn_from_mfn(mfn_x(cd_mfn), gfn_x(gfn));
-> >>>>>>>> +
-> >>>>>>>> +            ret = p2m->set_entry(p2m, gfn, cd_mfn,
-PAGE_ORDER_4K,
-> >>>>>>> p2m_ram_rw,
-> >>>>>>>> +                                 p2m->default_access, -1);
-> >>>>>>>> +            if ( ret )
-> >>>>>>>> +                return ret;
-> >>>>>>>> +        }
-> >>>>>>>> +        else if ( p2mt != p2m_ram_rw )
-> >>>>>>>> +            return -EBUSY;
-> >>>>>>>> +
-> >>>>>>>> +        /*
-> >>>>>>>> +         * Simply specify the entire range up to the end of the
-> >>> page.
-> >>>>>>> All the
-> >>>>>>>> +         * function uses it for is a check for not crossing page
-> >>>>>>> boundaries.
-> >>>>>>>> +         */
-> >>>>>>>> +        offset = PAGE_OFFSET(d_area->map);
-> >>>>>>>> +        ret = map_guest_area(cd_vcpu, gfn_to_gaddr(gfn) +
-offset,
-> >>>>>>>> +                             PAGE_SIZE - offset, cd_area, NULL);
-> >>>>>>>> +        if ( ret )
-> >>>>>>>> +            return ret;
-> >>>>>>>> +    }
-> >>>>>>>> +    else
-> >>>>>>>> +        cd_mfn = page_to_mfn(cd_area->pg);
-> >>>>>>>
-> >>>>>>> Everything to this point seems to be non mem-sharing/forking
-> > related.
-> >>>>> Could
-> >>>>>>> these live somewhere else? There must be some other place where
-> >>>>> allocating
-> >>>>>>> these areas happens already for non-fork VMs so it would make
-sense
-> > to
-> >>>>> just
-> >>>>>>> refactor that code to be callable from here.
-> >>>>>>
-> >>>>>> It is the "copy" aspect with makes this mem-sharing (or really
-fork)
-> >>>>>> specific. Plus in the end this is no different from what you have
-> >>>>>> there right now for copying the vCPU info area. In the final patch
-> >>>>>> that other code gets removed by re-using the code here.
-> >>>>>
-> >>>>> Yes, the copy part is fork-specific. Arguably if there was a way to
-do
-> >>> the
-> >>>>> allocation of the page for vcpu_info I would prefer that being
-> >>> elsewhere,
-> >>>>> but while the only requirement is allocate-page and copy from parent
-> >>> I'm OK
-> >>>>> with that logic being in here because it's really straight forward.
-> > But
-> >>> now
-> >>>>> you also do extra sanity checks here which are harder to comprehend
-in
-> >>> this
-> >>>>> context alone.
-> >>>>
-> >>>> What sanity checks are you talking about (also below, where you claim
-> >>>> map_guest_area() would be used only to sanity check)?
-> >>>
-> >>> Did I misread your comment above "All the function uses it for is a
-> > check
-> >>> for not crossing page boundaries"? That sounds to me like a simple
-> > sanity
-> >>> check, unclear why it matters though and why only for forks.
-> >>
-> >> The comment is about the function's use of the range it is being
-passed.
-> >> It doesn't say in any way that the function is doing only sanity
-checking.
-> >> If the comment wording is ambiguous or unclear, I'm happy to take
-> >> improvement suggestions.
-> >
-> > Yes, please do, it definitely was confusing while reviewing the patch.
->
-> I'm sorry, but what does "please do" mean when I asked for improvement
-> suggestions? I continue to think the comment is quite clear as is, so
-> if anything needs adjusting, I'd need to know pretty precisely what it
-> is that needs adding and/or re-writing. I can't, after all, guess what
-> your misunderstanding resulted from.
-
-I meant please do add the extra information you just spelled out in your
-previous email. "Map the page into the guest. We pass the entire range to
-map_guest_area so that it can check that no cross-page mapping is taking
-place (in which case it will fail). If no such issue is present the page is
-being mapped and made accessible to the guest."
-
-If that's not what the function is doing, please explain clearly what it
-will do.
-
-Tamas
-
---000000000000039b2705f32e07cd
-Content-Type: text/html; charset="UTF-8"
+--qcyccrleajamxo75
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><br><br>On Thu, Jan 26, 2023 at 11:48 AM Jan Beulich &lt;<=
-a href=3D"mailto:jbeulich@suse.com">jbeulich@suse.com</a>&gt; wrote:<br>&gt=
-;<br>&gt; On 26.01.2023 16:41, Tamas K Lengyel wrote:<br>&gt; &gt; On Thu, =
-Jan 26, 2023 at 3:14 AM Jan Beulich &lt;<a href=3D"mailto:jbeulich@suse.com=
-">jbeulich@suse.com</a>&gt; wrote:<br>&gt; &gt;&gt;<br>&gt; &gt;&gt; On 25.=
-01.2023 16:34, Tamas K Lengyel wrote:<br>&gt; &gt;&gt;&gt; On Tue, Jan 24, =
-2023 at 6:19 AM Jan Beulich &lt;<a href=3D"mailto:jbeulich@suse.com">jbeuli=
-ch@suse.com</a>&gt; wrote:<br>&gt; &gt;&gt;&gt;&gt;<br>&gt; &gt;&gt;&gt;&gt=
-; On 23.01.2023 19:32, Tamas K Lengyel wrote:<br>&gt; &gt;&gt;&gt;&gt;&gt; =
-On Mon, Jan 23, 2023 at 11:24 AM Jan Beulich &lt;<a href=3D"mailto:jbeulich=
-@suse.com">jbeulich@suse.com</a>&gt;<br>&gt; &gt; wrote:<br>&gt; &gt;&gt;&g=
-t;&gt;&gt;&gt; On 23.01.2023 17:09, Tamas K Lengyel wrote:<br>&gt; &gt;&gt;=
-&gt;&gt;&gt;&gt;&gt; On Mon, Jan 23, 2023 at 9:55 AM Jan Beulich &lt;<a hre=
-f=3D"mailto:jbeulich@suse.com">jbeulich@suse.com</a>&gt;<br>&gt; &gt; wrote=
-:<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; --- a/xen/arch/x86/mm/mem_sharin=
-g.c<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +++ b/xen/arch/x86/mm/mem_shar=
-ing.c<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; @@ -1653,6 +1653,65 @@ stati=
-c void copy_vcpu_nonreg_state(struc<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt=
-; =C2=A0 =C2=A0 =C2=A0hvm_set_nonreg_state(cd_vcpu, &amp;nrs);<br>&gt; &gt;=
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; =C2=A0}<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&g=
-t;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +static int copy_guest_area(str=
-uct guest_area *cd_area,<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 const struct guest_area *d_area,<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt=
-;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct vcpu *cd_vcpu,<br>&gt; &gt;&gt;&gt;&gt;&=
-gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const struct domain *d)<br>&gt; &gt;&gt;=
-&gt;&gt;&gt;&gt;&gt;&gt; +{<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0mfn_t d_mfn, cd_mfn;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<b=
-r>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0if ( !d_area-&gt;pg =
-)<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=
-urn 0;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&=
-gt;&gt;&gt;&gt; + =C2=A0 =C2=A0d_mfn =3D page_to_mfn(d_area-&gt;pg);<br>&gt=
-; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&g=
-t; + =C2=A0 =C2=A0/* Allocate &amp; map a page for the area if it hasn&#39;=
-t been<br>&gt; &gt; already.<br>&gt; &gt;&gt;&gt;&gt;&gt; */<br>&gt; &gt;&g=
-t;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0if ( !cd_area-&gt;pg )<br>&gt; &g=
-t;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0{<br>&gt; &gt;&gt;&gt;&gt;&gt=
-;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0gfn_t gfn =3D mfn_to_gfn(d, d_mf=
-n);<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0s=
-truct p2m_domain *p2m =3D p2m_get_hostp2m(cd_vcpu-&gt;domain);<br>&gt; &gt;=
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0p2m_type_t p2mt;<=
-br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0p2m_a=
-ccess_t p2ma;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0unsigned int offset;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0int ret;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt=
-; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0c=
-d_mfn =3D p2m-&gt;get_entry(p2m, gfn, &amp;p2mt, &amp;p2ma, 0, NULL,<br>&gt=
-; &gt;&gt;&gt;&gt;&gt; NULL);<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0if ( mfn_eq(cd_mfn, INVALID_MFN) )<br>&gt; &gt;&=
-gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0{<br>&gt; &gt;&gt;=
-&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0struct =
-page_info *pg =3D<br>&gt; &gt;&gt;&gt; alloc_domheap_page(cd_vcpu-&gt;domai=
-n,<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt; 0);<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt=
-;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0if ( !pg )<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -ENOMEM;<br>&=
-gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;=
-&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cd_mfn =3D page_to_mfn(pg);=
-<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0set_gpfn_from_mfn(mfn_x(cd_mfn), gfn_x(gfn));<br>&gt; &gt;&gt;&gt=
-;&gt;&gt;&gt;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D p2m-&gt;set_entry(p2m, gfn, cd_mf=
-n, PAGE_ORDER_4K,<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt; p2m_ram_rw,<br>&gt; =
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 p=
-2m-&gt;default_access, -1);<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ( ret )<br>&gt; &gt;&gt;&gt;&gt;&g=
-t;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret=
-urn ret;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0}<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0else if ( p2mt !=3D p2m_ram_rw )<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt=
-; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -EBUSY;<br>&gt; &gt;&gt=
-;&gt;&gt;&gt;&gt;&gt;&gt; +<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0/*<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 * Simply specify the entire range up to the end of=
- the<br>&gt; &gt;&gt;&gt; page.<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt; All th=
-e<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 * =
-function uses it for is a check for not crossing page<br>&gt; &gt;&gt;&gt;&=
-gt;&gt;&gt;&gt; boundaries.<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 */<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0offset =3D PAGE_OFFSET(d_area-&gt;map);<br>&gt; &gt=
-;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D map_gues=
-t_area(cd_vcpu, gfn_to_gaddr(gfn) + offset,<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt=
-;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 PAGE_SIZE - offset, cd_area, NULL);<br>&=
-gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0if ( ret =
-)<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0return ret;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =
-=C2=A0}<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0else<br>&gt=
-; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0cd_mfn =3D =
-page_to_mfn(cd_area-&gt;pg);<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>&gt; &=
-gt;&gt;&gt;&gt;&gt;&gt;&gt; Everything to this point seems to be non mem-sh=
-aring/forking<br>&gt; &gt; related.<br>&gt; &gt;&gt;&gt;&gt;&gt; Could<br>&=
-gt; &gt;&gt;&gt;&gt;&gt;&gt;&gt; these live somewhere else? There must be s=
-ome other place where<br>&gt; &gt;&gt;&gt;&gt;&gt; allocating<br>&gt; &gt;&=
-gt;&gt;&gt;&gt;&gt;&gt; these areas happens already for non-fork VMs so it =
-would make sense<br>&gt; &gt; to<br>&gt; &gt;&gt;&gt;&gt;&gt; just<br>&gt; =
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; refactor that code to be callable from here.<b=
-r>&gt; &gt;&gt;&gt;&gt;&gt;&gt;<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt; It is the =
-&quot;copy&quot; aspect with makes this mem-sharing (or really fork)<br>&gt=
-; &gt;&gt;&gt;&gt;&gt;&gt; specific. Plus in the end this is no different f=
-rom what you have<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt; there right now for copy=
-ing the vCPU info area. In the final patch<br>&gt; &gt;&gt;&gt;&gt;&gt;&gt;=
- that other code gets removed by re-using the code here.<br>&gt; &gt;&gt;&g=
-t;&gt;&gt;<br>&gt; &gt;&gt;&gt;&gt;&gt; Yes, the copy part is fork-specific=
-. Arguably if there was a way to do<br>&gt; &gt;&gt;&gt; the<br>&gt; &gt;&g=
-t;&gt;&gt;&gt; allocation of the page for vcpu_info I would prefer that bei=
-ng<br>&gt; &gt;&gt;&gt; elsewhere,<br>&gt; &gt;&gt;&gt;&gt;&gt; but while t=
-he only requirement is allocate-page and copy from parent<br>&gt; &gt;&gt;&=
-gt; I&#39;m OK<br>&gt; &gt;&gt;&gt;&gt;&gt; with that logic being in here b=
-ecause it&#39;s really straight forward.<br>&gt; &gt; But<br>&gt; &gt;&gt;&=
-gt; now<br>&gt; &gt;&gt;&gt;&gt;&gt; you also do extra sanity checks here w=
-hich are harder to comprehend in<br>&gt; &gt;&gt;&gt; this<br>&gt; &gt;&gt;=
-&gt;&gt;&gt; context alone.<br>&gt; &gt;&gt;&gt;&gt;<br>&gt; &gt;&gt;&gt;&g=
-t; What sanity checks are you talking about (also below, where you claim<br=
->&gt; &gt;&gt;&gt;&gt; map_guest_area() would be used only to sanity check)=
-?<br>&gt; &gt;&gt;&gt;<br>&gt; &gt;&gt;&gt; Did I misread your comment abov=
-e &quot;All the function uses it for is a<br>&gt; &gt; check<br>&gt; &gt;&g=
-t;&gt; for not crossing page boundaries&quot;? That sounds to me like a sim=
-ple<br>&gt; &gt; sanity<br>&gt; &gt;&gt;&gt; check, unclear why it matters =
-though and why only for forks.<br>&gt; &gt;&gt;<br>&gt; &gt;&gt; The commen=
-t is about the function&#39;s use of the range it is being passed.<br>&gt; =
-&gt;&gt; It doesn&#39;t say in any way that the function is doing only sani=
-ty checking.<br>&gt; &gt;&gt; If the comment wording is ambiguous or unclea=
-r, I&#39;m happy to take<br>&gt; &gt;&gt; improvement suggestions.<br>&gt; =
-&gt;<br>&gt; &gt; Yes, please do, it definitely was confusing while reviewi=
-ng the patch.<br>&gt;<br>&gt; I&#39;m sorry, but what does &quot;please do&=
-quot; mean when I asked for improvement<br>&gt; suggestions? I continue to =
-think the comment is quite clear as is, so<br>&gt; if anything needs adjust=
-ing, I&#39;d need to know pretty precisely what it<br>&gt; is that needs ad=
-ding and/or re-writing. I can&#39;t, after all, guess what<br>&gt; your mis=
-understanding resulted from.<br><div><br></div><div>I meant please do add t=
-he extra information you just spelled out in your previous email. &quot;Map=
- the page into the guest. We pass the entire range to=20
-map_guest_area so that it can check that no cross-page mapping is taking pl=
-ace (in which case it will fail). If no such issue is present the page is b=
-eing mapped and made accessible to the guest.&quot;<br></div><div><br></div=
-><div>If that&#39;s not what the function is doing, please explain clearly =
-what it will do.<br></div><div><br></div><div>Tamas<br></div></div>
+Hi,
 
---000000000000039b2705f32e07cd--
+On Wed, Jan 25, 2023 at 12:38:48AM -0800, Suren Baghdasaryan wrote:
+> Replace direct modifications to vma->vm_flags with calls to modifier
+> functions to be able to track flag changes and to keep vma locking
+> correctness.
+>=20
+> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> ---
+> [...]
+>  drivers/hsi/clients/cmt_speech.c                   |  2 +-
+>  120 files changed, 188 insertions(+), 199 deletions(-)
+> [...]
+> diff --git a/drivers/hsi/clients/cmt_speech.c b/drivers/hsi/clients/cmt_s=
+peech.c
+> index 8069f795c864..952a31e742a1 100644
+> --- a/drivers/hsi/clients/cmt_speech.c
+> +++ b/drivers/hsi/clients/cmt_speech.c
+> @@ -1264,7 +1264,7 @@ static int cs_char_mmap(struct file *file, struct v=
+m_area_struct *vma)
+>  	if (vma_pages(vma) !=3D 1)
+>  		return -EINVAL;
+> =20
+> -	vma->vm_flags |=3D VM_IO | VM_DONTDUMP | VM_DONTEXPAND;
+> +	set_vm_flags(vma, VM_IO | VM_DONTDUMP | VM_DONTEXPAND);
+>  	vma->vm_ops =3D &cs_char_vm_ops;
+>  	vma->vm_private_data =3D file->private_data;
+> =20
+
+Acked-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+
+-- Sebastian
+
+--qcyccrleajamxo75
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmPSs1EACgkQ2O7X88g7
++pquLBAAkw9lw9lxNRCI6jvqLy98JsUBgSQigNB6Eh8JVWsySHMm1OszFCcvTpoc
+vinC/VPMOa6JwEw5e9naXRF2UJahO+Cx+e5MYIKos3QyIUPfi0YM7Cv96h6+c4l/
+NdcxLS8+9ElitTuA47UVgPSeZwzdZ1kU5VUV1X2fx+6aGA+dBfWVBgWDqU6AB0Sa
+ehU4betso5Ypl26YEmLPHmY+8Xx2jXNwwBEgsHgO2/YjRn9YPDeMAqb4lWs99h0d
+nUV1VqwTClRrExtNDvidHryknmyCIBpYt38gn0i9+uIf9mFoBmUDN+/zAdRguGBT
+r1CQAwvRvHmEyGJ4dp1nijyt/PWxDBlCWytlmzXrK/rkeH8sQCRdCr9L83/d5DM0
+iU98ehmbH9kx8rD4y0L91xmsnegNYNKSfAvz3EP4KYFOHjTw2SOCYoazPu3z62bN
+d3HL+08LeZpm1XwVPydZqBd5UpBK8NaQYCJ3BjsLUefsSJE+SWzsnoYFnbUrL1X9
+1XfU6LGtVvjCPUsjk7oqh5PjtRGQsdtUhSZJLwNzTeh4I0nSzL1pj8vRFZ7UTcV4
+RmFYsjBbKhja2fC13eM4tKzfx53harnHVNuUPw2aoLKshpkQaOTUqWBnRXtbJZkb
+dSRKObxfPlHVI+awnfN6owpXF86Owew2+XJcXILOPxaBk8PI/Ns=
+=/0TB
+-----END PGP SIGNATURE-----
+
+--qcyccrleajamxo75--
 
