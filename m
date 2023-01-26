@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6A3C05027
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B66C54E94
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 03:34:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484687.751403 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.484689.751423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKt1h-0008Fr-Jn; Thu, 26 Jan 2023 03:34:13 +0000
+	id 1pKt1s-0000N8-5b; Thu, 26 Jan 2023 03:34:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484687.751403; Thu, 26 Jan 2023 03:34:13 +0000
+Received: by outflank-mailman (output) from mailman id 484689.751423; Thu, 26 Jan 2023 03:34:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKt1h-0008Fk-Gj; Thu, 26 Jan 2023 03:34:13 +0000
-Received: by outflank-mailman (input) for mailman id 484687;
- Thu, 26 Jan 2023 03:34:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pKt1s-0000N1-2J; Thu, 26 Jan 2023 03:34:24 +0000
+Received: by outflank-mailman (input) for mailman id 484689;
+ Thu, 26 Jan 2023 03:34:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Q4q1=5X=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pKt1f-0008Fc-UT
- for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 03:34:12 +0000
+ id 1pKt1r-0000Lj-60
+ for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 03:34:23 +0000
 Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
- [66.111.4.27]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 49431b6c-9d2a-11ed-b8d1-410ff93cb8f0;
- Thu, 26 Jan 2023 04:34:07 +0100 (CET)
+ [66.111.4.27]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4fe5c3ad-9d2a-11ed-91b6-6bf2151ebd3b;
+ Thu, 26 Jan 2023 04:34:20 +0100 (CET)
 Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id D81D35C05B2;
- Wed, 25 Jan 2023 22:34:05 -0500 (EST)
+ by mailout.nyi.internal (Postfix) with ESMTP id 2472C5C05B7;
+ Wed, 25 Jan 2023 22:34:17 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Wed, 25 Jan 2023 22:34:05 -0500
+ by compute6.internal (MEProxy); Wed, 25 Jan 2023 22:34:17 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 25 Jan 2023 22:34:04 -0500 (EST)
+ 25 Jan 2023 22:34:16 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,104 +45,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 49431b6c-9d2a-11ed-b8d1-410ff93cb8f0
+X-Inumbo-ID: 4fe5c3ad-9d2a-11ed-91b6-6bf2151ebd3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1674704045; x=1674790445; bh=3zrqCCWozEhlE3QduurTIaTnuK8HrtZwnOI
-	/8OAKWhk=; b=itbOC/cn4y/B40q8XnHC36ZK342HhUiZQWzWRilS+UaShH1NhZp
-	1PIxe43uByehOYWScDldnSB68SutvMRyXl/4yQ7STcrYFsYiZxDIdibVrkfQd59y
-	smuG5Op6lc6AP91KJTBaEkXF4J+7yg3MUFiilIMxFP0EiZxs/I016ZoFZFI2tBci
-	9w7zB9ntKgF7oe9mhUDMTKz2pnLewxPQUN2Izy4WUrdvWwVGWHskqPXAtNoOiop+
-	XDLHC8lPhPgqa6XJ8JtDKVoBXB5MRkNV9+BowGxC0SWn5O9gr1KxGin24Vs8sqN+
-	1bBzr/xYHNkhKOCWtfqrdtjly7Jh0E7AK8w==
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
+	1674704057; x=1674790457; bh=fly1TGtjPYQFqq0ZAbmMb6xmSvsz35BqaEQ
+	byQNg2OA=; b=D1MtYf7memgXbJNrc512Gsyf7cLrgjr6PQo/+5SRDUNVexrSxSC
+	Jkb5mc4UepBZHaS+WfVmJOPzRnlte6IdRUwS2LchBnaoWtesjoO1buvJGixk1ZWt
+	W2JlzBei3s3Q+yUEq/btspULrZTxS5BYxXousMYLYeRrAQ8Vz/bDNL7SjKPt/1HO
+	V+D/T8GldIOZR/fE2l3RLQw7uXqbjeBid6SdZxtWQPQmjG+VNO/1ntp5kbEu7oFI
+	lnzGP/sb+Mtlukny0sQD11buwfGcg/H2paeQWwfapygyZ1QbCpdMapdr3yZZzAOu
+	2nJkuttV4wyUT8tSgLLiVazf/HXYBehvrdg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1674704045; x=1674790445; bh=3zrqCCWozEhlE
-	3QduurTIaTnuK8HrtZwnOI/8OAKWhk=; b=oxKex1i2j/0Mco60GksvTldYC42Dd
-	pdUMjSpUSOTpb9z1QAY+WUjYg6ksLLQK2uzbQKUAo1Zg2C+sHtIXBCpAnIbFsAjn
-	4+0oxB0u3bOM25qOS+bHQra+pbeecgVar02jsJ9u+jvTbdz4WMSYw49Jb34aMEYM
-	eA7qAkSX54AjjyHdGvu4vnqfb//Q+JQdEJJN4zQg7/KwK2oz0+Y7dZaj6f58L7TT
-	hs5nF3d73B2HTS3diqakESrrVHJYBme1t58O9mNY2dfhdL+yq37BpqHFilxmkj3P
-	N3TdP1ZHcFZtWcQrp9Tc+rIw7+GJR9krLEHVjqwyH+TQS+i2g8sdlFxCQ==
-X-ME-Sender: <xms:rfTRY6725xmw3M9_wy6VAcPGHbcrIDAAXALC_ezzqGgu8_uRhoPv0w>
-    <xme:rfTRYz54wgPmc9J-m65mihdjNty8KrpH3dOxqxrzqbIl5I_4wleBtSzykLUzL999H
-    yEK2Y9VkVevVew>
-X-ME-Received: <xmr:rfTRY5c-XeYocmJVDOF_vnw6pNbx_lwfvTcuwuxZ1xAZTtge5V4IEydC9RVAweE53XptqUbyW9xj>
+	:x-sasl-enc; s=fm3; t=1674704057; x=1674790457; bh=fly1TGtjPYQFq
+	q0ZAbmMb6xmSvsz35BqaEQbyQNg2OA=; b=ctkpfx7SZRRL6KeO6bFZhCqe3XQGd
+	ddY9ADAEaPF42/Pdj3OYxAFRo254vZsVEa8tWSr/KSF+zVoyu2EteDsynPXOj/iu
+	63IO7MJyBbRlf7+vQey7wd0POoDgEkJdxFADcHNTYc1/FbN9ZjueKRKqVShvQjKd
+	H52kTj6LTGwltBqYV4MSsF9pfN6Ngjul1V6orbHr317ENrVkDkF04ZJyJ/u6siGZ
+	040psDMjFLte9H8xZp2q3BlERdUWC3vFfHvaXpbUYvoMJDuxj/eP7uesva1h1NAJ
+	A31HPEIeEK62hAR0XVgh41M6lyaOiUZeQlINouPHd1OF+PYrKk/UTJ/5g==
+X-ME-Sender: <xms:uPTRY-UJugvRHQWqLPTevHKqWNImygoOOyYewPe_uQqS9qbczCFzJQ>
+    <xme:uPTRY6kQLCCCct-1GcPEKU697zRbqex5ZNGMVHmm5m1c95TxOkO3SEzC1ScFo6NML
+    oOwjeNEzEMil4k>
+X-ME-Received: <xmr:uPTRYyZG5ypvub0AjxhcULUmMs0YaTlx0iWR3IkE2nr6D7XtDdxS9uvROL8aCXQoMnZS-iuZdIud>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddvfedgheelucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeffvghmihcu
-    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
-    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefhgefgieeitdeijeeguddtkefgteeg
-    heehgeetkeevhfefgfduhedtveelgeeugeenucevlhhushhtvghrufhiiigvpedtnecurf
-    grrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhl
-    rggsrdgtohhm
-X-ME-Proxy: <xmx:rfTRY3K8BsaR6SikC5jT7-f3d9e22OHeqXhkgePMrLn0y58UnAVNCw>
-    <xmx:rfTRY-JsiC-CmyH3JqmtndM5ovAjIocOp_H5Vnz5xbocvmIcvUB5Vw>
-    <xmx:rfTRY4wEKKzvSMjPN6rg_jb98hKZEXW7biJaskmWaZ9ourLFDq6IKQ>
-    <xmx:rfTRY9_6RGw9FBSqSFdBrKQEovNBIAL-_eHatj1IbfsXY2Q7MP1mdQ>
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepheehvdekudfffeelkeelvdevffej
+    ieetudeifeeliefgleffiedvgefhheehgfeunecuffhomhgrihhnpehinhguihhrvggtth
+    drnhhrpdhinhguihhrvggtthdrihgunecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
+    rghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhslhgrsg
+    drtghomh
+X-ME-Proxy: <xmx:ufTRY1VuavHbMeRfNh8kDPgSScRHLLvGJKom87ozljBfd7VtLvnXOw>
+    <xmx:ufTRY4kcERKeOg3A5RFmTzfWgpLEQfKpt-p4qEWyUhIR0g086pbcKg>
+    <xmx:ufTRY6fYHq4xTO6jgFUdjKJN8TzKE92H_QhdqAHrdujMm1gOVJ1NeA>
+    <xmx:ufTRY3ufM2M8yw78lZ1XU9KjM0U4Iyf08R5809m_oRpfv3KY2kmPCQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Jens Axboe <axboe@kernel.dk>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Alasdair Kergon <agk@redhat.com>,
-	Mike Snitzer <snitzer@kernel.org>
+	Juergen Gross <jgross@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Juergen Gross <jgross@suse.com>,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
-	dm-devel@redhat.com
-Subject: [RFC PATCH 0/7] Allow race-free block device handling
-Date: Wed, 25 Jan 2023 22:33:52 -0500
-Message-Id: <20230126033358.1880-1-demi@invisiblethingslab.com>
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [RFC PATCH 6/7] Minor blkback cleanups
+Date: Wed, 25 Jan 2023 22:33:57 -0500
+Message-Id: <20230126033358.1880-6-demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230126033358.1880-1-demi@invisiblethingslab.com>
+References: <20230126033358.1880-1-demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This work aims to allow userspace to create and destroy block devices
-in a race-free and leak-free way, and to allow them to be exposed to
-other Xen VMs via blkback without leaks or races.  It’s marked as RFC
-for a few reasons:
+No functional change intended.
 
-- The code has been only lightly tested.  It might be unstable or
-  insecure.
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ drivers/block/xen-blkback/blkback.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-- The DM_DEV_CREATE ioctl gains a new flag.  Unknown flags were
-  previously ignored, so this could theoretically break buggy userspace
-  tools.
-
-- I have no idea if I got the block device reference counting and
-  locking correct.
-
-Demi Marie Obenour (7):
-  block: Support creating a struct file from a block device
-  Allow userspace to get an FD to a newly-created DM device
-  Implement diskseq checks in blkback
-  Increment diskseq when releasing a loop device
-  If autoclear is set, delete a no-longer-used loop device
-  Minor blkback cleanups
-  xen/blkback: Inform userspace that device has been opened
-
- block/bdev.c                        |  77 +++++++++++--
- block/genhd.c                       |   1 +
- drivers/block/loop.c                |  17 ++-
- drivers/block/xen-blkback/blkback.c |   8 +-
- drivers/block/xen-blkback/xenbus.c  | 171 ++++++++++++++++++++++------
- drivers/md/dm-ioctl.c               |  67 +++++++++--
- include/linux/blkdev.h              |   5 +
- include/uapi/linux/dm-ioctl.h       |  16 ++-
- 8 files changed, 298 insertions(+), 64 deletions(-)
-
+diff --git a/drivers/block/xen-blkback/blkback.c b/drivers/block/xen-blkback/blkback.c
+index a5cf7f1e871c7f9ff397ab8ff1d7b9e3db686659..8a49cbe81d8895f89371bdf50d1b445c088c9b6a 100644
+--- a/drivers/block/xen-blkback/blkback.c
++++ b/drivers/block/xen-blkback/blkback.c
+@@ -1238,6 +1238,8 @@ static int dispatch_rw_block_io(struct xen_blkif_ring *ring,
+ 	nseg = req->operation == BLKIF_OP_INDIRECT ?
+ 	       req->u.indirect.nr_segments : req->u.rw.nr_segments;
+ 
++	BUILD_BUG_ON(offsetof(struct blkif_request, u.rw.id) != 8);
++	BUILD_BUG_ON(offsetof(struct blkif_request, u.indirect.id) != 8);
+ 	if (unlikely(nseg == 0 && operation_flags != REQ_PREFLUSH) ||
+ 	    unlikely((req->operation != BLKIF_OP_INDIRECT) &&
+ 		     (nseg > BLKIF_MAX_SEGMENTS_PER_REQUEST)) ||
+@@ -1261,13 +1263,13 @@ static int dispatch_rw_block_io(struct xen_blkif_ring *ring,
+ 		preq.sector_number     = req->u.rw.sector_number;
+ 		for (i = 0; i < nseg; i++) {
+ 			pages[i]->gref = req->u.rw.seg[i].gref;
+-			seg[i].nsec = req->u.rw.seg[i].last_sect -
+-				req->u.rw.seg[i].first_sect + 1;
+-			seg[i].offset = (req->u.rw.seg[i].first_sect << 9);
+ 			if ((req->u.rw.seg[i].last_sect >= (XEN_PAGE_SIZE >> 9)) ||
+ 			    (req->u.rw.seg[i].last_sect <
+ 			     req->u.rw.seg[i].first_sect))
+ 				goto fail_response;
++			seg[i].nsec = req->u.rw.seg[i].last_sect -
++				req->u.rw.seg[i].first_sect + 1;
++			seg[i].offset = (req->u.rw.seg[i].first_sect << 9);
+ 			preq.nr_sects += seg[i].nsec;
+ 		}
+ 	} else {
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 Invisible Things Lab
+
 
