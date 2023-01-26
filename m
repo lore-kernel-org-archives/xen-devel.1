@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D87EC54E94
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 17:31:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.485150.752175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F3B6C05027
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 17:49:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.485170.752185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pL665-0000t4-LP; Thu, 26 Jan 2023 17:31:37 +0000
+	id 1pL6NM-0002qG-3C; Thu, 26 Jan 2023 17:49:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 485150.752175; Thu, 26 Jan 2023 17:31:37 +0000
+Received: by outflank-mailman (output) from mailman id 485170.752185; Thu, 26 Jan 2023 17:49:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pL665-0000sx-HP; Thu, 26 Jan 2023 17:31:37 +0000
-Received: by outflank-mailman (input) for mailman id 485150;
- Thu, 26 Jan 2023 17:07:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pL6NM-0002q9-0A; Thu, 26 Jan 2023 17:49:28 +0000
+Received: by outflank-mailman (input) for mailman id 485170;
+ Thu, 26 Jan 2023 17:49:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KraK=5X=collabora.com=sebastian.reichel@srs-se1.protection.inumbo.net>)
- id 1pL5iz-00055K-Gf
- for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 17:07:45 +0000
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f1989b4a-9d9b-11ed-b8d1-410ff93cb8f0;
- Thu, 26 Jan 2023 18:07:42 +0100 (CET)
-Received: from mercury (dyndsl-037-138-191-219.ewe-ip-backbone.de
- [37.138.191.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: sre)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 7FE346602E7E;
- Thu, 26 Jan 2023 17:07:41 +0000 (GMT)
-Received: by mercury (Postfix, from userid 1000)
- id 8DAD710609C7; Thu, 26 Jan 2023 18:07:39 +0100 (CET)
+ <SRS0=xamf=5X=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
+ id 1pL6NK-0002q3-LP
+ for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 17:49:26 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c575218e-9da1-11ed-a5d9-ddcf98b90cbd;
+ Thu, 26 Jan 2023 18:49:25 +0100 (CET)
+Received: by mail-wm1-x32f.google.com with SMTP id q8so1662603wmo.5
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Jan 2023 09:49:24 -0800 (PST)
+Received: from [192.168.16.153] (54-240-197-239.amazon.com. [54.240.197.239])
+ by smtp.gmail.com with ESMTPSA id
+ iz17-20020a05600c555100b003db07420d14sm2065074wmb.39.2023.01.26.09.49.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Jan 2023 09:49:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,159 +46,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1989b4a-9d9b-11ed-b8d1-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1674752861;
-	bh=TJwB9xWefUtenAJhobcnuA3/dr44yh/1qZH05naV3dA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HIAeawkSMl4wLK9atphFO2PYIuQtn0mXWrQTGJkp27Vvwen4RmNJXIKy0KOcMN2qu
-	 MGji/BoqRh//5quIKkg+7Jg9a4rlT6zYnOxKnHRve8IRt32uZ0O2J9C6ByA7KSG9ni
-	 ooI+f+xDzdj/4Xv/XqAW1ZMOqMbxlnaE69Ns4AaVsCb09DHvVD+xjXrJ7HkcJ65ZDs
-	 0FKkR9qOOchTbFQKw+Lbe8GJsd/K96q/WWSPWtyPUY4G0yRJ/G34tsJUBI/vL5q95x
-	 a6dIJ/I/0Glk/75yhzfiBv6PLPN/HUTuWOcS4vpdAGRdicde5HTb77Vj3shLRE2rZN
-	 snAuQFm3yL5CQ==
-Date: Thu, 26 Jan 2023 18:07:39 +0100
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: akpm@linux-foundation.org, michel@lespinasse.org, jglisse@google.com,
-	mhocko@suse.com, vbabka@suse.cz, hannes@cmpxchg.org,
-	mgorman@techsingularity.net, dave@stgolabs.net, willy@infradead.org,
-	liam.howlett@oracle.com, peterz@infradead.org,
-	ldufour@linux.ibm.com, paulmck@kernel.org, luto@kernel.org,
-	songliubraving@fb.com, peterx@redhat.com, david@redhat.com,
-	dhowells@redhat.com, hughd@google.com, bigeasy@linutronix.de,
-	kent.overstreet@linux.dev, punit.agrawal@bytedance.com,
-	lstoakes@gmail.com, peterjung1337@gmail.com, rientjes@google.com,
-	axelrasmussen@google.com, joelaf@google.com, minchan@google.com,
-	jannh@google.com, shakeelb@google.com, tatashin@google.com,
-	edumazet@google.com, gthelen@google.com, gurua@google.com,
-	arjunroy@google.com, soheil@google.com, hughlynch@google.com,
-	leewalsh@google.com, posk@google.com, will@kernel.org,
-	aneesh.kumar@linux.ibm.com, npiggin@gmail.com,
-	chenhuacai@kernel.org, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com, richard@nod.at,
-	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
-	qianweili@huawei.com, wangzhou1@hisilicon.com,
-	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org,
-	airlied@gmail.com, daniel@ffwll.ch,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	tzimmermann@suse.de, l.stach@pengutronix.de,
-	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com,
-	matthias.bgg@gmail.com, robdclark@gmail.com,
-	quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
-	tomba@kernel.org, hjc@rock-chips.com, heiko@sntech.de,
-	ray.huang@amd.com, kraxel@redhat.com, mcoquelin.stm32@gmail.com,
-	alexandre.torgue@foss.st.com, tfiga@chromium.org,
-	m.szyprowski@samsung.com, mchehab@kernel.org,
-	dimitri.sivanich@hpe.com, zhangfei.gao@linaro.org,
-	jejb@linux.ibm.com, martin.petersen@oracle.com,
-	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com,
-	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de,
-	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net,
-	xiang@kernel.org, chao@kernel.org, tytso@mit.edu,
-	adilger.kernel@dilger.ca, miklos@szeredi.hu,
-	mike.kravetz@oracle.com, muchun.song@linux.dev, bhe@redhat.com,
-	andrii@kernel.org, yoshfuji@linux-ipv6.org, dsahern@kernel.org,
-	kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, tiwai@suse.com,
-	haojian.zhuang@gmail.com, robert.jarzmik@free.fr,
-	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org, x86@kernel.org,
-	linux-kernel@vger.kernel.org, linux-graphics-maintainer@vmware.com,
-	linux-ia64@vger.kernel.org, linux-arch@vger.kernel.org,
-	loongarch@lists.linux.dev, kvm@vger.kernel.org,
-	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org,
-	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev,
-	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
-	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
-	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org,
-	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
-	target-devel@vger.kernel.org, linux-usb@vger.kernel.org,
-	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org,
-	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org,
-	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
-	devel@lists.orangefs.org, kexec@lists.infradead.org,
-	linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
-	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com,
-	selinux@vger.kernel.org, alsa-devel@alsa-project.org,
-	kernel-team@android.com
-Subject: Re: [PATCH v2 3/6] mm: replace vma->vm_flags direct modifications
- with modifier calls
-Message-ID: <20230126170739.mlka2jivn3mfstyf@mercury.elektranox.org>
-References: <20230125083851.27759-1-surenb@google.com>
- <20230125083851.27759-4-surenb@google.com>
+X-Inumbo-ID: c575218e-9da1-11ed-a5d9-ddcf98b90cbd
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:organization:content-language
+         :references:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OK8D8R+tAQUoFtCWzoU1n8SQdUbAKXNoKJvtArjQYWo=;
+        b=fsrSpnrqMY978vETifGGB5jJhFgGa9z1kwcWK6T2nOCu+2w+3q003EfrS2S3nto/9O
+         lxe3tYcU8G4mfiFeNDwyeOtZ6IpN6OGNe5mvX2oCYaolr2h2fKwfDb+bxz95DcEGZcgt
+         baW9SuyDs+IEAs4Fczqco/bSDXCuXJ9zw8fBxPmw1fsMHyYS/OnDg/d4M0REeUbUPJvJ
+         RQv6LwyWhdbAqU2ztQFsLdrlFMGtDLdvlO64WYfr1H45JdhGSnTHa0NWmRYX1GMcLOq5
+         lgctRAthj0M2xFVSiOFnZZWIfgJNNw6o+vkIeVJ+9yWcTvOSRYMwMeFWYUlgDljKCXEG
+         ExkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:organization:content-language
+         :references:to:subject:reply-to:user-agent:mime-version:date
+         :message-id:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OK8D8R+tAQUoFtCWzoU1n8SQdUbAKXNoKJvtArjQYWo=;
+        b=tYpBlRY33xSJenDPb3hlqVO868Xecr7i7h0mMR0sPv4esnzAfEZE4bDq2wka3SvRNA
+         tXAPRfavCTcFUenLb8Xe7Bnxi4Vp3wp7zGVzb6qmqCjd7/ew3Ne90m23dr/GyiebSWIw
+         rRJ6cjkDpf6Z/ct+XyaqGYzRoZLYJvuEKjR8uZaV6w2O405ytmBzcG/Rua2oS+FTHJmi
+         AA0BRHQ0UG0GpMtDdAkYzOHFPLWHQ7NshrIIxIRV7CkZlIQnZZsHjw6hyINyr0jQ7cgc
+         5Z22hpgL6Y69IJEeWmyynbjF/HDUuji++f7I8pUi62EFHhD1dXd0qb14IE6KuBtKGrQk
+         Wvgw==
+X-Gm-Message-State: AFqh2kpD0EDjORh43OdWZ49kouQ9Z2bwyFH5NeCYH9lIhQv2lc3oaG8a
+	ir5IEH8OOoxsToJA0z3tXKU=
+X-Google-Smtp-Source: AMrXdXs5F4OCgvN3uEJ60IUaqKqHzXV14E3jUKorb3s+0tE+r6nmGLv0K7Ivj0ZpjpxRkHHOTPAUPQ==
+X-Received: by 2002:a05:600c:3ac8:b0:3da:270b:ba6b with SMTP id d8-20020a05600c3ac800b003da270bba6bmr37704210wms.41.1674755364280;
+        Thu, 26 Jan 2023 09:49:24 -0800 (PST)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Message-ID: <46ea1f4e-2061-d5f8-2b44-5d24a3a3e7ca@xen.org>
+Date: Thu, 26 Jan 2023 17:49:22 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="qcyccrleajamxo75"
-Content-Disposition: inline
-In-Reply-To: <20230125083851.27759-4-surenb@google.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Reply-To: paul@xen.org
+Subject: Re: [SeaBIOS PATCH] xen: require Xen info structure at 0x1000 to
+ detect Xen
+To: David Woodhouse <dwmw2@infradead.org>, seabios <seabios@seabios.org>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ qemu-devel <qemu-devel@nongnu.org>
+References: <feef99dd2e1a5dce004d22baf07d716d6ea1344c.camel@infradead.org>
+Content-Language: en-US
+Organization: Xen Project
+In-Reply-To: <feef99dd2e1a5dce004d22baf07d716d6ea1344c.camel@infradead.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+On 20/01/2023 11:33, David Woodhouse wrote:
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> 
+> When running under Xen, hvmloader places a table at 0x1000 with the e820
+> information and BIOS tables. If this isn't present, SeaBIOS will
+> currently panic.
+> 
+> We now have support for running Xen guests natively in QEMU/KVM, which
+> boots SeaBIOS directly instead of via hvmloader, and does not provide
+> the same structure.
+> 
+> As it happens, this doesn't matter on first boot. because although we
+> set PlatformRunningOn to PF_QEMU|PF_XEN, reading it back again still
+> gives zero. Presumably because in true Xen, this is all already RAM. But
+> in QEMU with a faithfully-emulated PAM config in the host bridge, it's
+> still in ROM mode at this point so we don't see what we've just written.
+> 
+> On reboot, however, the region *is* set to RAM mode and we do see the
+> updated value of PlatformRunningOn, do manage to remember that we've
+> detected Xen in CPUID, and hit the panic.
+> 
+> It's not trivial to detect QEMU vs. real Xen at the time xen_preinit()
+> runs, because it's so early. We can't even make a XENVER_extraversion
+> hypercall to look for hints, because we haven't set up the hypercall
+> page (and don't have an allocator to give us a page in which to do so).
+> 
+> So just make Xen detection contingent on the info structure being
+> present. If it wasn't, we were going to panic anyway. That leaves us
+> taking the standard QEMU init path for Xen guests in native QEMU,
+> which is just fine.
+> 
+> Untested on actual Xen but ObviouslyCorrect™.
 
---qcyccrleajamxo75
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Works for me...
 
-Hi,
+Tested-by: Paul Durrant <paul@xen.org>
 
-On Wed, Jan 25, 2023 at 12:38:48AM -0800, Suren Baghdasaryan wrote:
-> Replace direct modifications to vma->vm_flags with calls to modifier
-> functions to be able to track flag changes and to keep vma locking
-> correctness.
->=20
-> Signed-off-by: Suren Baghdasaryan <surenb@google.com>
+> 
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
-> [...]
->  drivers/hsi/clients/cmt_speech.c                   |  2 +-
->  120 files changed, 188 insertions(+), 199 deletions(-)
-> [...]
-> diff --git a/drivers/hsi/clients/cmt_speech.c b/drivers/hsi/clients/cmt_s=
-peech.c
-> index 8069f795c864..952a31e742a1 100644
-> --- a/drivers/hsi/clients/cmt_speech.c
-> +++ b/drivers/hsi/clients/cmt_speech.c
-> @@ -1264,7 +1264,7 @@ static int cs_char_mmap(struct file *file, struct v=
-m_area_struct *vma)
->  	if (vma_pages(vma) !=3D 1)
->  		return -EINVAL;
-> =20
-> -	vma->vm_flags |=3D VM_IO | VM_DONTDUMP | VM_DONTEXPAND;
-> +	set_vm_flags(vma, VM_IO | VM_DONTDUMP | VM_DONTEXPAND);
->  	vma->vm_ops =3D &cs_char_vm_ops;
->  	vma->vm_private_data =3D file->private_data;
-> =20
+>   src/fw/xen.c | 45 ++++++++++++++++++++++++++++++++-------------
+>   1 file changed, 32 insertions(+), 13 deletions(-)
+> 
 
-Acked-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+Also...
 
--- Sebastian
+Reviewed-by: Paul Durrant <paul@xen.org>
 
---qcyccrleajamxo75
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmPSs1EACgkQ2O7X88g7
-+pquLBAAkw9lw9lxNRCI6jvqLy98JsUBgSQigNB6Eh8JVWsySHMm1OszFCcvTpoc
-vinC/VPMOa6JwEw5e9naXRF2UJahO+Cx+e5MYIKos3QyIUPfi0YM7Cv96h6+c4l/
-NdcxLS8+9ElitTuA47UVgPSeZwzdZ1kU5VUV1X2fx+6aGA+dBfWVBgWDqU6AB0Sa
-ehU4betso5Ypl26YEmLPHmY+8Xx2jXNwwBEgsHgO2/YjRn9YPDeMAqb4lWs99h0d
-nUV1VqwTClRrExtNDvidHryknmyCIBpYt38gn0i9+uIf9mFoBmUDN+/zAdRguGBT
-r1CQAwvRvHmEyGJ4dp1nijyt/PWxDBlCWytlmzXrK/rkeH8sQCRdCr9L83/d5DM0
-iU98ehmbH9kx8rD4y0L91xmsnegNYNKSfAvz3EP4KYFOHjTw2SOCYoazPu3z62bN
-d3HL+08LeZpm1XwVPydZqBd5UpBK8NaQYCJ3BjsLUefsSJE+SWzsnoYFnbUrL1X9
-1XfU6LGtVvjCPUsjk7oqh5PjtRGQsdtUhSZJLwNzTeh4I0nSzL1pj8vRFZ7UTcV4
-RmFYsjBbKhja2fC13eM4tKzfx53harnHVNuUPw2aoLKshpkQaOTUqWBnRXtbJZkb
-dSRKObxfPlHVI+awnfN6owpXF86Owew2+XJcXILOPxaBk8PI/Ns=
-=/0TB
------END PGP SIGNATURE-----
-
---qcyccrleajamxo75--
 
