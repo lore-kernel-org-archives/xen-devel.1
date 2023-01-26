@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5696AC61D97
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 05:08:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.484533.751492 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFAE9C54E94
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Jan 2023 05:13:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.484743.751543 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKuUx-00058S-2V; Thu, 26 Jan 2023 05:08:31 +0000
+	id 1pKuZo-0002MD-4g; Thu, 26 Jan 2023 05:13:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 484533.751492; Thu, 26 Jan 2023 05:08:30 +0000
+Received: by outflank-mailman (output) from mailman id 484743.751543; Thu, 26 Jan 2023 05:13:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pKuUw-00055k-OA; Thu, 26 Jan 2023 05:08:30 +0000
-Received: by outflank-mailman (input) for mailman id 484533;
- Wed, 25 Jan 2023 18:39:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pKuZo-0002M6-1w; Thu, 26 Jan 2023 05:13:32 +0000
+Received: by outflank-mailman (input) for mailman id 484743;
+ Thu, 26 Jan 2023 05:13:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NNIG=5W=infradead.org=willy@srs-se1.protection.inumbo.net>)
- id 1pKkg4-0005iZ-Ia
- for xen-devel@lists.xenproject.org; Wed, 25 Jan 2023 18:39:20 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 92c0e269-9cdf-11ed-b8d1-410ff93cb8f0;
- Wed, 25 Jan 2023 19:39:18 +0100 (CET)
-Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1pKkeP-0066hH-0o; Wed, 25 Jan 2023 18:37:37 +0000
+ <SRS0=0+3p=5X=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1pKuZm-0002M0-M3
+ for xen-devel@lists.xenproject.org; Thu, 26 Jan 2023 05:13:30 +0000
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
+ [66.111.4.27]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2a2f8711-9d38-11ed-91b6-6bf2151ebd3b;
+ Thu, 26 Jan 2023 06:13:28 +0100 (CET)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id A89635C05B9;
+ Thu, 26 Jan 2023 00:13:26 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute6.internal (MEProxy); Thu, 26 Jan 2023 00:13:26 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 26 Jan 2023 00:13:25 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,125 +45,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92c0e269-9cdf-11ed-b8d1-410ff93cb8f0
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=j8xmcwaWWp8ClSuIcWbfPO9W4DI7+K1SIXYR1hupOAY=; b=uqNynxzucz1vO4Sybud/wnfqlG
-	XxsLNOwKfxMMQq2z+2mEwSQepA2Cgl288rz8ppyGnCDD245OrpnK+lLHo83C85yAJqJOOkyy9NCp4
-	qmW1PdDBkKx7H5H7CuTrTaW668Ax6XD7hJfO7woN7MoWAjzhSqQRaCuht1RFhZ03cdOhzx8vskmyo
-	utYjRqoPln+RK+MIFkiqDBv2fEqneNERI4c9/pWDfp7yn00dEjgBzAOu+9ajSFVQvgY4Ml53E7t5d
-	4KvoHjjGbdeWlMlk7Lgwsa8VGdyruWiJYIAak7bpfijYPXdYqIwuOD9Kmo+xWyNX8MhOoxpc82QLY
-	/xONblxA==;
-Date: Wed, 25 Jan 2023 18:37:36 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: Peter Zijlstra <peterz@infradead.org>, akpm@linux-foundation.org,
-	michel@lespinasse.org, jglisse@google.com, mhocko@suse.com,
-	vbabka@suse.cz, hannes@cmpxchg.org, mgorman@techsingularity.net,
-	dave@stgolabs.net, liam.howlett@oracle.com, ldufour@linux.ibm.com,
-	paulmck@kernel.org, luto@kernel.org, songliubraving@fb.com,
-	peterx@redhat.com, david@redhat.com, dhowells@redhat.com,
-	hughd@google.com, bigeasy@linutronix.de, kent.overstreet@linux.dev,
-	punit.agrawal@bytedance.com, lstoakes@gmail.com,
-	peterjung1337@gmail.com, rientjes@google.com,
-	axelrasmussen@google.com, joelaf@google.com, minchan@google.com,
-	jannh@google.com, shakeelb@google.com, tatashin@google.com,
-	edumazet@google.com, gthelen@google.com, gurua@google.com,
-	arjunroy@google.com, soheil@google.com, hughlynch@google.com,
-	leewalsh@google.com, posk@google.com, will@kernel.org,
-	aneesh.kumar@linux.ibm.com, npiggin@gmail.com,
-	chenhuacai@kernel.org, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com, richard@nod.at,
-	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
-	qianweili@huawei.com, wangzhou1@hisilicon.com,
-	herbert@gondor.apana.org.au, davem@davemloft.net, vkoul@kernel.org,
-	airlied@gmail.com, daniel@ffwll.ch,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	tzimmermann@suse.de, l.stach@pengutronix.de,
-	krzysztof.kozlowski@linaro.org, patrik.r.jakobsson@gmail.com,
-	matthias.bgg@gmail.com, robdclark@gmail.com,
-	quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
-	tomba@kernel.org, hjc@rock-chips.com, heiko@sntech.de,
-	ray.huang@amd.com, kraxel@redhat.com, sre@kernel.org,
-	mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
-	tfiga@chromium.org, m.szyprowski@samsung.com, mchehab@kernel.org,
-	dimitri.sivanich@hpe.com, zhangfei.gao@linaro.org,
-	jejb@linux.ibm.com, martin.petersen@oracle.com,
-	dgilbert@interlog.com, hdegoede@redhat.com, mst@redhat.com,
-	jasowang@redhat.com, alex.williamson@redhat.com, deller@gmx.de,
-	jayalk@intworks.biz, viro@zeniv.linux.org.uk, nico@fluxnic.net,
-	xiang@kernel.org, chao@kernel.org, tytso@mit.edu,
-	adilger.kernel@dilger.ca, miklos@szeredi.hu,
-	mike.kravetz@oracle.com, muchun.song@linux.dev, bhe@redhat.com,
-	andrii@kernel.org, yoshfuji@linux-ipv6.org, dsahern@kernel.org,
-	kuba@kernel.org, pabeni@redhat.com, perex@perex.cz, tiwai@suse.com,
-	haojian.zhuang@gmail.com, robert.jarzmik@free.fr,
-	linux-mm@kvack.org, linux-arm-kernel@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org, x86@kernel.org,
-	linux-kernel@vger.kernel.org, linux-graphics-maintainer@vmware.com,
-	linux-ia64@vger.kernel.org, linux-arch@vger.kernel.org,
-	loongarch@lists.linux.dev, kvm@vger.kernel.org,
-	linux-s390@vger.kernel.org, linux-sgx@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-acpi@vger.kernel.org,
-	linux-crypto@vger.kernel.org, nvdimm@lists.linux.dev,
-	dmaengine@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
-	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
-	linux-accelerators@lists.ozlabs.org, sparclinux@vger.kernel.org,
-	linux-scsi@vger.kernel.org, linux-staging@lists.linux.dev,
-	target-devel@vger.kernel.org, linux-usb@vger.kernel.org,
-	netdev@vger.kernel.org, linux-fbdev@vger.kernel.org,
-	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org,
-	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
-	devel@lists.orangefs.org, kexec@lists.infradead.org,
-	linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
-	linux-perf-users@vger.kernel.org, kasan-dev@googlegroups.com,
-	selinux@vger.kernel.org, alsa-devel@alsa-project.org,
-	kernel-team@android.com
-Subject: Re: [PATCH v2 1/6] mm: introduce vma->vm_flags modifier functions
-Message-ID: <Y9F28J9njAtwifuL@casper.infradead.org>
-References: <20230125083851.27759-1-surenb@google.com>
- <20230125083851.27759-2-surenb@google.com>
- <Y9Dx0cPXF2yoLwww@hirez.programming.kicks-ass.net>
- <CAJuCfpEcVCZaCGzc-Wim25eaV5e6YG1YJAAdKwZ6JHViB0z8aw@mail.gmail.com>
+X-Inumbo-ID: 2a2f8711-9d38-11ed-91b6-6bf2151ebd3b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to; s=fm3; t=
+	1674710006; x=1674796406; bh=si2CIeQHBvEuBg0GKAq7c57w/l0f6keWtZb
+	ZENwz+Cg=; b=TU/TLoenO7nU4Zgag4pHQ9NDhmS5vEblIyIC4EpELdyspPyxEmK
+	vsUJEPyhrTPE2dHGgRwzvEoQt7hIipuxkPcGo2FmyKYxNj/fstwpizlEQ8zwJByI
+	0bohzchjPAywJTCw39Xs4U0IFz1+7l014ULWIRbSOtCzfh1ZER9HkH4B+bXzyF/j
+	YRJqE00gCT/FzHmm/qySX6Vlg9SafclW/NaPbmwgy6SrVze5hw48f3JKwCnkfF1x
+	QJIRy+lruJ/YYL+Sp8OJcOP8tjCSj8MzAMHr8OgrNU74iUyuPWeWNRm9ulRe9lzB
+	HvsfiwG0rows11oEdF1Ncd3toEisNiWfrHg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1674710006; x=1674796406; bh=si2CIeQHBvEuB
+	g0GKAq7c57w/l0f6keWtZbZENwz+Cg=; b=YO8NH5dPFIM8uFLgeyEWKZ+X8ljlj
+	k3N28Pkp8dSwiqlIzicRI2tK2elnHGj/Yb3giv7m8wRKUdjhwd1HGficyhm3xQXU
+	fBbtUvMJ5g0qfmPvqAwlBUnOhxOzSzoVf4i2Vji1Bm6lRCM1kq2lWAMP2jVw+yne
+	lAeb1hoMuwdYRyb7YXYgjXnPwWsvs+AwSTagAK4yYzfHMGg7OzWk8h9k+ay1oD+W
+	7pN8Y5DiEWTmVZPTwBnHjKk7dNzdyeNtQ4C7n7QeI5o5i7JXhw83fkj5xCSem3QD
+	c5UgP7hVWG0PUqcEmfiQw4fzTYm2aQgLgz4kS+Z08yhoCr02DiDhZnakQ==
+X-ME-Sender: <xms:9gvSY9qUe1TGob5fDDdTEgKUKT4F17CK9aCpQW6yWeiTHH14Q6pB3Q>
+    <xme:9gvSY_pYSI36pRCuodyysmPy9csENTepU83j7_zze7YtZhpSIBprTHXeGniYN58fJ
+    mFt3VYeJO2wbA>
+X-ME-Received: <xmr:9gvSY6PWlvHydTEMQJfYIFEyf3M-uHerzRtMifpON62Wb9v7m-FqF7YKOJS00crMrEuXW2G1A2epa-nPeforirbGSUQoTpvEc0WT01SNv0vAMlvWYWqm>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddvfedgjeekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghk
+    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeelkefh
+    udelteelleelteetveeffeetffekteetjeehlefggeekleeghefhtdehvdenucevlhhush
+    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhes
+    ihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:9gvSY45BN99xpV5q7YvHznyVgbn9nAVqJyLaKYLBh1OwZpTG8Okm_A>
+    <xmx:9gvSY85BmH5WKkTZbKZ27ug5ISgPJuv7L9F2nMCwQ0-YCXZEahiizQ>
+    <xmx:9gvSYwi1wYAeX0qR_y2msvZUkO5Nahg38NO9h5jZ5Sj35X8LVlX4aw>
+    <xmx:9gvSY6Sws963j1I7Wb2NkG1BTO3AlsI8RiSo93hBywUHMH9goeaEaw>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH] tools/python: change 's#' size type for Python >= 3.10
+Date: Thu, 26 Jan 2023 06:13:10 +0100
+Message-Id: <20230126051310.4149074-1-marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJuCfpEcVCZaCGzc-Wim25eaV5e6YG1YJAAdKwZ6JHViB0z8aw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 25, 2023 at 08:49:50AM -0800, Suren Baghdasaryan wrote:
-> On Wed, Jan 25, 2023 at 1:10 AM Peter Zijlstra <peterz@infradead.org> wrote:
-> > > +     /*
-> > > +      * Flags, see mm.h.
-> > > +      * WARNING! Do not modify directly.
-> > > +      * Use {init|reset|set|clear|mod}_vm_flags() functions instead.
-> > > +      */
-> > > +     unsigned long vm_flags;
-> >
-> > We have __private and ACCESS_PRIVATE() to help with enforcing this.
-> 
-> Thanks for pointing this out, Peter! I guess for that I'll need to
-> convert all read accesses and provide get_vm_flags() too? That will
-> cause some additional churt (a quick search shows 801 hits over 248
-> files) but maybe it's worth it? I think Michal suggested that too in
-> another patch. Should I do that while we are at it?
+Python < 3.10 by default uses 'int' type for data+size string types
+(s#), unless PY_SSIZE_T_CLEAN is defined - in which case it uses
+Py_ssize_t. The former behavior was removed in Python 3.10 and now it's
+required to define PY_SSIZE_T_CLEAN before including Python.h, and using
+Py_ssize_t for the length argument. The PY_SSIZE_T_CLEAN behavior is
+supported since Python 2.5.
 
-Here's a trick I saw somewhere in the VFS:
+Adjust bindings accordingly.
 
-	union {
-		const vm_flags_t vm_flags;
-		vm_flags_t __private __vm_flags;
-	};
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ tools/python/xen/lowlevel/xc/xc.c | 3 ++-
+ tools/python/xen/lowlevel/xs/xs.c | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-Now it can be read by anybody but written only by those using
-ACCESS_PRIVATE.
+diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowlevel/xc/xc.c
+index fd008610329b..cfb2734a992b 100644
+--- a/tools/python/xen/lowlevel/xc/xc.c
++++ b/tools/python/xen/lowlevel/xc/xc.c
+@@ -4,6 +4,7 @@
+  * Copyright (c) 2003-2004, K A Fraser (University of Cambridge)
+  */
+ 
++#define PY_SSIZE_T_CLEAN
+ #include <Python.h>
+ #define XC_WANT_COMPAT_MAP_FOREIGN_API
+ #include <xenctrl.h>
+@@ -1774,7 +1775,7 @@ static PyObject *pyflask_load(PyObject *self, PyObject *args, PyObject *kwds)
+ {
+     xc_interface *xc_handle;
+     char *policy;
+-    uint32_t len;
++    Py_ssize_t len;
+     int ret;
+ 
+     static char *kwd_list[] = { "policy", NULL };
+diff --git a/tools/python/xen/lowlevel/xs/xs.c b/tools/python/xen/lowlevel/xs/xs.c
+index 0dad7fa5f2fc..3ba5a8b893d9 100644
+--- a/tools/python/xen/lowlevel/xs/xs.c
++++ b/tools/python/xen/lowlevel/xs/xs.c
+@@ -18,6 +18,7 @@
+  * Copyright (C) 2005 XenSource Ltd.
+  */
+ 
++#define PY_SSIZE_T_CLEAN
+ #include <Python.h>
+ 
+ #include <stdbool.h>
+@@ -141,7 +142,7 @@ static PyObject *xspy_write(XsHandle *self, PyObject *args)
+     char *thstr;
+     char *path;
+     char *data;
+-    int data_n;
++    Py_ssize_t data_n;
+     bool result;
+ 
+     if (!xh)
+-- 
+2.37.3
+
 
