@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF259C61DB3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B931C61DA4
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Jan 2023 13:59:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.485589.752915 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.485594.752970 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pLPGd-0000r7-GN; Fri, 27 Jan 2023 13:59:47 +0000
+	id 1pLPGj-0002PX-Dj; Fri, 27 Jan 2023 13:59:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 485589.752915; Fri, 27 Jan 2023 13:59:47 +0000
+Received: by outflank-mailman (output) from mailman id 485594.752970; Fri, 27 Jan 2023 13:59:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pLPGd-0000qw-9q; Fri, 27 Jan 2023 13:59:47 +0000
-Received: by outflank-mailman (input) for mailman id 485589;
- Fri, 27 Jan 2023 13:59:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pLPGj-0002OF-8z; Fri, 27 Jan 2023 13:59:53 +0000
+Received: by outflank-mailman (input) for mailman id 485594;
+ Fri, 27 Jan 2023 13:59:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dhsa=5Y=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pLPGc-0000nM-5W
- for xen-devel@lists.xenproject.org; Fri, 27 Jan 2023 13:59:46 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id da9747f9-9e4a-11ed-a5d9-ddcf98b90cbd;
- Fri, 27 Jan 2023 14:59:45 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id r2so5045666wrv.7
- for <xen-devel@lists.xenproject.org>; Fri, 27 Jan 2023 05:59:45 -0800 (PST)
+ id 1pLPGi-00023y-6B
+ for xen-devel@lists.xenproject.org; Fri, 27 Jan 2023 13:59:52 +0000
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [2a00:1450:4864:20::42d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id dd9bedf9-9e4a-11ed-b8d1-410ff93cb8f0;
+ Fri, 27 Jan 2023 14:59:50 +0100 (CET)
+Received: by mail-wr1-x42d.google.com with SMTP id m14so4594038wrg.13
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Jan 2023 05:59:50 -0800 (PST)
 Received: from localhost.localdomain
  (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
  by smtp.gmail.com with ESMTPSA id
- d3-20020adfe2c3000000b002bc7fcf08ddsm3971131wrj.103.2023.01.27.05.59.43
+ d3-20020adfe2c3000000b002bc7fcf08ddsm3971131wrj.103.2023.01.27.05.59.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jan 2023 05:59:43 -0800 (PST)
+ Fri, 27 Jan 2023 05:59:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da9747f9-9e4a-11ed-a5d9-ddcf98b90cbd
+X-Inumbo-ID: dd9bedf9-9e4a-11ed-b8d1-410ff93cb8f0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=smSUDHICnf15fQP+C9uW/E72KuO/jLzmp6nN3W3CB9I=;
-        b=dadblgR1q6IpOd/TXAOyYr6zV+UO44OSHTRu9HcBRSAYqqx8znzLOQFLfVDCmzRDom
-         eGyuXaL+Jx/q+d4+uLVPTn+wluxGZXCG9UeeuJ68ilv5SwvdyuzVX6cGZWEk4d3xcmSH
-         WXYG96A3vobHVKMEsk3LlSrP9VJgKyNQTqIg5pOcAZUYoknyuZQzvs+/nSdUwYO0Xnlz
-         TYpTLZM+l5+rNnmhDW6b5a6QEikx6WwD5P7K7rHHBPFrKUkQ9zk8ul3aM1bSFA+GxSsZ
-         FQ5SxA1vE3xoIr4GnPm0MbVhOaezcWmBMg5vze6OzqJmL4g+Q54VHyfh/UyFlDFeOjDY
-         3v0g==
+        bh=nZU75X7zN3E8l3wJnpARzbbD/gMXF2Tgi8DqO2CpH0I=;
+        b=GHI2tm52iAwYlhN8x+9ynOzv3/ZRsq9sY0Dla1Uic5UCwS+KVTCEEUZnGVC0NO1goJ
+         8Hr7gqsY7To896P9L4zYW25oNnmIPBnjFzqLTbGyAHwM3lFFMj2EzrnYRQKKIfb14Kgr
+         /ha/NXFwh7FsLPByjKLb3re1KsTZ1vCiD9RMUMglieg+FXmkHk7QL9L1W3w8bj3ehzJ5
+         yr1rMzDtmJHcXi8pJIu0qEdDtHHLesC8C1Y0bKNgXvxWurthhmt7FPPLH2K42L49MTdV
+         euMpAfVPQUpc0RXMpIsLGkohMoW9p/39cGG8HEZncZhtuKy8Nd0SNSBOZBrCgTvqYWSk
+         dZHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=smSUDHICnf15fQP+C9uW/E72KuO/jLzmp6nN3W3CB9I=;
-        b=TFSrjpfiPKtEQ/z6EoQQuvtB6hk7a4JCqDeYyaS0pYdRYrCt3BrK/J5MxLe7LLtro3
-         xQ62pvbLjACeGZw/YoI1fcSWKwL3zBCBhnMVe9Uw7NBuUGHA6b6HXGMzc5H//Wv0hIBC
-         H1oJDOkGk+dhxf1tleRA/aMzF4VwM70iVJzVWkcdYLQDsazh/qZKstxeEaMfzF7jMXeu
-         NXtZHxPKrZqQZglONglOGPdpmODpKEzOnOt9AV1SnmVUPPHELU/1VJafzgHy5HOAmZ48
-         uHcCMKLA6I4bzZJTBFItrO5iLLxH+ORHH2BNQfr+8nK8Xx4Uo3kDRoGH7SGg00Bw5SNk
-         piKQ==
-X-Gm-Message-State: AO0yUKU6U9NaUSILkEwd1rL0J0S8MTdO9SCEF13qOiMfecxZmgfmdke4
-	zfwRTtYoeF1TwsohaLOlJqUhS6ZpylI=
-X-Google-Smtp-Source: AK7set8GzZy3ME0eU8wzMjCPiBHK7DckEg6zcX4yWcJO1ZuBodx9oX5jkJMzgMZlyzokyKbux07oZA==
-X-Received: by 2002:a5d:4283:0:b0:2bf:d428:a768 with SMTP id k3-20020a5d4283000000b002bfd428a768mr2043010wrq.49.1674827984421;
-        Fri, 27 Jan 2023 05:59:44 -0800 (PST)
+        bh=nZU75X7zN3E8l3wJnpARzbbD/gMXF2Tgi8DqO2CpH0I=;
+        b=24Kvp0TgxmyKSh8NlafCjAxKYeEfiNdH47lTYEduq4ZIN0/BNbHwCeuLaWOGF7sUaZ
+         F6VSMBH+9Ca7zdLM6CN93PxUgGWg3lqWvFrecxq9zpyHlt7lcq9NMZiCOTyZwxyoxuzc
+         tbNqSCdRq96gwDgXaIVE7rN2mKc8Kj3u9Sn73Y/V/vuYxCjxtETv3xOf8yVUYXCTQVDJ
+         +F+dYp+MKBGmoQ4zmeYqdNvMbBL4DSacdRd1ReonSTHFjk1QyRCnVtOxtAXvukXtGRdm
+         pXC8r8Krlajgj9ewaqG83iLKLgWA0BBj5CZVIPTqrq3ptLqa4IB0Z1aDN4DBAbp80X9r
+         YbaQ==
+X-Gm-Message-State: AFqh2kpvPCZyPvlQe9H0UHr7otTrnhnmMkyLon7dGM5uSy/vjuTHPx7l
+	xM2s+AZeK7cUeg/oL6wgeCreW1EADp0=
+X-Google-Smtp-Source: AMrXdXvvRg9Xkp5SUkn5oAnJJ++hi0NhAJhqfmq4Ydun6pzIeJaEBnccx6LMLEIg5f5Wtkc2og1zNg==
+X-Received: by 2002:a5d:6582:0:b0:2be:5c14:eb74 with SMTP id q2-20020a5d6582000000b002be5c14eb74mr23111943wru.62.1674827989547;
+        Fri, 27 Jan 2023 05:59:49 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -88,39 +88,39 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 01/14] xen/riscv: add _zicsr to CFLAGS
-Date: Fri, 27 Jan 2023 15:59:06 +0200
-Message-Id: <971c400abf7f88a6be322db72481c075d3ceb233.1674818705.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 06/14] xen/riscv: introduce empty <asm/cache.h>
+Date: Fri, 27 Jan 2023 15:59:11 +0200
+Message-Id: <1c53e9784707482edf96d144d9ce36a4fc9d7ed5.1674818705.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1674818705.git.oleksii.kurochko@gmail.com>
 References: <cover.1674818705.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Work with some registers requires csr command which is part of
-Zicsr.
+To include <xen/lib.h> <asm/cache.h> is required
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
-  - Nothing changed
+  - <asm/cache.h> is a new empty header which is required to include
+    <xen/lib.h>
 ---
- xen/arch/riscv/arch.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/riscv/include/asm/cache.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/cache.h
 
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 012dc677c3..95b41d9f3e 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -10,7 +10,7 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
- # into the upper half _or_ the lower half of the address space.
- # -mcmodel=medlow would force Xen into the lower half.
- 
--CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
-+CFLAGS += -march=$(riscv-march-y)_zicsr -mstrict-align -mcmodel=medany
- 
- # TODO: Drop override when more of the build is working
- override ALL_OBJS-y = arch/$(TARGET_ARCH)/built_in.o
+diff --git a/xen/arch/riscv/include/asm/cache.h b/xen/arch/riscv/include/asm/cache.h
+new file mode 100644
+index 0000000000..69573eb051
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/cache.h
+@@ -0,0 +1,6 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
++#ifndef _ASM_RISCV_CACHE_H
++#define _ASM_RISCV_CACHE_H
++
++#endif /* _ASM_RISCV_CACHE_H */
 -- 
 2.39.0
 
