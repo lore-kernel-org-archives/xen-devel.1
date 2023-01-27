@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4294FC54EAA
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61550C636BD
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Jan 2023 14:00:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.485591.752939 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.485590.752930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pLPGg-0001Yq-35; Fri, 27 Jan 2023 13:59:50 +0000
+	id 1pLPGe-0001IX-RE; Fri, 27 Jan 2023 13:59:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 485591.752939; Fri, 27 Jan 2023 13:59:50 +0000
+Received: by outflank-mailman (output) from mailman id 485590.752930; Fri, 27 Jan 2023 13:59:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pLPGg-0001Yc-0G; Fri, 27 Jan 2023 13:59:50 +0000
-Received: by outflank-mailman (input) for mailman id 485591;
- Fri, 27 Jan 2023 13:59:48 +0000
+	id 1pLPGe-0001IO-O5; Fri, 27 Jan 2023 13:59:48 +0000
+Received: by outflank-mailman (input) for mailman id 485590;
+ Fri, 27 Jan 2023 13:59:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dhsa=5Y=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pLPGe-0000nM-Mu
- for xen-devel@lists.xenproject.org; Fri, 27 Jan 2023 13:59:48 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
+ id 1pLPGd-0000nM-5b
+ for xen-devel@lists.xenproject.org; Fri, 27 Jan 2023 13:59:47 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc41cfcc-9e4a-11ed-a5d9-ddcf98b90cbd;
- Fri, 27 Jan 2023 14:59:48 +0100 (CET)
-Received: by mail-wm1-x32e.google.com with SMTP id fl24so3519043wmb.1
- for <xen-devel@lists.xenproject.org>; Fri, 27 Jan 2023 05:59:47 -0800 (PST)
+ id db1c1821-9e4a-11ed-a5d9-ddcf98b90cbd;
+ Fri, 27 Jan 2023 14:59:46 +0100 (CET)
+Received: by mail-wr1-x430.google.com with SMTP id b7so5070069wrt.3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Jan 2023 05:59:46 -0800 (PST)
 Received: from localhost.localdomain
  (lfbn-gre-1-240-53.w90-112.abo.wanadoo.fr. [90.112.199.53])
  by smtp.gmail.com with ESMTPSA id
- d3-20020adfe2c3000000b002bc7fcf08ddsm3971131wrj.103.2023.01.27.05.59.46
+ d3-20020adfe2c3000000b002bc7fcf08ddsm3971131wrj.103.2023.01.27.05.59.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jan 2023 05:59:46 -0800 (PST)
+ Fri, 27 Jan 2023 05:59:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc41cfcc-9e4a-11ed-a5d9-ddcf98b90cbd
+X-Inumbo-ID: db1c1821-9e4a-11ed-a5d9-ddcf98b90cbd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7CNvAgjXDN7DvNk7wXZV36nzw79XUYPxFgVXqj3cPmo=;
-        b=gfRFhfLrC0gpo+JKFXYycl/QL6Y11jmYjSMdL5zkD5QpmzjJuEiYU5BAlkgNIU3D9G
-         D+PSoBedxFd+gJO7dHkbFGw58idBgzvkizWdZGUSHkq84kauS4yII6aP2xz/xPIgr8Ve
-         jBCd5XBn/wBcuvXY5vst5+Zq1852g4OYEBsGAoiMitVRBKbxbO0DI+cQhEjyyr0xDOgC
-         jVmiNPUUvWm9I6zq0IygTAnOo+o5qhs1+BpvhVuKKmbZ1KDcToyWS/1Yuk9Tnnb+SI69
-         yqYqlbBr3QsqzJPBNuvj3s1mgWz47vBNxKIpSDackKesjHss82bxyVzx7vyac/QuaCbl
-         JYgQ==
+        bh=M6CXWGrRmetWnTON0psYBk3rMNfFAijYRefln9RvY+M=;
+        b=qIiooRD3Jx9D80j/dfTVYrMWYhVzIrmVBrhRw2guFhbEOTunfZgr9SMOXUejUh/vba
+         AYagNIgLuYAkeiwq+zaydtQeZMdGJDMONquCLgGeSEMd/dTjQsbzXkqxgDy+cnq3YwYs
+         OybGtUSQsLltQP0J+UnVFz3erk19XgoHXHV8293/DS5ZKUqkzrG/PgGR7OYnLIAEKmTl
+         S2s7zLIW1Yk+B1PCVytvbgi6CWDXu7VRf0jvuHf5vqaCxazjFOISMFGFnwfGhUY+Xzhy
+         Ev/j4n9bZWtUBvzts7U0CiwpZEKFmOTr64a+tTmum6k2jJdGENUdwItdR9gkWYfYJ4T6
+         pIBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7CNvAgjXDN7DvNk7wXZV36nzw79XUYPxFgVXqj3cPmo=;
-        b=Nkexcay9fkNMOHrCbDXMEnXql/W/5hBKtzHHatcdm0qp+ara1V1wlvFnDfl7ISBSfh
-         jM/asFyoqgsm46SZYShrXDz5jzPY3/XgEoc8yXnoW4HTkl1QCSb/VxDCZBsn/EYyZeBi
-         E2ru1kG90INxqdzRcZFkbuhv0Y+5zsli2e3y2AjHkqfUctsFrkxVCEYHS2uu4rI/v8Oi
-         I1Exeb6kQuZtrj5Uwb4rANsYkmMv/78d+F6fJhUo+v3AvAHQ3qnr8zN9OJD9hLto4BUq
-         yUkIvkaChYZUkb2r3dAV7L+XTUNUVEfX6JKYdDHcQ/8Lc6x2zPtqrHH9xxNIsnw0iY0b
-         bq7w==
-X-Gm-Message-State: AO0yUKUzNCXSdZZe0d9k8gfWEiDVv1gYnX+RuwDK59MZBHwPFVSu56lr
-	wVKXhh/XpsUx2ueQodyV08BswIR+D0M=
-X-Google-Smtp-Source: AK7set+bePZVpTJkP/anUZYoflLwL8Nzs21eqGjTRsfEcvnwXCGOOqOPTKCthpF8ezJCXmAU344z2A==
-X-Received: by 2002:a7b:c7ce:0:b0:3dc:42d2:aeee with SMTP id z14-20020a7bc7ce000000b003dc42d2aeeemr643533wmk.25.1674827987321;
-        Fri, 27 Jan 2023 05:59:47 -0800 (PST)
+        bh=M6CXWGrRmetWnTON0psYBk3rMNfFAijYRefln9RvY+M=;
+        b=UhYyNvOLFlvNZ9mKDTuoHkmfrcTmibycUQN/8uhE8RNJRkxPqiH7AE4933n7H3XLhP
+         dgL1CkEZalrdDnJW8e3YqSdWJhlgkAR6SELen0taKCzcdToJPBMouRsC+xudXrxe6Iod
+         KP6VhoFGeo6F8f/VejDe1TH8L1sEQrUE0h8VRF7rCORZlNXl+9mi4LzPu67QZ2RHCuWt
+         phRiP0CNcF54bP1HtfGJ91vI4d6JU7R1s2gkxWR703kuxA2hvU9TReB6Bk8fV/Rok+cr
+         TBphZ/Hx26PLvg7/CHZui9I3XEoHL5KKn8II7JdX1jeNcnBvgoyl182qjzjxVEX8fcH/
+         ph0w==
+X-Gm-Message-State: AFqh2kpx5pz4mNikjs4Ga0FCkfa+FokcgtN2We+jyoWgt6wMWksdCZP0
+	QoiFezSd8jkTj7VtZePqJEpdOFzmxjU=
+X-Google-Smtp-Source: AMrXdXsGr8dR80xKZBB9zzklpx4B8zZKx38QJzLfxWlGgu+EzMuTpXN+Ar0T4t70kVLT1b6kouxzjQ==
+X-Received: by 2002:adf:f2cb:0:b0:2be:4fbe:42e1 with SMTP id d11-20020adff2cb000000b002be4fbe42e1mr27629599wrp.5.1674827985409;
+        Fri, 27 Jan 2023 05:59:45 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -88,122 +88,84 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 04/14] xen/riscv: add <asm/csr.h> header
-Date: Fri, 27 Jan 2023 15:59:09 +0200
-Message-Id: <b26d981f189adad8af4560fcc10360da02df97a9.1674818705.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 02/14] xen/riscv: add <asm/asm.h> header
+Date: Fri, 27 Jan 2023 15:59:07 +0200
+Message-Id: <9a098db8e3fef97df987b2a7330333b51a21cb8c.1674818705.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1674818705.git.oleksii.kurochko@gmail.com>
 References: <cover.1674818705.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The following changes were made in comparison with <asm/csr.h> from
-Linux:
-  * remove all defines as they are defined in riscv_encoding.h
-  * leave only csr_* macros
-
-Origin: https://github.com/torvalds/linux.git 2475bf0250de
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V2:
-  - Minor refactoring mentioned in the commit message, switch tabs to
-    spaces and refactor things around __asm__ __volatile__.
-  - Update the commit message and add "Origin:" tag.
+  - Nothing changed
 ---
- xen/arch/riscv/include/asm/csr.h | 84 ++++++++++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/csr.h
+ xen/arch/riscv/include/asm/asm.h | 54 ++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/asm.h
 
-diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+diff --git a/xen/arch/riscv/include/asm/asm.h b/xen/arch/riscv/include/asm/asm.h
 new file mode 100644
-index 0000000000..4275cf6515
+index 0000000000..6d426ecea7
 --- /dev/null
-+++ b/xen/arch/riscv/include/asm/csr.h
-@@ -0,0 +1,84 @@
++++ b/xen/arch/riscv/include/asm/asm.h
+@@ -0,0 +1,54 @@
++/* SPDX-License-Identifier: (GPL-2.0-only) */
 +/*
-+ * SPDX-License-Identifier: GPL-2.0-only
-+ *
 + * Copyright (C) 2015 Regents of the University of California
 + */
 +
-+#ifndef _ASM_RISCV_CSR_H
-+#define _ASM_RISCV_CSR_H
++#ifndef _ASM_RISCV_ASM_H
++#define _ASM_RISCV_ASM_H
 +
-+#include <asm/asm.h>
-+#include <xen/const.h>
-+#include <asm/riscv_encoding.h>
++#ifdef __ASSEMBLY__
++#define __ASM_STR(x)	x
++#else
++#define __ASM_STR(x)	#x
++#endif
 +
-+#ifndef __ASSEMBLY__
++#if __riscv_xlen == 64
++#define __REG_SEL(a, b)	__ASM_STR(a)
++#elif __riscv_xlen == 32
++#define __REG_SEL(a, b)	__ASM_STR(b)
++#else
++#error "Unexpected __riscv_xlen"
++#endif
 +
-+#define csr_read(csr)                                           \
-+({                                                              \
-+    register unsigned long __v;                                 \
-+    __asm__ __volatile__ (  "csrr %0, " __ASM_STR(csr)          \
-+                            : "=r" (__v)                        \
-+                            : : "memory" );                     \
-+    __v;                                                        \
-+})
++#define REG_L		__REG_SEL(ld, lw)
++#define REG_S		__REG_SEL(sd, sw)
 +
-+#define csr_write(csr, val)                                     \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrw " __ASM_STR(csr) ", %0"       \
-+                            : /* no outputs */                  \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+})
++#if __SIZEOF_POINTER__ == 8
++#ifdef __ASSEMBLY__
++#define RISCV_PTR		.dword
++#else
++#define RISCV_PTR		".dword"
++#endif
++#elif __SIZEOF_POINTER__ == 4
++#ifdef __ASSEMBLY__
++#define RISCV_PTR		.word
++#else
++#define RISCV_PTR		".word"
++#endif
++#else
++#error "Unexpected __SIZEOF_POINTER__"
++#endif
 +
-+#define csr_swap(csr, val)                                      \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrrw %0, " __ASM_STR(csr) ", %1"  \
-+                            : "=r" (__v)                        \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+    __v;                                                        \
-+})
++#if (__SIZEOF_INT__ == 4)
++#define RISCV_INT		__ASM_STR(.word)
++#else
++#error "Unexpected __SIZEOF_INT__"
++#endif
 +
-+#define csr_read_set(csr, val)                                  \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrrs %0, " __ASM_STR(csr) ", %1"  \
-+                            : "=r" (__v)                        \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+    __v;                                                        \
-+})
++#if (__SIZEOF_SHORT__ == 2)
++#define RISCV_SHORT		__ASM_STR(.half)
++#else
++#error "Unexpected __SIZEOF_SHORT__"
++#endif
 +
-+#define csr_set(csr, val)                                       \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrs " __ASM_STR(csr) ", %0"       \
-+                            : /* no outputs */                  \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+})
-+
-+#define csr_read_clear(csr, val)                                \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrrc %0, " __ASM_STR(csr) ", %1"  \
-+                            : "=r" (__v)                        \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+    __v;                                                        \
-+})
-+
-+#define csr_clear(csr, val)                                     \
-+({                                                              \
-+    unsigned long __v = (unsigned long)(val);                   \
-+    __asm__ __volatile__ (  "csrc " __ASM_STR(csr) ", %0"       \
-+                            : /*no outputs */                   \
-+                            : "rK" (__v)                        \
-+                            : "memory" );                       \
-+})
-+
-+#endif /* __ASSEMBLY__ */
-+
-+#endif /* _ASM_RISCV_CSR_H */
++#endif /* _ASM_RISCV_ASM_H */
 -- 
 2.39.0
 
