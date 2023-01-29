@@ -4,45 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3843C61D97
-	for <xen-devel@archiver.kernel.org>; Sun, 29 Jan 2023 18:50:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.486409.753754 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55EDBC54EED
+	for <xen-devel@archiver.kernel.org>; Sun, 29 Jan 2023 23:03:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.486445.753777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMCkc-0000Ce-KR; Sun, 29 Jan 2023 18:50:02 +0000
+	id 1pMGhZ-0003ug-Nq; Sun, 29 Jan 2023 23:03:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 486409.753754; Sun, 29 Jan 2023 18:50:02 +0000
+Received: by outflank-mailman (output) from mailman id 486445.753777; Sun, 29 Jan 2023 23:03:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMCkc-0000C6-CU; Sun, 29 Jan 2023 18:50:02 +0000
-Received: by outflank-mailman (input) for mailman id 486409;
- Sun, 29 Jan 2023 18:50:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=As8j=52=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 1pMCkb-00007Y-1L
- for xen-devel@lists.xenproject.org; Sun, 29 Jan 2023 18:50:01 +0000
-Received: from sonata.ens-lyon.org (sonata.ens-lyon.org [140.77.166.138])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b84e0226-a005-11ed-b8d1-410ff93cb8f0;
- Sun, 29 Jan 2023 19:49:56 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by sonata.ens-lyon.org (Postfix) with ESMTP id 4D6B2200FB;
- Sun, 29 Jan 2023 19:49:54 +0100 (CET)
-Received: from sonata.ens-lyon.org ([127.0.0.1])
- by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4AaagANKtKKu; Sun, 29 Jan 2023 19:49:54 +0100 (CET)
-Received: from begin (lfbn-bor-1-1163-184.w92-158.abo.wanadoo.fr
- [92.158.138.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by sonata.ens-lyon.org (Postfix) with ESMTPSA id 0289A200F9;
- Sun, 29 Jan 2023 19:49:53 +0100 (CET)
-Received: from samy by begin with local (Exim 4.96)
- (envelope-from <samuel.thibault@ens-lyon.org>) id 1pMCkT-000G6W-1i;
- Sun, 29 Jan 2023 19:49:53 +0100
+	id 1pMGhZ-0003uZ-L1; Sun, 29 Jan 2023 23:03:09 +0000
+Received: by outflank-mailman (input) for mailman id 486445;
+ Sun, 29 Jan 2023 23:03:08 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pMGhY-0003uP-2o; Sun, 29 Jan 2023 23:03:08 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pMGhX-0005sF-MH; Sun, 29 Jan 2023 23:03:07 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pMGhX-00081n-3I; Sun, 29 Jan 2023 23:03:07 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1pMGhX-0002b8-2r; Sun, 29 Jan 2023 23:03:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,298 +44,249 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b84e0226-a005-11ed-b8d1-410ff93cb8f0
-Date: Sun, 29 Jan 2023 19:49:53 +0100
-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org,
-	wl@xen.org
-Subject: Re: [PATCH] Mini-OS: move xenbus test code into test.c
-Message-ID: <20230129184953.lcfdp23l6pp42c3l@begin>
-Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Juergen Gross <jgross@suse.com>, minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org, wl@xen.org
-References: <20230127073346.6992-1-jgross@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=1T2tXTeVP9/5AgKnjM7D/rhJqQ5jAMqSCTQ08AfUfJc=; b=q1LXRnqdUDFwj5PD+OBKoO/llZ
+	MFbzu8ZDHMFP5+a9hyaceZ4mEBpEGxqwtVuLdoQIA4u6+QdOPBA53IuPOTa7Ygfyz/7KNyEUO+50h
+	nLDefupPOabUPs2U8q8tGN+mBOAQWsuNbIJucRKU9qRCJbczMZJBLFlJo0J3w+YUp7rY=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-176271-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230127073346.6992-1-jgross@suse.com>
-Organization: I am not organized
-User-Agent: NeoMutt/20170609 (1.8.3)
+MIME-Version: 1.0
+Subject: [linux-linus test] 176271: trouble: blocked/broken/fail/pass/starved
+X-Osstest-Failures:
+    linux-linus:build-armhf:<job status>:broken:regression
+    linux-linus:test-amd64-amd64-libvirt:<job status>:broken:regression
+    linux-linus:build-armhf:host-install(4):broken:regression
+    linux-linus:build-armhf:syslog-server:running:regression
+    linux-linus:test-amd64-amd64-libvirt:host-install(5):broken:heisenbug
+    linux-linus:test-amd64-amd64-qemuu-nested-intel:xen-boot:fail:heisenbug
+    linux-linus:test-armhf-armhf-examine:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-qcow2:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:build-check(1):blocked:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:build-check(1):blocked:nonblocking
+    linux-linus:build-armhf-libvirt:build-check(1):blocked:nonblocking
+    linux-linus:build-armhf:capture-logs:broken:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-seattle:hosts-allocate:starved:nonblocking
+X-Osstest-Versions-This:
+    linux=c96618275234ad03d44eafe9f8844305bb44fda4
+X-Osstest-Versions-That:
+    linux=9d84bb40bcb30a7fa16f33baa967aeb9953dda78
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sun, 29 Jan 2023 23:03:07 +0000
 
-Juergen Gross, le ven. 27 janv. 2023 08:33:46 +0100, a ecrit:
-> The test code in xenbus.c can easily be moved into test.c.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+flight 176271 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/176271/
 
-Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+Failures and problems with tests :-(
 
-> ---
->  test.c   | 108 +++++++++++++++++++++++++++++++++++++++++++++++++++-
->  xenbus.c | 113 -------------------------------------------------------
->  2 files changed, 106 insertions(+), 115 deletions(-)
-> 
-> diff --git a/test.c b/test.c
-> index 42a26661..465c54e8 100644
-> --- a/test.c
-> +++ b/test.c
-> @@ -44,6 +44,7 @@
->  #include <fcntl.h>
->  #include <xen/features.h>
->  #include <xen/version.h>
-> +#include <xen/io/xs_wire.h>
->  
->  #ifdef CONFIG_XENBUS
->  static unsigned int do_shutdown = 0;
-> @@ -52,11 +53,114 @@ static DECLARE_WAIT_QUEUE_HEAD(shutdown_queue);
->  #endif
->  
->  #ifdef CONFIG_XENBUS
-> -void test_xenbus(void);
-> +/* Send a debug message to xenbus.  Can block. */
-> +static void xenbus_debug_msg(const char *msg)
-> +{
-> +    int len = strlen(msg);
-> +    struct write_req req[] = {
-> +        { "print", sizeof("print") },
-> +        { msg, len },
-> +        { "", 1 }};
-> +    struct xsd_sockmsg *reply;
-> +
-> +    reply = xenbus_msg_reply(XS_DEBUG, 0, req, ARRAY_SIZE(req));
-> +    printk("Got a reply, type %d, id %d, len %d.\n",
-> +           reply->type, reply->req_id, reply->len);
-> +}
-> +
-> +static void do_ls_test(const char *pre)
-> +{
-> +    char **dirs, *msg;
-> +    int x;
-> +
-> +    printk("ls %s...\n", pre);
-> +    msg = xenbus_ls(XBT_NIL, pre, &dirs);
-> +    if ( msg )
-> +    {
-> +        printk("Error in xenbus ls: %s\n", msg);
-> +        free(msg);
-> +        return;
-> +    }
-> +
-> +    for ( x = 0; dirs[x]; x++ )
-> +    {
-> +        printk("ls %s[%d] -> %s\n", pre, x, dirs[x]);
-> +        free(dirs[x]);
-> +    }
-> +
-> +    free(dirs);
-> +}
-> +
-> +static void do_read_test(const char *path)
-> +{
-> +    char *res, *msg;
-> +
-> +    printk("Read %s...\n", path);
-> +    msg = xenbus_read(XBT_NIL, path, &res);
-> +    if ( msg )
-> +    {
-> +        printk("Error in xenbus read: %s\n", msg);
-> +        free(msg);
-> +        return;
-> +    }
-> +    printk("Read %s -> %s.\n", path, res);
-> +    free(res);
-> +}
-> +
-> +static void do_write_test(const char *path, const char *val)
-> +{
-> +    char *msg;
-> +
-> +    printk("Write %s to %s...\n", val, path);
-> +    msg = xenbus_write(XBT_NIL, path, val);
-> +    if ( msg )
-> +    {
-> +        printk("Result %s\n", msg);
-> +        free(msg);
-> +    }
-> +    else
-> +        printk("Success.\n");
-> +}
-> +
-> +static void do_rm_test(const char *path)
-> +{
-> +    char *msg;
-> +
-> +    printk("rm %s...\n", path);
-> +    msg = xenbus_rm(XBT_NIL, path);
-> +    if ( msg )
-> +    {
-> +        printk("Result %s\n", msg);
-> +        free(msg);
-> +    }
-> +    else
-> +        printk("Success.\n");
-> +}
->  
->  static void xenbus_tester(void *p)
->  {
-> -    test_xenbus();
-> +    printk("Doing xenbus test.\n");
-> +    xenbus_debug_msg("Testing xenbus...\n");
-> +
-> +    printk("Doing ls test.\n");
-> +    do_ls_test("device");
-> +    do_ls_test("device/vif");
-> +    do_ls_test("device/vif/0");
-> +
-> +    printk("Doing read test.\n");
-> +    do_read_test("device/vif/0/mac");
-> +    do_read_test("device/vif/0/backend");
-> +
-> +    printk("Doing write test.\n");
-> +    do_write_test("device/vif/0/flibble", "flobble");
-> +    do_read_test("device/vif/0/flibble");
-> +    do_write_test("device/vif/0/flibble", "widget");
-> +    do_read_test("device/vif/0/flibble");
-> +
-> +    printk("Doing rm test.\n");
-> +    do_rm_test("device/vif/0/flibble");
-> +    do_read_test("device/vif/0/flibble");
-> +    printk("(Should have said ENOENT)\n");
->  }
->  #endif
->  
-> diff --git a/xenbus.c b/xenbus.c
-> index aa1fe7bf..81e9b65d 100644
-> --- a/xenbus.c
-> +++ b/xenbus.c
-> @@ -964,119 +964,6 @@ domid_t xenbus_get_self_id(void)
->      return ret;
->  }
->  
-> -#ifdef CONFIG_TEST
-> -/* Send a debug message to xenbus.  Can block. */
-> -static void xenbus_debug_msg(const char *msg)
-> -{
-> -    int len = strlen(msg);
-> -    struct write_req req[] = {
-> -        { "print", sizeof("print") },
-> -        { msg, len },
-> -        { "", 1 }};
-> -    struct xsd_sockmsg *reply;
-> -
-> -    reply = xenbus_msg_reply(XS_DEBUG, 0, req, ARRAY_SIZE(req));
-> -    printk("Got a reply, type %d, id %d, len %d.\n",
-> -           reply->type, reply->req_id, reply->len);
-> -}
-> -
-> -static void do_ls_test(const char *pre)
-> -{
-> -    char **dirs, *msg;
-> -    int x;
-> -
-> -    printk("ls %s...\n", pre);
-> -    msg = xenbus_ls(XBT_NIL, pre, &dirs);
-> -    if ( msg )
-> -    {
-> -        printk("Error in xenbus ls: %s\n", msg);
-> -        free(msg);
-> -        return;
-> -    }
-> -
-> -    for ( x = 0; dirs[x]; x++ )
-> -    {
-> -        printk("ls %s[%d] -> %s\n", pre, x, dirs[x]);
-> -        free(dirs[x]);
-> -    }
-> -
-> -    free(dirs);
-> -}
-> -
-> -static void do_read_test(const char *path)
-> -{
-> -    char *res, *msg;
-> -
-> -    printk("Read %s...\n", path);
-> -    msg = xenbus_read(XBT_NIL, path, &res);
-> -    if ( msg )
-> -    {
-> -        printk("Error in xenbus read: %s\n", msg);
-> -        free(msg);
-> -        return;
-> -    }
-> -    printk("Read %s -> %s.\n", path, res);
-> -    free(res);
-> -}
-> -
-> -static void do_write_test(const char *path, const char *val)
-> -{
-> -    char *msg;
-> -
-> -    printk("Write %s to %s...\n", val, path);
-> -    msg = xenbus_write(XBT_NIL, path, val);
-> -    if ( msg )
-> -    {
-> -        printk("Result %s\n", msg);
-> -        free(msg);
-> -    }
-> -    else
-> -        printk("Success.\n");
-> -}
-> -
-> -static void do_rm_test(const char *path)
-> -{
-> -    char *msg;
-> -
-> -    printk("rm %s...\n", path);
-> -    msg = xenbus_rm(XBT_NIL, path);
-> -    if ( msg )
-> -    {
-> -        printk("Result %s\n", msg);
-> -        free(msg);
-> -    }
-> -    else
-> -        printk("Success.\n");
-> -}
-> -
-> -/* Simple testing thing */
-> -void test_xenbus(void)
-> -{
-> -    printk("Doing xenbus test.\n");
-> -    xenbus_debug_msg("Testing xenbus...\n");
-> -
-> -    printk("Doing ls test.\n");
-> -    do_ls_test("device");
-> -    do_ls_test("device/vif");
-> -    do_ls_test("device/vif/0");
-> -
-> -    printk("Doing read test.\n");
-> -    do_read_test("device/vif/0/mac");
-> -    do_read_test("device/vif/0/backend");
-> -
-> -    printk("Doing write test.\n");
-> -    do_write_test("device/vif/0/flibble", "flobble");
-> -    do_read_test("device/vif/0/flibble");
-> -    do_write_test("device/vif/0/flibble", "widget");
-> -    do_read_test("device/vif/0/flibble");
-> -
-> -    printk("Doing rm test.\n");
-> -    do_rm_test("device/vif/0/flibble");
-> -    do_read_test("device/vif/0/flibble");
-> -    printk("(Should have said ENOENT)\n");
-> -}
-> -#endif /* CONFIG_TEST */
-> -
->  /*
->   * Local variables:
->   * mode: C
-> -- 
-> 2.35.3
-> 
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                     <job status>                 broken
+ test-amd64-amd64-libvirt        <job status>                 broken
+ build-armhf                   4 host-install(4)        broken REGR. vs. 173462
+ build-armhf                   3 syslog-server                running
 
--- 
-Samuel
----
-Pour une évaluation indépendante, transparente et rigoureuse !
-Je soutiens la Commission d'Évaluation de l'Inria.
+Tests which are failing intermittently (not blocking):
+ test-amd64-amd64-libvirt      5 host-install(5)          broken pass in 176267
+ test-amd64-amd64-qemuu-nested-intel  8 xen-boot            fail pass in 176267
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-examine      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-qcow2  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-arndale   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit1   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-cubietruck  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-vhd       1 build-check(1)               blocked  n/a
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ build-armhf                   5 capture-logs          broken blocked in 173462
+ test-amd64-amd64-libvirt    15 migrate-support-check fail in 176267 never pass
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 173462
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 173462
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-seattle   3 hosts-allocate               starved  n/a
+
+version targeted for testing:
+ linux                c96618275234ad03d44eafe9f8844305bb44fda4
+baseline version:
+ linux                9d84bb40bcb30a7fa16f33baa967aeb9953dda78
+
+Last test of basis   173462  2022-10-07 18:41:45 Z  114 days
+Failing since        173470  2022-10-08 06:21:34 Z  113 days  235 attempts
+Testing same since   176267  2023-01-29 00:13:34 Z    0 days    2 attempts
+
+------------------------------------------------------------
+3466 people touched revisions under test,
+not listing them all
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  broken  
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-freebsd11-amd64                             pass    
+ test-amd64-amd64-freebsd12-amd64                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  blocked 
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  blocked 
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  blocked 
+ test-armhf-armhf-xl-cubietruck                               blocked 
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     blocked 
+ test-amd64-amd64-qemuu-nested-intel                          fail    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     broken  
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                blocked 
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               blocked 
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     blocked 
+ test-arm64-arm64-xl-seattle                                  starved 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      pass    
+ test-armhf-armhf-xl-vhd                                      blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-armhf broken
+broken-job test-amd64-amd64-libvirt broken
+broken-step test-amd64-amd64-libvirt host-install(5)
+broken-step build-armhf host-install(4)
+broken-step build-armhf capture-logs
+broken-job build-armhf broken
+
+Not pushing.
+
+(No revision log; it would be 533253 lines long.)
 
