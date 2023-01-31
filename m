@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1DA7C636CD
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 05:52:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.487383.755003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AFAC636CC
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 07:41:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.487425.755031 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMjYk-0001VK-4k; Tue, 31 Jan 2023 05:51:58 +0000
+	id 1pMlFs-0007TF-7D; Tue, 31 Jan 2023 07:40:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 487383.755003; Tue, 31 Jan 2023 05:51:58 +0000
+Received: by outflank-mailman (output) from mailman id 487425.755031; Tue, 31 Jan 2023 07:40:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMjYk-0001VC-2A; Tue, 31 Jan 2023 05:51:58 +0000
-Received: by outflank-mailman (input) for mailman id 487383;
- Tue, 31 Jan 2023 05:51:57 +0000
+	id 1pMlFs-0007T8-4T; Tue, 31 Jan 2023 07:40:36 +0000
+Received: by outflank-mailman (input) for mailman id 487425;
+ Tue, 31 Jan 2023 07:40:34 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1pMjYj-0001V3-Oh; Tue, 31 Jan 2023 05:51:57 +0000
+ id 1pMlFq-0007Sy-Px; Tue, 31 Jan 2023 07:40:34 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1pMjYj-000070-Ku; Tue, 31 Jan 2023 05:51:57 +0000
+ id 1pMlFq-0002io-Lw; Tue, 31 Jan 2023 07:40:34 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1pMjYj-0001a1-C4; Tue, 31 Jan 2023 05:51:57 +0000
+ id 1pMlFq-0005ts-E2; Tue, 31 Jan 2023 07:40:34 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pMjYj-0005bV-BL; Tue, 31 Jan 2023 05:51:57 +0000
+ id 1pMlFq-00012k-Db; Tue, 31 Jan 2023 07:40:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,15 +47,15 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=JjtkaNJg4l8JgqbhWgAOuRaDu49oF1azn4bJI5PdD6A=; b=56EWh797cWPgK+iAu8HXakmBgw
-	G5rFrqu3KhBNR4Trap7mV9ptQWw0z0VuPcK7NayuYXosDKoxjWPrJF84ZYsiK/jJz+fl84vbaxTJE
-	uro8tLFQfArZ3+0cxMu9WeRtJKU/FV3I6FoaVSIFGxqqPMdK9G65iFNCsBh1KTjdefRA=;
+	bh=EwNNDeGWhOPZKqryfxpDNRRd8NZIS9pfjKJ5tuLPnXQ=; b=iwLQccbfThBAHF4dd1N3+NDy+m
+	grNIB0SyxmKwmoCqCUI8x6Qb0MGgC5kFrl7nKajxzLPksNtXRK1kCsswzO4+cCa07sR64WSjNGp02
+	Baak+HS25GaS0iCURcDnaS+yAaP87H0gDQVkDGcL+jGW3WnJ9DE1flXPrUpo+w19V9fo=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-176288-mainreport@xen.org>
+Message-ID: <osstest-176292-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 176288: trouble: blocked/broken/pass
+Subject: [xen-unstable-smoke test] 176292: trouble: blocked/broken/pass
 X-Osstest-Failures:
     xen-unstable-smoke:build-armhf:<job status>:broken:regression
     xen-unstable-smoke:build-armhf:host-install(4):broken:regression
@@ -70,10 +70,10 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     xen=10b80ee5588e8928b266dea02a5e99d098bd227a
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 31 Jan 2023 05:51:57 +0000
+Date: Tue, 31 Jan 2023 07:40:34 +0000
 
-flight 176288 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/176288/
+flight 176292 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/176292/
 
 Failures and problems with tests :-(
 
@@ -96,7 +96,7 @@ baseline version:
  xen                  10b80ee5588e8928b266dea02a5e99d098bd227a
 
 Last test of basis   176151  2023-01-26 14:00:29 Z    4 days
-Testing same since   176283  2023-01-30 21:02:20 Z    0 days    4 attempts
+Testing same since   176283  2023-01-30 21:02:20 Z    0 days    5 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
