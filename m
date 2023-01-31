@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E51C636D7
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 21:29:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.487849.755604 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48EF5C63797
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 21:29:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.487847.755590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMyC7-0001QU-Q9; Tue, 31 Jan 2023 21:29:35 +0000
+	id 1pMyC6-00015d-35; Tue, 31 Jan 2023 21:29:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 487849.755604; Tue, 31 Jan 2023 21:29:35 +0000
+Received: by outflank-mailman (output) from mailman id 487847.755590; Tue, 31 Jan 2023 21:29:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMyC7-0001PN-LU; Tue, 31 Jan 2023 21:29:35 +0000
-Received: by outflank-mailman (input) for mailman id 487849;
- Tue, 31 Jan 2023 21:29:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pMyC5-000159-Ty; Tue, 31 Jan 2023 21:29:33 +0000
+Received: by outflank-mailman (input) for mailman id 487847;
+ Tue, 31 Jan 2023 21:29:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qwjI=54=citrix.com=prvs=3886215e8=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pMyC5-0000Nm-Kb
- for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 21:29:33 +0000
+ id 1pMyC4-0000Nb-Kh
+ for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 21:29:32 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 58685249-a1ae-11ed-b63b-5f92e7d2e73a;
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 58eef30c-a1ae-11ed-933c-83870f6b2ba8;
  Tue, 31 Jan 2023 22:29:31 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,62 +38,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 58685249-a1ae-11ed-b63b-5f92e7d2e73a
+X-Inumbo-ID: 58eef30c-a1ae-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1675200571;
+  d=citrix.com; s=securemail; t=1675200570;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=D6fomBGSmJOQ8kYSoARFYZfJ7J0cbqAWh1IAdPyYhsE=;
-  b=JYEzherDJoTOePts40n4Aw3VyqbG07cKdW3/nIiXhQDQl4rtz2h72RNi
-   PL75zCAHkKhjEVHCL41hn6+/1ve1Xfp2v5iOkk7UP2tD4wymOE25Z025/
-   vQcXVrnvZa+PdpAgj8BOfli07zt620i73jBCXIWNkrrA5xeZQaVIQjE/c
-   k=;
+  bh=h6tenPYxyZVuTbfcgU9nfxQU9sqSsuEBVjFHdCiT8ok=;
+  b=ZqQqvOdX5KKbbBc3TH9V8JrKxTvwFWztDm1k7EmLlFMal2Qc2wD+TqMZ
+   MZj+V/IaN4scW7KbBhxfC/5ayssWolx4KVrtyEtccb5tDt0lvvDBvtvEV
+   N8h6tAFJtwyY9c0q7TKebPETQ/bQV7g9QRc9QqhlA2PoLcfTTsmXI2xWG
+   U=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 95499181
+X-MesageID: 95499179
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:UaIn26Dp78IZrxVW/yjjw5YqxClBgxIJ4kV8jS/XYbTApG8ghmNWy
- TcbCG+EOvyDYmOgL4t1O4Ti9RsHuZ/Wm9M1QQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
- yk6QoOdRCzhZiaE/n9BCpC48T8nk/nNHuCnYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
- t7pyyHlEAbNNwVcbyRFtMpvlDs15K6p4GpD5wRlDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
- uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
- jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIw0/5SWVMJ1
- +IhMTkAYjTY28uE8qOCY7w57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
- pdHL2M1N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9K4HWFJQMzh/wS
- mTu2zrFWkslF8Wl8BWZ8m6QivTwwy3UcddHfFG/3qEz2wDCroAJMzUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQiHKNoBM0QddbFOw+rgaXxcLpDx2xXzZeCGQbMZp/6ZFwHGZxv
- rOUoz/3LRV3leWnDlCDz66doD+WYnQ8H10TXAZRGGPp/OLfiI00ixvOSPNqH6i0ksD5FFnM/
- tyakMQtr+5N1JBWjs1X6XiC2mvx/caREmbZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/pnzv55p0xWG2zaD+qXNEBzzk0NPhagKvFlDyL5Ba67ogwPBb
- k7Joh9275ROJnasZqIfS9vvVJlznPC4TYm/DK+8gj9yjn9ZLV/vwc2TTRTIgzCFfLYEzsnTx
- qt3ge7zVC1HWMyLPRK9RvsH0K9D+8zN7Tq7eHwP9Dz+ieD2TCfMGd843K6mMrhRAFWs/F+Er
- L6y9qKil31ibQEJSnKOrdBIcg1WdyhT6FKfg5U/S9Nv6zFOQAkJY8I9C5t4E2C5t8y5Ttv1w
- 0w=
-IronPort-HdrOrdr: A9a23:6YTmlaFIAcvJGvc6pLqF8ZLXdLJyesId70hD6qkvc3Fom52j/f
- xGws5x6fatskdoZJkh8erhBEDyewKmyXcV2/hZAV7MZniDhILFFu9fBM7ZskTd8k7Fh6ZgPM
- VbAs9D4bTLZDAX4voSojPIderIq+P3k5xA8N2uqkuFOjsaCZ2IgT0ZNi+rVmlNACVWD5swE5
- SRouJBujqbYHwSKuirG3UfWODHhtvT0LbrewQPCRIL4BSHyWrA0s+xLzGomjMlFx9fy7Yr9m
- bI1yT/+6WYqvm+jjPMymPJ6JxSud35jv9OHtaFhMQ5IijlziyoeINicbufuy1dmpDl1H8a1P
- 335zswNcV67H3cOkuvpwH25gXm2DEyr1f/1F6xmxLY0IDEbQN/L/AEqZNScxPf5UZllsp7yr
- h302WQsIcSJQ/cnR76+8PDW3hR5wWJSDsZ4KAuZk5kIMsjgYxq3M8iFYRuYdU99RfBmcEa+S
- 9VfYThDbhtABenhjvizxNSKZSXLwkO91G9MwU/U4WuokRrtWE8wE0CyMMFmHAcsJo7Vplf/u
- zBdr9ljbdUU6YtHNZA7co6MLmK41b2MGfxGXPXJU6iGLAMOnrLpZKy6LIp5PuycJhNyJcpgp
- zOXF5RqGZ3IivVeLuz9YwO9gqITHS2XDzrxM0b759luqfkTL6uNSGYUlghn8apvv1aCMzGXP
- S4Po5QHpbYXBzTMJcM2xe7V4hZKHEYXsFQstEnW0iWqsaOMYHuvvyzSoehGFMsK0dVZorSOA
- pzYNGoHrQ+0qmCYA6HvCTs
+IronPort-Data: A9a23:dbqxyaKz/vJ8W1YuFE+R0JUlxSXFcZb7ZxGr2PjKsXjdYENShDMOz
+ 2QcXGCPaPuNajDyKNkiPYmy8E1S6JTWm4MyQVBlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
+ ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHv+kUrWs1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
+ Jb5rta31GWNglaYCUpJrfPcwP9TlK6q4mhA5wdnPasjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
+ /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
+ jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5eGUQWx
+ 7s6NgkUZx2Po7nq6YCJW9BF05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
+ oxANGQpNU6bC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TbGJkEzx/H9
+ woq+UziPB9CZYSR+AaI91ypgM70xDrZcYE7QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxasshcCVvJKHuY96QXLzbDbizt1HUBdEGQHMoZ/8pZrG3pzj
+ AThc87V6SJHmaWwEUDa1KmttDq/NQxOcUYwVz49ZF5QizX8m70bghXKR9dlNae6iNzpBD39q
+ wy3QDgCa6Y71pBSifjilbzTq3f1/8WSEFZpjunCdjj9hj6VcrJJcGBBBbLzyf9bZLiUQVCa1
+ JTvs5jPtbteZX1hecHkfQnsIF1Lz6zdWNE/qQQ1d3XEy9hK0yDLQGyoyGsiTHqFy+5dEdMTX
+ GfduBlK+LhYN2awYKl8buqZUpp1kPGxTYy9C6qOMbKih6SdkyferElTibO4hTixwCDAb4lgU
+ XtkTSpcJSlDUvk2pNZHb+wczaUq1kgDKZD7HPjGI+Cc+ePGPha9EO5VWGZim8hltMtoVi2Jq
+ YcAXyZLoj0DONDDjt7/qtdPcwtVcCRhVfgbaaV/L4a+H+avI0l5Y9e5/F/rU9UNc3h9/gsQw
+ kyAZw==
+IronPort-HdrOrdr: A9a23:x/ZWIKsggLX9ZL7yRf0m/2E77skCb4Aji2hC6mlwRA09TyXGra
+ 2TdaUgvyMc1gx7ZJh5o6H5BEGBKUm9yXcH2/hrAV7CZniuhILGFvAH0WKP+VPd8mjFh5dgPM
+ RbAuBD4b/LfD9HZK/BiWHVfOrIguP3lpxA7t2urEuFODsaDp2ImD0JaDpzfHcWeCB2Qb4CUL
+ aM7MtOoDStPVwRc8SAH3EAG8TTutHRk5riQBgeQzoq8hOHgz+E4KPzV0Hw5GZVbxp/hZMZtU
+ TVmQ3w4auu99m91x/nzmfWq7hGhdf7zdNHJcqUzuwYMC/lhAqEbJloH5eCoDc2iuey70tCqq
+ iGnz4Qe+BIr1/BdGC8phXgnyP61iw11nPkwViExVP+vM3QXlsBeoZ8rLMcViGcx1srvdl63q
+ 4O9XmerYBrARTJmzm4z8TUVittilG/rRMZ4KEuZj1kIMUjgY1q3MwiFXBuYdQ99eXBmcIa+d
+ xVfYDhDTBtABanhj7izy1SKZeXLw4O91+9MzU/U4quonVrdTlCvjcl7d1akXEa+J0nTZ5Yo+
+ zCL6RzjblLCtQbdKRnGY46ML+K40H2MGDx2VipUCHaPbBCP2iIp4/84b0z6u3vcJsUzIEqkJ
+ CEVF9Dr2Y9d0/nFMXLhfRwg2bwaXT4WS6oxtBV5pB/tLG5TL33MTebQFRrl8e7uf0QDsDSRv
+ 72MpNLBP3oK3foBO9yrnrDcogXLWNbXNweu949VV7LqsXXKpfyvuiea/rXLKqFK0dWZoo+OA
+ pyYNHeHrQw0qnwYA6GvPH4YQKSRnDC
 X-IronPort-AV: E=Sophos;i="5.97,261,1669093200"; 
-   d="scan'208";a="95499181"
+   d="scan'208";a="95499179"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Christian Lindig
 	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>,
 	=?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>, Rob Hoes
 	<Rob.Hoes@citrix.com>
-Subject: [PATCH 4/7] tools/ocaml/evtchn: Misc cleanup
-Date: Tue, 31 Jan 2023 21:29:10 +0000
-Message-ID: <20230131212913.6199-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/7] tools/ocaml/libs: Allocate the correct amount of memory for Abstract_tag
+Date: Tue, 31 Jan 2023 21:29:08 +0000
+Message-ID: <20230131212913.6199-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20230131212913.6199-1-andrew.cooper3@citrix.com>
 References: <20230131212913.6199-1-andrew.cooper3@citrix.com>
@@ -101,17 +101,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
- * Remove local integers when all we're returning is Val_int() of another
-   variable.  The CAMLlocal*() can't be optimised automatically, as it's
-   registered with the GC.
- * Rename "virq_type" to "virq" and "_port" to "port".
- * In stub_eventchn_pending(), rename 'port' to 'rc', to be consistent with
-   all other stubs that return xenevtchn_port_or_error_t.
- * In stub_eventchn_unmask(), check for rc == -1 to be consistent with all
-   other stubs.
+caml_alloc() takes units of Wsize (word size), not bytes.  As a consequence,
+we're allocating 4 or 8 times too much memory.
 
-No practical change.
+Ocaml has a helper, Wsize_bsize(), but it truncates cases which aren't an
+exact multiple.  Use a BUILD_BUG_ON() to cover the potential for truncation,
+as there's no rounding-up form of the helper.
 
+Fixes: 8b7ce06a2d34 ("ocaml: Add XC bindings.")
+Fixes: d3e649277a13 ("ocaml: add mmap bindings implementation.")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Christian Lindig <christian.lindig@citrix.com>
@@ -119,123 +117,64 @@ CC: David Scott <dave@recoil.org>
 CC: Edwin Török <edwin.torok@cloud.com>
 CC: Rob Hoes <Rob.Hoes@citrix.com>
 ---
- tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 45 +++++++++++----------------
- 1 file changed, 18 insertions(+), 27 deletions(-)
+ tools/ocaml/libs/mmap/Makefile        | 2 ++
+ tools/ocaml/libs/mmap/xenmmap_stubs.c | 6 +++++-
+ tools/ocaml/libs/xc/xenctrl_stubs.c   | 5 ++++-
+ 3 files changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
-index d7881ca95f98..34dcfed30275 100644
---- a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
-+++ b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
-@@ -98,17 +98,15 @@ CAMLprim value stub_eventchn_fdopen(value fdval)
- CAMLprim value stub_eventchn_fd(value xce_val)
- {
- 	CAMLparam1(xce_val);
--	CAMLlocal1(result);
- 	xenevtchn_handle *xce = xce_of_val(xce_val);
- 	int fd;
+diff --git a/tools/ocaml/libs/mmap/Makefile b/tools/ocaml/libs/mmap/Makefile
+index a62153713571..855b8b2c9877 100644
+--- a/tools/ocaml/libs/mmap/Makefile
++++ b/tools/ocaml/libs/mmap/Makefile
+@@ -2,6 +2,8 @@ OCAML_TOPLEVEL=$(CURDIR)/../..
+ XEN_ROOT=$(OCAML_TOPLEVEL)/../..
+ include $(OCAML_TOPLEVEL)/common.make
  
-+	/* Don't drop the GC lock.  This is a simple read out of memory */
- 	fd = xenevtchn_fd(xce);
- 	if (fd == -1)
- 		caml_failwith("evtchn fd failed");
- 
--	result = Val_int(fd);
--
--	CAMLreturn(result);
-+	CAMLreturn(Val_int(fd));
- }
- 
- CAMLprim value stub_eventchn_notify(value xce_val, value port)
-@@ -131,37 +129,34 @@ CAMLprim value stub_eventchn_bind_interdomain(value xce_val, value domid,
-                                               value remote_port)
- {
- 	CAMLparam3(xce_val, domid, remote_port);
--	CAMLlocal1(port);
- 	xenevtchn_handle *xce = xce_of_val(xce_val);
- 	xenevtchn_port_or_error_t rc;
- 
- 	caml_enter_blocking_section();
--	rc = xenevtchn_bind_interdomain(xce, Int_val(domid), Int_val(remote_port));
-+	rc = xenevtchn_bind_interdomain(xce, Int_val(domid),
-+					Int_val(remote_port));
- 	caml_leave_blocking_section();
- 
- 	if (rc == -1)
- 		caml_failwith("evtchn bind_interdomain failed");
--	port = Val_int(rc);
- 
--	CAMLreturn(port);
-+	CAMLreturn(Val_int(rc));
- }
- 
--CAMLprim value stub_eventchn_bind_virq(value xce_val, value virq_type)
-+CAMLprim value stub_eventchn_bind_virq(value xce_val, value virq)
- {
--	CAMLparam2(xce_val, virq_type);
--	CAMLlocal1(port);
-+	CAMLparam2(xce_val, virq);
- 	xenevtchn_handle *xce = xce_of_val(xce_val);
- 	xenevtchn_port_or_error_t rc;
- 
- 	caml_enter_blocking_section();
--	rc = xenevtchn_bind_virq(xce, Int_val(virq_type));
-+	rc = xenevtchn_bind_virq(xce, Int_val(virq));
- 	caml_leave_blocking_section();
- 
- 	if (rc == -1)
- 		caml_failwith("evtchn bind_virq failed");
--	port = Val_int(rc);
- 
--	CAMLreturn(port);
-+	CAMLreturn(Val_int(rc));
- }
- 
- CAMLprim value stub_eventchn_unbind(value xce_val, value port)
-@@ -183,35 +178,31 @@ CAMLprim value stub_eventchn_unbind(value xce_val, value port)
- CAMLprim value stub_eventchn_pending(value xce_val)
- {
- 	CAMLparam1(xce_val);
--	CAMLlocal1(result);
- 	xenevtchn_handle *xce = xce_of_val(xce_val);
--	xenevtchn_port_or_error_t port;
-+	xenevtchn_port_or_error_t rc;
- 
- 	caml_enter_blocking_section();
--	port = xenevtchn_pending(xce);
-+	rc = xenevtchn_pending(xce);
- 	caml_leave_blocking_section();
- 
--	if (port == -1)
-+	if (rc == -1)
- 		caml_failwith("evtchn pending failed");
--	result = Val_int(port);
- 
--	CAMLreturn(result);
-+	CAMLreturn(Val_int(rc));
- }
- 
--CAMLprim value stub_eventchn_unmask(value xce_val, value _port)
-+CAMLprim value stub_eventchn_unmask(value xce_val, value port)
- {
--	CAMLparam2(xce_val, _port);
-+	CAMLparam2(xce_val, port);
- 	xenevtchn_handle *xce = xce_of_val(xce_val);
--	evtchn_port_t port;
- 	int rc;
- 
--	port = Int_val(_port);
--
- 	caml_enter_blocking_section();
--	rc = xenevtchn_unmask(xce, port);
-+	rc = xenevtchn_unmask(xce, Int_val(port));
- 	caml_leave_blocking_section();
- 
--	if (rc)
-+	if (rc == -1)
- 		caml_failwith("evtchn unmask failed");
++CFLAGS += $(CFLAGS_xeninclude)
 +
- 	CAMLreturn(Val_unit);
- }
+ OBJS = xenmmap
+ INTF = $(foreach obj, $(OBJS),$(obj).cmi)
+ LIBS = xenmmap.cma xenmmap.cmxa
+diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
+index e03951d781bb..d623ad390e40 100644
+--- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
++++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
+@@ -21,6 +21,8 @@
+ #include <errno.h>
+ #include "mmap_stubs.h"
+ 
++#include <xen-tools/libs.h>
++
+ #include <caml/mlvalues.h>
+ #include <caml/memory.h>
+ #include <caml/alloc.h>
+@@ -59,7 +61,9 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
+ 	default: caml_invalid_argument("maptype");
+ 	}
+ 
+-	result = caml_alloc(sizeof(struct mmap_interface), Abstract_tag);
++	BUILD_BUG_ON((sizeof(struct mmap_interface) % sizeof(value)) != 0);
++	result = caml_alloc(Wsize_bsize(sizeof(struct mmap_interface)),
++			    Abstract_tag);
+ 
+ 	if (mmap_interface_init(Intf_val(result), Int_val(fd),
+ 	                        c_pflag, c_mflag,
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+index 728818445975..fd1f306f0202 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs.c
++++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+@@ -1031,7 +1031,10 @@ CAMLprim value stub_map_foreign_range(value xch, value dom,
+ 	uint32_t c_dom;
+ 	unsigned long c_mfn;
+ 
+-	result = caml_alloc(sizeof(struct mmap_interface), Abstract_tag);
++	BUILD_BUG_ON((sizeof(struct mmap_interface) % sizeof(value)) != 0);
++	result = caml_alloc(Wsize_bsize(sizeof(struct mmap_interface)),
++			    Abstract_tag);
++
+ 	intf = (struct mmap_interface *) result;
+ 
+ 	intf->len = Int_val(size);
 -- 
 2.11.0
 
