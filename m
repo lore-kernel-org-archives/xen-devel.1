@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06466C636CC
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EF3C636D4
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 21:29:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.487844.755557 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.487850.755613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMyC4-0000Nz-6D; Tue, 31 Jan 2023 21:29:32 +0000
+	id 1pMyC8-0001Xy-CO; Tue, 31 Jan 2023 21:29:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 487844.755557; Tue, 31 Jan 2023 21:29:32 +0000
+Received: by outflank-mailman (output) from mailman id 487850.755613; Tue, 31 Jan 2023 21:29:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMyC4-0000Ns-23; Tue, 31 Jan 2023 21:29:32 +0000
-Received: by outflank-mailman (input) for mailman id 487844;
- Tue, 31 Jan 2023 21:29:30 +0000
+	id 1pMyC8-0001VA-1g; Tue, 31 Jan 2023 21:29:36 +0000
+Received: by outflank-mailman (input) for mailman id 487850;
+ Tue, 31 Jan 2023 21:29:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qwjI=54=citrix.com=prvs=3886215e8=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pMyC2-0000Nb-CI
- for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 21:29:30 +0000
+ id 1pMyC5-0000Nb-Kl
+ for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 21:29:33 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 54e58ec1-a1ae-11ed-933c-83870f6b2ba8;
- Tue, 31 Jan 2023 22:29:28 +0100 (CET)
+ id 599ac36b-a1ae-11ed-933c-83870f6b2ba8;
+ Tue, 31 Jan 2023 22:29:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,61 +38,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54e58ec1-a1ae-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: 599ac36b-a1ae-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1675200568;
+  d=citrix.com; s=securemail; t=1675200571;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=jNU72Uu2tmrcqHFCNgIV8t/XfjcVgtHdUCV/DbhunZ0=;
-  b=QMTAIaJm5uUkfYsHhHh2hOmT50uppvvn2vGnDBTiyGu9DAV8jDMUCRHI
-   deD4VWRrMcJ8iF4eZBFHj1uUyUTGWch1DkfbvylTBb428J9UtTjolI0s9
-   +3zUzq1u89Eb8QCyeAhb3jWz95EGclaGS6TXrvLTyzEadp/LYwBXR092n
-   4=;
+  bh=YZc3Qe4tQu/04xfxAwG/P7vQhM7bvhY61z2fO5lZ86M=;
+  b=FotiXju3+4liJe4vHjhgOMTCs9TVfB+zVgxBhtX9ltBoKjhWldW57DsF
+   jgDX8ZTyCF3y2Py+klAHfyo7CvrW1UwBAUlmPKhiKZ/dBWo/swI09+eW7
+   gXS/5P7YIe+u3+XgvypS2cJw+GZJt1RIcTD3loiooBiPJ42kKPMbIxbeE
+   c=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 95499176
+X-MesageID: 95499183
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:DRPIu6rBBa1a1sQTvyEoYRPaRKNeBmIZZRIvgKrLsJaIsI4StFCzt
- garIBmGOayJYmr3L4onPYrg9k1XucfSz4BjHQZtrC9kQy0WoJuZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpAFc+E0/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKm06WxwUmAWP6gR5weHzCBNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXABkVS0ixwMCo+auyR+VI3ZgKHvv6BapK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVxrl6PqLVxyG/U1AFri5DmMcbPe8zMTsJQ9qqdj
- jObozWoW05EXDCZ4XmM3SylpNbppgPcQLIbD6y90aJ7gULGkwT/DzVJDADm8JFVkHWWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U24R+A4rDZ6AGYAi4DVDEpVTA9nJZoH3pwj
- AbPxo63Q2U169V5VE5x6J+9tRbqC283M1YbbCIIaVBZyuvRsbga20enoslYLIa5idj8GDfVy
- j+MrTQji7h7sfPnx5lX7nic3Wvy+8Ghohodo1yOAzn7tl8RiJuNPdTA1LTN0RpXwG91pHGlt
- WNMpcWR5ftm4XqlxH3UG7Vl8F1ECp+43NzgbbxHRcFJG9eFoSTLkWVsDNZWei9U3j4sI2OBX
- aMqkVo5CGVvFHWrd7RrRIm6Ft4ny6Ptffy8CK+JN4sWOsAsLlXYlM2LWaJ39zm9+HXAbIllY
- cvLGSpSJSly5VtbIMqeGL5GjO5DKtEWzmLPX5HrpylLIpLHDEN5vYwtaQPUBshgtfPsnekg2
- 4oHXyd840kFAbKWj+i+2dJ7EG3m2lBgXMyo8JMKKrTTSuekcUl4Y8LsLXoaU9QNt8xoei3gp
- xlRhmcwJILDuED6
-IronPort-HdrOrdr: A9a23:zKvS1q9/wraM3VeHjKxuk+HBdr1zdoMgy1knxilNoENuH/Bwxv
- rFoB1E73TJYW4qKQkdcdDpAsm9qADnhOVICOgqTP6ftWbdyQ+Vxe1Zg7cKhgeQYhEWldQtnZ
- uIEZIOb+EYZGIS5aqU3OD7KadH/DDtytHKuQ6q9QYJcegcUdAD0+4WMGemO3wzYDMDKYsyFZ
- Ka6MYCjz28eU4PZsD+KmgZU/PFr9jrkoujRRIdHRYo5CSHkDvtsdfBYlKl9yZbdwkK7aYp8G
- DDnQC8zqK/s8ujwhuZ+37P449QkN7BzMIGIMCXkMAaJhjllw7tToV8XL+puiwzvYiUmR0Xue
- iJhy1lE9V46nvXcG3wiwDqwRPc3DEn7GKn4UOEgFP4yPaJCA4SOo5kv8Z0YxHZ400vsJVXy6
- RQxV+UsJJREFfpgDn93d7VTBtn/3DE7kbK0NRjwUC3Y7FuKIO5nrZvv3+9161wXh4S3bpXUd
- WGyvusocq+P2nqK0wx9VMfuuBEFk5DYytuBHJy9/B9mgIm4ExR3g8WwtcSkWwH8494Q55Y5/
- 7cOqAtj71WSNQKBJgNcNvpbPHHeFAleyi8RV66MBDiDuUKKnjNo5n47PE84/yrYoUByN83lI
- 7aWF1VuGYucwa2YPf+qqFj41TIWiGwTD7twsZR69xwvaD9XqPiNWmGREo1m8Wtrv0DConQWu
- q1OphRH/j/RFGebrphzkn7Qd1fOHMeWMoatpIyXE+PuNvCLsnwuunSYJ/oVcnQ+PYfKxPC61
- c4LUnOzZ97nz+Ws1fD8WbsZ08=
+IronPort-Data: A9a23:rHDd5a7tMly7k5beTkGK4QxRtDnHchMFZxGqfqrLsTDasY5as4F+v
+ mEcD23TOqzfMWenftsnPozjpEkP6MLXztRrQQNs+CEzHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraBYnoqLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+45wehBtC5gZlPakQ5QeF/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m3
+ OQ9cAJKTA66nuu7zJbgFsBetNUaBZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9zxvE9
+ zOfrz+R7hcyF/yP8zuL8niWr/b+kwL/ZL80T52V36s/6LGU7jNKU0BHPbehmtGph0j7V99BJ
+ kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c9ZZDeAS8gyGzavQpQGDCQA5oiVpMYJ88pVsHHpzi
+ wHPxomybdByjFGLYVuF0++m6hGsADEcIGMmPnMtfzkU2vC29enfkSnzZtpkFae0iPj8Fjfx3
+ y2GoUACulkDsSIY//7lpA6a2lpAsrCMF1dovVuPAgpJ+ysjPOaYi5qUBU83BBqqBKKQVRG/s
+ XcNgKByB8heXMjWxERhrAjgdYxFBspp0hWG2TaD/LF7rVxBHkJPmqgOiAyS3G8zbq45lcbBO
+ Sc/Qz956p5JJ2eNZqRqeY+3AMlC5fG+Som8B6iMNocUOMcZmOq7EMZGPB744owQuBJ0zfFX1
+ WmzLq5A8kr2+Yw4lWHrFo/xIJcgxzwkxHO7eHwI503P7FZqX1bMEe1tGALXPogEAFas/F29H
+ yB3a5HblH2ykYTWPkHqzGLkBQtTcSZgWs2q8Zw/myzqClMOJVzNwsT5mdsJE7GJVYwM/gsU1
+ hlRgnNl9Wc=
+IronPort-HdrOrdr: A9a23:hVYwJq3ICPaAWKoFIX7QPwqjBatxeYIsimQD101hICG9Lfb0qy
+ n+pp4mPEHP4wr5AEtQ4expOMG7IU80hqQFmrX5XI3SFTUO11HYSL2KgbGN/9SkIVyGygc/79
+ YpT0EdMqyWMbESt6+TjGaF+pQbsb+6GcuT9ITjJgJWPGRXgtZbnmVE42igc3FedU1jP94UBZ
+ Cc7s1Iq36JfmkWVN2yAj0oTvXOvNrCkbPheFojCwQ84AeDoDu04PqieiLolCs2Yndq+/MP4G
+ LFmwv26uGKtOy68AbV0yv+/olbg9zoz/pEHYiphtIOIjvhpw60bMBKWqGEvhoyvOazgWxa2+
+ XkklMFBYBe+nnRdma6rV/GwA/7ygsj7Hfk1BuxnWbjidaRfkN3N+NxwaZiNjfJ4Uspu99xlI
+ hR2XiCipZRBRTc2Azg+tnzUQ1wnEbcmwtsrQdTtQ0QbWItUs4QkWUtxjIXLH7GJlO51GkTKp
+ guMCgb3ocSTbrVVQGcgoAl+q3XYp16JGb6fqFFgL3Z79EepgEE82IIgMMYhXsO75Q7Vt1N4P
+ nFKL1hkPVUQtYRdr8VPpZ0fSKbMB2+ffv3ChPmHX33UKUcf37doZ/+57s4oOmsZZwT1ZM33J
+ DMSklRu2I+c1/nTZTm5uw8zjndBGGmGTj9wMBX4JZ0/rX6WbrwKCWGDFQjidGprfkTCtDSH/
+ yzJJVVCfn+KnaGI/c/4yTuH51JbXUOWswcvdg2H1qIv8LQM4Xv8vfWdf7CTYCdYgrMmlmPck
+ frcAKDVfmotHrbJUMQqCKhJU/QRg==
 X-IronPort-AV: E=Sophos;i="5.97,261,1669093200"; 
-   d="scan'208";a="95499176"
+   d="scan'208";a="95499183"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edwin.torok@cloud.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
 	David Scott <dave@recoil.org>, Rob Hoes <Rob.Hoes@citrix.com>
-Subject: [PATCH 1/7] tools/ocaml/libs: Don't declare stubs as taking void
-Date: Tue, 31 Jan 2023 21:29:07 +0000
-Message-ID: <20230131212913.6199-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/7] tools/ocaml/xc: Fix binding for xc_domain_assign_device()
+Date: Tue, 31 Jan 2023 21:29:11 +0000
+Message-ID: <20230131212913.6199-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20230131212913.6199-1-andrew.cooper3@citrix.com>
 References: <20230131212913.6199-1-andrew.cooper3@citrix.com>
@@ -102,14 +102,18 @@ Content-Transfer-Encoding: 8bit
 
 From: Edwin Török <edwin.torok@cloud.com>
 
-There is no such thing as an Ocaml function (C stub or otherwise) taking no
-parameters.  In the absence of any other parameters, unit is still passed.
+The patch adding this binding was plain broken, and unreviewed.  It modified
+the C stub to add a 4th parameter without an equivalent adjustment in the
+Ocaml side of the bindings.
 
-This doesn't explode with any ABI we care about, but would malfunction for an
-ABI environment such as stdcall.
+In 64bit builds, this causes us to dereference whatever dead value is in %rcx
+when trying to interpret the rflags parameter.
 
-Fixes: c3afd398ba7f ("ocaml: Add XS bindings.")
-Fixes: 8b7ce06a2d34 ("ocaml: Add XC bindings.")
+This has gone unnoticed because Xapi doesn't use this binding (it has its
+own), but unbreak the binding by passing RDM_RELAXED unconditionally for
+now (matching the libxl default behaviour).
+
+Fixes: 9b34056cb4 ("tools: extend xc_assign_device() to support rdm reservation policy")
 Signed-off-by: Edwin Török <edwin.torok@cloud.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -118,43 +122,47 @@ CC: David Scott <dave@recoil.org>
 CC: Edwin Török <edwin.torok@cloud.com>
 CC: Rob Hoes <Rob.Hoes@citrix.com>
 ---
- tools/ocaml/libs/xb/xenbus_stubs.c  | 5 ++---
- tools/ocaml/libs/xc/xenctrl_stubs.c | 4 ++--
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 17 +++++------------
+ 1 file changed, 5 insertions(+), 12 deletions(-)
 
-diff --git a/tools/ocaml/libs/xb/xenbus_stubs.c b/tools/ocaml/libs/xb/xenbus_stubs.c
-index 3065181a55e6..97116b07826a 100644
---- a/tools/ocaml/libs/xb/xenbus_stubs.c
-+++ b/tools/ocaml/libs/xb/xenbus_stubs.c
-@@ -30,10 +30,9 @@
- #include <xenctrl.h>
- #include <xen/io/xs_wire.h>
- 
--CAMLprim value stub_header_size(void)
-+CAMLprim value stub_header_size(value unit)
- {
--	CAMLparam0();
--	CAMLreturn(Val_int(sizeof(struct xsd_sockmsg)));
-+	return Val_int(sizeof(struct xsd_sockmsg));
- }
- 
- CAMLprim value stub_header_of_string(value s)
 diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index 2fba9c5e94d6..728818445975 100644
+index fd1f306f0202..291663bb278a 100644
 --- a/tools/ocaml/libs/xc/xenctrl_stubs.c
 +++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -86,9 +86,9 @@ static void Noreturn failwith_xc(xc_interface *xch)
- 	caml_raise_with_string(*caml_named_value("xc.error"), error_str);
+@@ -1245,17 +1245,12 @@ CAMLprim value stub_xc_domain_test_assign_device(value xch, value domid, value d
+ 	CAMLreturn(Val_bool(ret == 0));
  }
  
--CAMLprim value stub_xc_interface_open(void)
-+CAMLprim value stub_xc_interface_open(value unit)
+-static int domain_assign_device_rdm_flag_table[] = {
+-    XEN_DOMCTL_DEV_RDM_RELAXED,
+-};
+-
+-CAMLprim value stub_xc_domain_assign_device(value xch, value domid, value desc,
+-                                            value rflag)
++CAMLprim value stub_xc_domain_assign_device(value xch, value domid, value desc)
  {
--	CAMLparam0();
-+	CAMLparam1(unit);
- 	CAMLlocal1(result);
- 	xc_interface *xch;
+-	CAMLparam4(xch, domid, desc, rflag);
++	CAMLparam3(xch, domid, desc);
+ 	int ret;
+ 	int domain, bus, dev, func;
+-	uint32_t sbdf, flag;
++	uint32_t sbdf;
  
+ 	domain = Int_val(Field(desc, 0));
+ 	bus = Int_val(Field(desc, 1));
+@@ -1263,10 +1258,8 @@ CAMLprim value stub_xc_domain_assign_device(value xch, value domid, value desc,
+ 	func = Int_val(Field(desc, 3));
+ 	sbdf = encode_sbdf(domain, bus, dev, func);
+ 
+-	ret = Int_val(Field(rflag, 0));
+-	flag = domain_assign_device_rdm_flag_table[ret];
+-
+-	ret = xc_assign_device(_H(xch), _D(domid), sbdf, flag);
++	ret = xc_assign_device(_H(xch), _D(domid), sbdf,
++			       XEN_DOMCTL_DEV_RDM_RELAXED);
+ 
+ 	if (ret < 0)
+ 		failwith_xc(_H(xch));
 -- 
 2.11.0
 
