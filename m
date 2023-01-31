@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30743C636CC
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 22:52:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.487902.755733 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A39C38142
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 22:52:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.487904.755754 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMzUI-0001P9-7I; Tue, 31 Jan 2023 22:52:26 +0000
+	id 1pMzUK-0001vD-8N; Tue, 31 Jan 2023 22:52:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 487902.755733; Tue, 31 Jan 2023 22:52:26 +0000
+Received: by outflank-mailman (output) from mailman id 487904.755754; Tue, 31 Jan 2023 22:52:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMzUI-0001Ox-3s; Tue, 31 Jan 2023 22:52:26 +0000
-Received: by outflank-mailman (input) for mailman id 487902;
- Tue, 31 Jan 2023 22:52:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pMzUK-0001uY-2d; Tue, 31 Jan 2023 22:52:28 +0000
+Received: by outflank-mailman (input) for mailman id 487904;
+ Tue, 31 Jan 2023 22:52:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=skZt=54=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1pMzUG-0000Ma-F5
- for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 22:52:24 +0000
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2060a.outbound.protection.outlook.com
- [2a01:111:f400:7e8d::60a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea5a87be-a1b9-11ed-b63b-5f92e7d2e73a;
- Tue, 31 Jan 2023 23:52:20 +0100 (CET)
-Received: from MW4P222CA0029.NAMP222.PROD.OUTLOOK.COM (2603:10b6:303:114::34)
- by PH8PR12MB6913.namprd12.prod.outlook.com (2603:10b6:510:1ca::22)
+ id 1pMzUI-0008Hj-Co
+ for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 22:52:26 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20626.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::626])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ed5f3a07-a1b9-11ed-933c-83870f6b2ba8;
+ Tue, 31 Jan 2023 23:52:25 +0100 (CET)
+Received: from MW4PR03CA0022.namprd03.prod.outlook.com (2603:10b6:303:8f::27)
+ by PH0PR12MB5468.namprd12.prod.outlook.com (2603:10b6:510:ea::23)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38; Tue, 31 Jan
- 2023 22:52:17 +0000
-Received: from CO1NAM11FT066.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:114:cafe::6d) by MW4P222CA0029.outlook.office365.com
- (2603:10b6:303:114::34) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 22:52:21 +0000
+Received: from CO1NAM11FT106.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:8f:cafe::cc) by MW4PR03CA0022.outlook.office365.com
+ (2603:10b6:303:8f::27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38 via Frontend
- Transport; Tue, 31 Jan 2023 22:52:17 +0000
+ Transport; Tue, 31 Jan 2023 22:52:20 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT066.mail.protection.outlook.com (10.13.175.18) with Microsoft SMTP
+ CO1NAM11FT106.mail.protection.outlook.com (10.13.175.44) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6043.17 via Frontend Transport; Tue, 31 Jan 2023 22:52:16 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ 15.20.6043.22 via Frontend Transport; Tue, 31 Jan 2023 22:52:19 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 31 Jan
- 2023 16:52:15 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 16:52:19 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 31 Jan
- 2023 16:52:15 -0600
+ 2023 14:52:18 -0800
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Tue, 31 Jan 2023 16:52:15 -0600
+ Transport; Tue, 31 Jan 2023 16:52:18 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea5a87be-a1b9-11ed-b63b-5f92e7d2e73a
+X-Inumbo-ID: ed5f3a07-a1b9-11ed-933c-83870f6b2ba8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=T93iwMoZgy9Jf7xdUTsUCVfYa/D6Jpp0RXFRIlQSwkCyfc7s9hL1LJQgcoR4/I0ER+9zBSr8ZmZC6cC75vECbi47vsdPwEXGiEE7WJu4O/+z25AKLzGdttzJgwhgHtxTGviy2M12pyuLE+B43l8qjBOcBmKBeBW3VRAKRFa8d1kQZCoSBJWXtxb8S8m/wwrhu/QBFG3lW6xGQ9bNnngBgrtE4BXYL/gJFlQPi0Gv/pxY0QyRAQJ+KQwZjWNeJIU9e7QYDyI47u/+LRdOglQ7tS4FNDPS0Z9HzaP8G06LYjkVxkoHeOfhvEQOSfV1cQbsdcJMmta41NabIAEfBhiIzw==
+ b=mXY2AGIYjpjCP5V5Cx+0Sq7p38NQM1z89S78V/x4yehYjVXBF77UpCm7EJPoowmBcmV4DDG4dj7Ub463DQU1VvX2BjXWv/GPvkFj9XTqL5gZrdhlGSxdYGAb84wnJmy/d315XqYZbTfZ+3/0Kcj/+x3D3LMUOjjtNyyR2Om8m8ebpPUDB7Y1D15g783RPppuz2s7yhRlF7c7Z7KHhTDBL2BcZRvQCnCaPJbtk4mlLJvVtKeFIH8YFrxjFUhjlwyY6N7M+HkUNPMUQzUhRF4CyAV/RrPDBRVCpUudcnDDrE++nIac2u4LUGhsp32SHTLhrHa3oqIEWNv5ybxOAYodLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G835PztH0JFR0+pwJr/tzQC6Id3/bG3j6rumsmwk9Us=;
- b=j02vR+MZE15i1yfU/QTGm/OBjwSG1Ici7XSnR9VoefRgytLEMyUiIdMHb4RAJrOCAHhkonIsFQOK+oI15UifbqQLyJ1Ir5P/FmS+8zIIvmKeLcFirUrjFT2ioy4zvFAVyqzjYIG1JxYnQcyCYo7j0f0tzuiJ7pNh78zeDvvZdBnZYlCbKe3Dwr2lvMTjfbzXV2F+DovtM8oFxmePnv3BpIaxAIbGg73QRT8ZT0ekxEBVT6f9ZomoYVNyve4cbII7kJ5O7Ncv7TGKlP0gZ0wLN0Fn/DduOPZsVkgDAgVLHbro/HG2F9ChG5miuTtS2HV/KmhXSb0eKrBHI1mvHM1crA==
+ bh=A4ErF5BL7bDWql01g8Ddsvo8tfdsJHgWhVo5VZ0Rbpo=;
+ b=YJNZDExdjXVkGI7o9ZE+UJi114bodC53Fr+EV7TTuTM4dIOTsWH6n9YpGMa2SMnoMx2sIc6R9/MXjb8jUpXl/bU83K38JvquPNYNWAQFtEwp1ziagUXr/9AXTQEMFW0EClBg50SOBdLZpzQ528Xd8n1VvVl1sC3hIPOo8c4dsOhl1ZYoeh1vCCoJV8vyw2NSwL+JbFQNrMP9uGzxmREKGVrsgBeJvbXFxzpBMI1S2f7inSZqu92MdhKUFnRKXz9lD+PJCnJwfCGZm7dpxngPCA06h5c5ktbVLmA2uVRMBOZhKuSS4VjDpsA6eeajMMat39P1bzBxFNLUzNgGy/QsGg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G835PztH0JFR0+pwJr/tzQC6Id3/bG3j6rumsmwk9Us=;
- b=vvhB+nQylkuBK5EK0LeDpUQH+WM/0vZ8QuPvhwY6uC+8S3P+PEIIBPdxMpX8qBsw3IRouMD3kIK09w5+v7yKCRemeRj3duCc6WN3sMLKyW0FSh5o7doe7WJsYqU8Jm0Z02qLyOR3JXiiOiJohnsgbNjMDogZjhmHB313kZjK2lU=
+ bh=A4ErF5BL7bDWql01g8Ddsvo8tfdsJHgWhVo5VZ0Rbpo=;
+ b=YWhVSCLB4d07T0gyop8GGpH5x9B2fauThpMM44tfcHxGSlwOEXZqmf4gACVqY1Iuu3AjHonzrPixPwke+yvI/CGsGftvQ+KoYOOTxkyKDiq9b9qmNR8c4MKyEL2sE3Jfi0T+GRPt+QwEqssM7ntUYcxAPT8srrojr2JGk7IgYNY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -93,9 +93,9 @@ CC: <xen-devel@lists.xenproject.org>, <vikram.garhwal@amd.com>,
 	<stefano.stabellini@amd.com>, <alex.bennee@linaro.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, "Paul
  Durrant" <paul@xen.org>
-Subject: [QEMU][PATCH v5 05/10] include/hw/xen/xen_common: return error from xen_create_ioreq_server
-Date: Tue, 31 Jan 2023 14:51:44 -0800
-Message-ID: <20230131225149.14764-6-vikram.garhwal@amd.com>
+Subject: [QEMU][PATCH v5 07/10] hw/xen/xen-hvm-common: Use g_new and error_report
+Date: Tue, 31 Jan 2023 14:51:46 -0800
+Message-ID: <20230131225149.14764-8-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230131225149.14764-1-vikram.garhwal@amd.com>
 References: <20230131225149.14764-1-vikram.garhwal@amd.com>
@@ -103,85 +103,91 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT066:EE_|PH8PR12MB6913:EE_
-X-MS-Office365-Filtering-Correlation-Id: 83650632-186f-4e4d-bceb-08db03ddccf4
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT106:EE_|PH0PR12MB5468:EE_
+X-MS-Office365-Filtering-Correlation-Id: 32835289-f924-41c9-871a-08db03ddcf01
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	z/DzTBG2KJu2lQZgNJo1jzl6BYALwZkz81aWsaHCo0wnAHFAHW5T4x4hO+W5StoejY7jvmfZcPHP+GJ0Ez2mNToJIMABJz4sPcD5/f7pFMXoArorGVeAzQZXVP4YdPihFx6qAIG0WQ4b2+98uCQadhHNcHol3+PTe5YcBkYdjEWpNGxfUed2ShISyVFvNDFQ9zY0iHwGOPo+NZ1YtBv+FtmFW48VSwI8rAiG4jOP8X+JTBC72GENzEAHGgZ8JQJHWPr1dhln6sPELrpl8hTp+3bDPswgtjdKznUVKwpr1pn0up/wJMU/vHObjHkSVqm/58Qoj1//FY2n/F4mqk8OF6ATqTiJhNRj2fPtKdmjzQaUebe+90ekXOxtss3mYG6IwbVZHKMrOYaR9VrcX/vCqG37XmteKI+NeorKot7izauKgottbL3DrODI8GsXptBxwnsAbqIfy/RQ73aUa+TncU8MEn0P3DC2YrilbYo82kANGnXGSJ7ATw09GTGAliKKVmNvkn8Lv1oVk46FViDBiXwcmW8hXs7lB/pblj5Npg7Af2h1jCgByOboxJhFE5T9EYJL1i0SdrR0pEpzlc0QXowv/FCUyDJgaUk/oNeScye89DvlO7WoWV+viayCUeXzJQqY//xnKiOnd2qjiCzVnYARYTbHf5sPXfVxd0FvRbaToA+E10H9Npo8MB4MARJO2mDxXN+Y3pCXOKTDVVcNhn0Kt4ggfPhx3STWBd/8CPs=
+	lKmVv4sLAJnszWivO3MTW1loDbkWoZnh4P/MHWWXo49dAMsIuIlbeRqxpqq/mao/r+S25MToHuJtE9Ad7Z6Z0jkV93BSqmMfmbkqBKdyZ8dWBuW4uFcOZosSaNjP5I29Zk8OeMR3LOQwz0sMNfO2N1EMRkkSCVDtlhBV+xsa0Z8bKVC0nIXUJn33m4JFBmvn9k+ahHYv3CoKvYGIXC2LtjITMH3Yfny5y1vlPZRzL9yDqjauBitKwQTqKD6ZYSja7r3Pzm9gE2rp0n1x76vBUxGlTAQ7Ry1/lReEnbJh2SFsx8OtxJJFBNis/YX2X27E6HgGajfaTuku1fH8PV/+gwdgRciABFPQYHohX3lLd6Jo4AbVOQJD9hCIdKqejgGY2+Mg3WzjrmRlIEVwd0zGIcib94p1FrHilkC9ay5n/CmreMk+HU4lXhGCI89YvlCjYK33VmyviRDyXulHB6c9LzgTlLnQot8lA3KtSrtuGFnNroPGeirElW4lygLqoB0WCs0FOK8kkaQolxBx3+h6UDea0zXls1zEanr68cBa/sX++GrEOA724l5uAcluOSwtxqMVoufO82EkO0X+ZaK/bCn6z7si6oqV/hRsb+4GhM3Mc68CtwrmGQx/hMZ1x4ZgVMEXkBGD03rPHhTTkMHnBGVj7W6gxM4/Iuk4WSG+Zp6eiKaeojlgRwIkWTEsOIuACXHHGjO7KymbZhKCCRzPVQuBDdJgrAlY3li71wvjK84=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(346002)(39860400002)(376002)(396003)(136003)(451199018)(36840700001)(40470700004)(46966006)(6666004)(1076003)(6916009)(186003)(26005)(478600001)(8676002)(4326008)(70586007)(70206006)(336012)(2616005)(47076005)(41300700001)(426003)(83380400001)(2906002)(40460700003)(82740400003)(8936002)(86362001)(81166007)(36860700001)(36756003)(82310400005)(40480700001)(356005)(44832011)(316002)(5660300002)(54906003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(376002)(346002)(396003)(136003)(451199018)(40470700004)(46966006)(36840700001)(356005)(81166007)(86362001)(36860700001)(82740400003)(70586007)(316002)(36756003)(70206006)(8936002)(5660300002)(41300700001)(54906003)(4326008)(6916009)(8676002)(82310400005)(2906002)(40480700001)(44832011)(336012)(426003)(40460700003)(83380400001)(2616005)(47076005)(478600001)(186003)(26005)(1076003)(6666004)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2023 22:52:16.2741
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2023 22:52:19.7134
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 83650632-186f-4e4d-bceb-08db03ddccf4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32835289-f924-41c9-871a-08db03ddcf01
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT066.eop-nam11.prod.protection.outlook.com
+	CO1NAM11FT106.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6913
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5468
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
+Replace g_malloc with g_new and perror with error_report.
 
-This is done to prepare for enabling xenpv support for ARM architecture.
-On ARM it is possible to have a functioning xenpv machine with only the
-PV backends and no IOREQ server. If the IOREQ server creation fails,
-continue to the PV backends initialization.
-
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- include/hw/xen/xen_common.h | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ hw/xen/xen-hvm-common.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
-index 9a13a756ae..9ec69582b3 100644
---- a/include/hw/xen/xen_common.h
-+++ b/include/hw/xen/xen_common.h
-@@ -467,9 +467,10 @@ static inline void xen_unmap_pcidev(domid_t dom,
- {
- }
+diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
+index 5e3c7b073f..077c8dae5b 100644
+--- a/hw/xen/xen-hvm-common.c
++++ b/hw/xen/xen-hvm-common.c
+@@ -34,7 +34,7 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
+     trace_xen_ram_alloc(ram_addr, size);
  
--static inline void xen_create_ioreq_server(domid_t dom,
--                                           ioservid_t *ioservid)
-+static inline int xen_create_ioreq_server(domid_t dom,
-+                                          ioservid_t *ioservid)
- {
-+    return 0;
- }
+     nr_pfn = size >> TARGET_PAGE_BITS;
+-    pfn_list = g_malloc(sizeof (*pfn_list) * nr_pfn);
++    pfn_list = g_new(xen_pfn_t, nr_pfn);
  
- static inline void xen_destroy_ioreq_server(domid_t dom,
-@@ -600,8 +601,8 @@ static inline void xen_unmap_pcidev(domid_t dom,
-                                                   PCI_FUNC(pci_dev->devfn));
- }
- 
--static inline void xen_create_ioreq_server(domid_t dom,
--                                           ioservid_t *ioservid)
-+static inline int xen_create_ioreq_server(domid_t dom,
-+                                          ioservid_t *ioservid)
- {
-     int rc = xendevicemodel_create_ioreq_server(xen_dmod, dom,
-                                                 HVM_IOREQSRV_BUFIOREQ_ATOMIC,
-@@ -609,12 +610,14 @@ static inline void xen_create_ioreq_server(domid_t dom,
- 
-     if (rc == 0) {
-         trace_xen_ioreq_server_create(*ioservid);
--        return;
-+        return rc;
+     for (i = 0; i < nr_pfn; i++) {
+         pfn_list[i] = (ram_addr >> TARGET_PAGE_BITS) + i;
+@@ -731,7 +731,7 @@ void destroy_hvm_domain(bool reboot)
+             return;
+         }
+         if (errno != ENOTTY /* old Xen */) {
+-            perror("xendevicemodel_shutdown failed");
++            error_report("xendevicemodel_shutdown failed with error %d", errno);
+         }
+         /* well, try the old thing then */
+     }
+@@ -801,7 +801,7 @@ static void xen_do_ioreq_register(XenIOState *state,
      }
  
-     *ioservid = 0;
-     use_default_ioreq_server = true;
-     trace_xen_default_ioreq_server();
-+
-+    return rc;
- }
+     /* Note: cpus is empty at this point in init */
+-    state->cpu_by_vcpu_id = g_malloc0(max_cpus * sizeof(CPUState *));
++    state->cpu_by_vcpu_id = g_new0(CPUState *, max_cpus);
  
- static inline void xen_destroy_ioreq_server(domid_t dom,
+     rc = xen_set_ioreq_server_state(xen_domid, state->ioservid, true);
+     if (rc < 0) {
+@@ -810,7 +810,7 @@ static void xen_do_ioreq_register(XenIOState *state,
+         goto err;
+     }
+ 
+-    state->ioreq_local_port = g_malloc0(max_cpus * sizeof (evtchn_port_t));
++    state->ioreq_local_port = g_new0(evtchn_port_t, max_cpus);
+ 
+     /* FIXME: how about if we overflow the page here? */
+     for (i = 0; i < max_cpus; i++) {
+@@ -864,13 +864,13 @@ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
+ 
+     state->xce_handle = xenevtchn_open(NULL, 0);
+     if (state->xce_handle == NULL) {
+-        perror("xen: event channel open");
++        error_report("xen: event channel open failed with error %d", errno);
+         goto err;
+     }
+ 
+     state->xenstore = xs_daemon_open();
+     if (state->xenstore == NULL) {
+-        perror("xen: xenstore open");
++        error_report("xen: xenstore open failed with error %d", errno);
+         goto err;
+     }
+ 
 -- 
 2.17.0
 
