@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AADFC636D4
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 22:52:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.487898.755689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B4AC636CC
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Jan 2023 22:52:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.487900.755710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMzU7-00008j-TM; Tue, 31 Jan 2023 22:52:15 +0000
+	id 1pMzUE-0000lV-Ih; Tue, 31 Jan 2023 22:52:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 487898.755689; Tue, 31 Jan 2023 22:52:15 +0000
+Received: by outflank-mailman (output) from mailman id 487900.755710; Tue, 31 Jan 2023 22:52:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pMzU7-00008c-QH; Tue, 31 Jan 2023 22:52:15 +0000
-Received: by outflank-mailman (input) for mailman id 487898;
- Tue, 31 Jan 2023 22:52:14 +0000
+	id 1pMzUE-0000lO-F1; Tue, 31 Jan 2023 22:52:22 +0000
+Received: by outflank-mailman (input) for mailman id 487900;
+ Tue, 31 Jan 2023 22:52:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=skZt=54=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1pMzU6-0008Hj-08
- for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 22:52:14 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20601.outbound.protection.outlook.com
- [2a01:111:f400:7e88::601])
+ id 1pMzUC-0008Hj-La
+ for xen-devel@lists.xenproject.org; Tue, 31 Jan 2023 22:52:20 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20606.outbound.protection.outlook.com
+ [2a01:111:f400:7e89::606])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e6bd8c97-a1b9-11ed-933c-83870f6b2ba8;
- Tue, 31 Jan 2023 23:52:13 +0100 (CET)
-Received: from MW4PR04CA0121.namprd04.prod.outlook.com (2603:10b6:303:84::6)
- by IA1PR12MB6626.namprd12.prod.outlook.com (2603:10b6:208:3a2::20) with
+ id e9cbc5e5-a1b9-11ed-933c-83870f6b2ba8;
+ Tue, 31 Jan 2023 23:52:20 +0100 (CET)
+Received: from MW4P222CA0002.NAMP222.PROD.OUTLOOK.COM (2603:10b6:303:114::7)
+ by PH7PR12MB6857.namprd12.prod.outlook.com (2603:10b6:510:1af::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.36; Tue, 31 Jan
- 2023 22:52:09 +0000
-Received: from CO1NAM11FT100.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:84:cafe::a1) by MW4PR04CA0121.outlook.office365.com
- (2603:10b6:303:84::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38; Tue, 31 Jan
+ 2023 22:52:15 +0000
+Received: from CO1NAM11FT066.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:114:cafe::9a) by MW4P222CA0002.outlook.office365.com
+ (2603:10b6:303:114::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38 via Frontend
- Transport; Tue, 31 Jan 2023 22:52:09 +0000
+ Transport; Tue, 31 Jan 2023 22:52:15 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT100.mail.protection.outlook.com (10.13.175.133) with Microsoft SMTP
+ CO1NAM11FT066.mail.protection.outlook.com (10.13.175.18) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6064.22 via Frontend Transport; Tue, 31 Jan 2023 22:52:09 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ 15.20.6043.17 via Frontend Transport; Tue, 31 Jan 2023 22:52:13 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 31 Jan
- 2023 16:52:07 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 16:52:12 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 31 Jan
- 2023 16:52:07 -0600
+ 2023 14:52:12 -0800
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Tue, 31 Jan 2023 16:52:06 -0600
+ Transport; Tue, 31 Jan 2023 16:52:11 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6bd8c97-a1b9-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: e9cbc5e5-a1b9-11ed-933c-83870f6b2ba8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GC630tdiylspJQ4CZzRXUIhUCIIjHuaqddW8vav2zZ7hSknTPzIqO0wB90QAIad3ejhmf21n1UItVMVh51Ui+Zqh/72X/9TbV4AYrjqOvtTWtDpPuPvagz+u8Bpf8wXCB4NVvvPEQ4nV1uT5uCy+heCkK2f1CzJ0M5o7dFhVtjDtAe48fCRnoSBh8I+eRP6GmdwtDkkdrk7Emdyk6XXgZTW7gblwH8gEyn4ek7z6mueixxozqIKojuXuLphMJfhyjMptrpLhfosmVjoMy2WVJO5RQ/N4OwJtrRcxlh4EYOQtsKUgcOMPLSYCm4lGnA8rb6iTfYcBF/z70UqK2ILkvA==
+ b=f68m9saXZEpw4fzGqfUGzhbFO+BjPRbUvRlW/N3EntBOdIqblOy4XCLeC50B6hqPHgeaBJSNYEoSSi7XxLlS0YcN0Ki9+sjbSt7kN9ILZRZ6k5UJo6ZcWJSlYWnJ9D1JiWno0Q1YroKZuJ/4Qz6K18037ijX1RkYbZDdL6np18Frqt6yAStUlHdI0pFrfhMKSoaBA7E6wuDYJYSteQvgkaPuU2uXPNaFRrl9qVCnyAh81MsrOfR0VhdALtA8PxlGdmv+TCfBMXW4ttRiNF9psGD/+jA8e+bTYuDLkXtvmgqJ/tw351epf2chqBpAIlxCTcvhaz/hvrEc//rAMnbxhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z7qBBSFtT16dKo24xhhVW2fFUFVUWqNupyxQmZ/Rxf8=;
- b=M3gQ32FuazLL/p1bb8hJYqGYblDgjbOQzTUPbz1jpF2kIpgHkfVXukZF50GAN8mLoAURC4mSy7H0tc8kQqu8VPbOdZkRM4PuTIFU8eC21hOs00FF7JZk/KLzUAKa7rAAVuzCtxhE2YqKVRIwX1rAJ6Mx82G3FM34VwWIoNo/5CyClztlT4UtJIIzvN+FT0sGWueDFZUbwg9s0hH821svWe9jKi6l0N6RbDkx0z3iXoVGfgbbcOoNhTqB+OQz442/iXIJyjVoL1o71wI/oKHV3jzm6TecqOzQvmq6/3cfG5b06UcOdFIcyrgPcNuZQidJiHuHgA2lZWTUfmK1fuPOTg==
+ bh=/pArBdHE6pupZI0iEmfLZok1fiWO0kN2Oo56dAzFs5Q=;
+ b=KlkQUO3+U2dkJfZM0txeKTpAyvQyfZSDypXOKu6kwm9gh7O8I01QH7paDD58z7pcyueKs/18kMSrm71WZ8YH/Fvx60/Me/IjxqWXx2laQ8A0ZlcNKZsktoyinrASFGoyC6IV3+l5RUbxWRD4htgmuJW9DEB8kSBwoprg2YvrKzeRGBRWVa4r/AgYPtOR/4wMYVmMUYfs7hSvbCFAeh+tjhnMa6FHUZ4yQDp8Qh5jPQpxgf0G849H+l+xrGDqRtxKC1Ev7zrgm3XGfKy78Ywky76B+GJt80U6f4SGOlRgfyR1renc99WlxRVGfNpc+Sgg0vSyieywgcNYltJt9QfWHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z7qBBSFtT16dKo24xhhVW2fFUFVUWqNupyxQmZ/Rxf8=;
- b=b6mJgIk2FVkh3991xxSYYBweFi5PPhaqnw63j/avr9IVKf1R2a1Yfsky6STo7Id+KNaK/igYs3/0C6J8k8Y7J4RT9tYNMPAuRnFKrGJ/mX4dPBM+/nQXP6xRTBzMazIXWJx0slUJjt+I/pEFQIvo/gJ3k6WAn6e5/mGO5aw88rg=
+ bh=/pArBdHE6pupZI0iEmfLZok1fiWO0kN2Oo56dAzFs5Q=;
+ b=e6fijxWOMnF5eYEoC2iysRvmzZr0MHgH9Oi0rdouPtFDOpzfRHOKWvXN2W46HK6fcXvD8xeu4a1yWNm1I5i8m6ORyLKPHqZ/nBRVO2HzzAhJRNDVGtNjaEh94RMDnPooQuXwceeriZp0GG+ueKc5vIl+5P/NpxDHuYwcFV38DUY=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -90,123 +90,222 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <qemu-devel@nongnu.org>
 CC: <xen-devel@lists.xenproject.org>, <vikram.garhwal@amd.com>,
-	<stefano.stabellini@amd.com>, <alex.bennee@linaro.org>, "Michael S. Tsirkin"
-	<mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, "Paolo
- Bonzini" <pbonzini@redhat.com>, Richard Henderson
-	<richard.henderson@linaro.org>, Eduardo Habkost <eduardo@habkost.net>,
-	Stefano Stabellini <sstabellini@kernel.org>, Anthony Perard
-	<anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>
-Subject: [QEMU][PATCH v5 01/10] hw/i386/xen/: move xen-mapcache.c to hw/xen/
-Date: Tue, 31 Jan 2023 14:51:40 -0800
-Message-ID: <20230131225149.14764-2-vikram.garhwal@amd.com>
+	<stefano.stabellini@amd.com>, <alex.bennee@linaro.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, "Paul
+ Durrant" <paul@xen.org>, "Michael S. Tsirkin" <mst@redhat.com>, "Marcel
+ Apfelbaum" <marcel.apfelbaum@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>, Eduardo Habkost
+	<eduardo@habkost.net>
+Subject: [QEMU][PATCH v5 03/10] hw/i386/xen/xen-hvm: move x86-specific fields out of XenIOState
+Date: Tue, 31 Jan 2023 14:51:42 -0800
+Message-ID: <20230131225149.14764-4-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230131225149.14764-1-vikram.garhwal@amd.com>
 References: <20230131225149.14764-1-vikram.garhwal@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT100:EE_|IA1PR12MB6626:EE_
-X-MS-Office365-Filtering-Correlation-Id: da900d49-00e6-4d0b-d87e-08db03ddc8a2
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT066:EE_|PH7PR12MB6857:EE_
+X-MS-Office365-Filtering-Correlation-Id: c5a632be-6f78-46c0-07e8-08db03ddcb70
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	sMTu4NTIVq6BnP/vfpJum4h8Whh8iXnSpPCSrTjTFrxJWJbH/aolzHISb/7YEwwIBlmt1bNnmTPvjsBu/kCZEYEteOjQS3cDggp3E1RsJH9fo++fYFxlIX1j9sXoRsUg9x4dAn/ixMiEMrbUzpjGIkE23ju2hO/XSlJP9DcWRvK3D1vh5/FcabaT3yly/gPeILAMQh6D4Pww9RLY/uY2vzOpoKWRhGDAWGrjoLc4TfkuyjWQg34C93kKh06pRsx6znY3bsbTu4kRsor3w2Qhj/k6JaiwiQWN6MEb8aLt3IsfNKaQBskG7JuypnHdbBXSBAzbG5TrZviHwJ7QBruqjQLGxVtmIkHXSyn8oX7ZHiT8OL/y/2Jh6fnQNK//flwNTny04woF2BhjPgDd45OUYUcS+IF2eZgSPJzaZxQixVs0s/ayjXylg/L1zEKeJm23jgTAsydg6IgbAZLotfnmdbhzImp8Do3KOF0meCzJNuYp106tWYBg3HsW+OrCNxdr4B12x9cEWDwktaUvIogpHbIufvidsSPkUfieq0fWNkZGOrmmkygppu+A9s/4vixsjxvSKxpog+1MQJu07rPI+L7mO6gtmKbTf1EfLI7qoTMbH6Cdv6g7thSnoCh2ejTqfEB6jDLq23v9BdCo9Y8ArpzBuSOoQGykQDTP3kTWi3GBP9PQZzrdg6+PlFijOxOenp4nmcM1meT0S+Mn3unyWi+dEsTmXLVeCW1VN6KNllA=
+	+8XOw0n08GypojEth6Ap7WO6i77NEtgLru79/4jqcpj26NvFhBRHhWjDP8L+G7XTKM4l+MjFBFRCDyzIj3w4GEfh4pVOTfyidHLM7aWWM1QM4S4d4ySaO5vcQN3SKVRzwO34RaqXwT9/+PgFnAewJe2fP4WsOcFE2RU7Qx1mQkeOv8IxjILoA6Ucu7VqGxDUB7i9TiC3Xms6LPAqEo29OUKR/4NgxJpZmnmImZZofdk1KdWHXRldpp//PRShd8zFcF2EcwzRRqvIcFaoj62G+VvFp+B4AoM4f80f8uk+oNll6fZsB9bEuOsesUmRCdzGJJfO9chRmaRnzeXGg3HxfAY/6P4TTgbf5C154Et6RdmRfmYgAyrkYqJoUrwEkyegj97fv4CUej/ljSFZ/dgfeyi3dPY4ghAjAbepDXjZ+4fR4Qt+TXpacoJ0gkENbKIiI/oUPh+7ZS6nA7kmGzBVtdAEonuATu+DlzVKULPX07EaXTRm4TTFOvluC6lWXnN5GeBCnX0D0jNyCpZNxpe7NpwkDdMj91vrVYQ8yHgSazct5sxNOtYsAXVaVxCb3Ka8kplUiYL4dUdU2hsDW6vXMIoySvfX6QAYjlfAceWak5Fzzaz5us8mG2LY9MO2Ui/quem11AP/ib8AzD6ikmw20JNwNLz/3L1z118K+p42bKcvAw2yfuCL3foJafolPxaJ3b9Cqu2eh2t8WD7HLM5O6NO4pH4dy7gEuc5PPfvbGx8=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(346002)(39860400002)(396003)(376002)(136003)(451199018)(36840700001)(40470700004)(46966006)(8936002)(70206006)(316002)(70586007)(4326008)(8676002)(6916009)(5660300002)(7416002)(54906003)(44832011)(2906002)(1076003)(41300700001)(478600001)(186003)(6666004)(336012)(26005)(2616005)(356005)(36756003)(40460700003)(83380400001)(81166007)(47076005)(426003)(36860700001)(82310400005)(82740400003)(86362001)(40480700001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(346002)(376002)(136003)(396003)(39860400002)(451199018)(36840700001)(46966006)(40470700004)(44832011)(2906002)(36756003)(82310400005)(66574015)(426003)(2616005)(54906003)(83380400001)(336012)(47076005)(6666004)(316002)(26005)(186003)(478600001)(1076003)(40460700003)(70586007)(4326008)(70206006)(8676002)(6916009)(356005)(40480700001)(5660300002)(8936002)(7416002)(86362001)(41300700001)(81166007)(36860700001)(82740400003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2023 22:52:09.0265
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2023 22:52:13.7267
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: da900d49-00e6-4d0b-d87e-08db03ddc8a2
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5a632be-6f78-46c0-07e8-08db03ddcb70
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT100.eop-nam11.prod.protection.outlook.com
+	CO1NAM11FT066.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6626
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6857
 
-xen-mapcache.c contains common functions which can be used for enabling Xen on
-aarch64 with IOREQ handling. Moving it out from hw/i386/xen to hw/xen to make it
-accessible for both aarch64 and x86.
+From: Stefano Stabellini <stefano.stabellini@amd.com>
 
-Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+In preparation to moving most of xen-hvm code to an arch-neutral location, move:
+- shared_vmport_page
+- log_for_dirtybit
+- dirty_bitmap
+- suspend
+- wakeup
+
+out of XenIOState struct as these are only used on x86, especially the ones
+related to dirty logging.
+Updated XenIOState can be used for both aarch64 and x86.
+
+Also, remove free_phys_offset as it was unused.
+
 Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- hw/i386/meson.build              | 1 +
- hw/i386/xen/meson.build          | 1 -
- hw/i386/xen/trace-events         | 5 -----
- hw/xen/meson.build               | 4 ++++
- hw/xen/trace-events              | 5 +++++
- hw/{i386 => }/xen/xen-mapcache.c | 0
- 6 files changed, 10 insertions(+), 6 deletions(-)
- rename hw/{i386 => }/xen/xen-mapcache.c (100%)
+ hw/i386/xen/xen-hvm.c | 58 ++++++++++++++++++++-----------------------
+ 1 file changed, 27 insertions(+), 31 deletions(-)
 
-diff --git a/hw/i386/meson.build b/hw/i386/meson.build
-index 213e2e82b3..cfdbfdcbcb 100644
---- a/hw/i386/meson.build
-+++ b/hw/i386/meson.build
-@@ -33,5 +33,6 @@ subdir('kvm')
- subdir('xen')
+diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+index 1fba0e0ae1..06c446e7be 100644
+--- a/hw/i386/xen/xen-hvm.c
++++ b/hw/i386/xen/xen-hvm.c
+@@ -73,6 +73,7 @@ struct shared_vmport_iopage {
+ };
+ typedef struct shared_vmport_iopage shared_vmport_iopage_t;
+ #endif
++static shared_vmport_iopage_t *shared_vmport_page;
  
- i386_ss.add_all(xenpv_ss)
-+i386_ss.add_all(xen_ss)
+ static inline uint32_t xen_vcpu_eport(shared_iopage_t *shared_page, int i)
+ {
+@@ -95,6 +96,11 @@ typedef struct XenPhysmap {
+ } XenPhysmap;
  
- hw_arch += {'i386': i386_ss}
-diff --git a/hw/i386/xen/meson.build b/hw/i386/xen/meson.build
-index be84130300..2fcc46e6ca 100644
---- a/hw/i386/xen/meson.build
-+++ b/hw/i386/xen/meson.build
-@@ -1,6 +1,5 @@
- i386_ss.add(when: 'CONFIG_XEN', if_true: files(
-   'xen-hvm.c',
--  'xen-mapcache.c',
-   'xen_apic.c',
-   'xen_platform.c',
-   'xen_pvdevice.c',
-diff --git a/hw/i386/xen/trace-events b/hw/i386/xen/trace-events
-index 5d6be61090..a0c89d91c4 100644
---- a/hw/i386/xen/trace-events
-+++ b/hw/i386/xen/trace-events
-@@ -21,8 +21,3 @@ xen_map_resource_ioreq(uint32_t id, void *addr) "id: %u addr: %p"
- cpu_ioreq_config_read(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
- cpu_ioreq_config_write(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
+ static QLIST_HEAD(, XenPhysmap) xen_physmap;
++static const XenPhysmap *log_for_dirtybit;
++/* Buffer used by xen_sync_dirty_bitmap */
++static unsigned long *dirty_bitmap;
++static Notifier suspend;
++static Notifier wakeup;
  
--# xen-mapcache.c
--xen_map_cache(uint64_t phys_addr) "want 0x%"PRIx64
--xen_remap_bucket(uint64_t index) "index 0x%"PRIx64
--xen_map_cache_return(void* ptr) "%p"
+ typedef struct XenPciDevice {
+     PCIDevice *pci_dev;
+@@ -105,7 +111,6 @@ typedef struct XenPciDevice {
+ typedef struct XenIOState {
+     ioservid_t ioservid;
+     shared_iopage_t *shared_page;
+-    shared_vmport_iopage_t *shared_vmport_page;
+     buffered_iopage_t *buffered_io_page;
+     xenforeignmemory_resource_handle *fres;
+     QEMUTimer *buffered_io_timer;
+@@ -125,14 +130,8 @@ typedef struct XenIOState {
+     MemoryListener io_listener;
+     QLIST_HEAD(, XenPciDevice) dev_list;
+     DeviceListener device_listener;
+-    hwaddr free_phys_offset;
+-    const XenPhysmap *log_for_dirtybit;
+-    /* Buffer used by xen_sync_dirty_bitmap */
+-    unsigned long *dirty_bitmap;
+ 
+     Notifier exit;
+-    Notifier suspend;
+-    Notifier wakeup;
+ } XenIOState;
+ 
+ /* Xen specific function for piix pci */
+@@ -462,10 +461,10 @@ static int xen_remove_from_physmap(XenIOState *state,
+     }
+ 
+     QLIST_REMOVE(physmap, list);
+-    if (state->log_for_dirtybit == physmap) {
+-        state->log_for_dirtybit = NULL;
+-        g_free(state->dirty_bitmap);
+-        state->dirty_bitmap = NULL;
++    if (log_for_dirtybit == physmap) {
++        log_for_dirtybit = NULL;
++        g_free(dirty_bitmap);
++        dirty_bitmap = NULL;
+     }
+     g_free(physmap);
+ 
+@@ -626,16 +625,16 @@ static void xen_sync_dirty_bitmap(XenIOState *state,
+         return;
+     }
+ 
+-    if (state->log_for_dirtybit == NULL) {
+-        state->log_for_dirtybit = physmap;
+-        state->dirty_bitmap = g_new(unsigned long, bitmap_size);
+-    } else if (state->log_for_dirtybit != physmap) {
++    if (log_for_dirtybit == NULL) {
++        log_for_dirtybit = physmap;
++        dirty_bitmap = g_new(unsigned long, bitmap_size);
++    } else if (log_for_dirtybit != physmap) {
+         /* Only one range for dirty bitmap can be tracked. */
+         return;
+     }
+ 
+     rc = xen_track_dirty_vram(xen_domid, start_addr >> TARGET_PAGE_BITS,
+-                              npages, state->dirty_bitmap);
++                              npages, dirty_bitmap);
+     if (rc < 0) {
+ #ifndef ENODATA
+ #define ENODATA  ENOENT
+@@ -650,7 +649,7 @@ static void xen_sync_dirty_bitmap(XenIOState *state,
+     }
+ 
+     for (i = 0; i < bitmap_size; i++) {
+-        unsigned long map = state->dirty_bitmap[i];
++        unsigned long map = dirty_bitmap[i];
+         while (map != 0) {
+             j = ctzl(map);
+             map &= ~(1ul << j);
+@@ -676,12 +675,10 @@ static void xen_log_start(MemoryListener *listener,
+ static void xen_log_stop(MemoryListener *listener, MemoryRegionSection *section,
+                          int old, int new)
+ {
+-    XenIOState *state = container_of(listener, XenIOState, memory_listener);
 -
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index ae0ace3046..19d0637c46 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -22,3 +22,7 @@ else
- endif
+     if (old & ~new & (1 << DIRTY_MEMORY_VGA)) {
+-        state->log_for_dirtybit = NULL;
+-        g_free(state->dirty_bitmap);
+-        state->dirty_bitmap = NULL;
++        log_for_dirtybit = NULL;
++        g_free(dirty_bitmap);
++        dirty_bitmap = NULL;
+         /* Disable dirty bit tracking */
+         xen_track_dirty_vram(xen_domid, 0, 0, NULL);
+     }
+@@ -1021,9 +1018,9 @@ static void handle_vmport_ioreq(XenIOState *state, ioreq_t *req)
+ {
+     vmware_regs_t *vmport_regs;
  
- specific_ss.add_all(when: ['CONFIG_XEN', xen], if_true: xen_specific_ss)
-+
-+xen_ss = ss.source_set()
-+
-+xen_ss.add(when: 'CONFIG_XEN', if_true: files('xen-mapcache.c'))
-diff --git a/hw/xen/trace-events b/hw/xen/trace-events
-index 3da3fd8348..2c8f238f42 100644
---- a/hw/xen/trace-events
-+++ b/hw/xen/trace-events
-@@ -41,3 +41,8 @@ xs_node_vprintf(char *path, char *value) "%s %s"
- xs_node_vscanf(char *path, char *value) "%s %s"
- xs_node_watch(char *path) "%s"
- xs_node_unwatch(char *path) "%s"
-+
-+# xen-mapcache.c
-+xen_map_cache(uint64_t phys_addr) "want 0x%"PRIx64
-+xen_remap_bucket(uint64_t index) "index 0x%"PRIx64
-+xen_map_cache_return(void* ptr) "%p"
-diff --git a/hw/i386/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
-similarity index 100%
-rename from hw/i386/xen/xen-mapcache.c
-rename to hw/xen/xen-mapcache.c
+-    assert(state->shared_vmport_page);
++    assert(shared_vmport_page);
+     vmport_regs =
+-        &state->shared_vmport_page->vcpu_vmport_regs[state->send_vcpu];
++        &shared_vmport_page->vcpu_vmport_regs[state->send_vcpu];
+     QEMU_BUILD_BUG_ON(sizeof(*req) < sizeof(*vmport_regs));
+ 
+     current_cpu = state->cpu_by_vcpu_id[state->send_vcpu];
+@@ -1468,7 +1465,6 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
+ 
+     state->memory_listener = xen_memory_listener;
+     memory_listener_register(&state->memory_listener, &address_space_memory);
+-    state->log_for_dirtybit = NULL;
+ 
+     state->io_listener = xen_io_listener;
+     memory_listener_register(&state->io_listener, &address_space_io);
+@@ -1489,19 +1485,19 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
+     QLIST_INIT(&xen_physmap);
+     xen_read_physmap(state);
+ 
+-    state->suspend.notify = xen_suspend_notifier;
+-    qemu_register_suspend_notifier(&state->suspend);
++    suspend.notify = xen_suspend_notifier;
++    qemu_register_suspend_notifier(&suspend);
+ 
+-    state->wakeup.notify = xen_wakeup_notifier;
+-    qemu_register_wakeup_notifier(&state->wakeup);
++    wakeup.notify = xen_wakeup_notifier;
++    qemu_register_wakeup_notifier(&wakeup);
+ 
+     rc = xen_get_vmport_regs_pfn(xen_xc, xen_domid, &ioreq_pfn);
+     if (!rc) {
+         DPRINTF("shared vmport page at pfn %lx\n", ioreq_pfn);
+-        state->shared_vmport_page =
++        shared_vmport_page =
+             xenforeignmemory_map(xen_fmem, xen_domid, PROT_READ|PROT_WRITE,
+                                  1, &ioreq_pfn, NULL);
+-        if (state->shared_vmport_page == NULL) {
++        if (shared_vmport_page == NULL) {
+             error_report("map shared vmport IO page returned error %d handle=%p",
+                          errno, xen_xc);
+             goto err;
 -- 
 2.17.0
 
