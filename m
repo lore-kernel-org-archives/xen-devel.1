@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB94DC05027
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Feb 2023 08:30:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.488197.756162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68036C38142
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Feb 2023 09:06:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.488211.756174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pN8VW-0003nM-1j; Wed, 01 Feb 2023 08:30:18 +0000
+	id 1pN94U-0000Aj-QG; Wed, 01 Feb 2023 09:06:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 488197.756162; Wed, 01 Feb 2023 08:30:18 +0000
+Received: by outflank-mailman (output) from mailman id 488211.756174; Wed, 01 Feb 2023 09:06:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pN8VV-0003nF-VI; Wed, 01 Feb 2023 08:30:17 +0000
-Received: by outflank-mailman (input) for mailman id 488197;
- Wed, 01 Feb 2023 08:30:16 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EYYs=55=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1pN8VU-0003n6-2N
- for xen-devel@lists.xenproject.org; Wed, 01 Feb 2023 08:30:16 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a66d1e21-a20a-11ed-933c-83870f6b2ba8;
- Wed, 01 Feb 2023 09:30:14 +0100 (CET)
-Received: by mail-wm1-x336.google.com with SMTP id k16so12049747wms.2
- for <xen-devel@lists.xenproject.org>; Wed, 01 Feb 2023 00:30:15 -0800 (PST)
-Received: from [192.168.9.204] (54-240-197-238.amazon.com. [54.240.197.238])
- by smtp.gmail.com with ESMTPSA id
- f31-20020a05600c491f00b003dc3d9fb09asm922456wmp.47.2023.02.01.00.30.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Feb 2023 00:30:14 -0800 (PST)
+	id 1pN94U-0000Ac-Lm; Wed, 01 Feb 2023 09:06:26 +0000
+Received: by outflank-mailman (input) for mailman id 488211;
+ Wed, 01 Feb 2023 09:06:25 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1pN94T-0000AW-9o
+ for xen-devel@lists.xenproject.org; Wed, 01 Feb 2023 09:06:25 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pN94S-0002X2-5U; Wed, 01 Feb 2023 09:06:24 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.102])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pN94R-0002Vu-Up; Wed, 01 Feb 2023 09:06:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,70 +41,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a66d1e21-a20a-11ed-933c-83870f6b2ba8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I/e7owFfcePnLRzxpORdL+Ugp/T7FuArUHTWMklHSZE=;
-        b=EHcHSKQDWrNLfrV+Zaa/V6XU/gSZoD0Nre3JE13SUBQh3px4OSMGL+aMGglogy5m4G
-         T5/0+KUbLG5vUwYM0WZEJrMxk029b7oaDq96zZ9p+akCHZBRfL79n3bYkbwR1sDSzXsz
-         daQko7c6Q07LbIjQADi4sTGv44JTGn9W8gRgt1tApbYSYuu2ddh3IGDOv4nvaPtV5vuD
-         iF7KUbJIxQoU8Voq/qIFP7yvkLopvYsGlltoguRNw8y0RRWzW5jECBSxRd+y+1ehGaC/
-         GnGELYZ/vMMGOaJPdbRakzxkSc8RfBdP570p5tYDV6PWqGr9cBuUNKlZrS8g6P7MbXYo
-         EiYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I/e7owFfcePnLRzxpORdL+Ugp/T7FuArUHTWMklHSZE=;
-        b=AngwNeK6oqaSD+b9YhtWA/SsXNVKUlSTRde7qsudocfgiy4St4bNcniSUq7jULEYeX
-         TklcTL/51I1T76z8We9YTWLnAXD3SaGxRjM5OQXzCHhebxujhbFp3fhA6QBBmGZmKnwb
-         IGgGcbb9USos6cPW6oZIz23jtLfB4E31pXl5XORECTKkdQlWfZ5VBg6bsRadhxDjL9Yi
-         32vBaBcD7DretVFhzBdzCU+ZyA85hj6gr5zUi6yHWoqTQdXiq1CjcLvgwVQayg5EkVBi
-         TJGOBcCjq6ftNe513xzV0ooi1h6vkUVeQPOfP3+U1kbkNNp1+HZSBE8e3t+uZ7qFM1Uh
-         sjUw==
-X-Gm-Message-State: AO0yUKXEa8O/J93F6F/FW8YOyiBg7S1sg5DIUHI+CWMtKQ+uZZar9L0N
-	9v7HGJlfycPXGmS5Diog3uA=
-X-Google-Smtp-Source: AK7set8U7h6JgTIUz/GSAXKxVEMdwMw6uPhYD8pbylUmygyycWG1uyrxwtyWU9ELgp5Jz13+EJJG8w==
-X-Received: by 2002:a1c:7c0e:0:b0:3dc:561a:79d8 with SMTP id x14-20020a1c7c0e000000b003dc561a79d8mr1285631wmc.35.1675240214862;
-        Wed, 01 Feb 2023 00:30:14 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <179d773b-2634-b52b-8836-8d8f882e1495@xen.org>
-Date: Wed, 1 Feb 2023 08:30:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:
+	From:References:Cc:To:MIME-Version:Date:Message-ID;
+	bh=m2obYo8VF0262euVcLhlmIca1IIMvx+h7vlIhXldtK8=; b=AqDRYpBmUZJwC1FklR7lsjwugD
+	QxSO0IafPCLph1OXHJeec3pOPE5ozfs+UHzn+LBVp1JmeGHIHtp7xq3FL3lHpYrgDCzMHDbWEpm4d
+	INEABfMskBh9ZgAo3SQBSCZ8kX693A9yjzR+yn0qJ2zwkwD3TjPLeWGc7kJVzo7DWRBs=;
+Message-ID: <1a1e9b46-e665-f33a-b122-31a5af5b22da@xen.org>
+Date: Wed, 1 Feb 2023 09:06:21 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Reply-To: paul@xen.org
-Subject: Re: [QEMU][PATCH v5 09/10] hw/arm: introduce xenpvh machine
-Content-Language: en-US
-To: Vikram Garhwal <vikram.garhwal@amd.com>, qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org, stefano.stabellini@amd.com,
- alex.bennee@linaro.org, Peter Maydell <peter.maydell@linaro.org>,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+To: Andrew Cooper <amc96@srcf.net>, Alistair Francis <alistair23@gmail.com>
+Cc: Oleksii <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org,
+ Bob Eshleman <bobbyeshleman@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>,
- "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>
-References: <20230131225149.14764-1-vikram.garhwal@amd.com>
- <20230131225149.14764-10-vikram.garhwal@amd.com>
-Organization: Xen Project
-In-Reply-To: <20230131225149.14764-10-vikram.garhwal@amd.com>
+ Gianluca Guida <gianluca@rivosinc.com>, Connor Davis
+ <connojdavis@gmail.com>, Bobby Eshleman <bobby.eshleman@gmail.com>
+References: <cover.1674819203.git.oleksii.kurochko@gmail.com>
+ <06c2c36bd68b2534c757dc4087476e855253680a.1674819203.git.oleksii.kurochko@gmail.com>
+ <f5cd1bfb116bfcc86fc2848df7eead05cd1a24c0.camel@gmail.com>
+ <CAKmqyKMGiDiPRZBekdKan=+YduSmkB2DoWo5btrtVQ8nS3KMAg@mail.gmail.com>
+ <2f6a3b17-4e41-fe9a-1713-4942b3bd3585@xen.org>
+ <CAKmqyKNwH4-D3dKGQEsW_Zup4OT32C1RwaA7_Sey4fo_jOzFcA@mail.gmail.com>
+ <9d5841b2-5d0b-390f-6e95-cf492e99e5a2@srcf.net>
+From: Julien Grall <julien@xen.org>
+Subject: Re: [PATCH v7 1/2] xen/riscv: introduce early_printk basic stuff
+In-Reply-To: <9d5841b2-5d0b-390f-6e95-cf492e99e5a2@srcf.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 31/01/2023 22:51, Vikram Garhwal wrote:
-> Add a new machine xenpvh which creates a IOREQ server to register/connect with
-> Xen Hypervisor.
+Hi Andrew,
+
+On 01/02/2023 00:21, Andrew Cooper wrote:
+> On 31/01/2023 11:17 pm, Alistair Francis wrote:
+>> On Tue, Jan 31, 2023 at 10:03 PM Julien Grall <julien@xen.org> wrote:
+>>> On 31/01/2023 11:44, Alistair Francis wrote:
+>>>> On Sat, Jan 28, 2023 at 12:15 AM Oleksii <oleksii.kurochko@gmail.com> wrote:
+>>>>
+>>>   From my understanding, on RISC-V, the use of PC-relative address is
+>>> only guaranteed with medany. So if you were going to change the cmodel
+>>> (Andrew suggested you would), then early_*() may end up to be broken.
+>>>
+>>> This check serve as a documentation of the assumption and also help the
+>>> developer any change in the model and take the appropriate action to
+>>> remediate it.
+>>>
+>>>> I think this is safe to remove.
+>>> Based on what I wrote above, do you still think this is safe?
+>> With that in mind it's probably worth leaving in then. Maybe the
+>> comment should be updated to make it explicit why we want this check
+>> (I find the current comment not very helpful).
 > 
+> The presence of this check pre-supposes that Xen will always relocate
+> itself, and this simply not true.  XIP for example typically does not
+> 
+> Furthermore it's not checking the property wanted.  The way C is
+> compiled has no bearing on what relocation head.S uses to call it.
 
-Is this really the right way? Is it not possible to do the Xen 
-initialization (including ioreq server registration) off the back of the 
-accelerator init (i.e. AccelOpsClass ops_init function), which seems 
-like the right place to do it now that it's no longer architecture specific.
+I think we are still cross-talking each other because this is not my 
+point. I am not sure how to explain differently...
 
-   Paul
+This check is not about how head.S call early_*() but making sure the C 
+function can be executed with the MMU off. In which case, you will 
+likely have VA != PA.
 
+In theory head.S could apply some relocations before hand, but it may be 
+too complicated to do it before calling early_*().
+
+> 
+> It is a given that we compile the hypervisor with a consistent code
+> model, meaning that the properly actually making the check do what is
+> wanted is also the property that means it is not needed in the first place.
+
+See above.
+
+> 
+> This check is literally not worth the bytes it's taking up on disk, and
+> not worth the added compiler time, nor the wasted time of whoever comes
+> to support something like XIP in the future finds it to be in the way.
+> Xen as a whole will really genuinely function as intended in models
+> other than medany, and it demonstrates a misunderstanding of the topic
+> to put in such a check to begin with.
+
+Then enlight me :). So far it looks more like you are not understanding 
+my point: I am talking about C function call with MMU off (e.g. VA != 
+PA) and you are talking about Xen as a whole.
+
+I guess the only way to really know is to implement a different model. 
+At which point there are three possible outcome:
+   1) We had the compiler check, it fired and the developper will take 
+action to fix it (if needed).
+   2) We have no compiler check, the developper knew what to do it and 
+fixed it.
+   3) We have no compiler check, the developper where not aware of the 
+problem and we will waste time.
+
+Even if you disagree with the check, then I think 1 is still the best 
+because it would explain our assumption. Yes it may waste a few minutes 
+to the developer switching the model. But that probably nothing compare 
+to the time you could waste if you don't notice it.
+
+Anyway, Alistair has now all the information to take an informative 
+decision.
+
+Cheers,
+
+-- 
+Julien Grall
 
