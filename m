@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 183BAC64EC3
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 11:02:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.488652.756823 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50035C636D3
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 11:08:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.488663.756877 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNXLg-0001q1-FP; Thu, 02 Feb 2023 11:01:48 +0000
+	id 1pNXSF-0003oU-Lk; Thu, 02 Feb 2023 11:08:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 488652.756823; Thu, 02 Feb 2023 11:01:48 +0000
+Received: by outflank-mailman (output) from mailman id 488663.756877; Thu, 02 Feb 2023 11:08:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNXLg-0001pu-Ci; Thu, 02 Feb 2023 11:01:48 +0000
-Received: by outflank-mailman (input) for mailman id 488652;
- Thu, 02 Feb 2023 11:01:47 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pNXLf-0001po-SN
- for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 11:01:47 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pNXLf-0000G1-IS; Thu, 02 Feb 2023 11:01:47 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=[192.168.13.48]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pNXLf-00082D-AP; Thu, 02 Feb 2023 11:01:47 +0000
+	id 1pNXSF-0003mZ-D6; Thu, 02 Feb 2023 11:08:35 +0000
+Received: by outflank-mailman (input) for mailman id 488663;
+ Thu, 02 Feb 2023 11:08:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4BK1=56=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1pNXSE-0002sY-5K
+ for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 11:08:34 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id ee36cf06-a2e9-11ed-933c-83870f6b2ba8;
+ Thu, 02 Feb 2023 12:08:32 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E62A414BF;
+ Thu,  2 Feb 2023 03:09:14 -0800 (PST)
+Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
+ [10.1.199.62])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C35FE3F64C;
+ Thu,  2 Feb 2023 03:08:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,66 +45,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=Wfa34thKVwZD18phf0vy2KO2zCRZpkb0b2cZCkSZawk=; b=osgO4KywStz4KDi1svzX3yjSYV
-	r+NsGHaPfSpo/QIapDLMMsQ6GMni0SQ8jgEBDjYiD92VjczpfdWDjiaGqkV1pWoRYgfvUE4k9SJm2
-	gYRD8+HAx+8weyTOOauqpIBd9fxZEhltqbBr9FZJFWWpY8jvM5WbpaQqd1irtu//naIc=;
-Message-ID: <3ef695c9-9b5e-3323-a901-d6daf030e07d@xen.org>
-Date: Thu, 2 Feb 2023 11:01:45 +0000
+X-Inumbo-ID: ee36cf06-a2e9-11ed-933c-83870f6b2ba8
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 04/10] xen/arm: add SVE exception class handling
+Date: Thu,  2 Feb 2023 11:08:10 +0000
+Message-Id: <20230202110816.1252419-5-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230202110816.1252419-1-luca.fancellu@arm.com>
+References: <20230202110816.1252419-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v2 2/2] xen/arm: Add support for booting gzip compressed
- uImages
-Content-Language: en-US
-To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, ayankuma@amd.com
-References: <20230202084905.6950-1-michal.orzel@amd.com>
- <20230202084905.6950-3-michal.orzel@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20230202084905.6950-3-michal.orzel@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Michal,
+SVE has a new exception class with code 0x19, introduce the new code
+and handle the exception.
 
-On 02/02/2023 08:49, Michal Orzel wrote:
-> @@ -265,11 +284,14 @@ static __init int kernel_decompress(struct bootmodule *mod)
->   #define IH_ARCH_ARM             2       /* ARM          */
->   #define IH_ARCH_ARM64           22      /* ARM64        */
->   
-> +/* uImage Compression Types */
-> +#define IH_COMP_GZIP            1
-> +
->   /*
->    * Check if the image is a uImage and setup kernel_info
->    */
->   static int __init kernel_uimage_probe(struct kernel_info *info,
-> -                                      paddr_t addr, paddr_t size)
-> +                                      struct bootmodule *mod)
->   {
->       struct {
->           __be32 magic;   /* Image Header Magic Number */
-> @@ -287,6 +309,8 @@ static int __init kernel_uimage_probe(struct kernel_info *info,
->       } uimage;
->   
->       uint32_t len;
-> +    paddr_t addr = mod->start;
-> +    paddr_t size = mod->size;
->   
->       if ( size < sizeof(uimage) )
->           return -EINVAL;
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+Changes from RFC:
+ - No changes
+---
+ xen/arch/arm/include/asm/processor.h |  1 +
+ xen/arch/arm/traps.c                 | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
 
-Shouldn't we return -ENOENT here?
-
-The rest look good to me.
-
-Cheers,
-
+diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
+index 0e38926b94db..625c2bd0cd6c 100644
+--- a/xen/arch/arm/include/asm/processor.h
++++ b/xen/arch/arm/include/asm/processor.h
+@@ -426,6 +426,7 @@
+ #define HSR_EC_HVC64                0x16
+ #define HSR_EC_SMC64                0x17
+ #define HSR_EC_SYSREG               0x18
++#define HSR_EC_SVE                  0x19
+ #endif
+ #define HSR_EC_INSTR_ABORT_LOWER_EL 0x20
+ #define HSR_EC_INSTR_ABORT_CURR_EL  0x21
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index a78a99ddadd0..c2e30feafd5a 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -2160,6 +2160,13 @@ void do_trap_guest_sync(struct cpu_user_regs *regs)
+         perfc_incr(trap_sysreg);
+         do_sysreg(regs, hsr);
+         break;
++    case HSR_EC_SVE:
++        GUEST_BUG_ON(regs_mode_is_32bit(regs));
++        gprintk(XENLOG_WARNING,
++                "Domain id %d tried to use SVE while not allowed\n",
++                current->domain->domain_id);
++        inject_undef_exception(regs, hsr);
++        break;
+ #endif
+ 
+     case HSR_EC_INSTR_ABORT_LOWER_EL:
+@@ -2189,6 +2196,11 @@ void do_trap_hyp_sync(struct cpu_user_regs *regs)
+     case HSR_EC_BRK:
+         do_trap_brk(regs, hsr);
+         break;
++    case HSR_EC_SVE:
++        /* An SVE exception is a bug somewhere in hypervisor code */
++        printk("SVE trap at EL2.\n");
++        do_unexpected_trap("Hypervisor", regs);
++        break;
+ #endif
+     case HSR_EC_DATA_ABORT_CURR_EL:
+     case HSR_EC_INSTR_ABORT_CURR_EL:
 -- 
-Julien Grall
+2.25.1
+
 
