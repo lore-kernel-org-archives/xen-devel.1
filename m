@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDCC1C6379F
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 11:08:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.488664.756889 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3A1C64EC4
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 11:08:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.488661.756851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNXSH-0004C6-SX; Thu, 02 Feb 2023 11:08:37 +0000
+	id 1pNXSD-0003Bb-Rs; Thu, 02 Feb 2023 11:08:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 488664.756889; Thu, 02 Feb 2023 11:08:37 +0000
+Received: by outflank-mailman (output) from mailman id 488661.756851; Thu, 02 Feb 2023 11:08:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNXSH-0004By-Ov; Thu, 02 Feb 2023 11:08:37 +0000
-Received: by outflank-mailman (input) for mailman id 488664;
- Thu, 02 Feb 2023 11:08:36 +0000
+	id 1pNXSD-0003AH-Kt; Thu, 02 Feb 2023 11:08:33 +0000
+Received: by outflank-mailman (input) for mailman id 488661;
+ Thu, 02 Feb 2023 11:08:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4BK1=56=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1pNXSG-0002sY-FB
- for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 11:08:36 +0000
+ id 1pNXSC-0002sY-4x
+ for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 11:08:32 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ef050eaa-a2e9-11ed-933c-83870f6b2ba8;
- Thu, 02 Feb 2023 12:08:34 +0100 (CET)
+ id ecc1a21b-a2e9-11ed-933c-83870f6b2ba8;
+ Thu, 02 Feb 2023 12:08:30 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4A34F1515;
- Thu,  2 Feb 2023 03:09:16 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 740A41424;
+ Thu,  2 Feb 2023 03:09:12 -0800 (PST)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 08F443F64C;
- Thu,  2 Feb 2023 03:08:32 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CD8333F64C;
+ Thu,  2 Feb 2023 03:08:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,520 +45,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ef050eaa-a2e9-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: ecc1a21b-a2e9-11ed-933c-83870f6b2ba8
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 05/10] arm/sve: save/restore SVE context switch
-Date: Thu,  2 Feb 2023 11:08:11 +0000
-Message-Id: <20230202110816.1252419-6-luca.fancellu@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 02/10] xen/arm: add sve_vl_bits field to domain
+Date: Thu,  2 Feb 2023 11:08:08 +0000
+Message-Id: <20230202110816.1252419-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230202110816.1252419-1-luca.fancellu@arm.com>
 References: <20230202110816.1252419-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Save/restore context switch for SVE, allocate memory to contain
-the Z0-31 registers whose length is maximum 2048 bits each and
-FFR who can be maximum 256 bits, the allocated memory depends on
-how many bits is the vector length for the domain and how many bits
-are supported by the platform.
+Add sve_vl_bits field to arch_domain and xen_arch_domainconfig
+structure, to allow the domain to have an information about the
+SVE feature and the number of SVE register bits that are allowed
+for this domain.
 
-Save P0-15 whose length is maximum 256 bits each, in this case the
-memory used is from the fpregs field in struct vfp_state,
-because V0-31 are part of Z0-31 and this space would have been
-unused for SVE domain otherwise.
+The field is used also to allow or forbid a domain to use SVE,
+because a value equal to zero means the guest is not allowed to
+use the feature.
 
-Create zcr_el{1,2} fields in arch_vcpu, initialise zcr_el2 on vcpu
-creation given the requested vector length and restore it on
-context switch, save/restore ZCR_EL1 value as well.
-
-Remove headers from sve.c that are already included using
-xen/sched.h.
+Check that the requested vector length is lower or equal to the
+platform supported vector length, otherwise fail on domain
+creation.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
 Changes from RFC:
- - Moved zcr_el2 field introduction in this patch, restore its
-   content inside sve_restore_state function. (Julien)
+ - restore zcr_el2 in sve_restore_state, that will be introduced
+   later in this serie, so remove zcr_el2 related code from this
+   patch and move everything to the later patch (Julien)
+ - add explicit padding into struct xen_arch_domainconfig (Julien)
+ - Don't lower down the vector length, just fail to create the
+   domain. (Julien)
 ---
- xen/arch/arm/arm64/sve.c                 |  65 ++++++++++-
- xen/arch/arm/arm64/sve_asm.S             | 141 +++++++++++++++++++++++
- xen/arch/arm/arm64/vfp.c                 |  79 +++++++------
- xen/arch/arm/domain.c                    |   7 ++
- xen/arch/arm/include/asm/arm64/sve.h     |  13 +++
- xen/arch/arm/include/asm/arm64/sysregs.h |   3 +
- xen/arch/arm/include/asm/arm64/vfp.h     |  10 ++
- xen/arch/arm/include/asm/domain.h        |   2 +
- 8 files changed, 281 insertions(+), 39 deletions(-)
+ xen/arch/arm/arm64/sve.c             |  9 ++++++++
+ xen/arch/arm/domain.c                | 32 ++++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/arm64/sve.h | 12 +++++++++++
+ xen/arch/arm/include/asm/domain.h    |  5 +++++
+ xen/include/public/arch-arm.h        |  3 +++
+ xen/include/public/domctl.h          |  2 +-
+ 6 files changed, 62 insertions(+), 1 deletion(-)
 
 diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
-index eee39caa9efa..bb3229ead005 100644
+index 1c8024b44cd8..eee39caa9efa 100644
 --- a/xen/arch/arm/arm64/sve.c
 +++ b/xen/arch/arm/arm64/sve.c
-@@ -5,14 +5,29 @@
-  * Copyright (C) 2022 ARM Ltd.
+@@ -6,6 +6,7 @@
   */
  
--#include <xen/types.h>
--#include <asm/cpufeature.h>
-+#include <xen/sched.h>
-+#include <xen/sizes.h>
+ #include <xen/types.h>
++#include <asm/cpufeature.h>
  #include <asm/arm64/sve.h>
--#include <asm/arm64/sysregs.h>
--#include <asm/processor.h>
--#include <asm/system.h>
- 
- extern unsigned int sve_get_hw_vl(void);
-+extern void sve_save_ctx(uint64_t *sve_ctx, uint64_t *pregs, int save_ffr);
-+extern void sve_load_ctx(uint64_t const *sve_ctx, uint64_t const *pregs,
-+                         int restore_ffr);
-+
-+static inline uint16_t sve_zreg_ctx_size(uint16_t vl)
-+{
-+    /*
-+     * Z0-31 registers size in bytes is computed from VL that is in bits, so VL
-+     * in bytes is VL/8.
-+     */
-+    return (vl / 8U) * 32U;
-+}
-+
-+static inline uint16_t sve_ffrreg_ctx_size(uint16_t vl)
-+{
-+    /* FFR register size is VL/8, which is in bytes (VL/8)/8 */
-+    return (vl / 64U);
-+}
- 
- register_t compute_max_zcr(void)
+ #include <asm/arm64/sysregs.h>
+ #include <asm/processor.h>
+@@ -47,3 +48,11 @@ register_t vl_to_zcr(uint16_t vl)
  {
-@@ -56,3 +71,43 @@ uint16_t get_sys_vl_len(void)
-     return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
-             SVE_VL_MULTIPLE_VAL;
+     return ((vl / SVE_VL_MULTIPLE_VAL) - 1U) & ZCR_ELx_LEN_MASK;
  }
 +
-+int sve_context_init(struct vcpu *v)
++/* Get the system sanitized value for VL in bits */
++uint16_t get_sys_vl_len(void)
 +{
-+    uint64_t *ctx = _xzalloc(sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) +
-+                             sve_ffrreg_ctx_size(v->domain->arch.sve_vl_bits),
-+                             L1_CACHE_BYTES);
-+
-+    if ( !ctx )
-+        return -ENOMEM;
-+
-+    v->arch.vfp.sve_context = ctx;
-+
-+    return 0;
++    /* ZCR_ELx len field is ((len+1) * 128) = vector bits length */
++    return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
++            SVE_VL_MULTIPLE_VAL;
 +}
-+
-+void sve_context_free(struct vcpu *v)
-+{
-+    xfree(v->arch.vfp.sve_context);
-+}
-+
-+void sve_save_state(struct vcpu *v)
-+{
-+    uint64_t *sve_ctx_zreg_end = v->arch.vfp.sve_context +
-+            (sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) / sizeof(uint64_t));
-+
-+    v->arch.zcr_el1 = READ_SYSREG(ZCR_EL1);
-+
-+    sve_save_ctx(sve_ctx_zreg_end, v->arch.vfp.fpregs, 1);
-+}
-+
-+void sve_restore_state(struct vcpu *v)
-+{
-+    uint64_t *sve_ctx_zreg_end = v->arch.vfp.sve_context +
-+            (sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) / sizeof(uint64_t));
-+
-+    WRITE_SYSREG(v->arch.zcr_el1, ZCR_EL1);
-+    WRITE_SYSREG(v->arch.zcr_el2, ZCR_EL2);
-+
-+    sve_load_ctx(sve_ctx_zreg_end, v->arch.vfp.fpregs, 1);
-+}
-diff --git a/xen/arch/arm/arm64/sve_asm.S b/xen/arch/arm/arm64/sve_asm.S
-index 4d1549344733..8c37d7bc95d5 100644
---- a/xen/arch/arm/arm64/sve_asm.S
-+++ b/xen/arch/arm/arm64/sve_asm.S
-@@ -17,6 +17,18 @@
-     .endif
- .endm
- 
-+.macro _sve_check_zreg znr
-+    .if (\znr) < 0 || (\znr) > 31
-+        .error "Bad Scalable Vector Extension vector register number \znr."
-+    .endif
-+.endm
-+
-+.macro _sve_check_preg pnr
-+    .if (\pnr) < 0 || (\pnr) > 15
-+        .error "Bad Scalable Vector Extension predicate register number \pnr."
-+    .endif
-+.endm
-+
- .macro _check_num n, min, max
-     .if (\n) < (\min) || (\n) > (\max)
-         .error "Number \n out of range [\min,\max]"
-@@ -26,6 +38,54 @@
- /* SVE instruction encodings for non-SVE-capable assemblers */
- /* (pre binutils 2.28, all kernel capable clang versions support SVE) */
- 
-+/* STR (vector): STR Z\nz, [X\nxbase, #\offset, MUL VL] */
-+.macro _sve_str_v nz, nxbase, offset=0
-+    _sve_check_zreg \nz
-+    _check_general_reg \nxbase
-+    _check_num (\offset), -0x100, 0xff
-+    .inst 0xe5804000                \
-+        | (\nz)                     \
-+        | ((\nxbase) << 5)          \
-+        | (((\offset) & 7) << 10)   \
-+        | (((\offset) & 0x1f8) << 13)
-+.endm
-+
-+/* LDR (vector): LDR Z\nz, [X\nxbase, #\offset, MUL VL] */
-+.macro _sve_ldr_v nz, nxbase, offset=0
-+    _sve_check_zreg \nz
-+    _check_general_reg \nxbase
-+    _check_num (\offset), -0x100, 0xff
-+    .inst 0x85804000                \
-+        | (\nz)                     \
-+        | ((\nxbase) << 5)          \
-+        | (((\offset) & 7) << 10)   \
-+        | (((\offset) & 0x1f8) << 13)
-+.endm
-+
-+/* STR (predicate): STR P\np, [X\nxbase, #\offset, MUL VL] */
-+.macro _sve_str_p np, nxbase, offset=0
-+    _sve_check_preg \np
-+    _check_general_reg \nxbase
-+    _check_num (\offset), -0x100, 0xff
-+    .inst 0xe5800000                \
-+        | (\np)                     \
-+        | ((\nxbase) << 5)          \
-+        | (((\offset) & 7) << 10)   \
-+        | (((\offset) & 0x1f8) << 13)
-+.endm
-+
-+/* LDR (predicate): LDR P\np, [X\nxbase, #\offset, MUL VL] */
-+.macro _sve_ldr_p np, nxbase, offset=0
-+    _sve_check_preg \np
-+    _check_general_reg \nxbase
-+    _check_num (\offset), -0x100, 0xff
-+    .inst 0x85800000                \
-+        | (\np)                     \
-+        | ((\nxbase) << 5)          \
-+        | (((\offset) & 7) << 10)   \
-+        | (((\offset) & 0x1f8) << 13)
-+.endm
-+
- /* RDVL X\nx, #\imm */
- .macro _sve_rdvl nx, imm
-     _check_general_reg \nx
-@@ -35,11 +95,92 @@
-         | (((\imm) & 0x3f) << 5)
- .endm
- 
-+/* RDFFR (unpredicated): RDFFR P\np.B */
-+.macro _sve_rdffr np
-+    _sve_check_preg \np
-+    .inst 0x2519f000                \
-+        | (\np)
-+.endm
-+
-+/* WRFFR P\np.B */
-+.macro _sve_wrffr np
-+    _sve_check_preg \np
-+    .inst 0x25289000                \
-+        | ((\np) << 5)
-+.endm
-+
-+.macro __for from:req, to:req
-+    .if (\from) == (\to)
-+        _for__body %\from
-+    .else
-+        __for %\from, %((\from) + ((\to) - (\from)) / 2)
-+        __for %((\from) + ((\to) - (\from)) / 2 + 1), %\to
-+    .endif
-+.endm
-+
-+.macro _for var:req, from:req, to:req, insn:vararg
-+    .macro _for__body \var:req
-+        .noaltmacro
-+        \insn
-+        .altmacro
-+    .endm
-+
-+    .altmacro
-+    __for \from, \to
-+    .noaltmacro
-+
-+    .purgem _for__body
-+.endm
-+
-+.macro sve_save nxzffrctx, nxpctx, save_ffr
-+    _for n, 0, 31, _sve_str_v \n, \nxzffrctx, \n - 32
-+    _for n, 0, 15, _sve_str_p \n, \nxpctx, \n
-+        cbz \save_ffr, 1f
-+        _sve_rdffr 0
-+        _sve_str_p 0, \nxzffrctx
-+        _sve_ldr_p 0, \nxpctx
-+        b 2f
-+1:
-+        str xzr, [x\nxzffrctx]      // Zero out FFR
-+2:
-+.endm
-+
-+.macro sve_load nxzffrctx, nxpctx, restore_ffr
-+    _for n, 0, 31, _sve_ldr_v \n, \nxzffrctx, \n - 32
-+        cbz \restore_ffr, 1f
-+        _sve_ldr_p 0, \nxzffrctx
-+        _sve_wrffr 0
-+1:
-+    _for n, 0, 15, _sve_ldr_p \n, \nxpctx, \n
-+.endm
-+
- /* Gets the current vector register size in bytes */
- GLOBAL(sve_get_hw_vl)
-     _sve_rdvl 0, 1
-     ret
- 
-+/*
-+ * Save the SVE context
-+ *
-+ * x0 - pointer to buffer for Z0-31 + FFR
-+ * x1 - pointer to buffer for P0-15
-+ * x2 - Save FFR if non-zero
-+ */
-+GLOBAL(sve_save_ctx)
-+    sve_save 0, 1, x2
-+    ret
-+
-+/*
-+ * Load the SVE context
-+ *
-+ * x0 - pointer to buffer for Z0-31 + FFR
-+ * x1 - pointer to buffer for P0-15
-+ * x2 - Restore FFR if non-zero
-+ */
-+GLOBAL(sve_load_ctx)
-+    sve_load 0, 1, x2
-+    ret
-+
- /*
-  * Local variables:
-  * mode: ASM
-diff --git a/xen/arch/arm/arm64/vfp.c b/xen/arch/arm/arm64/vfp.c
-index 47885e76baae..2d0d7c2e6ddb 100644
---- a/xen/arch/arm/arm64/vfp.c
-+++ b/xen/arch/arm/arm64/vfp.c
-@@ -2,29 +2,35 @@
- #include <asm/processor.h>
- #include <asm/cpufeature.h>
- #include <asm/vfp.h>
-+#include <asm/arm64/sve.h>
- 
- void vfp_save_state(struct vcpu *v)
- {
-     if ( !cpu_has_fp )
-         return;
- 
--    asm volatile("stp q0, q1, [%1, #16 * 0]\n\t"
--                 "stp q2, q3, [%1, #16 * 2]\n\t"
--                 "stp q4, q5, [%1, #16 * 4]\n\t"
--                 "stp q6, q7, [%1, #16 * 6]\n\t"
--                 "stp q8, q9, [%1, #16 * 8]\n\t"
--                 "stp q10, q11, [%1, #16 * 10]\n\t"
--                 "stp q12, q13, [%1, #16 * 12]\n\t"
--                 "stp q14, q15, [%1, #16 * 14]\n\t"
--                 "stp q16, q17, [%1, #16 * 16]\n\t"
--                 "stp q18, q19, [%1, #16 * 18]\n\t"
--                 "stp q20, q21, [%1, #16 * 20]\n\t"
--                 "stp q22, q23, [%1, #16 * 22]\n\t"
--                 "stp q24, q25, [%1, #16 * 24]\n\t"
--                 "stp q26, q27, [%1, #16 * 26]\n\t"
--                 "stp q28, q29, [%1, #16 * 28]\n\t"
--                 "stp q30, q31, [%1, #16 * 30]\n\t"
--                 : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
-+    if ( is_sve_domain(v->domain) )
-+        sve_save_state(v);
-+    else
-+    {
-+        asm volatile("stp q0, q1, [%1, #16 * 0]\n\t"
-+                     "stp q2, q3, [%1, #16 * 2]\n\t"
-+                     "stp q4, q5, [%1, #16 * 4]\n\t"
-+                     "stp q6, q7, [%1, #16 * 6]\n\t"
-+                     "stp q8, q9, [%1, #16 * 8]\n\t"
-+                     "stp q10, q11, [%1, #16 * 10]\n\t"
-+                     "stp q12, q13, [%1, #16 * 12]\n\t"
-+                     "stp q14, q15, [%1, #16 * 14]\n\t"
-+                     "stp q16, q17, [%1, #16 * 16]\n\t"
-+                     "stp q18, q19, [%1, #16 * 18]\n\t"
-+                     "stp q20, q21, [%1, #16 * 20]\n\t"
-+                     "stp q22, q23, [%1, #16 * 22]\n\t"
-+                     "stp q24, q25, [%1, #16 * 24]\n\t"
-+                     "stp q26, q27, [%1, #16 * 26]\n\t"
-+                     "stp q28, q29, [%1, #16 * 28]\n\t"
-+                     "stp q30, q31, [%1, #16 * 30]\n\t"
-+                     : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
-+    }
- 
-     v->arch.vfp.fpsr = READ_SYSREG(FPSR);
-     v->arch.vfp.fpcr = READ_SYSREG(FPCR);
-@@ -37,23 +43,28 @@ void vfp_restore_state(struct vcpu *v)
-     if ( !cpu_has_fp )
-         return;
- 
--    asm volatile("ldp q0, q1, [%1, #16 * 0]\n\t"
--                 "ldp q2, q3, [%1, #16 * 2]\n\t"
--                 "ldp q4, q5, [%1, #16 * 4]\n\t"
--                 "ldp q6, q7, [%1, #16 * 6]\n\t"
--                 "ldp q8, q9, [%1, #16 * 8]\n\t"
--                 "ldp q10, q11, [%1, #16 * 10]\n\t"
--                 "ldp q12, q13, [%1, #16 * 12]\n\t"
--                 "ldp q14, q15, [%1, #16 * 14]\n\t"
--                 "ldp q16, q17, [%1, #16 * 16]\n\t"
--                 "ldp q18, q19, [%1, #16 * 18]\n\t"
--                 "ldp q20, q21, [%1, #16 * 20]\n\t"
--                 "ldp q22, q23, [%1, #16 * 22]\n\t"
--                 "ldp q24, q25, [%1, #16 * 24]\n\t"
--                 "ldp q26, q27, [%1, #16 * 26]\n\t"
--                 "ldp q28, q29, [%1, #16 * 28]\n\t"
--                 "ldp q30, q31, [%1, #16 * 30]\n\t"
--                 : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
-+    if ( is_sve_domain(v->domain) )
-+        sve_restore_state(v);
-+    else
-+    {
-+        asm volatile("ldp q0, q1, [%1, #16 * 0]\n\t"
-+                     "ldp q2, q3, [%1, #16 * 2]\n\t"
-+                     "ldp q4, q5, [%1, #16 * 4]\n\t"
-+                     "ldp q6, q7, [%1, #16 * 6]\n\t"
-+                     "ldp q8, q9, [%1, #16 * 8]\n\t"
-+                     "ldp q10, q11, [%1, #16 * 10]\n\t"
-+                     "ldp q12, q13, [%1, #16 * 12]\n\t"
-+                     "ldp q14, q15, [%1, #16 * 14]\n\t"
-+                     "ldp q16, q17, [%1, #16 * 16]\n\t"
-+                     "ldp q18, q19, [%1, #16 * 18]\n\t"
-+                     "ldp q20, q21, [%1, #16 * 20]\n\t"
-+                     "ldp q22, q23, [%1, #16 * 22]\n\t"
-+                     "ldp q24, q25, [%1, #16 * 24]\n\t"
-+                     "ldp q26, q27, [%1, #16 * 26]\n\t"
-+                     "ldp q28, q29, [%1, #16 * 28]\n\t"
-+                     "ldp q30, q31, [%1, #16 * 30]\n\t"
-+                     : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
-+    }
- 
-     WRITE_SYSREG(v->arch.vfp.fpsr, FPSR);
-     WRITE_SYSREG(v->arch.vfp.fpcr, FPCR);
 diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 8d64e3c08edf..4a9a19189dd2 100644
+index adb6ace2e24d..8d64e3c08edf 100644
 --- a/xen/arch/arm/domain.c
 +++ b/xen/arch/arm/domain.c
-@@ -552,7 +552,12 @@ int arch_vcpu_create(struct vcpu *v)
+@@ -13,6 +13,7 @@
+ #include <xen/wait.h>
+ 
+ #include <asm/alternative.h>
++#include <asm/arm64/sve.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
+ #include <asm/current.h>
+@@ -550,6 +551,8 @@ int arch_vcpu_create(struct vcpu *v)
+     v->arch.vmpidr = MPIDR_SMP | vcpuid_to_vaffinity(v->vcpu_id);
  
      v->arch.cptr_el2 = get_default_cptr_flags();
-     if ( is_sve_domain(v->domain) )
-+    {
-+        if ( (rc = sve_context_init(v)) != 0 )
-+            goto fail;
-         v->arch.cptr_el2 &= ~HCPTR_CP(8);
-+        v->arch.zcr_el2 = vl_to_zcr(v->domain->arch.sve_vl_bits);
-+    }
++    if ( is_sve_domain(v->domain) )
++        v->arch.cptr_el2 &= ~HCPTR_CP(8);
  
      v->arch.hcr_el2 = get_default_hcr_flags();
  
-@@ -582,6 +587,8 @@ fail:
+@@ -594,6 +597,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+     unsigned int max_vcpus;
+     unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
+     unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu);
++    unsigned int sve_vl_bits = config->arch.sve_vl_bits;
  
- void arch_vcpu_destroy(struct vcpu *v)
- {
-+    if ( is_sve_domain(v->domain) )
-+        sve_context_free(v);
-     vcpu_timer_destroy(v);
-     vcpu_vgic_free(v);
-     free_xenheap_pages(v->arch.stack, STACK_ORDER);
+     if ( (config->flags & ~flags_optional) != flags_required )
+     {
+@@ -602,6 +606,31 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
+ 
++    /* Check feature flags */
++    if ( sve_vl_bits > 0 ) {
++        unsigned int zcr_max_bits = get_sys_vl_len();
++
++        if ( !cpu_has_sve )
++        {
++            dprintk(XENLOG_INFO, "SVE is unsupported on this machine.\n");
++            return -EINVAL;
++        }
++        else if ( !is_vl_valid(sve_vl_bits) )
++        {
++            dprintk(XENLOG_INFO, "Unsupported SVE vector length (%u)\n",
++                    sve_vl_bits);
++            return -EINVAL;
++        }
++        else if ( sve_vl_bits > zcr_max_bits )
++        {
++            dprintk(XENLOG_INFO,
++                    "The requested SVE vector length (%u) must be lower or \n"
++                    "equal to the platform supported vector length (%u)\n",
++                    sve_vl_bits, zcr_max_bits);
++            return -EINVAL;
++        }
++    }
++
+     /* The P2M table must always be shared between the CPU and the IOMMU */
+     if ( config->iommu_opts & XEN_DOMCTL_IOMMU_no_sharept )
+     {
+@@ -744,6 +773,9 @@ int arch_domain_create(struct domain *d,
+     if ( (rc = domain_vpci_init(d)) != 0 )
+         goto fail;
+ 
++    /* Copy sve_vl_bits to the domain configuration */
++    d->arch.sve_vl_bits = config->arch.sve_vl_bits;
++
+     return 0;
+ 
+ fail:
 diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
-index f4a660e402ca..28c31b329233 100644
+index bd56e2f24230..f4a660e402ca 100644
 --- a/xen/arch/arm/include/asm/arm64/sve.h
 +++ b/xen/arch/arm/include/asm/arm64/sve.h
-@@ -24,6 +24,10 @@ static inline bool is_vl_valid(uint16_t vl)
+@@ -13,10 +13,17 @@
+ /* Vector length must be multiple of 128 */
+ #define SVE_VL_MULTIPLE_VAL (128U)
+ 
++static inline bool is_vl_valid(uint16_t vl)
++{
++    /* SVE vector length is multiple of 128 and maximum 2048 */
++    return ((vl % SVE_VL_MULTIPLE_VAL) == 0) && (vl <= SVE_VL_MAX_BITS);
++}
++
+ #ifdef CONFIG_ARM64_SVE
+ 
  register_t compute_max_zcr(void);
  register_t vl_to_zcr(uint16_t vl);
- uint16_t get_sys_vl_len(void);
-+int sve_context_init(struct vcpu *v);
-+void sve_context_free(struct vcpu *v);
-+void sve_save_state(struct vcpu *v);
-+void sve_restore_state(struct vcpu *v);
++uint16_t get_sys_vl_len(void);
  
  #else /* !CONFIG_ARM64_SVE */
  
-@@ -42,6 +46,15 @@ static inline uint16_t get_sys_vl_len(void)
+@@ -30,6 +37,11 @@ static inline register_t vl_to_zcr(uint16_t vl)
      return 0;
  }
  
-+static inline int sve_context_init(struct vcpu *v)
++static inline uint16_t get_sys_vl_len(void)
 +{
 +    return 0;
 +}
-+
-+static inline void sve_context_free(struct vcpu *v) {}
-+static inline void sve_save_state(struct vcpu *v) {}
-+static inline void sve_restore_state(struct vcpu *v) {}
 +
  #endif
  
  #endif /* _ARM_ARM64_SVE_H */
-diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
-index 4cabb9eb4d5e..3fdeb9d8cdef 100644
---- a/xen/arch/arm/include/asm/arm64/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-@@ -88,6 +88,9 @@
- #ifndef ID_AA64ISAR2_EL1
- #define ID_AA64ISAR2_EL1            S3_0_C0_C6_2
- #endif
-+#ifndef ZCR_EL1
-+#define ZCR_EL1                     S3_0_C1_C2_0
-+#endif
- 
- /* ID registers (imported from arm64/include/asm/sysreg.h in Linux) */
- 
-diff --git a/xen/arch/arm/include/asm/arm64/vfp.h b/xen/arch/arm/include/asm/arm64/vfp.h
-index e6e8c363bc16..8af714cb8ecc 100644
---- a/xen/arch/arm/include/asm/arm64/vfp.h
-+++ b/xen/arch/arm/include/asm/arm64/vfp.h
-@@ -6,7 +6,17 @@
- 
- struct vfp_state
- {
-+    /*
-+     * When SVE is enabled for the guest, fpregs memory will be used to
-+     * save/restore P0-P15 registers, otherwise it will be used for the V0-V31
-+     * registers.
-+     */
-     uint64_t fpregs[64] __vfp_aligned;
-+    /*
-+     * When SVE is enabled for the guest, sve_context contains memory to
-+     * save/restore Z0-Z31 registers and FFR.
-+     */
-+    uint64_t *sve_context;
-     register_t fpcr;
-     register_t fpexc32_el2;
-     register_t fpsr;
 diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-index 1bd669e0a5c1..4d1066750a9b 100644
+index 42eb5df320a7..1bd669e0a5c1 100644
 --- a/xen/arch/arm/include/asm/domain.h
 +++ b/xen/arch/arm/include/asm/domain.h
-@@ -195,6 +195,8 @@ struct arch_vcpu
-     register_t tpidrro_el0;
+@@ -31,6 +31,8 @@ enum domain_type {
  
-     /* HYP configuration */
-+    register_t zcr_el1;
-+    register_t zcr_el2;
-     register_t cptr_el2;
-     register_t hcr_el2;
-     register_t mdcr_el2;
+ #define is_domain_direct_mapped(d) ((d)->cdf & CDF_directmap)
+ 
++#define is_sve_domain(d) ((d)->arch.sve_vl_bits > 0)
++
+ /*
+  * Is the domain using the host memory layout?
+  *
+@@ -114,6 +116,9 @@ struct arch_domain
+     void *tee;
+ #endif
+ 
++    /* max SVE vector length in bits */
++    uint16_t sve_vl_bits;
++
+ }  __cacheline_aligned;
+ 
+ struct arch_vcpu
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index 1528ced5097a..3094aeb57990 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -304,6 +304,9 @@ struct xen_arch_domainconfig {
+     uint16_t tee_type;
+     /* IN */
+     uint32_t nr_spis;
++    /* IN */
++    uint16_t sve_vl_bits;
++    uint16_t _pad1;
+     /*
+      * OUT
+      * Based on the property clock-frequency in the DT timer node.
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 51be28c3de7c..616d7a1c070d 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -21,7 +21,7 @@
+ #include "hvm/save.h"
+ #include "memory.h"
+ 
+-#define XEN_DOMCTL_INTERFACE_VERSION 0x00000015
++#define XEN_DOMCTL_INTERFACE_VERSION 0x00000016
+ 
+ /*
+  * NB. xen_domctl.domain is an IN/OUT parameter for this operation.
 -- 
 2.25.1
 
