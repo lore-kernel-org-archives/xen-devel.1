@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22257C05027
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 08:06:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.488585.756713 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAEE2C636D4
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 08:50:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.488596.756735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNUcA-0006gn-EJ; Thu, 02 Feb 2023 08:06:38 +0000
+	id 1pNVHf-0004Qi-3h; Thu, 02 Feb 2023 08:49:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 488585.756713; Thu, 02 Feb 2023 08:06:38 +0000
+Received: by outflank-mailman (output) from mailman id 488596.756735; Thu, 02 Feb 2023 08:49:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNUcA-0006gg-B6; Thu, 02 Feb 2023 08:06:38 +0000
-Received: by outflank-mailman (input) for mailman id 488585;
- Thu, 02 Feb 2023 08:06:37 +0000
+	id 1pNVHf-0004Qb-0B; Thu, 02 Feb 2023 08:49:31 +0000
+Received: by outflank-mailman (input) for mailman id 488596;
+ Thu, 02 Feb 2023 08:49:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8a/s=56=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1pNUc9-0005Ed-En
- for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 08:06:37 +0000
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2061e.outbound.protection.outlook.com
- [2a01:111:f400:7eb2::61e])
+ id 1pNVHe-0004Po-2O
+ for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 08:49:30 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20613.outbound.protection.outlook.com
+ [2a01:111:f400:fe5b::613])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 813f7dc2-a2d0-11ed-b63b-5f92e7d2e73a;
- Thu, 02 Feb 2023 09:06:33 +0100 (CET)
-Received: from DM6PR02CA0116.namprd02.prod.outlook.com (2603:10b6:5:1b4::18)
- by CH0PR12MB5217.namprd12.prod.outlook.com (2603:10b6:610:d0::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.25; Thu, 2 Feb
- 2023 08:06:29 +0000
-Received: from DM6NAM11FT067.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:1b4:cafe::88) by DM6PR02CA0116.outlook.office365.com
- (2603:10b6:5:1b4::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.24 via Frontend
- Transport; Thu, 2 Feb 2023 08:06:29 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT067.mail.protection.outlook.com (10.13.172.76) with Microsoft SMTP
+ id 7fa8a137-a2d6-11ed-b63b-5f92e7d2e73a;
+ Thu, 02 Feb 2023 09:49:27 +0100 (CET)
+Received: from BN9P223CA0018.NAMP223.PROD.OUTLOOK.COM (2603:10b6:408:10b::23)
+ by MN2PR12MB4566.namprd12.prod.outlook.com (2603:10b6:208:26a::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38; Thu, 2 Feb
+ 2023 08:49:23 +0000
+Received: from BN8NAM11FT116.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:10b:cafe::5f) by BN9P223CA0018.outlook.office365.com
+ (2603:10b6:408:10b::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.25 via Frontend
+ Transport; Thu, 2 Feb 2023 08:49:23 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT116.mail.protection.outlook.com (10.13.176.67) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6064.27 via Frontend Transport; Thu, 2 Feb 2023 08:06:28 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6064.27 via Frontend Transport; Thu, 2 Feb 2023 08:49:23 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
- 2023 02:06:24 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
- 2023 02:06:21 -0600
-Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Thu, 2 Feb 2023 02:06:20 -0600
+ 2023 02:49:23 -0600
+Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
+ via Frontend Transport; Thu, 2 Feb 2023 02:49:21 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,174 +61,249 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 813f7dc2-a2d0-11ed-b63b-5f92e7d2e73a
+X-Inumbo-ID: 7fa8a137-a2d6-11ed-b63b-5f92e7d2e73a
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XRtbGVeTBKtkpfJcQG1VdvQnehbswqo7QDHWa4TgQVDrU/IQOSVc1t+3HQsqowqIMZe2/TWNx2fpAdFmV1AxGiP7zUwn9+zYDw26u+IUjD/JaFU9l/hpwRXICiIeP5nkiZGtkdftllXfC9MGljAfRk2++mECiyFNvoc2GiI1AxyWINnMMajtKR1mQriBdxT53WeihdRGuW2Yu20QF4rvLM8a9KbGyDAEhMrn3tOZDUt7IKixuotVbOufTQsfa9vppuPRlVN99T7Z4k5+N9flQ+YT/STJaAiBD2eVs3LUT6gnCr6uG7BB8Ymw/zXjPe/r1C49RHhErZ/qaGUhMEmz/A==
+ b=SyRUAm/cHRaiZzLVhUFT09Xd8ko0DaHnNBubjdzjLI3pbXVNb1ip5qV1V7sqUEoGLmBupkyd9u9h98SN7BjbG5eQncvb06uEfUx6R83F3n9d7lF480A8gcgGEhb8z+qgj5s7BPXt0LnwuYQkNo/Ks40lRUJOQXnV1k087b7VuyNjT4LQcKTqrD2GktdAS3WLUF7VsF2C/xCTlLPlaSjZqHrtLKadT5UdZbq2AQHqvgaFx/3O1fLaf9BN0dZTJMit7ED0nJJC26ZRNuUvf6hrKnEv/lUl1y3UtzvXdaR9OrCXf8j6VoAWT5pD3Tahdw2Lg9Q4JZPT3y15EVVL9vAUpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C7VC1h+8je+j4d4guKURpOqcDAiPdLiwramoPfCIikg=;
- b=bLESw6IL0/GHPSTVP/8kNOxrQutaXSgPiEg/QqwdBkRV9cFKkqWy8yKrNiifVV1qQM3c47Sof4cVydAFJP1B/jbyfSxxbaBogqW3LfZVBwhqc73/hX43AEx4uN/mOY5Fk95eNkN71b/BYs5cxKAGiR5yk/wRLIwqXiXOoASGs2fuERsGDNZ0Rto4K50H9OpfAqn8+uBTcp8XeGd4eIxrbh0w0DvCAq9+0vlepEMJBKsm4He2vezaP40hasiUesM26QUii4Ut2tHSwCLnz0ICZoxFKCoVe2dLuiVkiZyuC1NUawkpaLAumwvedru9v72/C17zSn9EpLJniDWY/6Ijhw==
+ bh=uBLNfq0kNGD8ONWUKgdnR9q15jFiaFT0XCVIzdVZEEQ=;
+ b=HdSCxB4cmaEp3gMxkc7lZ8ajtDdppAjoNG4IAzFNPJAE7tudJjNsqnzeLsqgR8+BImrNgjA2wZ0SSlfaARnu+MkQyB4cEc/JBJQkq5u6YfhNQ+8uAzZYtTQYAP4RVhuiggbFqE6as4yudezNvREj6B7WdFDeEQ1DvMp1Q3v4GQzzjf/edYbPfl7VTeMdrrFyZbQ5ggU93UDbMh+xUC+G2NNJlUHMTebYRRYaBu22ChoIBYza8Z0GtnLcjLe3QWJcJMIvDEakKGvxlBojMsHHcaEtTY6F6Uy+bylZN4gleVQMecwOKXOVNzd6zf1F5Civ7TsQwgHw/YEmh7Xe011gVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C7VC1h+8je+j4d4guKURpOqcDAiPdLiwramoPfCIikg=;
- b=1gkcNles5cerb5VVw31kyPoey2aflHmjib9LYuP4Gzmh7+2frQ0ePY0tYmEnFNM5quuF9sb8eNrPFofQqBLheNChb1IQhb2b3E0sz/PZYE31bJVRjDdy9SzAJGquvS2bmynijjokLX7oOR40HIeS2AWgzb6zBr0CF9pSSGGbXq8=
+ bh=uBLNfq0kNGD8ONWUKgdnR9q15jFiaFT0XCVIzdVZEEQ=;
+ b=rE0oexAgbSG2eNPfXT3Qm+4P6dIxL7KP1I7Zs/fBEEEgbjScC+rdvUgyAFEXIlvchlCfq2u+iFvY4AWReIHBDmWoIPpyPYETbPYsoZD+n2xx95kFTdZZbFO6N5uK4ztld8dihtuRt0OpNM/VGN1vdlBYNSa+EVbxGINd9D85oQE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Message-ID: <f1549a1d-785b-6052-5b3b-bcd873b21576@amd.com>
-Date: Thu, 2 Feb 2023 09:06:19 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [PATCH 2/2] xen/arm: Add support for booting gzip compressed
- uImages
-To: Julien Grall <julien@xen.org>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	<ayankuma@amd.com>
-References: <20230131151354.25943-1-michal.orzel@amd.com>
- <20230131151354.25943-3-michal.orzel@amd.com>
- <653d05c1-a860-052c-4ce2-55998c77db42@xen.org>
- <442d7e6b-9b51-69bc-48ea-c844427a4a97@amd.com>
- <f45dfe55-ca51-7aa0-ef9a-2788cfead470@xen.org>
- <7c09b900-6568-e57d-3256-2cf72a73690c@amd.com>
- <6d3638e0-5613-ee7b-d919-1db3cd0ca2fb@xen.org>
- <bbb9e223-5112-4370-d569-c78b6ab609a8@amd.com>
- <1c9d7bcb-9ef1-8940-f709-a361285ad206@xen.org>
-Content-Language: en-US
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <1c9d7bcb-9ef1-8940-f709-a361285ad206@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	<ayankuma@amd.com>, Ayan Kumar Halder <ayan.kumar.halder@amd.com>, "Julien
+ Grall" <jgrall@amazon.com>
+Subject: [PATCH v2 1/2] xen/arm: Move kernel_uimage_probe definition after kernel_decompress
+Date: Thu, 2 Feb 2023 09:49:04 +0100
+Message-ID: <20230202084905.6950-2-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230202084905.6950-1-michal.orzel@amd.com>
+References: <20230202084905.6950-1-michal.orzel@amd.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT067:EE_|CH0PR12MB5217:EE_
-X-MS-Office365-Filtering-Correlation-Id: 542277da-ec06-4079-61fc-08db04f46370
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT116:EE_|MN2PR12MB4566:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8f362ae-692a-4ced-581a-08db04fa61fa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	D8+8VKL9GfYLkS3emGDRrAMXHVvqIAa58T8K8sFtyekj9065IMcCKaBs8gCRZHzEtAv89/w9mvSkur8fTNNLTP9INC57WShjNUlNtZdTR2gFeJD6DJV/aI3hK2OnWoa/lh5ljxhUxK5K0oAaqUvhyi/AxU4OOAhRC3D12cyW+oGEUsYUrUD1nzFE4QtJbglxH0NwVJTOwNk4p7gGsOdrIBGT9FpTeLqPGLnV7yelBp8D9lDqicRN6KRIwT5zNM6352T+vVSVSLsi/kchcpC8tFIIiGAts1h7Lw+UONUDBUiA5ejdGBsK/mpM2BzNxmcS8vTuWShkqDtgHX0HqsNSapVfzyNFv5t5frHRVKkpHzkC7Fzx6ztzV7/y2rgFXgDvcZ3qJ1XcbHpt2XbtZ3yN6Z6+CY7rM/h9G1iM6N3yke0/gSKIxYdFT54xCp0uuD97iaQ/qworwFoCKqht4/KZmqjRFon05TswFT+nKk5yHHO6tK3iXSEglMcFH+7Kd98dSSrA1LFkIi755vXk482Om8Ew41Mdag1yjkiRa7r4gkvy9CSMlFwNmGX02cDyAqW/BN3dwFqy1UgjlgkpYQh6FFk+PBwXJTtscDeEVYKVvwsE5wd+aUqVe0g6oPLrByqyQs5roZp7RXQHwAg4eDD31gTGEU6umsE76/FWGgYRFQ0XLFm+QRLBxKyl9AOgMtOYHwHZr4DcrcDxG3hGCCsz0jTtVLZpCph86S4+SXISaPQ1vO71JF5mSYAFXE/UUVQ4CjlDc8p23EJ70atmVype0Q==
+	6YaMZPcBI8LpF1WcIFBuro0VZRysGKakmq/xz/mJv+ArpSo1zJqrh32QjBcq19dhf46tqgcJ/ItzvrbN/u1yOrRX1lNbWKYKWOWc8gjnXqnTqAjUDf/BF76yauoV5DKJdEiVm13XHXNOh7hf4f0QHV/sxFd+c3W4RDIlAVR6AEMDpSmQKzhIkQ4bEXmS5iK1ygd/PTamSNrbUH/lL+rlYK4QcXtpGSXwbeRVZgmeG1O384eTHgkpcgvaB5LA+XpKQdx3enkGhQO/VtVmJToGcMbNBuDmjeB2rlqNqdhBKfbEYmHDFCcE0qkXtKuq+ZM3WJxCmTi29s+JWZdrcO6UbpZRslXW82FR8hC5F62pA5QkV4mm1hhArZjmgVmSvIz6tASCAYWq1iRBXCVMgLigC4SekuQ2SUWYwuLHwtalgPbhZ2Y0YhWqqPFoc/xSZfSZr0o9aG3O0aPN97lI5DlBFPhuzL6kA8NcGAMJFYyrfN/VL0lPjOLs7Z0U7adQymKEwUqSGAz8/YBHncWrBJDcszFqpqoehUP529bF5x9tMOP5xLEgh0N85YfJhiQpuW62UREsqCQAwbl3RFQZKQrH0yUi2hCG68A0tXFfmyoKfqgx0xks8BN+S6FrO6AwZGlmkELcnpplo9NCy9WrIi/AwlaLQf04kUFDXK6qweJ2HfH/AYEVS06FFlNjvA9ZLEvPKlJ3dXorPwSpY18+swUeUfRNY8PHSoVF3IAUhwT/BZU=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(396003)(346002)(39860400002)(136003)(376002)(451199018)(46966006)(36840700001)(40470700004)(47076005)(356005)(81166007)(82310400005)(86362001)(40460700003)(36756003)(31696002)(40480700001)(36860700001)(82740400003)(31686004)(44832011)(4326008)(8676002)(41300700001)(2906002)(8936002)(110136005)(54906003)(16576012)(5660300002)(316002)(2616005)(83380400001)(336012)(426003)(478600001)(26005)(70586007)(70206006)(186003)(53546011)(36900700001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(346002)(39860400002)(396003)(376002)(451199018)(40470700004)(36840700001)(46966006)(2616005)(336012)(40460700003)(40480700001)(82310400005)(36756003)(36860700001)(86362001)(82740400003)(8936002)(5660300002)(316002)(44832011)(356005)(54906003)(41300700001)(426003)(47076005)(81166007)(2906002)(83380400001)(6916009)(1076003)(4326008)(186003)(8676002)(478600001)(26005)(6666004)(70206006)(70586007)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 08:06:28.9116
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 08:49:23.4720
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 542277da-ec06-4079-61fc-08db04f46370
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8f362ae-692a-4ced-581a-08db04fa61fa
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DM6NAM11FT067.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT116.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5217
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4566
 
-Hi Julien,
+In a follow-up patch, we will be calling kernel_decompress function from
+within kernel_uimage_probe to support booting compressed images with
+u-boot header. Therefore, move the kernel_uimage_probe definition after
+kernel_decompress so that the latter is visible to the former.
 
-On 01/02/2023 19:54, Julien Grall wrote:
-> 
-> 
-> On 01/02/2023 12:56, Michal Orzel wrote:
->> Hi Julien,
-> 
-> Hi Michal,
-> 
->> On 01/02/2023 12:20, Julien Grall wrote:
->>>
->>>
->>> On 01/02/2023 11:01, Michal Orzel wrote:
->>>> I would prefer not to do this in this series as the goals are different. This series is to remove
->>>> the known Xen limitation.
->>>
->>> The reason I am asking is it effectively change the way you would
->>> implement. If we were going to support zImage/Image within uImage, then
->>> we would need to fallthrough rather than calling kernel_decompress().
->>>
->>> I am not aware of any at the moment. Better asking now than realizing
->>> after the fact that there is a need...
->> We need uImage support as there is more and more need to support booting
->> raw images of some RTOSes (there is always additional concern \wrt booting requirements
->> but at least the header allows to try to boot them). We are not aware of any need
->> to do some special handling to parse more than one header + from what I said earlier,
->> this is an unusual approach not seen to be handled by anyone.
->>
->>>
->>>>>> This could be solved by doing (not harmful in my opinion for common case)
->>>>>> addr &= PAGE_MASK.
->>>>> I don't quite understand your argument here. We need a check that work
->>>>> for everyone (not only in the common case).
->>>> As we assume the kernel module is at page aligned address (otherwise the issue you observed
->>>> can happen not only in uImage compressed case)
->>>
->>> I am not aware of such assumption. It is allowed to use non page-aligned
->>> address and it is correct for Xen to not free the first part if it is
->>> not page aligned because the first part may contain data from another
->>> module (or else).
->>>
->>>> , having a check like
->>>> this is generic. I.e. for normal usecase (no uImage compressed), addr &= PAGE_MASK
->>>> does not modify the address. For uImage compressed usecase it causes the addr to get
->>>> back to the previous value (before we added header size to it).
->>>>
->>>> Apart from the addr, we need to pass the correct size (as we extracted header size from it).
->>>> We could have the following (with appropriate comment):
->>>> size += addr - (addr & PAGE_MASK);
->>>> addr &= PAGE_MASK;
->>>> fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
->>>>
->>>> It does not look great but solves the uImage issue and does not modify
->>>> the previous behavior. Anyway, I'm open for suggestions.
->>>
->>> Two options:
->>>    1) Move the call to fw_unreserved_regions() outside of
->>> kernel_decompress().
->>>    2) Pass the offset of the gzip header to kernel_decompress().
->>> Something like where it would be  sizeof(uimage) in the uImage case or 0
->>> otherwise.
->>>
->>> I have a slight preference for the latter.
->> That is cool.
->> I'm in favor of this as well because it would allow not to set mod->start,size
->> from kernel_uimage_probe. Everything can be done in kernel_decompress:
->>
->> Diff:
-> 
-> A few comments because you resend the patch with it included.
-> 
->>
->> -static __init int kernel_decompress(struct bootmodule *mod)
->> +static __init int kernel_decompress(struct bootmodule *mod, uint32_t offset)
->>   {
->>       char *output, *input;
->>       char magic[2];
->> @@ -201,8 +201,14 @@ static __init int kernel_decompress(struct bootmodule *mod)
->>       struct page_info *pages;
->>       mfn_t mfn;
->>       int i;
->> -    paddr_t addr = mod->start;
->> -    paddr_t size = mod->size;
->> +
->> +    /*
->> +     * It might be that gzip header does not appear at the start address
->> +     * (i.e. in case of compressed uImage) so take into account offset to
-> 
-> NIT: I would use 'e.g.' because in the future we may have multiple
-> reason where the offset is not zero.
-> 
->> +     * gzip header.
->> +    */ > +    paddr_t addr = mod->start + offset;
->> +    paddr_t size = mod->size - offset;
-> 
-> You want to check that mod->size is at least equal to offset.
-Sounds reasonable. Thanks.
+No functional change intended.
 
-~Michal
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+Changes in v2:
+ - add Rb and Ab
+---
+ xen/arch/arm/kernel.c | 146 +++++++++++++++++++++---------------------
+ 1 file changed, 73 insertions(+), 73 deletions(-)
+
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 36081e73f140..068fbf88e492 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -186,6 +186,79 @@ static void __init kernel_zimage_load(struct kernel_info *info)
+     iounmap(kernel);
+ }
+ 
++static __init uint32_t output_length(char *image, unsigned long image_len)
++{
++    return *(uint32_t *)&image[image_len - 4];
++}
++
++static __init int kernel_decompress(struct bootmodule *mod)
++{
++    char *output, *input;
++    char magic[2];
++    int rc;
++    unsigned int kernel_order_out;
++    paddr_t output_size;
++    struct page_info *pages;
++    mfn_t mfn;
++    int i;
++    paddr_t addr = mod->start;
++    paddr_t size = mod->size;
++
++    if ( size < 2 )
++        return -EINVAL;
++
++    copy_from_paddr(magic, addr, sizeof(magic));
++
++    /* only gzip is supported */
++    if ( !gzip_check(magic, size) )
++        return -EINVAL;
++
++    input = ioremap_cache(addr, size);
++    if ( input == NULL )
++        return -EFAULT;
++
++    output_size = output_length(input, size);
++    kernel_order_out = get_order_from_bytes(output_size);
++    pages = alloc_domheap_pages(NULL, kernel_order_out, 0);
++    if ( pages == NULL )
++    {
++        iounmap(input);
++        return -ENOMEM;
++    }
++    mfn = page_to_mfn(pages);
++    output = __vmap(&mfn, 1 << kernel_order_out, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
++
++    rc = perform_gunzip(output, input, size);
++    clean_dcache_va_range(output, output_size);
++    iounmap(input);
++    vunmap(output);
++
++    if ( rc )
++    {
++        free_domheap_pages(pages, kernel_order_out);
++        return rc;
++    }
++
++    mod->start = page_to_maddr(pages);
++    mod->size = output_size;
++
++    /*
++     * Need to free pages after output_size here because they won't be
++     * freed by discard_initial_modules
++     */
++    i = PFN_UP(output_size);
++    for ( ; i < (1 << kernel_order_out); i++ )
++        free_domheap_page(pages + i);
++
++    /*
++     * Free the original kernel, update the pointers to the
++     * decompressed kernel
++     */
++    fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
++
++    return 0;
++}
++
+ /*
+  * Uimage CPU Architecture Codes
+  */
+@@ -289,79 +362,6 @@ static int __init kernel_uimage_probe(struct kernel_info *info,
+     return 0;
+ }
+ 
+-static __init uint32_t output_length(char *image, unsigned long image_len)
+-{
+-    return *(uint32_t *)&image[image_len - 4];
+-}
+-
+-static __init int kernel_decompress(struct bootmodule *mod)
+-{
+-    char *output, *input;
+-    char magic[2];
+-    int rc;
+-    unsigned int kernel_order_out;
+-    paddr_t output_size;
+-    struct page_info *pages;
+-    mfn_t mfn;
+-    int i;
+-    paddr_t addr = mod->start;
+-    paddr_t size = mod->size;
+-
+-    if ( size < 2 )
+-        return -EINVAL;
+-
+-    copy_from_paddr(magic, addr, sizeof(magic));
+-
+-    /* only gzip is supported */
+-    if ( !gzip_check(magic, size) )
+-        return -EINVAL;
+-
+-    input = ioremap_cache(addr, size);
+-    if ( input == NULL )
+-        return -EFAULT;
+-
+-    output_size = output_length(input, size);
+-    kernel_order_out = get_order_from_bytes(output_size);
+-    pages = alloc_domheap_pages(NULL, kernel_order_out, 0);
+-    if ( pages == NULL )
+-    {
+-        iounmap(input);
+-        return -ENOMEM;
+-    }
+-    mfn = page_to_mfn(pages);
+-    output = __vmap(&mfn, 1 << kernel_order_out, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
+-
+-    rc = perform_gunzip(output, input, size);
+-    clean_dcache_va_range(output, output_size);
+-    iounmap(input);
+-    vunmap(output);
+-
+-    if ( rc )
+-    {
+-        free_domheap_pages(pages, kernel_order_out);
+-        return rc;
+-    }
+-
+-    mod->start = page_to_maddr(pages);
+-    mod->size = output_size;
+-
+-    /*
+-     * Need to free pages after output_size here because they won't be
+-     * freed by discard_initial_modules
+-     */
+-    i = PFN_UP(output_size);
+-    for ( ; i < (1 << kernel_order_out); i++ )
+-        free_domheap_page(pages + i);
+-
+-    /*
+-     * Free the original kernel, update the pointers to the
+-     * decompressed kernel
+-     */
+-    fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
+-
+-    return 0;
+-}
+-
+ #ifdef CONFIG_ARM_64
+ /*
+  * Check if the image is a 64-bit Image.
+-- 
+2.25.1
+
 
