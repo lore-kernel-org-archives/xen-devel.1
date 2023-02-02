@@ -4,33 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60278C61DA4
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 08:05:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.488574.756690 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22257C05027
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Feb 2023 08:06:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.488585.756713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNUat-0005V5-NA; Thu, 02 Feb 2023 08:05:19 +0000
+	id 1pNUcA-0006gn-EJ; Thu, 02 Feb 2023 08:06:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 488574.756690; Thu, 02 Feb 2023 08:05:19 +0000
+Received: by outflank-mailman (output) from mailman id 488585.756713; Thu, 02 Feb 2023 08:06:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNUat-0005Uy-KY; Thu, 02 Feb 2023 08:05:19 +0000
-Received: by outflank-mailman (input) for mailman id 488574;
- Thu, 02 Feb 2023 08:05:18 +0000
+	id 1pNUcA-0006gg-B6; Thu, 02 Feb 2023 08:06:38 +0000
+Received: by outflank-mailman (input) for mailman id 488585;
+ Thu, 02 Feb 2023 08:06:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IGwg=56=casper.srs.infradead.org=BATV+067b40b933c07ef79d88+7102+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pNUar-0005Ed-KE
- for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 08:05:18 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=8a/s=56=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1pNUc9-0005Ed-En
+ for xen-devel@lists.xenproject.org; Thu, 02 Feb 2023 08:06:37 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2061e.outbound.protection.outlook.com
+ [2a01:111:f400:7eb2::61e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 50d7c5de-a2d0-11ed-b63b-5f92e7d2e73a;
- Thu, 02 Feb 2023 09:05:11 +0100 (CET)
-Received: from [2001:8b0:10b:5::bb3] (helo=u3832b3a9db3152.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pNUab-00DCu7-R7; Thu, 02 Feb 2023 08:05:02 +0000
+ id 813f7dc2-a2d0-11ed-b63b-5f92e7d2e73a;
+ Thu, 02 Feb 2023 09:06:33 +0100 (CET)
+Received: from DM6PR02CA0116.namprd02.prod.outlook.com (2603:10b6:5:1b4::18)
+ by CH0PR12MB5217.namprd12.prod.outlook.com (2603:10b6:610:d0::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.25; Thu, 2 Feb
+ 2023 08:06:29 +0000
+Received: from DM6NAM11FT067.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:5:1b4:cafe::88) by DM6PR02CA0116.outlook.office365.com
+ (2603:10b6:5:1b4::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.24 via Frontend
+ Transport; Thu, 2 Feb 2023 08:06:29 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT067.mail.protection.outlook.com (10.13.172.76) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6064.27 via Frontend Transport; Thu, 2 Feb 2023 08:06:28 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
+ 2023 02:06:24 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
+ 2023 02:06:21 -0600
+Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Thu, 2 Feb 2023 02:06:20 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,212 +65,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50d7c5de-a2d0-11ed-b63b-5f92e7d2e73a
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=3O1h4pbUCfZjJxageF80vcxvuNGjkEh9LQSJTXdH+gk=; b=Z3qvABEdpMlUo41TiYy1gHZEDm
-	S0BRxwgdijxvfOYNOJ91gdlj5zlB2Y6+1GsL8B5qMcP2IxJWw6886qj6Mgkh7l1SwUvY2cqk3cUtx
-	xiXzcH0qc0wTt/nrl836BfXfxLPt2kuu9978iftB8W57OX5Ya6xUuGWZM+i14+QMHUigwUgCP6Yp2
-	9qTiCTQ2G8/0sYOHY4ofpjloSFYAQ8dJZpQa9iEI/GSCIMfJ9mtzpnMG/Yki8azoxLqJquOD4uJAV
-	6e+ShS6j8JuMEg9JsKCWr2pCmeojsbCtsEjsVFgyLdvADE6TKK13NBON6qBiai/P5K9i6TIaZVF5j
-	ESsVfdqA==;
-Message-ID: <fd3259a2765d4b33ccf7baea320ac798bab63159.camel@infradead.org>
-Subject: Re: [SeaBIOS] [SeaBIOS PATCH] xen: require Xen info structure at
- 0x1000 to detect Xen
-From: David Woodhouse <dwmw2@infradead.org>
-To: Kevin O'Connor <kevin@koconnor.net>, Gerd Hoffmann <kraxel@redhat.com>
-Cc: seabios <seabios@seabios.org>, xen-devel
- <xen-devel@lists.xenproject.org>,  qemu-devel <qemu-devel@nongnu.org>, paul
- <paul@xen.org>
-Date: Thu, 02 Feb 2023 08:05:01 +0000
-In-Reply-To: <Y9scWQ/ASMCrY/uM@morn>
-References: <feef99dd2e1a5dce004d22baf07d716d6ea1344c.camel@infradead.org>
-	 <Y9scWQ/ASMCrY/uM@morn>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-sroW6G48O+5dXLLiahn3"
-User-Agent: Evolution 3.44.4-0ubuntu1 
+X-Inumbo-ID: 813f7dc2-a2d0-11ed-b63b-5f92e7d2e73a
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=XRtbGVeTBKtkpfJcQG1VdvQnehbswqo7QDHWa4TgQVDrU/IQOSVc1t+3HQsqowqIMZe2/TWNx2fpAdFmV1AxGiP7zUwn9+zYDw26u+IUjD/JaFU9l/hpwRXICiIeP5nkiZGtkdftllXfC9MGljAfRk2++mECiyFNvoc2GiI1AxyWINnMMajtKR1mQriBdxT53WeihdRGuW2Yu20QF4rvLM8a9KbGyDAEhMrn3tOZDUt7IKixuotVbOufTQsfa9vppuPRlVN99T7Z4k5+N9flQ+YT/STJaAiBD2eVs3LUT6gnCr6uG7BB8Ymw/zXjPe/r1C49RHhErZ/qaGUhMEmz/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=C7VC1h+8je+j4d4guKURpOqcDAiPdLiwramoPfCIikg=;
+ b=bLESw6IL0/GHPSTVP/8kNOxrQutaXSgPiEg/QqwdBkRV9cFKkqWy8yKrNiifVV1qQM3c47Sof4cVydAFJP1B/jbyfSxxbaBogqW3LfZVBwhqc73/hX43AEx4uN/mOY5Fk95eNkN71b/BYs5cxKAGiR5yk/wRLIwqXiXOoASGs2fuERsGDNZ0Rto4K50H9OpfAqn8+uBTcp8XeGd4eIxrbh0w0DvCAq9+0vlepEMJBKsm4He2vezaP40hasiUesM26QUii4Ut2tHSwCLnz0ICZoxFKCoVe2dLuiVkiZyuC1NUawkpaLAumwvedru9v72/C17zSn9EpLJniDWY/6Ijhw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=C7VC1h+8je+j4d4guKURpOqcDAiPdLiwramoPfCIikg=;
+ b=1gkcNles5cerb5VVw31kyPoey2aflHmjib9LYuP4Gzmh7+2frQ0ePY0tYmEnFNM5quuF9sb8eNrPFofQqBLheNChb1IQhb2b3E0sz/PZYE31bJVRjDdy9SzAJGquvS2bmynijjokLX7oOR40HIeS2AWgzb6zBr0CF9pSSGGbXq8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <f1549a1d-785b-6052-5b3b-bcd873b21576@amd.com>
+Date: Thu, 2 Feb 2023 09:06:19 +0100
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-
-
---=-sroW6G48O+5dXLLiahn3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Subject: Re: [PATCH 2/2] xen/arm: Add support for booting gzip compressed
+ uImages
+To: Julien Grall <julien@xen.org>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	<ayankuma@amd.com>
+References: <20230131151354.25943-1-michal.orzel@amd.com>
+ <20230131151354.25943-3-michal.orzel@amd.com>
+ <653d05c1-a860-052c-4ce2-55998c77db42@xen.org>
+ <442d7e6b-9b51-69bc-48ea-c844427a4a97@amd.com>
+ <f45dfe55-ca51-7aa0-ef9a-2788cfead470@xen.org>
+ <7c09b900-6568-e57d-3256-2cf72a73690c@amd.com>
+ <6d3638e0-5613-ee7b-d919-1db3cd0ca2fb@xen.org>
+ <bbb9e223-5112-4370-d569-c78b6ab609a8@amd.com>
+ <1c9d7bcb-9ef1-8940-f709-a361285ad206@xen.org>
+Content-Language: en-US
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <1c9d7bcb-9ef1-8940-f709-a361285ad206@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT067:EE_|CH0PR12MB5217:EE_
+X-MS-Office365-Filtering-Correlation-Id: 542277da-ec06-4079-61fc-08db04f46370
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	D8+8VKL9GfYLkS3emGDRrAMXHVvqIAa58T8K8sFtyekj9065IMcCKaBs8gCRZHzEtAv89/w9mvSkur8fTNNLTP9INC57WShjNUlNtZdTR2gFeJD6DJV/aI3hK2OnWoa/lh5ljxhUxK5K0oAaqUvhyi/AxU4OOAhRC3D12cyW+oGEUsYUrUD1nzFE4QtJbglxH0NwVJTOwNk4p7gGsOdrIBGT9FpTeLqPGLnV7yelBp8D9lDqicRN6KRIwT5zNM6352T+vVSVSLsi/kchcpC8tFIIiGAts1h7Lw+UONUDBUiA5ejdGBsK/mpM2BzNxmcS8vTuWShkqDtgHX0HqsNSapVfzyNFv5t5frHRVKkpHzkC7Fzx6ztzV7/y2rgFXgDvcZ3qJ1XcbHpt2XbtZ3yN6Z6+CY7rM/h9G1iM6N3yke0/gSKIxYdFT54xCp0uuD97iaQ/qworwFoCKqht4/KZmqjRFon05TswFT+nKk5yHHO6tK3iXSEglMcFH+7Kd98dSSrA1LFkIi755vXk482Om8Ew41Mdag1yjkiRa7r4gkvy9CSMlFwNmGX02cDyAqW/BN3dwFqy1UgjlgkpYQh6FFk+PBwXJTtscDeEVYKVvwsE5wd+aUqVe0g6oPLrByqyQs5roZp7RXQHwAg4eDD31gTGEU6umsE76/FWGgYRFQ0XLFm+QRLBxKyl9AOgMtOYHwHZr4DcrcDxG3hGCCsz0jTtVLZpCph86S4+SXISaPQ1vO71JF5mSYAFXE/UUVQ4CjlDc8p23EJ70atmVype0Q==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(396003)(346002)(39860400002)(136003)(376002)(451199018)(46966006)(36840700001)(40470700004)(47076005)(356005)(81166007)(82310400005)(86362001)(40460700003)(36756003)(31696002)(40480700001)(36860700001)(82740400003)(31686004)(44832011)(4326008)(8676002)(41300700001)(2906002)(8936002)(110136005)(54906003)(16576012)(5660300002)(316002)(2616005)(83380400001)(336012)(426003)(478600001)(26005)(70586007)(70206006)(186003)(53546011)(36900700001)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 08:06:28.9116
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 542277da-ec06-4079-61fc-08db04f46370
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM6NAM11FT067.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5217
 
-On Wed, 2023-02-01 at 21:13 -0500, Kevin O'Connor wrote:
-> On Fri, Jan 20, 2023 at 11:33:19AM +0000, David Woodhouse wrote:
-> > From: David Woodhouse <dwmw@amazon.co.uk>
-> >=20
-> > When running under Xen, hvmloader places a table at 0x1000 with the e82=
-0
-> > information and BIOS tables. If this isn't present, SeaBIOS will=20
-> > currently panic.
-> >=20
-> > We now have support for running Xen guests natively in QEMU/KVM, which
-> > boots SeaBIOS directly instead of via hvmloader, and does not provide
-> > the same structure.
-> >=20
-> > As it happens, this doesn't matter on first boot. because although we
-> > set PlatformRunningOn to PF_QEMU|PF_XEN, reading it back again still
-> > gives zero. Presumably because in true Xen, this is all already RAM. Bu=
-t
-> > in QEMU with a faithfully-emulated PAM config in the host bridge, it's
-> > still in ROM mode at this point so we don't see what we've just written=
-.
-> >=20
-> > On reboot, however, the region *is* set to RAM mode and we do see the
-> > updated value of PlatformRunningOn, do manage to remember that we've
-> > detected Xen in CPUID, and hit the panic.
-> >=20
-> > It's not trivial to detect QEMU vs. real Xen at the time xen_preinit()
-> > runs, because it's so early. We can't even make a XENVER_extraversion
-> > hypercall to look for hints, because we haven't set up the hypercall
-> > page (and don't have an allocator to give us a page in which to do so).
-> >=20
-> > So just make Xen detection contingent on the info structure being
-> > present. If it wasn't, we were going to panic anyway. That leaves us
-> > taking the standard QEMU init path for Xen guests in native QEMU,
-> > which is just fine.
->=20
-> Thanks.=C2=A0 I committed this change.
->=20
-> -Kevin
+Hi Julien,
 
-Thanks, Kevin.
+On 01/02/2023 19:54, Julien Grall wrote:
+> 
+> 
+> On 01/02/2023 12:56, Michal Orzel wrote:
+>> Hi Julien,
+> 
+> Hi Michal,
+> 
+>> On 01/02/2023 12:20, Julien Grall wrote:
+>>>
+>>>
+>>> On 01/02/2023 11:01, Michal Orzel wrote:
+>>>> I would prefer not to do this in this series as the goals are different. This series is to remove
+>>>> the known Xen limitation.
+>>>
+>>> The reason I am asking is it effectively change the way you would
+>>> implement. If we were going to support zImage/Image within uImage, then
+>>> we would need to fallthrough rather than calling kernel_decompress().
+>>>
+>>> I am not aware of any at the moment. Better asking now than realizing
+>>> after the fact that there is a need...
+>> We need uImage support as there is more and more need to support booting
+>> raw images of some RTOSes (there is always additional concern \wrt booting requirements
+>> but at least the header allows to try to boot them). We are not aware of any need
+>> to do some special handling to parse more than one header + from what I said earlier,
+>> this is an unusual approach not seen to be handled by anyone.
+>>
+>>>
+>>>>>> This could be solved by doing (not harmful in my opinion for common case)
+>>>>>> addr &= PAGE_MASK.
+>>>>> I don't quite understand your argument here. We need a check that work
+>>>>> for everyone (not only in the common case).
+>>>> As we assume the kernel module is at page aligned address (otherwise the issue you observed
+>>>> can happen not only in uImage compressed case)
+>>>
+>>> I am not aware of such assumption. It is allowed to use non page-aligned
+>>> address and it is correct for Xen to not free the first part if it is
+>>> not page aligned because the first part may contain data from another
+>>> module (or else).
+>>>
+>>>> , having a check like
+>>>> this is generic. I.e. for normal usecase (no uImage compressed), addr &= PAGE_MASK
+>>>> does not modify the address. For uImage compressed usecase it causes the addr to get
+>>>> back to the previous value (before we added header size to it).
+>>>>
+>>>> Apart from the addr, we need to pass the correct size (as we extracted header size from it).
+>>>> We could have the following (with appropriate comment):
+>>>> size += addr - (addr & PAGE_MASK);
+>>>> addr &= PAGE_MASK;
+>>>> fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
+>>>>
+>>>> It does not look great but solves the uImage issue and does not modify
+>>>> the previous behavior. Anyway, I'm open for suggestions.
+>>>
+>>> Two options:
+>>>    1) Move the call to fw_unreserved_regions() outside of
+>>> kernel_decompress().
+>>>    2) Pass the offset of the gzip header to kernel_decompress().
+>>> Something like where it would be  sizeof(uimage) in the uImage case or 0
+>>> otherwise.
+>>>
+>>> I have a slight preference for the latter.
+>> That is cool.
+>> I'm in favor of this as well because it would allow not to set mod->start,size
+>> from kernel_uimage_probe. Everything can be done in kernel_decompress:
+>>
+>> Diff:
+> 
+> A few comments because you resend the patch with it included.
+> 
+>>
+>> -static __init int kernel_decompress(struct bootmodule *mod)
+>> +static __init int kernel_decompress(struct bootmodule *mod, uint32_t offset)
+>>   {
+>>       char *output, *input;
+>>       char magic[2];
+>> @@ -201,8 +201,14 @@ static __init int kernel_decompress(struct bootmodule *mod)
+>>       struct page_info *pages;
+>>       mfn_t mfn;
+>>       int i;
+>> -    paddr_t addr = mod->start;
+>> -    paddr_t size = mod->size;
+>> +
+>> +    /*
+>> +     * It might be that gzip header does not appear at the start address
+>> +     * (i.e. in case of compressed uImage) so take into account offset to
+> 
+> NIT: I would use 'e.g.' because in the future we may have multiple
+> reason where the offset is not zero.
+> 
+>> +     * gzip header.
+>> +    */ > +    paddr_t addr = mod->start + offset;
+>> +    paddr_t size = mod->size - offset;
+> 
+> You want to check that mod->size is at least equal to offset.
+Sounds reasonable. Thanks.
 
-I'd like to get the rest of the Xen platform support in to qemu 8.0 if
-possible. Which is currently scheduled for March.
-
-Is there likely to be a SeaBIOS release before then which Gerd would
-pull into qemu anyway, or should I submit a submodule update to a
-snapshot of today's tree? That would just pull in this commit, and the
-one other fix that's in the SeaBIOS tree since 1.16.1?
-
-
- $ git shortlog rel-1.16.1..
-David Woodhouse (1):
-      xen: require Xen info structure at 0x1000 to detect Xen
-
-Qi Zhou (1):
-      usb: fix wrong init of keyboard/mouse's if first interface is not boo=
-t protocol
-
-
-
-
---=-sroW6G48O+5dXLLiahn3
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
-ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
-EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
-FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
-aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
-EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
-VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
-aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
-ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
-QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
-rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
-ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
-U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
-DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
-BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
-dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
-BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
-QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
-CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
-xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
-IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
-kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
-eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
-KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
-1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
-OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
-x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
-5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
-DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
-VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
-UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
-MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
-ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
-oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
-SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
-xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
-RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
-bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
-NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
-KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
-5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
-C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
-gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
-VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
-by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
-b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
-BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
-QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
-c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
-AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
-qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
-v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
-Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
-tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
-Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
-YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
-ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
-IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
-ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
-GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
-h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
-9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
-P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
-2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
-BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
-7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
-lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
-lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
-AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
-Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
-FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
-BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
-cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
-aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
-LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
-BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
-cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
-Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
-lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
-WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
-hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
-IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
-dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
-NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
-xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwMjAyMDgwNTAxWjAvBgkqhkiG9w0BCQQxIgQgXb8x9FP2
-dLdzxyp5RSIdrPlq7/qDMQk4hDF89xX3h/Uwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
-A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
-dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
-DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
-MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
-Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgCqRncvkU1L7LeqmTzvESKUO40Gr2DHKjEi
-RGTQ5dohjRGVUKHnKQDSmL3cYbJXRsAKnvy4hfzFzlgriC5zU2LoI84Rq0Bt1nskIL9lRaD9pvUN
-JNINB9tykaxomB8NhZfvFDVy1MlT7uLRgs34yic/yFhKr4N9wyCUuR2x8PRYUNIzUSYATdAkrwc4
-aPqCKzcpXPcIAk326ifhzC+g+vcdrVPLmdMuQX2p4Gd864zTq8QiLl6cbt2yxHSwRonc17YSbONG
-M4u6tQWkCId2sVDhDz3fGmX3AWbpc8PN+qmaP08+sa9rty/M+4O2JX1cKlM/mF6U2vG1oQu4VCRX
-9GteBwOD1SUYdz+nO51kisxUgXnOslOZ1QaCV9QiWAkBs47wwypEqPpEJG+YKB921l60J3+pWxZL
-IIXTmZTCcMxlMxVWxMxn3iAKlhwFNpBI2/i3Lu169dmy0lvGXq+HSsHfUPMSlQWLug2vKWG9TArf
-/9KBXH7UJrSsZ+blvwxmBB+4ZBGQ645LKL/COQsxRc6NbmAlmjYZ4f/pR55S23u9qmdbWI2ktQ7B
-Iquj1KS/sLRqBhb7NmDkr19UlfJ3IC+E0w3UIrR9JFTRj50QWdn4T2M/4Q5ZOVqKHmpf8DYLX635
-QlGdo7Z1oqKnqj9WO9MTHMps8MuLCA4vGDZisZPJDAAAAAAAAA==
-
-
---=-sroW6G48O+5dXLLiahn3--
+~Michal
 
