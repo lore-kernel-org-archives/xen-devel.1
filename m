@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BDBC61DA4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA2CC6379F
 	for <xen-devel@archiver.kernel.org>; Fri,  3 Feb 2023 09:18:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.489059.757396 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.489056.757370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNsDH-0007oO-Gn; Fri, 03 Feb 2023 09:18:31 +0000
+	id 1pNsD7-00079R-VV; Fri, 03 Feb 2023 09:18:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 489059.757396; Fri, 03 Feb 2023 09:18:31 +0000
+Received: by outflank-mailman (output) from mailman id 489056.757370; Fri, 03 Feb 2023 09:18:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNsDH-0007oF-D1; Fri, 03 Feb 2023 09:18:31 +0000
-Received: by outflank-mailman (input) for mailman id 489059;
- Fri, 03 Feb 2023 09:18:29 +0000
+	id 1pNsD7-000793-S6; Fri, 03 Feb 2023 09:18:21 +0000
+Received: by outflank-mailman (input) for mailman id 489056;
+ Fri, 03 Feb 2023 09:18:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HD5o=57=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pNsDF-0006sG-OB
- for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 09:18:29 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1pNsD7-0006sG-8I
+ for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 09:18:21 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8a0311c-a3a3-11ed-933c-83870f6b2ba8;
- Fri, 03 Feb 2023 10:18:29 +0100 (CET)
+ id b1f94e37-a3a3-11ed-933c-83870f6b2ba8;
+ Fri, 03 Feb 2023 10:18:19 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 079943447D;
- Fri,  3 Feb 2023 09:18:29 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D4C3C20FB1;
+ Fri,  3 Feb 2023 09:18:17 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D2CB01346D;
- Fri,  3 Feb 2023 09:18:28 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AB8B01346D;
+ Fri,  3 Feb 2023 09:18:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id Jm4sMmTR3GMkEwAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 03 Feb 2023 09:18:28 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id oqyuKFnR3GMREwAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 03 Feb 2023 09:18:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,141 +53,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8a0311c-a3a3-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: b1f94e37-a3a3-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1675415909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1675415897; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GtWQKRAyY57feFJk8BbUzmL2nez/i6gSp+ydtlu7X9A=;
-	b=W2spmIMlIzYekMsW/Nktfe/U0VVGVGHAsO/wqtUDQBwSfMriG+gLhv4eU8qX16ZeD2kqxU
-	ZwKQEMJBklXMCsymSYU8e5wjFP83bBCQJHQuI898uqC2ZZh+HcL+lDyUoAEP0pp2V4jebs
-	xzCkqi97iujyPKCo0BapNivCn+zUZbs=
+	bh=z81Lk0F6Fek1HMkTBl7IwshhUmTJkCu1CQ5yFDMGHEk=;
+	b=qPrMTeO36fOo9LpfULKQZr0DuSFU+In+5S3JH3QghH/n9PK7erMaAdu72JKpbbe8/P5tpp
+	arucenRLw4PDxTzX+LHI8sYVY/XY21Ydwt/mmJzhmuQFZgcd/rb8iACWWNas2uVEi0uswy
+	cFcQYoZxRsj2afrV/yqX99DzOtCIlGs=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 3/7] Mini-OS: add support for runtime mounts
-Date: Fri,  3 Feb 2023 10:18:05 +0100
-Message-Id: <20230203091809.14478-4-jgross@suse.com>
+Subject: [PATCH 1/7] Mini-OS: xenbus: add support for reading node from directory
+Date: Fri,  3 Feb 2023 10:18:03 +0100
+Message-Id: <20230203091809.14478-2-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230203091809.14478-1-jgross@suse.com>
 References: <20230203091809.14478-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the support to mount a device at runtime. The number of dynamic
-mounts is limited by a #define.
-
-For devices supporting multiple files struct file is modified to hold
-a pointer to file specific data in contrast to device specific data.
+Especially PV device drivers often need to read multiple Xenstore
+nodes from a common dirctory. Add support for reading a string or an
+unsigned value by specifying the directory and the node.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- include/lib.h |  5 +++++
- lib/sys.c     | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 54 insertions(+), 1 deletion(-)
+ include/xenbus.h |  6 ++++++
+ xenbus.c         | 39 ++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 42 insertions(+), 3 deletions(-)
 
-diff --git a/include/lib.h b/include/lib.h
-index 36d94ec4..fd8c36de 100644
---- a/include/lib.h
-+++ b/include/lib.h
-@@ -172,6 +172,7 @@ struct file {
-     union {
-         int fd; /* Any fd from an upper layer. */
-         void *dev;
-+        void *filedata;
-     };
- };
+diff --git a/include/xenbus.h b/include/xenbus.h
+index 3871f358..c0fc0ac5 100644
+--- a/include/xenbus.h
++++ b/include/xenbus.h
+@@ -108,6 +108,12 @@ int xenbus_read_integer(const char *path);
+  * read and parsing were successful, 0 if not */
+ int xenbus_read_uuid(const char* path, unsigned char uuid[16]);
  
-@@ -194,6 +195,10 @@ struct mount_point {
-     void *dev;
- };
- 
-+int mount(const char *path, void *dev,
-+          int (*open)(struct mount_point *, const char *, int, mode_t));
-+void umount(const char *path);
++/* Support functions for reading values from directory/node tuple. */
++char *xenbus_read_string(xenbus_transaction_t xbt, const char *dir,
++                         const char *node, char **value);
++char *xenbus_read_unsigned(xenbus_transaction_t xbt, const char *dir,
++                           const char *node, unsigned int *value);
 +
- unsigned int alloc_file_type(const struct file_ops *ops);
- 
- off_t lseek_default(struct file *file, off_t offset, int whence);
-diff --git a/lib/sys.c b/lib/sys.c
-index 1475c621..4171bfd6 100644
---- a/lib/sys.c
-+++ b/lib/sys.c
-@@ -339,7 +339,14 @@ static int open_mem(struct mount_point *mnt, const char *pathname, int flags,
-     return fd;
+ /* Contraction of snprintf and xenbus_write(path/node). */
+ char* xenbus_printf(xenbus_transaction_t xbt,
+                                   const char* node, const char* path,
+diff --git a/xenbus.c b/xenbus.c
+index 81e9b65d..811cde25 100644
+--- a/xenbus.c
++++ b/xenbus.c
+@@ -936,16 +936,21 @@ int xenbus_read_uuid(const char *path, unsigned char uuid[16])
+     return 1;
  }
  
--static struct mount_point mount_points[] = {
-+#ifdef CONFIG_CONSFRONT
-+#define STATIC_MNTS   4
-+#else
-+#define STATIC_MNTS   2
-+#endif
-+#define DYNAMIC_MNTS  8
-+
-+static struct mount_point mount_points[STATIC_MNTS + DYNAMIC_MNTS] = {
-     { .path = "/var/log",     .open = open_log,  .dev = NULL },
-     { .path = "/dev/mem",     .open = open_mem,  .dev = NULL },
- #ifdef CONFIG_CONSFRONT
-@@ -365,6 +372,8 @@ int open(const char *pathname, int flags, ...)
-     for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
-     {
-         mnt = mount_points + m;
-+        if ( !mnt->path )
-+            continue;
-         mlen = strlen(mnt->path);
-         if ( !strncmp(pathname, mnt->path, mlen) &&
-              (pathname[mlen] == '/' || pathname[mlen] == 0) )
-@@ -375,6 +384,45 @@ int open(const char *pathname, int flags, ...)
-     return -1;
- }
- 
-+int mount(const char *path, void *dev,
-+          int (*open)(struct mount_point *, const char *, int, mode_t))
++#define BUFFER_SIZE 256
++static void xenbus_build_path(const char *dir, const char *node, char *res)
 +{
-+    unsigned int m;
-+    struct mount_point *mnt;
-+
-+    for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
-+    {
-+        mnt = mount_points + m;
-+        if ( !mnt->path )
-+        {
-+            mnt->path = strdup(path);
-+            mnt->open = open;
-+            mnt->dev = dev;
-+            return 0;
-+        }
-+    }
-+
-+    errno = ENOSPC;
-+    return -1;
++    BUG_ON(strlen(dir) + strlen(node) + 1 >= BUFFER_SIZE);
++    sprintf(res,"%s/%s", dir, node);
 +}
 +
-+void umount(const char *path)
-+{
-+    unsigned int m;
-+    struct mount_point *mnt;
-+
-+    for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
-+    {
-+        mnt = mount_points + m;
-+        if ( mnt->path && !strcmp(mnt->path, path) )
-+        {
-+            free((char *)mnt->path);
-+            mnt->path = NULL;
-+            return;
-+        }
-+    }
-+}
-+
- int isatty(int fd)
+ char *xenbus_printf(xenbus_transaction_t xbt, const char* node,
+                     const char* path, const char* fmt, ...)
  {
-     return files[fd].type == FTYPE_CONSOLE;
+-#define BUFFER_SIZE 256
+     char fullpath[BUFFER_SIZE];
+     char val[BUFFER_SIZE];
+     va_list args;
+ 
+-    BUG_ON(strlen(node) + strlen(path) + 1 >= BUFFER_SIZE);
+-    sprintf(fullpath,"%s/%s", node, path);
++    xenbus_build_path(node, path, fullpath);
+     va_start(args, fmt);
+     vsprintf(val, fmt, args);
+     va_end(args);
+@@ -964,6 +969,34 @@ domid_t xenbus_get_self_id(void)
+     return ret;
+ }
+ 
++char *xenbus_read_string(xenbus_transaction_t xbt, const char *dir,
++                         const char *node, char **value)
++{
++    char path[BUFFER_SIZE];
++
++    xenbus_build_path(dir, node, path);
++
++    return xenbus_read(xbt, path, value);
++}
++
++char *xenbus_read_unsigned(xenbus_transaction_t xbt, const char *dir,
++                           const char *node, unsigned int *value)
++{
++    char path[BUFFER_SIZE];
++    char *msg;
++    char *str;
++
++    xenbus_build_path(dir, node, path);
++    msg = xenbus_read(xbt, path, &str);
++    if ( msg )
++        return msg;
++
++    sscanf(str, "%u", value);
++    free(str);
++
++    return NULL;
++}
++
+ /*
+  * Local variables:
+  * mode: C
 -- 
 2.35.3
 
