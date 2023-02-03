@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0FCAC636CC
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Feb 2023 09:18:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.489054.757355 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BDBC61DA4
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Feb 2023 09:18:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.489059.757396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNsD6-0006sn-N5; Fri, 03 Feb 2023 09:18:20 +0000
+	id 1pNsDH-0007oO-Gn; Fri, 03 Feb 2023 09:18:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 489054.757355; Fri, 03 Feb 2023 09:18:20 +0000
+Received: by outflank-mailman (output) from mailman id 489059.757396; Fri, 03 Feb 2023 09:18:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNsD6-0006se-Ir; Fri, 03 Feb 2023 09:18:20 +0000
-Received: by outflank-mailman (input) for mailman id 489054;
- Fri, 03 Feb 2023 09:18:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pNsDH-0007oF-D1; Fri, 03 Feb 2023 09:18:31 +0000
+Received: by outflank-mailman (input) for mailman id 489059;
+ Fri, 03 Feb 2023 09:18:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HD5o=57=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pNsD4-0006pI-Mi
- for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 09:18:18 +0000
+ id 1pNsDF-0006sG-OB
+ for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 09:18:29 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aed2bf58-a3a3-11ed-9254-a70e01b1f5fa;
- Fri, 03 Feb 2023 10:18:14 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b8a0311c-a3a3-11ed-933c-83870f6b2ba8;
+ Fri, 03 Feb 2023 10:18:29 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4C6923447B;
- Fri,  3 Feb 2023 09:18:12 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 079943447D;
+ Fri,  3 Feb 2023 09:18:29 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1FCA31346D;
- Fri,  3 Feb 2023 09:18:12 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D2CB01346D;
+ Fri,  3 Feb 2023 09:18:28 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id rJZoBlTR3GMEEwAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 03 Feb 2023 09:18:12 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id Jm4sMmTR3GMkEwAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 03 Feb 2023 09:18:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,74 +53,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aed2bf58-a3a3-11ed-9254-a70e01b1f5fa
+X-Inumbo-ID: b8a0311c-a3a3-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1675415892; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=lKKJC6YtNCf8aiN934Ne7s/FwvZH2vXGkqQ7iJjfCoc=;
-	b=bIVE2i7Ah9bPQR9b5WIX7DOvSsZvUP1ODjO58clZnz/27q437oW9hjZ9ZWYFmN0UqP58RJ
-	YwyH7w+yPxuTV9r1IqFb27JpdKbHiADMvpq/gI8JGSLxu25kfdODHf/+naoUFbL8V5H+5+
-	XNcQdKU2va5dmK8e3lMTkPoSfGW+m0E=
+	t=1675415909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GtWQKRAyY57feFJk8BbUzmL2nez/i6gSp+ydtlu7X9A=;
+	b=W2spmIMlIzYekMsW/Nktfe/U0VVGVGHAsO/wqtUDQBwSfMriG+gLhv4eU8qX16ZeD2kqxU
+	ZwKQEMJBklXMCsymSYU8e5wjFP83bBCQJHQuI898uqC2ZZh+HcL+lDyUoAEP0pp2V4jebs
+	xzCkqi97iujyPKCo0BapNivCn+zUZbs=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 0/7] Mini-OS: ad minimal 9pfs support
-Date: Fri,  3 Feb 2023 10:18:02 +0100
-Message-Id: <20230203091809.14478-1-jgross@suse.com>
+Subject: [PATCH 3/7] Mini-OS: add support for runtime mounts
+Date: Fri,  3 Feb 2023 10:18:05 +0100
+Message-Id: <20230203091809.14478-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230203091809.14478-1-jgross@suse.com>
+References: <20230203091809.14478-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series is adding minimal support to use 9pfs in Mini-OS. It is
-adding a PV 9pfs frontend and the ability to open, close, read and
-write files.
+Add the support to mount a device at runtime. The number of dynamic
+mounts is limited by a #define.
 
-The series has been tested with qemu as 9pfs backend in a PVH Mini-OS
-guest (I've used a slightly modified Xenstore-stubdom for that purpose
-in order to reuse the build runes).
+For devices supporting multiple files struct file is modified to hold
+a pointer to file specific data in contrast to device specific data.
 
-This series is meant to setup the stage for adding file based logging
-support to Xenstore-stubdom and later to add live update support (being
-able to save the LU data stream in a dom0 file makes this a _lot_
-easier).
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ include/lib.h |  5 +++++
+ lib/sys.c     | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 54 insertions(+), 1 deletion(-)
 
-In order to keep Mini-OS's license I have only used the protocol docs
-available on the internet [1] and the verified those with the qemu 9pfs
-backend implementation (especially for supporting the 9P2000.u variant,
-as qemu doesn't support the basic 9P2000 protocol).
-
-The needed fixed values of the protocol have been taken from [2].
-
-[1]: http://ericvh.github.io/9p-rfc/rfc9p2000.html
-[2]: https://github.com/0intro/libixp
-
-Juergen Gross (7):
-  Mini-OS: xenbus: add support for reading node from directory
-  Mini-OS: add concept of mount points
-  Mini-OS: add support for runtime mounts
-  Mini-OS: add 9pfs frontend
-  Mini-OS: add 9pfs transport layer
-  Mini-OS: add open and close handling to the 9pfs frontend
-  Mini-OS: add read and write support to 9pfsfront
-
- 9pfront.c                     | 1201 +++++++++++++++++++++++++++++++++
- Config.mk                     |    1 +
- Makefile                      |    1 +
- arch/x86/testbuild/all-no     |    1 +
- arch/x86/testbuild/all-yes    |    1 +
- arch/x86/testbuild/newxen-yes |    1 +
- include/9pfront.h             |    7 +
- include/lib.h                 |   14 +
- include/xenbus.h              |    6 +
- lib/sys.c                     |  128 +++-
- xenbus.c                      |   39 +-
- 11 files changed, 1378 insertions(+), 22 deletions(-)
- create mode 100644 9pfront.c
- create mode 100644 include/9pfront.h
-
+diff --git a/include/lib.h b/include/lib.h
+index 36d94ec4..fd8c36de 100644
+--- a/include/lib.h
++++ b/include/lib.h
+@@ -172,6 +172,7 @@ struct file {
+     union {
+         int fd; /* Any fd from an upper layer. */
+         void *dev;
++        void *filedata;
+     };
+ };
+ 
+@@ -194,6 +195,10 @@ struct mount_point {
+     void *dev;
+ };
+ 
++int mount(const char *path, void *dev,
++          int (*open)(struct mount_point *, const char *, int, mode_t));
++void umount(const char *path);
++
+ unsigned int alloc_file_type(const struct file_ops *ops);
+ 
+ off_t lseek_default(struct file *file, off_t offset, int whence);
+diff --git a/lib/sys.c b/lib/sys.c
+index 1475c621..4171bfd6 100644
+--- a/lib/sys.c
++++ b/lib/sys.c
+@@ -339,7 +339,14 @@ static int open_mem(struct mount_point *mnt, const char *pathname, int flags,
+     return fd;
+ }
+ 
+-static struct mount_point mount_points[] = {
++#ifdef CONFIG_CONSFRONT
++#define STATIC_MNTS   4
++#else
++#define STATIC_MNTS   2
++#endif
++#define DYNAMIC_MNTS  8
++
++static struct mount_point mount_points[STATIC_MNTS + DYNAMIC_MNTS] = {
+     { .path = "/var/log",     .open = open_log,  .dev = NULL },
+     { .path = "/dev/mem",     .open = open_mem,  .dev = NULL },
+ #ifdef CONFIG_CONSFRONT
+@@ -365,6 +372,8 @@ int open(const char *pathname, int flags, ...)
+     for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
+     {
+         mnt = mount_points + m;
++        if ( !mnt->path )
++            continue;
+         mlen = strlen(mnt->path);
+         if ( !strncmp(pathname, mnt->path, mlen) &&
+              (pathname[mlen] == '/' || pathname[mlen] == 0) )
+@@ -375,6 +384,45 @@ int open(const char *pathname, int flags, ...)
+     return -1;
+ }
+ 
++int mount(const char *path, void *dev,
++          int (*open)(struct mount_point *, const char *, int, mode_t))
++{
++    unsigned int m;
++    struct mount_point *mnt;
++
++    for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
++    {
++        mnt = mount_points + m;
++        if ( !mnt->path )
++        {
++            mnt->path = strdup(path);
++            mnt->open = open;
++            mnt->dev = dev;
++            return 0;
++        }
++    }
++
++    errno = ENOSPC;
++    return -1;
++}
++
++void umount(const char *path)
++{
++    unsigned int m;
++    struct mount_point *mnt;
++
++    for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
++    {
++        mnt = mount_points + m;
++        if ( mnt->path && !strcmp(mnt->path, path) )
++        {
++            free((char *)mnt->path);
++            mnt->path = NULL;
++            return;
++        }
++    }
++}
++
+ int isatty(int fd)
+ {
+     return files[fd].type == FTYPE_CONSOLE;
 -- 
 2.35.3
 
