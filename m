@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C11C636D4
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Feb 2023 16:26:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.489253.757594 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6CDC636D4
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Feb 2023 17:06:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.489264.757643 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNysf-00067P-QP; Fri, 03 Feb 2023 16:25:41 +0000
+	id 1pNzVk-0003OK-57; Fri, 03 Feb 2023 17:06:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 489253.757594; Fri, 03 Feb 2023 16:25:41 +0000
+Received: by outflank-mailman (output) from mailman id 489264.757643; Fri, 03 Feb 2023 17:06:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pNysf-00067I-Nb; Fri, 03 Feb 2023 16:25:41 +0000
-Received: by outflank-mailman (input) for mailman id 489253;
- Fri, 03 Feb 2023 16:25:40 +0000
+	id 1pNzVk-0003NK-19; Fri, 03 Feb 2023 17:06:04 +0000
+Received: by outflank-mailman (input) for mailman id 489264;
+ Fri, 03 Feb 2023 17:06:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ulaf=57=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pNyse-00066t-I4
- for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 16:25:40 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
+ id 1pNzVj-00033s-3b
+ for xen-devel@lists.xenproject.org; Fri, 03 Feb 2023 17:06:03 +0000
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [2a00:1450:4864:20::42f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 64ca80e7-a3df-11ed-93b5-47a8fe42b414;
- Fri, 03 Feb 2023 17:25:38 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id q5so5180693wrv.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 Feb 2023 08:25:38 -0800 (PST)
-Received: from [192.168.8.199] (46.204.104.21.nat.umts.dynamic.t-mobile.pl.
- [46.204.104.21]) by smtp.gmail.com with ESMTPSA id
- t6-20020adfa2c6000000b002be063f6820sm2434117wra.81.2023.02.03.08.25.35
+ id 08d59ef9-a3e5-11ed-93b5-47a8fe42b414;
+ Fri, 03 Feb 2023 18:06:01 +0100 (CET)
+Received: by mail-wr1-x42f.google.com with SMTP id r27so1421583wrr.1
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Feb 2023 09:06:01 -0800 (PST)
+Received: from 34-6F-24-FC-D2-65..
+ (46.204.104.21.nat.umts.dynamic.t-mobile.pl. [46.204.104.21])
+ by smtp.gmail.com with ESMTPSA id
+ f17-20020a5d50d1000000b002bfe266d710sm2452191wrt.90.2023.02.03.09.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Feb 2023 08:25:37 -0800 (PST)
+ Fri, 03 Feb 2023 09:06:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,134 +47,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 64ca80e7-a3df-11ed-93b5-47a8fe42b414
+X-Inumbo-ID: 08d59ef9-a3e5-11ed-93b5-47a8fe42b414
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=BrZkd8Gb1stEJ2yXCGv4hyM19hEmdyJWbEeYNYITO5U=;
-        b=Uc4UDdIAVtU0GnrCHb6EZFjF3S+WBAtUCEziykw72hKMygS/hKu/D0+A5VN123b/tM
-         Sjw6XAYy8gcLAJJrIV0BgKrJx5o3hrAJBcntaIXpcRAx0DmmFMLE6fdgy4Dw3Amjtwyk
-         WqkVwgl2yBt79+dFc4s4UfdNkCBMpZ9TqQoKJ3kkqh11QCuQN1bFxdTVBmkx4wKtzk/d
-         RzALZEZbyryey2hgWk/Akn9wKZmExChcvHIUDmCV8h/3Upgd7ItD4jeSzTG258eGdqgP
-         FZz2CiyD0XuQ8Rn2S5yMs8jm3B4ZTRSMcjAPAiL7qs9lnrzMDXNYOdDoPgiePLPQGNjR
-         iQFA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zHXZzCaP4EL/Cp/TI2J6cwghMvNFDSnZkyTmGo7qoH0=;
+        b=S+9fHGTuMOFzFjMfTsb2kTRx6sobp8yOt0pRw4mymhSu71QMs8DOVI8p0nTCctml2Y
+         DJFZJF18GIrWI0BQaZGI5WHR4YvMWvXJUP7GOhMDFQfpov0XRGvz3Ldq1G1vt3jIW596
+         TD3EUtyJPWPaQaBtOv/89WZVCScohpgL7DQ6vY96ZnkM0urOKkrpWqHvhf34qBPnsPBG
+         /h52f2mIdif5myuP4pCXlOGrufTR5dHmyiYK7IXGz0iKxlLx+K6IttedZUdA4nm1881c
+         xOyAgyR5Uyoqq/6sl+PCUUHEt564shjXNF09yJfYvPQ3XjB/4AZw+wNAyQaK7QkRvlpw
+         xcYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=BrZkd8Gb1stEJ2yXCGv4hyM19hEmdyJWbEeYNYITO5U=;
-        b=vHHXPk/+bw7AuNZvlM59o3HQj9sOgVSZgQeWpnPhT1/RalHKfq4rDo6VvRxH+GKO2s
-         Qx9geLTwkx2N2ZWMnI4sUJ0UsPhGkEHI2YFBaJnBV0qIy8Ge2vTrQispM3Whr7B8n/zU
-         jgXKgDnQDtZv9xXAGvLBDTjFRgt1VeaBDeCw3PPtNDmwYew7Tvl/kB6WpkT03C4yheTF
-         pw5R0uFTeVD2kuEgOxyo03r2e40Nxzby0MCbcMfeeTlJ/0UkjiAQ7E8JB7AmHUIot1MF
-         2X94USdUnz5Fk4Sg2A05ERFjQQgdCwwfVDqfrw4F6AHDPT2iOO+80W1cwmm/NOwz3z5l
-         mcTA==
-X-Gm-Message-State: AO0yUKU3VEBhKmct9ntBOiuRzZhdUVoBov5QomJmsYt3W8JddNjVzefa
-	JkvNqlkC7/s4QZ310EhgkCU=
-X-Google-Smtp-Source: AK7set8cSH/bVDGRatdPhgkQW1wN++2K3oYsczmSVhz1J8cLjBH9ksLVg/Wh0M1Bthlo0d92TPbsRA==
-X-Received: by 2002:adf:d231:0:b0:2c3:d3be:a607 with SMTP id k17-20020adfd231000000b002c3d3bea607mr2247909wrh.35.1675441537846;
-        Fri, 03 Feb 2023 08:25:37 -0800 (PST)
-Message-ID: <73d9a10bbb0451aec55b486aa5452bc3e196201f.camel@gmail.com>
-Subject: Re: [PATCH v2 12/14] xen/riscv: introduce an implementation of
- macros from <asm/bug.h>
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>,  Stefano Stabellini <sstabellini@kernel.org>,
- Gianluca Guida <gianluca@rivosinc.com>, Bob Eshleman
- <bobbyeshleman@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>
-Date: Fri, 03 Feb 2023 18:25:35 +0200
-In-Reply-To: <b37d6cd4-0b11-b4f1-4b27-7d90729abd6d@xen.org>
-References: <cover.1674818705.git.oleksii.kurochko@gmail.com>
-	 <06c06dde5ee635c6d1ebf66a8cff9e7e1f4fbf5c.1674818705.git.oleksii.kurochko@gmail.com>
-	 <73553bcf-9688-c187-a9cb-c12806484893@xen.org>
-	 <2c4d490bde4f04f956e481257ddc7129c312abb6.camel@gmail.com>
-	 <873d4754-0314-0022-96a9-e54ed78ac6ef@xen.org>
-	 <d41b705904b693e80cf5fdadd46a26e38d1bc596.camel@gmail.com>
-	 <b5dba106-e7ed-4aa9-ea44-19adacc7fade@xen.org>
-	 <cb036efce9bf55e9ac87f9d1254915a7d6ac33ad.camel@gmail.com>
-	 <b37d6cd4-0b11-b4f1-4b27-7d90729abd6d@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zHXZzCaP4EL/Cp/TI2J6cwghMvNFDSnZkyTmGo7qoH0=;
+        b=JANsS+NKLxVmurJ0UvnkE08hYfxOL2U3J9PKoWvSKhaN4SUi9dEoc4VuQcqtL4OBDA
+         c+46McKouX0F7fhDWRKXQl9Z3PaF07uT9rH4S78nDqv6+8/Zyv/O023i5aDseHOoWX5I
+         1GmvDOTWcI6uACKC1hXgsjel+MtgPkDI/b2vybUDKd0OfwMzASTn9bwtQE7rZ3a0xLqw
+         yNeUK3fnmyBWZTCZUC+cItwxTtZDop60P3Ew53UHgQtgKWr8aeIPxsufNCLVUYu+w98W
+         fop+6spUk82QeLL87i+vZuG8cyY5Mph+RZCHKRga44OzHPNp8LWI8qssqiMntPv20la7
+         LQ9w==
+X-Gm-Message-State: AO0yUKVH39+Hl6uJKTlA+akYne+ttk2iIau87jiZuBR3ElpipmUD34+0
+	ZM0OhLWlUSYOSpTVxNOa+Z4rPBwjYBw=
+X-Google-Smtp-Source: AK7set9OpICIjgWDA7IdAqXmFcZBD6zYoq//moBwyhuYa0DOPIeuf6b9f1wVD6gxwcI0z3wLeyr20A==
+X-Received: by 2002:adf:d0cc:0:b0:2bf:da4d:524 with SMTP id z12-20020adfd0cc000000b002bfda4d0524mr10467422wrh.35.1675443960437;
+        Fri, 03 Feb 2023 09:06:00 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h>
+Date: Fri,  3 Feb 2023 19:05:50 +0200
+Message-Id: <5a427934949e3b0cf6026c8ad6c62e37e5250ca7.1675441720.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1675441720.git.oleksii.kurochko@gmail.com>
+References: <cover.1675441720.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Fri, 2023-02-03 at 13:23 +0000, Julien Grall wrote:
->=20
->=20
-> On 03/02/2023 13:15, Oleksii wrote:
-> > Hi Julien,
->=20
-> Hi Oleksii,
->=20
-> > On Wed, 2023-02-01 at 22:11 +0000, Julien Grall wrote:
-> > I am trying to introduce GENERIC_BUG_FRAME config ( only for ARM
-> > now as
-> > some stuff isn't available now for RISC-V such as
-> > find_text_region(),
-> > printk() and so on... Thereby I will switch to do_bug_frame() to
-> > generic one a little bit later for RISCV ) so I added the following
-> > to
-> > Kconfig:
-> >=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0 config GENERIC_DO_BUG_FRAME
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool "Generic implement=
-ation of do_bug_frame()"
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0default y if ARM
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0default n
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0help
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ...
-> >=20
-> > But when I pushed the commit to GitLab all ARM randconfig jobs
-> > failed
-> > because they decided not to set GENERIC_BUG_FRAME=3Dy.
-> > Could you please give me a suggestion how I can work around this
-> > problem? ( I thought that it would be enough to use default y but
-> > randconfig can override it ).
->=20
-> You don't want to allow the user to deselect GENERIC_DO_BUG_FRAME. So
-> you want config ARM to select it:
->=20
-> (arch/arm/Kconfig)
-> config ARM
-> =C2=A0=C2=A0=C2=A0 ...
-> =C2=A0=C2=A0=C2=A0 select GENERIC_DO_BUG_FRAME
->=20
->=20
-> (common/Kconfig)
-> config GENERIC_DO_BUG_FRAME
-> =C2=A0=C2=A0=C2=A0 bool
->=20
-> > Or is it needed to provide an empty implementation for
-> > do_bug_frame()
-> > GENERIC_BUG_FRAME=3Dn?
-> > Also I thought about weak function as an option...
-> >=20
-> > Here is pipeline for generic bug frame feature and the patch ( of
-> > course not ready for upstream but at least it shows an idea ):
-> > =C2=A0 *
-> > https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/766581174
-> > =C2=A0 *
-> > https://gitlab.com/xen-project/people/olkur/xen/-/commit/6fc6481202852e=
-0aa2c2cb3877f2d71ac0213511
-> > =C2=A0=20
-> > P.S.: Probably you have some comments ( something that is
-> > unacceptable
-> > even now ) about the patch. I will happy to hear them too.
->=20
-> I will try to have a look next week.
->=20
-Thanks a lot.
+Since the generic version of bug.h stuff was introduced it
+is necessary to rename all uses of <asm/bug.h> to <xen/bug.h>
 
-I think that I'll send separate patch series with generic bug.h stuff
-today.
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/drivers/cpufreq/cpufreq.c | 2 +-
+ xen/include/xen/lib.h         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-> Cheers,
->=20
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index a94520ee57..f290821a0e 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -39,7 +39,7 @@
+ #include <xen/guest_access.h>
+ #include <xen/domain.h>
+ #include <xen/cpu.h>
+-#include <asm/bug.h>
++#include <xen/bug.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+ 
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index 05ee1e18af..e914ccade0 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -24,12 +24,12 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++#include <xen/bug.h>
+ #include <xen/inttypes.h>
+ #include <xen/stdarg.h>
+ #include <xen/types.h>
+ #include <xen/xmalloc.h>
+ #include <xen/string.h>
+-#include <asm/bug.h>
+ 
+ #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
+ #define WARN_ON(p)  ({                  \
+-- 
+2.39.0
 
-~ Oleksii
 
