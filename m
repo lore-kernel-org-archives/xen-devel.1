@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9425AC64EC5
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 14:47:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.491185.760172 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50932C64ED6
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 14:47:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.491186.760182 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPPFJ-00043m-DZ; Tue, 07 Feb 2023 14:46:57 +0000
+	id 1pPPFL-0004Iw-MA; Tue, 07 Feb 2023 14:46:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 491185.760172; Tue, 07 Feb 2023 14:46:57 +0000
+Received: by outflank-mailman (output) from mailman id 491186.760182; Tue, 07 Feb 2023 14:46:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPPFJ-00043f-AN; Tue, 07 Feb 2023 14:46:57 +0000
-Received: by outflank-mailman (input) for mailman id 491185;
- Tue, 07 Feb 2023 14:46:55 +0000
+	id 1pPPFL-0004Io-JM; Tue, 07 Feb 2023 14:46:59 +0000
+Received: by outflank-mailman (input) for mailman id 491186;
+ Tue, 07 Feb 2023 14:46:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BG9e=6D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pPPFH-00043Z-Mg
- for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 14:46:55 +0000
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [2a00:1450:4864:20::431])
+ id 1pPPFJ-00043Z-QZ
+ for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 14:46:57 +0000
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [2a00:1450:4864:20::42d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 435db7ae-a6f6-11ed-933c-83870f6b2ba8;
- Tue, 07 Feb 2023 15:46:54 +0100 (CET)
-Received: by mail-wr1-x431.google.com with SMTP id o18so13802520wrj.3
- for <xen-devel@lists.xenproject.org>; Tue, 07 Feb 2023 06:46:54 -0800 (PST)
+ id 4515cb25-a6f6-11ed-933c-83870f6b2ba8;
+ Tue, 07 Feb 2023 15:46:57 +0100 (CET)
+Received: by mail-wr1-x42d.google.com with SMTP id i5so6624587wrc.0
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Feb 2023 06:46:57 -0800 (PST)
 Received: from 34-6F-24-FC-D2-65..
  (46.204.109.85.nat.umts.dynamic.t-mobile.pl. [46.204.109.85])
  by smtp.gmail.com with ESMTPSA id
- h10-20020a5d4fca000000b002c3e94cb757sm5269743wrw.117.2023.02.07.06.46.52
+ h10-20020a5d4fca000000b002c3e94cb757sm5269743wrw.117.2023.02.07.06.46.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 06:46:53 -0800 (PST)
+ Tue, 07 Feb 2023 06:46:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,35 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 435db7ae-a6f6-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: 4515cb25-a6f6-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AMHmfkHHTHE0v8pkna6MESdKkLlHbxr+3nLxEqnuiC4=;
-        b=JJI6HdRHIWyCG0Qcly/fFIST+Tcw6IpEg44w2jU+neU9OLHt6feqdUdJUAC+jR9jMZ
-         27ARJoCYBkXc0FL0UjJWCPiJEWaASW6ffCQKesJjBg6FvS2WixNHIzBgX38hvF2CAVPU
-         FFJwy7qKs/C+nw8uk0h45KmcB3qZHZGAOvRGEUTTGeOmC1g9oOdfpxHqVNsMl8Kl86wM
-         swKJxCoqZ6zDJPG45WlE59CIdFEeOWAASU0adaTHk40Ey3jyDKp4aruCMpKqGJy2Bp6B
-         aiCHdeIxntwjD6/wnyK2Usu48SNyrjXlylq28uJeyCtaYCgSbHIZPPwFMQlFJtyth0cz
-         wTIA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3tgYfAfD7y5+s+fFwercTLYRC593TWNu/7OHh5VrJ1Y=;
+        b=mtUiH24LSxdP83e3/HoZXgc0OSVrOXMZMcwetkPgnyCh7NTtvPvHdSqhUmfgoOXfjG
+         3Vy3kMX6XdDkBUxrJRZiL802ZUViLF/QSv8ug/V7uWD32qsl9Gxi/kmfHz2NEyfLZ4He
+         woSGDLNeeutwfm3i3ZY86XtvDhzsNqVIcdkBHVD6FX2m1TsriDf9AeJsVWPkTLBwndYB
+         nJT8PrAIIVMvMmm8N8cQO/eQEum5PioQprmtXeT01A0fmCv7EgpXgVhzQuTyfVWzJgyw
+         WzfWMeh67YspgiKw6C5DE2xLTKEd/5HZQwqrpN/ugVtTJ+0A3sGYknkruujams3oE0mJ
+         cy1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AMHmfkHHTHE0v8pkna6MESdKkLlHbxr+3nLxEqnuiC4=;
-        b=RTLw/nuySScArWW/Ybk/auOP3rVOhZtEtvbZPXsxTYbJ7D+Kf+Sozd+G6Z1rVYm5R0
-         mNWRhb8WZBzKhjgUbV05XH+ZlcLbLdaJ8VR4RI+RbVGiso1wcToA5YQD9IUeklWWee4K
-         IQMY22gqGiapw23H2fViNqeqAjaOHTiaefVqx3kRvF3W8MOkDW+FUOwFeCc1UAjcjpMF
-         jtup7StB2LT4EW1PkpmfsjS3B8txJb8m3mCQBpVbA2NaN0nOMVcNP8tKFvXGgDK5enNk
-         pxExPzd/aC+xYa1ISXAv6Spr26HCiuRAu6+j3srdP5IAze2q6J6eyhnIOjyJ6/J66pLh
-         2Gxw==
-X-Gm-Message-State: AO0yUKVLLlr+hRd0axTBoCo6GVVEzCfb9UvOHb/nGLYz8I36w36LT+FT
-	x3R5SWN2QQhYuY07YxdoRWGrVC+AlJM=
-X-Google-Smtp-Source: AK7set98BUQF2JfES/VGC6uCGFzYm12btefrioeDJfWkGepohAAunlIN0GLPqqAWrAY6y6FHTg6uwQ==
-X-Received: by 2002:adf:e786:0:b0:2c3:def9:7e1a with SMTP id n6-20020adfe786000000b002c3def97e1amr3055414wrm.44.1675781213722;
-        Tue, 07 Feb 2023 06:46:53 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3tgYfAfD7y5+s+fFwercTLYRC593TWNu/7OHh5VrJ1Y=;
+        b=sq3Ehho7Hv/y/9Pp7Z3A8n7y1jG3+wRncBzjfoO+khrNp9AiAV6KAAVmZ++d4m9u+G
+         YcaYNG8F5Rj3ei5ANKg7OPcQHi7Dt1UoCJKIY7IvbAT06JJdUAckn7bJCDr7qD3JiH4C
+         qLJ5p0Q6OTA29dagEz8jWaFSeXLrO4rx9C8hGjFsBcXQZZHi9KMa6fK+3tGEyDJpbdzD
+         8iNP5frkJJLYBZs7gCEHiaIuHLLiDjsJQTAFDgLpu4/K5lJwAHfVUxp+iMRMA/9+4C7N
+         jPpKkGFV26qhtiEJH7ZKAtMr67uOFmWa6CVh2Fz9BxbTZKCRoc7+astC3q7PbgQ+vBBG
+         M5rA==
+X-Gm-Message-State: AO0yUKVYtYWUCCc1ukBDAeM6AUKkhP36wVUahWjSaycdUscWcbtSOKz1
+	kyohqejqg+gQI9w3QWEIsJOcY2ECF34=
+X-Google-Smtp-Source: AK7set/Ro8PcNKY56BKu1kk8MYAYlHQ4VC0V0zDkbBq20MZDeqvG877jB1ZF4xqM4qub7WdYBiNxFg==
+X-Received: by 2002:a05:6000:110e:b0:2bf:95fb:e5b3 with SMTP id z14-20020a056000110e00b002bf95fbe5b3mr2886114wrw.33.1675781216795;
+        Tue, 07 Feb 2023 06:46:56 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -86,118 +87,88 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v3 00/14] RISCV basic exception handling implementation
-Date: Tue,  7 Feb 2023 16:46:35 +0200
-Message-Id: <cover.1675779308.git.oleksii.kurochko@gmail.com>
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v3 02/14] xen/riscv: add <asm/asm.h> header
+Date: Tue,  7 Feb 2023 16:46:37 +0200
+Message-Id: <0c7192216497663865fa220c95301c357a846568.1675779308.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1675779308.git.oleksii.kurochko@gmail.com>
+References: <cover.1675779308.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The patch series is based on another one [Basic early_printk and smoke
-test implementation] and [introduce generic implementation
-of macros from bug.h] which haven't been commited yet.
-
-The patch series provides a basic implementation of exception handling.
-It can do only basic things such as decode a cause of an exception,
-save/restore registers and execute "wfi" instruction if an exception
-can not be handled.
-
-To verify that exception handling works well it was implemented macros
-from <asm/bug.h> such as BUG/WARN/run_in_exception/assert_failed.
-The implementation of macros is used "ebreak" instruction and set up bug
-frame tables for each type of macros.
-Also it was implemented register save/restore to return and continue work
-after WARN/run_in_exception.
-Not all functionality of the macros was implemented as some of them
-require hard-panic the system which is not available now. Instead of
-hard-panic 'wfi' instruction is used but it should be definitely changed
-in the neareset future.
-It wasn't implemented show_execution_state() and stack trace discovering
-as it's not necessary now.
-
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V3:
-  - Change the name of config RISCV_ISA_RV64IMA to RISCV_ISA_RV64G
-    as instructions from Zicsr and Zifencei extensions aren't part of
-    I extension any more.
-  - Rebase the patch "xen/riscv: introduce an implementation of macros
-    from <asm/bug.h>" on top of patch series [introduce generic implementation
-    of macros from bug.h]
-  - Update commit messages
+  - Nothing changed
 ---
 Changes in V2:
-  - take the latest riscv_encoding.h from OpenSBI, update it with Xen
-    related changes, and update the commit message with "Origin:"
-    tag and the commit message itself.
-  - add "Origin:" tag to the commit messag of the patch
-    [xen/riscv: add <asm/csr.h> header].
-  - Remove the patch [xen/riscv: add early_printk_hnum() function] as the
-    functionality provided by the patch isn't used now.
-  - Refactor prcoess.h: move structure offset defines to asm-offsets.c,
-    change register_t to unsigned long.
-  - Refactor entry.S to use offsets defined in asm-offsets.C
-  - Rename {__,}handle_exception to handle_trap() and do_trap() to be more
-    consistent with RISC-V spec.
-  - Merge the pathc which introduces do_unexpected_trap() with the patch
-    [xen/riscv: introduce exception handlers implementation].
-  - Rename setup_trap_handler() to trap_init() and update correspondingly
-    the patches in the patch series.
-  - Refactor bug.h, remove bug_instr_t type from it.
-  - Refactor decode_trap_cause() function to be more optimization-friendly.
-  - Add two new empty headers: <cache.h> and <string.h> as they are needed to
-    include <xen/lib.h> which provides ARRAY_SIZE and other macros.
-  - Code style fixes.
+  - Nothing changed
 ---
-
-Oleksii Kurochko (14):
-  xen/riscv: change ISA to r64G
-  xen/riscv: add <asm/asm.h> header
-  xen/riscv: add <asm/riscv_encoding.h header
-  xen/riscv: add <asm/csr.h> header
-  xen/riscv: introduce empty <asm/string.h>
-  xen/riscv: introduce empty <asm/cache.h>
-  xen/riscv: introduce exception context
-  xen/riscv: introduce exception handlers implementation
-  xen/riscv: introduce decode_cause() stuff
-  xen/riscv: mask all interrupts
-  xen/riscv: introduce trap_init()
-  xen/riscv: introduce an implementation of macros from <asm/bug.h>
-  xen/riscv: test basic handling stuff
-  automation: modify RISC-V smoke test
-
- automation/scripts/qemu-smoke-riscv64.sh    |   2 +-
- xen/arch/riscv/Kconfig                      |  14 +-
- xen/arch/riscv/Makefile                     |   2 +
- xen/arch/riscv/arch.mk                      |   2 +-
- xen/arch/riscv/entry.S                      |  94 ++
- xen/arch/riscv/include/asm/asm.h            |  54 ++
- xen/arch/riscv/include/asm/bug.h            |  38 +
- xen/arch/riscv/include/asm/cache.h          |   6 +
- xen/arch/riscv/include/asm/csr.h            |  84 ++
- xen/arch/riscv/include/asm/processor.h      |  82 ++
- xen/arch/riscv/include/asm/riscv_encoding.h | 927 ++++++++++++++++++++
- xen/arch/riscv/include/asm/string.h         |   6 +
- xen/arch/riscv/include/asm/traps.h          |  14 +
- xen/arch/riscv/riscv64/asm-offsets.c        |  53 ++
- xen/arch/riscv/riscv64/head.S               |   5 +
- xen/arch/riscv/setup.c                      |  22 +-
- xen/arch/riscv/traps.c                      | 233 +++++
- xen/arch/riscv/xen.lds.S                    |  10 +
- 18 files changed, 1640 insertions(+), 8 deletions(-)
- create mode 100644 xen/arch/riscv/entry.S
+ xen/arch/riscv/include/asm/asm.h | 54 ++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
  create mode 100644 xen/arch/riscv/include/asm/asm.h
- create mode 100644 xen/arch/riscv/include/asm/bug.h
- create mode 100644 xen/arch/riscv/include/asm/cache.h
- create mode 100644 xen/arch/riscv/include/asm/csr.h
- create mode 100644 xen/arch/riscv/include/asm/processor.h
- create mode 100644 xen/arch/riscv/include/asm/riscv_encoding.h
- create mode 100644 xen/arch/riscv/include/asm/string.h
- create mode 100644 xen/arch/riscv/include/asm/traps.h
- create mode 100644 xen/arch/riscv/traps.c
 
+diff --git a/xen/arch/riscv/include/asm/asm.h b/xen/arch/riscv/include/asm/asm.h
+new file mode 100644
+index 0000000000..6d426ecea7
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/asm.h
+@@ -0,0 +1,54 @@
++/* SPDX-License-Identifier: (GPL-2.0-only) */
++/*
++ * Copyright (C) 2015 Regents of the University of California
++ */
++
++#ifndef _ASM_RISCV_ASM_H
++#define _ASM_RISCV_ASM_H
++
++#ifdef __ASSEMBLY__
++#define __ASM_STR(x)	x
++#else
++#define __ASM_STR(x)	#x
++#endif
++
++#if __riscv_xlen == 64
++#define __REG_SEL(a, b)	__ASM_STR(a)
++#elif __riscv_xlen == 32
++#define __REG_SEL(a, b)	__ASM_STR(b)
++#else
++#error "Unexpected __riscv_xlen"
++#endif
++
++#define REG_L		__REG_SEL(ld, lw)
++#define REG_S		__REG_SEL(sd, sw)
++
++#if __SIZEOF_POINTER__ == 8
++#ifdef __ASSEMBLY__
++#define RISCV_PTR		.dword
++#else
++#define RISCV_PTR		".dword"
++#endif
++#elif __SIZEOF_POINTER__ == 4
++#ifdef __ASSEMBLY__
++#define RISCV_PTR		.word
++#else
++#define RISCV_PTR		".word"
++#endif
++#else
++#error "Unexpected __SIZEOF_POINTER__"
++#endif
++
++#if (__SIZEOF_INT__ == 4)
++#define RISCV_INT		__ASM_STR(.word)
++#else
++#error "Unexpected __SIZEOF_INT__"
++#endif
++
++#if (__SIZEOF_SHORT__ == 2)
++#define RISCV_SHORT		__ASM_STR(.half)
++#else
++#error "Unexpected __SIZEOF_SHORT__"
++#endif
++
++#endif /* _ASM_RISCV_ASM_H */
 -- 
 2.39.0
 
