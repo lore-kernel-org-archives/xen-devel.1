@@ -4,32 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FE5C636CD
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 12:25:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.491062.760009 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CB5C636CD
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 12:42:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.491071.760037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPN2F-0006jA-Fh; Tue, 07 Feb 2023 12:25:19 +0000
+	id 1pPNIZ-00017W-Hh; Tue, 07 Feb 2023 12:42:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 491062.760009; Tue, 07 Feb 2023 12:25:19 +0000
+Received: by outflank-mailman (output) from mailman id 491071.760037; Tue, 07 Feb 2023 12:42:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPN2F-0006j3-B4; Tue, 07 Feb 2023 12:25:19 +0000
-Received: by outflank-mailman (input) for mailman id 491062;
- Tue, 07 Feb 2023 12:25:18 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pPN2D-0006ix-W2
- for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 12:25:18 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pPN2D-0000fV-7O; Tue, 07 Feb 2023 12:25:17 +0000
-Received: from [54.239.6.184] (helo=[192.168.19.254])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pPN2D-000827-0f; Tue, 07 Feb 2023 12:25:17 +0000
+	id 1pPNIZ-00016y-Ax; Tue, 07 Feb 2023 12:42:11 +0000
+Received: by outflank-mailman (input) for mailman id 491071;
+ Tue, 07 Feb 2023 12:42:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=BG9e=6D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pPNIY-0000om-Co
+ for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 12:42:10 +0000
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [2a00:1450:4864:20::32c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d3288455-a6e4-11ed-93b5-47a8fe42b414;
+ Tue, 07 Feb 2023 13:42:04 +0100 (CET)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ bg13-20020a05600c3c8d00b003d9712b29d2so13083590wmb.2
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Feb 2023 04:42:04 -0800 (PST)
+Received: from 34-6F-24-FC-D2-65..
+ (46.204.109.85.nat.umts.dynamic.t-mobile.pl. [46.204.109.85])
+ by smtp.gmail.com with ESMTPSA id
+ d3-20020a056000114300b002c3f9404c45sm19632wrx.7.2023.02.07.04.42.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Feb 2023 04:42:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,77 +48,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=oRKxtklRriJfGpyyw3SWVXtexrI5aDfH8hx9UnXSOQo=; b=YEZic+YqEAcpH08jzHNLItnIFl
-	VhMXxRMjsqq7ZOszl0mzQY32/i1/zpQ8BcTLajCYLmuPViXvHexFiUyyFKI1TQx7yqilMZ5G9+QrI
-	xOZR15k1chfJUKQVrVNptBOuJaVf2YF20iS1xOzsnijidaj72f3apXLjA3H6trkQ0uH4=;
-Message-ID: <43562da4-53a1-df7a-dcf3-2af62a95f42d@xen.org>
-Date: Tue, 7 Feb 2023 12:25:15 +0000
+X-Inumbo-ID: d3288455-a6e4-11ed-93b5-47a8fe42b414
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rviyH505nsbYK2ozmVytpLFJQlUNOXPwSYuCd3kmF7A=;
+        b=ZbZcaBRqoKsBUHy+yBzw6A7IpcZoHc11piFNhJxND8DTmVn8up8S5sS7e9Oz958NJ5
+         C0Mdm6Ah//0tNwSH7l4B7u3s6qzhTU3CwtT2ZEdxGyldffM0irGPQ0PQwZXa+bzHg7Rl
+         sdCMeVrV4pzXX2v7jJ7592Ve6TGr5HgHUqX3WrofTgr9PzJd/myOD/5SpcqWU9Jw1xS4
+         wtE7o8xWYT8XmKnK3YWF/R554SYMgPxk4FCOjuzitIwob4mL1aRzt/G2zgVo0Nk434mn
+         OJS64KwMLHwuasw3/C4bx8pILsmP57blSrtFG8BdNdo73AF9doeTqCsWEDvfhzsKr6UN
+         WQ/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rviyH505nsbYK2ozmVytpLFJQlUNOXPwSYuCd3kmF7A=;
+        b=DNW76a1V1b4eEa/mWbD6fQSGPiohYYy+pgTZlo3ufPUaXxcJxpNhGtbkRzN0BarCV2
+         EKNOjzM31lzK7KG5Is9ai4jhcZzW4uPUiCBHOQ7Alf7PA2rlOumORnLXbJzst302wPGr
+         RAo5T540m0ApU23nG02OVVYqzpN/X5TkbL/lkDGxdev36Iz5NvYPRnfWNCH7KGyHgtDj
+         U8cmtYvjqFpKTWPKAisemqwLgKqkvSW8hAIuH63yNqrMBfRB1tCybi3AJLPePOMbxhAu
+         qNfVS9Aw3lNPMqNPmQekrJy6FvlYnUliiSe5Ztyir7YaoH0S+n6BM0QM0iJ8uGZvfiqE
+         DEmQ==
+X-Gm-Message-State: AO0yUKVaUVeNfNSHhN+O2naE5BAzoLmv7bqh8cYc4yD2czxgUAxiHV15
+	ulIh9Rhi6oZv/yAeC0xIRlhp/NCnjy8=
+X-Google-Smtp-Source: AK7set8zdSCBTXeP8zqZSORJdmDP/4UE3Fy1x6QxZBzmptqONrAoC2Dlln7oY75Qh8V1nEU8NWO8/w==
+X-Received: by 2002:a05:600c:3596:b0:3df:d431:cf64 with SMTP id p22-20020a05600c359600b003dfd431cf64mr2909266wmq.39.1675773723875;
+        Tue, 07 Feb 2023 04:42:03 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Bobby Eshleman <bobby.eshleman@gmail.com>
+Subject: [PATCH v9 1/2] xen/riscv: introduce early_printk basic stuff
+Date: Tue,  7 Feb 2023 14:41:52 +0200
+Message-Id: <06c2c36bd68b2534c757dc4087476e855253680a.1675772422.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1675772422.git.oleksii.kurochko@gmail.com>
+References: <cover.1675772422.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.7.1
-Subject: Re: [PATCH v3 1/2] xen/device_tree: fix Eclair findings for MISRA C
- 2012 Rule 20.7
-Content-Language: en-US
-To: Xenia Ragiadakou <burzalodowa@gmail.com>,
- Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20230203190908.211541-1-burzalodowa@gmail.com>
- <20230203190908.211541-2-burzalodowa@gmail.com>
- <F9BF9B83-7889-4D51-B0B3-09950071AB75@arm.com>
- <63d81215-fd4a-e2f2-e145-3ee115b7df14@xen.org>
- <a8056218-34d6-71b2-8034-42dcf6f37a1b@gmail.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <a8056218-34d6-71b2-8034-42dcf6f37a1b@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+Because printk() relies on a serial driver (like the ns16550 driver)
+and drivers require working virtual memory (ioremap()) there is not
+print functionality early in Xen boot.
 
+The patch introduces the basic stuff of early_printk functionality
+which will be enough to print 'hello from C environment".
 
-On 07/02/2023 10:46, Xenia Ragiadakou wrote:
-> 
-> On 2/7/23 12:39, Julien Grall wrote:
->> Hi,
->>
->> On 07/02/2023 10:23, Luca Fancellu wrote:
->>>
->>>
->>>> On 3 Feb 2023, at 19:09, Xenia Ragiadakou <burzalodowa@gmail.com> 
->>>> wrote:
->>>>
->>>
->>> I’m not really a supporter of empty commit message, but it’s up to 
->>> the maintainer :)
->>
->> +1. In this case a brief summary of the rule would be handy for those 
->> that are not well-versed with MISRA.
->>
->> This can be dealt on commit if you propose a new commit message.
-> 
-> I 'm refrained from stating the rule as is because it is strict and it 
-> is not applied as is.
+Originally early_printk.{c,h} was introduced by Bobby Eshleman
+(https://github.com/glg-rv/xen/commit/a3c9916bbdff7ad6030055bbee7e53d1aab71384)
+but some functionality was changed:
+early_printk() function was changed in comparison with the original as
+common isn't being built now so there is no vscnprintf.
 
-I am a bit confused with this statement. From misra/..., we are 
-supporting rule 20.7. So why aren't applying it strictly?
+This commit adds early printk implementation built on the putc SBI call.
 
-And if it is not applied as-is, shouldn't we document the violation (if 
-any)?
+As sbi_console_putchar() is already being planned for deprecation
+it is used temporarily now and will be removed or reworked after
+real uart will be ready.
 
-> 
-> "Add parentheses around macro parameters when the precedence and 
-> associativity of the performed operators can lead to unintended order of 
-> evaluation."
-> 
-> Is this ok?
+Signed-off-by: Bobby Eshleman <bobby.eshleman@gmail.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Bobby Eshleman <bobby.eshleman@gmail.com>
+---
+Changes in V9:
+    - Bring "cmodel=medany" check back to be sure that C function is safe to be
+      called in early boot when MMU is off ( e.g. VA != PA ) 
+---
+Changes in V8:
+    - Nothing was changed
+---
+Changes in V7:
+    - Nothing was changed
+---
+Changes in V6:
+    - Remove __riscv_cmodel_medany check from early_printk.c
+---
+Changes in V5:
+    - Code style fixes
+    - Change an error message of #error in case of __riscv_cmodel_medany
+      isn't defined
+---
+Changes in V4:
+    - Remove "depends on RISCV*" from Kconfig.debug as it is located in
+      arch specific folder so by default RISCV configs should be ebabled.
+    - Add "ifdef __riscv_cmodel_medany" to be sure that PC-relative addressing
+      is used as early_*() functions can be called from head.S with MMU-off and
+      before relocation (if it would be needed at all for RISC-V)
+    - fix code style
+---
+Changes in V3:
+    - reorder headers in alphabetical order
+    - merge changes related to start_xen() function from "[PATCH v2 7/8]
+      xen/riscv: print hello message from C env" to this patch
+    - remove unneeded parentheses in definition of STACK_SIZE
+---
+Changes in V2:
+    - introduce STACK_SIZE define.
+    - use consistent padding between instruction mnemonic and operand(s)
+---
+---
+ xen/arch/riscv/Kconfig.debug              |  5 ++++
+ xen/arch/riscv/Makefile                   |  1 +
+ xen/arch/riscv/early_printk.c             | 33 +++++++++++++++++++++++
+ xen/arch/riscv/include/asm/early_printk.h | 12 +++++++++
+ xen/arch/riscv/setup.c                    |  4 +++
+ 5 files changed, 55 insertions(+)
+ create mode 100644 xen/arch/riscv/early_printk.c
+ create mode 100644 xen/arch/riscv/include/asm/early_printk.h
 
-I am OK with this. Is there any ID from Eclair that could be used to 
-track each error (and so we can confirm they have disappeared)?
-
-Cheers,
-
+diff --git a/xen/arch/riscv/Kconfig.debug b/xen/arch/riscv/Kconfig.debug
+index e69de29bb2..608c9ff832 100644
+--- a/xen/arch/riscv/Kconfig.debug
++++ b/xen/arch/riscv/Kconfig.debug
+@@ -0,0 +1,5 @@
++config EARLY_PRINTK
++    bool "Enable early printk"
++    default DEBUG
++    help
++      Enables early printk debug messages
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index fd916e1004..1a4f1a6015 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -1,3 +1,4 @@
++obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-$(CONFIG_RISCV_64) += riscv64/
+ obj-y += sbi.o
+ obj-y += setup.o
+diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
+new file mode 100644
+index 0000000000..b66a11f1bc
+--- /dev/null
++++ b/xen/arch/riscv/early_printk.c
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * RISC-V early printk using SBI
++ *
++ * Copyright (C) 2021 Bobby Eshleman <bobbyeshleman@gmail.com>
++ */
++#include <asm/early_printk.h>
++#include <asm/sbi.h>
++
++/*
++ * TODO:
++ *   sbi_console_putchar is already planned for deprecation
++ *   so it should be reworked to use UART directly.
++*/
++void early_puts(const char *s, size_t nr)
++{
++    while ( nr-- > 0 )
++    {
++        if ( *s == '\n' )
++            sbi_console_putchar('\r');
++        sbi_console_putchar(*s);
++        s++;
++    }
++}
++
++void early_printk(const char *str)
++{
++    while ( *str )
++    {
++        early_puts(str, 1);
++        str++;
++    }
++}
+diff --git a/xen/arch/riscv/include/asm/early_printk.h b/xen/arch/riscv/include/asm/early_printk.h
+new file mode 100644
+index 0000000000..05106e160d
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/early_printk.h
+@@ -0,0 +1,12 @@
++#ifndef __EARLY_PRINTK_H__
++#define __EARLY_PRINTK_H__
++
++#include <xen/early_printk.h>
++
++#ifdef CONFIG_EARLY_PRINTK
++void early_printk(const char *str);
++#else
++static inline void early_printk(const char *s) {};
++#endif
++
++#endif /* __EARLY_PRINTK_H__ */
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 13e24e2fe1..d09ffe1454 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -1,12 +1,16 @@
+ #include <xen/compile.h>
+ #include <xen/init.h>
+ 
++#include <asm/early_printk.h>
++
+ /* Xen stack for bringing up the first CPU. */
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
+     __aligned(STACK_SIZE);
+ 
+ void __init noreturn start_xen(void)
+ {
++    early_printk("Hello from C env\n");
++
+     for ( ;; )
+         asm volatile ("wfi");
+ 
 -- 
-Julien Grall
+2.39.0
+
 
