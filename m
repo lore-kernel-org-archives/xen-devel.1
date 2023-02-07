@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E41BAC636CD
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 14:03:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.491172.760161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA5FC636CC
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Feb 2023 14:47:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.491188.760205 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPOZJ-0007hd-3E; Tue, 07 Feb 2023 14:03:33 +0000
+	id 1pPPFO-0004pM-EE; Tue, 07 Feb 2023 14:47:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 491172.760161; Tue, 07 Feb 2023 14:03:33 +0000
+Received: by outflank-mailman (output) from mailman id 491188.760205; Tue, 07 Feb 2023 14:47:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPOZI-0007hW-W0; Tue, 07 Feb 2023 14:03:32 +0000
-Received: by outflank-mailman (input) for mailman id 491172;
- Tue, 07 Feb 2023 14:03:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rEk/=6D=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pPOZH-0007hQ-Rf
- for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 14:03:31 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2d3a8384-a6f0-11ed-93b5-47a8fe42b414;
- Tue, 07 Feb 2023 15:03:20 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9774938B13;
- Tue,  7 Feb 2023 14:03:19 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 15351139ED;
- Tue,  7 Feb 2023 14:03:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id E93JAyda4mNlAwAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 07 Feb 2023 14:03:19 +0000
+	id 1pPPFO-0004pD-Am; Tue, 07 Feb 2023 14:47:02 +0000
+Received: by outflank-mailman (input) for mailman id 491188;
+ Tue, 07 Feb 2023 14:47:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=BG9e=6D=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pPPFN-00043Z-3f
+ for xen-devel@lists.xenproject.org; Tue, 07 Feb 2023 14:47:01 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 47213d3c-a6f6-11ed-933c-83870f6b2ba8;
+ Tue, 07 Feb 2023 15:47:00 +0100 (CET)
+Received: by mail-wr1-x431.google.com with SMTP id o18so13802865wrj.3
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Feb 2023 06:47:00 -0800 (PST)
+Received: from 34-6F-24-FC-D2-65..
+ (46.204.109.85.nat.umts.dynamic.t-mobile.pl. [46.204.109.85])
+ by smtp.gmail.com with ESMTPSA id
+ h10-20020a5d4fca000000b002c3e94cb757sm5269743wrw.117.2023.02.07.06.46.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Feb 2023 06:46:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,206 +47,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d3a8384-a6f0-11ed-93b5-47a8fe42b414
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1675778599; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=aqWjYHqVE8IvaN3952TdpK0BSSvIahWB7+QeuDQju0E=;
-	b=Z+sNqKMBUcr9PbS8JeE5I2eNwQCHKlA7YsRnX1vfF9u9qVANR71qfA6hfqriiyCLd+A2Er
-	7w/L+SecSxDsWrc9hzFu3BvqbVocAAFx2nOjyaMPiYKyFPRgoFrUSKvuu2VGQyq6qSezaO
-	59vLyZ33Nzgx+F2rcVJL5N1Xtxok7JM=
-Message-ID: <e5ca6ffa-ccc1-06a0-4382-2b6cf4f75548@suse.com>
-Date: Tue, 7 Feb 2023 15:03:18 +0100
+X-Inumbo-ID: 47213d3c-a6f6-11ed-933c-83870f6b2ba8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OxYCQq01h12RUP/eyWz/O7MFFuhOlyFFr7TX4jQoI/U=;
+        b=H4JNQlCrpWpbRS9D75dBSvGVXJUZ5y0BPr76bV3vEIfBT9Tpc+WXmEhGn+2YcYRnA3
+         o+I3zBVlSORkux1fxax5KmYKHVlVtPpSYjNZwTnVJngztGGpH53d+dEk5P6llwN1mT2u
+         PLzbR+5ofut80mDQpqcgXGPeWTyFejPaNwidwdKPLizYbxa+Er3CXjWEwML5D5T/ozdJ
+         prBfMgfKKINZUjHIY2H0bEXYFQXfUHObTsPnoRp8uZb/ml9S3xh0AOgyz6vq5qr9ftPM
+         23S0/JC639XRoqyzTbnu/r6XEIzQufGpXu9RxVjokco1RSlXR9xtiX+Ujrq7KHk3Igl+
+         xjNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=OxYCQq01h12RUP/eyWz/O7MFFuhOlyFFr7TX4jQoI/U=;
+        b=OfFGNc3Je5cPOGolYO+nURiI95WDoxXsMFX4beedeuxPz6hbadHVUs6fukjXKkdLqm
+         W9ygPCRhuRD+7P4ghYgGu+j7/1yKCKTpX9t1A+F2q6WB82fk9USh2ew2WiBKHduRgvcA
+         dySIouGhr2cMRNUyzpKY9xoCbt2M7SuJqXNyNfj91AFxE1sks9uVLT4+DtNVY6EJUTxs
+         0GIhW5/OGFaTY7OYL/pwRWDBoHU1H+YRGGy1NO4plQxSuROs50kPpXkzXlDLct/Ji7gh
+         riM75CLY23be31rCH7s3hRVNc+YoLGsQdGBU0fH9cUokS+EZ+eJdY7raAi3b/8ouaQrS
+         da8Q==
+X-Gm-Message-State: AO0yUKUiPU1BIgk2HcYZnmsQBg8FhD1wgSdZXa+PTgL6LX6J6C6W7jFf
+	9NyIN+tN/AWO+/+aX9UWavSONB+KmTc=
+X-Google-Smtp-Source: AK7set9PU/vNtc9ac4qkctk68Byc909U61wI9XuJyABb2tsMHaccyEkm/KHnWAMYDx0G7KNsb50tkQ==
+X-Received: by 2002:a5d:5505:0:b0:2bb:e868:6a45 with SMTP id b5-20020a5d5505000000b002bbe8686a45mr2841966wrv.56.1675781220173;
+        Tue, 07 Feb 2023 06:47:00 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v3 04/14] xen/riscv: add <asm/csr.h> header
+Date: Tue,  7 Feb 2023 16:46:39 +0200
+Message-Id: <94a46f35bc9387c699d9d24b1c792b54ec290255.1675779308.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1675779308.git.oleksii.kurochko@gmail.com>
+References: <cover.1675779308.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Content-Language: en-US
-To: Dan Carpenter <error27@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Julia Lawall <julia.lawall@inria.fr>, Luis Chamberlain
- <mcgrof@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>,
- Hongchen Zhang <zhanghongchen@loongson.cn>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Christian Brauner (Microsoft)" <brauner@kernel.org>,
- David Howells <dhowells@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Eric Dumazet <edumazet@google.com>,
- "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
- maobibo <maobibo@loongson.cn>, Matthew Wilcox <willy@infradead.org>,
- Sedat Dilek <sedat.dilek@gmail.com>
-References: <20230129060452.7380-1-zhanghongchen@loongson.cn>
- <CAHk-=wjw-rrT59k6VdeLu4qUarQOzicsZPFGAO5J8TKM=oukUw@mail.gmail.com>
- <Y+EjmnRqpLuBFPX1@bombadil.infradead.org>
- <4ffbb0c8-c5d0-73b3-7a4e-2da9a7b03669@inria.fr> <Y+EupX1jX1c5BAHv@kadam>
- <Y+JUIl64UDmdkboh@kadam>
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: xen: sleeping in atomic warnings
-In-Reply-To: <Y+JUIl64UDmdkboh@kadam>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------8Cy4GAJEf0mO30TJKVjHugHL"
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------8Cy4GAJEf0mO30TJKVjHugHL
-Content-Type: multipart/mixed; boundary="------------ISvi0mubQ4jvNED1SOA4tE7c";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Dan Carpenter <error27@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Julia Lawall <julia.lawall@inria.fr>, Luis Chamberlain
- <mcgrof@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>,
- Hongchen Zhang <zhanghongchen@loongson.cn>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Christian Brauner (Microsoft)" <brauner@kernel.org>,
- David Howells <dhowells@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Eric Dumazet <edumazet@google.com>,
- "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
- maobibo <maobibo@loongson.cn>, Matthew Wilcox <willy@infradead.org>,
- Sedat Dilek <sedat.dilek@gmail.com>
-Message-ID: <e5ca6ffa-ccc1-06a0-4382-2b6cf4f75548@suse.com>
-Subject: Re: xen: sleeping in atomic warnings
-References: <20230129060452.7380-1-zhanghongchen@loongson.cn>
- <CAHk-=wjw-rrT59k6VdeLu4qUarQOzicsZPFGAO5J8TKM=oukUw@mail.gmail.com>
- <Y+EjmnRqpLuBFPX1@bombadil.infradead.org>
- <4ffbb0c8-c5d0-73b3-7a4e-2da9a7b03669@inria.fr> <Y+EupX1jX1c5BAHv@kadam>
- <Y+JUIl64UDmdkboh@kadam>
-In-Reply-To: <Y+JUIl64UDmdkboh@kadam>
+The following changes were made in comparison with <asm/csr.h> from
+Linux:
+  * remove all defines as they are defined in riscv_encoding.h
+  * leave only csr_* macros
 
---------------ISvi0mubQ4jvNED1SOA4tE7c
-Content-Type: multipart/mixed; boundary="------------iyE4cjBPZ5UxfPZspDcYBu0a"
+Origin: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ d2d11f342b17
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V3:
+  - Update origin to https://git.kernel.org/...
+---
+Changes in V2:
+  - Minor refactoring mentioned in the commit message, switch tabs to
+    spaces and refactor things around __asm__ __volatile__.
+  - Update the commit message and add "Origin:" tag.
+---
+ xen/arch/riscv/include/asm/csr.h | 84 ++++++++++++++++++++++++++++++++
+ 1 file changed, 84 insertions(+)
+ create mode 100644 xen/arch/riscv/include/asm/csr.h
 
---------------iyE4cjBPZ5UxfPZspDcYBu0a
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+new file mode 100644
+index 0000000000..4275cf6515
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/csr.h
+@@ -0,0 +1,84 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-only
++ *
++ * Copyright (C) 2015 Regents of the University of California
++ */
++
++#ifndef _ASM_RISCV_CSR_H
++#define _ASM_RISCV_CSR_H
++
++#include <asm/asm.h>
++#include <xen/const.h>
++#include <asm/riscv_encoding.h>
++
++#ifndef __ASSEMBLY__
++
++#define csr_read(csr)                                           \
++({                                                              \
++    register unsigned long __v;                                 \
++    __asm__ __volatile__ (  "csrr %0, " __ASM_STR(csr)          \
++                            : "=r" (__v)                        \
++                            : : "memory" );                     \
++    __v;                                                        \
++})
++
++#define csr_write(csr, val)                                     \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrw " __ASM_STR(csr) ", %0"       \
++                            : /* no outputs */                  \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++})
++
++#define csr_swap(csr, val)                                      \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrrw %0, " __ASM_STR(csr) ", %1"  \
++                            : "=r" (__v)                        \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++    __v;                                                        \
++})
++
++#define csr_read_set(csr, val)                                  \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrrs %0, " __ASM_STR(csr) ", %1"  \
++                            : "=r" (__v)                        \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++    __v;                                                        \
++})
++
++#define csr_set(csr, val)                                       \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrs " __ASM_STR(csr) ", %0"       \
++                            : /* no outputs */                  \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++})
++
++#define csr_read_clear(csr, val)                                \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrrc %0, " __ASM_STR(csr) ", %1"  \
++                            : "=r" (__v)                        \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++    __v;                                                        \
++})
++
++#define csr_clear(csr, val)                                     \
++({                                                              \
++    unsigned long __v = (unsigned long)(val);                   \
++    __asm__ __volatile__ (  "csrc " __ASM_STR(csr) ", %0"       \
++                            : /*no outputs */                   \
++                            : "rK" (__v)                        \
++                            : "memory" );                       \
++})
++
++#endif /* __ASSEMBLY__ */
++
++#endif /* _ASM_RISCV_CSR_H */
+-- 
+2.39.0
 
-T24gMDcuMDIuMjMgMTQ6MzcsIERhbiBDYXJwZW50ZXIgd3JvdGU6DQo+IFRoZXNlIGFyZSBz
-dGF0aWMgY2hlY2tlciB3YXJuaW5ncyBmcm9tIFNtYXRjaC4gIFRoZSBsaW5lIG51bWJlcnMg
-YXJlDQo+IGJhc2VkIG9uIG5leHQtMjAyMzAyMDcuICBUbyByZXByb2R1Y2UgdGhlc2Ugd2Fy
-bmluZ3MgdGhlbiB5b3UgbmVlZCB0bw0KPiBoYXZlIHRoZSBsYXRlc3QgU21hdGNoIGZyb20g
-Z2l0IGFuZCB5b3UgbmVlZCB0byByZWJ1aWxkIHRoZSBjcm9zcw0KPiBmdW5jdGlvbiBwcm9i
-YWJseSBmb3VyIHRpbWVzLiAgSSBoYXZlIHJldmlld2VkIG1vc3Qgb2YgdGhlc2UgYW5kIHRo
-ZXkNCj4gYWxsIHNlZW0gdmFsaWQgdG8gbWUuICBJIHJlbWVtYmVyIEkgcmVwb3J0ZWQgc29t
-ZSBhIHdoaWxlIGJhY2sgYnV0IG5ldmVyDQo+IGhlYXJkIGJhY2suICBodHRwczovL2xvcmUu
-a2VybmVsLm9yZy9hbGwvMjAyMTA4MDIxNDQwMzcuR0EyOTU0MEBraWxpLw0KPiANCj4gcmVn
-YXJkcywNCj4gZGFuIGNhcnBlbnRlcg0KPiANCj4gYXJjaC94ODYveGVuL3AybS5jOjE4OSBh
-bGxvY19wMm1fcGFnZSgpIHdhcm46IHNsZWVwaW5nIGluIGF0b21pYyBjb250ZXh0DQo+IHhl
-bl9jcmVhdGVfY29udGlndW91c19yZWdpb24oKSA8LSBkaXNhYmxlcyBwcmVlbXB0DQo+IHhl
-bl9kZXN0cm95X2NvbnRpZ3VvdXNfcmVnaW9uKCkgPC0gZGlzYWJsZXMgcHJlZW1wdA0KPiAt
-PiB4ZW5fcmVtYXBfZXhjaGFuZ2VkX3B0ZXMoKQ0KPiAgICAgLT4gc2V0X3BoeXNfdG9fbWFj
-aGluZSgpDQo+ICAgICAgICAtPiB4ZW5fYWxsb2NfcDJtX2VudHJ5KCkNCj4gICAgICAgICAg
-IC0+IGFsbG9jX3AybV9wbWQoKQ0KPiB4ZW5fYWxsb2NfcDJtX2VudHJ5KCkgPGR1cGxpY2F0
-ZT4NCj4gICAgICAgICAgICAgIC0+IGFsbG9jX3AybV9wYWdlKCkNCg0KVGhvc2UgYWxsb2Nh
-dGlvbnMgY2FuJ3QgYmUgcmVhY2hlZCBhZnRlciBlYXJseSBib290Lg0KDQo+IGRyaXZlcnMv
-eGVuL2V2ZW50cy9ldmVudHNfYmFzZS5jOjEyMTMgYmluZF9ldnRjaG5fdG9faXJxX2NoaXAo
-KSB3YXJuOiBzbGVlcGluZyBpbiBhdG9taWMgY29udGV4dA0KPiBwdmNhbGxzX2Zyb250X2Nv
-bm5lY3QoKSA8LSBkaXNhYmxlcyBwcmVlbXB0DQo+IHB2Y2FsbHNfZnJvbnRfYWNjZXB0KCkg
-PC0gZGlzYWJsZXMgcHJlZW1wdA0KPiAtPiBjcmVhdGVfYWN0aXZlKCkNCj4gICAgIC0+IGJp
-bmRfZXZ0Y2huX3RvX2lycWhhbmRsZXIoKQ0KPiAgICAgICAgLT4gYmluZF9ldnRjaG5fdG9f
-aXJxaGFuZGxlcl9jaGlwKCkNCj4gICAgICAgICAgIC0+IGJpbmRfZXZ0Y2huX3RvX2lycV9j
-aGlwKCkNCg0KWWVzLCB0aGF0IG9uZSBsb29rcyB2ZXJ5IHN1c3BpY2lvdXMuIEJhc2ljYWxs
-eSB0aGUgc2FtZSBwcm9ibGVtIGFzIGFsbA0KdGhlIG90aGVyIHB2Y2FsbHMgaXNzdWVzIGJl
-bG93Lg0KDQo+IGRyaXZlcnMvbmV0L2V0aGVybmV0L3Fsb2dpYy9uZXR4ZW4vbmV0eGVuX25p
-Y19ody5jOjMwMyBuZXR4ZW5fcGNpZV9zZW1fbG9jaygpIHdhcm46IHNsZWVwaW5nIGluIGF0
-b21pYyBjb250ZXh0DQo+IG5ldHhlbl9uaWNfaHdfd3JpdGVfd3hfMk0oKSA8LSBkaXNhYmxl
-cyBwcmVlbXB0DQo+IG5ldHhlbl9uaWNfaHdfcmVhZF93eF8yTSgpIDwtIGRpc2FibGVzIHBy
-ZWVtcHQNCj4gLT4gbmV0eGVuX3BjaWVfc2VtX2xvY2soKQ0KDQpUaGlzIGlzIG5vdCBYZW4g
-cmVsYXRlZC4NCg0KPiBkcml2ZXJzL3hlbi94ZW4tcGNpYmFjay9wY2lfc3R1Yi5jOjExMCBw
-Y2lzdHViX2RldmljZV9yZWxlYXNlKCkgd2Fybjogc2xlZXBpbmcgaW4gYXRvbWljIGNvbnRl
-eHQNCj4gcGNpc3R1Yl9nZXRfcGNpX2Rldl9ieV9zbG90KCkgPC0gZGlzYWJsZXMgcHJlZW1w
-dA0KPiBwY2lzdHViX2dldF9wY2lfZGV2KCkgPC0gZGlzYWJsZXMgcHJlZW1wdA0KPiAtPiBw
-Y2lzdHViX2RldmljZV9nZXRfcGNpX2RldigpDQo+ICAgICAtPiBwY2lzdHViX2RldmljZV9w
-dXQoKQ0KPiAgICAgICAgLT4gcGNpc3R1Yl9kZXZpY2VfcmVsZWFzZSgpDQoNClNlZW1zIHRv
-cCBiZSBwcm9ibGVtYXRpYywgdG9vLg0KDQo+IGRyaXZlcnMveGVuL3hlbi1zY3NpYmFjay5j
-OjEwMTYgX19zY3NpYmFja19kZWxfdHJhbnNsYXRpb25fZW50cnkoKSB3YXJuOiBzbGVlcGlu
-ZyBpbiBhdG9taWMgY29udGV4dA0KPiBzY3NpYmFja19kZWxfdHJhbnNsYXRpb25fZW50cnko
-KSA8LSBkaXNhYmxlcyBwcmVlbXB0DQo+IHNjc2liYWNrX3JlbGVhc2VfdHJhbnNsYXRpb25f
-ZW50cnkoKSA8LSBkaXNhYmxlcyBwcmVlbXB0DQo+IC0+IF9fc2NzaWJhY2tfZGVsX3RyYW5z
-bGF0aW9uX2VudHJ5KCkNCg0KTmVlZHMgZml4aW5nIChzYW1lIGZpeCBhcyB0aGUgb3RoZXIg
-c2NzaWJhY2sgaXNzdWUpLg0KDQpUaGFua3MgZm9yIHRoZSByZXBvcnRzLA0KDQoNCkp1ZXJn
-ZW4NCg==
---------------iyE4cjBPZ5UxfPZspDcYBu0a
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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
-jR/i1DG86lem3iBDXzXsZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------iyE4cjBPZ5UxfPZspDcYBu0a--
-
---------------ISvi0mubQ4jvNED1SOA4tE7c--
-
---------------8Cy4GAJEf0mO30TJKVjHugHL
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmPiWiYFAwAAAAAACgkQsN6d1ii/Ey/x
-Hgf+P2Hd8pWhpiMwq3X+xYM/xtj+fvlGoOrT0aNfmaplCixttNBdSZw/MuMAIkqodiNp6uHap9tk
-2/Jfcf9JwTgNRcdr23SNSMPGh86R3JKF/qaCMfM8wifYktD/meNw0Vs1ZW5xw8QZOCwqe9jqv3Hz
-CQKBeHTEeH9uDb4wql8A6gao/2tnusvveVESAF98OoP1cPv7vuB4ylG+4kyjOp5WqvfT37xrmP6R
-mhfe9AdX3MLEAFefFXDmxMHbxaRk5ZMCt5Y3HKiUpIJEPWPzXmJyVMY2DhHMKwm6WYVH5fFnGs8T
-y/UMp78Wic3f7u3tNzjylhrnaKthkCrhwKVmmxTGkg==
-=qKRH
------END PGP SIGNATURE-----
-
---------------8Cy4GAJEf0mO30TJKVjHugHL--
 
