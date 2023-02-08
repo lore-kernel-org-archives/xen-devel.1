@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E47BC05027
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Feb 2023 20:22:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.491983.761357 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE03CC636D6
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Feb 2023 20:59:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.491994.761379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPqxA-0003iH-VY; Wed, 08 Feb 2023 20:22:04 +0000
+	id 1pPrWe-00080g-5h; Wed, 08 Feb 2023 20:58:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 491983.761357; Wed, 08 Feb 2023 20:22:04 +0000
+Received: by outflank-mailman (output) from mailman id 491994.761379; Wed, 08 Feb 2023 20:58:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pPqxA-0003iA-SD; Wed, 08 Feb 2023 20:22:04 +0000
-Received: by outflank-mailman (input) for mailman id 491983;
- Wed, 08 Feb 2023 20:22:03 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pPqx9-0003i0-J6; Wed, 08 Feb 2023 20:22:03 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pPqx9-0005DA-HA; Wed, 08 Feb 2023 20:22:03 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pPqx9-0001kC-2e; Wed, 08 Feb 2023 20:22:03 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pPqx9-0005SZ-26; Wed, 08 Feb 2023 20:22:03 +0000
+	id 1pPrWe-00080Z-2m; Wed, 08 Feb 2023 20:58:44 +0000
+Received: by outflank-mailman (input) for mailman id 491994;
+ Wed, 08 Feb 2023 20:58:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=mMba=6E=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
+ id 1pPrWc-0007kX-Ko
+ for xen-devel@lists.xenproject.org; Wed, 08 Feb 2023 20:58:42 +0000
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+ [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5d433fe9-a7f3-11ed-93b5-47a8fe42b414;
+ Wed, 08 Feb 2023 21:58:40 +0100 (CET)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id 0C1455C013E;
+ Wed,  8 Feb 2023 15:58:40 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute4.internal (MEProxy); Wed, 08 Feb 2023 15:58:40 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 8 Feb 2023 15:58:38 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,230 +45,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=3ooPXi8FpxWOZpuTydm1Jo2a20M2ADsl2GTUWb5+1+U=; b=t9fV7Z/ErHqkuNdOUTPrCWNXnT
-	BR+K2utUDFK6RxH2DiOkb3saGZFveJz7/LWDU3SCJo7STnc59zlNQwIZT4SO0/sKhGY9IZC6FaR1G
-	yR4y+sjGedBvXuoJXok2HbuS0lFib4KN+7z/WXwY4UGFb2GErR1nKAogtWNn92bNViss=;
+X-Inumbo-ID: 5d433fe9-a7f3-11ed-93b5-47a8fe42b414
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
+	1675889920; x=1675976320; bh=YjlH9X1VyXgKgkGafsk0dvpHNT7Xq4V4f4f
+	mb7TTmQY=; b=jaEcFfmHc3jC4mYccFTIPr09qO7jo80ZccMUmV7ONnH7Y13AcC1
+	J0mqLLxFgjaQ7taNYM/UqrQ1pUVcB5eGD1QXvpm75yZEyliVvM99ErUNaFdhkFCT
+	GLBQEbceYawOVVStZOfeU7ZJVvRXToWHeouzAh7mpopV169AweJxZRa2PxXk8a+r
+	jOAHpX4+aWWmrQau5OkCA/UANUQsGoVeCFZf7+t9JTXJliuJ2E3oOCSh1hSutPhf
+	Fz6N7NArDclx7i2KcIuh+qYRACQUnHubGyBHWoq6g59kJF1gu5dOZngWMOz0VUoq
+	p5NekZSxz0CXEWDMEFgB5CldR83ZC6dO0Rw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1675889920; x=1675976320; bh=YjlH9X1VyXgKg
+	kGafsk0dvpHNT7Xq4V4f4fmb7TTmQY=; b=epZVL0unkdc7f5L0bOAadoCipddZY
+	oDZp2lKBJaGzoNwWCywg+liuQqg1MZlPBLE+bWlQtPeCEFWoI3Oeba7XhrAiQXW6
+	hZcx6twW/Nxxs61YTlagFpQ7ACJCOdmL9Rb0GGQeT6c3Vgtws0gPh7YrO6bhorEd
+	PxjLp5KN3fRSyjYQN8yZFgK0CMBp9XhnKf8bBGovIaFeWZsT8Y5Xtu1LKYLyMAUM
+	N4Juxc6hTSY9ctAH+xX5tfjRebTilxhBzhRzexd/qX5rLBo+j58GbwWymSVfIARx
+	ytuY6eQ9CtziUqaT1vK5wff7YAP0b6vgw6hAH2ofBr3bZ6FfTtworH71A==
+X-ME-Sender: <xms:_wzkY9nLq60Omlz3mRI79IGgILONohEJGSdCOmyjnXi4D3CW172Uag>
+    <xme:_wzkY43dTK0iL16Uvpw2YkOF30d9xUAf5wd-vlhwH_lEQF2jUZ6FIRzFbEVmAwVm5
+    YI4rR0gisFpytI>
+X-ME-Received: <xmr:_wzkYzpbI1TlOx06GDFoPa6EWTeoPJUDSHdmt79S7EiX5rCC3mn9ONcf7688k07VARWi5bX4Png>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudehuddgkedtucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepteduueehgeeujeegudeiffffveel
+    teeljeevudeileffieetgfegffeitedvkeeunecuffhomhgrihhnpehphihthhhonhdroh
+    hrghdpihhnthgvlhdrtghomhdptggvnhhtohhsrdhorhhgpdhllhhvmhdrohhrghdpuggv
+    sghirghnrdhorhhgpdgrlhhpihhnvghlihhnuhigrdhorhhgnecuvehluhhsthgvrhfuih
+    iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgv
+    thhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:_wzkY9lfX0HK4EoU_SmAnng7TbskdSCUx65lpsnRA0xRPBPdrXaQdw>
+    <xmx:_wzkY72JCEyqK5Nkb2BjJvk4QQMyzZqvksVgtyPHOfJTHH2raf9PMA>
+    <xmx:_wzkY8sPhWznX9uA3QOr6OlvJpfjr6JylW2ydG3ceiQzUvIABwnb-w>
+    <xmx:AA3kY1rZ99mRymy1v4ueDY7zBQQ3rfUmcmeCfgLPBYBHlwWMrH3TEg>
+Feedback-ID: iac594737:Fastmail
+From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-176498-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v2 2/4] Automation and CI: Replace git:// and http:// with https://
+Date: Wed,  8 Feb 2023 15:58:22 -0500
+Message-Id: <8a3d0ce9747e486e91ad5b47777c80293e0fd168.1675889602.git.demi@invisiblethingslab.com>
+X-Mailer: git-send-email 2.39.1
+In-Reply-To: <cover.1675889601.git.demi@invisiblethingslab.com>
+References: <cover.1675889601.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Subject: [linux-linus test] 176498: tolerable trouble: fail/pass/starved - PUSHED
-X-Osstest-Failures:
-    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-i386-xsm:debian-hvm-install:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-examine:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-libvirt:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-qcow2:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-raw:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit1:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit2:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-cubietruck:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-multivcpu:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-rtds:build-check(1):starved:nonblocking
-    linux-linus:test-armhf-armhf-xl-vhd:build-check(1):starved:nonblocking
-    linux-linus:build-armhf-libvirt:build-check(1):starved:nonblocking
-    linux-linus:build-armhf:hosts-allocate:starved:nonblocking
-X-Osstest-Versions-This:
-    linux=513c1a3d3f1982fb850c910937099525b0d35e24
-X-Osstest-Versions-That:
-    linux=05ecb680708a1dbe6554d6fc17e5d9a8a7cb5e6a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 08 Feb 2023 20:22:03 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 176498 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/176498/
+Obtaining code over an insecure transport is a terrible idea for
+blatently obvious reasons.  Even for non-executable data, insecure
+transports are considered deprecated.
 
-Failures :-/ but no regressions.
+This patch enforces the use of secure transports in automation and CI.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 176434
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 176434
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 176434
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 176434
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm 12 debian-hvm-install fail like 176434
- test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 176434
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-examine      1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt      1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt-qcow2  1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               starved  n/a
- test-armhf-armhf-xl           1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-credit1   1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-credit2   1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-cubietruck  1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-multivcpu  1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-rtds      1 build-check(1)               starved  n/a
- test-armhf-armhf-xl-vhd       1 build-check(1)               starved  n/a
- build-armhf-libvirt           1 build-check(1)               starved  n/a
- build-armhf                   2 hosts-allocate               starved  n/a
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ README                                       | 4 ++--
+ automation/build/centos/CentOS-7.2.repo      | 8 ++++----
+ automation/build/debian/stretch-llvm-8.list  | 4 ++--
+ automation/build/debian/unstable-llvm-8.list | 4 ++--
+ automation/scripts/qemu-smoke-dom0-arm32.sh  | 2 +-
+ 5 files changed, 11 insertions(+), 11 deletions(-)
 
-version targeted for testing:
- linux                513c1a3d3f1982fb850c910937099525b0d35e24
-baseline version:
- linux                05ecb680708a1dbe6554d6fc17e5d9a8a7cb5e6a
+diff --git a/README b/README
+index 755b3d8eaf8f7a58a945b7594e68a3fe455a7bdf..f8cc426f78d690f37e013242e81d4e440556c330 100644
+--- a/README
++++ b/README
+@@ -181,7 +181,7 @@ Python Runtime Libraries
+ Various tools, such as pygrub, have the following runtime dependencies:
+ 
+     * Python 2.6 or later.
+-          URL:    http://www.python.org/
++          URL:    https://www.python.org/
+           Debian: python
+ 
+ Note that the build system expects `python` to be available. If your system
+@@ -197,7 +197,7 @@ Intel(R) Trusted Execution Technology Support
+ Intel's technology for safer computing, Intel(R) Trusted Execution Technology
+ (Intel(R) TXT), defines platform-level enhancements that provide the building
+ blocks for creating trusted platforms.  For more information, see
+-http://www.intel.com/technology/security/.
++https://www.intel.com/technology/security/.
+ 
+ Intel(R) TXT support is provided by the Trusted Boot (tboot) module in
+ conjunction with minimal logic in the Xen hypervisor.
+diff --git a/automation/build/centos/CentOS-7.2.repo b/automation/build/centos/CentOS-7.2.repo
+index 4da27faeb5fa863fd4e140cbeaad308b9a543b86..8e37da1a03f839c486eb9bd0af46716cfb9086e0 100644
+--- a/automation/build/centos/CentOS-7.2.repo
++++ b/automation/build/centos/CentOS-7.2.repo
+@@ -6,28 +6,28 @@
+ 
+ [base]
+ name=CentOS-7.2.1511 - Base
+-baseurl=http://vault.centos.org/7.2.1511/os/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/os/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #released updates 
+ [updates]
+ name=CentOS-7.2.1511 - Updates
+-baseurl=http://vault.centos.org/7.2.1511/updates/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/updates/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #additional packages that may be useful
+ [extras]
+ name=CentOS-7.2.1511 - Extras
+-baseurl=http://vault.centos.org/7.2.1511/extras/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/extras/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #additional packages that extend functionality of existing packages
+ [centosplus]
+ name=CentOS-7.2.1511 - Plus
+-baseurl=http://vault.centos.org/7.2.1511/centosplus/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/centosplus/$basearch/
+ gpgcheck=1
+ gpgcheck=1
+ enabled=0
+diff --git a/automation/build/debian/stretch-llvm-8.list b/automation/build/debian/stretch-llvm-8.list
+index 09fe843fb2a31ae38f752d7c8c71cf97f5b14513..590001ca81e826ab624ba9185423adf4b0c51a21 100644
+--- a/automation/build/debian/stretch-llvm-8.list
++++ b/automation/build/debian/stretch-llvm-8.list
+@@ -1,3 +1,3 @@
+ # Strech LLVM 8 repos
+-deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
+-deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
++deb https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
++deb-src https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
+diff --git a/automation/build/debian/unstable-llvm-8.list b/automation/build/debian/unstable-llvm-8.list
+index dc119fa0b4df1bd6e742c42776710abcd6deaa86..1db1598997429d7a14d3fcd8f0f8152aa6d40b8a 100644
+--- a/automation/build/debian/unstable-llvm-8.list
++++ b/automation/build/debian/unstable-llvm-8.list
+@@ -1,3 +1,3 @@
+ # Unstable LLVM 8 repos
+-deb http://apt.llvm.org/unstable/ llvm-toolchain-8 main
+-deb-src http://apt.llvm.org/unstable/ llvm-toolchain-8 main
++deb https://apt.llvm.org/unstable/ llvm-toolchain-8 main
++deb-src https://apt.llvm.org/unstable/ llvm-toolchain-8 main
+diff --git a/automation/scripts/qemu-smoke-dom0-arm32.sh b/automation/scripts/qemu-smoke-dom0-arm32.sh
+index 98e4d481f65c2b29ac935ddf6247132ddf94fa1d..6163eeeda623527d0620fb20a23b589b1168a896 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm32.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm32.sh
+@@ -4,7 +4,7 @@ set -ex
+ 
+ cd binaries
+ # Use the kernel from Debian
+-curl --fail --silent --show-error --location --output vmlinuz http://http.us.debian.org/debian/dists/bullseye/main/installer-armhf/current/images/netboot/vmlinuz
++curl --fail --silent --show-error --location --output vmlinuz https://deb.debian.org/debian/dists/bullseye/main/installer-armhf/current/images/netboot/vmlinuz
+ # Use a tiny initrd based on busybox from Alpine Linux
+ curl --fail --silent --show-error --location --output initrd.tar.gz https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/armhf/alpine-minirootfs-3.15.1-armhf.tar.gz
+ 
+-- 
+Sincerely,
+Demi Marie Obenour (she/her/hers)
+Invisible Things Lab
 
-Last test of basis   176434  2023-02-07 00:16:17 Z    1 days
-Testing same since   176498  2023-02-07 17:26:36 Z    1 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Linus Torvalds <torvalds@linux-foundation.org>
-  Shiju Jose <shiju.jose@huawei.com>
-  Steven Rostedt (Google) <rostedt@goodmis.org>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  starved 
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          starved 
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          starved 
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 fail    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-freebsd11-amd64                             pass    
- test-amd64-amd64-freebsd12-amd64                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-amd64-examine-bios                                pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  pass    
- test-armhf-armhf-xl-credit1                                  starved 
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  starved 
- test-armhf-armhf-xl-cubietruck                               starved 
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-amd64-examine                                     pass    
- test-arm64-arm64-examine                                     pass    
- test-armhf-armhf-examine                                     starved 
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     starved 
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                starved 
- test-amd64-amd64-pair                                        pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-qcow2                               starved 
- test-amd64-amd64-libvirt-raw                                 pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-armhf-armhf-libvirt-raw                                 starved 
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     starved 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-amd64-xl-shadow                                   pass    
- test-arm64-arm64-xl-thunderx                                 pass    
- test-amd64-amd64-examine-uefi                                pass    
- test-amd64-amd64-xl-vhd                                      pass    
- test-arm64-arm64-xl-vhd                                      pass    
- test-armhf-armhf-xl-vhd                                      starved 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-hint: The 'hooks/update' hook was ignored because it's not set as executable.
-hint: You can disable this warning with `git config advice.ignoredHook false`.
-hint: The 'hooks/post-receive' hook was ignored because it's not set as executable.
-hint: You can disable this warning with `git config advice.ignoredHook false`.
-hint: The 'hooks/post-update' hook was ignored because it's not set as executable.
-hint: You can disable this warning with `git config advice.ignoredHook false`.
-To xenbits.xen.org:/home/xen/git/linux-pvops.git
-   05ecb680708a..513c1a3d3f19  513c1a3d3f1982fb850c910937099525b0d35e24 -> tested/linux-linus
 
