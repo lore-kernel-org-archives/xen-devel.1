@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F1BC636D7
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Feb 2023 15:56:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.492678.762375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422F8C61DA4
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Feb 2023 15:56:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.492672.762347 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pQ9Hp-00081W-Aj; Thu, 09 Feb 2023 15:56:37 +0000
+	id 1pQ9Hm-0007ST-TG; Thu, 09 Feb 2023 15:56:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 492678.762375; Thu, 09 Feb 2023 15:56:37 +0000
+Received: by outflank-mailman (output) from mailman id 492672.762347; Thu, 09 Feb 2023 15:56:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pQ9Ho-0007yN-VO; Thu, 09 Feb 2023 15:56:36 +0000
-Received: by outflank-mailman (input) for mailman id 492678;
- Thu, 09 Feb 2023 15:56:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pQ9Hm-0007SJ-O8; Thu, 09 Feb 2023 15:56:34 +0000
+Received: by outflank-mailman (input) for mailman id 492672;
+ Thu, 09 Feb 2023 15:56:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vyas=6F=gmail.com=dmitry.semenets@srs-se1.protection.inumbo.net>)
- id 1pQ9Hn-0006cl-8z
- for xen-devel@lists.xenproject.org; Thu, 09 Feb 2023 15:56:35 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 52e438b2-a892-11ed-93b5-47a8fe42b414;
- Thu, 09 Feb 2023 16:56:32 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id jg8so7713077ejc.6
- for <xen-devel@lists.xenproject.org>; Thu, 09 Feb 2023 07:56:32 -0800 (PST)
+ id 1pQ9Hl-0007Ak-2K
+ for xen-devel@lists.xenproject.org; Thu, 09 Feb 2023 15:56:33 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 519d4f8f-a892-11ed-933c-83870f6b2ba8;
+ Thu, 09 Feb 2023 16:56:30 +0100 (CET)
+Received: by mail-ej1-x62f.google.com with SMTP id c26so2920514ejz.10
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Feb 2023 07:56:30 -0800 (PST)
 Received: from dsemenets-HP-EliteBook-850-G8-Notebook-PC.. ([91.219.254.72])
  by smtp.gmail.com with ESMTPSA id
- v1-20020a170906b00100b0087862f45a29sm1027594ejy.174.2023.02.09.07.56.30
+ v1-20020a170906b00100b0087862f45a29sm1027594ejy.174.2023.02.09.07.56.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Feb 2023 07:56:31 -0800 (PST)
+ Thu, 09 Feb 2023 07:56:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,906 +46,1434 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52e438b2-a892-11ed-93b5-47a8fe42b414
+X-Inumbo-ID: 519d4f8f-a892-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=iDSIcL+mVhfPXUiOzfh6UyHDqJq2g2EiKPGtIhsGJug=;
-        b=Tsv1J0SIn2AQiBfOIN4Zx1VU1h6vO/6e70o2ZhUZs1UiNXjuI/zPs7jf4dClIGaS8t
-         l85GPQopTZuCo2FHS+b1lalYeHUlQ4ie6cA+jlbzjVs+Lb3duAjyldyKv1SFo5wWoXk2
-         Pw//cSTqS+xhdEWjGLqNMfRPjX5JmZiQQbF861Ehqu7BWobMCTrwlBFpha8ZHOPoMWmX
-         PN3YF+W5vS8S24dHFVllwRDKLunUzuk8BYmK20XY4Xtm1O7Od3Clx4Tqi3V9bPHd0vnU
-         SiJVvMLv2Ae3QpDVNauzbWu+g7v3swyVM9oafKHSjr/dE5LNa7TW7Fg2Ipv4jAc1IUTh
-         3f9Q==
+        bh=yJepENBooB8tnoAsGQEI6uVGIC9PbSV8wMNtT1M+PBA=;
+        b=lVKyPCvi1P3BzjR0R1P0UuDTd3etXpBDEHEpBz7XajqUzfGRqEpK4po3AHGdPahnBc
+         feUq7TBn90f16l37u1nPgV/yLIRGA5NX9pMqkhxg4XZj4tB6TAiqcqqymDcIF3Qvk6RB
+         ILPb/cM3Ng3Q1YtDovAUKtz1OkZqVPikWXRT6m7SlWQdkcNA9Vb13DYryFoedH8FBcJD
+         hFKZM8WmV3uE01vui46Vv3UN3kRpwrPEXG8OOVgXvtqdWRLeU3/DhcrqVfYZk3S2E1+V
+         vdjEynY77IIIQVKifqGBl206Bb3TgRsKSb2LTpUXzjG/2Qu3bh7muNrFOvDtB8doU6Ed
+         iVnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=iDSIcL+mVhfPXUiOzfh6UyHDqJq2g2EiKPGtIhsGJug=;
-        b=waTH0u9x/p8oupDs6YEUJ8G8AnlUR4F6+6I3orO2Kgl0czTcU5ABpp4YWZ9QTs3lfq
-         5dte2vA8imvWI5KgYl7ztQvDCFWGe20vXZ7JJI/a+wL3SWzTXtTxObDWsUoQ5LKWsZa3
-         mhhakWVldEfaphVgSt5+sGKP6fBiGfxpT86Rcb0ZdutdzYaSBST2mjkQ6cRqELhqXI4Y
-         wDmz7hzJw2mfmaYpTMLC2qAeZa1E+p5wCC27tOPYT8jxeWXhuiUSSHRld8/8fmKMQzLD
-         gCT13grUtCb9nBhRdo/RgGSEjOHoME65n+ocoJWnMpwEpDEkzmnJ7oJiBtaUtNhkLQ0F
-         5gfQ==
-X-Gm-Message-State: AO0yUKU/oQ6fO+xJ5n7nNvWTZtu1fQXqBUkf4GikTVRyTrRlKJ35I9FA
-	LJUqpM116qy1Zu46xQS+oQiPMaTk0OzCfA==
-X-Google-Smtp-Source: AK7set9QCgZKoZwqmEPnbSoTdDC1nIasulaWiBEwtR3KAzfx+GskGsW+KyFfVuWD/lcbAarUsjLZeg==
-X-Received: by 2002:a17:906:5307:b0:88f:1255:59c with SMTP id h7-20020a170906530700b0088f1255059cmr9552033ejo.1.1675958191909;
-        Thu, 09 Feb 2023 07:56:31 -0800 (PST)
+        bh=yJepENBooB8tnoAsGQEI6uVGIC9PbSV8wMNtT1M+PBA=;
+        b=WMCrpxnE0t6PgSO/j5Vff/FQubXWxTvsjZDuBTiVcvJ9FJRzMz2k9F/yjKTrPXENSO
+         tamHQUEnWo0Zl9cuWyHi/nZ/6yqSuDVs4Z5esLcUxdNB2R5pW1BwcvMgaeuHlL0hlk7g
+         6mqazOTzpF6RKjj+Qt7IVX9DVWsVxNHdnsOgDZlSpfpXO1xBn95OgrmdqGuggG+lbUBq
+         zu70guwuIlkcmfz000OA+4/kHdiSPxJG2DAdF85SeTRtsb+vTIOPiobOK62i2TPO/JNd
+         gv63Kj9pvMr9/OgfNzXrJ4/WY0+uBLYJPThoLpRo/qALHb4ExsV2exxRFlaUNPK+xEaS
+         hsaw==
+X-Gm-Message-State: AO0yUKXLB2/EaB0PDo8/Vs9mztdFxq5neCWCwxk8vgxNTlSA49i5NQR4
+	f+Rdcor44cYtPp7YZ0moyiBOlgKIBOIn4A==
+X-Google-Smtp-Source: AK7set81phE31Bybl/PFIIPg1DndlV9xZvdjfkV6IeUrl6A1qoPYapdjwju8W1yUblqTS9BP/VV9og==
+X-Received: by 2002:a17:906:1d2:b0:893:526b:c77b with SMTP id 18-20020a17090601d200b00893526bc77bmr12880215ejj.7.1675958189713;
+        Thu, 09 Feb 2023 07:56:29 -0800 (PST)
 From: dmitry.semenets@gmail.com
 To: xen-devel@lists.xenproject.org
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+Cc: Dmytro Semenets <dmytro_semenets@epam.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [RFC PATCH v4 5/9] tools/light: pci: move assign/revert logic to pcid
-Date: Thu,  9 Feb 2023 17:55:59 +0200
-Message-Id: <20230209155604.2753219-6-dmitry.semenets@gmail.com>
+	Juergen Gross <jgross@suse.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>
+Subject: [RFC PATCH v4 3/9] tools/xlpcid: Add xlpcid daemon
+Date: Thu,  9 Feb 2023 17:55:57 +0200
+Message-Id: <20230209155604.2753219-4-dmitry.semenets@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230209155604.2753219-1-dmitry.semenets@gmail.com>
 References: <20230209155604.2753219-1-dmitry.semenets@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+From: Dmytro Semenets <dmytro_semenets@epam.com>
 
-Implement commands MAKE_ASSIGNABLE and REVERT_ASSIGNABLE in pcid in
-the same way as they were implemented in libxl_pci.c
+Add draft version of pcid server (based on vchan-node2), which can receive
+messages from the client.
 
-Replace original logic in libxl_pci.c by calling appropriate functions
-from pcid.
+Add essential functionality to handle pcid protocol:
+- define required constants
+- prepare for handling remote requests
+- prepare and send an error packet
 
-This is quite huge patch, as lots of code were moved from lixbl_pci.c
-to libxl_pcid.c.
-
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Dmytro Semenets <dmytro_semenets@epam.com>
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Signed-off-by: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>
 ---
- tools/include/xen-pcid.h      |  38 ++++
- tools/libs/light/libxl_pci.c  | 292 +++++--------------------
- tools/libs/light/libxl_pcid.c | 396 ++++++++++++++++++++++++++++++++++
- 3 files changed, 492 insertions(+), 234 deletions(-)
+ tools/Makefile                                |   1 +
+ tools/configure                               |   8 +-
+ tools/configure.ac                            |   1 +
+ tools/hotplug/FreeBSD/rc.d/xlpcid.in          |  75 +++
+ tools/hotplug/Linux/init.d/xlpcid.in          |  76 ++++
+ tools/hotplug/Linux/systemd/Makefile          |   1 +
+ .../hotplug/Linux/systemd/xenpcid.service.in  |  10 +
+ tools/hotplug/NetBSD/rc.d/xlpcid.in           |  75 +++
+ tools/include/xen-pcid.h                      |  95 ++++
+ tools/libs/light/Makefile                     |   1 +
+ tools/libs/light/libxl_pci.c                  | 128 ++++++
+ tools/libs/light/libxl_pcid.c                 | 428 ++++++++++++++++++
+ tools/xlpcid/Makefile                         |  52 +++
+ tools/xlpcid/bash-completion                  |  20 +
+ tools/xlpcid/xlpcid.c                         | 213 +++++++++
+ 15 files changed, 1182 insertions(+), 2 deletions(-)
+ create mode 100644 tools/hotplug/FreeBSD/rc.d/xlpcid.in
+ create mode 100644 tools/hotplug/Linux/init.d/xlpcid.in
+ create mode 100644 tools/hotplug/Linux/systemd/xenpcid.service.in
+ create mode 100644 tools/hotplug/NetBSD/rc.d/xlpcid.in
+ create mode 100644 tools/include/xen-pcid.h
+ create mode 100644 tools/libs/light/libxl_pcid.c
+ create mode 100644 tools/xlpcid/Makefile
+ create mode 100644 tools/xlpcid/bash-completion
+ create mode 100644 tools/xlpcid/xlpcid.c
 
+diff --git a/tools/Makefile b/tools/Makefile
+index 4906fdbc23..5a99f7bb61 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -30,6 +30,7 @@ endif
+ SUBDIRS-y += xenpmd
+ SUBDIRS-$(CONFIG_GOLANG) += golang
+ SUBDIRS-y += xl
++SUBDIRS-y += xlpcid
+ SUBDIRS-y += helpers
+ SUBDIRS-$(CONFIG_X86) += xenpaging
+ SUBDIRS-$(CONFIG_X86) += debugger
+diff --git a/tools/configure b/tools/configure
+index dae377c982..0cd6edb6ca 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -2455,7 +2455,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+ 
+-ac_config_files="$ac_config_files ../config/Tools.mk hotplug/common/hotplugpath.sh hotplug/FreeBSD/rc.d/xencommons hotplug/FreeBSD/rc.d/xendriverdomain hotplug/Linux/init.d/sysconfig.xencommons hotplug/Linux/init.d/sysconfig.xendomains hotplug/Linux/init.d/xen-watchdog hotplug/Linux/init.d/xencommons hotplug/Linux/init.d/xendomains hotplug/Linux/init.d/xendriverdomain hotplug/Linux/launch-xenstore hotplug/Linux/vif-setup hotplug/Linux/xen-hotplug-common.sh hotplug/Linux/xendomains hotplug/NetBSD/rc.d/xencommons hotplug/NetBSD/rc.d/xendriverdomain ocaml/libs/xs/paths.ml ocaml/xenstored/paths.ml ocaml/xenstored/oxenstored.conf"
++ac_config_files="$ac_config_files ../config/Tools.mk hotplug/common/hotplugpath.sh hotplug/FreeBSD/rc.d/xencommons hotplug/FreeBSD/rc.d/xendriverdomain hotplug/FreeBSD/rc.d/xlpcid hotplug/Linux/init.d/sysconfig.xencommons hotplug/Linux/init.d/sysconfig.xendomains hotplug/Linux/init.d/xlpcid hotplug/Linux/init.d/xen-watchdog hotplug/Linux/init.d/xencommons hotplug/Linux/init.d/xendomains hotplug/Linux/init.d/xendriverdomain hotplug/Linux/launch-xenstore hotplug/Linux/vif-setup hotplug/Linux/xen-hotplug-common.sh hotplug/Linux/xendomains hotplug/NetBSD/rc.d/xencommons hotplug/NetBSD/rc.d/xendriverdomain hotplug/NetBSD/rc.d/xlpcid ocaml/libs/xs/paths.ml ocaml/xenstored/paths.ml ocaml/xenstored/oxenstored.conf"
+ 
+ ac_config_headers="$ac_config_headers config.h"
+ 
+@@ -10081,7 +10081,7 @@ fi
+ 
+ if test "x$systemd" = "xy"; then :
+ 
+-    ac_config_files="$ac_config_files hotplug/Linux/systemd/proc-xen.mount hotplug/Linux/systemd/xen-init-dom0.service hotplug/Linux/systemd/xen-qemu-dom0-disk-backend.service hotplug/Linux/systemd/xen-watchdog.service hotplug/Linux/systemd/xenconsoled.service hotplug/Linux/systemd/xendomains.service hotplug/Linux/systemd/xendriverdomain.service hotplug/Linux/systemd/xenstored.service"
++    ac_config_files="$ac_config_files hotplug/Linux/systemd/proc-xen.mount hotplug/Linux/systemd/xen-init-dom0.service hotplug/Linux/systemd/xen-qemu-dom0-disk-backend.service hotplug/Linux/systemd/xen-watchdog.service hotplug/Linux/systemd/xenconsoled.service hotplug/Linux/systemd/xendomains.service hotplug/Linux/systemd/xendriverdomain.service hotplug/Linux/systemd/xenstored.service hotplug/Linux/systemd/xenpcid.service"
+ 
+ 
+ fi
+@@ -10946,8 +10946,10 @@ do
+     "hotplug/common/hotplugpath.sh") CONFIG_FILES="$CONFIG_FILES hotplug/common/hotplugpath.sh" ;;
+     "hotplug/FreeBSD/rc.d/xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/FreeBSD/rc.d/xencommons" ;;
+     "hotplug/FreeBSD/rc.d/xendriverdomain") CONFIG_FILES="$CONFIG_FILES hotplug/FreeBSD/rc.d/xendriverdomain" ;;
++    "hotplug/FreeBSD/rc.d/xlpcid") CONFIG_FILES="$CONFIG_FILES hotplug/FreeBSD/rc.d/xlpcid" ;;
+     "hotplug/Linux/init.d/sysconfig.xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/sysconfig.xencommons" ;;
+     "hotplug/Linux/init.d/sysconfig.xendomains") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/sysconfig.xendomains" ;;
++    "hotplug/Linux/init.d/xlpcid") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/xlpcid" ;;
+     "hotplug/Linux/init.d/xen-watchdog") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/xen-watchdog" ;;
+     "hotplug/Linux/init.d/xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/xencommons" ;;
+     "hotplug/Linux/init.d/xendomains") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/init.d/xendomains" ;;
+@@ -10958,6 +10960,7 @@ do
+     "hotplug/Linux/xendomains") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/xendomains" ;;
+     "hotplug/NetBSD/rc.d/xencommons") CONFIG_FILES="$CONFIG_FILES hotplug/NetBSD/rc.d/xencommons" ;;
+     "hotplug/NetBSD/rc.d/xendriverdomain") CONFIG_FILES="$CONFIG_FILES hotplug/NetBSD/rc.d/xendriverdomain" ;;
++    "hotplug/NetBSD/rc.d/xlpcid") CONFIG_FILES="$CONFIG_FILES hotplug/NetBSD/rc.d/xlpcid" ;;
+     "ocaml/libs/xs/paths.ml") CONFIG_FILES="$CONFIG_FILES ocaml/libs/xs/paths.ml" ;;
+     "ocaml/xenstored/paths.ml") CONFIG_FILES="$CONFIG_FILES ocaml/xenstored/paths.ml" ;;
+     "ocaml/xenstored/oxenstored.conf") CONFIG_FILES="$CONFIG_FILES ocaml/xenstored/oxenstored.conf" ;;
+@@ -10970,6 +10973,7 @@ do
+     "hotplug/Linux/systemd/xendomains.service") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/systemd/xendomains.service" ;;
+     "hotplug/Linux/systemd/xendriverdomain.service") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/systemd/xendriverdomain.service" ;;
+     "hotplug/Linux/systemd/xenstored.service") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/systemd/xenstored.service" ;;
++    "hotplug/Linux/systemd/xenpcid.service") CONFIG_FILES="$CONFIG_FILES hotplug/Linux/systemd/xenpcid.service" ;;
+ 
+   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
+   esac
+diff --git a/tools/configure.ac b/tools/configure.ac
+index 3a2f6a2da9..d2b22e94a9 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -489,6 +489,7 @@ AS_IF([test "x$systemd" = "xy"], [
+     hotplug/Linux/systemd/xendomains.service
+     hotplug/Linux/systemd/xendriverdomain.service
+     hotplug/Linux/systemd/xenstored.service
++    hotplug/Linux/systemd/xenpcid.service
+     ])
+ ])
+ 
+diff --git a/tools/hotplug/FreeBSD/rc.d/xlpcid.in b/tools/hotplug/FreeBSD/rc.d/xlpcid.in
+new file mode 100644
+index 0000000000..ad414c25ba
+--- /dev/null
++++ b/tools/hotplug/FreeBSD/rc.d/xlpcid.in
+@@ -0,0 +1,75 @@
++#! /bin/bash
++#
++# xlpcid
++#
++# description: Run xlpcid daemon
++### BEGIN INIT INFO
++# Provides:          xlpcid
++# Short-Description: Start/stop xlpcid
++# Description:       Run xlpcid daemon
++### END INIT INFO
++#
++
++. @XEN_SCRIPT_DIR@/hotplugpath.sh
++
++xencommons_config=@CONFIG_DIR@/@CONFIG_LEAF_DIR@
++
++test -f $xencommons_config/xencommons && . $xencommons_config/xencommons
++
++XLPCID_PIDFILE="@XEN_RUN_DIR@/xlpcid.pid"
++
++# Source function library.
++if [ -e  /etc/init.d/functions ] ; then
++    . /etc/init.d/functions
++elif [ -e /lib/lsb/init-functions ] ; then
++    . /lib/lsb/init-functions
++    success () {
++        log_success_msg $*
++    }
++    failure () {
++        log_failure_msg $*
++    }
++else
++    success () {
++        echo $*
++    }
++    failure () {
++        echo $*
++    }
++fi
++
++start() {
++  echo Starting xlpcid...
++  ${sbindir}/xlpcid --pidfile=$XLPCID_PIDFILE $XLPCID_ARGS
++}
++
++stop() {
++  echo Stopping xl pcid...
++  if read 2>/dev/null <$XLPCID_PIDFILE pid; then
++    kill $pid
++    while kill -9 $pid >/dev/null 2>&1; do sleep 1; done
++    rm -f $XLPCID_PIDFILE
++  fi
++}
++
++case "$1" in
++  start)
++    start
++	;;
++  stop)
++	stop
++	;;
++  restart)
++	stop
++	start
++	;;
++  status)
++	;;
++  condrestart)
++	stop
++	start
++	;;
++  *)
++	echo $"Usage: $0 {start|stop|status|restart|condrestart}"
++	exit 1
++esac
+diff --git a/tools/hotplug/Linux/init.d/xlpcid.in b/tools/hotplug/Linux/init.d/xlpcid.in
+new file mode 100644
+index 0000000000..d8e38501a7
+--- /dev/null
++++ b/tools/hotplug/Linux/init.d/xlpcid.in
+@@ -0,0 +1,76 @@
++#! /bin/bash
++#
++# xlpcid
++#
++# description: Run xlpcid daemon
++### BEGIN INIT INFO
++# Provides:          xlpcid
++# Short-Description: Start/stop xlpcid
++# Description:       Run xlpcid daemon
++### END INIT INFO
++#
++
++. @XEN_SCRIPT_DIR@/hotplugpath.sh
++
++xencommons_config=@CONFIG_DIR@/@CONFIG_LEAF_DIR@
++
++test -f $xencommons_config/xencommons && . $xencommons_config/xencommons
++
++XLPCID_PIDFILE="@XEN_RUN_DIR@/xlpcid.pid"
++
++# Source function library.
++if [ -e  /etc/init.d/functions ] ; then
++    . /etc/init.d/functions
++elif [ -e /lib/lsb/init-functions ] ; then
++    . /lib/lsb/init-functions
++    success () {
++        log_success_msg $*
++    }
++    failure () {
++        log_failure_msg $*
++    }
++else
++    success () {
++        echo $*
++    }
++    failure () {
++        echo $*
++    }
++fi
++
++start() {
++  echo Starting xlpcid...
++  ${sbindir}/xlpcid --pidfile=$XLPCID_PIDFILE $XLPCID_ARGS
++}
++
++stop() {
++  echo Stopping xl pcid...
++  if read 2>/dev/null <$XLPCID_PIDFILE pid; then
++    kill $pid
++    while kill -9 $pid >/dev/null 2>&1; do sleep 1; done
++    rm -f $XLPCID_PIDFILE
++  fi
++}
++
++case "$1" in
++  start)
++    start
++	;;
++  stop)
++	stop
++	;;
++  restart)
++	stop
++	start
++	;;
++  status)
++	;;
++  condrestart)
++	stop
++	start
++	;;
++  *)
++	echo $"Usage: $0 {start|stop|status|restart|condrestart}"
++	exit 1
++esac
++
+diff --git a/tools/hotplug/Linux/systemd/Makefile b/tools/hotplug/Linux/systemd/Makefile
+index e29889156d..49f0f87296 100644
+--- a/tools/hotplug/Linux/systemd/Makefile
++++ b/tools/hotplug/Linux/systemd/Makefile
+@@ -12,6 +12,7 @@ XEN_SYSTEMD_SERVICE += xendomains.service
+ XEN_SYSTEMD_SERVICE += xen-watchdog.service
+ XEN_SYSTEMD_SERVICE += xen-init-dom0.service
+ XEN_SYSTEMD_SERVICE += xendriverdomain.service
++XEN_SYSTEMD_SERVICE += xenpcid.service
+ 
+ ALL_XEN_SYSTEMD :=	$(XEN_SYSTEMD_MODULES)  \
+ 			$(XEN_SYSTEMD_MOUNT)	\
+diff --git a/tools/hotplug/Linux/systemd/xenpcid.service.in b/tools/hotplug/Linux/systemd/xenpcid.service.in
+new file mode 100644
+index 0000000000..b0bfd72734
+--- /dev/null
++++ b/tools/hotplug/Linux/systemd/xenpcid.service.in
+@@ -0,0 +1,10 @@
++[Unit]
++Description=Xen PCI host daemon
++ConditionVirtualization=xen
++
++[Service]
++Type=forking
++ExecStart=@sbindir@/xlpcid
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/tools/hotplug/NetBSD/rc.d/xlpcid.in b/tools/hotplug/NetBSD/rc.d/xlpcid.in
+new file mode 100644
+index 0000000000..ad414c25ba
+--- /dev/null
++++ b/tools/hotplug/NetBSD/rc.d/xlpcid.in
+@@ -0,0 +1,75 @@
++#! /bin/bash
++#
++# xlpcid
++#
++# description: Run xlpcid daemon
++### BEGIN INIT INFO
++# Provides:          xlpcid
++# Short-Description: Start/stop xlpcid
++# Description:       Run xlpcid daemon
++### END INIT INFO
++#
++
++. @XEN_SCRIPT_DIR@/hotplugpath.sh
++
++xencommons_config=@CONFIG_DIR@/@CONFIG_LEAF_DIR@
++
++test -f $xencommons_config/xencommons && . $xencommons_config/xencommons
++
++XLPCID_PIDFILE="@XEN_RUN_DIR@/xlpcid.pid"
++
++# Source function library.
++if [ -e  /etc/init.d/functions ] ; then
++    . /etc/init.d/functions
++elif [ -e /lib/lsb/init-functions ] ; then
++    . /lib/lsb/init-functions
++    success () {
++        log_success_msg $*
++    }
++    failure () {
++        log_failure_msg $*
++    }
++else
++    success () {
++        echo $*
++    }
++    failure () {
++        echo $*
++    }
++fi
++
++start() {
++  echo Starting xlpcid...
++  ${sbindir}/xlpcid --pidfile=$XLPCID_PIDFILE $XLPCID_ARGS
++}
++
++stop() {
++  echo Stopping xl pcid...
++  if read 2>/dev/null <$XLPCID_PIDFILE pid; then
++    kill $pid
++    while kill -9 $pid >/dev/null 2>&1; do sleep 1; done
++    rm -f $XLPCID_PIDFILE
++  fi
++}
++
++case "$1" in
++  start)
++    start
++	;;
++  stop)
++	stop
++	;;
++  restart)
++	stop
++	start
++	;;
++  status)
++	;;
++  condrestart)
++	stop
++	start
++	;;
++  *)
++	echo $"Usage: $0 {start|stop|status|restart|condrestart}"
++	exit 1
++esac
 diff --git a/tools/include/xen-pcid.h b/tools/include/xen-pcid.h
-index 6a5724363d..5e96b8de6e 100644
---- a/tools/include/xen-pcid.h
+new file mode 100644
+index 0000000000..098118a0c3
+--- /dev/null
 +++ b/tools/include/xen-pcid.h
-@@ -99,6 +99,44 @@
- #define PCID_CMD_LIST_ASSIGNABLE        "list_assignable"
- #define PCID_MSG_FIELD_DEVICES          "devices"
- 
+@@ -0,0 +1,95 @@
++/*
++    Common definitions for Xen PCI client-server protocol.
++    Copyright (C) 2021 EPAM Systems Inc.
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Lesser General Public
++    License as published by the Free Software Foundation; either
++    version 2.1 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Lesser General Public License for more details.
++
++    SPDX-License-Identifier: LGPL-2.1+
++*/
++
++#ifndef XEN_PCID_H
++#define XEN_PCID_H
++
++#define PCID_SRV_NAME           "pcid"
++#define PCID_XS_TOKEN           "pcid-token"
++
++#define PCI_RECEIVE_BUFFER_SIZE 4096
++#define PCI_MAX_SIZE_RX_BUF     MB(1)
++
 +/*
 + *******************************************************************************
-+ * Make device assignable
++ * Common request and response structures used be the pcid remote protocol are
++ * described below.
++ *******************************************************************************
++ * Request:
++ * +-------------+--------------+----------------------------------------------+
++ * | Field       | Type         | Comment                                      |
++ * +-------------+--------------+----------------------------------------------+
++ * | cmd         | string       | String identifying the command               |
++ * +-------------+--------------+----------------------------------------------+
 + *
-+ * This command makes given device assignable by ensuring that OS
-+ * will not try to access it.
++ * Response:
++ * +-------------+--------------+----------------------------------------------+
++ * | Field       | Type         | Comment                                      |
++ * +-------------+--------------+----------------------------------------------+
++ * | resp        | string       | Command string as in the request             |
++ * +-------------+--------------+----------------------------------------------+
++ * | error       | string       | "okay", "failed"                               |
++ * +-------------+--------------+----------------------------------------------+
++ * | error_desc  | string       | Optional error description string            |
++ * +-------------+--------------+----------------------------------------------+
 + *
-+ * Request (see other mandatory fields above):
-+ *  - "cmd" field of the request must be set to "make_assignable".
-+ *  - "sbdf" SBDF of the device in format defined by PCID_SBDF_FMT.
-+ *  - "rebind" = true if daemon needs to save original driver name,
-+ *    so device later can be rebound back.
++ * Notes.
++ * 1. Every request and response must contain the above mandatory structures.
++ * 2. In case if a bad packet or an unknown command received by the server side
++ * a valid reply with the corresponding error code must be sent to the client.
 + *
-+ * Response (see other mandatory fields above):
-+ *  - "resp" field of the response must be set to "make_assignable".
++ * Requests and responses, which require SBDF as part of their payload, must
++ * use the following convention for encoding SBDF value:
++ *
++ * pci_device object:
++ * +-------------+--------------+----------------------------------------------+
++ * | Field       | Type         | Comment                                      |
++ * +-------------+--------------+----------------------------------------------+
++ * | sbdf        | string       | SBDF string in form SSSS:BB:DD.F             |
++ * +-------------+--------------+----------------------------------------------+
 + */
-+#define PCID_CMD_MAKE_ASSIGNABLE        "make_assignable"
-+#define PCID_MSG_FIELD_REBIND           "rebind"
++
++/* Fileld names */
++#define PCID_MSG_FIELD_CMD      "cmd"
++
++#define PCID_MSG_FIELD_RESP     "resp"
++#define PCID_MSG_FIELD_ERR      "error"
++#define PCID_MSG_FIELD_ERR_DESC "error_desc"
++
++/* pci_device object fields. */
++#define PCID_MSG_FIELD_SBDF     "sbdf"
++
++/* Error values */
++#define PCID_MSG_ERR_OK         "okay"
++#define PCID_MSG_ERR_FAILED     "failed"
++#define PCID_MSG_ERR_NA         "NA"
++
++#define PCID_SBDF_FMT           "%04x:%02x:%02x.%01x"
++
++int libxl_pcid_process(libxl_ctx *ctx);
++
++#endif /* XEN_PCID_H */
 +
 +/*
-+ *******************************************************************************
-+ * Revert device from assignable state
-+ *
-+ * This command reverts effect of "make_assignable" command. Basically,
-+ * now device can be used by OS again.
-+ *
-+ * Request (see other mandatory fields above):
-+ *  - "cmd" field of the request must be set to "revert_assignable".
-+ *  - "sbdf" SBDF of the device in format defined by PCID_SBDF_FMT.
-+ *  - "rebind" = true if daemon needs to rebind device back to it's
-+ *    original driver, which name was saved by "make_assignable" command
-+ *
-+ * Response (see other mandatory fields above):
-+ *  - "resp" field of the response must be set to "revert_assignable".
++ * Local variables:
++ *  mode: C
++ *  c-file-style: "linux"
++ *  indent-tabs-mode: t
++ *  c-basic-offset: 8
++ *  tab-width: 8
++ * End:
 + */
-+#define PCID_CMD_REVERT_ASSIGNABLE      "revert_assignable"
-+
-+
- int libxl_pcid_process(libxl_ctx *ctx);
- 
- #endif /* XEN_PCID_H */
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 0941ad2cf4..72997eaac9 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -71,6 +71,7 @@ OBJS-y += libxl.o
+ OBJS-y += libxl_create.o
+ OBJS-y += libxl_dm.o
+ OBJS-y += libxl_pci.o
++OBJS-y += libxl_pcid.o
+ OBJS-y += libxl_vchan.o
+ OBJS-y += libxl_dom.o
+ OBJS-y += libxl_exec.o
 diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index c4b04ccb92..b3dfd95fd3 100644
+index f4c4f17545..3d9ed0d50c 100644
 --- a/tools/libs/light/libxl_pci.c
 +++ b/tools/libs/light/libxl_pci.c
-@@ -82,6 +82,10 @@ static int pci_handle_response(libxl__gc *gc,
+@@ -18,6 +18,10 @@
  
-     if (strcmp(command_name, PCID_CMD_LIST_ASSIGNABLE) == 0)
-        ret = process_list_assignable(gc, response, result);
-+    else if (strcmp(command_name, PCID_CMD_MAKE_ASSIGNABLE) == 0)
-+        *result = libxl__json_object_alloc(gc, JSON_NULL);
-+    else if (strcmp(command_name, PCID_CMD_REVERT_ASSIGNABLE) == 0)
-+        *result = libxl__json_object_alloc(gc, JSON_NULL);
+ #include "libxl_internal.h"
  
-     return ret;
- }
-@@ -636,44 +640,6 @@ void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num)
-     free(list);
- }
- 
--/* Unbind device from its current driver, if any.  If driver_path is non-NULL,
-- * store the path to the original driver in it. */
--static int sysfs_dev_unbind(libxl__gc *gc, libxl_device_pci *pci,
--                            char **driver_path)
--{
--    char * spath, *dp = NULL;
--    struct stat st;
--
--    spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/driver",
--                           pci->domain,
--                           pci->bus,
--                           pci->dev,
--                           pci->func);
--    if ( !lstat(spath, &st) ) {
--        /* Find the canonical path to the driver. */
--        dp = libxl__zalloc(gc, PATH_MAX);
--        dp = realpath(spath, dp);
--        if ( !dp ) {
--            LOGE(ERROR, "realpath() failed");
--            return -1;
--        }
--
--        LOG(DEBUG, "Driver re-plug path: %s", dp);
--
--        /* Unbind from the old driver */
--        spath = GCSPRINTF("%s/unbind", dp);
--        if ( sysfs_write_bdf(gc, spath, pci) < 0 ) {
--            LOGE(ERROR, "Couldn't unbind device");
--            return -1;
--        }
--    }
--
--    if ( driver_path )
--        *driver_path = dp;
--
--    return 0;
--}
--
- static uint16_t sysfs_dev_get_vendor(libxl__gc *gc, libxl_device_pci *pci)
- {
-     char *pci_device_vendor_path =
-@@ -785,49 +751,6 @@ bool libxl__is_igd_vga_passthru(libxl__gc *gc,
-     return false;
- }
- 
--/*
-- * A brief comment about slots.  I don't know what slots are for; however,
-- * I have by experimentation determined:
-- * - Before a device can be bound to pciback, its BDF must first be listed
-- *   in pciback/slots
-- * - The way to get the BDF listed there is to write BDF to
-- *   pciback/new_slot
-- * - Writing the same BDF to pciback/new_slot is not idempotent; it results
-- *   in two entries of the BDF in pciback/slots
-- * It's not clear whether having two entries in pciback/slots is a problem
-- * or not.  Just to be safe, this code does the conservative thing, and
-- * first checks to see if there is a slot, adding one only if one does not
-- * already exist.
-- */
--
--/* Scan through /sys/.../pciback/slots looking for pci's BDF */
--static int pciback_dev_has_slot(libxl__gc *gc, libxl_device_pci *pci)
--{
--    FILE *f;
--    int rc = 0;
--    unsigned dom, bus, dev, func;
--
--    f = fopen(SYSFS_PCIBACK_DRIVER"/slots", "r");
--
--    if (f == NULL) {
--        LOGE(ERROR, "Couldn't open %s", SYSFS_PCIBACK_DRIVER"/slots");
--        return ERROR_FAIL;
--    }
--
--    while (fscanf(f, "%x:%x:%x.%d\n", &dom, &bus, &dev, &func) == 4) {
--        if (dom == pci->domain
--            && bus == pci->bus
--            && dev == pci->dev
--            && func == pci->func) {
--            rc = 1;
--            goto out;
--        }
--    }
--out:
--    fclose(f);
--    return rc;
--}
--
- static int pciback_dev_is_assigned(libxl__gc *gc, libxl_device_pci *pci)
- {
-     char * spath;
-@@ -856,133 +779,34 @@ static int pciback_dev_is_assigned(libxl__gc *gc, libxl_device_pci *pci)
-     return -1;
- }
- 
--static int pciback_dev_assign(libxl__gc *gc, libxl_device_pci *pci)
--{
--    int rc;
--
--    if ( (rc = pciback_dev_has_slot(gc, pci)) < 0 ) {
--        LOGE(ERROR, "Error checking for pciback slot");
--        return ERROR_FAIL;
--    } else if (rc == 0) {
--        if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/new_slot",
--                             pci) < 0 ) {
--            LOGE(ERROR, "Couldn't bind device to pciback!");
--            return ERROR_FAIL;
--        }
--    }
--
--    if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/bind", pci) < 0 ) {
--        LOGE(ERROR, "Couldn't bind device to pciback!");
--        return ERROR_FAIL;
--    }
--    return 0;
--}
--
--static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
--{
--    /* Remove from pciback */
--    if ( sysfs_dev_unbind(gc, pci, NULL) < 0 ) {
--        LOG(ERROR, "Couldn't unbind device!");
--        return ERROR_FAIL;
--    }
--
--    /* Remove slot if necessary */
--    if ( pciback_dev_has_slot(gc, pci) > 0 ) {
--        if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/remove_slot",
--                             pci) < 0 ) {
--            LOGE(ERROR, "Couldn't remove pciback slot");
--            return ERROR_FAIL;
--        }
--    }
--    return 0;
--}
--
- static int libxl__device_pci_assignable_add(libxl__gc *gc,
-                                             libxl_device_pci *pci,
-                                             int rebind)
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
--    unsigned dom, bus, dev, func;
--    char *spath, *driver_path = NULL;
--    const char *name;
-+    struct vchan_info *vchan;
-     int rc;
--    struct stat st;
--
--    /* Local copy for convenience */
--    dom = pci->domain;
--    bus = pci->bus;
--    dev = pci->dev;
--    func = pci->func;
--    name = pci->name;
--
--    /* Sanitise any name that is set */
--    if (name) {
--        unsigned int i, n = strlen(name);
-+    libxl__json_object *args, *result;
- 
--        if (n > 64) { /* Reasonable upper bound on name length */
--            LOG(ERROR, "Name too long");
--            return ERROR_FAIL;
--        }
--
--        for (i = 0; i < n; i++) {
--            if (!isgraph(name[i])) {
--                LOG(ERROR, "Names may only include printable characters");
--                return ERROR_FAIL;
--            }
--        }
--    }
--
--    /* See if the device exists */
--    spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF, dom, bus, dev, func);
--    if ( lstat(spath, &st) ) {
--        LOGE(ERROR, "Couldn't lstat %s", spath);
--        return ERROR_FAIL;
--    }
--
--    /* Check to see if it's already assigned to pciback */
--    rc = pciback_dev_is_assigned(gc, pci);
--    if ( rc < 0 ) {
--        return ERROR_FAIL;
--    }
--    if ( rc ) {
--        LOG(WARN, PCI_BDF" already assigned to pciback", dom, bus, dev, func);
--        goto name;
-+    vchan = pci_vchan_get_client(gc);
-+    if (!vchan) {
-+        rc = ERROR_NOT_READY;
-+        goto out;
-     }
- 
--    /* Check to see if there's already a driver that we need to unbind from */
--    if ( sysfs_dev_unbind(gc, pci, &driver_path ) ) {
--        LOG(ERROR, "Couldn't unbind "PCI_BDF" from driver",
--            dom, bus, dev, func);
--        return ERROR_FAIL;
--    }
-+    args = libxl__vchan_start_args(gc);
- 
--    /* Store driver_path for rebinding to dom0 */
--    if ( rebind ) {
--        if ( driver_path ) {
--            pci_info_xs_write(gc, pci, "driver_path", driver_path);
--        } else if ( (driver_path =
--                     pci_info_xs_read(gc, pci, "driver_path")) != NULL ) {
--            LOG(INFO, PCI_BDF" not bound to a driver, will be rebound to %s",
--                dom, bus, dev, func, driver_path);
--        } else {
--            LOG(WARN, PCI_BDF" not bound to a driver, will not be rebound.",
--                dom, bus, dev, func);
--        }
--    } else {
--        pci_info_xs_remove(gc, pci, "driver_path");
--    }
-+    libxl__vchan_arg_add_string(gc, args, PCID_MSG_FIELD_SBDF,
-+                                GCSPRINTF(PCID_SBDF_FMT, pci->domain,
-+                                          pci->bus, pci->dev, pci->func));
-+    libxl__vchan_arg_add_bool(gc, args, PCID_MSG_FIELD_REBIND, rebind);
- 
--    if ( pciback_dev_assign(gc, pci) ) {
--        LOG(ERROR, "Couldn't bind device to pciback!");
--        return ERROR_FAIL;
-+    result = vchan_send_command(gc, vchan, PCID_CMD_MAKE_ASSIGNABLE, args);
-+    if (!result) {
-+        rc = ERROR_FAIL;
-+        goto vchan_free;
-     }
- 
--name:
--    if (name)
--        pci_info_xs_write(gc, pci, "name", name);
--    else
--        pci_info_xs_remove(gc, pci, "name");
--
-     /*
-      * DOMID_IO is just a sentinel domain, without any actual mappings,
-      * so always pass XEN_DOMCTL_DEV_RDM_RELAXED to avoid assignment being
-@@ -990,12 +814,15 @@ name:
-      */
-     rc = xc_assign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pci),
-                           XEN_DOMCTL_DEV_RDM_RELAXED);
--    if ( rc < 0 ) {
--        LOG(ERROR, "failed to quarantine "PCI_BDF, dom, bus, dev, func);
--        return ERROR_FAIL;
--    }
-+    if ( rc < 0 )
-+        LOG(ERROR, "failed to quarantine "PCI_BDF, pci->domain, pci->bus,
-+            pci->dev, pci->func);
- 
--    return 0;
-+vchan_free:
-+    pci_vchan_free(gc, vchan);
++#include <xen-pcid.h>
 +
-+out:
-+    return rc;
- }
- 
- static int name2bdf(libxl__gc *gc, libxl_device_pci *pci)
-@@ -1038,13 +865,8 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-     int rc;
--    char *driver_path;
--
--    /* If the device is named then we need to look up the BDF */
--    if (pci->name) {
--        rc = name2bdf(gc, pci);
--        if (rc) return rc;
--    }
-+    struct vchan_info *vchan;
-+    libxl__json_object *args, *temp_obj, *result;
- 
-     /* De-quarantine */
-     rc = xc_deassign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pci));
-@@ -1054,41 +876,43 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
- 
--    /* Unbind from pciback */
--    if ( (rc = pciback_dev_is_assigned(gc, pci)) < 0 ) {
--        return ERROR_FAIL;
--    } else if ( rc ) {
--        pciback_dev_unassign(gc, pci);
--    } else {
--        LOG(WARN, "Not bound to pciback");
-+    vchan = pci_vchan_get_client(gc);
-+    if (!vchan) {
-+        rc = ERROR_NOT_READY;
-+        goto out;
-     }
- 
--    /* Rebind if necessary */
--    driver_path = pci_info_xs_read(gc, pci, "driver_path");
-+    args = libxl__json_object_alloc(gc, JSON_MAP);
-+    temp_obj = libxl__json_object_alloc(gc, JSON_STRING);
-+    if (!temp_obj) {
-+        rc = ERROR_NOMEM;
-+        goto vchan_free;
-+    }
-+    temp_obj->u.string = GCSPRINTF(PCID_SBDF_FMT, pci->domain, pci->bus,
-+                                   pci->dev, pci->func);
-+    flexarray_append_pair(args->u.map, PCID_MSG_FIELD_SBDF, temp_obj);
- 
--    if ( driver_path ) {
--        if ( rebind ) {
--            LOG(INFO, "Rebinding to driver at %s", driver_path);
-+    args = libxl__json_object_alloc(gc, JSON_MAP);
-+    temp_obj = libxl__json_object_alloc(gc, JSON_BOOL);
-+    if (!temp_obj) {
-+        rc = ERROR_NOMEM;
-+        goto vchan_free;
-+    }
- 
--            if ( sysfs_write_bdf(gc,
--                                 GCSPRINTF("%s/bind", driver_path),
--                                 pci) < 0 ) {
--                LOGE(ERROR, "Couldn't bind device to %s", driver_path);
--                return -1;
--            }
-+    temp_obj->u.b = rebind;
-+    flexarray_append_pair(args->u.map, PCID_MSG_FIELD_REBIND, temp_obj);
- 
--            pci_info_xs_remove(gc, pci, "driver_path");
--        }
--    } else {
--        if ( rebind ) {
--            LOG(WARN,
--                "Couldn't find path for original driver; not rebinding");
--        }
-+    result = vchan_send_command(gc, vchan, PCID_CMD_REVERT_ASSIGNABLE, args);
-+    if (!result) {
-+        rc = ERROR_FAIL;
-+        goto vchan_free;
-     }
- 
--    pci_info_xs_remove(gc, pci, "name");
-+vchan_free:
-+    pci_vchan_free(gc, vchan);
- 
--    return 0;
-+out:
-+    return rc;
- }
- 
- int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci,
-diff --git a/tools/libs/light/libxl_pcid.c b/tools/libs/light/libxl_pcid.c
-index 8dfccc439d..5e1e41feb5 100644
---- a/tools/libs/light/libxl_pcid.c
-+++ b/tools/libs/light/libxl_pcid.c
-@@ -38,6 +38,8 @@
- 
- #define DOM0_ID 0
- 
-+#define PCI_BDF                "%04x:%02x:%02x.%01x"
++#include "libxl_vchan.h"
 +
- struct vchan_client {
-     XEN_LIST_ENTRY(struct vchan_client) list;
+ #define PCI_BDF                "%04x:%02x:%02x.%01x"
+ #define PCI_BDF_SHORT          "%02x:%02x.%01x"
+ #define PCI_BDF_VDEVFN         "%04x:%02x:%02x.%01x@%02x"
+@@ -25,6 +29,130 @@
+ #define PCI_BDF_XSPATH         "%04x-%02x-%02x-%01x"
+ #define PCI_PT_QDEV_ID         "pci-pt-%02x_%02x.%01x"
  
-@@ -119,6 +121,394 @@ static int process_list_assignable(libxl__gc *gc, yajl_gen gen,
-     return 0;
- }
- 
-+static int pciback_dev_is_assigned(libxl__gc *gc, unsigned int domain,
-+				   unsigned int bus, unsigned int dev,
-+				   unsigned int func)
++static int pci_handle_response(libxl__gc *gc,
++                               const libxl__json_object *response,
++                               libxl__json_object **result)
 +{
-+    char * spath;
-+    int rc;
-+    struct stat st;
++    const libxl__json_object *command_obj;
++    const libxl__json_object *err_obj;
++    char *command_name;
++    int ret = 0;
 +
-+    if (access(SYSFS_PCIBACK_DRIVER, F_OK) < 0) {
-+        if (errno == ENOENT) {
-+            LOG(ERROR, "Looks like pciback driver is not loaded");
-+        } else {
-+            LOGE(ERROR, "Can't access "SYSFS_PCIBACK_DRIVER);
-+        }
-+        return -1;
-+    }
++    *result = NULL;
 +
-+    spath = GCSPRINTF(SYSFS_PCIBACK_DRIVER"/"PCI_BDF,
-+		      domain, bus, dev, func);
-+    rc = lstat(spath, &st);
-+
-+    if (rc == 0)
-+        return 1;
-+    if (rc < 0 && errno == ENOENT)
++    command_obj = libxl__json_map_get(PCID_MSG_FIELD_RESP, response, JSON_STRING);
++    if (!command_obj) {
++        /* This is an unsupported or bad response. */
 +        return 0;
-+    LOGE(ERROR, "Accessing %s", spath);
-+    return -1;
-+}
++    }
 +
-+#define PCID_INFO_PATH		"pcid"
-+#define PCID_BDF_XSPATH         "%04x-%02x-%02x-%01x"
++    err_obj = libxl__json_map_get(PCID_MSG_FIELD_ERR, response, JSON_STRING);
++    if (!err_obj) {
++        /* Bad packet without error code field. */
++        return 0;
++    }
 +
-+static char *pcid_info_xs_path(libxl__gc *gc, unsigned int domain,
-+			       unsigned int bus, unsigned int dev,
-+			       unsigned int func, const char *node)
-+{
-+    return node ?
-+        GCSPRINTF(PCID_INFO_PATH"/"PCID_BDF_XSPATH"/%s",
-+                  domain, bus, dev, func, node) :
-+        GCSPRINTF(PCID_INFO_PATH"/"PCID_BDF_XSPATH,
-+                  domain, bus, dev, func);
-+}
++    if (strcmp(err_obj->u.string, PCID_MSG_ERR_OK) != 0) {
++        const libxl__json_object *err_desc_obj;
 +
-+
-+static int pcid_info_xs_write(libxl__gc *gc, unsigned int domain,
-+			       unsigned int bus, unsigned int dev,
-+			       unsigned int func, const char *node,
-+			      const char *val)
-+{
-+    char *path = pcid_info_xs_path(gc, domain, bus, dev, func, node);
-+    int rc = libxl__xs_printf(gc, XBT_NULL, path, "%s", val);
-+
-+    if (rc) LOGE(WARN, "Write of %s to node %s failed.", val, path);
-+
-+    return rc;
-+}
-+
-+static char *pcid_info_xs_read(libxl__gc *gc, unsigned int domain,
-+			       unsigned int bus, unsigned int dev,
-+			       unsigned int func, const char *node)
-+{
-+    char *path = pcid_info_xs_path(gc, domain, bus, dev, func, node);
-+
-+    return libxl__xs_read(gc, XBT_NULL, path);
-+}
-+
-+static void pcid_info_xs_remove(libxl__gc *gc, unsigned int domain,
-+			       unsigned int bus, unsigned int dev,
-+			       unsigned int func, const char *node)
-+{
-+    char *path = pcid_info_xs_path(gc, domain, bus, dev, func, node);
-+    libxl_ctx *ctx = libxl__gc_owner(gc);
-+
-+    /* Remove the xenstore entry */
-+    xs_rm(ctx->xsh, XBT_NULL, path);
-+}
-+
-+
-+/* Write the standard BDF into the sysfs path given by sysfs_path. */
-+static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
-+			   unsigned int domain, unsigned int bus,
-+			   unsigned int dev, unsigned int func)
-+{
-+    int rc, fd;
-+    char *buf;
-+
-+    fd = open(sysfs_path, O_WRONLY);
-+    if (fd < 0) {
-+        LOGE(ERROR, "Couldn't open %s", sysfs_path);
++        /* The response may contain an optional error string. */
++        err_desc_obj = libxl__json_map_get(PCID_MSG_FIELD_ERR_DESC,
++                                           response, JSON_STRING);
++        if (err_desc_obj)
++            LOG(ERROR, "%s", err_desc_obj->u.string);
++        else
++            LOG(ERROR, "%s", err_obj->u.string);
 +        return ERROR_FAIL;
 +    }
 +
-+    buf = GCSPRINTF(PCI_BDF, domain, bus, dev, func);
-+    rc = write(fd, buf, strlen(buf));
-+    /* Annoying to have two if's, but we need the errno */
-+    if (rc < 0)
-+        LOGE(ERROR, "write to %s returned %d", sysfs_path, rc);
-+    close(fd);
++    command_name = command_obj->u.string;
++    LOG(DEBUG, "command: %s", command_name);
 +
-+    if (rc < 0)
-+        return ERROR_FAIL;
-+
-+    return 0;
++    return ret;
 +}
 +
++#define CONVERT_YAJL_GEN_TO_STATUS(gen) \
++    ((gen) == yajl_gen_status_ok ? yajl_status_ok : yajl_status_error)
 +
-+/* Unbind device from its current driver, if any.  If driver_path is non-NULL,
-+ * store the path to the original driver in it. */
-+static int sysfs_dev_unbind(libxl__gc *gc, unsigned int domain,
-+			    unsigned int bus, unsigned int dev,
-+			    unsigned int func,
-+                            char **driver_path)
++static char *pci_prepare_request(libxl__gc *gc, yajl_gen gen, char *cmd,
++                             libxl__json_object *args)
 +{
-+    char * spath, *dp = NULL;
-+    struct stat st;
++    const unsigned char *buf;
++    libxl_yajl_length len;
++    yajl_gen_status sts;
++    yajl_status ret;
++    char *request = NULL;
++    int rc;
 +
-+    spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/driver",
-+                           domain, bus, dev, func);
-+    if (!lstat(spath, &st)) {
-+        /* Find the canonical path to the driver. */
-+        dp = libxl__zalloc(gc, PATH_MAX);
-+        dp = realpath(spath, dp);
-+        if ( !dp ) {
-+            LOGE(ERROR, "realpath() failed");
-+            return -1;
-+        }
++    ret = CONVERT_YAJL_GEN_TO_STATUS(yajl_gen_map_open(gen));
++    if (ret != yajl_status_ok)
++        return NULL;
 +
-+        LOG(DEBUG, "Driver re-plug path: %s", dp);
++    rc = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_CMD, cmd);
++    if (rc)
++        return NULL;
 +
-+        /* Unbind from the old driver */
-+        spath = GCSPRINTF("%s/unbind", dp);
-+        if (sysfs_write_bdf(gc, spath, domain, bus, dev, func) < 0) {
-+            LOGE(ERROR, "Couldn't unbind device");
-+            return -1;
++    if (args) {
++        int idx = 0;
++        libxl__json_map_node *node = NULL;
++
++        assert(args->type == JSON_MAP);
++        for (idx = 0; idx < args->u.map->count; idx++) {
++            if (flexarray_get(args->u.map, idx, (void**)&node) != 0)
++                break;
++
++            ret = CONVERT_YAJL_GEN_TO_STATUS(libxl__yajl_gen_asciiz(gen, node->map_key));
++            if (ret != yajl_status_ok)
++                return NULL;
++            ret = libxl__json_object_to_yajl_gen(gc, gen, node->obj);
++            if (ret != yajl_status_ok)
++                return NULL;
 +        }
 +    }
++    ret = CONVERT_YAJL_GEN_TO_STATUS(yajl_gen_map_close(gen));
++    if (ret != yajl_status_ok)
++        return NULL;
 +
-+    if (driver_path)
-+        *driver_path = dp;
++    sts = yajl_gen_get_buf(gen, &buf, &len);
++    if (sts != yajl_gen_status_ok)
++        return NULL;
 +
-+    return 0;
++    request = libxl__sprintf(gc, "%s", buf);
++
++    vchan_dump_gen(gc, gen);
++
++    return request;
 +}
 +
++struct vchan_info *pci_vchan_get_client(libxl__gc *gc);
++struct vchan_info *pci_vchan_get_client(libxl__gc *gc)
++{
++    struct vchan_info *vchan;
++
++    vchan = libxl__zalloc(gc, sizeof(*vchan));
++    if (!vchan)
++        goto out;
++    vchan->state = vchan_new_client(gc, PCID_SRV_NAME);
++    if (!(vchan->state)) {
++        vchan = NULL;
++        goto out;
++    }
++
++    vchan->handle_response = pci_handle_response;
++    vchan->prepare_request = pci_prepare_request;
++    vchan->receive_buf_size = PCI_RECEIVE_BUFFER_SIZE;
++    vchan->max_buf_size = PCI_MAX_SIZE_RX_BUF;
++
++out:
++    return vchan;
++}
++
++void pci_vchan_free(libxl__gc *gc, struct vchan_info *vchan);
++void pci_vchan_free(libxl__gc *gc, struct vchan_info *vchan)
++{
++    vchan_fini_one(gc, vchan->state);
++}
++
+ static unsigned int pci_encode_bdf(libxl_device_pci *pci)
+ {
+     unsigned int value;
+diff --git a/tools/libs/light/libxl_pcid.c b/tools/libs/light/libxl_pcid.c
+new file mode 100644
+index 0000000000..2ce8f1504d
+--- /dev/null
++++ b/tools/libs/light/libxl_pcid.c
+@@ -0,0 +1,428 @@
 +/*
-+ * A brief comment about slots.  I don't know what slots are for; however,
-+ * I have by experimentation determined:
-+ * - Before a device can be bound to pciback, its BDF must first be listed
-+ *   in pciback/slots
-+ * - The way to get the BDF listed there is to write BDF to
-+ *   pciback/new_slot
-+ * - Writing the same BDF to pciback/new_slot is not idempotent; it results
-+ *   in two entries of the BDF in pciback/slots
-+ * It's not clear whether having two entries in pciback/slots is a problem
-+ * or not.  Just to be safe, this code does the conservative thing, and
-+ * first checks to see if there is a slot, adding one only if one does not
-+ * already exist.
++    Utils for xl pcid daemon
++
++    Copyright (C) 2021 EPAM Systems Inc.
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Lesser General Public
++    License as published by the Free Software Foundation; either
++    version 2.1 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Lesser General Public License for more details.
++
++    You should have received a copy of the GNU Lesser General Public
++    License along with this library; If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+/* Scan through /sys/.../pciback/slots looking for pci's BDF */
-+static int pciback_dev_has_slot(libxl__gc *gc, unsigned int domain,
-+			      unsigned int bus, unsigned int dev,
-+			      unsigned int func)
++#define _GNU_SOURCE  // required for strchrnul()
++
++#include "libxl_osdeps.h" /* must come before any other headers */
++
++#include "libxl_internal.h"
++#include "libxl_vchan.h"
++
++#include <libxl_utils.h>
++#include <libxlutil.h>
++
++#include <xenstore.h>
++
++#include <libxl.h>
++#include <libxl_json.h>
++#include <dirent.h>
++
++#include <pthread.h>
++#include <xen-pcid.h>
++
++#define DOM0_ID 0
++
++struct vchan_client {
++    XEN_LIST_ENTRY(struct vchan_client) list;
++
++    /* This is the watch entry fired for this client. */
++    char **watch_ret;
++    /* Length of the watch_ret[XS_WATCH_PATH]. */
++    size_t watch_len;
++
++    struct vchan_info info;
++
++    /*
++     * This context is used by the processing loop to create its own gc
++     * and use it while processing commands, so we do not get OOM.
++     */
++    libxl_ctx *ctx;
++    /* This gc holds all allocations made for the client needs itself. */
++    libxl__gc gc[1];
++    pthread_t run_thread;
++};
++
++static XEN_LIST_HEAD(clients_list, struct vchan_client) vchan_clients;
++
++static pthread_mutex_t vchan_client_mutex;
++
++static int make_error_reply(libxl__gc *gc, yajl_gen gen, char *desc,
++                            char *command_name)
 +{
-+    FILE *f;
-+    int rc = 0;
-+    unsigned s_domain, s_bus, s_dev, s_func;
++    int rc;
 +
-+    f = fopen(SYSFS_PCIBACK_DRIVER"/slots", "r");
++    rc = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_RESP,
++                                       command_name);
++    if (rc)
++        return rc;
 +
-+    if (f == NULL) {
-+        LOGE(ERROR, "Couldn't open %s", SYSFS_PCIBACK_DRIVER"/slots");
-+        return ERROR_FAIL;
++    rc = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_ERR,
++                                       PCID_MSG_ERR_FAILED);
++    if (rc)
++        return rc;
++
++    rc = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_ERR_DESC, desc);
++    if (rc)
++        return rc;
++
++    return 0;
++}
++
++static int pcid_handle_request(libxl__gc *gc, yajl_gen gen,
++                               const libxl__json_object *request)
++{
++    const libxl__json_object *command_obj;
++    libxl__json_object *command_response = NULL;
++    char *command_name;
++    int ret = 0;
++
++    yajl_gen_map_open(gen);
++
++    command_obj = libxl__json_map_get(PCID_MSG_FIELD_CMD, request, JSON_STRING);
++    if (!command_obj) {
++        /* This is an unsupported or bad request. */
++        ret = make_error_reply(gc, gen, "Unsupported request or bad packet",
++                               PCID_MSG_ERR_NA);
++        goto out;
 +    }
 +
-+    while (fscanf(f, "%x:%x:%x.%d\n",
-+		  &s_domain, &s_bus, &s_dev, &s_func) == 4) {
-+        if (s_domain == domain &&
-+            s_bus == bus &&
-+            s_dev == dev &&
-+            s_func == func) {
-+            rc = 1;
-+            goto out;
-+        }
++    command_name = command_obj->u.string;
++
++    /*
++     * This is an unsupported command: make a reply and proceed over
++     * the error path.
++     */
++    ret = make_error_reply(gc, gen, "Unsupported command",
++                           command_name);
++    if (!ret)
++        ret = ERROR_NOTFOUND;
++
++    if (ret) {
++        /*
++         * The command handler on error must provide a valid response,
++         * so we don't need to add any other field below.
++         */
++        ret = 0;
++        goto out;
 +    }
++
++    if (command_response) {
++	ret = libxl__json_object_to_yajl_gen(gc, gen, command_response);
++	if (ret)
++	    goto out;
++    }
++
++    ret = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_RESP,
++                                        command_name);
++    if (ret)
++        goto out;
++
++    ret = libxl__vchan_field_add_string(gc, gen, PCID_MSG_FIELD_ERR,
++                                        PCID_MSG_ERR_OK);
 +out:
-+    fclose(f);
-+    return rc;
++    yajl_gen_map_close(gen);
++
++    vchan_dump_gen(gc, gen);
++
++    return ret;
 +}
 +
-+static int pciback_dev_assign(libxl__gc *gc, unsigned int domain,
-+			      unsigned int bus, unsigned int dev,
-+			      unsigned int func)
++static char *pcid_prepare_response(libxl__gc *gc, yajl_gen gen)
 +{
-+    int rc;
++    const unsigned char *buf;
++    libxl_yajl_length len;
++    yajl_gen_status sts;
++    char *reply = NULL;
 +
-+    if ( (rc = pciback_dev_has_slot(gc, domain, bus, dev, func)) < 0 ) {
-+        LOGE(ERROR, "Error checking for pciback slot");
-+        return ERROR_FAIL;
-+    } else if (rc == 0) {
-+        if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/new_slot",
-+                             domain, bus, dev, func) < 0 ) {
-+            LOGE(ERROR, "Couldn't bind device to pciback!");
-+            return ERROR_FAIL;
-+        }
-+    }
++    sts = yajl_gen_get_buf(gen, &buf, &len);
++    if (sts != yajl_gen_status_ok)
++        goto out;
 +
-+    if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/bind",
-+			 domain, bus, dev, func) < 0 ) {
-+        LOGE(ERROR, "Couldn't bind device to pciback!");
-+        return ERROR_FAIL;
-+    }
-+    return 0;
++    reply = libxl__sprintf(gc, "%s", buf);
++
++    vchan_dump_gen(gc, gen);
++
++out:
++    return reply;
 +}
 +
-+static int process_make_assignable(libxl__gc *gc, yajl_gen gen,
-+                                   char *command_name,
-+                                   const struct libxl__json_object *request,
-+                                   struct libxl__json_object **response)
++static void server_fini_one(libxl__gc *gc, struct vchan_client *client)
 +{
-+    struct stat st;
-+    const struct libxl__json_object *json_o;
-+    unsigned int dom, bus, dev, func;
-+    int rc;
-+    bool rebind;
-+    char *spath, *driver_path = NULL;
++    pthread_mutex_lock(&vchan_client_mutex);
++    XEN_LIST_REMOVE(client, list);
++    pthread_mutex_unlock(&vchan_client_mutex);
 +
-+    json_o = libxl__json_map_get(PCID_MSG_FIELD_SBDF, request, JSON_STRING);
-+    if (!json_o) {
-+        make_error_reply(gc, gen, "No mandatory parameter 'sbdf'", command_name);
-+        return ERROR_FAIL;
-+    }
-+
-+    if (sscanf(libxl__json_object_get_string(json_o), PCID_SBDF_FMT,
-+	       &dom, &bus, &dev, &func) != 4) {
-+        make_error_reply(gc, gen, "Can't parse SBDF", command_name);
-+        return ERROR_FAIL;
-+    }
-+
-+    json_o = libxl__json_map_get(PCID_MSG_FIELD_REBIND, request, JSON_BOOL);
-+    if (!json_o) {
-+        make_error_reply(gc, gen, "No mandatory parameter 'rebind'", command_name);
-+        return ERROR_FAIL;
-+    }
-+
-+    rebind = libxl__json_object_get_bool(json_o);
-+
-+    /* See if the device exists */
-+    spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF, dom, bus, dev, func);
-+    if ( lstat(spath, &st) ) {
-+        make_error_reply(gc, gen, strerror(errno), command_name);
-+        LOGE(ERROR, "Couldn't lstat %s", spath);
-+        return ERROR_FAIL;
-+    }
-+
-+    /* Check to see if it's already assigned to pciback */
-+    rc = pciback_dev_is_assigned(gc, dom, bus, dev, func);
-+    if (rc < 0) {
-+        make_error_reply(gc, gen, "Can't check if device is assigned",
-+			 command_name);
-+        return ERROR_FAIL;
-+    }
-+    if (rc) {
-+        LOG(WARN, PCI_BDF" already assigned to pciback", dom, bus, dev, func);
-+        goto done;
-+    }
-+
-+    /* Check to see if there's already a driver that we need to unbind from */
-+    if (sysfs_dev_unbind(gc, dom, bus, dev, func, &driver_path)) {
-+        LOG(ERROR, "Couldn't unbind "PCI_BDF" from driver",
-+            dom, bus, dev, func);
-+        return ERROR_FAIL;
-+    }
-+
-+    /* Store driver_path for rebinding back */
-+    if (rebind) {
-+        if (driver_path) {
-+            pcid_info_xs_write(gc, dom, bus, dev, func, "driver_path",
-+			       driver_path);
-+        } else if ( (driver_path =
-+                     pcid_info_xs_read(gc, dom, bus, dev, func,
-+				       "driver_path")) != NULL ) {
-+            LOG(INFO, PCI_BDF" not bound to a driver, will be rebound to %s",
-+                dom, bus, dev, func, driver_path);
-+        } else {
-+            LOG(WARN, PCI_BDF" not bound to a driver, will not be rebound.",
-+                dom, bus, dev, func);
-+        }
-+    } else {
-+        pcid_info_xs_remove(gc, dom, bus, dev, func, "driver_path");
-+    }
-+
-+    if (pciback_dev_assign(gc, dom, bus, dev, func)) {
-+        LOG(ERROR, "Couldn't bind device to pciback!");
-+        return ERROR_FAIL;
-+    }
-+
-+done:
-+    return 0;
++    GC_FREE;
++    free(client->watch_ret);
++    free(client);
 +}
 +
-+static int pciback_dev_unassign(libxl__gc *gc, unsigned int domain,
-+			      unsigned int bus, unsigned int dev,
-+			      unsigned int func)
++static bool is_vchan_exist(libxl_ctx *ctx, char *watch_dir)
 +{
-+    /* Remove from pciback */
-+    if ( sysfs_dev_unbind(gc, domain, bus, dev, func, NULL) < 0 ) {
-+        LOG(ERROR, "Couldn't unbind device!");
-+        return ERROR_FAIL;
-+    }
++    char **dir = NULL;
++    unsigned int nb;
++    bool ret = false;
 +
-+    /* Remove slot if necessary */
-+    if ( pciback_dev_has_slot(gc, domain, bus, dev, func) > 0 ) {
-+        if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/remove_slot",
-+                             domain, bus, dev, func) < 0 ) {
-+            LOGE(ERROR, "Couldn't remove pciback slot");
-+            return ERROR_FAIL;
-+        }
++    dir = xs_directory(ctx->xsh, XBT_NULL, watch_dir, &nb);
++    if (dir) {
++        free(dir);
++        ret = true;
 +    }
-+    return 0;
++    return ret;
 +}
 +
-+static int process_revert_assignable(libxl__gc *gc, yajl_gen gen,
-+                                   char *command_name,
-+                                   const struct libxl__json_object *request,
-+                                   struct libxl__json_object **response)
++static void *client_thread(void *arg)
 +{
-+    const struct libxl__json_object *json_o;
-+    unsigned int dom, bus, dev, func;
-+    int rc;
-+    bool rebind;
-+    char *driver_path = NULL;
++    struct vchan_client *client = arg;
 +
-+    json_o = libxl__json_map_get(PCID_MSG_FIELD_SBDF, request, JSON_STRING);
-+    if (!json_o) {
-+        make_error_reply(gc, gen, "No mandatory parameter 'sbdf'", command_name);
-+        return ERROR_FAIL;
++    while (true) {
++        int ret;
++        /*
++         * libvchan uses garbage collector for processing requests,
++         * so we create a new one each time we process a packet and
++         * dispose it right away to prevent OOM.
++         */
++        GC_INIT(client->ctx);
++        ret = vchan_process_command(gc, &client->info);
++        GC_FREE;
++
++        if ((ret == ERROR_NOTFOUND) || (ret == ERROR_INVAL))
++            continue;
++        if (ret < 0)
++            break;
++    }
++    vchan_fini_one(client->gc, client->info.state);
++    server_fini_one(client->gc, client);
++    return NULL;
++}
++
++#define DEFAULT_THREAD_STACKSIZE (24 * 1024)
++/* NetBSD doesn't have PTHREAD_STACK_MIN. */
++#ifndef PTHREAD_STACK_MIN
++#define PTHREAD_STACK_MIN 0
++#endif
++
++#define READ_THREAD_STACKSIZE                           \
++    ((DEFAULT_THREAD_STACKSIZE < PTHREAD_STACK_MIN) ?   \
++    PTHREAD_STACK_MIN : DEFAULT_THREAD_STACKSIZE)
++
++static bool init_client_thread(libxl__gc *gc, struct vchan_client *new_client)
++{
++
++    sigset_t set, old_set;
++    pthread_attr_t attr;
++    static size_t stack_size;
++#ifdef USE_DLSYM
++    size_t (*getsz)(pthread_attr_t *attr);
++#endif
++
++    if (pthread_attr_init(&attr) != 0)
++        return false;
++    if (!stack_size) {
++#ifdef USE_DLSYM
++        getsz = dlsym(RTLD_DEFAULT, "__pthread_get_minstack");
++        if (getsz)
++            stack_size = getsz(&attr);
++#endif
++        if (stack_size < READ_THREAD_STACKSIZE)
++            stack_size = READ_THREAD_STACKSIZE;
++    }
++    if (pthread_attr_setstacksize(&attr, stack_size) != 0) {
++        pthread_attr_destroy(&attr);
++        return false;
 +    }
 +
-+    if (sscanf(libxl__json_object_get_string(json_o), PCID_SBDF_FMT,
-+	       &dom, &bus, &dev, &func) != 4) {
-+        make_error_reply(gc, gen, "Can't parse SBDF", command_name);
-+        return ERROR_FAIL;
++    sigfillset(&set);
++    pthread_sigmask(SIG_SETMASK, &set, &old_set);
++
++    if (pthread_create(&new_client->run_thread, &attr, client_thread,
++                       new_client) != 0) {
++        pthread_sigmask(SIG_SETMASK, &old_set, NULL);
++        pthread_attr_destroy(&attr);
++        return false;
++    }
++    pthread_sigmask(SIG_SETMASK, &old_set, NULL);
++    pthread_attr_destroy(&attr);
++
++    return true;
++}
++
++static void init_new_client(libxl_ctx *ctx, libxl__gc *gc,
++                            struct clients_list *list, char **watch_ret)
++{
++    struct vchan_client *new_client;
++    char *xs_path = watch_ret[XS_WATCH_PATH];
++
++    LOG(DEBUG, "New client at \"%s\"", xs_path);
++
++    new_client = malloc(sizeof(*new_client));
++    if (!new_client) {
++        LOGE(ERROR, "Failed to allocate new client at \"%s\"", xs_path);
++        return;
 +    }
 +
-+    json_o = libxl__json_map_get(PCID_MSG_FIELD_REBIND, request, JSON_BOOL);
-+    if (!json_o) {
-+        make_error_reply(gc, gen, "No mandatory parameter 'rebind'", command_name);
-+        return ERROR_FAIL;
++    memset(new_client, 0, sizeof(*new_client));
++
++    new_client->watch_ret = watch_ret;
++    new_client->watch_len = strlen(xs_path);
++    new_client->ctx = ctx;
++    /*
++     * Remember the GC of this client, so we can dispose its memory.
++     * Use it from now on.
++     */
++    LIBXL_INIT_GC(new_client->gc[0], ctx);
++
++    new_client->info.state = vchan_init_new_state(new_client->gc, DOM0_ID,
++                                                  xs_path, true);
++    if (!(new_client->info.state)) {
++        LOGE(ERROR, "Failed to add new client at \"%s\"", xs_path);
++        server_fini_one(new_client->gc, new_client);
++        return;
 +    }
 +
-+    rebind = libxl__json_object_get_bool(json_o);
++    new_client->info.handle_request = pcid_handle_request;
++    new_client->info.prepare_response = pcid_prepare_response;
++    new_client->info.receive_buf_size = PCI_RECEIVE_BUFFER_SIZE;
++    new_client->info.max_buf_size = PCI_MAX_SIZE_RX_BUF;
 +
-+    /* Unbind from pciback */
-+    if ( (rc = pciback_dev_is_assigned(gc, dom, bus, dev, func)) < 0 ) {
-+        make_error_reply(gc, gen, "Can't unbind from pciback", command_name);
-+        return ERROR_FAIL;
-+    } else if ( rc ) {
-+        pciback_dev_unassign(gc, dom, bus, dev, func);
-+    } else {
-+        LOG(WARN, "Not bound to pciback");
++    if (!init_client_thread(new_client->gc, new_client)) {
++        LOGE(ERROR, "Failed to create client's thread for \"%s\"", xs_path);
++        server_fini_one(new_client->gc, new_client);
++        return;
 +    }
 +
-+    /* Rebind if necessary */
-+    driver_path = pcid_info_xs_read(gc, dom, bus, dev, func, "driver_path");
++    pthread_mutex_lock(&vchan_client_mutex);
++    XEN_LIST_INSERT_HEAD(&vchan_clients, new_client, list);
++    pthread_mutex_unlock(&vchan_client_mutex);
++}
 +
-+    if ( driver_path ) {
-+        if ( rebind ) {
-+            LOG(INFO, "Rebinding to driver at %s", driver_path);
++static void terminate_clients(void)
++{
++    struct vchan_client *client;
 +
-+            if ( sysfs_write_bdf(gc,
-+                                 GCSPRINTF("%s/bind", driver_path),
-+                                 dom, bus, dev, func) < 0 ) {
-+                LOGE(ERROR, "Couldn't bind device to %s", driver_path);
-+                return -1;
++    pthread_mutex_lock(&vchan_client_mutex);
++    XEN_LIST_FOREACH(client, &vchan_clients, list) {
++        pthread_join(client->run_thread, NULL);
++    }
++    pthread_mutex_unlock(&vchan_client_mutex);
++}
++
++int libxl_pcid_process(libxl_ctx *ctx)
++{
++    GC_INIT(ctx);
++    char *xs_path, *str;
++    char **watch_ret;
++    unsigned int watch_num;
++    libxl_domid domid;
++    int ret;
++
++    pthread_mutex_init(&vchan_client_mutex, NULL);
++
++    str = xs_read(ctx->xsh, 0, "domid", NULL);
++    if (!str) {
++        LOGE(ERROR, "Can't read own domid\n");
++        ret = -ENOENT;
++        goto out;
++    }
++
++    ret = sscanf(str, "%d", &domid);
++    free(str);
++    if (ret != 1)
++    {
++        LOGE(ERROR, "Own domid is not an integer\n");
++        ret = -EINVAL;
++        goto out;
++    }
++
++    xs_path = vchan_get_server_xs_path(gc, domid, PCID_SRV_NAME);
++
++    /* Recreate the base folder: remove all leftovers. */
++    ret = libxl__xs_rm_checked(gc, XBT_NULL, xs_path);
++    if (ret)
++        goto out;
++
++    if (!xs_mkdir(CTX->xsh, XBT_NULL, xs_path))
++    {
++        LOGE(ERROR, "xenstore mkdir failed: `%s'", xs_path);
++        ret = ERROR_FAIL;
++        goto out;
++    }
++
++    /* Wait for vchan client to create a new UUID under the server's folder. */
++    if (!xs_watch(CTX->xsh, xs_path, PCID_XS_TOKEN)) {
++        LOGE(ERROR, "xs_watch (%s) failed", xs_path);
++        ret = ERROR_FAIL;
++        goto out;
++    }
++
++    while ((watch_ret = xs_read_watch(CTX->xsh, &watch_num))) {
++        struct vchan_client *client;
++        size_t len;
++        bool found;
++
++        /*
++         * Any change under the base directory will fire an event, so we need
++         * to filter if this is indeed a new client or it is because vchan
++         * server creates nodes under its UUID.
++         *
++         * Never try to instantiate a vchan server right under xs_path.
++         */
++        if (!strcmp(watch_ret[XS_WATCH_PATH], xs_path))
++            continue;
++
++        found = false;
++        len = strlen(watch_ret[XS_WATCH_PATH]);
++
++        pthread_mutex_lock(&vchan_client_mutex);
++        XEN_LIST_FOREACH(client, &vchan_clients, list) {
++            str = client->watch_ret[XS_WATCH_PATH];
++
++            if (strstr(watch_ret[XS_WATCH_PATH], str)) {
++                /*
++                 * Base path is a substring of the current path, so it can be:
++                 *  - a new node with different name, but starting with str
++                 *  - a subnode under str, so it will have '/' after str
++                 *  - same string
++                 */
++                if (len == client->watch_len) {
++                    found = true;
++                    break;
++                }
++                if (len > client->watch_len) {
++                    if (watch_ret[XS_WATCH_PATH][client->watch_len] == '/') {
++                        found = true;
++                        break;
++                    }
++                }
 +            }
-+
-+            pcid_info_xs_remove(gc, dom, bus, dev, func, "driver_path");
 +        }
-+    } else {
-+        if ( rebind ) {
-+            LOG(WARN,
-+                "Couldn't find path for original driver; not rebinding");
++        pthread_mutex_unlock(&vchan_client_mutex);
++
++        if (!found && is_vchan_exist(ctx, watch_ret[XS_WATCH_PATH]))
++            init_new_client(ctx, gc, &vchan_clients, watch_ret);
++    }
++
++    xs_unwatch(CTX->xsh, xs_path, PCID_XS_TOKEN);
++
++out:
++    terminate_clients();
++    GC_FREE;
++    pthread_mutex_destroy(&vchan_client_mutex);
++    return ret;
++}
+diff --git a/tools/xlpcid/Makefile b/tools/xlpcid/Makefile
+new file mode 100644
+index 0000000000..238b6ef02f
+--- /dev/null
++++ b/tools/xlpcid/Makefile
+@@ -0,0 +1,52 @@
++#
++# tools/xlpcid/Makefile
++#
++
++XEN_ROOT = $(CURDIR)/../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
++	-Wno-declaration-after-statement -Wformat-nonliteral
++CFLAGS += -fPIC
++
++CFLAGS += $(PTHREAD_CFLAGS)
++LDFLAGS += $(PTHREAD_LDFLAGS)
++
++CFLAGS_XLPCID += $(CFLAGS_libxenlight)
++CFLAGS_XLPCID += $(CFLAGS_libxenutil)
++CFLAGS_XLPCID += -Wshadow
++CFLAGS_XLPCID += $(CFLAGS_libxenvchan)
++
++#XL_OBJS-$(CONFIG_X86) = xl_psr.o
++XLPCID_OBJS = xlpcid.o $(XLPCID_OBJS-y)
++
++$(XLPCID_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
++$(XLPCID_OBJS): CFLAGS += $(CFLAGS_XLPCID)
++$(XLPCID_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h # libxl_json.h needs it.
++
++.PHONY: all
++all: xlpcid
++
++xlpcid: $(XLPCID_OBJS)
++	$(CC) $(LDFLAGS) -o $@ $(XLPCID_OBJS) $(LDLIBS_libxenutil) $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxenvchan) -lyajl $(APPEND_LDFLAGS)
++
++.PHONY: install
++install: all
++	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
++	$(INSTALL_DIR) $(DESTDIR)$(BASH_COMPLETION_DIR)
++	$(INSTALL_PROG) xlpcid $(DESTDIR)$(sbindir)
++	$(INSTALL_DATA) bash-completion $(DESTDIR)$(BASH_COMPLETION_DIR)/xlpcid
++
++.PHONY: uninstall
++uninstall:
++	rm -f $(DESTDIR)$(BASH_COMPLETION_DIR)/xlpcid
++	rm -f $(DESTDIR)$(sbindir)/xlpcid
++
++.PHONY: clean
++clean:
++	$(RM) *.o xlpcid $(DEPS_RM)
++
++distclean: clean
++
++
++-include $(DEPS_INCLUDE)
+diff --git a/tools/xlpcid/bash-completion b/tools/xlpcid/bash-completion
+new file mode 100644
+index 0000000000..578ef38b9f
+--- /dev/null
++++ b/tools/xlpcid/bash-completion
+@@ -0,0 +1,20 @@
++# Copy this file to /etc/bash_completion.d/xl
++
++_xlpcid()
++{
++	local IFS=$'\n,'
++
++	local cur opts xlpcid
++	COMPREPLY=()
++	cur="${COMP_WORDS[COMP_CWORD]}"
++	xlpcid=xlpcid
++
++	if [[ $COMP_CWORD == 1 ]] ; then
++		opts=`${xlpcid} help 2>/dev/null | sed '1,4d' | awk '/^ [^ ]/ {print $1}' | sed 's/$/ ,/g'` && COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
++		return 0
++	fi
++
++	return 0
++}
++
++complete -F _xlpcid -o nospace -o default xlpcid
+diff --git a/tools/xlpcid/xlpcid.c b/tools/xlpcid/xlpcid.c
+new file mode 100644
+index 0000000000..cb5804341d
+--- /dev/null
++++ b/tools/xlpcid/xlpcid.c
+@@ -0,0 +1,213 @@
++/*
++    Pcid daemon that acts as a server for the client in the libxl PCI
++
++    Copyright (C) 2021 EPAM Systems Inc.
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Lesser General Public
++    License as published by the Free Software Foundation; either
++    version 2.1 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Lesser General Public License for more details.
++
++    You should have received a copy of the GNU Lesser General Public
++    License along with this library; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define _GNU_SOURCE  // required for strchrnul()
++
++#include <libxl_utils.h>
++#include <libxlutil.h>
++
++#include <stdlib.h>
++#include <stdio.h>
++#include <string.h>
++#include <unistd.h>
++#include <getopt.h>
++#include <fcntl.h>
++#include <errno.h>
++
++#include <xen-pcid.h>
++#include <xenstore.h>
++#include <assert.h>
++
++libxl_ctx *ctx;
++xentoollog_logger_stdiostream *logger;
++libxl_bitmap global_vm_affinity_mask;
++libxl_bitmap global_hvm_affinity_mask;
++libxl_bitmap global_pv_affinity_mask;
++char *lockfile;
++int logfile;
++
++static void help(void)
++{
++    fprintf(stderr, "Usage xlpcid [-ftTvp]\n")
++    fprintf(stderr, " --foreground         -  run in foreground mode\n");
++    fprintf(stderr, " --pidfile <pidfile>  -  specify pid file\n");
++    fprintf(stderr, " -t                   -  Always use carriage-return-based overwriting\n");
++    fprintf(stderr, "                         for displaying progress messages without scrolling\n");
++    fprintf(stderr, "                         the screen. Without -t, this is done only if stderr is a tty.\n");
++    fprintf(stderr, " -T                   -  Include timestamps and pid of the xl process in output.\n");
++    fprintf(stderr, " -v                   -  Verbose\n");
++}
++
++static void xlpcid_ctx_alloc(void)
++{
++    if (libxl_ctx_alloc(&ctx, LIBXL_VERSION, 0, (xentoollog_logger*)logger)) {
++        fprintf(stderr, "cannot init xl context\n");
++        exit(1);
++    }
++
++    libxl_bitmap_init(&global_vm_affinity_mask);
++    libxl_bitmap_init(&global_hvm_affinity_mask);
++    libxl_bitmap_init(&global_pv_affinity_mask);
++}
++
++static void xlpcid_ctx_free(void)
++{
++    libxl_bitmap_dispose(&global_pv_affinity_mask);
++    libxl_bitmap_dispose(&global_hvm_affinity_mask);
++    libxl_bitmap_dispose(&global_vm_affinity_mask);
++    if (ctx) {
++        libxl_ctx_free(ctx);
++        ctx = NULL;
++    }
++    if (logger) {
++        xtl_logger_destroy((xentoollog_logger*)logger);
++        logger = NULL;
++    }
++    if (lockfile) {
++        free(lockfile);
++        lockfile = NULL;
++    }
++}
++
++static int do_daemonize(const char *name, const char *pidfile)
++{
++    char *fullname;
++    int nullfd, ret = 0;
++
++    ret = libxl_create_logfile(ctx, name, &fullname);
++    if (ret) {
++        fprintf(stderr, "Failed to open logfile %s: %s", fullname, strerror(errno));
++        exit(-1);
++    }
++
++    logfile = open(fullname, O_WRONLY|O_CREAT|O_APPEND, 0644);
++    free(fullname);
++    assert(logfile >= 3);
++
++    nullfd = open("/dev/null", O_RDONLY);
++    assert(nullfd >= 3);
++
++    dup2(nullfd, 0);
++    dup2(logfile, 1);
++    dup2(logfile, 2);
++
++    close(nullfd);
++
++    if (daemon(0, 1)) {
++        perror("daemon");
++        close(logfile);
++        return 1;
++    }
++
++    if (pidfile) {
++        int fd = open(pidfile, O_RDWR | O_CREAT, S_IRUSR|S_IWUSR);
++        char *pid = NULL;
++
++        if (fd == -1) {
++            perror("Unable to open pidfile");
++            exit(1);
++        }
++
++        if (asprintf(&pid, "%ld\n", (long)getpid()) == -1) {
++            perror("Formatting pid");
++            exit(1);
++        }
++
++        if (write(fd, pid, strlen(pid)) < 0) {
++            perror("Writing pid");
++            exit(1);
++        }
++
++        if (close(fd) < 0) {
++            perror("Closing pidfile");
++            exit(1);
++        }
++
++        free(pid);
++    }
++
++    return ret;
++}
++
++int main(int argc, char *argv[])
++{
++    int opt = 0, daemonize = 1, ret = 0;
++    const char *pidfile = NULL;
++    unsigned int xtl_flags = 0;
++    bool progress_use_cr = 0;
++    bool timestamps = 0;
++    xentoollog_level minmsglevel = XTL_PROGRESS;
++    static const struct option opts[] = {
++        {"pidfile", 1, 0, 'p'},
++        {"foreground", 0, 0, 'f'},
++        {"help", 0, 0, 'h'},
++        {0, 0, 0, 0}
++    };
++
++    while ((opt = getopt_long(argc, argv, "hftTvp:", opts, NULL)) != -1)
++        switch (opt) {
++        case 'f':
++            daemonize = 0;
++            break;
++        case 'p':
++            pidfile = optarg;
++            break;
++        case 't':
++            timestamps = 1;
++            break;
++        case 'T':
++            progress_use_cr = 1;
++            break;
++        case 'v':
++            if (minmsglevel > 0)
++                minmsglevel--;
++            break;
++        case 'h':
++            help();
++            exit(1);
++            break;
++        default:
++            fprintf(stderr, "Unknown option '%c'\n", opt);
++            break;
++        }
++
++    if (progress_use_cr)
++        xtl_flags |= XTL_STDIOSTREAM_PROGRESS_USE_CR;
++    if (timestamps)
++        xtl_flags |= XTL_STDIOSTREAM_SHOW_DATE | XTL_STDIOSTREAM_SHOW_PID;
++    logger = xtl_createlogger_stdiostream(stderr, minmsglevel, xtl_flags);
++    if (!logger)
++        exit(EXIT_FAILURE);
++
++    xlpcid_ctx_alloc();
++
++    if (daemonize) {
++        ret = do_daemonize("xlpcid", pidfile);
++        if (ret) {
++            ret = (ret == 1) ? 0 : ret;
++            goto out_daemon;
 +        }
 +    }
 +
-+    return 0;
-+}
++    libxl_pcid_process(ctx);
 +
- static int pcid_handle_request(libxl__gc *gc, yajl_gen gen,
-                                const libxl__json_object *request)
- {
-@@ -142,6 +532,12 @@ static int pcid_handle_request(libxl__gc *gc, yajl_gen gen,
-     if (strcmp(command_name, PCID_CMD_LIST_ASSIGNABLE) == 0)
-        ret = process_list_assignable(gc, gen, command_name,
-                                      request, &command_response);
-+    else if (strcmp(command_name, PCID_CMD_MAKE_ASSIGNABLE) == 0)
-+       ret = process_make_assignable(gc, gen, command_name,
-+                                     request, &command_response);
-+    else if (strcmp(command_name, PCID_CMD_REVERT_ASSIGNABLE) == 0)
-+       ret = process_revert_assignable(gc, gen, command_name,
-+                                     request, &command_response);
-     else {
-         /*
-          * This is an unsupported command: make a reply and proceed over
++out_daemon:
++    xlpcid_ctx_free();
++    exit(ret);
++}
 -- 
 2.34.1
 
