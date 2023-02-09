@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B31C61DA4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78AD6C05027
 	for <xen-devel@archiver.kernel.org>; Thu,  9 Feb 2023 23:00:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.492967.762776 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.492965.762749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pQFu5-0003e7-UL; Thu, 09 Feb 2023 23:00:33 +0000
+	id 1pQFu2-0002vP-Lt; Thu, 09 Feb 2023 23:00:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 492967.762776; Thu, 09 Feb 2023 23:00:33 +0000
+Received: by outflank-mailman (output) from mailman id 492965.762749; Thu, 09 Feb 2023 23:00:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pQFu5-0003dp-Qz; Thu, 09 Feb 2023 23:00:33 +0000
-Received: by outflank-mailman (input) for mailman id 492967;
- Thu, 09 Feb 2023 23:00:32 +0000
+	id 1pQFu2-0002vF-HS; Thu, 09 Feb 2023 23:00:30 +0000
+Received: by outflank-mailman (input) for mailman id 492965;
+ Thu, 09 Feb 2023 23:00:28 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pQFu4-0003Z9-BM
- for xen-devel@lists.xenproject.org; Thu, 09 Feb 2023 23:00:32 +0000
+ (envelope-from <julien@xen.org>) id 1pQFu0-0002rg-Ti
+ for xen-devel@lists.xenproject.org; Thu, 09 Feb 2023 23:00:28 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1pQFu2-0002zT-EM; Thu, 09 Feb 2023 23:00:30 +0000
+ id 1pQFty-0002z1-Un; Thu, 09 Feb 2023 23:00:26 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1pQFu2-00085P-6V; Thu, 09 Feb 2023 23:00:30 +0000
+ id 1pQFty-00085P-Im; Thu, 09 Feb 2023 23:00:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=UaeXAyK9G+d6uKBLeX0Ry/BqypqCs7yld6AbDMZh2nY=; b=23o7qg/+CRZJ591D00CzlQ5hxI
-	nqaS1++g8bII0fn6+fb5eeeLE6VQPR0dn1bAPusVBtVrqoiO7wkW3F5V7w+Dq3fS/B+2wCcX6FHVt
-	FijU5UnYPYjOKFGiuk4mr2pTWBLFH12GKLy0GbuxmSR+4WaLncjn9Qu/N1vFkuEwnrqk=;
+	bh=LljhuvpwgXyxpkGUKmVnFpYI6mcRI4zQJLFFFZ5wgts=; b=pBiaBDG7mHoQDSDoCg3R0hpQOF
+	25ztjt2Lw261AYCROpdpsRKAmZekA0EFdNXZwSkIW5/V7Ae48g7PZYkcE4gxSKfLBvML2uWkP0Vqy
+	xAy+bgECfAGvPBqPcgDkmGSRJ8MejRywk0EH/si0Lv1YV2xhbvL8K0Czp7XN2XZJfFZ4=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: demi@invisiblethingslab.com,
@@ -56,16 +56,13 @@ Cc: demi@invisiblethingslab.com,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Jun Nakajima <jun.nakajima@intel.com>,
 	Kevin Tian <kevin.tian@intel.com>,
+	Paul Durrant <paul@xen.org>,
 	George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH 3/6] xen/x86: Replace GPL v2.0 copyright with an SPDX tag in *.h
-Date: Thu,  9 Feb 2023 23:00:17 +0000
-Message-Id: <20230209230020.52695-4-julien@xen.org>
+Subject: [PATCH 1/6] xen/x86: Replace GPL v2.0 copyright with an SPDX tag in *.c
+Date: Thu,  9 Feb 2023 23:00:15 +0000
+Message-Id: <20230209230020.52695-2-julien@xen.org>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230209230020.52695-1-julien@xen.org>
 References: <20230209230020.52695-1-julien@xen.org>
@@ -77,7 +74,7 @@ From: Julien Grall <jgrall@amazon.com>
 It is easier to understand the license of a file when using SPDX.
 
 This is replacing the below pattern with the SPDX tag GPL-2.0 in
-xen/arch/x86/*.h:
+xen/arch/x86/*.c:
 
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -107,50 +104,56 @@ Signed-off-by: Julien Grall <jgrall@amazon.com>
  *
  * You should have received a copy of the GNU General Public License along with
  * this program; If not, see <http://www.gnu.org/licenses/>.
-42sh> find xen/arch/x86/ -name '*.h' -exec replace_license.py gpl-2.0.txt GPL-2.0 {} \;
+42sh> find xen/arch/x86/ -name '*.c' -exec replace_license.py gpl-2.0.txt GPL-2.0 {} \;
 ---
- xen/arch/x86/include/asm/altp2m.h            | 13 +------------
- xen/arch/x86/include/asm/hvm/asid.h          | 13 +------------
- xen/arch/x86/include/asm/hvm/domain.h        | 13 +------------
- xen/arch/x86/include/asm/hvm/hvm.h           | 13 +------------
- xen/arch/x86/include/asm/hvm/io.h            | 13 +------------
- xen/arch/x86/include/asm/hvm/ioreq.h         | 13 +------------
- xen/arch/x86/include/asm/hvm/irq.h           | 13 +------------
- xen/arch/x86/include/asm/hvm/monitor.h       | 13 +------------
- xen/arch/x86/include/asm/hvm/nestedhvm.h     | 13 +------------
- xen/arch/x86/include/asm/hvm/save.h          | 13 +------------
- xen/arch/x86/include/asm/hvm/support.h       | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/asid.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/emulate.h   | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/intr.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/nestedsvm.h | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/svm.h       | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/svmdebug.h  | 13 +------------
- xen/arch/x86/include/asm/hvm/svm/vmcb.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/vcpu.h          | 13 +------------
- xen/arch/x86/include/asm/hvm/vlapic.h        | 13 +------------
- xen/arch/x86/include/asm/hvm/vm_event.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/vmx/vmx.h       | 13 +------------
- xen/arch/x86/include/asm/hvm/vmx/vvmx.h      | 13 +------------
- xen/arch/x86/include/asm/hvm/vpt.h           | 13 +------------
- xen/arch/x86/include/asm/iommu.h             |  1 +
- xen/arch/x86/include/asm/ioreq.h             | 13 +------------
- xen/arch/x86/include/asm/vm_event.h          | 13 +------------
- xen/arch/x86/include/asm/vpmu.h              | 13 +------------
- xen/arch/x86/mm/hap/private.h                | 13 +------------
- xen/arch/x86/x86_64/mmconfig.h               | 13 +------------
- 31 files changed, 31 insertions(+), 360 deletions(-)
+ xen/arch/x86/cpu/mwait-idle.c    | 13 +------------
+ xen/arch/x86/cpu/vpmu.c          | 13 +------------
+ xen/arch/x86/cpu/vpmu_amd.c      | 13 +------------
+ xen/arch/x86/cpu/vpmu_intel.c    | 13 +------------
+ xen/arch/x86/genapic/x2apic.c    | 13 +------------
+ xen/arch/x86/hvm/asid.c          | 13 +------------
+ xen/arch/x86/hvm/dm.c            | 13 +------------
+ xen/arch/x86/hvm/hpet.c          | 13 +------------
+ xen/arch/x86/hvm/hvm.c           | 13 +------------
+ xen/arch/x86/hvm/intercept.c     | 13 +------------
+ xen/arch/x86/hvm/io.c            | 13 +------------
+ xen/arch/x86/hvm/ioreq.c         | 13 +------------
+ xen/arch/x86/hvm/irq.c           | 13 +------------
+ xen/arch/x86/hvm/mtrr.c          | 13 +------------
+ xen/arch/x86/hvm/nestedhvm.c     | 13 +------------
+ xen/arch/x86/hvm/pmtimer.c       | 13 +------------
+ xen/arch/x86/hvm/quirks.c        | 13 +------------
+ xen/arch/x86/hvm/save.c          | 13 +------------
+ xen/arch/x86/hvm/svm/asid.c      | 13 +------------
+ xen/arch/x86/hvm/svm/emulate.c   | 13 +------------
+ xen/arch/x86/hvm/svm/intr.c      | 13 +------------
+ xen/arch/x86/hvm/svm/nestedsvm.c | 13 +------------
+ xen/arch/x86/hvm/svm/svm.c       | 13 +------------
+ xen/arch/x86/hvm/svm/svmdebug.c  | 13 +------------
+ xen/arch/x86/hvm/svm/vmcb.c      | 13 +------------
+ xen/arch/x86/hvm/vlapic.c        | 13 +------------
+ xen/arch/x86/hvm/vmx/intr.c      | 13 +------------
+ xen/arch/x86/hvm/vmx/vmcs.c      | 13 +------------
+ xen/arch/x86/hvm/vmx/vmx.c       | 13 +------------
+ xen/arch/x86/hvm/vmx/vvmx.c      | 13 +------------
+ xen/arch/x86/hvm/vpt.c           | 13 +------------
+ xen/arch/x86/mm/altp2m.c         | 13 +------------
+ xen/arch/x86/mm/hap/guest_walk.c | 13 +------------
+ xen/arch/x86/mm/hap/nested_ept.c | 13 +------------
+ xen/arch/x86/mm/p2m-ept.c        | 13 +------------
+ 35 files changed, 35 insertions(+), 420 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/altp2m.h b/xen/arch/x86/include/asm/altp2m.h
-index b206e95863a6..a2b2bc02f2f5 100644
---- a/xen/arch/x86/include/asm/altp2m.h
-+++ b/xen/arch/x86/include/asm/altp2m.h
-@@ -1,18 +1,7 @@
+diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
+index 9e981e7e26dc..83bd9956ed36 100644
+--- a/xen/arch/x86/cpu/mwait-idle.c
++++ b/xen/arch/x86/cpu/mwait-idle.c
+@@ -1,20 +1,9 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * Alternate p2m HVM
-  * Copyright (c) 2014, Intel Corporation.
+  * mwait_idle.c - native hardware idle loop for modern processors
+  *
+  * Copyright (c) 2013, Intel Corporation.
+  * Len Brown <len.brown@intel.com>
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -165,15 +168,120 @@ index b206e95863a6..a2b2bc02f2f5 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_ALTP2M_H
-diff --git a/xen/arch/x86/include/asm/hvm/asid.h b/xen/arch/x86/include/asm/hvm/asid.h
-index 633ddb72e494..ed6a5e760ce0 100644
---- a/xen/arch/x86/include/asm/hvm/asid.h
-+++ b/xen/arch/x86/include/asm/hvm/asid.h
+ /*
+diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
+index b6b7342fb466..22d5d476ac3f 100644
+--- a/xen/arch/x86/cpu/vpmu.c
++++ b/xen/arch/x86/cpu/vpmu.c
+@@ -1,20 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * vpmu.c: PMU virtualization for HVM domain.
+  *
+  * Copyright (c) 2007, Intel Corporation.
+  *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+- *
+  * Author: Haitao Shan <haitao.shan@intel.com>
+  */
+ #include <xen/cpu.h>
+diff --git a/xen/arch/x86/cpu/vpmu_amd.c b/xen/arch/x86/cpu/vpmu_amd.c
+index 58794a16f06c..229b46268052 100644
+--- a/xen/arch/x86/cpu/vpmu_amd.c
++++ b/xen/arch/x86/cpu/vpmu_amd.c
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * vpmu.c: PMU virtualization for HVM domain.
+  *
+@@ -7,18 +8,6 @@
+  * Author: Wei Wang <wei.wang2@amd.com>
+  * Tested by: Suravee Suthikulpanit <Suravee.Suthikulpanit@amd.com>
+  *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+- *
+  */
+ 
+ #include <xen/err.h>
+diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
+index a8df52579db8..24c3b91eda56 100644
+--- a/xen/arch/x86/cpu/vpmu_intel.c
++++ b/xen/arch/x86/cpu/vpmu_intel.c
+@@ -1,20 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * vpmu_core2.c: CORE 2 specific PMU virtualization for HVM domain.
+  *
+  * Copyright (c) 2007, Intel Corporation.
+  *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+- *
+  * Author: Haitao Shan <haitao.shan@intel.com>
+  */
+ 
+diff --git a/xen/arch/x86/genapic/x2apic.c b/xen/arch/x86/genapic/x2apic.c
+index f73390cdb017..f38cb160ce6e 100644
+--- a/xen/arch/x86/genapic/x2apic.c
++++ b/xen/arch/x86/genapic/x2apic.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * asid.h: ASID management
+  * x2APIC driver.
+  *
+  * Copyright (c) 2008, Intel Corporation.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/asid.c b/xen/arch/x86/hvm/asid.c
+index 1fd2770a3ae0..81969ba483e9 100644
+--- a/xen/arch/x86/hvm/asid.c
++++ b/xen/arch/x86/hvm/asid.c
+@@ -1,19 +1,8 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * asid.c: ASID management
   * Copyright (c) 2007, Advanced Micro Devices, Inc.
   * Copyright (c) 2009, Citrix Systems, Inc.
 - *
@@ -190,18 +298,15 @@ index 633ddb72e494..ed6a5e760ce0 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_ASID_H__
-diff --git a/xen/arch/x86/include/asm/hvm/domain.h b/xen/arch/x86/include/asm/hvm/domain.h
-index 698455444ea8..a3482c170668 100644
---- a/xen/arch/x86/include/asm/hvm/domain.h
-+++ b/xen/arch/x86/include/asm/hvm/domain.h
-@@ -1,20 +1,9 @@
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
+index f8e6089870b0..ffe7a48a55c7 100644
+--- a/xen/arch/x86/hvm/dm.c
++++ b/xen/arch/x86/hvm/dm.c
+@@ -1,17 +1,6 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * domain.h: HVM per domain definitions
-  *
-  * Copyright (c) 2004, Intel Corporation.
-  * Copyright (c) 2005, International Business Machines Corporation
+  * Copyright (c) 2016 Citrix Systems Inc.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -216,19 +321,45 @@ index 698455444ea8..a3482c170668 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_DOMAIN_H__
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 65768c797ea7..108682aafe92 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -1,20 +1,9 @@
+ #include <xen/event.h>
+diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
+index c65e1b27d09e..b760a321cbf2 100644
+--- a/xen/arch/x86/hvm/hpet.c
++++ b/xen/arch/x86/hvm/hpet.c
+@@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * hvm.h: Hardware virtual machine assist interface definitions.
+  * hpet.c: HPET emulation for HVM guests.
+  * Copyright (c) 2006, Intel Corporation.
+  * Copyright (c) 2006, Keir Fraser <keir@xensource.com>
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <asm/hvm/vpt.h>
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 5c1e64189600..8718401655e4 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -1,21 +1,10 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * hvm.c: Common hardware virtual machine abstractions.
   *
-  * Leendert van Doorn, leendert@watson.ibm.com
+  * Copyright (c) 2004, Intel Corporation.
   * Copyright (c) 2005, International Business Machines Corporation.
-- *
+  * Copyright (c) 2008, Citrix Systems, Inc.
+- * 
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
 - * version 2, as published by the Free Software Foundation.
@@ -242,17 +373,18 @@ index 65768c797ea7..108682aafe92 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_HVM_H__
-diff --git a/xen/arch/x86/include/asm/hvm/io.h b/xen/arch/x86/include/asm/hvm/io.h
-index 54e0161b492c..554c31b01fab 100644
---- a/xen/arch/x86/include/asm/hvm/io.h
-+++ b/xen/arch/x86/include/asm/hvm/io.h
-@@ -1,19 +1,8 @@
+ #include <xen/ctype.h>
+diff --git a/xen/arch/x86/hvm/intercept.c b/xen/arch/x86/hvm/intercept.c
+index ffa31b746716..6eef70d4ae8c 100644
+--- a/xen/arch/x86/hvm/intercept.c
++++ b/xen/arch/x86/hvm/intercept.c
+@@ -1,20 +1,9 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * io.h: HVM IO support
+  * intercept.c: Handle performance critical I/O packets in hypervisor space
   *
   * Copyright (c) 2004, Intel Corporation.
+  * Copyright (c) 2008, Citrix Systems, Inc.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -267,15 +399,42 @@ index 54e0161b492c..554c31b01fab 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_IO_H__
-diff --git a/xen/arch/x86/include/asm/hvm/ioreq.h b/xen/arch/x86/include/asm/hvm/ioreq.h
-index 9b2eb6fedf99..bf76189d8e13 100644
---- a/xen/arch/x86/include/asm/hvm/ioreq.h
-+++ b/xen/arch/x86/include/asm/hvm/ioreq.h
+ #include <xen/ioreq.h>
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 5ae209d3b6b3..77a14bdd0fa3 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -1,21 +1,10 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * io.c: Handling I/O and interrupts.
+  *
+  * Copyright (c) 2004, Intel Corporation.
+  * Copyright (c) 2005, International Business Machines Corporation.
+  * Copyright (c) 2008, Citrix Systems, Inc.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index 0bdcca1e1a5f..ab2fcae8836e 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * hvm.h: Hardware virtual machine assist interface definitions.
+  * hvm/io.c: hardware virtual machine I/O emulation
   *
   * Copyright (c) 2016 Citrix Systems Inc.
 - *
@@ -292,15 +451,15 @@ index 9b2eb6fedf99..bf76189d8e13 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_IOREQ_H__
-diff --git a/xen/arch/x86/include/asm/hvm/irq.h b/xen/arch/x86/include/asm/hvm/irq.h
-index c4369ceb7aaa..e0c33f2fe7d5 100644
---- a/xen/arch/x86/include/asm/hvm/irq.h
-+++ b/xen/arch/x86/include/asm/hvm/irq.h
+ #include <xen/domain.h>
+diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
+index 4fe87a71c12b..a75c514917f8 100644
+--- a/xen/arch/x86/hvm/irq.c
++++ b/xen/arch/x86/hvm/irq.c
 @@ -1,21 +1,10 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /******************************************************************************
-  * irq.h
+  * irq.c
   * 
   * Interrupt distribution and delivery logic.
   * 
@@ -319,17 +478,17 @@ index c4369ceb7aaa..e0c33f2fe7d5 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_IRQ_H__
-diff --git a/xen/arch/x86/include/asm/hvm/monitor.h b/xen/arch/x86/include/asm/hvm/monitor.h
-index 639f6dfa374c..7077cd9da64e 100644
---- a/xen/arch/x86/include/asm/hvm/monitor.h
-+++ b/xen/arch/x86/include/asm/hvm/monitor.h
+ #include <xen/types.h>
+diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
+index 344edc2d6a96..0bd8852dd3e8 100644
+--- a/xen/arch/x86/hvm/mtrr.c
++++ b/xen/arch/x86/hvm/mtrr.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * include/asm-x86/hvm/monitor.h
+  * mtrr.c: MTRR/PAT virtualization
   *
-  * Arch-specific hardware virtual machine monitor abstractions.
+  * Copyright (c) 2007, Intel Corporation.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -344,11 +503,11 @@ index 639f6dfa374c..7077cd9da64e 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_MONITOR_H__
-diff --git a/xen/arch/x86/include/asm/hvm/nestedhvm.h b/xen/arch/x86/include/asm/hvm/nestedhvm.h
-index 7184928c2bb1..7b827f0245af 100644
---- a/xen/arch/x86/include/asm/hvm/nestedhvm.h
-+++ b/xen/arch/x86/include/asm/hvm/nestedhvm.h
+ #include <xen/domain_page.h>
+diff --git a/xen/arch/x86/hvm/nestedhvm.c b/xen/arch/x86/hvm/nestedhvm.c
+index 58370190ffc9..b7ad5cb94788 100644
+--- a/xen/arch/x86/hvm/nestedhvm.c
++++ b/xen/arch/x86/hvm/nestedhvm.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
@@ -369,41 +528,18 @@ index 7184928c2bb1..7b827f0245af 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef _HVM_NESTEDHVM_H
-diff --git a/xen/arch/x86/include/asm/hvm/save.h b/xen/arch/x86/include/asm/hvm/save.h
-index e975011ddb71..be4a5b4e41ef 100644
---- a/xen/arch/x86/include/asm/hvm/save.h
-+++ b/xen/arch/x86/include/asm/hvm/save.h
-@@ -1,17 +1,6 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * save.h: HVM support routines for save/restore
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
- #ifndef __XEN_HVM_SAVE_H__
-diff --git a/xen/arch/x86/include/asm/hvm/support.h b/xen/arch/x86/include/asm/hvm/support.h
-index 6b583738ecb5..8c0dc11f4d20 100644
---- a/xen/arch/x86/include/asm/hvm/support.h
-+++ b/xen/arch/x86/include/asm/hvm/support.h
+ #include <asm/msr.h>
+diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
+index b89d0fd53ba1..8075cc139b09 100644
+--- a/xen/arch/x86/hvm/pmtimer.c
++++ b/xen/arch/x86/hvm/pmtimer.c
 @@ -1,20 +1,9 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * support.h: HVM support routines used by VT-x and SVM.
+  * hvm/pmtimer.c: emulation of the ACPI PM timer 
   *
-  * Leendert van Doorn, leendert@watson.ibm.com
-  * Copyright (c) 2005, International Business Machines Corporation.
+  * Copyright (c) 2007, XenSource inc.
+  * Copyright (c) 2006, Intel Corporation.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -418,15 +554,66 @@ index 6b583738ecb5..8c0dc11f4d20 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_SUPPORT_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/asid.h b/xen/arch/x86/include/asm/hvm/svm/asid.h
-index 0e5ec3ab788a..8e5323f3417b 100644
---- a/xen/arch/x86/include/asm/hvm/svm/asid.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/asid.h
+ #include <xen/sched.h>
+diff --git a/xen/arch/x86/hvm/quirks.c b/xen/arch/x86/hvm/quirks.c
+index 2adab1f4b84b..d0b91031cf07 100644
+--- a/xen/arch/x86/hvm/quirks.c
++++ b/xen/arch/x86/hvm/quirks.c
+@@ -1,17 +1,6 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /******************************************************************************
+  * x86/hvm/quirks.c
+- * 
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/types.h>
+diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
+index c1675e3d9fb0..a4b7d90d55aa 100644
+--- a/xen/arch/x86/hvm/save.c
++++ b/xen/arch/x86/hvm/save.c
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * hvm/save.c: Save and restore HVM guest's emulated hardware state.
+  *
+@@ -6,18 +7,6 @@
+  * Copyright (c) 2007, Isaku Yamahata <yamahata at valinux co jp>
+  *                     VA Linux Systems Japan K.K.
+  *                     split x86 specific part
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/guest_access.h>
+diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
+index ab06dd3f3ae2..a48666f0e2fe 100644
+--- a/xen/arch/x86/hvm/svm/asid.c
++++ b/xen/arch/x86/hvm/svm/asid.c
 @@ -1,18 +1,7 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * asid.h: handling ASIDs in SVM.
+  * asid.c: handling ASIDs in SVM.
   * Copyright (c) 2007, Advanced Micro Devices, Inc.
 - *
 - * This program is free software; you can redistribute it and/or modify it
@@ -442,16 +629,40 @@ index 0e5ec3ab788a..8e5323f3417b 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_SVM_ASID_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/emulate.h b/xen/arch/x86/include/asm/hvm/svm/emulate.h
-index eb1a8c24af6d..81866f970b3b 100644
---- a/xen/arch/x86/include/asm/hvm/svm/emulate.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/emulate.h
+ #include <asm/amd.h>
+diff --git a/xen/arch/x86/hvm/svm/emulate.c b/xen/arch/x86/hvm/svm/emulate.c
+index 16fc134883cf..37ad64e60e5d 100644
+--- a/xen/arch/x86/hvm/svm/emulate.c
++++ b/xen/arch/x86/hvm/svm/emulate.c
+@@ -1,18 +1,7 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * emulate.c: handling SVM emulate instructions help.
+  * Copyright (c) 2005 AMD Corporation.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/err.h>
+diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+index 9525f3559392..807ce82b4861 100644
+--- a/xen/arch/x86/hvm/svm/intr.c
++++ b/xen/arch/x86/hvm/svm/intr.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * emulate.h: SVM instruction emulation bits.
-  * Copyright (c) 2005, AMD Corporation.
+  * intr.c: Interrupt handling for SVM.
+  * Copyright (c) 2005, AMD Inc.
   * Copyright (c) 2004, Intel Corporation.
 - *
 - * This program is free software; you can redistribute it and/or modify it
@@ -467,41 +678,15 @@ index eb1a8c24af6d..81866f970b3b 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_SVM_EMULATE_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/intr.h b/xen/arch/x86/include/asm/hvm/svm/intr.h
-index ae52d9f948b1..d8548876fdd1 100644
---- a/xen/arch/x86/include/asm/hvm/svm/intr.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/intr.h
-@@ -1,20 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * intr.h: SVM Architecture related definitions
-  * Copyright (c) 2005, AMD Corporation.
-  * Copyright (c) 2004, Intel Corporation.
-  *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  */
- 
- #ifndef __ASM_X86_HVM_SVM_INTR_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-index 656d7d1a9a71..c84a9ae9eed3 100644
---- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 9f5f35f16aff..c5658ae9f131 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * nestedsvm.h: Nested Virtualization
+  * nestedsvm.c: Nested Virtualization
   * Copyright (c) 2011, Advanced Micro Devices, Inc
   *
 - * This program is free software; you can redistribute it and/or modify it
@@ -517,17 +702,67 @@ index 656d7d1a9a71..c84a9ae9eed3 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
 - *
   */
- #ifndef __ASM_X86_HVM_SVM_NESTEDSVM_H__
- #define __ASM_X86_HVM_SVM_NESTEDSVM_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/svm.h b/xen/arch/x86/include/asm/hvm/svm/svm.h
-index 65e35a4f59b7..e9facc1e41ae 100644
---- a/xen/arch/x86/include/asm/hvm/svm/svm.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/svm.h
+ 
+ #include <asm/hvm/support.h>
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index fa7325720328..22a7dab03924 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1,19 +1,8 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * svm.c: handling SVM architecture-related VM exits
+  * Copyright (c) 2004, Intel Corporation.
+  * Copyright (c) 2005-2007, Advanced Micro Devices, Inc.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/guest_access.h>
+diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
+index bce86f0ef706..87a2fe49638a 100644
+--- a/xen/arch/x86/hvm/svm/svmdebug.c
++++ b/xen/arch/x86/hvm/svm/svmdebug.c
+@@ -1,19 +1,8 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * svmdebug.c: debug functions
+  * Copyright (c) 2011, Advanced Micro Devices, Inc.
+  *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+- *
+  */
+ 
+ #include <xen/sched.h>
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index 305d4767e387..b9354e359514 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
 @@ -1,20 +1,9 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * svm.h: SVM Architecture related definitions
-  * Copyright (c) 2005, AMD Corporation.
+  * vmcb.c: VMCB management
+  * Copyright (c) 2005-2007, Advanced Micro Devices, Inc.
   * Copyright (c) 2004, Intel Corporation.
   *
 - * This program is free software; you can redistribute it and/or modify it
@@ -544,91 +779,15 @@ index 65e35a4f59b7..e9facc1e41ae 100644
 - *
   */
  
- #ifndef __ASM_X86_HVM_SVM_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/svmdebug.h b/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-index 330c1d91aad5..6c3dbbecada8 100644
---- a/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/svmdebug.h
-@@ -1,19 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * svmdebug.h: SVM related debug defintions
-  * Copyright (c) 2011, AMD Corporation.
-  *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  */
- 
- #ifndef __ASM_X86_HVM_SVM_SVMDEBUG_H__
-diff --git a/xen/arch/x86/include/asm/hvm/svm/vmcb.h b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
-index e87728fa81cd..f3737ae50784 100644
---- a/xen/arch/x86/include/asm/hvm/svm/vmcb.h
-+++ b/xen/arch/x86/include/asm/hvm/svm/vmcb.h
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index eb32f12e2d14..57f599dee4ea 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
 @@ -1,20 +1,9 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * vmcb.h: VMCB related definitions
-  * Copyright (c) 2005-2007, Advanced Micro Devices, Inc
-  * Copyright (c) 2004, Intel Corporation.
-  *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  */
- #ifndef __ASM_X86_HVM_SVM_VMCB_H__
- #define __ASM_X86_HVM_SVM_VMCB_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
-index 8adf4555c2ab..9a73cec688c3 100644
---- a/xen/arch/x86/include/asm/hvm/vcpu.h
-+++ b/xen/arch/x86/include/asm/hvm/vcpu.h
-@@ -1,19 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * vcpu.h: HVM per vcpu definitions
-  *
-  * Copyright (c) 2005, International Business Machines Corporation.
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
- #ifndef __ASM_X86_HVM_VCPU_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vlapic.h b/xen/arch/x86/include/asm/hvm/vlapic.h
-index 8f908928c35c..729eeca11009 100644
---- a/xen/arch/x86/include/asm/hvm/vlapic.h
-+++ b/xen/arch/x86/include/asm/hvm/vlapic.h
-@@ -1,20 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * hvm_vlapic.h: virtualize LAPIC definitions.
+  * vlapic.c: virtualize LAPIC for HVM vcpus.
   *
   * Copyright (c) 2004, Intel Corporation.
   * Copyright (c) 2006 Keir Fraser, XenSource Inc.
@@ -646,17 +805,17 @@ index 8f908928c35c..729eeca11009 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_VLAPIC_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vm_event.h b/xen/arch/x86/include/asm/hvm/vm_event.h
-index 28cb07ce8ff6..e5c64334fa52 100644
---- a/xen/arch/x86/include/asm/hvm/vm_event.h
-+++ b/xen/arch/x86/include/asm/hvm/vm_event.h
+ #include <xen/types.h>
+diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
+index 6a8316de0e25..38f86530c37d 100644
+--- a/xen/arch/x86/hvm/vmx/intr.c
++++ b/xen/arch/x86/hvm/vmx/intr.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * include/asm-x86/hvm/vm_event.h
-  *
-  * Hardware virtual machine vm_event abstractions.
+  * intr.c: handling I/O, interrupts related VMX entry/exit
+  * Copyright (c) 2004, Intel Corporation.
+  * Copyright (c) 2004-2007, XenSource Inc.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -671,17 +830,17 @@ index 28cb07ce8ff6..e5c64334fa52 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_VM_EVENT_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-index 0a84e7447805..a7b0623295d3 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -1,19 +1,8 @@
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 09edbd23b399..c0b1ae9ba296 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -1,18 +1,7 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * vmcs.h: VMCS related definitions
+  * vmcs.c: VMCS management
   * Copyright (c) 2004, Intel Corporation.
-  *
+- *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
 - * version 2, as published by the Free Software Foundation.
@@ -693,20 +852,19 @@ index 0a84e7447805..a7b0623295d3 100644
 - *
 - * You should have received a copy of the GNU General Public License along with
 - * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
   */
- #ifndef __ASM_X86_HVM_VMX_VMCS_H__
- #define __ASM_X86_HVM_VMX_VMCS_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmx.h b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-index 234da4a7f445..b8cf14795f46 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
-@@ -1,19 +1,8 @@
+ 
+ #include <xen/init.h>
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index ade2a25ce7c2..60a1dd6aca2f 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -1,18 +1,7 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * vmx.h: VMX Architecture related definitions
+  * vmx.c: handling VMX architecture-related VM exits
   * Copyright (c) 2004, Intel Corporation.
-  *
+- *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
 - * version 2, as published by the Free Software Foundation.
@@ -718,20 +876,19 @@ index 234da4a7f445..b8cf14795f46 100644
 - *
 - * You should have received a copy of the GNU General Public License along with
 - * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
   */
- #ifndef __ASM_X86_HVM_VMX_VMX_H__
- #define __ASM_X86_HVM_VMX_VMX_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
-index 2c3adb5dd6b3..6bb0c778c583 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+ 
+ #include <xen/guest_access.h>
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 674cdabb0736..5696ba89d113 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
 @@ -1,3 +1,4 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
- 
  /*
-  * vvmx.h: Support virtual VMX for nested virtualization.
-@@ -6,18 +7,6 @@
+  * vvmx.c: Support virtual VMX for nested virtualization.
+  *
+@@ -5,18 +6,6 @@
   * Author: Qing He <qing.he@intel.com>
   *         Eddie Dong <eddie.dong@intel.com>
   *
@@ -748,18 +905,18 @@ index 2c3adb5dd6b3..6bb0c778c583 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
 - *
   */
- #ifndef __ASM_X86_HVM_VVMX_H__
- #define __ASM_X86_HVM_VVMX_H__
-diff --git a/xen/arch/x86/include/asm/hvm/vpt.h b/xen/arch/x86/include/asm/hvm/vpt.h
-index 74c0cedd11cc..c0e1380076a7 100644
---- a/xen/arch/x86/include/asm/hvm/vpt.h
-+++ b/xen/arch/x86/include/asm/hvm/vpt.h
+ 
+ #include <xen/ioreq.h>
+diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
+index 621f5bb88b63..f0a6424d7f36 100644
+--- a/xen/arch/x86/hvm/vpt.c
++++ b/xen/arch/x86/hvm/vpt.c
 @@ -1,19 +1,8 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * vpt.h: Virtual Platform Timer definitions
+  * vpt.c: Virtual Platform Timer
   *
-  * Copyright (c) 2004, Intel Corporation.
+  * Copyright (c) 2006, Xiaowei Yang, Intel Corporation.
 - *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
@@ -774,130 +931,17 @@ index 74c0cedd11cc..c0e1380076a7 100644
 - * this program; If not, see <http://www.gnu.org/licenses/>.
   */
  
- #ifndef __ASM_X86_HVM_VPT_H__
-diff --git a/xen/arch/x86/include/asm/iommu.h b/xen/arch/x86/include/asm/iommu.h
-index fc0afe35bf6b..8e1e0ad9ee18 100644
---- a/xen/arch/x86/include/asm/iommu.h
-+++ b/xen/arch/x86/include/asm/iommu.h
-@@ -1,3 +1,4 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * This program is free software; you can redistribute it and/or modify it
-  * under the terms and conditions of the GNU General Public License,
-diff --git a/xen/arch/x86/include/asm/ioreq.h b/xen/arch/x86/include/asm/ioreq.h
-index d06ce9a6ea56..3a3b5923485c 100644
---- a/xen/arch/x86/include/asm/ioreq.h
-+++ b/xen/arch/x86/include/asm/ioreq.h
-@@ -1,3 +1,4 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * ioreq.h: Hardware virtual machine assist interface definitions.
-  *
-@@ -5,18 +6,6 @@
-  * from the common code.
-  *
-  * Copyright (c) 2016 Citrix Systems Inc.
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
- #ifndef __ASM_X86_IOREQ_H__
-diff --git a/xen/arch/x86/include/asm/vm_event.h b/xen/arch/x86/include/asm/vm_event.h
-index 075612407523..2434446a7c75 100644
---- a/xen/arch/x86/include/asm/vm_event.h
-+++ b/xen/arch/x86/include/asm/vm_event.h
-@@ -1,19 +1,8 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * vm_event.h: architecture specific vm_event handling routines
-  *
-  * Copyright (c) 2015 Tamas K Lengyel (tamas@tklengyel.com)
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
- 
- #ifndef __ASM_X86_VM_EVENT_H__
-diff --git a/xen/arch/x86/include/asm/vpmu.h b/xen/arch/x86/include/asm/vpmu.h
-index 05e1fbfccfcf..bdf2f9dd0473 100644
---- a/xen/arch/x86/include/asm/vpmu.h
-+++ b/xen/arch/x86/include/asm/vpmu.h
-@@ -1,20 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * vpmu.h: PMU virtualization for HVM domain.
-  *
-  * Copyright (c) 2007, Intel Corporation.
-  *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  * Author: Haitao Shan <haitao.shan@intel.com>
-  */
- 
-diff --git a/xen/arch/x86/mm/hap/private.h b/xen/arch/x86/mm/hap/private.h
-index 1040eaf69f43..4442a0daf103 100644
---- a/xen/arch/x86/mm/hap/private.h
-+++ b/xen/arch/x86/mm/hap/private.h
-@@ -1,20 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * arch/x86/mm/hap/private.h
-  *
-  * Copyright (c) 2007, AMD Corporation (Wei Huang)
-  *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  */
- #ifndef __HAP_PRIVATE_H__
- #define __HAP_PRIVATE_H__
-diff --git a/xen/arch/x86/x86_64/mmconfig.h b/xen/arch/x86/x86_64/mmconfig.h
-index 433046be663a..671cd4cfea37 100644
---- a/xen/arch/x86/x86_64/mmconfig.h
-+++ b/xen/arch/x86/x86_64/mmconfig.h
+ #include <xen/sched.h>
+diff --git a/xen/arch/x86/mm/altp2m.c b/xen/arch/x86/mm/altp2m.c
+index 07393befeeed..4077889f204c 100644
+--- a/xen/arch/x86/mm/altp2m.c
++++ b/xen/arch/x86/mm/altp2m.c
 @@ -1,18 +1,7 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * Copyright (c) 2006, Intel Corporation.
-  *
+  * Alternate p2m HVM
+  * Copyright (c) 2014, Intel Corporation.
+- *
 - * This program is free software; you can redistribute it and/or modify it
 - * under the terms and conditions of the GNU General Public License,
 - * version 2, as published by the Free Software Foundation.
@@ -909,10 +953,86 @@ index 433046be663a..671cd4cfea37 100644
 - *
 - * You should have received a copy of the GNU General Public License along with
 - * this program; If not, see <http://www.gnu.org/licenses/>.
-- *
-  * Author: Allen Kay <allen.m.kay@intel.com> - adapted from linux
   */
  
+ #include <asm/hvm/hvm.h>
+diff --git a/xen/arch/x86/mm/hap/guest_walk.c b/xen/arch/x86/mm/hap/guest_walk.c
+index 1da8d3b99edc..4dd67027e50b 100644
+--- a/xen/arch/x86/mm/hap/guest_walk.c
++++ b/xen/arch/x86/mm/hap/guest_walk.c
+@@ -1,21 +1,10 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * arch/x86/mm/hap/guest_walk.c
+  *
+  * Guest page table walker
+  * Copyright (c) 2007, AMD Corporation (Wei Huang)
+  * Copyright (c) 2007, XenSource Inc.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/domain_page.h>
+diff --git a/xen/arch/x86/mm/hap/nested_ept.c b/xen/arch/x86/mm/hap/nested_ept.c
+index 605e47c16cd5..f9a600213444 100644
+--- a/xen/arch/x86/mm/hap/nested_ept.c
++++ b/xen/arch/x86/mm/hap/nested_ept.c
+@@ -1,20 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * nested_ept.c: Handling virtulized EPT for guest in nested case.
+  *
+  * Copyright (c) 2012, Intel Corporation
+  *  Xiantao Zhang <xiantao.zhang@intel.com>
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ #include <xen/vm_event.h>
+ #include <xen/event.h>
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index bb143c6c42c6..f643085d236d 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -1,18 +1,7 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*
+  * ept-p2m.c: use the EPT page table as p2m
+  * Copyright (c) 2007, Intel Corporation.
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms and conditions of the GNU General Public License,
+- * version 2, as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope it will be useful, but WITHOUT
+- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+- * more details.
+- *
+- * You should have received a copy of the GNU General Public License along with
+- * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #include <xen/domain_page.h>
 -- 
 2.39.1
 
