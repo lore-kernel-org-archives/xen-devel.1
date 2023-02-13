@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B13E8C636D7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A11C64EC4
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Feb 2023 08:44:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.494205.764191 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.494210.764226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRURh-00053t-Nw; Mon, 13 Feb 2023 08:44:21 +0000
+	id 1pRURq-0005kd-FL; Mon, 13 Feb 2023 08:44:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 494205.764191; Mon, 13 Feb 2023 08:44:21 +0000
+Received: by outflank-mailman (output) from mailman id 494210.764226; Mon, 13 Feb 2023 08:44:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRURh-00053m-LP; Mon, 13 Feb 2023 08:44:21 +0000
-Received: by outflank-mailman (input) for mailman id 494205;
- Mon, 13 Feb 2023 08:44:19 +0000
+	id 1pRURq-0005kU-Ar; Mon, 13 Feb 2023 08:44:30 +0000
+Received: by outflank-mailman (input) for mailman id 494210;
+ Mon, 13 Feb 2023 08:44:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=DRhn=6J=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pRURf-00053b-SJ
- for xen-devel@lists.xenproject.org; Mon, 13 Feb 2023 08:44:19 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1pRURp-00053b-AI
+ for xen-devel@lists.xenproject.org; Mon, 13 Feb 2023 08:44:29 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [2001:67c:2178:6::1c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 98b9f786-ab7a-11ed-933c-83870f6b2ba8;
- Mon, 13 Feb 2023 09:44:17 +0100 (CET)
+ id 9f3030d6-ab7a-11ed-933c-83870f6b2ba8;
+ Mon, 13 Feb 2023 09:44:26 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0C5A367B09;
- Mon, 13 Feb 2023 08:44:16 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 30DED37870;
+ Mon, 13 Feb 2023 08:44:27 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CF8141391B;
- Mon, 13 Feb 2023 08:44:15 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 03E4E1391B;
+ Mon, 13 Feb 2023 08:44:26 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id aBtHMV/46WMoRAAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 13 Feb 2023 08:44:15 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id yNUpO2r46WM2RAAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 13 Feb 2023 08:44:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,80 +53,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98b9f786-ab7a-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: 9f3030d6-ab7a-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1676277856; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=2TpvI14vjytLk+fJ6jQ6L4mTK2f8+asinqiPiJO4Cp8=;
-	b=dF9Q7GVGtTjlVr5s7SWi6e7UVCaS3Pz8GB7geRxBSHm6ACnbQhmVy5seqA4Yu/+XSOtFuW
-	goRiQVr8m40NdjQQ5hM/oPsJvLjCbQ1L+01XdSvYc/ub8XfNgFqedc776kPf5GV//AA5vc
-	Dbnqt0/9PP2oO906XoBY1Z5jNZKxzXY=
+	t=1676277867; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=19ujpdeO6r/ntB3v/0hzqQCc5N6kEKU3yTBXBtOtbZg=;
+	b=UxYiQRhP1uw/dAULpCCF9xOTAqeUbO9hm0aaDfQjC1i0wV90bjKIPIzKCsoIV41Aiq+/3K
+	cV8NacSRhsjG58kxQNyVHDGZ+stNlJvON/xNpy6S2L7Q/dfUiMaRgda/eFqjmbcgYNkvLO
+	EL5Y5HLwN8l3iKbedmbWVBMcX3x4Lxo=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 0/7] Mini-OS: add minimal 9pfs support
-Date: Mon, 13 Feb 2023 09:44:05 +0100
-Message-Id: <20230213084412.21065-1-jgross@suse.com>
+Subject: [PATCH v3 2/7] Mini-OS: add concept of mount points
+Date: Mon, 13 Feb 2023 09:44:07 +0100
+Message-Id: <20230213084412.21065-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230213084412.21065-1-jgross@suse.com>
+References: <20230213084412.21065-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series is adding minimal support to use 9pfs in Mini-OS. It is
-adding a PV 9pfs frontend and the ability to open, close, read and
-write files.
+Add the concept of mount points to Mini-OS. A mount point is a path
+associated with a device pointer and an open() callback. A mount point
+can be either a file (e.g. "/dev/mem") or a directory ("/var/log").
 
-The series has been tested with qemu as 9pfs backend in a PVH Mini-OS
-guest (I've used a slightly modified Xenstore-stubdom for that purpose
-in order to reuse the build runes).
+This allows to replace the special casing in the generic open()
+handling with a generic mount point handling.
 
-This series is meant to setup the stage for adding file based logging
-support to Xenstore-stubdom and later to add live update support (being
-able to save the LU data stream in a dom0 file makes this a _lot_
-easier).
+Prepare the open() callbacks to support creating new files by adding a
+mode parameter.
 
-In order to keep Mini-OS's license I have only used the protocol docs
-available on the internet [1] and then verified those with the qemu 9pfs
-backend implementation (especially for supporting the 9P2000.u variant,
-as qemu doesn't support the basic 9P2000 protocol).
+Additionally add a close() prototype to include/lib.h, as it is missing
+today.
 
-The needed fixed values of the protocol have been taken from [2].
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+---
+V2:
+- pass path below mount point to open callbacks (Samuel Thibault)
+---
+ include/lib.h |  9 ++++++
+ lib/sys.c     | 80 +++++++++++++++++++++++++++++++++++++++------------
+ 2 files changed, 70 insertions(+), 19 deletions(-)
 
-[1]: http://ericvh.github.io/9p-rfc/rfc9p2000.html
-[2]: https://github.com/0intro/libixp
-
-Changes in V2:
-- addressed comments by Samuel Thibault
-
-Changes in V3:
-- addressed comments by Samuel Thibault and Andrew Cooper
-
-Juergen Gross (7):
-  Mini-OS: xenbus: add support for reading node from directory
-  Mini-OS: add concept of mount points
-  Mini-OS: add support for runtime mounts
-  Mini-OS: add 9pfs frontend
-  Mini-OS: add 9pfs transport layer
-  Mini-OS: add open and close handling to the 9pfs frontend
-  Mini-OS: add read and write support to 9pfsfront
-
- 9pfront.c                     | 1300 +++++++++++++++++++++++++++++++++
- Config.mk                     |    1 +
- Makefile                      |    1 +
- arch/x86/testbuild/all-no     |    1 +
- arch/x86/testbuild/all-yes    |    1 +
- arch/x86/testbuild/newxen-yes |    1 +
- include/9pfront.h             |    7 +
- include/lib.h                 |   14 +
- include/xenbus.h              |    6 +
- lib/sys.c                     |  123 +++-
- xenbus.c                      |   40 +-
- 11 files changed, 1473 insertions(+), 22 deletions(-)
- create mode 100644 9pfront.c
- create mode 100644 include/9pfront.h
-
+diff --git a/include/lib.h b/include/lib.h
+index bec99646..36d94ec4 100644
+--- a/include/lib.h
++++ b/include/lib.h
+@@ -187,6 +187,13 @@ struct file_ops {
+     bool (*select_wr)(struct file *file);
+ };
+ 
++struct mount_point {
++    const char *path;
++    int (*open)(struct mount_point *mnt, const char *pathname, int flags,
++                mode_t mode);
++    void *dev;
++};
++
+ unsigned int alloc_file_type(const struct file_ops *ops);
+ 
+ off_t lseek_default(struct file *file, off_t offset, int whence);
+@@ -198,6 +205,8 @@ int alloc_fd(unsigned int type);
+ void close_all_files(void);
+ extern struct thread *main_thread;
+ void sparse(unsigned long data, size_t size);
++
++int close(int fd);
+ #endif
+ 
+ #endif /* _LIB_H_ */
+diff --git a/lib/sys.c b/lib/sys.c
+index 8f8a3de2..2f33c937 100644
+--- a/lib/sys.c
++++ b/lib/sys.c
+@@ -263,11 +263,6 @@ char *getcwd(char *buf, size_t size)
+     return buf;
+ }
+ 
+-#define LOG_PATH "/var/log/"
+-#define SAVE_PATH "/var/lib/xen"
+-#define SAVE_CONSOLE 1
+-#define RESTORE_CONSOLE 2
+-
+ int mkdir(const char *pathname, mode_t mode)
+ {
+     errno = EIO;
+@@ -286,18 +281,30 @@ int posix_openpt(int flags)
+     return fd;
+ }
+ 
++static int open_pt(struct mount_point *mnt, const char *pathname, int flags,
++                   mode_t mode)
++{
++    return posix_openpt(flags);
++}
++
+ int open_savefile(const char *path, int save)
+ {
+     int fd;
+     char nodename[64];
+ 
+-    snprintf(nodename, sizeof(nodename), "device/console/%d", save ? SAVE_CONSOLE : RESTORE_CONSOLE);
++    snprintf(nodename, sizeof(nodename), "device/console/%d", save ? 1 : 2);
+ 
+     fd = open_consfront(nodename);
+     printk("fd(%d) = open_savefile\n", fd);
+ 
+     return fd;
+ }
++
++static int open_save(struct mount_point *mnt, const char *pathname, int flags,
++                     mode_t mode)
++{
++    return open_savefile(pathname, flags & O_WRONLY);
++}
+ #else
+ int posix_openpt(int flags)
+ {
+@@ -311,24 +318,59 @@ int open_savefile(const char *path, int save)
+ }
+ #endif
+ 
+-int open(const char *pathname, int flags, ...)
++static int open_log(struct mount_point *mnt, const char *pathname, int flags,
++                    mode_t mode)
+ {
+     int fd;
++
+     /* Ugly, but fine.  */
+-    if (!strncmp(pathname,LOG_PATH,strlen(LOG_PATH))) {
+-	fd = alloc_fd(FTYPE_CONSOLE);
+-        printk("open(%s) -> %d\n", pathname, fd);
+-        return fd;
++    fd = alloc_fd(FTYPE_CONSOLE);
++    printk("open(%s%s) -> %d\n", mnt->path, pathname, fd);
++    return fd;
++}
++
++static int open_mem(struct mount_point *mnt, const char *pathname, int flags,
++                    mode_t mode)
++{
++    int fd;
++
++    fd = alloc_fd(FTYPE_MEM);
++    printk("open(%s%s) -> %d\n", mnt->path, pathname, fd);
++    return fd;
++}
++
++static struct mount_point mount_points[] = {
++    { .path = "/var/log",     .open = open_log,  .dev = NULL },
++    { .path = "/dev/mem",     .open = open_mem,  .dev = NULL },
++#ifdef CONFIG_CONSFRONT
++    { .path = "/dev/ptmx",    .open = open_pt,   .dev = NULL },
++    { .path = "/var/lib/xen", .open = open_save, .dev = NULL },
++#endif
++};
++
++int open(const char *pathname, int flags, ...)
++{
++    unsigned int m, mlen;
++    struct mount_point *mnt;
++    mode_t mode = 0;
++    va_list ap;
++
++    if ( flags & O_CREAT )
++    {
++        va_start(ap, flags);
++        mode = va_arg(ap, mode_t);
++        va_end(ap);
+     }
+-    if (!strncmp(pathname, "/dev/mem", strlen("/dev/mem"))) {
+-        fd = alloc_fd(FTYPE_MEM);
+-        printk("open(/dev/mem) -> %d\n", fd);
+-        return fd;
++
++    for ( m = 0; m < ARRAY_SIZE(mount_points); m++ )
++    {
++        mnt = mount_points + m;
++        mlen = strlen(mnt->path);
++        if ( !strncmp(pathname, mnt->path, mlen) &&
++             (pathname[mlen] == '/' || pathname[mlen] == 0) )
++            return mnt->open(mnt, pathname + mlen, flags, mode);
+     }
+-    if (!strncmp(pathname, "/dev/ptmx", strlen("/dev/ptmx")))
+-        return posix_openpt(flags);
+-    if (!strncmp(pathname,SAVE_PATH,strlen(SAVE_PATH)))
+-        return open_savefile(pathname, flags & O_WRONLY);
++
+     errno = EIO;
+     return -1;
+ }
 -- 
 2.35.3
 
