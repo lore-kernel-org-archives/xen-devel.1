@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B736AC05027
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Feb 2023 15:37:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.495207.765483 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05107C61DA4
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Feb 2023 15:39:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.495215.765505 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRxMt-0000vA-9o; Tue, 14 Feb 2023 15:37:19 +0000
+	id 1pRxOU-0001iM-8B; Tue, 14 Feb 2023 15:38:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 495207.765483; Tue, 14 Feb 2023 15:37:19 +0000
+Received: by outflank-mailman (output) from mailman id 495215.765505; Tue, 14 Feb 2023 15:38:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRxMt-0000v3-5T; Tue, 14 Feb 2023 15:37:19 +0000
-Received: by outflank-mailman (input) for mailman id 495207;
- Tue, 14 Feb 2023 15:37:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pRxOU-0001hm-2C; Tue, 14 Feb 2023 15:38:58 +0000
+Received: by outflank-mailman (input) for mailman id 495215;
+ Tue, 14 Feb 2023 15:38:56 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ncYx=6K=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1pRxMq-0000ux-Ng
- for xen-devel@lists.xenproject.org; Tue, 14 Feb 2023 15:37:18 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 743dda42-ac7d-11ed-93b5-47a8fe42b414;
- Tue, 14 Feb 2023 16:37:14 +0100 (CET)
-Received: from j130084.upc-j.chello.nl ([24.132.130.84]
- helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pRxLi-009fnp-0h; Tue, 14 Feb 2023 15:36:49 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A87A4302E5D;
- Tue, 14 Feb 2023 12:22:17 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id DC38A20B4E943; Tue, 14 Feb 2023 12:22:17 +0100 (CET)
+ <SRS0=Xrib=6K=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1pRxOS-0001Wn-71
+ for xen-devel@lists.xenproject.org; Tue, 14 Feb 2023 15:38:56 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20602.outbound.protection.outlook.com
+ [2a01:111:f400:fe5a::602])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ae3d67da-ac7d-11ed-933c-83870f6b2ba8;
+ Tue, 14 Feb 2023 16:38:53 +0100 (CET)
+Received: from MW4PR03CA0320.namprd03.prod.outlook.com (2603:10b6:303:dd::25)
+ by PH8PR12MB6914.namprd12.prod.outlook.com (2603:10b6:510:1cb::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.19; Tue, 14 Feb
+ 2023 15:38:47 +0000
+Received: from CO1NAM11FT088.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:dd:cafe::c6) by MW4PR03CA0320.outlook.office365.com
+ (2603:10b6:303:dd::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.24 via Frontend
+ Transport; Tue, 14 Feb 2023 15:38:47 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1NAM11FT088.mail.protection.outlook.com (10.13.175.131) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6111.10 via Frontend Transport; Tue, 14 Feb 2023 15:38:46 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 14 Feb
+ 2023 09:38:45 -0600
+Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
+ via Frontend Transport; Tue, 14 Feb 2023 09:38:44 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,87 +61,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 743dda42-ac7d-11ed-93b5-47a8fe42b414
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=b7LTeIXXRhjHNZKLwP2eUBOvy8A+bNKHoN43DEwbShs=; b=ZJ60tcltd9tUxPXvvq0xlFyIL6
-	54nH3MAS0etSF71Vg31JUcBLXpBh0L+qyMjnH0cxJZnhy+fNVHyAzg6tUysiafwkXr6EGN1bBLvH8
-	EYt+sO5hnoq5doF2AgnlkNiLoWPL6qsbM1FtrRNneXwa9ml2PbJyjXR/IJ2cuIvmKzCrsRHcWDyHW
-	pNejNvINpl6m6Rt/Z/UQdUP58lzgNnEq801+MLxXOmpukMds0dFq1ldemt3EOaEF2sESv/EOD4B5P
-	2whxU1KzDZJfq7oBespZomiCoXfkBFdsr7hb1C+wZ5VkYomLpJgiFCa2lMYkziYJc7yEVbHqvKP/D
-	ysJjZYXQ==;
-Date: Tue, 14 Feb 2023 12:22:17 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Stephen Rothwell <sfr@canb.auug.org.au>
-Cc: Juergen Gross <jgross@suse.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>,
-	Xen Devel <xen-devel@lists.xenproject.org>,
-	Per Bilse <per.bilse@citrix.com>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Next Mailing List <linux-next@vger.kernel.org>
-Subject: Re: linux-next: duplicate patches in the xen-tip tree
-Message-ID: <Y+tu6Xqqb6cdiDAA@hirez.programming.kicks-ass.net>
-References: <20230214124700.22f0a62e@canb.auug.org.au>
+X-Inumbo-ID: ae3d67da-ac7d-11ed-933c-83870f6b2ba8
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TjgjpTEHlCqZJps126iT/LYemc31bd+qk+mIqjEQ663gUot1seDNVG8VZcN90EgRgwzhN9p1XsWZspqAiTyxIIv3CZypgOXKpEMaOjVCM52bt7Ro/kRWbRayThPhekgWuxGPdo07SRssJqf2ak7w9sN50tgctJrF8Xysn01FhBIyBhL69h4K5HCAwz8ka5LDpZ/76KmSGcvJkACba/qLvoEcF1mvzlGNJyzHpZTuIW9EaK9w7jdIOMMaBCiomM0sfkr9QHIlRimOie5O/r2b2yJuyL63DJgMAFrmhsgOsqwk/0+25GPJp2bqai5MAKxLhVC30dnbE2IbIbCtEFZywg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+XI/+Q/H0hC3+0B3P5aQlm8k2GZbJADIABnvkZNJtFk=;
+ b=WenY5yBxXoCz5G4VeWYHtQmGGisLCY9hXjUsJXXkvFKWg+sNID/oGulopaIzgglIdZ57HMX5pICo/kI7duYn35TooYHLaodITCsEUKsTxIIGyeZSLxs1qKU/Y95oWMAyG+Ce/2Hl7DlM4RBDIQQzHUtoujwspiU6lToaN4/YnveH2jbqi6Bjz+84cZUpMUao604ajGNWVO9y6z9USiPi7V+2oE2Dt3RTwFWagQecu5Zoh8wLHAwyB12kdZuUORA0Z5U6FzbsKo3aTig/ICUYN7Ns7QfDUNx9qBpkZRWVA4bExxmEaGWv+E890tgRQTrnUilg4Msm5v86RwsnIHCkqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+XI/+Q/H0hC3+0B3P5aQlm8k2GZbJADIABnvkZNJtFk=;
+ b=w+hjcxgKuR8g5tT2iBSA6khlxyFbJHKLqfWpXlouE9jQwzQd5qwRJnGj490vrVokQxQdttSz3xqL1BXziIPDk9fG+ZoodShWimaePqgDTB0I1qcpE0NFKlguL6YRxxZ9tmDp/2Ugez26M4W9HgkilQKY6yBsh0m4Ec+eHkrsljE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 0/5] automation: dom0less arm32 testing
+Date: Tue, 14 Feb 2023 16:38:37 +0100
+Message-ID: <20230214153842.15637-1-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="9N+tlQnp6RT7SrtH"
-Content-Disposition: inline
-In-Reply-To: <20230214124700.22f0a62e@canb.auug.org.au>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT088:EE_|PH8PR12MB6914:EE_
+X-MS-Office365-Filtering-Correlation-Id: dc6e551b-5cba-48bb-ea0c-08db0ea18fef
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	HKD7kY2zJjkmb76SCnZnjF8fE433fVYoAgMaNznaWNUZyXoO0TmRB6E/jvdcknjnTM0XrS3BXO1OnjmzFp2nSOuyNZ9pBYVFX6nShxqijgVDsgDzRJBsUW4BczeKAwj5/aV0pUcOemPlo4Y14Y4KgSpNCvGua9sE4FInIHXYC764q1eGuxUXEDjvITCHRxtVEAtt67YTmxxz4hkKJyPbeaU2j4INd6b6QggUBIpNta7xt9LKUHTPtSXNSHxqhibcpXi9d3TIeRalIi0iD3c9rok4rXiEZ9Un0gF9rOsRP7GcKd3dd6fOAT5NKIQrjcQAOfrJtefIfumSI+UOZ6snh31bZQWpHwKhnGxR+EL6RkK1wkX+OSn2woiOGzwueJ2E3YA9+4kz1yDqIEYvFn2iKa8bXlb2I0gcOTNd0a91CTKDfMN+jJKDKH89RTCyepIIkJH5Ags7wttnUknXv8v64Q/plIX9d3W9ENoVCs28rv9qvhDtBGM32IeEnhGdSEo5DvC6zTsp2WwgyWuFwcR/Xar3yLlcmuukWbzqvv1oNgPgzVGr1YzHsuWmE0PE03SRp1bjhYeWJF1iKwLJiHV1YYxJlcJ/00r46EZT2K5D0+C43SRr1eHOGUPuzul28LzV/0/pGlHE7ocmAW8/5XHGTUTJVe8mT1mM08MhO6LqugZ5UbEfcsK1gQdBsH1stWS56PQLFJDTd/QvUtNyWvUgLIEybGJIAX4br77937/RD7+RJDXkZmN+vLNn3SFe8oSF
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(346002)(39860400002)(376002)(396003)(451199018)(36840700001)(46966006)(40470700004)(316002)(54906003)(356005)(426003)(47076005)(5660300002)(8936002)(40480700001)(40460700003)(81166007)(82740400003)(41300700001)(2906002)(36756003)(8676002)(36860700001)(6666004)(70206006)(44832011)(82310400005)(83380400001)(86362001)(966005)(478600001)(26005)(6916009)(186003)(1076003)(70586007)(4326008)(2616005)(336012)(32563001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2023 15:38:46.9039
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dc6e551b-5cba-48bb-ea0c-08db0ea18fef
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1NAM11FT088.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6914
 
+This patch series aims at improving the arm32 CI testing by introducing
+the dom0less-based tests. It creates a foundation for further test expansion.
+This is particularly important now, when OSSTEST arm32 stuff is down and we
+need to have at least some coverage in gitlab CI.
 
---9N+tlQnp6RT7SrtH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Note:
+First patch is added to the series for convenience. It switches the arm32
+cross builds to be executed on arm64 instead of x86, as the latter has a lot
+less resources resulting in slowing down the whole pipeline.
 
-On Tue, Feb 14, 2023 at 12:47:00PM +1100, Stephen Rothwell wrote:
-> Hi all,
->=20
-> The following commits are also in the tip tree as different commits
-> (but the same patches):
->=20
->   415dab3c1796 ("drivers/xen/hypervisor: Expose Xen SIF flags to userspac=
-e")
->   336f560a8917 ("x86/xen: don't let xen_pv_play_dead() return")
->   f697cb00afa9 ("x86/xen: mark xen_pv_play_dead() as __noreturn")
->=20
-> These are commits
->=20
->   859761e770f8 ("drivers/xen/hypervisor: Expose Xen SIF flags to userspac=
-e")
->   076cbf5d2163 ("x86/xen: don't let xen_pv_play_dead() return")
->   1aff0d2658e5 ("x86/xen: mark xen_pv_play_dead() as __noreturn")
->=20
-> in the tip tree.
+CI pipeline performed on top of this series + cppcheck patch:
+https://gitlab.com/xen-project/people/morzel/xen-orzelmichal/-/pipelines/777181033
 
-This was intentional (dependencies) and the plan is to only offer the
-tip branch for merge after the Xen tree goes in.
+Michal Orzel (5):
+  automation: Switch arm32 cross builds to run on arm64
+  automation: Add arm32 dom0less testing
+  automation: Add a static memory allocation test on arm32
+  automation: Add a gzip compressed kernel image test on arm32
+  automation: Add a true dom0less test on arm32
 
---9N+tlQnp6RT7SrtH
-Content-Type: application/pgp-signature; name="signature.asc"
+ ... => unstable-arm64v8-arm32-gcc.dockerfile} |   3 +-
+ automation/gitlab-ci/build.yaml               |  30 +++-
+ automation/gitlab-ci/test.yaml                |  64 ++++++++
+ .../scripts/qemu-smoke-dom0less-arm32.sh      | 142 ++++++++++++++++++
+ 4 files changed, 232 insertions(+), 7 deletions(-)
+ rename automation/build/debian/{unstable-arm32-gcc.dockerfile => unstable-arm64v8-arm32-gcc.dockerfile} (94%)
+ create mode 100755 automation/scripts/qemu-smoke-dom0less-arm32.sh
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.25.1
 
-iQIzBAABCgAdFiEEv3OU3/byMaA0LqWJdkfhpEvA5LoFAmPrbuMACgkQdkfhpEvA
-5Lq1xQ//X0sV6gQk3sHy5WQPnx4D4OcH0oiOyu9ytASjCEVL/wxNlB3TOAW9TV1e
-eWTTdx3NoTI8A2i3u8SEYzlGN6+p/jCJdIlfwyeRTpJ5l6f0U+xKN2LYc7yn7h34
-faixh10wtlG//RzdJjVsOMkORjKiZuV7BYSViVNu9Trc5AhcpP53wevx5wk7VN9E
-wTM7wJM6r3/g3SGM7f5ZNB4rr0SnZGoNNcO9dEeBOPK5PR5iGSQJtPMSS/2lKk5i
-KQimr0N7jR6aRPzsN0+zAECnE0WW71N/4UCUZ5tGJIMZreCBhZTyXC+D+tTerxkM
-C53RaFq6zRx+wQVN7waVHLuboKKO5vaGYrt8gy9sVkaoo6sdtz94QuHldG6FCg4b
-3APdN43UCd0vB2WX4yEmnAsgOY4AqkebEAcFyCEME+nEpA2zr/tjCXG7JfKqQNG8
-Ujy84aM2mKs4fVmaPhunXCv9IxHLcyTriVsnmcYi+gn68913NsFVqHiAr4/Lf9dO
-QfCyAqWEcxxfoqiy8ebOumivjXNn8Mz5lSWD/oEJTI11rtzleRJLwrt7W9JE6gI3
-HRZK1/x7Mc8kbQIvACqx4paxa0B/8+/67xruENgjv7EbUxjIoX7uYeIixfol7OMf
-eKgsJ25N7IvxWnSDUtXeHI5BvyKHX/4B/aVacyyDJHva4R5dHQA=
-=YOXl
------END PGP SIGNATURE-----
-
---9N+tlQnp6RT7SrtH--
 
