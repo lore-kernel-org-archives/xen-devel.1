@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B617AC64EC7
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Feb 2023 15:39:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.495214.765500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C88C64ED8
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Feb 2023 15:39:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.495217.765523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRxOT-0001ap-UF; Tue, 14 Feb 2023 15:38:57 +0000
+	id 1pRxOV-00023n-BJ; Tue, 14 Feb 2023 15:38:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 495214.765500; Tue, 14 Feb 2023 15:38:57 +0000
+Received: by outflank-mailman (output) from mailman id 495217.765523; Tue, 14 Feb 2023 15:38:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRxOT-0001af-PW; Tue, 14 Feb 2023 15:38:57 +0000
-Received: by outflank-mailman (input) for mailman id 495214;
- Tue, 14 Feb 2023 15:38:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pRxOV-00021f-1Y; Tue, 14 Feb 2023 15:38:59 +0000
+Received: by outflank-mailman (input) for mailman id 495217;
+ Tue, 14 Feb 2023 15:38:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Xrib=6K=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1pRxOR-0001Wo-Va
- for xen-devel@lists.xenproject.org; Tue, 14 Feb 2023 15:38:55 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2061f.outbound.protection.outlook.com
- [2a01:111:f400:fe59::61f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ad369242-ac7d-11ed-93b5-47a8fe42b414;
- Tue, 14 Feb 2023 16:38:51 +0100 (CET)
-Received: from BN7PR02CA0033.namprd02.prod.outlook.com (2603:10b6:408:20::46)
- by DM4PR12MB7717.namprd12.prod.outlook.com (2603:10b6:8:103::14) with
+ id 1pRxOT-0001Wn-73
+ for xen-devel@lists.xenproject.org; Tue, 14 Feb 2023 15:38:57 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [2a01:111:f400:7eae::600])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b07c23f2-ac7d-11ed-933c-83870f6b2ba8;
+ Tue, 14 Feb 2023 16:38:55 +0100 (CET)
+Received: from BN0PR04CA0001.namprd04.prod.outlook.com (2603:10b6:408:ee::6)
+ by CH2PR12MB4938.namprd12.prod.outlook.com (2603:10b6:610:34::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.24; Tue, 14 Feb
- 2023 15:38:47 +0000
-Received: from BN8NAM11FT086.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:20:cafe::ef) by BN7PR02CA0033.outlook.office365.com
- (2603:10b6:408:20::46) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.24 via Frontend
- Transport; Tue, 14 Feb 2023 15:38:47 +0000
+ 2023 15:38:51 +0000
+Received: from BN8NAM11FT083.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:ee:cafe::fe) by BN0PR04CA0001.outlook.office365.com
+ (2603:10b6:408:ee::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.26 via Frontend
+ Transport; Tue, 14 Feb 2023 15:38:51 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT086.mail.protection.outlook.com (10.13.176.220) with Microsoft SMTP
+ BN8NAM11FT083.mail.protection.outlook.com (10.13.177.75) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6086.26 via Frontend Transport; Tue, 14 Feb 2023 15:38:47 +0000
+ 15.20.6086.26 via Frontend Transport; Tue, 14 Feb 2023 15:38:51 +0000
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 14 Feb
- 2023 09:38:47 -0600
+ 2023 09:38:50 -0600
 Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
- via Frontend Transport; Tue, 14 Feb 2023 09:38:46 -0600
+ via Frontend Transport; Tue, 14 Feb 2023 09:38:49 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,22 +61,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad369242-ac7d-11ed-93b5-47a8fe42b414
+X-Inumbo-ID: b07c23f2-ac7d-11ed-933c-83870f6b2ba8
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ta12bThNphkHAZydVdUXkmkG+JwwTOkoadommGHiD09IgXjBBW1by0fzbhKxRCeNEDtkCe/f7JNLvSFvGLDfH7T2oKFPtvuUNWeJkvxVZ2MFPwMBdb5hqHXvaLGl2gAfE3AAQIDNbwqzqjGAqfEKJvsuJ3H82rJc7rWW6YoT6LbxBItvXAvxU0piVqIUDF42q6EIywqDUP3R46zBF5RsW6XNd/4D+UzJ2Av9OfvHsYPYhmxlVV82x5leqaV9pnd9CpLFubFHUwxUGUyR6t4RL6uqTYCPkLJ8m6nAi8xRrKQ5Dlr9PEJ1Ey18klw4/yG/vY+Y0iS3HJwhkRMkO6Myjg==
+ b=bZcH4xujC2G2v82cxAudHWpjXsFoRHAqdcXZ/oIv/aF/KHzqFk4Dc73AIibMKPPQ6FVM1XRiLM2y5hY05zNCIAV8lUWtuD/w9+0b2CD22nGFhVNH3UiI3JQSFEJKINFIHQrFQR96tEJKm2EWosfxl6kF0Ets/tnnCdOjX4pvIEjsfxRv9n0ydVLHb7qbA2P9Px8c1uxAbCpFt4Nrw6oR+B3LOnA/+aBmWFqB9JTJ0ZRylBpzKrn37CQ1jCy/hDXB3NbU5tn03q4PbcF8IOeu2Zi5EmcbX3DCYKGmur7ok79mM+oMpvv/5zFAOKh8FS0Ss8xSkKsOYcZOAjjpJuLtGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YBMwFXs2iyyGl7+YYdai6PnoFQtpNzal7lo6WSR2gU0=;
- b=C0i1AqZgTIYFelYLmlb0yG/1xCQZiMtvuZilf4g8Zd0zSILEPRdhYXsF0ONkQr1vjUVi0KiewihkjGosS0ZvVLJfBiV3YSlsXbRFEpoJ+sY2FTioV0KoXund+QhKpWZUIcjKDJntQu6KaM6sm3jYv5UaotpVVE5df004+RmieZtZaBOlkWylnbZ08WbSA98V/tuCoTEDwe8m6NKcNr3z7/APqYsi9hpriWvGRPOT8TTe1HBM+s0iBgzTclyQODaKGGTjmawRYRwf6umjHhBtisDGtm6htN3BrWnm4KhopNIE37rSL+HAf9XGWcvATkrzPK9UvAHoxRQQI+p2HW5xJw==
+ bh=VrWoeY005CFD5W1azhm+V3ALraRSyeUKG95MNZECaF8=;
+ b=RiCQypaykDEH8zyEUyUnCglaMHqZ/Au4gy6thrngoWiVzNld56Y9+NFDfc/IpIM6m0fAy8OsUv4Pc6WXJPIHCaco2/Z7QpNTde5r19KWGVp0m5nY9JrYlCakvbHDK2pfVB+s9MPKV30Vbee+uLDQCw+uCEbjvSE/ngdorz8cglu2Ez5mGrMrYjXNnXmQxZtf05zd0g+cPQfzJIK5j/6CHsCyHvlLCe2mVBp3b3Pb5kutn2UouwGo/7ISBIAmZYB577veNqXr71CeQ7VYJlstt+J/MdzQNUJvxKNWbxUkDcDJYz5NczZn9dzPpmLUhP8x7JEY2NjaVE3In9TnGa1r6g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YBMwFXs2iyyGl7+YYdai6PnoFQtpNzal7lo6WSR2gU0=;
- b=vUMomFGwdZLrE0Y/RmFqvyrnm72ATArsasPi4an4hZDN6K9KzgciqVF4T6Up9Tsl7LtRpdy63ycgLMn4OniIB3RaXPmqYAlGontOi2iye7FNsxqdjjmxDqc6UHPVCPrvHwPdD1q2XMtMsk/BHJZJ7Ll6tpBn9OdOBhZ2crbtf7A=
+ bh=VrWoeY005CFD5W1azhm+V3ALraRSyeUKG95MNZECaF8=;
+ b=ZtRAuO9swxrvYVM3aXHxqCAMhaaXvjROM6vt6tN6Q/4YAIhx6mXuzMGB1wggcOsE1BnZYpduLAlCyXK6PJLUiTCh6uervCpoWOg3ZhVAYYQL7LcfEYZYh3vpv4+n6vnkE3MojAJh/EktrRgLK//2AJWgyvtf/7hmx5vJFvHuYKU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -86,10 +86,10 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 From: Michal Orzel <michal.orzel@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 1/5] automation: Switch arm32 cross builds to run on arm64
-Date: Tue, 14 Feb 2023 16:38:38 +0100
-Message-ID: <20230214153842.15637-2-michal.orzel@amd.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 4/5] automation: Add a gzip compressed kernel image test on arm32
+Date: Tue, 14 Feb 2023 16:38:41 +0100
+Message-ID: <20230214153842.15637-5-michal.orzel@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230214153842.15637-1-michal.orzel@amd.com>
 References: <20230214153842.15637-1-michal.orzel@amd.com>
@@ -98,113 +98,106 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8NAM11FT086:EE_|DM4PR12MB7717:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a065924-8f57-4207-fa46-08db0ea19043
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT083:EE_|CH2PR12MB4938:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca799b3c-8d72-4548-8cc3-08db0ea1927d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	sYuq54mPUTnDagYjCATStV04epwf+GdG6DSKT3nWOfLnaIFhsVK+Hn++JIVwUyzU8Y4I1c/S4xGH4NHcPNO+7x5OsqPwWN6hH5l9G+mwBBXlRdiv3k9q/1VcR6/jwwUs/TuqpL706cobJILoDmL5FRTieacXzSMZEOVF00cYx+p7t7QSRV1qJqkmJ3TNbUjZ48DyE8FKwhy3v3UEokdSxjVnE0SX7ocehtCZWb91nQ91uQltJnlCzXuOcbtgB+YxW6dIaldVpbNvz/GqSL4mQaZ8jmYJi9gSCbHTgsHwJJWK8DSaBlpwJxCAYj4Pr2lPwW2l/JE6Zk71ncbXi9QHwnBCWCX0dSLufFw3e9LImuMhztff2FCAljvhZgSC8DdRHRQc/Tmr97l3nCglM+UKn7RVN/eW/JMpnjOWqu5v2PgU85OTp8LSP4zjHKPmVWQS/QFAAoqNAsH4Jo2GOl4GuTQNbG6hG9v+ItFPiz2vEV9vKCwD5S94Fkn3wXgjqDLcJ+eydkbxnY20v7Dn2f17Gkm11+94ymT/MGOt7XG8DhZANmmxy+AUAriSbF9WfalgtQ7FoC/GDcHn3Qxb7yPi2dKwoOknjA7E296EV3RTGkrU+tw7M8EH7U0fofBdFScgeA4eAPg2OGAT8iMqFHplLdtUx2glMf/UlQ0bHGhYcG9EjPOQiF09+c5N2e9P4b/8JZm4WikEL5gFo8wbdUWk7cF/ZuqPIfRQWg1/d7veuio=
+	stVE1UCSS1wdeJf9uMFsK6dHh4qQNpqq4EWDgy1025opqGjI6rbH4aYnZ/UY57jI/nGzzXCNsUIp7TCteN2OXfyfEMHiDHY8YF/uQIFBAjva7q4fNHh7lbSpLEv/N1n3gc6aEazrhxw1tSoFsI0058zskyFlDovgoxRhICN18/4ss3fWz840QGAghWa4l0BKP+tvs4X2u04RrSbykLKUxS9aDQZBT/9nB+aYaEIHkrmVHuFw038jTHno0dZ8Yw+t//XUiJs9jfsGLjII37TAmbgN7z1otX269ESB2ui7QN2NIi0XoW2fHMHxdNJZFNI6l+2bdN0JNX3FVFo+NaNFxU1XpQcF7Br2oqUC3jD0goZRng644DmzaRvJAV3K/XLSXBQADDS+7bqAbMO0gP/tN+MTLN5fS1L275DSvMnpESU19F/VPgZxdNNN1///vLAntg87KpMUVjOImYCnBRYAQ/DERJaacUNaPchfkbdutsAfrt9r/qny8zVyEh6QDk3yXvbt+2P6twCDLKSCPyzAmeZetlo5c088vIbQK/Y7rjX0si7bfB4JMZW6n232VNNpo370+wGPVKlREpZ6ktikCnm1u05wKQNa2GkhCi7fpgByUZ3IMY017rHrP1pjOO7AeKLXnq6QdpMWD9FH02h15EydUeNt1pwHRq1ul6EY58lgIorEh+4mobvyb1ywqqJ4WHJLGqbJ4qazxg3Wsv127uOLeoBPUGAM4I+vjkBC1xE=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(396003)(39860400002)(136003)(376002)(346002)(451199018)(46966006)(36840700001)(40470700004)(336012)(26005)(186003)(36756003)(82310400005)(2616005)(478600001)(86362001)(426003)(83380400001)(47076005)(1076003)(6666004)(54906003)(316002)(40480700001)(4326008)(41300700001)(36860700001)(8676002)(6916009)(8936002)(70586007)(5660300002)(70206006)(44832011)(2906002)(356005)(81166007)(40460700003)(82740400003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(396003)(346002)(136003)(376002)(451199018)(36840700001)(46966006)(40470700004)(82740400003)(40460700003)(2906002)(478600001)(83380400001)(356005)(26005)(1076003)(186003)(6666004)(36756003)(966005)(5660300002)(41300700001)(44832011)(36860700001)(70586007)(70206006)(8936002)(6916009)(8676002)(4326008)(82310400005)(81166007)(86362001)(426003)(54906003)(40480700001)(336012)(47076005)(2616005)(316002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2023 15:38:47.5486
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2023 15:38:51.2969
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a065924-8f57-4207-fa46-08db0ea19043
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca799b3c-8d72-4548-8cc3-08db0ea1927d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN8NAM11FT086.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT083.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7717
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4938
 
-Due to the limited x86 CI resources slowing down the whole pipeline,
-switch the arm32 cross builds to be executed on arm64 which is much more
-capable. For that, rename the existing debian container dockerfile
-from unstable-arm32-gcc to unstable-arm64v8-arm32-gcc and use
-arm64v8/debian:unstable as an image. Note, that we cannot use the same
-container name as we have to keep the backwards compatibility.
-Take the opportunity to remove extra empty line at the end of a file.
+Xen supports booting gzip compressed kernels, therefore add a new test
+job qemu-smoke-dom0less-arm32-gcc-gzip in debug and non-debug variant
+that will execute qemu-smoke-dom0less-arm32.sh script to test booting
+a domU with a gzip compressed kernel image (in our case zImage).
 
-Modify the tag of .arm32-cross-build-tmpl to arm64 and update the build
-jobs accordingly.
+By passing "gzip" as a test variant, the test will call gzip command
+to compress kernel image and use it in ImageBuilder configuration for
+domU1. No need for a specific check to be executed from domU. Being able
+to see a test message from a boot log is sufficient to mark a test as
+passed.
 
 Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
 Changes in v2:
- - new patch
-
-For convenience and own testing, I built and pushed the new container
-to registry.
+ - take into account dom0 presence
+ - drop Rb as a result of code changes
 ---
- ...ockerfile => unstable-arm64v8-arm32-gcc.dockerfile} |  3 +--
- automation/gitlab-ci/build.yaml                        | 10 +++++-----
- 2 files changed, 6 insertions(+), 7 deletions(-)
- rename automation/build/debian/{unstable-arm32-gcc.dockerfile => unstable-arm64v8-arm32-gcc.dockerfile} (94%)
+ automation/gitlab-ci/test.yaml                  | 16 ++++++++++++++++
+ automation/scripts/qemu-smoke-dom0less-arm32.sh | 13 +++++++++++++
+ 2 files changed, 29 insertions(+)
 
-diff --git a/automation/build/debian/unstable-arm32-gcc.dockerfile b/automation/build/debian/unstable-arm64v8-arm32-gcc.dockerfile
-similarity index 94%
-rename from automation/build/debian/unstable-arm32-gcc.dockerfile
-rename to automation/build/debian/unstable-arm64v8-arm32-gcc.dockerfile
-index b41a57f19729..11860425a6a2 100644
---- a/automation/build/debian/unstable-arm32-gcc.dockerfile
-+++ b/automation/build/debian/unstable-arm64v8-arm32-gcc.dockerfile
-@@ -1,4 +1,4 @@
--FROM debian:unstable
-+FROM arm64v8/debian:unstable
- LABEL maintainer.name="The Xen Project" \
-       maintainer.email="xen-devel@lists.xenproject.org"
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index c2bcc5d4d3e5..be7a55d89708 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -242,6 +242,22 @@ qemu-smoke-dom0less-arm32-gcc-debug-staticmem:
+     - *arm32-test-needs
+     - debian-unstable-gcc-arm32-debug-staticmem
  
-@@ -21,4 +21,3 @@ RUN apt-get update && \
-         apt-get autoremove -y && \
-         apt-get clean && \
-         rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
--
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index a053c5c7325d..f8e156e0a994 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -123,7 +123,7 @@
-   variables:
-     XEN_TARGET_ARCH: arm32
-   tags:
--    - x86_64
-+    - arm64
++qemu-smoke-dom0less-arm32-gcc-gzip:
++  extends: .qemu-arm32
++  script:
++    - ./automation/scripts/qemu-smoke-dom0less-arm32.sh gzip 2>&1 | tee ${LOGFILE}
++  needs:
++    - *arm32-test-needs
++    - debian-unstable-gcc-arm32
++
++qemu-smoke-dom0less-arm32-gcc-debug-gzip:
++  extends: .qemu-arm32
++  script:
++    - ./automation/scripts/qemu-smoke-dom0less-arm32.sh gzip 2>&1 | tee ${LOGFILE}
++  needs:
++    - *arm32-test-needs
++    - debian-unstable-gcc-arm32-debug
++
+ qemu-alpine-x86_64-gcc:
+   extends: .qemu-x86-64
+   script:
+diff --git a/automation/scripts/qemu-smoke-dom0less-arm32.sh b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+index bd89a3f8b45e..c2e331451d99 100755
+--- a/automation/scripts/qemu-smoke-dom0less-arm32.sh
++++ b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+@@ -33,6 +33,15 @@ fi
+ "
+ fi
  
- .arm32-cross-build:
-   extends: .arm32-cross-build-tmpl
-@@ -542,26 +542,26 @@ alpine-3.12-clang-debug:
- debian-unstable-gcc-arm32:
-   extends: .gcc-arm32-cross-build
-   variables:
--    CONTAINER: debian:unstable-arm32-gcc
-+    CONTAINER: debian:unstable-arm64v8-arm32-gcc
-     HYPERVISOR_ONLY: y
++if [[ "${test_variant}" == "gzip" ]]; then
++    # Compress kernel image with gzip (keep unmodified one for dom0)
++    gzip -k vmlinuz
++    passed="${test_variant} test passed"
++    domU_check="
++echo \"${passed}\"
++"
++fi
++
+ # dom0/domU rootfs
+ # We are using the same rootfs for dom0 and domU. The only difference is
+ # that for the former, we set explictly rdinit to /bin/sh, whereas for the
+@@ -89,6 +98,10 @@ if [[ "${test_variant}" == "static-mem" ]]; then
+     echo -e "\nDOMU_STATIC_MEM[0]=\"${domu_base} ${domu_size}\"" >> config
+ fi
  
- debian-unstable-gcc-arm32-debug:
-   extends: .gcc-arm32-cross-build-debug
-   variables:
--    CONTAINER: debian:unstable-arm32-gcc
-+    CONTAINER: debian:unstable-arm64v8-arm32-gcc
-     HYPERVISOR_ONLY: y
- 
- debian-unstable-gcc-arm32-randconfig:
-   extends: .gcc-arm32-cross-build
-   variables:
--    CONTAINER: debian:unstable-arm32-gcc
-+    CONTAINER: debian:unstable-arm64v8-arm32-gcc
-     HYPERVISOR_ONLY: y
-     RANDCONFIG: y
- 
- debian-unstable-gcc-arm32-debug-randconfig:
-   extends: .gcc-arm32-cross-build-debug
-   variables:
--    CONTAINER: debian:unstable-arm32-gcc
-+    CONTAINER: debian:unstable-arm64v8-arm32-gcc
-     HYPERVISOR_ONLY: y
-     RANDCONFIG: y
- 
++if [[ "${test_variant}" == "gzip" ]]; then
++    sed -i 's/DOMU_KERNEL\[0\]=.*/DOMU_KERNEL\[0\]="vmlinuz.gz"/' config
++fi
++
+ rm -rf imagebuilder
+ git clone https://gitlab.com/ViryaOS/imagebuilder
+ bash imagebuilder/scripts/uboot-script-gen -t tftp -d . -c config
 -- 
 2.25.1
 
