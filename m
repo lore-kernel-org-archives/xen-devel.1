@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBEDC636CC
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Feb 2023 23:57:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.494894.765060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D810C636D4
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Feb 2023 00:32:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.494901.765083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRih1-0002ln-9m; Mon, 13 Feb 2023 23:57:07 +0000
+	id 1pRjFJ-00007b-Ku; Tue, 14 Feb 2023 00:32:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 494894.765060; Mon, 13 Feb 2023 23:57:07 +0000
+Received: by outflank-mailman (output) from mailman id 494901.765083; Tue, 14 Feb 2023 00:32:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pRih1-0002lg-6i; Mon, 13 Feb 2023 23:57:07 +0000
-Received: by outflank-mailman (input) for mailman id 494894;
- Mon, 13 Feb 2023 23:57:06 +0000
+	id 1pRjFJ-00007T-HA; Tue, 14 Feb 2023 00:32:33 +0000
+Received: by outflank-mailman (input) for mailman id 494901;
+ Tue, 14 Feb 2023 00:32:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i+K/=6J=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1pRih0-0002lW-8k
- for xen-devel@lists.xenproject.org; Mon, 13 Feb 2023 23:57:06 +0000
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ <SRS0=nHuR=6K=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1pRjFI-0008Jd-8V
+ for xen-devel@lists.xenproject.org; Tue, 14 Feb 2023 00:32:32 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [2604:1380:4601:e00::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1ca9f1b2-abfa-11ed-933c-83870f6b2ba8;
- Tue, 14 Feb 2023 00:57:04 +0100 (CET)
+ id 11392cc6-abff-11ed-933c-83870f6b2ba8;
+ Tue, 14 Feb 2023 01:32:31 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id E8D03CE0B18;
- Mon, 13 Feb 2023 23:57:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AFCB6C433EF;
- Mon, 13 Feb 2023 23:56:59 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D3805B81A2B;
+ Tue, 14 Feb 2023 00:32:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE6CCC4339B;
+ Tue, 14 Feb 2023 00:32:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,206 +46,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ca9f1b2-abfa-11ed-933c-83870f6b2ba8
+X-Inumbo-ID: 11392cc6-abff-11ed-933c-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1676332620;
-	bh=ooG84o3Fy2ttUBPRj/D/CuBk20QbKBTFeLh70y8Iqi8=;
+	s=k20201202; t=1676334749;
+	bh=Iko+bq06Ug3Z5JNn58WE7Wj2iLf6aIMHm/3cFv7xpJs=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=cV2b5FBj3UMizrspCC4XDHZJDFS8i4w/Fhw12GLGloz7Vr/67qfq2mJ+3bdLIFWMH
-	 qR3d6uu0hezC8AlFPEh1qRGAEO2D6hjQd5W2cAEUt/F76ByvAMAXZ1WRD5C7gPj3Ge
-	 0kxpRRQhVgk55ggVX0CR6TJ/S9Zuy7mkB8Uez5ArY3ye394+2373X56cnHW+SsbvO6
-	 Z4ZXahVWz8g0uY+RnQdfGofvhkkhbaARW3hfmZPZhLIg+3zWhYxiI4FwuBHxgPi9wS
-	 d9r1FfrU1Xy8KPlYNTWHt5zoi+tA5qa9x/lC/5ROKElHj9f5Q4heJLWKGTjmXWXwsF
-	 MuYZ+p+Mhlwvg==
-Date: Mon, 13 Feb 2023 15:56:58 -0800 (PST)
+	b=EhLdV79I/6i80Yd8Aiz2Vg3Zi+a3bjaqeFgjqr8nW3FLxVi0RJgEe188ojSAUj54w
+	 1Bf8Imhc5E4LWJAX6bcGAa5dI7Xwt7yHg5EeYed6VkmFSULiPQ2bvspK3C42CoaqWn
+	 gah+G8A0N/zjapmMAr5ojgyQKVsZc5rbAgnoxk2xn3eo17Lv90YAi/ZvYfThZ4+we0
+	 P6lw6dDln8SeU+vWVEV+tmw8iOSmuy+1mv4xXug0NpkSdGEYDanrriKakrqfZhk1QV
+	 FrPZ9lhCkXq2Gnvtl31Da2LmWMQW95TVJkqxT0VH6NV6RyCvmL46m7J58jV1+CgvWQ
+	 Rl3wcPLKvzC1w==
+Date: Mon, 13 Feb 2023 16:32:27 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Michal Orzel <michal.orzel@amd.com>
 cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
     Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] automation: Add container and build jobs to run cppcheck
- analysis
-In-Reply-To: <20230213142312.11806-1-michal.orzel@amd.com>
-Message-ID: <alpine.DEB.2.22.394.2302131551430.4661@ubuntu-linux-20-04-desktop>
-References: <20230213142312.11806-1-michal.orzel@amd.com>
+Subject: Re: [PATCH 2/3] automation: Add a static memory allocation test on
+ arm32
+In-Reply-To: <20230213142210.11728-3-michal.orzel@amd.com>
+Message-ID: <alpine.DEB.2.22.394.2302131545140.4661@ubuntu-linux-20-04-desktop>
+References: <20230213142210.11728-1-michal.orzel@amd.com> <20230213142210.11728-3-michal.orzel@amd.com>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Mon, 13 Feb 2023, Michal Orzel wrote:
-> Add a debian container with cppcheck installation routine inside,
-> capable of performing cppcheck analysis on Xen-only build including
-> cross-builds for arm32 and arm64.
+> Add a new test job qemu-smoke-dom0less-arm32-gcc-staticmem in debug
+> and non-debug variant that will execute qemu-smoke-dom0less-arm32.sh
+> script to test static memory allocation feature. The test case itself
+> is directly taken from dom0less arm64 testing.
 > 
-> Populate build jobs making use of that container to run cppcheck
-> analysis to produce a text report (xen-cppcheck.txt) containing the list
-> of all the findings.
-> 
-> This patch does not aim at performing any sort of bisection. Cppcheck is
-> imperfect and for now, our goal is to at least be aware of its reports,
-> so that we can compare them with the ones produced by better tools and
-> to be able to see how these reports change as a result of further
-> infrastructure improvements (e.g. exception list, rules exclusion).
+> Populate build jobs to compile Xen with config options necessary to
+> enable static memory feature. Populate test jobs passing "static-mem"
+> as a test variant. The test configures domU with a static memory region
+> (direct-mapped) and adds a check using /proc/iomem to determine the
+> memory region marked as "System RAM".
 > 
 > Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 
-Thanks for the patch, very nice!
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 
 > ---
-> For those interested in, here is a sample pipeline:
-> https://gitlab.com/xen-project/people/morzel/xen-orzelmichal/-/pipelines/775769167
-> ---
->  .../build/debian/unstable-cppcheck.dockerfile | 37 +++++++++++++++++
->  automation/gitlab-ci/build.yaml               | 40 +++++++++++++++++++
->  automation/scripts/build                      | 11 ++++-
->  3 files changed, 87 insertions(+), 1 deletion(-)
->  create mode 100644 automation/build/debian/unstable-cppcheck.dockerfile
+>  automation/gitlab-ci/build.yaml               | 20 +++++++++++++++++++
+>  automation/gitlab-ci/test.yaml                | 16 +++++++++++++++
+>  .../scripts/qemu-smoke-dom0less-arm32.sh      | 17 ++++++++++++++++
+>  3 files changed, 53 insertions(+)
 > 
-> diff --git a/automation/build/debian/unstable-cppcheck.dockerfile b/automation/build/debian/unstable-cppcheck.dockerfile
-> new file mode 100644
-> index 000000000000..39bcc50673c8
-> --- /dev/null
-> +++ b/automation/build/debian/unstable-cppcheck.dockerfile
-> @@ -0,0 +1,37 @@
-> +FROM debian:unstable
-> +LABEL maintainer.name="The Xen Project" \
-> +      maintainer.email="xen-devel@lists.xenproject.org"
-> +
-> +ENV DEBIAN_FRONTEND=noninteractive
-> +ENV CPPCHECK_VERSION=2.7
-> +ENV USER root
-> +
-> +RUN mkdir /build
-> +WORKDIR /build
-> +
-> +# dependencies for cppcheck and Xen-only build/cross-build
-> +RUN apt-get update && \
-> +    apt-get --quiet --yes install \
-> +        build-essential \
-> +        curl \
-> +        python-is-python3 \
-> +        libpcre3-dev \
-> +        flex \
-> +        bison \
-> +        gcc-arm-linux-gnueabihf \
-> +        gcc-aarch64-linux-gnu
-> +
-> +# cppcheck release build (see cppcheck readme.md)
-> +RUN curl -fsSLO https://github.com/danmar/cppcheck/archive/"$CPPCHECK_VERSION".tar.gz && \
-> +    tar xvzf "$CPPCHECK_VERSION".tar.gz && \
-> +    cd cppcheck-"$CPPCHECK_VERSION" && \
-> +    make install -j$(nproc) \
-> +        MATCHCOMPILER=yes \
-> +        FILESDIR=/usr/share/cppcheck \
-> +        HAVE_RULES=yes CXXFLAGS="-O2 -DNDEBUG -Wall -Wno-sign-compare -Wno-unused-function"
-> +
-> +# clean
-> +RUN apt-get autoremove -y && \
-> +    apt-get clean && \
-> +    rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/* && \
-> +    rm -rf cppcheck-"$CPPCHECK_VERSION"* "$CPPCHECK_VERSION".tar.gz
 > diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-> index a053c5c7325d..c8831ccbec7a 100644
+> index a053c5c7325d..166182bc595f 100644
 > --- a/automation/gitlab-ci/build.yaml
 > +++ b/automation/gitlab-ci/build.yaml
-> @@ -7,6 +7,7 @@
->      paths:
->        - binaries/
->        - xen-config
-> +      - xen-cppcheck.txt
->        - '*.log'
->        - '*/*.log'
->      when: always
-> @@ -145,6 +146,23 @@
->    variables:
->      <<: *gcc
+> @@ -565,6 +565,26 @@ debian-unstable-gcc-arm32-debug-randconfig:
+>      HYPERVISOR_ONLY: y
+>      RANDCONFIG: y
 >  
-> +.arm64-cross-build-tmpl:
-> +  <<: *build
-> +  variables:
-> +    XEN_TARGET_ARCH: arm64
-> +  tags:
-> +    - x86_64
-> +
-> +.arm64-cross-build:
-> +  extends: .arm64-cross-build-tmpl
-> +  variables:
-> +    debug: n
-> +
-> +.gcc-arm64-cross-build:
-> +  extends: .arm64-cross-build
-> +  variables:
-> +    <<: *gcc
-> +
->  .arm64-build-tmpl:
->    <<: *build
->    variables:
-> @@ -679,6 +697,28 @@ archlinux-current-gcc-riscv64-debug-randconfig:
->      EXTRA_FIXED_RANDCONFIG:
->        CONFIG_COVERAGE=n
->  
-> +# Cppcheck analysis jobs
-> +
-> +debian-unstable-gcc-cppcheck:
-> +  extends: .gcc-x86-64-build
-> +  variables:
-> +    CONTAINER: debian:unstable-cppcheck
-> +    CPPCHECK: y
-> +
-> +debian-unstable-gcc-arm32-cppcheck:
+> +debian-unstable-gcc-arm32-staticmem:
 > +  extends: .gcc-arm32-cross-build
 > +  variables:
-> +    CONTAINER: debian:unstable-cppcheck
-> +    CROSS_COMPILE: /usr/bin/arm-linux-gnueabihf-
-> +    CPPCHECK: y
+> +    CONTAINER: debian:unstable-arm32-gcc
+> +    HYPERVISOR_ONLY: y
+> +    EXTRA_XEN_CONFIG: |
+> +      CONFIG_EXPERT=y
+> +      CONFIG_UNSUPPORTED=y
+> +      CONFIG_STATIC_MEMORY=y
 > +
-> +debian-unstable-gcc-arm64-cppcheck:
-> +  extends: .gcc-arm64-cross-build
+> +debian-unstable-gcc-arm32-debug-staticmem:
+> +  extends: .gcc-arm32-cross-build-debug
 > +  variables:
-> +    CONTAINER: debian:unstable-cppcheck
-> +    CROSS_COMPILE: /usr/bin/aarch64-linux-gnu-
-> +    CPPCHECK: y
+> +    CONTAINER: debian:unstable-arm32-gcc
+> +    HYPERVISOR_ONLY: y
+> +    EXTRA_XEN_CONFIG: |
+> +      CONFIG_EXPERT=y
+> +      CONFIG_UNSUPPORTED=y
+> +      CONFIG_STATIC_MEMORY=y
 > +
->  ## Test artifacts common
+>  # Arm builds
 >  
->  .test-jobs-artifact-common:
-> diff --git a/automation/scripts/build b/automation/scripts/build
-> index f2f5e55bc04f..c219752d553e 100755
-> --- a/automation/scripts/build
-> +++ b/automation/scripts/build
-> @@ -38,7 +38,16 @@ cp xen/.config xen-config
->  # Directory for the artefacts to be dumped into
->  mkdir binaries
+>  debian-unstable-gcc-arm64:
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index 84ab1fee50a4..c2bcc5d4d3e5 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -226,6 +226,22 @@ qemu-smoke-dom0less-arm32-gcc-debug:
+>      - *arm32-test-needs
+>      - debian-unstable-gcc-arm32-debug
 >  
-> -if [[ "${HYPERVISOR_ONLY}" == "y" ]]; then
-> +if [[ "${CPPCHECK}" == "y" ]]; then
-> +    # Cppcheck analysis invokes Xen-only build.
-
-Given that when $CPPCHECK == y we are doing a hypervisor-only build,
-what do you think of also specifying $HYPERVISOR_ONLY == y in these
-cases?
-
-We could set both CPPCHECK=y and HYPERVISOR_ONLY=y in build.yaml and
-then here also check for both.
-
-
-> +    # Known limitation: cppcheck generates inconsistent reports when running
-> +    # in parallel mode, therefore do not specify -j<n>.
-
-I take you tried -j$(nproc) on gitlab-ci and didn't work well? I tested
--j$(nproc) in my native arm64 environment and seemed to work well.
-
-
-> +    xen/scripts/xen-analysis.py --run-cppcheck --cppcheck-misra
+> +qemu-smoke-dom0less-arm32-gcc-staticmem:
+> +  extends: .qemu-arm32
+> +  script:
+> +    - ./automation/scripts/qemu-smoke-dom0less-arm32.sh static-mem 2>&1 | tee ${LOGFILE}
+> +  needs:
+> +    - *arm32-test-needs
+> +    - debian-unstable-gcc-arm32-staticmem
 > +
-> +    # Preserve artefacts
-> +    cp xen/xen binaries/xen
-> +    cp xen/cppcheck-report/xen-cppcheck.txt xen-cppcheck.txt
-> +elif [[ "${HYPERVISOR_ONLY}" == "y" ]]; then
->      # Xen-only build
->      make -j$(nproc) xen
+> +qemu-smoke-dom0less-arm32-gcc-debug-staticmem:
+> +  extends: .qemu-arm32
+> +  script:
+> +    - ./automation/scripts/qemu-smoke-dom0less-arm32.sh static-mem 2>&1 | tee ${LOGFILE}
+> +  needs:
+> +    - *arm32-test-needs
+> +    - debian-unstable-gcc-arm32-debug-staticmem
+> +
+>  qemu-alpine-x86_64-gcc:
+>    extends: .qemu-x86-64
+>    script:
+> diff --git a/automation/scripts/qemu-smoke-dom0less-arm32.sh b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+> index c81529cbbfd0..f89ee8b6464a 100755
+> --- a/automation/scripts/qemu-smoke-dom0less-arm32.sh
+> +++ b/automation/scripts/qemu-smoke-dom0less-arm32.sh
+> @@ -17,6 +17,19 @@ echo \"${passed}\"
+>  "
+>  fi
 >  
+> +if [[ "${test_variant}" == "static-mem" ]]; then
+> +    # Memory range that is statically allocated to domU1
+> +    domu_base="0x50000000"
+> +    domu_size="0x20000000"
+> +    passed="${test_variant} test passed"
+> +    domU_check="
+> +mem_range=$(printf \"%08x-%08x\" ${domu_base} $(( ${domu_base} + ${domu_size} - 1 )))
+> +if grep -q -x \"\${mem_range} : System RAM\" /proc/iomem; then
+> +    echo \"${passed}\"
+> +fi
+> +"
+> +fi
+> +
+>  # domU rootfs
+>  mkdir rootfs
+>  cd rootfs
+> @@ -62,6 +75,10 @@ BOOT_CMD="bootm"
+>  UBOOT_SOURCE="boot.source"
+>  UBOOT_SCRIPT="boot.scr"' > config
+>  
+> +if [[ "${test_variant}" == "static-mem" ]]; then
+> +    echo -e "\nDOMU_STATIC_MEM[0]=\"${domu_base} ${domu_size}\"" >> config
+> +fi
+> +
+>  rm -rf imagebuilder
+>  git clone https://gitlab.com/ViryaOS/imagebuilder
+>  bash imagebuilder/scripts/uboot-script-gen -t tftp -d . -c config
 > -- 
 > 2.25.1
 > 
