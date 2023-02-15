@@ -4,29 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C40BCC636D4
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Feb 2023 12:02:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.495902.766331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C99C636CC
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Feb 2023 12:06:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.495915.766352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pSGUR-0002vh-Qd; Wed, 15 Feb 2023 12:02:23 +0000
+	id 1pSGXw-0004Eq-Go; Wed, 15 Feb 2023 12:06:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 495902.766331; Wed, 15 Feb 2023 12:02:23 +0000
+Received: by outflank-mailman (output) from mailman id 495915.766352; Wed, 15 Feb 2023 12:06:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pSGUR-0002va-Mc; Wed, 15 Feb 2023 12:02:23 +0000
-Received: by outflank-mailman (input) for mailman id 495902;
- Wed, 15 Feb 2023 12:02:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LhbV=6L=citrix.com=prvs=4037f5ffb=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1pSGUQ-0002d9-L5
- for xen-devel@lists.xenproject.org; Wed, 15 Feb 2023 12:02:22 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 98d2f2df-ad28-11ed-933c-83870f6b2ba8;
- Wed, 15 Feb 2023 13:02:21 +0100 (CET)
+	id 1pSGXw-0004Ej-Dc; Wed, 15 Feb 2023 12:06:00 +0000
+Received: by outflank-mailman (input) for mailman id 495915;
+ Wed, 15 Feb 2023 12:05:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5iRA=6L=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1pSGXu-0004EW-IH
+ for xen-devel@lists.xenproject.org; Wed, 15 Feb 2023 12:05:58 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1a25c237-ad29-11ed-93b5-47a8fe42b414;
+ Wed, 15 Feb 2023 13:05:56 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id DF0B8207CB;
+ Wed, 15 Feb 2023 12:05:55 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A362513483;
+ Wed, 15 Feb 2023 12:05:55 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id WsZ1JqPK7GMzQAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 15 Feb 2023 12:05:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,141 +53,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98d2f2df-ad28-11ed-933c-83870f6b2ba8
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1676462540;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=/vUeHriTwM3BI+2QtwE/fpQP34e1Nzdh1FIIl05etc8=;
-  b=J4IDjLsUke/lWqjB3gfIFnP8o92FRD50FNO97HFmN/0XLe0QOfwr+Dbw
-   6heBDkwOFpmAhgQU70SIN8s27TCvwcIHA2V30ENXark2Z1zlEJkQQcFkh
-   V5749cSss9cu1Dmm+odtLEV6rtHr8QZ6YB7GqIgY4hc+klFcfY8mV19NO
-   M=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 97137984
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:7YfmxaxGpqvggbq2ozh6t+cZxirEfRIJ4+MujC+fZmUNrF6WrkUEx
- zYeDz2APv+KNGL8f9lyaYq+oB5SvJOHmNdjGwdtqiAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
- ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTrafYEidfCc8IA85kxVvhuUltYBhhNm9Emult
- Mj75sbSIzdJ4RYtWo4vw//F+UwHUMja4mtC5QRkPK0T5TcyqlFOZH4hDfDpR5fHatE88t6SH
- 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KU1nr
- dFbEW4SVE+G2t+Sn5GDb/lcuf12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKZOUYn1lQ/UfrSmM+hgGX/dDtJ7kqYv6Mt70DYzRBr0airO93QEjCPbZQKxx3H9
- zKal4j/KkAWKoaW5jOlzkit2s7KrwzJeoAZToTto5aGh3XMnzdOWXX6T2CTsfS/z0KzRd9bA
- 0gV4TY167g/8lSxSdvwVAH+p2SL1jYXUsBcFOAS4wiXxq3ZpQ2eAwAsVSVdYdYrsMs3Qz0C1
- VKTmd7tQzt1v9WopWm1r+nO62noYG5McDFEPHVfJecY3zX9iK0a1j+Md4h8KvGw0+DRRhLI5
- iC6kxFr0t3/kvU3/6m8+FnGhRelqZ7IUhM5623rY4610u9qTNX7PtL1sDA3+d4Fdd/EFQfZ4
- BDojuDEtIgz4YexeDthqQnnNJWg/L67PTLVmjaD9LFxpm32qxZPkW29iQySxXuF0O5eIlcFg
- 2eJ42u9AaO/2lPwNcebhKrvY/nGNYC6SbzYugn8N7KimKRZeg6d5z1JbkWNxW3rm0VEufhhZ
- snAIJfyVydAWf4PIN+KqwE1i+dDKscWnz67eHwG507/jer2iIC9F9/pz2dinshmtfjZ8W05A
- v5UNteQygU3bQENSnC/zGLnFnhTdSJTLcmv+6RqmhurflIO9JcJV6WAntvMuuVNw8xoqws/1
- i3lBRUCkgCi3iWvxMfjQikLVY4DlK1X9RoTVRHA937xgBDPva7HAH8jSqYK
-IronPort-HdrOrdr: A9a23:waCHuqMuh0iMt8BcTv2jsMiBIKoaSvp037BL7SxMoHluGaalfq
- +V7ZcmPGDP+U4ssR0b+OxoQZPwJ080lqQb3WByB8bBYOC8ghrNEGgK1+KLrgEIfReOk9K1vZ
- 0QFJSWY+efMbEVt6bHCFvSKadY/OW6
-X-IronPort-AV: E=Sophos;i="5.97,299,1669093200"; 
-   d="scan'208";a="97137984"
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Doug Goldstein
-	<cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [XEN PATCH 1/4] automation: Remove clang-8 from Debian unstable container
-Date: Wed, 15 Feb 2023 12:02:05 +0000
-Message-ID: <20230215120208.35807-2-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230215120208.35807-1-anthony.perard@citrix.com>
-References: <20230215120208.35807-1-anthony.perard@citrix.com>
+X-Inumbo-ID: 1a25c237-ad29-11ed-93b5-47a8fe42b414
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1676462755; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=s+PkheF8hQEAxpcHBI1ZjXUyvfAs5BV4HCkW3WFbchw=;
+	b=fROjidXyVIz3tNvMQrJJtfPssV0ZyIcC8JlY4BoGSpiHtqTI6C+jXxFJJaH7pgEwvXkcgE
+	YMrY4pL2tTHy4z3zvq7rwTOmmIhuSyxabFfvs123GIL7HeOdFIxoTto1X4TvSNCpJeyLPv
+	m6H1Cob9fC4Zt9p13CpLMxgC7AnDzFE=
+Message-ID: <28bd8aec-cd41-7b5c-0f32-12c79595134d@suse.com>
+Date: Wed, 15 Feb 2023 13:05:55 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ the arch/x86 maintainers <x86@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>
+References: <afb02f3e-3d69-07ca-c3ec-5bbeeceb5e55@suse.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] x86/Xen: tidy xen-head.S
+In-Reply-To: <afb02f3e-3d69-07ca-c3ec-5bbeeceb5e55@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------A6ze7oXFmJ8UvlBIzAo2fkuT"
 
-First, apt complain that it isn't the right way to add keys anymore,
-but hopefully that's just a warning.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------A6ze7oXFmJ8UvlBIzAo2fkuT
+Content-Type: multipart/mixed; boundary="------------UNETlYYd9cw7AK9x3o0HrBD0";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ the arch/x86 maintainers <x86@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>
+Message-ID: <28bd8aec-cd41-7b5c-0f32-12c79595134d@suse.com>
+Subject: Re: [PATCH] x86/Xen: tidy xen-head.S
+References: <afb02f3e-3d69-07ca-c3ec-5bbeeceb5e55@suse.com>
+In-Reply-To: <afb02f3e-3d69-07ca-c3ec-5bbeeceb5e55@suse.com>
 
-Second, we can't install clang-8:
-The following packages have unmet dependencies:
- clang-8 : Depends: libstdc++-8-dev but it is not installable
-           Depends: libgcc-8-dev but it is not installable
-           Depends: libobjc-8-dev but it is not installable
-           Recommends: llvm-8-dev but it is not going to be installed
-           Recommends: libomp-8-dev but it is not going to be installed
- libllvm8 : Depends: libffi7 (>= 3.3~20180313) but it is not installable
-E: Unable to correct problems, you have held broken packages.
+--------------UNETlYYd9cw7AK9x3o0HrBD0
+Content-Type: multipart/mixed; boundary="------------0Ad47DS10VbCi1CsS7DNCHik"
 
-clang on Debian unstable is now version 14.0.6.
+--------------0Ad47DS10VbCi1CsS7DNCHik
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
+T24gMTUuMDIuMjMgMTI6MzMsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBGaXJzdCBvZiBhbGwg
+ZHJvcCAzMi1iaXQgbGVmdG92ZXJzLCBpbmNsdWRpbmcgdGhlIGluY2x1c2lvbiBvZiB0aGUg
+ZmlsZQ0KPiBmcm9tIGhlYWRfMzIuUy4NCg0KSSBkb24ndCBzZWUgd2h5IHdlIHdvdWxkIHdh
+bnQgdG8gZHJvcCAzMi1iaXQgSFZNIGFuZCBQVkggc3VwcG9ydC4NCg0KPiBUaGVuIGZ1cnRo
+ZXIgbW92ZSBQVi1vbmx5IEVMRiBub3RlcyBpbnNpZGUgdGhlIFhFTl9QVg0KPiBjb25kaXRp
+b25hbC4gRmluYWxseSBoYXZlIHRoZSAic3VwcG9ydGVkIGZlYXR1cmVzIiBub3RlIGFjdHVh
+bGx5IHJlcG9ydA0KPiByZWFsaXR5OiBBbGwgdGhyZWUgb2YgdGhlIGZlYXR1cmVzIGFyZSBz
+dXBwb3J0ZWQgYW5kL29yIGFwcGxpY2FibGUgb25seQ0KPiBpbiBjZXJ0YWluIGNhc2VzLg0K
+PiANCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0K
+PiANCj4gLS0tIGEvYXJjaC94ODYva2VybmVsL2hlYWRfMzIuUw0KPiArKysgYi9hcmNoL3g4
+Ni9rZXJuZWwvaGVhZF8zMi5TDQo+IEBAIC01MjQsOCArNTI0LDYgQEAgX19JTklUUk9EQVRB
+DQo+ICAgaW50X21zZzoNCj4gICAJLmFzY2l6ICJVbmtub3duIGludGVycnVwdCBvciBmYXVs
+dCBhdDogJXAgJXAgJXBcbiINCj4gICANCj4gLSNpbmNsdWRlICIuLi8uLi94ODYveGVuL3hl
+bi1oZWFkLlMiDQo+IC0NCg0KVGhpcyBpcyB3cm9uZyBmb3Igbm9uLVBWIGNhc2VzLg0KDQo+
+ICAgLyoNCj4gICAgKiBUaGUgSURUIGFuZCBHRFQgJ2Rlc2NyaXB0b3JzJyBhcmUgYSBzdHJh
+bmdlIDQ4LWJpdCBvYmplY3QNCj4gICAgKiBvbmx5IHVzZWQgYnkgdGhlIGxpZHQgYW5kIGxn
+ZHQgaW5zdHJ1Y3Rpb25zLiBUaGV5IGFyZSBub3QNCj4gLS0tIGEvYXJjaC94ODYveGVuL3hl
+bi1oZWFkLlMNCj4gKysrIGIvYXJjaC94ODYveGVuL3hlbi1oZWFkLlMNCj4gQEAgLTgzLDI3
+ICs4MywzMyBAQCBTWU1fQ09ERV9FTkQoYXNtX2NwdV9icmluZ3VwX2FuZF9pZGxlKQ0KPiAg
+IAlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfR1VFU1RfT1MsICAgICAgIC5hc2NpeiAibGlu
+dXgiKQ0KPiAgIAlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfR1VFU1RfVkVSU0lPTiwgIC5h
+c2NpeiAiMi42IikNCj4gICAJRUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX1hFTl9WRVJTSU9O
+LCAgICAuYXNjaXogInhlbi0zLjAiKQ0KPiAtI2lmZGVmIENPTkZJR19YODZfMzINCj4gLQlF
+TEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfVklSVF9CQVNFLCAgICAgIF9BU01fUFRSIF9fUEFH
+RV9PRkZTRVQpDQo+IC0jZWxzZQ0KPiAgIAlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfVklS
+VF9CQVNFLCAgICAgIF9BU01fUFRSIF9fU1RBUlRfS0VSTkVMX21hcCkNCg0KVGhpcyB3aWxs
+IGJlIHdyb25nIGZvciAzMi1iaXQgZ3Vlc3RzIG5vdy4gSSdtIG5vdCBzdXJlIHRoZSB2YWx1
+ZSBpcyByZWFsbHkNCnVzZWQgaW4gWGVuIGZvciBub24tUFYgZ3Vlc3RzLCB0aG91Z2guDQoN
+Cj4gICAJLyogTWFwIHRoZSBwMm0gdGFibGUgdG8gYSA1MTJHQi1hbGlnbmVkIHVzZXIgYWRk
+cmVzcy4gKi8NCj4gICAJRUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX0lOSVRfUDJNLCAgICAg
+ICAucXVhZCAoUFVEX1NJWkUgKiBQVFJTX1BFUl9QVUQpKQ0KDQpNb3ZlIHRoaXMgdW5kZXIg
+dGhlIENPTkZJR19QViB1bWJyZWxsYT8NCg0KPiAtI2VuZGlmDQo+ICAgI2lmZGVmIENPTkZJ
+R19YRU5fUFYNCj4gICAJRUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX0VOVFJZLCAgICAgICAg
+ICBfQVNNX1BUUiBzdGFydHVwX3hlbikNCj4gKwlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVf
+RkVBVFVSRVMsICAgICAgIC5hc2NpaSAiIXdyaXRhYmxlX3BhZ2VfdGFibGVzIikNCj4gKwlF
+TEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfUEFFX01PREUsICAgICAgIC5hc2NpeiAieWVzIikN
+Cj4gKwlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfTDFfTUZOX1ZBTElELA0KPiArCQkucXVh
+ZCBfUEFHRV9QUkVTRU5UOyAucXVhZCBfUEFHRV9QUkVTRU5UKQ0KPiArIyBkZWZpbmUgRkVB
+VFVSRVNfUFYgKDEgPDwgWEVORkVBVF93cml0YWJsZV9wYWdlX3RhYmxlcykNCj4gKyNlbHNl
+DQo+ICsjIGRlZmluZSBGRUFUVVJFU19QViAwDQo+ICsjZW5kaWYNCj4gKyNpZmRlZiBDT05G
+SUdfWEVOX1BWSA0KPiArIyBkZWZpbmUgRkVBVFVSRVNfUFZIICgxIDw8IFhFTkZFQVRfbGlu
+dXhfcnNkcF91bnJlc3RyaWN0ZWQpDQo+ICsjZWxzZQ0KPiArIyBkZWZpbmUgRkVBVFVSRVNf
+UFZIIDANCj4gKyNlbmRpZg0KPiArI2lmZGVmIENPTkZJR19YRU5fRE9NMA0KPiArIyBkZWZp
+bmUgRkVBVFVSRVNfRE9NMCAoMSA8PCBYRU5GRUFUX2RvbTApDQo+ICsjZWxzZQ0KPiArIyBk
+ZWZpbmUgRkVBVFVSRVNfRE9NMCAwDQo+ICAgI2VuZGlmDQo+ICAgCUVMRk5PVEUoWGVuLCBY
+RU5fRUxGTk9URV9IWVBFUkNBTExfUEFHRSwgX0FTTV9QVFIgaHlwZXJjYWxsX3BhZ2UpDQo+
+IC0JRUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX0ZFQVRVUkVTLA0KPiAtCQkuYXNjaWkgIiF3
+cml0YWJsZV9wYWdlX3RhYmxlc3xwYWVfcGdkaXJfYWJvdmVfNGdiIikNCj4gICAJRUxGTk9U
+RShYZW4sIFhFTl9FTEZOT1RFX1NVUFBPUlRFRF9GRUFUVVJFUywNCj4gLQkJLmxvbmcgKDEg
+PDwgWEVORkVBVF93cml0YWJsZV9wYWdlX3RhYmxlcykgfCAgICAgICBcDQo+IC0JCSAgICAg
+ICgxIDw8IFhFTkZFQVRfZG9tMCkgfCAgICAgICAgICAgICAgICAgICAgICAgXA0KPiAtCQkg
+ICAgICAoMSA8PCBYRU5GRUFUX2xpbnV4X3JzZHBfdW5yZXN0cmljdGVkKSkNCj4gLQlFTEZO
+T1RFKFhlbiwgWEVOX0VMRk5PVEVfUEFFX01PREUsICAgICAgIC5hc2NpeiAieWVzIikNCj4g
+KwkJLmxvbmcgRkVBVFVSRVNfUFYgfCBGRUFUVVJFU19QVkggfCBGRUFUVVJFU19ET00wKQ0K
+PiAgIAlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfTE9BREVSLCAgICAgICAgIC5hc2NpeiAi
+Z2VuZXJpYyIpDQo+IC0JRUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX0wxX01GTl9WQUxJRCwN
+Cj4gLQkJLnF1YWQgX1BBR0VfUFJFU0VOVDsgLnF1YWQgX1BBR0VfUFJFU0VOVCkNCj4gICAJ
+RUxGTk9URShYZW4sIFhFTl9FTEZOT1RFX1NVU1BFTkRfQ0FOQ0VMLCAubG9uZyAxKQ0KPiAg
+IAlFTEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfTU9EX1NUQVJUX1BGTiwgIC5sb25nIDEpDQo+
+ICAgCUVMRk5PVEUoWGVuLCBYRU5fRUxGTk9URV9IVl9TVEFSVF9MT1csICAgX0FTTV9QVFIg
+X19IWVBFUlZJU09SX1ZJUlRfU1RBUlQpDQoNCkFyZSBYRU5fRUxGTk9URV9NT0RfU1RBUlRf
+UEZOIGFuZCBYRU5fRUxGTk9URV9IVl9TVEFSVF9MT1cgcmVhbGx5IHJlbGV2YW50DQpmb3Ig
+dGhlIG5vbi1QViBjYXNlPyBJIGRvbid0IHRoaW5rIHNvIChpbiB0aGVvcnkgWEVOX0VMRk5P
+VEVfTU9EX1NUQVJUX1BGTg0KY291bGQgYmUgdXNlZCwgYnV0IHRoZSBtYWluIHJlYXNvbiBm
+b3IgaXRzIGludHJvZHVjdGlvbiB3YXMgUFYgZ3Vlc3RzIElJUkMpLg0KDQoNCkp1ZXJnZW4N
+Cg==
+--------------0Ad47DS10VbCi1CsS7DNCHik
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Current container have:
-root@f3d1fc4f58c7:/build# clang --version
-clang version 8.0.1- (branches/release_80)
-root@113cb5730b2a:/build# clang-8 --version
-clang version 8.0.1- (branches/release_80)
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-(built about 3years ago)
----
- automation/build/debian/unstable-llvm-8.list |  3 ---
- automation/build/debian/unstable.dockerfile  | 12 ------------
- automation/gitlab-ci/build.yaml              | 10 ----------
- 3 files changed, 25 deletions(-)
- delete mode 100644 automation/build/debian/unstable-llvm-8.list
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
 
-diff --git a/automation/build/debian/unstable-llvm-8.list b/automation/build/debian/unstable-llvm-8.list
-deleted file mode 100644
-index dc119fa0b4..0000000000
---- a/automation/build/debian/unstable-llvm-8.list
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# Unstable LLVM 8 repos
--deb http://apt.llvm.org/unstable/ llvm-toolchain-8 main
--deb-src http://apt.llvm.org/unstable/ llvm-toolchain-8 main
-diff --git a/automation/build/debian/unstable.dockerfile b/automation/build/debian/unstable.dockerfile
-index 9de766d596..b560337b7a 100644
---- a/automation/build/debian/unstable.dockerfile
-+++ b/automation/build/debian/unstable.dockerfile
-@@ -51,15 +51,3 @@ RUN apt-get update && \
-         apt-get autoremove -y && \
-         apt-get clean && \
-         rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
--
--RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
--COPY unstable-llvm-8.list /etc/apt/sources.list.d/
--
--RUN apt-get update && \
--    apt-get --quiet --yes install \
--        clang-8 \
--        lld-8 \
--        && \
--        apt-get autoremove -y && \
--        apt-get clean && \
--        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index a053c5c732..7d8af93653 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -339,16 +339,6 @@ debian-unstable-clang-debug:
-   variables:
-     CONTAINER: debian:unstable
- 
--debian-unstable-clang-8:
--  extends: .clang-8-x86-64-build
--  variables:
--    CONTAINER: debian:unstable
--
--debian-unstable-clang-8-debug:
--  extends: .clang-8-x86-64-build-debug
--  variables:
--    CONTAINER: debian:unstable
--
- debian-unstable-gcc:
-   extends: .gcc-x86-64-build
-   variables:
--- 
-Anthony PERARD
+--------------0Ad47DS10VbCi1CsS7DNCHik--
 
+--------------UNETlYYd9cw7AK9x3o0HrBD0--
+
+--------------A6ze7oXFmJ8UvlBIzAo2fkuT
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmPsyqMFAwAAAAAACgkQsN6d1ii/Ey/U
+9ggAhYhEYbe1ICb1vnHfSL7mmdxhra/LZk1kUGcu8FCX7pf2SI6G4jUASsrG8GeoMfkaV2D/aLEs
+cU3vCC8L2tLN8ousZANidrjBah1sCwRdTe9AG8zv/bvSKZAnSaPIjnDb3nJAsfYxtHO1Kpc7K7HL
+5S79TnvSCsaNaEb33W7SpVl4ikvEkA2r4jrxAzD1+C1eFE7vK4PwEYgl27Fb3lg21nP8jI2R9TXP
+Of6mCITbZmthRd7Rz8nUDyLqZF5UdlqQnf/JISDPzVYJp9CTm9Ctxu26PTvA4sDXoPmmmvkqR69m
+d+1ercmAOxP8ldACX3qseEFIp+QOfc7lUtYWciqZEQ==
+=/EaQ
+-----END PGP SIGNATURE-----
+
+--------------A6ze7oXFmJ8UvlBIzAo2fkuT--
 
