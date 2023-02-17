@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A15C636D6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546C1C636D7
 	for <xen-devel@archiver.kernel.org>; Fri, 17 Feb 2023 21:36:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.497309.768237 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.497312.768270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pT8ON-0005eh-Vs; Fri, 17 Feb 2023 21:35:43 +0000
+	id 1pT8OY-0006V6-Nk; Fri, 17 Feb 2023 21:35:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 497309.768237; Fri, 17 Feb 2023 21:35:43 +0000
+Received: by outflank-mailman (output) from mailman id 497312.768270; Fri, 17 Feb 2023 21:35:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pT8ON-0005ea-T2; Fri, 17 Feb 2023 21:35:43 +0000
-Received: by outflank-mailman (input) for mailman id 497309;
- Fri, 17 Feb 2023 21:35:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pT8OY-0006Ux-KZ; Fri, 17 Feb 2023 21:35:54 +0000
+Received: by outflank-mailman (input) for mailman id 497312;
+ Fri, 17 Feb 2023 21:35:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Uk7L=6N=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pT8OM-0005eU-W5
- for xen-devel@lists.xenproject.org; Fri, 17 Feb 2023 21:35:43 +0000
+ id 1pT8OW-0006Se-Pq
+ for xen-devel@lists.xenproject.org; Fri, 17 Feb 2023 21:35:52 +0000
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
- [64.147.123.19]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 04bf2d19-af0b-11ed-933d-83870f6b2ba8;
- Fri, 17 Feb 2023 22:35:40 +0100 (CET)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id 994BB320030E;
- Fri, 17 Feb 2023 16:35:35 -0500 (EST)
+ [64.147.123.19]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0b6f53a6-af0b-11ed-93b5-47a8fe42b414;
+ Fri, 17 Feb 2023 22:35:50 +0100 (CET)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.west.internal (Postfix) with ESMTP id E75C7320089C;
+ Fri, 17 Feb 2023 16:35:47 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Fri, 17 Feb 2023 16:35:36 -0500
+ by compute2.internal (MEProxy); Fri, 17 Feb 2023 16:35:48 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 Feb 2023 16:35:33 -0500 (EST)
+ 17 Feb 2023 16:35:46 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +45,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04bf2d19-af0b-11ed-933d-83870f6b2ba8
+X-Inumbo-ID: 0b6f53a6-af0b-11ed-93b5-47a8fe42b414
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1676669735; x=1676756135; bh=MGcjZgooPU4cVCfzNgS6jrb+K4sHboY2z/T
-	xtj3xkoY=; b=pYTtTqGzCSSjtkBq5troOdPs5ICo/HLZhre4QvsnyVg3UNt9VJl
-	TxyGNf3LrWJrTHmDPHyJDp/7Itur51flu4DhvPHJNYLV3hxzqt/cU5zMcbLV7qQr
-	ciBxQhYUFIcFJ2oVQd1bBt30g+5xeW/Zv2rJx1QYfqap/kbDU/4EtEPSrzuFJct3
-	GU3fqhQkwVtTwzbBy2HzYYIQ7Aev/CbE6QEJGUPos8i4KFt/f0q7M0i0sewJuuMZ
-	ss/4R6Gv9UXdWE/mok96Yjqnoq+IkiwhCjdIXu534lSfewnDssKnB4KtFNG/C5lz
-	JRrnKfPCbo5J1ybeVuPCDzw+ajH4/m+hIpQ==
+	1676669747; x=1676756147; bh=x1U4BNcj9Zecyq6U+qye/Zm4u8N3JEG92kP
+	6XRxNw5M=; b=EuxNTi/WJ2evETCOCnkyHZhhBD0GadXH9uWRmgjPhdLHGUkv/Z5
+	Mb+F/VcW8VvXF/AhUiQaGtXYtTEoCSU1x+/hBBJvmPtX1zRrqrSvz682GvojzWgl
+	ACYx9MboiAT489YllvUncTdLgXbpKTOw/KDZbFRahxhYHuqui9CVeqiwvP3bPr++
+	UJhZiRoLKBuVoNTzMx0FakLzoCoOVue8OAXa7uz7P7PDDi4+B34lzlJinbPXRDLL
+	QKPm4U/QPughND35egun7eEBrfnScBzEmvl758HVBe2H4AApDR8UWy8TYiWgPQoE
+	v1UHrbklpCfifoq0P3vIAUpBi/125UbzSVA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1676669735; x=1676756135; bh=MGcjZgooPU4cV
-	CfzNgS6jrb+K4sHboY2z/Txtj3xkoY=; b=GD0wAo35BMrhGIqt1CgQ7SGEETen8
-	h2zXF8DLWhkjeJ5afeiIr1KNKMi2hzraQJdAzzJn58z47zLpqXbYm+R39/i1sXTB
-	zHMn8xmT5hfvaveOC9qe+5NESrAzWicPv5MwS+LR2hQbv4DYn3q6RQGct0QECnxF
-	XIj563E++3xv2yjk8h5xyO2zMDhsgIo1MyS3a4jTiROnAHdTKqrXCJZEnScI97db
-	wkIPF4rX+LsIu2WXQaDnbIDrn5b8kkNUbZt5ankv2OJr2HwPIy48Xq2CHCTBu4e6
-	MEBxj1F+HghKabJAULH+L4G8IqnurLIagS1zP86usOmk9ANf2BdxHnsmQ==
-X-ME-Sender: <xms:JvPvYy2tRH5wc7ijJDGwrUTdYPXgiOVjP3_lIU7twz-nBAR7gdaruw>
-    <xme:JvPvY1FGRmrBFZVhBluG_xCWTL0msohjw9GBB5NeBw7jLjCOdi4S7WvUAKaMadGQO
-    BcV0pwjtGA-I3E>
-X-ME-Received: <xmr:JvPvY64OJWsrY1NLFqk6Oxz1sJ09S_STZ5DfWv9DKxMYOcfsKMAFnF7PtALrrXGTsQmf6DfJ8Ss>
+	:x-sasl-enc; s=fm1; t=1676669747; x=1676756147; bh=x1U4BNcj9Zecy
+	q6U+qye/Zm4u8N3JEG92kP6XRxNw5M=; b=rESrJyygVPh4xQWZRYa7i9FIQysje
+	mMg2ZrCXAJ4erSPAZSInLg52d6QXckImWDRMV7xzaX/kYQ6rrg9kTcmrlrjkJw0c
+	WDj4Zd91rVmMxemvhnO+5uQ3vkaWjp0uMIVDM/WdSKZehGU5LrUfA0UAUN8EM1nL
+	KHk7v23YDocNk5IdJPTivjzr88zzD1atLjlzgNA2dwDV6oVkXSv/G0ZhmfALGwOq
+	5yBQSL85C2YRJBoXvD/hrQhmHBSejLxqIwi/rlTvWWdgtpyHy91HO6uNIIAc/UyF
+	Bn5v8w8jGuSNjaAjxwnXNlQvPI+tW5PwBWjGzUCBE0J++qeGL174uLSdw==
+X-ME-Sender: <xms:M_PvYzT2u_gZirIVPuAGaId6lxC2pv8a-VgfQWKeMXnh0OZRUg3qkw>
+    <xme:M_PvY0yoIB-4KM9VUObzGYyUjUaV3ClNuimHntUGpYZ7--M6NwzKeYZQWARCZE7oO
+    MsbyyEqjx502K4>
+X-ME-Received: <xmr:M_PvY41IjJ1PLd5T9ygcppaLjauJS9blplDaRXJrN0lRLg86Z_I5rHI0TUO4WhyP5RrQGu5H1lM>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudeiledgudegkecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
     enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghm
     ihcuofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinh
-    hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefffffffeegvefftdeifeeiveeu
-    gffhheetjedvhfetveekkeefkedvgeekffelgeenucffohhmrghinhepgigvnhdrohhrgh
-    dprhhiphhouhhthhihphgvrhhtrhgrnhhsphhorhhttghonhhfihhgrdhmkhenucevlhhu
-    shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:JvPvYz0AQ5u5xlOLRa9XrgfhSNnIneFYonlGvXA9JHFrpAYhTYDxng>
-    <xmx:JvPvY1GsPagMREbAclEhpZd8xKMzSzRhPesp4Kvg0Hy8_cSi5D0OoQ>
-    <xmx:JvPvY8_ApaSl7W3eLU5klrsNAIhRIfnSFHf_zri9YQmCYjZsXQD1Ew>
-    <xmx:J_PvY9_0GzgpYuaS6gOYQhgUTAS-0Qmq2AsH-OhLIOQ4gKyyn3-h-A>
+    hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeetudeuheegueejgeduieffffev
+    leetleejveduieelffeitefggeffieetvdekueenucffohhmrghinhepphihthhhohhnrd
+    horhhgpdhinhhtvghlrdgtohhmpdgtvghnthhoshdrohhrghdplhhlvhhmrdhorhhgpdgu
+    vggsihgrnhdrohhrghdprghlphhinhgvlhhinhhugidrohhrghenucevlhhushhtvghruf
+    hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghl
+    vghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:M_PvYzD-yIr1cG_VJy1voEqFXp5lT3wavePGHw6dMNTm0JJxaXCGHg>
+    <xmx:M_PvY8ged9zGkWrLYj2mF3cGQsltPmtUBfv0guP_AMNurNcmHdd_ng>
+    <xmx:M_PvY3pnpjXigi4EW7G8G9ouOaPpvUIcNs4xwf0ft4QbYLuc7J5IJQ>
+    <xmx:M_PvY3VQo1r_GQrJ5v6q9K6OjL3V29D5sWuTgVspjhc5E7Th04dGjQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,17 +98,13 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v3 0/4] Stop using insecure transports
-Date: Fri, 17 Feb 2023 16:35:23 -0500
-Message-Id: <cover.1676668922.git.demi@invisiblethingslab.com>
+Subject: [PATCH v3 3/4] Automation and CI: Replace git:// and http:// with https://
+Date: Fri, 17 Feb 2023 16:35:26 -0500
+Message-Id: <5063d50f393401b302018451c223b2a7d5c6c5c7.1676668923.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <cover.1675889601.git.demi@invisiblethingslab.com>
-References: <cover.1675889601.git.demi@invisiblethingslab.com>
+In-Reply-To: <cover.1676668922.git.demi@invisiblethingslab.com>
+References: <cover.1676668922.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
@@ -115,35 +112,110 @@ Obtaining code over an insecure transport is a terrible idea for
 blatently obvious reasons.  Even for non-executable data, insecure
 transports are considered deprecated.
 
-Changes since v2:
+This patch enforces the use of secure transports in automation and CI.
+All URLs are known to work.
 
-- Drop patches 5 and 6, which changed links not used by automated tools.
-  These patches are the least urgent and hardest to review.
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ README                                       | 4 ++--
+ automation/build/centos/CentOS-7.2.repo      | 8 ++++----
+ automation/build/debian/stretch-llvm-8.list  | 4 ++--
+ automation/build/debian/unstable-llvm-8.list | 4 ++--
+ automation/scripts/qemu-smoke-dom0-arm32.sh  | 2 +-
+ 5 files changed, 11 insertions(+), 11 deletions(-)
 
-- Ensure that no links are broken, and fail with an error instead of
-  trying to use links that *are* broken.
-
-Demi Marie Obenour (4):
-  Use HTTPS for all xenbits.xen.org Git repos
-  Build system: Replace git:// and http:// with https://
-  Automation and CI: Replace git:// and http:// with https://
-  Rip out HyperTransport
-
- Config.mk                                    | 20 ++++-------
- README                                       |  4 +--
- automation/build/centos/CentOS-7.2.repo      |  8 ++---
- automation/build/debian/stretch-llvm-8.list  |  4 +--
- automation/build/debian/unstable-llvm-8.list |  4 +--
- automation/scripts/qemu-smoke-dom0-arm32.sh  |  2 +-
- docs/misc/livepatch.pandoc                   |  2 +-
- docs/process/xen-release-management.pandoc   |  2 +-
- scripts/get_maintainer.pl                    |  2 +-
- stubdom/configure                            | 24 ++++++++-----
- stubdom/configure.ac                         | 24 ++++++++-----
- tools/firmware/etherboot/Makefile            |  6 +---
- xen/include/xen/pci_regs.h                   | 37 --------------------
- 13 files changed, 51 insertions(+), 88 deletions(-)
-
+diff --git a/README b/README
+index 755b3d8eaf8f7a58a945b7594e68a3fe455a7bdf..f8cc426f78d690f37e013242e81d4e440556c330 100644
+--- a/README
++++ b/README
+@@ -181,7 +181,7 @@ Python Runtime Libraries
+ Various tools, such as pygrub, have the following runtime dependencies:
+ 
+     * Python 2.6 or later.
+-          URL:    http://www.python.org/
++          URL:    https://www.python.org/
+           Debian: python
+ 
+ Note that the build system expects `python` to be available. If your system
+@@ -197,7 +197,7 @@ Intel(R) Trusted Execution Technology Support
+ Intel's technology for safer computing, Intel(R) Trusted Execution Technology
+ (Intel(R) TXT), defines platform-level enhancements that provide the building
+ blocks for creating trusted platforms.  For more information, see
+-http://www.intel.com/technology/security/.
++https://www.intel.com/technology/security/.
+ 
+ Intel(R) TXT support is provided by the Trusted Boot (tboot) module in
+ conjunction with minimal logic in the Xen hypervisor.
+diff --git a/automation/build/centos/CentOS-7.2.repo b/automation/build/centos/CentOS-7.2.repo
+index 4da27faeb5fa863fd4e140cbeaad308b9a543b86..8e37da1a03f839c486eb9bd0af46716cfb9086e0 100644
+--- a/automation/build/centos/CentOS-7.2.repo
++++ b/automation/build/centos/CentOS-7.2.repo
+@@ -6,28 +6,28 @@
+ 
+ [base]
+ name=CentOS-7.2.1511 - Base
+-baseurl=http://vault.centos.org/7.2.1511/os/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/os/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #released updates 
+ [updates]
+ name=CentOS-7.2.1511 - Updates
+-baseurl=http://vault.centos.org/7.2.1511/updates/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/updates/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #additional packages that may be useful
+ [extras]
+ name=CentOS-7.2.1511 - Extras
+-baseurl=http://vault.centos.org/7.2.1511/extras/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/extras/$basearch/
+ gpgcheck=1
+ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+ 
+ #additional packages that extend functionality of existing packages
+ [centosplus]
+ name=CentOS-7.2.1511 - Plus
+-baseurl=http://vault.centos.org/7.2.1511/centosplus/$basearch/
++baseurl=https://vault.centos.org/7.2.1511/centosplus/$basearch/
+ gpgcheck=1
+ gpgcheck=1
+ enabled=0
+diff --git a/automation/build/debian/stretch-llvm-8.list b/automation/build/debian/stretch-llvm-8.list
+index 09fe843fb2a31ae38f752d7c8c71cf97f5b14513..590001ca81e826ab624ba9185423adf4b0c51a21 100644
+--- a/automation/build/debian/stretch-llvm-8.list
++++ b/automation/build/debian/stretch-llvm-8.list
+@@ -1,3 +1,3 @@
+ # Strech LLVM 8 repos
+-deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
+-deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
++deb https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
++deb-src https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
+diff --git a/automation/build/debian/unstable-llvm-8.list b/automation/build/debian/unstable-llvm-8.list
+index dc119fa0b4df1bd6e742c42776710abcd6deaa86..1db1598997429d7a14d3fcd8f0f8152aa6d40b8a 100644
+--- a/automation/build/debian/unstable-llvm-8.list
++++ b/automation/build/debian/unstable-llvm-8.list
+@@ -1,3 +1,3 @@
+ # Unstable LLVM 8 repos
+-deb http://apt.llvm.org/unstable/ llvm-toolchain-8 main
+-deb-src http://apt.llvm.org/unstable/ llvm-toolchain-8 main
++deb https://apt.llvm.org/unstable/ llvm-toolchain-8 main
++deb-src https://apt.llvm.org/unstable/ llvm-toolchain-8 main
+diff --git a/automation/scripts/qemu-smoke-dom0-arm32.sh b/automation/scripts/qemu-smoke-dom0-arm32.sh
+index 98e4d481f65c2b29ac935ddf6247132ddf94fa1d..950ad3a0daa63d66fc8647c0a390ff59c2f22b1a 100755
+--- a/automation/scripts/qemu-smoke-dom0-arm32.sh
++++ b/automation/scripts/qemu-smoke-dom0-arm32.sh
+@@ -4,7 +4,7 @@ set -ex
+ 
+ cd binaries
+ # Use the kernel from Debian
+-curl --fail --silent --show-error --location --output vmlinuz http://http.us.debian.org/debian/dists/bullseye/main/installer-armhf/current/images/netboot/vmlinuz
++curl --fail --silent --show-error --location --output vmlinuz https://ftp.debian.org/debian/dists/bullseye/main/installer-armhf/current/images/netboot/vmlinuz
+ # Use a tiny initrd based on busybox from Alpine Linux
+ curl --fail --silent --show-error --location --output initrd.tar.gz https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/armhf/alpine-minirootfs-3.15.1-armhf.tar.gz
+ 
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
