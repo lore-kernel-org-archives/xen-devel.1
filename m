@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F089C64EC7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A649C64ED9
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Feb 2023 16:41:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.498237.769082 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.498235.769060 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pU9E0-00070M-2i; Mon, 20 Feb 2023 16:41:12 +0000
+	id 1pU9Dw-0006Vv-H5; Mon, 20 Feb 2023 16:41:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 498237.769082; Mon, 20 Feb 2023 16:41:12 +0000
+Received: by outflank-mailman (output) from mailman id 498235.769060; Mon, 20 Feb 2023 16:41:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pU9Dz-00070F-UX; Mon, 20 Feb 2023 16:41:11 +0000
-Received: by outflank-mailman (input) for mailman id 498237;
- Mon, 20 Feb 2023 16:41:10 +0000
+	id 1pU9Dw-0006Vo-Dk; Mon, 20 Feb 2023 16:41:08 +0000
+Received: by outflank-mailman (input) for mailman id 498235;
+ Mon, 20 Feb 2023 16:41:08 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NJGl=6Q=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pU9Dy-0006Vi-F1
- for xen-devel@lists.xenproject.org; Mon, 20 Feb 2023 16:41:10 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
+ id 1pU9Dv-0006Vi-U0
+ for xen-devel@lists.xenproject.org; Mon, 20 Feb 2023 16:41:07 +0000
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [2a00:1450:4864:20::22a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 610e7f9e-b13d-11ed-933d-83870f6b2ba8;
- Mon, 20 Feb 2023 17:41:09 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id l8so1771380ljq.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 08:41:09 -0800 (PST)
+ id 5f4e76e2-b13d-11ed-933d-83870f6b2ba8;
+ Mon, 20 Feb 2023 17:41:06 +0100 (CET)
+Received: by mail-lj1-x22a.google.com with SMTP id f16so1709196ljq.10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 08:41:06 -0800 (PST)
 Received: from 34-6F-24-FC-D2-65..
  (46.204.108.92.nat.umts.dynamic.t-mobile.pl. [46.204.108.92])
  by smtp.gmail.com with ESMTPSA id
- f8-20020a2e6a08000000b002934d555783sm65798ljc.6.2023.02.20.08.41.07
+ f8-20020a2e6a08000000b002934d555783sm65798ljc.6.2023.02.20.08.41.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Feb 2023 08:41:09 -0800 (PST)
+ Mon, 20 Feb 2023 08:41:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 610e7f9e-b13d-11ed-933d-83870f6b2ba8
+X-Inumbo-ID: 5f4e76e2-b13d-11ed-933d-83870f6b2ba8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=c1MpbYkthmfF/j5tbT9Ls4HfPFbZX5FNFb/Z6pTJAxg=;
-        b=UiIfZFboHwH67hlEPkfcEEE/34XyvkKLZ3y8Q8ltELBBsTV2cs9LT1uyKUQU3ovcXZ
-         8shObelEr+mzCYJipWEmbrz7VcsdwZvJjjl2mgTRAjHrcGrLM4Fxw48XGarvD7jBhS+d
-         7V2Hb4o5oHHiSR+97ncsNbwkpfDL9Y+94sFMuUzqL06Dtc1/WuXyvqSsMrYTlHOGMWlx
-         a4jwBtMy6nnMYIjGtrYDgR8/4XVCRIdBaiMIuz8UbV0sgtQo5qbZrNG1JHV34jQFpATp
-         b+mZKbJJw68kQhyBAtbSBrIgGy8FKizpzfUBiCKgIAowhCAAZv8cMQpmOY7GWluqz3s6
-         6D9A==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=IiEn/Rcm1MU1Cyz/bLiQ58eQG40sQBxNpXMLCDni3G4=;
+        b=F9/K41sVEDsZPYf6mDjjHOcxm/puT6B1iAnP9m9qhoX2w17zGAIA/ueuSzAWDs9XbK
+         T9GRlhCCo1r0CMzu74E632JDKkcqpDgX1R+LTplu6DGWUhm+51toYcOux7g6vdHiIozL
+         +fLUIrBMlLTSwoxzA+WhAgcW1W31az00w7sLLkmqApCE4udLpYu86QRuhsEscn9YjR1v
+         UFxPQq5V2JnZXgQOObYH86a+86FwON2u4DbWLnCptYvzISpZUP6RfT15+zoO/i9VP1ck
+         BX85ygqaiDUIcTlyqsLCVv65g3AuvolFpISqzKl3L009DncaIeIE/G0GUp20bPXAD+fu
+         XaEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=c1MpbYkthmfF/j5tbT9Ls4HfPFbZX5FNFb/Z6pTJAxg=;
-        b=5xKKEqDKHOT4t2uPcqMStuA9UcgvSgf4TT1/eReTSkC5A2n691oK59sOgpnQgWu0UY
-         R8jrfNVkvyUFcbfgpKwoxC9bbxPDe3bk3zl1XYRBUNet9yFTFfF1Pvtfvp86LsLpQoh0
-         QK7UA9je45Jyd0AAlQXSi+Uki1GA5zz7v4oPcDy8hEGL2KWVV2/zPyYFKiCuLVYkHrTP
-         VsvPf9+9GL0/B/jWcWBjPbmmzxFxtEeB6WiK/cQjKYMP+CeMjcHKYysW/zzoUAKCJLqS
-         hGmQTI5CFLTTWoy1+qwnxYHMIPOTAoJaqOi1JrzAxlNT2nhaaLSThpDnkn+l4uKLbU4c
-         7XVg==
-X-Gm-Message-State: AO0yUKWsjCe7XGgevRr5e12BZGtQl9UBaLZJtX2SBLugLjhQHPGSB/r7
-	VVf0bA9Fr3wilppcC/9CswNjhvfXPsw=
-X-Google-Smtp-Source: AK7set89y+om3PEExn5kE/pMZmu/hwZFPshETVGlfRftqChwkTdlUAQ7Jc7yBHswtwsGxg9jGWk1sQ==
-X-Received: by 2002:a05:651c:2128:b0:293:fea:c912 with SMTP id a40-20020a05651c212800b002930feac912mr822844ljq.13.1676911269268;
-        Mon, 20 Feb 2023 08:41:09 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=IiEn/Rcm1MU1Cyz/bLiQ58eQG40sQBxNpXMLCDni3G4=;
+        b=G1VeZ6iYv/7lIhshDy3yC1F3ZflCjUgHruSWv9eszoTIJgdLPonBcEXOqLRwdN1cEz
+         fWPu15ClF7mROVOOm+ZCaI5aZWN+5lO6eXDupzN1sPOkRKi0H6nazBQSMM0iIvRKgvEe
+         b0sfwzxAHCLSDKX0aliBCpPTnrO+KlIKZY6EJLIMZCkjyncOz2dauTRCyg+7Zg2155Np
+         7tflkdE/IPc57bTdyMUyDcoG0biiS5zm8jusYb41vXYqmCZyQPz03KdxHnoeE2qszaFO
+         yJhiSrPr4cSygfgpZcY59/cAmmkiBo79auXMVGZsCcGGl4IyEXlQv25ibJXcDu6GujRQ
+         3Szw==
+X-Gm-Message-State: AO0yUKUjQUVur+8YD6RcZNxi7BJeyCuoDpVdqMOMExNDFEriUDoND5QV
+	d+aeMM6s1UKdPQ5JXTvbeIuQO4n+94M=
+X-Google-Smtp-Source: AK7set+HzUhRBLgzeYobI5sPALQGFvy3w4VEajoAXRLuwNu1zqLtvzT1A22pd9yPsZTcPu9/deSU4A==
+X-Received: by 2002:a2e:a1c7:0:b0:293:6037:9850 with SMTP id c7-20020a2ea1c7000000b0029360379850mr722019ljm.51.1676911266074;
+        Mon, 20 Feb 2023 08:41:06 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -84,155 +83,88 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gianluca Guida <gianluca@rivosinc.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 2/4] xen: change <asm/bug.h> to <xen/bug.h>
-Date: Mon, 20 Feb 2023 18:40:58 +0200
-Message-Id: <e21f8b59f22cc8bdb425a5002ed6e1473090b16f.1676909088.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 0/4] introduce generic implementation of macros from bug.h
+Date: Mon, 20 Feb 2023 18:40:56 +0200
+Message-Id: <cover.1676909088.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
-In-Reply-To: <cover.1676909088.git.oleksii.kurochko@gmail.com>
-References: <cover.1676909088.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since the generic version of bug.h stuff was introduced use <xen/bug.h>
-instead of unnecessary <asm/bug.h>
+A large part of the content of the bug.h is repeated among all
+architectures (especially x86 and RISCV have the same implementation), so it
+was created a new config CONFIG_GENERIC_BUG_FRAME which is used to
+introduce generic implementation of do_bug_frame() and move x86's <asm/bug.h>
+to <xen/common/...> with the following changes:
+  * Add inclusion of arch-specific header <asm/bug.h>
+  * Rename the guard and remove x86 specific changes
+  * Wrap macros BUG_FRAME/run_in_exception_handler/WARN/BUG/assert_failed/etc
+    into #ifndef "BUG_FRAME/run_in_exception_handler/WARN/BUG/assert_failed/etc"
+    thereby each architecture can override the generic implementation of macros.
+  * Add #if{n}def __ASSEMBLY__ ... #endif
+  * Introduce BUG_FRAME_STRUCTURE define to be able to change the structure of bug
+    frame
+  * Introduce BUG_INSTR and MODIFIER to make _ASM_BUGFRAME_TEXT reusable between x86 and
+    RISC-V.
+  * Make macros related to bug frame structure more generic.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+For ARM only common parts were removed from <asm/bug.h> and re-use generic
+do_bug_frame() for ARM.
+
+RISC-V will be switched to use <xen/bug.h> and in the future, it will use common
+the version of do_bug_frame() when xen/common will work for RISC-V.
 
 ---
 Changes in V2:
- * Put [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h> as second patch,
-   update the patch to change all <asm/bug.h> to <xen/bug.h> among the whole project
-   to not break build.
- * Update the commit message.
+  * Update cover letter.
+  * Switch to x86 implementation as generic as it is more compact ( at least from the point of view of bug frame structure).
+  * Put [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h> as second patch,
+    update the patch to change all <asm/bug.h> to <xen/bug.h> among the whole project
+    to not break compilation.
+  * Rename CONFIG_GENERIC_DO_BUG_FRAME to CONFIG_GENERIC_BUG_FRAME.
+  * Change the macro bug_loc(b) to avoid the need for a cast:
+    #define bug_loc(b) ((unsigned long)(b) + (b)->loc_disp)
+  * Rename BUG_FRAME_STUFF to BUG_FRAME_STRUCT
+  * Make macros related to bug frame structure more generic.
+  * Rename bug_file() in ARM implementation to bug_ptr() as generic do_bug_frame() uses
+    bug_ptr().
+  * Introduce BUG_INSTR and MODIFIER to make _ASM_BUGFRAME_TEXT reusable between x86 and
+    RISC-V.
+  * Rework do_invalid_op() in x86 ( re-use handle_bug_frame() and find_bug_frame() )
 ---
- xen/arch/arm/include/asm/div64.h     | 2 +-
- xen/arch/arm/vgic/vgic-v2.c          | 2 +-
- xen/arch/arm/vgic/vgic.c             | 2 +-
- xen/arch/x86/acpi/cpufreq/cpufreq.c  | 2 +-
- xen/arch/x86/include/asm/asm_defns.h | 2 +-
- xen/drivers/cpufreq/cpufreq.c        | 2 +-
- xen/include/xen/lib.h                | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+Oleksii Kurochko (4):
+  xen: introduce CONFIG_GENERIC_BUG_FRAME
+  xen: change <asm/bug.h> to <xen/bug.h>
+  xen/arm: switch ARM to use generic implementation of bug.h
+  xen/x86: switch x86 to use generic implemetation of bug.h
 
-diff --git a/xen/arch/arm/include/asm/div64.h b/xen/arch/arm/include/asm/div64.h
-index 1cd58bc51a..fc667a80f9 100644
---- a/xen/arch/arm/include/asm/div64.h
-+++ b/xen/arch/arm/include/asm/div64.h
-@@ -74,7 +74,7 @@
- 
- #elif __GNUC__ >= 4
- 
--#include <asm/bug.h>
-+#include <xen/bug.h>
- 
- /*
-  * If the divisor happens to be constant, we determine the appropriate
-diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-index 1a99d3a8b4..c90e88fddb 100644
---- a/xen/arch/arm/vgic/vgic-v2.c
-+++ b/xen/arch/arm/vgic/vgic-v2.c
-@@ -16,8 +16,8 @@
-  */
- 
- #include <asm/new_vgic.h>
--#include <asm/bug.h>
- #include <asm/gic.h>
-+#include <xen/bug.h>
- #include <xen/sched.h>
- #include <xen/sizes.h>
- 
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index f0f2ea5021..b9463a5f27 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -15,9 +15,9 @@
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
-+#include <xen/bug.h>
- #include <xen/list_sort.h>
- #include <xen/sched.h>
--#include <asm/bug.h>
- #include <asm/event.h>
- #include <asm/new_vgic.h>
- 
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index c27cbb2304..18ff2a443b 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -27,6 +27,7 @@
-  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
- 
-+#include <xen/bug.h>
- #include <xen/types.h>
- #include <xen/errno.h>
- #include <xen/delay.h>
-@@ -35,7 +36,6 @@
- #include <xen/sched.h>
- #include <xen/timer.h>
- #include <xen/xmalloc.h>
--#include <asm/bug.h>
- #include <asm/msr.h>
- #include <asm/io.h>
- #include <asm/processor.h>
-diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
-index d9431180cf..a8526cf36c 100644
---- a/xen/arch/x86/include/asm/asm_defns.h
-+++ b/xen/arch/x86/include/asm/asm_defns.h
-@@ -6,7 +6,7 @@
- /* NB. Auto-generated from arch/.../asm-offsets.c */
- #include <asm/asm-offsets.h>
- #endif
--#include <asm/bug.h>
-+#include <xen/bug.h>
- #include <asm/x86-defns.h>
- #include <xen/stringify.h>
- #include <asm/cpufeature.h>
-diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
-index a94520ee57..354f78580b 100644
---- a/xen/drivers/cpufreq/cpufreq.c
-+++ b/xen/drivers/cpufreq/cpufreq.c
-@@ -26,6 +26,7 @@
-  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
- 
-+#include <xen/bug.h>
- #include <xen/types.h>
- #include <xen/errno.h>
- #include <xen/delay.h>
-@@ -39,7 +40,6 @@
- #include <xen/guest_access.h>
- #include <xen/domain.h>
- #include <xen/cpu.h>
--#include <asm/bug.h>
- #include <asm/io.h>
- #include <asm/processor.h>
- 
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index 05ee1e18af..e914ccade0 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -24,12 +24,12 @@
- 
- #ifndef __ASSEMBLY__
- 
-+#include <xen/bug.h>
- #include <xen/inttypes.h>
- #include <xen/stdarg.h>
- #include <xen/types.h>
- #include <xen/xmalloc.h>
- #include <xen/string.h>
--#include <asm/bug.h>
- 
- #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
- #define WARN_ON(p)  ({                  \
+ xen/arch/arm/Kconfig                 |   1 +
+ xen/arch/arm/include/asm/bug.h       |  32 +-----
+ xen/arch/arm/include/asm/div64.h     |   2 +-
+ xen/arch/arm/include/asm/traps.h     |   2 -
+ xen/arch/arm/traps.c                 |  79 -------------
+ xen/arch/arm/vgic/vgic-v2.c          |   2 +-
+ xen/arch/arm/vgic/vgic.c             |   2 +-
+ xen/arch/x86/Kconfig                 |   1 +
+ xen/arch/x86/acpi/cpufreq/cpufreq.c  |   2 +-
+ xen/arch/x86/include/asm/asm_defns.h |   2 +-
+ xen/arch/x86/include/asm/bug.h       |  88 +--------------
+ xen/arch/x86/traps.c                 |  81 +++-----------
+ xen/common/Kconfig                   |   3 +
+ xen/common/Makefile                  |   1 +
+ xen/common/bug.c                     | 113 +++++++++++++++++++
+ xen/drivers/cpufreq/cpufreq.c        |   2 +-
+ xen/include/xen/bug.h                | 161 +++++++++++++++++++++++++++
+ xen/include/xen/lib.h                |   2 +-
+ 18 files changed, 306 insertions(+), 270 deletions(-)
+ create mode 100644 xen/common/bug.c
+ create mode 100644 xen/include/xen/bug.h
+
 -- 
 2.39.0
 
