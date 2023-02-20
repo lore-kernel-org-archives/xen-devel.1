@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CDC2C05027
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Feb 2023 17:17:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.498286.769130 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753D4C05027
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Feb 2023 17:17:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.498292.769152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pU9ma-0005V0-TK; Mon, 20 Feb 2023 17:16:56 +0000
+	id 1pU9mt-0006BA-De; Mon, 20 Feb 2023 17:17:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 498286.769130; Mon, 20 Feb 2023 17:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 498292.769152; Mon, 20 Feb 2023 17:17:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pU9ma-0005Ut-Pt; Mon, 20 Feb 2023 17:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 498286;
- Mon, 20 Feb 2023 17:16:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pU9mt-0006B1-Af; Mon, 20 Feb 2023 17:17:15 +0000
+Received: by outflank-mailman (input) for mailman id 498292;
+ Mon, 20 Feb 2023 17:17:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kEKe=6Q=templeofstupid.com=kjlx@srs-se1.protection.inumbo.net>)
- id 1pU9mY-0005Un-NT
- for xen-devel@lists.xenproject.org; Mon, 20 Feb 2023 17:16:54 +0000
-Received: from poodle.tulip.relay.mailchannels.net
- (poodle.tulip.relay.mailchannels.net [23.83.218.249])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c5ba0b6-b142-11ed-933d-83870f6b2ba8;
- Mon, 20 Feb 2023 18:16:52 +0100 (CET)
+ id 1pU9ms-00064N-7y
+ for xen-devel@lists.xenproject.org; Mon, 20 Feb 2023 17:17:14 +0000
+Received: from gold.apple.relay.mailchannels.net
+ (gold.apple.relay.mailchannels.net [23.83.208.72])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 68b9cdcc-b142-11ed-93b5-47a8fe42b414;
+ Mon, 20 Feb 2023 18:17:11 +0100 (CET)
 Received: from relay.mailchannels.net (localhost [127.0.0.1])
- by relay.mailchannels.net (Postfix) with ESMTP id A1C2F3C0CE3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 17:16:48 +0000 (UTC)
+ by relay.mailchannels.net (Postfix) with ESMTP id ABE0688175E
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 17:17:09 +0000 (UTC)
 Received: from pdx1-sub0-mail-a306.dreamhost.com (unknown [127.0.0.6])
  (Authenticated sender: dreamhost)
- by relay.mailchannels.net (Postfix) with ESMTPA id 415CB3C0E1F
- for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 17:16:48 +0000 (UTC)
+ by relay.mailchannels.net (Postfix) with ESMTPA id 4CDFB88184A
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 17:17:09 +0000 (UTC)
 Received: from pdx1-sub0-mail-a306.dreamhost.com (pop.dreamhost.com
  [64.90.62.162]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
- by 100.116.179.67 (trex/6.7.1); Mon, 20 Feb 2023 17:16:48 +0000
+ by 100.120.227.140 (trex/6.7.1); Mon, 20 Feb 2023 17:17:09 +0000
 Received: from kmjvbox (c-76-102-200-71.hsd1.ca.comcast.net [76.102.200.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: kjlx@templeofstupid.com)
- by pdx1-sub0-mail-a306.dreamhost.com (Postfix) with ESMTPSA id 4PL8Gl1rTqz1NZ
- for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 09:16:46 -0800 (PST)
+ by pdx1-sub0-mail-a306.dreamhost.com (Postfix) with ESMTPSA id 4PL8H76xmYz14y
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Feb 2023 09:17:07 -0800 (PST)
 Received: from johansen (uid 1000) (envelope-from kjlx@templeofstupid.com)
  id e0067 by kmjvbox (DragonFly Mail Agent v0.12);
- Mon, 20 Feb 2023 09:16:43 -0800
+ Mon, 20 Feb 2023 09:17:04 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,44 +59,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c5ba0b6-b142-11ed-933d-83870f6b2ba8
+X-Inumbo-ID: 68b9cdcc-b142-11ed-93b5-47a8fe42b414
 X-Sender-Id: dreamhost|x-authsender|kjlx@templeofstupid.com
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1676913408; a=rsa-sha256;
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1676913429; a=rsa-sha256;
 	cv=none;
-	b=l492S/ueqfNkE2hF1aShCsu/8ItsPVcUL6qlv4ymyreqGZkXfEIDad8Ih6qK2DFGD6Tw7r
-	MApxXTfOhA9o1BKZFEnuj9ePu0RvCD/0jVGYgRKLBVfhSCbBtdgrlNPqNgm5nBB+3azy8E
-	1mnwHa+0XX/2VDWsx4V/d9ZGT6y+LYWF6Ha8RHA/KTd31ogjjxy6g4ujRCVRWQg8YGc53y
-	XZ/FxGWKwAJq5AdqTi2syyzPkhkcCiuOSNQ9EoVKhane3/gPSmfbztMBWdvbsZGLoe7XbV
-	D+r+QRf5+U6H8N+bp+r9XcrzVnBp5MxdZblrKlYF5GcvgCfL8xbgbhse95jCdA==
+	b=kvnksgyh6M8oen6dXHa6hqwrt0jYmY79LMBMaoI1zA39VHsu55q9+GDTX/8PpDQO41/syg
+	tq3Mwm4LnvT/ruGjzdDBmZKeIO3Pr9biW2Z2VyL+c0fVlyTwS4cLuIfernBesdjMZ1VfnY
+	UJGK/4Irz+IBqL+0UOQCt3Q9Lc8YEJ9itq4Xh6+aqQy/opSK8ghgoVwVcSlb7+Z8OmYhzo
+	gViuhA0KA8mAbQzGS3Skg1GbvAQBhoxcn6XbWKhZWpwVkj5giAFsGcG877wrsZW/AfaBEl
+	KzZwIkpGwgf/M+ZR1uXpEt5ePH4y4Avi1BEyakqBy1NjIS2qH5QgvuuxF6/chg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mailchannels.net;
-	s=arc-2022; t=1676913408;
+	s=arc-2022; t=1676913429;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 dkim-signature; bh=fUu5dy7aqGfj6EXLkWJV8gzrUOJ39VlTABuiXGf/DAY=;
-	b=dWv8T6EfGWnWfCcAqPLtxresHVmUaAPkwYmnChDuuSVqErJatinWWUOQF/yJts2O3nEF70
-	37o9cn0f2OT+Cc5zD/ismISXQ8R4rKUUZVRUfL0BlCDvFLv4vmaU3UBikYYd/lWRNDxQ46
-	9UACjHt8ZJGVCUa6UOx7PkF/M5rZLFEnvf9DpwaJ/OHcGGaf/8VeIxlBAavkjXT2Sh7COk
-	wIX8lKZc1aosjm+8RXakqatGozKZrjfy8Z3BK89oV157AZm42OxsIXC5fK2o2ekt8Xybo+
-	S4sDp/9sG2N/e6CJNE3xQShOha/lThI9+5PkydsJvanCEvFHI+JJrea8fokOMA==
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=1W/yHp+digs/9tQmrEdxtc9OFifUEYrTHbBFllZM5ek=;
+	b=J5WP74FErdjwIGmhBynl9T4C1+WS224WE7CKPt25NBtgS3CtoPpUongJ/S06U09ud2vnHB
+	IYSxUzn7j1TTn7ZhNxo03brQHY4HL9z77GM7LLfAOBiZT2uC0hzojc0FUoH0jtUCRLKx/B
+	bf4puFtu1qm7pJxFDEkUo0eLMGtPYTT24MEXm779X4kT9S7bnQu/iEKcglWNR0cOJJTi+E
+	ujCOgCQaHDGdQyoDhdETkCDu+fnbybw2pGakwmZh34eO97bIAnv/m5NzZCkTW1NePgTi+b
+	ZpA2/Hvk1X6MtXlQ0IP7Kpp6bNZQJL7dHqndt1mx4Fj5C52dBqT/HFVAoDe66w==
 ARC-Authentication-Results: i=1;
-	rspamd-9788b98bc-l6ctm;
+	rspamd-5db48964c-wmdpd;
 	auth=pass smtp.auth=dreamhost smtp.mailfrom=kjlx@templeofstupid.com
 X-Sender-Id: dreamhost|x-authsender|kjlx@templeofstupid.com
-X-MC-Relay: Neutral
+X-MC-Relay: Good
 X-MailChannels-SenderId: dreamhost|x-authsender|kjlx@templeofstupid.com
 X-MailChannels-Auth-Id: dreamhost
-X-Bored-Irritate: 6331909a11482b5b_1676913408494_3548150860
-X-MC-Loop-Signature: 1676913408494:2375623452
-X-MC-Ingress-Time: 1676913408493
+X-Skirt-Well-Made: 2c2945951908affb_1676913429530_3151703476
+X-MC-Loop-Signature: 1676913429530:3091638531
+X-MC-Ingress-Time: 1676913429530
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=templeofstupid.com;
-	s=dreamhost; t=1676913407;
-	bh=fUu5dy7aqGfj6EXLkWJV8gzrUOJ39VlTABuiXGf/DAY=;
+	s=dreamhost; t=1676913428;
+	bh=1W/yHp+digs/9tQmrEdxtc9OFifUEYrTHbBFllZM5ek=;
 	h=Date:From:To:Cc:Subject:Content-Type;
-	b=oizMo8h8X0zgNVSz/6yhg8Unuwn+LyOASs/GaiBa5lJZoI4RqD5eNKfWf1+Vy+OX0
-	 yqFQoihSD0/b2C8QrM1J5naHejiLxMUA6Y10JbaEfZaqRunqILMW2/yVJoUWFMwHVl
-	 XovQOnLWQ6Drv/037PMZkbB6BymxPGFCm/tc4KRs=
-Date: Mon, 20 Feb 2023 09:16:43 -0800
+	b=UUG+txwSbZjwjKPTHOyD8W9Nra+sAjzKNx1Z6Zjyj2c3VHCmyut7CT3coeCJ0wFee
+	 Wxoq7Kx4mLjOFB5TJiSakB0a5Dwa8JHYwJLGt5lY2dAgcucToTPtRj2A7vMLrsfGup
+	 4IrCnF1Oay8LPGaD551QoJYhFev96Qv8lxefMIik=
+Date: Mon, 20 Feb 2023 09:17:04 -0800
 From: Krister Johansen <kjlx@templeofstupid.com>
 To: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>,
@@ -109,29 +110,48 @@ Cc: Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>,
 	Anthony Liguori <aliguori@amazon.com>,
 	David Reaver <me@davidreaver.com>,
 	Brendan Gregg <brendan@intel.com>
-Subject: [PATCH linux-next 0/2] x86/xen TSC related cleanups
-Message-ID: <cover.1676610413.git.kjlx@templeofstupid.com>
+Subject: [PATCH linux-next 2/2] x86/xen/time: cleanup xen_tsc_safe_clocksource
+Message-ID: <f6bab47230b00cecb67f2c5d94716c8236609967.1676610413.git.kjlx@templeofstupid.com>
+References: <cover.1676610413.git.kjlx@templeofstupid.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <cover.1676610413.git.kjlx@templeofstupid.com>
 
-Hi,
-Enclosed please find a pair of patches that perform some additional cleanup
-that was suggested by Boris and Jan.
+Modifies xen_tsc_safe_clocksource() to use newly defined constants from
+arch/x86/include/asm/xen/cpuid.h.  This replaces a numeric value with
+XEN_CPUID_TSC_MODE_NEVER_EMULATE, and deletes a comment that is now self
+explanatory.
 
-Specifically: this resync's arch/x86/include/asm/xen/cpuid.h from its
-upstream source in the Xen tree, and then uses one of the new #define-s to
-replace a constant in x86/xen/time.c that was previously only numerically
-defined.
+There should be no change in the function's behavior.
 
-Krister Johansen (2):
-  xen: update arch/x86/include/asm/xen/cpuid.h
-  x86/xen/time: cleanup xen_tsc_safe_clocksource
+Signed-off-by: Krister Johansen <kjlx@templeofstupid.com>
+---
+ arch/x86/xen/time.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- arch/x86/include/asm/xen/cpuid.h | 22 ++++++++++++++++++----
- arch/x86/xen/time.c              |  4 ++--
- 2 files changed, 20 insertions(+), 6 deletions(-)
-
+diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
+index 95140609c8a8..cf6dd9f9fa6a 100644
+--- a/arch/x86/xen/time.c
++++ b/arch/x86/xen/time.c
+@@ -20,6 +20,7 @@
+ #include <asm/pvclock.h>
+ #include <asm/xen/hypervisor.h>
+ #include <asm/xen/hypercall.h>
++#include <asm/xen/cpuid.h>
+ 
+ #include <xen/events.h>
+ #include <xen/features.h>
+@@ -495,8 +496,7 @@ static int __init xen_tsc_safe_clocksource(void)
+ 	/* Leaf 4, sub-leaf 0 (0x40000x03) */
+ 	cpuid_count(xen_cpuid_base() + 3, 0, &eax, &ebx, &ecx, &edx);
+ 
+-	/* tsc_mode = no_emulate (2) */
+-	if (ebx != 2)
++	if (ebx != XEN_CPUID_TSC_MODE_NEVER_EMULATE)
+ 		return 0;
+ 
+ 	return 1;
 -- 
 2.25.1
 
