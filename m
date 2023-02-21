@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B83CC64ED6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFEFC6FA9D
 	for <xen-devel@archiver.kernel.org>; Tue, 21 Feb 2023 16:56:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.499025.770062 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.499018.769999 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUVwC-0007TW-4W; Tue, 21 Feb 2023 16:56:20 +0000
+	id 1pUVw6-0006DY-DF; Tue, 21 Feb 2023 16:56:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 499025.770062; Tue, 21 Feb 2023 16:56:20 +0000
+Received: by outflank-mailman (output) from mailman id 499018.769999; Tue, 21 Feb 2023 16:56:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUVwB-0007Qg-Og; Tue, 21 Feb 2023 16:56:19 +0000
-Received: by outflank-mailman (input) for mailman id 499025;
- Tue, 21 Feb 2023 16:56:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pUVw6-0006DR-Ab; Tue, 21 Feb 2023 16:56:14 +0000
+Received: by outflank-mailman (input) for mailman id 499018;
+ Tue, 21 Feb 2023 16:56:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TJL1=6R=citrix.com=prvs=409c08766=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1pUVwA-0006LK-DO
- for xen-devel@lists.xenproject.org; Tue, 21 Feb 2023 16:56:18 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a6e795ff-b208-11ed-93b6-47a8fe42b414;
- Tue, 21 Feb 2023 17:56:16 +0100 (CET)
+ id 1pUVw5-0006DG-4j
+ for xen-devel@lists.xenproject.org; Tue, 21 Feb 2023 16:56:13 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9fd1cedf-b208-11ed-a089-e9535cc0f9c3;
+ Tue, 21 Feb 2023 17:56:05 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,128 +38,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a6e795ff-b208-11ed-93b6-47a8fe42b414
+X-Inumbo-ID: 9fd1cedf-b208-11ed-a089-e9535cc0f9c3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1676998576;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=UseCy4+DGI15ehevA8lX7nQmBmn5pL/bMgIUe4HdfiA=;
-  b=SpLtwq+UFEPVDSGIYr4ML4Gq1Mc0Cad78RzLKXHxRbMZtJa3SxwGhjjV
-   Y+RKyBmizPp9H6xBxvL+kDv4blFdFKMrbkS7IZutuavmlJGPGk6ieFGId
-   ABSIIt/ekXk1d2NdUy1tePAaQu+Z5I0eOBGTAy1pLo/ejT75Pi6BMygiW
-   k=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1676998565;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=CunKAyRcxTzgTRqFGUV8eBEdQzfnPyauV8u6JmcacUY=;
+  b=K+ZnI42UG/o9S3nBnK6LizRh5AxXfsCRcjE4uBGk9KaENHlYYJf0zOwR
+   tualiDEWXv9keizj2KJKvFEWxLddtXMX8N4le72sX4bG/VEicfmU+z3QT
+   H3Qvtr8ynNZTxofKBEWUigCdVUfpOCBk67DGZd9JqP+SGSMmIqVfl44fr
+   U=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 97316300
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 96765384
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:N1uj96qyt3qDMSc3Vi5zp3snLWleBmICZRIvgKrLsJaIsI4StFCzt
- garIBmBOKyOZTejKd8lYIvl/UkAu5OBytI2HlA//yFnFSgU85uZCYyVIHmrMnLJJKUvbq7FA
- +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpA1c/Ek/NsDo788YhmIlknNOlNA2Ev
- NL2sqX3NUSsnjV5KQr40YrawP9UlKm06WxwUmAWP6gR5weEzSBNV/rzGInqR5fGatgMdgKFb
- 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
- OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXACwwYgDd3MOp/IvhVrFxouUkEu6zbYxK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
- eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVRrk6VoqwmpXDe1gVr3JDmMcbPe8zMTsJQ9qqdj
- jOZpD2nWUlCXDCZ4TSUqnKeo7bMoQy4X6BIHoWZ/8VBv2TGkwT/DzVJDADm8JFVkHWWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8Ux4RuBzaf86A+DCm8JCDVGbbQOr9QqTDYn0
- luImdLBBjF1trCRD3WH+d+pQSiaYHZPazVYPGldEFVDuoO4yG0usv7RZspeHL7r1fzqJQiq3
- 2iXiAk5uZJL3MFegs1X4mv7qz6ro5HISCs86QPWQn+p42tFWWK1W2C7wQOFtKgdde51WnHE5
- SFZwJbGsIjiGLnXzESwrPMx8KZFDhpvGBnVmhZREpYo7FxBEFbzLNkLsFmSyKqEW/vomAMFg
- meJ5Gu9B7cJZhNGiJObhKroUqwXIVDIT4iNaxwtRoMmjmJNXAGG5jpyQkWbwnrglkMh+YlmZ
- 8jFIJ/8VSZFUP8/pNZTewv6+eV2rh3SOEuJHcyrp/hZ+ef2iIGppUctbwLVM7FRAFKsqwTJ6
- ddPX/ZmOD0GONASlhL/qNZJRXhTdChTOHwDg5APHgJ1ClY8ST5J5j646e9JRrGJaIwPyLmWp
- CrmAhYAoLc97FWeQTi3hrlYQOuHdf5CQbgTYUTA4X7AN6AfXLuS
-IronPort-HdrOrdr: A9a23:+gAjrKzdJSoWJP+tGuBWKrPw2r1zdoMgy1knxilNoHxuH/BwWf
- rPoB17726TtN91YhsdcL+7V5VoLUmzyXcx2/hyAV7AZniAhILLFvAA0WKK+VSJdxEWtNQtsJ
- uIG5IUNDSaNykfsS+V2miF+9ZL+qj5zEir792usUuEm2tRGtBdBwQSMHfqLqVvLjM2fKbQjP
- Cnl7d6TzzLQwVuUu2LQkMrcsLkvNPxmJfvcXc9dmIaAFnnt0LS1FbieSLopCsjbw==
+IronPort-Data: A9a23:7ghZP6L6xQKkMXaCFE+Ry5UlxSXFcZb7ZxGr2PjKsXjdYENShWMHm
+ 2FOUG+GPK6KYjP3e99+PYXn/U9X6sfTyYcxSQBlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
+ ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
+ Jb5rta31GWNglaYCUpJrfPcwP9TlK6q4mhA5AZnPasjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
+ /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
+ jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5THDsN1
+ PAHcQsRLTyeofrp+OqXVOpz05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
+ oxANGQpNU6bC/FMEg5/5JYWleG0hn75YntApUicv6Yf6GnP1g1hlrPqNbI5f/TbG5oLwx3I+
+ goq+Uz2Kx9DKcaOwwaU3Srrr8uUgiinWbg7QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxaspQUAUtBdF+k77gClyafO5QudQG8eQVZpY9U8uMg7bTcjz
+ FOOkpXiAjkHjVGOYSvDrPHO92r0YHVLazZYPkfoUDfp/fHHvdtwrx7QF+1/U4KoqMWqIWnc3
+ TOV+X1Wa6ooseYH0KCy/Fbiij2qp4TUQgNd2jg7Tl5J/SsiOtf7OtXABUzzqK8Zcd3HFgXpU
+ G0swZD20QwYMX2aeMVhqs0pFarh2fuKOSa0bbVHT8h4rGTFF5JOkOltDNBCyKVBaJtsldzBO
+ hW7VeZtCHh7ZSLCUEOPS9jtY/nGNIC5fTgfatjab8BVfr96fxKd8SdlaCa4hj6yzhl1wflvZ
+ s7AKa5A6Er27ow9kVKLqxo1i+d3lkjSO0uOLXwE8/hX+eXHPyPEIVv0GFCPcvo4/Mu5TPb9q
+ r5i2z+x40wHCoXWO3CHmbP/2HhWdRDX87iq8Z0IHgNCSyI6cFwc5wj5m+1/JdY+xPwMzo8lP
+ BiVAydl9bY2vlWfQS3iV5ypQOqHsUpXxZ7jARERAA==
+IronPort-HdrOrdr: A9a23:21FyeK0YPlGvqhMFShXb1gqjBEQkLtp133Aq2lEZdPU0SKGlfg
+ 6V/MjztCWE7gr5PUtLpTnuAsa9qB/nm6KdpLNhX4tKPzOW31dATrsSjrcKqgeIc0HDH6xmpM
+ JdmsBFY+EYZmIK6foSjjPYLz4hquP3j5xBh43lvglQpdcBUdAQ0+97YDzrYnGfXGN9dOME/A
+ L33Ls7m9KnE05nFviTNz0+cMXogcbEr57iaQ5uPW9a1OHf5QnYk4ITCnKjr20jbw8=
 X-IronPort-AV: E=Sophos;i="5.97,315,1669093200"; 
-   d="scan'208";a="97316300"
+   d="scan'208";a="96765384"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [XEN PATCH v2 6/7] automation: Remove testing on Debian Jessie
-Date: Tue, 21 Feb 2023 16:55:41 +0000
-Message-ID: <20230221165542.7642-7-anthony.perard@citrix.com>
+	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [XEN PATCH v2 0/7] automation: Update containers to allow HTTPS access to xenbits
+Date: Tue, 21 Feb 2023 16:55:35 +0000
+Message-ID: <20230221165542.7642-1-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230221165542.7642-1-anthony.perard@citrix.com>
-References: <20230221165542.7642-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Jessie as rearch EOL in 2020.
+Patch series available in this git branch:
+https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.gitlab-containers-update-v2
 
-Even if we update the containers, we would still not be able to reach
-HTTPS webside with Let's Encrypt certificates and thus would need more
-change to the container.
+v2:
+- Remove CentOS 7.2
+- Remove Debian Jessie test, but update container recipe for the benefit of
+  older branches.
+- Fix CentOS 7 containner recipe to update all packages. (Fix missing update of
+  HTTPS root certificates)
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
+There is work in progress [1] to update urls in our repo to use https, but
+those https urls to xenbits don't work in our containers, due to an expired
+root certificate. So we need to update those containers.
 
-Notes:
-    HTTPS would fail unless we commit "automation: Remove expired root
-    certificates used to be used by let's encrypt", that is. Patch still in
-    the series, and fix Jessie.
+This series update the dockerfile where just rebuilding the container isn't enough.
 
- automation/gitlab-ci/build.yaml | 40 ---------------------------------
- 1 file changed, 40 deletions(-)
+I've tested the new containers but didn't updated them yet. You can see the
+result in the following links (if you can access them). There are other
+containers been test which didn't need dockerfile update.
+(That was with v1 of the series)
+    https://gitlab.com/xen-project/people/anthonyper/xen/-/pipelines/777474218
+    https://gitlab.com/xen-project/people/anthonyper/xen/-/pipelines/778218868
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 22ce1c45e7..2be1b05d5c 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -221,46 +221,6 @@ centos-7-gcc-debug:
-   variables:
-     CONTAINER: centos:7
- 
--debian-jessie-clang:
--  extends: .clang-x86-64-build
--  variables:
--    CONTAINER: debian:jessie
--
--debian-jessie-clang-debug:
--  extends: .clang-x86-64-build-debug
--  variables:
--    CONTAINER: debian:jessie
--
--debian-jessie-gcc:
--  extends: .gcc-x86-64-build
--  variables:
--    CONTAINER: debian:jessie
--
--debian-jessie-gcc-debug:
--  extends: .gcc-x86-64-build-debug
--  variables:
--    CONTAINER: debian:jessie
--
--debian-jessie-32-clang:
--  extends: .clang-x86-32-build
--  variables:
--    CONTAINER: debian:jessie-i386
--
--debian-jessie-32-clang-debug:
--  extends: .clang-x86-32-build-debug
--  variables:
--    CONTAINER: debian:jessie-i386
--
--debian-jessie-32-gcc:
--  extends: .gcc-x86-32-build
--  variables:
--    CONTAINER: debian:jessie-i386
--
--debian-jessie-32-gcc-debug:
--  extends: .gcc-x86-32-build-debug
--  variables:
--    CONTAINER: debian:jessie-i386
--
- debian-stretch-clang:
-   extends: .clang-x86-64-build
-   variables:
+Building randconfig on debian unstable seems to be an issue.
+
+[1] https://lore.kernel.org/xen-devel/75d91def8234bceb41548147ee8af5fea52bd1d6.1675889602.git.demi@invisiblethingslab.com/
+
+Cheers,
+
+Anthony PERARD (7):
+  automation: Remove CentOS 7.2 containers and builds
+  automation: Ensure that all packages are up-to-dates in CentOS 7
+    container
+  automation: Remove clang-8 from Debian unstable container
+  automation: Use EOL tag for Jessie container
+  automation: Add more aliases in containerize
+  automation: Remove testing on Debian Jessie
+  automation: Remove expired root certificates used to be used by let's
+    encrypt
+
+ automation/build/centos/7.2.dockerfile        | 52 ----------------
+ automation/build/centos/7.dockerfile          |  3 +-
+ automation/build/centos/CentOS-7.2.repo       | 35 -----------
+ .../build/debian/jessie-i386.dockerfile       |  7 ++-
+ automation/build/debian/jessie.dockerfile     |  7 ++-
+ automation/build/debian/unstable-llvm-8.list  |  3 -
+ automation/build/debian/unstable.dockerfile   | 12 ----
+ automation/build/ubuntu/trusty.dockerfile     |  5 ++
+ automation/gitlab-ci/build.yaml               | 60 -------------------
+ automation/scripts/containerize               |  3 +
+ 10 files changed, 22 insertions(+), 165 deletions(-)
+ delete mode 100644 automation/build/centos/7.2.dockerfile
+ delete mode 100644 automation/build/centos/CentOS-7.2.repo
+ delete mode 100644 automation/build/debian/unstable-llvm-8.list
+
 -- 
 Anthony PERARD
 
