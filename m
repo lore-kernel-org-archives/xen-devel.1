@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0868DC6FD1A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37015C6FD1B
 	for <xen-devel@archiver.kernel.org>; Wed, 22 Feb 2023 15:34:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.499544.770767 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.499545.770773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUr89-0002Uz-IM; Wed, 22 Feb 2023 15:34:05 +0000
+	id 1pUr8A-0002er-8B; Wed, 22 Feb 2023 15:34:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 499544.770767; Wed, 22 Feb 2023 15:34:05 +0000
+Received: by outflank-mailman (output) from mailman id 499545.770773; Wed, 22 Feb 2023 15:34:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUr88-0002QV-Ox; Wed, 22 Feb 2023 15:34:04 +0000
-Received: by outflank-mailman (input) for mailman id 499544;
- Wed, 22 Feb 2023 15:34:02 +0000
+	id 1pUr89-0002c4-Gi; Wed, 22 Feb 2023 15:34:05 +0000
+Received: by outflank-mailman (input) for mailman id 499545;
+ Wed, 22 Feb 2023 15:34:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvgA=6S=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pUr85-0001MH-Ns
- for xen-devel@lists.xenproject.org; Wed, 22 Feb 2023 15:34:01 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
+ id 1pUr87-0001MH-B7
+ for xen-devel@lists.xenproject.org; Wed, 22 Feb 2023 15:34:03 +0000
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [2a00:1450:4864:20::12c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 536c2c77-b2c6-11ed-93b6-47a8fe42b414;
- Wed, 22 Feb 2023 16:33:59 +0100 (CET)
-Received: by mail-lf1-x135.google.com with SMTP id f18so10543953lfa.3
- for <xen-devel@lists.xenproject.org>; Wed, 22 Feb 2023 07:34:00 -0800 (PST)
+ id 5461d2c2-b2c6-11ed-93b6-47a8fe42b414;
+ Wed, 22 Feb 2023 16:34:00 +0100 (CET)
+Received: by mail-lf1-x12c.google.com with SMTP id bp25so10676489lfb.0
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Feb 2023 07:34:01 -0800 (PST)
 Received: from localhost.localdomain (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- q9-20020ac25289000000b004db0d26adb4sm927746lfm.182.2023.02.22.07.33.58
+ q9-20020ac25289000000b004db0d26adb4sm927746lfm.182.2023.02.22.07.34.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Feb 2023 07:33:59 -0800 (PST)
+ Wed, 22 Feb 2023 07:34:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 536c2c77-b2c6-11ed-93b6-47a8fe42b414
+X-Inumbo-ID: 5461d2c2-b2c6-11ed-93b6-47a8fe42b414
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oaAb7ukOE/W1jF7n380+WVov1wWGPwFJcHBGgA4I42A=;
-        b=PsIcsB1eAGAv31fKhzszD8BPuis7RyhebinM1YoSHMcMlhsPv+l5LRETNGSJgaWiOE
-         vfoFQQNo+Z592qPRDlV+kqKb+5E8EmzMz3+Txwwqg0txE7h9x6COb81lmSwWOTM0USuI
-         pHUguVHJU/s/rLl+H9m4QFmRWR9TEydGMFyNVTxCBHM4EGex5yO6/bSbIrHATk9ZSLjA
-         qFav1IYaJG30zWOgLqi6BNAjnWGFgjnakHyII6qasFKHHEkH0GU6jqXA1JLxjKAiu4Y/
-         Kazw2LNaosSD0z8bJimwxf96wgDm1Iuo/ckhKILeffwCrxz6bWlTmpNZIeIax34OB5i6
-         mwgg==
+        bh=6KguU5fKyIYZ3B6fRSfTmGKEYTHZutvCnKPhrDpB1io=;
+        b=YQ7QaUw2xSr0uhygfwAIAPTnrqAX0QSAeZ638gQy98K6yT9B0ioUdpuyfD/GEtFt34
+         E/q0d6XP2L3ipHWJwhkjyR7Sfq08lY5CYYj9oLtjj86uVPLOe6wmrFCCUiSmNwMc8d4w
+         bLdQmsYNKgnSuQ1e2GmC2kCPGuLo9KM5IPf/rJ7iNEpy2L7nacLcUPXj4a32DtpSjmqx
+         Ww4Slve+itnWYK3BK8k3cBJhIngJrnUd7FigQzG6zTc6HCeeMRsM8JI3VSUi4p6fVZNs
+         XkNR0Fw0hv1Y4AXvWq+xFYJtG8ujcRIr8RDF9i1z2cgHl81oZColGEa8Nq8oA6Mvj7FI
+         3ItQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oaAb7ukOE/W1jF7n380+WVov1wWGPwFJcHBGgA4I42A=;
-        b=kqWLteWdKuPfHwK2AWvsT3rrjkxT0Tx0y1Hk1KQQ6gJmoxeMcpXJeWvX1i1WLPdk/P
-         Mh9gkYhUSWN1JkpnFiHlbCJL/o1v+1kTEYyW913NasSuhMKtmzNoBl1ciqzOkaUo1WTr
-         m33rM08EmdALegp3K7MPgNTHcYHPrDNs+Am/i19xiO8l21u/6pl1y0uAERMOv8kYsBHo
-         1fc3mi4NstKd2XTc5RMhaEPcxOKQW+3pzqwSZOB9uQIIgW4kdZyk2n1t297Xos4jTHKP
-         te8hgNT3UbEkiAEbsYx+kE6Ngk9cM4NTss7CmlVXycSLBwyGs+K165ouKdNi7Hc4BuoQ
-         /gGA==
-X-Gm-Message-State: AO0yUKWxFtO/tdT1c0Qhqwp0LDdZWI566P0bNoXGY8BfZ5CaVSlr/+yd
-	PYKUfrZnbpxbHIMutPUSxKgJkvsZVYzTBTGK4oo=
-X-Google-Smtp-Source: AK7set/BrU6GpxdvnsexBpdAumv70/Z+G4UeQ/FoCu2NxcHU8B/LeNDcv7Ablb5ZYe6LLtZazjYCTQ==
-X-Received: by 2002:ac2:5ece:0:b0:4dd:9aec:e468 with SMTP id d14-20020ac25ece000000b004dd9aece468mr1184919lfq.58.1677080039581;
-        Wed, 22 Feb 2023 07:33:59 -0800 (PST)
+        bh=6KguU5fKyIYZ3B6fRSfTmGKEYTHZutvCnKPhrDpB1io=;
+        b=GS+WVJftdXyfPCPi+XgF5RV0EKWljbVdcTnBM2G3QRRXPRDgsnHNxiso/YGmG9YQuy
+         0kcdC91wKKXCLXS51eK0fqOChWdinjZvNnAfqe++VPLbu+0aO9nvgCnGrIEenuA0wn6E
+         qiyA3jDOiYJaIvTeuxjFo3lQ/EL7bvP8mg0FkER72xyeLMrWhCFDEhrOgcKt3Cd6ei18
+         O+v8kbwOtVF67SNXBUXn4dhWF+Rz+S7UsD5Ibuk07TcHAsEnR5X9gAPR53Eu1ItdyMfs
+         QcQxtka34HrCCq/tRobBUSSE+auiNodU/5vF0GOPmG0mm2xlWjFXaU5CskU9LyDgpOgt
+         Jyxw==
+X-Gm-Message-State: AO0yUKXG2DmIMr0I2QmmJx6AGsf1/RSUTjaJmqUQdYB1ojKSBcKvF30W
+	Ytc1WoOO9wk07qG3KGFgwWFd2Wsaq0scD04Dvwk=
+X-Google-Smtp-Source: AK7set/xYReyFarccwfkMjZIxvACnhtNCeZqDqdQl+pSNBAcE7+gyQOEvXc3nFfTscS6Ntnj2sDjTw==
+X-Received: by 2002:ac2:43b3:0:b0:4dc:4b05:485c with SMTP id t19-20020ac243b3000000b004dc4b05485cmr2784611lfl.50.1677080041130;
+        Wed, 22 Feb 2023 07:34:01 -0800 (PST)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
@@ -86,59 +86,62 @@ Cc: Bertrand.Marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v7 06/20] xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET
-Date: Wed, 22 Feb 2023 16:33:03 +0100
-Message-Id: <a3f70753dc853c2fb81efad72321ec00accf3f27.1677079672.git.jens.wiklander@linaro.org>
+Subject: [XEN PATCH v7 08/20] xen/arm: ffa: note dependency on 4k pages
+Date: Wed, 22 Feb 2023 16:33:05 +0100
+Message-Id: <6c0ef5d2174bfa8c25aeb94395160ab9d863b63a.1677079672.git.jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1677079671.git.jens.wiklander@linaro.org>
 References: <cover.1677079671.git.jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Defines flags used for the function FFA_PARTITION_INFO_GET.
+Adds a BUILD_BUG_ON() to assert the dependency on 4k pages in the FF-A
+mediator.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 ---
- xen/arch/arm/tee/ffa.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ xen/arch/arm/tee/ffa.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index aa6cdbe0a4f9..f4562ed2defc 100644
+index d04bac9cc47f..8b0b80ce1ff5 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -56,6 +56,32 @@
+@@ -56,6 +56,16 @@
  #define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
                                                   FFA_MY_VERSION_MINOR)
  
 +/*
-+ * Flags used for the FFA_PARTITION_INFO_GET return message:
-+ * BIT(0): Supports receipt of direct requests
-+ * BIT(1): Can send direct requests
-+ * BIT(2): Can send and receive indirect messages
-+ * BIT(3): Supports receipt of notifications
-+ * BIT(4-5): Partition ID is a PE endpoint ID
++ * The FF-A specification explicitly works with 4K pages as a measure of
++ * memory size, for example, FFA_RXTX_MAP takes one parameter "RX/TX page
++ * count" which is the number of contiguous 4K pages allocated. Xen may use
++ * a different page size depending on the configuration to avoid confusion
++ * with PAGE_SIZE use a special define when it's a page size as in the FF-A
++ * specification.
 + */
-+#define FFA_PART_PROP_DIRECT_REQ_RECV   BIT(0, U)
-+#define FFA_PART_PROP_DIRECT_REQ_SEND   BIT(1, U)
-+#define FFA_PART_PROP_INDIRECT_MSGS     BIT(2, U)
-+#define FFA_PART_PROP_RECV_NOTIF        BIT(3, U)
-+#define FFA_PART_PROP_IS_PE_ID          (0U << 4)
-+#define FFA_PART_PROP_IS_SEPID_INDEP    (1U << 4)
-+#define FFA_PART_PROP_IS_SEPID_DEP      (2U << 4)
-+#define FFA_PART_PROP_IS_AUX_ID         (3U << 4)
-+#define FFA_PART_PROP_NOTIF_CREATED     BIT(6, U)
-+#define FFA_PART_PROP_NOTIF_DESTROYED   BIT(7, U)
-+#define FFA_PART_PROP_AARCH64_STATE     BIT(8, U)
++#define FFA_PAGE_SIZE                   SZ_4K
 +
-+/*
-+ * Flag used as parameter to FFA_PARTITION_INFO_GET to return partition
-+ * count only.
-+ */
-+#define FFA_PARTITION_INFO_GET_COUNT_FLAG BIT(0, U)
+ /* Framework direct request/response */
+ #define FFA_MSG_FLAG_FRAMEWORK          BIT(31, U)
+ #define FFA_MSG_TYPE_MASK               0xFFU;
+@@ -242,6 +252,17 @@ static bool ffa_probe(void)
+     unsigned int major_vers;
+     unsigned int minor_vers;
+ 
++    /*
++     * FF-A often works in units of 4K pages and currently it's assumed
++     * that we can map memory using that granularity. See also the comment
++     * above the FFA_PAGE_SIZE define.
++     *
++     * It is possible to support a PAGE_SIZE larger than 4K in Xen, but
++     * until that is fully handled in this code make sure that we only use
++     * 4K page sizes.
++     */
++    BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE);
 +
- /* Function IDs */
- #define FFA_ERROR                       0x84000060U
- #define FFA_SUCCESS_32                  0x84000061U
+     /*
+      * psci_init_smccc() updates this value with what's reported by EL-3
+      * or secure world.
 -- 
 2.34.1
 
