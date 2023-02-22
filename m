@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C5DC678DB
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Feb 2023 15:34:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.499537.770707 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E10F3C636D6
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Feb 2023 15:34:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.499540.770727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUr84-0001Ma-3O; Wed, 22 Feb 2023 15:34:00 +0000
+	id 1pUr85-0001jD-VE; Wed, 22 Feb 2023 15:34:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 499537.770707; Wed, 22 Feb 2023 15:34:00 +0000
+Received: by outflank-mailman (output) from mailman id 499540.770727; Wed, 22 Feb 2023 15:34:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUr84-0001MT-0V; Wed, 22 Feb 2023 15:34:00 +0000
-Received: by outflank-mailman (input) for mailman id 499537;
- Wed, 22 Feb 2023 15:33:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pUr85-0001fk-Qv; Wed, 22 Feb 2023 15:34:01 +0000
+Received: by outflank-mailman (input) for mailman id 499540;
+ Wed, 22 Feb 2023 15:34:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JvgA=6S=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pUr82-0001MC-GP
- for xen-devel@lists.xenproject.org; Wed, 22 Feb 2023 15:33:58 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 511aef28-b2c6-11ed-a089-e9535cc0f9c3;
- Wed, 22 Feb 2023 16:33:57 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id w27so10582924lfu.4
- for <xen-devel@lists.xenproject.org>; Wed, 22 Feb 2023 07:33:55 -0800 (PST)
+ id 1pUr83-0001MH-V8
+ for xen-devel@lists.xenproject.org; Wed, 22 Feb 2023 15:34:00 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 518898e9-b2c6-11ed-93b6-47a8fe42b414;
+ Wed, 22 Feb 2023 16:33:56 +0100 (CET)
+Received: by mail-lf1-x12f.google.com with SMTP id w27so10583020lfu.4
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Feb 2023 07:33:56 -0800 (PST)
 Received: from localhost.localdomain (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- q9-20020ac25289000000b004db0d26adb4sm927746lfm.182.2023.02.22.07.33.53
+ q9-20020ac25289000000b004db0d26adb4sm927746lfm.182.2023.02.22.07.33.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Feb 2023 07:33:54 -0800 (PST)
+ Wed, 22 Feb 2023 07:33:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,35 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 511aef28-b2c6-11ed-a089-e9535cc0f9c3
+X-Inumbo-ID: 518898e9-b2c6-11ed-93b6-47a8fe42b414
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oeWtQaC3JHvl+29pYelyweMXbxlYjOwAamRSQUiecqg=;
-        b=SifL+Ye44BVdwX9OQqbEOwDBBvuUDaaGPV8NgFtyEKHTR77C8e9Ib7MswD2hORx3CR
-         J6gvwE9Y3DXsnFMjOoRJRNBO8NCwEmdKDZL8j8zsnVk3SQtW2lAL7H5qZwvU5pQwozWd
-         Elr0bDjST4kbYwRscQcg/IGGatUvJkYvvup/SD7+Q/IuQQwWUvy0s6QaY/QGR3uK5h0o
-         HogP1Ibppq7zCCZ/7M/8l1MkfZqmGtthLXXXP1Qwg9pZhcgOyRxbwkI4CKjPi/VofU3J
-         ak2vEWzR5fJkZq5GzkT6LHKUL/DxvZAKCyadg3cXPe2tQHH3rZSxg+CfPa/O4HLyjyE4
-         wPRw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6ZsjNSv3BszwMRlZ3430f1yrOpOpDXzM9fMCdGNbTzc=;
+        b=BIq73+5buxXluU82WKlUW/WkRfEhf2NGWpvWB7eFKDakZ9a0NK1xttUZuQLUbSy53x
+         3qMp5eYpS+922Ioc4H6ovetIJtTwjO6Sr90NMjW+JeT1vVA6GatO0bcSfb1iB1y5Wuli
+         G9vG2m3RDsnYE5M7xKjyVjXFT2joNgz00pLx8EUxkQnQi3+ecoKqUgje5JlyJq7ynOFY
+         6aetXU/Yjzh7wYAyCt+yS78E+kPdySk+5mQOqA4Q/nVoo0cxpo7jU7gHHcjGlVsADlOx
+         UAcZNVja1R6KetSU/oneOtbvZaXC0kguKoMoBP7ZufnaG8TDIGqj2eGAF+TO7Rz2wn1T
+         AV4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oeWtQaC3JHvl+29pYelyweMXbxlYjOwAamRSQUiecqg=;
-        b=ljZ1GCnM8y+BMLb+vbwNkiav0Lq8sP0mr55wwA6Ouczj++Skxl6Rn+24SEC1gU2WSD
-         Cy1g2voYdBtu60sPsD0eS/FhXyhE0Vs5VI8s/a+VKmDWD7SEgjpb5SlZwuWvSMcJyJdj
-         +ZM+hFVvaft5VPl+U/2InpufEMOJF4ousE2k2LY3BqZ3Cu29ygSvqSLBfZDmIyqk/8F1
-         e9/G8ifXAeXjEQ3x1OpqWUl9D90mDJSVozdJgs7ZBQsZll7w8NfjBRPZykIrsqcn9Kmf
-         eUxCq3YfXIkoo2Ljhh6GAzVJpdOPrSsqQQkuZwic09ZaGAzQNCmU5ha1pSMMDFYfniCj
-         A9xw==
-X-Gm-Message-State: AO0yUKVuGJG87BPMgSADmLPD6FdktFIKdElx4LIOTDFcdfgRPDOu3atv
-	Q4V0MKoCcYnQ9gvWp0ZbptK/AunSTzc0TpTdM2w=
-X-Google-Smtp-Source: AK7set9ZKkyXjXuW14WrdBSdQEKq16nsolr64pMwzHGxJKq+tIYmPFN/35u2YFGyHLpg9+F2WFHE6Q==
-X-Received: by 2002:ac2:55b5:0:b0:4b5:7e4c:dcea with SMTP id y21-20020ac255b5000000b004b57e4cdceamr2648612lfg.51.1677080034533;
-        Wed, 22 Feb 2023 07:33:54 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=6ZsjNSv3BszwMRlZ3430f1yrOpOpDXzM9fMCdGNbTzc=;
+        b=8MaZlQ/+FaKpTo+M+y9jhWlW8BsJfHgHuZmCMCZ4A496wIe9zTwsJXM127PpjOJsuY
+         aCu3MyNAQx08OfwG+/I39Ic+ZrWW68tq07qUHJ1BlH5BcuFvXHI5eIapl5v0ADdkzGDk
+         pEEduWSHAh6LrOOpv596+uSq+zmIYTHNELH0mGRBoF7ry27wzsZ84hKMRc0F30KWc7kF
+         bBhMZnJiGF+mA9bEjZmbteu4TWmTN+Pk6j1CHSWKqO7GshkyYt5ZGsvbSMUQIcrmZOiU
+         0kMiClIzaQucogZTs4xa+BNqOyoW6sPiDxpAUSfaG+0t34zNGS+IC/9aVlWauKkQlnOl
+         DBww==
+X-Gm-Message-State: AO0yUKWr217Gm+tcBEptisg/2OCiRU7sylJ0HcwNMstgck48iiHxpFEu
+	9/zSmi/XPTa+1Lvwk4nW4cJj+Nc2xwsWm8gvJMs=
+X-Google-Smtp-Source: AK7set9riMwQZMLprPrPH8sv4ujWvOXUCd5+6lnZiau7TuboZfgOu1DHlL74ZRYowGtdO7JjwnwicQ==
+X-Received: by 2002:a19:550e:0:b0:4db:456a:9a1 with SMTP id n14-20020a19550e000000b004db456a09a1mr2892389lfe.66.1677080036259;
+        Wed, 22 Feb 2023 07:33:56 -0800 (PST)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
@@ -84,209 +85,415 @@ Cc: Bertrand.Marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [XEN PATCH v7 00/20] Xen FF-A mediator
-Date: Wed, 22 Feb 2023 16:32:57 +0100
-Message-Id: <cover.1677079671.git.jens.wiklander@linaro.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v7 02/20] xen/arm: tee: add a primitive FF-A mediator
+Date: Wed, 22 Feb 2023 16:32:59 +0100
+Message-Id: <5f0a74b3e4f6cda56e780a739859537246d4892f.1677079672.git.jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1677079671.git.jens.wiklander@linaro.org>
+References: <cover.1677079671.git.jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Adds a FF-A version 1.1 [1] mediator to communicate with a Secure
+Partition in secure world.
 
-This patch sets add an FF-A [1] mediator to the TEE mediator framework
-already present in Xen.  The FF-A mediator implements the subset of the
-FF-A 1.1 specification needed to communicate with OP-TEE using FF-A as
-transport mechanism instead of SMC/HVC as with the TEE mediator. It allows
-a similar design in OP-TEE as with the TEE mediator where OP-TEE presents
-one virtual partition of itself to each guest in Xen.
+This commit brings in only the parts needed to negotiate FF-A version
+number with guest and SPMC.
 
-The FF-A mediator is generic in the sense it has nothing OP-TEE specific
-except that only the subset needed for OP-TEE is implemented so far. The
-hooks needed to inform OP-TEE that a guest is created or destroyed are part
-of the FF-A specification.
-
-It should be possible to extend the FF-A mediator to implement a larger
-portion of the FF-A 1.1 specification without breaking with the way OP-TEE
-is communicated with here. So it should be possible to support any TEE or
-Secure Partition using FF-A as transport with this mediator.
-
-The patches are also available at https://github.com/jenswi-linaro/xen
-branch "xen_ffa_v7".
-
-With help from Bertrand I've intregrated this in a test setup with OP-TEE.
-Please check prerequisites at
-https://optee.readthedocs.io/en/latest/building/prerequisites.html
-
-My setup is duplicated using:
-repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
-        -b qemu_xen_ffa
-repo sync -j8
-cd build
-make -j8 toolchains
-make -j8 all
-make run-only
-
-Test in dom0 with for instance:
-xtest 1004
-
-at the prompt.
-
-To start up a domu and connect to it do:
-cd /mnt/host/build/qemu_v8/xen
-xl create guest_ffa.cfg
-xl console domu
-
-Then test as usual with "xtest 1004".
-
-The setup uses the branch "ffa" from https://github.com/jenswi-linaro/xen.
-That's currently the same as the "xen_ffa_v7" branch, but the "ffa" branch
-may change later as I update for a new version of the patch set.
-
-[1] https://developer.arm.com/documentation/den0077/latest
-
-Thanks,
-Jens
-
-v6->v7:
-* Split some of the larger patches into smaller patches for easier review.
-  For instance, the v6 patch "xen/arm: add a primitive FF-A mediator" has
-  been replaced with:
-  - "xen/arm: add a primitive FF-A mediator"
-  - "tools: add Arm FF-A mediator"
-  - "docs: add Arm FF-A mediator"
-  - "xen/arm: ffa: add remaining SMC function IDs"
-* Some small fixes in the error path for handle_mem_share()
-* Switched to SPDX for license in new files.
-* Fixed comment style issues in
-  "xen/arm: smccc: add support for SMCCCv1.2 extended input/output registers"
-* Made FFA support UNSUPPORTED in "xen/arm: add a primitive FF-A mediator"
-* Replaced ffa_get_call_count() with FFA_NR_FUNCS
-* Update the FFA_MAX_SHM_PAGE_COUNT with a formula instead of a value.
-* Replaced XEN_ARM_FLAGS_FFA with XEN_DOMCTL_CONFIG_TEE_FFA to minimize impact
-  on struct xen_arch_domainconfig. This works because the FF-A mediator and
-  the OP-TEE mediator will not be used at the same time in by a guest.
-* Replaced "ffa" boolean in the guest config with a new "ffa" value to the
-  enumeration "tee_type".
-* Integrated the FF-A mediator in the TEE mediator framework instead of
-  being its own.
-* Rebased on staging as of 2023-02-16
-
-v5->v6:
-* Updated "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-  commit message and moved the patch right before the patch which needs it.
-  Applied Michal Orzel's R-B tag.
-* Renamed the guest configuration option "ffa_enabled" to "ffa" and
-  updated the description.
-* More tools update in "xen/arm: add a primitive FF-A mediator" with the "ffa"
-  option, including golang and ocaml.
-* Update ffa_domain_init() to return an error if communication with
-  the SPMC can't be established.
-* Factored out a ffa_domain_destroy() from ffa_relinquish_resources().
-* Added ffa_get_call_count() to give an accurate number of FF-A function,
-  updated in each patch as new FF-A functions are added.
-* Added a flags field in struct xen_arch_domainconfig that replaces the
-  ffa_enabled field.
-* Made check_mandatory_feature() __init
-* Replaced a few printk() calls with gprintk() where needed.
-* Rebased on staging as of 2022-09-14
-
-V4->v5:
-* Added "xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h"
-* Added documentation for the "ffa_enabled" guest config flag
-* Changed to GPL license for xen/arch/arm/ffa.c
-* Added __read_mostly and const where applicable
-* Added more describing comments in the code
-* Moved list of shared memory object ("ffa_mem_list") into the guest context
-  as they are guest specific
-* Simplified a few of the simple wrapper functions for SMC to SPMC
-* Added a BUILD_BUG_ON(PAGE_SIZE != FFA_PAGE_SIZE) since the mediator
-  currently depends on the page size to be same as FFA_PAGE_SIZE (4k).
-* Added max number of shared memory object per guest and max number of
-  size of each shared memory object
-* Added helper macros to calculate offsets of different FF-A data structures
-  in the communication buffer instead of relying on pointer arithmetic
-* Addressed style issues and other comments
-* Broke the commit "xen/arm: add FF-A mediator" into multiple parts, trying
-  to add a few features at a time as requested
-* Added a missing call to rxtx_unmap() in ffa_relinquish_resources()
-* Assignment of "ffa_enabled" is kept as is until I have something definitive
-  on the type etc.
-* Tested with CONFIG_DEBUG=y
-
-v3->v4:
-* Missed v3 and sent a v4 instead by mistake.
-
-v2->v3:
-* Generates offsets into struct arm_smccc_1_2_regs with asm-offsets.c in
-  order to avoid hard coded offsets in the assembly function
-  arm_smccc_1_2_smc()
-* Adds an entry in SUPPORT.md on the FF-A status
-* Adds a configuration variable "ffa_enabled" to tell if FF-A should be
-  enabled for a particular domu guest
-* Moves the ffa_frag_list for fragmented memory share requests into
-  struct ffa_ctx instead to keep it per guest in order to avoid mixups
-  and simplify locking
-* Adds a spinlock to struct ffa_ctx for per guest locking
-* Addressing style issues and suggestions
-* Uses FFA_FEATURES to check that all the needed features are available
-  before initializing the mediator
-* Rebased on staging as of 2022-06-20
-
-v1->v2:
-* Rebased on staging to resolve some merge conflicts as requested
-
-Jens Wiklander (20):
-  xen/arm: smccc: add support for SMCCCv1.2 extended input/output
-    registers
-  xen/arm: tee: add a primitive FF-A mediator
-  tools: add Arm FF-A mediator
-  docs: add Arm FF-A mediator
-  xen/arm: ffa: add remaining SMC function IDs
-  xen/arm: ffa: add flags for FFA_PARTITION_INFO_GET
-  xen/arm: ffa: add defines for framework direct request/response
-    messages
-  xen/arm: ffa: note dependency on 4k pages
-  xen/arm: ffa: add support for FFA_ID_GET
-  xen/arm: ffa: add direct request support
-  xen/arm: ffa: map SPMC rx/tx buffers
-  xen/arm: ffa: send guest events to Secure Partitions
-  xen/arm: ffa: support mapping guest RX/TX buffers
-  xen/arm: ffa: support guest FFA_PARTITION_INFO_GET
-  xen/arm: move regpair_to_uint64() and uint64_to_regpair() to regs.h
-  xen/arm: ffa: add defines for sharing memory
-  xen/arm: ffa: add ABI structs for sharing memory
-  xen/arm: ffa: support sharing memory
-  xen/arm: ffa: add support to reclaim shared memory
-  xen/arm: ffa: support sharing large memory ranges
-
- SUPPORT.md                         |    7 +
- docs/man/xl.cfg.5.pod.in           |   15 +
- tools/libs/light/libxl_arm.c       |    3 +
- tools/libs/light/libxl_types.idl   |    3 +-
- xen/arch/arm/arm64/asm-offsets.c   |    9 +
- xen/arch/arm/arm64/smc.S           |   42 +
- xen/arch/arm/include/asm/domain.h  |    2 +-
- xen/arch/arm/include/asm/psci.h    |    4 +
- xen/arch/arm/include/asm/regs.h    |   12 +
- xen/arch/arm/include/asm/smccc.h   |   40 +
- xen/arch/arm/include/asm/tee/ffa.h |   35 +
- xen/arch/arm/tee/Kconfig           |   11 +
- xen/arch/arm/tee/Makefile          |    1 +
- xen/arch/arm/tee/ffa.c             | 1839 ++++++++++++++++++++++++++++
- xen/arch/arm/tee/optee.c           |   11 -
- xen/arch/arm/vsmc.c                |   19 +-
- xen/include/public/arch-arm.h      |    1 +
- 17 files changed, 2037 insertions(+), 17 deletions(-)
+[1] https://developer.arm.com/documentation/den0077/e
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+---
+ xen/arch/arm/include/asm/domain.h  |   2 +-
+ xen/arch/arm/include/asm/psci.h    |   4 +
+ xen/arch/arm/include/asm/tee/ffa.h |  35 +++++
+ xen/arch/arm/tee/Kconfig           |  11 ++
+ xen/arch/arm/tee/Makefile          |   1 +
+ xen/arch/arm/tee/ffa.c             | 217 +++++++++++++++++++++++++++++
+ xen/arch/arm/vsmc.c                |  17 ++-
+ xen/include/public/arch-arm.h      |   1 +
+ 8 files changed, 284 insertions(+), 4 deletions(-)
  create mode 100644 xen/arch/arm/include/asm/tee/ffa.h
  create mode 100644 xen/arch/arm/tee/ffa.c
 
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index 0e310601e846..754daa8efa04 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -110,7 +110,7 @@ struct arch_domain
+     struct vpl011 vpl011;
+ #endif
+ 
+-#ifdef CONFIG_TEE
++#if defined(CONFIG_TEE) || defined(CONFIG_FFA)
+     void *tee;
+ #endif
+ 
+diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm/psci.h
+index 832f77afff3a..4780972621bb 100644
+--- a/xen/arch/arm/include/asm/psci.h
++++ b/xen/arch/arm/include/asm/psci.h
+@@ -24,6 +24,10 @@ void call_psci_cpu_off(void);
+ void call_psci_system_off(void);
+ void call_psci_system_reset(void);
+ 
++/* Range of allocated PSCI function numbers */
++#define	PSCI_FNUM_MIN_VALUE                 _AC(0,U)
++#define	PSCI_FNUM_MAX_VALUE                 _AC(0x1f,U)
++
+ /* PSCI v0.2 interface */
+ #define PSCI_0_2_FN32(nr) ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,             \
+                                              ARM_SMCCC_CONV_32,               \
+diff --git a/xen/arch/arm/include/asm/tee/ffa.h b/xen/arch/arm/include/asm/tee/ffa.h
+new file mode 100644
+index 000000000000..94960100718e
+--- /dev/null
++++ b/xen/arch/arm/include/asm/tee/ffa.h
+@@ -0,0 +1,35 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * xen/arch/arm/include/asm/tee/ffa.h
++ *
++ * Arm Firmware Framework for ARMv8-A(FFA) mediator
++ *
++ * Copyright (C) 2023  Linaro Limited
++ */
++
++#ifndef __ASM_ARM_TEE_FFA_H__
++#define __ASM_ARM_TEE_FFA_H__
++
++#include <xen/const.h>
++#include <xen/kconfig.h>
++
++#include <asm/smccc.h>
++#include <asm/types.h>
++
++#define FFA_FNUM_MIN_VALUE              _AC(0x60,U)
++#define FFA_FNUM_MAX_VALUE              _AC(0x86,U)
++
++static inline bool is_ffa_fid(uint32_t fid)
++{
++    uint32_t fn = fid & ARM_SMCCC_FUNC_MASK;
++
++    return fn >= FFA_FNUM_MIN_VALUE && fn <= FFA_FNUM_MAX_VALUE;
++}
++
++#ifdef CONFIG_FFA
++#define FFA_NR_FUNCS    (9 + (IS_ENABLED(CONFIG_ARM_64) ? 3 : 0) )
++#else
++#define FFA_NR_FUNCS    0
++#endif
++
++#endif /*__ASM_ARM_TEE_FFA_H__*/
+diff --git a/xen/arch/arm/tee/Kconfig b/xen/arch/arm/tee/Kconfig
+index 392169b2559d..923f08ba8cb7 100644
+--- a/xen/arch/arm/tee/Kconfig
++++ b/xen/arch/arm/tee/Kconfig
+@@ -8,3 +8,14 @@ config OPTEE
+ 	  virtualization-enabled OP-TEE present. You can learn more
+ 	  about virtualization for OP-TEE at
+ 	  https://optee.readthedocs.io/architecture/virtualization.html
++
++config FFA
++	bool "Enable FF-A mediator support (UNSUPPORTED)" if UNSUPPORTED
++	default n
++	depends on ARM_64
++	help
++	  This option enables a minimal FF-A mediator. The mediator is
++	  generic as it follows the FF-A specification [1], but it only
++	  implements a small subset of the specification.
++
++	  [1] https://developer.arm.com/documentation/den0077/latest
+diff --git a/xen/arch/arm/tee/Makefile b/xen/arch/arm/tee/Makefile
+index 982c87968447..58a1015e40e0 100644
+--- a/xen/arch/arm/tee/Makefile
++++ b/xen/arch/arm/tee/Makefile
+@@ -1,2 +1,3 @@
++obj-$(CONFIG_FFA) += ffa.o
+ obj-y += tee.o
+ obj-$(CONFIG_OPTEE) += optee.o
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+new file mode 100644
+index 000000000000..824153c9303a
+--- /dev/null
++++ b/xen/arch/arm/tee/ffa.c
+@@ -0,0 +1,217 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * xen/arch/arm/tee/ffa.c
++ *
++ * Arm Firmware Framework for ARMv8-A (FF-A) mediator
++ *
++ * Copyright (C) 2023  Linaro Limited
++ */
++
++#include <xen/domain_page.h>
++#include <xen/errno.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++#include <xen/sched.h>
++#include <xen/types.h>
++#include <xen/sizes.h>
++#include <xen/bitops.h>
++
++#include <asm/smccc.h>
++#include <asm/event.h>
++#include <asm/tee/tee.h>
++#include <asm/tee/ffa.h>
++#include <asm/regs.h>
++
++/* Error codes */
++#define FFA_RET_OK                      0
++#define FFA_RET_NOT_SUPPORTED           -1
++#define FFA_RET_INVALID_PARAMETERS      -2
++#define FFA_RET_NO_MEMORY               -3
++#define FFA_RET_BUSY                    -4
++#define FFA_RET_INTERRUPTED             -5
++#define FFA_RET_DENIED                  -6
++#define FFA_RET_RETRY                   -7
++#define FFA_RET_ABORTED                 -8
++
++/* FFA_VERSION helpers */
++#define FFA_VERSION_MAJOR_SHIFT         16U
++#define FFA_VERSION_MAJOR_MASK          0x7FFFU
++#define FFA_VERSION_MINOR_SHIFT         0U
++#define FFA_VERSION_MINOR_MASK          0xFFFFU
++#define MAKE_FFA_VERSION(major, minor)  \
++        ((((major) & FFA_VERSION_MAJOR_MASK) << FFA_VERSION_MAJOR_SHIFT) | \
++         ((minor) & FFA_VERSION_MINOR_MASK))
++
++#define FFA_MIN_VERSION         MAKE_FFA_VERSION(1, 0)
++#define FFA_VERSION_1_0         MAKE_FFA_VERSION(1, 0)
++#define FFA_VERSION_1_1         MAKE_FFA_VERSION(1, 1)
++
++/*
++ * This is the version we want to use in communication with guests and SPs.
++ * During negotiation with a guest or a SP we may need to lower it for
++ * that particular guest or SP.
++ */
++#define FFA_MY_VERSION_MAJOR    1U
++#define FFA_MY_VERSION_MINOR    1U
++#define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
++                                                 FFA_MY_VERSION_MINOR)
++
++/* Function IDs */
++#define FFA_ERROR                       0x84000060U
++#define FFA_SUCCESS_32                  0x84000061U
++#define FFA_VERSION                     0x84000063U
++
++struct ffa_ctx {
++    uint32_t guest_vers;
++};
++
++/* Negotiated FF-A version to use with the SPMC */
++static uint32_t ffa_version __ro_after_init;
++
++static bool ffa_get_version(uint32_t *vers)
++{
++    const struct arm_smccc_1_2_regs arg = {
++        .a0 = FFA_VERSION,
++        .a1 = FFA_MY_VERSION,
++    };
++    struct arm_smccc_1_2_regs resp;
++
++    arm_smccc_1_2_smc(&arg, &resp);
++    if ( resp.a0 == FFA_RET_NOT_SUPPORTED )
++    {
++        gprintk(XENLOG_ERR, "ffa: FFA_VERSION returned not supported\n");
++        return false;
++    }
++
++    *vers = resp.a0;
++
++    return true;
++}
++
++static void set_regs(struct cpu_user_regs *regs, register_t v0, register_t v1,
++                     register_t v2, register_t v3, register_t v4, register_t v5,
++                     register_t v6, register_t v7)
++{
++        set_user_reg(regs, 0, v0);
++        set_user_reg(regs, 1, v1);
++        set_user_reg(regs, 2, v2);
++        set_user_reg(regs, 3, v3);
++        set_user_reg(regs, 4, v4);
++        set_user_reg(regs, 5, v5);
++        set_user_reg(regs, 6, v6);
++        set_user_reg(regs, 7, v7);
++}
++
++static void handle_version(struct cpu_user_regs *regs)
++{
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++    uint32_t vers = get_user_reg(regs, 1);
++
++    if ( vers < FFA_VERSION_1_1 )
++        vers = FFA_VERSION_1_0;
++    else
++        vers = FFA_VERSION_1_1;
++
++    ctx->guest_vers = vers;
++    set_regs(regs, vers, 0, 0, 0, 0, 0, 0, 0);
++}
++
++static bool ffa_handle_call(struct cpu_user_regs *regs)
++{
++    uint32_t fid = get_user_reg(regs, 0);
++    struct domain *d = current->domain;
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !ctx )
++        return false;
++
++    switch ( fid )
++    {
++    case FFA_VERSION:
++        handle_version(regs);
++        return true;
++
++    default:
++        gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
++        return false;
++    }
++}
++
++static int ffa_domain_init(struct domain *d)
++{
++    struct ffa_ctx *ctx;
++
++    if ( !ffa_version )
++        return -ENODEV;
++
++    ctx = xzalloc(struct ffa_ctx);
++    if ( !ctx )
++        return -ENOMEM;
++
++    d->arch.tee = ctx;
++
++    return 0;
++}
++
++/* This function is supposed to undo what ffa_domain_init() has done */
++static int ffa_relinquish_resources(struct domain *d)
++{
++    struct ffa_ctx *ctx = d->arch.tee;
++
++    if ( !ctx )
++        return 0;
++
++    XFREE(d->arch.tee);
++
++    return 0;
++}
++
++static bool ffa_probe(void)
++{
++    uint32_t vers;
++    unsigned int major_vers;
++    unsigned int minor_vers;
++
++    /*
++     * psci_init_smccc() updates this value with what's reported by EL-3
++     * or secure world.
++     */
++    if ( smccc_ver < ARM_SMCCC_VERSION_1_2 )
++    {
++        printk(XENLOG_ERR
++               "ffa: unsupported SMCCC version %#x (need at least %#x)\n",
++               smccc_ver, ARM_SMCCC_VERSION_1_2);
++        return false;
++    }
++
++    if ( !ffa_get_version(&vers) )
++        return false;
++
++    if ( vers < FFA_MIN_VERSION || vers > FFA_MY_VERSION )
++    {
++        printk(XENLOG_ERR "ffa: Incompatible version %#x found\n", vers);
++        return false;
++    }
++
++    major_vers = (vers >> FFA_VERSION_MAJOR_SHIFT) & FFA_VERSION_MAJOR_MASK;
++    minor_vers = vers & FFA_VERSION_MINOR_MASK;
++    printk(XENLOG_INFO "ARM FF-A Mediator version %u.%u\n",
++           FFA_MY_VERSION_MAJOR, FFA_MY_VERSION_MINOR);
++    printk(XENLOG_INFO "ARM FF-A Firmware version %u.%u\n",
++           major_vers, minor_vers);
++
++    ffa_version = vers;
++
++    return true;
++}
++
++static const struct tee_mediator_ops ffa_ops =
++{
++    .probe = ffa_probe,
++    .domain_init = ffa_domain_init,
++    .relinquish_resources = ffa_relinquish_resources,
++    .handle_call = ffa_handle_call,
++};
++
++REGISTER_TEE_MEDIATOR(ffa, "FF-A", XEN_DOMCTL_CONFIG_TEE_FFA, &ffa_ops);
+diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
+index cd68fa80e98a..7f2f5eb9ce3d 100644
+--- a/xen/arch/arm/vsmc.c
++++ b/xen/arch/arm/vsmc.c
+@@ -15,6 +15,7 @@
+ #include <asm/monitor.h>
+ #include <asm/regs.h>
+ #include <asm/smccc.h>
++#include <asm/tee/ffa.h>
+ #include <asm/tee/tee.h>
+ #include <asm/traps.h>
+ #include <asm/vpsci.h>
+@@ -24,7 +25,7 @@
+ #define XEN_SMCCC_FUNCTION_COUNT 3
+ 
+ /* Number of functions currently supported by Standard Service Service Calls. */
+-#define SSSC_SMCCC_FUNCTION_COUNT (3 + VPSCI_NR_FUNCS)
++#define SSSC_SMCCC_FUNCTION_COUNT (3 + VPSCI_NR_FUNCS + FFA_NR_FUNCS)
+ 
+ static bool fill_uid(struct cpu_user_regs *regs, xen_uuid_t uuid)
+ {
+@@ -188,13 +189,23 @@ static bool handle_existing_apis(struct cpu_user_regs *regs)
+     return do_vpsci_0_1_call(regs, fid);
+ }
+ 
++static bool is_psci_fid(uint32_t fid)
++{
++    uint32_t fn = fid & ARM_SMCCC_FUNC_MASK;
++
++    return fn >= PSCI_FNUM_MIN_VALUE && fn <= PSCI_FNUM_MAX_VALUE;
++}
++
+ /* PSCI 0.2 interface and other Standard Secure Calls */
+ static bool handle_sssc(struct cpu_user_regs *regs)
+ {
+     uint32_t fid = (uint32_t)get_user_reg(regs, 0);
+ 
+-    if ( do_vpsci_0_2_call(regs, fid) )
+-        return true;
++    if ( is_psci_fid(fid) )
++        return do_vpsci_0_2_call(regs, fid);
++
++    if ( is_ffa_fid(fid) )
++        return tee_handle_call(regs);
+ 
+     switch ( fid )
+     {
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index 1528ced5097a..92aff923056a 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -296,6 +296,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ 
+ #define XEN_DOMCTL_CONFIG_TEE_NONE      0
+ #define XEN_DOMCTL_CONFIG_TEE_OPTEE     1
++#define XEN_DOMCTL_CONFIG_TEE_FFA       2
+ 
+ struct xen_arch_domainconfig {
+     /* IN/OUT */
 -- 
 2.34.1
 
