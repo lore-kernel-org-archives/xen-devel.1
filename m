@@ -4,35 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFEB7C61DA4
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Feb 2023 15:20:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.499529.770697 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E0C64EC7
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Feb 2023 15:34:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.499538.770719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUquZ-0007ZU-S5; Wed, 22 Feb 2023 15:20:03 +0000
+	id 1pUr85-0001bl-F8; Wed, 22 Feb 2023 15:34:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 499529.770697; Wed, 22 Feb 2023 15:20:03 +0000
+Received: by outflank-mailman (output) from mailman id 499538.770719; Wed, 22 Feb 2023 15:34:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pUquZ-0007Yr-OO; Wed, 22 Feb 2023 15:20:03 +0000
-Received: by outflank-mailman (input) for mailman id 499529;
- Wed, 22 Feb 2023 15:20:02 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pUquY-0007Mq-GH; Wed, 22 Feb 2023 15:20:02 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pUquY-0005iU-EB; Wed, 22 Feb 2023 15:20:02 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pUquY-0005lC-3x; Wed, 22 Feb 2023 15:20:02 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pUquY-0008EN-3W; Wed, 22 Feb 2023 15:20:02 +0000
+	id 1pUr85-0001be-8c; Wed, 22 Feb 2023 15:34:01 +0000
+Received: by outflank-mailman (input) for mailman id 499538;
+ Wed, 22 Feb 2023 15:33:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=JvgA=6S=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1pUr83-0001MC-68
+ for xen-devel@lists.xenproject.org; Wed, 22 Feb 2023 15:33:59 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5311e990-b2c6-11ed-a089-e9535cc0f9c3;
+ Wed, 22 Feb 2023 16:33:58 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id m6so10601552lfq.5
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Feb 2023 07:33:58 -0800 (PST)
+Received: from localhost.localdomain (h-46-59-78-111.A175.priv.bahnhof.se.
+ [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
+ q9-20020ac25289000000b004db0d26adb4sm927746lfm.182.2023.02.22.07.33.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Feb 2023 07:33:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,85 +46,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=wtH1FVJfdYi80415cKfxTuM5efuX0+sq9r4Z/MLbES4=; b=F4+f0D3sO5M9oXjZ8cifLNROUM
-	N+YN0IfgfvEfjEydVhzu5zVMqrEJ+gSTHLfBnfBUz+BSMzBB/+xOlsR30/XN8hoFxvMv57w1pL5xn
-	/bCD00+PTYFpT4ajSrzuhBX/iHJl17h9+WcD0lfkj78tlwiCRGBGPJKZnwVgN0p9YfZI=;
+X-Inumbo-ID: 5311e990-b2c6-11ed-a089-e9535cc0f9c3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Zqvukz9Wc9inONzmuv1uqsHsrEr+5BrdoP3LyiYlJNc=;
+        b=A5wwFKfLIQXuxIScvZsdkXI7TfET/8Br388Cj7wQG+b6a6GmqgTNLaCaxklh0lPUDS
+         nAtT2c9RPmuCRUo9tHO/DoToQ6fM2JSEDsNaDEkka0r2rrTlb8NZTB3yVjfyUE55xwsJ
+         MbWoyYJXmJ78Hfk8KBYdC/1UWDc3CPohkl3MjiC8fbTBmTWDN86nHVwYZOAXt395BHrB
+         0r1M5lmxpHiviohxpFyo+3w+stRsTSLsQmN+a+WbHu5sZp81OGz1bXzZoeJ8PW82Z2WL
+         qZHrVGIulMCIaK8N750h+PWtKziYA7TTPJGkgAjWklIj8QJSCMfg81WhXynCr5u9e/5R
+         RjLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Zqvukz9Wc9inONzmuv1uqsHsrEr+5BrdoP3LyiYlJNc=;
+        b=iMTFeCRCtHmehAD/djPzKFMSCd5OOE06jXql96iy/cty55qYHOkhRomRBX+9qrCGqm
+         Pg4lp26jwBfOY2zsg6xhlQOgYs3664jE5qunbxt3rUJY+sNSOl+Ws1QHAf8sNwZO0tP1
+         0ARMLhssKwYx2fAyEWvEh86YVRVOymsrzsQJtkm7Klt1NTH5WkEEFxB81W+w2RGKzocZ
+         dU6LX7v9GIKEVajpnGcdo4FBnHMioYCVonKjCQcOEN4Ebu9SSbmgKikaXdu6w/Gk0kx5
+         gQR+bvhnSIN1oWhxMNPZDkQ46VncnpLtGtnv8IJeAwK+qjFCQs4FSTG80o4r6fnAEKn7
+         G7uA==
+X-Gm-Message-State: AO0yUKWE5ozFZ/Il3/8JCAn1AyaHJqb/CKZBbC/w7KaLSo4himpLmzhm
+	DBfNLJqdontwEP7G5zgHAhIy/UwIopDLKx4mLBM=
+X-Google-Smtp-Source: AK7set+DcuvGaDQ5vp9ctw+TkJQtIbCDGMtu3l/ttC+FbPE+boIAHse0unqWaTs9of2BqAGtALrbeg==
+X-Received: by 2002:ac2:5234:0:b0:4cb:4374:cc78 with SMTP id i20-20020ac25234000000b004cb4374cc78mr3352349lfl.26.1677080037933;
+        Wed, 22 Feb 2023 07:33:57 -0800 (PST)
+From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-178129-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Bertrand.Marquis@arm.com,
+	Marc Bonnici <marc.bonnici@arm.com>,
+	Achin Gupta <achin.gupta@arm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [XEN PATCH v7 04/20] docs: add Arm FF-A mediator
+Date: Wed, 22 Feb 2023 16:33:01 +0100
+Message-Id: <5c588d92cdf23a7355a79bf4b91c7214e5ced197.1677079672.git.jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1677079671.git.jens.wiklander@linaro.org>
+References: <cover.1677079671.git.jens.wiklander@linaro.org>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 178129: tolerable trouble: pass/starved - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):starved:nonblocking
-    xen-unstable-smoke:build-armhf:hosts-allocate:starved:nonblocking
-X-Osstest-Versions-This:
-    xen=40c12ba546729fdcc8b6731f675806dc268a5745
-X-Osstest-Versions-That:
-    xen=c76e4ff7d531ee2bf37c9d4037c8645f9e586fcd
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 22 Feb 2023 15:20:02 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 178129 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/178129/
+Describes a FF-A version 1.1 [1] mediator to communicate with a Secure
+Partition in secure world.
 
-Failures :-/ but no regressions.
+[1] https://developer.arm.com/documentation/den0077/latest
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+---
+ SUPPORT.md               |  7 +++++++
+ docs/man/xl.cfg.5.pod.in | 15 +++++++++++++++
+ 2 files changed, 22 insertions(+)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl           1 build-check(1)               starved  n/a
- build-armhf                   2 hosts-allocate               starved  n/a
+diff --git a/SUPPORT.md b/SUPPORT.md
+index aa1940e55f09..5e0595419684 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -818,6 +818,13 @@ that covers the DMA of the device to be passed through.
+ 
+ No support for QEMU backends in a 16K or 64K domain.
+ 
++### ARM: Firmware Framework for Arm A-profile (FF-A) Mediator
++
++    Status, Arm64: Tech Preview
++
++There are still some code paths where a vCPU may hog a pCPU longer than
++necessary. The FF-A mediator is not yet implemented for Arm32.
++
+ ### ARM: Guest Device Tree support
+ 
+     Status: Supported
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 024bceeb61b2..ca4fc3e67b0c 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -1645,6 +1645,21 @@ in OP-TEE.
+ 
+ This feature is a B<technology preview>.
+ 
++=item B<ffa>
++
++B<Arm only.> Allow a guest to communicate via FF-A with Secure Partitions
++(SP), default false.
++
++Currently is only a small subset of the FF-A specification supported. Just
++enough to communicate with OP-TEE. In general only direct messaging and
++sharing memory with one SP. More advanced use cases where memory might be
++shared or donated to multple SPs is not supported.
++
++See L<https://developer.arm.com/documentation/den0077/latest> for more
++informantion about FF-A.
++
++This feature is a B<technology preview>.
++
+ =back
+ 
+ =back
+-- 
+2.34.1
 
-version targeted for testing:
- xen                  40c12ba546729fdcc8b6731f675806dc268a5745
-baseline version:
- xen                  c76e4ff7d531ee2bf37c9d4037c8645f9e586fcd
-
-Last test of basis   178044  2023-02-21 18:00:27 Z    0 days
-Testing same since   178129  2023-02-22 13:00:29 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  starved 
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          starved 
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   c76e4ff7d5..40c12ba546  40c12ba546729fdcc8b6731f675806dc268a5745 -> smoke
 
