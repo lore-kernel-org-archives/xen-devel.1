@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1155C64ED8
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Feb 2023 11:35:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.500950.772538 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5016BC61DA4
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Feb 2023 11:35:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.500951.772547 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pVWM8-0007yh-2M; Fri, 24 Feb 2023 11:35:16 +0000
+	id 1pVWMB-0008IN-A9; Fri, 24 Feb 2023 11:35:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 500950.772538; Fri, 24 Feb 2023 11:35:16 +0000
+Received: by outflank-mailman (output) from mailman id 500951.772547; Fri, 24 Feb 2023 11:35:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pVWM7-0007ya-VH; Fri, 24 Feb 2023 11:35:15 +0000
-Received: by outflank-mailman (input) for mailman id 500950;
- Fri, 24 Feb 2023 11:35:14 +0000
+	id 1pVWMB-0008IC-72; Fri, 24 Feb 2023 11:35:19 +0000
+Received: by outflank-mailman (input) for mailman id 500951;
+ Fri, 24 Feb 2023 11:35:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AdiI=6U=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pVWM6-0007Ri-67
- for xen-devel@lists.xenproject.org; Fri, 24 Feb 2023 11:35:14 +0000
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [2a00:1450:4864:20::229])
+ id 1pVWM9-0007Ri-Cr
+ for xen-devel@lists.xenproject.org; Fri, 24 Feb 2023 11:35:17 +0000
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [2a00:1450:4864:20::236])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d9edc5d-b437-11ed-88bb-e56d68cac8db;
- Fri, 24 Feb 2023 12:35:13 +0100 (CET)
-Received: by mail-lj1-x229.google.com with SMTP id h3so7820599lja.12
- for <xen-devel@lists.xenproject.org>; Fri, 24 Feb 2023 03:35:13 -0800 (PST)
+ id 4f91104c-b437-11ed-88bb-e56d68cac8db;
+ Fri, 24 Feb 2023 12:35:17 +0100 (CET)
+Received: by mail-lj1-x236.google.com with SMTP id j17so14022782ljq.11
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Feb 2023 03:35:17 -0800 (PST)
 Received: from 34-6F-24-FC-D2-65..
  (46.204.108.92.nat.umts.dynamic.t-mobile.pl. [46.204.108.92])
  by smtp.gmail.com with ESMTPSA id
- a25-20020a05651c031900b00295a8d1ecc7sm50489ljp.18.2023.02.24.03.35.11
+ a25-20020a05651c031900b00295a8d1ecc7sm50489ljp.18.2023.02.24.03.35.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 03:35:13 -0800 (PST)
+ Fri, 24 Feb 2023 03:35:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d9edc5d-b437-11ed-88bb-e56d68cac8db
+X-Inumbo-ID: 4f91104c-b437-11ed-88bb-e56d68cac8db
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IcCcmDaZL5zu7cfe/7cHTiIVDkNgVS1oXLcUiC5qO7w=;
-        b=JK3DMo2dMWh8dHqhVMFgjt/8fBVa204x55PqUZhNMcPl/464ndON30L8Gxp6y9mpDt
-         HgAAYeyp4JGL2FjqSo8MCaVJHs7mhoW6pMBKY4A/GyW2N9dF/N6ggBMfM/BYVCu/d6qO
-         t1Bsk4A0HQ/8pPyoXmyxS3HHoqpqpjOYT2TyNsAMeNqbB5bWUhnJ5lu9Ha631xMZ+Yvq
-         ijKZ4nGskNg2xI07SDBO1c57YboWiyupmVEcttAyW8b67wEuJVUdlPZd9uWrsGua8K3w
-         u1wdhALPqpJkXjXdfeAiQ0Hh5/7lz1HRPyJMWYuu7di3qR0rpvDBnDQSnnNgKzvJjKwg
-         mqnA==
+        bh=hIxTAP/3TGyxLcEVY7CEZJFocAqIc1IBpnueXSNtmDY=;
+        b=U+larZamfCH9mQ/VwojXLUSZs/o1gPlNXvwsNihd1K3DkqNEk91cGqCfuf2gQCJ66A
+         DWwEsKOI28MaozS1WldORIM81djT2x+Mp+icOsWqOsZR8tohe3uewbUpJvTSZXfFims7
+         h7L/bo6K4+yxAPi/i1/ZojVrte53Xj3t+oZnc1W4eBaWkUXrtPnpnfw7VokgxWvcl4o7
+         rnMlfplee6O11yKaPFmgAcdL0irYbbcBOGfvTfT92KMwUgT1pornu+8so/qrTn1wLa9W
+         8/alYmPjcxS/8xrXx69JldcsmyBhm9V8JJCJt14BnQeBROJx6nnonlfdWRzIF0TyYEkG
+         ZV8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IcCcmDaZL5zu7cfe/7cHTiIVDkNgVS1oXLcUiC5qO7w=;
-        b=rEkongJXukuMETybYXu4/Dvwyjarsw+B/ROKX9G2gBQXstSadVTXq0XhphMrFGCC4t
-         wxnABcB8JQvFLNjl3tK/AwaDKSKH7/mvhwnJ8Rdb7IkE9F5HXLEHcDsGXNrtebQ/ILvA
-         YBRY/d3Opz7sSgZPumXl3Z//xxQHFlY44vrGBC+y/da1NqACEAGw7rn6Oc3vPfGMlAdp
-         6IzzHV4EQ1HZ/+0RSVdFmoyDpMr/N6Bm+VO2DNChq4EC+U/2jVhCvzAB0uZX3RmH2FFJ
-         7hqQRMPPKmrXaKSuZDFpSdG1I0tIdAeScVSPqOn069I/JfgrUjM0wQSFU+OVVu0Vz5Go
-         oL5Q==
-X-Gm-Message-State: AO0yUKW4HBcK+aU9ojrhoaWbX0/gQe6SzHH6Iq4MedvGd7qbeIRNvQNx
-	6xLrLG/FRzW0QEnyfL7GqaaF4f0pJU4=
-X-Google-Smtp-Source: AK7set/EXM1tkclqIwZBSYHsUoP7ePa7hIn3WHt4VPvdZEUY/320uQhvIUMa3beAC7izmOId4sJqNA==
-X-Received: by 2002:a05:651c:547:b0:294:6361:6fe6 with SMTP id q7-20020a05651c054700b0029463616fe6mr7081109ljp.8.1677238513273;
-        Fri, 24 Feb 2023 03:35:13 -0800 (PST)
+        bh=hIxTAP/3TGyxLcEVY7CEZJFocAqIc1IBpnueXSNtmDY=;
+        b=1wL1mwKKYolNxyLMhXgiK+UDs+DWUoKT5CutLIULCmBdTCn19MdZwPGQE33rlfa+Rm
+         HXRxmZ+M05eAk4o7/KDFa999JvlOTUabs5QDGRpT5W/cU3qKpVhT6RuttT1bWErSgA9k
+         xMpJ5iQscGrq+InTWPBA023u2qPG9HXHfcBt1OsU/2mienwumZRXe/VDycrsYsDXLYVq
+         7PbFWSXeJQllTGzXDf5gvksYdKJiH5ZPvaT7w0wf4giE6ECK6wmSoT0t6XeV//HFwm0l
+         6+mK/A8J97DkcPdgHc71XT/gjUcVQjn9QB6M+L1iUgxV3Ngyxmeg7Oc0M9EjeTHL5Bw1
+         pblQ==
+X-Gm-Message-State: AO0yUKUHalsvaub/XSgdCqexhz6+OgXovHG/bB1v3/jWqzMne07ubXqv
+	wkAnEpCO9XHlxR6v7Gl2ss6ZETNrNj8=
+X-Google-Smtp-Source: AK7set/C7+Z9LsxeOBSwfXCljzTFBvEwKy3H2gCJtW4JKrebBOV4qBcf2dZyo9tINQj1Ny2AzLC+/g==
+X-Received: by 2002:a2e:7d08:0:b0:293:51ba:24b3 with SMTP id y8-20020a2e7d08000000b0029351ba24b3mr5522813ljc.41.1677238516392;
+        Fri, 24 Feb 2023 03:35:16 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -88,9 +88,9 @@ Cc: Julien Grall <julien@xen.org>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v4 2/5] xen/riscv: introduce trap_init()
-Date: Fri, 24 Feb 2023 13:35:02 +0200
-Message-Id: <b1b2252d3105eeaf0cee10ae2be253c8526d0e5c.1677237653.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 4/5] xen/riscv: test basic handling stuff
+Date: Fri, 24 Feb 2023 13:35:04 +0200
+Message-Id: <e45d81c0c3be7f7f3ca37e307625a878b9c2a390.1677237653.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <cover.1677237653.git.oleksii.kurochko@gmail.com>
 References: <cover.1677237653.git.oleksii.kurochko@gmail.com>
@@ -98,76 +98,53 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 Changes in V4:
-  - Nothing changed
+  - Add Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 Changes in V3:
   - Nothing changed
 ---
 Changes in V2:
-  - Rename setup_trap_handler() to trap_init().
-  - Add Reviewed-by to the commit message.
+  - Nothing changed
 ---
- xen/arch/riscv/include/asm/traps.h | 1 +
- xen/arch/riscv/setup.c             | 4 ++++
- xen/arch/riscv/traps.c             | 7 +++++++
- 3 files changed, 12 insertions(+)
+ xen/arch/riscv/setup.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
-index f3fb6b25d1..f1879294ef 100644
---- a/xen/arch/riscv/include/asm/traps.h
-+++ b/xen/arch/riscv/include/asm/traps.h
-@@ -7,6 +7,7 @@
- 
- void do_trap(struct cpu_user_regs *cpu_regs);
- void handle_trap(void);
-+void trap_init(void);
- 
- #endif /* __ASSEMBLY__ */
- 
 diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index d09ffe1454..c8513ca4f8 100644
+index 73b9a82883..b3f8b10f71 100644
 --- a/xen/arch/riscv/setup.c
 +++ b/xen/arch/riscv/setup.c
-@@ -1,7 +1,9 @@
- #include <xen/compile.h>
- #include <xen/init.h>
- 
-+#include <asm/csr.h>
- #include <asm/early_printk.h>
-+#include <asm/traps.h>
- 
- /* Xen stack for bringing up the first CPU. */
+@@ -10,12 +10,28 @@
  unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-@@ -11,6 +13,8 @@ void __init noreturn start_xen(void)
+     __aligned(STACK_SIZE);
+ 
++static void test_run_in_exception(struct cpu_user_regs *regs)
++{
++    early_printk("If you see this message, ");
++    early_printk("run_in_exception_handler is most likely working\n");
++}
++
++static void test_macros_from_bug_h(void)
++{
++    run_in_exception_handler(test_run_in_exception);
++    WARN();
++    early_printk("If you see this message, ");
++    early_printk("WARN is most likely working\n");
++}
++
+ void __init noreturn start_xen(void)
  {
      early_printk("Hello from C env\n");
  
-+    trap_init();
+     trap_init();
+ 
++    test_macros_from_bug_h();
 +
      for ( ;; )
          asm volatile ("wfi");
  
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 29b1a0dfae..ad7311f269 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -13,6 +13,13 @@
- #include <asm/processor.h>
- #include <asm/traps.h>
- 
-+void trap_init(void)
-+{
-+    unsigned long addr = (unsigned long)&handle_trap;
-+
-+    csr_write(CSR_STVEC, addr);
-+}
-+
- static const char *decode_trap_cause(unsigned long cause)
- {
-     static const char *const trap_causes[] = {
 -- 
 2.39.0
 
