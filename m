@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF36DC7EE2F
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Feb 2023 18:50:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.501414.773156 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13882C6FA8E
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Feb 2023 18:50:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.501417.773190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pVd9A-0001qa-Iv; Fri, 24 Feb 2023 18:50:20 +0000
+	id 1pVd9G-0002su-Fz; Fri, 24 Feb 2023 18:50:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 501414.773156; Fri, 24 Feb 2023 18:50:20 +0000
+Received: by outflank-mailman (output) from mailman id 501417.773190; Fri, 24 Feb 2023 18:50:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pVd9A-0001px-EA; Fri, 24 Feb 2023 18:50:20 +0000
-Received: by outflank-mailman (input) for mailman id 501414;
- Fri, 24 Feb 2023 18:50:20 +0000
+	id 1pVd9G-0002sg-B0; Fri, 24 Feb 2023 18:50:26 +0000
+Received: by outflank-mailman (input) for mailman id 501417;
+ Fri, 24 Feb 2023 18:50:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vhFC=6U=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1pVd99-0001Wv-Uw
- for xen-devel@lists.xenproject.org; Fri, 24 Feb 2023 18:50:20 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
+ id 1pVd9E-0001Wv-AN
+ for xen-devel@lists.xenproject.org; Fri, 24 Feb 2023 18:50:24 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 15c00070-b474-11ed-88bb-e56d68cac8db;
- Fri, 24 Feb 2023 19:50:19 +0100 (CET)
-Received: by mail-ed1-x533.google.com with SMTP id ee7so1127029edb.2
- for <xen-devel@lists.xenproject.org>; Fri, 24 Feb 2023 10:50:19 -0800 (PST)
+ id 1842c71b-b474-11ed-88bb-e56d68cac8db;
+ Fri, 24 Feb 2023 19:50:23 +0100 (CET)
+Received: by mail-ed1-x534.google.com with SMTP id cy6so1064825edb.5
+ for <xen-devel@lists.xenproject.org>; Fri, 24 Feb 2023 10:50:23 -0800 (PST)
 Received: from uni.router.wind (adsl-185.109.242.225.tellas.gr.
  [109.242.225.185]) by smtp.googlemail.com with ESMTPSA id
- me19-20020a170906aed300b008b17662e1f7sm10585245ejb.53.2023.02.24.10.50.17
+ me19-20020a170906aed300b008b17662e1f7sm10585245ejb.53.2023.02.24.10.50.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 10:50:18 -0800 (PST)
+ Fri, 24 Feb 2023 10:50:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,56 +46,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 15c00070-b474-11ed-88bb-e56d68cac8db
+X-Inumbo-ID: 1842c71b-b474-11ed-88bb-e56d68cac8db
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Bco5bSqEWusubMpaw+Hfl1JBeko3KHLffepxLAFmo6E=;
-        b=R/Bk6ghbcUbXyuoFrgS3T5hNsN5ZIk9+H4PgFcX9k9vnmrEJswbaKEV4nz/825tFvc
-         4oJvRifjhKIcSPjgarXKJaHtNXre0cQ/z9MTsYyvLyx0tVTQPoiDf343/AATpquKGIIP
-         4SZwHCi7rovxiNEMz/amOGRH1ZL7HEa+Y3Tg0W1MF2aqmdhoLMY3RSST0GXjjLaeS5n6
-         C30AOXN/s/vWIYoInBYdQigmBJlMHgKitlotTR0UNLkwH9uFfZ79rV4UsOuZ3jCoOHKv
-         qUxG9pwiq0wRGfYlRIJ0fTCvpAgmxY1C9yK2aNqgU8jJW16G3k8q14nqqHAFeNY5VYdh
-         46Ww==
+        bh=Gqq2LM2t+HmFiSRF7FgdQUDEL19Q+hSAOOihEvGk4Dc=;
+        b=L8p9Wve2dDEeQN1XTdp7iNd4kJdRVxTiDa1Pcm+GXkxAFqtMI77EWbXqr3B8lVdmRG
+         Hqy3mUfHS4HtIet0RwUgr4HTAOVHAeMsE6XdqfILHnFnYJRO0mx9I+/ZIdzDIxcITkEd
+         mhtA1nmDY2oWun6zZ9prBz9G6eYeHokTD/f/T61XS7ZKIxSxwUeF1oBNX1/CXWMplWwc
+         tT9MggRxWlZC4zm8XJP+r7HyWRS5WOTbk2e+Q0XP2oo9R97Am6gAS1mLGK31zJhvjZhD
+         rcN4Rj40JQeBXhDLJHICznNf6BjKxiwr9IV4OU2Zj0wfcgZfts0cGiQzEfmRBRCyZHdi
+         5gkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Bco5bSqEWusubMpaw+Hfl1JBeko3KHLffepxLAFmo6E=;
-        b=xFWQdv7px6+bDNKTL4iPEkYO0lnO1+TFpodGbMk1DfYXIDwzsTS1J9A/tqB0fPZdvj
-         G7mNiaX3oajtFYPvOqk2ET+YnMQPwhSVDWlBEwoPIqlU62YreEhkpFYobB8iV5Dh+/Pm
-         d1sPw1yS4vWhDuL06iQEd1Gk4uFQ2eKWnEVqPBLLs1qC/33DQnL+sHvFxIdbQPKTxp40
-         LoLp0f8D89OgIhWHSdH4DXdrQRGoQVLv7K0n+Rjl6D/0UiO6thEDzeiM32KN/egLkeZi
-         UKGSe2twmefTF7wnXa0Wmqv/5ukF1xai8njRTz/LUDloHEPlS5hu0TFBT+iSZoCzH/BS
-         /DBA==
-X-Gm-Message-State: AO0yUKVeea77gU6tYPTZcpk5wtHCPX0Iqo0P1hU1wC5Xd+JUH7PHtIXb
-	/E9JTVIFIlJao2O2KJhLroaHDiHKU4M=
-X-Google-Smtp-Source: AK7set+8uC8eKcxhrC/cQNSnKM9kiGL8BrTnT8AKAF2bYRESkZE8apgLs9KYZV8250yv4ZUXtjC1FQ==
-X-Received: by 2002:a17:906:af1a:b0:880:a42d:dfb4 with SMTP id lx26-20020a170906af1a00b00880a42ddfb4mr23476209ejb.16.1677264618696;
-        Fri, 24 Feb 2023 10:50:18 -0800 (PST)
+        bh=Gqq2LM2t+HmFiSRF7FgdQUDEL19Q+hSAOOihEvGk4Dc=;
+        b=aWWkl27kcjeY08+skMypthOvZPNfdfNbNfESoLqXHrrMBLgZ0WwzPfJWL5Ku6KEaar
+         ZfFmxnH0xVDrUCKU80qziRUfE1mdIwY6IJ/+cpQut6NKrTLa1YijUmtitRFBC9CpUAgj
+         m+jQhkXLry+BEQXejQtSnr6LYAaPNNERpfTTjADhskRRVVLoXi7iPzu4OlYwLorVplHN
+         aRNDl6fLiCeIUb9RrPnFMr2tDzI4HLKYCf/uMzoQ+EBGepl05vSIbfvT0A5EKLLR/kZm
+         9DLO0i5htrd3TNfuwW/lzlwnM0wo3Q6UNq4uQzRPqBLnrFDAI4z18fg6Up5bk7Ko+25T
+         XINg==
+X-Gm-Message-State: AO0yUKX0bbxSPs4O8RVGWAHexsMJZBVDohNTl7RgHzXozrEVJSa1+N8y
+	MSlFVopc3RXoIFP3ldepeccPGBvFmeI=
+X-Google-Smtp-Source: AK7set+kcFY7XsDKtLQs18c6Bb0OK0K3u0Stm/G02MIx8hyZlJr+N6G0D80/JfLmA3IwyCtPtv6aRw==
+X-Received: by 2002:a17:907:5c6:b0:8af:3b78:315d with SMTP id wg6-20020a17090705c600b008af3b78315dmr33240581ejb.23.1677264623042;
+        Fri, 24 Feb 2023 10:50:23 -0800 (PST)
 From: Xenia Ragiadakou <burzalodowa@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 02/14] x86/svm: make asid.h private
-Date: Fri, 24 Feb 2023 20:49:58 +0200
-Message-Id: <20230224185010.3692754-3-burzalodowa@gmail.com>
+Subject: [PATCH v3 05/14] x86/svm: move nestedsvm declarations used only by svm code to private header
+Date: Fri, 24 Feb 2023 20:50:01 +0200
+Message-Id: <20230224185010.3692754-6-burzalodowa@gmail.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20230224185010.3692754-1-burzalodowa@gmail.com>
 References: <20230224185010.3692754-1-burzalodowa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The asm/hvm/svm/asid.h is used only internally by the SVM code, so it can be
-changed into a private header.
-
-Take the opportunity to use an SPDX tag for the licence and remove included
-but unused xen/types.h.
+Create a new private header in arch/x86/hvm/svm called nestedsvm.h and move
+there all definitions and declarations that are used only by svm code and
+don't need to reside in an external header.
 
 No functional change intended.
 
@@ -105,64 +103,101 @@ Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
 Changes in v3:
   - new patch
 
- xen/arch/x86/hvm/svm/asid.c             |  3 +-
- xen/arch/x86/hvm/svm/asid.h             | 38 +++++++++++++++++++
- xen/arch/x86/hvm/svm/svm.c              |  2 +-
- xen/arch/x86/include/asm/hvm/svm/asid.h | 49 -------------------------
- 4 files changed, 41 insertions(+), 51 deletions(-)
- create mode 100644 xen/arch/x86/hvm/svm/asid.h
- delete mode 100644 xen/arch/x86/include/asm/hvm/svm/asid.h
+ xen/arch/x86/hvm/svm/intr.c                  |  2 +
+ xen/arch/x86/hvm/svm/nestedhvm.h             | 77 ++++++++++++++++++++
+ xen/arch/x86/hvm/svm/nestedsvm.c             |  2 +-
+ xen/arch/x86/hvm/svm/svm.c                   |  2 +-
+ xen/arch/x86/hvm/svm/svm.h                   |  2 +-
+ xen/arch/x86/include/asm/hvm/svm/nestedsvm.h | 53 +-------------
+ 6 files changed, 86 insertions(+), 52 deletions(-)
+ create mode 100644 xen/arch/x86/hvm/svm/nestedhvm.h
 
-diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
-index ab06dd3f3a..1128434878 100644
---- a/xen/arch/x86/hvm/svm/asid.c
-+++ b/xen/arch/x86/hvm/svm/asid.c
-@@ -17,9 +17,10 @@
+diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+index d21e930af0..dbb0022190 100644
+--- a/xen/arch/x86/hvm/svm/intr.c
++++ b/xen/arch/x86/hvm/svm/intr.c
+@@ -37,6 +37,8 @@
+ #include <xen/domain_page.h>
+ #include <asm/hvm/trace.h>
  
- #include <asm/amd.h>
- #include <asm/hvm/nestedhvm.h>
--#include <asm/hvm/svm/asid.h>
- #include <asm/hvm/svm/svm.h>
- 
-+#include "asid.h"
++#include "nestedhvm.h"
 +
- void svm_asid_init(const struct cpuinfo_x86 *c)
+ static void svm_inject_nmi(struct vcpu *v)
  {
-     int nasids = 0;
-diff --git a/xen/arch/x86/hvm/svm/asid.h b/xen/arch/x86/hvm/svm/asid.h
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
 new file mode 100644
-index 0000000000..4dd6abb5fb
+index 0000000000..43245e13de
 --- /dev/null
-+++ b/xen/arch/x86/hvm/svm/asid.h
-@@ -0,0 +1,38 @@
++++ b/xen/arch/x86/hvm/svm/nestedhvm.h
+@@ -0,0 +1,77 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * asid.h: handling ASIDs in SVM.
++ * nestedsvm.h: Nested Virtualization
 + *
-+ * Copyright (c) 2007, Advanced Micro Devices, Inc.
++ * Copyright (c) 2011, Advanced Micro Devices, Inc
 + */
 +
-+#ifndef __X86_HVM_SVM_ASID_PRIV_H__
-+#define __X86_HVM_SVM_ASID_PRIV_H__
++#ifndef __X86_HVM_SVM_NESTEDHVM_PRIV_H__
++#define __X86_HVM_SVM_NESTEDHVM_PRIV_H__
 +
-+#include <asm/hvm/asid.h>
-+#include <asm/processor.h>
++#include <xen/mm.h>
++#include <xen/types.h>
 +
-+void svm_asid_init(const struct cpuinfo_x86 *c);
-+void svm_asid_handle_vmrun(void);
++#include <asm/hvm/vcpu.h>
++#include <asm/hvm/hvm.h>
++#include <asm/hvm/nestedhvm.h>
++#include <asm/msr-index.h>
 +
-+static inline void svm_asid_g_invlpg(struct vcpu *v, unsigned long g_linear)
-+{
-+#if 0
-+    /* Optimization? */
-+    svm_invlpga(g_linear, v->arch.hvm.svm.vmcb->guest_asid);
-+#endif
++/* SVM specific intblk types, cannot be an enum because gcc 4.5 complains */
++/* GIF cleared */
++#define hvm_intblk_svm_gif      hvm_intblk_arch
 +
-+    /* Safe fallback. Take a new ASID. */
-+    hvm_asid_flush_vcpu(v);
-+}
++#define vcpu_nestedsvm(v) (vcpu_nestedhvm(v).u.nsvm)
 +
-+#endif /* __X86_HVM_SVM_ASID_PRIV_H__ */
++/* True when l1 guest enabled SVM in EFER */
++#define nsvm_efer_svm_enabled(v) \
++    (!!((v)->arch.hvm.guest_efer & EFER_SVME))
++
++int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr);
++void nestedsvm_vmexit_defer(struct vcpu *v,
++    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2);
++enum nestedhvm_vmexits
++nestedsvm_vmexit_n2n1(struct vcpu *v, struct cpu_user_regs *regs);
++enum nestedhvm_vmexits
++nestedsvm_check_intercepts(struct vcpu *v, struct cpu_user_regs *regs,
++    uint64_t exitcode);
++void svm_nested_features_on_efer_update(struct vcpu *v);
++
++/* Interface methods */
++void cf_check nsvm_vcpu_destroy(struct vcpu *v);
++int cf_check nsvm_vcpu_initialise(struct vcpu *v);
++int cf_check nsvm_vcpu_reset(struct vcpu *v);
++int nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs);
++int cf_check nsvm_vcpu_vmexit_event(struct vcpu *v,
++                                    const struct x86_event *event);
++uint64_t cf_check nsvm_vcpu_hostcr3(struct vcpu *v);
++bool cf_check nsvm_vmcb_guest_intercepts_event(
++    struct vcpu *v, unsigned int vector, int errcode);
++bool cf_check nsvm_vmcb_hap_enabled(struct vcpu *v);
++enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v);
++
++/* Interrupts, vGIF */
++void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v);
++void svm_vmexit_do_stgi(struct cpu_user_regs *regs, struct vcpu *v);
++bool nestedsvm_gif_isset(struct vcpu *v);
++int cf_check nsvm_hap_walk_L1_p2m(
++    struct vcpu *v, paddr_t L2_gpa, paddr_t *L1_gpa, unsigned int *page_order,
++    uint8_t *p2m_acc, struct npfec npfec);
++
++#define NSVM_INTR_NOTHANDLED     3
++#define NSVM_INTR_NOTINTERCEPTED 2
++#define NSVM_INTR_FORCEVMEXIT    1
++#define NSVM_INTR_MASKED         0
++
++int nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack);
++
++#endif /* __X86_HVM_SVM_NESTEDHVM_PRIV_H__ */
 +
 +/*
 + * Local variables:
@@ -173,81 +208,139 @@ index 0000000000..4dd6abb5fb
 + * indent-tabs-mode: nil
 + * End:
 + */
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 5f5752ce21..80b72b5dee 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -20,13 +20,13 @@
+ #include <asm/hvm/svm/svm.h>
+ #include <asm/hvm/svm/vmcb.h>
+ #include <asm/hvm/nestedhvm.h>
+-#include <asm/hvm/svm/nestedsvm.h>
+ #include <asm/hvm/svm/svmdebug.h>
+ #include <asm/paging.h> /* paging_mode_hap */
+ #include <asm/event.h> /* for local_event_delivery_(en|dis)able */
+ #include <asm/p2m.h> /* p2m_get_pagetable, p2m_get_nestedp2m */
+ 
+ #include "emulate.h"
++#include "nestedhvm.h"
+ #include "svm.h"
+ 
+ #define NSVM_ERROR_VVMCB        1
 diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 6d394e4fe3..793a10eaca 100644
+index c767a3eb76..4b74ee3d7c 100644
 --- a/xen/arch/x86/hvm/svm/svm.c
 +++ b/xen/arch/x86/hvm/svm/svm.c
 @@ -37,7 +37,6 @@
  #include <asm/hvm/monitor.h>
  #include <asm/hvm/nestedhvm.h>
  #include <asm/hvm/support.h>
--#include <asm/hvm/svm/asid.h>
- #include <asm/hvm/svm/emulate.h>
- #include <asm/hvm/svm/nestedsvm.h>
+-#include <asm/hvm/svm/nestedsvm.h>
  #include <asm/hvm/svm/svm.h>
+ #include <asm/hvm/svm/svmdebug.h>
+ #include <asm/hvm/svm/vmcb.h>
 @@ -55,6 +54,7 @@
  
- #include <public/sched.h>
- 
-+#include "asid.h"
+ #include "asid.h"
+ #include "emulate.h"
++#include "nestedhvm.h"
  #include "svm.h"
  
  void noreturn svm_asm_do_resume(void);
-diff --git a/xen/arch/x86/include/asm/hvm/svm/asid.h b/xen/arch/x86/include/asm/hvm/svm/asid.h
-deleted file mode 100644
-index 0e5ec3ab78..0000000000
---- a/xen/arch/x86/include/asm/hvm/svm/asid.h
-+++ /dev/null
-@@ -1,49 +0,0 @@
--/*
-- * asid.h: handling ASIDs in SVM.
-- * Copyright (c) 2007, Advanced Micro Devices, Inc.
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program; If not, see <http://www.gnu.org/licenses/>.
-- */
+diff --git a/xen/arch/x86/hvm/svm/svm.h b/xen/arch/x86/hvm/svm/svm.h
+index 9e65919757..f700f26f90 100644
+--- a/xen/arch/x86/hvm/svm/svm.h
++++ b/xen/arch/x86/hvm/svm/svm.h
+@@ -36,7 +36,7 @@ static inline void svm_invlpga(unsigned long linear, uint32_t asid)
+         ".byte 0x0f,0x01,0xdf"
+         : /* output */
+         : /* input */
+-        "a" (linear), "c" (asid));
++        "a" (linear), "c" (asid) );
+ }
+ 
+ /* TSC rate */
+diff --git a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+index 656d7d1a9a..94d45d2e8d 100644
+--- a/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
++++ b/xen/arch/x86/include/asm/hvm/svm/nestedsvm.h
+@@ -18,15 +18,12 @@
+ #ifndef __ASM_X86_HVM_SVM_NESTEDSVM_H__
+ #define __ASM_X86_HVM_SVM_NESTEDSVM_H__
+ 
+-#include <asm/hvm/hvm.h>
+-#include <asm/hvm/svm/vmcb.h>
++#include <xen/types.h>
+ 
+-/* SVM specific intblk types, cannot be an enum because gcc 4.5 complains */
+-/* GIF cleared */
+-#define hvm_intblk_svm_gif      hvm_intblk_arch
++#include <asm/hvm/svm/vmcb.h>
+ 
+ struct nestedsvm {
+-    bool_t ns_gif;
++    bool ns_gif;
+     uint64_t ns_msr_hsavepa; /* MSR HSAVE_PA value */
+ 
+     /* l1 guest physical address of virtual vmcb used by prior VMRUN.
+@@ -72,7 +69,7 @@ struct nestedsvm {
+     uint64_t ns_vmcb_guestcr3, ns_vmcb_hostcr3;
+     uint32_t ns_guest_asid;
+ 
+-    bool_t ns_hap_enabled;
++    bool ns_hap_enabled;
+ 
+     /* Only meaningful when vmexit_pending flag is set */
+     struct {
+@@ -90,48 +87,6 @@ struct nestedsvm {
+     } ns_hostflags;
+ };
+ 
+-#define vcpu_nestedsvm(v) (vcpu_nestedhvm(v).u.nsvm)
 -
--#ifndef __ASM_X86_HVM_SVM_ASID_H__
--#define __ASM_X86_HVM_SVM_ASID_H__
+-/* True when l1 guest enabled SVM in EFER */
+-#define nsvm_efer_svm_enabled(v) \
+-    (!!((v)->arch.hvm.guest_efer & EFER_SVME))
 -
--#include <xen/types.h>
--#include <asm/hvm/asid.h>
--#include <asm/processor.h>
+-int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr);
+-void nestedsvm_vmexit_defer(struct vcpu *v,
+-    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2);
+-enum nestedhvm_vmexits
+-nestedsvm_vmexit_n2n1(struct vcpu *v, struct cpu_user_regs *regs);
+-enum nestedhvm_vmexits
+-nestedsvm_check_intercepts(struct vcpu *v, struct cpu_user_regs *regs,
+-    uint64_t exitcode);
+-void svm_nested_features_on_efer_update(struct vcpu *v);
 -
--void svm_asid_init(const struct cpuinfo_x86 *c);
--void svm_asid_handle_vmrun(void);
+-/* Interface methods */
+-void cf_check nsvm_vcpu_destroy(struct vcpu *v);
+-int cf_check nsvm_vcpu_initialise(struct vcpu *v);
+-int cf_check nsvm_vcpu_reset(struct vcpu *v);
+-int nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs);
+-int cf_check nsvm_vcpu_vmexit_event(struct vcpu *v, const struct x86_event *event);
+-uint64_t cf_check nsvm_vcpu_hostcr3(struct vcpu *v);
+-bool cf_check nsvm_vmcb_guest_intercepts_event(
+-    struct vcpu *v, unsigned int vector, int errcode);
+-bool cf_check nsvm_vmcb_hap_enabled(struct vcpu *v);
+-enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v);
 -
--static inline void svm_asid_g_invlpg(struct vcpu *v, unsigned long g_linear)
--{
--#if 0
--    /* Optimization? */
--    svm_invlpga(g_linear, v->arch.hvm.svm.vmcb->guest_asid);
--#endif
+-/* Interrupts, vGIF */
+-void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v);
+-void svm_vmexit_do_stgi(struct cpu_user_regs *regs, struct vcpu *v);
+-bool_t nestedsvm_gif_isset(struct vcpu *v);
+-int cf_check nsvm_hap_walk_L1_p2m(
+-    struct vcpu *v, paddr_t L2_gpa, paddr_t *L1_gpa, unsigned int *page_order,
+-    uint8_t *p2m_acc, struct npfec npfec);
 -
--    /* Safe fallback. Take a new ASID. */
--    hvm_asid_flush_vcpu(v);
--}
+-#define NSVM_INTR_NOTHANDLED     3
+-#define NSVM_INTR_NOTINTERCEPTED 2
+-#define NSVM_INTR_FORCEVMEXIT    1
+-#define NSVM_INTR_MASKED         0
+-int nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack);
 -
--#endif /* __ASM_X86_HVM_SVM_ASID_H__ */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * tab-width: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
+ #endif /* ASM_X86_HVM_SVM_NESTEDSVM_H__ */
+ 
+ /*
 -- 
 2.37.2
 
