@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E03DC7EE23
-	for <xen-devel@archiver.kernel.org>; Sat, 25 Feb 2023 20:38:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.501867.773666 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 355A8C64EC7
+	for <xen-devel@archiver.kernel.org>; Sat, 25 Feb 2023 20:38:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.501870.773687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pW1IV-0007PT-2F; Sat, 25 Feb 2023 20:37:35 +0000
+	id 1pW1Ik-0007zt-L7; Sat, 25 Feb 2023 20:37:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 501867.773666; Sat, 25 Feb 2023 20:37:35 +0000
+Received: by outflank-mailman (output) from mailman id 501870.773687; Sat, 25 Feb 2023 20:37:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pW1IU-0007PM-Va; Sat, 25 Feb 2023 20:37:34 +0000
-Received: by outflank-mailman (input) for mailman id 501867;
- Sat, 25 Feb 2023 20:37:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pW1Ik-0007zk-Hw; Sat, 25 Feb 2023 20:37:50 +0000
+Received: by outflank-mailman (input) for mailman id 501870;
+ Sat, 25 Feb 2023 20:37:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wch7=6V=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1pW1IT-0007PG-41
- for xen-devel@lists.xenproject.org; Sat, 25 Feb 2023 20:37:33 +0000
-Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
- [64.147.123.24]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 37a18c7e-b54c-11ed-88bb-e56d68cac8db;
- Sat, 25 Feb 2023 21:37:30 +0100 (CET)
+ id 1pW1Ij-0007yc-Oh
+ for xen-devel@lists.xenproject.org; Sat, 25 Feb 2023 20:37:49 +0000
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
+ [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4162fbfc-b54c-11ed-a82a-c9ca1d2f71af;
+ Sat, 25 Feb 2023 21:37:48 +0100 (CET)
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 27EDA32004AE;
- Sat, 25 Feb 2023 15:37:25 -0500 (EST)
+ by mailout.nyi.internal (Postfix) with ESMTP id 67C5E5C009D;
+ Sat, 25 Feb 2023 15:37:43 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Sat, 25 Feb 2023 15:37:26 -0500
+ by compute5.internal (MEProxy); Sat, 25 Feb 2023 15:37:43 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 25 Feb 2023 15:37:23 -0500 (EST)
+ 25 Feb 2023 15:37:41 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,47 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37a18c7e-b54c-11ed-88bb-e56d68cac8db
+X-Inumbo-ID: 4162fbfc-b54c-11ed-a82a-c9ca1d2f71af
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm1; t=
-	1677357444; x=1677443844; bh=O4/IZ+LuGJRHMvCUTkXEoOEx+FGHNfoNKJ2
-	om9c4VdI=; b=p4aDnP7hxbRCNULXC4DzXv88OAYlhDVPgE9EVhuOV21Kiv9sDeV
-	5HMuOC2Z0uDkqvIaNtgjd+ny56W6xXBp8m3ETEz64zhe+umkX2R7PSJADMzcliY5
-	iuag9poAMqs0dxmpCyeGrcvx5XXGcmD12jcO4oFYTxw4UwkETjekidSuPqW23W6T
-	69JlPwPxMd6AMsFrkMEp3+AdifgcSErpW5zxUqGD6Q91JyWcFCxEIQ83plVAZZD6
-	SFLHWC0R4hlwpm5yUUbHE9p9yWyi3pr6PxbB1BU32GF1j0VLybM9ACxR/JGQYf0e
-	ucJwBsQbQDHPsYIVctJ7D8qKnTKJb5sitTg==
+	1677357463; x=1677443863; bh=DLRFynjeQ7h4Iqriku9OW2YC9py/QqyZn5H
+	hylUDGk4=; b=Tis2+b/6AIiQ1NA/82TuNQnJfHqUecgC6ERoIGxnyOzHDpuRazo
+	2vnA9m0GuMWjjB6WeREqIJaymDHrshqceKTOsNCZWkcG4e9gKfM4zvIBK2137PC5
+	QA+pOQ08wqbEWYc8L38ydflFFzebLFpYto9ZPxtziCjpnZSqFn3w3LW6DE6Fa69D
+	FG3Z8rO73KboK4CtJ3urBwvcoibTbDtmcFWufFevyDuEse4zXUEJUGj8ouLZEPKB
+	g5fEXmpPt3ZtCcNx9FYjpjadX/z4yl0zKnCmz05r28Pc6dfhF1sFstcpH10Jfde6
+	VQ9w0EC6M7xmKxZnV/mgrlB7dKleklsp+Kw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1677357444; x=1677443844; bh=O4/IZ+LuGJRHM
-	vCUTkXEoOEx+FGHNfoNKJ2om9c4VdI=; b=KZmEalqhO1cvpS90Baj8dKWVZLual
-	pHZv799zyBj4NtiFiW8WrhJPskGlBGySAbOVe5ghvu3KfL9HXCyTY0KhUHRacImI
-	H89+kEU1/hcsSK/fTU584jCdqIBIRZl7+xo+5aDsGC3+bC1pDA5cwNbm69SAOMS4
-	HlIha9NX8ZBpDC4dmw6A+IkBwPJVPEoGi18+qjuS8BTQ+UP4MYGKIBRNeylknC7U
-	1W5Ngt6CPGVuBQXFA/a1FJB9uoGAyrTrm1Fppl8c/Ohsq8Lq1humz5buBLv3nspB
-	FD7X4Y9Oupo3aCgILdZWjYQi/g1NOePZXENNA+RiTUB2f0/J5kUAR9tHQ==
-X-ME-Sender: <xms:hHH6Y9Dz_4m4DFyTqRvZ3lia93uj9B4h3IwIgEfEPSjiB6xEhcLCkg>
-    <xme:hHH6Y7jLvSJCp5Ix58DYbGDDjNdTk8LEQnBfJLRHK462sCeDeWVRasaekGqbKauVt
-    d9E39x4flbvH28>
-X-ME-Received: <xmr:hHH6Y4ll16Qkt1JUTmdp9XqIY60pluZZ7R7MpVbQusl2exyx-aRyvetEC5mzkGvQ8-cQeb77UiY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudekiedgjeehucetufdoteggodetrfdotf
+	:x-sasl-enc; s=fm1; t=1677357463; x=1677443863; bh=DLRFynjeQ7h4I
+	qriku9OW2YC9py/QqyZn5HhylUDGk4=; b=I7VtMLO6MqopveuFt8AQ6r462eTti
+	qCQMelgBYgJRgGNjKIt8+bN1rqGzJkp7P6jjo8yAxjqgePrbcx4reXyXDm+y9ZdN
+	7hA74nd2wJEFNNZnF6bQkABMUlgCTBGTJt3ia6qPViccwIKTqXwb1lHy//ihga8N
+	5Xbi/JHhu8PsYcrg4kctcheknQup7bXhDXoF2ptUWnvJaMZafPbAsfeOmUcxP+K1
+	WdED7UlylDimE8wtLF78BUwob+sES9wrEMwA6Q1FDec1cvbWrIt+ONrbjNsLc/Mg
+	UsujPeQitaoku4K7mBfmUZ1fvm07CRd01KGdMKTXXSgZ1Fahnjw+gzzgA==
+X-ME-Sender: <xms:lnH6YzRdISFL4ydBQHJd1jPtEhPLQ9UNNLRPx6g5hsk3whFhJFnp9g>
+    <xme:lnH6Y0yD12D9Zx1N3-uY0-h5CpEHK2ZV-UpC9osTFjUM5l7hfQjWVeHcjPh29GbEJ
+    WXF9794ynPYEuc>
+X-ME-Received: <xmr:lnH6Y42HKcXRZ_l8-tAJFwXv8YyfPgWqJVjdmcu8hDk00abJ84mRNlPduIHtd3DtDncuLNtfWo0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrudekiedgjeeiucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
     ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnheptefhhfdtkefhkefgjeduffehuedt
-    gfduveejiedvffdvgeevledttdegvefhueegnecuffhomhgrihhnpeigvghnrdhorhhgpd
-    gtohhnfhhighdrmhhknecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghi
-    lhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:hHH6Y3y9HmI5kOHvr2BO7NAWrs-wMCTR4EY57e-QxYEK9aTFYcqw5g>
-    <xmx:hHH6YyTa59ccGJC5Hwm4yg6eNLPf9z2XlHselUWuWAo7HNjhQ3s7Lg>
-    <xmx:hHH6Y6bVyg23RF_voeUqXn_hZVbwMUv3tTxURKxLKptEOnGopdxpAA>
-    <xmx:hHH6Y-ad-WNebjHMfla0YufkfKnFZx1k0AwS0XeVF-VcIE8wvDYcwA>
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnheptdeutddvfedtgeejfeehjefffedv
+    tddvkefhgefgueegjefhveevueegtdfhkeehnecuffhomhgrihhnpeigvghnphhrohhjvg
+    gtthdrohhrghdpgigvnhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhlrggsrd
+    gtohhm
+X-ME-Proxy: <xmx:lnH6YzDRVsM3DQiQh5lH59YpXnUDqrd3998g6FPWh_OXJzlg-PxZgQ>
+    <xmx:lnH6Y8j1a-DSXWhxcxYVv640VIp2oEewZHliW-y6UF8qwpG7kC85aQ>
+    <xmx:lnH6Y3ryDxL_uvX76WRqG4Z0xrX70bbQx6BG8o0tkSfUKAOcD6ZhGA>
+    <xmx:l3H6Y4h4mDb4ejoT3MFPGgscG4n_QnTrjmh5Yw7guXGDQT96nFkuHA>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,67 +98,50 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v5 0/5] Stop using insecure transports
-Date: Sat, 25 Feb 2023 15:37:10 -0500
-Message-Id: <cover.1677356813.git.demi@invisiblethingslab.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v5 2/5] Change remaining xenbits.xen.org links to HTTPS
+Date: Sat, 25 Feb 2023 15:37:12 -0500
+Message-Id: <e36a472b3e58ee81e8d61e7306f0ee2068eff62a.1677356813.git.demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1676750305.git.demi@invisiblethingslab.com>
-References: <cover.1676750305.git.demi@invisiblethingslab.com>
+In-Reply-To: <cover.1677356813.git.demi@invisiblethingslab.com>
+References: <cover.1677356813.git.demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Obtaining code over an insecure transport is a terrible idea for
-blatently obvious reasons.  Even for non-executable data, insecure
-transports are considered deprecated.
+Also fix an old xenbits.xenproject.org link.
 
-Changes since v4:
+Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+---
+ Config.mk        | 2 +-
+ tools/misc/mkrpm | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-- Remove known-broken links entirely.  They only mislead users into
-  believing the code can be obtained there when it cannot.
-
-Changes since v3:
-
-- Drop patch 4, which is an unrelated removal of unused code.
-
-- Do not fail with an error if one tries to build the I/O emulator,
-  vTPM, or vTPM manager stubdomains and passes --enable-extfiles.  The
-  user may have provided alternate download URLs via environment
-  variables.
-
-Changes since v2:
-
-- Drop patches 5 and 6, which changed links not used by automated tools.
-  These patches are the least urgent and hardest to review.
-
-- Ensure that no links are broken, and fail with an error instead of
-  trying to use links that *are* broken.
-
-Demi Marie Obenour (5):
-  Use HTTPS for all xenbits.xen.org Git repos
-  Change remaining xenbits.xen.org links to HTTPS
-  Build system: Do not try to use broken links
-  Build system: Replace git:// and http:// with https://
-  Automation and CI: Replace git:// and http:// with https://
-
- Config.mk                                   | 20 ++++---------
- README                                      |  4 +--
- automation/build/debian/stretch-llvm-8.list |  4 +--
- automation/scripts/qemu-smoke-dom0-arm32.sh |  2 +-
- docs/misc/livepatch.pandoc                  |  2 +-
- docs/process/xen-release-management.pandoc  |  2 +-
- m4/stubdom.m4                               |  5 ++--
- scripts/get_maintainer.pl                   |  2 +-
- stubdom/configure                           | 33 ++++++---------------
- stubdom/configure.ac                        | 18 +++++------
- tools/firmware/etherboot/Makefile           |  6 +---
- tools/misc/mkrpm                            |  2 +-
- 12 files changed, 37 insertions(+), 63 deletions(-)
-
+diff --git a/Config.mk b/Config.mk
+index 75f1975e5e78af44d36c2372cba6e89b425267a5..b2bef45b059976d5a6320eabada6073004eb22ee 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -191,7 +191,7 @@ APPEND_CFLAGS += $(foreach i, $(APPEND_INCLUDES), -I$(i))
+ EMBEDDED_EXTRA_CFLAGS := -fno-pie -fno-stack-protector -fno-stack-protector-all
+ EMBEDDED_EXTRA_CFLAGS += -fno-exceptions -fno-asynchronous-unwind-tables
+ 
+-XEN_EXTFILES_URL ?= http://xenbits.xen.org/xen-extfiles
++XEN_EXTFILES_URL ?= https://xenbits.xen.org/xen-extfiles
+ # All the files at that location were downloaded from elsewhere on
+ # the internet.  The original download URL is preserved as a comment
+ # near the place in the Xen Makefiles where the file is used.
+diff --git a/tools/misc/mkrpm b/tools/misc/mkrpm
+index 68819b2d739cea5491b53f9b944ee2bd20d92c2b..548db4b5da2691547438df5d7d58e5b4c3bd90d0 100644
+--- a/tools/misc/mkrpm
++++ b/tools/misc/mkrpm
+@@ -34,7 +34,7 @@ Version: $version
+ Release: $release
+ License: GPL
+ Group:   System/Hypervisor
+-URL: http://xenbits.xenproject.org/xen.git
++URL: https://xenbits.xen.org/git-http/xen.git
+ 
+ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+ %define _binary_payload w1.gzdio
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
