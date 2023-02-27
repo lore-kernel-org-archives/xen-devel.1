@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 030B9C7EE2D
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Feb 2023 07:57:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.502220.773938 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A50C64ED6
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Feb 2023 08:26:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.502253.773958 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pWYNh-0001oC-4Z; Mon, 27 Feb 2023 07:57:09 +0000
+	id 1pWYpG-00085C-48; Mon, 27 Feb 2023 08:25:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 502220.773938; Mon, 27 Feb 2023 07:57:09 +0000
+Received: by outflank-mailman (output) from mailman id 502253.773958; Mon, 27 Feb 2023 08:25:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pWYNh-0001o1-1F; Mon, 27 Feb 2023 07:57:09 +0000
-Received: by outflank-mailman (input) for mailman id 502220;
- Mon, 27 Feb 2023 07:57:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oRQf=6X=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1pWYNf-0000zt-81
- for xen-devel@lists.xenproject.org; Mon, 27 Feb 2023 07:57:07 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5353a6b3-b674-11ed-a82a-c9ca1d2f71af;
- Mon, 27 Feb 2023 08:57:05 +0100 (CET)
-Received: by mail-ed1-x531.google.com with SMTP id cq23so22126117edb.1
- for <xen-devel@lists.xenproject.org>; Sun, 26 Feb 2023 23:57:05 -0800 (PST)
-Received: from uni.router.wind (adsl-209.109.242.226.tellas.gr.
- [109.242.226.209]) by smtp.googlemail.com with ESMTPSA id
- b23-20020a50ccd7000000b0049ef70a2894sm2788272edj.38.2023.02.26.23.57.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 23:57:03 -0800 (PST)
+	id 1pWYpG-000855-1J; Mon, 27 Feb 2023 08:25:38 +0000
+Received: by outflank-mailman (input) for mailman id 502253;
+ Mon, 27 Feb 2023 08:25:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=10za=6X=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1pWYpE-00084z-0W
+ for xen-devel@lists.xenproject.org; Mon, 27 Feb 2023 08:25:36 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20621.outbound.protection.outlook.com
+ [2a01:111:f400:7e1a::621])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e3c592f-b678-11ed-88bb-e56d68cac8db;
+ Mon, 27 Feb 2023 09:25:34 +0100 (CET)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by PAXPR04MB8094.eurprd04.prod.outlook.com (2603:10a6:102:1c1::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6134.29; Mon, 27 Feb
+ 2023 08:25:32 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::154e:166d:ec25:531b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::154e:166d:ec25:531b%7]) with mapi id 15.20.6134.027; Mon, 27 Feb 2023
+ 08:25:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,378 +49,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5353a6b3-b674-11ed-a82a-c9ca1d2f71af
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=62fJGVZ50pgC5Zj0lapAQX8/jn38WZfFE90N46rhqOc=;
-        b=aeopOVF+ZmTM9E1XSIg18EmWxLfPTk6K/Zo8lH97FqBN4mxKZ9nhlE6xRx4Ch29nPT
-         /20cPln2vSqnzPXVmUZXVge4IjKXCha/UR2tPxR2t9lxurOwF8ewtWFauKr+4dnWwFH6
-         5BFQ18Srn/Av6C+VgelkgNvtR6XZYiARrD+dnswZm6t3G4bqsA+coUhv+vNS4CCdhg76
-         FFIr4YictVrBJn+OCAST1Wz4kePyiANoCCaZ6QMiLmFcwBHiUzaiInfz49bF7EAoyFq6
-         G5p50jV8fzt8oW1bIMwY/e/sLc6xKuXxvnpv+GDfYuXVBK+3nL6vTUXSJ98+gz5YSn4B
-         nfVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=62fJGVZ50pgC5Zj0lapAQX8/jn38WZfFE90N46rhqOc=;
-        b=BRRIYzzJgaAkpdGCRsneK2PByF8ijquiyR+fUVPZQ6KEa38yZSvL73YO4Mm8NItWSf
-         lNNVpM/saWN2Zf2Mmp0llar9qFdX9IR21yVx5BCI5d6ucWK3ACWbPFrY3eTOByqodWnr
-         Mvis68EUdsDmZNru6t2d3bt7Y8XroNJYhryJP7Q+qNQOamogqVt8YB2zgziyues3Muw+
-         TlD4ftfgDAz+FtYPQXaKbY6VpECJqVjshhsHnk9gz0Y7YDtinztESqCOn0TpWMt9nIj+
-         YLnq8uRtuXv3OV2wtyuiYKwIgJzbIvGmGPmYNCvBZBU+L//lB3QOSXrsJP7DtyJOBD98
-         rrzQ==
-X-Gm-Message-State: AO0yUKW4P8+BQLcxypiy1pV7C9jPdmk2oWseQuYEz0TPo6vLNRIoGwm0
-	24HbHgU5ygjB2sMpNCIAAWwbP1fguFAryQ==
-X-Google-Smtp-Source: AK7set++sPj47cXU0KyOEHvdPqoq+vL31REQK7S1la89qbPs5Slr4kKrDXazFIwBa/iQHf6X7Cnlyg==
-X-Received: by 2002:a05:6402:60d:b0:4ad:7c30:259a with SMTP id n13-20020a056402060d00b004ad7c30259amr24302872edv.2.1677484624048;
-        Sun, 26 Feb 2023 23:57:04 -0800 (PST)
-From: Xenia Ragiadakou <burzalodowa@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 3/4] x86/vmx: replace enum vmx_msr_intercept_type with the msr access flags
-Date: Mon, 27 Feb 2023 09:56:51 +0200
-Message-Id: <20230227075652.3782973-4-burzalodowa@gmail.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20230227075652.3782973-1-burzalodowa@gmail.com>
-References: <20230227075652.3782973-1-burzalodowa@gmail.com>
+X-Inumbo-ID: 4e3c592f-b678-11ed-88bb-e56d68cac8db
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AwnAhwEEnhFb76I7BwZf9s6xyExVNndeAvydKlIHMi9+5EqMfsb+gjZ3s6CLJaIuFBiZBRB+d0dT5k9eI1YUtMonkSUEEE031Usx15AU7UA5lNGtHv5V+hP0tu2fD24bxRQr0ZNLGQ+9CVTE9adTmFhn+i6yu7N4gu9zc+oif/lkORHxClc5TVo93PfS6agiO6dHt+3TJSbZLC0ncL0zTQHH9q+1hZ7cGtSX0FYANCS0XdqESiHHmPRyuSKhv1jm72quu2Dbo63R0WFAIXqIq9tnMxDwZ1YIVDWGF1NtFUC1R38yIBGYTALY+DT1iDTBFRN0CrrGyROvLdR9VgVBRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Sfyl7/Y7lDf78h9hLB+9Q/6fx14q15njNB5cRcJb5/w=;
+ b=CrZTGAyP4gl8uf7NTLiR4dAjRU5JbzmIIh5RER6woA8QKqKOa6KyxHYExlK+IJlPrZE02kpyuWzRak54F2KZpwUPqazFAh1KqnKFIKTJDCDyJYu+yL+wW83+XDJE0b/28jxIAyC4QHffvvZ1iGXvCJ7XO1q7yV1z3P1XqfOAqZWGybT2TT3T7bajnMgiuT7vRii7HKJFh/KR/SZtRQTAni0mtuo7L84hZ+vbOCxcgTq2rDM+GBtb1Ikv+7IksJZod+D/V3JeVXb1fYH5US12YVqvc8S1rBWPEcK1ETg+UAT26HoEKQc5PlvwMkQapVV0rrQZr0371mdVVHGF//cbIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Sfyl7/Y7lDf78h9hLB+9Q/6fx14q15njNB5cRcJb5/w=;
+ b=kOmSdqyN6jufJfpgWwr2U50fsOVLv+OHf+Prd+Zxah8FU1GNWOvNnZlfRcQtCrZiYh3B4Xe/NLC/aVmwx3zY1W7xReH2NTyS23iKeSyMGNENhbN0bw0kvuWcoZAUOswKnOt9GM57LwoWVl+sj+R09ElOwUPVyNccWIWfaY00NHE+QcgdHtQRc2bgpafGEeu6PeIknczpRQzNQoF5AIHs1Q5Tcp9XG1voV96pHfzs5cgUlsmtQLDB1NnM1iXi3TysmniXAxp87Rb692iS1DHwTyZyy9oWsLz/lOrROKEVg4ozf7UndDsBSsdyUw/bV42v0OeM1DoKiKQTSxHCUWP1ug==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <30b906ef-9c93-afec-14f5-4623cd24b273@suse.com>
+Date: Mon, 27 Feb 2023 09:25:32 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v4 2/3] Build system: Replace git:// and http:// with
+ https://
+To: Demi Marie Obenour <demi@invisiblethingslab.com>
+Cc: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+References: <cover.1676750305.git.demi@invisiblethingslab.com>
+ <944d212b0047339e4c15f7f85d74ff7fbfe96912.1676750305.git.demi@invisiblethingslab.com>
+ <8c4aa332-07ee-e91a-50f1-ced9e36db2a1@suse.com> <Y/lASQDDXEZY5qDB@itl-email>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <Y/lASQDDXEZY5qDB@itl-email>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0170.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:99::19) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|PAXPR04MB8094:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8f661f18-538b-4b01-9d90-08db189c3132
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	0xLRazXPDRCVS6k2qC4lPChd2XIjGD67oAvxlXMEyXLAIJO5oARK+6xhc2Ljm8DHMRMqK7umlyVXPnvFojffpbsewVDN2zUQsUpUE9PvuGZAlsHAUzmzU05qytS/9rrYzRdlyGEAIz4+yP7kdPIJF+Ck+4xk9SGITQFTkwTWXFHhGnoGphCH6Hnm23J5wgT/At7wtgE4T8m6vhsP6Ct1OWHQ3a3JjBqPN1oTnTPX1UthnaMr5MA2tkInYquz6ToM/C/3bA+n/bjbr2jTYT9HvuZ+L6ZcDB2TW0pZq64NdjFe13BQCGGG+HO6H3iYdUzlPffroGS+Pwz0FFJ70NtQObSWdQwSnXPudUTaIg1BPT5TZ6zO17vrKNzG7RutGKs8BN4vHoOhWYQgJqSxhuig6bSnRU6U7OMKe1zvMWnUlHEDzzMuVLmfehy8/NTERjJlkJtxORrUI2Zz2imnOR12Yr41RWZrhfjz04kjHg2ASqkzSZA94UuM3eQBImy9yijavsbMfIEZKJCnPEkHhuR2a6uMf/lIVQ7JOXY/DosFlEymGmYvvZqJQVcHP4WX+775APD8u7EZ2Qj+rgRoKeN5HUoWuWdL9RGS2o5jdhMPYH2lJ2wWKMImGYBBQ0Jx6T7mHXY/14vHtBjtARYA+t//0T7oF6ffvKWoRpYfhAyYK6MnUM53DfS1MFB55syef2VkFLGJih2OYBb2VdiWrfsyuA==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(136003)(396003)(376002)(366004)(346002)(39860400002)(451199018)(36756003)(5660300002)(8936002)(7416002)(6506007)(6512007)(53546011)(38100700002)(83380400001)(26005)(186003)(2616005)(86362001)(31696002)(316002)(41300700001)(66946007)(54906003)(66476007)(4326008)(66556008)(6916009)(8676002)(478600001)(6486002)(31686004)(2906002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UW9pcXB0Nk1qQnFFNy9rUFViRjJmSlFMSHZVR3RyYXVmOHR4Z3dKMTI2K2VQ?=
+ =?utf-8?B?MHRlaG1QNG8xeDdrdkd1TmtFODEyeDZVSExUeVZYSXNoNGUzQk9CM21ZaC8z?=
+ =?utf-8?B?ZGlIMzhHUG93OHV5OVhYVk9TWmw5bFhadWZ4K3oyaURGUmZkaVYwTTJSbGY3?=
+ =?utf-8?B?TW9aOGFNeEpwMmhKR1orMlYrWkFLOUpjMjV4RC9hZ0k3bFVaRDRHZURraitM?=
+ =?utf-8?B?QmQ5MTRnNlE5VFEvMFZMdjdqN2EzcnZLYXBLNTFveFk1S29ZUDEzU3JZaHJn?=
+ =?utf-8?B?Zm5PN0pYQ2UrenM2NXR3M1c5cmtWSStvazFpWE5pSnNKUnJKdCtVVi9ETU1l?=
+ =?utf-8?B?cU5JMGNobVlsZWxXTkMrVmljbHF1WFpMK0VvVW9KaVpUMzYzZzQ0bGU0MWI2?=
+ =?utf-8?B?VlM4dXl6Y05zZUxGYmVwYTFtVHFyM0FHY1Y3c0RTbk9DbUZLNnl6RWZ0R2kz?=
+ =?utf-8?B?V2x2cFhUNTVSOTFOc05OS2RMMG1iSkgrVmJTNE0vOVpWWHBBdER3c3ZxVFJD?=
+ =?utf-8?B?ais3ejJoVnhwdlNuZXlaeFpUZFdJaXYzckMwaExpU2k0SktreDJIb0dJRTd5?=
+ =?utf-8?B?NkkyYXRjeVh5aE1vYTlsR0F1TzEzUEg5SzM5NmcwVXFoZmkwYmdXc0pnRHI3?=
+ =?utf-8?B?L2pZM05KaExVeno3UTYxVVJ5eTJpY09uNG9GaHJid1JXamVITDA5Y2orcDJh?=
+ =?utf-8?B?QkQzQmVHZUpYdXpQQWFtaDByU2xxTXhvTHNKTHhxQzlqTXVFL2ZkSThaN3VC?=
+ =?utf-8?B?cDRZRHNjWjdYT1prR015Zi9VZ0cwaTk5RXpnanYvRktwWkkraHBELytVdlgz?=
+ =?utf-8?B?U093US9GQjE4czZXQ0FVLzgrUDJLNkxSWGV6T1R4ZGZRejhIYTRZb3ZoSE41?=
+ =?utf-8?B?Vk1IOFZpZE5RWEx3SVQ4YWVhdC9DMWlSUUdVa2VkL1hyNVhBQ1FKMFFCOVNN?=
+ =?utf-8?B?aGdkNUlqcUJtZm5RTXV2UUlKMUgyRmx4S0lPQkJBam5DaWZTNlZRM20raEVQ?=
+ =?utf-8?B?VGJxQzlxandPS2FSRHllaUJJbmlMZ1hPQTJsMEh1ODB1cVJINE43UnlENVZW?=
+ =?utf-8?B?NStlNWFyS1BhbjM0cVFFdUhJWGdycDJnKy80VHFYVEN2R2xyMjg4OG9iV0hi?=
+ =?utf-8?B?UzRnUm4yRFNPVjh3VEhicFd4bGc3cnhjTUxXbG9sTmRaY3lwb2tEcmVZaitV?=
+ =?utf-8?B?MGY0ZEpETXQwd21BUFY2M3B3cmFLdmdrUS9WczNncEwvZnVYa2NvbWMybDNC?=
+ =?utf-8?B?eVB0elBDN24zdFpKZXlFdnZqQjF2ZGh0alloaDBIY1dON2loR1ZWS3pWVWQ5?=
+ =?utf-8?B?L1lvNmUyZWlNOUpEOFp1NGVXK3Zxd28wZ3c0anZJYUtTNWg2Snk2OW1xY29r?=
+ =?utf-8?B?QnlSd1JlNEZ2a284QUN6bG9Zem1JZGluWXhCREhzZDh4Z3Q2eWN4MS9lM0NQ?=
+ =?utf-8?B?SXNaVjEyN1ZKc1k1bUNSOXpzenRDeW9peTIrSEJtYmQ5ZXhlWi8zb1pWVXFl?=
+ =?utf-8?B?ZXRUNDFWQUN2czd1ZVJZbkZ5WTNFWUIvZHFYYzBzUXhJSElYTUNwaVpzNDNI?=
+ =?utf-8?B?dHFOdzZDSEpJRFQ2Vmp2SXN3eXlQWEljazN3dElTMFVxV2t6UGtacHZvN3M3?=
+ =?utf-8?B?ODhnMmU4RzJEZVhHWks2cmsraCtZdDBkTFFITnRuck85UG9sRk9USWc2R2RO?=
+ =?utf-8?B?YnNwdHdiOFhGTU1FVW1JM3J0YVZnQUFUY3JvcXdHNlZ0UGpxQUM4dmpYZWtE?=
+ =?utf-8?B?ZnNDQXRFZktUck90aHB0TzFRb3MxTWkrY2FhL2ZuNytCK2xuN3Vha0pxSTFD?=
+ =?utf-8?B?U3BLdjFCUjQzUXltZTkrSm9NWlRvODYrMTRpWEVKOG51RjllWHFRaVorMFJu?=
+ =?utf-8?B?RUJjNHJ2c2RDelIwbTg4R2lQSXRLb1ZQVktLK1NLZGhETitmcVdzR3c4dWxJ?=
+ =?utf-8?B?NHlaSjFuN2pjemFOcDRQTktZRzhTWWJWcGM2eUJwdHVqQUllMjlxd2cxMEdZ?=
+ =?utf-8?B?ZTFocG1pa29UZUsydTg2SktBRmt3c0lPU1ZvODFkdm9nemRMcFNrcEdRa1pS?=
+ =?utf-8?B?dFU5Mlk1cnZ3b3pwd080a2YwaGZwU0pKZXZUMENzU2V2bUdqcERaN0UxWG1B?=
+ =?utf-8?Q?WoyTg8sX/a33xqXqWrnNNmnMM?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f661f18-538b-4b01-9d90-08db189c3132
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2023 08:25:32.7266
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XuIOllO1SNQb+6rEifm2R+KdOa8/LUc9bN74t4/PpS/ljOVd2Xi0IJ6P1rZe+2al5mmqEo6UGL0wXtrjqObRng==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8094
 
-Replace enum vmx_msr_intercept_type with the msr access flags, defined
-in hvm.h, so that the functions {svm,vmx}_{set,clear}_msr_intercept()
-share the same prototype.
+On 24.02.2023 23:55, Demi Marie Obenour wrote:
+> On Tue, Feb 21, 2023 at 11:07:58AM +0100, Jan Beulich wrote:
+>> On 19.02.2023 03:46, Demi Marie Obenour wrote:
+>>> --- a/stubdom/configure
+>>> +++ b/stubdom/configure
+>>> @@ -3535,7 +3535,7 @@ if test "x$ZLIB_URL" = "x"; then :
+>>>  	if test "x$extfiles" = "xy"; then :
+>>>    ZLIB_URL=\$\(XEN_EXTFILES_URL\)
+>>>  else
+>>> -  ZLIB_URL="http://www.zlib.net"
+>>> +  ZLIB_URL="https://www.zlib.net"
+>>>  fi
+>>
+>> In v3 you said that this URL can't be used anymore for the version we're
+>> trying to fetch (which I can confirm). Leaving aside the question of why
+>> stubdom was never updated in that regard, what use is it to update URL
+>> (without even mentioning the aspect in the description) in such a case?
+>> (I haven't gone through any of the other URLs again, so there may well
+>> be more similar cases.)
+> 
+> Main advantage is that it will fail securely rather than downloading
+> whatever random code an MITM attacker put in there.
 
-No functional change intended.
+As said before (and implied here): At the very least you need to mention
+the aspect in the description. But then wouldn't things be failing equally
+securely if no (non-working) URL was put in place, or one which is
+guaranteed to yield an error but makes obvious that no real URL is meant?
 
-Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
----
- xen/arch/x86/cpu/vpmu_intel.c           | 24 +++++++-------
- xen/arch/x86/hvm/vmx/vmcs.c             | 38 ++++++++++-----------
- xen/arch/x86/hvm/vmx/vmx.c              | 44 ++++++++++++-------------
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h | 14 ++------
- 4 files changed, 54 insertions(+), 66 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index bcfa187a14..bd91c79a36 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -230,22 +230,22 @@ static void core2_vpmu_set_msr_bitmap(struct vcpu *v)
- 
-     /* Allow Read/Write PMU Counters MSR Directly. */
-     for ( i = 0; i < fixed_pmc_cnt; i++ )
--        vmx_clear_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR0 + i, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR0 + i, MSR_RW);
- 
-     for ( i = 0; i < arch_pmc_cnt; i++ )
-     {
--        vmx_clear_msr_intercept(v, MSR_IA32_PERFCTR0 + i, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_IA32_PERFCTR0 + i, MSR_RW);
- 
-         if ( full_width_write )
--            vmx_clear_msr_intercept(v, MSR_IA32_A_PERFCTR0 + i, VMX_MSR_RW);
-+            vmx_clear_msr_intercept(v, MSR_IA32_A_PERFCTR0 + i, MSR_RW);
-     }
- 
-     /* Allow Read PMU Non-global Controls Directly. */
-     for ( i = 0; i < arch_pmc_cnt; i++ )
--        vmx_clear_msr_intercept(v, MSR_P6_EVNTSEL(i), VMX_MSR_R);
-+        vmx_clear_msr_intercept(v, MSR_P6_EVNTSEL(i), MSR_R);
- 
--    vmx_clear_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, VMX_MSR_R);
--    vmx_clear_msr_intercept(v, MSR_IA32_DS_AREA, VMX_MSR_R);
-+    vmx_clear_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, MSR_R);
-+    vmx_clear_msr_intercept(v, MSR_IA32_DS_AREA, MSR_R);
- }
- 
- static void core2_vpmu_unset_msr_bitmap(struct vcpu *v)
-@@ -253,21 +253,21 @@ static void core2_vpmu_unset_msr_bitmap(struct vcpu *v)
-     unsigned int i;
- 
-     for ( i = 0; i < fixed_pmc_cnt; i++ )
--        vmx_set_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR0 + i, VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR0 + i, MSR_RW);
- 
-     for ( i = 0; i < arch_pmc_cnt; i++ )
-     {
--        vmx_set_msr_intercept(v, MSR_IA32_PERFCTR0 + i, VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_IA32_PERFCTR0 + i, MSR_RW);
- 
-         if ( full_width_write )
--            vmx_set_msr_intercept(v, MSR_IA32_A_PERFCTR0 + i, VMX_MSR_RW);
-+            vmx_set_msr_intercept(v, MSR_IA32_A_PERFCTR0 + i, MSR_RW);
-     }
- 
-     for ( i = 0; i < arch_pmc_cnt; i++ )
--        vmx_set_msr_intercept(v, MSR_P6_EVNTSEL(i), VMX_MSR_R);
-+        vmx_set_msr_intercept(v, MSR_P6_EVNTSEL(i), MSR_R);
- 
--    vmx_set_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, VMX_MSR_R);
--    vmx_set_msr_intercept(v, MSR_IA32_DS_AREA, VMX_MSR_R);
-+    vmx_set_msr_intercept(v, MSR_CORE_PERF_FIXED_CTR_CTRL, MSR_R);
-+    vmx_set_msr_intercept(v, MSR_IA32_DS_AREA, MSR_R);
- }
- 
- static inline void __core2_vpmu_save(struct vcpu *v)
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index ed71ecfb62..22c12509d5 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -902,8 +902,7 @@ static void vmx_set_host_env(struct vcpu *v)
-               (unsigned long)&get_cpu_info()->guest_cpu_user_regs.error_code);
- }
- 
--void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr,
--                             enum vmx_msr_intercept_type type)
-+void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr, int type)
- {
-     struct vmx_msr_bitmap *msr_bitmap = v->arch.hvm.vmx.msr_bitmap;
-     struct domain *d = v->domain;
-@@ -917,25 +916,24 @@ void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr,
- 
-     if ( msr <= 0x1fff )
-     {
--        if ( type & VMX_MSR_R )
-+        if ( type & MSR_R )
-             clear_bit(msr, msr_bitmap->read_low);
--        if ( type & VMX_MSR_W )
-+        if ( type & MSR_W )
-             clear_bit(msr, msr_bitmap->write_low);
-     }
-     else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
-     {
-         msr &= 0x1fff;
--        if ( type & VMX_MSR_R )
-+        if ( type & MSR_R )
-             clear_bit(msr, msr_bitmap->read_high);
--        if ( type & VMX_MSR_W )
-+        if ( type & MSR_W )
-             clear_bit(msr, msr_bitmap->write_high);
-     }
-     else
-         ASSERT(!"MSR out of range for interception\n");
- }
- 
--void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr,
--                           enum vmx_msr_intercept_type type)
-+void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr, int type)
- {
-     struct vmx_msr_bitmap *msr_bitmap = v->arch.hvm.vmx.msr_bitmap;
- 
-@@ -945,17 +943,17 @@ void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr,
- 
-     if ( msr <= 0x1fff )
-     {
--        if ( type & VMX_MSR_R )
-+        if ( type & MSR_R )
-             set_bit(msr, msr_bitmap->read_low);
--        if ( type & VMX_MSR_W )
-+        if ( type & MSR_W )
-             set_bit(msr, msr_bitmap->write_low);
-     }
-     else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
-     {
-         msr &= 0x1fff;
--        if ( type & VMX_MSR_R )
-+        if ( type & MSR_R )
-             set_bit(msr, msr_bitmap->read_high);
--        if ( type & VMX_MSR_W )
-+        if ( type & MSR_W )
-             set_bit(msr, msr_bitmap->write_high);
-     }
-     else
-@@ -1162,17 +1160,17 @@ static int construct_vmcs(struct vcpu *v)
-         v->arch.hvm.vmx.msr_bitmap = msr_bitmap;
-         __vmwrite(MSR_BITMAP, virt_to_maddr(msr_bitmap));
- 
--        vmx_clear_msr_intercept(v, MSR_FS_BASE, VMX_MSR_RW);
--        vmx_clear_msr_intercept(v, MSR_GS_BASE, VMX_MSR_RW);
--        vmx_clear_msr_intercept(v, MSR_SHADOW_GS_BASE, VMX_MSR_RW);
--        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_CS, VMX_MSR_RW);
--        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_ESP, VMX_MSR_RW);
--        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_EIP, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_FS_BASE, MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_GS_BASE, MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_SHADOW_GS_BASE, MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_CS, MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_ESP, MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_IA32_SYSENTER_EIP, MSR_RW);
-         if ( paging_mode_hap(d) && (!is_iommu_enabled(d) || iommu_snoop) )
--            vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, VMX_MSR_RW);
-+            vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, MSR_RW);
-         if ( (vmexit_ctl & VM_EXIT_CLEAR_BNDCFGS) &&
-              (vmentry_ctl & VM_ENTRY_LOAD_BNDCFGS) )
--            vmx_clear_msr_intercept(v, MSR_IA32_BNDCFGS, VMX_MSR_RW);
-+            vmx_clear_msr_intercept(v, MSR_IA32_BNDCFGS, MSR_RW);
-     }
- 
-     /* I/O access bitmap. */
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 0ec33bcc18..87c47c002c 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -802,7 +802,7 @@ static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
-      */
-     if ( cp->feat.ibrsb )
-     {
--        vmx_clear_msr_intercept(v, MSR_SPEC_CTRL, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_SPEC_CTRL, MSR_RW);
- 
-         rc = vmx_add_guest_msr(v, MSR_SPEC_CTRL, 0);
-         if ( rc )
-@@ -810,7 +810,7 @@ static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
-     }
-     else
-     {
--        vmx_set_msr_intercept(v, MSR_SPEC_CTRL, VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_SPEC_CTRL, MSR_RW);
- 
-         rc = vmx_del_msr(v, MSR_SPEC_CTRL, VMX_MSR_GUEST);
-         if ( rc && rc != -ESRCH )
-@@ -820,20 +820,20 @@ static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
- 
-     /* MSR_PRED_CMD is safe to pass through if the guest knows about it. */
-     if ( cp->feat.ibrsb || cp->extd.ibpb )
--        vmx_clear_msr_intercept(v, MSR_PRED_CMD,  VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_PRED_CMD, MSR_RW);
-     else
--        vmx_set_msr_intercept(v, MSR_PRED_CMD,  VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_PRED_CMD, MSR_RW);
- 
-     /* MSR_FLUSH_CMD is safe to pass through if the guest knows about it. */
-     if ( cp->feat.l1d_flush )
--        vmx_clear_msr_intercept(v, MSR_FLUSH_CMD, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_FLUSH_CMD, MSR_RW);
-     else
--        vmx_set_msr_intercept(v, MSR_FLUSH_CMD, VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_FLUSH_CMD, MSR_RW);
- 
-     if ( cp->feat.pks )
--        vmx_clear_msr_intercept(v, MSR_PKRS, VMX_MSR_RW);
-+        vmx_clear_msr_intercept(v, MSR_PKRS, MSR_RW);
-     else
--        vmx_set_msr_intercept(v, MSR_PKRS, VMX_MSR_RW);
-+        vmx_set_msr_intercept(v, MSR_PKRS, MSR_RW);
- 
-  out:
-     vmx_vmcs_exit(v);
-@@ -1429,7 +1429,7 @@ static void cf_check vmx_handle_cd(struct vcpu *v, unsigned long value)
- 
-             vmx_get_guest_pat(v, pat);
-             vmx_set_guest_pat(v, uc_pat);
--            vmx_set_msr_intercept(v, MSR_IA32_CR_PAT, VMX_MSR_RW);
-+            vmx_set_msr_intercept(v, MSR_IA32_CR_PAT, MSR_RW);
- 
-             wbinvd();               /* flush possibly polluted cache */
-             hvm_asid_flush_vcpu(v); /* invalidate memory type cached in TLB */
-@@ -1440,7 +1440,7 @@ static void cf_check vmx_handle_cd(struct vcpu *v, unsigned long value)
-             v->arch.hvm.cache_mode = NORMAL_CACHE_MODE;
-             vmx_set_guest_pat(v, *pat);
-             if ( !is_iommu_enabled(v->domain) || iommu_snoop )
--                vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, VMX_MSR_RW);
-+                vmx_clear_msr_intercept(v, MSR_IA32_CR_PAT, MSR_RW);
-             hvm_asid_flush_vcpu(v); /* no need to flush cache */
-         }
-     }
-@@ -1906,9 +1906,9 @@ static void cf_check vmx_update_guest_efer(struct vcpu *v)
-      * into hardware, clear the read intercept to avoid unnecessary VMExits.
-      */
-     if ( guest_efer == v->arch.hvm.guest_efer )
--        vmx_clear_msr_intercept(v, MSR_EFER, VMX_MSR_R);
-+        vmx_clear_msr_intercept(v, MSR_EFER, MSR_R);
-     else
--        vmx_set_msr_intercept(v, MSR_EFER, VMX_MSR_R);
-+        vmx_set_msr_intercept(v, MSR_EFER, MSR_R);
- }
- 
- void nvmx_enqueue_n2_exceptions(struct vcpu *v, 
-@@ -2335,7 +2335,7 @@ static void cf_check vmx_enable_msr_interception(struct domain *d, uint32_t msr)
-     struct vcpu *v;
- 
-     for_each_vcpu ( d, v )
--        vmx_set_msr_intercept(v, msr, VMX_MSR_W);
-+        vmx_set_msr_intercept(v, msr, MSR_W);
- }
- 
- static void cf_check vmx_vcpu_update_eptp(struct vcpu *v)
-@@ -3502,17 +3502,17 @@ void cf_check vmx_vlapic_msr_changed(struct vcpu *v)
-             {
-                 for ( msr = MSR_X2APIC_FIRST;
-                       msr <= MSR_X2APIC_LAST; msr++ )
--                    vmx_clear_msr_intercept(v, msr, VMX_MSR_R);
-+                    vmx_clear_msr_intercept(v, msr, MSR_R);
- 
--                vmx_set_msr_intercept(v, MSR_X2APIC_PPR, VMX_MSR_R);
--                vmx_set_msr_intercept(v, MSR_X2APIC_TMICT, VMX_MSR_R);
--                vmx_set_msr_intercept(v, MSR_X2APIC_TMCCT, VMX_MSR_R);
-+                vmx_set_msr_intercept(v, MSR_X2APIC_PPR, MSR_R);
-+                vmx_set_msr_intercept(v, MSR_X2APIC_TMICT, MSR_R);
-+                vmx_set_msr_intercept(v, MSR_X2APIC_TMCCT, MSR_R);
-             }
-             if ( cpu_has_vmx_virtual_intr_delivery )
-             {
--                vmx_clear_msr_intercept(v, MSR_X2APIC_TPR, VMX_MSR_W);
--                vmx_clear_msr_intercept(v, MSR_X2APIC_EOI, VMX_MSR_W);
--                vmx_clear_msr_intercept(v, MSR_X2APIC_SELF, VMX_MSR_W);
-+                vmx_clear_msr_intercept(v, MSR_X2APIC_TPR, MSR_W);
-+                vmx_clear_msr_intercept(v, MSR_X2APIC_EOI, MSR_W);
-+                vmx_clear_msr_intercept(v, MSR_X2APIC_SELF, MSR_W);
-             }
-         }
-         else
-@@ -3523,7 +3523,7 @@ void cf_check vmx_vlapic_msr_changed(struct vcpu *v)
-            SECONDARY_EXEC_VIRTUALIZE_X2APIC_MODE) )
-         for ( msr = MSR_X2APIC_FIRST;
-               msr <= MSR_X2APIC_LAST; msr++ )
--            vmx_set_msr_intercept(v, msr, VMX_MSR_RW);
-+            vmx_set_msr_intercept(v, msr, MSR_RW);
- 
-     vmx_update_secondary_exec_control(v);
-     vmx_vmcs_exit(v);
-@@ -3659,7 +3659,7 @@ static int cf_check vmx_msr_write_intercept(
-                         return X86EMUL_OKAY;
-                     }
- 
--                    vmx_clear_msr_intercept(v, lbr->base + i, VMX_MSR_RW);
-+                    vmx_clear_msr_intercept(v, lbr->base + i, MSR_RW);
-                 }
-             }
- 
-diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-index 0a84e74478..e08c506be5 100644
---- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-+++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
-@@ -644,18 +644,8 @@ static inline int vmx_write_guest_msr(struct vcpu *v, uint32_t msr,
-     return 0;
- }
- 
--
--/* MSR intercept bitmap infrastructure. */
--enum vmx_msr_intercept_type {
--    VMX_MSR_R  = 1,
--    VMX_MSR_W  = 2,
--    VMX_MSR_RW = VMX_MSR_R | VMX_MSR_W,
--};
--
--void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr,
--                             enum vmx_msr_intercept_type type);
--void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr,
--                           enum vmx_msr_intercept_type type);
-+void vmx_clear_msr_intercept(struct vcpu *v, unsigned int msr, int type);
-+void vmx_set_msr_intercept(struct vcpu *v, unsigned int msr, int type);
- void vmx_vmcs_switch(paddr_t from, paddr_t to);
- void vmx_set_eoi_exit_bitmap(struct vcpu *v, u8 vector);
- void vmx_clear_eoi_exit_bitmap(struct vcpu *v, u8 vector);
--- 
-2.37.2
-
+Jan
 
