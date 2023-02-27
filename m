@@ -4,42 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB331C64ED6
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Feb 2023 14:50:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.502672.774562 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07487C64ED6
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Feb 2023 15:00:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.502680.774581 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pWepB-00069R-P8; Mon, 27 Feb 2023 14:49:57 +0000
+	id 1pWezM-0000lF-3s; Mon, 27 Feb 2023 15:00:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 502672.774562; Mon, 27 Feb 2023 14:49:57 +0000
+Received: by outflank-mailman (output) from mailman id 502680.774581; Mon, 27 Feb 2023 15:00:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pWepB-00069K-MI; Mon, 27 Feb 2023 14:49:57 +0000
-Received: by outflank-mailman (input) for mailman id 502672;
- Mon, 27 Feb 2023 14:49:57 +0000
+	id 1pWezM-0000l8-0g; Mon, 27 Feb 2023 15:00:28 +0000
+Received: by outflank-mailman (input) for mailman id 502680;
+ Mon, 27 Feb 2023 15:00:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mutd=6X=citrix.com=prvs=4152eaadc=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pWepB-00069E-5F
- for xen-devel@lists.xenproject.org; Mon, 27 Feb 2023 14:49:57 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc6b907a-b6ad-11ed-a82a-c9ca1d2f71af;
- Mon, 27 Feb 2023 15:49:53 +0100 (CET)
-Received: from mail-dm6nam10lp2108.outbound.protection.outlook.com (HELO
- NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.108])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Feb 2023 09:49:31 -0500
-Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
- by CH0PR03MB6052.namprd03.prod.outlook.com (2603:10b6:610:bf::11)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=10za=6X=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1pWezK-0000kp-SZ
+ for xen-devel@lists.xenproject.org; Mon, 27 Feb 2023 15:00:27 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20612.outbound.protection.outlook.com
+ [2a01:111:f400:7d00::612])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 75d58f42-b6af-11ed-a82a-c9ca1d2f71af;
+ Mon, 27 Feb 2023 16:00:24 +0100 (CET)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by DU2PR04MB9194.eurprd04.prod.outlook.com (2603:10a6:10:2f9::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6134.29; Mon, 27 Feb
- 2023 14:49:14 +0000
-Received: from BYAPR03MB3623.namprd03.prod.outlook.com
- ([fe80::8299:f95f:934b:29e8]) by BYAPR03MB3623.namprd03.prod.outlook.com
- ([fe80::8299:f95f:934b:29e8%7]) with mapi id 15.20.6134.027; Mon, 27 Feb 2023
- 14:49:14 +0000
+ 2023 15:00:21 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::154e:166d:ec25:531b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::154e:166d:ec25:531b%7]) with mapi id 15.20.6134.027; Mon, 27 Feb 2023
+ 15:00:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,368 +49,218 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc6b907a-b6ad-11ed-a82a-c9ca1d2f71af
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1677509393;
-  h=message-id:date:from:subject:to:cc:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=iY4MRneShEdl09YptamtBOd+4nAdAUzUI3hqOx8TSnI=;
-  b=drxHuMXPANluVEXH4UrcOTKc4A7+K50G7b6P5ze+F2/ZZ4rwSKgduG2D
-   7LKeFiQb6SR83r0Xtpn0/CHNq9bWyQZ+bhjbg0RUtfXZ5icQrVi00RgIg
-   IV/K5opOO53ep31bm8go8I6Na2ZCvjLYz1OUycitiDxWTybdzlUmbASMt
-   Q=;
-X-IronPort-RemoteIP: 104.47.58.108
-X-IronPort-MID: 98697399
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:9BTA8aI9x4F26OLAFE+R6pQlxSXFcZb7ZxGr2PjKsXjdYENSgTEGy
- GsZDGGCOvqCM2b3KYh2O4Sz80gH6sWGytJrTwVlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPTwP9TlK6q4mhA5AZhPasjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5RDD1S5
- P01AQoLdzKq3KWEzKC6Ws1F05FLwMnDZOvzu1lG5BSAVbMKZM6GRK/Ho9hFwD03m8ZCW+7EY
- NYUYiZuaxKGZABTPlAQC9Q1m+LAanvXKmUE7g7K4/dnpTGLnGSd05C0WDbRUvWMSd9YgQCzo
- WXe8n6iKhobKMae2XyO9XfEaurnzHOlCd1JRezQGvhCgVKS+lY6LwYsaVqi+aCXmEK+R8tYJ
- BlBksYphe1onKCxdfH/UAe/u2WspQMHVpxbFOhSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
- 1SV2dTzClRHvbGKSHTb6rCOqjCaMiwSMGNEbigBJSMa5/HzrYd1iQjAJuuPC4awh9zxXD31n
- TaDqXFmg61J1JZbkaKm4VrAnjSg4IDTSRI47RnWWWTj6R5lYImiZMqj7l2zAet8Ebt1h2Kp5
- BAs8/VyJshXVMzlePClKAnVIIyU2g==
-IronPort-HdrOrdr: A9a23:/Q2e06lgUTnC7d2hrQ1l2HYVL7vpDfIp3DAbv31ZSRFFG/Fw5P
- re+cjztCWE7Ar5PUtKpTnuAtjnfZqiz+8X3WB8B9uftWrd1ldATrsSj7cKqgeIc0fDH4Vmup
- uIHZISNDQlNzlHZc2T2njeLz5XrePmzJyV
-X-IronPort-AV: E=Sophos;i="5.98,219,1673931600"; 
-   d="scan'208";a="98697399"
+X-Inumbo-ID: 75d58f42-b6af-11ed-a82a-c9ca1d2f71af
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MKlC4Kz2GNlwcrVE0EzJk07NMm5b3vHM1Y1qzDy35f98vCKrh7pCY4A47cf7yWQajpZGs8s3QLsBXI2V2ueJeviS6i/xugbaTvAGXA8K3yJo4AMyCd0fBl3NlLjTds9QCP3ahEEunokQ5Wv6SiPxXedCpmYthRJKKA+As9ujIntRW/dpL5hI2FnY9NfoD3H5oyil1II9+VgIDySrEwBJD4y76ocytGUkta7om5Vbi7Ir60N+e1975zTgbYulKfG8a6JyY/VpLbZHn1XdbiQ5FnijV+8C6VxCbw6d6CylXpqOp9+XHafDb/xCbuJnKuo3gAF+B2Xr9Sl0PO45IdEWBQ==
+ b=nRC5qHIioGtzUqXVRIwn2yvnb82hDVzM7S0siVnGz77pjCx69x1mXE7MmcVk2xI6avWjk9ZZHv4nzqi/oco8h7HahHS0c4WdqT1EXDhEdvL1bdpqvXKLDAPauAhgY2paR23X7LaHSSiWl9sHWR9XNCrRE9CXDl/qhSuxZXjnqIkO2CcfSdpklzOytecjOTZGvZ5JM1PDhDHqapXDJNFY3bh71JDqFbEd8+Ds2vb3sJ+7gKVLc6PRpaD8/BCchfu4lUy5bUBLqrAxyA95XcKN6TfV2VjuluLFDhCZ8UvW5h3oy6svvjD4kHV3e3yHq2mnBC6rZB08oF94LM7ZbhDbWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iY4MRneShEdl09YptamtBOd+4nAdAUzUI3hqOx8TSnI=;
- b=N50nCkxifC2PiontIPc/q0qBzNSHTPNaNHnNve47LowRlM0tJUhW7I5GQah4EICSxSNVoRKmRqJVvWQikpNvqn3875sSvqXzSf8+dKGljiakKR9HKLXiwBBfPuCd5kR55QJnbB4AofGd70Uo2GWs65EF2mT6Vfs+kO8WdEqcFFsFRZIuod7d9khFoRL3hnAiucS4+a0ya+W8sMG8YgoZW1hXFNh52CKoEOg280wNqcFYOaVhm35Zt0AkyqRAf8jpAmWruImaxSUyGjSU61klcl+BE+nwnFn/3srxkBQMO1rTKs+L7Mcd55JSY13tFpTCFsc9vHwiQEMWTEdjUf1SEg==
+ bh=3OszXZPctgpmr94+qLqKPiPURi8jAc9g+E/ezLbDIm4=;
+ b=CsTLui51g3vEulYMhH0vdYdrbWvihGAZg+OEh5WeSUcpupdhdv0n0nIaTuV1uErZld7888JuVcuu45iwOT/Gn2Vd2ku8GnZzdnBFlxBkSSRSTMTQ3J0c7x4RwrnwFvznDKvrDl6CHYUo1Gx22Er4h3L+V4iDgqcBctLRZ6Jv041eAjPzWIwggs1JKx5VIg7Kn+All6AZqG3nN+/SgKyXVqofjwYbCCLg39N59RaELdX0lQmG4X70mur/Bzu14VSIeKobDt47ouJ4U/YM1hqGS7DFncLKSlunJQCNhakGA4yedEWvx57QOECxFGmmNOeQMC92m2y0AmKaXTCun3PiKw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iY4MRneShEdl09YptamtBOd+4nAdAUzUI3hqOx8TSnI=;
- b=MgKXVVFkLVV3Mc+CCurba6UJanH41TqmN41B9N0PupIArZm/0k4xYXLDzAoB7TvHhBeAZZSNbUpzacmBY5kd7ypiacIlsLboGscvkPgnF3yo3hQq0LL+wT405k45rpNdvRuKYhy9C1OiSmzsvzoNXDTQC3FiZ8hzRtC/7d2Nd40=
+ bh=3OszXZPctgpmr94+qLqKPiPURi8jAc9g+E/ezLbDIm4=;
+ b=l2K0lFI3yySyr+mFSTA4BnaS3E7awn8PdHWaIXc16AAC+aw85zyX4sHigpdzdi7xQYklj2D0fpx6WQeHpPYcibZjgFlunHJUR0c0Frgm+7MTV9SqcOrJZ79UPXwk2oUw+hb/ZU4KHyoxyK3+hLkjTH5BgfIK5Yuul4nI/4MMaIi20SCSjDl3RO2xPHpudwHHak9MIK3lNU6BxthRf5bTFv/zROYBCU7zxEt2/YFe8ZqYhgi3sYARF3jJA7P8WLjOdAMdvFAAv1LVdKT+rN0btK5E5vp02MounKBRyPk+4bs86By1mfpkTmCyVveMcSRVov0jSCcvUQJZKMyihyylBQ==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <01313963-0cdf-e681-b0d7-9d0e756ea6a2@citrix.com>
-Date: Mon, 27 Feb 2023 14:49:09 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v1 1/2] xc_core_arch_map_p2m_tree_rw: fix memory leak
-Content-Language: en-GB
-To: Juergen Gross <jgross@suse.com>, =?UTF-8?B?RWR3aW4gVMO2csO2aw==?=
- <edvin.torok@citrix.com>, xen-devel@lists.xenproject.org
-Cc: =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>,
- Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-References: <cover.1677245356.git.edwin.torok@cloud.com>
- <c721e627bc74047c0c5e55c0aeae7d72bbc3ce0e.1677245356.git.edwin.torok@cloud.com>
- <12b656b2-76d5-2ce6-9548-5ee8e57451ae@citrix.com>
- <deecfab5-0622-f004-d592-1c186fc241ae@suse.com>
-In-Reply-To: <deecfab5-0622-f004-d592-1c186fc241ae@suse.com>
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <8bb1d032-639b-d6f4-28f7-2f5e5fbcbf4e@suse.com>
+Date: Mon, 27 Feb 2023 16:00:21 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] build: add crypto/ to SUBDIRS
+Content-Language: en-US
+To: Michal Orzel <michal.orzel@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20230227095315.6483-1-michal.orzel@amd.com>
+ <c16cbd72-9a5d-cea7-dd17-c9521328fffa@suse.com>
+ <113d8d74-19a6-85da-8b89-1a21bf95960e@amd.com>
+ <bbf3edac-d992-28b0-91b2-ca97159fbce2@suse.com>
+ <c38e0913-e588-712f-6e0f-698f9dbf51ba@amd.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <c38e0913-e588-712f-6e0f-698f9dbf51ba@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO2P265CA0488.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:13a::13) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FRYP281CA0014.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::24)
+ To VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR03MB3623:EE_|CH0PR03MB6052:EE_
-X-MS-Office365-Filtering-Correlation-Id: 648169a4-31c3-4c88-91d2-08db18d1cb79
-X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DU2PR04MB9194:EE_
+X-MS-Office365-Filtering-Correlation-Id: 56b89852-4104-4587-5001-08db18d358d9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	PsrjJZBSRRPHzWdtAleWQN9fnj+byDku+VVXprYmKkcGOHpFY6zUvpze9u/ptJk06bWgcEAXjSfQF57U/221dCgQEJns76mQ6lv65SgdX4uEPalftMZJ8PAUDYOZHNIyQZwR1yV0HoulVY30FGqqYWC9bRtPRinky2kBpxe9p+/BBjJypTzwPf6Grpf3yvddLC/RDpncf2UqZfWmBt9ADKStZCZOvLpIDxQL/CYa1Qxt+OQ5O4cmWRSRUpjQCCktYfzmTJIino5P8HvbyC93fupKVHIYSEQ3SkToGj/qPwp2IsaVbb80nliHVxy9mlgz7zpUM1bPS0lwSQMgWmyhEzf8FNzUSdDSfh86rsqF5n2MFlP2503ymbt//5v+RHVYenlOVRGHBU+9N9aQuc7qDDexViYFg4B6rTO+0VbCbIuQaZiEwqGp449/9wqunRhgNLBPgoafzsI5S0M/09MU368cWLiN0zXZHPvLditAqetLDXutGRIEfvL8fJPlLTK8+WrMWC8aypV3Wxc6steo4E3EvfgaHSvLYnLeuyMjFZnTWhH8TpBAggPOEu52fH/nB71jCwiz2H6RCJFiqHb2KBSKgA3Hhc1QonLnph7CJcoTvKeULJk0z1WHLlA5W8WoFZuYlJ1QleIlG5mb1OHwp+5iaPgQh7do86y9oDRhP1m2kzgS8FIIByyobNjNhWymIaeNqa+lyoOlIF18XRFjUoAMPaG4tUCHV8ZzJyTqwmLpBqmnkM6pULBR+Y640+IBtpj+e3IPwhKD6RaKuO1pTw==
+	Lxbsg4dmprx2mQTXHiYWrFIk42BLzIStmoOuSG2ZGzNzX8Z9AmR4yr49qr2ziUwmiEIC8kMx2rLSdVh3oRkd1e+Bj3krA9AJ3kl6KeIJRaU06TXBysokv67h85ip8CekJZovIjpns8pyJQmrhLwA9df+401js+LuJuurAwwTSZrl/znVvqq0QQ4bADKZKop6CDRmSywCQQJabnz5vbHYv8OP6Oahx/2daypWHmvSJIN9497ouzaGt5fGY6V8+GcYpljRZ5Sw/BQvwEoQB8/BTn48X70MrMTToXSNYLLEnHfSM+UQXmJa8UowWBHjwPKJWTKMpwoonToUTCYNH3wVsGn3NidYvz7rQ0UnowLvPN4i41iG22uISLDGEQl8ntSshcD4tGrCkDTyrqhj0iGQkURJMCayIICz7PJxY1eIyjuGVfgCB3fWuie+eiWxpIQDiMAafSbIjHgRcPiUH6/GYomUQb049gYGbLJ09azhEbZP2KUhDskXJ1IgeZgJumth9WRbMbSEDtoM4PIyqq5xGguyOvuVfYriIaoqveirUOXIGswFFfsvTjhkypVQ66jU7sby4B7DZpkkgPewEOry5UAquNLBPBGQClv3kPbwZoeGerLlQStAiFFRaz+kD9qmYPx5u43dQEY+5VGcV9ZfS84JFLdxyAdnItB5Rqua+fnfbV3OJ1JdIhRFAqupTG9YCSjTPh3YJndkiW+OOHotnVnrnnAh9OwF5zUkuk6zHGQ=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(366004)(376002)(346002)(136003)(396003)(451199018)(36756003)(110136005)(316002)(54906003)(6486002)(5660300002)(2906002)(8936002)(478600001)(66556008)(66946007)(66476007)(8676002)(4326008)(41300700001)(82960400001)(31696002)(86362001)(38100700002)(6512007)(26005)(107886003)(53546011)(6506007)(6666004)(186003)(2616005)(66574015)(31686004)(70780200001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(346002)(136003)(376002)(396003)(366004)(39860400002)(451199018)(4326008)(41300700001)(66476007)(66556008)(66946007)(83380400001)(8676002)(6916009)(38100700002)(36756003)(2906002)(31696002)(86362001)(5660300002)(8936002)(2616005)(6486002)(478600001)(53546011)(6506007)(54906003)(186003)(6512007)(26005)(31686004)(316002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?a1Zjelp6eTdzbjdnQlB2SGQ0TSthVmpRR09Tam05M1B2OU50WWZUeloxeUVW?=
- =?utf-8?B?c24ycm01Q3VRYzJqZnlneFdpNzFzMkl3QVpTZkxHYUhXREdwQWROV2pJdk52?=
- =?utf-8?B?UkFOVUgrenh4aWJwZXJIRXpuUzBPOXUyYkVEUk5CZFBqNHhiejJZZTJlMk9K?=
- =?utf-8?B?eHJwQ09zUFdWelZYbU51MHZ6Zk5FRHVDbUtMTEZRZnV2K0RyODBvL3lTNDJl?=
- =?utf-8?B?N2FveEU3YS9pQWZRT0wwS1k0SXc0NVJNcEZBY2tsZ3lTRXh0MDJtNjVlK3Fh?=
- =?utf-8?B?eWRKWTdkeVBYdUswR1d4MHExWlVybVViUE9nZmtmKzJVSzY0RE1KUjhXYnFD?=
- =?utf-8?B?QUpLenFvZkJidTRzTFl5SjloQXFFd0lNakxYS2FaU2pJalpDTWsxSG5NZ3ll?=
- =?utf-8?B?d21OYjNGWjdHRHFvYzhyTXAyNEpyakovcnNrRk1mMEg3NHBjSlZkUEtWdWph?=
- =?utf-8?B?SlJ1NGVJZFJsMUloak11UTh4cE80OUZtMTIrSkdCL2JpU0E3V1NhUEdKbCtu?=
- =?utf-8?B?ZWJQR3h6VkxlZUlFQzduaHZCMWxDc3daeUhLQlF2Z2xZVGJDN2hySkNDaEFo?=
- =?utf-8?B?Q0tmcjcrUUM0YmJoNFVsRDQyV2FwM0JyMlJIYnlKMHBMd0hiaTVpSjhZdkNl?=
- =?utf-8?B?R2o2RW84OXhnR2thK3pLQjBRbFVtOHRvV1ZpMjgwMTJDeEw1T2JvcFJIbDFC?=
- =?utf-8?B?dDdZSFZ5bUd4bkpkV0Y4YmNVMG93UElrQlNyZEJGQXcveW5IYVdxTVZybk5Y?=
- =?utf-8?B?b1huTUFyT24zSGpFbG56UjBaM0ZsalJNVmVzSjdCYTBtNUMxQXNDUHdBTjE5?=
- =?utf-8?B?b1ZxeHlKL1Z3MHo1WjJ2TUc3ejRwQVdnaTNKUTZzK2dNbjV2QmVYRFFBNzR1?=
- =?utf-8?B?TlFQb1A2YTZ0eU9IbitJQWVhcTY3VlAwSXlBOTlpRXcvekpyYnBFV1dyUVQy?=
- =?utf-8?B?RTdhWmluUEdjdDZBSnBGZk41ZUgrSFd5LytoVXlTWk9RU3NacFJaWXVRQ3VF?=
- =?utf-8?B?MXhqWVB2K1FSRDRZbS80NDZKV1BzZUo3NDJMMHU0OThwMEhYYW5UYllWZVVZ?=
- =?utf-8?B?K3FZQWxZQitmV0hIUjhhV2xCSjVoVlNGdGZjMm5SSkZtZHdXWGVOOGZVVjJC?=
- =?utf-8?B?T3p0em1IWVdqelZyczdFYWlwZ3diNjJ1S3luaVBKMjhwRzVzK2xGMy9hdGdC?=
- =?utf-8?B?bTRiMGN6UjU5SDdwTGRtWHYxRytlTDRMVSt3MVN4VE11bUtNMy9iVDhnQ0Ex?=
- =?utf-8?B?czVyWmZCUkp3dU5UOGlBUzBtY2dGdThnNHAxQWVTTmxNczJCTld1VTdIUTdi?=
- =?utf-8?B?bjJrb0Y0di9zZE5hWFZtaDdFSi9HMnRaRnMvZHkwcVRJME5GNElJdFVXOEJL?=
- =?utf-8?B?MVJmNVJRcWQwdjV4UXVHVUhYV3MzUUxaSlgzeDJKSjJFYnR0ZzBudnJUejlK?=
- =?utf-8?B?ZE9LbmphVzlyUmh3bmZRa1l2amlKaTNzZzVhVmtQZVFTTGhJKzlTTmRwbjgz?=
- =?utf-8?B?VjZSWWtCbDU4RGhZYTEwcHliK0J6ZjkrdGkva3NDUnZwbllPNjZvWW1GZUMv?=
- =?utf-8?B?aXVnZ0xoT2VPWEJVczNQcm4vSVJ6aGRUWGgvdWVWZ2NSTzVIc2JUb09VL2lW?=
- =?utf-8?B?cU5RMThxYmd3UFJ1VzVwa2FVTVp5MTlyZENVQmw1c2JjRVRVL2p4d3B2Q2Q5?=
- =?utf-8?B?eS9rbTg5ZGFjdzhZR1hvRmFKK3IzZTJrbThJY09qbWQ3dy9XUGtCekpaV0ZZ?=
- =?utf-8?B?NnVNRUJWWGd3TTJvd09sS2F5K1FJZzlsWjVNblcwbng3SUVjMXpUYm01Tlda?=
- =?utf-8?B?QjFiRDZSRUc0SmdsV3JtSC9zUVBMMEQzYmJiNWtlNUsvQnU1d2Z3ZzMrVlYw?=
- =?utf-8?B?dk5jODErcndvT3VubnRiUnZ2STlJQ2dRSlhnUWJBL2ZNZGo1OU9NOVpGS3Qz?=
- =?utf-8?B?djhwY0FNMEM2S3RyRFZ6eXpLUEhrNlo3ekdOTVdodnp0RFRPMWc1eGx3TUhP?=
- =?utf-8?B?S2E4d3BXRFRrRDNvWVpRNFNMbmV5VUJGamtVN0tKR0RLMC9tMzlpSGtZUXRQ?=
- =?utf-8?B?aGQraDF6MCtyQ0QzR3BuU3kwaUtrUFlxV3d5UzBYM3U3V1lGNU44KzVjV09B?=
- =?utf-8?B?Q1h5Wk9zZTVBZjYyTmdFdjh5b1RPcmJ3dlVlY01PN0dkRGdFMDN2ZUdpbFhu?=
- =?utf-8?B?clE9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	j25bI4ygAPN5sLv0ml61VJXZDQ4rQbJUJBSjvvyvMcourPUnE9FMhqm31yc0ykS2eB9QDpRua/GWBCGc1vqW82L0gab9e7+vId8ATnLclC67sSDWe8xfVV70jhuwsDtDSxtvdsnhy9ip2wcmOllTp5W9Q4/ExYrwLIVLjcvkJJTUkCtP2bcTbwtKN8UP530U0PkMkjjw9+qCDqmI0VeuzMjvRjHxj4Lc81Wg6yESaGTMccmW2io2P0U/03pWBRgOK5qO3laAIRVLDFCXtMxPtdBBCM0y1FFx5tnNR0lKJx7iq6xGjcHUMiYuuPhz5GnDPzxv8fB/hrszFK1wF7wUymHAFN1UYwMkhI/q80MAqIk9aIQNn7gDaQrCyu6ATugtAJqBLd4RDXdp9H8dmfISDhvmtswtqjQkCy4XIhFONTIg6OXO5OcZF74a1xXcp6FpN88Nf2sFW1z9+ahxu3ITLUtp1mAQD3nfIQ3TfH/GMvpOrwf3+Dx3P4UijFo8dQsmWd4g53a4hUP8oObq+bpKyzqtCh+pY39LGsHAWNAHxU7Fms2wWzlky8vRFKhU3HYVNgnmZJ+HHcUoz+kLi6yinMffAM+ld4uDNcoK+DorueYt9af2Y9UTB2VH0Sy5jny7v7mmUWQatEnXjBZkiQK54RoDEAPL9s3RDrF1zN0S4BJrZ9xna4LyYPCGO1sIiDBFBu3KUVG0/UORa2DmlvqCU82H/uT20oUZ5TbP8MeNx0n0rAxCUK43dAryUOsGfClckOFZCLC+QWzqdDk6TGH6ad5VVnyt1fhAHZZ9U3115AHswrbApta2wATGsAGbTG5SNSD3x5OU83i3MOXpAwVnc0OLhObJpPfnE8x9NQWrhnM=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 648169a4-31c3-4c88-91d2-08db18d1cb79
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+	=?utf-8?B?RC9CVDVJa3NGM0k5TStQUG5kRTJQakxPeWNJQ2ZoMEVrZlZnalE2VEUvRUw1?=
+ =?utf-8?B?SXl5bm1YVlE5NTR3UHEzSkZYckRvM1JuM2RPdTdGMzRwVk0veEN0dnZ2VytK?=
+ =?utf-8?B?Q2hmOW5PczIwYXdSVjJpWGVnSllPRVRrby9jOHQwM3duVFlock5sOXlpWGRk?=
+ =?utf-8?B?R0VzNnkveFRqWnRkbHMwVTdmL2lkQ2dtNFVUK050eGxxVXZ0bW42emcyN1or?=
+ =?utf-8?B?WmVPWFNYMFNjektZeHNtak5CYVBzWlphNHhSTUdUN1lYOU1vUEU3YWF5cEtH?=
+ =?utf-8?B?blJmb2ZEbUlxc0FBRFg3eUVDT2UxR2hRYlA0VUl6MVl5Sk5OUlREVFFndS85?=
+ =?utf-8?B?VTlROTRvY2k5bm1DcUZWWHpnSDdGT2FNTzBOMjEzSU54cnZhNGc1MnozOCtZ?=
+ =?utf-8?B?MVhIelV4a2lpdGljNEhNbU5hdFJIZ0VuQUc2STlUZXo0K0k3TEQ4NjNmUWsx?=
+ =?utf-8?B?UVdFWWpzSmJ5T1lWOUVTN1FVcnUzaFJ5SmNPZy9Yc2kyZXhPT3FMc2ovbmRJ?=
+ =?utf-8?B?aTB5b1pTeHFiS0Jld1BzOGlFVHpueUNjaWZiTkxIZ3M1NUVZeXlkajJTMTZV?=
+ =?utf-8?B?Vkc0cllNS05EdnhXQUJXWERmbkh2RndpL0FHTitHMkl0U1NiL2t5NTRZYUJL?=
+ =?utf-8?B?dmpsc0tYbk1DaXVQdGYwS0tYemVoRUEvMi9OakpaYVFrWTM4dXRFVTdEMGlY?=
+ =?utf-8?B?Nk4wTW9aSU1RQzBFbXpLcGJQREFHMDMxL0ZBajBrRjlYcWwzYUtTN0hWT05M?=
+ =?utf-8?B?WGFNNzNHbUVSV2F6dmhrQlAwWi9IbUJZMG1XWStTL0lIdmNIYjQzQVE3cFFq?=
+ =?utf-8?B?TEZhV21jZzJUdGhkRFZYQUY4TkhVVlJya3d4ak5lUENtOHR3ZHNId1ZHYkRF?=
+ =?utf-8?B?T0Q1NXlhM0Q1K0tRNyt1VlRuc0l6NkM5ZmRpbVY3RktDbHF5WThHZlUxbzZp?=
+ =?utf-8?B?Vk1URjJ0RmdWS1FYTzc5ZElZTkZucW5vejE1MGo3aHlHRVZzUlJreU5BTjRo?=
+ =?utf-8?B?NUVmRExsOHFOVkNqa0w2QzYxNVljN2gydDNOYmRCcThSSGcyYjlwT21zcHZq?=
+ =?utf-8?B?ek16b29PdE9Bd1VFNjd5WExKMk5OOTBnQmxFOGZLNUdGY0tXWkRzbmpacEdm?=
+ =?utf-8?B?NHkreERMaEpQbktXVWdzdHY3V25UaW1ETnl1TlNwMWJUVEZkQWF0YmRaZ3c5?=
+ =?utf-8?B?RFZ2K1liMEJDYURtejNpcjlpS3J3bjVkNmMrK0poR095bTN6SWRDS3g5NWZX?=
+ =?utf-8?B?ZkpPOWlzM1BUVENwYVpVYjhrQWFmeDdPTDUrby9MRjQ4QVd1Um5ia0s4L1lw?=
+ =?utf-8?B?ZVYvK0V2Ky9vT1JXRUNsbElIdDY0N2MwZkZpcXpkbnhPUjFyVUFid29zdGZv?=
+ =?utf-8?B?RGpQWmlSblhlbkR0R1VxV1Q1cFJvdlVTb002MTIrRE5mc0EvcHRRUCtkUGlD?=
+ =?utf-8?B?SVNDT2hLN3ROM2R0R00yR1JwaG5LNVprRUR2VEtjYVhheFRmSk40T3NPMFMv?=
+ =?utf-8?B?UVRLSUt1ZitIY3hwcncyQjF0WXZMcUZ6SUZWUTcra25kWHZWNlpSOThHUlJ2?=
+ =?utf-8?B?djAwZU1JZXNudHJsN2JibUszRk52QUFvaE9tNG1WQkRBdTA5OXlXc1BhcEJG?=
+ =?utf-8?B?dVlyYWlFd3ZzYk1Kdis4cWlEazNQS0kxNTFxUzFUQ29qWFpSaHhNZ1lNZUlF?=
+ =?utf-8?B?aC95OUk2b3ZmSnZ5TUxONlRzcUJrZFFRMmFWeFdoSmMvN1JObDNkMUZ0UUdC?=
+ =?utf-8?B?QVNCeEsxR2s1T251cHB4OHA4S003ZnZvbXFhMnJnYmNBenFySS93cEV3YmM0?=
+ =?utf-8?B?MGVPZEJ2UkdUNHhOMWtqNDZKSnFIT3NwSHNKMUlUN0dFNEsrUlRjbWRLN0N4?=
+ =?utf-8?B?YmhqaVE1NHc0OG9zVWFNWFZFRE02S2VaRWNpczRLT24zbVgrdnBGcEJPOWRG?=
+ =?utf-8?B?SjJCS29FQUI0Wk9MQVN0eGFWUmtnMXI4ZG9ZWHRLejR5Qk0yZW1yZVpjc05W?=
+ =?utf-8?B?ai9sek9VcndCRmdKS2FzdjFqcGQ0OUkzbjB0cUFPSTR1bkk0aDU0YlJQdjlI?=
+ =?utf-8?B?Wk9Cam1UOFptUlJJSFpvR0UxZ3NHQTF2VXdwTkhXalBoQ2d3dFZFQjlLc25W?=
+ =?utf-8?Q?8F4zdKY8AcjQX+2rnIN4vdgJ2?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56b89852-4104-4587-5001-08db18d358d9
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2023 14:49:14.4968
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2023 15:00:21.2891
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TXJsVP6US8IdsHFVoLJqPjHw+smX/+iqFkt37YFyrZoIGH0zBqX+a7L67GWzGBqyF3g2TuVDi4TPUKSYGRG/Ac8Ioy7hHMBlxKY8DAHx3qo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR03MB6052
+X-MS-Exchange-CrossTenant-UserPrincipalName: Sorgwzm0yPvzzIixwFuBUv8HXdPCgZGGet+JeNtRiL5wwreoYrFA20XnDf6BD2KBRuV51eFj4Mb0ldUT3ft4Jg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB9194
 
-On 27/02/2023 2:42 pm, Juergen Gross wrote:
-> On 24.02.23 15:56, Andrew Cooper wrote:
->> On 24/02/2023 1:36 pm, Edwin Török wrote:
->>> From: Edwin Török <edwin.torok@cloud.com>
+On 27.02.2023 15:46, Michal Orzel wrote:
+> On 27/02/2023 14:54, Jan Beulich wrote:
+>> On 27.02.2023 14:41, Michal Orzel wrote:
+>>> On 27/02/2023 11:10, Jan Beulich wrote:
+>>>> On 27.02.2023 10:53, Michal Orzel wrote:
+>>>>> --- a/xen/Makefile
+>>>>> +++ b/xen/Makefile
+>>>>> @@ -589,7 +589,7 @@ $(TARGET): outputmakefile FORCE
+>>>>>       $(Q)$(MAKE) $(build)=. arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
+>>>>>       $(Q)$(MAKE) $(build)=. MKRELOC=$(MKRELOC) 'ALL_OBJS=$(ALL_OBJS-y)' 'ALL_LIBS=$(ALL_LIBS-y)' $@
+>>>>>
+>>>>> -SUBDIRS = xsm arch/$(TARGET_ARCH) common drivers lib test
+>>>>> +SUBDIRS = xsm arch/$(TARGET_ARCH) common crypto drivers lib test
+>>>>>  define all_sources
+>>>>>      ( find include -type f -name '*.h' -print; \
+>>>>>        find $(SUBDIRS) -type f -name '*.[chS]' -print )
+>>>>
+>>>> As long as it's arch/$(TARGET_ARCH) that's used here, crypto should imo
+>>>> also only be included when selected (or at the very least only when an
+>>>> arch might select it, which afaics is possible on x86 only right now).
+>>>>
+>>>> It would also help if in the description you made explicit that SUBDIRS
+>>>> isn't used for anything else (the name, after all, is pretty generic).
+>>>> Which actually points at an issue: I suppose the variable would actually
+>>>> better be used elsewhere as well, e.g. in the _clean: rule and perhaps
+>>>> also in the setting of ALL_OBJS-y. (That'll require splitting the
+>>>> variable, to that e.g. _clean would use $(SUBDIRS), $(SUBDIRS-y), and
+>>>> $(SUBDIRS-) collectively.) It is, imo, that lack of consolidation which
+>>>> has caused crypto to be missing from SUBDIRS.
+>>>>
+>>> I think what you wrote can be split into 2 parts: the part being a goal of this patch
+>>> and the cleanup/improvements that would be beneficial but not related to this patch.
+>>> The second part involves more code and there are parts to be discussed:
 >>>
->>> Prior to bd7a29c3d0 'out' would've always been executed and memory
->>> freed, but that commit changed it such that it returns early and leaks.
+>>> 1) If we decide to create ALL_OBJS-y from SUBDIRS, then we would need to carve out test/ dir
+>>> that is not part of ALL_OBJS-y and add it to SUBDIRS later on. Also, the order of ALL_OBJS-y matters
+>>> for linking, so we would need to transfer the responsibility to SUBDIRS. The natural placement of
+>>> SUBDIRS (including SUBDIRS-y, etc.) would be right above ALL_OBJS-y. However, when doing clean (next point),
+>>> need-config is set to n and SUBDIRS would be empty. This means it would need to be defined somewhere at the
+>>> top of the Makefile (thus harder to make sure the linking order is correct).
 >>>
->>> Found using gcc 12.2.1 `-fanalyzer`:
->>> ```
->>> xg_core_x86.c: In function ‘xc_core_arch_map_p2m_tree_rw’:
->>> xg_core_x86.c:300:5: error: leak of ‘p2m_frame_list_list’ [CWE-401]
->>> [-Werror=analyzer-malloc-leak]
->>>    300 |     return p2m_frame_list;
->>>        |     ^~~~~~
->>>    ‘xc_core_arch_map_p2m_writable’: events 1-2
->>>      |
->>>      |  378 | xc_core_arch_map_p2m_writable(xc_interface *xch,
->>> struct domain_info_context *dinfo, xc_dominfo_t *info,
->>>      |      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>      |      | |
->>>      |      | (1) entry to ‘xc_core_arch_map_p2m_writable’
->>>      |......
->>>      |  381 |     return xc_core_arch_map_p2m_rw(xch, dinfo, info,
->>> live_shinfo, live_p2m, 1);
->>>      |      |           
->>> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>      |      |            |
->>>      |      |            (2) calling ‘xc_core_arch_map_p2m_rw’ from
->>> ‘xc_core_arch_map_p2m_writable’
->>>      |
->>>      +--> ‘xc_core_arch_map_p2m_rw’: events 3-10
->>>             |
->>>             |  319 | xc_core_arch_map_p2m_rw(xc_interface *xch,
->>> struct domain_info_context *dinfo, xc_dominfo_t *info,
->>>             |      | ^~~~~~~~~~~~~~~~~~~~~~~
->>>             |      | |
->>>             |      | (3) entry to ‘xc_core_arch_map_p2m_rw’
->>>             |......
->>>             |  328 |     if ( xc_domain_nr_gpfns(xch, info->domid,
->>> &dinfo->p2m_size) < 0 )
->>>             |      |        ~
->>>             |      |        |
->>>             |      |        (4) following ‘false’ branch...
->>>             |......
->>>             |  334 |     if ( dinfo->p2m_size < info->nr_pages  )
->>>             |      |     ~~ ~
->>>             |      |     |  |
->>>             |      |     |  (6) following ‘false’ branch...
->>>             |      |     (5) ...to here
->>>             |......
->>>             |  340 |     p2m_cr3 = GET_FIELD(live_shinfo,
->>> arch.p2m_cr3, dinfo->guest_width);
->>>             |      |     ~~~~~~~
->>>             |      |     |
->>>             |      |     (7) ...to here
->>>             |  341 |
->>>             |  342 |     p2m_frame_list = p2m_cr3 ?
->>> xc_core_arch_map_p2m_list_rw(xch, dinfo, dom, live_shinfo, p2m_cr3)
->>>             |      |                     
->>> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>             |  343 |                              :
->>> xc_core_arch_map_p2m_tree_rw(xch, dinfo, dom, live_shinfo);
->>>             |      |                             
->>> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>             |      |                              | |
->>>             |      |                              | (9) ...to here
->>>             |      |                              | (10) calling
->>> ‘xc_core_arch_map_p2m_tree_rw’ from ‘xc_core_arch_map_p2m_rw’
->>>             |      |                              (8) following
->>> ‘false’ branch...
->>>             |
->>>             +--> ‘xc_core_arch_map_p2m_tree_rw’: events 11-24
->>>                    |
->>>                    |  228 |
->>> xc_core_arch_map_p2m_tree_rw(xc_interface *xch, struct
->>> domain_info_context *dinfo,
->>>                    |      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>                    |      | |
->>>                    |      | (11) entry to
->>> ‘xc_core_arch_map_p2m_tree_rw’
->>>                    |......
->>>                    |  245 |     if ( !live_p2m_frame_list_list )
->>>                    |      |        ~
->>>                    |      |        |
->>>                    |      |        (12) following ‘false’ branch
->>> (when ‘live_p2m_frame_list_list’ is non-NULL)...
->>>                    |......
->>>                    |  252 |     if ( !(p2m_frame_list_list =
->>> malloc(PAGE_SIZE)) )
->>>                    |      |     ~~ ~                        
->>> ~~~~~~~~~~~~~~~~~
->>>                    |      |     |  |                         |
->>>                    |      |     |  |                         (14)
->>> allocated here
->>>                    |      |     |  (15) assuming
->>> ‘p2m_frame_list_list’ is non-NULL
->>>                    |      |     |  (16) following ‘false’ branch
->>> (when ‘p2m_frame_list_list’ is non-NULL)...
->>>                    |      |     (13) ...to here
->>>                    |......
->>>                    |  257 |     memcpy(p2m_frame_list_list,
->>> live_p2m_frame_list_list, PAGE_SIZE);
->>>                    |      |     ~~~~~~
->>>                    |      |     |
->>>                    |      |     (17) ...to here
->>>                    |......
->>>                    |  266 |     else if ( dinfo->guest_width <
->>> sizeof(unsigned long) )
->>>                    |      |             ~
->>>                    |      |             |
->>>                    |      |             (18) following ‘false’
->>> branch...
->>>                    |......
->>>                    |  270 |     live_p2m_frame_list =
->>>                    |      |     ~~~~~~~~~~~~~~~~~~~
->>>                    |      |     |
->>>                    |      |     (19) ...to here
->>>                    |......
->>>                    |  275 |     if ( !live_p2m_frame_list )
->>>                    |      |        ~
->>>                    |      |        |
->>>                    |      |        (20) following ‘false’ branch
->>> (when ‘live_p2m_frame_list’ is non-NULL)...
->>>                    |......
->>>                    |  282 |     if ( !(p2m_frame_list =
->>> malloc(P2M_TOOLS_FL_SIZE)) )
->>>                    |      |     ~~ ~
->>>                    |      |     |  |
->>>                    |      |     |  (22) following ‘false’ branch
->>> (when ‘p2m_frame_list’ is non-NULL)...
->>>                    |      |     (21) ...to here
->>>                    |......
->>>                    |  287 |     memset(p2m_frame_list, 0,
->>> P2M_TOOLS_FL_SIZE);
->>>                    |      |     ~~~~~~
->>>                    |      |     |
->>>                    |      |     (23) ...to here
->>>                    |......
->>>                    |  300 |     return p2m_frame_list;
->>>                    |      |     ~~~~~~
->>>                    |      |     |
->>>                    |      |     (24) ‘p2m_frame_list_list’ leaks
->>> here; was allocated at (14)
->>>                    |
->>> ```
->>> Fixes: bd7a29c3d0 ("tools/libs/ctrl: fix xc_core_arch_map_p2m() to
->>> support linear p2m table")
+>>> 2) If we deicide to use SUBDIRS for _clean rule, then we would need some foreach loop, right?
+>>> Apart from that, there are other directories that are not part of SUBDIRS i.e. include/, tools/.
+>>> Together with SUBDIRS variable, it would create confusion (these dirs are also sub-directories, so why
+>>> not having them listed in this variable?). Also, I can see that we do clean not only for $(TARGET_ARCH)
+>>> but for all the existing architectures.
+>>
+>> I understand that the changes would be more involved, but I disagree with
+>> your "two parts" statement: If what I've outlined was already the case,
+>> your patch would not even exist (because crypto/ would already be taken
+>> care of wherever needed).
+>>
+>>> I would prefer to stick for now to the goal of this patch which is to add crypto/ so that it is taken
+>>> into account for the tags/csope generation. Would the following change be ok for that purpose?
 >>>
->>> Signed-off-by: Edwin Török <edwin.torok@cloud.com>
->>> ---
->>>   tools/libs/guest/xg_core_x86.c | 2 ++
->>>   1 file changed, 2 insertions(+)
+>>> diff --git a/xen/Makefile b/xen/Makefile
+>>> index 2d55bb9401f4..05bf301bd7ab 100644
+>>> --- a/xen/Makefile
+>>> +++ b/xen/Makefile
+>>> @@ -589,7 +589,9 @@ $(TARGET): outputmakefile FORCE
+>>>       $(Q)$(MAKE) $(build)=. arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
+>>>       $(Q)$(MAKE) $(build)=. MKRELOC=$(MKRELOC) 'ALL_OBJS=$(ALL_OBJS-y)' 'ALL_LIBS=$(ALL_LIBS-y)' $@
 >>>
->>> diff --git a/tools/libs/guest/xg_core_x86.c
->>> b/tools/libs/guest/xg_core_x86.c
->>> index 61106b98b8..69929879d7 100644
->>> --- a/tools/libs/guest/xg_core_x86.c
->>> +++ b/tools/libs/guest/xg_core_x86.c
->>> @@ -297,6 +297,8 @@ xc_core_arch_map_p2m_tree_rw(xc_interface *xch,
->>> struct domain_info_context *dinf
->>>         dinfo->p2m_frames = P2M_FL_ENTRIES;
->>>   +    free(p2m_frame_list_list);
+>>> -SUBDIRS = xsm arch/$(TARGET_ARCH) common drivers lib test
+>>> +SUBDIRS-$(CONFIG_CRYPTO) += crypto
+>>> +SUBDIRS = xsm arch/$(TARGET_ARCH) common drivers lib test $(SUBDIRS-y)
 >>> +
->>>       return p2m_frame_list;
->>>      out:
+>>>  define all_sources
+>>>      ( find include -type f -name '*.h' -print; \
+>>>        find $(SUBDIRS) -type f -name '*.[chS]' -print )
 >>
->> I agree there are problems here, but I think they're larger still.  The
->> live_p2m_frame_list_list and live_p2m_frame_list foreign mappings are
->> leaked too on the success path.
->>
->> I think this is the necessary fix:
->
-> Yes, I agree.
->
->>
->> ~Andrew
->>
->> ----8<----
->>
->> diff --git a/tools/libs/guest/xg_core_x86.c
->> b/tools/libs/guest/xg_core_x86.c
->> index 61106b98b877..c5e4542ccccc 100644
->> --- a/tools/libs/guest/xg_core_x86.c
->> +++ b/tools/libs/guest/xg_core_x86.c
->> @@ -229,11 +229,11 @@ xc_core_arch_map_p2m_tree_rw(xc_interface *xch,
->> struct domain_info_context *dinf
->>                                uint32_t dom, shared_info_any_t
->> *live_shinfo)
->>   {
->>       /* Double and single indirect references to the live P2M table */
->> -    xen_pfn_t *live_p2m_frame_list_list;
->> +    xen_pfn_t *live_p2m_frame_list_list = NULL;
->>       xen_pfn_t *live_p2m_frame_list = NULL;
->>       /* Copies of the above. */
->>       xen_pfn_t *p2m_frame_list_list = NULL;
->> -    xen_pfn_t *p2m_frame_list;
->> +    xen_pfn_t *p2m_frame_list = NULL;
->>         int err;
->>       int i;
->> @@ -297,8 +297,6 @@ xc_core_arch_map_p2m_tree_rw(xc_interface *xch,
->> struct domain_info_context *dinf
->>         dinfo->p2m_frames = P2M_FL_ENTRIES;
->>   -    return p2m_frame_list;
->> -
->>    out:
->>       err = errno;
->>   @@ -312,7 +310,7 @@ xc_core_arch_map_p2m_tree_rw(xc_interface *xch,
->> struct domain_info_context *dinf
->>         errno = err;
->>   -    return NULL;
->> +    return p2m_frame_list;
->>   }
->>     static int
->>
->
-> In case this fix is taken, my
->
-> Reviewed-by: Juergen Gross <jgross@suse.com>
->
-> can be added.
+>> The fact that, afaict, this won't do is related to the outline I gave.
+>> You've referred yourself to need-config. Most if not all of the goals
+>> SUBDIRS is (currently) relevant for are listed in no-dot-config-targets.
+>> Hence your change above is effectively a no-op, because CONFIG_CRYPTO
+>> will simply be unset in the common case. Therefore if an easy change is
+>> wanted, the original version of it would be it. An intermediate
+>> approach might be to add crypto to SUBDIRS only when TARGET_ARCH=x86.
+>> But neither would preclude the same issue from being introduced again,
+>> when a new subdir appears.
+> I understand your concerns. However, I cannot see how your suggested changes
+> e.g. making use of SUBDIRS in ALL_OBJS and _clean would solve our issue.
+> They would reduce the repetitions (hence I called them cleanup/improvements)
+> but as we want to keep tags,cscope,clean as no-dot-config targets,
 
-Thanks.  I'll write a full patch and post it, with appropriate tags, and
-also include it in my commit sweep.
+I, for one, didn't take this is a goal (perhaps for clean, but there ...
 
-~Andrew
+> we would still not be able to use:
+> SUBDIRS-$(CONFIG_CRYPTO) += crypto
+> and use it in all_sources (because as you pointed out, it will be a no-op).
+
+... the problem is obvious to solve, as outlined before).
+
+> Also, why do we care so much about guarding crypto/ if we take into account
+> so many architecture/config dependent files for tags/cscope (e.g. in drivers,
+> lib/x86, etc.)?
+
+Good question, which I'm afraid I have to answer with asking back:
+
+> If these are no-dot-config targets, then we should take everything, apart
+> from really big directories like arch/ ones.
+
+Why is arch/ other than arch/$(TARGET_ARCH) to be ignored? And if it is,
+why would crypto, used by only x86, not be ignored? As always I'd prefer
+firm rules, not arbitrary and/or fuzzy boundaries.
+
+Furthermore, considering e.g. cscope: Personally I view it as actively
+wrong to constrain it to just one arch. That'll lead to mistakes as
+soon as you want to make any cross-arch or even tree-wide change. Hence
+it would probably want treating just like clean. I can't comment on the
+various tags (case-insensitive) goals, as I don't know what they're
+about.
+
+Jan
 
