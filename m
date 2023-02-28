@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 318A9C64ED6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBB0C64EC7
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Feb 2023 17:40:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.503620.775952 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.503617.775928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pX3xR-0007I3-7z; Tue, 28 Feb 2023 17:40:09 +0000
+	id 1pX3xO-0006hn-8R; Tue, 28 Feb 2023 17:40:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 503620.775952; Tue, 28 Feb 2023 17:40:09 +0000
+Received: by outflank-mailman (output) from mailman id 503617.775928; Tue, 28 Feb 2023 17:40:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pX3xQ-0007HM-V1; Tue, 28 Feb 2023 17:40:08 +0000
-Received: by outflank-mailman (input) for mailman id 503620;
- Tue, 28 Feb 2023 17:40:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pX3xO-0006hf-3O; Tue, 28 Feb 2023 17:40:06 +0000
+Received: by outflank-mailman (input) for mailman id 503617;
+ Tue, 28 Feb 2023 17:40:05 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WuWh=6Y=citrix.com=prvs=4168872ba=sergey.dyasli@srs-se1.protection.inumbo.net>)
- id 1pX3xP-0006sS-HB
- for xen-devel@lists.xenproject.org; Tue, 28 Feb 2023 17:40:07 +0000
+ id 1pX3xN-0006WI-A2
+ for xen-devel@lists.xenproject.org; Tue, 28 Feb 2023 17:40:05 +0000
 Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id efab59e6-b78e-11ed-9695-2f268f93b82a;
- Tue, 28 Feb 2023 18:40:06 +0100 (CET)
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ec0694bf-b78e-11ed-a550-8520e6686977;
+ Tue, 28 Feb 2023 18:40:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: efab59e6-b78e-11ed-9695-2f268f93b82a
+X-Inumbo-ID: ec0694bf-b78e-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1677606006;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=U9Ac8kfawVwJyTiVqm0kbmJdZ36EQ83/TJ8nOn83CLs=;
-  b=ZyNxqXQE7XpitWStBxkVZKonIsFUdM37MDIlrdvN2SBFWluioPjaLbbD
-   mMLBEQvc2f1z7b1kTeeWunC3Fl1SPen+6a+XX31JDTh5tKK8xqdwhzl+/
-   OSLqPLps8GjhQAhsYrwS8JIwAoB18fF/ZIPLhsrgClKJOADd3k1cYJWsR
-   Y=;
+  d=citrix.com; s=securemail; t=1677606001;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=g4W4W/7oBB6pzfZ5TSnKR3UMeS8LA7gAF0KFTPw8wP0=;
+  b=bK835yw6W4ueUsCBBTER/5PcyV5U04EXsYCjuxbd1wOhYDaKrR5cVSUe
+   /OjTmllB6uaxKXJa+yLhGe/PgaX8ASQ/EcY1MhsUCEIxoTHXPm1+BiLGP
+   szigVgvvSZcz9Y9+V6c1SDTVnlE4CySvxCqxNZMYkzg29NlkB9rZxFNze
+   I=;
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 101312544
+X-MesageID: 101312542
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:/ZIn368CLMgzU7CS/cvyDrUDTn6TJUtcMsCJ2f8bNWPcYEJGY0x3y
- jFLXDrUMqrZMzCnftxxad61pBlVvpGGy4JlHgc9/iE8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ire7kI/1BjOkGlA5AdmP6ob5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklj1
- sBIeTIkbim4uMuv7LOSTeI8nc0seZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
- ZBDMHw2MUqGOkcUUrsUIMtWcOOAnXTlfDBJ7l6ErLEz4kDYzRBr0airO93QEjCPbZwNxx3B/
- D+aowwVBDkYOd6+1WOr0UiWh/DCvBHwSbgKNpy3o6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
- 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WdBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC/
- l2GhdTyHhR0raaYD3ma89+8ry62OCUTBX8PY2kDVwRty8L4vIg5gxbLT9BiOK24lNv4HXf32
- T/ikcQlr+xN14hRjfz9pA2ZxWv2/fAlUzLZ+C36fV71vwFQZLeeWKWxxVny6v0QN4+WGwzpU
- Gc/p+CS6+UHDJeonSOLQfkQELzB28tpIAEwknY0QcB/qm3FF2qLONkJvWogfBsB3tMsI2eBX
- aPFhe9GCHa/1lOOZLQ/XY++At9CIUPIRYW8DaC8gjajj/FMmO67EMNGPxP4M4PFyhJEfUQD1
- XCzIK6R4Y4yU/gP8dZPb751PUUX7i4/33jPYpvw0g6q17GTDFbMF+habQHUP7hlvf/VyOkwz
- zq4H5HXoyizrcWkOnWHmWLtBQtiwYcH6WDe9JUMK7/rzvtOE2A9Ef7BqY7NiKQ895m5Ytzgp
- ynnMmcBkQqXuJEyAVnSApyVQO+1DMkXQLNSFXBEAGtELFB4Odb+sfdOLMBoFVTlncQ6pcNJo
- zA+U53oKpxypv7volzxsbGVQFReSSmW
-IronPort-HdrOrdr: A9a23:U9KYOqvnPFYs4oODgEjJyNm+7skDi9V00zEX/kB9WHVpm5qj5q
- STdZUguSMc5wx9ZJhNo6H4BEDEewK7yXcX2+Ys1NWZLWzbUTCTXeJfBOLZqlXd8m/FltK1s5
- 0QEZSWJ+eAdWSS5vyKhzVQfexL/PC3tIi0gO/F1XdkSkVPY6FkqyN0EBySHEEzZAQuP/QEPa
- vZztdDryC7eXwRKuCyBnxAYvPKoMfCno/nZxlDJxNP0mizZGOTg4LHLw==
+IronPort-Data: A9a23:fF1e36uPJCdC9QI5TEwoMPJw3ufnVJheMUV32f8akzHdYApBsoF/q
+ tZmKWHXO/iLNmX3e9xxPtuwoEkPvpDRx4IyTgE5rSA9FXsR+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg3HVQ+IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj6Fv0gnRkPaoQ5AWExyFPZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwBRMxPkGBruKP+42SU8Vtr8MofNLiM9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkARfA5NU/rSn8/x7pX7WyZVsl2YtOw78mHIyA1Z27nxKtvFPNeNQK25m27B/
+ judpj6kXkty2Nq3w2S/6kqnuM71ugzZcac2Jaa07PBQuQjGroAUIEJPDgbqyRWjsWauVtQaJ
+ 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O+8w5RyJy6HUyx2EHWVCRTlEAPQ5sOcmSDps0
+ UWG9/vrCiZoq6a9Um+G+/GfqjbaESoIKW4PYwcUQA1D5MPsyKkolQ7GRNtnFK+zj/X2FCv2z
+ jTMqzIx74j/luZSif/9pwqexWvx+N6QFFVdChjrsnyNwyBFNN+nToyR0mfy9NpBBYGSHkKIs
+ y1R8ySB19wmAZaInS2LZewCGrC1+vqIWAHhbU5T84oJrGr0pSP6FWxEyHQnfRoybJ5YEdP8S
+ BWL0T698qO/K5dDgUVfR4uqQ/onwqH7fTgOfqCFN4EeCnSdmeLuwc2PWaJy9zqw+KTPuftlU
+ Xt+TSpLJSdyNEif5GDqL9rxKJdyrszE+UvdRIrg0zOs2qeEaXieRN8taQXRMb1jtvLc/FSJo
+ r6z0vdmLD0FDYXDjtT/q9ZPfTjm01BgbXwJlyCnXrHaeVc3cI3QI/TQ3akga+RYc1d9z4/1E
+ oWGchYAkjLX3CSXQThmn1g/MNsDq74j9yNkVcHtVH70s0UejXGHt/9PJsZnLOJ8q4SOD5dcF
+ pE4RilJOdwXIhyvxtjXRcOVQFBKHPhzuT+zAg==
+IronPort-HdrOrdr: A9a23:NGTD86FHnrBz6M0NpLqEFceALOsnbusQ8zAXPhZKOHhom62j+/
+ xG88536faZskdpZJhko6HnBEDiexzhHPxOkOws1OyZLWrbUQKTRelfBMnZowEIfReOlNK1+p
+ 0QC5SWY+eAamSS4/yR3CCIV/48xdGc6qChgqP7x3dpCSVncbtp4Qs8KgvzKCNLbTgDLYc9HI
+ CH5sJB4x6peXFSU9+yAWMMVfXCodqOtJ+OW3877k4cgzWzsQ==
 X-IronPort-AV: E=Sophos;i="5.98,222,1673931600"; 
-   d="scan'208";a="101312544"
+   d="scan'208";a="101312542"
 From: Sergey Dyasli <sergey.dyasli@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
@@ -86,66 +85,30 @@ CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
 	<anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, George Dunlap
 	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Sergey Dyasli <sergey.dyasli@citrix.com>
-Subject: [PATCH v2 2/3] tools/xenctrl: add xc_get_cpu_version()
-Date: Tue, 28 Feb 2023 17:39:31 +0000
-Message-ID: <20230228173932.28510-3-sergey.dyasli@citrix.com>
+Subject: [PATCH v2 0/3] xen-ucode: print information about currently loaded ucode
+Date: Tue, 28 Feb 2023 17:39:29 +0000
+Message-ID: <20230228173932.28510-1-sergey.dyasli@citrix.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230228173932.28510-1-sergey.dyasli@citrix.com>
-References: <20230228173932.28510-1-sergey.dyasli@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-As a wrapper for XENPF_get_cpu_version platform op.
+I've split the patch into 3 parts. And now I'm using xenhypfs instead of
+introducing another platform op. That's my first attempt at xenhypfs and
+the patch itself is of RFC quality. Open questions are where to put the
+new code and if it's possible to come up with a better hypfs functions.
 
-Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>
----
+Sergey Dyasli (3):
+  xen/hypfs: add initial cpuinfo directory
+  tools/xenctrl: add xc_get_cpu_version()
+  tools/xen-ucode: print information about currently loaded ucode
+
  tools/include/xenctrl.h   |  1 +
- tools/libs/ctrl/xc_misc.c | 20 ++++++++++++++++++++
- 2 files changed, 21 insertions(+)
+ tools/libs/ctrl/xc_misc.c | 20 ++++++++
+ tools/misc/Makefile       |  2 +-
+ tools/misc/xen-ucode.c    | 97 +++++++++++++++++++++++++++++++++++++++
+ xen/arch/x86/cpu/common.c | 58 +++++++++++++++++++++++
+ 5 files changed, 177 insertions(+), 1 deletion(-)
 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 23037874d3..8aa747dc2e 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -1186,6 +1186,7 @@ int xc_physinfo(xc_interface *xch, xc_physinfo_t *info);
- int xc_cputopoinfo(xc_interface *xch, unsigned *max_cpus,
-                    xc_cputopo_t *cputopo);
- int xc_microcode_update(xc_interface *xch, const void *buf, size_t len);
-+int xc_get_cpu_version(xc_interface *xch, struct xenpf_pcpu_version *cpu_ver);
- int xc_numainfo(xc_interface *xch, unsigned *max_nodes,
-                 xc_meminfo_t *meminfo, uint32_t *distance);
- int xc_pcitopoinfo(xc_interface *xch, unsigned num_devs,
-diff --git a/tools/libs/ctrl/xc_misc.c b/tools/libs/ctrl/xc_misc.c
-index 265f15ec2d..f2f6e4348e 100644
---- a/tools/libs/ctrl/xc_misc.c
-+++ b/tools/libs/ctrl/xc_misc.c
-@@ -226,6 +226,26 @@ int xc_microcode_update(xc_interface *xch, const void *buf, size_t len)
-     return ret;
- }
- 
-+int xc_get_cpu_version(xc_interface *xch, struct xenpf_pcpu_version *cpu_ver)
-+{
-+    int ret;
-+    DECLARE_PLATFORM_OP;
-+
-+    if ( !xch || !cpu_ver )
-+        return -1;
-+
-+    platform_op.cmd = XENPF_get_cpu_version;
-+    platform_op.u.pcpu_version.xen_cpuid = cpu_ver->xen_cpuid;
-+
-+    ret = do_platform_op(xch, &platform_op);
-+    if ( ret != 0 )
-+        return ret;
-+
-+    *cpu_ver = platform_op.u.pcpu_version;
-+
-+    return 0;
-+}
-+
- int xc_cputopoinfo(xc_interface *xch, unsigned *max_cpus,
-                    xc_cputopo_t *cputopo)
- {
 -- 
 2.17.1
 
