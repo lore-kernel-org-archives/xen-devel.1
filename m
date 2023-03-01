@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 898B7C64EC7
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Mar 2023 09:46:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.503930.776349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75FABC64ED6
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Mar 2023 09:53:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.503938.776371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXJ25-0005nz-1x; Wed, 01 Mar 2023 09:45:57 +0000
+	id 1pXJ9V-0007nj-IZ; Wed, 01 Mar 2023 09:53:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 503930.776349; Wed, 01 Mar 2023 09:45:57 +0000
+Received: by outflank-mailman (output) from mailman id 503938.776371; Wed, 01 Mar 2023 09:53:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXJ24-0005ns-VZ; Wed, 01 Mar 2023 09:45:56 +0000
-Received: by outflank-mailman (input) for mailman id 503930;
- Wed, 01 Mar 2023 09:45:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pXJ9V-0007mV-DX; Wed, 01 Mar 2023 09:53:37 +0000
+Received: by outflank-mailman (input) for mailman id 503938;
+ Wed, 01 Mar 2023 09:53:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=S3ad=6Z=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pXJ23-0005nm-KK
- for xen-devel@lists.xenproject.org; Wed, 01 Mar 2023 09:45:55 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dc12c5b1-b815-11ed-96a0-2f268f93b82a;
- Wed, 01 Mar 2023 10:45:55 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id i9so16840577lfc.6
- for <xen-devel@lists.xenproject.org>; Wed, 01 Mar 2023 01:45:54 -0800 (PST)
-Received: from [192.168.8.114] (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
- [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
- w14-20020ac2442e000000b004db00b4c671sm1660387lfl.7.2023.03.01.01.45.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Mar 2023 01:45:53 -0800 (PST)
+ <SRS0=OPXQ=6Z=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1pXJ9U-0007ZN-GF
+ for xen-devel@lists.xenproject.org; Wed, 01 Mar 2023 09:53:36 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id ee00b70f-b816-11ed-a550-8520e6686977;
+ Wed, 01 Mar 2023 10:53:34 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 21648152B;
+ Wed,  1 Mar 2023 01:54:17 -0800 (PST)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.195.25])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 96D4C3F881;
+ Wed,  1 Mar 2023 01:53:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,75 +44,252 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc12c5b1-b815-11ed-96a0-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677663954;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=xGd25hKD6s5gYIjdZ2TJ8putMxGMRWq8uqxg0K9WGy8=;
-        b=PYebjBpkRJ7c8bmhgNCn+UTbyof8RAVzD58Gg0uwEZdFldUh69uw/cXpbTM4N750P6
-         oRijbx1M9PsvQoJTIIJk19aJt3GBgCvH+wHFCF5nSXmViTESHLKAXZUhHudFR2vSrKea
-         4XjKEz/Z/hQz1bi4CkudMlGnszkMsdg5wOlS8DAo2Qw0vV7iFMFOXlZfynaTIhSmXTRa
-         BitEbVft7bhpFusapzkx5bvDCnENm+rOi3NR2yOGugV4oAyTcDa76WH3OQJ9bjSJ/sUS
-         QE8Qk6/oRqmgEsGw+36ceA2l2quq4UTNrMKCFKuDfv/gcN10gffi7uoZP002Yc5tOqBG
-         UpdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677663954;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xGd25hKD6s5gYIjdZ2TJ8putMxGMRWq8uqxg0K9WGy8=;
-        b=kDJfwg1IfU+g1E0e2BDzDGrIwH1eNJJXCkUgfiUzcpUC8DrNJucUDs8RhYWnS/w+Xr
-         vZi6q1KAEkk2YsnG5NgnVHgBicOnen95f1xfHDsUnO3u06eAShxUQI5n1EofOhnIXnOh
-         dlKDP9pByklzdX5nY0If+M0gqJ6GY7UiFls2g8IHr41TPMXqrRgpgtpIjni/FE8Ex8P9
-         gKu9L7te3f/AI8rMeEctSGyIHUMMjPBEC2ZSRUKWqLMp7b4J/T9cZTrBcHo0HufLmJFm
-         0iHXZtb7o6iY9vrfTgdzRvrrcdLFthSCxe3PUh+0gscZC8hR2dRbCCQgKJmvLbNoWtBQ
-         tzcg==
-X-Gm-Message-State: AO0yUKVoz4zFrKxSg+2LRQ0l07xpjtKXLrcOF69Z85Ekiuyb0vy9jgeD
-	/RyNudX1q4XpdUdNFqDUxEw=
-X-Google-Smtp-Source: AK7set93g12AZQJGfNXIzhRCR4dhgNfO+Ps2jOP9k/GVVBk81uMyE2nto5limetFQFXBXNkHtUqNhw==
-X-Received: by 2002:a05:6512:63:b0:4e1:7dd:1142 with SMTP id i3-20020a056512006300b004e107dd1142mr1531462lfo.51.1677663953998;
-        Wed, 01 Mar 2023 01:45:53 -0800 (PST)
-Message-ID: <1815e0ae98493797c0f30030acd461928b9a4120.camel@gmail.com>
-Subject: Re: [PATCH v4 1/5] xen/riscv: introduce decode_cause() stuff
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>, Andrew Cooper
- <andrew.cooper3@citrix.com>,  Stefano Stabellini <sstabellini@kernel.org>,
- Gianluca Guida <gianluca@rivosinc.com>, Bob Eshleman
- <bobbyeshleman@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
-Date: Wed, 01 Mar 2023 11:45:51 +0200
-In-Reply-To: <d35a9e46666819552a1174094bac8e8c1c5baece.camel@gmail.com>
-References: <cover.1677237653.git.oleksii.kurochko@gmail.com>
-	 <397e6741438a8b125dc53945a74a58246fac4faf.1677237653.git.oleksii.kurochko@gmail.com>
-	 <2fb6e5ad-9e25-9c63-7f01-8a3d55297cf7@suse.com>
-	 <d35a9e46666819552a1174094bac8e8c1c5baece.camel@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+X-Inumbo-ID: ee00b70f-b816-11ed-a550-8520e6686977
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH v2 2/2] xen/misra: add entries to exclude-list.json
+Date: Wed,  1 Mar 2023 09:53:20 +0000
+Message-Id: <20230301095320.264301-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230301095320.264301-1-luca.fancellu@arm.com>
+References: <20230301095320.264301-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2023-03-01 at 11:41 +0200, Oleksii wrote:
-> On Mon, 2023-02-27 at 13:48 +0100, Jan Beulich wrote:
-> > On 24.02.2023 12:35, Oleksii Kurochko wrote:
-> > > --- a/xen/arch/riscv/traps.c
-> > > +++ b/xen/arch/riscv/traps.c
-> > > @@ -4,10 +4,95 @@
-> > > =C2=A0 *
-> > > =C2=A0 * RISC-V Trap handlers
-> > > =C2=A0 */
-> > > +
-> > > +#include <xen/errno.h>
-> >=20
-> > I couldn't spot anything in the file which would require this
-> > inclusion.
-> -EINVAL, -ENOENT are used in do_bug_frame() I missed that when wrote
-> previous answer on e-mail.
-Sorry for confusion. I resolved merge conflicts after rebase so
-<xen/errno.h> should be remove as anything is used in traps.c from it
+Add entries to the exclude-list.json for those files that need to be
+excluded from the analysis scan.
 
-~ Oleksii
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
+This list is originated from Michal's work here:
+https://patchwork.kernel.org/project/xen-devel/patch/20221116092032.4423-1-michal.orzel@amd.com/#25123099
+and changed to adapt to this task.
+Changes from v1:
+ - updated list with new files from Stefano
+ - add comment field for every entry (Jan)
+---
+---
+ docs/misra/exclude-list.json | 199 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 198 insertions(+), 1 deletion(-)
+
+diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
+index 1fb0ac67747b..ca1e2dd678ff 100644
+--- a/docs/misra/exclude-list.json
++++ b/docs/misra/exclude-list.json
+@@ -1,4 +1,201 @@
+ {
+     "version": "1.0",
+-    "content": []
++    "content": [
++        {
++            "rel_path": "arch/arm/arm64/cpufeature.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/arm/arm64/insn.c",
++            "comment": "Imported on Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/arm/arm64/lib/find_next_bit.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/acpi/boot.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/acpi/cpu_idle.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/acpi/cpufreq/cpufreq.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/acpi/cpuidle_menu.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/acpi/lib.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/amd.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/centaur.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/common.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/hygon.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/intel.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/intel_cacheinfo.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/mcheck/non-fatal.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/mtrr/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/cpu/mwait-idle.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/delay.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/dmi_scan.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/mpparse.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/srat.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/time.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "arch/x86/x86_64/mmconf-fam10h.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/bitmap.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/bunzip2.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/earlycpio.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/inflate.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/libfdt/*",
++            "comment": "External library"
++        },
++        {
++            "rel_path": "common/livepatch_elf.c",
++            "comment": "Not in scope initially as it generates many violations and it is not enabled in safety configurations"
++        },
++        {
++            "rel_path": "common/lzo.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/lz4/decompress.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/radix-tree.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/ubsan/ubsan.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/un*.c",
++            "comment": "unlz4.c implementation by Yann Collet, the others un* are from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/xz/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "common/zstd/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "crypto/*",
++            "comment": "Origin is external and documented in crypto/README.source"
++        },
++        {
++            "rel_path": "drivers/acpi/apei/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/hwregs.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/numa.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/osl.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/tables.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/tables/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/acpi/utilities/*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "drivers/video/font_*",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "lib/list-sort.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "lib/rbtree.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "lib/xxhash*.c",
++            "comment": "Imported from Linux, ignore for now"
++        },
++        {
++            "rel_path": "xsm/flask/*",
++            "comment": "Not in scope initially as it generates many violations and it is not enabled in safety configurations"
++        }
++    ]
+ }
+-- 
+2.34.1
 
 
