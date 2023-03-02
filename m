@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7198C83005
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:35:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505059.777675 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 516C3C7EE36
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:35:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505063.777711 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxT-0003m1-IX; Thu, 02 Mar 2023 15:35:03 +0000
+	id 1pXkxY-0004q4-Q0; Thu, 02 Mar 2023 15:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505059.777675; Thu, 02 Mar 2023 15:35:03 +0000
+Received: by outflank-mailman (output) from mailman id 505063.777711; Thu, 02 Mar 2023 15:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxS-0003d6-G5; Thu, 02 Mar 2023 15:35:02 +0000
-Received: by outflank-mailman (input) for mailman id 505059;
- Thu, 02 Mar 2023 15:34:58 +0000
+	id 1pXkxX-0004ko-MT; Thu, 02 Mar 2023 15:35:07 +0000
+Received: by outflank-mailman (input) for mailman id 505063;
+ Thu, 02 Mar 2023 15:35:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ucY8=62=casper.srs.infradead.org=BATV+a1ad97f05afd282148df+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pXkxN-0001Jw-Mo
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:57 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
+ <SRS0=ZMsQ=62=desiato.srs.infradead.org=BATV+9a0490e5ac528e462c30+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pXkxP-0001Jw-NA
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:59 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2185c4b-b90f-11ed-a550-8520e6686977;
+ id c2b91fcc-b90f-11ed-a550-8520e6686977;
  Thu, 02 Mar 2023 16:34:49 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pXkx3-002UND-TC; Thu, 02 Mar 2023 15:34:38 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pXkx3-00FL3Z-2p; Thu, 02 Mar 2023 15:34:38 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pXkx3-004uyT-2x; Thu, 02 Mar 2023 15:34:37 +0000
+ Linux)) id 1pXkx3-004uyH-2L; Thu, 02 Mar 2023 15:34:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c2185c4b-b90f-11ed-a550-8520e6686977
+X-Inumbo-ID: c2b91fcc-b90f-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=erWVL3FsZ/k0NITRskjF433HZz8ozg61BvoyoaGHf94=; b=DCP0WDgAi2HDlsISe89uQqbkEV
-	dFTT20r4Tt2KoGf3KxxmLH3Q6nBAbgaozjY3u/1gxEF97GOPc7Cc5OLwve8qbv9Sk2h6rWOJKOk7M
-	SLv7/HaPVDm1OU1hMQ7fC7nZ/wD5j4EwVRqlZMJMLlhbme6K1Ww19ynAbcu7AujbU1ShGgI8MMFCj
-	sO0e+Vqr+GTa+IA9/XRAgtI1l6AVjAmVU1kj41DesArN+3ZpANpaOpprcLBEl6t1g4YUT2n4FcxHW
-	AWvahBPb78oowvmx8ahIlbf8vVoBq7puDz0woEql4hmaykt32lSCQoENXMwf7JtBLdMxD+5jLgP0C
-	k2nMH6bw==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=+LHndM7s06jE4AQvHMfpIjWQzwiehskMN9ekfZrGg84=; b=C7oLaOwfN9v8e3sRj1Kx5VN2Oi
+	4snywDWGsEZfIdTsRdGE6YD3mpSxFM+IiEpFpm+E9ThIfAaIpqxmq1E4qNc3nbjs0CBpV1ZqB3/8U
+	gWCtBolozsoPRge4juS+R1ho5gTzdBEpHHWoI+OJQGTXj4PpJmpv5P4ZLUbOaq5WTUuQ0nhPtY/+8
+	khZiyoqW2B/O5vedi99TITipU4c7ZBI+tjrTuUAOrGvLB+tUyCL/UdR4V+JdyA3hc5Vj87eDJBHhP
+	m/QdDCSqCiWjCrw2fFIRGyPVNvPNVmE29XnC8OgkYeAoCwdIZgdHmf02b5iUm3vVceQ/sBkN8WR5A
+	qchwnQ7A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -64,598 +64,138 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	vikram.garhwal@amd.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 03/25] hw/xen: Implement XenStore watches
-Date: Thu,  2 Mar 2023 15:34:13 +0000
-Message-Id: <20230302153435.1170111-4-dwmw2@infradead.org>
+Subject: [RFC PATCH v1 00/25] Enable PV backends with Xen/KVM emulation
+Date: Thu,  2 Mar 2023 15:34:10 +0000
+Message-Id: <20230302153435.1170111-1-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
-References: <20230302153435.1170111-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+Now that the basic platform support is hopefully on the cusp of being 
+merged, here's phase 2 which wires up the XenBus and PV back ends.
 
-Starts out fairly simple: a hash table of watches based on the path.
+It starts with a basic single-tenant internal implementation of a 
+XenStore, with a copy-on-write tree, watches, transactions, quotas.
 
-Except there can be multiple watches on the same path, so the watch ends
-up being a simple linked list, and the head of that list is in the hash
-table. Which makes removal a bit of a PITA but it's not so bad; we just
-special-case "I had to remove the head of the list and now I have to
-replace it in / remove it from the hash table". And if we don't remove
-the head, it's a simple linked-list operation.
+Then we introduce operations tables for the grant table, event channel,
+foreignmen and xenstore operations so that in addition to using the Xen
+libraries for those, QEMU can use its internal emulated versions.
 
-We do need to fire watches on *deleted* nodes, so instead of just a simple
-xs_node_unref() on the topmost victim, we need to recurse down and fire
-watches on them all.
+A little bit of cleaning up of header files, and we can enable the build
+of xen-bus in the CONFIG_XEN_EMU build, and run a Xen guest with an
+actual PV disk...
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- hw/i386/kvm/xenstore_impl.c | 253 +++++++++++++++++++++++++++++++++---
- tests/unit/test-xs-node.c   |  85 ++++++++++++
- 2 files changed, 323 insertions(+), 15 deletions(-)
+   qemu-system-x86_64 -serial mon:stdio -M q35 -display none -m 1G -smp 2 \
+      -accel kvm,xen-version=0x4000e,kernel-irqchip=split \
+      -kernel bzImage -append "console=ttyS0 root=/dev/xvda1 selinux=0" \
+      -drive file=/var/lib/libvirt/images/fedora28.qcow2,if=none,id=disk \
+      -device xen-disk,drive=disk,vdev=xvda
 
-diff --git a/hw/i386/kvm/xenstore_impl.c b/hw/i386/kvm/xenstore_impl.c
-index 9e10a31bea..2e464af93a 100644
---- a/hw/i386/kvm/xenstore_impl.c
-+++ b/hw/i386/kvm/xenstore_impl.c
-@@ -37,9 +37,20 @@ typedef struct XsNode {
- #endif
- } XsNode;
- 
-+typedef struct XsWatch {
-+    struct XsWatch *next;
-+    xs_impl_watch_fn *cb;
-+    void *cb_opaque;
-+    char *token;
-+    unsigned int dom_id;
-+    int rel_prefix;
-+} XsWatch;
-+
- struct XenstoreImplState {
-     XsNode *root;
-     unsigned int nr_nodes;
-+    GHashTable *watches;
-+    unsigned int nr_domu_watches;
- };
- 
- static inline XsNode *xs_node_new(void)
-@@ -146,6 +157,7 @@ struct walk_op {
-     void *op_opaque;
-     void *op_opaque2;
- 
-+    GList *watches;
-     unsigned int dom_id;
- 
-     /* The number of nodes which will exist in the tree if this op succeeds. */
-@@ -166,6 +178,35 @@ struct walk_op {
-     bool create_dirs;
- };
- 
-+static void fire_watches(struct walk_op *op, bool parents)
-+{
-+    GList *l = NULL;
-+    XsWatch *w;
-+
-+    if (!op->mutating) {
-+        return;
-+    }
-+
-+    if (parents) {
-+        l = op->watches;
-+    }
-+
-+    w = g_hash_table_lookup(op->s->watches, op->path);
-+    while (w || l) {
-+        if (!w) {
-+            /* Fire the parent nodes from 'op' if asked to */
-+            w = l->data;
-+            l = l->next;
-+            continue;
-+        }
-+
-+        assert(strlen(op->path) > w->rel_prefix);
-+        w->cb(w->cb_opaque, op->path + w->rel_prefix, w->token);
-+
-+        w = w->next;
-+    }
-+}
-+
- static int xs_node_add_content(XsNode **n, struct walk_op *op)
- {
-     GByteArray *data = op->op_opaque;
-@@ -213,6 +254,8 @@ static int xs_node_get_content(XsNode **n, struct walk_op *op)
- static int node_rm_recurse(gpointer key, gpointer value, gpointer user_data)
- {
-     struct walk_op *op = user_data;
-+    int path_len = strlen(op->path);
-+    int key_len = strlen(key);
-     XsNode *n = value;
-     bool this_inplace = op->inplace;
- 
-@@ -220,11 +263,22 @@ static int node_rm_recurse(gpointer key, gpointer value, gpointer user_data)
-         op->inplace = 0;
-     }
- 
-+    assert(key_len + path_len + 2 <= sizeof(op->path));
-+    op->path[path_len] = '/';
-+    memcpy(op->path + path_len + 1, key, key_len + 1);
-+
-     if (n->children) {
-         g_hash_table_foreach_remove(n->children, node_rm_recurse, op);
-     }
-     op->new_nr_nodes--;
- 
-+    /*
-+     * Fire watches on *this* node but not the parents because they are
-+     * going to be deleted too, so the watch will fire for them anyway.
-+     */
-+    fire_watches(op, false);
-+    op->path[path_len] = '\0';
-+
-     /*
-      * Actually deleting the child here is just an optimisation; if we
-      * don't then the final unref on the topmost victim will just have
-@@ -238,7 +292,7 @@ static int xs_node_rm(XsNode **n, struct walk_op *op)
- {
-     bool this_inplace = op->inplace;
- 
--    /* Keep count of the nodes in the subtree which gets deleted. */
-+    /* Fire watches for, and count, nodes in the subtree which get deleted */
-     if ((*n)->children) {
-         g_hash_table_foreach_remove((*n)->children, node_rm_recurse, op);
-     }
-@@ -269,9 +323,11 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-     XsNode *old = *n, *child = NULL;
-     bool stole_child = false;
-     bool this_inplace;
-+    XsWatch *watch;
-     int err;
- 
-     namelen = strlen(op->path);
-+    watch = g_hash_table_lookup(op->s->watches, op->path);
- 
-     /* Is there a child, or do we hit the double-NUL termination? */
-     if (op->path[namelen + 1]) {
-@@ -292,6 +348,9 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-     if (!child_name) {
-         /* This is the actual node on which the operation shall be performed */
-         err = op->op_fn(n, op);
-+        if (!err) {
-+            fire_watches(op, true);
-+        }
-         goto out;
-     }
- 
-@@ -333,11 +392,24 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-         goto out;
-     }
- 
-+    /*
-+     * If there's a watch on this node, add it to the list to be fired
-+     * (with the correct full pathname for the modified node) at the end.
-+     */
-+    if (watch) {
-+        op->watches = g_list_append(op->watches, watch);
-+    }
-+
-     /*
-      * Except for the temporary child-stealing as noted, our node has not
-      * changed yet. We don't yet know the overall operation will complete.
-      */
-     err = xs_node_walk(&child, op);
-+
-+    if (watch) {
-+        op->watches = g_list_remove(op->watches, watch);
-+    }
-+
-     if (err || !op->mutating) {
-         if (stole_child) {
-             /* Put it back as it was. */
-@@ -375,6 +447,7 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-  out:
-     op->path[namelen] = '\0';
-     if (!namelen) {
-+        assert(!op->watches);
-         /*
-          * On completing the recursion back up the path walk and reaching the
-          * top, assign the new node count if the operation was successful.
-@@ -457,6 +530,7 @@ static int init_walk_op(XenstoreImplState *s, struct walk_op *op,
-      * path element for the lookup.
-      */
-     op->path[strlen(op->path) + 1] = '\0';
-+    op->watches = NULL;
-     op->path[0] = '\0';
-     op->inplace = true;
-     op->mutating = false;
-@@ -589,38 +663,187 @@ int xs_impl_set_perms(XenstoreImplState *s, unsigned int dom_id,
- int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
-                   const char *token, xs_impl_watch_fn fn, void *opaque)
- {
--    /*
--     * When calling the callback @fn, note that the path should
--     * precisely match the relative path that the guest provided, even
--     * if it was a relative path which needed to be prefixed with
--     * /local/domain/${domid}/
--     */
--    return ENOSYS;
-+    char abspath[XENSTORE_ABS_PATH_MAX + 1];
-+    XsWatch *w, *l;
-+    int ret;
-+
-+    ret = validate_path(abspath, path, dom_id);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    /* Check for duplicates */
-+    w = g_hash_table_lookup(s->watches, abspath);
-+    while (w) {
-+        if (!g_strcmp0(token, w->token) &&  opaque == w->cb_opaque &&
-+            fn == w->cb && dom_id == w->dom_id) {
-+            return EEXIST;
-+        }
-+        w = w->next;
-+    }
-+
-+    if (dom_id && s->nr_domu_watches >= XS_MAX_WATCHES) {
-+        return E2BIG;
-+    }
-+
-+    w = g_new0(XsWatch, 1);
-+    w->token = g_strdup(token);
-+    w->cb = fn;
-+    w->cb_opaque = opaque;
-+    w->dom_id = dom_id;
-+    w->rel_prefix = strlen(abspath) - strlen(path);
-+
-+    l = g_hash_table_lookup(s->watches, abspath);
-+    if (l) {
-+        w->next = l->next;
-+        l->next = w;
-+    } else {
-+        g_hash_table_insert(s->watches, g_strdup(abspath), w);
-+    }
-+    if (dom_id) {
-+        s->nr_domu_watches++;
-+    }
-+
-+    /* A new watch should fire immediately */
-+    fn(opaque, path, token);
-+
-+    return 0;
-+}
-+
-+static XsWatch *free_watch(XenstoreImplState *s, XsWatch *w)
-+{
-+    XsWatch *next = w->next;
-+
-+    if (w->dom_id) {
-+        assert(s->nr_domu_watches);
-+        s->nr_domu_watches--;
-+    }
-+
-+    g_free(w->token);
-+    g_free(w);
-+
-+    return next;
- }
- 
- int xs_impl_unwatch(XenstoreImplState *s, unsigned int dom_id,
-                     const char *path, const char *token,
-                     xs_impl_watch_fn fn, void *opaque)
- {
-+    char abspath[XENSTORE_ABS_PATH_MAX + 1];
-+    XsWatch *w, **l;
-+    int ret;
-+
-+    ret = validate_path(abspath, path, dom_id);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    w = g_hash_table_lookup(s->watches, abspath);
-+    if (!w) {
-+        return ENOENT;
-+    }
-+
-     /*
--     * When calling the callback @fn, note that the path should
--     * precisely match the relative path that the guest provided, even
--     * if it was a relative path which needed to be prefixed with
--     * /local/domain/${domid}/
-+     * The hash table contains the first element of a list of
-+     * watches. Removing the first element in the list is a
-+     * special case because we have to update the hash table to
-+     * point to the next (or remove it if there's nothing left).
-      */
--    return ENOSYS;
-+    if (!g_strcmp0(token, w->token) && fn == w->cb && opaque == w->cb_opaque &&
-+        dom_id == w->dom_id) {
-+        if (w->next) {
-+            /* Insert the previous 'next' into the hash table */
-+            g_hash_table_insert(s->watches, g_strdup(abspath), w->next);
-+        } else {
-+            /* Nothing left; remove from hash table */
-+            g_hash_table_remove(s->watches, abspath);
-+        }
-+        free_watch(s, w);
-+        return 0;
-+    }
-+
-+    /*
-+     * We're all done messing with the hash table because the element
-+     * it points to has survived the cull. Now it's just a simple
-+     * linked list removal operation.
-+     */
-+    for (l = &w->next; *l; l = &w->next) {
-+        w = *l;
-+
-+        if (!g_strcmp0(token, w->token) && fn == w->cb &&
-+            opaque != w->cb_opaque && dom_id == w->dom_id) {
-+            *l = free_watch(s, w);
-+            return 0;
-+        }
-+    }
-+
-+    return ENOENT;
- }
- 
- int xs_impl_reset_watches(XenstoreImplState *s, unsigned int dom_id)
- {
--    /* Remove the watch that matches all four criteria */
--    return ENOSYS;
-+    char **watch_paths;
-+    guint nr_watch_paths;
-+    guint i;
-+
-+    watch_paths = (char **)g_hash_table_get_keys_as_array(s->watches,
-+                                                          &nr_watch_paths);
-+
-+    for (i = 0; i < nr_watch_paths; i++) {
-+        XsWatch *w1 = g_hash_table_lookup(s->watches, watch_paths[i]);
-+        XsWatch *w2, *w, **l;
-+
-+        /*
-+         * w1 is the original list. The hash table has this pointer.
-+         * w2 is the head of our newly-filtered list.
-+         * w and l are temporary for processing. w is somewhat redundant
-+         * with *l but makes my eyes bleed less.
-+         */
-+
-+        w = w2 = w1;
-+        l = &w;
-+        while (w) {
-+            if (w->dom_id == dom_id) {
-+                /* If we're freeing the head of the list, bump w2 */
-+                if (w2 == w) {
-+                    w2 = w->next;
-+                }
-+                *l = free_watch(s, w);
-+            } else {
-+                l = &w->next;
-+            }
-+            w = *l;
-+        }
-+        /*
-+         * If the head of the list survived the cull, we don't need to
-+         * touch the hash table and we're done with this path. Else...
-+         */
-+        if (w1 != w2) {
-+            g_hash_table_steal(s->watches, watch_paths[i]);
-+
-+            /*
-+             * It was already freed. (Don't worry, this whole thing is
-+             * single-threaded and nobody saw it in the meantime). And
-+             * having *stolen* it, we now own the watch_paths[i] string
-+             * so if we don't give it back to the hash table, we need
-+             * to free it.
-+             */
-+            if (w2) {
-+                g_hash_table_insert(s->watches, watch_paths[i], w2);
-+            } else {
-+                g_free(watch_paths[i]);
-+            }
-+        }
-+    }
-+    g_free(watch_paths);
-+    return 0;
- }
- 
- XenstoreImplState *xs_impl_create(void)
- {
-     XenstoreImplState *s = g_new0(XenstoreImplState, 1);
- 
-+    s->watches = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-     s->nr_nodes = 1;
-     s->root = xs_node_new();
- #ifdef XS_NODE_UNIT_TEST
-diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
-index c78d5bd581..19000b64b2 100644
---- a/tests/unit/test-xs-node.c
-+++ b/tests/unit/test-xs-node.c
-@@ -34,10 +34,14 @@ static void xs_impl_delete(XenstoreImplState *s)
- {
-     int err;
- 
-+    xs_impl_reset_watches(s, DOMID_GUEST);
-+    g_assert(!s->nr_domu_watches);
-+
-     err = xs_impl_rm(s, DOMID_QEMU, XBT_NULL, "/local");
-     g_assert(!err);
-     g_assert(s->nr_nodes == 1);
- 
-+    g_hash_table_unref(s->watches);
-     xs_node_unref(s->root);
-     g_free(s);
- 
-@@ -65,6 +69,14 @@ static int write_str(XenstoreImplState *s, unsigned int dom_id,
-     return err;
- }
- 
-+static void watch_cb(void *_str, const char *path, const char *token)
-+{
-+    GString *str = _str;
-+
-+    g_string_append(str, path);
-+    g_string_append(str, token);
-+}
-+
- static XenstoreImplState *setup(void)
- {
-    XenstoreImplState *s = xs_impl_create();
-@@ -75,6 +87,7 @@ static XenstoreImplState *setup(void)
- 
-    err = write_str(s, DOMID_QEMU, XBT_NULL, abspath, "");
-    g_assert(!err);
-+   g_assert(s->nr_nodes == 4);
- 
-    g_free(abspath);
- 
-@@ -93,6 +106,8 @@ static void test_xs_node_simple(void)
- {
-     GByteArray *data = g_byte_array_new();
-     XenstoreImplState *s = setup();
-+    GString *guest_watches = g_string_new(NULL);
-+    GString *qemu_watches = g_string_new(NULL);
-     GList *items = NULL;
-     XsNode *old_root;
-     uint64_t gencnt;
-@@ -100,6 +115,20 @@ static void test_xs_node_simple(void)
- 
-     g_assert(s);
- 
-+    err = xs_impl_watch(s, DOMID_GUEST, "some", "guestwatch",
-+                        watch_cb, guest_watches);
-+    g_assert(!err);
-+    g_assert(guest_watches->len == strlen("someguestwatch"));
-+    g_assert(!strcmp(guest_watches->str, "someguestwatch"));
-+    g_string_truncate(guest_watches, 0);
-+
-+    err = xs_impl_watch(s, 0, "/local/domain/1/some", "qemuwatch",
-+                        watch_cb, qemu_watches);
-+    g_assert(!err);
-+    g_assert(qemu_watches->len == strlen("/local/domain/1/someqemuwatch"));
-+    g_assert(!strcmp(qemu_watches->str, "/local/domain/1/someqemuwatch"));
-+    g_string_truncate(qemu_watches, 0);
-+
-     /* Read gives ENOENT when it should */
-     err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "foo", data);
-     g_assert(err == ENOENT);
-@@ -109,6 +138,14 @@ static void test_xs_node_simple(void)
-                     "something");
-     g_assert(s->nr_nodes == 7);
-     g_assert(!err);
-+    g_assert(!strcmp(guest_watches->str,
-+                     "some/relative/pathguestwatch"));
-+    g_assert(!strcmp(qemu_watches->str,
-+                     "/local/domain/1/some/relative/pathqemuwatch"));
-+
-+    g_string_truncate(qemu_watches, 0);
-+    g_string_truncate(guest_watches, 0);
-+    xs_impl_reset_watches(s, 0);
- 
-     /* Read gives back what we wrote */
-     err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative/path", data);
-@@ -123,6 +160,8 @@ static void test_xs_node_simple(void)
-     g_assert(!err);
-     g_assert(data->len == strlen("something"));
- 
-+    g_assert(!qemu_watches->len);
-+    g_assert(!guest_watches->len);
-     /* Keep a copy, to force COW mode */
-     old_root = xs_node_ref(s->root);
- 
-@@ -132,12 +171,18 @@ static void test_xs_node_simple(void)
-                     "something else");
-     g_assert(!err);
-     g_assert(s->nr_nodes == 8);
-+    g_assert(!qemu_watches->len);
-+    g_assert(!strcmp(guest_watches->str, "some/relative/path2guestwatch"));
-+    g_string_truncate(guest_watches, 0);
- 
-     /* Overwrite an existing node */
-     err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative/path",
-                     "another thing");
-     g_assert(!err);
-     g_assert(s->nr_nodes == 8);
-+    g_assert(!qemu_watches->len);
-+    g_assert(!strcmp(guest_watches->str, "some/relative/pathguestwatch"));
-+    g_string_truncate(guest_watches, 0);
- 
-     /* We can list the two files we wrote */
-     err = xs_impl_directory(s, DOMID_GUEST, XBT_NULL, "some/relative", &gencnt,
-@@ -151,9 +196,38 @@ static void test_xs_node_simple(void)
-     g_assert(!items->next->next);
-     g_list_free_full(items, g_free);
- 
-+    err = xs_impl_unwatch(s, DOMID_GUEST, "some", "guestwatch",
-+                          watch_cb, guest_watches);
-+    g_assert(!err);
-+
-+    err = xs_impl_unwatch(s, DOMID_GUEST, "some", "guestwatch",
-+                          watch_cb, guest_watches);
-+    g_assert(err == ENOENT);
-+
-+    err = xs_impl_watch(s, DOMID_GUEST, "some/relative/path2", "watchp2",
-+                        watch_cb, guest_watches);
-+    g_assert(!err);
-+    g_assert(guest_watches->len == strlen("some/relative/path2watchp2"));
-+    g_assert(!strcmp(guest_watches->str, "some/relative/path2watchp2"));
-+    g_string_truncate(guest_watches, 0);
-+
-+    err = xs_impl_watch(s, DOMID_GUEST, "/local/domain/1/some/relative",
-+                        "watchrel", watch_cb, guest_watches);
-+    g_assert(!err);
-+    g_assert(guest_watches->len ==
-+             strlen("/local/domain/1/some/relativewatchrel"));
-+    g_assert(!strcmp(guest_watches->str,
-+                     "/local/domain/1/some/relativewatchrel"));
-+    g_string_truncate(guest_watches, 0);
-+
-     /* Write somewhere else which already existed */
-     err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative", "moredata");
-     g_assert(!err);
-+    g_assert(s->nr_nodes == 8);
-+
-+    g_assert(!strcmp(guest_watches->str,
-+                     "/local/domain/1/some/relativewatchrel"));
-+    g_string_truncate(guest_watches, 0);
- 
-     g_byte_array_set_size(data, 0);
-     err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-@@ -164,6 +238,7 @@ static void test_xs_node_simple(void)
-     /* Overwrite existing data */
-     err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative", "otherdata");
-     g_assert(!err);
-+    g_string_truncate(guest_watches, 0);
- 
-     g_byte_array_set_size(data, 0);
-     err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-@@ -176,11 +251,21 @@ static void test_xs_node_simple(void)
-     g_assert(!err);
-     g_assert(s->nr_nodes == 5);
- 
-+    /* Each watch fires with the least specific relevant path */
-+    g_assert(strstr(guest_watches->str,
-+                    "some/relative/path2watchp2"));
-+    g_assert(strstr(guest_watches->str,
-+                    "/local/domain/1/some/relativewatchrel"));
-+    g_string_truncate(guest_watches, 0);
-+
-     g_byte_array_set_size(data, 0);
-     err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-     g_assert(err == ENOENT);
-     g_byte_array_unref(data);
- 
-+    xs_impl_reset_watches(s, DOMID_GUEST);
-+    g_string_free(qemu_watches, true);
-+    g_string_free(guest_watches, true);
-     xs_node_unref(old_root);
-     xs_impl_delete(s);
- }
--- 
-2.39.0
+The main thing that isn't working here is migration. I've implemented it 
+for the internal xenstore and the unit tests exercise it, but the 
+existing PV back ends don't support it, perhaps partly because support 
+for guest transparent live migration support isn't upstream in Xen yet. 
+So the disk doesn't come back correctly after migration. I'm content 
+with that for 8.0 though.
+
+The other pre-existing constraint is that only the block back end has
+yet been ported to the "new" XenBus infrastructure, and is actually
+capable of creating its own backend nodes. Again, I can live with
+that for 8.0. Maybe this will motivate us to finally get round to
+converting the rest off XenLegacyBackend and killing it.
+
+We also don't have a simple way to perform grant mapping of multiple
+guest pages to contiguous addresses, as we can under real Xen. So we
+don't advertise max-ring-page-order for xen-disk in the emulated mode.
+Fixing that — if we actually want to — would probably require mapping
+RAM from an actual backing store object, so that it can be mapped again
+at a different location for the PV back end to see.
+
+David Woodhouse (21):
+      hw/xen: Add xenstore wire implementation and implementation stubs
+      hw/xen: Add basic XenStore tree walk and write/read/directory support
+      hw/xen: Implement XenStore watches
+      hw/xen: Implement XenStore transactions
+      hw/xen: Watches on XenStore transactions
+      hw/xen: Implement core serialize/deserialize methods for xenstore_impl
+      hw/xen: Add evtchn operations to allow redirection to internal emulation
+      hw/xen: Add gnttab operations to allow redirection to internal emulation
+      hw/xen: Pass grant ref to gnttab unmap operation
+      hw/xen: Add foreignmem operations to allow redirection to internal emulation
+      hw/xen: Move xenstore_store_pv_console_info to xen_console.c
+      hw/xen: Use XEN_PAGE_SIZE in PV backend drivers
+      hw/xen: Rename xen_common.h to xen_native.h
+      hw/xen: Build PV backend drivers for CONFIG_XEN_BUS
+      hw/xen: Only advertise ring-page-order for xen-block if gnttab supports it
+      hw/xen: Hook up emulated implementation for event channel operations
+      hw/xen: Add emulated implementation of grant table operations
+      hw/xen: Add emulated implementation of XenStore operations
+      hw/xen: Map guest XENSTORE_PFN grant in emulated Xenstore
+      hw/xen: Implement soft reset for emulated gnttab
+      i386/xen: Initialize Xen backends from pc_basic_device_init() for emulation
+
+Paul Durrant (4):
+      hw/xen: Implement XenStore permissions
+      hw/xen: Create initial XenStore nodes
+      hw/xen: Add xenstore operations to allow redirection to internal emulation
+      hw/xen: Avoid crash when backend watch fires too early
+
+ accel/xen/xen-all.c                           |   69 +-
+ hw/9pfs/meson.build                           |    2 +-
+ hw/9pfs/xen-9p-backend.c                      |   32 +-
+ hw/block/dataplane/meson.build                |    2 +-
+ hw/block/dataplane/xen-block.c                |   12 +-
+ hw/block/meson.build                          |    2 +-
+ hw/block/xen-block.c                          |   12 +-
+ hw/char/meson.build                           |    2 +-
+ hw/char/xen_console.c                         |   57 +-
+ hw/display/meson.build                        |    2 +-
+ hw/display/xenfb.c                            |   32 +-
+ hw/i386/kvm/meson.build                       |    1 +
+ hw/i386/kvm/trace-events                      |   15 +
+ hw/i386/kvm/xen_evtchn.c                      |   15 +
+ hw/i386/kvm/xen_gnttab.c                      |  325 ++++-
+ hw/i386/kvm/xen_gnttab.h                      |    1 +
+ hw/i386/kvm/xen_xenstore.c                    | 1250 +++++++++++++++-
+ hw/i386/kvm/xenstore_impl.c                   | 1927 +++++++++++++++++++++++++
+ hw/i386/kvm/xenstore_impl.h                   |   63 +
+ hw/i386/pc.c                                  |    7 +
+ hw/i386/pc_piix.c                             |    4 +-
+ hw/i386/xen/xen-hvm.c                         |   38 +-
+ hw/i386/xen/xen-mapcache.c                    |    2 +-
+ hw/i386/xen/xen_platform.c                    |    7 +-
+ hw/net/xen_nic.c                              |   25 +-
+ hw/usb/meson.build                            |    2 +-
+ hw/usb/xen-usb.c                              |   29 +-
+ hw/xen/meson.build                            |    6 +-
+ hw/xen/trace-events                           |    2 +-
+ hw/xen/xen-bus-helper.c                       |   62 +-
+ hw/xen/xen-bus.c                              |  411 +-----
+ hw/xen/xen-legacy-backend.c                   |  254 +---
+ hw/xen/xen-operations.c                       |  478 ++++++
+ hw/xen/xen_devconfig.c                        |    4 +-
+ hw/xen/xen_pt.c                               |    2 +-
+ hw/xen/xen_pt.h                               |    2 +-
+ hw/xen/xen_pt_config_init.c                   |    2 +-
+ hw/xen/xen_pt_graphics.c                      |    1 -
+ hw/xen/xen_pt_msi.c                           |    4 +-
+ hw/xen/xen_pvdev.c                            |   63 +-
+ include/hw/xen/xen-bus-helper.h               |   26 +-
+ include/hw/xen/xen-bus.h                      |   21 +-
+ include/hw/xen/xen-legacy-backend.h           |   24 +-
+ include/hw/xen/xen.h                          |   24 +-
+ include/hw/xen/xen_backend_ops.h              |  408 ++++++
+ include/hw/xen/{xen_common.h => xen_native.h} |   75 +-
+ include/hw/xen/xen_pvdev.h                    |    6 +-
+ softmmu/globals.c                             |    4 +
+ target/i386/kvm/xen-emu.c                     |    5 +
+ tests/unit/meson.build                        |    1 +
+ tests/unit/test-xs-node.c                     |  871 +++++++++++
+ 51 files changed, 5771 insertions(+), 920 deletions(-)
+
+
 
 
