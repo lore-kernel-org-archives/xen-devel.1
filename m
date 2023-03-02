@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7973C87FDC
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:35:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505060.777684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D23FC7EE43
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:35:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505055.777631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxV-00047X-33; Thu, 02 Mar 2023 15:35:05 +0000
+	id 1pXkxO-0002Xr-95; Thu, 02 Mar 2023 15:34:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505060.777684; Thu, 02 Mar 2023 15:35:04 +0000
+Received: by outflank-mailman (output) from mailman id 505055.777631; Thu, 02 Mar 2023 15:34:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxU-00043g-EW; Thu, 02 Mar 2023 15:35:04 +0000
-Received: by outflank-mailman (input) for mailman id 505060;
- Thu, 02 Mar 2023 15:34:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pXkxN-0002Ux-UC; Thu, 02 Mar 2023 15:34:57 +0000
+Received: by outflank-mailman (input) for mailman id 505055;
+ Thu, 02 Mar 2023 15:34:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ucY8=62=casper.srs.infradead.org=BATV+a1ad97f05afd282148df+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pXkxO-0001Jv-5m
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:58 +0000
+ id 1pXkxL-0001Jw-MR
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:55 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c263863f-b90f-11ed-96ad-2f268f93b82a;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c2222017-b90f-11ed-a550-8520e6686977;
  Thu, 02 Mar 2023 16:34:49 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pXkx4-002UNI-Ax; Thu, 02 Mar 2023 15:34:38 +0000
+ id 1pXkx4-002UNE-2J; Thu, 02 Mar 2023 15:34:38 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pXkx4-004uyz-18; Thu, 02 Mar 2023 15:34:38 +0000
+ Linux)) id 1pXkx4-004uyf-0H; Thu, 02 Mar 2023 15:34:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c263863f-b90f-11ed-96ad-2f268f93b82a
+X-Inumbo-ID: c2222017-b90f-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=NF8xN9k5qsj8llf3yVbtIw6AiA0womeXOrSieif4acs=; b=cUA7Lvw0yCJuWXSkIWQA5xO/xU
-	Oi0tHoBTGkTy0ikl27dE7lIj+pLnQsIXy2aPk8GHf/8P6QyEaLRtXsCQ5Wztsruq7+fRMIPkInvid
-	BhmWYmiNrX78XsgufP3qVCbduJfDZnim6W1zVR9V8Wfmw/VG1oJrRoh1PUlM/r6Hp+G62mybpghc7
-	a8a7VW3IfgxIBcXBUsZ+Qyjd/iEcWuoKDr7AwRrFBR7DRB9SuvWx6lnvLe5SrB6THBkKal1wOvUwv
-	h0Bs0RxEp/SQ2jbKEd6YwoRvmiAWSkdzE0EEf6ov2BVNwEYQq5NBZN/fSFsZw7QPTTKvriSAOH6M6
-	Rg5fMqgQ==;
+	bh=gd57rl6hA1kpboJXd3u6ccGehO1OwIsGsYx1K/fGbyI=; b=acy3mFlDAoiyeYDagf/VQnYz7z
+	GNoFtsStCfwiNviV1/hJ0GCzeCN8C2nFIpB1rfAL1RGyDnoMIOWhThp4rS1iDkk3pK0C+Iy9+fBZT
+	P3fyWCFcoy7M+pJGQvHuI9VYEYaGwLN8WIUFYe9Rpka7C17rKTaQNzyWIaQpPyJPpe0Fu1aPTuCpg
+	JOkFcp22gCMbfjTXfIXv8GHPLWZ+JM7jxPAiFwqiv0Jn5IT9YcW6709gnvPeSesqAG/Hr9Fv4sE6y
+	mTvVi/J3gqH2cWrq0Kfr9Etna1eH1lPpICFoU3C47P4SJVAxa5ibOLgHj+A5xNt8VI47tMcaqMl0o
+	C8yFoIvA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -64,9 +64,9 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	vikram.garhwal@amd.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 11/25] hw/xen: Pass grant ref to gnttab unmap operation
-Date: Thu,  2 Mar 2023 15:34:21 +0000
-Message-Id: <20230302153435.1170111-12-dwmw2@infradead.org>
+Subject: [RFC PATCH v1 06/25] hw/xen: Implement XenStore permissions
+Date: Thu,  2 Mar 2023 15:34:16 +0000
+Message-Id: <20230302153435.1170111-7-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
 References: <20230302153435.1170111-1-dwmw2@infradead.org>
@@ -75,331 +75,482 @@ Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Paul Durrant <pdurrant@amazon.com>
 
-The previous commit introduced redirectable gnttab operations fairly
-much like-for-like, with the exception of the extra arguments to the
-->open() call which were always NULL/0 anyway.
+Store perms as a GList of strings, check permissions.
 
-This *changes* the arguments to the ->unmap() operation to include the
-original ref# that was mapped. Under real Xen it isn't necessary; all we
-need to do from QEMU is munmap(), then the kernel will release the grant,
-and Xen does the tracking/refcounting for the guest.
-
-When we have emulated grant tables though, we need to do all that for
-ourselves. So let's have the back ends keep track of what they mapped
-and pass it in to the ->unmap() method for us.
-
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/9pfs/xen-9p-backend.c            |  7 ++++---
- hw/block/dataplane/xen-block.c      |  1 +
- hw/char/xen_console.c               |  2 +-
- hw/net/xen_nic.c                    | 13 ++++++++-----
- hw/usb/xen-usb.c                    | 21 ++++++++++++++++-----
- hw/xen/xen-bus.c                    |  4 ++--
- hw/xen/xen-legacy-backend.c         |  4 ++--
- hw/xen/xen-operations.c             |  9 ++++++++-
- include/hw/xen/xen-bus.h            |  2 +-
- include/hw/xen/xen-legacy-backend.h |  6 +++---
- include/hw/xen/xen_backend_ops.h    |  7 ++++---
- 11 files changed, 50 insertions(+), 26 deletions(-)
+ hw/i386/kvm/xen_xenstore.c  |   2 +-
+ hw/i386/kvm/xenstore_impl.c | 259 +++++++++++++++++++++++++++++++++---
+ hw/i386/kvm/xenstore_impl.h |   8 +-
+ tests/unit/test-xs-node.c   |  27 +++-
+ 4 files changed, 275 insertions(+), 21 deletions(-)
 
-diff --git a/hw/9pfs/xen-9p-backend.c b/hw/9pfs/xen-9p-backend.c
-index 864bdaf952..d8bb0e847c 100644
---- a/hw/9pfs/xen-9p-backend.c
-+++ b/hw/9pfs/xen-9p-backend.c
-@@ -359,12 +359,13 @@ static int xen_9pfs_free(struct XenLegacyDevice *xendev)
-         if (xen_9pdev->rings[i].data != NULL) {
-             xen_be_unmap_grant_refs(&xen_9pdev->xendev,
-                                     xen_9pdev->rings[i].data,
-+                                    xen_9pdev->rings[i].intf->ref,
-                                     (1 << xen_9pdev->rings[i].ring_order));
-         }
-         if (xen_9pdev->rings[i].intf != NULL) {
--            xen_be_unmap_grant_refs(&xen_9pdev->xendev,
--                                    xen_9pdev->rings[i].intf,
--                                    1);
-+            xen_be_unmap_grant_ref(&xen_9pdev->xendev,
-+                                   xen_9pdev->rings[i].intf,
-+                                   xen_9pdev->rings[i].ref);
-         }
-         if (xen_9pdev->rings[i].bh != NULL) {
-             qemu_bh_delete(xen_9pdev->rings[i].bh);
-diff --git a/hw/block/dataplane/xen-block.c b/hw/block/dataplane/xen-block.c
-index 2785b9e849..e55b713002 100644
---- a/hw/block/dataplane/xen-block.c
-+++ b/hw/block/dataplane/xen-block.c
-@@ -705,6 +705,7 @@ void xen_block_dataplane_stop(XenBlockDataPlane *dataplane)
-         Error *local_err = NULL;
+diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+index 64d8f1a38f..3b409e3817 100644
+--- a/hw/i386/kvm/xen_xenstore.c
++++ b/hw/i386/kvm/xen_xenstore.c
+@@ -98,7 +98,7 @@ static void xen_xenstore_realize(DeviceState *dev, Error **errp)
+     aio_set_fd_handler(qemu_get_aio_context(), xen_be_evtchn_fd(s->eh), true,
+                        xen_xenstore_event, NULL, NULL, NULL, s);
  
-         xen_device_unmap_grant_refs(xendev, dataplane->sring,
-+                                    dataplane->ring_ref,
-                                     dataplane->nr_ring_ref, &local_err);
-         dataplane->sring = NULL;
- 
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index 63153dfde4..19ad6c946a 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -271,7 +271,7 @@ static void con_disconnect(struct XenLegacyDevice *xendev)
-         if (!xendev->dev) {
-             xenforeignmemory_unmap(xen_fmem, con->sring, 1);
-         } else {
--            xen_be_unmap_grant_ref(xendev, con->sring);
-+            xen_be_unmap_grant_ref(xendev, con->sring, con->ring_ref);
-         }
-         con->sring = NULL;
-     }
-diff --git a/hw/net/xen_nic.c b/hw/net/xen_nic.c
-index 7d92c2d022..166d03787d 100644
---- a/hw/net/xen_nic.c
-+++ b/hw/net/xen_nic.c
-@@ -181,7 +181,7 @@ static void net_tx_packets(struct XenNetDev *netdev)
-                 qemu_send_packet(qemu_get_queue(netdev->nic),
-                                  page + txreq.offset, txreq.size);
-             }
--            xen_be_unmap_grant_ref(&netdev->xendev, page);
-+            xen_be_unmap_grant_ref(&netdev->xendev, page, txreq.gref);
-             net_tx_response(netdev, &txreq, NETIF_RSP_OKAY);
-         }
-         if (!netdev->tx_work) {
-@@ -261,7 +261,7 @@ static ssize_t net_rx_packet(NetClientState *nc, const uint8_t *buf, size_t size
-         return -1;
-     }
-     memcpy(page + NET_IP_ALIGN, buf, size);
--    xen_be_unmap_grant_ref(&netdev->xendev, page);
-+    xen_be_unmap_grant_ref(&netdev->xendev, page, rxreq.gref);
-     net_rx_response(netdev, &rxreq, NETIF_RSP_OKAY, NET_IP_ALIGN, size, 0);
- 
-     return size;
-@@ -343,7 +343,8 @@ static int net_connect(struct XenLegacyDevice *xendev)
-                                        netdev->rx_ring_ref,
-                                        PROT_READ | PROT_WRITE);
-     if (!netdev->rxs) {
--        xen_be_unmap_grant_ref(&netdev->xendev, netdev->txs);
-+        xen_be_unmap_grant_ref(&netdev->xendev, netdev->txs,
-+                               netdev->tx_ring_ref);
-         netdev->txs = NULL;
-         return -1;
-     }
-@@ -368,11 +369,13 @@ static void net_disconnect(struct XenLegacyDevice *xendev)
-     xen_pv_unbind_evtchn(&netdev->xendev);
- 
-     if (netdev->txs) {
--        xen_be_unmap_grant_ref(&netdev->xendev, netdev->txs);
-+        xen_be_unmap_grant_ref(&netdev->xendev, netdev->txs,
-+                               netdev->tx_ring_ref);
-         netdev->txs = NULL;
-     }
-     if (netdev->rxs) {
--        xen_be_unmap_grant_ref(&netdev->xendev, netdev->rxs);
-+        xen_be_unmap_grant_ref(&netdev->xendev, netdev->rxs,
-+                               netdev->rx_ring_ref);
-         netdev->rxs = NULL;
-     }
- }
-diff --git a/hw/usb/xen-usb.c b/hw/usb/xen-usb.c
-index 0f7369e7ed..a770a64cb4 100644
---- a/hw/usb/xen-usb.c
-+++ b/hw/usb/xen-usb.c
-@@ -101,6 +101,8 @@ struct usbback_hotplug {
- struct usbback_info {
-     struct XenLegacyDevice         xendev;  /* must be first */
-     USBBus                   bus;
-+    uint32_t                 urb_ring_ref;
-+    uint32_t                 conn_ring_ref;
-     void                     *urb_sring;
-     void                     *conn_sring;
-     struct usbif_urb_back_ring urb_ring;
-@@ -277,10 +279,11 @@ static int usbback_init_packet(struct usbback_req *usbback_req)
- static void usbback_do_response(struct usbback_req *usbback_req, int32_t status,
-                                 int32_t actual_length, int32_t error_count)
- {
-+    uint32_t ref[USBIF_MAX_SEGMENTS_PER_REQUEST];
-     struct usbback_info *usbif;
-     struct usbif_urb_response *res;
-     struct XenLegacyDevice *xendev;
--    unsigned int notify;
-+    unsigned int notify, i;
- 
-     usbif = usbback_req->usbif;
-     xendev = &usbif->xendev;
-@@ -293,13 +296,19 @@ static void usbback_do_response(struct usbback_req *usbback_req, int32_t status,
-     }
- 
-     if (usbback_req->buffer) {
--        xen_be_unmap_grant_refs(xendev, usbback_req->buffer,
-+        for (i = 0; i < usbback_req->nr_buffer_segs; i++) {
-+            ref[i] = usbback_req->req.seg[i].gref;
-+        }
-+        xen_be_unmap_grant_refs(xendev, usbback_req->buffer, ref,
-                                 usbback_req->nr_buffer_segs);
-         usbback_req->buffer = NULL;
-     }
- 
-     if (usbback_req->isoc_buffer) {
--        xen_be_unmap_grant_refs(xendev, usbback_req->isoc_buffer,
-+        for (i = 0; i < usbback_req->nr_extra_segs; i++) {
-+            ref[i] = usbback_req->req.seg[i + usbback_req->req.nr_buffer_segs].gref;
-+        }
-+        xen_be_unmap_grant_refs(xendev, usbback_req->isoc_buffer, ref,
-                                 usbback_req->nr_extra_segs);
-         usbback_req->isoc_buffer = NULL;
-     }
-@@ -832,11 +841,11 @@ static void usbback_disconnect(struct XenLegacyDevice *xendev)
-     xen_pv_unbind_evtchn(xendev);
- 
-     if (usbif->urb_sring) {
--        xen_be_unmap_grant_ref(xendev, usbif->urb_sring);
-+        xen_be_unmap_grant_ref(xendev, usbif->urb_sring, usbif->urb_ring_ref);
-         usbif->urb_sring = NULL;
-     }
-     if (usbif->conn_sring) {
--        xen_be_unmap_grant_ref(xendev, usbif->conn_sring);
-+        xen_be_unmap_grant_ref(xendev, usbif->conn_sring, usbif->conn_ring_ref);
-         usbif->conn_sring = NULL;
-     }
- 
-@@ -889,6 +898,8 @@ static int usbback_connect(struct XenLegacyDevice *xendev)
-         return -1;
-     }
- 
-+    usbif->urb_ring_ref = urb_ring_ref;
-+    usbif->conn_ring_ref = conn_ring_ref;
-     urb_sring = usbif->urb_sring;
-     conn_sring = usbif->conn_sring;
-     BACK_RING_INIT(&usbif->urb_ring, urb_sring, XC_PAGE_SIZE);
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index b247e86f28..aee6a8c9b0 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -967,10 +967,10 @@ void *xen_device_map_grant_refs(XenDevice *xendev, uint32_t *refs,
-     return map;
+-    s->impl = xs_impl_create();
++    s->impl = xs_impl_create(xen_domid);
  }
  
--void xen_device_unmap_grant_refs(XenDevice *xendev, void *map,
-+void xen_device_unmap_grant_refs(XenDevice *xendev, void *map, uint32_t *refs,
-                                  unsigned int nr_refs, Error **errp)
- {
--    if (qemu_xen_gnttab_unmap(xendev->xgth, map, nr_refs)) {
-+    if (qemu_xen_gnttab_unmap(xendev->xgth, map, refs, nr_refs)) {
-         error_setg_errno(errp, errno, "xengnttab_unmap failed");
+ static bool xen_xenstore_is_needed(void *opaque)
+diff --git a/hw/i386/kvm/xenstore_impl.c b/hw/i386/kvm/xenstore_impl.c
+index 380f8003ec..7988bde88f 100644
+--- a/hw/i386/kvm/xenstore_impl.c
++++ b/hw/i386/kvm/xenstore_impl.c
+@@ -12,6 +12,8 @@
+ #include "qemu/osdep.h"
+ #include "qom/object.h"
+ 
++#include "hw/xen/xen.h"
++
+ #include "xen_xenstore.h"
+ #include "xenstore_impl.h"
+ 
+@@ -30,6 +32,7 @@
+ typedef struct XsNode {
+     uint32_t ref;
+     GByteArray *content;
++    GList *perms;
+     GHashTable *children;
+     uint64_t gencnt;
+     bool deleted_in_tx;
+@@ -133,6 +136,9 @@ static inline void xs_node_unref(XsNode *n)
+     if (n->content) {
+         g_byte_array_unref(n->content);
      }
- }
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index 1e9a28f263..a48a25aeb5 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -137,11 +137,11 @@ void *xen_be_map_grant_refs(struct XenLegacyDevice *xendev, uint32_t *refs,
- }
- 
- void xen_be_unmap_grant_refs(struct XenLegacyDevice *xendev, void *ptr,
--                             unsigned int nr_refs)
-+                             uint32_t *refs, unsigned int nr_refs)
- {
-     assert(xendev->ops->flags & DEVOPS_FLAG_NEED_GNTDEV);
- 
--    if (qemu_xen_gnttab_unmap(xendev->gnttabdev, ptr, nr_refs)) {
-+    if (qemu_xen_gnttab_unmap(xendev->gnttabdev, ptr, refs, nr_refs)) {
-         xen_pv_printf(xendev, 0, "xengnttab_unmap failed: %s\n",
-                       strerror(errno));
++    if (n->perms) {
++        g_list_free_full(n->perms, g_free);
++    }
+     if (n->children) {
+         g_hash_table_unref(n->children);
      }
-diff --git a/hw/xen/xen-operations.c b/hw/xen/xen-operations.c
-index eb5fb0a59f..73dabac8e5 100644
---- a/hw/xen/xen-operations.c
-+++ b/hw/xen/xen-operations.c
-@@ -200,6 +200,13 @@ static xengnttab_handle *libxengnttab_backend_open(void)
-     return xengnttab_open(NULL, 0);
+@@ -144,8 +150,51 @@ static inline void xs_node_unref(XsNode *n)
+     g_free(n);
  }
  
-+static int libxengnttab_backend_unmap(xengnttab_handle *xgt,
-+                                      void *start_address, uint32_t *refs,
-+                                      uint32_t count)
++char *xs_perm_as_string(unsigned int perm, unsigned int domid)
 +{
-+    return xengnttab_unmap(xgt, start_address, count);
++    char letter;
++
++    switch (perm) {
++    case XS_PERM_READ | XS_PERM_WRITE:
++        letter = 'b';
++        break;
++    case XS_PERM_READ:
++        letter = 'r';
++        break;
++    case XS_PERM_WRITE:
++        letter = 'w';
++        break;
++    case XS_PERM_NONE:
++    default:
++        letter = 'n';
++        break;
++    }
++
++    return g_strdup_printf("%c%u", letter, domid);
 +}
 +
- 
- static struct gnttab_backend_ops libxengnttab_backend_ops = {
-     .features = XEN_GNTTAB_OP_FEATURE_MAP_MULTIPLE,
-@@ -208,7 +215,7 @@ static struct gnttab_backend_ops libxengnttab_backend_ops = {
-     .grant_copy = libxengnttab_fallback_grant_copy,
-     .set_max_grants = xengnttab_set_max_grants,
-     .map_refs = xengnttab_map_domain_grant_refs,
--    .unmap = xengnttab_unmap,
-+    .unmap = libxengnttab_backend_unmap,
- };
- 
- void setup_xen_backend_ops(void)
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 72d71d1eb7..5a90e79d53 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -102,7 +102,7 @@ void xen_device_set_max_grant_refs(XenDevice *xendev, unsigned int nr_refs,
- void *xen_device_map_grant_refs(XenDevice *xendev, uint32_t *refs,
-                                 unsigned int nr_refs, int prot,
-                                 Error **errp);
--void xen_device_unmap_grant_refs(XenDevice *xendev, void *map,
-+void xen_device_unmap_grant_refs(XenDevice *xendev, void *map, uint32_t *refs,
-                                  unsigned int nr_refs, Error **errp);
- 
- typedef struct XenDeviceGrantCopySegment {
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index eaf79cd221..ab28583267 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -52,7 +52,7 @@ void xen_be_set_max_grant_refs(struct XenLegacyDevice *xendev,
- void *xen_be_map_grant_refs(struct XenLegacyDevice *xendev, uint32_t *refs,
-                             unsigned int nr_refs, int prot);
- void xen_be_unmap_grant_refs(struct XenLegacyDevice *xendev, void *ptr,
--                             unsigned int nr_refs);
-+                             uint32_t *refs, unsigned int nr_refs);
- 
- int xen_be_copy_grant_refs(struct XenLegacyDevice *xendev,
-                            bool to_domain, XenGrantCopySegment segs[],
-@@ -65,9 +65,9 @@ static inline void *xen_be_map_grant_ref(struct XenLegacyDevice *xendev,
- }
- 
- static inline void xen_be_unmap_grant_ref(struct XenLegacyDevice *xendev,
--                                          void *ptr)
-+                                          void *ptr, uint32_t ref)
++static gpointer do_perm_copy(gconstpointer src, gpointer user_data)
++{
++    return g_strdup(src);
++}
++
++static XsNode *xs_node_create(const char *name, GList *perms)
++{
++    XsNode *n = xs_node_new();
++
++#ifdef XS_NODE_UNIT_TEST
++    if (name) {
++        n->name = g_strdup(name);
++    }
++#endif
++
++    n->perms = g_list_copy_deep(perms, do_perm_copy, NULL);
++
++    return n;
++}
++
+ /* For copying from one hash table to another using g_hash_table_foreach() */
+-static void do_insert(gpointer key, gpointer value, gpointer user_data)
++static void do_child_insert(gpointer key, gpointer value, gpointer user_data)
  {
--    return xen_be_unmap_grant_refs(xendev, ptr, 1);
-+    return xen_be_unmap_grant_refs(xendev, ptr, &ref, 1);
+     g_hash_table_insert(user_data, g_strdup(key), xs_node_ref(value));
  }
- 
- /* actual backend drivers */
-diff --git a/include/hw/xen/xen_backend_ops.h b/include/hw/xen/xen_backend_ops.h
-index bb3333ab00..6f9d8e2c62 100644
---- a/include/hw/xen/xen_backend_ops.h
-+++ b/include/hw/xen/xen_backend_ops.h
-@@ -144,7 +144,8 @@ struct gnttab_backend_ops {
-     int (*set_max_grants)(xengnttab_handle *xgt, uint32_t nr_grants);
-     void *(*map_refs)(xengnttab_handle *xgt, uint32_t count, uint32_t domid,
-                       uint32_t *refs, int prot);
--    int (*unmap)(xengnttab_handle *xgt, void *start_address, uint32_t count);
-+    int (*unmap)(xengnttab_handle *xgt, void *start_address, uint32_t *refs,
-+                 uint32_t count);
- };
- 
- extern struct gnttab_backend_ops *xen_gnttab_ops;
-@@ -204,13 +205,13 @@ static inline void *qemu_xen_gnttab_map_refs(xengnttab_handle *xgt,
- }
- 
- static inline int qemu_xen_gnttab_unmap(xengnttab_handle *xgt,
--                                        void *start_address,
-+                                        void *start_address, uint32_t *refs,
-                                         uint32_t count)
- {
-     if (!xen_gnttab_ops) {
-         return -ENOSYS;
+@@ -162,12 +211,16 @@ static XsNode *xs_node_copy(XsNode *old)
      }
--    return xen_gnttab_ops->unmap(xgt, start_address, count);
-+    return xen_gnttab_ops->unmap(xgt, start_address, refs, count);
+ #endif
+ 
++    assert(old);
+     if (old->children) {
+         n->children = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
+                                             (GDestroyNotify)xs_node_unref);
+-        g_hash_table_foreach(old->children, do_insert, n->children);
++        g_hash_table_foreach(old->children, do_child_insert, n->children);
+     }
+-    if (old && old->content) {
++    if (old->perms) {
++        n->perms = g_list_copy_deep(old->perms, do_perm_copy, NULL);
++    }
++    if (old->content) {
+         n->content = g_byte_array_ref(old->content);
+     }
+     return n;
+@@ -383,6 +436,9 @@ static XsNode *xs_node_copy_deleted(XsNode *old, struct walk_op *op)
+         op->op_opaque2 = n->children;
+         g_hash_table_foreach(old->children, copy_deleted_recurse, op);
+     }
++    if (old->perms) {
++        n->perms = g_list_copy_deep(old->perms, do_perm_copy, NULL);
++    }
+     n->deleted_in_tx = true;
+     /* If it gets resurrected we only fire a watch if it lost its content */
+     if (old->content) {
+@@ -417,6 +473,104 @@ static int xs_node_rm(XsNode **n, struct walk_op *op)
+     return 0;
  }
  
- void setup_xen_backend_ops(void);
++static int xs_node_get_perms(XsNode **n, struct walk_op *op)
++{
++    GList **perms = op->op_opaque;
++
++    assert(op->inplace);
++    assert(*n);
++
++    *perms = g_list_copy_deep((*n)->perms, do_perm_copy, NULL);
++    return 0;
++}
++
++static void parse_perm(const char *perm, char *letter, unsigned int *dom_id)
++{
++    unsigned int n = sscanf(perm, "%c%u", letter, dom_id);
++
++    assert(n == 2);
++}
++
++static bool can_access(unsigned int dom_id, GList *perms, const char *letters)
++{
++    unsigned int i, n;
++    char perm_letter;
++    unsigned int perm_dom_id;
++    bool access;
++
++    if (dom_id == 0) {
++        return true;
++    }
++
++    n = g_list_length(perms);
++    assert(n >= 1);
++
++    /*
++     * The dom_id of the first perm is the owner, and the owner always has
++     * read-write access.
++     */
++    parse_perm(g_list_nth_data(perms, 0), &perm_letter, &perm_dom_id);
++    if (dom_id == perm_dom_id) {
++        return true;
++    }
++
++    /*
++     * The letter of the first perm specified the default access for all other
++     * domains.
++     */
++    access = !!strchr(letters, perm_letter);
++    for (i = 1; i < n; i++) {
++        parse_perm(g_list_nth_data(perms, i), &perm_letter, &perm_dom_id);
++        if (dom_id != perm_dom_id) {
++            continue;
++        }
++        access = !!strchr(letters, perm_letter);
++    }
++
++    return access;
++}
++
++static int xs_node_set_perms(XsNode **n, struct walk_op *op)
++{
++    GList *perms = op->op_opaque;
++
++    if (op->dom_id) {
++        unsigned int perm_dom_id;
++        char perm_letter;
++
++        /* A guest may not change permissions on nodes it does not own */
++        if (!can_access(op->dom_id, (*n)->perms, "")) {
++            return EPERM;
++        }
++
++        /* A guest may not change the owner of a node it owns. */
++        parse_perm(perms->data, &perm_letter, &perm_dom_id);
++        if (perm_dom_id != op->dom_id) {
++            return EPERM;
++        }
++
++        if (g_list_length(perms) > XS_MAX_PERMS_PER_NODE) {
++            return ENOSPC;
++        }
++    }
++
++    /* We *are* the node to be written. Either this or a copy. */
++    if (!op->inplace) {
++        XsNode *old = *n;
++        *n = xs_node_copy(old);
++        xs_node_unref(old);
++    }
++
++    if ((*n)->perms) {
++        g_list_free_full((*n)->perms, g_free);
++    }
++    (*n)->perms = g_list_copy_deep(perms, do_perm_copy, NULL);
++    if (op->tx_id != XBT_NULL) {
++        (*n)->modified_in_tx = true;
++    }
++    return 0;
++}
++
+ /*
+  * Passed a full reference in *n which it may free if it needs to COW.
+  *
+@@ -458,6 +612,13 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
+     }
+ 
+     if (!child_name) {
++        const char *letters = op->mutating ? "wb" : "rb";
++
++        if (!can_access(op->dom_id, old->perms, letters)) {
++            err = EACCES;
++            goto out;
++        }
++
+         /* This is the actual node on which the operation shall be performed */
+         err = op->op_fn(n, op);
+         if (!err) {
+@@ -491,12 +652,20 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
+             stole_child = true;
+         }
+     } else if (op->create_dirs) {
++        assert(op->mutating);
++
++        if (!can_access(op->dom_id, old->perms, "wb")) {
++            err = EACCES;
++            goto out;
++        }
++
+         if (op->dom_id && op->new_nr_nodes >= XS_MAX_DOMAIN_NODES) {
+             err = ENOSPC;
+             goto out;
+         }
++
++        child = xs_node_create(child_name, old->perms);
+         op->new_nr_nodes++;
+-        child = xs_node_new();
+ 
+         /*
+          * If we're creating a new child, we can clearly modify it (and its
+@@ -918,20 +1087,73 @@ int xs_impl_rm(XenstoreImplState *s, unsigned int dom_id,
+ int xs_impl_get_perms(XenstoreImplState *s, unsigned int dom_id,
+                       xs_transaction_t tx_id, const char *path, GList **perms)
+ {
+-    /*
+-     * The perms are (char *) in the <perm-as-string> wire format to be
+-     * freed by the caller.
+-     */
+-    return ENOSYS;
++    struct walk_op op;
++    XsNode **n;
++    int ret;
++
++    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
++    if (ret) {
++        return ret;
++    }
++    op.op_fn = xs_node_get_perms;
++    op.op_opaque = perms;
++    return xs_node_walk(n, &op);
++}
++
++static void is_valid_perm(gpointer data, gpointer user_data)
++{
++    char *perm = data;
++    bool *valid = user_data;
++    char letter;
++    unsigned int dom_id;
++
++    if (!*valid) {
++        return;
++    }
++
++    if (sscanf(perm, "%c%u", &letter, &dom_id) != 2) {
++        *valid = false;
++        return;
++    }
++
++    switch (letter) {
++    case 'n':
++    case 'r':
++    case 'w':
++    case 'b':
++        break;
++
++    default:
++        *valid = false;
++        break;
++    }
+ }
+ 
+ int xs_impl_set_perms(XenstoreImplState *s, unsigned int dom_id,
+                       xs_transaction_t tx_id, const char *path, GList *perms)
+ {
+-    /*
+-     * The perms are (const char *) in the <perm-as-string> wire format.
+-     */
+-    return ENOSYS;
++    struct walk_op op;
++    XsNode **n;
++    bool valid = true;
++    int ret;
++
++    if (!g_list_length(perms)) {
++        return EINVAL;
++    }
++
++    g_list_foreach(perms, is_valid_perm, &valid);
++    if (!valid) {
++        return EINVAL;
++    }
++
++    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
++    if (ret) {
++        return ret;
++    }
++    op.op_fn = xs_node_set_perms;
++    op.op_opaque = perms;
++    op.mutating = true;
++    return xs_node_walk(n, &op);
+ }
+ 
+ int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
+@@ -1122,18 +1344,19 @@ static void xs_tx_free(void *_tx)
+     g_free(tx);
+ }
+ 
+-XenstoreImplState *xs_impl_create(void)
++XenstoreImplState *xs_impl_create(unsigned int dom_id)
+ {
+     XenstoreImplState *s = g_new0(XenstoreImplState, 1);
++    GList *perms;
+ 
+     s->watches = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+     s->transactions = g_hash_table_new_full(g_direct_hash, g_direct_equal,
+                                             NULL, xs_tx_free);
++
++    perms = g_list_append(NULL, xs_perm_as_string(XS_PERM_NONE, 0));
++    s->root = xs_node_create("/", perms);
++    g_list_free_full(perms, g_free);
+     s->nr_nodes = 1;
+-    s->root = xs_node_new();
+-#ifdef XS_NODE_UNIT_TEST
+-    s->root->name = g_strdup("/");
+-#endif
+ 
+     s->root_tx = s->last_tx = 1;
+     return s;
+diff --git a/hw/i386/kvm/xenstore_impl.h b/hw/i386/kvm/xenstore_impl.h
+index beb7b29ab8..2f81251b5e 100644
+--- a/hw/i386/kvm/xenstore_impl.h
++++ b/hw/i386/kvm/xenstore_impl.h
+@@ -16,9 +16,15 @@ typedef uint32_t xs_transaction_t;
+ 
+ #define XBT_NULL 0
+ 
++#define XS_PERM_NONE  0x00
++#define XS_PERM_READ  0x01
++#define XS_PERM_WRITE 0x02
++
+ typedef struct XenstoreImplState XenstoreImplState;
+ 
+-XenstoreImplState *xs_impl_create(void);
++XenstoreImplState *xs_impl_create(unsigned int dom_id);
++
++char *xs_perm_as_string(unsigned int perm, unsigned int domid);
+ 
+ /*
+  * These functions return *positive* error numbers. This is a little
+diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
+index 02c72baa62..2c0f89c694 100644
+--- a/tests/unit/test-xs-node.c
++++ b/tests/unit/test-xs-node.c
+@@ -80,8 +80,9 @@ static void watch_cb(void *_str, const char *path, const char *token)
+ 
+ static XenstoreImplState *setup(void)
+ {
+-   XenstoreImplState *s = xs_impl_create();
++   XenstoreImplState *s = xs_impl_create(DOMID_GUEST);
+    char *abspath;
++   GList *perms;
+    int err;
+ 
+    abspath = g_strdup_printf("/local/domain/%u", DOMID_GUEST);
+@@ -90,6 +91,13 @@ static XenstoreImplState *setup(void)
+    g_assert(!err);
+    g_assert(s->nr_nodes == 4);
+ 
++   perms = g_list_append(NULL, g_strdup_printf("n%u", DOMID_QEMU));
++   perms = g_list_append(perms, g_strdup_printf("r%u", DOMID_GUEST));
++
++   err = xs_impl_set_perms(s, DOMID_QEMU, XBT_NULL, abspath, perms);
++   g_assert(!err);
++
++   g_list_free_full(perms, g_free);
+    g_free(abspath);
+ 
+    abspath = g_strdup_printf("/local/domain/%u/some", DOMID_GUEST);
+@@ -98,6 +106,12 @@ static XenstoreImplState *setup(void)
+    g_assert(!err);
+    g_assert(s->nr_nodes == 5);
+ 
++   perms = g_list_append(NULL, g_strdup_printf("n%u", DOMID_GUEST));
++
++   err = xs_impl_set_perms(s, DOMID_QEMU, XBT_NULL, abspath, perms);
++   g_assert(!err);
++
++   g_list_free_full(perms, g_free);
+    g_free(abspath);
+ 
+    return s;
+@@ -166,6 +180,12 @@ static void test_xs_node_simple(void)
+     /* Keep a copy, to force COW mode */
+     old_root = xs_node_ref(s->root);
+ 
++    /* Write somewhere we aren't allowed, in COW mode */
++    err = write_str(s, DOMID_GUEST, XBT_NULL, "/local/domain/badplace",
++                    "moredata");
++    g_assert(err == EACCES);
++    g_assert(s->nr_nodes == 7);
++
+     /* Write works again */
+     err = write_str(s, DOMID_GUEST, XBT_NULL,
+                     "/local/domain/1/some/relative/path2",
+@@ -226,6 +246,11 @@ static void test_xs_node_simple(void)
+     g_assert(!err);
+     g_assert(s->nr_nodes == 8);
+ 
++    /* Write somewhere we aren't allowed */
++    err = write_str(s, DOMID_GUEST, XBT_NULL, "/local/domain/badplace",
++                    "moredata");
++    g_assert(err == EACCES);
++
+     g_assert(!strcmp(guest_watches->str,
+                      "/local/domain/1/some/relativewatchrel"));
+     g_string_truncate(guest_watches, 0);
 -- 
 2.39.0
 
