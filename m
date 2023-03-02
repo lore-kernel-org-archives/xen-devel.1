@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23CCDC678D4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4262C7EE37
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 17:54:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505299.778008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.505298.778000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXn7l-0000Eq-Da; Thu, 02 Mar 2023 17:53:49 +0000
+	id 1pXn7k-0008VD-U6; Thu, 02 Mar 2023 17:53:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505299.778008; Thu, 02 Mar 2023 17:53:49 +0000
+Received: by outflank-mailman (output) from mailman id 505298.778000; Thu, 02 Mar 2023 17:53:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXn7l-0000C6-6j; Thu, 02 Mar 2023 17:53:49 +0000
-Received: by outflank-mailman (input) for mailman id 505299;
+	id 1pXn7k-0008Rc-N7; Thu, 02 Mar 2023 17:53:48 +0000
+Received: by outflank-mailman (input) for mailman id 505298;
  Thu, 02 Mar 2023 17:53:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BPDg=62=citrix.com=prvs=418368d91=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1pXn7j-00086w-IU
+ id 1pXn7j-00086v-3J
  for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 17:53:47 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2cb47d8d-b923-11ed-96ad-2f268f93b82a;
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2d0cb084-b923-11ed-a550-8520e6686977;
  Thu, 02 Mar 2023 18:53:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,433 +38,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2cb47d8d-b923-11ed-96ad-2f268f93b82a
+X-Inumbo-ID: 2d0cb084-b923-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1677779625;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=5MNo1ps8O2O0aeLQiXGpyjU3jhCbvyS2iGWQkujCObw=;
-  b=Ypta3oKZqs32cHavA+kXrbFJgcK10POplzP2LQeKkQ0iTVRb+V0dgw2S
-   AOFF02FcuCr0lt0DwdRxSReKZcSRGslIRbRaol6ZlzYeyJ7RVVFXW/qAb
-   j8XWswznmo7XEFB2zSile8ccySKj4GOulfdUu4H3A6K1HgCv3AWAB6q6Q
-   I=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Pqjolciy/GYaOh/EUUxEl9qt3jG0Ps61g++fsO8Rsmo=;
+  b=GcHEtLSafx9DhybyYzjnebuSYLNmy89Wmpkz4JhaYZRS9+gIsHjqgyzo
+   a69YF/LYIxUFQ9qM1mu8RCEFcTv8HIlst8KyS+f05O9CFEeDTs8NA6h2G
+   OIujfWsCt+FszkIpKFyy8zf4oHVPjHEWPZjqOEts4MqDqsFNygLC3wAdA
+   A=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 99135360
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 101652772
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Ywu3D6MFXMM7GF7vrR2+l8FynXyQoLVcMsEvi/4bfWQNrUolhjBWx
- zEcXGyBbv7ZN2Pze4t1aoq18x9UsZTTyNdmHAto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tD5gZmPpingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0ulrAFoJ7
- +ckEh4IMhqlpvqb5+ujZfY506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w2Nk+ojx5nYz/7DLo3mvuogX/uNSVVsluPqYI84nTJzRw327/oWDbQUo3bHJ4IxRjAz
- o7A10/zXj1KJeSH8yi61X2W2+bgghjnWLtHQdVU8dY12QbOlwT/EiY+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yFaPtwQQXNd4GOQg5AaAjKHT5m6xHXMYRzRMbNgnss4eRjEw0
- FKN2dTzClRSXKa9ECzHsO3O9HXrZHZTdDVZDcMZcecby9b/obp0lAnzdPhmTKSTr8XYPmjo7
- C/f+UDSmI4vpcIM0qy6+3XOjDStuoXFQ2YJ2+nHYo62xlgnPdD4PuRE/XCetK8dd9jBEjFtq
- VBew6CjAPYy4YZhfcBnaMEEB/mX6vmMK1UwanY/TsB6p1xBF5NOFL28AQ2Sxm8zb67omhezO
- ic/XD+9A7cCVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOgD+zwRV8yfhmZ
- cbznSOQ4ZEyU/kP8dZLb71Fje9DKt4Wngs/uqwXPzz4iOHDNRZ5uJ8OMUeUb/BR0U93iFy9z
- jqrDOPTk083eLSnMkHqHXs7cQhiwY4TWcqn9KS6t4erfmJbJY3WI6SKneh6ItQ7xvU9eyWh1
- ijVZ3K0AWHX3RXvQThmoFg5AF8zdf6TdU4GABE=
-IronPort-HdrOrdr: A9a23:+aSsLaHsmK+8UxhYpLqE5seALOsnbusQ8zAXPiFKJSC9F/byqy
- nAppsmPHPP5gr5OktBpTnwAsi9qBrnnPYejLX5Vo3SPzUO1lHYSb1K3M/PxCDhBj271sM179
- YFT0GmMqyTMWRH
+IronPort-Data: A9a23:riksuKmrKu4cilt5syG4ocro5gybJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIeXmjUb//eZWbxft1yaYy/o0kF6MXRx9ZgSVY+pSxmFCMWpZLJC+rCIxarNUt+DCFhoGFPt
+ JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
+ LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5AWGzBH5MbpETU2PByqgKmVrNrbSq
+ 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
+ f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
+ e4qMiEEcBahu8udxK6DG8MzxekOLsa+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
+ ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglH2dSFYr1SE47I6+WHJwCR60aT3McqTcduPLSlQth/A/
+ zybpTumWHn2MvSYzmG3olGUjNbesgjrCaAzRb6fztBD1Qj7Kms7V0RNCArTTeOCol6zXZdTJ
+ lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4CPYm4QuAzq7V5QexBWUeSDNFLts8u6ceTjUw2
+ liEt9jgHzBovfueTnf1y1uPhWrsY25PdzZEPHJaC1JfuLEPvb3fkDrdfMxyGbCzrOHcMjXs+
+ 2Gg82sTqrcc2JtjO7qAwXjLhDelp57sRwEz5xnKUm/N0j6VdLJJdKTztwGFsK8owJKxCwDY4
+ SNaw5T2APUmV8nlqcCbfAka8FhFDd6hOSaUv1NgFoJJG9+Fqy/6JtA4DN2TyS5U3ic4ld3BO
+ hK7VeB5vsU70J6WgUhfMuqM5zwCl/SIKDgcfqm8giBySpZwbhSb2ypleFSd2Wvg+GB1z/5gZ
+ 8bGIZ71VCpLYUiC8NZRb71AuYLHOwhknT+DLXwF50/PPUWiiI69Fu5ebQrmghER56KYugTFm
+ +uzxOPToyizpNbWO3GNmaZKdABiEJTOLcyuwyChXrLZc1UO9aBII6O5/I7NjKQ+xPgOzb6Qo
+ CjsMqKaoXKm7UD6xcyxQigLQNvSsVxX9xrX4QRE0Y6U5kUe
+IronPort-HdrOrdr: A9a23:pLwkj6BC9YtXctTlHelo55DYdb4zR+YMi2TDt3oddfU1SL38qy
+ nKpp4mPHDP5wr5NEtPpTniAtjjfZq/z/5ICOAqVN/PYOCPggCVxepZnOjfKlPbehEX9oRmpN
+ 1dm6oVMqyMMbCt5/yKnDVRELwbsaa6GLjDv5a785/0JzsaE52J6W1Ce2GmO3wzfiZqL7wjGq
+ GR48JWzgDQAkj+PqyAdx84t/GonayzqK7b
 X-IronPort-AV: E=Sophos;i="5.98,228,1673931600"; 
-   d="scan'208";a="99135360"
+   d="scan'208";a="101652772"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>
-Subject: [RFC XEN PATCH 4/7] automation: Adding containers build jobs and test of thoses
-Date: Thu, 2 Mar 2023 17:53:29 +0000
-Message-ID: <20230302175332.56052-5-anthony.perard@citrix.com>
+	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [RFC XEN PATCH 0/7] automation, RFC prototype, Have GitLab CI built its own containers
+Date: Thu, 2 Mar 2023 17:53:25 +0000
+Message-ID: <20230302175332.56052-1-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230302175332.56052-1-anthony.perard@citrix.com>
-References: <20230302175332.56052-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-For the test-containers jobs, mostly copy from "build.yaml", rename
-'.container-*-tmpl' templates to '.container-*-testtmpl', prefix build
-jobs with "test-", add BUILD_CONTAINER and "needs" to container
-template.
+Patch series available in this git branch:
+https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.gitlab-containers-auto-rebuild-v1
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
+Hi,
 
-Notes:
-    WARNING: This is an incomplete list of the containers that can be
-    rebuilt and tested.
+I have done some research to be able to build containers in the CI. This works
+only for x86 containers as I've setup only a single x86 gitlab-runner to be
+able to run docker-in-docker.
 
- automation/gitlab-ci/containers.yaml      |  74 ++++++-
- automation/gitlab-ci/test-containers.yaml | 257 ++++++++++++++++++++++
- 2 files changed, 330 insertions(+), 1 deletion(-)
+The runner is setup to only accept jobs from a branch that is "protected" in
+gitlab. Also, one need credential to push to the container register, those are
+called "Group deploy tokens", and I've set the variables CI_DEPLOY_USER and
+CI_DEPLOY_PASSWORD in the project "xen-project/xen" (variables only visible on
+a pipeline running on a protected branch).
 
-diff --git a/automation/gitlab-ci/containers.yaml b/automation/gitlab-ci/containers.yaml
-index ace93eaccf..a6d61980b1 100644
---- a/automation/gitlab-ci/containers.yaml
-+++ b/automation/gitlab-ci/containers.yaml
-@@ -18,8 +18,80 @@
-   after_script:
-     - docker logout
- 
--debian-unstable-container:
-+archlinux-current-container:
-+  variables:
-+    BUILD_CONTAINER: archlinux/current
-+  extends:
-+    - .container-build-tmpl
-+
-+centos-7-2-container:
-+  variables:
-+    BUILD_CONTAINER: centos/7.2
-+  extends:
-+    - .container-build-tmpl
-+
-+centos-7-container:
-+  variables:
-+    BUILD_CONTAINER: centos/7
-+  extends:
-+    - .container-build-tmpl
-+
-+debian-jessie-container:
-+  variables:
-+    BUILD_CONTAINER: debian/jessie
-+  extends:
-+    - .container-build-tmpl
-+
-+debian-jessie-32-container:
-+  variables:
-+    BUILD_CONTAINER: debian/jessie-i386
-+  extends:
-+    - .container-build-tmpl
-+
-+debian-stretch-container:
-+  variables:
-+    BUILD_CONTAINER: debian/stretch
-+  extends:
-+    - .container-build-tmpl
-+
-+debian-stretch-32-container:
-+  variables:
-+    BUILD_CONTAINER: debian/stretch-i386
-   extends:
-     - .container-build-tmpl
-+
-+debian-unstable-container:
-   variables:
-     BUILD_CONTAINER: debian/unstable
-+  extends:
-+    - .container-build-tmpl
-+
-+debian-unstable-32-container:
-+  variables:
-+    BUILD_CONTAINER: debian/unstable-i386
-+  extends:
-+    - .container-build-tmpl
-+
-+ubuntu-trusty-container:
-+  variables:
-+    BUILD_CONTAINER: ubuntu/trusty
-+  extends:
-+    - .container-build-tmpl
-+
-+ubuntu-xenial-container:
-+  variables:
-+    BUILD_CONTAINER: ubuntu/xenial
-+  extends:
-+    - .container-build-tmpl
-+
-+ubuntu-bionic-container:
-+  variables:
-+    BUILD_CONTAINER: ubuntu/bionic
-+  extends:
-+    - .container-build-tmpl
-+
-+ubuntu-focal-container:
-+  variables:
-+    BUILD_CONTAINER: ubuntu/focal
-+  extends:
-+    - .container-build-tmpl
-diff --git a/automation/gitlab-ci/test-containers.yaml b/automation/gitlab-ci/test-containers.yaml
-index 5dbf3902ff..4d5c6ba364 100644
---- a/automation/gitlab-ci/test-containers.yaml
-+++ b/automation/gitlab-ci/test-containers.yaml
-@@ -197,6 +197,148 @@
- 
- # Jobs below this line
- 
-+.container-archlinux-testtmpl:
-+  variables:
-+    CONTAINER: archlinux:current
-+    BUILD_CONTAINER: archlinux/current
-+  needs:
-+    - archlinux-current-container
-+
-+test-archlinux-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-archlinux-testtmpl
-+
-+test-archlinux-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-archlinux-testtmpl
-+
-+.container-centos-7-testtmpl:
-+  variables:
-+    CONTAINER: centos:7
-+    BUILD_CONTAINER: centos/7
-+  needs:
-+    - centos-7-container
-+
-+test-centos-7-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-centos-7-testtmpl
-+
-+test-centos-7-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-centos-7-testtmpl
-+
-+.container-debian-jessie-testtmpl:
-+  variables:
-+    CONTAINER: debian:jessie
-+    BUILD_CONTAINER: debian/jessie
-+  needs:
-+    - debian-jessie-container
-+
-+test-debian-jessie-clang:
-+  extends:
-+    - .clang-x86-64-testbuild
-+    - .container-debian-jessie-testtmpl
-+
-+test-debian-jessie-clang-debug:
-+  extends:
-+    - .clang-x86-64-testbuild-debug
-+    - .container-debian-jessie-testtmpl
-+
-+test-debian-jessie-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-debian-jessie-testtmpl
-+
-+test-debian-jessie-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-debian-jessie-testtmpl
-+
-+.container-debian-32-jessie-testtmpl:
-+  variables:
-+    CONTAINER: debian:jessie-i386
-+    BUILD_CONTAINER: debian/jessie-i386
-+  needs:
-+    - debian-jessie-32-container
-+
-+test-debian-jessie-32-clang:
-+  extends:
-+    - .clang-x86-32-testbuild
-+    - .container-debian-32-jessie-testtmpl
-+
-+test-debian-jessie-32-clang-debug:
-+  extends:
-+    - .clang-x86-32-testbuild-debug
-+    - .container-debian-32-jessie-testtmpl
-+
-+test-debian-jessie-32-gcc:
-+  extends:
-+    - .gcc-x86-32-testbuild
-+    - .container-debian-32-jessie-testtmpl
-+
-+test-debian-jessie-32-gcc-debug:
-+  extends:
-+    - .gcc-x86-32-testbuild-debug
-+    - .container-debian-32-jessie-testtmpl
-+
-+.container-debian-stretch-testtmpl:
-+  variables:
-+    CONTAINER: debian:stretch
-+    BUILD_CONTAINER: debian/stretch
-+  needs:
-+    - debian-stretch-container
-+
-+test-debian-stretch-clang:
-+  extends:
-+    - .clang-x86-64-testbuild
-+    - .container-debian-stretch-testtmpl
-+
-+test-debian-stretch-clang-debug:
-+  extends:
-+    - .clang-x86-64-testbuild-debug
-+    - .container-debian-stretch-testtmpl
-+
-+test-debian-stretch-clang-8:
-+  extends:
-+    - .clang-8-x86-64-testbuild
-+    - .container-debian-stretch-testtmpl
-+
-+test-debian-stretch-clang-8-debug:
-+  extends:
-+    - .clang-8-x86-64-testbuild-debug
-+    - .container-debian-stretch-testtmpl
-+
-+test-debian-stretch-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-debian-stretch-testtmpl
-+
-+test-debian-stretch-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-debian-stretch-testtmpl
-+
-+.container-debian-stretch-32-testtmpl:
-+  variables:
-+    CONTAINER: debian:stretch-i386
-+    BUILD_CONTAINER: debian/stretch-i386
-+  needs:
-+    - debian-stretch-32-container
-+
-+test-debian-stretch-32-clang-debug:
-+  extends:
-+    - .clang-x86-32-testbuild-debug
-+    - .container-debian-stretch-32-testtmpl
-+
-+test-debian-stretch-32-gcc-debug:
-+  extends:
-+    - .gcc-x86-32-testbuild-debug
-+    - .container-debian-stretch-32-testtmpl
-+
- .container-debian-unstable-testtmpl:
-   variables:
-     CONTAINER: debian:unstable
-@@ -237,3 +379,118 @@ test-debian-unstable-gcc-debug-randconfig:
-     - .container-debian-unstable-testtmpl
-   variables:
-     RANDCONFIG: y
-+
-+.container-debian-unstable-32-testtmpl:
-+  variables:
-+    CONTAINER: debian:unstable-i386
-+    BUILD_CONTAINER: debian/unstable-i386
-+  needs:
-+    - debian-unstable-32-container
-+
-+test-debian-unstable-32-clang-debug:
-+  extends:
-+    - .clang-x86-32-testbuild-debug
-+    - .container-debian-unstable-32-testtmpl
-+
-+test-debian-unstable-32-gcc-debug:
-+  extends:
-+    - .gcc-x86-32-testbuild-debug
-+    - .container-debian-unstable-32-testtmpl
-+
-+.container-ubuntu-trusty-testtmpl:
-+  variables:
-+    CONTAINER: ubuntu:trusty
-+    BUILD_CONTAINER: ubuntu/trusty
-+  needs:
-+    - ubuntu-trusty-container
-+
-+test-ubuntu-trusty-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-ubuntu-trusty-testtmpl
-+
-+test-ubuntu-trusty-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-ubuntu-trusty-testtmpl
-+
-+.container-ubuntu-xenial-testtmpl:
-+  variables:
-+    CONTAINER: ubuntu:xenial
-+    BUILD_CONTAINER: ubuntu/xenial
-+  needs:
-+    - ubuntu-xenial-container
-+
-+test-ubuntu-xenial-clang:
-+  extends:
-+    - .clang-x86-64-testbuild
-+    - .container-ubuntu-xenial-testtmpl
-+
-+test-ubuntu-xenial-clang-debug:
-+  extends:
-+    - .clang-x86-64-testbuild-debug
-+    - .container-ubuntu-xenial-testtmpl
-+
-+test-ubuntu-xenial-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-ubuntu-xenial-testtmpl
-+
-+test-ubuntu-xenial-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-ubuntu-xenial-testtmpl
-+
-+.container-ubuntu-bionic-testtmpl:
-+  variables:
-+    CONTAINER: ubuntu:bionic
-+    BUILD_CONTAINER: ubuntu/bionic
-+  needs:
-+    - ubuntu-bionic-container
-+
-+test-ubuntu-bionic-clang:
-+  extends:
-+    - .clang-x86-64-testbuild
-+    - .container-ubuntu-bionic-testtmpl
-+
-+test-ubuntu-bionic-clang-debug:
-+  extends:
-+    - .clang-x86-64-testbuild-debug
-+    - .container-ubuntu-bionic-testtmpl
-+
-+test-ubuntu-bionic-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-ubuntu-bionic-testtmpl
-+
-+test-ubuntu-bionic-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-ubuntu-bionic-testtmpl
-+
-+.container-ubuntu-focal-testtmpl:
-+  variables:
-+    CONTAINER: ubuntu:focal
-+    BUILD_CONTAINER: ubuntu/focal
-+  needs:
-+    - ubuntu-focal-container
-+
-+test-ubuntu-focal-gcc:
-+  extends:
-+    - .gcc-x86-64-testbuild
-+    - .container-ubuntu-focal-testtmpl
-+
-+test-ubuntu-focal-gcc-debug:
-+  extends:
-+    - .gcc-x86-64-testbuild-debug
-+    - .container-ubuntu-focal-testtmpl
-+
-+test-ubuntu-focal-clang:
-+  extends:
-+    - .clang-x86-64-testbuild
-+    - .container-ubuntu-focal-testtmpl
-+
-+test-ubuntu-focal-clang-debug:
-+  extends:
-+    - .clang-x86-64-testbuild-debug
-+    - .container-ubuntu-focal-testtmpl
+These patch introduce quite a lot of redundancies in jobs, 2 new jobs per
+containers which build/push containers, and duplicate most of build.yaml.
+This mean that if we go with this, we have to duplicate and keep in sync many
+jobs.
+
+To avoid having to do the duplicated jobs by hand, I could look at
+creating a script that use "build.yaml" as input and produce the 3
+stages needed to update a container, but that script would need to be
+run by hand, as gitlab can't really use it, unless ..
+
+I've look at generated pipeline, and they look like this in gitlab:
+    https://gitlab.com/xen-project/people/anthonyper/xen/-/pipelines/777665738
+But the result of the generated/child pipeline doesn't seems to be taken into
+account in the original pipeline, which make me think that we can't use them to
+generate "build.yaml". But maybe the could be use for generating the pipeline
+that will update a container.
+Doc:
+    https://docs.gitlab.com/ee/ci/pipelines/downstream_pipelines.html#dynamic-child-pipelines
+
+So, with all of this, is it reasonable to test containers before
+pushing them to production? Or is it to much work? We could simply have jobs
+tacking care of rebuilding a container and pushing them to production without
+testing.
+
+An example with the variable DO_REBUILD_CONTAINER and PUSH_CONTAINER set (and
+existing build/test jobs disabled):
+    https://gitlab.com/xen-project/people/anthonyper/xen/-/pipelines/791711467
+
+Cheers,
+
+Anthony PERARD (7):
+  automation: Automatically rebuild debian:unstable container
+  automation: Introduce test-containers stage
+  automation: Add a template per container for build jobs.
+  automation: Adding containers build jobs and test of thoses
+  automation: Introduce DO_REBUILD_CONTAINER, to allow to rebuild a
+    container
+  automation: Push container been tested
+  automation: Add some more push containers jobs
+
+ .gitlab-ci.yml                            |   6 +
+ automation/build/Makefile                 |  14 +-
+ automation/gitlab-ci/build.yaml           | 327 ++++++++------
+ automation/gitlab-ci/containers.yaml      |  98 +++++
+ automation/gitlab-ci/push-containers.yaml |  79 ++++
+ automation/gitlab-ci/test-containers.yaml | 496 ++++++++++++++++++++++
+ 6 files changed, 894 insertions(+), 126 deletions(-)
+ create mode 100644 automation/gitlab-ci/containers.yaml
+ create mode 100644 automation/gitlab-ci/push-containers.yaml
+ create mode 100644 automation/gitlab-ci/test-containers.yaml
+
 -- 
 Anthony PERARD
 
