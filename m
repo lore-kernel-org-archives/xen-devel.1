@@ -4,64 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51413C678D4
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 08:56:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.504731.777074 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87CAC678D4
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 09:20:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.504742.777124 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXej7-0003tI-CA; Thu, 02 Mar 2023 08:55:49 +0000
+	id 1pXf7C-0000Ku-PX; Thu, 02 Mar 2023 09:20:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 504731.777074; Thu, 02 Mar 2023 08:55:49 +0000
+Received: by outflank-mailman (output) from mailman id 504742.777124; Thu, 02 Mar 2023 09:20:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXej7-0003tB-7v; Thu, 02 Mar 2023 08:55:49 +0000
-Received: by outflank-mailman (input) for mailman id 504731;
- Thu, 02 Mar 2023 08:55:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pXf7C-0000Kj-Lk; Thu, 02 Mar 2023 09:20:42 +0000
+Received: by outflank-mailman (input) for mailman id 504742;
+ Thu, 02 Mar 2023 09:20:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Lklr=62=arm.com=Luca.Fancellu@srs-se1.protection.inumbo.net>)
- id 1pXej5-0003t5-Nz
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 08:55:47 +0000
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20606.outbound.protection.outlook.com
- [2a01:111:f400:fe13::606])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 02e7a239-b8d8-11ed-a550-8520e6686977;
- Thu, 02 Mar 2023 09:55:42 +0100 (CET)
-Received: from DB3PR08CA0008.eurprd08.prod.outlook.com (2603:10a6:8::21) by
- AM0PR08MB5475.eurprd08.prod.outlook.com (2603:10a6:208:188::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6156.19; Thu, 2 Mar 2023 08:55:30 +0000
-Received: from DBAEUR03FT062.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:8:0:cafe::f0) by DB3PR08CA0008.outlook.office365.com
- (2603:10a6:8::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.18 via Frontend
- Transport; Thu, 2 Mar 2023 08:55:30 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DBAEUR03FT062.mail.protection.outlook.com (100.127.142.64) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6156.18 via Frontend Transport; Thu, 2 Mar 2023 08:55:29 +0000
-Received: ("Tessian outbound 2ba0ed2ebb9f:v135");
- Thu, 02 Mar 2023 08:55:29 +0000
-Received: from f1553225d149.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 3C405CF7-6DFE-402D-B750-2897FCA0A0F2.1; 
- Thu, 02 Mar 2023 08:55:18 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id f1553225d149.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 02 Mar 2023 08:55:18 +0000
-Received: from AM6PR08MB3749.eurprd08.prod.outlook.com (2603:10a6:20b:8f::22)
- by AM7PR08MB5512.eurprd08.prod.outlook.com (2603:10a6:20b:de::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.19; Thu, 2 Mar
- 2023 08:55:15 +0000
-Received: from AM6PR08MB3749.eurprd08.prod.outlook.com
- ([fe80::f0e7:5f67:ed2f:a70a]) by AM6PR08MB3749.eurprd08.prod.outlook.com
- ([fe80::f0e7:5f67:ed2f:a70a%4]) with mapi id 15.20.6156.018; Thu, 2 Mar 2023
- 08:55:15 +0000
+ <SRS0=5rfr=62=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pXf7B-0007lr-4P
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 09:20:41 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 80341584-b8db-11ed-96aa-2f268f93b82a;
+ Thu, 02 Mar 2023 10:20:40 +0100 (CET)
+Received: by mail-lj1-x22e.google.com with SMTP id by8so16876931ljb.7
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Mar 2023 01:20:40 -0800 (PST)
+Received: from fedora.. (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
+ [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
+ g7-20020a2eb5c7000000b002946be8475esm2018442ljn.135.2023.03.02.01.20.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Mar 2023 01:20:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,123 +46,302 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02e7a239-b8d8-11ed-a550-8520e6686977
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qXgK/+wGSplPdHF/FL01UQYN7tMUop+Xnt4MppqqvLY=;
- b=yt+eDf0+NHts3hC29fT+Q0+P9JTMgx+sGeP/0y1hIzrBZGvuYie/vBQKF54N0OynHdKq/COK/VpneSYB8/0nkDs3hgzmm1oyVvHLRqo8ITGov2ayeW0i48c3XY2b+ATn/D+Wa7kONI5inEWe34VAF9rSCx7tO86CbZAqwfmDtMc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 1c800889619869aa
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ieSvnFS5wu17LZVl6V5h1wqN9+++9+vkS3PUtdkEBDrfP8uLqseaaGZKjHw0JvoGzQ2WPfWuY9z3sHB5Y5PE79kxTUsjy1vKgq6SNMr73u9PJVsZkJmOtoJzVNlR3q1AroIdgjC8xnkEuyY3FucNLmxmjrgPCIasXV0A0pwSR8YV2W6sfvryICqqlw/0C2yi1AZGJ6ca6cD2nu97ckwo9Fz+wMd/y45SGxvSqd9b4QofJ+JA1R7tF7zPMvMrkM3F4WHfjBs0jCAKouwKxlv03yi0JjuSgBhuM8KCqYY9S4HbFDMRlbD0f6j1g43zzFthrzRqFYCXC+m4TcQBHCmqug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qXgK/+wGSplPdHF/FL01UQYN7tMUop+Xnt4MppqqvLY=;
- b=QesxT+pCHY7UozskjfS1yIThUTLdeGB2kU/xvxUlMq0JpQRMmLFa73FjyuYglk9PGFvtfSUuUQkpdehPEzaJwVU8K18uP5/+yOhmr9K2dCcvNH7UExthFp+dUCbHDL5XapU+1wdgj3KkH7Vi0q2MREJCfJu8VAV02kyLER6ohsaZHBJP01MWHAUJ5yltt/q32zRy+qlcsQJ4Un4PZ3m+g+FyHq0gVl0TJKQtIBWzNkdNICekYegMsynU7xnN/sVxfWd1CcR0t8bVWY4RivamkJiqCHUPsMY04697J1nTL7TlFqzsbCwx/pyVbhzNTuWnQ7nUJJJvQBp4vsfpjsrPuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qXgK/+wGSplPdHF/FL01UQYN7tMUop+Xnt4MppqqvLY=;
- b=yt+eDf0+NHts3hC29fT+Q0+P9JTMgx+sGeP/0y1hIzrBZGvuYie/vBQKF54N0OynHdKq/COK/VpneSYB8/0nkDs3hgzmm1oyVvHLRqo8ITGov2ayeW0i48c3XY2b+ATn/D+Wa7kONI5inEWe34VAF9rSCx7tO86CbZAqwfmDtMc=
-From: Luca Fancellu <Luca.Fancellu@arm.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Bertrand Marquis
-	<Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan
- Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Wei Liu
-	<wl@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH v2 2/2] xen/misra: add entries to exclude-list.json
-Thread-Topic: [PATCH v2 2/2] xen/misra: add entries to exclude-list.json
-Thread-Index: AQHZTCO+YULgtT6v8UGWpLW+tpxpla7moaSAgACPcYA=
-Date: Thu, 2 Mar 2023 08:55:15 +0000
-Message-ID: <23059C98-EEE9-4F27-AB54-4648629D497A@arm.com>
-References: <20230301095320.264301-1-luca.fancellu@arm.com>
- <20230301095320.264301-3-luca.fancellu@arm.com>
- <alpine.DEB.2.22.394.2303011605310.3680@ubuntu-linux-20-04-desktop>
-In-Reply-To:
- <alpine.DEB.2.22.394.2303011605310.3680@ubuntu-linux-20-04-desktop>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3731.400.51.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	AM6PR08MB3749:EE_|AM7PR08MB5512:EE_|DBAEUR03FT062:EE_|AM0PR08MB5475:EE_
-X-MS-Office365-Filtering-Correlation-Id: c0f54edf-7d1a-4c9e-522d-08db1afbdff2
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- A3dnbb3F6u7PrcJqTUfFTUL0fVZzukjk3SKH/JxRo/bJoN8boD+jFVAR129t+V3Jc6BVU1kRwuSpq10+68AMJQu3dZ4FR8RovyFMfwK8YaGzUt4Xr5KOz4CUF56fx8eds716Px7FvsucOYrbcjJfarvwtkxjd+Phz32AoBwdPnT842ptviBbJMJReXT+IUwjY1u/GUMxNIvimTCUndJsXN4+euSjGsucqZiLqHDDof6P3ccR8gVagZprzQ9VN69VBy22nDTQg8tFrsV29697KF9s7lugJUi0gUBTScxuKeIWxh54LEmkwkqv/SHESNvaizGU6QE7RJrWNRmjxDH33D21DTdk26hBJO+DbUpDEPOTO1AaiCgPxIaL3ESXoU/DxDkpWN4TLdOt/pcpXp+6+qmDjaGXU8TgHxx3dxyXK3QsEwQ3r2zV5SAr3sEM4R1LHt3AQbAISPVUzkh1eTU5213wVBXu5Hefyt+j6/78bzJmXTf3fWzO2Odh2LJloTM3m1k2pWk81SQOFvoMA+3KWYDjPP6fheMAydK+th9hgvp7jJnTMTsJTSkJ05lIZ3ziIR7L5J/DzgX0CVdwv5M3nRjv/4CuKxuckytFT2a0G6HoGz6XyRVNlHKtDOrQ9mnAyPF5OjsLEtQ+aKToj4zyZqcmzSNRKT6yv1W1lhBDLvnFsLD4Y10Kvyj5Gv926IqeTsSNIDsAlIZ9xYwaJWs8JsNfib9sSuHEcZrpnp289eM=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3749.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(346002)(136003)(366004)(376002)(396003)(451199018)(36756003)(33656002)(53546011)(6486002)(6506007)(6512007)(2616005)(186003)(26005)(54906003)(41300700001)(316002)(91956017)(4326008)(64756008)(4744005)(66556008)(66476007)(8676002)(76116006)(6916009)(2906002)(66446008)(71200400001)(8936002)(5660300002)(478600001)(38100700002)(122000001)(86362001)(38070700005)(66946007)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <23E69306C5777C45985E75626D3F2063@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 80341584-b8db-11ed-96aa-2f268f93b82a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1677748840;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uPYrgRCWywkVLO74D9udXA+9/9Qyzd34sCcyyXMkS2Y=;
+        b=kploAvBGBe/Y7GmJwmv32QXnF7m3C9Pu2+IIxr1nhBwSq8xgGfxG8ktGUxxCySmeiJ
+         cmOVrHD2RgFvbcz9XmQCWis5rCXieiO9yNTg468LCQ/QmgkCSznXSy5pseArQ7CyB5ip
+         yGaUxYpHgnI5yr6Vf+374An25kZKs7vHz7384ecv91mDzZznh1W+TDhaektphtr0XC+L
+         Fk6MrJ2XecuXo/l0ZGYfUgbxPZeboT6RW5jzZPIKop1qBG+6OnrRfd3rcO7VjV93k4SM
+         um6+CPkxAbteR0juOtglGK7yUF4hS/yuWCBAruOk0U4A7NOFnSvxYLwjtfE/Ep8HvaM4
+         cFHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1677748840;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uPYrgRCWywkVLO74D9udXA+9/9Qyzd34sCcyyXMkS2Y=;
+        b=K5enyWxMcIt11vONE31bqkRVVaJFKHrxHncVwIN+2DSfgjf8tjnRyC8E/rvtTxwWCM
+         fjDO6eKWIGdrcs1+ciIjF8bB3pUauICyvuyjGuwc+NvI5afwZmgSup7Y5+IJnzpjNovj
+         TocTCtx5iKEu/tML9RjkiKoidofhW1d5gnKs4EJAmYZw4kRXGmJKZ621GtS16RQ8gsYZ
+         KS5FLJ5XWc/kBsC4kii9eD7m9P0/i5X6GEqQPfACWwIwIH932fXa6FV6PFdkKcUCl/FZ
+         kLCR5crjfi492YgzPoRq2qZh/jthIA/y9nQ0nKBWvKoYdeBa1DLzVFdcVu2KSh/SYCGO
+         50EQ==
+X-Gm-Message-State: AO0yUKWqXZnkP4xQKfSrBh99+pKXcb7k/VmVg/l3yF2WD6xdTcL8lHdX
+	SHkHA877FXhZPsGq/2XngBk//ePhAo4=
+X-Google-Smtp-Source: AK7set/O0Fwd90V2JfkZtuCYj9I5bhF8RryfFAjvNJxijqs8RJzMTM/gZnNzOjMxD+bKTahOtFwuMQ==
+X-Received: by 2002:a2e:b55c:0:b0:295:74f5:fcab with SMTP id a28-20020a2eb55c000000b0029574f5fcabmr3081757ljn.39.1677748839886;
+        Thu, 02 Mar 2023 01:20:39 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Julien Grall <julien@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 4/4] xen/x86: switch x86 to use generic implemetation of bug.h
+Date: Thu,  2 Mar 2023 11:20:28 +0200
+Message-Id: <636d049e3962547dfa793e4878ef2683b12df798.1677747527.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1677747527.git.oleksii.kurochko@gmail.com>
+References: <cover.1677747527.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR08MB5512
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DBAEUR03FT062.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	3933473d-a4fb-4260-ed78-08db1afbd74e
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	5k6oOK5ox/xJxbAxwzTqdur8vdV+ZhH3CxiDFxIPgElEnPdufrP7g3AY9fUr/EVVW+XiReDsy10CJTuKj9BV9j5DbkwIFdX3KTpGrsb1MJ4O/vZ3LDt+0eg9efllRDX8Uyfxtt5zEI5xBRriRGGOPmZqyTDckIQfyHuVKkk1hEKO1HTLpd5m3rpVkYs7dTQA9Wv6sFlorXx2Y2cMLO1mkD6J3ByMPQ0Q2qjdDQ6Jtqdc6FpAQ7BCyrpGtzsTznyKNgkvNs8XZXYSO8vrkr27JtJtbt1IOrj1RH5aJS5YHq2e5bbApenG7L1s9G0flmvgG/SSoTe7vXFsA7ejUbcrzTyvbG0hRAv0DI4DK7PydLW8ho9ThTaCKfTIJy51pUAVG5j6kc1HrgvPgwwQQL6aVd5S6ZzOSvUv1dC9kQmQskGBuQlXizpEaF0EDFbt+EDjw5bfYC1VOPzaHQgmAtBhmwh4GePlHFlRBZpBuSkjiaK58TPjihoVjIQ4S95INUdKJirRGL4ANapoQT6mmI1o4wEe2bEgOZC72oNZZ0GoXlcizX1FJgmS6honarSdL2vReKQ4PQZzoR2pwTXDoyt60eXzxmFKWAURTOxO26rrOGPqy9pm5mjZcaPV+qjjwfRshIdtoptCfzjbgADvikFRiSAiI786ozvuVDm4xMEMB80WTy51BuRsdbWnxtG5k9wQBYsiBYOGVV09HIdWtINvpw==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230025)(4636009)(396003)(39860400002)(136003)(346002)(376002)(451199018)(36840700001)(46966006)(40470700004)(36860700001)(47076005)(33656002)(40460700003)(36756003)(5660300002)(6862004)(8936002)(82740400003)(81166007)(478600001)(356005)(86362001)(40480700001)(82310400005)(186003)(2616005)(26005)(336012)(6512007)(6486002)(53546011)(6506007)(70206006)(4744005)(2906002)(8676002)(70586007)(316002)(41300700001)(4326008)(54906003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2023 08:55:29.9214
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c0f54edf-7d1a-4c9e-522d-08db1afbdff2
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DBAEUR03FT062.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB5475
+Content-Transfer-Encoding: 8bit
 
+The following changes were made:
+* Make GENERIC_BUG_FRAME mandatory for X86
+* Update asm/bug.h using generic implementation in <xen/bug.h>
+* Change prototype of debugger_trap_fatal() in asm/debugger.h
+  to align it with generic prototype in <xen/debugger.h>.
+* Update do_invalid_op using generic do_bug_frame()
 
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V4:
+ * Back comment /* !__ASSEMBLY__ */ for #else case in <asm/bug.h>
+ * Remove changes related to x86/.../asm/debuger.h as do_bug_frame() prototype
+   was updated and cpu_user_regs isn't const any more.
+---
+Changes in V3:
+ * As prototype and what do_bug_frame() returns was changed so patch 3 and 4
+   was updated to use a new version of do_bug_frame
+ * MODIFIER was change to BUG_ASM_CONST to align with generic implementation
+---
+Changes in V2:
+  * Remove all unnecessary things from <asm/bug.h> as they were introduced in
+    <xen/bug.h>.
+  * Define BUG_INSTR = 'ud2' and MODIFIER = 'c' ( it is needed to skip '$'
+    when use an imidiate in x86 assembly )
+  * Update do_invalid_op() to re-use handle_bug_frame() and find_bug_frame()
+    from generic implemetation of CONFIG_GENERIC_BUG_FRAME
+  * Code style fixes.
+---
+ xen/arch/x86/Kconfig           |  1 +
+ xen/arch/x86/include/asm/bug.h | 73 ++----------------------------
+ xen/arch/x86/traps.c           | 81 +++-------------------------------
+ 3 files changed, 11 insertions(+), 144 deletions(-)
 
-> On 2 Mar 2023, at 00:21, Stefano Stabellini <sstabellini@kernel.org> wrot=
-e:
->=20
-> On Wed, 1 Mar 2023, Luca Fancellu wrote:
->> Add entries to the exclude-list.json for those files that need to be
->> excluded from the analysis scan.
->>=20
->> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
->=20
->=20
-> I checked the results both x86 and arm and they look much more
-> reasonable (with the exception of the way too many unusedStructMember
-> reports on x86).
-
-Hi Stefano,
-
-yes I will send a patch to suppress unusedStructMember globally
-
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 6a7825f4ba..b0ff1f3ee6 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -11,6 +11,7 @@ config X86
+ 	select ARCH_MAP_DOMAIN_PAGE
+ 	select ARCH_SUPPORTS_INT128
+ 	select CORE_PARKING
++	select GENERIC_BUG_FRAME
+ 	select HAS_ALTERNATIVE
+ 	select HAS_COMPAT
+ 	select HAS_CPUFREQ
+diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
+index 79133e53e7..2a8d3f84b8 100644
+--- a/xen/arch/x86/include/asm/bug.h
++++ b/xen/arch/x86/include/asm/bug.h
+@@ -1,79 +1,12 @@
+ #ifndef __X86_BUG_H__
+ #define __X86_BUG_H__
+ 
+-#define BUG_DISP_WIDTH    24
+-#define BUG_LINE_LO_WIDTH (31 - BUG_DISP_WIDTH)
+-#define BUG_LINE_HI_WIDTH (31 - BUG_DISP_WIDTH)
++#define BUG_DEBUGGER_TRAP_FATAL(regs) debugger_trap_fatal(X86_EXC_GP,regs)
+ 
+ #ifndef __ASSEMBLY__
+ 
+-#define BUG_FRAME_STRUCT
+-
+-struct bug_frame {
+-    signed int loc_disp:BUG_DISP_WIDTH;
+-    unsigned int line_hi:BUG_LINE_HI_WIDTH;
+-    signed int ptr_disp:BUG_DISP_WIDTH;
+-    unsigned int line_lo:BUG_LINE_LO_WIDTH;
+-    signed int msg_disp[];
+-};
+-
+-#define bug_loc(b) ((const void *)(b) + (b)->loc_disp)
+-#define bug_ptr(b) ((const void *)(b) + (b)->ptr_disp)
+-#define bug_line(b) (((((b)->line_hi + ((b)->loc_disp < 0)) &                \
+-                       ((1 << BUG_LINE_HI_WIDTH) - 1)) <<                    \
+-                      BUG_LINE_LO_WIDTH) +                                   \
+-                     (((b)->line_lo + ((b)->ptr_disp < 0)) &                 \
+-                      ((1 << BUG_LINE_LO_WIDTH) - 1)))
+-#define bug_msg(b) ((const char *)(b) + (b)->msg_disp[1])
+-
+-#define _ASM_BUGFRAME_TEXT(second_frame)                                     \
+-    ".Lbug%=: ud2\n"                                                         \
+-    ".pushsection .bug_frames.%c[bf_type], \"a\", @progbits\n"               \
+-    ".p2align 2\n"                                                           \
+-    ".Lfrm%=:\n"                                                             \
+-    ".long (.Lbug%= - .Lfrm%=) + %c[bf_line_hi]\n"                           \
+-    ".long (%c[bf_ptr] - .Lfrm%=) + %c[bf_line_lo]\n"                        \
+-    ".if " #second_frame "\n"                                                \
+-    ".long 0, %c[bf_msg] - .Lfrm%=\n"                                        \
+-    ".endif\n"                                                               \
+-    ".popsection\n"                                                          \
+-
+-#define _ASM_BUGFRAME_INFO(type, line, ptr, msg)                             \
+-    [bf_type]    "i" (type),                                                 \
+-    [bf_ptr]     "i" (ptr),                                                  \
+-    [bf_msg]     "i" (msg),                                                  \
+-    [bf_line_lo] "i" ((line & ((1 << BUG_LINE_LO_WIDTH) - 1))                \
+-                      << BUG_DISP_WIDTH),                                    \
+-    [bf_line_hi] "i" (((line) >> BUG_LINE_LO_WIDTH) << BUG_DISP_WIDTH)
+-
+-#define BUG_FRAME(type, line, ptr, second_frame, msg) do {                   \
+-    BUILD_BUG_ON((line) >> (BUG_LINE_LO_WIDTH + BUG_LINE_HI_WIDTH));         \
+-    BUILD_BUG_ON((type) >= BUGFRAME_NR);                                     \
+-    asm volatile ( _ASM_BUGFRAME_TEXT(second_frame)                          \
+-                   :: _ASM_BUGFRAME_INFO(type, line, ptr, msg) );            \
+-} while (0)
+-
+-
+-#define WARN() BUG_FRAME(BUGFRAME_warn, __LINE__, __FILE__, 0, NULL)
+-#define BUG() do {                                              \
+-    BUG_FRAME(BUGFRAME_bug,  __LINE__, __FILE__, 0, NULL);      \
+-    unreachable();                                              \
+-} while (0)
+-
+-/*
+- * TODO: untangle header dependences, break BUILD_BUG_ON() out of xen/lib.h,
+- * and use a real static inline here to get proper type checking of fn().
+- */
+-#define run_in_exception_handler(fn)                            \
+-    do {                                                        \
+-        (void)((fn) == (void (*)(struct cpu_user_regs *))NULL); \
+-        BUG_FRAME(BUGFRAME_run_fn, 0, fn, 0, NULL);             \
+-    } while ( 0 )
+-
+-#define assert_failed(msg) do {                                 \
+-    BUG_FRAME(BUGFRAME_assert, __LINE__, __FILE__, 1, msg);     \
+-    unreachable();                                              \
+-} while (0)
++#define BUG_INSTR       "ud2"
++#define BUG_ASM_CONST   "c"
+ 
+ #else  /* !__ASSEMBLY__ */
+ 
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index cade9e12f8..7c33ebceff 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -24,6 +24,7 @@
+  * Gareth Hughes <gareth@valinux.com>, May 2000
+  */
+ 
++#include <xen/bug.h>
+ #include <xen/init.h>
+ #include <xen/sched.h>
+ #include <xen/lib.h>
+@@ -1166,12 +1167,9 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+ 
+ void do_invalid_op(struct cpu_user_regs *regs)
+ {
+-    const struct bug_frame *bug = NULL;
+     u8 bug_insn[2];
+-    const char *prefix = "", *filename, *predicate, *eip = (char *)regs->rip;
+-    unsigned long fixup;
+-    int id = -1, lineno;
+-    const struct virtual_region *region;
++    const char *eip = (char *)regs->rip;
++    int id;
+ 
+     if ( likely(guest_mode(regs)) )
+     {
+@@ -1185,83 +1183,18 @@ void do_invalid_op(struct cpu_user_regs *regs)
+          memcmp(bug_insn, "\xf\xb", sizeof(bug_insn)) )
+         goto die;
+ 
+-    region = find_text_region(regs->rip);
+-    if ( region )
+-    {
+-        for ( id = 0; id < BUGFRAME_NR; id++ )
+-        {
+-            const struct bug_frame *b;
+-            unsigned int i;
+-
+-            for ( i = 0, b = region->frame[id].bugs;
+-                  i < region->frame[id].n_bugs; b++, i++ )
+-            {
+-                if ( bug_loc(b) == eip )
+-                {
+-                    bug = b;
+-                    goto found;
+-                }
+-            }
+-        }
+-    }
+-
+- found:
+-    if ( !bug )
++    id = do_bug_frame(regs, regs->rip);
++    if ( id < 0 )
+         goto die;
+-    eip += sizeof(bug_insn);
+-    if ( id == BUGFRAME_run_fn )
+-    {
+-        void (*fn)(struct cpu_user_regs *) = bug_ptr(bug);
+-
+-        fn(regs);
+-        fixup_exception_return(regs, (unsigned long)eip);
+-        return;
+-    }
+ 
+-    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
+-    filename = bug_ptr(bug);
+-    if ( !is_kernel(filename) && !is_patch(filename) )
+-        goto die;
+-    fixup = strlen(filename);
+-    if ( fixup > 50 )
+-    {
+-        filename += fixup - 47;
+-        prefix = "...";
+-    }
+-    lineno = bug_line(bug);
++    eip += sizeof(bug_insn);
+ 
+     switch ( id )
+     {
++    case BUGFRAME_run_fn:
+     case BUGFRAME_warn:
+-        printk("Xen WARN at %s%s:%d\n", prefix, filename, lineno);
+-        show_execution_state(regs);
+         fixup_exception_return(regs, (unsigned long)eip);
+         return;
+-
+-    case BUGFRAME_bug:
+-        printk("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+-
+-        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
+-            return;
+-
+-        show_execution_state(regs);
+-        panic("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+-
+-    case BUGFRAME_assert:
+-        /* ASSERT: decode the predicate string pointer. */
+-        predicate = bug_msg(bug);
+-        if ( !is_kernel(predicate) && !is_patch(predicate) )
+-            predicate = "<unknown>";
+-
+-        printk("Assertion '%s' failed at %s%s:%d\n",
+-               predicate, prefix, filename, lineno);
+-
+-        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
+-            return;
+-
+-        show_execution_state(regs);
+-        panic("Assertion '%s' failed at %s%s:%d\n",
+-              predicate, prefix, filename, lineno);
+     }
+ 
+  die:
+-- 
+2.39.0
 
 
