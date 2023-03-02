@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB671C678D4
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:39:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505124.777763 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466AAC6FA8E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:39:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505132.777773 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXl1N-0003dw-QH; Thu, 02 Mar 2023 15:39:05 +0000
+	id 1pXl1Y-00043a-7s; Thu, 02 Mar 2023 15:39:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505124.777763; Thu, 02 Mar 2023 15:39:05 +0000
+Received: by outflank-mailman (output) from mailman id 505132.777773; Thu, 02 Mar 2023 15:39:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXl1N-0003dn-Mo; Thu, 02 Mar 2023 15:39:05 +0000
-Received: by outflank-mailman (input) for mailman id 505124;
- Thu, 02 Mar 2023 15:39:04 +0000
+	id 1pXl1Y-00043F-4k; Thu, 02 Mar 2023 15:39:16 +0000
+Received: by outflank-mailman (input) for mailman id 505132;
+ Thu, 02 Mar 2023 15:39:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZMsQ=62=desiato.srs.infradead.org=BATV+9a0490e5ac528e462c30+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pXkxV-0001Jw-OV
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:35:06 +0000
+ id 1pXkxX-0001Jw-Oy
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:35:08 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2b69582-b90f-11ed-a550-8520e6686977;
+ id c2b6b5f4-b90f-11ed-a550-8520e6686977;
  Thu, 02 Mar 2023 16:34:49 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pXkx4-00FL3d-0o; Thu, 02 Mar 2023 15:34:39 +0000
+ id 1pXkx3-00FL3a-2u; Thu, 02 Mar 2023 15:34:38 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pXkx4-004uyj-0S; Thu, 02 Mar 2023 15:34:38 +0000
+ Linux)) id 1pXkx3-004uyK-2Y; Thu, 02 Mar 2023 15:34:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c2b69582-b90f-11ed-a550-8520e6686977
+X-Inumbo-ID: c2b6b5f4-b90f-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Ca2714vgfm18G+KeFQHG/S9JS+BdaUec2bE3wcS910w=; b=qyL9Kow45NCZ9QXvTmhTUdR7fP
-	UZgbx0jLXWCGC2o642X5kABEQ3uxiER8SvY8ieySF2nq5ZwLsuV0bwwEM2jDfXqjtz4SY+mUfRD/A
-	VIJEQGIuAxFEILYbPrtQLaSGOvmndf82DwEfZgt5aWNUcAAMqM/ptFjUINSB9UJXavstslaR3tu9C
-	e16Wtac8SiRFl5/ev5mGu1N1SnUwWLW7hkiHTYS05SCNqBe5BFbQYMefdailPDkVBGuhd1nxZuZEb
-	m71IrNCzneaP8uhfZ6LgR4Qol0eiMtv1yang1PnVab3YAvcQZfABxcnyBCo7GHEjxuyLkYydBChQ8
-	2i8AIudg==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=ST1bS0bRzWP/tyEo71GSlFGlC4rrFm1ZZcHZE6bjAhs=; b=IO8rWde70SWnL/PxFFvNuS4qd4
+	d+0ab7T1OOtiHvUYdmGs7u1J7jUDB/ZySytfJabPbLkNO7OMPO2fgxyMpStliZeupkB01qTeH4hI+
+	R9toSu594vBRhdFKXvXCQg3YgTjUq+aNcWZM3G5mQI+7LdbmUAjhibKzRB2jGOrMEtI1Y8p0xbQ6A
+	k29ITQkpYxgRvbJAlgz8RB7BULgIrH1nbH/PwiH6c72GaTY2oUZ5p4G/bKOBV6FOx8iru81x9SOy+
+	W5pOaFXiii03nqkiGJetOKZeK2ghkc9Krb+E9uvjuI19HFDBHUOO2EskZdYA66LQXJjOBl6Ropy4F
+	+idEBTKg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -64,1100 +64,1195 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	vikram.garhwal@amd.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 07/25] hw/xen: Implement core serialize/deserialize methods for xenstore_impl
-Date: Thu,  2 Mar 2023 15:34:17 +0000
-Message-Id: <20230302153435.1170111-8-dwmw2@infradead.org>
+Subject: [RFC PATCH v1 01/25] hw/xen: Add xenstore wire implementation and implementation stubs
+Date: Thu,  2 Mar 2023 15:34:11 +0000
+Message-Id: <20230302153435.1170111-2-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
 References: <20230302153435.1170111-1-dwmw2@infradead.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-In fact I think we want to only serialize the contents of the domain's
-path in /local/domain/${domid} and leave the rest to be recreated? Will
-defer to Paul for that.
+This implements the basic wire protocol for the XenStore commands, punting
+all the actual implementation to xs_impl_* functions which all just return
+errors for now.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/i386/kvm/xen_xenstore.c  |  25 +-
- hw/i386/kvm/xenstore_impl.c | 574 +++++++++++++++++++++++++++++++++++-
- hw/i386/kvm/xenstore_impl.h |   5 +
- tests/unit/test-xs-node.c   | 236 ++++++++++++++-
- 4 files changed, 824 insertions(+), 16 deletions(-)
+ hw/i386/kvm/meson.build     |   1 +
+ hw/i386/kvm/trace-events    |  15 +
+ hw/i386/kvm/xen_xenstore.c  | 871 +++++++++++++++++++++++++++++++++++-
+ hw/i386/kvm/xenstore_impl.c | 117 +++++
+ hw/i386/kvm/xenstore_impl.h |  58 +++
+ 5 files changed, 1054 insertions(+), 8 deletions(-)
+ create mode 100644 hw/i386/kvm/xenstore_impl.c
+ create mode 100644 hw/i386/kvm/xenstore_impl.h
 
+diff --git a/hw/i386/kvm/meson.build b/hw/i386/kvm/meson.build
+index 82dd6ae7c6..6621ba5cd7 100644
+--- a/hw/i386/kvm/meson.build
++++ b/hw/i386/kvm/meson.build
+@@ -9,6 +9,7 @@ i386_kvm_ss.add(when: 'CONFIG_XEN_EMU', if_true: files(
+   'xen_evtchn.c',
+   'xen_gnttab.c',
+   'xen_xenstore.c',
++  'xenstore_impl.c',
+   ))
+ 
+ i386_ss.add_all(when: 'CONFIG_KVM', if_true: i386_kvm_ss)
+diff --git a/hw/i386/kvm/trace-events b/hw/i386/kvm/trace-events
+index b83c3eb965..e4c82de6f3 100644
+--- a/hw/i386/kvm/trace-events
++++ b/hw/i386/kvm/trace-events
+@@ -3,3 +3,18 @@ kvm_xen_unmap_pirq(int pirq, int gsi) "pirq %d gsi %d"
+ kvm_xen_get_free_pirq(int pirq, int type) "pirq %d type %d"
+ kvm_xen_bind_pirq(int pirq, int port) "pirq %d port %d"
+ kvm_xen_unmask_pirq(int pirq, char *dev, int vector) "pirq %d dev %s vector %d"
++xenstore_error(unsigned int id, unsigned int tx_id, const char *err) "req %u tx %u err %s"
++xenstore_read(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_write(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_mkdir(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_directory(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_directory_part(unsigned int tx_id, const char *path, unsigned int offset) "tx %u path %s offset %u"
++xenstore_transaction_start(unsigned int new_tx) "new_tx %u"
++xenstore_transaction_end(unsigned int tx_id, bool commit) "tx %u commit %d"
++xenstore_rm(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_get_perms(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_set_perms(unsigned int tx_id, const char *path) "tx %u path %s"
++xenstore_watch(const char *path, const char *token) "path %s token %s"
++xenstore_unwatch(const char *path, const char *token) "path %s token %s"
++xenstore_reset_watches(void) ""
++xenstore_watch_event(const char *path, const char *token) "path %s token %s"
 diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index 3b409e3817..1b1358ad4c 100644
+index 14193ef3f9..64d8f1a38f 100644
 --- a/hw/i386/kvm/xen_xenstore.c
 +++ b/hw/i386/kvm/xen_xenstore.c
-@@ -66,6 +66,9 @@ struct XenXenstoreState {
-     evtchn_port_t guest_port;
-     evtchn_port_t be_port;
-     struct xenevtchn_handle *eh;
-+
-+    uint8_t *impl_state;
-+    uint32_t impl_state_size;
- };
+@@ -28,6 +28,10 @@
+ #include "sysemu/kvm.h"
+ #include "sysemu/kvm_xen.h"
  
++#include "trace.h"
++
++#include "xenstore_impl.h"
++
+ #include "hw/xen/interface/io/xs_wire.h"
+ #include "hw/xen/interface/event_channel.h"
+ 
+@@ -47,6 +51,9 @@ struct XenXenstoreState {
+     SysBusDevice busdev;
+     /*< public >*/
+ 
++    XenstoreImplState *impl;
++    GList *watch_events;
++
+     MemoryRegion xenstore_page;
+     struct xenstore_domain_interface *xs;
+     uint8_t req_data[XENSTORE_HEADER_SIZE + XENSTORE_PAYLOAD_MAX];
+@@ -64,6 +71,7 @@ struct XenXenstoreState {
  struct XenXenstoreState *xen_xenstore_singleton;
-@@ -109,16 +112,26 @@ static bool xen_xenstore_is_needed(void *opaque)
- static int xen_xenstore_pre_save(void *opaque)
- {
-     XenXenstoreState *s = opaque;
-+    GByteArray *save;
  
-     if (s->eh) {
-         s->guest_port = xen_be_evtchn_get_guest_port(s->eh);
+ static void xen_xenstore_event(void *opaque);
++static void fire_watch_cb(void *opaque, const char *path, const char *token);
+ 
+ static void xen_xenstore_realize(DeviceState *dev, Error **errp)
+ {
+@@ -89,6 +97,8 @@ static void xen_xenstore_realize(DeviceState *dev, Error **errp)
      }
+     aio_set_fd_handler(qemu_get_aio_context(), xen_be_evtchn_fd(s->eh), true,
+                        xen_xenstore_event, NULL, NULL, NULL, s);
 +
-+    g_free(s->impl_state);
-+    save = xs_impl_serialize(s->impl);
-+    s->impl_state = save->data;
-+    s->impl_state_size = save->len;
-+    g_byte_array_free(save, false);
-+
-     return 0;
++    s->impl = xs_impl_create();
  }
  
- static int xen_xenstore_post_load(void *opaque, int ver)
+ static bool xen_xenstore_is_needed(void *opaque)
+@@ -213,20 +223,761 @@ static void reset_rsp(XenXenstoreState *s)
+     s->rsp_offset = 0;
+ }
+ 
++static void xs_error(XenXenstoreState *s, unsigned int id,
++                     xs_transaction_t tx_id, int errnum)
++{
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    const char *errstr = NULL;
++
++    for (unsigned int i = 0; i < ARRAY_SIZE(xsd_errors); i++) {
++        struct xsd_errors *xsd_error = &xsd_errors[i];
++
++        if (xsd_error->errnum == errnum) {
++            errstr = xsd_error->errstring;
++            break;
++        }
++    }
++    assert(errstr);
++
++    trace_xenstore_error(id, tx_id, errstr);
++
++    rsp->type = XS_ERROR;
++    rsp->req_id = id;
++    rsp->tx_id = tx_id;
++    rsp->len = (uint32_t)strlen(errstr) + 1;
++
++    memcpy(&rsp[1], errstr, rsp->len);
++}
++
++static void xs_ok(XenXenstoreState *s, unsigned int type, unsigned int req_id,
++                  xs_transaction_t tx_id)
++{
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    const char *okstr = "OK";
++
++    rsp->type = type;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = (uint32_t)strlen(okstr) + 1;
++
++    memcpy(&rsp[1], okstr, rsp->len);
++}
++
++/*
++ * The correct request and response formats are documented in xen.git:
++ * docs/misc/xenstore.txt. A summary is given below for convenience.
++ * The '|' symbol represents a NUL character.
++ *
++ * ---------- Database read, write and permissions operations ----------
++ *
++ * READ                    <path>|                 <value|>
++ * WRITE                   <path>|<value|>
++ *         Store and read the octet string <value> at <path>.
++ *         WRITE creates any missing parent paths, with empty values.
++ *
++ * MKDIR                   <path>|
++ *         Ensures that the <path> exists, by necessary by creating
++ *         it and any missing parents with empty values.  If <path>
++ *         or any parent already exists, its value is left unchanged.
++ *
++ * RM                      <path>|
++ *         Ensures that the <path> does not exist, by deleting
++ *         it and all of its children.  It is not an error if <path> does
++ *         not exist, but it _is_ an error if <path>'s immediate parent
++ *         does not exist either.
++ *
++ * DIRECTORY               <path>|                 <child-leaf-name>|*
++ *         Gives a list of the immediate children of <path>, as only the
++ *         leafnames.  The resulting children are each named
++ *         <path>/<child-leaf-name>.
++ *
++ * DIRECTORY_PART          <path>|<offset>         <gencnt>|<child-leaf-name>|*
++ *         Same as DIRECTORY, but to be used for children lists longer than
++ *         XENSTORE_PAYLOAD_MAX. Input are <path> and the byte offset into
++ *         the list of children to return. Return values are the generation
++ *         count <gencnt> of the node (to be used to ensure the node hasn't
++ *         changed between two reads: <gencnt> being the same for multiple
++ *         reads guarantees the node hasn't changed) and the list of children
++ *         starting at the specified <offset> of the complete list.
++ *
++ * GET_PERMS               <path>|                 <perm-as-string>|+
++ * SET_PERMS               <path>|<perm-as-string>|+?
++ *         <perm-as-string> is one of the following
++ *                 w<domid>        write only
++ *                 r<domid>        read only
++ *                 b<domid>        both read and write
++ *                 n<domid>        no access
++ *         See https://wiki.xen.org/wiki/XenBus section
++ *         `Permissions' for details of the permissions system.
++ *         It is possible to set permissions for the special watch paths
++ *         "@introduceDomain" and "@releaseDomain" to enable receiving those
++ *         watches in unprivileged domains.
++ *
++ * ---------- Watches ----------
++ *
++ * WATCH                   <wpath>|<token>|?
++ *         Adds a watch.
++ *
++ *         When a <path> is modified (including path creation, removal,
++ *         contents change or permissions change) this generates an event
++ *         on the changed <path>.  Changes made in transactions cause an
++ *         event only if and when committed.  Each occurring event is
++ *         matched against all the watches currently set up, and each
++ *         matching watch results in a WATCH_EVENT message (see below).
++ *
++ *         The event's path matches the watch's <wpath> if it is an child
++ *         of <wpath>.
++ *
++ *         <wpath> can be a <path> to watch or @<wspecial>.  In the
++ *         latter case <wspecial> may have any syntax but it matches
++ *         (according to the rules above) only the following special
++ *         events which are invented by xenstored:
++ *             @introduceDomain    occurs on INTRODUCE
++ *             @releaseDomain      occurs on any domain crash or
++ *                                 shutdown, and also on RELEASE
++ *                                 and domain destruction
++ *         <wspecial> events are sent to privileged callers or explicitly
++ *         via SET_PERMS enabled domains only.
++ *
++ *         When a watch is first set up it is triggered once straight
++ *         away, with <path> equal to <wpath>.  Watches may be triggered
++ *         spuriously.  The tx_id in a WATCH request is ignored.
++ *
++ *         Watches are supposed to be restricted by the permissions
++ *         system but in practice the implementation is imperfect.
++ *         Applications should not rely on being sent a notification for
++ *         paths that they cannot read; however, an application may rely
++ *         on being sent a watch when a path which it _is_ able to read
++ *         is deleted even if that leaves only a nonexistent unreadable
++ *         parent.  A notification may omitted if a node's permissions
++ *         are changed so as to make it unreadable, in which case future
++ *         notifications may be suppressed (and if the node is later made
++ *         readable, some notifications may have been lost).
++ *
++ * WATCH_EVENT                                     <epath>|<token>|
++ *         Unsolicited `reply' generated for matching modification events
++ *         as described above.  req_id and tx_id are both 0.
++ *
++ *         <epath> is the event's path, ie the actual path that was
++ *         modified; however if the event was the recursive removal of an
++ *         parent of <wpath>, <epath> is just
++ *         <wpath> (rather than the actual path which was removed).  So
++ *         <epath> is a child of <wpath>, regardless.
++ *
++ *         Iff <wpath> for the watch was specified as a relative pathname,
++ *         the <epath> path will also be relative (with the same base,
++ *         obviously).
++ *
++ * UNWATCH                 <wpath>|<token>|?
++ *
++ * RESET_WATCHES           |
++ *         Reset all watches and transactions of the caller.
++ *
++ * ---------- Transactions ----------
++ *
++ * TRANSACTION_START       |                       <transid>|
++ *         <transid> is an opaque uint32_t allocated by xenstored
++ *         represented as unsigned decimal.  After this, transaction may
++ *         be referenced by using <transid> (as 32-bit binary) in the
++ *         tx_id request header field.  When transaction is started whole
++ *         db is copied; reads and writes happen on the copy.
++ *         It is not legal to send non-0 tx_id in TRANSACTION_START.
++ *
++ * TRANSACTION_END         T|
++ * TRANSACTION_END         F|
++ *         tx_id must refer to existing transaction.  After this
++ *         request the tx_id is no longer valid and may be reused by
++ *         xenstore.  If F, the transaction is discarded.  If T,
++ *         it is committed: if there were any other intervening writes
++ *         then our END gets get EAGAIN.
++ *
++ *         The plan is that in the future only intervening `conflicting'
++ *         writes cause EAGAIN, meaning only writes or other commits
++ *         which changed paths which were read or written in the
++ *         transaction at hand.
++ *
++ */
++
++static void xs_read(XenXenstoreState *s, unsigned int req_id,
++                    xs_transaction_t tx_id, uint8_t *req_data, unsigned int len)
++{
++    const char *path = (const char *)req_data;
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    uint8_t *rsp_data = (uint8_t *)&rsp[1];
++    g_autoptr(GByteArray) data = g_byte_array_new();
++    int err;
++
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_read(tx_id, path);
++    err = xs_impl_read(s->impl, xen_domid, tx_id, path, data);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    rsp->type = XS_READ;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = 0;
++
++    len = data->len;
++    if (len > XENSTORE_PAYLOAD_MAX) {
++        xs_error(s, req_id, tx_id, E2BIG);
++        return;
++    }
++
++    memcpy(&rsp_data[rsp->len], data->data, len);
++    rsp->len += len;
++}
++
++static void xs_write(XenXenstoreState *s, unsigned int req_id,
++                     xs_transaction_t tx_id, uint8_t *req_data,
++                     unsigned int len)
++{
++    g_autoptr(GByteArray) data = g_byte_array_new();
++    const char *path;
++    int err;
++
++    if (len == 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    path = (const char *)req_data;
++
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    g_byte_array_append(data, req_data, len);
++
++    trace_xenstore_write(tx_id, path);
++    err = xs_impl_write(s->impl, xen_domid, tx_id, path, data);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_WRITE, req_id, tx_id);
++}
++
++static void xs_mkdir(XenXenstoreState *s, unsigned int req_id,
++                     xs_transaction_t tx_id, uint8_t *req_data,
++                     unsigned int len)
++{
++    g_autoptr(GByteArray) data = g_byte_array_new();
++    const char *path;
++    int err;
++
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    path = (const char *)req_data;
++
++    trace_xenstore_mkdir(tx_id, path);
++    err = xs_impl_read(s->impl, xen_domid, tx_id, path, data);
++    if (err == ENOENT) {
++        err = xs_impl_write(s->impl, xen_domid, tx_id, path, data);
++    }
++
++    if (!err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_MKDIR, req_id, tx_id);
++}
++
++static void xs_append_strings(XenXenstoreState *s, struct xsd_sockmsg *rsp,
++                              GList *strings, unsigned int start, bool truncate)
++{
++    uint8_t *rsp_data = (uint8_t *)&rsp[1];
++    GList *l;
++
++    for (l = strings; l; l = l->next) {
++        size_t len = strlen(l->data) + 1; /* Including the NUL termination */
++        char *str = l->data;
++
++        if (rsp->len + len > XENSTORE_PAYLOAD_MAX) {
++            if (truncate) {
++                len = XENSTORE_PAYLOAD_MAX - rsp->len;
++                if (!len) {
++                    return;
++                }
++            } else {
++                xs_error(s, rsp->req_id, rsp->tx_id, E2BIG);
++                return;
++            }
++        }
++
++        if (start) {
++            if (start >= len) {
++                start -= len;
++                continue;
++            }
++
++            str += start;
++            len -= start;
++            start = 0;
++        }
++
++        memcpy(&rsp_data[rsp->len], str, len);
++        rsp->len += len;
++    }
++    /* XS_DIRECTORY_PART wants an extra NUL to indicate the end */
++    if (truncate && rsp->len < XENSTORE_PAYLOAD_MAX) {
++        rsp_data[rsp->len++] = '\0';
++    }
++}
++
++static void xs_directory(XenXenstoreState *s, unsigned int req_id,
++                         xs_transaction_t tx_id, uint8_t *req_data,
++                         unsigned int len)
++{
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    GList *items = NULL;
++    const char *path;
++    int err;
++
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    path = (const char *)req_data;
++
++    trace_xenstore_directory(tx_id, path);
++    err = xs_impl_directory(s->impl, xen_domid, tx_id, path, NULL, &items);
++    if (err != 0) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    rsp->type = XS_DIRECTORY;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = 0;
++
++    xs_append_strings(s, rsp, items, 0, false);
++
++    g_list_free_full(items, g_free);
++}
++
++static void xs_directory_part(XenXenstoreState *s, unsigned int req_id,
++                              xs_transaction_t tx_id, uint8_t *req_data,
++                              unsigned int len)
++{
++    const char *offset_str, *path = (const char *)req_data;
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    char *rsp_data = (char *)&rsp[1];
++    uint64_t gencnt = 0;
++    unsigned int offset;
++    GList *items = NULL;
++    int err;
++
++    if (len == 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    offset_str = (const char *)req_data;
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    if (len) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    if (qemu_strtoui(offset_str, NULL, 10, &offset) < 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_directory_part(tx_id, path, offset);
++    err = xs_impl_directory(s->impl, xen_domid, tx_id, path, &gencnt, &items);
++    if (err != 0) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    rsp->type = XS_DIRECTORY_PART;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = snprintf(rsp_data, XENSTORE_PAYLOAD_MAX, "%" PRIu64, gencnt) + 1;
++
++    xs_append_strings(s, rsp, items, offset, true);
++
++    g_list_free_full(items, g_free);
++}
++
++static void xs_transaction_start(XenXenstoreState *s, unsigned int req_id,
++                                 xs_transaction_t tx_id, uint8_t *req_data,
++                                 unsigned int len)
++{
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    char *rsp_data = (char *)&rsp[1];
++    int err;
++
++    if (len != 1 || req_data[0] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    rsp->type = XS_TRANSACTION_START;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = 0;
++
++    err = xs_impl_transaction_start(s->impl, xen_domid, &tx_id);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    trace_xenstore_transaction_start(tx_id);
++
++    rsp->len = snprintf(rsp_data, XENSTORE_PAYLOAD_MAX, "%u", tx_id);
++    assert(rsp->len < XENSTORE_PAYLOAD_MAX);
++    rsp->len++;
++}
++
++static void xs_transaction_end(XenXenstoreState *s, unsigned int req_id,
++                               xs_transaction_t tx_id, uint8_t *req_data,
++                               unsigned int len)
++{
++    bool commit;
++    int err;
++
++    if (len != 2 || req_data[1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    switch (req_data[0]) {
++    case 'T':
++        commit = true;
++        break;
++    case 'F':
++        commit = false;
++        break;
++    default:
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_transaction_end(tx_id, commit);
++    err = xs_impl_transaction_end(s->impl, xen_domid, tx_id, commit);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_TRANSACTION_END, req_id, tx_id);
++}
++
++static void xs_rm(XenXenstoreState *s, unsigned int req_id,
++                  xs_transaction_t tx_id, uint8_t *req_data, unsigned int len)
++{
++    const char *path = (const char *)req_data;
++    int err;
++
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_rm(tx_id, path);
++    err = xs_impl_rm(s->impl, xen_domid, tx_id, path);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_RM, req_id, tx_id);
++}
++
++static void xs_get_perms(XenXenstoreState *s, unsigned int req_id,
++                         xs_transaction_t tx_id, uint8_t *req_data,
++                         unsigned int len)
++{
++    const char *path = (const char *)req_data;
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    GList *perms = NULL;
++    int err;
++
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_get_perms(tx_id, path);
++    err = xs_impl_get_perms(s->impl, xen_domid, tx_id, path, &perms);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    rsp->type = XS_GET_PERMS;
++    rsp->req_id = req_id;
++    rsp->tx_id = tx_id;
++    rsp->len = 0;
++
++    xs_append_strings(s, rsp, perms, 0, false);
++
++    g_list_free_full(perms, g_free);
++}
++
++static void xs_set_perms(XenXenstoreState *s, unsigned int req_id,
++                         xs_transaction_t tx_id, uint8_t *req_data,
++                         unsigned int len)
++{
++    const char *path = (const char *)req_data;
++    uint8_t *perm;
++    GList *perms = NULL;
++    int err;
++
++    if (len == 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    perm = req_data;
++    while (len--) {
++        if (*req_data++ == '\0') {
++            perms = g_list_append(perms, perm);
++            perm = req_data;
++        }
++    }
++
++    /*
++     * Note that there may be trailing garbage at the end of the buffer.
++     * This is explicitly permitted by the '?' at the end of the definition:
++     *
++     *    SET_PERMS         <path>|<perm-as-string>|+?
++     */
++
++    trace_xenstore_set_perms(tx_id, path);
++    err = xs_impl_set_perms(s->impl, xen_domid, tx_id, path, perms);
++    g_list_free(perms);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_SET_PERMS, req_id, tx_id);
++}
++
++static void xs_watch(XenXenstoreState *s, unsigned int req_id,
++                     xs_transaction_t tx_id, uint8_t *req_data,
++                     unsigned int len)
++{
++    const char *token, *path = (const char *)req_data;
++    int err;
++
++    if (len == 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    token = (const char *)req_data;
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    /*
++     * Note that there may be trailing garbage at the end of the buffer.
++     * This is explicitly permitted by the '?' at the end of the definition:
++     *
++     *    WATCH             <wpath>|<token>|?
++     */
++
++    trace_xenstore_watch(path, token);
++    err = xs_impl_watch(s->impl, xen_domid, path, token, fire_watch_cb, s);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_WATCH, req_id, tx_id);
++}
++
++static void xs_unwatch(XenXenstoreState *s, unsigned int req_id,
++                       xs_transaction_t tx_id, uint8_t *req_data,
++                       unsigned int len)
++{
++    const char *token, *path = (const char *)req_data;
++    int err;
++
++    if (len == 0) {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    token = (const char *)req_data;
++    while (len--) {
++        if (*req_data++ == '\0') {
++            break;
++        }
++        if (len == 0) {
++            xs_error(s, req_id, tx_id, EINVAL);
++            return;
++        }
++    }
++
++    trace_xenstore_unwatch(path, token);
++    err = xs_impl_unwatch(s->impl, xen_domid, path, token, fire_watch_cb, s);
++    if (err) {
++        xs_error(s, req_id, tx_id, err);
++        return;
++    }
++
++    xs_ok(s, XS_UNWATCH, req_id, tx_id);
++}
++
++static void xs_reset_watches(XenXenstoreState *s, unsigned int req_id,
++                             xs_transaction_t tx_id, uint8_t *req_data,
++                             unsigned int len)
++{
++    if (len == 0 || req_data[len - 1] != '\0') {
++        xs_error(s, req_id, tx_id, EINVAL);
++        return;
++    }
++
++    trace_xenstore_reset_watches();
++    xs_impl_reset_watches(s->impl, xen_domid);
++
++    xs_ok(s, XS_RESET_WATCHES, req_id, tx_id);
++}
++
++static void xs_priv(XenXenstoreState *s, unsigned int req_id,
++                    xs_transaction_t tx_id, uint8_t *data,
++                    unsigned int len)
++{
++    xs_error(s, req_id, tx_id, EACCES);
++}
++
++static void xs_unimpl(XenXenstoreState *s, unsigned int req_id,
++                      xs_transaction_t tx_id, uint8_t *data,
++                      unsigned int len)
++{
++    xs_error(s, req_id, tx_id, ENOSYS);
++}
++
++typedef void (*xs_impl)(XenXenstoreState *s, unsigned int req_id,
++                        xs_transaction_t tx_id, uint8_t *data,
++                        unsigned int len);
++
++struct xsd_req {
++    const char *name;
++    xs_impl fn;
++};
++#define XSD_REQ(_type, _fn)                           \
++    [_type] = { .name = #_type, .fn = _fn }
++
++struct xsd_req xsd_reqs[] = {
++    XSD_REQ(XS_READ, xs_read),
++    XSD_REQ(XS_WRITE, xs_write),
++    XSD_REQ(XS_MKDIR, xs_mkdir),
++    XSD_REQ(XS_DIRECTORY, xs_directory),
++    XSD_REQ(XS_DIRECTORY_PART, xs_directory_part),
++    XSD_REQ(XS_TRANSACTION_START, xs_transaction_start),
++    XSD_REQ(XS_TRANSACTION_END, xs_transaction_end),
++    XSD_REQ(XS_RM, xs_rm),
++    XSD_REQ(XS_GET_PERMS, xs_get_perms),
++    XSD_REQ(XS_SET_PERMS, xs_set_perms),
++    XSD_REQ(XS_WATCH, xs_watch),
++    XSD_REQ(XS_UNWATCH, xs_unwatch),
++    XSD_REQ(XS_CONTROL, xs_priv),
++    XSD_REQ(XS_INTRODUCE, xs_priv),
++    XSD_REQ(XS_RELEASE, xs_priv),
++    XSD_REQ(XS_IS_DOMAIN_INTRODUCED, xs_priv),
++    XSD_REQ(XS_RESUME, xs_priv),
++    XSD_REQ(XS_SET_TARGET, xs_priv),
++    XSD_REQ(XS_RESET_WATCHES, xs_reset_watches),
++};
++
+ static void process_req(XenXenstoreState *s)
+ {
+     struct xsd_sockmsg *req = (struct xsd_sockmsg *)s->req_data;
+-    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
+-    const char enosys[] = "ENOSYS";
++    xs_impl handler = NULL;
+ 
+     assert(req_pending(s));
+     assert(!s->rsp_pending);
+ 
+-    rsp->type = XS_ERROR;
+-    rsp->req_id = req->req_id;
+-    rsp->tx_id = req->tx_id;
+-    rsp->len = sizeof(enosys);
+-    memcpy((void *)&rsp[1], enosys, sizeof(enosys));
++    if (req->type < ARRAY_SIZE(xsd_reqs)) {
++        handler = xsd_reqs[req->type].fn;
++    }
++    if (!handler) {
++        handler = &xs_unimpl;
++    }
++
++    handler(s, req->req_id, req->tx_id, (uint8_t *)&req[1], req->len);
+ 
+     s->rsp_pending = true;
+     reset_req(s);
+@@ -415,6 +1166,106 @@ static unsigned int put_rsp(XenXenstoreState *s)
+     return copylen;
+ }
+ 
++static void deliver_watch(XenXenstoreState *s, const char *path,
++                          const char *token)
++{
++    struct xsd_sockmsg *rsp = (struct xsd_sockmsg *)s->rsp_data;
++    uint8_t *rsp_data = (uint8_t *)&rsp[1];
++    unsigned int len;
++
++    assert(!s->rsp_pending);
++
++    trace_xenstore_watch_event(path, token);
++
++    rsp->type = XS_WATCH_EVENT;
++    rsp->req_id = 0;
++    rsp->tx_id = 0;
++    rsp->len = 0;
++
++    len = strlen(path);
++
++    /* XENSTORE_ABS/REL_PATH_MAX should ensure there can be no overflow */
++    assert(rsp->len + len < XENSTORE_PAYLOAD_MAX);
++
++    memcpy(&rsp_data[rsp->len], path, len);
++    rsp->len += len;
++    rsp_data[rsp->len] = '\0';
++    rsp->len++;
++
++    len = strlen(token);
++    /*
++     * It is possible for the guest to have chosen a token that will
++     * not fit (along with the patch) into a watch event. We have no
++     * choice but to drop the event if this is the case.
++     */
++    if (rsp->len + len >= XENSTORE_PAYLOAD_MAX) {
++        return;
++    }
++
++    memcpy(&rsp_data[rsp->len], token, len);
++    rsp->len += len;
++    rsp_data[rsp->len] = '\0';
++    rsp->len++;
++
++    s->rsp_pending = true;
++}
++
++struct watch_event {
++    char *path;
++    char *token;
++};
++
++static void queue_watch(XenXenstoreState *s, const char *path,
++                        const char *token)
++{
++    struct watch_event *ev = g_new0(struct watch_event, 1);
++
++    ev->path = g_strdup(path);
++    ev->token = g_strdup(token);
++
++    s->watch_events = g_list_append(s->watch_events, ev);
++}
++
++static void fire_watch_cb(void *opaque, const char *path, const char *token)
++{
++    XenXenstoreState *s = opaque;
++
++    assert(qemu_mutex_iothread_locked());
++
++    /*
++     * If there's a response pending, we obviously can't scribble over
++     * it. But if there's a request pending, it has dibs on the buffer
++     * too.
++     *
++     * In the common case of a watch firing due to backend activity
++     * when the ring was otherwise idle, we should be able to copy the
++     * strings directly into the rsp_data and thence the actual ring,
++     * without needing to perform any allocations and queue them.
++     */
++    if (s->rsp_pending || req_pending(s)) {
++        queue_watch(s, path, token);
++    } else {
++        deliver_watch(s, path, token);
++        /*
++         * If the message was queued because there was already ring activity,
++         * no need to wake the guest. But if not, we need to send the evtchn.
++         */
++        xen_be_evtchn_notify(s->eh, s->be_port);
++    }
++}
++
++static void process_watch_events(XenXenstoreState *s)
++{
++    struct watch_event *ev = s->watch_events->data;
++
++    deliver_watch(s, ev->path, ev->token);
++
++    s->watch_events = g_list_remove(s->watch_events, ev);
++    g_free(ev->path);
++    g_free(ev->token);
++    g_free(ev);
++}
++
+ static void xen_xenstore_event(void *opaque)
  {
      XenXenstoreState *s = opaque;
-+    GByteArray *save;
-+    int ret;
+@@ -433,6 +1284,10 @@ static void xen_xenstore_event(void *opaque)
+         copied_to = copied_from = 0;
+         processed = false;
  
-     /*
-      * As qemu/dom0, rebind to the guest's port. The Windows drivers may
-@@ -135,7 +148,13 @@ static int xen_xenstore_post_load(void *opaque, int ver)
++        if (!s->rsp_pending && s->watch_events) {
++            process_watch_events(s);
++        }
++
+         if (s->rsp_pending) {
+             copied_to = put_rsp(s);
          }
-         s->be_port = be_port;
-     }
--    return 0;
-+
-+    save = g_byte_array_new_take(s->impl_state, s->impl_state_size);
-+    s->impl_state = NULL;
-+    s->impl_state_size = 0;
-+
-+    ret = xs_impl_deserialize(s->impl, save, xen_domid, fire_watch_cb, s);
-+    return ret;
- }
+@@ -441,7 +1296,7 @@ static void xen_xenstore_event(void *opaque)
+             copied_from = get_req(s);
+         }
  
- static const VMStateDescription xen_xenstore_vmstate = {
-@@ -155,6 +174,10 @@ static const VMStateDescription xen_xenstore_vmstate = {
-         VMSTATE_BOOL(rsp_pending, XenXenstoreState),
-         VMSTATE_UINT32(guest_port, XenXenstoreState),
-         VMSTATE_BOOL(fatal_error, XenXenstoreState),
-+        VMSTATE_UINT32(impl_state_size, XenXenstoreState),
-+        VMSTATE_VARRAY_UINT32_ALLOC(impl_state, XenXenstoreState,
-+                                    impl_state_size, 0,
-+                                    vmstate_info_uint8, uint8_t),
-         VMSTATE_END_OF_LIST()
-     }
- };
+-        if (req_pending(s) && !s->rsp_pending) {
++        if (req_pending(s) && !s->rsp_pending && !s->watch_events) {
+             process_req(s);
+             processed = true;
+         }
 diff --git a/hw/i386/kvm/xenstore_impl.c b/hw/i386/kvm/xenstore_impl.c
-index 7988bde88f..82e7ae06f5 100644
---- a/hw/i386/kvm/xenstore_impl.c
+new file mode 100644
+index 0000000000..31dbc98fe0
+--- /dev/null
 +++ b/hw/i386/kvm/xenstore_impl.c
-@@ -37,6 +37,7 @@ typedef struct XsNode {
-     uint64_t gencnt;
-     bool deleted_in_tx;
-     bool modified_in_tx;
-+    unsigned int serialized_tx;
- #ifdef XS_NODE_UNIT_TEST
-     gchar *name; /* debug only */
- #endif
-@@ -68,6 +69,7 @@ struct XenstoreImplState {
-     unsigned int nr_domu_transactions;
-     unsigned int root_tx;
-     unsigned int last_tx;
-+    bool serialized;
- };
- 
- 
-@@ -1156,8 +1158,10 @@ int xs_impl_set_perms(XenstoreImplState *s, unsigned int dom_id,
-     return xs_node_walk(n, &op);
- }
- 
--int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
--                  const char *token, xs_impl_watch_fn fn, void *opaque)
-+static int do_xs_impl_watch(XenstoreImplState *s, unsigned int dom_id,
-+                            const char *path, const char *token,
-+                            xs_impl_watch_fn fn, void *opaque)
+@@ -0,0 +1,117 @@
++/*
++ * QEMU Xen emulation: The actual implementation of XenStore
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * Authors: David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
 +
- {
-     char abspath[XENSTORE_ABS_PATH_MAX + 1];
-     XsWatch *w, *l;
-@@ -1200,12 +1204,22 @@ int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
-         s->nr_domu_watches++;
-     }
- 
--    /* A new watch should fire immediately */
--    fn(opaque, path, token);
--
-     return 0;
- }
- 
++#include "qemu/osdep.h"
++
++#include "xen_xenstore.h"
++#include "xenstore_impl.h"
++
++struct XenstoreImplState {
++};
++
++int xs_impl_read(XenstoreImplState *s, unsigned int dom_id,
++                 xs_transaction_t tx_id, const char *path, GByteArray *data)
++{
++    /*
++     * The data GByteArray shall exist, and will be freed by caller.
++     * Just g_byte_array_append() to it.
++     */
++    return ENOENT;
++}
++
++int xs_impl_write(XenstoreImplState *s, unsigned int dom_id,
++                  xs_transaction_t tx_id, const char *path, GByteArray *data)
++{
++    /*
++     * The data GByteArray shall exist, will be freed by caller. You are
++     * free to use g_byte_array_steal() and keep the data.
++     */
++    return ENOSYS;
++}
++
++int xs_impl_directory(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path,
++                      uint64_t *gencnt, GList **items)
++{
++    /*
++     * The items are (char *) to be freed by caller. Although it's consumed
++     * immediately so if you want to change it to (const char *) and keep
++     * them, go ahead and change the caller.
++     */
++    return ENOENT;
++}
++
++int xs_impl_transaction_start(XenstoreImplState *s, unsigned int dom_id,
++                              xs_transaction_t *tx_id)
++{
++    return ENOSYS;
++}
++
++int xs_impl_transaction_end(XenstoreImplState *s, unsigned int dom_id,
++                            xs_transaction_t tx_id, bool commit)
++{
++    return ENOSYS;
++}
++
++int xs_impl_rm(XenstoreImplState *s, unsigned int dom_id,
++               xs_transaction_t tx_id, const char *path)
++{
++    return ENOSYS;
++}
++
++int xs_impl_get_perms(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path, GList **perms)
++{
++    /*
++     * The perms are (char *) in the <perm-as-string> wire format to be
++     * freed by the caller.
++     */
++    return ENOSYS;
++}
++
++int xs_impl_set_perms(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path, GList *perms)
++{
++    /*
++     * The perms are (const char *) in the <perm-as-string> wire format.
++     */
++    return ENOSYS;
++}
++
 +int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
 +                  const char *token, xs_impl_watch_fn fn, void *opaque)
 +{
-+    int ret = do_xs_impl_watch(s, dom_id, path, token, fn, opaque);
-+
-+    if (!ret) {
-+        /* A new watch should fire immediately */
-+        fn(opaque, path, token);
-+    }
-+
-+    return ret;
-+}
-+
- static XsWatch *free_watch(XenstoreImplState *s, XsWatch *w)
- {
-     XsWatch *next = w->next;
-@@ -1361,3 +1375,553 @@ XenstoreImplState *xs_impl_create(unsigned int dom_id)
-     s->root_tx = s->last_tx = 1;
-     return s;
- }
-+
-+
-+static void clear_serialized_tx(gpointer key, gpointer value, gpointer opaque)
-+{
-+    XsNode *n = value;
-+
-+    n->serialized_tx = XBT_NULL;
-+    if (n->children) {
-+        g_hash_table_foreach(n->children, clear_serialized_tx, NULL);
-+    }
-+}
-+
-+static void clear_tx_serialized_tx(gpointer key, gpointer value,
-+                                   gpointer opaque)
-+{
-+    XsTransaction *t = value;
-+
-+    clear_serialized_tx(NULL, t->root, NULL);
-+}
-+
-+static void write_be32(GByteArray *save, uint32_t val)
-+{
-+    uint32_t be = htonl(val);
-+    g_byte_array_append(save, (void *)&be, sizeof(be));
-+}
-+
-+
-+struct save_state {
-+    GByteArray *bytes;
-+    unsigned int tx_id;
-+};
-+
-+#define MODIFIED_IN_TX  (1U << 0)
-+#define DELETED_IN_TX   (1U << 1)
-+#define NODE_REF        (1U << 2)
-+
-+static void save_node(gpointer key, gpointer value, gpointer opaque)
-+{
-+    struct save_state *ss = opaque;
-+    XsNode *n = value;
-+    char *name = key;
-+    uint8_t flag = 0;
-+
-+    /* Child nodes (i.e. anything but the root) have a name */
-+    if (name) {
-+        g_byte_array_append(ss->bytes, key, strlen(key) + 1);
-+    }
-+
 +    /*
-+     * If we already wrote this node, refer to the previous copy.
-+     * There's no rename/move in XenStore, so all we need to find
-+     * it is the tx_id of the transation in which it exists. Which
-+     * may be the root tx.
++     * When calling the callback @fn, note that the path should
++     * precisely match the relative path that the guest provided, even
++     * if it was a relative path which needed to be prefixed with
++     * /local/domain/${domid}/
 +     */
-+    if (n->serialized_tx != XBT_NULL) {
-+        flag = NODE_REF;
-+        g_byte_array_append(ss->bytes, &flag, 1);
-+        write_be32(ss->bytes, n->serialized_tx);
-+    } else {
-+        GList *l;
-+        n->serialized_tx = ss->tx_id;
-+
-+        if (n->modified_in_tx) {
-+            flag |= MODIFIED_IN_TX;
-+        }
-+        if (n->deleted_in_tx) {
-+            flag |= DELETED_IN_TX;
-+        }
-+        g_byte_array_append(ss->bytes, &flag, 1);
-+
-+        if (n->content) {
-+            write_be32(ss->bytes, n->content->len);
-+            g_byte_array_append(ss->bytes, n->content->data, n->content->len);
-+        } else {
-+            write_be32(ss->bytes, 0);
-+        }
-+
-+        for (l = n->perms; l; l = l->next) {
-+            g_byte_array_append(ss->bytes, l->data, strlen(l->data) + 1);
-+        }
-+        /* NUL termination after perms */
-+        g_byte_array_append(ss->bytes, (void *)"", 1);
-+
-+        if (n->children) {
-+            g_hash_table_foreach(n->children, save_node, ss);
-+        }
-+        /* NUL termination after children (child name is NUL) */
-+        g_byte_array_append(ss->bytes, (void *)"", 1);
-+    }
++    return ENOSYS;
 +}
 +
-+static void save_tree(struct save_state *ss, uint32_t tx_id, XsNode *root)
++int xs_impl_unwatch(XenstoreImplState *s, unsigned int dom_id,
++                    const char *path, const char *token,
++                    xs_impl_watch_fn fn, void *opaque)
 +{
-+    write_be32(ss->bytes, tx_id);
-+    ss->tx_id = tx_id;
-+    save_node(NULL, root, ss);
++    /* Remove the watch that matches all four criteria */
++    return ENOSYS;
 +}
 +
-+static void save_tx(gpointer key, gpointer value, gpointer opaque)
++int xs_impl_reset_watches(XenstoreImplState *s, unsigned int dom_id)
 +{
-+    uint32_t tx_id = GPOINTER_TO_INT(key);
-+    struct save_state *ss = opaque;
-+    XsTransaction *n = value;
-+
-+    write_be32(ss->bytes, n->base_tx);
-+    write_be32(ss->bytes, n->dom_id);
-+
-+    save_tree(ss, tx_id, n->root);
++    return ENOSYS;
 +}
 +
-+static void save_watch(gpointer key, gpointer value, gpointer opaque)
++XenstoreImplState *xs_impl_create(void)
 +{
-+    struct save_state *ss = opaque;
-+    XsWatch *w = value;
-+
-+    /* We only save the *guest* watches. */
-+    if (w->dom_id) {
-+        gpointer relpath = key + w->rel_prefix;
-+        g_byte_array_append(ss->bytes, relpath, strlen(relpath) + 1);
-+        g_byte_array_append(ss->bytes, (void *)w->token, strlen(w->token) + 1);
-+    }
-+}
-+
-+GByteArray *xs_impl_serialize(XenstoreImplState *s)
-+{
-+    struct save_state ss;
-+
-+    ss.bytes = g_byte_array_new();
-+
-+    /*
-+     * node = flags [ real_node / node_ref ]
-+     *   flags = uint8_t (MODIFIED_IN_TX | DELETED_IN_TX | NODE_REF)
-+     *   node_ref = tx_id (in which the original version of this node exists)
-+     *   real_node = content perms child* NUL
-+     *     content = len data
-+     *       len = uint32_t
-+     *       data = uint8_t{len}
-+     *     perms = perm* NUL
-+     *       perm = asciiz
-+     *   child = name node
-+     *     name = asciiz
-+     *
-+     * tree = tx_id node
-+     *   tx_id = uint32_t
-+     *
-+     * transaction = base_tx_id dom_id tree
-+     *   base_tx_id = uint32_t
-+     *   dom_id = uint32_t
-+     *
-+     * tx_list = tree transaction* XBT_NULL
-+     *
-+     * watch = path token
-+     *   path = asciiz
-+     *   token = asciiz
-+     *
-+     * watch_list = watch* NUL
-+     *
-+     * xs_serialize_stream = last_tx tx_list watch_list
-+     *   last_tx = uint32_t
-+     */
-+
-+    /* Clear serialized_tx in every node. */
-+    if (s->serialized) {
-+        clear_serialized_tx(NULL, s->root, NULL);
-+        g_hash_table_foreach(s->transactions, clear_tx_serialized_tx, NULL);
-+    }
-+
-+    s->serialized = true;
-+
-+    write_be32(ss.bytes, s->last_tx);
-+    save_tree(&ss, s->root_tx, s->root);
-+    g_hash_table_foreach(s->transactions, save_tx, &ss);
-+
-+    write_be32(ss.bytes, XBT_NULL);
-+
-+    g_hash_table_foreach(s->watches, save_watch, &ss);
-+    g_byte_array_append(ss.bytes, (void *)"", 1);
-+
-+    return ss.bytes;
-+}
-+
-+struct unsave_state {
-+    char path[XENSTORE_ABS_PATH_MAX + 1];
-+    XenstoreImplState *s;
-+    GByteArray *bytes;
-+    uint8_t *d;
-+    size_t l;
-+    bool root_walk;
-+};
-+
-+static int consume_be32(struct unsave_state *us, unsigned int *val)
-+{
-+    uint32_t d;
-+
-+    if (us->l < sizeof(d)) {
-+        return -EINVAL;
-+    }
-+    memcpy(&d, us->d, sizeof(d));
-+    *val = ntohl(d);
-+    us->d += sizeof(d);
-+    us->l -= sizeof(d);
-+    return 0;
-+}
-+
-+static int consume_string(struct unsave_state *us, char **str, size_t *len)
-+{
-+    size_t l;
-+
-+    if (!us->l) {
-+        return -EINVAL;
-+    }
-+
-+    l = strnlen((void *)us->d, us->l);
-+    if (l == us->l) {
-+        return -EINVAL;
-+    }
-+
-+    if (str) {
-+        *str = (void *)us->d;
-+    }
-+    if (len) {
-+        *len = l;
-+    }
-+
-+    us->d += l + 1;
-+    us->l -= l + 1;
-+    return 0;
-+}
-+
-+static XsNode *lookup_node(XsNode *n, char *path)
-+{
-+    char *slash = strchr(path, '/');
-+    XsNode *child;
-+
-+    if (path[0] == '\0') {
-+        return n;
-+    }
-+
-+    if (slash) {
-+        *slash = '\0';
-+    }
-+
-+    if (!n->children) {
-+        return NULL;
-+    }
-+    child = g_hash_table_lookup(n->children, path);
-+    if (!slash) {
-+        return child;
-+    }
-+
-+    *slash = '/';
-+    if (!child) {
-+        return NULL;
-+    }
-+    return lookup_node(child, slash + 1);
-+}
-+
-+static XsNode *lookup_tx_node(struct unsave_state *us, unsigned int tx_id)
-+{
-+    XsTransaction *t;
-+    if (tx_id == us->s->root_tx) {
-+        return lookup_node(us->s->root, us->path + 1);
-+    }
-+
-+    t = g_hash_table_lookup(us->s->transactions, GINT_TO_POINTER(tx_id));
-+    if (!t) {
-+        return NULL;
-+    }
-+    g_assert(t->root);
-+    return lookup_node(t->root, us->path + 1);
-+}
-+
-+static void count_child_nodes(gpointer key, gpointer value, gpointer user_data)
-+{
-+    unsigned int *nr_nodes = user_data;
-+    XsNode *n = value;
-+
-+    (*nr_nodes)++;
-+
-+    if (n->children) {
-+        g_hash_table_foreach(n->children, count_child_nodes, nr_nodes);
-+    }
-+}
-+
-+static int consume_node(struct unsave_state *us, XsNode **nodep,
-+                        unsigned int *nr_nodes)
-+{
-+    XsNode *n = NULL;
-+    uint8_t flags;
-+    int ret;
-+
-+    if (us->l < 1) {
-+        return -EINVAL;
-+    }
-+    flags = us->d[0];
-+    us->d++;
-+    us->l--;
-+
-+    if (flags == NODE_REF) {
-+        unsigned int tx;
-+
-+        ret = consume_be32(us, &tx);
-+        if (ret) {
-+            return ret;
-+        }
-+
-+        n = lookup_tx_node(us, tx);
-+        if (!n) {
-+            return -EINVAL;
-+        }
-+        n->ref++;
-+        if (n->children) {
-+            g_hash_table_foreach(n->children, count_child_nodes, nr_nodes);
-+        }
-+    } else {
-+        uint32_t datalen;
-+
-+        if (flags & ~(DELETED_IN_TX | MODIFIED_IN_TX)) {
-+            return -EINVAL;
-+        }
-+        n = xs_node_new();
-+
-+        if (flags & DELETED_IN_TX) {
-+            n->deleted_in_tx = true;
-+        }
-+        if (flags & MODIFIED_IN_TX) {
-+            n->modified_in_tx = true;
-+        }
-+        ret = consume_be32(us, &datalen);
-+        if (ret) {
-+            xs_node_unref(n);
-+            return -EINVAL;
-+        }
-+        if (datalen) {
-+            if (datalen > us->l) {
-+                xs_node_unref(n);
-+                return -EINVAL;
-+            }
-+
-+            GByteArray *node_data = g_byte_array_new();
-+            g_byte_array_append(node_data, us->d, datalen);
-+            us->d += datalen;
-+            us->l -= datalen;
-+            n->content = node_data;
-+
-+            if (us->root_walk) {
-+                n->modified_in_tx = true;
-+            }
-+        }
-+        while (1) {
-+            char *perm = NULL;
-+            size_t permlen = 0;
-+
-+            ret = consume_string(us, &perm, &permlen);
-+            if (ret) {
-+                xs_node_unref(n);
-+                return ret;
-+            }
-+
-+            if (!permlen) {
-+                break;
-+            }
-+
-+            n->perms = g_list_append(n->perms, g_strdup(perm));
-+        }
-+
-+        /* Now children */
-+        while (1) {
-+            size_t childlen;
-+            char *childname;
-+            char *pathend;
-+            XsNode *child = NULL;
-+
-+            ret = consume_string(us, &childname, &childlen);
-+            if (ret) {
-+                xs_node_unref(n);
-+                return ret;
-+            }
-+
-+            if (!childlen) {
-+                break;
-+            }
-+
-+            pathend = us->path + strlen(us->path);
-+            strncat(us->path, "/", sizeof(us->path) - 1);
-+            strncat(us->path, childname, sizeof(us->path) - 1);
-+
-+            ret = consume_node(us, &child, nr_nodes);
-+            *pathend = '\0';
-+            if (ret) {
-+                xs_node_unref(n);
-+                return ret;
-+            }
-+            g_assert(child);
-+            xs_node_add_child(n, childname, child);
-+        }
-+
-+        /*
-+         * If the node has no data and no children we still want to fire
-+         * a watch on it.
-+         */
-+        if (us->root_walk && !n->children) {
-+            n->modified_in_tx = true;
-+        }
-+    }
-+
-+    if (!n->deleted_in_tx) {
-+        (*nr_nodes)++;
-+    }
-+
-+    *nodep = n;
-+    return 0;
-+}
-+
-+static int consume_tree(struct unsave_state *us, XsTransaction *t)
-+{
-+    int ret;
-+
-+    ret = consume_be32(us, &t->tx_id);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    if (t->tx_id > us->s->last_tx) {
-+        return -EINVAL;
-+    }
-+
-+    us->path[0] = '\0';
-+
-+    return consume_node(us, &t->root, &t->nr_nodes);
-+}
-+
-+int xs_impl_deserialize(XenstoreImplState *s, GByteArray *bytes,
-+                        unsigned int dom_id, xs_impl_watch_fn watch_fn,
-+                        void *watch_opaque)
-+{
-+    struct unsave_state us;
-+    XsTransaction base_t = { 0 };
-+    int ret;
-+
-+    us.s = s;
-+    us.bytes = bytes;
-+    us.d = bytes->data;
-+    us.l = bytes->len;
-+
-+    xs_impl_reset_watches(s, dom_id);
-+    g_hash_table_remove_all(s->transactions);
-+
-+    xs_node_unref(s->root);
-+    s->root = NULL;
-+    s->root_tx = s->last_tx = XBT_NULL;
-+
-+    ret = consume_be32(&us, &s->last_tx);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    /*
-+     * Consume the base tree into a transaction so that watches can be
-+     * fired as we commit it. By setting us.root_walk we cause the nodes
-+     * to be marked as 'modified_in_tx' as they are created, so that the
-+     * watches are triggered on them.
-+     */
-+    base_t.dom_id = dom_id;
-+    base_t.base_tx = XBT_NULL;
-+    us.root_walk = true;
-+    ret = consume_tree(&us, &base_t);
-+    if (ret) {
-+        return ret;
-+    }
-+    us.root_walk = false;
-+
-+    /*
-+     * Commit the transaction now while the refcount on all nodes is 1.
-+     * Note that we haven't yet reinstated the *guest* watches but that's
-+     * OK because we don't want the guest to see any changes. Even any
-+     * backend nodes which get recreated should be *precisely* as they
-+     * were before the migration. Back ends may have been instantiated
-+     * already, and will see the frontend magically blink into existence
-+     * now (well, from the aio_bh which fires the watches). It's their
-+     * responsibility to rebuild everything precisely as it was before.
-+     */
-+    ret = transaction_commit(s, &base_t);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    while (1) {
-+        unsigned int base_tx;
-+        XsTransaction *t;
-+
-+        ret = consume_be32(&us, &base_tx);
-+        if (ret) {
-+            return ret;
-+        }
-+        if (base_tx == XBT_NULL) {
-+            break;
-+        }
-+
-+        t = g_new0(XsTransaction, 1);
-+        t->base_tx = base_tx;
-+
-+        ret = consume_be32(&us, &t->dom_id);
-+        if (!ret) {
-+            ret = consume_tree(&us, t);
-+        }
-+        if (ret) {
-+            g_free(t);
-+            return ret;
-+        }
-+        g_assert(t->root);
-+        if (t->dom_id) {
-+            s->nr_domu_transactions++;
-+        }
-+        g_hash_table_insert(s->transactions, GINT_TO_POINTER(t->tx_id), t);
-+    }
-+
-+    while (1) {
-+        char *path, *token;
-+        size_t pathlen, toklen;
-+
-+        ret = consume_string(&us, &path, &pathlen);
-+        if (ret) {
-+            return ret;
-+        }
-+        if (!pathlen) {
-+            break;
-+        }
-+
-+        ret = consume_string(&us, &token, &toklen);
-+        if (ret) {
-+            return ret;
-+        }
-+
-+        if (!watch_fn) {
-+            continue;
-+        }
-+
-+        ret = do_xs_impl_watch(s, dom_id, path, token, watch_fn, watch_opaque);
-+        if (ret) {
-+            return ret;
-+        }
-+    }
-+
-+    if (us.l) {
-+        return -EINVAL;
-+    }
-+
-+    return 0;
++    return g_new0(XenstoreImplState, 1);
 +}
 diff --git a/hw/i386/kvm/xenstore_impl.h b/hw/i386/kvm/xenstore_impl.h
-index 2f81251b5e..bbe2391e2e 100644
---- a/hw/i386/kvm/xenstore_impl.h
+new file mode 100644
+index 0000000000..beb7b29ab8
+--- /dev/null
 +++ b/hw/i386/kvm/xenstore_impl.h
-@@ -61,4 +61,9 @@ int xs_impl_unwatch(XenstoreImplState *s, unsigned int dom_id,
-                     void *opaque);
- int xs_impl_reset_watches(XenstoreImplState *s, unsigned int dom_id);
- 
-+GByteArray *xs_impl_serialize(XenstoreImplState *s);
-+int xs_impl_deserialize(XenstoreImplState *s, GByteArray *bytes,
-+                        unsigned int dom_id, xs_impl_watch_fn watch_fn,
-+                        void *watch_opaque);
+@@ -0,0 +1,58 @@
++/*
++ * QEMU Xen emulation: The actual implementation of XenStore
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * Authors: David Woodhouse <dwmw2@infradead.org>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
 +
- #endif /* QEMU_XENSTORE_IMPL_H */
-diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
-index 2c0f89c694..fda6a047d0 100644
---- a/tests/unit/test-xs-node.c
-+++ b/tests/unit/test-xs-node.c
-@@ -29,8 +29,32 @@ static GList *xs_node_list;
- #define DOMID_QEMU 0
- #define DOMID_GUEST 1
- 
-+static void dump_ref(const char *name, XsNode *n, int indent)
-+{
-+    int i;
++#ifndef QEMU_XENSTORE_IMPL_H
++#define QEMU_XENSTORE_IMPL_H
 +
-+    if (!indent && name) {
-+        printf("%s:\n", name);
-+    }
++typedef uint32_t xs_transaction_t;
 +
-+    for (i = 0; i < indent; i++) {
-+        printf(" ");
-+    }
++#define XBT_NULL 0
 +
-+    printf("->%p(%d, '%s'): '%.*s'%s%s\n", n, n->ref, n->name,
-+           (int)(n->content ? n->content->len : strlen("<empty>")),
-+           n->content ? (char *)n->content->data : "<empty>",
-+           n->modified_in_tx ? " MODIFIED" : "",
-+           n->deleted_in_tx ? " DELETED" : "");
++typedef struct XenstoreImplState XenstoreImplState;
 +
-+    if (n->children) {
-+        g_hash_table_foreach(n->children, (void *)dump_ref,
-+                             GINT_TO_POINTER(indent + 2));
-+    }
-+}
++XenstoreImplState *xs_impl_create(void);
 +
- /* This doesn't happen in qemu but we want to make valgrind happy */
--static void xs_impl_delete(XenstoreImplState *s)
-+static void xs_impl_delete(XenstoreImplState *s, bool last)
- {
-     int err;
- 
-@@ -46,6 +70,10 @@ static void xs_impl_delete(XenstoreImplState *s)
-     xs_node_unref(s->root);
-     g_free(s);
- 
-+    if (!last) {
-+        return;
-+    }
++/*
++ * These functions return *positive* error numbers. This is a little
++ * unconventional but it helps to keep us honest because there is
++ * also a very limited set of error numbers that they are permitted
++ * to return (those in xsd_errors).
++ */
 +
-     if (xs_node_list) {
-         GList *l;
-         for (l = xs_node_list; l; l = l->next) {
-@@ -57,6 +85,137 @@ static void xs_impl_delete(XenstoreImplState *s)
-     g_assert(!nr_xs_nodes);
- }
- 
-+struct compare_walk {
-+    char path[XENSTORE_ABS_PATH_MAX + 1];
-+    XsNode *parent_2;
-+    bool compare_ok;
-+};
++int xs_impl_read(XenstoreImplState *s, unsigned int dom_id,
++                 xs_transaction_t tx_id, const char *path, GByteArray *data);
++int xs_impl_write(XenstoreImplState *s, unsigned int dom_id,
++                  xs_transaction_t tx_id, const char *path, GByteArray *data);
++int xs_impl_directory(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path,
++                      uint64_t *gencnt, GList **items);
++int xs_impl_transaction_start(XenstoreImplState *s, unsigned int dom_id,
++                              xs_transaction_t *tx_id);
++int xs_impl_transaction_end(XenstoreImplState *s, unsigned int dom_id,
++                            xs_transaction_t tx_id, bool commit);
++int xs_impl_rm(XenstoreImplState *s, unsigned int dom_id,
++               xs_transaction_t tx_id, const char *path);
++int xs_impl_get_perms(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path, GList **perms);
++int xs_impl_set_perms(XenstoreImplState *s, unsigned int dom_id,
++                      xs_transaction_t tx_id, const char *path, GList *perms);
 +
++/* This differs from xs_watch_fn because it has the token */
++typedef void(xs_impl_watch_fn)(void *opaque, const char *path,
++                               const char *token);
++int xs_impl_watch(XenstoreImplState *s, unsigned int dom_id, const char *path,
++                  const char *token, xs_impl_watch_fn fn, void *opaque);
++int xs_impl_unwatch(XenstoreImplState *s, unsigned int dom_id,
++                    const char *path, const char *token, xs_impl_watch_fn fn,
++                    void *opaque);
++int xs_impl_reset_watches(XenstoreImplState *s, unsigned int dom_id);
 +
-+static bool compare_perms(GList *p1, GList *p2)
-+{
-+    while (p1) {
-+        if (!p2 || g_strcmp0(p1->data, p2->data)) {
-+            return false;
-+        }
-+        p1 = p1->next;
-+        p2 = p2->next;
-+    }
-+    return (p2 == NULL);
-+}
-+
-+static bool compare_content(GByteArray *c1, GByteArray *c2)
-+{
-+    size_t len1 = 0, len2 = 0;
-+
-+    if (c1) {
-+        len1 = c1->len;
-+    }
-+    if (c2) {
-+        len2 = c2->len;
-+    }
-+    if (len1 != len2) {
-+        return false;
-+    }
-+
-+    if (!len1) {
-+        return true;
-+    }
-+
-+    return !memcmp(c1->data, c2->data, len1);
-+}
-+
-+static void compare_child(gpointer, gpointer, gpointer);
-+
-+static void compare_nodes(struct compare_walk *cw, XsNode *n1, XsNode *n2)
-+{
-+    int nr_children1 = 0, nr_children2 = 0;
-+
-+    if (n1->children) {
-+        nr_children1 = g_hash_table_size(n1->children);
-+    }
-+    if (n2->children) {
-+        nr_children2 = g_hash_table_size(n2->children);
-+    }
-+
-+    if (n1->ref != n2->ref ||
-+        n1->deleted_in_tx != n2->deleted_in_tx ||
-+        n1->modified_in_tx != n2->modified_in_tx ||
-+        !compare_perms(n1->perms, n2->perms) ||
-+        !compare_content(n1->content, n2->content) ||
-+        nr_children1 != nr_children2) {
-+        cw->compare_ok = false;
-+        printf("Compare failure on '%s'\n", cw->path);
-+    }
-+
-+    if (nr_children1) {
-+        XsNode *oldparent = cw->parent_2;
-+        cw->parent_2 = n2;
-+        g_hash_table_foreach(n1->children, compare_child, cw);
-+
-+        cw->parent_2 = oldparent;
-+    }
-+}
-+
-+static void compare_child(gpointer key, gpointer val, gpointer opaque)
-+{
-+    struct compare_walk *cw = opaque;
-+    char *childname = key;
-+    XsNode *child1 = val;
-+    XsNode *child2 = g_hash_table_lookup(cw->parent_2->children, childname);
-+    int pathlen = strlen(cw->path);
-+
-+    if (!child2) {
-+        cw->compare_ok = false;
-+        printf("Child '%s' does not exist under '%s'\n", childname, cw->path);
-+        return;
-+    }
-+
-+    strncat(cw->path, "/", sizeof(cw->path) - 1);
-+    strncat(cw->path, childname, sizeof(cw->path) - 1);
-+
-+    compare_nodes(cw, child1, child2);
-+    cw->path[pathlen] = '\0';
-+}
-+
-+static bool compare_trees(XsNode *n1, XsNode *n2)
-+{
-+    struct compare_walk cw;
-+
-+    cw.path[0] = '\0';
-+    cw.parent_2 = n2;
-+    cw.compare_ok = true;
-+
-+    if (!n1 || !n2) {
-+        return false;
-+    }
-+
-+    compare_nodes(&cw, n1, n2);
-+    return cw.compare_ok;
-+}
-+
-+static void compare_tx(gpointer key, gpointer val, gpointer opaque)
-+{
-+    XenstoreImplState *s2 = opaque;
-+    XsTransaction *t1 = val, *t2;
-+    unsigned int tx_id = GPOINTER_TO_INT(key);
-+
-+    t2 = g_hash_table_lookup(s2->transactions, key);
-+    g_assert(t2);
-+
-+    g_assert(t1->tx_id == tx_id);
-+    g_assert(t2->tx_id == tx_id);
-+    g_assert(t1->base_tx == t2->base_tx);
-+    g_assert(t1->dom_id == t2->dom_id);
-+    if (!compare_trees(t1->root, t2->root)) {
-+        printf("Comparison failure in TX %u after serdes:\n", tx_id);
-+        dump_ref("Original", t1->root, 0);
-+        dump_ref("Deserialised", t2->root, 0);
-+        g_assert(0);
-+    }
-+    g_assert(t1->nr_nodes == t2->nr_nodes);
-+}
-+
- static int write_str(XenstoreImplState *s, unsigned int dom_id,
-                           unsigned int tx_id, const char *path,
-                           const char *content)
-@@ -78,6 +237,40 @@ static void watch_cb(void *_str, const char *path, const char *token)
-     g_string_append(str, token);
- }
- 
-+static void check_serdes(XenstoreImplState *s)
-+{
-+    XenstoreImplState *s2 = xs_impl_create(DOMID_GUEST);
-+    GByteArray *bytes = xs_impl_serialize(s);
-+    int nr_transactions1, nr_transactions2;
-+    int ret;
-+
-+    ret = xs_impl_deserialize(s2, bytes, DOMID_GUEST, watch_cb, NULL);
-+    g_assert(!ret);
-+
-+    g_byte_array_unref(bytes);
-+
-+    g_assert(s->last_tx == s2->last_tx);
-+    g_assert(s->root_tx == s2->root_tx);
-+
-+    if (!compare_trees(s->root, s2->root)) {
-+        printf("Comparison failure in main tree after serdes:\n");
-+        dump_ref("Original", s->root, 0);
-+        dump_ref("Deserialised", s2->root, 0);
-+        g_assert(0);
-+    }
-+
-+    nr_transactions1 = g_hash_table_size(s->transactions);
-+    nr_transactions2 = g_hash_table_size(s2->transactions);
-+    g_assert(nr_transactions1 == nr_transactions2);
-+
-+    g_hash_table_foreach(s->transactions, compare_tx, s2);
-+
-+    g_assert(s->nr_domu_watches == s2->nr_domu_watches);
-+    g_assert(s->nr_domu_transactions == s2->nr_domu_transactions);
-+    g_assert(s->nr_nodes == s2->nr_nodes);
-+    xs_impl_delete(s2, false);
-+}
-+
- static XenstoreImplState *setup(void)
- {
-    XenstoreImplState *s = xs_impl_create(DOMID_GUEST);
-@@ -293,7 +486,7 @@ static void test_xs_node_simple(void)
-     g_string_free(qemu_watches, true);
-     g_string_free(guest_watches, true);
-     xs_node_unref(old_root);
--    xs_impl_delete(s);
-+    xs_impl_delete(s, true);
- }
- 
- 
-@@ -365,6 +558,8 @@ static void do_test_xs_node_tx(bool fail, bool commit)
-     g_assert(!memcmp(data->data, "something else", data->len));
-     g_byte_array_set_size(data, 0);
- 
-+    check_serdes(s);
-+
-     /* Attempt to commit the transaction */
-     err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, commit);
-     if (commit && fail) {
-@@ -381,6 +576,8 @@ static void do_test_xs_node_tx(bool fail, bool commit)
-     }
-     g_assert(s->nr_nodes == 7);
- 
-+    check_serdes(s);
-+
-     err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-                         watch_cb, watches);
-     g_assert(!err);
-@@ -399,7 +596,7 @@ static void do_test_xs_node_tx(bool fail, bool commit)
-     }
-     g_byte_array_unref(data);
-     g_string_free(watches, true);
--    xs_impl_delete(s);
-+    xs_impl_delete(s, true);
- }
- 
- static void test_xs_node_tx_fail(void)
-@@ -461,6 +658,8 @@ static void test_xs_node_tx_rm(void)
-     g_assert(!memcmp(data->data, "something", data->len));
-     g_byte_array_set_size(data, 0);
- 
-+    check_serdes(s);
-+
-     /* Commit the transaction */
-     err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-     g_assert(!err);
-@@ -480,7 +679,7 @@ static void test_xs_node_tx_rm(void)
-     g_assert(!err);
- 
-     g_string_free(watches, true);
--    xs_impl_delete(s);
-+    xs_impl_delete(s, true);
- }
- 
- static void test_xs_node_tx_resurrect(void)
-@@ -499,11 +698,16 @@ static void test_xs_node_tx_resurrect(void)
-     g_assert(!err);
-     g_assert(s->nr_nodes == 9);
- 
-+    /* Another node to remain shared */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/place/safe", "keepme");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+
-     /* This node will be wiped and resurrected */
-     err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark",
-                     "foo");
-     g_assert(!err);
--    g_assert(s->nr_nodes == 9);
-+    g_assert(s->nr_nodes == 11);
- 
-     /* Set a watch */
-     err = xs_impl_watch(s, DOMID_GUEST, "some", "watch",
-@@ -520,19 +724,23 @@ static void test_xs_node_tx_resurrect(void)
-     /* Delete the tree in the transaction */
-     err = xs_impl_rm(s, DOMID_GUEST, tx_id, "some/deep");
-     g_assert(!err);
--    g_assert(s->nr_nodes == 9);
-+    g_assert(s->nr_nodes == 11);
-     g_assert(!watches->len);
- 
-     /* Resurrect part of it */
-     err = write_str(s, DOMID_GUEST, tx_id, "some/deep/dark/different/path",
-                     "something");
-     g_assert(!err);
--    g_assert(s->nr_nodes == 9);
-+    g_assert(s->nr_nodes == 11);
-+
-+    check_serdes(s);
- 
-     /* Commit the transaction */
-     err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-     g_assert(!err);
--    g_assert(s->nr_nodes == 9);
-+    g_assert(s->nr_nodes == 11);
-+
-+    check_serdes(s);
- 
-     /* lost data */
-     g_assert(strstr(watches->str, "some/deep/dark/different/pathwatch"));
-@@ -549,12 +757,14 @@ static void test_xs_node_tx_resurrect(void)
-     g_assert(err == ENOENT);
-     g_byte_array_unref(data);
- 
-+    check_serdes(s);
-+
-     err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-                         watch_cb, watches);
-     g_assert(!err);
- 
-     g_string_free(watches, true);
--    xs_impl_delete(s);
-+    xs_impl_delete(s, true);
- }
- 
- static void test_xs_node_tx_resurrect2(void)
-@@ -608,11 +818,15 @@ static void test_xs_node_tx_resurrect2(void)
-     g_assert(!err);
-     g_assert(s->nr_nodes == 11);
- 
-+    check_serdes(s);
-+
-     /* Commit the transaction */
-     err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-     g_assert(!err);
-     g_assert(s->nr_nodes == 11);
- 
-+    check_serdes(s);
-+
-     /* lost data */
-     g_assert(strstr(watches->str, "some/deep/dark/relative/pathwatch"));
-     /* lost data */
-@@ -629,12 +843,14 @@ static void test_xs_node_tx_resurrect2(void)
- 
-     g_byte_array_unref(data);
- 
-+    check_serdes(s);
-+
-     err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-                         watch_cb, watches);
-     g_assert(!err);
- 
-     g_string_free(watches, true);
--    xs_impl_delete(s);
-+    xs_impl_delete(s, true);
- }
- 
- int main(int argc, char **argv)
++#endif /* QEMU_XENSTORE_IMPL_H */
 -- 
 2.39.0
 
