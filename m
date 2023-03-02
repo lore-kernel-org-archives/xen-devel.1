@@ -4,35 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2D7C678D4
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:39:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505181.777813 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE34C6FA8E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:52:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505206.777834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXl23-0006Oh-JU; Thu, 02 Mar 2023 15:39:47 +0000
+	id 1pXlEF-0001xB-9F; Thu, 02 Mar 2023 15:52:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505181.777813; Thu, 02 Mar 2023 15:39:47 +0000
+Received: by outflank-mailman (output) from mailman id 505206.777834; Thu, 02 Mar 2023 15:52:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXl23-0006OS-Fj; Thu, 02 Mar 2023 15:39:47 +0000
-Received: by outflank-mailman (input) for mailman id 505181;
- Thu, 02 Mar 2023 15:39:45 +0000
+	id 1pXlEF-0001x4-4R; Thu, 02 Mar 2023 15:52:23 +0000
+Received: by outflank-mailman (input) for mailman id 505206;
+ Thu, 02 Mar 2023 15:52:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZMsQ=62=desiato.srs.infradead.org=BATV+9a0490e5ac528e462c30+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pXkxY-0001Jw-Op
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:35:09 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=TfVa=62=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1pXlED-0001wy-N2
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:52:21 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on060a.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::60a])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2b7aa16-b90f-11ed-a550-8520e6686977;
- Thu, 02 Mar 2023 16:34:49 +0100 (CET)
-Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pXkx4-00FL3j-1r; Thu, 02 Mar 2023 15:34:39 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pXkx4-004uz7-1V; Thu, 02 Mar 2023 15:34:38 +0000
+ id 35c818f6-b912-11ed-a550-8520e6686977;
+ Thu, 02 Mar 2023 16:52:18 +0100 (CET)
+Received: from DB3PR08CA0010.eurprd08.prod.outlook.com (2603:10a6:8::23) by
+ AS8PR08MB9340.eurprd08.prod.outlook.com (2603:10a6:20b:5a8::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.18; Thu, 2 Mar
+ 2023 15:52:11 +0000
+Received: from DBAEUR03FT015.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:8:0:cafe::1) by DB3PR08CA0010.outlook.office365.com
+ (2603:10a6:8::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.18 via Frontend
+ Transport; Thu, 2 Mar 2023 15:52:11 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT015.mail.protection.outlook.com (100.127.142.112) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6156.20 via Frontend Transport; Thu, 2 Mar 2023 15:52:11 +0000
+Received: ("Tessian outbound 0df938784972:v135");
+ Thu, 02 Mar 2023 15:52:11 +0000
+Received: from d1892ff6d114.2
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ FFD392D9-E0FF-43C0-B318-F260B29D85B1.1; 
+ Thu, 02 Mar 2023 15:52:00 +0000
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id d1892ff6d114.2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 02 Mar 2023 15:52:00 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by DU0PR08MB9275.eurprd08.prod.outlook.com (2603:10a6:10:41b::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.19; Thu, 2 Mar
+ 2023 15:51:58 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::806c:fd65:92cf:7b7a]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::806c:fd65:92cf:7b7a%6]) with mapi id 15.20.6156.018; Thu, 2 Mar 2023
+ 15:51:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,1693 +73,303 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c2b7aa16-b90f-11ed-a550-8520e6686977
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=7OYcuGk/WJovN4Fv5UgZ+akMCJx0VuuFqOz3t8MFOl8=; b=A96C9T3klBaf5y8FERbIaq1p8B
-	qcL0vvjHV+7WOWbLN9X9idp393Or1KRbJV4/6HVfrxbDC84my8Sp2kOzXZ4Sf+Y/RBTb5w1wqjRmN
-	gfOm4D29deFFwaQfXuSuMhoKbTHG7oEyOp3oN4VVyFhphBjYfsZvis7GWVXEHSiMqHvYKsLQ0DXdL
-	t6EnmDvTGL34joq5CtT97KoaC4l+z7FvI3ZhUQMTbEJf2IX8eXLcW297XJFVP2drzns2ANi4cXAEX
-	hJqX55yaOpGtaSL84/HdHiokTLszF7xaVKnQSGCEwQVDFLBdySo8b8yiXd5cidUso2LG/0hx1oi1s
-	dl+0tSZw==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Joao Martins <joao.m.martins@oracle.com>,
-	Ankur Arora <ankur.a.arora@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	vikram.garhwal@amd.com,
-	Anthony Perard <anthony.perard@citrix.com>,
-	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 13/25] hw/xen: Add xenstore operations to allow redirection to internal emulation
-Date: Thu,  2 Mar 2023 15:34:23 +0000
-Message-Id: <20230302153435.1170111-14-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
-References: <20230302153435.1170111-1-dwmw2@infradead.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 35c818f6-b912-11ed-a550-8520e6686977
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Czf39zrHaWnaBfN3qeRgPUJb9qSQrGI7BeXfUrcWpHQ=;
+ b=renEI1hUUPzONAEDrxQLRq8n8w+hH8Z0mlG53mufMcScr5g2G3zAWgSxUeSLjrFS3EzBtCBv3pkXcH0g47M6WYqF6Fgf3GSO2ma3PnOaBCJjyHY70m/Omt5sbiubMGLsl3LQ4DFdi5eughA54G7R6dUxp9I1u99xep5FkN8SlTQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 1153d063e4ee4395
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Qt3JkC96T97GAbMIIDIiBmv9ef4D0hJMgOq7jJvMfZ/evcyanQGNrAG4utdLZ78qLfhhT08npxipvJ/zVBaFnF3Hg3iWGI7pgLjNODsBQ5JZhguHUarhdPKhjoOGokTcx5cslgSSjc0aB7Z5D2/Ell+7nLMj+p1+Sl9G0tEhOY71TwjlmpbzhyTTjvWU2TcLMguW3OmqrUaKejtK8ZNpBGFrUwyAMo7WRV1DdwkVwV7Fg/bNReWqxJ987p+csqjbJvZfQGEMIvZezH1qVh3i2zhEwvXHIyDPx2XrZ/RdMgU8xIqiNwYzUP/0xBIJ2Eg9AZI00bkiLRttY7LERX2UsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Czf39zrHaWnaBfN3qeRgPUJb9qSQrGI7BeXfUrcWpHQ=;
+ b=RtqMzTw3AzxydifL8yDOce0LGUnTRdx78rlsGynsKAKpUwUlHy0m8rzgqfb7S30O7andn48iMW7VmoWHgKKyT/1LGKud+PL8AAeq/KhKZMx4qI95i0VJbroAlmqPDsBYI6kFsLq7Q3Kt56NXT+j++vgxVXVOxYgjTrPBOktQIwNBLR40eCBkGyLoRlgpTjGGzDeUpoD2g76le7OM2mLFk4G2Neius8qA2BCswvMD1BsT2CG+dIriAEUeiPKc5ih5x/RiWtqX+dmvs0VUh0vM0oH9zhCCNZvqfeyhH2aNqZTMB0raE86qhUQToHF271zuFyvXg2wrj2Dfy+IacCgX9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Czf39zrHaWnaBfN3qeRgPUJb9qSQrGI7BeXfUrcWpHQ=;
+ b=renEI1hUUPzONAEDrxQLRq8n8w+hH8Z0mlG53mufMcScr5g2G3zAWgSxUeSLjrFS3EzBtCBv3pkXcH0g47M6WYqF6Fgf3GSO2ma3PnOaBCJjyHY70m/Omt5sbiubMGLsl3LQ4DFdi5eughA54G7R6dUxp9I1u99xep5FkN8SlTQ=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Julien Grall <julien@xen.org>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Luca Fancellu
+	<Luca.Fancellu@arm.com>, Michal Orzel <michal.orzel@amd.com>, Julien Grall
+	<jgrall@amazon.com>, Henry Wang <Henry.Wang@arm.com>
+Subject: Re: [PATCH v6 1/5] xen/arm32: head: Widen the use of the temporary
+ mapping
+Thread-Topic: [PATCH v6 1/5] xen/arm32: head: Widen the use of the temporary
+ mapping
+Thread-Index: AQHZTRegmVYOCBfckkKt3RhJZjw+I67no5qA
+Date: Thu, 2 Mar 2023 15:51:58 +0000
+Message-ID: <66AB8789-4F4F-474A-A05D-4850023488E5@arm.com>
+References: <20230302145916.44035-1-julien@xen.org>
+ <20230302145916.44035-2-julien@xen.org>
+In-Reply-To: <20230302145916.44035-2-julien@xen.org>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3731.400.51.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AM6PR08MB3784:EE_|DU0PR08MB9275:EE_|DBAEUR03FT015:EE_|AS8PR08MB9340:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5de035be-47ac-4d7d-ab80-08db1b36160a
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ qCvRM4p2A6QU66OHLqPs6Dk+/hyNcuOsprOZp3pORUNmy0xtR5GhHd5djl85qgMQcQxHwx1urYVrxW5IDwAsW8kCUxDyuz2h2a6I1Kgf2UW+h8nOa/SoW7BUjjhEGSa1IrGrkrrLWVPFGQOzVn3alxWyZiiWSNY/CrPlW4BFLB0nqJBzx3YGxRmXiXuTsrXMiejAtN1wdIW/lKbDs/joWrSb9vip/wko6dqUwa70XU5QfwJoANRLwTp4kd1cZIzoKaR+WGWiHCda1Qws1CCYRUZVGT9Jnruy3jGQgKrriTKA9qORRDBu3KQlf+V57wBc9jpK/27AQBY2mAWu6o+CR1W4KGNeWg4wU3vDwARJZClQOU0kX1fv+ukKIhBnI2g2hxVJBcy3uw2k0uskzrFVdNSP2668zL3PEPu6sPn6RET5nuNSB7VpLBoGOf+148kpHxdM8hgaR7rO9vHyBQ7kEwA3oIs3fklu64JoTZxFVQcSqymRXfAa+2qUK7+gblmqmzQH1aL6c+RKwpu/Z8dhDvqx9Dj3IcdjyQcCACbZF6b73o+oMJ7PigJDY0qhTtKYBjNDTS5BcdBkWoJ+UVlM5nm/0+wGFQXJZThJaJO0j/5NX4TKr6VsroQwDNdT5wnxtGkzIORdN60/JRpjVE93UuwaXmQDS6m9KoyN4fKLI6vCVKuGpdCkavqJSgGwMLb0yk7V+92h+ixOGXZiEhLUOVNXy4L2tX/6d5X+ApNPmKU=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(346002)(136003)(376002)(396003)(39860400002)(451199018)(83380400001)(122000001)(36756003)(38100700002)(478600001)(8936002)(5660300002)(66946007)(86362001)(38070700005)(33656002)(71200400001)(26005)(186003)(2616005)(6512007)(53546011)(6506007)(6486002)(66446008)(66556008)(66476007)(2906002)(64756008)(8676002)(76116006)(6916009)(41300700001)(316002)(4326008)(91956017)(54906003)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <041128C9236DFD45A048921A216974C5@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9275
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DBAEUR03FT015.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	fe81a816-7da2-4c50-84bb-08db1b360e2d
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	472Td7okK1NXGt2qAf2Z+g3IcFrfkRoPGnE89r4h1V21gh4457614o4LWGynyJK0mezaLDft/Y8nvJBNttQLWpPFNyz4n4B65ZiLketRV0mUPuGLvhaERUr07G7ydyiQMrVQcCLhRZ+86AJv0fwL/solYNoIvGqXzWnBQsAOzGhD6MH3KSBQQ6nHsUW+XZlXPY+LUg2fL+Ac8/u6lwknG+aMjqJgR35GS5PcMwgUhaoiTgF3SuS1q+8K86ZVfn/2Ylsk8/CltoVauucACwxYp9iGQlFnxPqTs6xzJEZ5gDWrDFFE1tpyi2x+oMyJDcIXGO3fFqcKknd0z9ddkL3vJXp3CqXNVzVHstbNwIrt9Oi8pGVvywydRPsKq/DCUy3HCgbBivLMC1tLMOo3N1NW6qUIn7iHSMAuUN3DA/ShbYrUgETzed1gIa5v/YkQSDAFDLLA/V0VJGEmmiS0SJXnMa06KlpJdMrdW435QlShCnuxgDuUNrEznaMBFJmWURgTZk25lfKNDWz7oqV++k0FDwaQ54sSnXyTB8Lh3eiEQFqvB8bQwH1+jPdWhXHCNxXHygr4NZ0ym1sQm2czD0Tu0uPXl3ScT9T0TWHiXh9AAzQfBndC1YdcH7gqOSNh0fIlCX/CIqaUdpGvN1IUtAjnj1bG8LRSciP3d9yCycVoHOMxpoP3AE8fp9LKtlh4Qx4JTfA7a4UtVXH3Ubm/M+MWfQ==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230025)(4636009)(346002)(136003)(39860400002)(396003)(376002)(451199018)(40470700004)(36840700001)(46966006)(40460700003)(36756003)(33656002)(53546011)(6486002)(6512007)(6506007)(2616005)(26005)(186003)(336012)(316002)(41300700001)(54906003)(4326008)(70206006)(2906002)(8676002)(70586007)(8936002)(478600001)(5660300002)(82740400003)(81166007)(6862004)(86362001)(40480700001)(82310400005)(356005)(36860700001)(83380400001)(47076005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2023 15:52:11.4882
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5de035be-47ac-4d7d-ab80-08db1b36160a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DBAEUR03FT015.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB9340
 
-From: Paul Durrant <pdurrant@amazon.com>
+Hi Julien,
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- accel/xen/xen-all.c                 |  11 +-
- hw/char/xen_console.c               |   2 +-
- hw/i386/kvm/xen_xenstore.c          |   3 -
- hw/i386/kvm/xenstore_impl.h         |   8 +-
- hw/xen/xen-bus-helper.c             |  62 +++----
- hw/xen/xen-bus.c                    | 261 ++++------------------------
- hw/xen/xen-legacy-backend.c         | 119 +++++++------
- hw/xen/xen-operations.c             | 198 +++++++++++++++++++++
- hw/xen/xen_devconfig.c              |   4 +-
- hw/xen/xen_pt_graphics.c            |   1 -
- hw/xen/xen_pvdev.c                  |  49 +-----
- include/hw/xen/xen-bus-helper.h     |  26 +--
- include/hw/xen/xen-bus.h            |  17 +-
- include/hw/xen/xen-legacy-backend.h |   6 +-
- include/hw/xen/xen_backend_ops.h    | 163 +++++++++++++++++
- include/hw/xen/xen_common.h         |   1 -
- include/hw/xen/xen_pvdev.h          |   2 +-
- softmmu/globals.c                   |   1 +
- 18 files changed, 525 insertions(+), 409 deletions(-)
+> On 2 Mar 2023, at 15:59, Julien Grall <julien@xen.org> wrote:
+>=20
+> From: Julien Grall <jgrall@amazon.com>
+>=20
+> At the moment, the temporary mapping is only used when the virtual
+> runtime region of Xen is clashing with the physical region.
+>=20
+> In follow-up patches, we will rework how secondary CPU bring-up works
+> and it will be convenient to use the fixmap area for accessing
+> the root page-table (it is per-cpu).
+>=20
+> Rework the code to use temporary mapping when the Xen physical address
+> is not overlapping with the temporary mapping.
+>=20
+> This also has the advantage to simplify the logic to identity map
+> Xen.
+>=20
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> Reviewed-by: Henry Wang <Henry.Wang@arm.com>
+> Tested-by: Henry Wang <Henry.Wang@arm.com>
+> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
-index e85e4aeba5..425216230f 100644
---- a/accel/xen/xen-all.c
-+++ b/accel/xen/xen-all.c
-@@ -90,12 +90,15 @@ void xenstore_store_pv_console_info(int i, Chardev *chr)
- }
- 
- 
--static void xenstore_record_dm_state(struct xs_handle *xs, const char *state)
-+static void xenstore_record_dm_state(const char *state)
- {
-+    struct xs_handle *xs;
-     char path[50];
- 
-+    /* We now have everything we need to set the xenstore entry. */
-+    xs = xs_open(0);
-     if (xs == NULL) {
--        error_report("xenstore connection not initialized");
-+        fprintf(stderr, "Could not contact XenStore\n");
-         exit(1);
-     }
- 
-@@ -109,6 +112,8 @@ static void xenstore_record_dm_state(struct xs_handle *xs, const char *state)
-         error_report("error recording dm state");
-         exit(1);
-     }
-+
-+    xs_close(xs);
- }
- 
- 
-@@ -117,7 +122,7 @@ static void xen_change_state_handler(void *opaque, bool running,
- {
-     if (running) {
-         /* record state running */
--        xenstore_record_dm_state(xenstore, "running");
-+        xenstore_record_dm_state("running");
-     }
- }
- 
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index e9cef3e1ef..ad8638a86d 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -181,7 +181,7 @@ static int con_init(struct XenLegacyDevice *xendev)
-     const char *output;
- 
-     /* setup */
--    dom = xs_get_domain_path(xenstore, con->xendev.dom);
-+    dom = qemu_xen_xs_get_domain_path(xenstore, con->xendev.dom);
-     if (!xendev->dev) {
-         snprintf(con->console, sizeof(con->console), "%s/console", dom);
-     } else {
-diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index 5a8e38aae7..bab40d1a04 100644
---- a/hw/i386/kvm/xen_xenstore.c
-+++ b/hw/i386/kvm/xen_xenstore.c
-@@ -38,9 +38,6 @@
- #define TYPE_XEN_XENSTORE "xen-xenstore"
- OBJECT_DECLARE_SIMPLE_TYPE(XenXenstoreState, XEN_XENSTORE)
- 
--#define XEN_PAGE_SHIFT 12
--#define XEN_PAGE_SIZE (1ULL << XEN_PAGE_SHIFT)
--
- #define ENTRIES_PER_FRAME_V1 (XEN_PAGE_SIZE / sizeof(grant_entry_v1_t))
- #define ENTRIES_PER_FRAME_V2 (XEN_PAGE_SIZE / sizeof(grant_entry_v2_t))
- 
-diff --git a/hw/i386/kvm/xenstore_impl.h b/hw/i386/kvm/xenstore_impl.h
-index bbe2391e2e..0df2a91aae 100644
---- a/hw/i386/kvm/xenstore_impl.h
-+++ b/hw/i386/kvm/xenstore_impl.h
-@@ -12,13 +12,7 @@
- #ifndef QEMU_XENSTORE_IMPL_H
- #define QEMU_XENSTORE_IMPL_H
- 
--typedef uint32_t xs_transaction_t;
--
--#define XBT_NULL 0
--
--#define XS_PERM_NONE  0x00
--#define XS_PERM_READ  0x01
--#define XS_PERM_WRITE 0x02
-+#include "hw/xen/xen_backend_ops.h"
- 
- typedef struct XenstoreImplState XenstoreImplState;
- 
-diff --git a/hw/xen/xen-bus-helper.c b/hw/xen/xen-bus-helper.c
-index 5a1e12b374..b2b2cc9c5d 100644
---- a/hw/xen/xen-bus-helper.c
-+++ b/hw/xen/xen-bus-helper.c
-@@ -10,6 +10,7 @@
- #include "hw/xen/xen-bus.h"
- #include "hw/xen/xen-bus-helper.h"
- #include "qapi/error.h"
-+#include "trace.h"
- 
- #include <glib/gprintf.h>
- 
-@@ -46,34 +47,28 @@ const char *xs_strstate(enum xenbus_state state)
-     return "INVALID";
- }
- 
--void xs_node_create(struct xs_handle *xsh, xs_transaction_t tid,
--                    const char *node, struct xs_permissions perms[],
--                    unsigned int nr_perms, Error **errp)
-+void xs_node_create(struct qemu_xs_handle *h, xs_transaction_t tid,
-+                    const char *node, unsigned int owner, unsigned int domid,
-+                    unsigned int perms, Error **errp)
- {
-     trace_xs_node_create(node);
- 
--    if (!xs_write(xsh, tid, node, "", 0)) {
-+    if (!qemu_xen_xs_create(h, tid, owner, domid, perms, node)) {
-         error_setg_errno(errp, errno, "failed to create node '%s'", node);
--        return;
--    }
--
--    if (!xs_set_permissions(xsh, tid, node, perms, nr_perms)) {
--        error_setg_errno(errp, errno, "failed to set node '%s' permissions",
--                         node);
-     }
- }
- 
--void xs_node_destroy(struct xs_handle *xsh, xs_transaction_t tid,
-+void xs_node_destroy(struct qemu_xs_handle *h, xs_transaction_t tid,
-                      const char *node, Error **errp)
- {
-     trace_xs_node_destroy(node);
- 
--    if (!xs_rm(xsh, tid, node)) {
-+    if (!qemu_xen_xs_destroy(h, tid, node)) {
-         error_setg_errno(errp, errno, "failed to destroy node '%s'", node);
-     }
- }
- 
--void xs_node_vprintf(struct xs_handle *xsh, xs_transaction_t tid,
-+void xs_node_vprintf(struct qemu_xs_handle *h, xs_transaction_t tid,
-                      const char *node, const char *key, Error **errp,
-                      const char *fmt, va_list ap)
- {
-@@ -86,7 +81,7 @@ void xs_node_vprintf(struct xs_handle *xsh, xs_transaction_t tid,
- 
-     trace_xs_node_vprintf(path, value);
- 
--    if (!xs_write(xsh, tid, path, value, len)) {
-+    if (!qemu_xen_xs_write(h, tid, path, value, len)) {
-         error_setg_errno(errp, errno, "failed to write '%s' to '%s'",
-                          value, path);
-     }
-@@ -95,18 +90,18 @@ void xs_node_vprintf(struct xs_handle *xsh, xs_transaction_t tid,
-     g_free(path);
- }
- 
--void xs_node_printf(struct xs_handle *xsh,  xs_transaction_t tid,
-+void xs_node_printf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                     const char *node, const char *key, Error **errp,
-                     const char *fmt, ...)
- {
-     va_list ap;
- 
-     va_start(ap, fmt);
--    xs_node_vprintf(xsh, tid, node, key, errp, fmt, ap);
-+    xs_node_vprintf(h, tid, node, key, errp, fmt, ap);
-     va_end(ap);
- }
- 
--int xs_node_vscanf(struct xs_handle *xsh,  xs_transaction_t tid,
-+int xs_node_vscanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                    const char *node, const char *key, Error **errp,
-                    const char *fmt, va_list ap)
- {
-@@ -115,7 +110,7 @@ int xs_node_vscanf(struct xs_handle *xsh,  xs_transaction_t tid,
- 
-     path = (strlen(node) != 0) ? g_strdup_printf("%s/%s", node, key) :
-         g_strdup(key);
--    value = xs_read(xsh, tid, path, NULL);
-+    value = qemu_xen_xs_read(h, tid, path, NULL);
- 
-     trace_xs_node_vscanf(path, value);
- 
-@@ -133,7 +128,7 @@ int xs_node_vscanf(struct xs_handle *xsh,  xs_transaction_t tid,
-     return rc;
- }
- 
--int xs_node_scanf(struct xs_handle *xsh,  xs_transaction_t tid,
-+int xs_node_scanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                   const char *node, const char *key, Error **errp,
-                   const char *fmt, ...)
- {
-@@ -141,42 +136,35 @@ int xs_node_scanf(struct xs_handle *xsh,  xs_transaction_t tid,
-     int rc;
- 
-     va_start(ap, fmt);
--    rc = xs_node_vscanf(xsh, tid, node, key, errp, fmt, ap);
-+    rc = xs_node_vscanf(h, tid, node, key, errp, fmt, ap);
-     va_end(ap);
- 
-     return rc;
- }
- 
--void xs_node_watch(struct xs_handle *xsh, const char *node, const char *key,
--                   char *token, Error **errp)
-+struct qemu_xs_watch *xs_node_watch(struct qemu_xs_handle *h, const char *node,
-+                                    const char *key, xs_watch_fn fn,
-+                                    void *opaque, Error **errp)
- {
-     char *path;
-+    struct qemu_xs_watch *w;
- 
-     path = (strlen(node) != 0) ? g_strdup_printf("%s/%s", node, key) :
-         g_strdup(key);
- 
-     trace_xs_node_watch(path);
- 
--    if (!xs_watch(xsh, path, token)) {
-+    w = qemu_xen_xs_watch(h, path, fn, opaque);
-+    if (!w) {
-         error_setg_errno(errp, errno, "failed to watch node '%s'", path);
-     }
- 
-     g_free(path);
-+
-+    return w;
- }
- 
--void xs_node_unwatch(struct xs_handle *xsh, const char *node,
--                     const char *key, const char *token, Error **errp)
-+void xs_node_unwatch(struct qemu_xs_handle *h, struct qemu_xs_watch *w)
- {
--    char *path;
--
--    path = (strlen(node) != 0) ? g_strdup_printf("%s/%s", node, key) :
--        g_strdup(key);
--
--    trace_xs_node_unwatch(path);
--
--    if (!xs_unwatch(xsh, path, token)) {
--        error_setg_errno(errp, errno, "failed to unwatch node '%s'", path);
--    }
--
--    g_free(path);
-+    qemu_xen_xs_unwatch(h, w);
- }
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index aee6a8c9b0..9fe54967d4 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -62,7 +62,7 @@ static void xen_device_unplug(XenDevice *xendev, Error **errp)
- 
-     /* Mimic the way the Xen toolstack does an unplug */
- again:
--    tid = xs_transaction_start(xenbus->xsh);
-+    tid = qemu_xen_xs_transaction_start(xenbus->xsh);
-     if (tid == XBT_NULL) {
-         error_setg_errno(errp, errno, "failed xs_transaction_start");
-         return;
-@@ -80,7 +80,7 @@ again:
-         goto abort;
-     }
- 
--    if (!xs_transaction_end(xenbus->xsh, tid, false)) {
-+    if (!qemu_xen_xs_transaction_end(xenbus->xsh, tid, false)) {
-         if (errno == EAGAIN) {
-             goto again;
-         }
-@@ -95,7 +95,7 @@ abort:
-      * We only abort if there is already a failure so ignore any error
-      * from ending the transaction.
-      */
--    xs_transaction_end(xenbus->xsh, tid, true);
-+    qemu_xen_xs_transaction_end(xenbus->xsh, tid, true);
- }
- 
- static void xen_bus_print_dev(Monitor *mon, DeviceState *dev, int indent)
-@@ -111,143 +111,6 @@ static char *xen_bus_get_dev_path(DeviceState *dev)
-     return xen_device_get_backend_path(XEN_DEVICE(dev));
- }
- 
--struct XenWatch {
--    char *node, *key;
--    char *token;
--    XenWatchHandler handler;
--    void *opaque;
--    Notifier notifier;
--};
--
--static void watch_notify(Notifier *n, void *data)
--{
--    XenWatch *watch = container_of(n, XenWatch, notifier);
--    const char *token = data;
--
--    if (!strcmp(watch->token, token)) {
--        watch->handler(watch->opaque);
--    }
--}
--
--static XenWatch *new_watch(const char *node, const char *key,
--                           XenWatchHandler handler, void *opaque)
--{
--    XenWatch *watch = g_new0(XenWatch, 1);
--    QemuUUID uuid;
--
--    qemu_uuid_generate(&uuid);
--
--    watch->token = qemu_uuid_unparse_strdup(&uuid);
--    watch->node = g_strdup(node);
--    watch->key = g_strdup(key);
--    watch->handler = handler;
--    watch->opaque = opaque;
--    watch->notifier.notify = watch_notify;
--
--    return watch;
--}
--
--static void free_watch(XenWatch *watch)
--{
--    g_free(watch->token);
--    g_free(watch->key);
--    g_free(watch->node);
--
--    g_free(watch);
--}
--
--struct XenWatchList {
--    struct xs_handle *xsh;
--    NotifierList notifiers;
--};
--
--static void watch_list_event(void *opaque)
--{
--    XenWatchList *watch_list = opaque;
--    char **v;
--    const char *token;
--
--    v = xs_check_watch(watch_list->xsh);
--    if (!v) {
--        return;
--    }
--
--    token = v[XS_WATCH_TOKEN];
--
--    notifier_list_notify(&watch_list->notifiers, (void *)token);
--
--    free(v);
--}
--
--static XenWatchList *watch_list_create(struct xs_handle *xsh)
--{
--    XenWatchList *watch_list = g_new0(XenWatchList, 1);
--
--    g_assert(xsh);
--
--    watch_list->xsh = xsh;
--    notifier_list_init(&watch_list->notifiers);
--    qemu_set_fd_handler(xs_fileno(watch_list->xsh), watch_list_event, NULL,
--                        watch_list);
--
--    return watch_list;
--}
--
--static void watch_list_destroy(XenWatchList *watch_list)
--{
--    g_assert(notifier_list_empty(&watch_list->notifiers));
--    qemu_set_fd_handler(xs_fileno(watch_list->xsh), NULL, NULL, NULL);
--    g_free(watch_list);
--}
--
--static XenWatch *watch_list_add(XenWatchList *watch_list, const char *node,
--                                const char *key, XenWatchHandler handler,
--                                void *opaque, Error **errp)
--{
--    ERRP_GUARD();
--    XenWatch *watch = new_watch(node, key, handler, opaque);
--
--    notifier_list_add(&watch_list->notifiers, &watch->notifier);
--
--    xs_node_watch(watch_list->xsh, node, key, watch->token, errp);
--    if (*errp) {
--        notifier_remove(&watch->notifier);
--        free_watch(watch);
--
--        return NULL;
--    }
--
--    return watch;
--}
--
--static void watch_list_remove(XenWatchList *watch_list, XenWatch *watch,
--                              Error **errp)
--{
--    xs_node_unwatch(watch_list->xsh, watch->node, watch->key, watch->token,
--                    errp);
--
--    notifier_remove(&watch->notifier);
--    free_watch(watch);
--}
--
--static XenWatch *xen_bus_add_watch(XenBus *xenbus, const char *node,
--                                   const char *key, XenWatchHandler handler,
--                                   Error **errp)
--{
--    trace_xen_bus_add_watch(node, key);
--
--    return watch_list_add(xenbus->watch_list, node, key, handler, xenbus,
--                          errp);
--}
--
--static void xen_bus_remove_watch(XenBus *xenbus, XenWatch *watch,
--                                 Error **errp)
--{
--    trace_xen_bus_remove_watch(watch->node, watch->key);
--
--    watch_list_remove(xenbus->watch_list, watch, errp);
--}
--
- static void xen_bus_backend_create(XenBus *xenbus, const char *type,
-                                    const char *name, char *path,
-                                    Error **errp)
-@@ -261,15 +124,15 @@ static void xen_bus_backend_create(XenBus *xenbus, const char *type,
-     trace_xen_bus_backend_create(type, path);
- 
- again:
--    tid = xs_transaction_start(xenbus->xsh);
-+    tid = qemu_xen_xs_transaction_start(xenbus->xsh);
-     if (tid == XBT_NULL) {
-         error_setg(errp, "failed xs_transaction_start");
-         return;
-     }
- 
--    key = xs_directory(xenbus->xsh, tid, path, &n);
-+    key = qemu_xen_xs_directory(xenbus->xsh, tid, path, &n);
-     if (!key) {
--        if (!xs_transaction_end(xenbus->xsh, tid, true)) {
-+        if (!qemu_xen_xs_transaction_end(xenbus->xsh, tid, true)) {
-             error_setg_errno(errp, errno, "failed xs_transaction_end");
-         }
-         return;
-@@ -300,7 +163,7 @@ again:
- 
-     free(key);
- 
--    if (!xs_transaction_end(xenbus->xsh, tid, false)) {
-+    if (!qemu_xen_xs_transaction_end(xenbus->xsh, tid, false)) {
-         qobject_unref(opts);
- 
-         if (errno == EAGAIN) {
-@@ -327,7 +190,7 @@ static void xen_bus_type_enumerate(XenBus *xenbus, const char *type)
- 
-     trace_xen_bus_type_enumerate(type);
- 
--    backend = xs_directory(xenbus->xsh, XBT_NULL, domain_path, &n);
-+    backend = qemu_xen_xs_directory(xenbus->xsh, XBT_NULL, domain_path, &n);
-     if (!backend) {
-         goto out;
-     }
-@@ -372,7 +235,7 @@ static void xen_bus_enumerate(XenBus *xenbus)
- 
-     trace_xen_bus_enumerate();
- 
--    type = xs_directory(xenbus->xsh, XBT_NULL, "backend", &n);
-+    type = qemu_xen_xs_directory(xenbus->xsh, XBT_NULL, "backend", &n);
-     if (!type) {
-         return;
-     }
-@@ -415,7 +278,7 @@ static void xen_bus_cleanup(XenBus *xenbus)
-     }
- }
- 
--static void xen_bus_backend_changed(void *opaque)
-+static void xen_bus_backend_changed(void *opaque, const char *path)
- {
-     XenBus *xenbus = opaque;
- 
-@@ -434,7 +297,7 @@ static void xen_bus_unrealize(BusState *bus)
- 
-         for (i = 0; i < xenbus->backend_types; i++) {
-             if (xenbus->backend_watch[i]) {
--                xen_bus_remove_watch(xenbus, xenbus->backend_watch[i], NULL);
-+                xs_node_unwatch(xenbus->xsh, xenbus->backend_watch[i]);
-             }
-         }
- 
-@@ -442,13 +305,8 @@ static void xen_bus_unrealize(BusState *bus)
-         xenbus->backend_watch = NULL;
-     }
- 
--    if (xenbus->watch_list) {
--        watch_list_destroy(xenbus->watch_list);
--        xenbus->watch_list = NULL;
--    }
--
-     if (xenbus->xsh) {
--        xs_close(xenbus->xsh);
-+        qemu_xen_xs_close(xenbus->xsh);
-     }
- }
- 
-@@ -463,7 +321,7 @@ static void xen_bus_realize(BusState *bus, Error **errp)
- 
-     trace_xen_bus_realize();
- 
--    xenbus->xsh = xs_open(0);
-+    xenbus->xsh = qemu_xen_xs_open();
-     if (!xenbus->xsh) {
-         error_setg_errno(errp, errno, "failed xs_open");
-         goto fail;
-@@ -476,19 +334,18 @@ static void xen_bus_realize(BusState *bus, Error **errp)
-         xenbus->backend_id = 0; /* Assume lack of node means dom0 */
-     }
- 
--    xenbus->watch_list = watch_list_create(xenbus->xsh);
--
-     module_call_init(MODULE_INIT_XEN_BACKEND);
- 
-     type = xen_backend_get_types(&xenbus->backend_types);
--    xenbus->backend_watch = g_new(XenWatch *, xenbus->backend_types);
-+    xenbus->backend_watch = g_new(struct qemu_xs_watch *,
-+                                  xenbus->backend_types);
- 
-     for (i = 0; i < xenbus->backend_types; i++) {
-         char *node = g_strdup_printf("backend/%s", type[i]);
- 
-         xenbus->backend_watch[i] =
--            xen_bus_add_watch(xenbus, node, key, xen_bus_backend_changed,
--                              &local_err);
-+            xs_node_watch(xenbus->xsh, node, key, xen_bus_backend_changed,
-+                          xenbus, &local_err);
-         if (local_err) {
-             /* This need not be treated as a hard error so don't propagate */
-             error_reportf_err(local_err,
-@@ -631,7 +488,7 @@ static bool xen_device_frontend_is_active(XenDevice *xendev)
-     }
- }
- 
--static void xen_device_backend_changed(void *opaque)
-+static void xen_device_backend_changed(void *opaque, const char *path)
- {
-     XenDevice *xendev = opaque;
-     const char *type = object_get_typename(OBJECT(xendev));
-@@ -685,66 +542,35 @@ static void xen_device_backend_changed(void *opaque)
-     }
- }
- 
--static XenWatch *xen_device_add_watch(XenDevice *xendev, const char *node,
--                                      const char *key,
--                                      XenWatchHandler handler,
--                                      Error **errp)
--{
--    const char *type = object_get_typename(OBJECT(xendev));
--
--    trace_xen_device_add_watch(type, xendev->name, node, key);
--
--    return watch_list_add(xendev->watch_list, node, key, handler, xendev,
--                          errp);
--}
--
--static void xen_device_remove_watch(XenDevice *xendev, XenWatch *watch,
--                                    Error **errp)
--{
--    const char *type = object_get_typename(OBJECT(xendev));
--
--    trace_xen_device_remove_watch(type, xendev->name, watch->node,
--                                  watch->key);
--
--    watch_list_remove(xendev->watch_list, watch, errp);
--}
--
--
- static void xen_device_backend_create(XenDevice *xendev, Error **errp)
- {
-     ERRP_GUARD();
-     XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
--    struct xs_permissions perms[2];
- 
-     xendev->backend_path = xen_device_get_backend_path(xendev);
- 
--    perms[0].id = xenbus->backend_id;
--    perms[0].perms = XS_PERM_NONE;
--    perms[1].id = xendev->frontend_id;
--    perms[1].perms = XS_PERM_READ;
--
-     g_assert(xenbus->xsh);
- 
--    xs_node_create(xenbus->xsh, XBT_NULL, xendev->backend_path, perms,
--                   ARRAY_SIZE(perms), errp);
-+    xs_node_create(xenbus->xsh, XBT_NULL, xendev->backend_path,
-+                   xenbus->backend_id, xendev->frontend_id, XS_PERM_READ, errp);
-     if (*errp) {
-         error_prepend(errp, "failed to create backend: ");
-         return;
-     }
- 
-     xendev->backend_state_watch =
--        xen_device_add_watch(xendev, xendev->backend_path,
--                             "state", xen_device_backend_changed,
--                             errp);
-+        xs_node_watch(xendev->xsh, xendev->backend_path,
-+                      "state", xen_device_backend_changed, xendev,
-+                      errp);
-     if (*errp) {
-         error_prepend(errp, "failed to watch backend state: ");
-         return;
-     }
- 
-     xendev->backend_online_watch =
--        xen_device_add_watch(xendev, xendev->backend_path,
--                             "online", xen_device_backend_changed,
--                             errp);
-+        xs_node_watch(xendev->xsh, xendev->backend_path,
-+                      "online", xen_device_backend_changed, xendev,
-+                      errp);
-     if (*errp) {
-         error_prepend(errp, "failed to watch backend online: ");
-         return;
-@@ -757,12 +583,12 @@ static void xen_device_backend_destroy(XenDevice *xendev)
-     Error *local_err = NULL;
- 
-     if (xendev->backend_online_watch) {
--        xen_device_remove_watch(xendev, xendev->backend_online_watch, NULL);
-+        xs_node_unwatch(xendev->xsh, xendev->backend_online_watch);
-         xendev->backend_online_watch = NULL;
-     }
- 
-     if (xendev->backend_state_watch) {
--        xen_device_remove_watch(xendev, xendev->backend_state_watch, NULL);
-+        xs_node_unwatch(xendev->xsh, xendev->backend_state_watch);
-         xendev->backend_state_watch = NULL;
-     }
- 
-@@ -837,7 +663,7 @@ static void xen_device_frontend_set_state(XenDevice *xendev,
-     }
- }
- 
--static void xen_device_frontend_changed(void *opaque)
-+static void xen_device_frontend_changed(void *opaque, const char *path)
- {
-     XenDevice *xendev = opaque;
-     XenDeviceClass *xendev_class = XEN_DEVICE_GET_CLASS(xendev);
-@@ -885,7 +711,6 @@ static void xen_device_frontend_create(XenDevice *xendev, Error **errp)
- {
-     ERRP_GUARD();
-     XenBus *xenbus = XEN_BUS(qdev_get_parent_bus(DEVICE(xendev)));
--    struct xs_permissions perms[2];
- 
-     xendev->frontend_path = xen_device_get_frontend_path(xendev);
- 
-@@ -894,15 +719,11 @@ static void xen_device_frontend_create(XenDevice *xendev, Error **errp)
-      * toolstack.
-      */
-     if (!xen_device_frontend_exists(xendev)) {
--        perms[0].id = xendev->frontend_id;
--        perms[0].perms = XS_PERM_NONE;
--        perms[1].id = xenbus->backend_id;
--        perms[1].perms = XS_PERM_READ | XS_PERM_WRITE;
--
-         g_assert(xenbus->xsh);
- 
--        xs_node_create(xenbus->xsh, XBT_NULL, xendev->frontend_path, perms,
--                       ARRAY_SIZE(perms), errp);
-+        xs_node_create(xenbus->xsh, XBT_NULL, xendev->frontend_path,
-+                       xendev->frontend_id, xenbus->backend_id,
-+                       XS_PERM_READ | XS_PERM_WRITE, errp);
-         if (*errp) {
-             error_prepend(errp, "failed to create frontend: ");
-             return;
-@@ -910,8 +731,8 @@ static void xen_device_frontend_create(XenDevice *xendev, Error **errp)
-     }
- 
-     xendev->frontend_state_watch =
--        xen_device_add_watch(xendev, xendev->frontend_path, "state",
--                             xen_device_frontend_changed, errp);
-+        xs_node_watch(xendev->xsh, xendev->frontend_path, "state",
-+                      xen_device_frontend_changed, xendev, errp);
-     if (*errp) {
-         error_prepend(errp, "failed to watch frontend state: ");
-     }
-@@ -923,8 +744,7 @@ static void xen_device_frontend_destroy(XenDevice *xendev)
-     Error *local_err = NULL;
- 
-     if (xendev->frontend_state_watch) {
--        xen_device_remove_watch(xendev, xendev->frontend_state_watch,
--                                NULL);
-+        xs_node_unwatch(xendev->xsh, xendev->frontend_state_watch);
-         xendev->frontend_state_watch = NULL;
-     }
- 
-@@ -1146,13 +966,8 @@ static void xen_device_unrealize(DeviceState *dev)
-         xendev->xgth = NULL;
-     }
- 
--    if (xendev->watch_list) {
--        watch_list_destroy(xendev->watch_list);
--        xendev->watch_list = NULL;
--    }
--
-     if (xendev->xsh) {
--        xs_close(xendev->xsh);
-+        qemu_xen_xs_close(xendev->xsh);
-         xendev->xsh = NULL;
-     }
- 
-@@ -1197,14 +1012,12 @@ static void xen_device_realize(DeviceState *dev, Error **errp)
- 
-     trace_xen_device_realize(type, xendev->name);
- 
--    xendev->xsh = xs_open(0);
-+    xendev->xsh = qemu_xen_xs_open();
-     if (!xendev->xsh) {
-         error_setg_errno(errp, errno, "failed xs_open");
-         goto unrealize;
-     }
- 
--    xendev->watch_list = watch_list_create(xendev->xsh);
--
-     xendev->xgth = qemu_xen_gnttab_open();
-     if (!xendev->xgth) {
-         error_setg_errno(errp, errno, "failed xengnttab_open");
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index a48a25aeb5..4ded3cec23 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -39,7 +39,7 @@ BusState *xen_sysbus;
- /* ------------------------------------------------------------- */
- 
- /* public */
--struct xs_handle *xenstore;
-+struct qemu_xs_handle *xenstore;
- const char *xen_protocol;
- 
- /* private */
-@@ -274,6 +274,25 @@ static void xen_be_frontend_changed(struct XenLegacyDevice *xendev,
-     }
- }
- 
-+static void xenstore_update_fe(void *opaque, const char *watch)
-+{
-+    struct XenLegacyDevice *xendev = opaque;
-+    const char *node;
-+    unsigned int len;
-+
-+    len = strlen(xendev->fe);
-+    if (strncmp(xendev->fe, watch, len) != 0) {
-+        return;
-+    }
-+    if (watch[len] != '/') {
-+        return;
-+    }
-+    node = watch + len + 1;
-+
-+    xen_be_frontend_changed(xendev, node);
-+    xen_be_check_state(xendev);
-+}
-+
- /* ------------------------------------------------------------- */
- /* Check for possible state transitions and perform them.        */
- 
-@@ -287,7 +306,6 @@ static void xen_be_frontend_changed(struct XenLegacyDevice *xendev,
-  */
- static int xen_be_try_setup(struct XenLegacyDevice *xendev)
- {
--    char token[XEN_BUFSIZE];
-     int be_state;
- 
-     if (xenstore_read_be_int(xendev, "state", &be_state) == -1) {
-@@ -308,8 +326,9 @@ static int xen_be_try_setup(struct XenLegacyDevice *xendev)
-     }
- 
-     /* setup frontend watch */
--    snprintf(token, sizeof(token), "fe:%p", xendev);
--    if (!xs_watch(xenstore, xendev->fe, token)) {
-+    xendev->watch = qemu_xen_xs_watch(xenstore, xendev->fe, xenstore_update_fe,
-+                                      xendev);
-+    if (!xendev->watch) {
-         xen_pv_printf(xendev, 0, "watching frontend path (%s) failed\n",
-                       xendev->fe);
-         return -1;
-@@ -498,46 +517,20 @@ void xen_be_check_state(struct XenLegacyDevice *xendev)
- 
- /* ------------------------------------------------------------- */
- 
--static int xenstore_scan(const char *type, int dom, struct XenDevOps *ops)
--{
--    struct XenLegacyDevice *xendev;
--    char path[XEN_BUFSIZE], token[XEN_BUFSIZE];
--    char **dev = NULL;
--    unsigned int cdev, j;
--
--    /* setup watch */
--    snprintf(token, sizeof(token), "be:%p:%d:%p", type, dom, ops);
--    snprintf(path, sizeof(path), "backend/%s/%d", type, dom);
--    if (!xs_watch(xenstore, path, token)) {
--        xen_pv_printf(NULL, 0, "xen be: watching backend path (%s) failed\n",
--                      path);
--        return -1;
--    }
--
--    /* look for backends */
--    dev = xs_directory(xenstore, 0, path, &cdev);
--    if (!dev) {
--        return 0;
--    }
--    for (j = 0; j < cdev; j++) {
--        xendev = xen_be_get_xendev(type, dom, atoi(dev[j]), ops);
--        if (xendev == NULL) {
--            continue;
--        }
--        xen_be_check_state(xendev);
--    }
--    free(dev);
--    return 0;
--}
-+struct xenstore_be {
-+    const char *type;
-+    int dom;
-+    struct XenDevOps *ops;
-+};
- 
--void xenstore_update_be(char *watch, char *type, int dom,
--                        struct XenDevOps *ops)
-+static void xenstore_update_be(void *opaque, const char *watch)
- {
-+    struct xenstore_be *be = opaque;
-     struct XenLegacyDevice *xendev;
-     char path[XEN_BUFSIZE], *bepath;
-     unsigned int len, dev;
- 
--    len = snprintf(path, sizeof(path), "backend/%s/%d", type, dom);
-+    len = snprintf(path, sizeof(path), "backend/%s/%d", be->type, be->dom);
-     if (strncmp(path, watch, len) != 0) {
-         return;
-     }
-@@ -551,9 +544,9 @@ void xenstore_update_be(char *watch, char *type, int dom,
-         return;
-     }
- 
--    xendev = xen_be_get_xendev(type, dom, dev, ops);
-+    xendev = xen_be_get_xendev(be->type, be->dom, dev, be->ops);
-     if (xendev != NULL) {
--        bepath = xs_read(xenstore, 0, xendev->be, &len);
-+        bepath = qemu_xen_xs_read(xenstore, 0, xendev->be, &len);
-         if (bepath == NULL) {
-             xen_pv_del_xendev(xendev);
-         } else {
-@@ -564,23 +557,41 @@ void xenstore_update_be(char *watch, char *type, int dom,
-     }
- }
- 
--void xenstore_update_fe(char *watch, struct XenLegacyDevice *xendev)
-+static int xenstore_scan(const char *type, int dom, struct XenDevOps *ops)
- {
--    char *node;
--    unsigned int len;
-+    struct XenLegacyDevice *xendev;
-+    char path[XEN_BUFSIZE];
-+    struct xenstore_be *be = g_new0(struct xenstore_be, 1);
-+    char **dev = NULL;
-+    unsigned int cdev, j;
- 
--    len = strlen(xendev->fe);
--    if (strncmp(xendev->fe, watch, len) != 0) {
--        return;
--    }
--    if (watch[len] != '/') {
--        return;
-+    /* setup watch */
-+    be->type = type;
-+    be->dom = dom;
-+    be->ops = ops;
-+    snprintf(path, sizeof(path), "backend/%s/%d", type, dom);
-+    if (!qemu_xen_xs_watch(xenstore, path, xenstore_update_be, be)) {
-+        xen_pv_printf(NULL, 0, "xen be: watching backend path (%s) failed\n",
-+                      path);
-+        return -1;
-     }
--    node = watch + len + 1;
- 
--    xen_be_frontend_changed(xendev, node);
--    xen_be_check_state(xendev);
-+    /* look for backends */
-+    dev = qemu_xen_xs_directory(xenstore, 0, path, &cdev);
-+    if (!dev) {
-+        return 0;
-+    }
-+    for (j = 0; j < cdev; j++) {
-+        xendev = xen_be_get_xendev(type, dom, atoi(dev[j]), ops);
-+        if (xendev == NULL) {
-+            continue;
-+        }
-+        xen_be_check_state(xendev);
-+    }
-+    free(dev);
-+    return 0;
- }
-+
- /* -------------------------------------------------------------------- */
- 
- static void xen_set_dynamic_sysbus(void)
-@@ -594,14 +605,12 @@ static void xen_set_dynamic_sysbus(void)
- 
- void xen_be_init(void)
- {
--    xenstore = xs_daemon_open();
-+    xenstore = qemu_xen_xs_open();
-     if (!xenstore) {
-         xen_pv_printf(NULL, 0, "can't connect to xenstored\n");
-         exit(1);
-     }
- 
--    qemu_set_fd_handler(xs_fileno(xenstore), xenstore_update, NULL, NULL);
--
-     if (xen_evtchn_ops == NULL || xen_gnttab_ops == NULL) {
-         xen_pv_printf(NULL, 0, "Xen operations not set up\n");
-         exit(1);
-diff --git a/hw/xen/xen-operations.c b/hw/xen/xen-operations.c
-index 61e56a7abe..80c8fbede6 100644
---- a/hw/xen/xen-operations.c
-+++ b/hw/xen/xen-operations.c
-@@ -10,6 +10,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/uuid.h"
- #include "qapi/error.h"
- 
- #include "hw/xen/xen_backend_ops.h"
-@@ -262,6 +263,202 @@ struct foreignmem_backend_ops libxenforeignmem_backend_ops = {
-     .unmap = libxenforeignmem_backend_unmap,
- };
- 
-+struct qemu_xs_handle {
-+    struct xs_handle *xsh;
-+    NotifierList notifiers;
-+};
-+
-+static void watch_event(void *opaque)
-+{
-+    struct qemu_xs_handle *h = opaque;
-+
-+    for (;;) {
-+        char **v = xs_check_watch(h->xsh);
-+
-+        if (!v) {
-+            break;
-+        }
-+
-+        notifier_list_notify(&h->notifiers, v);
-+        free(v);
-+    }
-+}
-+
-+static struct qemu_xs_handle *libxenstore_open(void)
-+{
-+    struct xs_handle *xsh = xs_open(0);
-+    struct qemu_xs_handle *h = g_new0(struct qemu_xs_handle, 1);
-+
-+    if (!xsh) {
-+        return NULL;
-+    }
-+
-+    h = g_new0(struct qemu_xs_handle, 1);
-+    h->xsh = xsh;
-+
-+    notifier_list_init(&h->notifiers);
-+    qemu_set_fd_handler(xs_fileno(h->xsh), watch_event, NULL, h);
-+
-+    return h;
-+}
-+
-+static void libxenstore_close(struct qemu_xs_handle *h)
-+{
-+    g_assert(notifier_list_empty(&h->notifiers));
-+    qemu_set_fd_handler(xs_fileno(h->xsh), NULL, NULL, NULL);
-+    xs_close(h->xsh);
-+    g_free(h);
-+}
-+
-+static char *libxenstore_get_domain_path(struct qemu_xs_handle *h,
-+                                         unsigned int domid)
-+{
-+    return xs_get_domain_path(h->xsh, domid);
-+}
-+
-+static char **libxenstore_directory(struct qemu_xs_handle *h,
-+                                    xs_transaction_t t, const char *path,
-+                                    unsigned int *num)
-+{
-+    return xs_directory(h->xsh, t, path, num);
-+}
-+
-+static void *libxenstore_read(struct qemu_xs_handle *h, xs_transaction_t t,
-+                              const char *path, unsigned int *len)
-+{
-+    return xs_read(h->xsh, t, path, len);
-+}
-+
-+static bool libxenstore_write(struct qemu_xs_handle *h, xs_transaction_t t,
-+                              const char *path, const void *data,
-+                              unsigned int len)
-+{
-+    return xs_write(h->xsh, t, path, data, len);
-+}
-+
-+static bool libxenstore_create(struct qemu_xs_handle *h, xs_transaction_t t,
-+                               unsigned int owner, unsigned int domid,
-+                               unsigned int perms, const char *path)
-+{
-+    struct xs_permissions perms_list[] = {
-+        {
-+            .id    = owner,
-+            .perms = XS_PERM_NONE,
-+        },
-+        {
-+            .id    = domid,
-+            .perms = perms,
-+        },
-+    };
-+
-+    if (!xs_mkdir(h->xsh, t, path)) {
-+        return false;
-+    }
-+
-+    return xs_set_permissions(h->xsh, t, path, perms_list,
-+                              ARRAY_SIZE(perms_list));
-+}
-+
-+static bool libxenstore_destroy(struct qemu_xs_handle *h, xs_transaction_t t,
-+                                const char *path)
-+{
-+    return xs_rm(h->xsh, t, path);
-+}
-+
-+struct qemu_xs_watch {
-+    char *path;
-+    char *token;
-+    xs_watch_fn fn;
-+    void *opaque;
-+    Notifier notifier;
-+};
-+
-+static void watch_notify(Notifier *n, void *data)
-+{
-+    struct qemu_xs_watch *w = container_of(n, struct qemu_xs_watch, notifier);
-+    const char **v = data;
-+
-+    if (!strcmp(w->token, v[XS_WATCH_TOKEN])) {
-+        w->fn(w->opaque, v[XS_WATCH_PATH]);
-+    }
-+}
-+
-+static struct qemu_xs_watch *new_watch(const char *path, xs_watch_fn fn,
-+                                       void *opaque)
-+{
-+    struct qemu_xs_watch *w = g_new0(struct qemu_xs_watch, 1);
-+    QemuUUID uuid;
-+
-+    qemu_uuid_generate(&uuid);
-+
-+    w->token = qemu_uuid_unparse_strdup(&uuid);
-+    w->path = g_strdup(path);
-+    w->fn = fn;
-+    w->opaque = opaque;
-+    w->notifier.notify = watch_notify;
-+
-+    return w;
-+}
-+
-+static void free_watch(struct qemu_xs_watch *w)
-+{
-+    g_free(w->token);
-+    g_free(w->path);
-+
-+    g_free(w);
-+}
-+
-+static struct qemu_xs_watch *libxenstore_watch(struct qemu_xs_handle *h,
-+                                               const char *path, xs_watch_fn fn,
-+                                               void *opaque)
-+{
-+    struct qemu_xs_watch *w = new_watch(path, fn, opaque);
-+
-+    notifier_list_add(&h->notifiers, &w->notifier);
-+
-+    if (!xs_watch(h->xsh, path, w->token)) {
-+        notifier_remove(&w->notifier);
-+        free_watch(w);
-+        return NULL;
-+    }
-+
-+    return w;
-+}
-+
-+static void libxenstore_unwatch(struct qemu_xs_handle *h,
-+                                struct qemu_xs_watch *w)
-+{
-+    xs_unwatch(h->xsh, w->path, w->token);
-+    notifier_remove(&w->notifier);
-+    free_watch(w);
-+}
-+
-+static xs_transaction_t libxenstore_transaction_start(struct qemu_xs_handle *h)
-+{
-+    return xs_transaction_start(h->xsh);
-+}
-+
-+static bool libxenstore_transaction_end(struct qemu_xs_handle *h,
-+                                        xs_transaction_t t, bool abort)
-+{
-+    return xs_transaction_end(h->xsh, t, abort);
-+}
-+
-+struct xenstore_backend_ops libxenstore_backend_ops = {
-+    .open = libxenstore_open,
-+    .close = libxenstore_close,
-+    .get_domain_path = libxenstore_get_domain_path,
-+    .directory = libxenstore_directory,
-+    .read = libxenstore_read,
-+    .write = libxenstore_write,
-+    .create = libxenstore_create,
-+    .destroy = libxenstore_destroy,
-+    .watch = libxenstore_watch,
-+    .unwatch = libxenstore_unwatch,
-+    .transaction_start = libxenstore_transaction_start,
-+    .transaction_end = libxenstore_transaction_end,
-+};
-+
- void setup_xen_backend_ops(void)
- {
- #if CONFIG_XEN_CTRL_INTERFACE_VERSION >= 40800
-@@ -277,4 +474,5 @@ void setup_xen_backend_ops(void)
-     xen_evtchn_ops = &libxenevtchn_backend_ops;
-     xen_gnttab_ops = &libxengnttab_backend_ops;
-     xen_foreignmem_ops = &libxenforeignmem_backend_ops;
-+    xen_xenstore_ops = &libxenstore_backend_ops;
- }
-diff --git a/hw/xen/xen_devconfig.c b/hw/xen/xen_devconfig.c
-index 46ee4a7f02..9b7304e544 100644
---- a/hw/xen/xen_devconfig.c
-+++ b/hw/xen/xen_devconfig.c
-@@ -11,11 +11,11 @@ static int xen_config_dev_dirs(const char *ftype, const char *btype, int vdev,
- {
-     char *dom;
- 
--    dom = xs_get_domain_path(xenstore, xen_domid);
-+    dom = qemu_xen_xs_get_domain_path(xenstore, xen_domid);
-     snprintf(fe, len, "%s/device/%s/%d", dom, ftype, vdev);
-     free(dom);
- 
--    dom = xs_get_domain_path(xenstore, 0);
-+    dom = qemu_xen_xs_get_domain_path(xenstore, 0);
-     snprintf(be, len, "%s/backend/%s/%d/%d", dom, btype, xen_domid, vdev);
-     free(dom);
- 
-diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
-index f303f67c9c..0aed3bb6fd 100644
---- a/hw/xen/xen_pt_graphics.c
-+++ b/hw/xen/xen_pt_graphics.c
-@@ -5,7 +5,6 @@
- #include "qapi/error.h"
- #include "xen_pt.h"
- #include "xen-host-pci-device.h"
--#include "hw/xen/xen-legacy-backend.h"
- 
- static unsigned long igd_guest_opregion;
- static unsigned long igd_host_opregion;
-diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
-index d8582cc74c..be1504b82c 100644
---- a/hw/xen/xen_pvdev.c
-+++ b/hw/xen/xen_pvdev.c
-@@ -54,31 +54,17 @@ void xen_config_cleanup(void)
-     struct xs_dirs *d;
- 
-     QTAILQ_FOREACH(d, &xs_cleanup, list) {
--        xs_rm(xenstore, 0, d->xs_dir);
-+        qemu_xen_xs_destroy(xenstore, 0, d->xs_dir);
-     }
- }
- 
- int xenstore_mkdir(char *path, int p)
- {
--    struct xs_permissions perms[2] = {
--        {
--            .id    = 0, /* set owner: dom0 */
--        }, {
--            .id    = xen_domid,
--            .perms = p,
--        }
--    };
--
--    if (!xs_mkdir(xenstore, 0, path)) {
-+    if (!qemu_xen_xs_create(xenstore, 0, 0, xen_domid, p, path)) {
-         xen_pv_printf(NULL, 0, "xs_mkdir %s: failed\n", path);
-         return -1;
-     }
-     xenstore_cleanup_dir(g_strdup(path));
--
--    if (!xs_set_permissions(xenstore, 0, path, perms, 2)) {
--        xen_pv_printf(NULL, 0, "xs_set_permissions %s: failed\n", path);
--        return -1;
--    }
-     return 0;
- }
- 
-@@ -87,7 +73,7 @@ int xenstore_write_str(const char *base, const char *node, const char *val)
-     char abspath[XEN_BUFSIZE];
- 
-     snprintf(abspath, sizeof(abspath), "%s/%s", base, node);
--    if (!xs_write(xenstore, 0, abspath, val, strlen(val))) {
-+    if (!qemu_xen_xs_write(xenstore, 0, abspath, val, strlen(val))) {
-         return -1;
-     }
-     return 0;
-@@ -100,7 +86,7 @@ char *xenstore_read_str(const char *base, const char *node)
-     char *str, *ret = NULL;
- 
-     snprintf(abspath, sizeof(abspath), "%s/%s", base, node);
--    str = xs_read(xenstore, 0, abspath, &len);
-+    str = qemu_xen_xs_read(xenstore, 0, abspath, &len);
-     if (str != NULL) {
-         /* move to qemu-allocated memory to make sure
-          * callers can savely g_free() stuff. */
-@@ -152,29 +138,6 @@ int xenstore_read_uint64(const char *base, const char *node, uint64_t *uval)
-     return rc;
- }
- 
--void xenstore_update(void *unused)
--{
--    char **vec = NULL;
--    intptr_t type, ops, ptr;
--    unsigned int dom, count;
--
--    vec = xs_read_watch(xenstore, &count);
--    if (vec == NULL) {
--        goto cleanup;
--    }
--
--    if (sscanf(vec[XS_WATCH_TOKEN], "be:%" PRIxPTR ":%d:%" PRIxPTR,
--               &type, &dom, &ops) == 3) {
--        xenstore_update_be(vec[XS_WATCH_PATH], (void *)type, dom, (void*)ops);
--    }
--    if (sscanf(vec[XS_WATCH_TOKEN], "fe:%" PRIxPTR, &ptr) == 1) {
--        xenstore_update_fe(vec[XS_WATCH_PATH], (void *)ptr);
--    }
--
--cleanup:
--    free(vec);
--}
--
- const char *xenbus_strstate(enum xenbus_state state)
- {
-     static const char *const name[] = {
-@@ -299,9 +262,7 @@ void xen_pv_del_xendev(struct XenLegacyDevice *xendev)
-     }
- 
-     if (xendev->fe) {
--        char token[XEN_BUFSIZE];
--        snprintf(token, sizeof(token), "fe:%p", xendev);
--        xs_unwatch(xenstore, xendev->fe, token);
-+        qemu_xen_xs_unwatch(xenstore, xendev->watch);
-         g_free(xendev->fe);
-     }
- 
-diff --git a/include/hw/xen/xen-bus-helper.h b/include/hw/xen/xen-bus-helper.h
-index 8782f30550..d8dcc2f010 100644
---- a/include/hw/xen/xen-bus-helper.h
-+++ b/include/hw/xen/xen-bus-helper.h
-@@ -8,40 +8,40 @@
- #ifndef HW_XEN_BUS_HELPER_H
- #define HW_XEN_BUS_HELPER_H
- 
--#include "hw/xen/xen_common.h"
-+#include "hw/xen/xen_backend_ops.h"
- 
- const char *xs_strstate(enum xenbus_state state);
- 
--void xs_node_create(struct xs_handle *xsh,  xs_transaction_t tid,
--                    const char *node, struct xs_permissions perms[],
--                    unsigned int nr_perms, Error **errp);
--void xs_node_destroy(struct xs_handle *xsh,  xs_transaction_t tid,
-+void xs_node_create(struct qemu_xs_handle *h,  xs_transaction_t tid,
-+                    const char *node, unsigned int owner, unsigned int domid,
-+                    unsigned int perms, Error **errp);
-+void xs_node_destroy(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                      const char *node, Error **errp);
- 
- /* Write to node/key unless node is empty, in which case write to key */
--void xs_node_vprintf(struct xs_handle *xsh,  xs_transaction_t tid,
-+void xs_node_vprintf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                      const char *node, const char *key, Error **errp,
-                      const char *fmt, va_list ap)
-     G_GNUC_PRINTF(6, 0);
--void xs_node_printf(struct xs_handle *xsh,  xs_transaction_t tid,
-+void xs_node_printf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                     const char *node, const char *key, Error **errp,
-                     const char *fmt, ...)
-     G_GNUC_PRINTF(6, 7);
- 
- /* Read from node/key unless node is empty, in which case read from key */
--int xs_node_vscanf(struct xs_handle *xsh,  xs_transaction_t tid,
-+int xs_node_vscanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                    const char *node, const char *key, Error **errp,
-                    const char *fmt, va_list ap)
-     G_GNUC_SCANF(6, 0);
--int xs_node_scanf(struct xs_handle *xsh,  xs_transaction_t tid,
-+int xs_node_scanf(struct qemu_xs_handle *h,  xs_transaction_t tid,
-                   const char *node, const char *key, Error **errp,
-                   const char *fmt, ...)
-     G_GNUC_SCANF(6, 7);
- 
- /* Watch node/key unless node is empty, in which case watch key */
--void xs_node_watch(struct xs_handle *xsh, const char *node, const char *key,
--                   char *token, Error **errp);
--void xs_node_unwatch(struct xs_handle *xsh, const char *node, const char *key,
--                     const char *token, Error **errp);
-+struct qemu_xs_watch *xs_node_watch(struct qemu_xs_handle *h, const char *node,
-+                                    const char *key, xs_watch_fn fn,
-+                                    void *opaque, Error **errp);
-+void xs_node_unwatch(struct qemu_xs_handle *h, struct qemu_xs_watch *w);
- 
- #endif /* HW_XEN_BUS_HELPER_H */
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 5a90e79d53..f435898164 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -9,29 +9,23 @@
- #define HW_XEN_BUS_H
- 
- #include "hw/xen/xen_backend_ops.h"
--#include "hw/xen/interface/io/xenbus.h"
- #include "hw/sysbus.h"
- #include "qemu/notify.h"
- #include "qom/object.h"
- 
--typedef void (*XenWatchHandler)(void *opaque);
--
--typedef struct XenWatchList XenWatchList;
--typedef struct XenWatch XenWatch;
- typedef struct XenEventChannel XenEventChannel;
- 
- struct XenDevice {
-     DeviceState qdev;
-     domid_t frontend_id;
-     char *name;
--    struct xs_handle *xsh;
--    XenWatchList *watch_list;
-+    struct qemu_xs_handle *xsh;
-     char *backend_path, *frontend_path;
-     enum xenbus_state backend_state, frontend_state;
-     Notifier exit;
--    XenWatch *backend_state_watch, *frontend_state_watch;
-+    struct qemu_xs_watch *backend_state_watch, *frontend_state_watch;
-     bool backend_online;
--    XenWatch *backend_online_watch;
-+    struct qemu_xs_watch *backend_online_watch;
-     xengnttab_handle *xgth;
-     bool inactive;
-     QLIST_HEAD(, XenEventChannel) event_channels;
-@@ -64,10 +58,9 @@ OBJECT_DECLARE_TYPE(XenDevice, XenDeviceClass, XEN_DEVICE)
- struct XenBus {
-     BusState qbus;
-     domid_t backend_id;
--    struct xs_handle *xsh;
--    XenWatchList *watch_list;
-+    struct qemu_xs_handle *xsh;
-     unsigned int backend_types;
--    XenWatch **backend_watch;
-+    struct qemu_xs_watch **backend_watch;
-     QLIST_HEAD(, XenDevice) inactive_devices;
- };
- 
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index ab28583267..6c307c5f2c 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -2,7 +2,6 @@
- #define HW_XEN_LEGACY_BACKEND_H
- 
- #include "hw/xen/xen_backend_ops.h"
--#include "hw/xen/interface/io/xenbus.h"
- #include "hw/xen/xen_pvdev.h"
- #include "net/net.h"
- #include "qom/object.h"
-@@ -16,7 +15,7 @@ DECLARE_INSTANCE_CHECKER(XenLegacyDevice, XENBACKEND,
-                          TYPE_XENBACKEND)
- 
- /* variables */
--extern struct xs_handle *xenstore;
-+extern struct qemu_xs_handle *xenstore;
- extern const char *xen_protocol;
- extern DeviceState *xen_sysdev;
- extern BusState *xen_sysbus;
-@@ -31,9 +30,6 @@ int xenstore_write_be_int64(struct XenLegacyDevice *xendev, const char *node,
- char *xenstore_read_be_str(struct XenLegacyDevice *xendev, const char *node);
- int xenstore_read_be_int(struct XenLegacyDevice *xendev, const char *node,
-                          int *ival);
--void xenstore_update_fe(char *watch, struct XenLegacyDevice *xendev);
--void xenstore_update_be(char *watch, char *type, int dom,
--                        struct XenDevOps *ops);
- char *xenstore_read_fe_str(struct XenLegacyDevice *xendev, const char *node);
- int xenstore_read_fe_int(struct XenLegacyDevice *xendev, const char *node,
-                          int *ival);
-diff --git a/include/hw/xen/xen_backend_ops.h b/include/hw/xen/xen_backend_ops.h
-index 0dff06bbde..90cca85f52 100644
---- a/include/hw/xen/xen_backend_ops.h
-+++ b/include/hw/xen/xen_backend_ops.h
-@@ -12,6 +12,10 @@
- #ifndef QEMU_XEN_BACKEND_OPS_H
- #define QEMU_XEN_BACKEND_OPS_H
- 
-+#include "hw/xen/xen.h"
-+#include "hw/xen/interface/xen.h"
-+#include "hw/xen/interface/io/xenbus.h"
-+
- /*
-  * For the time being, these operations map fairly closely to the API of
-  * the actual Xen libraries, e.g. libxenevtchn. As we complete the migration
-@@ -36,6 +40,16 @@ typedef uint32_t grant_ref_t;
- #define XEN_PAGE_SIZE        (1UL << XEN_PAGE_SHIFT)
- #define XEN_PAGE_MASK        (~(XEN_PAGE_SIZE - 1))
- 
-+#ifndef xen_rmb
-+#define xen_rmb() smp_rmb()
-+#endif
-+#ifndef xen_wmb
-+#define xen_wmb() smp_wmb()
-+#endif
-+#ifndef xen_mb
-+#define xen_mb() smp_mb()
-+#endif
-+
- struct evtchn_backend_ops {
-     xenevtchn_handle *(*open)(void);
-     int (*bind_interdomain)(xenevtchn_handle *xc, uint32_t domid,
-@@ -240,6 +254,155 @@ static inline int qemu_xen_foreignmem_unmap(void *addr, size_t pages)
-     return xen_foreignmem_ops->unmap(addr, pages);
- }
- 
-+typedef void (*xs_watch_fn)(void *opaque, const char *path);
-+
-+struct qemu_xs_handle;
-+struct qemu_xs_watch;
-+typedef uint32_t xs_transaction_t;
-+
-+#define XBT_NULL 0
-+
-+#define XS_PERM_NONE  0x00
-+#define XS_PERM_READ  0x01
-+#define XS_PERM_WRITE 0x02
-+
-+struct xenstore_backend_ops {
-+    struct qemu_xs_handle *(*open)(void);
-+    void (*close)(struct qemu_xs_handle *h);
-+    char *(*get_domain_path)(struct qemu_xs_handle *h, unsigned int domid);
-+    char **(*directory)(struct qemu_xs_handle *h, xs_transaction_t t,
-+                        const char *path, unsigned int *num);
-+    void *(*read)(struct qemu_xs_handle *h, xs_transaction_t t,
-+                  const char *path, unsigned int *len);
-+    bool (*write)(struct qemu_xs_handle *h, xs_transaction_t t,
-+                  const char *path, const void *data, unsigned int len);
-+    bool (*create)(struct qemu_xs_handle *h, xs_transaction_t t,
-+                   unsigned int owner, unsigned int domid,
-+                   unsigned int perms, const char *path);
-+    bool (*destroy)(struct qemu_xs_handle *h, xs_transaction_t t,
-+               const char *path);
-+    struct qemu_xs_watch *(*watch)(struct qemu_xs_handle *h, const char *path,
-+                                   xs_watch_fn fn, void *opaque);
-+    void (*unwatch)(struct qemu_xs_handle *h, struct qemu_xs_watch *w);
-+    xs_transaction_t (*transaction_start)(struct qemu_xs_handle *h);
-+    bool (*transaction_end)(struct qemu_xs_handle *h, xs_transaction_t t,
-+                            bool abort);
-+};
-+
-+extern struct xenstore_backend_ops *xen_xenstore_ops;
-+
-+static inline struct qemu_xs_handle *qemu_xen_xs_open(void)
-+{
-+    if (!xen_xenstore_ops) {
-+        return NULL;
-+    }
-+    return xen_xenstore_ops->open();
-+}
-+
-+static inline void qemu_xen_xs_close(struct qemu_xs_handle *h)
-+{
-+    if (!xen_xenstore_ops) {
-+        return;
-+    }
-+    xen_xenstore_ops->close(h);
-+}
-+
-+static inline char *qemu_xen_xs_get_domain_path(struct qemu_xs_handle *h,
-+                                                unsigned int domid)
-+{
-+    if (!xen_xenstore_ops) {
-+        return NULL;
-+    }
-+    return xen_xenstore_ops->get_domain_path(h, domid);
-+}
-+
-+static inline char **qemu_xen_xs_directory(struct qemu_xs_handle *h,
-+                                           xs_transaction_t t, const char *path,
-+                                           unsigned int *num)
-+{
-+    if (!xen_xenstore_ops) {
-+        return NULL;
-+    }
-+    return xen_xenstore_ops->directory(h, t, path, num);
-+}
-+
-+static inline void *qemu_xen_xs_read(struct qemu_xs_handle *h,
-+                                     xs_transaction_t t, const char *path,
-+                                     unsigned int *len)
-+{
-+    if (!xen_xenstore_ops) {
-+        return NULL;
-+    }
-+    return xen_xenstore_ops->read(h, t, path, len);
-+}
-+
-+static inline bool qemu_xen_xs_write(struct qemu_xs_handle *h,
-+                                     xs_transaction_t t, const char *path,
-+                                     const void *data, unsigned int len)
-+{
-+    if (!xen_xenstore_ops) {
-+        return false;
-+    }
-+    return xen_xenstore_ops->write(h, t, path, data, len);
-+}
-+
-+static inline bool qemu_xen_xs_create(struct qemu_xs_handle *h,
-+                                      xs_transaction_t t, unsigned int owner,
-+                                      unsigned int domid, unsigned int perms,
-+                                      const char *path)
-+{
-+    if (!xen_xenstore_ops) {
-+        return false;
-+    }
-+    return xen_xenstore_ops->create(h, t, owner, domid, perms, path);
-+}
-+
-+static inline bool qemu_xen_xs_destroy(struct qemu_xs_handle *h,
-+                                       xs_transaction_t t, const char *path)
-+{
-+    if (!xen_xenstore_ops) {
-+        return false;
-+    }
-+    return xen_xenstore_ops->destroy(h, t, path);
-+}
-+
-+static inline struct qemu_xs_watch *qemu_xen_xs_watch(struct qemu_xs_handle *h,
-+                                                      const char *path,
-+                                                      xs_watch_fn fn,
-+                                                      void *opaque)
-+{
-+    if (!xen_xenstore_ops) {
-+        return NULL;
-+    }
-+    return xen_xenstore_ops->watch(h, path, fn, opaque);
-+}
-+
-+static inline void qemu_xen_xs_unwatch(struct qemu_xs_handle *h,
-+                                       struct qemu_xs_watch *w)
-+{
-+    if (!xen_xenstore_ops) {
-+        return;
-+    }
-+    xen_xenstore_ops->unwatch(h, w);
-+}
-+
-+static inline xs_transaction_t qemu_xen_xs_transaction_start(struct qemu_xs_handle *h)
-+{
-+    if (!xen_xenstore_ops) {
-+        return XBT_NULL;
-+    }
-+    return xen_xenstore_ops->transaction_start(h);
-+}
-+
-+static inline bool qemu_xen_xs_transaction_end(struct qemu_xs_handle *h,
-+                                               xs_transaction_t t, bool abort)
-+{
-+    if (!xen_xenstore_ops) {
-+        return false;
-+    }
-+    return xen_xenstore_ops->transaction_end(h, t, abort);
-+}
-+
- void setup_xen_backend_ops(void);
- 
- #endif /* QEMU_XEN_BACKEND_OPS_H */
-diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
-index 632ce617cc..7edcf3eb25 100644
---- a/include/hw/xen/xen_common.h
-+++ b/include/hw/xen/xen_common.h
-@@ -12,7 +12,6 @@
- 
- #include <xenctrl.h>
- #include <xenstore.h>
--#include "hw/xen/interface/io/xenbus.h"
- 
- #include "hw/xen/xen.h"
- #include "hw/pci/pci_device.h"
-diff --git a/include/hw/xen/xen_pvdev.h b/include/hw/xen/xen_pvdev.h
-index 9c27b14764..d8eea353b8 100644
---- a/include/hw/xen/xen_pvdev.h
-+++ b/include/hw/xen/xen_pvdev.h
-@@ -39,6 +39,7 @@ struct XenLegacyDevice {
-     char               name[64];
-     int                debug;
- 
-+    struct qemu_xs_watch *watch;
-     enum xenbus_state  be_state;
-     enum xenbus_state  fe_state;
-     int                online;
-@@ -64,7 +65,6 @@ int xenstore_write_int64(const char *base, const char *node, int64_t ival);
- char *xenstore_read_str(const char *base, const char *node);
- int xenstore_read_int(const char *base, const char *node, int *ival);
- int xenstore_read_uint64(const char *base, const char *node, uint64_t *uval);
--void xenstore_update(void *unused);
- 
- const char *xenbus_strstate(enum xenbus_state state);
- 
-diff --git a/softmmu/globals.c b/softmmu/globals.c
-index dda32986f7..39678aa8c5 100644
---- a/softmmu/globals.c
-+++ b/softmmu/globals.c
-@@ -68,3 +68,4 @@ bool xen_domid_restrict;
- struct evtchn_backend_ops *xen_evtchn_ops;
- struct gnttab_backend_ops *xen_gnttab_ops;
- struct foreignmem_backend_ops *xen_foreignmem_ops;
-+struct xenstore_backend_ops *xen_xenstore_ops;
--- 
-2.39.0
+Cheers
+Bertrand
+
+>=20
+> ----
+>=20
+> Even if this patch is rewriting part of the previous patch, I decided
+> to keep them separated to help the review.
+>=20
+> The "follow-up patches" are still in draft at the moment. I still haven't
+> find a way to split them nicely and not require too much more work
+> in the coloring side.
+>=20
+> I have provided some medium-term goal in the cover letter.
+>=20
+>    Changes in v6:
+>        - Add Henry's reviewed-by and tested-by tag
+>        - Add Michal's reviewed-by
+>        - Add newline in remove_identity_mapping for clarity
+>=20
+>    Changes in v5:
+>        - Fix typo in a comment
+>        - No need to link boot_{second, third}_id again if we need to
+>          create a temporary area.
+>=20
+>    Changes in v3:
+>        - Resolve conflicts after switching from "ldr rX, <label>" to
+>          "mov_w rX, <label>" in a previous patch
+>=20
+>    Changes in v2:
+>        - Patch added
+> ---
+> xen/arch/arm/arm32/head.S | 86 ++++++++-------------------------------
+> 1 file changed, 16 insertions(+), 70 deletions(-)
+>=20
+> diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+> index df51550baa8a..9befffd85079 100644
+> --- a/xen/arch/arm/arm32/head.S
+> +++ b/xen/arch/arm/arm32/head.S
+> @@ -459,7 +459,6 @@ ENDPROC(cpu_init)
+> create_page_tables:
+>         /* Prepare the page-tables for mapping Xen */
+>         mov_w r0, XEN_VIRT_START
+> -        create_table_entry boot_pgtable, boot_second, r0, 1
+>         create_table_entry boot_second, boot_third, r0, 2
+>=20
+>         /* Setup boot_third: */
+> @@ -479,70 +478,37 @@ create_page_tables:
+>         cmp   r1, #(XEN_PT_LPAE_ENTRIES<<3) /* 512*8-byte entries per pag=
+e */
+>         blo   1b
+>=20
+> -        /*
+> -         * If Xen is loaded at exactly XEN_VIRT_START then we don't
+> -         * need an additional 1:1 mapping, the virtual mapping will
+> -         * suffice.
+> -         */
+> -        cmp   r9, #XEN_VIRT_START
+> -        moveq pc, lr
+> -
+>         /*
+>          * Setup the 1:1 mapping so we can turn the MMU on. Note that
+>          * only the first page of Xen will be part of the 1:1 mapping.
+> -         *
+> -         * In all the cases, we will link boot_third_id. So create the
+> -         * mapping in advance.
+>          */
+> +        create_table_entry boot_pgtable, boot_second_id, r9, 1
+> +        create_table_entry boot_second_id, boot_third_id, r9, 2
+>         create_mapping_entry boot_third_id, r9, r9
+>=20
+>         /*
+> -         * Find the first slot used. If the slot is not XEN_FIRST_SLOT,
+> -         * then the 1:1 mapping will use its own set of page-tables from
+> -         * the second level.
+> +         * Find the first slot used. If the slot is not the same
+> +         * as TEMPORARY_AREA_FIRST_SLOT, then we will want to switch
+> +         * to the temporary mapping before jumping to the runtime
+> +         * virtual mapping.
+>          */
+>         get_table_slot r1, r9, 1     /* r1 :=3D first slot */
+> -        cmp   r1, #XEN_FIRST_SLOT
+> -        beq   1f
+> -        create_table_entry boot_pgtable, boot_second_id, r9, 1
+> -        b     link_from_second_id
+> -
+> -1:
+> -        /*
+> -         * Find the second slot used. If the slot is XEN_SECOND_SLOT, th=
+en the
+> -         * 1:1 mapping will use its own set of page-tables from the
+> -         * third level.
+> -         */
+> -        get_table_slot r1, r9, 2     /* r1 :=3D second slot */
+> -        cmp   r1, #XEN_SECOND_SLOT
+> -        beq   virtphys_clash
+> -        create_table_entry boot_second, boot_third_id, r9, 2
+> -        b     link_from_third_id
+> +        cmp   r1, #TEMPORARY_AREA_FIRST_SLOT
+> +        bne   use_temporary_mapping
+>=20
+> -link_from_second_id:
+> -        create_table_entry boot_second_id, boot_third_id, r9, 2
+> -link_from_third_id:
+> -        /* Good news, we are not clashing with Xen virtual mapping */
+> +        mov_w r0, XEN_VIRT_START
+> +        create_table_entry boot_pgtable, boot_second, r0, 1
+>         mov   r12, #0                /* r12 :=3D temporary mapping not cr=
+eated */
+>         mov   pc, lr
+>=20
+> -virtphys_clash:
+> +use_temporary_mapping:
+>         /*
+> -         * The identity map clashes with boot_third. Link boot_first_id =
+and
+> -         * map Xen to a temporary mapping. See switch_to_runtime_mapping
+> -         * for more details.
+> +         * The identity mapping is not using the first slot
+> +         * TEMPORARY_AREA_FIRST_SLOT. Create a temporary mapping.
+> +         * See switch_to_runtime_mapping for more details.
+>          */
+> -        PRINT("- Virt and Phys addresses clash  -\r\n")
+>         PRINT("- Create temporary mapping -\r\n")
+>=20
+> -        /*
+> -         * This will override the link to boot_second in XEN_FIRST_SLOT.
+> -         * The page-tables are not live yet. So no need to use
+> -         * break-before-make.
+> -         */
+> -        create_table_entry boot_pgtable, boot_second_id, r9, 1
+> -        create_table_entry boot_second_id, boot_third_id, r9, 2
+> -
+>         /* Map boot_second (cover Xen mappings) to the temporary 1st slot=
+ */
+>         mov_w r0, TEMPORARY_XEN_VIRT_START
+>         create_table_entry boot_pgtable, boot_second, r0, 1
+> @@ -675,33 +641,13 @@ remove_identity_mapping:
+>         /* r2:r3 :=3D invalid page-table entry */
+>         mov   r2, #0x0
+>         mov   r3, #0x0
+> -        /*
+> -         * Find the first slot used. Remove the entry for the first
+> -         * table if the slot is not XEN_FIRST_SLOT.
+> -         */
+> +
+> +        /* Find the first slot used and remove it */
+>         get_table_slot r1, r9, 1     /* r1 :=3D first slot */
+> -        cmp   r1, #XEN_FIRST_SLOT
+> -        beq   1f
+> -        /* It is not in slot 0, remove the entry */
+>         mov_w r0, boot_pgtable       /* r0 :=3D root table */
+>         lsl   r1, r1, #3             /* r1 :=3D Slot offset */
+>         strd  r2, r3, [r0, r1]
+> -        b     identity_mapping_removed
+> -
+> -1:
+> -        /*
+> -         * Find the second slot used. Remove the entry for the first
+> -         * table if the slot is not XEN_SECOND_SLOT.
+> -         */
+> -        get_table_slot r1, r9, 2     /* r1 :=3D second slot */
+> -        cmp   r1, #XEN_SECOND_SLOT
+> -        beq   identity_mapping_removed
+> -        /* It is not in slot 1, remove the entry */
+> -        mov_w r0, boot_second        /* r0 :=3D second table */
+> -        lsl   r1, r1, #3             /* r1 :=3D Slot offset */
+> -        strd  r2, r3, [r0, r1]
+>=20
+> -identity_mapping_removed:
+>         flush_xen_tlb_local r0
+>         mov   pc, lr
+> ENDPROC(remove_identity_mapping)
+> --=20
+> 2.39.1
+>=20
+>=20
 
 
