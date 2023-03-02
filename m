@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7BAFC7EE39
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00CEC7EE3A
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 15:35:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505051.777599 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.505047.777573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxL-0001ig-LW; Thu, 02 Mar 2023 15:34:55 +0000
+	id 1pXkxK-0001KT-D1; Thu, 02 Mar 2023 15:34:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505051.777599; Thu, 02 Mar 2023 15:34:55 +0000
+Received: by outflank-mailman (output) from mailman id 505047.777573; Thu, 02 Mar 2023 15:34:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkxL-0001dE-Ay; Thu, 02 Mar 2023 15:34:55 +0000
-Received: by outflank-mailman (input) for mailman id 505051;
- Thu, 02 Mar 2023 15:34:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pXkxK-0001KM-87; Thu, 02 Mar 2023 15:34:54 +0000
+Received: by outflank-mailman (input) for mailman id 505047;
+ Thu, 02 Mar 2023 15:34:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ucY8=62=casper.srs.infradead.org=BATV+a1ad97f05afd282148df+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pXkxJ-0001Jw-Q2
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:53 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2137f89-b90f-11ed-a550-8520e6686977;
+ <SRS0=ZMsQ=62=desiato.srs.infradead.org=BATV+9a0490e5ac528e462c30+7130+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pXkxH-0001Jv-Rt
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 15:34:52 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c40c7173-b90f-11ed-96ad-2f268f93b82a;
  Thu, 02 Mar 2023 16:34:49 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pXkx4-002UNG-6D; Thu, 02 Mar 2023 15:34:38 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pXkx4-00FL3p-2y; Thu, 02 Mar 2023 15:34:44 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pXkx4-004uyn-0c; Thu, 02 Mar 2023 15:34:38 +0000
+ Linux)) id 1pXkx4-004uzb-2c; Thu, 02 Mar 2023 15:34:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c2137f89-b90f-11ed-a550-8520e6686977
+X-Inumbo-ID: c40c7173-b90f-11ed-96ad-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=CiL9BoVIR8kjLuSX6JDQTr7KEneQW3tf2NeAtIBuItk=; b=tgdtvoyyO6EkUx17MYdIZ0BC9v
-	+wdjiO/YftXiwsYf+hXfDk6NgeLX1UioTSk+oTsvWRln8Y4UpzIb9ox5+6Il7d2/8PS3tr0lyn4Sb
-	TEUktrIAaojfPt4Ays0rukS2gPFFe9iBizcg7kAVjGGnL4Ylnk15Y5hXWI2eHJvKcatermggwrH6W
-	zNh5SyVCIkKqaWPNt3t+OZbJUMBIreqLpd8NceeKzmK43/vzVha/JU7H96T4HswEBWpdvA7F0F6d9
-	tKxdaXLhxwgJSOuYj7ZiUlq0NKCxKQtDHHzimMEhUKFC9kZxwTIGlq9QRnU7vfSqxxQGpFjXIvl5j
-	bhw4V3Nw==;
+	bh=YlCfg83tKKXeKZ+xSZwkLL5PykObe3vQTOvEbi/RER8=; b=DiDdTZUfWBP8v/oc6s9Gc9aXNS
+	DmyqgfC2P9B45IlIUhm2YWvDQPvHiiZMs/BQ89SxeyJSf5E2HTlj+ZCzcRLDa0/a8FcOF7iLVyAsr
+	azJp1I8YoM3OeYPl25JZTvu502Qzn+fbod4+skxoIEbpuN/1J63rVR3AM6QHzcZ6C0ew0Bi3bDLiZ
+	NgndzJqcMVw4VoCQT6RZfpUmBEixeCCy4YqtPMnkFoxfig4gTTDy3kCz02zrewows2QJy5Rnq/NO/
+	2bzEUzX4V06JKvYJAVxYK0SX7k/mMvXK7NlLKPp9M5QOQRefoDNpjLAVnzAzJtdOT/V8H9wOYf48f
+	/OS0Gfyw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -64,116 +64,72 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	vikram.garhwal@amd.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 08/25] hw/xen: Create initial XenStore nodes
-Date: Thu,  2 Mar 2023 15:34:18 +0000
-Message-Id: <20230302153435.1170111-9-dwmw2@infradead.org>
+Subject: [RFC PATCH v1 20/25] hw/xen: Hook up emulated implementation for event channel operations
+Date: Thu,  2 Mar 2023 15:34:30 +0000
+Message-Id: <20230302153435.1170111-21-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
 References: <20230302153435.1170111-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
-From: Paul Durrant <pdurrant@amazon.com>
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+We provided the backend-facing evtchn functions very early on as part of
+the core Xen platform support, since things like timers and xenstore need
+to use them.
+
+By what may or may not be an astonishing coincidence, those functions
+just *happen* all to have exactly the right function prototypes to slot
+into the evtchn_backend_ops table and be called by the PV backends.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- hw/i386/kvm/xen_xenstore.c | 70 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
+ hw/i386/kvm/xen_evtchn.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index 1b1358ad4c..5a8e38aae7 100644
---- a/hw/i386/kvm/xen_xenstore.c
-+++ b/hw/i386/kvm/xen_xenstore.c
-@@ -76,9 +76,39 @@ struct XenXenstoreState *xen_xenstore_singleton;
- static void xen_xenstore_event(void *opaque);
- static void fire_watch_cb(void *opaque, const char *path, const char *token);
+diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
+index 886fbf6b3b..98a7b85047 100644
+--- a/hw/i386/kvm/xen_evtchn.c
++++ b/hw/i386/kvm/xen_evtchn.c
+@@ -34,6 +34,7 @@
+ #include "hw/pci/msi.h"
+ #include "hw/pci/msix.h"
+ #include "hw/irq.h"
++#include "hw/xen/xen_backend_ops.h"
  
-+static void G_GNUC_PRINTF (4, 5) relpath_printf(XenXenstoreState *s,
-+                                                GList *perms,
-+                                                const char *relpath,
-+                                                const char *fmt, ...)
-+{
-+    gchar *abspath;
-+    gchar *value;
-+    va_list args;
-+    GByteArray *data;
-+    int err;
+ #include "xen_evtchn.h"
+ #include "xen_overlay.h"
+@@ -278,6 +279,17 @@ static const TypeInfo xen_evtchn_info = {
+     .class_init    = xen_evtchn_class_init,
+ };
+ 
++static struct evtchn_backend_ops emu_evtchn_backend_ops = {
++    .open = xen_be_evtchn_open,
++    .bind_interdomain = xen_be_evtchn_bind_interdomain,
++    .unbind = xen_be_evtchn_unbind,
++    .close = xen_be_evtchn_close,
++    .get_fd = xen_be_evtchn_fd,
++    .notify = xen_be_evtchn_notify,
++    .unmask = xen_be_evtchn_unmask,
++    .pending = xen_be_evtchn_pending,
++};
 +
-+    abspath = g_strdup_printf("/local/domain/%u/%s", xen_domid, relpath);
-+    va_start(args, fmt);
-+    value = g_strdup_vprintf(fmt, args);
-+    va_end(args);
-+
-+    data = g_byte_array_new_take((void *)value, strlen(value));
-+
-+    err = xs_impl_write(s->impl, DOMID_QEMU, XBT_NULL, abspath, data);
-+    assert(!err);
-+
-+    g_byte_array_unref(data);
-+
-+    err = xs_impl_set_perms(s->impl, DOMID_QEMU, XBT_NULL, abspath, perms);
-+    assert(!err);
-+
-+    g_free(abspath);
-+}
-+
- static void xen_xenstore_realize(DeviceState *dev, Error **errp)
+ static void gsi_assert_bh(void *opaque)
  {
-     XenXenstoreState *s = XEN_XENSTORE(dev);
-+    GList *perms;
- 
-     if (xen_mode != XEN_EMULATE) {
-         error_setg(errp, "Xen xenstore support is for Xen emulation");
-@@ -102,6 +132,46 @@ static void xen_xenstore_realize(DeviceState *dev, Error **errp)
-                        xen_xenstore_event, NULL, NULL, NULL, s);
- 
-     s->impl = xs_impl_create(xen_domid);
+     struct vcpu_info *vi = kvm_xen_get_vcpu_info_hva(0);
+@@ -318,6 +330,9 @@ void xen_evtchn_create(void)
+     s->nr_pirq_inuse_words = DIV_ROUND_UP(s->nr_pirqs, 64);
+     s->pirq_inuse_bitmap = g_new0(uint64_t, s->nr_pirq_inuse_words);
+     s->pirq = g_new0(struct pirq_info, s->nr_pirqs);
 +
-+    /* Populate the default nodes */
-+
-+    /* Nodes owned by 'dom0' but readable by the guest */
-+    perms = g_list_append(NULL, xs_perm_as_string(XS_PERM_NONE, DOMID_QEMU));
-+    perms = g_list_append(perms, xs_perm_as_string(XS_PERM_READ, xen_domid));
-+
-+    relpath_printf(s, perms, "", "%s", "");
-+
-+    relpath_printf(s, perms, "domid", "%u", xen_domid);
-+
-+    relpath_printf(s, perms, "control/platform-feature-xs_reset_watches", "%u", 1);
-+    relpath_printf(s, perms, "control/platform-feature-multiprocessor-suspend", "%u", 1);
-+
-+    relpath_printf(s, perms, "platform/acpi", "%u", 1);
-+    relpath_printf(s, perms, "platform/acpi_s3", "%u", 1);
-+    relpath_printf(s, perms, "platform/acpi_s4", "%u", 1);
-+    relpath_printf(s, perms, "platform/acpi_laptop_slate", "%u", 0);
-+
-+    g_list_free_full(perms, g_free);
-+
-+    /* Nodes owned by the guest */
-+    perms = g_list_append(NULL, xs_perm_as_string(XS_PERM_NONE, xen_domid));
-+
-+    relpath_printf(s, perms, "attr", "%s", "");
-+
-+    relpath_printf(s, perms, "control/shutdown", "%s", "");
-+    relpath_printf(s, perms, "control/feature-poweroff", "%u", 1);
-+    relpath_printf(s, perms, "control/feature-reboot", "%u", 1);
-+    relpath_printf(s, perms, "control/feature-suspend", "%u", 1);
-+    relpath_printf(s, perms, "control/feature-s3", "%u", 1);
-+    relpath_printf(s, perms, "control/feature-s4", "%u", 1);
-+
-+    relpath_printf(s, perms, "data", "%s", "");
-+    relpath_printf(s, perms, "device", "%s", "");
-+    relpath_printf(s, perms, "drivers", "%s", "");
-+    relpath_printf(s, perms, "error", "%s", "");
-+    relpath_printf(s, perms, "feature", "%s", "");
-+
-+    g_list_free_full(perms, g_free);
++    /* Set event channel functions for backend drivers to use */
++    xen_evtchn_ops = &emu_evtchn_backend_ops;
  }
  
- static bool xen_xenstore_is_needed(void *opaque)
+ void xen_evtchn_connect_gsis(qemu_irq *system_gsis)
 -- 
 2.39.0
 
