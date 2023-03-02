@@ -4,37 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8285C678D4
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 17:25:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505289.777969 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34563C7EE32
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 17:54:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505300.778029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXmfl-0003vG-NC; Thu, 02 Mar 2023 17:24:53 +0000
+	id 1pXn7p-0000zX-LA; Thu, 02 Mar 2023 17:53:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505289.777969; Thu, 02 Mar 2023 17:24:53 +0000
+Received: by outflank-mailman (output) from mailman id 505300.778029; Thu, 02 Mar 2023 17:53:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXmfl-0003v9-KT; Thu, 02 Mar 2023 17:24:53 +0000
-Received: by outflank-mailman (input) for mailman id 505289;
- Thu, 02 Mar 2023 17:24:52 +0000
+	id 1pXn7p-0000zP-I1; Thu, 02 Mar 2023 17:53:53 +0000
+Received: by outflank-mailman (input) for mailman id 505300;
+ Thu, 02 Mar 2023 17:53:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5rfr=62=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pXmfk-0003v3-26
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 17:24:52 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 237c2f08-b91f-11ed-96ad-2f268f93b82a;
- Thu, 02 Mar 2023 18:24:50 +0100 (CET)
-Received: by mail-lf1-x131.google.com with SMTP id g17so222288lfv.4
- for <xen-devel@lists.xenproject.org>; Thu, 02 Mar 2023 09:24:50 -0800 (PST)
-Received: from [192.168.8.114] (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
- [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
- d20-20020ac241d4000000b004d856fe5121sm2684lfi.194.2023.03.02.09.24.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 09:24:50 -0800 (PST)
+ <SRS0=BPDg=62=citrix.com=prvs=418368d91=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1pXn7n-00086w-Sd
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 17:53:51 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2f827142-b923-11ed-96ad-2f268f93b82a;
+ Thu, 02 Mar 2023 18:53:50 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,174 +38,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 237c2f08-b91f-11ed-96ad-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677777890;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=8yTlx2FFxJWgC6lzHX/YP+4FDCc/l4O1IGGWnutrzmo=;
-        b=gYrPbnRE9ucyW739B/EdH5c7gVSCuXKz6WwS8+LKKydKApUiQ8lz43upADIGlO1LzD
-         u0KkhWRQyccgYU4XvbFy6TB2ntS0Dyqlt0zzVsejezF8JlODNlBPxG2gzKAl+PY5Tsmz
-         c99FEKUdk7ywSG44Z7ylx30/67kFRLxa10xSIKCb/0evCyY7u0ThxJt8ojL4jq2zptzI
-         vyc/hHh+EvaWuWSXYo2vvgmv8K4kSc4mSnDfMqP1NW9tAq8TWF0E/Blvw8oqiSVMZ8cl
-         haVK3zPmw4Ivs2YhA7tREPEru2fKFhr83XhiOSQb52NUxgeHGAIqzRkUgdjbD5WveQPu
-         7fhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677777890;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=8yTlx2FFxJWgC6lzHX/YP+4FDCc/l4O1IGGWnutrzmo=;
-        b=CuadfzKpHboQt0BsY6eCEgMkpaKbqih+jz1YWBMrLE9XS0CFTs11VrUQk8yZeZv/Ic
-         cpneg6GgH7RD35tPHFqlbPylRKrP7unyj6xNU8nJHdQ66D29UcTAJWLPDCrXYfoQ2wbM
-         rY2bQAlVeEo3nIkSiJtmIKls3IpTlX8idIvZINLiqEH/Y4+meYmYYqJZHEb0emSHraSy
-         M+p0VTf5cWblxU1UrDHaBtAWL5oMXyBIGSXVFsUNDdrr8vjbj7eaeDr++Q+UKlgWrx0K
-         DOFtRxWAP2wpU5abiOkGti/4o0jxAZs6ZjDtUk/EiKEoehg3EZv51zqYX6dyruCB0v/v
-         B7Aw==
-X-Gm-Message-State: AO0yUKWyje2mUnKG3YXHm21j5x5vqb18MG+cepadTQ/L6eYgGZE6EKqY
-	KRHv2NxMHhwJ+VAaWVlNhmw=
-X-Google-Smtp-Source: AK7set/pRhLjmkX3kZ0e7iIkoh876+2/zx2Pie+Qc1BDWwd0vC0JSuB2EqQqHcLpmfkdzBwmHImS1g==
-X-Received: by 2002:a19:c219:0:b0:4b5:7096:23ff with SMTP id l25-20020a19c219000000b004b5709623ffmr2907533lfc.66.1677777890248;
-        Thu, 02 Mar 2023 09:24:50 -0800 (PST)
-Message-ID: <e1cebd6338d9161708267eeac422d77eb768ea4b.camel@gmail.com>
-Subject: Re: [PATCH v1] xen/arm: align *(.proc.info) in the linker script
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
-	 <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Date: Thu, 02 Mar 2023 19:24:48 +0200
-In-Reply-To: <ab953ad7-0345-ce60-610d-02b6f4b26398@xen.org>
-References: 
-	<74973920d8722df3ce533979314564f331acf16e.1677687247.git.oleksii.kurochko@gmail.com>
-	 <370809af-75e6-546a-53e4-71a76444f367@xen.org>
-	 <a9c2638cd8620d74ec719845132ef65f08b4c934.camel@gmail.com>
-	 <cf15b113-ac6f-e115-6c38-38b25a265934@xen.org>
-	 <f2f6544a-a59e-2e10-0b8f-080f91708459@xen.org>
-	 <472fee066070db9cb3c662bf5cc6f8cb681aeb1b.camel@gmail.com>
-	 <ab953ad7-0345-ce60-610d-02b6f4b26398@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+X-Inumbo-ID: 2f827142-b923-11ed-96ad-2f268f93b82a
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1677779630;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=XlzauBoROJbKlRvdZpAzRjeIVuO3B6bK5CRK30Y6Ti8=;
+  b=g085QqguondbqCtI9gYtbNOO5SOw3taDSlzfhSJyFl6K0nczPtUk+o9t
+   z4138TXfP634bt/Iydahl5uO6tyJ0hnCJ3TIVFF6YX8EIcb5oHpHo2X9o
+   3QExtcxpbwlIDkSfWOxJZn0ErCuxP1gsYjJ+8bw3zbQoLdMB/nh9SZFph
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 98603789
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+IronPort-Data: A9a23:8VkI0KPidBSkz+TvrR2+l8FynXyQoLVcMsEvi/4bfWQNrUol0GEAn
+ DZLXjzSaP7cNmfzc9wiO4rgpE9Vv5eHyIViGgto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tD5gZmPpingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0sNORkhj1
+ tgnEhBTQjHElsy15JLhTNA506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
+ ZNEN3w2Nk+ojx5nYz/7DLo3mvuogX/uNSVVsluPqYI84nTJzRw327/oWDbQUo3aG50OwRbJz
+ o7A12/7JjJKNeS58iOmwiKMxeX3l3+gCLtHQdVU8dY12QbOlwT/EiY+XlKhrf60okW3Qd5YJ
+ gof/S9GhbMp6EWhQ935Xhu5iH2JpBgRX5xXCeJSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
+ 1SV2dTzClRSXKa9ECzHsO3O9HXrZHZTdDVZDcMZcecby/za56gerTbwdPY9PI/yn/P2PRGqx
+ Qnf+UDSmI4vpcIM0qy6+3XOjDStuoXFQ2YJ2+nHYo62xlgnPdD4PuRE/XCetK8dd9jBEjFtq
+ VBew6CjAPYy4YZhfcBnaMEEB/mX6vmMK1UwanY/TsB6p1xBF5NOFL28AQ2Sxm8zb67omhezO
+ ic/XD+9A7cCVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOgD+zwRV8yfhmZ
+ cbznSOQ4ZEyU/kP8dZLb71Fje9DKt4Wngs/uqwXPzz4iOHDNRZ5uJ8OMUeUb/BR0U93iFy9z
+ jqrDOPTk083eLSnMkHqHXs7cQhiwY4TWcqn9KS6t4erfmJbJY3WI6SKneh6ItQ7xvU9eyWh1
+ ijVZ3K0AWHX3RXvQThmoFg5AF8zdf6TdU4GABE=
+IronPort-HdrOrdr: A9a23:c9qUk6Dh2XE5JNnlHem755DYdb4zR+YMi2TDtnoBKiC9F/by/f
+ xG885rtyMc9wxhPU3I9ersBEDiexPhHPxOj7X5VI3KNDUO3lHFEGgI1+rfKlPbdBEW/9QtsZ
+ tdTw==
+X-IronPort-AV: E=Sophos;i="5.98,228,1673931600"; 
+   d="scan'208";a="98603789"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>
+Subject: [RFC XEN PATCH 5/7] automation: Introduce DO_REBUILD_CONTAINER, to allow to rebuild a container
+Date: Thu, 2 Mar 2023 17:53:30 +0000
+Message-ID: <20230302175332.56052-6-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230302175332.56052-1-anthony.perard@citrix.com>
+References: <20230302175332.56052-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Thu, 2023-03-02 at 14:50 +0000, Julien Grall wrote:
-> Hi Oleksii,
->=20
-> On 02/03/2023 07:34, Oleksii wrote:
-> > Hi Julien,
-> > > > > On Wed, 2023-03-01 at 16:21 +0000, Julien Grall wrote:
-> > > > > > Hi Oleksii,
-> > > > > >=20
-> > > > > > On 01/03/2023 16:14, Oleksii Kurochko wrote:
-> > > > > > > During testing of bug.h's macros generic implementation
-> > > > > > > yocto-
-> > > > > > > qemuarm
-> > > > > > > job crashed with data abort:
-> > > > > >=20
-> > > > > > The commit message is lacking some information. You are
-> > > > > > telling
-> > > > > > us
-> > > > > > that
-> > > > > > there is an error when building with your series, but this
-> > > > > > doesn't
-> > > > > > tell
-> > > > > > me why this is the correct fix.
-> > > > > >=20
-> > > > > > This is also why I asked to have the xen binary because I
-> > > > > > want
-> > > > > > to
-> > > > > > check
-> > > > > > whether this was a latent bug in Xen or your series
-> > > > > > effectively
-> > > > > > introduce a bug.
-> > > > > >=20
-> > > > > > Note that regardless what I just wrote this is a good idea
-> > > > > > to
-> > > > > > align
-> > > > > > __proc_info_start. I will try to have a closer look later
-> > > > > > and
-> > > > > > propose
-> > > > > > a
-> > > > > > commit message and/or any action for your other series.
-> > > > > Regarding binaries please take a look here:
-> > > > > https://lore.kernel.org/xen-devel/aa2862eacccfb0574859bf4cda8f499=
-2baa5d2e1.camel@gmail.com/
-> > > > >=20
-> > > > > I am not sure if you get my answer as I had the message from
-> > > > > delivery
-> > > > > server that it was blocked for some reason.
-> > > >=20
-> > > > I got the answer. The problem now is gitlab only keep the
-> > > > artifact
-> > > > for
-> > > > the latest build and it only provide a zImage (having the ELF
-> > > > would
-> > > > be
-> > > > easier).
-> > > >=20
-> > > > I will try to reproduce the error on my end.
-> > >=20
-> > > I managed to reproduce it. It looks like that after your bug
-> > > patch,
-> > > *(.rodata.*) will not be end on a 4-byte boundary. Before your
-> > > patch,
-> > > all the messages will be in .rodata.str. Now they are in
-> > > .bug_frames.*,
-> > > so there some difference in .rodata.*.
-> > >=20
-> > > That said, it is not entirely clear why we never seen the issue
-> > > before
-> > > because my guessing there are no guarantee that .rodata.* will be
-> > > suitably aligned.
-> > >=20
-> > > Anyway, here a proposal for the commit message:
-> > >=20
-> > > "
-> > > xen/arm: Ensure the start *(.proc.info) of is 4-byte aligned
-> > >=20
-> > > The entries in *(.proc.info) are expected to be 4-byte aligned
-> > > and
-> > > the
-> > > compiler will access them using 4-byte load instructions. On
-> > > Arm32,
-> > > the
-> > > alignment is strictly enforced by the processor and will result
-> > > to a
-> > > data abort if it is not correct.
-> > >=20
-> > > However, the linker script doesn't encode this requirement. So we
-> > > are
-> > > at
-> > > the mercy of the compiler/linker to have aligned the previous
-> > > sections
-> > > suitably.
-> > >=20
-> > > This was spotted when trying to use the upcoming generic bug
-> > > infrastructure with the compiler provided by Yocto.
-> > >=20
-> > > Link:
-> > > https://lore.kernel.org/xen-devel/6735859208c6dcb7320f89664ae298005f7=
-0827b.camel@gmail.com/
-> > > "
-> > >=20
-> > > If you are happy with the proposed commit message, then I can
-> > > update
-> > > it
-> > > while committing.
-> > I am happy with the proposed commit message.
->=20
-> Thanks. With that:
->=20
-> Reviewed-by: Julien Grall <jgrall@amazon.com>
->=20
-> I have addressed Jan's comment and committed the patch.
->=20
-Thanks a lot.
+This allow to start a pipeline manually and set a variable to test the
+build of a single container, e.g.
+    DO_REBUILD_CONTAINER = ubuntu/xenial
 
-Not generic bug feature is unblock.
-I'll wait for comments till tomorrow.
-If it won't be any that will sent new patch series.
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ automation/gitlab-ci/containers.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-~ Oleksii
+diff --git a/automation/gitlab-ci/containers.yaml b/automation/gitlab-ci/containers.yaml
+index a6d61980b1..9074bfe6f1 100644
+--- a/automation/gitlab-ci/containers.yaml
++++ b/automation/gitlab-ci/containers.yaml
+@@ -7,6 +7,7 @@
+     - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "staging"
+       changes:
+         - automation/build/${BUILD_CONTAINER}.dockerfile
++    - if: $DO_REBUILD_CONTAINER == $BUILD_CONTAINER
+   services:
+     - docker:dind
+   before_script:
+-- 
+Anthony PERARD
+
 
