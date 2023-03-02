@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAECC678D4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0269C7EE33
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 13:23:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.504923.777389 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.504921.777370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXiuB-0000U7-Iz; Thu, 02 Mar 2023 13:23:31 +0000
+	id 1pXiuA-0008Qv-53; Thu, 02 Mar 2023 13:23:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 504923.777389; Thu, 02 Mar 2023 13:23:31 +0000
+Received: by outflank-mailman (output) from mailman id 504921.777370; Thu, 02 Mar 2023 13:23:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXiuB-0000U0-GM; Thu, 02 Mar 2023 13:23:31 +0000
-Received: by outflank-mailman (input) for mailman id 504923;
- Thu, 02 Mar 2023 13:23:30 +0000
+	id 1pXiuA-0008Qo-2I; Thu, 02 Mar 2023 13:23:30 +0000
+Received: by outflank-mailman (input) for mailman id 504921;
+ Thu, 02 Mar 2023 13:23:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5rfr=62=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pXiuA-0008Qd-Dq
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 13:23:30 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ id 1pXiu8-0008Qd-V4
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 13:23:29 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6b38479c-b8fd-11ed-a550-8520e6686977;
- Thu, 02 Mar 2023 14:23:28 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id y14so17583480ljq.4
- for <xen-devel@lists.xenproject.org>; Thu, 02 Mar 2023 05:23:28 -0800 (PST)
+ id 698b6cdc-b8fd-11ed-a550-8520e6686977;
+ Thu, 02 Mar 2023 14:23:26 +0100 (CET)
+Received: by mail-lj1-x229.google.com with SMTP id t14so17578755ljd.5
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Mar 2023 05:23:25 -0800 (PST)
 Received: from fedora.. (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
  [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
- s8-20020a05651c048800b00290679ebac1sm2109551ljc.9.2023.03.02.05.23.26
+ s8-20020a05651c048800b00290679ebac1sm2109551ljc.9.2023.03.02.05.23.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 05:23:27 -0800 (PST)
+ Thu, 02 Mar 2023 05:23:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b38479c-b8fd-11ed-a550-8520e6686977
+X-Inumbo-ID: 698b6cdc-b8fd-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677763408;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IcGex5in4thV+OlZrwNvKuJkjY8dPXTKwAgZbk5Bkbk=;
-        b=EhuIONdNarO4l8MGOsL1rPZ5xLfOd0ik+8zpXehgJjsP4X7Df4xTErTzxcjh4uNyzx
-         cKOpX0h6LrwPH88eUbWXvR+TYgZ4RwkxmHJWeDeQeBXs91xRVp0qI1DCdVa7VEXZIp6/
-         nPMyaVPk7Nztml/KeJQ6I3Y6VBRxPtahCCC/dZRQTNEIEUIa7mNOIFv5zH5vaGwEswx4
-         Tdw2cu00ecBaEZv9m3kjFEiktIQLfNXEBFTQ7zpej3oQLJkvna4j4OaXB8L3xVvMrQDG
-         jMV+H75aEK8bxjnahDSF1wLzp08+NacHx+4xZbXPDWuo9FV0/xGLPqBqzMScEA0lO2S1
-         19tA==
+        d=gmail.com; s=20210112; t=1677763405;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=r54OMOhW88QqcfBk7WQqFpi2G04PCGrALjff0dQs4W4=;
+        b=CkFoCC6UYBLofYUgLsdXk2M53Tnc30hPp9uSKjziOo0o49mhDqUhpevAVmfR9PRbBb
+         Q0KwL20RwFzcnuChF78uvhMW+Ug/2sAS6qwypcBpKlgbZCKAWZEqsmTt90vJ8ck5Axko
+         f9AOKkQk+oDSTl0+IyKcTI6RUrI02GFh6LDb9GNZh0lUiU7i/UVg1yGqTBH1xgXiboIC
+         ZDXmqtuqKBG3GJ0bykvuGg881NImob1CalHGifb978KHn11VNKurqHaP/geBHAzrw4eW
+         UpMIakYhID2CoTDXgqMxuEEKL/BURqynn8tZZ+RkYQ7L0dmvDQvV3YZh7ymJyDgrXxoO
+         1hjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677763408;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IcGex5in4thV+OlZrwNvKuJkjY8dPXTKwAgZbk5Bkbk=;
-        b=SLSRT4ormkqG4J+2B2u9l5Uppk/7C4LCGqnHXe0k7xzNBUvfeLbWy7sRW3XqJOQU5A
-         6DVevH15OX22CfHEMoEQgdaQC7HiniebAwblRSpMtUFFQjI3wIb3f8QhaU+anXiE9+Kv
-         Tnh/wxI8eg1uh+7kjpNT0YC+tpFyPIgrQS3KtCrf/0bbV8/3C/2+spY6Azfxtw/YUjn3
-         w95smUiL0wCQOHjFM7nK9EcqUEpQgWcvq8sGaeLAi7r8Dvf82eYrIhaw/rErrTSSiQaj
-         KrWUQnkr31LSMIDtu7TYLxPITQhSK0xy6MFvB1KbXaZERpkLSgZ2ig/gi7ht+abrLwOf
-         OJMQ==
-X-Gm-Message-State: AO0yUKXJWtuUVmzWBF0oMRuHZWPk8696zE25RfSkF9bRFc2FPqTL3DEc
-	N7eyEJXQ2MUCYAjJ1Z00BKNeqmrUAm4=
-X-Google-Smtp-Source: AK7set/FrsS26xxLZ/uLPuGuy47aOWDBW+J+JZWvWpCNMiDAmCb0p0n3PqX6Edy2RQanmMbTuHUlMA==
-X-Received: by 2002:a2e:8048:0:b0:295:c399:686 with SMTP id p8-20020a2e8048000000b00295c3990686mr2976784ljg.13.1677763407706;
-        Thu, 02 Mar 2023 05:23:27 -0800 (PST)
+        d=1e100.net; s=20210112; t=1677763405;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=r54OMOhW88QqcfBk7WQqFpi2G04PCGrALjff0dQs4W4=;
+        b=QWbBeIqXpLrBmOqrjgOSuopO5AB9SUk/s3mVA4yG2BEEXLbecyt2qPcL/IsUjpQgdM
+         d/1uyNC1cDOzO4LgZJV8+uxYRO77mzMDn1rDC2k50oGKYV1z8egLj3m3hdRIh0B+yloT
+         agO8Jwv2PMPrn3x0I4UT3PbUxKhmMMMtFHEDQ7eHAOJH+f+p+Y/0fVTBpaC3wKKV2wzk
+         sS+/Orn858iKNG1cVevuZFR5jM5TyEzvUg5KomKdo1GSgM/FL5Nll+gbNeb3Zcd9GekP
+         YSbLmFR6LcIk3/zHris6muJ3WK45TsfwyvbDyJLoR/Pr415Su9JwvyoRMy356r1PH8nx
+         OdcQ==
+X-Gm-Message-State: AO0yUKUsO6F1kUt/TMPbj5TjMOpGc3rfuuqUDyMWBtFpYzsdhFdCOMsU
+	sWnM2MvPFkpo15YAVhbSNkC8Edx23Xw=
+X-Google-Smtp-Source: AK7set8xx+VVqPcSxKQZX0cI/xrBqy9FioTJTaXFF8ais5noatS9ErlTStdhsqBeu/sZcXO14ItHDA==
+X-Received: by 2002:a05:651c:b24:b0:295:d633:7401 with SMTP id b36-20020a05651c0b2400b00295d6337401mr2423400ljr.47.1677763404836;
+        Thu, 02 Mar 2023 05:23:24 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -86,67 +85,36 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 2/3] xen/riscv: initialize .bss section
-Date: Thu,  2 Mar 2023 15:23:19 +0200
-Message-Id: <495bd1d7fc2becdd48bd00253c079971e2231e99.1677762812.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 0/3] Do basic initialization things
+Date: Thu,  2 Mar 2023 15:23:17 +0200
+Message-Id: <cover.1677762812.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.0
-In-Reply-To: <cover.1677762812.git.oleksii.kurochko@gmail.com>
-References: <cover.1677762812.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+The patch series groups and updates the following patches:
+1. xen/riscv: disable fpu
+2. xen/riscv: initialize .bss section
+3. xen/riscv: read/save hart_id and dtb_base passed by bootloader
+
 ---
 Changes since v1:
  * initialization of .bss was moved to head.S
+ * read/save/pass of hart_id and  dtb_base passed by a bootloader
+   were moved to head.S. Also, it was updated start_xen() arguments
+   to recieve hard_id & dtb_base
 ---
- xen/arch/riscv/include/asm/asm.h | 4 ++++
- xen/arch/riscv/riscv64/head.S    | 9 +++++++++
- 2 files changed, 13 insertions(+)
 
-diff --git a/xen/arch/riscv/include/asm/asm.h b/xen/arch/riscv/include/asm/asm.h
-index 6d426ecea7..5208529cb4 100644
---- a/xen/arch/riscv/include/asm/asm.h
-+++ b/xen/arch/riscv/include/asm/asm.h
-@@ -26,14 +26,18 @@
- #if __SIZEOF_POINTER__ == 8
- #ifdef __ASSEMBLY__
- #define RISCV_PTR		.dword
-+#define RISCV_SZPTR		8
- #else
- #define RISCV_PTR		".dword"
-+#define RISCV_SZPTR		8
- #endif
- #elif __SIZEOF_POINTER__ == 4
- #ifdef __ASSEMBLY__
- #define RISCV_PTR		.word
-+#define RISCV_SZPTR		4
- #else
- #define RISCV_PTR		".word"
-+#define RISCV_SZPTR		4
- #endif
- #else
- #error "Unexpected __SIZEOF_POINTER__"
-diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-index 851b4691a5..b139976b7a 100644
---- a/xen/arch/riscv/riscv64/head.S
-+++ b/xen/arch/riscv/riscv64/head.S
-@@ -13,6 +13,15 @@ ENTRY(start)
-         lla     a6, _dtb_base
-         REG_S   a1, (a6)
- 
-+        la      a3, __bss_start
-+        la      a4, __bss_end
-+        ble     a4, a3, clear_bss_done
-+clear_bss:
-+        REG_S   zero, (a3)
-+        add     a3, a3, RISCV_SZPTR
-+        blt     a3, a4, clear_bss
-+clear_bss_done:
-+
-         la      sp, cpu0_boot_stack
-         li      t0, STACK_SIZE
-         add     sp, sp, t0
+Oleksii Kurochko (3):
+  xen/riscv: read/save hart_id and dtb_base passed by bootloader
+  xen/riscv: initialize .bss section
+  xen/riscv: disable fpu
+
+ xen/arch/riscv/include/asm/asm.h |  4 ++++
+ xen/arch/riscv/riscv64/head.S    | 33 ++++++++++++++++++++++++++++++++
+ xen/arch/riscv/setup.c           | 11 ++++++++++-
+ 3 files changed, 47 insertions(+), 1 deletion(-)
+
 -- 
 2.39.0
 
