@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44342C6FA8E
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 16:31:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505233.777874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01917C7EE32
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 16:31:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505236.777903 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXlpx-0001FA-38; Thu, 02 Mar 2023 16:31:21 +0000
+	id 1pXlq1-00021v-TR; Thu, 02 Mar 2023 16:31:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505233.777874; Thu, 02 Mar 2023 16:31:21 +0000
+Received: by outflank-mailman (output) from mailman id 505236.777903; Thu, 02 Mar 2023 16:31:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXlpw-0001F3-UO; Thu, 02 Mar 2023 16:31:20 +0000
-Received: by outflank-mailman (input) for mailman id 505233;
- Thu, 02 Mar 2023 16:31:19 +0000
+	id 1pXlq1-00021h-Pn; Thu, 02 Mar 2023 16:31:25 +0000
+Received: by outflank-mailman (input) for mailman id 505236;
+ Thu, 02 Mar 2023 16:31:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=RuGR=62=redhat.com=thuth@srs-se1.protection.inumbo.net>)
- id 1pXlpv-0001EZ-Gx
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 16:31:19 +0000
+ id 1pXlq0-0001EZ-7J
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 16:31:24 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7f51748-b917-11ed-96ad-2f268f93b82a;
- Thu, 02 Mar 2023 17:31:18 +0100 (CET)
+ id ab694b36-b917-11ed-96ad-2f268f93b82a;
+ Thu, 02 Mar 2023 17:31:23 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-108-FfzftseYMeyd-EeORqC0WQ-1; Thu, 02 Mar 2023 11:31:11 -0500
+ us-mta-436-ljrgtJZkOLWCI0Dxai-ocQ-1; Thu, 02 Mar 2023 11:31:19 -0500
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
  [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8C87A18E0044;
- Thu,  2 Mar 2023 16:31:10 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 870D1802D38;
+ Thu,  2 Mar 2023 16:31:18 +0000 (UTC)
 Received: from thuth.com (unknown [10.39.192.93])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 31BB74010E86;
- Thu,  2 Mar 2023 16:31:08 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 443AE400EA93;
+ Thu,  2 Mar 2023 16:31:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7f51748-b917-11ed-96ad-2f268f93b82a
+X-Inumbo-ID: ab694b36-b917-11ed-96ad-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1677774676;
+	s=mimecast20190719; t=1677774682;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=ZDJm0qbzU2JdESu0wAQDuLmy0wi+765V7K8ePbWUcC0=;
-	b=V3+wmj8YSqjOd1osE0XfbG9T4nMYXdIXc+oEaNa2UeAbzTDoPB3m6hOH8yCqwbqS2p4rBr
-	zkipxEzoYCauWifJkKhLIFu6xxuOHCTwHq/hxR+9mlxXrH2qqjggtvcD1JOE03+2nrvO+E
-	b0Vpb0Id4pvYCIvkY86/4l3CYj4HtQ0=
-X-MC-Unique: FfzftseYMeyd-EeORqC0WQ-1
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UosB4aUxpi/5dWz6XRm7RMey1SsdH1cuc7g1it7tUeE=;
+	b=Co0OSiG7yh2Lw8ZV2THS+LjQmjMyh3ZwKRTSWTDu2WGq+XAhLCZ4CEgyqs973NnP8Sya+s
+	A7LBiSwSG5+B5KN7Tj/byfAqG3ZM7Fh7K5xHcgCI7lB5zxQaVFnJ6/e43cUPCNvlAbGAnO
+	kOv6Big/noLBZb6VhnC68NELRfLqFtw=
+X-MC-Unique: ljrgtJZkOLWCI0Dxai-ocQ-1
 From: Thomas Huth <thuth@redhat.com>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>,
@@ -76,50 +77,50 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	Richard Henderson <richard.henderson@linaro.org>,
 	xen-devel@lists.xenproject.org,
 	Reinoud Zandijk <reinoud@netbsd.org>
-Subject: [PATCH v2 0/6] Deprecate support for 32-bit x86 and arm hosts
-Date: Thu,  2 Mar 2023 17:31:00 +0100
-Message-Id: <20230302163106.465559-1-thuth@redhat.com>
+Subject: [PATCH v2 3/6] gitlab-ci.d/crossbuilds: Drop the i386 jobs
+Date: Thu,  2 Mar 2023 17:31:03 +0100
+Message-Id: <20230302163106.465559-4-thuth@redhat.com>
+In-Reply-To: <20230302163106.465559-1-thuth@redhat.com>
+References: <20230302163106.465559-1-thuth@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 
-We're struggling quite badly with our CI minutes on the shared
-gitlab runners, so we urgently need to think of ways to cut down
-our supported build and target environments. qemu-system-i386 and
-qemu-system-arm are not really required anymore, since nobody uses
-KVM on the corresponding systems for production anymore, and the
--x86_64 and -arch64 variants are a proper superset of those binaries.
-So it's time to deprecate them and the corresponding 32-bit host
-environments now.
+Hardly anybody still uses 32-bit x86 environments for running QEMU,
+so let's stop wasting our scarce CI minutes with these jobs.
 
-This is a follow-up patch series from the previous discussion here:
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ .gitlab-ci.d/crossbuilds.yml | 16 ----------------
+ 1 file changed, 16 deletions(-)
 
- https://lore.kernel.org/qemu-devel/20230130114428.1297295-1-thuth@redhat.com/
-
-where people still mentioned that there is still interest in certain
-support for 32-bit host hardware. But as far as I could see, there is
-no real need for 32-bit x86 host support and for system emulation on
-32-bit arm hosts anymore, so it should be fine if we drop these host
-environments soon (these are also the two architectures that contribute
-the most to the long test times in our CI, so we would benefit a lot by
-dropping those).
-
-v2:
-- Split binary and host deprecation into separate patches
-- Added patches to immediately drop the jobs from the CI
-
-Thomas Huth (6):
-  docs/about/deprecated: Deprecate the qemu-system-i386 binary
-  docs/about/deprecated: Deprecate 32-bit x86 hosts
-  gitlab-ci.d/crossbuilds: Drop the i386 jobs
-  docs/about/deprecated: Deprecate the qemu-system-arm binary
-  docs/about/deprecated: Deprecate 32-bit arm hosts
-  gitlab-ci.d/crossbuilds: Drop the 32-bit arm system emulation jobs
-
- docs/about/deprecated.rst    | 43 ++++++++++++++++++++++++++++++++++++
- .gitlab-ci.d/crossbuilds.yml | 30 -------------------------
- 2 files changed, 43 insertions(+), 30 deletions(-)
-
+diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
+index 101416080c..3ce51adf77 100644
+--- a/.gitlab-ci.d/crossbuilds.yml
++++ b/.gitlab-ci.d/crossbuilds.yml
+@@ -43,22 +43,6 @@ cross-arm64-user:
+   variables:
+     IMAGE: debian-arm64-cross
+ 
+-cross-i386-system:
+-  extends: .cross_system_build_job
+-  needs:
+-    job: i386-fedora-cross-container
+-  variables:
+-    IMAGE: fedora-i386-cross
+-    MAKE_CHECK_ARGS: check-qtest
+-
+-cross-i386-user:
+-  extends: .cross_user_build_job
+-  needs:
+-    job: i386-fedora-cross-container
+-  variables:
+-    IMAGE: fedora-i386-cross
+-    MAKE_CHECK_ARGS: check
+-
+ cross-i386-tci:
+   extends: .cross_accel_build_job
+   timeout: 60m
 -- 
 2.31.1
 
