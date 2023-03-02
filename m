@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CFCC83005
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE6CC7EE36
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 20:46:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505405.778199 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.505402.778183 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXppB-0005pf-Lq; Thu, 02 Mar 2023 20:46:49 +0000
+	id 1pXppA-0005Sy-CT; Thu, 02 Mar 2023 20:46:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505405.778199; Thu, 02 Mar 2023 20:46:49 +0000
+Received: by outflank-mailman (output) from mailman id 505402.778183; Thu, 02 Mar 2023 20:46:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXppB-0005mN-Cw; Thu, 02 Mar 2023 20:46:49 +0000
-Received: by outflank-mailman (input) for mailman id 505405;
- Thu, 02 Mar 2023 20:46:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pXppA-0005RZ-3a; Thu, 02 Mar 2023 20:46:48 +0000
+Received: by outflank-mailman (input) for mailman id 505402;
+ Thu, 02 Mar 2023 20:46:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IBoy=62=infradead.org=mcgrof@srs-se1.protection.inumbo.net>)
- id 1pXppA-0004ie-4J
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 20:46:48 +0000
+ id 1pXpp8-0004iE-Rm
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 20:46:46 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5709df2d-b93b-11ed-a550-8520e6686977;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 56ef370c-b93b-11ed-96ad-2f268f93b82a;
  Thu, 02 Mar 2023 21:46:44 +0100 (CET)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1pXpoc-003HXW-Pv; Thu, 02 Mar 2023 20:46:14 +0000
+ (Red Hat Linux)) id 1pXpoc-003HXO-Df; Thu, 02 Mar 2023 20:46:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 5709df2d-b93b-11ed-a550-8520e6686977
+X-Inumbo-ID: 56ef370c-b93b-11ed-96ad-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=b/ElRNVyLTcjLcjUYbTcuyx0KXFL0MQ9s53W3J7Nkdk=; b=JCk7vmd3WPk/eusfOMOFOK2REk
-	1XVuRYTKBgLvoHrvgM9QB8cHTbTgvan1wf+AtXio6deB/kkhZpQfQneT6nmVXKxIezrONKrOTELf3
-	rmCdFYzMHmg0TONwR5JS3VZ4zjWOMvXxjMFqyI6psWBRhwrNFSzKCozLL3Y7WMmT9MwO2epJUmMn1
-	nx1ETSbvwg/quZ3YXXD2gyOYG/pSUp1kP3DtHGRkmCdbO6zoWCzkVSo+qXR4XGbcXKmbNwBRWEY4U
-	V/tsgcudL0zXWPh1vuYy3EMUxTm83D/qlj7qqRLAlpw6hkLDL5UQ5XuwLQuQCuAhQx5o/qgOt8lew
-	PxDMLkug==;
+	bh=MXqH7HxuGUp4vr/6baVHWsjCOA7cvGA5MJGn2lYMgHY=; b=Wn18YuHvszFD95jKeWngGibMfk
+	m0dkZQ/T4wh0lgQnmNyqnPNU8wiR3wNNIOFAQ/uJApiYoYiCX6W4rfGp9dazoMtM2bwoM+0WBiCNC
+	Zufdri5+sD3Q341upVXgIu1muzt5P4Jq3In7jEXridJQdLINYWC/lbJZRuwwbCAPQbiRw2Gifn7PV
+	5l4S/BZ9ufO6qSJiEuCDouaynQw+hbOCQIXagyqfer/Tf0CgxPlq9N55pKEXLUt0GgP9bjK+YI+um
+	6CZGflx9Hg4Q3sGl2wesUq57AAJ6djo3BjCYRDNYjrv49f8LE+JOOtmq1J70LFUnI4mMWXgd2vQ2k
+	0Y7scWbg==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: ebiederm@xmission.com,
 	keescook@chromium.org,
@@ -88,9 +88,9 @@ Cc: j.granados@samsung.com,
 	openipmi-developer@lists.sourceforge.net,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 6/7] tty: simplify sysctl registration
-Date: Thu,  2 Mar 2023 12:46:11 -0800
-Message-Id: <20230302204612.782387-7-mcgrof@kernel.org>
+Subject: [PATCH 2/7] ipmi: simplify sysctl registration
+Date: Thu,  2 Mar 2023 12:46:07 -0800
+Message-Id: <20230302204612.782387-3-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20230302204612.782387-1-mcgrof@kernel.org>
 References: <20230302204612.782387-1-mcgrof@kernel.org>
@@ -99,51 +99,48 @@ Content-Transfer-Encoding: 8bit
 Sender: Luis Chamberlain <mcgrof@infradead.org>
 
 register_sysctl_table() is a deprecated compatibility wrapper.
-register_sysctl_init() can do the directory creation for you so just use
-that
+register_sysctl() can do the directory creation for you so just use
+that.
 
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- drivers/tty/tty_io.c | 20 +-------------------
- 1 file changed, 1 insertion(+), 19 deletions(-)
+ drivers/char/ipmi/ipmi_poweroff.c | 16 +---------------
+ 1 file changed, 1 insertion(+), 15 deletions(-)
 
-diff --git a/drivers/tty/tty_io.c b/drivers/tty/tty_io.c
-index 36fb945fdad4..766750e355ac 100644
---- a/drivers/tty/tty_io.c
-+++ b/drivers/tty/tty_io.c
-@@ -3614,31 +3614,13 @@ static struct ctl_table tty_table[] = {
+diff --git a/drivers/char/ipmi/ipmi_poweroff.c b/drivers/char/ipmi/ipmi_poweroff.c
+index 163ec9749e55..870659d91db2 100644
+--- a/drivers/char/ipmi/ipmi_poweroff.c
++++ b/drivers/char/ipmi/ipmi_poweroff.c
+@@ -659,20 +659,6 @@ static struct ctl_table ipmi_table[] = {
  	{ }
  };
  
--static struct ctl_table tty_dir_table[] = {
--	{
--		.procname	= "tty",
--		.mode		= 0555,
--		.child		= tty_table,
--	},
+-static struct ctl_table ipmi_dir_table[] = {
+-	{ .procname	= "ipmi",
+-	  .mode		= 0555,
+-	  .child	= ipmi_table },
 -	{ }
 -};
 -
--static struct ctl_table tty_root_table[] = {
--	{
--		.procname	= "dev",
--		.mode		= 0555,
--		.child		= tty_dir_table,
--	},
+-static struct ctl_table ipmi_root_table[] = {
+-	{ .procname	= "dev",
+-	  .mode		= 0555,
+-	  .child	= ipmi_dir_table },
 -	{ }
 -};
 -
- /*
-  * Ok, now we can initialize the rest of the tty devices and can count
-  * on memory allocations, interrupts etc..
-  */
- int __init tty_init(void)
- {
--	register_sysctl_table(tty_root_table);
-+	register_sysctl_init("dev/tty", tty_table);
- 	cdev_init(&tty_cdev, &tty_fops);
- 	if (cdev_add(&tty_cdev, MKDEV(TTYAUX_MAJOR, 0), 1) ||
- 	    register_chrdev_region(MKDEV(TTYAUX_MAJOR, 0), 1, "/dev/tty") < 0)
+ static struct ctl_table_header *ipmi_table_header;
+ #endif /* CONFIG_PROC_FS */
+ 
+@@ -689,7 +675,7 @@ static int __init ipmi_poweroff_init(void)
+ 		pr_info("Power cycle is enabled\n");
+ 
+ #ifdef CONFIG_PROC_FS
+-	ipmi_table_header = register_sysctl_table(ipmi_root_table);
++	ipmi_table_header = register_sysctl("dev/ipmi", ipmi_table);
+ 	if (!ipmi_table_header) {
+ 		pr_err("Unable to register powercycle sysctl\n");
+ 		rv = -ENOMEM;
 -- 
 2.39.1
 
