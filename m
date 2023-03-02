@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CF9C87FDD
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 20:46:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505404.778194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C51ADC7EE37
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 20:46:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505400.778159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXppB-0005fW-5X; Thu, 02 Mar 2023 20:46:49 +0000
+	id 1pXpp8-0004t6-Oe; Thu, 02 Mar 2023 20:46:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505404.778194; Thu, 02 Mar 2023 20:46:49 +0000
+Received: by outflank-mailman (output) from mailman id 505400.778159; Thu, 02 Mar 2023 20:46:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXppA-0005dN-Ry; Thu, 02 Mar 2023 20:46:48 +0000
-Received: by outflank-mailman (input) for mailman id 505404;
- Thu, 02 Mar 2023 20:46:48 +0000
+	id 1pXpp8-0004qh-IF; Thu, 02 Mar 2023 20:46:46 +0000
+Received: by outflank-mailman (input) for mailman id 505400;
+ Thu, 02 Mar 2023 20:46:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IBoy=62=infradead.org=mcgrof@srs-se1.protection.inumbo.net>)
- id 1pXpp9-0004iE-Ry
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 20:46:47 +0000
+ id 1pXpp7-0004iE-Rf
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 20:46:45 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:3::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 572d7d20-b93b-11ed-96ad-2f268f93b82a;
- Thu, 02 Mar 2023 21:46:44 +0100 (CET)
+ id 56b74eb2-b93b-11ed-96ad-2f268f93b82a;
+ Thu, 02 Mar 2023 21:46:43 +0100 (CET)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1pXpoc-003HXK-7q; Thu, 02 Mar 2023 20:46:14 +0000
+ (Red Hat Linux)) id 1pXpoc-003HXU-Mw; Thu, 02 Mar 2023 20:46:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 572d7d20-b93b-11ed-96ad-2f268f93b82a
+X-Inumbo-ID: 56b74eb2-b93b-11ed-96ad-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=3oCwpVDu4xcBlhkNHBH3geMu/7Wx6m5tuk0CiJ937us=; b=oPfHzWkN8o7ub3rjHyZDbsPtuV
-	7OLcJfzIoHmz3hIhOOr5kBrnrOOjnqx+vnDYKGEwImYtId4tJmI3hI7TmpRvol1qy0/js0LDSCCef
-	uYyVFwuRIv+72rBzXJJL0naQqm1tyQKKt/2w75lq7w6OQGgJpvTeV7VQJ6LrUilaqMDLDtvyolKf8
-	0avj6KHqtDh0Bz8fQ0U6V+osbmh5p1GVtHHfZTjtL/mGvYZwDVOByysy24tuupVVhYrVm+iTXMJtH
-	iifnMDagP5WH4KcQAHvfQb48U1z36CnTuk+x2Iz2ihBwpYE8DEkqJb+70NXox4icRbETMcGAnJpzt
-	8LnDrLzQ==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=71lfCsPo7yFKiIAEzb7+CVhOSJuKqCJLiCYyMEP1nX8=; b=p6Yel5Hfld+1FW2EBNV5366POq
+	vJPcZmFCSoBMiHWsnzV+jFaz/uDjYDZKCSMVih6k7yTXZeK0esG+XoqGZm9PRwj7XoUWz1rJk2q/E
+	W+/FxaL2XVpQFgwiqiS/BLSFmuYGCiJ2RytjR/MyXk6RSB5u/Gb6pD9cbTP3FOuh/IUlWNVZg9nlC
+	ae1SW5g3A+R91mMBWyCJsTKqh3vMrYlSFc91+9y4TqjqjC2hXi5zZKAl59br57tm1NS/Si0Gk8WIN
+	4LHLL8b5jmRCk45aZvhVhNvYHw+agvS23gBr87drZJxFTEPUWGT0jgdOq4ItcyYm6kfRP8hHNOmNG
+	e/bvQgIQ==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: ebiederm@xmission.com,
 	keescook@chromium.org,
@@ -88,71 +88,102 @@ Cc: j.granados@samsung.com,
 	openipmi-developer@lists.sourceforge.net,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 0/7] sysctl: slowly deprecate register_sysctl_table()
-Date: Thu,  2 Mar 2023 12:46:05 -0800
-Message-Id: <20230302204612.782387-1-mcgrof@kernel.org>
+Subject: [PATCH 5/7] sgi-xp: simplify sysctl registration
+Date: Thu,  2 Mar 2023 12:46:10 -0800
+Message-Id: <20230302204612.782387-6-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20230302204612.782387-1-mcgrof@kernel.org>
+References: <20230302204612.782387-1-mcgrof@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Luis Chamberlain <mcgrof@infradead.org>
 
-As the large array of sysctls in kernel/sysctl.c is reduced we get to
-the point of wanting to optimize how we register sysctls by only dealing
-with flat simple structures, with no subdirectories. In particular the
-last empty element should not be needed. We'll get there, and save some
-memory, but as we move forward that path will be come the more relevant
-path to use in the sysctl registration. It is much simpler as it avoids
-recursion.
+Although this driver is a good use case for having a directory
+that is not other directories and then subdirectories with more
+entries, the usage of register_sysctl_table() can recurse and
+increases complexity so to avoid that just split out the
+registration to each directory with its own entries.
 
-Turns out we can also convert existing users of register_sysctl_table()
-which just need their subdirectories created for them. This effort
-addresses most users of register_sysctl_table() in drivers/ except
-parport -- that needs a bit more review.
+register_sysctl_table() is a deprecated compatibility wrapper.
+register_sysctl() can do the directory creation for you so just use
+that.
 
-This is part of the process to deprecate older sysctl users which uses
-APIs which can incur recursion, but don't need it [0]. This is the
-second effort.
+Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
+---
+ drivers/misc/sgi-xp/xpc_main.c | 24 ++++++++++--------------
+ 1 file changed, 10 insertions(+), 14 deletions(-)
 
-Yes -- we'll get to the point *each* of these conversions means saving
-one empty syctl, but that change needs a bit more careful review before
-merging. But since these conversion are also deleting tables for
-subdirectories, the delta in size of the kernel should not incrase
-really.
-
-The most complex change is the sgi-xp change which does deal with
-a case where we have a subdirectory with an entry, I just split
-that in two registrations. No point in keeping recursion just for
-a few minor if we can simplify code around. More eyeballs / review /
-testing on that change is appreciated.
-
-Sending these out early so they can get tested properly early on
-linux-next. I'm happy to take these via sysctl-next [0] but since
-I don' think register_sysctl_table() will be nuked on v6.4 I think
-it's fine for each of these to go into each respective tree. I can
-pick up last stragglers on sysctl-next. If you want me to take this
-via sysctl-next too, just let me know and I'm happy to do that. Either
-way works.
-
-[0] https://lkml.kernel.org/r/20230302202826.776286-1-mcgrof@kernel.org
-
-Luis Chamberlain (7):
-  scsi: simplify sysctl registration with register_sysctl()
-  ipmi: simplify sysctl registration
-  hv: simplify sysctl registration
-  md: simplify sysctl registration
-  sgi-xp: simplify sysctl registration
-  tty: simplify sysctl registration
-  xen: simplify sysctl registration for balloon
-
- drivers/char/ipmi/ipmi_poweroff.c | 16 +---------------
- drivers/hv/vmbus_drv.c            | 11 +----------
- drivers/md/md.c                   | 22 +---------------------
- drivers/misc/sgi-xp/xpc_main.c    | 24 ++++++++++--------------
- drivers/scsi/scsi_sysctl.c        | 16 +---------------
- drivers/tty/tty_io.c              | 20 +-------------------
- drivers/xen/balloon.c             | 20 +-------------------
- 7 files changed, 16 insertions(+), 113 deletions(-)
-
+diff --git a/drivers/misc/sgi-xp/xpc_main.c b/drivers/misc/sgi-xp/xpc_main.c
+index b2c3c22fc13c..6da509d692bb 100644
+--- a/drivers/misc/sgi-xp/xpc_main.c
++++ b/drivers/misc/sgi-xp/xpc_main.c
+@@ -93,7 +93,7 @@ int xpc_disengage_timelimit = XPC_DISENGAGE_DEFAULT_TIMELIMIT;
+ static int xpc_disengage_min_timelimit;	/* = 0 */
+ static int xpc_disengage_max_timelimit = 120;
+ 
+-static struct ctl_table xpc_sys_xpc_hb_dir[] = {
++static struct ctl_table xpc_sys_xpc_hb[] = {
+ 	{
+ 	 .procname = "hb_interval",
+ 	 .data = &xpc_hb_interval,
+@@ -112,11 +112,7 @@ static struct ctl_table xpc_sys_xpc_hb_dir[] = {
+ 	 .extra2 = &xpc_hb_check_max_interval},
+ 	{}
+ };
+-static struct ctl_table xpc_sys_xpc_dir[] = {
+-	{
+-	 .procname = "hb",
+-	 .mode = 0555,
+-	 .child = xpc_sys_xpc_hb_dir},
++static struct ctl_table xpc_sys_xpc[] = {
+ 	{
+ 	 .procname = "disengage_timelimit",
+ 	 .data = &xpc_disengage_timelimit,
+@@ -127,14 +123,9 @@ static struct ctl_table xpc_sys_xpc_dir[] = {
+ 	 .extra2 = &xpc_disengage_max_timelimit},
+ 	{}
+ };
+-static struct ctl_table xpc_sys_dir[] = {
+-	{
+-	 .procname = "xpc",
+-	 .mode = 0555,
+-	 .child = xpc_sys_xpc_dir},
+-	{}
+-};
++
+ static struct ctl_table_header *xpc_sysctl;
++static struct ctl_table_header *xpc_sysctl_hb;
+ 
+ /* non-zero if any remote partition disengage was timed out */
+ int xpc_disengage_timedout;
+@@ -1041,6 +1032,8 @@ xpc_do_exit(enum xp_retval reason)
+ 
+ 	if (xpc_sysctl)
+ 		unregister_sysctl_table(xpc_sysctl);
++	if (xpc_sysctl_hb)
++		unregister_sysctl_table(xpc_sysctl_hb);
+ 
+ 	xpc_teardown_partitions();
+ 
+@@ -1243,7 +1236,8 @@ xpc_init(void)
+ 		goto out_1;
+ 	}
+ 
+-	xpc_sysctl = register_sysctl_table(xpc_sys_dir);
++	xpc_sysctl = register_sysctl("xpc", xpc_sys_xpc);
++	xpc_sysctl_hb = register_sysctl("xpc/hb", xpc_sys_xpc_hb);
+ 
+ 	/*
+ 	 * Fill the partition reserved page with the information needed by
+@@ -1308,6 +1302,8 @@ xpc_init(void)
+ 	(void)unregister_die_notifier(&xpc_die_notifier);
+ 	(void)unregister_reboot_notifier(&xpc_reboot_notifier);
+ out_2:
++	if (xpc_sysctl_hb)
++		unregister_sysctl_table(xpc_sysctl_hb);
+ 	if (xpc_sysctl)
+ 		unregister_sysctl_table(xpc_sysctl);
+ 
 -- 
 2.39.1
 
