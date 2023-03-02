@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C60AC6FA8E
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 14:55:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.504988.777480 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 275F4C6FA8E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 14:59:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.504998.777504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkKv-0008IQ-J8; Thu, 02 Mar 2023 14:55:13 +0000
+	id 1pXkOz-00016E-OZ; Thu, 02 Mar 2023 14:59:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 504988.777480; Thu, 02 Mar 2023 14:55:13 +0000
+Received: by outflank-mailman (output) from mailman id 504998.777504; Thu, 02 Mar 2023 14:59:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkKv-0008II-F7; Thu, 02 Mar 2023 14:55:13 +0000
-Received: by outflank-mailman (input) for mailman id 504988;
- Thu, 02 Mar 2023 14:55:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5rfr=62=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pXkKu-0008HR-Lj
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 14:55:12 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3acb4e16-b90a-11ed-a550-8520e6686977;
- Thu, 02 Mar 2023 15:55:10 +0100 (CET)
-Received: by mail-lf1-x133.google.com with SMTP id i9so22471888lfc.6
- for <xen-devel@lists.xenproject.org>; Thu, 02 Mar 2023 06:55:10 -0800 (PST)
-Received: from [192.168.8.114] (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
- [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
- m4-20020a195204000000b004d023090504sm2143283lfb.84.2023.03.02.06.55.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 06:55:09 -0800 (PST)
+	id 1pXkOz-00014h-It; Thu, 02 Mar 2023 14:59:25 +0000
+Received: by outflank-mailman (input) for mailman id 504998;
+ Thu, 02 Mar 2023 14:59:24 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1pXkOy-0000vO-GH
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 14:59:24 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pXkOy-0003gi-79; Thu, 02 Mar 2023 14:59:24 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1pXkOx-0003fg-Vo; Thu, 02 Mar 2023 14:59:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,154 +42,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3acb4e16-b90a-11ed-a550-8520e6686977
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677768910;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=LaPa202ZbYeI1r6tXlRRzL0J9HxRdYo4iVkR3jD4HjA=;
-        b=T+IAnSmtyL+OkhtJ1OgpcNSN8xXpeprWcXUGakJfLvEa/iXpYgrUC1/RgixtZtlANu
-         phBsns+WBrCqS6XIrIfzRq6azdSvRLVMjkWZKoujwDxBd5ZIoNJBRknc4ZPqpSzYRfKM
-         0w26Xd8rDifH58D1nIFBa058LEF0P69pjol01fJBeyCaDvjB+XY3kv27gLWZePvzP5P1
-         nnJLc1p3Vq55MWwchoPDUUMtoczinXsMcc246F2fabR3UNq2Z+zRtmxntiCXk8Njg5UK
-         7UFtzeoXhz4tQpvIFykbFndqAIrdDmQNluQB5+ldmBvj5Negz6o70NdPhgKEoC90S4/p
-         UGEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677768910;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=LaPa202ZbYeI1r6tXlRRzL0J9HxRdYo4iVkR3jD4HjA=;
-        b=a6DN2TmEb0E9vGl1h2cBy0XGlNwPrmpNQxPGCG+yOdRbwcHwe7g13VhFzsq9Q01iPP
-         hQ/sFbSoa+rMXg8YfSMT2i9g8CGJiBYnwBXtYZE0u80FhWJLNMwJFziXBQN43VKL6WRI
-         OcgZ4qSen5vBAD8z31m9U2ARW9WBm1LPhXQERpOJCc6d3GU7uruKmI+DJm6jCC0Xg+jc
-         /FwjGMa+J0Gx451ZXe0vFILGRaPeKm8LBC3TgWg02DEOcmmh8n4TEJCk8HuM4FY+Xtfr
-         BYncsgRiUCInHGwco8MdVy3KpPwaeIeG2YZrhVPrzKK/Url0inyKLoFAYXOmibx5RGmB
-         4nxg==
-X-Gm-Message-State: AO0yUKU7LslUulEYULH7lUTSmzecdXOpHeVD7MPu0WppLwOOA9dVMNb1
-	J2j9HGmsmlFpIKSe/sndYhk=
-X-Google-Smtp-Source: AK7set8qSxU5P0J9z16Ui8IVYEfIILkxvbd02qCp6OcGvQ7qUbcIv90OT3+/npy/vvC4Ad6HTsiBVA==
-X-Received: by 2002:a19:5213:0:b0:4d5:a689:e965 with SMTP id m19-20020a195213000000b004d5a689e965mr2789439lfb.51.1677768910277;
-        Thu, 02 Mar 2023 06:55:10 -0800 (PST)
-Message-ID: <2f64e60244a0c549f20782e5f57c3ff3c558736d.camel@gmail.com>
-Subject: Re: [PATCH v2 2/3] xen/riscv: initialize .bss section
-From: Oleksii <oleksii.kurochko@gmail.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>,  Gianluca Guida <gianluca@rivosinc.com>, Bob
- Eshleman <bobbyeshleman@gmail.com>, Alistair Francis
- <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>
-Date: Thu, 02 Mar 2023 16:55:08 +0200
-In-Reply-To: <092579ae-edcc-f04b-b9ab-fc97b78d0053@citrix.com>
-References: <cover.1677762812.git.oleksii.kurochko@gmail.com>
-	 <495bd1d7fc2becdd48bd00253c079971e2231e99.1677762812.git.oleksii.kurochko@gmail.com>
-	 <092579ae-edcc-f04b-b9ab-fc97b78d0053@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=/n8KYlwi0MikL9iUN4q3hKRMxMaEy9Jaay2HH6/vWUI=; b=P5qac8HkPhEzQGdxNTwSPgR0BD
+	c+p88wl6bvMhLtmPSX/cRJ8Zi9LYZy/O6+Me4mm7aHKS2rsNuPpiqOzJb5WKFKFkc0+E8Zu+d92Sv
+	dk4TiaAx9DCuJE3x/XE7r+uA7Pw+V2PaYzPEpPubMlwzmWWNlk3GZ3JsQP3kuQfb1kDo=;
+From: Julien Grall <julien@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Luca.Fancellu@arm.com,
+	michal.orzel@amd.com,
+	Julien Grall <jgrall@amazon.com>,
+	Luca Fancellu <luca.fancellu@arm.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v6 2/5] xen/arm64: Rework the memory layout
+Date: Thu,  2 Mar 2023 14:59:13 +0000
+Message-Id: <20230302145916.44035-3-julien@xen.org>
+X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230302145916.44035-1-julien@xen.org>
+References: <20230302145916.44035-1-julien@xen.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2023-03-02 at 14:12 +0000, Andrew Cooper wrote:
-> On 02/03/2023 1:23 pm, Oleksii Kurochko wrote:
-> > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> > ---
-> > Changes since v1:
-> > =C2=A0* initialization of .bss was moved to head.S
-> > ---
-> > =C2=A0xen/arch/riscv/include/asm/asm.h | 4 ++++
-> > =C2=A0xen/arch/riscv/riscv64/head.S=C2=A0=C2=A0=C2=A0 | 9 +++++++++
-> > =C2=A02 files changed, 13 insertions(+)
-> >=20
-> > diff --git a/xen/arch/riscv/include/asm/asm.h
-> > b/xen/arch/riscv/include/asm/asm.h
-> > index 6d426ecea7..5208529cb4 100644
-> > --- a/xen/arch/riscv/include/asm/asm.h
-> > +++ b/xen/arch/riscv/include/asm/asm.h
-> > @@ -26,14 +26,18 @@
-> > =C2=A0#if __SIZEOF_POINTER__ =3D=3D 8
-> > =C2=A0#ifdef __ASSEMBLY__
-> > =C2=A0#define RISCV_PTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.dword
-> > +#define RISCV_SZPTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A08
-> > =C2=A0#else
-> > =C2=A0#define RISCV_PTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0".dword"
-> > +#define RISCV_SZPTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A08
-> > =C2=A0#endif
-> > =C2=A0#elif __SIZEOF_POINTER__ =3D=3D 4
-> > =C2=A0#ifdef __ASSEMBLY__
-> > =C2=A0#define RISCV_PTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.word
-> > +#define RISCV_SZPTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A04
-> > =C2=A0#else
-> > =C2=A0#define RISCV_PTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0".word"
-> > +#define RISCV_SZPTR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A04
->=20
-> This an extremely verbose way of saying that __SIZEOF_POINTER__ is
-> the
-> right value to use...
->=20
-> Just drop the change here.=C2=A0 The code is better without this
-> indirection.
->=20
-> > =C2=A0#endif
-> > =C2=A0#else
-> > =C2=A0#error "Unexpected __SIZEOF_POINTER__"
-> > diff --git a/xen/arch/riscv/riscv64/head.S
-> > b/xen/arch/riscv/riscv64/head.S
-> > index 851b4691a5..b139976b7a 100644
-> > --- a/xen/arch/riscv/riscv64/head.S
-> > +++ b/xen/arch/riscv/riscv64/head.S
-> > @@ -13,6 +13,15 @@ ENTRY(start)
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lla=C2=A0=C2=A0=C2=A0=
-=C2=A0 a6, _dtb_base
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 REG_S=C2=A0=C2=A0 a1, =
-(a6)
-> > =C2=A0
->=20
-> /* Clear the BSS */
->=20
-> The comments (even just oneliners) will become increasingly useful as
-> the logic here grows.
->=20
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 a3, __bss_start
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 a4, __bss_end
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ble=C2=A0=C2=A0=C2=A0=C2=A0=
- a4, a3, clear_bss_done
-> > +clear_bss:
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 REG_S=C2=A0=C2=A0 zero, (a3=
-)
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=C2=A0=
- a3, a3, RISCV_SZPTR
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 blt=C2=A0=C2=A0=C2=A0=C2=A0=
- a3, a4, clear_bss
-> > +clear_bss_done:
->=20
-> You should use t's here, not a's.=C2=A0 What we are doing here is
-> temporary
-> and not constructing arguments to a function.=C2=A0 Furthermore we want t=
-o
-> preserve the a's where possible to avoid spilling the parameters.
->=20
-> Finally, the symbols should have an .L_ prefix to make the local
-> symbols.
->=20
-> It really doesn't matter now, but will when you're retrofitting elf
-> metadata to asm code to make livepatching work.=C2=A0 (I'm doing this on
-> x86
-> and it would have been easier if people had written the code nicely
-> the
-> first time around.)
-Thanks. I'll update the code.
->=20
-> ~Andrew
+From: Julien Grall <jgrall@amazon.com>
+
+Xen is currently not fully compliant with the Arm Arm because it will
+switch the TTBR with the MMU on.
+
+In order to be compliant, we need to disable the MMU before
+switching the TTBR. The implication is the page-tables should
+contain an identity mapping of the code switching the TTBR.
+
+In most of the case we expect Xen to be loaded in low memory. I am aware
+of one platform (i.e AMD Seattle) where the memory start above 512GB.
+To give us some slack, consider that Xen may be loaded in the first 2TB
+of the physical address space.
+
+The memory layout is reshuffled to keep the first four slots of the zeroeth
+level free. Xen will now be loaded at (2TB + 2MB). This requires a slight
+tweak of the boot code because XEN_VIRT_START cannot be used as an
+immediate.
+
+This reshuffle will make trivial to create a 1:1 mapping when Xen is
+loaded below 2TB.
+
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Tested-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+
+----
+    Changes in v6:
+        - Correct the BUILD_BUG_ON(), Xen virtual address should be
+          above 2TB (i.e. slot0 > 4).
+        - Add Bertrand's reviewed-by
+
+    Changes in v5:
+        - We are reserving 4 slots rather than 2.
+        - Fix the addresses in the layout comment.
+        - Fix the size of the region in the layout comment
+        - Add Luca's tested-by (the reviewed-by was not added
+          because of the changes requested by Michal
+        - Add Michal's reviewed-by
+
+    Changes in v4:
+        - Correct the documentation
+        - The start address is 2TB, so slot0 is 4 not 2.
+
+    Changes in v2:
+        - Reword the commit message
+        - Load Xen at 2TB + 2MB
+        - Update the documentation to reflect the new layout
+---
+ xen/arch/arm/arm64/head.S         |  3 ++-
+ xen/arch/arm/include/asm/config.h | 34 +++++++++++++++++++++----------
+ xen/arch/arm/mm.c                 | 11 +++++-----
+ 3 files changed, 31 insertions(+), 17 deletions(-)
+
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 4a3f87117c83..663f5813b12e 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -607,7 +607,8 @@ create_page_tables:
+          * need an additional 1:1 mapping, the virtual mapping will
+          * suffice.
+          */
+-        cmp   x19, #XEN_VIRT_START
++        ldr   x0, =XEN_VIRT_START
++        cmp   x19, x0
+         bne   1f
+         ret
+ 1:
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index 5df0e4c4959b..e388462c23d1 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -72,16 +72,13 @@
+ #include <xen/page-size.h>
+ 
+ /*
+- * Common ARM32 and ARM64 layout:
++ * ARM32 layout:
+  *   0  -   2M   Unmapped
+  *   2M -   4M   Xen text, data, bss
+  *   4M -   6M   Fixmap: special-purpose 4K mapping slots
+  *   6M -  10M   Early boot mapping of FDT
+  *   10M - 12M   Livepatch vmap (if compiled in)
+  *
+- * ARM32 layout:
+- *   0  -  12M   <COMMON>
+- *
+  *  32M - 128M   Frametable: 32 bytes per page for 12GB of RAM
+  * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
+  *                    space
+@@ -90,14 +87,23 @@
+  *   2G -   4G   Domheap: on-demand-mapped
+  *
+  * ARM64 layout:
+- * 0x0000000000000000 - 0x0000007fffffffff (512GB, L0 slot [0])
+- *   0  -  12M   <COMMON>
++ * 0x0000000000000000 - 0x000001ffffffffff (2TB, L0 slots [0..3])
++ *
++ *  Reserved to identity map Xen
++ *
++ * 0x0000020000000000 - 0x0000027fffffffff (512GB, L0 slot [4]
++ *  (Relative offsets)
++ *   0  -   2M   Unmapped
++ *   2M -   4M   Xen text, data, bss
++ *   4M -   6M   Fixmap: special-purpose 4K mapping slots
++ *   6M -  10M   Early boot mapping of FDT
++ *  10M -  12M   Livepatch vmap (if compiled in)
+  *
+  *   1G -   2G   VMAP: ioremap and early_ioremap
+  *
+  *  32G -  64G   Frametable: 56 bytes per page for 2TB of RAM
+  *
+- * 0x0000008000000000 - 0x00007fffffffffff (127.5TB, L0 slots [1..255])
++ * 0x0000028000000000 - 0x00007fffffffffff (125TB, L0 slots [5..255])
+  *  Unused
+  *
+  * 0x0000800000000000 - 0x000084ffffffffff (5TB, L0 slots [256..265])
+@@ -107,7 +113,17 @@
+  *  Unused
+  */
+ 
++#ifdef CONFIG_ARM_32
+ #define XEN_VIRT_START          _AT(vaddr_t, MB(2))
++#else
++
++#define SLOT0_ENTRY_BITS  39
++#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
++#define SLOT0_ENTRY_SIZE  SLOT0(1)
++
++#define XEN_VIRT_START          (SLOT0(4) + _AT(vaddr_t, MB(2)))
++#endif
++
+ #define XEN_VIRT_SIZE           _AT(vaddr_t, MB(2))
+ 
+ #define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
+@@ -163,10 +179,6 @@
+ 
+ #else /* ARM_64 */
+ 
+-#define SLOT0_ENTRY_BITS  39
+-#define SLOT0(slot) (_AT(vaddr_t,slot) << SLOT0_ENTRY_BITS)
+-#define SLOT0_ENTRY_SIZE  SLOT0(1)
+-
+ #define VMAP_VIRT_START  GB(1)
+ #define VMAP_VIRT_SIZE   GB(1)
+ 
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index f758cad545fa..9263fedc3b7d 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -153,7 +153,7 @@ static void __init __maybe_unused build_assertions(void)
+ #endif
+     /* Page table structure constraints */
+ #ifdef CONFIG_ARM_64
+-    BUILD_BUG_ON(zeroeth_table_offset(XEN_VIRT_START));
++    BUILD_BUG_ON(zeroeth_table_offset(XEN_VIRT_START) < 4);
+ #endif
+     BUILD_BUG_ON(first_table_offset(XEN_VIRT_START));
+ #ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
+@@ -496,10 +496,11 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+     phys_offset = boot_phys_offset;
+ 
+ #ifdef CONFIG_ARM_64
+-    p = (void *) xen_pgtable;
+-    p[0] = pte_of_xenaddr((uintptr_t)xen_first);
+-    p[0].pt.table = 1;
+-    p[0].pt.xn = 0;
++    pte = pte_of_xenaddr((uintptr_t)xen_first);
++    pte.pt.table = 1;
++    pte.pt.xn = 0;
++    xen_pgtable[zeroeth_table_offset(XEN_VIRT_START)] = pte;
++
+     p = (void *) xen_first;
+ #else
+     p = (void *) cpu0_pgtable;
+-- 
+2.39.1
 
 
