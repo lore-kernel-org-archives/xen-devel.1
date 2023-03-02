@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D273C7EE2F
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 14:59:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.504996.777489 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA19C7EE36
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Mar 2023 14:59:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505000.777530 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkOy-0000nK-5W; Thu, 02 Mar 2023 14:59:24 +0000
+	id 1pXkP1-0001k9-Ir; Thu, 02 Mar 2023 14:59:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 504996.777489; Thu, 02 Mar 2023 14:59:24 +0000
+Received: by outflank-mailman (output) from mailman id 505000.777530; Thu, 02 Mar 2023 14:59:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pXkOy-0000nD-2w; Thu, 02 Mar 2023 14:59:24 +0000
-Received: by outflank-mailman (input) for mailman id 504996;
- Thu, 02 Mar 2023 14:59:22 +0000
+	id 1pXkP1-0001it-Bf; Thu, 02 Mar 2023 14:59:27 +0000
+Received: by outflank-mailman (input) for mailman id 505000;
+ Thu, 02 Mar 2023 14:59:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pXkOw-0000n1-NF
- for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 14:59:22 +0000
+ (envelope-from <julien@xen.org>) id 1pXkP0-0001Eg-68
+ for xen-devel@lists.xenproject.org; Thu, 02 Mar 2023 14:59:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1pXkOw-0003gU-EV; Thu, 02 Mar 2023 14:59:22 +0000
+ id 1pXkP0-0003h4-1c; Thu, 02 Mar 2023 14:59:26 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1pXkOw-0003fg-4o; Thu, 02 Mar 2023 14:59:22 +0000
+ id 1pXkOz-0003fg-QV; Thu, 02 Mar 2023 14:59:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,97 +43,225 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
-	Subject:Cc:To:From; bh=Ou0y2DPaJpJuZcAxiK0GR7U1F/WjejWjy31ZHZ0yXYo=; b=swoMIv
-	4J+Ynm+wqoNqElVyyNS115RlxTZuVXsC9PYcjum//XBhDFYO0ysYtNWNnq0OK3EufMtzSTDYxuB5g
-	yvb6goRbOuFeVZhQ2igggONTrXhrNVJHUZbIKM1icMppeNByc+EIWucitAmY/J0QZpJSvqwP39Kw3
-	zSh1fPs193c=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=BmjURXf84YUJiKB9eOEY0h/Bknfj426Ddbz4nR7ogr0=; b=woauhNkEfOdiggkhgovC1HVXNG
+	cnNhXaFKcfichNxjReIXa/wHDRfstxok/T68Zfbg0yRKjCW4w7WD9n7HYFGswuwF/icsrXuJqa/jZ
+	wLWk80bh6X6ZaObqtzNx7Zz6fxiGRECU2irGzbeVsrfn2D+LLmDbrF6QGWDOwZ3OvsFA=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
 	michal.orzel@amd.com,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v6 0/5] xen/arm: Don't switch TTBR while the MMU is on
-Date: Thu,  2 Mar 2023 14:59:11 +0000
-Message-Id: <20230302145916.44035-1-julien@xen.org>
+	Julien Grall <jgrall@amazon.com>,
+	Luca Fancellu <luca.fancellu@arm.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v6 4/5] xen/arm64: mm: Rework switch_ttbr()
+Date: Thu,  2 Mar 2023 14:59:15 +0000
+Message-Id: <20230302145916.44035-5-julien@xen.org>
 X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230302145916.44035-1-julien@xen.org>
+References: <20230302145916.44035-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+At the moment, switch_ttbr() is switching the TTBR whilst the MMU is
+still on.
 
-Currently, Xen on Arm will switch TTBR whilst the MMU is on. This is
-similar to replacing existing mappings with new ones. So we need to
-follow a break-before-make sequence.
+Switching TTBR is like replacing existing mappings with new ones. So
+we need to follow the break-before-make sequence.
 
-When switching the TTBR, we need to temporarily disable the MMU
-before updating the TTBR. This means the page-tables must contain an
-identity mapping.
+In this case, it means the MMU needs to be switched off while the
+TTBR is updated. In order to disable the MMU, we need to first
+jump to an identity mapping.
 
-The current memory layout is not very flexible and has an higher chance
-to clash with the identity mapping.
+Rename switch_ttbr() to switch_ttbr_id() and create an helper on
+top to temporary map the identity mapping and call switch_ttbr()
+via the identity address.
 
-On Arm64, we have plenty of unused virtual address space Therefore, we can
-simply reshuffle the layout to leave the first part of the virtual
-address space empty.
+switch_ttbr_id() is now reworked to temporarily turn off the MMU
+before updating the TTBR.
 
-On Arm32, the virtual address space is already quite full. Even if we
-find space, it would be necessary to have a dynamic layout. So a
-different approach will be necessary. The chosen one is to have
-a temporary mapping that will be used to jumped from the ID mapping
-to the runtime mapping (or vice versa). The temporary mapping will
-be overlapping with the domheap area as it should not be used when
-switching on/off the MMU.
+We also need to make sure the helper switch_ttbr() is part of the
+identity mapping. So move _end_boot past it.
 
-The Arm32 part is not yet addressed and will be handled in a follow-up
-series.
+The arm32 code will use a different approach. So this issue is for now
+only resolved on arm64.
 
-After this series, most of Xen page-table code should be compliant
-with the Arm Arm. The last two issues I am aware of are:
- - domheap: Mappings are replaced without using the Break-Before-Make
-   approach.
- - The cache is not cleaned/invalidated when updating the page-tables
-   with Data cache off (like during early boot).
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+Tested-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-The long term plan is to get rid of boot_* page tables and then
-directly use the runtime pages. This means for coloring, we will
-need to build the pages in the relocated Xen rather than the current
-Xen.
+----
+    Changes in v6:
+        - Add Michal's reviewed-by tag
+        - Add Bertrand's reviewed-by tag
 
-For convience, I pushed a branch with everything applied:
+    Changes in v5:
+        - Add a newline in switch_ttbr()
+        - Add Luca's reviewed-by and tested-by
 
-https://xenbits.xen.org/git-http/people/julieng/xen-unstable.git
-branch boot-pt-rework-v6
+    Changes in v4:
+        - Don't modify setup_pagetables() as we don't handle arm32.
+        - Move the clearing of the boot page tables in an earlier patch
+        - Fix the numbering
 
-Cheers,
+    Changes in v2:
+        - Remove the arm32 changes. This will be addressed differently
+        - Re-instate the instruct cache flush. This is not strictly
+          necessary but kept it for safety.
+        - Use "dsb ish"  rather than "dsb sy".
 
-Julien Grall (5):
-  xen/arm32: head: Widen the use of the temporary mapping
-  xen/arm64: Rework the memory layout
-  xen/arm64: mm: Introduce helpers to prepare/enable/disable the
-    identity mapping
-  xen/arm64: mm: Rework switch_ttbr()
-  xen/arm64: smpboot: Directly switch to the runtime page-tables
 
- xen/arch/arm/arm32/head.S           |  86 +++------------
- xen/arch/arm/arm32/smpboot.c        |   4 +
- xen/arch/arm/arm64/Makefile         |   1 +
- xen/arch/arm/arm64/head.S           |  82 +++++++-------
- xen/arch/arm/arm64/mm.c             | 161 ++++++++++++++++++++++++++++
- xen/arch/arm/arm64/smpboot.c        |  15 ++-
- xen/arch/arm/include/asm/arm32/mm.h |   4 +
- xen/arch/arm/include/asm/arm64/mm.h |  13 +++
- xen/arch/arm/include/asm/config.h   |  34 ++++--
- xen/arch/arm/include/asm/mm.h       |   2 +
- xen/arch/arm/include/asm/setup.h    |  11 ++
- xen/arch/arm/include/asm/smp.h      |   1 +
- xen/arch/arm/mm.c                   |  19 ++--
- xen/arch/arm/smpboot.c              |   1 +
- 14 files changed, 306 insertions(+), 128 deletions(-)
- create mode 100644 xen/arch/arm/arm64/mm.c
+    TODO:
+        * Handle the case where the runtime Xen is loaded at a different
+          position for cache coloring. This will be dealt separately.
+---
+ xen/arch/arm/arm64/head.S     | 50 +++++++++++++++++++++++------------
+ xen/arch/arm/arm64/mm.c       | 31 ++++++++++++++++++++++
+ xen/arch/arm/include/asm/mm.h |  2 ++
+ xen/arch/arm/mm.c             |  2 --
+ 4 files changed, 66 insertions(+), 19 deletions(-)
 
+diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+index 663f5813b12e..5efd442b24af 100644
+--- a/xen/arch/arm/arm64/head.S
++++ b/xen/arch/arm/arm64/head.S
+@@ -816,30 +816,46 @@ ENDPROC(fail)
+  * Switch TTBR
+  *
+  * x0    ttbr
+- *
+- * TODO: This code does not comply with break-before-make.
+  */
+-ENTRY(switch_ttbr)
+-        dsb   sy                     /* Ensure the flushes happen before
+-                                      * continuing */
+-        isb                          /* Ensure synchronization with previous
+-                                      * changes to text */
+-        tlbi   alle2                 /* Flush hypervisor TLB */
+-        ic     iallu                 /* Flush I-cache */
+-        dsb    sy                    /* Ensure completion of TLB flush */
++ENTRY(switch_ttbr_id)
++        /* 1) Ensure any previous read/write have completed */
++        dsb    ish
++        isb
++
++        /* 2) Turn off MMU */
++        mrs    x1, SCTLR_EL2
++        bic    x1, x1, #SCTLR_Axx_ELx_M
++        msr    SCTLR_EL2, x1
++        isb
++
++        /*
++         * 3) Flush the TLBs.
++         * See asm/arm64/flushtlb.h for the explanation of the sequence.
++         */
++        dsb   nshst
++        tlbi  alle2
++        dsb   nsh
++        isb
++
++        /* 4) Update the TTBR */
++        msr   TTBR0_EL2, x0
+         isb
+ 
+-        msr    TTBR0_EL2, x0
++        /*
++         * 5) Flush I-cache
++         * This should not be necessary but it is kept for safety.
++         */
++        ic     iallu
++        isb
+ 
+-        isb                          /* Ensure synchronization with previous
+-                                      * changes to text */
+-        tlbi   alle2                 /* Flush hypervisor TLB */
+-        ic     iallu                 /* Flush I-cache */
+-        dsb    sy                    /* Ensure completion of TLB flush */
++        /* 6) Turn on the MMU */
++        mrs   x1, SCTLR_EL2
++        orr   x1, x1, #SCTLR_Axx_ELx_M  /* Enable MMU */
++        msr   SCTLR_EL2, x1
+         isb
+ 
+         ret
+-ENDPROC(switch_ttbr)
++ENDPROC(switch_ttbr_id)
+ 
+ #ifdef CONFIG_EARLY_PRINTK
+ /*
+diff --git a/xen/arch/arm/arm64/mm.c b/xen/arch/arm/arm64/mm.c
+index 56b9e9b8d3ef..78b7c7eb004f 100644
+--- a/xen/arch/arm/arm64/mm.c
++++ b/xen/arch/arm/arm64/mm.c
+@@ -120,6 +120,37 @@ void update_identity_mapping(bool enable)
+     BUG_ON(rc);
+ }
+ 
++extern void switch_ttbr_id(uint64_t ttbr);
++
++typedef void (switch_ttbr_fn)(uint64_t ttbr);
++
++void __init switch_ttbr(uint64_t ttbr)
++{
++    vaddr_t id_addr = virt_to_maddr(switch_ttbr_id);
++    switch_ttbr_fn *fn = (switch_ttbr_fn *)id_addr;
++    lpae_t pte;
++
++    /* Enable the identity mapping in the boot page tables */
++    update_identity_mapping(true);
++
++    /* Enable the identity mapping in the runtime page tables */
++    pte = pte_of_xenaddr((vaddr_t)switch_ttbr_id);
++    pte.pt.table = 1;
++    pte.pt.xn = 0;
++    pte.pt.ro = 1;
++    write_pte(&xen_third_id[third_table_offset(id_addr)], pte);
++
++    /* Switch TTBR */
++    fn(ttbr);
++
++    /*
++     * Disable the identity mapping in the runtime page tables.
++     * Note it is not necessary to disable it in the boot page tables
++     * because they are not going to be used by this CPU anymore.
++     */
++    update_identity_mapping(false);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 23dec574eb31..4262165ce25e 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -207,6 +207,8 @@ extern unsigned long total_pages;
+ extern void setup_pagetables(unsigned long boot_phys_offset);
+ /* Map FDT in boot pagetable */
+ extern void *early_fdt_map(paddr_t fdt_paddr);
++/* Switch to a new root page-tables */
++extern void switch_ttbr(uint64_t ttbr);
+ /* Remove early mappings */
+ extern void remove_early_mappings(void);
+ /* Allocate and initialise pagetables for a secondary CPU. Sets init_ttbr to the
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 265bc082567e..d4d376f70f50 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -476,8 +476,6 @@ static void xen_pt_enforce_wnx(void)
+     flush_xen_tlb_local();
+ }
+ 
+-extern void switch_ttbr(uint64_t ttbr);
+-
+ /* Clear a translation table and clean & invalidate the cache */
+ static void clear_table(void *table)
+ {
 -- 
 2.39.1
 
