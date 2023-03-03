@@ -4,42 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F294C678D4
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 10:36:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505804.778751 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC36C678D4
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 10:38:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505813.778777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY2lc-00054k-7d; Fri, 03 Mar 2023 10:36:00 +0000
+	id 1pY2o7-000655-B2; Fri, 03 Mar 2023 10:38:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505804.778751; Fri, 03 Mar 2023 10:36:00 +0000
+Received: by outflank-mailman (output) from mailman id 505813.778777; Fri, 03 Mar 2023 10:38:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY2lc-00054d-4K; Fri, 03 Mar 2023 10:36:00 +0000
-Received: by outflank-mailman (input) for mailman id 505804;
- Fri, 03 Mar 2023 10:35:58 +0000
+	id 1pY2o7-000639-4X; Fri, 03 Mar 2023 10:38:35 +0000
+Received: by outflank-mailman (input) for mailman id 505813;
+ Fri, 03 Mar 2023 10:38:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SP4M=63=citrix.com=prvs=419214df4=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pY2la-0004aT-BC
- for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 10:35:58 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2b66cfd3-b9af-11ed-a550-8520e6686977;
- Fri, 03 Mar 2023 11:35:55 +0100 (CET)
-Received: from mail-mw2nam12lp2044.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.44])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 03 Mar 2023 05:33:58 -0500
-Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
- by SN7PR03MB7085.namprd03.prod.outlook.com (2603:10b6:806:353::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.19; Fri, 3 Mar
- 2023 10:33:55 +0000
-Received: from BYAPR03MB3623.namprd03.prod.outlook.com
- ([fe80::8299:f95f:934b:29e8]) by BYAPR03MB3623.namprd03.prod.outlook.com
- ([fe80::8299:f95f:934b:29e8%7]) with mapi id 15.20.6156.021; Fri, 3 Mar 2023
- 10:33:55 +0000
+ <SRS0=y5Qx=63=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pY2o6-0005jk-5R
+ for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 10:38:34 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b2a5923-b9af-11ed-a550-8520e6686977;
+ Fri, 03 Mar 2023 11:38:32 +0100 (CET)
+Received: by mail-lf1-x136.google.com with SMTP id r27so2954708lfe.10
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Mar 2023 02:38:32 -0800 (PST)
+Received: from fedora.. (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
+ [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
+ d11-20020ac25ecb000000b004cb3a55feacsm338760lfq.100.2023.03.03.02.38.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Mar 2023 02:38:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,169 +46,308 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b66cfd3-b9af-11ed-a550-8520e6686977
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1677839755;
-  h=message-id:date:from:subject:to:cc:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=hQtdo1xNHOXdFD2yc95pzEBqcyuC5Z19hJyE3DEnEfU=;
-  b=Iy3zvr4YKxD8cH4N6svj9NEF5i444//LbOZnVto0GyTYy2I/vxyk6oJP
-   olZdAPuDfyxT11sr2gcDqVbi9cIYSrCFZ3ai0gfFbD5r9+9eJb6muUUIw
-   oVwc6O5DbcjWwbGohpGInI1OfiGWk0D5/4TKQVta3J6WPEUcKQcNtQxu3
-   c=;
-X-IronPort-RemoteIP: 104.47.66.44
-X-IronPort-MID: 99725549
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:JVRhdau5Jl1QB3gtns6aabAIgefnVOJfMUV32f8akzHdYApBsoF/q
- tZmKTuPOvmPNDOjco0jO9/gphlXv5+EyIRnHQM/qiE0QX5D+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg3HVQ+IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj6Fv0gnRkPaoQ5ASGzCFMZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwMRAMV0DZn/qM0J28Tcl92eA9FM3LI9ZK0p1g5Wmx4fcOZ7nmGv+PwOACmTA6i4ZJAOrUY
- NcfZXx3dhPcbhZTO1ARTpUjgOOvgXq5eDpdwL6XjfNvvy6Pk0ovjv6xbLI5efTTLSlRtm+eq
- njL4CLSBRYCOcbE4TGE7mitlqnEmiaTtIc6ReznrKM33Az7Kmo7CEUofgaRq9OAr2WzXt5jI
- WIY23ElhP1nnKCsZpynN/Gim1aDuhMfQNtRVe4n8gaGyqnTywmcD2kACDVGbbQOpMIwADAny
- FKNt9foHiB09q2YT2qH8bWZpi/0PjIaRUcAbyIZSQoO4/H4vZo+yBnIS75LC7Wph9f4HTXxx
- TGiryUkgbgXy8kR2M2T8lHOhTaxrZHhVA8r4R7WWGnj5QR8DKavYIai+FXA7fJNKY+fZlaEt
- XkA3cOZ6YgmBJWMjzCEQf9LEqug4f2EKxXDjVUpFJ4knxym/HileoJc6S9/P29mN88FfXniZ
- 0q7hO9KzJpaPX/vaLAtZYu0Up4u1fK4SYijUe3IZN1TZJQ3bBWA4CxleU+X2SbqjVQolqY8f
- 5ycdK5AEEonNEiu9xLuL8917FPh7npjlAs/mbiTI8yb7Iej
-IronPort-HdrOrdr: A9a23:Bh2Ai6u8Dbvg/Degfhw8udUq7skDRtV00zEX/kB9WHVpm6uj+/
- xG/c516faQsl0ssR4b9+xoVJPgfZq/z+8X3WBhB9eftWDd0QPDQb2Ki7GSpgEIcBeOlNK1u5
- 0QFZRWOZndCkV7kNa/wCTQKadY/DBfytHNuQ4J9QYLcT1X
-X-IronPort-AV: E=Sophos;i="5.98,230,1673931600"; 
-   d="scan'208";a="99725549"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IlXaF2zXrXer4eX+9blqpn/8q/1YSRYoOD9wKKBu22XnyLvcEC0mfcuAFr/tOdBfZZMTq3KaAwiVEVR7XBWCQrNJW+2/iLxfWOct4Kb8MtzLjuDSf87PJXnNq8b9GKZhBVNAJbTXD/uZDgio8M19jc3R5r5gVgXQ9KQSx1tJ8WmAUk5WgN1RI8YZ1Ouqzib/jEWdvyDUWaS5dTxMjo3m5kd+gxId1I8/34wlVCOmDdV8DxgT8nCkWW89REYsIknK7c/Bbt+3ok/lhds0bMqyei7ukeU01FefwNzog9YY2LE0kgwFnvWkgJJCQwPdoyXcEI0Hro3kWpTuzHf3X46hHg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k5n9hDcHY8X6iwfsyWRmEFEkECkAM83bv2we6AuXx98=;
- b=ZUJaJtBXkwIZMcXNPvFibRMV3GppyjvoXgMPHXUOZSqk7AWTkfltwoHHE7urmnjZnC0V6dXlyjOHE4WMGQASJyres84YLZz/PD9gEOGPVLqMp/3waQaMHn3561FQMNgpdehK/87bN5Y62quU0lDS0QZ4/Y0cRTMGpJNf1TRWE7vNb/+D0pDF9iQm+kLIA4HZcs5wZa8vDV7qe2eUKCNtuSAlXzSSw/mUsC/tLb6DLlBRrfWEtl1jWDdgnfrpPKb6W2N5fvPmcwWHRihkXehfQtONSLRBoB1NsJlqxzKrj8becz+ucFEqOKzm0Jp8BB7f6WZ88X6wlcoLE7zDJJ8qng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
+X-Inumbo-ID: 8b2a5923-b9af-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k5n9hDcHY8X6iwfsyWRmEFEkECkAM83bv2we6AuXx98=;
- b=Msc5KXKYOQVJ9NKYUuYLsx0IySx1SHCluwl9czrmZWnffXP3dohs53F7pit3xQ2P12+b4hC2+nd25VQ5rseBnfAK9YSTILLvGoJBCe76XZFavlWld2LKuC83RjSGxBoicZoXEN78PFDASeNcrL1559tVmKyZD63OXFRcJULcuVE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <009206ce-1750-95f2-7f6f-34c71f0b79ec@citrix.com>
-Date: Fri, 3 Mar 2023 10:33:49 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 3/3] xen/riscv: initialize .bss section
-Content-Language: en-GB
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Gianluca Guida <gianluca@rivosinc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>
-References: <cover.1677838213.git.oleksii.kurochko@gmail.com>
- <16fb328e06f6b99d967fa7d186a4c0aaa986050e.1677838213.git.oleksii.kurochko@gmail.com>
-In-Reply-To: <16fb328e06f6b99d967fa7d186a4c0aaa986050e.1677838213.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0653.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:296::23) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+        d=gmail.com; s=20210112; t=1677839912;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oruXISOzbtYmsjJP9608NUUX4p1qMmDHX62cBBlU67Q=;
+        b=T4ZzVZJADkACXJpTwzSpuzk0Juamfu/B3GEmo4X+fYL4UDjugiv+PmRUe9SMftPY5/
+         cLPNG1H+v3g4j6OTXb6vA0ne9NybG8sSedxoyn6x2Qfs364q7Ta+KLEoJP632Bs2f0O2
+         hM4MeW2wItSmczmPWAix8xlkukalRficE2kDzLVRuS0gZzwdNmSPggie9ZvII0XvVvf7
+         bIYG5A2AyhsaqTYtgYqunRZWUIfQvD0C496hWUO4GEiimbprM3FZu1k0rXVgIl0rnpsN
+         Dk6SGAQsoiczHQLxXljR1inHq9r2qrBKvaTrGFL/xvSRivNGqaE115AZfcwqviP/Zzyk
+         6+AA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1677839912;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oruXISOzbtYmsjJP9608NUUX4p1qMmDHX62cBBlU67Q=;
+        b=qU1rQgCOMtuyitZ0gbmcco5j7gw/xIh0lASkbJd67luvf6qleLThGsXem2GpK9Z5GV
+         reHQQPKJXx7RMSLEFGPxU/2LyXxsIqTY5s8eLQhIhchHYKEaqElUeqcA77aLWXT5GSuw
+         xg4OUqCg2cphn4Ga4MXln0UueTuUHmB7KreTFTN9oYmnZqYXuHXP7JKQ4jtzDS9/BNwj
+         z33XjzpIp2++Kel8EGfAWExXC7bSGpFnHd9IrgoP1qlcfsK7MmMjUI5s0LzFEApvLJmQ
+         7a7lQagVQNuuWzsDJ8bNodsVPnsHiry7DQN5N0p9UPpmrPGNiD4Ib2hlLno7BuSsZZ0W
+         9beg==
+X-Gm-Message-State: AO0yUKXa/qyfC1qdCXDp6CulrJeKVXpqt5UsJDYEkLCw6F3Dbgls3JD7
+	XRh6MmheGgIlrhjiMXbKMMkEDUdf2Kw=
+X-Google-Smtp-Source: AK7set8z6ttBU7k62qkCUu7V/uYCbZELCN61J9yKFY7e74qSUh/e4Qn70pVNDvPiDGzfpGNlxomjPw==
+X-Received: by 2002:ac2:598c:0:b0:4b0:1305:6ebf with SMTP id w12-20020ac2598c000000b004b013056ebfmr387484lfn.53.1677839911779;
+        Fri, 03 Mar 2023 02:38:31 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Julien Grall <julien@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 2/4] xen: change <asm/bug.h> to <xen/bug.h>
+Date: Fri,  3 Mar 2023 12:38:23 +0200
+Message-Id: <f108147036c9e35b156b45c0f52779cea09025c9.1677839409.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <cover.1677839409.git.oleksii.kurochko@gmail.com>
+References: <cover.1677839409.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR03MB3623:EE_|SN7PR03MB7085:EE_
-X-MS-Office365-Filtering-Correlation-Id: 67afdada-8435-4cff-3805-08db1bd2c9de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	KUrFxyLB0ksUNd5SpKns6JDOIVh4zQSuI3iZ6zWMHIw7/Zy9ZtTVFG2F0eZUTk1f/+40ekQYPCWKHS7YyKVIDbXquIdCCxSQFB/hBQcvl+sUs0cF9mNNg6Q9/Yx1G5y+Gdb/93wqLYZCsj3BC23b17M6VKxJIjQtRUO1veTngC7h/yzTjyJSANgbN3CvMncm1aJK0/vzRDXeAI+bHSQGjCAqVhwBAj8G6UR1Bj52OG/9Cx4bFKq6isGhm2h4cXGFJMPciRd9pXWSIxt8PDormsm0zNvCMdQahtenIXqO2uz1cXZBFv4zECIknvU0HxO0jmHPJVPAA1RUmWyGIhZiQJaxiFU/Eg2nP+V/7AIgtSiUCU2GtVqPhSEGti6f/I8j8UBCwkqfimZ/iJPp5AOqLyIY+Y7GmC8sdpEvjiYf8UxGovJVjzxal9Y7hHMdWoGPAZlgcHEGgRsz1iP6iz7hVnwRBysVnzOf4Gs/sR9mvvHmub4bU8IpdC6N1Y4Xc4kHkLcOi67IfrrfetSC0tQSVM0mb7DkwxCnCcCG+ENqeTbAtmya7qKcA+4jTRzeF4U+H9W/w5v3S0lf6AlYCTjqQ60PF9Ke2WCVxxSvwO0w5iJKtkPwzXV3pZmgoQ3E9b54BqnjfJWmGtqxyy7zoS9oGRCPtWQkZ/PXO3saPy+1ILO2dkxz8kjsv+tXucT/X55WUJBoSCbLi9JGA2VTw0v9pq24F9zX0B4ryyQdslzfAKgtBd/Q8xa9ZEBKe9E6R6o0
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(396003)(39860400002)(346002)(136003)(376002)(451199018)(31686004)(8936002)(6486002)(36756003)(54906003)(2616005)(66476007)(41300700001)(4326008)(8676002)(53546011)(66556008)(31696002)(86362001)(66946007)(2906002)(4744005)(26005)(5660300002)(316002)(6666004)(6506007)(478600001)(6512007)(38100700002)(82960400001)(186003)(142923001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VkQ1emkwWE1DU2Y3aS9qTlF2MXRSSnFKK1lBdWMzTkJiY1lzQ3VWeTdBYXNZ?=
- =?utf-8?B?TXNBWkdiQU5EL0JINmtHV2dhMzZJR1pNeE9sUU42d0ZxdWJTNE8xY2VDSjBn?=
- =?utf-8?B?N3lLZ0FmdG0vbFRUaHhpZFMwMjFmRGE1QVYwLzJtUkJ0WUQxN0tuN1M0SXMr?=
- =?utf-8?B?U3hlOCtEcmpjQ3F5aWkwL0dIOFlpc1B1bXA5RjBYNXVjV3ZoWGtpcytHNUp2?=
- =?utf-8?B?eWZRZ01LOG5ETzBHRjJkUzdHTmxGVmJCcDdnb2RWT0xQaUJ4VUtxNVB1N0oy?=
- =?utf-8?B?dkVsSVZsanAvNWR0VUNiLy9DeEdJa3NtTzltbjNyNVM2VkpWVmZLbWJNRjYz?=
- =?utf-8?B?YnVSU3JteTFWTkJzcjdWYW1NWlh2WnZsTU1XOXkrSEYwZndUR1MyWTQrQjB0?=
- =?utf-8?B?U1h3WklVMjlaMXRxYlJaUU4xSXI2cmJlYzFUVGlVVHBNVlhjamRCUkpndWJQ?=
- =?utf-8?B?UjU1Smgvb0l1ZnlQNlphRzJJQ1lxZnBSdUhXQU0rR1lqb2Y3cHp3dStSUVpS?=
- =?utf-8?B?aUxUTDhUTTBJTlJnL0p1Mlhna0NYc1ltNG5KTW1BazVDV3N4Nks3eFhkSC9Z?=
- =?utf-8?B?WVNKbVd6RXAwdkwya0htWXVhV0NpSjJMRkdxeFlDcGJwdUhqVnA0T1FDSmdm?=
- =?utf-8?B?Z094aWtjZWlsMzhSdWNYUzN0MGxucERiZDhpOHZQUk5rTlRkNGZWeUZaRXlJ?=
- =?utf-8?B?d29XMlJTZmlpc2NHZENvbjhIYWFnSmkyVzQ0OHRsanVLdDFDNXpXRkFCUGJV?=
- =?utf-8?B?TVE0V2RCNEhFRXp1bjFhdHlQNmN4WmFlZEJIRVd4L21lL2l2ZDk4SldrUnFy?=
- =?utf-8?B?L1VjM2wzOUx2VWI2SitzK3FFTDg4MDJqSmpyTWZmbUxaTUFHa1RTMG1weEpC?=
- =?utf-8?B?NGFIUnE0SjFJMXBvMU9sa1k2aFd5M1Y4ZFU4M0xvdjJtNlg3TUJMdXdvTWJR?=
- =?utf-8?B?ZHZJLytMM0djTmdtSDkySFlkalNKOWJXR0IzVWVsaEZUV1V6K284Umt3a3I5?=
- =?utf-8?B?Sk1DVDlTVGl6eHlaN1U2cWxTRWZ4RHFmUFVSdXY2R2NLa3BBckR1eTlmVHA3?=
- =?utf-8?B?Tk1zOEtydEZTZ0dUQXdLdjdwSGVFbEVVeTdLcXNXV3RhTGpvZmpQVWdrNlQ0?=
- =?utf-8?B?eVNEeFZXODNZWEROMHhnRE9oOGN2YnVxSDFweTd2SDZQYTl1OHJ0Z3FyRUpM?=
- =?utf-8?B?NTlIQzhFb0IvQVhzNVFYSEZIWnAxTHVOL1dabFlNZlVwY0djNTdMb3I3Qnc5?=
- =?utf-8?B?WHlBNUJRQmVIQk16bStzdDlwSllwTkthejYza2ZHa2VHeDY1UHF0RmUwWVdH?=
- =?utf-8?B?NWtHVVdzMjYxZXBEeXEvOFNud1NPYlJiZS9LcE9VYXJ4THJTa1RFWHNONXN5?=
- =?utf-8?B?ZmgyL1Z3NFk4WFhtWkIrZTFjc2VJemNJMXZkREd6ek85YnpwRHZ5eEViKzZl?=
- =?utf-8?B?Sms2SGZkanMva0VFZEptcmE2cVozRmVBeUd6Uml1OTI2ZGNZbDlZcVBKTUV6?=
- =?utf-8?B?a0wxQllueEQ4WnV6Uk9hSFFoVW9FS2NiWUxtZlRDQnVuUlN5enBSMDBIWHQz?=
- =?utf-8?B?UU5BTHJJUnlldFV6Sk5ydmpkUHpWOVFmRUlLcFRxc0VJSVdIV29xd2tHRFZv?=
- =?utf-8?B?MFhjaUVJVmNzUUVzWmQzd3hsRHlyeWF4TXVUOEFVMWJ2Qi8xV2pEVTZOck5j?=
- =?utf-8?B?alRRMHo4N1J4Y0I2MExLemg3eWpMMWtQRkpLbEt4VXg1WmlpSHVCTmtObGIv?=
- =?utf-8?B?d1gzMDl3SGs1aUo3NGZ4Z0t4VjJuUXpuWjNNazFmZHpYNWZaNlBNQXcrZ2dx?=
- =?utf-8?B?c3VqOStPUzR3cndqMmp4UVRYYytRTVVWWnNmODVUM2l4aWl2Z3ZVQ2JSeTJt?=
- =?utf-8?B?K0dyaTkxbFBoUlZyODZMVjR1WEFIUlQ0ZmVzZFB2MXNERHMzdlRMeGVIcTdl?=
- =?utf-8?B?Q1lKeng1UndDWlJESGhFMFVtWmpDWTJmdFp2ZzJ4UTZoL1JTNkE5QW5UNkhj?=
- =?utf-8?B?QUhzNUlLY2xWblhVMEFoUnp5TFptbVd6ankrM3ZqOXVyRGRiYjl3TmdjbWJp?=
- =?utf-8?B?Mm1CNysyTFp5bVVMbGJYSytpeVRtMHpIODNiYmdVK2YrSjlWOFRrcHk4d3Nj?=
- =?utf-8?B?TVJDUFBkVEVRaDk4VzliUVhOMVVMVFh2VmszSXJONzNaL1JmZjQvZ253YzJa?=
- =?utf-8?B?QXc9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	syBZR4c4BOcEJWf7Sl6cEwGQR2UCLkrlcx3JyyZ/M3Xh5qp4oL161tyrl8TfbgeHHlpxlFDEJqFWFTIf7MO15iGx4g4zioXX/ehqsH7AB2qTB60RU7bZ3V/NuRQXQnDYEU5Oa4nU6CZd9G8hihPAtG0O5qcOzEvpalxisHbCOb67hDdZp6UuD2/LTGg2w2/U/tkaCVmR3p4z/NIwNAySsqzViaHsW9qEadqQYUUeDnqwbCgwWdWZhATIfuhuVJ9eWADkQUg3lSwwSvLZX79hf4bkF6/1XWktwMDb62pOmhytOxWEdvm1S9ud68TO4ad/19AbZjN8EQ/8mFa18TWX1LBl1EEnUeIJ2Q0L1X1xg2iFGX4zjILWFcohTJ/564ifwwjt/5wNAc5hY64k8H6smsJVzQQmOB+FVh+XXPjhd0lYKnv0hRD+s1Tr2n55a6wBDanQEJOwpPJRmgNDQGE9B05ErbshBjqIsFd2alEP1YjlLBH1rf8/GGRRJdTIrUZsRvMc8IvANJkvCCo4jg99DnmFA4j4x1BCHLr1Cfq4cG0Vpcd3IO4w0O+EkHhko2r5/7h2SknBrSwgZ1X34r2+079W6WDVQ0SXttz5CiFX9Fo/vyO95uhR/NgAAQnaG3O36KueXPzQUT5I85bS9UrhX5j0pQwVVv/Q6o50ESWNhNgv47Gv5n5JpZwm3L2gH6TQ099UjjefvErBCJD28AgI15RH0p9zlxRAxfExAA5bFxU+a0AhJKfYnQD0CG5Y0IUXG6QPUa3qPcySXCfzmQEKFlwc1Tiojl74cm37LFgprBfkKOdLQTHLibmZXDr6FKrWJZ8Sfvz/ib3J0swY+6iP7uFfa1NJevkWprdU3Sp7XNdNM8WYMg9CH9GT+BV6geAcEtX/5FV8Z55htynbvgHMDGwkZBtuHUuPvVsP67491Gc=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67afdada-8435-4cff-3805-08db1bd2c9de
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2023 10:33:55.0047
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bWcit3UahJufG3nahpkGRyUuCugFQXGOjjsf6eiu0vcczL1YHmI1dPdZoeDo0re1vCQnvR/PnBVva9TprM5BV+XO8lKqNaTbZ0H3imkIx0M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR03MB7085
+Content-Transfer-Encoding: 8bit
 
-On 03/03/2023 10:24 am, Oleksii Kurochko wrote:
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+The idea of the patch is to change all <asm/bug.h> to <xen/bug.h> and
+keep Xen compilable with adding only minimal amount of changes:
+1. It was added "#include <xen/types.h>" to ARM's "<asm/bug.h>" as it
+  uses uint_{16,32}t in 'struct bug_frame'.
+2. It was added '#define BUG_FRAME_STRUCT' which means that ARM hasn't
+  been switched to generic implementation yet.
+3. It was added '#define BUG_FRAME_STRUCT' which means that x86 hasn't
+  been switched to generic implementation yet.
+4. BUGFRAME_* and _start_bug_frame[], _stop_bug_frame_*[] were removed
+  for ARM & x86 to deal with compilation errors such as:
+      redundant redeclaration of ...
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+In the following two patches x86 and ARM archictectures will be
+switched fully:
+* xen/arm: switch ARM to use generic implementation of bug.h
+* xen/x86: switch x86 to use generic implemetation of bug.h
 
-> diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-> index adf5d6c74a..8887f0cbd4 100644
-> --- a/xen/arch/riscv/riscv64/head.S
-> +++ b/xen/arch/riscv/riscv64/head.S
-> @@ -18,6 +19,14 @@ ENTRY(start)
->          li      t0, SSTATUS_FS
->          csrc    CSR_SSTATUS, t0
->  
-> +        /* Clear the BSS */
-> +        la      t3, __bss_start
-> +        la      t4, __bss_end
-> +.L_clear_bss:
-> +        REG_S   zero, (t3)
-> +        add     t3, t3, __SIZEOF_POINTER__
-> +        bltu    t3, t4, .L_clear_bss
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V5:
+ - Nothing changed
+---
+Changes in V4:
+	- defines BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH were moved into
+	  "ifndef BUG_FRAME_STRUCT" in <xen/bug.h> as they are specific for 'struct bug_frame' and so should
+	  co-exist together. So the defines were back to <asm/bug.h> until BUG_FRAME_STRUCT will be defined in
+	  <asm/bug.h>.
+	- Update the comment message.
+---
+Changes in V3:
+ * Update patch 2 not to break compilation: move some parts from patches 3 and 4
+   to patch 2:
+   * move some generic parts from <asm/bug.h> to <xen/bug.h>
+   * add define BUG_FRAME_STRUCT in ARM's <asm/bug.h>
+---
+Changes in V2:
+ * Put [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h> as second patch,
+   update the patch to change all <asm/bug.h> to <xen/bug.h> among the whole project
+   to not break build.
+ * Update the commit message.
+---
+ xen/arch/arm/include/asm/bug.h       | 17 ++++-------------
+ xen/arch/arm/include/asm/div64.h     |  2 +-
+ xen/arch/arm/vgic/vgic-v2.c          |  2 +-
+ xen/arch/arm/vgic/vgic.c             |  2 +-
+ xen/arch/x86/acpi/cpufreq/cpufreq.c  |  2 +-
+ xen/arch/x86/include/asm/asm_defns.h |  2 +-
+ xen/arch/x86/include/asm/bug.h       | 15 ++-------------
+ xen/drivers/cpufreq/cpufreq.c        |  2 +-
+ xen/include/xen/lib.h                |  2 +-
+ 9 files changed, 13 insertions(+), 33 deletions(-)
 
-Using t3/t4 is fine, but it would also have been fine to use t0/t1.
+diff --git a/xen/arch/arm/include/asm/bug.h b/xen/arch/arm/include/asm/bug.h
+index f4088d0913..9315662c6e 100644
+--- a/xen/arch/arm/include/asm/bug.h
++++ b/xen/arch/arm/include/asm/bug.h
+@@ -1,6 +1,8 @@
+ #ifndef __ARM_BUG_H__
+ #define __ARM_BUG_H__
+ 
++#include <xen/types.h>
++
+ #if defined(CONFIG_ARM_32)
+ # include <asm/arm32/bug.h>
+ #elif defined(CONFIG_ARM_64)
+@@ -13,6 +15,8 @@
+ #define BUG_LINE_LO_WIDTH (31 - BUG_DISP_WIDTH)
+ #define BUG_LINE_HI_WIDTH (31 - BUG_DISP_WIDTH)
+ 
++#define BUG_FRAME_STRUCT
++
+ struct bug_frame {
+     signed int loc_disp;    /* Relative address to the bug address */
+     signed int file_disp;   /* Relative address to the filename */
+@@ -26,13 +30,6 @@ struct bug_frame {
+ #define bug_line(b) ((b)->line)
+ #define bug_msg(b) ((const char *)(b) + (b)->msg_disp)
+ 
+-#define BUGFRAME_run_fn 0
+-#define BUGFRAME_warn   1
+-#define BUGFRAME_bug    2
+-#define BUGFRAME_assert 3
+-
+-#define BUGFRAME_NR     4
+-
+ /* Many versions of GCC doesn't support the asm %c parameter which would
+  * be preferable to this unpleasantness. We use mergeable string
+  * sections to avoid multiple copies of the string appearing in the
+@@ -89,12 +86,6 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
+ 
+-extern const struct bug_frame __start_bug_frames[],
+-                              __stop_bug_frames_0[],
+-                              __stop_bug_frames_1[],
+-                              __stop_bug_frames_2[],
+-                              __stop_bug_frames_3[];
+-
+ #endif /* __ARM_BUG_H__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/div64.h b/xen/arch/arm/include/asm/div64.h
+index 1cd58bc51a..fc667a80f9 100644
+--- a/xen/arch/arm/include/asm/div64.h
++++ b/xen/arch/arm/include/asm/div64.h
+@@ -74,7 +74,7 @@
+ 
+ #elif __GNUC__ >= 4
+ 
+-#include <asm/bug.h>
++#include <xen/bug.h>
+ 
+ /*
+  * If the divisor happens to be constant, we determine the appropriate
+diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
+index 1a99d3a8b4..c90e88fddb 100644
+--- a/xen/arch/arm/vgic/vgic-v2.c
++++ b/xen/arch/arm/vgic/vgic-v2.c
+@@ -16,8 +16,8 @@
+  */
+ 
+ #include <asm/new_vgic.h>
+-#include <asm/bug.h>
+ #include <asm/gic.h>
++#include <xen/bug.h>
+ #include <xen/sched.h>
+ #include <xen/sizes.h>
+ 
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index f0f2ea5021..b9463a5f27 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -15,9 +15,9 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <xen/bug.h>
+ #include <xen/list_sort.h>
+ #include <xen/sched.h>
+-#include <asm/bug.h>
+ #include <asm/event.h>
+ #include <asm/new_vgic.h>
+ 
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index c27cbb2304..18ff2a443b 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -27,6 +27,7 @@
+  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  */
+ 
++#include <xen/bug.h>
+ #include <xen/types.h>
+ #include <xen/errno.h>
+ #include <xen/delay.h>
+@@ -35,7 +36,6 @@
+ #include <xen/sched.h>
+ #include <xen/timer.h>
+ #include <xen/xmalloc.h>
+-#include <asm/bug.h>
+ #include <asm/msr.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
+index d9431180cf..a8526cf36c 100644
+--- a/xen/arch/x86/include/asm/asm_defns.h
++++ b/xen/arch/x86/include/asm/asm_defns.h
+@@ -6,7 +6,7 @@
+ /* NB. Auto-generated from arch/.../asm-offsets.c */
+ #include <asm/asm-offsets.h>
+ #endif
+-#include <asm/bug.h>
++#include <xen/bug.h>
+ #include <asm/x86-defns.h>
+ #include <xen/stringify.h>
+ #include <asm/cpufeature.h>
+diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
+index b7265bdfbe..79133e53e7 100644
+--- a/xen/arch/x86/include/asm/bug.h
++++ b/xen/arch/x86/include/asm/bug.h
+@@ -5,15 +5,10 @@
+ #define BUG_LINE_LO_WIDTH (31 - BUG_DISP_WIDTH)
+ #define BUG_LINE_HI_WIDTH (31 - BUG_DISP_WIDTH)
+ 
+-#define BUGFRAME_run_fn 0
+-#define BUGFRAME_warn   1
+-#define BUGFRAME_bug    2
+-#define BUGFRAME_assert 3
+-
+-#define BUGFRAME_NR     4
+-
+ #ifndef __ASSEMBLY__
+ 
++#define BUG_FRAME_STRUCT
++
+ struct bug_frame {
+     signed int loc_disp:BUG_DISP_WIDTH;
+     unsigned int line_hi:BUG_LINE_HI_WIDTH;
+@@ -80,12 +75,6 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
+ 
+-extern const struct bug_frame __start_bug_frames[],
+-                              __stop_bug_frames_0[],
+-                              __stop_bug_frames_1[],
+-                              __stop_bug_frames_2[],
+-                              __stop_bug_frames_3[];
+-
+ #else  /* !__ASSEMBLY__ */
+ 
+ /*
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index a94520ee57..354f78580b 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -26,6 +26,7 @@
+  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  */
+ 
++#include <xen/bug.h>
+ #include <xen/types.h>
+ #include <xen/errno.h>
+ #include <xen/delay.h>
+@@ -39,7 +40,6 @@
+ #include <xen/guest_access.h>
+ #include <xen/domain.h>
+ #include <xen/cpu.h>
+-#include <asm/bug.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+ 
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index 05ee1e18af..e914ccade0 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -24,12 +24,12 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++#include <xen/bug.h>
+ #include <xen/inttypes.h>
+ #include <xen/stdarg.h>
+ #include <xen/types.h>
+ #include <xen/xmalloc.h>
+ #include <xen/string.h>
+-#include <asm/bug.h>
+ 
+ #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
+ #define WARN_ON(p)  ({                  \
+-- 
+2.39.0
 
-~Andrew
 
