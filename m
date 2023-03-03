@@ -4,32 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373E2C64EC4
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 16:51:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.506121.779149 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5ABC64EC4
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 16:53:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.506131.779159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY8cn-0007Yk-QZ; Fri, 03 Mar 2023 16:51:17 +0000
+	id 1pY8f7-0008Qa-6l; Fri, 03 Mar 2023 16:53:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 506121.779149; Fri, 03 Mar 2023 16:51:17 +0000
+Received: by outflank-mailman (output) from mailman id 506131.779159; Fri, 03 Mar 2023 16:53:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY8cn-0007Yd-NF; Fri, 03 Mar 2023 16:51:17 +0000
-Received: by outflank-mailman (input) for mailman id 506121;
- Fri, 03 Mar 2023 16:51:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pY8f7-0008QT-3C; Fri, 03 Mar 2023 16:53:41 +0000
+Received: by outflank-mailman (input) for mailman id 506131;
+ Fri, 03 Mar 2023 16:53:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Pyx=63=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pY8cl-0007Jf-RQ
- for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 16:51:15 +0000
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [2a00:1450:4864:20::435])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9a4618ef-b9e3-11ed-96af-2f268f93b82a;
- Fri, 03 Mar 2023 17:51:12 +0100 (CET)
-Received: by mail-wr1-x435.google.com with SMTP id v16so2967290wrn.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 Mar 2023 08:51:11 -0800 (PST)
+ <SRS0=csqk=63=citrix.com=prvs=4196fa7ca=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1pY8f5-0008QJ-Cq
+ for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 16:53:39 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ef787ea6-b9e3-11ed-a550-8520e6686977;
+ Fri, 03 Mar 2023 17:53:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,209 +38,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a4618ef-b9e3-11ed-96af-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1677862271;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jN/rbUQiGJ/V5omFdDMO5rmWNNQ/FfJOctwI5vinchA=;
-        b=xGpYCkihlhqEJGsFNm5jVSb2UIDYZQdeoe19mzN41w/zWt5hXsID/dl3nn5H0i5wlO
-         pJfaM1JPore0nzHXZ/uNpTlivS5rUwrRnluoBzdEvLyScqSBgjEyTN+ne7X5T5QWbfZm
-         8+Y6UQJO4Pud8sGtZqswTuNj905arEd1ZJp4V7qbhUbAGVa0JMvKxVV69HqENJgwQSWz
-         UgX0l7hmsPo7ZeOHKwgfHJVJo+kB7L0kayj93luQtxxU0UvtNupmMkxyttmYNYk/5m2d
-         TWsRCENCBvEMbxgDF0LWVlZXC6+MGWAcoqmHPqD63A3xDdgdyKvPQtn3uu9QDszy5gJE
-         iGiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677862271;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jN/rbUQiGJ/V5omFdDMO5rmWNNQ/FfJOctwI5vinchA=;
-        b=nFSp4znPirRI5a//TvdWY65aTG8IERpEIXEAQFZByJ2cDsthQfVpXAnxZWZbTCL94E
-         lfVnv4Py9/iDS14ZaA/wp4pCWdRYi9D4dgfqct/aztjY4tUoyKSiSo9EOmoWHDEueLyC
-         QoT38D0le0+XbbzLk/AYF9lwUJe4Uau85DqYDcGwoqn7LkhvAvRPzxN/ZRJwMmWEyYOR
-         R1LpXtZCbMlOqGUgKtFtQA8AJfRE7OpKIJzpDqorQ4fRPED64m27TRXtu0OgcY0wvZv/
-         KERk9xEWm8t9egu7h/4JnFCWO+VFIh9zXGeCScOeSuTPer4p98CBbkEGRmBFhYJgYmxl
-         f1KA==
-X-Gm-Message-State: AO0yUKVksnLYcnDx6W19OSDdizVxw7fbB0uKbl6G63NAtIljKPPDkJ1e
-	k6/M6ikzTe9VgrfRHadrOnF+dlykoULF6wEWoJRY7w==
-X-Google-Smtp-Source: AK7set/tiWGDt41NdN+7Ijpgfepmv9MPULH+mdDL6ySRJH9T/5tO6V9Rb5FWU+RFBDV2SZzeKSvm023gZosDBf2s2IE=
-X-Received: by 2002:a5d:6485:0:b0:2c5:4adc:6e52 with SMTP id
- o5-20020a5d6485000000b002c54adc6e52mr1468968wri.3.1677862270974; Fri, 03 Mar
- 2023 08:51:10 -0800 (PST)
+X-Inumbo-ID: ef787ea6-b9e3-11ed-a550-8520e6686977
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1677862416;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=EJ7aC+BF1AzWXCEZ0JpqSlmiFXvoJnQrBO7MqzqOVGw=;
+  b=anvEej1CBw9x4qodWbvEM3kPVD6OcPx49CbqK7cWTkD3DH/aGUNksqdu
+   xfxbAgWv306i+lQtQunry7ukY52M1d7ytQDBBZuQre/XRSwmT8Fw4420M
+   /bBnLD5Qmqgin17RY9QVUEvDIWHf/qqBblhzC/rJmUI3IXkfHei6SZqgv
+   g=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 101792754
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+IronPort-Data: A9a23:BifYhKBc+rGlfxVW/zLjw5YqxClBgxIJ4kV8jS/XYbTApDx23jIAm
+ jEfX2COP6nZZmfyKYt0PYznp00AuZXcyNdkQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nOHuGmYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFu8pvlDs15K6p4GhA5QRkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIw/8NeE19T/
+ vYheA8WcCmpgeC6/ai+Y7w57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
+ pdHL2M1N3wsYDUWUrsTIJs4gOevgGi5azBCoUiZjaE2/3LS3Ep6172F3N/9I4TTGpQPwRvEz
+ o7A102gXVIKFPHY8xuI+U32pMnBuHnAaZ1HQdVU8dY12QbOlwT/EiY+XlKhrf60okW3Qd5YJ
+ gof/S9GhbMp6EWhQ935Xhu5iH2JpBgRX5xXCeJSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
+ 1SV2dTzClRSXKa9ECzHsO3O9HXrZHZTdDVZDcMZcecby9zGiZMNkxnFd4ZcC7CMpNv3FQzqx
+ hnf+UDSmI4vpcIM0qy6+3XOjDStuoXFQ2YJ2+nHYo62xlgnPdD4PuRE/XCetK8dd9jBEjFtq
+ VBew6CjAPYy4YZhfcBnaMEEB/mX6vmMK1UwanY/TsB6p1xBF5NOFL28AQ2Sxm8zb67omhezO
+ ic/XD+9A7cCVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOgD+ywBJ0wf5jZ
+ czznSOQ4ZEyU/kP8dZLb71Fje9DKt4Wngs/uqwXPzz4iOHDNRZ5uJ8OMUeUb/BR0U93iFy9z
+ jqrDOPTk083eLSnMkHqHXs7cQhiwY4TWcqn9KS6t4erfmJbJY3WI6WKke15J9c9wMy4VI7gp
+ xmAZ6OR83Kn7VWvFOlAQioLhG/HNXqnkU8GAA==
+IronPort-HdrOrdr: A9a23:sMJKz6sqEyvUtAMcKXfcW2Qh7skCo4Mji2hC6mlwRA09TyXGra
+ 6TdaUguiMc1gx8ZJkh8erwQJVoJkmshaKdgLNhTotKOTOGhILGFvAZ0WKP+UyHJ8S6zJ8j6U
+ 4iSdkkNDSSNykKsS+Z2njELz96+qjezEnAv463pB0BLXAIGsUQiDuVEjzrd3GeBjM2e6bRf6
+ DsnfavyQDQAEj+Oa+Adww4ttz41qn2fd/dEFI7Li9izDPLoSKj6bb8HRTd9hACUwlXybNnym
+ TBmxyR3NTpjxnuoCWstVP73tBzop/M29FDDMuDhow+MTP3kDulY4xnRvmroC01iPvH0idurP
+ D85zMbe+hj4XLYeW+45TH33RP77Too43j+jXeFnHrYp9DjTj5SMbsCuWtgSGqc16MchqA97E
+ sL5RPZi3NvN2KPoM0p3amKa/lo/nDE6UbK39RjyEC3arFuIYO5nbZvi3+9L61wah4SkLpXbN
+ VGPYX57PZScVSVK1XYpHQH+q33Yp0SJGbNfqFQgL3Z79EApgEK86Jf/r1Rop4ZzuNld3Bb3Z
+ WDDphV
+X-IronPort-AV: E=Sophos;i="5.98,231,1673931600"; 
+   d="scan'208";a="101792754"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>
+Subject: [XEN PATCH] automation: Use --no-install-recommends and -slim base for debian/unstable
+Date: Fri, 3 Mar 2023 16:52:58 +0000
+Message-ID: <20230303165258.12577-1-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <cover.1677079671.git.jens.wiklander@linaro.org>
- <ad85591c42f4db3c3001ae4b5572c1096c159593.1677079672.git.jens.wiklander@linaro.org>
- <C57A3E71-138B-40EB-8B0C-13603EB145AF@arm.com>
-In-Reply-To: <C57A3E71-138B-40EB-8B0C-13603EB145AF@arm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Fri, 3 Mar 2023 17:51:00 +0100
-Message-ID: <CAHUa44F=T8XB2OJYLA0Y9vUc2xY0dxa4VQTNmkQ3pmqLVwsG_g@mail.gmail.com>
-Subject: Re: [XEN PATCH v7 16/20] xen/arm: ffa: add defines for sharing memory
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Marc Bonnici <Marc.Bonnici@arm.com>, 
-	Achin Gupta <Achin.Gupta@arm.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Bertrand,
+Use "--no-install-recommends" to avoid installing many packages that
+aren't needed, many are *-doc packages. Also start using the -slim
+base image as they remove a few unused files/directories, like docs/.
 
-On Fri, Mar 3, 2023 at 2:38=E2=80=AFPM Bertrand Marquis
-<Bertrand.Marquis@arm.com> wrote:
->
-> Hi Jens,
->
-> > On 22 Feb 2023, at 16:33, Jens Wiklander <jens.wiklander@linaro.org> wr=
-ote:
-> >
-> > Adds defines needed for sharing using the function FFA_MEM_SHARE and
-> > friends.
-> >
-> > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-> > ---
-> > xen/arch/arm/tee/ffa.c | 57 ++++++++++++++++++++++++++++++++++++++++++
-> > 1 file changed, 57 insertions(+)
-> >
-> > diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-> > index 3571817c0bcd..bfd378f7fcd7 100644
-> > --- a/xen/arch/arm/tee/ffa.c
-> > +++ b/xen/arch/arm/tee/ffa.c
-> > @@ -22,6 +22,14 @@
-> > #include <asm/tee/ffa.h>
-> > #include <asm/regs.h>
-> >
-> > +/*
-> > + * References:
-> > + * FF-A-1.0-REL: FF-A specification version 1.0 available at
-> > + *               https://developer.arm.com/documentation/den0077/a
-> > + * FF-A-1.1-REL0: FF-A specification version 1.1 available at
-> > + *                https://developer.arm.com/documentation/den0077/e
-> > + */
->
-> This could actually be directly in the file header.
+Explicitly install "ca-certificates" as it is only recommended for
+"wget".
+Explicitly install "ocaml-findlib" as it is only recommended for
+"libfindlib-ocaml-dev".
 
-OK, I'll move it.
+Using "--no-install-recommends" saves about 600MB on the uncompress
+image. 2.89GB vs 2.3GB (value from `docker image list`).
 
->
-> > +
-> > /* Error codes */
-> > #define FFA_RET_OK                      0
-> > #define FFA_RET_NOT_SUPPORTED           -1
-> > @@ -66,6 +74,55 @@
-> >  */
-> > #define FFA_PAGE_SIZE                   SZ_4K
-> >
-> > +/*
-> > + * Limit for shared buffer size. Please note that this define limits
-> > + * number of pages. But user buffer can be not aligned to a page
-> > + * boundary. So it is possible that user would not be able to share
-> > + * exactly FFA_MAX_SHM_BUFFER_PG * FFA_PAGE_SIZE bytes.
-> > + *
-> > + * FF-A doesn't have any direct requirments on GlobalPlatform or vice
-> > + * versa, but an implementation can very well use FF-A in order to pro=
-vide
-> > + * a GlobalPlatform interface on top.
-> > + *
-> > + * Global Platform specification for TEE requires that any TEE
-> > + * implementation should allow to share buffers with size of at least
-> > + * 512KB. Due to align issue mentioned above, we need to increase this
-> > + * value with one.
->
-> Could you give a bit more details here: what spec version, where in the s=
-pec ?
->
-> I did download one version of it and at a first glance could not find thi=
-s value.
+Switching to -slim save about 130MB.
 
-https://globalplatform.org/specs-library/tee-client-api-specification/
-TEE Client API Specification version 1.0c, page 24, Table 4-1: API
-Configuration Constants, look for TEEC_CONFIG_SHAREDMEM_MAX_SIZE. I'll
-add a reference.
+Overwall, we go from 2.89GB to 2.17GB.
 
->
-> > + */
-> > +#define FFA_MAX_SHM_PAGE_COUNT          (SZ_512K / FFA_PAGE_SIZE + 1)
-> > +
-> > +/*
-> > + * Limits the number of shared buffers that guest can have at once. Th=
-is
-> > + * is to prevent case, when guests tricks XEN into exhausting its own
-> > + * memory by allocating many small buffers. This value has been chosen
-> > + * arbitrary.
-> > + */
-> > +#define FFA_MAX_SHM_COUNT               32
->
-> For those 2 limits, I am a bit wondering which should be defined in the c=
-ode or maybe
-> configurable in kconfig or through xen command line or per guest.
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
 
-Per guest sounds like an interesting option when these values aren't
-good enough.
+Notes:
+    Change to use "-slim" was proposed by Andy. I went futher and added
+    --no-install-recommends.
+    
+    I've tried to find other missing packages by looking at differences
+    in  "tools/config.log", "stubdom/config.log", "config/", and
+    "xen/.config".
+    
+    A test is in progress to check that no jobs are broken, but result
+    probably not before next week.
+        https://gitlab.com/xen-project/people/anthonyper/xen/-/pipelines/795600920
+    
+    I've only tested gcc debug=n on x86_64 locally.
 
->
-> I do not think we can answer that now but if one of these limits is reach=
-ed we should
-> have a clear error message so that we could easily say what to modify and=
- decide
-> if/how to solve it.
+ automation/build/debian/unstable-i386.dockerfile | 6 ++++--
+ automation/build/debian/unstable.dockerfile      | 6 ++++--
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
-I'll add prints in the later patches.
+diff --git a/automation/build/debian/unstable-i386.dockerfile b/automation/build/debian/unstable-i386.dockerfile
+index 1c4928b09e..cc116d32e9 100644
+--- a/automation/build/debian/unstable-i386.dockerfile
++++ b/automation/build/debian/unstable-i386.dockerfile
+@@ -1,4 +1,4 @@
+-FROM i386/debian:unstable
++FROM i386/debian:unstable-slim
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+@@ -12,7 +12,8 @@ ENTRYPOINT ["linux32"]
+ 
+ # build depends
+ RUN apt-get update && \
+-    apt-get --quiet --yes install \
++    apt-get --quiet --no-install-recommends --yes install \
++        ca-certificates \
+         build-essential \
+         zlib1g-dev \
+         libncurses5-dev \
+@@ -35,6 +36,7 @@ RUN apt-get update && \
+         libc6-dev \
+         libnl-3-dev \
+         ocaml-nox \
++        ocaml-findlib \
+         libfindlib-ocaml-dev \
+         markdown \
+         transfig \
+diff --git a/automation/build/debian/unstable.dockerfile b/automation/build/debian/unstable.dockerfile
+index 6ef2878200..06ac909a85 100644
+--- a/automation/build/debian/unstable.dockerfile
++++ b/automation/build/debian/unstable.dockerfile
+@@ -1,4 +1,4 @@
+-FROM debian:unstable
++FROM debian:unstable-slim
+ LABEL maintainer.name="The Xen Project" \
+       maintainer.email="xen-devel@lists.xenproject.org"
+ 
+@@ -10,7 +10,8 @@ WORKDIR /build
+ 
+ # build depends
+ RUN apt-get update && \
+-    apt-get --quiet --yes install \
++    apt-get --quiet --no-install-recommends --yes install \
++        ca-certificates \
+         build-essential \
+         zlib1g-dev \
+         libncurses5-dev \
+@@ -34,6 +35,7 @@ RUN apt-get update && \
+         libc6-dev-i386 \
+         libnl-3-dev \
+         ocaml-nox \
++        ocaml-findlib \
+         libfindlib-ocaml-dev \
+         markdown \
+         transfig \
+-- 
+Anthony PERARD
 
->
->
-> > +
-> > +/* FF-A-1.1-REL0 section 10.9.2 Memory region handle, page 167 */
-> > +#define FFA_HANDLE_HYP_FLAG             BIT(63, ULL)
-> > +#define FFA_HANDLE_INVALID              0xffffffffffffffffULL
-> > +
-> > +/*
-> > + * The bits for FFA_NORMAL_MEM_REG_ATTR FFA_MEM_ACC_RW below are
-> > + * defined in FF-A-1.1-REL0 Table 10.18 at page 175.
-> > + */
-> > + /* Memory attributes: Normal memory, Write-Back cacheable, Inner shar=
-eable */
-> > +#define FFA_NORMAL_MEM_REG_ATTR         0x2fU
-> > +/* Memory access permissions: Read-write */
-> > +#define FFA_MEM_ACC_RW                  0x2U
->
-> RW bits are defined in table 10.15 at page 168 if i am not mistaking
-
-Thanks, I'll update it.
-
->
-> > +
-> > +/* FF-A-1.1-REL0 section 10.11.4 Flags usage, page 184-187 */
-> > +/* Clear memory before mapping in receiver */
-> > +#define FFA_MEMORY_REGION_FLAG_CLEAR            BIT(0, U)
-> > +/* Relayer may time slice this operation */
-> > +#define FFA_MEMORY_REGION_FLAG_TIME_SLICE       BIT(1, U)
-> > +/* Clear memory after receiver relinquishes it */
-> > +#define FFA_MEMORY_REGION_FLAG_CLEAR_RELINQUISH BIT(2, U)
-> > +/* Share memory transaction */
-> > +#define FFA_MEMORY_REGION_TRANSACTION_TYPE_SHARE (1U << 3)
-> > +
-> > +
-> Please only add one empty line here.
-
-OK, I'll fix.
-
->
-> I checked the definitions and they are all coherent with the spec.
-
-Thanks,
-Jens
-
->
-> Cheers
-> Bertrand
->
-> > /* Framework direct request/response */
-> > #define FFA_MSG_FLAG_FRAMEWORK          BIT(31, U)
-> > #define FFA_MSG_TYPE_MASK               0xFFU;
-> > --
-> > 2.34.1
-> >
->
 
