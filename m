@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D82EC678D4
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 10:15:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.505710.778606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D312EC7EE2F
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Mar 2023 10:16:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.505737.778650 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY2RS-0002LN-MR; Fri, 03 Mar 2023 10:15:10 +0000
+	id 1pY2Sb-0005G6-Vb; Fri, 03 Mar 2023 10:16:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 505710.778606; Fri, 03 Mar 2023 10:15:10 +0000
+Received: by outflank-mailman (output) from mailman id 505737.778650; Fri, 03 Mar 2023 10:16:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pY2RS-0002KH-IB; Fri, 03 Mar 2023 10:15:10 +0000
-Received: by outflank-mailman (input) for mailman id 505710;
- Fri, 03 Mar 2023 10:15:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pY2Sb-0005Fz-Sw; Fri, 03 Mar 2023 10:16:21 +0000
+Received: by outflank-mailman (input) for mailman id 505737;
+ Fri, 03 Mar 2023 10:16:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=M2mb=63=redhat.com=thuth@srs-se1.protection.inumbo.net>)
- id 1pY2RR-00022o-0L
- for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 10:15:09 +0000
+ id 1pY2Sa-0005FT-Mf
+ for xen-devel@lists.xenproject.org; Fri, 03 Mar 2023 10:16:20 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 45069f22-b9ac-11ed-a550-8520e6686977;
- Fri, 03 Mar 2023 11:15:07 +0100 (CET)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 706b5243-b9ac-11ed-96af-2f268f93b82a;
+ Fri, 03 Mar 2023 11:16:19 +0100 (CET)
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-423-EPilcqYCMHO2VLnDNQ6Uqg-1; Fri, 03 Mar 2023 05:15:02 -0500
+ us-mta-287-busq1su_NymslZNVzzrKCw-1; Fri, 03 Mar 2023 05:15:09 -0500
 Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
  [10.11.54.9])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1ED471C0514F;
- Fri,  3 Mar 2023 10:15:02 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4FA5A1C05EA9;
+ Fri,  3 Mar 2023 10:15:09 +0000 (UTC)
 Received: from thuth.com (unknown [10.39.192.255])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 00B8F492C14;
- Fri,  3 Mar 2023 10:14:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2B304492C18;
+ Fri,  3 Mar 2023 10:15:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45069f22-b9ac-11ed-a550-8520e6686977
+X-Inumbo-ID: 706b5243-b9ac-11ed-96af-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1677838506;
+	s=mimecast20190719; t=1677838578;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=0kdnVnntb5nWcTW1rbFJ9Pn9nJlADeM6A9b2Bf+w7AQ=;
-	b=T/pXL5271rIIKm35N8A/z1bF2FoQ2+tA18jn0rYbwqk59x/Fi37dD7waW/6khas3y3Yb87
-	R0qrrjRbZlkOOVUiPwfCNqT7ts7m2FNN6GXn74DAD+Uq3PzL6ixuFg08NAwjCmyeJo/W+D
-	8YUkMJKrBNsaQmyFe8X22jN1MFyPKgo=
-X-MC-Unique: EPilcqYCMHO2VLnDNQ6Uqg-1
+	bh=VsyNx8S0oHx7gbsAqA7uqjFZbAUv+nmUJaK3qsCgNpc=;
+	b=THlE+7Zy0ayCWVhXDv71YOmX0nWDZ3jrPdtESPWq+Mq3zhBp4X+MrBD+R0t8rEAwR0svta
+	AiRdTj4a/JQIZnWgqkXxQkTAuLqD46e6MvbwLt2iH55CAipgHdVfbt7qBpy+p1YBgvZTzd
+	LJm1Sc9F9Cxum5sSn0x313xI+bOMblM=
+X-MC-Unique: busq1su_NymslZNVzzrKCw-1
 From: Thomas Huth <thuth@redhat.com>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>,
@@ -78,9 +78,9 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: [PATCH v3 2/6] docs/about/deprecated: Deprecate the qemu-system-i386 binary
-Date: Fri,  3 Mar 2023 11:14:48 +0100
-Message-Id: <20230303101452.769367-3-thuth@redhat.com>
+Subject: [PATCH v3 5/6] docs/about/deprecated: Deprecate the qemu-system-arm binary
+Date: Fri,  3 Mar 2023 11:14:51 +0100
+Message-Id: <20230303101452.769367-6-thuth@redhat.com>
 In-Reply-To: <20230303101452.769367-1-thuth@redhat.com>
 References: <20230303101452.769367-1-thuth@redhat.com>
 MIME-Version: 1.0
@@ -88,47 +88,40 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
 
-Aside from not supporting KVM on 32-bit hosts, the qemu-system-x86_64
-binary is a proper superset of the qemu-system-i386 binary. With the
-32-bit host support being deprecated, it is now also possible to
-deprecate the qemu-system-i386 binary.
-
-With regards to 32-bit KVM support in the x86 Linux kernel,
-the developers confirmed that they do not need a recent
-qemu-system-i386 binary here:
-
- https://lore.kernel.org/kvm/Y%2ffkTs5ajFy0hP1U@google.com/
+qemu-system-aarch64 is a proper superset of qemu-system-arm,
+and the latter was mainly still required for 32-bit KVM support.
+But this 32-bit KVM arm support has been dropped in the Linux
+kernel a couple of years ago already, so we don't really need
+qemu-system-arm anymore, thus deprecated it now.
 
 Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Signed-off-by: Thomas Huth <thuth@redhat.com>
 ---
- docs/about/deprecated.rst | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ docs/about/deprecated.rst | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index f0c1e6b545..a30aa8dfdf 100644
+index e2e908f84d..1b7b3da309 100644
 --- a/docs/about/deprecated.rst
 +++ b/docs/about/deprecated.rst
-@@ -34,6 +34,18 @@ deprecating the build option and no longer defend it in CI. The
- ``--enable-gcov`` build option remains for analysis test case
- coverage.
+@@ -45,6 +45,16 @@ run 32-bit guests by selecting a 32-bit CPU model, including KVM support
+ on x86_64 hosts. Thus users are recommended to reconfigure their systems
+ to use the ``qemu-system-x86_64`` binary instead.
  
-+``qemu-system-i386`` binary (since 8.0)
-+'''''''''''''''''''''''''''''''''''''''
++``qemu-system-arm`` binary (since 8.0)
++''''''''''''''''''''''''''''''''''''''
 +
-+The ``qemu-system-i386`` binary was mainly useful for running with KVM
-+on 32-bit x86 hosts, but most Linux distributions already removed their
-+support for 32-bit x86 kernels, so hardly anybody still needs this. The
-+``qemu-system-x86_64`` binary is a proper superset and can be used to
-+run 32-bit guests by selecting a 32-bit CPU model, including KVM support
-+on x86_64 hosts. Thus users are recommended to reconfigure their systems
-+to use the ``qemu-system-x86_64`` binary instead.
++``qemu-system-aarch64`` is a proper superset of ``qemu-system-arm``. The
++latter was mainly a requirement for running KVM on 32-bit arm hosts, but
++this 32-bit KVM support has been removed three years ago already (see:
++https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=541ad0150ca4
++). Thus the QEMU project will drop the ``qemu-system-arm`` binary in a
++future release. Use ``qemu-system-aarch64`` instead.
 +
-+
+ 
  System emulator command line arguments
  --------------------------------------
- 
 -- 
 2.31.1
 
