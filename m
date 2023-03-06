@@ -4,34 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9868FC678D4
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Mar 2023 08:41:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.506775.779924 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF2A1C678D4
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Mar 2023 08:47:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.506781.779940 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZ6PY-0008Qy-MJ; Mon, 06 Mar 2023 08:41:36 +0000
+	id 1pZ6V1-0000hA-KX; Mon, 06 Mar 2023 08:47:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 506775.779924; Mon, 06 Mar 2023 08:41:36 +0000
+Received: by outflank-mailman (output) from mailman id 506781.779940; Mon, 06 Mar 2023 08:47:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZ6PY-0008Qr-Jj; Mon, 06 Mar 2023 08:41:36 +0000
-Received: by outflank-mailman (input) for mailman id 506775;
- Mon, 06 Mar 2023 08:41:35 +0000
+	id 1pZ6V1-0000fg-ES; Mon, 06 Mar 2023 08:47:15 +0000
+Received: by outflank-mailman (input) for mailman id 506781;
+ Mon, 06 Mar 2023 08:47:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=q3Qw=66=alien8.de=bp@srs-se1.protection.inumbo.net>)
- id 1pZ6PN-0008QZ-ET
- for xen-devel@lists.xenproject.org; Mon, 06 Mar 2023 08:41:35 +0000
-Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ (envelope-from <SRS0=A4jh=66=redhat.com=thuth@srs-se1.protection.inumbo.net>)
+ id 1pZ6Uz-0000dk-Sm
+ for xen-devel@lists.xenproject.org; Mon, 06 Mar 2023 08:47:13 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ad005f2d-bbfa-11ed-96b4-2f268f93b82a;
- Mon, 06 Mar 2023 09:41:24 +0100 (CET)
-Received: from zn.tnic (p5de8e9fe.dip0.t-ipconnect.de [93.232.233.254])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7bb705e8-bbfb-11ed-96b4-2f268f93b82a;
+ Mon, 06 Mar 2023 09:47:11 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-480-BweyhluRMwuANh_BPVGZnA-1; Mon, 06 Mar 2023 03:47:06 -0500
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 364BD1EC0554;
- Mon,  6 Mar 2023 09:41:23 +0100 (CET)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6AB3C1C05EB7;
+ Mon,  6 Mar 2023 08:47:05 +0000 (UTC)
+Received: from thuth.com (unknown [10.39.193.101])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 21233440DE;
+ Mon,  6 Mar 2023 08:47:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,69 +52,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad005f2d-bbfa-11ed-96b4-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-	t=1678092083;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-	bh=Ch2JqcQidKQQw3jxmmjcy3XtJaLHvZg4719TcnfXY28=;
-	b=Qx2LNM8GAehIIoRwD6DIBt12Y5dpKRZm+CSgKO+pDq6m4Xe438WsLBNmOQg6NKRA3ywcQ5
-	LJE1fX9vDOQbHArJ99nI+xx1I2w/W+UEGxcn4QY6UKQEBvGEq5lZ1JEnIu+MfHiejEZE/z
-	aGW6efJMwgYssl+dV21lAbF+6UBau7E=
-Date: Mon, 6 Mar 2023 09:41:17 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Juergen Gross <jgross@suse.com>
-Cc: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>,
-	linux-kernel@vger.kernel.org, x86@kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Alexey Makhalov <amakhalov@vmware.com>,
-	VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2] x86/paravirt: merge activate_mm and dup_mmap callbacks
-Message-ID: <20230306084117.GAZAWnLeGI09VLsXkC@fat_crate.local>
-References: <20230207075902.7539-1-jgross@suse.com>
- <dc5fbb2e-6a23-15e5-a451-e069e90a0656@csail.mit.edu>
- <2b4b0590-8327-3567-f4cd-e610d52fbf1c@suse.com>
+X-Inumbo-ID: 7bb705e8-bbfb-11ed-96b4-2f268f93b82a
+X-MC-Unique: BweyhluRMwuANh_BPVGZnA-1
+From: Thomas Huth <thuth@redhat.com>
+To: qemu-devel@nongnu.org,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Daniel Berrange <berrange@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	qemu-arm@nongnu.org,
+	Maxim Levitsky <mlevitsk@redhat.com>,
+	libvir-list@redhat.com,
+	Richard Henderson <richard.henderson@linaro.org>,
+	xen-devel@lists.xenproject.org,
+	Reinoud Zandijk <reinoud@netbsd.org>,
+	Wilfred Mallawa <wilfred.mallawa@wdc.com>,
+	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Subject: [PATCH v4 1/5] docs/about/deprecated: Deprecate 32-bit x86 hosts for system emulation
+Date: Mon,  6 Mar 2023 09:46:54 +0100
+Message-Id: <20230306084658.29709-2-thuth@redhat.com>
+In-Reply-To: <20230306084658.29709-1-thuth@redhat.com>
+References: <20230306084658.29709-1-thuth@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <2b4b0590-8327-3567-f4cd-e610d52fbf1c@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 
-On Thu, Feb 23, 2023 at 04:05:51PM +0100, Juergen Gross wrote:
-> x86 maintainers, I think this patch should be carried via the tip tree.
+Hardly anybody still uses 32-bit x86 hosts today, so we should start
+deprecating them to stop wasting our time and CI minutes here.
+For example, there are also still some unresolved problems with these:
+When emulating 64-bit binaries in user mode, TCG does not honor atomicity
+for 64-bit accesses, which is "perhaps worse than not working at all"
+(quoting Richard). Let's simply make it clear that people should use
+64-bit x86 hosts nowadays and we do not intend to fix/maintain the old
+32-bit stuff.
 
-You missed a spot. I'll whack it.
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ docs/about/deprecated.rst | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/arch/x86/include/asm/mmu_context.h b/arch/x86/include/asm/mmu_context.h
-index a8b323266179..c3ad8a526378 100644
---- a/arch/x86/include/asm/mmu_context.h
-+++ b/arch/x86/include/asm/mmu_context.h
-@@ -16,13 +16,6 @@
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 15084f7bea..1ca9dc33d6 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -196,6 +196,17 @@ CI coverage support may bitrot away before the deprecation process
+ completes. The little endian variants of MIPS (both 32 and 64 bit) are
+ still a supported host architecture.
  
- extern atomic64_t last_mm_ctx_id;
++System emulation on 32-bit x86 hosts (since 8.0)
++''''''''''''''''''''''''''''''''''''''''''''''''
++
++Support for 32-bit x86 host deployments is increasingly uncommon in mainstream
++OS distributions given the widespread availability of 64-bit x86 hardware.
++The QEMU project no longer considers 32-bit x86 support for system emulation to
++be an effective use of its limited resources, and thus intends to discontinue
++it. Since all recent x86 hardware from the past >10 years is capable of the
++64-bit x86 extensions, a corresponding 64-bit OS should be used instead.
++
++
+ QEMU API (QAPI) events
+ ----------------------
  
--#ifndef CONFIG_PARAVIRT_XXL
--static inline void paravirt_activate_mm(struct mm_struct *prev,
--					struct mm_struct *next)
--{
--}
--#endif	/* !CONFIG_PARAVIRT_XXL */
--
- #ifdef CONFIG_PERF_EVENTS
- DECLARE_STATIC_KEY_FALSE(rdpmc_never_available_key);
- DECLARE_STATIC_KEY_FALSE(rdpmc_always_available_key);
-
 -- 
-Regards/Gruss,
-    Boris.
+2.31.1
 
-https://people.kernel.org/tglx/notes-about-netiquette
 
