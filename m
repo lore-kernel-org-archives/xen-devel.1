@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69594C678D5
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:17:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507769.781748 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E0DBC742A7
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:27:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507782.781817 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZbs1-0000fF-Ss; Tue, 07 Mar 2023 18:17:05 +0000
+	id 1pZc22-0003hY-2Y; Tue, 07 Mar 2023 18:27:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507769.781748; Tue, 07 Mar 2023 18:17:05 +0000
+Received: by outflank-mailman (output) from mailman id 507782.781817; Tue, 07 Mar 2023 18:27:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZbs1-0000f8-QF; Tue, 07 Mar 2023 18:17:05 +0000
-Received: by outflank-mailman (input) for mailman id 507769;
- Tue, 07 Mar 2023 18:17:04 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pZbrz-0000ev-W9; Tue, 07 Mar 2023 18:17:04 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pZbrz-0007GC-Ty; Tue, 07 Mar 2023 18:17:03 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pZbrz-0001Fv-Gd; Tue, 07 Mar 2023 18:17:03 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pZbrz-0005xc-GC; Tue, 07 Mar 2023 18:17:03 +0000
+	id 1pZc21-0003g1-Tj; Tue, 07 Mar 2023 18:27:25 +0000
+Received: by outflank-mailman (input) for mailman id 507782;
+ Tue, 07 Mar 2023 18:27:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pZc1z-0002M9-UT
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:23 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b2652102-bd15-11ed-96b5-2f268f93b82a;
+ Tue, 07 Mar 2023 19:27:20 +0100 (CET)
+Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pZc1o-006deP-3K; Tue, 07 Mar 2023 18:27:12 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1pZc1o-009e9p-0L; Tue, 07 Mar 2023 18:27:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,143 +43,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: b2652102-bd15-11ed-96b5-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=W/rEJyOEQE8svsYuA3kJ7BIc7/onRfpRZfYVp13sxO4=; b=0x6M/8B+E6j+RVl/QQIvbVjY3c
-	BEmma78sLdKYzDI7svMqWksQXaiI8Q5s+vu8jKeoO87sxoOlBE5F/KJwKzn4N7xudfFChCAdxSUHm
-	pdbZviRBQFNADcAAfwHls+Re207zI04Dlowm2tsfGeh5euACyUqDvXkii6zl+D7HVgDE=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-179462-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=clpLW6t7rNTbn75BmNqsky8pta5BOUHGruM/9tE0I6Y=; b=oxyb0Zc977dL6HDYla/xb0jmRi
+	wicc0b/PnADcjdbWq2Dk/p9BVwuybP+MgbvTevS8Wu1FoJTEwbavQ13D2W+BBHxm+zK8nU/h1jxsg
+	vVzDOE4ufdCkp2mrCNM8aG7dTVuAYypKE1NizOKfOinHlUNtHRNqvM/pTY3BhNamgAGnjeL8aE9X5
+	FNir07g/WsS3D4nqKatrbdKx/Bae+dfF4z076qYPgkvWfxI4QsBlajXd0RqQcunzJ2bd7vaqGx1c4
+	Z28jdK/WW4iFZpHSOKJLthh+YQrw5+84C7cY/59OWc6GSDs1ysuXHiyD0rtSmNCnhAJ2fLHy30tDH
+	Fqb//PVg==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Paul Durrant <paul@xen.org>,
+	Joao Martins <joao.m.martins@oracle.com>,
+	Ankur Arora <ankur.a.arora@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	vikram.garhwal@amd.com,
+	Anthony Perard <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org,
+	Juan Quintela <quintela@redhat.com>,
+	"Dr . David Alan Gilbert" <dgilbert@redhat.com>
+Subject: [PULL 23/27] hw/xen: Map guest XENSTORE_PFN grant in emulated Xenstore
+Date: Tue,  7 Mar 2023 18:27:03 +0000
+Message-Id: <20230307182707.2298618-24-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230307182707.2298618-1-dwmw2@infradead.org>
+References: <20230307182707.2298618-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Subject: [libvirt test] 179462: tolerable trouble: pass/starved - PUSHED
-X-Osstest-Failures:
-    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    libvirt:build-armhf-libvirt:build-check(1):starved:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:build-check(1):starved:nonblocking
-    libvirt:test-armhf-armhf-libvirt:build-check(1):starved:nonblocking
-    libvirt:test-armhf-armhf-libvirt-qcow2:build-check(1):starved:nonblocking
-    libvirt:build-armhf:hosts-allocate:starved:nonblocking
-X-Osstest-Versions-This:
-    libvirt=9fecdaf1c80f8fb4390c77b4d353ad07ba77c87a
-X-Osstest-Versions-That:
-    libvirt=cea8402e1c322a25ec944d1c36e902fac31d4331
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 07 Mar 2023 18:17:03 +0000
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-flight 179462 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/179462/
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Failures :-/ but no regressions.
+We don't actually access the guest's page through the grant, because
+this isn't real Xen, and we can just use the page we gave it in the
+first place. Map the grant anyway, mostly for cosmetic purposes so it
+*looks* like it's in use in the guest-visible grant table.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- build-armhf-libvirt           1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt      1 build-check(1)               starved  n/a
- test-armhf-armhf-libvirt-qcow2  1 build-check(1)               starved  n/a
- build-armhf                   2 hosts-allocate               starved  n/a
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ hw/i386/kvm/xen_xenstore.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-version targeted for testing:
- libvirt              9fecdaf1c80f8fb4390c77b4d353ad07ba77c87a
-baseline version:
- libvirt              cea8402e1c322a25ec944d1c36e902fac31d4331
+diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+index bf466c71ed..2cadafd56a 100644
+--- a/hw/i386/kvm/xen_xenstore.c
++++ b/hw/i386/kvm/xen_xenstore.c
+@@ -21,6 +21,7 @@
+ 
+ #include "hw/sysbus.h"
+ #include "hw/xen/xen.h"
++#include "hw/xen/xen_backend_ops.h"
+ #include "xen_overlay.h"
+ #include "xen_evtchn.h"
+ #include "xen_xenstore.h"
+@@ -34,6 +35,7 @@
+ 
+ #include "hw/xen/interface/io/xs_wire.h"
+ #include "hw/xen/interface/event_channel.h"
++#include "hw/xen/interface/grant_table.h"
+ 
+ #define TYPE_XEN_XENSTORE "xen-xenstore"
+ OBJECT_DECLARE_SIMPLE_TYPE(XenXenstoreState, XEN_XENSTORE)
+@@ -66,6 +68,9 @@ struct XenXenstoreState {
+ 
+     uint8_t *impl_state;
+     uint32_t impl_state_size;
++
++    struct xengntdev_handle *gt;
++    void *granted_xs;
+ };
+ 
+ struct XenXenstoreState *xen_xenstore_singleton;
+@@ -1453,6 +1458,17 @@ int xen_xenstore_reset(void)
+     }
+     s->be_port = err;
+ 
++    /*
++     * We don't actually access the guest's page through the grant, because
++     * this isn't real Xen, and we can just use the page we gave it in the
++     * first place. Map the grant anyway, mostly for cosmetic purposes so
++     * it *looks* like it's in use in the guest-visible grant table.
++     */
++    s->gt = qemu_xen_gnttab_open();
++    uint32_t xs_gntref = GNTTAB_RESERVED_XENSTORE;
++    s->granted_xs = qemu_xen_gnttab_map_refs(s->gt, 1, xen_domid, &xs_gntref,
++                                             PROT_READ | PROT_WRITE);
++
+     return 0;
+ }
+ 
+-- 
+2.39.0
 
-Last test of basis   179154  2023-03-04 04:20:24 Z    3 days
-Testing same since   179462  2023-03-07 04:20:39 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrea Bolognani <abologna@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  starved 
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          starved 
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     starved 
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-qcow2                               starved 
- test-arm64-arm64-libvirt-raw                                 pass    
- test-armhf-armhf-libvirt-raw                                 starved 
- test-amd64-i386-libvirt-raw                                  pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   cea8402e1c..9fecdaf1c8  9fecdaf1c80f8fb4390c77b4d353ad07ba77c87a -> xen-tested-master
 
