@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A002DC678D5
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 16:22:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507583.781278 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39509C6FD1A
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 16:23:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507589.781289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZa4h-0003M7-3i; Tue, 07 Mar 2023 16:22:03 +0000
+	id 1pZa5a-00043h-DV; Tue, 07 Mar 2023 16:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507583.781278; Tue, 07 Mar 2023 16:22:03 +0000
+Received: by outflank-mailman (output) from mailman id 507589.781289; Tue, 07 Mar 2023 16:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZa4h-0003M0-0v; Tue, 07 Mar 2023 16:22:03 +0000
-Received: by outflank-mailman (input) for mailman id 507583;
- Tue, 07 Mar 2023 16:22:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZa5a-00043a-AO; Tue, 07 Mar 2023 16:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 507589;
+ Tue, 07 Mar 2023 16:22:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZa4f-00030b-4J
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 16:22:01 +0000
+ id 1pZa5Z-0003Ki-Js
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 16:22:57 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 302b076a-bd04-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 17:22:00 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4f48674d-bd04-11ed-a550-8520e6686977;
+ Tue, 07 Mar 2023 17:22:55 +0100 (CET)
 Received: from [2001:8b0:10b:5:640c:634b:db90:9c87]
  (helo=u3832b3a9db3152.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pZa4X-006YTQ-7M; Tue, 07 Mar 2023 16:21:53 +0000
+ id 1pZa5Q-006YZ0-3p; Tue, 07 Mar 2023 16:22:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,19 +43,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 302b076a-bd04-11ed-96b5-2f268f93b82a
+X-Inumbo-ID: 4f48674d-bd04-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
 	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=hkgLMeScvQtXNmP8vLk5y3isKa3UBGhTjKl2IDsGIMk=; b=dpHhUxt6v9QZSravsSg0UVcvhC
-	hG1q2ZJdiKnkWM1MFaEGbH39kbqQ2cqNJAfBjV1/kwTAKdH8qLgWfODSS0/+6bsEbxSDrb+sgLoAw
-	jEP4pImJoF8V29yfQ9V7Fsz54g5y39VVLV1NcYLq3V4JN8fg9F7T4/GKCgExGIqnWUHPXZH4mU3pH
-	7rDTre8QfgjAb1gQjZzZ+4JIFCtaVsb3rId/xFRRiaCO6rTO9bvmFq5ylG7qy9b/e8S48dskLc+wy
-	U2TNnMJUjddAjnI0aZrJklZd1GoNAWYJ2EHjPaZxeHB52DIiLHX0jqQ1dbehsHEvPJsa1p45DJm4V
-	rc2DEdLw==;
-Message-ID: <945564aa2d51aa6cd6f9b179981ca3ded5c94190.camel@infradead.org>
-Subject: [RFC PATCH v1 26/25] MAINTAINERS: Add entry for Xen on KVM emulation
+	bh=nNhyhMhwfXBKddqL0/8UN9Xo0T2a9NXo9/sjONe8BOk=; b=thidL2pmJz3CPwZNpsw2A/39vX
+	nuzNNcWhl2EV/b8yasNrtUlJLkdb0o1wrf8/c3a+3qSmY8jf3+qD8sfCNnXFAgYZOU6+7MP5WEUAl
+	IDVOo+3839P0hFOi//7y/oNSAR42KpkUyej39+4iD0d6cGbOQ7y3UuS4pa6W/z0uyWPDhJfAvOSRp
+	FigLqDsM3HhC54qRAhD5Tds0KfcEYwabPnialtxNISyfExZeNYvoZE3RpcAvESds+uud8rUTdKdYk
+	DwAL+ZzLqT4qyhxS3L34es/tYyk+XjtEylHMcGIHDblFlg26DOgNKMBGzWHZSe3WFEKI7d8GWLCVI
+	XFq9X8kg==;
+Message-ID: <1de346bcc550da15f43c9efe05cb98ea57260df2.camel@infradead.org>
+Subject: [RFC PATCH v1 27/25] docs: Update Xen-on-KVM documentation for PV
+ disk support
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Paul Durrant <paul@xen.org>, Joao
@@ -63,17 +64,17 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Paul Durrant <paul@xen.org>, Joao
  <ankur.a.arora@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>,
  vikram.garhwal@amd.com, Anthony Perard <anthony.perard@citrix.com>,
  xen-devel@lists.xenproject.org
-Date: Tue, 07 Mar 2023 16:21:52 +0000
+Date: Tue, 07 Mar 2023 16:22:47 +0000
 In-Reply-To: <20230302153435.1170111-1-dwmw2@infradead.org>
 References: <20230302153435.1170111-1-dwmw2@infradead.org>
 Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-RnOalRUiVwy89vS9fhar"
+	boundary="=-hMr61SxQiFbEJlG4AHmT"
 User-Agent: Evolution 3.44.4-0ubuntu1 
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 
---=-RnOalRUiVwy89vS9fhar
+--=-hMr61SxQiFbEJlG4AHmT
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -81,35 +82,94 @@ From: David Woodhouse <dwmw@amazon.co.uk>
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ docs/system/i386/xen.rst | 30 +++++++++++++++++++++++-------
+ 1 file changed, 23 insertions(+), 7 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index da29661b37..76b705e467 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -443,6 +443,15 @@ F: target/i386/kvm/
- F: target/i386/sev*
- F: scripts/kvm/vmxcap
+diff --git a/docs/system/i386/xen.rst b/docs/system/i386/xen.rst
+index a00523b492..f06765e88c 100644
+--- a/docs/system/i386/xen.rst
++++ b/docs/system/i386/xen.rst
+@@ -9,6 +9,8 @@ KVM has support for hosting Xen guests, intercepting Xen hy=
+percalls and event
+ channel (Xen PV interrupt) delivery. This allows guests which expect to be
+ run under Xen to be hosted in QEMU under Linux/KVM instead.
 =20
-+Xen emulation on X86 KVM CPUs
-+M: David Woodhouse <dwmw2@infradead.org>
-+M: Paul Durrant <paul@xen.org>
-+S: Supported
-+F: include/sysemu/kvm_xen.h
-+F: target/i386/kvm/xen*
-+F: hw/i386/kvm/xen*
-+F: tests/avocado/xen_guest.py
++Using the split irqchip is mandatory for Xen support.
 +
- Guest CPU Cores (other accelerators)
- ------------------------------------
- Overall
+ Setup
+ -----
+=20
+@@ -17,14 +19,14 @@ accelerator, for example for Xen 4.10:
+=20
+ .. parsed-literal::
+=20
+-  |qemu_system| --accel kvm,xen-version=3D0x4000a
++  |qemu_system| --accel kvm,xen-version=3D0x4000a,kernel-irqchip=3Dsplit
+=20
+ Additionally, virtual APIC support can be advertised to the guest through =
+the
+ ``xen-vapic`` CPU flag:
+=20
+ .. parsed-literal::
+=20
+-  |qemu_system| --accel kvm,xen-version=3D0x4000a --cpu host,+xen_vapic
++  |qemu_system| --accel kvm,xen-version=3D0x4000a,kernel-irqchip=3Dsplit -=
+-cpu host,+xen_vapic
+=20
+ When Xen support is enabled, QEMU changes hypervisor identification (CPUID
+ 0x40000000..0x4000000A) to Xen. The KVM identification and features are no=
+t
+@@ -33,11 +35,25 @@ moves to leaves 0x40000100..0x4000010A.
+=20
+ The Xen platform device is enabled automatically for a Xen guest. This all=
+ows
+ a guest to unplug all emulated devices, in order to use Xen PV block and n=
+etwork
+-drivers instead. Note that until the Xen PV device back ends are enabled t=
+o work
+-with Xen mode in QEMU, that is unlikely to cause significant joy. Linux gu=
+ests
+-can be dissuaded from this by adding 'xen_emul_unplug=3Dnever' on their co=
+mmand
+-line, and it can also be noted that AHCI disk controllers are exempt from =
+being
+-unplugged, as are passthrough VFIO PCI devices.
++drivers instead. Under Xen, the boot disk is typically available both via =
+IDE
++emulation, and as a PV block device. Guest bootloaders typically use IDE t=
+o load
++the guest kernel, which then unplugs the IDE and continues with the Xen PV=
+ block
++device.
++
++This configuration can be achieved as follows
++
++.. parsed-literal::
++
++  |qemu_system| -M pc --accel kvm,xen-version=3D0x4000a,kernel-irqchip=3Ds=
+plit \\
++       -drive file=3D${GUEST_IMAGE},if=3Dnone,id=3Ddisk,file.locking=3Doff=
+ -device xen-disk,drive=3Ddisk,vdev=3Dxvda \\
++       -drive file=3D${GUEST_IMAGE},index=3D2,media=3Ddisk,file.locking=3D=
+off,if=3Dide
++
++It is necessary to use the pc machine type, as the q35 machine uses AHCI i=
+nstead
++of legacy IDE, and AHCI disks are not unplugged through the Xen PV unplug
++mechanism.
++
++VirtIO devices can also be used; Linux guests may need to be dissuaded fro=
+m
++umplugging them by adding 'xen_emul_unplug=3Dnever' on their command line.
+=20
+ Properties
+ ----------
 --=20
 2.34.1
 
 
 
---=-RnOalRUiVwy89vS9fhar
+--=-hMr61SxQiFbEJlG4AHmT
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -201,25 +261,25 @@ IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
 dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
 NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
 xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
-DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwMzA3MTYyMTUyWjAvBgkqhkiG9w0BCQQxIgQgZzQeIAhc
-7QQgDi03bxYniNvKTrFfHIOILJ/7Hkuz5CEwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwMzA3MTYyMjQ3WjAvBgkqhkiG9w0BCQQxIgQg2H3ZM2Q9
+3rfKG9QoaBNr2GIOtU55IqxM3ing4YmPNcAwgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
 BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
 A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
 dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
 DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
 MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
 Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
-lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgBVepFemNwm0FU05xxDEsdUZauRarZdG4+2
-RSoP8lC7x/ZDddIfd4vh77lpEJz1DghzBxrNYqPpPS3DiKdSW2fs2aI/eOUnkqEnmNrdRh3cCB6L
-pcpHU7PFRKv9ZL2KxLlYnYvt+72XDin79sjN2AkyBINRmn6dYyDJySqJ8/eYZuF6bwP6SOwwnPXw
-lOGbeCGXm8yLRz+P4ILxDVWBTk+Rd+UPo0qWSvRcjKoHIrOl2/pMl3ETEVCAlOTsbHtkeg756fdZ
-1ov6F3Hwieh+Pxt0HN75iVJSdu1MEb0TrwWp5OHByz70BuwQEPyyenvTpGYKU4qTjlYRuizb2gXu
-Z1jIk0lacuHj2YRCbmZmACjcirSEg+ZsehvpEaD8bnOrUlfG5cSACuqGznDNYcCvtwOHF+MoRuLo
-TbxSK2hs+iyGEOodmeAz3hByUA5zQC+O/h3WuAvoMDhpJ1vF9dRFvW3XvIHDk7u592144C8wFbxo
-H2bdlgXAIHXw95tHdqax81hAd7vF6FUdpMTG9jrXCJDTpQ9Y7GPAmHDMX5SqisCiXyAvIWGi6yYx
-g5B7D334JvUL1LsTs29fJDgN0arJB2sMhBK581LkPX6E9vL3VuJRQpi9AJSrS/ZDn4Aei0qJKCoI
-eToYG0vPo0Lmrenw6Xtyxis+STb8c6XQ3Lkwa4f9bwAAAAAAAA==
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAh+vEWnRVDD4GADfb+4rZXQ96Ttzo+zyk2
+UxO5O9jFh/dN95Y5CvXSkAfPdNoaySvYgYVFNhefUHEhGWCNMq+8MknAM+CJA46o1inuQ6jHNXuh
+jWayY+jT7v9yIKaAfifKZfpXmvIanlhLq5xCTCCSlYGEatXm3fXqWp9dbG45XPbpHBKvlsHaB9Sz
+FNa3lWgYUeWSIR04HWSLcs3eO/2BwEEXU7cJH4ROeedvluF/J8cG/INqYape05Jr3753UhAzquTC
+jIZBJc5aqNxi5WXJfCpBs5/h68G+F6O02uZOrDwWWpeBke2ffT3SbpGIshXurBIYgB7NiOsTYugl
+vGiVYJW77IGPs/n21oQY4QLl67MgLEz9MKKhSGGvz8ls03dgaUlhHHoNFwVIjkIh/lC5NuZihwo9
+BSOJqA40XAhWaMUdvA9SXDOPkctF7EIekkWB0QJxT9EkRm/40kXHuteUX8eoJSY3dwh2rS+5Yz5e
+WWbhr9OG2eiMitgCjySPzYW4z0ajqeYss9gc7xUKveDDIKO0pyV663nt8oBmssxOONhfDx+DJ2vy
+BtPh81WD3gKN+1nI5g0tmj3fHbc1AWfu9ioHSxwA0Zt6v59WTlINc3RQC/WnHJUFYDkmH2yvuqm2
+vHsssIEoZI+MQAxIFV/8SibG97X8u2FtZF2RPO+6hAAAAAAAAA==
 
 
---=-RnOalRUiVwy89vS9fhar--
+--=-hMr61SxQiFbEJlG4AHmT--
 
