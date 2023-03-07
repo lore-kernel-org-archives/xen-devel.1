@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40463C74A44
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C91FC74A4B
 	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:27:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507774.781759 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.507781.781825 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc1x-0002Mc-R8; Tue, 07 Mar 2023 18:27:21 +0000
+	id 1pZc22-0003pN-S7; Tue, 07 Mar 2023 18:27:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507774.781759; Tue, 07 Mar 2023 18:27:21 +0000
+Received: by outflank-mailman (output) from mailman id 507781.781825; Tue, 07 Mar 2023 18:27:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc1x-0002MV-OP; Tue, 07 Mar 2023 18:27:21 +0000
-Received: by outflank-mailman (input) for mailman id 507774;
- Tue, 07 Mar 2023 18:27:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZc22-0003nm-Bi; Tue, 07 Mar 2023 18:27:26 +0000
+Received: by outflank-mailman (input) for mailman id 507781;
+ Tue, 07 Mar 2023 18:27:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tG96=67=desiato.srs.infradead.org=BATV+98a25f4d4d04c9e21499+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZc1v-0002M9-8k
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:19 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b0e0b098-bd15-11ed-96b5-2f268f93b82a;
+ <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pZc1z-0002MP-6K
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:23 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b11ade81-bd15-11ed-a550-8520e6686977;
  Tue, 07 Mar 2023 19:27:18 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pZc1n-00H8TI-33; Tue, 07 Mar 2023 18:27:12 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pZc1o-006deS-4g; Tue, 07 Mar 2023 18:27:12 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZc1n-009e9J-2Z; Tue, 07 Mar 2023 18:27:11 +0000
+ Linux)) id 1pZc1o-009e9t-0T; Tue, 07 Mar 2023 18:27:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b0e0b098-bd15-11ed-96b5-2f268f93b82a
+X-Inumbo-ID: b11ade81-bd15-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=LCuGhkStdX7AYXdKG03Aj3hRWhx9QALsH27R8ZBBwAE=; b=DZ9/+6plNvW46NKhwdKl2dS920
-	N0q+TYpACg76DGmQRDJuKqwypmyEd9Spuz3SrC9xdJM5iZwf2OaMmLAZZneyMiHp28Nqc3fTqFWO+
-	sXTPsueJVUqd8MXNeEmcUhQsOzCD4jKOJo+EMfQmLMdTx/GMM1FiQI6H4GwZkZxCZhT38XolyuReJ
-	UFqFN9G8hXXgQ5/XpLS1S3XvNtMnROu4LRRL4OgxlsUcBAgHTlDXRbAK+fTWFGQlSL5S0mCwS305T
-	g+WmnWVETcQ36NKPduIAlAuExWXp+O64lNio9bOQcb6ocsJAl3E2EMgfBc6vtsJuwMsEKmwnI5Aeg
-	wsvtbrRQ==;
+	bh=sITHLK7IN7D/Ke5/pulzgo4hxU3UNITjLOK0n4RQKaE=; b=RZMlahzobCy5dYZOUmjcjhSwni
+	FRUjW85WWGoOn9LL5WQWQsiASZJgwvaTkBB0nFKgJA9Vi8No80FwZMq5JYgMprtKq7eKo6k/vijTg
+	UfpnOMYj6wwXfS9jIdeF1Xhd0MRM7Enmd5qFPUs3CkCWXj4wRnXiAK0mX/VWOfC4g0JyYXWmL9pJH
+	/rnchSlu73lqYQVDJ2hJA9TYGxMcaLCCJUIp2L8NgI7Ydf9ptNGm2J7OL9l+qkG8irBDE5aP1UKIp
+	FOOI0OOL1duYELYBAkz6QvJlpBsqMibJC53C9Wkj9k2jHi0bkJ4InPQWBjhliH6gxQCBr81vlPYl2
+	JcGhxK1A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org,
@@ -67,125 +67,118 @@ Cc: qemu-devel@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	Juan Quintela <quintela@redhat.com>,
 	"Dr . David Alan Gilbert" <dgilbert@redhat.com>
-Subject: [PULL 17/27] hw/xen: Build PV backend drivers for CONFIG_XEN_BUS
-Date: Tue,  7 Mar 2023 18:26:57 +0000
-Message-Id: <20230307182707.2298618-18-dwmw2@infradead.org>
+Subject: [PULL 24/27] hw/xen: Implement soft reset for emulated gnttab
+Date: Tue,  7 Mar 2023 18:27:04 +0000
+Message-Id: <20230307182707.2298618-25-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230307182707.2298618-1-dwmw2@infradead.org>
 References: <20230307182707.2298618-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Now that we have the redirectable Xen backend operations we can build the
-PV backends even without the Xen libraries.
+This is only part of it; we will also need to get the PV back end drivers
+to tear down their own mappings (or do it for them, but they kind of need
+to stop using the pointers too).
+
+Some more work on the actual PV back ends and xen-bus code is going to be
+needed to really make soft reset and migration fully functional, and this
+part is the basis for that.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/9pfs/meson.build            | 2 +-
- hw/block/dataplane/meson.build | 2 +-
- hw/block/meson.build           | 2 +-
- hw/char/meson.build            | 2 +-
- hw/display/meson.build         | 2 +-
- hw/usb/meson.build             | 2 +-
- hw/xen/meson.build             | 5 ++++-
- 7 files changed, 10 insertions(+), 7 deletions(-)
+ hw/i386/kvm/xen_gnttab.c  | 26 ++++++++++++++++++++++++--
+ hw/i386/kvm/xen_gnttab.h  |  1 +
+ target/i386/kvm/xen-emu.c |  5 +++++
+ 3 files changed, 30 insertions(+), 2 deletions(-)
 
-diff --git a/hw/9pfs/meson.build b/hw/9pfs/meson.build
-index 12443b6ad5..fd37b7a02d 100644
---- a/hw/9pfs/meson.build
-+++ b/hw/9pfs/meson.build
-@@ -15,7 +15,7 @@ fs_ss.add(files(
- ))
- fs_ss.add(when: 'CONFIG_LINUX', if_true: files('9p-util-linux.c'))
- fs_ss.add(when: 'CONFIG_DARWIN', if_true: files('9p-util-darwin.c'))
--fs_ss.add(when: 'CONFIG_XEN', if_true: files('xen-9p-backend.c'))
-+fs_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-9p-backend.c'))
- softmmu_ss.add_all(when: 'CONFIG_FSDEV_9P', if_true: fs_ss)
+diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
+index 2bf91d36c0..21c30e3659 100644
+--- a/hw/i386/kvm/xen_gnttab.c
++++ b/hw/i386/kvm/xen_gnttab.c
+@@ -72,13 +72,11 @@ static void xen_gnttab_realize(DeviceState *dev, Error **errp)
+         error_setg(errp, "Xen grant table support is for Xen emulation");
+         return;
+     }
+-    s->nr_frames = 0;
+     s->max_frames = kvm_xen_get_gnttab_max_frames();
+     memory_region_init_ram(&s->gnt_frames, OBJECT(dev), "xen:grant_table",
+                            XEN_PAGE_SIZE * s->max_frames, &error_abort);
+     memory_region_set_enabled(&s->gnt_frames, true);
+     s->entries.v1 = memory_region_get_ram_ptr(&s->gnt_frames);
+-    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
  
- specific_ss.add(when: 'CONFIG_VIRTIO_9P', if_true: files('virtio-9p-device.c'))
-diff --git a/hw/block/dataplane/meson.build b/hw/block/dataplane/meson.build
-index 12c6a264f1..78d7ac1a11 100644
---- a/hw/block/dataplane/meson.build
-+++ b/hw/block/dataplane/meson.build
-@@ -1,2 +1,2 @@
- specific_ss.add(when: 'CONFIG_VIRTIO_BLK', if_true: files('virtio-blk.c'))
--specific_ss.add(when: 'CONFIG_XEN', if_true: files('xen-block.c'))
-+specific_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-block.c'))
-diff --git a/hw/block/meson.build b/hw/block/meson.build
-index b434d5654c..cc2a75cc50 100644
---- a/hw/block/meson.build
-+++ b/hw/block/meson.build
-@@ -14,7 +14,7 @@ softmmu_ss.add(when: 'CONFIG_PFLASH_CFI02', if_true: files('pflash_cfi02.c'))
- softmmu_ss.add(when: 'CONFIG_SSI_M25P80', if_true: files('m25p80.c'))
- softmmu_ss.add(when: 'CONFIG_SSI_M25P80', if_true: files('m25p80_sfdp.c'))
- softmmu_ss.add(when: 'CONFIG_SWIM', if_true: files('swim.c'))
--softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xen-block.c'))
-+softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-block.c'))
- softmmu_ss.add(when: 'CONFIG_TC58128', if_true: files('tc58128.c'))
+     /* Create individual page-sizes aliases for overlays */
+     s->gnt_aliases = (void *)g_new0(MemoryRegion, s->max_frames);
+@@ -90,8 +88,11 @@ static void xen_gnttab_realize(DeviceState *dev, Error **errp)
+         s->gnt_frame_gpas[i] = INVALID_GPA;
+     }
  
- specific_ss.add(when: 'CONFIG_VIRTIO_BLK', if_true: files('virtio-blk.c', 'virtio-blk-common.c'))
-diff --git a/hw/char/meson.build b/hw/char/meson.build
-index 7b594f51b8..e02c60dd54 100644
---- a/hw/char/meson.build
-+++ b/hw/char/meson.build
-@@ -18,7 +18,7 @@ softmmu_ss.add(when: 'CONFIG_SERIAL_PCI', if_true: files('serial-pci.c'))
- softmmu_ss.add(when: 'CONFIG_SERIAL_PCI_MULTI', if_true: files('serial-pci-multi.c'))
- softmmu_ss.add(when: 'CONFIG_SHAKTI_UART', if_true: files('shakti_uart.c'))
- softmmu_ss.add(when: 'CONFIG_VIRTIO_SERIAL', if_true: files('virtio-console.c'))
--softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xen_console.c'))
-+softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen_console.c'))
- softmmu_ss.add(when: 'CONFIG_XILINX', if_true: files('xilinx_uartlite.c'))
- 
- softmmu_ss.add(when: 'CONFIG_AVR_USART', if_true: files('avr_usart.c'))
-diff --git a/hw/display/meson.build b/hw/display/meson.build
-index f470179122..4191694380 100644
---- a/hw/display/meson.build
-+++ b/hw/display/meson.build
-@@ -14,7 +14,7 @@ softmmu_ss.add(when: 'CONFIG_PL110', if_true: files('pl110.c'))
- softmmu_ss.add(when: 'CONFIG_SII9022', if_true: files('sii9022.c'))
- softmmu_ss.add(when: 'CONFIG_SSD0303', if_true: files('ssd0303.c'))
- softmmu_ss.add(when: 'CONFIG_SSD0323', if_true: files('ssd0323.c'))
--softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xenfb.c'))
-+softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xenfb.c'))
- 
- softmmu_ss.add(when: 'CONFIG_VGA_PCI', if_true: files('vga-pci.c'))
- softmmu_ss.add(when: 'CONFIG_VGA_ISA', if_true: files('vga-isa.c'))
-diff --git a/hw/usb/meson.build b/hw/usb/meson.build
-index bdf34cbd3e..599dc24f0d 100644
---- a/hw/usb/meson.build
-+++ b/hw/usb/meson.build
-@@ -84,6 +84,6 @@ if libusb.found()
-   hw_usb_modules += {'host': usbhost_ss}
- endif
- 
--softmmu_ss.add(when: ['CONFIG_USB', 'CONFIG_XEN', libusb], if_true: files('xen-usb.c'))
-+softmmu_ss.add(when: ['CONFIG_USB', 'CONFIG_XEN_BUS', libusb], if_true: files('xen-usb.c'))
- 
- modules += { 'hw-usb': hw_usb_modules }
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index f195bbd25c..19c6aabc7c 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -1,10 +1,13 @@
--softmmu_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-+softmmu_ss.add(when: ['CONFIG_XEN_BUS'], if_true: files(
-   'xen-backend.c',
-   'xen-bus-helper.c',
-   'xen-bus.c',
-   'xen-legacy-backend.c',
-   'xen_devconfig.c',
-   'xen_pvdev.c',
-+))
++    s->nr_frames = 0;
++    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
+     s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
+     s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
 +
-+softmmu_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-   'xen-operations.c',
- ))
+     qemu_mutex_init(&s->gnt_lock);
  
+     xen_gnttab_singleton = s;
+@@ -523,3 +524,24 @@ static struct gnttab_backend_ops emu_gnttab_backend_ops = {
+     .unmap = xen_be_gnttab_unmap,
+ };
+ 
++int xen_gnttab_reset(void)
++{
++    XenGnttabState *s = xen_gnttab_singleton;
++
++    if (!s) {
++        return -ENOTSUP;
++    }
++
++    QEMU_LOCK_GUARD(&s->gnt_lock);
++
++    s->nr_frames = 0;
++
++    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
++
++    s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
++    s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
++
++    memset(s->map_track, 0, s->max_frames * ENTRIES_PER_FRAME_V1);
++
++    return 0;
++}
+diff --git a/hw/i386/kvm/xen_gnttab.h b/hw/i386/kvm/xen_gnttab.h
+index 3bdbe96191..ee215239b0 100644
+--- a/hw/i386/kvm/xen_gnttab.h
++++ b/hw/i386/kvm/xen_gnttab.h
+@@ -13,6 +13,7 @@
+ #define QEMU_XEN_GNTTAB_H
+ 
+ void xen_gnttab_create(void);
++int xen_gnttab_reset(void);
+ int xen_gnttab_map_page(uint64_t idx, uint64_t gfn);
+ 
+ struct gnttab_set_version;
+diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
+index bad3131d08..0bb6c601c9 100644
+--- a/target/i386/kvm/xen-emu.c
++++ b/target/i386/kvm/xen-emu.c
+@@ -1406,6 +1406,11 @@ int kvm_xen_soft_reset(void)
+         return err;
+     }
+ 
++    err = xen_gnttab_reset();
++    if (err) {
++        return err;
++    }
++
+     err = xen_xenstore_reset();
+     if (err) {
+         return err;
 -- 
 2.39.0
 
