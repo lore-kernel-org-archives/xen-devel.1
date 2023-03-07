@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C91FC74A4B
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:27:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507781.781825 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392E7C74A5B
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:27:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507776.781771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc22-0003pN-S7; Tue, 07 Mar 2023 18:27:26 +0000
+	id 1pZc1y-0002ZH-Kt; Tue, 07 Mar 2023 18:27:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507781.781825; Tue, 07 Mar 2023 18:27:26 +0000
+Received: by outflank-mailman (output) from mailman id 507776.781771; Tue, 07 Mar 2023 18:27:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc22-0003nm-Bi; Tue, 07 Mar 2023 18:27:26 +0000
-Received: by outflank-mailman (input) for mailman id 507781;
- Tue, 07 Mar 2023 18:27:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pZc1y-0002Xo-Dc; Tue, 07 Mar 2023 18:27:22 +0000
+Received: by outflank-mailman (input) for mailman id 507776;
+ Tue, 07 Mar 2023 18:27:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZc1z-0002MP-6K
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:23 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b11ade81-bd15-11ed-a550-8520e6686977;
+ <SRS0=tG96=67=desiato.srs.infradead.org=BATV+98a25f4d4d04c9e21499+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pZc1w-0002M9-UG
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:20 +0000
+Received: from desiato.infradead.org (desiato.infradead.org
+ [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b14b444b-bd15-11ed-96b5-2f268f93b82a;
  Tue, 07 Mar 2023 19:27:18 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pZc1o-006deS-4g; Tue, 07 Mar 2023 18:27:12 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pZc1o-00H8TK-05; Tue, 07 Mar 2023 18:27:12 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZc1o-009e9t-0T; Tue, 07 Mar 2023 18:27:12 +0000
+ Linux)) id 1pZc1n-009e9U-2v; Tue, 07 Mar 2023 18:27:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b11ade81-bd15-11ed-a550-8520e6686977
+X-Inumbo-ID: b14b444b-bd15-11ed-96b5-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=sITHLK7IN7D/Ke5/pulzgo4hxU3UNITjLOK0n4RQKaE=; b=RZMlahzobCy5dYZOUmjcjhSwni
-	FRUjW85WWGoOn9LL5WQWQsiASZJgwvaTkBB0nFKgJA9Vi8No80FwZMq5JYgMprtKq7eKo6k/vijTg
-	UfpnOMYj6wwXfS9jIdeF1Xhd0MRM7Enmd5qFPUs3CkCWXj4wRnXiAK0mX/VWOfC4g0JyYXWmL9pJH
-	/rnchSlu73lqYQVDJ2hJA9TYGxMcaLCCJUIp2L8NgI7Ydf9ptNGm2J7OL9l+qkG8irBDE5aP1UKIp
-	FOOI0OOL1duYELYBAkz6QvJlpBsqMibJC53C9Wkj9k2jHi0bkJ4InPQWBjhliH6gxQCBr81vlPYl2
-	JcGhxK1A==;
+	bh=XcYyUSsIZ5DPXUpEedwRKiEDlpl47E4QL1UmqvKuII4=; b=mXjZh3oir2CzXxIvpNQfXwgxiv
+	aKX/nCWb/Qkg+o8eWO9TSCMJYfBaEfsBYkZQk5xIA0AM70wfvlThGS6lNtQ7SQoCCqkOrzG/1Ab0r
+	ysj4zC1pMgmMofP2hfc6ake3hRhvnvu1CZzy6PTKARXvgOz40kYbNCoxmTDPIHbet89dm3JR2/px0
+	E+EmKp5/OpPyDK6K86iC+5ne3pEkuTHUNeA9ZoFLLX3RX7B9H4vf0H6M13rpO2t/sampfXTDGH4LA
+	arrP54cyISm6VxR58Jcrxbs9m01MTlhB9P9FwqrlpmGgP0WXpBvFX/ngmDdsWphLlyoOWh9yZIvDr
+	rm5zu11Q==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org,
@@ -67,118 +67,58 @@ Cc: qemu-devel@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	Juan Quintela <quintela@redhat.com>,
 	"Dr . David Alan Gilbert" <dgilbert@redhat.com>
-Subject: [PULL 24/27] hw/xen: Implement soft reset for emulated gnttab
-Date: Tue,  7 Mar 2023 18:27:04 +0000
-Message-Id: <20230307182707.2298618-25-dwmw2@infradead.org>
+Subject: [PULL 19/27] hw/xen: Only advertise ring-page-order for xen-block if gnttab supports it
+Date: Tue,  7 Mar 2023 18:26:59 +0000
+Message-Id: <20230307182707.2298618-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230307182707.2298618-1-dwmw2@infradead.org>
 References: <20230307182707.2298618-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-This is only part of it; we will also need to get the PV back end drivers
-to tear down their own mappings (or do it for them, but they kind of need
-to stop using the pointers too).
-
-Some more work on the actual PV back ends and xen-bus code is going to be
-needed to really make soft reset and migration fully functional, and this
-part is the basis for that.
+Whem emulating Xen, multi-page grants are distinctly non-trivial and we
+have elected not to support them for the time being. Don't advertise
+them to the guest.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/kvm/xen_gnttab.c  | 26 ++++++++++++++++++++++++--
- hw/i386/kvm/xen_gnttab.h  |  1 +
- target/i386/kvm/xen-emu.c |  5 +++++
- 3 files changed, 30 insertions(+), 2 deletions(-)
+ hw/block/xen-block.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
-index 2bf91d36c0..21c30e3659 100644
---- a/hw/i386/kvm/xen_gnttab.c
-+++ b/hw/i386/kvm/xen_gnttab.c
-@@ -72,13 +72,11 @@ static void xen_gnttab_realize(DeviceState *dev, Error **errp)
-         error_setg(errp, "Xen grant table support is for Xen emulation");
-         return;
-     }
--    s->nr_frames = 0;
-     s->max_frames = kvm_xen_get_gnttab_max_frames();
-     memory_region_init_ram(&s->gnt_frames, OBJECT(dev), "xen:grant_table",
-                            XEN_PAGE_SIZE * s->max_frames, &error_abort);
-     memory_region_set_enabled(&s->gnt_frames, true);
-     s->entries.v1 = memory_region_get_ram_ptr(&s->gnt_frames);
--    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index 87299615e3..f5a744589d 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -83,7 +83,8 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
+             g_free(ring_ref);
+             return;
+         }
+-    } else if (order <= blockdev->props.max_ring_page_order) {
++    } else if (qemu_xen_gnttab_can_map_multi() &&
++               order <= blockdev->props.max_ring_page_order) {
+         unsigned int i;
  
-     /* Create individual page-sizes aliases for overlays */
-     s->gnt_aliases = (void *)g_new0(MemoryRegion, s->max_frames);
-@@ -90,8 +88,11 @@ static void xen_gnttab_realize(DeviceState *dev, Error **errp)
-         s->gnt_frame_gpas[i] = INVALID_GPA;
+         nr_ring_ref = 1 << order;
+@@ -255,8 +256,12 @@ static void xen_block_realize(XenDevice *xendev, Error **errp)
      }
  
-+    s->nr_frames = 0;
-+    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
-     s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
-     s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
+     xen_device_backend_printf(xendev, "feature-flush-cache", "%u", 1);
+-    xen_device_backend_printf(xendev, "max-ring-page-order", "%u",
+-                              blockdev->props.max_ring_page_order);
 +
-     qemu_mutex_init(&s->gnt_lock);
- 
-     xen_gnttab_singleton = s;
-@@ -523,3 +524,24 @@ static struct gnttab_backend_ops emu_gnttab_backend_ops = {
-     .unmap = xen_be_gnttab_unmap,
- };
- 
-+int xen_gnttab_reset(void)
-+{
-+    XenGnttabState *s = xen_gnttab_singleton;
-+
-+    if (!s) {
-+        return -ENOTSUP;
++    if (qemu_xen_gnttab_can_map_multi()) {
++        xen_device_backend_printf(xendev, "max-ring-page-order", "%u",
++                                  blockdev->props.max_ring_page_order);
 +    }
 +
-+    QEMU_LOCK_GUARD(&s->gnt_lock);
-+
-+    s->nr_frames = 0;
-+
-+    memset(s->entries.v1, 0, XEN_PAGE_SIZE * s->max_frames);
-+
-+    s->entries.v1[GNTTAB_RESERVED_XENSTORE].flags = GTF_permit_access;
-+    s->entries.v1[GNTTAB_RESERVED_XENSTORE].frame = XEN_SPECIAL_PFN(XENSTORE);
-+
-+    memset(s->map_track, 0, s->max_frames * ENTRIES_PER_FRAME_V1);
-+
-+    return 0;
-+}
-diff --git a/hw/i386/kvm/xen_gnttab.h b/hw/i386/kvm/xen_gnttab.h
-index 3bdbe96191..ee215239b0 100644
---- a/hw/i386/kvm/xen_gnttab.h
-+++ b/hw/i386/kvm/xen_gnttab.h
-@@ -13,6 +13,7 @@
- #define QEMU_XEN_GNTTAB_H
+     xen_device_backend_printf(xendev, "info", "%u", blockdev->info);
  
- void xen_gnttab_create(void);
-+int xen_gnttab_reset(void);
- int xen_gnttab_map_page(uint64_t idx, uint64_t gfn);
- 
- struct gnttab_set_version;
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index bad3131d08..0bb6c601c9 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -1406,6 +1406,11 @@ int kvm_xen_soft_reset(void)
-         return err;
-     }
- 
-+    err = xen_gnttab_reset();
-+    if (err) {
-+        return err;
-+    }
-+
-     err = xen_xenstore_reset();
-     if (err) {
-         return err;
+     xen_device_frontend_printf(xendev, "virtual-device", "%lu",
 -- 
 2.39.0
 
