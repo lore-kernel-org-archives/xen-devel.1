@@ -4,37 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B94C6FD1A
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 16:26:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507596.781299 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A11C678D5
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 16:28:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507599.781309 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZa9I-0004n3-Vg; Tue, 07 Mar 2023 16:26:48 +0000
+	id 1pZaAH-0005JO-A1; Tue, 07 Mar 2023 16:27:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507596.781299; Tue, 07 Mar 2023 16:26:48 +0000
+Received: by outflank-mailman (output) from mailman id 507599.781309; Tue, 07 Mar 2023 16:27:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZa9I-0004mw-So; Tue, 07 Mar 2023 16:26:48 +0000
-Received: by outflank-mailman (input) for mailman id 507596;
- Tue, 07 Mar 2023 16:26:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZaAH-0005JH-6U; Tue, 07 Mar 2023 16:27:49 +0000
+Received: by outflank-mailman (input) for mailman id 507599;
+ Tue, 07 Mar 2023 16:27:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bVoF=67=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1pZa9H-0004mq-KQ
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 16:26:47 +0000
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [2a00:1450:4864:20::433])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id daaf94dd-bd04-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 17:26:46 +0100 (CET)
-Received: by mail-wr1-x433.google.com with SMTP id v16so12790389wrn.0
- for <xen-devel@lists.xenproject.org>; Tue, 07 Mar 2023 08:26:46 -0800 (PST)
-Received: from [192.168.25.218] (54-240-197-230.amazon.com. [54.240.197.230])
- by smtp.gmail.com with ESMTPSA id
- z17-20020a5d44d1000000b002c58ca558b6sm12858433wrr.88.2023.03.07.08.26.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Mar 2023 08:26:45 -0800 (PST)
+ <SRS0=cT4f=67=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
+ id 1pZaAG-0005J4-7U
+ for xen-devel@lists.xen.org; Tue, 07 Mar 2023 16:27:48 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fd314a8e-bd04-11ed-a550-8520e6686977;
+ Tue, 07 Mar 2023 17:27:45 +0100 (CET)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-49-8JjfyWGJMh-pzHJNb1HhRw-1; Tue, 07 Mar 2023 11:27:29 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 953E5109DD1D;
+ Tue,  7 Mar 2023 16:22:40 +0000 (UTC)
+Received: from localhost (unknown [10.39.195.7])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 88B7C1121330;
+ Tue,  7 Mar 2023 16:22:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,121 +52,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: daaf94dd-bd04-11ed-96b5-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678206406;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I80iEwAu4TMYHhdsbHIgvh7/mafwHEpwDMpOmPu3VGM=;
-        b=L6S4fwA2oOwi/xBrfz6Nnp/KUez6VuoT6LaHwoLXXotSsmAX/KnN+sBsSELQumASdc
-         8NcEG0lbHHtfIGO8eSYJmP6PwOLVvOY4jw3gYiGIl+pVoqEj76sncbhv88zjF9h2PI7l
-         QR3+4dGeiR8aYULXgy06Ht/Ar2a7sAkkw9nUUN/mA50xzDl3sM85WQN0vWEDOZGX2ZEh
-         YHb9MS55LNm38n+fBWSINnRtsflY0OiBdfzKFUhMv3RhUt7TIxcP6su7mV2q818pyElz
-         AGhjYgjYtYMT7uxhWylriZ6NKdDzbwbq1c7rB8gGX7q1QWUpUCV8CGtORNJEzjSK5ljA
-         sjyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678206406;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I80iEwAu4TMYHhdsbHIgvh7/mafwHEpwDMpOmPu3VGM=;
-        b=xuVirrjpQfab2NMgszVkHSJIQLPbGYuY8ePol/V5SJl07yle33gjFHz2QsJY72gRw2
-         rbWJ/9dSFLBL8Ci1BOZ96gsCVLmezImu+rp4MYikei30Bqj93zqbRo28Mmeu2P0zmW8s
-         1RTOAasZTSaONVvpZxPcvenAR6DWHShB3gE2VP2lSXWpfRE2mDN4+56T50e3wTyRbeSz
-         v+TxsvMyGxcgV4kZzOow2pxdSUR/+8SVnN1y2rrWi7biq4gKkrjJdXw4IymLcIPCSr3R
-         LjwjpAM0hy4Me4U1KluSW638bRqEqYpah2fdn/NAgbv8sUe2Zg1Q6vkEBq5aF5yL/Van
-         +BsA==
-X-Gm-Message-State: AO0yUKU5JWYF+Ffy+MSujG+0zMd9XmMGvsluKalAL4U8n/NV1uxV6iKL
-	l9le9B5WngWuhPqmRGoEDzA=
-X-Google-Smtp-Source: AK7set8zbGsS6LCfp75z+EmFwqCqnXKYjSlzne8m1S5SgKTGCyISo+WRaXxS5E7mGw8oY8cOpmWBzQ==
-X-Received: by 2002:adf:ce91:0:b0:2c3:fb3e:ae85 with SMTP id r17-20020adfce91000000b002c3fb3eae85mr10585326wrn.44.1678206406129;
-        Tue, 07 Mar 2023 08:26:46 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <827fce11-372f-db65-b15d-6db8373dcf97@xen.org>
-Date: Tue, 7 Mar 2023 16:26:44 +0000
+X-Inumbo-ID: fd314a8e-bd04-11ed-a550-8520e6686977
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1678206464;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LP0xoPmabZaoC9r1RZtKU8ht9scARLswjvuaeFwadH8=;
+	b=gTYRunYxKIYMG891HwGF1yeA2EVZUA3ZK0W1LkqEP84DVE34nQibO01wZh/qSJbtwQ88oa
+	qjHOYT0WF7DCskhsiJkDRwaOncou9JyWNWPocKYcYOGtTe7M87dF6kNGaqZ7hli1RHWuCg
+	6t8rwy9YAkC1iM9EIVk/lVUC4DQT2wQ=
+X-MC-Unique: 8JjfyWGJMh-pzHJNb1HhRw-1
+Date: Tue, 7 Mar 2023 11:22:37 -0500
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Viresh Kumar <viresh.kumar@linaro.org>
+Cc: qemu-devel@nongnu.org, virtio-dev@lists.oasis-open.org,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+	stratos-dev@op-lists.linaro.org,
+	Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xen.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Sebastien Boeuf <sebastien.boeuf@intel.com>,
+	Liu Jiang <gerry@linux.alibaba.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>
+Subject: Re: [PATCH V2] docs: vhost-user: Add Xen specific memory mapping
+ support
+Message-ID: <20230307162237.GI124259@fedora>
+References: <7c3c120bcf2cf023e873800fd3f55239dd302e38.1678100850.git.viresh.kumar@linaro.org>
+ <20230306153451.GB51288@fedora>
+ <20230307054336.uvky5d7q2qqlxdcv@vireshk-i7>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Reply-To: paul@xen.org
-Subject: Re: [RFC PATCH v1 23/25] hw/xen: Map guest XENSTORE_PFN grant in
- emulated Xenstore
-Content-Language: en-US
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- Joao Martins <joao.m.martins@oracle.com>,
- Ankur Arora <ankur.a.arora@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, vikram.garhwal@amd.com,
- Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
-References: <20230302153435.1170111-1-dwmw2@infradead.org>
- <20230302153435.1170111-24-dwmw2@infradead.org>
-Organization: Xen Project
-In-Reply-To: <20230302153435.1170111-24-dwmw2@infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="nbguWgicIIaPt9yw"
+Content-Disposition: inline
+In-Reply-To: <20230307054336.uvky5d7q2qqlxdcv@vireshk-i7>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
 
-On 02/03/2023 15:34, David Woodhouse wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
-> 
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> ---
->   hw/i386/kvm/xen_xenstore.c | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
-> 
-> diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-> index 028f80499e..f9b7387024 100644
-> --- a/hw/i386/kvm/xen_xenstore.c
-> +++ b/hw/i386/kvm/xen_xenstore.c
-> @@ -21,6 +21,7 @@
->   
->   #include "hw/sysbus.h"
->   #include "hw/xen/xen.h"
-> +#include "hw/xen/xen_backend_ops.h"
->   #include "xen_overlay.h"
->   #include "xen_evtchn.h"
->   #include "xen_xenstore.h"
-> @@ -34,6 +35,7 @@
->   
->   #include "hw/xen/interface/io/xs_wire.h"
->   #include "hw/xen/interface/event_channel.h"
-> +#include "hw/xen/interface/grant_table.h"
->   
->   #define TYPE_XEN_XENSTORE "xen-xenstore"
->   OBJECT_DECLARE_SIMPLE_TYPE(XenXenstoreState, XEN_XENSTORE)
-> @@ -66,6 +68,9 @@ struct XenXenstoreState {
->   
->       uint8_t *impl_state;
->       uint32_t impl_state_size;
-> +
-> +    struct xengntdev_handle *gt;
-> +    void *granted_xs;
->   };
->   
->   struct XenXenstoreState *xen_xenstore_singleton;
-> @@ -1452,6 +1457,17 @@ int xen_xenstore_reset(void)
->       }
->       s->be_port = err;
->   
-> +    /*
-> +     * We don't actually access the guest's page through the grant, because
-> +     * this isn't real Xen, and we can just use the page we gave it in the
-> +     * first place. Map the grant anyway, mostly for cosmetic purposes so
-> +     * it *looks* like it's in use in the guest-visible grant table.
 
-Might be useful to stick this text in the commit comment too.
+--nbguWgicIIaPt9yw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Paul Durrant <paul@xen.org>
+On Tue, Mar 07, 2023 at 11:13:36AM +0530, Viresh Kumar wrote:
+> On 06-03-23, 10:34, Stefan Hajnoczi wrote:
+> > On Mon, Mar 06, 2023 at 04:40:24PM +0530, Viresh Kumar wrote:
+> > > +Xen mmap description
+> > > +^^^^^^^^^^^^^^^^^^^^
+> > > +
+> > > ++-------+-------+
+> > > +| flags | domid |
+> > > ++-------+-------+
+> > > +
+> > > +:flags: 64-bit bit field
+> > > +
+> > > +- Bit 0 is set for Xen foreign memory memory mapping.
+> > > +- Bit 1 is set for Xen grant memory memory mapping.
+> > > +- Bit 2 is set if the back-end can directly map additional memory (l=
+ike
+> > > +  descriptor buffers or indirect descriptors, which aren't part of a=
+lready
+> > > +  shared memory regions) without the need of front-end sending an ad=
+ditional
+> > > +  memory region first.
+> >=20
+> > I don't understand what Bit 2 does. Can you rephrase this? It's unclear
+> > to me how additional memory can be mapped without a memory region
+> > (especially the fd) is sent?
+>=20
+> I (somehow) assumed we will be able to use the same file descriptor
+> that was shared for the virtqueues memory regions and yes I can see
+> now why it wouldn't work or create problems.
+>=20
+> And I need suggestion now on how to make this work.
+>=20
+> With Xen grants, the front end receives grant address from the from
+> guest kernel, they aren't physical addresses, kind of IOMMU stuff.
+>=20
+> The back-end gets access for memory regions of the virtqueues alone
+> initially.  When the back-end gets a request, it reads the descriptor
+> and finds the buffer address, which isn't part of already shared
+> regions. The same happens for descriptor addresses in case indirect
+> descriptor feature is negotiated.
+>=20
+> At this point I was thinking maybe the back-end can simply call the
+> mmap/ioctl to map the memory, using the file descriptor used for the
+> virtqueues.
+>=20
+> How else can we make this work ? We also need to unmap/remove the
+> memory region, as soon as the buffer is processed as the grant address
+> won't be relevant for any subsequent request.
+>=20
+> Should I use VHOST_USER_IOTLB_MSG for this ? I did look at it and I
+> wasn't convinced if it was an exact fit. For example it says that a
+> memory address reported with miss/access fail should be part of an
+> already sent memory region, which isn't the case here.
 
-> +     */
-> +    s->gt = qemu_xen_gnttab_open();
-> +    uint32_t xs_gntref = GNTTAB_RESERVED_XENSTORE;
-> +    s->granted_xs = qemu_xen_gnttab_map_refs(s->gt, 1, xen_domid, &xs_gntref,
-> +                                             PROT_READ | PROT_WRITE);
-> +
->       return 0;
->   }
->   
+VHOST_USER_IOTLB_MSG probably isn't necessary because address
+translation is not required. It will also reduce performance by adding
+extra communication.
+
+Instead, you could change the 1 memory region : 1 mmap relationship that
+existing non-Xen vhost-user back-end implementations have. In Xen
+vhost-user back-ends, the memory region details (including the file
+descriptor and Xen domain id) would be stashed away in back-end when the
+front-end adds memory regions. No mmap would be performed upon
+VHOST_USER_ADD_MEM_REG or VHOST_USER_SET_MEM_TABLE.
+
+Whenever the back-end needs to do DMA, it looks up the memory region and
+performs the mmap + Xen-specific calls:
+- A long-lived mmap of the vring is set up when
+  VHOST_USER_SET_VRING_ENABLE is received.
+- Short-lived mmaps of the indirect descriptors and memory pointed to by
+  the descriptors is set up by the virtqueue processing code.
+
+Does this sound workable to you?
+
+Stefan
+
+--nbguWgicIIaPt9yw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmQHZM0ACgkQnKSrs4Gr
+c8i5EggAg1GeEPUvp+GwY0QihzVnKf+r+lRnlqHwuK0q1FLR6JJV1fNRijZ8krVW
+5V3DfLnwR1mMa79qp725qrhLPIi3gwvmF9cflASoGNAAS5IEv9BWiPHB5jPpNNM+
+iryUkktHZmXccCvA4VHH2arBKu0NInpWPHYx3xiR3AcX4XO71acWnJ09z7JouNdO
+238p6zVatv8npgLHqJEvinlIgvqZ6NHCAyC/JJAhQ3fS/u9+yKVfbFMWHGpiNLsl
+2Y/qoHZRyz8aeJfzNP5kQqCSp8Io2SGnsp5Q2GAP6xgHAtLVdWhk8EAgyYdgagWj
+t5VNNWpSF7qOKix2kqlSdoYYgJ/myQ==
+=4zqx
+-----END PGP SIGNATURE-----
+
+--nbguWgicIIaPt9yw--
 
 
