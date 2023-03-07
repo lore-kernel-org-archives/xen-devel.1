@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E7EC6FD1A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41A7C6FD1D
 	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:18:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507650.781448 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.507651.781456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZaww-0000xt-81; Tue, 07 Mar 2023 17:18:06 +0000
+	id 1pZaww-00015J-NR; Tue, 07 Mar 2023 17:18:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507650.781448; Tue, 07 Mar 2023 17:18:06 +0000
+Received: by outflank-mailman (output) from mailman id 507651.781456; Tue, 07 Mar 2023 17:18:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZaww-0000v0-2Q; Tue, 07 Mar 2023 17:18:06 +0000
-Received: by outflank-mailman (input) for mailman id 507650;
- Tue, 07 Mar 2023 17:18:04 +0000
+	id 1pZaww-00012j-Ef; Tue, 07 Mar 2023 17:18:06 +0000
+Received: by outflank-mailman (input) for mailman id 507651;
+ Tue, 07 Mar 2023 17:18:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZawu-0000bA-Kd
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:18:04 +0000
+ id 1pZawv-0000bA-9s
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:18:05 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0318280e-bd0c-11ed-a550-8520e6686977;
+ id 0315c7f0-bd0c-11ed-a550-8520e6686977;
  Tue, 07 Mar 2023 18:18:01 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pZawk-006ayC-MQ; Tue, 07 Mar 2023 17:17:55 +0000
+ id 1pZawk-006ay6-Bg; Tue, 07 Mar 2023 17:17:54 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZawk-009ciE-2F; Tue, 07 Mar 2023 17:17:54 +0000
+ Linux)) id 1pZawk-009chn-1B; Tue, 07 Mar 2023 17:17:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 0318280e-bd0c-11ed-a550-8520e6686977
+X-Inumbo-ID: 0315c7f0-bd0c-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=4BkL9NyCgm8G9JQUlKfpShNc/FIh4cWQeRocuey9tU8=; b=GeUVdgGSmXJsf28yr1m+YFJgP/
-	I4tHijoLmJrTrjvs1rNLLzvJaMez8nnt6Mk6GaUzAhBXARxsG7ZVcxtOpuv4LlW2jLTOv4wyZS7M4
-	VdSDxy7zkp3Fl1VuiIhammfD36oC9MFdn4+cXhnk4zVsvhbSQ/rDYutcuLq+ZKJX9+IPpAotMG5zs
-	jfvmEPVq/5Fbv/cyvlLMU0q2C7vEe4RcX9qOuGmVwtDEKHT1Xw41lGVyD6YKdRcnIs7A6FR+wNK+O
-	yOJiAlQlp+ddkCZj1fCo2bAk6xVImZSk4cjuTq/BNoZ10qtxrCLGZAhCxYmUbKDC2Twd1aGGaMPBL
-	s1I0IAiQ==;
+	bh=XcYyUSsIZ5DPXUpEedwRKiEDlpl47E4QL1UmqvKuII4=; b=jvJ9tQPOuJFebkKg0V5juiyKzZ
+	Z18YSLGfJnU9igUISRf0/QJHVt7YjMz3LewFIiIll+SUOvBRWnbnKFf3BLM9yc6AF5pF4xgpI43LY
+	efHoDwmsDbrT0iQxWT0h75pdfB6ZnSkHMQT1/zUWOdXz2Mk4wIilc6mTL7s3KKXN9e1FoqscD/BA3
+	sPUhcQdD1LcxFmEwE88G8bDG4X3oy2ov26Xt+Th2BpoLudNgSEcDApvZ+QhAHEB2WndhTksTLJulE
+	52+f4OX+1PbdaO79BmzslXXqBjQQQqzccx9q4USKSprjMaKzJzFBpe3Kzd1vT6PEtH1RpNkHhjf1y
+	MXG/AN1A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,9 +67,9 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Dr . David Alan Gilbert" <dgilbert@redhat.com>,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v2 25/27] i386/xen: Initialize Xen backends from pc_basic_device_init() for emulation
-Date: Tue,  7 Mar 2023 17:17:48 +0000
-Message-Id: <20230307171750.2293175-26-dwmw2@infradead.org>
+Subject: [PATCH v2 19/27] hw/xen: Only advertise ring-page-order for xen-block if gnttab supports it
+Date: Tue,  7 Mar 2023 17:17:42 +0000
+Message-Id: <20230307171750.2293175-20-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230307171750.2293175-1-dwmw2@infradead.org>
 References: <20230307171750.2293175-1-dwmw2@infradead.org>
@@ -80,53 +80,45 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Now that all the work is done to enable the PV backends to work without
-actual Xen, instantiate the bus from pc_basic_device_init() for emulated
-mode.
-
-This allows us finally to launch an emulated Xen guest with PV disk.
-
-   qemu-system-x86_64 -serial mon:stdio -M q35 -cpu host -display none \
-     -m 1G -smp 2 -accel kvm,xen-version=0x4000a,kernel-irqchip=split \
-     -kernel bzImage -append "console=ttyS0 root=/dev/xvda1" \
-     -drive file=/var/lib/libvirt/images/fedora28.qcow2,if=none,id=disk \
-     -device xen-disk,drive=disk,vdev=xvda
-
-If we use -M pc instead of q35, we can even add an IDE disk and boot a
-guest image normally through grub. But q35 gives us AHCI and that isn't
-unplugged by the Xen magic, so the guests ends up seeing "both" disks.
+Whem emulating Xen, multi-page grants are distinctly non-trivial and we
+have elected not to support them for the time being. Don't advertise
+them to the guest.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/pc.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ hw/block/xen-block.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 7bebea57e3..1489abf010 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -102,6 +102,11 @@
- #include "trace.h"
- #include CONFIG_DEVICES
- 
-+#ifdef CONFIG_XEN_EMU
-+#include "hw/xen/xen-legacy-backend.h"
-+#include "hw/xen/xen-bus.h"
-+#endif
-+
- /*
-  * Helper for setting model-id for CPU models that changed model-id
-  * depending on QEMU versions up to QEMU 2.4.
-@@ -1318,6 +1323,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-         if (pcms->bus) {
-             pci_create_simple(pcms->bus, -1, "xen-platform");
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index 87299615e3..f5a744589d 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -83,7 +83,8 @@ static void xen_block_connect(XenDevice *xendev, Error **errp)
+             g_free(ring_ref);
+             return;
          }
-+        xen_bus_init();
-+        xen_be_init();
-     }
- #endif
+-    } else if (order <= blockdev->props.max_ring_page_order) {
++    } else if (qemu_xen_gnttab_can_map_multi() &&
++               order <= blockdev->props.max_ring_page_order) {
+         unsigned int i;
  
+         nr_ring_ref = 1 << order;
+@@ -255,8 +256,12 @@ static void xen_block_realize(XenDevice *xendev, Error **errp)
+     }
+ 
+     xen_device_backend_printf(xendev, "feature-flush-cache", "%u", 1);
+-    xen_device_backend_printf(xendev, "max-ring-page-order", "%u",
+-                              blockdev->props.max_ring_page_order);
++
++    if (qemu_xen_gnttab_can_map_multi()) {
++        xen_device_backend_printf(xendev, "max-ring-page-order", "%u",
++                                  blockdev->props.max_ring_page_order);
++    }
++
+     xen_device_backend_printf(xendev, "info", "%u", blockdev->info);
+ 
+     xen_device_frontend_printf(xendev, "virtual-device", "%lu",
 -- 
 2.39.0
 
