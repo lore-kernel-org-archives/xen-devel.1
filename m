@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D99ABC6FD1A
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:19:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507729.781699 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D1BC678D5
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:46:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507753.781709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZayH-0006S7-FF; Tue, 07 Mar 2023 17:19:29 +0000
+	id 1pZbOa-0003Ii-PQ; Tue, 07 Mar 2023 17:46:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507729.781699; Tue, 07 Mar 2023 17:19:29 +0000
+Received: by outflank-mailman (output) from mailman id 507753.781709; Tue, 07 Mar 2023 17:46:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZayH-0006Ru-CQ; Tue, 07 Mar 2023 17:19:29 +0000
-Received: by outflank-mailman (input) for mailman id 507729;
- Tue, 07 Mar 2023 17:19:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZbOa-0003Ib-Mc; Tue, 07 Mar 2023 17:46:40 +0000
+Received: by outflank-mailman (input) for mailman id 507753;
+ Tue, 07 Mar 2023 17:46:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tG96=67=desiato.srs.infradead.org=BATV+98a25f4d4d04c9e21499+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZax7-0000az-Bn
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:18:17 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 07d92301-bd0c-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 18:18:09 +0100 (CET)
-Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pZawj-00H5zw-26; Tue, 07 Mar 2023 17:17:54 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZawj-009cgn-1i; Tue, 07 Mar 2023 17:17:53 +0000
+ <SRS0=Ob8o=67=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
+ id 1pZbOZ-0003IC-RL
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:46:40 +0000
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on0603.outbound.protection.outlook.com
+ [2a01:111:f400:fe0c::603])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 00f862e4-bd10-11ed-a550-8520e6686977;
+ Tue, 07 Mar 2023 18:46:36 +0100 (CET)
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com (2603:10a6:803:5a::13)
+ by PAXPR04MB8863.eurprd04.prod.outlook.com (2603:10a6:102:20e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.29; Tue, 7 Mar
+ 2023 17:46:32 +0000
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::f883:bd6d:18d4:c487]) by VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::f883:bd6d:18d4:c487%4]) with mapi id 15.20.6156.029; Tue, 7 Mar 2023
+ 17:46:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,552 +48,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 07d92301-bd0c-11ed-96b5-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=BkYMrTPfiwe8ful5EeikJA8cZYk3rSUcxns06e108Rc=; b=iQ6P9mu3t78OOU5Y6cWsRbv3pK
-	dKT67jpXHqn2q1bA9a7EDYsYVvvDizXswDjzHLm33jScK93gYstZO01dDWUb5tpCv2qR3wkU19rT9
-	Zcryx96TCLdkltiK/i+HF2SF1oGmCksgXYInAYOVxAIayz+AZsxpF4ZzdhGauFk7IcoQmoQChn74d
-	rM6xPorjVfZxCJXQMfNUcBUDn6HS3LSVmdGPKctVq7yfkug5Yhmq0SsAdbqvaJkIMfGGNDdBgCTx2
-	CgawsjBEpNfkvL7zewNKnF6R2Lg19zHMbH9SzNo3SSTQ6slOClPyjfeaOSWCYD0N1geVD/lQGWwKo
-	cbpupqTQ==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Joao Martins <joao.m.martins@oracle.com>,
-	Ankur Arora <ankur.a.arora@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	vikram.garhwal@amd.com,
-	Anthony Perard <anthony.perard@citrix.com>,
-	xen-devel@lists.xenproject.org,
-	Juan Quintela <quintela@redhat.com>,
-	"Dr . David Alan Gilbert" <dgilbert@redhat.com>,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v2 05/27] hw/xen: Watches on XenStore transactions
-Date: Tue,  7 Mar 2023 17:17:28 +0000
-Message-Id: <20230307171750.2293175-6-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230307171750.2293175-1-dwmw2@infradead.org>
-References: <20230307171750.2293175-1-dwmw2@infradead.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 00f862e4-bd10-11ed-a550-8520e6686977
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZRtGRzphnlN5pP88mEYP3YQ3RSBp9dM6Md06REjFuykMnUZ0oEUL7v+OutsIN8KHnjmy2ZNeRBuz4MB3zQyf+rIzm/begKDwP0+MpiUFuQw+0QI0Z/ixiBReJ0DGkgZw95Ckc8T7tVVBenbr9/ghdF4kT0gyr7fB1uh/vbkk7VUiQBdszxtRj8aZjYAG7yR2GfhO9ZPW+4/kLVtm+yTag/+9GWlEGSd+b9ivvipWGIc6Gd60acyYfHJspBuMHgUpFoL2Cx9a7dPuwNJW+jqk7Fdnqu+orEH2aEgTRwJomcWVHUVTXdFiDgNZL4bUA5wqWpF421IUI5NUTKACyeAiww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+tJXt4RG4WKx1/yFmJmwlyt7r4nomhj+7N9nOuH7bQE=;
+ b=OtLjBewsMtrTBdS6OkhnguOrDf2AruniZ2jI2W1RV1k1CCF+ZYHbW0vT9tCqlPZzc8J7GP5U6Y8jmd490LAGMN1VcRtBgJP3LyiNof5BXDNhM5uHvYMYQnsQadjVXck9vxHVkqABMoktuE5FTaxSEDbinEc1CqZXpG3VOjyq6+Xt/Ehs3cQLzq7tNWqyJ4rt7sKxm4js8N4c3qclNpDwpyGRTZjPs5S5eOhx+QdtmPr2B0OQEfsi5Vy0Tzlj8hT36zFldAs9nkw0Tre0174pBu42VSesci3v8yvmMgkeut2Qd+Daao3FbO9eqa+irz9JJXkuWwhTYPI6mYwGIjtjjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector2-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+tJXt4RG4WKx1/yFmJmwlyt7r4nomhj+7N9nOuH7bQE=;
+ b=YYQ8XFJhBR4K30rUSApglEuNqIv2qo16HR046CeJyR/rhKXt0+z/Auce3++wjSfyOoIAWGqwXYv9HNhm9rfAaWHrh9+ubyRVn91SayHHOAlQXEaHBrbetJ5zfreVdDG7KcSxlPd+gOBB8P7XoPLRruv01Lf+tunQIb2o9IGufDs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Message-ID: <f6ab5731-3d43-edc7-daca-2694269560a7@oss.nxp.com>
+Date: Tue, 7 Mar 2023 19:46:13 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v1 0/2] Fix ARM Generic Timer interrupt parsing
+Content-Language: en-US
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrei Cherechesu <andrei.cherechesu@nxp.com>, sstabellini@kernel.org,
+ julien@xen.org, Volodymyr_Babchuk@epam.com, rahul.singh@arm.com
+References: <20230307100949.9231-1-andrei.cherechesu@oss.nxp.com>
+ <6A06A9E8-4643-4920-83D9-3B628D29A386@arm.com>
+From: Andrei Cherechesu <andrei.cherechesu@oss.nxp.com>
+In-Reply-To: <6A06A9E8-4643-4920-83D9-3B628D29A386@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM0PR03CA0061.eurprd03.prod.outlook.com (2603:10a6:208::38)
+ To VI1PR04MB5056.eurprd04.prod.outlook.com (2603:10a6:803:5a::13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5056:EE_|PAXPR04MB8863:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5271772b-1e48-4bd4-b7ff-08db1f33e306
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	ydVHa5U++x3opPQMAh09bqBeLy7R8skJZGpVQMYdrAhysjBL/vn9O6WnePexC4IryvSyAtRFB0nB9CdYLRfJzvZJjomg6jTMHW5rU7iLlwxsfKqs58MXxWSPAbm/9aO15+HvrwPitC+36nW6Xe88teWNUWc0KKMQr7ehoNUQpS8RopsxuL4hpJvH69V2xDxL2Ad9OOl2HK5VkchL1PJI1x441O7YaSobmResmnFko5kSg5gc1x6ATPNh4ncKTXB2UKt5Rpl4LFs6IptSWoJunepbLaTLqkiUuIrRHdlwRypjorjmYo/iL2PNMG/zVQo6TVTqDVPstnq5YOc5Jh2zI+KEQUl5KSmK76raIG25SaIPnPkyBMTL7K565bL+7j1BnnumvRz7zMVT3HwFtaeS7LXEStgTG3L3HWTO7J6Yrw67XuEFtglDi68+St7D8SGs8ldBbZB+M6QL43xZBapAsJLKt1nxJliEuo/3BfeJVIGkOYJe7Z7pd22tmRO73qEW+eDohaLQgM9WQYoTCR2xbBFzVKVeI5160fg2ag6813bNCF6ptjV6BD1favOxWm3Bi4F3ufRt6E5W0mRcpT7mXlXn4MllCirDMT9bNt0JHTEMSxBk3GgePMTFAEt2XSS++Zl/N8asoDzwFEdVE+KdF8r49BEW02qNduos5ZiAO2bSMeO8CNtlw4QAmBnr9TYe4Zctzik6oCoykzhte2bYNd61iMrDFJZODfswEMIVTQE98Ez/W06LUrBGPg8vEvXz
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5056.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(136003)(376002)(366004)(39860400002)(346002)(396003)(451199018)(31686004)(8676002)(4326008)(5660300002)(44832011)(41300700001)(66946007)(8936002)(6506007)(6666004)(2906002)(31696002)(86362001)(38100700002)(66556008)(66476007)(6486002)(26005)(966005)(110136005)(478600001)(6512007)(316002)(83380400001)(186003)(2616005)(55236004)(53546011)(41533002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?S2xveWRXN2FGcmEzMDZBUVA2bHQrdmJGYjBKeUw5RmxPc29tdHZhbTY4dUNC?=
+ =?utf-8?B?U0g2OU93ckN5c3FKYnpuNnI0NWUrUTBZaTgwN3RQb3ZGK09TcUorZkpOc0R4?=
+ =?utf-8?B?WE5tTmtpT29WcGZ2K1NYYmVYa21Wem1aNGhzdmFCZmFXeXhHVmlIdUJ1ZXJQ?=
+ =?utf-8?B?TytHd1NUSGYxZWRuSE5XWGdjTVQ4NmY1SGJiMEprM081Z3ZNeEZDZ3VxcCtB?=
+ =?utf-8?B?VzNhWFp5Tnh2TWptM1BxSXpaWXEvT0ZLWTYxbmdYbkQyM3hHaC92NThwQWUw?=
+ =?utf-8?B?bXBwcVFiMGZIWkZLTllETDlQUVdRZUs0eTV6NElvUXJaU0ZrdEZ6WUdVYXQ2?=
+ =?utf-8?B?MjFSTlNFU2lrTnJiL2FDTVo5WVJoNUd1eTZhaDZOaHhrSnJ5S3U5OWVMU0Ja?=
+ =?utf-8?B?cTJJMUFFN2lpOUxkcFI4dk1Oek1pQWdRV2MzRTJoRk1LSjlZZFIwYjlIQjVx?=
+ =?utf-8?B?OUEyUUhFTkNyUUIxdDZZVkV1eTdNVlZ6SGNYTnF5cWZpWGhMSHhOUlhhb0Fs?=
+ =?utf-8?B?ZndlaTI5UVhUK2hxVnN1R2o0c3ZLMWdGYWFjOFM1QTFWbXJ5eGRaQzIxR1Vy?=
+ =?utf-8?B?YVhJTTlsTG0vei9hSlpsTVNlQlJ3OGdLRnk0b1FpL1FqWFh1RTcyb2p1NDcr?=
+ =?utf-8?B?c2FJZWltaHdHQ2cyaXZUczAvb1RJc2dTUk9VMHA4UjRKcElhdnNqekU4NGcy?=
+ =?utf-8?B?MXREYWk5L29IOEdOWVNNR3JIampqbzFlQUcxU2E1WU9yUVBhN0prblBHbEpk?=
+ =?utf-8?B?Tm40bENOWnYwMUxDbFM1UEloMTRIdzVqQ3hUakVvTldxOEtwWnNwd0tpK05G?=
+ =?utf-8?B?MWE0MjU0N0R1Z281L21FOWpNVmtwTEdnclkrRnJrKzJpZjhCUmt5dVNIcUwr?=
+ =?utf-8?B?VWh0Tk45bXhvUndCTHQxclBML0JoTi82dDFCdU5FNmdicHM3OXh0Nml6MDRM?=
+ =?utf-8?B?WDhpN0puK2p6TTJnM0V0a0pvbEh3a2pDb0lkT3VkRVVCN3JEWmxyQWNkcTdK?=
+ =?utf-8?B?eFNHU2tUMHVMNUhPNEtxdG9lZlJpNTU3Y2RsMkV3UTYyMFZvb1F3NlVDbkJC?=
+ =?utf-8?B?YUVqSzRTSi9KMTl3cDh6Y0dPMlh6KzNsUlJkKzlRdzVVWUp4QUFhSy9Vb0VT?=
+ =?utf-8?B?QlN4ZENGbzNFVEpGQWtsRmlXdnFYcGUxeS9JVUdpY2Z1aGRlMUtEZEp6UnFw?=
+ =?utf-8?B?TnZZZitjRDZ1NEtBb0JiNEY3d24ySkNaS01iNDRqWjhyVjJMZGJ0Qk5KOHh1?=
+ =?utf-8?B?V2JKRXFCdmoxUTl3S2ZWUWZBWTRBM2F5Y2hGL2swQktRemhISnN4RG9mNjZI?=
+ =?utf-8?B?T3Y2WjZnVjcxellBR3haRldQYldmTlAzS21sejcrYlJmelpvdGsycHJUVVRX?=
+ =?utf-8?B?SkRTcXpQcmkwZkxMeS9HcjZuMkxFS1c0bExZV2JJQWNsaXBSNVBzb01wSUpr?=
+ =?utf-8?B?dDRCRGt2SkphMCswbjMzWkRZcUFEb0g3UEVNcHUyMFRtZ2ZaTHM5cDQ3ZWM3?=
+ =?utf-8?B?cFgxUy94M3lnQWxRYWhGYnk4UXFCcFhwTTc5MWR6VVUwSC85NTRhYnpwRGhj?=
+ =?utf-8?B?TCtNRDhibjlCMEdueGROMXZ2azZxQWd5REpqbkt5c3k0MEdBZlZ4WUFsREJh?=
+ =?utf-8?B?bS8vT3lJZnpvWWhyWXEvWm5ZSUx4OTFxMzVCOFRzYnp6aUFNUWxqdFQ4aFRU?=
+ =?utf-8?B?cGtMb3ppY3VCTWdkVEEwdkZlWUdQUG9MUTVRa2pRZHMySmJCSm44VUFSN29Y?=
+ =?utf-8?B?b2pHcGVnWklxZEhnYnJuSjZoZ1Zmb2Z3MHJHTGtYN0RYUko3Sk84ckVPeDVj?=
+ =?utf-8?B?eG4vKy9uTWVQbHZiWU1nbStQRFY2NnpXRGJPZEF1eDlCNWs4Vk5YaXplMXFw?=
+ =?utf-8?B?MnVxbTB6ZDFEMHlVdGwvUDZZNGRkVklxdzFUanZibzlQN0JkaGYrYmM5eC8y?=
+ =?utf-8?B?bUlVYTR0OVZ3SXpIZHNmQTRSdHR3QlRjc0lwMU1TRWlzWEFYWkJwMFRyVlR3?=
+ =?utf-8?B?TXNvZUVidGR0bFpONXVOSU4yNElFMzhZYkViSWo4a3g1R1VMVHoxSzdKT280?=
+ =?utf-8?B?MmtZUklMd2szTlJsTmxOcXNFcmE3VUxabWJGZFNNU1U2WDB2SE5wVlJza0VC?=
+ =?utf-8?B?OEJOam05R0FSZFdhU0RsVzduSG1HZEtJQVE3ek9uMHMzVGVRZWRRaWZ6dFB5?=
+ =?utf-8?B?b1E9PQ==?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5271772b-1e48-4bd4-b7ff-08db1f33e306
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5056.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2023 17:46:32.2280
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dP0fxu3JImr5Z0ggZqT+1Ei9vKYLPsHZ0cNDjjuNszMoaeSxtJ+KVqdVwVgVSNvbH2efDR5e8c7XAuNYikXEDDSvs6IFQGmqfX0O79nZ5nU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8863
 
-From: David Woodhouse <dwmw@amazon.co.uk>
 
-Firing watches on the nodes that still exist is relatively easy; just
-walk the tree and look at the nodes with refcount of one.
 
-Firing watches on *deleted* nodes is more fun. We add 'modified_in_tx'
-and 'deleted_in_tx' flags to each node. Nodes with those flags cannot
-be shared, as they will always be unique to the transaction in which
-they were created.
+On 07/03/2023 17:27, Bertrand Marquis wrote:
+> Hi Andrei,
+> 
+> When submitting patches, please use the add_maintainer.pl script so that maintainers of the code
+> modified are added in CC.
 
-When xs_node_walk would need to *create* a node as scaffolding and it
-encounters a deleted_in_tx node, it can resurrect it simply by clearing
-its deleted_in_tx flag. If that node originally had any *data*, they're
-gone, and the modified_in_tx flag will have been set when it was first
-deleted.
+Hi Bertrand,
 
-We then attempt to send appropriate watches when the transaction is
-committed, properly delete the deleted_in_tx nodes, and remove the
-modified_in_tx flag from the others.
+Thank you for reviewing the patches. I apologize for not adding the
+maintainers in CC. I added them now.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/i386/kvm/xenstore_impl.c | 151 ++++++++++++++++++++++-
- tests/unit/test-xs-node.c   | 231 +++++++++++++++++++++++++++++++++++-
- 2 files changed, 380 insertions(+), 2 deletions(-)
+> 
+>> On 7 Mar 2023, at 11:09, Andrei Cherechesu (OSS) <andrei.cherechesu@oss.nxp.com> wrote:
+>>
+>> From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>>
+>> This 2-patch series fixes the parsing of the ARM Generic Timer
+>> interrupts from the device tree.
+>>
+>> If the generic timer interrupts order in the DT was different than
+>> the expected order in Xen code, these interrupts would no longer be
+>> correctly parsed and registered by Xen, and would result in boot failure.
+>>
+>> This method with using "interrupt-names" for the generic timer interrupts
+>> instead of having them hardcoded in the DTB in a specific order is the newer
+>> approach already implemented in Linux. Xen did not have the necessary code for
+>> this approach, and it has been implemented by the means of this patch series.
+> 
+> Would mind giving a link to an example or the Linux documentation if there is one ?
+> 
 
-diff --git a/hw/i386/kvm/xenstore_impl.c b/hw/i386/kvm/xenstore_impl.c
-index 0812e367b0..60f42f61d6 100644
---- a/hw/i386/kvm/xenstore_impl.c
-+++ b/hw/i386/kvm/xenstore_impl.c
-@@ -32,6 +32,8 @@ typedef struct XsNode {
-     GByteArray *content;
-     GHashTable *children;
-     uint64_t gencnt;
-+    bool deleted_in_tx;
-+    bool modified_in_tx;
- #ifdef XS_NODE_UNIT_TEST
-     gchar *name; /* debug only */
- #endif
-@@ -153,6 +155,13 @@ static XsNode *xs_node_copy(XsNode *old)
-     XsNode *n = xs_node_new();
- 
-     n->gencnt = old->gencnt;
-+
-+#ifdef XS_NODE_UNIT_TEST
-+    if (n->name) {
-+        n->name = g_strdup(old->name);
-+    }
-+#endif
-+
-     if (old->children) {
-         n->children = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
-                                             (GDestroyNotify)xs_node_unref);
-@@ -221,6 +230,9 @@ struct walk_op {
-     bool mutating;
-     bool create_dirs;
-     bool in_transaction;
-+
-+    /* Tracking during recursion so we know which is first. */
-+    bool deleted_in_tx;
- };
- 
- static void fire_watches(struct walk_op *op, bool parents)
-@@ -277,6 +289,9 @@ static int xs_node_add_content(XsNode **n, struct walk_op *op)
-         g_byte_array_unref((*n)->content);
-     }
-     (*n)->content = g_byte_array_ref(data);
-+    if (op->tx_id != XBT_NULL) {
-+        (*n)->modified_in_tx = true;
-+    }
-     return 0;
- }
- 
-@@ -333,10 +348,62 @@ static int node_rm_recurse(gpointer key, gpointer value, gpointer user_data)
-     return this_inplace;
- }
- 
-+static XsNode *xs_node_copy_deleted(XsNode *old, struct walk_op *op);
-+static void copy_deleted_recurse(gpointer key, gpointer value,
-+                                 gpointer user_data)
-+{
-+    struct walk_op *op = user_data;
-+    GHashTable *siblings = op->op_opaque2;
-+    XsNode *n = xs_node_copy_deleted(value, op);
-+
-+    /*
-+     * Reinsert the deleted_in_tx copy of the node into the parent's
-+     * 'children' hash table. Having stashed it from op->op_opaque2
-+     * before the recursive call to xs_node_copy_deleted() scribbled
-+     * over it.
-+     */
-+    g_hash_table_insert(siblings, g_strdup(key), n);
-+}
-+
-+static XsNode *xs_node_copy_deleted(XsNode *old, struct walk_op *op)
-+{
-+    XsNode *n = xs_node_new();
-+
-+    n->gencnt = old->gencnt;
-+
-+#ifdef XS_NODE_UNIT_TEST
-+    if (old->name) {
-+        n->name = g_strdup(old->name);
-+    }
-+#endif
-+
-+    if (old->children) {
-+        n->children = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
-+                                            (GDestroyNotify)xs_node_unref);
-+        op->op_opaque2 = n->children;
-+        g_hash_table_foreach(old->children, copy_deleted_recurse, op);
-+    }
-+    n->deleted_in_tx = true;
-+    /* If it gets resurrected we only fire a watch if it lost its content */
-+    if (old->content) {
-+        n->modified_in_tx = true;
-+    }
-+    op->new_nr_nodes--;
-+    return n;
-+}
-+
- static int xs_node_rm(XsNode **n, struct walk_op *op)
- {
-     bool this_inplace = op->inplace;
- 
-+    if (op->tx_id != XBT_NULL) {
-+        /* It's not trivial to do inplace handling for this one */
-+        XsNode *old = *n;
-+        *n = xs_node_copy_deleted(old, op);
-+        xs_node_unref(old);
-+        return 0;
-+    }
-+
-     /* Fire watches for, and count, nodes in the subtree which get deleted */
-     if ((*n)->children) {
-         g_hash_table_foreach_remove((*n)->children, node_rm_recurse, op);
-@@ -408,6 +475,10 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-     }
- 
-     if (child) {
-+        if (child->deleted_in_tx) {
-+            assert(child->ref == 1);
-+            /* Cannot actually set child->deleted_in_tx = false until later */
-+        }
-         xs_node_ref(child);
-         /*
-          * Now we own it too. But if we can modify inplace, that's going to
-@@ -475,6 +546,15 @@ static int xs_node_walk(XsNode **n, struct walk_op *op)
-         xs_node_unref(old);
-     }
- 
-+    /*
-+     * If we resurrected a deleted_in_tx node, we can mark it as no longer
-+     * deleted now that we know the overall operation has succeeded.
-+     */
-+    if (op->create_dirs && child && child->deleted_in_tx) {
-+        op->new_nr_nodes++;
-+        child->deleted_in_tx = false;
-+    }
-+
-     /*
-      * The child may be NULL here, for a remove operation. Either way,
-      * xs_node_add_child() will do the right thing and return a value
-@@ -709,8 +789,69 @@ int xs_impl_transaction_start(XenstoreImplState *s, unsigned int dom_id,
-     return 0;
- }
- 
-+static gboolean tx_commit_walk(gpointer key, gpointer value,
-+                               gpointer user_data)
-+{
-+    struct walk_op *op = user_data;
-+    int path_len = strlen(op->path);
-+    int key_len = strlen(key);
-+    bool fire_parents = true;
-+    XsWatch *watch;
-+    XsNode *n = value;
-+
-+    if (n->ref != 1) {
-+        return false;
-+    }
-+
-+    if (n->deleted_in_tx) {
-+        /*
-+         * We fire watches on our parents if we are the *first* node
-+         * to be deleted (the topmost one). This matches the behaviour
-+         * when deleting in the live tree.
-+         */
-+        fire_parents = !op->deleted_in_tx;
-+
-+        /* Only used on the way down so no need to clear it later */
-+        op->deleted_in_tx = true;
-+    }
-+
-+    assert(key_len + path_len + 2 <= sizeof(op->path));
-+    op->path[path_len] = '/';
-+    memcpy(op->path + path_len + 1, key, key_len + 1);
-+
-+    watch = g_hash_table_lookup(op->s->watches, op->path);
-+    if (watch) {
-+        op->watches = g_list_append(op->watches, watch);
-+    }
-+
-+    if (n->children) {
-+        g_hash_table_foreach_remove(n->children, tx_commit_walk, op);
-+    }
-+
-+    if (watch) {
-+        op->watches = g_list_remove(op->watches, watch);
-+    }
-+
-+    /*
-+     * Don't fire watches if this node was only copied because a
-+     * descendent was changed. The modified_in_tx flag indicates the
-+     * ones which were really changed.
-+     */
-+    if (n->modified_in_tx || n->deleted_in_tx) {
-+        fire_watches(op, fire_parents);
-+        n->modified_in_tx = false;
-+    }
-+    op->path[path_len] = '\0';
-+
-+    /* Deleted nodes really do get expunged when we commit */
-+    return n->deleted_in_tx;
-+}
-+
- static int transaction_commit(XenstoreImplState *s, XsTransaction *tx)
- {
-+    struct walk_op op;
-+    XsNode **n;
-+
-     if (s->root_tx != tx->base_tx) {
-         return EAGAIN;
-     }
-@@ -720,10 +861,18 @@ static int transaction_commit(XenstoreImplState *s, XsTransaction *tx)
-     s->root_tx = tx->tx_id;
-     s->nr_nodes = tx->nr_nodes;
- 
-+    init_walk_op(s, &op, XBT_NULL, tx->dom_id, "/", &n);
-+    op.deleted_in_tx = false;
-+    op.mutating = true;
-+
-     /*
--     * XX: Walk the new root and fire watches on any node which has a
-+     * Walk the new root and fire watches on any node which has a
-      * refcount of one (which is therefore unique to this transaction).
-      */
-+    if (s->root->children) {
-+        g_hash_table_foreach_remove(s->root->children, tx_commit_walk, &op);
-+    }
-+
-     return 0;
- }
- 
-diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
-index 3c3654550a..02c72baa62 100644
---- a/tests/unit/test-xs-node.c
-+++ b/tests/unit/test-xs-node.c
-@@ -347,7 +347,13 @@ static void do_test_xs_node_tx(bool fail, bool commit)
-     } else {
-         g_assert(!err);
-     }
--    g_assert(!watches->len);
-+    if (commit && !fail) {
-+        g_assert(!strcmp(watches->str,
-+                         "some/relative/pathwatch"));
-+        g_string_truncate(watches, 0);
-+    } else {
-+       g_assert(!watches->len);
-+    }
-     g_assert(s->nr_nodes == 7);
- 
-     err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-@@ -386,6 +392,226 @@ static void test_xs_node_tx_succeed(void)
-     do_test_xs_node_tx(false, true);
- }
- 
-+static void test_xs_node_tx_rm(void)
-+{
-+    XenstoreImplState *s = setup();
-+    GString *watches = g_string_new(NULL);
-+    GByteArray *data = g_byte_array_new();
-+    unsigned int tx_id = XBT_NULL;
-+    int err;
-+
-+    g_assert(s);
-+
-+    /* Set a watch */
-+    err = xs_impl_watch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+    g_assert(watches->len == strlen("somewatch"));
-+    g_assert(!strcmp(watches->str, "somewatch"));
-+    g_string_truncate(watches, 0);
-+
-+    /* Write something */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                    "something");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+    g_assert(!strcmp(watches->str,
-+                     "some/deep/dark/relative/pathwatch"));
-+    g_string_truncate(watches, 0);
-+
-+    /* Create a transaction */
-+    err = xs_impl_transaction_start(s, DOMID_GUEST, &tx_id);
-+    g_assert(!err);
-+
-+    /* Delete the tree in the transaction */
-+    err = xs_impl_rm(s, DOMID_GUEST, tx_id, "some/deep/dark");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+    g_assert(!watches->len);
-+
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                       data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("something"));
-+    g_assert(!memcmp(data->data, "something", data->len));
-+    g_byte_array_set_size(data, 0);
-+
-+    /* Commit the transaction */
-+    err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 6);
-+
-+    g_assert(!strcmp(watches->str, "some/deep/darkwatch"));
-+    g_string_truncate(watches, 0);
-+
-+    /* Now the node is gone */
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                       data);
-+    g_assert(err == ENOENT);
-+    g_byte_array_unref(data);
-+
-+    err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+
-+    g_string_free(watches, true);
-+    xs_impl_delete(s);
-+}
-+
-+static void test_xs_node_tx_resurrect(void)
-+{
-+    XenstoreImplState *s = setup();
-+    GString *watches = g_string_new(NULL);
-+    GByteArray *data = g_byte_array_new();
-+    unsigned int tx_id = XBT_NULL;
-+    int err;
-+
-+    g_assert(s);
-+
-+    /* Write something */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                    "something");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+
-+    /* This node will be wiped and resurrected */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark",
-+                    "foo");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+
-+    /* Set a watch */
-+    err = xs_impl_watch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+    g_assert(watches->len == strlen("somewatch"));
-+    g_assert(!strcmp(watches->str, "somewatch"));
-+    g_string_truncate(watches, 0);
-+
-+    /* Create a transaction */
-+    err = xs_impl_transaction_start(s, DOMID_GUEST, &tx_id);
-+    g_assert(!err);
-+
-+    /* Delete the tree in the transaction */
-+    err = xs_impl_rm(s, DOMID_GUEST, tx_id, "some/deep");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+    g_assert(!watches->len);
-+
-+    /* Resurrect part of it */
-+    err = write_str(s, DOMID_GUEST, tx_id, "some/deep/dark/different/path",
-+                    "something");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+
-+    /* Commit the transaction */
-+    err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+
-+    /* lost data */
-+    g_assert(strstr(watches->str, "some/deep/dark/different/pathwatch"));
-+    /* topmost deleted */
-+    g_assert(strstr(watches->str, "some/deep/dark/relativewatch"));
-+    /* lost data */
-+    g_assert(strstr(watches->str, "some/deep/darkwatch"));
-+
-+    g_string_truncate(watches, 0);
-+
-+    /* Now the node is gone */
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                       data);
-+    g_assert(err == ENOENT);
-+    g_byte_array_unref(data);
-+
-+    err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+
-+    g_string_free(watches, true);
-+    xs_impl_delete(s);
-+}
-+
-+static void test_xs_node_tx_resurrect2(void)
-+{
-+    XenstoreImplState *s = setup();
-+    GString *watches = g_string_new(NULL);
-+    GByteArray *data = g_byte_array_new();
-+    unsigned int tx_id = XBT_NULL;
-+    int err;
-+
-+    g_assert(s);
-+
-+    /* Write something */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                    "something");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 9);
-+
-+    /* Another node to remain shared */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/place/safe", "keepme");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+
-+    /* This node will be wiped and resurrected */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/deep/dark",
-+                    "foo");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+
-+    /* Set a watch */
-+    err = xs_impl_watch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+    g_assert(watches->len == strlen("somewatch"));
-+    g_assert(!strcmp(watches->str, "somewatch"));
-+    g_string_truncate(watches, 0);
-+
-+    /* Create a transaction */
-+    err = xs_impl_transaction_start(s, DOMID_GUEST, &tx_id);
-+    g_assert(!err);
-+
-+    /* Delete the tree in the transaction */
-+    err = xs_impl_rm(s, DOMID_GUEST, tx_id, "some/deep");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+    g_assert(!watches->len);
-+
-+    /* Resurrect part of it */
-+    err = write_str(s, DOMID_GUEST, tx_id, "some/deep/dark/relative/path",
-+                    "something");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+
-+    /* Commit the transaction */
-+    err = xs_impl_transaction_end(s, DOMID_GUEST, tx_id, true);
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 11);
-+
-+    /* lost data */
-+    g_assert(strstr(watches->str, "some/deep/dark/relative/pathwatch"));
-+    /* lost data */
-+    g_assert(strstr(watches->str, "some/deep/darkwatch"));
-+
-+    g_string_truncate(watches, 0);
-+
-+    /* Now the node is gone */
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/deep/dark/relative/path",
-+                       data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("something"));
-+    g_assert(!memcmp(data->data, "something", data->len));
-+
-+    g_byte_array_unref(data);
-+
-+    err = xs_impl_unwatch(s, DOMID_GUEST, "some", "watch",
-+                        watch_cb, watches);
-+    g_assert(!err);
-+
-+    g_string_free(watches, true);
-+    xs_impl_delete(s);
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -395,6 +621,9 @@ int main(int argc, char **argv)
-     g_test_add_func("/xs_node/tx_abort", test_xs_node_tx_abort);
-     g_test_add_func("/xs_node/tx_fail", test_xs_node_tx_fail);
-     g_test_add_func("/xs_node/tx_succeed", test_xs_node_tx_succeed);
-+    g_test_add_func("/xs_node/tx_rm", test_xs_node_tx_rm);
-+    g_test_add_func("/xs_node/tx_resurrect", test_xs_node_tx_resurrect);
-+    g_test_add_func("/xs_node/tx_resurrect2", test_xs_node_tx_resurrect2);
- 
-     return g_test_run();
- }
--- 
-2.39.0
+The bindings [0] for the ARM Generic Timer DT node were changed around
+Linux 5.13, when the interrupt-names property was added, along with the
+implementation for handling it [1].
 
+
+[0]
+https://elixir.bootlin.com/linux/v6.3-rc1/source/Documentation/devicetree/bindings/timer/arm,arch_timer.yaml#L44
+[1]
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/clocksource/arm_arch_timer.c?id=86332e9e3477af8f31c9d5f3e81e57e0fd2118e7
+
+
+Regards,
+Andrei
+
+
+> Cheers
+> Bertrand
+> 
+>>
+>> Functionality should remain the same if "interrupt-names" is not present in the
+>> Generic Timer DTB node of the platform, but the interrupts should then still be
+>> present in the expected "sec-phys", "phys", "virt", "hyp-phys", "hyp-virt" order.
+>> If "interrupt-names" is present, now it is also correctly handled.
+>>
+>> Andrei Cherechesu (2):
+>>  arch/arm: irq: Add platform_get_irq_byname() implementation
+>>  arch/arm: time: Add support for parsing interrupts by names
+>>
+>> xen/arch/arm/include/asm/irq.h        |  2 ++
+>> xen/arch/arm/include/asm/time.h       |  3 ++-
+>> xen/arch/arm/irq.c                    | 14 +++++++++++
+>> xen/arch/arm/time.c                   | 26 +++++++++++++++++---
+>> xen/drivers/passthrough/arm/smmu-v3.c | 35 +++++----------------------
+>> 5 files changed, 46 insertions(+), 34 deletions(-)
+>>
+>> -- 
+>> 2.35.1
+>>
+>>
+> 
 
