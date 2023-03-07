@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B437DC678D4
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:29:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507854.782038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B529C6FD1E
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 19:55:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507888.782049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc4H-0008Aa-49; Tue, 07 Mar 2023 18:29:45 +0000
+	id 1pZdOe-00047a-E4; Tue, 07 Mar 2023 19:54:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507854.782038; Tue, 07 Mar 2023 18:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 507888.782049; Tue, 07 Mar 2023 19:54:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc4G-00089q-Vt; Tue, 07 Mar 2023 18:29:44 +0000
-Received: by outflank-mailman (input) for mailman id 507854;
- Tue, 07 Mar 2023 18:29:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pZdOe-00047T-Ak; Tue, 07 Mar 2023 19:54:52 +0000
+Received: by outflank-mailman (input) for mailman id 507888;
+ Tue, 07 Mar 2023 19:54:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZc29-0002MP-7Q
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:33 +0000
-Received: from casper.infradead.org (casper.infradead.org
- [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b450af81-bd15-11ed-a550-8520e6686977;
- Tue, 07 Mar 2023 19:27:23 +0100 (CET)
-Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pZc1n-006deC-Bg; Tue, 07 Mar 2023 18:27:11 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZc1n-009e8h-0y; Tue, 07 Mar 2023 18:27:11 +0000
+ <SRS0=Ob8o=67=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
+ id 1pZdOc-00046p-RC
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 19:54:51 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on0601.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::601])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id eaee4c73-bd21-11ed-96b5-2f268f93b82a;
+ Tue, 07 Mar 2023 20:54:50 +0100 (CET)
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com (2603:10a6:803:5a::13)
+ by PAXPR04MB9188.eurprd04.prod.outlook.com (2603:10a6:102:222::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.29; Tue, 7 Mar
+ 2023 19:54:47 +0000
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::f883:bd6d:18d4:c487]) by VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::f883:bd6d:18d4:c487%4]) with mapi id 15.20.6156.029; Tue, 7 Mar 2023
+ 19:54:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,692 +48,257 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b450af81-bd15-11ed-a550-8520e6686977
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=NmTq7xdswHQSe29JrCR0/eIaXBdiuGrCFOBx7jmSa9Y=; b=G5SUOmko1fipL6SDB2hu4ruoGS
-	eW+Z8a2i4uMjcVHutfcbZBhulMuTBg2xj9mzOtwBLqAYYQVsmRhUPZgA6Nqm0vVvXGujfwEB0ycAf
-	xR6+Bv1PKODyup3HH+4ZtQFr6PTKtAbDjiElsV4NeIOoyU4VaCXSLwk8JJ9P91GVywFguHdalmefi
-	A/tHH4qSAlmWCdasOv7ocYXRlowDFuWxjqqMBMGUrMtBXCHqnNYF6OSLbX/AoyWECJCThLZD97NLL
-	QdPN3dKR8s+VZofQYjpr8NJFrnW9f7n7nGvBawhggne6nZqV9Ipn4bfzz5hPrEPrIVRDU9C/7L+c1
-	sShbyWUw==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Joao Martins <joao.m.martins@oracle.com>,
-	Ankur Arora <ankur.a.arora@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	vikram.garhwal@amd.com,
-	Anthony Perard <anthony.perard@citrix.com>,
-	xen-devel@lists.xenproject.org,
-	Juan Quintela <quintela@redhat.com>,
-	"Dr . David Alan Gilbert" <dgilbert@redhat.com>
-Subject: [PULL 09/27] hw/xen: Add evtchn operations to allow redirection to internal emulation
-Date: Tue,  7 Mar 2023 18:26:49 +0000
-Message-Id: <20230307182707.2298618-10-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230307182707.2298618-1-dwmw2@infradead.org>
-References: <20230307182707.2298618-1-dwmw2@infradead.org>
-MIME-Version: 1.0
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: eaee4c73-bd21-11ed-96b5-2f268f93b82a
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EUY2AfQoEAaICmjnh/n9WFH5r9662UtxXmhCWrjCto/KBPv6bl6fyAiE5VJWRR6lDm1mk+DIvB/I8+PKK6vNQvRdzZ8xJ2/ncydtiMRm0YE9U2/ioi6Ti+PfAzgRNnLlFE3oR7kwD7nUjJGQpFL9jr2hP97W6MDNMVTCdKA/TMeC8t4+26pj0SaCxGmWuTUv5kPeSKevdPGcaxZxzQ/Zvm9ezLO8cMxKw3Zgu8Xky0h1AVwMVsEMhk/qrOGPeTxRFssRGtBm49XW6tNM+QcQy3Rnsaw7m6HZZoucabDuGAhBfA+ZdkjYr4I2MbAGWqpWqaTkBAX9/mJA5HylWlam8g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Kc17WUrmS64784VF8GAKkn9ZAxdbN+DE1ElxJAybMRw=;
+ b=WlHXxYnfPahY2+0SCe45gvTMAuaMyW3W+b27gcv9IzV40mwzTOf4M8HwxxOn8tS1GbCVO732ZBdCSpGIFtwWOrF45Hernkt5skYPHGhAYZluNJFHNZhihRx2xOxTu6wx2u9nRBJF7EQ6lJVRk5daVSkOcb12QJME6Q+8J3pTIMJecWySeT3SSDUTrZEB3Nzc+JwOB9hqn/KawqCX05zGicUkJGUEaEyj9U4zbupj1nmjHtLQjdqUXWKW3hip9suC1fIlqdPGwGOw3E05h3ShZjvzY4ovMB+dPaurfHjIHtvSWx9DywqFmJ+BqcnUCKqw4jI/SkJNgXvtmynaToyZqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector2-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Kc17WUrmS64784VF8GAKkn9ZAxdbN+DE1ElxJAybMRw=;
+ b=BrD9+u+PUBocwSxo6ro0xytgjmOcIUoJnuAdSw0uQIc85w7DtXicA+EsZu/BF1CEDWwBNJUJtY7rPVuTvAITfuS/u8/8l5J9dXHFXlplRyPp9Fd8fSMJZH9g765Sg5D/FWj5vnZgIClIUj0QtM4B0GUzgDJmLnwoSHPBcpci6Dk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Message-ID: <87f2a996-f3c0-bf74-8da3-c6ff861f797f@oss.nxp.com>
+Date: Tue, 7 Mar 2023 21:54:42 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v1 2/2] arch/arm: time: Add support for parsing interrupts
+ by names
+Content-Language: en-US
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrei Cherechesu <andrei.cherechesu@nxp.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr_Babchuk@epam.com, rahul.singh@arm.com
+References: <20230307100949.9231-1-andrei.cherechesu@oss.nxp.com>
+ <20230307100949.9231-3-andrei.cherechesu@oss.nxp.com>
+ <370745D6-D6AF-43D0-8E9F-2DB160BE0E07@arm.com>
+From: Andrei Cherechesu <andrei.cherechesu@oss.nxp.com>
+In-Reply-To: <370745D6-D6AF-43D0-8E9F-2DB160BE0E07@arm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM0PR01CA0091.eurprd01.prod.exchangelabs.com
+ (2603:10a6:208:10e::32) To VI1PR04MB5056.eurprd04.prod.outlook.com
+ (2603:10a6:803:5a::13)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5056:EE_|PAXPR04MB9188:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4e882d17-87fc-4e6d-3e86-08db1f45cd02
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	zxG1V+6EDCKzXWp0frmluhkcDZNTEg6m56pMhhKbRnXbYAXlcf2SwLLClTPHW1pK1gf7OjMKpCN1xcsJnr/jz6EbeyGrmaNdBVSHGtQLblVcOjQCj1fN7SnkiRBSNhjoED/qveGkPl2oaTUqYAxv6+gdImJ4CEQf6nEMCWLPbZhdRLIAusYDHtlINmWdfKFRhlAxhjHvTWzkdovfzzGHhGBA5Wika5M6ae/R5peZuY5CccS7Onnm43CY4fjDSa2ifJt9hxQU9uJj4LGAFZC5WLVvULzX8GHIgu+nBts6T20WzuZkKyV3HgRPVVom6LdS+FTLj+p88S+cK7aHv5bQJVaXwPjeW/4deWyoRLfHfZgd5NOSZDLDzTSkZcOJJWsVaJ7PyJ2Ca+JMN1fjvvgymy9P7VrRYeCpyjEWW3EA5uzyegF0rh8GMIQY2LeL8KZBZ0RE/kMl9MRnwDwWWG/xwLFoXGVLE/d8yxtyjqkxtWUnJmUa3QCF1Gt0Lf7F4zuAPkYprVXKg/d47re2+vIGSO01zhy0CmdsFmTw+tnlNtXNpiIMhMY7p7BRr6H9wt3IHs8b93Czh6zDfghqnwM2/7uUpgVMEmkJ5OQZ0FVwSx2fDz+LxhdPV9CdG81evgMz54JvcxGPtwV7kZXPuoVnJ5GFz/POixvrtMVUW13KpREHGvbfb8RZY7xk16ZAmyTl38W7SfEFwDKqYHMuLPscg/7oXzQMhzlgV20ACoAw+Ik=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5056.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(346002)(376002)(366004)(396003)(136003)(39860400002)(451199018)(5660300002)(6512007)(186003)(26005)(8676002)(66556008)(66476007)(4326008)(66946007)(110136005)(966005)(6486002)(54906003)(31696002)(316002)(86362001)(6506007)(53546011)(41300700001)(55236004)(38100700002)(8936002)(478600001)(6666004)(83380400001)(2906002)(2616005)(31686004)(44832011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZXpmYXJBYWljK2x1dXRCL1RrUmRYeE9jZGw5dVN4UmJkSFE0bUw3TzlaS0N3?=
+ =?utf-8?B?YVgrSUdGZTM1SnI3Skx2dXROSUk0T3A3SFpVOURXVHhVYUJ2TEgzUXJNLzhP?=
+ =?utf-8?B?NVA5SWZ6OWpYTy90RlpZbHAzN3RxbEJVYzBxd3VaSGdlaWNYbE9hSzNhOU0v?=
+ =?utf-8?B?NU5TOXd0Y0FTemVHRnBVUHZXNTVnZXFpUzZ0UTI0TUNOSDVQaDJmWWJTTnAv?=
+ =?utf-8?B?MlkrSzNyakFDb0cwL2N5d2szTXQ1bXQ4WUdzWTRoMURRSUY4MFg0aGJ5cmVO?=
+ =?utf-8?B?UmtsTTJHeFdOdC9JVkNUYnZFZzA2ZDZVbDNNTXVOYXJPODRaNXZMbU90cktY?=
+ =?utf-8?B?V0lrRXI5L25aZ0JzTGlBanljeS9hVXgrQXpNV2dBdEFYbzBSbDlQUEoyUVdH?=
+ =?utf-8?B?eDBHamR4YVpORnplUWJXc3l2bVVISy8zdVZROXJ6VEhUL1JGazZETUIzdmhj?=
+ =?utf-8?B?Mk44TVVkOVhmcVVWQUs4WDhEZ2F6djZsNm1aT2c5UmcxYlZwcWxqQTBNV1Zy?=
+ =?utf-8?B?b0xLcVRqNHdxYmpTaG9QbWUvMXVveEdRWWxLR25vcTk3RXJleDU2MzBZRXhQ?=
+ =?utf-8?B?WU5LUWE5NlBMakNsa0ZSSWlMWmJtb0dyNEpuRUxsV3R5YWZJeUJndG93bFhY?=
+ =?utf-8?B?dlYrbXJtcmk3c3FXOGVTUVBiUUNXejc3RnNhb0hJZlpJRUpRRndQMHEyN2Ez?=
+ =?utf-8?B?d2R4TitUQ3MyejgrZ3AzZ2x3bDFBMnhMMTlnTTVrQWlPN3lXeWlqSUVJVmtU?=
+ =?utf-8?B?MFp5bUlXNzg5cGcvSnhHSGJ3amNaVS9EbjVOcXZoemdZQ1pQR0dERzNkZ1FN?=
+ =?utf-8?B?MWpWWWZVRWRJOHg5L3RNUW4wUEgweVlUZzN2MlJNZGxmakxRaGpxYzFzb2k1?=
+ =?utf-8?B?UzMvTU5iN0YzbmtaR3FxYyt1c2NqSEZhWXZicFhKOU8wbEM4WEIydzA3QTlB?=
+ =?utf-8?B?TnNPZzhKL2UwSWVDRm9ObHNReW9VMFpqSjlYKzZCaGdMTmRnL21waGZwSWU3?=
+ =?utf-8?B?cWFVUWgybm1ZMjlTaTRQVTl4RHhYOTJSb1ZEenQ3TjRhNUNmUWtiMEUyU0Z2?=
+ =?utf-8?B?cWdSRlJPZVhpU0NFakVvalkwZWh3cnlZeFAwUWRqVEF3MW9qaTNpRG5pd0ZP?=
+ =?utf-8?B?WGlkOWlGVFNIMUV3UCtSYTZOQ0hDYTdrSmhEKy9zTnB5TVpUditYWWJQb2Zq?=
+ =?utf-8?B?OGRRVVZydXBCcThrWWg1aFN3QnR2WHFCSmFSNUlWbUIwMGFYV0lnRkMySURp?=
+ =?utf-8?B?N2svd25IaXpEMjR2MThxRys2UERDbDRmNXRHZmJ2M1dQRGxlODR3R0lYZ0JY?=
+ =?utf-8?B?NitpUDRpYTIzSGg3ZUhJMkFnUmxEYW5iV2VINUQ2MVJoMXJyV245eEUwZkNP?=
+ =?utf-8?B?YWZjcE5xbUp6V0VTNnMwZEtRZ2tGeUFGRWhMVHRUZGxEZmIxUC9IaU1MZk1M?=
+ =?utf-8?B?UVpLczFOWXVNQkg5Z0lrTDV4TDQxdTh2clNlWHV2dVZNSjIwZTBWVG1NRkVk?=
+ =?utf-8?B?dW9DNnVlTCtOTi9HUXBHazFwMWZkSlVpUmVhRXIxWXFGVDV2Y0dDRlh2OW5u?=
+ =?utf-8?B?V21hNjdnSER5TXhQYnhHby8wVklLRmZrdVVlZzgweDBkclFGYWtYMHRGVW5V?=
+ =?utf-8?B?a1JLdDR6aDN6emhKS0JDazlqSHpiMHF0Y0QyYmhGYVJ3NGhQKzRiN05LYm9R?=
+ =?utf-8?B?WWVNcHRDUG1oeFNGQ3hZT0Q1V2VKUndHMGtndmhiT1ZYL01DS1BwZCt1WjJH?=
+ =?utf-8?B?Q25KK0h5djZPVmNhcCs1MzZPRTJsQjZqOVQyYWtNVjdKZUo3R1lUTFFOck1n?=
+ =?utf-8?B?T1F3dmhRdUgwNDJoVVpjMmpYQklGOTJ0NVdITmg4azEwMXJrcUx5Q3gwZURE?=
+ =?utf-8?B?d3VGZncyUHh6MlRiRWpuNXBUaUhvSDBPYk1YNmpGcHhHTUtJeitwYjRXd2la?=
+ =?utf-8?B?bnRiWW1reVdobUxwNm5MZmtLWkMxTVpqVXVIZE9BQ1BGeVVOb0pKUUMvZHhB?=
+ =?utf-8?B?S0ZETzZrbGtscGRVMGtXbXE1VGRvVktRd2l4UmZxenpoV1hHbG1wbnMxZGZn?=
+ =?utf-8?B?OVdNdzZGUTZBSm9ac1VHT3dCWTRGcm0xMkNXYVhvc0tJblNVK3N3YTgvWE12?=
+ =?utf-8?B?QTVQUzVHM0NST05WSmcvMjhDS0VlZzBYMll6eHl2QnZPM2ZPUzgzck83Z2lq?=
+ =?utf-8?B?K1E9PQ==?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e882d17-87fc-4e6d-3e86-08db1f45cd02
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5056.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2023 19:54:46.7612
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9qKs2xTwVrv0rgS7lWYq0HquIs4cJTSr81XUEbjMbduLHbeXPbvj+Q/Nr+TScGUCsFRLcKpcDw+Zp3/O1H0K4Ry00K+B3FlkBmPFKbKucGA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9188
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+On 07/03/2023 17:38, Bertrand Marquis wrote:
+> Hi Andrei,
+> 
+>> On 7 Mar 2023, at 11:09, Andrei Cherechesu (OSS) <andrei.cherechesu@oss.nxp.com> wrote:
+>>
+>> From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>>
+>> Added support for parsing the ARM generic timer interrupts DT
+>> node by the "interrupt-names" property, if it is available.
+>>
+>> If not available, the usual parsing based on the expected
+>> IRQ order is performed.
+>>
+>> Also added the "hyp-virt" PPI to the timer PPI list, even
+>> though it's currently not in use. If the "hyp-virt" PPI is
+>> not found, the hypervisor won't panic.
+>>
+>> Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>> ---
+>> xen/arch/arm/include/asm/time.h |  3 ++-
+>> xen/arch/arm/time.c             | 26 ++++++++++++++++++++++----
+>> 2 files changed, 24 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+>> index 4b401c1110..49ad8c1a6d 100644
+>> --- a/xen/arch/arm/include/asm/time.h
+>> +++ b/xen/arch/arm/include/asm/time.h
+>> @@ -82,7 +82,8 @@ enum timer_ppi
+>>     TIMER_PHYS_NONSECURE_PPI = 1,
+>>     TIMER_VIRT_PPI = 2,
+>>     TIMER_HYP_PPI = 3,
+>> -    MAX_TIMER_PPI = 4,
+>> +    TIMER_HYP_VIRT_PPI = 4,
+>> +    MAX_TIMER_PPI = 5,
+>> };
+>>
+>> /*
+>> diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+>> index 433d7be909..794da646d6 100644
+>> --- a/xen/arch/arm/time.c
+>> +++ b/xen/arch/arm/time.c
+>> @@ -38,6 +38,14 @@ uint32_t __read_mostly timer_dt_clock_frequency;
+>>
+>> static unsigned int timer_irq[MAX_TIMER_PPI];
+>>
+>> +static const char *timer_irq_names[MAX_TIMER_PPI] = {
+>> +    [TIMER_PHYS_SECURE_PPI] = "sec-phys",
+>> +    [TIMER_PHYS_NONSECURE_PPI] = "phys",
+>> +    [TIMER_VIRT_PPI] = "virt",
+>> +    [TIMER_HYP_PPI] = "hyp-phys",
+>> +    [TIMER_HYP_VIRT_PPI] = "hyp-virt",
+>> +};
+>> +
+> 
+> I would need some reference or a pointer to some doc to check those.
 
-The existing implementation calling into the real libxenevtchn moves to
-a new file hw/xen/xen-operations.c, and is called via a function table
-which in a subsequent commit will also be able to invoke the emulated
-event channel support.
+Hi Bertrand,
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/9pfs/xen-9p-backend.c            |  24 +++---
- hw/i386/xen/xen-hvm.c               |  27 ++++---
- hw/xen/meson.build                  |   1 +
- hw/xen/xen-bus.c                    |  22 +++---
- hw/xen/xen-legacy-backend.c         |   8 +-
- hw/xen/xen-operations.c             |  71 +++++++++++++++++
- hw/xen/xen_pvdev.c                  |  12 +--
- include/hw/xen/xen-bus.h            |   1 +
- include/hw/xen/xen-legacy-backend.h |   1 +
- include/hw/xen/xen_backend_ops.h    | 118 ++++++++++++++++++++++++++++
- include/hw/xen/xen_common.h         |  12 ---
- include/hw/xen/xen_pvdev.h          |   1 +
- softmmu/globals.c                   |   1 +
- 13 files changed, 242 insertions(+), 57 deletions(-)
- create mode 100644 hw/xen/xen-operations.c
- create mode 100644 include/hw/xen/xen_backend_ops.h
+This implementation follows the one in Linux [0]. The parsing order for
+the IRQs remains the same whether or not the "interrupt-names" property
+is available, since the driver in both Linux and Xen expects them in a
+specific order (defined by enum arch_timer_ppi_nr in Linux, for example)
+which, most of the time, does not correspond to how they are mapped onto
+the SoC. But now it can discover them correctly regardless of their
+order in the "interrupts" property in the DT node.
 
-diff --git a/hw/9pfs/xen-9p-backend.c b/hw/9pfs/xen-9p-backend.c
-index 65c4979c3c..864bdaf952 100644
---- a/hw/9pfs/xen-9p-backend.c
-+++ b/hw/9pfs/xen-9p-backend.c
-@@ -241,7 +241,7 @@ static void xen_9pfs_push_and_notify(V9fsPDU *pdu)
-     xen_wmb();
- 
-     ring->inprogress = false;
--    xenevtchn_notify(ring->evtchndev, ring->local_port);
-+    qemu_xen_evtchn_notify(ring->evtchndev, ring->local_port);
- 
-     qemu_bh_schedule(ring->bh);
- }
-@@ -324,8 +324,8 @@ static void xen_9pfs_evtchn_event(void *opaque)
-     Xen9pfsRing *ring = opaque;
-     evtchn_port_t port;
- 
--    port = xenevtchn_pending(ring->evtchndev);
--    xenevtchn_unmask(ring->evtchndev, port);
-+    port = qemu_xen_evtchn_pending(ring->evtchndev);
-+    qemu_xen_evtchn_unmask(ring->evtchndev, port);
- 
-     qemu_bh_schedule(ring->bh);
- }
-@@ -337,10 +337,10 @@ static void xen_9pfs_disconnect(struct XenLegacyDevice *xendev)
- 
-     for (i = 0; i < xen_9pdev->num_rings; i++) {
-         if (xen_9pdev->rings[i].evtchndev != NULL) {
--            qemu_set_fd_handler(xenevtchn_fd(xen_9pdev->rings[i].evtchndev),
--                    NULL, NULL, NULL);
--            xenevtchn_unbind(xen_9pdev->rings[i].evtchndev,
--                             xen_9pdev->rings[i].local_port);
-+            qemu_set_fd_handler(qemu_xen_evtchn_fd(xen_9pdev->rings[i].evtchndev),
-+                                NULL, NULL, NULL);
-+            qemu_xen_evtchn_unbind(xen_9pdev->rings[i].evtchndev,
-+                                   xen_9pdev->rings[i].local_port);
-             xen_9pdev->rings[i].evtchndev = NULL;
-         }
-     }
-@@ -447,12 +447,12 @@ static int xen_9pfs_connect(struct XenLegacyDevice *xendev)
-         xen_9pdev->rings[i].inprogress = false;
- 
- 
--        xen_9pdev->rings[i].evtchndev = xenevtchn_open(NULL, 0);
-+        xen_9pdev->rings[i].evtchndev = qemu_xen_evtchn_open();
-         if (xen_9pdev->rings[i].evtchndev == NULL) {
-             goto out;
-         }
--        qemu_set_cloexec(xenevtchn_fd(xen_9pdev->rings[i].evtchndev));
--        xen_9pdev->rings[i].local_port = xenevtchn_bind_interdomain
-+        qemu_set_cloexec(qemu_xen_evtchn_fd(xen_9pdev->rings[i].evtchndev));
-+        xen_9pdev->rings[i].local_port = qemu_xen_evtchn_bind_interdomain
-                                             (xen_9pdev->rings[i].evtchndev,
-                                              xendev->dom,
-                                              xen_9pdev->rings[i].evtchn);
-@@ -463,8 +463,8 @@ static int xen_9pfs_connect(struct XenLegacyDevice *xendev)
-             goto out;
-         }
-         xen_pv_printf(xendev, 2, "bind evtchn port %d\n", xendev->local_port);
--        qemu_set_fd_handler(xenevtchn_fd(xen_9pdev->rings[i].evtchndev),
--                xen_9pfs_evtchn_event, NULL, &xen_9pdev->rings[i]);
-+        qemu_set_fd_handler(qemu_xen_evtchn_fd(xen_9pdev->rings[i].evtchndev),
-+                            xen_9pfs_evtchn_event, NULL, &xen_9pdev->rings[i]);
-     }
- 
-     xen_9pdev->security_model = xenstore_read_be_str(xendev, "security_model");
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index e5a1dd19f4..cb1d24f592 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -761,7 +761,7 @@ static ioreq_t *cpu_get_ioreq(XenIOState *state)
-     int i;
-     evtchn_port_t port;
- 
--    port = xenevtchn_pending(state->xce_handle);
-+    port = qemu_xen_evtchn_pending(state->xce_handle);
-     if (port == state->bufioreq_local_port) {
-         timer_mod(state->buffered_io_timer,
-                 BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
-@@ -780,7 +780,7 @@ static ioreq_t *cpu_get_ioreq(XenIOState *state)
-         }
- 
-         /* unmask the wanted port again */
--        xenevtchn_unmask(state->xce_handle, port);
-+        qemu_xen_evtchn_unmask(state->xce_handle, port);
- 
-         /* get the io packet from shared memory */
-         state->send_vcpu = i;
-@@ -1147,7 +1147,7 @@ static void handle_buffered_io(void *opaque)
-                 BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
-     } else {
-         timer_del(state->buffered_io_timer);
--        xenevtchn_unmask(state->xce_handle, state->bufioreq_local_port);
-+        qemu_xen_evtchn_unmask(state->xce_handle, state->bufioreq_local_port);
-     }
- }
- 
-@@ -1196,8 +1196,8 @@ static void cpu_handle_ioreq(void *opaque)
-         }
- 
-         req->state = STATE_IORESP_READY;
--        xenevtchn_notify(state->xce_handle,
--                         state->ioreq_local_port[state->send_vcpu]);
-+        qemu_xen_evtchn_notify(state->xce_handle,
-+                               state->ioreq_local_port[state->send_vcpu]);
-     }
- }
- 
-@@ -1206,7 +1206,7 @@ static void xen_main_loop_prepare(XenIOState *state)
-     int evtchn_fd = -1;
- 
-     if (state->xce_handle != NULL) {
--        evtchn_fd = xenevtchn_fd(state->xce_handle);
-+        evtchn_fd = qemu_xen_evtchn_fd(state->xce_handle);
-     }
- 
-     state->buffered_io_timer = timer_new_ms(QEMU_CLOCK_REALTIME, handle_buffered_io,
-@@ -1249,7 +1249,7 @@ static void xen_exit_notifier(Notifier *n, void *data)
-         xenforeignmemory_unmap_resource(xen_fmem, state->fres);
-     }
- 
--    xenevtchn_close(state->xce_handle);
-+    qemu_xen_evtchn_close(state->xce_handle);
-     xs_daemon_close(state->xenstore);
- }
- 
-@@ -1397,9 +1397,11 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
-     xen_pfn_t ioreq_pfn;
-     XenIOState *state;
- 
-+    setup_xen_backend_ops();
-+
-     state = g_new0(XenIOState, 1);
- 
--    state->xce_handle = xenevtchn_open(NULL, 0);
-+    state->xce_handle = qemu_xen_evtchn_open();
-     if (state->xce_handle == NULL) {
-         perror("xen: event channel open");
-         goto err;
-@@ -1463,8 +1465,9 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
- 
-     /* FIXME: how about if we overflow the page here? */
-     for (i = 0; i < max_cpus; i++) {
--        rc = xenevtchn_bind_interdomain(state->xce_handle, xen_domid,
--                                        xen_vcpu_eport(state->shared_page, i));
-+        rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
-+                                              xen_vcpu_eport(state->shared_page,
-+                                                             i));
-         if (rc == -1) {
-             error_report("shared evtchn %d bind error %d", i, errno);
-             goto err;
-@@ -1472,8 +1475,8 @@ void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
-         state->ioreq_local_port[i] = rc;
-     }
- 
--    rc = xenevtchn_bind_interdomain(state->xce_handle, xen_domid,
--                                    state->bufioreq_remote_port);
-+    rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
-+                                          state->bufioreq_remote_port);
-     if (rc == -1) {
-         error_report("buffered evtchn bind error %d", errno);
-         goto err;
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index ae0ace3046..f195bbd25c 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -5,6 +5,7 @@ softmmu_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-   'xen-legacy-backend.c',
-   'xen_devconfig.c',
-   'xen_pvdev.c',
-+  'xen-operations.c',
- ))
- 
- xen_specific_ss = ss.source_set()
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index df3f6b9ae0..d0b1ae93da 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -1095,12 +1095,12 @@ static bool xen_device_poll(void *opaque)
- static void xen_device_event(void *opaque)
- {
-     XenEventChannel *channel = opaque;
--    unsigned long port = xenevtchn_pending(channel->xeh);
-+    unsigned long port = qemu_xen_evtchn_pending(channel->xeh);
- 
-     if (port == channel->local_port) {
-         xen_device_poll(channel);
- 
--        xenevtchn_unmask(channel->xeh, port);
-+        qemu_xen_evtchn_unmask(channel->xeh, port);
-     }
- }
- 
-@@ -1115,11 +1115,11 @@ void xen_device_set_event_channel_context(XenDevice *xendev,
-     }
- 
-     if (channel->ctx)
--        aio_set_fd_handler(channel->ctx, xenevtchn_fd(channel->xeh), true,
-+        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-                            NULL, NULL, NULL, NULL, NULL);
- 
-     channel->ctx = ctx;
--    aio_set_fd_handler(channel->ctx, xenevtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-                        xen_device_event, NULL, xen_device_poll, NULL, channel);
- }
- 
-@@ -1131,13 +1131,13 @@ XenEventChannel *xen_device_bind_event_channel(XenDevice *xendev,
-     XenEventChannel *channel = g_new0(XenEventChannel, 1);
-     xenevtchn_port_or_error_t local_port;
- 
--    channel->xeh = xenevtchn_open(NULL, 0);
-+    channel->xeh = qemu_xen_evtchn_open();
-     if (!channel->xeh) {
-         error_setg_errno(errp, errno, "failed xenevtchn_open");
-         goto fail;
-     }
- 
--    local_port = xenevtchn_bind_interdomain(channel->xeh,
-+    local_port = qemu_xen_evtchn_bind_interdomain(channel->xeh,
-                                             xendev->frontend_id,
-                                             port);
-     if (local_port < 0) {
-@@ -1160,7 +1160,7 @@ XenEventChannel *xen_device_bind_event_channel(XenDevice *xendev,
- 
- fail:
-     if (channel->xeh) {
--        xenevtchn_close(channel->xeh);
-+        qemu_xen_evtchn_close(channel->xeh);
-     }
- 
-     g_free(channel);
-@@ -1177,7 +1177,7 @@ void xen_device_notify_event_channel(XenDevice *xendev,
-         return;
-     }
- 
--    if (xenevtchn_notify(channel->xeh, channel->local_port) < 0) {
-+    if (qemu_xen_evtchn_notify(channel->xeh, channel->local_port) < 0) {
-         error_setg_errno(errp, errno, "xenevtchn_notify failed");
-     }
- }
-@@ -1193,14 +1193,14 @@ void xen_device_unbind_event_channel(XenDevice *xendev,
- 
-     QLIST_REMOVE(channel, list);
- 
--    aio_set_fd_handler(channel->ctx, xenevtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-                        NULL, NULL, NULL, NULL, NULL);
- 
--    if (xenevtchn_unbind(channel->xeh, channel->local_port) < 0) {
-+    if (qemu_xen_evtchn_unbind(channel->xeh, channel->local_port) < 0) {
-         error_setg_errno(errp, errno, "xenevtchn_unbind failed");
-     }
- 
--    xenevtchn_close(channel->xeh);
-+    qemu_xen_evtchn_close(channel->xeh);
-     g_free(channel);
- }
- 
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index afba71f6eb..9ce3dc204b 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -294,13 +294,13 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
-     xendev->debug      = debug;
-     xendev->local_port = -1;
- 
--    xendev->evtchndev = xenevtchn_open(NULL, 0);
-+    xendev->evtchndev = qemu_xen_evtchn_open();
-     if (xendev->evtchndev == NULL) {
-         xen_pv_printf(NULL, 0, "can't open evtchn device\n");
-         qdev_unplug(DEVICE(xendev), NULL);
-         return NULL;
-     }
--    qemu_set_cloexec(xenevtchn_fd(xendev->evtchndev));
-+    qemu_set_cloexec(qemu_xen_evtchn_fd(xendev->evtchndev));
- 
-     xen_pv_insert_xendev(xendev);
- 
-@@ -751,14 +751,14 @@ int xen_be_bind_evtchn(struct XenLegacyDevice *xendev)
-     if (xendev->local_port != -1) {
-         return 0;
-     }
--    xendev->local_port = xenevtchn_bind_interdomain
-+    xendev->local_port = qemu_xen_evtchn_bind_interdomain
-         (xendev->evtchndev, xendev->dom, xendev->remote_port);
-     if (xendev->local_port == -1) {
-         xen_pv_printf(xendev, 0, "xenevtchn_bind_interdomain failed\n");
-         return -1;
-     }
-     xen_pv_printf(xendev, 2, "bind evtchn port %d\n", xendev->local_port);
--    qemu_set_fd_handler(xenevtchn_fd(xendev->evtchndev),
-+    qemu_set_fd_handler(qemu_xen_evtchn_fd(xendev->evtchndev),
-                         xen_pv_evtchn_event, NULL, xendev);
-     return 0;
- }
-diff --git a/hw/xen/xen-operations.c b/hw/xen/xen-operations.c
-new file mode 100644
-index 0000000000..1a959d89e8
---- /dev/null
-+++ b/hw/xen/xen-operations.c
-@@ -0,0 +1,71 @@
-+/*
-+ * QEMU Xen backend support: Operations for true Xen
-+ *
-+ * Copyright © 2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * Authors: David Woodhouse <dwmw2@infradead.org>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+
-+#include "hw/xen/xen_backend_ops.h"
-+#include "hw/xen/xen_common.h"
-+
-+/*
-+ * If we have new enough libxenctrl then we do not want/need these compat
-+ * interfaces, despite what the user supplied cflags might say. They
-+ * must be undefined before including xenctrl.h
-+ */
-+#undef XC_WANT_COMPAT_EVTCHN_API
-+
-+#include <xenctrl.h>
-+
-+/*
-+ * We don't support Xen prior to 4.2.0.
-+ */
-+
-+/* Xen 4.2 through 4.6 */
-+#if CONFIG_XEN_CTRL_INTERFACE_VERSION < 40701
-+
-+typedef xc_evtchn xenevtchn_handle;
-+typedef evtchn_port_or_error_t xenevtchn_port_or_error_t;
-+
-+#define xenevtchn_open(l, f) xc_evtchn_open(l, f);
-+#define xenevtchn_close(h) xc_evtchn_close(h)
-+#define xenevtchn_fd(h) xc_evtchn_fd(h)
-+#define xenevtchn_pending(h) xc_evtchn_pending(h)
-+#define xenevtchn_notify(h, p) xc_evtchn_notify(h, p)
-+#define xenevtchn_bind_interdomain(h, d, p) xc_evtchn_bind_interdomain(h, d, p)
-+#define xenevtchn_unmask(h, p) xc_evtchn_unmask(h, p)
-+#define xenevtchn_unbind(h, p) xc_evtchn_unbind(h, p)
-+
-+#else /* CONFIG_XEN_CTRL_INTERFACE_VERSION >= 40701 */
-+
-+#include <xenevtchn.h>
-+
-+#endif
-+
-+static xenevtchn_handle *libxenevtchn_backend_open(void)
-+{
-+    return xenevtchn_open(NULL, 0);
-+}
-+
-+struct evtchn_backend_ops libxenevtchn_backend_ops = {
-+    .open = libxenevtchn_backend_open,
-+    .close = xenevtchn_close,
-+    .bind_interdomain = xenevtchn_bind_interdomain,
-+    .unbind = xenevtchn_unbind,
-+    .get_fd = xenevtchn_fd,
-+    .notify = xenevtchn_notify,
-+    .unmask = xenevtchn_unmask,
-+    .pending = xenevtchn_pending,
-+};
-+
-+void setup_xen_backend_ops(void)
-+{
-+    xen_evtchn_ops = &libxenevtchn_backend_ops;
-+}
-diff --git a/hw/xen/xen_pvdev.c b/hw/xen/xen_pvdev.c
-index 1a5177b354..86a2c8e567 100644
---- a/hw/xen/xen_pvdev.c
-+++ b/hw/xen/xen_pvdev.c
-@@ -238,14 +238,14 @@ void xen_pv_evtchn_event(void *opaque)
-     struct XenLegacyDevice *xendev = opaque;
-     evtchn_port_t port;
- 
--    port = xenevtchn_pending(xendev->evtchndev);
-+    port = qemu_xen_evtchn_pending(xendev->evtchndev);
-     if (port != xendev->local_port) {
-         xen_pv_printf(xendev, 0,
-                       "xenevtchn_pending returned %d (expected %d)\n",
-                       port, xendev->local_port);
-         return;
-     }
--    xenevtchn_unmask(xendev->evtchndev, port);
-+    qemu_xen_evtchn_unmask(xendev->evtchndev, port);
- 
-     if (xendev->ops->event) {
-         xendev->ops->event(xendev);
-@@ -257,15 +257,15 @@ void xen_pv_unbind_evtchn(struct XenLegacyDevice *xendev)
-     if (xendev->local_port == -1) {
-         return;
-     }
--    qemu_set_fd_handler(xenevtchn_fd(xendev->evtchndev), NULL, NULL, NULL);
--    xenevtchn_unbind(xendev->evtchndev, xendev->local_port);
-+    qemu_set_fd_handler(qemu_xen_evtchn_fd(xendev->evtchndev), NULL, NULL, NULL);
-+    qemu_xen_evtchn_unbind(xendev->evtchndev, xendev->local_port);
-     xen_pv_printf(xendev, 2, "unbind evtchn port %d\n", xendev->local_port);
-     xendev->local_port = -1;
- }
- 
- int xen_pv_send_notify(struct XenLegacyDevice *xendev)
- {
--    return xenevtchn_notify(xendev->evtchndev, xendev->local_port);
-+    return qemu_xen_evtchn_notify(xendev->evtchndev, xendev->local_port);
- }
- 
- /* ------------------------------------------------------------- */
-@@ -306,7 +306,7 @@ void xen_pv_del_xendev(struct XenLegacyDevice *xendev)
-     }
- 
-     if (xendev->evtchndev != NULL) {
--        xenevtchn_close(xendev->evtchndev);
-+        qemu_xen_evtchn_close(xendev->evtchndev);
-     }
-     if (xendev->gnttabdev != NULL) {
-         xengnttab_close(xendev->gnttabdev);
-diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
-index 4d966a2dbb..e21b83796e 100644
---- a/include/hw/xen/xen-bus.h
-+++ b/include/hw/xen/xen-bus.h
-@@ -8,6 +8,7 @@
- #ifndef HW_XEN_BUS_H
- #define HW_XEN_BUS_H
- 
-+#include "hw/xen/xen_backend_ops.h"
- #include "hw/xen/xen_common.h"
- #include "hw/sysbus.h"
- #include "qemu/notify.h"
-diff --git a/include/hw/xen/xen-legacy-backend.h b/include/hw/xen/xen-legacy-backend.h
-index e31cd3a068..06985b1f03 100644
---- a/include/hw/xen/xen-legacy-backend.h
-+++ b/include/hw/xen/xen-legacy-backend.h
-@@ -2,6 +2,7 @@
- #define HW_XEN_LEGACY_BACKEND_H
- 
- #include "hw/xen/xen_common.h"
-+#include "hw/xen/xen_backend_ops.h"
- #include "hw/xen/xen_pvdev.h"
- #include "net/net.h"
- #include "qom/object.h"
-diff --git a/include/hw/xen/xen_backend_ops.h b/include/hw/xen/xen_backend_ops.h
-new file mode 100644
-index 0000000000..9605456e81
---- /dev/null
-+++ b/include/hw/xen/xen_backend_ops.h
-@@ -0,0 +1,118 @@
-+/*
-+ * QEMU Xen backend support
-+ *
-+ * Copyright © 2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * Authors: David Woodhouse <dwmw2@infradead.org>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+
-+#ifndef QEMU_XEN_BACKEND_OPS_H
-+#define QEMU_XEN_BACKEND_OPS_H
-+
-+/*
-+ * For the time being, these operations map fairly closely to the API of
-+ * the actual Xen libraries, e.g. libxenevtchn. As we complete the migration
-+ * from XenLegacyDevice back ends to the new XenDevice model, they may
-+ * evolve to slightly higher-level APIs.
-+ *
-+ * The internal emulations do not emulate the Xen APIs entirely faithfully;
-+ * only enough to be used by the Xen backend devices. For example, only one
-+ * event channel can be bound to each handle, since that's sufficient for
-+ * the device support (only the true Xen HVM backend uses more). And the
-+ * behaviour of unmask() and pending() is different too because the device
-+ * backends don't care.
-+ */
-+
-+typedef struct xenevtchn_handle xenevtchn_handle;
-+typedef int xenevtchn_port_or_error_t;
-+typedef uint32_t evtchn_port_t;
-+
-+struct evtchn_backend_ops {
-+    xenevtchn_handle *(*open)(void);
-+    int (*bind_interdomain)(xenevtchn_handle *xc, uint32_t domid,
-+                            evtchn_port_t guest_port);
-+    int (*unbind)(xenevtchn_handle *xc, evtchn_port_t port);
-+    int (*close)(struct xenevtchn_handle *xc);
-+    int (*get_fd)(struct xenevtchn_handle *xc);
-+    int (*notify)(struct xenevtchn_handle *xc, evtchn_port_t port);
-+    int (*unmask)(struct xenevtchn_handle *xc, evtchn_port_t port);
-+    int (*pending)(struct xenevtchn_handle *xc);
-+};
-+
-+extern struct evtchn_backend_ops *xen_evtchn_ops;
-+
-+static inline xenevtchn_handle *qemu_xen_evtchn_open(void)
-+{
-+    if (!xen_evtchn_ops) {
-+        return NULL;
-+    }
-+    return xen_evtchn_ops->open();
-+}
-+
-+static inline int qemu_xen_evtchn_bind_interdomain(xenevtchn_handle *xc,
-+                                                   uint32_t domid,
-+                                                   evtchn_port_t guest_port)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->bind_interdomain(xc, domid, guest_port);
-+}
-+
-+static inline int qemu_xen_evtchn_unbind(xenevtchn_handle *xc,
-+                                         evtchn_port_t port)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->unbind(xc, port);
-+}
-+
-+static inline int qemu_xen_evtchn_close(xenevtchn_handle *xc)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->close(xc);
-+}
-+
-+static inline int qemu_xen_evtchn_fd(xenevtchn_handle *xc)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->get_fd(xc);
-+}
-+
-+static inline int qemu_xen_evtchn_notify(xenevtchn_handle *xc,
-+                                         evtchn_port_t port)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->notify(xc, port);
-+}
-+
-+static inline int qemu_xen_evtchn_unmask(xenevtchn_handle *xc,
-+                                         evtchn_port_t port)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->unmask(xc, port);
-+}
-+
-+static inline int qemu_xen_evtchn_pending(xenevtchn_handle *xc)
-+{
-+    if (!xen_evtchn_ops) {
-+        return -ENOSYS;
-+    }
-+    return xen_evtchn_ops->pending(xc);
-+}
-+
-+void setup_xen_backend_ops(void);
-+
-+#endif /* QEMU_XEN_BACKEND_OPS_H */
-diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
-index 9a13a756ae..34abd0a772 100644
---- a/include/hw/xen/xen_common.h
-+++ b/include/hw/xen/xen_common.h
-@@ -28,18 +28,7 @@ extern xc_interface *xen_xc;
- #if CONFIG_XEN_CTRL_INTERFACE_VERSION < 40701
- 
- typedef xc_interface xenforeignmemory_handle;
--typedef xc_evtchn xenevtchn_handle;
- typedef xc_gnttab xengnttab_handle;
--typedef evtchn_port_or_error_t xenevtchn_port_or_error_t;
--
--#define xenevtchn_open(l, f) xc_evtchn_open(l, f);
--#define xenevtchn_close(h) xc_evtchn_close(h)
--#define xenevtchn_fd(h) xc_evtchn_fd(h)
--#define xenevtchn_pending(h) xc_evtchn_pending(h)
--#define xenevtchn_notify(h, p) xc_evtchn_notify(h, p)
--#define xenevtchn_bind_interdomain(h, d, p) xc_evtchn_bind_interdomain(h, d, p)
--#define xenevtchn_unmask(h, p) xc_evtchn_unmask(h, p)
--#define xenevtchn_unbind(h, p) xc_evtchn_unbind(h, p)
- 
- #define xengnttab_open(l, f) xc_gnttab_open(l, f)
- #define xengnttab_close(h) xc_gnttab_close(h)
-@@ -69,7 +58,6 @@ static inline void *xenforeignmemory_map(xc_interface *h, uint32_t dom,
- 
- #else /* CONFIG_XEN_CTRL_INTERFACE_VERSION >= 40701 */
- 
--#include <xenevtchn.h>
- #include <xengnttab.h>
- #include <xenforeignmemory.h>
- 
-diff --git a/include/hw/xen/xen_pvdev.h b/include/hw/xen/xen_pvdev.h
-index 7cd4bc2b82..9c27b14764 100644
---- a/include/hw/xen/xen_pvdev.h
-+++ b/include/hw/xen/xen_pvdev.h
-@@ -1,6 +1,7 @@
- #ifndef QEMU_HW_XEN_PVDEV_H
- #define QEMU_HW_XEN_PVDEV_H
- 
-+#include "hw/xen/xen_backend_ops.h"
- #include "hw/xen/xen_common.h"
- /* ------------------------------------------------------------- */
- 
-diff --git a/softmmu/globals.c b/softmmu/globals.c
-index 0a4405614e..eb62739be1 100644
---- a/softmmu/globals.c
-+++ b/softmmu/globals.c
-@@ -65,3 +65,4 @@ bool qemu_uuid_set;
- uint32_t xen_domid;
- enum xen_mode xen_mode = XEN_DISABLED;
- bool xen_domid_restrict;
-+struct evtchn_backend_ops *xen_evtchn_ops;
--- 
-2.39.0
+Only the "hyp-virt" IRQ is not required to be present, which is also the
+last one parsed.
 
+[0]
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/clocksource/arm_arch_timer.c?id=86332e9e3477af8f31c9d5f3e81e57e0fd2118e7
+
+> 
+>> unsigned int timer_get_irq(enum timer_ppi ppi)
+>> {
+>>     ASSERT(ppi >= TIMER_PHYS_SECURE_PPI && ppi < MAX_TIMER_PPI);
+>> @@ -149,15 +157,25 @@ static void __init init_dt_xen_time(void)
+>> {
+>>     int res;
+>>     unsigned int i;
+>> +    bool has_names;
+>> +
+>> +    has_names = dt_property_read_bool(timer, "interrupt-names");
+>>
+>>     /* Retrieve all IRQs for the timer */
+>>     for ( i = TIMER_PHYS_SECURE_PPI; i < MAX_TIMER_PPI; i++ )
+>>     {
+>> -        res = platform_get_irq(timer, i);
+>> -
+>> -        if ( res < 0 )
+>> +        if ( has_names )
+>> +            res = platform_get_irq_byname(timer, timer_irq_names[i]);
+>> +        else
+>> +            res = platform_get_irq(timer, i);
+>> +
+>> +        if ( res > 0 )
+> 
+> The behaviour of the code is changed here compared to the current
+> version as res = 0 will now generate a panic.
+> 
+> Some device tree might not specify an interrupt number and just put
+> 0 and Xen will now panic on those systems.
+> As I have no idea if such systems exists and the behaviour is modified
+> you should justify this and mention it in the commit message or keep
+> the old behaviour and let 0 go through without a panic.
+> 
+> @stefano, julien any idea here ? should just keep the old behaviour ?
+> 
+
+You're right, I didn't take the dummy fake interrupts case into
+consideration. I also think we should keep the old behaviour then, and
+let 0 go through too, as you mentioned.
+
+
+>> +            timer_irq[i] = res;
+>> +        /* Do not panic if "hyp-virt" PPI is not found, since it's not
+>> +         * currently used.
+>> +         */
+> 
+> Please respect the standard for comments and keep the first line empty:
+> /*
+>  * comment
+>  */
+> 
+
+Will update in v2.
+
+>> +        else if ( i != TIMER_HYP_VIRT_PPI )
+>>             panic("Timer: Unable to retrieve IRQ %u from the device tree\n", i);
+>> -        timer_irq[i] = res;
+>>     }
+>> }
+> 
+> Cheers
+> Bertrand
+> 
+
+Thanks for the review.
+
+Regards,
+Andrei
+
+>>
+>> -- 
+>> 2.35.1
+>>
+>>
+> 
 
