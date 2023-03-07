@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67313C678DB
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:29:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507824.781989 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A3C3C6FD1A
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 18:29:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507847.782029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc43-0005oK-LR; Tue, 07 Mar 2023 18:29:31 +0000
+	id 1pZc4C-0007WI-Mw; Tue, 07 Mar 2023 18:29:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507824.781989; Tue, 07 Mar 2023 18:29:31 +0000
+Received: by outflank-mailman (output) from mailman id 507847.782029; Tue, 07 Mar 2023 18:29:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZc43-0005o6-HA; Tue, 07 Mar 2023 18:29:31 +0000
-Received: by outflank-mailman (input) for mailman id 507824;
- Tue, 07 Mar 2023 18:29:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZc4C-0007Vu-Iq; Tue, 07 Mar 2023 18:29:40 +0000
+Received: by outflank-mailman (input) for mailman id 507847;
+ Tue, 07 Mar 2023 18:29:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZc28-0002M9-Vx
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:27:33 +0000
+ id 1pZc2f-0002MP-96
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 18:28:05 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b2fa0f05-bd15-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 19:27:21 +0100 (CET)
-Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cb786c08-bd15-11ed-a550-8520e6686977;
+ Tue, 07 Mar 2023 19:28:02 +0100 (CET)
+Received: from [2001:8b0:10b:5:640c:634b:db90:9c87]
+ (helo=u3832b3a9db3152.ant.amazon.com)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pZc1m-006de8-Te; Tue, 07 Mar 2023 18:27:11 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZc1m-009e8D-2n; Tue, 07 Mar 2023 18:27:10 +0000
+ id 1pZc2b-006dmP-1Z; Tue, 07 Mar 2023 18:28:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,878 +42,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b2fa0f05-bd15-11ed-96b5-2f268f93b82a
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: cb786c08-bd15-11ed-a550-8520e6686977
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=roOXmxmzTlHGXFakXynsNOCVNOYbdrPEnnmW0uIAY2w=; b=aY3X0NEwSvWsUv2XtRLZAqQVmQ
-	70Ee/7eP3YatjfQRUWMab3i6m1AK4r+BXRlkRTVAPOL8F482ekHT76Lp7MJ/RhpuqESKALIrboB8h
-	Dku+9UusHYE4efd8r4Zpl9WreXWCNJuPjYaxz+zClZMXjMFaCTvMpl4OQ1C6kjxAxd6nb4YLKythk
-	1m2NP+cEL5iyNaYMTxHHN/zX0bcDY3pw5XUgXVBAO0ycAIhJh6XvKwoFHvHAmNRsoGq0hhyf3F0Tr
-	HeqJ1gipvKKrgewzIvQrF02WjYt8Hbf17iW1O2hTvmSc5SYl56SACs7wzHwnX084rEMnSOel0Iaij
-	RlRjaeMQ==;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=xBoLJuspkURnfw0M8x/cNsoAf1tSWjmvJ7KUtni5tN4=; b=JKzwzAH9NosCLRgrWKAl3hDoqN
+	51hWuzVP8+yIaPpfJkkfaREQ6WxZ7R41EXqPzii7VlopooWOxRWeVRBnV18gQwbUKNLRB6bG8ZAtm
+	1Q1yRqLQ0+aestDDvCeIseiz3b5Q+4qQyWwMOq+R5gQ7RXIeVyavqZXmuUZO11gxNybXc9GESQBqW
+	bV43sWT/CuFtAw9If2WM2TqjEteQFTJV0A8ZopI7MVnjksAafcDckyjcAtlCTCWkSX/quR6AnhVUg
+	hvkoy3brG2zI2dwcOyIRE2GZv3nLrNZi8gAWFDa+AlhSTdsaknBiBGIMaMpVh86JQaGHl6vxy6k64
+	UZVVj1jg==;
+Message-ID: <151b96ce831d276b4c6ce093c450cacf362aa1cb.camel@infradead.org>
+Subject: Re: [PATCH v2 00/27] Enable PV backends with Xen/KVM emulation
 From: David Woodhouse <dwmw2@infradead.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Joao Martins <joao.m.martins@oracle.com>,
-	Ankur Arora <ankur.a.arora@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	vikram.garhwal@amd.com,
-	Anthony Perard <anthony.perard@citrix.com>,
-	xen-devel@lists.xenproject.org,
-	Juan Quintela <quintela@redhat.com>,
-	"Dr . David Alan Gilbert" <dgilbert@redhat.com>
-Subject: [PULL 02/27] hw/xen: Add basic XenStore tree walk and write/read/directory support
-Date: Tue,  7 Mar 2023 18:26:42 +0000
-Message-Id: <20230307182707.2298618-3-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230307182707.2298618-1-dwmw2@infradead.org>
-References: <20230307182707.2298618-1-dwmw2@infradead.org>
+To: paul@xen.org, qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Joao Martins
+ <joao.m.martins@oracle.com>, Ankur Arora <ankur.a.arora@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, vikram.garhwal@amd.com,
+ Anthony Perard <anthony.perard@citrix.com>, 
+ xen-devel@lists.xenproject.org, Juan Quintela <quintela@redhat.com>, "Dr .
+ David Alan Gilbert" <dgilbert@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>
+Date: Tue, 07 Mar 2023 18:27:59 +0000
+In-Reply-To: <007876ac-9f68-756b-3f86-db2f67886558@xen.org>
+References: <20230307171750.2293175-1-dwmw2@infradead.org>
+	 <007876ac-9f68-756b-3f86-db2f67886558@xen.org>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-yZoybcGqW9vsWrHzMQfw"
+User-Agent: Evolution 3.44.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: David Woodhouse <dwmw@amazon.co.uk>
 
-This is a fairly simple implementation of a copy-on-write tree.
+--=-yZoybcGqW9vsWrHzMQfw
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The node walk function starts off at the root, with 'inplace == true'.
-If it ever encounters a node with a refcount greater than one (including
-the root node), then that node is shared with other trees, and cannot
-be modified in place, so the inplace flag is cleared and we copy on
-write from there on down.
+On Tue, 2023-03-07 at 17:57 +0000, Paul Durrant wrote:
+> I think the series is good to go now so time to send a PR.
 
-Xenstore write has 'mkdir -p' semantics and will create the intermediate
-nodes if they don't already exist, so in that case we flip the inplace
-flag back to true as we populate the newly-created nodes.
+Done, thank you!
 
-We put a copy of the absolute path into the buffer in the struct walk_op,
-with *two* NUL terminators at the end. As xs_node_walk() goes down the
-tree, it replaces the next '/' separator with a NUL so that it can use
-the 'child name' in place. The next recursion down then puts the '/'
-back and repeats the exercise for the next path element... if it doesn't
-hit that *second* NUL termination which indicates the true end of the
-path.
+--=-yZoybcGqW9vsWrHzMQfw
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/i386/kvm/xenstore_impl.c | 527 +++++++++++++++++++++++++++++++++++-
- tests/unit/meson.build      |   1 +
- tests/unit/test-xs-node.c   | 197 ++++++++++++++
- 3 files changed, 718 insertions(+), 7 deletions(-)
- create mode 100644 tests/unit/test-xs-node.c
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
+ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
+EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
+FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
+aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
+EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
+VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
+aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
+ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
+QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
+rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
+ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
+U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
+DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
+BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
+dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
+BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
+QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
+CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
+xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
+IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
+kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
+eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
+KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
+1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
+OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
+x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
+5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
+DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
+VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
+UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
+MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
+ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
+oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
+SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
+xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
+RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
+bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
+NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
+KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
+5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
+C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
+gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
+VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
+by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
+b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
+BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
+QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
+c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
+AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
+qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
+v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
+Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
+tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
+Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
+YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
+ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
+IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
+ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
+GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
+h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
+9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
+P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
+2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
+BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
+7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
+lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
+lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
+AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
+Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
+FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
+BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
+cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
+aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
+LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
+BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
+cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
+Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
+lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
+WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
+hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
+IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
+dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
+NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
+xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwMzA3MTgyODAwWjAvBgkqhkiG9w0BCQQxIgQgdI0MJ4KP
+VO2CMs0NFciJNgNYKf19XMZFl+Tj9PaUA7Ywgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
+A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
+dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
+DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
+MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
+Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAz2IaWbGmxg/wB+Wdt0qGctqyvDB7qo1Zs
+23TSysGJwk7xMl49ACF2BuKB0H16BoedLKhVfEOCLGNKAygskfEXjelWXymySBcJNyJZGhKRqqVm
+c6iXz6lY+vpG8MHKAkUsLfLrJgBgUWV4Sq8pYSd6vBxQkpO/8FyRo1GtM5FH6zTSekx4zA0UDt9s
+PETPclT7s+wC6WIfvwWbY2ECT8vnBhW+DvztPa686hBJfxF8RwGifJ26wO8SgNhdJAr6SwLoWiUN
+DWWIFrFYQqQpPMBWiX/3BQ9AqGSyfE1FZYNzB0u2ea7Fq7+FixmvayGYITDSMs+O4uhLWVGYnSyo
+VpOAaYAwPznzgYLNCdwVGSmUnzUGRq2dVPlc0ytMHrXHSP9HGKJZa9OJyZbZpOeKTTP7SpdPLLug
+LzQ30pyJYzs2IYk9E8t6MomZoH+H8kMI+4YPazntPP2+w5RvpEksHExNTsqtv7xrkpGUf02HSgCz
+sOsh62tosfDQ1UbTV8ZfRUaOExqNh6DAFX5OkOb6tIMChJLI4dq5VfFQSW/4kIsKEa2vklkvtN19
+wv8qxO0Yxn9LAz/L9YnlmNrpk5Ln+3TnG1TMxtvnt2GnJO7bPsTLK0sqbLWK0wZg/kNpTFHsfQj+
+FlFtW6nIjs/CDPjMZn+aIpnSAYabJEU+roZGgkRX3gAAAAAAAA==
 
-diff --git a/hw/i386/kvm/xenstore_impl.c b/hw/i386/kvm/xenstore_impl.c
-index 31dbc98fe0..9e10a31bea 100644
---- a/hw/i386/kvm/xenstore_impl.c
-+++ b/hw/i386/kvm/xenstore_impl.c
-@@ -10,13 +10,470 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qom/object.h"
- 
- #include "xen_xenstore.h"
- #include "xenstore_impl.h"
- 
-+#include "hw/xen/interface/io/xs_wire.h"
-+
-+#define XS_MAX_WATCHES          128
-+#define XS_MAX_DOMAIN_NODES     1000
-+#define XS_MAX_NODE_SIZE        2048
-+#define XS_MAX_TRANSACTIONS     10
-+#define XS_MAX_PERMS_PER_NODE   5
-+
-+#define XS_VALID_CHARS "abcdefghijklmnopqrstuvwxyz" \
-+                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-+                       "0123456789-/_"
-+
-+typedef struct XsNode {
-+    uint32_t ref;
-+    GByteArray *content;
-+    GHashTable *children;
-+    uint64_t gencnt;
-+#ifdef XS_NODE_UNIT_TEST
-+    gchar *name; /* debug only */
-+#endif
-+} XsNode;
-+
- struct XenstoreImplState {
-+    XsNode *root;
-+    unsigned int nr_nodes;
- };
- 
-+static inline XsNode *xs_node_new(void)
-+{
-+    XsNode *n = g_new0(XsNode, 1);
-+    n->ref = 1;
-+
-+#ifdef XS_NODE_UNIT_TEST
-+    nr_xs_nodes++;
-+    xs_node_list = g_list_prepend(xs_node_list, n);
-+#endif
-+    return n;
-+}
-+
-+static inline XsNode *xs_node_ref(XsNode *n)
-+{
-+    /* With just 10 transactions, it can never get anywhere near this. */
-+    g_assert(n->ref < INT_MAX);
-+
-+    g_assert(n->ref);
-+    n->ref++;
-+    return n;
-+}
-+
-+static inline void xs_node_unref(XsNode *n)
-+{
-+    if (!n) {
-+        return;
-+    }
-+    g_assert(n->ref);
-+    if (--n->ref) {
-+        return;
-+    }
-+
-+    if (n->content) {
-+        g_byte_array_unref(n->content);
-+    }
-+    if (n->children) {
-+        g_hash_table_unref(n->children);
-+    }
-+#ifdef XS_NODE_UNIT_TEST
-+    g_free(n->name);
-+    nr_xs_nodes--;
-+    xs_node_list = g_list_remove(xs_node_list, n);
-+#endif
-+    g_free(n);
-+}
-+
-+/* For copying from one hash table to another using g_hash_table_foreach() */
-+static void do_insert(gpointer key, gpointer value, gpointer user_data)
-+{
-+    g_hash_table_insert(user_data, g_strdup(key), xs_node_ref(value));
-+}
-+
-+static XsNode *xs_node_copy(XsNode *old)
-+{
-+    XsNode *n = xs_node_new();
-+
-+    n->gencnt = old->gencnt;
-+    if (old->children) {
-+        n->children = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
-+                                            (GDestroyNotify)xs_node_unref);
-+        g_hash_table_foreach(old->children, do_insert, n->children);
-+    }
-+    if (old && old->content) {
-+        n->content = g_byte_array_ref(old->content);
-+    }
-+    return n;
-+}
-+
-+/* Returns true if it made a change to the hash table */
-+static bool xs_node_add_child(XsNode *n, const char *path_elem, XsNode *child)
-+{
-+    assert(!strchr(path_elem, '/'));
-+
-+    if (!child) {
-+        assert(n->children);
-+        return g_hash_table_remove(n->children, path_elem);
-+    }
-+
-+#ifdef XS_NODE_UNIT_TEST
-+    g_free(child->name);
-+    child->name = g_strdup(path_elem);
-+#endif
-+    if (!n->children) {
-+        n->children = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
-+                                            (GDestroyNotify)xs_node_unref);
-+    }
-+
-+    /*
-+     * The documentation for g_hash_table_insert() says that it "returns a
-+     * boolean value to indicate whether the newly added value was already
-+     * in the hash table or not."
-+     *
-+     * It could perhaps be clearer that returning TRUE means it wasn't,
-+     */
-+    return g_hash_table_insert(n->children, g_strdup(path_elem), child);
-+}
-+
-+struct walk_op {
-+    struct XenstoreImplState *s;
-+    char path[XENSTORE_ABS_PATH_MAX + 2]; /* Two NUL terminators */
-+    int (*op_fn)(XsNode **n, struct walk_op *op);
-+    void *op_opaque;
-+    void *op_opaque2;
-+
-+    unsigned int dom_id;
-+
-+    /* The number of nodes which will exist in the tree if this op succeeds. */
-+    unsigned int new_nr_nodes;
-+
-+    /*
-+     * This is maintained on the way *down* the walk to indicate
-+     * whether nodes can be modified in place or whether COW is
-+     * required. It starts off being true, as we're always going to
-+     * replace the root node. If we walk into a shared subtree it
-+     * becomes false. If we start *creating* new nodes for a write,
-+     * it becomes true again.
-+     *
-+     * Do not use it on the way back up.
-+     */
-+    bool inplace;
-+    bool mutating;
-+    bool create_dirs;
-+};
-+
-+static int xs_node_add_content(XsNode **n, struct walk_op *op)
-+{
-+    GByteArray *data = op->op_opaque;
-+
-+    if (op->dom_id) {
-+        /*
-+         * The real XenStored includes permissions and names of child nodes
-+         * in the calculated datasize but life's too short. For a single
-+         * tenant internal XenStore, we don't have to be quite as pedantic.
-+         */
-+        if (data->len > XS_MAX_NODE_SIZE) {
-+            return E2BIG;
-+        }
-+    }
-+    /* We *are* the node to be written. Either this or a copy. */
-+    if (!op->inplace) {
-+        XsNode *old = *n;
-+        *n = xs_node_copy(old);
-+        xs_node_unref(old);
-+    }
-+
-+    if ((*n)->content) {
-+        g_byte_array_unref((*n)->content);
-+    }
-+    (*n)->content = g_byte_array_ref(data);
-+    return 0;
-+}
-+
-+static int xs_node_get_content(XsNode **n, struct walk_op *op)
-+{
-+    GByteArray *data = op->op_opaque;
-+    GByteArray *node_data;
-+
-+    assert(op->inplace);
-+    assert(*n);
-+
-+    node_data = (*n)->content;
-+    if (node_data) {
-+        g_byte_array_append(data, node_data->data, node_data->len);
-+    }
-+
-+    return 0;
-+}
-+
-+static int node_rm_recurse(gpointer key, gpointer value, gpointer user_data)
-+{
-+    struct walk_op *op = user_data;
-+    XsNode *n = value;
-+    bool this_inplace = op->inplace;
-+
-+    if (n->ref != 1) {
-+        op->inplace = 0;
-+    }
-+
-+    if (n->children) {
-+        g_hash_table_foreach_remove(n->children, node_rm_recurse, op);
-+    }
-+    op->new_nr_nodes--;
-+
-+    /*
-+     * Actually deleting the child here is just an optimisation; if we
-+     * don't then the final unref on the topmost victim will just have
-+     * to cascade down again repeating all the g_hash_table_foreach()
-+     * calls.
-+     */
-+    return this_inplace;
-+}
-+
-+static int xs_node_rm(XsNode **n, struct walk_op *op)
-+{
-+    bool this_inplace = op->inplace;
-+
-+    /* Keep count of the nodes in the subtree which gets deleted. */
-+    if ((*n)->children) {
-+        g_hash_table_foreach_remove((*n)->children, node_rm_recurse, op);
-+    }
-+    op->new_nr_nodes--;
-+
-+    if (this_inplace) {
-+        xs_node_unref(*n);
-+    }
-+    *n = NULL;
-+    return 0;
-+}
-+
-+/*
-+ * Passed a full reference in *n which it may free if it needs to COW.
-+ *
-+ * When changing the tree, the op->inplace flag indicates whether this
-+ * node may be modified in place (i.e. it and all its parents had a
-+ * refcount of one). If walking down the tree we find a node whose
-+ * refcount is higher, we must clear op->inplace and COW from there
-+ * down. Unless we are creating new nodes as scaffolding for a write
-+ * (which works like 'mkdir -p' does). In which case those newly
-+ * created nodes can (and must) be modified in place again.
-+ */
-+static int xs_node_walk(XsNode **n, struct walk_op *op)
-+{
-+    char *child_name = NULL;
-+    size_t namelen;
-+    XsNode *old = *n, *child = NULL;
-+    bool stole_child = false;
-+    bool this_inplace;
-+    int err;
-+
-+    namelen = strlen(op->path);
-+
-+    /* Is there a child, or do we hit the double-NUL termination? */
-+    if (op->path[namelen + 1]) {
-+        char *slash;
-+        child_name = op->path + namelen + 1;
-+        slash = strchr(child_name, '/');
-+        if (slash) {
-+            *slash = '\0';
-+        }
-+        op->path[namelen] = '/';
-+    }
-+
-+    /* If we walk into a subtree which is shared, we must COW */
-+    if (op->mutating && old->ref != 1) {
-+        op->inplace = false;
-+    }
-+
-+    if (!child_name) {
-+        /* This is the actual node on which the operation shall be performed */
-+        err = op->op_fn(n, op);
-+        goto out;
-+    }
-+
-+    /* op->inplace will be further modified during the recursion */
-+    this_inplace = op->inplace;
-+
-+    if (old && old->children) {
-+        child = g_hash_table_lookup(old->children, child_name);
-+        /* This is a *weak* reference to 'child', owned by the hash table */
-+    }
-+
-+    if (child) {
-+        xs_node_ref(child);
-+        /*
-+         * Now we own it too. But if we can modify inplace, that's going to
-+         * foil the check and force it to COW. We want to be the *only* owner
-+         * so that it can be modified in place, so remove it from the hash
-+         * table in that case. We'll add it (or its replacement) back later.
-+         */
-+        if (op->mutating && this_inplace) {
-+            g_hash_table_remove(old->children, child_name);
-+            stole_child = true;
-+        }
-+    } else if (op->create_dirs) {
-+        if (op->dom_id && op->new_nr_nodes >= XS_MAX_DOMAIN_NODES) {
-+            err = ENOSPC;
-+            goto out;
-+        }
-+        op->new_nr_nodes++;
-+        child = xs_node_new();
-+
-+        /*
-+         * If we're creating a new child, we can clearly modify it (and its
-+         * children) in place from here on down.
-+         */
-+        op->inplace = true;
-+    } else {
-+        err = ENOENT;
-+        goto out;
-+    }
-+
-+    /*
-+     * Except for the temporary child-stealing as noted, our node has not
-+     * changed yet. We don't yet know the overall operation will complete.
-+     */
-+    err = xs_node_walk(&child, op);
-+    if (err || !op->mutating) {
-+        if (stole_child) {
-+            /* Put it back as it was. */
-+            g_hash_table_replace(old->children, g_strdup(child_name), child);
-+        } else {
-+            xs_node_unref(child);
-+        }
-+        goto out;
-+    }
-+
-+    /*
-+     * Now we know the operation has completed successfully and we're on
-+     * the way back up. Make the change, substituting 'child' in the
-+     * node at our level.
-+     */
-+    if (!this_inplace) {
-+        *n = xs_node_copy(old);
-+        xs_node_unref(old);
-+    }
-+
-+    /*
-+     * The child may be NULL here, for a remove operation. Either way,
-+     * xs_node_add_child() will do the right thing and return a value
-+     * indicating whether it changed the parent's hash table or not.
-+     *
-+     * We bump the parent gencnt if it adds a child that we *didn't*
-+     * steal from it in the first place, or if child==NULL and was
-+     * thus removed (whether we stole it earlier and didn't put it
-+     * back, or xs_node_add_child() actually removed it now).
-+     */
-+    if ((xs_node_add_child(*n, child_name, child) && !stole_child) || !child) {
-+        (*n)->gencnt++;
-+    }
-+
-+ out:
-+    op->path[namelen] = '\0';
-+    if (!namelen) {
-+        /*
-+         * On completing the recursion back up the path walk and reaching the
-+         * top, assign the new node count if the operation was successful.
-+         */
-+        if (!err && op->mutating) {
-+            op->s->nr_nodes = op->new_nr_nodes;
-+        }
-+    }
-+    return err;
-+}
-+
-+static void append_directory_item(gpointer key, gpointer value,
-+                                  gpointer user_data)
-+{
-+    GList **items = user_data;
-+
-+    *items = g_list_insert_sorted(*items, g_strdup(key), (GCompareFunc)strcmp);
-+}
-+
-+/* Populates items with char * names which caller must free. */
-+static int xs_node_directory(XsNode **n, struct walk_op *op)
-+{
-+    GList **items = op->op_opaque;
-+
-+    assert(op->inplace);
-+    assert(*n);
-+
-+    if ((*n)->children) {
-+        g_hash_table_foreach((*n)->children, append_directory_item, items);
-+    }
-+
-+    if (op->op_opaque2) {
-+        *(uint64_t *)op->op_opaque2 = (*n)->gencnt;
-+    }
-+
-+    return 0;
-+}
-+
-+static int validate_path(char *outpath, const char *userpath,
-+                         unsigned int dom_id)
-+{
-+    size_t i, pathlen = strlen(userpath);
-+
-+    if (!pathlen || userpath[pathlen] == '/' || strstr(userpath, "//")) {
-+        return EINVAL;
-+    }
-+    for (i = 0; i < pathlen; i++) {
-+        if (!strchr(XS_VALID_CHARS, userpath[i])) {
-+            return EINVAL;
-+        }
-+    }
-+    if (userpath[0] == '/') {
-+        if (pathlen > XENSTORE_ABS_PATH_MAX) {
-+            return E2BIG;
-+        }
-+        memcpy(outpath, userpath, pathlen + 1);
-+    } else {
-+        if (pathlen > XENSTORE_REL_PATH_MAX) {
-+            return E2BIG;
-+        }
-+        snprintf(outpath, XENSTORE_ABS_PATH_MAX, "/local/domain/%u/%s", dom_id,
-+                 userpath);
-+    }
-+    return 0;
-+}
-+
-+
-+static int init_walk_op(XenstoreImplState *s, struct walk_op *op,
-+                        xs_transaction_t tx_id, unsigned int dom_id,
-+                        const char *path, XsNode ***rootp)
-+{
-+    int ret = validate_path(op->path, path, dom_id);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    /*
-+     * We use *two* NUL terminators at the end of the path, as during the walk
-+     * we will temporarily turn each '/' into a NUL to allow us to use that
-+     * path element for the lookup.
-+     */
-+    op->path[strlen(op->path) + 1] = '\0';
-+    op->path[0] = '\0';
-+    op->inplace = true;
-+    op->mutating = false;
-+    op->create_dirs = false;
-+    op->dom_id = dom_id;
-+    op->s = s;
-+
-+    if (tx_id == XBT_NULL) {
-+        *rootp = &s->root;
-+        op->new_nr_nodes = s->nr_nodes;
-+    } else {
-+        return ENOENT;
-+    }
-+
-+    return 0;
-+}
-+
- int xs_impl_read(XenstoreImplState *s, unsigned int dom_id,
-                  xs_transaction_t tx_id, const char *path, GByteArray *data)
- {
-@@ -24,7 +481,17 @@ int xs_impl_read(XenstoreImplState *s, unsigned int dom_id,
-      * The data GByteArray shall exist, and will be freed by caller.
-      * Just g_byte_array_append() to it.
-      */
--    return ENOENT;
-+    struct walk_op op;
-+    XsNode **n;
-+    int ret;
-+
-+    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
-+    if (ret) {
-+        return ret;
-+    }
-+    op.op_fn = xs_node_get_content;
-+    op.op_opaque = data;
-+    return xs_node_walk(n, &op);
- }
- 
- int xs_impl_write(XenstoreImplState *s, unsigned int dom_id,
-@@ -32,9 +499,21 @@ int xs_impl_write(XenstoreImplState *s, unsigned int dom_id,
- {
-     /*
-      * The data GByteArray shall exist, will be freed by caller. You are
--     * free to use g_byte_array_steal() and keep the data.
-+     * free to use g_byte_array_steal() and keep the data. Or just ref it.
-      */
--    return ENOSYS;
-+    struct walk_op op;
-+    XsNode **n;
-+    int ret;
-+
-+    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
-+    if (ret) {
-+        return ret;
-+    }
-+    op.op_fn = xs_node_add_content;
-+    op.op_opaque = data;
-+    op.mutating = true;
-+    op.create_dirs = true;
-+    return xs_node_walk(n, &op);
- }
- 
- int xs_impl_directory(XenstoreImplState *s, unsigned int dom_id,
-@@ -46,7 +525,18 @@ int xs_impl_directory(XenstoreImplState *s, unsigned int dom_id,
-      * immediately so if you want to change it to (const char *) and keep
-      * them, go ahead and change the caller.
-      */
--    return ENOENT;
-+    struct walk_op op;
-+    XsNode **n;
-+    int ret;
-+
-+    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
-+    if (ret) {
-+        return ret;
-+    }
-+    op.op_fn = xs_node_directory;
-+    op.op_opaque = items;
-+    op.op_opaque2 = gencnt;
-+    return xs_node_walk(n, &op);
- }
- 
- int xs_impl_transaction_start(XenstoreImplState *s, unsigned int dom_id,
-@@ -64,7 +554,17 @@ int xs_impl_transaction_end(XenstoreImplState *s, unsigned int dom_id,
- int xs_impl_rm(XenstoreImplState *s, unsigned int dom_id,
-                xs_transaction_t tx_id, const char *path)
- {
--    return ENOSYS;
-+    struct walk_op op;
-+    XsNode **n;
-+    int ret;
-+
-+    ret = init_walk_op(s, &op, tx_id, dom_id, path, &n);
-+    if (ret) {
-+        return ret;
-+    }
-+    op.op_fn = xs_node_rm;
-+    op.mutating = true;
-+    return xs_node_walk(n, &op);
- }
- 
- int xs_impl_get_perms(XenstoreImplState *s, unsigned int dom_id,
-@@ -102,16 +602,29 @@ int xs_impl_unwatch(XenstoreImplState *s, unsigned int dom_id,
-                     const char *path, const char *token,
-                     xs_impl_watch_fn fn, void *opaque)
- {
--    /* Remove the watch that matches all four criteria */
-+    /*
-+     * When calling the callback @fn, note that the path should
-+     * precisely match the relative path that the guest provided, even
-+     * if it was a relative path which needed to be prefixed with
-+     * /local/domain/${domid}/
-+     */
-     return ENOSYS;
- }
- 
- int xs_impl_reset_watches(XenstoreImplState *s, unsigned int dom_id)
- {
-+    /* Remove the watch that matches all four criteria */
-     return ENOSYS;
- }
- 
- XenstoreImplState *xs_impl_create(void)
- {
--    return g_new0(XenstoreImplState, 1);
-+    XenstoreImplState *s = g_new0(XenstoreImplState, 1);
-+
-+    s->nr_nodes = 1;
-+    s->root = xs_node_new();
-+#ifdef XS_NODE_UNIT_TEST
-+    s->root->name = g_strdup("/");
-+#endif
-+    return s;
- }
-diff --git a/tests/unit/meson.build b/tests/unit/meson.build
-index 51f453e6c4..d9c0a7eae6 100644
---- a/tests/unit/meson.build
-+++ b/tests/unit/meson.build
-@@ -47,6 +47,7 @@ tests = {
-   'ptimer-test': ['ptimer-test-stubs.c', meson.project_source_root() / 'hw/core/ptimer.c'],
-   'test-qapi-util': [],
-   'test-interval-tree': [],
-+  'test-xs-node': [qom],
- }
- 
- if have_system or have_tools
-diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
-new file mode 100644
-index 0000000000..c78d5bd581
---- /dev/null
-+++ b/tests/unit/test-xs-node.c
-@@ -0,0 +1,197 @@
-+/*
-+ * QEMU XenStore XsNode testing
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+
-+static int nr_xs_nodes;
-+static GList *xs_node_list;
-+
-+#define XS_NODE_UNIT_TEST
-+
-+/*
-+ * We don't need the core Xen definitions. And we *do* want to be able
-+ * to run the unit tests even on architectures that Xen doesn't support
-+ * (because life's too short to bother doing otherwise, and test coverage
-+ * doesn't hurt).
-+ */
-+#define __XEN_PUBLIC_XEN_H__
-+
-+#include "hw/i386/kvm/xenstore_impl.c"
-+
-+#define DOMID_QEMU 0
-+#define DOMID_GUEST 1
-+
-+/* This doesn't happen in qemu but we want to make valgrind happy */
-+static void xs_impl_delete(XenstoreImplState *s)
-+{
-+    int err;
-+
-+    err = xs_impl_rm(s, DOMID_QEMU, XBT_NULL, "/local");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 1);
-+
-+    xs_node_unref(s->root);
-+    g_free(s);
-+
-+    if (xs_node_list) {
-+        GList *l;
-+        for (l = xs_node_list; l; l = l->next) {
-+            XsNode *n = l->data;
-+            printf("Remaining node at %p name %s ref %u\n", n, n->name,
-+                   n->ref);
-+        }
-+    }
-+    g_assert(!nr_xs_nodes);
-+}
-+
-+static int write_str(XenstoreImplState *s, unsigned int dom_id,
-+                          unsigned int tx_id, const char *path,
-+                          const char *content)
-+{
-+    GByteArray *d = g_byte_array_new();
-+    int err;
-+
-+    g_byte_array_append(d, (void *)content, strlen(content));
-+    err = xs_impl_write(s, dom_id, tx_id, path, d);
-+    g_byte_array_unref(d);
-+    return err;
-+}
-+
-+static XenstoreImplState *setup(void)
-+{
-+   XenstoreImplState *s = xs_impl_create();
-+   char *abspath;
-+   int err;
-+
-+   abspath = g_strdup_printf("/local/domain/%u", DOMID_GUEST);
-+
-+   err = write_str(s, DOMID_QEMU, XBT_NULL, abspath, "");
-+   g_assert(!err);
-+
-+   g_free(abspath);
-+
-+   abspath = g_strdup_printf("/local/domain/%u/some", DOMID_GUEST);
-+
-+   err = write_str(s, DOMID_QEMU, XBT_NULL, abspath, "");
-+   g_assert(!err);
-+   g_assert(s->nr_nodes == 5);
-+
-+   g_free(abspath);
-+
-+   return s;
-+}
-+
-+static void test_xs_node_simple(void)
-+{
-+    GByteArray *data = g_byte_array_new();
-+    XenstoreImplState *s = setup();
-+    GList *items = NULL;
-+    XsNode *old_root;
-+    uint64_t gencnt;
-+    int err;
-+
-+    g_assert(s);
-+
-+    /* Read gives ENOENT when it should */
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "foo", data);
-+    g_assert(err == ENOENT);
-+
-+    /* Write works */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative/path",
-+                    "something");
-+    g_assert(s->nr_nodes == 7);
-+    g_assert(!err);
-+
-+    /* Read gives back what we wrote */
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative/path", data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("something"));
-+    g_assert(!memcmp(data->data, "something", data->len));
-+
-+    /* Even if we use an abolute path */
-+    g_byte_array_set_size(data, 0);
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL,
-+                       "/local/domain/1/some/relative/path", data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("something"));
-+
-+    /* Keep a copy, to force COW mode */
-+    old_root = xs_node_ref(s->root);
-+
-+    /* Write works again */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL,
-+                    "/local/domain/1/some/relative/path2",
-+                    "something else");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 8);
-+
-+    /* Overwrite an existing node */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative/path",
-+                    "another thing");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 8);
-+
-+    /* We can list the two files we wrote */
-+    err = xs_impl_directory(s, DOMID_GUEST, XBT_NULL, "some/relative", &gencnt,
-+                            &items);
-+    g_assert(!err);
-+    g_assert(items);
-+    g_assert(gencnt == 2);
-+    g_assert(!strcmp(items->data, "path"));
-+    g_assert(items->next);
-+    g_assert(!strcmp(items->next->data, "path2"));
-+    g_assert(!items->next->next);
-+    g_list_free_full(items, g_free);
-+
-+    /* Write somewhere else which already existed */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative", "moredata");
-+    g_assert(!err);
-+
-+    g_byte_array_set_size(data, 0);
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("moredata"));
-+    g_assert(!memcmp(data->data, "moredata", data->len));
-+
-+    /* Overwrite existing data */
-+    err = write_str(s, DOMID_GUEST, XBT_NULL, "some/relative", "otherdata");
-+    g_assert(!err);
-+
-+    g_byte_array_set_size(data, 0);
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-+    g_assert(!err);
-+    g_assert(data->len == strlen("otherdata"));
-+    g_assert(!memcmp(data->data, "otherdata", data->len));
-+
-+    /* Remove the subtree */
-+    err = xs_impl_rm(s, DOMID_GUEST, XBT_NULL, "some/relative");
-+    g_assert(!err);
-+    g_assert(s->nr_nodes == 5);
-+
-+    g_byte_array_set_size(data, 0);
-+    err = xs_impl_read(s, DOMID_GUEST, XBT_NULL, "some/relative", data);
-+    g_assert(err == ENOENT);
-+    g_byte_array_unref(data);
-+
-+    xs_node_unref(old_root);
-+    xs_impl_delete(s);
-+}
-+
-+
-+int main(int argc, char **argv)
-+{
-+    g_test_init(&argc, &argv, NULL);
-+    module_call_init(MODULE_INIT_QOM);
-+
-+    g_test_add_func("/xs_node/simple", test_xs_node_simple);
-+
-+    return g_test_run();
-+}
--- 
-2.39.0
 
+--=-yZoybcGqW9vsWrHzMQfw--
 
