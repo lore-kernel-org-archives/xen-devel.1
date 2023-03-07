@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81988C7618D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA717C6FD1A
 	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:18:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507659.781535 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.507660.781544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZax4-0003HD-S3; Tue, 07 Mar 2023 17:18:14 +0000
+	id 1pZax6-0003ZX-23; Tue, 07 Mar 2023 17:18:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507659.781535; Tue, 07 Mar 2023 17:18:14 +0000
+Received: by outflank-mailman (output) from mailman id 507660.781544; Tue, 07 Mar 2023 17:18:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZax4-0003Bm-5u; Tue, 07 Mar 2023 17:18:14 +0000
-Received: by outflank-mailman (input) for mailman id 507659;
- Tue, 07 Mar 2023 17:18:09 +0000
+	id 1pZax5-0003VQ-Ee; Tue, 07 Mar 2023 17:18:15 +0000
+Received: by outflank-mailman (input) for mailman id 507660;
+ Tue, 07 Mar 2023 17:18:10 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tG96=67=desiato.srs.infradead.org=BATV+98a25f4d4d04c9e21499+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pZawy-0000az-AC
+ id 1pZawz-0000az-P1
  for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:18:09 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 05e0fec5-bd0c-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 18:18:06 +0100 (CET)
+ id 06efe807-bd0c-11ed-96b5-2f268f93b82a;
+ Tue, 07 Mar 2023 18:18:07 +0100 (CET)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pZawk-00H60I-37; Tue, 07 Mar 2023 17:17:55 +0000
+ id 1pZawk-00H605-1E; Tue, 07 Mar 2023 17:17:54 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pZawk-009ciN-2b; Tue, 07 Mar 2023 17:17:54 +0000
+ Linux)) id 1pZawk-009chc-0p; Tue, 07 Mar 2023 17:17:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 05e0fec5-bd0c-11ed-96b5-2f268f93b82a
+X-Inumbo-ID: 06efe807-bd0c-11ed-96b5-2f268f93b82a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=OoYpLHePGTOV3SgREKPbrdXd7gYiqaJPFQARRGBbtMA=; b=dQ2W63BpaOT14MjuTBavL5krDY
-	HBtCxKGuayq07fM/ERZum4k87nFmJGT/nIREh5NAMgVrWmmH/WdgCaeJ6oq4o4+CvnI9bDZeu6zDp
-	a14a8v6c9ny/7bkFi6SMazCFmdM/W+ATnjmiZoKlvO880QZ95MxMJWzFFoQuxU8JRrzsBS3cQQP4j
-	QiB9TQBR/tjsd6nCDzH4VfvbbW3vz4sypUnCCIt9WIdTSnGd4AWHOXuJ5wla1fy2N7GsVMbkGZkVL
-	dcHnjoDPTPEyufAlmDy7v9UDlEHNRVw8dfeZ3DOpnGMO/IFtwwmN4TnRHEsR1M8QltNHdOmpeNCQW
-	iNk7lDHA==;
+	bh=LCuGhkStdX7AYXdKG03Aj3hRWhx9QALsH27R8ZBBwAE=; b=irHWC2CWbld2HraL4VmIX2sxRv
+	cqhSmZeKW2DkoE0UqImkOuoTgiB77r2xxiSd3JDjK2DAgC3ArDj8uYrZCQDg4tSLnRfy8pvuxQCKR
+	Do7ZAwUI5p1xYv/q0Gdu6pmzmtvU53xb6FosxYqhsIhJ0yha9cWd9X27pcphl5FH7+Q2/VRpuc315
+	vLVECVz1ZxAVh6g+sQqP0l8mxSf2rP3vxP66WNKc/QtAGW/pSO2C/jGENGiBqJ009PFaJQfOrQ65m
+	Z3+CJLm9FcvOBg5RTlBlQdYgDFG0tENidC74skQZpNrs0L2/kXUdqUk8CAhmXGlp4wRHz0RKYjgzg
+	ErU7Nqjw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,9 +67,9 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Dr . David Alan Gilbert" <dgilbert@redhat.com>,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v2 27/27] docs: Update Xen-on-KVM documentation for PV disk support
-Date: Tue,  7 Mar 2023 17:17:50 +0000
-Message-Id: <20230307171750.2293175-28-dwmw2@infradead.org>
+Subject: [PATCH v2 17/27] hw/xen: Build PV backend drivers for CONFIG_XEN_BUS
+Date: Tue,  7 Mar 2023 17:17:40 +0000
+Message-Id: <20230307171750.2293175-18-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230307171750.2293175-1-dwmw2@infradead.org>
 References: <20230307171750.2293175-1-dwmw2@infradead.org>
@@ -80,73 +80,112 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
+Now that we have the redirectable Xen backend operations we can build the
+PV backends even without the Xen libraries.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- docs/system/i386/xen.rst | 30 +++++++++++++++++++++++-------
- 1 file changed, 23 insertions(+), 7 deletions(-)
+ hw/9pfs/meson.build            | 2 +-
+ hw/block/dataplane/meson.build | 2 +-
+ hw/block/meson.build           | 2 +-
+ hw/char/meson.build            | 2 +-
+ hw/display/meson.build         | 2 +-
+ hw/usb/meson.build             | 2 +-
+ hw/xen/meson.build             | 5 ++++-
+ 7 files changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/docs/system/i386/xen.rst b/docs/system/i386/xen.rst
-index a00523b492..f06765e88c 100644
---- a/docs/system/i386/xen.rst
-+++ b/docs/system/i386/xen.rst
-@@ -9,6 +9,8 @@ KVM has support for hosting Xen guests, intercepting Xen hypercalls and event
- channel (Xen PV interrupt) delivery. This allows guests which expect to be
- run under Xen to be hosted in QEMU under Linux/KVM instead.
+diff --git a/hw/9pfs/meson.build b/hw/9pfs/meson.build
+index 12443b6ad5..fd37b7a02d 100644
+--- a/hw/9pfs/meson.build
++++ b/hw/9pfs/meson.build
+@@ -15,7 +15,7 @@ fs_ss.add(files(
+ ))
+ fs_ss.add(when: 'CONFIG_LINUX', if_true: files('9p-util-linux.c'))
+ fs_ss.add(when: 'CONFIG_DARWIN', if_true: files('9p-util-darwin.c'))
+-fs_ss.add(when: 'CONFIG_XEN', if_true: files('xen-9p-backend.c'))
++fs_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-9p-backend.c'))
+ softmmu_ss.add_all(when: 'CONFIG_FSDEV_9P', if_true: fs_ss)
  
-+Using the split irqchip is mandatory for Xen support.
+ specific_ss.add(when: 'CONFIG_VIRTIO_9P', if_true: files('virtio-9p-device.c'))
+diff --git a/hw/block/dataplane/meson.build b/hw/block/dataplane/meson.build
+index 12c6a264f1..78d7ac1a11 100644
+--- a/hw/block/dataplane/meson.build
++++ b/hw/block/dataplane/meson.build
+@@ -1,2 +1,2 @@
+ specific_ss.add(when: 'CONFIG_VIRTIO_BLK', if_true: files('virtio-blk.c'))
+-specific_ss.add(when: 'CONFIG_XEN', if_true: files('xen-block.c'))
++specific_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-block.c'))
+diff --git a/hw/block/meson.build b/hw/block/meson.build
+index b434d5654c..cc2a75cc50 100644
+--- a/hw/block/meson.build
++++ b/hw/block/meson.build
+@@ -14,7 +14,7 @@ softmmu_ss.add(when: 'CONFIG_PFLASH_CFI02', if_true: files('pflash_cfi02.c'))
+ softmmu_ss.add(when: 'CONFIG_SSI_M25P80', if_true: files('m25p80.c'))
+ softmmu_ss.add(when: 'CONFIG_SSI_M25P80', if_true: files('m25p80_sfdp.c'))
+ softmmu_ss.add(when: 'CONFIG_SWIM', if_true: files('swim.c'))
+-softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xen-block.c'))
++softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-block.c'))
+ softmmu_ss.add(when: 'CONFIG_TC58128', if_true: files('tc58128.c'))
+ 
+ specific_ss.add(when: 'CONFIG_VIRTIO_BLK', if_true: files('virtio-blk.c', 'virtio-blk-common.c'))
+diff --git a/hw/char/meson.build b/hw/char/meson.build
+index 7b594f51b8..e02c60dd54 100644
+--- a/hw/char/meson.build
++++ b/hw/char/meson.build
+@@ -18,7 +18,7 @@ softmmu_ss.add(when: 'CONFIG_SERIAL_PCI', if_true: files('serial-pci.c'))
+ softmmu_ss.add(when: 'CONFIG_SERIAL_PCI_MULTI', if_true: files('serial-pci-multi.c'))
+ softmmu_ss.add(when: 'CONFIG_SHAKTI_UART', if_true: files('shakti_uart.c'))
+ softmmu_ss.add(when: 'CONFIG_VIRTIO_SERIAL', if_true: files('virtio-console.c'))
+-softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xen_console.c'))
++softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen_console.c'))
+ softmmu_ss.add(when: 'CONFIG_XILINX', if_true: files('xilinx_uartlite.c'))
+ 
+ softmmu_ss.add(when: 'CONFIG_AVR_USART', if_true: files('avr_usart.c'))
+diff --git a/hw/display/meson.build b/hw/display/meson.build
+index f470179122..4191694380 100644
+--- a/hw/display/meson.build
++++ b/hw/display/meson.build
+@@ -14,7 +14,7 @@ softmmu_ss.add(when: 'CONFIG_PL110', if_true: files('pl110.c'))
+ softmmu_ss.add(when: 'CONFIG_SII9022', if_true: files('sii9022.c'))
+ softmmu_ss.add(when: 'CONFIG_SSD0303', if_true: files('ssd0303.c'))
+ softmmu_ss.add(when: 'CONFIG_SSD0323', if_true: files('ssd0323.c'))
+-softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xenfb.c'))
++softmmu_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xenfb.c'))
+ 
+ softmmu_ss.add(when: 'CONFIG_VGA_PCI', if_true: files('vga-pci.c'))
+ softmmu_ss.add(when: 'CONFIG_VGA_ISA', if_true: files('vga-isa.c'))
+diff --git a/hw/usb/meson.build b/hw/usb/meson.build
+index bdf34cbd3e..599dc24f0d 100644
+--- a/hw/usb/meson.build
++++ b/hw/usb/meson.build
+@@ -84,6 +84,6 @@ if libusb.found()
+   hw_usb_modules += {'host': usbhost_ss}
+ endif
+ 
+-softmmu_ss.add(when: ['CONFIG_USB', 'CONFIG_XEN', libusb], if_true: files('xen-usb.c'))
++softmmu_ss.add(when: ['CONFIG_USB', 'CONFIG_XEN_BUS', libusb], if_true: files('xen-usb.c'))
+ 
+ modules += { 'hw-usb': hw_usb_modules }
+diff --git a/hw/xen/meson.build b/hw/xen/meson.build
+index f195bbd25c..19c6aabc7c 100644
+--- a/hw/xen/meson.build
++++ b/hw/xen/meson.build
+@@ -1,10 +1,13 @@
+-softmmu_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
++softmmu_ss.add(when: ['CONFIG_XEN_BUS'], if_true: files(
+   'xen-backend.c',
+   'xen-bus-helper.c',
+   'xen-bus.c',
+   'xen-legacy-backend.c',
+   'xen_devconfig.c',
+   'xen_pvdev.c',
++))
 +
- Setup
- -----
++softmmu_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
+   'xen-operations.c',
+ ))
  
-@@ -17,14 +19,14 @@ accelerator, for example for Xen 4.10:
- 
- .. parsed-literal::
- 
--  |qemu_system| --accel kvm,xen-version=0x4000a
-+  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split
- 
- Additionally, virtual APIC support can be advertised to the guest through the
- ``xen-vapic`` CPU flag:
- 
- .. parsed-literal::
- 
--  |qemu_system| --accel kvm,xen-version=0x4000a --cpu host,+xen_vapic
-+  |qemu_system| --accel kvm,xen-version=0x4000a,kernel-irqchip=split --cpu host,+xen_vapic
- 
- When Xen support is enabled, QEMU changes hypervisor identification (CPUID
- 0x40000000..0x4000000A) to Xen. The KVM identification and features are not
-@@ -33,11 +35,25 @@ moves to leaves 0x40000100..0x4000010A.
- 
- The Xen platform device is enabled automatically for a Xen guest. This allows
- a guest to unplug all emulated devices, in order to use Xen PV block and network
--drivers instead. Note that until the Xen PV device back ends are enabled to work
--with Xen mode in QEMU, that is unlikely to cause significant joy. Linux guests
--can be dissuaded from this by adding 'xen_emul_unplug=never' on their command
--line, and it can also be noted that AHCI disk controllers are exempt from being
--unplugged, as are passthrough VFIO PCI devices.
-+drivers instead. Under Xen, the boot disk is typically available both via IDE
-+emulation, and as a PV block device. Guest bootloaders typically use IDE to load
-+the guest kernel, which then unplugs the IDE and continues with the Xen PV block
-+device.
-+
-+This configuration can be achieved as follows
-+
-+.. parsed-literal::
-+
-+  |qemu_system| -M pc --accel kvm,xen-version=0x4000a,kernel-irqchip=split \\
-+       -drive file=${GUEST_IMAGE},if=none,id=disk,file.locking=off -device xen-disk,drive=disk,vdev=xvda \\
-+       -drive file=${GUEST_IMAGE},index=2,media=disk,file.locking=off,if=ide
-+
-+It is necessary to use the pc machine type, as the q35 machine uses AHCI instead
-+of legacy IDE, and AHCI disks are not unplugged through the Xen PV unplug
-+mechanism.
-+
-+VirtIO devices can also be used; Linux guests may need to be dissuaded from
-+umplugging them by adding 'xen_emul_unplug=never' on their command line.
- 
- Properties
- ----------
 -- 
 2.39.0
 
