@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3687C6FD1A
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:00:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.507644.781419 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E7EC6FD1A
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Mar 2023 17:18:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.507650.781448 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZafw-0007I3-FD; Tue, 07 Mar 2023 17:00:32 +0000
+	id 1pZaww-0000xt-81; Tue, 07 Mar 2023 17:18:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 507644.781419; Tue, 07 Mar 2023 17:00:32 +0000
+Received: by outflank-mailman (output) from mailman id 507650.781448; Tue, 07 Mar 2023 17:18:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pZafw-0007Hw-CT; Tue, 07 Mar 2023 17:00:32 +0000
-Received: by outflank-mailman (input) for mailman id 507644;
- Tue, 07 Mar 2023 17:00:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pZaww-0000v0-2Q; Tue, 07 Mar 2023 17:18:06 +0000
+Received: by outflank-mailman (input) for mailman id 507650;
+ Tue, 07 Mar 2023 17:18:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bVoF=67=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
- id 1pZafu-0007Ho-TK
- for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:00:30 +0000
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [2a00:1450:4864:20::331])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90be248c-bd09-11ed-96b5-2f268f93b82a;
- Tue, 07 Mar 2023 18:00:30 +0100 (CET)
-Received: by mail-wm1-x331.google.com with SMTP id
- t25-20020a1c7719000000b003eb052cc5ccso10858649wmi.4
- for <xen-devel@lists.xenproject.org>; Tue, 07 Mar 2023 09:00:30 -0800 (PST)
-Received: from [192.168.25.218] (54-240-197-230.amazon.com. [54.240.197.230])
- by smtp.gmail.com with ESMTPSA id
- o33-20020a05600c512100b003e209186c07sm20143602wms.19.2023.03.07.09.00.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Mar 2023 09:00:29 -0800 (PST)
+ <SRS0=yYpO=67=casper.srs.infradead.org=BATV+9298a7250c90fe94fbb7+7135+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pZawu-0000bA-Kd
+ for xen-devel@lists.xenproject.org; Tue, 07 Mar 2023 17:18:04 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0318280e-bd0c-11ed-a550-8520e6686977;
+ Tue, 07 Mar 2023 18:18:01 +0100 (CET)
+Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pZawk-006ayC-MQ; Tue, 07 Mar 2023 17:17:55 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1pZawk-009ciE-2F; Tue, 07 Mar 2023 17:17:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,120 +43,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90be248c-bd09-11ed-96b5-2f268f93b82a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678208429;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GUDIygacfCGVR8fGo1IJ3EdUPNHwyAGo+roo8APTsNk=;
-        b=ph1sfvMxY+XZesLpU7cO7ml/bRJUJG2DNJ7+XYzCof2Z2t+1m3vq5apYJFeYV7Aice
-         zfSv7AUvd+MEntffGDYCodsF89eozNPxKdE5O/3ShJU/Fzsb7Cjs7sRdVxhfNb/eT1rX
-         mOK2EcUqV6oBobYdaqtKv7z1VtoVpokXETVoOQvlhI75I8/DLXAcGlNz3ZypvOcfAcNs
-         PJ/wyx/Y7Agnp3QZHEUuD0wojqHtujpfhaWhd7tGgCc6wVWvWA/gHKTSTZ+5ErvcIVRK
-         skFzghgn8xvfJaC9naklym9POMszOYVbhrQwjFxOaIy0GuO/NytKp+xJN76mz/pWdKkL
-         i02g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678208429;
-        h=content-transfer-encoding:in-reply-to:organization:references:cc:to
-         :content-language:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GUDIygacfCGVR8fGo1IJ3EdUPNHwyAGo+roo8APTsNk=;
-        b=iyzoD4k55CZCR9qFw0aUdnNPUfdlzq0Ane5GcC9JqGqnBFSTXNIQ3c6MqRoemT99+m
-         23qTmN+Q/C5y7qLyDiCK8CjhTT/pxcq8sTXOT7yrjk/TIcKrrsGkQRy0QCfTLKWaKiE+
-         9HnVxjAuMco5vxPRfmlS2uVu7pa6pmYITBRkcrfMh6qalPf/znqu1umBxi0TRPwGTeiR
-         r6DmM+ejOnOWx+TYZa5dydcWo6C14BqKhkp59zQ0q9nrS2av3ysqSU9X/x7hmzfGh9nJ
-         GZtHmwml38TKDsMjUZjOCcy0x1rK/KJH5ET7BjCb4DqogPa9McUgPVDUQcnmp6JPPMjZ
-         OCLw==
-X-Gm-Message-State: AO0yUKUsPdpsvvw55GEV0u9B2Ca2HDvGdwT15wSQ6NBQMVwNc3EANC59
-	5ocNRZpImrVROQixChqfa78=
-X-Google-Smtp-Source: AK7set88xSK51uoh3VVvDUs/jOF+Gr5Ee1CiOxaq5zxqImeG9T02U2YrY4P93URvNhWTORPq7ylJaw==
-X-Received: by 2002:a05:600c:4751:b0:3eb:578d:decb with SMTP id w17-20020a05600c475100b003eb578ddecbmr12283511wmo.28.1678208429602;
-        Tue, 07 Mar 2023 09:00:29 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <c97bd1cd-5540-bfb0-0fda-68d2cb6254d0@xen.org>
-Date: Tue, 7 Mar 2023 17:00:28 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Reply-To: paul@xen.org
-Subject: Re: [RFC PATCH v1 07/25] hw/xen: Implement core serialize/deserialize
- methods for xenstore_impl
-Content-Language: en-US
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org,
- Juan Quintela <quintela@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+X-Inumbo-ID: 0318280e-bd0c-11ed-a550-8520e6686977
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=4BkL9NyCgm8G9JQUlKfpShNc/FIh4cWQeRocuey9tU8=; b=GeUVdgGSmXJsf28yr1m+YFJgP/
+	I4tHijoLmJrTrjvs1rNLLzvJaMez8nnt6Mk6GaUzAhBXARxsG7ZVcxtOpuv4LlW2jLTOv4wyZS7M4
+	VdSDxy7zkp3Fl1VuiIhammfD36oC9MFdn4+cXhnk4zVsvhbSQ/rDYutcuLq+ZKJX9+IPpAotMG5zs
+	jfvmEPVq/5Fbv/cyvlLMU0q2C7vEe4RcX9qOuGmVwtDEKHT1Xw41lGVyD6YKdRcnIs7A6FR+wNK+O
+	yOJiAlQlp+ddkCZj1fCo2bAk6xVImZSk4cjuTq/BNoZ10qtxrCLGZAhCxYmUbKDC2Twd1aGGaMPBL
+	s1I0IAiQ==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
- Joao Martins <joao.m.martins@oracle.com>,
- Ankur Arora <ankur.a.arora@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, vikram.garhwal@amd.com,
- Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
-References: <20230302153435.1170111-1-dwmw2@infradead.org>
- <20230302153435.1170111-8-dwmw2@infradead.org>
- <5f03307a80c33b62380128bf3f638d47eca74357.camel@infradead.org>
- <e1e4f027-25bc-2e1c-4451-b4d304493f16@xen.org>
- <1ab939956031328a9a16fb4e76417e23f292e6ba.camel@infradead.org>
- <335a946a-6eae-00e6-b30f-142522cc4c26@xen.org>
-Organization: Xen Project
-In-Reply-To: <335a946a-6eae-00e6-b30f-142522cc4c26@xen.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+	Paul Durrant <paul@xen.org>,
+	Joao Martins <joao.m.martins@oracle.com>,
+	Ankur Arora <ankur.a.arora@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	vikram.garhwal@amd.com,
+	Anthony Perard <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org,
+	Juan Quintela <quintela@redhat.com>,
+	"Dr . David Alan Gilbert" <dgilbert@redhat.com>,
+	Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH v2 25/27] i386/xen: Initialize Xen backends from pc_basic_device_init() for emulation
+Date: Tue,  7 Mar 2023 17:17:48 +0000
+Message-Id: <20230307171750.2293175-26-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230307171750.2293175-1-dwmw2@infradead.org>
+References: <20230307171750.2293175-1-dwmw2@infradead.org>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-On 07/03/2023 16:59, Paul Durrant wrote:
-> On 07/03/2023 16:52, David Woodhouse wrote:
->> On Tue, 2023-03-07 at 16:39 +0000, Paul Durrant wrote:
->>> On 07/03/2023 16:33, David Woodhouse wrote:
->>>> On Thu, 2023-03-02 at 15:34 +0000, David Woodhouse wrote:
->>>>> From: David Woodhouse <dwmw@amazon.co.uk>
->>>>>
->>>>> In fact I think we want to only serialize the contents of the domain's
->>>>> path in /local/domain/${domid} and leave the rest to be recreated? 
->>>>> Will
->>>>> defer to Paul for that.
->>>>>
->>>>> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
->>>>
->>>> Paul, your Reviewed-by: on this one is conspicuous in its absence. I
->>>> mentioned migration in the cover letter — this much is working fine,
->>>> but it's the PV back ends that don't yet work.
->>>>
->>>> I'd quite like to merge the basic serialization/deserialization of
->>>> XenStore itself, with the unit tests.
->>>
->>> The patch is basically ok, I just think the serialization should be
->>> limited to the guest nodes... filtering out those not owned by xen_domid
->>> would probably work for that.
->>
->> Yeah, so let's just do this (as part of this patch #7) for now:
->>
->> --- a/hw/i386/kvm/xen_xenstore.c
->> +++ b/hw/i386/kvm/xen_xenstore.c
->> @@ -235,6 +235,7 @@ static int xen_xenstore_post_load(void *opaque, int
->> ver)
->>   static const VMStateDescription xen_xenstore_vmstate = {
->>       .name = "xen_xenstore",
->> +    .unmigratable = 1, /* The PV back ends don't migrate yet */
->>       .version_id = 1,
->>       .minimum_version_id = 1,
->>       .needed = xen_xenstore_is_needed,
->>
->>
->> It means we can't migrate guests even if they're only using fully
->> emulated devices... but I think that's a reasonable limitation until we
->> implement it fully.
->>
-> 
-> Ok. With that added...
-> 
-> Revieweed-by: Paul Durrant <paul@xen.org>
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Typoed, sorry...
+Now that all the work is done to enable the PV backends to work without
+actual Xen, instantiate the bus from pc_basic_device_init() for emulated
+mode.
 
+This allows us finally to launch an emulated Xen guest with PV disk.
+
+   qemu-system-x86_64 -serial mon:stdio -M q35 -cpu host -display none \
+     -m 1G -smp 2 -accel kvm,xen-version=0x4000a,kernel-irqchip=split \
+     -kernel bzImage -append "console=ttyS0 root=/dev/xvda1" \
+     -drive file=/var/lib/libvirt/images/fedora28.qcow2,if=none,id=disk \
+     -device xen-disk,drive=disk,vdev=xvda
+
+If we use -M pc instead of q35, we can even add an IDE disk and boot a
+guest image normally through grub. But q35 gives us AHCI and that isn't
+unplugged by the Xen magic, so the guests ends up seeing "both" disks.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
+---
+ hw/i386/pc.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-> 
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 7bebea57e3..1489abf010 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -102,6 +102,11 @@
+ #include "trace.h"
+ #include CONFIG_DEVICES
+ 
++#ifdef CONFIG_XEN_EMU
++#include "hw/xen/xen-legacy-backend.h"
++#include "hw/xen/xen-bus.h"
++#endif
++
+ /*
+  * Helper for setting model-id for CPU models that changed model-id
+  * depending on QEMU versions up to QEMU 2.4.
+@@ -1318,6 +1323,8 @@ void pc_basic_device_init(struct PCMachineState *pcms,
+         if (pcms->bus) {
+             pci_create_simple(pcms->bus, -1, "xen-platform");
+         }
++        xen_bus_init();
++        xen_be_init();
+     }
+ #endif
+ 
+-- 
+2.39.0
 
 
