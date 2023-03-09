@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D10CC74A5B
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Mar 2023 13:33:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508267.782808 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC757C6FD1F
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Mar 2023 13:33:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.508265.782783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1paGOx-0002OD-LT; Thu, 09 Mar 2023 13:33:47 +0000
+	id 1paGOu-0001cT-W9; Thu, 09 Mar 2023 13:33:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508267.782808; Thu, 09 Mar 2023 13:33:47 +0000
+Received: by outflank-mailman (output) from mailman id 508265.782783; Thu, 09 Mar 2023 13:33:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1paGOx-0002O0-Gw; Thu, 09 Mar 2023 13:33:47 +0000
-Received: by outflank-mailman (input) for mailman id 508267;
- Thu, 09 Mar 2023 13:33:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1paGOu-0001c6-Pg; Thu, 09 Mar 2023 13:33:44 +0000
+Received: by outflank-mailman (input) for mailman id 508265;
+ Thu, 09 Mar 2023 13:33:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RZdn=7B=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1paGOv-00013B-L3
- for xen-devel@lists.xenproject.org; Thu, 09 Mar 2023 13:33:45 +0000
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [2a00:1450:4864:20::334])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 034f0fef-be7f-11ed-87f5-c1b5be75604c;
- Thu, 09 Mar 2023 14:33:44 +0100 (CET)
-Received: by mail-wm1-x334.google.com with SMTP id k37so1175288wms.0
- for <xen-devel@lists.xenproject.org>; Thu, 09 Mar 2023 05:33:44 -0800 (PST)
+ id 1paGOt-0001IZ-JR
+ for xen-devel@lists.xenproject.org; Thu, 09 Mar 2023 13:33:43 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 019cf144-be7f-11ed-956e-85ef70e17bfa;
+ Thu, 09 Mar 2023 14:33:41 +0100 (CET)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ l7-20020a05600c1d0700b003eb5e6d906bso1222974wms.5
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Mar 2023 05:33:41 -0800 (PST)
 Received: from fedora.. (46.204.108.143.nat.umts.dynamic.t-mobile.pl.
  [46.204.108.143]) by smtp.gmail.com with ESMTPSA id
- he11-20020a05600c540b00b003df5be8987esm2672209wmb.20.2023.03.09.05.33.42
+ he11-20020a05600c540b00b003df5be8987esm2672209wmb.20.2023.03.09.05.33.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Mar 2023 05:33:43 -0800 (PST)
+ Thu, 09 Mar 2023 05:33:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 034f0fef-be7f-11ed-87f5-c1b5be75604c
+X-Inumbo-ID: 019cf144-be7f-11ed-956e-85ef70e17bfa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678368824;
+        d=gmail.com; s=20210112; t=1678368821;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+zAWdmipjTmyv+kU5KlZ3LiEbu3zViDQxHONb1o9/AU=;
-        b=kfcJIUgDxs0RiU5N8LXvIRPaV5ko7lgDLBfizoUDAUlPntl4IeR5R7qlYr5CIiR/lD
-         9pqYSz39Q6U0GSLoIeKVeYLCGoP0YHP46MiXzUGMcYF3ZuFcDKtxTUA+YP2qZPHCb55q
-         B+pGRqH6dtPSuh+5KB0EZtSiwj/jdRzgrOqXKpWpb/OO7ctHs2tTZduP3WX9IM9/e1Rx
-         zF1yT4Weoob0hJYSS9dpd6WjBhjusjidXMJQDXhONw7c1yZ2o/sdBlWmSDSHXUoOQqud
-         0d3uqj859hMpfsdfSV0odZOUleYJp0WqItPMiGup2Qp6aCp1RwetuWvCdUu/5B9vK20g
-         wjuA==
+        bh=iwHPugclA9fxaG15juqlxYVC4Svp3r2KHxTOl+XGGLQ=;
+        b=bT+jPyhAoT7oeC1Uiv8MMpGdEMa0nJNykW2WO6+XwQJG5rxMo1rolYGUez1RmyjEqr
+         Uy209cQF1XV2mZoy4X94KS/YFzYmqP0iTC3kCpvCeeJXWQRpFfRWBpe3owPJIgYTy8wF
+         of5ZAIYacFIm4FIH00H2zUi0b1hnfwLjINh8V86QPm+cLE4j86LAFEgVVe3ognpJlaDs
+         7wlsESJAp0NNc9dwF07LXKdmwAmTuD5RMpeDtwS95pbyt4d64ko5w50alQh8J455jeLW
+         E4rCAfMa0xh0fCJ1CRBc3KLguVKQwfyBdD4tBsskANuX2aSjvuPiEiCflLwR6y0DUYaT
+         2BUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678368824;
+        d=1e100.net; s=20210112; t=1678368821;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+zAWdmipjTmyv+kU5KlZ3LiEbu3zViDQxHONb1o9/AU=;
-        b=YS69sC7aMPDp+wrgqMlxJJZEJj5DXC/3AdwN/8YuN0XCI3977oucKKl/EMhXLmscnh
-         kgVdmZnsjJFK2s0L6AyTX7m9s+ln3l922vxD0QesWaU4VcIsWOMZQV4KD3+TK1Ga6THc
-         niItguEVn+Yd+ZLYEm1TP/4pfqzE0NHqa53Avl/Qedc3FZCaYP7/kJHzFdSewMP94JWG
-         11ltSaoexAwn9yeL7PtQ+FlUE5T9L5rehpWN3qhNOE7NbQtaWLM2NkWim8vnWVN0GpeM
-         U+Y/jnW5tWrci97L/gdq4Ux3l2Bw4bfEjeMSKgu5kqD51v4kV+abLEtrlchY/NSiSoU3
-         fMsg==
-X-Gm-Message-State: AO0yUKXPULCIH+yMGTvg0evYlwS/iyJEv5Rv8AZlTieKoRHWV67k1LRb
-	65UB32B866+iMrvf90/eOj2qdqoHNeVu9g==
-X-Google-Smtp-Source: AK7set/JUDTcInR86wuJ01MgZ+bOm9ddP0FkutXHBZb0VSMBdGdsYvQUEIk7Ics1nqXebAf2lZmjkw==
-X-Received: by 2002:a05:600c:4fd4:b0:3eb:2b88:867e with SMTP id o20-20020a05600c4fd400b003eb2b88867emr19349876wmq.10.1678368823771;
-        Thu, 09 Mar 2023 05:33:43 -0800 (PST)
+        bh=iwHPugclA9fxaG15juqlxYVC4Svp3r2KHxTOl+XGGLQ=;
+        b=jG3hdQTkVruAYdEbkIYwyOb+71VR/DP9MHgwamRQNXRd0nwjJAEPZ93H63N+WOCYYu
+         qSpRI7C1HDacFntEsSJyCvF9j9eqKudarJRB2/Dnd7BBRm6T6XQPVPyf4PU1xcFWdBEF
+         LOlekp1EdsxHLbXyHW04D9XvlKcJifMAtYx30EE0SuVpdcpH2T5XUwzH69xXk41liV9V
+         KKt4xNj3b/iCuHCqoHk/ebSikYcuZB6mqk5PxLwgMdyPlgERjyd8UlOimxJIbhXVY6Rk
+         EU0yJWC6dcEzN2a/5nZn43sYIkP4T0GcrD+jNgbMGnV9JecabARQv4cvMkZxH6KdSJr5
+         +IYw==
+X-Gm-Message-State: AO0yUKV+RrKbvtur7JDjzB6yp/KQ1tlrFkyuTL5ZzDvjviRaSsjvBQS5
+	mIUAMRFXsAlVSrOwO9+CGi28NCL0s5qjLQ==
+X-Google-Smtp-Source: AK7set+RHvFUM/3QMscPBuBAvCgCqjbAbNfs7jVhQLtbfJmZ9AHjReU3nueDOejZnCIqe//H7eQRlg==
+X-Received: by 2002:a1c:f415:0:b0:3df:9858:c03a with SMTP id z21-20020a1cf415000000b003df9858c03amr17802302wma.15.1678368820964;
+        Thu, 09 Mar 2023 05:33:40 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -84,279 +85,295 @@ Cc: Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gianluca Guida <gianluca@rivosinc.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 5/5] xen/x86: switch x86 to use generic implemetation of bug.h
-Date: Thu,  9 Mar 2023 15:33:28 +0200
-Message-Id: <2e803fd639a4af558153635a40d034b0af250e4e.1678368234.git.oleksii.kurochko@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v7 3/5] xen: change <asm/bug.h> to <xen/bug.h>
+Date: Thu,  9 Mar 2023 15:33:26 +0200
+Message-Id: <9c436fdfeb73d7201093da997a8d09314a3e59a9.1678368234.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <cover.1678368234.git.oleksii.kurochko@gmail.com>
 References: <cover.1678368234.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The following changes were made:
-* Make GENERIC_BUG_FRAME mandatory for X86
-* Update asm/bug.h using generic implementation in <xen/bug.h>
-* Update do_invalid_op using generic do_bug_frame()
-* Define BUG_DEBUGGER_TRAP_FATAL to debugger_trap_fatal(X86_EXC_GP,regs)
-* type of eip variable was changed to 'const void *'
-* add '#include <xen/debugger.h>'
+The idea of the patch is to change all <asm/bug.h> to <xen/bug.h> and
+keep Xen compilable with adding only minimal amount of changes:
+1. It was added "#include <xen/types.h>" to ARM's "<asm/bug.h>" as it
+  uses uint_{16,32}t in 'struct bug_frame'.
+2. It was added '#define BUG_FRAME_STRUCT' which means that ARM hasn't
+  been switched to generic implementation yet.
+3. It was added '#define BUG_FRAME_STRUCT' which means that x86 hasn't
+  been switched to generic implementation yet.
+4. BUGFRAME_* and _start_bug_frame[], _stop_bug_frame_*[] were removed
+  for ARM & x86 to deal with compilation errors such as:
+      redundant redeclaration of ...
+5. Remove BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH from
+  x86's <asm.bug.h> to not to produce #undef for them and #define again
+  with the same values as in <xen/bug.h>. These #undef and #define will
+  be anyway removed in the patch [2]
+
+In the following two patches x86 and ARM archictectures will be
+switched fully:
+[1] xen/arm: switch ARM to use generic implementation of bug.h
+[2] xen/x86: switch x86 to use generic implemetation of bug.h
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V7:
- * update the commit message
- * make eip 'const void *'
- * change [eip = (unsigned char *)eip + sizeof(bug_insn);] to [eip += sizeof(bug_insn);]
- * add '#include <xen/debugger.h>' to <asm/bug.h>
- * add Reviewed-by: Jan Beulich <jbeulich@suse.com>
+ * Remove #undef {BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH} from
+   ARM and x86:
+   * for ARM was created separate patch where the defines are removed as
+     unused.
+   * for x86, the defines were removed now not to produce #undef of them to remove
+            them again in the following-up patch
+ * Update commit message
+ * Add Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in V6:
- * update the commit message
- * update the type of eip to 'void *' in do_invalid_op()
- * fix the logic of do_invalid_op()
- * move macros BUG_DEBUGGER_TRAP_FATAL under #ifndef __ASSEMBLY__ as
-   it is not necessary to be in assembly code.
+	- change the inclusion order of <xen/bug.h>.
+	- add #undef of BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH for ARM & x86
+	  as they were introduced unconditionally in <xen/bug.h>.
+	- update the commit message
 ---
 Changes in V5:
- * Nothing changed
+ - Nothing changed
 ---
 Changes in V4:
- * Back comment /* !__ASSEMBLY__ */ for #else case in <asm/bug.h>
- * Remove changes related to x86/.../asm/debuger.h as do_bug_frame() prototype
-   was updated and cpu_user_regs isn't const any more.
+	- defines BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH were moved into
+	  "ifndef BUG_FRAME_STRUCT" in <xen/bug.h> as they are specific for 'struct bug_frame' and so should
+	  co-exist together. So the defines were back to <asm/bug.h> until BUG_FRAME_STRUCT will be defined in
+	  <asm/bug.h>.
+	- Update the comment message.
 ---
 Changes in V3:
- * As prototype and what do_bug_frame() returns was changed so patch 3 and 4
-   was updated to use a new version of do_bug_frame
- * MODIFIER was change to BUG_ASM_CONST to align with generic implementation
+ * Update patch 2 not to break compilation: move some parts from patches 3 and 4
+   to patch 2:
+   * move some generic parts from <asm/bug.h> to <xen/bug.h>
+   * add define BUG_FRAME_STRUCT in ARM's <asm/bug.h>
 ---
 Changes in V2:
-  * Remove all unnecessary things from <asm/bug.h> as they were introduced in
-    <xen/bug.h>.
-  * Define BUG_INSTR = 'ud2' and MODIFIER = 'c' ( it is needed to skip '$'
-    when use an imidiate in x86 assembly )
-  * Update do_invalid_op() to re-use handle_bug_frame() and find_bug_frame()
-    from generic implemetation of CONFIG_GENERIC_BUG_FRAME
-  * Code style fixes.
+ * Put [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h> as second patch,
+   update the patch to change all <asm/bug.h> to <xen/bug.h> among the whole project
+   to not break build.
+ * Update the commit message.
 ---
- xen/arch/x86/Kconfig           |  1 +
- xen/arch/x86/include/asm/bug.h | 69 ++---------------------------
- xen/arch/x86/traps.c           | 81 ++++------------------------------
- 3 files changed, 13 insertions(+), 138 deletions(-)
+ xen/arch/arm/include/asm/bug.h       | 17 ++++-------------
+ xen/arch/arm/include/asm/div64.h     |  2 +-
+ xen/arch/arm/vgic/vgic-v2.c          |  2 +-
+ xen/arch/arm/vgic/vgic.c             |  2 +-
+ xen/arch/x86/acpi/cpufreq/cpufreq.c  |  2 +-
+ xen/arch/x86/include/asm/asm_defns.h |  2 +-
+ xen/arch/x86/include/asm/bug.h       | 19 ++-----------------
+ xen/drivers/cpufreq/cpufreq.c        |  2 +-
+ xen/include/xen/lib.h                |  2 +-
+ 9 files changed, 13 insertions(+), 37 deletions(-)
 
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 6a7825f4ba..b0ff1f3ee6 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -11,6 +11,7 @@ config X86
- 	select ARCH_MAP_DOMAIN_PAGE
- 	select ARCH_SUPPORTS_INT128
- 	select CORE_PARKING
-+	select GENERIC_BUG_FRAME
- 	select HAS_ALTERNATIVE
- 	select HAS_COMPAT
- 	select HAS_CPUFREQ
-diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
-index 4b3e7b019d..8531d5f91e 100644
---- a/xen/arch/x86/include/asm/bug.h
-+++ b/xen/arch/x86/include/asm/bug.h
-@@ -3,73 +3,12 @@
+diff --git a/xen/arch/arm/include/asm/bug.h b/xen/arch/arm/include/asm/bug.h
+index d6c98505bf..cacaf014ab 100644
+--- a/xen/arch/arm/include/asm/bug.h
++++ b/xen/arch/arm/include/asm/bug.h
+@@ -1,6 +1,8 @@
+ #ifndef __ARM_BUG_H__
+ #define __ARM_BUG_H__
  
- #ifndef __ASSEMBLY__
++#include <xen/types.h>
++
+ #if defined(CONFIG_ARM_32)
+ # include <asm/arm32/bug.h>
+ #elif defined(CONFIG_ARM_64)
+@@ -9,6 +11,8 @@
+ # error "unknown ARM variant"
+ #endif
  
--#define BUG_FRAME_STRUCT
-+#include <xen/debugger.h>
++#define BUG_FRAME_STRUCT
++
+ struct bug_frame {
+     signed int loc_disp;    /* Relative address to the bug address */
+     signed int file_disp;   /* Relative address to the filename */
+@@ -22,13 +26,6 @@ struct bug_frame {
+ #define bug_line(b) ((b)->line)
+ #define bug_msg(b) ((const char *)(b) + (b)->msg_disp)
  
--struct bug_frame {
--    signed int loc_disp:BUG_DISP_WIDTH;
--    unsigned int line_hi:BUG_LINE_HI_WIDTH;
--    signed int ptr_disp:BUG_DISP_WIDTH;
--    unsigned int line_lo:BUG_LINE_LO_WIDTH;
--    signed int msg_disp[];
--};
-+#define BUG_DEBUGGER_TRAP_FATAL(regs) debugger_trap_fatal(X86_EXC_GP,regs)
+-#define BUGFRAME_run_fn 0
+-#define BUGFRAME_warn   1
+-#define BUGFRAME_bug    2
+-#define BUGFRAME_assert 3
+-
+-#define BUGFRAME_NR     4
+-
+ /* Many versions of GCC doesn't support the asm %c parameter which would
+  * be preferable to this unpleasantness. We use mergeable string
+  * sections to avoid multiple copies of the string appearing in the
+@@ -85,12 +82,6 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
  
--#define bug_loc(b) ((const void *)(b) + (b)->loc_disp)
--#define bug_ptr(b) ((const void *)(b) + (b)->ptr_disp)
--#define bug_line(b) (((((b)->line_hi + ((b)->loc_disp < 0)) &                \
--                       ((1 << BUG_LINE_HI_WIDTH) - 1)) <<                    \
--                      BUG_LINE_LO_WIDTH) +                                   \
--                     (((b)->line_lo + ((b)->ptr_disp < 0)) &                 \
--                      ((1 << BUG_LINE_LO_WIDTH) - 1)))
--#define bug_msg(b) ((const char *)(b) + (b)->msg_disp[1])
+-extern const struct bug_frame __start_bug_frames[],
+-                              __stop_bug_frames_0[],
+-                              __stop_bug_frames_1[],
+-                              __stop_bug_frames_2[],
+-                              __stop_bug_frames_3[];
 -
--#define _ASM_BUGFRAME_TEXT(second_frame)                                     \
--    ".Lbug%=: ud2\n"                                                         \
--    ".pushsection .bug_frames.%c[bf_type], \"a\", @progbits\n"               \
--    ".p2align 2\n"                                                           \
--    ".Lfrm%=:\n"                                                             \
--    ".long (.Lbug%= - .Lfrm%=) + %c[bf_line_hi]\n"                           \
--    ".long (%c[bf_ptr] - .Lfrm%=) + %c[bf_line_lo]\n"                        \
--    ".if " #second_frame "\n"                                                \
--    ".long 0, %c[bf_msg] - .Lfrm%=\n"                                        \
--    ".endif\n"                                                               \
--    ".popsection\n"                                                          \
--
--#define _ASM_BUGFRAME_INFO(type, line, ptr, msg)                             \
--    [bf_type]    "i" (type),                                                 \
--    [bf_ptr]     "i" (ptr),                                                  \
--    [bf_msg]     "i" (msg),                                                  \
--    [bf_line_lo] "i" ((line & ((1 << BUG_LINE_LO_WIDTH) - 1))                \
--                      << BUG_DISP_WIDTH),                                    \
--    [bf_line_hi] "i" (((line) >> BUG_LINE_LO_WIDTH) << BUG_DISP_WIDTH)
--
--#define BUG_FRAME(type, line, ptr, second_frame, msg) do {                   \
--    BUILD_BUG_ON((line) >> (BUG_LINE_LO_WIDTH + BUG_LINE_HI_WIDTH));         \
--    BUILD_BUG_ON((type) >= BUGFRAME_NR);                                     \
--    asm volatile ( _ASM_BUGFRAME_TEXT(second_frame)                          \
--                   :: _ASM_BUGFRAME_INFO(type, line, ptr, msg) );            \
--} while (0)
--
--
--#define WARN() BUG_FRAME(BUGFRAME_warn, __LINE__, __FILE__, 0, NULL)
--#define BUG() do {                                              \
--    BUG_FRAME(BUGFRAME_bug,  __LINE__, __FILE__, 0, NULL);      \
--    unreachable();                                              \
--} while (0)
--
--/*
-- * TODO: untangle header dependences, break BUILD_BUG_ON() out of xen/lib.h,
-- * and use a real static inline here to get proper type checking of fn().
-- */
--#define run_in_exception_handler(fn)                            \
--    do {                                                        \
--        (void)((fn) == (void (*)(struct cpu_user_regs *))NULL); \
--        BUG_FRAME(BUGFRAME_run_fn, 0, fn, 0, NULL);             \
--    } while ( 0 )
--
--#define assert_failed(msg) do {                                 \
--    BUG_FRAME(BUGFRAME_assert, __LINE__, __FILE__, 1, msg);     \
--    unreachable();                                              \
--} while (0)
-+#define BUG_INSTR       "ud2"
-+#define BUG_ASM_CONST   "c"
+ #endif /* __ARM_BUG_H__ */
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/include/asm/div64.h b/xen/arch/arm/include/asm/div64.h
+index 1cd58bc51a..fc667a80f9 100644
+--- a/xen/arch/arm/include/asm/div64.h
++++ b/xen/arch/arm/include/asm/div64.h
+@@ -74,7 +74,7 @@
  
- #else  /* !__ASSEMBLY__ */
+ #elif __GNUC__ >= 4
  
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index cade9e12f8..c36e3f855b 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -24,6 +24,7 @@
-  * Gareth Hughes <gareth@valinux.com>, May 2000
+-#include <asm/bug.h>
++#include <xen/bug.h>
+ 
+ /*
+  * If the divisor happens to be constant, we determine the appropriate
+diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
+index 1a99d3a8b4..c90e88fddb 100644
+--- a/xen/arch/arm/vgic/vgic-v2.c
++++ b/xen/arch/arm/vgic/vgic-v2.c
+@@ -16,8 +16,8 @@
+  */
+ 
+ #include <asm/new_vgic.h>
+-#include <asm/bug.h>
+ #include <asm/gic.h>
++#include <xen/bug.h>
+ #include <xen/sched.h>
+ #include <xen/sizes.h>
+ 
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index f0f2ea5021..b9463a5f27 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -15,9 +15,9 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
  
 +#include <xen/bug.h>
- #include <xen/init.h>
+ #include <xen/list_sort.h>
  #include <xen/sched.h>
- #include <xen/lib.h>
-@@ -1166,12 +1167,9 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+-#include <asm/bug.h>
+ #include <asm/event.h>
+ #include <asm/new_vgic.h>
  
- void do_invalid_op(struct cpu_user_regs *regs)
- {
--    const struct bug_frame *bug = NULL;
-     u8 bug_insn[2];
--    const char *prefix = "", *filename, *predicate, *eip = (char *)regs->rip;
--    unsigned long fixup;
--    int id = -1, lineno;
--    const struct virtual_region *region;
-+    const void *eip = (const void *)regs->rip;
-+    int id;
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index c27cbb2304..18ff2a443b 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -27,6 +27,7 @@
+  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  */
  
-     if ( likely(guest_mode(regs)) )
-     {
-@@ -1185,83 +1183,20 @@ void do_invalid_op(struct cpu_user_regs *regs)
-          memcmp(bug_insn, "\xf\xb", sizeof(bug_insn)) )
-         goto die;
++#include <xen/bug.h>
+ #include <xen/types.h>
+ #include <xen/errno.h>
+ #include <xen/delay.h>
+@@ -35,7 +36,6 @@
+ #include <xen/sched.h>
+ #include <xen/timer.h>
+ #include <xen/xmalloc.h>
+-#include <asm/bug.h>
+ #include <asm/msr.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
+index d9431180cf..baaaccb26e 100644
+--- a/xen/arch/x86/include/asm/asm_defns.h
++++ b/xen/arch/x86/include/asm/asm_defns.h
+@@ -6,8 +6,8 @@
+ /* NB. Auto-generated from arch/.../asm-offsets.c */
+ #include <asm/asm-offsets.h>
+ #endif
+-#include <asm/bug.h>
+ #include <asm/x86-defns.h>
++#include <xen/bug.h>
+ #include <xen/stringify.h>
+ #include <asm/cpufeature.h>
+ #include <asm/alternative.h>
+diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
+index b7265bdfbe..4b3e7b019d 100644
+--- a/xen/arch/x86/include/asm/bug.h
++++ b/xen/arch/x86/include/asm/bug.h
+@@ -1,19 +1,10 @@
+ #ifndef __X86_BUG_H__
+ #define __X86_BUG_H__
  
--    region = find_text_region(regs->rip);
--    if ( region )
--    {
--        for ( id = 0; id < BUGFRAME_NR; id++ )
--        {
--            const struct bug_frame *b;
--            unsigned int i;
+-#define BUG_DISP_WIDTH    24
+-#define BUG_LINE_LO_WIDTH (31 - BUG_DISP_WIDTH)
+-#define BUG_LINE_HI_WIDTH (31 - BUG_DISP_WIDTH)
 -
--            for ( i = 0, b = region->frame[id].bugs;
--                  i < region->frame[id].n_bugs; b++, i++ )
--            {
--                if ( bug_loc(b) == eip )
--                {
--                    bug = b;
--                    goto found;
--                }
--            }
--        }
--    }
+-#define BUGFRAME_run_fn 0
+-#define BUGFRAME_warn   1
+-#define BUGFRAME_bug    2
+-#define BUGFRAME_assert 3
 -
-- found:
--    if ( !bug )
-+    id = do_bug_frame(regs, regs->rip);
-+    if ( id < 0 )
-         goto die;
--    eip += sizeof(bug_insn);
--    if ( id == BUGFRAME_run_fn )
--    {
--        void (*fn)(struct cpu_user_regs *) = bug_ptr(bug);
+-#define BUGFRAME_NR     4
 -
--        fn(regs);
--        fixup_exception_return(regs, (unsigned long)eip);
--        return;
--    }
+ #ifndef __ASSEMBLY__
  
--    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
--    filename = bug_ptr(bug);
--    if ( !is_kernel(filename) && !is_patch(filename) )
--        goto die;
--    fixup = strlen(filename);
--    if ( fixup > 50 )
--    {
--        filename += fixup - 47;
--        prefix = "...";
--    }
--    lineno = bug_line(bug);
-+    eip += sizeof(bug_insn);
++#define BUG_FRAME_STRUCT
++
+ struct bug_frame {
+     signed int loc_disp:BUG_DISP_WIDTH;
+     unsigned int line_hi:BUG_LINE_HI_WIDTH;
+@@ -80,12 +71,6 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
  
-     switch ( id )
-     {
-+    case BUGFRAME_run_fn:
-     case BUGFRAME_warn:
--        printk("Xen WARN at %s%s:%d\n", prefix, filename, lineno);
--        show_execution_state(regs);
-         fixup_exception_return(regs, (unsigned long)eip);
--        return;
+-extern const struct bug_frame __start_bug_frames[],
+-                              __stop_bug_frames_0[],
+-                              __stop_bug_frames_1[],
+-                              __stop_bug_frames_2[],
+-                              __stop_bug_frames_3[];
 -
-     case BUGFRAME_bug:
--        printk("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
--
--        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
--            return;
--
--        show_execution_state(regs);
--        panic("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
--
-     case BUGFRAME_assert:
--        /* ASSERT: decode the predicate string pointer. */
--        predicate = bug_msg(bug);
--        if ( !is_kernel(predicate) && !is_patch(predicate) )
--            predicate = "<unknown>";
--
--        printk("Assertion '%s' failed at %s%s:%d\n",
--               predicate, prefix, filename, lineno);
--
--        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
--            return;
--
--        show_execution_state(regs);
--        panic("Assertion '%s' failed at %s%s:%d\n",
--              predicate, prefix, filename, lineno);
-+        return;
-     }
+ #else  /* !__ASSEMBLY__ */
  
-  die:
+ /*
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index a94520ee57..354f78580b 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -26,6 +26,7 @@
+  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  */
+ 
++#include <xen/bug.h>
+ #include <xen/types.h>
+ #include <xen/errno.h>
+ #include <xen/delay.h>
+@@ -39,7 +40,6 @@
+ #include <xen/guest_access.h>
+ #include <xen/domain.h>
+ #include <xen/cpu.h>
+-#include <asm/bug.h>
+ #include <asm/io.h>
+ #include <asm/processor.h>
+ 
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index 05ee1e18af..e914ccade0 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -24,12 +24,12 @@
+ 
+ #ifndef __ASSEMBLY__
+ 
++#include <xen/bug.h>
+ #include <xen/inttypes.h>
+ #include <xen/stdarg.h>
+ #include <xen/types.h>
+ #include <xen/xmalloc.h>
+ #include <xen/string.h>
+-#include <asm/bug.h>
+ 
+ #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
+ #define WARN_ON(p)  ({                  \
 -- 
 2.39.2
 
