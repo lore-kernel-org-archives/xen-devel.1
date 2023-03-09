@@ -4,38 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC757C6FD1F
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Mar 2023 13:33:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508265.782783 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E393C61DA4
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Mar 2023 13:46:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.508284.782818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1paGOu-0001cT-W9; Thu, 09 Mar 2023 13:33:44 +0000
+	id 1paGbI-0005ho-Rj; Thu, 09 Mar 2023 13:46:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508265.782783; Thu, 09 Mar 2023 13:33:44 +0000
+Received: by outflank-mailman (output) from mailman id 508284.782818; Thu, 09 Mar 2023 13:46:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1paGOu-0001c6-Pg; Thu, 09 Mar 2023 13:33:44 +0000
-Received: by outflank-mailman (input) for mailman id 508265;
- Thu, 09 Mar 2023 13:33:43 +0000
+	id 1paGbI-0005hh-Ob; Thu, 09 Mar 2023 13:46:32 +0000
+Received: by outflank-mailman (input) for mailman id 508284;
+ Thu, 09 Mar 2023 13:46:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RZdn=7B=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1paGOt-0001IZ-JR
- for xen-devel@lists.xenproject.org; Thu, 09 Mar 2023 13:33:43 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
+ <SRS0=ne43=7B=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1paGbH-0005hb-MH
+ for xen-devel@lists.xenproject.org; Thu, 09 Mar 2023 13:46:32 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20601.outbound.protection.outlook.com
+ [2a01:111:f400:7eae::601])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 019cf144-be7f-11ed-956e-85ef70e17bfa;
- Thu, 09 Mar 2023 14:33:41 +0100 (CET)
-Received: by mail-wm1-x32d.google.com with SMTP id
- l7-20020a05600c1d0700b003eb5e6d906bso1222974wms.5
- for <xen-devel@lists.xenproject.org>; Thu, 09 Mar 2023 05:33:41 -0800 (PST)
-Received: from fedora.. (46.204.108.143.nat.umts.dynamic.t-mobile.pl.
- [46.204.108.143]) by smtp.gmail.com with ESMTPSA id
- he11-20020a05600c540b00b003df5be8987esm2672209wmb.20.2023.03.09.05.33.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Mar 2023 05:33:40 -0800 (PST)
+ id c824d530-be80-11ed-956e-85ef70e17bfa;
+ Thu, 09 Mar 2023 14:46:25 +0100 (CET)
+Received: from MW4P220CA0022.NAMP220.PROD.OUTLOOK.COM (2603:10b6:303:115::27)
+ by CH2PR12MB4325.namprd12.prod.outlook.com (2603:10b6:610:a9::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.18; Thu, 9 Mar
+ 2023 13:46:21 +0000
+Received: from CO1NAM11FT057.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:115:cafe::59) by MW4P220CA0022.outlook.office365.com
+ (2603:10b6:303:115::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.19 via Frontend
+ Transport; Thu, 9 Mar 2023 13:46:21 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT057.mail.protection.outlook.com (10.13.174.205) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6178.18 via Frontend Transport; Thu, 9 Mar 2023 13:46:21 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 9 Mar
+ 2023 07:46:20 -0600
+Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Thu, 9 Mar 2023 07:46:19 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,334 +61,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 019cf144-be7f-11ed-956e-85ef70e17bfa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678368821;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iwHPugclA9fxaG15juqlxYVC4Svp3r2KHxTOl+XGGLQ=;
-        b=bT+jPyhAoT7oeC1Uiv8MMpGdEMa0nJNykW2WO6+XwQJG5rxMo1rolYGUez1RmyjEqr
-         Uy209cQF1XV2mZoy4X94KS/YFzYmqP0iTC3kCpvCeeJXWQRpFfRWBpe3owPJIgYTy8wF
-         of5ZAIYacFIm4FIH00H2zUi0b1hnfwLjINh8V86QPm+cLE4j86LAFEgVVe3ognpJlaDs
-         7wlsESJAp0NNc9dwF07LXKdmwAmTuD5RMpeDtwS95pbyt4d64ko5w50alQh8J455jeLW
-         E4rCAfMa0xh0fCJ1CRBc3KLguVKQwfyBdD4tBsskANuX2aSjvuPiEiCflLwR6y0DUYaT
-         2BUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678368821;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iwHPugclA9fxaG15juqlxYVC4Svp3r2KHxTOl+XGGLQ=;
-        b=jG3hdQTkVruAYdEbkIYwyOb+71VR/DP9MHgwamRQNXRd0nwjJAEPZ93H63N+WOCYYu
-         qSpRI7C1HDacFntEsSJyCvF9j9eqKudarJRB2/Dnd7BBRm6T6XQPVPyf4PU1xcFWdBEF
-         LOlekp1EdsxHLbXyHW04D9XvlKcJifMAtYx30EE0SuVpdcpH2T5XUwzH69xXk41liV9V
-         KKt4xNj3b/iCuHCqoHk/ebSikYcuZB6mqk5PxLwgMdyPlgERjyd8UlOimxJIbhXVY6Rk
-         EU0yJWC6dcEzN2a/5nZn43sYIkP4T0GcrD+jNgbMGnV9JecabARQv4cvMkZxH6KdSJr5
-         +IYw==
-X-Gm-Message-State: AO0yUKV+RrKbvtur7JDjzB6yp/KQ1tlrFkyuTL5ZzDvjviRaSsjvBQS5
-	mIUAMRFXsAlVSrOwO9+CGi28NCL0s5qjLQ==
-X-Google-Smtp-Source: AK7set+RHvFUM/3QMscPBuBAvCgCqjbAbNfs7jVhQLtbfJmZ9AHjReU3nueDOejZnCIqe//H7eQRlg==
-X-Received: by 2002:a1c:f415:0:b0:3df:9858:c03a with SMTP id z21-20020a1cf415000000b003df9858c03amr17802302wma.15.1678368820964;
-        Thu, 09 Mar 2023 05:33:40 -0800 (PST)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Julien Grall <julien@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v7 3/5] xen: change <asm/bug.h> to <xen/bug.h>
-Date: Thu,  9 Mar 2023 15:33:26 +0200
-Message-Id: <9c436fdfeb73d7201093da997a8d09314a3e59a9.1678368234.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1678368234.git.oleksii.kurochko@gmail.com>
-References: <cover.1678368234.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: c824d530-be80-11ed-956e-85ef70e17bfa
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FCUCBVuAha2F5KGdV6KigIZGxRc1Ae0qdbGjYkiv6NtYfpGpj9Vg+ynbEtT/V98nnQSrdeCeQZRQPuFyBCkxU3YDmIYOqOiLxsQujaI+2F/ivGPk52h3cLg18dviL4YEGDybie1jjNZcKxHP/RRUynibYlUMdCVj0l3CDJyaUxgEwG5+OyquSTtDuzMmijYHlLPiUF2Gk2OCMpz57ki8NFB9rF9hxWwV08hf2WcspXrAo0d7wMk27pZwu6JrRzOIKqyqU5ps1Xml3U7xt3WiW6TzhoFSyJm5bZhZ4lCS1VJL9gFYh1ONtI80GlY2at4bS2l0udQc1w5zIN3lwKhavw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tXnibmtTrFawTaL2374okS9Ai2LcsMHUqWONMynBM3M=;
+ b=L74eIHcpe+sacw1ciFai/BcfWasL6huRXC6t19oXgasG5uwZApY2djzmwwM4tDMndYnPJjVp7HR8Fi2KKX3PvLluE/NW5+6K+LPeGxGnXcBGe3sqXH3/Tq2da6/pPgJaSqRbFJzKTDxtJx3RVLZDWQW9QD1n09QOSOwjRLgREQgxQKbExZHhqrRVh3JUAF2d7u22ExuToHPp2UCmitaxgvGgZ7vCJAcmI3ct6dwUsjroO8XbRMSa9Fh0kkrK23P3MUHxfVrg3BFKi8uxD1F9P6Y0o0NgRdsD240nd7vWybRCStMe2uxHglKuXRxkWt7DTDgDeUX6rW/FzY20ubBQtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tXnibmtTrFawTaL2374okS9Ai2LcsMHUqWONMynBM3M=;
+ b=UJ1l729hoiDvgfYWypePF9V5JqsCucJfZRFhzoogyR8mROwCra+QB5vAGOnrVaLUZGcyyWEzar9hEdPOTrCT+RwBVs2DG+VFLbWYJztzIJgJggQVrL0YVIZx/vUddzOO4pIyAWuZsVniJnORT+jQmfYgPTV7eW/yrAnwDS95/dg=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <93cefcfc-1cfe-bb79-0f6d-5e578ad153fa@amd.com>
+Date: Thu, 9 Mar 2023 14:46:18 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v1 2/2] arch/arm: time: Add support for parsing interrupts
+ by names
+Content-Language: en-US
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, "Andrei Cherechesu (OSS)"
+	<andrei.cherechesu@oss.nxp.com>, Xen-devel <xen-devel@lists.xenproject.org>,
+	Andrei Cherechesu <andrei.cherechesu@nxp.com>, Julien Grall <julien@xen.org>
+References: <20230307100949.9231-1-andrei.cherechesu@oss.nxp.com>
+ <20230307100949.9231-3-andrei.cherechesu@oss.nxp.com>
+ <370745D6-D6AF-43D0-8E9F-2DB160BE0E07@arm.com>
+ <alpine.DEB.2.22.394.2303071301300.863724@ubuntu-linux-20-04-desktop>
+ <B58C926D-25FD-4EB6-A83C-229E72E16181@arm.com>
+ <7a0734e9-a980-3dc1-026d-0c96a89c4d5c@amd.com>
+ <0932C0EB-F90A-45D4-87F4-3594E6E74C64@arm.com>
+ <3c0a6e88-2a1a-f06a-cac1-59801b1acfd6@amd.com>
+ <D0D43830-5F75-4284-86E5-967E2059B377@arm.com>
+ <df481924-6fa9-cac3-f822-9ff51b0824fe@amd.com>
+ <CA41DB66-DB7E-4EDD-9A34-38328A2A8C9E@arm.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <CA41DB66-DB7E-4EDD-9A34-38328A2A8C9E@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT057:EE_|CH2PR12MB4325:EE_
+X-MS-Office365-Filtering-Correlation-Id: 810512f1-6903-4a74-2405-08db20a4aaaa
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	MTECn1OeQjEBCGrhI6cRs5ibxMynsrPuudMpDcJFnz7JcGXAarSWsFIlZ1m1kpGvTjaygr3V7IHP7AkbKW5ofLVY+kq3kDsWhy+Yj4WTbdYJSFpowismiahBrQpA0kWqTz4w5kp7VmLc3m+PR9DU40p2OxWtR+kdLiPeRF99tKPsp/vd3WFh8E5fNG/D3TjaEh1UoauNQNMELv7NQ5WJlRo/K/S25DWhySb+56oa2X9JeAGyxe/9H+1nQg/kk4P8GKG1b9rSypC40KqgliAhlkVay5XTpaOGUG19jjTyvlkv4dDtFIwabXc0/8PV2QuPDhcQmUEPlSbGowD4Tir9zDvu/7y7/bEXUxAl1Y3BaiB27v9CTNuHt5XxHHwgnrZrVRN+GjBmME7Y4Rw368v6ijzw+L4BHBKFxJftMgiORsFllUMkwffZapCG0StocG5siRLrKKkIA59XN+kF4V4yG8qSQND9BCb1YblDqzOE149WhoBWbOs/Q4KRtzJIiGVqwaUEVOCdNnwFTBgP3cc01/6ZadqCWTTRRc6F9BgEdbsZFlkIVpHDh53pXFZajkg7T8+998eFaa9BaNpDMqL99+Bt6esHYGRJ6x3pcMES3+ZnG6tq/mHuMvzlhN5Qxd54LEMdN41d1gMPMJdMjnxHpxyIHjDkGFENwwRq6D0AICqRmo3WMGTz1ThX9Jwrxr7ZQgBfusmn8Hr7g1zHQlULhRQC2EJ9eu7/9onDAqK9pMMopouvaDsCx/CuQnXLYoI3mml02ztOItQe/DAMXGPYRA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(396003)(39860400002)(136003)(346002)(376002)(451199018)(40470700004)(46966006)(36840700001)(31686004)(82310400005)(82740400003)(36860700001)(83380400001)(426003)(47076005)(36756003)(54906003)(478600001)(40480700001)(356005)(316002)(16576012)(2616005)(336012)(40460700003)(186003)(26005)(81166007)(53546011)(5660300002)(41300700001)(44832011)(70206006)(8936002)(4326008)(6916009)(70586007)(8676002)(2906002)(86362001)(31696002)(36900700001)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2023 13:46:21.1497
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 810512f1-6903-4a74-2405-08db20a4aaaa
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1NAM11FT057.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4325
 
-The idea of the patch is to change all <asm/bug.h> to <xen/bug.h> and
-keep Xen compilable with adding only minimal amount of changes:
-1. It was added "#include <xen/types.h>" to ARM's "<asm/bug.h>" as it
-  uses uint_{16,32}t in 'struct bug_frame'.
-2. It was added '#define BUG_FRAME_STRUCT' which means that ARM hasn't
-  been switched to generic implementation yet.
-3. It was added '#define BUG_FRAME_STRUCT' which means that x86 hasn't
-  been switched to generic implementation yet.
-4. BUGFRAME_* and _start_bug_frame[], _stop_bug_frame_*[] were removed
-  for ARM & x86 to deal with compilation errors such as:
-      redundant redeclaration of ...
-5. Remove BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH from
-  x86's <asm.bug.h> to not to produce #undef for them and #define again
-  with the same values as in <xen/bug.h>. These #undef and #define will
-  be anyway removed in the patch [2]
 
-In the following two patches x86 and ARM archictectures will be
-switched fully:
-[1] xen/arm: switch ARM to use generic implementation of bug.h
-[2] xen/x86: switch x86 to use generic implemetation of bug.h
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V7:
- * Remove #undef {BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH} from
-   ARM and x86:
-   * for ARM was created separate patch where the defines are removed as
-     unused.
-   * for x86, the defines were removed now not to produce #undef of them to remove
-            them again in the following-up patch
- * Update commit message
- * Add Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in V6:
-	- change the inclusion order of <xen/bug.h>.
-	- add #undef of BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH for ARM & x86
-	  as they were introduced unconditionally in <xen/bug.h>.
-	- update the commit message
----
-Changes in V5:
- - Nothing changed
----
-Changes in V4:
-	- defines BUG_DISP_WIDTH, BUG_LINE_LO_WIDTH, BUG_LINE_HI_WIDTH were moved into
-	  "ifndef BUG_FRAME_STRUCT" in <xen/bug.h> as they are specific for 'struct bug_frame' and so should
-	  co-exist together. So the defines were back to <asm/bug.h> until BUG_FRAME_STRUCT will be defined in
-	  <asm/bug.h>.
-	- Update the comment message.
----
-Changes in V3:
- * Update patch 2 not to break compilation: move some parts from patches 3 and 4
-   to patch 2:
-   * move some generic parts from <asm/bug.h> to <xen/bug.h>
-   * add define BUG_FRAME_STRUCT in ARM's <asm/bug.h>
----
-Changes in V2:
- * Put [PATCH v1 4/4] xen: change <asm/bug.h> to <xen/bug.h> as second patch,
-   update the patch to change all <asm/bug.h> to <xen/bug.h> among the whole project
-   to not break build.
- * Update the commit message.
----
- xen/arch/arm/include/asm/bug.h       | 17 ++++-------------
- xen/arch/arm/include/asm/div64.h     |  2 +-
- xen/arch/arm/vgic/vgic-v2.c          |  2 +-
- xen/arch/arm/vgic/vgic.c             |  2 +-
- xen/arch/x86/acpi/cpufreq/cpufreq.c  |  2 +-
- xen/arch/x86/include/asm/asm_defns.h |  2 +-
- xen/arch/x86/include/asm/bug.h       | 19 ++-----------------
- xen/drivers/cpufreq/cpufreq.c        |  2 +-
- xen/include/xen/lib.h                |  2 +-
- 9 files changed, 13 insertions(+), 37 deletions(-)
+On 09/03/2023 13:45, Bertrand Marquis wrote:
+> 
+> 
+> Hi Michal,
+> 
+>> On 9 Mar 2023, at 13:42, Michal Orzel <michal.orzel@amd.com> wrote:
+>>
+>> Hi Bertrand,
+>>
+>> On 09/03/2023 13:19, Bertrand Marquis wrote:
+>>>
+>>>
+>>> Hi Michal,
+>>>
+>>>> On 9 Mar 2023, at 12:35, Michal Orzel <michal.orzel@amd.com> wrote:
+>>>>
+>>>>
+>>>>
+>>>> On 09/03/2023 11:39, Bertrand Marquis wrote:
+>>>>>
+>>>>>
+>>>>> Hi Michal,
+>>>>>
+>>>>>> On 9 Mar 2023, at 11:05, Michal Orzel <michal.orzel@amd.com> wrote:
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> On 09/03/2023 09:02, Bertrand Marquis wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>> Hi Stefano,
+>>>>>>>
+>>>>>>>> On 7 Mar 2023, at 22:02, Stefano Stabellini <sstabellini@kernel.org> wrote:
+>>>>>>>>
+>>>>>>>> On Tue, 7 Mar 2023, Bertrand Marquis wrote:
+>>>>>>>>>> On 7 Mar 2023, at 11:09, Andrei Cherechesu (OSS) <andrei.cherechesu@oss.nxp.com> wrote:
+>>>>>>>>>>
+>>>>>>>>>> From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>>>>>>>>>>
+>>>>>>>>>> Added support for parsing the ARM generic timer interrupts DT
+>>>>>>>>>> node by the "interrupt-names" property, if it is available.
+>>>>>>>>>>
+>>>>>>>>>> If not available, the usual parsing based on the expected
+>>>>>>>>>> IRQ order is performed.
+>>>>>>>>>>
+>>>>>>>>>> Also added the "hyp-virt" PPI to the timer PPI list, even
+>>>>>>>>>> though it's currently not in use. If the "hyp-virt" PPI is
+>>>>>>>>>> not found, the hypervisor won't panic.
+>>>>>>>>>>
+>>>>>>>>>> Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+>>>>>>>>>> ---
+>>>>>>>>>> xen/arch/arm/include/asm/time.h |  3 ++-
+>>>>>>>>>> xen/arch/arm/time.c             | 26 ++++++++++++++++++++++----
+>>>>>>>>>> 2 files changed, 24 insertions(+), 5 deletions(-)
+>>>>>>>>>>
+>>>>>>>>>> diff --git a/xen/arch/arm/include/asm/time.h b/xen/arch/arm/include/asm/time.h
+>>>>>>>>>> index 4b401c1110..49ad8c1a6d 100644
+>>>>>>>>>> --- a/xen/arch/arm/include/asm/time.h
+>>>>>>>>>> +++ b/xen/arch/arm/include/asm/time.h
+>>>>>>>>>> @@ -82,7 +82,8 @@ enum timer_ppi
+>>>>>>>>>> TIMER_PHYS_NONSECURE_PPI = 1,
+>>>>>>>>>> TIMER_VIRT_PPI = 2,
+>>>>>>>>>> TIMER_HYP_PPI = 3,
+>>>>>>>>>> -    MAX_TIMER_PPI = 4,
+>>>>>>>>>> +    TIMER_HYP_VIRT_PPI = 4,
+>>>>>>>>>> +    MAX_TIMER_PPI = 5,
+>>>>>>>>>> };
+>>>>>>>>>>
+>>>>>>>>>> /*
+>>>>>>>>>> diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
+>>>>>>>>>> index 433d7be909..794da646d6 100644
+>>>>>>>>>> --- a/xen/arch/arm/time.c
+>>>>>>>>>> +++ b/xen/arch/arm/time.c
+>>>>>>>>>> @@ -38,6 +38,14 @@ uint32_t __read_mostly timer_dt_clock_frequency;
+>>>>>>>>>>
+>>>>>>>>>> static unsigned int timer_irq[MAX_TIMER_PPI];
+>>>>>>>>>>
+>>>>>>>>>> +static const char *timer_irq_names[MAX_TIMER_PPI] = {
+>>>>>>>>>> +    [TIMER_PHYS_SECURE_PPI] = "sec-phys",
+>>>>>>>>>> +    [TIMER_PHYS_NONSECURE_PPI] = "phys",
+>>>>>>>>>> +    [TIMER_VIRT_PPI] = "virt",
+>>>>>>>>>> +    [TIMER_HYP_PPI] = "hyp-phys",
+>>>>>>>>>> +    [TIMER_HYP_VIRT_PPI] = "hyp-virt",
+>>>>>>>>>> +};
+>>>>>>>>>> +
+>>>>>>>>>
+>>>>>>>>> I would need some reference or a pointer to some doc to check those.
+>>>>>>>>>
+>>>>>>>>>> unsigned int timer_get_irq(enum timer_ppi ppi)
+>>>>>>>>>> {
+>>>>>>>>>> ASSERT(ppi >= TIMER_PHYS_SECURE_PPI && ppi < MAX_TIMER_PPI);
+>>>>>>>>>> @@ -149,15 +157,25 @@ static void __init init_dt_xen_time(void)
+>>>>>>>>>> {
+>>>>>>>>>> int res;
+>>>>>>>>>> unsigned int i;
+>>>>>>>>>> +    bool has_names;
+>>>>>>>>>> +
+>>>>>>>>>> +    has_names = dt_property_read_bool(timer, "interrupt-names");
+>>>>>>>>>>
+>>>>>>>>>> /* Retrieve all IRQs for the timer */
+>>>>>>>>>> for ( i = TIMER_PHYS_SECURE_PPI; i < MAX_TIMER_PPI; i++ )
+>>>>>>>>>> {
+>>>>>>>>>> -        res = platform_get_irq(timer, i);
+>>>>>>>>>> -
+>>>>>>>>>> -        if ( res < 0 )
+>>>>>>>>>> +        if ( has_names )
+>>>>>>>>>> +            res = platform_get_irq_byname(timer, timer_irq_names[i]);
+>>>>>>>>>> +        else
+>>>>>>>>>> +            res = platform_get_irq(timer, i);
+>>>>>>>>>> +
+>>>>>>>>>> +        if ( res > 0 )
+>>>>>>>>>
+>>>>>>>>> The behaviour of the code is changed here compared to the current
+>>>>>>>>> version as res = 0 will now generate a panic.
+>>>>>>>>>
+>>>>>>>>> Some device tree might not specify an interrupt number and just put
+>>>>>>>>> 0 and Xen will now panic on those systems.
+>>>>>>>>> As I have no idea if such systems exists and the behaviour is modified
+>>>>>>>>> you should justify this and mention it in the commit message or keep
+>>>>>>>>> the old behaviour and let 0 go through without a panic.
+>>>>>>>>>
+>>>>>>>>> @stefano, julien any idea here ? should just keep the old behaviour ?
+>>>>>>>>
+>>>>>>>> platform_get_irq returns 0 if the irq is 0. The irq cannot be 0 because
+>>>>>>>> 0 is reserved for SGIs, not PPIs. So I think it is OK to consider 0 an
+>>>>>>>> error.
+>>>>>>>
+>>>>>>> Problem here is that a DTB might not specify all interrupts and just put
+>>>>>>> 0 for the one not used (or not available for example if you have no secure
+>>>>>>> world).
+>>>>>> Xen requires presence of EL3,EL2 and on such system, at least the following timers needs to be there
+>>>>>> according to Arm ARM:
+>>>>>> - EL3 phys (if EL3 is there)
+>>>>>
+>>>>> This might be needed by EL3 but not by Xen.
+>>>> Xen requires system with EL3 and if there is EL3, both Arm spec and dt bindings requires sec-phys timer to be there.
+>>>> So it would be very strange to see a fake interrupt with IRQ being 0. But if we relly want to only care about
+>>>> what Xen needs, then we could live with that (although it is difficult for me to find justification for 0 there).
+>>>> Device trees are created per system and if system has EL3, then why forcing 0 to be listed for sec-phys timer?
+>>>>
+>>>
+>>> Let's see that on the other angle: why should Xen check stuff that it does not need ?
+>> Because apart from what it needs or not, there is a matter of a failure in Xen.
+>> Xen exposes timer IRQs to dom0 as they were taken from dtb and allowing 0 for any of the timer IRQ would result
+>> in a Xen failure when reserving such IRQ. Xen presets SGI IRQs, meaning bits 0:15 in allocated_irqs bitmap are set.
+>> This is why when calling vgic_reserve_virq and passing SGI always results in calling a BUG().
+>>
+>> So we have two options:
+>> - panic earlier with a meaningful message when IRQ is 0
+>> - let Xen continue and reach BUG which would be not that obvious for people using but not knowing Xen
+> 
+> So you are saying that in the current state 0 would be ignored during scan and create a bug later.
+Yes, provided platform_get_irq() returns 0. This is however only theory because IMO it is impossible at the moment.
+Both GICs, do not allow specifying SGIs in dt bindings and require at least 3 cells where 1st one specifies type.
+So if we have a fake IRQ 0 as PPI, platform_get_irq will return 16 and for SPI - 32.
+Therefore I cannot see how it would return 0.
 
-diff --git a/xen/arch/arm/include/asm/bug.h b/xen/arch/arm/include/asm/bug.h
-index d6c98505bf..cacaf014ab 100644
---- a/xen/arch/arm/include/asm/bug.h
-+++ b/xen/arch/arm/include/asm/bug.h
-@@ -1,6 +1,8 @@
- #ifndef __ARM_BUG_H__
- #define __ARM_BUG_H__
- 
-+#include <xen/types.h>
-+
- #if defined(CONFIG_ARM_32)
- # include <asm/arm32/bug.h>
- #elif defined(CONFIG_ARM_64)
-@@ -9,6 +11,8 @@
- # error "unknown ARM variant"
- #endif
- 
-+#define BUG_FRAME_STRUCT
-+
- struct bug_frame {
-     signed int loc_disp;    /* Relative address to the bug address */
-     signed int file_disp;   /* Relative address to the filename */
-@@ -22,13 +26,6 @@ struct bug_frame {
- #define bug_line(b) ((b)->line)
- #define bug_msg(b) ((const char *)(b) + (b)->msg_disp)
- 
--#define BUGFRAME_run_fn 0
--#define BUGFRAME_warn   1
--#define BUGFRAME_bug    2
--#define BUGFRAME_assert 3
--
--#define BUGFRAME_NR     4
--
- /* Many versions of GCC doesn't support the asm %c parameter which would
-  * be preferable to this unpleasantness. We use mergeable string
-  * sections to avoid multiple copies of the string appearing in the
-@@ -85,12 +82,6 @@ struct bug_frame {
-     unreachable();                                              \
- } while (0)
- 
--extern const struct bug_frame __start_bug_frames[],
--                              __stop_bug_frames_0[],
--                              __stop_bug_frames_1[],
--                              __stop_bug_frames_2[],
--                              __stop_bug_frames_3[];
--
- #endif /* __ARM_BUG_H__ */
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/include/asm/div64.h b/xen/arch/arm/include/asm/div64.h
-index 1cd58bc51a..fc667a80f9 100644
---- a/xen/arch/arm/include/asm/div64.h
-+++ b/xen/arch/arm/include/asm/div64.h
-@@ -74,7 +74,7 @@
- 
- #elif __GNUC__ >= 4
- 
--#include <asm/bug.h>
-+#include <xen/bug.h>
- 
- /*
-  * If the divisor happens to be constant, we determine the appropriate
-diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-index 1a99d3a8b4..c90e88fddb 100644
---- a/xen/arch/arm/vgic/vgic-v2.c
-+++ b/xen/arch/arm/vgic/vgic-v2.c
-@@ -16,8 +16,8 @@
-  */
- 
- #include <asm/new_vgic.h>
--#include <asm/bug.h>
- #include <asm/gic.h>
-+#include <xen/bug.h>
- #include <xen/sched.h>
- #include <xen/sizes.h>
- 
-diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
-index f0f2ea5021..b9463a5f27 100644
---- a/xen/arch/arm/vgic/vgic.c
-+++ b/xen/arch/arm/vgic/vgic.c
-@@ -15,9 +15,9 @@
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
-+#include <xen/bug.h>
- #include <xen/list_sort.h>
- #include <xen/sched.h>
--#include <asm/bug.h>
- #include <asm/event.h>
- #include <asm/new_vgic.h>
- 
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index c27cbb2304..18ff2a443b 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -27,6 +27,7 @@
-  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
- 
-+#include <xen/bug.h>
- #include <xen/types.h>
- #include <xen/errno.h>
- #include <xen/delay.h>
-@@ -35,7 +36,6 @@
- #include <xen/sched.h>
- #include <xen/timer.h>
- #include <xen/xmalloc.h>
--#include <asm/bug.h>
- #include <asm/msr.h>
- #include <asm/io.h>
- #include <asm/processor.h>
-diff --git a/xen/arch/x86/include/asm/asm_defns.h b/xen/arch/x86/include/asm/asm_defns.h
-index d9431180cf..baaaccb26e 100644
---- a/xen/arch/x86/include/asm/asm_defns.h
-+++ b/xen/arch/x86/include/asm/asm_defns.h
-@@ -6,8 +6,8 @@
- /* NB. Auto-generated from arch/.../asm-offsets.c */
- #include <asm/asm-offsets.h>
- #endif
--#include <asm/bug.h>
- #include <asm/x86-defns.h>
-+#include <xen/bug.h>
- #include <xen/stringify.h>
- #include <asm/cpufeature.h>
- #include <asm/alternative.h>
-diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
-index b7265bdfbe..4b3e7b019d 100644
---- a/xen/arch/x86/include/asm/bug.h
-+++ b/xen/arch/x86/include/asm/bug.h
-@@ -1,19 +1,10 @@
- #ifndef __X86_BUG_H__
- #define __X86_BUG_H__
- 
--#define BUG_DISP_WIDTH    24
--#define BUG_LINE_LO_WIDTH (31 - BUG_DISP_WIDTH)
--#define BUG_LINE_HI_WIDTH (31 - BUG_DISP_WIDTH)
--
--#define BUGFRAME_run_fn 0
--#define BUGFRAME_warn   1
--#define BUGFRAME_bug    2
--#define BUGFRAME_assert 3
--
--#define BUGFRAME_NR     4
--
- #ifndef __ASSEMBLY__
- 
-+#define BUG_FRAME_STRUCT
-+
- struct bug_frame {
-     signed int loc_disp:BUG_DISP_WIDTH;
-     unsigned int line_hi:BUG_LINE_HI_WIDTH;
-@@ -80,12 +71,6 @@ struct bug_frame {
-     unreachable();                                              \
- } while (0)
- 
--extern const struct bug_frame __start_bug_frames[],
--                              __stop_bug_frames_0[],
--                              __stop_bug_frames_1[],
--                              __stop_bug_frames_2[],
--                              __stop_bug_frames_3[];
--
- #else  /* !__ASSEMBLY__ */
- 
- /*
-diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
-index a94520ee57..354f78580b 100644
---- a/xen/drivers/cpufreq/cpufreq.c
-+++ b/xen/drivers/cpufreq/cpufreq.c
-@@ -26,6 +26,7 @@
-  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  */
- 
-+#include <xen/bug.h>
- #include <xen/types.h>
- #include <xen/errno.h>
- #include <xen/delay.h>
-@@ -39,7 +40,6 @@
- #include <xen/guest_access.h>
- #include <xen/domain.h>
- #include <xen/cpu.h>
--#include <asm/bug.h>
- #include <asm/io.h>
- #include <asm/processor.h>
- 
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index 05ee1e18af..e914ccade0 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -24,12 +24,12 @@
- 
- #ifndef __ASSEMBLY__
- 
-+#include <xen/bug.h>
- #include <xen/inttypes.h>
- #include <xen/stdarg.h>
- #include <xen/types.h>
- #include <xen/xmalloc.h>
- #include <xen/string.h>
--#include <asm/bug.h>
- 
- #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
- #define WARN_ON(p)  ({                  \
--- 
-2.39.2
+~Michal
 
 
