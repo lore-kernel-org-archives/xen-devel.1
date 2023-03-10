@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC848C6FA99
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Mar 2023 20:37:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508583.783377 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63DA1C6FD19
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Mar 2023 20:37:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.508585.783396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pajUe-0007GK-00; Fri, 10 Mar 2023 20:37:36 +0000
+	id 1pajUg-0007ka-Gd; Fri, 10 Mar 2023 20:37:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508583.783377; Fri, 10 Mar 2023 20:37:35 +0000
+Received: by outflank-mailman (output) from mailman id 508585.783396; Fri, 10 Mar 2023 20:37:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pajUd-0007GD-TM; Fri, 10 Mar 2023 20:37:35 +0000
-Received: by outflank-mailman (input) for mailman id 508583;
- Fri, 10 Mar 2023 20:37:34 +0000
+	id 1pajUg-0007kT-Db; Fri, 10 Mar 2023 20:37:38 +0000
+Received: by outflank-mailman (input) for mailman id 508585;
+ Fri, 10 Mar 2023 20:37:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cIIN=7C=citrix.com=prvs=426914f36=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pajUc-0007G2-Ch
- for xen-devel@lists.xenproject.org; Fri, 10 Mar 2023 20:37:34 +0000
+ id 1pajUf-0007G2-5Y
+ for xen-devel@lists.xenproject.org; Fri, 10 Mar 2023 20:37:37 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5f7b3934-bf83-11ed-956e-85ef70e17bfa;
- Fri, 10 Mar 2023 21:37:30 +0100 (CET)
+ id 62ca3ef9-bf83-11ed-956e-85ef70e17bfa;
+ Fri, 10 Mar 2023 21:37:35 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,78 +38,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f7b3934-bf83-11ed-956e-85ef70e17bfa
+X-Inumbo-ID: 62ca3ef9-bf83-11ed-956e-85ef70e17bfa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1678480650;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jFzBoDKTtuF+GO/ELlQsUz1UPEnhhesb0CRGuBAV2lU=;
-  b=JHxj/eW84l/+jTXJ/JdUMXArDen/um4IIvwpqh6lWlxnH8TzQ9QzgcpL
-   e7J85RzwBFb4ei0RwcsRvuv8rUYAdBKoZFZPfYs4m/Lm/7dkPbBHMtAoh
-   9myaBFh389N7edqeCXsuXmzR6u3mttERBaEHfLS0cuf/HUHaGcxjs3Dkw
-   0=;
+  d=citrix.com; s=securemail; t=1678480655;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=vWKg24kXULjAm/MIBSk16wv0jwgKTvpBpsdeyDx77L0=;
+  b=LgzMsFphtFV5qjDfriZSGomjvX7TegV8a8nw77Sf3o6H0ANu14ij9gpX
+   mi+hvw5b/I8l4nA5UBCuFgD5UxKSwbjzfeVGxH1LZYrR/uUgB7R5+4moC
+   RAGzF1m2HYLxF9E5Xjczf8YF8/35Fq4fX79cBpE/VePwiuZDmFP+bKPx0
+   Y=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 100282287
+X-MesageID: 100282288
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:q+DLdKnHtzddvNaT5t4WsK/o5gyhJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIcXz3VPanfZDehLtt/bIy38EIO7cOHzdBlGQVq/Hw2EiMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5QeGzRH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- cJJcRwGbB2ivM+vzqqDTbZlo+oCc/C+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQth/A/
- jiWpT6pXXn2MvSzyB+96l2rl9bWvjv3CaMDTp+09vRl1Qj7Kms7V0RNCArTTeOCol6zXZdTJ
- lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4Mcc39QWMwar8+BuCCy4PSTspQMMinN87Q3otz
- FDht9/gGzFHqrCeTnOZsLCOoluP1TM9dDFYI3VeFE1cvoel+dto5v7Scjp9OJDk1/H+GzzR+
- B2TojAGgOoaqOAqiJzuqDgrnAmQjpTOSwc04CDeUWSk8h51aeaZWmC41bTIxa0eddjEFzFtq
- FBBwpHDt75WUflhgQTXGI0w8KeVC+Fp2dE2qXpmBNEf+juk4BZPlqgAsWgldC+F3ivpEAIFg
- XM/WysLuPe/31PwN8ebhr5d7Ox7pZUM7fy/CpjpgiNmO/CdjjOv8iB0flK31GvwikUqmqxXE
- c7FLpbwUi1AWPo6kGPeqwIhPVgDnHxW+I8ubcqjk0TPPUS2PhZ5tovpwHPRN7tkvctoUS3e8
- spFNtvi9vmseLSWX8UjyqZKdQpiBSFiVfjLRzl/KrbrzvxORDtwVJc8ANoJJ+RYokiivryTp
- y3jBBcGlAKXaL+uAVziV02PoYjHBf5XxU/X9wR2Zj5EB1BLjV6T0Zoi
-IronPort-HdrOrdr: A9a23:4Mk1I61SemKrb7DD4LFhKwqjBfdyeYIsimQD101hICG9E/bo4v
- xG+c5xuyMc5wxwZJheo6H9BEDtexLhHP1OkPos1MmZLWvbUQKTRekJ0WKI+UyCJ8SRzJ856U
- 9qG5IOd+EZZTJB4foTi2ODfOrJD7O8nZyAtKPm6zNIcCkvUqdn6m5Ce3Sm+o8dfng5OXL8fq
- DslvauYlCbCAUqh7+Adx04dtmGncTPiJXlJTYeHnccmXCzpALt0qf+Dx+bmjwDUzZDqI1SjF
- TtokjC/6C+tPP+7RfZ2wbonvNrseqk8MJHGMuPzu4KLTn24zzYArhJavm5pTUop+Pq0nYG+e
- O82ysIDoBI8nbMeWPwmxf3xAX69z4r5xbZuCSlqEqmm9X9WDU5T/VMnphYdByx0TtbgO1B
+IronPort-Data: A9a23:nML/MK6hTN16GX4sYFWVNwxRtCnHchMFZxGqfqrLsTDasY5as4F+v
+ mBOWzqGb/fYN2H1fd90YI6+9xhS6sKDm4RqQAdsrSFjHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraCYnsrLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+7JwehBtC5gZlPasS5AeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5my
+ 61BBDsPYzG4qvu42Iq8FeBJqOV8FZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx7A/
+ DKcpTSpav0cHOG+8DSVzXm9utOV3iXQYqQpJref0tc/1TV/wURMUUZLBDNXu8KRmkO4Ht5SN
+ UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JyOeAn7ACGyoLP/h2UQGMDS1Zpd9gOpMIwAzsw2
+ Te0c8jBXGI19ufPEDTEq+nS9GnpUcQIEYMcTRFVFCcO4dTCm6wqgAr3SYlqNYCU0eSgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7DFjG8U
+ G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gKvFmSx28zaK7onAMFh
+ 2eC0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZo3EyOhXKjj6wzBFEfUQD1
+ XCzK5rEMJrnIf4/kGreqxk1i9fHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrlR0U9wmy2Mq
+ 4w3H5LTm31ivBjWPnG/HXg7cQpbchDWxPne96RqSwJ0ClE9QT1/VaePnetJlk4Mt/09q9okN
+ 0qVAidwoGcTT1Wdc21mtlgLhGvTYKtC
+IronPort-HdrOrdr: A9a23:SVLPaKFVHK15kswspLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
+ mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YZT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.98,250,1673931600"; 
-   d="scan'208";a="100282287"
+   d="scan'208";a="100282288"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?=
-	<edwin.torok@cloud.com>, Rob Hoes <Rob.Hoes@citrix.com>
-Subject: [PATCH 0/3] x86: Minor improvements to xen-cpuid
-Date: Fri, 10 Mar 2023 20:37:09 +0000
-Message-ID: <20230310203712.1431387-1-andrew.cooper3@citrix.com>
+	<anthony.perard@citrix.com>
+Subject: [PATCH 2/3] tools/xen-cpuid: Rework the handling of dynamic featuresets
+Date: Fri, 10 Mar 2023 20:37:11 +0000
+Message-ID: <20230310203712.1431387-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230310203712.1431387-1-andrew.cooper3@citrix.com>
+References: <20230310203712.1431387-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-All to make it easier to do CPUID development work (which is fairness is
-mostly me).
+struct fsinfo is the vestigial remnant of an older internal design which
+didn't survive very long.
 
-Andrew Cooper (3):
-  tools/xen-cpuid: Support dash as a bitmap delimiter
-  tools/xen-cpuid: Rework the handling of dynamic featuresets
-  x86/sysctl: Retrofit XEN_SYSCTL_cpu_featureset_{pv,hvm}_max
+Simplify things by inlining get_featureset() and having a single memory
+allocation that gets reused.  This in turn changes featuresets[] to be a
+simple list of names, so rename it to fs_names[].
 
- tools/misc/xen-cpuid.c          | 60 +++++++++++++++------------------
- tools/ocaml/libs/xc/xenctrl.ml  |  8 ++++-
- tools/ocaml/libs/xc/xenctrl.mli |  8 ++++-
- xen/arch/x86/sysctl.c           |  4 ++-
- xen/include/public/sysctl.h     |  2 ++
- 5 files changed, 46 insertions(+), 36 deletions(-)
+No functional change.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/misc/xen-cpuid.c | 53 ++++++++++++++++++------------------------
+ 1 file changed, 22 insertions(+), 31 deletions(-)
+
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 361102d8cfb1..227df7352e2b 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -246,16 +246,11 @@ static const struct {
+ 
+ #define COL_ALIGN "18"
+ 
+-static struct fsinfo {
+-    const char *name;
+-    uint32_t len;
+-    uint32_t *fs;
+-} featuresets[] =
+-{
+-    [XEN_SYSCTL_cpu_featureset_host] = { "Host", 0, NULL },
+-    [XEN_SYSCTL_cpu_featureset_raw]  = { "Raw",  0, NULL },
+-    [XEN_SYSCTL_cpu_featureset_pv]   = { "PV",   0, NULL },
+-    [XEN_SYSCTL_cpu_featureset_hvm]  = { "HVM",  0, NULL },
++static const char *const fs_names[] = {
++    [XEN_SYSCTL_cpu_featureset_host] = "Host",
++    [XEN_SYSCTL_cpu_featureset_raw]  = "Raw",
++    [XEN_SYSCTL_cpu_featureset_pv]   = "PV",
++    [XEN_SYSCTL_cpu_featureset_hvm]  = "HVM",
+ };
+ 
+ static void dump_leaf(uint32_t leaf, const char *const *strs)
+@@ -302,22 +297,10 @@ static void decode_featureset(const uint32_t *features,
+     }
+ }
+ 
+-static int get_featureset(xc_interface *xch, unsigned int idx)
+-{
+-    struct fsinfo *f = &featuresets[idx];
+-
+-    f->len = nr_features;
+-    f->fs = calloc(nr_features, sizeof(*f->fs));
+-
+-    if ( !f->fs )
+-        err(1, "calloc(, featureset)");
+-
+-    return xc_get_cpu_featureset(xch, idx, &f->len, f->fs);
+-}
+-
+ static void dump_info(xc_interface *xch, bool detail)
+ {
+     unsigned int i;
++    uint32_t *fs;
+ 
+     printf("nr_features: %u\n", nr_features);
+ 
+@@ -348,26 +331,34 @@ static void dump_info(xc_interface *xch, bool detail)
+                       nr_features, "HVM Hap Default", detail);
+ 
+     printf("\nDynamic sets:\n");
+-    for ( i = 0; i < ARRAY_SIZE(featuresets); ++i )
++
++    fs = malloc(sizeof(*fs) * nr_features);
++    if ( !fs )
++        err(1, "malloc(featureset)");
++
++    for ( i = 0; i < ARRAY_SIZE(fs_names); ++i )
+     {
+-        if ( get_featureset(xch, i) )
++        uint32_t len = nr_features;
++        int ret;
++
++        memset(fs, 0, sizeof(*fs) * nr_features);
++
++        ret = xc_get_cpu_featureset(xch, i, &len, fs);
++        if ( ret )
+         {
+             if ( errno == EOPNOTSUPP )
+             {
+-                printf("%s featureset not supported by Xen\n",
+-                       featuresets[i].name);
++                printf("%s featureset not supported by Xen\n", fs_names[i]);
+                 continue;
+             }
+ 
+             err(1, "xc_get_featureset()");
+         }
+ 
+-        decode_featureset(featuresets[i].fs, featuresets[i].len,
+-                          featuresets[i].name, detail);
++        decode_featureset(fs, len, fs_names[i], detail);
+     }
+ 
+-    for ( i = 0; i < ARRAY_SIZE(featuresets); ++i )
+-        free(featuresets[i].fs);
++    free(fs);
+ }
+ 
+ static void print_policy(const char *name,
 -- 
 2.30.2
 
