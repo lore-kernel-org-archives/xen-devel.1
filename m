@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC349C6FA99
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Mar 2023 16:03:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508518.783242 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC43C64EC4
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Mar 2023 16:03:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.508517.783228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pafCo-0000ws-1O; Fri, 10 Mar 2023 16:02:54 +0000
+	id 1pafCl-0000We-NV; Fri, 10 Mar 2023 16:02:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508518.783242; Fri, 10 Mar 2023 16:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 508517.783228; Fri, 10 Mar 2023 16:02:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pafCn-0000wh-UM; Fri, 10 Mar 2023 16:02:53 +0000
-Received: by outflank-mailman (input) for mailman id 508518;
- Fri, 10 Mar 2023 16:02:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pafCl-0000WJ-K0; Fri, 10 Mar 2023 16:02:51 +0000
+Received: by outflank-mailman (input) for mailman id 508517;
+ Fri, 10 Mar 2023 16:02:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cIIN=7C=citrix.com=prvs=426914f36=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pafCm-0000Sh-E4
- for xen-devel@lists.xenproject.org; Fri, 10 Mar 2023 16:02:52 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 016eb0d4-bf5d-11ed-87f5-c1b5be75604c;
- Fri, 10 Mar 2023 17:02:51 +0100 (CET)
+ id 1pafCk-0000Sn-TN
+ for xen-devel@lists.xenproject.org; Fri, 10 Mar 2023 16:02:50 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ff5f31d6-bf5c-11ed-956e-85ef70e17bfa;
+ Fri, 10 Mar 2023 17:02:47 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,122 +38,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 016eb0d4-bf5d-11ed-87f5-c1b5be75604c
+X-Inumbo-ID: ff5f31d6-bf5c-11ed-956e-85ef70e17bfa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1678464171;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=hxDuuASBYhC3lgjPMhX5Vo2Fmk3Cotqg6TNgoc6+qJE=;
-  b=hqj1VhyzMJNJnj2MiY+0/h2gELVNvZXxCVNt+ltukyPzYEcn50ADuNC7
-   HJTMHXToBN1o+MKIb6tu2x0fC80dRTn26Hs6Xc/MAZ1fXpFs2CTNbb3bz
-   Xpd+ILgN3eHG8FkYiwHl4cVF/a3Ff4LMV1YyoEWHQzbiKkZVsB08mHNUM
-   0=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1678464167;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=edO+VCSyuvNaX8xW5UwZy89V5UgToFqB1ABOZapoULo=;
+  b=PSU7jXN/adP3AGppELTTdzJYj+ADkfe61YwopRzz/tj4cI0tIK154cov
+   2kQ4uGCM8pjTROtdEIL3M8nRyKu1A3giZXKXrsfDsV5MNR9n44ljTfvY3
+   PWzE1zlze9KEIMKeZCGagxpaHKsjLWtky7uMds9sH7ZmsXpyI7nRm8ZHx
+   s=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 100246595
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 99716942
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:A/v9qKlc1A0J88r+9W3JEK3o5gyXJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIbD2GOPqyMajCkL9ogaYTiphtS7Z7dmt41GQA5/CEzRSMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5QeGzRH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- eQJd20KcA7Eu+2/3+qbZtYznpojIMa+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQth/A/
- jiaoTmoX3n2MvSOwjbY9yuLl9XhgH64W4IWH4fhz+Bl1Qj7Kms7V0RNCArTTeOColG6c8JSL
- QoT4CVGhbg/8gmnQ8fwWzW8oWWYpVgMVtxICeo45QqRjK3O7G6xJEIJUzpAY9wOr9ItSHoh0
- Vrhoj/yLWUx6vvPEyvbr+rK62roYkD5MFPuewccXFRY5Mf95708hw2XbvpcT7brjtH6TGSYL
- y+xkAAygLAajMgu3qq9/Ezajz/EmqUlXjLZ9S2MADv7s1oRiJqNItXxtAOFtaoowJOxFAHpg
- ZQSpySJAAni57mpnTfFfugCFarBCx2tYGyF2g4H83XMGl2QF5+fkWJ4umwWyKRBaJxsldrVj
- Kj76GtsCGd7ZifCUEOOS9vZ5z4W5abhD8/5cfvfc8BDZJN8HCfeon4+Ph7Ojji2zRdw+U3aB
- Xt8WZzxZUv29Iw9lGbmLwvj+eVDKt8CKZP7GsmgkkXPPUu2b3+JU7YVWGZinchghJ5oVD79q
- o4FX+PTkkU3bQELSnWPmWLlBQxQfCdT6FGfg5A/S9Nv1SI/RTBwVKGMn+x6E2Gn9owM/tr1E
- riGchcw4DLCabfvc21mtlgLhGvTYKtC
-IronPort-HdrOrdr: A9a23:Gyi3hqN2wDsxecBcTs+jsMiBIKoaSvp037BL7SxMoHluGfBw+P
- rAoB1273HJYVQqOE3I6OrgBEDoexq1n/NICOIqTNSftWfdyQ6VBbAnwYz+wyDxXw3Sn9QtsZ
- uIqpIOauHNMQ==
+IronPort-Data: A9a23:Q3rvaa3IAIL7mTOWxvbD5cRxkn2cJEfYwER7XKvMYLTBsI5bpz0Pn
+ GcaC2uOPPuLYmX2f413YYzlp0MGsJSEmNNkGwVkpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliefTAOK6ULWeUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8tuTS+HuDgNyo4GlD5gdnPagR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfPTgV1
+ 84ycAE0clO52cWc/fWRT7Zgv5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiFJQKxxjJ+
+ jiuE2LRWBUVGIKjzCi561Gcut7Rx3/VXtsiC+jtnhJtqALKnTFCYPEMbnOkpdGph0j4XMhQQ
+ 2QE9yxroaUs+UiDStjmQwb+sHOCpgQbWddbD6s98g7l4oj+7hudB2MEZiVcc9Fgv8gzLQHGz
+ XfQwYmvX2Y29uTIFzTErOz8QS6O1TY9ETZZRx0uFTo8/5rZ/qYZs1XlS4lvKfvg5jHqIg3Yz
+ zePpSk4orwci88Xyqm2lWz6byKQSovhFVBsuFiONo6xxkYgPdP+OdT0gbTOxawYRLt1WGVtq
+ 5TtdyK2yOkVRa+AmyWWKAnmNOH4vq3VWNEwbLMGInXAy9hP0yT+FWyzyGskTKuMDirjUW6BX
+ aMrkVkNjKK/xVPzBUONX6q/Ct4x0Y/rHsn/W/bfY7JmO8YuJFTXonA2PhPPgwgBdXTAdollZ
+ P+mnTuEVy5GWcyLMhLsLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaopUQtaTOzghQCxPrc+m39q
+ o8PX/ZmPj0DCIUSlAGLq99MRb3LRFBnba3LRzt/L7PSc1U4RT9+UJc8A9oJIuRYokicrc+Ql
+ lnVZ6OS4AGXaaHvQelSVk1eVQ==
+IronPort-HdrOrdr: A9a23:LQPe2qpQgCRx5xJiw108SIIaV5oleYIsimQD101hICG9E/b1qy
+ nKpp8mPHDP5wr5NEtPpTnjAsm9qALnlKKdiLN5Vd3OYOCMghrKEGgN1/qG/xTQXwH46+5Bxe
+ NBXsFFebnN5IFB/KTH3DU=
 X-IronPort-AV: E=Sophos;i="5.98,250,1673931600"; 
-   d="scan'208";a="100246595"
+   d="scan'208";a="99716942"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 2/2] x86/spec-ctrl: Enumerations for DDP controls
-Date: Fri, 10 Mar 2023 16:02:38 +0000
-Message-ID: <20230310160238.1321765-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/2] x86: Misc enumeration improvements
+Date: Fri, 10 Mar 2023 16:02:36 +0000
+Message-ID: <20230310160238.1321765-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230310160238.1321765-1-andrew.cooper3@citrix.com>
-References: <20230310160238.1321765-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/data-dependent-prefetcher.html
+Patch 1 noticed because xen-cpuid currently says:
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- tools/libs/light/libxl_cpuid.c              | 1 +
- tools/misc/xen-cpuid.c                      | 2 +-
+  [13] 0x00000007:2.edx   intel-psfd <1> <2> <4> mcdt-no
+
+when dumping the static known-feature bitmap.  In some copious free time, we
+should have a unit test that catches this.
+
+Patch 2 when double checking that the enumeration hole was in fact correct.
+
+We should offer DDP-CTRL to guests, but I'm not sure when it is appearing in
+hardware, and it's not massively urgent - the DDP behaviour is mostly sane
+(having been designed in a post-spectre world) and this is a just-in-case
+control.
+
+Andrew Cooper (2):
+  x86/spec-ctrl: Add BHI controls to userspace components
+  x86/spec-ctrl: Enumerations for DDP controls
+
+ tools/libs/light/libxl_cpuid.c              | 4 ++++
+ tools/misc/xen-cpuid.c                      | 6 +++---
  xen/arch/x86/include/asm/msr-index.h        | 1 +
  xen/include/public/arch-x86/cpufeatureset.h | 1 +
- 4 files changed, 4 insertions(+), 1 deletion(-)
+ 4 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
-index 1d4e8a6b0067..968635981086 100644
---- a/tools/libs/light/libxl_cpuid.c
-+++ b/tools/libs/light/libxl_cpuid.c
-@@ -242,6 +242,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
-         {"intel-psfd",   0x00000007,  2, CPUID_REG_EDX,  0,  1},
-         {"ipred-ctrl",   0x00000007,  2, CPUID_REG_EDX,  1,  1},
-         {"rrsba-ctrl",   0x00000007,  2, CPUID_REG_EDX,  2,  1},
-+        {"ddp-ctrl",     0x00000007,  2, CPUID_REG_EDX,  3,  1},
-         {"bhi-ctrl",     0x00000007,  2, CPUID_REG_EDX,  4,  1},
-         {"mcdt-no",      0x00000007,  2, CPUID_REG_EDX,  5,  1},
- 
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index 4f4261f4aa95..868054ab96a6 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -216,7 +216,7 @@ static const char *const str_7d1[32] =
- static const char *const str_7d2[32] =
- {
-     [ 0] = "intel-psfd",    [ 1] = "ipred-ctrl",
--    [ 2] = "rrsba-ctrl",
-+    [ 2] = "rrsba-ctrl",    [ 3] = "ddp-ctrl",
-     [ 4] = "bhi-ctrl",      [ 5] = "mcdt-no",
- };
- 
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 7615d8087f46..4e90b361eb08 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -41,6 +41,7 @@
- #define  SPEC_CTRL_RRSBA_DIS_U              (_AC(1, ULL) <<  5)
- #define  SPEC_CTRL_RRSBA_DIS_S              (_AC(1, ULL) <<  6)
- #define  SPEC_CTRL_PSFD                     (_AC(1, ULL) <<  7)
-+#define  SPEC_CTRL_DDPU_D                   (_AC(1, ULL) <<  8)
- #define  SPEC_CTRL_BHI_DIS_S                (_AC(1, ULL) << 10)
- 
- #define MSR_PRED_CMD                        0x00000049
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 336744b47119..4976a27690af 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -295,6 +295,7 @@ XEN_CPUFEATURE(INTEL_PSFD,         13*32+ 0) /*A  MSR_SPEC_CTRL.PSFD */
- XEN_CPUFEATURE(IPRED_CTRL,         13*32+ 1) /*   MSR_SPEC_CTRL.IPRED_DIS_* */
- XEN_CPUFEATURE(RRSBA_CTRL,         13*32+ 2) /*   MSR_SPEC_CTRL.RRSBA_DIS_* */
- XEN_CPUFEATURE(BHI_CTRL,           13*32+ 4) /*   MSR_SPEC_CTRL.BHI_DIS_S */
-+XEN_CPUFEATURE(DDP_CTRL,           13*32+ 3) /*   MSR_SPEC_CTRL.DDPU_U */
- XEN_CPUFEATURE(MCDT_NO,            13*32+ 5) /*A  MCDT_NO */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
 -- 
 2.30.2
 
