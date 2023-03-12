@@ -4,49 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE92C6FA99
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC079C7618E
 	for <xen-devel@archiver.kernel.org>; Sun, 12 Mar 2023 12:02:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508985.784060 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.508987.784076 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pbKPN-0003ML-84; Sun, 12 Mar 2023 12:02:37 +0000
+	id 1pbKPO-0003nL-IJ; Sun, 12 Mar 2023 12:02:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508985.784060; Sun, 12 Mar 2023 12:02:37 +0000
+Received: by outflank-mailman (output) from mailman id 508987.784076; Sun, 12 Mar 2023 12:02:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pbKPN-0003LQ-1C; Sun, 12 Mar 2023 12:02:37 +0000
-Received: by outflank-mailman (input) for mailman id 508985;
- Sun, 12 Mar 2023 12:02:36 +0000
+	id 1pbKPO-0003kE-Bq; Sun, 12 Mar 2023 12:02:38 +0000
+Received: by outflank-mailman (input) for mailman id 508987;
+ Sun, 12 Mar 2023 12:02:37 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=TSl9=7E=amd.com=Ray.Huang@srs-se1.protection.inumbo.net>)
- id 1pbKPL-0003B1-VY
+ (envelope-from <SRS0=y+T3=7E=gmail.com=shentey@srs-se1.protection.inumbo.net>)
+ id 1pbKPM-0003B1-Ql
  for xen-devel@lists.xenproject.org; Sun, 12 Mar 2023 12:02:36 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20615.outbound.protection.outlook.com
- [2a01:111:f400:fe59::615])
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [2a00:1450:4864:20::52c])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c51b46d9-c0cd-11ed-956e-85ef70e17bfa;
- Sun, 12 Mar 2023 13:02:34 +0100 (CET)
-Received: from MWH0EPF00056D0B.namprd21.prod.outlook.com
- (2603:10b6:30f:fff2:0:1:0:b) by IA1PR12MB6484.namprd12.prod.outlook.com
- (2603:10b6:208:3a7::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.27; Sun, 12 Mar
- 2023 12:02:29 +0000
-Received: from CO1NAM11FT106.eop-nam11.prod.protection.outlook.com
- (2a01:111:f400:7eab::208) by MWH0EPF00056D0B.outlook.office365.com
- (2603:1036:d20::b) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.23 via Frontend
- Transport; Sun, 12 Mar 2023 12:02:28 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT106.mail.protection.outlook.com (10.13.175.44) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6178.24 via Frontend Transport; Sun, 12 Mar 2023 12:02:28 +0000
-Received: from hr-amd.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Sun, 12 Mar
- 2023 07:02:23 -0500
+ id c57c7506-c0cd-11ed-956e-85ef70e17bfa;
+ Sun, 12 Mar 2023 13:02:33 +0100 (CET)
+Received: by mail-ed1-x52c.google.com with SMTP id cn21so7937347edb.0
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Mar 2023 05:02:33 -0700 (PDT)
+Received: from Provence.localdomain
+ (dynamic-078-054-022-093.78.54.pool.telefonica.de. [78.54.22.93])
+ by smtp.gmail.com with ESMTPSA id
+ xj9-20020a170906db0900b009231714b3d4sm1293745ejb.151.2023.03.12.05.02.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Mar 2023 05:02:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,112 +47,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c51b46d9-c0cd-11ed-956e-85ef70e17bfa
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mLcG1DCf0wfu/lrin0oRaqN6QBNtywb+IplYk9O4zik25QQgD30bnT5J4gjZWzvYBeLG49mPrz1LTj0f0RQa84KkzSfkB+tSel4fFySSbClAr0nebZ6zoPY//DsoOU5Nv7LnrE+tcAH6wqq5rn+rHBZsjLfXpS8uR7EZ0/NnvccV2sqsFwOt0cY1IwXZUaB3qwLUvLGHbuWEU0DJNEDCcyxLt1o9uaECxJZuFXizlCHc9UtKQBwxPNVDcM+NtEOza92oxHxW1YGrqMA6bGjciChqBrZ/iFp4+osnHEpZ3f1mrawA9TwZzg31/LcvgGObBePO2mTTtwtqoVCtRPCOKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vERtBQZO4btnLGfti3VSOefpivXiYTBUA9KHiM91onM=;
- b=mRUHowUkoibA+y3yuIucX9n/NuJ61VNiLm0wYNyJR2ZstnGN+xH/115+zj7Gh2v6/kZIWpMIM5osniFHhpBYjrLs+/JHaUR2oRtrE8K/wo6o8lLBqYthnTSXB2q6fxxocrVAPPy+F9ezhPml37Ct/KC5Ht2xupOUy77TjwR0jvosLlty9FYbm3ByTPNJ3sYNOS9RYG7O45WB0GSrG1aEOFlBoExDrYkES4qOgQ3YyIJrIWjgVMIMBwruQCqTVqMQb6RCO8jdQ+ix86Lcqb6lIjOgVrz0li+U/KmzINg4110ROG9cfMT36A8Npp7CkZRteWCKRIwOGuTciE8atv8SCw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vERtBQZO4btnLGfti3VSOefpivXiYTBUA9KHiM91onM=;
- b=N1lgjq+qSA9Yor7xsm25sk5Z8A/clJPGoqZlmFyeipAjMwDXYwSn801X6o4aPVbaOJktX2/YmshQiRYrVztTtsqV2awjhsDfuAiktu4KAOjS9N9S565afWn8i0rN/ual76G2k2b74WsocP+TLTZehvc/OxSLsd4l5YgiawBmhUg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Huang Rui <ray.huang@amd.com>
-To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Oleksandr Tyshchenko
-	<oleksandr_tyshchenko@epam.com>, Boris Ostrovsky
-	<boris.ostrovsky@oracle.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, <xen-devel@lists.xenproject.org>,
-	<linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-	<amd-gfx@lists.freedesktop.org>
-CC: Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "Stewart
- Hildebrand" <Stewart.Hildebrand@amd.com>, Xenia Ragiadakou
-	<burzalodowa@gmail.com>, Honglei Huang <honglei1.huang@amd.com>, Julia Zhang
-	<julia.zhang@amd.com>, Chen Jiqian <Jiqian.Chen@amd.com>, Huang Rui
-	<ray.huang@amd.com>
-Subject: [RFC PATCH 2/5] xen/grants: update initialization order of xen grant table
-Date: Sun, 12 Mar 2023 20:01:54 +0800
-Message-ID: <20230312120157.452859-3-ray.huang@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230312120157.452859-1-ray.huang@amd.com>
-References: <20230312120157.452859-1-ray.huang@amd.com>
+X-Inumbo-ID: c57c7506-c0cd-11ed-956e-85ef70e17bfa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678622553;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Zx4WQ0rpWKtdmR92czSmYxtVfc9kMMG+Fa09pszRXII=;
+        b=Kq0+PWIOx/dVZ15PrMf151vUjYkB6uw1jPdTgLlXYfQXbhvPC3e617ZPRfDQPm0p52
+         D7BWiQFSoGlRTF9l4bCMsUCYx6VRorBIRy7q9oP5dTNrPeZB7QETmuW6FwDPYWAvNJb9
+         oofS6MVVF9rjv7aBcUTfqOap5T6OHG3k8g58VIiS8sI1Y3/jT9pxCb0zV7FtIATh187L
+         Bxog9AQv8s+toelMiZoQA4pkJ4D/gBJtBDJj6h7jmlccLMZB7WiNHLlNKBooCckMrGuo
+         prxzTTi/98U/zrmf+c+sFw+Oc3v6PNtXvWK0M9wNPocVYkbhNAXbmddghY/34R+IxilH
+         HTQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678622553;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Zx4WQ0rpWKtdmR92czSmYxtVfc9kMMG+Fa09pszRXII=;
+        b=3sWmejz6xi7kIkdsUhOpa7P5aXtRb7MYoJSka9WkY6JN+fp0YMIj46mUv8TcIlySMk
+         RsU2VfeTYf2IbOD06BgsAIWJNyHwM4++Qg+WGYVuLuhJBKmjEPUTeifK0Gcam/xJaekR
+         fOQXGLgaaGjvaiWVRzooifW0IDA3/dE3Gi5oAByW0VGlIZ6h91Gh+ewYC8HoUDoyA3I0
+         Yg7r99taFoME9wj0l7HNaZsC78SPjfopawMRCjC4fv/OcnwxrxFxZiPZnCl54dsQTFMr
+         1OT55JdFq7yA4Nh4EU+SOVCSE86bVAKsF0YXb88fFTSRTx/OPcSvwBeJQj5Hg2CwQ6/S
+         SjKA==
+X-Gm-Message-State: AO0yUKWq8Gj7hH3GTycRZfzSHCsG5tDu3tP1UR6aDkI69HehcQUrcUsx
+	klo0Tyxs1ZcQ+bctSTORbEo=
+X-Google-Smtp-Source: AK7set/yTkaiC/AD/f/M0Ng0EK/oMU6zvGaSDuWVsoHBKyUNqdpnuBumcPec5u1y/AC8bZR4Zq7YGQ==
+X-Received: by 2002:a17:907:2beb:b0:921:5cce:6599 with SMTP id gv43-20020a1709072beb00b009215cce6599mr3576266ejc.41.1678622552832;
+        Sun, 12 Mar 2023 05:02:32 -0700 (PDT)
+From: Bernhard Beschow <shentey@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Paul Durrant <paul@xen.org>,
+	xen-devel@lists.xenproject.org,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Chuck Zmudzinski <brchuckz@aol.com>,
+	Bernhard Beschow <shentey@gmail.com>
+Subject: [PATCH v3 0/6] Resolve TYPE_PIIX3_XEN_DEVICE
+Date: Sun, 12 Mar 2023 13:02:15 +0100
+Message-Id: <20230312120221.99183-1-shentey@gmail.com>
+X-Mailer: git-send-email 2.39.2
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT106:EE_|IA1PR12MB6484:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41a5f9d5-9c4d-4d38-5abb-08db22f1a6cb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	aMux3Bv4HXWKFfc1LCihWGJ726Lphqqk3roevqlcSWm466fAZx9I8APnJQi2dTwz2Y3WAj21pkO9JQwG/1kMmON8R3ybiXGy12FD98jNT3WdXXzobMHHoaxWBcE8O6WjpS0HKPkrzVkmNKvcV/9X2fcQ7tj9q99Cc8INvQJmWykQx6myPm/ylU8H40TAuqS+3GI0lEostDtgh6akAk/iUR3sQohLV6CYIRRx4YH3PaaTFR+YXfCOS9nRazoWQTxmEEmiL25+BcKRCkDfPHhl+NqBVLyvdl41Emq8WBobOZeSrn31xlucmNtQu//wkYXI40qtr/+iX/K/OtbSL6TUCcu75QEodfj+dZ9JIJ/5y3Rql8lrM9ZK4ErE5pQ2Zq2tinsrTcPXtxxSimckcH1mIh6GHRPfsr7B49P68rg1ksIbaLUxmr3iqbhIWVSV8k1EQezSDTa8qqGxReJy2M5wCiGzpH8IxUxOvbZV10PNjNPeUjKxnahOc86QNSwaNraIudjZyNFfnCXBNtVAqC+JDUEtjaRpFCHJ5PimMhPX1UlFSzNd+lLAQjH/ucRHDis4kHJEMhT3ztf6cOCpxg2CgJ+Tek4z7EFky27/MsjhxO9kKWkf5wk2GRcQlFwo6xnHuARBu1/BH/Yxc96IZuiuQyOPfFjhz1D4SkrZv3WJDR/FoYn7ac/CX05AhawvD0ygvPW7EQwLMTw9zyxyTxv0krdhj74w1fZe3ZoAXF/KKls=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(346002)(396003)(376002)(136003)(451199018)(46966006)(40470700004)(36840700001)(7696005)(426003)(478600001)(83380400001)(36860700001)(6666004)(82310400005)(36756003)(356005)(82740400003)(110136005)(47076005)(54906003)(1076003)(336012)(316002)(186003)(26005)(16526019)(7416002)(86362001)(40480700001)(81166007)(40460700003)(2906002)(2616005)(70206006)(41300700001)(8676002)(8936002)(4326008)(5660300002)(70586007)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2023 12:02:28.2302
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41a5f9d5-9c4d-4d38-5abb-08db22f1a6cb
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT106.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6484
+Content-Transfer-Encoding: quoted-printable
 
-The xen grant table will be initialied before parsing the PCI resources,
-so xen_alloc_unpopulated_pages() ends up using a range from the PCI
-window because Linux hasn't parsed the PCI information yet.
-
-So modify the initialization order to make sure the real PCI resources
-are parsed before.
-
-Signed-off-by: Huang Rui <ray.huang@amd.com>
----
- arch/x86/xen/grant-table.c | 2 +-
- drivers/xen/grant-table.c  | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/x86/xen/grant-table.c b/arch/x86/xen/grant-table.c
-index 1e681bf62561..64a04d1e70f5 100644
---- a/arch/x86/xen/grant-table.c
-+++ b/arch/x86/xen/grant-table.c
-@@ -165,5 +165,5 @@ static int __init xen_pvh_gnttab_setup(void)
- }
- /* Call it _before_ __gnttab_init as we need to initialize the
-  * xen_auto_xlat_grant_frames first. */
--core_initcall(xen_pvh_gnttab_setup);
-+fs_initcall_sync(xen_pvh_gnttab_setup);
- #endif
-diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
-index e1ec725c2819..6382112f3473 100644
---- a/drivers/xen/grant-table.c
-+++ b/drivers/xen/grant-table.c
-@@ -1680,4 +1680,4 @@ static int __gnttab_init(void)
- }
- /* Starts after core_initcall so that xen_pvh_gnttab_setup can be called
-  * beforehand to initialize xen_auto_xlat_grant_frames. */
--core_initcall_sync(__gnttab_init);
-+rootfs_initcall(__gnttab_init);
--- 
-2.25.1
-
+There is currently a dedicated PIIX3 device model for use under Xen. By reu=
+sing=0D
+existing PCI API during initialization this device model can be eliminated =
+and=0D
+the plain PIIX3 device model can be used instead.=0D
+=0D
+Resolving TYPE_PIIX3_XEN_DEVICE results in less code while also making Xen=
+=0D
+agnostic towards the precise south bridge being used in the PC machine. The=
+=0D
+latter might become particularily interesting once PIIX4 becomes usable in =
+the=0D
+PC machine, avoiding the "Frankenstein" use of PIIX4_ACPI in PIIX3.=0D
+=0D
+Testing done:=0D
+- `make check`=0D
+- `make check-avocado`=0D
+- Run `xl create` with the following config:=0D
+    name =3D "Manjaro"=0D
+    type =3D 'hvm'=0D
+    memory =3D 1536=0D
+    apic =3D 1=0D
+    usb =3D 1=0D
+    disk =3D [ "file:manjaro-kde-21.2.6-220416-linux515.iso,hdc:cdrom,r" ]=
+=0D
+    device_model_override =3D "/usr/bin/qemu-system-x86_64"=0D
+    vga =3D "stdvga"=0D
+    sdl =3D 1=0D
+- `qemu-system-x86_64 -M pc -m 2G -cpu host \=0D
+    -accel kvm,xen-version=3D0x4000a,kernel-irqchip=3Dsplit \=0D
+    -cdrom manjaro-kde-21.2.6-220416-linux515.iso`=0D
+- `qemu-system-x86_64 -M pc -m 2G -cpu host -accel kvm \=0D
+    -cdrom manjaro-kde-21.2.6-220416-linux515.iso`=0D
+=0D
+v3:=0D
+- Rebase onto master=0D
+=0D
+v2:=0D
+- xen_piix3_set_irq() is already generic. Just rename it. (Chuck)=0D
+=0D
+Tested-by: Chuck Zmudzinski <brchuckz@aol.com>=0D
+=0D
+Bernhard Beschow (6):=0D
+  include/hw/xen/xen: Rename xen_piix3_set_irq() to xen_intx_set_irq()=0D
+  hw/isa/piix3: Reuse piix3_realize() in piix3_xen_realize()=0D
+  hw/isa/piix3: Wire up Xen PCI IRQ handling outside of PIIX3=0D
+  hw/isa/piix3: Avoid Xen-specific variant of piix3_write_config()=0D
+  hw/isa/piix3: Resolve redundant k->config_write assignments=0D
+  hw/isa/piix3: Resolve redundant TYPE_PIIX3_XEN_DEVICE=0D
+=0D
+ include/hw/southbridge/piix.h |  1 -=0D
+ include/hw/xen/xen.h          |  2 +-=0D
+ hw/i386/pc_piix.c             | 36 +++++++++++++++++++--=0D
+ hw/i386/xen/xen-hvm.c         |  2 +-=0D
+ hw/isa/piix3.c                | 60 +----------------------------------=0D
+ stubs/xen-hw-stub.c           |  2 +-=0D
+ 6 files changed, 37 insertions(+), 66 deletions(-)=0D
+=0D
+-- =0D
+2.39.2=0D
+=0D
 
