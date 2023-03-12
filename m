@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCE5CC6FA99
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC028C74A5B
 	for <xen-devel@archiver.kernel.org>; Sun, 12 Mar 2023 09:29:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.508937.783965 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.508925.783925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pbI0j-0006zD-5h; Sun, 12 Mar 2023 09:29:01 +0000
+	id 1pbI0g-00062S-5i; Sun, 12 Mar 2023 09:28:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 508937.783965; Sun, 12 Mar 2023 09:29:01 +0000
+Received: by outflank-mailman (output) from mailman id 508925.783925; Sun, 12 Mar 2023 09:28:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pbI0i-0006xf-Tx; Sun, 12 Mar 2023 09:29:00 +0000
-Received: by outflank-mailman (input) for mailman id 508937;
- Sun, 12 Mar 2023 09:28:59 +0000
+	id 1pbI0f-00062J-Vx; Sun, 12 Mar 2023 09:28:57 +0000
+Received: by outflank-mailman (input) for mailman id 508925;
+ Sun, 12 Mar 2023 09:28:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=TSl9=7E=amd.com=Ray.Huang@srs-se1.protection.inumbo.net>)
- id 1pbHw9-00008O-98
- for xen-devel@lists.xenproject.org; Sun, 12 Mar 2023 09:24:17 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20606.outbound.protection.outlook.com
- [2a01:111:f400:7ea9::606])
+ id 1pbHwZ-00008O-Mg
+ for xen-devel@lists.xenproject.org; Sun, 12 Mar 2023 09:24:43 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20609.outbound.protection.outlook.com
+ [2a01:111:f400:7e8c::609])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7465656-c0b7-11ed-87f5-c1b5be75604c;
- Sun, 12 Mar 2023 10:24:15 +0100 (CET)
-Received: from MW4PR04CA0194.namprd04.prod.outlook.com (2603:10b6:303:86::19)
- by MW4PR12MB6730.namprd12.prod.outlook.com (2603:10b6:303:1ec::7)
+ id b7d293e8-c0b7-11ed-87f5-c1b5be75604c;
+ Sun, 12 Mar 2023 10:24:43 +0100 (CET)
+Received: from MW4PR03CA0223.namprd03.prod.outlook.com (2603:10b6:303:b9::18)
+ by PH8PR12MB6962.namprd12.prod.outlook.com (2603:10b6:510:1bd::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.22; Sun, 12 Mar
- 2023 09:24:11 +0000
-Received: from CO1NAM11FT081.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:86:cafe::9f) by MW4PR04CA0194.outlook.office365.com
- (2603:10b6:303:86::19) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 09:24:38 +0000
+Received: from CO1NAM11FT088.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:b9:cafe::dc) by MW4PR03CA0223.outlook.office365.com
+ (2603:10b6:303:b9::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.24 via Frontend
- Transport; Sun, 12 Mar 2023 09:24:11 +0000
+ Transport; Sun, 12 Mar 2023 09:24:38 +0000
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1NAM11FT081.mail.protection.outlook.com (10.13.174.80) with Microsoft SMTP
+ CO1NAM11FT088.mail.protection.outlook.com (10.13.175.131) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6178.24 via Frontend Transport; Sun, 12 Mar 2023 09:24:10 +0000
+ 15.20.6178.24 via Frontend Transport; Sun, 12 Mar 2023 09:24:38 +0000
 Received: from hr-amd.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Sun, 12 Mar
- 2023 04:24:05 -0500
+ 2023 04:24:33 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,22 +58,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7465656-c0b7-11ed-87f5-c1b5be75604c
+X-Inumbo-ID: b7d293e8-c0b7-11ed-87f5-c1b5be75604c
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i0/tgazRt6cMazx5y/yh3U7aJCK0Nh1WthmW1Px470fGF+LKs/BgGl60c92fsgfTktqWfEh5MFqERNCzLifSqTUA4qmNechJMPbrtRVDWFMaTwBZ5OvtZgiDkPVKHz3LrYnFLowv2oFj1y9akhr+qmJdN1Rhy7ctYVNcGyNjSwcJ1a1zgeirLI0bCeouoyn3uMQu8ibjv2Au0fiqQRxVFXcfzPhPQlIPVWUB2GzlixiZvy6wi2W1T9KM9EkC+ZSbRXGk+RyxvpB4NORR2shTrHVGqNIbiKIe2ssxPhG54LJZdQGzmqhwAfxzccG5fysteIsWBaLrBoX/EBwi3sMjfQ==
+ b=T4BVFOQz+1oCDcCfyYMlezy6i2yl9caGQB3tdS1APBxUhcDx6VppFlOqsjHHWuPphpqVY6KxVC20nUZD7cC9SUMyG+hs/cGz9pZvKjvdi+SKMSXeJQNZwmisa6HzzGVKaN9/j6b7E/WRT/dZOQWih3vwYvhWSUd/RSUJ/ZwgHWo3q8YBE+daOnK83BTbpoFGnPy+rKQ9EugVBu0fA5UmnyUtOPiwkWxkFpYeFFW5/iw6ZfJcavuRC/WdIS6CdTTNLog8lBzN8W/yIkYB1rO6Dk/t/fjILgXsQswmf0NzaT9a15xglx9fX2Np/GGSyUBxInMQb8mOJsey15kTAJquVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dj6lfkvOPBIVxai9KbL/xN6ZbDyalhOcTyL8nw2E/7U=;
- b=hDjsICdB0D+gVkBsJBtVrO2xMVkm7ErnjgJ9hW/fn2X66dTrSI7AuQ/P9CU+09qzUWEetnFC7rW17urYo0KLV4PY0vJHSU1/3ybHHEro6YlQKH/MTmozyw57gq+KyABPpUw4E736Uc/BI1iGpYZR9/AGlH+HZsQeFLr24swTtOmy7kRTseIsiSzYKa1u02BRpnKpxcJA7y4mH+60rbce9cxOAlBLESVBxpl79SOrJELbrui5eCV3cHiswQvRPAR7uAE9kXpplfs1T4qnxGvzpAjgcrIr3uMJf8ShE5AIfSkcKlPJElH87wvCy49mnBwS3LToK0X2Uw5Wy0Cu4MLvLQ==
+ bh=fdXw/VYVPUbUxiMUH7EPpY7XT11q7Fr3BSwkuljjJuA=;
+ b=gbGLTr2Y/ydr+7M3dIrtNo/8j7MAQPZ5wZdaDNyQ29VmFyByFbEhbOO5cjdKph21M/jxXA1tRNvA0NsnF9eEGBTdaCG9nF+M5Jg7JDbWU5sbh0btsYobFZHW+q7Ma2Rvtn9n89Ttu1pEgVZzS9AH6N0BvmdTdLiTqZ7TXyz4IfZPRdzlhLfW1/49YpNPct6bEpDxeH2RSTjA6/3VXwqZOpG3RLfejtRtp0mNipfGiMNVAdWICVry95jzmGV4uqv1mIMzwadnHzSAKQt6s4T7HDwyqe4RlJrRDfXzvjoIbVlxTiKizY4npfPYBlqt6BgIR/Ob84ws0SG1CuRhV2zSSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dj6lfkvOPBIVxai9KbL/xN6ZbDyalhOcTyL8nw2E/7U=;
- b=NsxXfEKKS6p/oUmMUpeuyfy09Fis+ZTwtxSC2sGMEOgbzMiD4HPJkn3Un1WGzeLlQZHXYwYtdAxYfAQjzHA7pppoDTzzzqH0pH8SbfU3nUrjfXyIRCira8upicBFJXxzeWdXaaJvpYgL3M5t/QEB6SagAjnoUnES7yYgkd9S+3A=
+ bh=fdXw/VYVPUbUxiMUH7EPpY7XT11q7Fr3BSwkuljjJuA=;
+ b=Rw8nreq6E3Cb6pVme74+5TirhnlQ0LIyOap+SeNh7VHSqV08OBRo/N05KHQ6fy4z4UDZaQZuzEn5Skrrj9leBu85pf7b4Vv9G+OXf1O70qImCOwKqDuDaUEUYTEd0D4VyJznIV0je4sk2sBLfM26SClxNjYaatW293eivQS92nI=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -94,9 +94,9 @@ CC: Alex Deucher <alexander.deucher@amd.com>,
 	<burzalodowa@gmail.com>, Honglei Huang <honglei1.huang@amd.com>, Julia Zhang
 	<julia.zhang@amd.com>, Chen Jiqian <Jiqian.Chen@amd.com>, Huang Rui
 	<ray.huang@amd.com>
-Subject: [RFC QEMU PATCH 12/18] softmmu: Fix the size to map cache with xen for host virtual address
-Date: Sun, 12 Mar 2023 17:22:38 +0800
-Message-ID: <20230312092244.451465-13-ray.huang@amd.com>
+Subject: [RFC QEMU PATCH 18/18] xen: translate irq of host pci device to gsi
+Date: Sun, 12 Mar 2023 17:22:44 +0800
+Message-ID: <20230312092244.451465-19-ray.huang@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230312092244.451465-1-ray.huang@amd.com>
 References: <20230312092244.451465-1-ray.huang@amd.com>
@@ -108,72 +108,58 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT081:EE_|MW4PR12MB6730:EE_
-X-MS-Office365-Filtering-Correlation-Id: dee7682c-ed0d-4f3d-332d-08db22db89eb
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT088:EE_|PH8PR12MB6962:EE_
+X-MS-Office365-Filtering-Correlation-Id: cc673529-2423-4135-5ed6-08db22db9a78
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	m1jlEmupMXRV44cn+86FabSTWSRL5yxQFrDFzXb/jh/UNvcq9PBWDse1XBQ6W5mRDN1nQZNylwg66VM3N8Zmh+nklXnsbjC4dJ0p4HsCmJ3NSrIXD9HSvu75IJX0qoAQgp+t9WVVkmi+ctafdo5ws1RPggDjT+e43B28+M86RpXG+cWTDFlZF9rvZF6Kin1TAjxwAciXOtLHQ7OK5tnplJYmV0fMw+0Is32Qt15bxvAtsRH0Udhcm1IBfWM+Z8o+avg8XbvxGiuKVzPGt9JhUVdYa59QcihDmJ+6/mrpdTbK3wQL0UGmVaqq8dQsswcrekbbw4Pf4RZ3yRY2FbeNVgs+42Z39JX7+Rw2s7xxacaJpqgQ3Zx6bqXSAfx1y84IfaQphd5q5n/xsqYv9AMs054FA4gzRSZ0Qq4Kj9m5zeTgANs0yF0BQmfRPX4jrQqOcsTF4VJhgDIiT6LV1O4WkfiKq9F80AhJZviZinKbBR2qesHoF5lxQ0eCwyTqQFZoOoCwX+a9x85KS32CA+241Qs1F52Sibnv1xEMltsnD9PSouUqYludEAMYh3fqNmceW8u69lQyiCy8ytXPWQgIWCbBjVuzxE6mnChuWFmVa37YT05eYIqG307GzMoTIXLRiS3+bRT0tzMv6/K9Mya47iPOhKn5dhm95LK3R11zsfANtsjnrDEc8aWR8AfHadTCd5zINSUKwmar06lbGeW69rlS5NoZuI6q7WH8rg7IavjLf2NISPmTU/8uXy67ovhi
+	XJOZrVicCW17z/AcoTuCNDsCWVZBmtGSfp5oLSWAjg/A86NQilOIu5bUUyq7g+Rf3jewmAMNSsj6E4+CmvMZsx5lHjGA2fAVgJBOfelFqEVUEt23AskDYZdCcnQArJKTADn/3zR8htkA1g0sHE8QOmZrmTmhHBjFvccPC5v3NXr+I3oljE80f9J6pS4r3NnrGsMakxShAAa+crZ0RZLQfB6It8XX2IknYhPMoQSHyCCVxvz1MldJwELllb5RXr/gDDkt591Yr/6+uHa0udrrFZPC0KluHRA1a3RwyJMFpK8CI1jniIIuEhtJqYx4HM8zSQB5uBBJlH2o4r9xMlrzitg4JayEU1IbX3K+2t/4CmgO7hBjBiIXfVJGZJl7UZ6Wl0/DindZZN7vZpRWVUIw//4I88kwWpWYuh8/Bq0Owtn44gEcoxshJpoZ//gg4tc8T6R5Wbmc4bX2NxstjevyC90Jvri1FW04av5MUoXLxDG7RnGIlTR64aiRou4UXdqaaA18DDjzDbojQ8NsWFNEkxkeKRKZIbul/tATRT80Qm3BeIzAe0D4JY0xPrlOUktUbcv+03DlteyAqC/zHjPY1XL3T72DAl0PaLv+bjFGKsPDY59L5MkXzXxWgawlCcMeaw9sT5ZpYzt9MVHUflEHB147Z9mptw8GhicWYzkP+IMlhsfmhkd/SuIt6Ugng8cmCb/lbq8F/a71X3Vh6OAX5s6qn/qH1ZL/3PBdQYiL/q9EAkBnC0DZikWWfAUtM8yj
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(346002)(376002)(39860400002)(396003)(136003)(451199018)(46966006)(36840700001)(40470700004)(82310400005)(36860700001)(82740400003)(6666004)(83380400001)(426003)(47076005)(36756003)(478600001)(54906003)(110136005)(40480700001)(356005)(921005)(316002)(336012)(81166007)(2616005)(40460700003)(186003)(7696005)(26005)(16526019)(1076003)(5660300002)(2906002)(4326008)(8936002)(8676002)(41300700001)(70206006)(70586007)(7416002)(86362001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(396003)(346002)(39860400002)(376002)(451199018)(40470700004)(36840700001)(46966006)(36860700001)(6666004)(7416002)(5660300002)(8936002)(70586007)(70206006)(4326008)(82310400005)(7696005)(40480700001)(8676002)(83380400001)(54906003)(110136005)(36756003)(316002)(478600001)(426003)(47076005)(41300700001)(40460700003)(336012)(86362001)(82740400003)(2906002)(356005)(921005)(186003)(16526019)(81166007)(1076003)(26005)(4744005)(2616005)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2023 09:24:10.8569
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2023 09:24:38.6256
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dee7682c-ed0d-4f3d-332d-08db22db89eb
+X-MS-Exchange-CrossTenant-Network-Message-Id: cc673529-2423-4135-5ed6-08db22db9a78
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT081.eop-nam11.prod.protection.outlook.com
+	CO1NAM11FT088.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6730
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6962
 
-The xen_map_cache function wants to pass offset and size of this memory
-block as the input parameters to map the host virtual address. However,
-block->offset is too large as 0x100000000 (4G), if we assign the size as
-block->max_length (0x110000000), the mapped host address will be out of
-block->max_length and easy to overflow. We have to assign the size as
-(block->max_length - block->offset), then that is able to ensure the
-address will be located in legal range inside of max_length.
+From: Chen Jiqian <Jiqian.Chen@amd.com>
 
-{rcu = {next = 0x0, func = 0x0}, mr = 0x55555681b620, host = 0x0,
-colo_cache = 0x0, offset = 0x100000000, used_length = 0x110000000,
-max_length = 0x110000000, resized = 0x0, flags = 0x10, idstr = {0x78,
-0x65, 0x6e, 0x2e, 0x72, 0x61, 0x6d, 0x0 <repeats 249 times>}, next = {
-    le_next = 0x5555568c61b0, le_prev = 0x55555681c640},
-ramblock_notifiers = {lh_first = 0x0}, fd = 0xffffffff, page_size =
-0x1000, bmap = 0x0, receivedmap = 0x0, clear_bmap = 0x0,
-clear_bmap_shift = 0x0, postcopy_length = 0x0}
+Use the new interface in the kernel to map pirq for qemu.
 
+Signed-off-by: Chen Jiqian <Jiqian.Chen@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
 ---
- softmmu/physmem.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/xen/xen-host-pci-device.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/softmmu/physmem.c b/softmmu/physmem.c
-index 1b606a3002..1b0bb35da9 100644
---- a/softmmu/physmem.c
-+++ b/softmmu/physmem.c
-@@ -2304,7 +2304,7 @@ void *qemu_map_ram_ptr(RAMBlock *ram_block, ram_addr_t addr)
-             return xen_map_cache(addr, 0, 0, false);
-         }
+diff --git a/hw/xen/xen-host-pci-device.c b/hw/xen/xen-host-pci-device.c
+index 8c6e9a1716..6ca841a967 100644
+--- a/hw/xen/xen-host-pci-device.c
++++ b/hw/xen/xen-host-pci-device.c
+@@ -9,6 +9,7 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qemu/cutils.h"
++#include "hw/xen/xen_common.h"
+ #include "xen-host-pci-device.h"
  
--        block->host = xen_map_cache(block->offset, block->max_length, 1, false);
-+	block->host = xen_map_cache(block->offset, block->max_length, 1, false);
+ #define XEN_HOST_PCI_MAX_EXT_CAP \
+@@ -368,7 +369,7 @@ void xen_host_pci_device_get(XenHostPCIDevice *d, uint16_t domain,
+     if (*errp) {
+         goto error;
      }
-     return ramblock_ptr(block, addr);
- }
-@@ -2337,7 +2337,8 @@ static void *qemu_ram_ptr_length(RAMBlock *ram_block, ram_addr_t addr,
-             return xen_map_cache(addr, *size, lock, lock);
-         }
+-    d->irq = v;
++    d->irq = xc_physdev_gsi_from_irq(xen_xc, v);
  
--        block->host = xen_map_cache(block->offset, block->max_length, 1, lock);
-+	block->host = xen_map_cache(block->offset,
-+				    block->max_length - block->offset, 1, lock);
-     }
- 
-     return ramblock_ptr(block, addr);
+     xen_host_pci_get_hex_value(d, "class", &v, errp);
+     if (*errp) {
 -- 
 2.25.1
 
