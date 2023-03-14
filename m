@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30589C6FD1C
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:16:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509634.785782 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44516C74A5B
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:16:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509635.785792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5RU-00068O-PT; Tue, 14 Mar 2023 14:15:56 +0000
+	id 1pc5RX-0006Uo-17; Tue, 14 Mar 2023 14:15:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509634.785782; Tue, 14 Mar 2023 14:15:56 +0000
+Received: by outflank-mailman (output) from mailman id 509635.785792; Tue, 14 Mar 2023 14:15:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5RU-00068F-Mi; Tue, 14 Mar 2023 14:15:56 +0000
-Received: by outflank-mailman (input) for mailman id 509634;
- Tue, 14 Mar 2023 14:15:55 +0000
+	id 1pc5RW-0006Uf-Tm; Tue, 14 Mar 2023 14:15:58 +0000
+Received: by outflank-mailman (input) for mailman id 509635;
+ Tue, 14 Mar 2023 14:15:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vQyL=7G=citrix.com=prvs=430d4338b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pc5RT-0004aK-Dv
- for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:15:55 +0000
+ id 1pc5RV-0004aK-Su
+ for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:15:58 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9d06bc2-c272-11ed-b464-930f4c7d94ae;
- Tue, 14 Mar 2023 15:15:53 +0100 (CET)
+ id bc186cb0-c272-11ed-b464-930f4c7d94ae;
+ Tue, 14 Mar 2023 15:15:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9d06bc2-c272-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: bc186cb0-c272-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1678803353;
+  d=citrix.com; s=securemail; t=1678803355;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=D6P/0Ux22KKUfuQOSNSwL3QP/V9gYzj/MuXrDUsbGVw=;
-  b=gvDKIhkkxXMXRYel7qDTFTIdzB2+qvovqEysmOdLlQp/lxQcOT44AlZY
-   5v2DO1BaI7qz30FSsSaKIv7CpErr3DTlqrXWwGeB96eLllf7J/ienqHeg
-   omkYEwUGeW3G5r9XAW6FzBy6gG4j5YddQ2oasYYN8i7SdJweyBSuqyAzI
-   s=;
+  bh=/9L7vCCTMH++1ZUbrE71ZPsBvnajhXkBbzMQNg2Y4gQ=;
+  b=BXllIWgH1j69vRCGyd762wrmvR3fkl1xvzW/smZbYnaBU2CP0Nhs37Za
+   rco5/Hz8iSNSuGxG3C8UyxgeNBtasL8aB75VIM00MDZOgYX1DnzIaPO+C
+   ehVadrJ44ZXhIvWoYA6bqeRl9liFm0/SBb87V5TzdGMXToSXUvIk3CnzR
+   g=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 100156184
+X-MesageID: 100156187
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:PEw446PozVcs5IzvrR28l8FynXyQoLVcMsEvi/4bfWQNrUoi0jMHy
- WcWD22OOveIMTajeNx1PYi/8EpSuMPQxtBqGwto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tD5wBmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0r1eQnBor
- cMpExJXVhClus+Qx4K8S9A506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXSHZwIwB/I+
- goq+UzoPhAYbs2iwACD1S6dibbs2nr7XLodQejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasoRo0S9dWVeog52mlz6PO5g+DC2ssTzhfaccnvss7WTwr0
- FCSm9rjQzdotdWopWm1r+nO62noYG5McDFEPHVfJecY3zX9iNoazQPpFulSK4zvtt3TJBzWx
- ACNrRFr0t3/kvU3/6m8+FnGhRelqZ7IUhM5623rY4610u9qTNX7PtL1sDA3+d4Fdd/EFQfZ4
- BDojuDEtIgz4YexeDthqQnnNJWg/L67PTLVmjaD9LFxpm32qxZPkW29iQySxXuF0O5eJFcFg
- 2eJ42u9AaO/21P7BZKbm6rrV6wXIVHITLwJrMz8YNtUeYRWfwSa5ixobkP49zmzzxhzyvtgY
- 83GKJ/E4ZMm5UNPnVKLqxo1i+d3lkjSO0uKLXwE8/hX+eXHPyPEIVv0GFCPcvo4/Mu5nekhy
- P4Gb5Hi40wGAIXDjtz/rdZ7waYicSJqWvgbaqV/Koa+H+aRMDpxU66Ike5/JtwNcmY8vr6gw
- 0xRk3RwkDLX7UAr4y3QMxiPtJuHsU5DkE8G
-IronPort-HdrOrdr: A9a23:rBQX065y1YW9Mg6raAPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+IronPort-Data: A9a23:XbCDsaARLk3GLxVW/zHjw5YqxClBgxIJ4kV8jS/XYbTApDJ33jBWy
+ mNKCmmAM//fajf1LY9yO4Wz8hhU6p/Ux4JnQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+ yk6QoOdRCzhZiaE/n9BCpC48T8nk/nOHuGmYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
+ t7pyyHlEAbNNwVcbyRFu8pvlDs15K6p4GhB4gRkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
+ uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
+ jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwoc80EEcWy
+ s0jCmo1bja+qsSx8LW6c7w57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
+ pdHL2M1N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9I4TSHJgLxxbHz
+ o7A11ShHzcdaveT9SrG3nuS2dDuxDPwVI1HQdVU8dY12QbOlwT/EiY+RVa95PW0lEO6c9ZeM
+ FAPvDojq7Ao806mRcW7WAe3yFabujYMVtwWFPc1gCmIw7DR6hyUBUAFSCBAc90ssMIqRT0s2
+ USNltmvDjtq2IB5UlrEqO3S92nrf3FIcylbP3RsoRY5D8fL+6hwnzSXcedYMvSNjvvINBf38
+ zeLlX1r71kMtvIj26K+9FHBpjujoJnVUwI4jjnqsnKZAhBRP9D8OdHxgbTPxbMZddvCEAHd1
+ JQRs5LGhN3iG61hg8BkrA8lOLiyr8iIPzTH6bKEN8lwrm/9k5JPkG053d2fGKuLGpxZEdMKS
+ BWJ0e+02HO0FCrCUEOPS9jtY/nGNIC5fTgfatjab8BVfr96fxKd8SdlaCa4hj6ywBd3y/5lY
+ 8rCKK5A6Er27ow2pAdaus9HieN7rszA7Tq7qW/HI+SPjuPFOS/9pUYtO1qSdOEphJ65TPHu2
+ 48HbaOikkwPONASlwGLqeb/23hWdylkbX03wuQLHtO+zv1OQzF5WqaBnO18K+SIXc19z4/1w
+ 510YWcAoHKXuJENAVzSMRiPtJuHsU5DkE8G
+IronPort-HdrOrdr: A9a23:XFV++a5B3C85R6i8jgPXwPDXdLJyesId70hD6qhwISY6TiX+rb
  HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
  0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.98,260,1673931600"; 
-   d="scan'208";a="100156184"
+   d="scan'208";a="100156187"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
@@ -83,9 +83,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
 	<marmarek@invisiblethingslab.com>, Bernhard Kaindl
 	<bernhard.kaindl@citrix.com>
-Subject: [PATCH 4/7] tools/pygrub: Factor out common setup.py parts
-Date: Tue, 14 Mar 2023 14:15:17 +0000
-Message-ID: <20230314141520.3652451-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/7] tools/python: Improve unit test handling
+Date: Tue, 14 Mar 2023 14:15:19 +0000
+Message-ID: <20230314141520.3652451-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230314141520.3652451-1-andrew.cooper3@citrix.com>
 References: <20230314141520.3652451-1-andrew.cooper3@citrix.com>
@@ -93,9 +93,11 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-... to mirror the tools/python side in c/s 2b8314a3c354.
-
-No functional change.
+ * Add X86_{CPUID,MSR}_POLICY_FORMAT checks which were missed previously.
+ * Drop test_suite().  It hasn't been necessary since the Py2.3 era.
+ * Drop the __main__ logic.  This can't be used without manually adjusting the
+   include path, and `make test` knows how to do the right thing.
+ * For `make test`, use `-v` to see which tests have been discovered and run.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -104,39 +106,52 @@ CC: Anthony PERARD <anthony.perard@citrix.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 ---
- tools/pygrub/Makefile | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ tools/python/Makefile               |  2 +-
+ tools/python/xen/migration/tests.py | 14 ++------------
+ 2 files changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/tools/pygrub/Makefile b/tools/pygrub/Makefile
-index 37b214621492..29ad0513212f 100644
---- a/tools/pygrub/Makefile
-+++ b/tools/pygrub/Makefile
-@@ -6,19 +6,20 @@ PY_CFLAGS = $(CFLAGS) $(PY_NOOPT_CFLAGS)
- PY_LDFLAGS = $(SHLIB_LDFLAGS) $(APPEND_LDFLAGS)
- INSTALL_LOG = build/installed_files.txt
+diff --git a/tools/python/Makefile b/tools/python/Makefile
+index 511e7deae409..697299bf2802 100644
+--- a/tools/python/Makefile
++++ b/tools/python/Makefile
+@@ -36,7 +36,7 @@ uninstall:
  
-+setup.py = CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLAGS)" \
-+           $(PYTHON) setup.py
-+
- .PHONY: all
- all: build
- .PHONY: build
- build:
--	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build
-+	$(setup.py) build
+ .PHONY: test
+ test:
+-	LD_LIBRARY_PATH=$$(readlink -f ../libs/ctrl):$$(readlink -f ../xenstore) $(PYTHON) -m unittest discover
++	LD_LIBRARY_PATH=$$(readlink -f ../libs/ctrl):$$(readlink -f ../xenstore) $(PYTHON) -m unittest discover -v
  
- .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)/$(bindir)
--	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" \
--		LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py install \
--		--record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
--		 --root="$(DESTDIR)" --install-scripts=$(LIBEXEC_BIN) --force
-+	$(setup.py) install --record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
-+		--root="$(DESTDIR)" --install-scripts=$(LIBEXEC_BIN) --force
- 	set -e; if [ $(bindir) != $(LIBEXEC_BIN) -a \
- 	             "`readlink -f $(DESTDIR)/$(bindir)`" != \
- 	             "`readlink -f $(LIBEXEC_BIN)`" ]; then \
+ .PHONY: clean
+ clean:
+diff --git a/tools/python/xen/migration/tests.py b/tools/python/xen/migration/tests.py
+index ff2768946bb5..f22e2c2b7cf0 100644
+--- a/tools/python/xen/migration/tests.py
++++ b/tools/python/xen/migration/tests.py
+@@ -26,6 +26,8 @@ class TestLibxc(unittest.TestCase):
+                          (libxc.X86_TSC_INFO_FORMAT, 24),
+                          (libxc.HVM_PARAMS_ENTRY_FORMAT, 16),
+                          (libxc.HVM_PARAMS_FORMAT, 8),
++                         (libxc.X86_CPUID_POLICY_FORMAT, 24),
++                         (libxc.X86_MSR_POLICY_FORMAT, 16),
+                          ):
+             self.assertEqual(calcsize(fmt), sz)
+ 
+@@ -40,15 +42,3 @@ class TestLibxl(unittest.TestCase):
+                          (libxl.EMULATOR_HEADER_FORMAT, 8),
+                          ):
+             self.assertEqual(calcsize(fmt), sz)
+-
+-
+-def test_suite():
+-    suite = unittest.TestSuite()
+-
+-    suite.addTest(unittest.makeSuite(TestLibxc))
+-    suite.addTest(unittest.makeSuite(TestLibxl))
+-
+-    return suite
+-
+-if __name__ == "__main__":
+-    unittest.main()
 -- 
 2.30.2
 
