@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCC23C6FD1D
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:15:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509633.785772 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D0CC74A5B
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:15:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509632.785756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5RD-0005KZ-Ha; Tue, 14 Mar 2023 14:15:39 +0000
+	id 1pc5RC-0004sr-6J; Tue, 14 Mar 2023 14:15:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509633.785772; Tue, 14 Mar 2023 14:15:39 +0000
+Received: by outflank-mailman (output) from mailman id 509632.785756; Tue, 14 Mar 2023 14:15:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5RD-0005KM-C5; Tue, 14 Mar 2023 14:15:39 +0000
-Received: by outflank-mailman (input) for mailman id 509633;
- Tue, 14 Mar 2023 14:15:38 +0000
+	id 1pc5RC-0004s6-1t; Tue, 14 Mar 2023 14:15:38 +0000
+Received: by outflank-mailman (input) for mailman id 509632;
+ Tue, 14 Mar 2023 14:15:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vQyL=7G=citrix.com=prvs=430d4338b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pc5RB-0004aK-Ql
- for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:15:37 +0000
+ id 1pc5RA-0004aK-MC
+ for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:15:36 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id af971267-c272-11ed-b464-930f4c7d94ae;
- Tue, 14 Mar 2023 15:15:36 +0100 (CET)
+ id af7f90c4-c272-11ed-b464-930f4c7d94ae;
+ Tue, 14 Mar 2023 15:15:34 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,45 +38,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af971267-c272-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: af7f90c4-c272-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1678803336;
+  d=citrix.com; s=securemail; t=1678803334;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=A8tFjeqpaYYMHH549QY+2fBsFMwY3Y1/gunP80ksQ5U=;
-  b=iamMQcwBJqX52bMALeR8BESFaQpQGlvoxdlvQduGRXVd4u69UOj2Euys
-   V8lJGjLpYSJS7TAllH8vGxPXeFyAfCRjjikapV7fuvNLViA1N36/s33jU
-   WrgbJchGQmcbEZS7a4eDddg3u0BMN/kmbfQC2/leKh800/Vk5sWwnGxwg
-   U=;
+  bh=C0d3uxwMv1ov6KcfS5c7XJ6RUpKJXLIQRNm/aiuPRhQ=;
+  b=GLGGJStEgr947sAazjsV46aQxlzy+EGfbKfCQz8KDvLeL4ptXKqK7unp
+   e4RjmNg+a6DMuB3an7O22NDM3ntyA0mUo15zLGPAZ4iI/qGGrYDLyYv8E
+   rR7GNaAMYe55H+QfIBeAt4fSXiKIaDIaoSa+spm8zELizwI9cYhtLzKdo
+   c=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 100695474
+X-MesageID: 100695473
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Y9OkbK5SZrjyYQxCuhtZawxRtCbHchMFZxGqfqrLsTDasY5as4F+v
- mcfXT2HM6ncYWL0c4hzbtuz9EgAvJeEyNZiTVBs/ilnHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraCYnsrLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9VU+7JwehBtC5gZlPasS4AeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m5
- a0IJRQIbEi6l7i9w7e3RMV2pJw5I5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx7A+
- DObozulav0cHN6Y6jOb00mUvPaVx3ukY6gyGr+g98c/1TV/wURMUUZLBDNXu8KRmkO4Ht5SN
- UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JPF8Uq5QfLzbDbiy6cD3IBRyRMa/QnstE3Xj0g0
- lKVn9LvCidrubfTQnWYnop4thvrZ3JTdzVbI3ZZE01cuYKLTJwPYgznXodzHYqwjIXMCWv7w
- DWGogQkpe0Jgptev0mkxmzvjzWpr5nPawc64ATLQ26ohj9EiJ6Zi5+AsgaCs6sZRGqNZhzY5
- SVfxZDChAwbJcvV/BFhVtnhC11ACxytFDTHyWBiEJA6n9hG0y7yJNsAiN2SyaoADyrlRdMLS
- BWO0e+yzMUJVJdPUUOQS9PZNijS5fK8fekJr9iNBja0XrB/dRWc4AZlblOK0mbmnSAEyP9ga
- cjAK5n2VytDUMyLKQZaoM9MuYLHOwhknT+DLXwF503PPUWiiI69Fu5ebQrmghER56KYugTFm
- +ti2z+x40wHCoXWO3CHmbP/2HhWdRDX87iq8Z0IHgNCSyI6cFwc5wj5muN5KtU1wvoIxo8lP
- BiVAydl9bY2vlWfQS3iV5ypQOmHsUpXxZ7jARERAA==
-IronPort-HdrOrdr: A9a23:yLvaFKHSa0ZdgASKpLqENMeALOsnbusQ8zAXPiFKOGdom6mj/P
- xG88506faZslsssTIb6LS90dC7IE80rKQU3WBzB8bBYOCFghrREGgK1+KLqQEIfReOk9K1vp
- 0OT0ERMrHN5BdB/KHHCaSDYrAd6cjC2pqBwc3Zy25pTQlsYa0l1QFkEQyWe3cGJzWuQaBJba
- ah2g==
+IronPort-Data: A9a23:+whBGqP1iDsp+LzvrR27l8FynXyQoLVcMsEvi/4bfWQNrUpz1jFWy
+ WceD2+DMq3bMWLxc9sna423pExUvJbQz95gSQto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tD5wBmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0vYmEWxq8
+ P5AESBXZROGi+ya2pDjUOY506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
+ ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXSHZsEwxrH/
+ Qoq+UypIT4GL/i57Qab0WCmo97SnyTLdKs7QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxasoRo0S9dWVeog52mlz6PO5g+DC2ssTzhfaccnvss7WTwr0
+ FCSm9rjQzdotdWopWm1r+nO62noYG5McDFEPHVfJecY3zX9iJFinh/rS9Q7Kb7vhd7wFT/c2
+ RLStidr0t3/kvU3/6m8+FnGhRelqZ7IUhM5623rY4610u9qTNX7PtL1sDA3+d4Fdd/EFQfZ4
+ BDojuDEtIgz4YexeDthqQnnNJWg/L67PTLVmjaD9LFxpm32qxZPkW29iQySxXuF0O5eJFcFg
+ 2eJ42u9AaO/21P7BZKbm6rrV6wXIVHITLwJrMz8YNtUeYRWfwSa5ixobkP49zmzzxhzyvtgY
+ 83GKJ/E4ZMm5UNPnVKLqxo1i+d3lkjSO0uKLXwE8/hX+eXHPyPEIVv0GFCPcvo4/Mu5nekhy
+ P4Gb5Hi40wGAIXDjtz/rdZ7waYicSJqWvgbaqV/Koa+H+aRMDpxU66Ike5/JtwNcmY8vr6gw
+ 0xRk3RwkDLX7UAr4y3QApy/QNsDhapCkE8=
+IronPort-HdrOrdr: A9a23:2K8jCqwLB7s/RBTtDKsUKrPw8L1zdoMgy1knxilNoH1uA7elfq
+ WV98jzuiWbtN98YhwdcJO7Sc29qArnlKKduLNwAV7AZniFhILLFvAb0WKK+VSJcREWkNQtsJ
+ uIGJIQNDSfNzRHZInBkW6F+nsbsb+62bHtr933i11qSRhua6lm5Qs8MACGCUd7LTM2ZqbRUK
+ Dsn/Z6mw==
 X-IronPort-AV: E=Sophos;i="5.98,260,1673931600"; 
-   d="scan'208";a="100695474"
+   d="scan'208";a="100695473"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
@@ -84,9 +84,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
 	<marmarek@invisiblethingslab.com>, Bernhard Kaindl
 	<bernhard.kaindl@citrix.com>
-Subject: [PATCH 5/7] tools: Use -s for python shebangs
-Date: Tue, 14 Mar 2023 14:15:18 +0000
-Message-ID: <20230314141520.3652451-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/7] tools/misc: Drop xencons
+Date: Tue, 14 Mar 2023 14:15:15 +0000
+Message-ID: <20230314141520.3652451-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230314141520.3652451-1-andrew.cooper3@citrix.com>
 References: <20230314141520.3652451-1-andrew.cooper3@citrix.com>
@@ -94,10 +94,18 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This is mandated by the Fedora packaging guidelines because it is a security
-vulnerability otherwise in suid scripts.  It's a very good idea generally,
-because it prevents the users local python environment interfering from system
-packaged scripts.
+This is a python script which has it's shebang modified by be python3, but
+was never converted to be python3 compatible.
+
+The most recent reference I can find to this script (which isn't incidental
+adjustments in the makefile) is from the Xen book, fileish 561e30b80402 which
+says
+
+  %% <snip>  Alternatively, if the
+  %% Xen machine is connected to a serial-port server then we supply a
+  %% dumb TCP terminal client, {\tt xencons}.
+
+So this a not-invented-here version of telnet.  Delete it.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -106,50 +114,129 @@ CC: Anthony PERARD <anthony.perard@citrix.com>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 ---
- tools/Rules.mk        | 2 +-
- tools/pygrub/Makefile | 2 +-
- tools/python/Makefile | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ tools/misc/Makefile |  2 -
+ tools/misc/xencons  | 92 ---------------------------------------------
+ 2 files changed, 94 deletions(-)
+ delete mode 100755 tools/misc/xencons
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 6e135387bd7e..18cf83f5be83 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -179,7 +179,7 @@ CFLAGS += $(CFLAGS-y)
- CFLAGS += $(EXTRA_CFLAGS_XEN_TOOLS)
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 1c6e1d6a0471..233a7948c050 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -12,7 +12,6 @@ CFLAGS += $(CFLAGS_libxenstore)
+ # Everything to be installed in regular bin/
+ INSTALL_BIN-$(CONFIG_X86)      += xen-cpuid
+ INSTALL_BIN-$(CONFIG_X86)      += xen-detect
+-INSTALL_BIN                    += xencons
+ INSTALL_BIN                    += xencov_split
+ INSTALL_BIN += $(INSTALL_BIN-y)
  
- INSTALL_PYTHON_PROG = \
--	$(XEN_ROOT)/tools/python/install-wrap "$(PYTHON_PATH)" $(INSTALL_PROG)
-+	$(XEN_ROOT)/tools/python/install-wrap "$(PYTHON_PATH) -s" $(INSTALL_PROG)
+@@ -44,7 +43,6 @@ INSTALL_PRIVBIN                += xenpvnetboot
+ TARGETS_ALL := $(INSTALL_BIN) $(INSTALL_SBIN) $(INSTALL_PRIVBIN)
  
- %.opic: %.c
- 	$(CC) $(CPPFLAGS) -DPIC $(CFLAGS) $(CFLAGS_$*.opic) -fPIC -c -o $@ $< $(APPEND_CFLAGS)
-diff --git a/tools/pygrub/Makefile b/tools/pygrub/Makefile
-index 29ad0513212f..04b3995cc0f6 100644
---- a/tools/pygrub/Makefile
-+++ b/tools/pygrub/Makefile
-@@ -7,7 +7,7 @@ PY_LDFLAGS = $(SHLIB_LDFLAGS) $(APPEND_LDFLAGS)
- INSTALL_LOG = build/installed_files.txt
+ # Everything which only needs copying to install
+-TARGETS_COPY += xencons
+ TARGETS_COPY += xencov_split
+ TARGETS_COPY += xenpvnetboot
  
- setup.py = CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLAGS)" \
--           $(PYTHON) setup.py
-+           $(PYTHON) setup.py --executable="$(PYTHON_PATH) -s"
- 
- .PHONY: all
- all: build
-diff --git a/tools/python/Makefile b/tools/python/Makefile
-index cc764236478a..511e7deae409 100644
---- a/tools/python/Makefile
-+++ b/tools/python/Makefile
-@@ -12,7 +12,7 @@ setup.py = CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLA
-            SHLIB_libxenctrl="$(SHLIB_libxenctrl)" \
-            SHLIB_libxenguest="$(SHLIB_libxenguest)" \
-            SHLIB_libxenstore="$(SHLIB_libxenstore)" \
--           $(PYTHON) setup.py
-+           $(PYTHON) setup.py --executable="$(PYTHON_PATH) -s"
- 
- .PHONY: build
- build:
+diff --git a/tools/misc/xencons b/tools/misc/xencons
+deleted file mode 100755
+index 8bd3178eab4e..000000000000
+--- a/tools/misc/xencons
++++ /dev/null
+@@ -1,92 +0,0 @@
+-#!/usr/bin/env python
+-
+-##############################################
+-# Console client for Xen guest OSes
+-# Copyright (c) 2004, K A Fraser
+-##############################################
+-
+-import errno, os, signal, socket, struct, sys
+-
+-from termios import *
+-# Indexes into termios.tcgetattr() list.
+-IFLAG  = 0
+-OFLAG  = 1
+-CFLAG  = 2
+-LFLAG  = 3
+-ISPEED = 4
+-OSPEED = 5
+-CC     = 6
+-
+-def __child_death(signum, frame):
+-    global stop
+-    stop = True
+-
+-def __recv_from_sock(sock):
+-    global stop
+-    stop = False
+-    while not stop:
+-        try:
+-            data = sock.recv(1024)
+-        except socket.error, error:
+-            if error[0] != errno.EINTR:
+-                raise
+-        else:
+-            try:
+-                os.write(1, data)
+-            except os.error, error:
+-                if error[0] != errno.EINTR:
+-                    raise
+-    os.wait()
+-
+-def __send_to_sock(sock):
+-    while 1:
+-        try:
+-            data = os.read(0,1024)
+-        except os.error, error:
+-            if error[0] != errno.EINTR:
+-                raise
+-        else:
+-            if ord(data[0]) == ord(']')-64:
+-                break
+-            try:
+-                sock.send(data)
+-            except socket.error, error:
+-                if error[0] == errno.EPIPE:
+-                    sys.exit(0)
+-                if error[0] != errno.EINTR:
+-                    raise
+-    sys.exit(0)
+-
+-def connect(host,port):
+-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
+-    sock.connect((host,port))
+-
+-    oattrs = tcgetattr(0)
+-    nattrs = tcgetattr(0)
+-    nattrs[IFLAG] = nattrs[IFLAG] & ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON)
+-    nattrs[OFLAG] = nattrs[OFLAG] & ~(OPOST)
+-    nattrs[CFLAG] = nattrs[CFLAG] & ~(CSIZE | PARENB)
+-    nattrs[CFLAG] = nattrs[CFLAG] | CS8
+-    nattrs[LFLAG] = nattrs[LFLAG] & ~(ECHO | ICANON | IEXTEN | ISIG)
+-    nattrs[CC][VMIN] = 1
+-    nattrs[CC][VTIME] = 0
+-
+-    if os.fork():
+-        signal.signal(signal.SIGCHLD, __child_death)
+-        print "************ REMOTE CONSOLE: CTRL-] TO QUIT ********"
+-        tcsetattr(0, TCSAFLUSH, nattrs)
+-        try:
+-            __recv_from_sock(sock)
+-        finally:
+-            tcsetattr(0, TCSAFLUSH, oattrs)
+-            print
+-            print "************ REMOTE CONSOLE EXITED *****************"
+-    else:
+-        signal.signal(signal.SIGPIPE, signal.SIG_IGN)
+-        __send_to_sock(sock)
+-
+-if __name__ == '__main__':
+-    if len(sys.argv) != 3:
+-        print sys.argv[0] + " <host> <port>"
+-        sys.exit(1)
+-    connect(str(sys.argv[1]),int(sys.argv[2]))
 -- 
 2.30.2
 
