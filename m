@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC911C74A44
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 20:57:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509831.786402 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94582C05027
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 20:57:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509834.786432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcBhK-0001eV-Cm; Tue, 14 Mar 2023 20:56:42 +0000
+	id 1pcBhU-0002VP-9p; Tue, 14 Mar 2023 20:56:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509831.786402; Tue, 14 Mar 2023 20:56:42 +0000
+Received: by outflank-mailman (output) from mailman id 509834.786432; Tue, 14 Mar 2023 20:56:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcBhK-0001eN-9z; Tue, 14 Mar 2023 20:56:42 +0000
-Received: by outflank-mailman (input) for mailman id 509831;
- Tue, 14 Mar 2023 20:56:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pcBhU-0002VI-5f; Tue, 14 Mar 2023 20:56:52 +0000
+Received: by outflank-mailman (input) for mailman id 509834;
+ Tue, 14 Mar 2023 20:56:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ugWp=7G=epam.com=prvs=7437a4d9da=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
- id 1pcBhJ-0001PN-Cs
- for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 20:56:41 +0000
+ id 1pcBhT-0001PG-6N
+ for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 20:56:51 +0000
 Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b57a9eb0-c2aa-11ed-b464-930f4c7d94ae;
- Tue, 14 Mar 2023 21:56:37 +0100 (CET)
+ [148.163.137.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bd6fe7e5-c2aa-11ed-87f5-c1b5be75604c;
+ Tue, 14 Mar 2023 21:56:50 +0100 (CET)
 Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
  by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 32EKchDm017378; Tue, 14 Mar 2023 20:56:34 GMT
+ 32EKchDl017378; Tue, 14 Mar 2023 20:56:33 GMT
 Received: from eur05-vi1-obe.outbound.protection.outlook.com
  (mail-vi1eur05lp2175.outbound.protection.outlook.com [104.47.17.175])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3pb0520156-3
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3pb0520156-2
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Mar 2023 20:56:34 +0000
+ Tue, 14 Mar 2023 20:56:33 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
  by PAXPR03MB7967.eurprd03.prod.outlook.com (2603:10a6:102:21a::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Tue, 14 Mar
- 2023 20:56:31 +0000
+ 2023 20:56:30 +0000
 Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::967e:573a:15a9:176e]) by VI1PR03MB3710.eurprd03.prod.outlook.com
  ([fe80::967e:573a:15a9:176e%4]) with mapi id 15.20.6178.026; Tue, 14 Mar 2023
- 20:56:31 +0000
+ 20:56:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,32 +55,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b57a9eb0-c2aa-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: bd6fe7e5-c2aa-11ed-87f5-c1b5be75604c
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PQDEFzFQEctIMciwl+OzILvSR+CtxdwKClPvqkzCdH+oDsbR9ODNhE8AncllQnO8TSsW/yZq+NotDcTmu2ybRbcGf2+PFWXDusjKKJOVzlT6LNkcytQ2Z+cVSqIUQSAMI6oUW6wfxrDROeeoKX7UHO1rytiTm1846btTwvuhwz1b1eQS9CkbUqNsa/otfhF40hbd+mru89BHYXDTG0ssSImnBMNrhT/Yew/ne3ka/Gwjd/3GICVvkxsan+rnmtwjZcJUT3Ulm/oQ0eLT/Hg4/jafJUd6SGrgGCS3RqHmqT+Du49cdLShBOtnQuq/sc0mIjwYUdcBwTMWgAWY0r+kNg==
+ b=lWePQK1s5qlonxJcwc17I5daPq2zcSJZH51nt3y3H71wY6gfOKLq7tv4+alx8YCU9eRVukXzgUfWlrteom+Z5z9rAoXjLU/PbrukZnE4wn9mlbavwNA5wOCe2uZQpWZ9yS8k6dTehGDe/mSGXmU85Xrf5V5hgou8Y99SedG1HXBbYnK0z40lwNfjeJo6QKguVUgtLAk6XxdiYNYHf8tz5xNcIvIy8qgHUl6FwQqmQ0ETO4LZmIXosY54SqYfSyk2QQg12UKMV8wQH++WrS4CydO60JynRW5LhBKCJWP6qoMbcf3xfT8D4xwpm7uNMxCu5OCEOKrdCIBMuPlrQoXAxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bujiMIeI01tpfNGAxOt9A1TohJ0brfLaSY560ql/6y8=;
- b=ZcKZPIYzvjg3a+xuzBXN9aGpneT1iz6/fZq+mxyxa9YGVAItEWeYY1NLE0mMrgCOVxgrbx0TN82Vxxcj3IsH9oPtvcY+qlnDq/q1RdbvKVU9c4AnJEXu28uexFQPmRXI6AwYEhLNE9DTMjQ1aw3c5hAqWC38cF13WR4BJ4DGlEry/cuAcgHAD7UngKrQrjv1gdvABrmoaIs+mtzIa06juDL8zxqF8DhQjN2WRwXpSfdbwKmLImNXJjC2LdipW/SiUH6JuWJijiaEVDu3+y/q4KM42DyHZwAw14msDPjmjrL5popYL85mUbHpmhpazMUBCXd8tqcLsMhcKxbg9SErdw==
+ bh=x7tBqA5OxDzYHo/yEP4dPIJSk0WzvlCUdOtG1wDrd3k=;
+ b=ZDVRNx9HfV+K8gSoeggq42pNM5AnOZyktEKjGKd8DEL0wyB1wNjMPBZM79GQrmNnQ9TQxZ/9dtHNjLE//E8IYPPL54TJwBWo9Nhz4MgypPxMpEbRBKARjUUML2lFV51NPUZWdecn01+RFzMF1IoPW71irrJTPLzoUpBE8G+ioDkGfWDRUqUJKv5ANPRcfTYbfZacGRMmMbDZHN1Srgm2YeJLZOjpL33bKyAndufK3Lf5RwaJ7CtdiXtf+DlBTfVvSHdCvgJyFIptyTLoECrUUA9KtbYTlY4rNQXyLAcibqWb8zG9sNxdWR1UdFl/FEmLgZ2J5v51mDLhoaOMZEi9ug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bujiMIeI01tpfNGAxOt9A1TohJ0brfLaSY560ql/6y8=;
- b=TRgsE2qqyXIug3Rvp9xC4Tsva8b3hoeQ/yoB+W4E3ti6aokwK8VgDRNvhjqgrdWQVrZnGqd3Sltn1cnzLJdaS6Wg2UY47E3VzHqcOKN1R0rpYNtgPzGZ/ZY48eumt44P/02l0A5osPHgV8KsKFXy99yMKmMrgAKVn2eIFx+VaCKlAhyA4PcGZfFCpUOUAoUpkG72EScSY256GzGWdj3F+JHkPw7P6btyawhmBoxhwi5UC93CoG711TG03oK2Rq0nKml0W5bTeIlFm66HrfCeKA67uf0Qz8z5oow4LxXYC1Db4NjjiNshUbUuMazID2KfYM3RzsI5tTVjiC//C60Fbw==
+ bh=x7tBqA5OxDzYHo/yEP4dPIJSk0WzvlCUdOtG1wDrd3k=;
+ b=Mwtf9yAUNxP8g5GXxvRmTAHeAYjlgxEDYluXBY6jA2+lM2Wi5D5CJZVlOPjcDsitQjYffAn7qoTIWYlJ18Ihc6KoFkdQHi7ghsQxsc4oD6Rwue1poums9Cd7OVAvB/qpVfmBbEu8EuJoZDccMz9V2GdGqnkRCkn8yCeXkM24bBlUUn25Q4Jtg1EelurOMoHOvQEH9FuTv+3pz+Gxuok2zFA0rxJrU8tAA8gkIoeAj3Rri551/qkxSiM/s7MKIOALbxqtC3j4TGwaupg2dQQTJsVrY6uJd9lEQGo+6+UjeK9GEvDNgh9BvJew3AwU9qay3BR8CG02iCkP3weSpPnG6Q==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 3/6] vpci: crash domain if we wasn't able to (un) map vPCI
- regions
-Thread-Topic: [PATCH v3 3/6] vpci: crash domain if we wasn't able to (un) map
- vPCI regions
-Thread-Index: AQHZVrdzRVfDuhWpnEqbBuMRX+vTVw==
-Date: Tue, 14 Mar 2023 20:56:30 +0000
-Message-ID: <20230314205612.3703668-4-volodymyr_babchuk@epam.com>
+        Andrew Cooper
+	<andrew.cooper3@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Jan
+ Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+        Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 1/6] xen: add reference counter support
+Thread-Topic: [PATCH v3 1/6] xen: add reference counter support
+Thread-Index: AQHZVrdyBx9pogLqRUq3RbhGdjZNSA==
+Date: Tue, 14 Mar 2023 20:56:29 +0000
+Message-ID: <20230314205612.3703668-2-volodymyr_babchuk@epam.com>
 References: <20230314205612.3703668-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20230314205612.3703668-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -90,44 +94,44 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.39.2
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|PAXPR03MB7967:EE_
-x-ms-office365-filtering-correlation-id: 2fc9dfd1-07b6-41fb-77c3-08db24ce968a
+x-ms-office365-filtering-correlation-id: 42c5c5d9-763a-4a04-b8f4-08db24ce9628
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- ubw5diB9t8NW2UgX8HlKvSfPhPzOV6VfAUHH6IlrTbvgSyEWDbBGJmEPOzijjBbJ2ISEr1+J1KlbY26l8Mo9OPpB4HBDdRVHyy3u6W+MBrYrENPj0rkKM2CXuuClV/T8FLlOBzT0oBsMqCEIKlBAcux6QrFAfAXtA3a2cIdX3oBLO9xKQ2eiXRgLav19aqHrcKYN4nyWqTWFjueOPQ5e2ooQhxk7jVzCkQtWA8ZMAOfTNsa5JO6aqxd23Zi3dEACxHE3z0vrj4nostgZEoLMiUAk0MIEAojvSC0lElHgP4Cep6BmlFnpTIsIDEybLIInVP0MN/y+5Ei6I7ESVKZjR1MpNp4HLLgfKPkkrDXOc6n8yrXIlRp+XDfVmVfTB2RNJdnO9DxxGgb7++9xqJq0VNACPjW2/pnsfvUuq8T/jwFN4qEotrrRl+HdzgXsM8rYOXanvJhTczGI7wTOpTjTUfp1aM8CQqRfj3gzhLePXPMQ6KmmtMbJYPuhcIWRBJzgU+29rxoAC6t1NU3tJaEEKaM/EXEr8oha4CCo7bCHarTsTdznN5bpTX5iIfqS9I47x0SFmJrt80vOlt/auRXsEc+0CqhYW8p9V3J4Wuk2XWt+ABb45nbSEcwrQRmU3ItQD60LvbXZEDr4VdkuGXB/HClpyOwGdbZ7Qlfd5hwTpfN76j/It9br7iepG9tRvOy4E9H4qIF+wk11kW3XX4kgQg==
+ 7laLWOEeMp6OS8XO67yqPwy8RIZn2Ju6KYuewQZeqb1zVx1eCDv5+bJrP9nl1kccTS8xg1szfLiUT8w+U65p5wG4KTZFECbKL/C4tjaJZ85jVQfU1tgyyse385I4/9GINKN2G1aFch9nKt7A+DX44oPKhPF4WxRjonbBYvT3c6Al97BZ+z+X+3OJAipdtlFKCEpZG5sdTA2vHs0+BgeKUWCYyzFcP/FjdEpY4wNDVoz2srkDGeo/GykRJ3vrkPDD1DMzBFmG54G/3eKY+98QeEnZtfkC+7P4HGpR59plCuAUnjV5q7GwPMLFId81XjSzEXfPkW8A7FEj3nvqaSzPAaRHqcqhh0hdYNIWRUJg1ZSQrL6Xkr3e0DTHiY6983L+tYpu33nttZBXlILKpwTPh6Hw+9shGIwn3cR9Lh6teFbwHehTPtJ3AuLVDcyAMXTB2LO5eaTtxiNIPG9GenYPawZVi49kU/gvGY1ZeUaPBd1kEb0NvLNxDLMPbq4uHIFIBoU/WAtAqBjvgK+xuXKpcjd9Ez3RFvr9wgHjFtrikxO0GSBdDhx+qlg+Pahr9Wlx30In2MG8q0c54iXh54IhzLuydefbGqyHj6G0CgI4oW4lA/hiN+hbGlS57ePhKnA/33lf++p7jf4HD0TyOtHQQ22SbJ2iHxQoGfPPOk8aAY6jl15k8hbLgVvo3syTyDkHOTvrKmpve7Msx10gRP18HA==
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(376002)(346002)(136003)(366004)(396003)(39860400002)(451199018)(54906003)(316002)(86362001)(36756003)(38070700005)(38100700002)(478600001)(122000001)(55236004)(83380400001)(6512007)(6506007)(2616005)(1076003)(186003)(26005)(5660300002)(6486002)(91956017)(41300700001)(6916009)(71200400001)(76116006)(64756008)(8936002)(8676002)(2906002)(66556008)(66476007)(66946007)(66446008)(4326008);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?BescmCuB6tXcs8SN2vu/r2N6rpAoLJ25LJ6GVm+wdExCu82L2fj7XfOJUj?=
- =?iso-8859-1?Q?pto7hknqujKfmoM/qDpJ+k+Q4FKt7uP2D93NzUeAfCR77zrZc+lUHEfxnm?=
- =?iso-8859-1?Q?o36IDhPDzJ+Ig5ZnFWkIxlFVWK5R1bFMKYFPlJval64LdrRXZeUsIVX4UH?=
- =?iso-8859-1?Q?JX10SMbV2Sf9owSyad3pdzW4fBi93U3aAsLJPm4h5lEULH3F6sE9TUuKVs?=
- =?iso-8859-1?Q?6qvmLkQSAWu7pgoNuBCVwpajC2VmR7N1XPUVZ0Mt+HQAsrZDOWdDfYegRY?=
- =?iso-8859-1?Q?/vx9TtrnJS3Y1znE3UlrR3WdtzM55j0dnPTQBor53yZY5E3CKqHB7qVu1Q?=
- =?iso-8859-1?Q?mUnht5ejB05lZZxIogSWtyXnqRuE47QgDFfWdvBCsU2Fn+5B3Lgxl8Bjz8?=
- =?iso-8859-1?Q?arQChlF2HVFL/QNpD2GPoSwGzQ7dgVh06KmiE6aHy0afrtGc8+H/F1fyRS?=
- =?iso-8859-1?Q?9ViOqxOaqtZ9DH+vRh2f2hupSpHyzamjCXmPv904zzbvnGtddZPSKecenw?=
- =?iso-8859-1?Q?2q0JOmM9sl1ct/8lmP/mwfRsCFIEOZEsWbjSIQJgHCuuAZusTFBRfXD7ZZ?=
- =?iso-8859-1?Q?dpejoA4ABFqPYo2M7C18pZ+QWN9txQFBKe268I53jrcXmJ9ulA0AVoA0yj?=
- =?iso-8859-1?Q?9Yu6+5n5unr03XOaci3wrmx2xJYbLY9enxoOu6RecvyQ6LKwgdz10HRZkv?=
- =?iso-8859-1?Q?jgLOcjgIjVBpFjwcJw6n1IbSRuPtTXhtznFd39uZO0SJsvEhIkiq+f/0do?=
- =?iso-8859-1?Q?U4gOTWuoI/7lHMf/QlBSSBzyb72o0Ihz77y70ah7EqLBzZCEBHlsuu6MN1?=
- =?iso-8859-1?Q?Cc0iHVzAck3NqgGHPsgPhnmRfboMe5P/Y37nHP6PAtZ8vkmry8HnE7b0l2?=
- =?iso-8859-1?Q?We9rnrWjjxHEM6JdTX+gMG9Cp8Eh4b6uX0x90bY+UxiGKYTTGaqJKTXlHU?=
- =?iso-8859-1?Q?Mr79nE0yjYUlBjPipi9qRII0VKJkdmjJ5P2XEY0vopGgR48zutU9vKXbPh?=
- =?iso-8859-1?Q?QDJWJBgMPK/0AdcWiDJA/xVd0tr/Eu31aFgxao0qwsBS5z/oNOPemOQeQh?=
- =?iso-8859-1?Q?uUZuMnYgJ6T79bZhyipVYDnbqQNABLv3LZ9mjMcUZyQmFO0kV7pxLWFtF/?=
- =?iso-8859-1?Q?b9CvAp/VqvmIKKO4xs+vhTt42IpwZJK9p+yCkNHIWw3JsLUyrPuNTjtIvJ?=
- =?iso-8859-1?Q?xZb5/MrCzEbhmzMBt9nlXpRlfZ6l1E3hRZcnmCbPLASoPQkAwvKhel/WaW?=
- =?iso-8859-1?Q?rMVdSCtkTgR2/amfTg1jEwJJLZrOc3Ovf8h+If3HE+2on7L67sB1/LH2H+?=
- =?iso-8859-1?Q?aLSbWWfCxsI1oNGczp/C00cnadtxxd9KkYjFKzFBuLVilvymfncLKkF8SA?=
- =?iso-8859-1?Q?9epjXNm2J8otkUsSXbY4J8G22jXCT2MwiLNBgIGFVx4suzwWLDGcp8ljAs?=
- =?iso-8859-1?Q?gKvmhMRz+u630QrglNFIU8moYYrxlZrAKHOejBfO5CpDes4KcfKhG1qAL2?=
- =?iso-8859-1?Q?J+sTme8rrZqEYq5UUs3oWJMLH+OHPOM0ZbZN+byJRszlcsT9ZQMQzXWiWh?=
- =?iso-8859-1?Q?SJrYHnARjZv7boMfVXQXmej2uXXJPGTkJYpAIHJ6n6Kqwv3rVC8jEZXVXT?=
- =?iso-8859-1?Q?DDInIIYfGQfySaTnIV0NRV2wfIl+taZL3jaMxXwW/5rk+qG66qyBudzw?=
+ =?iso-8859-1?Q?raZ1IChzFUgdvCWliX699AlFD+urI0p1BrQ9CX2Y954xB8tt3MCbSpmHGV?=
+ =?iso-8859-1?Q?H5nj21bx3oawXXxN/9lmCr+mxYqdw+KQ/wM3AAeuEW7lctUp/sTnkRFaJP?=
+ =?iso-8859-1?Q?O0Sj59WBUa+DjoB3UI2RtB42IXoukJSl3AtzDQ5CmobCiVw4lMwFCf4bzf?=
+ =?iso-8859-1?Q?l+MoN7EujaYUlbWU088wY/Stn49lcprKfYLk6ZkUHtw07oq4NfR7xrKXLb?=
+ =?iso-8859-1?Q?6lE8PECjiSuKTDmy+BX8ztJAVR/nOdjSUmJFD9heJKveC+YxJ8yrP7SyTZ?=
+ =?iso-8859-1?Q?uPdsAoaeD+APq4Wb9Z/AIH+xE+Hp5wrOogi9Lb7WMSxAXqICAVMWJGcPQE?=
+ =?iso-8859-1?Q?dNDUrSzyIcK6ALaTYou+0U4pUonc9VVoeg1DnedOuDA6IBTDcjMvJj0zK+?=
+ =?iso-8859-1?Q?ckYbo9ypLfkDoWyb1MK+Q+hN/1z8BbH33okAOhZ0AjI83+ttSjGrqy+HmU?=
+ =?iso-8859-1?Q?58k5DUjdO4DMEtBg+E0VgAb7nyO9bMh7+BlrAvR0NnDSKJhh1GyoUrPg0l?=
+ =?iso-8859-1?Q?mGxPSzeMJvv6Ty4YZ2z3PUZNUZIH4MUMsXKKgDGWN3oG1pMvCtU0bCDqps?=
+ =?iso-8859-1?Q?tj1+m2w1Viz4DBcrQUemcoCYJVlPR74G8/SexUW0N/JDzS6PpTUHpYuda+?=
+ =?iso-8859-1?Q?RhRrR2nYunzbixe5b8gerG8/jykymXo1WxIf9Va+g7D3ZbDU9Y5CsNYm7Q?=
+ =?iso-8859-1?Q?5hPspzeD3lOWMFHcpc/EzHIOmnJF499ujBZ57tKRRbK22Ji+Cp9ickeUBu?=
+ =?iso-8859-1?Q?7s/oyB65fGW/ceTXl48Ob5Jd/FF2v1BBeQLPxCexvjN4Xyevv4qp2F5Z8J?=
+ =?iso-8859-1?Q?tv0CxUNyJwpWUDUfI6j77sQieztRNLFsdbiu4ZpyYDLEFcaOjgFVKTsS4/?=
+ =?iso-8859-1?Q?9Hzg4912sLIZ3EAyFBJ+Mox6lBxFjwzooC6WoBeCPhrmDkh346Mbpmn9Ch?=
+ =?iso-8859-1?Q?THNIp/oNTv3x53XEUkj2KJK1O4kNqYgiWjTc6mZjh+MCMo9Wp3i5XsUYhz?=
+ =?iso-8859-1?Q?OVspp0QEga7gZytM4VWvdjlNvJrUBOmzZwfZ7Nn3vJkvnhmR7J1/XZ2+Ka?=
+ =?iso-8859-1?Q?ZDQ0W/U3yQw+S+ijLZc6UWTGIzqhjplgekNidE8aiz/6SBpHLksRGh+OeY?=
+ =?iso-8859-1?Q?1eMi4RykH0FxnE/xQ7ZjI1hbAKxOJIG8EfbBt8zz74Zh2PHwd2tOIxLnl1?=
+ =?iso-8859-1?Q?/zRW6lBW2r0nf1Wx9wQmOW9fPWrL62OaMrVVTNb3e9SM6QsvutJUTw2qLa?=
+ =?iso-8859-1?Q?1Dhy3O23BxwyEfRdZENjWEtVHFIL9A8IVGZd9EHoSbZwmMas98T0TyPGvx?=
+ =?iso-8859-1?Q?LmxP3HQBrzKimdFQ7aIPxX6Tur5vA1HC30vfHub9XMmbgb7pvBo5CewhEB?=
+ =?iso-8859-1?Q?GIvDL3hO/bX58xy8aD+FqJyBivADbfnqBq2jCA3yblssZzC1hIATgWho3Q?=
+ =?iso-8859-1?Q?VN0lfIV7yCrQ+BzgkYQzVr4HeKElcdtlHD8xleLmysCGubz53ljNoZ/31C?=
+ =?iso-8859-1?Q?kBbqrbe/8gGeBh6fIETgpRVh2J8/Ih4EHwp2lsJuHcpKlvu07Qfc90rVvq?=
+ =?iso-8859-1?Q?Zz/406njrUs3iAzL9zGjEFRzxsMdA1NJoYli+TAaEfXPF7N0jrQnkUHO/O?=
+ =?iso-8859-1?Q?3D6im0ivQEVgpHVMxy3EntpZJKTW1guGSvyWOtgs5V6EBEAaeRiUC9tA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -135,65 +139,128 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2fc9dfd1-07b6-41fb-77c3-08db24ce968a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Mar 2023 20:56:30.0421
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42c5c5d9-763a-4a04-b8f4-08db24ce9628
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Mar 2023 20:56:29.2765
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4PvcZkAB80bioXeVm1mdBkohJAwQhAlnmY3u2nQfTvBufmTguLADkY+WLoI6GVLNu4YKUWh6IQAtpsi4e+x6OQrWvZYUqW3jAeNL1KYxS/Y=
+X-MS-Exchange-CrossTenant-userprincipalname: KKEhdFqOaTIxpw2mLIPTMYtxooX0VFh7q44D1fg7urKY62wNvwxbxlMPTYkWkTViY/kNtj70qnwdEC87FHnVdE2YshXTA+KbiYQAobv1wBw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR03MB7967
-X-Proofpoint-ORIG-GUID: OJIrJ60dx9-k4b8P-5rmvGDskVIzpZIs
-X-Proofpoint-GUID: OJIrJ60dx9-k4b8P-5rmvGDskVIzpZIs
+X-Proofpoint-ORIG-GUID: 9LTZF6K_WfMc60YSOQ2b5VdYZIEbzilF
+X-Proofpoint-GUID: 9LTZF6K_WfMc60YSOQ2b5VdYZIEbzilF
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-03-14_14,2023-03-14_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=644
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=587
  priorityscore=1501 suspectscore=0 clxscore=1015 mlxscore=0 malwarescore=0
  lowpriorityscore=0 impostorscore=0 adultscore=0 phishscore=0 bulkscore=0
  spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2212070000 definitions=main-2303140168
 
-In that unlikely case, when map_range() fails to do it's job,
-domain memory mapping will be left in inconsistent state. As there is
-no easy way to remove stale p2m mapping we need to crash domain, as
-FIXME suggests.
+We can use reference counter to ease up object lifetime management.
+This patch adds very basic support for reference counters. refcnt
+should be used in the following way:
+
+1. Protected structure should have refcnt_t field
+
+2. This field should be initialized with refcnt_init() during object
+construction.
+
+3. If code holds a valid pointer to a structure/object it can increase
+refcount with refcnt_get(). No additional locking is required.
+
+4. Code should call refcnt_put() before dropping pointer to a
+protected structure. `destructor` is a call back function that should
+destruct object and free all resources, including structure protected
+itself. Destructor will be called if reference counter reaches zero.
+
+5. If code does not hold a valid pointer to a protected structure it
+should use other locking mechanism to obtain a pointer. For example,
+it should lock a list that hold protected objects.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
 ---
-
 v3:
- - new patch
+  - moved in from another patch series
+  - used structure to encapsulate refcnt_t
+  - removed #ifndef NDEBUG in favor of just calling ASSERT
+  - added assertion to refcnt_put
+  - added saturation support: code catches overflow and underflow
+  - added EMACS magic at end of the file
+  - fixed formatting
 ---
- xen/drivers/vpci/header.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+ xen/include/xen/refcnt.h | 59 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+ create mode 100644 xen/include/xen/refcnt.h
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index ec2e978a4e..8319fe4c1d 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -162,14 +162,11 @@ bool vpci_process_pending(struct vcpu *v)
-         rangeset_destroy(v->vpci.mem);
-         v->vpci.mem =3D NULL;
-         if ( rc )
--            /*
--             * FIXME: in case of failure remove the device from the domain=
-.
--             * Note that there might still be leftover mappings. While thi=
-s is
--             * safe for Dom0, for DomUs the domain will likely need to be
--             * killed in order to avoid leaking stale p2m mappings on
--             * failure.
--             */
-+        {
-             vpci_remove_device(v->vpci.pdev);
-+            if ( !is_hardware_domain(v->domain) )
-+                domain_crash(v->domain);
-+        }
-     }
-=20
-     return false;
+diff --git a/xen/include/xen/refcnt.h b/xen/include/xen/refcnt.h
+new file mode 100644
+index 0000000000..1ac05d927c
+--- /dev/null
++++ b/xen/include/xen/refcnt.h
+@@ -0,0 +1,59 @@
++#ifndef __XEN_REFCNT_H__
++#define __XEN_REFCNT_H__
++
++#include <asm/atomic.h>
++#include <asm/bug.h>
++
++#define REFCNT_SATURATED (INT_MIN / 2)
++
++typedef struct {
++    atomic_t refcnt;
++} refcnt_t;
++
++static inline void refcnt_init(refcnt_t *refcnt)
++{
++    atomic_set(&refcnt->refcnt, 1);
++}
++
++static inline int refcnt_read(refcnt_t *refcnt)
++{
++    return atomic_read(&refcnt->refcnt);
++}
++
++static inline void refcnt_get(refcnt_t *refcnt)
++{
++    int old =3D atomic_add_unless(&refcnt->refcnt, 1, 0);
++
++    if ( unlikely(old < 0) || unlikely (old + 1 < 0) )
++    {
++        atomic_set(&refcnt->refcnt, REFCNT_SATURATED);
++        printk(XENLOG_ERR"refcnt saturation: old =3D %d\n", old);
++        WARN();
++    }
++}
++
++static inline void refcnt_put(refcnt_t *refcnt, void (*destructor)(refcnt_=
+t *refcnt))
++{
++    int ret =3D atomic_dec_return(&refcnt->refcnt);
++
++    if ( ret =3D=3D 0 )
++        destructor(refcnt);
++
++    if ( unlikely(ret < 0))
++    {
++        atomic_set(&refcnt->refcnt, REFCNT_SATURATED);
++        printk(XENLOG_ERR"refcnt already hit 0: val =3D %d\n", ret);
++        WARN();
++    }
++}
++
++#endif
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 --=20
 2.39.2
 
