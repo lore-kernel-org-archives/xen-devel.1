@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 618D6C74A44
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 19:26:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509809.786349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6D4C74A44
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 20:17:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509822.786375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcAHr-0005Kz-FQ; Tue, 14 Mar 2023 19:26:19 +0000
+	id 1pcB4c-0004rU-02; Tue, 14 Mar 2023 20:16:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509809.786349; Tue, 14 Mar 2023 19:26:19 +0000
+Received: by outflank-mailman (output) from mailman id 509822.786375; Tue, 14 Mar 2023 20:16:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcAHr-0005Ko-CS; Tue, 14 Mar 2023 19:26:19 +0000
-Received: by outflank-mailman (input) for mailman id 509809;
- Tue, 14 Mar 2023 19:26:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pcB4b-0004rN-TY; Tue, 14 Mar 2023 20:16:41 +0000
+Received: by outflank-mailman (input) for mailman id 509822;
+ Tue, 14 Mar 2023 20:16:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oTSp=7G=linux.intel.com=andriy.shevchenko@srs-se1.protection.inumbo.net>)
- id 1pcAHq-0004ZR-1e
- for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 19:26:18 +0000
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 161f50b4-c29e-11ed-b464-930f4c7d94ae;
- Tue, 14 Mar 2023 20:26:15 +0100 (CET)
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Mar 2023 12:26:03 -0700
-Received: from black.fi.intel.com ([10.237.72.28])
- by orsmga006.jf.intel.com with ESMTP; 14 Mar 2023 12:25:52 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1003)
- id 89848209; Tue, 14 Mar 2023 21:26:37 +0200 (EET)
+ <SRS0=snfi=7G=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pcB4Z-0004r9-PT
+ for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 20:16:39 +0000
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [2a00:1450:4864:20::52f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1f98d079-c2a5-11ed-87f5-c1b5be75604c;
+ Tue, 14 Mar 2023 21:16:38 +0100 (CET)
+Received: by mail-ed1-x52f.google.com with SMTP id cn21so36836194edb.0
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Mar 2023 13:16:37 -0700 (PDT)
+Received: from [192.168.8.114] (46.204.101.131.nat.umts.dynamic.t-mobile.pl.
+ [46.204.101.131]) by smtp.gmail.com with ESMTPSA id
+ br7-20020a170906d14700b008c979c74732sm1520701ejb.156.2023.03.14.13.16.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Mar 2023 13:16:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,837 +46,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 161f50b4-c29e-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1678821975; x=1710357975;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=NshdJ8tqK6DE+uconXxOB7qK3eOq0x2Ew2SHzKH6m/s=;
-  b=A4F2fVUXoBipdL7r3COT+Fl157atb7gXddiYTnRsnqlEN/sDosiG9Vfu
-   fdYKWwWZKqN7AW4rcvQHhRoAhHGsw5XJ5jCBuCSwI/In1iWpHJn9FYs87
-   44BX2pEvwlTfk+ACCNVlA0AcnqSGvKqAU/fMTU6SFP5mpiSZZxByaZ1NZ
-   I2yJuspbRBnB9FnzqH2XrtEjcrj136HWdcaYPnjiPB2lCfpDhogGYhsnQ
-   goLv7iCPKiy+2R/l+ur9OxqnblXr7XpwzYOQbmiKqP1h53paXXOOK45EN
-   nCas/pqU8lo+DPEpBORC9fwutRB/Z3yaMgbMEjeCLa71HBWqZ3NUIBiAW
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10649"; a="402389809"
-X-IronPort-AV: E=Sophos;i="5.98,260,1673942400"; 
-   d="scan'208";a="402389809"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10649"; a="656474984"
-X-IronPort-AV: E=Sophos;i="5.98,260,1673942400"; 
-   d="scan'208";a="656474984"
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	=?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kw@linux.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Niklas Schnelle <schnelle@linux.ibm.com>,
-	Bjorn Helgaas <helgaas@kernel.org>,
-	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-	=?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
-	"Maciej W. Rozycki" <macro@orcam.me.uk>,
-	Juergen Gross <jgross@suse.com>,
-	Dominik Brodowski <linux@dominikbrodowski.net>,
-	linux-kernel@vger.kernel.org,
-	linux-alpha@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mips@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-pci@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-acpi@vger.kernel.org
-Cc: Miguel Ojeda <ojeda@kernel.org>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-	Matt Turner <mattst88@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Andrew Lunn <andrew@lunn.ch>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	Gregory Clement <gregory.clement@bootlin.com>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <christophe.leroy@csgroup.eu>,
-	Anatolij Gustschin <agust@denx.de>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Rich Felker <dalias@libc.org>,
-	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
-	"David S. Miller" <davem@davemloft.net>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH v5 1/4] PCI: Introduce pci_dev_for_each_resource()
-Date: Tue, 14 Mar 2023 21:26:31 +0200
-Message-Id: <20230314192634.63531-2-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230314192634.63531-1-andriy.shevchenko@linux.intel.com>
-References: <20230314192634.63531-1-andriy.shevchenko@linux.intel.com>
+X-Inumbo-ID: 1f98d079-c2a5-11ed-87f5-c1b5be75604c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678824997;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=2nEz2dpMPbvL8ON3mDc6ZbiUBwMkCNptBtABAlbR4bc=;
+        b=LpfISWhaGDuUUXnu0ZK3knLJA3URBqgF5AhxOIvJ9JfHg91Ns5b9fVcAEu4L2fbYkS
+         uhw9yl7UxBIpYb2++Gebx0S5jhAtgKFXC4bDMLlIigERSsI4zd2pBTmtMIrPiXRCpJsd
+         49niiWDoknIhPT7JmCdPcDla4OlcMfHe4hirRkhAK9s83Fn8eUvl9w2SoDj+U5wv3AO/
+         3iPmfA63GfiZH8mDwbzJR/JrVU70zjTPnDUKomcdJ6FaIlV+lU7BXpWsM7KEJUOwJ18J
+         3tch9Q8WJvixY5YW+t7dDaNBVxdGyp7q8Iwu0A/o8HJJPh2ZAEMdLzVLCFm5I/9NDWQZ
+         Xq7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678824997;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=2nEz2dpMPbvL8ON3mDc6ZbiUBwMkCNptBtABAlbR4bc=;
+        b=0JZgMV4j/X53bg+M19tR9MNVquqPLZuofBRPryKWCDW3g9uIeGw+REh6dk1CBwG1pP
+         KBKRgTLYkaXXyf+NaGnspcPkoV1Acxvqx9sDU1/Yf5K7biEExZtlY+6OQXEretuk+Cd8
+         pAkS2r1qV7NeN1Lf+GzcegdQGLVtQZQjkOZNgSqt5ZEZnNUwHLmz5HGxvx3M0Z+eyNaR
+         xHGKMyPhXMie7eLm3/T1D573yHgUxuCD0qkqnXqeV/oJZ6vQ6hetcDaAtjam648IZddV
+         qFoTDp5jQt8bntQwfjxSWlYqug1/E/nmXsACKLJv7IM3ipPaU3XgK6AXSaOTGeeF836p
+         5OdA==
+X-Gm-Message-State: AO0yUKW00/fHCSEBzndBcMkdmOoWRJke58+cqrT3NOCz2uxKPLH3E7sR
+	ADsfpY65cZCVTysMl40J39Y=
+X-Google-Smtp-Source: AK7set+Ty+7Z3xgwWokHWZwB+s1Aky+zamPEQOLabnC4NN3/mQ2K+Sv6IW0gNyyJiFTvWerfRYs2sw==
+X-Received: by 2002:a17:906:ae51:b0:921:5cce:6592 with SMTP id lf17-20020a170906ae5100b009215cce6592mr3543652ejb.59.1678824996857;
+        Tue, 14 Mar 2023 13:16:36 -0700 (PDT)
+Message-ID: <e7c42fc7561b88b1a18463b9b28d0b09cd6553c4.camel@gmail.com>
+Subject: Re: [PATCH v1] xen/riscv: make calculation of stack address
+ PC-relative
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Gianluca Guida
+	 <gianluca@rivosinc.com>, Bob Eshleman <bobbyeshleman@gmail.com>, Alistair
+	Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>
+Date: Tue, 14 Mar 2023 22:16:34 +0200
+In-Reply-To: <9c5ec3f3-c909-8f45-4460-1b29ce333d10@citrix.com>
+References: 
+	<ad2249c1b5be01f99ef9c294a3264da0c9715bab.1678809641.git.oleksii.kurochko@gmail.com>
+	 <9c5ec3f3-c909-8f45-4460-1b29ce333d10@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
+On Tue, 2023-03-14 at 17:09 +0000, Andrew Cooper wrote:
+> On 14/03/2023 4:00 pm, Oleksii Kurochko wrote:
+> > The patch is needed to keep all addresses PC-relative.
+> >=20
+> > Pseudoinstruction 'la' can be transformed to 'auipc/addi' or
+> > 'auipc/l{w|d}'. It depends on the .option directive: nopic and pic.
+> >=20
+> > Right now, 'la' transforms to 'auipc/l{w|d}', which in case of
+> > cpu0_boot_stack[] will lead to the usage of _GLOBAL_OFFSET_TABLE_
+> > where all addresses will be without counting that it might happen
+> > that linker address !=3D load address.
+> >=20
+> > To be sure that SP is loaded always PC-relative address
+> > 'la' should be changed to 'lla', which always transforms to
+> > 'auipc/addi'.
+> >=20
+> > Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> > ---
+> > =C2=A0xen/arch/riscv/riscv64/head.S | 2 +-
+> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/xen/arch/riscv/riscv64/head.S
+> > b/xen/arch/riscv/riscv64/head.S
+> > index 8887f0cbd4..e12d2a7cf3 100644
+> > --- a/xen/arch/riscv/riscv64/head.S
+> > +++ b/xen/arch/riscv/riscv64/head.S
+> > @@ -27,7 +27,7 @@ ENTRY(start)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=
+=C2=A0 t3, t3, __SIZEOF_POINTER__
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bltu=C2=A0=C2=A0=C2=A0=
+ t3, t4, .L_clear_bss
+> > =C2=A0
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 sp, cpu0_boot_stack
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lla=C2=A0=C2=A0=C2=A0=C2=A0=
+ sp, cpu0_boot_stack
+>=20
+> I don't think this is the appropriate way forward.=C2=A0 It's very much
+> smells like duct tape hiding the real bug.
+>=20
+As an option, I thought to add in head.S '.option nopic' directive to
+make la translated to auipc/addi [1] pair.
+As an alternative option, adds to AFLAGS +=3D -fno-PIC... but still...
 
-Instead of open-coding it everywhere introduce a tiny helper that can be
-used to iterate over each resource of a PCI device, and convert the most
-obvious users into it.
+I checked in Linux binary how 'la' instruction is transformed, and it
+looks like it is translated as I expect to auipc/addi pair:
+ffffffe000001066: 00027517 auipc a0,0x27
+ffffffe00000106a: f9a50513 addi a0,a0,-102 # ffffffe000028000
+<early_pg_dir>
 
-While at it drop doubled empty line before pdev_sort_resources().
+I checked compiler flags between Xen and Linux. The difference is in-
+fno-PIE (Linux also adds -mabi and -march to AFLAGS):
 
-No functional changes intended.
+1. Linux build command of head.S: riscv64-linux-gnu-gcc -Wp,-
+MD,arch/riscv/kernel/.head.o.d -nostdinc -isystem /usr/lib/gcc-
+cross/riscv64-linux-gnu/9/include -I./arch/riscv/include -
+I./arch/riscv/include/generated -I./include -I./arch/riscv/include/uapi
+-I./arch/riscv/include/generated/uapi -I./include/uapi -
+I./include/generated/uapi -include ./include/linux/kconfig.h -
+D__KERNEL__ -D__ASSEMBLY__ -fno-PIE -mabi=3Dlp64 -march=3Drv64imafdc -c -o
+arch/riscv/kernel/head.o arch/riscv/kernel/head.S
 
-Suggested-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Signed-off-by: Mika Westerberg <mika.westerberg@linux.intel.com>
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Reviewed-by: Krzysztof Wilczyński <kw@linux.com>
----
- .clang-format                             |  2 ++
- arch/alpha/kernel/pci.c                   |  5 ++--
- arch/arm/kernel/bios32.c                  | 16 ++++++-------
- arch/arm/mach-dove/pcie.c                 | 10 ++++----
- arch/arm/mach-mv78xx0/pcie.c              | 10 ++++----
- arch/arm/mach-orion5x/pci.c               | 10 ++++----
- arch/mips/pci/ops-bcm63xx.c               |  8 +++----
- arch/mips/pci/pci-legacy.c                |  3 +--
- arch/powerpc/kernel/pci-common.c          | 21 ++++++++--------
- arch/powerpc/platforms/4xx/pci.c          |  8 +++----
- arch/powerpc/platforms/52xx/mpc52xx_pci.c |  4 ++--
- arch/powerpc/platforms/pseries/pci.c      | 16 ++++++-------
- arch/sh/drivers/pci/pcie-sh7786.c         | 10 ++++----
- arch/sparc/kernel/leon_pci.c              |  5 ++--
- arch/sparc/kernel/pci.c                   | 10 ++++----
- arch/sparc/kernel/pcic.c                  |  5 ++--
- drivers/pci/remove.c                      |  5 ++--
- drivers/pci/setup-bus.c                   | 27 ++++++++-------------
- drivers/pci/setup-res.c                   |  4 +---
- drivers/pci/vgaarb.c                      | 17 ++++---------
- drivers/pci/xen-pcifront.c                |  4 +---
- drivers/pnp/quirks.c                      | 29 ++++++++---------------
- include/linux/pci.h                       | 15 ++++++++++--
- 23 files changed, 111 insertions(+), 133 deletions(-)
+2. Xen build command of head.S:riscv64-linux-gnu-gcc -MMD -MP -MF
+arch/riscv/riscv64/.head.o.d -D__ASSEMBLY__ -Wa,--noexecstack -
+DBUILD_ID -fno-strict-aliasing -Wall -Wstrict-prototypes -Wdeclaration-
+after-statement -Wno-unused-but-set-variable -Wno-unused-local-typedefs
+-O1 -fno-omit-frame-pointer -nostdinc -fno-builtin -fno-common -Werror
+-Wredundant-decls -Wno-pointer-arith -Wvla -pipe -D__XEN__ -include
+./include/xen/config.h -Wa,--strip-local-absolute -g -mabi=3Dlp64 -
+I./include -I./arch/riscv/include -march=3Drv64gc -mstrict-align -
+mcmodel=3Dmedany - -c arch/riscv/riscv64/head.S -o
+arch/riscv/riscv64/head.o
 
-diff --git a/.clang-format b/.clang-format
-index d988e9fa9b26..266abb843654 100644
---- a/.clang-format
-+++ b/.clang-format
-@@ -520,6 +520,8 @@ ForEachMacros:
-   - 'of_property_for_each_string'
-   - 'of_property_for_each_u32'
-   - 'pci_bus_for_each_resource'
-+  - 'pci_dev_for_each_resource'
-+  - 'pci_dev_for_each_resource_p'
-   - 'pci_doe_for_each_off'
-   - 'pcl_for_each_chunk'
-   - 'pcl_for_each_segment'
-diff --git a/arch/alpha/kernel/pci.c b/arch/alpha/kernel/pci.c
-index 64fbfb0763b2..4458eb7f44f0 100644
---- a/arch/alpha/kernel/pci.c
-+++ b/arch/alpha/kernel/pci.c
-@@ -288,11 +288,10 @@ pcibios_claim_one_bus(struct pci_bus *b)
- 	struct pci_bus *child_bus;
- 
- 	list_for_each_entry(dev, &b->devices, bus_list) {
-+		struct resource *r;
- 		int i;
- 
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			struct resource *r = &dev->resource[i];
--
-+		pci_dev_for_each_resource(dev, r, i) {
- 			if (r->parent || !r->start || !r->flags)
- 				continue;
- 			if (pci_has_flag(PCI_PROBE_ONLY) ||
-diff --git a/arch/arm/kernel/bios32.c b/arch/arm/kernel/bios32.c
-index e7ef2b5bea9c..5254734b23e6 100644
---- a/arch/arm/kernel/bios32.c
-+++ b/arch/arm/kernel/bios32.c
-@@ -142,15 +142,15 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_WINBOND2, PCI_DEVICE_ID_WINBOND2_89C940F,
-  */
- static void pci_fixup_dec21285(struct pci_dev *dev)
- {
--	int i;
--
- 	if (dev->devfn == 0) {
-+		struct resource *r;
-+
- 		dev->class &= 0xff;
- 		dev->class |= PCI_CLASS_BRIDGE_HOST << 8;
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			dev->resource[i].start = 0;
--			dev->resource[i].end   = 0;
--			dev->resource[i].flags = 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start = 0;
-+			r->end = 0;
-+			r->flags = 0;
- 		}
- 	}
- }
-@@ -162,13 +162,11 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_DEC, PCI_DEVICE_ID_DEC_21285, pci_fixup_d
- static void pci_fixup_ide_bases(struct pci_dev *dev)
- {
- 	struct resource *r;
--	int i;
- 
- 	if ((dev->class >> 8) != PCI_CLASS_STORAGE_IDE)
- 		return;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		r = dev->resource + i;
-+	pci_dev_for_each_resource_p(dev, r) {
- 		if ((r->start & ~0x80) == 0x374) {
- 			r->start |= 2;
- 			r->end = r->start;
-diff --git a/arch/arm/mach-dove/pcie.c b/arch/arm/mach-dove/pcie.c
-index 754ca381f600..58cecd79a204 100644
---- a/arch/arm/mach-dove/pcie.c
-+++ b/arch/arm/mach-dove/pcie.c
-@@ -142,14 +142,14 @@ static struct pci_ops pcie_ops = {
- static void rc_pci_fixup(struct pci_dev *dev)
- {
- 	if (dev->bus->parent == NULL && dev->devfn == 0) {
--		int i;
-+		struct resource *r;
- 
- 		dev->class &= 0xff;
- 		dev->class |= PCI_CLASS_BRIDGE_HOST << 8;
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			dev->resource[i].start = 0;
--			dev->resource[i].end   = 0;
--			dev->resource[i].flags = 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start = 0;
-+			r->end   = 0;
-+			r->flags = 0;
- 		}
- 	}
- }
-diff --git a/arch/arm/mach-mv78xx0/pcie.c b/arch/arm/mach-mv78xx0/pcie.c
-index 6190f538a124..f59f02150a36 100644
---- a/arch/arm/mach-mv78xx0/pcie.c
-+++ b/arch/arm/mach-mv78xx0/pcie.c
-@@ -186,14 +186,14 @@ static struct pci_ops pcie_ops = {
- static void rc_pci_fixup(struct pci_dev *dev)
- {
- 	if (dev->bus->parent == NULL && dev->devfn == 0) {
--		int i;
-+		struct resource *r;
- 
- 		dev->class &= 0xff;
- 		dev->class |= PCI_CLASS_BRIDGE_HOST << 8;
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			dev->resource[i].start = 0;
--			dev->resource[i].end   = 0;
--			dev->resource[i].flags = 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start = 0;
-+			r->end   = 0;
-+			r->flags = 0;
- 		}
- 	}
- }
-diff --git a/arch/arm/mach-orion5x/pci.c b/arch/arm/mach-orion5x/pci.c
-index 888fdc9099c5..0933b47b601a 100644
---- a/arch/arm/mach-orion5x/pci.c
-+++ b/arch/arm/mach-orion5x/pci.c
-@@ -522,14 +522,14 @@ static int __init pci_setup(struct pci_sys_data *sys)
- static void rc_pci_fixup(struct pci_dev *dev)
- {
- 	if (dev->bus->parent == NULL && dev->devfn == 0) {
--		int i;
-+		struct resource *r;
- 
- 		dev->class &= 0xff;
- 		dev->class |= PCI_CLASS_BRIDGE_HOST << 8;
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			dev->resource[i].start = 0;
--			dev->resource[i].end   = 0;
--			dev->resource[i].flags = 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start	= 0;
-+			r->end		= 0;
-+			r->flags	= 0;
- 		}
- 	}
- }
-diff --git a/arch/mips/pci/ops-bcm63xx.c b/arch/mips/pci/ops-bcm63xx.c
-index dc6dc2741272..c0efcbf3c63f 100644
---- a/arch/mips/pci/ops-bcm63xx.c
-+++ b/arch/mips/pci/ops-bcm63xx.c
-@@ -413,18 +413,18 @@ struct pci_ops bcm63xx_cb_ops = {
- static void bcm63xx_fixup(struct pci_dev *dev)
- {
- 	static int io_window = -1;
--	int i, found, new_io_window;
-+	int found, new_io_window;
-+	struct resource *r;
- 	u32 val;
- 
- 	/* look for any io resource */
- 	found = 0;
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--		if (pci_resource_flags(dev, i) & IORESOURCE_IO) {
-+	pci_dev_for_each_resource_p(dev, r) {
-+		if (resource_type(r) == IORESOURCE_IO) {
- 			found = 1;
- 			break;
- 		}
- 	}
--
- 	if (!found)
- 		return;
- 
-diff --git a/arch/mips/pci/pci-legacy.c b/arch/mips/pci/pci-legacy.c
-index 468722c8a5c6..ec2567f8efd8 100644
---- a/arch/mips/pci/pci-legacy.c
-+++ b/arch/mips/pci/pci-legacy.c
-@@ -249,12 +249,11 @@ static int pcibios_enable_resources(struct pci_dev *dev, int mask)
- 
- 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
- 	old_cmd = cmd;
--	for (idx = 0; idx < PCI_NUM_RESOURCES; idx++) {
-+	pci_dev_for_each_resource(dev, r, idx) {
- 		/* Only set up the requested stuff */
- 		if (!(mask & (1<<idx)))
- 			continue;
- 
--		r = &dev->resource[idx];
- 		if (!(r->flags & (IORESOURCE_IO | IORESOURCE_MEM)))
- 			continue;
- 		if ((idx == PCI_ROM_RESOURCE) &&
-diff --git a/arch/powerpc/kernel/pci-common.c b/arch/powerpc/kernel/pci-common.c
-index d67cf79bf5d0..1908a46cad54 100644
---- a/arch/powerpc/kernel/pci-common.c
-+++ b/arch/powerpc/kernel/pci-common.c
-@@ -880,6 +880,7 @@ int pcibios_root_bridge_prepare(struct pci_host_bridge *bridge)
- static void pcibios_fixup_resources(struct pci_dev *dev)
- {
- 	struct pci_controller *hose = pci_bus_to_host(dev->bus);
-+	struct resource *res;
- 	int i;
- 
- 	if (!hose) {
-@@ -891,9 +892,9 @@ static void pcibios_fixup_resources(struct pci_dev *dev)
- 	if (dev->is_virtfn)
- 		return;
- 
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--		struct resource *res = dev->resource + i;
-+	pci_dev_for_each_resource(dev, res, i) {
- 		struct pci_bus_region reg;
-+
- 		if (!res->flags)
- 			continue;
- 
-@@ -1452,11 +1453,10 @@ void pcibios_claim_one_bus(struct pci_bus *bus)
- 	struct pci_bus *child_bus;
- 
- 	list_for_each_entry(dev, &bus->devices, bus_list) {
-+		struct resource *r;
- 		int i;
- 
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			struct resource *r = &dev->resource[i];
--
-+		pci_dev_for_each_resource(dev, r, i) {
- 			if (r->parent || !r->start || !r->flags)
- 				continue;
- 
-@@ -1705,19 +1705,20 @@ EXPORT_SYMBOL_GPL(pcibios_scan_phb);
- 
- static void fixup_hide_host_resource_fsl(struct pci_dev *dev)
- {
--	int i, class = dev->class >> 8;
-+	int class = dev->class >> 8;
- 	/* When configured as agent, programming interface = 1 */
- 	int prog_if = dev->class & 0xf;
-+	struct resource *r;
- 
- 	if ((class == PCI_CLASS_PROCESSOR_POWERPC ||
- 	     class == PCI_CLASS_BRIDGE_OTHER) &&
- 		(dev->hdr_type == PCI_HEADER_TYPE_NORMAL) &&
- 		(prog_if == 0) &&
- 		(dev->bus->parent == NULL)) {
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			dev->resource[i].start = 0;
--			dev->resource[i].end = 0;
--			dev->resource[i].flags = 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start = 0;
-+			r->end = 0;
-+			r->flags = 0;
- 		}
- 	}
- }
-diff --git a/arch/powerpc/platforms/4xx/pci.c b/arch/powerpc/platforms/4xx/pci.c
-index ca5dd7a5842a..9d19123c0da8 100644
---- a/arch/powerpc/platforms/4xx/pci.c
-+++ b/arch/powerpc/platforms/4xx/pci.c
-@@ -57,7 +57,7 @@ static inline int ppc440spe_revA(void)
- static void fixup_ppc4xx_pci_bridge(struct pci_dev *dev)
- {
- 	struct pci_controller *hose;
--	int i;
-+	struct resource *r;
- 
- 	if (dev->devfn != 0 || dev->bus->self != NULL)
- 		return;
-@@ -79,9 +79,9 @@ static void fixup_ppc4xx_pci_bridge(struct pci_dev *dev)
- 	/* Hide the PCI host BARs from the kernel as their content doesn't
- 	 * fit well in the resource management
- 	 */
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--		dev->resource[i].start = dev->resource[i].end = 0;
--		dev->resource[i].flags = 0;
-+	pci_dev_for_each_resource_p(dev, r) {
-+		r->start = r->end = 0;
-+		r->flags = 0;
- 	}
- 
- 	printk(KERN_INFO "PCI: Hiding 4xx host bridge resources %s\n",
-diff --git a/arch/powerpc/platforms/52xx/mpc52xx_pci.c b/arch/powerpc/platforms/52xx/mpc52xx_pci.c
-index 859e2818c43d..f0b0ac298484 100644
---- a/arch/powerpc/platforms/52xx/mpc52xx_pci.c
-+++ b/arch/powerpc/platforms/52xx/mpc52xx_pci.c
-@@ -327,14 +327,14 @@ mpc52xx_pci_setup(struct pci_controller *hose,
- static void
- mpc52xx_pci_fixup_resources(struct pci_dev *dev)
- {
-+	struct resource *res;
- 	int i;
- 
- 	pr_debug("%s() %.4x:%.4x\n", __func__, dev->vendor, dev->device);
- 
- 	/* We don't rely on boot loader for PCI and resets all
- 	   devices */
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--		struct resource *res = &dev->resource[i];
-+	pci_dev_for_each_resource_p(dev, res) {
- 		if (res->end > res->start) {	/* Only valid resources */
- 			res->end -= res->start;
- 			res->start = 0;
-diff --git a/arch/powerpc/platforms/pseries/pci.c b/arch/powerpc/platforms/pseries/pci.c
-index 60e0a58928ef..ee7b2c737c92 100644
---- a/arch/powerpc/platforms/pseries/pci.c
-+++ b/arch/powerpc/platforms/pseries/pci.c
-@@ -240,7 +240,7 @@ void __init pSeries_final_fixup(void)
-  */
- static void fixup_winbond_82c105(struct pci_dev* dev)
- {
--	int i;
-+	struct resource *r;
- 	unsigned int reg;
- 
- 	if (!machine_is(pseries))
-@@ -251,14 +251,14 @@ static void fixup_winbond_82c105(struct pci_dev* dev)
- 	/* Enable LEGIRQ to use INTC instead of ISA interrupts */
- 	pci_write_config_dword(dev, 0x40, reg | (1<<11));
- 
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; ++i) {
-+	pci_dev_for_each_resource_p(dev, r) {
- 		/* zap the 2nd function of the winbond chip */
--		if (dev->resource[i].flags & IORESOURCE_IO
--		    && dev->bus->number == 0 && dev->devfn == 0x81)
--			dev->resource[i].flags &= ~IORESOURCE_IO;
--		if (dev->resource[i].start == 0 && dev->resource[i].end) {
--			dev->resource[i].flags = 0;
--			dev->resource[i].end = 0;
-+		if (dev->bus->number == 0 && dev->devfn == 0x81 &&
-+		    r->flags & IORESOURCE_IO)
-+			r->flags &= ~IORESOURCE_IO;
-+		if (r->start == 0 && r->end) {
-+			r->flags = 0;
-+			r->end = 0;
- 		}
- 	}
- }
-diff --git a/arch/sh/drivers/pci/pcie-sh7786.c b/arch/sh/drivers/pci/pcie-sh7786.c
-index b0c2a5238d04..982f9aec2f2f 100644
---- a/arch/sh/drivers/pci/pcie-sh7786.c
-+++ b/arch/sh/drivers/pci/pcie-sh7786.c
-@@ -140,12 +140,12 @@ static void sh7786_pci_fixup(struct pci_dev *dev)
- 	 * Prevent enumeration of root complex resources.
- 	 */
- 	if (pci_is_root_bus(dev->bus) && dev->devfn == 0) {
--		int i;
-+		struct resource *r;
- 
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			dev->resource[i].start	= 0;
--			dev->resource[i].end	= 0;
--			dev->resource[i].flags	= 0;
-+		pci_dev_for_each_resource_p(dev, r) {
-+			r->start	= 0;
-+			r->end		= 0;
-+			r->flags	= 0;
- 		}
- 	}
- }
-diff --git a/arch/sparc/kernel/leon_pci.c b/arch/sparc/kernel/leon_pci.c
-index e5e5ff6b9a5c..b6663a3fbae9 100644
---- a/arch/sparc/kernel/leon_pci.c
-+++ b/arch/sparc/kernel/leon_pci.c
-@@ -62,15 +62,14 @@ void leon_pci_init(struct platform_device *ofdev, struct leon_pci_info *info)
- 
- int pcibios_enable_device(struct pci_dev *dev, int mask)
- {
-+	struct resource *res;
- 	u16 cmd, oldcmd;
- 	int i;
- 
- 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
- 	oldcmd = cmd;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *res = &dev->resource[i];
--
-+	pci_dev_for_each_resource(dev, res, i) {
- 		/* Only set up the requested stuff */
- 		if (!(mask & (1<<i)))
- 			continue;
-diff --git a/arch/sparc/kernel/pci.c b/arch/sparc/kernel/pci.c
-index cb1ef25116e9..a948a49817c7 100644
---- a/arch/sparc/kernel/pci.c
-+++ b/arch/sparc/kernel/pci.c
-@@ -663,11 +663,10 @@ static void pci_claim_bus_resources(struct pci_bus *bus)
- 	struct pci_dev *dev;
- 
- 	list_for_each_entry(dev, &bus->devices, bus_list) {
-+		struct resource *r;
- 		int i;
- 
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			struct resource *r = &dev->resource[i];
--
-+		pci_dev_for_each_resource(dev, r, i) {
- 			if (r->parent || !r->start || !r->flags)
- 				continue;
- 
-@@ -724,15 +723,14 @@ struct pci_bus *pci_scan_one_pbm(struct pci_pbm_info *pbm,
- 
- int pcibios_enable_device(struct pci_dev *dev, int mask)
- {
-+	struct resource *res;
- 	u16 cmd, oldcmd;
- 	int i;
- 
- 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
- 	oldcmd = cmd;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *res = &dev->resource[i];
--
-+	pci_dev_for_each_resource(dev, res, i) {
- 		/* Only set up the requested stuff */
- 		if (!(mask & (1<<i)))
- 			continue;
-diff --git a/arch/sparc/kernel/pcic.c b/arch/sparc/kernel/pcic.c
-index ee4c9a9a171c..25fe0a061732 100644
---- a/arch/sparc/kernel/pcic.c
-+++ b/arch/sparc/kernel/pcic.c
-@@ -643,15 +643,14 @@ void pcibios_fixup_bus(struct pci_bus *bus)
- 
- int pcibios_enable_device(struct pci_dev *dev, int mask)
- {
-+	struct resource *res;
- 	u16 cmd, oldcmd;
- 	int i;
- 
- 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
- 	oldcmd = cmd;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *res = &dev->resource[i];
--
-+	pci_dev_for_each_resource(dev, res, i) {
- 		/* Only set up the requested stuff */
- 		if (!(mask & (1<<i)))
- 			continue;
-diff --git a/drivers/pci/remove.c b/drivers/pci/remove.c
-index 0145aef1b930..1310e01fb540 100644
---- a/drivers/pci/remove.c
-+++ b/drivers/pci/remove.c
-@@ -5,10 +5,9 @@
- 
- static void pci_free_resources(struct pci_dev *dev)
- {
--	int i;
-+	struct resource *res;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *res = dev->resource + i;
-+	pci_dev_for_each_resource_p(dev, res) {
- 		if (res->parent)
- 			release_resource(res);
- 	}
-diff --git a/drivers/pci/setup-bus.c b/drivers/pci/setup-bus.c
-index c690572b10ce..d4fc7665f70a 100644
---- a/drivers/pci/setup-bus.c
-+++ b/drivers/pci/setup-bus.c
-@@ -124,20 +124,17 @@ static resource_size_t get_res_add_align(struct list_head *head,
- 	return dev_res ? dev_res->min_align : 0;
- }
- 
--
- /* Sort resources by alignment */
- static void pdev_sort_resources(struct pci_dev *dev, struct list_head *head)
- {
-+	struct resource *r;
- 	int i;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *r;
-+	pci_dev_for_each_resource(dev, r, i) {
- 		struct pci_dev_resource *dev_res, *tmp;
- 		resource_size_t r_align;
- 		struct list_head *n;
- 
--		r = &dev->resource[i];
--
- 		if (r->flags & IORESOURCE_PCI_FIXED)
- 			continue;
- 
-@@ -895,10 +892,9 @@ static void pbus_size_io(struct pci_bus *bus, resource_size_t min_size,
- 
- 	min_align = window_alignment(bus, IORESOURCE_IO);
- 	list_for_each_entry(dev, &bus->devices, bus_list) {
--		int i;
-+		struct resource *r;
- 
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			struct resource *r = &dev->resource[i];
-+		pci_dev_for_each_resource_p(dev, r) {
- 			unsigned long r_size;
- 
- 			if (r->parent || !(r->flags & IORESOURCE_IO))
-@@ -1014,10 +1010,10 @@ static int pbus_size_mem(struct pci_bus *bus, unsigned long mask,
- 	size = 0;
- 
- 	list_for_each_entry(dev, &bus->devices, bus_list) {
-+		struct resource *r;
- 		int i;
- 
--		for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--			struct resource *r = &dev->resource[i];
-+		pci_dev_for_each_resource(dev, r, i) {
- 			resource_size_t r_size;
- 
- 			if (r->parent || (r->flags & IORESOURCE_PCI_FIXED) ||
-@@ -1358,11 +1354,10 @@ static void assign_fixed_resource_on_bus(struct pci_bus *b, struct resource *r)
-  */
- static void pdev_assign_fixed_resources(struct pci_dev *dev)
- {
--	int i;
-+	struct resource *r;
- 
--	for (i = 0; i <  PCI_NUM_RESOURCES; i++) {
-+	pci_dev_for_each_resource_p(dev, r) {
- 		struct pci_bus *b;
--		struct resource *r = &dev->resource[i];
- 
- 		if (r->parent || !(r->flags & IORESOURCE_PCI_FIXED) ||
- 		    !(r->flags & (IORESOURCE_IO | IORESOURCE_MEM)))
-@@ -1795,11 +1790,9 @@ static void remove_dev_resources(struct pci_dev *dev, struct resource *io,
- 				 struct resource *mmio,
- 				 struct resource *mmio_pref)
- {
--	int i;
--
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		struct resource *res = &dev->resource[i];
-+	struct resource *res;
- 
-+	pci_dev_for_each_resource_p(dev, res) {
- 		if (resource_type(res) == IORESOURCE_IO) {
- 			remove_dev_resource(io, dev, res);
- 		} else if (resource_type(res) == IORESOURCE_MEM) {
-diff --git a/drivers/pci/setup-res.c b/drivers/pci/setup-res.c
-index b492e67c3d87..967f9a758923 100644
---- a/drivers/pci/setup-res.c
-+++ b/drivers/pci/setup-res.c
-@@ -484,12 +484,10 @@ int pci_enable_resources(struct pci_dev *dev, int mask)
- 	pci_read_config_word(dev, PCI_COMMAND, &cmd);
- 	old_cmd = cmd;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
-+	pci_dev_for_each_resource(dev, r, i) {
- 		if (!(mask & (1 << i)))
- 			continue;
- 
--		r = &dev->resource[i];
--
- 		if (!(r->flags & (IORESOURCE_IO | IORESOURCE_MEM)))
- 			continue;
- 		if ((i == PCI_ROM_RESOURCE) &&
-diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-index f80b6ec88dc3..3ec6a0b7dbf0 100644
---- a/drivers/pci/vgaarb.c
-+++ b/drivers/pci/vgaarb.c
-@@ -548,10 +548,8 @@ static bool vga_is_firmware_default(struct pci_dev *pdev)
- #if defined(CONFIG_X86) || defined(CONFIG_IA64)
- 	u64 base = screen_info.lfb_base;
- 	u64 size = screen_info.lfb_size;
-+	struct resource *r;
- 	u64 limit;
--	resource_size_t start, end;
--	unsigned long flags;
--	int i;
- 
- 	/* Select the device owning the boot framebuffer if there is one */
- 
-@@ -561,19 +559,14 @@ static bool vga_is_firmware_default(struct pci_dev *pdev)
- 	limit = base + size;
- 
- 	/* Does firmware framebuffer belong to us? */
--	for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--		flags = pci_resource_flags(pdev, i);
--
--		if ((flags & IORESOURCE_MEM) == 0)
-+	pci_dev_for_each_resource_p(pdev, r) {
-+		if (resource_type(r) != IORESOURCE_MEM)
- 			continue;
- 
--		start = pci_resource_start(pdev, i);
--		end  = pci_resource_end(pdev, i);
--
--		if (!start || !end)
-+		if (!r->start || !r->end)
- 			continue;
- 
--		if (base < start || limit >= end)
-+		if (base < r->start || limit >= r->end)
- 			continue;
- 
- 		return true;
-diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
-index fcd029ca2eb1..83c0ab50676d 100644
---- a/drivers/pci/xen-pcifront.c
-+++ b/drivers/pci/xen-pcifront.c
-@@ -390,9 +390,7 @@ static int pcifront_claim_resource(struct pci_dev *dev, void *data)
- 	int i;
- 	struct resource *r;
- 
--	for (i = 0; i < PCI_NUM_RESOURCES; i++) {
--		r = &dev->resource[i];
--
-+	pci_dev_for_each_resource(dev, r, i) {
- 		if (!r->parent && r->start && r->flags) {
- 			dev_info(&pdev->xdev->dev, "claiming resource %s/%d\n",
- 				pci_name(dev), i);
-diff --git a/drivers/pnp/quirks.c b/drivers/pnp/quirks.c
-index ac98b9919029..6085a1471de2 100644
---- a/drivers/pnp/quirks.c
-+++ b/drivers/pnp/quirks.c
-@@ -229,8 +229,7 @@ static void quirk_ad1815_mpu_resources(struct pnp_dev *dev)
- static void quirk_system_pci_resources(struct pnp_dev *dev)
- {
- 	struct pci_dev *pdev = NULL;
--	struct resource *res;
--	resource_size_t pnp_start, pnp_end, pci_start, pci_end;
-+	struct resource *res, *r;
- 	int i, j;
- 
- 	/*
-@@ -243,32 +242,26 @@ static void quirk_system_pci_resources(struct pnp_dev *dev)
- 	 * so they won't be claimed by the PNP system driver.
- 	 */
- 	for_each_pci_dev(pdev) {
--		for (i = 0; i < DEVICE_COUNT_RESOURCE; i++) {
--			unsigned long flags, type;
-+		pci_dev_for_each_resource(pdev, r, i) {
-+			unsigned long type = resource_type(r);
- 
--			flags = pci_resource_flags(pdev, i);
--			type = flags & (IORESOURCE_IO | IORESOURCE_MEM);
--			if (!type || pci_resource_len(pdev, i) == 0)
-+			if (!(type == IORESOURCE_IO || type == IORESOURCE_MEM) ||
-+			    resource_size(r) == 0)
- 				continue;
- 
--			if (flags & IORESOURCE_UNSET)
-+			if (r->flags & IORESOURCE_UNSET)
- 				continue;
- 
--			pci_start = pci_resource_start(pdev, i);
--			pci_end = pci_resource_end(pdev, i);
- 			for (j = 0;
- 			     (res = pnp_get_resource(dev, type, j)); j++) {
- 				if (res->start == 0 && res->end == 0)
- 					continue;
- 
--				pnp_start = res->start;
--				pnp_end = res->end;
--
- 				/*
- 				 * If the PNP region doesn't overlap the PCI
- 				 * region at all, there's no problem.
- 				 */
--				if (pnp_end < pci_start || pnp_start > pci_end)
-+				if (!resource_overlaps(res, r))
- 					continue;
- 
- 				/*
-@@ -278,8 +271,7 @@ static void quirk_system_pci_resources(struct pnp_dev *dev)
- 				 * PNP device describes a bridge with PCI
- 				 * behind it.
- 				 */
--				if (pnp_start <= pci_start &&
--				    pnp_end >= pci_end)
-+				if (res->start <= r->start && res->end >= r->end)
- 					continue;
- 
- 				/*
-@@ -288,9 +280,8 @@ static void quirk_system_pci_resources(struct pnp_dev *dev)
- 				 * driver from requesting its resources.
- 				 */
- 				dev_warn(&dev->dev,
--					 "disabling %pR because it overlaps "
--					 "%s BAR %d %pR\n", res,
--					 pci_name(pdev), i, &pdev->resource[i]);
-+					 "disabling %pR because it overlaps %s BAR %d %pR\n",
-+					 res, pci_name(pdev), i, r);
- 				res->flags |= IORESOURCE_DISABLED;
- 			}
- 		}
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index b50e5c79f7e3..a97f026afaed 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1995,14 +1995,25 @@ int pci_iobar_pfn(struct pci_dev *pdev, int bar, struct vm_area_struct *vma);
-  * These helpers provide future and backwards compatibility
-  * for accessing popular PCI BAR info
-  */
-+#define pci_resource_n(dev, bar)	(&(dev)->resource[(bar)])
- #define pci_resource_start(dev, bar)	((dev)->resource[(bar)].start)
- #define pci_resource_end(dev, bar)	((dev)->resource[(bar)].end)
- #define pci_resource_flags(dev, bar)	((dev)->resource[(bar)].flags)
- #define pci_resource_len(dev,bar) \
- 	((pci_resource_end((dev), (bar)) == 0) ? 0 :	\
- 							\
--	 (pci_resource_end((dev), (bar)) -		\
--	  pci_resource_start((dev), (bar)) + 1))
-+	 resource_size(pci_resource_n((dev), (bar))))
-+
-+#define __pci_dev_for_each_resource(dev, res, __i, vartype)		\
-+	for (vartype __i = 0;						\
-+	     res = pci_resource_n(dev, __i), __i < PCI_NUM_RESOURCES;	\
-+	     __i++)
-+
-+#define pci_dev_for_each_resource(dev, res, i)				\
-+       __pci_dev_for_each_resource(dev, res, i, )
-+
-+#define pci_dev_for_each_resource_p(dev, res)				\
-+	__pci_dev_for_each_resource(dev, res, __i, unsigned int)
- 
- /*
-  * Similar to the helpers above, these manipulate per-pci_dev
--- 
-2.39.2
+So can we update AFLAGS in xen/arch/riscv/arch.mk with -fno-PIE or will
+it still be an incorrect fix?
 
+[1]
+https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#=
+pseudoinstructions
+
+~ Oleksii
 
