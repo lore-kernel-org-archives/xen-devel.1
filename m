@@ -4,42 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83D74C74A5B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:01:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509618.785702 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB183C6FD1D
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Mar 2023 14:09:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509626.785722 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5Dr-00016v-H4; Tue, 14 Mar 2023 14:01:51 +0000
+	id 1pc5Kf-0002Rm-Ha; Tue, 14 Mar 2023 14:08:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509618.785702; Tue, 14 Mar 2023 14:01:51 +0000
+Received: by outflank-mailman (output) from mailman id 509626.785722; Tue, 14 Mar 2023 14:08:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pc5Dr-00016o-Dp; Tue, 14 Mar 2023 14:01:51 +0000
-Received: by outflank-mailman (input) for mailman id 509618;
- Tue, 14 Mar 2023 14:01:49 +0000
+	id 1pc5Kf-0002Rf-Ej; Tue, 14 Mar 2023 14:08:53 +0000
+Received: by outflank-mailman (input) for mailman id 509626;
+ Tue, 14 Mar 2023 14:08:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dXSW=7G=citrix.com=prvs=430734c92=roger.pau@srs-se1.protection.inumbo.net>)
- id 1pc5Dp-0000Kz-LO
- for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:01:49 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bf796c42-c270-11ed-b464-930f4c7d94ae;
- Tue, 14 Mar 2023 15:01:46 +0100 (CET)
-Received: from mail-mw2nam10lp2103.outbound.protection.outlook.com (HELO
- NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.103])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 14 Mar 2023 10:01:41 -0400
-Received: from SJ0PR03MB6360.namprd03.prod.outlook.com (2603:10b6:a03:395::11)
- by BN9PR03MB6202.namprd03.prod.outlook.com (2603:10b6:408:11f::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Tue, 14 Mar
- 2023 14:01:39 +0000
-Received: from SJ0PR03MB6360.namprd03.prod.outlook.com
- ([fe80::48a7:d1ab:897:acda]) by SJ0PR03MB6360.namprd03.prod.outlook.com
- ([fe80::48a7:d1ab:897:acda%3]) with mapi id 15.20.6178.019; Tue, 14 Mar 2023
- 14:01:39 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=9LtO=7G=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
+ id 1pc5Kd-0002RX-7y
+ for xen-devel@lists.xenproject.org; Tue, 14 Mar 2023 14:08:51 +0000
+Received: from sonic303-24.consmr.mail.gq1.yahoo.com
+ (sonic303-24.consmr.mail.gq1.yahoo.com [98.137.64.205])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bb9600e8-c271-11ed-b464-930f4c7d94ae;
+ Tue, 14 Mar 2023 15:08:46 +0100 (CET)
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic303.consmr.mail.gq1.yahoo.com with HTTP; Tue, 14 Mar 2023 14:08:44 +0000
+Received: by hermes--production-ne1-759c9b8c64-rg9jt (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 38f7483c5dbaf59a571a085480ef55d7; 
+ Tue, 14 Mar 2023 14:08:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,154 +44,303 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bf796c42-c270-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1678802507;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=x7Pi9JeyEdLMkLaLvLunTaIo2KLX7orfHAf/XFSyvgs=;
-  b=DVsfvgqYMWZuMZDvzekAVRewHnKkG4K4Gc3dOdTipa2XBvdQLfcA/k1R
-   FdiYKyGWlF1JOS1woyreglmhjnDIg4hr3DJQfnhTOCpH6H+Y0f3fwgYQs
-   EbPVrYJKO5qq5wlNntu3SLINDuzYnZt/gVI2/oEVgI8ziwFxU+Q9zl8sy
-   w=;
-X-IronPort-RemoteIP: 104.47.55.103
-X-IronPort-MID: 100153562
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:XyMPlqse/2Hf0Fq+zKKqQ8Fk0ufnVLJfMUV32f8akzHdYApBsoF/q
- tZmKWiEP62NM2X9ftsjO4y/pEoF7JHdzYVrQFA6qyEwRS5A+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg3HVQ+IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4bKj6Fv0gnRkPaoQ5ASHyyFPZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwLncsYzapv/ON2PGqZ7cxq5s9FunzM9ZK0p1g5Wmx4fcOZ7nmGv2PwOACmTA6i4ZJAOrUY
- NcfZXx3dhPcbhZTO1ARTpUjgOOvgXq5eDpdwL6XjfNvvy6Pk0osjf60aIG9lt+iHK25mm6Co
- W3L5SLhCwwyP92D0zuVtHmrg4cjmAuiANpLSeblqKQCbFu7yVMfJUMyenmBjsKChkWSWP91G
- VMr9X97xUQ13AnxJjXnZDW6r2SDpQU0QMdLHqsx7wTl4q7V5RuJQ2sJVDhMbPQ4u8IsAz8nz
- FmEm5XuHzMHmLmUT2+Ns72QqjixETYaIHVEZiIeSwYBpd75r+kbhwLFSdtLE6OviNDxXz3zq
- xiaoS57i7gNgMoj06Sg4UuBkz+qvoLOTAM++kPQRG3N0+9iTIusZojt7EeB6/9Fdd6dVgPY5
- CNCnNWC5ucTC53LjDaKXOgGALCu4bCCLSHYhllsWZIm8lxB5kKeQGyZ2xkmTG8BDyrOUWWBj
- JP70e+J2KJuAQ==
-IronPort-HdrOrdr: A9a23:mOy/DqAA6sFP7QDlHelc55DYdb4zR+YMi2TDt3oddfU1SL3+qy
- nKpp4mPHDP5wr5NEtPpTnEAtjifZq+z+8Q3WByB9eftWDd0QPFEGgh1/qB/9SJIUbDH4VmpM
- JdmsZFaeEZDTJB/LrHCAvTKade/DFQmprY+9s3zB1WPHBXg7kL1XYeNu4CeHcGPjWvA/ACZe
- Ohz/sCnRWMU1INYP+2A3EUNtKz2uEixPrdEGY77wdM0nj0sQ+V
-X-IronPort-AV: E=Sophos;i="5.98,260,1673931600"; 
-   d="scan'208";a="100153562"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OMcTC2Qol6KIFcNvsdcwJtEeLDeZ+S+Cx7IjJxKR/dEq4lE0MzRgxH3/2mJfGsgukjmDtb/II9Xi+MZoj20zAmH+zuDuE0erqfy2jPjJma1RpnXyw8hY6fLLnjNy+1IUKN+NX84NBLfJHf4oeo/adWhFISUSfHhKLVtRgMqiiKNqRldiqna3mvd0rA15VTCUGTaJ+Y7IGMqVL8GOmEZ37vjv2NmubhPIU89cavHsTczVt8CFCobmPavRcS4mryUB1J1eH4b0wZ//WqVgqcC4FrR3GodlWqhxIjZscS3QmYFhZi+GNsHVM0JGdH1hRB4i8QtcwP7xPXC+2eia3949uQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eduAfkaPs2BiUv37ci00k765OBwKbz6EiaFklRaz2j8=;
- b=PfVaJ19XZoNXENPjiVIrHG+KDaAPxj0CrT5D9XM3KhO6CzOUfAzmahEoeOCLMRjAJhXQfZ+GI1YsUEGm7ULiriZvnva3A0IfeQFBmUe6HmvljF6ZrxIXkM5Qc1RzyP5KAiBkpl07N1RCw2lwSQSkZNL+HD8HU6P/gNwAHxjFJloQTNCGkXTYGotMFgrQ+kwgFZmRYhxdk6cN6T0p9BjP3yt1rsOFjrrXWzD9MJNSkeCabJ70V26/frtE892kIYkvfYtF67ZUNmLr5/dgb0guTNMt5/+z8fsEm8ynMGl7EQ2e4Um1BxcebTtXdjdKk6kuEaaVmosNLHvVlM/nUZxRWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eduAfkaPs2BiUv37ci00k765OBwKbz6EiaFklRaz2j8=;
- b=THz1LWM4FFy4KGH9TBi/3evZH6TFflzovwVWrVr8jBmmke6C98tLqk169OVUsniwI4TBfYAvo1jLQtzGyCI2LY6nvkwvBPuz58apCzplVWzszeWMZ2sUFI0/dTjJtR1I/xUKlzZORy5zOOAnOrG/ktdFNhDBP4EM9tqINkwxtzY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Tue, 14 Mar 2023 15:01:32 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
-	Jens Axboe <axboe@kernel.dk>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 0/4] xen/blkback: some cleanups
-Message-ID: <ZBB+POI+ipSqKBJ6@Air-de-Roger>
-References: <20221216145816.27374-1-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20221216145816.27374-1-jgross@suse.com>
-X-ClientProxiedBy: MR1P264CA0115.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:50::33) To SJ0PR03MB6360.namprd03.prod.outlook.com
- (2603:10b6:a03:395::11)
+X-Inumbo-ID: bb9600e8-c271-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1678802924; bh=0LtqezmiTIuF1bLUTi9sCtQOp4N6+Va959+zTiUe6Yk=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=BjJxcgXvKWkSdw3I3im5DE3iOXpd2j37677NIkaccqZ2Af030hCrFLeNe5HU163lsqb14LSS+G6qOqA3pLX6+0I/lURGnjQxgTjHmupzyVX2kciZVG83iH4YIDymFM3mk7GC+bfDcFq8cuesGP8T6zE/o2Kz8SlCTI2OYxA9EwrvBMrurc78y3uUD6zym9hnkHnawLXHCphMS4pwZofGEhicEWTaOyVqHIl+l+K/PufH9JABRS08SckaVVPZIiH3YhnhpLIva4YoXr/FAspwSbOOXaFa91jaRZI62mOEtYvl7bMkUGtL5YILIV2/ZOuFXzdgieGv28iey4QTX3qcMw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1678802924; bh=9i0sphlhMEan7zFuTdD32Tyo+rFnjj9Cb0ZFf5E3oMj=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=ehl/gbqiaikm9QslCePzX0MYKn7ykqPrPQ0yeowmE8u46iiVy2iDMChC4jEFuEaYh778oF4IzAkZ8p9LOpTz97ekaPcAQ0NASP8NbCvZGbVNVFp2KzZgObWOBRLMtVon2u2VhO5wN3I5Q53CrjmUvf/93m488R5ShmjcIkLyIasXFlRRaCvD3YTZNToqBBqZToZrMFSt7595vROJZw7ajyJGStqk9HT2quN+QjIeqMQw0q/wWMp3lN9btvgKb7btxZRV8qhcU1lF2QcVh1d43sMaidMQHhmRh9aDcKAhnI94gZc1CsgdAsMwhGsSVD93IZZdSsWT/cq0wKNim6PC/A==
+X-YMail-OSG: 5sFzdeEVM1mAv2uPHa3ln9_24FwZssq02GFih9HFBqDWiCN13nlRRmDSNzU1A6D
+ ivfF62BK7cmvW7NOCIvUm52gnKspiDEV2jrlRjkxVHFFoC.2QJMiv9coHnsq1BO26U2nsM_DHiQ_
+ 5fIwNr3HbFUz0tHItwXEkyRYSIADw9_uK0FwPU0WtYsamMgxLZ5g8DByZNKbEe37Lekg64U0QrIG
+ 03PuL5yjhjYYKbxpec0z16f2o1dQHJZ8k4pE.__uGZy9_QuSQA_bR3yu7W_NrsNE9O46HpJ07oX_
+ GO8iJL33wpEnuLrZ_LPtRxRns6vUfSiLbPOcGe9TPZBYHZMAfn8wTVB61im5YOPC7n1Wqq5ojdYs
+ dXB32.OrLsO3wXhTQifagpvMD1E0bw4A_bM6O6ABr49F7ydOK5j2w0yRu3QAJwJWFTeV.NG5kpDd
+ QslyDhC2gRhKYVUR1GbrBd.eIP4wspbuwpVPn3h3vA0erUK4x5VPeHlJuzSxyOnF8ZF3hvEMmN5A
+ dfl449OQYVvEZOCS0Zsu9vtIQXjDjX02KfMXUYKy7NkVon0m0Ta2AXfYevfFkaVBvQTr8.rdlHC2
+ rVecjgiJdWBa8I5fKSdyHqMTwHpAbmigFyWVZBmkPJRoY7ivtr6XZFGcMGjYbijvrO9w50lnirlX
+ InDkN8OhREVFeXkfof7Unx5h5hCk3WmbxFZvQyev.fRo4ESlUnLk3Xk5E5qduUEGWbJymcGbhT9d
+ YWrAj5e6aE9W8IIIdMhthkuc0chofIl5P8XnmbO.3XOjV3TdA..U_EL2FZ9Cra0S5dlkos_lShVZ
+ C507gAX8B5hofWw.gIYGgsWa48sG6n50gD5h7DK_grnTx2N_rkIF4dg05c56I2bx7Ndy0WFbgRg2
+ cy2os6nsYtu4R_HTZyYqZLIlttQvvva02WsFZk01B7Um_Cld7vsGdrqioNwTO7jI.6Ch1wa4G4NQ
+ hzRh2RF5Ni0ELjX2I1lv.SXcgOxcNxEMLVxDyiIPxuTAAsICOXGT4g4dMCT2pAtj.ieIub4GHB_o
+ iS39MgJyhrprv9UgIA9svw62pzvwdFFBUSOjfpV357DHicaGpiNWlJ7jYhm0kmygrSzn.R5857co
+ QLbl0aAxzsPT5qmMNmR4GJoR2cX2CJnGZL7hnX92BObfLSpTqN4UVSJepAb.KmiD78yFk2biix.O
+ KM8M.P8GB4hT0fHzsivxAXyICp_4S0EE7d5NvfE1_ao.zeZfzP1Q2gbzL0BYcQPEJkOE8P1yHQqR
+ UsDAA9ELWwY8NUQJa51MJeu.J7vaU7dXucQlXPF1krwadoOxg9AxGfMRdtpnULq7fyuOE0LpMYe0
+ scXaciyyR4X3CyUb8ioAAzsYXirgDzV5PK4AqO2kXW7qf5f06fuZ1gg7uIexTJdJLyZuJQtXuO0F
+ rPjvQi8Lqzc.9d3StC4vET6kSmtcCzjGB1yAd01WhM6D8hjdkk9nvi6jpISb4x29WusDEpSNS8Jt
+ Ej7tyG6mRPtn20fajr.KiI_1iKUAGcfuC8k1ozfKGa1DNgC9GbXpBph0cjXJfCHuepZRTBQUQY8s
+ WzeAO4LB6C6sh5vYC91bwlNW_neG0IPfASqlZ0nAdNZKSZJjxDqZqK1EzWh6rHqP9trUZQHab4FP
+ YFSo4aZhJ72hj8XV3csU5U8gglHfIpchC7QCytyyddgDG6r76y9ORjpA2tbTBfSTAmgQKNW86Dqm
+ GbNajGkYcOdVyYphRT1URW9o6hsiuL.6719qZFCbEZwRusx5spe2LhC2nzuMPGNlb6GZXq6FowcQ
+ vhCaia.FNuRORhP2.ZSGLRVhx6.Cy7PqzkQQFxsOUi09BnREOAzATS7c9K66njKGPoMaom3Cx_kY
+ _jvqabRnjRYFqXUxPnyzlY4ueJV3vvOz8JBV4B6fC4rlis3YFSODHF54HmBbkUw0NK36aQacN4ST
+ dYdzo35CeumwoK6GYK.1NgiZAda1d1LI4Wejs3jN9HaXOPdnqoruevAFLQr8SJkbs_pG93homz8T
+ LQcLEwGxCoCmoiMlx4pELQD5IL.m_zZjEToXl6z1KtaI16aP6.085cHfNT6b24crmWD77tvP_zU0
+ FxUijaf9G_d1Au50q3uDwXOP5XZiHUo2wInqhw8OBdzzRyV8cNh3SN4.3MTnWT_OWj_x2G2MzGLU
+ DtU0IpqIhhcyTQyRR8CKxoLJYStdgECfpO72JEDbTLJVsxDV6N4abUJIvnjL.lYh7WoRhIRD5LeS
+ qtX9rHKWrKJ2f6xUqtfqP31qH
+X-Sonic-MF: <brchuckz@aim.com>
+X-Sonic-ID: ff59ccee-9918-48da-8d9e-5f9b2f42ed7f
+Message-ID: <c44a3666-43b6-5287-dfc1-c6e61798fa9d@aol.com>
+Date: Tue, 14 Mar 2023 10:08:40 -0400
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|BN9PR03MB6202:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d0198a6-f4b1-4f10-83b5-08db2494a1d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	S5I/JFmwyFqjydr5Qwo7IAIZnZJlA99YthCLp/u4QYECSZaiIgvjf2+gd0wMMBbuPtHQXQvLxQnWD1iRHfPmlc+qW5VJyz6ZbNAt1L+LrIQAwCX46i6lY+1sw98bVr3+O26rr24hyBfH8v138qLbWo+92ZPrEx/92RJNoPaV/omm3c+SgNEetzkL/V/O8Pv6kjtvT97d601wYzwSaSElTTaBhuL/9Mvq+CTnm9AyweLgF9ooYBW8xGX51WHwFbkvPjMvV+15tqBYtHlQ9udQpAyBzSNXvvdSVmReKrWtB9M6X6kcnaC4lVUGZLUhv3Wl00q8dDmuRDubdqODxy2mwbRPUqx/vVv5R00xG3qYwJ3BuUm8FWC1Nn6HzxkFErKsc8w6wHIwIWMF6XAKynMoNkkva9qnSm4XiY+2QvKT73N2nb6RoDFgx9j65Mz3sxbcAZIrNth7zvs5dGQPJrlxtAhPtI9tWgby+xE1dZW/8+mG0PCyipxJCgldK8csh7/MYzyXGDJaveNtYl8kQ+AZ3L3UxLwK9KEkKkaNS6ro05aO0+4uQHjB1QReGIm1mK8y9PWI0LWt74XPWxsCtTF19xPrHk5wetsQJ3nKuaID90pwnoAGnqzmd5GiTU3ItsRYmvgoAosKrlsMkbWj+RwBoA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(7916004)(4636009)(396003)(136003)(346002)(376002)(39860400002)(366004)(451199018)(85182001)(316002)(6486002)(478600001)(5660300002)(2906002)(8936002)(4744005)(4326008)(8676002)(6916009)(66556008)(66476007)(66946007)(41300700001)(82960400001)(86362001)(38100700002)(186003)(33716001)(6666004)(6506007)(9686003)(6512007)(26005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RnF1VTVXaFBBendORjA3OW5TZmFQRlh5QzUyaUVFNi8wMThGY0MwbC9vMnRD?=
- =?utf-8?B?NmVOcUFNL2ZBUEFBVkpYZHZWSklmcEo5Vlp2SkU4cWsvSUdIa3ArNHFCcngy?=
- =?utf-8?B?Rk4xY081WGRkZGc1eTRxYzF4M3ZwVTRGOTJ3NTBjTjM3dFdhK0w1amh2cEFp?=
- =?utf-8?B?dFJrbHQxa0cxN1BHdS9waHpRQWN5WUN2WUloUGJlWk52aU9saHkva2NSQnhW?=
- =?utf-8?B?cElIOHV2SGtZek9IYW56UmllYVhaQVZSRHI1dStUMllKZTQ2aExVdFBGQjhm?=
- =?utf-8?B?RlNRbXZ0S0N6b1ZUQmQ5ODhBN1V5Y3NVUnc4dXVpZFcrbmcrblBLZlN6U3Zl?=
- =?utf-8?B?QjBKNEZsOFlpbERxV2JHNTBwaEY1Mmd1L3lqZWU0NEl6TWthZFR5NlhleTM4?=
- =?utf-8?B?b2Uva3NZR04yZHdqMDAzN3BNSUZNMVJmelZ1UG1OTDlFVStGWlJGazlnZnQ2?=
- =?utf-8?B?YXFnZGRCMGlXNDdLN2xBMHVVT1hpQ1BKTGpXVjlvNGV2WkIxVzR3ZTJKaWsz?=
- =?utf-8?B?VHNqSXpQcTBuSnBzOGl4TzVPQkorNkFpWVBOVERMRVdpMDFBNUpGcEdpanhj?=
- =?utf-8?B?UnJnaDFBdlFqTXVrMWZNanhTcHRZVGRZNndIN1M2WlBWb09GUmw0ZHA1TmhE?=
- =?utf-8?B?Q2xVZnBPZ3ZmS0JVTk5pSmk5Qys3RzBiV2l3SkpMTG9mQ2hmOEVENEwzc1Zq?=
- =?utf-8?B?bnlEVzZNbktzZS9qYVFYZ3hXakNxWXJNcVZkUGl3Zm0rdE9NK1BUYlhiV3pF?=
- =?utf-8?B?YThZWXNzbnRDTzJuZFdhVDhDY2pxMGJLK0NDalBoYkltNktub0JkN3dISHhP?=
- =?utf-8?B?YUs5NklUREtocXZIeGpkVTNrVFFSWWQwMTBrSnJKTXEwNmYxczVRSWJLWXhZ?=
- =?utf-8?B?eGM2SDk1Z0NHNmI0eWxQZE9DRzUrT24wYXMxR2ZyQ0NzNWh0M0lCZ0RwdTdw?=
- =?utf-8?B?d1MzMTVmOGFYeFBsZ3ZVQU5GMmFXR1prVldZRXpaYmd1TmdGMVczd3hRTGJJ?=
- =?utf-8?B?bkVYdFZoa3NUcVkxUEpqbEZoS1lUcWNQSTk1ME8zZjhJY0p2dWRhWU4wSXRN?=
- =?utf-8?B?eExqejVrd0pla3NXbVVhMFNtTEl6SVk0Wks5eFFMNDhPc0hTdEVYbWhVWStK?=
- =?utf-8?B?ZGszSHQ3bVVvUWFIVzA2c2lnazR5UFk0Yy9nYndEYWozWHNTd1BPekhqUTdz?=
- =?utf-8?B?VjNpalVaVFJvUGRUUnlHWXpDYTl4YU5La0tubjZkWkpPM25GdlVqcWdkWlN4?=
- =?utf-8?B?emF2Und3eWpuOW9aanZqTWV6U0N4emQ2ak9mRCs0NEF1R051a0M5OTFncENi?=
- =?utf-8?B?RFowRk5rdXBIbmJ5ZXRYZ2dNVzBxMjlsa082YkRpRXlLVWtCeHdyNVJFSngz?=
- =?utf-8?B?aFBLdTVXaWRWYVpEVVFQc080NWdlVmFNbHhieitKaW5lS3Fvd04wb0ptdXNu?=
- =?utf-8?B?bVMxc3BlYWhUOVBtM2FsZHpVazZmVnhWRUxhVG5ZMmNYbXBBemxwUEFKdjZI?=
- =?utf-8?B?bHoyZGowdTN2R3lzSnZSOS9OQmk5UTh2di83eFVYaDlSZHFUK1NtWEcyRmU5?=
- =?utf-8?B?QzJlcUM3VE41T2lleEcxTWYzQ0RieFNCN1FFaGhpZHhVU2VQVmo5SjY3dVVo?=
- =?utf-8?B?MTRYQlA4Rlk4WUZzejRkRHBWZzVTYWwwVldKeS93andOdndPM2hGUlhOVytr?=
- =?utf-8?B?NjdLZjZwdmk1cWhjeDRyWVFxVnhpNDh6UUJ2akhGTnJPWTdsYTIvNFEzZzhw?=
- =?utf-8?B?WDk0U0NpMXFUbzJlRmJSTS9VSW1MeVhxaG1MR2hOT05zWHhmb3Z6eHl4UlA3?=
- =?utf-8?B?YTAvOFFVTnZVa0RIR3g5QXhHbHUvT3FjUnIzcE5LdFd6RWJiTjdvU2NKWUNP?=
- =?utf-8?B?QXpTV0M5K0dDaFFpRUpSZEtOOXZhRVErLzRDSkI0RERpTjJiSk9Qbk0vK3l2?=
- =?utf-8?B?RjJwcncwdVE1bmpaRkNFZXRUYVZIbUNTVEp4b1RtTWRkN2V3TkxkdkJLbER6?=
- =?utf-8?B?djZTQTNvc093Q3pqZXQwWHFwMHpiSjBZMGlWbWpKY2p6NVNUaERveGI1eHJC?=
- =?utf-8?B?RE1qNkdpdi82N2xGVGFLN3hrcGFMVkQ4Vit0TWRDdVZWdzlraERFMXhVb0N6?=
- =?utf-8?B?N3lrTW1qTjdaQUxEd1FrWGp2R2oyc3lYdWc4RWlKWGhCdm1ZRXlhSlFjWHVk?=
- =?utf-8?B?d0E9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	KXuBWJQQXDlrjoqlPQS21XC/Zb03S5wSoh7OZJM/Mo83aow/HAp/FT+r59QqkMSLLC8InbNHtLPhDohTdqpC8BsWzreP05kKrE3ohVEvfu9qLtrBieSz0HqwAt3SPas/udiIN/gU4M1YsoOTe5gzHzfJYwO8IXRYDsrvC5szus6fs77YVMcW02THXG2OEtzwWWguitYUtfG34qmwLWjFhWtWDZJzR6x6vEXSuBbFGsH+G4eXDe0wOVVkXhbL2QazCZP1S8BcSMLqRr4LkT60OhIdqKfAx1FWHpDe63fb9jnGkuE4W0fFB3tRA2R3ThRc07k8HSrZm9K2LTCoeDZrwG+StU5JYUVOKfHKWLTSy3aKvUsXQv7QbzJTnTc7iq0VDeILYWZ4mZavi0lGIRunFlJi00I/Ry7nlKu90cE1OW/L9x2wbyYQV5wOeeMo2hjTezH5dLq/G9rcO5NaT8C9ELbZyVkcVOs3hfqdxIYbdIPu2WladnVBmhCklnZWlkPyJ3VYHEHodkH/yTOb5xncMe3qXeyeld7pDtGo8uBv1lCc5uz8G5z4GmaStpVTEBrFTjo+SXAAb3DxY5dgAcRZzJjzMByLrUTP1NzjQQ2cUWtXMTUxnCIPY2oXup5vLgdAf2d8Tk+f8AM9HTDTNluG2vGDD5/v4nQPIdU7GsT+bLPCrPDPvMLOmE2WuG6126hu4RvNd3ZiYCckMwZxl/XeP/OXeFaZh18VCl/EBlcXW5XQ4EmeFZxofHBdFiomXEBEDQd2GMkuf/WeDRcnU4fVvHxovjzkQ6DkXh/j+4VqawBaEDgavRtSij4ftY0D2B/toRX3f0TLRPa9N7vP1w71J0AYViTEDp+HoBSNyQJtbLcMBzi05lw6/P6882mKy57n
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d0198a6-f4b1-4f10-83b5-08db2494a1d1
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6360.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2023 14:01:39.5741
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YLJ4CQ19IJfG17KQaVUhDWtTERcyf2L0tZVNw9shM6Zcy5MsPelXk/Hcp6KAuovKbjDoiEnmNo47hgAjHbPTXQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR03MB6202
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v2 2/2] pci: allow slot_reserved_mask to be ignored with
+ manual slot assignment
+Content-Language: en-US
+To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ "Michael S. Tsirkin" <mst@redhat.com>
+Cc: qemu-devel@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <cover.1678763217.git.brchuckz@aol.com>
+ <d9ae459b2814425c2d9e756e45d993c824da150a.1678763217.git.brchuckz@aol.com>
+ <20230314023148-mutt-send-email-mst@kernel.org>
+ <0c8ee7e9-dd23-262f-f67e-359e14abf6f2@ilande.co.uk>
+ <20230314091653-mutt-send-email-mst@kernel.org>
+ <34eda0c4-3d90-0e22-7888-81bf18e2a5f0@aol.com>
+ <7b79ec08-064c-7940-0285-be8a96e2a144@ilande.co.uk>
+From: Chuck Zmudzinski <brchuckz@aol.com>
+In-Reply-To: <7b79ec08-064c-7940-0285-be8a96e2a144@ilande.co.uk>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.21284 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
 
-On Fri, Dec 16, 2022 at 03:58:12PM +0100, Juergen Gross wrote:
-> Some small cleanup patches I had lying around for some time now.
-> 
-> Juergen Gross (4):
->   xen/blkback: fix white space code style issues
->   xen/blkback: remove stale prototype
->   xen/blkback: simplify free_persistent_gnts() interface
+On 3/14/2023 9:41 AM, Mark Cave-Ayland wrote:
+> On 14/03/2023 13:26, Chuck Zmudzinski wrote:
+>
+> > On 3/14/2023 9:17 AM, Michael S. Tsirkin wrote:
+> >> On Tue, Mar 14, 2023 at 12:43:12PM +0000, Mark Cave-Ayland wrote:
+> >>> On 14/03/2023 06:33, Michael S. Tsirkin wrote:
+> >>>
+> >>>> On Tue, Mar 14, 2023 at 12:01:09AM -0400, Chuck Zmudzinski wrote:
+> >>>>> Commit 4f67543bb8c5 ("xen/pt: reserve PCI slot 2 for Intel igd-passthru")
+> >>>>> uses slot_reserved_mask to reserve slot 2 for the Intel IGD for the
+> >>>>> xenfv machine when the guest is configured for igd-passthru.
+> >>>>>
+> >>>>> A desired extension to that commit is to allow use of the reserved slot
+> >>>>> if the administrator manually configures a device to use the reserved
+> >>>>> slot. Currently, slot_reserved_mask is enforced unconditionally. With
+> >>>>> this patch, the pci bus can be configured so the slot is only reserved
+> >>>>> if the pci device to be added to the bus is configured for automatic
+> >>>>> slot assignment.
+> >>>>>
+> >>>>> To enable the desired behavior of slot_reserved_mask machine, add a
+> >>>>> boolean member enforce_slot_reserved_mask_manual to struct PCIBus and
+> >>>>> add a function pci_bus_ignore_slot_reserved_mask_manual which can be
+> >>>>> called to change the default behavior of always enforcing
+> >>>>> slot_reserved_mask so, in that case, slot_reserved_mask is only enforced
+> >>>>> when the pci device being added is configured for automatic slot
+> >>>>> assignment.
+> >>>>>
+> >>>>> Call the new pci_bus_ignore_slot_reserved_mask_manual function after
+> >>>>> creating the pci bus for the pc/i440fx/xenfv machine type to implement
+> >>>>> the desired behavior of causing slot_reserved_mask to only apply when
+> >>>>> the pci device to be added to a pc/i440fx/xenfv machine is configured
+> >>>>> for automatic slot assignment.
+> >>>>>
+> >>>>> Link: https://lore.kernel.org/qemu-devel/20230106064838-mutt-send-email-mst@kernel.org/
+> >>>>> Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
+> >>>>
+> >>>> I really dislike this.
+> >>>> It seems that xen should not have used slot_reserved_mask,
+> >>>> and instead needs something new like slot_manual_mask.
+> >>>> No?
+> >>>
+> >>> My suggestion was to move the validation logic to a separate callback
+> >>> function in PCIBus (see
+> >>> https://lists.gnu.org/archive/html/qemu-devel/2023-03/msg03988.html) but
+> >>> perhaps I wasn't clear enough in pointing out that I was thinking this could
+> >>> *replace* the existing slot_reserved_mask mechanism, rather than providing a
+> >>> hook to allow it to be manipulated.
+> >>>
+> >>> Here's a very rough patch put together over lunch that attempts this for
+> >>> pci_bus_devfn_reserved(): the idea is that sun4u and Xen would call
+> >>> pci_bus_set_slot_reserved_fn() with a suitable pci_slot_reserved_fn
+> >>> implementation, and slot_reserved_mask gets removed completely i.e.:
+> >>>
+> >>>
+> >>> diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+> >>> index def5000e7b..30b856499a 100644
+> >>> --- a/hw/pci/pci.c
+> >>> +++ b/hw/pci/pci.c
+> >>> @@ -493,6 +493,13 @@ bool pci_bus_bypass_iommu(PCIBus *bus)
+> >>>       return host_bridge->bypass_iommu;
+> >>>   }
+> >>>
+> >>> +static bool pci_bus_default_slot_reserved(PCISlotReservationType restype,
+> >>> +                                          int devfn)
+> >>> +{
+> >>> +    /* All slots accessible by default */
+> >>> +    return false;
+> >>> +}
+> >>> +
+> >>>   static void pci_root_bus_internal_init(PCIBus *bus, DeviceState *parent,
+> >>>                                          MemoryRegion *address_space_mem,
+> >>>                                          MemoryRegion *address_space_io,
+> >>> @@ -500,7 +507,7 @@ static void pci_root_bus_internal_init(PCIBus *bus,
+> >>> DeviceState *parent,
+> >>>   {
+> >>>       assert(PCI_FUNC(devfn_min) == 0);
+> >>>       bus->devfn_min = devfn_min;
+> >>> -    bus->slot_reserved_mask = 0x0;
+> >>> +    bus->slot_reserved_fn = pci_bus_default_slot_reserved;
+> >>>       bus->address_space_mem = address_space_mem;
+> >>>       bus->address_space_io = address_space_io;
+> >>>       bus->flags |= PCI_BUS_IS_ROOT;
+> >>> @@ -1111,9 +1118,15 @@ static bool pci_bus_devfn_available(PCIBus *bus, int devfn)
+> >>>       return !(bus->devices[devfn]);
+> >>>   }
+> >>>
+> >>> -static bool pci_bus_devfn_reserved(PCIBus *bus, int devfn)
+> >>> +static bool pci_bus_devfn_reserved(PCIBus *bus, int devfn,
+> >>> +                                   PCISlotReservationType restype)
+> >>> +{
+> >>> +    return bus->slot_reserved_fn(restype, devfn);
+> >>> +}
+> >>> +
+> >>> +void pci_bus_set_slot_reserved_fn(PCIBus *bus, pci_slot_reserved_fn fn)
+> >>>   {
+> >>> -    return bus->slot_reserved_mask & (1UL << PCI_SLOT(devfn));
+> >>> +    bus->slot_reserved_fn = fn;
+> >>>   }
+> >>>
+> >>>   /* -1 for devfn means auto assign */
+> >>> @@ -1141,7 +1154,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
+> >>>           for(devfn = bus->devfn_min ; devfn < ARRAY_SIZE(bus->devices);
+> >>>               devfn += PCI_FUNC_MAX) {
+> >>>               if (pci_bus_devfn_available(bus, devfn) &&
+> >>> -                   !pci_bus_devfn_reserved(bus, devfn)) {
+> >>> +                   !pci_bus_devfn_reserved(bus, devfn, PCI_SLOT_RESERVATION_AUTO)) {
+> >>>                   goto found;
+> >>>               }
+> >>>           }
+> >>> @@ -1149,7 +1162,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
+> >>>                      "or reserved", name);
+> >>>           return NULL;
+> >>>       found: ;
+> >>> -    } else if (pci_bus_devfn_reserved(bus, devfn)) {
+> >>> +    } else if (pci_bus_devfn_reserved(bus, devfn, PCI_SLOT_RESERVATION_MANUAL)) {
+> >>>           error_setg(errp, "PCI: slot %d function %d not available for %s,"
+> >>>                                          MemoryRegion *address_space_io,
+> >>> @@ -500,7 +507,7 @@ static void pci_root_bus_internal_init(PCIBus *bus,
+> >>> DeviceState *parent,
+> >>>   {
+> >>>       assert(PCI_FUNC(devfn_min) == 0);
+> >>>       bus->devfn_min = devfn_min;
+> >>> -    bus->slot_reserved_mask = 0x0;
+> >>> +    bus->slot_reserved_fn = pci_bus_default_slot_reserved;
+> >>>       bus->address_space_mem = address_space_mem;
+> >>>       bus->address_space_io = address_space_io;
+> >>>       bus->flags |= PCI_BUS_IS_ROOT;
+> >>> @@ -1111,9 +1118,15 @@ static bool pci_bus_devfn_available(PCIBus *bus, int devfn)
+> >>>       return !(bus->devices[devfn]);
+> >>>   }
+> >>>
+> >>> -static bool pci_bus_devfn_reserved(PCIBus *bus, int devfn)
+> >>> +static bool pci_bus_devfn_reserved(PCIBus *bus, int devfn,
+> >>> +                                   PCISlotReservationType restype)
+> >>> +{
+> >>> +    return bus->slot_reserved_fn(restype, devfn);
+> >>> +}
+> >>> +
+> >>> +void pci_bus_set_slot_reserved_fn(PCIBus *bus, pci_slot_reserved_fn fn)
+> >>>   {
+> >>> -    return bus->slot_reserved_mask & (1UL << PCI_SLOT(devfn));
+> >>> +    bus->slot_reserved_fn = fn;
+> >>>   }
+> >>>
+> >>>   /* -1 for devfn means auto assign */
+> >>> @@ -1141,7 +1154,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
+> >>>           for(devfn = bus->devfn_min ; devfn < ARRAY_SIZE(bus->devices);
+> >>>               devfn += PCI_FUNC_MAX) {
+> >>>               if (pci_bus_devfn_available(bus, devfn) &&
+> >>> -                   !pci_bus_devfn_reserved(bus, devfn)) {
+> >>> +                   !pci_bus_devfn_reserved(bus, devfn, PCI_SLOT_RESERVATION_AUTO)) {
+> >>>                   goto found;
+> >>>               }
+> >>>           }
+> >>> @@ -1149,7 +1162,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
+> >>>                      "or reserved", name);
+> >>>           return NULL;
+> >>>       found: ;
+> >>> -    } else if (pci_bus_devfn_reserved(bus, devfn)) {
+> >>> +    } else if (pci_bus_devfn_reserved(bus, devfn, PCI_SLOT_RESERVATION_MANUAL)) {
+> >>>           error_setg(errp, "PCI: slot %d function %d not available for %s,"
+> >>>                      " reserved",
+> >>>                      PCI_SLOT(devfn), PCI_FUNC(devfn), name);
+> >>> diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+> >>> index d5a40cd058..8a949f7ae1 100644
+> >>> --- a/include/hw/pci/pci.h
+> >>> +++ b/include/hw/pci/pci.h
+> >>> @@ -257,10 +257,18 @@ MemoryRegion *pci_address_space_io(PCIDevice *dev);
+> >>>    */
+> >>>   int pci_bar(PCIDevice *d, int reg);
+> >>>
+> >>> +typedef enum PCISlotReservationType {
+> >>> +    PCI_SLOT_RESERVATION_AUTO,
+> >>> +    PCI_SLOT_RESERVATION_MANUAL
+> >>> +} PCISlotReservationType;
+> >>> +
+> >>> +typedef bool (*pci_slot_reserved_fn)(PCISlotReservationType restype, int devfn);
+> >>>   typedef void (*pci_set_irq_fn)(void *opaque, int irq_num, int level);
+> >>>   typedef int (*pci_map_irq_fn)(PCIDevice *pci_dev, int irq_num);
+> >>>   typedef PCIINTxRoute (*pci_route_irq_fn)(void *opaque, int pin);
+> >>>
+> >>> +void pci_bus_set_slot_reserved_fn(PCIBus *bus, pci_slot_reserved_fn fn);
+> >>> +
+> >>>   #define TYPE_PCI_BUS "PCI"
+> >>>   OBJECT_DECLARE_TYPE(PCIBus, PCIBusClass, PCI_BUS)
+> >>>   #define TYPE_PCIE_BUS "PCIE"
+> >>> diff --git a/include/hw/pci/pci_bus.h b/include/hw/pci/pci_bus.h
+> >>> index 5653175957..d68ea1418d 100644
+> >>> --- a/include/hw/pci/pci_bus.h
+> >>> +++ b/include/hw/pci/pci_bus.h
+> >>> @@ -36,7 +36,7 @@ struct PCIBus {
+> >>>       PCIIOMMUFunc iommu_fn;
+> >>>       void *iommu_opaque;
+> >>>       uint8_t devfn_min;
+> >>> -    uint32_t slot_reserved_mask;
+> >>> +    pci_slot_reserved_fn slot_reserved_fn;
+> >>>       pci_set_irq_fn set_irq;
+> >>>       pci_map_irq_fn map_irq;
+> >>>       pci_route_irq_fn route_intx_to_irq;
+> >>>
+> >>>
+> >>> If this approach seems reasonable, I'm happy for someone else to take this
+> >>> over and turn it into a proper series.
+> >>>
+> >>>
+> >>> ATB,
+> >>>
+> >>> Mark.
+> >>
+> >> It's ok too though I think I like chuck's proposal better:
+> >> less callbacks to chase.
+> >>
+> > 
+> > I would be willing to pursue this if there were more use cases for
+> > slot_reserved_mask than just the two cases we have now: xen and sun4u.
+> > Until there is a clear demand for a more general way to manipulate the
+> > mask, I agree with Michael that the KISS principle should apply here.
+>
+> No worries. The thinking behind this idea was that it feel like the Xen case is 
+> special in that it has separate requirements for auto slot allocation and manual slot 
+> allocation: if slot reservation were used in more places, I'd expect the sun4u case 
+> to be more common, in which case it seems a bit more work for the common case to have 
+> to set both slot_reserved_mask_auto and slot_reserved_mask_manual separately. Perhaps 
+> a single accessor function can be used to set both mask values together for a PCIBus?
+>
+> Regardless, I'll take step back and leave you and Michael to come up with a solution 
+> that you're both happy with. Let me know if you need me to test anything on sun4u.
 
-All first 3:
+I will give this a little time to see if anyone else has any ideas here,
+and to also more carefully consider Mark's proposal, before posting
+v3.
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Kind regards,
 
->   xen/blkback: move blkif_get_x86_*_req() into blkback.c
-
-I've got two minor further adjustments for 4.
-
-Thanks, Roger.
+Chuck
 
