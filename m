@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DF5C761AF
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Mar 2023 09:06:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509944.786792 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E566C77B60
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Mar 2023 09:06:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509940.786747 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcN5W-0007bE-N1; Wed, 15 Mar 2023 09:06:26 +0000
+	id 1pcN5P-0006DE-Nj; Wed, 15 Mar 2023 09:06:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509944.786792; Wed, 15 Mar 2023 09:06:26 +0000
+Received: by outflank-mailman (output) from mailman id 509940.786747; Wed, 15 Mar 2023 09:06:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcN5W-0007aV-E1; Wed, 15 Mar 2023 09:06:26 +0000
-Received: by outflank-mailman (input) for mailman id 509944;
- Wed, 15 Mar 2023 09:06:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pcN5P-0006AT-En; Wed, 15 Mar 2023 09:06:19 +0000
+Received: by outflank-mailman (input) for mailman id 509940;
+ Wed, 15 Mar 2023 09:06:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UsHm=7H=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1pcN5V-0005Kr-AM
- for xen-devel@lists.xenproject.org; Wed, 15 Mar 2023 09:06:25 +0000
+ id 1pcN5N-0005KS-Vl
+ for xen-devel@lists.xenproject.org; Wed, 15 Mar 2023 09:06:18 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a87b664b-c310-11ed-b464-930f4c7d94ae;
- Wed, 15 Mar 2023 10:06:23 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id a481f899-c310-11ed-87f5-c1b5be75604c;
+ Wed, 15 Mar 2023 10:06:16 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9CFE84B3;
- Wed, 15 Mar 2023 02:07:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D2CD4169C;
+ Wed, 15 Mar 2023 02:06:59 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.195.25])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AE36B3F8C6;
- Wed, 15 Mar 2023 02:06:21 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0D8793F8C6;
+ Wed, 15 Mar 2023 02:06:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,192 +44,522 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a87b664b-c310-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: a481f899-c310-11ed-87f5-c1b5be75604c
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Nick Rosbrook <rosbrookn@gmail.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 09/10] xen/tools: add sve parameter in XL configuration
-Date: Wed, 15 Mar 2023 09:05:57 +0000
-Message-Id: <20230315090558.731029-10-luca.fancellu@arm.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 05/10] arm/sve: save/restore SVE context switch
+Date: Wed, 15 Mar 2023 09:05:53 +0000
+Message-Id: <20230315090558.731029-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230315090558.731029-1-luca.fancellu@arm.com>
 References: <20230315090558.731029-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add sve parameter in XL configuration to allow guests to use
-SVE feature.
+Save/restore context switch for SVE, allocate memory to contain
+the Z0-31 registers whose length is maximum 2048 bits each and
+FFR who can be maximum 256 bits, the allocated memory depends on
+how many bits is the vector length for the domain and how many bits
+are supported by the platform.
+
+Save P0-15 whose length is maximum 256 bits each, in this case the
+memory used is from the fpregs field in struct vfp_state,
+because V0-31 are part of Z0-31 and this space would have been
+unused for SVE domain otherwise.
+
+Create zcr_el{1,2} fields in arch_vcpu, initialise zcr_el2 on vcpu
+creation given the requested vector length and restore it on
+context switch, save/restore ZCR_EL1 value as well.
+
+Remove headers from sve.c that are already included using
+xen/sched.h.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
 Changes from v1:
- - updated to use arch_capabilities field for vector length
+ - No changes
 Changes from RFC:
- - changed libxl_types.idl sve field to uint16
- - now toolstack uses info from physinfo to check against the
-   sve XL value
- - Changed documentation
+ - Moved zcr_el2 field introduction in this patch, restore its
+   content inside sve_restore_state function. (Julien)
 ---
- docs/man/xl.cfg.5.pod.in             | 11 +++++++++++
- tools/golang/xenlight/helpers.gen.go |  2 ++
- tools/golang/xenlight/types.gen.go   |  1 +
- tools/include/libxl.h                |  5 +++++
- tools/libs/light/libxl_arm.c         |  2 ++
- tools/libs/light/libxl_types.idl     |  1 +
- tools/xl/xl_parse.c                  | 25 +++++++++++++++++++++++--
- 7 files changed, 45 insertions(+), 2 deletions(-)
+ xen/arch/arm/arm64/sve.c                 |  65 ++++++++++-
+ xen/arch/arm/arm64/sve_asm.S             | 141 +++++++++++++++++++++++
+ xen/arch/arm/arm64/vfp.c                 |  79 +++++++------
+ xen/arch/arm/domain.c                    |   7 ++
+ xen/arch/arm/include/asm/arm64/sve.h     |  13 +++
+ xen/arch/arm/include/asm/arm64/sysregs.h |   3 +
+ xen/arch/arm/include/asm/arm64/vfp.h     |  10 ++
+ xen/arch/arm/include/asm/domain.h        |   2 +
+ 8 files changed, 281 insertions(+), 39 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 024bceeb61b2..bb138322e290 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -2903,6 +2903,17 @@ Currently, only the "sbsa_uart" model is supported for ARM.
- 
- =back
- 
-+=item B<sve="NUMBER">
-+
-+To enable SVE, user must specify a number different from zero, maximum 2048 and
-+multiple of 128. That value will be the maximum number of SVE registers bits
-+that the hypervisor will impose to this guest. If the platform has a lower
-+supported bits value, then the domain creation will fail.
-+A value equal to zero is the default and it means this guest is not allowed to
-+use SVE.
-+
-+=back
-+
- =head3 x86
- 
- =over 4
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index aad9645222a1..fb3b55e0cc36 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -1117,6 +1117,7 @@ default:
- return fmt.Errorf("invalid union key '%v'", x.Type)}
- x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
- x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
-+x.ArchArm.Sve = uint16(xc.arch_arm.sve)
- if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil {
- return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
-@@ -1602,6 +1603,7 @@ default:
- return fmt.Errorf("invalid union key '%v'", x.Type)}
- xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
- xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
-+xc.arch_arm.sve = C.uint16_t(x.ArchArm.Sve)
- if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
- return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index 88ec0260404f..8fd0d9b668a7 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -537,6 +537,7 @@ TypeUnion DomainBuildInfoTypeUnion
- ArchArm struct {
- GicVersion GicVersion
- Vuart VuartType
-+Sve uint16
- }
- ArchX86 struct {
- MsrRelaxed Defbool
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index d652895075a0..1057962e2e3f 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -278,6 +278,11 @@
+diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
+index 4a4ff5dbef49..1b95a3cbadd1 100644
+--- a/xen/arch/arm/arm64/sve.c
++++ b/xen/arch/arm/arm64/sve.c
+@@ -5,14 +5,29 @@
+  * Copyright (C) 2022 ARM Ltd.
   */
- #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE 1
+ 
+-#include <xen/types.h>
+-#include <asm/cpufeature.h>
++#include <xen/sched.h>
++#include <xen/sizes.h>
+ #include <asm/arm64/sve.h>
+-#include <asm/arm64/sysregs.h>
+-#include <asm/processor.h>
+-#include <asm/system.h>
+ 
+ extern unsigned int sve_get_hw_vl(void);
++extern void sve_save_ctx(uint64_t *sve_ctx, uint64_t *pregs, int save_ffr);
++extern void sve_load_ctx(uint64_t const *sve_ctx, uint64_t const *pregs,
++                         int restore_ffr);
++
++static inline uint16_t sve_zreg_ctx_size(uint16_t vl)
++{
++    /*
++     * Z0-31 registers size in bytes is computed from VL that is in bits, so VL
++     * in bytes is VL/8.
++     */
++    return (vl / 8U) * 32U;
++}
++
++static inline uint16_t sve_ffrreg_ctx_size(uint16_t vl)
++{
++    /* FFR register size is VL/8, which is in bytes (VL/8)/8 */
++    return (vl / 64U);
++}
+ 
+ register_t compute_max_zcr(void)
+ {
+@@ -57,3 +72,43 @@ uint16_t get_sys_vl_len(void)
+     return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
+             SVE_VL_MULTIPLE_VAL;
+ }
++
++int sve_context_init(struct vcpu *v)
++{
++    uint64_t *ctx = _xzalloc(sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) +
++                             sve_ffrreg_ctx_size(v->domain->arch.sve_vl_bits),
++                             L1_CACHE_BYTES);
++
++    if ( !ctx )
++        return -ENOMEM;
++
++    v->arch.vfp.sve_context = ctx;
++
++    return 0;
++}
++
++void sve_context_free(struct vcpu *v)
++{
++    xfree(v->arch.vfp.sve_context);
++}
++
++void sve_save_state(struct vcpu *v)
++{
++    uint64_t *sve_ctx_zreg_end = v->arch.vfp.sve_context +
++            (sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) / sizeof(uint64_t));
++
++    v->arch.zcr_el1 = READ_SYSREG(ZCR_EL1);
++
++    sve_save_ctx(sve_ctx_zreg_end, v->arch.vfp.fpregs, 1);
++}
++
++void sve_restore_state(struct vcpu *v)
++{
++    uint64_t *sve_ctx_zreg_end = v->arch.vfp.sve_context +
++            (sve_zreg_ctx_size(v->domain->arch.sve_vl_bits) / sizeof(uint64_t));
++
++    WRITE_SYSREG(v->arch.zcr_el1, ZCR_EL1);
++    WRITE_SYSREG(v->arch.zcr_el2, ZCR_EL2);
++
++    sve_load_ctx(sve_ctx_zreg_end, v->arch.vfp.fpregs, 1);
++}
+diff --git a/xen/arch/arm/arm64/sve_asm.S b/xen/arch/arm/arm64/sve_asm.S
+index 4d1549344733..8c37d7bc95d5 100644
+--- a/xen/arch/arm/arm64/sve_asm.S
++++ b/xen/arch/arm/arm64/sve_asm.S
+@@ -17,6 +17,18 @@
+     .endif
+ .endm
+ 
++.macro _sve_check_zreg znr
++    .if (\znr) < 0 || (\znr) > 31
++        .error "Bad Scalable Vector Extension vector register number \znr."
++    .endif
++.endm
++
++.macro _sve_check_preg pnr
++    .if (\pnr) < 0 || (\pnr) > 15
++        .error "Bad Scalable Vector Extension predicate register number \pnr."
++    .endif
++.endm
++
+ .macro _check_num n, min, max
+     .if (\n) < (\min) || (\n) > (\max)
+         .error "Number \n out of range [\min,\max]"
+@@ -26,6 +38,54 @@
+ /* SVE instruction encodings for non-SVE-capable assemblers */
+ /* (pre binutils 2.28, all kernel capable clang versions support SVE) */
+ 
++/* STR (vector): STR Z\nz, [X\nxbase, #\offset, MUL VL] */
++.macro _sve_str_v nz, nxbase, offset=0
++    _sve_check_zreg \nz
++    _check_general_reg \nxbase
++    _check_num (\offset), -0x100, 0xff
++    .inst 0xe5804000                \
++        | (\nz)                     \
++        | ((\nxbase) << 5)          \
++        | (((\offset) & 7) << 10)   \
++        | (((\offset) & 0x1f8) << 13)
++.endm
++
++/* LDR (vector): LDR Z\nz, [X\nxbase, #\offset, MUL VL] */
++.macro _sve_ldr_v nz, nxbase, offset=0
++    _sve_check_zreg \nz
++    _check_general_reg \nxbase
++    _check_num (\offset), -0x100, 0xff
++    .inst 0x85804000                \
++        | (\nz)                     \
++        | ((\nxbase) << 5)          \
++        | (((\offset) & 7) << 10)   \
++        | (((\offset) & 0x1f8) << 13)
++.endm
++
++/* STR (predicate): STR P\np, [X\nxbase, #\offset, MUL VL] */
++.macro _sve_str_p np, nxbase, offset=0
++    _sve_check_preg \np
++    _check_general_reg \nxbase
++    _check_num (\offset), -0x100, 0xff
++    .inst 0xe5800000                \
++        | (\np)                     \
++        | ((\nxbase) << 5)          \
++        | (((\offset) & 7) << 10)   \
++        | (((\offset) & 0x1f8) << 13)
++.endm
++
++/* LDR (predicate): LDR P\np, [X\nxbase, #\offset, MUL VL] */
++.macro _sve_ldr_p np, nxbase, offset=0
++    _sve_check_preg \np
++    _check_general_reg \nxbase
++    _check_num (\offset), -0x100, 0xff
++    .inst 0x85800000                \
++        | (\np)                     \
++        | ((\nxbase) << 5)          \
++        | (((\offset) & 7) << 10)   \
++        | (((\offset) & 0x1f8) << 13)
++.endm
++
+ /* RDVL X\nx, #\imm */
+ .macro _sve_rdvl nx, imm
+     _check_general_reg \nx
+@@ -35,11 +95,92 @@
+         | (((\imm) & 0x3f) << 5)
+ .endm
+ 
++/* RDFFR (unpredicated): RDFFR P\np.B */
++.macro _sve_rdffr np
++    _sve_check_preg \np
++    .inst 0x2519f000                \
++        | (\np)
++.endm
++
++/* WRFFR P\np.B */
++.macro _sve_wrffr np
++    _sve_check_preg \np
++    .inst 0x25289000                \
++        | ((\np) << 5)
++.endm
++
++.macro __for from:req, to:req
++    .if (\from) == (\to)
++        _for__body %\from
++    .else
++        __for %\from, %((\from) + ((\to) - (\from)) / 2)
++        __for %((\from) + ((\to) - (\from)) / 2 + 1), %\to
++    .endif
++.endm
++
++.macro _for var:req, from:req, to:req, insn:vararg
++    .macro _for__body \var:req
++        .noaltmacro
++        \insn
++        .altmacro
++    .endm
++
++    .altmacro
++    __for \from, \to
++    .noaltmacro
++
++    .purgem _for__body
++.endm
++
++.macro sve_save nxzffrctx, nxpctx, save_ffr
++    _for n, 0, 31, _sve_str_v \n, \nxzffrctx, \n - 32
++    _for n, 0, 15, _sve_str_p \n, \nxpctx, \n
++        cbz \save_ffr, 1f
++        _sve_rdffr 0
++        _sve_str_p 0, \nxzffrctx
++        _sve_ldr_p 0, \nxpctx
++        b 2f
++1:
++        str xzr, [x\nxzffrctx]      // Zero out FFR
++2:
++.endm
++
++.macro sve_load nxzffrctx, nxpctx, restore_ffr
++    _for n, 0, 31, _sve_ldr_v \n, \nxzffrctx, \n - 32
++        cbz \restore_ffr, 1f
++        _sve_ldr_p 0, \nxzffrctx
++        _sve_wrffr 0
++1:
++    _for n, 0, 15, _sve_ldr_p \n, \nxpctx, \n
++.endm
++
+ /* Gets the current vector register size in bytes */
+ GLOBAL(sve_get_hw_vl)
+     _sve_rdvl 0, 1
+     ret
  
 +/*
-+ * libxl_domain_build_info has the arch_arm.sve field.
++ * Save the SVE context
++ *
++ * x0 - pointer to buffer for Z0-31 + FFR
++ * x1 - pointer to buffer for P0-15
++ * x2 - Save FFR if non-zero
 + */
-+#define LIBXL_HAVE_BUILDINFO_ARCH_ARM_SVE 1
++GLOBAL(sve_save_ctx)
++    sve_save 0, 1, x2
++    ret
++
++/*
++ * Load the SVE context
++ *
++ * x0 - pointer to buffer for Z0-31 + FFR
++ * x1 - pointer to buffer for P0-15
++ * x2 - Restore FFR if non-zero
++ */
++GLOBAL(sve_load_ctx)
++    sve_load 0, 1, x2
++    ret
 +
  /*
-  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
-  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index ddc7b2a15975..31f30e054bf4 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -211,6 +211,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
+  * Local variables:
+  * mode: ASM
+diff --git a/xen/arch/arm/arm64/vfp.c b/xen/arch/arm/arm64/vfp.c
+index 47885e76baae..2d0d7c2e6ddb 100644
+--- a/xen/arch/arm/arm64/vfp.c
++++ b/xen/arch/arm/arm64/vfp.c
+@@ -2,29 +2,35 @@
+ #include <asm/processor.h>
+ #include <asm/cpufeature.h>
+ #include <asm/vfp.h>
++#include <asm/arm64/sve.h>
  
-+    config->arch.sve_vl_bits = d_config->b_info.arch_arm.sve;
-+
+ void vfp_save_state(struct vcpu *v)
+ {
+     if ( !cpu_has_fp )
+         return;
+ 
+-    asm volatile("stp q0, q1, [%1, #16 * 0]\n\t"
+-                 "stp q2, q3, [%1, #16 * 2]\n\t"
+-                 "stp q4, q5, [%1, #16 * 4]\n\t"
+-                 "stp q6, q7, [%1, #16 * 6]\n\t"
+-                 "stp q8, q9, [%1, #16 * 8]\n\t"
+-                 "stp q10, q11, [%1, #16 * 10]\n\t"
+-                 "stp q12, q13, [%1, #16 * 12]\n\t"
+-                 "stp q14, q15, [%1, #16 * 14]\n\t"
+-                 "stp q16, q17, [%1, #16 * 16]\n\t"
+-                 "stp q18, q19, [%1, #16 * 18]\n\t"
+-                 "stp q20, q21, [%1, #16 * 20]\n\t"
+-                 "stp q22, q23, [%1, #16 * 22]\n\t"
+-                 "stp q24, q25, [%1, #16 * 24]\n\t"
+-                 "stp q26, q27, [%1, #16 * 26]\n\t"
+-                 "stp q28, q29, [%1, #16 * 28]\n\t"
+-                 "stp q30, q31, [%1, #16 * 30]\n\t"
+-                 : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
++    if ( is_sve_domain(v->domain) )
++        sve_save_state(v);
++    else
++    {
++        asm volatile("stp q0, q1, [%1, #16 * 0]\n\t"
++                     "stp q2, q3, [%1, #16 * 2]\n\t"
++                     "stp q4, q5, [%1, #16 * 4]\n\t"
++                     "stp q6, q7, [%1, #16 * 6]\n\t"
++                     "stp q8, q9, [%1, #16 * 8]\n\t"
++                     "stp q10, q11, [%1, #16 * 10]\n\t"
++                     "stp q12, q13, [%1, #16 * 12]\n\t"
++                     "stp q14, q15, [%1, #16 * 14]\n\t"
++                     "stp q16, q17, [%1, #16 * 16]\n\t"
++                     "stp q18, q19, [%1, #16 * 18]\n\t"
++                     "stp q20, q21, [%1, #16 * 20]\n\t"
++                     "stp q22, q23, [%1, #16 * 22]\n\t"
++                     "stp q24, q25, [%1, #16 * 24]\n\t"
++                     "stp q26, q27, [%1, #16 * 26]\n\t"
++                     "stp q28, q29, [%1, #16 * 28]\n\t"
++                     "stp q30, q31, [%1, #16 * 30]\n\t"
++                     : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
++    }
+ 
+     v->arch.vfp.fpsr = READ_SYSREG(FPSR);
+     v->arch.vfp.fpcr = READ_SYSREG(FPCR);
+@@ -37,23 +43,28 @@ void vfp_restore_state(struct vcpu *v)
+     if ( !cpu_has_fp )
+         return;
+ 
+-    asm volatile("ldp q0, q1, [%1, #16 * 0]\n\t"
+-                 "ldp q2, q3, [%1, #16 * 2]\n\t"
+-                 "ldp q4, q5, [%1, #16 * 4]\n\t"
+-                 "ldp q6, q7, [%1, #16 * 6]\n\t"
+-                 "ldp q8, q9, [%1, #16 * 8]\n\t"
+-                 "ldp q10, q11, [%1, #16 * 10]\n\t"
+-                 "ldp q12, q13, [%1, #16 * 12]\n\t"
+-                 "ldp q14, q15, [%1, #16 * 14]\n\t"
+-                 "ldp q16, q17, [%1, #16 * 16]\n\t"
+-                 "ldp q18, q19, [%1, #16 * 18]\n\t"
+-                 "ldp q20, q21, [%1, #16 * 20]\n\t"
+-                 "ldp q22, q23, [%1, #16 * 22]\n\t"
+-                 "ldp q24, q25, [%1, #16 * 24]\n\t"
+-                 "ldp q26, q27, [%1, #16 * 26]\n\t"
+-                 "ldp q28, q29, [%1, #16 * 28]\n\t"
+-                 "ldp q30, q31, [%1, #16 * 30]\n\t"
+-                 : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
++    if ( is_sve_domain(v->domain) )
++        sve_restore_state(v);
++    else
++    {
++        asm volatile("ldp q0, q1, [%1, #16 * 0]\n\t"
++                     "ldp q2, q3, [%1, #16 * 2]\n\t"
++                     "ldp q4, q5, [%1, #16 * 4]\n\t"
++                     "ldp q6, q7, [%1, #16 * 6]\n\t"
++                     "ldp q8, q9, [%1, #16 * 8]\n\t"
++                     "ldp q10, q11, [%1, #16 * 10]\n\t"
++                     "ldp q12, q13, [%1, #16 * 12]\n\t"
++                     "ldp q14, q15, [%1, #16 * 14]\n\t"
++                     "ldp q16, q17, [%1, #16 * 16]\n\t"
++                     "ldp q18, q19, [%1, #16 * 18]\n\t"
++                     "ldp q20, q21, [%1, #16 * 20]\n\t"
++                     "ldp q22, q23, [%1, #16 * 22]\n\t"
++                     "ldp q24, q25, [%1, #16 * 24]\n\t"
++                     "ldp q26, q27, [%1, #16 * 26]\n\t"
++                     "ldp q28, q29, [%1, #16 * 28]\n\t"
++                     "ldp q30, q31, [%1, #16 * 30]\n\t"
++                     : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
++    }
+ 
+     WRITE_SYSREG(v->arch.vfp.fpsr, FPSR);
+     WRITE_SYSREG(v->arch.vfp.fpcr, FPCR);
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 8d64e3c08edf..4a9a19189dd2 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -552,7 +552,12 @@ int arch_vcpu_create(struct vcpu *v)
+ 
+     v->arch.cptr_el2 = get_default_cptr_flags();
+     if ( is_sve_domain(v->domain) )
++    {
++        if ( (rc = sve_context_init(v)) != 0 )
++            goto fail;
+         v->arch.cptr_el2 &= ~HCPTR_CP(8);
++        v->arch.zcr_el2 = vl_to_zcr(v->domain->arch.sve_vl_bits);
++    }
+ 
+     v->arch.hcr_el2 = get_default_hcr_flags();
+ 
+@@ -582,6 +587,8 @@ fail:
+ 
+ void arch_vcpu_destroy(struct vcpu *v)
+ {
++    if ( is_sve_domain(v->domain) )
++        sve_context_free(v);
+     vcpu_timer_destroy(v);
+     vcpu_vgic_free(v);
+     free_xenheap_pages(v->arch.stack, STACK_ORDER);
+diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
+index f4a660e402ca..28c31b329233 100644
+--- a/xen/arch/arm/include/asm/arm64/sve.h
++++ b/xen/arch/arm/include/asm/arm64/sve.h
+@@ -24,6 +24,10 @@ static inline bool is_vl_valid(uint16_t vl)
+ register_t compute_max_zcr(void);
+ register_t vl_to_zcr(uint16_t vl);
+ uint16_t get_sys_vl_len(void);
++int sve_context_init(struct vcpu *v);
++void sve_context_free(struct vcpu *v);
++void sve_save_state(struct vcpu *v);
++void sve_restore_state(struct vcpu *v);
+ 
+ #else /* !CONFIG_ARM64_SVE */
+ 
+@@ -42,6 +46,15 @@ static inline uint16_t get_sys_vl_len(void)
      return 0;
  }
  
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 0e90b6b408ec..ed21d32e703c 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -663,6 +663,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
- 
-     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
-                                ("vuart", libxl_vuart_type),
-+                               ("sve", uint16),
-                               ])),
-     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
-                               ])),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 853e9f357a1a..5574a91ce5a7 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -12,6 +12,7 @@
-  * GNU Lesser General Public License for more details.
-  */
- 
-+#include <arm_arch_capabilities.h>
- #include <ctype.h>
- #include <inttypes.h>
- #include <limits.h>
-@@ -1316,8 +1317,6 @@ void parse_config_data(const char *config_source,
-         exit(EXIT_FAILURE);
-     }
- 
--    libxl_physinfo_dispose(&physinfo);
--
-     config= xlu_cfg_init(stderr, config_source);
-     if (!config) {
-         fprintf(stderr, "Failed to allocate for configuration\n");
-@@ -2828,6 +2827,28 @@ skip_usbdev:
-         }
-     }
- 
-+    if (!xlu_cfg_get_long (config, "sve", &l, 0)) {
-+        unsigned int arm_sve_vl =
-+            arch_capabilities_arm_sve(physinfo.arch_capabilities);
-+        if (!arm_sve_vl) {
-+            fprintf(stderr, "SVE is not supported by the platform\n");
-+            exit(-ERROR_FAIL);
-+        } else if (((l % 128) != 0) || (l > 2048)) {
-+            fprintf(stderr,
-+                    "Invalid sve value: %ld. Needs to be <= 2048 and multiple"
-+                    " of 128\n", l);
-+            exit(-ERROR_FAIL);
-+        } else if (l > arm_sve_vl) {
-+            fprintf(stderr,
-+                    "Invalid sve value: %ld. Platform supports up to %u bits\n",
-+                    l, arm_sve_vl);
-+            exit(-ERROR_FAIL);
-+        }
-+        b_info->arch_arm.sve = l;
-+    }
++static inline int sve_context_init(struct vcpu *v)
++{
++    return 0;
++}
 +
-+    libxl_physinfo_dispose(&physinfo);
++static inline void sve_context_free(struct vcpu *v) {}
++static inline void sve_save_state(struct vcpu *v) {}
++static inline void sve_restore_state(struct vcpu *v) {}
 +
-     parse_vkb_list(config, d_config);
+ #endif
  
-     d_config->virtios = NULL;
+ #endif /* _ARM_ARM64_SVE_H */
+diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+index 4cabb9eb4d5e..3fdeb9d8cdef 100644
+--- a/xen/arch/arm/include/asm/arm64/sysregs.h
++++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+@@ -88,6 +88,9 @@
+ #ifndef ID_AA64ISAR2_EL1
+ #define ID_AA64ISAR2_EL1            S3_0_C0_C6_2
+ #endif
++#ifndef ZCR_EL1
++#define ZCR_EL1                     S3_0_C1_C2_0
++#endif
+ 
+ /* ID registers (imported from arm64/include/asm/sysreg.h in Linux) */
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/vfp.h b/xen/arch/arm/include/asm/arm64/vfp.h
+index e6e8c363bc16..8af714cb8ecc 100644
+--- a/xen/arch/arm/include/asm/arm64/vfp.h
++++ b/xen/arch/arm/include/asm/arm64/vfp.h
+@@ -6,7 +6,17 @@
+ 
+ struct vfp_state
+ {
++    /*
++     * When SVE is enabled for the guest, fpregs memory will be used to
++     * save/restore P0-P15 registers, otherwise it will be used for the V0-V31
++     * registers.
++     */
+     uint64_t fpregs[64] __vfp_aligned;
++    /*
++     * When SVE is enabled for the guest, sve_context contains memory to
++     * save/restore Z0-Z31 registers and FFR.
++     */
++    uint64_t *sve_context;
+     register_t fpcr;
+     register_t fpexc32_el2;
+     register_t fpsr;
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index 1bd669e0a5c1..4d1066750a9b 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -195,6 +195,8 @@ struct arch_vcpu
+     register_t tpidrro_el0;
+ 
+     /* HYP configuration */
++    register_t zcr_el1;
++    register_t zcr_el2;
+     register_t cptr_el2;
+     register_t hcr_el2;
+     register_t mdcr_el2;
 -- 
 2.34.1
 
