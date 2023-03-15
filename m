@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEF1C7618D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Mar 2023 05:14:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.509893.786585 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21E0C61DA4
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Mar 2023 05:18:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.509900.786605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcJSc-0006Gx-Dj; Wed, 15 Mar 2023 05:14:02 +0000
+	id 1pcJWW-0007mq-CR; Wed, 15 Mar 2023 05:18:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 509893.786585; Wed, 15 Mar 2023 05:14:02 +0000
+Received: by outflank-mailman (output) from mailman id 509900.786605; Wed, 15 Mar 2023 05:18:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcJSc-0006Gq-AR; Wed, 15 Mar 2023 05:14:02 +0000
-Received: by outflank-mailman (input) for mailman id 509893;
- Wed, 15 Mar 2023 05:14:00 +0000
+	id 1pcJWW-0007mj-9H; Wed, 15 Mar 2023 05:18:04 +0000
+Received: by outflank-mailman (input) for mailman id 509900;
+ Wed, 15 Mar 2023 05:18:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=unbF=7H=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1pcJSa-00061o-Jm
- for xen-devel@lists.xenproject.org; Wed, 15 Mar 2023 05:14:00 +0000
-Received: from sonic315-8.consmr.mail.gq1.yahoo.com
- (sonic315-8.consmr.mail.gq1.yahoo.com [98.137.65.32])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=dncz=7H=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
+ id 1pcJWU-0007md-Ko
+ for xen-devel@lists.xen.org; Wed, 15 Mar 2023 05:18:02 +0000
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [2607:f8b0:4864:20::62f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2f3cad0c-c2f0-11ed-b464-930f4c7d94ae;
- Wed, 15 Mar 2023 06:13:58 +0100 (CET)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic315.consmr.mail.gq1.yahoo.com with HTTP; Wed, 15 Mar 2023 05:13:55 +0000
-Received: by hermes--production-ne1-759c9b8c64-f7wvp (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 96a4225277b909cacfff2106b7580bc2; 
- Wed, 15 Mar 2023 05:13:52 +0000 (UTC)
+ id be581796-c2f0-11ed-b464-930f4c7d94ae;
+ Wed, 15 Mar 2023 06:17:58 +0100 (CET)
+Received: by mail-pl1-x62f.google.com with SMTP id ix20so12351625plb.3
+ for <xen-devel@lists.xen.org>; Tue, 14 Mar 2023 22:17:56 -0700 (PDT)
+Received: from localhost ([122.172.83.155]) by smtp.gmail.com with ESMTPSA id
+ bn9-20020a056a00324900b0062578514d6fsm1856054pfb.58.2023.03.14.22.17.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Mar 2023 22:17:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,105 +45,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f3cad0c-c2f0-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1678857235; bh=Dvm0+j349dR++2RKACkaePAlEc9RP8c6kRaeARHbS0c=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=KtugQMHpl1GDXmWLhvIeiXStzBNKV07gFILGczba8cpuySr9DStKduPMQbgtTgmYi0ad6HrKgoGg72PLwyj9C6gjyI1lA64+T6J8bJqhvOIFtCYPa2fnHz+Y/JH/uD92wxu4cqj1uTx4+HBE0B7j974ScdP4IHQrZlOoWZv4sVQEU9RNMVYJ+HADi5f7X4qDFGPwbJWyLD0wj2onDNqis5e8PSw9Cc4YhOAi0SuhJEPfKX2FXpeM1vAuqsN+CYrmXqk2SHYJbzqVXVR2a8eZ7r5hxNjGKsw4C4O6Gb64MZcIvud6kQ5Bm4G7+V+J6qbz04LM+pjTSfT2QGr2JsTz0g==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1678857235; bh=lakcgKceV7+sNyPhB709BIs8Fpptwv2jTTrLYiIaQj5=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=aKjVtvuFNnC7dZnMBWajr7pbanadmpFwSFIDaYbehtxX2+JCG9kLoPlmUMHtEGA7dyjOG7Dzb8T3AovemZaOtkL5L1LnawXYiAYVigBdszuShkeyhwcCVVl3/AmEu8b/IgZcVS2c0RbzjOmhGYT+oZ5D+bWownR3yWR/vwsnKWTXucpLbQlPKiMxrFJqJ/5il/jmp2O9JoEchVys4TBPQ/emAdCRnaxbQFsKtGiSUpBYK3xjjnSnd5HJLhKu8Z4lHmK8qrTZUUUwOnrTVvHfqefBrgJLXLKWT9L5dGWQ8j2FEhOpJN4ZpgYPOzHlIWJMxSN9IhzbtY1q+oMWmmY1uw==
-X-YMail-OSG: zVdoTbMVM1loPPhTgc_WHr6exeMAHqDEUoYbqb.M6GCMd3DRTDwgGi5Y5I8IjP.
- 5QA.Le_Ccvq8dAfMSxbdnFsZiPaKd2BwF929F1vnSukbFNAXvDjTNuUjxFFlKTIs_W.AlieqSjD9
- zOK8ZlNATBzPrcd.DJKu8Z_Y7.sXAiPQBTjhCHKBGct4p.3fpcfHAd_HblgQIgI.PKmr8Wy0V6k7
- CfAmeuywKvDKjwRf2M8KKt62Qg.ZfY1JdAJZ_kS74QD1ulm64kXIIxEIWMER9y_z64bFzZFP765p
- pSJtwiv.3HWGmZPPGUGO45KkFdkjua18Y6yHcU9ZEXkIcqSRJp5aR4Z0LNul.eLEaoUlo2Wy7ji9
- vOXgV312R35Bo4jBtO6sOfiSmcFtU7E2oGWbcWm.S3eEQhPu_vDcgw7de7tB3J9bbtXrPf6LjnZ8
- nv1KFVCG6Qi_5bLNqPMZhzr4P.pUtRFPcTAq.Ep9XtJOM93S5X2NvsB2k8CEHKF_CtdnwmKL3FPn
- 9sIY6gWcPDNH5wRj73urAenpaZMJfTLma7ULZYnXvZsKllp_wRdTADK591sUknJz3lKV5jyGrqd6
- PmVlplUJrqMoGy99yaJvb7lIlnqYZ7h4OH9703q.enIF7IzJlsrFBl84DEB2aAVHZaAWxr.PXhTF
- X2UlyU5yJ6e_qt9IVSdZ0wzFtSjLe9cFaMG4NS22O7iSyFxF0N46rCazNHx5ic7N.vOkmi5jDNr1
- VBhhsm.fvjvWN4SXRXXKEb6u.zishr5EUAu8a3lyYOOvux5yqUlFw0MLZJgj3yZEQ5tgNF15tbSb
- 1uHssjc8Hi6f28B00H5QpgGm0KA63SB2.asp0L4YvMikcJMHTXvvUpISaS7HsrG6EcYVW2WPYFNg
- 66rEf_agmMWH_O7SyQxlC6_bPFK2ZI1k_5hJfNXtTvEFqqGlyWGrRaXOhQ47CbDtZdC4T_stQ6uo
- QU29LlHpsXeqwAMWZ5LpVFT3JDp95CZKcF9GixxX.wXmgrR5.KvXU1kr._1G63mGSQ60_Xv.RMt_
- hcA4zlZOTNtPZtSWt3ksGkN_x2WE1oy5dYBwkWHWwsYvss0hTT8JnLuyrQ9q5qta3DF.UJaOfQtw
- Jq0wO6sCly83fTpyIMUYonB2B6T1SjQZWrfnAuNdn36S3hJhPRBb5BkFtdaSs6eMm5M75mvcyC4B
- YQylVQ4O92lqbUbWJGscHgb0C4gZ0eA6ebVmaDx71XhrSppwcbsYYIJJ8Fg63eW7vhUeBY30ou1y
- Mpan63GOJmHGAl7nb5n68YYVzQMHZDU7Y5G9p1FOLce_USarP8jrfvCoTouBO4_4uJqnS0FEQEGC
- BI1xwAcbcKlaihOWkzXsnpOCbI2DQdxIeKQsFMlEVrovSUnCdDYPElVtazqRwRXf4d73sCxG6cbH
- dkeloA5huRJmLwFG_HV04kqp5918fd7p0PKBeAg0ipjUG5EgB_grJ9E7LJNToSy0EpK63jSjN6oE
- eE2Ze7sOmsnBeBTBcEnGC7EbB_.22IFwv8pS35AX2OmTN_h4QdfVXUDo1hx3iyan3Nup9An9eMeg
- _ERLtFapsFyPCiDOBtUFkm7Lq4_Dh1oDn7z29tg5a7hAsIcgiv1_zhUcAGoWfvL.Fi8l3Z5ZS2x1
- hkvnOG2uXQnb7G2aBDnINzQCOvkcg0keyXGD5JrtVCkUauhoAFhDZjwR2pBOYa5pyhPaA4FQ5fv7
- kxTUrrp7TNMr07YycoayYs03vnFo8L.s.igcWl6fGoJkLHNaJsdZQejZubKO7mvID6vxu3bMf71e
- EN7.UHmi98AtB0i7Fgyt2YbWXVgrOVJebMY5kNd2y7T3Vv7vlsVN6gjZdiDPALkFPRjNBWCl3ND7
- SQlBaHygn6C3BBo00LXEsNSQ75p9OxWoF_n7sKAM0fHBNOzQSQZowF.BPb5.TY4X_UrssKP.qnXE
- 7hqfV95ln_1tCSKmNXawyZaoZtqLZaC1jZ72NAKPP5HCMGMQ57YD6R0sHN2lmw7zMbNAhYTKYGx8
- ZhrTAQM.5z7okRMdGGL.DRiQ3J3AmCjTOqup7x5l8PPOi3Hws77SFlEtaQtZpZ1muTH0XMtQ4jLP
- oZuh4u55fHTtFkYk3K7M2nkDYBzOEPcV.ZFEYzxhCqls5hVj1eKyQR6_s4biSIkkc.1TWQQ.Zb9.
- DDQbWH65WD9JngH_nnTce2drPfhFG9ZK8dK1M3lU.oVmoVMlj6zykfT7W2Ec3F0v1p96nGvGumK6
- E_g--
-X-Sonic-MF: <brchuckz@aim.com>
-X-Sonic-ID: 2256c2cf-d671-423c-bebb-9e20782933db
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: qemu-devel@nongnu.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 0/2] pci: slot_reserved_mask improvements
-Date: Wed, 15 Mar 2023 01:13:40 -0400
-Message-Id: <cover.1678851637.git.brchuckz@aol.com>
-X-Mailer: git-send-email 2.39.2
+X-Inumbo-ID: be581796-c2f0-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1678857475;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=y8QmKYcJg57HlzpunFUH9MGPifRoNDq8hXq0hFkxBNA=;
+        b=abtA9w7+N9PnFhqJMTS1vxekyB+/9TRZH757nvWjC02O4HuYQfEbGMmD6ICW7rMFjY
+         /VmGD+DSb6byIkc6ilrxJg1Z62GJqLpixlq583fSkrd9N8zzlEq+PUYLqbCjGsD6pZzr
+         lNMKud71kSuDbnS5pru+h7MQGeq3nXJGF1+5NYUsY0V54O243pKtc5WzZ0NVCCDd6+Rw
+         3bhP/Nawtapv3spmtMwhDzE3512ZNUdt9CaHz4T4WJge5hudYtFOTxOrQLUGqX4uXum5
+         MVBH2rVWKsGPVjryEipxT4zwgFRep8zhaSYlfOQGnMfpK3v0H9FUXboiFoC4LXZ5B6gr
+         0UYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678857475;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=y8QmKYcJg57HlzpunFUH9MGPifRoNDq8hXq0hFkxBNA=;
+        b=szIsT3n2C/JCn811+7gw/TL+lnQLxtbRy3gA9H7l+0tgkYZkrKMIYjg+6E74vqB/CQ
+         uaWhNLyyQ1GemHkIlbfHcNhPyt90hzSVBDe/EY9bnC1pypD7QummsPu0LgJd7/DzQiXa
+         5KmHlR846uuHM6Cq/kPh5AvHOm0lBCNMJ7MdLONCqcB2nouLZ3c2E3s+hVVMXQlu47MY
+         lB8TGy5+DRL8bb/mpcFGgz3U5A29s5yU5OdWc1cBfdICMiuIJwGoPm1jh1Qu0IKLQp10
+         9McmJz+AqCb32MWu0+6z9qqzIwAmOlG11UPcANe4hGnLJI5OeR1I3bZQOi4rAZtsDe0y
+         zURw==
+X-Gm-Message-State: AO0yUKVnyUe1CZxZHqbzeSZqHXJms936Ax2i+PzbZQD6QRw/Ny6+gF0C
+	MxlAEA+5jBSnW97myWp6XG2MNQ==
+X-Google-Smtp-Source: AK7set+v+08YLmgVZIkdUoqQNIHkvJTCWU5NZ9zfOm8OmZpJiNuz6CJzunAVmSRk/ShmWB32e+7zgw==
+X-Received: by 2002:a05:6a20:7a1f:b0:d6:f0:85a with SMTP id t31-20020a056a207a1f00b000d600f0085amr1351227pzh.17.1678857475344;
+        Tue, 14 Mar 2023 22:17:55 -0700 (PDT)
+Date: Wed, 15 Mar 2023 10:47:52 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: qemu-devel@nongnu.org, virtio-dev@lists.oasis-open.org,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+	Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	stratos-dev@op-lists.linaro.org,
+	Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xen.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Sebastien Boeuf <sebastien.boeuf@intel.com>,
+	Liu Jiang <gerry@linux.alibaba.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>
+Subject: Re: [PATCH V3 0/2] qemu: vhost-user: Support Xen memory mapping
+ quirks
+Message-ID: <20230315051752.2owlp26mq72dqel2@vireshk-i7>
+References: <cover.1678351495.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-References: <cover.1678851637.git.brchuckz.ref@aol.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1678351495.git.viresh.kumar@linaro.org>
 
-This patch series consists of two patches. The first provides accessor
-functions in pci.h to avoid direct access of slot_reserved_mask
-according to the comment at the top of include/hw/pci/pci_bus.h. No
-functional change is intended with this patch.
+On 09-03-23, 14:20, Viresh Kumar wrote:
+> Hello,
+> 
+> This patchset tries to update the vhost-user protocol to make it support special
+> memory mapping required in case of Xen hypervisor.
+> 
+> The first patch is mostly cleanup and second one introduces a new xen specific
+> feature.
+> 
+> V2->V3:
+> - Remove the extra message and instead update the memory regions to carry
+>   additional data.
+> 
+> - Drop the one region one mmap relationship and allow back-end to map only parts
+>   of a region at once, required for Xen grant mappings.
+> 
+> - Additional cleanup patch 1/2.
 
-The second patch replaces slot_reserved_mask with two new masks,
-slot_reserved_auto_mask and slot_reserved_manual_mask so the current
-behavior of reserving slot 2 for the Intel IGD for the xenfv machine
-will be ignored if an administrator manually configures a device to use
-the reserved slot.
+Stefan,
 
-The current behavior of always reserving slots in the sun4u machine is
-preserved by this patch series; the patch series only changes how
-slot_reserved_mask works in the xenfv machine. Although the patch
-series can affect xenfv machines configured for igd-passthru if an
-administrator assigns some of the pci slot addresses manually, it
-does not affect the libxl default configuration for igd-passthru because
-libxl uses automatic slot assignment by default.
-
-Testing:
-   - Tested xenfv/igd with both manual and auto slot allocation - behaves as expected
-   - Verified that qemu-system-sparc64 still compiles with the patches to sun4u.c
-   - xen4u machine not tested -- Mark, can you do this?
-
-Link: https://lore.kernel.org/qemu-devel/20230106064838-mutt-send-email-mst@kernel.org/
-
-Chuck Zmudzinski (2):
-  pci: avoid accessing slot_reserved_mask directly outside of pci.c
-  pci: introduce slot_reserved_auto_mask and slot_reserved_manual_mask
-
-Changelog
-
-v3: Re-work second patch in response to comments/discussion of v2
-
-v2: Add first patch and cover letter to make this a 2-patch series
-    Make changes to the second patch (see second patch for changelog)
-
- hw/pci/pci.c             | 32 +++++++++++++++++++++++++++-----
- hw/sparc64/sun4u.c       |  7 +++----
- hw/xen/xen_pt.c          |  7 +++----
- include/hw/pci/pci.h     |  3 +++
- include/hw/pci/pci_bus.h |  3 ++-
- 5 files changed, 38 insertions(+), 14 deletions(-)
+Does this version look better ?
 
 -- 
-2.39.2
-
+viresh
 
