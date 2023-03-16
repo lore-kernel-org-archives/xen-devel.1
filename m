@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3490C6FD1F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0439EC7618E
 	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 17:17:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.510753.789063 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.510755.789076 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcrDl-0002wJ-80; Thu, 16 Mar 2023 17:16:57 +0000
+	id 1pcrDl-000397-Ue; Thu, 16 Mar 2023 17:16:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 510753.789063; Thu, 16 Mar 2023 17:16:57 +0000
+Received: by outflank-mailman (output) from mailman id 510755.789076; Thu, 16 Mar 2023 17:16:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcrDl-0002wC-5F; Thu, 16 Mar 2023 17:16:57 +0000
-Received: by outflank-mailman (input) for mailman id 510753;
- Thu, 16 Mar 2023 17:16:55 +0000
+	id 1pcrDl-00038E-Pp; Thu, 16 Mar 2023 17:16:57 +0000
+Received: by outflank-mailman (input) for mailman id 510755;
+ Thu, 16 Mar 2023 17:16:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ItE1=7I=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1pcrDj-0002vv-32
- for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 17:16:55 +0000
+ id 1pcrDk-0002vv-Gw
+ for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 17:16:56 +0000
 Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
  [66.111.4.27]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5666fe0e-c41e-11ed-b464-930f4c7d94ae;
- Thu, 16 Mar 2023 18:16:51 +0100 (CET)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.nyi.internal (Postfix) with ESMTP id 51C2F5C003F;
- Thu, 16 Mar 2023 13:16:49 -0400 (EDT)
+ id 593797db-c41e-11ed-b464-930f4c7d94ae;
+ Thu, 16 Mar 2023 18:16:54 +0100 (CET)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id 2C2E55C0172;
+ Thu, 16 Mar 2023 13:16:54 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Thu, 16 Mar 2023 13:16:49 -0400
+ by compute5.internal (MEProxy); Thu, 16 Mar 2023 13:16:54 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 16 Mar 2023 13:16:48 -0400 (EDT)
+ 16 Mar 2023 13:16:52 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,96 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5666fe0e-c41e-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 593797db-c41e-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
-	 s=fm1; t=1678987009; x=1679073409; bh=+9fb1hmJCPKv+iZdAg0qfVtiR
-	/aKkEjFEePF5ANBzoE=; b=aw1BvQ1D2gmdu4ZpckMPFHyh8LKgKfv1jKR9si1f6
-	PmdaY2/uS3Z9gl3fNJGo3vsMRhFSB1O/xkBEOq0P7ih0RDCTS3LUqmH+VJJCQssc
-	IMd1LAvcTVmb9/f2HkZC0i0hpp+rrVLXKdPxpKmvKqx5Wgle0Gc5bUzc8A3u/MdX
-	Uvi3O7gTNTaaKNoz430BG27Jqi2iT6Ti1Mk7zw6w76QRwi0jYNeTQ7FA9VxDshFA
-	VZpMUYo8gCuohgsahSNxIyc+qmID+Uzlr/pY/AwJ5/CnrIsrFbOp3X+gjFsanFXY
-	IwNCg6LZpi713AX21162sbOYxY9RqQOxPA66HIicbaruA==
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=fm1; t=1678987014; x=1679073414; bh=R2
+	KhcNjVkVS92xl9mbSvSkrpGVEwfW14kn3tzUhf1No=; b=R+zVOn1ZWIPiCdyCin
+	mqfjeXFvMv6+JZXCqF+93IWm1bOAYJgwV1czAbCcmU/hE9461hT4OlZflpB92D/o
+	ZKuI4e/YHOiICDxSxesZy4FLtpzHCuXLFqMts6bHBmUIJIDJG/B82JKK2fzHIJ7b
+	J/rvHlpyWjzlEhHwaw21ef+h310MtADR5LTy7lh6AGDVb611+nYAhI4RQaHa8Vnu
+	FFMf98p4mubUUGiQVBXVgTPY5i1OFnfg5NpvQBW2ByhD0PuNYu3jJWM1+ZMbqv0o
+	Cl0REgkFLvXt/RYASMZ+nLxCdJngRb3tfJvrLFtGbxnzQIRqGWKEaZpGk0szn5LA
+	BzVg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; t=1678987009; x=1679073409; bh=+
-	9fb1hmJCPKv+iZdAg0qfVtiR/aKkEjFEePF5ANBzoE=; b=AjSQTRNVLwos6dFwM
-	PfGUG5S89wEKRG20Kf3ADW5yCihAAwLGIBMihUvXM8ZtKEXN5eeFfgZBZDTjjwRY
-	cypOvF/i0kuNcI9PQ7FIcZqd1yDQXDJNYiktvxwTpdZLDHmO82U+VGxOrrvGko3q
-	QAxWyyGa/zUqkRIzQRtWOTWhT5SafdP1yBr0mVH5z4UAKYuBddc1xTSp90m4FS5Y
-	InV6p46sOi8BFzktKfXA+OpzQGdU84GOhWkdi4a5vdQYrPQ7aWEcxkfViSkUiuia
-	+UQC6fH8guV280EVZQ8K10WdQXXBC0vN5hSzia+WWnhEq32lHbL7VKsW+wtlnYbC
-	iwFeg==
-X-ME-Sender: <xms:AU8TZJuO3vC-KTXiKzgO6I9H_JzkzLj2zaHRAqvkuLXKizhB5n-Jxw>
-    <xme:AU8TZCcWvKtN_B2sCEp-fZcmX7pFcuWT5yrhQ-MitRXvaiw3FpQS-SIKLuQC4QPSf
-    nyXC2vHHJaxVQ>
-X-ME-Received: <xmr:AU8TZMzQUFBE870xfvQclydbpuv94xvBTNB4K3AR0F5_sJb75YT-Hv_orn883IVsrq2yZaoyl2o4wrN2wi6SXF0k5L7p67fQzkNSc96MBplTbfYR5TMN>
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1678987014; x=1679073414; bh=R2KhcNjVkVS92xl9mbSvSkrpGVEwfW14kn3
+	tzUhf1No=; b=LNmgunLGxTEnSX1F0oVDYFKwhGlbLRyR6OETGwdhTw7twyeVIrv
+	dLD8jwU+CLLdnVzFAMlA5Z5Pm+ONFo8ewLrm9j94ApYB0u+ke/sN8XBLV1GvN1SF
+	pDBOc18SfUNbV5PfyyGkSHFVVQC8GKOomnrdpRUPiTqwr6Q267m/3s5kmkgLwf+Z
+	LZEzqAz+oeVnk28ETSW5Lh2ZT92UJj/rXXhzTN4NSMbXumLS+tULadaJCujlk/JU
+	3FLqNqRECi0dDHUgj6eKGRLRdP8l/Pp7Yrczht5GslxrKRSoij0WsDk0Tjzjo8NL
+	aNjqIfwpZJHys9fdHBqucAJ8V0b5CnFej8A==
+X-ME-Sender: <xms:BU8TZHXL1D19EQ40D6l4mAp4TGF22un2fZ24C86U1xIhTxy29F5IPw>
+    <xme:BU8TZPnaN9BrhWs9rX5UNrwL-r0bM6NgR40TYdtXVsYjKr1Tk1Q3dI0WHj0Xj-AtW
+    S5dgXh9ZtxX0A>
+X-ME-Received: <xmr:BU8TZDZKcJnd1_gdwwzjqBlaRzDIGIW2njj5Mq6_MMQ735PyAttPKT-w7WNNbyvAsn1xR_aSeYNEoo8fJUxiKlucj8eDVDMKddETp7286f8t_qfbFooM>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdeftddguddttdcutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgv
-    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
-    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepleek
-    hfduleetleelleetteevfeefteffkeetteejheelgfegkeelgeehhfdthedvnecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:AU8TZAOb83aGBZgSJgHSHW_3-F7noGPD5On7m4pv4d-v-zoHon7Xow>
-    <xmx:AU8TZJ92BUDGJiJzFXO3dIxmr-ll0yOpHjnHdbi5cd3_-AFOFBOO5g>
-    <xmx:AU8TZAX4YOgp_6dO8u-9TjEDzlT0PVqwFGGV__pSra6wjPbTjaM2yA>
-    <xmx:AU8TZLnjcwLQSqMLBBFOQ7i-ubq41Wu6c_KNzPcp_hqvGtHK_cjdHg>
+    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgr
+    rhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghkse
+    hinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhep
+    ueejhfejheelteetfedutdefteegudelheegteefkeduvddttdduhfeufeevteevnecuff
+    homhgrihhnpehphihthhhonhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgr
+    rhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinh
+    hgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:Bk8TZCWJJ7oSukLnQ8tFRRznF4PErvA-JEBJv3nHFuVm2XmuxrFGhA>
+    <xmx:Bk8TZBlnbIis65Lzqvev1ImY8mNErWBDI9dFBVquQLbfxJR-otqc4w>
+    <xmx:Bk8TZPf3urRvALkGAJcDsNWlvp4EDo3RPUjOKJcSBPFJAEzwKfon0w>
+    <xmx:Bk8TZEvBrtK0Aw3V2VSMVYxW5p4f7pK2rM8VoO4gjoKo1whOLqGeHQ>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 1/4] tools: convert setup.py to use setuptools
-Date: Thu, 16 Mar 2023 18:16:31 +0100
-Message-Id: <20230316171634.320626-1-marmarek@invisiblethingslab.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 4/4] Update README to state Python3 requirement
+Date: Thu, 16 Mar 2023 18:16:34 +0100
+Message-Id: <20230316171634.320626-4-marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230316171634.320626-1-marmarek@invisiblethingslab.com>
+References: <20230316171634.320626-1-marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Python distutils is deprecated and is going to be removed in Python
-3.12. Migrate to setuptools.
-Setuptools in Python 3.11 complains:
-SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-Keep using setup.py anyway to build C extension.
+Python2 is not supported anymore.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- tools/pygrub/setup.py | 3 +--
- tools/python/setup.py | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ README | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tools/pygrub/setup.py b/tools/pygrub/setup.py
-index 0e4e3d02d372..5db743180713 100644
---- a/tools/pygrub/setup.py
-+++ b/tools/pygrub/setup.py
-@@ -1,5 +1,4 @@
--from distutils.core import setup, Extension
--from distutils.ccompiler import new_compiler
-+from setuptools import setup, Extension
- import os
- import sys
+diff --git a/README b/README
+index 755b3d8eaf8f..b2d9d79d891b 100644
+--- a/README
++++ b/README
+@@ -50,7 +50,7 @@ provided by your OS distributor:
+         - GNU Binutils 2.24 or later
+     * POSIX compatible awk
+     * Development install of zlib (e.g., zlib-dev)
+-    * Development install of Python 2.6 or later (e.g., python-dev)
++    * Development install of Python 3.2 or later (e.g., python3-dev)
+     * Development install of curses (e.g., libncurses-dev)
+     * Development install of openssl (e.g., openssl-dev)
+     * Development install of x11 (e.g. xorg-x11-dev)
+@@ -180,9 +180,9 @@ Python Runtime Libraries
  
-diff --git a/tools/python/setup.py b/tools/python/setup.py
-index 721a3141d7b7..7d57ccfbfffb 100644
---- a/tools/python/setup.py
-+++ b/tools/python/setup.py
-@@ -1,5 +1,4 @@
--
--from distutils.core import setup, Extension
-+from setuptools import setup, Extension
- import os, sys
+ Various tools, such as pygrub, have the following runtime dependencies:
  
- XEN_ROOT = "../.."
+-    * Python 2.6 or later.
++    * Python 3.2 or later.
+           URL:    http://www.python.org/
+-          Debian: python
++          Debian: python3
+ 
+ Note that the build system expects `python` to be available. If your system
+ only has `python2` or `python3` but not `python` (as in Linux From Scratch),
 -- 
 2.39.2
 
