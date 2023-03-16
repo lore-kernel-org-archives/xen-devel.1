@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27615C6FD19
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B003C6FD1F
 	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 14:39:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.510649.788725 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.510651.788743 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcolX-0006nU-Nl; Thu, 16 Mar 2023 14:39:39 +0000
+	id 1pcola-0007Ka-9W; Thu, 16 Mar 2023 14:39:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 510649.788725; Thu, 16 Mar 2023 14:39:39 +0000
+Received: by outflank-mailman (output) from mailman id 510651.788743; Thu, 16 Mar 2023 14:39:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcolX-0006n1-HM; Thu, 16 Mar 2023 14:39:39 +0000
-Received: by outflank-mailman (input) for mailman id 510649;
- Thu, 16 Mar 2023 14:39:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pcola-0007JL-4V; Thu, 16 Mar 2023 14:39:42 +0000
+Received: by outflank-mailman (input) for mailman id 510651;
+ Thu, 16 Mar 2023 14:39:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NB6E=7I=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pcolW-0006hg-2o
- for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 14:39:38 +0000
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [2a00:1450:4864:20::52e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5f6f605f-c408-11ed-b464-930f4c7d94ae;
- Thu, 16 Mar 2023 15:39:35 +0100 (CET)
-Received: by mail-ed1-x52e.google.com with SMTP id eh3so8492482edb.11
- for <xen-devel@lists.xenproject.org>; Thu, 16 Mar 2023 07:39:35 -0700 (PDT)
+ id 1pcolY-0006WA-H7
+ for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 14:39:40 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 61e69eac-c408-11ed-87f5-c1b5be75604c;
+ Thu, 16 Mar 2023 15:39:39 +0100 (CET)
+Received: by mail-ed1-x534.google.com with SMTP id cy23so8471774edb.12
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Mar 2023 07:39:40 -0700 (PDT)
 Received: from fedora.. (46.204.101.131.nat.umts.dynamic.t-mobile.pl.
  [46.204.101.131]) by smtp.gmail.com with ESMTPSA id
- q16-20020a1709060e5000b008b980c3e013sm3970187eji.179.2023.03.16.07.39.33
+ q16-20020a1709060e5000b008b980c3e013sm3970187eji.179.2023.03.16.07.39.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Mar 2023 07:39:35 -0700 (PDT)
+ Thu, 16 Mar 2023 07:39:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f6f605f-c408-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 61e69eac-c408-11ed-87f5-c1b5be75604c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678977575;
+        d=gmail.com; s=20210112; t=1678977579;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YQMyKbzQe0AjQ7eGyuvY7xOmw9XaxRLiNTI1dISB708=;
-        b=X+Pp4vF+BjOTTI9+tC6SgbPvdbpLNSCWCd+ov2PsheNQQfqYRDWn0CPyBmaA3IwQXw
-         9C2oydfDIUVrFFcTlsPwlf25PK9ycRc6vnpbRZT/HLOH4d0B4iWX0W5WfT0djQDidnwE
-         FiD0b0vFb7NRnSf/68IB+aD4wwAacgZqDf1+4sBntFcJhzc6ifXpHyGean0vCoc1MxeT
-         nWuib/viRD7Pczj+eiD/7X2MykirIrDL7xjJWWviE1zi1V8V1fZxVr1invQGU2RYLgB+
-         qlqYtaz8Zaf+TGzdCXlEAQW+bpWTTr3gy3Hv8Q+axtz3sRJ8taTeVCJbMUMXg++rIxM2
-         kC2A==
+        bh=QwhZUEDbU03FgtZvxsT8dmiRdPOC/MCr+LKArTSUuK0=;
+        b=LfCilxI99YjO1HEPhb9/5Iip+mUoAlN/FaC4RdMQLB1L7MweN8Y0FYUIgEuTj8lQ9D
+         A7LZThJfxU43bPO/EFOOzPXyNC8DpsiB/qIoGH4KmUy5PZE2aHZqyyVCM0suNpEscGq6
+         XYH1trmXu66/0Zh/dyZJYOUoZ/qEdbYpC/SmNY9yXp2Kj50K2gBSVXmYCFKI9++cOeCA
+         oC+P6xoC/lFSoms266G4CvwNac21sXBfuEn2nyLnhy7ZzCJFt6acWBd87iqteL2ew+e7
+         dnALpvuSIiKmciecZrGsLb39wf8eZi5aAR7lDUfrmUV+b+DrZ8MTrzh7fRDoHKsjHzkz
+         ApgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678977575;
+        d=1e100.net; s=20210112; t=1678977579;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YQMyKbzQe0AjQ7eGyuvY7xOmw9XaxRLiNTI1dISB708=;
-        b=1y49TxGzP5T5l+YE/Ki0BLYe/m9/SOItdYB8xXHJAGir+XsQcLqxod6JpvkNc60us1
-         IgFcCtE5uuNBgGUNlXLXuUpxflzwCjRca6o5csAEo1eu00p3yjs1P5sk2ipOr3GHfinh
-         CucDzxibh0gsY2Pddl/lJU1UvVkhY2oPml4j5DGnpDwZxfWc4pYP26qbIIbREzd9OZFS
-         8Mpp93LuOxfv9L+6Exteg4cmNFHIPGpDPunNVgAxmuIeXHJjtokklzaeojpm2TOiIytw
-         PmN375RdykJRnSgwC9fu84yCchpu5sQkDMzya6bHVWConks57Jwp1JD3mCRdBYFPgTd9
-         qOnw==
-X-Gm-Message-State: AO0yUKWeDbjTyjohgqX4MYWhT+wlSfPH9efcrL9Sy9nEOXjnPfzIRLGn
-	bL1bS+m1ifI6KKslhZYOBBj4Z3cjUR3beg==
-X-Google-Smtp-Source: AK7set9qqBVMh2bkP/3GgL0gqjIw1GS6jOmy7mvO21s2qCJ8T8i+Mz1gDMGirsCe+afTiTHnvRpd8g==
-X-Received: by 2002:a17:906:fe4c:b0:931:b34:4172 with SMTP id wz12-20020a170906fe4c00b009310b344172mr1419801ejb.3.1678977575171;
-        Thu, 16 Mar 2023 07:39:35 -0700 (PDT)
+        bh=QwhZUEDbU03FgtZvxsT8dmiRdPOC/MCr+LKArTSUuK0=;
+        b=3TPWYrcyNRa4g0nME061OxNhAloKw3ZZ3zf75knKrEELncxhXRsl+rHS4omE1loqkn
+         hOrAa0u6l6z2YzpG9UsGqipyxLKrWTuDZTQ3GLYeIf5epDDnmeOTRw6gbAzJscSmfxOy
+         GJXa4vauTh+54rwmIrL0SXvKJa+jwubZVFI+iMvsbGr6845Zxl2V5+cPY7Fri9XbqR3f
+         T3/a1H5VCm8Ql6bZy8kOSeBY8sqihMH5qXLk2P7jNpaWTr8yYp3nSZ+huAnsl/3qU0fH
+         9sYnP4/40fYfBg5oWOJCljUDcDeLTog0ERCcrJAdpfR+DwR/MlcuB28Kkl1rCsCS7oOK
+         xp1A==
+X-Gm-Message-State: AO0yUKVr/JqygDLbHDaKCsdwtkwrf/B6NMcPUuZmJiA3Ut7/PoB98vWD
+	ZTswymlpZoGpbXuWu/X9ZawoDGzVQJ5fgA==
+X-Google-Smtp-Source: AK7set+Vrw/c5buXIsbsEI62JvWFHhRvEkwkzgagKamP974RO2D+8gf004qYvaTQBzeTEN/ggAfbsw==
+X-Received: by 2002:a17:907:dab:b0:92f:b290:78c with SMTP id go43-20020a1709070dab00b0092fb290078cmr6091041ejc.21.1678977579482;
+        Thu, 16 Mar 2023 07:39:39 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -87,72 +87,141 @@ Cc: Julien Grall <julien@xen.org>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v5 1/7] xen/riscv: introduce boot information structure
-Date: Thu, 16 Mar 2023 16:39:23 +0200
-Message-Id: <553b07e967f56b78eba2d27c9115cce707a45c08.1678976127.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v5 4/7] xen/riscv: introduce decode_cause() stuff
+Date: Thu, 16 Mar 2023 16:39:26 +0200
+Message-Id: <8c7b4a5d328be8b1cd2aa99c8d9a7883e4969600.1678976127.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <cover.1678976127.git.oleksii.kurochko@gmail.com>
 References: <cover.1678976127.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The structure holds information about:
-1. linker start/end address
-2. load start/end address
-
-Also the patch introduces offsets for boot information structure
-members to access them in assembly code.
+The patch introduces stuff needed to decode a reason of an
+exception.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V5:
- * the patch was introduced in the current patch series (V5)
+  - Remove <xen/error.h> from riscv/traps/c as nothing would require
+    inclusion.
+  - decode_reserved_interrupt_cause(), decode_interrupt_cause(), decode_cause, do_unexpected_trap()
+    were made as static they are expected to be used only in traps.c
+  - use LINK_TO_LOAD() for addresses which can be linker time relative.
 ---
- xen/arch/riscv/include/asm/boot-info.h | 15 +++++++++++++++
- xen/arch/riscv/riscv64/asm-offsets.c   |  3 +++
- 2 files changed, 18 insertions(+)
- create mode 100644 xen/arch/riscv/include/asm/boot-info.h
+Changes in V4:
+  - fix string in decode_reserved_interrupt_cause()
+---
+Changes in V3:
+  - Nothing changed
+---
+Changes in V2:
+  - Make decode_trap_cause() more optimization friendly.
+  - Merge the pathc which introduces do_unexpected_trap() to the current one.
+---
+ xen/arch/riscv/traps.c | 87 +++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 86 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/boot-info.h b/xen/arch/riscv/include/asm/boot-info.h
-new file mode 100644
-index 0000000000..cda3d278f5
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/boot-info.h
-@@ -0,0 +1,15 @@
-+#ifndef _ASM_BOOT_INFO_H
-+#define _ASM_BOOT_INFO_H
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index ccd3593f5a..8a1529e0c5 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -4,10 +4,95 @@
+  *
+  * RISC-V Trap handlers
+  */
 +
-+extern struct boot_info {
-+    unsigned long linker_start;
-+    unsigned long linker_end;
-+    unsigned long load_start;
-+    unsigned long load_end;
-+} boot_info;
++#include <xen/lib.h>
 +
-+/* LINK_TO_LOAD() and LOAD_TO_LINK() works only when MMU isn't enabled. */
-+#define LINK_TO_LOAD(addr) ((addr) - boot_info.linker_start + boot_info.load_start)
-+#define LOAD_TO_LINK(addr) ((addr) - boot_info.load_start + boot_info.linker_start)
-+
-+#endif
-\ No newline at end of file
-diff --git a/xen/arch/riscv/riscv64/asm-offsets.c b/xen/arch/riscv/riscv64/asm-offsets.c
-index d632b75c2a..6b89e9a91d 100644
---- a/xen/arch/riscv/riscv64/asm-offsets.c
-+++ b/xen/arch/riscv/riscv64/asm-offsets.c
-@@ -1,5 +1,6 @@
- #define COMPILE_OFFSETS
- 
 +#include <asm/boot-info.h>
++#include <asm/csr.h>
++#include <asm/early_printk.h>
  #include <asm/processor.h>
- #include <xen/types.h>
+ #include <asm/traps.h>
  
-@@ -50,4 +51,6 @@ void asm_offsets(void)
-     OFFSET(CPU_USER_REGS_SEPC, struct cpu_user_regs, sepc);
-     OFFSET(CPU_USER_REGS_SSTATUS, struct cpu_user_regs, sstatus);
-     OFFSET(CPU_USER_REGS_PREGS, struct cpu_user_regs, pregs);
-+    OFFSET(BI_LINKER_START, struct boot_info, linker_start);
-+    OFFSET(BI_LOAD_START, struct boot_info, load_start);
+-void do_trap(struct cpu_user_regs *cpu_regs)
++static const char *decode_trap_cause(unsigned long cause)
++{
++    static const char *const trap_causes[] = {
++        [CAUSE_MISALIGNED_FETCH] = "Instruction Address Misaligned",
++        [CAUSE_FETCH_ACCESS] = "Instruction Access Fault",
++        [CAUSE_ILLEGAL_INSTRUCTION] = "Illegal Instruction",
++        [CAUSE_BREAKPOINT] = "Breakpoint",
++        [CAUSE_MISALIGNED_LOAD] = "Load Address Misaligned",
++        [CAUSE_LOAD_ACCESS] = "Load Access Fault",
++        [CAUSE_MISALIGNED_STORE] = "Store/AMO Address Misaligned",
++        [CAUSE_STORE_ACCESS] = "Store/AMO Access Fault",
++        [CAUSE_USER_ECALL] = "Environment Call from U-Mode",
++        [CAUSE_SUPERVISOR_ECALL] = "Environment Call from S-Mode",
++        [CAUSE_MACHINE_ECALL] = "Environment Call from M-Mode",
++        [CAUSE_FETCH_PAGE_FAULT] = "Instruction Page Fault",
++        [CAUSE_LOAD_PAGE_FAULT] = "Load Page Fault",
++        [CAUSE_STORE_PAGE_FAULT] = "Store/AMO Page Fault",
++        [CAUSE_FETCH_GUEST_PAGE_FAULT] = "Instruction Guest Page Fault",
++        [CAUSE_LOAD_GUEST_PAGE_FAULT] = "Load Guest Page Fault",
++        [CAUSE_VIRTUAL_INST_FAULT] = "Virtualized Instruction Fault",
++        [CAUSE_STORE_GUEST_PAGE_FAULT] = "Guest Store/AMO Page Fault",
++    };
++
++    if ( cause < ARRAY_SIZE(trap_causes) && trap_causes[cause] )
++        return trap_causes[cause];
++    return "UNKNOWN";
++}
++
++static const char *decode_reserved_interrupt_cause(unsigned long irq_cause)
++{
++    switch ( irq_cause )
++    {
++    case IRQ_M_SOFT:
++        return "M-mode Software Interrupt";
++    case IRQ_M_TIMER:
++        return "M-mode TIMER Interrupt";
++    case IRQ_M_EXT:
++        return "M-mode External Interrupt";
++    default:
++        return "UNKNOWN IRQ type";
++    }
++}
++
++static const char *decode_interrupt_cause(unsigned long cause)
++{
++    unsigned long irq_cause = cause & ~CAUSE_IRQ_FLAG;
++
++    switch ( irq_cause )
++    {
++    case IRQ_S_SOFT:
++        return "Supervisor Software Interrupt";
++    case IRQ_S_TIMER:
++        return "Supervisor Timer Interrupt";
++    case IRQ_S_EXT:
++        return "Supervisor External Interrupt";
++    default:
++        return decode_reserved_interrupt_cause(irq_cause);
++    }
++}
++
++static const char *decode_cause(unsigned long cause)
++{
++    if ( cause & CAUSE_IRQ_FLAG )
++        return decode_interrupt_cause(cause);
++
++    return decode_trap_cause(cause);
++}
++
++static void do_unexpected_trap(const struct cpu_user_regs *regs)
+ {
++    unsigned long cause = csr_read(CSR_SCAUSE);
++
++    early_printk("Unhandled exception: ");
++    early_printk(LINK_TO_LOAD(decode_cause(cause)));
++    early_printk("\n");
++
+     die();
  }
++
++void do_trap(struct cpu_user_regs *cpu_regs)
++{
++    do_unexpected_trap(cpu_regs);
++}
 -- 
 2.39.2
 
