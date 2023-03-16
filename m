@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2933AC6FD19
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 17:12:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.510749.789053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FCCC6FD19
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 17:17:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.510754.789069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcr9E-0002KC-P9; Thu, 16 Mar 2023 17:12:16 +0000
+	id 1pcrDl-000307-Hu; Thu, 16 Mar 2023 17:16:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 510749.789053; Thu, 16 Mar 2023 17:12:16 +0000
+Received: by outflank-mailman (output) from mailman id 510754.789069; Thu, 16 Mar 2023 17:16:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcr9E-0002K5-Km; Thu, 16 Mar 2023 17:12:16 +0000
-Received: by outflank-mailman (input) for mailman id 510749;
- Thu, 16 Mar 2023 17:12:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pcr9D-0002Jt-2k; Thu, 16 Mar 2023 17:12:15 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pcr9C-0005T2-Vw; Thu, 16 Mar 2023 17:12:14 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pcr9C-0004Js-Hl; Thu, 16 Mar 2023 17:12:14 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pcr9C-0005lq-HH; Thu, 16 Mar 2023 17:12:14 +0000
+	id 1pcrDl-0002zZ-Dg; Thu, 16 Mar 2023 17:16:57 +0000
+Received: by outflank-mailman (input) for mailman id 510754;
+ Thu, 16 Mar 2023 17:16:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ItE1=7I=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1pcrDj-0002vw-Mz
+ for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 17:16:55 +0000
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
+ [66.111.4.27]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 57227afd-c41e-11ed-87f5-c1b5be75604c;
+ Thu, 16 Mar 2023 18:16:53 +0100 (CET)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 87B945C016A;
+ Thu, 16 Mar 2023 13:16:50 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute2.internal (MEProxy); Thu, 16 Mar 2023 13:16:50 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 16 Mar 2023 13:16:49 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,86 +45,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=v/tpswMOc0m3xCaSFZHUXCw0HCMc68cjrGkIbPSXkSI=; b=lhA3NvragR6viEH+7SpKgF4oee
-	Px/fkmcT/KbF5y68h8tv5/aqVbyR3zFNuRSLac80+02uLegpDzVnGVs7dzHfAK4zSp+Z8UQIMOi2+
-	8m/NVHbvPB+mfkYgnKKfJdRu9gFW7ONFbVMKrK/pgeuQ7Y39smUZD9Fde3IFoL1hfuak=;
+X-Inumbo-ID: 57227afd-c41e-11ed-87f5-c1b5be75604c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=fm1; t=1678987010; x=1679073410; bh=QP
+	VkeV0fObWCjCHmmGo4u18UjuPCJC0H97vrVfuwEOo=; b=b+i4mm/fXPW3Gbenmw
+	bzhJXC9XY+s2NKiad856pVaJ9a1aJEGCbvUz4PxXGXYvUjBJhSwki2/IW1FL4cYP
+	MF5ErJTPmN7TTnUoebhIUrz53B4bctdDff/6by38jhjG2Q8phKvH52IrMarn+J56
+	AL2c4GVqnW5d1NvCTcwpq1X18wKIcBQ8/2Z5h/FZx6gMwPdB6ShKK0fgQ3o6Wg7O
+	OpQizGHmBO70fOwAGVIedTp0MJpNHIseV1gJng1xEeuiDuwxzfZJkUHRqCg1itfz
+	SrhVnlZrSKVxQn3cJTQyFq/Y/Eh1J6XKyMp9rw0FAaKJQuIHvnv/PKVZadhrzgCN
+	Hgzg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1678987010; x=1679073410; bh=QPVkeV0fObWCjCHmmGo4u18UjuPCJC0H97v
+	rVfuwEOo=; b=skDBrl5gKsSNamj2JiyRRBG3tayfupiK1bQiWVZLnWmTiBBWuWE
+	iC9szsu4NAuTTbRLlpV+gv/Nb7jgIP9g1ONvm+BFq3WuVKtKiZVTDc3LVrjQOayw
+	606HpMfskwwcxqvQ5G6mNSKNNaqGk3VdpZzxFBEu/vmylaOqm0rJya06iM8jz9GG
+	t4vvJ2BZZ1M/wy0/AblIDtyHGGbHMkSvDq7VTKecTj6HRX1DcW+qbySj3GKUVjt2
+	70bU61K9FJpHy2nV0x2c5gVjd3JOqrJ+GAGDktv5v6q7WUoRNz2cLExbce3NkjIm
+	Hw0eF2/MOkmONmO2oFkvYrZX0YesWKDt92w==
+X-ME-Sender: <xms:Ak8TZEbrQ39sBlwOfwEAkIXGNkvRfybpK9vlz1TaLbmpjUYcYvFDbw>
+    <xme:Ak8TZPYsyhWx7qg2XaT7q9BzRxpqNRhZyb9_bCYoVMTBfyl72XAFr6TglwLaEGlts
+    rMpPIhPbLISMg>
+X-ME-Received: <xmr:Ak8TZO-AoqlfF1xxINCEdSRyW3FUyoOsvvl9sPqoLhvb0uwUvNXIFXUX391732YhNVq8HS7iEaxjw47OJyj87aj04xJ3k-IYxgC5Hm_xJJ_QBbsh5f-->
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdeftddguddttdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgr
+    rhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghkse
+    hinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhep
+    gfeuudehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuve
+    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghr
+    vghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:Ak8TZOoLP51IFf1xJ2qLRMIMOtJA4Iiv84WjyB84TvBsjS4yR3zcdQ>
+    <xmx:Ak8TZPoSiLyPBtqL72qqphczYYDQnI_aXqX___ogkPEjHCgIu9kRjw>
+    <xmx:Ak8TZMRMW1K7uTMQkXClyUi_QoxutD1Xso42LpbhEb9hkA_xEYuL0w>
+    <xmx:Ak8TZG3FQJKtK8CiT6JCYDJX7Q7tbzpO10SKJXwLfLEjseamyLZxdQ>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-179687-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 2/4] tools: don't use distutils in configure nor Makefile
+Date: Thu, 16 Mar 2023 18:16:32 +0100
+Message-Id: <20230316171634.320626-2-marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230316171634.320626-1-marmarek@invisiblethingslab.com>
+References: <20230316171634.320626-1-marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 179687: tolerable trouble: pass/starved - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):starved:nonblocking
-    xen-unstable-smoke:build-armhf:hosts-allocate:starved:nonblocking
-X-Osstest-Versions-This:
-    xen=36e49fc8cbad21a4308b4701caaa685ef04e120b
-X-Osstest-Versions-That:
-    xen=5d8f05e10646aeef1c4a49610c0c44a7cdaf62a3
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 16 Mar 2023 17:12:14 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-flight 179687 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/179687/
+Python distutils is deprecated and is going to be removed in Python
+3.12. The distutils.sysconfig is available as sysconfig module in
+stdlib since Python 3.2, so use that directly.
 
-Failures :-/ but no regressions.
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+ m4/python_devel.m4       | 28 ++++++++++++++--------------
+ tools/libs/stat/Makefile |  4 ++--
+ 2 files changed, 16 insertions(+), 16 deletions(-)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl           1 build-check(1)               starved  n/a
- build-armhf                   2 hosts-allocate               starved  n/a
+diff --git a/m4/python_devel.m4 b/m4/python_devel.m4
+index bbf1e0354b2b..bb60857b030a 100644
+--- a/m4/python_devel.m4
++++ b/m4/python_devel.m4
+@@ -5,21 +5,21 @@ ac_previous_libs=$LIBS
+ AC_PATH_PROG([pyconfig], [$PYTHON-config], [no])
+ AS_IF([test x"$pyconfig" = x"no"], [
+     dnl For those that don't have python-config
+-    CPPFLAGS="$CFLAGS `$PYTHON -c 'import distutils.sysconfig; \
+-        print("-I" + distutils.sysconfig.get_config_var("INCLUDEPY"))'`"
+-    CPPFLAGS="$CPPFLAGS `$PYTHON -c 'import distutils.sysconfig; \
+-        print(distutils.sysconfig.get_config_var("CFLAGS"))'`"
+-    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
+-        print("-L" + distutils.sysconfig.get_python_lib(plat_specific=1,\
++    CPPFLAGS="$CFLAGS `$PYTHON -c 'import sysconfig; \
++        print("-I" + sysconfig.get_config_var("INCLUDEPY"))'`"
++    CPPFLAGS="$CPPFLAGS `$PYTHON -c 'import sysconfig; \
++        print(sysconfig.get_config_var("CFLAGS"))'`"
++    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
++        print("-L" + sysconfig.get_python_lib(plat_specific=1,\
+         standard_lib=1) + "/config")'`"
+-    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
+-        print(distutils.sysconfig.get_config_var("LINKFORSHARED"))'`"
+-    LDFLAGS="$LDFLAGS `$PYTHON -c 'import distutils.sysconfig; \
+-        print(distutils.sysconfig.get_config_var("LDFLAGS"))'`"
+-    LIBS="$LIBS `$PYTHON -c 'import distutils.sysconfig; \
+-        print(distutils.sysconfig.get_config_var("LIBS"))'`"
+-    LIBS="$LIBS `$PYTHON -c 'import distutils.sysconfig; \
+-        print(distutils.sysconfig.get_config_var("SYSLIBS"))'`"
++    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
++        print(sysconfig.get_config_var("LINKFORSHARED"))'`"
++    LDFLAGS="$LDFLAGS `$PYTHON -c 'import sysconfig; \
++        print(sysconfig.get_config_var("LDFLAGS"))'`"
++    LIBS="$LIBS `$PYTHON -c 'import sysconfig; \
++        print(sysconfig.get_config_var("LIBS"))'`"
++    LIBS="$LIBS `$PYTHON -c 'import sysconfig; \
++        print(sysconfig.get_config_var("SYSLIBS"))'`"
+ ], [
+     dnl If python-config is found use it
+     CPPFLAGS="$CFLAGS `$PYTHON-config --cflags`"
+diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
+index ee5c42bf7b4d..a968eaff48cb 100644
+--- a/tools/libs/stat/Makefile
++++ b/tools/libs/stat/Makefile
+@@ -73,8 +73,8 @@ $(PYLIB): $(PYSRC)
+ python-bindings: $(PYLIB) $(PYMOD)
+ 
+ pythonlibdir = $(shell $(PYTHON) -c \
+-	       'import distutils.sysconfig as cfg; \
+-	        print(cfg.get_python_lib(False, False, prefix="$(prefix)"))')
++	       'import sysconfig; \
++	        print(sysconfig.get_python_lib("platlib", vars={"platbase": "$(prefix)"}))')
+ 
+ .PHONY: install-python-bindings
+ install-python-bindings: $(PYLIB) $(PYMOD)
+-- 
+2.39.2
 
-version targeted for testing:
- xen                  36e49fc8cbad21a4308b4701caaa685ef04e120b
-baseline version:
- xen                  5d8f05e10646aeef1c4a49610c0c44a7cdaf62a3
-
-Last test of basis   179681  2023-03-16 13:00:25 Z    0 days
-Testing same since   179687  2023-03-16 15:00:53 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Henry Wang <Henry.Wang@arm.com>
-  Jan Beulich <jbeulich@suse.com>
-  Jason Andryuk <jandryuk@gmail.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  starved 
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          starved 
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   5d8f05e106..36e49fc8cb  36e49fc8cbad21a4308b4701caaa685ef04e120b -> smoke
 
