@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4A81C7618D
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 14:39:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.510648.788719 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47544C6FD1F
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Mar 2023 14:39:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.510653.788769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcolX-0006lL-DW; Thu, 16 Mar 2023 14:39:39 +0000
+	id 1pcold-00086X-Rt; Thu, 16 Mar 2023 14:39:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 510648.788719; Thu, 16 Mar 2023 14:39:39 +0000
+Received: by outflank-mailman (output) from mailman id 510653.788769; Thu, 16 Mar 2023 14:39:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pcolX-0006lE-AM; Thu, 16 Mar 2023 14:39:39 +0000
-Received: by outflank-mailman (input) for mailman id 510648;
- Thu, 16 Mar 2023 14:39:37 +0000
+	id 1pcold-00085y-Le; Thu, 16 Mar 2023 14:39:45 +0000
+Received: by outflank-mailman (input) for mailman id 510653;
+ Thu, 16 Mar 2023 14:39:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NB6E=7I=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1pcolV-0006WA-Qr
- for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 14:39:37 +0000
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [2a00:1450:4864:20::535])
+ id 1pcolc-0006WA-26
+ for xen-devel@lists.xenproject.org; Thu, 16 Mar 2023 14:39:44 +0000
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [2a00:1450:4864:20::536])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 603c7922-c408-11ed-87f5-c1b5be75604c;
- Thu, 16 Mar 2023 15:39:37 +0100 (CET)
-Received: by mail-ed1-x535.google.com with SMTP id h8so8550623ede.8
- for <xen-devel@lists.xenproject.org>; Thu, 16 Mar 2023 07:39:37 -0700 (PDT)
+ id 63c912cb-c408-11ed-87f5-c1b5be75604c;
+ Thu, 16 Mar 2023 15:39:43 +0100 (CET)
+Received: by mail-ed1-x536.google.com with SMTP id r11so8604768edd.5
+ for <xen-devel@lists.xenproject.org>; Thu, 16 Mar 2023 07:39:43 -0700 (PDT)
 Received: from fedora.. (46.204.101.131.nat.umts.dynamic.t-mobile.pl.
  [46.204.101.131]) by smtp.gmail.com with ESMTPSA id
- q16-20020a1709060e5000b008b980c3e013sm3970187eji.179.2023.03.16.07.39.35
+ q16-20020a1709060e5000b008b980c3e013sm3970187eji.179.2023.03.16.07.39.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Mar 2023 07:39:36 -0700 (PDT)
+ Thu, 16 Mar 2023 07:39:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 603c7922-c408-11ed-87f5-c1b5be75604c
+X-Inumbo-ID: 63c912cb-c408-11ed-87f5-c1b5be75604c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678977576;
+        d=gmail.com; s=20210112; t=1678977582;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FKTp6dhD+4idMmK9ijuA9b238S46/VfGSoR4ri38brw=;
-        b=jy8u2YoDJFHvNcDmZHex1DeiAuyMUA3z9f6y9fA2TTiO9KjAHPufx9C23cUXZjkrmk
-         /yQEKIVernI1kqs+IBjUWBMQ5VDfPuwZQb6/FscIeVv0jEjt4I9+N5LzZ5ShFGoHVo/P
-         GImQvTVbwEBoT9Yk9R5O+LI3/x12adNWbmtIDoBhi/7cCjR1Rppv1t+1ObMZi5PsERGy
-         Xpwye8I/yxvSBCBnAa21OcLLyU59FYhzCFXwkCigtDjTjPpjfspK/vemHi+v77g4Pq4f
-         tm9fk0945NjhfOdOHkX6XXq1Xtr4OgPHWDL8zaDAyUzYiIC+PF3aGHmBkVyg6DiUGGkO
-         zCfg==
+        bh=X7oCfkecOQ2j8RepZ+CNQJX2PvriCtlq7k5FrgLtuck=;
+        b=ReeUJVL8vnLrnkGDEYCiEAvmh2/kVs6V6fBk3Cao+CH5kHEuDwfI1oiab9Px+Owjtn
+         ipCS/XESu7EKCBflzL8xyII5DBsiQ8/9aMXyFCob+UrVT84rGzbebryKQB4Isty34Ym4
+         U4HClM8HwrvJBw1DzqYA9LbQoLocSItziAcEjK+Ad2nOQdMvnr1MkMPmN7ukAG37uyJO
+         OBtT/9UTldewNl/nFSmgu4TQB5w/Ab4hrUCVDnDMKlbZ7eV4z6j2hIpziyhu9oI7LsEq
+         OU/LGWI3uRHxc3h3K4RlOvLMUKFlXQn9GbejX6pTYUADiKI8KgHL+fsyYvRX3gfbt3XJ
+         rcRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678977576;
+        d=1e100.net; s=20210112; t=1678977582;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FKTp6dhD+4idMmK9ijuA9b238S46/VfGSoR4ri38brw=;
-        b=3GQk6BdvCSVHQYZbulkzpemPs2WUzpl0V0Qrq3rZI36+XCMXdyCuOw//46QinwafOj
-         v7UAogEFo4OEZPWmbA+Y1nNlOI3GfVDFgtpy9aVaCVZ1c7WXC26Fv1v1mMCNvnwLFDNw
-         gqFnKf2ML0Jap/e0zxl7HkParzUPq8spGapinKSUhH+jh63lsCl+1HJFQ2Raao+ZeNMP
-         HoZ9yeu3ORQgYZYOyg1cKPsIsRrwDd22BF6fEKRzMtOG57sXDrUBrO52fZlo+ZtvMKVn
-         NvsDnzqAwiTt4Rqu5+4I4+qaVHxz+N8Ji6ytBWmlzLAlmGlS4Aiy06Ix2RKgzuqmMvbE
-         Vx0Q==
-X-Gm-Message-State: AO0yUKVhyMaXvZRO9Wi9QKAGgBcIrCUQ3bh7E3g2767UNsIeT++Dij/L
-	sez4GuMmOckmkKuOfGuy5hNSsA0I7JUdCg==
-X-Google-Smtp-Source: AK7set8HtsRIID8Vf/liy0Uj8Kik4uprAzIHvvNP/SBbta69oYn2IjTXTo18aEGrsHyRMbTmEiYBEg==
-X-Received: by 2002:a17:906:d0cc:b0:84d:3403:f4f2 with SMTP id bq12-20020a170906d0cc00b0084d3403f4f2mr10321182ejb.62.1678977576604;
-        Thu, 16 Mar 2023 07:39:36 -0700 (PDT)
+        bh=X7oCfkecOQ2j8RepZ+CNQJX2PvriCtlq7k5FrgLtuck=;
+        b=7KqNYB/SenSwcbQe3WM3+YGQbc5OnlWc3Bn5mIQRmZ5PmB1JoOmVZEpY6CokrLHD9H
+         /AnJpEXN6fRfbPviJSfF5T+LA9hEhKE1/GRiY6pOhrVq8LqVdTsjgpMHQQEILgiwp2MP
+         fPfdatl00SSxNo06dkfn/ZodthBb63wHNbUWAm3eqkV4df0XPY4fB/9Eppyuea79Ug3O
+         245QUmi/asWEC5CCIX1Zy/3GcLi9Ep5JjAzcB0evouy3//Acb/M9reTwwyMYnKzoGUuY
+         Q6RY97YFNwBswAK0mFL7zisFyVBTSxiq3J4MY/rI2AS2YLF56NM7lZu+foxxBv8z1PP4
+         BLpQ==
+X-Gm-Message-State: AO0yUKX5+hC+IuXtX4Yit7i5Dw2T2hQ2Srg2sd8Yi60QXzaeDrM8TMKG
+	vdAWWtWJJPbUGKgEm++74xchcW8WXGqHvw==
+X-Google-Smtp-Source: AK7set+q1LnSNVGK3HLixY3bvOEyRMc7E0nYtEaG8ouEXoSfiSM/qCUkTuNzaUhLt52K7viCbzpyRA==
+X-Received: by 2002:a17:906:5a95:b0:7e0:eed0:8beb with SMTP id l21-20020a1709065a9500b007e0eed08bebmr10305130ejq.41.1678977582626;
+        Thu, 16 Mar 2023 07:39:42 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -87,64 +87,318 @@ Cc: Julien Grall <julien@xen.org>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v5 2/7] xen/riscv: initialize boot_info structure
-Date: Thu, 16 Mar 2023 16:39:24 +0200
-Message-Id: <1941d4ed64ff6edcc6354d09d6a40db4d6f63c44.1678976127.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v5 6/7] xen/riscv: introduce an implementation of macros from <asm/bug.h>
+Date: Thu, 16 Mar 2023 16:39:28 +0200
+Message-Id: <67807e242d3e12f1080956eea052285cb67a7dbf.1678976127.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <cover.1678976127.git.oleksii.kurochko@gmail.com>
 References: <cover.1678976127.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The patch introduces macros: BUG(), WARN(), run_in_exception(),
+assert_failed.
+To be precise, the macros from generic bug implementation (<xen/bug.h>)
+will be used.
+
+The implementation uses "ebreak" instruction in combination with
+diffrent bug frame tables (for each type) which contains useful
+information.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V5:
- * the patch was introduced in the current patch series (V5)
+  - Remove "#include <xen/types.h>" from <asm/bug.h> as there is no any need in it anymore
+  - Update macros GET_INSN_LENGTH: remove UL and 'unsigned int len;' from it
+  - Remove " include <xen/bug.h>" from risc/setup.c. it is not needed in the current version of
+    the patch
+  - change an argument type from vaddr_t to uint32_t for is_valid_bugaddr and introduce read_instr() to
+    read instruction properly as the length of qinstruction can be either 32 or 16 bits.
+  - Code style fixes
+  - update the comments before do_bug_frame() in riscv/trap.c
+  - Refactor is_valid_bugaddr() function.
+  - introduce macros cast_to_bug_frame(addr) to hide casts.
+  - use LINK_TO_LOAD() for addresses which are linker time relative.
 ---
- xen/arch/riscv/setup.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+Changes in V4:
+  - Updates in RISC-V's <asm/bug.h>:
+    * Add explanatory comment about why there is only defined for 32-bits length
+      instructions and 16/32-bits BUG_INSN_{16,32}.
+    * Change 'unsigned long' to 'unsigned int' inside GET_INSN_LENGTH().
+    * Update declaration of is_valid_bugaddr(): switch return type from int to bool
+      and the argument from 'unsigned int' to 'vaddr'.
+  - Updates in RISC-V's traps.c:
+    * replace /xen and /asm includes 
+    * update definition of is_valid_bugaddr():switch return type from int to bool
+      and the argument from 'unsigned int' to 'vaddr'. Code style inside function
+      was updated too.
+    * do_bug_frame() refactoring:
+      * local variables start and bug became 'const struct bug_frame'
+      * bug_frames[] array became 'static const struct bug_frame[] = ...'
+      * remove all casts
+      * remove unneeded comments and add an explanatory comment that the do_bug_frame()
+        will be switched to a generic one.
+    * do_trap() refactoring:
+      * read 16-bits value instead of 32-bits as compressed instruction can
+        be used and it might happen than only 16-bits may be accessible.
+      * code style updates
+      * re-use instr variable instead of re-reading instruction.
+  - Updates in setup.c:
+    * add blank line between xen/ and asm/ includes.
+---
+Changes in V3:
+  - Rebase the patch "xen/riscv: introduce an implementation of macros
+    from <asm/bug.h>" on top of patch series [introduce generic implementation
+    of macros from bug.h]
+---
+Changes in V2:
+  - Remove __ in define namings
+  - Update run_in_exception_handler() with
+    register void *fn_ asm(__stringify(BUG_FN_REG)) = (fn);
+  - Remove bug_instr_t type and change it's usage to uint32_t
+---
+ xen/arch/riscv/include/asm/bug.h       |  28 +++++
+ xen/arch/riscv/include/asm/processor.h |   2 +
+ xen/arch/riscv/traps.c                 | 139 +++++++++++++++++++++++++
+ xen/arch/riscv/xen.lds.S               |  10 ++
+ 4 files changed, 179 insertions(+)
 
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index 0908bdb9f9..36556eb779 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,12 +1,16 @@
- #include <xen/compile.h>
- #include <xen/init.h>
-+#include <xen/kernel.h>
+diff --git a/xen/arch/riscv/include/asm/bug.h b/xen/arch/riscv/include/asm/bug.h
+index e8b1e40823..bf3194443f 100644
+--- a/xen/arch/riscv/include/asm/bug.h
++++ b/xen/arch/riscv/include/asm/bug.h
+@@ -7,4 +7,32 @@
+ #ifndef _ASM_RISCV_BUG_H
+ #define _ASM_RISCV_BUG_H
  
-+#include <asm/boot-info.h>
- #include <asm/early_printk.h>
- 
- /* Xen stack for bringing up the first CPU. */
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
- 
-+struct boot_info boot_info = { (unsigned long)&_start, (unsigned long)&_end, 0UL, 0UL };
++#ifndef __ASSEMBLY__
 +
- /*  
-  * To be sure that .bss isn't zero. It will simplify code of
-  * .bss initialization.
-@@ -15,11 +19,19 @@ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-  */
- int dummy_bss __attribute__((unused));
++#define BUG_INSTR "ebreak"
++
++/*
++ * The base instruction set has a fixed length of 32-bit naturally aligned
++ * instructions.
++ *
++ * There are extensions of variable length ( where each instruction can be
++ * any number of 16-bit parcels in length ) but they aren't used in Xen
++ * and Linux kernel ( where these definitions were taken from ).
++ *
++ * Compressed ISA is used now where the instruction length is 16 bit  and
++ * 'ebreak' instruction, in this case, can be either 16 or 32 bit (
++ * depending on if compressed ISA is used or not )
++ */
++#define INSN_LENGTH_MASK        _UL(0x3)
++#define INSN_LENGTH_32          _UL(0x3)
++
++#define BUG_INSN_32             _UL(0x00100073) /* ebreak */
++#define BUG_INSN_16             _UL(0x9002)     /* c.ebreak */
++#define COMPRESSED_INSN_MASK    _UL(0xffff)
++
++#define GET_INSN_LENGTH(insn)                               \
++    (((insn) & INSN_LENGTH_MASK) == INSN_LENGTH_32 ? 4 : 2) \
++
++#endif /* !__ASSEMBLY__ */
++
+ #endif /* _ASM_RISCV_BUG_H */
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index a71448e02e..ef23d9589e 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -69,6 +69,8 @@ static inline void die(void)
+         wfi();
+ }
  
-+static void fill_boot_info(void)
++void show_execution_state(const struct cpu_user_regs *regs);
++
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif /* _ASM_RISCV_PROCESSOR_H */
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 581f34efbc..2afcabb912 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -5,6 +5,8 @@
+  * RISC-V Trap handlers
+  */
+ 
++#include <xen/bug.h>
++#include <xen/errno.h>
+ #include <xen/lib.h>
+ 
+ #include <asm/boot-info.h>
+@@ -13,6 +15,10 @@
+ #include <asm/processor.h>
+ #include <asm/traps.h>
+ 
++#define cast_to_bug_frame(addr) \
++    (const struct bug_frame *)(LINK_TO_LOAD((char *)addr))
++
++
+ void trap_init(void)
+ {
+     unsigned long addr = (unsigned long)&handle_trap;
+@@ -99,7 +105,140 @@ static void do_unexpected_trap(const struct cpu_user_regs *regs)
+     die();
+ }
+ 
++void show_execution_state(const struct cpu_user_regs *regs)
 +{
-+    boot_info.load_start = (unsigned long)_start;
-+    boot_info.load_end   = (unsigned long)_end;
++    early_printk("implement show_execution_state(regs)\n");
 +}
 +
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                unsigned long dtb_paddr)
- {
-     early_printk("Hello from C env\n");
- 
-+    fill_boot_info();
++/*
++ * TODO: change early_printk's function to early_printk with format
++ *       when s(n)printf() will be added.
++ *
++ * Probably the TODO won't be needed as generic do_bug_frame()
++ * has been introduced and current implementation will be replaced
++ * with generic one when panic(), printk() and find_text_region()
++ * (virtual memory?) will be ready/merged
++ */
++int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
++{
++    const struct bug_frame *start, *end;
++    const struct bug_frame *bug = NULL;
++    unsigned int id = 0;
++    const char *filename, *predicate;
++    int lineno;
 +
-     early_printk("All set up\n");
-     for ( ;; )
-         asm volatile ("wfi");
++    static const struct bug_frame* bug_frames[] = {
++        &__start_bug_frames[0],
++        &__stop_bug_frames_0[0],
++        &__stop_bug_frames_1[0],
++        &__stop_bug_frames_2[0],
++        &__stop_bug_frames_3[0],
++    };
++
++    for ( id = 0; id < BUGFRAME_NR; id++ )
++    {
++        start = cast_to_bug_frame(bug_frames[id]);
++        end   = cast_to_bug_frame(bug_frames[id + 1]);
++
++        while ( start != end )
++        {
++            if ( (vaddr_t)bug_loc(start) == pc )
++            {
++                bug = start;
++                goto found;
++            }
++
++            start++;
++        }
++    }
++
++ found:
++    if ( bug == NULL )
++        return -ENOENT;
++
++    if ( id == BUGFRAME_run_fn )
++    {
++        void (*fn)(const struct cpu_user_regs *) = bug_ptr(bug);
++
++        fn(regs);
++
++        goto end;
++    }
++
++    /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
++    filename = bug_ptr(bug);
++    lineno = bug_line(bug);
++
++    switch ( id )
++    {
++    case BUGFRAME_warn:
++        early_printk("Xen WARN at ");
++        early_printk(filename);
++        early_printk("\n");
++
++        show_execution_state(regs);
++
++        goto end;
++
++    case BUGFRAME_bug:
++        early_printk("Xen BUG at ");
++        early_printk(filename);
++        early_printk("\n");
++
++        show_execution_state(regs);
++        early_printk("change wait_for_interrupt to panic() when common is available\n");
++        die();
++
++    case BUGFRAME_assert:
++        /* ASSERT: decode the predicate string pointer. */
++        predicate = bug_msg(bug);
++
++        early_printk("Assertion \'");
++        early_printk(predicate);
++        early_printk("\' failed at ");
++        early_printk(filename);
++        early_printk("\n");
++
++        show_execution_state(regs);
++        early_printk("change wait_for_interrupt to panic() when common is available\n");
++        die();
++    }
++
++    return -EINVAL;
++
++ end:
++    return 0;
++}
++
++static bool is_valid_bugaddr(uint32_t insn)
++{
++    return insn == BUG_INSN_32 ||
++           (insn & COMPRESSED_INSN_MASK) == BUG_INSN_16;
++}
++
++static uint32_t read_instr(unsigned long pc)
++{
++    uint16_t instr16 = *(uint16_t *)pc;
++
++    if ( GET_INSN_LENGTH(instr16) == 2 )
++        return (uint32_t)instr16;
++    else
++        return *(uint32_t *)pc;
++}
++
+ void do_trap(struct cpu_user_regs *cpu_regs)
+ {
++    register_t pc = cpu_regs->sepc;
++    uint32_t instr = read_instr(pc);
++
++    if ( is_valid_bugaddr(instr) )
++    {
++        if ( !do_bug_frame(cpu_regs, pc) )
++        {
++            cpu_regs->sepc += GET_INSN_LENGTH(instr);
++            return;
++        }
++    }
++
+     do_unexpected_trap(cpu_regs);
+ }
+diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
+index f299ea8422..eed457c492 100644
+--- a/xen/arch/riscv/xen.lds.S
++++ b/xen/arch/riscv/xen.lds.S
+@@ -40,6 +40,16 @@ SECTIONS
+     . = ALIGN(PAGE_SIZE);
+     .rodata : {
+         _srodata = .;          /* Read-only data */
++        /* Bug frames table */
++       __start_bug_frames = .;
++       *(.bug_frames.0)
++       __stop_bug_frames_0 = .;
++       *(.bug_frames.1)
++       __stop_bug_frames_1 = .;
++       *(.bug_frames.2)
++       __stop_bug_frames_2 = .;
++       *(.bug_frames.3)
++       __stop_bug_frames_3 = .;
+         *(.rodata)
+         *(.rodata.*)
+         *(.data.rel.ro)
 -- 
 2.39.2
 
