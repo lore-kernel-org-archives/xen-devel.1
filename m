@@ -4,29 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD32C7618A
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 18:21:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.512062.791671 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714DCC7618A
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 18:39:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.512066.791684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peK80-00036a-N9; Mon, 20 Mar 2023 18:21:04 +0000
+	id 1peKPj-0004vK-8h; Mon, 20 Mar 2023 18:39:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 512062.791671; Mon, 20 Mar 2023 18:21:04 +0000
+Received: by outflank-mailman (output) from mailman id 512066.791684; Mon, 20 Mar 2023 18:39:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peK80-00036T-IG; Mon, 20 Mar 2023 18:21:04 +0000
-Received: by outflank-mailman (input) for mailman id 512062;
- Mon, 20 Mar 2023 18:21:02 +0000
+	id 1peKPj-0004vD-5u; Mon, 20 Mar 2023 18:39:23 +0000
+Received: by outflank-mailman (input) for mailman id 512066;
+ Mon, 20 Mar 2023 18:39:21 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xqGy=7M=citrix.com=prvs=436e66757=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1peK7y-000367-Mh
- for xen-devel@lists.xenproject.org; Mon, 20 Mar 2023 18:21:02 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f52cc2e3-c74b-11ed-b464-930f4c7d94ae;
- Mon, 20 Mar 2023 19:20:59 +0100 (CET)
+ <SRS0=Z4LM=7M=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-se1.protection.inumbo.net>)
+ id 1peKPh-0004v7-Lu
+ for xen-devel@lists.xenproject.org; Mon, 20 Mar 2023 18:39:21 +0000
+Received: from rs227.mailgun.us (rs227.mailgun.us [209.61.151.227])
+ by se1-gles-flk1.inumbo.com (Halon) with UTF8SMTPS
+ id 859ddeac-c74e-11ed-b464-930f4c7d94ae;
+ Mon, 20 Mar 2023 19:39:19 +0100 (CET)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com
+ [209.85.128.177]) by
+ 88001cc23a1c with SMTP id 6418a854061a559e84d33861 (version=TLS1.3,
+ cipher=TLS_AES_128_GCM_SHA256); Mon, 20 Mar 2023 18:39:16 GMT
+Received: by mail-yw1-f177.google.com with SMTP id
+ 00721157ae682-544787916d9so239634527b3.13
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Mar 2023 11:39:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,126 +44,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f52cc2e3-c74b-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1679336459;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=ewB48VVVTqCfeKXnvd51+6AIJ1OC9YPhA6YX0qasxSI=;
-  b=JTljJy2VeVa7GIpnDpSMgwFp4l7Zcwvc5rpwrNHeVugOaR/TZLfxjUJR
-   A9WHK6srMRxL0vLNAQ0BPYzWO3GGkLEw578+4i6dXCjeDZMoESlzsJolD
-   nhtb/i8/cHFD6P0g21avUGchpmaeMW9k3Y1fj68T+db5CTWS12AZeXVfX
-   8=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 102000891
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:s0hAPq6EESZUaL0TGCG1tgxRtFbHchMFZxGqfqrLsTDasY5as4F+v
- jMfUT+HM/uONzDyKNlyaI6wpEgB6J7Xy4BrGQBl/nxnHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
- plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraCYnsrLeNdYH9JoQp5nOIkiZJfj9G8Agec0
- fv/uMSaM1K+s9JOGjt8B5mr9VU+7JwehBtC5gZlPasR5AeH/5UoJMl3yZ+ZfiOQrrZ8RoZWd
- 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m6
- +YkNWAVfgy6hv/u/emLWO51gNZyFZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx7C/
- jqerzWgav0cHP3ClQOc8FyLvL7SmA/0RNwDG5qo1PE/1TV/wURMUUZLBDNXu8KRlUqWS99Zb
- UsO9UIGrqUs9UrtUtj0WTW5pmKJulgXXN84O/037kSBx7TZ5y6dB3MYVXhRZdo+rsg0SDc2k
- FiTkLvBJxZirbmUQnK17aqPoHW5Pi19EIMZTXZaF01fuYCl+dxtyEuVFb6PDZJZkPXrAw3tk
- yiasBE/mu0u1v4Z0Ly97wH+1mfESofycuIl2unGdjv7sVIhPtP9ONzABUvztqgZctvAJrWVl
- D1dwpXFsrhTZX2YvHbVKNjhCo1F8Bps3Nf0pVd0V6cs+D22k5JIVdABuWouTKuF3yttRNMIX
- KMwkVkLjHOrFCH2BZKbmb5d9uxwlfSwfTgaahwkRoUXOcUgHON21CpveVSRzwjQraTYqolmY
- c3zWZ/1XR4n5VFPkGLeb/0DyoUi2i1W7TqVHfgXOTz7i+vBDJNUIJ9ZWGazghcRtf3U+VqJq
- I0BbKNnCXx3CYXDX8UeyqZLRXhiEJTxLcqeRxB/HgJbHjdbJQ==
-IronPort-HdrOrdr: A9a23:4F9A+aFzr2eqgFxPpLqEOceALOsnbusQ8zAXPidKOH5om62j5q
- OTdZEgvnXJYVkqNU3I5urwX5VoLUmxyXcX2+ks1NWZMjUO0VHARL2KhrGC/9SPIULDH+dmpM
- FdWrk7ANniSUJ8l4L/7BOjG9gthNmLmZrY4Nv23jNkSRIvcaZ7qx1kARyQCU1uWQlBAt4wD5
- 303Lsimwad
-X-IronPort-AV: E=Sophos;i="5.98,276,1673931600"; 
-   d="scan'208";a="102000891"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH] x86/vmx: Provide named fields for IO exit qualification
-Date: Mon, 20 Mar 2023 18:20:52 +0000
-Message-ID: <20230320182052.1831486-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 859ddeac-c74e-11ed-b464-930f4c7d94ae
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=tklengyel.com;
+ q=dns/txt; s=mailo; t=1679337556; x=1679344756; h=Content-Type: Cc: To: To:
+ Subject: Subject: Message-ID: Date: From: From: In-Reply-To: References:
+ MIME-Version: Sender: Sender;
+ bh=hrDp51DhFoX/YZk/0G0Jzcc7Cdfae+rRAMlZRhBZKec=;
+ b=TLaQL98yuivPyr5h5Y8IVKn4dWEUKCDbThKYnnHZRBebfZJX1DiBZzhFITE8svjthgcHZwIdAQ0Ojfna/Ytvb95hB5o5BJjKW5uGld/LIjW42rFEs5BWXyvIPv3ONgielMqjp2I3kx2+6tQMYg05QMtidEzHUfcd+wDguPvBd9if3ob92EWG85SWivsgOs0L+k50shyikFgEpYdBmul7x5q9sTy5rLkC6x4T1SGk5rVohHnXIPVd5pg3UuOECiMqaPIQG8DoZYmTyiXvMjvx6+gswtvfwrbErpO5bKP7BsHpPuQ0/umTLz7B7D/uv0G/gFteN8OTRdCFUSgv6J2BYw==
+X-Mailgun-Sending-Ip: 209.61.151.227
+X-Mailgun-Sid: WyIyYTNmOCIsInhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZyIsImNkODQwIl0=
+Sender: tamas@tklengyel.com
+X-Gm-Message-State: AO0yUKUcwSX7CYUV0wSpWGYt5iOK+B6uu0FSObPJWxsF+o13tVLJz9Uf
+	DI/MMls7UdCGoM1YYFpZDA4cE/ExkneFNizCbsE=
+X-Google-Smtp-Source: AK7set+teOTIitWntHCNKc8hIZreEClezJzRgGX6bocZI9eevsFe0hPJ0YEETDGnfQaCb7TBR1PKf5ha+qyQDzNSzXY=
+X-Received: by 2002:a81:4302:0:b0:541:7266:3fd7 with SMTP id
+ q2-20020a814302000000b0054172663fd7mr10045070ywa.3.1679337556022; Mon, 20 Mar
+ 2023 11:39:16 -0700 (PDT)
 MIME-Version: 1.0
+References: <858e4c67d14ec9d9c6737dd0b33056e3610c00f6.1679054228.git.isaikin-dmitry@yandex.ru>
+ <8aeee329-460f-0f79-a381-2dd0559e01d6@suse.com>
+In-Reply-To: <8aeee329-460f-0f79-a381-2dd0559e01d6@suse.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Mon, 20 Mar 2023 18:38:39 -0400
+X-Gmail-Original-Message-ID: <CABfawhnWGezKs5YmH=KkrLVVJgrRKLJtDi_9oFKGE7wzPYeDqA@mail.gmail.com>
+Message-ID: <CABfawhnWGezKs5YmH=KkrLVVJgrRKLJtDi_9oFKGE7wzPYeDqA@mail.gmail.com>
+Subject: Re: [XEN PATCH v3] x86/monitor: Add new monitor event to catch I/O instructions
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Dmitry Isaykin <isaikin-dmitry@yandex.ru>, Wei Liu <wl@xen.org>, 
+	Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Alexandru Isaila <aisaila@bitdefender.com>, Petre Pircalabu <ppircalabu@bitdefender.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, 
+	Anton Belousov <abelousov@ptsecurity.com>, xen-devel@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="0000000000007c1ffd05f7593ef7"
+
+--0000000000007c1ffd05f7593ef7
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-This removes most of the opencoded bit logic on the exit qualification.
-Unfortunately, size is 1-based not 0-based, so need adjusting in a separate
-variable.
+> Are you actually sure you want to tie the vm-event interface to the ioreq
+> one (this is also a question to you, Tamas)? It would look slightly better
+> to me if this was a simple boolean named after its purpose (e.g. "write"
+> or "out" when it's meant to be set for OUT / OUTS and clear for IN / INS).
 
-No functional change.
+A boolean would be preferred indeed.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Kevin Tian <kevin.tian@intel.com>
----
- xen/arch/x86/hvm/vmx/vmx.c | 30 ++++++++++++++++++++++--------
- 1 file changed, 22 insertions(+), 8 deletions(-)
+Tamas
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 00b531f76cbf..a96c601efded 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4560,23 +4560,37 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
-         break;
- 
-     case EXIT_REASON_IO_INSTRUCTION:
--        __vmread(EXIT_QUALIFICATION, &exit_qualification);
--        if ( exit_qualification & 0x10 )
-+    {
-+        union {
-+            unsigned long raw;
-+            struct {
-+                uint32_t size:3;
-+                bool     in:1;
-+                bool     str:1;
-+                bool     rep:1;
-+                bool     imm:1;
-+                uint32_t :9;
-+                uint16_t port;
-+            };
-+        } io_qual;
-+        unsigned int bytes;
-+
-+        __vmread(EXIT_QUALIFICATION, &io_qual.raw);
-+        bytes = io_qual.size + 1;
-+
-+        if ( io_qual.str )
-         {
--            /* INS, OUTS */
-             if ( !hvm_emulate_one_insn(x86_insn_is_portio, "port I/O") )
-                 hvm_inject_hw_exception(TRAP_gp_fault, 0);
-         }
-         else
-         {
--            /* IN, OUT */
--            uint16_t port = (exit_qualification >> 16) & 0xFFFF;
--            int bytes = (exit_qualification & 0x07) + 1;
--            int dir = (exit_qualification & 0x08) ? IOREQ_READ : IOREQ_WRITE;
--            if ( handle_pio(port, bytes, dir) )
-+            if ( handle_pio(io_qual.port, bytes,
-+                            io_qual.in ? IOREQ_READ : IOREQ_WRITE) )
-                 update_guest_eip(); /* Safe: IN, OUT */
-         }
-         break;
-+    }
- 
-     case EXIT_REASON_INVD:
-     case EXIT_REASON_WBINVD:
--- 
-2.30.2
+--0000000000007c1ffd05f7593ef7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><br>&gt; Are you actually sure you want to tie the vm-even=
+t interface to the ioreq<br>&gt; one (this is also a question to you, Tamas=
+)? It would look slightly better<br>&gt; to me if this was a simple boolean=
+ named after its purpose (e.g. &quot;write&quot;<br>&gt; or &quot;out&quot;=
+ when it&#39;s meant to be set for OUT / OUTS and clear for IN / INS).<br><=
+div><br></div><div>A boolean would be preferred indeed.</div><div><br></div=
+><div>Tamas<br></div></div>
+
+--0000000000007c1ffd05f7593ef7--
 
