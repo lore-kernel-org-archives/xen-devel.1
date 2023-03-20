@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8429C6FD1D
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 18:42:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.512069.791693 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD71AC6FD1D
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 18:42:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.512071.791704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peKSH-0006If-MV; Mon, 20 Mar 2023 18:42:01 +0000
+	id 1peKSn-0006os-2o; Mon, 20 Mar 2023 18:42:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 512069.791693; Mon, 20 Mar 2023 18:42:01 +0000
+Received: by outflank-mailman (output) from mailman id 512071.791704; Mon, 20 Mar 2023 18:42:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peKSH-0006IY-Jh; Mon, 20 Mar 2023 18:42:01 +0000
-Received: by outflank-mailman (input) for mailman id 512069;
- Mon, 20 Mar 2023 18:42:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1peKSm-0006ol-Vt; Mon, 20 Mar 2023 18:42:32 +0000
+Received: by outflank-mailman (input) for mailman id 512071;
+ Mon, 20 Mar 2023 18:42:31 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=QJTx=7M=gmail.com=shentey@srs-se1.protection.inumbo.net>)
- id 1peKSG-0006IO-2H
- for xen-devel@lists.xenproject.org; Mon, 20 Mar 2023 18:42:00 +0000
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [2a00:1450:4864:20::533])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e48e5c41-c74e-11ed-b464-930f4c7d94ae;
- Mon, 20 Mar 2023 19:41:57 +0100 (CET)
-Received: by mail-ed1-x533.google.com with SMTP id cy23so50505840edb.12
- for <xen-devel@lists.xenproject.org>; Mon, 20 Mar 2023 11:41:57 -0700 (PDT)
-Received: from [127.0.0.1] ([62.214.191.67]) by smtp.gmail.com with ESMTPSA id
- g26-20020a1709064e5a00b00930525d89e2sm4713481ejw.89.2023.03.20.11.41.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Mar 2023 11:41:56 -0700 (PDT)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1peKSl-0006n3-NL; Mon, 20 Mar 2023 18:42:31 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1peKSl-0003sd-M0; Mon, 20 Mar 2023 18:42:31 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1peKSl-00056F-95; Mon, 20 Mar 2023 18:42:31 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1peKSl-0005Q7-8c; Mon, 20 Mar 2023 18:42:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,253 +44,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e48e5c41-c74e-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679337717;
-        h=content-transfer-encoding:mime-version:message-id:references
-         :in-reply-to:subject:to:from:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=a5sYjg0jBsL2jJxH4vrRssLuchzA6izTtqncZVVtxao=;
-        b=BPcliWQNMk87obcfpHKQn+9EIZdm/nKv7VmGPjqf8NmCPcbqWd64SHe1gdCIn5kE5r
-         M7E0jOnV0G/ZUJqHZXiO9rrJg0gU2yex5+L7DUmgrSfGIhSPZTJf/SrUJlCQd7NEzdPt
-         tSwrrMLk+6NAtosG+ePj/Fsgh82yi4sNBrDBv+xZBXzvoFyQlLLNkVyzAs15NLpp1LD9
-         MapLkrYOrFo+Z05O9C1/O0fM7hyT8DqPcHaJBHv2UbdQwosRSUWNibJEjuoUbEcHyYln
-         cLWmYN6sfqxhAQGOluSLMy953Y2oPx5anxrFsBw8fYhemCs7Z46CoV20c4Uc+YWmRjZ6
-         CW9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679337717;
-        h=content-transfer-encoding:mime-version:message-id:references
-         :in-reply-to:subject:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=a5sYjg0jBsL2jJxH4vrRssLuchzA6izTtqncZVVtxao=;
-        b=4CYpvcW2gTBOECkK2JGuoC4S8CdC02bGNRbm+ARClADJYVJb2rb5zRz1KrXyslrPpK
-         Ndavrku7qFUF1NNdlBsUaa3/D2JiFII9qFovUPeh6P8IEbQLrz5Fh4RNDLAbLDVNCkBP
-         xHyuTYqVaD9e2j8vwYvAX0ht2Nf3U1eyb4t222iX6e63XbdofYncXBRQZ4NPrPBNpi7Q
-         6Bolx10zYbsmKNiU1j1LtdrOeRRalzlzaQHm619fP4HNhPiK+4hU5+N7nzKYKXWErtXy
-         r9sV8a0CofEEu+MTdo9EKaDbCtpkQrCx8yu6Rf7+H/0GfxLNL+jJwQjp1enl8UKj1ZVX
-         zutw==
-X-Gm-Message-State: AO0yUKUIUis2kml/rrV8161+G5GdxtcoggGFYBRhYB8nkYNhCu5zRv2y
-	7dt1FD5lqaEnWL6UMoXKxtQ=
-X-Google-Smtp-Source: AK7set9VO64wcT0abmsv0BNocsxIcxyAwMbDZanuQ0HX+CoKRj3lv9bbGeRi67LYQZpXQlie0tlxYA==
-X-Received: by 2002:a17:906:d146:b0:90b:208:6179 with SMTP id br6-20020a170906d14600b0090b02086179mr591925ejb.28.1679337717020;
-        Mon, 20 Mar 2023 11:41:57 -0700 (PDT)
-Date: Mon, 20 Mar 2023 09:13:08 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: qemu-devel@nongnu.org, Jason Andryuk <jandryuk@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- xen-devel@lists.xenproject.org,
- =?ISO-8859-1?Q?Marek_Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] xen: Fix host pci for stubdom
-In-Reply-To: <20230320000554.8219-1-jandryuk@gmail.com>
-References: <20230320000554.8219-1-jandryuk@gmail.com>
-Message-ID: <A6498A22-B701-4B0A-884E-575EEBD77EAB@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=t983TZUw63pTX4YI7CiTatnFwIXAu0k7SbYca1m3f34=; b=h58rYxACa/zhJdc9NyUHe06d0k
+	S2LGD/kS+4m8BSPqRta7s5kgqd+HJn32DFL9KeRaeZ+diUiaU6XFS54glL9E7R+pNMUQ0M2CkQMAm
+	jRE7CL8FtIaMbuaeDM938DlKJxmvDXCqBwDlP4D3xAkYzeiWTVNBRyH1pB5U7IoBav4A=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-179814-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Subject: [xen-unstable-smoke test] 179814: tolerable trouble: pass/starved - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):starved:nonblocking
+    xen-unstable-smoke:build-armhf:hosts-allocate:starved:nonblocking
+X-Osstest-Versions-This:
+    xen=c2581c58bec96afa450ebaca3fa2a33bcb0a9974
+X-Osstest-Versions-That:
+    xen=9bf21fcaef07f68ab52d0382ff554616a1cf66d8
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 20 Mar 2023 18:42:31 +0000
+
+flight 179814 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/179814/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl           1 build-check(1)               starved  n/a
+ build-armhf                   2 hosts-allocate               starved  n/a
+
+version targeted for testing:
+ xen                  c2581c58bec96afa450ebaca3fa2a33bcb0a9974
+baseline version:
+ xen                  9bf21fcaef07f68ab52d0382ff554616a1cf66d8
+
+Last test of basis   179720  2023-03-17 13:01:58 Z    3 days
+Testing same since   179814  2023-03-20 17:00:25 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  David Woodhouse <dwmw@amazon.co.uk>
+  Michal Orzel <michal.orzel@amd.com>
+  Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  starved 
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          starved 
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Am 20=2E M=C3=A4rz 2023 00:05:54 UTC schrieb Jason Andryuk <jandryuk@gmail=
-=2Ecom>:
->PCI passthrough for an HVM with a stubdom is PV PCI passthrough from
->dom0 to the stubdom, and then QEMU passthrough of the PCI device inside
->the stubdom=2E  xen-pciback has boolean module param passthrough which
->controls "how to export PCI topology to guest"=2E  If passthrough=3D1, th=
-e
->frontend shows a PCI SBDF matching the backend host device=2E  When
->passthough=3D0, the frontend will get a sequentially allocated SBDF=2E
->
->libxl passes the host SBDF over QMP to QEMU=2E  For non-stubdom or stubdo=
-m
->with passthrough=3D1, this works fine=2E  However, it fails for
->passthrough=3D0 when QEMU can't find the sysfs node for the host SBDF=2E
->
->Handle all these cases=2E  Look for the xenstore frontend nodes=2E  If th=
-ey
->are missing, then default to using the QMP command provided SBDF=2E  This
->is the non-stubdom case=2E  If xenstore nodes are found, then read the
->local SBDF from the xenstore nodes=2E  This will handle either
->passthrough=3D0/1 case=2E
->
->Based on a stubdom-specific patch originally by Marek
->Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab=2Ecom>, which is b=
-ased
->on earlier work by HW42 <hw42@ipsumj=2Ede>
->
->Signed-off-by: Jason Andryuk <jandryuk@gmail=2Ecom>
->---
-> hw/xen/xen-host-pci-device=2Ec | 96 +++++++++++++++++++++++++++++++++++-
-> hw/xen/xen-host-pci-device=2Eh |  6 +++
-> 2 files changed, 101 insertions(+), 1 deletion(-)
->
->diff --git a/hw/xen/xen-host-pci-device=2Ec b/hw/xen/xen-host-pci-device=
-=2Ec
->index 8c6e9a1716=2E=2E51a72b432d 100644
->--- a/hw/xen/xen-host-pci-device=2Ec
->+++ b/hw/xen/xen-host-pci-device=2Ec
->@@ -9,6 +9,7 @@
-> #include "qemu/osdep=2Eh"
-> #include "qapi/error=2Eh"
-> #include "qemu/cutils=2Eh"
->+#include "hw/xen/xen-legacy-backend=2Eh"
-> #include "xen-host-pci-device=2Eh"
->=20
-> #define XEN_HOST_PCI_MAX_EXT_CAP \
->@@ -33,13 +34,101 @@
-> #define IORESOURCE_PREFETCH     0x00001000      /* No side effects */
-> #define IORESOURCE_MEM_64       0x00100000
->=20
->+/*
->+ * Non-passthrough (dom0) accesses are local PCI devices and use the giv=
-en BDF
->+ * Passthough (stubdom) accesses are through PV frontend PCI device=2E  =
-Those
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-I'm unable to parse this sentence, which may be due to my unfamiliarity wi=
-th Xen terminology=2E
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-There is also an extra space before "Those"=2E
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
-Best regards,
-Bernhard
 
->+ * either have a BDF identical to the backend's BFD (xen-backend=2Epasst=
-hrough=3D1)
->+ * or a local virtual BDF (xen-backend=2Epassthrough=3D0)
->+ *
->+ * We are always given the backend's BDF and need to lookup the appropri=
-ate
->+ * local BDF for sysfs access=2E
->+ */
->+static void xen_host_pci_fill_local_addr(XenHostPCIDevice *d, Error **er=
-rp)
->+{
->+    unsigned int num_devs, len, i;
->+    unsigned int domain, bus, dev, func;
->+    char *be_path;
->+    char path[80];
->+    char *msg;
->+
->+    be_path =3D qemu_xen_xs_read(xenstore, 0, "device/pci/0/backend", &l=
-en);
->+    if (!be_path) {
->+        /*
->+         * be_path doesn't exist, so we are dealing with a local
->+         * (non-passthough) device=2E
->+         */
->+        d->local_domain =3D d->domain;
->+        d->local_bus =3D d->bus;
->+        d->local_dev =3D d->dev;
->+        d->local_func =3D d->func;
->+
->+        return;
->+    }
->+
->+    snprintf(path, sizeof(path), "%s/num_devs", be_path);
->+    msg =3D qemu_xen_xs_read(xenstore, 0, path, &len);
->+    if (!msg) {
->+        goto err_out;
->+    }
->+
->+    if (sscanf(msg, "%u", &num_devs) !=3D 1) {
->+        error_setg(errp, "Failed to parse %s (%s)", msg, path);
->+        goto err_out;
->+    }
->+    free(msg);
->+
->+    for (i =3D 0; i < num_devs; i++) {
->+        snprintf(path, sizeof(path), "%s/dev-%u", be_path, i);
->+        msg =3D qemu_xen_xs_read(xenstore, 0, path, &len);
->+        if (!msg) {
->+            error_setg(errp, "Failed to read %s", path);
->+            goto err_out;
->+        }
->+        if (sscanf(msg, "%x:%x:%x=2E%x", &domain, &bus, &dev, &func) !=
-=3D 4) {
->+            error_setg(errp, "Failed to parse %s (%s)", msg, path);
->+            goto err_out;
->+        }
->+        free(msg);
->+        if (domain !=3D d->domain ||
->+            bus !=3D d->bus ||
->+            dev !=3D d->dev ||
->+            func !=3D d->func)
->+            continue;
->+        snprintf(path, sizeof(path), "%s/vdev-%u", be_path, i);
->+        msg =3D qemu_xen_xs_read(xenstore, 0, path, &len);
->+        if (!msg) {
->+            error_setg(errp, "Failed to read %s", path);
->+            goto out;
->+        }
->+        if (sscanf(msg, "%x:%x:%x=2E%x", &domain, &bus, &dev, &func) !=
-=3D 4) {
->+            error_setg(errp, "Failed to parse %s (%s)", msg, path);
->+            goto err_out;
->+        }
->+        free(msg);
->+        d->local_domain =3D domain;
->+        d->local_bus =3D bus;
->+        d->local_dev =3D dev;
->+        d->local_func =3D func;
->+        goto out;
->+    }
->+
->+    error_setg(errp, "Failed to find local %x:%x:%x=2E%x", d->domain, d-=
->bus,
->+               d->dev, d->func);
->+
->+err_out:
->+    free(msg);
->+out:
->+    free(be_path);
->+}
->+
-> static void xen_host_pci_sysfs_path(const XenHostPCIDevice *d,
->                                     const char *name, char *buf, ssize_t=
- size)
-> {
->     int rc;
->=20
->     rc =3D snprintf(buf, size, "/sys/bus/pci/devices/%04x:%02x:%02x=2E%d=
-/%s",
->-                  d->domain, d->bus, d->dev, d->func, name);
->+                  d->local_domain, d->local_bus, d->local_dev, d->local_=
-func,
->+                  name);
->     assert(rc >=3D 0 && rc < size);
-> }
->=20
->@@ -342,6 +431,11 @@ void xen_host_pci_device_get(XenHostPCIDevice *d, ui=
-nt16_t domain,
->     d->dev =3D dev;
->     d->func =3D func;
->=20
->+    xen_host_pci_fill_local_addr(d, errp);
->+    if (*errp) {
->+        goto error;
->+    }
->+
->     xen_host_pci_config_open(d, errp);
->     if (*errp) {
->         goto error;
->diff --git a/hw/xen/xen-host-pci-device=2Eh b/hw/xen/xen-host-pci-device=
-=2Eh
->index 4d8d34ecb0=2E=2E270dcb27f7 100644
->--- a/hw/xen/xen-host-pci-device=2Eh
->+++ b/hw/xen/xen-host-pci-device=2Eh
->@@ -23,6 +23,12 @@ typedef struct XenHostPCIDevice {
->     uint8_t dev;
->     uint8_t func;
->=20
->+    /* different from the above in case of stubdomain */
->+    uint16_t local_domain;
->+    uint8_t local_bus;
->+    uint8_t local_dev;
->+    uint8_t local_func;
->+
->     uint16_t vendor_id;
->     uint16_t device_id;
->     uint32_t class_code;
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   9bf21fcaef..c2581c58be  c2581c58bec96afa450ebaca3fa2a33bcb0a9974 -> smoke
 
