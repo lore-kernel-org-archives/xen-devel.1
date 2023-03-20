@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E975C6FD1D
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 14:23:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.511948.791410 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE92C7618A
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Mar 2023 14:30:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.511957.791433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peGQL-00061c-0E; Mon, 20 Mar 2023 14:23:45 +0000
+	id 1peGWD-0007O1-4G; Mon, 20 Mar 2023 14:29:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 511948.791410; Mon, 20 Mar 2023 14:23:44 +0000
+Received: by outflank-mailman (output) from mailman id 511957.791433; Mon, 20 Mar 2023 14:29:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1peGQK-00061V-Ty; Mon, 20 Mar 2023 14:23:44 +0000
-Received: by outflank-mailman (input) for mailman id 511948;
- Mon, 20 Mar 2023 14:23:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1peGWD-0007Nu-1W; Mon, 20 Mar 2023 14:29:49 +0000
+Received: by outflank-mailman (input) for mailman id 511957;
+ Mon, 20 Mar 2023 14:29:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Cnb9=7M=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1peGQJ-00061P-Ef
- for xen-devel@lists.xenproject.org; Mon, 20 Mar 2023 14:23:43 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d0030f8f-c72a-11ed-87f5-c1b5be75604c;
- Mon, 20 Mar 2023 15:23:41 +0100 (CET)
-Received: by mail-wm1-x32c.google.com with SMTP id
- l15-20020a05600c4f0f00b003ed58a9a15eso7622675wmq.5
- for <xen-devel@lists.xenproject.org>; Mon, 20 Mar 2023 07:23:41 -0700 (PDT)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- p9-20020a1c5449000000b003dc1d668866sm16596895wmi.10.2023.03.20.07.23.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Mar 2023 07:23:40 -0700 (PDT)
+ (envelope-from <SRS0=W9b8=7M=m5p.com=ehem@srs-se1.protection.inumbo.net>)
+ id 1peGWC-0007No-L3
+ for xen-devel@lists.xenproject.org; Mon, 20 Mar 2023 14:29:48 +0000
+Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a8860ee6-c72b-11ed-b464-930f4c7d94ae;
+ Mon, 20 Mar 2023 15:29:45 +0100 (CET)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 32KETY6n086168
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Mon, 20 Mar 2023 10:29:40 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.16.1/8.15.2/Submit) id 32KETXQn086167;
+ Mon, 20 Mar 2023 07:29:33 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,143 +45,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d0030f8f-c72a-11ed-87f5-c1b5be75604c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1679322221;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=wDFPVnK26gTPvQ7OQnmaMHAo8uxTCxn0wjupc66n0+g=;
-        b=iupUAOLOVvIo5M2FeGbu2pABScMqZ1WtjEgwgzAmbLp8n1wBphdMsJVh/nBr2ctxaq
-         niYu4FF+KJTk+QSzJev4lNK//Wy/Yhv2xD0lLuBLZslRJqBIMiTdxNYJxSEs1KxrsHJR
-         HXKgVtUZ7tM96cRGbKte3pAoXlUVUeGIklTPLppMnqAsDyzgnvesrxlGGjLmAxHwP2Z8
-         oOTJXlxwRgHOZRq+NQU2XjlOeW0QinUZw0n+V/hg5OrnJccCE8/JVuMQzPi0BC01UBxH
-         +gRQI2RsNKHxJHJ8loygXyNNQB1Q6krKKZ6IgKVxC7ORtE9QtzBgoDcVrwecwQ2JsPM+
-         E8LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679322221;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wDFPVnK26gTPvQ7OQnmaMHAo8uxTCxn0wjupc66n0+g=;
-        b=TzU5+94KNvpBQ4w3vBYaH7Y5s6uHb++owc5//HLcLZcr/dtlykDDtRGLJripO0vDqx
-         40/QfPWFW55xK9Z0BxKvIZnCmXDT2rIi17tQpHaMWB/BUI5MvkVzLjXj7KJ0vAA7+Qev
-         hRhK6HDFg8Ss+O3I2Ul+gBBItQA/5PKngskbyqbT2IHU7cTkOickA64cXZfJmBv3lh1b
-         ciUV35kk19xgXS5k9jGql55q/qYgUNb9OMO+j3GYJT9u8X1ZmzrOd1X3XOcsyhtVIRk/
-         3OLUcDAPmB9qKZJP/KIx5xzW53R1dBlgfNaEEEepXGRYbusJB71nCF7TgUHAMz1ZGxt1
-         c4wA==
-X-Gm-Message-State: AO0yUKVvPN7TgHXUm5ZZwFxcEQqzUVqVGrlgNC6xYKGwhrzAiAp9rJzT
-	AWIcm9/MqboLhUJvSMGa60rDVQ==
-X-Google-Smtp-Source: AK7set/aRqtnWw0m8lIYSvCcTJKy8bYXEjcr1/Crqm07tlo2b+OzQuFfio36H5QqfOmps9fL+g8D5g==
-X-Received: by 2002:a05:600c:3b24:b0:3ed:296b:4899 with SMTP id m36-20020a05600c3b2400b003ed296b4899mr26844308wms.15.1679322220744;
-        Mon, 20 Mar 2023 07:23:40 -0700 (PDT)
-Message-ID: <cdf53d5e-d74d-9316-f1bc-3efc36e1c3bc@linaro.org>
-Date: Mon, 20 Mar 2023 15:23:38 +0100
+X-Inumbo-ID: a8860ee6-c72b-11ed-b464-930f4c7d94ae
+Date: Mon, 20 Mar 2023 07:29:33 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2 2/2] x86/APIC: modify error_interrupt() to output
+ using single printk()
+Message-ID: <ZBhtzfhumm9AWqte@mattapan.m5p.com>
+References: <cover.1679084101.git.ehem+xen@m5p.com>
+ <4db49e192b6829e520cf497481a51deef227b23b.1679084101.git.ehem+xen@m5p.com>
+ <f945860e-6a82-7070-3a1b-2e73a53040de@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.9.0
-Subject: Re: [PATCH-for-8.1 4/5] bulk: Do not declare function prototypes
- using extern keyword
-Content-Language: en-US
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
- Peter Maydell <peter.maydell@linaro.org>, Andrew Jeffery <andrew@aj.id.au>,
- Joel Stanley <joel@jms.id.au>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- Stefan Weil <sw@weilnetz.de>, Riku Voipio <riku.voipio@iki.fi>,
- Marcelo Tosatti <mtosatti@redhat.com>, Aurelien Jarno
- <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- xen-devel@lists.xenproject.org, kvm@vger.kernel.org
-References: <20230320134219.22489-1-philmd@linaro.org>
- <20230320134219.22489-5-philmd@linaro.org> <ZBhkIjelEtR7lckj@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <ZBhkIjelEtR7lckj@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f945860e-6a82-7070-3a1b-2e73a53040de@suse.com>
 
-On 20/3/23 14:48, Daniel P. Berrangé wrote:
-> On Mon, Mar 20, 2023 at 02:42:18PM +0100, Philippe Mathieu-Daudé wrote:
->> By default, C function prototypes declared in headers are visible,
->> so there is no need to declare them as 'extern' functions.
->> Remove this redundancy in a single bulk commit; do not modify:
->>
->>    - meson.build (used to check function availability at runtime)
->>    - pc-bios
->>    - libdecnumber
->>    - *.c
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   block/dmg.h                    |  8 +++----
->>   bsd-user/bsd-file.h            |  6 ++---
->>   crypto/hmacpriv.h              | 13 +++++------
->>   hw/xen/xen_pt.h                |  8 +++----
->>   include/crypto/secret_common.h | 14 +++++-------
->>   include/exec/page-vary.h       |  4 ++--
->>   include/hw/misc/aspeed_scu.h   |  2 +-
->>   include/hw/nvram/npcm7xx_otp.h |  4 ++--
->>   include/hw/qdev-core.h         |  4 ++--
->>   include/qemu/crc-ccitt.h       |  4 ++--
->>   include/qemu/osdep.h           |  2 +-
->>   include/qemu/rcu.h             | 14 ++++++------
->>   include/qemu/sys_membarrier.h  |  4 ++--
->>   include/qemu/uri.h             |  6 ++---
->>   include/sysemu/accel-blocker.h | 14 ++++++------
->>   include/sysemu/os-win32.h      |  4 ++--
->>   include/user/safe-syscall.h    |  4 ++--
->>   target/i386/sev.h              |  6 ++---
->>   target/mips/cpu.h              |  4 ++--
->>   tcg/tcg-internal.h             |  4 ++--
->>   tests/tcg/minilib/minilib.h    |  2 +-
->>   include/exec/memory_ldst.h.inc | 42 +++++++++++++++++-----------------
->>   roms/seabios                   |  2 +-
+On Mon, Mar 20, 2023 at 09:56:54AM +0100, Jan Beulich wrote:
+> On 17.03.2023 20:53, Elliott Mitchell wrote:
+> > This takes care of the issue of APIC errors tending to occur on multiple
+> > cores at one.  In turn this tends to causes the error messages to be
 > 
-> Accidental submodule commit.,
-> 
->>   23 files changed, 84 insertions(+), 91 deletions(-)
->>
->> diff --git a/block/dmg.h b/block/dmg.h
->> index e488601b62..ed209b5dec 100644
->> --- a/block/dmg.h
->> +++ b/block/dmg.h
->> @@ -51,10 +51,10 @@ typedef struct BDRVDMGState {
->>       z_stream zstream;
->>   } BDRVDMGState;
->>   
->> -extern int (*dmg_uncompress_bz2)(char *next_in, unsigned int avail_in,
->> -                                 char *next_out, unsigned int avail_out);
->> +int (*dmg_uncompress_bz2)(char *next_in, unsigned int avail_in,
->> +                          char *next_out, unsigned int avail_out);
->>   
->> -extern int (*dmg_uncompress_lzfse)(char *next_in, unsigned int avail_in,
->> -                                   char *next_out, unsigned int avail_out);
->> +int (*dmg_uncompress_lzfse)(char *next_in, unsigned int avail_in,
->> +                            char *next_out, unsigned int avail_out);
-> 
-> These are variable declarations, so with this change you'll get multiple
-> copies of the variable if this header is included from multiple source
-> files. IOW, the 'extern' usage is correct.
+> Nit: "at once"?
 
-Doh indeed, good catch, thanks.
+https://en.wiktionary.org/wiki/at_once
 
->> diff --git a/roms/seabios b/roms/seabios
->> index ea1b7a0733..3208b098f5 160000
->> --- a/roms/seabios
->> +++ b/roms/seabios
->> @@ -1 +1 @@
->> -Subproject commit ea1b7a0733906b8425d948ae94fba63c32b1d425
->> +Subproject commit 3208b098f51a9ef96d0dfa71d5ec3a3eaec88f0a
+Adverb #2, synonym of "simultaneously".
+
+
+> > @@ -1419,12 +1420,12 @@ static void cf_check error_interrupt(struct cpu_user_regs *regs)
+> >      v1 = apic_read(APIC_ESR);
+> >      ack_APIC_irq();
+> >  
+> > -    printk(XENLOG_DEBUG "APIC error on CPU%u: %02x(%02x)",
+> > -            smp_processor_id(), v , v1);
+> >      for ( i = 7; i >= 0; --i )
+> > -        if ( v1 & (1 << i) )
+> > -            printk("%s", esr_fields[i]);
+> > -    printk("\n");
+> > +        entries[i] = v1 & (1 << i) ? esr_fields[i] : "";
+> > +    printk(XENLOG_DEBUG "APIC error on CPU%u: %02x(%02x)"
+> > +            "%s%s%s%s%s%s%s%s" "\n",
+> > +            smp_processor_id(), v , v1, entries[0], entries[1], entries[2],
+> > +            entries[3], entries[4], entries[5], entries[6], entries[7]);
 > 
-> Nope !
+> Two style nits: Indentation wants fixing here (it was wrong in the original
+> code already), and the stray blank between v and the comma also wants
+> dropping at this occasion.
 
-Oops...
+There are several minor issues here which may be best handled during
+commit as they're very small items about how precisely you want this to
+look.
+
+First, I later realized I goofed the argument order.  In order to match
+the original implementation, it needs to be entries[7] ... entries[0]
+(could though be the low-order bits should be reported first).
+
+Second, the order of the for loop no longer matters.  Using
+ARRAY_SIZE(esr_fields) and increment should now be more maintainable
+(this would also allow i to be unsigned).
+
+Third, I'm simply unsure how you would prefer to format the printk().
+I imagine at some future point the register may have additional bits
+allocated.  At such point esr_fields[] would grow, but this would also
+require adding to the format string and adding an argument.
+
+Seems like several fiddly bits which mostly effect look and don't really
+effect the implementation.
+
+
+-- 
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
