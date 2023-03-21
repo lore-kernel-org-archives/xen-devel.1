@@ -4,31 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1533BC74A5B
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Mar 2023 14:05:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.512678.792777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42DF5C6FD1D
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Mar 2023 14:05:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.512682.792798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pecby-0006hZ-Up; Tue, 21 Mar 2023 14:05:14 +0000
+	id 1peccD-0007fj-LP; Tue, 21 Mar 2023 14:05:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 512678.792777; Tue, 21 Mar 2023 14:05:14 +0000
+Received: by outflank-mailman (output) from mailman id 512682.792798; Tue, 21 Mar 2023 14:05:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pecby-0006hS-S2; Tue, 21 Mar 2023 14:05:14 +0000
-Received: by outflank-mailman (input) for mailman id 512678;
- Tue, 21 Mar 2023 14:05:13 +0000
+	id 1peccD-0007fc-IU; Tue, 21 Mar 2023 14:05:29 +0000
+Received: by outflank-mailman (input) for mailman id 512682;
+ Tue, 21 Mar 2023 14:05:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LvxA=7N=gmail.com=rjwysocki@srs-se1.protection.inumbo.net>)
- id 1pecbx-0006ai-IM
- for xen-devel@lists.xenproject.org; Tue, 21 Mar 2023 14:05:13 +0000
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 64c43291-c7f1-11ed-b464-930f4c7d94ae;
- Tue, 21 Mar 2023 15:05:11 +0100 (CET)
-Received: by mail-ed1-f46.google.com with SMTP id i5so13224897eda.0
- for <xen-devel@lists.xenproject.org>; Tue, 21 Mar 2023 07:05:11 -0700 (PDT)
+ <SRS0=CsWt=7N=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1peccC-0006ai-4t
+ for xen-devel@lists.xenproject.org; Tue, 21 Mar 2023 14:05:28 +0000
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2061b.outbound.protection.outlook.com
+ [2a01:111:f400:7e8d::61b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6d6146bd-c7f1-11ed-b464-930f4c7d94ae;
+ Tue, 21 Mar 2023 15:05:25 +0100 (CET)
+Received: from DS7PR03CA0073.namprd03.prod.outlook.com (2603:10b6:5:3bb::18)
+ by DS0PR12MB6415.namprd12.prod.outlook.com (2603:10b6:8:cc::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Tue, 21 Mar
+ 2023 14:05:22 +0000
+Received: from DS1PEPF0000B079.namprd05.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::a8) by DS7PR03CA0073.outlook.office365.com
+ (2603:10b6:5:3bb::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37 via Frontend
+ Transport; Tue, 21 Mar 2023 14:05:22 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS1PEPF0000B079.mail.protection.outlook.com (10.167.17.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6178.30 via Frontend Transport; Tue, 21 Mar 2023 14:05:22 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 21 Mar
+ 2023 09:05:21 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 21 Mar
+ 2023 07:05:20 -0700
+Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
+ via Frontend Transport; Tue, 21 Mar 2023 09:05:18 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,152 +65,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 64c43291-c7f1-11ed-b464-930f4c7d94ae
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679407510;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=haBPYj/XDzU0eh284RB5Ofq6oaj5HEMamthlq2TXC24=;
-        b=fZa22rGWARuPHa+xGkL9qWPZS0MWRDSQOc3MbjkXcJzDF03JNdVLhbRcTSBU8rOelU
-         CWi7stIUKZBb8YYmJDJUJ7Oj24HJHydxP0dbo/pAHFW9tpEI9n5HUvycy3BD0y2gZuZQ
-         tSxeyWO5BBlvQ1U4qE6tgJeCLxkXy0EyP+Wjp2CFWxH/C2xAF6w9uxNEDHtzf4Vy9AO7
-         W2xOVhNMwaTV5OhY3snwDgCAIcIau6PNUH+wQ1z+LGW3J7Rq6G4nSTfaeVLlFBl/aoK9
-         aExjSYjnxXtX8NdNETMrSedwzkbFSaU3oNWLWmyG2+7skMVixmYA6KotcHkbb9YYwj43
-         Ccag==
-X-Gm-Message-State: AO0yUKULirhwVQALv5pfzwOH7V+S+SVQ1CNDJs8socI6iyIz+YYTXX+z
-	f3u2Gll2s1qx9Zwy2zeca0e6r2xNhOc1Ce0ikSQ=
-X-Google-Smtp-Source: AK7set/4Zz6ut7/h8w7nzIGz5caU0PYESQW7O7xQDY0ROd3s/dX3cmcW4UqA9dxlhc4jvY/zE/BzH6OwM3gLCg+5dBM=
-X-Received: by 2002:a50:bac7:0:b0:4fb:f19:87f with SMTP id x65-20020a50bac7000000b004fb0f19087fmr1778235ede.3.1679407510501;
- Tue, 21 Mar 2023 07:05:10 -0700 (PDT)
+X-Inumbo-ID: 6d6146bd-c7f1-11ed-b464-930f4c7d94ae
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TVuiIhp9xTP1TzDB7R0lPnM/Q94Sodd1w6h6itlfUL2BoeIbZGQ3Mrllbl8cdxFCsPHV6er9xvOqZnD6KAXbOGdcJoqVOVUjxCO4HZHK/4ztu/SxShz+YqSMI/Tn7l/qRxgnqCgaewjoI854kFgyKMibvmcAZPhHA6ONsoWeVk6Xvi/uDW4Nh+q1YJavBriI1yP0Lc5KPp6Zc3oh8wCBZGtlNa+9M6Dm0UaDiMKHgvnv8CyAuzSO8jgmiMCwm4H1cGRyjhQO2b6koofe+m7czNUEVv1njRdVanxXs4lmoNRFDEpbv8hEecXC/aSS9MkOXSTRBeWDi8mqaA0tdgtpww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MyaKuKEF+X/1Kr4Tl9QPLAvUvFva7QxbH99CVqus0xY=;
+ b=ZlL5afim+rGFkX4/PtYQ7xqPVuvpLYXzAdbCw49UfwqnF7Zv6GTf9NMri6XL5GeBj3cWMpWFtJEAF8VxDpGiKjIHvwYdU2owC7WKUK+TEcLLu3Rh4Z3S5MR5fjOqERe2nbBB0WF2hRWwyeu37YnaPs53T8fbltiABkRoOqRiBpKmS1n9HPM6rnWAuCsCxFsVimHb5lNcIfmHBSrc9wNUH39n5iQw7DbKvOOuoQoZWiwyiWlDW6RPITsJabNIsaJ1Z/DeO+Igb+bPXfL9u5MIebffGDI8EhIMRPczFV59564mxGbhMFf8vekfzLWaERUey8iWLviwnCmwxvixe7/Wpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MyaKuKEF+X/1Kr4Tl9QPLAvUvFva7QxbH99CVqus0xY=;
+ b=ReoJnGhJpRrTwTUGAOIN2plpdNSMUgqBLHz/wclSUQ7nybq9povoBYQOTWk7Y5QWOa6X0eamfVlkHrfpJZQD1S6Gr+ukc6PayDsyKf/xjLYhH3bScywAEF/fz74NE/uHEQu8WC/IbQmQFyOSH0lf6cKoBkR7cp1BhRa7wzIUVgw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <stefano.stabellini@amd.com>, <julien@xen.org>,
+	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>,
+	<andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>, <jbeulich@suse.com>,
+	<wl@xen.org>, <rahul.singh@arm.com>, Ayan Kumar Halder
+	<ayan.kumar.halder@amd.com>
+Subject: [XEN v4 06/11] xen/arm: smmu: Use writeq_relaxed_non_atomic() for writing to SMMU_CBn_TTBR0
+Date: Tue, 21 Mar 2023 14:03:52 +0000
+Message-ID: <20230321140357.24094-7-ayan.kumar.halder@amd.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230321140357.24094-1-ayan.kumar.halder@amd.com>
+References: <20230321140357.24094-1-ayan.kumar.halder@amd.com>
 MIME-Version: 1.0
-References: <20230316164257.42590-1-roger.pau@citrix.com> <CAJZ5v0jskeE8nJt04vyEkDO3rOwOHp36mcKcV=L9LGXD0HL6Mw@mail.gmail.com>
- <ZBm42pgVCvsv6dzK@Air-de-Roger>
-In-Reply-To: <ZBm42pgVCvsv6dzK@Air-de-Roger>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Tue, 21 Mar 2023 15:04:59 +0100
-Message-ID: <CAJZ5v0hy0DeOp7YPerhbn26Vxpk=uhfE5YcmRLquWk5Hw9Kyzg@mail.gmail.com>
-Subject: Re: [PATCH v4] acpi/processor: fix evaluating _PDC method when
- running as Xen dom0
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, josef@oderland.se, 
-	Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Len Brown <lenb@kernel.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Alex Chiang <achiang@hp.com>, 
-	linux-acpi@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0000B079:EE_|DS0PR12MB6415:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8f74f5e1-0f78-44d8-bd2f-08db2a154fc7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	DkQet4KD9tM/vlmph+nkGnsmiH9mWPc4NxUcqsJbMNmkEd4ZT3jjs932in0GNf4f//xGdlqGYgoZmWC11y06m7EIL5agmypUJ7bn8k6GYE8oMVOj622nmH86jKZmM+B4Brod+Pu8ArS5+b9b+V4GA5eua+x1XwGB/7fNKCKHWMUYNkXkqUvdYA1cntAOsUTlIVO87E+VFZDK3a5D0y+ErAr6/g52gwwKpX0DNthaGYkeTDcYCT7d+IVY2sZPbFs0ll1CWXRL8crFMDVuDkVqTXZzCBNncChESLom+06w4zVuTe+/HEn/nT1bC8yNBZCUPgYsMhexPW8miDDMglMaeoI0YWPk5sFva4/kvtF8EmfErRysKl83d8O7TGDE8TxQtPND7++WXMsn5DMDRC+Opo091LpPaQ2CJsKVoHnmhTxAPL7MbzRbyiYCbiXOxTRwL/IHNp6UPs+QS+9ujzxo9YCLaf8woPuI2nkGu08cLMLzAd3KSxd5mdkA7kofYMK6JxfSb1XOLcuEPKeGSeaqB23HkI/3CLAaxH/QqKQZCVvwfQyg4MXNhYu9L2WJpCyAvw0JAKza7ZZdhApeN8PAIzyAiG1StWhxQsK74UWvD4ogSOr5259LQ5iWT0ACssSJFFavoZj5q8I9nUEd1UjiKNN26BU85MC15V796o8LQN7ad6Hw3E+sojFnPuv1UiMg8Gopd4Nz1gihg1ctqqgylnZ3mX14srpfJYr8nwUsbpo=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(39860400002)(376002)(346002)(396003)(451199018)(46966006)(36840700001)(40470700004)(41300700001)(7416002)(8936002)(5660300002)(4326008)(36860700001)(40480700001)(82310400005)(356005)(103116003)(86362001)(36756003)(40460700003)(81166007)(82740400003)(2906002)(6666004)(336012)(83380400001)(426003)(47076005)(478600001)(2616005)(26005)(186003)(1076003)(54906003)(316002)(70586007)(6916009)(70206006)(8676002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2023 14:05:22.3289
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f74f5e1-0f78-44d8-bd2f-08db2a154fc7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS1PEPF0000B079.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6415
 
-On Tue, Mar 21, 2023 at 3:02=E2=80=AFPM Roger Pau Monn=C3=A9 <roger.pau@cit=
-rix.com> wrote:
->
-> On Tue, Mar 21, 2023 at 02:47:46PM +0100, Rafael J. Wysocki wrote:
-> > On Thu, Mar 16, 2023 at 5:43=E2=80=AFPM Roger Pau Monne <roger.pau@citr=
-ix.com> wrote:
-> > >
-> > > In ACPI systems, the OS can direct power management, as opposed to th=
-e
-> > > firmware.  This OS-directed Power Management is called OSPM.  Part of
-> > > telling the firmware that the OS going to direct power management is
-> > > making ACPI "_PDC" (Processor Driver Capabilities) calls.  These _PDC
-> > > methods must be evaluated for every processor object.  If these _PDC
-> > > calls are not completed for every processor it can lead to
-> > > inconsistency and later failures in things like the CPU frequency
-> > > driver.
-> > >
-> > > In a Xen system, the dom0 kernel is responsible for system-wide power
-> > > management.  The dom0 kernel is in charge of OSPM.  However, the
-> > > number of CPUs available to dom0 can be different than the number of
-> > > CPUs physically present on the system.
-> > >
-> > > This leads to a problem: the dom0 kernel needs to evaluate _PDC for
-> > > all the processors, but it can't always see them.
-> > >
-> > > In dom0 kernels, ignore the existing ACPI method for determining if a
-> > > processor is physically present because it might not be accurate.
-> > > Instead, ask the hypervisor for this information.
-> > >
-> > > Fix this by introducing a custom function to use when running as Xen
-> > > dom0 in order to check whether a processor object matches a CPU that'=
-s
-> > > online.  Such checking is done using the existing information fetched
-> > > by the Xen pCPU subsystem, extending it to also store the ACPI ID.
-> > >
-> > > This ensures that _PDC method gets evaluated for all physically onlin=
-e
-> > > CPUs, regardless of the number of CPUs made available to dom0.
-> > >
-> > > Fixes: 5d554a7bb064 ('ACPI: processor: add internal processor_physica=
-lly_present()')
-> > > Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> > > ---
-> > > Changes since v3:
-> > >  - Protect xen_processor_present() definition with CONFIG_ACPI.
-> > >
-> > > Changes since v2:
-> > >  - Extend and use the existing pcpu functionality.
-> > >
-> > > Changes since v1:
-> > >  - Reword commit message.
-> > > ---
-> > >  arch/x86/include/asm/xen/hypervisor.h | 10 ++++++++++
-> > >  drivers/acpi/processor_pdc.c          | 11 +++++++++++
-> > >  drivers/xen/pcpu.c                    | 21 +++++++++++++++++++++
-> > >  3 files changed, 42 insertions(+)
-> > >
-> > > diff --git a/arch/x86/include/asm/xen/hypervisor.h b/arch/x86/include=
-/asm/xen/hypervisor.h
-> > > index 5fc35f889cd1..990a1609677e 100644
-> > > --- a/arch/x86/include/asm/xen/hypervisor.h
-> > > +++ b/arch/x86/include/asm/xen/hypervisor.h
-> > > @@ -63,4 +63,14 @@ void __init xen_pvh_init(struct boot_params *boot_=
-params);
-> > >  void __init mem_map_via_hcall(struct boot_params *boot_params_p);
-> > >  #endif
-> > >
-> > > +#if defined(CONFIG_XEN_DOM0) && defined(CONFIG_ACPI)
-> > > +bool __init xen_processor_present(uint32_t acpi_id);
-> > > +#else
-> > > +static inline bool xen_processor_present(uint32_t acpi_id)
-> > > +{
-> > > +       BUG();
-> > > +       return false;
-> > > +}
-> > > +#endif
-> > > +
-> > >  #endif /* _ASM_X86_XEN_HYPERVISOR_H */
-> > > diff --git a/drivers/acpi/processor_pdc.c b/drivers/acpi/processor_pd=
-c.c
-> > > index 8c3f82c9fff3..18fb04523f93 100644
-> > > --- a/drivers/acpi/processor_pdc.c
-> > > +++ b/drivers/acpi/processor_pdc.c
-> > > @@ -14,6 +14,8 @@
-> > >  #include <linux/acpi.h>
-> > >  #include <acpi/processor.h>
-> > >
-> > > +#include <xen/xen.h>
-> >
-> > This along with the definition above is evidently insufficient for
-> > xen_processor_present() to always be defined.  See
-> > https://lore.kernel.org/linux-acpi/64198b60.bO+m9o5w+Hd8hcF3%25lkp@inte=
-l.com/T/#u
-> > for example.
-> >
-> > I'm dropping the patch now, please fix and resend.
->
-> Hello,
->
-> Sorry.  I've sent a followup fix:
->
-> https://lore.kernel.org/xen-devel/20230321112522.46806-1-roger.pau@citrix=
-.com/T/#u
->
-> Would you be fine with taking such followup, or would rather prefer
-> for me to send the original fixed patch as v5?
+Refer ARM IHI 0062D.c ID070116 (SMMU 2.0 spec), 17-360, 17.3.9,
+SMMU_CBn_TTBR0 is a 64 bit register. Thus, one can use
+writeq_relaxed_non_atomic() to write to it instead of invoking
+writel_relaxed() twice for lower half and upper half of the register.
 
-Please fold the fix into the original patch and resend.
+This also helps us as p2maddr is 'paddr_t' (which may be u32 in future).
+Thus, one can assign p2maddr to a 64 bit register and do the bit
+manipulations on it, to generate the value for SMMU_CBn_TTBR0.
+
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+---
+Changes from -
+
+v1 - 1. Extracted the patch from "[XEN v1 8/9] xen/arm: Other adaptations required to support 32bit paddr".
+Use writeq_relaxed_non_atomic() to write u64 register in a non-atomic
+fashion.
+
+v2 - 1. Added R-b.
+
+v3 - 1. No changes.
+
+ xen/drivers/passthrough/arm/smmu.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 79281075ba..c8ef2a925f 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -499,8 +499,7 @@ enum arm_smmu_s2cr_privcfg {
+ #define ARM_SMMU_CB_SCTLR		0x0
+ #define ARM_SMMU_CB_RESUME		0x8
+ #define ARM_SMMU_CB_TTBCR2		0x10
+-#define ARM_SMMU_CB_TTBR0_LO		0x20
+-#define ARM_SMMU_CB_TTBR0_HI		0x24
++#define ARM_SMMU_CB_TTBR0		0x20
+ #define ARM_SMMU_CB_TTBCR		0x30
+ #define ARM_SMMU_CB_S1_MAIR0		0x38
+ #define ARM_SMMU_CB_FSR			0x58
+@@ -1083,6 +1082,7 @@ static void arm_smmu_flush_pgtable(struct arm_smmu_device *smmu, void *addr,
+ static void arm_smmu_init_context_bank(struct arm_smmu_domain *smmu_domain)
+ {
+ 	u32 reg;
++	u64 reg64;
+ 	bool stage1;
+ 	struct arm_smmu_cfg *cfg = &smmu_domain->cfg;
+ 	struct arm_smmu_device *smmu = smmu_domain->smmu;
+@@ -1177,12 +1177,13 @@ static void arm_smmu_init_context_bank(struct arm_smmu_domain *smmu_domain)
+ 	dev_notice(smmu->dev, "d%u: p2maddr 0x%"PRIpaddr"\n",
+ 		   smmu_domain->cfg.domain->domain_id, p2maddr);
+ 
+-	reg = (p2maddr & ((1ULL << 32) - 1));
+-	writel_relaxed(reg, cb_base + ARM_SMMU_CB_TTBR0_LO);
+-	reg = (p2maddr >> 32);
++	reg64 = p2maddr;
++
+ 	if (stage1)
+-		reg |= ARM_SMMU_CB_ASID(cfg) << TTBRn_HI_ASID_SHIFT;
+-	writel_relaxed(reg, cb_base + ARM_SMMU_CB_TTBR0_HI);
++		reg64 |= (((uint64_t) (ARM_SMMU_CB_ASID(cfg) << TTBRn_HI_ASID_SHIFT))
++		         << 32);
++
++	writeq_relaxed_non_atomic(reg64, cb_base + ARM_SMMU_CB_TTBR0);
+ 
+ 	/*
+ 	 * TTBCR
+-- 
+2.17.1
+
 
