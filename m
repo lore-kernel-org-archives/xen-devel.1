@@ -4,56 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E50C7619A
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Mar 2023 11:10:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.513782.795305 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5747FC6FD1C
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Mar 2023 11:18:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.513790.795325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfIpp-0007LG-13; Thu, 23 Mar 2023 11:10:21 +0000
+	id 1pfIxY-000094-5X; Thu, 23 Mar 2023 11:18:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 513782.795305; Thu, 23 Mar 2023 11:10:21 +0000
+Received: by outflank-mailman (output) from mailman id 513790.795325; Thu, 23 Mar 2023 11:18:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfIpo-0007L9-Sz; Thu, 23 Mar 2023 11:10:20 +0000
-Received: by outflank-mailman (input) for mailman id 513782;
- Thu, 23 Mar 2023 11:10:19 +0000
+	id 1pfIxY-00008x-2l; Thu, 23 Mar 2023 11:18:20 +0000
+Received: by outflank-mailman (input) for mailman id 513790;
+ Thu, 23 Mar 2023 11:18:18 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7ZVY=7P=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1pfIpn-0007L2-EG
- for xen-devel@lists.xenproject.org; Thu, 23 Mar 2023 11:10:19 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060a.outbound.protection.outlook.com
- [2a01:111:f400:7e8a::60a])
+ <SRS0=6w1C=7P=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pfIxW-00008r-K3
+ for xen-devel@lists.xenproject.org; Thu, 23 Mar 2023 11:18:18 +0000
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [2a00:1450:4864:20::435])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 490caa09-c96b-11ed-b464-930f4c7d94ae;
- Thu, 23 Mar 2023 12:10:15 +0100 (CET)
-Received: from CY5PR13CA0054.namprd13.prod.outlook.com (2603:10b6:930:11::18)
- by SN7PR12MB6885.namprd12.prod.outlook.com (2603:10b6:806:263::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Thu, 23 Mar
- 2023 11:10:11 +0000
-Received: from CY4PEPF0000C97F.namprd02.prod.outlook.com
- (2603:10b6:930:11:cafe::e3) by CY5PR13CA0054.outlook.office365.com
- (2603:10b6:930:11::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.6 via Frontend
- Transport; Thu, 23 Mar 2023 11:10:11 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000C97F.mail.protection.outlook.com (10.167.241.197) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6178.30 via Frontend Transport; Thu, 23 Mar 2023 11:10:10 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 23 Mar
- 2023 06:10:10 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 23 Mar
- 2023 06:10:10 -0500
-Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Thu, 23 Mar 2023 06:10:09 -0500
+ id 67495f54-c96c-11ed-b464-930f4c7d94ae;
+ Thu, 23 Mar 2023 12:18:15 +0100 (CET)
+Received: by mail-wr1-x435.google.com with SMTP id l12so20011285wrm.10
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Mar 2023 04:18:14 -0700 (PDT)
+Received: from [192.168.8.100] (46.204.108.203.nat.umts.dynamic.t-mobile.pl.
+ [46.204.108.203]) by smtp.gmail.com with ESMTPSA id
+ v3-20020adfe4c3000000b002cf8220cc75sm7998308wrm.24.2023.03.23.04.18.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Mar 2023 04:18:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,185 +46,493 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 490caa09-c96b-11ed-b464-930f4c7d94ae
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bosZ9MIGJc6dRrBpWwUY/MLPH6OHjC4aVRhFfva2357lP2/Ww0UQnWPDQpXAQQ2oMxfaUgYwD+LlAX98K8DG+hNHoYPNI/+AaoPjG5eeSez0X4cMw11Rf9UxCQWEtWxcdJ8RXEpYYOllZAYCShRXKInxoGRuLsjOm8bQwHQG22Xz9MY9nVNRj+gm86DGewRy1WGqyIDWKuLgN21j9xbg+ToFT165yFHqhTF7OlrfnUxzAPedrqiMGzXTBcR7aBQ6nzoDTsVQTdb0FJG3gnYJNS8CAjzj53FDIkTehb8vHPd0blGgqTeKB1zO8/xBiHX/EZJD0YUTuACmwb+H01/4oA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4widxbphHpArrB0F3pOKk8DifoAe5kxLKXEB+osPoG4=;
- b=TFM1yT8WIfIgDuN4lQruspOxS9THZ/7l3LMmZiWunHpDvcv1CSOQJNocjLsD9jOrs8yPuW58YYgX41TuSELW/dgJcPQQ8fQCnCHrdXkVDoVt+v8pcU/xj1Uwm7K3O9vo6PMQzNn4+KijVCXRocpk77r2NQGlJzQJXP21ZNt+5mwmY4D/sznrhe0kbNamIdegfu0pC4pEECj0wy7VAg/sfA5aSoBsYk9Wj32+AutuqMW5W1BpEh3UqwCLNi3fpb1aKv1hirJNbSyahsn1NJsYOgOIA0Q7dkN6IE3vOoO1bWHKxHcuTBbcuBZFP2KUXqpG63vhLrcxyG7V1RUMIKHvaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4widxbphHpArrB0F3pOKk8DifoAe5kxLKXEB+osPoG4=;
- b=d7eAde7MGPJ2MJNXGLG0DQfmtPXsyxxgZoVH0M+ra6YdKSMQ2/5rcQ/b92aL8XVLb0rqk2/bSSsLkZKa62XiLz1xLt7b88kv3nw5IoLNMN9KMTFbXN+OPDsq463f3VyXernSM3XgEY36LSVVqscIuKUppd9Q+3ZbX7wMDfeHB3I=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Message-ID: <b0253701-3696-fd18-ba74-9fb7e6150a1f@amd.com>
-Date: Thu, 23 Mar 2023 12:10:03 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH 2/2] xen/arm: vpl011: Fix domain_vpl011_init error path
-To: Julien Grall <julien@xen.org>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20230322102941.959-1-michal.orzel@amd.com>
- <20230322102941.959-3-michal.orzel@amd.com>
- <130680d1-155e-e989-8ab9-2ef59ca59fd6@xen.org>
-Content-Language: en-US
-From: Michal Orzel <michal.orzel@amd.com>
-In-Reply-To: <130680d1-155e-e989-8ab9-2ef59ca59fd6@xen.org>
+X-Inumbo-ID: 67495f54-c96c-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679570294;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=qPFKWsVdl6/0HXaBPNn5qvqY7qtKq1/ygkdLGCEXykI=;
+        b=mlktyJNvmkqpomU7eD1wJMsKqy+In9sm8VDH1j3/bf3E9ZTEq84RtJFTdNNAnmQ6x7
+         bBYkWKamPqVA6JG3XBhn6TiH9byOnqDksBq6i8tXbGfFnbyYy0AGT8MHWLhScevTn3tJ
+         vjQZItdzASvMGFITl+55zynpd/smoe1ipuFd4ZFRoaQoHLqxw/oNVawhIp6srPhxGWa/
+         xpnnI+gMXOjLMrB1frRPn6w1E+IAysLwCX2tBLdQmbcCw1UrIHtfhXhNr9mpfFzxR0Xa
+         6mePrAwwtgQRpsvlLBfivnVM5+FLT2NLZQWEbTDY8o/bFCxurFv30c8R+4dbJCcFWmgH
+         DrKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679570294;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qPFKWsVdl6/0HXaBPNn5qvqY7qtKq1/ygkdLGCEXykI=;
+        b=vwOuUo7rTDvVF7S4AuD5VHwfmICYICBIBYz2AI/1miBgrlCPjP592w82pes2wgLJsC
+         qiRGCx6zrbRIn0+C73dqgm8HL+4yDQ5pNSvOktNidCX0vLuBKBlaIVTCA4pQyJOdZOUe
+         d5qaoV0sCSgAI34U5TCKmYkwAuO7+/Ocx/30KVcroaicgTU/n7I0k4N1t4CCtlHTMFPM
+         31cCJdChtMdsa50cxF8qeFX8EwwoOjYFlsovSJrCMdXwVdfpcQ9m5u9eEnzdEyNLb53d
+         WdKhN5Yxd2sSCmw2g9ouZsYSDg67GNcT6GH+CSN3+b6EIH4k8SA6V3ar+tTB2kwEQPUK
+         Uq1Q==
+X-Gm-Message-State: AAQBX9dToYuNtRRuVAjQf+RruuzD91y6dmO5+nnkkA6mpYtnPAVb2is2
+	6lOBn2fz6gF+oRDNi4ftH/E=
+X-Google-Smtp-Source: AKy350aYtvWxmHCKo+FMJ6O3GYkVV7uiG5lVTvMEmx5+9H3fUiqlOMNWdPaNLP+45XDZjhsEBpr5cw==
+X-Received: by 2002:adf:fa0c:0:b0:2cf:e70f:d1a8 with SMTP id m12-20020adffa0c000000b002cfe70fd1a8mr2275628wrr.10.1679570293895;
+        Thu, 23 Mar 2023 04:18:13 -0700 (PDT)
+Message-ID: <c9f4b34c4aef31906e715c7ddce8e077e5eef52c.camel@gmail.com>
+Subject: Re: [PATCH v2 1/3] xen/riscv: introduce setup_initial_pages
+From: Oleksii <oleksii.kurochko@gmail.com>
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>,  Stefano Stabellini <sstabellini@kernel.org>,
+ Gianluca Guida <gianluca@rivosinc.com>, Bob Eshleman
+ <bobbyeshleman@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>
+Date: Thu, 23 Mar 2023 13:18:12 +0200
+In-Reply-To: <60444252-80b6-230e-9090-2c96d5d6187d@xen.org>
+References: <cover.1678984041.git.oleksii.kurochko@gmail.com>
+	 <85a21ada5a0fc44bb9db1dcc1f6cf191a6e66bfb.1678984041.git.oleksii.kurochko@gmail.com>
+	 <9ff0e335-6cb2-be49-046d-745ce05f7086@xen.org>
+	 <5169c6c8a0c4c90b56e3f525a55de464edf7181e.camel@gmail.com>
+	 <60444252-80b6-230e-9090-2c96d5d6187d@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000C97F:EE_|SN7PR12MB6885:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7ba56348-cffa-4865-c219-08db2b8f2b37
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	APK5dqzhhlp4ZIDI4eakJB0+oLiEwM58OvyntUTKQoU26Pki1I8AL+FxFwuBz6JIMEI6pPLAUuGXcoOjZi1+QGaRuJ2d3QbtXBtOuj7R9CbThN8XC09s+cACbWSDnZW3bOKq5wUiVDD6rzqxFNt57k7WkV5eFhFPTfCU9IlJr/14zDbVBPub+PldhkUCLtz3ko3zXkPDrOk9MwW5T1DCF2EipyQ1Fu3Ij+WSJIcVaXCHOKL4k0O3s2g/c2PgJZgBdp71/r9CxAy2AGb99kAUFWUHDtW9bt9i51y1lENPvorG4k3CSuk+Nvv4NUvpsxybfrzsaxwQia0QYZmOZLy+NrIEmM1ipTR2dKaj/SOWCqKmr97MmdrQJiSuhgs+Ex+DZdbf2wwXer69KUgs+dldBoHnkJBg192sgYm6pukCl12fJzYP5v0yMyAkyOHbeBvLcKL4xa4ODWL+H1n5uGuV7dUyba/esqjbpo3Ngqn5zaIqPzUSUU6Hy0nJ19kXTF58A8uTy6M5tDOB0qkGwWWTddUO6ngftpF1rvsdVMKbgd4l67tQsto2wyMUSe2r1GLMjp/JjRnvu5QDe8VfYikOUYXPq1yjgfz5rVaaDRjyLFLmqqFK/XIizDSDYD0crPC1JARSFehBTDkXZmFk63cR2WSMW54yNGlBKnXGu/cZ6feY4D192Ws2Y2wC4qLFkjwgD5EAU2PJbd+/Z56Vr6R3VKt3otYjaTxe3ePLrvGb9DD5wYDRQN1q1WLQmyLtGnkgfe0MqaOI8ymgw66cshksJQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(136003)(376002)(396003)(346002)(39860400002)(451199018)(36840700001)(46966006)(40470700004)(86362001)(356005)(31686004)(2616005)(336012)(82740400003)(6666004)(26005)(186003)(53546011)(31696002)(426003)(47076005)(478600001)(2906002)(54906003)(4326008)(81166007)(40460700003)(82310400005)(44832011)(83380400001)(110136005)(16576012)(70206006)(40480700001)(316002)(5660300002)(8676002)(41300700001)(36860700001)(8936002)(36756003)(70586007)(43740500002)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2023 11:10:10.7198
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ba56348-cffa-4865-c219-08db2b8f2b37
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000C97F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6885
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
+MIME-Version: 1.0
 
 Hi Julien,
 
-On 22/03/2023 17:19, Julien Grall wrote:
-> 
-> 
-> Hi Michal,
-> 
-> On 22/03/2023 10:29, Michal Orzel wrote:
->> When vgic_reserve_virq() fails and backend is in domain, we should also
->> free the allocated event channel.
->>
->> When backend is in Xen and call to xzalloc() returns NULL, there is no
->> need to call xfree(). This should be done instead on an error path
->> from vgic_reserve_virq().
-> 
-> Most likely this was implemented this way to avoid a double "if (
-> vpl011->backend_in_domain)". TBH, I am not very thrilled with this
-> approach. Could we instead consider to use domain_pl011_deinit()? (A
-> couple of tweak would be necessary to use it)
-I think we could. More about it later.
+On Wed, 2023-03-22 at 14:21 +0000, Julien Grall wrote:
+...
+>=20
+> > > > +=C2=A0=C2=A0=C2=A0 unsigned long page_addr;
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 // /* align start addresses */
+> > > > +=C2=A0=C2=A0=C2=A0 // map_start &=3D XEN_PT_LEVEL_MAP_MASK(0);
+> > > > +=C2=A0=C2=A0=C2=A0 // pa_start &=3D XEN_PT_LEVEL_MAP_MASK(0);
+> > >=20
+> > > They should be switched to ASSERT() or BUG_ON().
+> > Sure. Thanks. I'll update.
+> > >=20
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 page_addr =3D map_start;
+> > > > +=C2=A0=C2=A0=C2=A0 while ( page_addr < map_end )
+> > >=20
+> > > This loop is continue to assume that only the mapping can first
+> > > in
+> > > 2MB
+> > > section (or less if the start is not 2MB aligned).
+> > >=20
+> > > I am OK if you want to assume it, but I think this should be
+> > > documented
+> > > (with words and ASSERT()/BUG_ON()) to avoid any mistake.
+> > I add a check in setup_initial_pagetables:
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BUG_ON(load_addr_start % (PAGE_ENTRIES *=
+ PAGE_SIZE) !=3D 0);
+> > Probably this is not a correct place and should be moved to
+> > setup_initial_mapping() instead of setup_initial_pagetables()
+>=20
+> Yes it should be moved in setup_initial_mapping().
+Then I'll moved it to setup_initial_mapping()
+>=20
+> > >=20
+> > > > +=C2=A0=C2=A0=C2=A0 {
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long index2 =
+=3D pt_index(2, page_addr);
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long index1 =
+=3D pt_index(1, page_addr);
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned long index0 =
+=3D pt_index(0, page_addr);
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Setup level2 table *=
+/
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 second[index2] =3D padd=
+r_to_pte((unsigned long)first);
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 second[index2].pte |=3D=
+ PTE_TABLE;
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Setup level1 table *=
+/
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 first[index1] =3D paddr=
+_to_pte((unsigned long)zeroeth);
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 first[index1].pte |=3D =
+PTE_TABLE;
+> > > > +
+> > > > +
+> > >=20
+> > > NIT: Spurious line?
+> > Yeah, should be removed. Thanks.
+> > >=20
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Setup level0 table *=
+/
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if ( !pte_is_valid(&zer=
+oeth[index0]) )
+> > >=20
+> > > On the previous version, you said it should be checked for each
+> > > level.
+> > I had a terrible internet connection, and my message wasn't sent.
+>=20
+> No worries.
+>=20
+> >=20
+> > I decided not to check that l2 and l1 are used only for referring
+> > to
+> > the next page table but not leaf PTE. So it is safe to overwrite it
+> > each time (the addresses of page tables are the same all the time)
+>=20
+> You are letting the caller to decide which page-table to use for each
+> level. So you are at the mercy that caller will do the right thing.
+>=20
+> IHMO, this is a pretty bad idea because debugging page-tables error
+> are=20
+> difficult. So it is better to have safety in place. This is not
+> worth...
+>=20
+> =C2=A0 and
+> > probably it will be better from optimization point of view to
+> > ignore if
+> > clauses.
+>=20
+> ... the optimization in particular when this is at boot time.
+I didn't think about that caller will do always the right thing so
+I will add the check.
+>=20
+> >=20
+> > And it is needed in case of L0 because it is possible that some
+> > addressed were marked with specific flag ( execution, read, write )
+> > and
+> > so not to overwrite the flags set before the check is needed.
+> In which case you should really report an error because the caller
+> may=20
+> have decide to set execution flag and you don't honor. So when the
+> code=20
+> is executed, you will receive a fault and this may be hard to find
+> out=20
+> what happen.
 
-> 
->> Also, take the opportunity to return -ENOMEM
->> instead of -EINVAL when memory allocation fails.
->>
->> Fixes: 1ee1e4b0d1ff ("xen/arm: Allow vpl011 to be used by DomU")
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
->> ---
->>   xen/arch/arm/vpl011.c | 11 +++++++----
->>   1 file changed, 7 insertions(+), 4 deletions(-)
->>
->> diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
->> index 541ec962f189..df29a65ad365 100644
->> --- a/xen/arch/arm/vpl011.c
->> +++ b/xen/arch/arm/vpl011.c
->> @@ -696,8 +696,8 @@ int domain_vpl011_init(struct domain *d, struct vpl011_init_info *info)
->>           vpl011->backend.xen = xzalloc(struct vpl011_xen_backend);
->>           if ( vpl011->backend.xen == NULL )
->>           {
->> -            rc = -EINVAL;
->> -            goto out1;
->> +            rc = -ENOMEM;
->> +            goto out;
->>           }
->>       }
->>
->> @@ -720,12 +720,15 @@ int domain_vpl011_init(struct domain *d, struct vpl011_init_info *info)
->>   out2:
->>       vgic_free_virq(d, vpl011->virq);
->>
->> +    if ( vpl011->backend_in_domain )
->> +        free_xen_event_channel(d, vpl011->evtchn);
->> +    else
->> +        xfree(vpl011->backend.xen);
-> 
-> There is another bug here (unrelated to your change). You want to use
-> XFREE() to avoid an extra free in domain_pl011_deinit(). Can you look at it?
-Strictly speaking this is not a bug. Memory allocation can only happen if backend is in Xen.
-This means, that if vpl011 init fails, we will call free only once (domain_vpl011_deinit
-will not be called on this path i.e. we will invoke panic after construct_domU).
-Of course, we could switch to XFREE just for sanity.
+Right now, it is expected situation that the caller will try to change
+execution flag during the setup of initial page tables.
 
-> 
->> +
->>   out1:
->>       if ( vpl011->backend_in_domain )
->>           destroy_ring_for_helper(&vpl011->backend.dom.ring_buf,
->>                                   vpl011->backend.dom.ring_page);
->> -    else
->> -        xfree(vpl011->backend.xen);
->>
->>   out:
->>       return rc;
-> 
-Solution to reuse domain_pl011_deinit would be as follows:
+It is possible in the currently implemented logic of the setup of
+initial page tables.
 
-     vgic_free_virq(d, vpl011->virq);
- 
- out1:
--    if ( vpl011->backend_in_domain )
--        destroy_ring_for_helper(&vpl011->backend.dom.ring_buf,
--                                vpl011->backend.dom.ring_page);
--    else
--        xfree(vpl011->backend.xen);
-+    domain_vpl011_deinit(d);
- 
- out:
-     return rc;
-@@ -737,12 +733,15 @@ void domain_vpl011_deinit(struct domain *d)
- 
-     if ( vpl011->backend_in_domain )
-     {
--        if ( !vpl011->backend.dom.ring_buf )
--            return;
-+        if ( vpl011->backend.dom.ring_buf )
-+            destroy_ring_for_helper(&vpl011->backend.dom.ring_buf,
-+                                    vpl011->backend.dom.ring_page);
- 
--        free_xen_event_channel(d, vpl011->evtchn);
--        destroy_ring_for_helper(&vpl011->backend.dom.ring_buf,
--                                vpl011->backend.dom.ring_page);
-+        if ( vpl011->evtchn )
-+        {
-+            free_xen_event_channel(d, vpl011->evtchn);
-+            vpl011->evtchn = 0;
-+        }
-     }
-     else
-         xfree(vpl011->backend.xen);
+Let me explain what I mean.
 
-However there is one problem with guarding free_xen_event_channel to be called only once.
-Even without allocating event channel, vpl011->evtchn is 0 by default. So doing:
-if ( is_port_valid(vpl011->evtchn) )
-    free_xen_event_channel(d, vpl011->evtchn);
-would not help us as evtchn 0 is always there. So in my proposal I'm assuming (I think correctly)
-that vpl011->evtchn cannot be 0 after successful evtchn allocation because 0 is "reserved".
-But I might be wrong in which case I'm clueless how to do the proper check.
+The first step of setup_initial_pagetables() is to map .text, .init,
+.rodata with necessary flags RX, RX, R.
+Remaining sections will have RW flags, and to map them,
+setup_initial_mapping() is called for the whole range of [linker_start,
+linker_end] not to map them one by one thereby during this step
+setup_initial_mapping() will try to remap addresses ranges which
+overlap with .text, .init, .rodata with RW flags but it should leave
+with the previously set flags.
+>=20
+> >=20
+> > > the next page table but not leaf PTE.But here you still only
+> > > check
+> > > for a single level.
+> > >=20
+> > > Furthermore, I would strongly suggest to also check the valid PTE
+> > > is
+> > > the
+> > > same as you intend to write to catch any override (they are a
+> > > pain to
+> > > debug).
+> > but if load addresses and linker addresses don't overlap is it
+> > possible
+> > situation that valid PTE will be overridden?
+>=20
+> A bug in the code. In fact, if you add the check you would have
+> notice=20
+> that your existing code is buggy (see below).
+>=20
+> > >=20
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 {
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ /* Update level0 table */
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ zeroeth[index0] =3D paddr_to_pte((page_addr -
+> > > > map_start)
+> > > > + pa_start);
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ zeroeth[index0].pte |=3D flags;
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Point to next page *=
+/
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 page_addr +=3D XEN_PT_L=
+EVEL_SIZE(0);
+> > > > +=C2=A0=C2=A0=C2=A0 }
+> > > > +}
+> > > > +
+> > > > +/*
+> > > > + * setup_initial_pagetables:
+> > > > + *
+> > > > + * Build the page tables for Xen that map the following:
+> > > > + *=C2=A0=C2=A0 load addresses to linker addresses
+>=20
+> I would suggest to expand because this is not entirely what you
+> exactly=20
+> are doing. In fact...
+>=20
+> > > > + */
+> > > > +void __init setup_initial_pagetables(void)
+> > > > +{
+> > > > +=C2=A0=C2=A0=C2=A0 pte_t *second;
+> > > > +=C2=A0=C2=A0=C2=A0 pte_t *first;
+> > > > +=C2=A0=C2=A0=C2=A0 pte_t *zeroeth;
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 unsigned long load_addr_start=C2=A0=C2=A0 =3D b=
+oot_info.load_start;
+> > > > +=C2=A0=C2=A0=C2=A0 unsigned long load_addr_end=C2=A0=C2=A0=C2=A0=
+=C2=A0 =3D boot_info.load_end;
+> > > > +=C2=A0=C2=A0=C2=A0 unsigned long linker_addr_start =3D boot_info.l=
+inker_start;
+> > > > +=C2=A0=C2=A0=C2=A0 unsigned long linker_addr_end=C2=A0=C2=A0 =3D b=
+oot_info.linker_end;
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 BUG_ON(load_addr_start % (PAGE_ENTRIES * PAGE_S=
+IZE) !=3D 0);
+> > > > +=C2=A0=C2=A0=C2=A0 if (load_addr_start !=3D linker_addr_start)
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BUG_ON((linker_addr_end=
+ > load_addr_start &&
+> > > > load_addr_end
+> > > > > linker_addr_start));
+> > >=20
+> > > I would suggest to switch to a panic() with an error message as
+> > > this
+> > > would help the user understanding what this is breaking.
+> > >=20
+> > > Alternatively, you could document what this check is for.
+> > I think I will document it for now as panic() isn't ready for use
+> > now.
+> > >=20
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 /* Get the addresses where the page tables were=
+ loaded */
+> > > > +=C2=A0=C2=A0=C2=A0 second=C2=A0 =3D (pte_t *)(&xen_second_pagetabl=
+e);
+> > > > +=C2=A0=C2=A0=C2=A0 first=C2=A0=C2=A0 =3D (pte_t *)(&xen_first_page=
+table);
+> > > > +=C2=A0=C2=A0=C2=A0 zeroeth =3D (pte_t *)(&xen_zeroeth_pagetable);
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 setup_initial_mapping(second, first, zeroeth,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&_stext),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&_etext),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 (unsigned long)&_stext,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 PTE_LEAF_DEFAULT);
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 setup_initial_mapping(second, first, zeroeth,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&__init_begin),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&__init_end),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 (unsigned long)&__init_begin,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 PTE_LEAF_DEFAULT | PTE_WRITABLE);
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 setup_initial_mapping(second, first, zeroeth,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&_srodata),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 LOAD_TO_LINK((unsigned
+> > > > long)&_erodata),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 (unsigned long)(&_srodata),
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 PTE_VALID | PTE_READABLE);
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0 setup_initial_mapping(second, first, zeroeth,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 linker_addr_start,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 linker_addr_end,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 load_addr_start,
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 PTE_LEAF_DEFAULT | PTE_READABLE);
+>=20
+> ... this is not cover above. AFAIU, this is the one for the 1:1
+> mapping.
+But there is no 1:1 mapping.
+I thought that 1:1 mapping is when the physical address is equal to
+0x10020 then after MMU is enabled the virtual address will be the same
+0x10020 and mapped to 0x10020.
 
-~Michal
+Probably I missed something but this code maps all linker addresses
+to correspondent load addresses and it will be 1:1 only in case when
+load address is equal to linker address.
+>=20
+> > >=20
+> > > As I said in v1, you need to use a different set of page-table
+> > > here.
+> > If I understand you correctly I have to use a different set of
+> > page-
+> > table in case when it is possible that size of Xen will be larger
+> > then
+> > PAGE_SIZE. So I added to xen.lds.S a check to be sure that the size
+> > fits into PAGE_SIZE.
+>=20
+> This is not what I was referring to. I was pointing out that second,=20
+> first, zeroeth are exactly the same for all the callers. You want to=20
+> introduce a second set of zeroeth table. You will want to do the same
+> for first but it is not always used.
+>=20
+> Otherwise, this is not going to work if Xen is loaded at a different=20
+> address than the runtime.
+Ok.
+
+I understand what do you mean in general but still I am not sure that I
+understand a particular case when I am sure that the size of Xen is no
+bigger then 2MB and load address is aligned on 2Mb boundary.
+
+The size of one l0 page table is 512 (1 << 9 ) entries which covers 4K
+(1 << 12) * 512 =3D 2 Mb of memory so it should be fine.
+All the callers in my case are trying to map addresses from
+[linker_start, linker_end] which is not bigger then 2 MB and is aligned
+on 2 MB boundary.
+
+>=20
+> That said, when I spoke with Andrew yesterday, he mentioned that your
+> initial goal is to support the case where Xen is loaded at the
+> runtime=20
+> address. I understand this simplifies a lot the code and I told him I
+> was OK with that. However, it would be good to document what are your
+> goals in each series (this is not always clear what you skip on
+> purpose).
+>=20
+> >=20
+> > > Also, where do you guarantee that Xen will be loaded at a 2MB
+> > > aligned
+> > > address? (For a fact I know that UEFI is only guarantee 4KB
+> > > alignment).
+> > There is a check in setup_initial_pagetables:
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BUG_ON(load_addr_start % (PAGE_ENTRIES *=
+ PAGE_SIZE) !=3D 0);
+>=20
+> This is not very obvious the check is to confirm that Xen is probably
+> aligned. I would suggest to add a comment.
+>=20
+> Also, you might want to use XEN_PT_LEVEL_SIZE(..) to make it more=20
+> obvious what sort of alignment you are trying to enforce.
+I will update add the comment and use XEN_PT_LEVEL_SIZE(...) instead.
+>=20
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 sp, cpu0_boot_stack
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 t0, STACK_SIZE
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=
+=C2=A0 sp, sp, t0
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Re-init an addr=
+ess of exception handler as it was
+> > > > overwritten=C2=A0 with
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * the address of =
+the .L_mmu_is_enabled label.
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Before jump to =
+trap_init save return address of
+> > > > enable_mmu() to
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * know where we s=
+hould back after enable_mmu() will
+> > > > be
+> > > > finished.
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 s0, ra
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lla=C2=A0=C2=A0=C2=A0=
+=C2=A0 t0, trap_init
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 jalr=C2=A0=C2=A0=C2=A0 =
+ra, t0
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Re-calculate th=
+e return address of enable_mmu()
+> > > > function for case
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * when linker sta=
+rt address isn't equal to load start
+> > > > address
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=
+=C2=A0 s0, s0, t1
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 ra, s0
+> > > > +
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret
+> > >=20
+> > > Missing ENDPROC?
+> > I haven't seen the usage of ENDPROC for RISC-V so it looks like it
+> > is
+> > not necessary.
+>=20
+> Ok. Would the objdump be able to report the function properly then? I
+> know that on Arm, it was necessary report assembly function properly.
+It is fine for RISC-V:
+
+Disassembly of section .text:
+
+0000000000200000 <_start>:
+  200000:       10401073                csrw    sie,zero
+  200004:       6299                    lui     t0,0x6
+...
+  20003c:       00000013                nop
+
+0000000000200040 <enable_mmu>:
+  200040:       0003a297                auipc   t0,0x3a
+...
+  20009e:       941a                    add     s0,s0,t1
+  2000a0:       80a2                    mv      ra,s0
+  2000a2:       8082                    ret
+        ...
+
+00000000002000b0 <__bitmap_empty>:
+  2000b0:       1141                    addi    sp,sp,-16
+  2000b2:       e422                    sd      s0,8(sp)
+  2000b4:       0800                    addi    s0,sp,16
+...
+
+>=20
+> > >=20
+> > > > diff --git a/xen/arch/riscv/xen.lds.S
+> > > > b/xen/arch/riscv/xen.lds.S
+> > > > index eed457c492..e4ac4e84b6 100644
+> > > > --- a/xen/arch/riscv/xen.lds.S
+> > > > +++ b/xen/arch/riscv/xen.lds.S
+> > > > @@ -179,3 +179,5 @@ SECTIONS
+> > > > =C2=A0=C2=A0=20
+> > > > =C2=A0=C2=A0 ASSERT(!SIZEOF(.got),=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ".=
+got non-empty")
+> > > > =C2=A0=C2=A0 ASSERT(!SIZEOF(.got.plt),=C2=A0 ".got.plt non-empty")
+> > > > +
+> > > > +ASSERT(_end - _start <=3D MB(2), "Xen too large for early-boot
+> > > > assumptions")
+> > >=20
+> > ~ Oleksii
+> >=20
+>=20
+~ Oleksii
+
 
