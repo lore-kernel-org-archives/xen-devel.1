@@ -4,32 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 898F6C6FD1D
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Mar 2023 11:58:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.513817.795400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4EB0C6FD1D
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Mar 2023 12:14:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.513823.795420 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfJa0-0000YL-3U; Thu, 23 Mar 2023 11:58:04 +0000
+	id 1pfJpv-0003wc-Sj; Thu, 23 Mar 2023 12:14:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 513817.795400; Thu, 23 Mar 2023 11:58:04 +0000
+Received: by outflank-mailman (output) from mailman id 513823.795420; Thu, 23 Mar 2023 12:14:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfJa0-0000YE-0c; Thu, 23 Mar 2023 11:58:04 +0000
-Received: by outflank-mailman (input) for mailman id 513817;
- Thu, 23 Mar 2023 11:58:03 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1pfJZz-0000Y6-F7
- for xen-devel@lists.xenproject.org; Thu, 23 Mar 2023 11:58:03 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pfJZy-0006KX-0Q; Thu, 23 Mar 2023 11:58:02 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=[192.168.18.79]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1pfJZx-0006co-L2; Thu, 23 Mar 2023 11:58:01 +0000
+	id 1pfJpv-0003wV-Q3; Thu, 23 Mar 2023 12:14:31 +0000
+Received: by outflank-mailman (input) for mailman id 513823;
+ Thu, 23 Mar 2023 12:14:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=k1NO=7P=citrix.com=prvs=439d27799=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1pfJpu-0003vz-76
+ for xen-devel@lists.xenproject.org; Thu, 23 Mar 2023 12:14:30 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4030f7f5-c974-11ed-85db-49a42c6b2330;
+ Thu, 23 Mar 2023 13:14:26 +0100 (CET)
+Received: from mail-mw2nam10lp2108.outbound.protection.outlook.com (HELO
+ NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.108])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 23 Mar 2023 08:14:13 -0400
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
+ by DM6PR03MB5098.namprd03.prod.outlook.com (2603:10b6:5:1e8::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Thu, 23 Mar
+ 2023 12:14:10 +0000
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::8299:f95f:934b:29e8]) by BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::8299:f95f:934b:29e8%7]) with mapi id 15.20.6178.038; Thu, 23 Mar 2023
+ 12:14:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,339 +51,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=BmrDscVcCoL5bBK3V/1a3l04QW0IO6bblcDuxIbXh4g=; b=lJQuwU5trO55h34D4xaXU6Ty7J
-	9S7qkLdR6QlMVscPApTBBwCsA3CVJJ5K5EQ8iTOl4SPBsfeR4jW7K9eHNfXHX3wCgygZwvhYcBwM6
-	lppmsDEB3p/I216gCe2fqg526xFkGPmkGUf3o4m5REmWo1VnO781kdWedyKjtwFqsbkw=;
-Message-ID: <98194c59-6bd8-7b98-c94d-df0f4faf0c04@xen.org>
-Date: Thu, 23 Mar 2023 11:57:59 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.9.0
-Subject: Re: [PATCH v2 1/3] xen/riscv: introduce setup_initial_pages
-Content-Language: en-US
-To: Oleksii <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Gianluca Guida <gianluca@rivosinc.com>,
- Bob Eshleman <bobbyeshleman@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>
-References: <cover.1678984041.git.oleksii.kurochko@gmail.com>
- <85a21ada5a0fc44bb9db1dcc1f6cf191a6e66bfb.1678984041.git.oleksii.kurochko@gmail.com>
- <9ff0e335-6cb2-be49-046d-745ce05f7086@xen.org>
- <5169c6c8a0c4c90b56e3f525a55de464edf7181e.camel@gmail.com>
- <60444252-80b6-230e-9090-2c96d5d6187d@xen.org>
- <c9f4b34c4aef31906e715c7ddce8e077e5eef52c.camel@gmail.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <c9f4b34c4aef31906e715c7ddce8e077e5eef52c.camel@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Inumbo-ID: 4030f7f5-c974-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1679573666;
+  h=message-id:date:from:subject:to:cc:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=VPbaa4dmeUqFKzkRcDCPMnHVQ1RKsXJBdk3DIVCH974=;
+  b=PDJTDpAYUxKDJXipilkUU0EtZ03qiWrZCvR7R576fkS/fF+h0TwSz9le
+   flK2O8W5saxq0vhy/UtM7EgPFa6uqD9ONdLGWHBoiiceWXJ60Wk/6lAAc
+   15tdVozGL1ML/d/JYUAmo/URLd0atalkjUfYHYv6dE8+k5OuXUqYosu/e
+   E=;
+X-IronPort-RemoteIP: 104.47.55.108
+X-IronPort-MID: 102017987
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:XqgmsaLWzNB6FjpfFE+R4pQlxSXFcZb7ZxGr2PjKsXjdYENS0mdWz
+ GVMCjqHOvrYamqjedp2bdu38kwCuMeBmt83TFBlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
+ ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
+ Jb5rta31GWNglaYCUpJrfPTwP9TlK6q4mhA5QZlPakjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
+ /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
+ jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5HIW8Sr
+ qBGCwksZyK7jM2EyY21Uvtz05FLwMnDZOvzu1lG5BSAVbMDfsqGRK/Ho9hFwD03m8ZCW+7EY
+ NYUYiZuaxKGZABTPlAQC9Q1m+LAanvXKmUE7g7K4/dqpTGLnGSd05C0WDbRUvWMSd9YgQCzo
+ WXe8n6iKhobKMae2XyO9XfEaurnxHuhANtNRe3nnhJsqGHL2GkOLRxGb0Wqmd6CsEukReJFC
+ 2VBr0LCqoB3riRHVOLVXRe1vXqFtR40QMdLHqsx7wTl4rrZ5UOVC3YJShZFacc6r4kmSDoyz
+ FiLktj1Qzt1v9W9Vna15rqS6zSoNkA9MW4HTT8JS00C+daLnW0ophfGT9ImFbHviNTwQGn02
+ 2rT9Hh4gKgPh8kW0an95UrAnz+nupnOSEgy+xnTWWWmqAh+YeZJerCV1LQS1t4YRK7xc7VLl
+ CJf8yRCxIji1a2wqRE=
+IronPort-HdrOrdr: A9a23:ir+bdaPUgdX5fsBcT9z255DYdb4zR+YMi2TDiHoddfUFSKalfp
+ 6V98jztSWatN/eYgBYpTnyAtjmfZq6z+8J3WBxB8bZYOCCggeVxe5ZnOjfKlHbakjDH6tmpN
+ xdmstFeaPN5DpB7foSiTPQe7hA/DDEytHRuQ639QYTcegAUdAF0+4WMHf8LqQ7fnglOXJvf6
+ Dsmvav6gDQMUj+Ka+Adws4dtmGg+eOuIPtYBYACRJiwA6SjQmw4Lq/PwmE0gwYWzZvx65n1W
+ TeiQT26oiqrvn+k3bnpiPuxqUTvOGk5spIBcSKhMRQAjLwijywbIAkd6yesCszqOSP7k9vtN
+ XXuR8vM+l69nuUVGCophnG3RXmzV8VmjLf4G7dpUGmjd3yRTo8BcYErYVFciHB405lmN1nyq
+ pE00+QqpISVHr77W7AzumNcysvulu/oHIkn+JWp3tDUbEGYLsUiYAE5ktaHLoJASq/woE6F+
+ tFCt3a+Z9tABinRkGcmlMq7M2nX3w1EBvDak8euvaN2zwTp3x9x1tw/r1pol4wsLYGD7VU7e
+ XNNapl0JtUSNUNUK57DOAdBeOqF23kW3v3QSKvCGWiMJtCF2PGqpbx7rlwzvqtYoY0wJw7n4
+ mEeE9EtFQ1Z1nlBaS1rdx2Gyj2MSeAtAnWu4RjD8ATgMy5eFOrC1zMdLkWqbrinx1FaferHM
+ paO/ptcovexCXVaMB0NjbFKupvwEklIbwoU+kAKiKzS+LwW/vXX7/gAb/uDYuoNwoYcUXCJV
+ ZGdATPBax7nzWWsznD8VfsZ08=
+X-IronPort-AV: E=Sophos;i="5.98,283,1673931600"; 
+   d="scan'208";a="102017987"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JrK5xAEOcx6RQDRvMj4IyUUYV6CwWu8NL/zHT8OcmyqLG+BW+2Znen7vp9FaU/E7OlGB8mhUCn8SFFkXvbjw/U997nSPIt0g9fq5jSy8FQ3lioGwVL1xA8aTHCzKJP+D9Dk3leh8jS+UUYOz7pFoSiNX4XQHiYfu+N18tohiFutOA/v9J4wNdKyps7m46LWZHgNqsXz8kj5ImDRV94n9NRXvAmDbB9NPw+18VTv7h6NSmUR3hPy2u5jrU02/WqkkVYnxdqnSzkqVpthCt9VI66myK6gH6vT2h+bU0h10Y057+BXjOwBZBlQdCRxq7aNhLtFINoX5ayEmcKDwD5EvvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KPQJfK9R9/y9NInsPWhPMorXGcdLAO5dHgfqeCBErLc=;
+ b=BlTj/tzcRONl6DP0zZ/NNjtBuaLGBxfxFEwoc2wWunmUoZvFGArzle47DFqqQUrsWKMLW/NsTuubcjBCUMl9hKACZK6b6heXY1vccUSv+R5KeHk89Scl51mV1BIrqnE/3Pikc6FnSqA1NdULA6q+cKLY+FhiyRwNsLYa2DEfrboqOwNO8s0khzoNWoG0UpS70F4sGoOi4NiGwSDU9IGtxOUtwy14ztAHCMet9ZKIDeGqh0gs5vUvWZEPOjuAGfddhTEIJAGjGkSEgU6iVcKiUyb3giT8R68gNcAf9jS1PA3x5m+HJkV50OSrvGuD6N/c8fA5wjJlAacUJiLA/BLnVw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KPQJfK9R9/y9NInsPWhPMorXGcdLAO5dHgfqeCBErLc=;
+ b=NbGa9vvMlYYKlwHMWqTe7uasvraWB0/cTD7EhjK6dzKUEaXmxOiym2RDU4qVGsTeuIkyB0C2wlr8Sn9iuJKcE7RW9EYen/HQu6ZL8xua8jPvS9WV987o84o/+fCNxyUTiaX8q4WLU08lNbAi8lGW5PaOERMlUSofVB3xe3X+k7w=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <aa5629ac-be62-5838-78cf-62e7d0a53ffc@citrix.com>
+Date: Thu, 23 Mar 2023 12:14:04 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 03/16] x86/shadow: drop redundant present bit checks from
+ SHADOW_FOREACH_L<N>E() "bodys"
+Content-Language: en-GB
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Tim Deegan <tim@xen.org>
+References: <dd9205b8-63f0-b1bc-f2b8-50d5da2bf2a7@suse.com>
+ <54e7a146-6f86-95a7-7b3b-0ba5dd418949@suse.com>
+In-Reply-To: <54e7a146-6f86-95a7-7b3b-0ba5dd418949@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0385.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18f::12) To BYAPR03MB3623.namprd03.prod.outlook.com
+ (2603:10b6:a02:aa::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR03MB3623:EE_|DM6PR03MB5098:EE_
+X-MS-Office365-Filtering-Correlation-Id: 718b04cf-905c-4c66-3782-08db2b981b85
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	rrqN9g5l1ibRq/bQU90vGnFRdA6kJBZuMcML+O5MfxDCEVCIYUsSiDfFvs/P6YPjQmjDwQJojodTldZlqcVkeVQU31rasTV9J8mMq+YuRuhz2/tUo1HSIkrBbHUYIIfyZbdQpQmp4XZgGvr6tRWf5IArWvSg/leBlEk5ONJTJl+U/t9OE8CBKy+ms/HotlBSMi585JfXmejgP/5s8qHEAkdZw0Jhgoxiu5ZP73ZHDWYi8QRYTGqMdvLYwyaHAFT0KRJhxUXfsqI7djY+90+aDm8CkbjmeHJtOSc3bnwkv7mQC9hhxaSxblct/sDLAkUSpudg0/cP/mkfQilTPAjSsOmNcc1oNeG1R7HnC2YGbraNPo0I+bjUNyNyfPic05Tk9v6rs4HoRdBv5DkHpHzuY+F3YDmgdNtvUWmOm6vKfNqzRO0LDeOKZBzFlvKxU+ujaarLWBcHBlLq5Vq1H8h3Up1pFy7WiBY+W2vuGug4Z0a0K+HndBKm+Xj8nVKSH0DD7yqQu8uC0oDVtMcEr3M8SOCjqUUMZWYh1auezZQjumztAoKjxWbf0O+v3bhTfk4W/Suny0Ax1Oq6lV+RlwzNrIGctop/PASwcFLM681wq/dJFBSOWlvGTNhBka3CceCNHCGv+jxMC3BEXMBXRPJC1zOEK+Lwd4Z0FNejgW77pYobKFwC9YFWQBfeQOFPexkN+cjM1wREoQDldfiWvN6Ux4+rLnadurPCKYEJQvmpQxAnJwtyPqggfmj7vOq7mAV3
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(366004)(376002)(136003)(346002)(396003)(451199018)(4326008)(66556008)(66476007)(8676002)(66946007)(110136005)(316002)(54906003)(5660300002)(82960400001)(41300700001)(8936002)(53546011)(26005)(6512007)(6506007)(6666004)(2616005)(186003)(478600001)(6486002)(86362001)(31696002)(36756003)(38100700002)(2906002)(31686004)(45980500001)(43740500002)(473944003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Uk9FL2N5VVJiM05majdrQ2hSUms3Y0NPcEtFclU3NkV6bEhuTm5uRTBqWHVT?=
+ =?utf-8?B?NGlNNWdyK050MEx2TGRjcVEyM3h0SWhKMGE0UlJ5QjErTGEwRkNBUHNYT0Zy?=
+ =?utf-8?B?ZWJJUE1wTXRWMEZqeHg5T0RNeW4xd3dGdjM5MzZ6UzJ5SFNEalpVeXlQWDQ3?=
+ =?utf-8?B?ODJEcXJFUzRBVitDdHlwQ25Vdnc0bkc5T0FCNXZJcUt4OW5EWDdoMUY3T2RK?=
+ =?utf-8?B?eVMyYmNqTVJDd3BobW5WL3VhZThCNWk3QzV0UXVBUEtkTmd1QVQrWXArWWxI?=
+ =?utf-8?B?amp2bTUvUG9TaUpUZENrR0xQQ3FFdTduZjVraktoWVNianBlY0w2eTFvOG1E?=
+ =?utf-8?B?Qk9Fc28zbVdXUU14azRBQVFyNXV3K21mMnNGUlJnd01mSmZ3Z0ozTERUNnM0?=
+ =?utf-8?B?cGZvNTVKZXF3bjJlV2NhNDFBQjZmZ0pVSU11M3JvcFNjYURDeHhVVlVtWkhE?=
+ =?utf-8?B?UjB4emlWdFhnWUJ5YmJyNDZCNlNad2lWUFFqLzIyS0VBYnRTdm1CNHN6Qm1u?=
+ =?utf-8?B?M05OV1VleFFTR2d6SUpsNWttZFdYUWM1QjNxYkhwTE1rMXhlZFFUNWlOalZP?=
+ =?utf-8?B?OHpLSWx0dEVhalM0NkdGWHpZUXVYK0hWUzRmajAreDR5Y1V3UVV0Z2xKT1lG?=
+ =?utf-8?B?UkphYWRhS0NQNncrYmxkYlNaOGRCd0JwOUFZWnpJT0EwMG04NW92SU9QWUxQ?=
+ =?utf-8?B?STIzMnUzZ2xDMlJKQyt5N3d3cmY3U0JyVHFHeEZwVGkrT2oxeGZVaS9PNWhz?=
+ =?utf-8?B?NDNEZ0pmY2V0MUJGK28zUFdFeFdvOFZTQm40cTFIaVo3RDlQTGtsaE82NDRo?=
+ =?utf-8?B?bU84R3lGVHVsSmVSZ0oxYzZ4YzNTVm52YTBoTjdKWnR3MnZjY09oZVRZcFRm?=
+ =?utf-8?B?aFhnejBBSE1iWjAxK3ZjcCtaV2JKTElPNUJqV25xMlQ4Y2JINHlSenFwd1cr?=
+ =?utf-8?B?cTZWa1RJT2xhbEQ1Ri9nMlFjTUhoYU43c1JaRHBIbW5xVGVyWkZkZUxWaXQy?=
+ =?utf-8?B?czBmL01wbThtVUJEbHFtVU9FT0JoUG5xbllnelhUMUhBNFBGbUJ5aXNnYjRM?=
+ =?utf-8?B?VjNOOE53YkFESzVEZVpKUEp5TUJldHFIUnUySEI5ek81OG5tZVBnRFYwaWpW?=
+ =?utf-8?B?RTFuV29Xdnc1ZW5oR3FIQ1NoWENla2tSL2tLeU9CeWhVZjFNbi83Q2dQcUZr?=
+ =?utf-8?B?cTNOWW5oNnpTd3NBNG03U1hqajJpWkN1SUNYUzVGN2g3Q1JuME54dVQwbVgw?=
+ =?utf-8?B?ekRjZmZHRjJzaXQ4RzNRUCtMWVVZZk1YdThCM2VJNUEwbVkvdkZYbVhzTUhy?=
+ =?utf-8?B?WjVGMUZ3MEJuUmtnRGFHNHpOUU5lRVJ4RkJsQVdzZVZveS9GbkpvQVVTN3dy?=
+ =?utf-8?B?TlZqSzZCVDFzdVdIbzNHaTgzUmlkbXhvNHpPa0tRcUY0MEVubW5MdWtVcWc2?=
+ =?utf-8?B?MkZ0NVVHMWRTZEZ1bU1LMkdaU0RGZmxQVzgxT0oyMThrSlZMYVVyUmVBRmo4?=
+ =?utf-8?B?cm9USFVYcU1SOE5nS1VVdVJIQW1VcmRaK0s0Vkp5dnM5ek1FVFB1clc0SzEr?=
+ =?utf-8?B?SXJXLzBybHFtYkVCeUdwY3hLV20wcWVnVlVQWDlPMWx4cituTCt5YzJHZmpN?=
+ =?utf-8?B?akw0WmFxT012a0dTU1JoMWVKWTh1bUxhWE9FTDFKU1hVcGxCdDV1eXJpcjdZ?=
+ =?utf-8?B?bVJ6b3gzcmo4U0lsZFY3RlBkQktBQ2N3WlFqdDhBeldvT1RPdTVFd2tGWExC?=
+ =?utf-8?B?NFUxaUlCOVAvY043K0lMUWZWb2hwbWJqb3RQVklETFFQOUNmTDlGRFFOTTAw?=
+ =?utf-8?B?MXV4WjViUUhraHZWRVFTRTZrZitEREE2VWxFSkZsZkNWWUI5eEc5V1ZMT3l5?=
+ =?utf-8?B?QU5pOXdGMU9EalNEbDBHUE1LYk1wMzNYSWRNNnk3akNBMENJaG9yOFhsNmJn?=
+ =?utf-8?B?NWNPelVEMFZUSGlnandIb1VZWWY5Ynd2ZzhXS1laM2NQSVUrd1BKeXF1Ulhj?=
+ =?utf-8?B?cFNiaFBVSEFQSGRMaXE1S0JzYlBTSmRNajBKWUlWVHVVS0pVbEhpTU55Qk1a?=
+ =?utf-8?B?Q1grdjBXQy9FUi9sSDZJZlhKTm9YRHBBeS9zY1NuT0F6Szc0OG53SExRUmNG?=
+ =?utf-8?B?VUpuV05QN3BuSHloUmhsaytRYlcwWlhXWE1GRnJhVVVhQkhkRmVOWG9Kc1hC?=
+ =?utf-8?B?QVE9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	p0wDc2awCP0lhxt1x+okAZTmhXoUbfGEzhD5kgQnSJV8qt/ifBanZdytSN2C3Qo0fFyT9QXDcKLaG5fhTEs6UuH/3mpj6Jq4OBeo4vOH8ptnURCtU1HghVDAH2ox/7431zluO7v7SWewAZgJq8rGXNrMbOwWrNFDvO1XNxwoCdp0cQ1y5QopZ/u16I3U/K1eRaWYlb29Eeu4dGlcPZT40DavIa2NxlkGtW/dvQa9pGWVPH56Un0ZzZi3NxMnu2+O3YOhAaD/xYo2x3Xy4c3bYUTMuJEYp1LI42BVhqrDu2LxEvPD31Tm3bmgiH13XGk7aJX9GckXsj/iD23bezk7jI62CvktDSnQ2bhoHVJN45Mj3qkZwhzF/vNnC9FEBO7Mt9iygbHNCrxE/q5hUFbdwWX0g2/IY94CjJX56Ade1Uyd9b5PEBcWM0Yl7noMzQ+oxPNtx3hcN1FRDVfW1/8RrmsRXe9QT2+mxPfNmopzjjcQ5PUpD3u3lasQIZkWuHHpRgV5RIb/dRSc2abHKyzIF6YKzO9dXdKbaneqlgoKWaRlS6+LuXZk+2OwmOhu3AfDa2MFobhgv3sZ2RAoSWB6dJwz1Hva4kXEpv/DVQl5b6I/yetMxGYSNxZMVIjOrhfjsESRJa8Hgg8mCvq4j3BLH8qQwUdRI4DEXmMEgZTf3A0Lil95ExYWbuqANlU97iuDP8fSpYDwLTvhXOgPsX46AJxd+6AebQAwFWZmMNMB5OU+kSK1AGjgCXbYLCo3iOUNW3SW+lj/KIyAw5CO9L8qupsPEx9ap0EnvcHtiI1u1AEC9zOH/pgr9IaNsZoWq5G+I2onEz03ifpo/p/+trA6VQ==
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 718b04cf-905c-4c66-3782-08db2b981b85
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2023 12:14:10.2451
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: h9UTuQ/UkLupGwplbWtFZafLIxNpfP3zy4F3anDspj8wMbqj9XNimO+H9Xp+NQrKde7UuUvcFn9fC+Q1uSKhbUA7dSJ3E2qNr7aNy/qJyaQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5098
 
-On 23/03/2023 11:18, Oleksii wrote:
-> Hi Julien,
+On 22/03/2023 9:31 am, Jan Beulich wrote:
+> SHADOW_FOREACH_L<N>E() already invokes the "body" only when the present
+> bit is set; no need to re-do the check.
+>
+> While there also
+> - stop open-coding mfn_to_maddr() in code being touched (re-indented)
+>   anyway,
+> - stop open-coding mfn_eq() in code being touched or adjacent code,
+> - drop local variables when they're no longer used at least twice.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Hi Oleksii,
+While I agree this is the current behaviour, it's another spiketrap
+waiting to happen.
 
-> On Wed, 2023-03-22 at 14:21 +0000, Julien Grall wrote:
-> ...
->>
->>>>> +    unsigned long page_addr;
->>>>> +
->>>>> +    // /* align start addresses */
->>>>> +    // map_start &= XEN_PT_LEVEL_MAP_MASK(0);
->>>>> +    // pa_start &= XEN_PT_LEVEL_MAP_MASK(0);
->>>>
->>>> They should be switched to ASSERT() or BUG_ON().
->>> Sure. Thanks. I'll update.
->>>>
->>>>> +
->>>>> +    page_addr = map_start;
->>>>> +    while ( page_addr < map_end )
->>>>
->>>> This loop is continue to assume that only the mapping can first
->>>> in
->>>> 2MB
->>>> section (or less if the start is not 2MB aligned).
->>>>
->>>> I am OK if you want to assume it, but I think this should be
->>>> documented
->>>> (with words and ASSERT()/BUG_ON()) to avoid any mistake.
->>> I add a check in setup_initial_pagetables:
->>>        BUG_ON(load_addr_start % (PAGE_ENTRIES * PAGE_SIZE) != 0);
->>> Probably this is not a correct place and should be moved to
->>> setup_initial_mapping() instead of setup_initial_pagetables()
->>
->> Yes it should be moved in setup_initial_mapping().
-> Then I'll moved it to setup_initial_mapping()
->>
->>>>
->>>>> +    {
->>>>> +        unsigned long index2 = pt_index(2, page_addr);
->>>>> +        unsigned long index1 = pt_index(1, page_addr);
->>>>> +        unsigned long index0 = pt_index(0, page_addr);
->>>>> +
->>>>> +        /* Setup level2 table */
->>>>> +        second[index2] = paddr_to_pte((unsigned long)first);
->>>>> +        second[index2].pte |= PTE_TABLE;
->>>>> +
->>>>> +        /* Setup level1 table */
->>>>> +        first[index1] = paddr_to_pte((unsigned long)zeroeth);
->>>>> +        first[index1].pte |= PTE_TABLE;
->>>>> +
->>>>> +
->>>>
->>>> NIT: Spurious line?
->>> Yeah, should be removed. Thanks.
->>>>
->>>>> +        /* Setup level0 table */
->>>>> +        if ( !pte_is_valid(&zeroeth[index0]) )
->>>>
->>>> On the previous version, you said it should be checked for each
->>>> level.
->>> I had a terrible internet connection, and my message wasn't sent.
->>
->> No worries.
->>
->>>
->>> I decided not to check that l2 and l1 are used only for referring
->>> to
->>> the next page table but not leaf PTE. So it is safe to overwrite it
->>> each time (the addresses of page tables are the same all the time)
->>
->> You are letting the caller to decide which page-table to use for each
->> level. So you are at the mercy that caller will do the right thing.
->>
->> IHMO, this is a pretty bad idea because debugging page-tables error
->> are
->> difficult. So it is better to have safety in place. This is not
->> worth...
->>
->>    and
->>> probably it will be better from optimization point of view to
->>> ignore if
->>> clauses.
->>
->> ... the optimization in particular when this is at boot time.
-> I didn't think about that caller will do always the right thing so
-> I will add the check.
->>
->>>
->>> And it is needed in case of L0 because it is possible that some
->>> addressed were marked with specific flag ( execution, read, write )
->>> and
->>> so not to overwrite the flags set before the check is needed.
->> In which case you should really report an error because the caller
->> may
->> have decide to set execution flag and you don't honor. So when the
->> code
->> is executed, you will receive a fault and this may be hard to find
->> out
->> what happen.
-> 
-> Right now, it is expected situation that the caller will try to change
-> execution flag during the setup of initial page tables. >
-> It is possible in the currently implemented logic of the setup of
-> initial page tables.
+There needs to be a rename of these macros to something like
+FOREACH_PRESENT_SL?E(...).  The SHADOW prefix is a bit verbose and can
+be ineligibly encoded with the L?E acronym.
 
-This sounds like a bug in your caller implementation. You should not try 
-to workaround this in your code updating the page-tables.
+After which this patch be trivially correct, and the resulting code will
+read safely in context.
 
-> Let me explain what I mean.
-> 
-> The first step of setup_initial_pagetables() is to map .text, .init,
-> .rodata with necessary flags RX, RX, R.
-> Remaining sections will have RW flags, and to map them,
-> setup_initial_mapping() is called for the whole range of [linker_start,
-> linker_end] not to map them one by one thereby during this step
-> setup_initial_mapping() will try to remap addresses ranges which
-> overlap with .text, .init, .rodata with RW flags but it should leave
-> with the previously set flags.
-Why do you need to call setup_init_mapping() with the whole range? In 
-fact the only reason I can think this is useful is when you when to 
-create a 1:1 mapping when the linker and load address is different. But...
+>
+> --- a/xen/arch/x86/mm/shadow/multi.c
+> +++ b/xen/arch/x86/mm/shadow/multi.c
+> @@ -3647,13 +3632,10 @@ int cf_check sh_remove_l1_shadow(struct
+>  {
+>      shadow_l2e_t *sl2e;
+>      int done = 0;
+> -    int flags;
+>  
+>      SHADOW_FOREACH_L2E(sl2mfn, sl2e, 0, done, d,
+>      {
+> -        flags = shadow_l2e_get_flags(*sl2e);
+> -        if ( (flags & _PAGE_PRESENT)
+> -             && (mfn_x(shadow_l2e_get_mfn(*sl2e)) == mfn_x(sl1mfn)) )
+> +        if ( mfn_x(shadow_l2e_get_mfn(*sl2e)) == mfn_x(sl1mfn) )
 
->>>>> +
->>>>> +    /* Get the addresses where the page tables were loaded */
->>>>> +    second  = (pte_t *)(&xen_second_pagetable);
->>>>> +    first   = (pte_t *)(&xen_first_pagetable);
->>>>> +    zeroeth = (pte_t *)(&xen_zeroeth_pagetable);
->>>>> +
->>>>> +    setup_initial_mapping(second, first, zeroeth,
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&_stext),
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&_etext),
->>>>> +                          (unsigned long)&_stext,
->>>>> +                          PTE_LEAF_DEFAULT);
->>>>> +
->>>>> +    setup_initial_mapping(second, first, zeroeth,
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&__init_begin),
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&__init_end),
->>>>> +                          (unsigned long)&__init_begin,
->>>>> +                          PTE_LEAF_DEFAULT | PTE_WRITABLE);
->>>>> +
->>>>> +    setup_initial_mapping(second, first, zeroeth,
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&_srodata),
->>>>> +                          LOAD_TO_LINK((unsigned
->>>>> long)&_erodata),
->>>>> +                          (unsigned long)(&_srodata),
->>>>> +                          PTE_VALID | PTE_READABLE);
->>>>> +
->>>>> +    setup_initial_mapping(second, first, zeroeth,
->>>>> +                          linker_addr_start,
->>>>> +                          linker_addr_end,
->>>>> +                          load_addr_start,
->>>>> +                          PTE_LEAF_DEFAULT | PTE_READABLE);
->>
->> ... this is not cover above. AFAIU, this is the one for the 1:1
->> mapping.
-> But there is no 1:1 mapping.
-> I thought that 1:1 mapping is when the physical address is equal to
-> 0x10020 then after MMU is enabled the virtual address will be the same
-> 0x10020 and mapped to 0x10020.
-> 
-> Probably I missed something but this code maps all linker addresses
-> to correspondent load addresses and it will be 1:1 only in case when
-> load address is equal to linker address.
+You've done mfn_eq() conversions thus far, but the final 3 hunks of the
+patch could do with a conversion too.
 
-... here you say this is not the purpose.
-
-Also, if you don't intend to deal with load != link address yet, then 
-the following BUG_ON() needs to be updated:
-
-+    if (load_addr_start != linker_addr_start)
-+        BUG_ON((linker_addr_end > load_addr_start && load_addr_end > 
-linker_addr_start));
-
->>
->>>>
->>>> As I said in v1, you need to use a different set of page-table
->>>> here.
->>> If I understand you correctly I have to use a different set of
->>> page-
->>> table in case when it is possible that size of Xen will be larger
->>> then
->>> PAGE_SIZE. So I added to xen.lds.S a check to be sure that the size
->>> fits into PAGE_SIZE.
->>
->> This is not what I was referring to. I was pointing out that second,
->> first, zeroeth are exactly the same for all the callers. You want to
->> introduce a second set of zeroeth table. You will want to do the same
->> for first but it is not always used.
->>
->> Otherwise, this is not going to work if Xen is loaded at a different
->> address than the runtime.
-> Ok.
-> 
-> I understand what do you mean in general but still I am not sure that I
-> understand a particular case when I am sure that the size of Xen is no
-> bigger then 2MB and load address is aligned on 2Mb boundary.
-> 
-> The size of one l0 page table is 512 (1 << 9 ) entries which covers 4K
-> (1 << 12) * 512 = 2 Mb of memory so it should be fine.
-> All the callers in my case are trying to map addresses from
-> [linker_start, linker_end] which is not bigger then 2 MB and is aligned
-> on 2 MB boundary.
-
-I interpreted that your last call was meant to be for the 1:1 mapping 
-when load != link address. It looks like I was wrong, so the same 
-page-table should be OK.
-
-> 
->>
->> That said, when I spoke with Andrew yesterday, he mentioned that your
->> initial goal is to support the case where Xen is loaded at the
->> runtime
->> address. I understand this simplifies a lot the code and I told him I
->> was OK with that. However, it would be good to document what are your
->> goals in each series (this is not always clear what you skip on
->> purpose).
->>
->>>
->>>> Also, where do you guarantee that Xen will be loaded at a 2MB
->>>> aligned
->>>> address? (For a fact I know that UEFI is only guarantee 4KB
->>>> alignment).
->>> There is a check in setup_initial_pagetables:
->>>        BUG_ON(load_addr_start % (PAGE_ENTRIES * PAGE_SIZE) != 0);
->>
->> This is not very obvious the check is to confirm that Xen is probably
->> aligned. I would suggest to add a comment.
->>
->> Also, you might want to use XEN_PT_LEVEL_SIZE(..) to make it more
->> obvious what sort of alignment you are trying to enforce.
-> I will update add the comment and use XEN_PT_LEVEL_SIZE(...) instead.
->>
->>>>> +        la      sp, cpu0_boot_stack
->>>>> +        li      t0, STACK_SIZE
->>>>> +        add     sp, sp, t0
->>>>> +
->>>>> +        /*
->>>>> +         * Re-init an address of exception handler as it was
->>>>> overwritten  with
->>>>> +         * the address of the .L_mmu_is_enabled label.
->>>>> +         * Before jump to trap_init save return address of
->>>>> enable_mmu() to
->>>>> +         * know where we should back after enable_mmu() will
->>>>> be
->>>>> finished.
->>>>> +         */
->>>>> +        mv      s0, ra
->>>>> +        lla     t0, trap_init
->>>>> +        jalr    ra, t0
->>>>> +
->>>>> +        /*
->>>>> +         * Re-calculate the return address of enable_mmu()
->>>>> function for case
->>>>> +         * when linker start address isn't equal to load start
->>>>> address
->>>>> +         */
->>>>> +        add     s0, s0, t1
->>>>> +        mv      ra, s0
->>>>> +
->>>>> +        ret
->>>>
->>>> Missing ENDPROC?
->>> I haven't seen the usage of ENDPROC for RISC-V so it looks like it
->>> is
->>> not necessary.
->>
->> Ok. Would the objdump be able to report the function properly then? I
->> know that on Arm, it was necessary report assembly function properly.
-> It is fine for RISC-V:
-> 
-> Disassembly of section .text:
-> 
-> 0000000000200000 <_start>:
->    200000:       10401073                csrw    sie,zero
->    200004:       6299                    lui     t0,0x6
-> ...
->    20003c:       00000013                nop
-> 
-> 0000000000200040 <enable_mmu>:
->    200040:       0003a297                auipc   t0,0x3a
-> ...
->    20009e:       941a                    add     s0,s0,t1
->    2000a0:       80a2                    mv      ra,s0
->    2000a2:       8082                    ret
->          ...
-> 
-> 00000000002000b0 <__bitmap_empty>:
->    2000b0:       1141                    addi    sp,sp,-16
->    2000b2:       e422                    sd      s0,8(sp)
->    2000b4:       0800                    addi    s0,sp,16
-> ...
-
-Perfect thanks!
-
-Cheers,
-
--- 
-Julien Grall
+With that, and subject to a suitable rename of the macros ahead of this
+change, Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
