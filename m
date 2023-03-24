@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58CCDC6FD1C
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Mar 2023 20:07:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.514403.796577 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 571AEC6FD20
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Mar 2023 20:14:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.514411.796603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfngl-0000du-Sp; Fri, 24 Mar 2023 20:07:03 +0000
+	id 1pfnoE-0002vD-Uw; Fri, 24 Mar 2023 20:14:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 514403.796577; Fri, 24 Mar 2023 20:07:03 +0000
+Received: by outflank-mailman (output) from mailman id 514411.796603; Fri, 24 Mar 2023 20:14:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pfngl-0000dn-Q1; Fri, 24 Mar 2023 20:07:03 +0000
-Received: by outflank-mailman (input) for mailman id 514403;
- Fri, 24 Mar 2023 20:07:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pfnoE-0002v6-SJ; Fri, 24 Mar 2023 20:14:46 +0000
+Received: by outflank-mailman (input) for mailman id 514411;
+ Fri, 24 Mar 2023 20:14:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GJ5Y=7Q=citrix.com=prvs=4404309fd=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pfngk-0000dh-RP
- for xen-devel@lists.xenproject.org; Fri, 24 Mar 2023 20:07:02 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6ec6d8ba-ca7f-11ed-85db-49a42c6b2330;
- Fri, 24 Mar 2023 21:07:00 +0100 (CET)
+ id 1pfnoD-0002v0-3t
+ for xen-devel@lists.xenproject.org; Fri, 24 Mar 2023 20:14:45 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8089ebc8-ca80-11ed-b464-930f4c7d94ae;
+ Fri, 24 Mar 2023 21:14:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,157 +38,264 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ec6d8ba-ca7f-11ed-85db-49a42c6b2330
+X-Inumbo-ID: 8089ebc8-ca80-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1679688420;
+  d=citrix.com; s=securemail; t=1679688879;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=uUNdOr0iq5uq2KSc6DtNwrAIhxFGe0jPBBuBvAvxQ2k=;
-  b=TzRXSsEQ2fwW5omBJkE/oddLVN1CHG0CVjymopUTE/vjFf66Xg+BQO44
-   uRlGL3jeCUdenSJ1QEusoABwaS2NM7yhR2Cn8OmX9eCKEueWyeIwbWMAz
-   OgbGWcYqvEFSug6MhJUeWJXpBK9xPIBrhrMhYCRmMmlbOhoIs70dEg4ap
-   I=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=6+X5iWEq4/xfHK18TenmEa1/hd5O+w32aYVsdrJSDGQ=;
+  b=DeoTjrhbwj7d9zvcQQqNEWsHHdMpA4TSwhqAd89hwWqAi4mGxfr0QiJb
+   RoViHGWSMoN+F2nQXLS7aRgIetzNzHza8HAuMXyhxgOd8uf0Suthq9/n9
+   EUKumgVryKhlHAakDA8nVaco/P4TXcR9rX4esaPvUwXj5sEdJbxcpOg0G
+   Y=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 102273567
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 104684418
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:oXklR6klGuaVnK50UZIoxF7o5gyeJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xJKCmGDPazZY2WkL9olPYji/UxV7JGHyIQySQZrqH03QSMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5gOGzRH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- c1EBWAzcg3Eu+G7yraEVu1JhdkSNvC+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQth/A/
- DiZpDmnXXn2MvSixCqH/FOegNTdkATcX7gZN+24y+VT1Qj7Kms7V0RNCArTTeOColWlR9tVJ
- kgQ+ywvhas/7kqmSp/6RRLQiHuFtR4VX5xXCf837CmEz6aS6AGcbkAPRyRNb9EOv8YsSTsnk
- FSOmrvBFTFp9bGYV3+Z3rOVti+pfzgYK3cYYi0JRhdD5MPsyLzflTqWEIwlSvTsyISoR3epm
- WviQDUCa6s7vJImh5un4Bf7gD+moqfVSis2+zTNZzfwhu9mX7JJd7BE+HCCs6kRctjEFALZ1
- JQXs5PAtb5TVPlhgATIGbxQR+/xup5pJRWG2TZS848dGyNBEpJJVaRZ+3lAKUhgKa7okhe5M
- RaI6Wu9CHK+VUZGjJObgKrrUazGNYC6SbzYugn8N7KimKRZeg6d5z1JbkWNxW3rm0VEufhhZ
- sbFIZ30VCdBUPkPIN+KqwA1j9cWKt0WnzuPFfgXMTz+uVZhWJJlYehcawbfBgzIxKiFvB/U4
- 75iCid+8D0GCLeWSnCOoeYuwaUicSBT6Wbe95YGKYZu42NORAkcNhMm6ex/INM/z/wMzI8lP
- BiVAydl9bY2vlWfQS3iV5ypQOqHsUpXxZ7jARERAA==
-IronPort-HdrOrdr: A9a23:zMOWcazvdlHt657PXv1lKrPwIr1zdoMgy1knxilNoH1uHvBw8v
- rEoB1173DJYVoqNk3I++rhBEDwexLhHPdOiOF6UItKNzOW21dAQrsSiLfK8nnNHDD/6/4Y9Y
- oISdkbNDQoNykZsfrH
+IronPort-Data: A9a23:776MNajaPYBG7WmjQWu4yn5QX161WxAKZh0ujC45NGQN5FlHY01je
+ htvDWGFPK2DYTfwLtF3PYjj9hkB75GAnNBiT1Bk+C09Q3wb9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsy+qWi0N8klgZmP6sT5wWCzyN94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tQoLzkIVBa9mtir2bGmbrI1nvkfKu3CadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
+ pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
+ j6YrzilW0Fy2Nq35WqiwmP9psv0sQilUtNMKrKU/OFyuQjGroAUIEJPDgbqyRWjsWauVtQaJ
+ 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O+E37QCly6zK4h2YDGwJUj5AbtM9sMY8Azct0
+ zehvfnkGDhuu729Um+G+/GfqjbaETMOMWYIaCsATA0Ey9ruuoc+ilTIVNkLOLGxps34H3f32
+ T/ihCojg7Qei+Yb2qP9+krI6w9AvbCQEFRzvF+OGDv4sEUgPtXNi5GUBUbz3fFJKbyfcES7o
+ WEHhuzFtfgzMZepvXnYKAkSJ41F98ppIRWF3wE+Qcd8rW/1k5KwVdsOuW8jfS+FJu5BIGa0O
+ xGL5Gu98bcJZBOXgblLj5Vd4ijA5YzpDpzbW//ddbKiibAhJVbcrEmCiaN9tl0BcXTAcollY
+ /93ie72UR4n5V1PlVJavds1374x3TwZzmjOX539xBnP+ePAOy/LGexdaQrVN71RAEa4TOL9r
+ b5i2zaikU0DAIUSnAGOmWLsEbz6BSdiXs2nwyCmXuWCPhBnCAkcNhMl+pt4I9YNt/0Mxo/1E
+ oSVBhcwJKzX2SeWdm1nqxlLNNvSYHqIhS1lZnN2bQ7xgRDOo++Htc8iSnf+RpF/nMQL8BK+Z
+ 6JaEylcKpyjkgj6xgk=
+IronPort-HdrOrdr: A9a23:TxsXhKh1KVItDjIE/hnteY+KanBQXtYji2hC6mlwRA09TySZ//
+ rBoB19726RtN9xYgBHpTnuAsm9qB/nmaKdgrNhWItKPjOW21dARbsKheCJrgEIcxeOkdK1vp
+ 0AT0ERMrLN5CBB/KTH3DU=
 X-IronPort-AV: E=Sophos;i="5.98,288,1673931600"; 
-   d="scan'208";a="102273567"
+   d="scan'208";a="104684418"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH] CI: Remove llvm-8 from the Debian Stretch container
-Date: Fri, 24 Mar 2023 20:06:54 +0000
-Message-ID: <20230324200654.3245297-1-andrew.cooper3@citrix.com>
+	<anthony.perard@citrix.com>, Demi Marie Obenour
+	<demi@invisiblethingslab.com>, George Dunlap <George.Dunlap@eu.citrix.com>,
+	Jan Beulich <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>, Julien Grall <julien@xen.org>
+Subject: [PATCH] configure: Drop --enable-githttp
+Date: Fri, 24 Mar 2023 20:14:04 +0000
+Message-ID: <20230324201404.3247572-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-For similar reasons to c/s a6b1e2b80fe20.  While this container is still
-build-able, all the other problems with explicitly-versioned compilers remain.
+Following Demi's work to use HTTPS everywhere, all users of GIT_HTTP have
+been removed from the build system.  Drop the configure knob.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Anthony PERARD <anthony.perard@citrix.com>
+CC: Demi Marie Obenour <demi@invisiblethingslab.com>
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Doug Goldstein <cardoe@cardoe.com>
-
-This will require backporting to older trees, but there's already a list it
-can be added too.
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
 ---
- automation/build/debian/stretch-llvm-8.list |  3 ---
- automation/build/debian/stretch.dockerfile  | 12 ---------
- automation/gitlab-ci/build.yaml             | 27 ---------------------
- 3 files changed, 42 deletions(-)
- delete mode 100644 automation/build/debian/stretch-llvm-8.list
+ INSTALL               |  5 -----
+ config/Tools.mk.in    |  6 ------
+ config/Toplevel.mk.in |  1 -
+ configure             | 27 ---------------------------
+ configure.ac          |  1 -
+ tools/configure       | 27 ---------------------------
+ tools/configure.ac    |  1 -
+ 7 files changed, 68 deletions(-)
 
-diff --git a/automation/build/debian/stretch-llvm-8.list b/automation/build/debian/stretch-llvm-8.list
-deleted file mode 100644
-index 590001ca81e8..000000000000
---- a/automation/build/debian/stretch-llvm-8.list
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# Strech LLVM 8 repos
--deb https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
--deb-src https://apt.llvm.org/stretch/ llvm-toolchain-stretch-8 main
-diff --git a/automation/build/debian/stretch.dockerfile b/automation/build/debian/stretch.dockerfile
-index 2c086b197cba..1af6c691f8f4 100644
---- a/automation/build/debian/stretch.dockerfile
-+++ b/automation/build/debian/stretch.dockerfile
-@@ -54,15 +54,3 @@ RUN apt-get update && \
-         apt-get autoremove -y && \
-         apt-get clean && \
-         rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
--
--RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
--COPY stretch-llvm-8.list /etc/apt/sources.list.d/
--
--RUN apt-get update && \
--    apt-get --quiet --yes install \
--        clang-8 \
--        lld-8 \
--        && \
--        apt-get autoremove -y && \
--        apt-get clean && \
--        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 820cc0af83bd..3547aa419097 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -28,13 +28,6 @@
-     CXX: clang++
-     clang: y
+diff --git a/INSTALL b/INSTALL
+index 0d3eb89f0298..3816c17dcde8 100644
+--- a/INSTALL
++++ b/INSTALL
+@@ -89,11 +89,6 @@ from a wrong location. Compiling the tools with rpath will force the
+ linker to look in the correct location.
+   --enable-rpath
  
--.clang-8-tmpl:
--  variables: &clang-8
--    CC: clang-8
--    CXX: clang++-8
--    LD: ld.lld-8
--    clang: y
+-During build in a git checkout the buildsystem needs to download
+-additional tools such as qemu. This is done with either the native git
+-protocol, or via http if this option is enabled.
+-  --enable-githttp
 -
- .x86-64-build-tmpl:
-   <<: *build
-   variables:
-@@ -99,16 +92,6 @@
-   variables:
-     <<: *clang
+ Disable xenstat and xentop monitoring tools.
+   --disable-monitors
  
--.clang-8-x86-64-build:
--  extends: .x86-64-build
--  variables:
--    <<: *clang-8
--
--.clang-8-x86-64-build-debug:
--  extends: .x86-64-build-debug
--  variables:
--    <<: *clang-8
--
- .clang-x86-32-build:
-   extends: .x86-32-build
-   variables:
-@@ -285,16 +268,6 @@ debian-stretch-clang-debug:
-   variables:
-     CONTAINER: debian:stretch
+diff --git a/config/Tools.mk.in b/config/Tools.mk.in
+index d0d460f922d8..6abb377564db 100644
+--- a/config/Tools.mk.in
++++ b/config/Tools.mk.in
+@@ -37,12 +37,6 @@ LIBNL3_LIBS         := @LIBNL3_LIBS@
+ LIBNL3_CFLAGS       := @LIBNL3_CFLAGS@
+ XEN_TOOLS_RPATH     := @rpath@
  
--debian-stretch-clang-8:
--  extends: .clang-8-x86-64-build
--  variables:
--    CONTAINER: debian:stretch
+-# Download GIT repositories via HTTP or GIT's own protocol?
+-# GIT's protocol is faster and more robust, when it works at all (firewalls
+-# may block it). We make it the default, but if your GIT repository downloads
+-# fail or hang, please pass --enable-githttp to configure.
+-GIT_HTTP            ?= @githttp@
 -
--debian-stretch-clang-8-debug:
--  extends: .clang-8-x86-64-build-debug
--  variables:
--    CONTAINER: debian:stretch
+ # Optional components
+ XENSTAT_XENTOP      := @monitors@
+ OCAML_TOOLS         := @ocamltools@
+diff --git a/config/Toplevel.mk.in b/config/Toplevel.mk.in
+index 4ecacbb37d68..4db7eafcab5d 100644
+--- a/config/Toplevel.mk.in
++++ b/config/Toplevel.mk.in
+@@ -1,2 +1 @@
+ SUBSYSTEMS               := @SUBSYSTEMS@
+-GIT_HTTP                 ?= @githttp@
+diff --git a/configure b/configure
+index f5cd3c286b55..99f8434cbf64 100755
+--- a/configure
++++ b/configure
+@@ -594,7 +594,6 @@ stubdom
+ tools
+ xen
+ subdirs
+-githttp
+ DEBUG_DIR
+ XEN_DUMP_DIR
+ XEN_PAGING_DIR
+@@ -673,7 +672,6 @@ with_xen_scriptdir
+ with_xen_dumpdir
+ with_rundir
+ with_debugdir
+-enable_githttp
+ enable_xen
+ enable_tools
+ enable_stubdom
+@@ -1309,8 +1307,6 @@ Optional Features:
+   --disable-option-checking  ignore unrecognized --enable/--with options
+   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+-  --enable-githttp        Download GIT repositories via HTTP (default is
+-                          DISABLED)
+   --disable-xen           Disable build and install of xen
+   --disable-tools         Disable build and install of tools
+   --enable-stubdom        Enable build and install of stubdom
+@@ -2124,29 +2120,6 @@ DEBUG_DIR=$debugdir_path
+ 
+ 
+ 
+-# Check whether --enable-githttp was given.
+-if test "${enable_githttp+set}" = set; then :
+-  enableval=$enable_githttp;
+-fi
 -
- debian-stretch-gcc:
-   extends: .gcc-x86-64-build
-   variables:
+-
+-if test "x$enable_githttp" = "xno"; then :
+-
+-    ax_cv_githttp="n"
+-
+-elif test "x$enable_githttp" = "xyes"; then :
+-
+-    ax_cv_githttp="y"
+-
+-elif test -z $ax_cv_githttp; then :
+-
+-    ax_cv_githttp="n"
+-
+-fi
+-githttp=$ax_cv_githttp
+-
+-
+-
+ case "$host_cpu" in
+     i[3456]86|x86_64)
+         arch_enable_stubdom=y
+diff --git a/configure.ac b/configure.ac
+index 3aea40715307..19d9311c2ae4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -17,7 +17,6 @@ m4_include([m4/subsystem.m4])
+ m4_include([m4/paths.m4])
+ 
+ AX_XEN_EXPAND_CONFIG()
+-AX_ARG_DEFAULT_DISABLE([githttp], [Download GIT repositories via HTTP])
+ 
+ dnl mini-os is only ported to certain platforms
+ case "$host_cpu" in
+diff --git a/tools/configure b/tools/configure
+index dae377c98252..bb5b1ae45067 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -714,7 +714,6 @@ ovmf
+ xsmpolicy
+ ocamltools
+ monitors
+-githttp
+ rpath
+ werror
+ DEBUG_DIR
+@@ -807,7 +806,6 @@ with_rundir
+ with_debugdir
+ enable_werror
+ enable_rpath
+-enable_githttp
+ enable_monitors
+ enable_ocamltools
+ enable_xsmpolicy
+@@ -1494,8 +1492,6 @@ Optional Features:
+   --disable-werror        Build tools without -Werror (default is ENABLED)
+   --enable-rpath          Build tools with -Wl,-rpath,LIBDIR (default is
+                           DISABLED)
+-  --enable-githttp        Download GIT repositories via HTTP (default is
+-                          DISABLED)
+   --disable-monitors      Disable xenstat and xentop monitoring tools (default
+                           is ENABLED)
+   --disable-ocamltools    Disable Ocaml tools (default is ENABLED)
+@@ -4156,29 +4152,6 @@ rpath=$ax_cv_rpath
+ 
+ 
+ 
+-# Check whether --enable-githttp was given.
+-if test "${enable_githttp+set}" = set; then :
+-  enableval=$enable_githttp;
+-fi
+-
+-
+-if test "x$enable_githttp" = "xno"; then :
+-
+-    ax_cv_githttp="n"
+-
+-elif test "x$enable_githttp" = "xyes"; then :
+-
+-    ax_cv_githttp="y"
+-
+-elif test -z $ax_cv_githttp; then :
+-
+-    ax_cv_githttp="n"
+-
+-fi
+-githttp=$ax_cv_githttp
+-
+-
+-
+ # Check whether --enable-monitors was given.
+ if test "${enable_monitors+set}" = set; then :
+   enableval=$enable_monitors;
+diff --git a/tools/configure.ac b/tools/configure.ac
+index 3a2f6a2da9e0..9bcf42f233f1 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -84,7 +84,6 @@ AX_XEN_EXPAND_CONFIG()
+ # Enable/disable options
+ AX_ARG_DEFAULT_ENABLE([werror], [Build tools without -Werror])
+ AX_ARG_DEFAULT_DISABLE([rpath], [Build tools with -Wl,-rpath,LIBDIR])
+-AX_ARG_DEFAULT_DISABLE([githttp], [Download GIT repositories via HTTP])
+ AX_ARG_DEFAULT_ENABLE([monitors], [Disable xenstat and xentop monitoring tools])
+ AX_ARG_DEFAULT_ENABLE([ocamltools], [Disable Ocaml tools])
+ AX_ARG_DEFAULT_ENABLE([xsmpolicy], [Disable XSM policy compilation])
 -- 
 2.30.2
 
