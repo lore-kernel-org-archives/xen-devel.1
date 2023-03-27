@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55678C761A6
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50645C76195
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 19:42:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.515454.798344 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.515455.798353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgsiu-0002yX-6H; Mon, 27 Mar 2023 19:41:44 +0000
+	id 1pgsiv-0003Dq-DG; Mon, 27 Mar 2023 19:41:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 515454.798344; Mon, 27 Mar 2023 19:41:44 +0000
+Received: by outflank-mailman (output) from mailman id 515455.798353; Mon, 27 Mar 2023 19:41:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgsiu-0002yQ-2e; Mon, 27 Mar 2023 19:41:44 +0000
-Received: by outflank-mailman (input) for mailman id 515454;
- Mon, 27 Mar 2023 19:41:42 +0000
+	id 1pgsiv-0003Dj-AJ; Mon, 27 Mar 2023 19:41:45 +0000
+Received: by outflank-mailman (input) for mailman id 515455;
+ Mon, 27 Mar 2023 19:41:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kO+W=7T=citrix.com=prvs=443697bea=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pgsis-0002j7-De
- for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 19:41:42 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 62f618e2-ccd7-11ed-b464-930f4c7d94ae;
- Mon, 27 Mar 2023 21:41:39 +0200 (CEST)
+ id 1pgsit-0002j7-ET
+ for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 19:41:43 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 65a50857-ccd7-11ed-b464-930f4c7d94ae;
+ Mon, 27 Mar 2023 21:41:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,158 +38,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62f618e2-ccd7-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 65a50857-ccd7-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1679946098;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=zXrYZq0YbjQfrHz+D24bJPE28LLfa/PMxOmz2kUZMhI=;
-  b=ctJbWgX1qxk3abg3PZsD1sPghlIXUnMqBAigEjSdWNbBttBzjZj3iIxr
-   PXhf5RLym/mtS3qTCXAD8sipb2h7WBDFFYXMh4h754XTiqS3Sh+/8wDno
-   7ygldHb2najrY/Nt9Al3QhwvUROdVu8JKXk7j6uzpMcs2XzPhrd2apW8Z
-   A=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1679946101;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=+37pQAwDXobSUp4Mzig8HvM3vol/fpBbo+6RTtS8o+U=;
+  b=NFAbki5vAz5tR0Sc3/Q7kmMPUkKSL57zbrlv+wN1XLXZqmVyts0wVHN4
+   xN1GEwva1h9sGvb2x9S3EtQ8hvEMV+/Jfe0hEVEE0kE/wkfQqv8eoQfaD
+   oXzU23nbtv4KZ2RD257bTxg7F+xgU9632xTvEyw2z1r1fOuHHtWfe7XMz
+   E=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 103115614
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 103008789
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:pgESI6A8heWN5RVW/1Pjw5YqxClBgxIJ4kV8jS/XYbTApD0ngTRRz
- WoeDz2Eb/yJZzD3LtlwPoy+oxtQucLWy4RmQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
- yk6QoOdRCzhZiaE/n9BCpC48T8nk/nOHuGmYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
- t7pyyHlEAbNNwVcbyRFu8pvlDs15K6p4GhC4QRkDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
- uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
- jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIwq/R2HF9L/
- +EhFnMgdD3c2824/+u/Y7w57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
- pdHL2M1N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9I4TRHJwIwB/Ez
- o7A1073OUpZbMeU8iqI4339grbt3im8dJ1HQdVU8dY12QbOlwT/EiY+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yFamlBMBX9tbE8Uh9RqAjKHT5m6xGWwsXjNHLts8u6cLqScCj
- wHT2YmzXHo27ePTECjGnluJkd+sEXkHLHI8YCUZdDVGzsPO/90cgC2WSv82RcZZkebJ9SHML
- yGi9XZh1utN0JRQj81X7nic3Wvy+8Ghohodo1yOAzn7tl4RiJuNPdTA1LTN0RpXwG91pHGlt
- WNMpcWR5ftm4XqlxH3UG7Vl8F1ECp+43Nzgbb1HRcNJG8yFoSLLQGypyGgWyL1VGsgFYyT1R
- 0TYpBlc4pReVFPzM/AmMt7oW591l/a4fTgAahwyRoAWCnSWXFHvwc2TTRTIgzCFfLYEyMnTx
- qt3ge7zVC1HWMyLPRK9RvsH0K9D+x3SMVj7HMihpzz+iOr2WZJgYetdWLd4RrxjvfzsTcS82
- 4o3CvZmPD0GCbSlOHWOod9KRb3IRFBiba3LRwVsXrbrCmJb9KsJUJc9HZtJl1RZoplo
-IronPort-HdrOrdr: A9a23:GqQEYaMZId+AvMBcTgajsMiBIKoaSvp037Eqv3oBLyC9E/b5qy
- nKpp8mPHDP6Qr5NEtQ/OxoW5PwOE80l6QFmbX5VI3KNGaJhILBFvAY0WKI+UyFJ8SRzJ876Y
- 5QN4VFJZnXK3MSt6rHCQ+DeeoI8Z283Jrtr8H44FdCcTpDVoFHyENCJjvzKDwUeCB2QZU4EZ
- aH5tlKvVObFEg/ZNigG38AU/PiirTw5fDbXSI=
+IronPort-Data: A9a23:U/9cFqnuwuEzBP100vdnyHjo5gyMJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJOXWmHaa6MMTTxKtF3O9ix808Bv5/QytdjHAFlqS0wRCMWpZLJC+rCIxarNUt+DCFhoGFPt
+ JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
+ LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5gCGzRH5MbpETU2PByqgKmVrNrbSq
+ 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
+ f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
+ e0ydBsVcC+Eu9CN/Z6wVvVTv8gRE/C+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
+ ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQth/A/
+ TqerzupU3n2MvSG8wvf2FuTqtWWvgzZcblNLIOn98dT1Qj7Kms7V0RNCArTTeOCol6zXZdTJ
+ lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4Mcc39QWMwar8+BuCCy4PSTspQMMinN87Q3otz
+ FDhoj/yLWUx6vvPEyvbr+rK62roYkD5MFPuewcVZ1cu+8fcp70BtS/jRcp/L5e5vOLMTGSYL
+ y+xkMQuu1kCpZdViPTlow2d2GrESovhFVBsuFiONo6xxkYgPdP+OdT1gbTOxawYRLt1WGVtq
+ 5TtdyK2yOkVRa+AmyWWKAnmNOH4vq3VWNEwbLMGInXAy9hO0yT5FWyoyGsiTHqFyPosdz7ze
+ 1P0sghM/pJVN3bCRfYpPNPgV516lve6S4yNuhXogjxmOMAZmOivoklTibO4hTixwCDAb4lmU
+ XtkTSpcJSlDUvk2pNZHb+wczaUq1kgD+I8nfriil07P+ePHNBaopUItbAPmRvon95mNvAi92
+ 48Zb6NmPT0DCryhCsQWmKZPRW03wY8TXMmv8JYLL77Se2KL2ggJUpfs/F/oQKQ994w9qwsC1
+ ivVtpNwoLYnuUD6FA==
+IronPort-HdrOrdr: A9a23:xBZJf6ADUn2ktp3lHelr55DYdb4zR+YMi2TC1yhKOHpom62j9/
+ xG+c5x6faaslcssR0b6LW90cq7MArhHPxOkPEs1N6ZNWGI1ldARLsSlrcKqAeQfxEWmNQtsp
+ tIQuxSMvC1K35Q5PyX3OC/Kbwd6ejCyoyTwc356FhMYz1QQ5xBySA8MCqne3cGJzVuNN43FJ
+ +R/MpVqyDIQxkqR86mHGQCW+TZh/CjruOFXSI7
 X-IronPort-AV: E=Sophos;i="5.98,295,1673931600"; 
-   d="scan'208";a="103115614"
+   d="scan'208";a="103008789"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Sergey Dyasli
 	<sergey.dyasli@citrix.com>
-Subject: [PATCH 4/5] x86/ucode: Cache results in microcode_scan_module()
-Date: Mon, 27 Mar 2023 20:41:25 +0100
-Message-ID: <20230327194126.3573997-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/5] x86/ucode: Fixes to bootstrap_map() handling
+Date: Mon, 27 Mar 2023 20:41:21 +0100
+Message-ID: <20230327194126.3573997-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230327194126.3573997-1-andrew.cooper3@citrix.com>
-References: <20230327194126.3573997-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-When microcode_scan_module() is used, it's used twice.
+Stumbled on to while trying to fix bugs elsewhere with bootstrap_map().  I
+don't know if I'd conciously reaslised how bogus microcode_init() was
+previously, but it absolutely can't stay...
 
-The caching of the bootstrap_map() pointer in ucode_blob.data is buggy for
-multiple reasons and is going to be removed.
+Andrew Cooper (5):
+  xen/earlycpio: Drop nextoff parameter
+  x86/ucode: Fold early_update_cache() into microcode_init_cache()
+  x86/ucode: Fold early_microcode_update_cpu() into early_microcode_init()
+  x86/ucode: Cache results in microcode_scan_module()
+  x86/ucode: Drop ucode_mod and ucode_blob
 
-Right now, the boot flow depends on the second pass over
-bootstrap_map()/find_cpio_data() altering ucode_blob.data to use the directmap
-alias of the CPIO module, where previously it caches the early boostrap
-mapping.
+ xen/arch/x86/cpu/microcode/core.c | 247 +++++++++++++++---------------
+ xen/common/earlycpio.c            |   8 +-
+ xen/include/xen/earlycpio.h       |   3 +-
+ 3 files changed, 128 insertions(+), 130 deletions(-)
 
-If the scan is successful, it will be successful the second time too, but
-there's no point repeating the work.  Cache the module index, offset and size
-to short circuit things the second time around.
-
-While rearranging this, reduce the scope of the internals of the loop,
-changing the type of _blob_start to void and droping the dead stores into cd.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Sergey Dyasli <sergey.dyasli@citrix.com>
----
- xen/arch/x86/cpu/microcode/core.c | 34 ++++++++++++++++++++++++++-----
- 1 file changed, 29 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 4d2a896fe78d..7d32bc13db6f 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -152,14 +152,30 @@ void __init microcode_scan_module(
-     unsigned long *module_map,
-     const multiboot_info_t *mbi)
- {
-+    static __initdata struct { /* Cached details of a previous successful scan. */
-+        unsigned long offset;  /* Offset from the start of the CPIO archive. */
-+        unsigned long size;    /* Size of the CPIO file. */
-+        unsigned int mod_idx;  /* Which multiboot module the CPIO archive is. */
-+    } scan;
-+
-     module_t *mod = (module_t *)__va(mbi->mods_addr);
--    uint64_t *_blob_start;
--    unsigned long _blob_size;
--    struct cpio_data cd;
-     const char *p = NULL;
-     int i;
- 
-     ucode_blob.size = 0;
-+
-+    if ( scan.mod_idx ) /* Previous scan was successful. */
-+    {
-+        void *map = bootstrap_map(&mod[scan.mod_idx]);
-+
-+        if ( !map )
-+            return;
-+
-+        ucode_blob.size = scan.size;
-+        ucode_blob.data = map + scan.offset;
-+        return;
-+    }
-+
-     if ( !ucode_scan )
-         return;
- 
-@@ -175,6 +191,10 @@ void __init microcode_scan_module(
-      */
-     for ( i = 1 /* Ignore dom0 kernel */; i < mbi->mods_count; i++ )
-     {
-+        void *_blob_start;
-+        unsigned long _blob_size;
-+        struct cpio_data cd;
-+
-         if ( !test_bit(i, module_map) )
-             continue;
- 
-@@ -186,15 +206,19 @@ void __init microcode_scan_module(
-                    i, _blob_size);
-             continue;
-         }
--        cd.data = NULL;
--        cd.size = 0;
-+
-         cd = find_cpio_data(p, _blob_start, _blob_size);
-         if ( cd.data )
-         {
-+            scan.mod_idx = i;
-+            scan.offset  = cd.data - _blob_start;
-+            scan.size    = cd.size;
-+
-             ucode_blob.size = cd.size;
-             ucode_blob.data = cd.data;
-             break;
-         }
-+
-         bootstrap_map(NULL);
-     }
- }
 -- 
 2.30.2
 
