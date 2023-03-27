@@ -4,36 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1382C761A6
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 10:09:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.515117.797684 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B651C7619A
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 10:13:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.515132.797704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgjnJ-0005G5-2j; Mon, 27 Mar 2023 10:09:41 +0000
+	id 1pgjqH-0007gK-Ux; Mon, 27 Mar 2023 10:12:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 515117.797684; Mon, 27 Mar 2023 10:09:41 +0000
+Received: by outflank-mailman (output) from mailman id 515132.797704; Mon, 27 Mar 2023 10:12:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgjnI-0005Fy-Uo; Mon, 27 Mar 2023 10:09:40 +0000
-Received: by outflank-mailman (input) for mailman id 515117;
- Mon, 27 Mar 2023 10:09:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pgjqH-0007gD-RJ; Mon, 27 Mar 2023 10:12:45 +0000
+Received: by outflank-mailman (input) for mailman id 515132;
+ Mon, 27 Mar 2023 10:12:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jSZI=7T=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1pgjnG-00050r-RM
- for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 10:09:39 +0000
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7a4b4b25-cc87-11ed-85db-49a42c6b2330;
- Mon, 27 Mar 2023 12:09:37 +0200 (CEST)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id E61AD5C014D;
- Mon, 27 Mar 2023 06:09:35 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Mon, 27 Mar 2023 06:09:35 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 27 Mar 2023 06:09:34 -0400 (EDT)
+ <SRS0=d31z=7T=citrix.com=prvs=4435eb1af=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1pgjqG-0007g0-W3
+ for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 10:12:45 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e7604559-cc87-11ed-b464-930f4c7d94ae;
+ Mon, 27 Mar 2023 12:12:41 +0200 (CEST)
+Received: from mail-mw2nam10lp2101.outbound.protection.outlook.com (HELO
+ NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.101])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 27 Mar 2023 06:12:38 -0400
+Received: from SJ0PR03MB6360.namprd03.prod.outlook.com (2603:10b6:a03:395::11)
+ by MN2PR03MB5214.namprd03.prod.outlook.com (2603:10b6:208:1ef::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.30; Mon, 27 Mar
+ 2023 10:12:36 +0000
+Received: from SJ0PR03MB6360.namprd03.prod.outlook.com
+ ([fe80::48a7:d1ab:897:acda]) by SJ0PR03MB6360.namprd03.prod.outlook.com
+ ([fe80::48a7:d1ab:897:acda%6]) with mapi id 15.20.6178.041; Mon, 27 Mar 2023
+ 10:12:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,404 +51,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a4b4b25-cc87-11ed-85db-49a42c6b2330
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm2; t=1679911775; x=1679998175; bh=Xg
-	uvSU65OUXrBnKZJQwmkiD5FqnzcP7jvRUz9zeLO90=; b=aMBneFLq+4/izD/DW8
-	KxXqt90Boa11BIJIQB6bHIs9ppi2l069YpLX0KBFXJu5ydxzk6aD7zUgehpBNxdv
-	OhooZFZBDuFFdoQr2fzrUmtdgRAp7ksSbPTHmEirY940tws/nK1sXDPtABDNkC02
-	M4bPvjG/eYqEaJSgs9FKbkJz/zQKVonvJTOfCVBy9OGtGjmIj7Qnp04O8+M7ziEO
-	8odLp7PP8xr1N7bfehLPR+K6VjHfvZnTW71bDk7ZGzP0QRBO59Hc5eq9k0Ijm+0M
-	NvRroQRWiDsgHSLFSPCP9zvY+vkhK8O6U2u8LUGDQXIpzGJYRtpVq+7uNWJZxghQ
-	uCmA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1679911775; x=1679998175; bh=XguvSU65OUXrBnKZJQwmkiD5FqnzcP7jvRU
-	z9zeLO90=; b=kHOLYx/JlCG+qgSaWf4U+LeZ706+0kaLfwUeuDIYfecsDDPy13x
-	g4qA2nomzJYj3FaGBHy7gZulmz42s4uN9W9XwKZF/iqE8K+EQzg0nZwHtti+87+W
-	qG1UQuMyQM7z46wtPLbg8bOgmPtHridGl8OyqIb2UuuIYE8o8RFpNFUwgDlJQASf
-	PV77hXb58lvp15P5BSUuuw+G5dJer3Ip2Hz5OmzrC2z/HRc3H7l6bPL+dYu2Zlve
-	sGJ8I5Ni8oFUFy+8BL3QcuyiXluGFFnXf2VHUZGY6yU4s6avLPAsak2p+2CCoWPz
-	nAOxvvp46n6rf2vajUOZl6P+KIx4rKhN1EA==
-X-ME-Sender: <xms:X2shZF_e4MnxMFyfH5dWuRKok4MbhPeHbdWXOgmejCccIx7YHKFMWw>
-    <xme:X2shZJskEqaV5K8hHWQLi0_goszTZSoEIClwV2LxQLdQxxxXP-o3vMQsYg7wtcxgQ
-    _bJvdzUqj4EGQ>
-X-ME-Received: <xmr:X2shZDAw4SLcSQKEeGgSxGQMNFkRdjHokbbceD_Br0oDGgQp8btHo3Lh6DIkGZWKxYccEGpENGFL-qwF-YSur129BTOS3Ov4XCb6PpRbeCJ02_1Yxsvj>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdehvddgvdehucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
-    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
-    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
-    ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
-    khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:X2shZJcQUHzkVq1CP5KeS3YbouSSS8dIURGORuGGGka-gW86-W8J_A>
-    <xmx:X2shZKN-dlYdVhdwrxPWsDv0DGBX66854h1DW7qYtxpU4Eyy95LzNQ>
-    <xmx:X2shZLn5ZN9qvIRaCsoSlVFjwEf1IAntA5q99jld-IwjK5d2I3HzpQ>
-    <xmx:X2shZHqow4Yw_NaBAURLBhu_Qo85hlGerjRYvs8DXJdHay_FApvPwQ>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Paul Durrant <paul@xen.org>,
+X-Inumbo-ID: e7604559-cc87-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1679911961;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=uHFscnL0ZNL/uVUdYNF6Ze8Wzf1U5/EnxyRslIfM+3o=;
+  b=OmF05ytCcyBqelSlf/bw1BrclXcFNgYitKp28FfW37J3O241FzVo3Y7E
+   iJ2lWHv+ob4pTTiN9lmCtBiJvhKUtbGqdA7HgP8zelcUXCWde7TIRQlSd
+   l5nR6pelAAEKYavHnr2HSAkGVxwKHV1lM2OUuSZ+RqpfpvS5Lpt1z8uqe
+   I=;
+X-IronPort-RemoteIP: 104.47.55.101
+X-IronPort-MID: 103349369
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:8FH506i5GEfryhI9HrL4wpt7X161vREKZh0ujC45NGQN5FlHY01je
+ htvXmCFMv2NMGajeY9wbtywpxsAusDUx9IwQAU/rio9RSkb9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsy+qWi0N8klgZmP6sT5wWBzyB94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tQiMTAMcw/EutuNxavmZ7JRpZ4CEJXCadZ3VnFIlVk1DN4AaLWaG+Dv2oUd2z09wMdTAfzZe
+ swVLyJ1awjNaAFOPVFRD48imOCvhT/0dDgwRFC9/PJrpTSMilEsluG1abI5efTTLSlRtlyfq
+ W/cuXzwHzkRNcCFyCrD+XWp7gPKtXqjA9lORebmp5aGhnW47DYuSy8IW2C2sOKr03K4ePF9E
+ WYbr39GQa8asRbDosPGdxixunuNpBMfc9tWDewh6QuJx7bU4gCWHWwNRHhKb9lOnN87Q3km2
+ 0GEm/vtBCdzq/uFRHSF7LCWoDiufy8PIgcqZyYCQREU/trLr4Q6jxaJRdFmeIa3hNDoHTD7w
+ xiRsTMzwb4UiKYjyKGT7V3BxTW2qfD0ohUd4wzWWieg8Vl/bYv8P4iwswGDtLBHMZqTSUSHs
+ D4cgc+C4esSDJaL0iuQXOEKG7Lv7PGAWNHBvWNS81Aa32zF0xaekUp4uVmS+G8B3h44RALU
+IronPort-HdrOrdr: A9a23:JbacT6O7i48/6MBcTj+jsMiBIKoaSvp037Dk7TEKdfUzSL3rqy
+ nOpoVp6faaskdvZJhNo6H8BEDEewKtyXcX2/hhAV7BZnibhILAFugLnOiSoUyEakmOkZ866U
+ 4jSdkENDSaNykCsS+V2njBLz9t+qj4zEgn7d20859/JjsBV0ljhD0VNu/NKCFLrFEtP/UE/J
+ 323KR6TzzKQxUqhsDRPBk4dtmGmfXWmZL6QTNuPW9T1DWz
+X-IronPort-AV: E=Sophos;i="5.98,294,1673931600"; 
+   d="scan'208";a="103349369"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nCzqVzXFCapvSgsqnMLhIdPyKXt+OHh7A2rFzwEzxGLLCe7nQ2XMsrg/gO0N2W2HIR33qcX4aQug5eZENUNK6PorQ1qb0E9XNIe/p4nTuTxeckUj0QDo6JfIpZrHy9VjXKDpei3kPbb5lvd/gTSqKKWQYZSY67oowqm7yGbVK6KxqwP9SnljB0EVKshmbMbhP1JC0npqv01W4ISEo9pLarhbD1auV89/rYd19RooYfsFnfO2LInpfAVrxlWje3l9F2zb8MPgIlZM1hrMg3kkVyIIo6a3p1qJ5YPNPgr1fK5NrJmrrI4FJDH3dmZJ3NtwKYx6+J0oA8G0p/F+sjbsqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jo5dWKE2xHXN07tXbu3fqBhFzZpbMO/vJwx1vsjB3ks=;
+ b=cFdUMzmmzxmciJd40iFzvw1/IwkN6s1hj1tBXdxENcSSW4+1dtoFjl+gWLRKFxDZfLvBSD7dLT68Kx3BcM5pygWV/VJynmAjHe6EnS2+hPzGRMYTX/dii6O8ST1EQ35xDf7xPtDn9KRzqw2Ju8BK9aRMbcqD6QXFuvtHljcfevwbqwrFpeU4fdJA7tPKtvZmJ58wkOL3PO33ZgNnIKWdZWVLhAb1Fu7FvZ2Y1aIJxbZFup2ju4a1JZVv0gdFQBjcayg2buBmakK9SUpZwnkpMRIdQ0TNcn1y+/IZ20VMi8d0Am6j0UdQVPdFth0VQJ05y7EBuKecFrrA2nX/DXAVMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jo5dWKE2xHXN07tXbu3fqBhFzZpbMO/vJwx1vsjB3ks=;
+ b=FBxtkHGwEHXc3vrvaIVU/bTLlP+xqk1gvVir1po/Rt5P3tm7IzxCTdMaAvWgIf5/GEUkuJ0zuX07o7R6GPlqCdDaShAEX2Qaq8CORzfc2lMydiJYJogkQwjRFB7006K7Hdh5LUJFVo2Pk/Nmutm+PoYUtHsg6a+qdE8JZRTat/4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Date: Mon, 27 Mar 2023 12:12:29 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, Jason Andryuk <jandryuk@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] x86/mm: add API for marking only part of a MMIO page read only
-Date: Mon, 27 Mar 2023 12:09:15 +0200
-Message-Id: <f5381e06d92cccf9756ad00fd77f82fba98a9d80.1679911575.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.0fffd3f3080b5eeb8d22126eda6088734bb0c926.1679911575.git-series.marmarek@invisiblethingslab.com>
-References: <cover.0fffd3f3080b5eeb8d22126eda6088734bb0c926.1679911575.git-series.marmarek@invisiblethingslab.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v2 1/3] x86/msi: passthrough all MSI-X vector ctrl writes
+ to device model
+Message-ID: <ZCFsDbKfGvn7giN+@Air-de-Roger>
+References: <20230325024924.882883-1-marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230325024924.882883-1-marmarek@invisiblethingslab.com>
+X-ClientProxiedBy: LO2P123CA0051.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1::15) To SJ0PR03MB6360.namprd03.prod.outlook.com
+ (2603:10b6:a03:395::11)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|MN2PR03MB5214:EE_
+X-MS-Office365-Filtering-Correlation-Id: 607e278c-a68d-4b7a-4acb-08db2eabc945
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	xZbkJ7CNdW6GOsZ7LcCtgetlDEugYBcQ8xc5Zp5NZvZOyWJpbqVVno4RG2F/10P4XK+CuAySPHfra7LeRO4lbPT/03zrBlegMgY7c28QU3JDURyleIbKZ96Bql3pUpPUzAY0OduwglVL69KxDsB9nGPLM+mvME854TPidDo28/JBYgd4vjPop8SSPeTjqvTPNNU4TBu3Ky1KgsW0ZJYJ08G6LgaQkEim0LE7dQiZ4u6UEoPmwqKnoUmtApT9vOztpuVq3lVwNUTTW12t7Yfz3h4iVg5BXsdrTRULztHsCsfGsHFJtFsa6FUrWYOE2zyAaeKSPd2tGeIEJSLcHPdeI893z5qVs6nnwL8c8DlQasXoRAqnCnk+/LYs4ySsOkTfKFbbh4VAdOlT8lZqK758dgZJoy2sfA/SiescP43aTf7QIjB1A5DCRFSZtFsk5wD0KB1z6IjUbEjlQ26Tr1HULEmiIOQzrtN3kJl1WU8QwCF85sUhVKc3/nrDGU61YAfc8kJko+atVF0HHkBgahcaOgWNMNzVDpSoQyXUZYsMjaUhWk+9RZ5gY2i8MSqrM/Vw
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(7916004)(4636009)(39860400002)(136003)(346002)(366004)(396003)(376002)(451199021)(9686003)(6512007)(6506007)(26005)(41300700001)(6666004)(186003)(6486002)(83380400001)(66574015)(478600001)(54906003)(316002)(4326008)(38100700002)(2906002)(6916009)(8676002)(66476007)(66556008)(66946007)(85182001)(82960400001)(33716001)(86362001)(5660300002)(8936002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?M0VRS2hERG82dVB3R2wvZXA3MGNhaTlLT3Faa0tVQkhTai9TbnpkVzZUWW50?=
+ =?utf-8?B?a2JCNEd6TnVuVlZhVWpuVGFIQWUybGVFMEJ6QmFCN1VvV1RyTnpiblZLQzlp?=
+ =?utf-8?B?cjk4aDdsUFUwZmZLeG9nVGVIU3NVMnNMd0lEMTFEWnZxZERISzV6WlQ2OUpk?=
+ =?utf-8?B?bWszR1RkWm56a3ZtTllWcEVrYXpuWEVHUlVwYlZkbW0zcWx5OGQySmt1S1By?=
+ =?utf-8?B?WGNYZHk4eCtuUDYwQm14NXVzMnJYNFBITXRCamRzZ1o5c3BNK3VrU21kejJx?=
+ =?utf-8?B?WkhDRGNvR1J2TUt0ckYwdlU5d1IrSmZCMHBXUkNNSFRBMVR5UkhWeGxvSnNh?=
+ =?utf-8?B?ankzNTI2OS9mdUZneTVjYlhILzRYeTIwUVNneDVpcS9OY0FyVEVpT0QyOTdO?=
+ =?utf-8?B?aUFsK0QvNGVrK0h4RFBNY1o5ZGlEUGRhc1RjRTFNY1hUR21xTnNnUm1FdWZR?=
+ =?utf-8?B?U0NkOEpDTENhTlM4UjZxdmpLTjhHeWZRQVJSVXJvLzhJYzlidCsvVkxEVjg3?=
+ =?utf-8?B?R0txYmtHOVVUem1NUjRoMllWbVRYREZUVmYwRXhlWFFuSHBSYmJ0M3VEVlRT?=
+ =?utf-8?B?ajdOb0RWMkZPUEdLMHR2NFJXWTNOaEpWSVo2eUErVnJidUswYUtzc3lYTC9Q?=
+ =?utf-8?B?QWtaa1V3OTE2cHZubVpRZzgxQUZLaENkN2pvYWU4amo4Wm5uUWFOOS9DU1B3?=
+ =?utf-8?B?ekUwSTZtdS9GUU5Ob1c2S3VqUjJYYUpJei9YeWhlZ21POEhxdnVSd1doTDho?=
+ =?utf-8?B?T1BLdzFmdVBVS3BnWERmalpUZ3EwQ1hxQnE0WE9DWDNFWlJTYU9wb0ZsYVpv?=
+ =?utf-8?B?U1ArZC9wWWJmbGFpaGxuZHZaanVIelZlUzJYYjRFUm5Kd2dGRVBlRjJwbFRW?=
+ =?utf-8?B?M1k5Ky96TnUzOWcwUTRPUGpHSjFjOTZ1OFV3dzh5Mi9xL0xPUUx2UDFQL1Mx?=
+ =?utf-8?B?QTQyN0p1VHc4VnJhQjBCVjZkcnRKMGtHdEJFYzdaQWpRdmFSSWVKaUQ5R3JT?=
+ =?utf-8?B?aCtTYUloa050NWFrUHQyNFVHUk1xOGhvWEZLNGNuVmx6dlQrTndRalpYZWE4?=
+ =?utf-8?B?dHRGM0hUd3FDSXBrc213amFaNDBLRzlocDkwWmo2THVWR2FOdlNCSThRVHBo?=
+ =?utf-8?B?YlkyanhYcDVnZDlFUjNxd2hzTlQycEtFZmVqaFBKbS9pUC81d0FzK2RqTnlm?=
+ =?utf-8?B?NXRLL2pjNFFIME1Td3JzWTZoM3V4Z1NpbjJ0ODBFUWxZcllQanBnQkY0aGd3?=
+ =?utf-8?B?Q3FtVHNnWXVZUHJKY3dYUjVkQVlPWUZnajFDaFpjbGVwT2RNdjc2STgwaHlV?=
+ =?utf-8?B?VU80cHAzenkvOEpacHZNWWptWXJFaHliYVRGSGVYV2w0ZTdGSzFuRzk4bUxL?=
+ =?utf-8?B?WXVFVGUxS21xYlU4UGs3dzFXWWNQampRdlNBNFJwNVV3VzhPQUFqQ3NOT3Vl?=
+ =?utf-8?B?Sm1IeVdCZCtxZlphRlJxdEt6NUYvT0dEODk0UDlVc2RoVzZyUFBxY1VaWlhD?=
+ =?utf-8?B?T0t2Tm5STHFVRHBIbVFUOE9CL2NKaTZwcUJ1dlpyUFRhVkZYNmVQUmkxNzkr?=
+ =?utf-8?B?VjRQUk9pSHllQ0VOT0I1a3NsYitLM1IrSVk4NC9GZTF0Umd3UTFBeXFsQlVy?=
+ =?utf-8?B?a3FCOGE1Ump1OFJiNmltQ2wvdGEzZkcrOExwcmFxcGF3NXVjSXIwNU01VVVu?=
+ =?utf-8?B?MkJBZHVrT0FBY0xUZ0JmRnpDcW5qN0pHVlBwcGJzZFNEOUd4YUFZdnJxczJt?=
+ =?utf-8?B?SzZFMitsd3diYm1WNWNxeUN6cXh0Vm1zS3FIUUluaDErSUhPZm84ZzUvdkFq?=
+ =?utf-8?B?VTFUQjhFMUNjMVJvbVl2Qko0M1Y2azMvd3VwZU9hV3pZWlM4SFJUejUrTWor?=
+ =?utf-8?B?bmRsT3JNc3hqOGQ4RVFMVGQySmk3SmQ4MVM0OGZmZmE1WnZHL28zZy9xMlMr?=
+ =?utf-8?B?dTJ1OUVZRy9RYkdqMlFjMmpJb2dqWnI4eE9QaGx3M3BmYlNHOGY4cURiQXR1?=
+ =?utf-8?B?RFRuRFlZU0xmb1dSSm9ockJEemJvdE5JWEhuQWVyY3J5OVNYd2c3OGNKeGJS?=
+ =?utf-8?B?TUd4MHNMTnFYcTJ3M01BN1NjYmd1WnhiVTVkcGtkWGtFSXRlUEpNemlHR0Vo?=
+ =?utf-8?Q?CzWo8aQOOvYje7u75UyZabBsc?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	OBzIT+tPTOmkxFiVQNc9pfJyW5QDR5N8QNqeXAFB4pg9XKP3SxdQIKQG/h+jY/S2zD7NvXoD2inZmI0ZzR9N9+5xnoieorvo1bYqTrpcyWzUY9r709t3BoLEy6/RX4tR/eyRbyHKSWYXfJmbUjNmPYWJb4RvrrTNGnSmI6JYFfW56/KWUT/Adz2mhY7a3Qxcpp4w57K20QHTNTPdK9FQ5Lob2/ObuRKH0s5W1QkAM8gvNqAMA1Ime8tjnQWW/lKY5yiutWp46PLIgkoCGinw30Mre4TdyVNNmNUj8BL5e3WcUXJ8dwyv7MKiVcc1x113xH+5OQ4ahlbXuHBv7FjaCME8k5INQ9GQ25kzNj3mGuybFhf5I+xiyjxOYXc/2v+2okZiyLYpuCXTavipr+Fns3jzdznPDqrvIti+gW59rmcWD4FZj4/18C2NcBdZZ5c5vicIvJMCwZaj0DSsyg2XUVVgSfY91oP13YhZTkQdNj6HGc6eXdaIyjQJyBRrLA+EzQvmz4vTPnW112SB2BvSCp6qKjeWecoBgmqBp0vq6cpPQJDZgUTRZRFumRu9MdGogMpVLQYHWT0rLvGTRlh0L6CcVLkvU5kqWJmQzhFL2hMn1h0JGzazC1x3Pxei1a9kqcqJKg45ogi0d76jjZA/Yr2J1osgUC3OlwYdvSaM0V//Gtih/EAySvRjRNLNnqQadhVBIiAAeyHNqRmt1/5ijwZYz4KfNRhBIerzTxKcVLnmTMKxyx/6DkiWegNSd5tcRX5wBdHtMcHisOSyFk/5YI8HVRp+FEX+opQsTY6zg87MBvUeKpOHfIou/47124/17dwqZhLrNUlirmjvdQwWyt/vpaBGBvYoPOQd0BMX4yWYURELrB179wumN1mFS805wW+xkigvsr9MagaR36OfaWXiXAxwtWRb4nGjEQ2rxLM=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 607e278c-a68d-4b7a-4acb-08db2eabc945
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6360.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2023 10:12:35.7697
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CukfxfZQ2I7hsF7UV4gMlZ35D0v2bfOwnM4xbartFa7qj6TI8OHd24cYo1bkdxKpJ58urhb9qLhCYXI0i1vDPA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB5214
 
-In some cases, only few registers on a page needs to be write-protected.
-Examples include USB3 console (64 bytes worth of registers) or MSI-X's
-PBA table (which doesn't need to span the whole table either).
-Current API allows only marking whole pages pages read-only, which
-sometimes may cover other registers that guest may need to write into.
+On Sat, Mar 25, 2023 at 03:49:22AM +0100, Marek Marczykowski-Górecki wrote:
+> QEMU needs to know whether clearing maskbit of a vector is really
+> clearing, or was already cleared before. Currently Xen sends only
+> clearing that bit to the device model, but not setting it, so QEMU
+> cannot detect it. Because of that, QEMU is working this around by
+> checking via /dev/mem, but that isn't the proper approach.
+> 
+> Give all necessary information to QEMU by passing all ctrl writes,
+> including masking a vector. This does include forwarding also writes
+> that did not change the value, but as tested on both Linux (6.1.12) and
+> Windows (10 pro), they don't do excessive writes of unchanged values
+> (Windows seems to clear maskbit in some cases twice, but not more).
 
-Currently, when a guest tries to write to an MMIO page on the
-mmio_ro_ranges, it's either immediately crashed on EPT violation - if
-that's HVM, or if PV, it gets #PF. In case of Linux PV, if access was
-from userspace (like, /dev/mem), it will try to fixup by updating page
-tables (that Xen again will force to read-only) and will hit that #PF
-again (looping endlessly). Both behaviors are undesirable if guest could
-actually be allowed the write.
+Since we passthrough all the accesses to the device model, is the
+handling in Xen still required?  It might be worth to also expose any
+interfaces needed to the device model so all the functionality done by
+the msixtbl_mmio_ops hooks could be done by QEMU, since we end up
+passing the accesses anyway.
 
-Introduce an API that allows marking part of a page read-only. Since
-sub-page permissions are not a thing in page tables, do this via
-emulation (or simply page fault handler for PV) that handles writes that
-are supposed to be allowed. Those writes require the page to be mapped
-to Xen, so subpage_mmio_ro_add() function takes fixmap index of the
-page. The page needs to be added to mmio_ro_ranges, first anyway.
-Sub-page ranges are stored using rangeset for each added page, and those
-pages are stored on a plain list (as there isn't supposed to be many
-pages needing this precise r/o control).
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> ---
+> v2:
+>  - passthrough quad writes to emulator too (Jan)
+>  - (ab)use len==0 for write len=4 completion (Jan), but add descriptive
+>    #define for this magic value
+> 
+> This behavior change needs to be surfaced to the device model somehow,
+> so it knows whether it can rely on it. I'm open for suggestions.
 
-The mechanism this API is plugged in is slightly different for PV and
-HVM. For both paths, it's plugged into mmio_ro_emulated_write(). For PV,
-it's already called for #PF on read-only MMIO page. For HVM however, EPT
-violation on p2m_mmio_direct page results in a direct domain_crash().
-To reach mmio_ro_emulated_write(), change how write violations for
-p2m_mmio_direct are handled - specifically, treat them similar to
-p2m_ioreq_server. This makes relevant ioreq handler being called,
-that finally end up calling mmio_ro_emulated_write().
-Both of those paths need an MFN to which guest tried to write (to check
-which part of the page is supposed to be read-only, and where
-the page is mapped for writes). This information currently isn't
-available directly in mmio_ro_emulated_write(), but in both cases it is
-already resolved somewhere higher in the call tree. Pass it down to
-mmio_ro_emulated_write() via new mmio_ro_emulate_ctxt.mfn field.
+Maybe exposed in XEN_DMOP_get_ioreq_server_info?
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Shadow mode is not tested, but I don't expect it to work differently than
-HAP in areas related to this patch.
-The used locking should make it safe to use similar to mmio_ro_ranges,
-but frankly the only use (introduced in the next patch) could go without
-locking at all, as subpage_mmio_ro_add() is called only before any
-domain is constructed and subpage_mmio_ro_remove() is never called.
----
- xen/arch/x86/hvm/emulate.c      |   2 +-
- xen/arch/x86/hvm/hvm.c          |   3 +-
- xen/arch/x86/include/asm/mm.h   |  22 ++++-
- xen/arch/x86/mm.c               | 181 +++++++++++++++++++++++++++++++++-
- xen/arch/x86/pv/ro-page-fault.c |   1 +-
- 5 files changed, 207 insertions(+), 2 deletions(-)
+But I wonder whether it shouldn't be the other way arround, the device
+model tells Xen it doesn't need to handle any MSI-X accesses because
+QEMU will take care of it, likely using a new flag in
+XEN_DMOP_create_ioreq_server or maybe in XEN_DOMCTL_bind_pt_irq as
+part of the gflags, but then we would need to assert that the flag is
+passed for all MSI-X interrupts bound from that device to the same
+domain.
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 95364deb1996..311102724dea 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -2733,7 +2733,7 @@ int hvm_emulate_one_mmio(unsigned long mfn, unsigned long gla)
-         .write      = mmio_ro_emulated_write,
-         .validate   = hvmemul_validate,
-     };
--    struct mmio_ro_emulate_ctxt mmio_ro_ctxt = { .cr2 = gla };
-+    struct mmio_ro_emulate_ctxt mmio_ro_ctxt = { .cr2 = gla, .mfn = _mfn(mfn) };
-     struct hvm_emulate_ctxt ctxt;
-     const struct x86_emulate_ops *ops;
-     unsigned int seg, bdf;
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index d326fa1c0136..f1c928e3e4ee 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1942,7 +1942,8 @@ int hvm_hap_nested_page_fault(paddr_t gpa, unsigned long gla,
-      */
-     if ( (p2mt == p2m_mmio_dm) ||
-          (npfec.write_access &&
--          (p2m_is_discard_write(p2mt) || (p2mt == p2m_ioreq_server))) )
-+          (p2m_is_discard_write(p2mt) || (p2mt == p2m_ioreq_server) ||
-+           p2mt == p2m_mmio_direct)) )
-     {
-         if ( !handle_mmio_with_translation(gla, gpa >> PAGE_SHIFT, npfec) )
-             hvm_inject_hw_exception(TRAP_gp_fault, 0);
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index db29e3e2059f..91937d556bac 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -522,9 +522,31 @@ extern struct rangeset *mmio_ro_ranges;
- void memguard_guard_stack(void *p);
- void memguard_unguard_stack(void *p);
- 
-+/*
-+ * Add more precise r/o marking for a MMIO page. Bytes range specified here
-+ * will still be R/O, but the rest of the page (nor marked as R/O via another
-+ * call) will have writes passed through. The write passthrough requires
-+ * providing fixmap entry by the caller.
-+ * Since multiple callers can mark different areas of the same page, they might
-+ * provide different fixmap entries (although that's very unlikely in
-+ * practice). Only the one provided by the first caller will be used. Return value
-+ * indicates whether this fixmap entry will be used, or a different one
-+ * provided earlier (in which case the caller might decide to release it).
-+ *
-+ * Return values:
-+ *  - negative: error
-+ *  - 0: success, fixmap entry is claimed
-+ *  - 1: success, fixmap entry set earlier will be used
-+ */
-+int subpage_mmio_ro_add(mfn_t mfn, unsigned long offset_s,
-+                        unsigned long offset_e, int fixmap_idx);
-+int subpage_mmio_ro_remove(mfn_t mfn, unsigned long offset_s,
-+                           unsigned long offset_e);
-+
- struct mmio_ro_emulate_ctxt {
-         unsigned long cr2;
-         unsigned int seg, bdf;
-+        mfn_t mfn;
- };
- 
- int cf_check mmio_ro_emulated_write(
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 0fe14faa5fa7..b50bdee40b6b 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -165,6 +165,19 @@ bool __read_mostly machine_to_phys_mapping_valid;
- 
- struct rangeset *__read_mostly mmio_ro_ranges;
- 
-+/* Handling sub-page read-only MMIO regions */
-+struct subpage_ro_range {
-+    struct list_head list;
-+    mfn_t mfn;
-+    int fixmap_idx;
-+    struct rangeset *ro_bytes;
-+    struct rcu_head rcu;
-+};
-+
-+static LIST_HEAD(subpage_ro_ranges);
-+static DEFINE_RCU_READ_LOCK(subpage_ro_rcu);
-+static DEFINE_SPINLOCK(subpage_ro_lock);
-+
- static uint32_t base_disallow_mask;
- /* Global bit is allowed to be set on L1 PTEs. Intended for user mappings. */
- #define L1_DISALLOW_MASK ((base_disallow_mask | _PAGE_GNTTAB) & ~_PAGE_GLOBAL)
-@@ -4893,6 +4906,172 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return 0;
- }
- 
-+int subpage_mmio_ro_add(
-+    mfn_t mfn,
-+    unsigned long offset_s,
-+    unsigned long offset_e,
-+    int fixmap_idx)
-+{
-+    struct subpage_ro_range *entry = NULL, *iter;
-+    int rc;
-+
-+    ASSERT(rangeset_contains_singleton(mmio_ro_ranges, mfn_x(mfn)));
-+    ASSERT(offset_s < PAGE_SIZE);
-+    ASSERT(offset_e < PAGE_SIZE);
-+
-+    spin_lock(&subpage_ro_lock);
-+
-+    list_for_each_entry( iter, &subpage_ro_ranges, list )
-+    {
-+        if ( mfn_eq(iter->mfn, mfn) )
-+        {
-+            entry = iter;
-+            break;
-+        }
-+    }
-+    if ( !entry )
-+    {
-+        /* iter==NULL marks it was a newly allocated entry */
-+        iter = NULL;
-+        entry = xmalloc(struct subpage_ro_range);
-+        rc = -ENOMEM;
-+        if ( !entry )
-+            goto err_unlock;
-+        entry->mfn = mfn;
-+        entry->fixmap_idx = fixmap_idx;
-+        entry->ro_bytes = rangeset_new(NULL, "subpage r/o mmio",
-+                                       RANGESETF_prettyprint_hex);
-+        rc = -ENOMEM;
-+        if ( !entry->ro_bytes )
-+            goto err_unlock;
-+    }
-+
-+    rc = rangeset_add_range(entry->ro_bytes, offset_s, offset_e);
-+    if ( rc < 0 )
-+        goto err_unlock;
-+
-+    if ( !iter )
-+        list_add_rcu(&entry->list, &subpage_ro_ranges);
-+
-+    spin_unlock(&subpage_ro_lock);
-+
-+    if ( !iter || entry->fixmap_idx == fixmap_idx )
-+        return 0;
-+    else
-+        return 1;
-+
-+err_unlock:
-+    spin_unlock(&subpage_ro_lock);
-+    if ( !iter )
-+    {
-+        if ( entry )
-+        {
-+            if ( entry->ro_bytes )
-+                rangeset_destroy(entry->ro_bytes);
-+            xfree(entry);
-+        }
-+    }
-+    return rc;
-+}
-+
-+static void subpage_mmio_ro_free(struct rcu_head *rcu)
-+{
-+    struct subpage_ro_range *entry = container_of(rcu, struct subpage_ro_range, rcu);
-+
-+    rangeset_destroy(entry->ro_bytes);
-+    xfree(entry);
-+}
-+
-+int subpage_mmio_ro_remove(
-+    mfn_t mfn,
-+    unsigned long offset_s,
-+    unsigned long offset_e)
-+{
-+    struct subpage_ro_range *entry = NULL, *iter;
-+    int rc;
-+
-+    ASSERT(offset_s < PAGE_SIZE);
-+    ASSERT(offset_e < PAGE_SIZE);
-+
-+    spin_lock(&subpage_ro_lock);
-+
-+    list_for_each_entry_rcu( iter, &subpage_ro_ranges, list )
-+    {
-+        if ( mfn_eq(iter->mfn, mfn) )
-+        {
-+            entry = iter;
-+            break;
-+        }
-+    }
-+    rc = -ENOENT;
-+    if ( !entry )
-+        goto out_unlock;
-+
-+    rc = rangeset_remove_range(entry->ro_bytes, offset_s, offset_e);
-+    if ( rc < 0 )
-+        goto out_unlock;
-+
-+    rc = 0;
-+
-+    if ( !rangeset_is_empty(entry->ro_bytes) )
-+        goto out_unlock;
-+
-+    list_del_rcu(&entry->list);
-+    call_rcu(&entry->rcu, subpage_mmio_ro_free);
-+
-+out_unlock:
-+    spin_unlock(&subpage_ro_lock);
-+    return rc;
-+}
-+
-+static void subpage_mmio_write_emulate(
-+    mfn_t mfn,
-+    unsigned long offset,
-+    void *data,
-+    unsigned int len)
-+{
-+    struct subpage_ro_range *entry;
-+    void __iomem *addr;
-+
-+    rcu_read_lock(&subpage_ro_rcu);
-+
-+    list_for_each_entry_rcu( entry, &subpage_ro_ranges, list )
-+    {
-+        if ( mfn_eq(entry->mfn, mfn) )
-+        {
-+            if ( rangeset_overlaps_range(entry->ro_bytes, offset, offset + len - 1) )
-+                goto out_unlock;
-+
-+            addr = fix_to_virt(entry->fixmap_idx) + offset;
-+            switch ( len )
-+            {
-+            case 1:
-+                writeb(*(uint8_t*)data, addr);
-+                break;
-+            case 2:
-+                writew(*(uint16_t*)data, addr);
-+                break;
-+            case 4:
-+                writel(*(uint32_t*)data, addr);
-+                break;
-+            case 8:
-+                writeq(*(uint64_t*)data, addr);
-+                break;
-+            default:
-+                /* mmio_ro_emulated_write() already validated the size */
-+                ASSERT_UNREACHABLE();
-+            }
-+            goto out_unlock;
-+        }
-+    }
-+    gdprintk(XENLOG_WARNING,
-+             "ignoring write to R/O MMIO mfn %" PRI_mfn " offset %lx len %u\n",
-+             mfn_x(mfn), offset, len);
-+
-+out_unlock:
-+    rcu_read_unlock(&subpage_ro_rcu);
-+}
-+
- int cf_check mmio_ro_emulated_write(
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -4911,6 +5090,8 @@ int cf_check mmio_ro_emulated_write(
-         return X86EMUL_UNHANDLEABLE;
-     }
- 
-+    subpage_mmio_write_emulate(mmio_ro_ctxt->mfn, offset & (PAGE_SIZE - 1), p_data, bytes);
-+
-     return X86EMUL_OKAY;
- }
- 
-diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
-index 5963f5ee2d51..91caa2c8f520 100644
---- a/xen/arch/x86/pv/ro-page-fault.c
-+++ b/xen/arch/x86/pv/ro-page-fault.c
-@@ -342,6 +342,7 @@ static int mmio_ro_do_page_fault(struct x86_emulate_ctxt *ctxt,
-             return X86EMUL_UNHANDLEABLE;
-     }
- 
-+    mmio_ro_ctxt.mfn = mfn;
-     ctxt->data = &mmio_ro_ctxt;
-     if ( pci_ro_mmcfg_decode(mfn_x(mfn), &mmio_ro_ctxt.seg, &mmio_ro_ctxt.bdf) )
-         return x86_emulate(ctxt, &mmcfg_intercept_ops);
--- 
-git-series 0.9.1
+Thanks, Roger.
 
