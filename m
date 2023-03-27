@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9D0C77B6C
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 19:42:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.515453.798333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7767C77B60
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 19:42:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.515457.798374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgsis-0002jP-Po; Mon, 27 Mar 2023 19:41:42 +0000
+	id 1pgsix-0003ij-19; Mon, 27 Mar 2023 19:41:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 515453.798333; Mon, 27 Mar 2023 19:41:42 +0000
+Received: by outflank-mailman (output) from mailman id 515457.798374; Mon, 27 Mar 2023 19:41:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgsis-0002jI-NG; Mon, 27 Mar 2023 19:41:42 +0000
-Received: by outflank-mailman (input) for mailman id 515453;
- Mon, 27 Mar 2023 19:41:42 +0000
+	id 1pgsiw-0003iD-Sd; Mon, 27 Mar 2023 19:41:46 +0000
+Received: by outflank-mailman (input) for mailman id 515457;
+ Mon, 27 Mar 2023 19:41:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kO+W=7T=citrix.com=prvs=443697bea=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pgsir-0002j7-PD
- for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 19:41:42 +0000
+ id 1pgsiv-0002j7-Dt
+ for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 19:41:45 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 62f0e800-ccd7-11ed-b464-930f4c7d94ae;
- Mon, 27 Mar 2023 21:41:38 +0200 (CEST)
+ id 65bdbad7-ccd7-11ed-b464-930f4c7d94ae;
+ Mon, 27 Mar 2023 21:41:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62f0e800-ccd7-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 65bdbad7-ccd7-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1679946098;
+  d=citrix.com; s=securemail; t=1679946102;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qHxoaXcYTvK6LrtavVTEPpXmEC/muoBbiaV4h46YBMA=;
-  b=R2aKa0qEOt6uVQ9A1QIMt9c8NaZjDlVvmlonnFgeG25wWVYK044tzGqR
-   kyXzdVzkB7M7Swz7IFqcfy4IoJ2uLaJoWuB3TldSLGpmEey0KcmdBwjwq
-   AtXn24YKrBBANxg2ZJrZ9IsWjoXScKgCbuwRpk0+YEV3nYnDFAgscashT
-   o=;
+  bh=LsekXLTw0DjPTzJsgqE8jFzXfBBPFxBP5u5EwDgnQTo=;
+  b=PsKJoU5VoM6ym3ON0I2H/5duSvBza1Q1OIi0J9EYG51NS2kONfizgEQP
+   AKtlDCf/H0wK5Bo6TdhSVNWyk4IRFOuiqmvwPn7qhPiaKOBtU/vRy/nyN
+   kJVvevfwbNo4URNcd86KKxH0tBMqNYMAJQ4I3V5YneEX1v6dCbXB5jZ22
+   g=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 103008786
+X-MesageID: 103008790
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:2TsHU6PFZ10BXH/vrR2ol8FynXyQoLVcMsEvi/4bfWQNrUorhjRWy
- GMcWD2POqmDamvxe9B1PISz9BwH6pLSmNJiQAto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tD5ANmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0vddXUpW6
- 8MfFAI2UzyIm/6J+b6JddA506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXSHp0NzhnI+
- Aoq+Uz2XjcLDp+k9QOrySz8nM/trSr5RacdQejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasnDQRRt5RGO0S8xyWx+zf5APxLncAZi5MbpohrsBeeNAx/
- gbXxZWzX2Up6eDLDyvHrd94sA9eJwAEBzMpfTE7Sjc32OTPq50vsSvDfOlaRfvdYsLOJd3g/
- 9ybhHFg2ORN05NRjP3TEUPv2Gz1+MWQJuIhzkCOBz/+sFskDGKwT9bwgWU3+8qsO2pworOpm
- HEf0/aT4+kVZX1mvHzcGb5ddF1FChvsDdE9vbKMN8N7n9hV0yT/Fb28Gg1WKkZzKdojcjT0e
- kLVsg45zMYNYyr7MfYnON3rVZxCIU3c+TLNDKi8gj1mPPBMmPKvpnkyNSZ8IUi0+KTTrU3PE
- cjCKpv9ZZrrIa9m0CC3V48g7FPf/QhnnTm7bcmin3yaPU+2OCb9Ya0bK2GHcu1RxPrC+G05B
- f4DbZrVo/ieOcWiChTqHXk7dAlTdiJnXMCn8qS6tIere2JbJY3oMNeJqZtJRmCvt/49ejvgl
- p1lZnJl9Q==
-IronPort-HdrOrdr: A9a23:cyh7iqGKBec31Sn8pLqEL8eALOsnbusQ8zAXP0AYc20yTiX4ra
- CTdZEgviMc5wxxZJhNo6HkBEDiewKkyXcW2/hoAV7KZmCP1wWVxelZnPDfKlbbaknDH4BmpM
- BdWpk7JefcSX5dpq/BjDVQFexL/PC3tJqFv6P16VBDbS9XUIlczyFfTjy2LyRNNWp7LKt8G5
- qY6tBGtDa7EE57Uu2wGmMZWezOvP3n/aiWAyI7Ow==
+IronPort-Data: A9a23:LMLZAqktGizZl7cFfGK/wRzo5gyMJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIbWGqCPq7ZNmumL4skPYS/8E1QsZGGmodmHAM+/i48FSMWpZLJC+rCIxarNUt+DCFhoGFPt
+ JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
+ LvartbWfVSowFaYCEpNg064gE4p7aSaVA8w5ARkPqgQ5gCGzRH5MbpETU2PByqgKmVrNrbSq
+ 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
+ f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
+ e0ydBsVcC+Eu9CN/Z6wVvVTv8gRE/C+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
+ ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglHWdTFCpU3Tjq0w+2XJlyR60aT3McqTcduPLSlQth/A/
+ TqerzuoWnn2MvS7+COb8HeiodXVkAO4BIs9U6KAyMB11Qj7Kms7V0RNCArTTeOCol6zXZdTJ
+ lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4Mcc39QWMwar8+BuCCy4PSTspQMMinN87Q3otz
+ FDhoj/yLWUx6vvPEyvbr+rK62roYkD5MFPuewcVZ1cu+8fcp70BtS/jRcp/L5e5vOLMTGSYL
+ y+xkMQuu1kCpZdViPTlow2d2GrESovhFVBsuFiONo6xxkYgPdP+OdT1gbTOxawYRLt1WGVtq
+ 5TtdyK2yOkVRa+AmyWWKAnmNOH4vq3VWNEwbLMGInXAy9hO0yT5FWyoyGsiTHqFyPosdz7ze
+ 1P0sghM/pJVN3bCRfYpPNPgV516lve6S4yNuhXogjxmOMAZmOivoklTibO4hTixwCDAb4lmU
+ XtkTSpcJSlDUvk2pNZHb+wczaUq1kgD+I8nfriil07P+ePHNBaopUItbAPmRvon95mNvAi92
+ 48Zb6NmPT0DCryhCsQWmKZPRW03wY8TXMmv8JYLL77Se2KL2ggJUpfs/F/oQKQ994w9qwsC1
+ ivVtpNwoLYnuUD6FA==
+IronPort-HdrOrdr: A9a23:iClWU63um1A9Kjec2YfYpQqjBHUkLtp133Aq2lEZdPRUGvbo8f
+ xG/c566faQsl0ssR4b+OxoVJPwJE80lqQFmLX5X43SJDUO0VHARO4N0WKL+UyaJ8SUzJ846U
+ 4PSdkYNPTASXVBoILdxiLQKbodKd+8mpyAtKPl400oZydMRIFP0zxQNya8NQlNaDQuP+tbKL
+ OsosVGoja7eWcadK2Aa0UtVfTYutvOmInHTHc9dnwa1DU=
 X-IronPort-AV: E=Sophos;i="5.98,295,1673931600"; 
-   d="scan'208";a="103008786"
+   d="scan'208";a="103008790"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Sergey Dyasli
 	<sergey.dyasli@citrix.com>
-Subject: [PATCH 1/5] xen/earlycpio: Drop nextoff parameter
-Date: Mon, 27 Mar 2023 20:41:22 +0100
-Message-ID: <20230327194126.3573997-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/5] x86/ucode: Fold early_microcode_update_cpu() into early_microcode_init()
+Date: Mon, 27 Mar 2023 20:41:24 +0100
+Message-ID: <20230327194126.3573997-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230327194126.3573997-1-andrew.cooper3@citrix.com>
 References: <20230327194126.3573997-1-andrew.cooper3@citrix.com>
@@ -93,13 +93,13 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This is imported from Linux, but the parameter being signed is dubious in the
-first place and we're not plausibly going to gain a use for the functionality.
-Linux has subsequently made it an optional parameter to avoid forcing callers
-to pass a stack variable they don't care about using.
+It is not valid to retain a bootstrap_map() across returning back to
+__start_xen(), but various pointers get stashed across calls.
 
-In the unlikely case that we gain a usecase, we can reintroduce it, but in the
-meantime simplify the single caller.
+Begin to address this by folding early_update_cache() into it's single caller,
+rearranging the exit path to always invalidate the mapping.
+
+No practical change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -108,78 +108,101 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 CC: Sergey Dyasli <sergey.dyasli@citrix.com>
 ---
- xen/arch/x86/cpu/microcode/core.c | 3 +--
- xen/common/earlycpio.c            | 8 +-------
- xen/include/xen/earlycpio.h       | 3 +--
- 3 files changed, 3 insertions(+), 11 deletions(-)
+ xen/arch/x86/cpu/microcode/core.c | 70 +++++++++++++++----------------
+ 1 file changed, 33 insertions(+), 37 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index cfa2d5053a52..11c471cc3f83 100644
+index 3d23e3ed7ee4..4d2a896fe78d 100644
 --- a/xen/arch/x86/cpu/microcode/core.c
 +++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -156,7 +156,6 @@ void __init microcode_scan_module(
-     uint64_t *_blob_start;
-     unsigned long _blob_size;
-     struct cpio_data cd;
--    long offset;
-     const char *p = NULL;
-     int i;
+@@ -804,45 +804,12 @@ int __init microcode_init_cache(unsigned long *module_map,
+     return rc;
+ }
  
-@@ -189,7 +188,7 @@ void __init microcode_scan_module(
-         }
-         cd.data = NULL;
-         cd.size = 0;
--        cd = find_cpio_data(p, _blob_start, _blob_size, &offset /* ignore */);
-+        cd = find_cpio_data(p, _blob_start, _blob_size);
-         if ( cd.data )
-         {
-             ucode_blob.size = cd.size;
-diff --git a/xen/common/earlycpio.c b/xen/common/earlycpio.c
-index 4bcf32a51ceb..6c76307c2541 100644
---- a/xen/common/earlycpio.c
-+++ b/xen/common/earlycpio.c
-@@ -56,10 +56,6 @@ enum cpio_fields {
-  * @path:       The directory to search for, including a slash at the end
-  * @data:       Pointer to the the cpio archive or a header inside
-  * @len:        Remaining length of the cpio based on data pointer
-- * @nextoff:    When a matching file is found, this is the offset from the
-- *              beginning of the cpio to the beginning of the next file, not the
-- *              matching file itself. It can be used to iterate through the cpio
-- *              to find all files inside of a directory path.
-  *
-  * @return:     struct cpio_data containing the address, length and
-  *              filename (with the directory path cut off) of the found file.
-@@ -68,8 +64,7 @@ enum cpio_fields {
-  *              the match returned an empty filename string.
-  */
- 
--struct cpio_data __init find_cpio_data(const char *path, void *data,
--				       size_t len,  long *nextoff)
-+struct cpio_data __init find_cpio_data(const char *path, void *data, size_t len)
+-/* BSP calls this function to parse ucode blob and then apply an update. */
+-static int __init early_microcode_update_cpu(void)
+-{
+-    const void *data = NULL;
+-    size_t len;
+-    struct microcode_patch *patch;
+-
+-    if ( ucode_blob.size )
+-    {
+-        len = ucode_blob.size;
+-        data = ucode_blob.data;
+-    }
+-    else if ( ucode_mod.mod_end )
+-    {
+-        len = ucode_mod.mod_end;
+-        data = bootstrap_map(&ucode_mod);
+-    }
+-
+-    if ( !data )
+-        return -ENOMEM;
+-
+-    patch = ucode_ops.cpu_request_microcode(data, len, false);
+-    if ( IS_ERR(patch) )
+-    {
+-        printk(XENLOG_WARNING "Parsing microcode blob error %ld\n",
+-               PTR_ERR(patch));
+-        return PTR_ERR(patch);
+-    }
+-
+-    if ( !patch )
+-        return -ENOENT;
+-
+-    return microcode_update_cpu(patch);
+-}
+-
+ int __init early_microcode_init(unsigned long *module_map,
+                                 const struct multiboot_info *mbi)
  {
- 	const size_t cpio_header_len = 8*C_NFIELDS - 2;
- 	struct cpio_data cd = { NULL, 0, "" };
-@@ -129,7 +124,6 @@ struct cpio_data __init find_cpio_data(const char *path, void *data,
- 		if ((ch[C_MODE] & 0170000) == 0100000 &&
- 		    ch[C_NAMESIZE] >= mypathsize &&
- 		    !memcmp(p, path, mypathsize)) {
--			*nextoff = (long)nptr - (long)data;
- 			if (ch[C_NAMESIZE] - mypathsize >= MAX_CPIO_FILE_NAME) {
- 				printk(
- 				"File %s exceeding MAX_CPIO_FILE_NAME [%d]\n",
-diff --git a/xen/include/xen/earlycpio.h b/xen/include/xen/earlycpio.h
-index 16d9404d739e..d4992035982d 100644
---- a/xen/include/xen/earlycpio.h
-+++ b/xen/include/xen/earlycpio.h
-@@ -9,7 +9,6 @@ struct cpio_data {
- 	char name[MAX_CPIO_FILE_NAME];
- };
+     const struct cpuinfo_x86 *c = &boot_cpu_data;
++    struct microcode_patch *patch;
++    struct ucode_mod_blob blob = {};
+     int rc = 0;
  
--struct cpio_data find_cpio_data(const char *path, void *data, size_t len,
--				long *offset);
-+struct cpio_data find_cpio_data(const char *path, void *data, size_t len);
+     switch ( c->x86_vendor )
+@@ -868,8 +835,37 @@ int __init early_microcode_init(unsigned long *module_map,
  
- #endif /* _EARLYCPIO_H */
+     ucode_ops.collect_cpu_info();
+ 
+-    if ( ucode_mod.mod_end || ucode_blob.size )
+-        rc = early_microcode_update_cpu();
++    if ( ucode_blob.data )
++    {
++        blob = ucode_blob;
++    }
++    else if ( ucode_mod.mod_end )
++    {
++        blob.data = bootstrap_map(&ucode_mod);
++        blob.size = ucode_mod.mod_end;
++    }
++
++    if ( !blob.data )
++        return 0;
++
++    patch = ucode_ops.cpu_request_microcode(blob.data, blob.size, false);
++    if ( IS_ERR(patch) )
++    {
++        rc = PTR_ERR(patch);
++        printk(XENLOG_WARNING "Parsing microcode blob error %d\n", rc);
++        goto out;
++    }
++
++    if ( !patch )
++    {
++        rc = -ENOENT;
++        goto out;
++    }
++
++    rc = microcode_update_cpu(patch);
++
++ out:
++    bootstrap_map(NULL);
+ 
+     return rc;
+ }
 -- 
 2.30.2
 
