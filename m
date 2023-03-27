@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC6BC6FD1D
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 16:13:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.515372.798164 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CBC5C6FD1D
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Mar 2023 16:22:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.515378.798183 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgpTO-0004u7-HF; Mon, 27 Mar 2023 16:13:30 +0000
+	id 1pgpbs-00071w-Im; Mon, 27 Mar 2023 16:22:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 515372.798164; Mon, 27 Mar 2023 16:13:30 +0000
+Received: by outflank-mailman (output) from mailman id 515378.798183; Mon, 27 Mar 2023 16:22:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pgpTO-0004u0-E2; Mon, 27 Mar 2023 16:13:30 +0000
-Received: by outflank-mailman (input) for mailman id 515372;
- Mon, 27 Mar 2023 16:13:29 +0000
+	id 1pgpbs-00071p-G8; Mon, 27 Mar 2023 16:22:16 +0000
+Received: by outflank-mailman (input) for mailman id 515378;
+ Mon, 27 Mar 2023 16:22:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Dqr1=7T=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
- id 1pgpTN-0004tt-I2
- for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 16:13:29 +0000
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [2a00:1450:4864:20::336])
+ (envelope-from <SRS0=J70X=7T=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1pgpbr-00071j-98
+ for xen-devel@lists.xenproject.org; Mon, 27 Mar 2023 16:22:15 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4ee40efc-ccba-11ed-85db-49a42c6b2330;
- Mon, 27 Mar 2023 18:13:27 +0200 (CEST)
-Received: by mail-wm1-x336.google.com with SMTP id
- o24-20020a05600c511800b003ef59905f26so5666904wms.2
- for <xen-devel@lists.xenproject.org>; Mon, 27 Mar 2023 09:13:27 -0700 (PDT)
-Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
- by smtp.gmail.com with ESMTPSA id
- y24-20020a05600c365800b003ef71d541cbsm2279124wmq.1.2023.03.27.09.13.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Mar 2023 09:13:26 -0700 (PDT)
+ id 88549bb9-ccbb-11ed-85db-49a42c6b2330;
+ Mon, 27 Mar 2023 18:22:13 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 63FD31FDC2;
+ Mon, 27 Mar 2023 16:22:13 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0935B13482;
+ Mon, 27 Mar 2023 16:22:13 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id QMiBALXCIWTKUgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 27 Mar 2023 16:22:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,311 +53,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ee40efc-ccba-11ed-85db-49a42c6b2330
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1679933607;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jWK7DJewWhB76sKBU5USq0WS7TermcVDq89Y08sBTnY=;
-        b=eBdrb2ZbX+p4rhw5mrsSJWhyNPVxt2NIKcmTIXsbadf8RU633scKyGTgAujqUc6uSO
-         FLYp8ey4xvD1Sd5YSoa7tAJLCAWKtQ4kp/6X6Jo8WhecCni6OxKZ7sqFykGJcOuNfCqy
-         /9nwx4GZDSQDM5I2qaaSlvmTzHKbGebYnOFrU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679933607;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jWK7DJewWhB76sKBU5USq0WS7TermcVDq89Y08sBTnY=;
-        b=f8vkfGoi/epnmUHms68pp0c1z4YDGRcrsXn68PaNaRvuOSsGMIEZ5Xs/lAekQnmF+1
-         ynGRg7QcI+Ko0+2mb8yTeErkB1zk7zDIptpIbaVlyRk7oYqgqGTNgiPs5fXIoCBjkUei
-         dHx4MALurEqyLa3tGZRI41W3G4QYOl1XIE1d93yQYjnU73rUI3C150++merJBj0grIG8
-         3XqK0EToEiKRPh5mcbuRZVE9Vj2uflO/m2pnGYeq/E9uR2ywSZ6P+oV41zCw4M3S18JA
-         4O1NcTRlV4rqPhSpQvZeRcWp2MI3fppCEq2Juz6ZIAr1KNhPv2OANn3YqS8X2Kjh+Gt9
-         lImA==
-X-Gm-Message-State: AO0yUKUzpQEZtYWrng+P9EUypFKMgQ2+Ytezmy7eCkN4UQnrT65UTxnQ
-	WCTrMvIQfYvpquufAxJkvPInTR+95bib//GNwGVTmQ==
-X-Google-Smtp-Source: AK7set+6xBiJuvOLT+3mNY8PjVz5frXqC3d4AUMXSMTYf6+/0hjg/fk2FjTSeR6lgc/k4A2XsMYVug==
-X-Received: by 2002:a1c:4b02:0:b0:3ee:4481:5415 with SMTP id y2-20020a1c4b02000000b003ee44815415mr10063583wma.26.1679933607146;
-        Mon, 27 Mar 2023 09:13:27 -0700 (PDT)
-From: George Dunlap <george.dunlap@cloud.com>
-To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@cloud.com>,
-	Anthony Perard <anthony.perard@cloud.com>,
-	Wei Liu <wl@xenproject.org>
-Subject: [PATCH 1/2] xenalyze: Handle start-of-day ->RUNNING transitions
-Date: Mon, 27 Mar 2023 17:13:25 +0100
-Message-Id: <20230327161326.48851-1-george.dunlap@cloud.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 88549bb9-ccbb-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1679934133; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UcDPc/tgrynPUn5Yb3kFJbY/0rSBTe/WWm+ukByYBNM=;
+	b=TGkHjJu7sMYfpPegpiMz6r/zjinvf3kc+DGbnTIIXrwRnjZy4qwzqzzJVbsuwY/njyAZTN
+	Sq3EXI32nlHMl94cM5qFS5uvakOzeyFnyP/ErYr9k6tlZ4i/F5prP2PWPGmeLC9Cb/0PEI
+	Pd1jLl14rSQY2G/6Jp5pfwJF0nIIxoE=
+Message-ID: <f94dbfe9-f690-8c3e-c251-b0d5f93d32f9@suse.com>
+Date: Mon, 27 Mar 2023 18:22:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Wei Liu <wei.liu@kernel.org>, Paul Durrant <paul@xen.org>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ xen-devel@lists.xenproject.org, stable@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20230327083646.18690-1-jgross@suse.com>
+ <20230327083646.18690-2-jgross@suse.com>
+ <59d90811-bc68-83cd-b7e5-7a8c2e2370d9@suse.com>
+ <f519a2d3-6662-35a2-b295-1825924affa8@suse.com>
+ <89653286-f05e-1fc1-b6bf-265b7ecaad0d@suse.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 1/2] xen/netback: don't do grant copy across page boundary
+In-Reply-To: <89653286-f05e-1fc1-b6bf-265b7ecaad0d@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------KOZ7ZtvRb62jdp8pvjMndc9b"
 
-A recent xentrace highlighted an unhandled corner case in the vcpu
-"start-of-day" logic, if the trace starts after the last running ->
-non-running transition, but before the first non-running -> running
-transition.  Because start-of-day wasn't handled, vcpu_next_update()
-was expecting p->current to be NULL, and tripping out with the
-following error message when it wasn't:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------KOZ7ZtvRb62jdp8pvjMndc9b
+Content-Type: multipart/mixed; boundary="------------0kqG5uzLZQlxMAQNhuEVe4xN";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Wei Liu <wei.liu@kernel.org>, Paul Durrant <paul@xen.org>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ xen-devel@lists.xenproject.org, stable@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+Message-ID: <f94dbfe9-f690-8c3e-c251-b0d5f93d32f9@suse.com>
+Subject: Re: [PATCH 1/2] xen/netback: don't do grant copy across page boundary
+References: <20230327083646.18690-1-jgross@suse.com>
+ <20230327083646.18690-2-jgross@suse.com>
+ <59d90811-bc68-83cd-b7e5-7a8c2e2370d9@suse.com>
+ <f519a2d3-6662-35a2-b295-1825924affa8@suse.com>
+ <89653286-f05e-1fc1-b6bf-265b7ecaad0d@suse.com>
+In-Reply-To: <89653286-f05e-1fc1-b6bf-265b7ecaad0d@suse.com>
 
-vcpu_next_update: FATAL: p->current not NULL! (d32768dv$p, runstate RUNSTATE_INIT)
+--------------0kqG5uzLZQlxMAQNhuEVe4xN
+Content-Type: multipart/mixed; boundary="------------AK01Xsixlkeb0Sq0830RmZ1R"
 
-where 32768 is the DEFAULT_DOMAIN, and $p is the pcpu number.
+--------------AK01Xsixlkeb0Sq0830RmZ1R
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Instead of calling vcpu_start() piecemeal throughout
-sched_runstate_process(), call it at the top of the function if the
-vcpu in question is still in RUNSTATE_INIT, so that we can handle all
-the cases in one place.
+T24gMjcuMDMuMjMgMTc6MzgsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAyNy4wMy4yMDIz
+IDEyOjA3LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gT24gMjcuMDMuMjMgMTE6NDksIEph
+biBCZXVsaWNoIHdyb3RlOg0KPj4+IE9uIDI3LjAzLjIwMjMgMTA6MzYsIEp1ZXJnZW4gR3Jv
+c3Mgd3JvdGU6DQo+Pj4+IEBAIC00MTMsNiArNDE4LDEzIEBAIHN0YXRpYyB2b2lkIHhlbnZp
+Zl9nZXRfcmVxdWVzdHMoc3RydWN0IHhlbnZpZl9xdWV1ZSAqcXVldWUsDQo+Pj4+ICAgIAkJ
+Y29wLT5kZXN0LnUuZ21mbiA9IHZpcnRfdG9fZ2ZuKHNrYi0+ZGF0YSArIHNrYl9oZWFkbGVu
+KHNrYikNCj4+Pj4gICAgCQkJCSAgICAgICAgICAgICAgIC0gZGF0YV9sZW4pOw0KPj4+PiAg
+ICANCj4+Pj4gKwkJLyogRG9uJ3QgY3Jvc3MgbG9jYWwgcGFnZSBib3VuZGFyeSEgKi8NCj4+
+Pj4gKwkJaWYgKGNvcC0+ZGVzdC5vZmZzZXQgKyBhbW91bnQgPiBYRU5fUEFHRV9TSVpFKSB7
+DQo+Pj4+ICsJCQlhbW91bnQgPSBYRU5fUEFHRV9TSVpFIC0gY29wLT5kZXN0Lm9mZnNldDsN
+Cj4+Pj4gKwkJCVhFTlZJRl9UWF9DQihza2IpLT5zcGxpdF9tYXNrIHw9IDFVIDw8IGNvcHlf
+Y291bnQoc2tiKTsNCj4+Pg0KPj4+IE1heWJlIHdvcnRod2hpbGUgdG8gYWRkIGEgQlVJTERf
+QlVHX09OKCkgc29tZXdoZXJlIHRvIG1ha2Ugc3VyZSB0aGlzDQo+Pj4gc2hpZnQgd29uJ3Qg
+Z3JvdyB0b28gbGFyZ2UgYSBzaGlmdCBjb3VudC4gVGhlIG51bWJlciBvZiBzbG90cyBhY2Nl
+cHRlZA0KPj4+IGNvdWxkIGNvbmNlaXZhYmx5IGJlIGdyb3duIHBhc3QgWEVOX05FVEJLX0xF
+R0FDWV9TTE9UU19NQVggKGkuZS4NCj4+PiBYRU5fTkVUSUZfTlJfU0xPVFNfTUlOKSBhdCBz
+b21lIHBvaW50Lg0KPj4NCj4+IFRoaXMgaXMgYmFzaWNhbGx5IGltcG9zc2libGUgZHVlIHRv
+IHRoZSBzaXplIHJlc3RyaWN0aW9uIG9mIHN0cnVjdA0KPj4geGVudmlmX3R4X2NiLg0KPiAN
+Cj4gSWYgaXRzIHNpemUgYmVjYW1lIGEgcHJvYmxlbSwgaXQgbWlnaHQgc2ltcGx5IHRha2Ug
+YSBsZXZlbCBvZiBpbmRpcmVjdGlvbg0KPiB0byBvdmVyY29tZSB0aGUgbGltaXRhdGlvbi4N
+Cg0KTWF5YmUuDQoNCk9UT0ggdGhpcyB3b3VsZCByZXF1aXJlIHNvbWUgcmV3b3JrLCB3aGlj
+aCBzaG91bGQgdGFrZSBzdWNoIHByb2JsZW1zIGludG8NCmNvbnNpZGVyYXRpb24uDQoNCklu
+IHRoZSBlbmQgSSdkIGJlIGZpbmUgdG8gYWRkIHN1Y2ggYSBCVUlMRF9CVUdfT04oKSwgYXMg
+dGhlIGNvZGUgaXMNCmNvbXBsaWNhdGVkIGVub3VnaCBhbHJlYWR5Lg0KDQo+IA0KPj4+PiBA
+QCAtNDIwLDcgKzQzMiw4IEBAIHN0YXRpYyB2b2lkIHhlbnZpZl9nZXRfcmVxdWVzdHMoc3Ry
+dWN0IHhlbnZpZl9xdWV1ZSAqcXVldWUsDQo+Pj4+ICAgIAkJcGVuZGluZ19pZHggPSBxdWV1
+ZS0+cGVuZGluZ19yaW5nW2luZGV4XTsNCj4+Pj4gICAgCQljYWxsYmFja19wYXJhbShxdWV1
+ZSwgcGVuZGluZ19pZHgpLmN0eCA9IE5VTEw7DQo+Pj4+ICAgIAkJY29weV9wZW5kaW5nX2lk
+eChza2IsIGNvcHlfY291bnQoc2tiKSkgPSBwZW5kaW5nX2lkeDsNCj4+Pj4gLQkJY29weV9j
+b3VudChza2IpKys7DQo+Pj4+ICsJCWlmICghc3BsaXQpDQo+Pj4+ICsJCQljb3B5X2NvdW50
+KHNrYikrKzsNCj4+Pj4gICAgDQo+Pj4+ICAgIAkJY29wKys7DQo+Pj4+ICAgIAkJZGF0YV9s
+ZW4gLT0gYW1vdW50Ow0KPj4+PiBAQCAtNDQxLDcgKzQ1NCw4IEBAIHN0YXRpYyB2b2lkIHhl
+bnZpZl9nZXRfcmVxdWVzdHMoc3RydWN0IHhlbnZpZl9xdWV1ZSAqcXVldWUsDQo+Pj4+ICAg
+IAkJCW5yX3Nsb3RzLS07DQo+Pj4+ICAgIAkJfSBlbHNlIHsNCj4+Pj4gICAgCQkJLyogVGhl
+IGNvcHkgb3AgcGFydGlhbGx5IGNvdmVyZWQgdGhlIHR4X3JlcXVlc3QuDQo+Pj4+IC0JCQkg
+KiBUaGUgcmVtYWluZGVyIHdpbGwgYmUgbWFwcGVkLg0KPj4+PiArCQkJICogVGhlIHJlbWFp
+bmRlciB3aWxsIGJlIG1hcHBlZCBvciBjb3BpZWQgaW4gdGhlIG5leHQNCj4+Pj4gKwkJCSAq
+IGl0ZXJhdGlvbi4NCj4+Pj4gICAgCQkJICovDQo+Pj4+ICAgIAkJCXR4cC0+b2Zmc2V0ICs9
+IGFtb3VudDsNCj4+Pj4gICAgCQkJdHhwLT5zaXplIC09IGFtb3VudDsNCj4+Pj4gQEAgLTUz
+OSw2ICs1NTMsMTMgQEAgc3RhdGljIGludCB4ZW52aWZfdHhfY2hlY2tfZ29wKHN0cnVjdCB4
+ZW52aWZfcXVldWUgKnF1ZXVlLA0KPj4+PiAgICAJCXBlbmRpbmdfaWR4ID0gY29weV9wZW5k
+aW5nX2lkeChza2IsIGkpOw0KPj4+PiAgICANCj4+Pj4gICAgCQluZXdlcnIgPSAoKmdvcHBf
+Y29weSktPnN0YXR1czsNCj4+Pj4gKw0KPj4+PiArCQkvKiBTcGxpdCBjb3BpZXMgbmVlZCB0
+byBiZSBoYW5kbGVkIHRvZ2V0aGVyLiAqLw0KPj4+PiArCQlpZiAoWEVOVklGX1RYX0NCKHNr
+YiktPnNwbGl0X21hc2sgJiAoMVUgPDwgaSkpIHsNCj4+Pj4gKwkJCSgqZ29wcF9jb3B5KSsr
+Ow0KPj4+PiArCQkJaWYgKCFuZXdlcnIpDQo+Pj4+ICsJCQkJbmV3ZXJyID0gKCpnb3BwX2Nv
+cHkpLT5zdGF0dXM7DQo+Pj4+ICsJCX0NCj4+Pg0KPj4+IEl0IGlzbid0IGd1YXJhbnRlZWQg
+dGhhdCBhIHNsb3QgbWF5IGJlIHNwbGl0IG9ubHkgb25jZSwgaXMgaXQ/IEFzc3VtaW5nIGEN
+Cj4+DQo+PiBJIHRoaW5rIGl0IGlzIGd1YXJhbnRlZWQuDQo+Pg0KPj4gTm8gc2xvdCBjYW4g
+Y292ZXIgbW9yZSB0aGFuIFhFTl9QQUdFX1NJWkUgYnl0ZXMgZHVlIHRvIHRoZSBncmFudHMg
+YmVpbmcNCj4+IHJlc3RyaWN0ZWQgdG8gdGhhdCBzaXplLiBUaGVyZSBpcyBubyB3YXkgaG93
+IHN1Y2ggYSBkYXRhIHBhY2tldCBjb3VsZCBjcm9zcw0KPj4gMiBwYWdlIGJvdW5kYXJpZXMu
+DQo+Pg0KPj4gSW4gdGhlIGVuZCB0aGUgcHJvYmxlbSBpc24ndCB0aGUgY29waWVzIGZvciB0
+aGUgbGluZWFyIGFyZWEgbm90IGNyb3NzaW5nDQo+PiBtdWx0aXBsZSBwYWdlIGJvdW5kYXJp
+ZXMsIGJ1dCB0aGUgY29waWVzIGZvciBhIHNpbmdsZSByZXF1ZXN0IHNsb3Qgbm90DQo+PiBk
+b2luZyBzby4gQW5kIHRoaXMgY2FuJ3QgaGFwcGVuIElNTy4NCj4gDQo+IFlvdSdyZSB0aGlu
+a2luZyBvZiBvbmx5IHdlbGwtZm9ybWVkIHJlcXVlc3RzLiBXaGF0IGFib3V0IHNhaWQgcmVx
+dWVzdA0KPiBwcm92aWRpbmcgYSBsYXJnZSBzaXplIHdpdGggb25seSB0aW55IGZyYWdtZW50
+cz8geGVudmlmX2dldF9yZXF1ZXN0cygpDQo+IHdpbGwgaGFwcGlseSBwcm9jZXNzIHN1Y2gs
+IGNyZWF0aW5nIGJvZ3VzIGdyYW50LWNvcHkgb3BzLiBCdXQgdGhlbSBmYWlsaW5nDQo+IG9u
+Y2Ugc3VibWl0dGVkIHRvIFhlbiB3aWxsIGJlIG9ubHkgYWZ0ZXIgZGFtYWdlIG1heSBhbHJl
+YWR5IGhhdmUgb2NjdXJyZWQNCj4gKGZyb20gYm9ndXMgdXBkYXRlcyBvZiBpbnRlcm5hbCBz
+dGF0ZTsgdGhlIGxvZ2ljIGFsdG9nZXRoZXIgaXMgdG9vDQo+IGludm9sdmVkIGZvciBtZSB0
+byBiZSBjb252aW5jZWQgdGhhdCBub3RoaW5nIGJhZCBjYW4gaGFwcGVuKS4NCg0KVGhlcmUg
+YXJlIHNhbml0eSBjaGVja3MgYWZ0ZXIgZWFjaCByZWxldmFudCBSSU5HX0NPUFlfUkVRVUVT
+VCgpIGNhbGwsIHdoaWNoDQp3aWxsIGJhaWwgb3V0IGlmICIodHhwLT5vZmZzZXQgKyB0eHAt
+PnNpemUpID4gWEVOX1BBR0VfU0laRSIgKHRoZSBmaXJzdCBvbmUNCmlzIGFmdGVyIHRoZSBj
+YWxsIG9mIHhlbnZpZl9jb3VudF9yZXF1ZXN0cygpLCBhcyB0aGlzIGNhbGwgd2lsbCBkZWNy
+ZWFzZSB0aGUNCnNpemUgb2YgdGhlIHJlcXVlc3QsIHRoZSBvdGhlciBjaGVjayBpcyBpbiB4
+ZW52aWZfY291bnRfcmVxdWVzdHMoKSkuDQoNCj4gSW50ZXJlc3RpbmdseSAoYXMgSSByZWFs
+aXplIG5vdykgdGhlIHNoaWZ0cyB5b3UgYWRkIGFyZSBub3QgYmUgYXQgcmlzayBvZg0KPiB0
+dXJuaW5nIFVCIGluIHRoaXMgY2FzZSwgYXMgdGhlIHNoaWZ0IGNvdW50IHdvbid0IGdvIGJl
+eW9uZCAxNi4NCj4gDQo+Pj4gbmVhci02NGsgcGFja2V0IHdpdGggYWxsIHRpbnkgbm9uLXBy
+aW1hcnkgc2xvdHMsIHRoYXQnbGwgY2F1c2UgdGhvc2UgdGlueQ0KPj4+IHNsb3RzIHRvIGFs
+bCBiZSBtYXBwZWQsIGJ1dCBkdWUgdG8NCj4+Pg0KPj4+IAkJaWYgKHJldCA+PSBYRU5fTkVU
+QktfTEVHQUNZX1NMT1RTX01BWCAtIDEgJiYgZGF0YV9sZW4gPCB0eHJlcS5zaXplKQ0KPj4+
+IAkJCWRhdGFfbGVuID0gdHhyZXEuc2l6ZTsNCj4+Pg0KPj4+IHdpbGwsIGFmYWljdCwgY2F1
+c2UgYSBsb3Qgb2YgY29weWluZyBmb3IgdGhlIHByaW1hcnkgc2xvdC4gVGhlcmVmb3JlIEkN
+Cj4+PiB0aGluayB5b3UgbmVlZCBhIGxvb3AgaGVyZSwgbm90IGp1c3QgYW4gaWYoKS4gUGx1
+cyB0eF9jb3B5X29wc1tdJ2VzDQo+Pj4gZGltZW5zaW9uIGFsc28gbG9va3MgdG8gbmVlZCBm
+dXJ0aGVyIGdyb3dpbmcgdG8gYWNjb21tb2RhdGUgdGhpcy4gT3INCj4+PiBtYXliZSBub3Qg
+LSBhdCBsZWFzdCB0aGUgZXh0cmVtZSBleGFtcGxlIGdpdmVuIHdvdWxkIHN0aWxsIGJlIGZp
+bmU7IG1vcmUNCj4+PiBnZW5lcmFsbHkgcGFja2V0cyBiZWluZyBsaW1pdGVkIHRvIGJlbG93
+IDY0ayBtZWFucyAyKjE2IHNsb3RzIHdvdWxkDQo+Pj4gc3VmZmljZSBhdCBvbmUgZW5kIG9m
+IHRoZSBzY2FsZSwgd2hpbGUgMipNQVhfUEVORElOR19SRVFTIHdvdWxkIGF0IHRoZQ0KPj4+
+IG90aGVyIGVuZCAoYWxsIHRpbnksIGluY2x1ZGluZyB0aGUgcHJpbWFyeSBzbG90KS4gV2hh
+dCBJIGhhdmVuJ3QgZnVsbHkNCj4+PiBjb252aW5jZWQgbXlzZWxmIG9mIGlzIHdoZXRoZXIg
+dGhlcmUgbWlnaHQgYmUgY2FzZXMgaW4gdGhlIG1pZGRsZSB3aGljaA0KPj4+IGFyZSB5ZXQg
+d29yc2UuDQo+Pg0KPj4gU2VlIGFib3ZlIHJlYXNvbmluZy4gSSB0aGluayBpdCBpcyBva2F5
+LCBidXQgbWF5YmUgSSdtIG1pc3Npbmcgc29tZXRoaW5nLg0KPiANCj4gV2VsbCwgdGhlIG1h
+aW4gdGhpbmcgSSdtIG1pc3NpbmcgaXMgYSAicHJpbWFyeSByZXF1ZXN0IGZpdHMgaW4gYSBw
+YWdlIg0KPiBjaGVjaywgZXZlbiBtb3JlIHNvIHdpdGggdGhlIG5ldyBjb3B5aW5nIGxvZ2lj
+IHRoYXQgdGhlIGNvbW1pdCByZWZlcmVuY2VkDQo+IGJ5IEZpeGVzOiBpbnRyb2R1Y2VkIGlu
+dG8geGVudmlmX2dldF9yZXF1ZXN0cygpLg0KDQpXaGVuIHhlbnZpZl9nZXRfcmVxdWVzdHMo
+KSBnZXRzIGNhbGxlZCwgYWxsIHJlcXVlc3RzIGFyZSBzYW5pdHkgY2hlY2tlZA0KYWxyZWFk
+eSAobm90ZSB0aGF0IHhlbnZpZl9nZXRfcmVxdWVzdHMoKSBpcyB3b3JraW5nIG9uIHRoZSBs
+b2NhbCBjb3BpZXMgb2YNCnRoZSByZXF1ZXN0cykuDQoNCg0KSnVlcmdlbg0K
+--------------AK01Xsixlkeb0Sq0830RmZ1R
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Sketch out at the top of the function all cases which we need to
-handle, and what to do in those cases.  Some transitions tell us where
-v is running; some transitions tell us about what is (or is not)
-running on p; some transitions tell us neither.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-If a transition tells us where v is now running, update its state;
-otherwise leave it in INIT, in order to avoid having to deal with TSC
-skew on start-up.
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
 
-If a transition tells us what is or is not running on p, update
-p->current (either to v or NULL).  Otherwise leave it alone.
+--------------AK01Xsixlkeb0Sq0830RmZ1R--
 
-If neither, do nothing.
+--------------0kqG5uzLZQlxMAQNhuEVe4xN--
 
-Reifying those rules:
+--------------KOZ7ZtvRb62jdp8pvjMndc9b
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-- If we're continuing to run, set v to RUNNING, and use p->first_tsc
-  as the runstate time.
+-----BEGIN PGP SIGNATURE-----
 
-- If we're starting to run, set v to RUNNING, and use ri->tsc as the
-  runstate time.
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmQhwrQFAwAAAAAACgkQsN6d1ii/Ey8o
+7Qf/UNv6jyUJtB5UZE4sBvosfP6HG1LYaUFg5CY7KhDu74n8270KFyOj3G8TYc7aaobr3u8MvWOS
+5V6fKu+/6VtBTtaoNKeqyTSstlwYjr6Cmp3B3cPQph5Mtfmrq4qrcKuHtGM5knaYCHvQisRybCYf
+CnJ0CUGqns4XgqpJHLe0fNnp0CheYTkMujuVG/xhAlPiJnYcgwxYiTyQL4FqUFlRz5q11oYOR/iY
+vEThuwSI4Q5saiXCJLuHgU6hSJd0arwDiajoP+joFPI8XLBtL2VDZrirj6voPawPVeLIoUm6bypi
+YiK8rfr9H7qj1NGEwYZx40N4XLVflSnYot4A+MzmxA==
+=idtz
+-----END PGP SIGNATURE-----
 
-- If v is being deschedled, leave v in the INIT state to avoid dealing
-  with TSC skew; but set p->current to NULL so that whatever is
-  scheduled next won't trigger the assert in vcpu_next_update().
-
-- If a vcpu is waking up (switching from one non-runnable state to
-  another non-runnable state), leave v in INIT, and p in whatever
-  state it's in (which may be the default domain, or some other vcpu
-  which has already run).
-
-While here, fix the comment above vcpu_start; it's called when the
-vcpu state is INIT, not when current is the default domain.
-
-Signed-off-by: George Dunlap <george.dunlap@cloud.com>
----
-CC: Anthony Perard <anthony.perard@cloud.com>
-CC: Wei Liu <wl@xenproject.org>
----
- tools/xentrace/xenalyze.c | 159 ++++++++++++++++++++++++--------------
- 1 file changed, 101 insertions(+), 58 deletions(-)
-
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index 5de167031e..9f6d9763ac 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -6885,39 +6885,86 @@ void vcpu_next_update(struct pcpu_info *p, struct vcpu_data *next, tsc_t tsc)
-     p->lost_record.seen_valid_schedule = 1;
- }
- 
--/* If current is the default domain, we're fixing up from something
-- * like start-of-day.  Update what we can. */
--void vcpu_start(struct pcpu_info *p, struct vcpu_data *v) {
--    /* If vcpus are created, or first show up, in a "dead zone", this will
--     * fail. */
--    if( !p->current || p->current->d->did != DEFAULT_DOMAIN) {
--        fprintf(stderr, "Strange, p->current not default domain!\n");
--        error(ERR_FILE, NULL);
--        return;
--    }
-+/* 
-+ * If the vcpu in question is in state INIT, we're fixing up from something
-+ * like start-of-day.  Update what we can.
-+ */
-+void vcpu_start(struct pcpu_info *p, struct vcpu_data *v,
-+                int old_runstate, int new_runstate, tsc_t ri_tsc) {
-+    tsc_t tsc;
-+
-+    /*
-+     * 
-+     * Cases:
-+     * running -> running:
-+     *  v -> running, using p->first_tsc
-+     * {runnable, blocked} -> running:
-+     *  v -> running, using ri->tsc
-+     * running -> {runnable, blocked}:
-+     *  Leave v INIT, but clear p->current in case another vcpu is scheduled
-+     * blocked -> runnable:
-+     *  Leave INIT, and also leave p->current, since we still don't know who's scheduled here
-+     */
-+
-+    /* 
-+     * NB that a vcpu won't come out of INIT until it starts running somewhere.  
-+     * If this event is pcpu that has already seen a scheduling event, p->current
-+     * should be null; if this is the first scheduling event on this pcpu, 
-+     * p->current should be the default domain.
-+     */
-+    if( old_runstate == RUNSTATE_RUNNING ) {
-+        if ( !p->current ||  p->current->d->did != DEFAULT_DOMAIN) {
-+            fprintf(stderr, "Strange, p->current not default domain!\n");
-+            error(ERR_FILE, NULL);
-+            return;
- 
--    if(!p->first_tsc) {
--        fprintf(stderr, "Strange, p%d first_tsc 0!\n", p->pid);
--        error(ERR_FILE, NULL);
-+        }
-+        
-+        if(!p->first_tsc) {
-+            fprintf(stderr, "Strange, p%d first_tsc 0!\n", p->pid);
-+            error(ERR_FILE, NULL);
-+        }
-+
-+        if(p->first_tsc <= p->current->runstate.tsc) {
-+            fprintf(stderr, "Strange, first_tsc %llx < default_domain runstate tsc %llx!\n",
-+                    p->first_tsc,
-+                    p->current->runstate.tsc);
-+            error(ERR_FILE, NULL);
-+        }
-+    
-+        /* Change default domain to 'queued' */
-+        runstate_update(p->current, RUNSTATE_QUEUED, p->first_tsc);
-+
-+        /* 
-+         * Set current to NULL, so that if another vcpu (not in INIT)
-+         * is scheduled here, we don't trip over the check in
-+         * vcpu_next_update()
-+         */
-+        p->current = NULL;
-     }
- 
--    if(p->first_tsc <= p->current->runstate.tsc) {
--        fprintf(stderr, "Strange, first_tsc %llx < default_domain runstate tsc %llx!\n",
--                p->first_tsc,
--                p->current->runstate.tsc);
--        error(ERR_FILE, NULL);
-+    /* TSC skew at start-of-day is hard to deal with.  Don't
-+     * bring a vcpu out of INIT until it's seen to be actually
-+     * running somewhere. */
-+    if ( new_runstate != RUNSTATE_RUNNING ) {
-+        fprintf(warn, "First schedule for d%dv%d doesn't take us into a running state; leaving INIT\n",
-+                v->d->did, v->vid);
-+
-+        return;
-     }
- 
--    /* Change default domain to 'queued' */
--    runstate_update(p->current, RUNSTATE_QUEUED, p->first_tsc);
-+    tsc = ri_tsc;
-+    if ( old_runstate == RUNSTATE_RUNNING ) {
-+        /* FIXME: Copy over data from the default domain this interval */
-+        fprintf(warn, "Using first_tsc for d%dv%d (%lld cycles)\n",
-+                v->d->did, v->vid, p->last_tsc - p->first_tsc);
- 
--    /* FIXME: Copy over data from the default domain this interval */
--    fprintf(warn, "Using first_tsc for d%dv%d (%lld cycles)\n",
--            v->d->did, v->vid, p->last_tsc - p->first_tsc);
-+        tsc = p->first_tsc;
-+    }
- 
-     /* Simulate the time since the first tsc */
--    runstate_update(v, RUNSTATE_RUNNING, p->first_tsc);
--    p->time.tsc = p->first_tsc;
-+    runstate_update(v, RUNSTATE_RUNNING, tsc);
-+    p->time.tsc = tsc;
-     p->current = v;
-     pcpu_string_draw(p);
-     v->p = p;
-@@ -7021,6 +7068,13 @@ void sched_runstate_process(struct pcpu_info *p)
-     last_oldstate = v->runstate.last_oldstate;
-     v->runstate.last_oldstate.wrong = RUNSTATE_INIT;
- 
-+    /* Handle all "start-of-day" issues in one place.  This can be
-+     * done before any of the other tracks or sanity checks. */
-+    if ( v->runstate.state == RUNSTATE_INIT ) {
-+        vcpu_start(p, v, sevt.old_runstate, sevt.new_runstate, ri->tsc);
-+        return;
-+    }
-+
-     /* Close vmexits when the putative reason for blocking / &c stops.
-      * This way, we don't account cpu contention to some other overhead. */
-     if(sevt.new_runstate == RUNSTATE_RUNNABLE
-@@ -7190,32 +7244,27 @@ update:
-      * or stopping actually running on a physical cpu. */
-     if ( type == CONTINUE )
-     {
--        if( v->runstate.state == RUNSTATE_INIT ) {
--            /* Start-of-day; account first tsc -> now to v */
--            vcpu_start(p, v);
--        } else {
--            /* Continue running.  First, do some sanity checks */
--            if ( v->runstate.state == RUNSTATE_LOST ) {
--                fprintf(warn, "WARNING: continue with d%dv%d in RUNSTATE_LOST.  Resetting current.\n",
--                        v->d->did, v->vid);
--                if ( p->current )
--                    vcpu_prev_update(p, p->current, ri->tsc, RUNSTATE_LOST);
--                vcpu_next_update(p, v, ri->tsc);
--            }
--            else if( v->runstate.state != RUNSTATE_RUNNING ) {
--                /* This should never happen. */
--                fprintf(warn, "FATAL: sevt.old_runstate running, but d%dv%d runstate %s!\n",
--                        v->d->did, v->vid, runstate_name[v->runstate.state]);
--                error(ERR_FILE, NULL);
--            } else if ( v->p != p ) {
--                fprintf(warn, "FATAL: continue on p%d, but d%dv%d p%d!\n",
--                        p->pid, v->d->did, v->vid,
--                        v->p ? v->p->pid : -1);
--                error(ERR_FILE, NULL);
--            }
--
--            runstate_update(v, RUNSTATE_RUNNING, ri->tsc);
-+        /* Continue running.  First, do some sanity checks */
-+        if ( v->runstate.state == RUNSTATE_LOST ) {
-+            fprintf(warn, "WARNING: continue with d%dv%d in RUNSTATE_LOST.  Resetting current.\n",
-+                    v->d->did, v->vid);
-+            if ( p->current )
-+                vcpu_prev_update(p, p->current, ri->tsc, RUNSTATE_LOST);
-+            vcpu_next_update(p, v, ri->tsc);
-+        }
-+        else if( v->runstate.state != RUNSTATE_RUNNING ) {
-+            /* This should never happen. */
-+            fprintf(warn, "FATAL: sevt.old_runstate running, but d%dv%d runstate %s!\n",
-+                    v->d->did, v->vid, runstate_name[v->runstate.state]);
-+            error(ERR_FILE, NULL);
-+        } else if ( v->p != p ) {
-+            fprintf(warn, "FATAL: continue on p%d, but d%dv%d p%d!\n",
-+                    p->pid, v->d->did, v->vid,
-+                    v->p ? v->p->pid : -1);
-+            error(ERR_FILE, NULL);
-         }
-+
-+        runstate_update(v, RUNSTATE_RUNNING, ri->tsc);
-     }
-     else if ( sevt.old_runstate == RUNSTATE_RUNNING
-               || v->runstate.state == RUNSTATE_RUNNING )
-@@ -7232,10 +7281,7 @@ update:
-          *   # (should never happen)
-          */
-         if( sevt.old_runstate == RUNSTATE_RUNNING ) {
--            if( v->runstate.state == RUNSTATE_INIT ) {
--                /* Start-of-day; account first tsc -> now to v */
--                vcpu_start(p, v);
--            } else if( v->runstate.state != RUNSTATE_RUNNING
-+            if( v->runstate.state != RUNSTATE_RUNNING
-                        && v->runstate.state != RUNSTATE_LOST ) {
-                 /* This should never happen. */
-                 fprintf(warn, "FATAL: sevt.old_runstate running, but d%dv%d runstate %s!\n",
-@@ -7264,11 +7310,8 @@ update:
- 
-         vcpu_next_update(p, v, ri->tsc);
-     }
--    else if ( v->runstate.state != RUNSTATE_INIT )
-+    else
-     {
--        /* TSC skew at start-of-day is hard to deal with.  Don't
--         * bring a vcpu out of INIT until it's seen to be actually
--         * running somewhere. */
-         runstate_update(v, sevt.new_runstate, ri->tsc);
-     }
- 
--- 
-2.25.1
-
+--------------KOZ7ZtvRb62jdp8pvjMndc9b--
 
