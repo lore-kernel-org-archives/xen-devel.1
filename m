@@ -4,36 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852CFC6FD18
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Mar 2023 10:21:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.516153.799818 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8BA4C74A5B
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Mar 2023 10:22:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.516154.799828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phSw7-0000BL-6v; Wed, 29 Mar 2023 10:21:47 +0000
+	id 1phSwG-0000Vk-Ex; Wed, 29 Mar 2023 10:21:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 516153.799818; Wed, 29 Mar 2023 10:21:47 +0000
+Received: by outflank-mailman (output) from mailman id 516154.799828; Wed, 29 Mar 2023 10:21:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phSw7-0000BE-3j; Wed, 29 Mar 2023 10:21:47 +0000
-Received: by outflank-mailman (input) for mailman id 516153;
- Wed, 29 Mar 2023 10:21:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1phSwG-0000Vd-C3; Wed, 29 Mar 2023 10:21:56 +0000
+Received: by outflank-mailman (input) for mailman id 516154;
+ Wed, 29 Mar 2023 10:21:54 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Nen3=7V=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1phSw5-0000Ax-A4
- for xen-devel@lists.xenproject.org; Wed, 29 Mar 2023 10:21:45 +0000
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7edb853b-ce1b-11ed-b464-930f4c7d94ae;
- Wed, 29 Mar 2023 12:21:41 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 5A2615C0061;
- Wed, 29 Mar 2023 06:21:40 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Wed, 29 Mar 2023 06:21:40 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 29 Mar 2023 06:21:38 -0400 (EDT)
+ <SRS0=WOlf=7V=citrix.com=prvs=445effd08=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1phSwE-0000AN-Ax
+ for xen-devel@lists.xenproject.org; Wed, 29 Mar 2023 10:21:54 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 83f93df2-ce1b-11ed-85db-49a42c6b2330;
+ Wed, 29 Mar 2023 12:21:52 +0200 (CEST)
+Received: from mail-bn7nam10lp2101.outbound.protection.outlook.com (HELO
+ NAM10-BN7-obe.outbound.protection.outlook.com) ([104.47.70.101])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 29 Mar 2023 06:21:38 -0400
+Received: from SJ0PR03MB6360.namprd03.prod.outlook.com (2603:10b6:a03:395::11)
+ by PH0PR03MB6940.namprd03.prod.outlook.com (2603:10b6:510:16e::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.35; Wed, 29 Mar
+ 2023 10:21:36 +0000
+Received: from SJ0PR03MB6360.namprd03.prod.outlook.com
+ ([fe80::48a7:d1ab:897:acda]) by SJ0PR03MB6360.namprd03.prod.outlook.com
+ ([fe80::48a7:d1ab:897:acda%6]) with mapi id 15.20.6178.041; Wed, 29 Mar 2023
+ 10:21:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,224 +51,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7edb853b-ce1b-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1680085300; x=1680171700; bh=KfquH4sfpRUM3ASZWY2tWbSYgabYb4sCOmF
-	F71dxQ3I=; b=ZGjktOg8M2ePuXKdoZ0zAREAJEb2l3Cv3J42rQcVxl6mOGFRJuy
-	X+d4ZTyBIa7lFlOvalL08lVVkNV2NwZPIl4WCJuxemgxnLO9Y56bSSpj7I7yjS1p
-	Vb+p2nR9Bmw56IF+S/QSuf2xPtBOHfPHfdZGI74Rr/8l9FwJcPoIbm8dmIo4UbHH
-	7sMLJGt5BpGnstdbID8wlPIiCR3sj9XDxaV/fDYu3V8CxjjV4cXHqYbulx38plbm
-	gtf1H9F4LqU50OlDb32HP/p3Q5JaCajbIO6UGDcTq9wkKn81fJGI0h5PXZDsfPim
-	WCTofDJfLn2e9rTsU55TU0On2D9Ty/iwKpg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1680085300; x=1680171700; bh=KfquH4sfpRUM3
-	ASZWY2tWbSYgabYb4sCOmFF71dxQ3I=; b=jNTCSLPDey86fQQlzO3OSLgVFGey/
-	eRg+nGzR8GKkrtgtTUZuXd3Rqbk7fDr1+ZJrsFIQmUkOX+oxUF6s1z3ZL7rcDtom
-	tHRMv2xLmkag75WpfvjLxH7pZYvbEmOpTYXt9iX86NXjxVNwHkz67eVSpWuTXs3p
-	T3E9xsHt+KuJbwS8aFrx7KvVb6LYEAJ3auO2zTD4Vp+CrZuczgCKfzzZM8qRpa5u
-	qxbq4vNPCegSP0i8Setec2zJ3sHm6jpIgg0rlcfzifcA0S98S+NUukrSYhRw3Gr6
-	n7s28yILCuulgKIVb8xN3+xiKN+9PndTGsMMTn+4QBmBHN/oK0swqzwSg==
-X-ME-Sender: <xms:NBEkZHqiPzLo1ND1gQwXM78UfNWnD7FQsHq6nFde0a2zhdwDS14Ukg>
-    <xme:NBEkZBrmf23O40WCKfaNtw8J9jVcOq5AigEArMsDMvGzfIxpjFs7PVCh_rQ1TAIRZ
-    Ck8o4NeBOCdYA>
-X-ME-Received: <xmr:NBEkZEOtiCsAjyGiij5Uu9l-CWtS1OL6fauVjlWOqMA20e-8khsa4-GhlKwlDeDra5aScr_hUu2ZCP1GZUpD3Mskvz1YSkvFdXw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdehiedgvdejucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgv
-    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
-    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfdu
-    leetfeevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
-    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:NBEkZK5jg217hqWI-BxswLrO9Ge66d1xGycAe8sQmzTrf-5KTayVAg>
-    <xmx:NBEkZG6JK7FwZ-7Ri3s3IyWKg7vFW5NUg1aaexGjdwXq9ShdukWPxA>
-    <xmx:NBEkZCj0UCOwQrnN4hykopRfX0YMc5qKj8OJC-XGMwUS3RicaWFWtw>
-    <xmx:NBEkZB0JmsgJVgH0pVPG5zoO7zuhFpoT6mRG3js1y-7vJM7Cf0PB2A>
-Feedback-ID: i1568416f:Fastmail
-Date: Wed, 29 Mar 2023 12:21:36 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/2] drivers/char: Use sub-page ro API to make just xhci
- dbc cap RO
-Message-ID: <ZCQRMAoch+oq+2/e@mail-itl>
-References: <cover.0fffd3f3080b5eeb8d22126eda6088734bb0c926.1679911575.git-series.marmarek@invisiblethingslab.com>
- <befefa60ea42a41543bc6dad70a559816cda8b7c.1679911575.git-series.marmarek@invisiblethingslab.com>
- <5cc58e5b-ba23-e7ae-c575-fe8cd713f515@suse.com>
+X-Inumbo-ID: 83f93df2-ce1b-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1680085312;
+  h=from:to:cc:subject:date:message-id:
+   content-transfer-encoding:mime-version;
+  bh=GgzvQ4F97uMh6hQ3cKDDJg2+/D82P4paLoBbMztQgYE=;
+  b=cvnvmoP4R/Lj0L5M429EDwTEh7aJo+mPf/A7uR/E1Q+mH1+RQijEUjlH
+   3yyLa1LFq69l6IHubnqwAo1vl+8MAuc66IxLIX4N68OEEU5NatNUwGACc
+   y/Ak4S5VcBYjhNZU8M1XnL9x7eHHzlgwiiEq/TyG/Utq8pHPU2J1wStUy
+   E=;
+X-IronPort-RemoteIP: 104.47.70.101
+X-IronPort-MID: 102857261
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:9JUsM6oJSSfGGex5NXgzlXeoO0leBmIKZBIvgKrLsJaIsI4StFCzt
+ garIBnUb/uKMDf2LdgkaYjkpBlU7Z+Ay9ZiS1Y5rH0zQSwb+JuZCYyVIHmrMnLJJKUvbq7FA
+ +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpA1c/Ek/NsDo788YhmIlknNOlNA2Ev
+ NL2sqX3NUSsnjV5KQr40YrawP9UlKm06WNwUmAWP6gR5weFzShNVfrzGInqR5fGatgMdgKFb
+ 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
+ OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
+ RAXAB4yTACYi767+bCQZMA8nvw9J/jBJoxK7xmMzRmBZRonabbqZvySoPV+g3I3jM0IGuvCb
+ c0EbzYpdA7HfxBEJlYQDtQ5gfusgX78NTZfrTp5p4JuuzSVkFM3j+CraYKMEjCJbZw9ckKwv
+ GXJ8n6/GhgHHNee1SCE4jSngeqncSbTAdpIRODnrKAz6LGV7jMLKx87CluwmP6o1FWbf/FzC
+ WBI4xN7+MDe82TuFLERRSaQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3Oc0TzE30
+ l6Cn/vyGCdi9raSTBqgGqy8qDqzPW0fKzAEbCpdFQ8duYC7+cc0kw7FSctlHOitlNrpFDrsw
+ jeM6i8jm7EUis1N3KK+lbzavw+RSlHyZlZdzm3qsqiNtGuVuKbNi1SU1GXm
+IronPort-HdrOrdr: A9a23:Ash9VqBNegzMiDjlHejHsseALOsnbusQ8zAXPh9KJCC9I/bzqy
+ nxpp8mPH/P5wr5lktQ++xoX5PwOU80lKQFmLX5WI3PYOCIghrNEGgP1+vfKl7balDDH5BmpM
+ BdmsFFYbWfbGSS5fyKmjVQeOxQpeVvnprY5ts3mBxWPHpXguxbnnBE4kHxKDwGeCB2Qb4CUL
+ aM7MtOoDStPVwRc8SAH3EAG8TTutHRk5riQBgeQzoq8hOHgz+E4KPzV0Hw5GZUbxp/hZMZtU
+ TVmQ3w4auu99m91x/nzmfWq7hGhdf7zdNHJcqUzuwYMC/lhAqEbJloH5eCoDc2iuey70tCqq
+ iFnz4Qe+BIr1/BdGC8phXgnyHmzTYV8nfnjXuVm2Hqr8DVTC8zT5Mpv/MRTjLpr24b+P1s2q
+ NC2GyU87JREBP7hSz4o/zFTQtjmEaYqWcr1cQTk3tce40Db6I5l/1owGplVLM7WA7q4oEuF+
+ djSOna+fZtaFufK0vUu2F+qebcLEgbL1OjeAwvq8aV2z9ZkDRS1E0D3vESmX8G6dYUV4REz/
+ 6sCNUmqJh+CustKY5tDuYIRsW6TkbXRwjXDW6UKVP7UIkaJnP2rYLt6rld3pDnRHUx9upypH
+ 39aiIZiYZrEHieSvFmnac7vywleV/NEwgEkaplltpEUr6VfsuZDcTMciFqryKamYRgPiTqYY
+ fOBHtoOY6dEYKXI/cu4+TfYegmFZBMarxghv8LH3Szn+nsFqrG8sTmTde7HsucLd9jYBK0Pk
+ c+
+X-IronPort-AV: E=Sophos;i="5.98,300,1673931600"; 
+   d="scan'208";a="102857261"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=A2IaZAR5vPZAk/isGePCrxrxNs0Kn6y9ikSt2Q89VMyv8c/UrAr8HljfVLEv8GdPSGe+lhNTHlbo9zAL+NWrlYp5osggMFJu6YItD9kWOw8jtq/Xnu6Ya1QJ7BWhg6XWImU0hoVh4zmf/OceCr+3CnT8I17nnXBiFY4A91hTeFtZ1kiMr6WwIol5j1uINIvL1I3ueDcMHR238+gX6GI4UkBXKH9ZcsIX6arIzIFrhrrkY1N1Hx/BuydUb60gqpwVJ8QSxvFa+Wl2rOPUTP5hgYJkzUrKSQbZhcRieMlo7E7SNcVpczh5GJL0fkrYJbVpy8bMIWbHi4Y51PpI29tNPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GBcikQid1EDsNKVmlhoAesovXe8SAQfNny1rvck7MW4=;
+ b=TyzBoTPpJLj3nfCkblAAUY66i4P5J/JX5Qovwqne8VjrGY1nVAvn2mLsBaGOgNDG6LxFrPr3RmFqnny9P6MrtKlmU5h+flP5x654QmGxKCRQpkfRzts0wSUYAPLWwTQfzRvskvZwxeHtL3bgAuNGoFiw+b16eAHS1we6h0kZzHA5WJ5EfKcwQ3DBWwW062X17uMiU8Y4HqBKs5ULL5jPw75BX2Un5lj58btXEuCy+cSiWvFK59a09RRsGxnu9w9a/8b1frwRNy7hRKvVZuDMILB9p0OK9SEIFtZbHrcocd6XVYVArnWL8rJ01Lh6OHP9uC3C2+gsgj1c12glxhNohQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GBcikQid1EDsNKVmlhoAesovXe8SAQfNny1rvck7MW4=;
+ b=bhz+H6GD+MtpaZkzz1G7eQG6yLfxiCLJIijOK6CpFuOSFwkMjuKFhlyZ+FuBeydqHdoEIKKbCaVN9EAHDQWcGYXqvu8xKGz3WzSrlvhn2AyOgwpCBcKBsIoFoEw3bm/IS7AgzfkqHjMarN5McGCSbs5KDhaasws+sbFPtxZhnfQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com,
+	Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH] vpci/msix: restore PBA access length and alignment restrictions
+Date: Wed, 29 Mar 2023 12:18:10 +0200
+Message-Id: <20230329101810.84726-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.40.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P265CA0238.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:350::11) To SJ0PR03MB6360.namprd03.prod.outlook.com
+ (2603:10b6:a03:395::11)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="oFYokrQPuEpgDQOi"
-Content-Disposition: inline
-In-Reply-To: <5cc58e5b-ba23-e7ae-c575-fe8cd713f515@suse.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB6360:EE_|PH0PR03MB6940:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7128f24e-ec8a-4a87-fa31-08db303f6042
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	REENbcAroG1WWJHJJ+Tn53SljIdFat1+X2oiIJbUqOeVsQ/dy5Al/5wtMqb9pnoby02ZlvaR1EiFp0GvJs5vlEBCZkq+/cb34TjnTxuaIy1o/5N3Xq5lg3p58x8EMdp9q3BGpseWGIJz+ogBihE2iI1KjQJfhtO2wteCmPMovNRuDoVCjOri7de/1b9WyQ4yJqaYVkPmCmSt08a2VBJKFD0Aam4dJ+CSFGRsqlXJQrSs2jC6+pzV9U8kRm6PMnfzvsJDhWVbmEUVB7cgkFN3Orh5IHqG2bQQl/PO7Xf3dYuSSjV+Bp3Pu4G81h2bTfn5MCbGoK4FqWougoU4XsvaBipvGNFhVLMIsSp57TnqToc2g0aNVURKS0AjxEdDRVchqZGa+Lz9ql4qC7SZzWc8ycZSdwESeFn5+Jl+/qFmwueFUSTq8Nf5ltFU4/7fr6uOXRl03su2zVcCui2gOL21+vTPX0olYz236x65Hsxk8adjaEe0E/Z1LzE9junt0tiyPgnHth20Te9VhbPDG4VNv+Dl+J5zMQpMtKwAeUFu3ojRi6Q1B/7ypirXB5HYo4Re
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6360.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(396003)(136003)(346002)(39860400002)(376002)(451199021)(83380400001)(1076003)(6666004)(107886003)(82960400001)(26005)(478600001)(316002)(6506007)(36756003)(8676002)(66476007)(66946007)(66556008)(6916009)(86362001)(4326008)(41300700001)(6512007)(2616005)(6486002)(38100700002)(5660300002)(8936002)(2906002)(186003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?N0xBM01saWZzNGx6bjNPSFA2MjNiN0RuOGltamVYQzl2MStBMUQxejFWcERo?=
+ =?utf-8?B?TzJ5NzJKTklSelZsY1NpVDV3YlhPL2VqUk81QTdPOGtOczU2UlZkaDlIWjRy?=
+ =?utf-8?B?Q0N1NzRjNUx4SmVRbUgvdVl3QXRNVGlxSE1IUi9TVWRNdk9CRnk4UEs4Q2lS?=
+ =?utf-8?B?RDVacnFlVnRES25jUE1PZHdGTVhQWVcvZm5hb2Vpdy9WL0huR29hZ2pnQWs1?=
+ =?utf-8?B?bWowaTNBNjJnemxBeEp3ZEw2dVAwMUIzWmRIRVhoZnZnMm04dmp5UzViR3Bh?=
+ =?utf-8?B?MUpVWU84NHBHQzlCRDA1NS85YnMrejdTWkoreGMwR1FQdU42aU9VNnA5bXg0?=
+ =?utf-8?B?UGtDTWZDdDJGU1ZDTEhCY0w2dXh0bGFRdXl6MHlSOUpMemNVVWh4K3N6eEdV?=
+ =?utf-8?B?Q0RacXhVTWNJVTg1MnFDS0NQeUlySjdqTVRYNjFGamtmejR4YUYwdm1HZVpY?=
+ =?utf-8?B?M09xR3grSjNLaVhNZlVabHVoZWlLM3F6TG0xdXZxNmZ5VUgydS82d1NtSzI0?=
+ =?utf-8?B?K2tjQ2ZTd0cyKzB2UlpoaE1WOFFnYkM4cXRFeEYrTmJUbFRTaitGYXBwZDhr?=
+ =?utf-8?B?YW1pZUFGbWEwSWpUZFo3N2wrRzJ0anhhb1NpZGMwbGw1VGhBTytITW8wRUhm?=
+ =?utf-8?B?bVFhd0FrUlBHdUhVRE9qNHVKdWRPdzRaSzNTQ2h3Ync5UlYrbCs3SDZUdk1r?=
+ =?utf-8?B?ZXVITHJaMlYyVXRBNlpRdThheUMvbmV2OTBxMFdwY1dCU3RLcHhNc2s1V0la?=
+ =?utf-8?B?ekJjNXVtNnZhd3Ixc005UEo2VTBWcG9QTHVBWmhwWnhEcnJsVHBNVkVmVnFl?=
+ =?utf-8?B?OGdGNlVKMFhpNmxSUURTRnJEQ0ZnbTdEMnNtNUo4d2NNM1lUckVsVEJ0V2o0?=
+ =?utf-8?B?UE9CNkxwUXhhZW5KYTdFNGsvbHFVeU94L0t4UXE5SDdIK0I5bTVpTXpYSWgr?=
+ =?utf-8?B?ZWFySGR5UEhUcXdxVERrRVZnZXJWYXR1anlFUkhYa2I1b3dtNXRFT1pia2Yx?=
+ =?utf-8?B?d0NXanZEVFYrQk15Qjcra2R4QUUzZkZxWnFuQlhvajhZekkyNE5YUnlqR1h4?=
+ =?utf-8?B?bFI5bFBhTXRzMnZDZzVRVmk4RUZMYkt4ekFkaWFwT053ZFZkTHNoaUtOZnla?=
+ =?utf-8?B?Uk5leFRNYzgyMUY4UWFCWDlRRUNOdUdoeDdSYWN1bndTT0tsR241YkZkaFhx?=
+ =?utf-8?B?QTRna2JUYnZ2WHYvK2hGaktSVDNwNm1KSS9kOHVCemY3NDN0c3AzdG55U1B5?=
+ =?utf-8?B?cC9IdnFVOGhPRGVyd3dqd2JPQU5qVVhJajRFcFc2VHVyVGlVZFZxUlRBQk9l?=
+ =?utf-8?B?dzRjMFFaYkp6MzRKYTlKbnkzZVFEYTZFQlQ5WmQxTVhwcTlPby9iQWw4MDg0?=
+ =?utf-8?B?ajc2cnBFQSs5Qmh0UDRsZlZBbFBVK3hGUHZkSEFCVjZlM1R6aFRvcnVDUEcw?=
+ =?utf-8?B?MUZXczdnY2VVbCtVU1JWY3ZNWCtMNjRnZHk3VnE5akVBZFVXemMvN1RQSEpr?=
+ =?utf-8?B?T1hrOUFmSXkvOVJLc1VwZy90eHJvODQvNC91OUc0SGtRUVRYODlRYm1aSk9h?=
+ =?utf-8?B?TjFpVmpjalpmUkExMXZtTFIyblZCTFZHSi9yYmlhclRzUmpGZkpsUXR5YUFP?=
+ =?utf-8?B?T2w3S3lYbnplTlVVYjQ0U2dGcW5zWCt5OGtWQVcxYnRQd2ZjckZKZW5ScVdD?=
+ =?utf-8?B?d3hOUjhRbUhCckduVmY1NEhINkNmdXVpZnBidVNEZkUvbEs1cGlScy9RbzlH?=
+ =?utf-8?B?aitKc2Q2TzRLSTQxK1YyT05yQXNhYjg2TzZMMFVjOG5tWTlubVJDL1V5MnRT?=
+ =?utf-8?B?ME5TN1FkbmxxeDBCbkdVNllLTU1sdUxBUXVlc1pNOUF2d0tqVlkxVDh1RE1u?=
+ =?utf-8?B?WHZDZTBrbzk2SHJDckVJUjZ0eG93WittWFc5QWNhaFlGc09oaXlwazZJZlJ0?=
+ =?utf-8?B?bWpEaDRMZUxKeVpaMEJmNmhlRTJ6VHlLOHB4S3ZMMDJwSEZnNkxIclZyQldI?=
+ =?utf-8?B?RXAxTW9qU01OVjFhaFdhR2QxaXJjVzF0ZGRTelRQbkFJUFZJbGlvM2lLK2t0?=
+ =?utf-8?B?MEpBUTNCcER2VXpyT1hwemtYQVFLdzVabWU5NEVVUnh2MzF0TzVNNXdRWkor?=
+ =?utf-8?Q?bWR/UMw2vz8laF//JbIA06ebT?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	QMQq+ifS9ww4cSH1RWg0yjBqZ0XfCCTveaxNwczdjjc1B29o/uoqyyrkjz3NQDXyfQpAowvnc6kENrdDLBLu0wxgi4meEJj8r5hbA9wTYIDmdWs9wuEjiLm1aqJuvsgKoCiwQBhrIQJJ78lujOc9+JN/RVnzO1wMFtvbqOEaMpm7Ty1SolXuLltlz9sUyxhdSfpWC8vF/Yz8qJ1M/O11L1k5/9SICJv6IEdQ1+C+5VbyMGaKNDFo/bWnX+pOU1tZW/KSDUqToO5DPeCxpJozwuL/BcwAc02xvfRoMRgLIXhKJrRQWFvCtuu5qkS0RQ+Lpu9oJXi/z7TW9E9SFXBkVEWip7kY2+1BHJWUbNboROcDkO/qtllR/7fd0KvF7tYm6xXc7BBLriV3BIKGeIhxTy3jchOL0J5PPpYFXujetdFsu9keMWCDNWYjocQXybaEinT8c5j8GqtExGFNychOtgIWtQY/RFo94Kjb54lhycvIRuCzW/OqwPnKdsaAwblEmC9Me0bIoF3jXfF9QmSseyopZfpbMaGJ8tdljdqgz/nQaZJyMBJMQGvErheZ8rjYRn9gimzY59/ABE0XCj/pmB/Rg2sav9mSKAPTNsNFpbgEzajgCPsMbHrb/hfnReZA4e7ulNgsI3Nq/1NLsBO3IHKC3OkoPw6gSe+xPHUMlNqttVcPQ0crxPd/gIbPzCxJbFrnBv+wiiWZV/VYyo9hEVtDKTGUCxN9AqZPQdQoUrPemeTxp9GwDX9xpTb8YzqgbM4gB/Nfx1/bUNmiqXtVK7bE9XNWoaggZ8FBSbgN2heLTuXG8Rz+bzsx+E9D9JPw
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7128f24e-ec8a-4a87-fa31-08db303f6042
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6360.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2023 10:21:36.2100
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v2E7w6pWb5pGsTV/0r8eXjKOWgRUZxuTvLAw5oLTd1IyoRF/Gv5s/T6wnoWRGsRmRjWmJPZtFUCxsSS/HrWthA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6940
 
+Accesses to the PBA array have the same length and alignment
+limitations as accesses to the MSI-X table:
 
---oFYokrQPuEpgDQOi
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 29 Mar 2023 12:21:36 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/2] drivers/char: Use sub-page ro API to make just xhci
- dbc cap RO
+"For all accesses to MSI-X Table and MSI-X PBA fields, software must
+use aligned full DWORD or aligned full QWORD transactions; otherwise,
+the result is undefined."
 
-On Wed, Mar 29, 2023 at 11:14:52AM +0200, Jan Beulich wrote:
-> On 27.03.2023 12:09, Marek Marczykowski-G=C3=B3recki wrote:
-> > ... not the whole page, which may contain other registers too. In fact
-> > on Tiger Lake and newer (at least), this page do contain other registers
-> > that Linux tries to use. And with share=3Dyes, a domU would use them to=
-o.
-> > Without this patch, PV dom0 would fail to initialize the controller,
-> > while HVM would be killed on EPT violation.
-> >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
-> >  xen/drivers/char/xhci-dbc.c | 38 ++++++++++++++++++++++++++++++++++++--
-> >  1 file changed, 36 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
-> > index 60b781f87202..df2524b0ca18 100644
-> > --- a/xen/drivers/char/xhci-dbc.c
-> > +++ b/xen/drivers/char/xhci-dbc.c
-> > @@ -1226,9 +1226,43 @@ static void __init cf_check dbc_uart_init_postir=
-q(struct serial_port *port)
-> >                           uart->dbc.xhc_dbc_offset),
-> >                  PFN_UP((uart->dbc.bar_val & PCI_BASE_ADDRESS_MEM_MASK)=
- +
-> >                         uart->dbc.xhc_dbc_offset +
-> > -                sizeof(*uart->dbc.dbc_reg)) - 1) )
-> > -        printk(XENLOG_INFO
-> > +                sizeof(*uart->dbc.dbc_reg)) - 1) ) {
->=20
-> Nit: No need for a brace here (and certainly not a misplaced one).
->=20
-> > +        printk(XENLOG_WARNING
->=20
-> This log level change looks kind of unrelated.
->=20
-> >                 "Error while adding MMIO range of device to mmio_ro_ran=
-ges\n");
-> > +    }
-> > +    else
-> > +    {
-> > +        unsigned long dbc_regs_start =3D (uart->dbc.bar_val &
-> > +                PCI_BASE_ADDRESS_MEM_MASK) + uart->dbc.xhc_dbc_offset;
-> > +        unsigned long dbc_regs_end =3D dbc_regs_start + sizeof(*uart->=
-dbc.dbc_reg);
-> > +
-> > +        /* This being smaller than a page simplifies conditions below =
-*/
-> > +        BUILD_BUG_ON(sizeof(*uart->dbc.dbc_reg) >=3D PAGE_SIZE - 1);
->=20
-> Why PAGE_SIZE - 1 (or why >=3D instead of > )? If there is a reason, then
-> the comment wants to be in sync.
+Introduce such length and alignment checks into the handling of PBA
+accesses for vPCI.  This was a mistake of mine for not reading the
+specification correctly.
 
-Indeed looks like off-by-one.
+Note that accesses must now be aligned, and hence there's no longer a
+need to check that the end of the access falls into the PBA region as
+both the access and the region addresses must be aligned.
 
-> > +        if ( dbc_regs_start & (PAGE_SIZE - 1) ||
->=20
-> Nit: Please parenthesize the & against the || (similarly again below).
->=20
-> Like asked by Roger for patch 1 (iirc), here and below please use
-> PAGE_OFFSET() in favor of (kind of) open-coding it.
->=20
-> > +                PFN_DOWN(dbc_regs_start) =3D=3D PFN_DOWN(dbc_regs_end)=
- )
->=20
-> Nit: Style (indentation).
->=20
-> > +        {
-> > +            if ( subpage_mmio_ro_add(
-> > +                        _mfn(PFN_DOWN(dbc_regs_start)),
-> > +                        dbc_regs_start & (PAGE_SIZE - 1),
-> > +                        PFN_DOWN(dbc_regs_start) =3D=3D PFN_DOWN(dbc_r=
-egs_end)
-> > +                        ? dbc_regs_end & (PAGE_SIZE - 1)
-> > +                        : PAGE_SIZE - 1,
-> > +                        FIX_XHCI_END) )
->=20
-> Nit: I think this is too deep a level of indentation; it should be a
-> single level (4 blanks) from the start of the function name (also
-> again another time below).
->=20
-> > +                printk(XENLOG_WARNING
-> > +                        "Error while adding MMIO range of device to su=
-bpage_mmio_ro\n");
->=20
-> Nit: Style (indentation).
->=20
-> > +        }
-> > +        if ( dbc_regs_end & (PAGE_SIZE - 1) &&
-> > +                PFN_DOWN(dbc_regs_start) !=3D PFN_DOWN(dbc_regs_end) )
-> > +        {
-> > +            if ( subpage_mmio_ro_add(
-> > +                        _mfn(PFN_DOWN(dbc_regs_end)),
-> > +                        0,
-> > +                        dbc_regs_end & (PAGE_SIZE - 1),
-> > +                        FIX_XHCI_END + PFN_DOWN(sizeof(*uart->dbc.dbc_=
-reg))) )
-> > +                printk(XENLOG_WARNING
-> > +                        "Error while adding MMIO range of device to su=
-bpage_mmio_ro\n");
-> > +        }
-> > +    }
->=20
-> Seeing the uses it occurs to me that the interface is somewhat odd: It
-> adds a r/o range to a page that is already recorded to be r/o. It would
-> imo be more logical the other way around: To add an exception (writable)
-> range. The only alternative would be to include the call to
-> rangeset_add_range(mmio_ro_ranges, ...) as part of the new function, and
-> reduce accordingly the range passed earlier in the function. But I think
-> this would needlessly complicate the code there.
+Fixes: b177892d2d ('vpci/msix: handle accesses adjacent to the MSI-X table')
+Reported-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/drivers/vpci/msix.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-I'm trying to make the interface safe against multiple calls making
-different parts of the page R/O. If it would mark an exception, then
-handling a page where multiple regions need to be protected would be
-rather cumbersome. It isn't the case for XHCI driver, but for example it
-could be in MSI-X (if I'd actually use this API there).
+diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
+index 99dd249c15..25bde77586 100644
+--- a/xen/drivers/vpci/msix.c
++++ b/xen/drivers/vpci/msix.c
+@@ -278,6 +278,11 @@ static int adjacent_read(const struct domain *d, const struct vpci_msix *msix,
+     if ( !adjacent_handle(msix, addr + len - 1) )
+         return X86EMUL_OKAY;
+ 
++    if ( VMSIX_ADDR_IN_RANGE(addr, vpci, VPCI_MSIX_PBA) &&
++         !access_allowed(msix->pdev, addr, len) )
++        /* PBA accesses must be aligned and 4 or 8 bytes in size. */
++        return X86EMUL_OKAY;
++
+     slot = get_slot(vpci, addr);
+     if ( slot >= ARRAY_SIZE(msix->table) )
+         return X86EMUL_OKAY;
+@@ -419,9 +424,8 @@ static int adjacent_write(const struct domain *d, const struct vpci_msix *msix,
+      * assumed to be equal or bigger (8 bytes) than the length of any access
+      * handled here.
+      */
+-    if ( (VMSIX_ADDR_IN_RANGE(addr, vpci, VPCI_MSIX_PBA) ||
+-          VMSIX_ADDR_IN_RANGE(addr + len - 1, vpci, VPCI_MSIX_PBA)) &&
+-         !is_hardware_domain(d) )
++    if ( VMSIX_ADDR_IN_RANGE(addr, vpci, VPCI_MSIX_PBA) &&
++         (!access_allowed(msix->pdev, addr, len) || !is_hardware_domain(d)) )
+         /* Ignore writes to PBA for DomUs, it's undefined behavior. */
+         return X86EMUL_OKAY;
+ 
+-- 
+2.40.0
 
-Making subpage_mmio_ro_add() to call mmio_ro_ranges() on its own,
-together with Roger's suggestion of using ioremap() internally instead
-of using fixmap would make it a bit nicer (if mapping the same page with
-ioremap() in addition to fixmap isn't a problem).
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---oFYokrQPuEpgDQOi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmQkETAACgkQ24/THMrX
-1yw5Rgf6AwqEcnmXLtIEPNdBPC3YPwhQtXnzRVzU6y9Gvp8enlVcMNYzlpt+3rCF
-ccbPL2oR2g8wyENdxZ5p0Z84fe86x3W9hVwI4dNadTT3RTXdhgw/CpV7RbHfl3u3
-JCVTwrw97Vq1waptdzIrjwRPJPW/OwgESefJxXb42h8nliO0wqwT/U/8VnsD7H/U
-jiEIswH3pBId9NkKFrScE0iai5+BVgW4S7B2vNsNsLVzcW+4foHNtU++3hZD1fBr
-svjLHx7UwMfEA+r+I9S0sp5HVuZOXwLyKMx/4S9TsxF00/ND1tOyOfaeQqOMpPQj
-fQR/euc/FEsiRKrWnuhmhV9S/7XijA==
-=iav7
------END PGP SIGNATURE-----
-
---oFYokrQPuEpgDQOi--
 
