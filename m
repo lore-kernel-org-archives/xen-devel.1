@@ -4,35 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C47B1C761AF
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 13:13:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.516734.801332 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9C7C761AF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 13:50:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.516740.801342 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phs5S-0000D9-8p; Thu, 30 Mar 2023 13:13:06 +0000
+	id 1phsfb-0004rc-4g; Thu, 30 Mar 2023 13:50:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 516734.801332; Thu, 30 Mar 2023 13:13:06 +0000
+Received: by outflank-mailman (output) from mailman id 516740.801342; Thu, 30 Mar 2023 13:50:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phs5S-0000D2-5f; Thu, 30 Mar 2023 13:13:06 +0000
-Received: by outflank-mailman (input) for mailman id 516734;
- Thu, 30 Mar 2023 13:13:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1phs5R-0000Cs-1R; Thu, 30 Mar 2023 13:13:05 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1phs5Q-0003Zb-V8; Thu, 30 Mar 2023 13:13:04 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1phs5Q-0001Zg-Ib; Thu, 30 Mar 2023 13:13:04 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1phs5Q-0007Ev-I8; Thu, 30 Mar 2023 13:13:04 +0000
+	id 1phsfb-0004rV-28; Thu, 30 Mar 2023 13:50:27 +0000
+Received: by outflank-mailman (input) for mailman id 516740;
+ Thu, 30 Mar 2023 13:50:25 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Hp/D=7W=kernel.org=patchwork-bot+netdevbpf@srs-se1.protection.inumbo.net>)
+ id 1phsfZ-0004rM-JT
+ for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 13:50:25 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ced9b997-cf01-11ed-b464-930f4c7d94ae;
+ Thu, 30 Mar 2023 15:50:20 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 74A956206D;
+ Thu, 30 Mar 2023 13:50:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CD5A9C4339C;
+ Thu, 30 Mar 2023 13:50:17 +0000 (UTC)
+Received: from aws-us-west-2-korg-oddjob-1.ci.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by aws-us-west-2-korg-oddjob-1.ci.codeaurora.org (Postfix) with ESMTP id
+ B025FE2A037; Thu, 30 Mar 2023 13:50:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,74 +49,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=GQGXVOsGn/CeQqtQOJgIxDQ28hGLV0unq2qdiT+ROs8=; b=qxXqBIntlT1b3w9pvO3PM8gKws
-	qD5mx85h28hhpVgO4C+8vbGqD5sLS8ohmyIhqvyoVYf0V/g6FuTTZecQ2z/Vrl4J8qCVH2sZ7pr+U
-	YDEz1IDV12YM0IQCe083hXuu+Vt1v/XKpiBEWi9ymIVqWvM7oF1ZKlQ6X6ScrxNEmvCw=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-180064-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: ced9b997-cf01-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1680184217;
+	bh=nCIxYfeOpNNYAdQJkG3B1YlgdvS8aT3sViVNWAQZLwA=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=RzU9+D40oss0bDCVl4JKyGqFN4Ay8AtGAFtuDOuNtAFRQ83P3OFSAP9yAuERvCxK+
+	 Lb7bHSs3foWMf+8ZckXx9yRqHJ/mGGpsCdUVvDvisqtiTiULxgd8bSO5y3F4rGbg1Y
+	 JQysUuQgHtChR+EFiMwGNin2g1dIjbVsX2Br5o0lNXHM81QPNwM7EpNEKffQ6flO50
+	 hHNDNa3+uf5EsGI29LeQVTbSYElfh0FJ0DUo5arJZ5Yx9AMBLzT9sPevlf1e0AFjzv
+	 0W/xJ5jBnJDMt44ndG9cQSTp1KACJGz0BvvR2ytTqAJldakrh9k/8RjtdnhTZL+Rag
+	 g2H9lz8o1m04w==
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Subject: [ovmf test] 180064: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=53eb26b238541799134aa5846530485c915735da
-X-Osstest-Versions-That:
-    ovmf=e3e88d90e8d777e38120c32c7b3bbfb9bcf99b79
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 30 Mar 2023 13:13:04 +0000
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v3] xen/netback: use same error messages for same errors
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <168018421771.9777.1140138877861718257.git-patchwork-notify@kernel.org>
+Date: Thu, 30 Mar 2023 13:50:17 +0000
+References: <20230329080259.14823-1-jgross@suse.com>
+In-Reply-To: <20230329080259.14823-1-jgross@suse.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: linux-kernel@vger.kernel.org, netdev@vger.kernel.org, wei.liu@kernel.org,
+ paul@xen.org, davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, xen-devel@lists.xenproject.org, jbeulich@suse.com
 
-flight 180064 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/180064/
+Hello:
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 53eb26b238541799134aa5846530485c915735da
-baseline version:
- ovmf                 e3e88d90e8d777e38120c32c7b3bbfb9bcf99b79
+This patch was applied to netdev/net.git (main)
+by Paolo Abeni <pabeni@redhat.com>:
 
-Last test of basis   180060  2023-03-30 02:42:13 Z    0 days
-Testing same since   180064  2023-03-30 11:13:36 Z    0 days    1 attempts
+On Wed, 29 Mar 2023 10:02:59 +0200 you wrote:
+> Issue the same error message in case an illegal page boundary crossing
+> has been detected in both cases where this is tested.
+> 
+> Suggested-by: Jan Beulich <jbeulich@suse.com>
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V2:
+> - new patch
+> V3:
+> - modify message text (Jan Beulich)
+> 
+> [...]
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Ard Biesheuvel <ardb@kernel.org>
-  Michael Kubacki <michael.kubacki@microsoft.com>
+Here is the summary with links:
+  - [v3] xen/netback: use same error messages for same errors
+    https://git.kernel.org/netdev/net/c/2eca98e5b24d
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
 
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   e3e88d90e8..53eb26b238  53eb26b238541799134aa5846530485c915735da -> xen-tested-master
 
