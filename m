@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08478C77B61
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 08:52:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.516529.800793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E781AC761AF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 08:59:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.516535.800814 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pho1D-00034b-5p; Thu, 30 Mar 2023 08:52:27 +0000
+	id 1pho7e-00048C-2o; Thu, 30 Mar 2023 08:59:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 516529.800793; Thu, 30 Mar 2023 08:52:27 +0000
+Received: by outflank-mailman (output) from mailman id 516535.800814; Thu, 30 Mar 2023 08:59:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pho1D-00034U-2u; Thu, 30 Mar 2023 08:52:27 +0000
-Received: by outflank-mailman (input) for mailman id 516529;
- Thu, 30 Mar 2023 08:52:25 +0000
+	id 1pho7d-000485-UK; Thu, 30 Mar 2023 08:59:05 +0000
+Received: by outflank-mailman (input) for mailman id 516535;
+ Thu, 30 Mar 2023 08:59:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yKpO=7W=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1pho1B-00034A-Pb
- for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 08:52:25 +0000
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on2062c.outbound.protection.outlook.com
- [2a01:111:f400:fe12::62c])
+ (envelope-from <SRS0=QMey=7W=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1phnzz-0005fr-S0
+ for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 08:51:12 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 30da6322-ced8-11ed-85db-49a42c6b2330;
- Thu, 30 Mar 2023 10:52:25 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AS8PR04MB9192.eurprd04.prod.outlook.com (2603:10a6:20b:44f::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.22; Thu, 30 Mar
- 2023 08:52:23 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::154e:166d:ec25:531b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::154e:166d:ec25:531b%6]) with mapi id 15.20.6222.033; Thu, 30 Mar 2023
- 08:52:23 +0000
+ id 04dd9234-ced8-11ed-85db-49a42c6b2330;
+ Thu, 30 Mar 2023 10:51:11 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B79661FEAA;
+ Thu, 30 Mar 2023 08:51:10 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 80343138FF;
+ Thu, 30 Mar 2023 08:51:10 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id LiHdHX5NJWRkIwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 30 Mar 2023 08:51:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,144 +53,499 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30da6322-ced8-11ed-85db-49a42c6b2330
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=INCrI6aDkRRrcLLcNi6lolqi1ywpN+7aLG0/YB8t9LHWy/z5xPmta5hxGY9PhPKyN41dOpops037cG0uN/k7rLJ+24LkPuP+IBcrmZclHIKc2hsk4meGleOisesxbvC9mEpzxrk4OEfkpgDdlSkDDKDNkpTaLUWq2/0lrUtHzA3h88ElGudPeMxb1L4eqUo4qABgTEUMdoKH4MeY4mzd/oNnN+/um09+Gx2Sc2/gXUbUFLkMBbhx/tkVU4QFqOg0ueaJQjWWOZj5KTDUb1q5vuwJWpFrBgEpYgU8ZoWzhFImq3RjyPSHpcno9DUBBlxKmIVu9511jhUhnLObxcRKnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t6z+q7IDztRnIlwyeJV+peCxcITcYbGX7wU+IOeUJbA=;
- b=KzxLZ3WbuzlMAUhclzN5fvmCjNIgzs00+/yPoo6g2AGnTWe8tUc1iHwDoewGubLqk1B/HzqeV5K+NRQb6mJ0Q50arw8lQb3sIThQ/F8M+mn3pg95r5LTVhmXYPoW4isDS2JokOjDvp4jVGZpGqM2JWiKT0+5bBJs/xAH+E8ws1/LBuzTP1GGgWJfALsPpNBZkP8twJt/ZJMDSsYXECJYaC6kwnyhdwLXRTsY8ZRhxWKkPo7T/bCKNXuyp9lMLB3DC3HzhxoANkAzQszHmwxxXX8gF8EmRYxLAGEQPZ3/r3fA4V4RELB0rx5gjs3HopZXND8BL1o8POvwyYOryOmxBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t6z+q7IDztRnIlwyeJV+peCxcITcYbGX7wU+IOeUJbA=;
- b=4T4h6lwE19mi/v6WQXtxGqUGsfUn5uiaCCKsbDB2Mx9ySSbLXs18y2XK4S2jUH8B1XptmEuhJzVoO/CTQurkMTlGhd4vhfY0pqkxss6V+Y0O8rYawclaVGg1Y2Fv+eVV5b0FJIvdghzPrcvplh9jsDSGWpLJl6NNETYV5cylxxxs5A7r8zBN8X6ZpbiWs6SeDWUypCTM+G6BAJxZBOmtb0Kr6YRzzrn03QqglklbN306/aMNh/wdY5NJ+vlxxezyuCFzll9H0e5LrJQJw/+ABCFZ2tInu8M8RxiNQn+3851KowX5heaXW627QVlWkMY1VbV66m1mRlhl9KxXbe4GKQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <02c609d2-096c-79ba-823b-46490dd00c04@suse.com>
-Date: Thu, 30 Mar 2023 10:52:21 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH 4/5] multiboot2: parse console= option when setting GOP
- mode
-Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: marmarek@invisiblethingslab.com, Andrew Cooper
- <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org, Daniel Kiper <daniel.kiper@oracle.com>
-References: <20221123154525.63068-1-roger.pau@citrix.com>
- <20221123154525.63068-5-roger.pau@citrix.com>
- <8f7e0393-8c0f-a924-7cee-25b9fca6f739@suse.com>
- <ZCRnU03XDCpqZQ5u@Air-de-Roger>
- <8fb2f771-3354-3f52-f923-e7fe7861cfbf@suse.com>
- <ZCVERoX9+LdQ/GIL@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <ZCVERoX9+LdQ/GIL@Air-de-Roger>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0024.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1c::15) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-Inumbo-ID: 04dd9234-ced8-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1680166270; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=n+LXWDKrHnNBBBh+eqFebI/xwup+/rnEIgqudl+aDTI=;
+	b=FW0lERnQI2c8NY81FGNYOqXsmd0iwh6gSC9Xv99qHsYMKX1vrftkz/gLbfOP75s3fXj+La
+	+Z7iiketYiYQiDrAm11gEDmC2W15aRlTDCGylChbjMGu9nw0pxfWeloycFVJdzg+PBtSPx
+	gKTFk+IxrZDZ6HNuweV9QfiemNzco2c=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Julien Grall <julien@xen.org>
+Subject: [PATCH v2 10/13] tools/xenstore: remove no longer needed functions from xs_lib.c
+Date: Thu, 30 Mar 2023 10:50:08 +0200
+Message-Id: <20230330085011.9170-11-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20230330085011.9170-1-jgross@suse.com>
+References: <20230330085011.9170-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|AS8PR04MB9192:EE_
-X-MS-Office365-Filtering-Correlation-Id: 443b3249-8c7e-4759-c956-08db30fc1422
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	JgzWmf5Cs/snruE9uFx7SV9esEsF8GKeNoIMdl1VddC+uZ4A1Zx/XqDd8sjyGlTadxClaGxUCQU/vqfbFZaUUhiRiVg5OmjDuche3/+dHgmqkYEVgiY+/viq7fuXXev8V4lVEOooo8mttfPfAnWD+5oQxY5JI8H0IpfCXWiSeGwBnnegBJQxxSxAbnpE4aPO7tIix9fSzg1lEknyEpMgfxVoziqynSudfU9Xm9M/V8+XibnCo2OBtLxmKo6ss8isDgIG4RiTWB5+v2JvUK6WNL04JyyeEyRcKOe3vUaGw9exBC7073VBMzJ6KiQ0WTo8dIT2mINN1IQ9TikwF8y8DrsPFLPtbBJdwaSdbk3WWOBqU/h2oa6mrRf0NOkfcF7o2d6cqpc7u33tRTS+1IcYR+qQ1a3XiO/0+C+HHf73z0nmdMTE5AOPFZvIJ0Y0WbBT2xPV8a4hisDS0kFeV08QnuBpx04IFaFsQNR1JD5RL2Dl/fxYIX+jSfzR+O99fL7ocupHW0/0pe+P5eh3S7qda0DJJpswAjJmE6g+023qw54DaMIY7kIjy2kP4Oz2x5dPPywbVL5iDIFOM6XpLzkM7/7EZzOFEE+Aftbj/X87c6Hl+BHsOTbF8vGIRnKZPWUA45788bsmL293SyXrF2ucHQ==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(346002)(39860400002)(396003)(136003)(366004)(451199021)(66476007)(6916009)(5660300002)(4326008)(8676002)(66946007)(66556008)(38100700002)(41300700001)(8936002)(31696002)(36756003)(86362001)(2906002)(6486002)(478600001)(2616005)(31686004)(53546011)(6512007)(6506007)(26005)(316002)(54906003)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cW5BYVk1MWVWMmpmMUhScVJtK0RiQnh0MGUwSWYydThncmFHVEQvRENmOEoz?=
- =?utf-8?B?VzI2UVFWT29Yd3Z2SmNsandlRFgzMTNzbVpVNHJMWnRQQi9SU296V1NFd1gv?=
- =?utf-8?B?b0FJRm0xam5iQU9INXEwa0NwbkhFc2FCMGcxeFNDek91U2hiZzZXVGROeXl2?=
- =?utf-8?B?Zk95THFTQ3dkMTQwMnpPS2dsY0NEQ1FSaE81bE5Id1IzMUdBcmtKSXdWcXFY?=
- =?utf-8?B?cFAxY0YrT0JwbXJqNVV0NXpWRTE0VmJGb2lYNVh5SldXRjlPMjNEelhjQUcv?=
- =?utf-8?B?a1dvMjR4SjczUWtITHBiYjRmczNzWVk1N2tMaFpEQVBNWUJha01GeWNMOXgw?=
- =?utf-8?B?S2laaHJ4eEgyc1BJUnAzRzE3L0ZBUkxlYTl3VzBCWHZQR0IvRUtzTTFaa0sz?=
- =?utf-8?B?emJ3M2cwbE5KalZvUVNEblZxTC9POFFCV0RGWWtZQ282cjZDb3ZDeU9xZFBu?=
- =?utf-8?B?S3pEeWFvb21zcEpzSVdCeTZuM3gzbGZSWUE3SVFlMGM2Qy9EZ1Nxd3BvenVw?=
- =?utf-8?B?MVpibVVtN0drMlVYYndDd3JBM0MwNUxzYW5nb2JxUmZweGx0V2NGNDR2MTB0?=
- =?utf-8?B?ME1yTFpIbGJWWmJ2cXBGQ29PanBWTUhVZk81TnAyUDhXbWRzNlNXSXJjSmpB?=
- =?utf-8?B?RWNac3FWc0Q1VEkveHZjbU5rSml3dE5oWmlwZkUreG5LQ3ZKQ2VGdUZKRlBT?=
- =?utf-8?B?UVBpM01sU3crNDUzc3dWUVZkYVVSWkJrY3R3WnlWYkRHM0lJWWRPdnBTenlZ?=
- =?utf-8?B?OGc0cVBiZDU2bVVzbFZQQjlMQ1dLYm9HNTBnQ3pETHdPcE5VSnh2Y0NEaFMv?=
- =?utf-8?B?WHIzQ3lNNTBHYWVBOTNWVzZ2WS9XbzF0RHp5OGVaRFZQWWlsYngxaGEzUmcy?=
- =?utf-8?B?V2l5VzVub20vTG9wRnJIbm1EdmtTVzF3bDJNZ2dBMHdzL3RvekVHdUoxR2Y1?=
- =?utf-8?B?UVN0K3k0cW9ieTdEeU9qbDFpOWFYSTZmYmozVVAvMHBKMHdJZWtLRG5HZXR3?=
- =?utf-8?B?RmZuWlozVVN1KzJ0N1lCNi81ZGF2dmwydElNSXRDVnJnYUtZZ09JQk5lODlx?=
- =?utf-8?B?RmpwRHpoNzZvSFp3N2hZRTNHNDdQZkdxSVVEZnlwczB3Sm02SGR5T3JSZXR4?=
- =?utf-8?B?N05zVkNyWksxbU5Pb2NCQTZCczE0NWJ2WS9rNElVbm5WTkplZjVWcjlTS3Ax?=
- =?utf-8?B?Y201bzVvNGxBUTdvMDJZUVF6Nzdtcm5leUFqWk5rbHpmY0Ztb1NkS3ZmTXpw?=
- =?utf-8?B?NElEVHpPU2JZTUk4amMwRzZoYWRUY1R6U0pvZHpwMUdibit0a0tUR2tqRitJ?=
- =?utf-8?B?UWVzTjBXTnlRSzZGZjliYUVLTVJHWW9SeHpmcTZacnk5ME1iOFJHTkowcGtR?=
- =?utf-8?B?b1NhN1RZMGdwYktXc2oxcFNTYWcvUFNTQXM3TjUrOXNvQXRyMWluRVhDdkk1?=
- =?utf-8?B?YnZNYTVtdmgxSWlIUVlDVWUyU21OcExWcC92WHZDUUxteGJjOUdQUXo3QklX?=
- =?utf-8?B?RVQzZ2twUTFMZFYzSGdubGRSLzdybkZzSS83NVVzWEtCQzhhTElKd29UU3B6?=
- =?utf-8?B?MXd3cHIxRmc0OXJGSTUyWC92TFZzdmFVYVNQdHd5Vjh0b2xIWlpIdnhHdERC?=
- =?utf-8?B?aGwrQzY5b1NUSVk3M3pSbUtML2l1K3R1b1FjZlYvUDBFcmpDWi9ISFExNjdu?=
- =?utf-8?B?WHJsME5NMjloMVhYQS82ZUNGWHZXVm84aDVFa0RWOHV4bFhFUCtWNW41SEM1?=
- =?utf-8?B?MHNOUE9NTkVtdFNBY25XSHVubnU2L2pqR3NLQTVJMVdyZTEvdWJNNDRtTkZE?=
- =?utf-8?B?dUZOaXdMVTVZQStuTytNWm1QNTRVdVViaFBNTWRoQm1sUEV1Y0Q2cFNyeVBV?=
- =?utf-8?B?Wk44aW1BN1NJS1p5Q0E5cE1aN2NHdllsSUh0ZU4yaGc2Vi9aZTRXN2cyV3hY?=
- =?utf-8?B?WW00Uit2bFVxdHdZb1hDcUdVQ2ZkKy82SU1OcFhPbHI2eWQwTmpCejBqQU9X?=
- =?utf-8?B?aFRMT3BIU2ZwL2JyYThMb3VTWm9rUFNhM0dQYS9IOW11aW9iSUUvRDBnSStZ?=
- =?utf-8?B?VlJBR1hYYzA3Y21jbEJNY1BJalhzYTVabzJFT0ZENkk2N2RFOS9ZejlxRm8x?=
- =?utf-8?Q?VBAUuhJdJIBRvmFpzAodgneH/?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 443b3249-8c7e-4759-c956-08db30fc1422
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2023 08:52:23.2002
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: A7U2lLbQlpGsAZKiQLdO8hH/hMU2AP6zO5fsqcRVC4+qOY2kWhr+sh2Miy54Ta6abTsKGcwpGrvOkDA2Eftr4g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9192
+Content-Transfer-Encoding: 8bit
 
-On 30.03.2023 10:11, Roger Pau Monné wrote:
-> On Thu, Mar 30, 2023 at 08:24:20AM +0200, Jan Beulich wrote:
->> On 29.03.2023 18:29, Roger Pau Monné wrote:
->>> On Mon, Dec 05, 2022 at 04:10:28PM +0100, Jan Beulich wrote:
->>>> On 23.11.2022 16:45, Roger Pau Monne wrote:
->>>>> @@ -265,6 +266,15 @@ __efi64_mb2_start:
->>>>>          cmpl    $MULTIBOOT2_TAG_TYPE_END,MB2_tag_type(%rcx)
->>>>>          je      .Lrun_bs
->>>>>  
->>>>> +        /*
->>>>> +         * Get command line from Multiboot2 information.
->>>>> +         * Must be last parsed tag.
->>>>
->>>> Why? And how do you guarantee this?
->>>
->>> I think the comment is misleading, must be the last checked for tag in
->>> the loop that does this in assembly, because it's not using cmove.
->>> I've adjusted to:
->>>
->>>         /* Get command line from Multiboot2 information. */
->>>         cmpl    $MULTIBOOT2_TAG_TYPE_CMDLINE,MB2_tag_type(%rcx)
->>>         jne     .Lno_cmdline
->>>         lea     MB2_tag_string(%rcx),%rdx
->>>         jmp     .Lefi_mb2_next_tag
->>> .Lno_cmdline:
->>>
->>> Maybe there's some instruction I'm missing similar to a conditional
->>> lea?
->>
->> There isn't. If you want to get away without conditional branch, then
->> you'll need to LEA to a scratch register (unconditional) and then
->> CMOVcc from that scratch register.
-> 
-> Likely not worth it, unless you dislike the extra conditional branch.
+xs_daemon_tdb() in xs_lib.c is no longer used at all, so it can be
+removed. xs_domain_dev() and xs_write_all() are not used by xenstored,
+so they can be moved to tools/libs/store/xs.c.
 
-Entirely up to you - I'm fine either way.
+Move functions used by xenstore-client only to xenstore_client.c.
 
-Jan
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- move xs_write_all(), too
+---
+ tools/include/xenstore.h         |   3 +
+ tools/include/xenstore_lib.h     |   3 -
+ tools/libs/store/xs.c            |  38 ++++++++
+ tools/xenstore/xenstore_client.c | 129 +++++++++++++++++++++++++
+ tools/xenstore/xs_lib.c          | 156 -------------------------------
+ tools/xenstore/xs_lib.h          |  17 ----
+ 6 files changed, 170 insertions(+), 176 deletions(-)
+
+diff --git a/tools/include/xenstore.h b/tools/include/xenstore.h
+index 2b3f69fb61..a442252849 100644
+--- a/tools/include/xenstore.h
++++ b/tools/include/xenstore.h
+@@ -113,6 +113,9 @@ void *xs_read(struct xs_handle *h, xs_transaction_t t,
+ bool xs_write(struct xs_handle *h, xs_transaction_t t,
+ 	      const char *path, const void *data, unsigned int len);
+ 
++/* Simple write function: loops for you. */
++bool xs_write_all(int fd, const void *data, unsigned int len);
++
+ /* Create a new directory.
+  * Returns false on failure, or success if it already exists.
+  */
+diff --git a/tools/include/xenstore_lib.h b/tools/include/xenstore_lib.h
+index 2266009ec1..43eec87379 100644
+--- a/tools/include/xenstore_lib.h
++++ b/tools/include/xenstore_lib.h
+@@ -47,9 +47,6 @@ const char *xs_daemon_rundir(void);
+ const char *xs_daemon_socket(void);
+ const char *xs_daemon_socket_ro(void);
+ 
+-/* Simple write function: loops for you. */
+-bool xs_write_all(int fd, const void *data, unsigned int len);
+-
+ /* Convert strings to permissions.  False if a problem. */
+ bool xs_strings_to_perms(struct xs_permissions *perms, unsigned int num,
+ 			 const char *strings);
+diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
+index 7a9a8b1656..48b0e917be 100644
+--- a/tools/libs/store/xs.c
++++ b/tools/libs/store/xs.c
+@@ -311,6 +311,26 @@ struct xs_handle *xs_domain_open(void)
+ 	return xs_open(0);
+ }
+ 
++static const char *xs_domain_dev(void)
++{
++	char *s = getenv("XENSTORED_PATH");
++	if (s)
++		return s;
++#if defined(__RUMPUSER_XEN__) || defined(__RUMPRUN__)
++	return "/dev/xen/xenbus";
++#elif defined(__linux__)
++	if (access("/dev/xen/xenbus", F_OK) == 0)
++		return "/dev/xen/xenbus";
++	return "/proc/xen/xenbus";
++#elif defined(__NetBSD__)
++	return "/kern/xen/xenbus";
++#elif defined(__FreeBSD__)
++	return "/dev/xen/xenstore";
++#else
++	return "/dev/xen/xenbus";
++#endif
++}
++
+ struct xs_handle *xs_open(unsigned long flags)
+ {
+ 	struct xs_handle *xsh = NULL;
+@@ -431,6 +451,24 @@ out_false:
+ #ifdef XSTEST
+ #define read_all read_all_choice
+ #define xs_write_all write_all_choice
++#else
++/* Simple routine for writing to sockets, etc. */
++bool xs_write_all(int fd, const void *data, unsigned int len)
++{
++	while (len) {
++		int done;
++
++		done = write(fd, data, len);
++		if (done < 0 && errno == EINTR)
++			continue;
++		if (done <= 0)
++			return false;
++		data += done;
++		len -= done;
++	}
++
++	return true;
++}
+ #endif
+ 
+ static int get_error(const char *errorstring)
+diff --git a/tools/xenstore/xenstore_client.c b/tools/xenstore/xenstore_client.c
+index 0628ba275e..8ff8abf12a 100644
+--- a/tools/xenstore/xenstore_client.c
++++ b/tools/xenstore/xenstore_client.c
+@@ -8,6 +8,7 @@
+  *
+  */
+ 
++#include <assert.h>
+ #include <err.h>
+ #include <errno.h>
+ #include <fcntl.h>
+@@ -40,12 +41,140 @@ enum mode {
+     MODE_watch,
+ };
+ 
++/* Sanitising (quoting) possibly-binary strings. */
++struct expanding_buffer {
++    char *buf;
++    int avail;
++};
++
+ static char *output_buf = NULL;
+ static int output_pos = 0;
+ static struct expanding_buffer ebuf;
+ 
+ static int output_size = 0;
+ 
++/* Ensure that given expanding buffer has at least min_avail characters. */
++static char *expanding_buffer_ensure(struct expanding_buffer *ebuf,
++                                     int min_avail)
++{
++    int want;
++    char *got;
++
++    if ( ebuf->avail >= min_avail )
++        return ebuf->buf;
++
++    if ( min_avail >= INT_MAX/3 )
++        return 0;
++
++    want = ebuf->avail + min_avail + 10;
++    got = realloc(ebuf->buf, want);
++    if ( !got )
++        return 0;
++
++    ebuf->buf = got;
++    ebuf->avail = want;
++    return ebuf->buf;
++}
++
++/* sanitise_value() may return NULL if malloc fails. */
++static char *sanitise_value(struct expanding_buffer *ebuf,
++                            const char *val, unsigned len)
++{
++    int used, remain, c;
++    unsigned char *ip;
++
++#define ADD(c) (ebuf->buf[used++] = (c))
++#define ADDF(f,c) (used += sprintf(ebuf->buf+used, (f), (c)))
++
++    assert(len < INT_MAX/5);
++
++    ip = (unsigned char *)val;
++    used = 0;
++    remain = len;
++
++    if ( !expanding_buffer_ensure(ebuf, remain + 1) )
++        return NULL;
++
++    while ( remain-- > 0 )
++    {
++        c= *ip++;
++
++        if ( c >= ' ' && c <= '~' && c != '\\' )
++        {
++            ADD(c);
++            continue;
++        }
++
++        if ( !expanding_buffer_ensure(ebuf, used + remain + 5) )
++            /* for "<used>\\nnn<remain>\0" */
++            return 0;
++
++        ADD('\\');
++        switch (c)
++        {
++        case '\t':  ADD('t');   break;
++        case '\n':  ADD('n');   break;
++        case '\r':  ADD('r');   break;
++        case '\\':  ADD('\\');  break;
++        default:
++            if ( c < 010 ) ADDF("%03o", c);
++            else           ADDF("x%02x", c);
++        }
++    }
++
++    ADD(0);
++    assert(used <= ebuf->avail);
++    return ebuf->buf;
++
++#undef ADD
++#undef ADDF
++}
++
++/* *out_len_r on entry is ignored; out must be at least strlen(in)+1 bytes. */
++static void unsanitise_value(char *out, unsigned *out_len_r, const char *in)
++{
++    const char *ip;
++    char *op;
++    unsigned c;
++    int n;
++
++    for ( ip = in, op = out; (c = *ip++); *op++ = c )
++    {
++        if ( c == '\\' )
++        {
++            c = *ip++;
++
++#define GETF(f) do                   \
++{                                    \
++     n = 0;                          \
++     sscanf(ip, f "%n", &c, &n);     \
++     ip += n;                        \
++} while ( 0 )
++
++            switch ( c )
++            {
++            case 't':           c= '\t';           break;
++            case 'n':           c= '\n';           break;
++            case 'r':           c= '\r';           break;
++            case '\\':          c= '\\';           break;
++            case 'x':           GETF("%2x");       break;
++            case '0': case '4':
++            case '1': case '5':
++            case '2': case '6':
++            case '3': case '7': --ip; GETF("%3o"); break;
++            case 0:             --ip;              break;
++            default:;
++            }
++#undef GETF
++        }
++    }
++
++    *op = 0;
++
++    if ( out_len_r )
++        *out_len_r = op - out;
++}
++
+ /* make sure there is at least 'len' more space in output_buf */
+ static void expand_buffer(size_t len)
+ {
+diff --git a/tools/xenstore/xs_lib.c b/tools/xenstore/xs_lib.c
+index b9941c567c..37e2a272ca 100644
+--- a/tools/xenstore/xs_lib.c
++++ b/tools/xenstore/xs_lib.c
+@@ -49,13 +49,6 @@ static const char *xs_daemon_path(void)
+ 	return buf;
+ }
+ 
+-const char *xs_daemon_tdb(void)
+-{
+-	static char buf[PATH_MAX];
+-	snprintf(buf, sizeof(buf), "%s/tdb", xs_daemon_rootdir());
+-	return buf;
+-}
+-
+ const char *xs_daemon_socket(void)
+ {
+ 	return xs_daemon_path();
+@@ -66,44 +59,6 @@ const char *xs_daemon_socket_ro(void)
+ 	return xs_daemon_path();
+ }
+ 
+-const char *xs_domain_dev(void)
+-{
+-	char *s = getenv("XENSTORED_PATH");
+-	if (s)
+-		return s;
+-#if defined(__RUMPUSER_XEN__) || defined(__RUMPRUN__)
+-	return "/dev/xen/xenbus";
+-#elif defined(__linux__)
+-	if (access("/dev/xen/xenbus", F_OK) == 0)
+-		return "/dev/xen/xenbus";
+-	return "/proc/xen/xenbus";
+-#elif defined(__NetBSD__)
+-	return "/kern/xen/xenbus";
+-#elif defined(__FreeBSD__)
+-	return "/dev/xen/xenstore";
+-#else
+-	return "/dev/xen/xenbus";
+-#endif
+-}
+-
+-/* Simple routines for writing to sockets, etc. */
+-bool xs_write_all(int fd, const void *data, unsigned int len)
+-{
+-	while (len) {
+-		int done;
+-
+-		done = write(fd, data, len);
+-		if (done < 0 && errno == EINTR)
+-			continue;
+-		if (done <= 0)
+-			return false;
+-		data += done;
+-		len -= done;
+-	}
+-
+-	return true;
+-}
+-
+ /* Convert strings to permissions.  False if a problem. */
+ bool xs_strings_to_perms(struct xs_permissions *perms, unsigned int num,
+ 			 const char *strings)
+@@ -179,114 +134,3 @@ unsigned int xs_count_strings(const char *strings, unsigned int len)
+ 
+ 	return num;
+ }
+-
+-char *expanding_buffer_ensure(struct expanding_buffer *ebuf, int min_avail)
+-{
+-	int want;
+-	char *got;
+-
+-	if (ebuf->avail >= min_avail)
+-		return ebuf->buf;
+-
+-	if (min_avail >= INT_MAX/3)
+-		return 0;
+-
+-	want = ebuf->avail + min_avail + 10;
+-	got = realloc(ebuf->buf, want);
+-	if (!got)
+-		return 0;
+-
+-	ebuf->buf = got;
+-	ebuf->avail = want;
+-	return ebuf->buf;
+-}
+-
+-char *sanitise_value(struct expanding_buffer *ebuf,
+-		     const char *val, unsigned len)
+-{
+-	int used, remain, c;
+-	unsigned char *ip;
+-
+-#define ADD(c) (ebuf->buf[used++] = (c))
+-#define ADDF(f,c) (used += sprintf(ebuf->buf+used, (f), (c)))
+-
+-	assert(len < INT_MAX/5);
+-
+-	ip = (unsigned char *)val;
+-	used = 0;
+-	remain = len;
+-
+-	if (!expanding_buffer_ensure(ebuf, remain + 1))
+-		return NULL;
+-
+-	while (remain-- > 0) {
+-		c= *ip++;
+-
+-		if (c >= ' ' && c <= '~' && c != '\\') {
+-			ADD(c);
+-			continue;
+-		}
+-
+-		if (!expanding_buffer_ensure(ebuf, used + remain + 5))
+-			/* for "<used>\\nnn<remain>\0" */
+-			return 0;
+-
+-		ADD('\\');
+-		switch (c) {
+-		case '\t':  ADD('t');   break;
+-		case '\n':  ADD('n');   break;
+-		case '\r':  ADD('r');   break;
+-		case '\\':  ADD('\\');  break;
+-		default:
+-			if (c < 010) ADDF("%03o", c);
+-			else         ADDF("x%02x", c);
+-		}
+-	}
+-
+-	ADD(0);
+-	assert(used <= ebuf->avail);
+-	return ebuf->buf;
+-
+-#undef ADD
+-#undef ADDF
+-}
+-
+-void unsanitise_value(char *out, unsigned *out_len_r, const char *in)
+-{
+-	const char *ip;
+-	char *op;
+-	unsigned c;
+-	int n;
+-
+-	for (ip = in, op = out; (c = *ip++); *op++ = c) {
+-		if (c == '\\') {
+-			c = *ip++;
+-
+-#define GETF(f) do {					\
+-			n = 0;				\
+-			sscanf(ip, f "%n", &c, &n);	\
+-			ip += n;			\
+-		} while (0)
+-
+-			switch (c) {
+-			case 't':		c= '\t';		break;
+-			case 'n':		c= '\n';		break;
+-			case 'r':		c= '\r';		break;
+-			case '\\':		c= '\\';		break;
+-			case 'x':		GETF("%2x");		break;
+-			case '0': case '4':
+-			case '1': case '5':
+-			case '2': case '6':
+-			case '3': case '7':	--ip; GETF("%3o");	break;
+-			case 0:			--ip;			break;
+-			default:;
+-			}
+-#undef GETF
+-		}
+-	}
+-
+-	*op = 0;
+-
+-	if (out_len_r)
+-		*out_len_r = op - out;
+-}
+diff --git a/tools/xenstore/xs_lib.h b/tools/xenstore/xs_lib.h
+index efa05997d6..61229aa435 100644
+--- a/tools/xenstore/xs_lib.h
++++ b/tools/xenstore/xs_lib.h
+@@ -22,8 +22,6 @@
+ #include "xenstore_lib.h"
+ 
+ const char *xs_daemon_rootdir(void);
+-const char *xs_domain_dev(void);
+-const char *xs_daemon_tdb(void);
+ 
+ /* Convert permissions to a string (up to len MAX_STRLEN(unsigned int)+1). */
+ bool xs_perm_to_string(const struct xs_permissions *perm,
+@@ -32,19 +30,4 @@ bool xs_perm_to_string(const struct xs_permissions *perm,
+ /* Given a string and a length, count how many strings (nul terms). */
+ unsigned int xs_count_strings(const char *strings, unsigned int len);
+ 
+-/* Sanitising (quoting) possibly-binary strings. */
+-struct expanding_buffer {
+-	char *buf;
+-	int avail;
+-};
+-
+-/* Ensure that given expanding buffer has at least min_avail characters. */
+-char *expanding_buffer_ensure(struct expanding_buffer *, int min_avail);
+-
+-/* sanitise_value() may return NULL if malloc fails. */
+-char *sanitise_value(struct expanding_buffer *, const char *val, unsigned len);
+-
+-/* *out_len_r on entry is ignored; out must be at least strlen(in)+1 bytes. */
+-void unsanitise_value(char *out, unsigned *out_len_r, const char *in);
+-
+ #endif /* XS_LIB_H */
+-- 
+2.35.3
+
 
