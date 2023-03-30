@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A1AC77B71
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D55CDC77B70
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 16:28:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.516801.801505 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.516805.801545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phv8W-0003qN-Tr; Thu, 30 Mar 2023 16:28:28 +0000
+	id 1phv8e-0004tV-VE; Thu, 30 Mar 2023 16:28:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 516801.801505; Thu, 30 Mar 2023 16:28:28 +0000
+Received: by outflank-mailman (output) from mailman id 516805.801545; Thu, 30 Mar 2023 16:28:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phv8W-0003qG-Qu; Thu, 30 Mar 2023 16:28:28 +0000
-Received: by outflank-mailman (input) for mailman id 516801;
- Thu, 30 Mar 2023 16:28:27 +0000
+	id 1phv8e-0004tG-RZ; Thu, 30 Mar 2023 16:28:36 +0000
+Received: by outflank-mailman (input) for mailman id 516805;
+ Thu, 30 Mar 2023 16:28:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=y3PO=7W=linux.intel.com=andriy.shevchenko@srs-se1.protection.inumbo.net>)
- id 1phv8V-0003qA-AP
- for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 16:28:27 +0000
+ id 1phv8d-0003qA-9k
+ for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 16:28:35 +0000
 Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e343b9e2-cf17-11ed-85db-49a42c6b2330;
- Thu, 30 Mar 2023 18:28:24 +0200 (CEST)
+ id ea40b6d3-cf17-11ed-85db-49a42c6b2330;
+ Thu, 30 Mar 2023 18:28:34 +0200 (CEST)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2023 09:28:21 -0700
+ 30 Mar 2023 09:28:32 -0700
 Received: from black.fi.intel.com ([10.237.72.28])
- by orsmga005.jf.intel.com with ESMTP; 30 Mar 2023 09:28:11 -0700
+ by orsmga005.jf.intel.com with ESMTP; 30 Mar 2023 09:28:22 -0700
 Received: by black.fi.intel.com (Postfix, from userid 1003)
- id 9DDDB13A; Thu, 30 Mar 2023 19:24:42 +0300 (EEST)
+ id 85CC62BE; Thu, 30 Mar 2023 19:24:52 +0300 (EEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,27 +45,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e343b9e2-cf17-11ed-85db-49a42c6b2330
+X-Inumbo-ID: ea40b6d3-cf17-11ed-85db-49a42c6b2330
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1680193704; x=1711729704;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=+jsYsz3z4S0KxQURpz+5dUW16i3yUqiq6XHaWQFPwWw=;
-  b=mivwcMf9HOkCM7eXDBH8b6cc89f4ST2N1Ame/dD36aFowxQeQhlKlXC6
-   Zj7vJ7BNaweDmG1J+2oLvtje0RkLJWis7CRZtUV0Ua0gAs252pa39tIHb
-   SEIgiOAF9VwGeh7VMu6m1CqwOxl93lLi+O+HO0GjZ0H2dnxW7EigkdgzW
-   bvaSkloC2KP6XXnOT0qsfs/Xsqf62vHaSR2gqfictN35IBek/e49gYXQw
-   dHUiJRgimxKDUuoLxmHS58IB9b94ocgWy4mze+l0OpVbYzDgBh7QrHSCU
-   iSrZlqTndD9aa8SJZLUo8qjI5Me343+7OxeBB+YFoxk4UGTboxNPAJto0
+  t=1680193714; x=1711729714;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=xbQWUNZRhMDKSfWq+Wm+hoCdoGH5KZ6pm5K/n+XSSwM=;
+  b=HT85l5NYyZLNzawnUtxbMAOFjsxDUmwxdiOu9NPsFbr3jTarqFqrumeb
+   ADFomDuksf0r16xVkhXHTJtMi82ssKSmNZVJm1IueNDOuEQEnMsuWdwpV
+   k5On/KlKTBy4Qv4YbZUQJakA7oFY7c0Mq8GyeD1CsnlHxSNF1WSa0TM+D
+   XGlYiPil0mPNDQCh2gVTQw+xJD8WDYczG5X0SxONWIt9k6yPns26oWl5b
+   nF/gzBfSKEdbt0TBLd9Xjr7N6aF30BQ82lhXJ0cs9P8giPP/J249Xkvzx
+   nYLM3TZfjZ+uz1sQ2h93CPQuhtNYLmUWeBaFSvqW1dM68/NjirmKPZ10v
    A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="427495924"
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="427496089"
 X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; 
-   d="scan'208";a="427495924"
+   d="scan'208";a="427496089"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="858971536"
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="858971554"
 X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; 
-   d="scan'208";a="858971536"
+   d="scan'208";a="858971554"
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
 	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -111,99 +111,50 @@ Cc: Miguel Ojeda <ojeda@kernel.org>,
 	Bjorn Helgaas <bhelgaas@google.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH v8 0/7] Add pci_dev_for_each_resource() helper and update users
-Date: Thu, 30 Mar 2023 19:24:27 +0300
-Message-Id: <20230330162434.35055-1-andriy.shevchenko@linux.intel.com>
+Subject: [PATCH v8 6/7] EISA: Convert to use less arguments in pci_bus_for_each_resource()
+Date: Thu, 30 Mar 2023 19:24:33 +0300
+Message-Id: <20230330162434.35055-7-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.40.0.1.gaa8946217a0b
+In-Reply-To: <20230330162434.35055-1-andriy.shevchenko@linux.intel.com>
+References: <20230330162434.35055-1-andriy.shevchenko@linux.intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Provide two new helper macros to iterate over PCI device resources and
-convert users.
+The pci_bus_for_each_resource() can hide the iterator loop since
+it may be not used otherwise. With this, we may drop that iterator
+variable definition.
 
-Looking at it, refactor existing pci_bus_for_each_resource() and convert
-users accordingly.
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Reviewed-by: Krzysztof Wilczyński <kw@linux.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ drivers/eisa/pci_eisa.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Note, the amount of lines grew due to the documentation update.
-
-Changelog v8:
-- fixed issue with pci_bus_for_each_resource() macro (LKP)
-- due to above added a new patch to document how it works
-- moved the last patch to be #2 (Philippe)
-- added tags (Philippe)
-
-Changelog v7:
-- made both macros to share same name (Bjorn)
-- split out the pci_resource_n() conversion (Bjorn)
-
-Changelog v6:
-- dropped unused variable in PPC code (LKP)
-
-Changelog v5:
-- renamed loop variable to minimize the clash (Keith)
-- addressed smatch warning (Dan)
-- addressed 0-day bot findings (LKP)
-
-Changelog v4:
-- rebased on top of v6.3-rc1
-- added tag (Krzysztof)
-
-Changelog v3:
-- rebased on top of v2 by Mika, see above
-- added tag to pcmcia patch (Dominik)
-
-Changelog v2:
-- refactor to have two macros
-- refactor existing pci_bus_for_each_resource() in the same way and
-  convert users
-
-Andy Shevchenko (6):
-  kernel.h: Split out COUNT_ARGS() and CONCATENATE()
-  PCI: Introduce pci_resource_n()
-  PCI: Document pci_bus_for_each_resource() to avoid confusion
-  PCI: Allow pci_bus_for_each_resource() to take less arguments
-  EISA: Convert to use less arguments in pci_bus_for_each_resource()
-  pcmcia: Convert to use less arguments in pci_bus_for_each_resource()
-
-Mika Westerberg (1):
-  PCI: Introduce pci_dev_for_each_resource()
-
- .clang-format                             |  1 +
- arch/alpha/kernel/pci.c                   |  5 +-
- arch/arm/kernel/bios32.c                  | 16 +++--
- arch/arm/mach-dove/pcie.c                 | 10 ++--
- arch/arm/mach-mv78xx0/pcie.c              | 10 ++--
- arch/arm/mach-orion5x/pci.c               | 10 ++--
- arch/mips/pci/ops-bcm63xx.c               |  8 +--
- arch/mips/pci/pci-legacy.c                |  3 +-
- arch/powerpc/kernel/pci-common.c          | 21 +++----
- arch/powerpc/platforms/4xx/pci.c          |  8 +--
- arch/powerpc/platforms/52xx/mpc52xx_pci.c |  5 +-
- arch/powerpc/platforms/pseries/pci.c      | 16 ++---
- arch/sh/drivers/pci/pcie-sh7786.c         | 10 ++--
- arch/sparc/kernel/leon_pci.c              |  5 +-
- arch/sparc/kernel/pci.c                   | 10 ++--
- arch/sparc/kernel/pcic.c                  |  5 +-
- drivers/eisa/pci_eisa.c                   |  4 +-
- drivers/pci/bus.c                         |  7 +--
- drivers/pci/hotplug/shpchp_sysfs.c        |  8 +--
- drivers/pci/pci.c                         |  3 +-
- drivers/pci/probe.c                       |  2 +-
- drivers/pci/remove.c                      |  5 +-
- drivers/pci/setup-bus.c                   | 37 +++++-------
- drivers/pci/setup-res.c                   |  4 +-
- drivers/pci/vgaarb.c                      | 17 ++----
- drivers/pci/xen-pcifront.c                |  4 +-
- drivers/pcmcia/rsrc_nonstatic.c           |  9 +--
- drivers/pcmcia/yenta_socket.c             |  3 +-
- drivers/pnp/quirks.c                      | 29 ++++-----
- include/linux/args.h                      | 13 ++++
- include/linux/kernel.h                    |  8 +--
- include/linux/pci.h                       | 72 +++++++++++++++++++----
- 32 files changed, 190 insertions(+), 178 deletions(-)
- create mode 100644 include/linux/args.h
-
+diff --git a/drivers/eisa/pci_eisa.c b/drivers/eisa/pci_eisa.c
+index 930c2332c3c4..8173e60bb808 100644
+--- a/drivers/eisa/pci_eisa.c
++++ b/drivers/eisa/pci_eisa.c
+@@ -20,8 +20,8 @@ static struct eisa_root_device pci_eisa_root;
+ 
+ static int __init pci_eisa_init(struct pci_dev *pdev)
+ {
+-	int rc, i;
+ 	struct resource *res, *bus_res = NULL;
++	int rc;
+ 
+ 	if ((rc = pci_enable_device (pdev))) {
+ 		dev_err(&pdev->dev, "Could not enable device\n");
+@@ -38,7 +38,7 @@ static int __init pci_eisa_init(struct pci_dev *pdev)
+ 	 * eisa_root_register() can only deal with a single io port resource,
+ 	*  so we use the first valid io port resource.
+ 	 */
+-	pci_bus_for_each_resource(pdev->bus, res, i)
++	pci_bus_for_each_resource(pdev->bus, res)
+ 		if (res && (res->flags & IORESOURCE_IO)) {
+ 			bus_res = res;
+ 			break;
 -- 
 2.40.0.1.gaa8946217a0b
 
