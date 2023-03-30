@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE4FC6FD1D
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 16:20:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.516797.801496 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2098FC77B77
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Mar 2023 16:28:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.516803.801526 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phv0L-0002Hb-0T; Thu, 30 Mar 2023 16:20:01 +0000
+	id 1phv8b-0004La-B3; Thu, 30 Mar 2023 16:28:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 516797.801496; Thu, 30 Mar 2023 16:20:00 +0000
+Received: by outflank-mailman (output) from mailman id 516803.801526; Thu, 30 Mar 2023 16:28:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1phv0K-0002HU-Sa; Thu, 30 Mar 2023 16:20:00 +0000
-Received: by outflank-mailman (input) for mailman id 516797;
- Thu, 30 Mar 2023 16:19:59 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1phv0J-0002HO-9O
- for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 16:19:59 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1phv0I-0001a1-Tv; Thu, 30 Mar 2023 16:19:58 +0000
-Received: from [15.248.2.61] (helo=[10.24.67.13])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1phv0I-0001f8-LE; Thu, 30 Mar 2023 16:19:58 +0000
+	id 1phv8b-0004LR-7o; Thu, 30 Mar 2023 16:28:33 +0000
+Received: by outflank-mailman (input) for mailman id 516803;
+ Thu, 30 Mar 2023 16:28:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=y3PO=7W=linux.intel.com=andriy.shevchenko@srs-se1.protection.inumbo.net>)
+ id 1phv8Z-0003qA-LA
+ for xen-devel@lists.xenproject.org; Thu, 30 Mar 2023 16:28:31 +0000
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e829bbd8-cf17-11ed-85db-49a42c6b2330;
+ Thu, 30 Mar 2023 18:28:30 +0200 (CEST)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Mar 2023 09:28:28 -0700
+Received: from black.fi.intel.com ([10.237.72.28])
+ by orsmga005.jf.intel.com with ESMTP; 30 Mar 2023 09:28:17 -0700
+Received: by black.fi.intel.com (Postfix, from userid 1003)
+ id C528C14B; Thu, 30 Mar 2023 19:24:48 +0300 (EEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,151 +45,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=fFay2VQGBFo8b+MWU800+V6xqHR5dczPyfrocxzUJ5E=; b=VvCTXwQOw8Kp9wyCMC8F+huW43
-	i/niujTAPDpmhLWC8hY+tpX0wbI1rXPBcGy5LSYExiwxrbe8P0BNHmlFKKLJMhQEa2CwxT6u38JAk
-	HaJSLwFbShVIEaJAMalqeha1sKpeaULaRn1VWY8uqktHYrnB6ae11XB3iqR1TOaEUVNM=;
-Message-ID: <e556f895-2b3f-92eb-a6be-e51f04fc869d@xen.org>
-Date: Thu, 30 Mar 2023 17:19:54 +0100
+X-Inumbo-ID: e829bbd8-cf17-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1680193710; x=1711729710;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=gIQa0UBc6rrUYtPkGDZ1t1xT6zplGxALb8OYgbohTeo=;
+  b=BMtTgumTEElOfhQRh4w1CoFSlfi1IAEExZC2z1RKdIUvoIe6ccOxQVzV
+   Rlksvnz+TcvSvVLgBTVVNHnv3EBmaC9Jdg26SckfEbnntjcaNkiJJkduh
+   m4oUcxXM2199ksPs7gvzF+1LgO9qQToWjlEGN6L8oBajTJAuOKW2GgO8N
+   bFBgi8gxJySCKoYEYvHJW0k0FHYB/J1zvzOvZ+OHAFlDGBrAbqdQ6itQ6
+   FlBGGA05YlYApYayjV7BP6ISso81/5cVOkvzXSErGBro1mVIKHNLLSFH9
+   fXvfsJRlgeuDd0n4MFFAh5vkidqwRdCSRQMSHS+pe5vQG+7X0A0wF0TNd
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="427495985"
+X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; 
+   d="scan'208";a="427495985"
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="858971548"
+X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; 
+   d="scan'208";a="858971548"
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	=?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kw@linux.com>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Niklas Schnelle <schnelle@linux.ibm.com>,
+	Bjorn Helgaas <helgaas@kernel.org>,
+	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+	=?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+	"Maciej W. Rozycki" <macro@orcam.me.uk>,
+	Juergen Gross <jgross@suse.com>,
+	Dominik Brodowski <linux@dominikbrodowski.net>,
+	linux-kernel@vger.kernel.org,
+	linux-alpha@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mips@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-sh@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-acpi@vger.kernel.org
+Cc: Miguel Ojeda <ojeda@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	Matt Turner <mattst88@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	Gregory Clement <gregory.clement@bootlin.com>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Anatolij Gustschin <agust@denx.de>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Rich Felker <dalias@libc.org>,
+	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+	"David S. Miller" <davem@davemloft.net>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH v8 1/7] kernel.h: Split out COUNT_ARGS() and CONCATENATE()
+Date: Thu, 30 Mar 2023 19:24:28 +0300
+Message-Id: <20230330162434.35055-2-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.40.0.1.gaa8946217a0b
+In-Reply-To: <20230330162434.35055-1-andriy.shevchenko@linux.intel.com>
+References: <20230330162434.35055-1-andriy.shevchenko@linux.intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.9.0
-Subject: Re: Need help on a issue (Unable to schedule guest for Xen on Arm)
-Content-Language: en-US
-To: Ayan Kumar Halder <ayankuma@amd.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>,
- Stewart Hildebrand <stewart.hildebrand@amd.com>,
- "Garhwal, Vikram" <vikram.garhwal@amd.com>,
- "Stabellini, Stefano" <stefano.stabellini@amd.com>
-References: <b4badb12-8887-d8d8-138e-8b4536ad95a4@amd.com>
- <2f7a00eb-50c9-bee7-231e-9285ffa4c9a9@amd.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <2f7a00eb-50c9-bee7-231e-9285ffa4c9a9@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+kernel.h is being used as a dump for all kinds of stuff for a long time.
+The COUNT_ARGS() and CONCATENATE() macros may be used in some places
+without need of the full kernel.h dependency train with it.
 
+Here is the attempt on cleaning it up by splitting out these macros().
 
-On 30/03/2023 16:57, Ayan Kumar Halder wrote:
-> (Apologies, fixed the formatting issue)
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ include/linux/args.h   | 13 +++++++++++++
+ include/linux/kernel.h |  8 +-------
+ 2 files changed, 14 insertions(+), 7 deletions(-)
+ create mode 100644 include/linux/args.h
 
-Hi,
-
-> 
-> On 30/03/2023 16:50, Ayan Kumar Halder wrote:
->> Hi Xen experts,
->>
->> I need some pointers on an issue I am facing.
->>
->> I am running my downstream port of Xen on Cortex-R52 hardware. The 
->> hardware consist of two R52 cores (the second core is in lockstep 
->> mode). So, currently the hardware does not support SMP.
->>
->> The issue is that Xen is unable to schedule a guest.
-
-Are you sure about this? Because...
-
-> So 
->> leave_hypervisor_to_guest() ---> check_for_pcpu_work() and this does 
->> not return.
-
-... leave_hypervisor_to_guest() indicates that a guest vCPU was 
-scheduled. Before we return to the guest we always check if there is 
-some softirq that need to be handled. So...
-
->>
->> Debugging this, I see  check_for_pcpu_work() --> do_softirq() --> 
->> __do_softirq() --> timer_softirq_action().
-
-.. the fact that check_for_pcpu_work() doesn't return seems to indicate 
-that there is a softirq that is always pending. Can you look which one 
-it is?
-
->>
->> In timer_softirq_action(), the problem I see is that for all the 
->> timers, "((t = heap[1])->expires < now)" is true.
->>
->>     while ( (heap_metadata(heap)->size != 0) &&
->>             ((t = heap[1])->expires < now) )
->>     {
->>         remove_from_heap(heap, t); <<<<------ So, this gets invoked 
->> for all the timers.
->>         execute_timer(ts, t);
->>     }
->>
->> So, further below reprogram_timer() gets invoked with timeout = 0 and 
->> it disables the timer. So, timer_interrupt() is never invoked.
-
-Which is expected because there is no timer armed, so there is no need 
-to configure the physical timer.
-
->>
->> Can someone give any pointers on what the underlying issue could be 
->> and how to debug further ?
-
-See above. You could also look why there is no softtimer pending and/or 
-where Xen is stuck (e.g. the PC).
-
->>
->> I do not observe this behavior while running on R52 FVP. The 
->> difference is that for most of the timers "((t = heap[1])->expires < 
->> now)" is false, so reprogram_timer() gets invoked with non zero 
->> timeout and subsequently, the timer_interrupt() get invoked.
-This reads as one of the following:
-   1) There is a missing barrier
-   2) You didn't properly configure some registers
-   3) There is an HW errata (I know that some of the Cortex-A had an 
-issue in when reading the Timer counter but seems unlikely here)
-
->>
->> Also, looking at the following from xen/arch/arm/time.c.
-> 
-> /* Set the timer to wake us up at a particular time.
->   * Timeout is a Xen system time (nanoseconds since boot); 0 disables 
-> the timer.
->   * Returns 1 on success; 0 if the timeout is too soon or is in the 
-> past. */
-> int reprogram_timer(s_time_t timeout)
-> {
->      uint64_t deadline;
-> 
->      if ( timeout == 0 )
->      {
->          WRITE_SYSREG(0, CNTHP_CTL_EL2);
->          return 1; <<<<<<<<<<<<<<<<<<<<<<-------------- Shouldn't this 
-> be 0 as the comment suggets ?
-
-I think 1 is correct because we want to disable the timer so this is a 
-success. 0 should be return if this was effectively a timeout.
-
-FWIW, x86 also seems to return 1 when the timeout is 0.
-
->      }
-> 
->      deadline = ns_to_ticks(timeout) + boot_count;
->      WRITE_SYSREG64(deadline, CNTHP_CVAL_EL2);
->      WRITE_SYSREG(CNTx_CTL_ENABLE, CNTHP_CTL_EL2);
->      isb();
-> 
->      /* No need to check for timers in the past; the Generic Timer fires
->       * on a signed 63-bit comparison. */
->      return 1;
-> }
-> 
->> Kind regards,
->>
->> Ayan
->>
->>
->>
->>
-
+diff --git a/include/linux/args.h b/include/linux/args.h
+new file mode 100644
+index 000000000000..16ef6fad8add
+--- /dev/null
++++ b/include/linux/args.h
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
++#ifndef _LINUX_ARGS_H
++#define _LINUX_ARGS_H
++
++/* This counts to 12. Any more, it will return 13th argument. */
++#define __COUNT_ARGS(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _n, X...) _n
++#define COUNT_ARGS(X...) __COUNT_ARGS(, ##X, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
++
++#define __CONCAT(a, b) a ## b
++#define CONCATENATE(a, b) __CONCAT(a, b)
++
++#endif	/* _LINUX_ARGS_H */
+diff --git a/include/linux/kernel.h b/include/linux/kernel.h
+index 0d91e0af0125..fa675d50d7b7 100644
+--- a/include/linux/kernel.h
++++ b/include/linux/kernel.h
+@@ -13,6 +13,7 @@
+ 
+ #include <linux/stdarg.h>
+ #include <linux/align.h>
++#include <linux/args.h>
+ #include <linux/limits.h>
+ #include <linux/linkage.h>
+ #include <linux/stddef.h>
+@@ -457,13 +458,6 @@ ftrace_vprintk(const char *fmt, va_list ap)
+ static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }
+ #endif /* CONFIG_TRACING */
+ 
+-/* This counts to 12. Any more, it will return 13th argument. */
+-#define __COUNT_ARGS(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _n, X...) _n
+-#define COUNT_ARGS(X...) __COUNT_ARGS(, ##X, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+-
+-#define __CONCAT(a, b) a ## b
+-#define CONCATENATE(a, b) __CONCAT(a, b)
+-
+ /* Rebuild everything on CONFIG_FTRACE_MCOUNT_RECORD */
+ #ifdef CONFIG_FTRACE_MCOUNT_RECORD
+ # define REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD
 -- 
-Julien Grall
+2.40.0.1.gaa8946217a0b
+
 
