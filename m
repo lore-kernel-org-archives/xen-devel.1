@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F88C77B73
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Apr 2023 18:30:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517556.803109 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8310FC77B72
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Apr 2023 18:30:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517553.803073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjOwz-0006VT-GF; Mon, 03 Apr 2023 18:30:41 +0000
+	id 1pjOwu-0005Ny-B9; Mon, 03 Apr 2023 18:30:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517556.803109; Mon, 03 Apr 2023 18:30:41 +0000
+Received: by outflank-mailman (output) from mailman id 517553.803073; Mon, 03 Apr 2023 18:30:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjOwz-0006VK-Cm; Mon, 03 Apr 2023 18:30:41 +0000
-Received: by outflank-mailman (input) for mailman id 517556;
- Mon, 03 Apr 2023 18:30:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pjOwu-0005LQ-2c; Mon, 03 Apr 2023 18:30:36 +0000
+Received: by outflank-mailman (input) for mailman id 517553;
+ Mon, 03 Apr 2023 18:30:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h1aQ=72=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1pjOwx-00058E-3X
- for xen-devel@lists.xenproject.org; Mon, 03 Apr 2023 18:30:39 +0000
+ id 1pjOws-0004HH-9S
+ for xen-devel@lists.xenproject.org; Mon, 03 Apr 2023 18:30:34 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a068c5f4-d24d-11ed-b464-930f4c7d94ae;
- Mon, 03 Apr 2023 20:30:37 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9df5a3e9-d24d-11ed-85db-49a42c6b2330;
+ Mon, 03 Apr 2023 20:30:33 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-439-74AM9wfyN9eiYjF1jls1ng-1; Mon, 03 Apr 2023 14:30:33 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
+ us-mta-127-rxZjFOypOgG8cMOE2p_TKw-1; Mon, 03 Apr 2023 14:30:27 -0400
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EE94B811E7C;
- Mon,  3 Apr 2023 18:30:31 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8F1D68C447E;
+ Mon,  3 Apr 2023 18:30:19 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.107])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 521171121314;
- Mon,  3 Apr 2023 18:30:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CC2A9483EC1;
+ Mon,  3 Apr 2023 18:30:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a068c5f4-d24d-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 9df5a3e9-d24d-11ed-85db-49a42c6b2330
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1680546636;
+	s=mimecast20190719; t=1680546632;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=w78ixlnTJkfmit1c5uhGwpfg3e2qbfo6w6b+6TW1iVA=;
-	b=D8g8DNdYotY3VuhWIN5vTd5CmEn80Ry48uLp2xBWgJ+aguPaY/WH8O/z7PWXXhydT3zCDm
-	ZgDNTHxlvXdxOeh9rjIagscMlbLbDKot1VRaMi+JENdwF2VzC0/CShZeyCjooamKM5YXMm
-	9R6V1BPLX2Fp3UVDHCidsLd4YD8gV8Y=
-X-MC-Unique: 74AM9wfyN9eiYjF1jls1ng-1
+	bh=TKqwyQ4Hx/raK7iVoVjGcYzVd4PPhwE8qnDjfh3DtNg=;
+	b=URu9BWdvsR30tJn1o9ILEciRQJDN6aQR/LQ34COhjAr41NM9w0luWbVDE2Fopal95lT5a4
+	dPKaZHwJCbahzydaAA3tNYRtPCYgHjJU8Az79cykjloJEmwPhp8WgC+KBmmSupMbTKqC7r
+	0TyJqYPIL+P9rEqRVhsS8ZCNDavhVWI=
+X-MC-Unique: rxZjFOypOgG8cMOE2p_TKw-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -95,61 +95,139 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
 	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PATCH 09/13] hw/xen: do not set is_external=true on evtchn fds
-Date: Mon,  3 Apr 2023 14:30:00 -0400
-Message-Id: <20230403183004.347205-10-stefanha@redhat.com>
+Subject: [PATCH 04/13] util/vhost-user-server: rename refcount to in_flight counter
+Date: Mon,  3 Apr 2023 14:29:55 -0400
+Message-Id: <20230403183004.347205-5-stefanha@redhat.com>
 In-Reply-To: <20230403183004.347205-1-stefanha@redhat.com>
 References: <20230403183004.347205-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 
-is_external=true suspends fd handlers between aio_disable_external() and
-aio_enable_external(). The block layer's drain operation uses this
-mechanism to prevent new I/O from sneaking in between
-bdrv_drained_begin() and bdrv_drained_end().
+The VuServer object has a refcount field and ref/unref APIs. The name is
+confusing because it's actually an in-flight request counter instead of
+a refcount.
 
-The xen-block device actually works fine with is_external=false because
-BlockBackend requests are already queued between bdrv_drained_begin()
-and bdrv_drained_end(). Since the Xen ring size is finite, request
-queuing will stop once the ring is full and memory usage is bounded.
-After bdrv_drained_end() the BlockBackend requests will resume and
-xen-block's processing will continue.
+Normally a refcount destroys the object upon reaching zero. The VuServer
+counter is used to wake up the vhost-user coroutine when there are no
+more requests.
 
-This is part of ongoing work to remove the aio_disable_external() API.
+Avoid confusing by renaming refcount and ref/unref to in_flight and
+inc/dec.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- hw/xen/xen-bus.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ include/qemu/vhost-user-server.h     |  6 +++---
+ block/export/vhost-user-blk-server.c | 11 +++++++----
+ util/vhost-user-server.c             | 14 +++++++-------
+ 3 files changed, 17 insertions(+), 14 deletions(-)
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index c59850b1de..c4fd26abe1 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -842,11 +842,11 @@ void xen_device_set_event_channel_context(XenDevice *xendev,
-     }
+diff --git a/include/qemu/vhost-user-server.h b/include/qemu/vhost-user-server.h
+index 25c72433ca..bc0ac9ddb6 100644
+--- a/include/qemu/vhost-user-server.h
++++ b/include/qemu/vhost-user-server.h
+@@ -41,7 +41,7 @@ typedef struct {
+     const VuDevIface *vu_iface;
  
-     if (channel->ctx)
--        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                            NULL, NULL, NULL, NULL, NULL);
+     /* Protected by ctx lock */
+-    unsigned int refcount;
++    unsigned int in_flight;
+     bool wait_idle;
+     VuDev vu_dev;
+     QIOChannel *ioc; /* The I/O channel with the client */
+@@ -60,8 +60,8 @@ bool vhost_user_server_start(VuServer *server,
  
-     channel->ctx = ctx;
--    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                        xen_device_event, NULL, xen_device_poll, NULL, channel);
+ void vhost_user_server_stop(VuServer *server);
+ 
+-void vhost_user_server_ref(VuServer *server);
+-void vhost_user_server_unref(VuServer *server);
++void vhost_user_server_inc_in_flight(VuServer *server);
++void vhost_user_server_dec_in_flight(VuServer *server);
+ 
+ void vhost_user_server_attach_aio_context(VuServer *server, AioContext *ctx);
+ void vhost_user_server_detach_aio_context(VuServer *server);
+diff --git a/block/export/vhost-user-blk-server.c b/block/export/vhost-user-blk-server.c
+index 3409d9e02e..e93f2ed6b4 100644
+--- a/block/export/vhost-user-blk-server.c
++++ b/block/export/vhost-user-blk-server.c
+@@ -49,7 +49,10 @@ static void vu_blk_req_complete(VuBlkReq *req, size_t in_len)
+     free(req);
  }
  
-@@ -920,7 +920,7 @@ void xen_device_unbind_event_channel(XenDevice *xendev,
+-/* Called with server refcount increased, must decrease before returning */
++/*
++ * Called with server in_flight counter increased, must decrease before
++ * returning.
++ */
+ static void coroutine_fn vu_blk_virtio_process_req(void *opaque)
+ {
+     VuBlkReq *req = opaque;
+@@ -67,12 +70,12 @@ static void coroutine_fn vu_blk_virtio_process_req(void *opaque)
+                                     in_num, out_num);
+     if (in_len < 0) {
+         free(req);
+-        vhost_user_server_unref(server);
++        vhost_user_server_dec_in_flight(server);
+         return;
+     }
  
-     QLIST_REMOVE(channel, list);
+     vu_blk_req_complete(req, in_len);
+-    vhost_user_server_unref(server);
++    vhost_user_server_dec_in_flight(server);
+ }
  
--    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                        NULL, NULL, NULL, NULL, NULL);
+ static void vu_blk_process_vq(VuDev *vu_dev, int idx)
+@@ -94,7 +97,7 @@ static void vu_blk_process_vq(VuDev *vu_dev, int idx)
+         Coroutine *co =
+             qemu_coroutine_create(vu_blk_virtio_process_req, req);
  
-     if (qemu_xen_evtchn_unbind(channel->xeh, channel->local_port) < 0) {
+-        vhost_user_server_ref(server);
++        vhost_user_server_inc_in_flight(server);
+         qemu_coroutine_enter(co);
+     }
+ }
+diff --git a/util/vhost-user-server.c b/util/vhost-user-server.c
+index 5b6216069c..1622f8cfb3 100644
+--- a/util/vhost-user-server.c
++++ b/util/vhost-user-server.c
+@@ -75,16 +75,16 @@ static void panic_cb(VuDev *vu_dev, const char *buf)
+     error_report("vu_panic: %s", buf);
+ }
+ 
+-void vhost_user_server_ref(VuServer *server)
++void vhost_user_server_inc_in_flight(VuServer *server)
+ {
+     assert(!server->wait_idle);
+-    server->refcount++;
++    server->in_flight++;
+ }
+ 
+-void vhost_user_server_unref(VuServer *server)
++void vhost_user_server_dec_in_flight(VuServer *server)
+ {
+-    server->refcount--;
+-    if (server->wait_idle && !server->refcount) {
++    server->in_flight--;
++    if (server->wait_idle && !server->in_flight) {
+         aio_co_wake(server->co_trip);
+     }
+ }
+@@ -192,13 +192,13 @@ static coroutine_fn void vu_client_trip(void *opaque)
+         /* Keep running */
+     }
+ 
+-    if (server->refcount) {
++    if (server->in_flight) {
+         /* Wait for requests to complete before we can unmap the memory */
+         server->wait_idle = true;
+         qemu_coroutine_yield();
+         server->wait_idle = false;
+     }
+-    assert(server->refcount == 0);
++    assert(server->in_flight == 0);
+ 
+     vu_deinit(vu_dev);
+ 
 -- 
 2.39.2
 
