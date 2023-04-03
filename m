@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D852C76196
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Apr 2023 16:28:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517537.803019 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73396C76196
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Apr 2023 18:30:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517552.803069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjN2t-0007rf-0i; Mon, 03 Apr 2023 16:28:39 +0000
+	id 1pjOwt-0005JH-TH; Mon, 03 Apr 2023 18:30:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517537.803019; Mon, 03 Apr 2023 16:28:38 +0000
+Received: by outflank-mailman (output) from mailman id 517552.803069; Mon, 03 Apr 2023 18:30:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjN2s-0007rY-Tt; Mon, 03 Apr 2023 16:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 517537;
- Mon, 03 Apr 2023 16:28:37 +0000
+	id 1pjOwt-0005J6-PZ; Mon, 03 Apr 2023 18:30:35 +0000
+Received: by outflank-mailman (input) for mailman id 517552;
+ Mon, 03 Apr 2023 18:30:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=L93W=72=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pjN2r-0007KG-So
- for xen-devel@lists.xenproject.org; Mon, 03 Apr 2023 16:28:37 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=h1aQ=72=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
+ id 1pjOwr-0004HH-VE
+ for xen-devel@lists.xenproject.org; Mon, 03 Apr 2023 18:30:34 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 95cbb07e-d23c-11ed-85db-49a42c6b2330;
- Mon, 03 Apr 2023 18:28:37 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ id 9db74a78-d24d-11ed-85db-49a42c6b2330;
+ Mon, 03 Apr 2023 20:30:33 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-281-cN00YhrQM7uB9EfAu9sSvQ-1; Mon, 03 Apr 2023 14:30:26 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 163CF21EEC;
- Mon,  3 Apr 2023 16:28:37 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C8A5B13416;
- Mon,  3 Apr 2023 16:28:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id SzKZL7T+KmTtXgAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 03 Apr 2023 16:28:36 +0000
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 416D13C10EEF;
+ Mon,  3 Apr 2023 18:30:12 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.107])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 751A6C15BA0;
+ Mon,  3 Apr 2023 18:30:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,68 +52,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95cbb07e-d23c-11ed-85db-49a42c6b2330
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1680539317; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
+X-Inumbo-ID: 9db74a78-d24d-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1680546631;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=221NmFTRmK1PFAHtiBP2d1/nR5dmCSk7Sk74pCThNJQ=;
-	b=YegnYhORMyDnRciHjmFHW0hridB1GwSWIr7sp9x6vZe6gEmxyWp/09cWdROCKDz5gIFDQf
-	xhWiKsrzneX7RzVcXgd3jMji8mHElRvxRsHn4ub8UYk6asn2WwrY+hSCRibOX5+iFi1SPg
-	mDwiWinrWYxP6pURfCjjz8hvGe+aFwk=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	bh=oL+HrJxL6ytOleAzvmZ4SJ3Zeezd7vV75aui9s0hUdo=;
+	b=dI+yjjuDwKKViSZTb1wuclFWGfaAIY4B8fBgPsiEvcqMluIfiN33JcNCj4A5KlkR1WTkz6
+	vj61EvXAzYx80j80rRhCLyGfHn8Se3lfYfZD51uWRrbQzZRFUUapSK/N67fQDa9wTwq0O3
+	fum+ALo6iIoQJmuSCHUgxKt8wCcQc9Q=
+X-MC-Unique: cN00YhrQM7uB9EfAu9sSvQ-1
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+	Julia Suvorova <jusual@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Peter Lieven <pl@kamp.de>,
+	Coiby Xu <Coiby.Xu@gmail.com>,
+	xen-devel@lists.xenproject.org,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	<qemu-block@nongnu.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Paul Durrant <paul@xen.org>,
+	"Richard W.M. Jones" <rjones@redhat.com>,
+	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Aarushi Mehta <mehta.aaru20@gmail.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 2/2] xen: update CONFIG_DEBUG_INFO help text
-Date: Mon,  3 Apr 2023 18:28:23 +0200
-Message-Id: <20230403162823.30681-3-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230403162823.30681-1-jgross@suse.com>
-References: <20230403162823.30681-1-jgross@suse.com>
+	Fam Zheng <fam@euphon.net>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Stefan Weil <sw@weilnetz.de>,
+	Juan Quintela <quintela@redhat.com>,
+	Xie Yongji <xieyongji@bytedance.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+	eesposit@redhat.com,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Anthony Perard <anthony.perard@citrix.com>
+Subject: [PATCH 01/13] virtio-scsi: avoid race between unplug and transport event
+Date: Mon,  3 Apr 2023 14:29:52 -0400
+Message-Id: <20230403183004.347205-2-stefanha@redhat.com>
+In-Reply-To: <20230403183004.347205-1-stefanha@redhat.com>
+References: <20230403183004.347205-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 
-Update the help text of the CONFIG_DEBUG_INFO option to be a little
-bit more specific.
+Only report a transport reset event to the guest after the SCSIDevice
+has been unrealized by qdev_simple_device_unplug_cb().
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+qdev_simple_device_unplug_cb() sets the SCSIDevice's qdev.realized field
+to false so that scsi_device_find/get() no longer see it.
+
+scsi_target_emulate_report_luns() also needs to be updated to filter out
+SCSIDevices that are unrealized.
+
+These changes ensure that the guest driver does not see the SCSIDevice
+that's being unplugged if it responds very quickly to the transport
+reset event.
+
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
-V2:
-- expand help text, especially mentioning INSTALL_EFI_STRIP
-  (Jan Beulich)
----
- xen/Kconfig.debug | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ hw/scsi/scsi-bus.c    |  3 ++-
+ hw/scsi/virtio-scsi.c | 18 +++++++++---------
+ 2 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
-index e0d773d347..e6e609f813 100644
---- a/xen/Kconfig.debug
-+++ b/xen/Kconfig.debug
-@@ -15,8 +15,14 @@ config DEBUG_INFO
- 	bool "Compile Xen with debug info"
- 	default DEBUG
- 	help
--	  If you say Y here the resulting Xen will include debugging info
--	  resulting in a larger binary image.
-+	  Say Y here if you want to build Xen with debug information. This
-+	  information is needed e.g. for doing crash dump analysis of the
-+	  hypervisor via the "crash" tool.
-+	  Saying Y will increase the size of the xen-syms and xen.efi
-+	  binaries. In case the space on the EFI boot partition is rather
-+	  limited, you may want to make use of the INSTALL_EFI_STRIP make
-+	  variable when building the hypervisor, in order to strip xen.efi
-+	  before installing it to the EFI partition.
+diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
+index c97176110c..f9bd064833 100644
+--- a/hw/scsi/scsi-bus.c
++++ b/hw/scsi/scsi-bus.c
+@@ -487,7 +487,8 @@ static bool scsi_target_emulate_report_luns(SCSITargetReq *r)
+             DeviceState *qdev = kid->child;
+             SCSIDevice *dev = SCSI_DEVICE(qdev);
  
- if DEBUG || EXPERT
+-            if (dev->channel == channel && dev->id == id && dev->lun != 0) {
++            if (dev->channel == channel && dev->id == id && dev->lun != 0 &&
++                qatomic_load_acquire(&dev->qdev.realized)) {
+                 store_lun(tmp, dev->lun);
+                 g_byte_array_append(buf, tmp, 8);
+                 len += 8;
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 612c525d9d..000961446c 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -1063,15 +1063,6 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+     SCSIDevice *sd = SCSI_DEVICE(dev);
+     AioContext *ctx = s->ctx ?: qemu_get_aio_context();
  
+-    if (virtio_vdev_has_feature(vdev, VIRTIO_SCSI_F_HOTPLUG)) {
+-        virtio_scsi_acquire(s);
+-        virtio_scsi_push_event(s, sd,
+-                               VIRTIO_SCSI_T_TRANSPORT_RESET,
+-                               VIRTIO_SCSI_EVT_RESET_REMOVED);
+-        scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
+-        virtio_scsi_release(s);
+-    }
+-
+     aio_disable_external(ctx);
+     qdev_simple_device_unplug_cb(hotplug_dev, dev, errp);
+     aio_enable_external(ctx);
+@@ -1082,6 +1073,15 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+         blk_set_aio_context(sd->conf.blk, qemu_get_aio_context(), NULL);
+         virtio_scsi_release(s);
+     }
++
++    if (virtio_vdev_has_feature(vdev, VIRTIO_SCSI_F_HOTPLUG)) {
++        virtio_scsi_acquire(s);
++        virtio_scsi_push_event(s, sd,
++                               VIRTIO_SCSI_T_TRANSPORT_RESET,
++                               VIRTIO_SCSI_EVT_RESET_REMOVED);
++        scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
++        virtio_scsi_release(s);
++    }
+ }
+ 
+ static struct SCSIBusInfo virtio_scsi_scsi_info = {
 -- 
-2.35.3
+2.39.2
 
 
