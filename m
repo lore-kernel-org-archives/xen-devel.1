@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6DC2C77B70
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:52:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517716.803520 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA6DC761A6
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:52:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517717.803525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdLP-0006z0-6n; Tue, 04 Apr 2023 09:52:51 +0000
+	id 1pjdLP-00074K-Pc; Tue, 04 Apr 2023 09:52:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517716.803520; Tue, 04 Apr 2023 09:52:51 +0000
+Received: by outflank-mailman (output) from mailman id 517717.803525; Tue, 04 Apr 2023 09:52:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdLP-0006y7-1o; Tue, 04 Apr 2023 09:52:51 +0000
-Received: by outflank-mailman (input) for mailman id 517716;
+	id 1pjdLP-00072q-EI; Tue, 04 Apr 2023 09:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 517717;
  Tue, 04 Apr 2023 09:52:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Oy2y=73=citrix.com=prvs=4518c43dc=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pjdLN-0005bo-Ai
+ id 1pjdLN-00056d-7T
  for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:52:49 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 742f8e97-d2ce-11ed-85db-49a42c6b2330;
- Tue, 04 Apr 2023 11:52:47 +0200 (CEST)
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 71129d6f-d2ce-11ed-b464-930f4c7d94ae;
+ Tue, 04 Apr 2023 11:52:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 742f8e97-d2ce-11ed-85db-49a42c6b2330
+X-Inumbo-ID: 71129d6f-d2ce-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1680601967;
+  d=citrix.com; s=securemail; t=1680601964;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=9UHULmNeog4OHP6x3IyWXzySNECyTqt0kgFmTV9Rc0k=;
-  b=IK9AzNLBAoh2XvuW4teqM9D3HYqjy1lkNvNy4Fijj04eQXjLcHu2yzSW
-   pHu2QuGXLqUJ9+Pw+ApWjcAxbbDuS03H6pVlniQhg89SGTkQQKep/nf7p
-   99JlWV0xEreuhWI+/TI5u1qy6xEm8P+DNdJkoUwfINPRhdRG8LtkXJ0zB
-   A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=HneZ+FyiXcZ5gyPQXO36bg8Dh9bI0rc/BYX3S3biViY=;
+  b=XOLkP+Qp9vWrMcjAxNov3/hjB2+dj3ygmlmKOaGt+ltkfcGIOnueYnbq
+   DaC1w+NZ2JFaNphpZKZeSy07N082DO/hS4t/r21RXi1bTXGOnDOv5aSvf
+   jgEC9T0kR82hwXv9T1zifq1xXnMrkles5qt8dmaJKCBhU4wQI2Ivtqr68
+   Q=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 106670672
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 104275102
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:I3hCz6wXoWh3baxkQiN6t+dIxirEfRIJ4+MujC+fZmUNrF6WrkUFz
- TYWUDyGOqrcN2X0eYsiYIXj80gPusSHz9Y1TFNoriAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+IronPort-Data: A9a23:xF1lj6zryNkAuFjMYsx6t+dIxirEfRIJ4+MujC+fZmUNrF6WrkUCy
+ jYcDG/TPfyJMWb1eooga9+0pEsBup/UmtJkTVFt/yAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
  ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTrafYEidfCc8IA85kxVvhuUltYBhhNm9Emult
  Mj75sbSIzdJ4RYtWo4vw//F+UMHUMja4mtC5QRiPawT5TcyqlFOZH4hDfDpR5fHatE88t6SH
  47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
- Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KXlM2
- Ow+OD8vVEySvOW82Jfic7k9ptt2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
- ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwNwBjH/
- jyZpQwVBDk5C5+BmAWeo0muufDU3grwY4EdHqa3o6sCbFq7mTVIVUx+uUGAiea9ol6zXZRYM
- UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL84QyUG2wFRT5pc8E9uYk9QjlC6
- 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0caZwIUaxsKweO/sbo0hArqF+8zQY6q24id9S7L/
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KVhI/
+ PM0EhUiUg6at9rr+ZSJDbFXoP12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwNwhzH+
+ zuepQwVBDkbO9e1ygTez06Lh82SlDH6G7AIM6Cno6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WdBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC6
+ 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0c7YyYLYTEgzOX9ubEL0yvpfJE7K4iM24id9S7L/
  9yakMQvr+xN3ZZWiPvhogmvbyGE/caQEFNsjunDdif8t14iOtb4D2C9wQKDhcusOrp1WbVoU
  JIsv8GFpN4DApiW/MBmaLVcRer5jxpp3dC1vLKOI3XC3273k5JbVdoMiAyS3W8wWir+RRfnY
  VXIpSRa74JJMX2hYMdfOtzhU5l2k/m6To67Bpg4i+aihbAoLGe6ENxGPxbMjwgBbmB3+U3AB
  XtrWZn1VitLYUiW5DG3W/0cwdcW+8zK/kuKHcqT503+gdKjiIu9Fe9t3K2mMrpos8tpYWz9r
  75iCid9404AD7GkO3WIqN57wJJjBSFTOK0aYvd/LoarSjeK0kl4YxMN6dvNo7BYopk=
-IronPort-HdrOrdr: A9a23:ZQBS36OH2TnlpcBcTgWjsMiBIKoaSvp037BK7S1MoH1uA6mlfq
- WV9sjzuiWatN98Yh8dcLO7Scu9qBHnlaKdiLN5VduftWHd01dAR7sSjrcKrQeAJ8X/nNQtr5
- uJccJFeaDN5Y4Rt7eH3OG6eexQv+Vu6MqT9IPjJ+8Gd3ATV0lnhT0JbTqzIwlNayRtI4E2L5
- aY7tovnUvaRZxGBv7LYEXsRoL41qT2qK4=
+IronPort-HdrOrdr: A9a23:1SF98aiMBDuv+B6mbtonImLiPnBQXgMji2hC6mlwRA09TyVXrb
+ HKoB1p726KtN9xYgBbpTnkAsO9qBznhOdICOUqTNSftUzdyQyVxeJZnPDfKl/balXDH4dmvM
+ 8KE5SWSueAaWSS5fya3ODSKadH/DDzytHVuQ6x9QYOceioUc1dBsVCZzpz3ncYeOA/P+tFKH
+ NU3KR6mwY=
 X-IronPort-AV: E=Sophos;i="5.98,317,1673931600"; 
-   d="scan'208";a="106670672"
+   d="scan'208";a="104275102"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
 	<wl@xen.org>
-Subject: [PATCH v2 07/15] x86: Merge xc_cpu_policy's cpuid and msr objects
-Date: Tue, 4 Apr 2023 10:52:14 +0100
-Message-ID: <20230404095222.1373721-8-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 05/15] x86: Merge the system {cpuid,msr} policy objects
+Date: Tue, 4 Apr 2023 10:52:12 +0100
+Message-ID: <20230404095222.1373721-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
 References: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
@@ -94,13 +94,15 @@ Content-Transfer-Encoding: 8bit
 
 Right now, they're the same underlying type, containing disjoint information.
 
-Use a single object instead.  Also take the opportunity to rename 'entries' to
-'msrs' which is more descriptive, and more in line with nr_msrs being the
-count of MSR entries in the API.
+Introduce a new cpu-policy.{h,c} to be the new location for all policy
+handling logic.  Place the combined objects in __ro_after_init, which is new
+since the original logic was written.
 
-test-tsx uses xg_private.h to access the internals of xc_cpu_policy, so needs
-updating at the same time.  Take the opportunity to improve the code clarity
-by passing a cpu_policy rather than an xc_cpu_policy into some functions.
+As we're trying to phase out the use of struct old_cpu_policy entirely, rework
+update_domain_cpu_policy() to not pointer-chase through system_policies[].
+
+This in turn allows system_policies[] in sysctl.c to become static and reduced
+in scope to XEN_SYSCTL_get_cpu_policy.
 
 No practical change.  This undoes the transient doubling of storage space from
 earlier patches.
@@ -113,351 +115,594 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 
 v2:
- * Reword the commit message.
- * Clean up test-tsx a bit more.
+ * Reword commit message
+ * Reintroduce dropped const from system_policies[]
 ---
- tools/libs/guest/xg_cpuid_x86.c | 36 ++++++++---------
- tools/libs/guest/xg_private.h   |  5 +--
- tools/tests/tsx/test-tsx.c      | 71 +++++++++++++++------------------
- 3 files changed, 53 insertions(+), 59 deletions(-)
+ xen/arch/x86/Makefile                 |  1 +
+ xen/arch/x86/cpu-policy.c             | 18 +++++++
+ xen/arch/x86/cpu/common.c             |  4 +-
+ xen/arch/x86/cpuid.c                  | 66 +++++++++++--------------
+ xen/arch/x86/domctl.c                 | 17 +++++--
+ xen/arch/x86/include/asm/cpu-policy.h | 14 ++++++
+ xen/arch/x86/include/asm/cpuid.h      |  6 ---
+ xen/arch/x86/include/asm/msr.h        |  7 ---
+ xen/arch/x86/msr.c                    | 38 ++++++--------
+ xen/arch/x86/sysctl.c                 | 71 ++++++++++-----------------
+ 10 files changed, 116 insertions(+), 126 deletions(-)
+ create mode 100644 xen/arch/x86/cpu-policy.c
+ create mode 100644 xen/arch/x86/include/asm/cpu-policy.h
 
-diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
-index 5fae06e77804..5061fe357767 100644
---- a/tools/libs/guest/xg_cpuid_x86.c
-+++ b/tools/libs/guest/xg_cpuid_x86.c
-@@ -431,7 +431,7 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
-     xc_dominfo_t di;
-     unsigned int i, nr_leaves, nr_msrs;
-     xen_cpuid_leaf_t *leaves = NULL;
--    struct cpuid_policy *p = NULL;
-+    struct cpu_policy *p = NULL;
-     uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
-     uint32_t host_featureset[FEATURESET_NR_ENTRIES] = {};
-     uint32_t len = ARRAY_SIZE(host_featureset);
-@@ -692,7 +692,7 @@ static int deserialize_policy(xc_interface *xch, xc_cpu_policy_t *policy,
-     uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
-     int rc;
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 08b110592dcc..fc9487aa4023 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -19,6 +19,7 @@ obj-y += bitops.o
+ obj-bin-y += bzimage.init.o
+ obj-bin-y += clear_page.o
+ obj-bin-y += copy_page.o
++obj-y += cpu-policy.o
+ obj-y += cpuid.o
+ obj-$(CONFIG_PV) += compat.o
+ obj-$(CONFIG_PV32) += x86_64/compat.o
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+new file mode 100644
+index 000000000000..663e9a084c53
+--- /dev/null
++++ b/xen/arch/x86/cpu-policy.c
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#include <xen/cache.h>
++#include <xen/kernel.h>
++
++#include <xen/lib/x86/cpu-policy.h>
++
++#include <asm/cpu-policy.h>
++
++struct cpu_policy __ro_after_init     raw_cpu_policy;
++struct cpu_policy __ro_after_init    host_cpu_policy;
++#ifdef CONFIG_PV
++struct cpu_policy __ro_after_init  pv_max_cpu_policy;
++struct cpu_policy __ro_after_init  pv_def_cpu_policy;
++#endif
++#ifdef CONFIG_HVM
++struct cpu_policy __ro_after_init hvm_max_cpu_policy;
++struct cpu_policy __ro_after_init hvm_def_cpu_policy;
++#endif
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 5ad347534a22..f11dcda57a69 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -3,6 +3,8 @@
+ #include <xen/delay.h>
+ #include <xen/param.h>
+ #include <xen/smp.h>
++
++#include <asm/cpu-policy.h>
+ #include <asm/current.h>
+ #include <asm/debugreg.h>
+ #include <asm/processor.h>
+@@ -141,7 +143,7 @@ bool __init probe_cpuid_faulting(void)
+ 		return false;
  
--    rc = x86_cpuid_copy_from_buffer(&policy->cpuid, policy->leaves,
-+    rc = x86_cpuid_copy_from_buffer(&policy->policy, policy->leaves,
-                                     nr_leaves, &err_leaf, &err_subleaf);
-     if ( rc )
-     {
-@@ -702,7 +702,7 @@ static int deserialize_policy(xc_interface *xch, xc_cpu_policy_t *policy,
-         return rc;
-     }
+ 	if ((rc = rdmsr_safe(MSR_INTEL_PLATFORM_INFO, val)) == 0)
+-		raw_msr_policy.platform_info.cpuid_faulting =
++		raw_cpu_policy.platform_info.cpuid_faulting =
+ 			val & MSR_PLATFORM_INFO_CPUID_FAULTING;
  
--    rc = x86_msr_copy_from_buffer(&policy->msr, policy->entries,
-+    rc = x86_msr_copy_from_buffer(&policy->policy, policy->msrs,
-                                   nr_entries, &err_msr);
-     if ( rc )
-     {
-@@ -719,18 +719,18 @@ int xc_cpu_policy_get_system(xc_interface *xch, unsigned int policy_idx,
-                              xc_cpu_policy_t *policy)
+ 	if (rc ||
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index b22725c492e7..0916bfe175c8 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -4,6 +4,7 @@
+ #include <xen/sched.h>
+ #include <xen/nospec.h>
+ #include <asm/amd.h>
++#include <asm/cpu-policy.h>
+ #include <asm/cpuid.h>
+ #include <asm/hvm/hvm.h>
+ #include <asm/hvm/nestedhvm.h>
+@@ -142,17 +143,6 @@ static void zero_leaves(struct cpuid_leaf *l,
+     memset(&l[first], 0, sizeof(*l) * (last - first + 1));
+ }
+ 
+-struct cpuid_policy __read_mostly     raw_cpuid_policy,
+-                    __read_mostly    host_cpuid_policy;
+-#ifdef CONFIG_PV
+-struct cpuid_policy __read_mostly  pv_max_cpuid_policy;
+-struct cpuid_policy __read_mostly  pv_def_cpuid_policy;
+-#endif
+-#ifdef CONFIG_HVM
+-struct cpuid_policy __read_mostly hvm_max_cpuid_policy;
+-struct cpuid_policy __read_mostly hvm_def_cpuid_policy;
+-#endif
+-
+ static void sanitise_featureset(uint32_t *fs)
  {
-     unsigned int nr_leaves = ARRAY_SIZE(policy->leaves);
--    unsigned int nr_entries = ARRAY_SIZE(policy->entries);
-+    unsigned int nr_msrs = ARRAY_SIZE(policy->msrs);
-     int rc;
+     /* for_each_set_bit() uses unsigned longs.  Extend with zeroes. */
+@@ -344,7 +334,7 @@ static void recalculate_misc(struct cpuid_policy *p)
  
-     rc = get_system_cpu_policy(xch, policy_idx, &nr_leaves, policy->leaves,
--                               &nr_entries, policy->entries);
-+                               &nr_msrs, policy->msrs);
-     if ( rc )
-     {
-         PERROR("Failed to obtain %u policy", policy_idx);
-         return rc;
-     }
- 
--    rc = deserialize_policy(xch, policy, nr_leaves, nr_entries);
-+    rc = deserialize_policy(xch, policy, nr_leaves, nr_msrs);
-     if ( rc )
-     {
-         errno = -rc;
-@@ -744,18 +744,18 @@ int xc_cpu_policy_get_domain(xc_interface *xch, uint32_t domid,
-                              xc_cpu_policy_t *policy)
+ static void __init calculate_raw_policy(void)
  {
-     unsigned int nr_leaves = ARRAY_SIZE(policy->leaves);
--    unsigned int nr_entries = ARRAY_SIZE(policy->entries);
-+    unsigned int nr_msrs = ARRAY_SIZE(policy->msrs);
-     int rc;
+-    struct cpuid_policy *p = &raw_cpuid_policy;
++    struct cpuid_policy *p = &raw_cpu_policy;
  
-     rc = get_domain_cpu_policy(xch, domid, &nr_leaves, policy->leaves,
--                               &nr_entries, policy->entries);
-+                               &nr_msrs, policy->msrs);
-     if ( rc )
-     {
-         PERROR("Failed to obtain domain %u policy", domid);
-         return rc;
-     }
+     x86_cpuid_policy_fill_native(p);
  
--    rc = deserialize_policy(xch, policy, nr_leaves, nr_entries);
-+    rc = deserialize_policy(xch, policy, nr_leaves, nr_msrs);
-     if ( rc )
-     {
-         errno = -rc;
-@@ -770,16 +770,16 @@ int xc_cpu_policy_set_domain(xc_interface *xch, uint32_t domid,
+@@ -354,10 +344,10 @@ static void __init calculate_raw_policy(void)
+ 
+ static void __init calculate_host_policy(void)
  {
-     uint32_t err_leaf = -1, err_subleaf = -1, err_msr = -1;
-     unsigned int nr_leaves = ARRAY_SIZE(policy->leaves);
--    unsigned int nr_entries = ARRAY_SIZE(policy->entries);
-+    unsigned int nr_msrs = ARRAY_SIZE(policy->msrs);
-     int rc;
+-    struct cpuid_policy *p = &host_cpuid_policy;
++    struct cpuid_policy *p = &host_cpu_policy;
+     unsigned int max_extd_leaf;
  
-     rc = xc_cpu_policy_serialise(xch, policy, policy->leaves, &nr_leaves,
--                                 policy->entries, &nr_entries);
-+                                 policy->msrs, &nr_msrs);
-     if ( rc )
-         return rc;
+-    *p = raw_cpuid_policy;
++    *p = raw_cpu_policy;
  
-     rc = xc_set_domain_cpu_policy(xch, domid, nr_leaves, policy->leaves,
--                                  nr_entries, policy->entries,
-+                                  nr_msrs, policy->msrs,
-                                   &err_leaf, &err_subleaf, &err_msr);
-     if ( rc )
-     {
-@@ -802,7 +802,7 @@ int xc_cpu_policy_serialise(xc_interface *xch, const xc_cpu_policy_t *p,
+     p->basic.max_leaf =
+         min_t(uint32_t, p->basic.max_leaf,   ARRAY_SIZE(p->basic.raw) - 1);
+@@ -449,17 +439,17 @@ static void __init guest_common_feature_adjustments(uint32_t *fs)
+      * of IBRS by using the AMD feature bit.  An administrator may wish for
+      * performance reasons to offer IBPB without IBRS.
+      */
+-    if ( host_cpuid_policy.feat.ibrsb )
++    if ( host_cpu_policy.feat.ibrsb )
+         __set_bit(X86_FEATURE_IBPB, fs);
+ }
  
-     if ( leaves )
-     {
--        rc = x86_cpuid_copy_to_buffer(&p->cpuid, leaves, nr_leaves);
-+        rc = x86_cpuid_copy_to_buffer(&p->policy, leaves, nr_leaves);
-         if ( rc )
-         {
-             ERROR("Failed to serialize CPUID policy");
-@@ -813,7 +813,7 @@ int xc_cpu_policy_serialise(xc_interface *xch, const xc_cpu_policy_t *p,
- 
-     if ( msrs )
-     {
--        rc = x86_msr_copy_to_buffer(&p->msr, msrs, nr_msrs);
-+        rc = x86_msr_copy_to_buffer(&p->policy, msrs, nr_msrs);
-         if ( rc )
-         {
-             ERROR("Failed to serialize MSR policy");
-@@ -831,7 +831,7 @@ int xc_cpu_policy_update_cpuid(xc_interface *xch, xc_cpu_policy_t *policy,
-                                uint32_t nr)
+ static void __init calculate_pv_max_policy(void)
  {
-     unsigned int err_leaf = -1, err_subleaf = -1;
--    int rc = x86_cpuid_copy_from_buffer(&policy->cpuid, leaves, nr,
-+    int rc = x86_cpuid_copy_from_buffer(&policy->policy, leaves, nr,
-                                         &err_leaf, &err_subleaf);
+-    struct cpuid_policy *p = &pv_max_cpuid_policy;
++    struct cpuid_policy *p = &pv_max_cpu_policy;
+     uint32_t pv_featureset[FSCAPINTS];
+     unsigned int i;
  
-     if ( rc )
-@@ -850,7 +850,7 @@ int xc_cpu_policy_update_msrs(xc_interface *xch, xc_cpu_policy_t *policy,
-                               const xen_msr_entry_t *msrs, uint32_t nr)
+-    *p = host_cpuid_policy;
++    *p = host_cpu_policy;
+     cpuid_policy_to_featureset(p, pv_featureset);
+ 
+     for ( i = 0; i < ARRAY_SIZE(pv_featureset); ++i )
+@@ -486,11 +476,11 @@ static void __init calculate_pv_max_policy(void)
+ 
+ static void __init calculate_pv_def_policy(void)
  {
-     unsigned int err_msr = -1;
--    int rc = x86_msr_copy_from_buffer(&policy->msr, msrs, nr, &err_msr);
-+    int rc = x86_msr_copy_from_buffer(&policy->policy, msrs, nr, &err_msr);
+-    struct cpuid_policy *p = &pv_def_cpuid_policy;
++    struct cpuid_policy *p = &pv_def_cpu_policy;
+     uint32_t pv_featureset[FSCAPINTS];
+     unsigned int i;
  
-     if ( rc )
+-    *p = pv_max_cpuid_policy;
++    *p = pv_max_cpu_policy;
+     cpuid_policy_to_featureset(p, pv_featureset);
+ 
+     for ( i = 0; i < ARRAY_SIZE(pv_featureset); ++i )
+@@ -506,12 +496,12 @@ static void __init calculate_pv_def_policy(void)
+ 
+ static void __init calculate_hvm_max_policy(void)
+ {
+-    struct cpuid_policy *p = &hvm_max_cpuid_policy;
++    struct cpuid_policy *p = &hvm_max_cpu_policy;
+     uint32_t hvm_featureset[FSCAPINTS];
+     unsigned int i;
+     const uint32_t *hvm_featuremask;
+ 
+-    *p = host_cpuid_policy;
++    *p = host_cpu_policy;
+     cpuid_policy_to_featureset(p, hvm_featureset);
+ 
+     hvm_featuremask = hvm_hap_supported() ?
+@@ -539,7 +529,7 @@ static void __init calculate_hvm_max_policy(void)
+      * HVM guests are able if running in protected mode.
+      */
+     if ( (boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
+-         raw_cpuid_policy.basic.sep )
++         raw_cpu_policy.basic.sep )
+         __set_bit(X86_FEATURE_SEP, hvm_featureset);
+ 
+     /*
+@@ -597,12 +587,12 @@ static void __init calculate_hvm_max_policy(void)
+ 
+ static void __init calculate_hvm_def_policy(void)
+ {
+-    struct cpuid_policy *p = &hvm_def_cpuid_policy;
++    struct cpuid_policy *p = &hvm_def_cpu_policy;
+     uint32_t hvm_featureset[FSCAPINTS];
+     unsigned int i;
+     const uint32_t *hvm_featuremask;
+ 
+-    *p = hvm_max_cpuid_policy;
++    *p = hvm_max_cpu_policy;
+     cpuid_policy_to_featureset(p, hvm_featureset);
+ 
+     hvm_featuremask = hvm_hap_supported() ?
+@@ -670,8 +660,8 @@ void recalculate_cpuid_policy(struct domain *d)
+ {
+     struct cpuid_policy *p = d->arch.cpuid;
+     const struct cpuid_policy *max = is_pv_domain(d)
+-        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_max_cpuid_policy : NULL)
+-        : (IS_ENABLED(CONFIG_HVM) ? &hvm_max_cpuid_policy : NULL);
++        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_max_cpu_policy : NULL)
++        : (IS_ENABLED(CONFIG_HVM) ? &hvm_max_cpu_policy : NULL);
+     uint32_t fs[FSCAPINTS], max_fs[FSCAPINTS];
+     unsigned int i;
+ 
+@@ -746,7 +736,7 @@ void recalculate_cpuid_policy(struct domain *d)
+     /* Fold host's FDP_EXCP_ONLY and NO_FPU_SEL into guest's view. */
+     fs[FEATURESET_7b0] &= ~(cpufeat_mask(X86_FEATURE_FDP_EXCP_ONLY) |
+                             cpufeat_mask(X86_FEATURE_NO_FPU_SEL));
+-    fs[FEATURESET_7b0] |= (host_cpuid_policy.feat._7b0 &
++    fs[FEATURESET_7b0] |= (host_cpu_policy.feat._7b0 &
+                            (cpufeat_mask(X86_FEATURE_FDP_EXCP_ONLY) |
+                             cpufeat_mask(X86_FEATURE_NO_FPU_SEL)));
+ 
+@@ -797,8 +787,8 @@ void recalculate_cpuid_policy(struct domain *d)
+ int init_domain_cpuid_policy(struct domain *d)
+ {
+     struct cpuid_policy *p = is_pv_domain(d)
+-        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_def_cpuid_policy : NULL)
+-        : (IS_ENABLED(CONFIG_HVM) ? &hvm_def_cpuid_policy : NULL);
++        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_def_cpu_policy : NULL)
++        : (IS_ENABLED(CONFIG_HVM) ? &hvm_def_cpu_policy : NULL);
+ 
+     if ( !p )
      {
-@@ -868,8 +868,8 @@ bool xc_cpu_policy_is_compatible(xc_interface *xch, xc_cpu_policy_t *host,
-                                  xc_cpu_policy_t *guest)
- {
-     struct cpu_policy_errors err = INIT_CPU_POLICY_ERRORS;
--    struct old_cpu_policy h = { &host->cpuid, &host->msr };
--    struct old_cpu_policy g = { &guest->cpuid, &guest->msr };
-+    struct old_cpu_policy h = { &host->policy, &host->policy };
-+    struct old_cpu_policy g = { &guest->policy, &guest->policy };
-     int rc = x86_cpu_policies_are_compatible(&h, &g, &err);
+@@ -1102,7 +1092,7 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
+         if ( is_pv_domain(d) && is_hardware_domain(d) &&
+              guest_kernel_mode(v, regs) && cpu_has_monitor &&
+              regs->entry_vector == TRAP_gp_fault )
+-            *res = raw_cpuid_policy.basic.raw[5];
++            *res = raw_cpu_policy.basic.raw[5];
+         break;
  
-     if ( !rc )
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index 09e24f122760..e729a8106c3e 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -173,10 +173,9 @@ int pin_table(xc_interface *xch, unsigned int type, unsigned long mfn,
- #include <xen/lib/x86/cpu-policy.h>
+     case 0x7:
+@@ -1234,14 +1224,14 @@ static void __init __maybe_unused build_assertions(void)
+     /* Find some more clever allocation scheme if this trips. */
+     BUILD_BUG_ON(sizeof(struct cpuid_policy) > PAGE_SIZE);
  
- struct xc_cpu_policy {
--    struct cpuid_policy cpuid;
--    struct msr_policy msr;
-+    struct cpu_policy policy;
-     xen_cpuid_leaf_t leaves[CPUID_MAX_SERIALISED_LEAVES];
--    xen_msr_entry_t entries[MSR_MAX_SERIALISED_ENTRIES];
-+    xen_msr_entry_t msrs[MSR_MAX_SERIALISED_ENTRIES];
- };
- #endif /* x86 */
- 
-diff --git a/tools/tests/tsx/test-tsx.c b/tools/tests/tsx/test-tsx.c
-index d6d98c299bf9..b7e1972ce8a7 100644
---- a/tools/tests/tsx/test-tsx.c
-+++ b/tools/tests/tsx/test-tsx.c
-@@ -151,15 +151,15 @@ static void test_tsx_msrs(void)
- {
-     printf("Testing MSR_TSX_FORCE_ABORT consistency\n");
-     test_tsx_msr_consistency(
--        MSR_TSX_FORCE_ABORT, host.cpuid.feat.tsx_force_abort);
-+        MSR_TSX_FORCE_ABORT, host.policy.feat.tsx_force_abort);
- 
-     printf("Testing MSR_TSX_CTRL consistency\n");
-     test_tsx_msr_consistency(
--        MSR_TSX_CTRL, host.msr.arch_caps.tsx_ctrl);
-+        MSR_TSX_CTRL, host.policy.arch_caps.tsx_ctrl);
- 
-     printf("Testing MSR_MCU_OPT_CTRL consistency\n");
-     test_tsx_msr_consistency(
--        MSR_MCU_OPT_CTRL, host.cpuid.feat.srbds_ctrl);
-+        MSR_MCU_OPT_CTRL, host.policy.feat.srbds_ctrl);
+-    BUILD_BUG_ON(sizeof(raw_cpuid_policy.basic) !=
+-                 sizeof(raw_cpuid_policy.basic.raw));
+-    BUILD_BUG_ON(sizeof(raw_cpuid_policy.feat) !=
+-                 sizeof(raw_cpuid_policy.feat.raw));
+-    BUILD_BUG_ON(sizeof(raw_cpuid_policy.xstate) !=
+-                 sizeof(raw_cpuid_policy.xstate.raw));
+-    BUILD_BUG_ON(sizeof(raw_cpuid_policy.extd) !=
+-                 sizeof(raw_cpuid_policy.extd.raw));
++    BUILD_BUG_ON(sizeof(raw_cpu_policy.basic) !=
++                 sizeof(raw_cpu_policy.basic.raw));
++    BUILD_BUG_ON(sizeof(raw_cpu_policy.feat) !=
++                 sizeof(raw_cpu_policy.feat.raw));
++    BUILD_BUG_ON(sizeof(raw_cpu_policy.xstate) !=
++                 sizeof(raw_cpu_policy.xstate.raw));
++    BUILD_BUG_ON(sizeof(raw_cpu_policy.extd) !=
++                 sizeof(raw_cpu_policy.extd.raw));
  }
  
  /*
-@@ -281,7 +281,7 @@ static void test_rtm_behaviour(void)
-     else
-         return fail("  Got unexpected behaviour %d\n", rtm_behaviour);
+diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
+index 944af63e68d0..5800bb10bc4a 100644
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -35,18 +35,25 @@
+ #include <asm/mem_sharing.h>
+ #include <asm/xstate.h>
+ #include <asm/psr.h>
+-#include <asm/cpuid.h>
++#include <asm/cpu-policy.h>
  
--    if ( host.cpuid.feat.rtm )
-+    if ( host.policy.feat.rtm )
-     {
-         if ( rtm_behaviour == RTM_UD )
-             fail("  Host reports RTM, but appears unavailable\n");
-@@ -293,57 +293,52 @@ static void test_rtm_behaviour(void)
-     }
- }
- 
--static void dump_tsx_details(const struct xc_cpu_policy *p, const char *pref)
-+static void dump_tsx_details(const struct cpu_policy *p, const char *pref)
+ static int update_domain_cpu_policy(struct domain *d,
+                                     xen_domctl_cpu_policy_t *xdpc)
  {
-     printf("  %s RTM %u, HLE %u, TSX_FORCE_ABORT %u, RTM_ALWAYS_ABORT %u, TSX_CTRL %u\n",
-            pref,
--           p->cpuid.feat.rtm,
--           p->cpuid.feat.hle,
--           p->cpuid.feat.tsx_force_abort,
--           p->cpuid.feat.rtm_always_abort,
--           p->msr.arch_caps.tsx_ctrl);
-+           p->feat.rtm,
-+           p->feat.hle,
-+           p->feat.tsx_force_abort,
-+           p->feat.rtm_always_abort,
-+           p->arch_caps.tsx_ctrl);
- }
+     struct old_cpu_policy new = {};
+-    const struct old_cpu_policy *sys = is_pv_domain(d)
+-        ? &system_policies[XEN_SYSCTL_cpu_policy_pv_max]
+-        : &system_policies[XEN_SYSCTL_cpu_policy_hvm_max];
++    struct cpu_policy *sys = is_pv_domain(d)
++        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_max_cpu_policy : NULL)
++        : (IS_ENABLED(CONFIG_HVM) ? &hvm_max_cpu_policy : NULL);
++    struct old_cpu_policy old_sys = { sys, sys };
+     struct cpu_policy_errors err = INIT_CPU_POLICY_ERRORS;
+     int ret = -ENOMEM;
  
- /* Sanity test various invariants we expect in the default/max policies. */
--static void test_guest_policies(const struct xc_cpu_policy *max,
--                                const struct xc_cpu_policy *def)
-+static void test_guest_policies(const struct cpu_policy *max,
-+                                const struct cpu_policy *def)
- {
--    const struct cpuid_policy *cm = &max->cpuid;
--    const struct cpuid_policy *cd = &def->cpuid;
--    const struct msr_policy *mm = &max->msr;
--    const struct msr_policy *md = &def->msr;
--
-     dump_tsx_details(max, "Max:");
-     dump_tsx_details(def, "Def:");
++    if ( !sys )
++    {
++        ASSERT_UNREACHABLE();
++        return -EOPNOTSUPP;
++    }
++
+     /* Start by copying the domain's existing policies. */
+     if ( !(new.cpuid = xmemdup(d->arch.cpuid)) ||
+          !(new.msr   = xmemdup(d->arch.msr)) )
+@@ -64,7 +71,7 @@ static int update_domain_cpu_policy(struct domain *d,
+     x86_cpuid_policy_clear_out_of_range_leaves(new.cpuid);
  
--    if ( ((cm->feat.raw[0].d | cd->feat.raw[0].d) &
-+    if ( ((max->feat.raw[0].d | def->feat.raw[0].d) &
-           (bitmaskof(X86_FEATURE_TSX_FORCE_ABORT) |
-            bitmaskof(X86_FEATURE_RTM_ALWAYS_ABORT) |
-            bitmaskof(X86_FEATURE_SRBDS_CTRL))) ||
--         ((mm->arch_caps.raw | md->arch_caps.raw) & ARCH_CAPS_TSX_CTRL) )
-+         ((max->arch_caps.raw | def->arch_caps.raw) & ARCH_CAPS_TSX_CTRL) )
-         fail("  Xen-only TSX controls offered to guest\n");
- 
-     switch ( rtm_behaviour )
-     {
-     case RTM_UD:
--        if ( (cm->feat.raw[0].b | cd->feat.raw[0].b) &
-+        if ( (max->feat.raw[0].b | def->feat.raw[0].b) &
-              (bitmaskof(X86_FEATURE_HLE) | bitmaskof(X86_FEATURE_RTM)) )
-              fail("  HLE/RTM offered to guests despite not being available\n");
-         break;
- 
-     case RTM_ABORT:
--        if ( cd->feat.raw[0].b &
-+        if ( def->feat.raw[0].b &
-              (bitmaskof(X86_FEATURE_HLE) | bitmaskof(X86_FEATURE_RTM)) )
-              fail("  HLE/RTM offered to guests by default despite not being usable\n");
-         break;
- 
-     case RTM_OK:
--        if ( !cm->feat.rtm || !cd->feat.rtm )
-+        if ( !max->feat.rtm || !def->feat.rtm )
-              fail("  RTM not offered to guests despite being available\n");
-         break;
-     }
- 
--    if ( cd->feat.hle )
-+    if ( def->feat.hle )
-         fail("  Fail: HLE offered in default policy\n");
- }
- 
-@@ -352,13 +347,13 @@ static void test_def_max_policies(void)
-     if ( xen_has_pv )
-     {
-         printf("Testing PV default/max policies\n");
--        test_guest_policies(&pv_max, &pv_default);
-+        test_guest_policies(&pv_max.policy, &pv_default.policy);
-     }
- 
-     if ( xen_has_hvm )
-     {
-         printf("Testing HVM default/max policies\n");
--        test_guest_policies(&hvm_max, &hvm_default);
-+        test_guest_policies(&hvm_max.policy, &hvm_default.policy);
-     }
- }
- 
-@@ -382,23 +377,23 @@ static void test_guest(struct xen_domctl_createdomain *c)
+     /* Audit the combined dataset. */
+-    ret = x86_cpu_policies_are_compatible(sys, &new, &err);
++    ret = x86_cpu_policies_are_compatible(&old_sys, &new, &err);
+     if ( ret )
          goto out;
-     }
  
--    dump_tsx_details(&guest_policy, "Cur:");
-+    dump_tsx_details(&guest_policy.policy, "Cur:");
+diff --git a/xen/arch/x86/include/asm/cpu-policy.h b/xen/arch/x86/include/asm/cpu-policy.h
+new file mode 100644
+index 000000000000..eef14bb4267e
+--- /dev/null
++++ b/xen/arch/x86/include/asm/cpu-policy.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#ifndef X86_CPU_POLICY_H
++#define X86_CPU_POLICY_H
++
++struct cpu_policy;
++
++extern struct cpu_policy     raw_cpu_policy;
++extern struct cpu_policy    host_cpu_policy;
++extern struct cpu_policy  pv_max_cpu_policy;
++extern struct cpu_policy  pv_def_cpu_policy;
++extern struct cpu_policy hvm_max_cpu_policy;
++extern struct cpu_policy hvm_def_cpu_policy;
++
++#endif /* X86_CPU_POLICY_H */
+diff --git a/xen/arch/x86/include/asm/cpuid.h b/xen/arch/x86/include/asm/cpuid.h
+index d418e8100dde..ea0586277331 100644
+--- a/xen/arch/x86/include/asm/cpuid.h
++++ b/xen/arch/x86/include/asm/cpuid.h
+@@ -46,12 +46,6 @@ DECLARE_PER_CPU(struct cpuidmasks, cpuidmasks);
+ /* Default masking MSR values, calculated at boot. */
+ extern struct cpuidmasks cpuidmask_defaults;
  
-     /*
-      * Check defaults given to the guest.
-      */
--    if ( guest_policy.cpuid.feat.rtm != (rtm_behaviour == RTM_OK) )
-+    if ( guest_policy.policy.feat.rtm != (rtm_behaviour == RTM_OK) )
-         fail("  RTM %u in guest, despite rtm behaviour\n",
--             guest_policy.cpuid.feat.rtm);
-+             guest_policy.policy.feat.rtm);
+-extern struct cpuid_policy raw_cpuid_policy, host_cpuid_policy,
+-    pv_max_cpuid_policy, pv_def_cpuid_policy,
+-    hvm_max_cpuid_policy, hvm_def_cpuid_policy;
+-
+-extern const struct old_cpu_policy system_policies[];
+-
+ /* Check that all previously present features are still available. */
+ bool recheck_cpu_features(unsigned int cpu);
  
--    if ( guest_policy.cpuid.feat.hle ||
--         guest_policy.cpuid.feat.tsx_force_abort ||
--         guest_policy.cpuid.feat.rtm_always_abort ||
--         guest_policy.cpuid.feat.srbds_ctrl ||
--         guest_policy.msr.arch_caps.tsx_ctrl )
-+    if ( guest_policy.policy.feat.hle ||
-+         guest_policy.policy.feat.tsx_force_abort ||
-+         guest_policy.policy.feat.rtm_always_abort ||
-+         guest_policy.policy.feat.srbds_ctrl ||
-+         guest_policy.policy.arch_caps.tsx_ctrl )
-         fail("  Unexpected features advertised\n");
+diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
+index 02eddd919c27..022230acc0af 100644
+--- a/xen/arch/x86/include/asm/msr.h
++++ b/xen/arch/x86/include/asm/msr.h
+@@ -292,13 +292,6 @@ static inline void wrmsr_tsc_aux(uint32_t val)
  
--    if ( host.cpuid.feat.rtm )
-+    if ( host.policy.feat.rtm )
+ uint64_t msr_spec_ctrl_valid_bits(const struct cpuid_policy *cp);
+ 
+-extern struct msr_policy     raw_msr_policy,
+-                            host_msr_policy,
+-                          pv_max_msr_policy,
+-                          pv_def_msr_policy,
+-                         hvm_max_msr_policy,
+-                         hvm_def_msr_policy;
+-
+ /* Container object for per-vCPU MSRs */
+ struct vcpu_msrs
+ {
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index 7ddf0078c3a2..bff26bc4e2b5 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -25,6 +25,7 @@
+ #include <xen/sched.h>
+ 
+ #include <asm/amd.h>
++#include <asm/cpu-policy.h>
+ #include <asm/debugreg.h>
+ #include <asm/hvm/nestedhvm.h>
+ #include <asm/hvm/viridian.h>
+@@ -37,20 +38,9 @@
+ 
+ DEFINE_PER_CPU(uint32_t, tsc_aux);
+ 
+-struct msr_policy __read_mostly     raw_msr_policy,
+-                  __read_mostly    host_msr_policy;
+-#ifdef CONFIG_PV
+-struct msr_policy __read_mostly  pv_max_msr_policy;
+-struct msr_policy __read_mostly  pv_def_msr_policy;
+-#endif
+-#ifdef CONFIG_HVM
+-struct msr_policy __read_mostly hvm_max_msr_policy;
+-struct msr_policy __read_mostly hvm_def_msr_policy;
+-#endif
+-
+ static void __init calculate_raw_policy(void)
+ {
+-    struct msr_policy *mp = &raw_msr_policy;
++    struct msr_policy *mp = &raw_cpu_policy;
+ 
+     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
+     /* Was already added by probe_cpuid_faulting() */
+@@ -61,9 +51,9 @@ static void __init calculate_raw_policy(void)
+ 
+ static void __init calculate_host_policy(void)
+ {
+-    struct msr_policy *mp = &host_msr_policy;
++    struct msr_policy *mp = &host_cpu_policy;
+ 
+-    *mp = raw_msr_policy;
++    *mp = raw_cpu_policy;
+ 
+     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
+     /* probe_cpuid_faulting() sanity checks presence of MISC_FEATURES_ENABLES */
+@@ -81,25 +71,25 @@ static void __init calculate_host_policy(void)
+ 
+ static void __init calculate_pv_max_policy(void)
+ {
+-    struct msr_policy *mp = &pv_max_msr_policy;
++    struct msr_policy *mp = &pv_max_cpu_policy;
+ 
+-    *mp = host_msr_policy;
++    *mp = host_cpu_policy;
+ 
+     mp->arch_caps.raw = 0; /* Not supported yet. */
+ }
+ 
+ static void __init calculate_pv_def_policy(void)
+ {
+-    struct msr_policy *mp = &pv_def_msr_policy;
++    struct msr_policy *mp = &pv_def_cpu_policy;
+ 
+-    *mp = pv_max_msr_policy;
++    *mp = pv_max_cpu_policy;
+ }
+ 
+ static void __init calculate_hvm_max_policy(void)
+ {
+-    struct msr_policy *mp = &hvm_max_msr_policy;
++    struct msr_policy *mp = &hvm_max_cpu_policy;
+ 
+-    *mp = host_msr_policy;
++    *mp = host_cpu_policy;
+ 
+     /* It's always possible to emulate CPUID faulting for HVM guests */
+     mp->platform_info.cpuid_faulting = true;
+@@ -109,9 +99,9 @@ static void __init calculate_hvm_max_policy(void)
+ 
+ static void __init calculate_hvm_def_policy(void)
+ {
+-    struct msr_policy *mp = &hvm_def_msr_policy;
++    struct msr_policy *mp = &hvm_def_cpu_policy;
+ 
+-    *mp = hvm_max_msr_policy;
++    *mp = hvm_max_cpu_policy;
+ }
+ 
+ void __init init_guest_msr_policy(void)
+@@ -135,8 +125,8 @@ void __init init_guest_msr_policy(void)
+ int init_domain_msr_policy(struct domain *d)
+ {
+     struct msr_policy *mp = is_pv_domain(d)
+-        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_def_msr_policy : NULL)
+-        : (IS_ENABLED(CONFIG_HVM) ? &hvm_def_msr_policy : NULL);
++        ? (IS_ENABLED(CONFIG_PV)  ?  &pv_def_cpu_policy : NULL)
++        : (IS_ENABLED(CONFIG_HVM) ? &hvm_def_cpu_policy : NULL);
+ 
+     if ( !mp )
      {
-         unsigned int _7b0;
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index 3ed7c69f4315..43a241f2090f 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -30,38 +30,7 @@
+ #include <xen/cpu.h>
+ #include <xsm/xsm.h>
+ #include <asm/psr.h>
+-#include <asm/cpuid.h>
+-
+-const struct old_cpu_policy system_policies[6] = {
+-    [ XEN_SYSCTL_cpu_policy_raw ] = {
+-        &raw_cpuid_policy,
+-        &raw_msr_policy,
+-    },
+-    [ XEN_SYSCTL_cpu_policy_host ] = {
+-        &host_cpuid_policy,
+-        &host_msr_policy,
+-    },
+-#ifdef CONFIG_PV
+-    [ XEN_SYSCTL_cpu_policy_pv_max ] = {
+-        &pv_max_cpuid_policy,
+-        &pv_max_msr_policy,
+-    },
+-    [ XEN_SYSCTL_cpu_policy_pv_default ] = {
+-        &pv_def_cpuid_policy,
+-        &pv_def_msr_policy,
+-    },
+-#endif
+-#ifdef CONFIG_HVM
+-    [ XEN_SYSCTL_cpu_policy_hvm_max ] = {
+-        &hvm_max_cpuid_policy,
+-        &hvm_max_msr_policy,
+-    },
+-    [ XEN_SYSCTL_cpu_policy_hvm_default ] = {
+-        &hvm_def_cpuid_policy,
+-        &hvm_def_msr_policy,
+-    },
+-#endif
+-};
++#include <asm/cpu-policy.h>
  
-@@ -406,7 +401,7 @@ static void test_guest(struct xen_domctl_createdomain *c)
-          * If host RTM is available, all combinations of guest flags should be
-          * possible.  Flip both HLE/RTM to check non-default settings.
-          */
--        _7b0 = (guest_policy.cpuid.feat.raw[0].b ^=
-+        _7b0 = (guest_policy.policy.feat.raw[0].b ^=
-                 (bitmaskof(X86_FEATURE_HLE) | bitmaskof(X86_FEATURE_RTM)));
+ struct l3_cache_info {
+     int ret;
+@@ -326,19 +295,19 @@ long arch_do_sysctl(
  
-         /* Set the new policy. */
-@@ -427,12 +422,12 @@ static void test_guest(struct xen_domctl_createdomain *c)
-             goto out;
+     case XEN_SYSCTL_get_cpu_featureset:
+     {
+-        static const struct cpuid_policy *const policy_table[6] = {
+-            [XEN_SYSCTL_cpu_featureset_raw]  = &raw_cpuid_policy,
+-            [XEN_SYSCTL_cpu_featureset_host] = &host_cpuid_policy,
++        static const struct cpu_policy *const policy_table[6] = {
++            [XEN_SYSCTL_cpu_featureset_raw]     = &raw_cpu_policy,
++            [XEN_SYSCTL_cpu_featureset_host]    = &host_cpu_policy,
+ #ifdef CONFIG_PV
+-            [XEN_SYSCTL_cpu_featureset_pv]   = &pv_def_cpuid_policy,
+-            [XEN_SYSCTL_cpu_featureset_pv_max] = &pv_max_cpuid_policy,
++            [XEN_SYSCTL_cpu_featureset_pv]      = &pv_def_cpu_policy,
++            [XEN_SYSCTL_cpu_featureset_pv_max]  = &pv_max_cpu_policy,
+ #endif
+ #ifdef CONFIG_HVM
+-            [XEN_SYSCTL_cpu_featureset_hvm]  = &hvm_def_cpuid_policy,
+-            [XEN_SYSCTL_cpu_featureset_hvm_max] = &hvm_max_cpuid_policy,
++            [XEN_SYSCTL_cpu_featureset_hvm]     = &hvm_def_cpu_policy,
++            [XEN_SYSCTL_cpu_featureset_hvm_max] = &hvm_max_cpu_policy,
+ #endif
+         };
+-        const struct cpuid_policy *p = NULL;
++        const struct cpu_policy *p = NULL;
+         uint32_t featureset[FSCAPINTS];
+         unsigned int nr;
+ 
+@@ -391,7 +360,19 @@ long arch_do_sysctl(
+ 
+     case XEN_SYSCTL_get_cpu_policy:
+     {
+-        const struct old_cpu_policy *policy;
++        static const struct cpu_policy *const system_policies[6] = {
++            [XEN_SYSCTL_cpu_policy_raw]         = &raw_cpu_policy,
++            [XEN_SYSCTL_cpu_policy_host]        = &host_cpu_policy,
++#ifdef CONFIG_PV
++            [XEN_SYSCTL_cpu_policy_pv_max]      = &pv_max_cpu_policy,
++            [XEN_SYSCTL_cpu_policy_pv_default]  = &pv_def_cpu_policy,
++#endif
++#ifdef CONFIG_HVM
++            [XEN_SYSCTL_cpu_policy_hvm_max]     = &hvm_max_cpu_policy,
++            [XEN_SYSCTL_cpu_policy_hvm_default] = &hvm_def_cpu_policy,
++#endif
++        };
++        const struct cpu_policy *policy;
+ 
+         /* Reserved field set, or bad policy index? */
+         if ( sysctl->u.cpu_policy._rsvd ||
+@@ -400,11 +381,11 @@ long arch_do_sysctl(
+             ret = -EINVAL;
+             break;
          }
+-        policy = &system_policies[
++        policy = system_policies[
+             array_index_nospec(sysctl->u.cpu_policy.index,
+                                ARRAY_SIZE(system_policies))];
  
--        dump_tsx_details(&guest_policy, "Cur:");
-+        dump_tsx_details(&guest_policy.policy, "Cur:");
- 
--        if ( guest_policy.cpuid.feat.raw[0].b != _7b0 )
-+        if ( guest_policy.policy.feat.raw[0].b != _7b0 )
+-        if ( !policy->cpuid || !policy->msr )
++        if ( !policy )
          {
-             fail("  Expected CPUID.7[1].b 0x%08x differs from actual 0x%08x\n",
--                 _7b0, guest_policy.cpuid.feat.raw[0].b);
-+                 _7b0, guest_policy.policy.feat.raw[0].b);
-             goto out;
-         }
-     }
+             ret = -EOPNOTSUPP;
+             break;
+@@ -414,7 +395,7 @@ long arch_do_sysctl(
+         if ( guest_handle_is_null(sysctl->u.cpu_policy.leaves) )
+             sysctl->u.cpu_policy.nr_leaves = CPUID_MAX_SERIALISED_LEAVES;
+         else if ( (ret = x86_cpuid_copy_to_buffer(
+-                       policy->cpuid,
++                       policy,
+                        sysctl->u.cpu_policy.leaves,
+                        &sysctl->u.cpu_policy.nr_leaves)) )
+             break;
+@@ -430,7 +411,7 @@ long arch_do_sysctl(
+         if ( guest_handle_is_null(sysctl->u.cpu_policy.msrs) )
+             sysctl->u.cpu_policy.nr_msrs = MSR_MAX_SERIALISED_ENTRIES;
+         else if ( (ret = x86_msr_copy_to_buffer(
+-                       policy->msr,
++                       policy,
+                        sysctl->u.cpu_policy.msrs,
+                        &sysctl->u.cpu_policy.nr_msrs)) )
+             break;
 -- 
 2.30.2
 
