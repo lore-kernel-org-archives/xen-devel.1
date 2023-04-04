@@ -4,29 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598BAC77B71
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:53:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517718.803537 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1C80C6FD1D
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:53:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517735.803550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdLR-0007WT-EP; Tue, 04 Apr 2023 09:52:53 +0000
+	id 1pjdLg-0001DI-Qi; Tue, 04 Apr 2023 09:53:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517718.803537; Tue, 04 Apr 2023 09:52:53 +0000
+Received: by outflank-mailman (output) from mailman id 517735.803550; Tue, 04 Apr 2023 09:53:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdLR-0007Ur-7F; Tue, 04 Apr 2023 09:52:53 +0000
-Received: by outflank-mailman (input) for mailman id 517718;
- Tue, 04 Apr 2023 09:52:51 +0000
+	id 1pjdLg-0001D2-NM; Tue, 04 Apr 2023 09:53:08 +0000
+Received: by outflank-mailman (input) for mailman id 517735;
+ Tue, 04 Apr 2023 09:53:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Oy2y=73=citrix.com=prvs=4518c43dc=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pjdLP-0005bo-36
- for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:52:51 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7485f6e7-d2ce-11ed-85db-49a42c6b2330;
- Tue, 04 Apr 2023 11:52:48 +0200 (CEST)
+ <SRS0=8u37=73=casper.srs.infradead.org=BATV+8e7372aa539f26de88ef+7163+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
+ id 1pjdLe-0005bo-Du
+ for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:53:07 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7e112011-d2ce-11ed-85db-49a42c6b2330;
+ Tue, 04 Apr 2023 11:53:05 +0200 (CEST)
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=freeip.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pjdL9-00FEvo-3m; Tue, 04 Apr 2023 09:52:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,1133 +43,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7485f6e7-d2ce-11ed-85db-49a42c6b2330
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1680601968;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=UWOWvkRFhQtN58lpWN5uMWSpgTK9p/X4W2+Z700adBA=;
-  b=Q+DNi5ozG4MyQG1HGxr14UHhfAKEFcdbdV8wNqQWJDTuy2Jc7xzuHROJ
-   oMSiAaHWFmdWB0a6fX+dMFHuk7zOTmDsrjOR8IX/P80sErBqHAVntacbA
-   ukdUOfwTiqCzFRrm9IKTz6J8t8FirFDwZyAbJ1VokRo5bEyuQE70aMZ4F
-   w=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 104275106
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:8puiia01dD2dX2jz//bD5axxkn2cJEfYwER7XKvMYLTBsI5bpzAHx
- 2UXDW/Sb/yMZ2KhetxxboSyoUNX7MfSnNJhQQpqpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefTAOK6ULWeUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS+HuDgNyo4GlD5gBmOagS1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfDGFyr
- eYECTk2RAmqqNKpxeyjY7FAr5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJ0JxBnF/
- zqYl4j/Ki4FGY3EzCCmzn2HuPHIh3PnfYgrLqLto5aGh3XMnzdOWXX6T2CTvv2RmkO4HdVFJ
- CQ86ico6KQ/6kGvZt38RAGj5m6JuAYGXNhdGPF87xuCooLW6QuEAmkPThZadccr8sQxQFQXO
- kShxo2zQ2Y16fvMFCzbr+3Pxd+vBcQLBWICWXceUSoM2PP6ia4DkReRVv87PIfg27UZBgrML
- yC2QDkW3utD1ZNUif/kpDgrkBr3+MGXE1ddChH/Gzv8s1gnPNPNi5mAswCz0BpWEGqOorBtV
- lAgktPW0u0BBIrleMelELRUR+HBCxpo3VThbb9T83oJrW7FF4aLJ9w43d2HDB4B3jw4UTHoe
- lTPngha+YVeOnCnBYcuPdLpVph0nPK7T4q1PhwxUjapSsEpHDJrAQk0PRLAt4wTuBNEfV4D1
- WezLp/3UCdy5VVPxzuqXeYNuYIWKtQF7TqLH/jTlk33uYdykVbJEd/pxnPSNLFmhE5FyS2Jm
- +ti2zyikEoADLenPnaOoeb+7zkidBAGOHw/kOQPHsbrH+asMDhJ5yP5qV/5R7FYog==
-IronPort-HdrOrdr: A9a23:+TC7BajZnnUAz5em4pebKylZdHBQXh4ji2hC6mlwRA09TyX5ra
- 2TdZUgpHrJYVMqMk3I9uruBEDtex3hHP1OkOss1NWZPDUO0VHARO1fBOPZqAEIcBeOldK1u5
- 0AT0B/YueAd2STj6zBkXSF+wBL+qj6zEiq792usEuEVWtRGsVdB58SMHfiLqVxLjM2YqYRJd
- 6nyedsgSGvQngTZtTTPAh/YwCSz+e78q4PeHQ9dmca1DU=
-X-IronPort-AV: E=Sophos;i="5.98,317,1673931600"; 
-   d="scan'208";a="104275106"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH v2 03/15] x86: Rename struct cpuid_policy to struct cpu_policy
-Date: Tue, 4 Apr 2023 10:52:10 +0100
-Message-ID: <20230404095222.1373721-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
-References: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 7e112011-d2ce-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=wvgoJQ9Lm0ccWU181xaSUlae1PKiLsa2k6MVbJjeNtE=; b=YUP5VxUUDjN7PoRvhJ1Z/6AqgN
+	7yoyEVN2XqXQTuYI69bJS2qGUdan3oCjnkR12UKpNSlPUNTUdzpk5DY/xbugywWlO6LHyyXlzhRbI
+	K2Ywx250HO65Ts7l7gE4H1aQbHnCpljV8c58aS4k6DHBdPMLQmOVkoRorlscUWkSdPLboEUeK6DPB
+	OiMDf9gevMIN5nmYLglpR/Erhx9f7yjXIm8kaAmocRrPc0s03A8mUs0e/00r9k3pYmxuyFakN/IxA
+	6AYcj54rWR37VJZarjItBstYW5YjQFIRie+IY8z2DEDap3aV0Guw7YGhSeXGk6I1dAc1AyFwAinCp
+	5FVxq6Iw==;
+Message-ID: <d5c612131f3e47cb08c090bae00b8b0dba58f11e.camel@infradead.org>
+Subject: Re: [PATCH 08/13] hw/xen: do not use
+ aio_set_fd_handler(is_external=true) in xen_xenstore
+From: David Woodhouse <dwmw2@infradead.org>
+To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Julia Suvorova <jusual@redhat.com>,
+  Kevin Wolf <kwolf@redhat.com>, Peter Lieven <pl@kamp.de>, Coiby Xu
+ <Coiby.Xu@gmail.com>,  xen-devel@lists.xenproject.org, Richard Henderson
+ <richard.henderson@linaro.org>,  Stefano Garzarella <sgarzare@redhat.com>,
+ qemu-block@nongnu.org, Eduardo Habkost <eduardo@habkost.net>, Philippe
+ =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Paul Durrant
+ <paul@xen.org>, "Richard W.M. Jones" <rjones@redhat.com>, "Dr. David Alan
+ Gilbert" <dgilbert@redhat.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Aarushi Mehta <mehta.aaru20@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Fam Zheng <fam@euphon.net>,
+ Stefan Weil <sw@weilnetz.de>,  Juan Quintela <quintela@redhat.com>, Xie
+ Yongji <xieyongji@bytedance.com>, Hanna Reitz <hreitz@redhat.com>,  Ronnie
+ Sahlberg <ronniesahlberg@gmail.com>, eesposit@redhat.com, "Michael S.
+ Tsirkin" <mst@redhat.com>, "Daniel P." =?ISO-8859-1?Q?Berrang=E9?=
+ <berrange@redhat.com>, Anthony Perard <anthony.perard@citrix.com>
+Date: Tue, 04 Apr 2023 10:52:32 +0100
+In-Reply-To: <20230403183004.347205-9-stefanha@redhat.com>
+References: <20230403183004.347205-1-stefanha@redhat.com>
+	 <20230403183004.347205-9-stefanha@redhat.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-7s6HEpTuj3u8ifXuNfwk"
+User-Agent: Evolution 3.44.4-0ubuntu1 
 MIME-Version: 1.0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+
+
+--=-7s6HEpTuj3u8ifXuNfwk
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Also merge lib/x86/cpuid.h entirely into lib/x86/cpu-policy.h
+On Mon, 2023-04-03 at 14:29 -0400, Stefan Hajnoczi wrote:
+> There is no need to suspend activity between aio_disable_external() and
+> aio_enable_external(), which is mainly used for the block layer's drain
+> operation.
+>=20
+> This is part of ongoing work to remove the aio_disable_external() API.
+>=20
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 
-Use a temporary define to make struct cpuid_policy still work.
+Reviewed-by: David Woodhouse <dwmw@amazon.co.uk>
 
-There's one forward declaration of struct cpuid_policy in
-tools/tests/x86_emulator/x86-emulate.h that isn't covered by the define, and
-it's easier to rename that now than to rearrange the includes.
+Thanks.
 
-No functional change.
+> ---
+> =C2=A0hw/i386/kvm/xen_xenstore.c | 2 +-
+> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
+> index 900679af8a..6e81bc8791 100644
+> --- a/hw/i386/kvm/xen_xenstore.c
+> +++ b/hw/i386/kvm/xen_xenstore.c
+> @@ -133,7 +133,7 @@ static void xen_xenstore_realize(DeviceState *dev, Er=
+ror **errp)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "Xensto=
+re evtchn port init failed");
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> -=C2=A0=C2=A0=C2=A0 aio_set_fd_handler(qemu_get_aio_context(), xen_be_evt=
+chn_fd(s->eh), true,
+> +=C2=A0=C2=A0=C2=A0 aio_set_fd_handler(qemu_get_aio_context(), xen_be_evt=
+chn_fd(s->eh), false,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xen_xens=
+tore_event, NULL, NULL, NULL, s);
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 s->impl =3D xs_impl_create(xen_domid);
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
 
-v2:
- * Retain test/x86_emulator handcoded dependency on cpuid-autogen.h
- * Rebase over x86_emulate() split
----
- tools/fuzz/cpu-policy/afl-policy-fuzzer.c |   2 +-
- tools/tests/x86_emulator/Makefile         |   2 +-
- tools/tests/x86_emulator/x86-emulate.h    |   2 +-
- xen/arch/x86/include/asm/cpuid.h          |   1 -
- xen/arch/x86/x86_emulate/x86_emulate.h    |   2 +-
- xen/include/xen/lib/x86/cpu-policy.h      | 463 ++++++++++++++++++++-
- xen/include/xen/lib/x86/cpuid.h           | 475 ----------------------
- xen/lib/x86/cpuid.c                       |   2 +-
- 8 files changed, 467 insertions(+), 482 deletions(-)
- delete mode 100644 xen/include/xen/lib/x86/cpuid.h
+--=-7s6HEpTuj3u8ifXuNfwk
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
-diff --git a/tools/fuzz/cpu-policy/afl-policy-fuzzer.c b/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
-index 7d0f274c6cdd..79e42e8bfd04 100644
---- a/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
-+++ b/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
-@@ -9,7 +9,7 @@
- #include <getopt.h>
- 
- #include <xen-tools/common-macros.h>
--#include <xen/lib/x86/cpuid.h>
-+#include <xen/lib/x86/cpu-policy.h>
- #include <xen/lib/x86/msr.h>
- #include <xen/domctl.h>
- 
-diff --git a/tools/tests/x86_emulator/Makefile b/tools/tests/x86_emulator/Makefile
-index f5d88fb9f681..4b1f75de052e 100644
---- a/tools/tests/x86_emulator/Makefile
-+++ b/tools/tests/x86_emulator/Makefile
-@@ -292,7 +292,7 @@ HOSTCFLAGS += $(CFLAGS_xeninclude) -I. $(HOSTCFLAGS-$(XEN_COMPILE_ARCH))
- x86.h := $(addprefix $(XEN_ROOT)/tools/include/xen/asm/,\
-                      x86-vendors.h x86-defns.h msr-index.h) \
-          $(addprefix $(XEN_ROOT)/tools/include/xen/lib/x86/, \
--                     cpuid.h cpuid-autogen.h)
-+                     cpu-policy.h cpuid-autogen.h)
- x86_emulate.h := x86-emulate.h x86_emulate/x86_emulate.h x86_emulate/private.h $(x86.h)
- 
- $(OBJS): %.o: %.c $(x86_emulate.h)
-diff --git a/tools/tests/x86_emulator/x86-emulate.h b/tools/tests/x86_emulator/x86-emulate.h
-index 942b4cdd47d1..02922d0c5a19 100644
---- a/tools/tests/x86_emulator/x86-emulate.h
-+++ b/tools/tests/x86_emulator/x86-emulate.h
-@@ -77,7 +77,7 @@
- #define is_canonical_address(x) (((int64_t)(x) >> 47) == ((int64_t)(x) >> 63))
- 
- extern uint32_t mxcsr_mask;
--extern struct cpuid_policy cp;
-+extern struct cpu_policy cp;
- 
- #define MMAP_SZ 16384
- bool emul_test_init(void);
-diff --git a/xen/arch/x86/include/asm/cpuid.h b/xen/arch/x86/include/asm/cpuid.h
-index 49b3128f06f9..d418e8100dde 100644
---- a/xen/arch/x86/include/asm/cpuid.h
-+++ b/xen/arch/x86/include/asm/cpuid.h
-@@ -9,7 +9,6 @@
- #include <xen/percpu.h>
- 
- #include <xen/lib/x86/cpu-policy.h>
--#include <xen/lib/x86/cpuid.h>
- 
- #include <public/sysctl.h>
- 
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
-index bb7af967ffee..75015104fbdb 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -23,7 +23,7 @@
- #ifndef __X86_EMULATE_H__
- #define __X86_EMULATE_H__
- 
--#include <xen/lib/x86/cpuid.h>
-+#include <xen/lib/x86/cpu-policy.h>
- 
- #define MAX_INST_LEN 15
- 
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index 3a5300d1078c..666505964d00 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -2,9 +2,342 @@
- #ifndef XEN_LIB_X86_POLICIES_H
- #define XEN_LIB_X86_POLICIES_H
- 
--#include <xen/lib/x86/cpuid.h>
-+#include <xen/lib/x86/cpuid-autogen.h>
- #include <xen/lib/x86/msr.h>
- 
-+#define FEATURESET_1d     0 /* 0x00000001.edx      */
-+#define FEATURESET_1c     1 /* 0x00000001.ecx      */
-+#define FEATURESET_e1d    2 /* 0x80000001.edx      */
-+#define FEATURESET_e1c    3 /* 0x80000001.ecx      */
-+#define FEATURESET_Da1    4 /* 0x0000000d:1.eax    */
-+#define FEATURESET_7b0    5 /* 0x00000007:0.ebx    */
-+#define FEATURESET_7c0    6 /* 0x00000007:0.ecx    */
-+#define FEATURESET_e7d    7 /* 0x80000007.edx      */
-+#define FEATURESET_e8b    8 /* 0x80000008.ebx      */
-+#define FEATURESET_7d0    9 /* 0x00000007:0.edx    */
-+#define FEATURESET_7a1   10 /* 0x00000007:1.eax    */
-+#define FEATURESET_e21a  11 /* 0x80000021.eax      */
-+#define FEATURESET_7b1   12 /* 0x00000007:1.ebx    */
-+#define FEATURESET_7d2   13 /* 0x00000007:2.edx    */
-+#define FEATURESET_7c1   14 /* 0x00000007:1.ecx    */
-+#define FEATURESET_7d1   15 /* 0x00000007:1.edx    */
-+
-+struct cpuid_leaf
-+{
-+    uint32_t a, b, c, d;
-+};
-+
-+/*
-+ * Versions of GCC before 5 unconditionally reserve %rBX as the PIC hard
-+ * register, and are unable to cope with spilling it.  This results in a
-+ * rather cryptic error:
-+ *    error: inconsistent operand constraints in an ‘asm’
-+ *
-+ * In affected situations, work around the issue by using a separate register
-+ * to hold the the %rBX output, and xchg twice to leave %rBX preserved around
-+ * the asm() statement.
-+ */
-+#if defined(__PIC__) && __GNUC__ < 5 && !defined(__clang__) && defined(__i386__)
-+# define XCHG_BX "xchg %%ebx, %[bx];"
-+# define BX_CON [bx] "=&r"
-+#elif defined(__PIC__) && __GNUC__ < 5 && !defined(__clang__) && \
-+    defined(__x86_64__) && (defined(__code_model_medium__) || \
-+                            defined(__code_model_large__))
-+# define XCHG_BX "xchg %%rbx, %q[bx];"
-+# define BX_CON [bx] "=&r"
-+#else
-+# define XCHG_BX ""
-+# define BX_CON "=&b"
-+#endif
-+
-+static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
-+{
-+    asm ( XCHG_BX
-+          "cpuid;"
-+          XCHG_BX
-+          : "=a" (l->a), BX_CON (l->b), "=&c" (l->c), "=&d" (l->d)
-+          : "a" (leaf) );
-+}
-+
-+static inline void cpuid_count_leaf(
-+    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
-+{
-+    asm ( XCHG_BX
-+          "cpuid;"
-+          XCHG_BX
-+          : "=a" (l->a), BX_CON (l->b), "=c" (l->c), "=&d" (l->d)
-+          : "a" (leaf), "c" (subleaf) );
-+}
-+
-+#undef BX_CON
-+#undef XCHG
-+
-+/**
-+ * Given the vendor id from CPUID leaf 0, look up Xen's internal integer
-+ * vendor ID.  Returns X86_VENDOR_UNKNOWN for any unknown vendor.
-+ */
-+unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx);
-+
-+/**
-+ * Given Xen's internal vendor ID, return a string suitable for printing.
-+ * Returns "Unknown" for any unrecognised ID.
-+ */
-+const char *x86_cpuid_vendor_to_str(unsigned int vendor);
-+
-+#define CPUID_GUEST_NR_BASIC      (0xdu + 1)
-+#define CPUID_GUEST_NR_CACHE      (5u + 1)
-+#define CPUID_GUEST_NR_FEAT       (2u + 1)
-+#define CPUID_GUEST_NR_TOPO       (1u + 1)
-+#define CPUID_GUEST_NR_XSTATE     (62u + 1)
-+#define CPUID_GUEST_NR_EXTD_INTEL (0x8u + 1)
-+#define CPUID_GUEST_NR_EXTD_AMD   (0x21u + 1)
-+#define CPUID_GUEST_NR_EXTD       MAX(CPUID_GUEST_NR_EXTD_INTEL, \
-+                                      CPUID_GUEST_NR_EXTD_AMD)
-+
-+/*
-+ * Maximum number of leaves a struct cpu_policy turns into when serialised for
-+ * interaction with the toolstack.  (Sum of all leaves in each union, less the
-+ * entries in basic which sub-unions hang off of.)
-+ */
-+#define CPUID_MAX_SERIALISED_LEAVES                     \
-+    (CPUID_GUEST_NR_BASIC +                             \
-+     CPUID_GUEST_NR_FEAT   - !!CPUID_GUEST_NR_FEAT +    \
-+     CPUID_GUEST_NR_CACHE  - !!CPUID_GUEST_NR_CACHE +   \
-+     CPUID_GUEST_NR_TOPO   - !!CPUID_GUEST_NR_TOPO +    \
-+     CPUID_GUEST_NR_XSTATE - !!CPUID_GUEST_NR_XSTATE +  \
-+     CPUID_GUEST_NR_EXTD + 2 /* hv_limit and hv2_limit */ )
-+
-+struct cpu_policy
-+{
-+#define DECL_BITFIELD(word) _DECL_BITFIELD(FEATURESET_ ## word)
-+#define _DECL_BITFIELD(x)   __DECL_BITFIELD(x)
-+#define __DECL_BITFIELD(x)  CPUID_BITFIELD_ ## x
-+
-+    /* Basic leaves: 0x000000xx */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_BASIC];
-+        struct {
-+            /* Leaf 0x0 - Max and vendor. */
-+            uint32_t max_leaf, vendor_ebx, vendor_ecx, vendor_edx;
-+
-+            /* Leaf 0x1 - Family/model/stepping and features. */
-+            uint32_t raw_fms;
-+            uint8_t :8,       /* Brand ID. */
-+                clflush_size, /* Number of 8-byte blocks per cache line. */
-+                lppp,         /* Logical processors per package. */
-+                apic_id;      /* Initial APIC ID. */
-+            union {
-+                uint32_t _1c;
-+                struct { DECL_BITFIELD(1c); };
-+            };
-+            union {
-+                uint32_t _1d;
-+                struct { DECL_BITFIELD(1d); };
-+            };
-+
-+            /* Leaf 0x2 - TLB/Cache/Prefetch. */
-+            uint8_t l2_nr_queries; /* Documented as fixed to 1. */
-+            uint8_t l2_desc[15];
-+
-+            uint64_t :64, :64; /* Leaf 0x3 - PSN. */
-+            uint64_t :64, :64; /* Leaf 0x4 - Structured Cache. */
-+            uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
-+            uint64_t :64, :64; /* Leaf 0x6 - Therm/Perf. */
-+            uint64_t :64, :64; /* Leaf 0x7 - Structured Features. */
-+            uint64_t :64, :64; /* Leaf 0x8 - rsvd */
-+            uint64_t :64, :64; /* Leaf 0x9 - DCA */
-+
-+            /* Leaf 0xa - Intel PMU. */
-+            uint8_t pmu_version, _pmu[15];
-+
-+            uint64_t :64, :64; /* Leaf 0xb - Topology. */
-+            uint64_t :64, :64; /* Leaf 0xc - rsvd */
-+            uint64_t :64, :64; /* Leaf 0xd - XSTATE. */
-+        };
-+    } basic;
-+
-+    /* Structured cache leaf: 0x00000004[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_CACHE];
-+        struct cpuid_cache_leaf {
-+            uint32_t /* a */ type:5, level:3;
-+            bool self_init:1, fully_assoc:1;
-+            uint32_t :4, threads_per_cache:12, cores_per_package:6;
-+            uint32_t /* b */ line_size:12, partitions:10, ways:10;
-+            uint32_t /* c */ sets;
-+            bool /* d */ wbinvd:1, inclusive:1, complex:1;
-+        } subleaf[CPUID_GUEST_NR_CACHE];
-+    } cache;
-+
-+    /* Structured feature leaf: 0x00000007[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_FEAT];
-+        struct {
-+            /* Subleaf 0. */
-+            uint32_t max_subleaf;
-+            union {
-+                uint32_t _7b0;
-+                struct { DECL_BITFIELD(7b0); };
-+            };
-+            union {
-+                uint32_t _7c0;
-+                struct { DECL_BITFIELD(7c0); };
-+            };
-+            union {
-+                uint32_t _7d0;
-+                struct { DECL_BITFIELD(7d0); };
-+            };
-+
-+            /* Subleaf 1. */
-+            union {
-+                uint32_t _7a1;
-+                struct { DECL_BITFIELD(7a1); };
-+            };
-+            union {
-+                uint32_t _7b1;
-+                struct { DECL_BITFIELD(7b1); };
-+            };
-+            union {
-+                uint32_t _7c1;
-+                struct { DECL_BITFIELD(7c1); };
-+            };
-+            union {
-+                uint32_t _7d1;
-+                struct { DECL_BITFIELD(7d1); };
-+            };
-+
-+            /* Subleaf 2. */
-+            uint32_t /* a */:32, /* b */:32, /* c */:32;
-+            union {
-+                uint32_t _7d2;
-+                struct { DECL_BITFIELD(7d2); };
-+            };
-+        };
-+    } feat;
-+
-+    /* Extended topology enumeration: 0x0000000B[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_TOPO];
-+        struct cpuid_topo_leaf {
-+            uint32_t id_shift:5, :27;
-+            uint16_t nr_logical, :16;
-+            uint8_t level, type, :8, :8;
-+            uint32_t x2apic_id;
-+        } subleaf[CPUID_GUEST_NR_TOPO];
-+    } topo;
-+
-+    /* Xstate feature leaf: 0x0000000D[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_XSTATE];
-+
-+        struct {
-+            /* Subleaf 0. */
-+            uint32_t xcr0_low, /* b */:32, max_size, xcr0_high;
-+
-+            /* Subleaf 1. */
-+            union {
-+                uint32_t Da1;
-+                struct { DECL_BITFIELD(Da1); };
-+            };
-+            uint32_t /* b */:32, xss_low, xss_high;
-+        };
-+
-+        /* Per-component common state.  Valid for i >= 2. */
-+        struct {
-+            uint32_t size, offset;
-+            bool xss:1, align:1;
-+            uint32_t _res_d;
-+        } comp[CPUID_GUEST_NR_XSTATE];
-+    } xstate;
-+
-+    /* Extended leaves: 0x800000xx */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_EXTD];
-+        struct {
-+            /* Leaf 0x80000000 - Max and vendor. */
-+            uint32_t max_leaf, vendor_ebx, vendor_ecx, vendor_edx;
-+
-+            /* Leaf 0x80000001 - Family/model/stepping and features. */
-+            uint32_t raw_fms, /* b */:32;
-+            union {
-+                uint32_t e1c;
-+                struct { DECL_BITFIELD(e1c); };
-+            };
-+            union {
-+                uint32_t e1d;
-+                struct { DECL_BITFIELD(e1d); };
-+            };
-+
-+            uint64_t :64, :64; /* Brand string. */
-+            uint64_t :64, :64; /* Brand string. */
-+            uint64_t :64, :64; /* Brand string. */
-+            uint64_t :64, :64; /* L1 cache/TLB. */
-+            uint64_t :64, :64; /* L2/3 cache/TLB. */
-+
-+            /* Leaf 0x80000007 - Advanced Power Management. */
-+            uint32_t /* a */:32, /* b */:32, /* c */:32;
-+            union {
-+                uint32_t e7d;
-+                struct { DECL_BITFIELD(e7d); };
-+            };
-+
-+            /* Leaf 0x80000008 - Misc addr/feature info. */
-+            uint8_t maxphysaddr, maxlinaddr, :8, :8;
-+            union {
-+                uint32_t e8b;
-+                struct { DECL_BITFIELD(e8b); };
-+            };
-+            uint32_t nc:8, :4, apic_id_size:4, :16;
-+            uint32_t /* d */:32;
-+
-+            uint64_t :64, :64; /* Leaf 0x80000009. */
-+            uint64_t :64, :64; /* Leaf 0x8000000a - SVM rev and features. */
-+            uint64_t :64, :64; /* Leaf 0x8000000b. */
-+            uint64_t :64, :64; /* Leaf 0x8000000c. */
-+            uint64_t :64, :64; /* Leaf 0x8000000d. */
-+            uint64_t :64, :64; /* Leaf 0x8000000e. */
-+            uint64_t :64, :64; /* Leaf 0x8000000f. */
-+            uint64_t :64, :64; /* Leaf 0x80000010. */
-+            uint64_t :64, :64; /* Leaf 0x80000011. */
-+            uint64_t :64, :64; /* Leaf 0x80000012. */
-+            uint64_t :64, :64; /* Leaf 0x80000013. */
-+            uint64_t :64, :64; /* Leaf 0x80000014. */
-+            uint64_t :64, :64; /* Leaf 0x80000015. */
-+            uint64_t :64, :64; /* Leaf 0x80000016. */
-+            uint64_t :64, :64; /* Leaf 0x80000017. */
-+            uint64_t :64, :64; /* Leaf 0x80000018. */
-+            uint64_t :64, :64; /* Leaf 0x80000019 - TLB 1GB Identifiers. */
-+            uint64_t :64, :64; /* Leaf 0x8000001a - Performance related info. */
-+            uint64_t :64, :64; /* Leaf 0x8000001b - IBS feature information. */
-+            uint64_t :64, :64; /* Leaf 0x8000001c. */
-+            uint64_t :64, :64; /* Leaf 0x8000001d - Cache properties. */
-+            uint64_t :64, :64; /* Leaf 0x8000001e - Extd APIC/Core/Node IDs. */
-+            uint64_t :64, :64; /* Leaf 0x8000001f - AMD Secure Encryption. */
-+            uint64_t :64, :64; /* Leaf 0x80000020 - Platform QoS. */
-+
-+            /* Leaf 0x80000021 - Extended Feature 2 */
-+            union {
-+                uint32_t e21a;
-+                struct { DECL_BITFIELD(e21a); };
-+            };
-+            uint32_t /* b */:32, /* c */:32, /* d */:32;
-+        };
-+    } extd;
-+
-+#undef __DECL_BITFIELD
-+#undef _DECL_BITFIELD
-+#undef DECL_BITFIELD
-+
-+    /* Toolstack selected Hypervisor max_leaf (if non-zero). */
-+    uint8_t hv_limit, hv2_limit;
-+
-+    /* Value calculated from raw data above. */
-+    uint8_t x86_vendor;
-+};
-+
-+/* Temporary */
-+#define cpuid_policy cpu_policy
-+
- struct old_cpu_policy
- {
-     struct cpuid_policy *cpuid;
-@@ -19,6 +352,134 @@ struct cpu_policy_errors
- 
- #define INIT_CPU_POLICY_ERRORS { -1, -1, -1 }
- 
-+/* Fill in a featureset bitmap from a CPUID policy. */
-+static inline void cpuid_policy_to_featureset(
-+    const struct cpuid_policy *p, uint32_t fs[FEATURESET_NR_ENTRIES])
-+{
-+    fs[FEATURESET_1d]  = p->basic._1d;
-+    fs[FEATURESET_1c]  = p->basic._1c;
-+    fs[FEATURESET_e1d] = p->extd.e1d;
-+    fs[FEATURESET_e1c] = p->extd.e1c;
-+    fs[FEATURESET_Da1] = p->xstate.Da1;
-+    fs[FEATURESET_7b0] = p->feat._7b0;
-+    fs[FEATURESET_7c0] = p->feat._7c0;
-+    fs[FEATURESET_e7d] = p->extd.e7d;
-+    fs[FEATURESET_e8b] = p->extd.e8b;
-+    fs[FEATURESET_7d0] = p->feat._7d0;
-+    fs[FEATURESET_7a1] = p->feat._7a1;
-+    fs[FEATURESET_e21a] = p->extd.e21a;
-+    fs[FEATURESET_7b1] = p->feat._7b1;
-+    fs[FEATURESET_7d2] = p->feat._7d2;
-+    fs[FEATURESET_7c1] = p->feat._7c1;
-+    fs[FEATURESET_7d1] = p->feat._7d1;
-+}
-+
-+/* Fill in a CPUID policy from a featureset bitmap. */
-+static inline void cpuid_featureset_to_policy(
-+    const uint32_t fs[FEATURESET_NR_ENTRIES], struct cpuid_policy *p)
-+{
-+    p->basic._1d  = fs[FEATURESET_1d];
-+    p->basic._1c  = fs[FEATURESET_1c];
-+    p->extd.e1d   = fs[FEATURESET_e1d];
-+    p->extd.e1c   = fs[FEATURESET_e1c];
-+    p->xstate.Da1 = fs[FEATURESET_Da1];
-+    p->feat._7b0  = fs[FEATURESET_7b0];
-+    p->feat._7c0  = fs[FEATURESET_7c0];
-+    p->extd.e7d   = fs[FEATURESET_e7d];
-+    p->extd.e8b   = fs[FEATURESET_e8b];
-+    p->feat._7d0  = fs[FEATURESET_7d0];
-+    p->feat._7a1  = fs[FEATURESET_7a1];
-+    p->extd.e21a  = fs[FEATURESET_e21a];
-+    p->feat._7b1  = fs[FEATURESET_7b1];
-+    p->feat._7d2  = fs[FEATURESET_7d2];
-+    p->feat._7c1  = fs[FEATURESET_7c1];
-+    p->feat._7d1  = fs[FEATURESET_7d1];
-+}
-+
-+static inline uint64_t cpuid_policy_xcr0_max(const struct cpuid_policy *p)
-+{
-+    return ((uint64_t)p->xstate.xcr0_high << 32) | p->xstate.xcr0_low;
-+}
-+
-+static inline uint64_t cpuid_policy_xstates(const struct cpuid_policy *p)
-+{
-+    uint64_t val = p->xstate.xcr0_high | p->xstate.xss_high;
-+
-+    return (val << 32) | p->xstate.xcr0_low | p->xstate.xss_low;
-+}
-+
-+const uint32_t *x86_cpuid_lookup_deep_deps(uint32_t feature);
-+
-+/**
-+ * Recalculate the content in a CPUID policy which is derived from raw data.
-+ */
-+void x86_cpuid_policy_recalc_synth(struct cpuid_policy *p);
-+
-+/**
-+ * Fill a CPUID policy using the native CPUID instruction.
-+ *
-+ * No sanitisation is performed, but synthesised values are calculated.
-+ * Values may be influenced by a hypervisor or from masking/faulting
-+ * configuration.
-+ */
-+void x86_cpuid_policy_fill_native(struct cpuid_policy *p);
-+
-+/**
-+ * Clear leaf data beyond the policies max leaf/subleaf settings.
-+ *
-+ * Policy serialisation purposefully omits out-of-range leaves, because there
-+ * are a large number of them due to vendor differences.  However, when
-+ * constructing new policies (e.g. levelling down), it is possible to end up
-+ * with out-of-range leaves with stale content in them.  This helper clears
-+ * them.
-+ */
-+void x86_cpuid_policy_clear_out_of_range_leaves(struct cpuid_policy *p);
-+
-+#ifdef __XEN__
-+#include <public/arch-x86/xen.h>
-+typedef XEN_GUEST_HANDLE_64(xen_cpuid_leaf_t) cpuid_leaf_buffer_t;
-+#else
-+#include <xen/arch-x86/xen.h>
-+typedef xen_cpuid_leaf_t cpuid_leaf_buffer_t[];
-+#endif
-+
-+/**
-+ * Serialise a cpuid_policy object into an array of cpuid leaves.
-+ *
-+ * @param policy     The cpuid_policy to serialise.
-+ * @param leaves     The array of leaves to serialise into.
-+ * @param nr_entries The number of entries in 'leaves'.
-+ * @returns -errno
-+ *
-+ * Writes at most CPUID_MAX_SERIALISED_LEAVES.  May fail with -ENOBUFS if the
-+ * leaves array is too short.  On success, nr_entries is updated with the
-+ * actual number of leaves written.
-+ */
-+int x86_cpuid_copy_to_buffer(const struct cpuid_policy *policy,
-+                             cpuid_leaf_buffer_t leaves, uint32_t *nr_entries);
-+
-+/**
-+ * Unserialise a cpuid_policy object from an array of cpuid leaves.
-+ *
-+ * @param policy      The cpuid_policy to unserialise into.
-+ * @param leaves      The array of leaves to unserialise from.
-+ * @param nr_entries  The number of entries in 'leaves'.
-+ * @param err_leaf    Optional hint for error diagnostics.
-+ * @param err_subleaf Optional hint for error diagnostics.
-+ * @returns -errno
-+ *
-+ * Reads at most CPUID_MAX_SERIALISED_LEAVES.  May return -ERANGE if an
-+ * incoming leaf is out of range of cpuid_policy, in which case the optional
-+ * err_* pointers will identify the out-of-range indicies.
-+ *
-+ * No content validation of in-range leaves is performed.  Synthesised data is
-+ * recalculated.
-+ */
-+int x86_cpuid_copy_from_buffer(struct cpuid_policy *policy,
-+                               const cpuid_leaf_buffer_t leaves,
-+                               uint32_t nr_entries, uint32_t *err_leaf,
-+                               uint32_t *err_subleaf);
-+
- /*
-  * Calculate whether two policies are compatible.
-  *
-diff --git a/xen/include/xen/lib/x86/cpuid.h b/xen/include/xen/lib/x86/cpuid.h
-deleted file mode 100644
-index fa98b371eef4..000000000000
---- a/xen/include/xen/lib/x86/cpuid.h
-+++ /dev/null
-@@ -1,475 +0,0 @@
--/* Common data structures and functions consumed by hypervisor and toolstack */
--#ifndef XEN_LIB_X86_CPUID_H
--#define XEN_LIB_X86_CPUID_H
--
--#include <xen/lib/x86/cpuid-autogen.h>
--
--#define FEATURESET_1d     0 /* 0x00000001.edx      */
--#define FEATURESET_1c     1 /* 0x00000001.ecx      */
--#define FEATURESET_e1d    2 /* 0x80000001.edx      */
--#define FEATURESET_e1c    3 /* 0x80000001.ecx      */
--#define FEATURESET_Da1    4 /* 0x0000000d:1.eax    */
--#define FEATURESET_7b0    5 /* 0x00000007:0.ebx    */
--#define FEATURESET_7c0    6 /* 0x00000007:0.ecx    */
--#define FEATURESET_e7d    7 /* 0x80000007.edx      */
--#define FEATURESET_e8b    8 /* 0x80000008.ebx      */
--#define FEATURESET_7d0    9 /* 0x00000007:0.edx    */
--#define FEATURESET_7a1   10 /* 0x00000007:1.eax    */
--#define FEATURESET_e21a  11 /* 0x80000021.eax      */
--#define FEATURESET_7b1   12 /* 0x00000007:1.ebx    */
--#define FEATURESET_7d2   13 /* 0x00000007:2.edx    */
--#define FEATURESET_7c1   14 /* 0x00000007:1.ecx    */
--#define FEATURESET_7d1   15 /* 0x00000007:1.edx    */
--
--struct cpuid_leaf
--{
--    uint32_t a, b, c, d;
--};
--
--/*
-- * Versions of GCC before 5 unconditionally reserve %rBX as the PIC hard
-- * register, and are unable to cope with spilling it.  This results in a
-- * rather cryptic error:
-- *    error: inconsistent operand constraints in an ‘asm’
-- *
-- * In affected situations, work around the issue by using a separate register
-- * to hold the the %rBX output, and xchg twice to leave %rBX preserved around
-- * the asm() statement.
-- */
--#if defined(__PIC__) && __GNUC__ < 5 && !defined(__clang__) && defined(__i386__)
--# define XCHG_BX "xchg %%ebx, %[bx];"
--# define BX_CON [bx] "=&r"
--#elif defined(__PIC__) && __GNUC__ < 5 && !defined(__clang__) && \
--    defined(__x86_64__) && (defined(__code_model_medium__) || \
--                            defined(__code_model_large__))
--# define XCHG_BX "xchg %%rbx, %q[bx];"
--# define BX_CON [bx] "=&r"
--#else
--# define XCHG_BX ""
--# define BX_CON "=&b"
--#endif
--
--static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
--{
--    asm ( XCHG_BX
--          "cpuid;"
--          XCHG_BX
--          : "=a" (l->a), BX_CON (l->b), "=&c" (l->c), "=&d" (l->d)
--          : "a" (leaf) );
--}
--
--static inline void cpuid_count_leaf(
--    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
--{
--    asm ( XCHG_BX
--          "cpuid;"
--          XCHG_BX
--          : "=a" (l->a), BX_CON (l->b), "=c" (l->c), "=&d" (l->d)
--          : "a" (leaf), "c" (subleaf) );
--}
--
--#undef BX_CON
--#undef XCHG
--
--/**
-- * Given the vendor id from CPUID leaf 0, look up Xen's internal integer
-- * vendor ID.  Returns X86_VENDOR_UNKNOWN for any unknown vendor.
-- */
--unsigned int x86_cpuid_lookup_vendor(uint32_t ebx, uint32_t ecx, uint32_t edx);
--
--/**
-- * Given Xen's internal vendor ID, return a string suitable for printing.
-- * Returns "Unknown" for any unrecognised ID.
-- */
--const char *x86_cpuid_vendor_to_str(unsigned int vendor);
--
--#define CPUID_GUEST_NR_BASIC      (0xdu + 1)
--#define CPUID_GUEST_NR_CACHE      (5u + 1)
--#define CPUID_GUEST_NR_FEAT       (2u + 1)
--#define CPUID_GUEST_NR_TOPO       (1u + 1)
--#define CPUID_GUEST_NR_XSTATE     (62u + 1)
--#define CPUID_GUEST_NR_EXTD_INTEL (0x8u + 1)
--#define CPUID_GUEST_NR_EXTD_AMD   (0x21u + 1)
--#define CPUID_GUEST_NR_EXTD       MAX(CPUID_GUEST_NR_EXTD_INTEL, \
--                                      CPUID_GUEST_NR_EXTD_AMD)
--
--/*
-- * Maximum number of leaves a struct cpuid_policy turns into when serialised
-- * for interaction with the toolstack.  (Sum of all leaves in each union, less
-- * the entries in basic which sub-unions hang off of.)
-- */
--#define CPUID_MAX_SERIALISED_LEAVES                     \
--    (CPUID_GUEST_NR_BASIC +                             \
--     CPUID_GUEST_NR_FEAT   - !!CPUID_GUEST_NR_FEAT +    \
--     CPUID_GUEST_NR_CACHE  - !!CPUID_GUEST_NR_CACHE +   \
--     CPUID_GUEST_NR_TOPO   - !!CPUID_GUEST_NR_TOPO +    \
--     CPUID_GUEST_NR_XSTATE - !!CPUID_GUEST_NR_XSTATE +  \
--     CPUID_GUEST_NR_EXTD + 2 /* hv_limit and hv2_limit */ )
--
--struct cpuid_policy
--{
--#define DECL_BITFIELD(word) _DECL_BITFIELD(FEATURESET_ ## word)
--#define _DECL_BITFIELD(x)   __DECL_BITFIELD(x)
--#define __DECL_BITFIELD(x)  CPUID_BITFIELD_ ## x
--
--    /* Basic leaves: 0x000000xx */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_BASIC];
--        struct {
--            /* Leaf 0x0 - Max and vendor. */
--            uint32_t max_leaf, vendor_ebx, vendor_ecx, vendor_edx;
--
--            /* Leaf 0x1 - Family/model/stepping and features. */
--            uint32_t raw_fms;
--            uint8_t :8,       /* Brand ID. */
--                clflush_size, /* Number of 8-byte blocks per cache line. */
--                lppp,         /* Logical processors per package. */
--                apic_id;      /* Initial APIC ID. */
--            union {
--                uint32_t _1c;
--                struct { DECL_BITFIELD(1c); };
--            };
--            union {
--                uint32_t _1d;
--                struct { DECL_BITFIELD(1d); };
--            };
--
--            /* Leaf 0x2 - TLB/Cache/Prefetch. */
--            uint8_t l2_nr_queries; /* Documented as fixed to 1. */
--            uint8_t l2_desc[15];
--
--            uint64_t :64, :64; /* Leaf 0x3 - PSN. */
--            uint64_t :64, :64; /* Leaf 0x4 - Structured Cache. */
--            uint64_t :64, :64; /* Leaf 0x5 - MONITOR. */
--            uint64_t :64, :64; /* Leaf 0x6 - Therm/Perf. */
--            uint64_t :64, :64; /* Leaf 0x7 - Structured Features. */
--            uint64_t :64, :64; /* Leaf 0x8 - rsvd */
--            uint64_t :64, :64; /* Leaf 0x9 - DCA */
--
--            /* Leaf 0xa - Intel PMU. */
--            uint8_t pmu_version, _pmu[15];
--
--            uint64_t :64, :64; /* Leaf 0xb - Topology. */
--            uint64_t :64, :64; /* Leaf 0xc - rsvd */
--            uint64_t :64, :64; /* Leaf 0xd - XSTATE. */
--        };
--    } basic;
--
--    /* Structured cache leaf: 0x00000004[xx] */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_CACHE];
--        struct cpuid_cache_leaf {
--            uint32_t /* a */ type:5, level:3;
--            bool self_init:1, fully_assoc:1;
--            uint32_t :4, threads_per_cache:12, cores_per_package:6;
--            uint32_t /* b */ line_size:12, partitions:10, ways:10;
--            uint32_t /* c */ sets;
--            bool /* d */ wbinvd:1, inclusive:1, complex:1;
--        } subleaf[CPUID_GUEST_NR_CACHE];
--    } cache;
--
--    /* Structured feature leaf: 0x00000007[xx] */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_FEAT];
--        struct {
--            /* Subleaf 0. */
--            uint32_t max_subleaf;
--            union {
--                uint32_t _7b0;
--                struct { DECL_BITFIELD(7b0); };
--            };
--            union {
--                uint32_t _7c0;
--                struct { DECL_BITFIELD(7c0); };
--            };
--            union {
--                uint32_t _7d0;
--                struct { DECL_BITFIELD(7d0); };
--            };
--
--            /* Subleaf 1. */
--            union {
--                uint32_t _7a1;
--                struct { DECL_BITFIELD(7a1); };
--            };
--            union {
--                uint32_t _7b1;
--                struct { DECL_BITFIELD(7b1); };
--            };
--            union {
--                uint32_t _7c1;
--                struct { DECL_BITFIELD(7c1); };
--            };
--            union {
--                uint32_t _7d1;
--                struct { DECL_BITFIELD(7d1); };
--            };
--
--            /* Subleaf 2. */
--            uint32_t /* a */:32, /* b */:32, /* c */:32;
--            union {
--                uint32_t _7d2;
--                struct { DECL_BITFIELD(7d2); };
--            };
--        };
--    } feat;
--
--    /* Extended topology enumeration: 0x0000000B[xx] */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_TOPO];
--        struct cpuid_topo_leaf {
--            uint32_t id_shift:5, :27;
--            uint16_t nr_logical, :16;
--            uint8_t level, type, :8, :8;
--            uint32_t x2apic_id;
--        } subleaf[CPUID_GUEST_NR_TOPO];
--    } topo;
--
--    /* Xstate feature leaf: 0x0000000D[xx] */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_XSTATE];
--
--        struct {
--            /* Subleaf 0. */
--            uint32_t xcr0_low, /* b */:32, max_size, xcr0_high;
--
--            /* Subleaf 1. */
--            union {
--                uint32_t Da1;
--                struct { DECL_BITFIELD(Da1); };
--            };
--            uint32_t /* b */:32, xss_low, xss_high;
--        };
--
--        /* Per-component common state.  Valid for i >= 2. */
--        struct {
--            uint32_t size, offset;
--            bool xss:1, align:1;
--            uint32_t _res_d;
--        } comp[CPUID_GUEST_NR_XSTATE];
--    } xstate;
--
--    /* Extended leaves: 0x800000xx */
--    union {
--        struct cpuid_leaf raw[CPUID_GUEST_NR_EXTD];
--        struct {
--            /* Leaf 0x80000000 - Max and vendor. */
--            uint32_t max_leaf, vendor_ebx, vendor_ecx, vendor_edx;
--
--            /* Leaf 0x80000001 - Family/model/stepping and features. */
--            uint32_t raw_fms, /* b */:32;
--            union {
--                uint32_t e1c;
--                struct { DECL_BITFIELD(e1c); };
--            };
--            union {
--                uint32_t e1d;
--                struct { DECL_BITFIELD(e1d); };
--            };
--
--            uint64_t :64, :64; /* Brand string. */
--            uint64_t :64, :64; /* Brand string. */
--            uint64_t :64, :64; /* Brand string. */
--            uint64_t :64, :64; /* L1 cache/TLB. */
--            uint64_t :64, :64; /* L2/3 cache/TLB. */
--
--            /* Leaf 0x80000007 - Advanced Power Management. */
--            uint32_t /* a */:32, /* b */:32, /* c */:32;
--            union {
--                uint32_t e7d;
--                struct { DECL_BITFIELD(e7d); };
--            };
--
--            /* Leaf 0x80000008 - Misc addr/feature info. */
--            uint8_t maxphysaddr, maxlinaddr, :8, :8;
--            union {
--                uint32_t e8b;
--                struct { DECL_BITFIELD(e8b); };
--            };
--            uint32_t nc:8, :4, apic_id_size:4, :16;
--            uint32_t /* d */:32;
--
--            uint64_t :64, :64; /* Leaf 0x80000009. */
--            uint64_t :64, :64; /* Leaf 0x8000000a - SVM rev and features. */
--            uint64_t :64, :64; /* Leaf 0x8000000b. */
--            uint64_t :64, :64; /* Leaf 0x8000000c. */
--            uint64_t :64, :64; /* Leaf 0x8000000d. */
--            uint64_t :64, :64; /* Leaf 0x8000000e. */
--            uint64_t :64, :64; /* Leaf 0x8000000f. */
--            uint64_t :64, :64; /* Leaf 0x80000010. */
--            uint64_t :64, :64; /* Leaf 0x80000011. */
--            uint64_t :64, :64; /* Leaf 0x80000012. */
--            uint64_t :64, :64; /* Leaf 0x80000013. */
--            uint64_t :64, :64; /* Leaf 0x80000014. */
--            uint64_t :64, :64; /* Leaf 0x80000015. */
--            uint64_t :64, :64; /* Leaf 0x80000016. */
--            uint64_t :64, :64; /* Leaf 0x80000017. */
--            uint64_t :64, :64; /* Leaf 0x80000018. */
--            uint64_t :64, :64; /* Leaf 0x80000019 - TLB 1GB Identifiers. */
--            uint64_t :64, :64; /* Leaf 0x8000001a - Performance related info. */
--            uint64_t :64, :64; /* Leaf 0x8000001b - IBS feature information. */
--            uint64_t :64, :64; /* Leaf 0x8000001c. */
--            uint64_t :64, :64; /* Leaf 0x8000001d - Cache properties. */
--            uint64_t :64, :64; /* Leaf 0x8000001e - Extd APIC/Core/Node IDs. */
--            uint64_t :64, :64; /* Leaf 0x8000001f - AMD Secure Encryption. */
--            uint64_t :64, :64; /* Leaf 0x80000020 - Platform QoS. */
--
--            /* Leaf 0x80000021 - Extended Feature 2 */
--            union {
--                uint32_t e21a;
--                struct { DECL_BITFIELD(e21a); };
--            };
--            uint32_t /* b */:32, /* c */:32, /* d */:32;
--        };
--    } extd;
--
--#undef __DECL_BITFIELD
--#undef _DECL_BITFIELD
--#undef DECL_BITFIELD
--
--    /* Toolstack selected Hypervisor max_leaf (if non-zero). */
--    uint8_t hv_limit, hv2_limit;
--
--    /* Value calculated from raw data above. */
--    uint8_t x86_vendor;
--};
--
--/* Fill in a featureset bitmap from a CPUID policy. */
--static inline void cpuid_policy_to_featureset(
--    const struct cpuid_policy *p, uint32_t fs[FEATURESET_NR_ENTRIES])
--{
--    fs[FEATURESET_1d]  = p->basic._1d;
--    fs[FEATURESET_1c]  = p->basic._1c;
--    fs[FEATURESET_e1d] = p->extd.e1d;
--    fs[FEATURESET_e1c] = p->extd.e1c;
--    fs[FEATURESET_Da1] = p->xstate.Da1;
--    fs[FEATURESET_7b0] = p->feat._7b0;
--    fs[FEATURESET_7c0] = p->feat._7c0;
--    fs[FEATURESET_e7d] = p->extd.e7d;
--    fs[FEATURESET_e8b] = p->extd.e8b;
--    fs[FEATURESET_7d0] = p->feat._7d0;
--    fs[FEATURESET_7a1] = p->feat._7a1;
--    fs[FEATURESET_e21a] = p->extd.e21a;
--    fs[FEATURESET_7b1] = p->feat._7b1;
--    fs[FEATURESET_7d2] = p->feat._7d2;
--    fs[FEATURESET_7c1] = p->feat._7c1;
--    fs[FEATURESET_7d1] = p->feat._7d1;
--}
--
--/* Fill in a CPUID policy from a featureset bitmap. */
--static inline void cpuid_featureset_to_policy(
--    const uint32_t fs[FEATURESET_NR_ENTRIES], struct cpuid_policy *p)
--{
--    p->basic._1d  = fs[FEATURESET_1d];
--    p->basic._1c  = fs[FEATURESET_1c];
--    p->extd.e1d   = fs[FEATURESET_e1d];
--    p->extd.e1c   = fs[FEATURESET_e1c];
--    p->xstate.Da1 = fs[FEATURESET_Da1];
--    p->feat._7b0  = fs[FEATURESET_7b0];
--    p->feat._7c0  = fs[FEATURESET_7c0];
--    p->extd.e7d   = fs[FEATURESET_e7d];
--    p->extd.e8b   = fs[FEATURESET_e8b];
--    p->feat._7d0  = fs[FEATURESET_7d0];
--    p->feat._7a1  = fs[FEATURESET_7a1];
--    p->extd.e21a  = fs[FEATURESET_e21a];
--    p->feat._7b1  = fs[FEATURESET_7b1];
--    p->feat._7d2  = fs[FEATURESET_7d2];
--    p->feat._7c1  = fs[FEATURESET_7c1];
--    p->feat._7d1  = fs[FEATURESET_7d1];
--}
--
--static inline uint64_t cpuid_policy_xcr0_max(const struct cpuid_policy *p)
--{
--    return ((uint64_t)p->xstate.xcr0_high << 32) | p->xstate.xcr0_low;
--}
--
--static inline uint64_t cpuid_policy_xstates(const struct cpuid_policy *p)
--{
--    uint64_t val = p->xstate.xcr0_high | p->xstate.xss_high;
--
--    return (val << 32) | p->xstate.xcr0_low | p->xstate.xss_low;
--}
--
--const uint32_t *x86_cpuid_lookup_deep_deps(uint32_t feature);
--
--/**
-- * Recalculate the content in a CPUID policy which is derived from raw data.
-- */
--void x86_cpuid_policy_recalc_synth(struct cpuid_policy *p);
--
--/**
-- * Fill a CPUID policy using the native CPUID instruction.
-- *
-- * No sanitisation is performed, but synthesised values are calculated.
-- * Values may be influenced by a hypervisor or from masking/faulting
-- * configuration.
-- */
--void x86_cpuid_policy_fill_native(struct cpuid_policy *p);
--
--/**
-- * Clear leaf data beyond the policies max leaf/subleaf settings.
-- *
-- * Policy serialisation purposefully omits out-of-range leaves, because there
-- * are a large number of them due to vendor differences.  However, when
-- * constructing new policies (e.g. levelling down), it is possible to end up
-- * with out-of-range leaves with stale content in them.  This helper clears
-- * them.
-- */
--void x86_cpuid_policy_clear_out_of_range_leaves(struct cpuid_policy *p);
--
--#ifdef __XEN__
--#include <public/arch-x86/xen.h>
--typedef XEN_GUEST_HANDLE_64(xen_cpuid_leaf_t) cpuid_leaf_buffer_t;
--#else
--#include <xen/arch-x86/xen.h>
--typedef xen_cpuid_leaf_t cpuid_leaf_buffer_t[];
--#endif
--
--/**
-- * Serialise a cpuid_policy object into an array of cpuid leaves.
-- *
-- * @param policy     The cpuid_policy to serialise.
-- * @param leaves     The array of leaves to serialise into.
-- * @param nr_entries The number of entries in 'leaves'.
-- * @returns -errno
-- *
-- * Writes at most CPUID_MAX_SERIALISED_LEAVES.  May fail with -ENOBUFS if the
-- * leaves array is too short.  On success, nr_entries is updated with the
-- * actual number of leaves written.
-- */
--int x86_cpuid_copy_to_buffer(const struct cpuid_policy *policy,
--                             cpuid_leaf_buffer_t leaves, uint32_t *nr_entries);
--
--/**
-- * Unserialise a cpuid_policy object from an array of cpuid leaves.
-- *
-- * @param policy      The cpuid_policy to unserialise into.
-- * @param leaves      The array of leaves to unserialise from.
-- * @param nr_entries  The number of entries in 'leaves'.
-- * @param err_leaf    Optional hint for error diagnostics.
-- * @param err_subleaf Optional hint for error diagnostics.
-- * @returns -errno
-- *
-- * Reads at most CPUID_MAX_SERIALISED_LEAVES.  May return -ERANGE if an
-- * incoming leaf is out of range of cpuid_policy, in which case the optional
-- * err_* pointers will identify the out-of-range indicies.
-- *
-- * No content validation of in-range leaves is performed.  Synthesised data is
-- * recalculated.
-- */
--int x86_cpuid_copy_from_buffer(struct cpuid_policy *policy,
--                               const cpuid_leaf_buffer_t leaves,
--                               uint32_t nr_entries, uint32_t *err_leaf,
--                               uint32_t *err_subleaf);
--
--#endif /* !XEN_LIB_X86_CPUID_H */
--
--/*
-- * Local variables:
-- * mode: C
-- * c-file-style: "BSD"
-- * c-basic-offset: 4
-- * tab-width: 4
-- * indent-tabs-mode: nil
-- * End:
-- */
-diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
-index 8eb88314f53c..e81f76c779c0 100644
---- a/xen/lib/x86/cpuid.c
-+++ b/xen/lib/x86/cpuid.c
-@@ -1,6 +1,6 @@
- #include "private.h"
- 
--#include <xen/lib/x86/cpuid.h>
-+#include <xen/lib/x86/cpu-policy.h>
- 
- static void zero_leaves(struct cpuid_leaf *l,
-                         unsigned int first, unsigned int last)
--- 
-2.30.2
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEkQw
+ggYQMIID+KADAgECAhBNlCwQ1DvglAnFgS06KwZPMA0GCSqGSIb3DQEBDAUAMIGIMQswCQYDVQQG
+EwJVUzETMBEGA1UECBMKTmV3IEplcnNleTEUMBIGA1UEBxMLSmVyc2V5IENpdHkxHjAcBgNVBAoT
+FVRoZSBVU0VSVFJVU1QgTmV0d29yazEuMCwGA1UEAxMlVVNFUlRydXN0IFJTQSBDZXJ0aWZpY2F0
+aW9uIEF1dGhvcml0eTAeFw0xODExMDIwMDAwMDBaFw0zMDEyMzEyMzU5NTlaMIGWMQswCQYDVQQG
+EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYD
+VQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50
+aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAyjztlApB/975Rrno1jvm2pK/KxBOqhq8gr2+JhwpKirSzZxQgT9tlC7zl6hn1fXjSo5MqXUf
+ItMltrMaXqcESJuK8dtK56NCSrq4iDKaKq9NxOXFmqXX2zN8HHGjQ2b2Xv0v1L5Nk1MQPKA19xeW
+QcpGEGFUUd0kN+oHox+L9aV1rjfNiCj3bJk6kJaOPabPi2503nn/ITX5e8WfPnGw4VuZ79Khj1YB
+rf24k5Ee1sLTHsLtpiK9OjG4iQRBdq6Z/TlVx/hGAez5h36bBJMxqdHLpdwIUkTqT8se3ed0PewD
+ch/8kHPo5fZl5u1B0ecpq/sDN/5sCG52Ds+QU5O5EwIDAQABo4IBZDCCAWAwHwYDVR0jBBgwFoAU
+U3m/WqorSs9UgOHYm8Cd8rIDZsswHQYDVR0OBBYEFAnA8vwL2pTbX/4r36iZQs/J4K0AMA4GA1Ud
+DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEF
+BQcDBDARBgNVHSAECjAIMAYGBFUdIAAwUAYDVR0fBEkwRzBFoEOgQYY/aHR0cDovL2NybC51c2Vy
+dHJ1c3QuY29tL1VTRVJUcnVzdFJTQUNlcnRpZmljYXRpb25BdXRob3JpdHkuY3JsMHYGCCsGAQUF
+BwEBBGowaDA/BggrBgEFBQcwAoYzaHR0cDovL2NydC51c2VydHJ1c3QuY29tL1VTRVJUcnVzdFJT
+QUFkZFRydXN0Q0EuY3J0MCUGCCsGAQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMA0G
+CSqGSIb3DQEBDAUAA4ICAQBBRHUAqznCFfXejpVtMnFojADdF9d6HBA4kMjjsb0XMZHztuOCtKF+
+xswhh2GqkW5JQrM8zVlU+A2VP72Ky2nlRA1GwmIPgou74TZ/XTarHG8zdMSgaDrkVYzz1g3nIVO9
+IHk96VwsacIvBF8JfqIs+8aWH2PfSUrNxP6Ys7U0sZYx4rXD6+cqFq/ZW5BUfClN/rhk2ddQXyn7
+kkmka2RQb9d90nmNHdgKrwfQ49mQ2hWQNDkJJIXwKjYA6VUR/fZUFeCUisdDe/0ABLTI+jheXUV1
+eoYV7lNwNBKpeHdNuO6Aacb533JlfeUHxvBz9OfYWUiXu09sMAviM11Q0DuMZ5760CdO2VnpsXP4
+KxaYIhvqPqUMWqRdWyn7crItNkZeroXaecG03i3mM7dkiPaCkgocBg0EBYsbZDZ8bsG3a08LwEsL
+1Ygz3SBsyECa0waq4hOf/Z85F2w2ZpXfP+w8q4ifwO90SGZZV+HR/Jh6rEaVPDRF/CEGVqR1hiuQ
+OZ1YL5ezMTX0ZSLwrymUE0pwi/KDaiYB15uswgeIAcA6JzPFf9pLkAFFWs1QNyN++niFhsM47qod
+x/PL+5jR87myx5uYdBEQkkDc+lKB1Wct6ucXqm2EmsaQ0M95QjTmy+rDWjkDYdw3Ms6mSWE3Bn7i
+5ZgtwCLXgAIe5W8mybM2JzCCBhQwggT8oAMCAQICEQDGvhmWZ0DEAx0oURL6O6l+MA0GCSqGSIb3
+DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
+VQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNlY3RpZ28g
+UlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTIyMDEwNzAw
+MDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9y
+ZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3GpC2bomUqk+91wLYBzDMcCj5C9m6
+oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZHh7htyAkWYVoFsFPrwHounto8xTsy
+SSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT9YgcBqKCo65pTFmOnR/VVbjJk4K2
+xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNjP+qDrh0db7PAjO1D4d5ftfrsf+kd
+RR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy2U+eITZ5LLE5s45mX2oPFknWqxBo
+bQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3BgBEmfsYWlBXO8rVXfvPgLs32VdV
+NZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/7auNVRmPB3v5SWEsH8xi4Bez2V9U
+KxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmdlFYhAflWKQ03Ufiu8t3iBE3VJbc2
+5oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9aelIl6vtbhMA+l0nfrsORMa4kobqQ5
+C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMBAAGjggHMMIIByDAfBgNVHSMEGDAW
+gBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeDMcimo0oz8o1R1Nver3ZVpSkwDgYD
+VR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYBBQUHAgEWF2h0dHBzOi8vc2VjdGln
+by5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9jcmwuc2VjdGlnby5jb20vU2VjdGln
+b1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYoGCCsGAQUFBwEB
+BH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdvLmNvbS9TZWN0aWdvUlNBQ2xpZW50
+QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAjBggrBgEFBQcwAYYXaHR0cDovL29j
+c3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkqhkiG9w0B
+AQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQvQ/fzPXmtR9t54rpmI2TfyvcKgOXp
+qa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvIlSPrzIB4Z2wyIGQpaPLlYflrrVFK
+v9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9ChWFfgSXvrWDZspnU3Gjw/rMHrGnql
+Htlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0whpBtXdyDjzBtQTaZJ7zTT/vlehc/
+tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9IzCCBhQwggT8oAMCAQICEQDGvhmW
+Z0DEAx0oURL6O6l+MA0GCSqGSIb3DQEBCwUAMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3Jl
+YXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0
+ZWQxPjA8BgNVBAMTNVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
+IEVtYWlsIENBMB4XDTIyMDEwNzAwMDAwMFoXDTI1MDEwNjIzNTk1OVowJDEiMCAGCSqGSIb3DQEJ
+ARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALQ3
+GpC2bomUqk+91wLYBzDMcCj5C9m6oZaHwvmIdXftOgTbCJXADo6G9T7BBAebw2JV38EINgKpy/ZH
+h7htyAkWYVoFsFPrwHounto8xTsySSePMiPlmIdQ10BcVSXMUJ3Juu16GlWOnAMJY2oYfEzmE7uT
+9YgcBqKCo65pTFmOnR/VVbjJk4K2xE34GC2nAdUQkPFuyaFisicc6HRMOYXPuF0DuwITEKnjxgNj
+P+qDrh0db7PAjO1D4d5ftfrsf+kdRR4gKVGSk8Tz2WwvtLAroJM4nXjNPIBJNT4w/FWWc/5qPHJy
+2U+eITZ5LLE5s45mX2oPFknWqxBobQZ8a9dsZ3dSPZBvE9ZrmtFLrVrN4eo1jsXgAp1+p7bkfqd3
+BgBEmfsYWlBXO8rVXfvPgLs32VdVNZxb/CDWPqBsiYv0Hv3HPsz07j5b+/cVoWqyHDKzkaVbxfq/
+7auNVRmPB3v5SWEsH8xi4Bez2V9UKxfYCnqsjp8RaC2/khxKt0A552Eaxnz/4ly/2C7wkwTQnBmd
+lFYhAflWKQ03Ufiu8t3iBE3VJbc25oMrglj7TRZrmKq3CkbFnX0fyulB+kHimrt6PIWn7kgyl9ae
+lIl6vtbhMA+l0nfrsORMa4kobqQ5C5rveVgmcIad67EDa+UqEKy/GltUwlSh6xy+TrK1tzDvAgMB
+AAGjggHMMIIByDAfBgNVHSMEGDAWgBQJwPL8C9qU21/+K9+omULPyeCtADAdBgNVHQ4EFgQUzMeD
+Mcimo0oz8o1R1Nver3ZVpSkwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYw
+FAYIKwYBBQUHAwQGCCsGAQUFBwMCMEAGA1UdIAQ5MDcwNQYMKwYBBAGyMQECAQEBMCUwIwYIKwYB
+BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFoGA1UdHwRTMFEwT6BNoEuGSWh0dHA6Ly9j
+cmwuc2VjdGlnby5jb20vU2VjdGlnb1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1h
+aWxDQS5jcmwwgYoGCCsGAQUFBwEBBH4wfDBVBggrBgEFBQcwAoZJaHR0cDovL2NydC5zZWN0aWdv
+LmNvbS9TZWN0aWdvUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNydDAj
+BggrBgEFBQcwAYYXaHR0cDovL29jc3Auc2VjdGlnby5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
+cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAyW6MUir5dm495teKqAQjDJwuFCi35h4xgnQv
+Q/fzPXmtR9t54rpmI2TfyvcKgOXpqa7BGXNFfh1JsqexVkIqZP9uWB2J+uVMD+XZEs/KYNNX2PvI
+lSPrzIB4Z2wyIGQpaPLlYflrrVFKv9CjT2zdqvy2maK7HKOQRt3BiJbVG5lRiwbbygldcALEV9Ch
+WFfgSXvrWDZspnU3Gjw/rMHrGnqlHtlyebp3pf3fSS9kzQ1FVtVIDrL6eqhTwJxe+pXSMMqFiN0w
+hpBtXdyDjzBtQTaZJ7zTT/vlehc/tDuqZwGHm/YJy883Ll+GP3NvOkgaRGWEuYWJJ6hFCkXYjyR9
+IzGCBMcwggTDAgEBMIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVz
+dGVyMRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMT
+NVNlY3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA
+xr4ZlmdAxAMdKFES+jupfjANBglghkgBZQMEAgEFAKCCAeswGAYJKoZIhvcNAQkDMQsGCSqGSIb3
+DQEHATAcBgkqhkiG9w0BCQUxDxcNMjMwNDA0MDk1MjMyWjAvBgkqhkiG9w0BCQQxIgQgrsepn9Vl
+DdKC1BeQEBFEi/a6RbJbt8TXN1jmHO7GNJ0wgb0GCSsGAQQBgjcQBDGBrzCBrDCBljELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEYMBYG
+A1UEChMPU2VjdGlnbyBMaW1pdGVkMT4wPAYDVQQDEzVTZWN0aWdvIFJTQSBDbGllbnQgQXV0aGVu
+dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIRAMa+GZZnQMQDHShREvo7qX4wgb8GCyqGSIb3
+DQEJEAILMYGvoIGsMIGWMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVy
+MRAwDgYDVQQHEwdTYWxmb3JkMRgwFgYDVQQKEw9TZWN0aWdvIExpbWl0ZWQxPjA8BgNVBAMTNVNl
+Y3RpZ28gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEAxr4Z
+lmdAxAMdKFES+jupfjANBgkqhkiG9w0BAQEFAASCAgAVZ1qfTa9Nxee1RiBcOJYy3wtZjMAiU4eW
+9bj9KacxKWNjZGupFHiljaK3GCNNbfQX0SaycrtzkHxnnGpBSnMy1uluAbCx/4Pxkw5tEO3s2oMl
+HJS70RRWDS9q3d26tgu6znZFl/JoVdNI9CljOw6adKOgDY4QL5TLEbGW4/CQJmDmLgnROIoiId9k
+l+EWUDZZEofAxneyZP1GpSV3f5945HxOxl5FlLlP2GmuEzpBZlIWsocyozX2FeKFSTR0BNIPssD0
+eS1fK3j9IEthkl3t1IlpGQPmkG8aYeRgNvpZc41eA2iVzFKGar5ILukzrCwc2Pp8sHC4bQSR7oB2
+xejzhzdBAYvMzu1FYLKqYvAmqT/xqXjxIjbucwT68yyLh8pp7NE5uIBl2L4acjmMfmFRJQAYSezP
+t/VWPxuZunQhzDzo4a0unsZP9I6KLfrnPggVbASb9oAfxCC8Hu4wPjbbyhuOs36+pHqLPcHKSVno
+sP4Z6mQnGOT8ng6LTCiYkq7LQkEHqgHFHIn5ScqYIY1x4VUQ4lUVkw2PE/MNacZ+hIsj7GYry2C7
+9o+aa1qw2f5NCns8ITlcqC3vdDks86MvETwP4V0tnRES+P91GPB0KnWhFUwSCIHLRFOni0GGggtj
+O6rNb9HAbDhwXn12vYtafW+933ruJSCaFbig3SeFsQAAAAAAAA==
 
+
+--=-7s6HEpTuj3u8ifXuNfwk--
 
