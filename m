@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C240AC77B62
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:59:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517752.803585 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA24C761A6
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:59:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517768.803600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdRZ-0003mr-FD; Tue, 04 Apr 2023 09:59:13 +0000
+	id 1pjdRm-0004r1-1y; Tue, 04 Apr 2023 09:59:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517752.803585; Tue, 04 Apr 2023 09:59:13 +0000
+Received: by outflank-mailman (output) from mailman id 517768.803600; Tue, 04 Apr 2023 09:59:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdRZ-0003mO-Bx; Tue, 04 Apr 2023 09:59:13 +0000
-Received: by outflank-mailman (input) for mailman id 517752;
- Tue, 04 Apr 2023 09:59:11 +0000
+	id 1pjdRl-0004qn-Th; Tue, 04 Apr 2023 09:59:25 +0000
+Received: by outflank-mailman (input) for mailman id 517768;
+ Tue, 04 Apr 2023 09:59:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Oy2y=73=citrix.com=prvs=4518c43dc=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pjdMK-00056d-2X
- for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:53:48 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 962f50e3-d2ce-11ed-b464-930f4c7d94ae;
- Tue, 04 Apr 2023 11:53:45 +0200 (CEST)
+ id 1pjdMG-00056d-FQ
+ for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:53:44 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9433838d-d2ce-11ed-b464-930f4c7d94ae;
+ Tue, 04 Apr 2023 11:53:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 962f50e3-d2ce-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 9433838d-d2ce-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1680602025;
+  d=citrix.com; s=securemail; t=1680602022;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=BD8/V6HTXPI8zjfRwIUp+LKbifOL/pPEYn5jnL6tGjU=;
-  b=aEhT89AkO8KrOFxlJwGFdsHqSg/+e2oJSGcN+/+4ebY3pOECirJTasTI
-   NJJW2kRRMv4SSesCIJgTczQdOJ1FVlZKpkVyg9387ZRhlEgNqiFgc7JS7
-   UNO4QXgeunyYt0obMr3+kHTO9kb+XUujwqDpGY3MDaNprTswMPVREsXIh
+  bh=ChH0mv0WlkWt8mC9RVpMxMqX69igiduH8qj4IJ/OTlE=;
+  b=SQUbV8GVwRO3uvUSYpX7wEh1Eu7H6jlNWovrOVwJbiFjpOHwF7RePZTB
+   phvODEYxBcx1TfzkB4RH9RqXaWEF/I5fQwyXJN7cXiI4EOk7RjFMqWrpA
+   fc3UkJ16A2c6Ri52zsC0abLudmRSLCb6FNap6UuDq7+HlyNFBuskcu6ts
    E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 103612437
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 104275209
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:KGRsUKqQKYmTq8pX0IbW2gF8deReBmJnZRIvgKrLsJaIsI4StFCzt
- garIBmFPPyKZGb0KY0iOd61oRsDvpDXm4VhSwo5pSgxHy4ao5uZCYyVIHmrMnLJJKUvbq7FA
+IronPort-Data: A9a23:jOR9b6rJqOdbVVFSZpebUQeba2NeBmJnZRIvgKrLsJaIsI4StFCzt
+ garIBmFMvyOZmSmctF2bo+w8h5QuZCBzdM1SVBvqSo3FCpHoJuZCYyVIHmrMnLJJKUvbq7FA
  +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpA1c/Ek/NsDo788YhmIlknNOlNA2Ev
  NL2sqX3NUSsnjV5KQr40YrawP9UlKm06WNwUmAWP6gR5weCzyVNVfrzGInqR5fGatgMdgKFb
  76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
  OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
- RAXAGxUbhuAm6WU+7m2d8Q9tu4mEMX6A6pK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
+ RAXABE1cyvcwN+d+4OmEuBi2f94IMvOOLpK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
  eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVxrl6PqLVxyG/U1AFri5DmMcbPe8zMTsJQ9qqdj
- juepDqgWE1Ba7RzzxKD/lb0q+qSkBj6G4YOO5eU8cN2sgeMkzl75Bo+CgLg/KjRZlSFc8JSL
+ jueoz6mX0tCZbRzzxKGqHGNgM/DzBjaY4EYSoGRyfpj2UO6kzl75Bo+CgLg/KjRZlSFc8JSL
  QkY9zQjqYA29Ve3VZ/tUhugunmGsxUAHd1KHIUSyiuA167V6AaxHXUfQ3hKb9lOnNAybSwn0
- BmOhdyBONB0mOTLEzTHrO7S9G7sf3FPdgfueBPoUyNZutnoo510rCnEQ+tOQZ6fi+H5CA7Zl
+ BmOhdyBONB0mOTLEzTHrO7S9G7sf3FPdgfueBPoUyMk28TY/8YOpSn+U45qHvGO1dH3PDXJl
  mXiQDcFu1kDsSIa//zlrQia3Gz2+cGhoh0dvVuOAD/8hu9tTMv8PtHztwCGhRpVBNzBJmRtq
  kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JAVdoKiN2GDB01WvvogBewC
  KMphStf5YVIIFyhZrJtboS6BqwClPawTYm5CKGONYAQMvCdkTNrGwk3PSatM53FyhBwwcnTx
  7/AGSpTMZrqIfs+l2fnLwvs+bQq2jo/1QvueHwP9Dz+ieD2TCfMGd843K6mMrhRAFWs/F+Er
- L6y9qKil31ibQEJSnKIrtJJdAxVdChT6FKfg5U/S9Nv6zFOQAkJY8I9C5t4E2C5t8y5Ttv1w
+ L6y9qKil31ibQEJSnKIrtJJdAxVdChT6FKfg5U/S9Nv6zFOQAkJY8I9C5t6E2C5t8y5Ttv1w
  0w=
-IronPort-HdrOrdr: A9a23:XbA7vaCUYNajGozlHelo55DYdb4zR+YMi2TDt3oddfU1SL38qy
- nKpp4mPHDP5wr5NEtPpTniAtjjfZq/z/5ICOAqVN/PYOCPggCVxepZnOjfKlPbehEX9oRmpN
- 1dm6oVMqyMMbCt5/yKnDVRELwbsaa6GLjDv5a785/0JzsaE52J6W1Ce2GmO3wzfiZqL7wjGq
- GR48JWzgDQAkj+PqyAdx84t/GonayzqK7b
+IronPort-HdrOrdr: A9a23:VwSaD63tK3JQsKmUXOpa4QqjBHYkLtp133Aq2lEZdPU0SKGlfq
+ GV7ZEmPHrP4gr5N0tOpTntAse9qBDnhPxICOsqXYtKNTOO0AeVxelZhrcKqAeQeBEWmNQ96U
+ 9hGZIOcuEZDzJB/LvHCN/TKadd/DGFmprY+ts31x1WPGVXgzkL1XYANu6ceHcGIzVuNN4CO7
+ e3wNFInDakcWR/VLXBOpFUN9KzweEijfjdEGc7OyI=
 X-IronPort-AV: E=Sophos;i="5.98,317,1673931600"; 
-   d="scan'208";a="103612437"
+   d="scan'208";a="104275209"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 15/15] x86: Remove temporary {cpuid,msr}_policy defines
-Date: Tue, 4 Apr 2023 10:52:22 +0100
-Message-ID: <20230404095222.1373721-16-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 13/15] tools/fuzz: Rework afl-policy-fuzzer
+Date: Tue, 4 Apr 2023 10:52:20 +0100
+Message-ID: <20230404095222.1373721-14-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
 References: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
@@ -92,10 +92,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-With all code areas updated, drop the temporary defines and adjust all
-remaining users.
-
-No practical change.
+With cpuid_policy and msr_policy merged to form cpu_policy, merge the
+respective fuzzing logic.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -104,325 +102,126 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 
 v2:
- * Split out of RFC patch
+ * New
 ---
- xen/arch/x86/cpu/mcheck/mce_intel.c    |  2 +-
- xen/arch/x86/cpuid.c                   |  2 +-
- xen/arch/x86/domain.c                  |  2 +-
- xen/arch/x86/hvm/hvm.c                 |  4 ++--
- xen/arch/x86/hvm/svm/svm.c             |  2 +-
- xen/arch/x86/hvm/vlapic.c              |  2 +-
- xen/arch/x86/hvm/vmx/vmx.c             |  8 ++++----
- xen/arch/x86/include/asm/msr.h         |  2 +-
- xen/arch/x86/msr.c                     | 20 +++++++++-----------
- xen/arch/x86/pv/domain.c               |  2 +-
- xen/arch/x86/pv/emul-priv-op.c         |  4 ++--
- xen/arch/x86/traps.c                   |  2 +-
- xen/arch/x86/x86_emulate/x86_emulate.c |  2 +-
- xen/include/xen/lib/x86/cpu-policy.h   |  4 ----
- 14 files changed, 26 insertions(+), 32 deletions(-)
+ tools/fuzz/cpu-policy/afl-policy-fuzzer.c | 57 ++++++++---------------
+ 1 file changed, 20 insertions(+), 37 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
-index 301533722d1a..2f23f02923d2 100644
---- a/xen/arch/x86/cpu/mcheck/mce_intel.c
-+++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
-@@ -1008,7 +1008,7 @@ int vmce_intel_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+diff --git a/tools/fuzz/cpu-policy/afl-policy-fuzzer.c b/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
+index 0ce3d8e16626..466bdbb1d91a 100644
+--- a/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
++++ b/tools/fuzz/cpu-policy/afl-policy-fuzzer.c
+@@ -16,16 +16,19 @@ static bool debug;
  
- int vmce_intel_rdmsr(const struct vcpu *v, uint32_t msr, uint64_t *val)
+ #define EMPTY_LEAF ((struct cpuid_leaf){})
+ 
+-static void check_cpuid(struct cpuid_policy *cp)
++static void check_policy(struct cpu_policy *cp)
  {
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     unsigned int bank = msr - MSR_IA32_MC0_CTL2;
+-    struct cpuid_policy new = {};
++    struct cpu_policy new = {};
+     size_t data_end;
+     xen_cpuid_leaf_t *leaves = malloc(CPUID_MAX_SERIALISED_LEAVES *
+                                       sizeof(xen_cpuid_leaf_t));
+-    unsigned int nr = CPUID_MAX_SERIALISED_LEAVES;
++    xen_msr_entry_t *msrs = malloc(MSR_MAX_SERIALISED_ENTRIES *
++                                   sizeof(xen_cpuid_leaf_t));
++    unsigned int nr_leaves = CPUID_MAX_SERIALISED_LEAVES;
++    unsigned int nr_msrs = MSR_MAX_SERIALISED_ENTRIES;
+     int rc;
  
-     switch ( msr )
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 3f20c342fde8..f311372cdf1f 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -36,7 +36,7 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
-                  uint32_t subleaf, struct cpuid_leaf *res)
- {
-     const struct domain *d = v->domain;
--    const struct cpuid_policy *p = d->arch.cpuid;
-+    const struct cpu_policy *p = d->arch.cpu_policy;
- 
-     *res = EMPTY_LEAF;
- 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index b23e5014d1d3..91f57e3a3b17 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -283,7 +283,7 @@ void update_guest_memory_policy(struct vcpu *v,
- 
- void domain_cpu_policy_changed(struct domain *d)
- {
--    const struct cpuid_policy *p = d->arch.cpuid;
-+    const struct cpu_policy *p = d->arch.cpu_policy;
-     struct vcpu *v;
- 
-     if ( is_pv_domain(d) )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 675c523d9909..7020fdce995c 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -924,7 +924,7 @@ const char *hvm_efer_valid(const struct vcpu *v, uint64_t value,
-                            signed int cr0_pg)
- {
-     const struct domain *d = v->domain;
--    const struct cpuid_policy *p = d->arch.cpuid;
-+    const struct cpu_policy *p = d->arch.cpu_policy;
- 
-     if ( value & ~EFER_KNOWN_MASK )
-         return "Unknown bits set";
-@@ -961,7 +961,7 @@ const char *hvm_efer_valid(const struct vcpu *v, uint64_t value,
- /* These bits in CR4 can be set by the guest. */
- unsigned long hvm_cr4_guest_valid_bits(const struct domain *d)
- {
--    const struct cpuid_policy *p = d->arch.cpuid;
-+    const struct cpu_policy *p = d->arch.cpu_policy;
-     bool mce, vmxe, cet;
- 
-     /* Logic broken out simply to aid readability below. */
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 02563e4b7027..b8fe759db456 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -583,7 +583,7 @@ static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
- {
-     struct svm_vcpu *svm = &v->arch.hvm.svm;
-     struct vmcb_struct *vmcb = svm->vmcb;
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     u32 bitmap = vmcb_get_exception_intercepts(vmcb);
- 
-     if ( opt_hvm_fep ||
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index dc93b5e930b1..f4f5ffc673e5 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -1083,7 +1083,7 @@ static void set_x2apic_id(struct vlapic *vlapic)
- 
- int guest_wrmsr_apic_base(struct vcpu *v, uint64_t value)
- {
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     struct vlapic *vlapic = vcpu_vlapic(v);
- 
-     if ( !has_vlapic(v->domain) )
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index e05588505871..ee4c41628cc3 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -710,7 +710,7 @@ static void vmx_restore_host_msrs(void)
- 
- static void vmx_save_guest_msrs(struct vcpu *v)
- {
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     struct vcpu_msrs *msrs = v->arch.msrs;
+-    if ( !leaves )
++    if ( !leaves || !msrs )
+         return;
  
      /*
-@@ -731,7 +731,7 @@ static void vmx_save_guest_msrs(struct vcpu *v)
+@@ -49,12 +52,19 @@ static void check_cpuid(struct cpuid_policy *cp)
+     x86_cpuid_policy_recalc_synth(cp);
  
- static void vmx_restore_guest_msrs(struct vcpu *v)
- {
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     const struct vcpu_msrs *msrs = v->arch.msrs;
+     /* Serialise... */
+-    rc = x86_cpuid_copy_to_buffer(cp, leaves, &nr);
++    rc = x86_cpuid_copy_to_buffer(cp, leaves, &nr_leaves);
++    assert(rc == 0);
++    assert(nr_leaves <= CPUID_MAX_SERIALISED_LEAVES);
++
++    rc = x86_msr_copy_to_buffer(cp, msrs, &nr_msrs);
+     assert(rc == 0);
+-    assert(nr <= CPUID_MAX_SERIALISED_LEAVES);
++    assert(nr_msrs <= MSR_MAX_SERIALISED_ENTRIES);
  
-     write_gs_shadow(v->arch.hvm.vmx.shadow_gs);
-@@ -784,7 +784,7 @@ void vmx_update_exception_bitmap(struct vcpu *v)
+     /* ... and deserialise. */
+-    rc = x86_cpuid_copy_from_buffer(&new, leaves, nr, NULL, NULL);
++    rc = x86_cpuid_copy_from_buffer(&new, leaves, nr_leaves, NULL, NULL);
++    assert(rc == 0);
++
++    rc = x86_msr_copy_from_buffer(&new, msrs, nr_msrs, NULL);
+     assert(rc == 0);
  
- static void cf_check vmx_cpuid_policy_changed(struct vcpu *v)
- {
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     int rc = 0;
- 
-     if ( opt_hvm_fep ||
-@@ -3521,7 +3521,7 @@ static int cf_check vmx_msr_write_intercept(
-     unsigned int msr, uint64_t msr_content)
- {
-     struct vcpu *v = current;
--    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-+    const struct cpu_policy *cp = v->domain->arch.cpu_policy;
- 
-     HVM_DBG_LOG(DBG_LEVEL_MSR, "ecx=%#x, msr_value=%#"PRIx64, msr, msr_content);
- 
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 458841733e18..1d8ea9f26faa 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -290,7 +290,7 @@ static inline void wrmsr_tsc_aux(uint32_t val)
-     }
+     /* The result after serialisation/deserialisaion should be identical... */
+@@ -76,28 +86,6 @@ static void check_cpuid(struct cpuid_policy *cp)
+     free(leaves);
  }
  
--uint64_t msr_spec_ctrl_valid_bits(const struct cpuid_policy *cp);
-+uint64_t msr_spec_ctrl_valid_bits(const struct cpu_policy *cp);
- 
- /* Container object for per-vCPU MSRs */
- struct vcpu_msrs
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 802fc60baf81..2e16818bf509 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -54,8 +54,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
- {
-     const struct vcpu *curr = current;
-     const struct domain *d = v->domain;
--    const struct cpuid_policy *cp = d->arch.cpuid;
--    const struct msr_policy *mp = d->arch.msr;
-+    const struct cpu_policy *cp = d->arch.cpu_policy;
-     const struct vcpu_msrs *msrs = v->arch.msrs;
-     int ret = X86EMUL_OKAY;
- 
-@@ -139,13 +138,13 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
-         goto get_reg;
- 
-     case MSR_INTEL_PLATFORM_INFO:
--        *val = mp->platform_info.raw;
-+        *val = cp->platform_info.raw;
-         break;
- 
-     case MSR_ARCH_CAPABILITIES:
-         if ( !cp->feat.arch_caps )
-             goto gp_fault;
--        *val = mp->arch_caps.raw;
-+        *val = cp->arch_caps.raw;
-         break;
- 
-     case MSR_INTEL_MISC_FEATURES_ENABLES:
-@@ -326,7 +325,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
-  * separate CPUID features for this functionality, but only set will be
-  * active.
-  */
--uint64_t msr_spec_ctrl_valid_bits(const struct cpuid_policy *cp)
-+uint64_t msr_spec_ctrl_valid_bits(const struct cpu_policy *cp)
- {
-     bool ssbd = cp->feat.ssbd || cp->extd.amd_ssbd;
-     bool psfd = cp->feat.intel_psfd || cp->extd.psfd;
-@@ -345,8 +344,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
- {
-     const struct vcpu *curr = current;
-     struct domain *d = v->domain;
--    const struct cpuid_policy *cp = d->arch.cpuid;
--    const struct msr_policy *mp = d->arch.msr;
-+    const struct cpu_policy *cp = d->arch.cpu_policy;
-     struct vcpu_msrs *msrs = v->arch.msrs;
-     int ret = X86EMUL_OKAY;
- 
-@@ -387,7 +385,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-          * for backwards compatiblity, the OS should write 0 to it before
-          * trying to access the current microcode version.
-          */
--        if ( d->arch.cpuid->x86_vendor != X86_VENDOR_INTEL || val != 0 )
-+        if ( cp->x86_vendor != X86_VENDOR_INTEL || val != 0 )
-             goto gp_fault;
-         break;
- 
-@@ -397,7 +395,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-          * to AMD CPUs as well (at least the architectural/CPUID part does).
-          */
-         if ( is_pv_domain(d) ||
--             d->arch.cpuid->x86_vendor != X86_VENDOR_AMD )
-+             cp->x86_vendor != X86_VENDOR_AMD )
-             goto gp_fault;
-         break;
- 
-@@ -409,7 +407,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-          * by any CPUID bit.
-          */
-         if ( is_pv_domain(d) ||
--             d->arch.cpuid->x86_vendor != X86_VENDOR_INTEL )
-+             cp->x86_vendor != X86_VENDOR_INTEL )
-             goto gp_fault;
-         break;
- 
-@@ -446,7 +444,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-         bool old_cpuid_faulting = msrs->misc_features_enables.cpuid_faulting;
- 
-         rsvd = ~0ull;
--        if ( mp->platform_info.cpuid_faulting )
-+        if ( cp->platform_info.cpuid_faulting )
-             rsvd &= ~MSR_MISC_FEATURES_CPUID_FAULTING;
- 
-         if ( val & rsvd )
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 95492715d8ad..5c92812dc67a 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -146,7 +146,7 @@ static void release_compat_l4(struct vcpu *v)
- 
- unsigned long pv_fixup_guest_cr4(const struct vcpu *v, unsigned long cr4)
- {
--    const struct cpuid_policy *p = v->domain->arch.cpuid;
-+    const struct cpu_policy *p = v->domain->arch.cpu_policy;
- 
-     /* Discard attempts to set guest controllable bits outside of the policy. */
-     cr4 &= ~((p->basic.tsc     ? 0 : X86_CR4_TSD)      |
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index ab52768271c5..04416f197951 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -885,7 +885,7 @@ static int cf_check read_msr(
- {
-     struct vcpu *curr = current;
-     const struct domain *currd = curr->domain;
--    const struct cpuid_policy *cp = currd->arch.cpuid;
-+    const struct cpu_policy *cp = currd->arch.cpu_policy;
-     bool vpmu_msr = false, warn = false;
-     uint64_t tmp;
-     int ret;
-@@ -1034,7 +1034,7 @@ static int cf_check write_msr(
- {
-     struct vcpu *curr = current;
-     const struct domain *currd = curr->domain;
--    const struct cpuid_policy *cp = currd->arch.cpuid;
-+    const struct cpu_policy *cp = currd->arch.cpu_policy;
-     bool vpmu_msr = false;
-     int ret;
- 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index c36e3f855bd9..e4f8b158e1ed 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1036,7 +1036,7 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
-                              uint32_t subleaf, struct cpuid_leaf *res)
- {
-     const struct domain *d = v->domain;
--    const struct cpuid_policy *p = d->arch.cpuid;
-+    const struct cpu_policy *p = d->arch.cpu_policy;
-     uint32_t base = is_viridian_domain(d) ? 0x40000100 : 0x40000000;
-     uint32_t idx  = leaf - base;
-     unsigned int limit = is_viridian_domain(d) ? p->hv2_limit : p->hv_limit;
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index 5a0ec5900a93..c69f7c65f526 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -848,7 +848,7 @@ protmode_load_seg(
-     struct x86_emulate_ctxt *ctxt,
-     const struct x86_emulate_ops *ops)
- {
--    const struct cpuid_policy *cp = ctxt->cpuid;
-+    const struct cpu_policy *cp = ctxt->cpu_policy;
-     enum x86_segment sel_seg = (sel & 4) ? x86_seg_ldtr : x86_seg_gdtr;
-     struct { uint32_t a, b; } desc, desc_hi = {};
-     uint8_t dpl, rpl;
-diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
-index dee46adeff17..182cf77cffaf 100644
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -375,10 +375,6 @@ struct cpu_policy
-     uint8_t x86_vendor;
- };
- 
--/* Temporary */
--#define cpuid_policy cpu_policy
--#define msr_policy cpu_policy
+-static void check_msr(struct msr_policy *mp)
+-{
+-    struct msr_policy new = {};
+-    xen_msr_entry_t *msrs = malloc(MSR_MAX_SERIALISED_ENTRIES *
+-                                   sizeof(xen_msr_entry_t));
+-    unsigned int nr = MSR_MAX_SERIALISED_ENTRIES;
+-    int rc;
 -
- struct cpu_policy_errors
+-    if ( !msrs )
+-        return;
+-
+-    rc = x86_msr_copy_to_buffer(mp, msrs, &nr);
+-    assert(rc == 0);
+-    assert(nr <= MSR_MAX_SERIALISED_ENTRIES);
+-
+-    rc = x86_msr_copy_from_buffer(&new, msrs, nr, NULL);
+-    assert(rc == 0);
+-    assert(memcmp(mp, &new, sizeof(*mp)) == 0);
+-
+-    free(msrs);
+-}
+-
+ int main(int argc, char **argv)
  {
-     uint32_t leaf, subleaf;
+     FILE *fp = NULL;
+@@ -144,8 +132,7 @@ int main(int argc, char **argv)
+     while ( __AFL_LOOP(1000) )
+ #endif
+     {
+-        struct cpuid_policy *cp = NULL;
+-        struct msr_policy *mp = NULL;
++        struct cpu_policy *cp = NULL;
+ 
+         if ( fp != stdin )
+         {
+@@ -160,22 +147,18 @@ int main(int argc, char **argv)
+         }
+ 
+         cp = calloc(1, sizeof(*cp));
+-        mp = calloc(1, sizeof(*mp));
+-        if ( !cp || !mp )
++        if ( !cp )
+             goto skip;
+ 
+         fread(cp, sizeof(*cp), 1, fp);
+-        fread(mp, sizeof(*mp), 1, fp);
+ 
+         if ( !feof(fp) )
+             goto skip;
+ 
+-        check_cpuid(cp);
+-        check_msr(mp);
++        check_policy(cp);
+ 
+     skip:
+         free(cp);
+-        free(mp);
+ 
+         if ( fp != stdin )
+         {
 -- 
 2.30.2
 
