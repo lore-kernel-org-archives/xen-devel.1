@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43901C761AF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:59:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.517749.803570 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3817C761A6
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Apr 2023 09:59:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.517751.803580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdRX-0003Rx-UL; Tue, 04 Apr 2023 09:59:11 +0000
+	id 1pjdRZ-0003hx-6H; Tue, 04 Apr 2023 09:59:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 517749.803570; Tue, 04 Apr 2023 09:59:11 +0000
+Received: by outflank-mailman (output) from mailman id 517751.803580; Tue, 04 Apr 2023 09:59:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjdRX-0003Rj-Qz; Tue, 04 Apr 2023 09:59:11 +0000
-Received: by outflank-mailman (input) for mailman id 517749;
- Tue, 04 Apr 2023 09:59:10 +0000
+	id 1pjdRZ-0003hq-1O; Tue, 04 Apr 2023 09:59:13 +0000
+Received: by outflank-mailman (input) for mailman id 517751;
+ Tue, 04 Apr 2023 09:59:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Oy2y=73=citrix.com=prvs=4518c43dc=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pjdMC-0005bo-Gy
- for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:53:40 +0000
+ id 1pjdMS-0005bo-R1
+ for xen-devel@lists.xenproject.org; Tue, 04 Apr 2023 09:53:56 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 926ea3a0-d2ce-11ed-85db-49a42c6b2330;
- Tue, 04 Apr 2023 11:53:39 +0200 (CEST)
+ id 9b5e9743-d2ce-11ed-85db-49a42c6b2330;
+ Tue, 04 Apr 2023 11:53:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 926ea3a0-d2ce-11ed-85db-49a42c6b2330
+X-Inumbo-ID: 9b5e9743-d2ce-11ed-85db-49a42c6b2330
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1680602019;
+  d=citrix.com; s=securemail; t=1680602034;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GbFah8Uej44Bj9X6DdnsRE7vn00ll+/fTK8duGH2gAE=;
-  b=RJH/ZgNLZ3lSIqMB3bEan5pDxw5I7g09rzjIzs17XzMBe07KFGPmXftg
-   Jwz9ThgHQxbFFZOtKRxnbTOYYZJq4mC70NJur+z1TNFaqmKFPe8OyC42V
-   AFY1cI5DZkwSCJOjIJksb0amE++Clo9uFJ4FEVPXWIQXM2zX9TRrsid87
-   o=;
+  bh=g6soTwUYllGEYZrZeu6VHps1q/P3LIhMMKfu395S8Yw=;
+  b=Nf0ZU6SdlXkjQwjPFuLSMIH3fVlpq3UFTM19kMDfK/O8oWiBivO69uiF
+   TqT+bWjNGD1vR+PqRcBqnyol607dnJBz9PgQSZxNJ0ryg8G2KBKDiLZ1L
+   OVZ52db+q6jQYdnpFNZGLnSXEmsEf9FCDURWD4Dv/JVIMQrK6Zp0d6njz
+   0=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 104161466
+X-MesageID: 104161492
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:uoLQVq9Ye3x1JcrNB3lyDrUD/36TJUtcMsCJ2f8bNWPcYEJGY0x3z
- moaD2rSOqqLYGL0edlxbNu+pBlVvpDUyNJiHFRs+X88E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ire7kI/1BjOkGlA5AdmOagX5Aa2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDklu9
- uIXeQoIYCmZntio+6C4W8hJq8gaeZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
- ZBDMHw2MUqGOkcUUrsUIMtWcOOAr3/zaTBH7nmSorI6+TP7xw1tyrn9dtHSf7RmQO0MxhrB+
- DuaoTqR7hcyN8yVxj28z1KVgKzsrBnVAYxJNKGWz6s/6LGU7jNKU0BHPbehmtGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c/h6HvA+6QqN4rHJ+AvfDW8BJhZebPQ2uclwQiYlv
- mJlhPuwW2Yp6ufMDyvAqPHN92ja1TUpwXEqRSwaQlo/5tfaupgJkCndTcdCNYO5t4igcd3v+
- AxmvBTSlp1K055Tivrlpw+e696/jsOXF1Bov207Skrgt1okP9D9OuRE/HCBtZ59wJClok5tV
- ZTus+yX96gwAJ6Ej0Rhq81dTejyt55p3NAx6GOD/qXNFBz3oRZPhagKvFlDyL5Ba67ogwPBb
- k7Joh9275ROJnasZqIfS9vvW5x3kfaxT4+/CKC8gj9yjn9ZLVfvwc2TTRTIgzCFfLYEysnTx
- qt3ge7zVC1HWMyLPRK9RvsH0K9D+x3SMVj7HMihpzz+iOr2WZJgYetdWLd4RrxjvfzsTcS82
- 4o3CvZmPD0ED7KiOHCLrtdDRb3IRFBiba3LRwVsXrbrCmJb9KsJUpc9HZtJl1RZoplo
-IronPort-HdrOrdr: A9a23:59oaB6CIYAkWZ2LlHelo55DYdb4zR+YMi2TDt3oddfU1SL38qy
- nKpp4mPHDP5wr5NEtPpTniAtjjfZq/z/5ICOAqVN/PYOCPggCVxepZnOjfKlPbehEX9oRmpN
- 1dm6oVMqyMMbCt5/yKnDVRELwbsaa6GLjDv5a785/0JzsaE52J6W1Ce2GmO3wzfiZqL7wjGq
- GR48JWzgDQAkj+PqyAdx84t/GonayzqK7b
+IronPort-Data: A9a23:ZPnmvaN/QfuEnHrvrR3al8FynXyQoLVcMsEvi/4bfWQNrUp2hDRTn
+ WtLC2jSMvePNzOhe4t+Pdmw8UoEscXdzNEyGgto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGj9SuvLrRC9H5qyo42tE5gBmPJingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0rd+DUURy
+ 9IxEQ4ESxqlqvOcwLjqe+Y506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
+ ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXSGZwLxxrJ/
+ Aoq+UzEC0gYGoKS2wCOrHi2jOjWwWT8dK4NQejQGvlC3wTImz175ActfUS/iem0jAi5Qd03A
+ 1wZ/G8ioLY/8GSvT8LhRFuorXicpBkeVtFMVeog52ml6IDZ/gKYDWgsVSNaZZots8peeNAx/
+ gbXxZWzX2Up6eDLDyvHrd94sA9eJwBEJGMmOhEqZDI76vzphqwipBLFH+dsRfvdYsLOJd3g/
+ 9ybhHFg1+1O0pBRiPzTEUPv2Gz1+MWQJuIhzkCOBz/+sFskDGKwT9bwgWU3+8qsO2pworOpm
+ HEf0/aT4+kVZX1mvHzcGb5ddF1FChvsDdE9vbKMN8N7n9hV0yT/Fb28GRknTKuTDu4KeCXyf
+ GjYsh5L6ZlYMROCNPEnO9/tVZVwlvK+RbwJs8w4ifIXOvBMmPKvpnkyNSZ8IUi2+KTTrU3PE
+ cjCKpv9ZZrrIa9m0CC3V48g7FPf/QhnnTm7bcmin3yaPU+2OCb9pUEtbAHfMYjULcqs/G3oz
+ jqoH5DVlEkFCbGhO3m/HEx6BQliEEXXzKve86R/HtNv6CI/cI39I5c9GY8cRrE=
+IronPort-HdrOrdr: A9a23:fE8LuaNbuPenKsBcTgWjsMiBIKoaSvp037BK7S1MoH1uA6mlfq
+ WV9sjzuiWatN98Yh8dcLO7Scu9qBHnlaKdiLN5VduftWHd01dAR7sSjrcKrQeAJ8X/nNQtr5
+ uJccJFeaDN5Y4Rt7eH3OG6eexQv+Vu6MqT9IPjJ+8Gd3ATV0lnhT0JbTqzIwlNayRtI4E2L5
+ aY7tovnUvaRZxGBv7LYEXsRoL41qT2qK4=
 X-IronPort-AV: E=Sophos;i="5.98,317,1673931600"; 
-   d="scan'208";a="104161466"
+   d="scan'208";a="104161492"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 10/15] x86/boot: Move MSR policy initialisation logic into cpu-policy.c
-Date: Tue, 4 Apr 2023 10:52:17 +0100
-Message-ID: <20230404095222.1373721-11-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 12/15] x86/emul: Switch x86_emulate_ctxt to cpu_policy
+Date: Tue, 4 Apr 2023 10:52:19 +0100
+Message-ID: <20230404095222.1373721-13-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
 References: <20230404095222.1373721-1-andrew.cooper3@citrix.com>
@@ -91,9 +91,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Switch to the newer cpu_policy nomenclature.
-
-No practical change.
+As with struct domain, retain cpuid as a valid alias for local code clarity.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -102,252 +100,160 @@ CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 
 v2:
- * New
+ * Retain cpuid compatibility alias.
+ * Split out of RFC patch.
 ---
- xen/arch/x86/cpu-policy.c             | 84 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/cpu-policy.h |  3 +
- xen/arch/x86/include/asm/msr.h        |  1 -
- xen/arch/x86/msr.c                    | 84 ---------------------------
- xen/arch/x86/setup.c                  |  3 +-
- 5 files changed, 89 insertions(+), 86 deletions(-)
+ tools/fuzz/x86_instruction_emulator/fuzz-emul.c | 2 +-
+ tools/tests/x86_emulator/test_x86_emulator.c    | 2 +-
+ tools/tests/x86_emulator/x86-emulate.c          | 2 +-
+ xen/arch/x86/hvm/emulate.c                      | 4 ++--
+ xen/arch/x86/mm/shadow/hvm.c                    | 2 +-
+ xen/arch/x86/pv/emul-priv-op.c                  | 2 +-
+ xen/arch/x86/pv/ro-page-fault.c                 | 2 +-
+ xen/arch/x86/x86_emulate/private.h              | 4 ++--
+ xen/arch/x86/x86_emulate/x86_emulate.h          | 7 +++++--
+ 9 files changed, 15 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index e9ac1269c35a..f6a2317ed7bd 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -20,6 +20,90 @@ struct cpu_policy __ro_after_init hvm_max_cpu_policy;
- struct cpu_policy __ro_after_init hvm_def_cpu_policy;
+diff --git a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
+index 966e46bee199..4885a68210d0 100644
+--- a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
++++ b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
+@@ -893,7 +893,7 @@ int LLVMFuzzerTestOneInput(const uint8_t *data_p, size_t size)
+     struct x86_emulate_ctxt ctxt = {
+         .data = &state,
+         .regs = &input.regs,
+-        .cpuid = &cp,
++        .cpu_policy = &cp,
+         .addr_size = 8 * sizeof(void *),
+         .sp_size = 8 * sizeof(void *),
+     };
+diff --git a/tools/tests/x86_emulator/test_x86_emulator.c b/tools/tests/x86_emulator/test_x86_emulator.c
+index 31586f805726..7b7fbaaf45ec 100644
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -909,7 +909,7 @@ int main(int argc, char **argv)
+ 
+     ctxt.regs = &regs;
+     ctxt.force_writeback = 0;
+-    ctxt.cpuid     = &cp;
++    ctxt.cpu_policy = &cp;
+     ctxt.lma       = sizeof(void *) == 8;
+     ctxt.addr_size = 8 * sizeof(void *);
+     ctxt.sp_size   = 8 * sizeof(void *);
+diff --git a/tools/tests/x86_emulator/x86-emulate.c b/tools/tests/x86_emulator/x86-emulate.c
+index f6ee09439751..2692404df906 100644
+--- a/tools/tests/x86_emulator/x86-emulate.c
++++ b/tools/tests/x86_emulator/x86-emulate.c
+@@ -25,7 +25,7 @@
  #endif
  
-+static void __init calculate_raw_policy(void)
-+{
-+    struct cpu_policy *p = &raw_cpu_policy;
-+
-+    /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
-+    /* Was already added by probe_cpuid_faulting() */
-+
-+    if ( cpu_has_arch_caps )
-+        rdmsrl(MSR_ARCH_CAPABILITIES, p->arch_caps.raw);
-+}
-+
-+static void __init calculate_host_policy(void)
-+{
-+    struct cpu_policy *p = &host_cpu_policy;
-+
-+    *p = raw_cpu_policy;
-+
-+    /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
-+    /* probe_cpuid_faulting() sanity checks presence of MISC_FEATURES_ENABLES */
-+    p->platform_info.cpuid_faulting = cpu_has_cpuid_faulting;
-+
-+    /* Temporary, until we have known_features[] for feature bits in MSRs. */
-+    p->arch_caps.raw &=
-+        (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
-+         ARCH_CAPS_SKIP_L1DFL | ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO |
-+         ARCH_CAPS_IF_PSCHANGE_MC_NO | ARCH_CAPS_TSX_CTRL | ARCH_CAPS_TAA_NO |
-+         ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO | ARCH_CAPS_PSDP_NO |
-+         ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA | ARCH_CAPS_BHI_NO |
-+         ARCH_CAPS_PBRSB_NO);
-+}
-+
-+static void __init calculate_pv_max_policy(void)
-+{
-+    struct cpu_policy *p = &pv_max_cpu_policy;
-+
-+    *p = host_cpu_policy;
-+
-+    p->arch_caps.raw = 0; /* Not supported yet. */
-+}
-+
-+static void __init calculate_pv_def_policy(void)
-+{
-+    struct cpu_policy *p = &pv_def_cpu_policy;
-+
-+    *p = pv_max_cpu_policy;
-+}
-+
-+static void __init calculate_hvm_max_policy(void)
-+{
-+    struct cpu_policy *p = &hvm_max_cpu_policy;
-+
-+    *p = host_cpu_policy;
-+
-+    /* It's always possible to emulate CPUID faulting for HVM guests */
-+    p->platform_info.cpuid_faulting = true;
-+
-+    p->arch_caps.raw = 0; /* Not supported yet. */
-+}
-+
-+static void __init calculate_hvm_def_policy(void)
-+{
-+    struct cpu_policy *p = &hvm_def_cpu_policy;
-+
-+    *p = hvm_max_cpu_policy;
-+}
-+
-+void __init init_guest_cpu_policies(void)
-+{
-+    calculate_raw_policy();
-+    calculate_host_policy();
-+
-+    if ( IS_ENABLED(CONFIG_PV) )
-+    {
-+        calculate_pv_max_policy();
-+        calculate_pv_def_policy();
-+    }
-+
-+    if ( hvm_enabled )
-+    {
-+        calculate_hvm_max_policy();
-+        calculate_hvm_def_policy();
-+    }
-+}
-+
- int init_domain_cpu_policy(struct domain *d)
+ uint32_t mxcsr_mask = 0x0000ffbf;
+-struct cpuid_policy cp;
++struct cpu_policy cp;
+ 
+ static char fpu_save_area[0x4000] __attribute__((__aligned__((64))));
+ static bool use_xsave;
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index 95364deb1996..5691725d6c6f 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2771,7 +2771,7 @@ int hvm_emulate_one_mmio(unsigned long mfn, unsigned long gla)
+ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
+     unsigned int errcode)
  {
-     struct cpu_policy *p = is_pv_domain(d)
-diff --git a/xen/arch/x86/include/asm/cpu-policy.h b/xen/arch/x86/include/asm/cpu-policy.h
-index 9ba34bbf5ea1..13e2a1f86d13 100644
---- a/xen/arch/x86/include/asm/cpu-policy.h
-+++ b/xen/arch/x86/include/asm/cpu-policy.h
-@@ -12,6 +12,9 @@ extern struct cpu_policy  pv_def_cpu_policy;
- extern struct cpu_policy hvm_max_cpu_policy;
- extern struct cpu_policy hvm_def_cpu_policy;
+-    struct hvm_emulate_ctxt ctx = {{ 0 }};
++    struct hvm_emulate_ctxt ctx = {};
+     int rc;
  
-+/* Initialise the guest cpu_policy objects. */
-+void init_guest_cpu_policies(void);
-+
- /* Allocate and initialise a CPU policy suitable for the domain. */
- int init_domain_cpu_policy(struct domain *d);
+     hvm_emulate_init_once(&ctx, NULL, guest_cpu_user_regs());
+@@ -2846,7 +2846,7 @@ void hvm_emulate_init_once(
  
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index b59a51d238a7..458841733e18 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -418,7 +418,6 @@ struct vcpu_msrs
-     uint32_t dr_mask[4];
- };
+     hvmemul_ctxt->validate = validate;
+     hvmemul_ctxt->ctxt.regs = regs;
+-    hvmemul_ctxt->ctxt.cpuid = curr->domain->arch.cpuid;
++    hvmemul_ctxt->ctxt.cpu_policy = curr->domain->arch.cpu_policy;
+     hvmemul_ctxt->ctxt.force_writeback = true;
+ }
  
--void init_guest_msr_policy(void);
- int init_vcpu_msr_policy(struct vcpu *v);
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index e2ee1c77056f..cc84af01925a 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -319,7 +319,7 @@ const struct x86_emulate_ops *shadow_init_emulation(
+     memset(sh_ctxt, 0, sizeof(*sh_ctxt));
  
- /*
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 93bd93feb644..802fc60baf81 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -38,90 +38,6 @@
+     sh_ctxt->ctxt.regs = regs;
+-    sh_ctxt->ctxt.cpuid = curr->domain->arch.cpuid;
++    sh_ctxt->ctxt.cpu_policy = curr->domain->arch.cpu_policy;
+     sh_ctxt->ctxt.lma = hvm_long_mode_active(curr);
  
- DEFINE_PER_CPU(uint32_t, tsc_aux);
+     /* Segment cache initialisation. Primed with CS. */
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index 5da00e24e4ff..ab52768271c5 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -1327,7 +1327,7 @@ int pv_emulate_privileged_op(struct cpu_user_regs *regs)
+     struct domain *currd = curr->domain;
+     struct priv_op_ctxt ctxt = {
+         .ctxt.regs = regs,
+-        .ctxt.cpuid = currd->arch.cpuid,
++        .ctxt.cpu_policy = currd->arch.cpu_policy,
+         .ctxt.lma = !is_pv_32bit_domain(currd),
+     };
+     int rc;
+diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
+index 5963f5ee2d51..0d02c7d2ab10 100644
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -356,7 +356,7 @@ int pv_ro_page_fault(unsigned long addr, struct cpu_user_regs *regs)
+     unsigned int addr_size = is_pv_32bit_domain(currd) ? 32 : BITS_PER_LONG;
+     struct x86_emulate_ctxt ctxt = {
+         .regs      = regs,
+-        .cpuid     = currd->arch.cpuid,
++        .cpu_policy = currd->arch.cpu_policy,
+         .addr_size = addr_size,
+         .sp_size   = addr_size,
+         .lma       = addr_size > 32,
+diff --git a/xen/arch/x86/x86_emulate/private.h b/xen/arch/x86/x86_emulate/private.h
+index 653a298c705b..8dee019731ae 100644
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -505,7 +505,7 @@ in_protmode(
+ })
  
--static void __init calculate_raw_policy(void)
--{
--    struct msr_policy *mp = &raw_cpu_policy;
--
--    /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
--    /* Was already added by probe_cpuid_faulting() */
--
--    if ( cpu_has_arch_caps )
--        rdmsrl(MSR_ARCH_CAPABILITIES, mp->arch_caps.raw);
--}
--
--static void __init calculate_host_policy(void)
--{
--    struct msr_policy *mp = &host_cpu_policy;
--
--    *mp = raw_cpu_policy;
--
--    /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
--    /* probe_cpuid_faulting() sanity checks presence of MISC_FEATURES_ENABLES */
--    mp->platform_info.cpuid_faulting = cpu_has_cpuid_faulting;
--
--    /* Temporary, until we have known_features[] for feature bits in MSRs. */
--    mp->arch_caps.raw &=
--        (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
--         ARCH_CAPS_SKIP_L1DFL | ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO |
--         ARCH_CAPS_IF_PSCHANGE_MC_NO | ARCH_CAPS_TSX_CTRL | ARCH_CAPS_TAA_NO |
--         ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO | ARCH_CAPS_PSDP_NO |
--         ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA | ARCH_CAPS_BHI_NO |
--         ARCH_CAPS_PBRSB_NO);
--}
--
--static void __init calculate_pv_max_policy(void)
--{
--    struct msr_policy *mp = &pv_max_cpu_policy;
--
--    *mp = host_cpu_policy;
--
--    mp->arch_caps.raw = 0; /* Not supported yet. */
--}
--
--static void __init calculate_pv_def_policy(void)
--{
--    struct msr_policy *mp = &pv_def_cpu_policy;
--
--    *mp = pv_max_cpu_policy;
--}
--
--static void __init calculate_hvm_max_policy(void)
--{
--    struct msr_policy *mp = &hvm_max_cpu_policy;
--
--    *mp = host_cpu_policy;
--
--    /* It's always possible to emulate CPUID faulting for HVM guests */
--    mp->platform_info.cpuid_faulting = true;
--
--    mp->arch_caps.raw = 0; /* Not supported yet. */
--}
--
--static void __init calculate_hvm_def_policy(void)
--{
--    struct msr_policy *mp = &hvm_def_cpu_policy;
--
--    *mp = hvm_max_cpu_policy;
--}
--
--void __init init_guest_msr_policy(void)
--{
--    calculate_raw_policy();
--    calculate_host_policy();
--
--    if ( IS_ENABLED(CONFIG_PV) )
--    {
--        calculate_pv_max_policy();
--        calculate_pv_def_policy();
--    }
--
--    if ( hvm_enabled )
--    {
--        calculate_hvm_max_policy();
--        calculate_hvm_def_policy();
--    }
--}
--
- int init_vcpu_msr_policy(struct vcpu *v)
+ static inline bool
+-_amd_like(const struct cpuid_policy *cp)
++_amd_like(const struct cpu_policy *cp)
  {
-     struct vcpu_msrs *msrs = xzalloc(struct vcpu_msrs);
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index b29229933d8c..51a19b9019eb 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -50,6 +50,7 @@
- #include <asm/nmi.h>
- #include <asm/alternative.h>
- #include <asm/mc146818rtc.h>
-+#include <asm/cpu-policy.h>
- #include <asm/cpuid.h>
- #include <asm/spec_ctrl.h>
- #include <asm/guest.h>
-@@ -1991,7 +1992,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-         panic("Could not protect TXT memory regions\n");
+     return cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON);
+ }
+@@ -513,7 +513,7 @@ _amd_like(const struct cpuid_policy *cp)
+ static inline bool
+ amd_like(const struct x86_emulate_ctxt *ctxt)
+ {
+-    return _amd_like(ctxt->cpuid);
++    return _amd_like(ctxt->cpu_policy);
+ }
  
-     init_guest_cpuid();
--    init_guest_msr_policy();
-+    init_guest_cpu_policies();
+ #define vcpu_has_fpu()         (ctxt->cpuid->basic.fpu)
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
+index 75015104fbdb..0139d16da70c 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -565,8 +565,11 @@ struct x86_emulate_ctxt
+      * Input-only state:
+      */
  
-     if ( xen_cpuidle )
-         xen_processor_pmbits |= XEN_PROCESSOR_PM_CX;
+-    /* CPUID Policy for the domain. */
+-    const struct cpuid_policy *cpuid;
++    /* CPU policy for the domain.  Allow aliases for local code clarity. */
++    union {
++        struct cpu_policy *cpu_policy;
++        struct cpu_policy *cpuid;
++    };
+ 
+     /* Set this if writes may have side effects. */
+     bool force_writeback;
 -- 
 2.30.2
 
