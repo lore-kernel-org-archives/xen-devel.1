@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DDCC7619A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456D6C77B62
 	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 07:09:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518263.804648 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.518257.804618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjxGP-0008Co-8m; Wed, 05 Apr 2023 07:09:01 +0000
+	id 1pjxGM-0007Qe-2V; Wed, 05 Apr 2023 07:08:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518263.804648; Wed, 05 Apr 2023 07:09:01 +0000
+Received: by outflank-mailman (output) from mailman id 518257.804618; Wed, 05 Apr 2023 07:08:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pjxGP-0008Cf-2H; Wed, 05 Apr 2023 07:09:01 +0000
-Received: by outflank-mailman (input) for mailman id 518263;
- Wed, 05 Apr 2023 07:08:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pjxGL-0007QS-W0; Wed, 05 Apr 2023 07:08:57 +0000
+Received: by outflank-mailman (input) for mailman id 518257;
+ Wed, 05 Apr 2023 07:08:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5wAG=74=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pjxCE-0002UC-Sd
- for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 07:04:42 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2367f272-d380-11ed-85db-49a42c6b2330;
- Wed, 05 Apr 2023 09:04:42 +0200 (CEST)
+ id 1pjxCX-0002Et-31
+ for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 07:05:01 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2d7be2a9-d380-11ed-b464-930f4c7d94ae;
+ Wed, 05 Apr 2023 09:04:59 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 1AC7020298;
- Wed,  5 Apr 2023 07:04:42 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id F139B203F7;
+ Wed,  5 Apr 2023 07:04:58 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DFDB813A31;
- Wed,  5 Apr 2023 07:04:41 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C72B113A31;
+ Wed,  5 Apr 2023 07:04:58 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id dLRaNYkdLWTnEwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 05 Apr 2023 07:04:41 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cxhLL5odLWQKFAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 05 Apr 2023 07:04:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,138 +53,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2367f272-d380-11ed-85db-49a42c6b2330
+X-Inumbo-ID: 2d7be2a9-d380-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1680678282; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1680678298; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GIdwVYCAKepkDxThtVUfw/37sAa1oGJdz4Nx6ZA+2lg=;
-	b=JYSdSrraO6+/ewSBe4ComCaeaEt6LaIqm7GpPwvvBB2/50c3lKRhEfexZ/M1PYtUNuOAdp
-	cAXPwMDtyPaVr6zj4HebZEt9t+7eJ9G9ICvXqsD4QgpVereucdcAxnztUHXU0/E9EcKMvt
-	WCuHsq6yasY6PYD4cdSaJ4rMhd+r4JQ=
+	bh=aCyLt0zxkjWxud2x9uGxTV8f0obgprf3/tY/K8k0jbw=;
+	b=JMkSCFp31r0fIZPNH2AkMftQJA+mpIcj9jvbs5ufb0Ar0XBybtUowBEtZDvBcP2LTjksJF
+	fqxANAkevAZlQI+gakDpVPD8TisCAKrF0fcbvK1C5jjSE/LCDkdGF8CT6w2ukbn0+ujGx6
+	xNfbNEucYtgjqwKlr68nrI4H020r5Bo=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 09/13] tools/xenstore: add TDB access trace support
-Date: Wed,  5 Apr 2023 09:03:45 +0200
-Message-Id: <20230405070349.25293-10-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 12/13] tools/xenstore: use generic accounting for remaining quotas
+Date: Wed,  5 Apr 2023 09:03:48 +0200
+Message-Id: <20230405070349.25293-13-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230405070349.25293-1-jgross@suse.com>
 References: <20230405070349.25293-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new trace switch "tdb" and the related trace calls.
+The maxrequests, node size, number of node permissions, and path length
+quota are a little bit special, as they are either active in
+transactions only (maxrequests), or they are just per item instead of
+count values. Nevertheless being able to know the maximum number of
+those quota related values per domain would be beneficial, so add them
+to the generic accounting.
 
-The "tdb" switch is off per default.
+The per domain value will never show current numbers other than zero,
+but the maximum number seen can be gathered the same way as the number
+of nodes during a transaction.
+
+To be able to use the const qualifier for a new function switch
+domain_is_unprivileged() to take a const pointer, too.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.c        | 8 +++++++-
- tools/xenstore/xenstored_core.h        | 7 +++++++
- tools/xenstore/xenstored_transaction.c | 7 ++++++-
- 3 files changed, 20 insertions(+), 2 deletions(-)
+ tools/xenstore/xenstored_core.c        | 14 ++++-----
+ tools/xenstore/xenstored_core.h        |  2 +-
+ tools/xenstore/xenstored_domain.c      | 39 ++++++++++++++++++++------
+ tools/xenstore/xenstored_domain.h      |  6 ++++
+ tools/xenstore/xenstored_transaction.c |  4 +--
+ tools/xenstore/xenstored_watch.c       |  2 +-
+ 6 files changed, 48 insertions(+), 19 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index bd816ce709..2d481fcad9 100644
+index 88c569b7d5..65df2866bf 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -589,6 +589,8 @@ static void get_acc_data(TDB_DATA *key, struct node_account_data *acc)
- 		if (old_data.dptr == NULL) {
- 			acc->memory = 0;
- 		} else {
-+			trace_tdb("read %s size %zu\n", key->dptr,
-+				  old_data.dsize + key->dsize);
- 			hdr = (void *)old_data.dptr;
- 			acc->memory = old_data.dsize;
- 			acc->domid = hdr->perms[0].id;
-@@ -655,6 +657,7 @@ int do_tdb_write(struct connection *conn, TDB_DATA *key, TDB_DATA *data,
- 		errno = EIO;
+@@ -799,8 +799,8 @@ int write_node_raw(struct connection *conn, TDB_DATA *key, struct node *node,
+ 		+ node->perms.num * sizeof(node->perms.p[0])
+ 		+ node->datalen + node->childlen;
+ 
+-	if (!no_quota_check && domain_is_unprivileged(conn) &&
+-	    data.dsize >= quota_max_entry_size) {
++	if (domain_max_chk(conn, ACC_NODESZ, data.dsize, quota_max_entry_size)
++	    && !no_quota_check) {
+ 		errno = ENOSPC;
  		return errno;
  	}
-+	trace_tdb("store %s size %zu\n", key->dptr, data->dsize + key->dsize);
+@@ -1168,7 +1168,7 @@ static bool valid_chars(const char *node)
+ 		       "0123456789-/_@") == strlen(node));
+ }
  
- 	if (acc) {
- 		/* Don't use new_domid, as it might be a transaction node. */
-@@ -682,6 +685,7 @@ int do_tdb_delete(struct connection *conn, TDB_DATA *key,
- 		errno = EIO;
- 		return errno;
+-bool is_valid_nodename(const char *node)
++bool is_valid_nodename(const struct connection *conn, const char *node)
+ {
+ 	int local_off = 0;
+ 	unsigned int domid;
+@@ -1188,7 +1188,8 @@ bool is_valid_nodename(const char *node)
+ 	if (sscanf(node, "/local/domain/%5u/%n", &domid, &local_off) != 1)
+ 		local_off = 0;
+ 
+-	if (strlen(node) > local_off + quota_max_path_len)
++	if (domain_max_chk(conn, ACC_PATHLEN, strlen(node) - local_off,
++			   quota_max_path_len))
+ 		return false;
+ 
+ 	return valid_chars(node);
+@@ -1250,7 +1251,7 @@ static struct node *get_node_canonicalized(struct connection *conn,
+ 	*canonical_name = canonicalize(conn, ctx, name);
+ 	if (!*canonical_name)
+ 		return NULL;
+-	if (!is_valid_nodename(*canonical_name)) {
++	if (!is_valid_nodename(conn, *canonical_name)) {
+ 		errno = EINVAL;
+ 		return NULL;
  	}
-+	trace_tdb("delete %s\n", key->dptr);
+@@ -1775,8 +1776,7 @@ static int do_set_perms(const void *ctx, struct connection *conn,
+ 		return EINVAL;
  
- 	if (acc->memory) {
- 		domid = get_acc_domid(conn, key, acc->domid);
-@@ -731,6 +735,8 @@ struct node *read_node(struct connection *conn, const void *ctx,
- 		goto error;
- 	}
+ 	perms.num--;
+-	if (domain_is_unprivileged(conn) &&
+-	    perms.num > quota_nb_perms_per_node)
++	if (domain_max_chk(conn, ACC_NPERM, perms.num, quota_nb_perms_per_node))
+ 		return ENOSPC;
  
-+	trace_tdb("read %s size %zu\n", key.dptr, data.dsize + key.dsize);
-+
- 	node->parent = NULL;
- 	talloc_steal(node, data.dptr);
- 
-@@ -2746,7 +2752,7 @@ static void set_quota(const char *arg, bool soft)
- 
- /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
- const char *const trace_switches[] = {
--	"obj", "io", "wrl", "acc",
-+	"obj", "io", "wrl", "acc", "tdb",
- 	NULL
- };
- 
+ 	permstr = in->buffer + strlen(in->buffer) + 1;
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 3e0734a6c6..5a11dc1231 100644
+index 3564d85d7d..9339820156 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -303,9 +303,16 @@ extern unsigned int trace_flags;
- #define TRACE_IO	0x00000002
- #define TRACE_WRL	0x00000004
- #define TRACE_ACC	0x00000008
-+#define TRACE_TDB	0x00000010
- extern const char *const trace_switches[];
- int set_trace_switch(const char *arg);
+@@ -258,7 +258,7 @@ void check_store(void);
+ void corrupt(struct connection *conn, const char *fmt, ...);
  
-+#define trace_tdb(...)				\
-+do {						\
-+	if (trace_flags & TRACE_TDB)		\
-+		trace("tdb: " __VA_ARGS__);	\
-+} while (0)
+ /* Is this a valid node name? */
+-bool is_valid_nodename(const char *node);
++bool is_valid_nodename(const struct connection *conn, const char *node);
+ 
+ /* Get name of parent node. */
+ char *get_parent(const void *ctx, const char *node);
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index d21f31da92..49e2c5c82a 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -433,7 +433,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		return ENOMEM;
+ 
+ #define ent(t, e) \
+-	resp = talloc_asprintf_append(resp, "%-16s: %8u (max: %8u\n", #t, \
++	resp = talloc_asprintf_append(resp, "%-17s: %8u (max: %8u\n", #t, \
+ 				      d->acc[e].val, d->acc[e].max); \
+ 	if (!resp) return ENOMEM
+ 
+@@ -442,6 +442,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+ 	ent(transactions, ACC_TRANS);
+ 	ent(outstanding, ACC_OUTST);
+ 	ent(memory, ACC_MEM);
++	ent(transaction-nodes, ACC_TRANSNODES);
+ 
+ #undef ent
+ 
+@@ -459,7 +460,7 @@ int domain_max_global_acc(const void *ctx, struct connection *conn)
+ 		return ENOMEM;
+ 
+ #define ent(t, e) \
+-	resp = talloc_asprintf_append(resp, "%-16s: %8u\n", #t,   \
++	resp = talloc_asprintf_append(resp, "%-17s: %8u\n", #t,   \
+ 				      acc_global_max[e]);         \
+ 	if (!resp) return ENOMEM
+ 
+@@ -468,6 +469,7 @@ int domain_max_global_acc(const void *ctx, struct connection *conn)
+ 	ent(transactions, ACC_TRANS);
+ 	ent(outstanding, ACC_OUTST);
+ 	ent(memory, ACC_MEM);
++	ent(transaction-nodes, ACC_TRANSNODES);
+ 
+ #undef ent
+ 
+@@ -1081,12 +1083,22 @@ int domain_adjust_node_perms(struct node *node)
+ 	return 0;
+ }
+ 
++static void domain_acc_valid_max(struct domain *d, enum accitem what,
++				 unsigned int val)
++{
++	assert(what < ARRAY_SIZE(d->acc));
++	assert(what < ARRAY_SIZE(acc_global_max));
 +
- extern TDB_CONTEXT *tdb_ctx;
- extern int dom0_domid;
- extern int dom0_event;
++	if (val > d->acc[what].max)
++		d->acc[what].max = val;
++	if (val > acc_global_max[what] && domid_is_unprivileged(d->domid))
++		acc_global_max[what] = val;
++}
++
+ static int domain_acc_add_valid(struct domain *d, enum accitem what, int add)
+ {
+ 	unsigned int val;
+ 
+-	assert(what < ARRAY_SIZE(d->acc));
+-
+ 	if ((add < 0 && -add > d->acc[what].val) ||
+ 	    (add > 0 && (INT_MAX - d->acc[what].val) < add)) {
+ 		/*
+@@ -1100,10 +1112,7 @@ static int domain_acc_add_valid(struct domain *d, enum accitem what, int add)
+ 	}
+ 
+ 	val = d->acc[what].val + add;
+-	if (val > d->acc[what].max)
+-		d->acc[what].max = val;
+-	if (val > acc_global_max[what] && domid_is_unprivileged(d->domid))
+-		acc_global_max[what] = val;
++	domain_acc_valid_max(d, what, val);
+ 
+ 	return val;
+ }
+@@ -1221,6 +1230,20 @@ void domain_reset_global_acc(void)
+ 	hashtable_iterate(domhash, domain_reset_global_acc_sub, NULL);
+ }
+ 
++bool domain_max_chk(const struct connection *conn, enum accitem what,
++		    unsigned int val, unsigned int quota)
++{
++	if (!conn || !conn->domain)
++		return false;
++
++	if (domain_is_unprivileged(conn) && val > quota)
++		return true;
++
++	domain_acc_valid_max(conn->domain, what, val);
++
++	return false;
++}
++
+ int domain_nbentry_inc(struct connection *conn, unsigned int domid)
+ {
+ 	return (domain_acc_add(conn, domid, ACC_NODES, 1, false) < 0)
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index b55c9bcc2d..3e17b63659 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -32,6 +32,10 @@ enum accitem {
+ 	ACC_OUTST,
+ 	ACC_MEM,
+ 	ACC_TRANS,
++	ACC_TRANSNODES,
++	ACC_NPERM,
++	ACC_PATHLEN,
++	ACC_NODESZ,
+ 	ACC_N,			/* Number of elements per domain. */
+ };
+ 
+@@ -128,6 +132,8 @@ void acc_drop(struct connection *conn);
+ void acc_commit(struct connection *conn);
+ int domain_max_global_acc(const void *ctx, struct connection *conn);
+ void domain_reset_global_acc(void);
++bool domain_max_chk(const struct connection *conn, unsigned int what,
++		    unsigned int val, unsigned int quota);
+ 
+ /* Write rate limiting */
+ 
 diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
-index 2b15506953..11c8bcec84 100644
+index 1c14b8579a..0b256f9b18 100644
 --- a/tools/xenstore/xenstored_transaction.c
 +++ b/tools/xenstore/xenstored_transaction.c
-@@ -374,8 +374,11 @@ static int finalize_transaction(struct connection *conn,
- 				if (tdb_error(tdb_ctx) != TDB_ERR_NOEXIST)
- 					return EIO;
- 				gen = NO_GENERATION;
--			} else
-+			} else {
-+				trace_tdb("read %s size %zu\n", key.dptr,
-+					  key.dsize + data.dsize);
- 				gen = hdr->generation;
-+			}
- 			talloc_free(data.dptr);
- 			if (i->generation != gen)
- 				return EAGAIN;
-@@ -399,6 +402,8 @@ static int finalize_transaction(struct connection *conn,
- 			set_tdb_key(i->trans_name, &ta_key);
- 			data = tdb_fetch(tdb_ctx, ta_key);
- 			if (data.dptr) {
-+				trace_tdb("read %s size %zu\n", ta_key.dptr,
-+					  ta_key.dsize + data.dsize);
- 				hdr = (void *)data.dptr;
- 				hdr->generation = ++generation;
- 				*is_corrupt |= do_tdb_write(conn, &key, &data,
+@@ -252,8 +252,8 @@ int access_node(struct connection *conn, struct node *node,
+ 
+ 	i = find_accessed_node(trans, node->name);
+ 	if (!i) {
+-		if (trans->nodes >= quota_trans_nodes &&
+-		    domain_is_unprivileged(conn)) {
++		if (domain_max_chk(conn, ACC_TRANSNODES, trans->nodes + 1,
++				   quota_trans_nodes)) {
+ 			ret = ENOSPC;
+ 			goto err;
+ 		}
+diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
+index e30cd89be3..61b1e3421e 100644
+--- a/tools/xenstore/xenstored_watch.c
++++ b/tools/xenstore/xenstored_watch.c
+@@ -176,7 +176,7 @@ static int check_watch_path(struct connection *conn, const void *ctx,
+ 		*path = canonicalize(conn, ctx, *path);
+ 		if (!*path)
+ 			return errno;
+-		if (!is_valid_nodename(*path))
++		if (!is_valid_nodename(conn, *path))
+ 			goto inval;
+ 	}
+ 
 -- 
 2.35.3
 
