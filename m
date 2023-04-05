@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 799C2C77B60
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 11:18:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518467.805053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D541C76188
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 11:24:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.518483.805087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk19j-0002xS-US; Wed, 05 Apr 2023 11:18:23 +0000
+	id 1pk1FL-0006JW-64; Wed, 05 Apr 2023 11:24:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518467.805053; Wed, 05 Apr 2023 11:18:23 +0000
+Received: by outflank-mailman (output) from mailman id 518483.805087; Wed, 05 Apr 2023 11:24:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk19j-0002x0-Q9; Wed, 05 Apr 2023 11:18:23 +0000
-Received: by outflank-mailman (input) for mailman id 518467;
- Wed, 05 Apr 2023 11:18:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=btvB=74=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
- id 1pk19i-0002uD-JG
- for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 11:18:22 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20627.outbound.protection.outlook.com
- [2a01:111:f400:7eaa::627])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 92183f78-d3a3-11ed-85db-49a42c6b2330;
- Wed, 05 Apr 2023 13:18:21 +0200 (CEST)
-Received: from DM6PR06CA0034.namprd06.prod.outlook.com (2603:10b6:5:120::47)
- by DM4PR12MB7669.namprd12.prod.outlook.com (2603:10b6:8:106::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.33; Wed, 5 Apr
- 2023 11:18:18 +0000
-Received: from DM6NAM11FT049.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:120:cafe::5d) by DM6PR06CA0034.outlook.office365.com
- (2603:10b6:5:120::47) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.44 via Frontend
- Transport; Wed, 5 Apr 2023 11:18:18 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DM6NAM11FT049.mail.protection.outlook.com (10.13.172.188) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6277.28 via Frontend Transport; Wed, 5 Apr 2023 11:18:18 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 5 Apr
- 2023 06:18:17 -0500
-Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
- SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34
- via Frontend Transport; Wed, 5 Apr 2023 06:18:16 -0500
+	id 1pk1FL-0006JP-3P; Wed, 05 Apr 2023 11:24:11 +0000
+Received: by outflank-mailman (input) for mailman id 518483;
+ Wed, 05 Apr 2023 11:24:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5wAG=74=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1pk1FJ-0006Ix-Nu
+ for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 11:24:09 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 60f995d9-d3a4-11ed-b464-930f4c7d94ae;
+ Wed, 05 Apr 2023 13:24:07 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 01ACB22161;
+ Wed,  5 Apr 2023 11:24:07 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BE27A13A31;
+ Wed,  5 Apr 2023 11:24:06 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id XviXLFZaLWT9IgAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 05 Apr 2023 11:24:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,106 +53,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92183f78-d3a3-11ed-85db-49a42c6b2330
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kaV+HV0ycyoxTc4dkHTLNG3K/5Lf8Nrp6RWQmY7xY/RCfHl5wjPN6xLzuACwqAB8LXSj4+l4lQu+ZdOJJYzgJBYwTIIqBWlAiTO5set3uLlIWptzeYAYbTcNr9ET4OSqAR/NTYXftoAqHkOxCUfr497FQLyTir1c3cNidabbBUg1MgoQklCzmc9bEVCTl0izAjlUBALj1p6Ri8Q41wegJoVSjVrcF68eIfuQFavsZUx9cMSVrwHLPvtkAhzf0y/2hYX5pA2Io3pskB+in6gnGQQFsrM4ux17AFxeqmr+bX7dItVsciPcSCjzJmvL5AL5zQHeh/yauswQAikgVCAiKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=faFuTvjumdAB2CRmAM9G85/4bLPNgqkuwbkGeX5rngE=;
- b=kjcKQVGukCECjqOvmwnNyPf0gBTADZsQJvmNCJaJdAlX8+ngV4qh8nmRmOiZ+RrnbRVTaAZn99vRWxz32iEejmTqhncYyTuOVMjFxOobagQ6GYp4LAxlAIuiBWrPLsEVUz3rLkhDQL1dkvxLNAc7jg9jJCfEKGKd2U0QZJaQDR4LhhIlFOmtlSb/SsssxgGPaFGHSDywdTiiSSXpGEXJpzAyiElsoXVg5p0rvQTlfHljVnIgZI1DFINedb4OuUeH73wSC+5GPumTRTOaqK5rze63t0/LDz3leVeapXIgCWZi3cTurBab/D4huHCQa9FsT33fbwhyC7dR7KD96VHH2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=faFuTvjumdAB2CRmAM9G85/4bLPNgqkuwbkGeX5rngE=;
- b=RGWTlBzc/JICUHm5hSlDVNLdIDkoqasILDgwRVjJy8Wy5VyTTNIMvLeCRi90OU3dKuueFx5BfRhTFQMoytkKVLLpx8TeRepO1Ht2sFp9EREclTMnzchUyjPPaVnwJOg6GHyhDqYIsuXawjCJvA645nPaTIT6Qp2aa0cFrGZq+8E=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 2/3] xen/arm: vpl011: Handle correctly TXFE when backend in Xen
-Date: Wed, 5 Apr 2023 13:17:49 +0200
-Message-ID: <20230405111750.12491-3-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230405111750.12491-1-michal.orzel@amd.com>
-References: <20230405111750.12491-1-michal.orzel@amd.com>
+X-Inumbo-ID: 60f995d9-d3a4-11ed-b464-930f4c7d94ae
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1680693847; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=oUbQqR93vbZJC0urz3kBptj/FjpSXr9L+EvtWJIzkAY=;
+	b=ezl7dZOyS77RQ86UNc7n8IlIi5lpR0FyYMjVG9l1Cf5GWUeRcyQOZJ8jU0cd5TjdNlJ94l
+	9lCyJ3o6zwcLlKrhnVg3Owaq+PyqRmfz6Je6gx/VRJ620F4w+6GSyvNoK3ugFohdnh1tgG
+	2u3UZc5fN6qZhr0n6v7UeNOMtii8Wtc=
+Message-ID: <563ff69f-0e9d-c90a-d18c-b3c351575716@suse.com>
+Date: Wed, 5 Apr 2023 13:24:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT049:EE_|DM4PR12MB7669:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00ee4a16-6e8e-45a1-6a0d-08db35c77563
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	673hHt9abvZww3bon2Kv6waImqCn0qsquHbGnmusaOu7iVAKUuPp5cX6+6AoDjbO58/zapfGBe7PKWVcNp1zpMIG8Gjy9Tvdcor/6L/iAf8vgPbI2mOQ2ME8tODBjmNyP51Dho96jUFa3eBTG338ii166a4b+m3/eutD+i6Se6O2tdEscxiXIbn7MnDDPfyV0JsVbwHNfeoaZAvhBZUGnGuDl5qbgmi1ZBKaU6AViSlG6J9t6V888PSVNr8dXYWOG6q7d4qmCkO8IzesWXsbXMJBWST/eaPiJ99LLnsYwMtDr+4X177Q5svIQqIC9mCpLT3FEY7VGJD/BkfkdbMn7F33bFWxPa0uysUp9RSO+/AzOeh5+584GxNZPbVn4vixHuSpPk4mZH5hBF53dhWiW0x1iGw4Oa1+RaegIrA/aQKzte7qrCDx6Gc9pmEAYpzaoc3/ZizLqiOgOl/MZcsKaKK7R7PKPfgTlE8Y8nhi/5kghqkRlPIaPWt0lQlhjVC5n8hiBF3DdIpRe8valZsvV3xE8JlBkbHKst7SJePziBKVNs/eXI8uUgYg7ASq3ttqb5fHOSMfsVWjfV4RcDxFEJjIbRyRD/dDY0OVWgpVVb5WDvfqIkdJ25ruz/HLURA0CFnkHHgM3a706skgYR19XL3we5x/Lhfc8P6E0LvgOiSz4MWwdzSnhq85LI+eOuo9ealmotnfaUpcEPp5qmgvpYa1222kEq3j0Wve0Y4v/tM=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(396003)(346002)(376002)(39860400002)(136003)(451199021)(40470700004)(36840700001)(46966006)(86362001)(426003)(70206006)(70586007)(41300700001)(4326008)(6666004)(316002)(6916009)(54906003)(8676002)(40480700001)(82310400005)(186003)(44832011)(8936002)(36860700001)(5660300002)(2906002)(356005)(82740400003)(81166007)(478600001)(83380400001)(47076005)(336012)(1076003)(2616005)(26005)(36756003)(40460700003)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Apr 2023 11:18:18.6489
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ee4a16-6e8e-45a1-6a0d-08db35c77563
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DM6NAM11FT049.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7669
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.1
+Subject: Re: [PATCH v2 2/2] xen: update CONFIG_DEBUG_INFO help text
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20230403162823.30681-1-jgross@suse.com>
+ <20230403162823.30681-3-jgross@suse.com>
+ <358e9788-b930-5c51-1e89-232be43f83e5@suse.com>
+From: Juergen Gross <jgross@suse.com>
+In-Reply-To: <358e9788-b930-5c51-1e89-232be43f83e5@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------3BvgmbWaZapsVCTU88DTFarK"
 
-When backend is in Xen, the handling of data written to DR register is a
-bit special because we want to tell guest that we are always ready for new
-data to be written (i.e. no real FIFO, TXFF/BUSY never set and TXI always
-set). This conflicts with the current handling of TXFE bit, which we
-always clear and never set on a write path (we happen to set it when we
-receive char from serial input due to use of vpl011_data_avail() but this
-might never be called). This can lead to issues if a guest driver makes
-use of TXFE bit to check for TX transmission completion (such guest could
-then wait endlessly). Fix it by keeping TXFE always set to match the
-current emulation logic.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------3BvgmbWaZapsVCTU88DTFarK
+Content-Type: multipart/mixed; boundary="------------hTOaozWB0FeTq5Wz2qESremc";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+Message-ID: <563ff69f-0e9d-c90a-d18c-b3c351575716@suse.com>
+Subject: Re: [PATCH v2 2/2] xen: update CONFIG_DEBUG_INFO help text
+References: <20230403162823.30681-1-jgross@suse.com>
+ <20230403162823.30681-3-jgross@suse.com>
+ <358e9788-b930-5c51-1e89-232be43f83e5@suse.com>
+In-Reply-To: <358e9788-b930-5c51-1e89-232be43f83e5@suse.com>
 
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
-We don't have to look far for an example of a PL011/SBSA driver relying on TXFE.
-If a guest had a driver like we have in Xen, we would end up with no messages
-being printed.
----
- xen/arch/arm/vpl011.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+--------------hTOaozWB0FeTq5Wz2qESremc
+Content-Type: multipart/mixed; boundary="------------wL7lCk1Jbl1XcOSznPXSa8r6"
 
-diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
-index 0186d8a31834..ff06deeb645c 100644
---- a/xen/arch/arm/vpl011.c
-+++ b/xen/arch/arm/vpl011.c
-@@ -112,8 +112,14 @@ static void vpl011_write_data_xen(struct domain *d, uint8_t data)
-         }
-     }
- 
-+    /*
-+     * When backend is in Xen, we tell guest we are always ready for new data
-+     * to be written. This is fulfilled by having:
-+     * - TXI/TXFE -> always set,
-+     * - TXFF/BUSY -> never set.
-+     */
-     vpl011->uartris |= TXI;
--    vpl011->uartfr &= ~TXFE;
-+    vpl011->uartfr |= TXFE;
-     vpl011_update_interrupt_status(d);
- 
-     VPL011_UNLOCK(d, flags);
--- 
-2.25.1
+--------------wL7lCk1Jbl1XcOSznPXSa8r6
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMDQuMDQuMjMgMTE6MDksIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAwMy4wNC4yMDIz
+IDE4OjI4LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gLS0tIGEveGVuL0tjb25maWcuZGVi
+dWcNCj4+ICsrKyBiL3hlbi9LY29uZmlnLmRlYnVnDQo+PiBAQCAtMTUsOCArMTUsMTQgQEAg
+Y29uZmlnIERFQlVHX0lORk8NCj4+ICAgCWJvb2wgIkNvbXBpbGUgWGVuIHdpdGggZGVidWcg
+aW5mbyINCj4+ICAgCWRlZmF1bHQgREVCVUcNCj4+ICAgCWhlbHANCj4+IC0JICBJZiB5b3Ug
+c2F5IFkgaGVyZSB0aGUgcmVzdWx0aW5nIFhlbiB3aWxsIGluY2x1ZGUgZGVidWdnaW5nIGlu
+Zm8NCj4+IC0JICByZXN1bHRpbmcgaW4gYSBsYXJnZXIgYmluYXJ5IGltYWdlLg0KPj4gKwkg
+IFNheSBZIGhlcmUgaWYgeW91IHdhbnQgdG8gYnVpbGQgWGVuIHdpdGggZGVidWcgaW5mb3Jt
+YXRpb24uIFRoaXMNCj4+ICsJICBpbmZvcm1hdGlvbiBpcyBuZWVkZWQgZS5nLiBmb3IgZG9p
+bmcgY3Jhc2ggZHVtcCBhbmFseXNpcyBvZiB0aGUNCj4+ICsJICBoeXBlcnZpc29yIHZpYSB0
+aGUgImNyYXNoIiB0b29sLg0KPj4gKwkgIFNheWluZyBZIHdpbGwgaW5jcmVhc2UgdGhlIHNp
+emUgb2YgdGhlIHhlbi1zeW1zIGFuZCB4ZW4uZWZpDQo+PiArCSAgYmluYXJpZXMuIEluIGNh
+c2UgdGhlIHNwYWNlIG9uIHRoZSBFRkkgYm9vdCBwYXJ0aXRpb24gaXMgcmF0aGVyDQo+PiAr
+CSAgbGltaXRlZCwgeW91IG1heSB3YW50IHRvIG1ha2UgdXNlIG9mIHRoZSBJTlNUQUxMX0VG
+SV9TVFJJUCBtYWtlDQo+PiArCSAgdmFyaWFibGUgd2hlbiBidWlsZGluZyB0aGUgaHlwZXJ2
+aXNvciwgaW4gb3JkZXIgdG8gc3RyaXAgeGVuLmVmaQ0KPj4gKwkgIGJlZm9yZSBpbnN0YWxs
+aW5nIGl0IHRvIHRoZSBFRkkgcGFydGl0aW9uLg0KPiANCj4gSG1tLCBJTlNUQUxMX0VGSV9T
+VFJJUCBpcyBvbmx5IGEgY291cnRlc3kgdG8gZGV2ZWxvcGVycyB3YW50aW5nIHRvIGluc3Rh
+bGwNCj4geGVuLmVmaSBkaXJlY3RseSBpbnRvIHRoZSBFRkkgcGFydGl0aW9uLiBJdCB3b3Vs
+ZG4ndCBhZmZlY3QgdGhlIG5vcm1hbA0KPiBmbG93LCBhbmQgaGVuY2UgSSB0aGluayB0aGlz
+IHdhbnRzIGV4cHJlc3NpbmcgaGVyZSBzdWNoIHRoYXQgYm90aCBraW5kcyBvZg0KPiBwZW9w
+bGUgaGF2ZSBhdCBsZWFzdCBhIGhpbnQgd2hhdCB0aGV5IG5lZWQgdG8gZG8uIEkuZS4gaW4g
+dGhlIG5vcm1hbCBjYXNlDQo+IHRoZXknZCBuZWVkIHRvIGFkanVzdCB0aGUgd2F5IHhlbi5l
+ZmkgaXMgInByb3BhZ2F0ZWQiIGZyb20gaXRzIGluc3RhbGxlZA0KPiBsb2NhdGlvbiBvbnRv
+IHRoZSBFRkkgcGFydGl0aW9uLCB0byBkbyB0aGUgZGVzaXJlZCBzdHJpcHBpbmcgYXQgdGhh
+dCB0aW1lLg0KDQpXb3VsZCB5b3UgYmUgZmluZSB3aXRoOg0KDQogICBJbiBjYXNlIHRoZSBz
+cGFjZSBvbiB0aGUgRUZJIGJvb3QgcGFydGl0aW9uIGlzIHJhdGhlcg0KICAgbGltaXRlZCwg
+eW91IG1heSB3YW50IHRvIGluc3RhbGwgYSBzdHJpcHBlZCB2YXJpYW50IG9mIHhlbi5lZmkg
+aW4NCiAgIHRoZSBFRkkgYm9vdCBwYXJ0aXRpb24gKGxvb2sgZm9yICJJTlNUQUxMX0VGSV9T
+VFJJUCIgaW4NCiAgIGRvY3MvbWlzYy9lZmkucGFuZG9jIGZvciBtb3JlIGluZm9ybWF0aW9u
+IC0gd2hlbiBub3QgdXNpbmcNCiAgICJtYWtlIGluc3RhbGwteGVuIiBmb3IgaW5zdGFsbGlu
+ZyB4ZW4uZWZpLCBzdHJpcHBpbmcgbmVlZHMgdG8gYmUNCiAgIGRvbmUgb3V0c2lkZSB0aGUg
+WGVuIGJ1aWxkIGVudmlyb25tZW50KS4NCg0KDQpKdWVyZ2VuDQo=
+--------------wL7lCk1Jbl1XcOSznPXSa8r6
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------wL7lCk1Jbl1XcOSznPXSa8r6--
+
+--------------hTOaozWB0FeTq5Wz2qESremc--
+
+--------------3BvgmbWaZapsVCTU88DTFarK
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmQtWlYFAwAAAAAACgkQsN6d1ii/Ey+O
+sgf9EmalaxAcqPyJFCxRiUgtTIOgegw1DREeJU+Ds1jGSIz8LoXi8rOJcFj6o+wxtocr67njyeQ2
+zb7alst8y00MFFEyUh3Afnke+apjKZ+nIfkYdWrZopTneqcdVDgUr+1COTKiFm5ad6hnMclL7lE9
+qSLQTA85Vm4C37k2wQ3BAseVDMMHrcmeUI0FGmPpPTwUT6hi2Ts0/WXqxZh8GU+oB95yMzODX9l1
+LG0ilJQr73ZUVn61jm2yFhF3pN5tRX0ttXYLkqDCje76HYWaOWhjYLovt0+/R7dkPDJd7MzqtxtO
+ya/gHS0J8Lxci3RUcRo1heb0JoIuSb99wHhQ+kq4TA==
+=s4PX
+-----END PGP SIGNATURE-----
+
+--------------3BvgmbWaZapsVCTU88DTFarK--
 
