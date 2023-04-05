@@ -4,41 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3348AC76188
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 10:45:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518462.805038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7D2C761A6
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 11:18:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.518469.805072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0dO-0006kE-5Y; Wed, 05 Apr 2023 10:44:58 +0000
+	id 1pk19p-0003Tf-Fq; Wed, 05 Apr 2023 11:18:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518462.805038; Wed, 05 Apr 2023 10:44:58 +0000
+Received: by outflank-mailman (output) from mailman id 518469.805072; Wed, 05 Apr 2023 11:18:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0dO-0006k7-27; Wed, 05 Apr 2023 10:44:58 +0000
-Received: by outflank-mailman (input) for mailman id 518462;
- Wed, 05 Apr 2023 10:44:56 +0000
+	id 1pk19p-0003TA-AT; Wed, 05 Apr 2023 11:18:29 +0000
+Received: by outflank-mailman (input) for mailman id 518469;
+ Wed, 05 Apr 2023 11:18:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=E6P8=74=redhat.com=mst@srs-se1.protection.inumbo.net>)
- id 1pk0dM-0006jx-HL
- for xen-devel@lists.xen.org; Wed, 05 Apr 2023 10:44:56 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=btvB=74=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1pk19n-0003OA-2Z
+ for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 11:18:27 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20626.outbound.protection.outlook.com
+ [2a01:111:f400:7e88::626])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e55f4197-d39e-11ed-b464-930f4c7d94ae;
- Wed, 05 Apr 2023 12:44:53 +0200 (CEST)
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-510--SGXi9h-OWiGow7FELWTWw-1; Wed, 05 Apr 2023 06:44:49 -0400
-Received: by mail-ed1-f70.google.com with SMTP id
- n6-20020a5099c6000000b00502c2f26133so4460794edb.12
- for <xen-devel@lists.xen.org>; Wed, 05 Apr 2023 03:44:48 -0700 (PDT)
-Received: from redhat.com ([2.52.139.22]) by smtp.gmail.com with ESMTPSA id
- p25-20020a170906a01900b0093a7952411asm7207199ejy.48.2023.04.05.03.44.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Apr 2023 03:44:47 -0700 (PDT)
+ id 93a97213-d3a3-11ed-b464-930f4c7d94ae;
+ Wed, 05 Apr 2023 13:18:24 +0200 (CEST)
+Received: from DS7P222CA0022.NAMP222.PROD.OUTLOOK.COM (2603:10b6:8:2e::25) by
+ IA1PR12MB7734.namprd12.prod.outlook.com (2603:10b6:208:422::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.35; Wed, 5 Apr
+ 2023 11:18:20 +0000
+Received: from DM6NAM11FT061.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:8:2e:cafe::2f) by DS7P222CA0022.outlook.office365.com
+ (2603:10b6:8:2e::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.37 via Frontend
+ Transport; Wed, 5 Apr 2023 11:18:20 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT061.mail.protection.outlook.com (10.13.173.138) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6277.28 via Frontend Transport; Wed, 5 Apr 2023 11:18:20 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 5 Apr
+ 2023 06:18:19 -0500
+Received: from XIR-MICHALO-L1.xilinx.com (10.180.168.240) by
+ SATLEXMB03.amd.com (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34
+ via Frontend Transport; Wed, 5 Apr 2023 06:18:18 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,123 +61,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e55f4197-d39e-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1680691492;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kq6oZ7N2bYTf0eEXEKbV1aFmSrlbXHt85D5v+zP8YuE=;
-	b=PqPwEh74rny6Rf2DAPJlaQtViJqcvRRT5MlAv6EYUs/M+2iARPJsWMnUGEThKN3DAhKUfJ
-	R23xvhARXG6i94e5BILUVlFyxwnsHYlotpQBqhjb3+fSRS3IyXC/TvpnFbJadtn49rWkWx
-	9MJjd8qtxWtvLFydBiA4OLy4R4eQh7M=
-X-MC-Unique: -SGXi9h-OWiGow7FELWTWw-1
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680691488;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kq6oZ7N2bYTf0eEXEKbV1aFmSrlbXHt85D5v+zP8YuE=;
-        b=EI6O2ucWs6IkbSUkEr55u19Z1IQBb7BtSwHBqwFc6FX4EsnO6FauVB52EvZ/wQiHeN
-         qu9xV/+QFDvavxVMZhUNh9jQatUQZ2ks6eqMzpV1ZPjjMYmUtpXj3y4EPYvoTfUs1NFZ
-         XukgO14XtWwuhWiklziGDI/XcGcG1GiW2nHIPAUTY31TWr7U6K5rPkPtRicgoat7QUmv
-         ZcbJ2ZgRuTlvkGOCdacz4FQYGADpkjXJrMMfkODpWdzmwh7ypTtB4dwI8cBaXvI3Vjj/
-         jIKZgBR3q9/fOVnXyt/dYGBHfNx10Iwu1NILM9C/JLENJLOYOGo4eOYIo7TuQEf192Cq
-         cQSg==
-X-Gm-Message-State: AAQBX9cTMNSx6HQji+T1/+ebewmL/DoBcAOAR2Wrawo9Lu1lxEXbjx4o
-	umOMkrfxBJ9wh/vNbQCfT9Y1BwI50+SvrHBwNGwHooKZC3NRVmHdbJpRDs3fTOuTBBJZ/1zIiTa
-	RP83Ea7Txxy/irLqK5g==
-X-Received: by 2002:a17:906:d045:b0:931:624b:6804 with SMTP id bo5-20020a170906d04500b00931624b6804mr2345359ejb.33.1680691487916;
-        Wed, 05 Apr 2023 03:44:47 -0700 (PDT)
-X-Google-Smtp-Source: AKy350b5k+F7FQS0kEh/ahvkTDuRpd40DUgmdol+8mUYtq06ub6whVh6ZTdy0b/m/9U1TYG1Nw5Bew==
-X-Received: by 2002:a17:906:d045:b0:931:624b:6804 with SMTP id bo5-20020a170906d04500b00931624b6804mr2345345ejb.33.1680691487657;
-        Wed, 05 Apr 2023 03:44:47 -0700 (PDT)
-Date: Wed, 5 Apr 2023 06:44:42 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>, qemu-devel@nongnu.org,
-	virtio-dev@lists.oasis-open.org,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	stratos-dev@op-lists.linaro.org,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xen.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Sebastien Boeuf <sebastien.boeuf@intel.com>,
-	Liu Jiang <gerry@linux.alibaba.com>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [PATCH V3 0/2] qemu: vhost-user: Support Xen memory mapping
- quirks
-Message-ID: <20230405064417-mutt-send-email-mst@kernel.org>
-References: <cover.1678351495.git.viresh.kumar@linaro.org>
- <20230405080512.nvxiw4lv7hyuzqej@vireshk-i7>
- <87h6tulkae.fsf@linaro.org>
- <20230405060340-mutt-send-email-mst@kernel.org>
- <87cz4ilj4j.fsf@linaro.org>
+X-Inumbo-ID: 93a97213-d3a3-11ed-b464-930f4c7d94ae
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HHh3tRuCS0Lg5C3Tq6P6x0xOB0FnbYQVfh4OfOuKxKw3t3a+PTDKaebTimcA2ee2m4MqTeUVlbqQbg5cnhOjC0Bmu5VAzxucmSa841KW+S1wfRDXjvDVtYxUCcjPCcZRTh5SG7jhVI5RUuMjerVOJGqvUVn782ESYZKZ7wuaKmbCSFwjZ4mHfnD4e+hBHgHAVhNIyGAuHO6CmIQwk4cznwLUBNcBDN5cmEQFO+ie73yjrwkFezyx3K4kLkQ2qa5ZB0RYr/uMmhCV/toVY8p95UiyG2DxqSXGcF4dXZ7a1Qjl9x09/2LqJb58YaBrUzWsUuzwRy1cvjW/HbuYE6DMcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=u4oUaq7lN8GdxSqirWE6VLLbTs/fytDNa65dm3uA6/s=;
+ b=mug+DyJJAZSjAG0UIkT8KjUfmhoWC6M965ZyxpF/CHnPOoTSHVuuNcQCzTqrMzXiu31/qbUpqnngH5eSEw4UsPwGJo30bnnytVsoHZ3UlUhkMLuoJ4dMjEEM+4pUUlafB8t8PM1djhU970gHPSMdgsSwdVFk/S7C3jdk9Il3GqlpuXN2sZhwOho/Z5U/G67nmMEG3uPe56R1rE4UIh1leuwauPjcWioHmhFetyGT068OIaXOv78YP5m9FbjB87yQQty/QQrka+VPBT+I0Gmyj2Y/aBuALCcIUojIicGcdGeVge7HBTAq8j5vzy0FYWv1pb2W757Dk6Erh3H4CGE1TQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=u4oUaq7lN8GdxSqirWE6VLLbTs/fytDNa65dm3uA6/s=;
+ b=GGPjY6Sk8EY31upxf3pvXMKjvhmR5OWXEIsSh3IwDq9BwOXDEDLGF86X7BQh3y5CIUBjLlrlqt+TsC1EdMBtXvHkKfq7lHp8yBy2RtKO00CPZAqsiBlIrC+DqWV52YftIpby/bregZ9ExP9/gTPyBto3Tx+XuCFXJvEkMMdEaAc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 3/3] xen/arm: vpl011: Do not try to handle TX FIFO status when backend in Xen
+Date: Wed, 5 Apr 2023 13:17:50 +0200
+Message-ID: <20230405111750.12491-4-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230405111750.12491-1-michal.orzel@amd.com>
+References: <20230405111750.12491-1-michal.orzel@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <87cz4ilj4j.fsf@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT061:EE_|IA1PR12MB7734:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ddf0363-7b25-4ed1-c010-08db35c7765a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	7B7zit89wb63fCYp2LFg+8QgEUB4Nx2tYbry3sdtjGK7YV8f0oZfGcKsRh+tuQduXsx3bx4JdJwl+Zy0BgdWsA5sbFH4M3lkEMh24Z1TZ+SoV289UbyghlO5gzxn352weDtNTvaXaAZlN8kH0G/eulweLK4uNuMNNlwDqnkQhkdX5OIwo41rbbSn8Ljt1EsHJmf5RyKH47BzQ3GUrfnyjNmDsF3gf5q4seflzwxPyOi6dQRwGeoPPfW6MCpxMEQkv4/t0CxsQCM6Tj9ECkSvnx3La2Co0+AdGzYNtY10K/dAumfXeLz6qmmhEWAKNVmXLYyEK0UPp5hhUPWC8JY+4N2n+EXJ9X+HMebRy8TYAMFcnUpXE+P5WNYcugAQ+XUSrmzIfcvXwn5QYVu/DWWtq7g+Cm8RyARoARUvIZCAyMsVzdsF9FKnUb0vISBENWhFEzmehgKiyaqBwJokrjMln82CyhQu2HwikmXO9z22bOgNehpMOllzEdXkBn2eMwpkjTkxM9vlxwLD402KFk/sQIwnwHjp6DoRXaA+76W9hYNFqXFZf9SSSNyK28JuTDipwKGVwOFBupeamnwqd75X9I4J+Uyzxolsjhs/kYV+VkkjG0DBtPPRDuH9yS3e8BoXzH8icqDInjU0A0IPHarKY2JMNNVOvvb1AN5jSwkzt8pH1YsvwOCz49RH0Mxvca5NdGy4LIe8satRfLsyf/Y9OUSjr45yQ9izAVICNn6zqyE=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(376002)(136003)(346002)(39860400002)(396003)(451199021)(40470700004)(46966006)(36840700001)(2616005)(8936002)(186003)(44832011)(5660300002)(2906002)(26005)(81166007)(82740400003)(1076003)(356005)(36860700001)(54906003)(4326008)(8676002)(6916009)(41300700001)(86362001)(40460700003)(426003)(70586007)(336012)(70206006)(478600001)(316002)(40480700001)(82310400005)(36756003)(47076005)(83380400001)(6666004)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Apr 2023 11:18:20.2698
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ddf0363-7b25-4ed1-c010-08db35c7765a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM6NAM11FT061.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7734
 
-On Wed, Apr 05, 2023 at 11:24:43AM +0100, Alex Bennée wrote:
-> 
-> "Michael S. Tsirkin" <mst@redhat.com> writes:
-> 
-> > On Wed, Apr 05, 2023 at 11:00:34AM +0100, Alex Bennée wrote:
-> >> 
-> >> Viresh Kumar <viresh.kumar@linaro.org> writes:
-> >> 
-> >> > On 09-03-23, 14:20, Viresh Kumar wrote:
-> >> >> Hello,
-> >> >> 
-> >> >> This patchset tries to update the vhost-user protocol to make it support special
-> >> >> memory mapping required in case of Xen hypervisor.
-> >> >> 
-> >> >> The first patch is mostly cleanup and second one introduces a new xen specific
-> >> >> feature.
-> >> >
-> >> > Can we apply this now ? I have developed code for rust-vmm crates
-> >> > based on this and we need to get this merged/finalized first before
-> >> > merging those changes.
-> >> 
-> >> 
-> >> I've queued into my virtio/vhost-user-device series so I'll get merged
-> >> with that series unless mst wants to take it now.
-> >
-> > Well the patches are tagged and I was going to take these after the release.
-> > Probably easier not to work on this in two trees.
-> > Still if there's something in your tree being blocked
-> > by these patches then
-> > Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> > Let me know.
-> 
-> The virtio/vhost-user-device tree work is orthogonal to this vhost-user
-> enhancement although all the work is related to our latest VirtIO
-> project inside Linaro, Orko:
-> https://linaro.atlassian.net/wiki/spaces/ORKO/overview
-> 
-> So if you are happy please take these patches now for when the tree
-> re-opens.
+From vpl011_rx_char_xen(), we call vpl011_data_avail() that handles both
+RX and TX state. Because we are passing 0 as out_fifo_level and
+SBSA_UART_FIFO_SIZE as out_size, we end up calling a function
+vpl011_update_tx_fifo_status() which performs TXI bit handling
+depending on the FIFO trigger level. This does not make sense when backend
+is in Xen, as we maintain a single TX state where data can always be
+written and as such there is no TX FIFO handling. Furthermore, this
+function assumes that the backend is in domain by making use of struct
+xencons_interface unconditionally. Fix it by calling this function only
+when backend is in domain. Also add an assert for sanity.
 
-Yes, I tagged them for when the tree reopens.
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+---
+ xen/arch/arm/vpl011.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-> >
-> >
-> >> >
-> >> > Thanks.
-> >> 
-> >> 
-> >> -- 
-> >> Alex Bennée
-> >> Virtualisation Tech Lead @ Linaro
-> 
-> 
-> -- 
-> Alex Bennée
-> Virtualisation Tech Lead @ Linaro
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index ff06deeb645c..7856b4b5f5a3 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -261,6 +261,9 @@ static void vpl011_update_tx_fifo_status(struct vpl011 *vpl011,
+     struct xencons_interface *intf = vpl011->backend.dom.ring_buf;
+     unsigned int fifo_threshold = sizeof(intf->out) - SBSA_UART_FIFO_LEVEL;
+ 
++    /* No TX FIFO handling when backend is in Xen */
++    ASSERT(vpl011->backend_in_domain);
++
+     BUILD_BUG_ON(sizeof(intf->out) < SBSA_UART_FIFO_SIZE);
+ 
+     /*
+@@ -547,7 +550,13 @@ static void vpl011_data_avail(struct domain *d,
+          */
+         vpl011->uartfr &= ~BUSY;
+ 
+-        vpl011_update_tx_fifo_status(vpl011, out_fifo_level);
++        /*
++         * When backend is in Xen, we are always ready for new data to be
++         * written (i.e. no TX FIFO handling), therefore we do not want
++         * to change the TX FIFO status in such case.
++         */
++        if ( vpl011->backend_in_domain )
++            vpl011_update_tx_fifo_status(vpl011, out_fifo_level);
+     }
+ 
+     vpl011_update_interrupt_status(d);
+-- 
+2.25.1
 
 
