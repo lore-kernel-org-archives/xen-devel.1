@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56E16C77B60
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 10:29:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518421.804972 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 554E9C7619A
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 10:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.518431.805008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0Ny-0000Fo-I2; Wed, 05 Apr 2023 10:29:02 +0000
+	id 1pk0O4-0001Ny-4u; Wed, 05 Apr 2023 10:29:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518421.804972; Wed, 05 Apr 2023 10:29:02 +0000
+Received: by outflank-mailman (output) from mailman id 518431.805008; Wed, 05 Apr 2023 10:29:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0Ny-0000EP-CV; Wed, 05 Apr 2023 10:29:02 +0000
-Received: by outflank-mailman (input) for mailman id 518421;
- Wed, 05 Apr 2023 10:29:00 +0000
+	id 1pk0O3-0001Ng-VT; Wed, 05 Apr 2023 10:29:07 +0000
+Received: by outflank-mailman (input) for mailman id 518431;
+ Wed, 05 Apr 2023 10:29:06 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gFET=74=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1pk0FE-0002Na-Hl
- for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 10:20:00 +0000
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [2a00:1450:4864:20::42b])
+ id 1pk0Ex-0002Na-A1
+ for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 10:19:43 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6af48c46-d39b-11ed-b464-930f4c7d94ae;
- Wed, 05 Apr 2023 12:19:58 +0200 (CEST)
-Received: by mail-wr1-x42b.google.com with SMTP id e18so35637518wra.9
- for <xen-devel@lists.xenproject.org>; Wed, 05 Apr 2023 03:19:58 -0700 (PDT)
+ id 60c82f71-d39b-11ed-b464-930f4c7d94ae;
+ Wed, 05 Apr 2023 12:19:41 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ l10-20020a05600c1d0a00b003f04bd3691eso6766053wms.5
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Apr 2023 03:19:41 -0700 (PDT)
 Received: from localhost.localdomain
  (4ab54-h01-176-184-52-81.dsl.sta.abo.bbox.fr. [176.184.52.81])
  by smtp.gmail.com with ESMTPSA id
- e11-20020a5d4e8b000000b002cde626cd96sm14624762wru.65.2023.04.05.03.19.54
+ n7-20020a05600c4f8700b003ee9c8cc631sm1780821wmq.23.2023.04.05.03.19.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 05 Apr 2023 03:19:58 -0700 (PDT)
+ Wed, 05 Apr 2023 03:19:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6af48c46-d39b-11ed-b464-930f4c7d94ae
+X-Inumbo-ID: 60c82f71-d39b-11ed-b464-930f4c7d94ae
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1680689998;
+        d=linaro.org; s=google; t=1680689981;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Byk5LNB9PsG7qsnBIJRRo9JOVccGApJy+cx27j4c9fU=;
-        b=zy6RoKZl3HFi+Q0vtR3UwohHMiMsWOn2/ul3EQVzNnehPXDwziBD8kN5oz8YFLSGXj
-         z/JbV/w7gRjJU5xeR6Z9EK4Q7ekBR7AroyEWwqox013ocsFMmdaA4ZWf2wIKs/m2o1XP
-         +/We8oxS7dteLdYGU8FLDvQO4VX6Suu2gr/VvXj3kZJ2FFAYoGMXBduf7o4qkVPTQNmu
-         0HhVtRaZCSFq9x8ZTK0MirJoKqdYOdV5BlEMLWbn5vWNkxftascntbFIYwA0uUlQwF/C
-         2xBShpUeR7qjrBXuhSVb8YEJTUIHLJJZrHR3rxKsIkhUvcQpcNTzRCtk+oyEz9o0QBbV
-         o/PA==
+        bh=S/MtLkEvv/mpFG8xdDJ5UGIDl6QuLPsc27INO07zRJs=;
+        b=j3hNNVtnFSkeMmMMmVP7MwKIlYYAEqbhDpfKTMInG3a+9K0+YXceoJPZJ4jZAHCBFI
+         VPa6eMgi/+9TXCgyr86xjuKK9t4zNhPlw7CAX0fvenTdKFSa3t+eBYp0hgH6m98d3/lR
+         jnJJMwWe2cN5PCDDRMn3ZiOfvLvOx0KgfKGPNgpITrxaoDPAOFx1uqGJJWFNIk4jpdv7
+         NGGSO2xZQkFpOwy7mhzr21QREPPwjCH42qXvKwpRx5Hf1PwrV8q3x4WiQL9Zq/cJZpvA
+         +TtnCQgltM297hRRmytaXGZhpTBrxwBYRmMmPEjntzUo7iHBOLTSWiIxfEFT8knJMWNo
+         rgog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680689998;
+        d=1e100.net; s=20210112; t=1680689981;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Byk5LNB9PsG7qsnBIJRRo9JOVccGApJy+cx27j4c9fU=;
-        b=mf2mSuq7lG7kdyKvB3AKbk066NpQugEV7T8gte70Y9jln6/UH+lbZuitS3iykbIXz8
-         /SH809xBOkLvEu4RnfoqLyxEsfxpEpbJILWmh7XLCglk3zOO2kaVcV4ToPjdG35XXf2g
-         YAb8OqvckT8C60RdDK3AwnP4CR6SLw4P4wem2jdnaGzDjA/F1eplyRw2wNCjXIERv0Wb
-         FMjjn3BChuB0jPcySVo1PRb9GxiBsD5ZIbml+4f5MgqIKHdlbw3QOpt4/FS6m6BE9HB/
-         5laUlPslxOlybzK1TPZ1+yolGw9SVlJcmjPxWl9hSkaFP6+sWT9A7t+GYTSFb/guLowl
-         N4VQ==
-X-Gm-Message-State: AAQBX9fSc+Ujt51dv1LNZU/FY7M5KSt1+rNFtWK5wpFJOcncDFb0NQPJ
-	r4L6LmKXb7aaI4sLHiYvcNSuDA==
-X-Google-Smtp-Source: AKy350ZkCRxUlRNTXX0kIqDAWFewpV/6tQ9nx8c+rFpbVyobQsMD1OzgOrzwPflhmrDI+QR50xCA9g==
-X-Received: by 2002:a5d:42c1:0:b0:2cf:eeae:88c3 with SMTP id t1-20020a5d42c1000000b002cfeeae88c3mr3555848wrr.32.1680689998344;
-        Wed, 05 Apr 2023 03:19:58 -0700 (PDT)
+        bh=S/MtLkEvv/mpFG8xdDJ5UGIDl6QuLPsc27INO07zRJs=;
+        b=ENxCQpKaZ/vJYYVAI/pNkWj5blaiw0Y3P01s+6CN3vcTM/wnO5KzZqAqqOxAsyFpie
+         QfnEX4I1aWEWKrME2hatZaUin5d2tLTPrXy2j53kEEXCM0U8G5wLqJOODKrPQ29r0ZPb
+         dqdceKwV/3insS9Sz3Gkw7sg2oLuBMdT4SbEMa9QRXXJF1Q0n1kr6SeHc6rANMz4ZWQA
+         Zub2EHnAYv/TpLWsAPUVM2rFO+mBeZlDci4tSaQOKALtsLWi09g7qnC80CfNfopgY+bx
+         KjW7byf3VkBTyx/FtdgyvGefna0HHurow6rJEbnGHgyTa5KGVHp7JQ6/WaI7VUxsQ7xd
+         xMzA==
+X-Gm-Message-State: AAQBX9ee/CrNb48v9z13d39+WMgzcsZNjSDBQDTBlr7XhRNqq1gqFiLe
+	foFpC3UFDFZ8uIL3qxhgYhTy9A==
+X-Google-Smtp-Source: AKy350ZceuduIKjGNIdlkcOLlYLJL5KbbisXjbggRXGoX4b3J2s4uJbs/AyE+v9R+USsxTJSDNjt2g==
+X-Received: by 2002:a1c:f707:0:b0:3ee:9909:acc8 with SMTP id v7-20020a1cf707000000b003ee9909acc8mr4174177wmh.32.1680689981231;
+        Wed, 05 Apr 2023 03:19:41 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -84,17 +85,10 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Cameron Esfahani <dirty@apple.com>,
-	Roman Bolshakov <r.bolshakov@yadro.com>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Yanan Wang <wangyanan55@huawei.com>,
-	Alexander Graf <agraf@csgraf.de>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	qemu-arm@nongnu.org
-Subject: [PATCH 14/14] accel: Rename HVF struct hvf_vcpu_state -> struct AccelvCPUState
-Date: Wed,  5 Apr 2023 12:18:11 +0200
-Message-Id: <20230405101811.76663-15-philmd@linaro.org>
+	Sunil Muthuswamy <sunilmut@microsoft.com>
+Subject: [PATCH 12/14] accel: Rename WHPX struct whpx_vcpu -> struct AccelvCPUState
+Date: Wed,  5 Apr 2023 12:18:09 +0200
+Message-Id: <20230405101811.76663-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230405101811.76663-1-philmd@linaro.org>
 References: <20230405101811.76663-1-philmd@linaro.org>
@@ -103,358 +97,146 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 We want all accelerators to share the same opaque pointer in
-CPUState.
-
-Rename the 'hvf_vcpu_state' structure as 'AccelvCPUState'.
-
-Use the generic 'accel' field of CPUState instead of 'hvf'.
-
-Replace g_malloc0() by g_new0() for readability.
+CPUState. Rename WHPX 'whpx_vcpu' as 'AccelvCPUState'.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/core/cpu.h     |  3 --
- include/sysemu/hvf_int.h  |  2 +-
- accel/hvf/hvf-accel-ops.c | 16 ++++-----
- target/arm/hvf/hvf.c      | 70 +++++++++++++++++++--------------------
- 4 files changed, 44 insertions(+), 47 deletions(-)
+ target/i386/whpx/whpx-all.c | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 8d27861ed5..1dc5efe650 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -236,7 +236,6 @@ typedef struct SavedIOTLB {
- struct KVMState;
- struct kvm_run;
- struct AccelvCPUState;
--struct hvf_vcpu_state;
+diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
+index 70eadb7f05..2372c4227a 100644
+--- a/target/i386/whpx/whpx-all.c
++++ b/target/i386/whpx/whpx-all.c
+@@ -229,7 +229,7 @@ typedef enum WhpxStepMode {
+     WHPX_STEP_EXCLUSIVE,
+ } WhpxStepMode;
  
- /* work queue */
- 
-@@ -442,8 +441,6 @@ struct CPUState {
-     /* Used for user-only emulation of prctl(PR_SET_UNALIGN). */
-     bool prctl_unalign_sigbus;
- 
--    struct hvf_vcpu_state *hvf;
--
-     /* track IOMMUs whose translations we've cached in the TCG TLB */
-     GArray *iommu_notifiers;
- };
-diff --git a/include/sysemu/hvf_int.h b/include/sysemu/hvf_int.h
-index 6545f7cd61..96ef51f4df 100644
---- a/include/sysemu/hvf_int.h
-+++ b/include/sysemu/hvf_int.h
-@@ -48,7 +48,7 @@ struct HVFState {
- };
- extern HVFState *hvf_state;
- 
--struct hvf_vcpu_state {
+-struct whpx_vcpu {
 +struct AccelvCPUState {
-     uint64_t fd;
-     void *exit;
-     bool vtimer_masked;
-diff --git a/accel/hvf/hvf-accel-ops.c b/accel/hvf/hvf-accel-ops.c
-index 24913ca9c4..06ca1d59a4 100644
---- a/accel/hvf/hvf-accel-ops.c
-+++ b/accel/hvf/hvf-accel-ops.c
-@@ -363,19 +363,19 @@ type_init(hvf_type_init);
+     WHV_EMULATOR_HANDLE emulator;
+     bool window_registered;
+     bool interruptable;
+@@ -260,9 +260,9 @@ static bool whpx_has_xsave(void)
+  * VP support
+  */
  
- static void hvf_vcpu_destroy(CPUState *cpu)
+-static struct whpx_vcpu *get_whpx_vcpu(CPUState *cpu)
++static struct AccelvCPUState *get_whpx_vcpu(CPUState *cpu)
  {
--    hv_return_t ret = hv_vcpu_destroy(cpu->hvf->fd);
-+    hv_return_t ret = hv_vcpu_destroy(cpu->accel->fd);
-     assert_hvf_ok(ret);
- 
-     hvf_arch_vcpu_destroy(cpu);
--    g_free(cpu->hvf);
--    cpu->hvf = NULL;
-+    g_free(cpu->accel);
-+    cpu->accel = NULL;
+-    return (struct whpx_vcpu *)cpu->accel;
++    return (struct AccelvCPUState *)cpu->accel;
  }
  
- static int hvf_init_vcpu(CPUState *cpu)
+ static WHV_X64_SEGMENT_REGISTER whpx_seg_q2h(const SegmentCache *qs, int v86,
+@@ -390,7 +390,7 @@ static uint64_t whpx_cr8_to_apic_tpr(uint64_t cr8)
+ static void whpx_set_registers(CPUState *cpu, int level)
  {
-     int r;
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct whpx_register_set vcxt;
+@@ -609,7 +609,7 @@ static void whpx_get_xcrs(CPUState *cpu)
+ static void whpx_get_registers(CPUState *cpu)
+ {
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct whpx_register_set vcxt;
+@@ -892,7 +892,7 @@ static const WHV_EMULATOR_CALLBACKS whpx_emu_callbacks = {
+ static int whpx_handle_mmio(CPUState *cpu, WHV_MEMORY_ACCESS_CONTEXT *ctx)
+ {
+     HRESULT hr;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     WHV_EMULATOR_STATUS emu_status;
  
--    cpu->hvf = g_malloc0(sizeof(*cpu->hvf));
-+    cpu->accel = g_new0(struct AccelvCPUState, 1);
+     hr = whp_dispatch.WHvEmulatorTryMmioEmulation(
+@@ -917,7 +917,7 @@ static int whpx_handle_portio(CPUState *cpu,
+                               WHV_X64_IO_PORT_ACCESS_CONTEXT *ctx)
+ {
+     HRESULT hr;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     WHV_EMULATOR_STATUS emu_status;
  
-     /* init cpu signals */
-     struct sigaction sigact;
-@@ -384,13 +384,13 @@ static int hvf_init_vcpu(CPUState *cpu)
-     sigact.sa_handler = dummy_signal;
-     sigaction(SIG_IPI, &sigact, NULL);
+     hr = whp_dispatch.WHvEmulatorTryIoEmulation(
+@@ -1417,7 +1417,7 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
+          * of QEMU, nor this port by calling WHvSetVirtualProcessorRegisters().
+          * This is the most common case.
+          */
+-        struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++        struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+         return vcpu->exit_ctx.VpContext.Rip;
+     } else {
+         /*
+@@ -1468,7 +1468,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
+ {
+     HRESULT hr;
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     int irq;
+@@ -1590,7 +1590,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
  
--    pthread_sigmask(SIG_BLOCK, NULL, &cpu->hvf->unblock_ipi_mask);
--    sigdelset(&cpu->hvf->unblock_ipi_mask, SIG_IPI);
-+    pthread_sigmask(SIG_BLOCK, NULL, &cpu->accel->unblock_ipi_mask);
-+    sigdelset(&cpu->accel->unblock_ipi_mask, SIG_IPI);
+ static void whpx_vcpu_post_run(CPUState *cpu)
+ {
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
  
- #ifdef __aarch64__
--    r = hv_vcpu_create(&cpu->hvf->fd, (hv_vcpu_exit_t **)&cpu->hvf->exit, NULL);
-+    r = hv_vcpu_create(&cpu->accel->fd, (hv_vcpu_exit_t **)&cpu->accel->exit, NULL);
- #else
--    r = hv_vcpu_create((hv_vcpuid_t *)&cpu->hvf->fd, HV_VCPU_DEFAULT);
-+    r = hv_vcpu_create((hv_vcpuid_t *)&cpu->accel->fd, HV_VCPU_DEFAULT);
- #endif
-     cpu->vcpu_dirty = 1;
-     assert_hvf_ok(r);
-diff --git a/target/arm/hvf/hvf.c b/target/arm/hvf/hvf.c
-index ad65603445..b85648b61c 100644
---- a/target/arm/hvf/hvf.c
-+++ b/target/arm/hvf/hvf.c
-@@ -366,29 +366,29 @@ int hvf_get_registers(CPUState *cpu)
-     int i;
+@@ -1617,7 +1617,7 @@ static void whpx_vcpu_process_async_events(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
  
-     for (i = 0; i < ARRAY_SIZE(hvf_reg_match); i++) {
--        ret = hv_vcpu_get_reg(cpu->hvf->fd, hvf_reg_match[i].reg, &val);
-+        ret = hv_vcpu_get_reg(cpu->accel->fd, hvf_reg_match[i].reg, &val);
-         *(uint64_t *)((void *)env + hvf_reg_match[i].offset) = val;
-         assert_hvf_ok(ret);
-     }
- 
-     for (i = 0; i < ARRAY_SIZE(hvf_fpreg_match); i++) {
--        ret = hv_vcpu_get_simd_fp_reg(cpu->hvf->fd, hvf_fpreg_match[i].reg,
-+        ret = hv_vcpu_get_simd_fp_reg(cpu->accel->fd, hvf_fpreg_match[i].reg,
-                                       &fpval);
-         memcpy((void *)env + hvf_fpreg_match[i].offset, &fpval, sizeof(fpval));
-         assert_hvf_ok(ret);
-     }
- 
-     val = 0;
--    ret = hv_vcpu_get_reg(cpu->hvf->fd, HV_REG_FPCR, &val);
-+    ret = hv_vcpu_get_reg(cpu->accel->fd, HV_REG_FPCR, &val);
-     assert_hvf_ok(ret);
-     vfp_set_fpcr(env, val);
- 
-     val = 0;
--    ret = hv_vcpu_get_reg(cpu->hvf->fd, HV_REG_FPSR, &val);
-+    ret = hv_vcpu_get_reg(cpu->accel->fd, HV_REG_FPSR, &val);
-     assert_hvf_ok(ret);
-     vfp_set_fpsr(env, val);
- 
--    ret = hv_vcpu_get_reg(cpu->hvf->fd, HV_REG_CPSR, &val);
-+    ret = hv_vcpu_get_reg(cpu->accel->fd, HV_REG_CPSR, &val);
-     assert_hvf_ok(ret);
-     pstate_write(env, val);
- 
-@@ -397,7 +397,7 @@ int hvf_get_registers(CPUState *cpu)
-             continue;
+     if ((cpu->interrupt_request & CPU_INTERRUPT_INIT) &&
+         !(env->hflags & HF_SMM_MASK)) {
+@@ -1656,7 +1656,7 @@ static int whpx_vcpu_run(CPUState *cpu)
+ {
+     HRESULT hr;
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
+     struct whpx_breakpoint *stepped_over_bp = NULL;
+     WhpxStepMode exclusive_step_mode = WHPX_STEP_NONE;
+     int ret;
+@@ -2154,7 +2154,7 @@ int whpx_init_vcpu(CPUState *cpu)
+ {
+     HRESULT hr;
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = NULL;
++    struct AccelvCPUState *vcpu = NULL;
+     Error *local_error = NULL;
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+@@ -2177,7 +2177,7 @@ int whpx_init_vcpu(CPUState *cpu)
          }
- 
--        ret = hv_vcpu_get_sys_reg(cpu->hvf->fd, hvf_sreg_match[i].reg, &val);
-+        ret = hv_vcpu_get_sys_reg(cpu->accel->fd, hvf_sreg_match[i].reg, &val);
-         assert_hvf_ok(ret);
- 
-         arm_cpu->cpreg_values[hvf_sreg_match[i].cp_idx] = val;
-@@ -420,24 +420,24 @@ int hvf_put_registers(CPUState *cpu)
- 
-     for (i = 0; i < ARRAY_SIZE(hvf_reg_match); i++) {
-         val = *(uint64_t *)((void *)env + hvf_reg_match[i].offset);
--        ret = hv_vcpu_set_reg(cpu->hvf->fd, hvf_reg_match[i].reg, val);
-+        ret = hv_vcpu_set_reg(cpu->accel->fd, hvf_reg_match[i].reg, val);
-         assert_hvf_ok(ret);
      }
  
-     for (i = 0; i < ARRAY_SIZE(hvf_fpreg_match); i++) {
-         memcpy(&fpval, (void *)env + hvf_fpreg_match[i].offset, sizeof(fpval));
--        ret = hv_vcpu_set_simd_fp_reg(cpu->hvf->fd, hvf_fpreg_match[i].reg,
-+        ret = hv_vcpu_set_simd_fp_reg(cpu->accel->fd, hvf_fpreg_match[i].reg,
-                                       fpval);
-         assert_hvf_ok(ret);
-     }
+-    vcpu = g_new0(struct whpx_vcpu, 1);
++    vcpu = g_new0(struct AccelvCPUState, 1);
  
--    ret = hv_vcpu_set_reg(cpu->hvf->fd, HV_REG_FPCR, vfp_get_fpcr(env));
-+    ret = hv_vcpu_set_reg(cpu->accel->fd, HV_REG_FPCR, vfp_get_fpcr(env));
-     assert_hvf_ok(ret);
- 
--    ret = hv_vcpu_set_reg(cpu->hvf->fd, HV_REG_FPSR, vfp_get_fpsr(env));
-+    ret = hv_vcpu_set_reg(cpu->accel->fd, HV_REG_FPSR, vfp_get_fpsr(env));
-     assert_hvf_ok(ret);
- 
--    ret = hv_vcpu_set_reg(cpu->hvf->fd, HV_REG_CPSR, pstate_read(env));
-+    ret = hv_vcpu_set_reg(cpu->accel->fd, HV_REG_CPSR, pstate_read(env));
-     assert_hvf_ok(ret);
- 
-     aarch64_save_sp(env, arm_current_el(env));
-@@ -449,11 +449,11 @@ int hvf_put_registers(CPUState *cpu)
-         }
- 
-         val = arm_cpu->cpreg_values[hvf_sreg_match[i].cp_idx];
--        ret = hv_vcpu_set_sys_reg(cpu->hvf->fd, hvf_sreg_match[i].reg, val);
-+        ret = hv_vcpu_set_sys_reg(cpu->accel->fd, hvf_sreg_match[i].reg, val);
-         assert_hvf_ok(ret);
-     }
- 
--    ret = hv_vcpu_set_vtimer_offset(cpu->hvf->fd, hvf_state->vtimer_offset);
-+    ret = hv_vcpu_set_vtimer_offset(cpu->accel->fd, hvf_state->vtimer_offset);
-     assert_hvf_ok(ret);
- 
-     return 0;
-@@ -474,7 +474,7 @@ static void hvf_set_reg(CPUState *cpu, int rt, uint64_t val)
-     flush_cpu_state(cpu);
- 
-     if (rt < 31) {
--        r = hv_vcpu_set_reg(cpu->hvf->fd, HV_REG_X0 + rt, val);
-+        r = hv_vcpu_set_reg(cpu->accel->fd, HV_REG_X0 + rt, val);
-         assert_hvf_ok(r);
-     }
- }
-@@ -487,7 +487,7 @@ static uint64_t hvf_get_reg(CPUState *cpu, int rt)
-     flush_cpu_state(cpu);
- 
-     if (rt < 31) {
--        r = hv_vcpu_get_reg(cpu->hvf->fd, HV_REG_X0 + rt, &val);
-+        r = hv_vcpu_get_reg(cpu->accel->fd, HV_REG_X0 + rt, &val);
-         assert_hvf_ok(r);
-     }
- 
-@@ -629,22 +629,22 @@ int hvf_arch_init_vcpu(CPUState *cpu)
-     assert(write_cpustate_to_list(arm_cpu, false));
- 
-     /* Set CP_NO_RAW system registers on init */
--    ret = hv_vcpu_set_sys_reg(cpu->hvf->fd, HV_SYS_REG_MIDR_EL1,
-+    ret = hv_vcpu_set_sys_reg(cpu->accel->fd, HV_SYS_REG_MIDR_EL1,
-                               arm_cpu->midr);
-     assert_hvf_ok(ret);
- 
--    ret = hv_vcpu_set_sys_reg(cpu->hvf->fd, HV_SYS_REG_MPIDR_EL1,
-+    ret = hv_vcpu_set_sys_reg(cpu->accel->fd, HV_SYS_REG_MPIDR_EL1,
-                               arm_cpu->mp_affinity);
-     assert_hvf_ok(ret);
- 
--    ret = hv_vcpu_get_sys_reg(cpu->hvf->fd, HV_SYS_REG_ID_AA64PFR0_EL1, &pfr);
-+    ret = hv_vcpu_get_sys_reg(cpu->accel->fd, HV_SYS_REG_ID_AA64PFR0_EL1, &pfr);
-     assert_hvf_ok(ret);
-     pfr |= env->gicv3state ? (1 << 24) : 0;
--    ret = hv_vcpu_set_sys_reg(cpu->hvf->fd, HV_SYS_REG_ID_AA64PFR0_EL1, pfr);
-+    ret = hv_vcpu_set_sys_reg(cpu->accel->fd, HV_SYS_REG_ID_AA64PFR0_EL1, pfr);
-     assert_hvf_ok(ret);
- 
-     /* We're limited to underlying hardware caps, override internal versions */
--    ret = hv_vcpu_get_sys_reg(cpu->hvf->fd, HV_SYS_REG_ID_AA64MMFR0_EL1,
-+    ret = hv_vcpu_get_sys_reg(cpu->accel->fd, HV_SYS_REG_ID_AA64MMFR0_EL1,
-                               &arm_cpu->isar.id_aa64mmfr0);
-     assert_hvf_ok(ret);
- 
-@@ -654,7 +654,7 @@ int hvf_arch_init_vcpu(CPUState *cpu)
- void hvf_kick_vcpu_thread(CPUState *cpu)
+     if (!vcpu) {
+         error_report("WHPX: Failed to allocte VCPU context.");
+@@ -2296,7 +2296,7 @@ int whpx_vcpu_exec(CPUState *cpu)
+ void whpx_destroy_vcpu(CPUState *cpu)
  {
-     cpus_kick_thread(cpu);
--    hv_vcpus_exit(&cpu->hvf->fd, 1);
-+    hv_vcpus_exit(&cpu->accel->fd, 1);
- }
+     struct whpx_state *whpx = &whpx_global;
+-    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
++    struct AccelvCPUState *vcpu = get_whpx_vcpu(cpu);
  
- static void hvf_raise_exception(CPUState *cpu, uint32_t excp,
-@@ -1191,13 +1191,13 @@ static int hvf_inject_interrupts(CPUState *cpu)
- {
-     if (cpu->interrupt_request & CPU_INTERRUPT_FIQ) {
-         trace_hvf_inject_fiq();
--        hv_vcpu_set_pending_interrupt(cpu->hvf->fd, HV_INTERRUPT_TYPE_FIQ,
-+        hv_vcpu_set_pending_interrupt(cpu->accel->fd, HV_INTERRUPT_TYPE_FIQ,
-                                       true);
-     }
- 
-     if (cpu->interrupt_request & CPU_INTERRUPT_HARD) {
-         trace_hvf_inject_irq();
--        hv_vcpu_set_pending_interrupt(cpu->hvf->fd, HV_INTERRUPT_TYPE_IRQ,
-+        hv_vcpu_set_pending_interrupt(cpu->accel->fd, HV_INTERRUPT_TYPE_IRQ,
-                                       true);
-     }
- 
-@@ -1231,7 +1231,7 @@ static void hvf_wait_for_ipi(CPUState *cpu, struct timespec *ts)
-      */
-     qatomic_mb_set(&cpu->thread_kicked, false);
-     qemu_mutex_unlock_iothread();
--    pselect(0, 0, 0, 0, ts, &cpu->hvf->unblock_ipi_mask);
-+    pselect(0, 0, 0, 0, ts, &cpu->accel->unblock_ipi_mask);
-     qemu_mutex_lock_iothread();
- }
- 
-@@ -1252,7 +1252,7 @@ static void hvf_wfi(CPUState *cpu)
-         return;
-     }
- 
--    r = hv_vcpu_get_sys_reg(cpu->hvf->fd, HV_SYS_REG_CNTV_CTL_EL0, &ctl);
-+    r = hv_vcpu_get_sys_reg(cpu->accel->fd, HV_SYS_REG_CNTV_CTL_EL0, &ctl);
-     assert_hvf_ok(r);
- 
-     if (!(ctl & 1) || (ctl & 2)) {
-@@ -1261,7 +1261,7 @@ static void hvf_wfi(CPUState *cpu)
-         return;
-     }
- 
--    r = hv_vcpu_get_sys_reg(cpu->hvf->fd, HV_SYS_REG_CNTV_CVAL_EL0, &cval);
-+    r = hv_vcpu_get_sys_reg(cpu->accel->fd, HV_SYS_REG_CNTV_CVAL_EL0, &cval);
-     assert_hvf_ok(r);
- 
-     ticks_to_sleep = cval - hvf_vtimer_val();
-@@ -1294,12 +1294,12 @@ static void hvf_sync_vtimer(CPUState *cpu)
-     uint64_t ctl;
-     bool irq_state;
- 
--    if (!cpu->hvf->vtimer_masked) {
-+    if (!cpu->accel->vtimer_masked) {
-         /* We will get notified on vtimer changes by hvf, nothing to do */
-         return;
-     }
- 
--    r = hv_vcpu_get_sys_reg(cpu->hvf->fd, HV_SYS_REG_CNTV_CTL_EL0, &ctl);
-+    r = hv_vcpu_get_sys_reg(cpu->accel->fd, HV_SYS_REG_CNTV_CTL_EL0, &ctl);
-     assert_hvf_ok(r);
- 
-     irq_state = (ctl & (TMR_CTL_ENABLE | TMR_CTL_IMASK | TMR_CTL_ISTATUS)) ==
-@@ -1308,8 +1308,8 @@ static void hvf_sync_vtimer(CPUState *cpu)
- 
-     if (!irq_state) {
-         /* Timer no longer asserting, we can unmask it */
--        hv_vcpu_set_vtimer_mask(cpu->hvf->fd, false);
--        cpu->hvf->vtimer_masked = false;
-+        hv_vcpu_set_vtimer_mask(cpu->accel->fd, false);
-+        cpu->accel->vtimer_masked = false;
-     }
- }
- 
-@@ -1317,7 +1317,7 @@ int hvf_vcpu_exec(CPUState *cpu)
- {
-     ARMCPU *arm_cpu = ARM_CPU(cpu);
-     CPUARMState *env = &arm_cpu->env;
--    hv_vcpu_exit_t *hvf_exit = cpu->hvf->exit;
-+    hv_vcpu_exit_t *hvf_exit = cpu->accel->exit;
-     hv_return_t r;
-     bool advance_pc = false;
- 
-@@ -1332,7 +1332,7 @@ int hvf_vcpu_exec(CPUState *cpu)
-     flush_cpu_state(cpu);
- 
-     qemu_mutex_unlock_iothread();
--    assert_hvf_ok(hv_vcpu_run(cpu->hvf->fd));
-+    assert_hvf_ok(hv_vcpu_run(cpu->accel->fd));
- 
-     /* handle VMEXIT */
-     uint64_t exit_reason = hvf_exit->reason;
-@@ -1346,7 +1346,7 @@ int hvf_vcpu_exec(CPUState *cpu)
-         break;
-     case HV_EXIT_REASON_VTIMER_ACTIVATED:
-         qemu_set_irq(arm_cpu->gt_timer_outputs[GTIMER_VIRT], 1);
--        cpu->hvf->vtimer_masked = true;
-+        cpu->accel->vtimer_masked = true;
-         return 0;
-     case HV_EXIT_REASON_CANCELED:
-         /* we got kicked, no exit to process */
-@@ -1457,10 +1457,10 @@ int hvf_vcpu_exec(CPUState *cpu)
- 
-         flush_cpu_state(cpu);
- 
--        r = hv_vcpu_get_reg(cpu->hvf->fd, HV_REG_PC, &pc);
-+        r = hv_vcpu_get_reg(cpu->accel->fd, HV_REG_PC, &pc);
-         assert_hvf_ok(r);
-         pc += 4;
--        r = hv_vcpu_set_reg(cpu->hvf->fd, HV_REG_PC, pc);
-+        r = hv_vcpu_set_reg(cpu->accel->fd, HV_REG_PC, pc);
-         assert_hvf_ok(r);
-     }
- 
+     whp_dispatch.WHvDeleteVirtualProcessor(whpx->partition, cpu->cpu_index);
+     whp_dispatch.WHvEmulatorDestroyEmulator(vcpu->emulator);
 -- 
 2.38.1
 
