@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 326B7C76188
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 10:29:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518423.804979 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CD0C761A6
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Apr 2023 10:29:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.518425.804987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0Nz-0000NT-16; Wed, 05 Apr 2023 10:29:03 +0000
+	id 1pk0Nz-0000YS-Mz; Wed, 05 Apr 2023 10:29:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518423.804979; Wed, 05 Apr 2023 10:29:02 +0000
+Received: by outflank-mailman (output) from mailman id 518425.804987; Wed, 05 Apr 2023 10:29:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pk0Ny-0000L1-Qg; Wed, 05 Apr 2023 10:29:02 +0000
-Received: by outflank-mailman (input) for mailman id 518423;
- Wed, 05 Apr 2023 10:29:00 +0000
+	id 1pk0Nz-0000XE-EY; Wed, 05 Apr 2023 10:29:03 +0000
+Received: by outflank-mailman (input) for mailman id 518425;
+ Wed, 05 Apr 2023 10:29:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gFET=74=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1pk0ES-00024X-SF
- for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 10:19:12 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
+ id 1pk0Ep-00024X-Ua
+ for xen-devel@lists.xenproject.org; Wed, 05 Apr 2023 10:19:36 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4f45fb5b-d39b-11ed-85db-49a42c6b2330;
- Wed, 05 Apr 2023 12:19:12 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id n19so20587973wms.0
- for <xen-devel@lists.xenproject.org>; Wed, 05 Apr 2023 03:19:12 -0700 (PDT)
+ id 5cfe3fec-d39b-11ed-85db-49a42c6b2330;
+ Wed, 05 Apr 2023 12:19:35 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ n19-20020a05600c501300b003f064936c3eso858463wmr.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Apr 2023 03:19:35 -0700 (PDT)
 Received: from localhost.localdomain
  (4ab54-h01-176-184-52-81.dsl.sta.abo.bbox.fr. [176.184.52.81])
  by smtp.gmail.com with ESMTPSA id
- y5-20020a1c4b05000000b003ede06f3178sm1730449wma.31.2023.04.05.03.19.08
+ d21-20020a1c7315000000b003ed1f6878a5sm1770353wmb.5.2023.04.05.03.19.32
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 05 Apr 2023 03:19:11 -0700 (PDT)
+ Wed, 05 Apr 2023 03:19:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f45fb5b-d39b-11ed-85db-49a42c6b2330
+X-Inumbo-ID: 5cfe3fec-d39b-11ed-85db-49a42c6b2330
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1680689952;
+        d=linaro.org; s=google; t=1680689975;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RAVav4ABEpIiF2Ib5SEI8jHJn5J3YAuyzrKJBGzco1s=;
-        b=hHxXSS6O9+86vT2m6d0DTc+hiT8gaRNGAVM+7W9qw5K7dcdKYYbh0E7lvSzpkYn368
-         fOMNZZP/1e+qRYjuveniW+hqJPeXRIDEN0l73ChMXeJHLmaPOblTjTKGwBGBBShSS3FY
-         MjxZ0uY781JiDGIyrZ2Wmf9jZfbEMqhXfcJrGMdfGEFfNJ40NRBoRK/JRBa+tS5fdI92
-         eU/ZF0jqD4wzOX6Sr/86Q1BA8EHQgHGTKipyyzmSWtpcvo657D+2/e3mC0kuVQ+XljSH
-         s07gbWhPjhP4utq/Kj/s6MnBKF2BXRP7AOXf6kw6C44JcSBNEeM091V355Hm/Q/Y0H3V
-         Xa9w==
+        bh=reJpuebcoI5BKEfS88SjCkcplXXPmguVbMU9Olmibx0=;
+        b=Q2+dqv8HKpPQKTf9cQJSeqsGPGkeqsXxu8v+C2JYWo/wkdpZHobUDc9N35z1UbQyXo
+         9C6lndVpWvjoGdquQUathNsJoiIiN7nJn3kgNVvT5T7tc01blota5eXmXHc1hE2a/9ew
+         2Wf7CCzhPcSAgNhjaTij8S5PpdLVkajwG2fdrCTckKDaeIUqcPO5ZI4SEhoPCSlpK/xc
+         jQRVVytzUEGa2Ydc7bSMmlI+Bj89/EomAs72KzqL8mlaSY0qlyPq25y3stucFF3G2pSS
+         /sRRUshA2hioO50En8HSMUOtDGPuoJV66S46OhB8lo7qSEotmJH2F75Zpnda8gdb6yr0
+         tHhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680689952;
+        d=1e100.net; s=20210112; t=1680689975;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RAVav4ABEpIiF2Ib5SEI8jHJn5J3YAuyzrKJBGzco1s=;
-        b=r0T/AgGQgPTwWlFRuvSMOVNOkd3Eg89SaacytUiZgbkguQ0bMbB+kiUEylaneX+tQQ
-         VvaSIPzIz9ZoAwd+YdLsmWwD4Dl8F0/gLncgYxdmxZC+ghIXnznrMEpyGf3CJfESIyXa
-         IHzIH0jdOKZQgQr6/5G1QidfGAYNnsA79PX0ywMOcLa3fIas1mntpdtRCoj2W8gwAmB2
-         h2Jj36abKocfiCQnRuQVCUN7C7N3BYbQCkX/ySVrDvNzwThAIt79+N4rAfrcy1uRWiUi
-         MmWHbAT2ODcniJrtDcAl0F89/TsRA+vNEfKq+LoIfgYx3Ejo4CgFvyTN3kFscFGwLqPO
-         ADPg==
-X-Gm-Message-State: AAQBX9eLn0bTzTKqijVcuVsRo4ag9vwO9B/irOvAQFjNJXI2PX2glKd7
-	bN78kTUp+PUHaogTff+bhLwMg5EwWpnNd4dZof4=
-X-Google-Smtp-Source: AKy350Zr65D5G7Y2SXbNR//LfCiPeKcYs21bo5zZhAXH6JQLmNB2HwLRUfAeUMYH/5tXslpZRuo8zQ==
-X-Received: by 2002:a05:600c:28f:b0:3ea:bc08:b63e with SMTP id 15-20020a05600c028f00b003eabc08b63emr4378808wmk.2.1680689951840;
-        Wed, 05 Apr 2023 03:19:11 -0700 (PDT)
+        bh=reJpuebcoI5BKEfS88SjCkcplXXPmguVbMU9Olmibx0=;
+        b=5ElheQRINiX2Ygsg/9tU8tpk0LQunD3JUPGDFeZwRYP1TtH8mbnZJmvwLhbfgeHWHk
+         +BQ6UkGmVrNTjCsFcIrf60S3VVPZQPZj2wUs7jR37tjZtSTVxbUInqLz75TuCKxtipsx
+         uaeEV2avu4/T4+WKR97w3vwbHeThGL2NwhfCdpnHoIb9w4CGbsvBeC/NNSNfwbojrVI4
+         ui6UNsBBHjZWaC+0/HlLawEiG7POxUmobF1nDTXrTWd7DiBuflUl6eINn0Z7ziZfE8jP
+         GMgrXbrW2tT7rLhcQAc/bD78jYzDQvGJ/1dhvXA6ga/Yk70b5Beq2Fq5IaBNRG/pb+ZE
+         FDHw==
+X-Gm-Message-State: AAQBX9ces/GWJ5T9bHIDWyxyrMmG9qEtbpkFLhjcJ9/N6dwDkHW6NXBJ
+	ugRwI8rpMBt0S/5COyowdsxMLA==
+X-Google-Smtp-Source: AKy350ZAz7PsFWbSoWRxQBkCoHp/n/DjoRXVF/1COGNHcX9m4lAa529X6M54U1ZwDgyYhrM/EeN7Fw==
+X-Received: by 2002:a1c:7717:0:b0:3f0:48f4:8454 with SMTP id t23-20020a1c7717000000b003f048f48454mr4350332wmi.27.1680689974915;
+        Wed, 05 Apr 2023 03:19:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -84,12 +85,10 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Yanan Wang <wangyanan55@huawei.com>
-Subject: [PATCH 08/14] accel: Move HAX hThread to accelerator context
-Date: Wed,  5 Apr 2023 12:18:05 +0200
-Message-Id: <20230405101811.76663-9-philmd@linaro.org>
+	Reinoud Zandijk <reinoud@netbsd.org>
+Subject: [PATCH 11/14] accel: Inline NVMM get_qemu_vcpu()
+Date: Wed,  5 Apr 2023 12:18:08 +0200
+Message-Id: <20230405101811.76663-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230405101811.76663-1-philmd@linaro.org>
 References: <20230405101811.76663-1-philmd@linaro.org>
@@ -97,83 +96,129 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-hThread variable is only used by the HAX accelerator,
-so move it to the accelerator specific context.
+No need for this helper to access the CPUState::accel field.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/core/cpu.h           | 1 -
- target/i386/hax/hax-i386.h      | 3 +++
- target/i386/hax/hax-accel-ops.c | 2 +-
- target/i386/hax/hax-all.c       | 2 +-
- target/i386/hax/hax-windows.c   | 2 +-
- 5 files changed, 6 insertions(+), 4 deletions(-)
+ target/i386/nvmm/nvmm-all.c | 28 +++++++++++-----------------
+ 1 file changed, 11 insertions(+), 17 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 173f47d24e..8d27861ed5 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -334,7 +334,6 @@ struct CPUState {
+diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
+index 97a7225598..1c0168d83c 100644
+--- a/target/i386/nvmm/nvmm-all.c
++++ b/target/i386/nvmm/nvmm-all.c
+@@ -49,12 +49,6 @@ struct qemu_machine {
+ static bool nvmm_allowed;
+ static struct qemu_machine qemu_mach;
  
-     struct QemuThread *thread;
- #ifdef _WIN32
--    HANDLE hThread;
-     QemuSemaphore sem;
- #endif
-     int thread_id;
-diff --git a/target/i386/hax/hax-i386.h b/target/i386/hax/hax-i386.h
-index d11d43e857..15d16772db 100644
---- a/target/i386/hax/hax-i386.h
-+++ b/target/i386/hax/hax-i386.h
-@@ -27,6 +27,9 @@ typedef HANDLE hax_fd;
- extern struct hax_state hax_global;
+-static struct AccelvCPUState *
+-get_qemu_vcpu(CPUState *cpu)
+-{
+-    return cpu->accel;
+-}
+-
+ static struct nvmm_machine *
+ get_nvmm_mach(void)
+ {
+@@ -86,7 +80,7 @@ nvmm_set_registers(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     struct nvmm_x64_state *state = vcpu->state;
+     uint64_t bitmap;
+@@ -223,7 +217,7 @@ nvmm_get_registers(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -347,7 +341,7 @@ static bool
+ nvmm_can_take_int(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     struct nvmm_machine *mach = get_nvmm_mach();
  
- typedef struct AccelvCPUState {
-+#ifdef _WIN32
-+    HANDLE hThread;
-+#endif
-     hax_fd fd;
-     int vcpu_id;
-     struct hax_tunnel *tunnel;
-diff --git a/target/i386/hax/hax-accel-ops.c b/target/i386/hax/hax-accel-ops.c
-index a8512efcd5..5031096760 100644
---- a/target/i386/hax/hax-accel-ops.c
-+++ b/target/i386/hax/hax-accel-ops.c
-@@ -73,7 +73,7 @@ static void hax_start_vcpu_thread(CPUState *cpu)
-                        cpu, QEMU_THREAD_JOINABLE);
-     assert(cpu->accel);
- #ifdef _WIN32
--    cpu->hThread = qemu_thread_get_handle(cpu->thread);
-+    cpu->accel->hThread = qemu_thread_get_handle(cpu->thread);
- #endif
- }
+@@ -372,7 +366,7 @@ nvmm_can_take_int(CPUState *cpu)
+ static bool
+ nvmm_can_take_nmi(CPUState *cpu)
+ {
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
  
-diff --git a/target/i386/hax/hax-all.c b/target/i386/hax/hax-all.c
-index a55b18f353..c9ccc411e9 100644
---- a/target/i386/hax/hax-all.c
-+++ b/target/i386/hax/hax-all.c
-@@ -206,7 +206,7 @@ int hax_vcpu_destroy(CPUState *cpu)
-     hax_close_fd(vcpu->fd);
-     hax_global.vm->vcpus[vcpu->vcpu_id] = NULL;
- #ifdef _WIN32
--    CloseHandle(cpu->hThread);
-+    CloseHandle(vcpu->hThread);
- #endif
-     g_free(vcpu);
-     cpu->accel = NULL;
-diff --git a/target/i386/hax/hax-windows.c b/target/i386/hax/hax-windows.c
-index 08ec93a256..b907953321 100644
---- a/target/i386/hax/hax-windows.c
-+++ b/target/i386/hax/hax-windows.c
-@@ -476,7 +476,7 @@ void hax_kick_vcpu_thread(CPUState *cpu)
-      */
-     cpu->exit_request = 1;
-     if (!qemu_cpu_is_self(cpu)) {
--        if (!QueueUserAPC(dummy_apc_func, cpu->hThread, 0)) {
-+        if (!QueueUserAPC(dummy_apc_func, cpu->accel->hThread, 0)) {
-             fprintf(stderr, "%s: QueueUserAPC failed with error %lu\n",
-                     __func__, GetLastError());
-             exit(1);
+     /*
+      * Contrary to INTs, NMIs always schedule an exit when they are
+@@ -395,7 +389,7 @@ nvmm_vcpu_pre_run(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -478,7 +472,7 @@ nvmm_vcpu_pre_run(CPUState *cpu)
+ static void
+ nvmm_vcpu_post_run(CPUState *cpu, struct nvmm_vcpu_exit *exit)
+ {
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     uint64_t tpr;
+@@ -565,7 +559,7 @@ static int
+ nvmm_handle_rdmsr(struct nvmm_machine *mach, CPUState *cpu,
+     struct nvmm_vcpu_exit *exit)
+ {
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -610,7 +604,7 @@ static int
+ nvmm_handle_wrmsr(struct nvmm_machine *mach, CPUState *cpu,
+     struct nvmm_vcpu_exit *exit)
+ {
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -686,7 +680,7 @@ nvmm_vcpu_loop(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_vcpu_exit *exit = vcpu->exit;
+@@ -892,7 +886,7 @@ static void
+ nvmm_ipi_signal(int sigcpu)
+ {
+     if (current_cpu) {
+-        struct AccelvCPUState *qcpu = get_qemu_vcpu(current_cpu);
++        struct AccelvCPUState *qcpu = current_cpu->accel;
+ #if NVMM_USER_VERSION >= 2
+         struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+         nvmm_vcpu_stop(vcpu);
+@@ -1027,7 +1021,7 @@ void
+ nvmm_destroy_vcpu(CPUState *cpu)
+ {
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct AccelvCPUState *qcpu = get_qemu_vcpu(cpu);
++    struct AccelvCPUState *qcpu = cpu->accel;
+ 
+     nvmm_vcpu_destroy(mach, &qcpu->vcpu);
+     g_free(cpu->accel);
 -- 
 2.38.1
 
