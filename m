@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8906CC77B6C
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Apr 2023 08:58:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.518775.805618 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACDC9C76196
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Apr 2023 09:08:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.518783.805638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pkLRv-0003pG-E2; Thu, 06 Apr 2023 08:58:31 +0000
+	id 1pkLbQ-0005uo-Hf; Thu, 06 Apr 2023 09:08:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 518775.805618; Thu, 06 Apr 2023 08:58:31 +0000
+Received: by outflank-mailman (output) from mailman id 518783.805638; Thu, 06 Apr 2023 09:08:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pkLRv-0003p9-BC; Thu, 06 Apr 2023 08:58:31 +0000
-Received: by outflank-mailman (input) for mailman id 518775;
- Thu, 06 Apr 2023 08:58:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ozA9=75=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1pkLRu-0003p3-7w
- for xen-devel@lists.xen.org; Thu, 06 Apr 2023 08:58:30 +0000
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [2607:f8b0:4864:20::62d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 304a2780-d459-11ed-b464-930f4c7d94ae;
- Thu, 06 Apr 2023 10:58:26 +0200 (CEST)
-Received: by mail-pl1-x62d.google.com with SMTP id ix20so36940117plb.3
- for <xen-devel@lists.xen.org>; Thu, 06 Apr 2023 01:58:25 -0700 (PDT)
-Received: from localhost ([122.172.85.8]) by smtp.gmail.com with ESMTPSA id
- f8-20020a170902860800b001a1adbe215asm904655plo.142.2023.04.06.01.58.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Apr 2023 01:58:22 -0700 (PDT)
+	id 1pkLbQ-0005uh-Em; Thu, 06 Apr 2023 09:08:20 +0000
+Received: by outflank-mailman (input) for mailman id 518783;
+ Thu, 06 Apr 2023 09:08:19 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pkLbP-0005uX-65; Thu, 06 Apr 2023 09:08:19 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pkLbP-0005HC-3Y; Thu, 06 Apr 2023 09:08:19 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1pkLbO-0001MB-KJ; Thu, 06 Apr 2023 09:08:18 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1pkLbO-0006w7-Jr; Thu, 06 Apr 2023 09:08:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,96 +44,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 304a2780-d459-11ed-b464-930f4c7d94ae
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1680771504;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DEQiq5V6EhExtdzg7l+GGgGWzMI4MYV9sltCbuia9S8=;
-        b=DqZf+45MshOs1nlVyinOhqFrKCuzw0gQlsLOP0ABgx6laBf7Pg+beSuaze8QVVfghR
-         awdDutM8sqXBsgP+BXTWzNrINKIlxL9iBKaOC6FIfHodelL7FbNSBDgVYjhwvLKOgE5m
-         MdjjBz40SWhgR+pdZt5+jIRFtwB9GjMGosHqmqyaRwzYl/f1JBuTl1aMIqxNxdBI9KHf
-         zicgU3cKtHZbiUWCVP2oqG6BYFOJGaCiOczU/tO9FR/zPQr/Xvr7opcZkYDOOoS4h7PS
-         iQfhUMh6M2zx9Qn2jzsUzYLyunaEwrK0rd1FhMpQJRTeuVUHLGXqkeJrdlGtH/t/RBDy
-         5U7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680771504;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=DEQiq5V6EhExtdzg7l+GGgGWzMI4MYV9sltCbuia9S8=;
-        b=VnPy/njpmlu+i3yzYGBra32JD7STFd7O+TZPEwsAD91nD84kQB3vuNVkx929KUxpYB
-         bG3cbUt53eDvw1JmQ5rFFTWRS0aoNPBPTTJ1TxerJn5LVKYT7JSRpJYlDLakdIj/KqIb
-         YAqwF30DS1qPucvs0A61m/tRiKb4zLHkEZMsL4/lhptcR4ygQHQsnLfmc9rEiIguGCVa
-         TqapjUmyTqHJ7DH6q/dRAqTsORxSlMQ4viKwjP+gu54ASlQFUIu+FwbqJaxkgBZvsVdN
-         nzsj9lYPRvIw4Q6ZBjpj6KeMUQh3TXrS+zVwB5dSIJxYxOy8AnWMJFuWPBzxxGIuCD2y
-         XMVg==
-X-Gm-Message-State: AAQBX9d1iJ5bnqB/FBUhJ77brRGKdW0E/Sru9nzIZhiUhPxWoJuamnc0
-	rILMSPNqqjIiz+8iAqE/aJLFQaK7ONAXOf45zFc=
-X-Google-Smtp-Source: AKy350YftpXWO2PU4R2xgveFOOV/hWCgUBa/eRONakgCC5lW+aSPlmCOp88OEaOYp2Sq6SUnduQGYA==
-X-Received: by 2002:a17:902:f986:b0:1a2:85f0:e73d with SMTP id ky6-20020a170902f98600b001a285f0e73dmr8431947plb.33.1680771503940;
-        Thu, 06 Apr 2023 01:58:23 -0700 (PDT)
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: xen-devel@lists.xen.org,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	stratos-dev@op-lists.linaro.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.com>,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>,
-	Erik Schilling <erik.schilling@linaro.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH V3 1/2] docs: Allow generic virtio device types to contain device-id
-Date: Thu,  6 Apr 2023 14:28:17 +0530
-Message-Id: <18458fa39433ce4ac950a0a20cc64da93db0b03a.1680771422.git.viresh.kumar@linaro.org>
-X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=EnX4CyUyIlLVd/OPkcT7LpM7eS6oFPZK49HT/hv48gc=; b=VhHd+yKtHh7/uMgxLaj/88lmA4
+	L/Wbjadli4j3miqIQ7ev2XOovUH3e260o03+XF/4ERal06MhMGsUf/3TSOYIogP2jaIt84qlVLYcr
+	JA4L2vg3kOS7mxHTpTO6/44suuTYUxge/w8vxdPStwcoRMONsqGo7wIPcku3yGQAOVkY=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-180166-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 180166: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=3e3be2cbc286e773ed5bd3afd5942440546888de
+X-Osstest-Versions-That:
+    ovmf=8d185dfb66700e65035d51f149570aeab728c665
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 06 Apr 2023 09:08:18 +0000
 
-For generic virtio devices, where we don't need to add compatible or
-other special DT properties, the type field is set to "virtio,device".
+flight 180166 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/180166/
 
-But this misses the case where the user sets the type with a valid
-virtio device id as well, like "virtio,device1a" for file system device.
-The complete list of virtio device ids is mentioned here:
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 3e3be2cbc286e773ed5bd3afd5942440546888de
+baseline version:
+ ovmf                 8d185dfb66700e65035d51f149570aeab728c665
 
-https://docs.oasis-open.org/virtio/virtio/v1.2/cs01/virtio-v1.2-cs01.html#x1-2160005
+Last test of basis   180164  2023-04-06 01:42:38 Z    0 days
+Testing same since   180166  2023-04-06 07:10:40 Z    0 days    1 attempts
 
-Update documentation to support that as well.
+------------------------------------------------------------
+People who touched revisions under test:
+  Ard Biesheuvel <ardb@kernel.org>
+  Jiewen Yao <jiewen.yao@intel.com>
 
-Fixes: dd54ea500be8 ("docs: add documentation for generic virtio devices")
-Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
----
-V2->V3:
-- Updated commit log and clarified / fixed doc.
-- Tag from Oleksandr.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
- docs/man/xl.cfg.5.pod.in | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 10f37990be57..24ac92718288 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -1608,8 +1608,11 @@ example, "type=virtio,device22" for the I2C device, whose device-tree binding is
- 
- L<https://www.kernel.org/doc/Documentation/devicetree/bindings/i2c/i2c-virtio.yaml>
- 
--For generic virtio devices, where we don't need to set special or compatible
--properties in the Device Tree, the type field must be set to "virtio,device".
-+For other generic virtio devices, where we don't need to set special or
-+compatible properties in the Device Tree, the type field must be set to
-+"virtio,device" or "virtio,device<N>", where "N" is the virtio device id in
-+hexadecimal format, without the "0x" prefix and all in lower case, like
-+"virtio,device1a" for the file system device.
- 
- =item B<transport=STRING>
- 
--- 
-2.31.1.272.g89b43f80a514
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   8d185dfb66..3e3be2cbc2  3e3be2cbc286e773ed5bd3afd5942440546888de -> xen-tested-master
 
