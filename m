@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7B6C6FD1D
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Apr 2023 15:26:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.519059.806208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A3CC6FD1D
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Apr 2023 15:48:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.519066.806223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pknyE-0007pg-Jx; Fri, 07 Apr 2023 15:25:46 +0000
+	id 1pkoKV-0001tv-O1; Fri, 07 Apr 2023 15:48:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 519059.806208; Fri, 07 Apr 2023 15:25:46 +0000
+Received: by outflank-mailman (output) from mailman id 519066.806223; Fri, 07 Apr 2023 15:48:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pknyE-0007pZ-H6; Fri, 07 Apr 2023 15:25:46 +0000
-Received: by outflank-mailman (input) for mailman id 519059;
- Fri, 07 Apr 2023 15:25:45 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pknyD-0007pP-GY; Fri, 07 Apr 2023 15:25:45 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pknyD-00071O-CH; Fri, 07 Apr 2023 15:25:45 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1pknyC-0000G8-Tc; Fri, 07 Apr 2023 15:25:44 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1pknyC-0003Y4-T2; Fri, 07 Apr 2023 15:25:44 +0000
+	id 1pkoKV-0001tG-JD; Fri, 07 Apr 2023 15:48:47 +0000
+Received: by outflank-mailman (input) for mailman id 519066;
+ Fri, 07 Apr 2023 15:48:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=aVqb=76=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1pkoKU-0001rF-LK
+ for xen-devel@lists.xenproject.org; Fri, 07 Apr 2023 15:48:46 +0000
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [2a00:1450:4864:20::233])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ad953bc0-d55b-11ed-85db-49a42c6b2330;
+ Fri, 07 Apr 2023 17:48:45 +0200 (CEST)
+Received: by mail-lj1-x233.google.com with SMTP id s20so23593292ljp.7
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Apr 2023 08:48:45 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ v12-20020a2e9f4c000000b00295a583a20bsm874765ljk.74.2023.04.07.08.48.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Apr 2023 08:48:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,74 +45,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=ByD4i+VqFUirE9zzFzftvTCEaF5vHCznD5cfuN/FWwE=; b=J5QmbukJ8nQyNvcUO3XqgVGoTv
-	1kKhNZhHdOJETe3BzaGVLte5s3FrwvSIrMLjGtdisPWqc5rYmTShisZoTz8WlDX1BA2R/cAOK47N9
-	dnQLXt4J5viNEL2toHVlpEaaYUuChMewflfUcOE+Zbf0iFIGtzLwI+9DEmfk5VwFZTA8=;
+X-Inumbo-ID: ad953bc0-d55b-11ed-85db-49a42c6b2330
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1680882524; x=1683474524;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Bvofdso7h4C0wbCuGQpq+8NVtokRUIZ6ky3V3PNneG0=;
+        b=UDjqnxv9yR2iTme8IfxrqJoKtTT30hQa3MiTyTzUHwl68nl1Pg/RDJfQve/u477hyf
+         lkcy8haZp0tzhaVuLFKsyA1honQArutrJbWZz954UQQqOpeE7WQ/eO8dJoHJh2OP78oA
+         p43yE+1vK+VNYdcRlgMOimU+ZWNBeUqBTXgbrjzcAVRBZUu1CCU/5thirqS7DOILUpow
+         ABKPjWDmFHYBhcH8HCYvQBZwvv1Vxyk1hd0sehTQBcsv2Dckr2aQqwkVZBoRCri/f9ma
+         3kyCh2nskDtgpRY+A+KbKJLHMr7MWfb9GSvh67L1+MgwBfQWZMWfL7By8YkqeKPctRGc
+         pdkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680882524; x=1683474524;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Bvofdso7h4C0wbCuGQpq+8NVtokRUIZ6ky3V3PNneG0=;
+        b=vDRAlXCCUkc4Te2ROzUpdVqAMmxUbtj2FvPGyDoXytQMoFHn2IXHjgb6eTGr/4tNZw
+         n28C77aQf85vyYZEJy6+t/ZRpMDlvwHY0dVstkXlwI4UDe1N04mPaYEQDrltc2/gILvq
+         mfVU/LS5jypSWnYsOoeJJKfirECK4aS17UQw+/LzRGvs8X6wX6gftsUbXG0djpU6bIGm
+         T+apnjLgCmRC+Gkt6Pd5LJbC2aVoVofuTYcuYWPrpW3r5b6TjBLkZuujblKTpFsiVwSV
+         Ec8pYSy48pDUQM2MMTM76/HdW13hWWWBhy+ocRrwAiCHV3UCPtLUJPbZg04GLQQJRIhk
+         0o7Q==
+X-Gm-Message-State: AAQBX9cmEqj/nKBrvoqLHy8RtBWYN81iq9jdSo+u3D2MM8R/uzuJ10d/
+	F3+/bkSF+RH3i2q7Jo0zi4gOHBBP6UE=
+X-Google-Smtp-Source: AKy350bLe1FW59P/4vvlykz2DGsyUiixloBEybTWDJDX7QqQWSCeG7bP8ED/tSCAql+uRecHRGgN5w==
+X-Received: by 2002:a2e:9214:0:b0:29c:9223:2f5e with SMTP id k20-20020a2e9214000000b0029c92232f5emr750160ljg.48.1680882524338;
+        Fri, 07 Apr 2023 08:48:44 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-180180-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Julien Grall <julien@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v4 2/3] xen/riscv: setup initial pagetables
+Date: Fri,  7 Apr 2023 18:48:38 +0300
+Message-Id: <2cbb70c8b29713f1faf235b4a90722d78bf258eb.1680882176.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <cover.1680882176.git.oleksii.kurochko@gmail.com>
+References: <cover.1680882176.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 180180: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=6405cd03048c1850d5047bf66fefa04189a05c94
-X-Osstest-Versions-That:
-    ovmf=cdf6ff1719a9453351baec4bd32fcfc30e9ceeac
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 07 Apr 2023 15:25:44 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 180180 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/180180/
+The patch does two thing:
+1. Setup initial pagetables.
+2. Enable MMU which end up with code in
+   cont_after_mmu_is_enabled()
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 6405cd03048c1850d5047bf66fefa04189a05c94
-baseline version:
- ovmf                 cdf6ff1719a9453351baec4bd32fcfc30e9ceeac
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in V4:
+ - Nothing changed. Only rebase
+---
+Changes in V3:
+ - update the commit message that MMU is also enabled here
+ - remove early_printk("All set up\n") as it was moved to
+   cont_after_mmu_is_enabled() function after MMU is enabled.
+---
+Changes in V2:
+ * Update the commit message
+---
+ xen/arch/riscv/setup.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Last test of basis   180175  2023-04-07 04:13:37 Z    0 days
-Testing same since   180180  2023-04-07 13:43:54 Z    0 days    1 attempts
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 315804aa87..cf5dc5824e 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -21,7 +21,10 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ {
+     early_printk("Hello from C env\n");
+ 
+-    early_printk("All set up\n");
++    setup_initial_pagetables();
++
++    enable_mmu();
++
+     for ( ;; )
+         asm volatile ("wfi");
+ 
+-- 
+2.39.2
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Ard Biesheuvel <ardb@kernel.org>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   cdf6ff1719..6405cd0304  6405cd03048c1850d5047bf66fefa04189a05c94 -> xen-tested-master
 
