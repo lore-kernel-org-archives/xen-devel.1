@@ -4,56 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C9CC76196
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Apr 2023 22:48:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.519976.807177 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A25C7619A
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Apr 2023 23:41:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.520019.807210 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmMmZ-0006mZ-6y; Tue, 11 Apr 2023 22:48:11 +0000
+	id 1pmNc9-0008QG-1W; Tue, 11 Apr 2023 23:41:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 519976.807177; Tue, 11 Apr 2023 22:48:11 +0000
+Received: by outflank-mailman (output) from mailman id 520019.807210; Tue, 11 Apr 2023 23:41:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmMmY-0006ho-Os; Tue, 11 Apr 2023 22:48:10 +0000
-Received: by outflank-mailman (input) for mailman id 519976;
- Tue, 11 Apr 2023 22:48:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pmNc8-0008Q9-Ut; Tue, 11 Apr 2023 23:41:28 +0000
+Received: by outflank-mailman (input) for mailman id 520019;
+ Tue, 11 Apr 2023 23:41:27 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LOX4=AC=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1pmMmX-00060o-1q
- for xen-devel@lists.xenproject.org; Tue, 11 Apr 2023 22:48:09 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20618.outbound.protection.outlook.com
- [2a01:111:f400:7e88::618])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ebc2165b-d8ba-11ed-b21e-6b7b168915f2;
- Wed, 12 Apr 2023 00:48:06 +0200 (CEST)
-Received: from CYZPR12CA0001.namprd12.prod.outlook.com (2603:10b6:930:8b::8)
- by CH3PR12MB7762.namprd12.prod.outlook.com (2603:10b6:610:151::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.28; Tue, 11 Apr
- 2023 22:48:00 +0000
-Received: from CY4PEPF0000C97D.namprd02.prod.outlook.com
- (2603:10b6:930:8b:cafe::5e) by CYZPR12CA0001.outlook.office365.com
- (2603:10b6:930:8b::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.36 via Frontend
- Transport; Tue, 11 Apr 2023 22:48:00 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000C97D.mail.protection.outlook.com (10.167.241.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6298.25 via Frontend Transport; Tue, 11 Apr 2023 22:48:00 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 11 Apr
- 2023 17:47:57 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 11 Apr
- 2023 17:47:57 -0500
-Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Tue, 11 Apr 2023 17:47:56 -0500
+ <SRS0=C0V3=AC=epam.com=prvs=8465a122a0=volodymyr_babchuk@srs-se1.protection.inumbo.net>)
+ id 1pmNc6-0008Q0-H5
+ for xen-devel@lists.xenproject.org; Tue, 11 Apr 2023 23:41:27 +0000
+Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
+ [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5c478059-d8c2-11ed-8611-37d641c3527e;
+ Wed, 12 Apr 2023 01:41:21 +0200 (CEST)
+Received: from pps.filterd (m0174681.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 33BJgr56026489; Tue, 11 Apr 2023 23:41:10 GMT
+Received: from eur04-vi1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04lp2053.outbound.protection.outlook.com [104.47.14.53])
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3pw43vtrb2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 11 Apr 2023 23:41:10 +0000
+Received: from VI1PR03MB3710.eurprd03.prod.outlook.com (2603:10a6:803:31::18)
+ by DBAPR03MB6358.eurprd03.prod.outlook.com (2603:10a6:10:192::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.38; Tue, 11 Apr
+ 2023 23:41:05 +0000
+Received: from VI1PR03MB3710.eurprd03.prod.outlook.com
+ ([fe80::9b45:4d32:a743:d5e3]) by VI1PR03MB3710.eurprd03.prod.outlook.com
+ ([fe80::9b45:4d32:a743:d5e3%3]) with mapi id 15.20.6277.034; Tue, 11 Apr 2023
+ 23:41:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,2300 +55,751 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebc2165b-d8ba-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 5c478059-d8c2-11ed-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K9SzP0FBBf9SUYqgTF4o/Sz8oINLOIgPYVgUeJWbbaaGqOzi3WnOSOyuwGEKg/r1luk0nlXErdrayuU+FJa8WuF2kMvApFcdInQ6lD7j8GJYkEY5C8bsiiVbgrTMVQxPLoWVtOAOoIZElAGvHPoY6BeFhWsa/3oSomkIHcQGH9AR2TxpYyVI5BjC4F7CdctnVeS4x/uJPWjQGcUHHLoIvXl2qacFTrQy1Uh115+Vb1iRZZHJStPJzkIv2JNIlM6lZC1e8S/vJquHCR9u97CFUMAjTK6QP81hheymH+W1DRAQhK8B+XRul6MJV76aluVdppTcnxowMJYCgYcFwXVlUA==
+ b=VSl54BxMIS/LRC689wNJe0FViLOMWlQrZSgRWINqjENzjdgda+8VVWBXYB1D05VIaHeXPqOiNOv6BVmb+jfSiCKhiPB3JkWzQJwBdg4//lhZwHMuAlGbEaVUW4xjuFSr2crBCYf08Ms9b7lYZNYzbrXZHTAu614QPjV8+mw617DWZ98h5dr8r5HoHR3FawmcRWSjW389Hh9hEakB3kWAG9JCZ8viNzGRySTULPpMtfR2mrL2SgRCh5k1zjI0ZOrMjeROxDbk/hh1jcG0PXpR+QQd//wySgbA1GX3ohtzVgMbb3Bx8YVLJHSASEbdQeepzsF8YFaBjlngxgWXA54t1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wIZIFcEluMLarFziGuZ+tNtfbECwk02fJil82lSHuSo=;
- b=b18gyK/T0iXHVC6D3jTjFhoNDwXSq8X3TIDJWfMtuVX1Hj+fW28uDkMAFMxAVN6qKcy1ftYdyzl6bNSZJOXAtrNaiXoihQHfvg4qKT7eiqCdQxTActGyFLxHxRPjZ15kX1tqDpdM0rKzRbs8dR9T0gCrLC4xfkBFJbTEqMc9rJU7eJZ0qLuQ2mOyU/R5eXMGsFplWzttJgkmKRuqPitzekXmKwpLmCut4/DTGtzyiFCiYOfH+xYC8hbK2ly0ZnCw1M2K8lYPsNGhJ3hCeMjOlOllAltk7F46GPpXsYhTejNNeEgW6y/HQzdVO++XDmGbqT5kbCo9JGYMnPgGUQ3+Tw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=eJtZlAWsizs0bUKr7ZMUM4O/+fMTn+dea7fKlJpYbe8=;
+ b=e7P8mSSe41Yli0AZg94xUeIA2YW5jn9Pr09MdqiZ9umAjIoR+QjZww5r0trn/0HHlton1OhQn0FDiOaXcvANHQEiTE7SMaqsZEaWjVz8ZYraOVcKbFg9FXlHl+LMB6Bkl6ZqfIIl9SBVdF79pPiXl2WHrt9GUvKVZ5wOuPA9hsTpaiM/Ys3iobgt1SLcGBAJfc1OTJtbF3+3QBN5XNzNurnSMxx1k3XUgtb5TdI1SC9fmB04faDu2qa8N5xYWWpQnjydOmvXiSjDlzyl75vquHX115AJHvgzs5xd57Ius7RgEre2jUUcxhRfsYTHRyZcIoyI3ZoSjupO90aYUttbBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wIZIFcEluMLarFziGuZ+tNtfbECwk02fJil82lSHuSo=;
- b=b7MmAEPsP7TpVCRz250eu3R3LVxIY9UAUeqS1NgcqE/1Ei6qt7ov6XlK85tPDcRIdSzoFdcvmt/bMcTDJbNloPMxK3+BdBwVHEtfjaug32uirRKIKLvtD4I1V4fMHOErptbgd+m2FnerV+7eVLYQ8L9aAWNSrZgfeLeUh9JoO0c=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-From: Vikram Garhwal <vikram.garhwal@amd.com>
-To: <qemu-devel@nongnu.org>
-CC: <xen-devel@lists.xenproject.org>, <vikram.garhwal@amd.com>,
-	<stefano.stabellini@amd.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
-	Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson
-	<richard.henderson@linaro.org>, Eduardo Habkost <eduardo@habkost.net>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
-	<marcel.apfelbaum@gmail.com>
-Subject: [QEMU][PATCH v6 04/10] xen-hvm: reorganize xen-hvm and move common function to xen-hvm-common
-Date: Tue, 11 Apr 2023 15:47:40 -0700
-Message-ID: <20230411224746.16152-5-vikram.garhwal@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230411224746.16152-1-vikram.garhwal@amd.com>
-References: <20230411224746.16152-1-vikram.garhwal@amd.com>
+ bh=eJtZlAWsizs0bUKr7ZMUM4O/+fMTn+dea7fKlJpYbe8=;
+ b=YCOfc03JAQPWs9wTvWOms9KkZIxL5WkWBEqjXvu8+lHVc1K5YLygo69vpMPsw67NLQLL8KhHUYDsy32ou3Pnks02fVYPClcpK3+05kq+hekDGWKXAa6EbVwdasPBlxctyenjZexjTo2QhcgqqL8aGRO32WAgis8IKP9nj9jee/3V3ewEZm1Ce1Q2NpSkLL8ERazoN+he4je5RB8eMTp0mcgvD8Iyk2WUGu+g0zYWYL0AUBKBCywUnUVN6fJSSnvlKfT6I+ctdJXCds8479T+rXFYWmHv3YqsIkHrp0Y9R3hPsV38410DtB4rLebDK7YnB7gLdxMqhSxWpUjQnKKbpg==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+        Jan
+ Beulich <jbeulich@suse.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>, Wei
+ Liu <wl@xen.org>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Julien Grall
+	<julien@xen.org>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Paul Durrant
+	<paul@xen.org>, Kevin Tian <kevin.tian@intel.com>
+Subject: Re: [PATCH v3 2/6] xen: pci: introduce reference counting for pdev
+Thread-Topic: [PATCH v3 2/6] xen: pci: introduce reference counting for pdev
+Thread-Index: AQHZVrdzsdckomMx4kauxHkZQ597Iq79mAMAgClI2AA=
+Date: Tue, 11 Apr 2023 23:41:04 +0000
+Message-ID: <873556xa0g.fsf@epam.com>
+References: <20230314205612.3703668-1-volodymyr_babchuk@epam.com>
+ <20230314205612.3703668-3-volodymyr_babchuk@epam.com>
+ <ZBNA9q5DXJYG3KVp@Air-de-Roger>
+In-Reply-To: <ZBNA9q5DXJYG3KVp@Air-de-Roger>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: mu4e 1.8.9; emacs 28.2
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI1PR03MB3710:EE_|DBAPR03MB6358:EE_
+x-ms-office365-filtering-correlation-id: 26f9804a-65d3-41e3-06ad-08db3ae6371c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ fiQFJWj8fiZOVY/B9QisSu4HHIiMIthYCtm051MNdLAnstyX3OtSK5V5InQtzlbCq+eqIqOyFPU8XVBKmXa1BDtbK8He+uOHQxANrFSIsSSzOeeXSDcdD3lPjd9epb+qo6uX0sx++VsJFh02TTrZNOvYCdBOU22iFDUNnfo7nnQe5/NYIINsz/AsPZJbGhL0QS+d6I3t85by7Cmx7QF6CiRLcphzFE+NFfErRVhpTF+lHA1aEXxYnc5YvorOJBMXfFZiitEvmRA90N2nMiWnL+jXyGGJM1B5HJZ4ZPHOV7wnZkQe8gzIg2cugNQmCIQlIw8AB8bBrB7mNNIu1wAQSEVgGLYCwkb5ITgL+fcGtewIq5NWnDYCD/WI7YdGIVWSr+PbtqSQnQvQJam/V/1TfXP880vXOYMkwtq58vUagdistt1cxg++a/squlwMlgOGNhrbBjCKCLcNoVhfPTncM2dwfQ8GNiWe7Ry0mhqaGyO0zNzBpSivBK4TO8FXGbwsIw6/XekVLDRgmlG6RKtNflUlmNxMqUMvh1kk61XEoJPOWaHaKFxcUDd6ljaV0sljyPE30M1LFnBIhTtJedUqjkf7G1Gs6ypSVh1mzx1Kpi0FgWkWwbuWirdjnUFkolSCpWmYTS1NePC00GXOiXf6pg==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR03MB3710.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(39860400002)(136003)(346002)(376002)(366004)(451199021)(2906002)(38100700002)(7416002)(6486002)(5660300002)(122000001)(30864003)(71200400001)(38070700005)(83380400001)(8936002)(55236004)(6506007)(6512007)(41300700001)(26005)(2616005)(66476007)(6916009)(66946007)(66446008)(76116006)(66556008)(86362001)(91956017)(4326008)(186003)(316002)(8676002)(64756008)(36756003)(54906003)(478600001)(21314003)(559001)(579004);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?Mkp3c0dvMWtyVVhhZU9hRkJvSzZyMkxyZlFuU21KL2cvZUM4SEZqMWI5S2ww?=
+ =?utf-8?B?cktJKzN3WmlNY2VVdVlIUEtsVFFOalA0NndmL1RKNXhsam5UZGFtb3BNNjZB?=
+ =?utf-8?B?b0NBZTN1aWRQV0x1d01aczdMRnc3VmQzeU1XSXBpZHNFOHBjUEF0UmgyVlQz?=
+ =?utf-8?B?M3d2eFRQaktJeGFXNHpUbXJnS1UvSDlDM05wZFNVaDB6V0pFWVFoQktCa1lo?=
+ =?utf-8?B?MmpYRWxiVHB2cHVWNzN0M2NSQmsydkMxYitlZG1WOWdTRVYxeU5udktVTm1v?=
+ =?utf-8?B?SzhtVzhYRTFwRHNmUXlIZWwyQlpXTVN6cUJaay9QdFJHeGNMMEs2Uk9aL0FH?=
+ =?utf-8?B?U3U3U2NjNUR0M0NFYlBVQ2FCYWRMZ1JYZ3VCYUFkY1l2TjdJMGQzYWFUWEdU?=
+ =?utf-8?B?SHFHNHZDc3ZLYk54b1BHRGl4Ymc2UUlLaXM2UU9ERmRLdEsxQ3BDNFE0Uk5t?=
+ =?utf-8?B?LzhxR05tLzNNQjRVYUZEdVhXcDkwZ0pPRzNLQTZtMWlVemFZbzBpb1hXNkto?=
+ =?utf-8?B?T20zZERtZjFrNHVUTy84YnNnVkVUaGZzbkFkSjl2VjhHc1ZQYktyWk5QZjBZ?=
+ =?utf-8?B?TFZqYnliMUU4NjRlUk41S0lZclV5a1VvTUk1b1JscGk3bUZucHoxbGFzK1ZZ?=
+ =?utf-8?B?OWdkSTkyZVlDNU9IZGdOd1BHeE9WTFNpYkRCQ250eUwwelZrOFNhVTdPUzRD?=
+ =?utf-8?B?eWJQcEdIRnpyTFpQRDJxRUFjTFVLNUpGUU1lc2Rsck1LQXIvQmJHV1ZoNEw0?=
+ =?utf-8?B?SktYa3RYUlN6ZGVyOGROeGJLYWpMcmhmbmgvMFAxd1JWYms0N0lBQUxMNGY2?=
+ =?utf-8?B?SVNSZ1ROTjJraW1sOXo2VUk3R3IwK0xZVGw2YVBsSDBob2huNmJZRFdTb1hk?=
+ =?utf-8?B?SVNiVXhpVWZrYktEeXNWdUFPc2lqU2prRTRXZkh2UnlZWW5zd3U0WFBoR3VL?=
+ =?utf-8?B?Q3p5RnJUajUzNUhNRG1EdHhXa0tsdzZubGVTMDgrUmJCbUV2VWFTTU9iSHU4?=
+ =?utf-8?B?N21JdC9RZk1oMGwyS3JLZUtDbHQ0SnB6SGh6dS8vZHh0SXgxRGZZUzUrRXRU?=
+ =?utf-8?B?N1ZaN2laVTgwUzAzS2NXWkNZQ3ZYWktQY09KLzFWZTE5R1Q2aUJ1OUlldkFk?=
+ =?utf-8?B?emNzZzUvaWpPdjlKVWVpTjJCZHEyTVZicHZCNVdMbmg4bkF0bllmQkczQ2t1?=
+ =?utf-8?B?Q2NnTkl0UGx4MTVvUHBKSjVqa0VINHZqYjdvTVpyYU1VKzVUZkZLWjZRcDJr?=
+ =?utf-8?B?MVMvaHpMekhQR0FTeXg0dkVvYStTMjV1T2NXOXhFTGJnbFY1a2lOWEVlY2pS?=
+ =?utf-8?B?cVJuQm9TMEF2aDd1ZnZhRHNjejRKWjdzN0g1TllTTzQ0SVF3MzJJSG1MdHFR?=
+ =?utf-8?B?NTk4UlFWbm5mTmZEc2lIek5tSzRhMEIyNlo1a21XK2p5TWMzZ2ZFdnRnZWZk?=
+ =?utf-8?B?Y0dUTWYzakxNeE8rT0dpaDNUYzNEMFBDS2sxY2FUb3QyVEJ3YjRRMmhJUHRw?=
+ =?utf-8?B?U01HbjNMSWsraDVZaDRqMXRmdFpnOWdmUVVnZVB3TVpDdEFkYmYyQ0tMVU1x?=
+ =?utf-8?B?UkJRTWJLcW9Ja0NvbUcxQTlESk1OcWMySGhCcWQ1MHhXZlJ4WkdFMkw0cm16?=
+ =?utf-8?B?MkN0OGI3ZFhhRVVVL3FjT0lsdUMxSy9hSk9DZE9BcFZnZVE4Q1c2Q3Vxa2xn?=
+ =?utf-8?B?MUFpM3VWMGtqemNWQTRQYmdSSThxNHNZNzNKenVvejViNDA5RGRwZHBWUnNF?=
+ =?utf-8?B?aXA0UEtZMGlMWjc3QnB3d25XWVprZHAxeUg2VGJUcm5rZ0FRd3VaV0laWnNE?=
+ =?utf-8?B?TENrOXdYSHMvY3BLWTF1NXlMVUdzU0xIR3p2eXY0Y3lyMkNFL1VGRmtmWldN?=
+ =?utf-8?B?NjhjbEsvZFNRbENHNWFVQm1iZlgwWkttZW5qWjhUTWlCM2x4anBaTm8rTzln?=
+ =?utf-8?B?U0xReFhvVHBWcFhPdVdaQnFRUHRSYS9JRzIwdWY4aWtNa3E0V2EyZWxNV0dS?=
+ =?utf-8?B?TC82NmthR0pCalE3SkFEd3ZzamhldVV0QVM5MkNXT0FjWFMrakxvamc4ejhZ?=
+ =?utf-8?B?VDBrYjgyRWw4WUxRU21CSjZ5MjNYVGprMDNnbjRkcC83US9ib245dDZJd0pU?=
+ =?utf-8?B?c0N3NFQrQkM4Wk82aGhKZ05vbko5Q05heXRvTk0zTzF2L2xtNVJZRGNZVVAv?=
+ =?utf-8?B?Q3c9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D85597D42357784198C9CE8607193FA2@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000C97D:EE_|CH3PR12MB7762:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ff20461-d2a4-4736-0590-08db3adecd5d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	CABI988Q0U8KWOTCEQfyL++X9Kte3o1wSlWAL5huGdFf8AgATwUC7elcL4Ck3UkOVNu8vyBI/p52cp6xrjL78eOhNqojLnbyociesjJ10zr9bom29SzQsvp45QwlHHPy+DW84El5FyIOCMvvrBjDe9igceV1SKzxYe5qKIXZk8CubINeDDvCbWU2VD2iIi3yaaT2amCWB1pf/9NOdK0abm+9qIOLencq3E8AQW+IRFePGqXCQHH2RNfhmfVZpHSXD3mZeA21t4HY+Bt8SYK/01ZSWgJE4gF5uwMH6jzw4xwDOKZskxKxprbdcacjpJzWR6Pn2MaBfebYRpkprsd8l4yBhaucuryOhJjwJQWMEPdsVoSao9XKkc/pUrjsie0EySNxnxEvP5AaDYrjst24VTsePoOxJHqMqOVFpRIQO7rY62DqLebRFZj8gd2tmKEUBEZ5O9qENf+RidMoyyhi8dRsoiKyHTURc/S3CZC8MyF5i9kqvRJ4PwqdTh3qBjP6UpxY7J/buTSSqcMdFUaKNLHNUwXikjvCREF4f9MLYG8qkZIh3Zy6rgsu9RoQeqj1OQ7u/rpPdoXwMbd8NirjXj3NAFBiNS+J6zorW34VuFDjF0b1dU3q1mFF08RTXUzCBCjNgqZdOruz5xDMAufXHtdFgE/TOxaqYQO7MwC9ST3KmQPuCxWFD3gJXswLc4SJnMIfadQwC9rdVmOmknE+hGUxNWuhcZ2eae/W766FmN4=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(346002)(136003)(396003)(376002)(451199021)(40470700004)(36840700001)(46966006)(30864003)(2906002)(40460700003)(356005)(41300700001)(81166007)(5660300002)(7416002)(8936002)(8676002)(44832011)(82310400005)(36756003)(86362001)(40480700001)(6666004)(1076003)(26005)(54906003)(478600001)(2616005)(36860700001)(83380400001)(336012)(426003)(47076005)(186003)(316002)(70206006)(70586007)(4326008)(6916009)(82740400003)(36900700001)(579004)(559001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2023 22:48:00.4539
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB3710.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 26f9804a-65d3-41e3-06ad-08db3ae6371c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Apr 2023 23:41:04.3932
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ff20461-d2a4-4736-0590-08db3adecd5d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY4PEPF0000C97D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7762
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NZbzsBNY+3WSfna+FKgdlfrADCnTo0bsqNYdZR5jTixlnV+SoKW6ch46HSupSBuaXHffqruAZae0oSkNrZYy4vqEdKBH81lVzl+nIKRXCOQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR03MB6358
+X-Proofpoint-ORIG-GUID: NBWx1qpd7oTfHIlgL1c21heI70KuBW85
+X-Proofpoint-GUID: NBWx1qpd7oTfHIlgL1c21heI70KuBW85
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-04-11_16,2023-04-11_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 mlxlogscore=999 lowpriorityscore=0 phishscore=0
+ suspectscore=0 adultscore=0 spamscore=0 bulkscore=0 malwarescore=0
+ clxscore=1015 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2304110213
 
-From: Stefano Stabellini <stefano.stabellini@amd.com>
-
-This patch does following:
-1. creates arch_handle_ioreq() and arch_xen_set_memory(). This is done in
-    preparation for moving most of xen-hvm code to an arch-neutral location,
-    move the x86-specific portion of xen_set_memory to arch_xen_set_memory.
-    Also, move handle_vmport_ioreq to arch_handle_ioreq.
-
-2. Pure code movement: move common functions to hw/xen/xen-hvm-common.c
-    Extract common functionalities from hw/i386/xen/xen-hvm.c and move them to
-    hw/xen/xen-hvm-common.c. These common functions are useful for creating
-    an IOREQ server.
-
-    xen_hvm_init_pc() contains the architecture independent code for creating
-    and mapping a IOREQ server, connecting memory and IO listeners, initializing
-    a xen bus and registering backends. Moved this common xen code to a new
-    function xen_register_ioreq() which can be used by both x86 and ARM machines.
-
-    Following functions are moved to hw/xen/xen-hvm-common.c:
-        xen_vcpu_eport(), xen_vcpu_ioreq(), xen_ram_alloc(), xen_set_memory(),
-        xen_region_add(), xen_region_del(), xen_io_add(), xen_io_del(),
-        xen_device_realize(), xen_device_unrealize(),
-        cpu_get_ioreq_from_shared_memory(), cpu_get_ioreq(), do_inp(),
-        do_outp(), rw_phys_req_item(), read_phys_req_item(),
-        write_phys_req_item(), cpu_ioreq_pio(), cpu_ioreq_move(),
-        cpu_ioreq_config(), handle_ioreq(), handle_buffered_iopage(),
-        handle_buffered_io(), cpu_handle_ioreq(), xen_main_loop_prepare(),
-        xen_hvm_change_state_handler(), xen_exit_notifier(),
-        xen_map_ioreq_server(), destroy_hvm_domain() and
-        xen_shutdown_fatal_error()
-
-3. Removed static type from below functions:
-    1. xen_region_add()
-    2. xen_region_del()
-    3. xen_io_add()
-    4. xen_io_del()
-    5. xen_device_realize()
-    6. xen_device_unrealize()
-    7. xen_hvm_change_state_handler()
-    8. cpu_ioreq_pio()
-    9. xen_exit_notifier()
-
-4. Replace TARGET_PAGE_SIZE with XC_PAGE_SIZE to match the page side with Xen.
-
-Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
- hw/i386/xen/trace-events        |   14 -
- hw/i386/xen/xen-hvm.c           | 1016 ++-----------------------------
- hw/xen/meson.build              |    5 +-
- hw/xen/trace-events             |   14 +
- hw/xen/xen-hvm-common.c         |  860 ++++++++++++++++++++++++++
- include/hw/i386/xen_arch_hvm.h  |   11 +
- include/hw/xen/arch_hvm.h       |    3 +
- include/hw/xen/xen-hvm-common.h |   99 +++
- 8 files changed, 1054 insertions(+), 968 deletions(-)
- create mode 100644 hw/xen/xen-hvm-common.c
- create mode 100644 include/hw/i386/xen_arch_hvm.h
- create mode 100644 include/hw/xen/arch_hvm.h
- create mode 100644 include/hw/xen/xen-hvm-common.h
-
-diff --git a/hw/i386/xen/trace-events b/hw/i386/xen/trace-events
-index a0c89d91c4..5d0a8d6dcf 100644
---- a/hw/i386/xen/trace-events
-+++ b/hw/i386/xen/trace-events
-@@ -7,17 +7,3 @@ xen_platform_log(char *s) "xen platform: %s"
- xen_pv_mmio_read(uint64_t addr) "WARNING: read from Xen PV Device MMIO space (address 0x%"PRIx64")"
- xen_pv_mmio_write(uint64_t addr) "WARNING: write to Xen PV Device MMIO space (address 0x%"PRIx64")"
- 
--# xen-hvm.c
--xen_ram_alloc(unsigned long ram_addr, unsigned long size) "requested: 0x%lx, size 0x%lx"
--xen_client_set_memory(uint64_t start_addr, unsigned long size, bool log_dirty) "0x%"PRIx64" size 0x%lx, log_dirty %i"
--handle_ioreq(void *req, uint32_t type, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p type=%d dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
--handle_ioreq_read(void *req, uint32_t type, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p read type=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
--handle_ioreq_write(void *req, uint32_t type, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p write type=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
--cpu_ioreq_pio(void *req, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p pio dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
--cpu_ioreq_pio_read_reg(void *req, uint64_t data, uint64_t addr, uint32_t size) "I/O=%p pio read reg data=0x%"PRIx64" port=0x%"PRIx64" size=%d"
--cpu_ioreq_pio_write_reg(void *req, uint64_t data, uint64_t addr, uint32_t size) "I/O=%p pio write reg data=0x%"PRIx64" port=0x%"PRIx64" size=%d"
--cpu_ioreq_move(void *req, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p copy dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
--xen_map_resource_ioreq(uint32_t id, void *addr) "id: %u addr: %p"
--cpu_ioreq_config_read(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
--cpu_ioreq_config_write(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
--
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index 6be5a250a8..a1ff5be4e1 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -10,43 +10,21 @@
- 
- #include "qemu/osdep.h"
- #include "qemu/units.h"
-+#include "qapi/error.h"
-+#include "qapi/qapi-commands-migration.h"
-+#include "trace.h"
- 
--#include "cpu.h"
--#include "hw/pci/pci.h"
--#include "hw/pci/pci_host.h"
- #include "hw/i386/pc.h"
- #include "hw/irq.h"
--#include "hw/hw.h"
- #include "hw/i386/apic-msidef.h"
--#include "hw/xen/xen_native.h"
--#include "hw/xen/xen-legacy-backend.h"
--#include "hw/xen/xen-bus.h"
- #include "hw/xen/xen-x86.h"
--#include "qapi/error.h"
--#include "qapi/qapi-commands-migration.h"
--#include "qemu/error-report.h"
--#include "qemu/main-loop.h"
- #include "qemu/range.h"
--#include "sysemu/runstate.h"
--#include "sysemu/sysemu.h"
--#include "sysemu/xen.h"
--#include "sysemu/xen-mapcache.h"
--#include "trace.h"
- 
--#include <xen/hvm/ioreq.h>
-+#include "hw/xen/xen-hvm-common.h"
-+#include "hw/xen/arch_hvm.h"
- #include <xen/hvm/e820.h>
- 
--//#define DEBUG_XEN_HVM
--
--#ifdef DEBUG_XEN_HVM
--#define DPRINTF(fmt, ...) \
--    do { fprintf(stderr, "xen: " fmt, ## __VA_ARGS__); } while (0)
--#else
--#define DPRINTF(fmt, ...) \
--    do { } while (0)
--#endif
--
--static MemoryRegion ram_memory, ram_640k, ram_lo, ram_hi;
-+static MemoryRegion ram_640k, ram_lo, ram_hi;
- static MemoryRegion *framebuffer;
- static bool xen_in_migration;
- 
-@@ -74,27 +52,8 @@ struct shared_vmport_iopage {
- };
- typedef struct shared_vmport_iopage shared_vmport_iopage_t;
- #endif
--static shared_vmport_iopage_t *shared_vmport_page;
- 
--static inline uint32_t xen_vcpu_eport(shared_iopage_t *shared_page, int i)
--{
--    return shared_page->vcpu_ioreq[i].vp_eport;
--}
--static inline ioreq_t *xen_vcpu_ioreq(shared_iopage_t *shared_page, int vcpu)
--{
--    return &shared_page->vcpu_ioreq[vcpu];
--}
--
--#define BUFFER_IO_MAX_DELAY  100
--
--typedef struct XenPhysmap {
--    hwaddr start_addr;
--    ram_addr_t size;
--    const char *name;
--    hwaddr phys_offset;
--
--    QLIST_ENTRY(XenPhysmap) list;
--} XenPhysmap;
-+static shared_vmport_iopage_t *shared_vmport_page;
- 
- static QLIST_HEAD(, XenPhysmap) xen_physmap;
- static const XenPhysmap *log_for_dirtybit;
-@@ -103,38 +62,6 @@ static unsigned long *dirty_bitmap;
- static Notifier suspend;
- static Notifier wakeup;
- 
--typedef struct XenPciDevice {
--    PCIDevice *pci_dev;
--    uint32_t sbdf;
--    QLIST_ENTRY(XenPciDevice) entry;
--} XenPciDevice;
--
--typedef struct XenIOState {
--    ioservid_t ioservid;
--    shared_iopage_t *shared_page;
--    buffered_iopage_t *buffered_io_page;
--    xenforeignmemory_resource_handle *fres;
--    QEMUTimer *buffered_io_timer;
--    CPUState **cpu_by_vcpu_id;
--    /* the evtchn port for polling the notification, */
--    evtchn_port_t *ioreq_local_port;
--    /* evtchn remote and local ports for buffered io */
--    evtchn_port_t bufioreq_remote_port;
--    evtchn_port_t bufioreq_local_port;
--    /* the evtchn fd for polling */
--    xenevtchn_handle *xce_handle;
--    /* which vcpu we are serving */
--    int send_vcpu;
--
--    struct xs_handle *xenstore;
--    MemoryListener memory_listener;
--    MemoryListener io_listener;
--    QLIST_HEAD(, XenPciDevice) dev_list;
--    DeviceListener device_listener;
--
--    Notifier exit;
--} XenIOState;
--
- /* Xen specific function for piix pci */
- 
- int xen_pci_slot_get_pirq(PCIDevice *pci_dev, int irq_num)
-@@ -247,42 +174,6 @@ static void xen_ram_init(PCMachineState *pcms,
-     }
- }
- 
--void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
--                   Error **errp)
--{
--    unsigned long nr_pfn;
--    xen_pfn_t *pfn_list;
--    int i;
--
--    if (runstate_check(RUN_STATE_INMIGRATE)) {
--        /* RAM already populated in Xen */
--        fprintf(stderr, "%s: do not alloc "RAM_ADDR_FMT
--                " bytes of ram at "RAM_ADDR_FMT" when runstate is INMIGRATE\n",
--                __func__, size, ram_addr);
--        return;
--    }
--
--    if (mr == &ram_memory) {
--        return;
--    }
--
--    trace_xen_ram_alloc(ram_addr, size);
--
--    nr_pfn = size >> TARGET_PAGE_BITS;
--    pfn_list = g_malloc(sizeof (*pfn_list) * nr_pfn);
--
--    for (i = 0; i < nr_pfn; i++) {
--        pfn_list[i] = (ram_addr >> TARGET_PAGE_BITS) + i;
--    }
--
--    if (xc_domain_populate_physmap_exact(xen_xc, xen_domid, nr_pfn, 0, 0, pfn_list)) {
--        error_setg(errp, "xen: failed to populate ram at " RAM_ADDR_FMT,
--                   ram_addr);
--    }
--
--    g_free(pfn_list);
--}
--
- static XenPhysmap *get_physmapping(hwaddr start_addr, ram_addr_t size)
- {
-     XenPhysmap *physmap = NULL;
-@@ -472,144 +363,6 @@ static int xen_remove_from_physmap(XenIOState *state,
-     return 0;
- }
- 
--static void xen_set_memory(struct MemoryListener *listener,
--                           MemoryRegionSection *section,
--                           bool add)
--{
--    XenIOState *state = container_of(listener, XenIOState, memory_listener);
--    hwaddr start_addr = section->offset_within_address_space;
--    ram_addr_t size = int128_get64(section->size);
--    bool log_dirty = memory_region_is_logging(section->mr, DIRTY_MEMORY_VGA);
--    hvmmem_type_t mem_type;
--
--    if (section->mr == &ram_memory) {
--        return;
--    } else {
--        if (add) {
--            xen_map_memory_section(xen_domid, state->ioservid,
--                                   section);
--        } else {
--            xen_unmap_memory_section(xen_domid, state->ioservid,
--                                     section);
--        }
--    }
--
--    if (!memory_region_is_ram(section->mr)) {
--        return;
--    }
--
--    if (log_dirty != add) {
--        return;
--    }
--
--    trace_xen_client_set_memory(start_addr, size, log_dirty);
--
--    start_addr &= TARGET_PAGE_MASK;
--    size = TARGET_PAGE_ALIGN(size);
--
--    if (add) {
--        if (!memory_region_is_rom(section->mr)) {
--            xen_add_to_physmap(state, start_addr, size,
--                               section->mr, section->offset_within_region);
--        } else {
--            mem_type = HVMMEM_ram_ro;
--            if (xen_set_mem_type(xen_domid, mem_type,
--                                 start_addr >> TARGET_PAGE_BITS,
--                                 size >> TARGET_PAGE_BITS)) {
--                DPRINTF("xen_set_mem_type error, addr: "HWADDR_FMT_plx"\n",
--                        start_addr);
--            }
--        }
--    } else {
--        if (xen_remove_from_physmap(state, start_addr, size) < 0) {
--            DPRINTF("physmapping does not exist at "HWADDR_FMT_plx"\n", start_addr);
--        }
--    }
--}
--
--static void xen_region_add(MemoryListener *listener,
--                           MemoryRegionSection *section)
--{
--    memory_region_ref(section->mr);
--    xen_set_memory(listener, section, true);
--}
--
--static void xen_region_del(MemoryListener *listener,
--                           MemoryRegionSection *section)
--{
--    xen_set_memory(listener, section, false);
--    memory_region_unref(section->mr);
--}
--
--static void xen_io_add(MemoryListener *listener,
--                       MemoryRegionSection *section)
--{
--    XenIOState *state = container_of(listener, XenIOState, io_listener);
--    MemoryRegion *mr = section->mr;
--
--    if (mr->ops == &unassigned_io_ops) {
--        return;
--    }
--
--    memory_region_ref(mr);
--
--    xen_map_io_section(xen_domid, state->ioservid, section);
--}
--
--static void xen_io_del(MemoryListener *listener,
--                       MemoryRegionSection *section)
--{
--    XenIOState *state = container_of(listener, XenIOState, io_listener);
--    MemoryRegion *mr = section->mr;
--
--    if (mr->ops == &unassigned_io_ops) {
--        return;
--    }
--
--    xen_unmap_io_section(xen_domid, state->ioservid, section);
--
--    memory_region_unref(mr);
--}
--
--static void xen_device_realize(DeviceListener *listener,
--                               DeviceState *dev)
--{
--    XenIOState *state = container_of(listener, XenIOState, device_listener);
--
--    if (object_dynamic_cast(OBJECT(dev), TYPE_PCI_DEVICE)) {
--        PCIDevice *pci_dev = PCI_DEVICE(dev);
--        XenPciDevice *xendev = g_new(XenPciDevice, 1);
--
--        xendev->pci_dev = pci_dev;
--        xendev->sbdf = PCI_BUILD_BDF(pci_dev_bus_num(pci_dev),
--                                     pci_dev->devfn);
--        QLIST_INSERT_HEAD(&state->dev_list, xendev, entry);
--
--        xen_map_pcidev(xen_domid, state->ioservid, pci_dev);
--    }
--}
--
--static void xen_device_unrealize(DeviceListener *listener,
--                                 DeviceState *dev)
--{
--    XenIOState *state = container_of(listener, XenIOState, device_listener);
--
--    if (object_dynamic_cast(OBJECT(dev), TYPE_PCI_DEVICE)) {
--        PCIDevice *pci_dev = PCI_DEVICE(dev);
--        XenPciDevice *xendev, *next;
--
--        xen_unmap_pcidev(xen_domid, state->ioservid, pci_dev);
--
--        QLIST_FOREACH_SAFE(xendev, &state->dev_list, entry, next) {
--            if (xendev->pci_dev == pci_dev) {
--                QLIST_REMOVE(xendev, entry);
--                g_free(xendev);
--                break;
--            }
--        }
--    }
--}
--
- static void xen_sync_dirty_bitmap(XenIOState *state,
-                                   hwaddr start_addr,
-                                   ram_addr_t size)
-@@ -717,277 +470,6 @@ static MemoryListener xen_memory_listener = {
-     .priority = 10,
- };
- 
--static MemoryListener xen_io_listener = {
--    .name = "xen-io",
--    .region_add = xen_io_add,
--    .region_del = xen_io_del,
--    .priority = 10,
--};
--
--static DeviceListener xen_device_listener = {
--    .realize = xen_device_realize,
--    .unrealize = xen_device_unrealize,
--};
--
--/* get the ioreq packets from share mem */
--static ioreq_t *cpu_get_ioreq_from_shared_memory(XenIOState *state, int vcpu)
--{
--    ioreq_t *req = xen_vcpu_ioreq(state->shared_page, vcpu);
--
--    if (req->state != STATE_IOREQ_READY) {
--        DPRINTF("I/O request not ready: "
--                "%x, ptr: %x, port: %"PRIx64", "
--                "data: %"PRIx64", count: %u, size: %u\n",
--                req->state, req->data_is_ptr, req->addr,
--                req->data, req->count, req->size);
--        return NULL;
--    }
--
--    xen_rmb(); /* see IOREQ_READY /then/ read contents of ioreq */
--
--    req->state = STATE_IOREQ_INPROCESS;
--    return req;
--}
--
--/* use poll to get the port notification */
--/* ioreq_vec--out,the */
--/* retval--the number of ioreq packet */
--static ioreq_t *cpu_get_ioreq(XenIOState *state)
--{
--    MachineState *ms = MACHINE(qdev_get_machine());
--    unsigned int max_cpus = ms->smp.max_cpus;
--    int i;
--    evtchn_port_t port;
--
--    port = qemu_xen_evtchn_pending(state->xce_handle);
--    if (port == state->bufioreq_local_port) {
--        timer_mod(state->buffered_io_timer,
--                BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
--        return NULL;
--    }
--
--    if (port != -1) {
--        for (i = 0; i < max_cpus; i++) {
--            if (state->ioreq_local_port[i] == port) {
--                break;
--            }
--        }
--
--        if (i == max_cpus) {
--            hw_error("Fatal error while trying to get io event!\n");
--        }
--
--        /* unmask the wanted port again */
--        qemu_xen_evtchn_unmask(state->xce_handle, port);
--
--        /* get the io packet from shared memory */
--        state->send_vcpu = i;
--        return cpu_get_ioreq_from_shared_memory(state, i);
--    }
--
--    /* read error or read nothing */
--    return NULL;
--}
--
--static uint32_t do_inp(uint32_t addr, unsigned long size)
--{
--    switch (size) {
--        case 1:
--            return cpu_inb(addr);
--        case 2:
--            return cpu_inw(addr);
--        case 4:
--            return cpu_inl(addr);
--        default:
--            hw_error("inp: bad size: %04x %lx", addr, size);
--    }
--}
--
--static void do_outp(uint32_t addr,
--        unsigned long size, uint32_t val)
--{
--    switch (size) {
--        case 1:
--            return cpu_outb(addr, val);
--        case 2:
--            return cpu_outw(addr, val);
--        case 4:
--            return cpu_outl(addr, val);
--        default:
--            hw_error("outp: bad size: %04x %lx", addr, size);
--    }
--}
--
--/*
-- * Helper functions which read/write an object from/to physical guest
-- * memory, as part of the implementation of an ioreq.
-- *
-- * Equivalent to
-- *   cpu_physical_memory_rw(addr + (req->df ? -1 : +1) * req->size * i,
-- *                          val, req->size, 0/1)
-- * except without the integer overflow problems.
-- */
--static void rw_phys_req_item(hwaddr addr,
--                             ioreq_t *req, uint32_t i, void *val, int rw)
--{
--    /* Do everything unsigned so overflow just results in a truncated result
--     * and accesses to undesired parts of guest memory, which is up
--     * to the guest */
--    hwaddr offset = (hwaddr)req->size * i;
--    if (req->df) {
--        addr -= offset;
--    } else {
--        addr += offset;
--    }
--    cpu_physical_memory_rw(addr, val, req->size, rw);
--}
--
--static inline void read_phys_req_item(hwaddr addr,
--                                      ioreq_t *req, uint32_t i, void *val)
--{
--    rw_phys_req_item(addr, req, i, val, 0);
--}
--static inline void write_phys_req_item(hwaddr addr,
--                                       ioreq_t *req, uint32_t i, void *val)
--{
--    rw_phys_req_item(addr, req, i, val, 1);
--}
--
--
--static void cpu_ioreq_pio(ioreq_t *req)
--{
--    uint32_t i;
--
--    trace_cpu_ioreq_pio(req, req->dir, req->df, req->data_is_ptr, req->addr,
--                         req->data, req->count, req->size);
--
--    if (req->size > sizeof(uint32_t)) {
--        hw_error("PIO: bad size (%u)", req->size);
--    }
--
--    if (req->dir == IOREQ_READ) {
--        if (!req->data_is_ptr) {
--            req->data = do_inp(req->addr, req->size);
--            trace_cpu_ioreq_pio_read_reg(req, req->data, req->addr,
--                                         req->size);
--        } else {
--            uint32_t tmp;
--
--            for (i = 0; i < req->count; i++) {
--                tmp = do_inp(req->addr, req->size);
--                write_phys_req_item(req->data, req, i, &tmp);
--            }
--        }
--    } else if (req->dir == IOREQ_WRITE) {
--        if (!req->data_is_ptr) {
--            trace_cpu_ioreq_pio_write_reg(req, req->data, req->addr,
--                                          req->size);
--            do_outp(req->addr, req->size, req->data);
--        } else {
--            for (i = 0; i < req->count; i++) {
--                uint32_t tmp = 0;
--
--                read_phys_req_item(req->data, req, i, &tmp);
--                do_outp(req->addr, req->size, tmp);
--            }
--        }
--    }
--}
--
--static void cpu_ioreq_move(ioreq_t *req)
--{
--    uint32_t i;
--
--    trace_cpu_ioreq_move(req, req->dir, req->df, req->data_is_ptr, req->addr,
--                         req->data, req->count, req->size);
--
--    if (req->size > sizeof(req->data)) {
--        hw_error("MMIO: bad size (%u)", req->size);
--    }
--
--    if (!req->data_is_ptr) {
--        if (req->dir == IOREQ_READ) {
--            for (i = 0; i < req->count; i++) {
--                read_phys_req_item(req->addr, req, i, &req->data);
--            }
--        } else if (req->dir == IOREQ_WRITE) {
--            for (i = 0; i < req->count; i++) {
--                write_phys_req_item(req->addr, req, i, &req->data);
--            }
--        }
--    } else {
--        uint64_t tmp;
--
--        if (req->dir == IOREQ_READ) {
--            for (i = 0; i < req->count; i++) {
--                read_phys_req_item(req->addr, req, i, &tmp);
--                write_phys_req_item(req->data, req, i, &tmp);
--            }
--        } else if (req->dir == IOREQ_WRITE) {
--            for (i = 0; i < req->count; i++) {
--                read_phys_req_item(req->data, req, i, &tmp);
--                write_phys_req_item(req->addr, req, i, &tmp);
--            }
--        }
--    }
--}
--
--static void cpu_ioreq_config(XenIOState *state, ioreq_t *req)
--{
--    uint32_t sbdf = req->addr >> 32;
--    uint32_t reg = req->addr;
--    XenPciDevice *xendev;
--
--    if (req->size != sizeof(uint8_t) && req->size != sizeof(uint16_t) &&
--        req->size != sizeof(uint32_t)) {
--        hw_error("PCI config access: bad size (%u)", req->size);
--    }
--
--    if (req->count != 1) {
--        hw_error("PCI config access: bad count (%u)", req->count);
--    }
--
--    QLIST_FOREACH(xendev, &state->dev_list, entry) {
--        if (xendev->sbdf != sbdf) {
--            continue;
--        }
--
--        if (!req->data_is_ptr) {
--            if (req->dir == IOREQ_READ) {
--                req->data = pci_host_config_read_common(
--                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
--                    req->size);
--                trace_cpu_ioreq_config_read(req, xendev->sbdf, reg,
--                                            req->size, req->data);
--            } else if (req->dir == IOREQ_WRITE) {
--                trace_cpu_ioreq_config_write(req, xendev->sbdf, reg,
--                                             req->size, req->data);
--                pci_host_config_write_common(
--                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
--                    req->data, req->size);
--            }
--        } else {
--            uint32_t tmp;
--
--            if (req->dir == IOREQ_READ) {
--                tmp = pci_host_config_read_common(
--                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
--                    req->size);
--                trace_cpu_ioreq_config_read(req, xendev->sbdf, reg,
--                                            req->size, tmp);
--                write_phys_req_item(req->data, req, 0, &tmp);
--            } else if (req->dir == IOREQ_WRITE) {
--                read_phys_req_item(req->data, req, 0, &tmp);
--                trace_cpu_ioreq_config_write(req, xendev->sbdf, reg,
--                                             req->size, tmp);
--                pci_host_config_write_common(
--                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
--                    tmp, req->size);
--            }
--        }
--    }
--}
--
- static void regs_to_cpu(vmware_regs_t *vmport_regs, ioreq_t *req)
- {
-     X86CPU *cpu;
-@@ -1031,226 +513,6 @@ static void handle_vmport_ioreq(XenIOState *state, ioreq_t *req)
-     current_cpu = NULL;
- }
- 
--static void handle_ioreq(XenIOState *state, ioreq_t *req)
--{
--    trace_handle_ioreq(req, req->type, req->dir, req->df, req->data_is_ptr,
--                       req->addr, req->data, req->count, req->size);
--
--    if (!req->data_is_ptr && (req->dir == IOREQ_WRITE) &&
--            (req->size < sizeof (target_ulong))) {
--        req->data &= ((target_ulong) 1 << (8 * req->size)) - 1;
--    }
--
--    if (req->dir == IOREQ_WRITE)
--        trace_handle_ioreq_write(req, req->type, req->df, req->data_is_ptr,
--                                 req->addr, req->data, req->count, req->size);
--
--    switch (req->type) {
--        case IOREQ_TYPE_PIO:
--            cpu_ioreq_pio(req);
--            break;
--        case IOREQ_TYPE_COPY:
--            cpu_ioreq_move(req);
--            break;
--        case IOREQ_TYPE_VMWARE_PORT:
--            handle_vmport_ioreq(state, req);
--            break;
--        case IOREQ_TYPE_TIMEOFFSET:
--            break;
--        case IOREQ_TYPE_INVALIDATE:
--            xen_invalidate_map_cache();
--            break;
--        case IOREQ_TYPE_PCI_CONFIG:
--            cpu_ioreq_config(state, req);
--            break;
--        default:
--            hw_error("Invalid ioreq type 0x%x\n", req->type);
--    }
--    if (req->dir == IOREQ_READ) {
--        trace_handle_ioreq_read(req, req->type, req->df, req->data_is_ptr,
--                                req->addr, req->data, req->count, req->size);
--    }
--}
--
--static bool handle_buffered_iopage(XenIOState *state)
--{
--    buffered_iopage_t *buf_page = state->buffered_io_page;
--    buf_ioreq_t *buf_req = NULL;
--    bool handled_ioreq = false;
--    ioreq_t req;
--    int qw;
--
--    if (!buf_page) {
--        return 0;
--    }
--
--    memset(&req, 0x00, sizeof(req));
--    req.state = STATE_IOREQ_READY;
--    req.count = 1;
--    req.dir = IOREQ_WRITE;
--
--    for (;;) {
--        uint32_t rdptr = buf_page->read_pointer, wrptr;
--
--        xen_rmb();
--        wrptr = buf_page->write_pointer;
--        xen_rmb();
--        if (rdptr != buf_page->read_pointer) {
--            continue;
--        }
--        if (rdptr == wrptr) {
--            break;
--        }
--        buf_req = &buf_page->buf_ioreq[rdptr % IOREQ_BUFFER_SLOT_NUM];
--        req.size = 1U << buf_req->size;
--        req.addr = buf_req->addr;
--        req.data = buf_req->data;
--        req.type = buf_req->type;
--        xen_rmb();
--        qw = (req.size == 8);
--        if (qw) {
--            if (rdptr + 1 == wrptr) {
--                hw_error("Incomplete quad word buffered ioreq");
--            }
--            buf_req = &buf_page->buf_ioreq[(rdptr + 1) %
--                                           IOREQ_BUFFER_SLOT_NUM];
--            req.data |= ((uint64_t)buf_req->data) << 32;
--            xen_rmb();
--        }
--
--        handle_ioreq(state, &req);
--
--        /* Only req.data may get updated by handle_ioreq(), albeit even that
--         * should not happen as such data would never make it to the guest (we
--         * can only usefully see writes here after all).
--         */
--        assert(req.state == STATE_IOREQ_READY);
--        assert(req.count == 1);
--        assert(req.dir == IOREQ_WRITE);
--        assert(!req.data_is_ptr);
--
--        qatomic_add(&buf_page->read_pointer, qw + 1);
--        handled_ioreq = true;
--    }
--
--    return handled_ioreq;
--}
--
--static void handle_buffered_io(void *opaque)
--{
--    XenIOState *state = opaque;
--
--    if (handle_buffered_iopage(state)) {
--        timer_mod(state->buffered_io_timer,
--                BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
--    } else {
--        timer_del(state->buffered_io_timer);
--        qemu_xen_evtchn_unmask(state->xce_handle, state->bufioreq_local_port);
--    }
--}
--
--static void cpu_handle_ioreq(void *opaque)
--{
--    XenIOState *state = opaque;
--    ioreq_t *req = cpu_get_ioreq(state);
--
--    handle_buffered_iopage(state);
--    if (req) {
--        ioreq_t copy = *req;
--
--        xen_rmb();
--        handle_ioreq(state, &copy);
--        req->data = copy.data;
--
--        if (req->state != STATE_IOREQ_INPROCESS) {
--            fprintf(stderr, "Badness in I/O request ... not in service?!: "
--                    "%x, ptr: %x, port: %"PRIx64", "
--                    "data: %"PRIx64", count: %u, size: %u, type: %u\n",
--                    req->state, req->data_is_ptr, req->addr,
--                    req->data, req->count, req->size, req->type);
--            destroy_hvm_domain(false);
--            return;
--        }
--
--        xen_wmb(); /* Update ioreq contents /then/ update state. */
--
--        /*
--         * We do this before we send the response so that the tools
--         * have the opportunity to pick up on the reset before the
--         * guest resumes and does a hlt with interrupts disabled which
--         * causes Xen to powerdown the domain.
--         */
--        if (runstate_is_running()) {
--            ShutdownCause request;
--
--            if (qemu_shutdown_requested_get()) {
--                destroy_hvm_domain(false);
--            }
--            request = qemu_reset_requested_get();
--            if (request) {
--                qemu_system_reset(request);
--                destroy_hvm_domain(true);
--            }
--        }
--
--        req->state = STATE_IORESP_READY;
--        qemu_xen_evtchn_notify(state->xce_handle,
--                               state->ioreq_local_port[state->send_vcpu]);
--    }
--}
--
--static void xen_main_loop_prepare(XenIOState *state)
--{
--    int evtchn_fd = -1;
--
--    if (state->xce_handle != NULL) {
--        evtchn_fd = qemu_xen_evtchn_fd(state->xce_handle);
--    }
--
--    state->buffered_io_timer = timer_new_ms(QEMU_CLOCK_REALTIME, handle_buffered_io,
--                                                 state);
--
--    if (evtchn_fd != -1) {
--        CPUState *cpu_state;
--
--        DPRINTF("%s: Init cpu_by_vcpu_id\n", __func__);
--        CPU_FOREACH(cpu_state) {
--            DPRINTF("%s: cpu_by_vcpu_id[%d]=%p\n",
--                    __func__, cpu_state->cpu_index, cpu_state);
--            state->cpu_by_vcpu_id[cpu_state->cpu_index] = cpu_state;
--        }
--        qemu_set_fd_handler(evtchn_fd, cpu_handle_ioreq, NULL, state);
--    }
--}
--
--
--static void xen_hvm_change_state_handler(void *opaque, bool running,
--                                         RunState rstate)
--{
--    XenIOState *state = opaque;
--
--    if (running) {
--        xen_main_loop_prepare(state);
--    }
--
--    xen_set_ioreq_server_state(xen_domid,
--                               state->ioservid,
--                               (rstate == RUN_STATE_RUNNING));
--}
--
--static void xen_exit_notifier(Notifier *n, void *data)
--{
--    XenIOState *state = container_of(n, XenIOState, exit);
--
--    xen_destroy_ioreq_server(xen_domid, state->ioservid);
--    if (state->fres != NULL) {
--        xenforeignmemory_unmap_resource(xen_fmem, state->fres);
--    }
--
--    qemu_xen_evtchn_close(state->xce_handle);
--    xs_daemon_close(state->xenstore);
--}
--
- #ifdef XEN_COMPAT_PHYSMAP
- static void xen_read_physmap(XenIOState *state)
- {
-@@ -1310,175 +572,17 @@ static void xen_wakeup_notifier(Notifier *notifier, void *data)
-     xc_set_hvm_param(xen_xc, xen_domid, HVM_PARAM_ACPI_S_STATE, 0);
- }
- 
--static int xen_map_ioreq_server(XenIOState *state)
--{
--    void *addr = NULL;
--    xen_pfn_t ioreq_pfn;
--    xen_pfn_t bufioreq_pfn;
--    evtchn_port_t bufioreq_evtchn;
--    int rc;
--
--    /*
--     * Attempt to map using the resource API and fall back to normal
--     * foreign mapping if this is not supported.
--     */
--    QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_bufioreq != 0);
--    QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_ioreq(0) != 1);
--    state->fres = xenforeignmemory_map_resource(xen_fmem, xen_domid,
--                                         XENMEM_resource_ioreq_server,
--                                         state->ioservid, 0, 2,
--                                         &addr,
--                                         PROT_READ | PROT_WRITE, 0);
--    if (state->fres != NULL) {
--        trace_xen_map_resource_ioreq(state->ioservid, addr);
--        state->buffered_io_page = addr;
--        state->shared_page = addr + TARGET_PAGE_SIZE;
--    } else if (errno != EOPNOTSUPP) {
--        error_report("failed to map ioreq server resources: error %d handle=%p",
--                     errno, xen_xc);
--        return -1;
--    }
--
--    rc = xen_get_ioreq_server_info(xen_domid, state->ioservid,
--                                   (state->shared_page == NULL) ?
--                                   &ioreq_pfn : NULL,
--                                   (state->buffered_io_page == NULL) ?
--                                   &bufioreq_pfn : NULL,
--                                   &bufioreq_evtchn);
--    if (rc < 0) {
--        error_report("failed to get ioreq server info: error %d handle=%p",
--                     errno, xen_xc);
--        return rc;
--    }
--
--    if (state->shared_page == NULL) {
--        DPRINTF("shared page at pfn %lx\n", ioreq_pfn);
--
--        state->shared_page = xenforeignmemory_map(xen_fmem, xen_domid,
--                                                  PROT_READ | PROT_WRITE,
--                                                  1, &ioreq_pfn, NULL);
--        if (state->shared_page == NULL) {
--            error_report("map shared IO page returned error %d handle=%p",
--                         errno, xen_xc);
--        }
--    }
--
--    if (state->buffered_io_page == NULL) {
--        DPRINTF("buffered io page at pfn %lx\n", bufioreq_pfn);
--
--        state->buffered_io_page = xenforeignmemory_map(xen_fmem, xen_domid,
--                                                       PROT_READ | PROT_WRITE,
--                                                       1, &bufioreq_pfn,
--                                                       NULL);
--        if (state->buffered_io_page == NULL) {
--            error_report("map buffered IO page returned error %d", errno);
--            return -1;
--        }
--    }
--
--    if (state->shared_page == NULL || state->buffered_io_page == NULL) {
--        return -1;
--    }
--
--    DPRINTF("buffered io evtchn is %x\n", bufioreq_evtchn);
--
--    state->bufioreq_remote_port = bufioreq_evtchn;
--
--    return 0;
--}
--
- void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
- {
-     MachineState *ms = MACHINE(pcms);
-     unsigned int max_cpus = ms->smp.max_cpus;
--    int i, rc;
-+    int rc;
-     xen_pfn_t ioreq_pfn;
-     XenIOState *state;
- 
--    setup_xen_backend_ops();
--
-     state = g_new0(XenIOState, 1);
- 
--    state->xce_handle = qemu_xen_evtchn_open();
--    if (state->xce_handle == NULL) {
--        perror("xen: event channel open");
--        goto err;
--    }
--
--    state->xenstore = xs_daemon_open();
--    if (state->xenstore == NULL) {
--        perror("xen: xenstore open");
--        goto err;
--    }
--
--    xen_create_ioreq_server(xen_domid, &state->ioservid);
--
--    state->exit.notify = xen_exit_notifier;
--    qemu_add_exit_notifier(&state->exit);
--
--    /*
--     * Register wake-up support in QMP query-current-machine API
--     */
--    qemu_register_wakeup_support();
--
--    rc = xen_map_ioreq_server(state);
--    if (rc < 0) {
--        goto err;
--    }
--
--    /* Note: cpus is empty at this point in init */
--    state->cpu_by_vcpu_id = g_new0(CPUState *, max_cpus);
--
--    rc = xen_set_ioreq_server_state(xen_domid, state->ioservid, true);
--    if (rc < 0) {
--        error_report("failed to enable ioreq server info: error %d handle=%p",
--                     errno, xen_xc);
--        goto err;
--    }
--
--    state->ioreq_local_port = g_new0(evtchn_port_t, max_cpus);
--
--    /* FIXME: how about if we overflow the page here? */
--    for (i = 0; i < max_cpus; i++) {
--        rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
--                                              xen_vcpu_eport(state->shared_page,
--                                                             i));
--        if (rc == -1) {
--            error_report("shared evtchn %d bind error %d", i, errno);
--            goto err;
--        }
--        state->ioreq_local_port[i] = rc;
--    }
--
--    rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
--                                          state->bufioreq_remote_port);
--    if (rc == -1) {
--        error_report("buffered evtchn bind error %d", errno);
--        goto err;
--    }
--    state->bufioreq_local_port = rc;
--
--    /* Init RAM management */
--#ifdef XEN_COMPAT_PHYSMAP
--    xen_map_cache_init(xen_phys_offset_to_gaddr, state);
--#else
--    xen_map_cache_init(NULL, state);
--#endif
--
--    qemu_add_vm_change_state_handler(xen_hvm_change_state_handler, state);
--
--    state->memory_listener = xen_memory_listener;
--    memory_listener_register(&state->memory_listener, &address_space_memory);
--
--    state->io_listener = xen_io_listener;
--    memory_listener_register(&state->io_listener, &address_space_io);
--
--    state->device_listener = xen_device_listener;
--    QLIST_INIT(&state->dev_list);
--    device_listener_register(&state->device_listener);
--
--    xen_bus_init();
--    xen_be_init();
-+    xen_register_ioreq(state, max_cpus, xen_memory_listener);
- 
-     QLIST_INIT(&xen_physmap);
-     xen_read_physmap(state);
-@@ -1518,59 +622,11 @@ err:
-     exit(1);
- }
- 
--void destroy_hvm_domain(bool reboot)
--{
--    xc_interface *xc_handle;
--    int sts;
--    int rc;
--
--    unsigned int reason = reboot ? SHUTDOWN_reboot : SHUTDOWN_poweroff;
--
--    if (xen_dmod) {
--        rc = xendevicemodel_shutdown(xen_dmod, xen_domid, reason);
--        if (!rc) {
--            return;
--        }
--        if (errno != ENOTTY /* old Xen */) {
--            perror("xendevicemodel_shutdown failed");
--        }
--        /* well, try the old thing then */
--    }
--
--    xc_handle = xc_interface_open(0, 0, 0);
--    if (xc_handle == NULL) {
--        fprintf(stderr, "Cannot acquire xenctrl handle\n");
--    } else {
--        sts = xc_domain_shutdown(xc_handle, xen_domid, reason);
--        if (sts != 0) {
--            fprintf(stderr, "xc_domain_shutdown failed to issue %s, "
--                    "sts %d, %s\n", reboot ? "reboot" : "poweroff",
--                    sts, strerror(errno));
--        } else {
--            fprintf(stderr, "Issued domain %d %s\n", xen_domid,
--                    reboot ? "reboot" : "poweroff");
--        }
--        xc_interface_close(xc_handle);
--    }
--}
--
- void xen_register_framebuffer(MemoryRegion *mr)
- {
-     framebuffer = mr;
- }
- 
--void xen_shutdown_fatal_error(const char *fmt, ...)
--{
--    va_list ap;
--
--    va_start(ap, fmt);
--    vfprintf(stderr, fmt, ap);
--    va_end(ap);
--    fprintf(stderr, "Will destroy the domain.\n");
--    /* destroy the domain */
--    qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_ERROR);
--}
--
- void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
- {
-     if (unlikely(xen_in_migration)) {
-@@ -1602,3 +658,57 @@ void qmp_xen_set_global_dirty_log(bool enable, Error **errp)
-         memory_global_dirty_log_stop(GLOBAL_DIRTY_MIGRATION);
-     }
- }
-+
-+void arch_xen_set_memory(XenIOState *state, MemoryRegionSection *section,
-+                                bool add)
-+{
-+    hwaddr start_addr = section->offset_within_address_space;
-+    ram_addr_t size = int128_get64(section->size);
-+    bool log_dirty = memory_region_is_logging(section->mr, DIRTY_MEMORY_VGA);
-+    hvmmem_type_t mem_type;
-+
-+    if (!memory_region_is_ram(section->mr)) {
-+        return;
-+    }
-+
-+    if (log_dirty != add) {
-+        return;
-+    }
-+
-+    trace_xen_client_set_memory(start_addr, size, log_dirty);
-+
-+    start_addr &= TARGET_PAGE_MASK;
-+    size = TARGET_PAGE_ALIGN(size);
-+
-+    if (add) {
-+        if (!memory_region_is_rom(section->mr)) {
-+            xen_add_to_physmap(state, start_addr, size,
-+                               section->mr, section->offset_within_region);
-+        } else {
-+            mem_type = HVMMEM_ram_ro;
-+            if (xen_set_mem_type(xen_domid, mem_type,
-+                                 start_addr >> TARGET_PAGE_BITS,
-+                                 size >> TARGET_PAGE_BITS)) {
-+                DPRINTF("xen_set_mem_type error, addr: "HWADDR_FMT_plx"\n",
-+                        start_addr);
-+            }
-+        }
-+    } else {
-+        if (xen_remove_from_physmap(state, start_addr, size) < 0) {
-+            DPRINTF("physmapping does not exist at "HWADDR_FMT_plx"\n", start_addr);
-+        }
-+    }
-+}
-+
-+void arch_handle_ioreq(XenIOState *state, ioreq_t *req)
-+{
-+    switch (req->type) {
-+    case IOREQ_TYPE_VMWARE_PORT:
-+            handle_vmport_ioreq(state, req);
-+        break;
-+    default:
-+        hw_error("Invalid ioreq type 0x%x\n", req->type);
-+    }
-+
-+    return;
-+}
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index 202752e557..afd20754a1 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -29,4 +29,7 @@ specific_ss.add_all(when: ['CONFIG_XEN', xen], if_true: xen_specific_ss)
- 
- xen_ss = ss.source_set()
- 
--xen_ss.add(when: 'CONFIG_XEN', if_true: files('xen-mapcache.c'))
-+xen_ss.add(when: 'CONFIG_XEN', if_true: files(
-+  'xen-mapcache.c',
-+  'xen-hvm-common.c',
-+))
-diff --git a/hw/xen/trace-events b/hw/xen/trace-events
-index f977c7c8c6..67a6c41926 100644
---- a/hw/xen/trace-events
-+++ b/hw/xen/trace-events
-@@ -42,6 +42,20 @@ xs_node_vscanf(char *path, char *value) "%s %s"
- xs_node_watch(char *path) "%s"
- xs_node_unwatch(char *path) "%s"
- 
-+# xen-hvm.c
-+xen_ram_alloc(unsigned long ram_addr, unsigned long size) "requested: 0x%lx, size 0x%lx"
-+xen_client_set_memory(uint64_t start_addr, unsigned long size, bool log_dirty) "0x%"PRIx64" size 0x%lx, log_dirty %i"
-+handle_ioreq(void *req, uint32_t type, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p type=%d dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
-+handle_ioreq_read(void *req, uint32_t type, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p read type=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
-+handle_ioreq_write(void *req, uint32_t type, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p write type=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
-+cpu_ioreq_pio(void *req, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p pio dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
-+cpu_ioreq_pio_read_reg(void *req, uint64_t data, uint64_t addr, uint32_t size) "I/O=%p pio read reg data=0x%"PRIx64" port=0x%"PRIx64" size=%d"
-+cpu_ioreq_pio_write_reg(void *req, uint64_t data, uint64_t addr, uint32_t size) "I/O=%p pio write reg data=0x%"PRIx64" port=0x%"PRIx64" size=%d"
-+cpu_ioreq_move(void *req, uint32_t dir, uint32_t df, uint32_t data_is_ptr, uint64_t addr, uint64_t data, uint32_t count, uint32_t size) "I/O=%p copy dir=%d df=%d ptr=%d port=0x%"PRIx64" data=0x%"PRIx64" count=%d size=%d"
-+xen_map_resource_ioreq(uint32_t id, void *addr) "id: %u addr: %p"
-+cpu_ioreq_config_read(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
-+cpu_ioreq_config_write(void *req, uint32_t sbdf, uint32_t reg, uint32_t size, uint32_t data) "I/O=%p sbdf=0x%x reg=%u size=%u data=0x%x"
-+
- # xen-mapcache.c
- xen_map_cache(uint64_t phys_addr) "want 0x%"PRIx64
- xen_remap_bucket(uint64_t index) "index 0x%"PRIx64
-diff --git a/hw/xen/xen-hvm-common.c b/hw/xen/xen-hvm-common.c
-new file mode 100644
-index 0000000000..a31b067404
---- /dev/null
-+++ b/hw/xen/xen-hvm-common.c
-@@ -0,0 +1,860 @@
-+#include "qemu/osdep.h"
-+#include "qemu/units.h"
-+#include "qapi/error.h"
-+#include "trace.h"
-+
-+#include "hw/pci/pci_host.h"
-+#include "hw/xen/xen-hvm-common.h"
-+#include "hw/xen/xen-bus.h"
-+#include "hw/boards.h"
-+#include "hw/xen/arch_hvm.h"
-+
-+MemoryRegion ram_memory;
-+
-+void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size, MemoryRegion *mr,
-+                   Error **errp)
-+{
-+    unsigned long nr_pfn;
-+    xen_pfn_t *pfn_list;
-+    int i;
-+
-+    if (runstate_check(RUN_STATE_INMIGRATE)) {
-+        /* RAM already populated in Xen */
-+        fprintf(stderr, "%s: do not alloc "RAM_ADDR_FMT
-+                " bytes of ram at "RAM_ADDR_FMT" when runstate is INMIGRATE\n",
-+                __func__, size, ram_addr);
-+        return;
-+    }
-+
-+    if (mr == &ram_memory) {
-+        return;
-+    }
-+
-+    trace_xen_ram_alloc(ram_addr, size);
-+
-+    nr_pfn = size >> TARGET_PAGE_BITS;
-+    pfn_list = g_malloc(sizeof (*pfn_list) * nr_pfn);
-+
-+    for (i = 0; i < nr_pfn; i++) {
-+        pfn_list[i] = (ram_addr >> TARGET_PAGE_BITS) + i;
-+    }
-+
-+    if (xc_domain_populate_physmap_exact(xen_xc, xen_domid, nr_pfn, 0, 0, pfn_list)) {
-+        error_setg(errp, "xen: failed to populate ram at " RAM_ADDR_FMT,
-+                   ram_addr);
-+    }
-+
-+    g_free(pfn_list);
-+}
-+
-+static void xen_set_memory(struct MemoryListener *listener,
-+                           MemoryRegionSection *section,
-+                           bool add)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, memory_listener);
-+
-+    if (section->mr == &ram_memory) {
-+        return;
-+    } else {
-+        if (add) {
-+            xen_map_memory_section(xen_domid, state->ioservid,
-+                                   section);
-+        } else {
-+            xen_unmap_memory_section(xen_domid, state->ioservid,
-+                                     section);
-+        }
-+    }
-+
-+    arch_xen_set_memory(state, section, add);
-+}
-+
-+void xen_region_add(MemoryListener *listener,
-+                           MemoryRegionSection *section)
-+{
-+    memory_region_ref(section->mr);
-+    xen_set_memory(listener, section, true);
-+}
-+
-+void xen_region_del(MemoryListener *listener,
-+                           MemoryRegionSection *section)
-+{
-+    xen_set_memory(listener, section, false);
-+    memory_region_unref(section->mr);
-+}
-+
-+void xen_io_add(MemoryListener *listener,
-+                       MemoryRegionSection *section)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, io_listener);
-+    MemoryRegion *mr = section->mr;
-+
-+    if (mr->ops == &unassigned_io_ops) {
-+        return;
-+    }
-+
-+    memory_region_ref(mr);
-+
-+    xen_map_io_section(xen_domid, state->ioservid, section);
-+}
-+
-+void xen_io_del(MemoryListener *listener,
-+                       MemoryRegionSection *section)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, io_listener);
-+    MemoryRegion *mr = section->mr;
-+
-+    if (mr->ops == &unassigned_io_ops) {
-+        return;
-+    }
-+
-+    xen_unmap_io_section(xen_domid, state->ioservid, section);
-+
-+    memory_region_unref(mr);
-+}
-+
-+void xen_device_realize(DeviceListener *listener,
-+                               DeviceState *dev)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, device_listener);
-+
-+    if (object_dynamic_cast(OBJECT(dev), TYPE_PCI_DEVICE)) {
-+        PCIDevice *pci_dev = PCI_DEVICE(dev);
-+        XenPciDevice *xendev = g_new(XenPciDevice, 1);
-+
-+        xendev->pci_dev = pci_dev;
-+        xendev->sbdf = PCI_BUILD_BDF(pci_dev_bus_num(pci_dev),
-+                                     pci_dev->devfn);
-+        QLIST_INSERT_HEAD(&state->dev_list, xendev, entry);
-+
-+        xen_map_pcidev(xen_domid, state->ioservid, pci_dev);
-+    }
-+}
-+
-+void xen_device_unrealize(DeviceListener *listener,
-+                                 DeviceState *dev)
-+{
-+    XenIOState *state = container_of(listener, XenIOState, device_listener);
-+
-+    if (object_dynamic_cast(OBJECT(dev), TYPE_PCI_DEVICE)) {
-+        PCIDevice *pci_dev = PCI_DEVICE(dev);
-+        XenPciDevice *xendev, *next;
-+
-+        xen_unmap_pcidev(xen_domid, state->ioservid, pci_dev);
-+
-+        QLIST_FOREACH_SAFE(xendev, &state->dev_list, entry, next) {
-+            if (xendev->pci_dev == pci_dev) {
-+                QLIST_REMOVE(xendev, entry);
-+                g_free(xendev);
-+                break;
-+            }
-+        }
-+    }
-+}
-+
-+MemoryListener xen_io_listener = {
-+    .name = "xen-io",
-+    .region_add = xen_io_add,
-+    .region_del = xen_io_del,
-+    .priority = 10,
-+};
-+
-+DeviceListener xen_device_listener = {
-+    .realize = xen_device_realize,
-+    .unrealize = xen_device_unrealize,
-+};
-+
-+/* get the ioreq packets from share mem */
-+static ioreq_t *cpu_get_ioreq_from_shared_memory(XenIOState *state, int vcpu)
-+{
-+    ioreq_t *req = xen_vcpu_ioreq(state->shared_page, vcpu);
-+
-+    if (req->state != STATE_IOREQ_READY) {
-+        DPRINTF("I/O request not ready: "
-+                "%x, ptr: %x, port: %"PRIx64", "
-+                "data: %"PRIx64", count: %u, size: %u\n",
-+                req->state, req->data_is_ptr, req->addr,
-+                req->data, req->count, req->size);
-+        return NULL;
-+    }
-+
-+    xen_rmb(); /* see IOREQ_READY /then/ read contents of ioreq */
-+
-+    req->state = STATE_IOREQ_INPROCESS;
-+    return req;
-+}
-+
-+/* use poll to get the port notification */
-+/* ioreq_vec--out,the */
-+/* retval--the number of ioreq packet */
-+static ioreq_t *cpu_get_ioreq(XenIOState *state)
-+{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    unsigned int max_cpus = ms->smp.max_cpus;
-+    int i;
-+    evtchn_port_t port;
-+
-+    port = qemu_xen_evtchn_pending(state->xce_handle);
-+    if (port == state->bufioreq_local_port) {
-+        timer_mod(state->buffered_io_timer,
-+                BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
-+        return NULL;
-+    }
-+
-+    if (port != -1) {
-+        for (i = 0; i < max_cpus; i++) {
-+            if (state->ioreq_local_port[i] == port) {
-+                break;
-+            }
-+        }
-+
-+        if (i == max_cpus) {
-+            hw_error("Fatal error while trying to get io event!\n");
-+        }
-+
-+        /* unmask the wanted port again */
-+        qemu_xen_evtchn_unmask(state->xce_handle, port);
-+
-+        /* get the io packet from shared memory */
-+        state->send_vcpu = i;
-+        return cpu_get_ioreq_from_shared_memory(state, i);
-+    }
-+
-+    /* read error or read nothing */
-+    return NULL;
-+}
-+
-+static uint32_t do_inp(uint32_t addr, unsigned long size)
-+{
-+    switch (size) {
-+        case 1:
-+            return cpu_inb(addr);
-+        case 2:
-+            return cpu_inw(addr);
-+        case 4:
-+            return cpu_inl(addr);
-+        default:
-+            hw_error("inp: bad size: %04x %lx", addr, size);
-+    }
-+}
-+
-+static void do_outp(uint32_t addr,
-+        unsigned long size, uint32_t val)
-+{
-+    switch (size) {
-+        case 1:
-+            return cpu_outb(addr, val);
-+        case 2:
-+            return cpu_outw(addr, val);
-+        case 4:
-+            return cpu_outl(addr, val);
-+        default:
-+            hw_error("outp: bad size: %04x %lx", addr, size);
-+    }
-+}
-+
-+/*
-+ * Helper functions which read/write an object from/to physical guest
-+ * memory, as part of the implementation of an ioreq.
-+ *
-+ * Equivalent to
-+ *   cpu_physical_memory_rw(addr + (req->df ? -1 : +1) * req->size * i,
-+ *                          val, req->size, 0/1)
-+ * except without the integer overflow problems.
-+ */
-+static void rw_phys_req_item(hwaddr addr,
-+                             ioreq_t *req, uint32_t i, void *val, int rw)
-+{
-+    /* Do everything unsigned so overflow just results in a truncated result
-+     * and accesses to undesired parts of guest memory, which is up
-+     * to the guest */
-+    hwaddr offset = (hwaddr)req->size * i;
-+    if (req->df) {
-+        addr -= offset;
-+    } else {
-+        addr += offset;
-+    }
-+    cpu_physical_memory_rw(addr, val, req->size, rw);
-+}
-+
-+static inline void read_phys_req_item(hwaddr addr,
-+                                      ioreq_t *req, uint32_t i, void *val)
-+{
-+    rw_phys_req_item(addr, req, i, val, 0);
-+}
-+static inline void write_phys_req_item(hwaddr addr,
-+                                       ioreq_t *req, uint32_t i, void *val)
-+{
-+    rw_phys_req_item(addr, req, i, val, 1);
-+}
-+
-+
-+void cpu_ioreq_pio(ioreq_t *req)
-+{
-+    uint32_t i;
-+
-+    trace_cpu_ioreq_pio(req, req->dir, req->df, req->data_is_ptr, req->addr,
-+                         req->data, req->count, req->size);
-+
-+    if (req->size > sizeof(uint32_t)) {
-+        hw_error("PIO: bad size (%u)", req->size);
-+    }
-+
-+    if (req->dir == IOREQ_READ) {
-+        if (!req->data_is_ptr) {
-+            req->data = do_inp(req->addr, req->size);
-+            trace_cpu_ioreq_pio_read_reg(req, req->data, req->addr,
-+                                         req->size);
-+        } else {
-+            uint32_t tmp;
-+
-+            for (i = 0; i < req->count; i++) {
-+                tmp = do_inp(req->addr, req->size);
-+                write_phys_req_item(req->data, req, i, &tmp);
-+            }
-+        }
-+    } else if (req->dir == IOREQ_WRITE) {
-+        if (!req->data_is_ptr) {
-+            trace_cpu_ioreq_pio_write_reg(req, req->data, req->addr,
-+                                          req->size);
-+            do_outp(req->addr, req->size, req->data);
-+        } else {
-+            for (i = 0; i < req->count; i++) {
-+                uint32_t tmp = 0;
-+
-+                read_phys_req_item(req->data, req, i, &tmp);
-+                do_outp(req->addr, req->size, tmp);
-+            }
-+        }
-+    }
-+}
-+
-+static void cpu_ioreq_move(ioreq_t *req)
-+{
-+    uint32_t i;
-+
-+    trace_cpu_ioreq_move(req, req->dir, req->df, req->data_is_ptr, req->addr,
-+                         req->data, req->count, req->size);
-+
-+    if (req->size > sizeof(req->data)) {
-+        hw_error("MMIO: bad size (%u)", req->size);
-+    }
-+
-+    if (!req->data_is_ptr) {
-+        if (req->dir == IOREQ_READ) {
-+            for (i = 0; i < req->count; i++) {
-+                read_phys_req_item(req->addr, req, i, &req->data);
-+            }
-+        } else if (req->dir == IOREQ_WRITE) {
-+            for (i = 0; i < req->count; i++) {
-+                write_phys_req_item(req->addr, req, i, &req->data);
-+            }
-+        }
-+    } else {
-+        uint64_t tmp;
-+
-+        if (req->dir == IOREQ_READ) {
-+            for (i = 0; i < req->count; i++) {
-+                read_phys_req_item(req->addr, req, i, &tmp);
-+                write_phys_req_item(req->data, req, i, &tmp);
-+            }
-+        } else if (req->dir == IOREQ_WRITE) {
-+            for (i = 0; i < req->count; i++) {
-+                read_phys_req_item(req->data, req, i, &tmp);
-+                write_phys_req_item(req->addr, req, i, &tmp);
-+            }
-+        }
-+    }
-+}
-+
-+static void cpu_ioreq_config(XenIOState *state, ioreq_t *req)
-+{
-+    uint32_t sbdf = req->addr >> 32;
-+    uint32_t reg = req->addr;
-+    XenPciDevice *xendev;
-+
-+    if (req->size != sizeof(uint8_t) && req->size != sizeof(uint16_t) &&
-+        req->size != sizeof(uint32_t)) {
-+        hw_error("PCI config access: bad size (%u)", req->size);
-+    }
-+
-+    if (req->count != 1) {
-+        hw_error("PCI config access: bad count (%u)", req->count);
-+    }
-+
-+    QLIST_FOREACH(xendev, &state->dev_list, entry) {
-+        if (xendev->sbdf != sbdf) {
-+            continue;
-+        }
-+
-+        if (!req->data_is_ptr) {
-+            if (req->dir == IOREQ_READ) {
-+                req->data = pci_host_config_read_common(
-+                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
-+                    req->size);
-+                trace_cpu_ioreq_config_read(req, xendev->sbdf, reg,
-+                                            req->size, req->data);
-+            } else if (req->dir == IOREQ_WRITE) {
-+                trace_cpu_ioreq_config_write(req, xendev->sbdf, reg,
-+                                             req->size, req->data);
-+                pci_host_config_write_common(
-+                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
-+                    req->data, req->size);
-+            }
-+        } else {
-+            uint32_t tmp;
-+
-+            if (req->dir == IOREQ_READ) {
-+                tmp = pci_host_config_read_common(
-+                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
-+                    req->size);
-+                trace_cpu_ioreq_config_read(req, xendev->sbdf, reg,
-+                                            req->size, tmp);
-+                write_phys_req_item(req->data, req, 0, &tmp);
-+            } else if (req->dir == IOREQ_WRITE) {
-+                read_phys_req_item(req->data, req, 0, &tmp);
-+                trace_cpu_ioreq_config_write(req, xendev->sbdf, reg,
-+                                             req->size, tmp);
-+                pci_host_config_write_common(
-+                    xendev->pci_dev, reg, PCI_CONFIG_SPACE_SIZE,
-+                    tmp, req->size);
-+            }
-+        }
-+    }
-+}
-+
-+static void handle_ioreq(XenIOState *state, ioreq_t *req)
-+{
-+    trace_handle_ioreq(req, req->type, req->dir, req->df, req->data_is_ptr,
-+                       req->addr, req->data, req->count, req->size);
-+
-+    if (!req->data_is_ptr && (req->dir == IOREQ_WRITE) &&
-+            (req->size < sizeof (target_ulong))) {
-+        req->data &= ((target_ulong) 1 << (8 * req->size)) - 1;
-+    }
-+
-+    if (req->dir == IOREQ_WRITE)
-+        trace_handle_ioreq_write(req, req->type, req->df, req->data_is_ptr,
-+                                 req->addr, req->data, req->count, req->size);
-+
-+    switch (req->type) {
-+        case IOREQ_TYPE_PIO:
-+            cpu_ioreq_pio(req);
-+            break;
-+        case IOREQ_TYPE_COPY:
-+            cpu_ioreq_move(req);
-+            break;
-+        case IOREQ_TYPE_TIMEOFFSET:
-+            break;
-+        case IOREQ_TYPE_INVALIDATE:
-+            xen_invalidate_map_cache();
-+            break;
-+        case IOREQ_TYPE_PCI_CONFIG:
-+            cpu_ioreq_config(state, req);
-+            break;
-+        default:
-+            arch_handle_ioreq(state, req);
-+    }
-+    if (req->dir == IOREQ_READ) {
-+        trace_handle_ioreq_read(req, req->type, req->df, req->data_is_ptr,
-+                                req->addr, req->data, req->count, req->size);
-+    }
-+}
-+
-+static bool handle_buffered_iopage(XenIOState *state)
-+{
-+    buffered_iopage_t *buf_page = state->buffered_io_page;
-+    buf_ioreq_t *buf_req = NULL;
-+    bool handled_ioreq = false;
-+    ioreq_t req;
-+    int qw;
-+
-+    if (!buf_page) {
-+        return 0;
-+    }
-+
-+    memset(&req, 0x00, sizeof(req));
-+    req.state = STATE_IOREQ_READY;
-+    req.count = 1;
-+    req.dir = IOREQ_WRITE;
-+
-+    for (;;) {
-+        uint32_t rdptr = buf_page->read_pointer, wrptr;
-+
-+        xen_rmb();
-+        wrptr = buf_page->write_pointer;
-+        xen_rmb();
-+        if (rdptr != buf_page->read_pointer) {
-+            continue;
-+        }
-+        if (rdptr == wrptr) {
-+            break;
-+        }
-+        buf_req = &buf_page->buf_ioreq[rdptr % IOREQ_BUFFER_SLOT_NUM];
-+        req.size = 1U << buf_req->size;
-+        req.addr = buf_req->addr;
-+        req.data = buf_req->data;
-+        req.type = buf_req->type;
-+        xen_rmb();
-+        qw = (req.size == 8);
-+        if (qw) {
-+            if (rdptr + 1 == wrptr) {
-+                hw_error("Incomplete quad word buffered ioreq");
-+            }
-+            buf_req = &buf_page->buf_ioreq[(rdptr + 1) %
-+                                           IOREQ_BUFFER_SLOT_NUM];
-+            req.data |= ((uint64_t)buf_req->data) << 32;
-+            xen_rmb();
-+        }
-+
-+        handle_ioreq(state, &req);
-+
-+        /* Only req.data may get updated by handle_ioreq(), albeit even that
-+         * should not happen as such data would never make it to the guest (we
-+         * can only usefully see writes here after all).
-+         */
-+        assert(req.state == STATE_IOREQ_READY);
-+        assert(req.count == 1);
-+        assert(req.dir == IOREQ_WRITE);
-+        assert(!req.data_is_ptr);
-+
-+        qatomic_add(&buf_page->read_pointer, qw + 1);
-+        handled_ioreq = true;
-+    }
-+
-+    return handled_ioreq;
-+}
-+
-+static void handle_buffered_io(void *opaque)
-+{
-+    XenIOState *state = opaque;
-+
-+    if (handle_buffered_iopage(state)) {
-+        timer_mod(state->buffered_io_timer,
-+                BUFFER_IO_MAX_DELAY + qemu_clock_get_ms(QEMU_CLOCK_REALTIME));
-+    } else {
-+        timer_del(state->buffered_io_timer);
-+        qemu_xen_evtchn_unmask(state->xce_handle, state->bufioreq_local_port);
-+    }
-+}
-+
-+static void cpu_handle_ioreq(void *opaque)
-+{
-+    XenIOState *state = opaque;
-+    ioreq_t *req = cpu_get_ioreq(state);
-+
-+    handle_buffered_iopage(state);
-+    if (req) {
-+        ioreq_t copy = *req;
-+
-+        xen_rmb();
-+        handle_ioreq(state, &copy);
-+        req->data = copy.data;
-+
-+        if (req->state != STATE_IOREQ_INPROCESS) {
-+            fprintf(stderr, "Badness in I/O request ... not in service?!: "
-+                    "%x, ptr: %x, port: %"PRIx64", "
-+                    "data: %"PRIx64", count: %u, size: %u, type: %u\n",
-+                    req->state, req->data_is_ptr, req->addr,
-+                    req->data, req->count, req->size, req->type);
-+            destroy_hvm_domain(false);
-+            return;
-+        }
-+
-+        xen_wmb(); /* Update ioreq contents /then/ update state. */
-+
-+        /*
-+         * We do this before we send the response so that the tools
-+         * have the opportunity to pick up on the reset before the
-+         * guest resumes and does a hlt with interrupts disabled which
-+         * causes Xen to powerdown the domain.
-+         */
-+        if (runstate_is_running()) {
-+            ShutdownCause request;
-+
-+            if (qemu_shutdown_requested_get()) {
-+                destroy_hvm_domain(false);
-+            }
-+            request = qemu_reset_requested_get();
-+            if (request) {
-+                qemu_system_reset(request);
-+                destroy_hvm_domain(true);
-+            }
-+        }
-+
-+        req->state = STATE_IORESP_READY;
-+        qemu_xen_evtchn_notify(state->xce_handle,
-+                               state->ioreq_local_port[state->send_vcpu]);
-+    }
-+}
-+
-+static void xen_main_loop_prepare(XenIOState *state)
-+{
-+    int evtchn_fd = -1;
-+
-+    if (state->xce_handle != NULL) {
-+        evtchn_fd = qemu_xen_evtchn_fd(state->xce_handle);
-+    }
-+
-+    state->buffered_io_timer = timer_new_ms(QEMU_CLOCK_REALTIME, handle_buffered_io,
-+                                                 state);
-+
-+    if (evtchn_fd != -1) {
-+        CPUState *cpu_state;
-+
-+        DPRINTF("%s: Init cpu_by_vcpu_id\n", __func__);
-+        CPU_FOREACH(cpu_state) {
-+            DPRINTF("%s: cpu_by_vcpu_id[%d]=%p\n",
-+                    __func__, cpu_state->cpu_index, cpu_state);
-+            state->cpu_by_vcpu_id[cpu_state->cpu_index] = cpu_state;
-+        }
-+        qemu_set_fd_handler(evtchn_fd, cpu_handle_ioreq, NULL, state);
-+    }
-+}
-+
-+
-+void xen_hvm_change_state_handler(void *opaque, bool running,
-+                                         RunState rstate)
-+{
-+    XenIOState *state = opaque;
-+
-+    if (running) {
-+        xen_main_loop_prepare(state);
-+    }
-+
-+    xen_set_ioreq_server_state(xen_domid,
-+                               state->ioservid,
-+                               (rstate == RUN_STATE_RUNNING));
-+}
-+
-+void xen_exit_notifier(Notifier *n, void *data)
-+{
-+    XenIOState *state = container_of(n, XenIOState, exit);
-+
-+    xen_destroy_ioreq_server(xen_domid, state->ioservid);
-+    if (state->fres != NULL) {
-+        xenforeignmemory_unmap_resource(xen_fmem, state->fres);
-+    }
-+
-+    qemu_xen_evtchn_close(state->xce_handle);
-+    xs_daemon_close(state->xenstore);
-+}
-+
-+static int xen_map_ioreq_server(XenIOState *state)
-+{
-+    void *addr = NULL;
-+    xen_pfn_t ioreq_pfn;
-+    xen_pfn_t bufioreq_pfn;
-+    evtchn_port_t bufioreq_evtchn;
-+    int rc;
-+
-+    /*
-+     * Attempt to map using the resource API and fall back to normal
-+     * foreign mapping if this is not supported.
-+     */
-+    QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_bufioreq != 0);
-+    QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_ioreq(0) != 1);
-+    state->fres = xenforeignmemory_map_resource(xen_fmem, xen_domid,
-+                                         XENMEM_resource_ioreq_server,
-+                                         state->ioservid, 0, 2,
-+                                         &addr,
-+                                         PROT_READ | PROT_WRITE, 0);
-+    if (state->fres != NULL) {
-+        trace_xen_map_resource_ioreq(state->ioservid, addr);
-+        state->buffered_io_page = addr;
-+        state->shared_page = addr + XC_PAGE_SIZE;
-+    } else if (errno != EOPNOTSUPP) {
-+        error_report("failed to map ioreq server resources: error %d handle=%p",
-+                     errno, xen_xc);
-+        return -1;
-+    }
-+
-+    rc = xen_get_ioreq_server_info(xen_domid, state->ioservid,
-+                                   (state->shared_page == NULL) ?
-+                                   &ioreq_pfn : NULL,
-+                                   (state->buffered_io_page == NULL) ?
-+                                   &bufioreq_pfn : NULL,
-+                                   &bufioreq_evtchn);
-+    if (rc < 0) {
-+        error_report("failed to get ioreq server info: error %d handle=%p",
-+                     errno, xen_xc);
-+        return rc;
-+    }
-+
-+    if (state->shared_page == NULL) {
-+        DPRINTF("shared page at pfn %lx\n", ioreq_pfn);
-+
-+        state->shared_page = xenforeignmemory_map(xen_fmem, xen_domid,
-+                                                  PROT_READ | PROT_WRITE,
-+                                                  1, &ioreq_pfn, NULL);
-+        if (state->shared_page == NULL) {
-+            error_report("map shared IO page returned error %d handle=%p",
-+                         errno, xen_xc);
-+        }
-+    }
-+
-+    if (state->buffered_io_page == NULL) {
-+        DPRINTF("buffered io page at pfn %lx\n", bufioreq_pfn);
-+
-+        state->buffered_io_page = xenforeignmemory_map(xen_fmem, xen_domid,
-+                                                       PROT_READ | PROT_WRITE,
-+                                                       1, &bufioreq_pfn,
-+                                                       NULL);
-+        if (state->buffered_io_page == NULL) {
-+            error_report("map buffered IO page returned error %d", errno);
-+            return -1;
-+        }
-+    }
-+
-+    if (state->shared_page == NULL || state->buffered_io_page == NULL) {
-+        return -1;
-+    }
-+
-+    DPRINTF("buffered io evtchn is %x\n", bufioreq_evtchn);
-+
-+    state->bufioreq_remote_port = bufioreq_evtchn;
-+
-+    return 0;
-+}
-+
-+void destroy_hvm_domain(bool reboot)
-+{
-+    xc_interface *xc_handle;
-+    int sts;
-+    int rc;
-+
-+    unsigned int reason = reboot ? SHUTDOWN_reboot : SHUTDOWN_poweroff;
-+
-+    if (xen_dmod) {
-+        rc = xendevicemodel_shutdown(xen_dmod, xen_domid, reason);
-+        if (!rc) {
-+            return;
-+        }
-+        if (errno != ENOTTY /* old Xen */) {
-+            perror("xendevicemodel_shutdown failed");
-+        }
-+        /* well, try the old thing then */
-+    }
-+
-+    xc_handle = xc_interface_open(0, 0, 0);
-+    if (xc_handle == NULL) {
-+        fprintf(stderr, "Cannot acquire xenctrl handle\n");
-+    } else {
-+        sts = xc_domain_shutdown(xc_handle, xen_domid, reason);
-+        if (sts != 0) {
-+            fprintf(stderr, "xc_domain_shutdown failed to issue %s, "
-+                    "sts %d, %s\n", reboot ? "reboot" : "poweroff",
-+                    sts, strerror(errno));
-+        } else {
-+            fprintf(stderr, "Issued domain %d %s\n", xen_domid,
-+                    reboot ? "reboot" : "poweroff");
-+        }
-+        xc_interface_close(xc_handle);
-+    }
-+}
-+
-+void xen_shutdown_fatal_error(const char *fmt, ...)
-+{
-+    va_list ap;
-+
-+    va_start(ap, fmt);
-+    vfprintf(stderr, fmt, ap);
-+    va_end(ap);
-+    fprintf(stderr, "Will destroy the domain.\n");
-+    /* destroy the domain */
-+    qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_ERROR);
-+}
-+
-+void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
-+                        MemoryListener xen_memory_listener)
-+{
-+    int i, rc;
-+
-+    setup_xen_backend_ops();
-+
-+    state->xce_handle = qemu_xen_evtchn_open();
-+    if (state->xce_handle == NULL) {
-+        perror("xen: event channel open");
-+        goto err;
-+    }
-+
-+    state->xenstore = xs_daemon_open();
-+    if (state->xenstore == NULL) {
-+        perror("xen: xenstore open");
-+        goto err;
-+    }
-+
-+    xen_create_ioreq_server(xen_domid, &state->ioservid);
-+
-+    state->exit.notify = xen_exit_notifier;
-+    qemu_add_exit_notifier(&state->exit);
-+
-+    /*
-+     * Register wake-up support in QMP query-current-machine API
-+     */
-+    qemu_register_wakeup_support();
-+
-+    rc = xen_map_ioreq_server(state);
-+    if (rc < 0) {
-+        goto err;
-+    }
-+
-+    /* Note: cpus is empty at this point in init */
-+    state->cpu_by_vcpu_id = g_malloc0(max_cpus * sizeof(CPUState *));
-+
-+    rc = xen_set_ioreq_server_state(xen_domid, state->ioservid, true);
-+    if (rc < 0) {
-+        error_report("failed to enable ioreq server info: error %d handle=%p",
-+                     errno, xen_xc);
-+        goto err;
-+    }
-+
-+    state->ioreq_local_port = g_malloc0(max_cpus * sizeof (evtchn_port_t));
-+
-+    /* FIXME: how about if we overflow the page here? */
-+    for (i = 0; i < max_cpus; i++) {
-+        rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
-+                                              xen_vcpu_eport(state->shared_page,
-+                                                             i));
-+        if (rc == -1) {
-+            error_report("shared evtchn %d bind error %d", i, errno);
-+            goto err;
-+        }
-+        state->ioreq_local_port[i] = rc;
-+    }
-+
-+    rc = qemu_xen_evtchn_bind_interdomain(state->xce_handle, xen_domid,
-+                                          state->bufioreq_remote_port);
-+    if (rc == -1) {
-+        error_report("buffered evtchn bind error %d", errno);
-+        goto err;
-+    }
-+    state->bufioreq_local_port = rc;
-+
-+    /* Init RAM management */
-+#ifdef XEN_COMPAT_PHYSMAP
-+    xen_map_cache_init(xen_phys_offset_to_gaddr, state);
-+#else
-+    xen_map_cache_init(NULL, state);
-+#endif
-+
-+    qemu_add_vm_change_state_handler(xen_hvm_change_state_handler, state);
-+
-+    state->memory_listener = xen_memory_listener;
-+    memory_listener_register(&state->memory_listener, &address_space_memory);
-+
-+    state->io_listener = xen_io_listener;
-+    memory_listener_register(&state->io_listener, &address_space_io);
-+
-+    state->device_listener = xen_device_listener;
-+    QLIST_INIT(&state->dev_list);
-+    device_listener_register(&state->device_listener);
-+
-+    xen_bus_init();
-+
-+    xen_be_init();
-+
-+    return;
-+err:
-+    error_report("xen hardware virtual machine initialisation failed");
-+    exit(1);
-+}
-diff --git a/include/hw/i386/xen_arch_hvm.h b/include/hw/i386/xen_arch_hvm.h
-new file mode 100644
-index 0000000000..1000f8f543
---- /dev/null
-+++ b/include/hw/i386/xen_arch_hvm.h
-@@ -0,0 +1,11 @@
-+#ifndef HW_XEN_ARCH_I386_HVM_H
-+#define HW_XEN_ARCH_I386_HVM_H
-+
-+#include <xen/hvm/ioreq.h>
-+#include "hw/xen/xen-hvm-common.h"
-+
-+void arch_handle_ioreq(XenIOState *state, ioreq_t *req);
-+void arch_xen_set_memory(XenIOState *state,
-+                         MemoryRegionSection *section,
-+                         bool add);
-+#endif
-diff --git a/include/hw/xen/arch_hvm.h b/include/hw/xen/arch_hvm.h
-new file mode 100644
-index 0000000000..26674648d8
---- /dev/null
-+++ b/include/hw/xen/arch_hvm.h
-@@ -0,0 +1,3 @@
-+#if defined(TARGET_I386) || defined(TARGET_X86_64)
-+#include "hw/i386/xen_arch_hvm.h"
-+#endif
-diff --git a/include/hw/xen/xen-hvm-common.h b/include/hw/xen/xen-hvm-common.h
-new file mode 100644
-index 0000000000..858ea07075
---- /dev/null
-+++ b/include/hw/xen/xen-hvm-common.h
-@@ -0,0 +1,99 @@
-+#ifndef HW_XEN_HVM_COMMON_H
-+#define HW_XEN_HVM_COMMON_H
-+
-+#include "qemu/osdep.h"
-+#include "qemu/units.h"
-+
-+#include "cpu.h"
-+#include "hw/pci/pci.h"
-+#include "hw/hw.h"
-+#include "hw/xen/xen_native.h"
-+#include "hw/xen/xen-legacy-backend.h"
-+#include "sysemu/runstate.h"
-+#include "sysemu/sysemu.h"
-+#include "sysemu/xen.h"
-+#include "sysemu/xen-mapcache.h"
-+
-+#include <xen/hvm/ioreq.h>
-+
-+extern MemoryRegion ram_memory;
-+extern MemoryListener xen_io_listener;
-+extern DeviceListener xen_device_listener;
-+
-+//#define DEBUG_XEN_HVM
-+
-+#ifdef DEBUG_XEN_HVM
-+#define DPRINTF(fmt, ...) \
-+    do { fprintf(stderr, "xen: " fmt, ## __VA_ARGS__); } while (0)
-+#else
-+#define DPRINTF(fmt, ...) \
-+    do { } while (0)
-+#endif
-+
-+static inline uint32_t xen_vcpu_eport(shared_iopage_t *shared_page, int i)
-+{
-+    return shared_page->vcpu_ioreq[i].vp_eport;
-+}
-+static inline ioreq_t *xen_vcpu_ioreq(shared_iopage_t *shared_page, int vcpu)
-+{
-+    return &shared_page->vcpu_ioreq[vcpu];
-+}
-+
-+#define BUFFER_IO_MAX_DELAY  100
-+
-+typedef struct XenPhysmap {
-+    hwaddr start_addr;
-+    ram_addr_t size;
-+    const char *name;
-+    hwaddr phys_offset;
-+
-+    QLIST_ENTRY(XenPhysmap) list;
-+} XenPhysmap;
-+
-+typedef struct XenPciDevice {
-+    PCIDevice *pci_dev;
-+    uint32_t sbdf;
-+    QLIST_ENTRY(XenPciDevice) entry;
-+} XenPciDevice;
-+
-+typedef struct XenIOState {
-+    ioservid_t ioservid;
-+    shared_iopage_t *shared_page;
-+    buffered_iopage_t *buffered_io_page;
-+    xenforeignmemory_resource_handle *fres;
-+    QEMUTimer *buffered_io_timer;
-+    CPUState **cpu_by_vcpu_id;
-+    /* the evtchn port for polling the notification, */
-+    evtchn_port_t *ioreq_local_port;
-+    /* evtchn remote and local ports for buffered io */
-+    evtchn_port_t bufioreq_remote_port;
-+    evtchn_port_t bufioreq_local_port;
-+    /* the evtchn fd for polling */
-+    xenevtchn_handle *xce_handle;
-+    /* which vcpu we are serving */
-+    int send_vcpu;
-+
-+    struct xs_handle *xenstore;
-+    MemoryListener memory_listener;
-+    MemoryListener io_listener;
-+    QLIST_HEAD(, XenPciDevice) dev_list;
-+    DeviceListener device_listener;
-+
-+    Notifier exit;
-+} XenIOState;
-+
-+void xen_exit_notifier(Notifier *n, void *data);
-+
-+void xen_region_add(MemoryListener *listener, MemoryRegionSection *section);
-+void xen_region_del(MemoryListener *listener, MemoryRegionSection *section);
-+void xen_io_add(MemoryListener *listener, MemoryRegionSection *section);
-+void xen_io_del(MemoryListener *listener, MemoryRegionSection *section);
-+void xen_device_realize(DeviceListener *listener, DeviceState *dev);
-+void xen_device_unrealize(DeviceListener *listener, DeviceState *dev);
-+
-+void xen_hvm_change_state_handler(void *opaque, bool running, RunState rstate);
-+void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
-+                        MemoryListener xen_memory_listener);
-+
-+void cpu_ioreq_pio(ioreq_t *req);
-+#endif /* HW_XEN_HVM_COMMON_H */
--- 
-2.17.0
-
+DQpIaSBSb2dlciwNCg0KUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+aXRlczoNCg0KPiBPbiBUdWUsIE1hciAxNCwgMjAyMyBhdCAwODo1NjoyOVBNICswMDAwLCBWb2xv
+ZHlteXIgQmFiY2h1ayB3cm90ZToNCj4+IFByaW9yIHRvIHRoaXMgY2hhbmdlLCBsaWZldGltZSBv
+ZiBwY2lfZGV2IG9iamVjdHMgd2FzIHByb3RlY3RlZCBieSBnbG9iYWwNCj4+IHBjaWRldnNfbG9j
+aygpLiBMb25nLXRlcm0gcGxhbiBpcyB0byByZW1vdmUgdGhpcyBsb2csIHNvIHdlIG5lZWQgc29t
+ZQ0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBe
+IGxvY2sNCj4NCj4gSSB3b3VsZG4ndCBzYXkgcmVtb3ZlLCBhcyBvbmUgd2F5IG9yIGFub3RoZXIg
+d2UgbmVlZCBhIGxvY2sgdG8gcHJvdGVjdA0KPiBjb25jdXJyZW50IGFjY2Vzc2VzLg0KPg0KDQpJ
+J2xsIHdyaXRlICJyZXBsYWNlIHRoaXMgZ2xvYmFsIGxvY2sgd2l0aCBjb3VwbGUgb2YgbW9yZSBn
+cmFudWxhcg0KbG9ja2luZyBkZXZpY2VzIg0KaWYgdGhpcyBpcyBva2F5IGZvciB5b3UuDQoNCj4+
+IG90aGVyIG1lY2hhbmlzbSB0byBlbnN1cmUgdGhhdCB0aG9zZSBvYmplY3RzIHdpbGwgbm90IGRp
+c2FwcGVhciB1bmRlcg0KPj4gZmVldCBvZiBjb2RlIHRoYXQgYWNjZXNzIHRoZW0uIFJlZmVyZW5j
+ZSBjb3VudGluZyBpcyBhIGdvb2QgY2hvaWNlIGFzDQo+PiBpdCBwcm92aWRlcyBlYXN5IHRvIGNv
+bXByZWhlbmQgd2F5IHRvIGNvbnRyb2wgb2JqZWN0IGxpZmV0aW1lLg0KPj4gDQo+PiBUaGlzIHBh
+dGNoIGFkZHMgdHdvIG5ldyBoZWxwZXIgZnVuY3Rpb25zOiBwY2lkZXZfZ2V0KCkgYW5kDQo+PiBw
+Y2lkZXZfcHV0KCkuIHBjaWRldl9nZXQoKSB3aWxsIGluY3JlYXNlIHJlZmVyZW5jZSBjb3VudGVy
+LCB3aGlsZQ0KPj4gcGNpZGV2X3B1dCgpIHdpbGwgZGVjcmVhc2UgaXQsIGRlc3Ryb3lpbmcgb2Jq
+ZWN0IHdoZW4gY291bnRlciByZWFjaGVzDQo+PiB6ZXJvLg0KPj4gDQo+PiBwY2lkZXZfZ2V0KCkg
+c2hvdWxkIGJlIHVzZWQgb25seSB3aGVuIHlvdSBhbHJlYWR5IGhhdmUgYSB2YWxpZCBwb2ludGVy
+DQo+PiB0byB0aGUgb2JqZWN0IG9yIHlvdSBhcmUgaG9sZGluZyBsb2NrIHRoYXQgcHJvdGVjdHMg
+b25lIG9mIHRoZQ0KPj4gbGlzdHMgKGRvbWFpbiwgcHNlZyBvciBhdHMpIHRoYXQgc3RvcmUgcGNp
+X2RldiBzdHJ1Y3RzLg0KPj4gDQo+PiBwY2lkZXZfZ2V0KCkgaXMgcmFyZWx5IHVzZWQgZGlyZWN0
+bHksIGJlY2F1c2UgdGhlcmUgYWxyZWFkeSBhcmUNCj4+IGZ1bmN0aW9ucyB0aGF0IHdpbGwgcHJv
+dmlkZSB2YWxpZCBwb2ludGVyIHRvIHBjaV9kZXYgc3RydWN0Og0KPj4gcGNpX2dldF9wZGV2KCks
+IHBjaV9nZXRfcmVhbF9wZGV2KCkuIFRoZXkgd2lsbCBsb2NrIGFwcHJvcHJpYXRlIGxpc3QsDQo+
+PiBmaW5kIG5lZWRlZCBvYmplY3QgYW5kIGluY3JlYXNlIGl0cyByZWZlcmVuY2UgY291bnRlciBi
+ZWZvcmUgcmV0dXJuaW5nDQo+PiB0byB0aGUgY2FsbGVyLg0KPj4gDQo+PiBOYXR1cmFsbHksIHBj
+aV9wdXQoKSBzaG91bGQgYmUgY2FsbGVkIGFmdGVyIGZpbmlzaGluZyB3b3JraW5nIHdpdGggYQ0K
+Pj4gcmVjZWl2ZWQgb2JqZWN0LiBUaGlzIGlzIHRoZSByZWFzb24gd2h5IHRoaXMgcGF0Y2ggaGF2
+ZSBzbyBtYW55DQo+PiBwY2lkZXZfcHV0KClzIGFuZCBzbyBsaXR0bGUgcGNpZGV2X2dldCgpczog
+ZXhpc3RpbmcgY2FsbHMgdG8NCj4+IHBjaV9nZXRfKigpIGZ1bmN0aW9ucyBub3cgd2lsbCBpbmNy
+ZWFzZSByZWZlcmVuY2UgY291bnRlcg0KPj4gYXV0b21hdGljYWxseSwgd2UganVzdCBuZWVkIHRv
+IGRlY3JlYXNlIGl0IGJhY2sgd2hlbiB3ZSBmaW5pc2hlZC4NCj4NCj4gQWZ0ZXIgbG9va2luZyBh
+IGJpdCBpbnRvIHRoaXMsIEkgd291bGQgbGlrZSB0byBhc2sgd2hldGhlciBpdCdzIGJlZW4NCj4g
+Y29uc2lkZXJlZCB0aGUgbmVlZCB0byBpbmNyZWFzZSB0aGUgcmVmY291bnQgZm9yIGVhY2ggdXNl
+IG9mIGEgcGRldi4NCj4NCg0KVGhpcyBpcyBob3cgTGludXggdXNlcyByZWZlcmVuY2UgbG9ja2lu
+Zy4gSXQgZGVjcmVhc2VzIGNvZ25pdGl2ZSBsb2FkDQphbmQgY2hhbmNlIGZvciBhbiBlcnJvciwg
+YXMgdGhlcmUgaXMgYSBzaW1wbGUgc2V0IG9mIHJ1bGVzLCB3aGljaCB5b3UNCmZvbGxvdy4NCg0K
+PiBGb3IgZXhhbXBsZSBJIHdvdWxkIGNvbnNpZGVyIHRoZSBpbml0aWFsIGFsbG9jX3BkZXYoKSB0
+byB0YWtlIGENCj4gcmVmY291bnQsIGFuZCB0aGVuIHBjaV9yZW1vdmVfZGV2aWNlKCkgX211c3Rf
+IGJlIHRoZSBmdW5jdGlvbiB0aGF0DQo+IHJlbW92ZXMgdGhlIGxhc3QgcmVmY291bnQsIHNvIHRo
+YXQgaXQgY2FuIHJldHVybiAtRUJVU1kgb3RoZXJ3aXNlIChzZWUNCj4gbXkgY29tbWVudCBiZWxv
+dykuDQoNCkkgdGVuZCB0byBkaXNhZ3JlZSB0aGVyZSwgYXMgdGhpcyBydWlucyB0aGUgdmVyeSBp
+ZGVhIG9mIHJlZmVyZW5jZQ0KY291bnRpbmcuIFdlIGNhbid0IGtub3cgd2hvIGVsc2UgaG9sZHMg
+cmVmZXJlbmNlIHJpZ2h0IG5vdy4gT2theSwgd2UNCm1pZ2h0IGtub3csIGJ1dCB0aGlzIHJlcXVp
+cmVzIGFkZGl0aW9uYWwgbG9jayB0byBzZXJpYWxpemUNCmFjY2Vzc2VzLiBXaGljaCwgaW4gdHVy
+biwgbWFrZXMgcmVmY291bnQgdW4tbmVlZGVkLg0KDQo+DQo+IEkgd291bGQgYWxzbyB0aGluayB0
+aGF0IGhhdmluZyB0aGUgZGV2aWNlIGFzc2lnbmVkIHRvIGEgZ3Vlc3Qgd2lsbCB0YWtlDQo+IGFu
+b3RoZXIgcmVmY291bnQsIGFuZCB0aGVuIGFueSB1c2FnZSBmcm9tIGZ1cnRoZXIgY2FsbGVycyAo
+aWU6IGxpa2UNCj4gdnBjaSkgd2lsbCBuZWVkIHNvbWUga2luZCBvZiBwcm90ZWN0aW9uIGZyb20g
+cHJldmVudGluZyB0aGUgZGV2aWNlDQo+IGZyb20gYmVpbmcgZGVhc3NpZ25lZCBmcm9tIGEgZG9t
+YWluIHdoaWxlIHZQQ0kgaGFuZGxlcnMgYXJlIHJ1bm5pbmcsDQo+IGFuZCB0aGUgY3VycmVudCBy
+ZWZjb3VudCB3b24ndCBoZWxwIHdpdGggdGhhdC4NCg0KWWVzLCBpZGVhIG9mIHRoaXMgcmVmY291
+bnRpbmcgaXMgdG8gZW5zdXJlIHRoYXQgYSBwZGV2IG9iamVjdCBleGlzdHMgYXMgYW4NCnZhbGlk
+IG9iamVjdCBpbiBtZW1vcnkgaWYgd2UgYXJlIGhvbGRpbmcgYSBsb25nLXRlcm0gcG9pbnRlciB0
+bw0KaXQuIEluZGVlZCwgdlBDSSBoYW5kbGVycyBzaG91bGQgdXNlIHNvbWUgb3RoZXIgbWVjaGFu
+aXNtIHRvIGVuc3VyZSB0aGF0DQpwZGV2IGlzIG5vdCBiZWluZyByZS1hc3NpZ25lZCB3aGlsZSBo
+YW5kbGVycyBhcmUgcnVubmluZy4gSSBiZWxpZXZlLA0KdGhpcyBpcyB0aGUgdGFzayBvZiB2cGNp
+LT5sb2NrLiBTaG91bGQgd2UgY2FsbA0KdnBjaV9yZW1vdmVfZGV2aWNlL3ZwY2lfYWRkX2hhbmRs
+ZXJzIGVhY2ggdGltZSB3ZSByZS1hc3NpZ24gYSBQQ0kgZGV2aWNlPw0KDQo+DQo+IFRoYXQgbWFr
+ZXMgbWUgd29uZGVyIGlmIGZvciBleGFtcGxlIGNhbGxlcnMgb2YgcGNpX2dldF9wZGV2KGQsIHNi
+ZGYpDQo+IGRvIG5lZWQgdG8gdGFrZSBhbiBleHRyYSByZWZjb3VudCwgYmVjYXVzZSBzdWNoIGFj
+Y2VzcyBpcyBhbHJlYWR5DQo+IHByb3RlY3RlZCBmcm9tIHRoZSBwZGV2IGdvaW5nIGF3YXkgYnkg
+dGhlIGZhY3QgdGhhdCB0aGUgZGV2aWNlIGlzDQo+IGFzc2lnbmVkIHRvIGEgZ3Vlc3QuICBCdXQg
+bWF5YmUgaXQncyB0b28gbXVjaCB3b3JrIHRvIHNlcGFyYXRlIHVzZXJzDQo+IG9mIHBjaV9nZXRf
+cGRldihkLCAuLi4pOyB2cyBwY2lfZ2V0X3BkZXYoTlVMTCwgLi4uKTsuDQo+DQo+IFRoZXJlJ3Mg
+YWxzbyBhIHdpbmRvdyB3aGVuIHRoZSByZWZjb3VudCBpcyBkcm9wcGVkIHRvIDAsIGFuZCB0aGUN
+Cj4gZGVzdHJ1Y3Rpb24gZnVuY3Rpb24gaXMgY2FsbGVkLCBidXQgYXQgdGhlIHNhbWUgdGltZSBh
+IGNvbmN1cnJlbnQNCj4gdGhyZWFkIGNvdWxkIGF0dGVtcHQgdG8gdGFrZSBhIHJlZmVyZW5jZSB0
+byB0aGUgcGRldiBzdGlsbD8NCg0KTGFzdCBwY2lkZXZfcHV0KCkgd291bGQgYmUgY2FsbGVkIGJ5
+IHBjaV9yZW1vdmVfZGV2aWNlKCksIGFmdGVyIHJlbW92aW5nDQppdCBmcm9tIGFsbCBsaXN0cy4g
+VGhpcyBzaG91bGQgcHJldmVudCBvdGhlciB0aHJlYWRzIGZyb20gb2J0YWluaW5nIGEgdmFsaWQN
+CnJlZmVyZW5jZSB0byB0aGUgcGRldi4NCg0KPg0KPj4gDQo+PiBUaGlzIHBhdGNoIHJlbW92ZXMg
+ImNvbnN0IiBxdWFsaWZpZXIgZnJvbSBzb21lIHBkZXYgcG9pbnRlcnMgYmVjYXVzZQ0KPj4gcGNp
+ZGV2X3B1dCgpIHRlY2huaWNhbGx5IGFsdGVycyB0aGUgY29udGVudHMgb2YgcGNpX2RldiBzdHJ1
+Y3R1cmUuDQo+PiANCj4+IFNpZ25lZC1vZmYtYnk6IFZvbG9keW15ciBCYWJjaHVrIDx2b2xvZHlt
+eXJfYmFiY2h1a0BlcGFtLmNvbT4NCj4+IFN1Z2dlc3RlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVs
+aWNoQHN1c2UuY29tPg0KPj4gDQo+PiAtLS0NCj4+IA0KPj4gdjM6DQo+PiAgLSBNb3ZlZCBpbiBm
+cm9tIGFub3RoZXIgcGF0Y2ggc2VyaWVzDQo+PiAgLSBGaXhlZCBjb2RlIGZvcm1hdHRpbmcgKHRh
+YnMgLT4gc3BhY2VzKQ0KPj4gIC0gUmVtb3ZlZCBlcnJvbmVvdXMgcGNpZGV2X3B1dCBpbiB2Z2Eu
+Yw0KPj4gIC0gQWRkZWQgbWlzc2luZyBwY2lkZXZfcHV0IGluIGNvdXBsZSBvZiBwbGFjZXMNCj4+
+ICAtIHJlbW92ZWQgbWVudGlvbiBvZiBwY2lfZ2V0X3BkZXZfYnlfZG9tYWluKCkNCj4+IC0tLQ0K
+Pj4gIHhlbi9hcmNoL3g4Ni9odm0vdm1zaS5jICAgICAgICAgICAgICAgICAgfCAgIDIgKy0NCj4+
+ICB4ZW4vYXJjaC94ODYvaXJxLmMgICAgICAgICAgICAgICAgICAgICAgIHwgICA0ICsNCj4+ICB4
+ZW4vYXJjaC94ODYvbXNpLmMgICAgICAgICAgICAgICAgICAgICAgIHwgIDQ0ICsrKysrKystDQo+
+PiAgeGVuL2FyY2gveDg2L3BjaS5jICAgICAgICAgICAgICAgICAgICAgICB8ICAgMyArDQo+PiAg
+eGVuL2FyY2gveDg2L3BoeXNkZXYuYyAgICAgICAgICAgICAgICAgICB8ICAxNyArKy0NCj4+ICB4
+ZW4vY29tbW9uL3N5c2N0bC5jICAgICAgICAgICAgICAgICAgICAgIHwgICA3ICstDQo+PiAgeGVu
+L2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL2lvbW11X2luaXQuYyB8ICAxMiArLQ0KPj4gIHhlbi9k
+cml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9tYXAuYyAgfCAgIDYgKy0NCj4+ICB4ZW4vZHJp
+dmVycy9wYXNzdGhyb3VnaC9wY2kuYyAgICAgICAgICAgIHwgMTM4ICsrKysrKysrKysrKysrKy0t
+LS0tLS0tDQo+PiAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL3F1aXJrcy5jICAgICB8ICAg
+MiArDQo+PiAgeGVuL2RyaXZlcnMvdmlkZW8vdmdhLmMgICAgICAgICAgICAgICAgICB8ICAgNyAr
+LQ0KPj4gIHhlbi9kcml2ZXJzL3ZwY2kvdnBjaS5jICAgICAgICAgICAgICAgICAgfCAgMTYgKyst
+DQo+PiAgeGVuL2luY2x1ZGUveGVuL3BjaS5oICAgICAgICAgICAgICAgICAgICB8ICAxOCArKysN
+Cj4+ICAxMyBmaWxlcyBjaGFuZ2VkLCAyMTUgaW5zZXJ0aW9ucygrKSwgNjEgZGVsZXRpb25zKC0p
+DQo+PiANCj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3Ztc2kuYyBiL3hlbi9hcmNo
+L3g4Ni9odm0vdm1zaS5jDQo+PiBpbmRleCAzY2Q0OTIzMDYwLi44YzNkNjczODcyIDEwMDY0NA0K
+Pj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXNpLmMNCj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9o
+dm0vdm1zaS5jDQo+PiBAQCAtOTE0LDcgKzkxNCw3IEBAIGludCB2cGNpX21zaXhfYXJjaF9wcmlu
+dChjb25zdCBzdHJ1Y3QgdnBjaV9tc2l4ICptc2l4KQ0KPj4gIA0KPj4gICAgICAgICAgICAgIHNw
+aW5fdW5sb2NrKCZtc2l4LT5wZGV2LT52cGNpLT5sb2NrKTsNCj4+ICAgICAgICAgICAgICBwcm9j
+ZXNzX3BlbmRpbmdfc29mdGlycXMoKTsNCj4+IC0gICAgICAgICAgICAvKiBOQjogd2UgYXNzdW1l
+IHRoYXQgcGRldiBjYW5ub3QgZ28gYXdheSBmb3IgYW4gYWxpdmUgZG9tYWluLiAqLw0KPj4gKw0K
+Pj4gICAgICAgICAgICAgIGlmICggIXBkZXYtPnZwY2kgfHwgIXNwaW5fdHJ5bG9jaygmcGRldi0+
+dnBjaS0+bG9jaykgKQ0KPj4gICAgICAgICAgICAgICAgICByZXR1cm4gLUVCVVNZOw0KPj4gICAg
+ICAgICAgICAgIGlmICggcGRldi0+dnBjaS0+bXNpeCAhPSBtc2l4ICkNCj4+IGRpZmYgLS1naXQg
+YS94ZW4vYXJjaC94ODYvaXJxLmMgYi94ZW4vYXJjaC94ODYvaXJxLmMNCj4+IGluZGV4IDIwMTUw
+YjFjN2YuLjg3NDY0ZDgyYzggMTAwNjQ0DQo+PiAtLS0gYS94ZW4vYXJjaC94ODYvaXJxLmMNCj4+
+ICsrKyBiL3hlbi9hcmNoL3g4Ni9pcnEuYw0KPj4gQEAgLTIxNzUsNiArMjE3NSw3IEBAIGludCBt
+YXBfZG9tYWluX3BpcnEoDQo+PiAgICAgICAgICAgICAgICAgIG1zaS0+ZW50cnlfbnIgPSByZXQ7
+DQo+PiAgICAgICAgICAgICAgICAgIHJldCA9IC1FTkZJTEU7DQo+PiAgICAgICAgICAgICAgfQ0K
+Pj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICAgICAgZ290byBk
+b25lOw0KPj4gICAgICAgICAgfQ0KPj4gIA0KPj4gQEAgLTIxODksNiArMjE5MCw3IEBAIGludCBt
+YXBfZG9tYWluX3BpcnEoDQo+PiAgICAgICAgICAgICAgbXNpX2Rlc2MtPmlycSA9IC0xOw0KPj4g
+ICAgICAgICAgICAgIG1zaV9mcmVlX2lycShtc2lfZGVzYyk7DQo+PiAgICAgICAgICAgICAgcmV0
+ID0gLUVCVVNZOw0KPj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAg
+ICAgICAgZ290byBkb25lOw0KPj4gICAgICAgICAgfQ0KPj4gIA0KPj4gQEAgLTIyNzMsMTAgKzIy
+NzUsMTIgQEAgaW50IG1hcF9kb21haW5fcGlycSgNCj4+ICAgICAgICAgICAgICB9DQo+PiAgICAg
+ICAgICAgICAgbXNpX2Rlc2MtPmlycSA9IC0xOw0KPj4gICAgICAgICAgICAgIG1zaV9mcmVlX2ly
+cShtc2lfZGVzYyk7DQo+PiArICAgICAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAg
+ICAgICAgICBnb3RvIGRvbmU7DQo+PiAgICAgICAgICB9DQo+PiAgDQo+PiAgICAgICAgICBzZXRf
+ZG9tYWluX2lycV9waXJxKGQsIGlycSwgaW5mbyk7DQo+PiArICAgICAgICBwY2lkZXZfcHV0KHBk
+ZXYpOw0KPj4gICAgICAgICAgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgmZGVzYy0+bG9jaywgZmxh
+Z3MpOw0KPj4gICAgICB9DQo+PiAgICAgIGVsc2UNCj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94
+ODYvbXNpLmMgYi94ZW4vYXJjaC94ODYvbXNpLmMNCj4+IGluZGV4IGQwYmY2M2RmMWQuLjkxOTI2
+ZmNlNTAgMTAwNjQ0DQo+PiAtLS0gYS94ZW4vYXJjaC94ODYvbXNpLmMNCj4+ICsrKyBiL3hlbi9h
+cmNoL3g4Ni9tc2kuYw0KPj4gQEAgLTU3Miw2ICs1NzIsMTAgQEAgaW50IG1zaV9mcmVlX2lycShz
+dHJ1Y3QgbXNpX2Rlc2MgKmVudHJ5KQ0KPj4gICAgICAgICAgICAgICAgICAgICAgICAgIHZpcnRf
+dG9fZml4KCh1bnNpZ25lZCBsb25nKWVudHJ5LT5tYXNrX2Jhc2UpKTsNCj4+ICANCj4+ICAgICAg
+bGlzdF9kZWwoJmVudHJ5LT5saXN0KTsNCj4+ICsNCj4+ICsgICAgLyogQ29ycmVzcG9uZHMgdG8g
+cGNpZGV2X2dldCgpIGluIG1zaVt4XV9jYXBhYmlsaXR5X2luaXQoKSAgKi8NCj4+ICsgICAgcGNp
+ZGV2X3B1dChlbnRyeS0+ZGV2KTsNCj4+ICsNCj4+ICAgICAgeGZyZWUoZW50cnkpOw0KPj4gICAg
+ICByZXR1cm4gMDsNCj4+ICB9DQo+PiBAQCAtNjQ0LDYgKzY0OCw3IEBAIHN0YXRpYyBpbnQgbXNp
+X2NhcGFiaWxpdHlfaW5pdChzdHJ1Y3QgcGNpX2RldiAqZGV2LA0KPj4gICAgICAgICAgICAgIGVu
+dHJ5W2ldLm1zaS5tcG9zID0gbXBvczsNCj4+ICAgICAgICAgIGVudHJ5W2ldLm1zaS5udmVjID0g
+MDsNCj4+ICAgICAgICAgIGVudHJ5W2ldLmRldiA9IGRldjsNCj4+ICsgICAgICAgIHBjaWRldl9n
+ZXQoZGV2KTsNCj4+ICAgICAgfQ0KPj4gICAgICBlbnRyeS0+bXNpLm52ZWMgPSBudmVjOw0KPj4g
+ICAgICBlbnRyeS0+aXJxID0gaXJxOw0KPj4gQEAgLTcwMywyMiArNzA4LDM2IEBAIHN0YXRpYyB1
+NjQgcmVhZF9wY2lfbWVtX2Jhcih1MTYgc2VnLCB1OCBidXMsIHU4IHNsb3QsIHU4IGZ1bmMsIHU4
+IGJpciwgaW50IHZmKQ0KPj4gICAgICAgICAgICAgICAhbnVtX3ZmIHx8ICFvZmZzZXQgfHwgKG51
+bV92ZiA+IDEgJiYgIXN0cmlkZSkgfHwNCj4+ICAgICAgICAgICAgICAgYmlyID49IFBDSV9TUklP
+Vl9OVU1fQkFSUyB8fA0KPj4gICAgICAgICAgICAgICAhcGRldi0+dmZfcmxlbltiaXJdICkNCj4+
+ICsgICAgICAgIHsNCj4+ICsgICAgICAgICAgICBpZiAoIHBkZXYgKQ0KPj4gKyAgICAgICAgICAg
+ICAgICBwY2lkZXZfcHV0KHBkZXYpOw0KPj4gICAgICAgICAgICAgIHJldHVybiAwOw0KPj4gKyAg
+ICAgICAgfQ0KPj4gICAgICAgICAgYmFzZSA9IHBvcyArIFBDSV9TUklPVl9CQVI7DQo+PiAgICAg
+ICAgICB2ZiAtPSBQQ0lfQkRGKGJ1cywgc2xvdCwgZnVuYykgKyBvZmZzZXQ7DQo+PiAgICAgICAg
+ICBpZiAoIHZmIDwgMCApDQo+PiArICAgICAgICB7DQo+PiArICAgICAgICAgICAgcGNpZGV2X3B1
+dChwZGV2KTsNCj4+ICAgICAgICAgICAgICByZXR1cm4gMDsNCj4+ICsgICAgICAgIH0NCj4+ICAg
+ICAgICAgIGlmICggc3RyaWRlICkNCj4+ICAgICAgICAgIHsNCj4+ICAgICAgICAgICAgICBpZiAo
+IHZmICUgc3RyaWRlICkNCj4+ICsgICAgICAgICAgICB7DQo+PiArICAgICAgICAgICAgICAgIHBj
+aWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICAgICAgICAgIHJldHVybiAwOw0KPj4gKyAgICAg
+ICAgICAgIH0NCj4+ICAgICAgICAgICAgICB2ZiAvPSBzdHJpZGU7DQo+PiAgICAgICAgICB9DQo+
+PiAgICAgICAgICBpZiAoIHZmID49IG51bV92ZiApDQo+PiArICAgICAgICB7DQo+PiArICAgICAg
+ICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAgICAgICAgICByZXR1cm4gMDsNCj4+ICsg
+ICAgICAgIH0NCj4+ICAgICAgICAgIEJVSUxEX0JVR19PTihBUlJBWV9TSVpFKHBkZXYtPnZmX3Js
+ZW4pICE9IFBDSV9TUklPVl9OVU1fQkFSUyk7DQo+PiAgICAgICAgICBkaXNwID0gdmYgKiBwZGV2
+LT52Zl9ybGVuW2Jpcl07DQo+PiAgICAgICAgICBsaW1pdCA9IFBDSV9TUklPVl9OVU1fQkFSUzsN
+Cj4+ICsgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgIH0NCj4+ICAgICAgZWxzZSBz
+d2l0Y2ggKCBwY2lfY29uZl9yZWFkOChQQ0lfU0JERihzZWcsIGJ1cywgc2xvdCwgZnVuYyksDQo+
+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUENJX0hFQURFUl9UWVBFKSAmIDB4
+N2YgKQ0KPj4gQEAgLTkyNSw2ICs5NDQsOCBAQCBzdGF0aWMgaW50IG1zaXhfY2FwYWJpbGl0eV9p
+bml0KHN0cnVjdCBwY2lfZGV2ICpkZXYsDQo+PiAgICAgICAgICBlbnRyeS0+ZGV2ID0gZGV2Ow0K
+Pj4gICAgICAgICAgZW50cnktPm1hc2tfYmFzZSA9IGJhc2U7DQo+PiAgDQo+PiArICAgICAgICBw
+Y2lkZXZfZ2V0KGRldik7DQo+PiArDQo+PiAgICAgICAgICBsaXN0X2FkZF90YWlsKCZlbnRyeS0+
+bGlzdCwgJmRldi0+bXNpX2xpc3QpOw0KPj4gICAgICAgICAgKmRlc2MgPSBlbnRyeTsNCj4+ICAg
+ICAgfQ0KPj4gQEAgLTk5OSw2ICsxMDIwLDcgQEAgc3RhdGljIGludCBfX3BjaV9lbmFibGVfbXNp
+KHN0cnVjdCBtc2lfaW5mbyAqbXNpLCBzdHJ1Y3QgbXNpX2Rlc2MgKipkZXNjKQ0KPj4gIHsNCj4+
+ICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiAgICAgIHN0cnVjdCBtc2lfZGVzYyAqb2xk
+X2Rlc2M7DQo+PiArICAgIGludCByZXQ7DQo+PiAgDQo+PiAgICAgIEFTU0VSVChwY2lkZXZzX2xv
+Y2tlZCgpKTsNCj4+ICAgICAgcGRldiA9IHBjaV9nZXRfcGRldihOVUxMLCBtc2ktPnNiZGYpOw0K
+Pj4gQEAgLTEwMTAsNiArMTAzMiw3IEBAIHN0YXRpYyBpbnQgX19wY2lfZW5hYmxlX21zaShzdHJ1
+Y3QgbXNpX2luZm8gKm1zaSwgc3RydWN0IG1zaV9kZXNjICoqZGVzYykNCj4+ICAgICAgew0KPj4g
+ICAgICAgICAgcHJpbnRrKFhFTkxPR19FUlIgImlycSAlZCBhbHJlYWR5IG1hcHBlZCB0byBNU0kg
+b24gJXBwXG4iLA0KPj4gICAgICAgICAgICAgICAgIG1zaS0+aXJxLCAmcGRldi0+c2JkZik7DQo+
+PiArICAgICAgICBwY2lkZXZfcHV0KHBkZXYpOw0KPj4gICAgICAgICAgcmV0dXJuIC1FRVhJU1Q7
+DQo+PiAgICAgIH0NCj4+ICANCj4+IEBAIC0xMDIwLDcgKzEwNDMsMTAgQEAgc3RhdGljIGludCBf
+X3BjaV9lbmFibGVfbXNpKHN0cnVjdCBtc2lfaW5mbyAqbXNpLCBzdHJ1Y3QgbXNpX2Rlc2MgKipk
+ZXNjKQ0KPj4gICAgICAgICAgX19wY2lfZGlzYWJsZV9tc2l4KG9sZF9kZXNjKTsNCj4+ICAgICAg
+fQ0KPj4gIA0KPj4gLSAgICByZXR1cm4gbXNpX2NhcGFiaWxpdHlfaW5pdChwZGV2LCBtc2ktPmly
+cSwgZGVzYywgbXNpLT5lbnRyeV9ucik7DQo+PiArICAgIHJldCA9IG1zaV9jYXBhYmlsaXR5X2lu
+aXQocGRldiwgbXNpLT5pcnEsIGRlc2MsIG1zaS0+ZW50cnlfbnIpOw0KPj4gKyAgICBwY2lkZXZf
+cHV0KHBkZXYpOw0KPj4gKw0KPj4gKyAgICByZXR1cm4gcmV0Ow0KPj4gIH0NCj4+ICANCj4+ICBz
+dGF0aWMgdm9pZCBfX3BjaV9kaXNhYmxlX21zaShzdHJ1Y3QgbXNpX2Rlc2MgKmVudHJ5KQ0KPj4g
+QEAgLTEwNTQsMjAgKzEwODAsMjkgQEAgc3RhdGljIGludCBfX3BjaV9lbmFibGVfbXNpeChzdHJ1
+Y3QgbXNpX2luZm8gKm1zaSwgc3RydWN0IG1zaV9kZXNjICoqZGVzYykNCj4+ICB7DQo+PiAgICAg
+IHN0cnVjdCBwY2lfZGV2ICpwZGV2Ow0KPj4gICAgICBzdHJ1Y3QgbXNpX2Rlc2MgKm9sZF9kZXNj
+Ow0KPj4gKyAgICBpbnQgcmV0Ow0KPj4gIA0KPj4gICAgICBBU1NFUlQocGNpZGV2c19sb2NrZWQo
+KSk7DQo+PiAgICAgIHBkZXYgPSBwY2lfZ2V0X3BkZXYoTlVMTCwgbXNpLT5zYmRmKTsNCj4+ICAg
+ICAgaWYgKCAhcGRldiB8fCAhcGRldi0+bXNpeCApDQo+PiArICAgIHsNCj4+ICsgICAgICAgIGlm
+ICggcGRldiApDQo+PiArICAgICAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAgICAg
+IHJldHVybiAtRU5PREVWOw0KPj4gKyAgICB9DQo+PiAgDQo+PiAgICAgIGlmICggbXNpLT5lbnRy
+eV9uciA+PSBwZGV2LT5tc2l4LT5ucl9lbnRyaWVzICkNCj4+ICsgICAgew0KPj4gKyAgICAgICAg
+cGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAgICAgIHJldHVybiAtRUlOVkFMOw0KPj4gKyAgICB9
+DQo+PiAgDQo+PiAgICAgIG9sZF9kZXNjID0gZmluZF9tc2lfZW50cnkocGRldiwgbXNpLT5pcnEs
+IFBDSV9DQVBfSURfTVNJWCk7DQo+PiAgICAgIGlmICggb2xkX2Rlc2MgKQ0KPj4gICAgICB7DQo+
+PiAgICAgICAgICBwcmludGsoWEVOTE9HX0VSUiAiaXJxICVkIGFscmVhZHkgbWFwcGVkIHRvIE1T
+SS1YIG9uICVwcFxuIiwNCj4+ICAgICAgICAgICAgICAgICBtc2ktPmlycSwgJnBkZXYtPnNiZGYp
+Ow0KPj4gKyAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAgICAgIHJldHVybiAtRUVY
+SVNUOw0KPj4gICAgICB9DQo+PiAgDQo+PiBAQCAtMTA3OCw3ICsxMTEzLDExIEBAIHN0YXRpYyBp
+bnQgX19wY2lfZW5hYmxlX21zaXgoc3RydWN0IG1zaV9pbmZvICptc2ksIHN0cnVjdCBtc2lfZGVz
+YyAqKmRlc2MpDQo+PiAgICAgICAgICBfX3BjaV9kaXNhYmxlX21zaShvbGRfZGVzYyk7DQo+PiAg
+ICAgIH0NCj4+ICANCj4+IC0gICAgcmV0dXJuIG1zaXhfY2FwYWJpbGl0eV9pbml0KHBkZXYsIG1z
+aSwgZGVzYyk7DQo+PiArICAgIHJldCA9IG1zaXhfY2FwYWJpbGl0eV9pbml0KHBkZXYsIG1zaSwg
+ZGVzYyk7DQo+PiArDQo+PiArICAgIHBjaWRldl9wdXQocGRldik7DQo+PiArDQo+PiArICAgIHJl
+dHVybiByZXQ7DQo+PiAgfQ0KPj4gIA0KPj4gIHN0YXRpYyB2b2lkIF9wY2lfY2xlYW51cF9tc2l4
+KHN0cnVjdCBhcmNoX21zaXggKm1zaXgpDQo+PiBAQCAtMTE1OSw2ICsxMTk4LDcgQEAgaW50IHBj
+aV9wcmVwYXJlX21zaXgodTE2IHNlZywgdTggYnVzLCB1OCBkZXZmbiwgYm9vbCBvZmYpDQo+PiAg
+ICAgIH0NCj4+ICAgICAgZWxzZQ0KPj4gICAgICAgICAgcmMgPSBtc2l4X2NhcGFiaWxpdHlfaW5p
+dChwZGV2LCBOVUxMLCBOVUxMKTsNCj4+ICsgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICAgICAg
+cGNpZGV2c191bmxvY2soKTsNCj4+ICANCj4+ICAgICAgcmV0dXJuIHJjOw0KPj4gZGlmZiAtLWdp
+dCBhL3hlbi9hcmNoL3g4Ni9wY2kuYyBiL3hlbi9hcmNoL3g4Ni9wY2kuYw0KPj4gaW5kZXggOTdi
+NzkyZTU3OC4uYzFmY2RmMDhkNiAxMDA2NDQNCj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9wY2kuYw0K
+Pj4gKysrIGIveGVuL2FyY2gveDg2L3BjaS5jDQo+PiBAQCAtOTIsNyArOTIsMTAgQEAgaW50IHBj
+aV9jb25mX3dyaXRlX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQgc2VnLCB1bnNpZ25lZCBpbnQgYmRm
+LA0KPj4gIA0KPj4gICAgICBwZGV2ID0gcGNpX2dldF9wZGV2KE5VTEwsIFBDSV9TQkRGKHNlZywg
+YmRmKSk7DQo+PiAgICAgIGlmICggcGRldiApDQo+PiArICAgIHsNCj4+ICAgICAgICAgIHJjID0g
+cGNpX21zaV9jb25mX3dyaXRlX2ludGVyY2VwdChwZGV2LCByZWcsIHNpemUsIGRhdGEpOw0KPj4g
+KyAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICsgICAgfQ0KPj4gIA0KPj4gICAgICBwY2lk
+ZXZzX3VubG9jaygpOw0KPj4gIA0KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9waHlzZGV2
+LmMgYi94ZW4vYXJjaC94ODYvcGh5c2Rldi5jDQo+PiBpbmRleCAyZjFkOTU1YTk2Li45NjIxNGEz
+ZDQwIDEwMDY0NA0KPj4gLS0tIGEveGVuL2FyY2gveDg2L3BoeXNkZXYuYw0KPj4gKysrIGIveGVu
+L2FyY2gveDg2L3BoeXNkZXYuYw0KPj4gQEAgLTUzMyw3ICs1MzMsMTQgQEAgcmV0X3QgZG9fcGh5
+c2Rldl9vcChpbnQgY21kLCBYRU5fR1VFU1RfSEFORExFX1BBUkFNKHZvaWQpIGFyZykNCj4+ICAg
+ICAgICAgIHBjaWRldnNfbG9jaygpOw0KPj4gICAgICAgICAgcGRldiA9IHBjaV9nZXRfcGRldihO
+VUxMLA0KPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQQ0lfU0JERigwLCByZXN0b3Jl
+X21zaS5idXMsIHJlc3RvcmVfbXNpLmRldmZuKSk7DQo+PiAtICAgICAgICByZXQgPSBwZGV2ID8g
+cGNpX3Jlc3RvcmVfbXNpX3N0YXRlKHBkZXYpIDogLUVOT0RFVjsNCj4+ICsgICAgICAgIGlmICgg
+cGRldiApDQo+PiArICAgICAgICB7DQo+PiArICAgICAgICAgICAgcmV0ID0gcGNpX3Jlc3RvcmVf
+bXNpX3N0YXRlKHBkZXYpOw0KPj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAr
+ICAgICAgICB9DQo+PiArICAgICAgICBlbHNlDQo+PiArICAgICAgICAgICAgcmV0ID0gLUVOT0RF
+VjsNCj4+ICsNCj4+ICAgICAgICAgIHBjaWRldnNfdW5sb2NrKCk7DQo+PiAgICAgICAgICBicmVh
+azsNCj4+ICAgICAgfQ0KPj4gQEAgLTU0OCw3ICs1NTUsMTMgQEAgcmV0X3QgZG9fcGh5c2Rldl9v
+cChpbnQgY21kLCBYRU5fR1VFU1RfSEFORExFX1BBUkFNKHZvaWQpIGFyZykNCj4+ICANCj4+ICAg
+ICAgICAgIHBjaWRldnNfbG9jaygpOw0KPj4gICAgICAgICAgcGRldiA9IHBjaV9nZXRfcGRldihO
+VUxMLCBQQ0lfU0JERihkZXYuc2VnLCBkZXYuYnVzLCBkZXYuZGV2Zm4pKTsNCj4+IC0gICAgICAg
+IHJldCA9IHBkZXYgPyBwY2lfcmVzdG9yZV9tc2lfc3RhdGUocGRldikgOiAtRU5PREVWOw0KPj4g
+KyAgICAgICAgaWYgKCBwZGV2ICkNCj4+ICsgICAgICAgIHsNCj4+ICsgICAgICAgICAgICByZXQg
+PSAgcGNpX3Jlc3RvcmVfbXNpX3N0YXRlKHBkZXYpOw0KPj4gKyAgICAgICAgICAgIHBjaWRldl9w
+dXQocGRldik7DQo+PiArICAgICAgICB9DQo+PiArICAgICAgICBlbHNlDQo+PiArICAgICAgICAg
+ICAgcmV0ID0gLUVOT0RFVjsNCj4+ICAgICAgICAgIHBjaWRldnNfdW5sb2NrKCk7DQo+PiAgICAg
+ICAgICBicmVhazsNCj4+ICAgICAgfQ0KPj4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vc3lzY3Rs
+LmMgYi94ZW4vY29tbW9uL3N5c2N0bC5jDQo+PiBpbmRleCAwMjUwNWFiMDQ0Li45YWYwN2ZhOTJh
+IDEwMDY0NA0KPj4gLS0tIGEveGVuL2NvbW1vbi9zeXNjdGwuYw0KPj4gKysrIGIveGVuL2NvbW1v
+bi9zeXNjdGwuYw0KPj4gQEAgLTQzOCw3ICs0MzgsNyBAQCBsb25nIGRvX3N5c2N0bChYRU5fR1VF
+U1RfSEFORExFX1BBUkFNKHhlbl9zeXNjdGxfdCkgdV9zeXNjdGwpDQo+PiAgICAgICAgICB7DQo+
+PiAgICAgICAgICAgICAgcGh5c2Rldl9wY2lfZGV2aWNlX3QgZGV2Ow0KPj4gICAgICAgICAgICAg
+IHVpbnQzMl90IG5vZGU7DQo+PiAtICAgICAgICAgICAgY29uc3Qgc3RydWN0IHBjaV9kZXYgKnBk
+ZXY7DQo+PiArICAgICAgICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiAgDQo+PiAgICAg
+ICAgICAgICAgaWYgKCBjb3B5X2Zyb21fZ3Vlc3Rfb2Zmc2V0KCZkZXYsIHRpLT5kZXZzLCBpLCAx
+KSApDQo+PiAgICAgICAgICAgICAgew0KPj4gQEAgLTQ1NCw4ICs0NTQsMTEgQEAgbG9uZyBkb19z
+eXNjdGwoWEVOX0dVRVNUX0hBTkRMRV9QQVJBTSh4ZW5fc3lzY3RsX3QpIHVfc3lzY3RsKQ0KPj4g
+ICAgICAgICAgICAgICAgICBub2RlID0gWEVOX0lOVkFMSURfTk9ERV9JRDsNCj4+ICAgICAgICAg
+ICAgICBlbHNlDQo+PiAgICAgICAgICAgICAgICAgIG5vZGUgPSBwZGV2LT5ub2RlOw0KPj4gLSAg
+ICAgICAgICAgIHBjaWRldnNfdW5sb2NrKCk7DQo+PiAgDQo+PiArICAgICAgICAgICAgaWYgKCBw
+ZGV2ICkNCj4+ICsgICAgICAgICAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICsNCj4+ICsg
+ICAgICAgICAgICBwY2lkZXZzX3VubG9jaygpOw0KPj4gICAgICAgICAgICAgIGlmICggY29weV90
+b19ndWVzdF9vZmZzZXQodGktPm5vZGVzLCBpLCAmbm9kZSwgMSkgKQ0KPj4gICAgICAgICAgICAg
+IHsNCj4+ICAgICAgICAgICAgICAgICAgcmV0ID0gLUVGQVVMVDsNCj4+IGRpZmYgLS1naXQgYS94
+ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQvaW9tbXVfaW5pdC5jIGIveGVuL2RyaXZlcnMvcGFz
+c3Rocm91Z2gvYW1kL2lvbW11X2luaXQuYw0KPj4gaW5kZXggOTc3M2NjZmNiNC4uZjkwYjFjMWU1
+OCAxMDA2NDQNCj4+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9pbml0
+LmMNCj4+ICsrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9pbml0LmMNCj4+
+IEBAIC02NDYsNiArNjQ2LDcgQEAgc3RhdGljIHZvaWQgY2ZfY2hlY2sgcGFyc2VfcHByX2xvZ19l
+bnRyeShzdHJ1Y3QgYW1kX2lvbW11ICppb21tdSwgdTMyIGVudHJ5W10pDQo+PiAgDQo+PiAgICAg
+IGlmICggcGRldiApDQo+PiAgICAgICAgICBndWVzdF9pb21tdV9hZGRfcHByX2xvZyhwZGV2LT5k
+b21haW4sIGVudHJ5KTsNCj4+ICsgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICB9DQo+PiAgDQo+
+PiAgc3RhdGljIHZvaWQgaW9tbXVfY2hlY2tfcHByX2xvZyhzdHJ1Y3QgYW1kX2lvbW11ICppb21t
+dSkNCj4+IEBAIC03NDksNiArNzUwLDExIEBAIHN0YXRpYyBib29sX3QgX19pbml0IHNldF9pb21t
+dV9pbnRlcnJ1cHRfaGFuZGxlcihzdHJ1Y3QgYW1kX2lvbW11ICppb21tdSkNCj4+ICAgICAgfQ0K
+Pj4gIA0KPj4gICAgICBwY2lkZXZzX2xvY2soKTsNCj4+ICsgICAgLyoNCj4+ICsgICAgICogWFhY
+OiBpdCBpcyB1bmNsZWFyIGlmIHRoaXMgZGV2aWNlIGNhbiBiZSByZW1vdmVkLiBSaWdodCBub3cN
+Cj4+ICsgICAgICogdGhlcmUgaXMgbm8gY29kZSB0aGF0IGNsZWFycyBtc2kuZGV2LCBzbyBubyBv
+bmUgd2lsbCBkZWNyZWFzZQ0KPj4gKyAgICAgKiByZWZjb3VudCBvbiBpdC4NCj4+ICsgICAgICov
+DQo+PiAgICAgIGlvbW11LT5tc2kuZGV2ID0gcGNpX2dldF9wZGV2KE5VTEwsIFBDSV9TQkRGKGlv
+bW11LT5zZWcsIGlvbW11LT5iZGYpKTsNCj4NCj4gSSBkb24ndCB0aGluayB3ZSBjYW4gcmVtb3Zl
+IGFuIElPTU1VIGZyb20gdGhlIHN5c3RlbSwgc28gdGhpcyBpcw0KPiBmaW5lIGFzLWlzIEFGQUlD
+VC4NCj4NCg0KT2gsIHRoYW5rIHlvdSBmb3IgdGhlIGNsYXJpZmljYXRpb24uIEknbGwgcmVtb3Zl
+IHRoZSBjb21tZW50IHRoZW4uDQoNCj4+ICAgICAgcGNpZGV2c191bmxvY2soKTsNCj4+ICAgICAg
+aWYgKCAhaW9tbXUtPm1zaS5kZXYgKQ0KPj4gQEAgLTEyNzQsNyArMTI4MCw3IEBAIHN0YXRpYyBp
+bnQgX19pbml0IGNmX2NoZWNrIGFtZF9pb21tdV9zZXR1cF9kZXZpY2VfdGFibGUoDQo+PiAgICAg
+IHsNCj4+ICAgICAgICAgIGlmICggaXZyc19tYXBwaW5nc1tiZGZdLnZhbGlkICkNCj4+ICAgICAg
+ICAgIHsNCj4+IC0gICAgICAgICAgICBjb25zdCBzdHJ1Y3QgcGNpX2RldiAqcGRldiA9IE5VTEw7
+DQo+PiArICAgICAgICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXYgPSBOVUxMOw0KPj4gIA0KPj4g
+ICAgICAgICAgICAgIC8qIGFkZCBkZXZpY2UgdGFibGUgZW50cnkgKi8NCj4+ICAgICAgICAgICAg
+ICBpb21tdV9kdGVfYWRkX2RldmljZV9lbnRyeSgmZHRbYmRmXSwgJml2cnNfbWFwcGluZ3NbYmRm
+XSk7DQo+PiBAQCAtMTI5OSw3ICsxMzA1LDEwIEBAIHN0YXRpYyBpbnQgX19pbml0IGNmX2NoZWNr
+IGFtZF9pb21tdV9zZXR1cF9kZXZpY2VfdGFibGUoDQo+PiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGRldi0+bXNpeCA/IHBkZXYtPm1zaXgtPm5yX2VudHJpZXMNCj4+ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIDogcGRldi0+bXNpX21heHZlYyk7DQo+PiAgICAgICAgICAg
+ICAgICAgIGlmICggIWl2cnNfbWFwcGluZ3NbYmRmXS5pbnRyZW1hcF90YWJsZSApDQo+PiArICAg
+ICAgICAgICAgICAgIHsNCj4+ICsgICAgICAgICAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7
+DQo+PiAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVOT01FTTsNCj4+ICsgICAgICAgICAg
+ICAgICAgfQ0KPj4gIA0KPj4gICAgICAgICAgICAgICAgICBpZiAoIHBkZXYtPnBoYW50b21fc3Ry
+aWRlICkNCj4+ICAgICAgICAgICAgICAgICAgew0KPj4gQEAgLTEzMTcsNiArMTMyNiw3IEBAIHN0
+YXRpYyBpbnQgX19pbml0IGNmX2NoZWNrIGFtZF9pb21tdV9zZXR1cF9kZXZpY2VfdGFibGUoDQo+
+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGl2cnNfbWFwcGluZ3NbYmRmXS5pbnRyZW1h
+cF9pbnVzZTsNCj4+ICAgICAgICAgICAgICAgICAgICAgIH0NCj4+ICAgICAgICAgICAgICAgICAg
+fQ0KPj4gKyAgICAgICAgICAgICAgICBwY2lkZXZfcHV0KHBkZXYpOw0KPj4gICAgICAgICAgICAg
+IH0NCj4+ICANCj4+ICAgICAgICAgICAgICBhbWRfaW9tbXVfc2V0X2ludHJlbWFwX3RhYmxlKA0K
+Pj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9tYXAuYyBi
+L3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9tYXAuYw0KPj4gaW5kZXggOTkzYmFj
+NmY4OC4uOWQ2MjFlM2QzNiAxMDA2NDQNCj4+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdo
+L2FtZC9pb21tdV9tYXAuYw0KPj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL2lv
+bW11X21hcC5jDQo+PiBAQCAtNzI0LDE0ICs3MjQsMTggQEAgaW50IGNmX2NoZWNrIGFtZF9pb21t
+dV9nZXRfcmVzZXJ2ZWRfZGV2aWNlX21lbW9yeSgNCj4+ICAgICAgICAgIGlmICggIWlvbW11ICkN
+Cj4+ICAgICAgICAgIHsNCj4+ICAgICAgICAgICAgICAvKiBNYXkgbmVlZCB0byB0cmlnZ2VyIHRo
+ZSB3b3JrYXJvdW5kIGluIGZpbmRfaW9tbXVfZm9yX2RldmljZSgpLiAqLw0KPj4gLSAgICAgICAg
+ICAgIGNvbnN0IHN0cnVjdCBwY2lfZGV2ICpwZGV2Ow0KPj4gKyAgICAgICAgICAgIHN0cnVjdCBw
+Y2lfZGV2ICpwZGV2Ow0KPj4gIA0KPj4gICAgICAgICAgICAgIHBjaWRldnNfbG9jaygpOw0KPj4g
+ICAgICAgICAgICAgIHBkZXYgPSBwY2lfZ2V0X3BkZXYoTlVMTCwgc2JkZik7DQo+PiAgICAgICAg
+ICAgICAgcGNpZGV2c191bmxvY2soKTsNCj4+ICANCj4+ICAgICAgICAgICAgICBpZiAoIHBkZXYg
+KQ0KPj4gKyAgICAgICAgICAgIHsNCj4+ICAgICAgICAgICAgICAgICAgaW9tbXUgPSBmaW5kX2lv
+bW11X2Zvcl9kZXZpY2Uoc2VnLCBiZGYpOw0KPj4gKyAgICAgICAgICAgICAgICAvKiBYWFg6IFNo
+b3VsZCB3ZSBob2xkIHBkZXYgcmVmZXJlbmNlIHRpbGwgZW5kIG9mIHRoZSBsb29wPyAqLw0KPj4g
+KyAgICAgICAgICAgICAgICBwY2lkZXZfcHV0KHBkZXYpOw0KPg0KPiBJIGRvbid0IHRoaW5rIHlv
+dSBuZWVkIHRvIGhvbGQgYSByZWZlcmVuY2UgdG8gdGhlIGRldmljZSB1bnRpbCB0aGUgZW5kDQo+
+IG9mIHRoZSBsb29wLCB0aGUgZGF0YSBmZXRjaGVkIHRoZXJlIGlzIGZyb20gdGhlIEFDUEkgdGFi
+bGVzLiAgSWYgdGhlDQo+IGZ1bmMoKSBoZWxwZXIgYWxzbyBuZWVkcyBhIHBkZXYgaW5zdGFuY2Ug
+aXMgaXQncyB0YXNrIHRvIGdldCBvbmUuDQo+DQoNClRoYW5rIHlvdSBmb3IgdGhlIGNsYXJpZmlj
+YXRpb24uIEknbGwgcmVtb3ZlIHRoZSBjb21tZW50Lg0KDQo+PiArICAgICAgICAgICAgfQ0KPj4g
+ICAgICAgICAgICAgIGlmICggIWlvbW11ICkNCj4+ICAgICAgICAgICAgICAgICAgY29udGludWU7
+DQo+PiAgICAgICAgICB9DQo+PiBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
+cGNpLmMgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9wY2kuYw0KPj4gaW5kZXggYjQyYWNiOGQ3
+Yy4uYjMyMzgyYWNhMCAxMDA2NDQNCj4+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3Bj
+aS5jDQo+PiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9wY2kuYw0KPj4gQEAgLTMyOCw2
+ICszMjgsNyBAQCBzdGF0aWMgc3RydWN0IHBjaV9kZXYgKmFsbG9jX3BkZXYoc3RydWN0IHBjaV9z
+ZWcgKnBzZWcsIHU4IGJ1cywgdTggZGV2Zm4pDQo+PiAgICAgICooKHU4KikgJnBkZXYtPmJ1cykg
+PSBidXM7DQo+PiAgICAgICooKHU4KikgJnBkZXYtPmRldmZuKSA9IGRldmZuOw0KPj4gICAgICBw
+ZGV2LT5kb21haW4gPSBOVUxMOw0KPj4gKyAgICByZWZjbnRfaW5pdCgmcGRldi0+cmVmY250KTsN
+Cj4+ICANCj4+ICAgICAgYXJjaF9wY2lfaW5pdF9wZGV2KHBkZXYpOw0KPj4gIA0KPj4gQEAgLTQy
+MiwzMyArNDIzLDYgQEAgc3RhdGljIHN0cnVjdCBwY2lfZGV2ICphbGxvY19wZGV2KHN0cnVjdCBw
+Y2lfc2VnICpwc2VnLCB1OCBidXMsIHU4IGRldmZuKQ0KPj4gICAgICByZXR1cm4gcGRldjsNCj4+
+ICB9DQo+PiAgDQo+PiAtc3RhdGljIHZvaWQgZnJlZV9wZGV2KHN0cnVjdCBwY2lfc2VnICpwc2Vn
+LCBzdHJ1Y3QgcGNpX2RldiAqcGRldikNCj4+IC17DQo+PiAtICAgIC8qIHVwZGF0ZSBidXMyYnJp
+ZGdlICovDQo+PiAtICAgIHN3aXRjaCAoIHBkZXYtPnR5cGUgKQ0KPj4gLSAgICB7DQo+PiAtICAg
+ICAgICB1bnNpZ25lZCBpbnQgc2VjX2J1cywgc3ViX2J1czsNCj4+IC0NCj4+IC0gICAgICAgIGNh
+c2UgREVWX1RZUEVfUENJZTJQQ0lfQlJJREdFOg0KPj4gLSAgICAgICAgY2FzZSBERVZfVFlQRV9M
+RUdBQ1lfUENJX0JSSURHRToNCj4+IC0gICAgICAgICAgICBzZWNfYnVzID0gcGNpX2NvbmZfcmVh
+ZDgocGRldi0+c2JkZiwgUENJX1NFQ09OREFSWV9CVVMpOw0KPj4gLSAgICAgICAgICAgIHN1Yl9i
+dXMgPSBwY2lfY29uZl9yZWFkOChwZGV2LT5zYmRmLCBQQ0lfU1VCT1JESU5BVEVfQlVTKTsNCj4+
+IC0NCj4+IC0gICAgICAgICAgICBzcGluX2xvY2soJnBzZWctPmJ1czJicmlkZ2VfbG9jayk7DQo+
+PiAtICAgICAgICAgICAgZm9yICggOyBzZWNfYnVzIDw9IHN1Yl9idXM7IHNlY19idXMrKyApDQo+
+PiAtICAgICAgICAgICAgICAgIHBzZWctPmJ1czJicmlkZ2Vbc2VjX2J1c10gPSBwc2VnLT5idXMy
+YnJpZGdlW3BkZXYtPmJ1c107DQo+PiAtICAgICAgICAgICAgc3Bpbl91bmxvY2soJnBzZWctPmJ1
+czJicmlkZ2VfbG9jayk7DQo+PiAtICAgICAgICAgICAgYnJlYWs7DQo+PiAtDQo+PiAtICAgICAg
+ICBkZWZhdWx0Og0KPj4gLSAgICAgICAgICAgIGJyZWFrOw0KPj4gLSAgICB9DQo+PiAtDQo+PiAt
+ICAgIGxpc3RfZGVsKCZwZGV2LT5hbGxkZXZzX2xpc3QpOw0KPj4gLSAgICBwZGV2X21zaV9kZWlu
+aXQocGRldik7DQo+PiAtICAgIHhmcmVlKHBkZXYpOw0KPj4gLX0NCj4+IC0NCj4+ICBzdGF0aWMg
+dm9pZCBfX2luaXQgX3BjaV9oaWRlX2RldmljZShzdHJ1Y3QgcGNpX2RldiAqcGRldikNCj4+ICB7
+DQo+PiAgICAgIGlmICggcGRldi0+ZG9tYWluICkNCj4+IEBAIC01MTcsMTAgKzQ5MSwxNCBAQCBz
+dHJ1Y3QgcGNpX2RldiAqcGNpX2dldF9yZWFsX3BkZXYocGNpX3NiZGZfdCBzYmRmKQ0KPj4gICAg
+ICB7DQo+PiAgICAgICAgICBpZiAoICEoc2JkZi5kZXZmbiAmIHN0cmlkZSkgKQ0KPj4gICAgICAg
+ICAgICAgIGNvbnRpbnVlOw0KPj4gKw0KPg0KPiBVbnJlbGF0ZWQgY2hhbmdlPyAgVGhlcmUgYXJl
+IHNvbWUgb2YgdGhvc2UgaW4gdGhlIHBhdGNoLCBzaG91bGQgYmUNCj4gcmVtb3ZlZC4NCg0KWWVz
+LCBzb3JyeSBmb3IgdGhpcy4NCg0KPg0KPj4gICAgICAgICAgc2JkZi5kZXZmbiAmPSB+c3RyaWRl
+Ow0KPj4gICAgICAgICAgcGRldiA9IHBjaV9nZXRfcGRldihOVUxMLCBzYmRmKTsNCj4+ICAgICAg
+ICAgIGlmICggcGRldiAmJiBzdHJpZGUgIT0gcGRldi0+cGhhbnRvbV9zdHJpZGUgKQ0KPj4gKyAg
+ICAgICAgew0KPj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICAg
+ICAgcGRldiA9IE5VTEw7DQo+PiArICAgICAgICB9DQo+PiAgICAgIH0NCj4+ICANCj4+ICAgICAg
+cmV0dXJuIHBkZXY7DQo+PiBAQCAtNTQ4LDEzICs1MjYsMTggQEAgc3RydWN0IHBjaV9kZXYgKnBj
+aV9nZXRfcGRldihjb25zdCBzdHJ1Y3QgZG9tYWluICpkLCBwY2lfc2JkZl90IHNiZGYpDQo+PiAg
+ICAgICAgICBsaXN0X2Zvcl9lYWNoX2VudHJ5ICggcGRldiwgJnBzZWctPmFsbGRldnNfbGlzdCwg
+YWxsZGV2c19saXN0ICkNCj4+ICAgICAgICAgICAgICBpZiAoIHBkZXYtPnNiZGYuYmRmID09IHNi
+ZGYuYmRmICYmDQo+PiAgICAgICAgICAgICAgICAgICAoIWQgfHwgcGRldi0+ZG9tYWluID09IGQp
+ICkNCj4+ICsgICAgICAgICAgICB7DQo+PiArICAgICAgICAgICAgICAgIHBjaWRldl9nZXQocGRl
+dik7DQo+PiAgICAgICAgICAgICAgICAgIHJldHVybiBwZGV2Ow0KPj4gKyAgICAgICAgICAgIH0N
+Cj4+ICAgICAgfQ0KPj4gICAgICBlbHNlDQo+PiAgICAgICAgICBsaXN0X2Zvcl9lYWNoX2VudHJ5
+ICggcGRldiwgJmQtPnBkZXZfbGlzdCwgZG9tYWluX2xpc3QgKQ0KPj4gICAgICAgICAgICAgIGlm
+ICggcGRldi0+c2JkZi5iZGYgPT0gc2JkZi5iZGYgKQ0KPj4gKyAgICAgICAgICAgIHsNCj4+ICsg
+ICAgICAgICAgICAgICAgcGNpZGV2X2dldChwZGV2KTsNCj4+ICAgICAgICAgICAgICAgICAgcmV0
+dXJuIHBkZXY7DQo+PiAtDQo+PiArICAgICAgICAgICAgfQ0KPj4gICAgICByZXR1cm4gTlVMTDsN
+Cj4+ICB9DQo+PiAgDQo+PiBAQCAtNjYzLDcgKzY0NiwxMCBAQCBpbnQgcGNpX2FkZF9kZXZpY2Uo
+dTE2IHNlZywgdTggYnVzLCB1OCBkZXZmbiwNCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgUENJX1NCREYoc2VnLCBpbmZvLT5waHlzZm4uYnVzLA0KPj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBpbmZvLT5waHlzZm4uZGV2Zm4pKTsNCj4+ICAgICAgICAgIGlm
+ICggcGRldiApDQo+PiArICAgICAgICB7DQo+PiAgICAgICAgICAgICAgcGZfaXNfZXh0Zm4gPSBw
+ZGV2LT5pbmZvLmlzX2V4dGZuOw0KPj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+
+PiArICAgICAgICB9DQo+PiAgICAgICAgICBwY2lkZXZzX3VubG9jaygpOw0KPj4gICAgICAgICAg
+aWYgKCAhcGRldiApDQo+PiAgICAgICAgICAgICAgcGNpX2FkZF9kZXZpY2Uoc2VnLCBpbmZvLT5w
+aHlzZm4uYnVzLCBpbmZvLT5waHlzZm4uZGV2Zm4sDQo+PiBAQCAtODE4LDcgKzgwNCw5IEBAIGlu
+dCBwY2lfcmVtb3ZlX2RldmljZSh1MTYgc2VnLCB1OCBidXMsIHU4IGRldmZuKQ0KPj4gICAgICAg
+ICAgICAgIGlmICggcGRldi0+ZG9tYWluICkNCj4+ICAgICAgICAgICAgICAgICAgbGlzdF9kZWwo
+JnBkZXYtPmRvbWFpbl9saXN0KTsNCj4+ICAgICAgICAgICAgICBwcmludGsoWEVOTE9HX0RFQlVH
+ICJQQ0kgcmVtb3ZlIGRldmljZSAlcHBcbiIsICZwZGV2LT5zYmRmKTsNCj4+IC0gICAgICAgICAg
+ICBmcmVlX3BkZXYocHNlZywgcGRldik7DQo+PiArICAgICAgICAgICAgbGlzdF9kZWwoJnBkZXYt
+PmFsbGRldnNfbGlzdCk7DQo+PiArICAgICAgICAgICAgcGRldl9tc2lfZGVpbml0KHBkZXYpOw0K
+Pj4gKyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+DQo+IEhtLCBJIHRoaW5rIGhlcmUg
+d2Ugd2FudCB0byBtYWtlIHN1cmUgdGhhdCB0aGUgZGV2aWNlIGhhcyBiZWVuIGZyZWVkLA0KPiBv
+ciBlbHNlIHlvdSB3b3VsZCBoYXZlIHRvIHJldHVybiAtRUJVU1kgdG8gdGhlIGNhbGxzIHRvIG5v
+dGlmeSB0aGF0DQo+IHRoZSBkZXZpY2UgaXMgc3RpbGwgaW4gdXNlLg0KDQpXaHk/IEFzIEkgY2Fu
+IHNlZSwgcGRldiBvYmplY3QgaXMgc3RpbGwgbWF5IHBvdGVudGlhbGx5IGJlIGFjY2Vzc2VkIGJ5
+DQpzb21lIG90aGVyIENQVSByaWdodCBub3cuIFNvIHBkZXYgb2JqZWN0IHdpbGwgYmUgZnJlZWQg
+YWZ0ZXIgbGFzdA0KcmVmZXJlbmNlIGlzIGRyb3BwZWQuIEFzIGl0IGlzIGFscmVhZHkgcmVtb3Zl
+ZCBmcm9tIGFsbCB0aGUgbGlzdHMsDQpwY2lfZGV2X2dldCgpIHdpbGwgbm90IGZpbmQgaXQgYW55
+bW9yZS4NCg0KQWN0dWFsbHksIEkgY2FuJ3Qgc2VlIGhvdyB0aGlzIGNhbiBoYXBwZW4gaW4gcmVh
+bGl0eSwgYXMgVlBDSSwgTVNJIGFuZA0KSU9NTVUgYXJlIGFscmVhZHkgZGVhY3RpdmF0ZWQgZm9y
+IHRoaXMgZGV2aWNlLiBTbywgbm8gb25lIHdvdWxkIHRvdWNoIGl0Lg0KDQo+DQo+IEkgdGhpbmsg
+d2UgbmVlZCBhbiBleHRyYSBwY2lkZXZfcHV0X2ZpbmFsKCkgb3Igc2ltaWxhciB0aGF0IGNhbiBi
+ZQ0KPiB1c2VkIGluIHBjaV9yZW1vdmVfZGV2aWNlKCkgdG8gYXNzZXJ0IHRoYXQgdGhlIGRldmlj
+ZSBoYXMgYmVlbg0KPiBhY3R1YWxseSByZW1vdmVkLg0KDQpXaWxsIHNvbWV0aGluZyBicmVhayBp
+ZiB3ZSBkb24ndCBkbyB0aGlzPyBJIGNhbid0IHNlZSBob3cgdGhpcyBjYW4NCmhhcHBlbi4NCg0K
+Pg0KPj4gICAgICAgICAgICAgIGJyZWFrOw0KPj4gICAgICAgICAgfQ0KPj4gIA0KPj4gQEAgLTg0
+OCw3ICs4MzYsNyBAQCBzdGF0aWMgaW50IGRlYXNzaWduX2RldmljZShzdHJ1Y3QgZG9tYWluICpk
+LCB1aW50MTZfdCBzZWcsIHVpbnQ4X3QgYnVzLA0KPj4gICAgICB7DQo+PiAgICAgICAgICByZXQg
+PSBpb21tdV9xdWFyYW50aW5lX2Rldl9pbml0KHBjaV90b19kZXYocGRldikpOw0KPj4gICAgICAg
+ICAgaWYgKCByZXQgKQ0KPj4gLSAgICAgICAgICAgcmV0dXJuIHJldDsNCj4+ICsgICAgICAgICAg
+ICBnb3RvIG91dDsNCj4+ICANCj4+ICAgICAgICAgIHRhcmdldCA9IGRvbV9pbzsNCj4+ICAgICAg
+fQ0KPj4gQEAgLTg3OCw2ICs4NjYsNyBAQCBzdGF0aWMgaW50IGRlYXNzaWduX2RldmljZShzdHJ1
+Y3QgZG9tYWluICpkLCB1aW50MTZfdCBzZWcsIHVpbnQ4X3QgYnVzLA0KPj4gICAgICBwZGV2LT5m
+YXVsdC5jb3VudCA9IDA7DQo+PiAgDQo+PiAgIG91dDoNCj4+ICsgICAgcGNpZGV2X3B1dChwZGV2
+KTsNCj4+ICAgICAgaWYgKCByZXQgKQ0KPj4gICAgICAgICAgcHJpbnRrKFhFTkxPR19HX0VSUiAi
+JXBkOiBkZWFzc2lnbiAoJXBwKSBmYWlsZWQgKCVkKVxuIiwNCj4+ICAgICAgICAgICAgICAgICBk
+LCAmUENJX1NCREYoc2VnLCBidXMsIGRldmZuKSwgcmV0KTsNCj4+IEBAIC0xMDExLDcgKzEwMDAs
+MTAgQEAgdm9pZCBwY2lfY2hlY2tfZGlzYWJsZV9kZXZpY2UodTE2IHNlZywgdTggYnVzLCB1OCBk
+ZXZmbikNCj4+ICAgICAgICAgICAgICBwZGV2LT5mYXVsdC5jb3VudCA+Pj0gMTsNCj4+ICAgICAg
+ICAgIHBkZXYtPmZhdWx0LnRpbWUgPSBub3c7DQo+PiAgICAgICAgICBpZiAoICsrcGRldi0+ZmF1
+bHQuY291bnQgPCBQVF9GQVVMVF9USFJFU0hPTEQgKQ0KPj4gKyAgICAgICAgew0KPj4gKyAgICAg
+ICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICAgICAgcGRldiA9IE5VTEw7DQo+
+PiArICAgICAgICB9DQo+PiAgICAgIH0NCj4+ICAgICAgcGNpZGV2c191bmxvY2soKTsNCj4+ICAN
+Cj4+IEBAIC0xMDIyLDYgKzEwMTQsOCBAQCB2b2lkIHBjaV9jaGVja19kaXNhYmxlX2RldmljZSh1
+MTYgc2VnLCB1OCBidXMsIHU4IGRldmZuKQ0KPj4gICAgICAgKiBjb250cm9sIGl0IGZvciB1cy4g
+Ki8NCj4+ICAgICAgY3dvcmQgPSBwY2lfY29uZl9yZWFkMTYocGRldi0+c2JkZiwgUENJX0NPTU1B
+TkQpOw0KPj4gICAgICBwY2lfY29uZl93cml0ZTE2KHBkZXYtPnNiZGYsIFBDSV9DT01NQU5ELCBj
+d29yZCAmIH5QQ0lfQ09NTUFORF9NQVNURVIpOw0KPj4gKw0KPj4gKyAgICBwY2lkZXZfcHV0KHBk
+ZXYpOw0KPj4gIH0NCj4+ICANCj4+ICAvKg0KPj4gQEAgLTExMzgsNiArMTEzMiw3IEBAIHN0YXRp
+YyBpbnQgX19od2RvbV9pbml0IGNmX2NoZWNrIF9zZXR1cF9od2RvbV9wY2lfZGV2aWNlcygNCj4+
+ICAgICAgICAgICAgICAgICAgcHJpbnRrKFhFTkxPR19XQVJOSU5HICJEb20lZCBvd25pbmcgJXBw
+P1xuIiwNCj4+ICAgICAgICAgICAgICAgICAgICAgICAgIHBkZXYtPmRvbWFpbi0+ZG9tYWluX2lk
+LCAmcGRldi0+c2JkZik7DQo+PiAgDQo+PiArICAgICAgICAgICAgcGNpZGV2X3B1dChwZGV2KTsN
+Cj4+ICAgICAgICAgICAgICBpZiAoIGlvbW11X3ZlcmJvc2UgKQ0KPj4gICAgICAgICAgICAgIHsN
+Cj4+ICAgICAgICAgICAgICAgICAgcGNpZGV2c191bmxvY2soKTsNCj4+IEBAIC0xMzg1LDMzICsx
+MzgwLDI4IEBAIHN0YXRpYyBpbnQgaW9tbXVfcmVtb3ZlX2RldmljZShzdHJ1Y3QgcGNpX2RldiAq
+cGRldikNCj4+ICAgICAgcmV0dXJuIGlvbW11X2NhbGwoaGQtPnBsYXRmb3JtX29wcywgcmVtb3Zl
+X2RldmljZSwgZGV2Zm4sIHBjaV90b19kZXYocGRldikpOw0KPj4gIH0NCj4+ICANCj4+IC1zdGF0
+aWMgaW50IGRldmljZV9hc3NpZ25lZCh1MTYgc2VnLCB1OCBidXMsIHU4IGRldmZuKQ0KPj4gK3N0
+YXRpYyBpbnQgZGV2aWNlX2Fzc2lnbmVkKHN0cnVjdCBwY2lfZGV2ICpwZGV2KQ0KPj4gIHsNCj4+
+IC0gICAgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiAgICAgIGludCByYyA9IDA7DQo+PiAgDQo+
+PiAgICAgIEFTU0VSVChwY2lkZXZzX2xvY2tlZCgpKTsNCj4+IC0gICAgcGRldiA9IHBjaV9nZXRf
+cGRldihOVUxMLCBQQ0lfU0JERihzZWcsIGJ1cywgZGV2Zm4pKTsNCj4+IC0NCj4+IC0gICAgaWYg
+KCAhcGRldiApDQo+PiAtICAgICAgICByYyA9IC1FTk9ERVY7DQo+PiAgICAgIC8qDQo+PiAgICAg
+ICAqIElmIHRoZSBkZXZpY2UgZXhpc3RzIGFuZCBpdCBpcyBub3Qgb3duZWQgYnkgZWl0aGVyIHRo
+ZSBoYXJkd2FyZQ0KPj4gICAgICAgKiBkb21haW4gb3IgZG9tX2lvIHRoZW4gaXQgbXVzdCBiZSBh
+c3NpZ25lZCB0byBhIGd1ZXN0LCBvciBiZQ0KPj4gICAgICAgKiBoaWRkZW4gKG93bmVkIGJ5IGRv
+bV94ZW4pLg0KPj4gICAgICAgKi8NCj4+IC0gICAgZWxzZSBpZiAoIHBkZXYtPmRvbWFpbiAhPSBo
+YXJkd2FyZV9kb21haW4gJiYNCj4+IC0gICAgICAgICAgICAgIHBkZXYtPmRvbWFpbiAhPSBkb21f
+aW8gKQ0KPj4gKyAgICBpZiAoIHBkZXYtPmRvbWFpbiAhPSBoYXJkd2FyZV9kb21haW4gJiYNCj4+
+ICsgICAgICAgICBwZGV2LT5kb21haW4gIT0gZG9tX2lvICkNCj4+ICAgICAgICAgIHJjID0gLUVC
+VVNZOw0KPj4gIA0KPj4gICAgICByZXR1cm4gcmM7DQo+PiAgfQ0KPj4gIA0KPj4gIC8qIENhbGxl
+ciBzaG91bGQgaG9sZCB0aGUgcGNpZGV2c19sb2NrICovDQo+DQo+IEkgd291bGQgYXNzdW1lIHRo
+ZSBjYWxsZXIgaGFzIHRha2VuIGFuIGV4dHJhIHJlZmVyZW5jZSB0byB0aGUgcGRldiwgc28NCj4g
+aG9sZGluZyB0aGUgcGNpZGV2c19sb2NrIGlzIG5vIGxvbmdlciBuZWVkZWQ/DQoNCkkgYW0gYXNz
+dW1lZCB0aGF0IGxvY2sgbWF5IGJlIHJlcXVpcmVkIGJ5IE1TSVggb3IgSU9NTVUgZnVuY3Rpb25z
+LCB0aGF0DQphcmUgYmVpbmcgY2FsbGVkIGhlcmUuIEZvciBleGFtcGxlLCBJIGNhbiBzZWUgdGhh
+dCByZWFzc2lnbl9kZXZpY2UoKSBpbg0KcGNpX2FtZF9pb21tdS5jIG1hbmlwdWxhdGVzIHdpdGgg
+c29tZSBsaXN0cy4gSSBiZWxpZXZlLCBpdCBzaG91bGQgYmUNCnByb3RlY3RlZCB3aXRoIHRoZSBs
+b2NrLg0KDQo+DQo+PiAtc3RhdGljIGludCBhc3NpZ25fZGV2aWNlKHN0cnVjdCBkb21haW4gKmQs
+IHUxNiBzZWcsIHU4IGJ1cywgdTggZGV2Zm4sIHUzMiBmbGFnKQ0KPj4gK3N0YXRpYyBpbnQgYXNz
+aWduX2RldmljZShzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3QgcGNpX2RldiAqcGRldiwgdTMyIGZs
+YWcpDQo+PiAgew0KPj4gICAgICBjb25zdCBzdHJ1Y3QgZG9tYWluX2lvbW11ICpoZCA9IGRvbV9p
+b21tdShkKTsNCj4+IC0gICAgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiArICAgIHVpbnQ4X3Qg
+ZGV2Zm47DQo+PiAgICAgIGludCByYyA9IDA7DQo+PiAgDQo+PiAgICAgIGlmICggIWlzX2lvbW11
+X2VuYWJsZWQoZCkgKQ0KPj4gQEAgLTE0MjIsMTAgKzE0MTIsMTEgQEAgc3RhdGljIGludCBhc3Np
+Z25fZGV2aWNlKHN0cnVjdCBkb21haW4gKmQsIHUxNiBzZWcsIHU4IGJ1cywgdTggZGV2Zm4sIHUz
+MiBmbGFnKQ0KPj4gIA0KPj4gICAgICAvKiBkZXZpY2VfYXNzaWduZWQoKSBzaG91bGQgYWxyZWFk
+eSBoYXZlIGNsZWFyZWQgdGhlIGRldmljZSBmb3IgYXNzaWdubWVudCAqLw0KPj4gICAgICBBU1NF
+UlQocGNpZGV2c19sb2NrZWQoKSk7DQo+PiAtICAgIHBkZXYgPSBwY2lfZ2V0X3BkZXYoTlVMTCwg
+UENJX1NCREYoc2VnLCBidXMsIGRldmZuKSk7DQo+PiAgICAgIEFTU0VSVChwZGV2ICYmIChwZGV2
+LT5kb21haW4gPT0gaGFyZHdhcmVfZG9tYWluIHx8DQo+PiAgICAgICAgICAgICAgICAgICAgICBw
+ZGV2LT5kb21haW4gPT0gZG9tX2lvKSk7DQo+PiAgDQo+PiArICAgIGRldmZuID0gcGRldi0+ZGV2
+Zm47DQo+PiArDQo+PiAgICAgIC8qIERvIG5vdCBhbGxvdyBicm9rZW4gZGV2aWNlcyB0byBiZSBh
+c3NpZ25lZCB0byBndWVzdHMuICovDQo+PiAgICAgIHJjID0gLUVCQURGOw0KPj4gICAgICBpZiAo
+IHBkZXYtPmJyb2tlbiAmJiBkICE9IGhhcmR3YXJlX2RvbWFpbiAmJiBkICE9IGRvbV9pbyApDQo+
+PiBAQCAtMTQ2MCw3ICsxNDUxLDcgQEAgc3RhdGljIGludCBhc3NpZ25fZGV2aWNlKHN0cnVjdCBk
+b21haW4gKmQsIHUxNiBzZWcsIHU4IGJ1cywgdTggZGV2Zm4sIHUzMiBmbGFnKQ0KPj4gICBkb25l
+Og0KPj4gICAgICBpZiAoIHJjICkNCj4+ICAgICAgICAgIHByaW50ayhYRU5MT0dfR19XQVJOSU5H
+ICIlcGQ6IGFzc2lnbiAoJXBwKSBmYWlsZWQgKCVkKVxuIiwNCj4+IC0gICAgICAgICAgICAgICBk
+LCAmUENJX1NCREYoc2VnLCBidXMsIGRldmZuKSwgcmMpOw0KPj4gKyAgICAgICAgICAgICAgIGQs
+ICZQQ0lfU0JERihwZGV2LT5zZWcsIHBkZXYtPmJ1cywgZGV2Zm4pLCByYyk7DQo+PiAgICAgIC8q
+IFRoZSBkZXZpY2UgaXMgYXNzaWduZWQgdG8gZG9tX2lvIHNvIG1hcmsgaXQgYXMgcXVhcmFudGlu
+ZWQgKi8NCj4+ICAgICAgZWxzZSBpZiAoIGQgPT0gZG9tX2lvICkNCj4+ICAgICAgICAgIHBkZXYt
+PnF1YXJhbnRpbmUgPSB0cnVlOw0KPj4gQEAgLTE1OTUsNiArMTU4Niw5IEBAIGludCBpb21tdV9k
+b19wY2lfZG9tY3RsKA0KPj4gICAgICAgICAgQVNTRVJUKGQpOw0KPj4gICAgICAgICAgLyogZmFs
+bCB0aHJvdWdoICovDQo+PiAgICAgIGNhc2UgWEVOX0RPTUNUTF90ZXN0X2Fzc2lnbl9kZXZpY2U6
+DQo+PiArICAgIHsNCj4+ICsgICAgICAgIHN0cnVjdCBwY2lfZGV2ICpwZGV2Ow0KPj4gKw0KPj4g
+ICAgICAgICAgLyogRG9uJ3Qgc3VwcG9ydCBzZWxmLWFzc2lnbm1lbnQgb2YgZGV2aWNlcy4gKi8N
+Cj4+ICAgICAgICAgIGlmICggZCA9PSBjdXJyZW50LT5kb21haW4gKQ0KPj4gICAgICAgICAgew0K
+Pj4gQEAgLTE2MjIsMjYgKzE2MTYsMzYgQEAgaW50IGlvbW11X2RvX3BjaV9kb21jdGwoDQo+PiAg
+ICAgICAgICBzZWcgPSBtYWNoaW5lX3NiZGYgPj4gMTY7DQo+PiAgICAgICAgICBidXMgPSBQQ0lf
+QlVTKG1hY2hpbmVfc2JkZik7DQo+PiAgICAgICAgICBkZXZmbiA9IFBDSV9ERVZGTihtYWNoaW5l
+X3NiZGYpOw0KPj4gLQ0KPj4gICAgICAgICAgcGNpZGV2c19sb2NrKCk7DQo+PiAtICAgICAgICBy
+ZXQgPSBkZXZpY2VfYXNzaWduZWQoc2VnLCBidXMsIGRldmZuKTsNCj4+ICsgICAgICAgIHBkZXYg
+PSBwY2lfZ2V0X3BkZXYoTlVMTCwgUENJX1NCREYoc2VnLCBidXMsIGRldmZuKSk7DQo+PiArICAg
+ICAgICBpZiAoICFwZGV2ICkNCj4+ICsgICAgICAgIHsNCj4+ICsgICAgICAgICAgICBwcmludGso
+WEVOTE9HX0dfSU5GTyAiJXBwIG5vbi1leGlzdGVudFxuIiwNCj4+ICsgICAgICAgICAgICAgICAg
+ICAgJlBDSV9TQkRGKHNlZywgYnVzLCBkZXZmbikpOw0KPj4gKyAgICAgICAgICAgIHJldCA9IC1F
+SU5WQUw7DQo+PiArICAgICAgICAgICAgYnJlYWs7DQo+PiArICAgICAgICB9DQo+PiArDQo+PiAr
+ICAgICAgICByZXQgPSBkZXZpY2VfYXNzaWduZWQocGRldik7DQo+PiAgICAgICAgICBpZiAoIGRv
+bWN0bC0+Y21kID09IFhFTl9ET01DVExfdGVzdF9hc3NpZ25fZGV2aWNlICkNCj4+ICAgICAgICAg
+IHsNCj4+ICAgICAgICAgICAgICBpZiAoIHJldCApDQo+PiAgICAgICAgICAgICAgew0KPj4gLSAg
+ICAgICAgICAgICAgICBwcmludGsoWEVOTE9HX0dfSU5GTyAiJXBwIGFscmVhZHkgYXNzaWduZWQs
+IG9yIG5vbi1leGlzdGVudFxuIiwNCj4+ICsgICAgICAgICAgICAgICAgcHJpbnRrKFhFTkxPR19H
+X0lORk8gIiVwcCBhbHJlYWR5IGFzc2lnbmVkXG4iLA0KPj4gICAgICAgICAgICAgICAgICAgICAg
+ICAgJlBDSV9TQkRGKHNlZywgYnVzLCBkZXZmbikpOw0KPj4gICAgICAgICAgICAgICAgICByZXQg
+PSAtRUlOVkFMOw0KPj4gICAgICAgICAgICAgIH0NCj4+ICAgICAgICAgIH0NCj4+ICAgICAgICAg
+IGVsc2UgaWYgKCAhcmV0ICkNCj4+IC0gICAgICAgICAgICByZXQgPSBhc3NpZ25fZGV2aWNlKGQs
+IHNlZywgYnVzLCBkZXZmbiwgZmxhZ3MpOw0KPj4gKyAgICAgICAgICAgIHJldCA9IGFzc2lnbl9k
+ZXZpY2UoZCwgcGRldiwgZmxhZ3MpOw0KPj4gKw0KPj4gKyAgICAgICAgcGNpZGV2X3B1dChwZGV2
+KTsNCj4NCj4gSSB3b3VsZCB0aGluayB5b3UgbmVlZCB0byBrZWVwIHRoZSByZWZjb3VudCBoZXJl
+IGlmIHJldCA9PSAwLCBzbyB0aGF0DQo+IHRoZSBkZXZpY2UgY2Fubm90IGJlIHJlbW92ZWQgd2hp
+bGUgYXNzaWduZWQgdG8gYSBkb21haW4/DQoNCkxvb2tzIGxpa2Ugd2UgYXJlIHBlcmNlaXZpbmcg
+ZnVuY3Rpb24gb2YgcmVmY250IGluIGEgZGlmZmVyZW50DQp3YXlzLiBGb3IgbWUsIHRoaXMgaXMg
+dGhlIG1lY2hhbmlzbSB0byBndWFyYW50ZWUgdGhhdCBpZiB3ZSBoYXZlIGEgdmFsaWQNCnBvaW50
+ZXIgdG8gYW4gb2JqZWN0LCB0aGlzIG9iamVjdCB3aWxsIG5vdCBkaXNhcHBlYXIgdW5kZXIgb3Vy
+DQpmZWV0LiBUaGlzIGlzIHRoZSBtYWluIGZ1bmN0aW9uIG9mIGtyZWZzIGluIHRoZSBsaW51eCBr
+ZXJuZWw6IGlmIHlvdXINCmNvZGUgaG9sZHMgYSByZWZlcmVuY2UgdG8gYW4gb2JqZWN0LCB5b3Ug
+Y2FuIGJlIHN1cmUgdGhhdCB0aGlzIG9iamVjdCBpcw0KZXhpc3RzIGluIG1lbW9yeS4NCg0KT24g
+b3RoZXIgaGFuZCwgaXQgc2VlbXMgdGhhdCB5b3UgYXJlIGNvbnNpZGVyaW5nIHRoaXMgcmVmY250
+IGFzIGFuIHVzYWdlDQpjb3VudGVyIGZvciBhbiBhY3R1YWwgUENJIGRldmljZSwgbm90ICJzdHJ1
+Y3QgcGRldiIgdGhhdCByZXByZXNlbnQNCml0LiBUaG9zZSBhcmUgdHdvIHJlbGF0ZWQgdGhpbmdz
+LCBidXQgbm90IHRoZSBzYW1lLiBTbywgSSBjYW4gc2VlIHdoeQ0KeW91IGFyZSBzdWdnZXN0aW5n
+IHRvIGdldCBhZGRpdGlvbmFsIHJlZmVyZW5jZSB0aGVyZS4gQnV0IGZvciBtZSwgdGhpcw0KbG9v
+a3MgdW5uZWNlc3Nhcnk6IHRoZSB2ZXJ5IGZpcnN0IHJlZmNvdW50IGlzIG9idGFpbmVkIGluDQpw
+Y2lfYWRkX2RldmljZSgpIGFuZCB0aGVyZSBpcyB0aGUgY29ycmVzcG9uZGluZyBmdW5jdGlvbg0K
+cGNpX3JlbW92ZV9kZXZpY2UoKSB0aGF0IHdpbGwgZHJvcCB0aGlzIHJlZmNvdW50LiBTbywgZm9y
+IG1lLCBpZiBhZG1pbg0Kd2FudHMgdG8gcmVtb3ZlIGEgUENJIGRldmljZSB3aGljaCBpcyBhc3Np
+Z25lZCB0byBhIGRvbWFpbiwgdGhleSBjYW4gZG8NCnRoaXMgYXMgdGhleSB3ZXJlIGFibGUgdG8g
+ZG8gdGhpcyBwcmlvciB0aGlzIHBhdGNoZXMuDQoNClRoZSBtYWluIHZhbHVlIG9mIGludHJvZHVj
+aW5nIHJlZmNudCBpcyB0byBiZSBhYmxlIHRvIGFjY2VzcyBwZGV2IG9iamVjdHMNCndpdGhvdXQg
+aG9sZGluZyB0aGUgZ2xvYmFsIHBjaWRldnNfbG9jaygpLiBUaGlzIGRvZXMgbm90IG1lYW4gdGhh
+dCB5b3UNCmRvbid0IG5lZWQgbG9ja2luZyBhdCBhbGwuIEJ1dCB0aGlzIGFsbG93cyB5b3UgdG8g
+dXNlIHBkZXYtPmxvY2sgKHdoaWNoDQpkb2VzIG5vdCBleGlzdHMgaW4gdGhpcyBzZXJpZXMsIGJ1
+dCB3YXMgaW50cm9kdWNlZCBpbiBhIFJGQyBlYXJsaWVyKSwgb3INCnZwY2ktPmxvY2ssIG9yIGFu
+eSBvdGhlciBzdWJzeXN0ZW0tPmxvY2suDQoNCj4NCj4+ICAgICAgICAgIHBjaWRldnNfdW5sb2Nr
+KCk7DQo+PiAgICAgICAgICBpZiAoIHJldCA9PSAtRVJFU1RBUlQgKQ0KPj4gICAgICAgICAgICAg
+IHJldCA9IGh5cGVyY2FsbF9jcmVhdGVfY29udGludWF0aW9uKF9fSFlQRVJWSVNPUl9kb21jdGws
+DQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImgi
+LCB1X2RvbWN0bCk7DQo+PiAgICAgICAgICBicmVhazsNCj4+IC0NCj4+ICsgICAgfQ0KPj4gICAg
+ICBjYXNlIFhFTl9ET01DVExfZGVhc3NpZ25fZGV2aWNlOg0KPj4gICAgICAgICAgLyogRG9uJ3Qg
+c3VwcG9ydCBzZWxmLWRlYXNzaWdubWVudCBvZiBkZXZpY2VzLiAqLw0KPj4gICAgICAgICAgaWYg
+KCBkID09IGN1cnJlbnQtPmRvbWFpbiApDQo+PiBAQCAtMTY4MSw2ICsxNjg1LDQ2IEBAIGludCBp
+b21tdV9kb19wY2lfZG9tY3RsKA0KPj4gICAgICByZXR1cm4gcmV0Ow0KPj4gIH0NCj4+ICANCj4+
+ICtzdGF0aWMgdm9pZCByZWxlYXNlX3BkZXYocmVmY250X3QgKnJlZmNudCkNCj4+ICt7DQo+PiAr
+ICAgIHN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gY29udGFpbmVyX29mKHJlZmNudCwgc3RydWN0IHBj
+aV9kZXYsIHJlZmNudCk7DQo+PiArICAgIHN0cnVjdCBwY2lfc2VnICpwc2VnID0gZ2V0X3BzZWco
+cGRldi0+c2VnKTsNCj4+ICsNCj4+ICsgICAgcHJpbnRrKFhFTkxPR19ERUJVRyAiUENJIHJlbGVh
+c2UgZGV2aWNlICVwcFxuIiwgJnBkZXYtPnNiZGYpOw0KPj4gKw0KPj4gKyAgICAvKiB1cGRhdGUg
+YnVzMmJyaWRnZSAqLw0KPj4gKyAgICBzd2l0Y2ggKCBwZGV2LT50eXBlICkNCj4+ICsgICAgew0K
+Pj4gKyAgICAgICAgdW5zaWduZWQgaW50IHNlY19idXMsIHN1Yl9idXM7DQo+PiArDQo+PiArICAg
+ICAgICBjYXNlIERFVl9UWVBFX1BDSWUyUENJX0JSSURHRToNCj4+ICsgICAgICAgIGNhc2UgREVW
+X1RZUEVfTEVHQUNZX1BDSV9CUklER0U6DQo+PiArICAgICAgICAgICAgc2VjX2J1cyA9IHBjaV9j
+b25mX3JlYWQ4KHBkZXYtPnNiZGYsIFBDSV9TRUNPTkRBUllfQlVTKTsNCj4+ICsgICAgICAgICAg
+ICBzdWJfYnVzID0gcGNpX2NvbmZfcmVhZDgocGRldi0+c2JkZiwgUENJX1NVQk9SRElOQVRFX0JV
+Uyk7DQo+PiArDQo+PiArICAgICAgICAgICAgc3Bpbl9sb2NrKCZwc2VnLT5idXMyYnJpZGdlX2xv
+Y2spOw0KPj4gKyAgICAgICAgICAgIGZvciAoIDsgc2VjX2J1cyA8PSBzdWJfYnVzOyBzZWNfYnVz
+KysgKQ0KPj4gKyAgICAgICAgICAgICAgICBwc2VnLT5idXMyYnJpZGdlW3NlY19idXNdID0gcHNl
+Zy0+YnVzMmJyaWRnZVtwZGV2LT5idXNdOw0KPj4gKyAgICAgICAgICAgIHNwaW5fdW5sb2NrKCZw
+c2VnLT5idXMyYnJpZGdlX2xvY2spOw0KPj4gKyAgICAgICAgICAgIGJyZWFrOw0KPj4gKw0KPj4g
+KyAgICAgICAgZGVmYXVsdDoNCj4+ICsgICAgICAgICAgICBicmVhazsNCj4+ICsgICAgfQ0KPj4g
+Kw0KPj4gKyAgICB4ZnJlZShwZGV2KTsNCj4+ICt9DQo+PiArDQo+PiArdm9pZCBwY2lkZXZfZ2V0
+KHN0cnVjdCBwY2lfZGV2ICpwZGV2KQ0KPj4gK3sNCj4+ICsgICAgcmVmY250X2dldCgmcGRldi0+
+cmVmY250KTsNCj4+ICt9DQo+PiArDQo+PiArdm9pZCBwY2lkZXZfcHV0KHN0cnVjdCBwY2lfZGV2
+ICpwZGV2KQ0KPj4gK3sNCj4+ICsgICAgcmVmY250X3B1dCgmcGRldi0+cmVmY250LCByZWxlYXNl
+X3BkZXYpOw0KPj4gK30NCj4+ICsNCj4+ICAvKg0KPj4gICAqIExvY2FsIHZhcmlhYmxlczoNCj4+
+ICAgKiBtb2RlOiBDDQo+PiBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRk
+L3F1aXJrcy5jIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL3F1aXJrcy5jDQo+PiBpbmRl
+eCBmY2M4ZjczZThiLi5kMjQwZGEwNDE2IDEwMDY0NA0KPj4gLS0tIGEveGVuL2RyaXZlcnMvcGFz
+c3Rocm91Z2gvdnRkL3F1aXJrcy5jDQo+PiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92
+dGQvcXVpcmtzLmMNCj4+IEBAIC00MjksNiArNDI5LDggQEAgc3RhdGljIGludCBfX211c3RfY2hl
+Y2sgbWFwX21lX3BoYW50b21fZnVuY3Rpb24oc3RydWN0IGRvbWFpbiAqZG9tYWluLA0KPj4gICAg
+ICAgICAgcmMgPSBkb21haW5fY29udGV4dF91bm1hcF9vbmUoZG9tYWluLCBkcmhkLT5pb21tdSwg
+MCwNCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBDSV9ERVZGTihk
+ZXYsIDcpKTsNCj4+ICANCj4+ICsgICAgcGNpZGV2X3B1dChwZGV2KTsNCj4+ICsNCj4+ICAgICAg
+cmV0dXJuIHJjOw0KPj4gIH0NCj4+ICANCj4+IGRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy92aWRl
+by92Z2EuYyBiL3hlbi9kcml2ZXJzL3ZpZGVvL3ZnYS5jDQo+PiBpbmRleCAwYTAzNTA4YmVlLi4x
+MDQ5ZDRkYTZkIDEwMDY0NA0KPj4gLS0tIGEveGVuL2RyaXZlcnMvdmlkZW8vdmdhLmMNCj4+ICsr
+KyBiL3hlbi9kcml2ZXJzL3ZpZGVvL3ZnYS5jDQo+PiBAQCAtMTE0LDcgKzExNCw3IEBAIHZvaWQg
+X19pbml0IHZpZGVvX2VuZGJvb3Qodm9pZCkNCj4+ICAgICAgICAgIGZvciAoIGJ1cyA9IDA7IGJ1
+cyA8IDI1NjsgKytidXMgKQ0KPj4gICAgICAgICAgICAgIGZvciAoIGRldmZuID0gMDsgZGV2Zm4g
+PCAyNTY7ICsrZGV2Zm4gKQ0KPj4gICAgICAgICAgICAgIHsNCj4+IC0gICAgICAgICAgICAgICAg
+Y29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiArICAgICAgICAgICAgICAgIHN0cnVjdCBw
+Y2lfZGV2ICpwZGV2Ow0KPj4gICAgICAgICAgICAgICAgICB1OCBiID0gYnVzLCBkZiA9IGRldmZu
+LCBzYjsNCj4+ICANCj4+ICAgICAgICAgICAgICAgICAgcGNpZGV2c19sb2NrKCk7DQo+PiBAQCAt
+MTI2LDcgKzEyNiwxMSBAQCB2b2lkIF9faW5pdCB2aWRlb19lbmRib290KHZvaWQpDQo+PiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBDSV9DTEFTU19ERVZJQ0UpICE9IDB4
+MDMwMCB8fA0KPj4gICAgICAgICAgICAgICAgICAgICAgICEocGNpX2NvbmZfcmVhZDE2KFBDSV9T
+QkRGKDAsIGJ1cywgZGV2Zm4pLCBQQ0lfQ09NTUFORCkgJg0KPj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgKFBDSV9DT01NQU5EX0lPIHwgUENJX0NPTU1BTkRfTUVNT1JZKSkgKQ0KPj4gKyAgICAg
+ICAgICAgICAgICB7DQo+PiArICAgICAgICAgICAgICAgICAgICBpZiAoIHBkZXYgKQ0KPj4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICAgICAg
+ICAgICAgICBjb250aW51ZTsNCj4+ICsgICAgICAgICAgICAgICAgfQ0KPj4gIA0KPj4gICAgICAg
+ICAgICAgICAgICB3aGlsZSAoIGIgKQ0KPj4gICAgICAgICAgICAgICAgICB7DQo+PiBAQCAtMTU3
+LDYgKzE2MSw3IEBAIHZvaWQgX19pbml0IHZpZGVvX2VuZGJvb3Qodm9pZCkNCj4+ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBidXMsIFBDSV9TTE9UKGRldmZuKSwgUENJX0ZVTkMoZGV2Zm4p
+KTsNCj4+ICAgICAgICAgICAgICAgICAgICAgIHBjaV9oaWRlX2RldmljZSgwLCBidXMsIGRldmZu
+KTsNCj4+ICAgICAgICAgICAgICAgICAgfQ0KPj4gKyAgICAgICAgICAgICAgICBwY2lkZXZfcHV0
+KHBkZXYpOw0KPj4gICAgICAgICAgICAgIH0NCj4+ICAgICAgfQ0KPj4gIA0KPj4gZGlmZiAtLWdp
+dCBhL3hlbi9kcml2ZXJzL3ZwY2kvdnBjaS5jIGIveGVuL2RyaXZlcnMvdnBjaS92cGNpLmMNCj4+
+IGluZGV4IDZkNDhkNDk2YmIuLjUyMzJmOTYwNWIgMTAwNjQ0DQo+PiAtLS0gYS94ZW4vZHJpdmVy
+cy92cGNpL3ZwY2kuYw0KPj4gKysrIGIveGVuL2RyaXZlcnMvdnBjaS92cGNpLmMNCj4+IEBAIC0z
+MTcsOCArMzE3LDggQEAgc3RhdGljIHVpbnQzMl90IG1lcmdlX3Jlc3VsdCh1aW50MzJfdCBkYXRh
+LCB1aW50MzJfdCBuZXcsIHVuc2lnbmVkIGludCBzaXplLA0KPj4gIA0KPj4gIHVpbnQzMl90IHZw
+Y2lfcmVhZChwY2lfc2JkZl90IHNiZGYsIHVuc2lnbmVkIGludCByZWcsIHVuc2lnbmVkIGludCBz
+aXplKQ0KPj4gIHsNCj4+IC0gICAgY29uc3Qgc3RydWN0IGRvbWFpbiAqZCA9IGN1cnJlbnQtPmRv
+bWFpbjsNCj4+IC0gICAgY29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXY7DQo+PiArICAgIHN0cnVj
+dCBkb21haW4gKmQgPSBjdXJyZW50LT5kb21haW47DQo+DQo+IFdoeSBkbyB5b3UgbmVlZCB0byBk
+cm9wIHRoZSBjb25zdCBvbiBkb21haW4gaGVyZT8NCj4NCg0KTG9va3MgbGlrZSBsZWZ0b3ZlciBm
+cm9tIGEgcHJldmlvdXMgdmVyc2lvbi4gV2lsbCByZW1vdmUuDQoNCj4+ICsgICAgc3RydWN0IHBj
+aV9kZXYgKnBkZXY7DQo+PiAgICAgIGNvbnN0IHN0cnVjdCB2cGNpX3JlZ2lzdGVyICpyOw0KPj4g
+ICAgICB1bnNpZ25lZCBpbnQgZGF0YV9vZmZzZXQgPSAwOw0KPj4gICAgICB1aW50MzJfdCBkYXRh
+ID0gfih1aW50MzJfdCkwOw0KPj4gQEAgLTMzMiw3ICszMzIsMTEgQEAgdWludDMyX3QgdnBjaV9y
+ZWFkKHBjaV9zYmRmX3Qgc2JkZiwgdW5zaWduZWQgaW50IHJlZywgdW5zaWduZWQgaW50IHNpemUp
+DQo+PiAgICAgIC8qIEZpbmQgdGhlIFBDSSBkZXYgbWF0Y2hpbmcgdGhlIGFkZHJlc3MuICovDQo+
+PiAgICAgIHBkZXYgPSBwY2lfZ2V0X3BkZXYoZCwgc2JkZik7DQo+PiAgICAgIGlmICggIXBkZXYg
+fHwgIXBkZXYtPnZwY2kgKQ0KPj4gKyAgICB7DQo+PiArICAgICAgICBpZiAoIHBkZXYgKQ0KPj4g
+KyAgICAgICAgICAgIHBjaWRldl9wdXQocGRldik7DQo+PiAgICAgICAgICByZXR1cm4gdnBjaV9y
+ZWFkX2h3KHNiZGYsIHJlZywgc2l6ZSk7DQo+PiArICAgIH0NCj4+ICANCj4+ICAgICAgc3Bpbl9s
+b2NrKCZwZGV2LT52cGNpLT5sb2NrKTsNCj4+ICANCj4+IEBAIC0zNzgsNiArMzgyLDcgQEAgdWlu
+dDMyX3QgdnBjaV9yZWFkKHBjaV9zYmRmX3Qgc2JkZiwgdW5zaWduZWQgaW50IHJlZywgdW5zaWdu
+ZWQgaW50IHNpemUpDQo+PiAgICAgICAgICBBU1NFUlQoZGF0YV9vZmZzZXQgPCBzaXplKTsNCj4+
+ICAgICAgfQ0KPj4gICAgICBzcGluX3VubG9jaygmcGRldi0+dnBjaS0+bG9jayk7DQo+PiArICAg
+IHBjaWRldl9wdXQocGRldik7DQo+PiAgDQo+PiAgICAgIGlmICggZGF0YV9vZmZzZXQgPCBzaXpl
+ICkNCj4+ICAgICAgew0KPj4gQEAgLTQyMCw4ICs0MjUsOCBAQCBzdGF0aWMgdm9pZCB2cGNpX3dy
+aXRlX2hlbHBlcihjb25zdCBzdHJ1Y3QgcGNpX2RldiAqcGRldiwNCj4+ICB2b2lkIHZwY2lfd3Jp
+dGUocGNpX3NiZGZfdCBzYmRmLCB1bnNpZ25lZCBpbnQgcmVnLCB1bnNpZ25lZCBpbnQgc2l6ZSwN
+Cj4+ICAgICAgICAgICAgICAgICAgdWludDMyX3QgZGF0YSkNCj4+ICB7DQo+PiAtICAgIGNvbnN0
+IHN0cnVjdCBkb21haW4gKmQgPSBjdXJyZW50LT5kb21haW47DQo+PiAtICAgIGNvbnN0IHN0cnVj
+dCBwY2lfZGV2ICpwZGV2Ow0KPj4gKyAgICBzdHJ1Y3QgZG9tYWluICpkID0gY3VycmVudC0+ZG9t
+YWluOw0KPj4gKyAgICBzdHJ1Y3QgcGNpX2RldiAqcGRldjsNCg0KLS0gDQpXQlIsIFZvbG9keW15
+cg0K
 
