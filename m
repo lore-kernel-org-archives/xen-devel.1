@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C73C7619A
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Apr 2023 19:20:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.519849.806970 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168CBC77B73
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Apr 2023 19:20:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.519861.806993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmJX1-0000ZH-HL; Tue, 11 Apr 2023 19:19:55 +0000
+	id 1pmJX4-00019e-2w; Tue, 11 Apr 2023 19:19:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 519849.806970; Tue, 11 Apr 2023 19:19:55 +0000
+Received: by outflank-mailman (output) from mailman id 519861.806993; Tue, 11 Apr 2023 19:19:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmJX1-0000Yx-Am; Tue, 11 Apr 2023 19:19:55 +0000
-Received: by outflank-mailman (input) for mailman id 519849;
- Tue, 11 Apr 2023 19:19:53 +0000
+	id 1pmJX3-00017T-Q5; Tue, 11 Apr 2023 19:19:57 +0000
+Received: by outflank-mailman (input) for mailman id 519861;
+ Tue, 11 Apr 2023 19:19:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LOX4=AC=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1pmJUf-0004Ta-7y
- for xen-devel@lists.xenproject.org; Tue, 11 Apr 2023 19:17:29 +0000
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20620.outbound.protection.outlook.com
- [2a01:111:f400:7eb2::620])
+ id 1pmJUR-0004Ta-Vq
+ for xen-devel@lists.xenproject.org; Tue, 11 Apr 2023 19:17:15 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20615.outbound.protection.outlook.com
+ [2a01:111:f400:7eaa::615])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7f308f27-d89d-11ed-b21e-6b7b168915f2;
- Tue, 11 Apr 2023 21:17:28 +0200 (CEST)
-Received: from MW4PR03CA0028.namprd03.prod.outlook.com (2603:10b6:303:8f::33)
- by CH3PR12MB8996.namprd12.prod.outlook.com (2603:10b6:610:170::17)
+ id 76edfa86-d89d-11ed-b21e-6b7b168915f2;
+ Tue, 11 Apr 2023 21:17:14 +0200 (CEST)
+Received: from BN9P221CA0020.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::32)
+ by BY5PR12MB4322.namprd12.prod.outlook.com (2603:10b6:a03:20a::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.38; Tue, 11 Apr
- 2023 19:17:24 +0000
-Received: from CO1NAM11FT048.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:8f:cafe::e) by MW4PR03CA0028.outlook.office365.com
- (2603:10b6:303:8f::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.35 via Frontend
- Transport; Tue, 11 Apr 2023 19:17:23 +0000
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CO1NAM11FT048.mail.protection.outlook.com (10.13.175.148) with Microsoft SMTP
+ 2023 19:17:11 +0000
+Received: from BN8NAM11FT113.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:10a:cafe::eb) by BN9P221CA0020.outlook.office365.com
+ (2603:10b6:408:10a::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.38 via Frontend
+ Transport; Tue, 11 Apr 2023 19:17:10 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT113.mail.protection.outlook.com (10.13.176.163) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6298.28 via Frontend Transport; Tue, 11 Apr 2023 19:17:23 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6298.29 via Frontend Transport; Tue, 11 Apr 2023 19:17:10 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 11 Apr
- 2023 14:17:20 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 14:17:07 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 11 Apr
- 2023 12:17:20 -0700
+ 2023 12:17:07 -0700
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Tue, 11 Apr 2023 14:17:19 -0500
+ Transport; Tue, 11 Apr 2023 14:17:07 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,35 +65,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f308f27-d89d-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 76edfa86-d89d-11ed-b21e-6b7b168915f2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=THcWC/giHtyMgrprcuU0OA3pwHxXNMdUgtgLjl6l1LPlqw6WBVt+khXjjWFhmDAgzqUF7UiMdv4dI7KWtb5aoVLa/2a1Y+jNT54qVZqUfaryLTfy3bcXNi4WS7eBXNJQuMazFGshN/GyCG3iZjEDyRotCMcyl8OIon1WyMhHg3d3vSGUw7gPuRUi6ZhWQ8rrE8c/S0AnJjHAENIq/CR2R77j2thE+wXaZMe3J2JXbPoL7aTEG1RQInihHjKdcDSKDJ37nDlLMAnlAfv6ruLrQhgvrW/w4t+/8YX2QUEsp20mea+4gQ/4C9/BJmUWKVscO92M0C/s1VhjpNku0TiJ+g==
+ b=E8b/gdsp9EhJpwqEqWnSuieF6eymTrNe7CZCQIhNlXPnI9rbzaQ9wvtKtsjf8kP5i3R8URY/xdnXA4z5xpo6gHBEMWaxZykiVSxkS5IX9GPzCVHxrsWjarIu4i2Gai1OZW1LhqjKfQ3613hbwJtVwcHRkvsqrjZQMhmB1zr+3fL7NYtkYjn/O/lE3EtnFmvqnRpqZjW2HhvCO8FLrJFTjXGgjdfpCxF+iPM1wo6kyd6vUyRKgOAiYIQGCBzoEf0Qa6jDfyC4ZMVRSiSGssuo3vgTR2fcrzTK+5aDDiUAsT2QnfwW7VVz06WpZOzG8MrZh1Rzisa1hHvAHTmyd6+Ukw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zOQW4Omju1dTUno8ADGoDg+I28lOLIV01naa3ZWrW1o=;
- b=Imta5BSur4SKHpXK1OWAg6ScqRx0I/4QXi5mKvt+7uUc4PMTlrEaF+jP8s2QdCGY3pC2xjOm9jxiv/buyrsEa6FtMTjHl5AAEsMQhlXhltPJXnRQgqUMILcl8g0Q+GKiRz0imGZl257O4n9t9aPcExhjDLkTorHq7p5aL1iMQdjfAnb5iXP8Eyoo4Tr9D7V1xSoxINEhabj8mGrEd2xiU+HEL+/AiZADEq7U5y63LFYzH1pA3M5wx5WcX+fGNnJFMng58wqLLP2z0AQ16WAaoUsa1xOveF6d9rojy4kmPJV9c5NwSpaPoiV4h391VR63Gwy/Mhd9G3UsDszCym8MjQ==
+ bh=91E2KEtRfiC4xks88DcPT08G46pT034ykx3UwRRlezk=;
+ b=nxIqwyEEBoGjZ2Kuiet6/zxQ1rXzFTD9+Tb8gozYJ/K69DjIujomDliSsWjN6KFcbMnN2aGkwTczNRgYS6wjhAw1GVWvCHbB877FDdlw/Z7ryiq0f0E0TkFr6zwbr6c+9/31vEwBGNPKAdGpMRl/1MRnkUrrkz2ExOW5z/Z0zUwocZDZe/bCYvRT+gZkSJQEFXS9Co2Di9Fi9PdJNEPQh4Q9FWsxvw/v6dOeJyMpOK92Qi76t4Up2UXXyPumbKQtuUsjFySgj4hkfiGchNgMjtqJzNIDEQ6BlcddYezacJLktwxN2ZYOhv3OVqVhnjwCzVsVvyy5irVapGD5gnheKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zOQW4Omju1dTUno8ADGoDg+I28lOLIV01naa3ZWrW1o=;
- b=bVqMaj/2byuHZk9KB58ch3tZUaCTDN6A8dmi21o0MZKHRB5YR1KnXT41/CI674SqlxxK0rfv06M811p4s2tWNoY1hIV3e0C1gugQoMlb6HPEbuMlMZlO0SSLbZL2uzlxhMaMLJrfz0I6wimh4GqV1YGKtSiADK/XtU1PLmOxWl8=
+ bh=91E2KEtRfiC4xks88DcPT08G46pT034ykx3UwRRlezk=;
+ b=Mlr/+9OeakKs1WY2xZ18xA0mf8IJHjFeJSeRCQ20Q0zD8LVeRq1TGn30xKGU8oa4JxImKkmgn4JGZaMnjvON9eZpaV/sVxo6PY/uIkYeMQfwhCSOKw8PW/xN+uEztqYsTT2xIFp0708WEh0TgXAcyESUMJ/qgIrlxY3WqsNsi6o=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, Vikram Garhwal <vikram.garhwal@amd.com>, "Julien
- Grall" <julien@xen.org>
-Subject: [XEN][PATCH v5 12/17] common/device_tree: Add rwlock for dt_host
-Date: Tue, 11 Apr 2023 12:16:31 -0700
-Message-ID: <20230411191636.26926-31-vikram.garhwal@amd.com>
+CC: <sstabellini@kernel.org>, Vikram Garhwal <vikram.garhwal@amd.com>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
+	<jgross@suse.com>
+Subject: [XEN][PATCH v5 16/17] tools/libs/light: Implement new libxl functions for device tree overlay ops
+Date: Tue, 11 Apr 2023 12:16:17 -0700
+Message-ID: <20230411191636.26926-17-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230411191636.26926-1-vikram.garhwal@amd.com>
 References: <20230411191636.26926-1-vikram.garhwal@amd.com>
@@ -101,212 +102,155 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT048:EE_|CH3PR12MB8996:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4eb61d8-5ff6-40fc-bc5e-08db3ac16151
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT113:EE_|BY5PR12MB4322:EE_
+X-MS-Office365-Filtering-Correlation-Id: f399bca7-e537-444f-ca75-08db3ac15925
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	HiPueW2wg3jaIMtd+UEEbXnwFPVrbmrZrGMl75Sfc/2DQnY7SCJkWLuxxLohuemFBARCMfBdCO3U3IKWJOCpKJWbUHFo+lZKF72rRQ7WmHKrCm1nrPV6jU+39VpsKIH783g/qXfZ+K3ys6k/BoC6AbXcd+5EAO5kuDLUKnEbxa5F1k9w4aYebEYTImOag5DUi50X8oVWYwtC0a9bzzVs3n+dhyRWokbof6EQ2XFh+BewN+4alARJcaE8xKzioSXJ9N9UZPKmA3E0SwyqRaZwKi+nl+aFHCaRQoHKW8VmEPfa4lTKVyjhWBQqHjOYmJ5QlKWqPwZQ0ISt1xX6o/1rkW14LZoZPq0kuLNJQ1T9yV4ORenDnYbpjb4/RjLm4gYCHYrdVBObuS/Wo1iGmXMnSQvDA8/Ou9BOAiNvanNo/YWa810hFcOc1vXjS8Zk0YcZFCWQvUHgKn0/NY2JU84vZa+7+HrnLw18HEXqYn3olKpfUyR7OBPzirk2NkSOj3DQLJEjaU8xPB8wyK99m+x2zdYg4rCEj04nDf8IR1hTzrrLXNJIaG4vRYDxhYiBWJWnTavnTYirvpBL0pXGIvTBjuRyGwOe+aezVRNvoS7B3azuwZUVecMvdphTkQbLzOHcF27V5DSQ3qsWVZW7pVi+ePwvhN/npoFLtFZs4P3gtG4TRrxykQl4smaZOcPB/KmFBWmxubxnDS6D2+hoJRabj0hE7dyjPEeZ73+6TLpsBp8=
+	K+t5V2+TAUOZSEpGSwWXK//7mVQ+/eyBcdLVEKdtEN4WY/OiGfcf1/gyhYIYcIO+xc2Z7SKl80+536Xeh5lp8rzwgmEG+EG1jTi+Dc0f7A5bykEp6HZNuGr4lWbKv/EtVCJdoFEo8wFwiEixU7By7P0fVXx77hwcPYNUCbnNTvhi4G3SB0PBW/wO19rtokte+XM11+gBEn3zZLSuFoIrdn97DHMFYsLdHHXCNCittTwO1WBOKmJPPZWZG6KA7wHnG8RYBi22flUwZQtwFON5Hv6xc2GS+LmOAlQsq3MSkv6Et51WAhgS6vECFMCqK+g7NSO5gvOm5emZJmtZTbipCt/XJ/VfOBh4Oa0djPeXy7z7gAgQqYxYVbz7N0Nuv3zzlGhZGDoQHxYkDAj4MNPHjlLD2z2CO2u/I8yj5k9ensKm4kjHEvBsvwLu2yiDG2oOYcvP7DfwpkT3fzXLKr1X6wKEXFe6tZv9rv5pz9WAzKXzusNAXLtYbtLK98MfTMptlzToh300Tn8FXSC3hHdECNcZfnPYVizzo/ogVgkdudl1bnIT1gI2jcjL7rKGZEXwY6i1IcLpLD37kdpYHv8szq26znZyba7r1Ca3/pdwXujCrw2C6froyU9xQXa4UdpI7Fh86Axdin70rTa6Hnd/Uv7KoVvjilC8Mzrj+v/lshuDw2ue+66wdjmcpghqxa2/+reQkMaVbByvXO+5tG6+1jiyC12STT/1S0UlEImC/76aPg8EpW7OH3jfEVSOg3NG
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(376002)(39860400002)(346002)(396003)(136003)(451199021)(40470700004)(36840700001)(46966006)(5660300002)(40460700003)(44832011)(8936002)(26005)(1076003)(40480700001)(6666004)(83380400001)(2906002)(47076005)(36756003)(186003)(426003)(2616005)(336012)(356005)(81166007)(82740400003)(86362001)(82310400005)(36860700001)(478600001)(41300700001)(6916009)(4326008)(70206006)(8676002)(70586007)(316002)(54906003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(136003)(376002)(346002)(39860400002)(396003)(451199021)(36840700001)(46966006)(40470700004)(8936002)(5660300002)(44832011)(82310400005)(41300700001)(70206006)(70586007)(40460700003)(4326008)(8676002)(6916009)(316002)(2906002)(478600001)(54906003)(6666004)(36756003)(86362001)(40480700001)(1076003)(26005)(2616005)(336012)(426003)(186003)(356005)(81166007)(82740400003)(47076005)(36860700001)(2004002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2023 19:17:23.7496
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2023 19:17:10.1336
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4eb61d8-5ff6-40fc-bc5e-08db3ac16151
+X-MS-Exchange-CrossTenant-Network-Message-Id: f399bca7-e537-444f-ca75-08db3ac15925
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CO1NAM11FT048.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT113.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8996
-
- Dynamic programming ops will modify the dt_host and there might be other
- function which are browsing the dt_host at the same time. To avoid the race
- conditions, adding rwlock for browsing the dt_host during runtime.
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4322
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
 ---
- xen/common/device_tree.c              |  3 +++
- xen/drivers/passthrough/device_tree.c | 39 +++++++++++++++++++++++++++
- xen/include/xen/device_tree.h         |  6 +++++
- 3 files changed, 48 insertions(+)
+ tools/include/libxl.h               | 11 +++++
+ tools/libs/light/Makefile           |  3 ++
+ tools/libs/light/libxl_dt_overlay.c | 71 +++++++++++++++++++++++++++++
+ 3 files changed, 85 insertions(+)
+ create mode 100644 tools/libs/light/libxl_dt_overlay.c
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index 507b4ac5b6..b330e6a013 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -2098,6 +2098,9 @@ void unflatten_device_tree(const void *fdt, struct dt_device_node **mynodes)
-     *allnextp = NULL;
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index cfa1a19131..1c5e8abaae 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -250,6 +250,12 @@
+  */
+ #define LIBXL_HAVE_DEVICETREE_PASSTHROUGH 1
  
-     dt_dprintk(" <- unflatten_device_tree()\n");
++#if defined(__arm__) || defined(__aarch64__)
++/**
++ * This means Device Tree Overlay is supported.
++ */
++#define LIBXL_HAVE_DT_OVERLAY 1
++#endif
+ /*
+  * libxl_domain_build_info has device_model_user to specify the user to
+  * run the device model with. See docs/misc/qemu-deprivilege.txt.
+@@ -2453,6 +2459,11 @@ libxl_device_pci *libxl_device_pci_list(libxl_ctx *ctx, uint32_t domid,
+                                         int *num);
+ void libxl_device_pci_list_free(libxl_device_pci* list, int num);
+ 
++#if defined(__arm__) || defined(__aarch64__)
++int libxl_dt_overlay(libxl_ctx *ctx, void *overlay,
++                     uint32_t overlay_size, uint8_t overlay_op);
++#endif
 +
-+    /* Init r/w lock for host device tree. */
-+    rwlock_init(&dt_host->lock);
- }
+ /*
+  * Turns the current process into a backend device service daemon
+  * for a driver domain.
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 96daeabc47..563a1e8d0a 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -112,6 +112,9 @@ OBJS-y += _libxl_types.o
+ OBJS-y += libxl_flask.o
+ OBJS-y += _libxl_types_internal.o
  
- static void dt_alias_add(struct dt_alias_prop *ap,
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index a77a217f3d..74f994b9da 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -112,6 +112,8 @@ int iommu_release_dt_devices(struct domain *d)
-     if ( !is_iommu_enabled(d) )
-         return 0;
- 
-+    read_lock(&dt_host->lock);
++# Device tree overlay is enabled only for ARM architecture.
++OBJS-$(CONFIG_ARM) += libxl_dt_overlay.o
 +
-     list_for_each_entry_safe(dev, _dev, &hd->dt_devices, domain_list)
-     {
-         rc = iommu_deassign_dt_device(d, dev);
-@@ -119,10 +121,14 @@ int iommu_release_dt_devices(struct domain *d)
-         {
-             dprintk(XENLOG_ERR, "Failed to deassign %s in domain %u\n",
-                     dt_node_full_name(dev), d->domain_id);
+ ifeq ($(CONFIG_LIBNL),y)
+ CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
+ endif
+diff --git a/tools/libs/light/libxl_dt_overlay.c b/tools/libs/light/libxl_dt_overlay.c
+new file mode 100644
+index 0000000000..a6c709a6dc
+--- /dev/null
++++ b/tools/libs/light/libxl_dt_overlay.c
+@@ -0,0 +1,71 @@
++/*
++ * Copyright (C) 2021 Xilinx Inc.
++ * Author Vikram Garhwal <fnu.vikram@xilinx.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published
++ * by the Free Software Foundation; version 2.1 only. with the special
++ * exception on linking described in file LICENSE.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ */
 +
-+            read_unlock(&dt_host->lock);
-             return rc;
-         }
-     }
- 
-+    read_unlock(&dt_host->lock);
++#include "libxl_osdeps.h" /* must come before any other headers */
++#include "libxl_internal.h"
++#include <libfdt.h>
++#include <xenctrl.h>
 +
-     return 0;
- }
- 
-@@ -259,11 +265,15 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
- 
-         spin_lock(&dtdevs_lock);
- 
-+        read_lock(&dt_host->lock);
++static int check_overlay_fdt(libxl__gc *gc, void *fdt, size_t size)
++{
++    int r;
 +
-         ret = dt_find_node_by_gpath(domctl->u.assign_device.u.dt.path,
-                                     domctl->u.assign_device.u.dt.size,
-                                     &dev);
-         if ( ret )
-         {
-+            read_unlock(&dt_host->lock);
++    if (fdt_magic(fdt) != FDT_MAGIC) {
++        LOG(ERROR, "Overlay FDT is not a valid Flat Device Tree");
++        return ERROR_FAIL;
++    }
 +
-             spin_unlock(&dtdevs_lock);
- 
-             break;
-@@ -272,6 +282,8 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-         ret = xsm_assign_dtdevice(XSM_HOOK, d, dt_node_full_name(dev));
-         if ( ret )
-         {
-+            read_unlock(&dt_host->lock);
++    r = fdt_check_header(fdt);
++    if (r) {
++        LOG(ERROR, "Failed to check the overlay FDT (%d)", r);
++        return ERROR_FAIL;
++    }
 +
-             spin_unlock(&dtdevs_lock);
- 
-             break;
-@@ -287,6 +299,8 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-                 ret = -EINVAL;
-             }
- 
-+            read_unlock(&dt_host->lock);
++    if (fdt_totalsize(fdt) > size) {
++        LOG(ERROR, "Overlay FDT totalsize is too big");
++        return ERROR_FAIL;
++    }
 +
-             spin_unlock(&dtdevs_lock);
- 
-             break;
-@@ -295,22 +309,31 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-         spin_unlock(&dtdevs_lock);
- 
-         if ( d == dom_io )
-+        {
-+            read_unlock(&dt_host->lock);
-             return -EINVAL;
-+        }
- 
-         ret = iommu_add_dt_device(dev);
-         if ( ret < 0 )
-         {
-             printk(XENLOG_G_ERR "Failed to add %s to the IOMMU\n",
-                    dt_node_full_name(dev));
++    return 0;
++}
 +
-+            read_unlock(&dt_host->lock);
-             break;
-         }
- 
-         ret = iommu_assign_dt_device(d, dev);
- 
-         if ( ret )
-+        {
-             printk(XENLOG_G_ERR "XEN_DOMCTL_assign_dt_device: assign \"%s\""
-                    " to dom%u failed (%d)\n",
-                    dt_node_full_name(dev), d->domain_id, ret);
-+        }
++int libxl_dt_overlay(libxl_ctx *ctx, void *overlay_dt, uint32_t overlay_dt_size,
++                     uint8_t overlay_op)
++{
++    int rc;
++    int r;
++    GC_INIT(ctx);
 +
-+        read_unlock(&dt_host->lock);
-         break;
- 
-     case XEN_DOMCTL_deassign_device:
-@@ -322,25 +345,41 @@ int iommu_do_dt_domctl(struct xen_domctl *domctl, struct domain *d,
-         if ( domctl->u.assign_device.flags )
-             break;
- 
-+        read_lock(&dt_host->lock);
++    if (check_overlay_fdt(gc, overlay_dt, overlay_dt_size)) {
++        LOG(ERROR, "Overlay DTB check failed");
++        rc = ERROR_FAIL;
++        goto out;
++    } else {
++        LOG(DEBUG, "Overlay DTB check passed");
++        rc = 0;
++    }
 +
-         ret = dt_find_node_by_gpath(domctl->u.assign_device.u.dt.path,
-                                     domctl->u.assign_device.u.dt.size,
-                                     &dev);
-         if ( ret )
-+        {
-+            read_unlock(&dt_host->lock);
-             break;
-+        }
- 
-         ret = xsm_deassign_dtdevice(XSM_HOOK, d, dt_node_full_name(dev));
++    r = xc_dt_overlay(ctx->xch, overlay_dt, overlay_dt_size, overlay_op);
 +
-         if ( ret )
-+        {
-+            read_unlock(&dt_host->lock);
-             break;
-+        }
- 
-         if ( d == dom_io )
-+        {
-+            read_unlock(&dt_host->lock);
-             return -EINVAL;
-+        }
- 
-         ret = iommu_deassign_dt_device(d, dev);
- 
-         if ( ret )
-+        {
-             printk(XENLOG_G_ERR "XEN_DOMCTL_assign_dt_device: assign \"%s\""
-                    " to dom%u failed (%d)\n",
-                    dt_node_full_name(dev), d->domain_id, ret);
-+        }
++    if (r) {
++        LOG(ERROR, "%s: Adding/Removing overlay dtb failed.", __func__);
++        rc = ERROR_FAIL;
++    }
 +
-+        read_unlock(&dt_host->lock);
-         break;
- 
-     default:
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 998f972ebc..b7272bbccc 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -18,6 +18,7 @@
- #include <xen/string.h>
- #include <xen/types.h>
- #include <xen/list.h>
-+#include <xen/rwlock.h>
- 
- #define DEVICE_TREE_MAX_DEPTH 16
- 
-@@ -106,6 +107,11 @@ struct dt_device_node {
-     struct list_head domain_list;
- 
-     struct device dev;
++out:
++    GC_FREE;
++    return rc;
++}
 +
-+    /*
-+     * Lock that protects r/w updates to unflattened device tree i.e. dt_host.
-+     */
-+    rwlock_t lock;
- };
- 
- #define dt_to_dev(dt_node)  (&(dt_node)->dev)
 -- 
 2.17.1
 
