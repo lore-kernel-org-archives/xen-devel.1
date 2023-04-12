@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51247C77B6E
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Apr 2023 18:51:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.520311.807754 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB7CC77B6F
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Apr 2023 18:51:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.520312.807765 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmfYs-0001qg-R1; Wed, 12 Apr 2023 18:51:18 +0000
+	id 1pmfYu-00025d-2G; Wed, 12 Apr 2023 18:51:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 520311.807754; Wed, 12 Apr 2023 18:51:18 +0000
+Received: by outflank-mailman (output) from mailman id 520312.807765; Wed, 12 Apr 2023 18:51:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmfYs-0001qZ-Nv; Wed, 12 Apr 2023 18:51:18 +0000
-Received: by outflank-mailman (input) for mailman id 520311;
- Wed, 12 Apr 2023 18:51:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pmfYt-00025V-Ub; Wed, 12 Apr 2023 18:51:19 +0000
+Received: by outflank-mailman (input) for mailman id 520312;
+ Wed, 12 Apr 2023 18:51:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3LfV=AD=casper.srs.infradead.org=BATV+9719990f4703cc1bc73b+7171+infradead.org+dwmw2@srs-se1.protection.inumbo.net>)
- id 1pmfYr-0001qS-9T
- for xen-devel@lists.xenproject.org; Wed, 12 Apr 2023 18:51:17 +0000
+ id 1pmfYt-0001qk-4D
+ for xen-devel@lists.xenproject.org; Wed, 12 Apr 2023 18:51:19 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 00c3d2ca-d963-11ed-b21e-6b7b168915f2;
- Wed, 12 Apr 2023 20:51:16 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 00c6275a-d963-11ed-8611-37d641c3527e;
+ Wed, 12 Apr 2023 20:51:15 +0200 (CEST)
 Received: from [2001:8b0:10b:5::ebe] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pmfYf-0077lB-4g; Wed, 12 Apr 2023 18:51:05 +0000
+ id 1pmfYf-0077lE-7x; Wed, 12 Apr 2023 18:51:06 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pmfYe-001r1B-1f; Wed, 12 Apr 2023 19:51:04 +0100
+ Linux)) id 1pmfYe-001r1R-2I; Wed, 12 Apr 2023 19:51:04 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 00c3d2ca-d963-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 00c6275a-d963-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=FAopztqETbo2fPeQeCNjHsbWvQfvN+qB27Usma2Ee8w=; b=j2olmn1su4XXnixX5a0dl5WOQs
-	tGYDDng0Lu+7HnGPetpa5EKtx3Lh/D8nFMhXglOuKJzqlsQwOBDoQXWNtMljZQblzaKOV87EDsLRZ
-	pKAmiO3JtQ1YIlqJfjTzOZJaXMkA3Nl6WPyaJbSPv7KJzgTV/r5skMbPF4geX7HCxRpVQQGcyuob5
-	qZVUs4cPDm0csrie7Ly5YZ8Zxr7tQbe/0n/V2YJDDMijpRdLW9YQCRiOI/yknWTPT3OPM1/KBR/r7
-	4gA+a3Oju3jyc4FeBjWcLFL9ogJsiMqaX7dvj6CqYVHCf7rGfp9punMadb1R04bsjxcg2Z8OxJDKY
-	NA37yTRg==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=pvefxXf1YhjL3JSf+V8JRgGjqQjxWW3E4QNSUXU8Vyk=; b=TjPE0dW5/ekjTjDaeeWQk5fUJV
+	nNUgr4r4gwcl33okRN07A5zJwF7Q0B4b01PnDXOtfu3v7VarXGfsZZNSPBiwmIfLc2EdIZ2EGBo4o
+	QTqoNs4SeLgJml9Y/6rUfD8FuNIh2wI+nWzJS/7XYaEwpMo+wj7PQJ9f5m1MKj8o0U6AFB1l5km3X
+	rElR8Zf42jdPGjQ1hHcqk1DSpdw5yW/z9RBJwQGSUYukk2JFnGU7rFkK9jtVNSx3ySS6kedTvELwC
+	pvVDHGxtrOnUPo8v7MBvIwMGNL0HzMnLXSZ8RfjifLwUOnrHdF05EhNKDHsy1O0kxGie2f4iVThoa
+	QyhSoxew==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: no Stabellini <sstabellini@kernel.org>,
@@ -69,49 +69,64 @@ Cc: no Stabellini <sstabellini@kernel.org>,
 	Thomas Huth <thuth@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH for-8.0 0/5] Xen emulation build/Coverity fixes
-Date: Wed, 12 Apr 2023 19:50:57 +0100
-Message-Id: <20230412185102.441523-1-dwmw2@infradead.org>
+Subject: [PATCH 4/5] hw/xen: Fix double-free in xen_console store_con_info()
+Date: Wed, 12 Apr 2023 19:51:01 +0100
+Message-Id: <20230412185102.441523-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230412185102.441523-1-dwmw2@infradead.org>
+References: <20230412185102.441523-1-dwmw2@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Some Coverity fixes and minor cleanups. And most notably, dropping
-support for Xen libraries older than 4.7.1.
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-I believe there are two issues that remain to be fixed. The x32 build
-fails, and I've seen patches which attempt to detect x32 and disable
-the Xen emulation. Along with assertions that we just shouldn't care.
-I don't have a strong opinion either way but it seems to be in hand.
+Coverity spotted a double-free (CID 1508254); we g_string_free(path) and
+then for some reason immediately call free(path) too.
 
-The other is the question of what Xen *actually* does if you try to
-unmap an IRQ_MSI_EMU PIRQ. I don't think Linux guests try that, and
-I'm fairly sure Windows doesn't even use MSI→PIRQ mappings in the
-first place, and I doubt any other guests care either. I'd like to
-establish the 'correct' behaviour and implement it, ideally before
-the 8.0 release, but it's going to take me a few days more.
+We should just use g_autoptr() for it anyway, which simplifies the code
+a bit.
 
-David Woodhouse (5):
-      hw/xen: Simplify emulated Xen platform init
-      hw/xen: Fix memory leak in libxenstore_open() for Xen
-      xen: Drop support for Xen versions below 4.7.1
-      hw/xen: Fix double-free in xen_console store_con_info()
-      hw/xen: Fix broken check for invalid state in xs_be_open()
+Fixes: 7a8a749da7d3 ("hw/xen: Move xenstore_store_pv_console_info to xen_console.c")
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ hw/char/xen_console.c | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
 
- hw/char/xen_console.c       |  13 ++----
- hw/i386/kvm/xen_evtchn.c    |  40 ++++++++---------
- hw/i386/kvm/xen_evtchn.h    |   3 +-
- hw/i386/kvm/xen_xenstore.c  |   2 +-
- hw/i386/pc.c                |  13 ++----
- hw/xen/xen-operations.c     |  59 +-----------------------
- include/hw/xen/xen_native.h | 107 +-------------------------------------------
- meson.build                 |   5 +--
- scripts/xen-detect.c        |  60 -------------------------
- 9 files changed, 33 insertions(+), 269 deletions(-)
-
-
+diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
+index c7a19c0e7c..810dae3f44 100644
+--- a/hw/char/xen_console.c
++++ b/hw/char/xen_console.c
+@@ -178,8 +178,7 @@ static int store_con_info(struct XenConsole *con)
+     Chardev *cs = qemu_chr_fe_get_driver(&con->chr);
+     char *pts = NULL;
+     char *dom_path;
+-    GString *path;
+-    int ret = -1;
++    g_autoptr(GString) path = NULL;
+ 
+     /* Only continue if we're talking to a pty. */
+     if (!CHARDEV_IS_PTY(cs)) {
+@@ -204,15 +203,9 @@ static int store_con_info(struct XenConsole *con)
+ 
+     if (xenstore_write_str(con->console, path->str, pts)) {
+         fprintf(stderr, "xenstore_write_str for '%s' fail", path->str);
+-        goto out;
++        return -1;
+     }
+-    ret = 0;
+-
+-out:
+-    g_string_free(path, true);
+-    free(path);
+-
+-    return ret;
++    return 0;
+ }
+ 
+ static int con_init(struct XenLegacyDevice *xendev)
+-- 
+2.39.2
 
 
