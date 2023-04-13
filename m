@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CB9C77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Apr 2023 07:16:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.520461.808046 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41FFAC77B79
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Apr 2023 07:16:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.520469.808127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBM-0001ko-0A; Thu, 13 Apr 2023 07:15:48 +0000
+	id 1pmrBT-0003kh-7c; Thu, 13 Apr 2023 07:15:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 520461.808046; Thu, 13 Apr 2023 07:15:47 +0000
+Received: by outflank-mailman (output) from mailman id 520469.808127; Thu, 13 Apr 2023 07:15:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBL-0001jz-Pm; Thu, 13 Apr 2023 07:15:47 +0000
-Received: by outflank-mailman (input) for mailman id 520461;
- Thu, 13 Apr 2023 07:15:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pmrBS-0003in-Cd; Thu, 13 Apr 2023 07:15:54 +0000
+Received: by outflank-mailman (input) for mailman id 520469;
+ Thu, 13 Apr 2023 07:15:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UVxt=AE=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pmrBL-0001gq-0O
- for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:47 +0000
+ id 1pmrBP-0001gr-PC
+ for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:51 +0000
 Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
  [2a00:1450:4864:20::134])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0182c663-d9cb-11ed-b21e-6b7b168915f2;
- Thu, 13 Apr 2023 09:15:44 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id d7so28946280lfj.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:44 -0700 (PDT)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 04d9ebc3-d9cb-11ed-8611-37d641c3527e;
+ Thu, 13 Apr 2023 09:15:50 +0200 (CEST)
+Received: by mail-lf1-x134.google.com with SMTP id i6so6145839lfp.1
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:50 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.43
+ n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Apr 2023 00:15:43 -0700 (PDT)
+ Thu, 13 Apr 2023 00:15:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,226 +46,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0182c663-d9cb-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 04d9ebc3-d9cb-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1681370144; x=1683962144;
+        d=linaro.org; s=google; t=1681370149; x=1683962149;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sPB2Dc6t3Zgd1EEjPsex1QWFM8C9VFNKedpjWqBxO5k=;
-        b=EvXtGtaw0BIV2NMQMuY4QKgGrDz+ryd3caJ2Qw+PTBLFkehwADpIx1R7gReCRzoJSa
-         b9GnenXOP5EM0wQM9GtwCIVbCQVRv5eFGLfAAzn6BCYX3JXdJd3ToNbJvllEJix8BfkT
-         78PwvoaHZJ9jgydmRYGzedCTgOy0WXpUtRL3IpOTCFIn/muvvbfEaLdaUZh0qkhTt85R
-         4Zb3B15KDi7OexYQdYu9LpG7IOcibytoXe5KyvfN0ImMCWmMAN4aTGiKD25jO2GzYanX
-         tNdGds9mCtnYQpPXmGHJkPYZONy6ckogZ0sGx6ZJ7G5meQb/vvFNiKZ9ySAUmfF3b/G7
-         M2AQ==
+        bh=Xdtgtks0Z+0OQgcElk/gBwu5R5RBnZenMx5onSQ1voY=;
+        b=pCCHs+6Bq8GYnAbcHC07R7jVm1hYJMLtVTHERhDWKLdVIDcQUDt8p+ovEdZg90KOMF
+         U7ikJbSTPvG8WwfYE2yJzKe6Sn8HTuV9XZw5KJShNA3lrW4KF58SZu+KBwrFaa5H38Ow
+         aupikAeEB3nBQMonVVpV0oQrYW3HZDD3X/dKWCquf27RNt39OVWuphK4LUyAG85qNDq4
+         zvo6ydDk0GF+rYM0anyskX5B8LIV/JpxfB2oQ5Xm9iOYkr2e0wWUR2rjG81K7TOJoz6I
+         Sh8FSpb9+k4Cnln8+AM3a2BocKbGq606CPIrx71oRf0ufxgE//vnlkvrqGzyFu9upJb6
+         IcdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681370144; x=1683962144;
+        d=1e100.net; s=20221208; t=1681370149; x=1683962149;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sPB2Dc6t3Zgd1EEjPsex1QWFM8C9VFNKedpjWqBxO5k=;
-        b=WMNZCr1AwrZdzSJwgGucafP4Ziy35GmvplfFfPKHP+fDJKpMBodMa763rCm/AWsp6y
-         0LL+0iCGO7v15bYVRrqgtdtcw+fEPup70xryzuwz5u+D9F0K5E1/Gar5nkc5h7U+vj/o
-         PgwrDPcISgzLlzkmbqI5iZtOpE9HzVJX/T+XMYXW5TPy/KH7KYI/7UpGmVBW47X39dpW
-         vrbgM+E/UKdlnEZoYiYdu2otchQ2BUUVBu6PSxwvbIbXKgIG3l7dAPq4FexTc3qC2Gjm
-         CFvMunxmiebkdBUU8CQWZBnaxE2ikW/LzfGm9Zypwc80n9K3iVQJE7QwmOhVFOWFOZaY
-         eI9g==
-X-Gm-Message-State: AAQBX9fbolx1CHYv6xOX9aQ/sqm9DIDSVRurBE8FprGSQchSKKtkWduX
-	NJPZKlPA3TQQGAcAhqC1Lpe2O8qy+nMnIjHOXCk=
-X-Google-Smtp-Source: AKy350ahhVJexmXN4HqaSvh9J9OfzgvqpB3LvRahdZVySM2Hj7+tIQKdZi3psAdn0wNK35trjyeemQ==
-X-Received: by 2002:ac2:4946:0:b0:4c0:2ddc:4559 with SMTP id o6-20020ac24946000000b004c02ddc4559mr489919lfi.69.1681370143951;
-        Thu, 13 Apr 2023 00:15:43 -0700 (PDT)
+        bh=Xdtgtks0Z+0OQgcElk/gBwu5R5RBnZenMx5onSQ1voY=;
+        b=Sl0VyrA2jr7H0GXtE8vcOJt3ySJvHqREiFE74GBXX225YYe2aBu1+WK2hbLYPMlwVN
+         iW1oTTCno4w/aJ8PPUMYjnYNhYWfkwNKaF0gJWPiHEMCk33GYabMDvsGVuroaNl5pxPs
+         d+jnl4AzsaXaNwHAeIqyEQIpu5wFWYQ603LXz/aURFrespoARyqH+oFIr9o3XdUEQAMd
+         Z8dsr4CDRDHRoVkRmkSs8oFlylIzELeZqpkndH+74adgof38RPSiSXir6wOp4cs4gQ4S
+         u6JpbpykUTO01VHf4hyPP3GFmnwXnFXT0XlzNJOyWvfVst2yHJSQ1ur83sL01HM/5lir
+         /qMg==
+X-Gm-Message-State: AAQBX9ei0QsGl2SBuCcR4TW182GBuMV3sUxeR8Xh7WIxuI/g7sDL32Y/
+	/ADk/tMSGvOMkYz1d3idnBEJlEeiLPG96qesMis=
+X-Google-Smtp-Source: AKy350YzDtXtY7GPdfoFCSuzwqUBv5NtAssSt/D/m1g+loRAlXuUWXfnFaxlPX9CUMS+xBFkbVlYWg==
+X-Received: by 2002:ac2:50cd:0:b0:4ec:8615:303e with SMTP id h13-20020ac250cd000000b004ec8615303emr495805lfm.33.1681370149673;
+        Thu, 13 Apr 2023 00:15:49 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
 	Marc Bonnici <marc.bonnici@arm.com>,
 	Achin Gupta <achin.gupta@arm.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Luca Fancellu <luca.fancellu@arm.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [XEN PATCH v8 01/22] xen/arm: smccc: add support for SMCCCv1.2 extended input/output registers
-Date: Thu, 13 Apr 2023 09:14:03 +0200
-Message-Id: <20230413071424.3273490-2-jens.wiklander@linaro.org>
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [XEN PATCH v8 08/22] xen/arm: ffa: add support for FFA_ID_GET
+Date: Thu, 13 Apr 2023 09:14:10 +0200
+Message-Id: <20230413071424.3273490-9-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 References: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-SMCCC v1.2 [1] AArch64 allows x0-x17 to be used as both parameter
-registers and result registers for the SMC and HVC instructions.
-
-Arm Firmware Framework for Armv8-A specification makes use of x0-x7 as
-parameter and result registers.
-
-Let us add new interface to support this extended set of input/output
-registers.
-
-This is based on 3fdc0cb59d97 ("arm64: smccc: Add support for SMCCCv1.2
-extended input/output registers") by Sudeep Holla from the Linux kernel
-
-The SMCCC version reported to the VM is bumped to 1.2 in order to support
-handling FF-A messages.
-
-[1] https://developer.arm.com/documentation/den0028/c/?lang=en
+Adds support for the FF-A function FFA_ID_GET to return the ID of the
+calling client.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/arm64/asm-offsets.c |  9 +++++++
- xen/arch/arm/arm64/smc.S         | 42 ++++++++++++++++++++++++++++++++
- xen/arch/arm/include/asm/smccc.h | 40 ++++++++++++++++++++++++++++++
- xen/arch/arm/vsmc.c              |  2 +-
- 4 files changed, 92 insertions(+), 1 deletion(-)
+ xen/arch/arm/tee/ffa.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/xen/arch/arm/arm64/asm-offsets.c b/xen/arch/arm/arm64/asm-offsets.c
-index 7226cd9b2eb0..7adb67a1b81a 100644
---- a/xen/arch/arm/arm64/asm-offsets.c
-+++ b/xen/arch/arm/arm64/asm-offsets.c
-@@ -57,6 +57,15 @@ void __dummy__(void)
-    BLANK();
-    OFFSET(SMCCC_RES_a0, struct arm_smccc_res, a0);
-    OFFSET(SMCCC_RES_a2, struct arm_smccc_res, a2);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X0_OFFS, struct arm_smccc_1_2_regs, a0);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X2_OFFS, struct arm_smccc_1_2_regs, a2);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X4_OFFS, struct arm_smccc_1_2_regs, a4);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X6_OFFS, struct arm_smccc_1_2_regs, a6);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X8_OFFS, struct arm_smccc_1_2_regs, a8);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X10_OFFS, struct arm_smccc_1_2_regs, a10);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X12_OFFS, struct arm_smccc_1_2_regs, a12);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X14_OFFS, struct arm_smccc_1_2_regs, a14);
-+   OFFSET(ARM_SMCCC_1_2_REGS_X16_OFFS, struct arm_smccc_1_2_regs, a16);
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+index 90ed71cbfda3..f129879c5b81 100644
+--- a/xen/arch/arm/tee/ffa.c
++++ b/xen/arch/arm/tee/ffa.c
+@@ -181,6 +181,12 @@ static bool ffa_get_version(uint32_t *vers)
+     return true;
  }
  
- /*
-diff --git a/xen/arch/arm/arm64/smc.S b/xen/arch/arm/arm64/smc.S
-index 91bae62dd4d2..fc6b676e2ee3 100644
---- a/xen/arch/arm/arm64/smc.S
-+++ b/xen/arch/arm/arm64/smc.S
-@@ -27,3 +27,45 @@ ENTRY(__arm_smccc_1_0_smc)
-         stp     x2, x3, [x4, #SMCCC_RES_a2]
- 1:
-         ret
++static uint16_t get_vm_id(const struct domain *d)
++{
++    /* +1 since 0 is reserved for the hypervisor in FF-A */
++    return d->domain_id + 1;
++}
 +
-+/*
-+ * void arm_smccc_1_2_smc(const struct arm_smccc_1_2_regs *args,
-+ *                        struct arm_smccc_1_2_regs *res)
-+ */
-+ENTRY(arm_smccc_1_2_smc)
-+    /* Save `res` and free a GPR that won't be clobbered by SMC call */
-+    stp     x1, x19, [sp, #-16]!
-+
-+    /* Ensure `args` won't be clobbered while loading regs in next step */
-+    mov	x19, x0
-+
-+    /* Load the registers x0 - x17 from the struct arm_smccc_1_2_regs */
-+    ldp	x0, x1, [x19, #ARM_SMCCC_1_2_REGS_X0_OFFS]
-+    ldp	x2, x3, [x19, #ARM_SMCCC_1_2_REGS_X2_OFFS]
-+    ldp	x4, x5, [x19, #ARM_SMCCC_1_2_REGS_X4_OFFS]
-+    ldp	x6, x7, [x19, #ARM_SMCCC_1_2_REGS_X6_OFFS]
-+    ldp	x8, x9, [x19, #ARM_SMCCC_1_2_REGS_X8_OFFS]
-+    ldp	x10, x11, [x19, #ARM_SMCCC_1_2_REGS_X10_OFFS]
-+    ldp	x12, x13, [x19, #ARM_SMCCC_1_2_REGS_X12_OFFS]
-+    ldp	x14, x15, [x19, #ARM_SMCCC_1_2_REGS_X14_OFFS]
-+    ldp	x16, x17, [x19, #ARM_SMCCC_1_2_REGS_X16_OFFS]
-+
-+    smc #0
-+
-+    /* Load the `res` from the stack */
-+    ldr	x19, [sp]
-+
-+    /* Store the registers x0 - x17 into the result structure */
-+    stp	x0, x1, [x19, #ARM_SMCCC_1_2_REGS_X0_OFFS]
-+    stp	x2, x3, [x19, #ARM_SMCCC_1_2_REGS_X2_OFFS]
-+    stp	x4, x5, [x19, #ARM_SMCCC_1_2_REGS_X4_OFFS]
-+    stp	x6, x7, [x19, #ARM_SMCCC_1_2_REGS_X6_OFFS]
-+    stp	x8, x9, [x19, #ARM_SMCCC_1_2_REGS_X8_OFFS]
-+    stp	x10, x11, [x19, #ARM_SMCCC_1_2_REGS_X10_OFFS]
-+    stp	x12, x13, [x19, #ARM_SMCCC_1_2_REGS_X12_OFFS]
-+    stp	x14, x15, [x19, #ARM_SMCCC_1_2_REGS_X14_OFFS]
-+    stp	x16, x17, [x19, #ARM_SMCCC_1_2_REGS_X16_OFFS]
-+
-+    /* Restore original x19 */
-+    ldp     xzr, x19, [sp], #16
-+    ret
-diff --git a/xen/arch/arm/include/asm/smccc.h b/xen/arch/arm/include/asm/smccc.h
-index b3dbeecc90ad..1adcd37443c7 100644
---- a/xen/arch/arm/include/asm/smccc.h
-+++ b/xen/arch/arm/include/asm/smccc.h
-@@ -33,6 +33,7 @@
+ static void set_regs(struct cpu_user_regs *regs, register_t v0, register_t v1,
+                      register_t v2, register_t v3, register_t v4, register_t v5,
+                      register_t v6, register_t v7)
+@@ -195,6 +201,12 @@ static void set_regs(struct cpu_user_regs *regs, register_t v0, register_t v1,
+         set_user_reg(regs, 7, v7);
+ }
  
- #define ARM_SMCCC_VERSION_1_0   SMCCC_VERSION(1, 0)
- #define ARM_SMCCC_VERSION_1_1   SMCCC_VERSION(1, 1)
-+#define ARM_SMCCC_VERSION_1_2   SMCCC_VERSION(1, 2)
- 
- /*
-  * This file provides common defines for ARM SMC Calling Convention as
-@@ -265,6 +266,45 @@ void __arm_smccc_1_0_smc(register_t a0, register_t a1, register_t a2,
-         else                                                    \
-             arm_smccc_1_0_smc(__VA_ARGS__);                     \
-     } while ( 0 )
++static void set_regs_success(struct cpu_user_regs *regs, uint32_t w2,
++                             uint32_t w3)
++{
++    set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, 0, 0, 0, 0);
++}
 +
-+/*
-+ * struct arm_smccc_1_2_regs - Arguments for or Results from SMC call
-+ * @a0-a17 argument values from registers 0 to 17
-+ */
-+struct arm_smccc_1_2_regs {
-+    unsigned long a0;
-+    unsigned long a1;
-+    unsigned long a2;
-+    unsigned long a3;
-+    unsigned long a4;
-+    unsigned long a5;
-+    unsigned long a6;
-+    unsigned long a7;
-+    unsigned long a8;
-+    unsigned long a9;
-+    unsigned long a10;
-+    unsigned long a11;
-+    unsigned long a12;
-+    unsigned long a13;
-+    unsigned long a14;
-+    unsigned long a15;
-+    unsigned long a16;
-+    unsigned long a17;
-+};
-+
-+/*
-+ * arm_smccc_1_2_smc() - make SMC calls
-+ * @args: arguments passed via struct arm_smccc_1_2_regs
-+ * @res: result values via struct arm_smccc_1_2_regs
-+ *
-+ * This function is used to make SMC calls following SMC Calling Convention
-+ * v1.2 or above. The content of the supplied param are copied from the
-+ * structure to registers prior to the SMC instruction. The return values
-+ * are updated with the content from registers on return from the SMC
-+ * instruction.
-+ */
-+void arm_smccc_1_2_smc(const struct arm_smccc_1_2_regs *args,
-+                       struct arm_smccc_1_2_regs *res);
- #endif /* CONFIG_ARM_64 */
- 
- #endif /* __ASSEMBLY__ */
-diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
-index 7335276f3fa1..cd68fa80e98a 100644
---- a/xen/arch/arm/vsmc.c
-+++ b/xen/arch/arm/vsmc.c
-@@ -85,7 +85,7 @@ static bool handle_arch(struct cpu_user_regs *regs)
-     switch ( fid )
-     {
-     case ARM_SMCCC_VERSION_FID:
--        set_user_reg(regs, 0, ARM_SMCCC_VERSION_1_1);
-+        set_user_reg(regs, 0, ARM_SMCCC_VERSION_1_2);
+ static void handle_version(struct cpu_user_regs *regs)
+ {
+     struct domain *d = current->domain;
+@@ -224,6 +236,9 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
+     case FFA_VERSION:
+         handle_version(regs);
          return true;
++    case FFA_ID_GET:
++        set_regs_success(regs, get_vm_id(d), 0);
++        return true;
  
-     case ARM_SMCCC_ARCH_FEATURES_FID:
+     default:
+         gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
+@@ -237,6 +252,12 @@ static int ffa_domain_init(struct domain *d)
+ 
+     if ( !ffa_version )
+         return -ENODEV;
++     /*
++      * We can't use that last possible domain ID or get_vm_id() would cause
++      * an overflow.
++      */
++    if ( d->domain_id >= UINT16_MAX)
++        return -ERANGE;
+ 
+     ctx = xzalloc(struct ffa_ctx);
+     if ( !ctx )
 -- 
 2.34.1
 
