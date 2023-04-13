@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF33C77B61
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF94C77B71
 	for <xen-devel@archiver.kernel.org>; Thu, 13 Apr 2023 07:16:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.520468.808119 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.520462.808052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBR-0003e2-Tt; Thu, 13 Apr 2023 07:15:53 +0000
+	id 1pmrBM-0001oM-9N; Thu, 13 Apr 2023 07:15:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 520468.808119; Thu, 13 Apr 2023 07:15:53 +0000
+Received: by outflank-mailman (output) from mailman id 520462.808052; Thu, 13 Apr 2023 07:15:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBR-0003cB-NB; Thu, 13 Apr 2023 07:15:53 +0000
-Received: by outflank-mailman (input) for mailman id 520468;
- Thu, 13 Apr 2023 07:15:51 +0000
+	id 1pmrBM-0001mg-2c; Thu, 13 Apr 2023 07:15:48 +0000
+Received: by outflank-mailman (input) for mailman id 520462;
+ Thu, 13 Apr 2023 07:15:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UVxt=AE=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pmrBP-0001gq-Dc
- for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:51 +0000
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [2a00:1450:4864:20::134])
+ id 1pmrBL-0001gq-7R
+ for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:47 +0000
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0550939e-d9cb-11ed-b21e-6b7b168915f2;
- Thu, 13 Apr 2023 09:15:50 +0200 (CEST)
-Received: by mail-lf1-x134.google.com with SMTP id d7so28946612lfj.3
- for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:50 -0700 (PDT)
+ id 027433b3-d9cb-11ed-b21e-6b7b168915f2;
+ Thu, 13 Apr 2023 09:15:46 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id 26so1146103lfq.11
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:46 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.49
+ n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Apr 2023 00:15:50 -0700 (PDT)
+ Thu, 13 Apr 2023 00:15:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,208 +46,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0550939e-d9cb-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 027433b3-d9cb-11ed-b21e-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1681370150; x=1683962150;
+        d=linaro.org; s=google; t=1681370145; x=1683962145;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/vIqA0Q41NfcSAHoiP+QU7NDN221D0N/8z0QGKDCRsU=;
-        b=NZKECmgRCwD3/Qt/bQB0GE/LjYiBu8Q2NiBGD0tYIoffAUzZUEIEg1ZhPAEM7wCIzB
-         HVRzL93FmjUV+sQFKE63TqJy5SYL88iVwe0lhTKx8TzLqP5FsngVGv7NwsYdzj95bZkq
-         74bNTFshVeGzooHtp9hPQFnB4uaRKEG/Lisi2zZPBdCp48nfvov6kx6pBaF3+rbPaAzr
-         SmyHDDmGE4vy/RGBE2uPyLO0X9dMF9dNbI0JYHkyKS1Qzyc6KKfvWp4ukx1qDGyP8Tga
-         56Od1+AyTWKqEYvWJ6u5nmVv+eavkqdnMP3m2gs7QCgLCxg0HySO9LooAAMSod4CTMFt
-         OznA==
+        bh=jvHKHuXznPMzD/YrdwjpNkW0g0k7uCPv2OF4tumTIDg=;
+        b=DxBHQVm8UihnJHYKIUCIRR4mhys8QHkTlgKUvBv8RJDmjDYQTMTPuDqqbViOSBsbn2
+         TNVIM8CmIpsufjdLysMS5NUS4UnMM5V/uwkNyVXARSx0YudIWg47FsTbgoiUHhKGzk3i
+         /j0A6GHghGov3HPZGsQSdoKqlqR3bH34EeaysF2xnw5mjSTa1CzzPYQ+LoQsutJ7NPkm
+         6jQGzFuqFkX0M/O44D7zzJS3Y0vrkJB4s05OQBzsCMDuO+ThxyZlM1inrgAZwLbKPMF/
+         iFZPHdsAekJLRjDwylEiL1Jswv+jzPIiPlylHHf0VQR5MJ9dXMtSfVePZ2PtzRhGlflx
+         CJmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681370150; x=1683962150;
+        d=1e100.net; s=20221208; t=1681370145; x=1683962145;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/vIqA0Q41NfcSAHoiP+QU7NDN221D0N/8z0QGKDCRsU=;
-        b=I4l2vRPuCadQetVMKL9mQ/0Y+xyxaa2XQIgG9VZDqJj1jAJJFB0hQ8xaKep9BlBHmI
-         enCxi0yYmNVl91TWoJDiE4YkvBXSrPxRCtF0wwsk15tyCS/QsroA5P0Ke/d5k9FKIKe/
-         yhGTT9u7l0l4WNnkn5bq7YeALK6qGOa726SYzwRzNmwTDbfa7JisUctKunQq2iRAXJH/
-         8Oxpk5sFvqYucgpBQ5iZNGOlJjNExUcR4Uk8u46voMRUxeA1+7eIokKAR269rGylOBqJ
-         45UxuDXjkolvQKG/y4XdFDEfNThsfUQi/ACoDPcNCooLYI2FXxpNOYMUm5/I7wALkmsS
-         cScQ==
-X-Gm-Message-State: AAQBX9dCU6fStQ8+Joxv3VV3JlEkgw/qi+bbF620h3GCyomyrb9HPQ9i
-	G9uHZlidmK7FpGfl+cI7KAMnEL1N2gcxtNcdVQQ=
-X-Google-Smtp-Source: AKy350Yeiq68Y6+HSv/qOyPfcMO+tL0U6l+2JdS8VPoPn1UifZK4LBUiSq/JMu8PwrkWsTEHHs2mfQ==
-X-Received: by 2002:a19:f60e:0:b0:4e8:5576:98f4 with SMTP id x14-20020a19f60e000000b004e8557698f4mr563090lfe.45.1681370150463;
-        Thu, 13 Apr 2023 00:15:50 -0700 (PDT)
+        bh=jvHKHuXznPMzD/YrdwjpNkW0g0k7uCPv2OF4tumTIDg=;
+        b=IEZXGBrwI4SCipDzuZ7WcbEU9GOYlKr77+YwzGTGYg4MvvTH/qlsJXieUzftyYSsbw
+         jleNGuGrJNogSBvSfiKt8EEimCVscvj/Qgf6ov3V1PeIHkHHoeHzow4zpc+xJC0XbUDR
+         cJQvSWxV9eNLqdrzaPYkwO2Rq+1Fz1XrEio+4GEDHJDflFmWXlpGQIb1kWrT+sPeA3gJ
+         pkEA80J5qgRI3im59hQYXEan/hVPu+V3vaZxkGicbqvW/MtyVDQgYwd/LgpMO4E0cu+h
+         jsTRfghPXh8P8npSR3zqyADurHW/sWx7/MR9TQz359X3RAjMG+Ri6reVqW7iscaRVN1h
+         omDA==
+X-Gm-Message-State: AAQBX9fdkFzylwaxLpvgcLSP3X6mwzU0fT4zQXS+taD9t8po/RoWn3QQ
+	odBKi9OCwH7njn5J6svPr/x26vb+NNZkOf405tk=
+X-Google-Smtp-Source: AKy350a8U/l3Qa0bSPOl21Sj+Fuz5NilmrG2kLfKY3kCeRxYyC5CV0tP0CCqVlw1bSHkvy9bxluygQ==
+X-Received: by 2002:ac2:43bc:0:b0:4ea:f526:5bea with SMTP id t28-20020ac243bc000000b004eaf5265beamr386992lfl.27.1681370145684;
+        Thu, 13 Apr 2023 00:15:45 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
 	Marc Bonnici <marc.bonnici@arm.com>,
 	Achin Gupta <achin.gupta@arm.com>,
 	Jens Wiklander <jens.wiklander@linaro.org>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v8 09/22] xen/arm: ffa: add direct request support
-Date: Thu, 13 Apr 2023 09:14:11 +0200
-Message-Id: <20230413071424.3273490-10-jens.wiklander@linaro.org>
+Subject: [XEN PATCH v8 03/22] tools: add Arm FF-A mediator
+Date: Thu, 13 Apr 2023 09:14:05 +0200
+Message-Id: <20230413071424.3273490-4-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 References: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds support for sending a FF-A direct request. Checks that the SP also
-supports handling a 32-bit direct request. 64-bit direct requests are
-not used by the mediator itself so there is not need to check for that.
+Adds a new "ffa" value to the Enumeration "tee_type" to indicate if a
+guest is trusted to use FF-A.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa.c | 112 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 112 insertions(+)
+ tools/include/libxl.h            | 5 +++++
+ tools/libs/light/libxl_arm.c     | 3 +++
+ tools/libs/light/libxl_types.idl | 3 ++-
+ 3 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index f129879c5b81..f2cce955d981 100644
---- a/xen/arch/arm/tee/ffa.c
-+++ b/xen/arch/arm/tee/ffa.c
-@@ -181,6 +181,56 @@ static bool ffa_get_version(uint32_t *vers)
-     return true;
- }
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index cfa1a191318c..7c48e8d8472e 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -283,6 +283,11 @@
+  */
+ #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE 1
  
-+static int32_t get_ffa_ret_code(const struct arm_smccc_1_2_regs *resp)
-+{
-+    switch ( resp->a0 )
-+    {
-+    case FFA_ERROR:
-+        if ( resp->a2 )
-+            return resp->a2;
-+        else
-+            return FFA_RET_NOT_SUPPORTED;
-+    case FFA_SUCCESS_32:
-+    case FFA_SUCCESS_64:
-+        return FFA_RET_OK;
-+    default:
-+        return FFA_RET_NOT_SUPPORTED;
-+    }
-+}
++/*
++ * arch_arm.tee field in libxl_domain_build_info has ffa value.
++ */
++#define LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE_FFA 1
 +
-+static int32_t ffa_simple_call(uint32_t fid, register_t a1, register_t a2,
-+                               register_t a3, register_t a4)
-+{
-+    const struct arm_smccc_1_2_regs arg = {
-+        .a0 = fid,
-+        .a1 = a1,
-+        .a2 = a2,
-+        .a3 = a3,
-+        .a4 = a4,
-+    };
-+    struct arm_smccc_1_2_regs resp;
-+
-+    arm_smccc_1_2_smc(&arg, &resp);
-+
-+    return get_ffa_ret_code(&resp);
-+}
-+
-+static int32_t ffa_features(uint32_t id)
-+{
-+    return ffa_simple_call(FFA_FEATURES, id, 0, 0, 0);
-+}
-+
-+static bool check_mandatory_feature(uint32_t id)
-+{
-+    int32_t ret = ffa_features(id);
-+
-+    if (ret)
-+        printk(XENLOG_ERR "ffa: mandatory feature id %#x missing: error %d\n",
-+               id, ret);
-+
-+    return !ret;
-+}
-+
- static uint16_t get_vm_id(const struct domain *d)
- {
-     /* +1 since 0 is reserved for the hypervisor in FF-A */
-@@ -222,6 +272,57 @@ static void handle_version(struct cpu_user_regs *regs)
-     set_regs(regs, vers, 0, 0, 0, 0, 0, 0, 0);
- }
- 
-+static void handle_msg_send_direct_req(struct cpu_user_regs *regs, uint32_t fid)
-+{
-+    struct arm_smccc_1_2_regs arg = { .a0 = fid, };
-+    struct arm_smccc_1_2_regs resp = { };
-+    struct domain *d = current->domain;
-+    uint32_t src_dst;
-+    uint64_t mask;
-+
-+    if ( smccc_is_conv_64(fid) )
-+        mask = GENMASK_ULL(63, 0);
-+    else
-+        mask = GENMASK_ULL(31, 0);
-+
-+    src_dst = get_user_reg(regs, 1);
-+    if ( (src_dst >> 16) != get_vm_id(d) )
-+    {
-+        resp.a0 = FFA_ERROR;
-+        resp.a2 = FFA_RET_INVALID_PARAMETERS;
-+        goto out;
-+    }
-+
-+    arg.a1 = src_dst;
-+    arg.a2 = get_user_reg(regs, 2) & mask;
-+    arg.a3 = get_user_reg(regs, 3) & mask;
-+    arg.a4 = get_user_reg(regs, 4) & mask;
-+    arg.a5 = get_user_reg(regs, 5) & mask;
-+    arg.a6 = get_user_reg(regs, 6) & mask;
-+    arg.a7 = get_user_reg(regs, 7) & mask;
-+
-+    arm_smccc_1_2_smc(&arg, &resp);
-+    switch ( resp.a0 )
-+    {
-+    case FFA_ERROR:
-+    case FFA_SUCCESS_32:
-+    case FFA_SUCCESS_64:
-+    case FFA_MSG_SEND_DIRECT_RESP_32:
-+    case FFA_MSG_SEND_DIRECT_RESP_64:
+ /*
+  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
+  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index ddc7b2a15975..601890dda1ce 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -205,6 +205,9 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+     case LIBXL_TEE_TYPE_OPTEE:
+         config->arch.tee_type = XEN_DOMCTL_CONFIG_TEE_OPTEE;
+         break;
++    case LIBXL_TEE_TYPE_FFA:
++        config->arch.tee_type = XEN_DOMCTL_CONFIG_TEE_FFA;
 +        break;
-+    default:
-+        /* Bad fid, report back. */
-+        memset(&arg, 0, sizeof(arg));
-+        arg.a0 = FFA_ERROR;
-+        arg.a1 = src_dst;
-+        arg.a2 = FFA_RET_ABORTED;
-+    }
-+
-+out:
-+    set_regs(regs, resp.a0, resp.a1 & mask, resp.a2 & mask, resp.a3 & mask,
-+             resp.a4 & mask, resp.a5 & mask, resp.a6 & mask, resp.a7 & mask);
-+}
-+
- static bool ffa_handle_call(struct cpu_user_regs *regs)
- {
-     uint32_t fid = get_user_reg(regs, 0);
-@@ -239,6 +340,10 @@ static bool ffa_handle_call(struct cpu_user_regs *regs)
-     case FFA_ID_GET:
-         set_regs_success(regs, get_vm_id(d), 0);
-         return true;
-+    case FFA_MSG_SEND_DIRECT_REQ_32:
-+    case FFA_MSG_SEND_DIRECT_REQ_64:
-+        handle_msg_send_direct_req(regs, fid);
-+        return true;
- 
      default:
-         gprintk(XENLOG_ERR, "ffa: unhandled fid 0x%x\n", fid);
-@@ -326,6 +431,13 @@ static bool ffa_probe(void)
-     printk(XENLOG_INFO "ARM FF-A Firmware version %u.%u\n",
-            major_vers, minor_vers);
+         LOG(ERROR, "Unknown TEE type %d",
+             d_config->b_info.tee);
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index c10292e0d7e3..1a680d0f8839 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -520,7 +520,8 @@ libxl_gic_version = Enumeration("gic_version", [
  
-+    /*
-+     * TODO save result of checked features and use that information to
-+     * accept or reject requests from guests.
-+     */
-+    if ( !check_mandatory_feature(FFA_MSG_SEND_DIRECT_REQ_32) )
-+        return false;
-+
-     ffa_version = vers;
+ libxl_tee_type = Enumeration("tee_type", [
+     (0, "none"),
+-    (1, "optee")
++    (1, "optee"),
++    (2, "ffa"),
+     ], init_val = "LIBXL_TEE_TYPE_NONE")
  
-     return true;
+ libxl_rdm_reserve = Struct("rdm_reserve", [
 -- 
 2.34.1
 
