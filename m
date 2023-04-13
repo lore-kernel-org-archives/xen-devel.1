@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 516B3C77B77
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Apr 2023 07:16:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.520466.808099 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11651C77B71
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Apr 2023 07:16:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.520474.808164 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBP-00035F-S2; Thu, 13 Apr 2023 07:15:51 +0000
+	id 1pmrBY-0004t1-4s; Thu, 13 Apr 2023 07:16:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 520466.808099; Thu, 13 Apr 2023 07:15:51 +0000
+Received: by outflank-mailman (output) from mailman id 520474.808164; Thu, 13 Apr 2023 07:16:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pmrBP-000347-Kb; Thu, 13 Apr 2023 07:15:51 +0000
-Received: by outflank-mailman (input) for mailman id 520466;
- Thu, 13 Apr 2023 07:15:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pmrBX-0004ob-9I; Thu, 13 Apr 2023 07:15:59 +0000
+Received: by outflank-mailman (input) for mailman id 520474;
+ Thu, 13 Apr 2023 07:15:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UVxt=AE=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
- id 1pmrBN-0001gq-PK
- for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:49 +0000
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [2a00:1450:4864:20::12e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 03ce63d4-d9cb-11ed-b21e-6b7b168915f2;
- Thu, 13 Apr 2023 09:15:48 +0200 (CEST)
-Received: by mail-lf1-x12e.google.com with SMTP id a23so18385405lfk.4
- for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:48 -0700 (PDT)
+ id 1pmrBV-0001gr-RI
+ for xen-devel@lists.xenproject.org; Thu, 13 Apr 2023 07:15:57 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 087a2851-d9cb-11ed-8611-37d641c3527e;
+ Thu, 13 Apr 2023 09:15:56 +0200 (CEST)
+Received: by mail-lf1-x135.google.com with SMTP id u12so154347lfu.5
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Apr 2023 00:15:56 -0700 (PDT)
 Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
  [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
- n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.47
+ n12-20020ac2490c000000b004dc83d04840sm181354lfi.79.2023.04.13.00.15.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Apr 2023 00:15:47 -0700 (PDT)
+ Thu, 13 Apr 2023 00:15:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03ce63d4-d9cb-11ed-b21e-6b7b168915f2
+X-Inumbo-ID: 087a2851-d9cb-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1681370148; x=1683962148;
+        d=linaro.org; s=google; t=1681370155; x=1683962155;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4h8RYyh5bzZRCknS4UVtSZ4pAXzS4T4Tgcv5Vo44wYc=;
-        b=A82X0qygBUotlb7DfIfBGFrNRMxjB6Hi05AXYcE8ng1UX27OkAmm6Q/PFJxKqveD7i
-         EB7UqFSYK0P5TZDMiPSPv/ixIlCi6gshIcsvr7Dutopp5imfc1DZBqnTQNSSjN/WYMTp
-         BIUVVW8yS8fksYfPJ78t6mQ2SCX1iQYa+vYfY6LH/TKAVAuWC4wzBbR+2A+OmxLuRZz6
-         mxdz/AmtFt+RH4qdWt053i/mFucNmnjypNZTxu8RScA4pLwdig6WHhpbJGhtv5phInhY
-         tiIlH6/Y1/KbHDIyudkgxuxvjt01vEIN8BXPdWTWTInkwAJQ+KiirwVJC39pozeRQLbi
-         S94g==
+        bh=WQr8Av63Y05+KRPqQW2MMZI9t0v676Nzga708PFgZbs=;
+        b=xvxXEBK2Compws42neNLU7+SQEYWylb37C3YXI+KnyyvdTZWisC+dizJ54qPLe/7BC
+         F11IjC/0l2XcefIx8iJhYi3TF+WZWHPvfub72LmSh53AbtCaW9NIy3kY3Qja74ixd6PH
+         dbyKlzrPuNpdAPqs4RGvaaVEx6hpV2OCdK1RbrAIyqwpOkJ6V5xMls0Fal+x6mJttwyD
+         BXSFedWxmKUb5ec+JCbveQxkxKeJ5szHSwzzAfR9pPIVITVVN2iaOOtNDQYx5la3dSWo
+         SZ3GQwv9ZHzTFkBJJDDO2IbPbD3586GTH9NzfXhR/C4dFl6khMr7vgaGNKbaIphF+riY
+         vwmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681370148; x=1683962148;
+        d=1e100.net; s=20221208; t=1681370155; x=1683962155;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4h8RYyh5bzZRCknS4UVtSZ4pAXzS4T4Tgcv5Vo44wYc=;
-        b=df8AFcW20vdiZnBhTQqquMjtlsaonyiNq1TYPBe6ua/B+JiNx5EP51xcBPj0YqL7ZX
-         DkNT8s8taohm1rIaxRwGWohLS2El/Z/1RHLYd6rX5+f7WjfD83ZNeOaxDkJ8SRB7Ufib
-         HbPZf9tb0LCqzQ0ixU1mVKIsIWXdQ/pjNIQN9ssdL3kjU5seflZFV0rcwoB/i4xNYz5X
-         XHiWNwrDKKm26bZMwlbQYvTL2fbpJD6KdGoQnkWiKK8lE18PJk+oo6xto0G5qE/jlMVN
-         Azw5MdoOyzk4DsFxvP7CBLAk/fnVfhGnwlgpinPGdbzHCPb/YZN2JUNEfAIurTxLJ9dz
-         Bydg==
-X-Gm-Message-State: AAQBX9e30JWBemLWUZBobmldPHaJmWeZDED+Tan5ma3DoIxHYHwpXtyK
-	W2YAyIZvKl/tn4DnAdyjeg+0XMt3vHcPED1BOyE=
-X-Google-Smtp-Source: AKy350beH+O+9f6FocX15Q6eI3oQwCr9xsNRMnzQDFyL45vH8snBqVe9+m1d9CZ9/Az5vOcXP12/uA==
-X-Received: by 2002:a05:6512:3902:b0:4e8:45d5:53bf with SMTP id a2-20020a056512390200b004e845d553bfmr548369lfu.40.1681370147940;
-        Thu, 13 Apr 2023 00:15:47 -0700 (PDT)
+        bh=WQr8Av63Y05+KRPqQW2MMZI9t0v676Nzga708PFgZbs=;
+        b=YoD1S/G4Fn6dunZ6G4PLzQ1PR99OJr3crDXKwhquv5xYIDkHrwfAAk2A+sc+yS8vHe
+         zD20h1qm869TlTyPyKSk7h2VxJ/h+AOc9SmCea1iH6rqXSPmVlApxrWE6qxHghW7sSmq
+         hdJQr6/mmdmn8Fkf+FOhIEKwf+YOl7Bd67SPPQfAEc5cVHKW8ARdtkck0jQjcRtodWDC
+         MmnVd7zhIzFy9BlBoK0+4uTldDkU9eXCV9mScf32I6X/Ie/COcR/Axb3KtNLT7uXoDqE
+         TcdPAx46NJaUvDgLgEwNQALUWK3ixJrF5EVmhxD6wdeCyYRdGYnza/qFLILFGI56iBf4
+         6ybw==
+X-Gm-Message-State: AAQBX9e+aeVqNYZ65eeEnrH1B4Xe0MGJdftf2X//TTlyf4EORUzSPUQi
+	CvRgmUFozuzGUPhrJQSiulBBL1KbTlr45TzOR/E=
+X-Google-Smtp-Source: AKy350Zs8E4alI77NZ8nPoBbhBLjXrkqVWz+tUygSw+cu9HmXrFfnPMlnm+5FI3jSslmcHKSwGkg1A==
+X-Received: by 2002:a19:f00f:0:b0:4eb:2b32:feab with SMTP id p15-20020a19f00f000000b004eb2b32feabmr444477lfc.50.1681370155779;
+        Thu, 13 Apr 2023 00:15:55 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: xen-devel@lists.xenproject.org
 Cc: Bertrand.Marquis@arm.com,
@@ -86,46 +86,104 @@ Cc: Bertrand.Marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v8 06/22] xen/arm: ffa: add defines for framework direct request/response messages
-Date: Thu, 13 Apr 2023 09:14:08 +0200
-Message-Id: <20230413071424.3273490-7-jens.wiklander@linaro.org>
+Subject: [XEN PATCH v8 16/22] xen/arm: ffa: add ABI structs for sharing memory
+Date: Thu, 13 Apr 2023 09:14:18 +0200
+Message-Id: <20230413071424.3273490-17-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 References: <20230413071424.3273490-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds defines for framework direct request/response messages.
+Adds the ABI structs used by function FFA_MEM_SHARE and friends for
+sharing memory.
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/arm/tee/ffa.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ xen/arch/arm/tee/ffa.c | 69 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 69 insertions(+)
 
 diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
-index 72e7d0575de5..cf7b7545aa03 100644
+index 58c581c8ffc7..f3e05911e16e 100644
 --- a/xen/arch/arm/tee/ffa.c
 +++ b/xen/arch/arm/tee/ffa.c
-@@ -57,6 +57,19 @@
- #define FFA_MY_VERSION          MAKE_FFA_VERSION(FFA_MY_VERSION_MAJOR, \
-                                                  FFA_MY_VERSION_MINOR)
+@@ -245,6 +245,75 @@ struct ffa_partition_info_1_1 {
+     uint8_t uuid[16];
+ };
  
-+/*
-+ * Flags and field values used for the MSG_SEND_DIRECT_REQ/RESP:
-+ * BIT(31): Framework or partition message
-+ * BIT(7-0): Message type for frameworks messages
-+ */
-+#define FFA_MSG_FLAG_FRAMEWORK          BIT(31, U)
-+#define FFA_MSG_TYPE_MASK               0xFFU;
-+#define FFA_MSG_PSCI                    0x0U
-+#define FFA_MSG_SEND_VM_CREATED         0x4U
-+#define FFA_MSG_RESP_VM_CREATED         0x5U
-+#define FFA_MSG_SEND_VM_DESTROYED       0x6U
-+#define FFA_MSG_RESP_VM_DESTROYED       0x7U
++/* Constituent memory region descriptor */
++struct ffa_address_range {
++    uint64_t address;
++    uint32_t page_count;
++    uint32_t reserved;
++};
 +
- /*
-  * Flags to determine partition properties in FFA_PARTITION_INFO_GET return
-  * message:
++/* Composite memory region descriptor */
++struct ffa_mem_region {
++    uint32_t total_page_count;
++    uint32_t address_range_count;
++    uint64_t reserved;
++    struct ffa_address_range address_range_array[];
++};
++
++/* Memory access permissions descriptor */
++struct ffa_mem_access_perm {
++    uint16_t endpoint_id;
++    uint8_t perm;
++    uint8_t flags;
++};
++
++/* Endpoint memory access descriptor */
++struct ffa_mem_access {
++    struct ffa_mem_access_perm access_perm;
++    uint32_t region_offs;
++    uint64_t reserved;
++};
++
++/* Lend, donate or share memory transaction descriptor */
++struct ffa_mem_transaction_1_0 {
++    uint16_t sender_id;
++    uint8_t mem_reg_attr;
++    uint8_t reserved0;
++    uint32_t flags;
++    uint64_t handle;
++    uint64_t tag;
++    uint32_t reserved1;
++    uint32_t mem_access_count;
++    struct ffa_mem_access mem_access_array[];
++};
++
++struct ffa_mem_transaction_1_1 {
++    uint16_t sender_id;
++    uint16_t mem_reg_attr;
++    uint32_t flags;
++    uint64_t handle;
++    uint64_t tag;
++    uint32_t mem_access_size;
++    uint32_t mem_access_count;
++    uint32_t mem_access_offs;
++    uint8_t reserved[12];
++};
++
++/* Endpoint RX/TX descriptor */
++struct ffa_endpoint_rxtx_descriptor_1_0 {
++    uint16_t sender_id;
++    uint16_t reserved;
++    uint32_t rx_range_count;
++    uint32_t tx_range_count;
++};
++
++struct ffa_endpoint_rxtx_descriptor_1_1 {
++    uint16_t sender_id;
++    uint16_t reserved;
++    uint32_t rx_region_offs;
++    uint32_t tx_region_offs;
++};
++
+ struct ffa_ctx {
+     void *rx;
+     const void *tx;
 -- 
 2.34.1
 
