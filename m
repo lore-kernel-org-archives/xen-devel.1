@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72228C77B79
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DB7DC77B77
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.521358.810060 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.521356.810055 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAi-0001FV-2g; Fri, 14 Apr 2023 23:49:40 +0000
+	id 1pnTAh-0000yR-6M; Fri, 14 Apr 2023 23:49:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 521358.810060; Fri, 14 Apr 2023 23:49:40 +0000
+Received: by outflank-mailman (output) from mailman id 521356.810055; Fri, 14 Apr 2023 23:49:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAh-0001BO-SR; Fri, 14 Apr 2023 23:49:39 +0000
-Received: by outflank-mailman (input) for mailman id 521358;
+	id 1pnTAg-0000xI-Kl; Fri, 14 Apr 2023 23:49:38 +0000
+Received: by outflank-mailman (input) for mailman id 521356;
  Fri, 14 Apr 2023 23:49:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZCOw=AF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pnT64-0000zb-7Z
- for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:44:52 +0000
+ id 1pnT5w-0001Th-NI
+ for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:44:44 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 56a62801-db1e-11ed-8611-37d641c3527e;
- Sat, 15 Apr 2023 01:44:46 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 54bdfe16-db1e-11ed-b21e-6b7b168915f2;
+ Sat, 15 Apr 2023 01:44:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56a62801-db1e-11ed-8611-37d641c3527e
-Message-ID: <20230414232310.444204883@linutronix.de>
+X-Inumbo-ID: 54bdfe16-db1e-11ed-b21e-6b7b168915f2
+Message-ID: <20230414232310.319386819@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1681515886;
+	s=2020; t=1681515883;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OJmMK1DNsYZsN6fUmGwfeq4ERjaNgScwoVZRQqH8yUw=;
-	b=GcFPtrg7k9VQxG3rMlumRMw5nuKtsJmdDMoJ6TSceXuK1zdHd+N9joDWuAZdo46YFNxZMP
-	Bsg8W/+6nBYJRVuCztzAyHJQvPJSb23Tablj/SGjhsX/WUeCrmSA9nsuhw8G2JGX2NZ97t
-	THjsQ+3MT5axiGFvQ/sUAHek0hFvHwgQKNG5VvKo8oZKr/4skgr04uS53dj+ol0BYWxhal
-	5oIGYZdmtf3qGjw5V88nnPJqYy7bxEgNOIlxEv9+tW18PGEfux4IdshBI1Y1RLHv+TPNLz
-	Ddqx3nRleBLOQcei7th1ojLHd0sg0KKVmzdvEaltZ8B7BxlHVYGVjXaqhkZyww==
+	 references:references; bh=7hAm6I9MiGtPmIXfa24B9PQ6b2IikPrY0L+IvEnJvPI=;
+	b=jK/GS8nzEcoNMYUK0AKSW91HahqfcKmgmQ+JtmtDnur9HSlYdew/SITlGW5QELStSGh6Q/
+	V57WOhEWSVSxWZWhG3SaBczDcMaraK+itB6zsiGdpLQtzoC7yxxSloqDZW6B4Njz8MWDbR
+	miMPGsiCOdTRydFFdFmiS70GYeAIK8oBwYAUlay9JYTfVbSXJ63AXiImeMdnSL+M470Et5
+	VfCBSEigMVHivkoKuqa+6Tu/41+RxN+9jOUZtcMtyT4RoQND7Pp1xwtWviW33NcuD2Qa/G
+	AC+ABgPHvS+/XtBUfn+u5LoukNQ3JpVGWaLmycJWPrCSc7LATrT2CKreEiN1ng==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1681515886;
+	s=2020e; t=1681515883;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OJmMK1DNsYZsN6fUmGwfeq4ERjaNgScwoVZRQqH8yUw=;
-	b=l2/PUI4LfABzfYrIQxeqJjxovlQLjpZzH9GEF/bgX07OlI0hCc/156VAzkEe/0KLuss+2I
-	g5EEfqF03SuN2wDg==
+	 references:references; bh=7hAm6I9MiGtPmIXfa24B9PQ6b2IikPrY0L+IvEnJvPI=;
+	b=IpKwz96GwSWUZ2KDbHlOo0nFprwPP3s9jahoNB/qpcC8qkXn9/Q9MaoBQo6UsIzMi7+Hea
+	LODiZVcbnARULPAg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,131 +94,370 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>
-Subject:
- [patch 20/37] cpu/hotplug: Remove cpu_report_state() and related unused cruft
+Subject: [patch 18/37] cpu/hotplug: Add CPU state tracking and synchronization
 References: <20230414225551.858160935@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Apr 2023 01:44:46 +0200 (CEST)
+Date: Sat, 15 Apr 2023 01:44:42 +0200 (CEST)
 
-No more users.
+The CPU state tracking and synchronization mechanism in smpboot.c is
+completely independent of the hotplug code and all logic around it is
+implemented in architecture specific code.
+
+Except for the state reporting of the AP there is absolutely nothing
+architecture specific and the sychronization and decision functions can be
+moved into the generic hotplug core code.
+
+Provide an integrated variant and add the core synchronization and decision
+points. This comes in two flavours:
+
+  1) DEAD state synchronization
+
+     Updated by the architecture code once the AP reaches the point where
+     it is ready to be torn down by the control CPU, e.g. by removing power
+     or clocks or tear down via the hypervisor.
+
+     The control CPU waits for this state to be reached with a timeout. If
+     the state is reached an architecture specific cleanup function is
+     invoked.
+
+  2) Full state synchronization
+
+     This extends #1 with AP alive synchronization. This is new
+     functionality, which allows to replace architecture specific wait
+     mechanims, e.g. cpumasks, completely.
+
+     It also prevents that an AP which is in a limbo state can be brought
+     up again. This can happen when an AP failed to report dead state
+     during a previous off-line operation.
+
+The dead synchronization is what most architectures use. Only x86 makes a
+bringup decision based on that state at the moment.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/cpu.h |    2 -
- kernel/smpboot.c    |   90 ----------------------------------------------------
- 2 files changed, 92 deletions(-)
+ arch/Kconfig               |   15 +++
+ include/linux/cpuhotplug.h |   12 ++
+ kernel/cpu.c               |  193 ++++++++++++++++++++++++++++++++++++++++++++-
+ kernel/smpboot.c           |    2 
+ 4 files changed, 221 insertions(+), 1 deletion(-)
 
---- a/include/linux/cpu.h
-+++ b/include/linux/cpu.h
-@@ -184,8 +184,6 @@ void arch_cpu_idle_enter(void);
- void arch_cpu_idle_exit(void);
- void arch_cpu_idle_dead(void);
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -34,6 +34,21 @@ config ARCH_HAS_SUBPAGE_FAULTS
+ config HOTPLUG_SMT
+ 	bool
  
--int cpu_report_state(int cpu);
--int cpu_check_up_prepare(int cpu);
- void cpu_set_state_online(int cpu);
- void play_idle_precise(u64 duration_ns, u64 latency_ns);
++# Selected by HOTPLUG_CORE_SYNC_DEAD or HOTPLUG_CORE_SYNC_FULL
++config HOTPLUG_CORE_SYNC
++	bool
++
++# Basic CPU dead synchronization selected by architecture
++config HOTPLUG_CORE_SYNC_DEAD
++	bool
++	select HOTPLUG_CORE_SYNC
++
++# Full CPU synchronization with alive state selected by architecture
++config HOTPLUG_CORE_SYNC_FULL
++	bool
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
++	select HOTPLUG_CORE_SYNC
++
+ config GENERIC_ENTRY
+ 	bool
  
+--- a/include/linux/cpuhotplug.h
++++ b/include/linux/cpuhotplug.h
+@@ -519,4 +519,16 @@ void cpuhp_online_idle(enum cpuhp_state
+ static inline void cpuhp_online_idle(enum cpuhp_state state) { }
+ #endif
+ 
++void cpuhp_ap_sync_alive(void);
++void arch_cpuhp_sync_state_poll(void);
++void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
++void cpuhp_ap_report_dead(void);
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu);
++#else
++static inline void cpuhp_ap_report_dead(void) { }
++static inline void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu) { }
++#endif
++
+ #endif
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -17,6 +17,7 @@
+ #include <linux/cpu.h>
+ #include <linux/oom.h>
+ #include <linux/rcupdate.h>
++#include <linux/delay.h>
+ #include <linux/export.h>
+ #include <linux/bug.h>
+ #include <linux/kthread.h>
+@@ -59,6 +60,7 @@
+  * @last:	For multi-instance rollback, remember how far we got
+  * @cb_state:	The state for a single callback (install/uninstall)
+  * @result:	Result of the operation
++ * @ap_sync_state:	State for AP synchronization
+  * @done_up:	Signal completion to the issuer of the task for cpu-up
+  * @done_down:	Signal completion to the issuer of the task for cpu-down
+  */
+@@ -76,6 +78,7 @@ struct cpuhp_cpu_state {
+ 	struct hlist_node	*last;
+ 	enum cpuhp_state	cb_state;
+ 	int			result;
++	atomic_t		ap_sync_state;
+ 	struct completion	done_up;
+ 	struct completion	done_down;
+ #endif
+@@ -276,6 +279,182 @@ static bool cpuhp_is_atomic_state(enum c
+ 	return CPUHP_AP_IDLE_DEAD <= state && state < CPUHP_AP_ONLINE;
+ }
+ 
++/* Synchronization state management */
++enum cpuhp_sync_state {
++	SYNC_STATE_DEAD,
++	SYNC_STATE_KICKED,
++	SYNC_STATE_SHOULD_DIE,
++	SYNC_STATE_ALIVE,
++	SYNC_STATE_SHOULD_ONLINE,
++	SYNC_STATE_ONLINE,
++};
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC
++/**
++ * cpuhp_ap_update_sync_state - Update synchronization state during bringup/teardown
++ * @state:	The synchronization state to set
++ *
++ * No synchronization point. Just update of the synchronization state.
++ */
++static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state)
++{
++	atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
++	int sync = atomic_read(st);
++
++	while (!atomic_try_cmpxchg(st, &sync, state));
++}
++
++void __weak arch_cpuhp_sync_state_poll(void) { cpu_relax(); }
++
++static bool cpuhp_wait_for_sync_state(unsigned int cpu, enum cpuhp_sync_state state,
++				      enum cpuhp_sync_state next_state)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	ktime_t now, end, start = ktime_get();
++	int sync;
++
++	end = start + 10ULL * NSEC_PER_SEC;
++
++	sync = atomic_read(st);
++	while (1) {
++		if (sync == state) {
++			if (!atomic_try_cmpxchg(st, &sync, next_state))
++				continue;
++			return true;
++		}
++
++		now = ktime_get();
++		if (now > end) {
++			/* Timeout. Leave the state unchanged */
++			return false;
++		} else if (now - start < NSEC_PER_MSEC) {
++			/* Poll for one millisecond */
++			arch_cpuhp_sync_state_poll();
++		} else {
++			usleep_range_state(USEC_PER_MSEC, 2 * USEC_PER_MSEC, TASK_UNINTERRUPTIBLE);
++		}
++		sync = atomic_read(st);
++	}
++	return true;
++}
++#else  /* CONFIG_HOTPLUG_CORE_SYNC */
++static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state) { }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC */
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
++/**
++ * cpuhp_ap_report_dead - Update synchronization state to DEAD
++ *
++ * No synchronization point. Just update of the synchronization state.
++ */
++void cpuhp_ap_report_dead(void)
++{
++	cpuhp_ap_update_sync_state(SYNC_STATE_DEAD);
++}
++
++void __weak arch_cpuhp_cleanup_dead_cpu(unsigned int cpu) { }
++
++/*
++ * Late CPU shutdown synchronization point. Cannot use cpuhp_state::done_down
++ * because the AP cannot issue complete() at this stage.
++ */
++static void cpuhp_bp_sync_dead(unsigned int cpu)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	int sync = atomic_read(st);
++
++	do {
++		/* CPU can have reported dead already. Don't overwrite that! */
++		if (sync == SYNC_STATE_DEAD)
++			break;
++	} while (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_SHOULD_DIE));
++
++	if (cpuhp_wait_for_sync_state(cpu, SYNC_STATE_DEAD, SYNC_STATE_DEAD)) {
++		/* CPU reached dead state. Invoke the cleanup function */
++		arch_cpuhp_cleanup_dead_cpu(cpu);
++		return;
++	}
++
++	/* No further action possible. Emit message and give up. */
++	pr_err("CPU%u failed to report dead state\n", cpu);
++}
++#else /* CONFIG_HOTPLUG_CORE_SYNC_DEAD */
++static inline void cpuhp_bp_sync_dead(unsigned int cpu) { }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC_DEAD */
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_FULL
++/**
++ * cpuhp_ap_sync_alive - Synchronize AP with the control CPU once it is alive
++ *
++ * Updates the AP synchronization state to SYNC_STATE_ALIVE and waits
++ * for the BP to release it.
++ */
++void cpuhp_ap_sync_alive(void)
++{
++	atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
++
++	cpuhp_ap_update_sync_state(SYNC_STATE_ALIVE);
++
++	/* Wait for the control CPU to release it. */
++	while (atomic_read(st) != SYNC_STATE_SHOULD_ONLINE)
++		cpu_relax();
++}
++
++static bool cpuhp_can_boot_ap(unsigned int cpu)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	int sync = atomic_read(st);
++
++again:
++	switch (sync) {
++	case SYNC_STATE_DEAD:
++		/* CPU is properly dead */
++		break;
++	case SYNC_STATE_KICKED:
++		/* CPU did not come up in previous attempt */
++		break;
++	case SYNC_STATE_ALIVE:
++		/* CPU is stuck cpuhp_ap_sync_alive(). */
++		break;
++	default:
++		/* CPU failed to report online or dead and is in limbo state. */
++		return false;
++	}
++
++	/* Prepare for booting */
++	if (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_KICKED))
++		goto again;
++
++	return true;
++}
++
++void __weak arch_cpuhp_cleanup_kick_cpu(unsigned int cpu) { }
++
++/*
++ * Early CPU bringup synchronization point. Cannot use cpuhp_state::done_up
++ * because the AP cannot issue complete() so early in the bringup.
++ */
++static int cpuhp_bp_sync_alive(unsigned int cpu)
++{
++	int ret = 0;
++
++	if (!IS_ENABLED(CONFIG_HOTPLUG_CORE_SYNC_FULL))
++		return 0;
++
++	if (!cpuhp_wait_for_sync_state(cpu, SYNC_STATE_ALIVE, SYNC_STATE_SHOULD_ONLINE)) {
++		pr_err("CPU%u failed to report alive state\n", cpu);
++		ret = -EIO;
++	}
++
++	/* Let the architecture cleanup the kick alive mechanics. */
++	arch_cpuhp_cleanup_kick_cpu(cpu);
++	return ret;
++}
++#else /* CONFIG_HOTPLUG_CORE_SYNC_FULL */
++static inline int cpuhp_bp_sync_alive(unsigned int cpu) { return 0; }
++static inline bool cpuhp_can_boot_ap(unsigned int cpu) { return true; }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC_FULL */
++
+ /* Serializes the updates to cpu_online_mask, cpu_present_mask */
+ static DEFINE_MUTEX(cpu_add_remove_lock);
+ bool cpuhp_tasks_frozen;
+@@ -588,6 +767,9 @@ static int bringup_cpu(unsigned int cpu)
+ 	struct task_struct *idle = idle_thread_get(cpu);
+ 	int ret;
+ 
++	if (!cpuhp_can_boot_ap(cpu))
++		return -EAGAIN;
++
+ 	/*
+ 	 * Reset stale stack state from the last time this CPU was online.
+ 	 */
+@@ -606,6 +788,10 @@ static int bringup_cpu(unsigned int cpu)
+ 	if (ret)
+ 		goto out_unlock;
+ 
++	ret = cpuhp_bp_sync_alive(cpu);
++	if (ret)
++		goto out_unlock;
++
+ 	ret = bringup_wait_for_ap_online(cpu);
+ 	if (ret)
+ 		goto out_unlock;
+@@ -1109,6 +1295,8 @@ static int takedown_cpu(unsigned int cpu
+ 	/* This actually kills the CPU. */
+ 	__cpu_die(cpu);
+ 
++	cpuhp_bp_sync_dead(cpu);
++
+ 	tick_cleanup_dead_cpu(cpu);
+ 	rcutree_migrate_callbacks(cpu);
+ 	return 0;
+@@ -1355,8 +1543,10 @@ void cpuhp_online_idle(enum cpuhp_state
+ 	if (state != CPUHP_AP_ONLINE_IDLE)
+ 		return;
+ 
++	cpuhp_ap_update_sync_state(SYNC_STATE_ONLINE);
++
+ 	/*
+-	 * Unpart the stopper thread before we start the idle loop (and start
++	 * Unpark the stopper thread before we start the idle loop (and start
+ 	 * scheduling); this ensures the stopper task is always available.
+ 	 */
+ 	stop_machine_unpark(smp_processor_id());
+@@ -2722,6 +2912,7 @@ void __init boot_cpu_hotplug_init(void)
+ {
+ #ifdef CONFIG_SMP
+ 	cpumask_set_cpu(smp_processor_id(), &cpus_booted_once_mask);
++	atomic_set(this_cpu_ptr(&cpuhp_state.ap_sync_state), SYNC_STATE_ONLINE);
+ #endif
+ 	this_cpu_write(cpuhp_state.state, CPUHP_ONLINE);
+ 	this_cpu_write(cpuhp_state.target, CPUHP_ONLINE);
 --- a/kernel/smpboot.c
 +++ b/kernel/smpboot.c
-@@ -329,97 +329,7 @@ EXPORT_SYMBOL_GPL(smpboot_unregister_per
- #ifndef CONFIG_HOTPLUG_CORE_SYNC
+@@ -326,6 +326,7 @@ void smpboot_unregister_percpu_thread(st
+ }
+ EXPORT_SYMBOL_GPL(smpboot_unregister_percpu_thread);
+ 
++#ifndef CONFIG_HOTPLUG_CORE_SYNC
  static DEFINE_PER_CPU(atomic_t, cpu_hotplug_state) = ATOMIC_INIT(CPU_POST_DEAD);
  
--/*
-- * Called to poll specified CPU's state, for example, when waiting for
-- * a CPU to come online.
-- */
--int cpu_report_state(int cpu)
--{
--	return atomic_read(&per_cpu(cpu_hotplug_state, cpu));
--}
--
--/*
-- * If CPU has died properly, set its state to CPU_UP_PREPARE and
-- * return success.  Otherwise, return -EBUSY if the CPU died after
-- * cpu_wait_death() timed out.  And yet otherwise again, return -EAGAIN
-- * if cpu_wait_death() timed out and the CPU still hasn't gotten around
-- * to dying.  In the latter two cases, the CPU might not be set up
-- * properly, but it is up to the arch-specific code to decide.
-- * Finally, -EIO indicates an unanticipated problem.
-- *
-- * Note that it is permissible to omit this call entirely, as is
-- * done in architectures that do no CPU-hotplug error checking.
-- */
--int cpu_check_up_prepare(int cpu)
--{
--	if (!IS_ENABLED(CONFIG_HOTPLUG_CPU)) {
--		atomic_set(&per_cpu(cpu_hotplug_state, cpu), CPU_UP_PREPARE);
--		return 0;
--	}
--
--	switch (atomic_read(&per_cpu(cpu_hotplug_state, cpu))) {
--
--	case CPU_POST_DEAD:
--
--		/* The CPU died properly, so just start it up again. */
--		atomic_set(&per_cpu(cpu_hotplug_state, cpu), CPU_UP_PREPARE);
--		return 0;
--
--	case CPU_DEAD_FROZEN:
--
--		/*
--		 * Timeout during CPU death, so let caller know.
--		 * The outgoing CPU completed its processing, but after
--		 * cpu_wait_death() timed out and reported the error. The
--		 * caller is free to proceed, in which case the state
--		 * will be reset properly by cpu_set_state_online().
--		 * Proceeding despite this -EBUSY return makes sense
--		 * for systems where the outgoing CPUs take themselves
--		 * offline, with no post-death manipulation required from
--		 * a surviving CPU.
--		 */
--		return -EBUSY;
--
--	case CPU_BROKEN:
--
--		/*
--		 * The most likely reason we got here is that there was
--		 * a timeout during CPU death, and the outgoing CPU never
--		 * did complete its processing.  This could happen on
--		 * a virtualized system if the outgoing VCPU gets preempted
--		 * for more than five seconds, and the user attempts to
--		 * immediately online that same CPU.  Trying again later
--		 * might return -EBUSY above, hence -EAGAIN.
--		 */
--		return -EAGAIN;
--
--	case CPU_UP_PREPARE:
--		/*
--		 * Timeout while waiting for the CPU to show up. Allow to try
--		 * again later.
--		 */
--		return 0;
--
--	default:
--
--		/* Should not happen.  Famous last words. */
--		return -EIO;
--	}
--}
--
--/*
-- * Mark the specified CPU online.
-- *
-- * Note that it is permissible to omit this call entirely, as is
-- * done in architectures that do no CPU-hotplug error checking.
-- */
--void cpu_set_state_online(int cpu)
--{
--	(void)atomic_xchg(&per_cpu(cpu_hotplug_state, cpu), CPU_ONLINE);
--}
--
- #ifdef CONFIG_HOTPLUG_CPU
--
  /*
-  * Wait for the specified CPU to exit the idle loop and die.
-  */
+@@ -488,3 +489,4 @@ bool cpu_report_death(void)
+ }
+ 
+ #endif /* #ifdef CONFIG_HOTPLUG_CPU */
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC */
 
 
