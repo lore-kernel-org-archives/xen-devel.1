@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B5BEC77B7C
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:44:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.521285.809885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C04C77B72
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.521288.809905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnT5x-0006kf-Gk; Fri, 14 Apr 2023 23:44:45 +0000
+	id 1pnTA1-0002kx-NL; Fri, 14 Apr 2023 23:48:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 521285.809885; Fri, 14 Apr 2023 23:44:45 +0000
+Received: by outflank-mailman (output) from mailman id 521288.809905; Fri, 14 Apr 2023 23:48:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnT5w-0006jJ-Sf; Fri, 14 Apr 2023 23:44:44 +0000
-Received: by outflank-mailman (input) for mailman id 521285;
- Fri, 14 Apr 2023 23:44:43 +0000
+	id 1pnTA1-0002kq-KZ; Fri, 14 Apr 2023 23:48:57 +0000
+Received: by outflank-mailman (input) for mailman id 521288;
+ Fri, 14 Apr 2023 23:48:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZCOw=AF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pnT5v-0000zb-Cg
- for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:44:43 +0000
+ id 1pnT6Q-0000zb-Oh
+ for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:45:14 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 53a62147-db1e-11ed-8611-37d641c3527e;
- Sat, 15 Apr 2023 01:44:41 +0200 (CEST)
+ id 6639473e-db1e-11ed-8611-37d641c3527e;
+ Sat, 15 Apr 2023 01:45:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53a62147-db1e-11ed-8611-37d641c3527e
-Message-ID: <20230414232310.256412375@linutronix.de>
+X-Inumbo-ID: 6639473e-db1e-11ed-8611-37d641c3527e
+Message-ID: <20230414232311.441918776@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1681515881;
+	s=2020; t=1681515912;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=e1FMo66EmKhD6c9vNMbCMEr10b7nb30z1HTBJhSwsws=;
-	b=gZ0HEhv3acCl5QBYyuBxsWswUfiT2pTSEiPx8KAuYf607AwMRXvsLBlYW5dljp8oWs/ntm
-	Rl62blc06B+wdYag6mxiaHF4d6UazbaaiGafHMeetJ/A7Hs5RVhUzMngs/dEe59idC0O2F
-	aA4jOVKszqOh4s2mn+PKplYpnPle5vYAOnMKw27lKXhJvIh/kbhLy4lRj7cXXA/G581Bej
-	PsarGBYF6AEmBjKJMVj8L9q7SGw5rle2qMtTuVh6V6kezaC/bwaovVLX9d1Zsm+GX8ANmu
-	PhMCi/IYxY/Oqm30JTDcZDBgs/Y7EGdHwcz8miDR/Arr0Wrr//IGKwmjd5YAMQ==
+	 references:references; bh=6cGHgynMBCaHRwYTrISGgGUY8IfBttwd4gSW6/8ncwo=;
+	b=Y6MvVoIRD+b308pDJWowuLkJP8xTk8BgVllbAchtET5SCLxH3pPaTbpOYvBSvJgt29AjQn
+	ezcDEAwpvw4go5HJCn0jDdZCGPT9MLW24qpZKb8kz2KJNNnr6JcyXOPyaUGlM/ANv9N+fq
+	tuEJRuRxzNty3GrkhGsgHYpRhP/0DX3AEiMTFdAHD/hkrve/Z/OGirQHyoZehUi+ZLj2of
+	nh0+zW/XB9E47Zv4MWfj7UgDu31M48dyxxMexXPIhf0Fh2Xfz56PypK/Z4RNZ1QuLpDfkl
+	MzM4X40h1quxb59BK38sroOGy3J6fRyyYS1Nn/XWNH7x+1QZ0XFumeRWVGSB2A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1681515881;
+	s=2020e; t=1681515912;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=e1FMo66EmKhD6c9vNMbCMEr10b7nb30z1HTBJhSwsws=;
-	b=4fNwIQeLJaYUXs5/LQAEGEGLbWkObI//eYOHt1swXrTx799wwKeZFlTzry5MJCiAr70s7q
-	ypFOiCNeSLElyzBg==
+	 references:references; bh=6cGHgynMBCaHRwYTrISGgGUY8IfBttwd4gSW6/8ncwo=;
+	b=62z6QxHlYDjrTs4WKqbuHCfVc8G+x+AUIAn0i55mZeGFgkDCFd3an/Sr2oboSn6ZUcOcEh
+	Lf1/KZWBw97ffRDQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -72,11 +72,11 @@ Cc: x86@kernel.org,
  Paul Menzel <pmenzel@molgen.mpg.de>,
  "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
  Piotr Gorski <lucjan.lucjanov@gmail.com>,
+ David Woodhouse <dwmw@amazon.co.uk>,
+ Usama Arif <usama.arif@bytedance.com>,
  Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
  xen-devel@lists.xenproject.org,
- David Woodhouse <dwmw@amazon.co.uk>,
- Usama Arif <usama.arif@bytedance.com>,
  Russell King <linux@armlinux.org.uk>,
  Arnd Bergmann <arnd@arndb.de>,
  linux-arm-kernel@lists.infradead.org,
@@ -94,47 +94,145 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>
-Subject: [patch 17/37] x86/xen/hvm: Get rid of DEAD_FROZEN handling
+Subject: [patch 36/37] x86/smpboot/64: Implement
+ arch_cpuhp_init_parallel_bringup() and enable it
 References: <20230414225551.858160935@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Apr 2023 01:44:41 +0200 (CEST)
+Date: Sat, 15 Apr 2023 01:45:12 +0200 (CEST)
 
-No point in this conditional voodoo. Un-initializing the lock mechanism is
-safe to be called unconditionally even if it was already invoked when the
-CPU died.
+Implement the validation function which tells the core code whether
+parallel bringup is possible:
 
-Remove the invocation of xen_smp_intr_free() as that has been already
-cleaned up in xen_cpu_dead_hvm().
+  1) Valid CPUID leaf for APIC ID retrieval. For non x2APIC systmms leaf
+     0x1 is sufficient, otherwise leaf 0xb or 0x1f must be available.
 
+  2) Prevent parallel bringup on encrypted guests as this requires a
+     different handling of the CPUID leaf retrieval via a call into the
+     trusted firmware module. This is what the #VC trap handler does later
+     on, which is not available during the very early startup.
+
+Originally-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org
 ---
- arch/x86/xen/enlighten_hvm.c |   11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ arch/x86/Kconfig             |    3 +-
+ arch/x86/kernel/cpu/common.c |    6 -----
+ arch/x86/kernel/smpboot.c    |   49 +++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 50 insertions(+), 8 deletions(-)
 
---- a/arch/x86/xen/enlighten_hvm.c
-+++ b/arch/x86/xen/enlighten_hvm.c
-@@ -161,13 +161,12 @@ static int xen_cpu_up_prepare_hvm(unsign
- 	int rc = 0;
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -272,8 +272,9 @@ config X86
+ 	select HAVE_UNSTABLE_SCHED_CLOCK
+ 	select HAVE_USER_RETURN_NOTIFIER
+ 	select HAVE_GENERIC_VDSO
++	select HOTPLUG_PARALLEL			if SMP && X86_64
+ 	select HOTPLUG_SMT			if SMP
+-	select HOTPLUG_SPLIT_STARTUP		if SMP
++	select HOTPLUG_SPLIT_STARTUP		if SMP && X86_32
+ 	select IRQ_FORCED_THREADING
+ 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
+ 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2127,11 +2127,7 @@ static inline void setup_getcpu(int cpu)
+ }
  
+ #ifdef CONFIG_X86_64
+-static inline void ucode_cpu_init(int cpu)
+-{
+-	if (cpu)
+-		load_ucode_ap();
+-}
++static inline void ucode_cpu_init(int cpu) { }
+ 
+ static inline void tss_setup_ist(struct tss_struct *tss)
+ {
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -58,6 +58,7 @@
+ #include <linux/overflow.h>
+ #include <linux/stackprotector.h>
+ #include <linux/cpuhotplug.h>
++#include <linux/mc146818rtc.h>
+ 
+ #include <asm/acpi.h>
+ #include <asm/cacheinfo.h>
+@@ -75,7 +76,7 @@
+ #include <asm/fpu/api.h>
+ #include <asm/setup.h>
+ #include <asm/uv/uv.h>
+-#include <linux/mc146818rtc.h>
++#include <asm/microcode.h>
+ #include <asm/i8259.h>
+ #include <asm/misc.h>
+ #include <asm/qspinlock.h>
+@@ -128,7 +129,6 @@ int arch_update_cpu_topology(void)
+ 	return retval;
+ }
+ 
+-
+ static unsigned int smpboot_warm_reset_vector_count;
+ 
+ static inline void smpboot_setup_warm_reset_vector(unsigned long start_eip)
+@@ -247,6 +247,8 @@ static void notrace start_secondary(void
+ #endif
+ 	cpu_init_exception_handling();
+ 
++	load_ucode_ap();
++
  	/*
--	 * This can happen if CPU was offlined earlier and
--	 * offlining timed out in common_cpu_die().
-+	 * If a CPU was offlined earlier and offlining timed out then the
-+	 * lock mechanism is still initialized. Uninit it unconditionally
-+	 * as it's safe to call even if already uninited. Interrupts and
-+	 * timer have already been handled in xen_cpu_dead_hvm().
- 	 */
--	if (cpu_report_state(cpu) == CPU_DEAD_FROZEN) {
--		xen_smp_intr_free(cpu);
--		xen_uninit_lock_cpu(cpu);
--	}
-+	xen_uninit_lock_cpu(cpu);
+ 	 * Sync point with the hotplug core. Sets the sync state to ALIVE
+ 	 * and waits for the control CPU to release it.
+@@ -1251,6 +1253,49 @@ void __init smp_prepare_cpus_common(void
+ 	set_cpu_sibling_map(0);
+ }
  
- 	if (cpu_acpi_id(cpu) != U32_MAX)
- 		per_cpu(xen_vcpu_id, cpu) = cpu_acpi_id(cpu);
++#ifdef CONFIG_X86_64
++/* Establish whether parallel bringup can be supported. */
++bool __init arch_cpuhp_init_parallel_bringup(void)
++{
++	unsigned int ctrl;
++
++	if (boot_cpu_data.cpuid_level < 0x01) {
++		pr_info("Parallel CPU startup disabled due to lack of CPUID\n");
++		return false;
++	}
++
++	/* Encrypted guests require special CPUID handling. */
++	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
++		pr_info("Parallel CPU startup disabled due to guest state encryption\n");
++		return false;
++	}
++
++	switch (topology_extended_leaf) {
++	case 0x0b:
++		ctrl = STARTUP_APICID_CPUID_0B;
++		break;
++	case 0x1f:
++		ctrl = STARTUP_APICID_CPUID_1F;
++		break;
++	case 0x00:
++		/* For !x2APIC mode 8 bits from leaf 0x01 are sufficient. */
++		if (!x2apic_mode) {
++			ctrl = STARTUP_APICID_CPUID_01;
++			break;
++		}
++		fallthrough;
++	default:
++		pr_info("Parallel CPU startup disabled. Unsupported topology leaf %u\n",
++			topology_extended_leaf);
++		return false;
++	}
++
++	pr_debug("Parallel CPU startup enabled: 0x%08x\n", ctrl);
++	smpboot_control = ctrl;
++	return true;
++}
++#endif
++
+ /*
+  * Prepare for SMP bootup.
+  * @max_cpus: configured maximum number of CPUs, It is a legacy parameter
 
 
