@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA7BC77B72
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.521346.810025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 331E1C77B77
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.521351.810036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAd-0008M0-Nf; Fri, 14 Apr 2023 23:49:35 +0000
+	id 1pnTAe-0008Uy-Gi; Fri, 14 Apr 2023 23:49:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 521346.810025; Fri, 14 Apr 2023 23:49:35 +0000
+Received: by outflank-mailman (output) from mailman id 521351.810036; Fri, 14 Apr 2023 23:49:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAd-0008Lr-Gf; Fri, 14 Apr 2023 23:49:35 +0000
-Received: by outflank-mailman (input) for mailman id 521346;
- Fri, 14 Apr 2023 23:49:33 +0000
+	id 1pnTAe-0008T1-5G; Fri, 14 Apr 2023 23:49:36 +0000
+Received: by outflank-mailman (input) for mailman id 521351;
+ Fri, 14 Apr 2023 23:49:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZCOw=AF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pnT64-0001Th-In
- for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:44:52 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pnT6C-0001Th-NI
+ for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:45:00 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 599e35f4-db1e-11ed-b21e-6b7b168915f2;
- Sat, 15 Apr 2023 01:44:52 +0200 (CEST)
+ id 5e954127-db1e-11ed-b21e-6b7b168915f2;
+ Sat, 15 Apr 2023 01:45:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 599e35f4-db1e-11ed-b21e-6b7b168915f2
-Message-ID: <20230414232310.631170657@linutronix.de>
+X-Inumbo-ID: 5e954127-db1e-11ed-b21e-6b7b168915f2
+Message-ID: <20230414232310.941680232@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1681515891;
+	s=2020; t=1681515899;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=y6SldvuVXq/pw8ptav6ZzZhZk50vNE0+ALorGdATBvE=;
-	b=j7ir4M38uyCqNd0WpGFhlMbHqqP22sIUkP6lTXCI4ZoMelPAhB0ZW3jUKq/qNg7dgtIPyr
-	wAgHvssp340UT3vn/QZsaFN0BbxJz/50Bk2j/ViCY7pmbdjJltpv6UUhTwyesp5uV/hH5R
-	rn30yImLh2MbCenzGtlPdqYodmJQsWXgthmyh3VDgg8IsWfSP8TgZqODKQUJwz+InU8in3
-	FyxZW7Fp+CUcayGzDXYKM02cvf34xnDKNWTxsXl+QFRwELU5xV0mCQa2KjOMor4Q501Rct
-	0HVatbGD4qEO2xAAV9X3ZovODF8RAMi5ZzvUu9hOjJPsLeNkmpDExwTMMJ6FBg==
+	 references:references; bh=PwaT1nVbkmNxpYn2jntunVyX300rI6JOSPoxKblUFxc=;
+	b=J4d36wqGXDsa4D15fuC6bgECzfAAInQki6KA3SUyC98aD0yQW6gcNLFjQOCHcXv2J+orZG
+	5Qmhd0e6dbHL514sP/COcIuWz15soNEsWHzEh1yBv2+hd5B8wqzYOidLR2BE5cayvWqW8Z
+	HTkU8Nrl6+H70MJnTBAZDmHlfDfKJpBLY0P7kmzee0usDqsCKruEINfZUsjihRGa5dTOub
+	nsf1V7hsU0pvXa2Ve2ehvBeS9w4NMv0lT4Qar9j26QhzX8zbcfe2cv28EW7JmGjaOXAvGg
+	fSx2t8XhhVFut65VN9kClCBXCqftJpibwk/DAZDt6leoEUA5kSkPTRcDM8b5qA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1681515891;
+	s=2020e; t=1681515899;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=y6SldvuVXq/pw8ptav6ZzZhZk50vNE0+ALorGdATBvE=;
-	b=Qg+tSuukciCk/31JBTMbNipFvroQgicaNOn31ON18qthuCRxjFkOmjqqsu/6PGW7nvHreJ
-	GQLRpem8ebEejbCw==
+	 references:references; bh=PwaT1nVbkmNxpYn2jntunVyX300rI6JOSPoxKblUFxc=;
+	b=GT9ybsNnlf8a2CqrpgJaThMxA4ODF78eIoN2mtLu9TxUz4hUltbB6uZ6jFavUSEgOGT604
+	TxVe7hxr4awf6HAw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -73,9 +72,8 @@ Cc: x86@kernel.org,
  Paul Menzel <pmenzel@molgen.mpg.de>,
  "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
  Piotr Gorski <lucjan.lucjanov@gmail.com>,
- Guo Ren <guoren@kernel.org>,
- linux-csky@vger.kernel.org,
  David Woodhouse <dwmw@amazon.co.uk>,
+ Mark Rutland <mark.rutland@arm.com>,
  Usama Arif <usama.arif@bytedance.com>,
  Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
@@ -85,6 +83,8 @@ Cc: x86@kernel.org,
  linux-arm-kernel@lists.infradead.org,
  Catalin Marinas <catalin.marinas@arm.com>,
  Will Deacon <will@kernel.org>,
+ Guo Ren <guoren@kernel.org>,
+ linux-csky@vger.kernel.org,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
  linux-mips@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
@@ -93,71 +93,64 @@ Cc: x86@kernel.org,
  Paul Walmsley <paul.walmsley@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  linux-riscv@lists.infradead.org,
- Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>
-Subject: [patch 23/37] csky/smp: Switch to hotplug core state synchronization
+Subject: [patch 28/37] cpu/hotplug: Reset task stack state in _cpu_up()
 References: <20230414225551.858160935@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Apr 2023 01:44:50 +0200 (CEST)
+Date: Sat, 15 Apr 2023 01:44:59 +0200 (CEST)
 
-Switch to the CPU hotplug core state tracking and synchronization
-mechanim. No functional change intended.
+From: David Woodhouse <dwmw@amazon.co.uk>
 
+Commit dce1ca0525bf ("sched/scs: Reset task stack state in bringup_cpu()")
+ensured that the shadow call stack and KASAN poisoning were removed from
+a CPU's stack each time that CPU is brought up, not just once.
+
+This is not incorrect. However, with parallel bringup the idle thread setup
+will happen at a different step. As a consequence the cleanup in
+bringup_cpu() would be too late.
+
+Move the SCS/KASAN cleanup to the generic _cpu_up() function instead,
+which already ensures that the new CPU's stack is available, purely to
+allow for early failure. This occurs when the CPU to be brought up is
+in the CPUHP_OFFLINE state, which should correctly do the cleanup any
+time the CPU has been taken down to the point where such is needed.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Guo Ren <guoren@kernel.org>
-Cc: linux-csky@vger.kernel.org
+Tested-by: Mark Rutland <mark.rutland@arm.com>
+Reviewed-by: Mark Rutland <mark.rutland@arm.com>
 ---
- arch/csky/Kconfig           |    1 +
- arch/csky/include/asm/smp.h |    2 +-
- arch/csky/kernel/smp.c      |    8 ++------
- 3 files changed, 4 insertions(+), 7 deletions(-)
+ kernel/cpu.c |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
---- a/arch/csky/Kconfig
-+++ b/arch/csky/Kconfig
-@@ -96,6 +96,7 @@ config CSKY
- 	select HAVE_REGS_AND_STACK_ACCESS_API
- 	select HAVE_STACKPROTECTOR
- 	select HAVE_SYSCALL_TRACEPOINTS
-+	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
- 	select MAY_HAVE_SPARSE_IRQ
- 	select MODULES_USE_ELF_RELA if MODULES
- 	select OF
---- a/arch/csky/include/asm/smp.h
-+++ b/arch/csky/include/asm/smp.h
-@@ -23,7 +23,7 @@ void __init set_send_ipi(void (*func)(co
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -769,12 +769,6 @@ static int bringup_cpu(unsigned int cpu)
+ 		return -EAGAIN;
  
- int __cpu_disable(void);
+ 	/*
+-	 * Reset stale stack state from the last time this CPU was online.
+-	 */
+-	scs_task_reset(idle);
+-	kasan_unpoison_task_stack(idle);
+-
+-	/*
+ 	 * Some architectures have to walk the irq descriptors to
+ 	 * setup the vector space for the cpu which comes online.
+ 	 * Prevent irq alloc/free across the bringup.
+@@ -1581,6 +1575,12 @@ static int _cpu_up(unsigned int cpu, int
+ 			ret = PTR_ERR(idle);
+ 			goto out;
+ 		}
++
++		/*
++		 * Reset stale stack state from the last time this CPU was online.
++		 */
++		scs_task_reset(idle);
++		kasan_unpoison_task_stack(idle);
+ 	}
  
--void __cpu_die(unsigned int cpu);
-+static inline void __cpu_die(unsigned int cpu) { }
- 
- #endif /* CONFIG_SMP */
- 
---- a/arch/csky/kernel/smp.c
-+++ b/arch/csky/kernel/smp.c
-@@ -291,12 +291,8 @@ int __cpu_disable(void)
- 	return 0;
- }
- 
--void __cpu_die(unsigned int cpu)
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
- {
--	if (!cpu_wait_death(cpu, 5)) {
--		pr_crit("CPU%u: shutdown failed\n", cpu);
--		return;
--	}
- 	pr_notice("CPU%u: shutdown\n", cpu);
- }
- 
-@@ -304,7 +300,7 @@ void arch_cpu_idle_dead(void)
- {
- 	idle_task_exit();
- 
--	cpu_report_death();
-+	cpuhp_ap_report_dead();
- 
- 	while (!secondary_stack)
- 		arch_cpu_idle();
+ 	cpuhp_tasks_frozen = tasks_frozen;
 
 
