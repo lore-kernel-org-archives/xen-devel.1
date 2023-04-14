@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C04C77B72
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.521288.809905 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7700BC77B71
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.521294.809915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTA1-0002kx-NL; Fri, 14 Apr 2023 23:48:57 +0000
+	id 1pnTA7-00033e-V2; Fri, 14 Apr 2023 23:49:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 521288.809905; Fri, 14 Apr 2023 23:48:57 +0000
+Received: by outflank-mailman (output) from mailman id 521294.809915; Fri, 14 Apr 2023 23:49:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTA1-0002kq-KZ; Fri, 14 Apr 2023 23:48:57 +0000
-Received: by outflank-mailman (input) for mailman id 521288;
- Fri, 14 Apr 2023 23:48:57 +0000
+	id 1pnTA7-00033X-Rb; Fri, 14 Apr 2023 23:49:03 +0000
+Received: by outflank-mailman (input) for mailman id 521294;
+ Fri, 14 Apr 2023 23:49:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZCOw=AF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pnT6Q-0000zb-Oh
- for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:45:14 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ id 1pnT68-0000zb-7w
+ for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:44:56 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6639473e-db1e-11ed-8611-37d641c3527e;
- Sat, 15 Apr 2023 01:45:13 +0200 (CEST)
+ id 57995914-db1e-11ed-8611-37d641c3527e;
+ Sat, 15 Apr 2023 01:44:49 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6639473e-db1e-11ed-8611-37d641c3527e
-Message-ID: <20230414232311.441918776@linutronix.de>
+X-Inumbo-ID: 57995914-db1e-11ed-8611-37d641c3527e
+Message-ID: <20230414232310.506665258@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1681515912;
+	s=2020; t=1681515888;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=6cGHgynMBCaHRwYTrISGgGUY8IfBttwd4gSW6/8ncwo=;
-	b=Y6MvVoIRD+b308pDJWowuLkJP8xTk8BgVllbAchtET5SCLxH3pPaTbpOYvBSvJgt29AjQn
-	ezcDEAwpvw4go5HJCn0jDdZCGPT9MLW24qpZKb8kz2KJNNnr6JcyXOPyaUGlM/ANv9N+fq
-	tuEJRuRxzNty3GrkhGsgHYpRhP/0DX3AEiMTFdAHD/hkrve/Z/OGirQHyoZehUi+ZLj2of
-	nh0+zW/XB9E47Zv4MWfj7UgDu31M48dyxxMexXPIhf0Fh2Xfz56PypK/Z4RNZ1QuLpDfkl
-	MzM4X40h1quxb59BK38sroOGy3J6fRyyYS1Nn/XWNH7x+1QZ0XFumeRWVGSB2A==
+	 references:references; bh=BWuCF2CiZKIQbbVy6vgpgYODjXTXdK2iLGuwNDfmq40=;
+	b=f+z8dnbF0VfVZ2drfvyKG7CFHH0pFiyt/pWm7ehfcpt37yeWoaaqrXqvZgx9e/X+XvrZce
+	gt4gtyv6t++LGb/9kB1kGkXRTvx7bPDMmlE2YCfC4bhE+s0E3cJidnKxtsU1uFW28KmFrm
+	Eh1JSahdrCC66cB1rpXpEnDQUWYAaCehtBdvR4JcyEbKg1e1N2/wIL2n3XDGfkKj7+6Kc2
+	i/dgOOZylb3sazc82Iv1WIdzwGBFxWc2QRD+sOwDm8QUeivjB4vTaM4N2GaxbzQoD4goZa
+	9mik80mRNDqag2mcRqOovhsRU7cr3S59unOU29PAZedSzmpwu0Vl+6WwRIUstA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1681515912;
+	s=2020e; t=1681515888;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=6cGHgynMBCaHRwYTrISGgGUY8IfBttwd4gSW6/8ncwo=;
-	b=62z6QxHlYDjrTs4WKqbuHCfVc8G+x+AUIAn0i55mZeGFgkDCFd3an/Sr2oboSn6ZUcOcEh
-	Lf1/KZWBw97ffRDQ==
+	 references:references; bh=BWuCF2CiZKIQbbVy6vgpgYODjXTXdK2iLGuwNDfmq40=;
+	b=HrYkhb/PC8lVyjiszH07tO75RvI9fVkc6wkdtUyyzhBuNuOW308LHInmD5FALuyFMFj8ZV
+	PF23VUQhymsOP5DA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -72,14 +73,14 @@ Cc: x86@kernel.org,
  Paul Menzel <pmenzel@molgen.mpg.de>,
  "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
  Piotr Gorski <lucjan.lucjanov@gmail.com>,
+ Russell King <linux@armlinux.org.uk>,
+ Arnd Bergmann <arnd@arndb.de>,
+ linux-arm-kernel@lists.infradead.org,
  David Woodhouse <dwmw@amazon.co.uk>,
  Usama Arif <usama.arif@bytedance.com>,
  Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
  xen-devel@lists.xenproject.org,
- Russell King <linux@armlinux.org.uk>,
- Arnd Bergmann <arnd@arndb.de>,
- linux-arm-kernel@lists.infradead.org,
  Catalin Marinas <catalin.marinas@arm.com>,
  Will Deacon <will@kernel.org>,
  Guo Ren <guoren@kernel.org>,
@@ -94,145 +95,82 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>
-Subject: [patch 36/37] x86/smpboot/64: Implement
- arch_cpuhp_init_parallel_bringup() and enable it
+Subject: [patch 21/37] ARM: smp: Switch to hotplug core state synchronization
 References: <20230414225551.858160935@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Apr 2023 01:45:12 +0200 (CEST)
+Date: Sat, 15 Apr 2023 01:44:47 +0200 (CEST)
 
-Implement the validation function which tells the core code whether
-parallel bringup is possible:
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
-  1) Valid CPUID leaf for APIC ID retrieval. For non x2APIC systmms leaf
-     0x1 is sufficient, otherwise leaf 0xb or 0x1f must be available.
-
-  2) Prevent parallel bringup on encrypted guests as this requires a
-     different handling of the CPUID leaf retrieval via a call into the
-     trusted firmware module. This is what the #VC trap handler does later
-     on, which is not available during the very early startup.
-
-Originally-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Russell King <linux@armlinux.org.uk>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: linux-arm-kernel@lists.infradead.org
 ---
- arch/x86/Kconfig             |    3 +-
- arch/x86/kernel/cpu/common.c |    6 -----
- arch/x86/kernel/smpboot.c    |   49 +++++++++++++++++++++++++++++++++++++++++--
- 3 files changed, 50 insertions(+), 8 deletions(-)
+ arch/arm/Kconfig           |    1 +
+ arch/arm/include/asm/smp.h |    2 +-
+ arch/arm/kernel/smp.c      |   18 +++++++-----------
+ 3 files changed, 9 insertions(+), 12 deletions(-)
 
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -272,8 +272,9 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
- 	select HAVE_GENERIC_VDSO
-+	select HOTPLUG_PARALLEL			if SMP && X86_64
- 	select HOTPLUG_SMT			if SMP
--	select HOTPLUG_SPLIT_STARTUP		if SMP
-+	select HOTPLUG_SPLIT_STARTUP		if SMP && X86_32
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -124,6 +124,7 @@ config ARM
+ 	select HAVE_SYSCALL_TRACEPOINTS
+ 	select HAVE_UID16
+ 	select HAVE_VIRT_CPU_ACCOUNTING_GEN
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
  	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2127,11 +2127,7 @@ static inline void setup_getcpu(int cpu)
+ 	select MODULES_USE_ELF_REL
+ 	select NEED_DMA_MAP_STATE
+--- a/arch/arm/include/asm/smp.h
++++ b/arch/arm/include/asm/smp.h
+@@ -64,7 +64,7 @@ extern void secondary_startup_arm(void);
+ 
+ extern int __cpu_disable(void);
+ 
+-extern void __cpu_die(unsigned int cpu);
++static inline void __cpu_die(unsigned int cpu) { }
+ 
+ extern void arch_send_call_function_single_ipi(int cpu);
+ extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
+--- a/arch/arm/kernel/smp.c
++++ b/arch/arm/kernel/smp.c
+@@ -289,15 +289,11 @@ int __cpu_disable(void)
  }
  
- #ifdef CONFIG_X86_64
--static inline void ucode_cpu_init(int cpu)
--{
--	if (cpu)
--		load_ucode_ap();
--}
-+static inline void ucode_cpu_init(int cpu) { }
- 
- static inline void tss_setup_ist(struct tss_struct *tss)
- {
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -58,6 +58,7 @@
- #include <linux/overflow.h>
- #include <linux/stackprotector.h>
- #include <linux/cpuhotplug.h>
-+#include <linux/mc146818rtc.h>
- 
- #include <asm/acpi.h>
- #include <asm/cacheinfo.h>
-@@ -75,7 +76,7 @@
- #include <asm/fpu/api.h>
- #include <asm/setup.h>
- #include <asm/uv/uv.h>
--#include <linux/mc146818rtc.h>
-+#include <asm/microcode.h>
- #include <asm/i8259.h>
- #include <asm/misc.h>
- #include <asm/qspinlock.h>
-@@ -128,7 +129,6 @@ int arch_update_cpu_topology(void)
- 	return retval;
- }
- 
--
- static unsigned int smpboot_warm_reset_vector_count;
- 
- static inline void smpboot_setup_warm_reset_vector(unsigned long start_eip)
-@@ -247,6 +247,8 @@ static void notrace start_secondary(void
- #endif
- 	cpu_init_exception_handling();
- 
-+	load_ucode_ap();
-+
- 	/*
- 	 * Sync point with the hotplug core. Sets the sync state to ALIVE
- 	 * and waits for the control CPU to release it.
-@@ -1251,6 +1253,49 @@ void __init smp_prepare_cpus_common(void
- 	set_cpu_sibling_map(0);
- }
- 
-+#ifdef CONFIG_X86_64
-+/* Establish whether parallel bringup can be supported. */
-+bool __init arch_cpuhp_init_parallel_bringup(void)
-+{
-+	unsigned int ctrl;
-+
-+	if (boot_cpu_data.cpuid_level < 0x01) {
-+		pr_info("Parallel CPU startup disabled due to lack of CPUID\n");
-+		return false;
-+	}
-+
-+	/* Encrypted guests require special CPUID handling. */
-+	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
-+		pr_info("Parallel CPU startup disabled due to guest state encryption\n");
-+		return false;
-+	}
-+
-+	switch (topology_extended_leaf) {
-+	case 0x0b:
-+		ctrl = STARTUP_APICID_CPUID_0B;
-+		break;
-+	case 0x1f:
-+		ctrl = STARTUP_APICID_CPUID_1F;
-+		break;
-+	case 0x00:
-+		/* For !x2APIC mode 8 bits from leaf 0x01 are sufficient. */
-+		if (!x2apic_mode) {
-+			ctrl = STARTUP_APICID_CPUID_01;
-+			break;
-+		}
-+		fallthrough;
-+	default:
-+		pr_info("Parallel CPU startup disabled. Unsupported topology leaf %u\n",
-+			topology_extended_leaf);
-+		return false;
-+	}
-+
-+	pr_debug("Parallel CPU startup enabled: 0x%08x\n", ctrl);
-+	smpboot_control = ctrl;
-+	return true;
-+}
-+#endif
-+
  /*
-  * Prepare for SMP bootup.
-  * @max_cpus: configured maximum number of CPUs, It is a legacy parameter
+- * called on the thread which is asking for a CPU to be shutdown -
+- * waits until shutdown has completed, or it is timed out.
++ * called on the thread which is asking for a CPU to be shutdown after the
++ * shutdown completed.
+  */
+-void __cpu_die(unsigned int cpu)
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
+ {
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_err("CPU%u: cpu didn't die\n", cpu);
+-		return;
+-	}
+ 	pr_debug("CPU%u: shutdown\n", cpu);
+ 
+ 	clear_tasks_mm_cpumask(cpu);
+@@ -337,11 +333,11 @@ void arch_cpu_idle_dead(void)
+ 	flush_cache_louis();
+ 
+ 	/*
+-	 * Tell __cpu_die() that this CPU is now safe to dispose of.  Once
+-	 * this returns, power and/or clocks can be removed at any point
+-	 * from this CPU and its cache by platform_cpu_kill().
++	 * Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose
++	 * of. Once this returns, power and/or clocks can be removed at
++	 * any point from this CPU and its cache by platform_cpu_kill().
+ 	 */
+-	(void)cpu_report_death();
++	cpuhp_ap_report_dead();
+ 
+ 	/*
+ 	 * Ensure that the cache lines associated with that completion are
 
 
