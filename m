@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 331E1C77B77
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.521351.810036 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBDA5C77B71
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Apr 2023 23:49:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.521347.810030 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAe-0008Uy-Gi; Fri, 14 Apr 2023 23:49:36 +0000
+	id 1pnTAe-0008RI-3H; Fri, 14 Apr 2023 23:49:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 521351.810036; Fri, 14 Apr 2023 23:49:36 +0000
+Received: by outflank-mailman (output) from mailman id 521347.810030; Fri, 14 Apr 2023 23:49:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pnTAe-0008T1-5G; Fri, 14 Apr 2023 23:49:36 +0000
-Received: by outflank-mailman (input) for mailman id 521351;
- Fri, 14 Apr 2023 23:49:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pnTAd-0008Qb-So; Fri, 14 Apr 2023 23:49:35 +0000
+Received: by outflank-mailman (input) for mailman id 521347;
+ Fri, 14 Apr 2023 23:49:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZCOw=AF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pnT6C-0001Th-NI
- for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:45:00 +0000
+ id 1pnT6N-0000zb-9T
+ for xen-devel@lists.xenproject.org; Fri, 14 Apr 2023 23:45:11 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e954127-db1e-11ed-b21e-6b7b168915f2;
- Sat, 15 Apr 2023 01:45:00 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6448a52f-db1e-11ed-8611-37d641c3527e;
+ Sat, 15 Apr 2023 01:45:09 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e954127-db1e-11ed-b21e-6b7b168915f2
-Message-ID: <20230414232310.941680232@linutronix.de>
+X-Inumbo-ID: 6448a52f-db1e-11ed-8611-37d641c3527e
+Message-ID: <20230414232311.316352541@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1681515899;
+	s=2020; t=1681515909;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=PwaT1nVbkmNxpYn2jntunVyX300rI6JOSPoxKblUFxc=;
-	b=J4d36wqGXDsa4D15fuC6bgECzfAAInQki6KA3SUyC98aD0yQW6gcNLFjQOCHcXv2J+orZG
-	5Qmhd0e6dbHL514sP/COcIuWz15soNEsWHzEh1yBv2+hd5B8wqzYOidLR2BE5cayvWqW8Z
-	HTkU8Nrl6+H70MJnTBAZDmHlfDfKJpBLY0P7kmzee0usDqsCKruEINfZUsjihRGa5dTOub
-	nsf1V7hsU0pvXa2Ve2ehvBeS9w4NMv0lT4Qar9j26QhzX8zbcfe2cv28EW7JmGjaOXAvGg
-	fSx2t8XhhVFut65VN9kClCBXCqftJpibwk/DAZDt6leoEUA5kSkPTRcDM8b5qA==
+	 references:references; bh=2PTnDdSuwes/9NjD8Pm7hXlACOxFTN9vJCNjWOfgGXM=;
+	b=Jh6ZM0Us9GGh285BMnb5fEm77rslh++J6j/QuRkHBnu0IJ3u2WPmnGe/3gdgkhs+Itn6YC
+	EYm2JHM+HCoiKXud+mnLR3pzE3sn62xS6OTtxoSRYTybybUo7HLhqrcnKqV1RwxPAi5wc5
+	OBp150tG8AHyoMw6+86zMyjFChURpnILiUkhTuUlpHCRtOIbCa3VMT62a8kcqkB8R+gKQ4
+	U9tfXpB5IVu1MhpvFCVN68arP6yea+vniJ2RVD3n3fNQwQKszlDZIcpnpbeZf4M7nBLa8W
+	ZFeGomntJTFI5LAn96fL2tniH8jRiNy2rM7ZxO27HO46gpoe/qq365pH/j/4pA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1681515899;
+	s=2020e; t=1681515909;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=PwaT1nVbkmNxpYn2jntunVyX300rI6JOSPoxKblUFxc=;
-	b=GT9ybsNnlf8a2CqrpgJaThMxA4ODF78eIoN2mtLu9TxUz4hUltbB6uZ6jFavUSEgOGT604
-	TxVe7hxr4awf6HAw==
+	 references:references; bh=2PTnDdSuwes/9NjD8Pm7hXlACOxFTN9vJCNjWOfgGXM=;
+	b=JDEmTRQRnlWI2RxVIaPHzb6Y3x+BSeHE+/1j/fasD5aAeXT8ZfKeZ96xHuB6wXG5qxyGWZ
+	eqmeypWBVFC7DyAA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -73,7 +73,6 @@ Cc: x86@kernel.org,
  "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
  Piotr Gorski <lucjan.lucjanov@gmail.com>,
  David Woodhouse <dwmw@amazon.co.uk>,
- Mark Rutland <mark.rutland@arm.com>,
  Usama Arif <usama.arif@bytedance.com>,
  Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
@@ -93,64 +92,33 @@ Cc: x86@kernel.org,
  Paul Walmsley <paul.walmsley@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  linux-riscv@lists.infradead.org,
+ Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>
-Subject: [patch 28/37] cpu/hotplug: Reset task stack state in _cpu_up()
+Subject: [patch 34/37] x86/cpu/amd; Invoke detect_extended_topology_early() on
+ boot CPU
 References: <20230414225551.858160935@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 15 Apr 2023 01:44:59 +0200 (CEST)
+Date: Sat, 15 Apr 2023 01:45:08 +0200 (CEST)
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+The early detection stores the extended topology leaf number which is
+required for parallel hotplug.
 
-Commit dce1ca0525bf ("sched/scs: Reset task stack state in bringup_cpu()")
-ensured that the shadow call stack and KASAN poisoning were removed from
-a CPU's stack each time that CPU is brought up, not just once.
-
-This is not incorrect. However, with parallel bringup the idle thread setup
-will happen at a different step. As a consequence the cleanup in
-bringup_cpu() would be too late.
-
-Move the SCS/KASAN cleanup to the generic _cpu_up() function instead,
-which already ensures that the new CPU's stack is available, purely to
-allow for early failure. This occurs when the CPU to be brought up is
-in the CPUHP_OFFLINE state, which should correctly do the cleanup any
-time the CPU has been taken down to the point where such is needed.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Tested-by: Mark Rutland <mark.rutland@arm.com>
-Reviewed-by: Mark Rutland <mark.rutland@arm.com>
 ---
- kernel/cpu.c |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ arch/x86/kernel/cpu/amd.c |    2 ++
+ 1 file changed, 2 insertions(+)
 
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -769,12 +769,6 @@ static int bringup_cpu(unsigned int cpu)
- 		return -EAGAIN;
- 
- 	/*
--	 * Reset stale stack state from the last time this CPU was online.
--	 */
--	scs_task_reset(idle);
--	kasan_unpoison_task_stack(idle);
--
--	/*
- 	 * Some architectures have to walk the irq descriptors to
- 	 * setup the vector space for the cpu which comes online.
- 	 * Prevent irq alloc/free across the bringup.
-@@ -1581,6 +1575,12 @@ static int _cpu_up(unsigned int cpu, int
- 			ret = PTR_ERR(idle);
- 			goto out;
+--- a/arch/x86/kernel/cpu/amd.c
++++ b/arch/x86/kernel/cpu/amd.c
+@@ -692,6 +692,8 @@ static void early_init_amd(struct cpuinf
  		}
-+
-+		/*
-+		 * Reset stale stack state from the last time this CPU was online.
-+		 */
-+		scs_task_reset(idle);
-+		kasan_unpoison_task_stack(idle);
  	}
  
- 	cpuhp_tasks_frozen = tasks_frozen;
++	detect_extended_topology_early(c);
++
+ 	if (cpu_has(c, X86_FEATURE_TOPOEXT))
+ 		smp_num_siblings = ((cpuid_ebx(0x8000001e) >> 8) & 0xff) + 1;
+ }
 
 
