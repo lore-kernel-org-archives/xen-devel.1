@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E1AAC77B77
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Apr 2023 12:14:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.522033.811175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45656C77B76
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Apr 2023 12:14:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.522032.811164 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poNkb-0001HN-0F; Mon, 17 Apr 2023 12:14:29 +0000
+	id 1poNkY-0000yp-HI; Mon, 17 Apr 2023 12:14:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 522033.811175; Mon, 17 Apr 2023 12:14:28 +0000
+Received: by outflank-mailman (output) from mailman id 522032.811164; Mon, 17 Apr 2023 12:14:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poNka-0001HE-TZ; Mon, 17 Apr 2023 12:14:28 +0000
-Received: by outflank-mailman (input) for mailman id 522033;
- Mon, 17 Apr 2023 12:14:27 +0000
+	id 1poNkY-0000yi-Dn; Mon, 17 Apr 2023 12:14:26 +0000
+Received: by outflank-mailman (input) for mailman id 522032;
+ Mon, 17 Apr 2023 12:14:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=696H=AI=citrix.com=prvs=464f2b76b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1poNkY-0000xC-Vw
- for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 12:14:26 +0000
+ id 1poNkX-0000xC-0t
+ for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 12:14:25 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6479c75b-dd19-11ed-8611-37d641c3527e;
- Mon, 17 Apr 2023 14:14:25 +0200 (CEST)
+ id 61fdfbb7-dd19-11ed-8611-37d641c3527e;
+ Mon, 17 Apr 2023 14:14:22 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,206 +38,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6479c75b-dd19-11ed-8611-37d641c3527e
+X-Inumbo-ID: 61fdfbb7-dd19-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1681733664;
+  d=citrix.com; s=securemail; t=1681733662;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Ew+rB9d1GFmavjWRsz8+3kGUcmwxQ2u2fM4aYYZINb4=;
-  b=e/ow2rp1E2xrM7btd1qpiSEkma/y2KWlQ64rBQJRF4SoeAY681cceWwZ
-   z6QNGkuXfcjuNYamDiME3LQpYSydCmhNuNCzga+XqZxzn5CD8bnFNM260
-   8vmSsADNpDn6E+R9adlyUZz56L6SDgl6wymQqZp1wYpNzm055MrCFMpvJ
-   s=;
+  bh=WOSwA4Gw3YJcS+3VeWA2TjaLAqOkde+i62MNsG9fL/4=;
+  b=R56YTCNKt/8X7mO8MwYZL5CSyLl56X8pPaY7Txx1ycW/atagL8MBX+xd
+   3O36ulpXs3ZD7V13JBdNBwrlWTS8xZKJ3Tfnjdsnkgd9p90jvIuO0d6s2
+   IDXyAHLF13YKcYytSXLtQ+qVdZDBgAkNC1c1fX2fahCZvHuhyOV2K9a30
+   A=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 105144452
+X-MesageID: 105144451
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:nPoUKaJ8dejJkM8MFE+RoJUlxSXFcZb7ZxGr2PjKsXjdYENSgTFWm
- GpOWGnSOvyLM2f8LYx1bY7l/RhU7ZWDz9dqQQVlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpJrfPSwP9TlK6q4mhA4gVhPakjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5FRkFL/
- 9E5dglONDvb3e+H8oPrds5F05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpNU6bC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TTHZgMwhrE+
- ziuE2LRITIcMfiT4xW80XOW3M3UunuiW8UiPejtnhJtqALKnTFCYPEMbnOrrP/8hkOgVtZ3L
- 00P5jFovaU07FasTNT2Q1u/unHslh0bXcBZH6sl6QWO4q3O6g2dCy4PSTspVTA9nJZoH3pwj
- AbPxo63Q2U169V5VE5x6J+m6hO3MwU0c1ZBPwRcFwY00eiznKYa20enoslYLEKlsjHkMWiuk
- 2nW93lj1ul7Yd0jjPviow2e6964jt2QF1NuuF2KNo6wxlkhDLNJcbBE/rQyARxoCI+CBmeMs
- 3Ef8yR1xLBfVMrd/MBhrQhkIV1I2xpmGGeG6bKXN8N9nwlBAlb6FWyq3BlwJV1yLuEPciLzb
- UnYtGt5vcEDZSX1NfcqPt3pV6zGKJQM8vy8D5jpgidmOMAtJGdrAgk1DaJv44wduBd1yvxuU
- XtqWc2tEWwbGcxa8dZCfM9EieVD7nlnlQvuqWXTk0zPPUy2OCTEFt/o8TKmMogE0U9ziF+Nq
- 4wAbJPalUw3vS+XSnC/zLP/5GsidRATba0aYeQOJoZv/iIO9LkdNsLs
-IronPort-HdrOrdr: A9a23:iUwiKaEgP1UZ1KT/pLqELMeALOsnbusQ8zAXPiBKJCC9E/bo8v
- xG+c5w6faaslkssR0b9+xoW5PwI080l6QU3WB5B97LMDUO0FHCEGgI1/qA/9SPIUzDHu4279
- YbT0B9YueAcGSTW6zBkXWF+9VL+qj5zEix792uq0uE1WtRGtldBwESMHf9LmRGADNoKLAeD5
- Sm6s9Ot1ObCA8qhpTSPAhiYwDbzee77a7bXQ==
-X-Talos-CUID: =?us-ascii?q?9a23=3AOe38jWhWonu2y6/LPwG1wDm0pzJuQDr9yX39AhG?=
- =?us-ascii?q?BSjxCEOeYeG2hqJ9Dup87?=
-X-Talos-MUID: 9a23:qp6IBwkdYm03/lQX3dkJdnpBF8Ftx6iEJ3kukK9cmdKjbXVzfAe02WE=
+IronPort-Data: A9a23:IeHEXaxETLSf45916HR6t+fDxirEfRIJ4+MujC+fZmUNrF6WrkUBn
+ GQdUG6CP/jYMWGgcopxaY+18ElUuZ+Ey95lSlBo+SAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTrafYEidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw//F+UIHUMja4mtC5QRiPK8T5TcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KVMJ1
+ fkSBRFTV1PZrLrszYOJe7lQoe12eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwNwx/E+
+ j6bpgwVBDkXOYe6yTm760ugqdXRkQjlVpgLT4eno6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WN1WCeQ2rh6Mzqn85ByQDWwJCDVGbbQOr9QqTDYn0
+ luImdLBBjF1trCRD3WH+d+8kzS2PiQEKH4YUgUNRwAF/trLrZk6i1TESdMLOKS4lMHvEDf8h
+ TWDtjEjhq47hNQOka68+DjvoRihu5zIRQ4d/RjMUySu6QYRTIy4Y42l73DL4PAGK5yWJnGeu
+ FAUls7Y6/oBZaxhjwTUHr9LRuvwoa/YbnuF2wUH84QdGyqFyTmDeIp9wW9HZx1CapwJSA3YM
+ HP0kFYEjHNMB0dGfZObcqroVZRzkfOxSIW5PhzHRoEQO8YsLWdr6AkrPBfNhD61zSDAhIllY
+ f+mndCQ4WH24EiN5B6/XK8j3LAi3UjSLkuDFMmgn3xLPVdzDUN5qIvp03PUNIjVFIve/G3oH
+ y93bqNmMSl3XuzkeTXw+oUON10MJnVTLcmo+5UJKbbbf1c5QD1J5xrtLVQJItUNokiovr2Qo
+ iHVtrFwkzITekEr2S3VMys+OdsDrL50rG4hPDxEAGtEL0MLON71hI9GLstfQFXS3LA7pRKCZ
+ 6VfKpro7zUmYmivxgnxmrGn9NQ4K0/z1VzXV8dnCRBmF6Ndq8Xy0oeMVmPSGOMmVHPfWRcWy
+ 1F46j7mfA==
+IronPort-HdrOrdr: A9a23:lknfQKPhoAAYE8BcTgWjsMiBIKoaSvp037BK7S1MoH1uA6mlfq
+ WV9sjzuiWatN98Yh8dcLO7Scu9qBHnlaKdiLN5VduftWHd01dAR7sSjrcKrQeAJ8X/nNQtr5
+ uJccJFeaDN5Y4Rt7eH3OG6eexQv+Vu6MqT9IPjJ+8Gd3ATV0lnhT0JbTqzIwlNayRtI4E2L5
+ aY7tovnUvaRZxGBv7LYEXsRoL41qT2qK4=
+X-Talos-CUID: 9a23:hHYlyWP/5TCIwu5Dam5H8UQ5O54cMSf2lC3dEn2JWVpOYejA
+X-Talos-MUID: 9a23:pQoADQZkwAsF0+BTujK3oTFhCt5R74uUFkwmj5scopK+Knkl
 X-IronPort-AV: E=Sophos;i="5.99,204,1677560400"; 
-   d="scan'208";a="105144452"
+   d="scan'208";a="105144451"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk
-	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v2 3/3] xen/livepatch: Fix .altinstructions safety checks
-Date: Mon, 17 Apr 2023 13:13:57 +0100
-Message-ID: <20230417121357.3738919-4-andrew.cooper3@citrix.com>
+	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>,
+	"Stefano Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+	"Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH v2 1/3] xen/ELF: Fix ELF32 PRI formatters
+Date: Mon, 17 Apr 2023 13:13:55 +0100
+Message-ID: <20230417121357.3738919-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230417121357.3738919-1-andrew.cooper3@citrix.com>
 References: <20230417121357.3738919-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-The prior check has && vs || mixups, making it tautologically false and thus
-providing no safety at all.  There are boundary errors too.
+It is rude to hide width formatting inside a PRI* macro, doubly so when it's
+only in one bitness of the macro.
 
-First start with a comment describing how the .altinstructions and
-.altinstr_replacement sections interact, and perform suitable cross-checking.
+However its fully buggy when all the users use %#"PRI because then it expands
+to the common trap of %#08x which does not do what the author intends.
 
-Second, rewrite the alt_instr loop entirely from scratch.  Origin sites have
-non-zero size, and must be fully contained within the livepatches .text
-section(s).  Any non-zero sized replacements must be fully contained within
-the .altinstr_replacement section.
+Switch the ELF PRI formatters to use plain integer PRI's, and move the width
+formatting to those callers where it matters.
 
-Fixes: f8a10174e8b1 ("xsplice: Add support for alternatives")
+No practical change.
+
+Fixes: 7597fabca76e ("livepatch: Include sizes when an mismatch occurs")
+Fixes: 380b229634f8 ("xsplice: Implement payload loading")
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 CC: Ross Lagerwall <ross.lagerwall@citrix.com>
-
-v2:
- * Rebase over prior patches to keep the ARM build working
- * Tweak commit message and comments for clarity
-
-As a further observation, .altinstr_replacement shouldn't survive beyond its
-use in apply_alternatives(), but the disp32 relative references (for x86 at
-least) in alt_instr force .altinstr_replacement to be close to the payload
-while being applied.
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/common/livepatch.c       | 68 ++++++++++++++++++++++++++++++++----
- xen/include/xen/elfstructs.h |  2 ++
- 2 files changed, 64 insertions(+), 6 deletions(-)
+ xen/common/livepatch_elf.c   | 6 +++---
+ xen/include/xen/elfstructs.h | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index c10ab1f374e0..004b5a436569 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -803,28 +803,84 @@ static int prepare_payload(struct payload *payload,
-     if ( sec )
-     {
- #ifdef CONFIG_HAS_ALTERNATIVE
-+        /*
-+         * (As of April 2023), Alternatives are formed of:
-+         * - An .altinstructions section with an array of struct alt_instr's.
-+         * - An .altinstr_replacement section containing instructions.
-+         *
-+         * An individual alt_instr contains:
-+         * - An orig reference, pointing into .text with a nonzero length
-+         * - A repl reference, pointing into .altinstr_replacement
-+         *
-+         * It is legal to have zero-length replacements, meaning it is legal
-+         * for the .altinstr_replacement section to be empty too.  An
-+         * implementation detail means that a zero-length replacement's repl
-+         * reference will still be in the .altinstr_replacement section.
-+         */
-+        const struct livepatch_elf_sec *repl_sec;
-         struct alt_instr *a, *start, *end;
- 
-         if ( !section_ok(elf, sec, sizeof(*a)) )
-             return -EINVAL;
- 
-+        /* Tolerate an empty .altinstructions section... */
-+        if ( sec->sec->sh_size == 0 )
-+            goto alt_done;
-+
-+        /* ... but otherwise, there needs to be something to alter... */
-+        if ( payload->text_size == 0 )
-+        {
-+            printk(XENLOG_ERR LIVEPATCH "%s Alternatives provided, but no .text\n",
-+                   elf->name);
-+            return -EINVAL;
-+        }
-+
-+        /* ... and something to be altered to. */
-+        repl_sec = livepatch_elf_sec_by_name(elf, ".altinstr_replacement");
-+        if ( !repl_sec )
-+        {
-+            printk(XENLOG_ERR LIVEPATCH "%s .altinstructions provided, but no .altinstr_replacement\n",
-+                   elf->name);
-+            return -EINVAL;
-+        }
-+
-         start = sec->load_addr;
-         end = sec->load_addr + sec->sec->sh_size;
- 
-         for ( a = start; a < end; a++ )
-         {
--            const void *instr = ALT_ORIG_PTR(a);
--            const void *replacement = ALT_REPL_PTR(a);
-+            const void *orig = ALT_ORIG_PTR(a);
-+            const void *repl = ALT_REPL_PTR(a);
-+
-+            /* orig must be fully within .text. */
-+            if ( orig               < payload->text_addr ||
-+                 a->orig_len        > payload->text_size ||
-+                 orig + a->orig_len > payload->text_addr + payload->text_size )
-+            {
-+                printk(XENLOG_ERR LIVEPATCH
-+                       "%s Alternative orig %p+%#x outside payload text %p+%#zx\n",
-+                       elf->name, orig, a->orig_len,
-+                       payload->text_addr, payload->text_size);
-+                return -EINVAL;
-+            }
- 
--            if ( (instr < region->start && instr >= region->end) ||
--                 (replacement < region->start && replacement >= region->end) )
-+            /*
-+             * repl must be fully within .altinstr_replacement, even if the
-+             * replacement and the section happen to both have zero length.
-+             */
-+            if ( repl               < repl_sec->load_addr ||
-+                 a->repl_len        > repl_sec->sec->sh_size ||
-+                 repl + a->repl_len > repl_sec->load_addr + repl_sec->sec->sh_size )
-             {
--                printk(XENLOG_ERR LIVEPATCH "%s Alt patching outside payload: %p\n",
--                       elf->name, instr);
-+                printk(XENLOG_ERR LIVEPATCH
-+                       "%s Alternative repl %p+%#x outside .altinstr_replacement %p+%#"PRIxElfWord"\n",
-+                       elf->name, repl, a->repl_len,
-+                       repl_sec->load_addr, repl_sec->sec->sh_size);
-                 return -EINVAL;
+diff --git a/xen/common/livepatch_elf.c b/xen/common/livepatch_elf.c
+index 45d73912a3cd..d37a7af84be6 100644
+--- a/xen/common/livepatch_elf.c
++++ b/xen/common/livepatch_elf.c
+@@ -310,12 +310,12 @@ int livepatch_elf_resolve_symbols(struct livepatch_elf *elf)
+                     break;
+                 }
              }
+-            dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Undefined symbol resolved: %s => %#"PRIxElfAddr"\n",
++            dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Undefined symbol resolved: %s => 0x%08"PRIxElfAddr"\n",
+                     elf->name, elf->sym[i].name, st_value);
+             break;
+ 
+         case SHN_ABS:
+-            dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Absolute symbol: %s => %#"PRIxElfAddr"\n",
++            dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Absolute symbol: %s => 0x%08"PRIxElfAddr"\n",
+                     elf->name, elf->sym[i].name, sym->st_value);
+             break;
+ 
+@@ -344,7 +344,7 @@ int livepatch_elf_resolve_symbols(struct livepatch_elf *elf)
+ 
+             st_value += (unsigned long)elf->sec[idx].load_addr;
+             if ( elf->sym[i].name )
+-                dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Symbol resolved: %s => %#"PRIxElfAddr" (%s)\n",
++                dprintk(XENLOG_DEBUG, LIVEPATCH "%s: Symbol resolved: %s => 0x%08"PRIxElfAddr" (%s)\n",
+                        elf->name, elf->sym[i].name,
+                        st_value, elf->sec[idx].name);
          }
-         apply_alternatives(start, end);
-+    alt_done:;
- #else
-         printk(XENLOG_ERR LIVEPATCH "%s: We don't support alternative patching\n",
-                elf->name);
 diff --git a/xen/include/xen/elfstructs.h b/xen/include/xen/elfstructs.h
-index 3124469faeb4..eb6b87a823a8 100644
+index 06e6f87c3d80..3124469faeb4 100644
 --- a/xen/include/xen/elfstructs.h
 +++ b/xen/include/xen/elfstructs.h
-@@ -563,6 +563,7 @@ typedef struct {
+@@ -561,8 +561,8 @@ typedef struct {
+ #endif
+ 
  #if defined(ELFSIZE) && (ELFSIZE == 32)
- #define PRIxElfAddr 	PRIx32
- #define PRIuElfWord 	PRIu32
-+#define PRIxElfWord 	PRIx32
+-#define PRIxElfAddr	"08x"
+-#define PRIuElfWord	"8u"
++#define PRIxElfAddr 	PRIx32
++#define PRIuElfWord 	PRIu32
  
  #define Elf_Ehdr	Elf32_Ehdr
  #define Elf_Phdr	Elf32_Phdr
-@@ -591,6 +592,7 @@ typedef struct {
- #elif defined(ELFSIZE) && (ELFSIZE == 64)
- #define PRIxElfAddr	PRIx64
- #define PRIuElfWord	PRIu64
-+#define PRIxElfWord	PRIx64
- 
- #define Elf_Ehdr	Elf64_Ehdr
- #define Elf_Phdr	Elf64_Phdr
 -- 
 2.30.2
 
