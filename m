@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B03C7EE21
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0592BC7EE45
 	for <xen-devel@archiver.kernel.org>; Mon, 17 Apr 2023 20:53:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.522334.811631 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.522320.811574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poVr9-0006rm-Vb; Mon, 17 Apr 2023 20:53:47 +0000
+	id 1poVr5-0005Xd-Sm; Mon, 17 Apr 2023 20:53:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 522334.811631; Mon, 17 Apr 2023 20:53:47 +0000
+Received: by outflank-mailman (output) from mailman id 522320.811574; Mon, 17 Apr 2023 20:53:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poVr9-0006mq-Kc; Mon, 17 Apr 2023 20:53:47 +0000
-Received: by outflank-mailman (input) for mailman id 522334;
- Mon, 17 Apr 2023 20:52:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1poVr5-0005XW-Po; Mon, 17 Apr 2023 20:53:43 +0000
+Received: by outflank-mailman (input) for mailman id 522320;
+ Mon, 17 Apr 2023 20:52:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9RIN=AI=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1poVqM-0005NG-6g
- for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 20:52:58 +0000
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [2607:f8b0:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d3f0fd64-dd61-11ed-8611-37d641c3527e;
- Mon, 17 Apr 2023 22:52:56 +0200 (CEST)
-Received: by mail-pl1-x635.google.com with SMTP id p17so16169835pla.3
- for <xen-devel@lists.xenproject.org>; Mon, 17 Apr 2023 13:52:56 -0700 (PDT)
+ id 1poVqB-0005M2-US
+ for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 20:52:48 +0000
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [2607:f8b0:4864:20::62c])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce3f57a9-dd61-11ed-b21e-6b7b168915f2;
+ Mon, 17 Apr 2023 22:52:47 +0200 (CEST)
+Received: by mail-pl1-x62c.google.com with SMTP id d15so10117808pll.12
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Apr 2023 13:52:46 -0700 (PDT)
 Received: from fedora.hsd1.ca.comcast.net ([2601:644:937f:7f20::c139])
  by smtp.googlemail.com with ESMTPSA id
- h7-20020a17090ac38700b0022335f1dae2sm7609707pjt.22.2023.04.17.13.52.53
+ h7-20020a17090ac38700b0022335f1dae2sm7609707pjt.22.2023.04.17.13.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Apr 2023 13:52:54 -0700 (PDT)
+ Mon, 17 Apr 2023 13:52:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3f0fd64-dd61-11ed-8611-37d641c3527e
+X-Inumbo-ID: ce3f57a9-dd61-11ed-b21e-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681764775; x=1684356775;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7rEN7TkKGGrS4Nr1e9+VSo1FDhdsaSEXyIULzlMdAE4=;
-        b=EY4pAo5dPiMdURcOVQM/Apa82VCO0I/XR1aYYt5qSz76HGumyOhUfKwA9+Mr5OFHh6
-         y4qX3lmzBRH5sE5hiL3G5H7+P1vU90VNiEuutpY92Aii8KdV81S7nJ0QBzccPQA4L2A1
-         H0r+gFj2e0wYN/AG4aVILv2cjCWqAiomeMPXPkWjszJF01iQ5TmXH8Bsz45QUOgwxoQ4
-         sHC8DrgU25+a1fsqdhglJSyR11j/cBOYD1x2MxJDA6rfBM+Ci8Y+wWCZicg642iTcaFB
-         y1U70avkZLTukuwNbayq0JR0dDmctnOUY0ghxZuZ1egx4BqGjtzmW9DXZrJYTWGZ5wwv
-         sRpQ==
+        d=gmail.com; s=20221208; t=1681764765; x=1684356765;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hd0eSPgOtTAWwT17PjaULR/3wkbhGTdpKJdeXsj3/Vw=;
+        b=pldku0ysKEp0NOEJOd7l0dIaF0yyGvAqpPlnmph3EM3Z2d65YTU4pF9c8hRBI8SIkB
+         bXZgcndrjQg15zyEZxLW+H7cAmzYTJGKbe6hTNRu88cjrehCSqACdUD1N8GZKEqBE4Xp
+         FwmFpHRnoIb29o3voauSnQ6p7drjWK4VEEwhJEits2ZcgZwb7+ryqE7mhLT9s2Dr91lB
+         24kMEEC0owKF37MtG1/RM5nwSQTWlS0iZbYOKzR4iyZZCfaJAgJ4qZTiCg2KEwK1Bku2
+         sGcyojF3egYr4Kr1rOZRroFrhK9ZnYopo4hTv+rSWBcsF96wp6BJQzFP7J0YdZ6544dh
+         BRmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681764775; x=1684356775;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=7rEN7TkKGGrS4Nr1e9+VSo1FDhdsaSEXyIULzlMdAE4=;
-        b=XD7NH1BpGaiMI6QZSq1yUzW019cL7ZibUWDL4abYOVIetra1c0anczP6u1JWIzGlST
-         iOY6GGhGHlIkTwrUwwLW97DwybFn/bSO8BZ++eG4UQ3xTjYvwVsNrKGZeugA5I4Fe2jY
-         nSN5dnyKxUd11ZwvZMmYgy6A7hFliWagezKSo+WyHeym+M4tZAFKHVbuOLeOy44P6EtB
-         IJmTM711bCfUGaDa9h04NMNS7SODH/HN/TEoXF8N3pkXSpIQjnPwv3isxR4x+1QnX25b
-         Lmhq5BIsX0a4B0wCkRNOVwbWjIUFbaUiOrz0Nq7LRaXWEF7V6/3GzONbFBgZKIVj5is+
-         FJqw==
-X-Gm-Message-State: AAQBX9e4H+gI/3K1mCAtsOAB2MpHae8iP26ysEROoNeuDuef2NcVKtw0
-	pG0jbSjk2TXcN0hb6FfrZX8=
-X-Google-Smtp-Source: AKy350Yghynh+/JYw1Y4OeSQkY97RuGOXV9v1JZPlpoHn0H6WhBdjqt/CneUg+QzYmLvk18Z1w5zNw==
-X-Received: by 2002:a05:6a20:394f:b0:ef:b02a:b35b with SMTP id r15-20020a056a20394f00b000efb02ab35bmr6833020pzg.0.1681764775054;
-        Mon, 17 Apr 2023 13:52:55 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1681764765; x=1684356765;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=hd0eSPgOtTAWwT17PjaULR/3wkbhGTdpKJdeXsj3/Vw=;
+        b=Odt6gaH8KiAVRUICPaxDLZZgiRPjJQ6GF2iXCYxmDCBsM8XrXdCwyT48hjejjdnA57
+         oDFfMM7eV89lM33dsmDLFk7xyoWu9YBHKAnQ7Xj113v+uWKncbbRGMLAUnaZqBupjO61
+         EncoWY5O9/zf87XyETB7ofDnkC0K+ox2e3X5VCGRBWX5Iwbu84UBGNPW8SAtwgMMR5Dd
+         eczwS/Mv0neEmEcBq8wVlVN390kJP46wTmw3AxTYq2r4BKc750KJA753Mu+suNtfBOk+
+         WOef4EBgXNixc7ZgyjmImSEeGXiBaI1XacZs2i+zomK/ak7oRj/TIN+8x3h0B4X6bofZ
+         Mcww==
+X-Gm-Message-State: AAQBX9dRKVPWIUV7pWAcgxDX63jokAAKqAB/SU1r567DaCUnpgPBYnKc
+	iFpZvfWIPBUtS7fnkalVEqg=
+X-Google-Smtp-Source: AKy350bJ4sdY66hQiY/gbzNJFaJpsyj9BEPw5KYAOTG4tZNrVmb2RliejTZYzbSXKDavSzAED/FXaQ==
+X-Received: by 2002:a17:90b:684:b0:246:f8a8:af02 with SMTP id m4-20020a17090b068400b00246f8a8af02mr15620340pjz.5.1681764765269;
+        Mon, 17 Apr 2023 13:52:45 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -97,90 +96,102 @@ Cc: linux-mm@kvack.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Subject: [PATCH 07/33] mm: Convert ptlock_ptr() to use ptdescs
-Date: Mon, 17 Apr 2023 13:50:22 -0700
-Message-Id: <20230417205048.15870-8-vishal.moola@gmail.com>
+Subject: [PATCH 00/33] Split ptdesc from struct page
+Date: Mon, 17 Apr 2023 13:50:15 -0700
+Message-Id: <20230417205048.15870-1-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230417205048.15870-1-vishal.moola@gmail.com>
-References: <20230417205048.15870-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This removes some direct accesses to struct page, working towards
-splitting out struct ptdesc from struct page.
+The MM subsystem is trying to shrink struct page. This patchset
+introduces a memory descriptor for page table tracking - struct ptdesc.
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
----
- arch/x86/xen/mmu_pv.c |  2 +-
- include/linux/mm.h    | 14 +++++++-------
- 2 files changed, 8 insertions(+), 8 deletions(-)
+This patchset introduces ptdesc, splits ptdesc from struct page, and
+converts many callers of page table constructor/destructors to use ptdescs.
 
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index fdc91deece7e..a1c9f8dcbb5a 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -651,7 +651,7 @@ static spinlock_t *xen_pte_lock(struct page *page, struct mm_struct *mm)
- 	spinlock_t *ptl = NULL;
- 
- #if USE_SPLIT_PTE_PTLOCKS
--	ptl = ptlock_ptr(page);
-+	ptl = ptlock_ptr(page_ptdesc(page));
- 	spin_lock_nest_lock(ptl, &mm->page_table_lock);
- #endif
- 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 17dc6e37ea03..ed8dd0464841 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -2789,9 +2789,9 @@ void __init ptlock_cache_init(void);
- bool ptlock_alloc(struct ptdesc *ptdesc);
- extern void ptlock_free(struct page *page);
- 
--static inline spinlock_t *ptlock_ptr(struct page *page)
-+static inline spinlock_t *ptlock_ptr(struct ptdesc *ptdesc)
- {
--	return page->ptl;
-+	return ptdesc->ptl;
- }
- #else /* ALLOC_SPLIT_PTLOCKS */
- static inline void ptlock_cache_init(void)
-@@ -2807,15 +2807,15 @@ static inline void ptlock_free(struct page *page)
- {
- }
- 
--static inline spinlock_t *ptlock_ptr(struct page *page)
-+static inline spinlock_t *ptlock_ptr(struct ptdesc *ptdesc)
- {
--	return &page->ptl;
-+	return &ptdesc->ptl;
- }
- #endif /* ALLOC_SPLIT_PTLOCKS */
- 
- static inline spinlock_t *pte_lockptr(struct mm_struct *mm, pmd_t *pmd)
- {
--	return ptlock_ptr(pmd_page(*pmd));
-+	return ptlock_ptr(page_ptdesc(pmd_page(*pmd)));
- }
- 
- static inline bool ptlock_init(struct page *page)
-@@ -2830,7 +2830,7 @@ static inline bool ptlock_init(struct page *page)
- 	VM_BUG_ON_PAGE(*(unsigned long *)&page->ptl, page);
- 	if (!ptlock_alloc(page_ptdesc(page)))
- 		return false;
--	spin_lock_init(ptlock_ptr(page));
-+	spin_lock_init(ptlock_ptr(page_ptdesc(page)));
- 	return true;
- }
- 
-@@ -2900,7 +2900,7 @@ static inline struct ptdesc *pmd_ptdesc(pmd_t *pmd)
- 
- static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
- {
--	return ptlock_ptr(ptdesc_page(pmd_ptdesc(pmd)));
-+	return ptlock_ptr(pmd_ptdesc(pmd));
- }
- 
- static inline bool pmd_ptlock_init(struct page *page)
+Ptdesc is a foundation to further standardize page tables, and eventually
+allow for dynamic allocation of page tables independent of struct page.
+However, the use of pages for page table tracking is quite deeply
+ingrained and varied across archictectures, so there is still a lot of
+work to be done before that can happen.
+
+This series is rebased on next-20230417.
+
+Vishal Moola (Oracle) (33):
+  s390: Use _pt_s390_gaddr for gmap address tracking
+  s390: Use pt_frag_refcount for pagetables
+  pgtable: Create struct ptdesc
+  mm: add utility functions for ptdesc
+  mm: Convert pmd_pgtable_page() to pmd_ptdesc()
+  mm: Convert ptlock_alloc() to use ptdescs
+  mm: Convert ptlock_ptr() to use ptdescs
+  mm: Convert pmd_ptlock_init() to use ptdescs
+  mm: Convert ptlock_init() to use ptdescs
+  mm: Convert pmd_ptlock_free() to use ptdescs
+  mm: Convert ptlock_free() to use ptdescs
+  mm: Create ptdesc equivalents for pgtable_{pte,pmd}_page_{ctor,dtor}
+  powerpc: Convert various functions to use ptdescs
+  x86: Convert various functions to use ptdescs
+  s390: Convert various gmap functions to use ptdescs
+  s390: Convert various pgalloc functions to use ptdescs
+  mm: Remove page table members from struct page
+  pgalloc: Convert various functions to use ptdescs
+  arm: Convert various functions to use ptdescs
+  arm64: Convert various functions to use ptdescs
+  csky: Convert __pte_free_tlb() to use ptdescs
+  hexagon: Convert __pte_free_tlb() to use ptdescs
+  loongarch: Convert various functions to use ptdescs
+  m68k: Convert various functions to use ptdescs
+  mips: Convert various functions to use ptdescs
+  nios2: Convert __pte_free_tlb() to use ptdescs
+  openrisc: Convert __pte_free_tlb() to use ptdescs
+  riscv: Convert alloc_{pmd, pte}_late() to use ptdescs
+  sh: Convert pte_free_tlb() to use ptdescs
+  sparc64: Convert various functions to use ptdescs
+  sparc: Convert pgtable_pte_page_{ctor, dtor}() to ptdesc equivalents
+  um: Convert {pmd, pte}_free_tlb() to use ptdescs
+  mm: Remove pgtable_{pmd, pte}_page_{ctor, dtor}() wrappers
+
+ Documentation/mm/split_page_table_lock.rst    |  12 +-
+ .../zh_CN/mm/split_page_table_lock.rst        |  14 +-
+ arch/arm/include/asm/tlb.h                    |  12 +-
+ arch/arm/mm/mmu.c                             |   6 +-
+ arch/arm64/include/asm/tlb.h                  |  14 +-
+ arch/arm64/mm/mmu.c                           |   7 +-
+ arch/csky/include/asm/pgalloc.h               |   4 +-
+ arch/hexagon/include/asm/pgalloc.h            |   8 +-
+ arch/loongarch/include/asm/pgalloc.h          |  27 ++-
+ arch/loongarch/mm/pgtable.c                   |   7 +-
+ arch/m68k/include/asm/mcf_pgalloc.h           |  41 ++--
+ arch/m68k/include/asm/sun3_pgalloc.h          |   8 +-
+ arch/m68k/mm/motorola.c                       |   4 +-
+ arch/mips/include/asm/pgalloc.h               |  31 +--
+ arch/mips/mm/pgtable.c                        |   7 +-
+ arch/nios2/include/asm/pgalloc.h              |   8 +-
+ arch/openrisc/include/asm/pgalloc.h           |   8 +-
+ arch/powerpc/mm/book3s64/mmu_context.c        |  10 +-
+ arch/powerpc/mm/book3s64/pgtable.c            |  32 +--
+ arch/powerpc/mm/pgtable-frag.c                |  46 ++--
+ arch/riscv/include/asm/pgalloc.h              |   8 +-
+ arch/riscv/mm/init.c                          |  16 +-
+ arch/s390/include/asm/pgalloc.h               |   4 +-
+ arch/s390/include/asm/tlb.h                   |   4 +-
+ arch/s390/mm/gmap.c                           | 218 +++++++++++-------
+ arch/s390/mm/pgalloc.c                        | 126 +++++-----
+ arch/sh/include/asm/pgalloc.h                 |   8 +-
+ arch/sparc/mm/init_64.c                       |  17 +-
+ arch/sparc/mm/srmmu.c                         |   5 +-
+ arch/um/include/asm/pgalloc.h                 |  18 +-
+ arch/x86/mm/pgtable.c                         |  46 ++--
+ arch/x86/xen/mmu_pv.c                         |   2 +-
+ include/asm-generic/pgalloc.h                 |  62 +++--
+ include/asm-generic/tlb.h                     |  11 +
+ include/linux/mm.h                            | 138 +++++++----
+ include/linux/mm_types.h                      |  14 --
+ include/linux/pgtable.h                       |  60 +++++
+ mm/memory.c                                   |   8 +-
+ 38 files changed, 625 insertions(+), 446 deletions(-)
+
 -- 
 2.39.2
 
