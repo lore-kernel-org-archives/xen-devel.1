@@ -4,56 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A40C77B7F
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Apr 2023 20:48:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.522316.811565 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270B9C77B7F
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Apr 2023 20:53:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.522321.811580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poVlW-0003w4-3k; Mon, 17 Apr 2023 20:47:58 +0000
+	id 1poVr6-0005Zb-5c; Mon, 17 Apr 2023 20:53:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 522316.811565; Mon, 17 Apr 2023 20:47:58 +0000
+Received: by outflank-mailman (output) from mailman id 522321.811580; Mon, 17 Apr 2023 20:53:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1poVlW-0003vx-0U; Mon, 17 Apr 2023 20:47:58 +0000
-Received: by outflank-mailman (input) for mailman id 522316;
- Mon, 17 Apr 2023 20:47:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1poVr6-0005ZG-0w; Mon, 17 Apr 2023 20:53:44 +0000
+Received: by outflank-mailman (input) for mailman id 522321;
+ Mon, 17 Apr 2023 20:52:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vOAz=AI=oracle.com=boris.ostrovsky@srs-se1.protection.inumbo.net>)
- id 1poVlU-0003vr-Dm
- for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 20:47:56 +0000
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ef00dd8-dd61-11ed-8611-37d641c3527e;
- Mon, 17 Apr 2023 22:47:53 +0200 (CEST)
-Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 33HJ0eMf024457; Mon, 17 Apr 2023 20:46:36 GMT
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3pyjuc46nr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 17 Apr 2023 20:46:36 +0000
-Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 33HJZjLu031978; Mon, 17 Apr 2023 20:46:34 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2105.outbound.protection.outlook.com [104.47.55.105])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3pyjcanu0c-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 17 Apr 2023 20:46:34 +0000
-Received: from BLAPR10MB5009.namprd10.prod.outlook.com (2603:10b6:208:321::10)
- by SJ0PR10MB6423.namprd10.prod.outlook.com (2603:10b6:a03:44d::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Mon, 17 Apr
- 2023 20:46:31 +0000
-Received: from BLAPR10MB5009.namprd10.prod.outlook.com
- ([fe80::70ac:313b:544d:4f45]) by BLAPR10MB5009.namprd10.prod.outlook.com
- ([fe80::70ac:313b:544d:4f45%4]) with mapi id 15.20.6298.045; Mon, 17 Apr 2023
- 20:46:31 +0000
+ <SRS0=9RIN=AI=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
+ id 1poVqD-0005M2-1z
+ for xen-devel@lists.xenproject.org; Mon, 17 Apr 2023 20:52:49 +0000
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [2607:f8b0:4864:20::635])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cf19d0e6-dd61-11ed-b21e-6b7b168915f2;
+ Mon, 17 Apr 2023 22:52:48 +0200 (CEST)
+Received: by mail-pl1-x635.google.com with SMTP id la15so4089324plb.11
+ for <xen-devel@lists.xenproject.org>; Mon, 17 Apr 2023 13:52:48 -0700 (PDT)
+Received: from fedora.hsd1.ca.comcast.net ([2601:644:937f:7f20::c139])
+ by smtp.googlemail.com with ESMTPSA id
+ h7-20020a17090ac38700b0022335f1dae2sm7609707pjt.22.2023.04.17.13.52.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Apr 2023 13:52:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,230 +46,315 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ef00dd8-dd61-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
- to : cc : references : from : subject : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2023-03-30;
- bh=Dik3CTs5kluBXXW+c9tt0GXpgHx50LBCrVssZ6qybKQ=;
- b=pe8762NDrY1nqd9QBmeYSOJh5lX/B1dyiwIg1X1QGfSaKOTZJhO32r6uNW/uJZIWKmZo
- lhrsBVolwdorsGwTRJY7qIWC8HtYpLzSDWB1/La6CGBGb5lH0o8IL6jelPuwwUTmETBD
- kUPSwQkCpqfRTl5XsVfK0N/FBGq8sO/XXeopE9HWaflUV02EunjUafWYToq0SBX8G3LQ
- sBhQlGBTp5vBIua+nUCKZl7HBVEfQzCBD2lSjXp47Q7TXddfytiM0LucLFE2XXdawqTT
- zAJ2qYih4Wm8OKV3Pr1DhY8Jn01mdiAMqLAMP3YZbMvK/rsPg11SosgmfzuBlvQEIakV zw== 
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Nn9CnRSrGrUV0+/hmoiicoEn4H/hle7r15VGUKaRpXRn4RccPgNw8qZfgpm8DZvUlzS0tgWgRyJHnqt2TjhlDx1hrmAaDHbIIAxAlmLWvGJTkXbOyvUPg5Kxq5a6rdXpUiOUL5qRjHca9KUEzV7DvxWXvRQEr84YeQnJsCheKQq2TLJ+37wCzee5/zQmMSQXI7/KY2gaJY9MidlgSvGzA5GpPIPen4+M4mj0sOB+wTW5mmwToEhvnz0KWwZDoCAiQXPO+QoSUQc+Tte1fhTBODcTBZ8CZjhGoK+F73TwUH7MM07C9C92a9GmA9xlA5zla202MaZXRGuGZiSxgwIC6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dik3CTs5kluBXXW+c9tt0GXpgHx50LBCrVssZ6qybKQ=;
- b=ZT4DpdDDcvU4A9+glvi+/tu6b3tKMFV58LPM01tqFW4Y6RNhBAR1437BmYwdhcDXuVbl9WYatHPzeufFfwl6Joq0bGuZJgvNXY4EnM8QysE0O/XtYKS+V0zt4ss+S9waIDzG4zwB8PKn2koXIvTUH1OUdzIExv0ltXCmWaA5fAjFc84qN+iM5yO5gmJtYYHuypOJ00V6bIlHZiFWOJ/OBmBPJAJSoHxi+mFhnA5ZjdajSOEcctaoF99XJ+sUMk/EWJ6xvatYiqywg5vgR00MCqjThKMX/n4GI2JVWWfa9dCqY1jT8PK2WI/UUGnOyZYEhkCAd8YcjFupKgVEs+0FzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+X-Inumbo-ID: cf19d0e6-dd61-11ed-b21e-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dik3CTs5kluBXXW+c9tt0GXpgHx50LBCrVssZ6qybKQ=;
- b=MOdN8AzLNIqVngZFV8fsxRYyftGAS9xS5AjTIJ0mdPvCYqKW4KR0vjOUiPMARKIfssSBP74g1it8yrIjASzSpTkUl0qWrWSv1BQyAXJlv67Y1pPx2ZrEeFCmrU8kcL5d+xJ3AcvbWHCbjBgT0ovRcriywBuJ/CPun11nDrjN1T8=
-Message-ID: <9914d517-cf10-a06b-c782-c74d2f24ad46@oracle.com>
-Date: Mon, 17 Apr 2023 16:46:17 -0400
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.10.0
-Content-Language: en-US
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, David Woodhouse <dwmw@infradead.org>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Brian Gerst <brgerst@gmail.com>,
-        Arjan van de Veen <arjan@linux.intel.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Paul McKenney <paulmck@kernel.org>,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Oleksandr Natalenko <oleksandr@natalenko.name>,
-        Paul Menzel <pmenzel@molgen.mpg.de>,
-        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-        Piotr Gorski <lucjan.lucjanov@gmail.com>,
-        Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Usama Arif <usama.arif@bytedance.com>,
-        Russell King <linux@armlinux.org.uk>, Arnd Bergmann <arnd@arndb.de>,
-        linux-arm-kernel@lists.infradead.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>,
-        linux-csky@vger.kernel.org,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        linux-mips@vger.kernel.org,
-        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-        Helge Deller <deller@gmx.de>, linux-parisc@vger.kernel.org,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt
- <palmer@dabbelt.com>, linux-riscv@lists.infradead.org,
-        Mark Rutland <mark.rutland@arm.com>, Sabin Rapan <sabrapan@amazon.com>
-References: <20230414225551.858160935@linutronix.de>
- <20230414232310.194293270@linutronix.de>
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [patch 16/37] x86/xen/smp_pv: Remove wait for CPU online
-In-Reply-To: <20230414232310.194293270@linutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0255.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:37c::20) To BLAPR10MB5009.namprd10.prod.outlook.com
- (2603:10b6:208:321::10)
+        d=gmail.com; s=20221208; t=1681764767; x=1684356767;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iUQ9/pimfaGXNi0CjQ5OYjWOczKCpE//S8xnkPc78yU=;
+        b=FAf7Q7K913ZX6r/eLsy+yAUsXKMRxOHj1fLyHB9UIaactpRsuyZTxwm6yr9/0kHhuJ
+         4Vp9zU5n5/h6vSIOmrhOIkQhtsXJjouneV7ATDr91jNlm1HLz9ERQ9iZEYmxf7IWZXzO
+         7Bjl99gPzEex4CTscD2JLBVlVfqL8/78eXbRp1C2OSneg1gvPPXFUCS8B+INtmwbneb1
+         7xu84pfQjybA5JWgsxDb5XtXBfw3JMpB/K4/MrDjwMi52JjctUf0w80qqRetA0UVkDY9
+         /WMnuBxaObETeplAy+OYgYm1cMdR/MAIyIhp1m3TGneur/zdkE7Srlujs8An47+1uBTa
+         DS5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681764767; x=1684356767;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iUQ9/pimfaGXNi0CjQ5OYjWOczKCpE//S8xnkPc78yU=;
+        b=PQxXSpe01IwKReJ7Z+SRLwFg1rEO84lynLMot3ErKS4NRBDJ7sar4ZgRB9kZ6ErLMD
+         oIKuvzeqab7ggxfpSrmvXYjDO0fSrUJjurn5samwpHaqT4U1+dbyHWFCv6W4tSsb5enP
+         cpobmZ1zQBGamELBsSUpShMqZ2gnH9vwsd8fUMRzQI0fWpU2r8PJc1fjS8UgwBcckKmn
+         cdYX2FbQwMm6B9XjdOkVUKvgHIQy0+A45/DaWYLTEj3+YBZ1hq419RujUDcmgqWDnc9i
+         WsbsbPicakNgfVFr9ZrMeM7IlkIKE9agXGAc6euKLoBY8SsaM3W7kufqi1FNDcoNhZXK
+         eAjA==
+X-Gm-Message-State: AAQBX9fCEyAgIQVhhNK4wO28EXFibntmKnu1FK4Ge8Zhne6pgcRxfqB+
+	Cv2aqRQepv/rlYJLh9R4uU3F1HI1uKl+Zg==
+X-Google-Smtp-Source: AKy350bJ+z7DqyQlo/Tq9sm7RhBTmVNaq1jAeXkgM2fHwXUjj/5Rwh13YNUG3IxyilUJQDR+HGgjBw==
+X-Received: by 2002:a17:90a:e642:b0:247:83fe:12b6 with SMTP id ep2-20020a17090ae64200b0024783fe12b6mr5579845pjb.43.1681764766744;
+        Mon, 17 Apr 2023 13:52:46 -0700 (PDT)
+From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>
+Cc: linux-mm@kvack.org,
+	linux-arch@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-csky@vger.kernel.org,
+	linux-hexagon@vger.kernel.org,
+	loongarch@lists.linux.dev,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-openrisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-sh@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-um@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
+Subject: [PATCH 01/33] s390: Use _pt_s390_gaddr for gmap address tracking
+Date: Mon, 17 Apr 2023 13:50:16 -0700
+Message-Id: <20230417205048.15870-2-vishal.moola@gmail.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230417205048.15870-1-vishal.moola@gmail.com>
+References: <20230417205048.15870-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BLAPR10MB5009:EE_|SJ0PR10MB6423:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9b7e9894-5935-424c-27d6-08db3f84d314
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Hp78QesZsk+ufzGrNhzZAke4U6ifyKKuUkHUNPc4Acr6oW/0KXdGfLJM+phFO/7LaVhHeAnYs2ih/L2Wj0eeI2JYJpKleeudxdxaGXkUHOo77A6ioXvzq+vhvZwEeVZ8gwxUtf2Mj5J6L9Z4j2YLN4vJwzYnOtkOp2k7Thjx/674eZr4njHRofPwCfr2VO2Vn+zPuyIGpoY3//eKc2jAKbnr0HAMJiG1OyVC0itF8YsQJ033x3HSfoh1YZmBSekdhAbB4+Cw62ey+W2Vkp2rMRxlm0ZEc/n//WmBEp0CZcz3nrYTu72wsxbabrZ0VvvlJtFS5LwXfI8RvpdahP/TrXj6E4jnrAeQqofp/vrMnXnFSpNIW/yTmXFPycF6MltSMhFVrZo2mOqLWG3MmpMRkdbpYZ3RhsCC19G+6FVkDzCNBkz55AnMsW6nJq/nTTIujgIDGjlPJBzCnk1zHzHALzFWlVSBa8GeXeIrYpjKGNB7i4ejcP6N3qyJK7TCMP2u5KnmbEo/EQQ0ugKk1dDE9Y1vAyGj7KAekpJthswoX7WSVvgMMDiOPldEgHx+6eP0jwX7C39eOO2z/BusV26CCIcLh7BToFVWIp9wtrtJddCOY8wXKE8x6xwt2ZYs24Oi4ln1MpOF3UdJyhbmrZAvHg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB5009.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(136003)(366004)(396003)(346002)(376002)(39860400002)(451199021)(86362001)(31696002)(83380400001)(36756003)(53546011)(6506007)(6512007)(26005)(186003)(2906002)(44832011)(7406005)(7416002)(2616005)(6486002)(31686004)(5660300002)(38100700002)(6666004)(8936002)(8676002)(478600001)(54906003)(110136005)(41300700001)(316002)(66946007)(66556008)(4326008)(66476007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?QS9rMnNESnl1NVZkVGFxNkdPU3ZDUlZETGtzT3NhVll0UmxqeWNIb3AyalNx?=
- =?utf-8?B?SGU3K05kR05jVEVLOFlDeUdxNFNuMXNIWHd1c2laWml6OEszZ1kzRFkyMUhp?=
- =?utf-8?B?R3ZaMDZibURuY2JYbXRUMGd0RDUvVnJlQmN0QkgxdWlxMkl5OUN6RkJyTytt?=
- =?utf-8?B?T1c4TXJJUkJ3YWRTa0ErZ1NYa09TbmE4SXErSUYrTU1lTXlJNG03TzJPUURQ?=
- =?utf-8?B?T2w3a29JdUlSMHJWU0ZHb3psYUNUaVpUa0hkZzdMa0NCUzBQMDV2Z09qVHM0?=
- =?utf-8?B?b0lkd1p0YUhkdXhuMmFrN042ek1QU1dsbk02cFc3WWljSG5nVWUwbzRIOVNu?=
- =?utf-8?B?ZXgyVkcrREgrb1NUdmJQUzJVdkRNUHlmN2FhSUgyTlVvbk1QVFYzTCtOZFNt?=
- =?utf-8?B?bHVlenNvU2ZnVDkzMDFtSzB6U2QyT2k3bXFFdS9kMWUwdFRCOHI4MU9wUEYx?=
- =?utf-8?B?WmMyQnlmYzEvYXNEVFA1S3VYVHRBdjVKK1VYV2ZHUWtoa3NydWVaYUxOSXFO?=
- =?utf-8?B?NUFvaUpCTnhxM1R6KzRySFpHcm5FcENnU2JhTmJYVzBEem5rK04yZFdNQXh3?=
- =?utf-8?B?MVllZXNsSnp2VEhRYk9vUVo3YlJmZ1MwN01zNyt3SVpESUk4aTRrZzNxcFZT?=
- =?utf-8?B?WWtuRUE4b2lVRXVPczZPOWFGK3MzS1J0eENlekJkdUtRckNUS2lDWTYrV1VL?=
- =?utf-8?B?OVdLSlpjTEkxZnZkL1V3TE5JRGZaVnYwemYrbzZMck5nNStVd0NVbzgrZGxv?=
- =?utf-8?B?OE9CNXNUblNKbDVVUnBKUDR3ckRSOENFWW1BQ0U0clVtUFhOWFlSY0dmUDQr?=
- =?utf-8?B?MFB5eG8wY1pleDhNZlRkZXJrbXE1VFM1cFNyUXhJZnNXR3JCMFpzNmlSTnN2?=
- =?utf-8?B?Sk43d29YMnM4UVg0UFNSemFJQ0R3MGhqYkhzWjY5WithTGVtVnowL0ZNR0pz?=
- =?utf-8?B?SWdVQ3ZMbyt0TW1BSmRMenY2R1hERWRzcjVwYStnWXQ4L0wwM3lXWUFia2I1?=
- =?utf-8?B?SU4vanlTK2t5VlV3UC9KMFNzVzZDd1phV0t1UTVadTN0eWFMYmNDdlNKR2li?=
- =?utf-8?B?NTJoaFU0TDB3emdGTjZwVmxzdVU3NGxNbVBDMGJaek5QMEUyK25vNHdJOENE?=
- =?utf-8?B?d3Vxb1hvUnZyQXAwVzBWV0RHQ0JxdDYxa2syQWl6UXo3N2xpbndRNm5tQU1P?=
- =?utf-8?B?WG15NUI2K2NyRFhUK2lxQWFMWWxZZGxrcXplalpGZTFQdFRYWUkvZFFyelhj?=
- =?utf-8?B?enUzTVYxR01WZUoyaHNVQ2ZCMWtmeW1yZG1ZckNvS0oxUDI1WjhqWEtYcE5U?=
- =?utf-8?B?ZEpEVzBSeFBBcDNtek1TeTFCQmxnVGtWRlhwemNyM2hyMUo0aTFwSG5EbEkw?=
- =?utf-8?B?TGc5NlpqL0Q5bnU1SW1hUkdoNFZabkNqU2lnZ3FDdHN1MmNsQjNCV3B5K2FY?=
- =?utf-8?B?dE1PNmdlbE02Q29IVW9QKzFucC9lUld5dGdvYk90ZlgwK3ZRYVJDWFhvUzc0?=
- =?utf-8?B?L1JUdE51alhsL3hZb2o5N3dvNGhLbXVPOUJTOFhTNUxaSGZiOWdVRnM2Y3dn?=
- =?utf-8?B?Y29CeDNCQmZ5Ums3MFA1bXNxV1VRWDhzQ0EyYnovK0EvS1hIa3dTVit5ZDZG?=
- =?utf-8?B?WFkzT0xtTjIzTUZVSXlScDZGaENnYlZNTlRGRVd6d3E4S3lMMklYRDlTcmhv?=
- =?utf-8?B?Z1JyUS83VmRJcGhwdmRTdE9nNmVHNldPc0g5VVF2UUZqa3ZxcEl3YU12L29J?=
- =?utf-8?B?Q0pLcXpiWmpBeTNaSzZvRGhFbTlUOU1vRGtEblJXRXhIMTA1dytjS0hZcEgx?=
- =?utf-8?B?QW9JZ0lRdU56NjZ0OXJwZUhBTWhDM0xQSjVJWEFiaHJDVDA5dDZER25uVThR?=
- =?utf-8?B?WFEzRFh4MXJYODY3eFYyTTF3OSsxUWoyNjlYOUkzVXFrWE5tRzRHdnZ4NFZw?=
- =?utf-8?B?a01EQ1llbmo0TU9Dd0hhQ3YyTUZWUHo2UmF2VXoxSFlzMndiRGJRaEdaSDBl?=
- =?utf-8?B?L3FMN2hrTlBoVTZqOU13YVhpOUhWT2lSRkhZRW9rb1RyWFR3ZW9uZi9LR3pQ?=
- =?utf-8?B?Zk1FRUZUSzc2eXhpREtVOXhQcFNWenhUN0ZGa3pzK1VGMGNWWXhsdzcvbWlm?=
- =?utf-8?B?NGlvWjI5TlFQNGdZS0E2ZkJyMUFLOHI2M1ExMjk0YmRhZ0MrS28zMUJMRDZH?=
- =?utf-8?B?MEE9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
-	=?utf-8?B?ZkF6bWp3L0EyalFoSVgrMERuOWRLUGFScXp5UE0zQkJTVklHSFRqY1N2MkRu?=
- =?utf-8?B?NGRMVGhTUlZoQzlFTmt1UFM1RS9INlRJbFhQOFZ2L3pGYVNxcmltMm0vcEZU?=
- =?utf-8?B?Mmg0ajMwYkczTDBCcmlBSU5nY25ReUVvWSt4blI4aklUY2xBVWMwT01nOHlt?=
- =?utf-8?B?NzZ1b2srNFppeTV2S1czNWFOR0htOG1hcHJEY050ZjRZYitkMWQ1RGtjYjNz?=
- =?utf-8?B?MjB3TjJWaURraXdwdmVabFRUUFArd1A4OUI3aUNGY2RackpQWWRCM3FzQU5Z?=
- =?utf-8?B?Qnh5cy9QL3U4RCtiSGtzdTZDdHZnTnRWNFRUcHRLYU40aHJqMUFsajlqNXBi?=
- =?utf-8?B?cGNmVlVVTVlSblJQL015UFh5UlZXd0t5V0VjSkZFbFdjZVFXVXJRRmxPZHZE?=
- =?utf-8?B?WEZuVVhJTTBxaE1QQy9SNytKZURZdjBsVzBiQkdlK2hNRHBQbFhMdHNRQjk3?=
- =?utf-8?B?OWh0WnVUZVdQV3YwTGw4U25TSTFSbXlRL1VkYW93aWNpWlN5Nnd0L3NNWnlZ?=
- =?utf-8?B?RXBoT2FlRUxqUFRDWC9VWnllekZabk4vMjdCUXlBdTBSWXJSRWs3RGdTeFZV?=
- =?utf-8?B?bVNHcjdnQnhyYlNHdlRTVjFDQmsvU1ZpdzBRcnA4MFJVUFlPOFFrc2dDUEMx?=
- =?utf-8?B?c01hTWdoT0Q5ODFVcDZKTGZibkZralhFSU0wRHUxZ3hzRkg5alZBcm9tckV0?=
- =?utf-8?B?OC9kQ3NJWVM3Yi9CZzRIQnM1RFZ0TllFc205eG1xanorNUU5Nm1PQlBKNzZX?=
- =?utf-8?B?cUJWeG9iWnZ1QitJSVNJTXVqbS94N2pNZTgydkphTTNSQTA5M1JMV0djMVA2?=
- =?utf-8?B?RzJLMHdXMzh6RDVuS2VQd00vV2p5Rk5kK2YxTXRjZWtoVVkyeGs1MGtOaVpt?=
- =?utf-8?B?TmR3Z2RJS3YwVDhIZzRjSndpSEMvUFlMMWJEaDVuSVROcTV5MkEwUWdkbzlr?=
- =?utf-8?B?U2RnbVpTb0loYXBHKzlIaGpaYlpUY2UxQnpDWG9uMEtpY25JR2xNNnAxS0pP?=
- =?utf-8?B?L1FmVTJ2MWo3MlRJL0NTMVI4WWVqNElYcW5ic3dudnR2RVJLTnV0M1NMQ3Vw?=
- =?utf-8?B?enpjRFQwQSt1RzZhZXRSQ003MzlDdVdoRmMwY2t0a2hoaEdSQzRmKzRYOTk0?=
- =?utf-8?B?KzNqOFpYSUxrb00rNVNPVS9uRW9zS2FXQU5ZZnIrcm5MUmJIeStrZWVLZ05E?=
- =?utf-8?B?bFl6c0U5bmNKdThWOEpKV2J0dTVXUE1ZeDZpNTZ0SmlPZjM2S2FxNy9ndnRz?=
- =?utf-8?B?RnkrZGcrYk1oM2pIM2E5bWxXb2l6WWxtaFpVWjIyblMxWExBS3BYWG9BdFVp?=
- =?utf-8?B?R0k5TldSS05LYUJpd2hxVVUvVWVKKzNGS3lSLzBudTVJWXUrWDZWeVRlOUVP?=
- =?utf-8?B?TFQwek9qTCtXNC93MEhXdDJmSG9FbzRIY2F5bUxXQU9TVVdmUlFFN0tYZzZY?=
- =?utf-8?B?VlFaTHZqYkhTdHJqSE9VNFZBTlFlSmgzSE9IMVRDbWNzaVBxTm5KaWZxRXNt?=
- =?utf-8?B?ZmlqdzZpenNQLzVxbFA5MzlxSnFreDRyS1lod2tiM0tIakVUamI0azFLM2Za?=
- =?utf-8?B?bEcxMFFMcENvMDYrQ1VDYWtwb24wU0h0ZHpMdzk2NWtoVGQxVFJLMVI2U2RP?=
- =?utf-8?B?ODFZVkY1bGczUENoNzhsajJ5ZXVNZlk1V3N2MXFWbEg1Nm9FTjBCWEJRekRz?=
- =?utf-8?B?d2R6YmJNSXFPS0M3ZU55VEZaWmxVbWxpL01pWm11NFpiYTJJRjBrWGsrOGVy?=
- =?utf-8?B?NHRlcWFTa01jRk5EMEwzL3JrdVlDQmhsdzE0cExvV2R3czIzNzBGSmZkQmll?=
- =?utf-8?B?L2lvWis2THN5VUFDaXhyL0JET3dSOGcxclRYcWFodENlVE1kVDVMQUFaYnlN?=
- =?utf-8?B?Z1h1ak45T09CeVJWaXZCRlllUy9mS1pGaGh4VWhZdlNiWHA2eXpFRWw3OEYw?=
- =?utf-8?B?c0JtZFEvelp2UzRzQnJqWm1aMWlOYituT0VlSDkxVzEzdUJvenRsZGRlOENn?=
- =?utf-8?B?U2l5NzFFcVRqY01BM210UTlFZWNmeWQrS1JGMGpHK0NOT2srNjFPTmphL1JV?=
- =?utf-8?B?SjZuWEQvUndsMEZaR0xSWmRncDI3QlpxeUNlSCtvSm84OHZ4VU1oMDVlT01n?=
- =?utf-8?B?TGw5ajdlajlBNkV4akwwbFVmK3l0UWxSZnBlVXk1ZXBma0NIOFNLODBIREZu?=
- =?utf-8?B?aDlNSkVrSUpBamdqN1pHdXJOSS93ODBFRS9OdGFTT0o0UUVmZStJOFBhVXZT?=
- =?utf-8?B?cFZQYnE0dkhFUm52ZHJVK05ZRkFRPT0=?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b7e9894-5935-424c-27d6-08db3f84d314
-X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB5009.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2023 20:46:31.5113
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: y4xClfSDkM2poLEaUQXiLHA5qZIpYq/FGfjTvTEdKFD8DcSQn7SG2UmbwTGULCnlU8GWneUTA4M6YoAcSGDFJFxYakWP8xUMhL3fYbVGGZQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6423
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-17_14,2023-04-17_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 suspectscore=0 bulkscore=0
- mlxscore=0 mlxlogscore=999 adultscore=0 phishscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
- definitions=main-2304170183
-X-Proofpoint-GUID: QmFEh5ZhXzphhqQeiblSz4L24eGPHOo4
-X-Proofpoint-ORIG-GUID: QmFEh5ZhXzphhqQeiblSz4L24eGPHOo4
+Content-Transfer-Encoding: 8bit
 
+s390 uses page->index to keep track of page tables for the guest address
+space. In an attempt to consolidate the usage of page fields in s390,
+replace _pt_pad_2 with _pt_s390_gaddr to replace page->index in gmap.
 
+This will help with the splitting of struct ptdesc from struct page, as
+well as allow s390 to use _pt_frag_refcount for fragmented page table
+tracking.
 
-On 4/14/23 7:44 PM, Thomas Gleixner wrote:
-> Now that the core code drops sparse_irq_lock after the idle thread
-> synchronized, it's pointless to wait for the AP to mark itself online.
-> 
-> Whether the control CPU runs in a wait loop or sleeps in the core code
-> waiting for the online operation to complete makes no difference.
-> 
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Juergen Gross <jgross@suse.com>
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: xen-devel@lists.xenproject.org
-> ---
->   arch/x86/xen/smp_pv.c |   10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> --- a/arch/x86/xen/smp_pv.c
-> +++ b/arch/x86/xen/smp_pv.c
-> @@ -340,11 +340,11 @@ static int xen_pv_cpu_up(unsigned int cp
->   
->   	xen_pmu_init(cpu);
->   
-> -	rc = HYPERVISOR_vcpu_op(VCPUOP_up, xen_vcpu_nr(cpu), NULL);
-> -	BUG_ON(rc);
-> -
-> -	while (cpu_report_state(cpu) != CPU_ONLINE)
-> -		HYPERVISOR_sched_op(SCHEDOP_yield, NULL);
-> +	/*
-> +	 * Why is this a BUG? If the hypercall fails then everything can be
-> +	 * rolled back, no?
-> +	 */
+Since page->_pt_s390_gaddr aliases with mapping, ensure its set to NULL
+before freeing the pages as well.
 
+Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+---
+ arch/s390/mm/gmap.c      | 50 +++++++++++++++++++++++++++-------------
+ include/linux/mm_types.h |  2 +-
+ 2 files changed, 35 insertions(+), 17 deletions(-)
 
-In many cases this indicates either some sort of hypervisor internal error or broken logic in the guest, so it is, well, a bug. But I suppose it may also be some transient condition in the hypervisor (I don't see it now but it can happen in the future) so perhaps we should indeed try not to die on the spot.
+diff --git a/arch/s390/mm/gmap.c b/arch/s390/mm/gmap.c
+index 5a716bdcba05..a61ea1a491dc 100644
+--- a/arch/s390/mm/gmap.c
++++ b/arch/s390/mm/gmap.c
+@@ -70,7 +70,7 @@ static struct gmap *gmap_alloc(unsigned long limit)
+ 	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+ 	if (!page)
+ 		goto out_free;
+-	page->index = 0;
++	page->_pt_s390_gaddr = 0;
+ 	list_add(&page->lru, &gmap->crst_list);
+ 	table = page_to_virt(page);
+ 	crst_table_init(table, etype);
+@@ -187,16 +187,20 @@ static void gmap_free(struct gmap *gmap)
+ 	if (!(gmap_is_shadow(gmap) && gmap->removed))
+ 		gmap_flush_tlb(gmap);
+ 	/* Free all segment & region tables. */
+-	list_for_each_entry_safe(page, next, &gmap->crst_list, lru)
++	list_for_each_entry_safe(page, next, &gmap->crst_list, lru) {
++		page->_pt_s390_gaddr = 0;
+ 		__free_pages(page, CRST_ALLOC_ORDER);
++	}
+ 	gmap_radix_tree_free(&gmap->guest_to_host);
+ 	gmap_radix_tree_free(&gmap->host_to_guest);
+ 
+ 	/* Free additional data for a shadow gmap */
+ 	if (gmap_is_shadow(gmap)) {
+ 		/* Free all page tables. */
+-		list_for_each_entry_safe(page, next, &gmap->pt_list, lru)
++		list_for_each_entry_safe(page, next, &gmap->pt_list, lru) {
++			page->_pt_s390_gaddr = 0;
+ 			page_table_free_pgste(page);
++		}
+ 		gmap_rmap_radix_tree_free(&gmap->host_to_rmap);
+ 		/* Release reference to the parent */
+ 		gmap_put(gmap->parent);
+@@ -318,12 +322,14 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
+ 		list_add(&page->lru, &gmap->crst_list);
+ 		*table = __pa(new) | _REGION_ENTRY_LENGTH |
+ 			(*table & _REGION_ENTRY_TYPE_MASK);
+-		page->index = gaddr;
++		page->_pt_s390_gaddr = gaddr;
+ 		page = NULL;
+ 	}
+ 	spin_unlock(&gmap->guest_table_lock);
+-	if (page)
++	if (page) {
++		page->_pt_s390_gaddr = 0;
+ 		__free_pages(page, CRST_ALLOC_ORDER);
++	}
+ 	return 0;
+ }
+ 
+@@ -341,7 +347,7 @@ static unsigned long __gmap_segment_gaddr(unsigned long *entry)
+ 	offset = (unsigned long) entry / sizeof(unsigned long);
+ 	offset = (offset & (PTRS_PER_PMD - 1)) * PMD_SIZE;
+ 	page = pmd_pgtable_page((pmd_t *) entry);
+-	return page->index + offset;
++	return page->_pt_s390_gaddr + offset;
+ }
+ 
+ /**
+@@ -1351,6 +1357,7 @@ static void gmap_unshadow_pgt(struct gmap *sg, unsigned long raddr)
+ 	/* Free page table */
+ 	page = phys_to_page(pgt);
+ 	list_del(&page->lru);
++	page->_pt_s390_gaddr = 0;
+ 	page_table_free_pgste(page);
+ }
+ 
+@@ -1379,6 +1386,7 @@ static void __gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr,
+ 		/* Free page table */
+ 		page = phys_to_page(pgt);
+ 		list_del(&page->lru);
++		page->_pt_s390_gaddr = 0;
+ 		page_table_free_pgste(page);
+ 	}
+ }
+@@ -1409,6 +1417,7 @@ static void gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr)
+ 	/* Free segment table */
+ 	page = phys_to_page(sgt);
+ 	list_del(&page->lru);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ }
+ 
+@@ -1437,6 +1446,7 @@ static void __gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr,
+ 		/* Free segment table */
+ 		page = phys_to_page(sgt);
+ 		list_del(&page->lru);
++		page->_pt_s390_gaddr = 0;
+ 		__free_pages(page, CRST_ALLOC_ORDER);
+ 	}
+ }
+@@ -1467,6 +1477,7 @@ static void gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr)
+ 	/* Free region 3 table */
+ 	page = phys_to_page(r3t);
+ 	list_del(&page->lru);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ }
+ 
+@@ -1495,6 +1506,7 @@ static void __gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr,
+ 		/* Free region 3 table */
+ 		page = phys_to_page(r3t);
+ 		list_del(&page->lru);
++		page->_pt_s390_gaddr = 0;
+ 		__free_pages(page, CRST_ALLOC_ORDER);
+ 	}
+ }
+@@ -1525,6 +1537,7 @@ static void gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr)
+ 	/* Free region 2 table */
+ 	page = phys_to_page(r2t);
+ 	list_del(&page->lru);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ }
+ 
+@@ -1557,6 +1570,7 @@ static void __gmap_unshadow_r1t(struct gmap *sg, unsigned long raddr,
+ 		/* Free region 2 table */
+ 		page = phys_to_page(r2t);
+ 		list_del(&page->lru);
++		page->_pt_s390_gaddr = 0;
+ 		__free_pages(page, CRST_ALLOC_ORDER);
+ 	}
+ }
+@@ -1762,9 +1776,9 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
+ 	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+ 	if (!page)
+ 		return -ENOMEM;
+-	page->index = r2t & _REGION_ENTRY_ORIGIN;
++	page->_pt_s390_gaddr = r2t & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->index |= GMAP_SHADOW_FAKE_TABLE;
++		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+ 	s_r2t = page_to_phys(page);
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+@@ -1814,6 +1828,7 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ 	return rc;
+ }
+@@ -1846,9 +1861,9 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
+ 	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+ 	if (!page)
+ 		return -ENOMEM;
+-	page->index = r3t & _REGION_ENTRY_ORIGIN;
++	page->_pt_s390_gaddr = r3t & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->index |= GMAP_SHADOW_FAKE_TABLE;
++		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+ 	s_r3t = page_to_phys(page);
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+@@ -1898,6 +1913,7 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ 	return rc;
+ }
+@@ -1930,9 +1946,9 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
+ 	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+ 	if (!page)
+ 		return -ENOMEM;
+-	page->index = sgt & _REGION_ENTRY_ORIGIN;
++	page->_pt_s390_gaddr = sgt & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->index |= GMAP_SHADOW_FAKE_TABLE;
++		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+ 	s_sgt = page_to_phys(page);
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+@@ -1982,6 +1998,7 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
++	page->_pt_s390_gaddr = 0;
+ 	__free_pages(page, CRST_ALLOC_ORDER);
+ 	return rc;
+ }
+@@ -2014,9 +2031,9 @@ int gmap_shadow_pgt_lookup(struct gmap *sg, unsigned long saddr,
+ 	if (table && !(*table & _SEGMENT_ENTRY_INVALID)) {
+ 		/* Shadow page tables are full pages (pte+pgste) */
+ 		page = pfn_to_page(*table >> PAGE_SHIFT);
+-		*pgt = page->index & ~GMAP_SHADOW_FAKE_TABLE;
++		*pgt = page->_pt_s390_gaddr & ~GMAP_SHADOW_FAKE_TABLE;
+ 		*dat_protection = !!(*table & _SEGMENT_ENTRY_PROTECT);
+-		*fake = !!(page->index & GMAP_SHADOW_FAKE_TABLE);
++		*fake = !!(page->_pt_s390_gaddr & GMAP_SHADOW_FAKE_TABLE);
+ 		rc = 0;
+ 	} else  {
+ 		rc = -EAGAIN;
+@@ -2054,9 +2071,9 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
+ 	page = page_table_alloc_pgste(sg->mm);
+ 	if (!page)
+ 		return -ENOMEM;
+-	page->index = pgt & _SEGMENT_ENTRY_ORIGIN;
++	page->_pt_s390_gaddr = pgt & _SEGMENT_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->index |= GMAP_SHADOW_FAKE_TABLE;
++		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+ 	s_pgt = page_to_phys(page);
+ 	/* Install shadow page table */
+ 	spin_lock(&sg->guest_table_lock);
+@@ -2101,6 +2118,7 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
++	page->_pt_s390_gaddr = 0;
+ 	page_table_free_pgste(page);
+ 	return rc;
+ 
+diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
+index 3fc9e680f174..2616d64c0e8c 100644
+--- a/include/linux/mm_types.h
++++ b/include/linux/mm_types.h
+@@ -144,7 +144,7 @@ struct page {
+ 		struct {	/* Page table pages */
+ 			unsigned long _pt_pad_1;	/* compound_head */
+ 			pgtable_t pmd_huge_pte; /* protected by page->ptl */
+-			unsigned long _pt_pad_2;	/* mapping */
++			unsigned long _pt_s390_gaddr;	/* mapping */
+ 			union {
+ 				struct mm_struct *pt_mm; /* x86 pgds only */
+ 				atomic_t pt_frag_refcount; /* powerpc */
+-- 
+2.39.2
 
-
-
--boris
-
-
-> +	BUG_ON(HYPERVISOR_vcpu_op(VCPUOP_up, xen_vcpu_nr(cpu), NULL));
->   
->   	return 0;
->   }
-> 
 
