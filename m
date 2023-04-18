@@ -4,65 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 004BBC77B78
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Apr 2023 12:48:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.522820.812423 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04CE3C77B76
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Apr 2023 12:50:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.522830.812449 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pokke-0000z5-R8; Tue, 18 Apr 2023 12:48:04 +0000
+	id 1pokmW-0002D2-S5; Tue, 18 Apr 2023 12:50:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 522820.812423; Tue, 18 Apr 2023 12:48:04 +0000
+Received: by outflank-mailman (output) from mailman id 522830.812449; Tue, 18 Apr 2023 12:50:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pokke-0000yy-Nn; Tue, 18 Apr 2023 12:48:04 +0000
-Received: by outflank-mailman (input) for mailman id 522820;
- Tue, 18 Apr 2023 12:48:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pokmW-0002CR-ME; Tue, 18 Apr 2023 12:50:00 +0000
+Received: by outflank-mailman (input) for mailman id 522830;
+ Tue, 18 Apr 2023 12:49:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BdQL=AJ=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1pokkd-0000ys-R4
- for xen-devel@lists.xenproject.org; Tue, 18 Apr 2023 12:48:03 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on061f.outbound.protection.outlook.com
- [2a01:111:f400:fe0c::61f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 41b49239-dde7-11ed-b21f-6b7b168915f2;
- Tue, 18 Apr 2023 14:48:03 +0200 (CEST)
-Received: from DB9PR06CA0010.eurprd06.prod.outlook.com (2603:10a6:10:1db::15)
- by AS8PR08MB7744.eurprd08.prod.outlook.com (2603:10a6:20b:508::16)
+ <SRS0=TTWx=AJ=citrix.com=prvs=4659928b3=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1pokmV-00029E-GE
+ for xen-devel@lists.xenproject.org; Tue, 18 Apr 2023 12:49:59 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 847e53d1-dde7-11ed-8611-37d641c3527e;
+ Tue, 18 Apr 2023 14:49:57 +0200 (CEST)
+Received: from mail-dm6nam10lp2109.outbound.protection.outlook.com (HELO
+ NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.109])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 18 Apr 2023 08:48:47 -0400
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
+ by SJ0PR03MB6952.namprd03.prod.outlook.com (2603:10b6:a03:41a::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Tue, 18 Apr
- 2023 12:47:55 +0000
-Received: from DBAEUR03FT028.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:1db:cafe::44) by DB9PR06CA0010.outlook.office365.com
- (2603:10a6:10:1db::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.47 via Frontend
- Transport; Tue, 18 Apr 2023 12:47:55 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DBAEUR03FT028.mail.protection.outlook.com (100.127.142.236) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6319.20 via Frontend Transport; Tue, 18 Apr 2023 12:47:55 +0000
-Received: ("Tessian outbound 99a3040377ca:v136");
- Tue, 18 Apr 2023 12:47:55 +0000
-Received: from b6a0658ec7c5.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 472F295A-AFBE-408D-B33F-63627DE530B6.1; 
- Tue, 18 Apr 2023 12:47:43 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b6a0658ec7c5.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 18 Apr 2023 12:47:43 +0000
-Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
- by PAVPR08MB9578.eurprd08.prod.outlook.com (2603:10a6:102:310::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Tue, 18 Apr
- 2023 12:47:36 +0000
-Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
- ([fe80::8e01:7058:6f40:90e1]) by AM6PR08MB3784.eurprd08.prod.outlook.com
- ([fe80::8e01:7058:6f40:90e1%7]) with mapi id 15.20.6298.045; Tue, 18 Apr 2023
- 12:47:36 +0000
+ 2023 12:48:44 +0000
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::a5a1:8cae:d45b:2030]) by BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::a5a1:8cae:d45b:2030%3]) with mapi id 15.20.6298.045; Tue, 18 Apr 2023
+ 12:48:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,411 +51,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41b49239-dde7-11ed-b21f-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U9ZKDk0iLgLKg/KqLgosILTuSTfBe1xK7PMUC6wjftA=;
- b=AyiQIStFaaBOQI4DQ+Qk39Jze1AK6gxb96biVZxzxSZyOtGFW1aj8tSfgkc6sxlDzQgWXX9c85sU79/wVrEUmWWW1dMplPpxryqmftyZ5iI7pnYXnyN+aNRR5ATarWrHFTeUrfX3w4JDmqNaUP4Hv7e4lU39Jjs9/myaH/WNbJs=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: a802e5ffdf604c77
-X-CR-MTA-TID: 64aa7808
+X-Inumbo-ID: 847e53d1-dde7-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1681822197;
+  h=message-id:date:from:subject:to:cc:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=1szQQbgu38S/FhK4aocf8lyVuLfzMiBV3lfjR3A9IV8=;
+  b=I4TcWFiLXIr5xtBjck7arfkX/PpfwpqmeSl6iUc2NNwKQro6mt5Xie3K
+   KgK976Y5cheFVCNX/SNGdJOeS4xgseOSNW/u95Z2BwDQZXSyCjTabUv0/
+   6NPISszp5XqfAMQ1Dtt3Kd7jFvEj7W8YK+GE4xfss32dNe3UtHgYal20e
+   g=;
+X-IronPort-RemoteIP: 104.47.58.109
+X-IronPort-MID: 105985840
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:UDGNuKhPdbWpKVb8mPKDIJ+eX161TxEKZh0ujC45NGQN5FlHY01je
+ htvD2CBOKqNZzbyLdpwbIi+8U0Cv8CByYc3GgFq/CFhQyMb9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsy+qWj0N8klgZmP6sT4AaOzyN94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tQ4ImlUcEyYo9ifnuLmbMM23eMpLuDkadZ3VnFIlVk1DN4AaLWaG+DmwIEd2z09wMdTAfzZe
+ swVLyJ1awjNaAFOPVFRD48imOCvhT/0dDgwRFC9/PJrpTSMilEhluG1YbI5efTTLSlRtm+eq
+ njL4CLSBRYCOcbE4TGE7mitlqnEmiaTtIc6TeXlp6430AHLroAVIDQ3ZVyFvvC/tlyRXdV0F
+ UUXqyUkkqdnoSRHSfG4BXVUukWsvBQRRt5RGO0S8xyWx+zf5APxLncAZi5MbpohrsBebSwn0
+ BqFks3kARRrsaaJUjSN+7GMtzSwNCMJa2gYakc5oRAt5tDipMQ/i0zJR9M6SKqt1IStSHf33
+ iyAqzU4i/MLl8kX2q6n/FfBxTWxupzOSQ1z7QLSNo640j5EiEeeT9TAwTDmATxodtjIJrVdl
+ BDoQ/Sj0d0=
+IronPort-HdrOrdr: A9a23:Abe2JqhAjyEPUkPl5erW94uAWnBQXvUji2hC6mlwRA09TyX+rb
+ HNoB17726WtN91YhodcL+7WZVoPkmsk6KdjbN/AV7aZnifhILwFvAY0WKA+V3d8k/Fh5RgPM
+ 5bGsAVNDSaNzZHZKjBjDVRx74bsaC6GHnEv5a6854Ud2xXg1wJ1XYcNu6AeXcGIzV7OQ==
+X-Talos-CUID: =?us-ascii?q?9a23=3AhuiHDmtcI0DeUW1IiutZGn3C6IsFeCSE0ivLB3W?=
+ =?us-ascii?q?RVzY0bpfPEnia+oprxp8=3D?=
+X-Talos-MUID: 9a23:6QbACwjgIZ7ywmyWE++2m8MpHeZY5JqxAUYxg7oAvOK6PC8hND2ig2Hi
+X-IronPort-AV: E=Sophos;i="5.99,207,1677560400"; 
+   d="scan'208";a="105985840"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HnO58N0vtztA9ksh2OaaEFRjk+nrkkZOg5/vahdGyZeuuo5wHZC4bI/vlTsuvMxqCzdZ3WlQ5aVzIwynTkJO6Cpt5exfSAQ0d4O3f5L8PNBbCPkw0q3K+NBNdkN4j7YR46jmIhvN0c4SwYXj2JlU5HdsRJv51gi4CMy/tezZUmR2JTZdzr4+d4g0HlPhxVJ0aHAcDqVum2XshK69P06U+ly+PfUJZLMwEVIMEsrgNpfRJCSKNkC3XpIsjy3AUM5micy8JBUi69x6egQ5/zkJGzKBCgOmF/11+JdAYm5NX9sTZa/eHbgR5fh3IVpcm16PCepvpSCrud/BgbOQ5Devkw==
+ b=i4vVERsht+FW+BYw9aUa4i0AU3p28d2eEpYOTsvZLljx7FjfdMLeIgw9TwgWDUbmyCsA4N6RKuSKibwVGBVLbrwPSqxNHbYZH8NPAwCE2sP2I758m+He9yJ800MilxPfPSoSq3NRuDX0XUNmZdmr8bCkLWZn9ev8A5irDxgAW0eJm2vJWDaZF4/i6mqrPijXmjxjaP18n5qKzDsIDevN/gfSHxF36Q7VrKFjY+MrZLjh07dPpJXmtdT/6k2n/VfemYA9doL3dtxEGiaPNLDVoA/6FoHKMLzNK0oKl8tglEoZoe6HokjOMv52/EpeLtC8imTjD87E9nsjD9X93KsDVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U9ZKDk0iLgLKg/KqLgosILTuSTfBe1xK7PMUC6wjftA=;
- b=hd/U3dfE1LasOEQIIQ0NfohOLPMMGdVPDPcCP6h+LA3ZazHNYw6WufXNYSjjAR11MwzyPpxC35+cUaim4LcpnDt9kDpzpwWGkqOnkAcaAEbnPa3QdlZEO/NzFXNXKTzgIu2bAszf7Ue/o0OrnlPvvNAXL15kqDm4eNt0s8vlHSM9n+djadWKAbZY0FX8L3C55/Mnyc1jQm8lA24BQd+iQMvHIu/ast1s3Pz1fvtetprA/UWNWp7kJTQYf4w04S1N5ecsSUgMjEgBN7YA3q5UcYkBRT2XnwwXx2YKppXBMgn1nEuaMTs12ESiF43sqwf1TEk2QbSktFzAy6F+If5SEQ==
+ bh=MRUdGIkBe+/samxQSGlU7uiOQ2DDQnQ65pV1K5DDiSI=;
+ b=AwiUbdAAPdVJp/CXHiKy8c9tVsk25wpp97vdZDzNi4upXT8P40MV+k8X17cGHp5nrTusLMCBJHT0hEFMmQ6S9K7Lw4Woeobv9EhKpeUN75mbFQ4lI7LdiKTTqMRFUOvE9Y0OBhTQD9/aIO64TcDY5xMFyrdsPyfDNMYQZxPTsJGuPTjTNq3LduMZIhPBCczxIb7cBP9EaWyGD3NNfVH2x+EeX0Oc5/JCrlEsqceXlG4+FUp2jTqQqfX9WZiTjqhu2k/uZv85uHtI7q1SV4Qlk/PXJMQJnx7z6YN7hgRy+kAHzGZ4tVsLzHq1PLtTTRtwYNCKsx5FuRAf+sx+PHhQsg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U9ZKDk0iLgLKg/KqLgosILTuSTfBe1xK7PMUC6wjftA=;
- b=AyiQIStFaaBOQI4DQ+Qk39Jze1AK6gxb96biVZxzxSZyOtGFW1aj8tSfgkc6sxlDzQgWXX9c85sU79/wVrEUmWWW1dMplPpxryqmftyZ5iI7pnYXnyN+aNRR5ATarWrHFTeUrfX3w4JDmqNaUP4Hv7e4lU39Jjs9/myaH/WNbJs=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v5 07/12] xen: enable Dom0 to use SVE feature
-Thread-Topic: [PATCH v5 07/12] xen: enable Dom0 to use SVE feature
-Thread-Index: AQHZbSQxHdlbNP/OhU+SnBXlOek6la8xDZGA
-Date: Tue, 18 Apr 2023 12:47:35 +0000
-Message-ID: <2833DC4A-95F0-482A-AD0F-3E942D1DA223@arm.com>
-References: <20230412094938.2693890-1-luca.fancellu@arm.com>
- <20230412094938.2693890-8-luca.fancellu@arm.com>
-In-Reply-To: <20230412094938.2693890-8-luca.fancellu@arm.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3731.500.231)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic:
-	AM6PR08MB3784:EE_|PAVPR08MB9578:EE_|DBAEUR03FT028:EE_|AS8PR08MB7744:EE_
-X-MS-Office365-Filtering-Correlation-Id: 81829f7c-e8b6-48a1-8d98-08db400b215d
-x-checkrecipientrouted: true
-nodisclaimer: true
+ bh=MRUdGIkBe+/samxQSGlU7uiOQ2DDQnQ65pV1K5DDiSI=;
+ b=wuCGYbW+gP7P/s7h+/6xpBPLxBSpQS3OcbE9XiX0DNrxh+aj94peMlcYeaF2aEvIsn3T0ItsdgluOfGeGe5+mwP4G4lvm2z1EoYVQL0IPVV9FpLgCkvIdu+I9gvobIzSFSZcccBmK0Q3V2nF093mvm3gGkWxdbGbjCJFjuom4iI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <69c0fb99-5c04-7b6e-bd0c-6e32bce12358@citrix.com>
+Date: Tue, 18 Apr 2023 13:48:38 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/livepatch: enable livepatching assembly source files
+Content-Language: en-GB
+To: Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+References: <20230418092458.15253-1-roger.pau@citrix.com>
+ <ab604666-e9a4-3656-73a6-c09b2ae9d3bd@suse.com>
+In-Reply-To: <ab604666-e9a4-3656-73a6-c09b2ae9d3bd@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P265CA0006.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ad::20) To BYAPR03MB3623.namprd03.prod.outlook.com
+ (2603:10b6:a02:aa::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR03MB3623:EE_|SJ0PR03MB6952:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34623a80-25b3-4f0e-cbb5-08db400b3e19
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- IWAvAOtTOmSOUgWFJ4I7/6E8UhNEy5xP8tkOeFuWlG46fF2FSOYzpFSBZMh5sDtjgziHzL+fzGtTRy8nQdEf0pdnEj51Om1GO57IYC8eT6zTvW5YRyi8Ke+NfCjfoBJktwBO3Tdkg5MyOt4Fja7NDEEm4xDuYfO390azFtqfI/wkGqFAyF9/3OIoBlBKsxFbI2JtBY+1vPdbeDSttZzyD3UdfPE+8AfbImVT8eGpARiHoIh//E1in0C5ynXa3t6Qdy53h82AeHTie3OQUBaNv92f8bRgrPVdfcxnB4bYQk9qdO6g+5sBYSKN6CMwPHJTPavk65NZefJdnTNf9ysoyt4TWDQNLM5x/61yXYwP76J/NIJtZAso5vNuBG0Zc7/JoHj0BpXxeRmSEH6AN7nYjT0PjzjiccW9swXQWgBRXcc7qSNtzzhEw/0Fk5VkbLwYYHU5C3X4XfKQvWxSUrEnMQVOMK10OA8IvR3o1c5N8E9QtCev3A9c/69irAha3jTNqnq0xQhNRSlikwjzIh1w4S3ya5m3IHgnxM+qL1FG3ysTaB7m6RwVZzNgnf+9mF0GQpcjNiSNPfn9GtbTcGWxHloUXD1SiF8BTPCCpqhNGS1L2lF3dGYlH2Hv7LhmzDChur2dxyBr9/5vCgQkQixSBw==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(39860400002)(366004)(136003)(376002)(346002)(451199021)(37006003)(478600001)(71200400001)(38100700002)(8936002)(6862004)(8676002)(316002)(41300700001)(91956017)(4326008)(6636002)(76116006)(66446008)(66556008)(66946007)(54906003)(122000001)(66476007)(186003)(2906002)(53546011)(38070700005)(6512007)(64756008)(6506007)(86362001)(83380400001)(36756003)(33656002)(2616005)(5660300002)(6486002)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <DBEBA3C24B097545A6F96461A8C96E97@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9578
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DBAEUR03FT028.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	5db6804d-0d61-43dd-0dea-08db400b15ea
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	FBIEPV7LNrH6g/NTSRciCZc7VHd+psGWpw+IZ5rPuIl93oKvjUb8hk2OziAU2MmXDxnX7lrlYId1QmdgCMlaN63QRaQO+4Jk20ztf+fM4l1n+ZZ4kY6oigtiAC6apaq8jb+pmjYsh0eCcPvhW6JhooAQUhiVREdMPcwY7AqgMO34va5dGSb8C4JHoXZ1wPKMAlvO3bgTQaFUtt5/02y10NfU7DFPCAoMi5lV+dIkPtIW0WwU9bwMGyp6VP9mHFc2rgSaT6w7Q14/mq7SViT9L7cG0tN0UZR2gqlTrv476IyzJcNyJ3RGVXtZKTn+OmDoHkb5EU4WjX8luehBOnfBwML4+C6XyaeopkS/KgHrvuW1KBrZBWBrZqJeQzbDP66hc8rOSAapgAVVoYnHqhUeiuV3mEsnKMdZIc+3qjWFFPcH/q+PaGEd3MgYTqTin0nGtutgI73gQ1+3aN+WlDEG6D2r7oqQeuKWJVSyshp2KlYd2jd7ka6Dsl2jZbHtbm/m37LOpnJpsJX6cwHIjnfAh8HN+67FAtF5nXbO4EK9T1dtt7SuL89622Deu6181WWypOmpAKAfchjNQnkPUS/mtCv2WkmZ9QrD196cATi3wXsoDdr1Bdzy8kGrovr2FkrXIc9P769urmQelvZmV34HkDh/SyOhHvoA+UK5HT/qy68xBtyb/rY0bAUvIJCxVn9k5XWLz2nwd5UyE/ojIV/rzQ==
+	a0ElOzN8+J3SDlRFNwce7bK2XyReFGjKW/gRmcklRhM9H2AaiJ+lqEUWXEuGJ2IGcTQNs/omgjcoDfHq8Mm9lvJsTDUjvwArfX+dz7/glcY/EWawJ8awQs/SObOYAFa7qDCpG6xgUhJ3zQFK/+ip2F1AKci/+WzPhXHUwS1qZQP67GOuD5dIX6Q7q4VPxK+5YzCUzGkRYpWxkBINBgAwDpvFB8WzhSuC+JKkTZKT2VOi5L9P3Opgl6kK3u+dKcUpxDnwfnB7PhM4JXjJCPMWEEvVkKJupyISqlkwl0XyvsYPR41hlvOsI89HmSHAfc8MpRjD9KP16n2Isnw78invGt19CZFR0TbAxvZQiPen9eMomQ2cxhTDKqoVyaDNt4fE6Qw1H/OEUvS9jQCJCGt+E2ji6JhD0EiSlfWdI4oT7rWDJnL7ZboXFJor6Y8NNrZk9Ssm6HJLMTDposwPxwlFe0Su5nKTuMU58jM2QXAQYQiHfZ/fOioh0s3o3knOnmMCyT3WJ+OwcG2BU0ljySH3iQ9LjNN5jvIlXdA7xIJnGtPpT4CmqinPNdh2o024l6zkv+FQ17+zjUzrB/uNn+UcUq/+y4Q4IbDiyKqhUdFRkNx8Tjsd8cXqJ+/+m/2rsOdLl6MGEccdMnVMmPfHl323qg==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(396003)(346002)(39860400002)(136003)(376002)(451199021)(40470700004)(46966006)(36840700001)(6506007)(336012)(83380400001)(6512007)(26005)(36756003)(86362001)(47076005)(82310400005)(186003)(356005)(40460700003)(2906002)(53546011)(107886003)(33656002)(2616005)(5660300002)(36860700001)(6486002)(8676002)(6862004)(8936002)(478600001)(81166007)(54906003)(37006003)(41300700001)(82740400003)(316002)(70586007)(40480700001)(70206006)(4326008)(6636002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Apr 2023 12:47:55.1654
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(39860400002)(366004)(376002)(346002)(136003)(451199021)(31696002)(2906002)(82960400001)(478600001)(6486002)(6666004)(2616005)(38100700002)(83380400001)(26005)(53546011)(6506007)(6512007)(31686004)(86362001)(186003)(36756003)(41300700001)(316002)(5660300002)(8676002)(8936002)(6636002)(110136005)(66556008)(66476007)(4326008)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Sk9YRmd4aVQzZGttcmVRR2VkdUYwMVJxR1RZTCt2VTlvelRxVU9rU1UrT01k?=
+ =?utf-8?B?RFJ6c2orVWRnY1h6MWxRZkdPb0VzTG52MnZqV09zL0YrRWRoVnQ5eDhZbG5E?=
+ =?utf-8?B?YXk0eklRM2plcm84WEVNOG9KNVpJdXVSZ2RhUHF3S2huOHNVT0VyOHRIMjVT?=
+ =?utf-8?B?S0tFZGRiK04wWms2dWN6c2xMMUFTRi93MUxkQUhQRlJ5TUhkRUtNM3ZoSmIv?=
+ =?utf-8?B?bjQ0bktXSzBlR2hOeVFjaDBJZmhtMmp6ejZXQzJUM21MaHRMRTYvTzZtZ2c3?=
+ =?utf-8?B?OXROUTUvNm1hUWJ6MHk5Yi96UlhSODk3ZTA4OU5kVS91Vnl5bGQ4MklveTBL?=
+ =?utf-8?B?Zmorc09lN2NUVW5wOUYvUFR1bHRtY3ljdkcvWjZmSTRVUDlkemZ0MGlkRkJO?=
+ =?utf-8?B?ZGhPRnhUeHRqMTNTYkRSdlRmbjVHdHpTTzBKZEhYOUFwRUFoa3V0eWZhQWV1?=
+ =?utf-8?B?K2tCdnY4aVBDYnVaZys4M1liOXBCNEFrL0VpQTdMZkRicGNrT2g5R09zK3hO?=
+ =?utf-8?B?cThvL2dZeEcrK2FsR1NjWmZ1ZnJTQ25vWmdHQzFRL0dWV3diR3dvRmtOYlhB?=
+ =?utf-8?B?OEtiTVpycnIzZW5jazF3VUs4V20vY3ZpZXBvK2FkeXFWL201Sys4OG1aS054?=
+ =?utf-8?B?c2tXN2xrWkd6UUdOWVplSGo4cXc0TW5sYXk0K29Oa2FmbjgxV0dyZWJ1Q1k2?=
+ =?utf-8?B?K21WV1dONWtVNVJ2Z3BhTjhpS0R3bnpDanVNS0RWUnRENW1vajh3TGtkWDRQ?=
+ =?utf-8?B?QnpIOWNpT0lNZVM0MWVncDd2cjl6ekFKaEFPMWV4UWdRZmpzM0xsQ01GNnBB?=
+ =?utf-8?B?TU5UZ0lFa1RtNjJNWW9XcmkwUmUvakZEQmdETmlEdDRJV3JpT2ZzUGZrVUpF?=
+ =?utf-8?B?TXUyNmhFWlFPc1p0eXd0dE1ROUNEY0lsaUx6N2pjbW5iMUtsQUVuck1QRytD?=
+ =?utf-8?B?bFFFK0hHbVRxdkU0Nmk0VkZxRy82cHpjeGVxYnp1UjU1VXl0WFJBSDAyTytp?=
+ =?utf-8?B?V0VvenZQdDJzVU9UakV1bWM4VWtpNkJhZ05Hd0xGbmJXRE1XZWhnTHorb2ho?=
+ =?utf-8?B?bFJyUTBscXdJYjFidGVDSmZUclo5MnRlbDlJWnF1RnZoUmRDakhoaWYzNHZH?=
+ =?utf-8?B?dzlSU29GaDhyOGFYUHNZMVJkRHp1MXhkWDZiaEhPTjNyTjMyZ0s1cDljUUVP?=
+ =?utf-8?B?am5SZ3NnemRKZjAwZm45bTg3Qy9nRzhQNjNHOTdSRHdSNGN0TG1sTnI0ZzJp?=
+ =?utf-8?B?aWtZQ3Mxa0dsNGRtU29BWnVLajBGaVlOdnpMRTl1TDQ2eSt1ankxaElDc1Zu?=
+ =?utf-8?B?NXEyZEhKWXdJRmtLZC94WExaMlBjNGRzRFFqd1BVSXdvNTlmYTVzWk9MZVhE?=
+ =?utf-8?B?N21TcXIranlpTEFFZEpkdjVkZEVZb0NnTFJFbzZyZzRSbjhCaGtMeUFwZHNm?=
+ =?utf-8?B?UzJza0tRbVB3STFudDh0WEJqWVNGWk0zNnYyR1B6SlVNM0pIb05WcVl2WC9p?=
+ =?utf-8?B?L09tTmlZMlNuQ2E1UlRxY2grYVpTclpialNOTndhOHJvQXpDMGt3dk5TNGZ2?=
+ =?utf-8?B?SzV6MnJWNkFaWm96OEdVdkhuUkVXNngrVFFFNW5kUEhFZElDUkNqZ3I0Z3N3?=
+ =?utf-8?B?VjBIQ01RN2JQUmFIYXpmUklNbmR2Q2lIWEJ6aXVsRkxYamVLNHFYSWtNWGRS?=
+ =?utf-8?B?aGordzZkdm5mRmh6SWxrOTlaRmRHRnh0Q1Y3M0dNamoyckc0cWVuV2IrRW0z?=
+ =?utf-8?B?UWtBTXFoMVZZaEd6a01JOE1yTXpVL1VMNVhSVVJVb1c5TDB0UGU3TmJ5RE1H?=
+ =?utf-8?B?ZUt4bEJHTmFqMnRkYnd2MHZkRmtmS1lpNlBXd2pKN3czZ2xvZmFUVEdJamNM?=
+ =?utf-8?B?Y2VaMUN4aXpkTExJc1FHcWdIVHVQVkVnbk9uT2prSzhYZVNvYUs5RXZpMmhF?=
+ =?utf-8?B?Nzl2NVBuWDhGUUtjWDVhTGtGdHpFRGNPYjlPUmYrNEVwSlNHeVVWVmZsVXFa?=
+ =?utf-8?B?UVNpM0s5OGFoS2hpd2w2MHNLUkw1S1F5UkN5TmZmMFJlNFpubUJobE04Z1ZE?=
+ =?utf-8?B?dDlobERhTlE5eU1MNWw4SmsrYjh4cHJ4UXE1UGdSKzFVdUlVSWlIYVBqWFR1?=
+ =?utf-8?B?RzBDak5Mb003WXNUQjREL09tNUdIREFLRFg1dHg4aUlHTk5Ka250OThwSDdr?=
+ =?utf-8?B?bXc9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	GiHwHvVnhpCMl1KJBuPMwRHPTOHmapwrDNEPKVEy+7NqRmKuErM5R9LCHi3g4v/JZ4eB4MZZkCFCT6PKlTkBAzwAnh5nhUcM/f2Tj/1edNQfJWfVuRv3Nm0opqfJURKx6xJWv1e4GgPsTvTtJkx93V1ZbqJm6/EcD7+3ohyFRnv+QhFnzPrV9EpBWNBqs1LS+U5S0ifxSgWMqA3lfZbNK5mNTc9rnG+TCIVl2XWpbRs9roKtAjhK98cZbnQhO11bjUVxs79u208DFaOL1G693rJ14ewE5q0fP6ZEzIIZFAnI2zv6pEOo9NTLErSxXYA2S1r5/UrSRK7aTSDcWzVveDs3o7NlDS2mJWKWJyYf5ijvTewi8TfdMwJMLOBeov6aTGSeHO3xs+6xfGCz/gMQIvUANV/27zAgnsOEtDd7swQ/hvfmNeU9ANjvwKC349KTmWDxW68+l1Jv0JD4r7xqe9CH+JxmhUxBLjpFlFkOyORJo5bT35c+o8BQHitqPmMcILdY7KNDlkw+YfYynMDwAvACVoroOTizFDYcPlahbyco7a8Q+CL6hEjFx7E4YWrz/xqt6srH66LMBualrUZfnmFnREb+/gAGYArRL7OYRHwQztPcDM1qFjzbUBucPwVZHYFL6jFRmTs85plnh2rmXO+37CvpCKtWBg9AiklraX9y7sqlSlznLav8tGkianEPByG0d49f38hZgV5yNTvC+VA/gEUmHoR/HZtoTRcx21Ef55yPM73LEEjBvi/gvhicdd8/L/f7ytTrRJYIjugTFFdQjYEV2FctyycU2fX57i/KVxrLms3DQc0OOrECOX6pJ3vVMhgjFSCHicj6QU3q/Q==
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34623a80-25b3-4f0e-cbb5-08db400b3e19
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Apr 2023 12:48:43.6660
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81829f7c-e8b6-48a1-8d98-08db400b215d
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DBAEUR03FT028.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7744
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XSiJM4MCRSFVAd+g4rmwwXMQH5lTV2dC/UJBOGRAfIq9LDNzwekA5KdMVt3txl0PjL2xnTjZZ0fEwMxrJAuQdUVNCMsycihxgYMRs00YE4o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6952
 
-Hi Luca,
+On 18/04/2023 12:00 pm, Jan Beulich wrote:
+> On 18.04.2023 11:24, Roger Pau Monne wrote:
+>> Some of the assembly entry points cannot be safely patched until it's
+>> safe to use jmp, as livepatch can replace a whole block with a jmp to
+>> a new address, and that won't be safe until speculative mitigations
+>> have been applied.
+> Isn't the issue only with indirect JMP, whereas livepatch uses only
+> direct ones?
 
-> On 12 Apr 2023, at 11:49, Luca Fancellu <Luca.Fancellu@arm.com> wrote:
->=20
-> Add a command line parameter to allow Dom0 the use of SVE resources,
-> the command line parameter sve=3D<integer>, sub argument of dom0=3D,
-> controls the feature on this domain and sets the maximum SVE vector
-> length for Dom0.
->=20
-> Add a new function, parse_signed_integer(), to parse an integer
-> command line argument.
->=20
-> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-> ---
-> Changes from v4:
-> - Negative values as user param means max supported HW VL (Jan)
-> - update documentation, make use of no_config_param(), rename
->   parse_integer into parse_signed_integer and take long long *,
->   also put a comment on the -2 return condition, update
->   declaration comment to reflect the modifications (Jan)
-> Changes from v3:
-> - Don't use fixed len types when not needed (Jan)
-> - renamed domainconfig_encode_vl to sve_encode_vl
-> - Use a sub argument of dom0=3D to enable the feature (Jan)
-> - Add parse_integer() function
-> Changes from v2:
-> - xen_domctl_createdomain field has changed into sve_vl and its
->   value now is the VL / 128, create an helper function for that.
-> Changes from v1:
-> - No changes
-> Changes from RFC:
-> - Changed docs to explain that the domain won't be created if the
->   requested vector length is above the supported one from the
->   platform.
-> ---
-> docs/misc/xen-command-line.pandoc    | 18 ++++++++++++++++--
-> xen/arch/arm/arm64/sve.c             | 21 +++++++++++++++++++++
-> xen/arch/arm/domain_build.c          | 27 +++++++++++++++++++++++++++
-> xen/arch/arm/include/asm/arm64/sve.h | 15 +++++++++++++++
-> xen/common/kernel.c                  | 25 +++++++++++++++++++++++++
-> xen/include/xen/lib.h                | 10 ++++++++++
-> 6 files changed, 114 insertions(+), 2 deletions(-)
->=20
-> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-li=
-ne.pandoc
-> index e0b89b7d3319..9c0790ce6c7c 100644
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -777,9 +777,9 @@ Specify the bit width of the DMA heap.
->=20
-> ### dom0
->     =3D List of [ pv | pvh, shadow=3D<bool>, verbose=3D<bool>,
-> -                cpuid-faulting=3D<bool>, msr-relaxed=3D<bool> ]
-> +                cpuid-faulting=3D<bool>, msr-relaxed=3D<bool> ] (x86)
->=20
-> -    Applicability: x86
-> +    =3D List of [ sve=3D<integer> ] (Arm)
->=20
-> Controls for how dom0 is constructed on x86 systems.
->=20
-> @@ -838,6 +838,20 @@ Controls for how dom0 is constructed on x86 systems.
->=20
->     If using this option is necessary to fix an issue, please report a bu=
-g.
->=20
-> +Enables features on dom0 on Arm systems.
-> +
-> +*   The `sve` integer parameter enables Arm SVE usage for Dom0 domain an=
-d sets
-> +    the maximum SVE vector length.
-> +    A value equal to 0 disables the feature, this is the default value.
-> +    Values below 0 means the feature uses the maximum SVE vector length
-> +    supported by hardware, please be aware that if the hardware doesn't =
-supports
-> +    SVE, the feature remains disabled.
-> +    Values above 0 explicitly set the maximum SVE vector length for Dom0=
-,
-> +    allowed values are from 128 to maximum 2048, being multiple of 128.
-> +    Please note that when the user explicitly specify the value, if that=
- value
-> +    is above the hardware supported maximum SVE vector length, the domai=
-n
-> +    creation will fail and the system will stop.
-> +
-> ### dom0-cpuid
->     =3D List of comma separated booleans
->=20
-> diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
-> index 5485648850a0..ad5db62e1805 100644
-> --- a/xen/arch/arm/arm64/sve.c
-> +++ b/xen/arch/arm/arm64/sve.c
-> @@ -9,6 +9,9 @@
-> #include <xen/sizes.h>
-> #include <asm/arm64/sve.h>
->=20
-> +/* opt_dom0_sve: allow Dom0 to use SVE and set maximum vector length. */
-> +int __initdata opt_dom0_sve;
-> +
-> extern unsigned int sve_get_hw_vl(void);
-> extern void sve_save_ctx(uint64_t *sve_ctx, uint64_t *pregs, int save_ffr=
-);
-> extern void sve_load_ctx(uint64_t const *sve_ctx, uint64_t const *pregs,
-> @@ -118,3 +121,21 @@ void sve_restore_state(struct vcpu *v)
->=20
->     sve_load_ctx(sve_ctx_zreg_end, v->arch.vfp.fpregs, 1);
-> }
-> +
-> +int __init sve_sanitize_vl_param(int val, unsigned int *out)
-> +{
-> +    /*
-> +     * Negative SVE parameter value means to use the maximum supported
-> +     * vector length, otherwise if a positive value is provided, check i=
-f the
-> +     * vector length is a multiple of 128 and not bigger than the maximu=
-m value
-> +     * 2048
-> +     */
-> +    if ( val < 0 )
-> +        *out =3D get_sys_vl_len();
-> +    else if ( ((val % SVE_VL_MULTIPLE_VAL) =3D=3D 0) && (val <=3D SVE_VL=
-_MAX_BITS) )
-> +        *out =3D val;
+We already have direct jumps prior to speculation safety logic. 
+Livepatching putting more in doesn't change our safety.
 
-Shouldn't you also check if it is not greater than the maximum vector lengt=
-h ?
+>> --- a/xen/arch/x86/include/asm/config.h
+>> +++ b/xen/arch/x86/include/asm/config.h
+>> @@ -44,6 +44,20 @@
+>>  /* Linkage for x86 */
+>>  #ifdef __ASSEMBLY__
+>>  #define ALIGN .align 16,0x90
+>> +#ifdef CONFIG_LIVEPATCH
+>> +#define START_LP(name)                          \
+>> +  jmp name;                                     \
+>> +  .pushsection .text.name, "ax", @progbits;     \
+> In how far is livepatch susceptible to two .text.* sections of the same
+> name? This can result here and perhaps also for static C functions.
 
-> +    else
-> +        return -1;
-> +
-> +    return 0;
-> +}
-> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> index eeb4662f0eee..3f30ef5c37b6 100644
-> --- a/xen/arch/arm/domain_build.c
-> +++ b/xen/arch/arm/domain_build.c
-> @@ -26,6 +26,7 @@
-> #include <asm/platform.h>
-> #include <asm/psci.h>
-> #include <asm/setup.h>
-> +#include <asm/arm64/sve.h>
-> #include <asm/cpufeature.h>
-> #include <asm/domain_build.h>
-> #include <xen/event.h>
-> @@ -61,6 +62,21 @@ custom_param("dom0_mem", parse_dom0_mem);
->=20
-> int __init parse_arch_dom0_param(const char *s, const char *e)
-> {
-> +    long long val;
-> +
-> +    if ( !parse_signed_integer("sve", s, e, &val) )
-> +    {
-> +#ifdef CONFIG_ARM64_SVE
-> +        if ( (val >=3D INT_MIN) && (val <=3D INT_MAX) )
-> +            opt_dom0_sve =3D val;
-> +        else
-> +            printk(XENLOG_INFO "'sve=3D%lld' value out of range!\n", val=
-);
-> +#else
-> +        no_config_param("ARM64_SVE", "sve", s, e);
-> +#endif
+Well - the section is the unit of binary-diffing noticing a difference.
 
-Correct me if my understanding is wrong but here you just ignore the sve
-parameter if SVE is not supported by Xen ?
+If we have a naming collision here, then I expect the linker will merge
+the two section, and the livepatch will end up bigger than it strictly
+needs to be.
 
-I am a bit wondering if we should not just refuse it here as the user might
-wrongly think that his parameter had some effect.
-
-Or is it a usual way to handle this case ?
-
-> +        return 0;
-> +    }
-> +
->     return -EINVAL;
-> }
->=20
-> @@ -4109,6 +4125,17 @@ void __init create_dom0(void)
->     if ( iommu_enabled )
->         dom0_cfg.flags |=3D XEN_DOMCTL_CDF_iommu;
->=20
-> +    if ( opt_dom0_sve )
-> +    {
-> +        unsigned int vl;
-> +
-> +        if ( !sve_sanitize_vl_param(opt_dom0_sve, &vl) )
-> +            dom0_cfg.arch.sve_vl =3D sve_encode_vl(vl);
-> +        else
-> +            printk(XENLOG_WARNING
-> +                   "SVE vector length error, disable feature for Dom0\n"=
-);
-> +    }
-> +
->     dom0 =3D domain_create(0, &dom0_cfg, CDF_privileged | CDF_directmap);
->     if ( IS_ERR(dom0) )
->         panic("Error creating domain 0 (rc =3D %ld)\n", PTR_ERR(dom0));
-> diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/=
-asm/arm64/sve.h
-> index fc162c9d2cf7..f1801876b5de 100644
-> --- a/xen/arch/arm/include/asm/arm64/sve.h
-> +++ b/xen/arch/arm/include/asm/arm64/sve.h
-> @@ -19,8 +19,15 @@ static inline unsigned int sve_decode_vl(unsigned int =
-sve_vl)
->     return sve_vl * SVE_VL_MULTIPLE_VAL;
-> }
->=20
-> +static inline unsigned int sve_encode_vl(unsigned int sve_vl_bits)
-> +{
-> +    return sve_vl_bits / SVE_VL_MULTIPLE_VAL;
-> +}
-> +
-> #ifdef CONFIG_ARM64_SVE
->=20
-> +extern int opt_dom0_sve;
-> +
-> register_t compute_max_zcr(void);
-> register_t vl_to_zcr(unsigned int vl);
-> unsigned int get_sys_vl_len(void);
-> @@ -28,9 +35,12 @@ int sve_context_init(struct vcpu *v);
-> void sve_context_free(struct vcpu *v);
-> void sve_save_state(struct vcpu *v);
-> void sve_restore_state(struct vcpu *v);
-> +int sve_sanitize_vl_param(int val, unsigned int *out);
->=20
-> #else /* !CONFIG_ARM64_SVE */
->=20
-> +#define opt_dom0_sve (0)
-> +
-> static inline register_t compute_max_zcr(void)
-> {
->     return 0;
-> @@ -55,6 +65,11 @@ static inline void sve_context_free(struct vcpu *v) {}
-> static inline void sve_save_state(struct vcpu *v) {}
-> static inline void sve_restore_state(struct vcpu *v) {}
->=20
-> +static inline int sve_sanitize_vl_param(int val, unsigned int *out)
-> +{
-> +    return -1;
-> +}
-> +
-> #endif /* CONFIG_ARM64_SVE */
->=20
-> #endif /* _ARM_ARM64_SVE_H */
-> diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-> index f7b1f65f373c..29d05282c8bb 100644
-> --- a/xen/common/kernel.c
-> +++ b/xen/common/kernel.c
-> @@ -314,6 +314,31 @@ int parse_boolean(const char *name, const char *s, c=
-onst char *e)
->     return -1;
-> }
->=20
-> +int __init parse_signed_integer(const char *name, const char *s, const c=
-har *e,
-> +                                long long *val)
-> +{
-> +    size_t slen, nlen;
-> +    const char *str;
-> +    long long pval;
-> +
-> +    slen =3D e ? ({ ASSERT(e >=3D s); e - s; }) : strlen(s);
-> +    nlen =3D strlen(name);
-> +
-> +    /* Does s start with name or contains only the name? */
-> +    if ( (slen <=3D nlen) || strncmp(s, name, nlen) || (s[nlen] !=3D '=
-=3D') )
-> +        return -1;
-> +
-> +    pval =3D simple_strtoll(&s[nlen + 1], &str, 0);
-> +
-> +    /* Number not recognised */
-> +    if ( str !=3D e )
-> +        return -2;
-> +
-> +    *val =3D pval;
-> +
-> +    return 0;
-> +}
-> +
-> int cmdline_strcmp(const char *frag, const char *name)
-> {
->     for ( ; ; frag++, name++ )
-> diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-> index e914ccade095..5343ee7a944a 100644
-> --- a/xen/include/xen/lib.h
-> +++ b/xen/include/xen/lib.h
-> @@ -94,6 +94,16 @@ int parse_bool(const char *s, const char *e);
->  */
-> int parse_boolean(const char *name, const char *s, const char *e);
->=20
-> +/**
-> + * Given a specific name, parses a string of the form:
-> + *   $NAME=3D<integer number>
-> + * returning 0 and a value in val, for a recognised integer.
-> + * Returns -1 for name not found, general errors, or -2 if name is found=
- but
-> + * not recognised number.
-> + */
-> +int parse_signed_integer(const char *name, const char *s, const char *e,
-> +                         long long *val);
-> +
-> /**
->  * Very similar to strcmp(), but will declare a match if the NUL in 'name=
-'
->  * lines up with comma, colon, semicolon or equals in 'frag'.  Designed f=
-or
-> --=20
-> 2.34.1
->=20
-
-Cheers
-Bertrand
-
-
+~Andrew
 
