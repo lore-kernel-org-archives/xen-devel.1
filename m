@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBA1C6FD18
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:28:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.523640.813879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36916C6FD18
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:29:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.523645.813929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBbb-0001in-95; Wed, 19 Apr 2023 17:28:31 +0000
+	id 1ppBbm-00039G-QD; Wed, 19 Apr 2023 17:28:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 523640.813879; Wed, 19 Apr 2023 17:28:31 +0000
+Received: by outflank-mailman (output) from mailman id 523645.813929; Wed, 19 Apr 2023 17:28:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBbb-0001ig-66; Wed, 19 Apr 2023 17:28:31 +0000
-Received: by outflank-mailman (input) for mailman id 523640;
- Wed, 19 Apr 2023 17:28:30 +0000
+	id 1ppBbm-000390-MF; Wed, 19 Apr 2023 17:28:42 +0000
+Received: by outflank-mailman (input) for mailman id 523645;
+ Wed, 19 Apr 2023 17:28:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pu/K=AK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppBba-0001ia-M1
- for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:28:30 +0000
+ id 1ppBbl-0001ia-R8
+ for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:28:41 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 985f871d-ded7-11ed-b21f-6b7b168915f2;
- Wed, 19 Apr 2023 19:28:28 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ id a0094f25-ded7-11ed-b21f-6b7b168915f2;
+ Wed, 19 Apr 2023 19:28:41 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-637-61a8q54tM8SArQfWECWbMQ-1; Wed, 19 Apr 2023 13:28:22 -0400
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
+ us-mta-486-UcPUP67CM-aZaF8Q22BlDA-1; Wed, 19 Apr 2023 13:28:36 -0400
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CF33185C069;
- Wed, 19 Apr 2023 17:28:20 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 962993C14844;
+ Wed, 19 Apr 2023 17:28:35 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.234])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 65E3C483EC4;
- Wed, 19 Apr 2023 17:28:19 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D2833492B04;
+ Wed, 19 Apr 2023 17:28:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 985f871d-ded7-11ed-b21f-6b7b168915f2
+X-Inumbo-ID: a0094f25-ded7-11ed-b21f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681925307;
+	s=mimecast20190719; t=1681925320;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=JAqVXMqjwf5xGB6ARdoAeUgfvsknmkfSYSzm+VSDhMc=;
-	b=B/gffyY6tWv2BCXraGKpu2rn5Fy+0sL3j0wosTVDP7L4lg5wFOmT8bf3qog7y3en4Qcg3k
-	JDOIBGCNx0/mxxnB9HHBCnzAH/3jWvA42caQyOlAaNzHyw/2CAtZWAF1DixhnxAcSbjIvu
-	jDtpAIZMsaf9Gb15G0Q+ZZQFG/CP7RY=
-X-MC-Unique: 61a8q54tM8SArQfWECWbMQ-1
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+bLg6uTzP7Qgt6lQ3xKdY10AY3Nt3xLke1uGL1u9ShU=;
+	b=JoXg8kWo+HvsWqgyV4zeD1qapFv8eXMPyGRyIG15Js1YHFbfccP8uA3OdR9F5R08P+LnEC
+	lNb41IBhFjndMGGX68m2kcqOknhn9XYEBmH5GRWgdQ9RrjxuZFGWg1WDZ5hpPLHyNFaId/
+	cYRQScHyAdh2epn9Ma/uTmzylurGPC0=
+X-MC-Unique: UcPUP67CM-aZaF8Q22BlDA-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -94,97 +95,153 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Stefan Weil <sw@weilnetz.de>,
 	Xie Yongji <xieyongji@bytedance.com>,
 	David Woodhouse <dwmw2@infradead.org>
-Subject: [PATCH v2 00/16] block: remove aio_disable_external() API
-Date: Wed, 19 Apr 2023 13:28:01 -0400
-Message-Id: <20230419172817.272758-1-stefanha@redhat.com>
+Subject: [PATCH v2 06/16] block/export: wait for vhost-user-blk requests when draining
+Date: Wed, 19 Apr 2023 13:28:07 -0400
+Message-Id: <20230419172817.272758-7-stefanha@redhat.com>
+In-Reply-To: <20230419172817.272758-1-stefanha@redhat.com>
+References: <20230419172817.272758-1-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
 
-v2:
-- Do not rely on BlockBackend request queuing, implement .drained_begin/end()
-  instead in xen-block, virtio-blk, and virtio-scsi [Paolo]
-- Add qdev_is_realized() API [Philippe]
-- Add patch to avoid AioContext lock around blk_exp_ref/unref() [Paolo]
-- Add patch to call .drained_begin/end() from main loop thread to simplify
-  callback implementations
+Each vhost-user-blk request runs in a coroutine. When the BlockBackend
+enters a drained section we need to enter a quiescent state. Currently
+any in-flight requests race with bdrv_drained_begin() because it is
+unaware of vhost-user-blk requests.
 
-The aio_disable_external() API temporarily suspends file descriptor monitoring
-in the event loop. The block layer uses this to prevent new I/O requests being
-submitted from the guest and elsewhere between bdrv_drained_begin() and
-bdrv_drained_end().
+When blk_co_preadv/pwritev()/etc returns it wakes the
+bdrv_drained_begin() thread but vhost-user-blk request processing has
+not yet finished. The request coroutine continues executing while the
+main loop thread thinks it is in a drained section.
 
-While the block layer still needs to prevent new I/O requests in drained
-sections, the aio_disable_external() API can be replaced with
-.drained_begin/end/poll() callbacks that have been added to BdrvChildClass and
-BlockDevOps.
+One example where this is unsafe is for blk_set_aio_context() where
+bdrv_drained_begin() is called before .aio_context_detached() and
+.aio_context_attach(). If request coroutines are still running after
+bdrv_drained_begin(), then the AioContext could change underneath them
+and they race with new requests processed in the new AioContext. This
+could lead to virtqueue corruption, for example.
 
-This newer .bdrained_begin/end/poll() approach is attractive because it works
-without specifying a specific AioContext. The block layer is moving towards
-multi-queue and that means multiple AioContexts may be processing I/O
-simultaneously.
+(This example is theoretical, I came across this while reading the
+code and have not tried to reproduce it.)
 
-The aio_disable_external() was always somewhat hacky. It suspends all file
-descriptors that were registered with is_external=true, even if they have
-nothing to do with the BlockDriverState graph nodes that are being drained.
-It's better to solve a block layer problem in the block layer than to have an
-odd event loop API solution.
+It's easy to make bdrv_drained_begin() wait for in-flight requests: add
+a .drained_poll() callback that checks the VuServer's in-flight counter.
+VuServer just needs an API that returns true when there are requests in
+flight. The in-flight counter needs to be atomic.
 
-The approach in this patch series is to implement BlockDevOps
-.drained_begin/end() callbacks that temporarily stop file descriptor handlers.
-This ensures that new I/O requests are not submitted in drained sections.
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+---
+ include/qemu/vhost-user-server.h     |  4 +++-
+ block/export/vhost-user-blk-server.c | 19 +++++++++++++++++++
+ util/vhost-user-server.c             | 14 ++++++++++----
+ 3 files changed, 32 insertions(+), 5 deletions(-)
 
-The first two virtio-scsi patches were already sent as a separate series. I
-included them because they are necessary in order to fully remove
-aio_disable_external().
-
-Based-on: 087bc644b7634436ca9d52fe58ba9234e2bef026 (kevin/block-next)
-
-Stefan Hajnoczi (16):
-  hw/qdev: introduce qdev_is_realized() helper
-  virtio-scsi: avoid race between unplug and transport event
-  virtio-scsi: stop using aio_disable_external() during unplug
-  block/export: only acquire AioContext once for
-    vhost_user_server_stop()
-  util/vhost-user-server: rename refcount to in_flight counter
-  block/export: wait for vhost-user-blk requests when draining
-  block/export: stop using is_external in vhost-user-blk server
-  hw/xen: do not use aio_set_fd_handler(is_external=true) in
-    xen_xenstore
-  block: add blk_in_drain() API
-  block: drain from main loop thread in bdrv_co_yield_to_drain()
-  xen-block: implement BlockDevOps->drained_begin()
-  hw/xen: do not set is_external=true on evtchn fds
-  block/export: rewrite vduse-blk drain code
-  block/export: don't require AioContext lock around blk_exp_ref/unref()
-  block/fuse: do not set is_external=true on FUSE fd
-  virtio: make it possible to detach host notifier from any thread
-
- hw/block/dataplane/xen-block.h              |   2 +
- include/block/export.h                      |   2 +
- include/hw/qdev-core.h                      |  17 ++-
- include/qemu/vhost-user-server.h            |   8 +-
- include/sysemu/block-backend-common.h       |  25 ++--
- include/sysemu/block-backend-global-state.h |   1 +
- block/block-backend.c                       |   7 ++
- block/export/export.c                       |  13 +-
- block/export/fuse.c                         |  58 ++++++++-
- block/export/vduse-blk.c                    | 128 ++++++++++++++------
- block/export/vhost-user-blk-server.c        |  73 +++++++----
- block/io.c                                  |   3 +-
- hw/block/dataplane/virtio-blk.c             |   2 +
- hw/block/dataplane/xen-block.c              |  42 +++++--
- hw/block/xen-block.c                        |  24 +++-
- hw/i386/kvm/xen_xenstore.c                  |   2 +-
- hw/scsi/scsi-bus.c                          |   6 +-
- hw/scsi/scsi-disk.c                         |   1 +
- hw/scsi/virtio-scsi-dataplane.c             |   9 ++
- hw/scsi/virtio-scsi.c                       |  21 ++--
- hw/xen/xen-bus.c                            |  11 +-
- util/vhost-user-server.c                    |  37 +++---
- 22 files changed, 348 insertions(+), 144 deletions(-)
-
+diff --git a/include/qemu/vhost-user-server.h b/include/qemu/vhost-user-server.h
+index bc0ac9ddb6..b1c1cda886 100644
+--- a/include/qemu/vhost-user-server.h
++++ b/include/qemu/vhost-user-server.h
+@@ -40,8 +40,9 @@ typedef struct {
+     int max_queues;
+     const VuDevIface *vu_iface;
+ 
++    unsigned int in_flight; /* atomic */
++
+     /* Protected by ctx lock */
+-    unsigned int in_flight;
+     bool wait_idle;
+     VuDev vu_dev;
+     QIOChannel *ioc; /* The I/O channel with the client */
+@@ -62,6 +63,7 @@ void vhost_user_server_stop(VuServer *server);
+ 
+ void vhost_user_server_inc_in_flight(VuServer *server);
+ void vhost_user_server_dec_in_flight(VuServer *server);
++bool vhost_user_server_has_in_flight(VuServer *server);
+ 
+ void vhost_user_server_attach_aio_context(VuServer *server, AioContext *ctx);
+ void vhost_user_server_detach_aio_context(VuServer *server);
+diff --git a/block/export/vhost-user-blk-server.c b/block/export/vhost-user-blk-server.c
+index e93f2ed6b4..dbf5207162 100644
+--- a/block/export/vhost-user-blk-server.c
++++ b/block/export/vhost-user-blk-server.c
+@@ -254,6 +254,22 @@ static void vu_blk_exp_request_shutdown(BlockExport *exp)
+     vhost_user_server_stop(&vexp->vu_server);
+ }
+ 
++/*
++ * Ensures that bdrv_drained_begin() waits until in-flight requests complete.
++ *
++ * Called with vexp->export.ctx acquired.
++ */
++static bool vu_blk_drained_poll(void *opaque)
++{
++    VuBlkExport *vexp = opaque;
++
++    return vhost_user_server_has_in_flight(&vexp->vu_server);
++}
++
++static const BlockDevOps vu_blk_dev_ops = {
++    .drained_poll  = vu_blk_drained_poll,
++};
++
+ static int vu_blk_exp_create(BlockExport *exp, BlockExportOptions *opts,
+                              Error **errp)
+ {
+@@ -292,6 +308,7 @@ static int vu_blk_exp_create(BlockExport *exp, BlockExportOptions *opts,
+     vu_blk_initialize_config(blk_bs(exp->blk), &vexp->blkcfg,
+                              logical_block_size, num_queues);
+ 
++    blk_set_dev_ops(exp->blk, &vu_blk_dev_ops, vexp);
+     blk_add_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_detach,
+                                  vexp);
+ 
+@@ -299,6 +316,7 @@ static int vu_blk_exp_create(BlockExport *exp, BlockExportOptions *opts,
+                                  num_queues, &vu_blk_iface, errp)) {
+         blk_remove_aio_context_notifier(exp->blk, blk_aio_attached,
+                                         blk_aio_detach, vexp);
++        blk_set_dev_ops(exp->blk, NULL, NULL);
+         g_free(vexp->handler.serial);
+         return -EADDRNOTAVAIL;
+     }
+@@ -312,6 +330,7 @@ static void vu_blk_exp_delete(BlockExport *exp)
+ 
+     blk_remove_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_detach,
+                                     vexp);
++    blk_set_dev_ops(exp->blk, NULL, NULL);
+     g_free(vexp->handler.serial);
+ }
+ 
+diff --git a/util/vhost-user-server.c b/util/vhost-user-server.c
+index 1622f8cfb3..2e6b640050 100644
+--- a/util/vhost-user-server.c
++++ b/util/vhost-user-server.c
+@@ -78,17 +78,23 @@ static void panic_cb(VuDev *vu_dev, const char *buf)
+ void vhost_user_server_inc_in_flight(VuServer *server)
+ {
+     assert(!server->wait_idle);
+-    server->in_flight++;
++    qatomic_inc(&server->in_flight);
+ }
+ 
+ void vhost_user_server_dec_in_flight(VuServer *server)
+ {
+-    server->in_flight--;
+-    if (server->wait_idle && !server->in_flight) {
+-        aio_co_wake(server->co_trip);
++    if (qatomic_fetch_dec(&server->in_flight) == 1) {
++        if (server->wait_idle) {
++            aio_co_wake(server->co_trip);
++        }
+     }
+ }
+ 
++bool vhost_user_server_has_in_flight(VuServer *server)
++{
++    return qatomic_load_acquire(&server->in_flight) > 0;
++}
++
+ static bool coroutine_fn
+ vu_message_read(VuDev *vu_dev, int conn_fd, VhostUserMsg *vmsg)
+ {
 -- 
 2.39.2
 
