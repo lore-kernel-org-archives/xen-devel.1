@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1470FC77B78
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:29:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.523647.813949 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332CBC77B73
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:29:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.523651.813969 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBbr-0003u9-DI; Wed, 19 Apr 2023 17:28:47 +0000
+	id 1ppBbu-0004bj-At; Wed, 19 Apr 2023 17:28:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 523647.813949; Wed, 19 Apr 2023 17:28:47 +0000
+Received: by outflank-mailman (output) from mailman id 523651.813969; Wed, 19 Apr 2023 17:28:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBbr-0003ty-9T; Wed, 19 Apr 2023 17:28:47 +0000
-Received: by outflank-mailman (input) for mailman id 523647;
- Wed, 19 Apr 2023 17:28:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ppBbu-0004b6-4l; Wed, 19 Apr 2023 17:28:50 +0000
+Received: by outflank-mailman (input) for mailman id 523651;
+ Wed, 19 Apr 2023 17:28:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pu/K=AK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppBbp-00036z-ES
- for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:28:45 +0000
+ id 1ppBbt-0001ia-BU
+ for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:28:49 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1822235-ded7-11ed-8611-37d641c3527e;
- Wed, 19 Apr 2023 19:28:43 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a47b38c0-ded7-11ed-b21f-6b7b168915f2;
+ Wed, 19 Apr 2023 19:28:48 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-140-B9iU9cznPoul00GA4s393w-1; Wed, 19 Apr 2023 13:28:39 -0400
+ us-mta-542-_TxeHOorMreDsIuRonGL0g-1; Wed, 19 Apr 2023 13:28:43 -0400
 Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
  [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E5A10185A791;
- Wed, 19 Apr 2023 17:28:37 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 42CE31C189B0;
+ Wed, 19 Apr 2023 17:28:42 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.234])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4AB5E492C3E;
- Wed, 19 Apr 2023 17:28:37 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B1BA2492C3E;
+ Wed, 19 Apr 2023 17:28:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1822235-ded7-11ed-8611-37d641c3527e
+X-Inumbo-ID: a47b38c0-ded7-11ed-b21f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681925322;
+	s=mimecast20190719; t=1681925327;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rd8h2e2Z0uhjua/p0PDxA8jGvK3/DbHaZUIqG5W/DmA=;
-	b=JqtDMXgTsQ1H/W3AelkJtzxSnizjEvx8CqYrFlyEfVH6FhqxhFs3jDEd7tXSt1yIBqWju2
-	uYUrWz4CCHxkhpxpBtAomjv2/kln1f2WRxBPoPvQvqt6i0b/dEMV88b9/5F9JJ+liwEblz
-	wsdtVNkUz94QhY+XEc97qIYcRp3WBFs=
-X-MC-Unique: B9iU9cznPoul00GA4s393w-1
+	bh=6sTqQmJRDK/JwUQj6FoYqmlPFJsGwZK9pc+TSucKp9o=;
+	b=Mv8C/c4wquXxxhjQPf7nJkxAOdO8BEPQw2gqJE7arr1WGda4/uL01w6m3THBIC/eELrKCX
+	aisiPPFcfWpujsDIL1eiKTkbccxC5Id0DXBYmVxoTl0V/POOQIUlxXHL7DD4nsaDm1VeUR
+	5n7SB5drWtpAf3hdY1lVRdFUwD3MWwE=
+X-MC-Unique: _TxeHOorMreDsIuRonGL0g-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -95,166 +95,57 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Stefan Weil <sw@weilnetz.de>,
 	Xie Yongji <xieyongji@bytedance.com>,
 	David Woodhouse <dwmw2@infradead.org>
-Subject: [PATCH v2 07/16] block/export: stop using is_external in vhost-user-blk server
-Date: Wed, 19 Apr 2023 13:28:08 -0400
-Message-Id: <20230419172817.272758-8-stefanha@redhat.com>
+Subject: [PATCH v2 09/16] block: add blk_in_drain() API
+Date: Wed, 19 Apr 2023 13:28:10 -0400
+Message-Id: <20230419172817.272758-10-stefanha@redhat.com>
 In-Reply-To: <20230419172817.272758-1-stefanha@redhat.com>
 References: <20230419172817.272758-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 
-vhost-user activity must be suspended during bdrv_drained_begin/end().
-This prevents new requests from interfering with whatever is happening
-in the drained section.
+The BlockBackend quiesce_counter is greater than zero during drained
+sections. Add an API to check whether the BlockBackend is in a drained
+section.
 
-Previously this was done using aio_set_fd_handler()'s is_external
-argument. In a multi-queue block layer world the aio_disable_external()
-API cannot be used since multiple AioContext may be processing I/O, not
-just one.
-
-Switch to BlockDevOps->drained_begin/end() callbacks.
+The next patch will use this API.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- block/export/vhost-user-blk-server.c | 43 ++++++++++++++--------------
- util/vhost-user-server.c             | 10 +++----
- 2 files changed, 26 insertions(+), 27 deletions(-)
+ include/sysemu/block-backend-global-state.h | 1 +
+ block/block-backend.c                       | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/block/export/vhost-user-blk-server.c b/block/export/vhost-user-blk-server.c
-index dbf5207162..6e1bc196fb 100644
---- a/block/export/vhost-user-blk-server.c
-+++ b/block/export/vhost-user-blk-server.c
-@@ -207,22 +207,6 @@ static const VuDevIface vu_blk_iface = {
-     .process_msg           = vu_blk_process_msg,
- };
- 
--static void blk_aio_attached(AioContext *ctx, void *opaque)
--{
--    VuBlkExport *vexp = opaque;
--
--    vexp->export.ctx = ctx;
--    vhost_user_server_attach_aio_context(&vexp->vu_server, ctx);
--}
--
--static void blk_aio_detach(void *opaque)
--{
--    VuBlkExport *vexp = opaque;
--
--    vhost_user_server_detach_aio_context(&vexp->vu_server);
--    vexp->export.ctx = NULL;
--}
--
- static void
- vu_blk_initialize_config(BlockDriverState *bs,
-                          struct virtio_blk_config *config,
-@@ -254,6 +238,25 @@ static void vu_blk_exp_request_shutdown(BlockExport *exp)
-     vhost_user_server_stop(&vexp->vu_server);
+diff --git a/include/sysemu/block-backend-global-state.h b/include/sysemu/block-backend-global-state.h
+index 2b6d27db7c..ac7cbd6b5e 100644
+--- a/include/sysemu/block-backend-global-state.h
++++ b/include/sysemu/block-backend-global-state.h
+@@ -78,6 +78,7 @@ void blk_activate(BlockBackend *blk, Error **errp);
+ int blk_make_zero(BlockBackend *blk, BdrvRequestFlags flags);
+ void blk_aio_cancel(BlockAIOCB *acb);
+ int blk_commit_all(void);
++bool blk_in_drain(BlockBackend *blk);
+ void blk_drain(BlockBackend *blk);
+ void blk_drain_all(void);
+ void blk_set_on_error(BlockBackend *blk, BlockdevOnError on_read_error,
+diff --git a/block/block-backend.c b/block/block-backend.c
+index 9e0f48692a..e0a1d9ec0f 100644
+--- a/block/block-backend.c
++++ b/block/block-backend.c
+@@ -1270,6 +1270,13 @@ blk_check_byte_request(BlockBackend *blk, int64_t offset, int64_t bytes)
+     return 0;
  }
  
-+/* Called with vexp->export.ctx acquired */
-+static void vu_blk_drained_begin(void *opaque)
++/* Are we currently in a drained section? */
++bool blk_in_drain(BlockBackend *blk)
 +{
-+    VuBlkExport *vexp = opaque;
-+
-+    vhost_user_server_detach_aio_context(&vexp->vu_server);
++    GLOBAL_STATE_CODE(); /* change to IO_OR_GS_CODE(), if necessary */
++    return qatomic_read(&blk->quiesce_counter);
 +}
 +
-+/* Called with vexp->export.blk AioContext acquired */
-+static void vu_blk_drained_end(void *opaque)
-+{
-+    VuBlkExport *vexp = opaque;
-+
-+    /* Refresh AioContext in case it changed */
-+    vexp->export.ctx = blk_get_aio_context(vexp->export.blk);
-+
-+    vhost_user_server_attach_aio_context(&vexp->vu_server, vexp->export.ctx);
-+}
-+
- /*
-  * Ensures that bdrv_drained_begin() waits until in-flight requests complete.
-  *
-@@ -267,6 +270,8 @@ static bool vu_blk_drained_poll(void *opaque)
- }
- 
- static const BlockDevOps vu_blk_dev_ops = {
-+    .drained_begin = vu_blk_drained_begin,
-+    .drained_end   = vu_blk_drained_end,
-     .drained_poll  = vu_blk_drained_poll,
- };
- 
-@@ -309,13 +314,9 @@ static int vu_blk_exp_create(BlockExport *exp, BlockExportOptions *opts,
-                              logical_block_size, num_queues);
- 
-     blk_set_dev_ops(exp->blk, &vu_blk_dev_ops, vexp);
--    blk_add_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_detach,
--                                 vexp);
- 
-     if (!vhost_user_server_start(&vexp->vu_server, vu_opts->addr, exp->ctx,
-                                  num_queues, &vu_blk_iface, errp)) {
--        blk_remove_aio_context_notifier(exp->blk, blk_aio_attached,
--                                        blk_aio_detach, vexp);
-         blk_set_dev_ops(exp->blk, NULL, NULL);
-         g_free(vexp->handler.serial);
-         return -EADDRNOTAVAIL;
-@@ -328,8 +329,6 @@ static void vu_blk_exp_delete(BlockExport *exp)
+ /* To be called between exactly one pair of blk_inc/dec_in_flight() */
+ static void coroutine_fn blk_wait_while_drained(BlockBackend *blk)
  {
-     VuBlkExport *vexp = container_of(exp, VuBlkExport, export);
- 
--    blk_remove_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_detach,
--                                    vexp);
-     blk_set_dev_ops(exp->blk, NULL, NULL);
-     g_free(vexp->handler.serial);
- }
-diff --git a/util/vhost-user-server.c b/util/vhost-user-server.c
-index 2e6b640050..332aea9306 100644
---- a/util/vhost-user-server.c
-+++ b/util/vhost-user-server.c
-@@ -278,7 +278,7 @@ set_watch(VuDev *vu_dev, int fd, int vu_evt,
-         vu_fd_watch->fd = fd;
-         vu_fd_watch->cb = cb;
-         qemu_socket_set_nonblock(fd);
--        aio_set_fd_handler(server->ioc->ctx, fd, true, kick_handler,
-+        aio_set_fd_handler(server->ioc->ctx, fd, false, kick_handler,
-                            NULL, NULL, NULL, vu_fd_watch);
-         vu_fd_watch->vu_dev = vu_dev;
-         vu_fd_watch->pvt = pvt;
-@@ -299,7 +299,7 @@ static void remove_watch(VuDev *vu_dev, int fd)
-     if (!vu_fd_watch) {
-         return;
-     }
--    aio_set_fd_handler(server->ioc->ctx, fd, true,
-+    aio_set_fd_handler(server->ioc->ctx, fd, false,
-                        NULL, NULL, NULL, NULL, NULL);
- 
-     QTAILQ_REMOVE(&server->vu_fd_watches, vu_fd_watch, next);
-@@ -362,7 +362,7 @@ void vhost_user_server_stop(VuServer *server)
-         VuFdWatch *vu_fd_watch;
- 
-         QTAILQ_FOREACH(vu_fd_watch, &server->vu_fd_watches, next) {
--            aio_set_fd_handler(server->ctx, vu_fd_watch->fd, true,
-+            aio_set_fd_handler(server->ctx, vu_fd_watch->fd, false,
-                                NULL, NULL, NULL, NULL, vu_fd_watch);
-         }
- 
-@@ -403,7 +403,7 @@ void vhost_user_server_attach_aio_context(VuServer *server, AioContext *ctx)
-     qio_channel_attach_aio_context(server->ioc, ctx);
- 
-     QTAILQ_FOREACH(vu_fd_watch, &server->vu_fd_watches, next) {
--        aio_set_fd_handler(ctx, vu_fd_watch->fd, true, kick_handler, NULL,
-+        aio_set_fd_handler(ctx, vu_fd_watch->fd, false, kick_handler, NULL,
-                            NULL, NULL, vu_fd_watch);
-     }
- 
-@@ -417,7 +417,7 @@ void vhost_user_server_detach_aio_context(VuServer *server)
-         VuFdWatch *vu_fd_watch;
- 
-         QTAILQ_FOREACH(vu_fd_watch, &server->vu_fd_watches, next) {
--            aio_set_fd_handler(server->ctx, vu_fd_watch->fd, true,
-+            aio_set_fd_handler(server->ctx, vu_fd_watch->fd, false,
-                                NULL, NULL, NULL, NULL, vu_fd_watch);
-         }
- 
 -- 
 2.39.2
 
