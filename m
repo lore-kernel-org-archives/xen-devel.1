@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AEE4C7EE20
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:39:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.523670.813984 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DEDC77B7A
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:39:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.523676.814018 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBlk-0008Pk-O3; Wed, 19 Apr 2023 17:39:00 +0000
+	id 1ppBln-0000d4-5R; Wed, 19 Apr 2023 17:39:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 523670.813984; Wed, 19 Apr 2023 17:39:00 +0000
+Received: by outflank-mailman (output) from mailman id 523676.814018; Wed, 19 Apr 2023 17:39:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBlk-0008PO-Ec; Wed, 19 Apr 2023 17:39:00 +0000
-Received: by outflank-mailman (input) for mailman id 523670;
- Wed, 19 Apr 2023 17:38:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ppBlm-0000aE-Kj; Wed, 19 Apr 2023 17:39:02 +0000
+Received: by outflank-mailman (input) for mailman id 523676;
+ Wed, 19 Apr 2023 17:38:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pu/K=AK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppBcL-0001ia-He
- for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:29:17 +0000
+ id 1ppBcR-00036z-4h
+ for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:29:23 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b53042d3-ded7-11ed-b21f-6b7b168915f2;
- Wed, 19 Apr 2023 19:29:16 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b7ffd628-ded7-11ed-8611-37d641c3527e;
+ Wed, 19 Apr 2023 19:29:21 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-615-GPguznyEPGaF7KXF2UnWHQ-1; Wed, 19 Apr 2023 13:29:12 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-263-whon3Qt8MtqXVgvzgaJ_Ug-1; Wed, 19 Apr 2023 13:29:17 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5554B3801F5C;
- Wed, 19 Apr 2023 17:29:11 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5340285A5B1;
+ Wed, 19 Apr 2023 17:29:16 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.234])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 462742026D16;
- Wed, 19 Apr 2023 17:29:09 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9494440C2064;
+ Wed, 19 Apr 2023 17:29:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b53042d3-ded7-11ed-b21f-6b7b168915f2
+X-Inumbo-ID: b7ffd628-ded7-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681925355;
+	s=mimecast20190719; t=1681925360;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=l1BfjF5WOabKn8yxsLU/Ixv2u9YtxHZYDFF52BuLnDA=;
-	b=gQVtIVBw6ET3cfMWOrRuDOfFgt87/WReAZzNzBBWFRLDy8L1DtVIEMs1ngB/Lkqr60+sJi
-	+ZjiQX9Q2guXRl+Yrso2qoLz+hwtboka8K/J0rgZBle+iVoRJa7sqVn5J/+gNv1tdw5/1l
-	6o0g/o+hTe0ZgYp5IMKHW8bMJRBjhhQ=
-X-MC-Unique: GPguznyEPGaF7KXF2UnWHQ-1
+	bh=svW5Iqq6ywfg5XGxDCHKSniKJYjg3etTmQ7BLHFrTFw=;
+	b=bJ5eK0foYwZXHicu/RQwVMa+0Kc3xER1cfViU5+dVZz1Ou018pGa6YD0BGU5W8a1tuDxAy
+	s/tkL4BOJD+Qgy5XodMygaSfUX7qOEIIqtNQv65I2lQh6ZjkIcCcAm9NEO1cj0E1I2Vn5x
+	zz7JinxcSLT4B39hYq8Xz0404G+7YlE=
+X-MC-Unique: whon3Qt8MtqXVgvzgaJ_Ug-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -95,62 +95,106 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Stefan Weil <sw@weilnetz.de>,
 	Xie Yongji <xieyongji@bytedance.com>,
 	David Woodhouse <dwmw2@infradead.org>
-Subject: [PATCH v2 12/16] hw/xen: do not set is_external=true on evtchn fds
-Date: Wed, 19 Apr 2023 13:28:13 -0400
-Message-Id: <20230419172817.272758-13-stefanha@redhat.com>
+Subject: [PATCH v2 14/16] block/export: don't require AioContext lock around blk_exp_ref/unref()
+Date: Wed, 19 Apr 2023 13:28:15 -0400
+Message-Id: <20230419172817.272758-15-stefanha@redhat.com>
 In-Reply-To: <20230419172817.272758-1-stefanha@redhat.com>
 References: <20230419172817.272758-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 
-is_external=true suspends fd handlers between aio_disable_external() and
-aio_enable_external(). The block layer's drain operation uses this
-mechanism to prevent new I/O from sneaking in between
-bdrv_drained_begin() and bdrv_drained_end().
+The FUSE export calls blk_exp_ref/unref() without the AioContext lock.
+Instead of fixing the FUSE export, adjust blk_exp_ref/unref() so they
+work without the AioContext lock. This way it's less error-prone.
 
-The previous commit converted the xen-block device to use BlockDevOps
-.drained_begin/end() callbacks. It no longer relies on is_external=true
-so it is safe to pass is_external=false.
-
-This is part of ongoing work to remove the aio_disable_external() API.
-
+Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- hw/xen/xen-bus.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/block/export.h   |  2 ++
+ block/export/export.c    | 13 ++++++-------
+ block/export/vduse-blk.c |  4 ----
+ 3 files changed, 8 insertions(+), 11 deletions(-)
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index b8f408c9ed..bf256d4da2 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -842,14 +842,14 @@ void xen_device_set_event_channel_context(XenDevice *xendev,
+diff --git a/include/block/export.h b/include/block/export.h
+index 7feb02e10d..f2fe0f8078 100644
+--- a/include/block/export.h
++++ b/include/block/export.h
+@@ -57,6 +57,8 @@ struct BlockExport {
+      * Reference count for this block export. This includes strong references
+      * both from the owner (qemu-nbd or the monitor) and clients connected to
+      * the export.
++     *
++     * Use atomics to access this field.
+      */
+     int refcount;
+ 
+diff --git a/block/export/export.c b/block/export/export.c
+index e3fee60611..edb05c9268 100644
+--- a/block/export/export.c
++++ b/block/export/export.c
+@@ -201,11 +201,10 @@ fail:
+     return NULL;
+ }
+ 
+-/* Callers must hold exp->ctx lock */
+ void blk_exp_ref(BlockExport *exp)
+ {
+-    assert(exp->refcount > 0);
+-    exp->refcount++;
++    assert(qatomic_read(&exp->refcount) > 0);
++    qatomic_inc(&exp->refcount);
+ }
+ 
+ /* Runs in the main thread */
+@@ -227,11 +226,10 @@ static void blk_exp_delete_bh(void *opaque)
+     aio_context_release(aio_context);
+ }
+ 
+-/* Callers must hold exp->ctx lock */
+ void blk_exp_unref(BlockExport *exp)
+ {
+-    assert(exp->refcount > 0);
+-    if (--exp->refcount == 0) {
++    assert(qatomic_read(&exp->refcount) > 0);
++    if (qatomic_fetch_dec(&exp->refcount) == 1) {
+         /* Touch the block_exports list only in the main thread */
+         aio_bh_schedule_oneshot(qemu_get_aio_context(), blk_exp_delete_bh,
+                                 exp);
+@@ -339,7 +337,8 @@ void qmp_block_export_del(const char *id,
+     if (!has_mode) {
+         mode = BLOCK_EXPORT_REMOVE_MODE_SAFE;
      }
- 
-     if (channel->ctx)
--        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                            NULL, NULL, NULL, NULL, NULL);
- 
-     channel->ctx = ctx;
-     if (ctx) {
-         aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh),
--                           true, xen_device_event, NULL, xen_device_poll, NULL,
--                           channel);
-+                           false, xen_device_event, NULL, xen_device_poll,
-+                           NULL, channel);
+-    if (mode == BLOCK_EXPORT_REMOVE_MODE_SAFE && exp->refcount > 1) {
++    if (mode == BLOCK_EXPORT_REMOVE_MODE_SAFE &&
++        qatomic_read(&exp->refcount) > 1) {
+         error_setg(errp, "export '%s' still in use", exp->id);
+         error_append_hint(errp, "Use mode='hard' to force client "
+                           "disconnect\n");
+diff --git a/block/export/vduse-blk.c b/block/export/vduse-blk.c
+index 35dc8fcf45..611430afda 100644
+--- a/block/export/vduse-blk.c
++++ b/block/export/vduse-blk.c
+@@ -44,9 +44,7 @@ static void vduse_blk_inflight_inc(VduseBlkExport *vblk_exp)
+ {
+     if (qatomic_fetch_inc(&vblk_exp->inflight) == 0) {
+         /* Prevent export from being deleted */
+-        aio_context_acquire(vblk_exp->export.ctx);
+         blk_exp_ref(&vblk_exp->export);
+-        aio_context_release(vblk_exp->export.ctx);
      }
  }
  
-@@ -923,7 +923,7 @@ void xen_device_unbind_event_channel(XenDevice *xendev,
+@@ -57,9 +55,7 @@ static void vduse_blk_inflight_dec(VduseBlkExport *vblk_exp)
+         aio_wait_kick();
  
-     QLIST_REMOVE(channel, list);
+         /* Now the export can be deleted */
+-        aio_context_acquire(vblk_exp->export.ctx);
+         blk_exp_unref(&vblk_exp->export);
+-        aio_context_release(vblk_exp->export.ctx);
+     }
+ }
  
--    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                        NULL, NULL, NULL, NULL, NULL);
- 
-     if (qemu_xen_evtchn_unbind(channel->xeh, channel->local_port) < 0) {
 -- 
 2.39.2
 
