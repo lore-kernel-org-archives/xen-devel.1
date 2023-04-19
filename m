@@ -4,43 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A90C7EE21
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:39:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.523671.813988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE37FC77B73
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 18:26:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.523727.814049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBll-0008S3-07; Wed, 19 Apr 2023 17:39:01 +0000
+	id 1ppCVg-0000O8-Uv; Wed, 19 Apr 2023 18:26:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 523671.813988; Wed, 19 Apr 2023 17:39:00 +0000
+Received: by outflank-mailman (output) from mailman id 523727.814049; Wed, 19 Apr 2023 18:26:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBlk-0008QZ-Ls; Wed, 19 Apr 2023 17:39:00 +0000
-Received: by outflank-mailman (input) for mailman id 523671;
- Wed, 19 Apr 2023 17:38:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Pu/K=AK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppBcT-00036z-56
- for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:29:25 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b89e3c4e-ded7-11ed-8611-37d641c3527e;
- Wed, 19 Apr 2023 19:29:22 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-441-nt5MpswVMfyrsieZJncL0w-1; Wed, 19 Apr 2023 13:29:19 -0400
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AD2C71C189A7;
- Wed, 19 Apr 2023 17:29:18 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.234])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 10F09C16024;
- Wed, 19 Apr 2023 17:29:17 +0000 (UTC)
+	id 1ppCVg-0000O1-RP; Wed, 19 Apr 2023 18:26:28 +0000
+Received: by outflank-mailman (input) for mailman id 523727;
+ Wed, 19 Apr 2023 18:26:27 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1ppCVf-0000Ns-H6
+ for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 18:26:27 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ppCVe-0004uY-Rp; Wed, 19 Apr 2023 18:26:26 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=[192.168.29.18]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ppCVe-0008AF-Ka; Wed, 19 Apr 2023 18:26:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,190 +41,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b89e3c4e-ded7-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681925361;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=AI5kqkdzipCjtseeQPE5/aVyAJxrbcrgigA/+qZzi/8=;
-	b=KpRyrFruTGvEL+gAea8wNrOCH9N0EyfTVmy7JCe2Aqy4RFAjjB9HQmmdJ2Ilhh9B1/2IQd
-	W1C5XGAc/1YVUAAhZoXDJ0sisv6EerlfC1SJuMQ9znA4pzHoGRBSTo3Iy3K133x5y9m5Qp
-	t3qmNAZmb/Ys6xcWYzAOvB2xwS6+n+8=
-X-MC-Unique: nt5MpswVMfyrsieZJncL0w-1
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Fam Zheng <fam@euphon.net>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Julia Suvorova <jusual@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Coiby Xu <Coiby.Xu@gmail.com>,
-	Paul Durrant <paul@xen.org>,
-	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Juan Quintela <quintela@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefano Garzarella <sgarzare@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Kevin Wolf <kwolf@redhat.com>,
-	"Richard W.M. Jones" <rjones@redhat.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Peter Lieven <pl@kamp.de>,
-	eesposit@redhat.com,
-	Aarushi Mehta <mehta.aaru20@gmail.com>,
-	Stefan Weil <sw@weilnetz.de>,
-	Xie Yongji <xieyongji@bytedance.com>,
-	David Woodhouse <dwmw2@infradead.org>
-Subject: [PATCH v2 15/16] block/fuse: do not set is_external=true on FUSE fd
-Date: Wed, 19 Apr 2023 13:28:16 -0400
-Message-Id: <20230419172817.272758-16-stefanha@redhat.com>
-In-Reply-To: <20230419172817.272758-1-stefanha@redhat.com>
-References: <20230419172817.272758-1-stefanha@redhat.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=NTxGG+Wi2y1G3NRuaUPx296WWyqbtUW6lIoscbs5XIw=; b=NlGya7ac/zgDkKuwWugGlzMGGt
+	wZSpJb8ozd/gR+pM5ybRL1rvlGCTQaba7mltRje2t5zCDjgBzuJM74Z6JiDKxFosS3ylyB+vaQ0+4
+	9kqOFpvda1bjB6XvGUeHm4fEVtZEOlkpLeHsKihj1u408PlThBLEv0fM9VRAMUU6/8n8=;
+Message-ID: <32060944-324d-4c38-ad60-69553ab5a6be@xen.org>
+Date: Wed, 19 Apr 2023 19:26:24 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.10.0
+Subject: Re: [PATCH 3/3] xen/arm: fix unitialized use warning
+Content-Language: en-US
+To: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+ xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230414185714.292881-1-stewart.hildebrand@amd.com>
+ <20230414185714.292881-4-stewart.hildebrand@amd.com>
+ <5fb567c5-1e82-a048-1cfe-f6f69e0b5ebc@xen.org>
+ <3833c906-8d88-d35d-b9dd-b70d5f7a9fa7@amd.com>
+ <b779a5cf-1421-086b-f7f3-188fcb9af3db@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <b779a5cf-1421-086b-f7f3-188fcb9af3db@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 
-This is part of ongoing work to remove the aio_disable_external() API.
+Hi Stewart,
 
-Use BlockDevOps .drained_begin/end/poll() instead of
-aio_set_fd_handler(is_external=true).
+On 17/04/2023 03:08, Stewart Hildebrand wrote:
+> On 4/16/23 22:03, Stewart Hildebrand wrote:
+>> On 4/16/23 08:53, Julien Grall wrote:
+>>> Hi Stewart,
+>>
+>> Hi Julien,
+>>
+>>> On 14/04/2023 19:57, Stewart Hildebrand wrote:
+>>>> When building the hypervisor with -Og, we encounter the following error:
+>>>
+>>> Is this with GCC 12 as well?
+>>
+>> Yes. If my memory serves me correctly this particular one occurs with both GCC 11 and 12.
 
-As a side-effect the FUSE export now follows AioContext changes like the
-other export types.
+Thanks. I will update the commit message to mention it.
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- block/export/fuse.c | 58 +++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 56 insertions(+), 2 deletions(-)
+>>
+>>>> arch/arm/domain_build.c: In function ‘make_cpus_node’:
+>>>> arch/arm/domain_build.c:2040:12: error: ‘clock_valid’ may be used uninitialized [-Werror=maybe-uninitialized]
+>>>>    2040 |         if ( clock_valid )
+>>>>         |            ^
+>>>> arch/arm/domain_build.c:1947:10: note: ‘clock_valid’ was declared here
+>>>>    1947 |     bool clock_valid;
+>>>>         |          ^~~~~~~~~~~
+>>>> cc1: all warnings being treated as errors
+>>>>
+>>>> Fix it by initializing the variable.
+>>>>
+>>>> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+>>>> ---
+>>>> See previous discussion here
+>>>> https://lists.xenproject.org/archives/html/xen-devel/2022-10/msg00741.html
+>>>> ---
+>>>>    xen/arch/arm/domain_build.c | 2 +-
+>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>>>> index 4f9d4f9d8867..18b350734a8e 100644
+>>>> --- a/xen/arch/arm/domain_build.c
+>>>> +++ b/xen/arch/arm/domain_build.c
+>>>> @@ -1944,7 +1944,7 @@ static int __init make_cpus_node(const struct domain *d, void *fdt)
+>>>>        /* Placeholder for cpu@ + a 32-bit hexadecimal number + \0 */
+>>>>        char buf[13];
+>>>>        u32 clock_frequency;
+>>>> -    bool clock_valid;
+>>>> +    bool clock_valid = false;
+>>>
+>>> NIT: I would add "Keep the compiler happy with -Og"
+>>>
+>>> I am happy to add it while committing if you agree.
+>>
+>> Yes, please do. Thanks.
+> 
+> One more thing, there is a typo in the subject, if you are willing to correct it while committing. s/unitialized/uninitialized/
 
-diff --git a/block/export/fuse.c b/block/export/fuse.c
-index 06fa41079e..65a7f4d723 100644
---- a/block/export/fuse.c
-+++ b/block/export/fuse.c
-@@ -50,6 +50,7 @@ typedef struct FuseExport {
- 
-     struct fuse_session *fuse_session;
-     struct fuse_buf fuse_buf;
-+    unsigned int in_flight; /* atomic */
-     bool mounted, fd_handler_set_up;
- 
-     char *mountpoint;
-@@ -78,6 +79,42 @@ static void read_from_fuse_export(void *opaque);
- static bool is_regular_file(const char *path, Error **errp);
- 
- 
-+static void fuse_export_drained_begin(void *opaque)
-+{
-+    FuseExport *exp = opaque;
-+
-+    aio_set_fd_handler(exp->common.ctx,
-+                       fuse_session_fd(exp->fuse_session), false,
-+                       NULL, NULL, NULL, NULL, NULL);
-+    exp->fd_handler_set_up = false;
-+}
-+
-+static void fuse_export_drained_end(void *opaque)
-+{
-+    FuseExport *exp = opaque;
-+
-+    /* Refresh AioContext in case it changed */
-+    exp->common.ctx = blk_get_aio_context(exp->common.blk);
-+
-+    aio_set_fd_handler(exp->common.ctx,
-+                       fuse_session_fd(exp->fuse_session), false,
-+                       read_from_fuse_export, NULL, NULL, NULL, exp);
-+    exp->fd_handler_set_up = true;
-+}
-+
-+static bool fuse_export_drained_poll(void *opaque)
-+{
-+    FuseExport *exp = opaque;
-+
-+    return qatomic_read(&exp->in_flight) > 0;
-+}
-+
-+static const BlockDevOps fuse_export_blk_dev_ops = {
-+    .drained_begin = fuse_export_drained_begin,
-+    .drained_end   = fuse_export_drained_end,
-+    .drained_poll  = fuse_export_drained_poll,
-+};
-+
- static int fuse_export_create(BlockExport *blk_exp,
-                               BlockExportOptions *blk_exp_args,
-                               Error **errp)
-@@ -101,6 +138,15 @@ static int fuse_export_create(BlockExport *blk_exp,
-         }
-     }
- 
-+    blk_set_dev_ops(exp->common.blk, &fuse_export_blk_dev_ops, exp);
-+
-+    /*
-+     * We handle draining ourselves using an in-flight counter and by disabling
-+     * the FUSE fd handler. Do not queue BlockBackend requests, they need to
-+     * complete so the in-flight counter reaches zero.
-+     */
-+    blk_set_disable_request_queuing(exp->common.blk, true);
-+
-     init_exports_table();
- 
-     /*
-@@ -224,7 +270,7 @@ static int setup_fuse_export(FuseExport *exp, const char *mountpoint,
-     g_hash_table_insert(exports, g_strdup(mountpoint), NULL);
- 
-     aio_set_fd_handler(exp->common.ctx,
--                       fuse_session_fd(exp->fuse_session), true,
-+                       fuse_session_fd(exp->fuse_session), false,
-                        read_from_fuse_export, NULL, NULL, NULL, exp);
-     exp->fd_handler_set_up = true;
- 
-@@ -246,6 +292,8 @@ static void read_from_fuse_export(void *opaque)
- 
-     blk_exp_ref(&exp->common);
- 
-+    qatomic_inc(&exp->in_flight);
-+
-     do {
-         ret = fuse_session_receive_buf(exp->fuse_session, &exp->fuse_buf);
-     } while (ret == -EINTR);
-@@ -256,6 +304,10 @@ static void read_from_fuse_export(void *opaque)
-     fuse_session_process_buf(exp->fuse_session, &exp->fuse_buf);
- 
- out:
-+    if (qatomic_fetch_dec(&exp->in_flight) == 1) {
-+        aio_wait_kick(); /* wake AIO_WAIT_WHILE() */
-+    }
-+
-     blk_exp_unref(&exp->common);
- }
- 
-@@ -268,7 +320,7 @@ static void fuse_export_shutdown(BlockExport *blk_exp)
- 
-         if (exp->fd_handler_set_up) {
-             aio_set_fd_handler(exp->common.ctx,
--                               fuse_session_fd(exp->fuse_session), true,
-+                               fuse_session_fd(exp->fuse_session), false,
-                                NULL, NULL, NULL, NULL, NULL);
-             exp->fd_handler_set_up = false;
-         }
-@@ -287,6 +339,8 @@ static void fuse_export_delete(BlockExport *blk_exp)
- {
-     FuseExport *exp = container_of(blk_exp, FuseExport, common);
- 
-+    blk_set_dev_ops(exp->common.blk, NULL, NULL);
-+
-     if (exp->fuse_session) {
-         if (exp->mounted) {
-             fuse_session_unmount(exp->fuse_session);
+Sure. I will do that.
+
+Cheers,
+
 -- 
-2.39.2
-
+Julien Grall
 
