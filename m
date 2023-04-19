@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB968C6FD18
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA95C77B73
 	for <xen-devel@archiver.kernel.org>; Wed, 19 Apr 2023 17:39:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.523673.814005 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.523675.814013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBlm-0000LP-6M; Wed, 19 Apr 2023 17:39:02 +0000
+	id 1ppBlm-0000UE-Pc; Wed, 19 Apr 2023 17:39:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 523673.814005; Wed, 19 Apr 2023 17:39:01 +0000
+Received: by outflank-mailman (output) from mailman id 523675.814013; Wed, 19 Apr 2023 17:39:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppBll-0000IR-Mj; Wed, 19 Apr 2023 17:39:01 +0000
-Received: by outflank-mailman (input) for mailman id 523673;
+	id 1ppBlm-0000Si-5e; Wed, 19 Apr 2023 17:39:02 +0000
+Received: by outflank-mailman (input) for mailman id 523675;
  Wed, 19 Apr 2023 17:38:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Pu/K=AK=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppBcF-0001ia-1N
- for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:29:11 +0000
+ id 1ppBcW-0001ia-0d
+ for xen-devel@lists.xenproject.org; Wed, 19 Apr 2023 17:29:28 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b17cf833-ded7-11ed-b21f-6b7b168915f2;
- Wed, 19 Apr 2023 19:29:10 +0200 (CEST)
+ id bb7d62a9-ded7-11ed-b21f-6b7b168915f2;
+ Wed, 19 Apr 2023 19:29:27 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-561-t53o4P_VPVaZURreVJcYqg-1; Wed, 19 Apr 2023 13:29:06 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
+ us-mta-457-UORK3zzVOxmLu7977uaTMQ-1; Wed, 19 Apr 2023 13:29:22 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 186651C189A4;
- Wed, 19 Apr 2023 17:29:05 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 59D9D1C189A4;
+ Wed, 19 Apr 2023 17:29:21 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.234])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C83E540BC798;
- Wed, 19 Apr 2023 17:28:43 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8045B40C2064;
+ Wed, 19 Apr 2023 17:29:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b17cf833-ded7-11ed-b21f-6b7b168915f2
+X-Inumbo-ID: bb7d62a9-ded7-11ed-b21f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681925349;
+	s=mimecast20190719; t=1681925366;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TBoAHwSzsacA9uVcaYGhwuzX40gWj9dN8dhM1t9uyLM=;
-	b=ghl6274+2MaUilmMocS4No0tX1RYmpz8NG2nuTYF6E13PtUUkMSLNhklTCIqivjJyPq7+F
-	9RUd5MihozaH7yLfLGhtA4IhmlAeC12gTtoA52fHSU8UdJh4wcPULefWO+kluGv/nueh3q
-	SxR8kS0AdwplrB/TKo/fB18LMGRwACQ=
-X-MC-Unique: t53o4P_VPVaZURreVJcYqg-1
+	bh=Qs0Wu6hxc7j58DwPPRdDhx+qIxo2MCSBXMmfJ14jr7A=;
+	b=P81Hbad2MkrxYTfi71uOxxkGaggxm+9W6bTi5GM2BTkPDcPFnK7pF6YXAlQOQkOq/8nV1O
+	hWV0a02+t5ibJI9zvKkiL8RyS6ToCmoM4vuje/hz+FkZktCEZmssTifAfPzGl6DH0z5Wb/
+	GjxSdH06n467P6qYOIzjoaC5c7SG0UE=
+X-MC-Unique: UORK3zzVOxmLu7977uaTMQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -95,85 +95,83 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Stefan Weil <sw@weilnetz.de>,
 	Xie Yongji <xieyongji@bytedance.com>,
 	David Woodhouse <dwmw2@infradead.org>
-Subject: [PATCH v2 10/16] block: drain from main loop thread in bdrv_co_yield_to_drain()
-Date: Wed, 19 Apr 2023 13:28:11 -0400
-Message-Id: <20230419172817.272758-11-stefanha@redhat.com>
+Subject: [PATCH v2 16/16] virtio: make it possible to detach host notifier from any thread
+Date: Wed, 19 Apr 2023 13:28:17 -0400
+Message-Id: <20230419172817.272758-17-stefanha@redhat.com>
 In-Reply-To: <20230419172817.272758-1-stefanha@redhat.com>
 References: <20230419172817.272758-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 
-For simplicity, always run BlockDevOps .drained_begin/end/poll()
-callbacks in the main loop thread. This makes it easier to implement the
-callbacks and avoids extra locks.
+virtio_queue_aio_detach_host_notifier() does two things:
+1. It removes the fd handler from the event loop.
+2. It processes the virtqueue one last time.
 
-Move the function pointer declarations from the I/O Code section to the
-Global State section in block-backend-common.h.
+The first step can be peformed by any thread and without taking the
+AioContext lock.
+
+The second step may need the AioContext lock (depending on the device
+implementation) and runs in the thread where request processing takes
+place. virtio-blk and virtio-scsi therefore call
+virtio_queue_aio_detach_host_notifier() from a BH that is scheduled in
+AioContext
+
+Scheduling a BH is undesirable for .drained_begin() functions. The next
+patch will introduce a .drained_begin() function that needs to call
+virtio_queue_aio_detach_host_notifier().
+
+Move the virtqueue processing out to the callers of
+virtio_queue_aio_detach_host_notifier() so that the function can be
+called from any thread. This is in preparation for the next patch.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/sysemu/block-backend-common.h | 25 +++++++++++++------------
- block/io.c                            |  3 ++-
- 2 files changed, 15 insertions(+), 13 deletions(-)
+ hw/block/dataplane/virtio-blk.c | 2 ++
+ hw/scsi/virtio-scsi-dataplane.c | 9 +++++++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/include/sysemu/block-backend-common.h b/include/sysemu/block-backend-common.h
-index 2391679c56..780cea7305 100644
---- a/include/sysemu/block-backend-common.h
-+++ b/include/sysemu/block-backend-common.h
-@@ -59,6 +59,19 @@ typedef struct BlockDevOps {
-      */
-     bool (*is_medium_locked)(void *opaque);
+diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
+index b28d81737e..bd7cc6e76b 100644
+--- a/hw/block/dataplane/virtio-blk.c
++++ b/hw/block/dataplane/virtio-blk.c
+@@ -286,8 +286,10 @@ static void virtio_blk_data_plane_stop_bh(void *opaque)
  
-+    /*
-+     * Runs when the backend receives a drain request.
-+     */
-+    void (*drained_begin)(void *opaque);
-+    /*
-+     * Runs when the backend's last drain request ends.
-+     */
-+    void (*drained_end)(void *opaque);
-+    /*
-+     * Is the device still busy?
-+     */
-+    bool (*drained_poll)(void *opaque);
-+
-     /*
-      * I/O API functions. These functions are thread-safe.
-      *
-@@ -76,18 +89,6 @@ typedef struct BlockDevOps {
-      * Runs when the size changed (e.g. monitor command block_resize)
-      */
-     void (*resize_cb)(void *opaque);
--    /*
--     * Runs when the backend receives a drain request.
--     */
--    void (*drained_begin)(void *opaque);
--    /*
--     * Runs when the backend's last drain request ends.
--     */
--    void (*drained_end)(void *opaque);
--    /*
--     * Is the device still busy?
--     */
--    bool (*drained_poll)(void *opaque);
- } BlockDevOps;
+     for (i = 0; i < s->conf->num_queues; i++) {
+         VirtQueue *vq = virtio_get_queue(s->vdev, i);
++        EventNotifier *host_notifier = virtio_queue_get_host_notifier(vq);
  
- /*
-diff --git a/block/io.c b/block/io.c
-index db438c7657..6285d67546 100644
---- a/block/io.c
-+++ b/block/io.c
-@@ -331,7 +331,8 @@ static void coroutine_fn bdrv_co_yield_to_drain(BlockDriverState *bs,
-     if (ctx != co_ctx) {
-         aio_context_release(ctx);
+         virtio_queue_aio_detach_host_notifier(vq, s->ctx);
++        virtio_queue_host_notifier_read(host_notifier);
      }
--    replay_bh_schedule_oneshot_event(ctx, bdrv_co_drain_bh_cb, &data);
-+    replay_bh_schedule_oneshot_event(qemu_get_aio_context(),
-+                                     bdrv_co_drain_bh_cb, &data);
+ }
  
-     qemu_coroutine_yield();
-     /* If we are resumed from some other event (such as an aio completion or a
+diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
+index 20bb91766e..81643445ed 100644
+--- a/hw/scsi/virtio-scsi-dataplane.c
++++ b/hw/scsi/virtio-scsi-dataplane.c
+@@ -71,12 +71,21 @@ static void virtio_scsi_dataplane_stop_bh(void *opaque)
+ {
+     VirtIOSCSI *s = opaque;
+     VirtIOSCSICommon *vs = VIRTIO_SCSI_COMMON(s);
++    EventNotifier *host_notifier;
+     int i;
+ 
+     virtio_queue_aio_detach_host_notifier(vs->ctrl_vq, s->ctx);
++    host_notifier = virtio_queue_get_host_notifier(vs->ctrl_vq);
++    virtio_queue_host_notifier_read(host_notifier);
++
+     virtio_queue_aio_detach_host_notifier(vs->event_vq, s->ctx);
++    host_notifier = virtio_queue_get_host_notifier(vs->event_vq);
++    virtio_queue_host_notifier_read(host_notifier);
++
+     for (i = 0; i < vs->conf.num_queues; i++) {
+         virtio_queue_aio_detach_host_notifier(vs->cmd_vqs[i], s->ctx);
++        host_notifier = virtio_queue_get_host_notifier(vs->cmd_vqs[i]);
++        virtio_queue_host_notifier_read(host_notifier);
+     }
+ }
+ 
 -- 
 2.39.2
 
