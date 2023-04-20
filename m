@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29331C77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524031.814567 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 333BDC77B72
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524033.814588 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSPy-0006Gs-JV; Thu, 20 Apr 2023 11:25:38 +0000
+	id 1ppSQ7-0006px-8g; Thu, 20 Apr 2023 11:25:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524031.814567; Thu, 20 Apr 2023 11:25:38 +0000
+Received: by outflank-mailman (output) from mailman id 524033.814588; Thu, 20 Apr 2023 11:25:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSPy-0006Gl-Go; Thu, 20 Apr 2023 11:25:38 +0000
-Received: by outflank-mailman (input) for mailman id 524031;
- Thu, 20 Apr 2023 11:25:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ppSQ7-0006pq-5V; Thu, 20 Apr 2023 11:25:47 +0000
+Received: by outflank-mailman (input) for mailman id 524033;
+ Thu, 20 Apr 2023 11:25:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PE5v=AL=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1ppSPx-0006GU-2x
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:25:37 +0000
+ id 1ppSQ5-0006Vv-M4
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:25:45 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 10ab30ad-df6e-11ed-8611-37d641c3527e;
- Thu, 20 Apr 2023 13:25:34 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 17195841-df6e-11ed-b21f-6b7b168915f2;
+ Thu, 20 Apr 2023 13:25:44 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1853B1480;
- Thu, 20 Apr 2023 04:26:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0CAE21480;
+ Thu, 20 Apr 2023 04:26:28 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7B0443F587;
- Thu, 20 Apr 2023 04:25:29 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 846CA3F587;
+ Thu, 20 Apr 2023 04:25:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,115 +45,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10ab30ad-df6e-11ed-8611-37d641c3527e
+X-Inumbo-ID: 17195841-df6e-11ed-b21f-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Henry Wang <Henry.Wang@arm.com>,
+Cc: Wei Chen <wei.chen@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Wei Chen <wei.chen@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 00/17] Device tree based NUMA support for Arm - Part#3
-Date: Thu, 20 Apr 2023 19:25:04 +0800
-Message-Id: <20230420112521.3272732-1-Henry.Wang@arm.com>
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [PATCH v3 02/17] xen/arm: implement helpers to get and update NUMA status
+Date: Thu, 20 Apr 2023 19:25:06 +0800
+Message-Id: <20230420112521.3272732-3-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230420112521.3272732-1-Henry.Wang@arm.com>
+References: <20230420112521.3272732-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-(Henry: Following the offline discussion with Wei, I will be
-the one to follow-up the upstream comments for this series.
-I already fixed all comments in v2 so far. Hence sending v3 out.)
+From: Wei Chen <wei.chen@arm.com>
 
-The preparation work to support NUMA on Arm has been merged
-and can be found at [1] and [2]. The initial discussions of
-the Arm NUMA support can be found at [3].
+NUMA has one global and one implementation specific switches. For
+ACPI NUMA implementation, Xen has acpi_numa, so we introduce
+device_tree_numa for device tree NUMA implementation. And use
+enumerations to indicate init, off and on status.
 
-- Background of this series:
+arch_numa_disabled will get device_tree_numa status, but for
+arch_numa_setup we have not provided boot arguments to setup
+device_tree_numa. So we just return -EINVAL in this patch.
 
-Xen memory allocation and scheduler modules are NUMA aware.
-But actually, on x86 has implemented the architecture APIs
-to support NUMA. Arm was providing a set of fake architecture
-APIs to make it compatible with NUMA awared memory allocation
-and scheduler.
-
-Arm system was working well as a single node NUMA system with
-these fake APIs, because we didn't have multiple nodes NUMA
-system on Arm. But in recent years, more and more Arm devices
-support multiple nodes NUMA system.
-
-So now we have a new problem. When Xen is running on these Arm
-devices, Xen still treat them as single node SMP systems. The
-NUMA affinity capability of Xen memory allocation and scheduler
-becomes meaningless. Because they rely on input data that does
-not reflect real NUMA layout.
-
-Xen still think the access time for all of the memory is the
-same for all CPUs. However, Xen may allocate memory to a VM
-from different NUMA nodes with different access speeds. This
-difference can be amplified in workloads inside VM, causing
-performance instability and timeouts.
-
-So in this patch series, we implement a set of NUMA API to use
-device tree to describe the NUMA layout. We reuse most of the
-code of x86 NUMA to create and maintain the mapping between
-memory and CPU, create the matrix between any two NUMA nodes.
-Except ACPI and some x86 specified code, we have moved other
-code to common. In next stage, when we implement ACPI based
-NUMA for Arm64, we may move the ACPI NUMA code to common too,
-but in current stage, we keep it as x86 only.
-
-This patch serires has been tested and booted well on FVP in
-Arm64 mode with NUMA configs in device tree and one HPE x86
-NUMA machine.
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2022-06/msg00499.html
-[2] https://lists.xenproject.org/archives/html/xen-devel/2022-11/msg01043.html
-[3] https://lists.xenproject.org/archives/html/xen-devel/2021-09/msg01903.html
-
-Henry Wang (1):
-  xen/arm: Set correct per-cpu cpu_core_mask
-
-Wei Chen (16):
-  xen/arm: use NR_MEM_BANKS to override default NR_NODE_MEMBLKS
-  xen/arm: implement helpers to get and update NUMA status
-  xen/arm: implement node distance helpers for Arm
-  xen/arm: use arch_get_ram_range to memory ranges from bootinfo
-  xen/arm: build NUMA cpu_to_node map in dt_smp_init_cpus
-  xen/arm: Add boot and secondary CPU to NUMA system
-  xen/arm: introduce a helper to parse device tree processor node
-  xen/arm: introduce a helper to parse device tree memory node
-  xen/arm: introduce a helper to parse device tree NUMA distance map
-  xen/arm: unified entry to parse all NUMA data from device tree
-  xen/arm: keep guest still be NUMA unware
-  xen/arm: enable device tree based NUMA in system init
-  xen/arm: implement numa_node_to_arch_nid for device tree NUMA
-  xen/arm: use CONFIG_NUMA to gate node_online_map in smpboot
-  xen/arm: Provide Kconfig options for Arm to enable NUMA
-  docs: update numa command line to support Arm
-
- SUPPORT.md                        |   1 +
- docs/misc/xen-command-line.pandoc |   2 +-
- xen/arch/arm/Kconfig              |  11 ++
- xen/arch/arm/Makefile             |   2 +
- xen/arch/arm/domain_build.c       |   6 +
- xen/arch/arm/include/asm/numa.h   |  92 +++++++++-
- xen/arch/arm/numa.c               | 185 +++++++++++++++++++
- xen/arch/arm/numa_device_tree.c   | 290 ++++++++++++++++++++++++++++++
- xen/arch/arm/setup.c              |  17 ++
- xen/arch/arm/smpboot.c            |  38 ++++
- xen/arch/x86/include/asm/numa.h   |   1 -
- xen/arch/x86/srat.c               |   2 +-
- xen/include/xen/numa.h            |  10 ++
- 13 files changed, 653 insertions(+), 4 deletions(-)
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Henry Wang <Henry.Wang@arm.com>
+---
+v2 -> v3:
+1. Rename the first entry of enum dt_numa_status as DT_NUMA_DEFAULT.
+2. Make enum dt_numa_status device_tree_numa as __ro_after_init and
+   assign it explicitly to DT_NUMA_DEFAULT.
+3. Update the year in copyright to 2023.
+4. Don't move the x86 numa_disabled() and make Arm's numa_disabled()
+   a static inline function for !CONFIG_NUMA.
+v1 -> v2:
+1. Use arch_numa_disabled to replace numa_enable_with_firmware.
+2. Introduce enumerations for device tree numa status.
+3. Use common numa_disabled, drop Arm version numa_disabled.
+4. Introduce arch_numa_setup for Arm.
+5. Rename bad_srat to numa_bad.
+6. Add numa_enable_with_firmware helper.
+7. Add numa_disabled helper.
+8. Refine commit message.
+---
+ xen/arch/arm/include/asm/numa.h | 17 +++++++++++
+ xen/arch/arm/numa.c             | 50 +++++++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
  create mode 100644 xen/arch/arm/numa.c
- create mode 100644 xen/arch/arm/numa_device_tree.c
 
+diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
+index 7d6ae36a19..83f60ad05b 100644
+--- a/xen/arch/arm/include/asm/numa.h
++++ b/xen/arch/arm/include/asm/numa.h
+@@ -22,6 +22,8 @@ typedef u8 nodeid_t;
+  */
+ #define NR_NODE_MEMBLKS NR_MEM_BANKS
+ 
++extern bool numa_disabled(void);
++
+ #else
+ 
+ /* Fake one node for now. See also node_online_map. */
+@@ -39,6 +41,21 @@ extern mfn_t first_valid_mfn;
+ #define node_start_pfn(nid) (mfn_x(first_valid_mfn))
+ #define __node_distance(a, b) (20)
+ 
++static inline bool numa_disabled(void)
++{
++    return true;
++}
++
++static inline bool arch_numa_unavailable(void)
++{
++    return true;
++}
++
++static inline bool arch_numa_broken(void)
++{
++    return true;
++}
++
+ #endif
+ 
+ #define arch_want_default_dmazone() (false)
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+new file mode 100644
+index 0000000000..eb5d0632cb
+--- /dev/null
++++ b/xen/arch/arm/numa.c
+@@ -0,0 +1,50 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Arm Architecture support layer for NUMA.
++ *
++ * Copyright (C) 2023 Arm Ltd
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++#include <xen/init.h>
++#include <xen/numa.h>
++
++enum dt_numa_status {
++    DT_NUMA_DEFAULT,
++    DT_NUMA_ON,
++    DT_NUMA_OFF,
++};
++
++static enum dt_numa_status __ro_after_init device_tree_numa = DT_NUMA_DEFAULT;
++
++void __init numa_fw_bad(void)
++{
++    printk(KERN_ERR "NUMA: device tree numa info table not used.\n");
++    device_tree_numa = DT_NUMA_OFF;
++}
++
++bool __init arch_numa_unavailable(void)
++{
++    return device_tree_numa != DT_NUMA_ON;
++}
++
++bool arch_numa_disabled(void)
++{
++    return device_tree_numa == DT_NUMA_OFF;
++}
++
++int __init arch_numa_setup(const char *opt)
++{
++    return -EINVAL;
++}
 -- 
 2.25.1
 
