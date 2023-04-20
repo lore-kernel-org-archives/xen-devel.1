@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281C6C77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:38:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524122.814767 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44EAEC77B72
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:38:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524121.814758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSbn-0001Op-2Q; Thu, 20 Apr 2023 11:37:51 +0000
+	id 1ppSbh-000187-LT; Thu, 20 Apr 2023 11:37:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524122.814767; Thu, 20 Apr 2023 11:37:51 +0000
+Received: by outflank-mailman (output) from mailman id 524121.814758; Thu, 20 Apr 2023 11:37:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSbm-0001Oi-VR; Thu, 20 Apr 2023 11:37:50 +0000
-Received: by outflank-mailman (input) for mailman id 524122;
- Thu, 20 Apr 2023 11:37:49 +0000
+	id 1ppSbh-000180-I8; Thu, 20 Apr 2023 11:37:45 +0000
+Received: by outflank-mailman (input) for mailman id 524121;
+ Thu, 20 Apr 2023 11:37:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=onos=AL=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppSbl-00017u-1y
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:37:49 +0000
+ id 1ppSbg-00017u-Jp
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:37:44 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c619e470-df6f-11ed-b21f-6b7b168915f2;
- Thu, 20 Apr 2023 13:37:48 +0200 (CEST)
+ id c28d34f5-df6f-11ed-b21f-6b7b168915f2;
+ Thu, 20 Apr 2023 13:37:42 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-587-VCLxhnfSPFqLD1O2cun8pQ-1; Thu, 20 Apr 2023 07:37:42 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-178-a4reCKcJMC-maL8cmDVnuQ-1; Thu, 20 Apr 2023 07:37:37 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 44168380671E;
- Thu, 20 Apr 2023 11:37:41 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0F9FB280BF69;
+ Thu, 20 Apr 2023 11:37:36 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 213381410F1C;
- Thu, 20 Apr 2023 11:37:39 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7A6FC2166B33;
+ Thu, 20 Apr 2023 11:37:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c619e470-df6f-11ed-b21f-6b7b168915f2
+X-Inumbo-ID: c28d34f5-df6f-11ed-b21f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681990667;
+	s=mimecast20190719; t=1681990661;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ct1ICfub90ccCopLja+U3Sq9ZQX/65uvuN+fpfLMIoc=;
-	b=SibGHQhKPwH260n+GV9EZs4FUJwLqfTDL30rrhZFCTcwSTBOLGtZGqgAZSiUpjayUmkVUa
-	OG5EZJmXmeDXx3fluHL0Td9uOw3GVj+OPBoxefJt2QKYdWIpCGtjGrWASqsHD7EIYU1XTg
-	pA/PCNmLM4cw6qidhmKcTFPvIpZ/qnA=
-X-MC-Unique: VCLxhnfSPFqLD1O2cun8pQ-1
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=NjZzjvFlly0+fag4k7wDm16HnoaaLh2yTrNsegeJk9A=;
+	b=bhWwn3VHQNh+DU/GBBa7Q41H1799jHIO6uQCtz5oqe/vY6OpX+W3z9IaDNwaYgKszDVahE
+	9p05l5pGaS77sdJHGSjb69jdECyJBgR2FJh9H39O2dikonbZHpUTuSRwv6AttxP3yWo4/1
+	KdTqRVqcqru/RtQTGA1w2pFIeiK1ZQo=
+X-MC-Unique: a4reCKcJMC-maL8cmDVnuQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Lieven <pl@kamp.de>,
@@ -94,89 +93,138 @@ Cc: Peter Lieven <pl@kamp.de>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	"Richard W.M. Jones" <rjones@redhat.com>,
 	Coiby Xu <Coiby.Xu@gmail.com>,
-	Stefano Garzarella <sgarzare@redhat.com>,
-	Daniil Tatianin <d-tatianin@yandex-team.ru>
-Subject: [PATCH v3 02/20] virtio-scsi: avoid race between unplug and transport event
-Date: Thu, 20 Apr 2023 07:37:14 -0400
-Message-Id: <20230420113732.336620-3-stefanha@redhat.com>
-In-Reply-To: <20230420113732.336620-1-stefanha@redhat.com>
-References: <20230420113732.336620-1-stefanha@redhat.com>
+	Stefano Garzarella <sgarzare@redhat.com>
+Subject: [PATCH v3 00/20] block: remove aio_disable_external() API
+Date: Thu, 20 Apr 2023 07:37:12 -0400
+Message-Id: <20230420113732.336620-1-stefanha@redhat.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
 
-Only report a transport reset event to the guest after the SCSIDevice
-has been unrealized by qdev_simple_device_unplug_cb().
+v3:
+- Resend full patch series. v2 was sent in the middle of a git rebase and was
+  missing patches. [Eric]
+- Apply Reviewed-by tags.
+v2:
+- Do not rely on BlockBackend request queuing, implement .drained_begin/end()
+  instead in xen-block, virtio-blk, and virtio-scsi [Paolo]
+- Add qdev_is_realized() API [Philippe]
+- Add patch to avoid AioContext lock around blk_exp_ref/unref() [Paolo]
+- Add patch to call .drained_begin/end() from main loop thread to simplify
+  callback implementations
 
-qdev_simple_device_unplug_cb() sets the SCSIDevice's qdev.realized field
-to false so that scsi_device_find/get() no longer see it.
+The aio_disable_external() API temporarily suspends file descriptor monitoring
+in the event loop. The block layer uses this to prevent new I/O requests being
+submitted from the guest and elsewhere between bdrv_drained_begin() and
+bdrv_drained_end().
 
-scsi_target_emulate_report_luns() also needs to be updated to filter out
-SCSIDevices that are unrealized.
+While the block layer still needs to prevent new I/O requests in drained
+sections, the aio_disable_external() API can be replaced with
+.drained_begin/end/poll() callbacks that have been added to BdrvChildClass and
+BlockDevOps.
 
-These changes ensure that the guest driver does not see the SCSIDevice
-that's being unplugged if it responds very quickly to the transport
-reset event.
+This newer .bdrained_begin/end/poll() approach is attractive because it works
+without specifying a specific AioContext. The block layer is moving towards
+multi-queue and that means multiple AioContexts may be processing I/O
+simultaneously.
 
-Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Daniil Tatianin <d-tatianin@yandex-team.ru>
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- hw/scsi/scsi-bus.c    |  3 ++-
- hw/scsi/virtio-scsi.c | 18 +++++++++---------
- 2 files changed, 11 insertions(+), 10 deletions(-)
+The aio_disable_external() was always somewhat hacky. It suspends all file
+descriptors that were registered with is_external=true, even if they have
+nothing to do with the BlockDriverState graph nodes that are being drained.
+It's better to solve a block layer problem in the block layer than to have an
+odd event loop API solution.
 
-diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
-index 07275fb631..64d7311757 100644
---- a/hw/scsi/scsi-bus.c
-+++ b/hw/scsi/scsi-bus.c
-@@ -486,7 +486,8 @@ static bool scsi_target_emulate_report_luns(SCSITargetReq *r)
-             DeviceState *qdev = kid->child;
-             SCSIDevice *dev = SCSI_DEVICE(qdev);
- 
--            if (dev->channel == channel && dev->id == id && dev->lun != 0) {
-+            if (dev->channel == channel && dev->id == id && dev->lun != 0 &&
-+                qdev_is_realized(&dev->qdev)) {
-                 store_lun(tmp, dev->lun);
-                 g_byte_array_append(buf, tmp, 8);
-                 len += 8;
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index 612c525d9d..000961446c 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -1063,15 +1063,6 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
-     SCSIDevice *sd = SCSI_DEVICE(dev);
-     AioContext *ctx = s->ctx ?: qemu_get_aio_context();
- 
--    if (virtio_vdev_has_feature(vdev, VIRTIO_SCSI_F_HOTPLUG)) {
--        virtio_scsi_acquire(s);
--        virtio_scsi_push_event(s, sd,
--                               VIRTIO_SCSI_T_TRANSPORT_RESET,
--                               VIRTIO_SCSI_EVT_RESET_REMOVED);
--        scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
--        virtio_scsi_release(s);
--    }
--
-     aio_disable_external(ctx);
-     qdev_simple_device_unplug_cb(hotplug_dev, dev, errp);
-     aio_enable_external(ctx);
-@@ -1082,6 +1073,15 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         blk_set_aio_context(sd->conf.blk, qemu_get_aio_context(), NULL);
-         virtio_scsi_release(s);
-     }
-+
-+    if (virtio_vdev_has_feature(vdev, VIRTIO_SCSI_F_HOTPLUG)) {
-+        virtio_scsi_acquire(s);
-+        virtio_scsi_push_event(s, sd,
-+                               VIRTIO_SCSI_T_TRANSPORT_RESET,
-+                               VIRTIO_SCSI_EVT_RESET_REMOVED);
-+        scsi_bus_set_ua(&s->bus, SENSE_CODE(REPORTED_LUNS_CHANGED));
-+        virtio_scsi_release(s);
-+    }
- }
- 
- static struct SCSIBusInfo virtio_scsi_scsi_info = {
+The approach in this patch series is to implement BlockDevOps
+.drained_begin/end() callbacks that temporarily stop file descriptor handlers.
+This ensures that new I/O requests are not submitted in drained sections.
+
+The first two virtio-scsi patches were already sent as a separate series. I
+included them because they are necessary in order to fully remove
+aio_disable_external().
+
+Based-on: 087bc644b7634436ca9d52fe58ba9234e2bef026 (kevin/block-next)
+
+Stefan Hajnoczi (20):
+  hw/qdev: introduce qdev_is_realized() helper
+  virtio-scsi: avoid race between unplug and transport event
+  virtio-scsi: stop using aio_disable_external() during unplug
+  block/export: only acquire AioContext once for
+    vhost_user_server_stop()
+  util/vhost-user-server: rename refcount to in_flight counter
+  block/export: wait for vhost-user-blk requests when draining
+  block/export: stop using is_external in vhost-user-blk server
+  hw/xen: do not use aio_set_fd_handler(is_external=true) in
+    xen_xenstore
+  block: add blk_in_drain() API
+  block: drain from main loop thread in bdrv_co_yield_to_drain()
+  xen-block: implement BlockDevOps->drained_begin()
+  hw/xen: do not set is_external=true on evtchn fds
+  block/export: rewrite vduse-blk drain code
+  block/export: don't require AioContext lock around blk_exp_ref/unref()
+  block/fuse: do not set is_external=true on FUSE fd
+  virtio: make it possible to detach host notifier from any thread
+  virtio-blk: implement BlockDevOps->drained_begin()
+  virtio-scsi: implement BlockDevOps->drained_begin()
+  virtio: do not set is_external=true on host notifiers
+  aio: remove aio_disable_external() API
+
+ hw/block/dataplane/xen-block.h              |   2 +
+ include/block/aio.h                         |  55 ---------
+ include/block/export.h                      |   2 +
+ include/hw/qdev-core.h                      |  17 ++-
+ include/hw/scsi/scsi.h                      |  14 +++
+ include/qemu/vhost-user-server.h            |   8 +-
+ include/sysemu/block-backend-common.h       |  25 ++--
+ include/sysemu/block-backend-global-state.h |   1 +
+ util/aio-posix.h                            |   1 -
+ block.c                                     |   7 --
+ block/blkio.c                               |  15 +--
+ block/block-backend.c                       |   7 ++
+ block/curl.c                                |  10 +-
+ block/export/export.c                       |  13 +-
+ block/export/fuse.c                         |  58 ++++++++-
+ block/export/vduse-blk.c                    | 128 ++++++++++++++------
+ block/export/vhost-user-blk-server.c        |  73 +++++++----
+ block/io.c                                  |   5 +-
+ block/io_uring.c                            |   4 +-
+ block/iscsi.c                               |   3 +-
+ block/linux-aio.c                           |   4 +-
+ block/nfs.c                                 |   5 +-
+ block/nvme.c                                |   8 +-
+ block/ssh.c                                 |   4 +-
+ block/win32-aio.c                           |   6 +-
+ hw/block/dataplane/virtio-blk.c             |  19 ++-
+ hw/block/dataplane/xen-block.c              |  42 +++++--
+ hw/block/virtio-blk.c                       |  38 +++++-
+ hw/block/xen-block.c                        |  24 +++-
+ hw/i386/kvm/xen_xenstore.c                  |   2 +-
+ hw/scsi/scsi-bus.c                          |  46 ++++++-
+ hw/scsi/scsi-disk.c                         |  28 ++++-
+ hw/scsi/virtio-scsi-dataplane.c             |  31 +++--
+ hw/scsi/virtio-scsi.c                       |  59 +++++++--
+ hw/virtio/virtio.c                          |   6 +-
+ hw/xen/xen-bus.c                            |  11 +-
+ io/channel-command.c                        |   6 +-
+ io/channel-file.c                           |   3 +-
+ io/channel-socket.c                         |   3 +-
+ migration/rdma.c                            |  16 +--
+ tests/unit/test-aio.c                       |  27 +----
+ tests/unit/test-fdmon-epoll.c               |  73 -----------
+ util/aio-posix.c                            |  20 +--
+ util/aio-win32.c                            |   8 +-
+ util/async.c                                |   3 +-
+ util/fdmon-epoll.c                          |  10 --
+ util/fdmon-io_uring.c                       |   8 +-
+ util/fdmon-poll.c                           |   3 +-
+ util/main-loop.c                            |   7 +-
+ util/qemu-coroutine-io.c                    |   7 +-
+ util/vhost-user-server.c                    |  38 +++---
+ hw/scsi/trace-events                        |   2 +
+ tests/unit/meson.build                      |   3 -
+ 53 files changed, 582 insertions(+), 436 deletions(-)
+ delete mode 100644 tests/unit/test-fdmon-epoll.c
+
 -- 
 2.39.2
 
