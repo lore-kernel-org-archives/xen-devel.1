@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9C2C77B7C
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524032.814578 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA92CC77B73
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524035.814608 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSQ2-0006X0-SI; Thu, 20 Apr 2023 11:25:42 +0000
+	id 1ppSQF-0007dT-PQ; Thu, 20 Apr 2023 11:25:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524032.814578; Thu, 20 Apr 2023 11:25:42 +0000
+Received: by outflank-mailman (output) from mailman id 524035.814608; Thu, 20 Apr 2023 11:25:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSQ2-0006Wt-O8; Thu, 20 Apr 2023 11:25:42 +0000
-Received: by outflank-mailman (input) for mailman id 524032;
- Thu, 20 Apr 2023 11:25:41 +0000
+	id 1ppSQF-0007dI-Kf; Thu, 20 Apr 2023 11:25:55 +0000
+Received: by outflank-mailman (input) for mailman id 524035;
+ Thu, 20 Apr 2023 11:25:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PE5v=AL=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1ppSQ1-0006Vv-6M
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:25:41 +0000
+ id 1ppSQE-0006Vv-91
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:25:54 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 14432ac5-df6e-11ed-b21f-6b7b168915f2;
- Thu, 20 Apr 2023 13:25:40 +0200 (CEST)
+ id 1c6c5186-df6e-11ed-b21f-6b7b168915f2;
+ Thu, 20 Apr 2023 13:25:53 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 339771516;
- Thu, 20 Apr 2023 04:26:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E60761480;
+ Thu, 20 Apr 2023 04:26:36 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D9E013F587;
- Thu, 20 Apr 2023 04:25:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A30503F587;
+ Thu, 20 Apr 2023 04:25:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14432ac5-df6e-11ed-b21f-6b7b168915f2
+X-Inumbo-ID: 1c6c5186-df6e-11ed-b21f-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Wei Chen <wei.chen@arm.com>,
@@ -53,14 +53,10 @@ Cc: Wei Chen <wei.chen@arm.com>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v3 01/17] xen/arm: use NR_MEM_BANKS to override default NR_NODE_MEMBLKS
-Date: Thu, 20 Apr 2023 19:25:05 +0800
-Message-Id: <20230420112521.3272732-2-Henry.Wang@arm.com>
+Subject: [PATCH v3 04/17] xen/arm: use arch_get_ram_range to memory ranges from bootinfo
+Date: Thu, 20 Apr 2023 19:25:08 +0800
+Message-Id: <20230420112521.3272732-5-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230420112521.3272732-1-Henry.Wang@arm.com>
 References: <20230420112521.3272732-1-Henry.Wang@arm.com>
@@ -69,90 +65,39 @@ Content-Transfer-Encoding: 8bit
 
 From: Wei Chen <wei.chen@arm.com>
 
-As a memory range described in device tree cannot be split across
-multiple nodes. And it is very likely than if you have more than
-64 nodes, you may need a lot more than 2 regions per node. So the
-default NR_NODE_MEMBLKS value (MAX_NUMNODES * 2) makes no sense
-on Arm.
-
-So, for Arm, we would just define NR_NODE_MEMBLKS as an alias to
-NR_MEM_BANKS. And in the future NR_MEM_BANKS will be user-configurable
-via kconfig, but for now leave NR_MEM_BANKS as 128 on Arm. This
-avoid to have different way to define the value based NUMA vs non-NUMA.
-
-Further discussions can be found here[1].
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2021-09/msg02322.html
+Implement the same helper "arch_get_ram_range" as x86 for NUMA
+code to get memory bank from Arm bootinfo.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 ---
-By checking the discussion in [1] and [2]
-[1] https://lists.xenproject.org/archives/html/xen-devel/2023-01/msg00595.html
-[2] https://lists.xenproject.org/archives/html/xen-devel/2021-09/msg02322.html
 v2 -> v3:
-1. No change
+1. No change.
 v1 -> v2:
-1. Add code comments to explain using NR_MEM_BANKS for Arm
-2. Refine commit messages.
+1. Use arch_get_ram_range instead of arch_get_memory_map.
 ---
- xen/arch/arm/include/asm/numa.h | 19 ++++++++++++++++++-
- xen/include/xen/numa.h          |  9 +++++++++
- 2 files changed, 27 insertions(+), 1 deletion(-)
+ xen/arch/arm/numa.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index e2bee2bd82..7d6ae36a19 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/arch/arm/include/asm/numa.h
-@@ -3,9 +3,26 @@
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+index c5ef81aad3..a0e7b14925 100644
+--- a/xen/arch/arm/numa.c
++++ b/xen/arch/arm/numa.c
+@@ -100,3 +100,14 @@ unsigned char __node_distance(nodeid_t from, nodeid_t to)
+ }
  
- #include <xen/mm.h>
- 
-+#include <asm/setup.h>
+ EXPORT_SYMBOL(__node_distance);
 +
- typedef u8 nodeid_t;
- 
--#ifndef CONFIG_NUMA
-+#ifdef CONFIG_NUMA
++int __init arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
++{
++    if ( idx >= bootinfo.mem.nr_banks )
++        return -ENOENT;
 +
-+/*
-+ * It is very likely that if you have more than 64 nodes, you may
-+ * need a lot more than 2 regions per node. So, for Arm, we would
-+ * just define NR_NODE_MEMBLKS as an alias to NR_MEM_BANKS.
-+ * And in the future NR_MEM_BANKS will be bumped for new platforms,
-+ * but for now leave NR_MEM_BANKS as it is on Arm. This avoid to
-+ * have different way to define the value based NUMA vs non-NUMA.
-+ *
-+ * Further discussions can be found here:
-+ * https://lists.xenproject.org/archives/html/xen-devel/2021-09/msg02322.html
-+ */
-+#define NR_NODE_MEMBLKS NR_MEM_BANKS
++    *start = bootinfo.mem.bank[idx].start;
++    *end = *start + bootinfo.mem.bank[idx].size;
 +
-+#else
- 
- /* Fake one node for now. See also node_online_map. */
- #define cpu_to_node(cpu) 0
-diff --git a/xen/include/xen/numa.h b/xen/include/xen/numa.h
-index 29b8c2df89..b86d0851fc 100644
---- a/xen/include/xen/numa.h
-+++ b/xen/include/xen/numa.h
-@@ -13,7 +13,16 @@
- #define MAX_NUMNODES 1
- #endif
- 
-+/*
-+ * Some architectures may have different considerations for
-+ * number of node memory blocks. They can define their
-+ * NR_NODE_MEMBLKS in asm/numa.h to reflect their architectural
-+ * implementation. If the arch does not have specific implementation,
-+ * the following default NR_NODE_MEMBLKS will be used.
-+ */
-+#ifndef NR_NODE_MEMBLKS
- #define NR_NODE_MEMBLKS (MAX_NUMNODES * 2)
-+#endif
- 
- #define vcpu_to_node(v) (cpu_to_node((v)->processor))
- 
++    return 0;
++}
 -- 
 2.25.1
 
