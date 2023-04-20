@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7642C77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524047.814628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD2FC77B72
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:26:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524052.814638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSQO-0000A7-BL; Thu, 20 Apr 2023 11:26:04 +0000
+	id 1ppSQV-0000r6-MR; Thu, 20 Apr 2023 11:26:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524047.814628; Thu, 20 Apr 2023 11:26:04 +0000
+Received: by outflank-mailman (output) from mailman id 524052.814638; Thu, 20 Apr 2023 11:26:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSQO-00009s-7J; Thu, 20 Apr 2023 11:26:04 +0000
-Received: by outflank-mailman (input) for mailman id 524047;
- Thu, 20 Apr 2023 11:26:02 +0000
+	id 1ppSQV-0000qy-J0; Thu, 20 Apr 2023 11:26:11 +0000
+Received: by outflank-mailman (input) for mailman id 524052;
+ Thu, 20 Apr 2023 11:26:10 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PE5v=AL=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1ppSQM-0006GU-OY
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:26:02 +0000
+ id 1ppSQU-0006GU-BS
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:26:10 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 20cf2ecc-df6e-11ed-8611-37d641c3527e;
- Thu, 20 Apr 2023 13:26:01 +0200 (CEST)
+ id 2527de5a-df6e-11ed-8611-37d641c3527e;
+ Thu, 20 Apr 2023 13:26:08 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3FA141480;
- Thu, 20 Apr 2023 04:26:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7B6B21480;
+ Thu, 20 Apr 2023 04:26:51 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 056CD3F587;
- Thu, 20 Apr 2023 04:25:57 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 412E33F587;
+ Thu, 20 Apr 2023 04:26:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 20cf2ecc-df6e-11ed-8611-37d641c3527e
+X-Inumbo-ID: 2527de5a-df6e-11ed-8611-37d641c3527e
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Wei Chen <wei.chen@arm.com>,
@@ -54,9 +54,9 @@ Cc: Wei Chen <wei.chen@arm.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v3 06/17] xen/arm: Add boot and secondary CPU to NUMA system
-Date: Thu, 20 Apr 2023 19:25:10 +0800
-Message-Id: <20230420112521.3272732-7-Henry.Wang@arm.com>
+Subject: [PATCH v3 08/17] xen/arm: introduce a helper to parse device tree memory node
+Date: Thu, 20 Apr 2023 19:25:12 +0800
+Message-Id: <20230420112521.3272732-9-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230420112521.3272732-1-Henry.Wang@arm.com>
 References: <20230420112521.3272732-1-Henry.Wang@arm.com>
@@ -65,14 +65,9 @@ Content-Transfer-Encoding: 8bit
 
 From: Wei Chen <wei.chen@arm.com>
 
-In this patch, we make NUMA node online and add cpu to
-its NUMA node. This will make NUMA-aware components
-have NUMA affinity data to support their work.
-
-To keep the mostly the same behavior of x86, we use
-numa_detect_cpu_node to online node. The difference is that,
-we have prepared cpu_to_node in dt_smp_init_cpus, so we don't
-need to setup cpu_to_node in numa_detect_cpu_node.
+Memory blocks' NUMA ID information is stored in device tree's
+memory nodes as "numa-node-id". We need a new helper to parse
+and verify this ID from memory nodes.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
@@ -80,78 +75,127 @@ Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 v2 -> v3:
 1. No change.
 v1 -> v2:
-1. Use unsigned int instead of int for cpu id.
-2. Use static inline for stub to do type check.
+1. Move numa_disabled check to fdt_parse_numa_memory_node.
+2. Use numa_bad to replace bad_srat.
+3. Replace tabs by spaces.
+4. Align parameters.
+5. return ENODATA for a normal dtb without numa info.
+6. Un-addressed comment:
+   "Why not parse numa-node-id and call fdt_numa_memory_affinity_init
+   from xen/arch/arm/bootfdt.c:device_tree_get_meminfo. Is it because
+   device_tree_get_meminfo is called too early?"
+   I checked the device_tree_get_meminfo code and I think the answer
+   is similar as I reply in RFC. I prefer a unify numa initialization
+   entry. Don't want to make numa parse code in different places.
+7. Use node id as dummy PXM for numa_update_node_memblks.
 ---
- xen/arch/arm/include/asm/numa.h |  9 +++++++++
- xen/arch/arm/numa.c             | 10 ++++++++++
- xen/arch/arm/setup.c            |  5 +++++
- 3 files changed, 24 insertions(+)
+ xen/arch/arm/numa_device_tree.c | 89 +++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index e7a7d4e835..2f3d7079d9 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/arch/arm/include/asm/numa.h
-@@ -36,6 +36,7 @@ typedef u8 nodeid_t;
- extern bool numa_disabled(void);
- extern void numa_set_distance(nodeid_t from, nodeid_t to,
-                               unsigned int distance);
-+extern void numa_detect_cpu_node(unsigned int cpu);
+diff --git a/xen/arch/arm/numa_device_tree.c b/xen/arch/arm/numa_device_tree.c
+index 52051e4537..9796490747 100644
+--- a/xen/arch/arm/numa_device_tree.c
++++ b/xen/arch/arm/numa_device_tree.c
+@@ -34,6 +34,26 @@ static int __init fdt_numa_processor_affinity_init(nodeid_t node)
+     return 0;
+ }
  
- #else
- 
-@@ -73,6 +74,14 @@ static inline void numa_set_node(unsigned int cpu, nodeid_t node)
++/* Callback for parsing of the memory regions affinity */
++static int __init fdt_numa_memory_affinity_init(nodeid_t node,
++                                                paddr_t start, paddr_t size)
++{
++    if ( !numa_memblks_available() )
++    {
++        dprintk(XENLOG_WARNING,
++                "Too many numa entry, try bigger NR_NODE_MEMBLKS\n");
++        return -EINVAL;
++    }
++
++    numa_fw_nid_name = "numa-node-id";
++    if ( !numa_update_node_memblks(node, node, start, size, false) )
++        return -EINVAL;
++
++    device_tree_numa = DT_NUMA_ON;
++
++    return 0;
++}
++
+ /* Parse CPU NUMA node info */
+ static int __init fdt_parse_numa_cpu_node(const void *fdt, int node)
  {
+@@ -62,3 +82,72 @@ static int __init fdt_parse_numa_cpu_node(const void *fdt, int node)
+ 
+     return fdt_numa_processor_affinity_init(nid);
  }
- 
-+static inline void numa_add_cpu(unsigned int cpu)
-+{
-+}
 +
-+static inline void numa_detect_cpu_node(unsigned int cpu)
++/* Parse memory node NUMA info */
++static int __init fdt_parse_numa_memory_node(const void *fdt, int node,
++                                             const char *name,
++                                             unsigned int addr_cells,
++                                             unsigned int size_cells)
 +{
-+}
++    unsigned int nid;
++    int ret = 0, len;
++    paddr_t addr, size;
++    const struct fdt_property *prop;
++    unsigned int idx, ranges;
++    const __be32 *addresses;
 +
- #endif
- 
- #define arch_want_default_dmazone() (false)
-diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
-index a0e7b14925..05a339b044 100644
---- a/xen/arch/arm/numa.c
-+++ b/xen/arch/arm/numa.c
-@@ -81,6 +81,16 @@ void __init numa_set_distance(nodeid_t from, nodeid_t to,
-     node_distance_map[from][to] = distance;
- }
- 
-+void numa_detect_cpu_node(unsigned int cpu)
-+{
-+    nodeid_t node = cpu_to_node[cpu];
++    if ( numa_disabled() )
++        return -EINVAL;
 +
++    /*
++     * device_tree_get_u32 will return NUMA_NO_NODE when this memory
++     * DT node doesn't have numa-node-id. This can help us to
++     * distinguish a bad DTB and a normal DTB without NUMA info.
++     */
++    nid = device_tree_get_u32(fdt, node, "numa-node-id", NUMA_NO_NODE);
 +    if ( node == NUMA_NO_NODE )
-+        node = 0;
++    {
++        numa_fw_bad();
++        return -ENODATA;
++    }
++    else if ( nid >= MAX_NUMNODES )
++    {
++        printk(XENLOG_WARNING "Node id %u exceeds maximum value\n", nid);
++        goto invalid_data;
++    }
 +
-+    node_set_online(node);
++    prop = fdt_get_property(fdt, node, "reg", &len);
++    if ( !prop )
++    {
++        printk(XENLOG_WARNING
++               "fdt: node `%s': missing `reg' property\n", name);
++        goto invalid_data;
++    }
++
++    addresses = (const __be32 *)prop->data;
++    ranges = len / (sizeof(__be32)* (addr_cells + size_cells));
++    for ( idx = 0; idx < ranges; idx++ )
++    {
++        device_tree_get_reg(&addresses, addr_cells, size_cells, &addr, &size);
++        /* Skip zero size ranges */
++        if ( !size )
++            continue;
++
++        ret = fdt_numa_memory_affinity_init(nid, addr, size);
++        if ( ret )
++            goto invalid_data;
++    }
++
++    if ( idx == 0 )
++    {
++        printk(XENLOG_ERR
++               "bad property in memory node, idx=%d ret=%d\n", idx, ret);
++        goto invalid_data;
++    }
++
++    return 0;
++
++invalid_data:
++    numa_fw_bad();
++    return -EINVAL;
 +}
-+
- unsigned char __node_distance(nodeid_t from, nodeid_t to)
- {
-     /* When NUMA is off, any distance will be treated as remote. */
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 6f9f4d8c8a..09e18d32df 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -1205,6 +1205,11 @@ void __init start_xen(unsigned long boot_phys_offset,
- 
-     for_each_present_cpu ( i )
-     {
-+        /* Detect and online node based on cpu_to_node[]. */
-+        numa_detect_cpu_node(i);
-+        /* Set up node_to_cpumask based on cpu_to_node[]. */
-+        numa_add_cpu(i);
-+
-         if ( (num_online_cpus() < nr_cpu_ids) && !cpu_online(i) )
-         {
-             int ret = cpu_up(i);
 -- 
 2.25.1
 
