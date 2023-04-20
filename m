@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8B6BC77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:38:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524123.814778 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B58C77B73
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:38:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524131.814788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSbz-0001rT-CY; Thu, 20 Apr 2023 11:38:03 +0000
+	id 1ppScN-0002cq-KO; Thu, 20 Apr 2023 11:38:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524123.814778; Thu, 20 Apr 2023 11:38:03 +0000
+Received: by outflank-mailman (output) from mailman id 524131.814788; Thu, 20 Apr 2023 11:38:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSbz-0001qe-7U; Thu, 20 Apr 2023 11:38:03 +0000
-Received: by outflank-mailman (input) for mailman id 524123;
- Thu, 20 Apr 2023 11:38:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ppScN-0002cj-HH; Thu, 20 Apr 2023 11:38:27 +0000
+Received: by outflank-mailman (input) for mailman id 524131;
+ Thu, 20 Apr 2023 11:38:26 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=onos=AL=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppSbx-0001nK-W9
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:38:01 +0000
+ id 1ppScM-0002cJ-Cw
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:38:26 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cbebed97-df6f-11ed-8611-37d641c3527e;
- Thu, 20 Apr 2023 13:37:59 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dc04e1c9-df6f-11ed-b21f-6b7b168915f2;
+ Thu, 20 Apr 2023 13:38:25 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-433-iWi0qQDrOru7dTdAiGIe9Q-1; Thu, 20 Apr 2023 07:37:39 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-556-i8H5la--OhiNA-YvKIl4IA-1; Thu, 20 Apr 2023 07:38:21 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4AD328996F3;
- Thu, 20 Apr 2023 11:37:38 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1588A1C08982;
+ Thu, 20 Apr 2023 11:38:20 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A66435AB7A;
- Thu, 20 Apr 2023 11:37:37 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 00AB92026D16;
+ Thu, 20 Apr 2023 11:37:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbebed97-df6f-11ed-8611-37d641c3527e
+X-Inumbo-ID: dc04e1c9-df6f-11ed-b21f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681990677;
+	s=mimecast20190719; t=1681990704;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=DrOhiPPcL+d6htjDrKGwRstWfOt7XytfnWLBr7kygzo=;
-	b=WIsjsDVv7HyDtM1F6k3FF5u8ijz8HUAezGGDfpYIUXukK6UH9iK2vO6JZghNPOWHQUn4Tx
-	+HfDJXSjmcjtDDw44RO5K66REStYoIKlqmjiJj0gTqmfzWnttunz00HLGeumfj9B4xTBzX
-	NqabMQREecI3QkKYSiObZJeKxJeKOqs=
-X-MC-Unique: iWi0qQDrOru7dTdAiGIe9Q-1
+	bh=mEUiDYhTGG6/grGbCAPXx5jwh+m436EKZLWWN7O6BQM=;
+	b=WokIk7Sd4qauXqXo/HxBQkO6cavPsbyX9Z/3pt7RvwHMs5Q8OqfFxhlmo9oVddy7cvRI+w
+	enHK4QXeKlDVJo8FxheFYR2v2SB+vT45SSSSKjUlT3Vz/B/finNbQiokyajldsPi317VD4
+	AhalpofJu/UkzA38X5qfpThJeJj3tYM=
+X-MC-Unique: i8H5la--OhiNA-YvKIl4IA-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Lieven <pl@kamp.de>,
@@ -94,86 +94,85 @@ Cc: Peter Lieven <pl@kamp.de>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	"Richard W.M. Jones" <rjones@redhat.com>,
 	Coiby Xu <Coiby.Xu@gmail.com>,
-	Stefano Garzarella <sgarzare@redhat.com>
-Subject: [PATCH v3 01/20] hw/qdev: introduce qdev_is_realized() helper
-Date: Thu, 20 Apr 2023 07:37:13 -0400
-Message-Id: <20230420113732.336620-2-stefanha@redhat.com>
+	Stefano Garzarella <sgarzare@redhat.com>,
+	Zhengui Li <lizhengui@huawei.com>,
+	Daniil Tatianin <d-tatianin@yandex-team.ru>
+Subject: [PATCH v3 03/20] virtio-scsi: stop using aio_disable_external() during unplug
+Date: Thu, 20 Apr 2023 07:37:15 -0400
+Message-Id: <20230420113732.336620-4-stefanha@redhat.com>
 In-Reply-To: <20230420113732.336620-1-stefanha@redhat.com>
 References: <20230420113732.336620-1-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
 
-Add a helper function to check whether the device is realized without
-requiring the Big QEMU Lock. The next patch adds a second caller. The
-goal is to avoid spreading DeviceState field accesses throughout the
-code.
+This patch is part of an effort to remove the aio_disable_external()
+API because it does not fit in a multi-queue block layer world where
+many AioContexts may be submitting requests to the same disk.
 
-Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+The SCSI emulation code is already in good shape to stop using
+aio_disable_external(). It was only used by commit 9c5aad84da1c
+("virtio-scsi: fixed virtio_scsi_ctx_check failed when detaching scsi
+disk") to ensure that virtio_scsi_hotunplug() works while the guest
+driver is submitting I/O.
+
+Ensure virtio_scsi_hotunplug() is safe as follows:
+
+1. qdev_simple_device_unplug_cb() -> qdev_unrealize() ->
+   device_set_realized() calls qatomic_set(&dev->realized, false) so
+   that future scsi_device_get() calls return NULL because they exclude
+   SCSIDevices with realized=false.
+
+   That means virtio-scsi will reject new I/O requests to this
+   SCSIDevice with VIRTIO_SCSI_S_BAD_TARGET even while
+   virtio_scsi_hotunplug() is still executing. We are protected against
+   new requests!
+
+2. Add a call to scsi_device_purge_requests() from scsi_unrealize() so
+   that in-flight requests are cancelled synchronously. This ensures
+   that no in-flight requests remain once qdev_simple_device_unplug_cb()
+   returns.
+
+Thanks to these two conditions we don't need aio_disable_external()
+anymore.
+
+Cc: Zhengui Li <lizhengui@huawei.com>
+Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
+Reviewed-by: Daniil Tatianin <d-tatianin@yandex-team.ru>
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/hw/qdev-core.h | 17 ++++++++++++++---
- hw/scsi/scsi-bus.c     |  3 +--
- 2 files changed, 15 insertions(+), 5 deletions(-)
+ hw/scsi/scsi-disk.c   | 1 +
+ hw/scsi/virtio-scsi.c | 3 ---
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index bd50ad5ee1..4d734cf35e 100644
---- a/include/hw/qdev-core.h
-+++ b/include/hw/qdev-core.h
-@@ -1,6 +1,7 @@
- #ifndef QDEV_CORE_H
- #define QDEV_CORE_H
+diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
+index 97c9b1c8cd..e01bd84541 100644
+--- a/hw/scsi/scsi-disk.c
++++ b/hw/scsi/scsi-disk.c
+@@ -2522,6 +2522,7 @@ static void scsi_realize(SCSIDevice *dev, Error **errp)
  
-+#include "qemu/atomic.h"
- #include "qemu/queue.h"
- #include "qemu/bitmap.h"
- #include "qemu/rcu.h"
-@@ -164,9 +165,6 @@ struct NamedClockList {
+ static void scsi_unrealize(SCSIDevice *dev)
+ {
++    scsi_device_purge_requests(dev, SENSE_CODE(RESET));
+     del_boot_device_lchs(&dev->qdev, NULL);
+ }
  
- /**
-  * DeviceState:
-- * @realized: Indicates whether the device has been fully constructed.
-- *            When accessed outside big qemu lock, must be accessed with
-- *            qatomic_load_acquire()
-  * @reset: ResettableState for the device; handled by Resettable interface.
-  *
-  * This structure should not be accessed directly.  We declare it here
-@@ -332,6 +330,19 @@ DeviceState *qdev_new(const char *name);
-  */
- DeviceState *qdev_try_new(const char *name);
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 000961446c..a02f9233ec 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -1061,11 +1061,8 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
+     VirtIODevice *vdev = VIRTIO_DEVICE(hotplug_dev);
+     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
+     SCSIDevice *sd = SCSI_DEVICE(dev);
+-    AioContext *ctx = s->ctx ?: qemu_get_aio_context();
  
-+/**
-+ * qdev_is_realized:
-+ * @dev: The device to check.
-+ *
-+ * May be called outside big qemu lock.
-+ *
-+ * Returns: %true% if the device has been fully constructed, %false% otherwise.
-+ */
-+static inline bool qdev_is_realized(DeviceState *dev)
-+{
-+    return qatomic_load_acquire(&dev->realized);
-+}
-+
- /**
-  * qdev_realize: Realize @dev.
-  * @dev: device to realize
-diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
-index c97176110c..07275fb631 100644
---- a/hw/scsi/scsi-bus.c
-+++ b/hw/scsi/scsi-bus.c
-@@ -60,8 +60,7 @@ static SCSIDevice *do_scsi_device_find(SCSIBus *bus,
-      * the user access the device.
-      */
+-    aio_disable_external(ctx);
+     qdev_simple_device_unplug_cb(hotplug_dev, dev, errp);
+-    aio_enable_external(ctx);
  
--    if (retval && !include_unrealized &&
--        !qatomic_load_acquire(&retval->qdev.realized)) {
-+    if (retval && !include_unrealized && !qdev_is_realized(&retval->qdev)) {
-         retval = NULL;
-     }
- 
+     if (s->ctx) {
+         virtio_scsi_acquire(s);
 -- 
 2.39.2
 
