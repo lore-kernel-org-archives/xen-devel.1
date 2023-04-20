@@ -4,43 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD93C77B73
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 11:50:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524200.814958 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAE9C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Apr 2023 12:01:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524218.814968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSnI-00044c-P0; Thu, 20 Apr 2023 11:49:44 +0000
+	id 1ppSyU-0007UM-Vv; Thu, 20 Apr 2023 12:01:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524200.814958; Thu, 20 Apr 2023 11:49:44 +0000
+Received: by outflank-mailman (output) from mailman id 524218.814968; Thu, 20 Apr 2023 12:01:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppSnI-00044T-KF; Thu, 20 Apr 2023 11:49:44 +0000
-Received: by outflank-mailman (input) for mailman id 524200;
- Thu, 20 Apr 2023 11:49:43 +0000
+	id 1ppSyU-0007UF-SZ; Thu, 20 Apr 2023 12:01:18 +0000
+Received: by outflank-mailman (input) for mailman id 524218;
+ Thu, 20 Apr 2023 12:01:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=onos=AL=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1ppSd2-0001nK-R7
- for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 11:39:08 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ <SRS0=8Idg=AL=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1ppSyT-0007U9-HT
+ for xen-devel@lists.xenproject.org; Thu, 20 Apr 2023 12:01:17 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20612.outbound.protection.outlook.com
+ [2a01:111:f400:7d00::612])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f4dc3610-df6f-11ed-8611-37d641c3527e;
- Thu, 20 Apr 2023 13:39:07 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-549-iXCyyEoXOhWgcUvuTttC3g-1; Thu, 20 Apr 2023 07:39:02 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B2226280BF65;
- Thu, 20 Apr 2023 11:39:01 +0000 (UTC)
-Received: from localhost (unknown [10.39.193.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9A1EC63A5E;
- Thu, 20 Apr 2023 11:39:00 +0000 (UTC)
+ id 0c664fb4-df73-11ed-8611-37d641c3527e;
+ Thu, 20 Apr 2023 14:01:14 +0200 (CEST)
+Received: from DU2PR04CA0051.eurprd04.prod.outlook.com (2603:10a6:10:234::26)
+ by AM7PR08MB5317.eurprd08.prod.outlook.com (2603:10a6:20b:101::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.22; Thu, 20 Apr
+ 2023 12:01:11 +0000
+Received: from DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:234:cafe::ac) by DU2PR04CA0051.outlook.office365.com
+ (2603:10a6:10:234::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.23 via Frontend
+ Transport; Thu, 20 Apr 2023 12:01:11 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT056.mail.protection.outlook.com (100.127.142.88) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6319.25 via Frontend Transport; Thu, 20 Apr 2023 12:01:11 +0000
+Received: ("Tessian outbound 3a01b65b5aad:v136");
+ Thu, 20 Apr 2023 12:01:11 +0000
+Received: from 15006531b184.2
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 09E57CB8-0153-4205-849A-5066F25DFC7F.1; 
+ Thu, 20 Apr 2023 12:01:00 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 15006531b184.2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 20 Apr 2023 12:01:00 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by AS2PR08MB8381.eurprd08.prod.outlook.com (2603:10a6:20b:558::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.21; Thu, 20 Apr
+ 2023 12:00:57 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::8e01:7058:6f40:90e1]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::8e01:7058:6f40:90e1%7]) with mapi id 15.20.6319.022; Thu, 20 Apr 2023
+ 12:00:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,338 +74,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4dc3610-df6f-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1681990745;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=V8/JM/4FpUbs1MFSPNPGCdntPIYaUvTzToJc4P5DEws=;
-	b=LWD1bXZyTARn5T/RL8QolxwrGjHwamQ+ZCxGi0m6N92MqGDdtLf0nYDRSF4TUtWMijv8Wt
-	R7Gf97xs231fQQ+EOg4JdLTAWv2RREF0EO+9hLvGNFi8icufxExpS/29N9hyeL/pl1EZaq
-	9AFRCdCRZWOlCZ6+905nUoP+5BPK9cM=
-X-MC-Unique: iXCyyEoXOhWgcUvuTttC3g-1
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Peter Lieven <pl@kamp.de>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	Xie Yongji <xieyongji@bytedance.com>,
-	Juan Quintela <quintela@redhat.com>,
-	qemu-block@nongnu.org,
-	Eduardo Habkost <eduardo@habkost.net>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Stefan Weil <sw@weilnetz.de>,
-	Fam Zheng <fam@euphon.net>,
-	Julia Suvorova <jusual@redhat.com>,
-	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
-	xen-devel@lists.xenproject.org,
-	Hanna Reitz <hreitz@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	eesposit@redhat.com,
-	Kevin Wolf <kwolf@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Aarushi Mehta <mehta.aaru20@gmail.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	"Richard W.M. Jones" <rjones@redhat.com>,
-	Coiby Xu <Coiby.Xu@gmail.com>,
-	Stefano Garzarella <sgarzare@redhat.com>
-Subject: [PATCH v3 18/20] virtio-scsi: implement BlockDevOps->drained_begin()
-Date: Thu, 20 Apr 2023 07:37:30 -0400
-Message-Id: <20230420113732.336620-19-stefanha@redhat.com>
-In-Reply-To: <20230420113732.336620-1-stefanha@redhat.com>
-References: <20230420113732.336620-1-stefanha@redhat.com>
+X-Inumbo-ID: 0c664fb4-df73-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gzGnHnbRrqpGWIdkxLYSf6zrAOvAZ4s7dC7fJoJhHfw=;
+ b=veRxT9ezyHiAXJE9kV3a0NULlIyrdcMkxVRwqq/sCz5VyT7i99aiIUDL4KhZQszPma4uDCPiwTzJFXSiZ6QQrcTWuwkyMj5lgM6woxMIdMb0EvQJ+h5qoiRNYupTd8N0K/7hOLx9xDdTw3+7/iM2i6878nvBeeaG9MUPZNpndL0=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 349c65c05fb1fc8e
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RHbv4dmy21UWDl/0LVMT/r875pOuRMTgkALySlQQkNvh86h42/S9mHp0SD7g9jIloV4hTZFMX0/aL+wYNak2a/nrt/g6ViKUi0mvovYmDwxyS9eYbmr9Ikv/sMVJFoB5IakmFjE8Bnvgh0nwf0JeqbWqvDEQ9tShloHbMc44EOVNx0AijGFkz8eNsarHDj6NqrQ/1vorvwlMcf8hD6z3fyHSV9CBv4zS1B19DjgfJXb4Gfp9wvg7TzzWBm7f0xGFRN5TQ//GaTkaB3TOsMX2GxsaAX4sKYCmFnqg6Cmd51rZsRdkCjgXGeggq1IldlQp9dlp9mOq5wH5AwCkzzdHwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gzGnHnbRrqpGWIdkxLYSf6zrAOvAZ4s7dC7fJoJhHfw=;
+ b=Ex85n6YYzkGYCRGL45+HXUUDjp9z88+s1yvIo1NTmc9Ie34OcjOyrl/Tr1eB44uY+OiZotfRSvckDmr39B9kigZycl7sEj3AGq0M+MCO3ccTqzk7dPkSsDq5VSXqiOekbUqR/YeSilXU5MGIDMymGqNu3msaOTAGyybqDpcBymRDqvZAhmdZPXS9nthwMGfScxd4U9iRF8M/stFaax68OpWh/Fh+qO03MnnCJlIUimdorrsZ8X2Je4DJtdOiMa5nqgjN5KB0Amzy1A5ys0y3/OY/0cSm9nUa7dwsPvxPCbq9gb3n022wryGHxaHzuxIH/GtgJHOWX7bU9pPEg7+v3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gzGnHnbRrqpGWIdkxLYSf6zrAOvAZ4s7dC7fJoJhHfw=;
+ b=veRxT9ezyHiAXJE9kV3a0NULlIyrdcMkxVRwqq/sCz5VyT7i99aiIUDL4KhZQszPma4uDCPiwTzJFXSiZ6QQrcTWuwkyMj5lgM6woxMIdMb0EvQJ+h5qoiRNYupTd8N0K/7hOLx9xDdTw3+7/iM2i6878nvBeeaG9MUPZNpndL0=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v5 07/12] xen: enable Dom0 to use SVE feature
+Thread-Topic: [PATCH v5 07/12] xen: enable Dom0 to use SVE feature
+Thread-Index:
+ AQHZbSQxHdlbNP/OhU+SnBXlOek6la8xDZGAgAE1nQCAAAF/gIAABdgAgAGkXACAADZRAA==
+Date: Thu, 20 Apr 2023 12:00:56 +0000
+Message-ID: <24B35030-092A-493F-AC78-52732746FA63@arm.com>
+References: <20230412094938.2693890-1-luca.fancellu@arm.com>
+ <20230412094938.2693890-8-luca.fancellu@arm.com>
+ <2833DC4A-95F0-482A-AD0F-3E942D1DA223@arm.com>
+ <F30CEF99-693A-4218-AC80-433A183DE866@arm.com>
+ <3DE2B914-FA6E-49EF-8748-BB8DE4B2CC11@arm.com>
+ <8DA3FECA-DEBD-479E-9E5A-57676B98ADA4@arm.com>
+ <DE00F3DB-C6D9-4D90-97A8-FD964FD03099@arm.com>
+In-Reply-To: <DE00F3DB-C6D9-4D90-97A8-FD964FD03099@arm.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3731.500.231)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AM6PR08MB3784:EE_|AS2PR08MB8381:EE_|DBAEUR03FT056:EE_|AM7PR08MB5317:EE_
+X-MS-Office365-Filtering-Correlation-Id: fce1ee73-fa2f-4cc6-df9e-08db4196eef4
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ ISSNA85t0pfbPCN/ETvnNZoC7d4LgVF2o04L+qUGKmaVKH89p3T9yOuSetIfg0VnUcGZWtVhAsD34PzRYlab+x7S2OZiYnM0MJh+O5OW6iZwclInlJVj0dX83ujIQoPsJnTgtlaK+HyyHyUwRPJPXGy8V/zVmlsRyv4ud5PPDcOeL3FOldDZg5WTnwbAzlCfFk8t1/y2f9TMGa/1nXu4UMAuCf3+1i4hSNlTkLxHY+Kdr7cCvMwDgKzN1WHxBCNKBdxBYro4+F/EOpXC5/grVloOPa64MeQYSXmcKDolwm6Te5GJLFzVcGtgy82TP7W1HjYrJPjtCM5o8eGrbAKWjxDcb2sEN7+luu0YbqrE2TdvyBNxsWZcsmTuv6rWTR+Ou8LFM/OVRjcDGA6doFcFyYu1GKMdcwb/vnELAk9pQa5aXfbwfq7s6L1Q2siHf+BsJrDtVHcH3M6gLKTN16IX5cz0ayZWvPCfrZJsrXX4dnR1Cha0cR/GC6+CnnGGcpJGvKIl0OeSo46Bj75XMgAHlHHeMabdz/OJnAItZuIra+LWrvbLC0nHCMbEL4onvomMK4avCam/4bUPfERQjc8tI7oAyrkQHGcfBsX6Gyidc2eUo7t392PCjJW/X38Kj8SiLbNUNgYO+metm86uv1Geg/cTZ2QEywp+scS8j6JturU=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(396003)(39850400004)(376002)(136003)(346002)(451199021)(83380400001)(6512007)(53546011)(6506007)(41300700001)(122000001)(6486002)(71200400001)(2616005)(186003)(91956017)(478600001)(33656002)(4326008)(66476007)(6636002)(76116006)(66556008)(316002)(64756008)(66946007)(66446008)(5660300002)(37006003)(54906003)(38070700005)(36756003)(86362001)(2906002)(8936002)(6862004)(8676002)(38100700002)(21314003)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <9EA39343E09B144097F1BEAA562FDBAD@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8381
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	b7ecf22b-e438-428b-8034-08db4196e625
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	WzZoKAPfWhdwICrkWtBTzfVbA8d7Vp2ZE6tRTK2RIZBbzHW/qnis8UdAwcuzYUn5QWViHXWEH9SgRfI1FuD84oa2GtgnH7gRUR/Lohiyuiw3orXtUib67yYRu+/66+LmE2IO+yX+oHnr3xguyzUWDiXhgD2XeIPP76gYYLDawCEexXamIrLqHk/jqumj8FzTCXlr2MPHx41St1N6RjOl/UI+1WtBULFJ2+M+SJU3VE9leQ+9YnYQJYiJVNjTR129lNrVlG1DYGu7uBQoYwn5Gg/cBkV9ObCW43lttY5Iif4vS3X1VJrjsA30A8Rp1gQqmNWf8/fTLLX7/SsTFoN05gbvbwyiDW5fsPl2DNJd9GBxBY04GEnJfudPKAPmpPVgS5o6opuRumEIuZrwV0iWe8Kvo51/POrYCr2j3BC7o72gnfDBz0Pacuc4lZv5SjtTtfxFk4w4sX129onbAbIDX97cgeM01czyTSDNhq/NQ9HTPYFww+XUop21YLRUUYNVVN5BOJAAiGttPjL855YlXGY959Ps5QMkCQcLCY5W5tuNFilQkSBRQWBrQxj/Auk6T975Q+ufQE/nC5XkqDJ4hajMqjgx+szH53FFlmPMMkLVGWtUOXpu+2/ELmS10Xw/0+PdJ7QS3AJEmVlFcSTmPalmHSJUVFyWCoS3AX4UkX1fm0JO2Qf38SI9oKuvy3zpgL1OZQ0kPJGBeS0C3E0ZZZCXL30Pva/7+X3QRf8qiv0=
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(346002)(39850400004)(136003)(376002)(396003)(451199021)(36840700001)(40470700004)(46966006)(186003)(6506007)(6512007)(53546011)(26005)(6486002)(107886003)(40480700001)(5660300002)(316002)(47076005)(2616005)(336012)(4326008)(41300700001)(70206006)(6636002)(70586007)(8936002)(8676002)(82740400003)(37006003)(6862004)(54906003)(82310400005)(478600001)(2906002)(86362001)(40460700003)(36756003)(33656002)(81166007)(83380400001)(36860700001)(356005)(21314003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2023 12:01:11.2826
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fce1ee73-fa2f-4cc6-df9e-08db4196eef4
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR08MB5317
 
-The virtio-scsi Host Bus Adapter provides access to devices on a SCSI
-bus. Those SCSI devices typically have a BlockBackend. When the
-BlockBackend enters a drained section, the SCSI device must temporarily
-stop submitting new I/O requests.
-
-Implement this behavior by temporarily stopping virtio-scsi virtqueue
-processing when one of the SCSI devices enters a drained section. The
-new scsi_device_drained_begin() API allows scsi-disk to message the
-virtio-scsi HBA.
-
-scsi_device_drained_begin() uses a drain counter so that multiple SCSI
-devices can have overlapping drained sections. The HBA only sees one
-pair of .drained_begin/end() calls.
-
-After this commit, virtio-scsi no longer depends on hw/virtio's
-ioeventfd aio_set_event_notifier(is_external=true). This commit is a
-step towards removing the aio_disable_external() API.
-
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- include/hw/scsi/scsi.h          | 14 ++++++++++++
- hw/scsi/scsi-bus.c              | 40 +++++++++++++++++++++++++++++++++
- hw/scsi/scsi-disk.c             | 27 +++++++++++++++++-----
- hw/scsi/virtio-scsi-dataplane.c | 22 ++++++++++--------
- hw/scsi/virtio-scsi.c           | 38 +++++++++++++++++++++++++++++++
- hw/scsi/trace-events            |  2 ++
- 6 files changed, 129 insertions(+), 14 deletions(-)
-
-diff --git a/include/hw/scsi/scsi.h b/include/hw/scsi/scsi.h
-index 6f23a7a73e..e2bb1a2fbf 100644
---- a/include/hw/scsi/scsi.h
-+++ b/include/hw/scsi/scsi.h
-@@ -133,6 +133,16 @@ struct SCSIBusInfo {
-     void (*save_request)(QEMUFile *f, SCSIRequest *req);
-     void *(*load_request)(QEMUFile *f, SCSIRequest *req);
-     void (*free_request)(SCSIBus *bus, void *priv);
-+
-+    /*
-+     * Temporarily stop submitting new requests between drained_begin() and
-+     * drained_end(). Called from the main loop thread with the BQL held.
-+     *
-+     * Implement these callbacks if request processing is triggered by a file
-+     * descriptor like an EventNotifier. Otherwise set them to NULL.
-+     */
-+    void (*drained_begin)(SCSIBus *bus);
-+    void (*drained_end)(SCSIBus *bus);
- };
- 
- #define TYPE_SCSI_BUS "SCSI"
-@@ -144,6 +154,8 @@ struct SCSIBus {
- 
-     SCSISense unit_attention;
-     const SCSIBusInfo *info;
-+
-+    int drain_count; /* protected by BQL */
- };
- 
- /**
-@@ -213,6 +225,8 @@ void scsi_req_cancel_complete(SCSIRequest *req);
- void scsi_req_cancel(SCSIRequest *req);
- void scsi_req_cancel_async(SCSIRequest *req, Notifier *notifier);
- void scsi_req_retry(SCSIRequest *req);
-+void scsi_device_drained_begin(SCSIDevice *sdev);
-+void scsi_device_drained_end(SCSIDevice *sdev);
- void scsi_device_purge_requests(SCSIDevice *sdev, SCSISense sense);
- void scsi_device_set_ua(SCSIDevice *sdev, SCSISense sense);
- void scsi_device_report_change(SCSIDevice *dev, SCSISense sense);
-diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
-index 64d7311757..b571fdf895 100644
---- a/hw/scsi/scsi-bus.c
-+++ b/hw/scsi/scsi-bus.c
-@@ -1668,6 +1668,46 @@ void scsi_device_purge_requests(SCSIDevice *sdev, SCSISense sense)
-     scsi_device_set_ua(sdev, sense);
- }
- 
-+void scsi_device_drained_begin(SCSIDevice *sdev)
-+{
-+    SCSIBus *bus = DO_UPCAST(SCSIBus, qbus, sdev->qdev.parent_bus);
-+    if (!bus) {
-+        return;
-+    }
-+
-+    assert(qemu_get_current_aio_context() == qemu_get_aio_context());
-+    assert(bus->drain_count < INT_MAX);
-+
-+    /*
-+     * Multiple BlockBackends can be on a SCSIBus and each may begin/end
-+     * draining at any time. Keep a counter so HBAs only see begin/end once.
-+     */
-+    if (bus->drain_count++ == 0) {
-+        trace_scsi_bus_drained_begin(bus, sdev);
-+        if (bus->info->drained_begin) {
-+            bus->info->drained_begin(bus);
-+        }
-+    }
-+}
-+
-+void scsi_device_drained_end(SCSIDevice *sdev)
-+{
-+    SCSIBus *bus = DO_UPCAST(SCSIBus, qbus, sdev->qdev.parent_bus);
-+    if (!bus) {
-+        return;
-+    }
-+
-+    assert(qemu_get_current_aio_context() == qemu_get_aio_context());
-+    assert(bus->drain_count > 0);
-+
-+    if (bus->drain_count-- == 1) {
-+        trace_scsi_bus_drained_end(bus, sdev);
-+        if (bus->info->drained_end) {
-+            bus->info->drained_end(bus);
-+        }
-+    }
-+}
-+
- static char *scsibus_get_dev_path(DeviceState *dev)
- {
-     SCSIDevice *d = SCSI_DEVICE(dev);
-diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-index e01bd84541..2249087d6a 100644
---- a/hw/scsi/scsi-disk.c
-+++ b/hw/scsi/scsi-disk.c
-@@ -2360,6 +2360,20 @@ static void scsi_disk_reset(DeviceState *dev)
-     s->qdev.scsi_version = s->qdev.default_scsi_version;
- }
- 
-+static void scsi_disk_drained_begin(void *opaque)
-+{
-+    SCSIDiskState *s = opaque;
-+
-+    scsi_device_drained_begin(&s->qdev);
-+}
-+
-+static void scsi_disk_drained_end(void *opaque)
-+{
-+    SCSIDiskState *s = opaque;
-+
-+    scsi_device_drained_end(&s->qdev);
-+}
-+
- static void scsi_disk_resize_cb(void *opaque)
- {
-     SCSIDiskState *s = opaque;
-@@ -2414,16 +2428,19 @@ static bool scsi_cd_is_medium_locked(void *opaque)
- }
- 
- static const BlockDevOps scsi_disk_removable_block_ops = {
--    .change_media_cb = scsi_cd_change_media_cb,
-+    .change_media_cb  = scsi_cd_change_media_cb,
-+    .drained_begin    = scsi_disk_drained_begin,
-+    .drained_end      = scsi_disk_drained_end,
-     .eject_request_cb = scsi_cd_eject_request_cb,
--    .is_tray_open = scsi_cd_is_tray_open,
-     .is_medium_locked = scsi_cd_is_medium_locked,
--
--    .resize_cb = scsi_disk_resize_cb,
-+    .is_tray_open     = scsi_cd_is_tray_open,
-+    .resize_cb        = scsi_disk_resize_cb,
- };
- 
- static const BlockDevOps scsi_disk_block_ops = {
--    .resize_cb = scsi_disk_resize_cb,
-+    .drained_begin = scsi_disk_drained_begin,
-+    .drained_end   = scsi_disk_drained_end,
-+    .resize_cb     = scsi_disk_resize_cb,
- };
- 
- static void scsi_disk_unit_attention_reported(SCSIDevice *dev)
-diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
-index 81643445ed..1060038e13 100644
---- a/hw/scsi/virtio-scsi-dataplane.c
-+++ b/hw/scsi/virtio-scsi-dataplane.c
-@@ -153,14 +153,16 @@ int virtio_scsi_dataplane_start(VirtIODevice *vdev)
-     s->dataplane_starting = false;
-     s->dataplane_started = true;
- 
--    aio_context_acquire(s->ctx);
--    virtio_queue_aio_attach_host_notifier(vs->ctrl_vq, s->ctx);
--    virtio_queue_aio_attach_host_notifier_no_poll(vs->event_vq, s->ctx);
-+    if (s->bus.drain_count == 0) {
-+        aio_context_acquire(s->ctx);
-+        virtio_queue_aio_attach_host_notifier(vs->ctrl_vq, s->ctx);
-+        virtio_queue_aio_attach_host_notifier_no_poll(vs->event_vq, s->ctx);
- 
--    for (i = 0; i < vs->conf.num_queues; i++) {
--        virtio_queue_aio_attach_host_notifier(vs->cmd_vqs[i], s->ctx);
-+        for (i = 0; i < vs->conf.num_queues; i++) {
-+            virtio_queue_aio_attach_host_notifier(vs->cmd_vqs[i], s->ctx);
-+        }
-+        aio_context_release(s->ctx);
-     }
--    aio_context_release(s->ctx);
-     return 0;
- 
- fail_host_notifiers:
-@@ -206,9 +208,11 @@ void virtio_scsi_dataplane_stop(VirtIODevice *vdev)
-     }
-     s->dataplane_stopping = true;
- 
--    aio_context_acquire(s->ctx);
--    aio_wait_bh_oneshot(s->ctx, virtio_scsi_dataplane_stop_bh, s);
--    aio_context_release(s->ctx);
-+    if (s->bus.drain_count == 0) {
-+        aio_context_acquire(s->ctx);
-+        aio_wait_bh_oneshot(s->ctx, virtio_scsi_dataplane_stop_bh, s);
-+        aio_context_release(s->ctx);
-+    }
- 
-     blk_drain_all(); /* ensure there are no in-flight requests */
- 
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index a02f9233ec..eba1e84dac 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -1081,6 +1081,42 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
-     }
- }
- 
-+/* Suspend virtqueue ioeventfd processing during drain */
-+static void virtio_scsi_drained_begin(SCSIBus *bus)
-+{
-+    VirtIOSCSI *s = container_of(bus, VirtIOSCSI, bus);
-+    VirtIODevice *vdev = VIRTIO_DEVICE(s);
-+    uint32_t total_queues = VIRTIO_SCSI_VQ_NUM_FIXED +
-+                            s->parent_obj.conf.num_queues;
-+
-+    if (!s->dataplane_started) {
-+        return;
-+    }
-+
-+    for (uint32_t i = 0; i < total_queues; i++) {
-+        VirtQueue *vq = virtio_get_queue(vdev, i);
-+        virtio_queue_aio_detach_host_notifier(vq, s->ctx);
-+    }
-+}
-+
-+/* Resume virtqueue ioeventfd processing after drain */
-+static void virtio_scsi_drained_end(SCSIBus *bus)
-+{
-+    VirtIOSCSI *s = container_of(bus, VirtIOSCSI, bus);
-+    VirtIODevice *vdev = VIRTIO_DEVICE(s);
-+    uint32_t total_queues = VIRTIO_SCSI_VQ_NUM_FIXED +
-+                            s->parent_obj.conf.num_queues;
-+
-+    if (!s->dataplane_started) {
-+        return;
-+    }
-+
-+    for (uint32_t i = 0; i < total_queues; i++) {
-+        VirtQueue *vq = virtio_get_queue(vdev, i);
-+        virtio_queue_aio_attach_host_notifier(vq, s->ctx);
-+    }
-+}
-+
- static struct SCSIBusInfo virtio_scsi_scsi_info = {
-     .tcq = true,
-     .max_channel = VIRTIO_SCSI_MAX_CHANNEL,
-@@ -1095,6 +1131,8 @@ static struct SCSIBusInfo virtio_scsi_scsi_info = {
-     .get_sg_list = virtio_scsi_get_sg_list,
-     .save_request = virtio_scsi_save_request,
-     .load_request = virtio_scsi_load_request,
-+    .drained_begin = virtio_scsi_drained_begin,
-+    .drained_end = virtio_scsi_drained_end,
- };
- 
- void virtio_scsi_common_realize(DeviceState *dev,
-diff --git a/hw/scsi/trace-events b/hw/scsi/trace-events
-index ab238293f0..bdd4e2c7c7 100644
---- a/hw/scsi/trace-events
-+++ b/hw/scsi/trace-events
-@@ -6,6 +6,8 @@ scsi_req_cancel(int target, int lun, int tag) "target %d lun %d tag %d"
- scsi_req_data(int target, int lun, int tag, int len) "target %d lun %d tag %d len %d"
- scsi_req_data_canceled(int target, int lun, int tag, int len) "target %d lun %d tag %d len %d"
- scsi_req_dequeue(int target, int lun, int tag) "target %d lun %d tag %d"
-+scsi_bus_drained_begin(void *bus, void *sdev) "bus %p sdev %p"
-+scsi_bus_drained_end(void *bus, void *sdev) "bus %p sdev %p"
- scsi_req_continue(int target, int lun, int tag) "target %d lun %d tag %d"
- scsi_req_continue_canceled(int target, int lun, int tag) "target %d lun %d tag %d"
- scsi_req_parsed(int target, int lun, int tag, int cmd, int mode, int xfer) "target %d lun %d tag %d command %d dir %d length %d"
--- 
-2.39.2
-
+SGkgTHVjYSwNCg0KPiBPbiAyMCBBcHIgMjAyMywgYXQgMTA6NDYsIEx1Y2EgRmFuY2VsbHUgPEx1
+Y2EuRmFuY2VsbHVAYXJtLmNvbT4gd3JvdGU6DQo+IA0KPj4+Pj4+IA0KPj4+Pj4+ICtpbnQgX19p
+bml0IHN2ZV9zYW5pdGl6ZV92bF9wYXJhbShpbnQgdmFsLCB1bnNpZ25lZCBpbnQgKm91dCkNCj4+
+Pj4+PiArew0KPj4+Pj4+ICsgICAgLyoNCj4+Pj4+PiArICAgICAqIE5lZ2F0aXZlIFNWRSBwYXJh
+bWV0ZXIgdmFsdWUgbWVhbnMgdG8gdXNlIHRoZSBtYXhpbXVtIHN1cHBvcnRlZA0KPj4+Pj4+ICsg
+ICAgICogdmVjdG9yIGxlbmd0aCwgb3RoZXJ3aXNlIGlmIGEgcG9zaXRpdmUgdmFsdWUgaXMgcHJv
+dmlkZWQsIGNoZWNrIGlmIHRoZQ0KPj4+Pj4+ICsgICAgICogdmVjdG9yIGxlbmd0aCBpcyBhIG11
+bHRpcGxlIG9mIDEyOCBhbmQgbm90IGJpZ2dlciB0aGFuIHRoZSBtYXhpbXVtIHZhbHVlDQo+Pj4+
+Pj4gKyAgICAgKiAyMDQ4DQo+Pj4+Pj4gKyAgICAgKi8NCj4+Pj4+PiArICAgIGlmICggdmFsIDwg
+MCApDQo+Pj4+Pj4gKyAgICAgICAgKm91dCA9IGdldF9zeXNfdmxfbGVuKCk7DQo+Pj4+Pj4gKyAg
+ICBlbHNlIGlmICggKCh2YWwgJSBTVkVfVkxfTVVMVElQTEVfVkFMKSA9PSAwKSAmJiAodmFsIDw9
+IFNWRV9WTF9NQVhfQklUUykgKQ0KPj4+Pj4+ICsgICAgICAgICpvdXQgPSB2YWw7DQo+Pj4+PiAN
+Cj4+Pj4+IFNob3VsZG4ndCB5b3UgYWxzbyBjaGVjayBpZiBpdCBpcyBub3QgZ3JlYXRlciB0aGFu
+IHRoZSBtYXhpbXVtIHZlY3RvciBsZW5ndGggPw0KPj4+PiANCj4+Pj4gSSBkb27igJl0IHVuZGVy
+c3RhbmQsIEkgYW0gY2hlY2tpbmcgdGhhdCB0aGUgdmFsdWUgaXMgYmVsb3cgb3IgZXF1YWwgdG8g
+U1ZFX1ZMX01BWF9CSVRTLA0KPj4+PiBJZiB5b3UgbWVhbiBpZiBpdCBzaG91bGQgYmUgY2hlY2tl
+ZCBhbHNvIGFnYWluc3QgdGhlIG1heGltdW0gc3VwcG9ydGVkIGxlbmd0aCBieSB0aGUgcGxhdGZv
+cm0sDQo+Pj4+IEkgdGhpbmsgdGhpcyBpcyBub3QgdGhlIHJpZ2h0IHBsYWNlLCB0aGUgY2hlY2sg
+aXMgYWxyZWFkeSBpbiBhcmNoX3Nhbml0aXNlX2RvbWFpbl9jb25maWcoKSwgaW50cm9kdWNlZA0K
+Pj4+PiBpbiBwYXRjaCAjMg0KPj4+IA0KPj4+IElmIHRoaXMgaXMgbm90IHRoZSByaWdodCBwbGFj
+ZSB0byBjaGVjayBpdCB0aGVuIHdoeSBjaGVja2luZyB0aGUgcmVzdCBoZXJlID8NCj4+PiANCj4+
+PiBGcm9tIGEgdXNlciBvciBhIGRldmVsb3BlciBwb2ludCBvZiB2aWV3IEkgd291bGQgZXhwZWN0
+IHRoZSB2YWxpZGl0eSBvZiB0aGUgaW5wdXQgdG8gYmUgY2hlY2tlZCBvbmx5DQo+Pj4gaW4gb25l
+IHBsYWNlLg0KPj4+IElmIGhlcmUgaXMgbm90IHRoZSBwbGFjZSBmb3IgdGhhdCBpdCBpcyBvayBi
+dXQgdGhlbiBpIHdvdWxkIGNoZWNrIGV2ZXJ5dGhpbmcgaW4gYXJjaF9zYW5pdGlzZV9kb21haW5f
+Y29uZmlnDQo+Pj4gKG11bHRpcGxlLCBtaW4gYW5kIHN1cHBvcnRlZCkgaW5zdGVhZCBvZiBkb2lu
+ZyBpdCBwYXJ0bHkgaW4gMiBwbGFjZXMuDQo+PiANCj4+IE9rLCBnaXZlbiB0aGUgd2F5IHdlIGVu
+Y29kZWQgdGhlIHZhbHVlIGluIHhlbl9kb21jdGxfY3JlYXRlZG9tYWluIHN0cnVjdHVyZSwgd2Ug
+aGF2ZSB0aGF0IHRoZSB2YWx1ZSB0YWtlcw0KPj4gdmVyeSBsaXR0bGUgc3BhY2UsIGJ1dCBhIHNt
+YWxsIGlzc3VlIGlzIHRoYXQgd2hlbiB3ZSBlbmNvZGUgaXQsIHdlIGFyZSBkaXZpZGluZyBpdCBi
+eSAxMjgsIHdoaWNoIGlzIGZpbmUgZm9yIHVzZXIgcGFyYW1zDQo+PiB0aGF0IGFyZSBtdWx0aXBs
+ZSBvZiAxMjgsIGJ1dCBpdOKAmXMgbGVzcyBmaW5lIGlmIHRoZSB1c2VyIHBhc3NlcyDigJwxMjni
+gJ0uDQo+PiANCj4+IFRvIG92ZXJjb21lIHRoaXMgaXNzdWUgd2UgYXJlIGNoZWNraW5nIHRoZSB2
+YWx1ZSB3aGVuIGl0IGlzIG5vdCBhbHJlYWR5IGVuY29kZWQuIE5vdywgdGhpbmtpbmcgYWJvdXQg
+aXQsIHRoZSBjaGVjaw0KPj4gIiYmICh2YWwgPD0gU1ZFX1ZMX01BWF9CSVRTKeKAnSBpcyBub3Qg
+cmVhbGx5IG5lZWRlZCwgYmVjYXVzZSBldmVuIGlmIHRoZSB2YWx1ZSBpcyBhYm92ZSwgdGhlbiBp
+biBhcmNoX3Nhbml0aXNlX2RvbWFpbl9jb25maWcNCj4+IHdlIHdpbGwgaGl0IHRoZSB0b3AgbGlt
+aXQgb2YgdGhlIHBsYXRmb3JtIG1heGltdW0gVkwuDQo+PiANCj4+IGludCBhcmNoX3Nhbml0aXNl
+X2RvbWFpbl9jb25maWcoc3RydWN0IHhlbl9kb21jdGxfY3JlYXRlZG9tYWluICpjb25maWcpDQo+
+PiB7DQo+PiAgIHVuc2lnbmVkIGludCBtYXhfdmNwdXM7DQo+PiAgIHVuc2lnbmVkIGludCBmbGFn
+c19yZXF1aXJlZCA9IChYRU5fRE9NQ1RMX0NERl9odm0gfCBYRU5fRE9NQ1RMX0NERl9oYXApOw0K
+Pj4gICB1bnNpZ25lZCBpbnQgZmxhZ3Nfb3B0aW9uYWwgPSAoWEVOX0RPTUNUTF9DREZfaW9tbXUg
+fCBYRU5fRE9NQ1RMX0NERl92cG11KTsNCj4+ICAgdW5zaWduZWQgaW50IHN2ZV92bF9iaXRzID0g
+c3ZlX2RlY29kZV92bChjb25maWctPmFyY2guc3ZlX3ZsKTsNCj4+IA0KPj4gICBpZiAoIChjb25m
+aWctPmZsYWdzICYgfmZsYWdzX29wdGlvbmFsKSAhPSBmbGFnc19yZXF1aXJlZCApDQo+PiAgIHsN
+Cj4+ICAgICAgIGRwcmludGsoWEVOTE9HX0lORk8sICJVbnN1cHBvcnRlZCBjb25maWd1cmF0aW9u
+ICUjeFxuIiwNCj4+ICAgICAgICAgICAgICAgY29uZmlnLT5mbGFncyk7DQo+PiAgICAgICByZXR1
+cm4gLUVJTlZBTDsNCj4+ICAgfQ0KPj4gDQo+PiAgIC8qIENoZWNrIGZlYXR1cmUgZmxhZ3MgKi8N
+Cj4+ICAgaWYgKCBzdmVfdmxfYml0cyA+IDAgKQ0KPj4gICB7DQo+PiAgICAgICB1bnNpZ25lZCBp
+bnQgemNyX21heF9iaXRzID0gZ2V0X3N5c192bF9sZW4oKTsNCj4+IA0KPj4gICAgICAgaWYgKCAh
+emNyX21heF9iaXRzICkNCj4+ICAgICAgIHsNCj4+ICAgICAgICAgICBkcHJpbnRrKFhFTkxPR19J
+TkZPLCAiU1ZFIGlzIHVuc3VwcG9ydGVkIG9uIHRoaXMgbWFjaGluZS5cbiIpOw0KPj4gICAgICAg
+ICAgIHJldHVybiAtRUlOVkFMOw0KPj4gICAgICAgfQ0KPj4gDQo+PiAgICAgICBpZiAoIHN2ZV92
+bF9iaXRzID4gemNyX21heF9iaXRzICkNCj4+ICAgICAgIHsNCj4+ICAgICAgICAgICBkcHJpbnRr
+KFhFTkxPR19JTkZPLA0KPj4gICAgICAgICAgICAgICAgICAgIlJlcXVlc3RlZCBTVkUgdmVjdG9y
+IGxlbmd0aCAoJXUpID4gc3VwcG9ydGVkIGxlbmd0aCAoJXUpXG4iLA0KPj4gICAgICAgICAgICAg
+ICAgICAgc3ZlX3ZsX2JpdHMsIHpjcl9tYXhfYml0cyk7DQo+PiAgICAgICAgICAgcmV0dXJuIC1F
+SU5WQUw7DQo+PiAgICAgICB9DQo+PiAgIH0NCj4+ICBbLi4uXQ0KPj4gDQo+PiBOb3csIEkgdW5k
+ZXJzdGFuZCB5b3VyIHBvaW50LCB3ZSBjb3VsZCBjaGVjayBldmVyeXRoaW5nIGluIHN2ZV9zYW5p
+dGl6ZV92bF9wYXJhbSgpLCBidXQgaXQgd291bGQgbGVhdmUgYSBwcm9ibGVtDQo+PiBmb3IgZG9t
+YWlucyBjcmVhdGVkIGJ5IGh5cGVyY2FsbHMgaWYgSSBhbSBub3Qgd3JvbmcuDQo+PiANCj4+IFdo
+YXQgZG8geW91IHRoaW5rPw0KDQpTb3JyeSBpIG1pc3NlZCB0aGF0IGFuc3dlci4NCg0KWWVzIGkg
+YWdyZWUsIG1heWJlIHdlIGNvdWxkIGZhY3Rvcml6ZSB0aGUgY2hlY2tzIGluIG9uZSBmdW5jdGlv
+biBhbmQgdXNlIGl0IGluIHNldmVyYWwgcGxhY2VzID8NCg0KDQo+IA0KPiBJIHRob3VnaHQgYWJv
+dXQgdGhhdCBhbmQgYW5vdGhlciBwb3NzaWJpbGl0eSBpcyB0byBzdG9yZSDigJxzdmVfdmzigJ0g
+YXMgdWludDE2X3QgaW5zaWRlIHN0cnVjdCB4ZW5fYXJjaF9kb21haW5jb25maWcsIGFuZA0KPiBj
+aGVjayBpdCBpbnNpZGUgYXJjaF9zYW5pdGlzZV9kb21haW5fY29uZmlnKCkgZm9yIGl0IHRvIGJl
+IG1vZCAxMjggYW5kIGxlc3MgdGhhbiB0aGUgbWF4IHN1cHBvcnRlZCBWTCwgdGhpcyB3aWxsDQo+
+IGFsbG93IHRvIGhhdmUgYWxsIHRoZSBjaGVja3MgaW4gb25lIHBsYWNlLCB0YWtpbmcgYSBiaXQg
+bW9yZSBzcGFjZSwgYW55d2F5IHdlIHdvdWxkIHRha2UgdGhlIHNwYWNlIGZyb20gdGhlIGltcGxp
+Y2l0DQo+IHBhZGRpbmcgYXMgdGhpcyBpcyB0aGUgY3VycmVudCBzdGF0dXM6DQo+IA0KPiBzdHJ1
+Y3QgYXJjaF9kb21haW4gew0KPiBlbnVtIGRvbWFpbl90eXBlICAgICAgICAgICB0eXBlOyAgICAg
+ICAgICAgICAgICAgLyogICAgIDAgICAgIDQgKi8NCj4gdWludDhfdCAgICAgICAgICAgICAgICAg
+ICAgc3ZlX3ZsOyAgICAgICAgICAgICAgIC8qICAgICA0ICAgICAxICovDQo+IA0KPiAvKiBYWFgg
+MyBieXRlcyBob2xlLCB0cnkgdG8gcGFjayAqLw0KPiANCj4gc3RydWN0IHAybV9kb21haW4gICAg
+ICAgICAgcDJtOyAgICAgICAgICAgICAgICAgIC8qICAgICA4ICAgMzI4ICovDQo+IC8qIC0tLSBj
+YWNoZWxpbmUgNSBib3VuZGFyeSAoMzIwIGJ5dGVzKSB3YXMgMTYgYnl0ZXMgYWdvIC0tLSAqLw0K
+PiBzdHJ1Y3QgaHZtX2RvbWFpbiAgICAgICAgICBodm07ICAgICAgICAgICAgICAgICAgLyogICAz
+MzYgICAzMTIgKi8NCj4gLyogLS0tIGNhY2hlbGluZSAxMCBib3VuZGFyeSAoNjQwIGJ5dGVzKSB3
+YXMgOCBieXRlcyBhZ28gLS0tICovDQo+IHN0cnVjdCBwYWdpbmdfZG9tYWluICAgICAgIHBhZ2lu
+ZzsgICAgICAgICAgICAgICAvKiAgIDY0OCAgICAzMiAqLw0KPiBzdHJ1Y3Qgdm1taW8gICAgICAg
+ICAgICAgICB2bW1pbzsgICAgICAgICAgICAgICAgLyogICA2ODAgICAgMzIgKi8NCj4gLyogLS0t
+IGNhY2hlbGluZSAxMSBib3VuZGFyeSAoNzA0IGJ5dGVzKSB3YXMgOCBieXRlcyBhZ28gLS0tICov
+DQo+IHVuc2lnbmVkIGludCAgICAgICAgICAgICAgIHJlbF9wcml2OyAgICAgICAgICAgICAvKiAg
+IDcxMiAgICAgNCAqLw0KPiANCj4gLyogWFhYIDQgYnl0ZXMgaG9sZSwgdHJ5IHRvIHBhY2sgKi8N
+Cj4gDQo+IHN0cnVjdCB7DQo+IHVpbnQ2NF90ICAgICAgICAgICBvZmZzZXQ7ICAgICAgICAgICAg
+ICAgLyogICA3MjAgICAgIDggKi8NCj4gc190aW1lX3QgICAgICAgICAgIG5hbm9zZWNvbmRzOyAg
+ICAgICAgICAvKiAgIDcyOCAgICAgOCAqLw0KPiB9IHZpcnRfdGltZXJfYmFzZTsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgLyogICA3MjAgICAgMTYgKi8NCj4gc3RydWN0IHZnaWNfZGlz
+dCAgICAgICAgICAgdmdpYzsgICAgICAgICAgICAgICAgIC8qICAgNzM2ICAgMjAwICovDQo+IA0K
+PiAvKiBYWFggbGFzdCBzdHJ1Y3QgaGFzIDIgYnl0ZXMgb2YgcGFkZGluZyAqLw0KPiANCj4gLyog
+LS0tIGNhY2hlbGluZSAxNCBib3VuZGFyeSAoODk2IGJ5dGVzKSB3YXMgNDAgYnl0ZXMgYWdvIC0t
+LSAqLw0KPiBzdHJ1Y3QgdnVhcnQgICAgICAgICAgICAgICB2dWFydDsgICAgICAgICAgICAgICAg
+LyogICA5MzYgICAgMzIgKi8NCj4gLyogLS0tIGNhY2hlbGluZSAxNSBib3VuZGFyeSAoOTYwIGJ5
+dGVzKSB3YXMgOCBieXRlcyBhZ28gLS0tICovDQo+IHVuc2lnbmVkIGludCAgICAgICAgICAgICAg
+IGV2dGNobl9pcnE7ICAgICAgICAgICAvKiAgIDk2OCAgICAgNCAqLw0KPiBzdHJ1Y3Qgew0KPiB1
+aW50OF90ICAgICAgICAgICAgcHJpdmlsZWdlZF9jYWxsX2VuYWJsZWQ6MTsgLyogICA5NzI6IDAg
+IDEgKi8NCj4gfSBtb25pdG9yOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IC8qICAgOTcyICAgICAxICovDQo+IA0KPiAvKiBYWFggMyBieXRlcyBob2xlLCB0cnkgdG8gcGFj
+ayAqLw0KPiANCj4gc3RydWN0IHZwbDAxMSAgICAgICAgICAgICAgdnBsMDExOyAgICAgICAgICAg
+ICAgIC8qICAgOTc2ICAgIDcyICovDQo+IA0KPiAvKiBzaXplOiAxMTUyLCBjYWNoZWxpbmVzOiAx
+OCwgbWVtYmVyczogMTMgKi8NCj4gLyogc3VtIG1lbWJlcnM6IDEwMzgsIGhvbGVzOiAzLCBzdW0g
+aG9sZXM6IDEwICovDQo+IC8qIHBhZGRpbmc6IDEwNCAqLw0KPiAvKiBwYWRkaW5nczogMSwgc3Vt
+IHBhZGRpbmdzOiAyICovDQo+IH0gX19hdHRyaWJ1dGVfXygoX19hbGlnbmVkX18oMTI4KSkpOw0K
+DQpUaGF0IHdvdWxkIHdvcmsgYnV0IGl0IGlzIGEgYml0IG9kZCB0byBzYXZlIGEgMTZiaXQgdmFs
+dWUganVzdCBzbw0KeW91IGNvdWxkIHNhdmUgaW52YWxpZCB2YWx1ZXMgYW5kIGdpdmUgYW4gZXJy
+b3IuDQoNCkNoZWVycw0KQmVydHJhbmQNCg0KDQo=
 
