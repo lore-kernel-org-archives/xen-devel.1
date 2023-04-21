@@ -4,33 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 081ADC7618E
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Apr 2023 05:49:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.524433.815375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9873BC7618E
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Apr 2023 06:19:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.524448.815385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppjdp-0004FW-VE; Fri, 21 Apr 2023 05:49:05 +0000
+	id 1ppk6w-0007jN-AN; Fri, 21 Apr 2023 06:19:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 524433.815375; Fri, 21 Apr 2023 05:49:05 +0000
+Received: by outflank-mailman (output) from mailman id 524448.815385; Fri, 21 Apr 2023 06:19:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ppjdp-0004FP-RA; Fri, 21 Apr 2023 05:49:05 +0000
-Received: by outflank-mailman (input) for mailman id 524433;
- Fri, 21 Apr 2023 03:36:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ppk6w-0007jG-76; Fri, 21 Apr 2023 06:19:10 +0000
+Received: by outflank-mailman (input) for mailman id 524448;
+ Fri, 21 Apr 2023 06:19:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Z4Eq=AM=bytedance.com=xieyongji@srs-se1.protection.inumbo.net>)
- id 1pphZN-0007iA-IB
- for xen-devel@lists.xenproject.org; Fri, 21 Apr 2023 03:36:22 +0000
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [2607:f8b0:4864:20::433])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ac76b144-dff5-11ed-8611-37d641c3527e;
- Fri, 21 Apr 2023 05:36:18 +0200 (CEST)
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-63b70ca0a84so2277553b3a.2
- for <xen-devel@lists.xenproject.org>; Thu, 20 Apr 2023 20:36:18 -0700 (PDT)
+ <SRS0=slXh=AM=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1ppk6u-0007jA-Gw
+ for xen-devel@lists.xenproject.org; Fri, 21 Apr 2023 06:19:08 +0000
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on0601.outbound.protection.outlook.com
+ [2a01:111:f400:fe0c::601])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6b483cba-e00c-11ed-b220-6b7b168915f2;
+ Fri, 21 Apr 2023 08:19:06 +0200 (CEST)
+Received: from AM6P193CA0107.EURP193.PROD.OUTLOOK.COM (2603:10a6:209:88::48)
+ by PAXPR08MB7365.eurprd08.prod.outlook.com (2603:10a6:102:225::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.22; Fri, 21 Apr
+ 2023 06:19:02 +0000
+Received: from AM7EUR03FT022.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:88:cafe::8e) by AM6P193CA0107.outlook.office365.com
+ (2603:10a6:209:88::48) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.27 via Frontend
+ Transport; Fri, 21 Apr 2023 06:19:02 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM7EUR03FT022.mail.protection.outlook.com (100.127.140.217) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6319.24 via Frontend Transport; Fri, 21 Apr 2023 06:19:01 +0000
+Received: ("Tessian outbound 99a3040377ca:v136");
+ Fri, 21 Apr 2023 06:19:01 +0000
+Received: from 14df61cd0fd9.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 2D72305C-93DC-424F-A0A7-C0D7CB369AA7.1; 
+ Fri, 21 Apr 2023 06:18:50 +0000
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 14df61cd0fd9.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Fri, 21 Apr 2023 06:18:50 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by AS2PR08MB9689.eurprd08.prod.outlook.com (2603:10a6:20b:607::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.22; Fri, 21 Apr
+ 2023 06:18:47 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::8e01:7058:6f40:90e1]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::8e01:7058:6f40:90e1%7]) with mapi id 15.20.6319.022; Fri, 21 Apr 2023
+ 06:18:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,366 +74,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac76b144-dff5-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1682048176; x=1684640176;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1jAyLYhp4ydL9pXoFgTievz8fgHmpFOhj5xccyxtnbM=;
-        b=lp2uPGA/zzrUBtwKYaosqKXYbp1Hfuaopw4Et1t12z8UqIEtWDFJUqvZZm8AXxlaCr
-         J3D4BRSEP9UPFrmgBm0cFxhBEUg8LGrs1C4Ooa5DbdTjExLLIKiduWFeFqUZegKhy0lO
-         PI+OUij8NLg8tdSDSUzWRwOKx0ey59ZTNH3eq4xYsIb0LEp/mIQ3vti5mCr2ciDZ2JMs
-         GEfQiIjGOsYrMyGISiiPL/vdzn7T2jZsXypgv0Nc5Fg+66Fc4ppoZfjvKnb8nkPz0ZFC
-         ByQBiMwVApRyDGt0M5Dap5+fvdGoz7hgNghs/fgJ1YsLYUm/2yHyvqNlG69gI7Ik3k7r
-         H2mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682048176; x=1684640176;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1jAyLYhp4ydL9pXoFgTievz8fgHmpFOhj5xccyxtnbM=;
-        b=FfQ2Y09cPLFMWa1M+IoFEqxUKqgGusT7Ajed4NNE1x6PQ1jpeQifx0XEuUofDDAZmB
-         Ooy1n/HukOazUpK6rm3IIzktR2qqotmrARzogunAwjBBrxtxt1/0Z8wYOaPgQ0Zn20/A
-         jyxQQaJHr6B2p1L3BRUlYYQlP6LG4meC98DBqZl5P+1fSMvnw+YBiZShQl3CbYE5L+ko
-         IMJ2fGqpUNwXvIJhAhckLpSoMas457z3G6o4mfvC0noNoTJSodZ0d5kpSvCtBFF5oCNn
-         Zg0N3YaV+7v8QrHqKI76sVGbIS+7iWeUADEjJ0111dszDhxM4S8WiJtlq1usTXfZYSFu
-         RFKw==
-X-Gm-Message-State: AAQBX9cdc6ZKlbtka0fKL77ioUZhW3mmTxB2lWvKQWCIUQkWQFwdgDgB
-	OAdPUqeq89stotJlU8zH3Pen3eIIQk+VdTGiyWv1
-X-Google-Smtp-Source: AKy350atzH7REymFEakAtJcBDaAv5k9Z2KJkzzHAI/Sc8hjb+qBg15jiqdI8NG3zUUovGGdTavKfB0tnlOpRCjqsQ48=
-X-Received: by 2002:a05:6a21:328d:b0:ee:ac3c:d2de with SMTP id
- yt13-20020a056a21328d00b000eeac3cd2demr6256801pzb.28.1682048176395; Thu, 20
- Apr 2023 20:36:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230420113732.336620-1-stefanha@redhat.com> <20230420113732.336620-14-stefanha@redhat.com>
-In-Reply-To: <20230420113732.336620-14-stefanha@redhat.com>
-From: Yongji Xie <xieyongji@bytedance.com>
-Date: Fri, 21 Apr 2023 11:36:02 +0800
-Message-ID: <CACycT3suSR+nYhe4z2zuocYsBBVSDBCE+614zT0jfDZCBRveaA@mail.gmail.com>
-Subject: Re: [PATCH v3 13/20] block/export: rewrite vduse-blk drain code
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: qemu devel list <qemu-devel@nongnu.org>, Peter Lieven <pl@kamp.de>, 
-	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
-	Juan Quintela <quintela@redhat.com>, qemu-block@nongnu.org, 
-	Eduardo Habkost <eduardo@habkost.net>, Richard Henderson <richard.henderson@linaro.org>, 
-	David Woodhouse <dwmw2@infradead.org>, Stefan Weil <sw@weilnetz.de>, Fam Zheng <fam@euphon.net>, 
-	Julia Suvorova <jusual@redhat.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, 
-	xen-devel@lists.xenproject.org, Hanna Reitz <hreitz@redhat.com>, 
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>, eesposit@redhat.com, Kevin Wolf <kwolf@redhat.com>, 
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Paul Durrant <paul@xen.org>, Aarushi Mehta <mehta.aaru20@gmail.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Anthony Perard <anthony.perard@citrix.com>, 
-	"Richard W.M. Jones" <rjones@redhat.com>, Coiby Xu <Coiby.Xu@gmail.com>, 
-	Stefano Garzarella <sgarzare@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Inumbo-ID: 6b483cba-e00c-11ed-b220-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sZbSnU5Dj0hCxeLw/YUMLbImyl1A3Ia5b1rQ7yzBo1w=;
+ b=C37k9z3hzeJY4dqoeWaYg0PjAHJE03XPMB354QfbW1AMaXIyoAdcZtaX7S7QezelCDvRGcl7GJHqTlBb3CZMBB2nPPlKeonZ8FmlGMEDrFtuLLbJYkXN4AR57uRHdBwYeq+RGkvjGF/B5RtXvyE1KkJD2oqAk49PXBa/ltSOfBk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 6335a298667bd911
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=U4cTCIXohqYmd2dOqlM1AuwQ1EKzMR6x/NXRZL69VHCYok5IUSaOxRVhRgEhO07tUB2FY6k9a1fo6wjza1Tie/pTlAnXEf4ILgjTNOWG04b7Gge2bWB6csy3PRISFBs07NwQEtf+Sfy42wFzkDpa8p60TNRZlN/C9kz08puVvjyBZnUM+0aTBEh0D77VIg5a0YdDrPPzjy1Cjv6VTF4kBSIO75pmIWOXPL6ac5X9bGxW0kHwKSWKJvqMnnIBG5AnLlrEJGBFmlIeaJ/FYY0//LnFEp2nyD4GylPCK1/CygVLNLHOHEUNnd2JcHDvDJb8zQYp6WQOCCyk0FVJmd5PBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sZbSnU5Dj0hCxeLw/YUMLbImyl1A3Ia5b1rQ7yzBo1w=;
+ b=WeauND7aKFLCk+fFrW6bIpGFZWmQ1CYtDeK1AMGp/RAocIopuuW7fledtJZH3dJQeAyKLY187CHl2ICPxaNXohNoKKtIUeCrZDbzoblDElld+QbxY8kuimKlzBtSHiEEEa+tBuis/5T1Z1Ey6qoc5h11nFucDk1hYFwk1mBbIrpDLMbc4riHh7cAMKJZn4WwHU2mb3/Sc/NZj+IslacnCtLz3E6cIIcBdVc8PLrqPrMutM+XSmDeW/2d1HstJeAJ4FOhUnuFhSe3QWgguZIWwi04xdTPuI7NT3p/jlTumcz1zW/E57DdhifQo9nqBWCPOg75qN1pxRdbIC8twFXutw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sZbSnU5Dj0hCxeLw/YUMLbImyl1A3Ia5b1rQ7yzBo1w=;
+ b=C37k9z3hzeJY4dqoeWaYg0PjAHJE03XPMB354QfbW1AMaXIyoAdcZtaX7S7QezelCDvRGcl7GJHqTlBb3CZMBB2nPPlKeonZ8FmlGMEDrFtuLLbJYkXN4AR57uRHdBwYeq+RGkvjGF/B5RtXvyE1KkJD2oqAk49PXBa/ltSOfBk=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Henry Wang <Henry.Wang@arm.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"community.manager@xenproject.org" <community.manager@xenproject.org>, Julien
+ Grall <julien@xen.org>, "sstabellini@kernel.org" <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Anthony PERARD
+	<anthony.perard@citrix.com>, George Dunlap <george.dunlap@cloud.com>, Juergen
+ Gross <jgross@suse.com>, Wei Chen <Wei.Chen@arm.com>
+Subject: Re: Xen 4.18 release schedule update and poll (was: RE: Xen 4.18
+ release: Proposed release schedule)
+Thread-Topic: Xen 4.18 release schedule update and poll (was: RE: Xen 4.18
+ release: Proposed release schedule)
+Thread-Index: AQHZdACYcHm0T1gRME+oVIqMr2d2RK81SjQA
+Date: Fri, 21 Apr 2023 06:18:47 +0000
+Message-ID: <26AF44F7-A028-4737-9BF9-266CBAA83A18@arm.com>
+References:
+ <AS8PR08MB7991424A3167C70A9B29530C92929@AS8PR08MB7991.eurprd08.prod.outlook.com>
+ <AS8PR08MB7991EAA2EF0E381FAFB4C1FD92609@AS8PR08MB7991.eurprd08.prod.outlook.com>
+In-Reply-To:
+ <AS8PR08MB7991EAA2EF0E381FAFB4C1FD92609@AS8PR08MB7991.eurprd08.prod.outlook.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3731.500.231)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AM6PR08MB3784:EE_|AS2PR08MB9689:EE_|AM7EUR03FT022:EE_|PAXPR08MB7365:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ad40d74-2fac-4f81-21ca-08db42304ca2
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ 5TcunEkh4Wkvov8ya0WS3YCFnyUdcg4KezEgpFEGdBY+gvrR4l+4n3w+W3oWgLtobdgZj4JaYOhlMBT1h/NZXo4xmtUwXPWnFH0Zc9Z7l++luQJD11Yx2I/HvDcqnoNZSleC5K9Kj2H86BszZF5/jXpUQFhpWfsxXvJ5FeZJaBcO5k3HzfMvlrD1h727AadIWv5gBi+L5FOmE1/clR6b9mrJEMrNb/W74VIQRm9yUFs48RZ2g2N0ozpHjTKkF2xdfvAfU6im7RNKSoAqa/Nw/QF7/CKFAhHVOUJjguyc3glSjxKfmi05xTs/jK+9+rWBYwZK7rn6XG66PTPtyn26YYVEpaOdpt3QvXPlO95NRcOwzwnNUcB8nBZ3a6+N7LuM1yyVHyQpxN58rOJHVlPU6IuO5fgdrOW8FzlSVbjKkVPi+xMEkkTyBZ8UrRdx+jq8JwoUacE0dnUJYSUOhR4V495EuqKpQ8xxBs+w1g4GrJ01x6fqkkuiExfhkzjkcWVT/Gl1hEJLC1g5adEmIfqC2W2e7PaAcjzSr2qRnARZg9dl9soPArQ4me4vMRhk7BJ2XAkGzSevRAxc/wiEH5/ApBY1FTus+Ap1rnUGSogt+/1+g1Kxh9u13xjtc4DB+CT5sz3I4CXlHZaNsAnDVUtZLA==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(136003)(396003)(39860400002)(376002)(346002)(451199021)(36756003)(7416002)(15650500001)(38070700005)(2906002)(38100700002)(8936002)(8676002)(5660300002)(6862004)(86362001)(186003)(33656002)(6486002)(71200400001)(6512007)(6506007)(37006003)(54906003)(6636002)(478600001)(2616005)(83380400001)(53546011)(66476007)(66556008)(66946007)(316002)(66446008)(41300700001)(122000001)(91956017)(4326008)(64756008)(76116006)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <F5E1E87777C1574CB4884FF0B18C589D@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9689
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM7EUR03FT022.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	be51319b-2e82-4c63-aa75-08db4230443d
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Y5aokEdi++7nvbh2myNeiwgRr+C4BzwtBDlgWbMH/DWAKbZY8efSh4VaLo0VH8Fa6NZ/FXzBS6hPUXMLCtqE718Za9hsXQWtUGCmDhMh+JCiLfX8mlbrksZKSHRq/Tckl/y9TcA750x2GV5ASzsgHlQEVv33NJCBIuw+H+BfuvaK80J9mOPw+Mppb7R0iPNx955rw+WKbOSevZBBTpB4v3jK2X7K7YGo5KY+U6OEKIyd27B0Ald35FlWGRrXnoxPH4f5i+F2azoTms9ffGngJVeEV1+1fv3SURQlwgiQliDZhZIy76sgypOHdLpwVH63KaxkUnNkMXBOytZZ4wLTlGAKc3H+TmqTtd23d9pYwfwyS/B4j8Z3E2kmnGKlNVMCE5FKI578XnzSVyhm/mq51w9eicOqgY2oyu8TSOL1+MY3K1Lzp2ZomZ0b7uPbxUH3KzT/mJEFgJJKGQL9HpeK7dh33aqjoVJvLYJt4wt/rBWaTrYDwyfPlmSaCmSSBr0oMkDK52bLi8XH7kO1On+H2/+idtP3VyUQRTCoCBuhz56zaM8sgkJFB4IULc/9XxntZ6a8KqEpHvH34RmbUa1eJrYY37kwBgi11eH/D5KSY/3x97Hml+dF50P42BLobdxgRlIWPXwNSmkivdDNCX1Wa2fptgb6rgF2ty0BPvbmTuLdt9Dq28OZAm/kCDbfYLjiS5rftzzNff7wbTq7bkt++g==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(136003)(396003)(39860400002)(376002)(346002)(451199021)(40470700004)(36840700001)(46966006)(36756003)(70206006)(40460700003)(15650500001)(2906002)(8936002)(8676002)(5660300002)(6862004)(40480700001)(86362001)(82310400005)(186003)(33656002)(6486002)(6512007)(26005)(6506007)(37006003)(54906003)(6636002)(478600001)(36860700001)(2616005)(83380400001)(47076005)(336012)(53546011)(316002)(81166007)(41300700001)(82740400003)(4326008)(70586007)(356005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2023 06:19:01.4145
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ad40d74-2fac-4f81-21ca-08db42304ca2
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM7EUR03FT022.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7365
 
-Hi Stefan,
+Hi,
 
-On Thu, Apr 20, 2023 at 7:39=E2=80=AFPM Stefan Hajnoczi <stefanha@redhat.co=
-m> wrote:
->
-> vduse_blk_detach_ctx() waits for in-flight requests using
-> AIO_WAIT_WHILE(). This is not allowed according to a comment in
-> bdrv_set_aio_context_commit():
->
->   /*
->    * Take the old AioContex when detaching it from bs.
->    * At this point, new_context lock is already acquired, and we are now
->    * also taking old_context. This is safe as long as bdrv_detach_aio_con=
-text
->    * does not call AIO_POLL_WHILE().
->    */
->
-> Use this opportunity to rewrite the drain code in vduse-blk:
->
-> - Use the BlockExport refcount so that vduse_blk_exp_delete() is only
->   called when there are no more requests in flight.
->
-> - Implement .drained_poll() so in-flight request coroutines are stopped
->   by the time .bdrv_detach_aio_context() is called.
->
-> - Remove AIO_WAIT_WHILE() from vduse_blk_detach_ctx() to solve the
->   .bdrv_detach_aio_context() constraint violation. It's no longer
->   needed due to the previous changes.
->
-> - Always handle the VDUSE file descriptor, even in drained sections. The
->   VDUSE file descriptor doesn't submit I/O, so it's safe to handle it in
->   drained sections. This ensures that the VDUSE kernel code gets a fast
->   response.
->
-> - Suspend virtqueue fd handlers in .drained_begin() and resume them in
->   .drained_end(). This eliminates the need for the
->   aio_set_fd_handler(is_external=3Dtrue) flag, which is being removed fro=
-m
->   QEMU.
->
-> This is a long list but splitting it into individual commits would
-> probably lead to git bisect failures - the changes are all related.
->
-> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> ---
->  block/export/vduse-blk.c | 132 +++++++++++++++++++++++++++------------
->  1 file changed, 93 insertions(+), 39 deletions(-)
->
-> diff --git a/block/export/vduse-blk.c b/block/export/vduse-blk.c
-> index f7ae44e3ce..35dc8fcf45 100644
-> --- a/block/export/vduse-blk.c
-> +++ b/block/export/vduse-blk.c
-> @@ -31,7 +31,8 @@ typedef struct VduseBlkExport {
->      VduseDev *dev;
->      uint16_t num_queues;
->      char *recon_file;
-> -    unsigned int inflight;
-> +    unsigned int inflight; /* atomic */
-> +    bool vqs_started;
->  } VduseBlkExport;
->
->  typedef struct VduseBlkReq {
-> @@ -41,13 +42,24 @@ typedef struct VduseBlkReq {
->
->  static void vduse_blk_inflight_inc(VduseBlkExport *vblk_exp)
->  {
-> -    vblk_exp->inflight++;
-> +    if (qatomic_fetch_inc(&vblk_exp->inflight) =3D=3D 0) {
+> On 21 Apr 2023, at 05:22, Henry Wang <Henry.Wang@arm.com> wrote:
+>=20
+> Hi all,
+>=20
+> Following the discussion in April community call, here comes the two
+> updated possible release schedule options that I came up with.
+>=20
+> Both of these two options will satisfy the requirements/concerns that
+> I've received so far. But I personally would prefer the option 2 as we
+> shouldn't expect there will be much progress happen in August due to
+> the EU holiday season. I wonder if anyone has any objections or alternate
+> suggestions.
 
-I wonder why we need to use atomic operations here.
+Even if the release date is in september, all major deadlines will happen i=
+n August.
 
-> +        /* Prevent export from being deleted */
-> +        aio_context_acquire(vblk_exp->export.ctx);
-> +        blk_exp_ref(&vblk_exp->export);
-> +        aio_context_release(vblk_exp->export.ctx);
-> +    }
->  }
->
->  static void vduse_blk_inflight_dec(VduseBlkExport *vblk_exp)
->  {
-> -    if (--vblk_exp->inflight =3D=3D 0) {
-> +    if (qatomic_fetch_dec(&vblk_exp->inflight) =3D=3D 1) {
-> +        /* Wake AIO_WAIT_WHILE() */
->          aio_wait_kick();
-> +
-> +        /* Now the export can be deleted */
-> +        aio_context_acquire(vblk_exp->export.ctx);
-> +        blk_exp_unref(&vblk_exp->export);
-> +        aio_context_release(vblk_exp->export.ctx);
->      }
->  }
->
-> @@ -124,8 +136,12 @@ static void vduse_blk_enable_queue(VduseDev *dev, Vd=
-useVirtq *vq)
->  {
->      VduseBlkExport *vblk_exp =3D vduse_dev_get_priv(dev);
->
-> +    if (!vblk_exp->vqs_started) {
-> +        return; /* vduse_blk_drained_end() will start vqs later */
-> +    }
-> +
->      aio_set_fd_handler(vblk_exp->export.ctx, vduse_queue_get_fd(vq),
-> -                       true, on_vduse_vq_kick, NULL, NULL, NULL, vq);
-> +                       false, on_vduse_vq_kick, NULL, NULL, NULL, vq);
->      /* Make sure we don't miss any kick afer reconnecting */
->      eventfd_write(vduse_queue_get_fd(vq), 1);
->  }
-> @@ -133,9 +149,14 @@ static void vduse_blk_enable_queue(VduseDev *dev, Vd=
-useVirtq *vq)
->  static void vduse_blk_disable_queue(VduseDev *dev, VduseVirtq *vq)
->  {
->      VduseBlkExport *vblk_exp =3D vduse_dev_get_priv(dev);
-> +    int fd =3D vduse_queue_get_fd(vq);
->
-> -    aio_set_fd_handler(vblk_exp->export.ctx, vduse_queue_get_fd(vq),
-> -                       true, NULL, NULL, NULL, NULL, NULL);
-> +    if (fd < 0) {
-> +        return;
-> +    }
-> +
-> +    aio_set_fd_handler(vblk_exp->export.ctx, fd, false,
-> +                       NULL, NULL, NULL, NULL, NULL);
->  }
->
->  static const VduseOps vduse_blk_ops =3D {
-> @@ -152,42 +173,19 @@ static void on_vduse_dev_kick(void *opaque)
->
->  static void vduse_blk_attach_ctx(VduseBlkExport *vblk_exp, AioContext *c=
-tx)
->  {
-> -    int i;
-> -
->      aio_set_fd_handler(vblk_exp->export.ctx, vduse_dev_get_fd(vblk_exp->=
-dev),
-> -                       true, on_vduse_dev_kick, NULL, NULL, NULL,
-> +                       false, on_vduse_dev_kick, NULL, NULL, NULL,
->                         vblk_exp->dev);
->
-> -    for (i =3D 0; i < vblk_exp->num_queues; i++) {
-> -        VduseVirtq *vq =3D vduse_dev_get_queue(vblk_exp->dev, i);
-> -        int fd =3D vduse_queue_get_fd(vq);
-> -
-> -        if (fd < 0) {
-> -            continue;
-> -        }
-> -        aio_set_fd_handler(vblk_exp->export.ctx, fd, true,
-> -                           on_vduse_vq_kick, NULL, NULL, NULL, vq);
-> -    }
-> +    /* Virtqueues are handled by vduse_blk_drained_end() */
->  }
->
->  static void vduse_blk_detach_ctx(VduseBlkExport *vblk_exp)
->  {
-> -    int i;
-> -
-> -    for (i =3D 0; i < vblk_exp->num_queues; i++) {
-> -        VduseVirtq *vq =3D vduse_dev_get_queue(vblk_exp->dev, i);
-> -        int fd =3D vduse_queue_get_fd(vq);
-> -
-> -        if (fd < 0) {
-> -            continue;
-> -        }
-> -        aio_set_fd_handler(vblk_exp->export.ctx, fd,
-> -                           true, NULL, NULL, NULL, NULL, NULL);
-> -    }
->      aio_set_fd_handler(vblk_exp->export.ctx, vduse_dev_get_fd(vblk_exp->=
-dev),
-> -                       true, NULL, NULL, NULL, NULL, NULL);
-> +                       false, NULL, NULL, NULL, NULL, NULL);
->
-> -    AIO_WAIT_WHILE(vblk_exp->export.ctx, vblk_exp->inflight > 0);
-> +    /* Virtqueues are handled by vduse_blk_drained_begin() */
->  }
->
->
-> @@ -220,8 +218,55 @@ static void vduse_blk_resize(void *opaque)
->                              (char *)&config.capacity);
->  }
->
-> +static void vduse_blk_stop_virtqueues(VduseBlkExport *vblk_exp)
-> +{
-> +    for (uint16_t i =3D 0; i < vblk_exp->num_queues; i++) {
-> +        VduseVirtq *vq =3D vduse_dev_get_queue(vblk_exp->dev, i);
-> +        vduse_blk_disable_queue(vblk_exp->dev, vq);
-> +    }
-> +
-> +    vblk_exp->vqs_started =3D false;
-> +}
-> +
-> +static void vduse_blk_start_virtqueues(VduseBlkExport *vblk_exp)
-> +{
-> +    vblk_exp->vqs_started =3D true;
-> +
-> +    for (uint16_t i =3D 0; i < vblk_exp->num_queues; i++) {
-> +        VduseVirtq *vq =3D vduse_dev_get_queue(vblk_exp->dev, i);
-> +        vduse_blk_enable_queue(vblk_exp->dev, vq);
-> +    }
-> +}
-> +
-> +static void vduse_blk_drained_begin(void *opaque)
-> +{
-> +    BlockExport *exp =3D opaque;
-> +    VduseBlkExport *vblk_exp =3D container_of(exp, VduseBlkExport, expor=
-t);
-> +
-> +    vduse_blk_stop_virtqueues(vblk_exp);
-> +}
-> +
-> +static void vduse_blk_drained_end(void *opaque)
-> +{
-> +    BlockExport *exp =3D opaque;
-> +    VduseBlkExport *vblk_exp =3D container_of(exp, VduseBlkExport, expor=
-t);
-> +
-> +    vduse_blk_start_virtqueues(vblk_exp);
-> +}
-> +
-> +static bool vduse_blk_drained_poll(void *opaque)
-> +{
-> +    BlockExport *exp =3D opaque;
-> +    VduseBlkExport *vblk_exp =3D container_of(exp, VduseBlkExport, expor=
-t);
-> +
-> +    return qatomic_read(&vblk_exp->inflight) > 0;
-> +}
-> +
->  static const BlockDevOps vduse_block_ops =3D {
-> -    .resize_cb =3D vduse_blk_resize,
-> +    .resize_cb     =3D vduse_blk_resize,
-> +    .drained_begin =3D vduse_blk_drained_begin,
-> +    .drained_end   =3D vduse_blk_drained_end,
-> +    .drained_poll  =3D vduse_blk_drained_poll,
->  };
->
->  static int vduse_blk_exp_create(BlockExport *exp, BlockExportOptions *op=
-ts,
-> @@ -268,6 +313,7 @@ static int vduse_blk_exp_create(BlockExport *exp, Blo=
-ckExportOptions *opts,
->      vblk_exp->handler.serial =3D g_strdup(vblk_opts->serial ?: "");
->      vblk_exp->handler.logical_block_size =3D logical_block_size;
->      vblk_exp->handler.writable =3D opts->writable;
-> +    vblk_exp->vqs_started =3D true;
->
->      config.capacity =3D
->              cpu_to_le64(blk_getlength(exp->blk) >> VIRTIO_BLK_SECTOR_BIT=
-S);
-> @@ -322,14 +368,20 @@ static int vduse_blk_exp_create(BlockExport *exp, B=
-lockExportOptions *opts,
->          vduse_dev_setup_queue(vblk_exp->dev, i, queue_size);
->      }
->
-> -    aio_set_fd_handler(exp->ctx, vduse_dev_get_fd(vblk_exp->dev), true,
-> +    aio_set_fd_handler(exp->ctx, vduse_dev_get_fd(vblk_exp->dev), false,
->                         on_vduse_dev_kick, NULL, NULL, NULL, vblk_exp->de=
-v);
->
->      blk_add_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_det=
-ach,
->                                   vblk_exp);
-> -
->      blk_set_dev_ops(exp->blk, &vduse_block_ops, exp);
->
-> +    /*
-> +     * We handle draining ourselves using an in-flight counter and by di=
-sabling
-> +     * virtqueue fd handlers. Do not queue BlockBackend requests, they n=
-eed to
-> +     * complete so the in-flight counter reaches zero.
-> +     */
-> +    blk_set_disable_request_queuing(exp->blk, true);
-> +
->      return 0;
->  err:
->      vduse_dev_destroy(vblk_exp->dev);
-> @@ -344,6 +396,9 @@ static void vduse_blk_exp_delete(BlockExport *exp)
->      VduseBlkExport *vblk_exp =3D container_of(exp, VduseBlkExport, expor=
-t);
->      int ret;
->
-> +    assert(qatomic_read(&vblk_exp->inflight) =3D=3D 0);
-> +
-> +    vduse_blk_detach_ctx(vblk_exp);
->      blk_remove_aio_context_notifier(exp->blk, blk_aio_attached, blk_aio_=
-detach,
->                                      vblk_exp);
->      blk_set_dev_ops(exp->blk, NULL, NULL);
-> @@ -355,13 +410,12 @@ static void vduse_blk_exp_delete(BlockExport *exp)
->      g_free(vblk_exp->handler.serial);
->  }
->
-> +/* Called with exp->ctx acquired */
->  static void vduse_blk_exp_request_shutdown(BlockExport *exp)
->  {
->      VduseBlkExport *vblk_exp =3D container_of(exp, VduseBlkExport, expor=
-t);
->
-> -    aio_context_acquire(vblk_exp->export.ctx);
-> -    vduse_blk_detach_ctx(vblk_exp);
-> -    aio_context_acquire(vblk_exp->export.ctx);
-> +    vduse_blk_stop_virtqueues(vblk_exp);
+So how about introducing an end of october possibility ?
 
-Can we add a AIO_WAIT_WHILE() here? Then we don't need to
-increase/decrease the BlockExport refcount during I/O processing.
+Cheers
+Bertrand
 
-Thanks,
-Yongji
+>=20
+> Please don't hesitate to raise your concerns and opinions. I would
+> encourage that the feedback collection is cut off by the middle of May
+> (say May 19). If nobody will have anything better, then let's go option 2
+> by "lazy consensus". Thanks.
+>=20
+> ** Proposed option 1: Wed Aug 30, 2023 **
+> (+8 months from Xen 4.17 release)
+>=20
+> - Last posting date          Fri Jun 16, 2023
+>=20
+> Patches adding new features are expected to be posted to the mailing
+> list by this date, although perhaps not in their final version.
+>=20
+> (Note that Xen Summit is Jun 24 - 26, 2023)
+>=20
+> - Feature freeze             Fri Jul 7, 2023 (+3 weeks from Last posting =
+date)
+>=20
+> Patches adding new features should be committed by this date.
+> Straightforward bugfixes may continue to be accepted by maintainers.
+>=20
+> - Code freeze                Fri Jul 21, 2023 (+2 weeks from Feature free=
+ze)
+>=20
+> Bugfixes only.
+>=20
+> - Hard code freeze           Fri Aug 11, 2023 (+3 weeks from Code freeze)
+>=20
+> Bugfixes for serious bugs (including regressions), and low-risk fixes onl=
+y.
+>=20
+> - Final commits              Fri Aug 25, 2023 (+2 weeks from Hard code fr=
+eeze)
+>=20
+> Branch off staging-4.18.
+>=20
+> - Release                    Wed Aug 30, 2023
+>=20
+>=20
+> ** Proposed option 2: Wed Sep 27, 2023 (or the first week of Oct)**
+> (+9 months from Xen 4.17 release)
+>=20
+> - Last posting date          Fri Jul 14, 2023
+>=20
+> Patches adding new features are expected to be posted to the mailing
+> list by this date, although perhaps not in their final version.
+>=20
+> - Feature freeze             Fri Aug 4, 2023 (+3 weeks from Last posting =
+date)
+>=20
+> Patches adding new features should be committed by this date.
+> Straightforward bugfixes may continue to be accepted by maintainers.
+>=20
+> - Code freeze                Fri Aug 18, 2023 (+2 weeks from Feature free=
+ze)
+>=20
+> Bugfixes only.
+>=20
+> - Hard code freeze           Fri Sep 8, 2023 (+3 weeks from Code freeze)
+>=20
+> Bugfixes for serious bugs (including regressions), and low-risk fixes onl=
+y.
+>=20
+> - Final commits              Fri Sep 22, 2023 (+2 weeks from Hard code fr=
+eeze)
+>=20
+> Branch off staging-4.18.
+>=20
+> - Release                    Wed Sep 27, 2023
+>=20
+> Kind regards,
+> Henry
+
 
