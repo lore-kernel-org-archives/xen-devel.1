@@ -4,35 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C391CC7EE24
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Apr 2023 06:03:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.525077.816123 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A50C7618E
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Apr 2023 07:23:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.525142.816153 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pqpIC-0003SJ-Ra; Mon, 24 Apr 2023 06:03:16 +0000
+	id 1pqqXH-0007d8-TK; Mon, 24 Apr 2023 07:22:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 525077.816123; Mon, 24 Apr 2023 06:03:16 +0000
+Received: by outflank-mailman (output) from mailman id 525142.816153; Mon, 24 Apr 2023 07:22:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pqpIC-0003S4-Nh; Mon, 24 Apr 2023 06:03:16 +0000
-Received: by outflank-mailman (input) for mailman id 525077;
- Mon, 24 Apr 2023 06:03:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pqqXH-0007d1-QJ; Mon, 24 Apr 2023 07:22:55 +0000
+Received: by outflank-mailman (input) for mailman id 525142;
+ Mon, 24 Apr 2023 07:22:55 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bhGg=AP=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1pqpIB-0000mg-5j
- for xen-devel@lists.xenproject.org; Mon, 24 Apr 2023 06:03:15 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id b2133e1d-e265-11ed-8611-37d641c3527e;
- Mon, 24 Apr 2023 08:03:12 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1915E1691;
- Sun, 23 Apr 2023 23:03:56 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1FB4F3F587;
- Sun, 23 Apr 2023 23:03:11 -0700 (PDT)
+ <SRS0=Qjkp=AP=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1pqqXH-0007cv-5B
+ for xen-devel@lists.xenproject.org; Mon, 24 Apr 2023 07:22:55 +0000
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on2062b.outbound.protection.outlook.com
+ [2a01:111:f400:fe12::62b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d400cd49-e270-11ed-b223-6b7b168915f2;
+ Mon, 24 Apr 2023 09:22:54 +0200 (CEST)
+Received: from AM6P192CA0023.EURP192.PROD.OUTLOOK.COM (2603:10a6:209:83::36)
+ by DU0PR08MB9461.eurprd08.prod.outlook.com (2603:10a6:10:42f::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.32; Mon, 24 Apr
+ 2023 07:22:47 +0000
+Received: from AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:83:cafe::28) by AM6P192CA0023.outlook.office365.com
+ (2603:10a6:209:83::36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.33 via Frontend
+ Transport; Mon, 24 Apr 2023 07:22:47 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM7EUR03FT058.mail.protection.outlook.com (100.127.140.247) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6340.19 via Frontend Transport; Mon, 24 Apr 2023 07:22:46 +0000
+Received: ("Tessian outbound 5154e9d36775:v136");
+ Mon, 24 Apr 2023 07:22:46 +0000
+Received: from 052e517e695c.3
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 97B7CC79-374B-4004-A543-AA5D64B22E7A.1; 
+ Mon, 24 Apr 2023 07:22:40 +0000
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 052e517e695c.3
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Mon, 24 Apr 2023 07:22:40 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com (2603:10a6:20b:570::15)
+ by PAWPR08MB9006.eurprd08.prod.outlook.com (2603:10a6:102:33f::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.33; Mon, 24 Apr
+ 2023 07:22:37 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::2db3:aa30:7be0:10a6]) by AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::2db3:aa30:7be0:10a6%7]) with mapi id 15.20.6319.033; Mon, 24 Apr 2023
+ 07:22:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,279 +74,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2133e1d-e265-11ed-8611-37d641c3527e
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Nick Rosbrook <rosbrookn@gmail.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v6 10/12] xen/tools: add sve parameter in XL configuration
-Date: Mon, 24 Apr 2023 07:02:46 +0100
-Message-Id: <20230424060248.1488859-11-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230424060248.1488859-1-luca.fancellu@arm.com>
+X-Inumbo-ID: d400cd49-e270-11ed-b223-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zWZY2rSM/tCJktyejvgNGix7coLYZlQDSM6wK3mXlsU=;
+ b=vn0aJ68HqVkWLoffnAPlZrjijZD612IQMYBu26SxYJSheuNdyhuAV2w+7EpKgDFf8/A+uHvtRwR7JjYAGsx7bh57bPE85WcQqC82s0A6IJWv8USvjKT9EDYsVwQ9msN/DD5THkCZkBXR1fdDDkHu2MDIcziWiP6lGGelXRgmeag=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=azUAZlf9IwESan4bJ5s6O77bw0qj9h8Yd2MP7pjSC8tbMMQ6yZ6DgRykrO0YtqEp9JEIGMnLbPPGSrrMEfpupKlgdkvtTefK7pRhi/mkH+q19RAyvFXo5ZjWePjXzXkF9Rj/iLv7P9qWVeCBXaXZgX3bUy+vFbiZRWT/UQvFkoRoCXY+tDa8j5s6QI7gWZiGAs0kbTfFhG1iywR67YCVYs9dYWl073KzEL+9S7ZDNEjtIJwfsNyh02pF5a/ngxMZt5JQLpa6w+8Kl1q9On9PfKq4BLV8R2K+R4xkhxXzbTXRKeFotOxe27qgtvh9q5qaABLtel73Yx4fGEm0XdW0bA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zWZY2rSM/tCJktyejvgNGix7coLYZlQDSM6wK3mXlsU=;
+ b=J4ZSK1OXdZTImoQ8A2eBMbs1vdX0dKxWrfYIyvy1Tx/JqJQGmdWg8RHISWVOrpw0F7nSZVPKJx90GUITWku0hpI2W6QdGilc5XHmYBg8OIc2fZ0Cgx+PSP/RzrwqjTZl8cwOZlhGuYkwFkxRpOMlVmSZ26Aa14UnpbfTitSbzULE4CuuwA8Ifk39a9m4MS7K8Bp+zRAEtZMgoaH3s2EvI0eCSUcRQUQE0awhAegAKF+mGGwsnGsH9JFvoE5Mbo7WeAi3NgUs6VId8fV2Cy/AzFAtqDfRbGHVVv4i6HBFnMNP/RvvHNrEom0PYriLIVaL2g9Ka4pOIMlhVvvuWhZG3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zWZY2rSM/tCJktyejvgNGix7coLYZlQDSM6wK3mXlsU=;
+ b=vn0aJ68HqVkWLoffnAPlZrjijZD612IQMYBu26SxYJSheuNdyhuAV2w+7EpKgDFf8/A+uHvtRwR7JjYAGsx7bh57bPE85WcQqC82s0A6IJWv8USvjKT9EDYsVwQ9msN/DD5THkCZkBXR1fdDDkHu2MDIcziWiP6lGGelXRgmeag=
+From: Henry Wang <Henry.Wang@arm.com>
+To: Luca Fancellu <Luca.Fancellu@arm.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
+	Community Manager <community.manager@xenproject.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan
+ Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: RE: [PATCH v6 12/12] xen/changelog: Add SVE and "dom0" options to the
+ changelog for Arm
+Thread-Topic: [PATCH v6 12/12] xen/changelog: Add SVE and "dom0" options to
+ the changelog for Arm
+Thread-Index: AQHZdnJ6OYC31hV5IU6Nadg0A3PyM686De0Q
+Date: Mon, 24 Apr 2023 07:22:36 +0000
+Message-ID:
+ <AS8PR08MB799146450E0BBD6BF1C740BA92679@AS8PR08MB7991.eurprd08.prod.outlook.com>
 References: <20230424060248.1488859-1-luca.fancellu@arm.com>
+ <20230424060248.1488859-13-luca.fancellu@arm.com>
+In-Reply-To: <20230424060248.1488859-13-luca.fancellu@arm.com>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ts-tracking-id: 14832DCF3D12584084C5229F410F1645.0
+x-checkrecipientchecked: true
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AS8PR08MB7991:EE_|PAWPR08MB9006:EE_|AM7EUR03FT058:EE_|DU0PR08MB9461:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3148ab1c-11dd-4edc-4bbc-08db4494b3e6
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ KQL14xjoFToztO9iKoHvxRLX01JjSRcYgsULmva5nT9Q0i24zf3ryIwayKup3pkFwh8mUbuB41JjJvQISf3XkG84bQkVHqabe8EbusfoB8BIuacnxAY9g6aAIMn9cmysti1F8JGiBMltLaJz8zcv06f018mngRnOaznwntjKEJGUhPWEuM26ooFHdDKw0/nEL4/u+KXJ8eL7u5RKgH7PK1Fv639Oz5g9J45hp+jdUQ9rnI4rJFNg6LZ2ghj1hFx+FZcZRfF02NctkbbTXach2PvCXXqgIAxx92JfKPX/URHVQ0nnNua8TWIpmc8j4DfcQ8ZAv0fPMJcp3pkd1XHgzSP96U/s8WiNmeeh/xXcPv8o0TynjZ15BT0Wnwc2E6C+86/b1TsHGnfaZeV/NFiraX4V6I7JJHXm2kXTEgcZvUJ4UmL6huvIuBpQQ2eXYNgdYFfDO+Wmc/D0uNjsmvJyjIaokdjkSeZt5H+B8/p4+Cf8lL91xGrvGYErgKMCO9gqeGojF7GXWvssAhaRm+NZ4kBDvq1f6nSaScDO3FUknzrs1dh+SNqwo7JoEZ5gLx5DEvGjUqtlNdKbT1kOdaE1cmd+hJW3RTin/PHpzY+BSy3GerHMtFGs8S+GjKKCkQGKmXjJlEgoLwxIAjOWaTC9bpu8qum3uBKgC89ugNREBssZVyAfYjJ0cSe7alj4JfmtmdHmx8f5mIlA+kBJElfE8A==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB7991.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(396003)(346002)(376002)(366004)(136003)(451199021)(38100700002)(122000001)(6506007)(9686003)(26005)(55016003)(186003)(83380400001)(33656002)(2906002)(4744005)(8676002)(8936002)(52536014)(5660300002)(54906003)(478600001)(7696005)(71200400001)(38070700005)(110136005)(316002)(4326008)(41300700001)(64756008)(66446008)(66556008)(66946007)(76116006)(86362001)(66476007)(59356011)(219803003)(207903002);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB9006
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	36eaa4ac-c16a-42d7-01bf-08db4494ae04
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	jFhWxbUr57iE40xG175KiG8m1aos2Fsa8nhwk8qeJuRo4oId1RyMOFkgKz9n6qDfOg7Km5xneZYYK4yPqMVARGXNR+1gN9x/Fw8PrJtTVxIP1ZaqPuHH3fZ/snbPWrZz6kbJHJISernJNl/vZL5kSEiUhs5Vn89GcAZm2SpB4I9KL8xzKPjOT+fhi778Hf/TAeaB282X+2nlNs4RTUYCqQd5pMW4IiNqFDRNHY9lmKYad5yG7ifJWAdwRXA1rb6aeiMBUVBJEGXnruJeTQMEIu727IeFm5k8ASEr/76xrDsx3Ln1MdwJHHIsELxQDiA5QKlknjE2yyRBtqB9tMRoTNtRS38AxHmJ2EIbUs0Gq7a6oWkHeuGXjIv0wWcy4Kdix2zM7AYNeTLpUttNG0RIOiryj3IaVvnE/WMui9xRuKjjmq8lNWi1JacAnwOV8hTXv0RpzNvloGXtQtrvcC/syrOASU6iR5cH4pP++AV2xs1l/eFGfRyDDkOi21wXXRB89+gYRM7qoeoJVKnEpBOMtyDOXEGXhQO6sghKZ6VZ5iUJubnQYsWZopRjJzAVW44+qGgQBe/iWgF4GjPBHgvgB5yF34aESKRlMg0SpzAEJiKSxzfysCJMYDsfEzSVnh9qSszDyS1bNARSij13YciRdsQM6tuqlVkAc/SGl/SlnKwtwEhoQw+0QI6Zcw4UpjTqBKbRvsISCIE2NYv8N0A/l0PSPGNg/C824FtfFYIkdeqJHSOOlJE3we1gVRYpYEMSclHCDuXBqXZxFEaZn75CqkVY021nJfxH/Mq7l/Iq7vA=
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(136003)(376002)(346002)(396003)(451199021)(40470700004)(46966006)(36840700001)(54906003)(110136005)(40460700003)(478600001)(82740400003)(316002)(4326008)(40480700001)(70206006)(70586007)(55016003)(356005)(41300700001)(81166007)(4744005)(2906002)(8936002)(8676002)(52536014)(5660300002)(36860700001)(186003)(86362001)(336012)(26005)(33656002)(6506007)(9686003)(7696005)(47076005)(83380400001)(82310400005)(59356011)(207903002)(219803003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2023 07:22:46.6495
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3148ab1c-11dd-4edc-4bbc-08db4494b3e6
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM7EUR03FT058.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9461
 
-Add sve parameter in XL configuration to allow guests to use
-SVE feature.
+Hi Luca,
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
-Changes from v5:
- - Update documentation
- - re-generated golang files
-Changes from v4:
- - Rename sve field to sve_vl (Anthony), changed type to
-   libxl_sve_type
- - Sanity check of sve field in libxl instead of xl, update docs
-   (Anthony)
- - drop Ack-by from George because of the changes in the Golang bits
-Changes from v3:
- - no changes
-Changes from v2:
- - domain configuration field name has changed to sve_vl,
-   also its value now is VL/128.
- - Add Ack-by George for the Golang bits
-Changes from v1:
- - updated to use arch_capabilities field for vector length
-Changes from RFC:
- - changed libxl_types.idl sve field to uint16
- - now toolstack uses info from physinfo to check against the
-   sve XL value
- - Changed documentation
----
- docs/man/xl.cfg.5.pod.in             | 16 ++++++++++++++++
- tools/golang/xenlight/helpers.gen.go |  2 ++
- tools/golang/xenlight/types.gen.go   | 23 +++++++++++++++++++++++
- tools/include/libxl.h                |  5 +++++
- tools/libs/light/libxl_arm.c         | 28 ++++++++++++++++++++++++++++
- tools/libs/light/libxl_types.idl     | 22 ++++++++++++++++++++++
- tools/xl/xl_parse.c                  |  8 ++++++++
- 7 files changed, 104 insertions(+)
+> -----Original Message-----
+> From: Luca Fancellu <luca.fancellu@arm.com>
+> Subject: [PATCH v6 12/12] xen/changelog: Add SVE and "dom0" options to th=
+e
+> changelog for Arm
+>=20
+> Arm now can use the "dom0=3D" Xen command line option and the support
+> for guests running SVE instructions is added, put entries in the
+> changelog.
+>=20
+> Mention the "Tech Preview" status and add an entry in SUPPORT.md
+>=20
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 10f37990be57..2ea996caa256 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -2952,6 +2952,22 @@ Currently, only the "sbsa_uart" model is supported for ARM.
- 
- =back
- 
-+=item B<sve="vl">
-+
-+The `sve` parameter enables Arm Scalable Vector Extension (SVE) usage for the
-+guest and sets the maximum SVE vector length, the option is applicable only to
-+AArch64 guests.
-+A value equal to "disabled" disables the feature, this is the default value.
-+Allowed values are "disabled", "128", "256", "384", "512", "640", "768", "896",
-+"1024", "1152", "1280", "1408", "1536", "1664", "1792", "1920", "2048", "hw".
-+Specifying "hw" means that the maximum vector length supported by the platform
-+will be used.
-+Please be aware that if a specific vector length is passed and its value is
-+above the maximum vector length supported by the platform, an error will be
-+raised.
-+
-+=back
-+
- =head3 x86
- 
- =over 4
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index 35397be2f9e2..cd1a16e32eac 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -1149,6 +1149,7 @@ default:
- return fmt.Errorf("invalid union key '%v'", x.Type)}
- x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
- x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
-+x.ArchArm.SveVl = SveType(xc.arch_arm.sve_vl)
- if err := x.ArchX86.MsrRelaxed.fromC(&xc.arch_x86.msr_relaxed);err != nil {
- return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
-@@ -1653,6 +1654,7 @@ default:
- return fmt.Errorf("invalid union key '%v'", x.Type)}
- xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
- xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
-+xc.arch_arm.sve_vl = C.libxl_sve_type(x.ArchArm.SveVl)
- if err := x.ArchX86.MsrRelaxed.toC(&xc.arch_x86.msr_relaxed); err != nil {
- return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index 3d968a496744..b131a7eedc9d 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -490,6 +490,28 @@ TeeTypeNone TeeType = 0
- TeeTypeOptee TeeType = 1
- )
- 
-+type SveType int
-+const(
-+SveTypeHw SveType = -1
-+SveTypeDisabled SveType = 0
-+SveType128 SveType = 128
-+SveType256 SveType = 256
-+SveType384 SveType = 384
-+SveType512 SveType = 512
-+SveType640 SveType = 640
-+SveType768 SveType = 768
-+SveType896 SveType = 896
-+SveType1024 SveType = 1024
-+SveType1152 SveType = 1152
-+SveType1280 SveType = 1280
-+SveType1408 SveType = 1408
-+SveType1536 SveType = 1536
-+SveType1664 SveType = 1664
-+SveType1792 SveType = 1792
-+SveType1920 SveType = 1920
-+SveType2048 SveType = 2048
-+)
-+
- type RdmReserve struct {
- Strategy RdmReserveStrategy
- Policy RdmReservePolicy
-@@ -564,6 +586,7 @@ TypeUnion DomainBuildInfoTypeUnion
- ArchArm struct {
- GicVersion GicVersion
- Vuart VuartType
-+SveVl SveType
- }
- ArchX86 struct {
- MsrRelaxed Defbool
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 4fa09ff7635a..cac641a7eba2 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -283,6 +283,11 @@
-  */
- #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_TEE 1
- 
-+/*
-+ * libxl_domain_build_info has the arch_arm.sve_vl field.
-+ */
-+#define LIBXL_HAVE_BUILDINFO_ARCH_ARM_SVE_VL 1
-+
- /*
-  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
-  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index ddc7b2a15975..1e69dac2c4fa 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -3,6 +3,8 @@
- #include "libxl_libfdt_compat.h"
- #include "libxl_arm.h"
- 
-+#include <xen-tools/arm-arch-capabilities.h>
-+
- #include <stdbool.h>
- #include <libfdt.h>
- #include <assert.h>
-@@ -211,6 +213,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
- 
-+    /* Parameter is sanitised in libxl__arch_domain_build_info_setdefault */
-+    if (d_config->b_info.arch_arm.sve_vl) {
-+        /* Vector length is divided by 128 in struct xen_domctl_createdomain */
-+        config->arch.sve_vl = d_config->b_info.arch_arm.sve_vl / 128U;
-+    }
-+
-     return 0;
- }
- 
-@@ -1681,6 +1689,26 @@ int libxl__arch_domain_build_info_setdefault(libxl__gc *gc,
-     /* ACPI is disabled by default */
-     libxl_defbool_setdefault(&b_info->acpi, false);
- 
-+    /* Sanitise SVE parameter */
-+    if (b_info->arch_arm.sve_vl) {
-+        unsigned int max_sve_vl =
-+            arch_capabilities_arm_sve(physinfo->arch_capabilities);
-+
-+        if (!max_sve_vl) {
-+            LOG(ERROR, "SVE is unsupported on this machine.");
-+            return ERROR_FAIL;
-+        }
-+
-+        if (LIBXL_SVE_TYPE_HW == b_info->arch_arm.sve_vl) {
-+            b_info->arch_arm.sve_vl = max_sve_vl;
-+        } else if (b_info->arch_arm.sve_vl > max_sve_vl) {
-+            LOG(ERROR,
-+                "Invalid sve value: %d. Platform supports up to %u bits",
-+                b_info->arch_arm.sve_vl, max_sve_vl);
-+            return ERROR_FAIL;
-+        }
-+    }
-+
-     if (b_info->type != LIBXL_DOMAIN_TYPE_PV)
-         return 0;
- 
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index fd31dacf7d5a..9e48bb772646 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -523,6 +523,27 @@ libxl_tee_type = Enumeration("tee_type", [
-     (1, "optee")
-     ], init_val = "LIBXL_TEE_TYPE_NONE")
- 
-+libxl_sve_type = Enumeration("sve_type", [
-+    (-1, "hw"),
-+    (0, "disabled"),
-+    (128, "128"),
-+    (256, "256"),
-+    (384, "384"),
-+    (512, "512"),
-+    (640, "640"),
-+    (768, "768"),
-+    (896, "896"),
-+    (1024, "1024"),
-+    (1152, "1152"),
-+    (1280, "1280"),
-+    (1408, "1408"),
-+    (1536, "1536"),
-+    (1664, "1664"),
-+    (1792, "1792"),
-+    (1920, "1920"),
-+    (2048, "2048")
-+    ], init_val = "LIBXL_SVE_TYPE_DISABLED")
-+
- libxl_rdm_reserve = Struct("rdm_reserve", [
-     ("strategy",    libxl_rdm_reserve_strategy),
-     ("policy",      libxl_rdm_reserve_policy),
-@@ -690,6 +711,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
- 
-     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
-                                ("vuart", libxl_vuart_type),
-+                               ("sve_vl", libxl_sve_type),
-                               ])),
-     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
-                               ])),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 1f6f47daf4e1..f036e56fc239 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2887,6 +2887,14 @@ skip_usbdev:
-         }
-     }
- 
-+    if (!xlu_cfg_get_string (config, "sve", &buf, 1)) {
-+        e = libxl_sve_type_from_string(buf, &b_info->arch_arm.sve_vl);
-+        if (e) {
-+            fprintf(stderr, "Unknown sve \"%s\" specified\n", buf);
-+            exit(EXIT_FAILURE);
-+        }
-+    }
-+
-     parse_vkb_list(config, d_config);
- 
-     d_config->virtios = NULL;
--- 
-2.34.1
+Acked-by: Henry Wang <Henry.Wang@arm.com> # CHANGELOG
 
+Kind regards,
+Henry
 
