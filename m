@@ -4,40 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441F4C77B61
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Apr 2023 12:02:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.525332.816466 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA40C7618E
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Apr 2023 12:09:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.525340.816475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pqutA-0003Km-9u; Mon, 24 Apr 2023 12:01:48 +0000
+	id 1pquzu-00040w-0K; Mon, 24 Apr 2023 12:08:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 525332.816466; Mon, 24 Apr 2023 12:01:48 +0000
+Received: by outflank-mailman (output) from mailman id 525340.816475; Mon, 24 Apr 2023 12:08:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pqutA-0003Kf-7L; Mon, 24 Apr 2023 12:01:48 +0000
-Received: by outflank-mailman (input) for mailman id 525332;
- Mon, 24 Apr 2023 12:01:47 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0Hh8=AP=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1pqut9-0003KX-07
- for xen-devel@lists.xenproject.org; Mon, 24 Apr 2023 12:01:47 +0000
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on062d.outbound.protection.outlook.com
- [2a01:111:f400:fe0e::62d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c82a99bc-e297-11ed-b223-6b7b168915f2;
- Mon, 24 Apr 2023 14:01:45 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by DBBPR04MB7819.eurprd04.prod.outlook.com (2603:10a6:10:1e9::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.33; Mon, 24 Apr
- 2023 12:01:42 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::52b2:f58:e19:56ae]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::52b2:f58:e19:56ae%2]) with mapi id 15.20.6319.033; Mon, 24 Apr 2023
- 12:01:42 +0000
+	id 1pquzt-00040p-TH; Mon, 24 Apr 2023 12:08:45 +0000
+Received: by outflank-mailman (input) for mailman id 525340;
+ Mon, 24 Apr 2023 12:08:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3wwt=AP=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1pquzs-00040d-Hl
+ for xen-devel@lists.xenproject.org; Mon, 24 Apr 2023 12:08:44 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20615.outbound.protection.outlook.com
+ [2a01:111:f400:7e89::615])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bfb5978b-e298-11ed-8611-37d641c3527e;
+ Mon, 24 Apr 2023 14:08:41 +0200 (CEST)
+Received: from BN9PR03CA0078.namprd03.prod.outlook.com (2603:10b6:408:fc::23)
+ by SA1PR12MB7409.namprd12.prod.outlook.com (2603:10b6:806:29c::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.31; Mon, 24 Apr
+ 2023 12:08:36 +0000
+Received: from BN8NAM11FT077.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:fc:cafe::c1) by BN9PR03CA0078.outlook.office365.com
+ (2603:10b6:408:fc::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.33 via Frontend
+ Transport; Mon, 24 Apr 2023 12:08:35 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT077.mail.protection.outlook.com (10.13.177.232) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6340.19 via Frontend Transport; Mon, 24 Apr 2023 12:08:35 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 24 Apr
+ 2023 07:08:32 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Mon, 24 Apr
+ 2023 05:08:31 -0700
+Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Mon, 24 Apr 2023 07:08:29 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,185 +65,255 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c82a99bc-e297-11ed-b223-6b7b168915f2
+X-Inumbo-ID: bfb5978b-e298-11ed-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bfzK61v1rYdPhquKWKAhUS9Bo4VRlf9fLV6SQKFWRXM7bnoNnHfy2ag9brcrLtig9Q570OAQwpZg7VGGObY1K7g1UXIClkfNiaVxXPqPFGHp8N63oWIUXM4lOp0qOlIOqxDH57mB0YtrTRr6TZ1ZMHUrrFTebsPWn9YJ4MKdESGnl4x2mj0Kj4391uocLgsbk/xBkLKqRJZQ2Z8fLMNhFbznDBx9F7igFerCcEwMl4aRaYxSa2Y4ZaYiKmB/iH9K9DiScxsbEgs3TTXs5Npz/1ORl9rS4UgUeBvSZipeGOnW193VFP6ajsl7uUvW53CB6U5nUF1VJJzYJmalYW2yQw==
+ b=EQhr/spC1I5ImLjbsuuothYCZKce5G39HzJgYk7cjtnpOYghPMe7qaOV2dDX9j6qBQnp+uiYH00H3TR4YVsnZeV6drUmuV4EcB/3g163ez8EqtkTaaVlBqWD/snVFkow7ldJQBva1cYgZFSt8dDCXmI9mSO2ZHgukNGd6eWbWi+8FTiMtTjmRRTRplj4ilAcv0+MR9xCkG0KYK6WofphTr4NBa8CZzzqB9WtIuawqdjEX2qEyNeyM6ti/CYwgnSIF66eaRRy9vv/awI1cSWX3EESIAxe5u1G9lN3XfCETgWkl0+ud6twhkTEmTUap7FbTCufxY3SLl9BsRO2Lbc1qg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n9hNCXuO0OnaZb3uPDhdrOiAnK2CzORCGdLFN0p9Z5U=;
- b=bQhlbhd9bEVl5PHDL/Q/m5MsB+J+1tnXIWLsKQY2LqS068kH7zPd/FSfduuLCgTSK4fZ3y4ojbWQ8bgLD7vmhXrzSMYhUdh28FBnQI6JGULss+E0M+TPBh83/nOn8/9FRpwM5hmJuZDXEofB9zGQ3o5JUkdfUIBvRPusCL6226Mnu+3G2r0zGFesRS5JFCXI8FemvZ+N95LMPeCgf+VfE9EL6c9xemSRm8KWbKts6WhnS1b7kRpNfScgRbzCMFcNc1aMQyZbbE5PjEqgaLnmRmbbb5EBi2dX+meHBKuTYexZATl9snMYwcOiWODuu5/xwLiKCfHA3XGOiXIaj7NdnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ bh=nzCZ6OwnIpGRLsrvkEjJ8Q4GOcTCd5aFi9nRFFZQ/J8=;
+ b=cZZSY0v+4lq+1fnvWLnA3U16WhUAutKic9lh9mtUkcnlCWyll/3gfvSw0+E0CZrYLdyyAbP9E+2mleYi8pLBT7MekDt6FublQJJpBF5+BOFnt9McAy5vY6IlOdj0WD4aPdFajjahFJVbOGIiGGaZLpB+1Eh/qT9NH4uskGxgWnidLCEAdKiwjJka81leAk0je964n/glC/sbp7gPaCMypWJ6qkzkStHQ2R9VJtJqnA0OosCrJ73/xghBK1H/48Mr2IdIVrHgFe/JW2R5IlZ7DpZCoeMIxFHYTSs+ejgtZkiPeUYOGNhbO95444MWCOJFh9D2lQ8FCuTGPUflWpzcYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n9hNCXuO0OnaZb3uPDhdrOiAnK2CzORCGdLFN0p9Z5U=;
- b=nUBUtDUscSVVYLrbNjz1QXl4mKxjw+vAdV66G6EKcLzqG0ha5VxuxMPLeHqEl7Mlvlr397zN+OI4AkpUhKbOSWylnm0TZ/g6cuXw30UPkUDrdOQWAI9S9FsczbIN3whC4bf7SXfsqEo5Kqq8v4CjHprQFKZKhggLGmP/PkV0KdjFMIjQ1xeTTr2V6pQNE/rK8Nj7mYEZKHX4xlzA+J4K2MEuLN4nsqwWFX5r46Lcu715L6EizieTrAw1ypKMtzzqqYrL8Tw+miXHJ/M5kuG21TYOCKexonuwx5nqIeSZpQ6iyndRjekwpwroNAWlkNUxwGIrmO/VWSpRxZbjre6SfA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <45bdf36f-93c5-9f7c-a028-0a9443f85013@suse.com>
-Date: Mon, 24 Apr 2023 14:01:38 +0200
+ bh=nzCZ6OwnIpGRLsrvkEjJ8Q4GOcTCd5aFi9nRFFZQ/J8=;
+ b=5ruGh9ZLDtPs01b54FgVh+uqePfcTns1Tq5rKMAAEV4X1V7sdYvQ24KMc/oymaItLQjGdeC3f1AvFg/NWJ+YEz63JRzylrGOP9ISyQOanyGS9jI/QW5lptnoFwmBvWulL3OzgYAUBRWMF95j2BPGCuKrSqiGNP0pME0/CRKQtc8=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Message-ID: <ca8fd34c-3755-161d-38c1-651cf08ef589@amd.com>
+Date: Mon, 24 Apr 2023 14:08:29 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH] xen: add support for crash dump analysis with xen.efi
+Subject: Re: [XEN v5 05/10] xen/arm: Introduce choice to enable 64/32 bit
+ physical addressing
 Content-Language: en-US
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <20230421135933.23353-1-jgross@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230421135933.23353-1-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
+To: Ayan Kumar Halder <ayan.kumar.halder@amd.com>,
+	<xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <stefano.stabellini@amd.com>, <julien@xen.org>,
+	<Volodymyr_Babchuk@epam.com>, <bertrand.marquis@arm.com>,
+	<andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>, <jbeulich@suse.com>,
+	<wl@xen.org>, <rahul.singh@arm.com>
+References: <20230413173735.48387-1-ayan.kumar.halder@amd.com>
+ <20230413173735.48387-6-ayan.kumar.halder@amd.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <20230413173735.48387-6-ayan.kumar.halder@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0054.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4a::18) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
-MIME-Version: 1.0
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DBBPR04MB7819:EE_
-X-MS-Office365-Filtering-Correlation-Id: 52ce8907-5239-4bc8-2f15-08db44bbaad4
-X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT077:EE_|SA1PR12MB7409:EE_
+X-MS-Office365-Filtering-Correlation-Id: 38a56cba-dbed-4a7f-cfc8-08db44bca17d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	pLqXnI3K7ZAW/o+Cb576yClwf42w6njc5BZ+xGDYroKIcpOaIvyqp6GMDtDU8eX6kaeRlEUg/BFpYdIRau6s+Ri3QhxpzSIwS4c9Tpx7wBFZLY6JmzIRU09OoxbOeE4QGenVeQ9mxbwKmf/IbKzcofYkN5tTTIuDqo4GVvxfoHf9KKsvFmaFUtCo7PJDJ2irv83y7GA9uv+MpnwPLi07zyLUPTQeWeSMIxuYfH1ajRv75h1lBnEcb3/AsfIA150Sm7L47uMrEjDIoXqNkmXzHrtf+6k5ZyrG3LZBc952e6zxndC1bmJHIcT9p2G1Xt7QrdxuEfVb5Ffg9ODxiucfWGOzJlHJ2wSYCxcl8bcAYpAYH9pTk8V555zLuiPDDcRvCy98rUxWrYRzX43YJQ1DKYg+TWNuBR/mnRnPZbL9TQc2viGkacKsEhsHJ4Mm5nxSudmeSxzFigJbZEsjFn8ELdmkLErVW0WyCjK6quLF2PmKxHombsFaYGw45/trsciVP/vOWgfCRN3VYBvJXODXVwpVUvsgKOpS+71D852sFyW+N78VLAotSzDAJEkh2shuV4xE06tKTsGjGjVMqlbSECZFs7JnIMnpbp6Z3AitvMGGiYBwCmyzQ+KX/bqR2lGTpcWi9Z3Ghnp+DTzEa3MBgQ==
+	LdVh97DfdLZp1227d4UrxW7qjyUL6Sa/13bsx7CcZRL4tSziobx4eghirjqsHC2HWSCfajS41v1u3nDFX4lAgfMwaAiL7rzlm2eN4hdVU7GYP1jnUJ/csa+6S1KkU48CtSTaZxv4XJq669Y71JrqQDrt0gxIBg2hj9Pw2VlProX6xcD2mZBrRxnezsrYKm31tCXNB76q+ibH18Wh5hKA3JAgyVh0391ol6mEoOBJEgYQ6DrNgr05llCGdcv/YbNJMXHnrTMhEHKpPfu5vSV+QbBJC3kLx1ymobcJdp0p8qPh4MUvcNVR7MRbFHmJhwc4BsFHpqskT83ZzFKNfZWGYLXYguFscd9Z8ekdS1WYGHvbbGxvdj8gyE9IM+pkeh+DxO/x1s23b40sj7uMhRsjwNyHqSoPC7zEjoid+k4cgGBjpKjotcdaYptE49//JtFBflD8jGW294ApVjvAOfg/wlf8h/2jf3tvttq0LvYD4hu1bgStH8R11r2aWAvkS5ZOn4vzCFlSxvNW8Fq0V6ub2umJUmFlCojKcv9f7mys3m7zZLe3IzvyoT1fZX1vvfU3BMW8xc2WVJKUIKxdZtjDKsop1DllkG0PTn9H6+EwiVovipD1lh2Q+i/Mjpw/ftjNUqGtvwiXmcBUe+iroXxstE8F08L3OTwpUAjxHP3M1/zmn2OmBMKA32HVe1r1zxZ4BilWQJA7nbGcvjHMk6wRV6d0+7K/fR5v2l6smCDsZ47WpJRjaEt5aFHcAPk7m4v09gzvDVHugobuybbz0f6zOfvBO1uMWoQ2NSoOBZ/jUQs=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(136003)(39860400002)(366004)(376002)(346002)(396003)(451199021)(2906002)(66476007)(66556008)(66946007)(316002)(4326008)(6862004)(8676002)(8936002)(5660300002)(41300700001)(36756003)(31696002)(86362001)(6512007)(26005)(186003)(53546011)(38100700002)(478600001)(6486002)(6666004)(83380400001)(31686004)(2616005)(6506007)(6636002)(54906003)(37006003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bSs2SVJ3Mjh5OVpxQWtoTE1rSXl6TVIyS0tjSGFwM0VoZnFmTDFyRXhZRDE2?=
- =?utf-8?B?ZkI3dXRoMWNCUkpnTGFQWnNGQkVpTnVkQnI2NjA0cUY1cklwRGZQbFBFTW5N?=
- =?utf-8?B?V0paekhJaW5DdVY2d094SGwrN0pnOTBmVzB5WnFsVVppUG9ja2dDSDFEOHY0?=
- =?utf-8?B?aUs3dFpOZTJhaDloL3c4bUUvRUVxR0VZT0wyRk1hYndvcGQ4eUJVRWx3ZlZK?=
- =?utf-8?B?bEpXV1lKRjRNelp3L3JVQ1ZaU00xRWR4UVdFR0ZjN3o2d1pReFZUZ1Rmc1pF?=
- =?utf-8?B?OXZob2Z1Y0FWQ25hWDlrMGQxL3F4L09nM2pueWt6Wjl0ZUxVS0lLZUxpWEZ4?=
- =?utf-8?B?ODlnOGljRzdUQWh2TVdtWUNuT2VHRkNGUVZpdGlKbjBGeERraC91NitYeGZo?=
- =?utf-8?B?Wllwb3UrWS9tR212WUFxaWZ5ZE55YVJ6eHRSdStuY0h6WGNRd20yaHJENWdD?=
- =?utf-8?B?NUx6NmdSZ1o2dTdzNjV1bG56N3BJM2ZaY2U2VzJFK3YyZjcvOGV5Yk4zcE1J?=
- =?utf-8?B?aDhzK25NQkV4Ukxac2QyNVY1Yk1FbnIwSFdNcUp0Q1BMNjl6TlNET1NxZCtZ?=
- =?utf-8?B?bVNCN1hqN2xSaWRuWGtKNmFrSDcrZFRUSm0wZmIvV0Vqcm5jVzlTRUFFUGtF?=
- =?utf-8?B?aENvNUprUGpBUU5XNWVRaVlZMFlhcFk5NnVyRlE4TnJud3h2enI4aHpyRm5P?=
- =?utf-8?B?R1g2UElaT0NsQjlHRkxpZGd4SEEvMFFPMkV1U3gvbUROUVF2UnlwOE96R3hK?=
- =?utf-8?B?d3JqYk92eForKzBmclFsYzJ6NmhycTl4UUswcml3bEpJMkRnbDNremtGTXFD?=
- =?utf-8?B?WnZXaDAxV0cxa0RtQ3VzQ0tzU2xpa2xZSnIrWDdzZ1ZtellqbHZ0U0hwQzNv?=
- =?utf-8?B?OVhHaHBmMktQZ1lyUUp6d3k5cUkvVUNrQVRTWlNNVDVXc1FsaS9JVzBITllV?=
- =?utf-8?B?U2RCa3h1NmhITFhHd3VGYitzTU54em54ZVFTTXpSMGt6R1hhR29DOVIxeit3?=
- =?utf-8?B?cHlTYWN4YXVxVFJXWjRoOXV5OGhISG5UVXNnWVB2S0ZxWnVVeXJUR1lnenow?=
- =?utf-8?B?ZHBLdkFEbUFZVWhnN1o3SzNRRkJ2Zk5ydFlrdEFxYkpwcUEyRVUvRUUvdEs5?=
- =?utf-8?B?RUFtMFRJQzdjUXlFMUhQVnI1MzRENmNBeUhkSk1hUXlRRFFhOFJZY1FqY1ly?=
- =?utf-8?B?ajBjVm1xNTFQQUNlOXlWWGhMc1ZtL3lHVGNORFJhaW5xUGFpaW1HeTVlTFhR?=
- =?utf-8?B?OGpHc1BvNGVDanFoODkzeXpaVWxWYTBMZEZGQWtSUWtsTXgyTVA4SHJGd3VL?=
- =?utf-8?B?LzlYckRwS25YbGcvd2NLSmh6bUREQkJMWEpPWjRhQllMcEFEajNKOUhKc1Fl?=
- =?utf-8?B?NWlvNkhTZ2ZjTXJRcWhoSW5DRXRnV0FPbnhtaEJ3Znk1dndBa0MzQTMrWXZX?=
- =?utf-8?B?c3Y3OE0zYTNEYVBNeUUzU0lkN3phemFjb21rSUFMSGtrdTk5NTFvU2YraERF?=
- =?utf-8?B?anRwQzZaOVhyd2htcVd2bld0dEVxVWdmTDNXR3pwU0Y0V24vcnp4UTdoSGp2?=
- =?utf-8?B?dXM4V3ZFQnN4NWNMRU0zM3QramtxeGNsMWRIKzcrcFdrSmJicXFsS0V2OXp4?=
- =?utf-8?B?RU5DRHcxcHJjNktvQ0VDd1BzTHArRDdOSEhxOVd0cGVtNjRFUkhHeDMySDNj?=
- =?utf-8?B?aUVQQXZlZ2Y5N2c1dFdvTm9OYy9YTTRQWUYzd0tXRkxaeEcremhnSE5ObGpr?=
- =?utf-8?B?MWN4K1RwRFRJYmFaMDZvWlo1anhiTnMzM1RRMWVxYzJKSU54T3ppbS9CRXA1?=
- =?utf-8?B?eno3aENReGJPZFlNakZlNHBWY1ovT1d4Y2hrZ3g3eXpFcVVBSXd2bmhscWkr?=
- =?utf-8?B?eVRkQWY5T3pTNGlRS1R4bW5EeWgyUEhKNTBmaHZXYlozZTh1a3pRT1pIUE40?=
- =?utf-8?B?VHZNUkV4Q21sV0lwbTJhVExIb1c4U09aWWV4RmgwWHpJRTY3Z2U3alBqVEZL?=
- =?utf-8?B?dUNQaktHZndYVUJYMDVudHAzUG53N1M1cEhlVEprRTFRK1ZKQWMySFk4bHBy?=
- =?utf-8?B?UjZTQkxLUzZZOGNBOUxETzJ4QjVqcG1yTVlvTXVkQVR0Q0tRSEVsSXFqaFpO?=
- =?utf-8?Q?plassOZ5b4XD/41bKHJ58zn/l?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52ce8907-5239-4bc8-2f15-08db44bbaad4
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2023 12:01:41.9945
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(376002)(396003)(346002)(39860400002)(136003)(451199021)(36840700001)(40470700004)(46966006)(70586007)(2616005)(336012)(426003)(83380400001)(36860700001)(4326008)(41300700001)(47076005)(31686004)(8676002)(8936002)(82740400003)(70206006)(356005)(81166007)(53546011)(5660300002)(316002)(110136005)(16576012)(186003)(7416002)(54906003)(40460700003)(31696002)(44832011)(478600001)(82310400005)(26005)(40480700001)(36756003)(86362001)(2906002)(21314003)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2023 12:08:35.6505
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2/2/+Tw7FUCLUxJCIerBFFGiYFpVzC3sCzT7E1p/3jRUgzLOcKZJwLWF1VsOoOQ4syhZeqkg9ScoYKyY666a0Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7819
+X-MS-Exchange-CrossTenant-Network-Message-Id: 38a56cba-dbed-4a7f-cfc8-08db44bca17d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN8NAM11FT077.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7409
 
-On 21.04.2023 15:59, Juergen Gross wrote:
-> Today it is not possible to analyse crash dumps of a system in
-> hypervisor mode when it had been booted via EFI, as the crash utility
-> doesn't understand the file format of xen.efi.
+Hi Ayan,
+
+On 13/04/2023 19:37, Ayan Kumar Halder wrote:
 > 
-> This can easily be solved by creating an ELF file from xen.efi via
-> objcopy. Using that file as name list for crash enables the user to
-> analyse the dump in hypervisor mode.
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Some Arm based hardware platforms which does not support LPAE
+> (eg Cortex-R52), uses 32 bit physical addresses.
+> Also, users may choose to use 32 bits to represent physical addresses
+> for optimization.
+> 
+> To support the above use cases, we have introduced arch independent
+> configs to choose if the physical address can be represented using
+> 32 bits (PHYS_ADDR_T_32) or 64 bits (!PHYS_ADDR_T_32).
+> For now only ARM_32 provides support to enable 32 bit physical
+> addressing.
+> 
+> When PHYS_ADDR_T_32 is defined, PADDR_BITS is set to 32.
+> When PHYS_ADDR_T_32 is not defined for ARM_32, PADDR_BITS is set to 40.
+> When PHYS_ADDR_T_32 is not defined for ARM_64, PADDR_BITS is set to 48.
+> The last two are same as the current configuration used today on Xen.
+> 
+> PADDR_BITS is also set to 48 when ARM_64 is defined. The reason being
+> the choice to select ARM_PA_BITS_32/ARM_PA_BITS_40/ARM_PA_BITS_48 is
+> currently allowed when ARM_32 is defined.
+> 
+> Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
 > ---
->  xen/Kconfig.debug     | 5 ++++-
->  xen/Makefile          | 4 ++++
->  xen/arch/x86/Makefile | 3 +++
->  3 files changed, 11 insertions(+), 1 deletion(-)
+> Changes from -
+> v1 - 1. Extracted from "[XEN v1 8/9] xen/arm: Other adaptations required to support 32bit paddr".
 > 
-> diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
-> index 94e818ee09..4aec0fd3aa 100644
-> --- a/xen/Kconfig.debug
-> +++ b/xen/Kconfig.debug
-> @@ -138,6 +138,9 @@ config DEBUG_INFO
->  	  the EFI boot partition (look for "INSTALL_EFI_STRIP" in
->  	  docs/misc/efi.pandoc for more information - when not using
->  	  "make install-xen" for installing xen.efi, stripping needs to be
-> -	  done outside the Xen build environment).
-> +	  done outside the Xen build environment). Note that stripping
-> +	  xen.efi using "INSTALL_EFI_STRIP" will disable the building of
-> +	  xen.efi.elf, which is needed for "crash" dump analysis of systems
-> +	  booted via EFI.
+> v2 - 1. Introduced Kconfig choice. ARM_64 can select PHYS_ADDR_64 only whereas
+> ARM_32 can select PHYS_ADDR_32 or PHYS_ADDR_64.
+> 2. For CONFIG_ARM_PA_32, paddr_t is defined as 'unsigned long'.
+> 
+> v3 - 1. Allow user to define PADDR_BITS by selecting different config options
+> ARM_PA_BITS_32, ARM_PA_BITS_40 and ARM_PA_BITS_48.
+> 2. Add the choice under "Architecture Features".
+> 
+> v4 - 1. Removed PHYS_ADDR_T_64 as !PHYS_ADDR_T_32 means PHYS_ADDR_T_32.
+> 
+>  xen/arch/Kconfig                     |  3 +++
+>  xen/arch/arm/Kconfig                 | 37 ++++++++++++++++++++++++++--
+>  xen/arch/arm/include/asm/page-bits.h |  6 +----
+>  xen/arch/arm/include/asm/types.h     |  6 +++++
+>  xen/arch/arm/mm.c                    |  5 ++++
+>  5 files changed, 50 insertions(+), 7 deletions(-)
+> 
+> diff --git a/xen/arch/Kconfig b/xen/arch/Kconfig
+> index 7028f7b74f..67ba38f32f 100644
+> --- a/xen/arch/Kconfig
+> +++ b/xen/arch/Kconfig
+> @@ -1,6 +1,9 @@
+>  config 64BIT
+>         bool
+> 
+> +config PHYS_ADDR_T_32
+> +       bool
+> +
+>  config NR_CPUS
+>         int "Maximum number of CPUs"
+>         range 1 4095
+> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+> index 239d3aed3c..3f6e13e475 100644
+> --- a/xen/arch/arm/Kconfig
+> +++ b/xen/arch/arm/Kconfig
+> @@ -19,13 +19,46 @@ config ARM
+>         select HAS_PMAP
+>         select IOMMU_FORCE_PT_SHARE
+> 
+> +menu "Architecture Features"
+> +
+> +choice
+> +       prompt "Physical address space size" if ARM_32
+Why is it protected by ARM_32 but in the next line you add something protected by ARM_64?
+This basically means that for arm64, ARM_PA_BITS_XXX is never defined.
 
-I'm afraid I don't understand this: INSTALL_EFI_STRIP only affects what
-may (optionally) be placed on the EFI partition. The normally installed
-xen.efi should be unaffected by this; an intermediate xen.efi.stripped
-is created instead.
+> +       default ARM_PA_BITS_48 if ARM_64
+> +       default ARM_PA_BITS_40 if ARM_32
+> +       help
+> +         User can choose to represent the width of physical address. This can
+> +         sometimes help in optimizing the size of image when user chooses a
+> +         smaller size to represent physical address.
+> +
+> +config ARM_PA_BITS_32
+> +       bool "32-bit"
+> +       help
+> +         On platforms where any physical address can be represented within 32 bits,
+> +         user should choose this option. This will help is reduced size of the
+> +         binary.
+> +       select PHYS_ADDR_T_32
+> +       depends on ARM_32
+> +
+> +config ARM_PA_BITS_40
+> +       bool "40-bit"
+> +       depends on ARM_32
+> +
+> +config ARM_PA_BITS_48
+> +       bool "40-bit"
+40-bit? I think this should be 48-bit.
 
-> --- a/xen/Makefile
-> +++ b/xen/Makefile
-> @@ -505,6 +505,9 @@ _install: $(TARGET)$(CONFIG_XEN_INSTALL_SUFFIX)
->  		if [ -e $(TARGET).efi.map ]; then \
->  			$(INSTALL_DATA) $(TARGET).efi.map $(D)$(DEBUG_DIR)/$(T)-$(XEN_FULLVERSION).efi.map; \
->  		fi; \
-> +		if [ -e $(TARGET).efi.elf ]; then \
-> +			$(INSTALL_DATA) $(TARGET).efi.elf $(D)$(DEBUG_DIR)/$(T)-$(XEN_FULLVERSION).efi.elf; \
-> +		fi; \
+> +       depends on ARM_48
+What is ARM_48? Shouldn't it be ARM_64?
+And if so, why bother defining it given everything here is protected by ARM_32.
 
-To avoid the risk of the two going out of sync (as also to limit
-redundancy), could you wrap the earlier "if" in a "for x in map elf;
-do ...; done" loop?
+> +endchoice
+> +
+> +config PADDR_BITS
+> +       int
+> +       default 32 if ARM_PA_BITS_32
+> +       default 40 if ARM_PA_BITS_40
+> +       default 48 if ARM_PA_BITS_48 || ARM_64
+This reads as if on arm32 we could have 48-bit PA space which is not true (LPAE is 40 bit unless I missed something).
+You could get rid of || ARM_64 if the choice wasn't protected by ARM_32 and fixing ARM_48 to ARM_64.
 
-> --- a/xen/arch/x86/Makefile
-> +++ b/xen/arch/x86/Makefile
-> @@ -224,6 +224,9 @@ endif
->  	$(MAKE) $(build)=$(@D) .$(@F).1r.o .$(@F).1s.o
->  	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds -N $< \
->  	      $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o $(orphan-handling-y) $(note_file_option) -o $@
-> +ifeq ($(CONFIG_DEBUG_INFO),y)
-> +	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),,$(OBJCOPY) -O elf64-x86-64 $@ $@.elf)
-> +endif
->  	$(NM) -pa --format=sysv $(@D)/$(@F) \
->  		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
->  	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
+> +
+>  config ARCH_DEFCONFIG
+>         string
+>         default "arch/arm/configs/arm32_defconfig" if ARM_32
+>         default "arch/arm/configs/arm64_defconfig" if ARM_64
+> 
+> -menu "Architecture Features"
+> -
+>  source "arch/Kconfig"
+> 
+>  config ACPI
+> diff --git a/xen/arch/arm/include/asm/page-bits.h b/xen/arch/arm/include/asm/page-bits.h
+> index 5d6477e599..deb381ceeb 100644
+> --- a/xen/arch/arm/include/asm/page-bits.h
+> +++ b/xen/arch/arm/include/asm/page-bits.h
+> @@ -3,10 +3,6 @@
+> 
+>  #define PAGE_SHIFT              12
+> 
+> -#ifdef CONFIG_ARM_64
+> -#define PADDR_BITS              48
+> -#else
+> -#define PADDR_BITS              40
+> -#endif
+> +#define PADDR_BITS              CONFIG_PADDR_BITS
+> 
+>  #endif /* __ARM_PAGE_SHIFT_H__ */
+> diff --git a/xen/arch/arm/include/asm/types.h b/xen/arch/arm/include/asm/types.h
+> index e218ed77bd..e3cfbbb060 100644
+> --- a/xen/arch/arm/include/asm/types.h
+> +++ b/xen/arch/arm/include/asm/types.h
+> @@ -34,9 +34,15 @@ typedef signed long long s64;
+>  typedef unsigned long long u64;
+>  typedef u32 vaddr_t;
+>  #define PRIvaddr PRIx32
+> +#if defined(CONFIG_PHYS_ADDR_T_32)
+> +typedef unsigned long paddr_t;
+> +#define INVALID_PADDR (~0UL)
+> +#define PRIpaddr "08lx"
+> +#else
+>  typedef u64 paddr_t;
+>  #define INVALID_PADDR (~0ULL)
+>  #define PRIpaddr "016llx"
+> +#endif
+>  typedef u32 register_t;
+>  #define PRIregister "08x"
+>  #elif defined (CONFIG_ARM_64)
+> diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+> index b99806af99..6dc37be97e 100644
+> --- a/xen/arch/arm/mm.c
+> +++ b/xen/arch/arm/mm.c
+> @@ -690,6 +690,11 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+>      const unsigned long mapping_size = frametable_size < MB(32) ? MB(2) : MB(32);
+>      int rc;
+> 
+> +    /*
+> +     * The size of paddr_t should be sufficient for the complete range of
+> +     * physical address.
+> +     */
+> +    BUILD_BUG_ON((sizeof(paddr_t) * 8) < PADDR_BITS);
+Just FYI, there is a macro BITS_PER_BYTE defined in bitops.h that you could use instead of 8.
+Although I'm not sure if this would be better :)
 
-Personally I think that - in case of build problems - having the map file
-created is more important (and less likely to fail) than the ELF one, so
-I'd prefer if the two steps could be ordered the other way around.
+>      BUILD_BUG_ON(sizeof(struct page_info) != PAGE_INFO_SIZE);
+> 
+>      if ( frametable_size > FRAMETABLE_SIZE )
+> --
+> 2.17.1
+> 
+> 
 
-Further I vaguely recall possible issues with entirely blank make rule
-lines. Plus having some trace of the command in a verbose log perhaps
-also wouldn't hurt. IOW maybe better add another use of the colon command
-here (we already have some, at least through $(MKRELOC)):
-
-ifeq ($(CONFIG_DEBUG_INFO),y)
-	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),:)$(OBJCOPY) -O elf64-x86-64 $@ $@.elf
-endif
-
-?
-
-Finally - do you really need to copy all the non-debug sections as well?
-Might --only-keep-debug be helpful here (provided it works for a PE/COFF
--> ELF copy operation; it looks to do so in my simple experiments)?
-
-Jan
+~Michal
 
