@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EEEC77B73
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06ABC6FD18
 	for <xen-devel@archiver.kernel.org>; Tue, 25 Apr 2023 17:27:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.526177.817740 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.526174.817709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1prMS4-0007qM-RY; Tue, 25 Apr 2023 17:27:40 +0000
+	id 1prMRw-0006y1-RM; Tue, 25 Apr 2023 17:27:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 526177.817740; Tue, 25 Apr 2023 17:27:40 +0000
+Received: by outflank-mailman (output) from mailman id 526174.817709; Tue, 25 Apr 2023 17:27:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1prMS4-0007q4-JP; Tue, 25 Apr 2023 17:27:40 +0000
-Received: by outflank-mailman (input) for mailman id 526177;
- Tue, 25 Apr 2023 17:27:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1prMRw-0006wt-MR; Tue, 25 Apr 2023 17:27:32 +0000
+Received: by outflank-mailman (input) for mailman id 526174;
+ Tue, 25 Apr 2023 17:27:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7Bb6=AQ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1prMS3-0007l5-Gq
- for xen-devel@lists.xenproject.org; Tue, 25 Apr 2023 17:27:39 +0000
+ id 1prMRw-0006fQ-B3
+ for xen-devel@lists.xenproject.org; Tue, 25 Apr 2023 17:27:32 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 78a1ec62-e38e-11ed-8611-37d641c3527e;
- Tue, 25 Apr 2023 19:27:37 +0200 (CEST)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 74cbded0-e38e-11ed-b223-6b7b168915f2;
+ Tue, 25 Apr 2023 19:27:31 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-319-1GkdNZ8vNFmRijBei6Lasw-1; Tue, 25 Apr 2023 13:27:30 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ us-mta-492-aQ75ElyHO6Sd8kPgmp3dug-1; Tue, 25 Apr 2023 13:27:22 -0400
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 57853885626;
- Tue, 25 Apr 2023 17:27:29 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4E5D9A0F391;
+ Tue, 25 Apr 2023 17:27:21 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.242])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6B06A2166B41;
- Tue, 25 Apr 2023 17:27:28 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B514514171B8;
+ Tue, 25 Apr 2023 17:27:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78a1ec62-e38e-11ed-8611-37d641c3527e
+X-Inumbo-ID: 74cbded0-e38e-11ed-b223-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1682443656;
+	s=mimecast20190719; t=1682443650;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=mEUiDYhTGG6/grGbCAPXx5jwh+m436EKZLWWN7O6BQM=;
-	b=LmFcph+6LbhJpiq7MdnyDQOSbqobS1ymcEFCay5kqgB8FYCdBXin46Qdhy395T9c0pNnFe
-	5vLtIQraJdzSPf7Ms7pgIK9qCZ6DONXRIzANCQuJv1unTM/n+pTsscdiMInYo3RiHvdKzv
-	AekbdPhDwvvQYLCOMHbLr06SszJU1bI=
-X-MC-Unique: 1GkdNZ8vNFmRijBei6Lasw-1
+	bh=6JkFpuuttzsHF3MmIyOMmXjxDhu1gSfxxf39pT8P3Wk=;
+	b=eOuOf6anvtgtNSlbHPqYrIMaflEVxvgijYK0CdXcZ+t+EOilYXID9tCjQSc25BLZATTlVS
+	2AEw35AEe5ebwEVKed9ANye+tbEhUMt2kQEBYCqj3lkEkIFBPeG/9eN3DP0/+C6bhSyEP5
+	3BjO4/tzM0yUcQLmgy5Ba3iJ08QuMDI=
+X-MC-Unique: aQ75ElyHO6Sd8kPgmp3dug-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
@@ -93,85 +93,144 @@ Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
 	Eduardo Habkost <eduardo@habkost.net>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Hanna Reitz <hreitz@redhat.com>,
-	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
-	Zhengui Li <lizhengui@huawei.com>,
-	Daniil Tatianin <d-tatianin@yandex-team.ru>
-Subject: [PATCH v4 04/20] virtio-scsi: stop using aio_disable_external() during unplug
-Date: Tue, 25 Apr 2023 13:27:00 -0400
-Message-Id: <20230425172716.1033562-5-stefanha@redhat.com>
+	Ronnie Sahlberg <ronniesahlberg@gmail.com>
+Subject: [PATCH v4 01/20] block-backend: split blk_do_set_aio_context()
+Date: Tue, 25 Apr 2023 13:26:57 -0400
+Message-Id: <20230425172716.1033562-2-stefanha@redhat.com>
 In-Reply-To: <20230425172716.1033562-1-stefanha@redhat.com>
 References: <20230425172716.1033562-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
 
-This patch is part of an effort to remove the aio_disable_external()
-API because it does not fit in a multi-queue block layer world where
-many AioContexts may be submitting requests to the same disk.
+blk_set_aio_context() is not fully transactional because
+blk_do_set_aio_context() updates blk->ctx outside the transaction. Most
+of the time this goes unnoticed but a BlockDevOps.drained_end() callback
+that invokes blk_get_aio_context() fails assert(ctx == blk->ctx). This
+happens because blk->ctx is only assigned after
+BlockDevOps.drained_end() is called and we're in an intermediate state
+where BlockDrvierState nodes already have the new context and the
+BlockBackend still has the old context.
 
-The SCSI emulation code is already in good shape to stop using
-aio_disable_external(). It was only used by commit 9c5aad84da1c
-("virtio-scsi: fixed virtio_scsi_ctx_check failed when detaching scsi
-disk") to ensure that virtio_scsi_hotunplug() works while the guest
-driver is submitting I/O.
+Making blk_set_aio_context() fully transactional solves this assertion
+failure because the BlockBackend's context is updated as part of the
+transaction (before BlockDevOps.drained_end() is called).
 
-Ensure virtio_scsi_hotunplug() is safe as follows:
+Split blk_do_set_aio_context() in order to solve this assertion failure.
+This helper function actually serves two different purposes:
+1. It drives blk_set_aio_context().
+2. It responds to BdrvChildClass->change_aio_ctx().
 
-1. qdev_simple_device_unplug_cb() -> qdev_unrealize() ->
-   device_set_realized() calls qatomic_set(&dev->realized, false) so
-   that future scsi_device_get() calls return NULL because they exclude
-   SCSIDevices with realized=false.
+Get rid of the helper function. Do #1 inside blk_set_aio_context() and
+do #2 inside blk_root_set_aio_ctx_commit(). This simplifies the code.
 
-   That means virtio-scsi will reject new I/O requests to this
-   SCSIDevice with VIRTIO_SCSI_S_BAD_TARGET even while
-   virtio_scsi_hotunplug() is still executing. We are protected against
-   new requests!
+The only drawback of the fully transactional approach is that
+blk_set_aio_context() must contend with blk_root_set_aio_ctx_commit()
+being invoked as part of the AioContext change propagation. This can be
+solved by temporarily setting blk->allow_aio_context_change to true.
 
-2. Add a call to scsi_device_purge_requests() from scsi_unrealize() so
-   that in-flight requests are cancelled synchronously. This ensures
-   that no in-flight requests remain once qdev_simple_device_unplug_cb()
-   returns.
+Future patches call blk_get_aio_context() from
+BlockDevOps->drained_end(), so this patch will become necessary.
 
-Thanks to these two conditions we don't need aio_disable_external()
-anymore.
-
-Cc: Zhengui Li <lizhengui@huawei.com>
-Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
-Reviewed-by: Daniil Tatianin <d-tatianin@yandex-team.ru>
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- hw/scsi/scsi-disk.c   | 1 +
- hw/scsi/virtio-scsi.c | 3 ---
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ block/block-backend.c | 71 +++++++++++++++++--------------------------
+ 1 file changed, 28 insertions(+), 43 deletions(-)
 
-diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-index 97c9b1c8cd..e01bd84541 100644
---- a/hw/scsi/scsi-disk.c
-+++ b/hw/scsi/scsi-disk.c
-@@ -2522,6 +2522,7 @@ static void scsi_realize(SCSIDevice *dev, Error **errp)
- 
- static void scsi_unrealize(SCSIDevice *dev)
- {
-+    scsi_device_purge_requests(dev, SENSE_CODE(RESET));
-     del_boot_device_lchs(&dev->qdev, NULL);
+diff --git a/block/block-backend.c b/block/block-backend.c
+index 5566ea059d..ffd1d66f7d 100644
+--- a/block/block-backend.c
++++ b/block/block-backend.c
+@@ -2199,52 +2199,31 @@ static AioContext *blk_aiocb_get_aio_context(BlockAIOCB *acb)
+     return blk_get_aio_context(blk_acb->blk);
  }
  
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index 000961446c..a02f9233ec 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -1061,11 +1061,8 @@ static void virtio_scsi_hotunplug(HotplugHandler *hotplug_dev, DeviceState *dev,
-     VirtIODevice *vdev = VIRTIO_DEVICE(hotplug_dev);
-     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
-     SCSIDevice *sd = SCSI_DEVICE(dev);
--    AioContext *ctx = s->ctx ?: qemu_get_aio_context();
+-static int blk_do_set_aio_context(BlockBackend *blk, AioContext *new_context,
+-                                  bool update_root_node, Error **errp)
+-{
+-    BlockDriverState *bs = blk_bs(blk);
+-    ThrottleGroupMember *tgm = &blk->public.throttle_group_member;
+-    int ret;
+-
+-    if (bs) {
+-        bdrv_ref(bs);
+-
+-        if (update_root_node) {
+-            /*
+-             * update_root_node MUST be false for blk_root_set_aio_ctx_commit(),
+-             * as we are already in the commit function of a transaction.
+-             */
+-            ret = bdrv_try_change_aio_context(bs, new_context, blk->root, errp);
+-            if (ret < 0) {
+-                bdrv_unref(bs);
+-                return ret;
+-            }
+-        }
+-        /*
+-         * Make blk->ctx consistent with the root node before we invoke any
+-         * other operations like drain that might inquire blk->ctx
+-         */
+-        blk->ctx = new_context;
+-        if (tgm->throttle_state) {
+-            bdrv_drained_begin(bs);
+-            throttle_group_detach_aio_context(tgm);
+-            throttle_group_attach_aio_context(tgm, new_context);
+-            bdrv_drained_end(bs);
+-        }
+-
+-        bdrv_unref(bs);
+-    } else {
+-        blk->ctx = new_context;
+-    }
+-
+-    return 0;
+-}
+-
+ int blk_set_aio_context(BlockBackend *blk, AioContext *new_context,
+                         Error **errp)
+ {
++    bool old_allow_change;
++    BlockDriverState *bs = blk_bs(blk);
++    int ret;
++
+     GLOBAL_STATE_CODE();
+-    return blk_do_set_aio_context(blk, new_context, true, errp);
++
++    if (!bs) {
++        blk->ctx = new_context;
++        return 0;
++    }
++
++    bdrv_ref(bs);
++
++    old_allow_change = blk->allow_aio_context_change;
++    blk->allow_aio_context_change = true;
++
++    ret = bdrv_try_change_aio_context(bs, new_context, NULL, errp);
++
++    blk->allow_aio_context_change = old_allow_change;
++
++    bdrv_unref(bs);
++    return ret;
+ }
  
--    aio_disable_external(ctx);
-     qdev_simple_device_unplug_cb(hotplug_dev, dev, errp);
--    aio_enable_external(ctx);
+ typedef struct BdrvStateBlkRootContext {
+@@ -2256,8 +2235,14 @@ static void blk_root_set_aio_ctx_commit(void *opaque)
+ {
+     BdrvStateBlkRootContext *s = opaque;
+     BlockBackend *blk = s->blk;
++    AioContext *new_context = s->new_ctx;
++    ThrottleGroupMember *tgm = &blk->public.throttle_group_member;
  
-     if (s->ctx) {
-         virtio_scsi_acquire(s);
+-    blk_do_set_aio_context(blk, s->new_ctx, false, &error_abort);
++    blk->ctx = new_context;
++    if (tgm->throttle_state) {
++        throttle_group_detach_aio_context(tgm);
++        throttle_group_attach_aio_context(tgm, new_context);
++    }
+ }
+ 
+ static TransactionActionDrv set_blk_root_context = {
 -- 
 2.39.2
 
