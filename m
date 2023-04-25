@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C85C6FD18
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Apr 2023 17:28:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.526192.817814 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F2AC77B61
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Apr 2023 17:28:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.526197.817831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1prMSM-0002lf-Pl; Tue, 25 Apr 2023 17:27:58 +0000
+	id 1prMSQ-0003TS-27; Tue, 25 Apr 2023 17:28:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 526192.817814; Tue, 25 Apr 2023 17:27:58 +0000
+Received: by outflank-mailman (output) from mailman id 526197.817831; Tue, 25 Apr 2023 17:28:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1prMSM-0002lQ-Jd; Tue, 25 Apr 2023 17:27:58 +0000
-Received: by outflank-mailman (input) for mailman id 526192;
- Tue, 25 Apr 2023 17:27:57 +0000
+	id 1prMSP-0003QU-O7; Tue, 25 Apr 2023 17:28:01 +0000
+Received: by outflank-mailman (input) for mailman id 526197;
+ Tue, 25 Apr 2023 17:28:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7Bb6=AQ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1prMSL-0007l5-Cl
- for xen-devel@lists.xenproject.org; Tue, 25 Apr 2023 17:27:57 +0000
+ id 1prMSO-0007l5-O5
+ for xen-devel@lists.xenproject.org; Tue, 25 Apr 2023 17:28:00 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 818b67b1-e38e-11ed-8611-37d641c3527e;
- Tue, 25 Apr 2023 19:27:52 +0200 (CEST)
+ id 855969ce-e38e-11ed-8611-37d641c3527e;
+ Tue, 25 Apr 2023 19:27:59 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-196-6D_FeGHnNl-RzOiCHv9FDA-1; Tue, 25 Apr 2023 13:27:48 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ us-mta-166-4yW8uuHRMwqs5zACvwosHQ-1; Tue, 25 Apr 2023 13:27:54 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E805487A9E6;
- Tue, 25 Apr 2023 17:27:46 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 444E887A9E8;
+ Tue, 25 Apr 2023 17:27:53 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.242])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1CE1E2166B41;
- Tue, 25 Apr 2023 17:27:45 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B7927C15BA0;
+ Tue, 25 Apr 2023 17:27:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 818b67b1-e38e-11ed-8611-37d641c3527e
+X-Inumbo-ID: 855969ce-e38e-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1682443671;
+	s=mimecast20190719; t=1682443677;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=l1BfjF5WOabKn8yxsLU/Ixv2u9YtxHZYDFF52BuLnDA=;
-	b=R3hAfaGqHbElLEBj5rTWRitcmgkqgDlMBepN/lfTDeTz/0w8D3OgY0R6yH+gWeB6oEVYQ/
-	+Y2GqMp4Z6ntVxXawasE9Rngg0vr7/rwddFMsHfjtNn4xB6vuCnJ5L177HT/NgwZtQ4ST5
-	VFHHOa61GMzklIFW8oruWmH3oaa4oao=
-X-MC-Unique: 6D_FeGHnNl-RzOiCHv9FDA-1
+	bh=AI5kqkdzipCjtseeQPE5/aVyAJxrbcrgigA/+qZzi/8=;
+	b=idZ+gkjmvrwYeE6c6KQnRkXUNMjTDeTpBaZZPJgqnsu9vZmQOvSnD+eemSKQjmdE1NBcme
+	1Ewy3ltVhx+d25ab+zfTV75mHM51VC6/j0cLXdaeocC/NZZ/+XnNGk/Yp9elP/UMUnoQNG
+	+TGFajP/qC0wLb/1Z57F523FHGsb64g=
+X-MC-Unique: 4yW8uuHRMwqs5zACvwosHQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
@@ -94,62 +94,146 @@ Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Hanna Reitz <hreitz@redhat.com>,
 	Ronnie Sahlberg <ronniesahlberg@gmail.com>
-Subject: [PATCH v4 12/20] hw/xen: do not set is_external=true on evtchn fds
-Date: Tue, 25 Apr 2023 13:27:08 -0400
-Message-Id: <20230425172716.1033562-13-stefanha@redhat.com>
+Subject: [PATCH v4 15/20] block/fuse: do not set is_external=true on FUSE fd
+Date: Tue, 25 Apr 2023 13:27:11 -0400
+Message-Id: <20230425172716.1033562-16-stefanha@redhat.com>
 In-Reply-To: <20230425172716.1033562-1-stefanha@redhat.com>
 References: <20230425172716.1033562-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
-
-is_external=true suspends fd handlers between aio_disable_external() and
-aio_enable_external(). The block layer's drain operation uses this
-mechanism to prevent new I/O from sneaking in between
-bdrv_drained_begin() and bdrv_drained_end().
-
-The previous commit converted the xen-block device to use BlockDevOps
-.drained_begin/end() callbacks. It no longer relies on is_external=true
-so it is safe to pass is_external=false.
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 
 This is part of ongoing work to remove the aio_disable_external() API.
 
+Use BlockDevOps .drained_begin/end/poll() instead of
+aio_set_fd_handler(is_external=true).
+
+As a side-effect the FUSE export now follows AioContext changes like the
+other export types.
+
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- hw/xen/xen-bus.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ block/export/fuse.c | 58 +++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 56 insertions(+), 2 deletions(-)
 
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index b8f408c9ed..bf256d4da2 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -842,14 +842,14 @@ void xen_device_set_event_channel_context(XenDevice *xendev,
+diff --git a/block/export/fuse.c b/block/export/fuse.c
+index 06fa41079e..65a7f4d723 100644
+--- a/block/export/fuse.c
++++ b/block/export/fuse.c
+@@ -50,6 +50,7 @@ typedef struct FuseExport {
+ 
+     struct fuse_session *fuse_session;
+     struct fuse_buf fuse_buf;
++    unsigned int in_flight; /* atomic */
+     bool mounted, fd_handler_set_up;
+ 
+     char *mountpoint;
+@@ -78,6 +79,42 @@ static void read_from_fuse_export(void *opaque);
+ static bool is_regular_file(const char *path, Error **errp);
+ 
+ 
++static void fuse_export_drained_begin(void *opaque)
++{
++    FuseExport *exp = opaque;
++
++    aio_set_fd_handler(exp->common.ctx,
++                       fuse_session_fd(exp->fuse_session), false,
++                       NULL, NULL, NULL, NULL, NULL);
++    exp->fd_handler_set_up = false;
++}
++
++static void fuse_export_drained_end(void *opaque)
++{
++    FuseExport *exp = opaque;
++
++    /* Refresh AioContext in case it changed */
++    exp->common.ctx = blk_get_aio_context(exp->common.blk);
++
++    aio_set_fd_handler(exp->common.ctx,
++                       fuse_session_fd(exp->fuse_session), false,
++                       read_from_fuse_export, NULL, NULL, NULL, exp);
++    exp->fd_handler_set_up = true;
++}
++
++static bool fuse_export_drained_poll(void *opaque)
++{
++    FuseExport *exp = opaque;
++
++    return qatomic_read(&exp->in_flight) > 0;
++}
++
++static const BlockDevOps fuse_export_blk_dev_ops = {
++    .drained_begin = fuse_export_drained_begin,
++    .drained_end   = fuse_export_drained_end,
++    .drained_poll  = fuse_export_drained_poll,
++};
++
+ static int fuse_export_create(BlockExport *blk_exp,
+                               BlockExportOptions *blk_exp_args,
+                               Error **errp)
+@@ -101,6 +138,15 @@ static int fuse_export_create(BlockExport *blk_exp,
+         }
      }
  
-     if (channel->ctx)
--        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+        aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                            NULL, NULL, NULL, NULL, NULL);
++    blk_set_dev_ops(exp->common.blk, &fuse_export_blk_dev_ops, exp);
++
++    /*
++     * We handle draining ourselves using an in-flight counter and by disabling
++     * the FUSE fd handler. Do not queue BlockBackend requests, they need to
++     * complete so the in-flight counter reaches zero.
++     */
++    blk_set_disable_request_queuing(exp->common.blk, true);
++
+     init_exports_table();
  
-     channel->ctx = ctx;
-     if (ctx) {
-         aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh),
--                           true, xen_device_event, NULL, xen_device_poll, NULL,
--                           channel);
-+                           false, xen_device_event, NULL, xen_device_poll,
-+                           NULL, channel);
-     }
+     /*
+@@ -224,7 +270,7 @@ static int setup_fuse_export(FuseExport *exp, const char *mountpoint,
+     g_hash_table_insert(exports, g_strdup(mountpoint), NULL);
+ 
+     aio_set_fd_handler(exp->common.ctx,
+-                       fuse_session_fd(exp->fuse_session), true,
++                       fuse_session_fd(exp->fuse_session), false,
+                        read_from_fuse_export, NULL, NULL, NULL, exp);
+     exp->fd_handler_set_up = true;
+ 
+@@ -246,6 +292,8 @@ static void read_from_fuse_export(void *opaque)
+ 
+     blk_exp_ref(&exp->common);
+ 
++    qatomic_inc(&exp->in_flight);
++
+     do {
+         ret = fuse_session_receive_buf(exp->fuse_session, &exp->fuse_buf);
+     } while (ret == -EINTR);
+@@ -256,6 +304,10 @@ static void read_from_fuse_export(void *opaque)
+     fuse_session_process_buf(exp->fuse_session, &exp->fuse_buf);
+ 
+ out:
++    if (qatomic_fetch_dec(&exp->in_flight) == 1) {
++        aio_wait_kick(); /* wake AIO_WAIT_WHILE() */
++    }
++
+     blk_exp_unref(&exp->common);
  }
  
-@@ -923,7 +923,7 @@ void xen_device_unbind_event_channel(XenDevice *xendev,
+@@ -268,7 +320,7 @@ static void fuse_export_shutdown(BlockExport *blk_exp)
  
-     QLIST_REMOVE(channel, list);
+         if (exp->fd_handler_set_up) {
+             aio_set_fd_handler(exp->common.ctx,
+-                               fuse_session_fd(exp->fuse_session), true,
++                               fuse_session_fd(exp->fuse_session), false,
+                                NULL, NULL, NULL, NULL, NULL);
+             exp->fd_handler_set_up = false;
+         }
+@@ -287,6 +339,8 @@ static void fuse_export_delete(BlockExport *blk_exp)
+ {
+     FuseExport *exp = container_of(blk_exp, FuseExport, common);
  
--    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), true,
-+    aio_set_fd_handler(channel->ctx, qemu_xen_evtchn_fd(channel->xeh), false,
-                        NULL, NULL, NULL, NULL, NULL);
- 
-     if (qemu_xen_evtchn_unbind(channel->xeh, channel->local_port) < 0) {
++    blk_set_dev_ops(exp->common.blk, NULL, NULL);
++
+     if (exp->fuse_session) {
+         if (exp->mounted) {
+             fuse_session_unmount(exp->fuse_session);
 -- 
 2.39.2
 
