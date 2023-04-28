@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1EBC77B60
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527226.819591 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B477C77B7F
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527228.819598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKql-00021c-WD; Fri, 28 Apr 2023 09:57:12 +0000
+	id 1psKqm-00028d-B6; Fri, 28 Apr 2023 09:57:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527226.819591; Fri, 28 Apr 2023 09:57:11 +0000
+Received: by outflank-mailman (output) from mailman id 527228.819598; Fri, 28 Apr 2023 09:57:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKql-0001z7-QA; Fri, 28 Apr 2023 09:57:11 +0000
-Received: by outflank-mailman (input) for mailman id 527226;
- Fri, 28 Apr 2023 09:53:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1psKqm-00025t-31; Fri, 28 Apr 2023 09:57:12 +0000
+Received: by outflank-mailman (input) for mailman id 527228;
+ Fri, 28 Apr 2023 09:54:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dCeu=AT=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
- id 1psKnH-0001iA-Dx
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:53:35 +0000
-Received: from out0-200.mail.aliyun.com (out0-200.mail.aliyun.com
- [140.205.0.200]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88079f65-e5aa-11ed-8611-37d641c3527e;
- Fri, 28 Apr 2023 11:53:33 +0200 (CEST)
+ id 1psKng-0001in-KE
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:54:00 +0000
+Received: from out0-208.mail.aliyun.com (out0-208.mail.aliyun.com
+ [140.205.0.208]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 96c1f67c-e5aa-11ed-b224-6b7b168915f2;
+ Fri, 28 Apr 2023 11:53:57 +0200 (CEST)
 Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
- fp:SMTPD_---.STFoGYl_1682675602) by smtp.aliyun-inc.com;
- Fri, 28 Apr 2023 17:53:23 +0800
+ fp:SMTPD_---.STFoGhB_1682675630) by smtp.aliyun-inc.com;
+ Fri, 28 Apr 2023 17:53:50 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,8 +41,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88079f65-e5aa-11ed-8611-37d641c3527e
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R211e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047212;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=17;SR=0;TI=SMTPD_---.STFoGYl_1682675602;
+X-Inumbo-ID: 96c1f67c-e5aa-11ed-b224-6b7b168915f2
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R111e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047206;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=14;SR=0;TI=SMTPD_---.STFoGhB_1682675630;
 From: "Hou Wenlong" <houwenlong.hwl@antgroup.com>
 To: linux-kernel@vger.kernel.org
 Cc: "Thomas Garnier" <thgarnie@chromium.org>,
@@ -51,79 +51,78 @@ Cc: "Thomas Garnier" <thgarnie@chromium.org>,
   "Hou Wenlong" <houwenlong.hwl@antgroup.com>,
   "Juergen Gross" <jgross@suse.com>,
   "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
-  "Darren Hart" <dvhart@infradead.org>,
-  "Andy Shevchenko" <andy@infradead.org>,
   "Thomas Gleixner" <tglx@linutronix.de>,
   "Ingo Molnar" <mingo@redhat.com>,
   "Borislav Petkov" <bp@alien8.de>,
   "Dave Hansen" <dave.hansen@linux.intel.com>,
    <x86@kernel.org>,
   "H. Peter Anvin" <hpa@zytor.com>,
-   <xen-devel@lists.xenproject.org>,
-   <platform-driver-x86@vger.kernel.org>
-Subject: [PATCH RFC 29/43] x86/PVH: Adapt PVH booting for PIE support
-Date: Fri, 28 Apr 2023 17:51:09 +0800
-Message-Id: <ea6994d2ab49a50cb5a8911c24562cd6d223c2b6.1682673543.git.houwenlong.hwl@antgroup.com>
+   <xen-devel@lists.xenproject.org>
+Subject: [PATCH RFC 37/43] x86/xen: Pin up to VSYSCALL_ADDR when vsyscall page is out of fixmap area
+Date: Fri, 28 Apr 2023 17:51:17 +0800
+Message-Id: <13975abd9b8b2e2e1e2efd3be6c341542b08af24.1682673543.git.houwenlong.hwl@antgroup.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 References: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If PIE is enabled, all symbol references would be RIP-relative. However,
-PVH booting runs in low address space, which could cause wrong x86_init
-callbacks assignment. Since init_top_pgt has building high kernel
-address mapping, let PVH booting runs in high address space to make all
-things right.
+If vsyscall page is moved out of fixmap area, then FIXADDR_TOP would be
+below vsyscall page. So it should pin up to VSYSCALL_ADDR if vsyscall is
+enabled.
 
-PVH booting assumes that no relocation happened. Since the kernel
-compile address is still in top 2G, so it is allowed to use R_X86_64_32S
-for symbol references in pvh_start_xen().
-
+Suggested-by: Lai Jiangshan <jiangshan.ljs@antgroup.com>
 Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
 Cc: Thomas Garnier <thgarnie@chromium.org>
-Cc: Lai Jiangshan <jiangshan.ljs@antgroup.com>
 Cc: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/platform/pvh/head.S | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+ arch/x86/xen/mmu_pv.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
-index 5842fe0e4f96..09518d4de042 100644
---- a/arch/x86/platform/pvh/head.S
-+++ b/arch/x86/platform/pvh/head.S
-@@ -94,6 +94,13 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
- 	/* 64-bit entry point. */
- 	.code64
- 1:
-+#ifdef CONFIG_X86_PIE
-+	movabs  $2f, %rax
-+	ANNOTATE_RETPOLINE_SAFE
-+	jmp *%rax
-+2:
-+	ANNOTATE_NOENDBR // above
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index a59bc013ee5b..28392f3478a0 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -587,6 +587,12 @@ static void xen_p4d_walk(struct mm_struct *mm, p4d_t *p4d,
+ 	xen_pud_walk(mm, pud, func, last, limit);
+ }
+ 
++#ifdef CONFIG_X86_VSYSCALL_EMULATION
++#define __KERNEL_MAP_TOP	(VSYSCALL_ADDR + PAGE_SIZE)
++#else
++#define __KERNEL_MAP_TOP	FIXADDR_TOP
 +#endif
- 	/* Set base address in stack canary descriptor. */
- 	mov $MSR_GS_BASE,%ecx
- #if defined(CONFIG_STACKPROTECTOR_FIXED)
-@@ -149,9 +156,15 @@ SYM_CODE_END(pvh_start_xen)
- 	.section ".init.data","aw"
- 	.balign 8
- SYM_DATA_START_LOCAL(gdt)
-+	/*
-+	 * Use an ASM_PTR (quad on x64) for _pa(gdt_start) because PIE requires
-+	 * a pointer size storage value before applying the relocation. On
-+	 * 32-bit _ASM_PTR will be a long which is aligned the space needed for
-+	 * relocation.
-+	 */
- 	.word gdt_end - gdt_start
--	.long _pa(gdt_start)
--	.word 0
-+	_ASM_PTR _pa(gdt_start)
-+	.balign 8
- SYM_DATA_END(gdt)
- SYM_DATA_START_LOCAL(gdt_start)
- 	.quad 0x0000000000000000            /* NULL descriptor */
++
+ /*
+  * (Yet another) pagetable walker.  This one is intended for pinning a
+  * pagetable.  This means that it walks a pagetable and calls the
+@@ -594,7 +600,7 @@ static void xen_p4d_walk(struct mm_struct *mm, p4d_t *p4d,
+  * at every level.  It walks the entire pagetable, but it only bothers
+  * pinning pte pages which are below limit.  In the normal case this
+  * will be STACK_TOP_MAX, but at boot we need to pin up to
+- * FIXADDR_TOP.
++ * __KERNEL_MAP_TOP.
+  *
+  * We must skip the Xen hole in the middle of the address space, just after
+  * the big x86-64 virtual hole.
+@@ -609,7 +615,7 @@ static void __xen_pgd_walk(struct mm_struct *mm, pgd_t *pgd,
+ 
+ 	/* The limit is the last byte to be touched */
+ 	limit--;
+-	BUG_ON(limit >= FIXADDR_TOP);
++	BUG_ON(limit >= __KERNEL_MAP_TOP);
+ 
+ 	/*
+ 	 * 64-bit has a great big hole in the middle of the address
+@@ -797,7 +803,7 @@ static void __init xen_after_bootmem(void)
+ #ifdef CONFIG_X86_VSYSCALL_EMULATION
+ 	SetPagePinned(virt_to_page(level3_user_vsyscall));
+ #endif
+-	xen_pgd_walk(&init_mm, xen_mark_pinned, FIXADDR_TOP);
++	xen_pgd_walk(&init_mm, xen_mark_pinned, __KERNEL_MAP_TOP);
+ }
+ 
+ static void xen_unpin_page(struct mm_struct *mm, struct page *page,
 -- 
 2.31.1
 
