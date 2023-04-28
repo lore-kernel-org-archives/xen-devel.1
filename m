@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 702B6C77B61
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 17:57:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527436.820011 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C209C77B61
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 17:58:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527442.820032 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psSLS-000630-9l; Fri, 28 Apr 2023 17:57:22 +0000
+	id 1psSMa-0006wW-WA; Fri, 28 Apr 2023 17:58:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527436.820011; Fri, 28 Apr 2023 17:57:22 +0000
+Received: by outflank-mailman (output) from mailman id 527442.820032; Fri, 28 Apr 2023 17:58:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psSLS-00062t-6a; Fri, 28 Apr 2023 17:57:22 +0000
-Received: by outflank-mailman (input) for mailman id 527436;
- Fri, 28 Apr 2023 17:57:21 +0000
+	id 1psSMa-0006wP-TH; Fri, 28 Apr 2023 17:58:32 +0000
+Received: by outflank-mailman (input) for mailman id 527442;
+ Fri, 28 Apr 2023 17:58:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SG5/=AT=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
- id 1psSLR-0005xG-IF
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 17:57:21 +0000
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060e.outbound.protection.outlook.com
- [2a01:111:f400:7e8a::60e])
+ id 1psSMY-0006fW-MZ
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 17:58:30 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20602.outbound.protection.outlook.com
+ [2a01:111:f400:fe59::602])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1dd676a4-e5ee-11ed-8611-37d641c3527e;
- Fri, 28 Apr 2023 19:57:19 +0200 (CEST)
-Received: from BN9PR03CA0781.namprd03.prod.outlook.com (2603:10b6:408:13f::6)
- by PH0PR12MB5450.namprd12.prod.outlook.com (2603:10b6:510:e8::22)
+ id 46a057dd-e5ee-11ed-8611-37d641c3527e;
+ Fri, 28 Apr 2023 19:58:28 +0200 (CEST)
+Received: from BN0PR03CA0009.namprd03.prod.outlook.com (2603:10b6:408:e6::14)
+ by MW4PR12MB7336.namprd12.prod.outlook.com (2603:10b6:303:21a::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.24; Fri, 28 Apr
- 2023 17:57:14 +0000
-Received: from BL02EPF000145B8.namprd05.prod.outlook.com
- (2603:10b6:408:13f:cafe::a2) by BN9PR03CA0781.outlook.office365.com
- (2603:10b6:408:13f::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.20; Fri, 28 Apr
+ 2023 17:58:23 +0000
+Received: from BL02EPF000145B9.namprd05.prod.outlook.com
+ (2603:10b6:408:e6:cafe::6a) by BN0PR03CA0009.outlook.office365.com
+ (2603:10b6:408:e6::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.24 via Frontend
- Transport; Fri, 28 Apr 2023 17:57:13 +0000
+ Transport; Fri, 28 Apr 2023 17:58:22 +0000
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF000145B8.mail.protection.outlook.com (10.167.241.208) with Microsoft
+ BL02EPF000145B9.mail.protection.outlook.com (10.167.241.209) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6340.15 via Frontend Transport; Fri, 28 Apr 2023 17:57:12 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ 15.20.6340.16 via Frontend Transport; Fri, 28 Apr 2023 17:58:21 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 28 Apr
- 2023 12:57:12 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 12:58:21 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 28 Apr
- 2023 12:57:12 -0500
+ 2023 10:58:21 -0700
 Received: from xcbayankuma41x.xilinx.com (10.180.168.240) by
  SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34
- via Frontend Transport; Fri, 28 Apr 2023 12:57:10 -0500
+ via Frontend Transport; Fri, 28 Apr 2023 12:58:19 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,22 +65,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1dd676a4-e5ee-11ed-8611-37d641c3527e
+X-Inumbo-ID: 46a057dd-e5ee-11ed-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=he8wUTrQyxRNVmeXe7Ck5g+D0hKqRwEnakTT1wUjuvoFcA+IJAwPljG7v3ECpqNcNK6PL1BC3N0k8PJLMNdY/VfMiKCXDYFkP6ywx8f09orF5dirJAOWcmtkAFeAbicWMjrPIi0+cJe0HwP06hcXY4yiBKEruJXPlt8t5+v/Astg0JnqOFqgMxcHLTpYa6oI94ecFZk39MKk9iNp0tPTWQ3cxdZE9B6mQZawlUCjrFWVDNgC5xBEp9XbDjJ0EajHjz13LoRQpgqAL4tF2W2WN8DNfJ1GcWYh+ErubZm+GeKAQVlNqu/9whOWI533bWAYPK//JC242HjzpNonKaFDbw==
+ b=WzksMsmhk12NDR98XFTADVbPMoJB/mP6ZdDktjdF6tKgm1tnGRRCJ1tcfRmX6AbNgqAPJMoYdiFNlAc0v6SfAm2nYKRpfOds4LT5FSyomFWpFWeO5O9UVeLc3ECWiAF1aN1KCBLTxihwp8/F7WUNCqNTmW8P99t1PL09+50tPv7CeQoxqoeA82rbjKYeEORhSuud/yBjr0gcF5VdQTuYBAcFG1z7fVahJKl48/F11k56O8r4uqCNXd0gL8pDwBwy9VdAgB230Gcv58pD4LkX5wbFiLjJGw5qV+IZbqnxS8NnU/84/hLWT/dm5h2tCWswSY7v6e+aMsu8K/Cbh/yhlg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RLOopyrCxXrFnZHqu61vRHbngeDUKnfARgP4fYXLREo=;
- b=FybGUtgmqipk6hdUXR3/shyYOHw0XPKvD9h4HIcwveVWYkFTFJboEuq9eXF2ukhBcHKovfjS4uSJFpoHDQol3igESY63KDFZUtLImacm23XpwBE58JnoPOxDawX301eN3/vfwX0R4e3fhoG7sKb9m3AXFSCDuqGtdcBK+ltW2HXUf0nURdwydwQXjFRUzXKdh52d3u6Ao06GT2gy+5mxOAZ5GW5nur9kB7zGe1M9Ikdatf0ong8WLdptM2Z83b6N+KNBKfxB1gUxWoMFHNBt/eo/SeycEJxx4i+zhnFptOxFNu30tKCSVTXBkpl3u3aFnOi0/EmzwFdnHt5MurU3Dw==
+ bh=2tVyky3bpGA94A0u00HDJgTdA9k/RVnS4Af0d6fVRvA=;
+ b=fQF/x4MM5AqutneDpqI22xMKWcGdaeec3R1MlzhF8qRymZ8WEK7qEUZsmoE7afDQ6pnWM/fM2Bp4/Y8VoXH1D4KqCcmOlOWeJCuYZ393tHMn9CVFKS6UeuoyiLr7urCOENPjOiCNNgzb4ELYJQTCtk//ub+yeBC8+/TP+LbmjPIt2Ag4PSUK4oHmUDg/Y4sxA+vIbmXPebm35WveaSZe5cvIjBXNvjJMzCnajlpdMXS/cOjvMc6PLrOe2r9ywfy47Ysoh9M6zf/e9VCLY9gt3Nzv0qTNJZ2q2qOAVq5PVbaAAVBNVeFWcWC7ExA0rKTr8Cwl8E3Eq8pv0E7CUTyqTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RLOopyrCxXrFnZHqu61vRHbngeDUKnfARgP4fYXLREo=;
- b=uJXBbTqwwF+Byazy7H5LHgoPgnwUbUKuXbg5xZom5YbzUva56uB35qku4C/owetAUoOMxjSg8bisDY87Zi/7sihCxm0MyUs3jCT8OYLgXMxeVc58kdkIoSCqEjpqIWWk0cezVawb6TVqMCQ9FrQwLlC7tN+pq0Ks8XK2r5ONk2k=
+ bh=2tVyky3bpGA94A0u00HDJgTdA9k/RVnS4Af0d6fVRvA=;
+ b=HjiuSLGbJ49bZNsoul9rdh+i0fjawHDEHXHD1t4nP6itLrLYYDYc+6HU1qPu86vtKPZyyW6v0m8l9CNrJXnEoatnxTThlVBv6o56kiEfTNlVabQ9MmOrS7MjHGk/q+57+bCi7nt+nMR0xwiJj99YTSRoWqfe3RkD6BJKuDpK+E8=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -94,9 +94,9 @@ CC: <sstabellini@kernel.org>, <stefano.stabellini@amd.com>, <julien@xen.org>,
 	<andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>, <jbeulich@suse.com>,
 	<wl@xen.org>, <rahul.singh@arm.com>, Ayan Kumar Halder
 	<ayan.kumar.halder@amd.com>
-Subject: [XEN v6 01/12] xen/arm: domain_build: Track unallocated pages using the frame number
-Date: Fri, 28 Apr 2023 18:55:32 +0100
-Message-ID: <20230428175543.11902-2-ayan.kumar.halder@amd.com>
+Subject: [XEN v6 03/12] xen/arm: Introduce a wrapper for dt_device_get_address() to handle paddr_t
+Date: Fri, 28 Apr 2023 18:55:34 +0100
+Message-ID: <20230428175543.11902-4-ayan.kumar.halder@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230428175543.11902-1-ayan.kumar.halder@amd.com>
 References: <20230428175543.11902-1-ayan.kumar.halder@amd.com>
@@ -104,171 +104,780 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF000145B8:EE_|PH0PR12MB5450:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa3189f5-981d-4e8f-e130-08db4811feb5
+X-MS-TrafficTypeDiagnostic: BL02EPF000145B9:EE_|MW4PR12MB7336:EE_
+X-MS-Office365-Filtering-Correlation-Id: 941913dc-7749-4620-501f-08db481227f6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	OiUpvXG3+lXoq17BnlvYznR4NfscNYqeRm5aEnuaqhyTML+zfRfomIWIXWLTSFjYcQe6i4XwWBmkJ28iie0zeKHm0/lFR1+iW+jKBkhDjaJM474trp/b17aNuHb/T7Taax0hZbJO5ddM/1i8zfFdCn/WE/F322e8FbJW3o0NIZ1rRcr/uZtuJMWsbajoqVwNM//7ZRaEhA4862drXLwu7+a7XVzxx2AR4oDUvkPb+USgiktt6sVcpTtH09mhoIw6SRuMlGFCmZ0NifZ9ryY5hWF1CSjGS/s6BUIrZDaHlFUbofoHTfdz6hyo9QS1UpU7qGcEOEAVSL56DWyFB88zF2V6BW4IxSgAHlNQ2lQr+5Uh6TbTO6JlzwAhWnG3lqt6wJFsXdddku2otmU3q3AILZYfNCYfiOKzfy3qwtkGdZa4sBBvSLFSwfDuO6YLJGbSc49pgQcLR2c1e3URQQJGtD+BqVtOBnMPdT+SZi3YXL6CgpSxswTw1gvF5XAdUlEqxS7S7GD5AuMqCq7NJy5t1HRMNGRt5PIzl3OjVI//tjAOQEZrpPdGohWDxnRrIby69TKxJt37ReobZ2f8CmYstrhkT6Iz82kDk+3XElGpjTpYN2bE56x+nxTcDOsMPIGHWMqdLbD1/uhvQ1+UII4vVoJ6Rb92uHy3bd28TKgVdAnMy+xo7wZykD+xi6lBMS9eZkiei3776VB7GT/OMSuaFfVcMEt7mZvj/Tptg1Z7cUZ+uuORQCcfTOKkskpDYQ80
+	k+iUGGqKqrI3/EBEtagkurlopE2gDcCASom5LczhICiQef5QEsCJ5u6NhI3cCUlCEPH9oDZGu439cdVwdINf9W5hWn/6VLX1l4yUhWDt57s2vBog5/umtakUd50j2gYs1t2lAmg5cCLBCoQ5n/8oB6mbY88H0cbDCiacCx+z7KVzTeV66kOgmwi6/vR6NfjkoU/OgvlaZbUVv2Un8VAfLK3lZzaZAT1pJ38GkSX/jz7q71odhP2e180PSFy5hn6CmaMCCSofKKmg+ZxWhXJf8PoMF0a74KDLQ7LlsLTutLQ63CPNZ23pPu5HAsSuI0Pe1db3mjCzbwyHwT4koLoVf2+Sdi0sL5EJOsbg7IgPSHmMymBqBG4sSXRzLlAl7q5y1UQuwZQnzSuCn94mJnWsmuzIEOF3eIwTknzfEbpfkRN9PDXL/A3h7kXTvfqOv44pFoP9i+D2S7BWscW6UuGEa3DAGpkcS9+l+HCgl+VMz5AyZKOVm89n2lSCC1n0P426cLSSfiIxXnZB17cSnQ5pm86yq8rLq+jMK8ZkDlDY4T/1lPrIURI6QnQt05cYN455KhCNDDoY0EfTGmFoEbfQTL7f5fB2YCtREdGc9BjXrc2dfWwxP1Qxiodt6IuTpor54Vmz6jp7fREcVWv8Cs7/wlQvMpHGgdDxDkUMakPAg+9gtaTxym7NBDRsCCFOWR4xalFMICcI6LEsm7W4P0L9c+fLltkOd8ZGdv3MwmPP7EM=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(346002)(396003)(376002)(136003)(451199021)(46966006)(36840700001)(40470700004)(8676002)(8936002)(7416002)(41300700001)(82740400003)(356005)(81166007)(36860700001)(316002)(2906002)(70206006)(70586007)(5660300002)(6916009)(82310400005)(4326008)(47076005)(83380400001)(426003)(336012)(2616005)(103116003)(54906003)(40480700001)(186003)(40460700003)(36756003)(86362001)(966005)(6666004)(1076003)(478600001)(26005)(21314003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(376002)(396003)(136003)(346002)(451199021)(40470700004)(36840700001)(46966006)(1076003)(2616005)(54906003)(83380400001)(47076005)(36860700001)(478600001)(40480700001)(6666004)(966005)(26005)(356005)(82740400003)(4326008)(6916009)(81166007)(70586007)(316002)(426003)(336012)(70206006)(186003)(7416002)(8676002)(41300700001)(40460700003)(8936002)(2906002)(30864003)(103116003)(82310400005)(86362001)(5660300002)(36756003)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2023 17:57:12.7564
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2023 17:58:21.9653
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa3189f5-981d-4e8f-e130-08db4811feb5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 941913dc-7749-4620-501f-08db481227f6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF000145B8.namprd05.prod.outlook.com
+	BL02EPF000145B9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5450
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7336
 
-rangeset_{xxx}_range() functions are invoked with 'start' and 'size' as
-arguments which are either 'uint64_t' or 'paddr_t'. However, the function
-accepts 'unsigned long' for 'start' and 'size'. 'unsigned long' is 32 bits for
-Arm32. Thus, there is an implicit downcasting from 'uint64_t'/'paddr_t' to
-'unsigned long' when invoking rangeset_{xxx}_range().
+dt_device_get_address() can accept uint64_t only for address and size.
+However, the address/size denotes physical addresses. Thus, they should
+be represented by 'paddr_t'.
+Consequently, we introduce a wrapper for dt_device_get_address() ie
+dt_device_get_paddr() which accepts address/size as paddr_t and inturn
+invokes dt_device_get_address() after converting address/size to
+uint64_t.
 
-So, it may seem there is a possibility of lose of data due to truncation.
+The reason for introducing this is that in future 'paddr_t' may not
+always be 64-bit. Thus, we need an explicit wrapper to do the type
+conversion and return an error in case of truncation.
 
-In reality, 'start' and 'size' are always page aligned. And Arm32 currently
-supports 40 bits as the width of physical address.
-So if the addresses are page aligned, the last 12 bits contain zeroes.
-Thus, we could instead pass page frame number which will contain 28 bits (40-12
-on Arm32) and this can be represented using 'unsigned long'.
-
-On Arm64, this change will not induce any adverse side effect as the max
-supported width of physical address is 48 bits. Thus, the width of 'gfn'
-(ie 48 - 12 = 36) can be represented using 'unsigned long' (which is 64 bits
-wide).
+With this, callers can now invoke dt_device_get_paddr().
 
 Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
 Changes from -
 
-v3 - 1. Extracted the patch from https://lists.xenproject.org/archives/html/xen-devel/2023-02/msg00657.html
-and added it to this series.
-2. Modified add_ext_regions(). This accepts a frame number instead of physical
-address.
+v1 - 1. New patch.
 
-v4 - 1. Reworded the commit message to use Arm32/Arm64
-(32-bit/64-bit Arm architecture).
-2. Replaced pfn with gfn to denote guest frame number in add_ext_regions().
-3. Use pfn_to_paddr() to return a physical address from the guest frame number.
+v2 - 1. Extracted part of "[XEN v2 05/11] xen/arm: Use paddr_t instead of u64 for address/size"
+into this patch.
 
-v5 - 1. Updated the commit message. Added R-b and A-b.
+2. dt_device_get_address() callers now invoke dt_device_get_paddr() instead.
 
- xen/arch/arm/domain_build.c | 27 +++++++++++++++++----------
- 1 file changed, 17 insertions(+), 10 deletions(-)
+3. Logged error in case of truncation.
+
+v3 - 1. Modified the truncation checks as "dt_addr != (paddr_t)dt_addr".
+2. Some sanity fixes.
+
+v4 - 1. Some sanity fixes.
+2. Preserved the declaration of dt_device_get_address() in
+xen/include/xen/device_tree.h. The reason being it is currently used by
+ns16550.c. This driver requires some more changes as pointed by Jan in
+https://lore.kernel.org/xen-devel/6196e90f-752e-e61a-45ce-37e46c22b812@suse.com/
+which is to be addressed as a separate series.
+
+v5 - 1. Removed initialization of variables.
+2. In dt_device_get_paddr(), added the check
+if ( !addr )
+    return -EINVAL; 
+
+ xen/arch/arm/domain_build.c                | 10 +++---
+ xen/arch/arm/gic-v2.c                      | 10 +++---
+ xen/arch/arm/gic-v3-its.c                  |  4 +--
+ xen/arch/arm/gic-v3.c                      | 10 +++---
+ xen/arch/arm/pci/pci-host-common.c         |  6 ++--
+ xen/arch/arm/platforms/brcm-raspberry-pi.c |  2 +-
+ xen/arch/arm/platforms/brcm.c              |  6 ++--
+ xen/arch/arm/platforms/exynos5.c           | 32 +++++++++---------
+ xen/arch/arm/platforms/sunxi.c             |  2 +-
+ xen/arch/arm/platforms/xgene-storm.c       |  2 +-
+ xen/common/device_tree.c                   | 39 ++++++++++++++++++++++
+ xen/drivers/char/cadence-uart.c            |  4 +--
+ xen/drivers/char/exynos4210-uart.c         |  4 +--
+ xen/drivers/char/imx-lpuart.c              |  4 +--
+ xen/drivers/char/meson-uart.c              |  4 +--
+ xen/drivers/char/mvebu-uart.c              |  4 +--
+ xen/drivers/char/omap-uart.c               |  4 +--
+ xen/drivers/char/pl011.c                   |  6 ++--
+ xen/drivers/char/scif-uart.c               |  4 +--
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c   |  8 ++---
+ xen/drivers/passthrough/arm/smmu-v3.c      |  2 +-
+ xen/drivers/passthrough/arm/smmu.c         |  8 ++---
+ xen/include/xen/device_tree.h              | 13 ++++++++
+ 23 files changed, 120 insertions(+), 68 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index f80fdd1af2..494611a3e5 100644
+index 270fb06139..1c558fca0c 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -1500,10 +1500,13 @@ static int __init make_resv_memory_node(const struct domain *d,
-     return res;
- }
- 
--static int __init add_ext_regions(unsigned long s, unsigned long e, void *data)
-+static int __init add_ext_regions(unsigned long s_gfn, unsigned long e_gfn,
-+                                  void *data)
- {
-     struct meminfo *ext_regions = data;
-     paddr_t start, size;
-+    paddr_t s = pfn_to_paddr(s_gfn);
-+    paddr_t e = pfn_to_paddr(e_gfn);
- 
-     if ( ext_regions->nr_banks >= ARRAY_SIZE(ext_regions->bank) )
-         return 0;
-@@ -1566,7 +1569,8 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
+@@ -1698,13 +1698,13 @@ static int __init find_memory_holes(const struct kernel_info *kinfo,
+     dt_for_each_device_node( dt_host, np )
      {
-         start = bootinfo.mem.bank[i].start;
-         end = bootinfo.mem.bank[i].start + bootinfo.mem.bank[i].size;
--        res = rangeset_add_range(unalloc_mem, start, end - 1);
-+        res = rangeset_add_range(unalloc_mem, PFN_DOWN(start),
-+                                 PFN_DOWN(end - 1));
-         if ( res )
+         unsigned int naddr;
+-        u64 addr, size;
++        paddr_t addr, size;
+ 
+         naddr = dt_number_of_address(np);
+ 
+         for ( i = 0; i < naddr; i++ )
          {
-             printk(XENLOG_ERR "Failed to add: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1580,7 +1584,8 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
-     {
-         start = assign_mem->bank[i].start;
-         end = assign_mem->bank[i].start + assign_mem->bank[i].size;
--        res = rangeset_remove_range(unalloc_mem, start, end - 1);
-+        res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
-+                                    PFN_DOWN(end - 1));
-         if ( res )
-         {
-             printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1595,7 +1600,8 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
-         start = bootinfo.reserved_mem.bank[i].start;
-         end = bootinfo.reserved_mem.bank[i].start +
-             bootinfo.reserved_mem.bank[i].size;
--        res = rangeset_remove_range(unalloc_mem, start, end - 1);
-+        res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start),
-+                                    PFN_DOWN(end - 1));
-         if ( res )
-         {
-             printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1607,7 +1613,7 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
-     /* Remove grant table region */
-     start = kinfo->gnttab_start;
-     end = kinfo->gnttab_start + kinfo->gnttab_size;
--    res = rangeset_remove_range(unalloc_mem, start, end - 1);
-+    res = rangeset_remove_range(unalloc_mem, PFN_DOWN(start), PFN_DOWN(end - 1));
-     if ( res )
-     {
-         printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1617,7 +1623,7 @@ static int __init find_unallocated_memory(const struct kernel_info *kinfo,
- 
-     start = 0;
-     end = (1ULL << p2m_ipa_bits) - 1;
--    res = rangeset_report_ranges(unalloc_mem, start, end,
-+    res = rangeset_report_ranges(unalloc_mem, PFN_DOWN(start), PFN_DOWN(end),
-                                  add_ext_regions, ext_regions);
-     if ( res )
-         ext_regions->nr_banks = 0;
-@@ -1639,7 +1645,7 @@ static int __init handle_pci_range(const struct dt_device_node *dev,
- 
-     start = addr & PAGE_MASK;
-     end = PAGE_ALIGN(addr + len);
--    res = rangeset_remove_range(mem_holes, start, end - 1);
-+    res = rangeset_remove_range(mem_holes, PFN_DOWN(start), PFN_DOWN(end - 1));
-     if ( res )
-     {
-         printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1677,7 +1683,7 @@ static int __init find_memory_holes(const struct kernel_info *kinfo,
-     /* Start with maximum possible addressable physical memory range */
-     start = 0;
-     end = (1ULL << p2m_ipa_bits) - 1;
--    res = rangeset_add_range(mem_holes, start, end);
-+    res = rangeset_add_range(mem_holes, PFN_DOWN(start), PFN_DOWN(end));
-     if ( res )
-     {
-         printk(XENLOG_ERR "Failed to add: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1708,7 +1714,8 @@ static int __init find_memory_holes(const struct kernel_info *kinfo,
- 
-             start = addr & PAGE_MASK;
-             end = PAGE_ALIGN(addr + size);
--            res = rangeset_remove_range(mem_holes, start, end - 1);
-+            res = rangeset_remove_range(mem_holes, PFN_DOWN(start),
-+                                        PFN_DOWN(end - 1));
+-            res = dt_device_get_address(np, i, &addr, &size);
++            res = dt_device_get_paddr(np, i, &addr, &size);
              if ( res )
              {
-                 printk(XENLOG_ERR "Failed to remove: %#"PRIpaddr"->%#"PRIpaddr"\n",
-@@ -1735,7 +1742,7 @@ static int __init find_memory_holes(const struct kernel_info *kinfo,
+                 printk(XENLOG_ERR "Unable to retrieve address %u for %s\n",
+@@ -2479,7 +2479,7 @@ static int __init handle_device(struct domain *d, struct dt_device_node *dev,
+     unsigned int naddr;
+     unsigned int i;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+     bool own_device = !dt_device_for_passthrough(dev);
+     /*
+      * We want to avoid mapping the MMIO in dom0 for the following cases:
+@@ -2534,7 +2534,7 @@ static int __init handle_device(struct domain *d, struct dt_device_node *dev,
+     /* Give permission and map MMIOs */
+     for ( i = 0; i < naddr; i++ )
+     {
+-        res = dt_device_get_address(dev, i, &addr, &size);
++        res = dt_device_get_paddr(dev, i, &addr, &size);
+         if ( res )
+         {
+             printk(XENLOG_ERR "Unable to retrieve address %u for %s\n",
+@@ -2965,7 +2965,7 @@ static int __init handle_passthrough_prop(struct kernel_info *kinfo,
+         if ( res )
+         {
+             printk(XENLOG_ERR "Unable to permit to dom%d access to"
+-                   " 0x%"PRIx64" - 0x%"PRIx64"\n",
++                   " 0x%"PRIpaddr" - 0x%"PRIpaddr"\n",
+                    kinfo->d->domain_id,
+                    mstart & PAGE_MASK, PAGE_ALIGN(mstart + size) - 1);
+             return res;
+diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
+index 5d4d298b86..6476ff4230 100644
+--- a/xen/arch/arm/gic-v2.c
++++ b/xen/arch/arm/gic-v2.c
+@@ -993,7 +993,7 @@ static void gicv2_extension_dt_init(const struct dt_device_node *node)
+             continue;
  
-     start = 0;
-     end = (1ULL << p2m_ipa_bits) - 1;
--    res = rangeset_report_ranges(mem_holes, start, end,
-+    res = rangeset_report_ranges(mem_holes, PFN_DOWN(start), PFN_DOWN(end),
-                                  add_ext_regions,  ext_regions);
+         /* Get register frame resource from DT. */
+-        if ( dt_device_get_address(v2m, 0, &addr, &size) )
++        if ( dt_device_get_paddr(v2m, 0, &addr, &size) )
+             panic("GICv2: Cannot find a valid v2m frame address\n");
+ 
+         /*
+@@ -1018,19 +1018,19 @@ static void __init gicv2_dt_init(void)
+     paddr_t vsize;
+     const struct dt_device_node *node = gicv2_info.node;
+ 
+-    res = dt_device_get_address(node, 0, &dbase, NULL);
++    res = dt_device_get_paddr(node, 0, &dbase, NULL);
      if ( res )
-         ext_regions->nr_banks = 0;
+         panic("GICv2: Cannot find a valid address for the distributor\n");
+ 
+-    res = dt_device_get_address(node, 1, &cbase, &csize);
++    res = dt_device_get_paddr(node, 1, &cbase, &csize);
+     if ( res )
+         panic("GICv2: Cannot find a valid address for the CPU\n");
+ 
+-    res = dt_device_get_address(node, 2, &hbase, NULL);
++    res = dt_device_get_paddr(node, 2, &hbase, NULL);
+     if ( res )
+         panic("GICv2: Cannot find a valid address for the hypervisor\n");
+ 
+-    res = dt_device_get_address(node, 3, &vbase, &vsize);
++    res = dt_device_get_paddr(node, 3, &vbase, &vsize);
+     if ( res )
+         panic("GICv2: Cannot find a valid address for the virtual CPU\n");
+ 
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 1ec9934191..3aa4edda10 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -1004,12 +1004,12 @@ static void gicv3_its_dt_init(const struct dt_device_node *node)
+      */
+     dt_for_each_child_node(node, its)
+     {
+-        uint64_t addr, size;
++        paddr_t addr, size;
+ 
+         if ( !dt_device_is_compatible(its, "arm,gic-v3-its") )
+             continue;
+ 
+-        if ( dt_device_get_address(its, 0, &addr, &size) )
++        if ( dt_device_get_paddr(its, 0, &addr, &size) )
+             panic("GICv3: Cannot find a valid ITS frame address\n");
+ 
+         add_to_host_its_list(addr, size, its);
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index bb59ea94cd..4e6c98bada 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -1377,7 +1377,7 @@ static void __init gicv3_dt_init(void)
+     int res, i;
+     const struct dt_device_node *node = gicv3_info.node;
+ 
+-    res = dt_device_get_address(node, 0, &dbase, NULL);
++    res = dt_device_get_paddr(node, 0, &dbase, NULL);
+     if ( res )
+         panic("GICv3: Cannot find a valid distributor address\n");
+ 
+@@ -1393,9 +1393,9 @@ static void __init gicv3_dt_init(void)
+ 
+     for ( i = 0; i < gicv3.rdist_count; i++ )
+     {
+-        uint64_t rdist_base, rdist_size;
++        paddr_t rdist_base, rdist_size;
+ 
+-        res = dt_device_get_address(node, 1 + i, &rdist_base, &rdist_size);
++        res = dt_device_get_paddr(node, 1 + i, &rdist_base, &rdist_size);
+         if ( res )
+             panic("GICv3: No rdist base found for region %d\n", i);
+ 
+@@ -1417,10 +1417,10 @@ static void __init gicv3_dt_init(void)
+      * For GICv3 supporting GICv2, GICC and GICV base address will be
+      * provided.
+      */
+-    res = dt_device_get_address(node, 1 + gicv3.rdist_count,
++    res = dt_device_get_paddr(node, 1 + gicv3.rdist_count,
+                                 &cbase, &csize);
+     if ( !res )
+-        dt_device_get_address(node, 1 + gicv3.rdist_count + 2,
++        dt_device_get_paddr(node, 1 + gicv3.rdist_count + 2,
+                               &vbase, &vsize);
+ }
+ 
+diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
+index a8ece94303..5550f9478d 100644
+--- a/xen/arch/arm/pci/pci-host-common.c
++++ b/xen/arch/arm/pci/pci-host-common.c
+@@ -93,7 +93,7 @@ gen_pci_init(struct dt_device_node *dev, const struct pci_ecam_ops *ops)
+         cfg_reg_idx = 0;
+ 
+     /* Parse our PCI ecam register address */
+-    err = dt_device_get_address(dev, cfg_reg_idx, &addr, &size);
++    err = dt_device_get_paddr(dev, cfg_reg_idx, &addr, &size);
+     if ( err )
+         goto err_exit;
+ 
+@@ -349,10 +349,10 @@ int __init pci_host_bridge_mappings(struct domain *d)
+ 
+         for ( i = 0; i < dt_number_of_address(dev); i++ )
+         {
+-            uint64_t addr, size;
++            paddr_t addr, size;
+             int err;
+ 
+-            err = dt_device_get_address(dev, i, &addr, &size);
++            err = dt_device_get_paddr(dev, i, &addr, &size);
+             if ( err )
+             {
+                 printk(XENLOG_ERR
+diff --git a/xen/arch/arm/platforms/brcm-raspberry-pi.c b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+index 811b40b1a6..407ec07f63 100644
+--- a/xen/arch/arm/platforms/brcm-raspberry-pi.c
++++ b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+@@ -64,7 +64,7 @@ static void __iomem *rpi4_map_watchdog(void)
+     if ( !node )
+         return NULL;
+ 
+-    ret = dt_device_get_address(node, 0, &start, &len);
++    ret = dt_device_get_paddr(node, 0, &start, &len);
+     if ( ret )
+     {
+         printk("Cannot read watchdog register address\n");
+diff --git a/xen/arch/arm/platforms/brcm.c b/xen/arch/arm/platforms/brcm.c
+index d481b2c60f..951e4d6cc3 100644
+--- a/xen/arch/arm/platforms/brcm.c
++++ b/xen/arch/arm/platforms/brcm.c
+@@ -40,7 +40,7 @@ static __init int brcm_get_dt_node(char *compat_str,
+                                    u32 *reg_base)
+ {
+     const struct dt_device_node *node;
+-    u64 reg_base_64;
++    paddr_t reg_base_paddr;
+     int rc;
+ 
+     node = dt_find_compatible_node(NULL, NULL, compat_str);
+@@ -50,7 +50,7 @@ static __init int brcm_get_dt_node(char *compat_str,
+         return -ENOENT;
+     }
+ 
+-    rc = dt_device_get_address(node, 0, &reg_base_64, NULL);
++    rc = dt_device_get_paddr(node, 0, &reg_base_paddr, NULL);
+     if ( rc )
+     {
+         dprintk(XENLOG_ERR, "%s: missing \"reg\" prop\n", __func__);
+@@ -61,7 +61,7 @@ static __init int brcm_get_dt_node(char *compat_str,
+         *dn = node;
+ 
+     if ( reg_base )
+-        *reg_base = reg_base_64;
++        *reg_base = reg_base_paddr;
+ 
+     return 0;
+ }
+diff --git a/xen/arch/arm/platforms/exynos5.c b/xen/arch/arm/platforms/exynos5.c
+index 6560507092..c48093cd4f 100644
+--- a/xen/arch/arm/platforms/exynos5.c
++++ b/xen/arch/arm/platforms/exynos5.c
+@@ -42,8 +42,8 @@ static int exynos5_init_time(void)
+     void __iomem *mct;
+     int rc;
+     struct dt_device_node *node;
+-    u64 mct_base_addr;
+-    u64 size;
++    paddr_t mct_base_addr;
++    paddr_t size;
+ 
+     node = dt_find_compatible_node(NULL, NULL, "samsung,exynos4210-mct");
+     if ( !node )
+@@ -52,14 +52,14 @@ static int exynos5_init_time(void)
+         return -ENXIO;
+     }
+ 
+-    rc = dt_device_get_address(node, 0, &mct_base_addr, &size);
++    rc = dt_device_get_paddr(node, 0, &mct_base_addr, &size);
+     if ( rc )
+     {
+         dprintk(XENLOG_ERR, "Error in \"samsung,exynos4210-mct\"\n");
+         return -ENXIO;
+     }
+ 
+-    dprintk(XENLOG_INFO, "mct_base_addr: %016llx size: %016llx\n",
++    dprintk(XENLOG_INFO, "mct_base_addr: 0x%"PRIpaddr" size: 0x%"PRIpaddr"\n",
+             mct_base_addr, size);
+ 
+     mct = ioremap_nocache(mct_base_addr, size);
+@@ -97,9 +97,9 @@ static int __init exynos5_smp_init(void)
+     struct dt_device_node *node;
+     void __iomem *sysram;
+     char *compatible;
+-    u64 sysram_addr;
+-    u64 size;
+-    u64 sysram_offset;
++    paddr_t sysram_addr;
++    paddr_t size;
++    paddr_t sysram_offset;
+     int rc;
+ 
+     node = dt_find_compatible_node(NULL, NULL, "samsung,secure-firmware");
+@@ -125,13 +125,13 @@ static int __init exynos5_smp_init(void)
+         return -ENXIO;
+     }
+ 
+-    rc = dt_device_get_address(node, 0, &sysram_addr, &size);
++    rc = dt_device_get_paddr(node, 0, &sysram_addr, &size);
+     if ( rc )
+     {
+         dprintk(XENLOG_ERR, "Error in %s\n", compatible);
+         return -ENXIO;
+     }
+-    dprintk(XENLOG_INFO, "sysram_addr: %016llx size: %016llx offset: %016llx\n",
++    dprintk(XENLOG_INFO,"sysram_addr: 0x%"PRIpaddr" size: 0x%"PRIpaddr"offset: 0x%"PRIpaddr"\n",
+             sysram_addr, size, sysram_offset);
+ 
+     sysram = ioremap_nocache(sysram_addr, size);
+@@ -189,7 +189,7 @@ static int exynos5_cpu_power_up(void __iomem *power, int cpu)
+     return 0;
+ }
+ 
+-static int exynos5_get_pmu_baseandsize(u64 *power_base_addr, u64 *size)
++static int exynos5_get_pmu_baseandsize(paddr_t *power_base_addr, paddr_t *size)
+ {
+     struct dt_device_node *node;
+     int rc;
+@@ -208,14 +208,14 @@ static int exynos5_get_pmu_baseandsize(u64 *power_base_addr, u64 *size)
+         return -ENXIO;
+     }
+ 
+-    rc = dt_device_get_address(node, 0, power_base_addr, size);
++    rc = dt_device_get_paddr(node, 0, power_base_addr, size);
+     if ( rc )
+     {
+         dprintk(XENLOG_ERR, "Error in \"samsung,exynos5XXX-pmu\"\n");
+         return -ENXIO;
+     }
+ 
+-    dprintk(XENLOG_DEBUG, "power_base_addr: %016llx size: %016llx\n",
++    dprintk(XENLOG_DEBUG, "power_base_addr: 0x%"PRIpaddr" size: 0x%"PRIpaddr"\n",
+             *power_base_addr, *size);
+ 
+     return 0;
+@@ -223,8 +223,8 @@ static int exynos5_get_pmu_baseandsize(u64 *power_base_addr, u64 *size)
+ 
+ static int exynos5_cpu_up(int cpu)
+ {
+-    u64 power_base_addr;
+-    u64 size;
++    paddr_t power_base_addr;
++    paddr_t size;
+     void __iomem *power;
+     int rc;
+ 
+@@ -256,8 +256,8 @@ static int exynos5_cpu_up(int cpu)
+ 
+ static void exynos5_reset(void)
+ {
+-    u64 power_base_addr;
+-    u64 size;
++    paddr_t power_base_addr;
++    paddr_t size;
+     void __iomem *pmu;
+     int rc;
+ 
+diff --git a/xen/arch/arm/platforms/sunxi.c b/xen/arch/arm/platforms/sunxi.c
+index e8e4d88bef..2b2c215f20 100644
+--- a/xen/arch/arm/platforms/sunxi.c
++++ b/xen/arch/arm/platforms/sunxi.c
+@@ -50,7 +50,7 @@ static void __iomem *sunxi_map_watchdog(bool *new_wdt)
+         return NULL;
+     }
+ 
+-    ret = dt_device_get_address(node, 0, &wdt_start, &wdt_len);
++    ret = dt_device_get_paddr(node, 0, &wdt_start, &wdt_len);
+     if ( ret )
+     {
+         dprintk(XENLOG_ERR, "Cannot read watchdog register address\n");
+diff --git a/xen/arch/arm/platforms/xgene-storm.c b/xen/arch/arm/platforms/xgene-storm.c
+index befd0c3c2d..6fc2f9679e 100644
+--- a/xen/arch/arm/platforms/xgene-storm.c
++++ b/xen/arch/arm/platforms/xgene-storm.c
+@@ -50,7 +50,7 @@ static void __init xgene_check_pirq_eoi(void)
+     if ( !node )
+         panic("%s: Can not find interrupt controller node\n", __func__);
+ 
+-    res = dt_device_get_address(node, 0, &dbase, NULL);
++    res = dt_device_get_paddr(node, 0, &dbase, NULL);
+     if ( res )
+         panic("%s: Cannot find a valid address for the distributor\n", __func__);
+ 
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 6c9712ab7b..2163cf26d0 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -955,6 +955,45 @@ int dt_device_get_address(const struct dt_device_node *dev, unsigned int index,
+     return 0;
+ }
+ 
++int dt_device_get_paddr(const struct dt_device_node *dev, unsigned int index,
++                        paddr_t *addr, paddr_t *size)
++{
++    uint64_t dt_addr, dt_size;
++    int ret;
++
++    ret = dt_device_get_address(dev, index, &dt_addr, &dt_size);
++    if ( ret )
++        return ret;
++
++    if ( !addr )
++        return -EINVAL;
++
++    if ( addr )
++    {
++        if ( dt_addr != (paddr_t)dt_addr )
++        {
++            printk("Error: Physical address 0x%"PRIx64" for node=%s is greater than max width (%zu bytes) supported\n",
++                   dt_addr, dev->name, sizeof(paddr_t));
++            return -ERANGE;
++        }
++
++        *addr = dt_addr;
++    }
++
++    if ( size )
++    {
++        if ( dt_size != (paddr_t)dt_size )
++        {
++            printk("Error: Physical size 0x%"PRIx64" for node=%s is greater than max width (%zu bytes) supported\n",
++                   dt_size, dev->name, sizeof(paddr_t));
++            return -ERANGE;
++        }
++
++        *size = dt_size;
++    }
++
++    return ret;
++}
+ 
+ int dt_for_each_range(const struct dt_device_node *dev,
+                       int (*cb)(const struct dt_device_node *,
+diff --git a/xen/drivers/char/cadence-uart.c b/xen/drivers/char/cadence-uart.c
+index 22905ba66c..c38d7ed143 100644
+--- a/xen/drivers/char/cadence-uart.c
++++ b/xen/drivers/char/cadence-uart.c
+@@ -158,14 +158,14 @@ static int __init cuart_init(struct dt_device_node *dev, const void *data)
+     const char *config = data;
+     struct cuart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+ 
+     uart = &cuart_com;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("cadence: Unable to retrieve the base"
+diff --git a/xen/drivers/char/exynos4210-uart.c b/xen/drivers/char/exynos4210-uart.c
+index 43aaf02e18..2503392ccd 100644
+--- a/xen/drivers/char/exynos4210-uart.c
++++ b/xen/drivers/char/exynos4210-uart.c
+@@ -303,7 +303,7 @@ static int __init exynos4210_uart_init(struct dt_device_node *dev,
+     const char *config = data;
+     struct exynos4210_uart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+@@ -316,7 +316,7 @@ static int __init exynos4210_uart_init(struct dt_device_node *dev,
+     uart->parity    = PARITY_NONE;
+     uart->stop_bits = 1;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("exynos4210: Unable to retrieve the base"
+diff --git a/xen/drivers/char/imx-lpuart.c b/xen/drivers/char/imx-lpuart.c
+index 9c1f3b71a3..77f70c2719 100644
+--- a/xen/drivers/char/imx-lpuart.c
++++ b/xen/drivers/char/imx-lpuart.c
+@@ -204,7 +204,7 @@ static int __init imx_lpuart_init(struct dt_device_node *dev,
+     const char *config = data;
+     struct imx_lpuart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+@@ -216,7 +216,7 @@ static int __init imx_lpuart_init(struct dt_device_node *dev,
+     uart->parity = 0;
+     uart->stop_bits = 1;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("imx8-lpuart: Unable to retrieve the base"
+diff --git a/xen/drivers/char/meson-uart.c b/xen/drivers/char/meson-uart.c
+index b1e25e0468..c627328122 100644
+--- a/xen/drivers/char/meson-uart.c
++++ b/xen/drivers/char/meson-uart.c
+@@ -209,14 +209,14 @@ static int __init meson_uart_init(struct dt_device_node *dev, const void *data)
+     const char *config = data;
+     struct meson_uart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+ 
+     uart = &meson_com;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("meson: Unable to retrieve the base address of the UART\n");
+diff --git a/xen/drivers/char/mvebu-uart.c b/xen/drivers/char/mvebu-uart.c
+index a00618b96f..cc55173513 100644
+--- a/xen/drivers/char/mvebu-uart.c
++++ b/xen/drivers/char/mvebu-uart.c
+@@ -231,14 +231,14 @@ static int __init mvebu_uart_init(struct dt_device_node *dev, const void *data)
+     const char *config = data;
+     struct mvebu3700_uart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+ 
+     uart = &mvebu3700_com;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("mvebu3700: Unable to retrieve the base address of the UART\n");
+diff --git a/xen/drivers/char/omap-uart.c b/xen/drivers/char/omap-uart.c
+index d6a5d59aa2..8e643cb039 100644
+--- a/xen/drivers/char/omap-uart.c
++++ b/xen/drivers/char/omap-uart.c
+@@ -324,7 +324,7 @@ static int __init omap_uart_init(struct dt_device_node *dev,
+     struct omap_uart *uart;
+     u32 clkspec;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+@@ -344,7 +344,7 @@ static int __init omap_uart_init(struct dt_device_node *dev,
+     uart->parity = UART_PARITY_NONE;
+     uart->stop_bits = 1;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("omap-uart: Unable to retrieve the base"
+diff --git a/xen/drivers/char/pl011.c b/xen/drivers/char/pl011.c
+index be67242bc0..052a651251 100644
+--- a/xen/drivers/char/pl011.c
++++ b/xen/drivers/char/pl011.c
+@@ -222,7 +222,7 @@ static struct uart_driver __read_mostly pl011_driver = {
+     .vuart_info   = pl011_vuart,
+ };
+ 
+-static int __init pl011_uart_init(int irq, u64 addr, u64 size, bool sbsa)
++static int __init pl011_uart_init(int irq, paddr_t addr, paddr_t size, bool sbsa)
+ {
+     struct pl011 *uart;
+ 
+@@ -258,14 +258,14 @@ static int __init pl011_dt_uart_init(struct dt_device_node *dev,
+ {
+     const char *config = data;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+     {
+         printk("WARNING: UART configuration is not supported\n");
+     }
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("pl011: Unable to retrieve the base"
+diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
+index 2fccafe340..1b28ba90e9 100644
+--- a/xen/drivers/char/scif-uart.c
++++ b/xen/drivers/char/scif-uart.c
+@@ -311,14 +311,14 @@ static int __init scif_uart_init(struct dt_device_node *dev,
+     const char *config = data;
+     struct scif_uart *uart;
+     int res;
+-    u64 addr, size;
++    paddr_t addr, size;
+ 
+     if ( strcmp(config, "") )
+         printk("WARNING: UART configuration is not supported\n");
+ 
+     uart = &scif_com;
+ 
+-    res = dt_device_get_address(dev, 0, &addr, &size);
++    res = dt_device_get_paddr(dev, 0, &addr, &size);
+     if ( res )
+     {
+         printk("scif-uart: Unable to retrieve the base"
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index 091f09b217..611d9eeba5 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -794,7 +794,7 @@ static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
+ static __init bool ipmmu_stage2_supported(void)
+ {
+     struct dt_device_node *np;
+-    uint64_t addr, size;
++    paddr_t addr, size;
+     void __iomem *base;
+     uint32_t product, cut;
+     bool stage2_supported = false;
+@@ -806,7 +806,7 @@ static __init bool ipmmu_stage2_supported(void)
+         return false;
+     }
+ 
+-    if ( dt_device_get_address(np, 0, &addr, &size) )
++    if ( dt_device_get_paddr(np, 0, &addr, &size) )
+     {
+         printk(XENLOG_ERR "ipmmu: Failed to get PRR MMIO\n");
+         return false;
+@@ -884,7 +884,7 @@ static int ipmmu_probe(struct dt_device_node *node)
+ {
+     const struct dt_device_match *match;
+     struct ipmmu_vmsa_device *mmu;
+-    uint64_t addr, size;
++    paddr_t addr, size;
+     uint32_t reg;
+     int irq, ret;
+ 
+@@ -905,7 +905,7 @@ static int ipmmu_probe(struct dt_device_node *node)
+     bitmap_zero(mmu->ctx, IPMMU_CTX_MAX);
+ 
+     /* Map I/O memory and request IRQ. */
+-    ret = dt_device_get_address(node, 0, &addr, &size);
++    ret = dt_device_get_paddr(node, 0, &addr, &size);
+     if ( ret )
+     {
+         dev_err(&node->dev, "Failed to get MMIO\n");
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index bfdb62b395..b7fa2e90f7 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -2428,7 +2428,7 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+ 	}
+ 
+ 	/* Base address */
+-	ret = dt_device_get_address(np, 0, &ioaddr, &iosize);
++	ret = dt_device_get_paddr(np, 0, &ioaddr, &iosize);
+ 	if (ret)
+ 		goto out_free_smmu;
+ 
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 0a514821b3..79281075ba 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -73,8 +73,8 @@
+ /* Xen: Helpers to get device MMIO and IRQs */
+ struct resource
+ {
+-	u64 addr;
+-	u64 size;
++	paddr_t addr;
++	paddr_t size;
+ 	unsigned int type;
+ };
+ 
+@@ -101,7 +101,7 @@ static struct resource *platform_get_resource(struct platform_device *pdev,
+ 
+ 	switch (type) {
+ 	case IORESOURCE_MEM:
+-		ret = dt_device_get_address(pdev, num, &res.addr, &res.size);
++		ret = dt_device_get_paddr(pdev, num, &res.addr, &res.size);
+ 
+ 		return ((ret) ? NULL : &res);
+ 
+@@ -169,7 +169,7 @@ static void __iomem *devm_ioremap_resource(struct device *dev,
+ 	ptr = ioremap_nocache(res->addr, res->size);
+ 	if (!ptr) {
+ 		dev_err(dev,
+-			"ioremap failed (addr 0x%"PRIx64" size 0x%"PRIx64")\n",
++			"ioremap failed (addr 0x%"PRIpaddr" size 0x%"PRIpaddr")\n",
+ 			res->addr, res->size);
+ 		return ERR_PTR(-ENOMEM);
+ 	}
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index 5f8f61aec8..ce25b89c4b 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -585,6 +585,19 @@ int dt_find_node_by_gpath(XEN_GUEST_HANDLE(char) u_path, uint32_t u_plen,
+  */
+ const struct dt_device_node *dt_get_parent(const struct dt_device_node *node);
+ 
++/**
++ * dt_device_get_paddr - Resolve an address for a device
++ * @device: the device whose address is to be resolved
++ * @index: index of the address to resolve
++ * @addr: address filled by this function
++ * @size: size filled by this function
++ *
++ * This function resolves an address, walking the tree, for a give
++ * device-tree node. It returns 0 on success.
++ */
++int dt_device_get_paddr(const struct dt_device_node *dev, unsigned int index,
++                        paddr_t *addr, paddr_t *size);
++
+ /**
+  * dt_device_get_address - Resolve an address for a device
+  * @device: the device whose address is to be resolved
 -- 
 2.17.1
 
