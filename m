@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C033C7EE22
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527229.819607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FB2C77B7F
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527222.819580 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKqm-0002Fa-OS; Fri, 28 Apr 2023 09:57:12 +0000
+	id 1psKql-0001pY-DD; Fri, 28 Apr 2023 09:57:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527229.819607; Fri, 28 Apr 2023 09:57:12 +0000
+Received: by outflank-mailman (output) from mailman id 527222.819580; Fri, 28 Apr 2023 09:57:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKqm-0002DX-DO; Fri, 28 Apr 2023 09:57:12 +0000
-Received: by outflank-mailman (input) for mailman id 527229;
- Fri, 28 Apr 2023 09:54:00 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1psKql-0001oz-9g; Fri, 28 Apr 2023 09:57:11 +0000
+Received: by outflank-mailman (input) for mailman id 527222;
+ Fri, 28 Apr 2023 09:52:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dCeu=AT=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
- id 1psKng-0001in-Rn
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:54:00 +0000
-Received: from out0-193.mail.aliyun.com (out0-193.mail.aliyun.com
- [140.205.0.193]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9675234d-e5aa-11ed-b224-6b7b168915f2;
- Fri, 28 Apr 2023 11:53:57 +0200 (CEST)
+ id 1psKma-0001fa-Sr
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:52:52 +0000
+Received: from out0-214.mail.aliyun.com (out0-214.mail.aliyun.com
+ [140.205.0.214]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6ebca779-e5aa-11ed-8611-37d641c3527e;
+ Fri, 28 Apr 2023 11:52:50 +0200 (CEST)
 Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
- fp:SMTPD_---.STFoGgp_1682675627) by smtp.aliyun-inc.com;
- Fri, 28 Apr 2023 17:53:48 +0800
+ fp:SMTPD_---.STFQGKD_1682675559) by smtp.aliyun-inc.com;
+ Fri, 28 Apr 2023 17:52:41 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,216 +41,418 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9675234d-e5aa-11ed-b224-6b7b168915f2
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R721e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047188;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=24;SR=0;TI=SMTPD_---.STFoGgp_1682675627;
+X-Inumbo-ID: 6ebca779-e5aa-11ed-8611-37d641c3527e
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R161e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047194;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=35;SR=0;TI=SMTPD_---.STFQGKD_1682675559;
 From: "Hou Wenlong" <houwenlong.hwl@antgroup.com>
 To: linux-kernel@vger.kernel.org
 Cc: "Thomas Garnier" <thgarnie@chromium.org>,
   "Lai Jiangshan" <jiangshan.ljs@antgroup.com>,
   "Kees Cook" <keescook@chromium.org>,
   "Hou Wenlong" <houwenlong.hwl@antgroup.com>,
-  "Andy Lutomirski" <luto@kernel.org>,
+  "Brian Gerst" <brgerst@gmail.com>,
   "Thomas Gleixner" <tglx@linutronix.de>,
   "Ingo Molnar" <mingo@redhat.com>,
   "Borislav Petkov" <bp@alien8.de>,
   "Dave Hansen" <dave.hansen@linux.intel.com>,
    <x86@kernel.org>,
   "H. Peter Anvin" <hpa@zytor.com>,
+  "Andy Lutomirski" <luto@kernel.org>,
   "Juergen Gross" <jgross@suse.com>,
-  "=?UTF-8?B?U3JpdmF0c2EgUy4gQmhhdCAoVk13YXJlKQ==?=" <srivatsa@csail.mit.edu>,
-  "Alexey Makhalov" <amakhalov@vmware.com>,
-  "VMware PV-Drivers Reviewers" <pv-drivers@vmware.com>,
   "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
-  "Andrew Morton" <akpm@linux-foundation.org>,
+  "Darren Hart" <dvhart@infradead.org>,
+  "Andy Shevchenko" <andy@infradead.org>,
+  "Nathan Chancellor" <nathan@kernel.org>,
+  "Nick Desaulniers" <ndesaulniers@google.com>,
+  "Tom Rix" <trix@redhat.com>,
+  "Peter Zijlstra" <peterz@infradead.org>,
   "=?UTF-8?B?TWlrZSBSYXBvcG9ydCAoSUJNKQ==?=" <rppt@kernel.org>,
-  "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
-  "Suren Baghdasaryan" <surenb@google.com>,
-  "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
-   <virtualization@lists.linux-foundation.org>,
-   <xen-devel@lists.xenproject.org>
-Subject: [PATCH RFC 36/43] x86/vsyscall: Don't use set_fixmap() to map vsyscall page
-Date: Fri, 28 Apr 2023 17:51:16 +0800
-Message-Id: <a77a84cc7fc4bf70bb8ac7fb6e55110e74bde3ca.1682673543.git.houwenlong.hwl@antgroup.com>
+  "Ashok Raj" <ashok.raj@intel.com>,
+  "Rick Edgecombe" <rick.p.edgecombe@intel.com>,
+  "Catalin Marinas" <catalin.marinas@arm.com>,
+  "Guo Ren" <guoren@kernel.org>,
+  "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+  "Jason A. Donenfeld" <Jason@zx2c4.com>,
+  "Pawan Gupta" <pawan.kumar.gupta@linux.intel.com>,
+  "Kim Phillips" <kim.phillips@amd.com>,
+  "David Woodhouse" <dwmw@amazon.co.uk>,
+  "Josh Poimboeuf" <jpoimboe@kernel.org>,
+   <xen-devel@lists.xenproject.org>,
+   <platform-driver-x86@vger.kernel.org>,
+   <llvm@lists.linux.dev>
+Subject: [PATCH RFC 16/43] x86-64: Use per-cpu stack canary if supported by compiler
+Date: Fri, 28 Apr 2023 17:50:56 +0800
+Message-Id: <7cee0c83225ffd8cf8fd0065bea9348f6db3b12a.1682673543.git.houwenlong.hwl@antgroup.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 References: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In order to unify FIXADDR_TOP for x86 and allow fixmap area to be
-moveable, vsyscall page should be mapped individually. However, for
-XENPV guest, vsyscall page needs to be mapped into user pagetable too.
-So introduce a new PVMMU op to help to map vsyscall page.
+From: Brian Gerst <brgerst@gmail.com>
 
-Suggested-by: Lai Jiangshan <jiangshan.ljs@antgroup.com>
+From: Brian Gerst <brgerst@gmail.com>
+
+If the compiler supports it, use a standard per-cpu variable for the
+stack protector instead of the old fixed location.  Keep the fixed
+location code for compatibility with older compilers.
+
+[Hou Wenlong: Disable it on Clang, adapt new code change and adapt
+missing GS set up path in pvh_start_xen()]
+
+Signed-off-by: Brian Gerst <brgerst@gmail.com>
+Co-developed-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
 Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
 Cc: Thomas Garnier <thgarnie@chromium.org>
+Cc: Lai Jiangshan <jiangshan.ljs@antgroup.com>
 Cc: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/entry/vsyscall/vsyscall_64.c |  3 +--
- arch/x86/include/asm/paravirt.h       |  7 +++++++
- arch/x86/include/asm/paravirt_types.h |  4 ++++
- arch/x86/include/asm/vsyscall.h       | 13 +++++++++++++
- arch/x86/kernel/paravirt.c            |  4 ++++
- arch/x86/xen/mmu_pv.c                 | 20 ++++++++++++++------
- 6 files changed, 43 insertions(+), 8 deletions(-)
+ arch/x86/Kconfig                      | 12 ++++++++++++
+ arch/x86/Makefile                     | 21 ++++++++++++++-------
+ arch/x86/entry/entry_64.S             |  6 +++++-
+ arch/x86/include/asm/processor.h      | 17 ++++++++++++-----
+ arch/x86/include/asm/stackprotector.h | 16 +++++++---------
+ arch/x86/kernel/asm-offsets_64.c      |  2 +-
+ arch/x86/kernel/cpu/common.c          | 15 +++++++--------
+ arch/x86/kernel/head_64.S             | 16 ++++++++++------
+ arch/x86/kernel/vmlinux.lds.S         |  4 +++-
+ arch/x86/platform/pvh/head.S          |  8 ++++++++
+ arch/x86/xen/xen-head.S               | 14 +++++++++-----
+ 11 files changed, 88 insertions(+), 43 deletions(-)
 
-diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
-index e0ca8120aea8..4373460ebbde 100644
---- a/arch/x86/entry/vsyscall/vsyscall_64.c
-+++ b/arch/x86/entry/vsyscall/vsyscall_64.c
-@@ -385,8 +385,7 @@ void __init map_vsyscall(void)
- 	 * page.
- 	 */
- 	if (vsyscall_mode == EMULATE) {
--		__set_fixmap(VSYSCALL_PAGE, physaddr_vsyscall,
--			     PAGE_KERNEL_VVAR);
-+		__set_vsyscall_page(physaddr_vsyscall, PAGE_KERNEL_VVAR);
- 		set_vsyscall_pgtable_user_bits(swapper_pg_dir);
- 	}
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 68e5da464b96..55cce8cdf9bd 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -410,6 +410,18 @@ config CC_HAS_SANE_STACKPROTECTOR
+ 	  the compiler produces broken code or if it does not let us control
+ 	  the segment on 32-bit kernels.
  
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 2350ceb43db0..dcc0706287ee 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -576,6 +576,13 @@ static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
++config CC_HAS_CUSTOMIZED_STACKPROTECTOR
++	bool
++	# Although clang supports -mstack-protector-guard-reg option, it
++	# would generate GOT reference for __stack_chk_guard even with
++	# -fno-PIE flag.
++	default y if (!CC_IS_CLANG && $(cc-option,-mstack-protector-guard-reg=gs))
++
++config STACKPROTECTOR_FIXED
++	bool
++	depends on X86_64 && STACKPROTECTOR
++	default !CC_HAS_CUSTOMIZED_STACKPROTECTOR
++
+ menu "Processor type and features"
+ 
+ config SMP
+diff --git a/arch/x86/Makefile b/arch/x86/Makefile
+index b39975977c03..57e4dbbf501d 100644
+--- a/arch/x86/Makefile
++++ b/arch/x86/Makefile
+@@ -111,13 +111,7 @@ ifeq ($(CONFIG_X86_32),y)
+         # temporary until string.h is fixed
+         KBUILD_CFLAGS += -ffreestanding
+ 
+-	ifeq ($(CONFIG_STACKPROTECTOR),y)
+-		ifeq ($(CONFIG_SMP),y)
+-			KBUILD_CFLAGS += -mstack-protector-guard-reg=fs -mstack-protector-guard-symbol=__stack_chk_guard
+-		else
+-			KBUILD_CFLAGS += -mstack-protector-guard=global
+-		endif
+-	endif
++	percpu_seg := fs
+ else
+         BITS := 64
+         UTS_MACHINE := x86_64
+@@ -167,6 +161,19 @@ else
+         KBUILD_CFLAGS += -mcmodel=kernel
+         KBUILD_RUSTFLAGS += -Cno-redzone=y
+         KBUILD_RUSTFLAGS += -Ccode-model=kernel
++
++	percpu_seg := gs
++endif
++
++ifeq ($(CONFIG_STACKPROTECTOR),y)
++	ifneq ($(CONFIG_STACKPROTECTOR_FIXED),y)
++		ifeq ($(CONFIG_SMP),y)
++			KBUILD_CFLAGS += -mstack-protector-guard-reg=$(percpu_seg) \
++					 -mstack-protector-guard-symbol=__stack_chk_guard
++		else
++			KBUILD_CFLAGS += -mstack-protector-guard=global
++		endif
++	endif
+ endif
+ 
+ #
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index 6f2297ebb15f..df79b7aa65bb 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -229,6 +229,10 @@ SYM_INNER_LABEL(entry_SYSRETQ_end, SYM_L_GLOBAL)
+ 	int3
+ SYM_CODE_END(entry_SYSCALL_64)
+ 
++#ifdef CONFIG_STACKPROTECTOR_FIXED
++#define __stack_chk_guard fixed_percpu_data + FIXED_stack_canary
++#endif
++
+ /*
+  * %rdi: prev task
+  * %rsi: next task
+@@ -252,7 +256,7 @@ SYM_FUNC_START(__switch_to_asm)
+ 
+ #ifdef CONFIG_STACKPROTECTOR
+ 	movq	TASK_stack_canary(%rsi), %rbx
+-	movq	%rbx, PER_CPU_VAR(fixed_percpu_data) + FIXED_stack_canary
++	movq	%rbx, PER_CPU_VAR(__stack_chk_guard)
+ #endif
+ 
+ 	/*
+diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
+index 2a5ec5750ba7..3890f609569d 100644
+--- a/arch/x86/include/asm/processor.h
++++ b/arch/x86/include/asm/processor.h
+@@ -379,6 +379,8 @@ struct irq_stack {
+ } __aligned(IRQ_STACK_SIZE);
+ 
+ #ifdef CONFIG_X86_64
++
++#ifdef CONFIG_STACKPROTECTOR_FIXED
+ struct fixed_percpu_data {
+ 	/*
+ 	 * GCC hardcodes the stack canary as %gs:40.  Since the
+@@ -394,21 +396,26 @@ struct fixed_percpu_data {
+ 
+ DECLARE_PER_CPU_FIRST(struct fixed_percpu_data, fixed_percpu_data) __visible;
+ DECLARE_INIT_PER_CPU(fixed_percpu_data);
++#endif /* CONFIG_STACKPROTECTOR_FIXED */
+ 
+ static inline unsigned long cpu_kernelmode_gs_base(int cpu)
  {
- 	pv_ops.mmu.set_fixmap(idx, phys, flags);
- }
-+
-+#ifdef CONFIG_X86_VSYSCALL_EMULATION
-+static inline void __set_vsyscall_page(phys_addr_t phys, pgprot_t flags)
-+{
-+	pv_ops.mmu.set_vsyscall_page(phys, flags);
-+}
-+#endif
- #endif
- 
- #if defined(CONFIG_SMP) && defined(CONFIG_PARAVIRT_SPINLOCKS)
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 982a234f5a06..e79f38232849 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -224,6 +224,10 @@ struct pv_mmu_ops {
- 	   an mfn.  We can tell which is which from the index. */
- 	void (*set_fixmap)(unsigned /* enum fixed_addresses */ idx,
- 			   phys_addr_t phys, pgprot_t flags);
-+
-+#ifdef CONFIG_X86_VSYSCALL_EMULATION
-+	void (*set_vsyscall_page)(phys_addr_t phys, pgprot_t flags);
-+#endif
- #endif
- } __no_randomize_layout;
- 
-diff --git a/arch/x86/include/asm/vsyscall.h b/arch/x86/include/asm/vsyscall.h
-index ab60a71a8dcb..73691fc60924 100644
---- a/arch/x86/include/asm/vsyscall.h
-+++ b/arch/x86/include/asm/vsyscall.h
-@@ -2,6 +2,7 @@
- #ifndef _ASM_X86_VSYSCALL_H
- #define _ASM_X86_VSYSCALL_H
- 
-+#include <asm/pgtable.h>
- #include <linux/seqlock.h>
- #include <uapi/asm/vsyscall.h>
- 
-@@ -15,6 +16,18 @@ extern void set_vsyscall_pgtable_user_bits(pgd_t *root);
-  */
- extern bool emulate_vsyscall(unsigned long error_code,
- 			     struct pt_regs *regs, unsigned long address);
-+static inline void native_set_vsyscall_page(phys_addr_t phys, pgprot_t flags)
-+{
-+	pgprot_val(flags) &= __default_kernel_pte_mask;
-+	set_pte_vaddr(VSYSCALL_ADDR, pfn_pte(phys >> PAGE_SHIFT, flags));
-+}
-+
-+#ifndef CONFIG_PARAVIRT_XXL
-+#define __set_vsyscall_page	native_set_vsyscall_page
++#ifdef CONFIG_STACKPROTECTOR_FIXED
+ 	return (unsigned long)per_cpu(fixed_percpu_data.gs_base, cpu);
 +#else
-+#include <asm/paravirt.h>
++#ifdef CONFIG_SMP
++	return per_cpu_offset(cpu);
++#else
++	return 0;
++#endif
++#endif
+ }
+ 
+ extern asmlinkage void ignore_sysret(void);
+ 
+ /* Save actual FS/GS selectors and bases to current->thread */
+ void current_save_fsgs(void);
+-#else	/* X86_64 */
+-#ifdef CONFIG_STACKPROTECTOR
+-DECLARE_PER_CPU(unsigned long, __stack_chk_guard);
+-#endif
+-#endif	/* !X86_64 */
++#endif	/* X86_64 */
+ 
+ struct perf_event;
+ 
+diff --git a/arch/x86/include/asm/stackprotector.h b/arch/x86/include/asm/stackprotector.h
+index 00473a650f51..24aa0e2ad0dd 100644
+--- a/arch/x86/include/asm/stackprotector.h
++++ b/arch/x86/include/asm/stackprotector.h
+@@ -36,6 +36,12 @@
+ 
+ #include <linux/sched.h>
+ 
++#ifdef CONFIG_STACKPROTECTOR_FIXED
++#define __stack_chk_guard fixed_percpu_data.stack_canary
++#else
++DECLARE_PER_CPU(unsigned long, __stack_chk_guard);
 +#endif
 +
- #else
- static inline void map_vsyscall(void) {}
- static inline bool emulate_vsyscall(unsigned long error_code,
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index ac10b46c5832..13c81402f377 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -33,6 +33,7 @@
- #include <asm/tlb.h>
- #include <asm/io_bitmap.h>
- #include <asm/gsseg.h>
-+#include <asm/vsyscall.h>
+ /*
+  * Initialize the stackprotector canary value.
+  *
+@@ -51,25 +57,17 @@ static __always_inline void boot_init_stack_canary(void)
+ {
+ 	unsigned long canary = get_random_canary();
+ 
+-#ifdef CONFIG_X86_64
++#ifdef CONFIG_STACKPROTECTOR_FIXED
+ 	BUILD_BUG_ON(offsetof(struct fixed_percpu_data, stack_canary) != 40);
+ #endif
+ 
+ 	current->stack_canary = canary;
+-#ifdef CONFIG_X86_64
+-	this_cpu_write(fixed_percpu_data.stack_canary, canary);
+-#else
+ 	this_cpu_write(__stack_chk_guard, canary);
+-#endif
+ }
+ 
+ static inline void cpu_init_stack_canary(int cpu, struct task_struct *idle)
+ {
+-#ifdef CONFIG_X86_64
+-	per_cpu(fixed_percpu_data.stack_canary, cpu) = idle->stack_canary;
+-#else
+ 	per_cpu(__stack_chk_guard, cpu) = idle->stack_canary;
+-#endif
+ }
+ 
+ #else	/* STACKPROTECTOR */
+diff --git a/arch/x86/kernel/asm-offsets_64.c b/arch/x86/kernel/asm-offsets_64.c
+index bb65371ea9df..f39baf90126c 100644
+--- a/arch/x86/kernel/asm-offsets_64.c
++++ b/arch/x86/kernel/asm-offsets_64.c
+@@ -56,7 +56,7 @@ int main(void)
+ 
+ 	BLANK();
+ 
+-#ifdef CONFIG_STACKPROTECTOR
++#ifdef CONFIG_STACKPROTECTOR_FIXED
+ 	OFFSET(FIXED_stack_canary, fixed_percpu_data, stack_canary);
+ 	BLANK();
+ #endif
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 3ea06b0b4570..972b1babf731 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2051,10 +2051,6 @@ DEFINE_PER_CPU_ALIGNED(struct pcpu_hot, pcpu_hot) = {
+ EXPORT_PER_CPU_SYMBOL(pcpu_hot);
+ 
+ #ifdef CONFIG_X86_64
+-DEFINE_PER_CPU_FIRST(struct fixed_percpu_data,
+-		     fixed_percpu_data) __aligned(PAGE_SIZE) __visible;
+-EXPORT_PER_CPU_SYMBOL_GPL(fixed_percpu_data);
+-
+ static void wrmsrl_cstar(unsigned long val)
+ {
+ 	/*
+@@ -2102,15 +2098,18 @@ void syscall_init(void)
+ 	       X86_EFLAGS_IOPL|X86_EFLAGS_NT|X86_EFLAGS_RF|
+ 	       X86_EFLAGS_AC|X86_EFLAGS_ID);
+ }
+-
+-#else	/* CONFIG_X86_64 */
++#endif	/* CONFIG_X86_64 */
+ 
+ #ifdef CONFIG_STACKPROTECTOR
++#ifdef CONFIG_STACKPROTECTOR_FIXED
++DEFINE_PER_CPU_FIRST(struct fixed_percpu_data,
++		     fixed_percpu_data) __aligned(PAGE_SIZE) __visible;
++EXPORT_PER_CPU_SYMBOL_GPL(fixed_percpu_data);
++#else
+ DEFINE_PER_CPU(unsigned long, __stack_chk_guard);
+ EXPORT_PER_CPU_SYMBOL(__stack_chk_guard);
+ #endif
+-
+-#endif	/* CONFIG_X86_64 */
++#endif
  
  /*
-  * nop stub, which must not clobber anything *including the stack* to
-@@ -357,6 +358,9 @@ struct paravirt_patch_template pv_ops = {
- 	},
+  * Clear all 6 debug registers:
+diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
+index 21f0556d3ac0..61f1873d0ff7 100644
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -68,7 +68,13 @@ SYM_CODE_START_NOALIGN(startup_64)
  
- 	.mmu.set_fixmap		= native_set_fixmap,
-+#ifdef CONFIG_X86_VSYSCALL_EMULATION
-+	.mmu.set_vsyscall_page	= native_set_vsyscall_page,
+ 	/* Setup GSBASE to allow stack canary access for C code */
+ 	movl	$MSR_GS_BASE, %ecx
++#if defined(CONFIG_STACKPROTECTOR_FIXED)
+ 	leaq	INIT_PER_CPU_VAR(fixed_percpu_data)(%rip), %rdx
++#elif defined(CONFIG_SMP)
++	movabs	$__per_cpu_load, %rdx
++#else
++	xorl	%edx, %edx
 +#endif
- #endif /* CONFIG_PARAVIRT_XXL */
+ 	movl	%edx, %eax
+ 	shrq	$32,  %rdx
+ 	wrmsr
+@@ -283,16 +289,14 @@ SYM_INNER_LABEL(secondary_startup_64_no_verify, SYM_L_GLOBAL)
+ 	movl %eax,%fs
+ 	movl %eax,%gs
  
- #if defined(CONFIG_PARAVIRT_SPINLOCKS)
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index fdc91deece7e..a59bc013ee5b 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -59,6 +59,7 @@
+-	/* Set up %gs.
+-	 *
+-	 * The base of %gs always points to fixed_percpu_data. If the
+-	 * stack protector canary is enabled, it is located at %gs:40.
++	/*
++	 * Set up GS base.
+ 	 * Note that, on SMP, the boot cpu uses init data section until
+ 	 * the per cpu areas are set up.
+ 	 */
+ 	movl	$MSR_GS_BASE,%ecx
+-#ifndef CONFIG_SMP
+-	leaq	INIT_PER_CPU_VAR(fixed_percpu_data)(%rip), %rdx
++#if !defined(CONFIG_SMP) && defined(CONFIG_STACKPROTECTOR_FIXED)
++	leaq	__per_cpu_load(%rip), %rdx
+ #endif
+ 	movl	%edx, %eax
+ 	shrq	$32, %rdx
+diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
+index 25f155205770..f02dcde9f8a8 100644
+--- a/arch/x86/kernel/vmlinux.lds.S
++++ b/arch/x86/kernel/vmlinux.lds.S
+@@ -500,12 +500,14 @@ SECTIONS
+  */
+ #define INIT_PER_CPU(x) init_per_cpu__##x = ABSOLUTE(x) + __per_cpu_load
+ INIT_PER_CPU(gdt_page);
+-INIT_PER_CPU(fixed_percpu_data);
+ INIT_PER_CPU(irq_stack_backing_store);
  
- #include <asm/tlbflush.h>
- #include <asm/fixmap.h>
-+#include <asm/vsyscall.h>
- #include <asm/mmu_context.h>
- #include <asm/setup.h>
- #include <asm/paravirt.h>
-@@ -2020,9 +2021,6 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
- 
- 	switch (idx) {
- 	case FIX_BTMAP_END ... FIX_BTMAP_BEGIN:
--#ifdef CONFIG_X86_VSYSCALL_EMULATION
--	case VSYSCALL_PAGE:
--#endif
- 		/* All local page mappings */
- 		pte = pfn_pte(phys, prot);
- 		break;
-@@ -2058,14 +2056,21 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
- 	vaddr = __fix_to_virt(idx);
- 	if (HYPERVISOR_update_va_mapping(vaddr, pte, UVMF_INVLPG))
- 		BUG();
-+}
- 
- #ifdef CONFIG_X86_VSYSCALL_EMULATION
-+static void xen_set_vsyscall_page(phys_addr_t phys, pgprot_t prot)
-+{
-+	pte_t pte = pfn_pte(phys >> PAGE_SHIFT, prot);
-+
-+	if (HYPERVISOR_update_va_mapping(VSYSCALL_ADDR, pte, UVMF_INVLPG))
-+		BUG();
-+
- 	/* Replicate changes to map the vsyscall page into the user
- 	   pagetable vsyscall mapping. */
--	if (idx == VSYSCALL_PAGE)
--		set_pte_vaddr_pud(level3_user_vsyscall, vaddr, pte);
--#endif
-+	set_pte_vaddr_pud(level3_user_vsyscall, VSYSCALL_ADDR, pte);
- }
++#ifdef CONFIG_STACKPROTECTOR_FIXED
++INIT_PER_CPU(fixed_percpu_data);
+ #ifdef CONFIG_SMP
+ . = ASSERT((fixed_percpu_data == 0),
+            "fixed_percpu_data is not at start of per-cpu area");
+ #endif
 +#endif
  
- static void __init xen_post_allocator_init(void)
- {
-@@ -2156,6 +2161,9 @@ static const typeof(pv_ops) xen_mmu_ops __initconst = {
- 		},
- 
- 		.set_fixmap = xen_set_fixmap,
-+#ifdef CONFIG_X86_VSYSCALL_EMULATION
-+		.set_vsyscall_page = xen_set_vsyscall_page,
+ #endif /* CONFIG_X86_64 */
+diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
+index b093996b7e19..5842fe0e4f96 100644
+--- a/arch/x86/platform/pvh/head.S
++++ b/arch/x86/platform/pvh/head.S
+@@ -96,8 +96,16 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
+ 1:
+ 	/* Set base address in stack canary descriptor. */
+ 	mov $MSR_GS_BASE,%ecx
++#if defined(CONFIG_STACKPROTECTOR_FIXED)
+ 	mov $_pa(INIT_PER_CPU_VAR(fixed_percpu_data)), %eax
+ 	xor %edx, %edx
++#elif defined(CONFIG_SMP)
++	mov $__per_cpu_load, %rax
++	cdq
++#else
++	xor %eax, %eax
++	xor %edx, %edx
 +#endif
- 	},
- };
+ 	wrmsr
+ 
+ 	call xen_prepare_pvh
+diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
+index 643d02900fbb..09eaf59e8066 100644
+--- a/arch/x86/xen/xen-head.S
++++ b/arch/x86/xen/xen-head.S
+@@ -51,15 +51,19 @@ SYM_CODE_START(startup_xen)
+ 
+ 	leaq	(__end_init_task - PTREGS_SIZE)(%rip), %rsp
+ 
+-	/* Set up %gs.
+-	 *
+-	 * The base of %gs always points to fixed_percpu_data.  If the
+-	 * stack protector canary is enabled, it is located at %gs:40.
++	/*
++	 * Set up GS base.
+ 	 * Note that, on SMP, the boot cpu uses init data section until
+ 	 * the per cpu areas are set up.
+ 	 */
+ 	movl	$MSR_GS_BASE,%ecx
+-	movq	$INIT_PER_CPU_VAR(fixed_percpu_data),%rax
++#if defined(CONFIG_STACKPROTECTOR_FIXED)
++	leaq	INIT_PER_CPU_VAR(fixed_percpu_data)(%rip), %rdx
++#elif defined(CONFIG_SMP)
++	movabs	$__per_cpu_load, %rdx
++#else
++	xorl	%eax, %eax
++#endif
+ 	cdq
+ 	wrmsr
  
 -- 
 2.31.1
