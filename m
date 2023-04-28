@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D044CC77B60
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 08:09:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527189.819516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56BCC77B7E
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 08:09:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527185.819485 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psJ9k-0003pR-NQ; Fri, 28 Apr 2023 08:08:40 +0000
+	id 1psJ9h-00037G-CT; Fri, 28 Apr 2023 08:08:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527189.819516; Fri, 28 Apr 2023 08:08:40 +0000
+Received: by outflank-mailman (output) from mailman id 527185.819485; Fri, 28 Apr 2023 08:08:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psJ9k-0003nA-Jh; Fri, 28 Apr 2023 08:08:40 +0000
-Received: by outflank-mailman (input) for mailman id 527189;
- Fri, 28 Apr 2023 08:08:39 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1psJ9h-000379-9W; Fri, 28 Apr 2023 08:08:37 +0000
+Received: by outflank-mailman (input) for mailman id 527185;
+ Fri, 28 Apr 2023 08:08:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=TmhV=AT=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
- id 1psJ9j-0003M3-D7
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 08:08:39 +0000
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [2a00:1450:4864:20::32a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e0a4c247-e59b-11ed-8611-37d641c3527e;
- Fri, 28 Apr 2023 10:08:37 +0200 (CEST)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-3f1e2555b5aso44959705e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 28 Apr 2023 01:08:37 -0700 (PDT)
+ id 1psJ9g-00036x-G7
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 08:08:36 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id df9af7b3-e59b-11ed-b224-6b7b168915f2;
+ Fri, 28 Apr 2023 10:08:35 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3f178da21afso64382075e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Apr 2023 01:08:35 -0700 (PDT)
 Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
  by smtp.gmail.com with ESMTPSA id
- 13-20020a05600c230d00b003f31da39b62sm2569464wmo.18.2023.04.28.01.08.35
+ 13-20020a05600c230d00b003f31da39b62sm2569464wmo.18.2023.04.28.01.08.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Apr 2023 01:08:35 -0700 (PDT)
+ Fri, 28 Apr 2023 01:08:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,115 +47,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0a4c247-e59b-11ed-8611-37d641c3527e
+X-Inumbo-ID: df9af7b3-e59b-11ed-b224-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1682669316; x=1685261316;
+        d=cloud.com; s=cloud; t=1682669314; x=1685261314;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ull2YxWBFQl0HliuvqOLTfd5qwQa1W30wkLZFscPDpw=;
-        b=c+VOSAyMBxEBJRiQ8XbRHkxqCgy0oM1qlBzbUlrqhy5sOrgE/OmyiX6kEah4qp9Mv1
-         0PH0dOE65KsGrnQ4cqQe7QqsgNJuJrDbY5ZtDA3X7mWDTuBb3ADkldtl8Pr82RMs1+QK
-         xDvNRBvKGqm1IWFmyCTvrlH4OwlKt15nv/Woc=
+        bh=ruSDN7fkH/OcFoZofz/uE6f8wHRubeKwBT3psKG1zkY=;
+        b=Bbk8MHYhSTUiQuilXeTQUUn2+xE9TuMCk0qc3kF6rZaqQAM8riYJ0NuiVz5s8GR3UJ
+         1/DzStwJdpKKBPUMDubq4p/j6PdT90q4ac4ZeFbI7o3mdZYlV3igYQf/5PDMIQQPHVrO
+         TLw+NXBZ9z6ysOr9wHa0ndsrIeb7ACZl2qjaw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682669316; x=1685261316;
+        d=1e100.net; s=20221208; t=1682669314; x=1685261314;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ull2YxWBFQl0HliuvqOLTfd5qwQa1W30wkLZFscPDpw=;
-        b=GX67mYm0XihBfzix7fo1d/rZ2zdad+QYsmvs8dhqqV+N0MAJlQg6pRnvE0yCDH4Z78
-         Rzc+Kk1wgyFN4ayEv1YXowbOQnxAUzulI3f1osMNfLTZhnfV7ZvlPuE4kdJT1F6SqmkE
-         s5Hzh5JeLWN/vXg3B6R2ZDdWhsGYJbqfyj6fRuh9CIdMFohkQ8URsxtmZJANjuqu++tA
-         P0g+UHZbXlMM1LmMUj4WuxBJzw6v+Q4kOsdQfzi11KgtTmlvtvjOE9+WvI3US9Kk5LzG
-         sSVIzDK7jcR+vrPkfkRQZZU9a3SH2UxvyF0MFVeJntsegJxZk7icVnYWKoX/cVCiUgJ2
-         loTA==
-X-Gm-Message-State: AC+VfDxHf7YNzgJW7RfiSiQKQarJiwRGOc6xRNZ2lGqtC3qkftfEqg/f
-	1WfmXCFPRp0mRun8B5rwAbVFttFtllTc4MzfNq8=
-X-Google-Smtp-Source: ACHHUZ4sKhcZrmWQOmeyk+jAWUc6aoWKQoq2pZkkD16DksbVl/Kln3xeeBjNzDXSKv8Zi17uTg+tkw==
-X-Received: by 2002:a05:600c:220d:b0:3f1:9526:22be with SMTP id z13-20020a05600c220d00b003f1952622bemr3282326wml.23.1682669316259;
-        Fri, 28 Apr 2023 01:08:36 -0700 (PDT)
+        bh=ruSDN7fkH/OcFoZofz/uE6f8wHRubeKwBT3psKG1zkY=;
+        b=krgU1RyyxB0FiGhRXpc06/0ghNhfqeHBG7eK2HHMmWo8iHcipuzJwHyuwXKW6ZliN3
+         WpLQQ6DZ54nh44QvuLW+nvQczWUq6hQoQIiTe47TPuA+jA0eKeBSsFGMTgYgxkgN5ig5
+         uK/D+6pfpdQ/aoST4VXTkQXhC4SRbEh8ceRcwtcZoE4808/x10GTyu4WY4HT+MQC/KuU
+         iB0A8HNOKwTNuAd3uqJNHwob0JjL8z0FJ+ZmINrxikJStgNeW0dqPYx+hp4QYvWJ6gBg
+         Xsio1SrE4fixiHZYcSrNTzO7GvW0bkJ5EHKz57hn1bJPnPNyNxiIwmOH9gciNqH05IcQ
+         RHiw==
+X-Gm-Message-State: AC+VfDz1pWFn+t/7B0TRoy3TQSrG/NaMDjrViUeOmHu6F+6OW+mWrqCx
+	BJ8v1e1la0lVzddjHJ0u3L0nYwtvmxpesL+0Y/U=
+X-Google-Smtp-Source: ACHHUZ662rNa/wbV8EG5ieb17gNhTuOnlw4IBT7Q1xgrvUjLcH2hUUYaFfSxqNOVQlypCm8sE4yC+w==
+X-Received: by 2002:a7b:cb94:0:b0:3f1:7ba6:d5ab with SMTP id m20-20020a7bcb94000000b003f17ba6d5abmr3392478wmi.36.1682669314569;
+        Fri, 28 Apr 2023 01:08:34 -0700 (PDT)
 From: George Dunlap <george.dunlap@cloud.com>
 To: xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@cloud.com>,
 	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Roger Pau Monne <roger.pau@cloud.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 5/5] SUPPORT.md: Make all security support explicit
-Date: Fri, 28 Apr 2023 09:08:32 +0100
-Message-Id: <20230428080832.2461044-5-george.dunlap@cloud.com>
+	Anthony PERARD <anthony.perard@cloud.com>
+Subject: [PATCH 2/5] xenalyze: Basic TRC_HVM_EMUL handling
+Date: Fri, 28 Apr 2023 09:08:29 +0100
+Message-Id: <20230428080832.2461044-2-george.dunlap@cloud.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230428080832.2461044-1-george.dunlap@cloud.com>
 References: <20230428080832.2461044-1-george.dunlap@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The initial goal of SUPPORT.md was to help both users, and the Xen
-Project Security Team, determine what functionality was security
-supported; i.e., what kinds of security bugs would trigger an XSA.
+For now, mainly just do volume analysis and get rid of the warnings.
 
-Our proposal is that as of 4.18, all functionality not explicitly
-listed as security supported will be considered not security
-supported.  Add some text to that effect.
-
-The patch as written cannot be applied, since specifying "xl.cfg core
-functionality" is a TODO; but it should do to start a discussion.
-
-Signed-off-by: Georg Dunlap <george.dunlap@cloud.com>
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
 ---
 CC: Wei Liu <wl@xen.org>
-CC: Andrew Cooper <andrew.cooper@cloud.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monne <roger.pau@cloud.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
+CC: Anthony PERARD <anthony.perard@cloud.com>
 ---
- SUPPORT.md | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ tools/xentrace/xenalyze.c | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index aa1940e55f..fcbcb44c44 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -17,6 +17,36 @@ for the definitions of the support status levels etc.
- Release Notes
- : <a href="https://wiki.xenproject.org/wiki/Xen_Project_X.YY_Release_Notes">RN</a>
+diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
+index ff9716cd12..f7f8943079 100644
+--- a/tools/xentrace/xenalyze.c
++++ b/tools/xentrace/xenalyze.c
+@@ -987,6 +987,7 @@ enum {
+     HVM_VOL_VMENTRY,
+     HVM_VOL_VMEXIT,
+     HVM_VOL_HANDLER,
++    HVM_VOL_EMUL,
+     HVM_VOL_MAX
+ };
  
-+# General security support
-+
-+An XSA will always be issued for security-related bugs which are
-+present in a "plain vanilla" configuration.  A "plain vanilla"
-+configuration is defined as follows:
-+
-+* The Xen hypervisor is built from a tagged release of Xen, or a
-+  commit which was on the tip of one of the supported stable branches.
-+
-+* The Xen hypervisor was built with the default config for the platform
-+
-+* No Xen command-line parameters were specified
-+
-+* No parameters for Xen-related drivers in the Linux kernel were specified
-+
-+* No modifications were made to the default xl.conf
-+
-+* xl.cfg files use only core functionality
-+
-+* Alternate toolstacks only activate functionality activated by the
-+  core functionality of xl.cfg files.
-+
-+Any system outside this configuration will only be considered security
-+supported if the functionality is explicitly listed as supported in
-+this document.
-+
-+If a security-related bug exits only in a configuration listed as not
-+security supported, the security team will generally not issue an XSA;
-+the bug will simply be handled in public.
-+
- # Feature Support
+@@ -1013,6 +1014,7 @@ const char *hvm_vol_name[HVM_VOL_MAX] = {
+     [HVM_VOL_VMENTRY]="vmentry",
+     [HVM_VOL_VMEXIT] ="vmexit",
+     [HVM_VOL_HANDLER]="handler",
++    [HVM_VOL_EMUL]="emul",
+ };
  
- ## Kconfig
+ enum {
+@@ -5275,15 +5277,18 @@ void hvm_process(struct pcpu_info *p)
+     if(vcpu_set_data_type(p->current, VCPU_DATA_HVM))
+         return;
+ 
+-    if(ri->evt.sub == 2)
+-    {
++    switch ( ri->evt.sub ) {
++    case 2: /* HVM_HANDLER */
+         UPDATE_VOLUME(p, hvm[HVM_VOL_HANDLER], ri->size);
+         hvm_handler_process(ri, h);
+-    }
+-    else
+-    {
++        break;
++    case 4: /* HVM_EMUL */
++        UPDATE_VOLUME(p, hvm[HVM_VOL_EMUL], ri->size);
++        warn_once("WARNING: We don't yet analyze HVM_EMUL events.\n");
++        /* FIXME: Collect analysis on this */
++        break;
++    default:
+         switch(ri->event) {
+-            /* HVM */
+         case TRC_HVM_VMEXIT:
+         case TRC_HVM_VMEXIT64:
+             UPDATE_VOLUME(p, hvm[HVM_VOL_VMEXIT], ri->size);
 -- 
 2.25.1
 
