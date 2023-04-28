@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79723C77B7C
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 10:42:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527255.819696 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B10AC77B61
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 10:42:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527257.819710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psLXt-0003VE-94; Fri, 28 Apr 2023 10:41:45 +0000
+	id 1psLXw-0003tJ-39; Fri, 28 Apr 2023 10:41:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527255.819696; Fri, 28 Apr 2023 10:41:45 +0000
+Received: by outflank-mailman (output) from mailman id 527257.819710; Fri, 28 Apr 2023 10:41:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psLXt-0003V1-3q; Fri, 28 Apr 2023 10:41:45 +0000
-Received: by outflank-mailman (input) for mailman id 527255;
- Fri, 28 Apr 2023 10:41:43 +0000
+	id 1psLXv-0003sp-R1; Fri, 28 Apr 2023 10:41:47 +0000
+Received: by outflank-mailman (input) for mailman id 527257;
+ Fri, 28 Apr 2023 10:41:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=19My=AT=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1psLXr-0002Ac-GN
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 10:41:43 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
+ id 1psLXu-0002Ac-Uz
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 10:41:46 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43bd335a-e5b1-11ed-b224-6b7b168915f2;
- Fri, 28 Apr 2023 12:41:42 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3010889c6ebso5961855f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 28 Apr 2023 03:41:42 -0700 (PDT)
+ id 45b8f029-e5b1-11ed-b224-6b7b168915f2;
+ Fri, 28 Apr 2023 12:41:46 +0200 (CEST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-2f95231618aso6131763f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Apr 2023 03:41:46 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- k6-20020a5d5246000000b002e71156b0fcsm20930378wrc.6.2023.04.28.03.41.40
+ k6-20020a5d5246000000b002e71156b0fcsm20930378wrc.6.2023.04.28.03.41.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Apr 2023 03:41:40 -0700 (PDT)
+ Fri, 28 Apr 2023 03:41:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,244 +47,308 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43bd335a-e5b1-11ed-b224-6b7b168915f2
+X-Inumbo-ID: 45b8f029-e5b1-11ed-b224-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1682678501; x=1685270501;
+        d=cloud.com; s=cloud; t=1682678505; x=1685270505;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+HVWSE744l3OULZh4xSGmf/1IsRnzQuhvgEnpES8XSA=;
-        b=VvNQ0dal8cGrhAqkRjUQvIbeMt5it4j2BZcrWYsk7wVhfIELfqIdSPro+LY4OnhPgx
-         PQ+4akxOW9Ks7zKvxEJx/YGdnvyX58FVNARVvurBA88DRgdwOybD3kMnnzQ8raD0tE1/
-         3gvcwRyHPhuBd5KP7GSoy5vPDTB75jFg+PqfY=
+        bh=elEycC0m0QwhjrI/cCyPmElzCeDcTnaeFu39NnQQmM4=;
+        b=hC/PZiuATFhzTmZYjkhbaeHmZK6LjbbDcfC9oLcOccrJjMDYraxZuYkn0v1xMmz/Gx
+         +tu2+qJvczbTi8wVU4opXXncC+RZGlNwMBd1mgrJwajRv3oDJ3L+ag7JQKQ4GxyXjRr0
+         MqvqZ2+GO8pgAswESbH3H1NLjAroNuar5opew=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682678501; x=1685270501;
+        d=1e100.net; s=20221208; t=1682678505; x=1685270505;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+HVWSE744l3OULZh4xSGmf/1IsRnzQuhvgEnpES8XSA=;
-        b=SvePO8iJCnRD4eovakbs2F566pSp3Pcn0oMz4XpCeTUX8oJ4cEtuTzRuFxPBQCTNrM
-         pavEeSZc27o1e+Ipd85cxefIrwwk5nd/LzVGBOONoU8Q4u28GFly36kT6bgEVBex0Y2F
-         FE5OIRmoaiC+E4TRdF2PqG8zMRRAUMTN7E3qXXIsEqTII+rudcmCeOwQKrPmzai5eq3+
-         OAx8HW6wzZEWpeTdETxU59E+HH3kuOn7bDsvdbyDtaQuWJLckCLYdWsHcj40H51yV6DV
-         rCKQ+Eqgi1hhoCjz0q0VO4Lp2qSxVTwlM6nqmZfaBrQJRf7vDybz77VOzu83OXi76cF7
-         +0ng==
-X-Gm-Message-State: AC+VfDweMLetR2W/qScM86FFr2TY+cXHq35rfo5zXjiAt4XZkG4qR6f9
-	aOUvmpWj5qOx4tXHJHMoYCmS/xFRIrfWHOapu0s=
-X-Google-Smtp-Source: ACHHUZ79L7YIHLjdQZubJbqtXhl3bN8DMD7+its5fbVq8tcieC29FXvNjK5bWE+tsktvZUY2dZeLmA==
-X-Received: by 2002:adf:f583:0:b0:2ce:a30d:f764 with SMTP id f3-20020adff583000000b002cea30df764mr3347215wro.21.1682678501700;
-        Fri, 28 Apr 2023 03:41:41 -0700 (PDT)
+        bh=elEycC0m0QwhjrI/cCyPmElzCeDcTnaeFu39NnQQmM4=;
+        b=NgW8j/U+7lNThrnqILMuiyWtJed3ShEUYHaNhHLYng3A4vJUbEdLxZMBvYEqLSeUYa
+         Zb6dvZphIWgH0mTTCg5MTkOtGp2HEQNsNy8vhSWRuNhrFgkGYvIs7z9ZkwpWBvITfKQo
+         zyeZi7Tm4gjiB6NFmVQJ3j9hZu0bYbgsOOBgE5TkE8nz+7ZHvPt/SDda+HttSrN3vty2
+         8ryvfaFmKuOQzgbs6VoVUmsEGuVtbrt7EdMd/N82s20d+ou/JudyyVXpkmXadUmyVELv
+         hvBB7VM8EaGmpU94TkTiqKs24shWjdFkAus0ihnv/vosHf/dB3X/K31w5qOyvAYApzJw
+         trVQ==
+X-Gm-Message-State: AC+VfDzCWlMA+bP6yvuCB8Qr6XMLf2fYthPQ42gaTV5Pu3ZzTmJQKyfD
+	XK33KU1WP5/weyElCUkoHJW9QPDagHa3LJ8QmSQ=
+X-Google-Smtp-Source: ACHHUZ4EX2u22zMI6e8UKRVUTZvFp8QMKnPqfpUIQgBLJ/iq77hFmLT3SbznD0IrDjoU6i6pKGJ06A==
+X-Received: by 2002:adf:f70c:0:b0:304:a7ca:1052 with SMTP id r12-20020adff70c000000b00304a7ca1052mr3342986wrp.35.1682678505001;
+        Fri, 28 Apr 2023 03:41:45 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 5/7] tools: Modify single-domid callers of xc_domain_getinfolist()
-Date: Fri, 28 Apr 2023 11:41:22 +0100
-Message-Id: <20230428104124.1044-6-alejandro.vallejo@cloud.com>
+Subject: [PATCH v2 7/7] domctl: Modify XEN_DOMCTL_getdomaininfo to fail if domid is not found
+Date: Fri, 28 Apr 2023 11:41:24 +0100
+Message-Id: <20230428104124.1044-8-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230428104124.1044-1-alejandro.vallejo@cloud.com>
 References: <20230428104124.1044-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xc_domain_getinfolist() internally relies on a sysctl that performs
-a linear search for the domids. Many callers of xc_domain_getinfolist()
-who require information about a precise domid are much better off calling
-xc_domain_getinfo_single() instead, that will use the getdomaininfo domctl
-instead and ensure the returned domid matches the requested one. The domtctl
-will find the domid faster too, because that uses hashed lists.
+It previously mimicked the getdomaininfo sysctl semantics by returning
+the first domid higher than the requested domid that does exist. This
+unintuitive behaviour causes quite a few mistakes and makes the call
+needlessly slow in its error path.
 
+This patch removes the fallback search, returning -ESRCH if the requested
+domain doesn't exist. Domain discovery can still be done through the sysctl
+interface as that performs a linear search on the list of domains.
+
+With this modification the xc_domain_getinfo() function is deprecated and
+removed to make sure it's not mistakenly used expecting the old behaviour.
+The new xc wrapper is xc_domain_getinfo_single().
+
+All previous callers of xc_domain_getinfo() have been updated to use
+xc_domain_getinfo_single() or xc_domain_getinfolist() instead. This also
+means xc_dominfo_t is no longer used by anything and can be purged.
+
+Resolves: xen-project/xen#105
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/light/libxl_dom.c         | 15 +++++----------
- tools/libs/light/libxl_dom_suspend.c |  7 +------
- tools/libs/light/libxl_domain.c      | 13 +++++--------
- tools/libs/light/libxl_mem.c         |  4 ++--
- tools/libs/light/libxl_sched.c       | 12 ++++--------
- tools/xenpaging/xenpaging.c          | 10 +++++-----
- 6 files changed, 22 insertions(+), 39 deletions(-)
+ tools/include/xenctrl.h        | 43 --------------------
+ tools/libs/ctrl/xc_domain.c    | 72 ----------------------------------
+ tools/libs/guest/xg_dom_boot.c |  2 +-
+ xen/common/domctl.c            | 32 +--------------
+ 4 files changed, 3 insertions(+), 146 deletions(-)
 
-diff --git a/tools/libs/light/libxl_dom.c b/tools/libs/light/libxl_dom.c
-index 25fb716084..bd5d823581 100644
---- a/tools/libs/light/libxl_dom.c
-+++ b/tools/libs/light/libxl_dom.c
-@@ -32,8 +32,8 @@ libxl_domain_type libxl__domain_type(libxl__gc *gc, uint32_t domid)
-     xc_domaininfo_t info;
-     int ret;
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 685df1c7ba..04d33db305 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -444,28 +444,6 @@ typedef struct xc_core_header {
+  * DOMAIN MANAGEMENT FUNCTIONS
+  */
  
--    ret = xc_domain_getinfolist(ctx->xch, domid, 1, &info);
--    if (ret != 1 || info.domain != domid) {
-+    ret = xc_domain_getinfo_single(ctx->xch, domid, &info);
-+    if (ret < 0) {
-         LOG(ERROR, "unable to get domain type for domid=%"PRIu32, domid);
-         return LIBXL_DOMAIN_TYPE_INVALID;
-     }
-@@ -70,15 +70,10 @@ int libxl__domain_cpupool(libxl__gc *gc, uint32_t domid)
-     xc_domaininfo_t info;
-     int ret;
+-typedef struct xc_dominfo {
+-    uint32_t      domid;
+-    uint32_t      ssidref;
+-    unsigned int  dying:1, crashed:1, shutdown:1,
+-                  paused:1, blocked:1, running:1,
+-                  hvm:1, debugged:1, xenstore:1, hap:1;
+-    unsigned int  shutdown_reason; /* only meaningful if shutdown==1 */
+-    unsigned long nr_pages; /* current number, not maximum */
+-    unsigned long nr_outstanding_pages;
+-    unsigned long nr_shared_pages;
+-    unsigned long nr_paged_pages;
+-    unsigned long shared_info_frame;
+-    uint64_t      cpu_time;
+-    unsigned long max_memkb;
+-    unsigned int  nr_online_vcpus;
+-    unsigned int  max_vcpu_id;
+-    xen_domain_handle_t handle;
+-    unsigned int  cpupool;
+-    uint8_t       gpaddr_bits;
+-    struct xen_arch_domainconfig arch_config;
+-} xc_dominfo_t;
+-
+ typedef xen_domctl_getdomaininfo_t xc_domaininfo_t;
  
--    ret = xc_domain_getinfolist(CTX->xch, domid, 1, &info);
--    if (ret != 1)
-+    ret = xc_domain_getinfo_single(CTX->xch, domid, &info);
-+    if (ret < 0)
-     {
--        LOGE(ERROR, "getinfolist failed %d", ret);
--        return ERROR_FAIL;
--    }
--    if (info.domain != domid)
--    {
--        LOGE(ERROR, "got info for dom%d, wanted dom%d\n", info.domain, domid);
-+        LOGED(ERROR, domid, "get domaininfo failed: %d", ret);
-         return ERROR_FAIL;
-     }
-     return info.cpupool;
-diff --git a/tools/libs/light/libxl_dom_suspend.c b/tools/libs/light/libxl_dom_suspend.c
-index 4fa22bb739..6091a5f3f6 100644
---- a/tools/libs/light/libxl_dom_suspend.c
-+++ b/tools/libs/light/libxl_dom_suspend.c
-@@ -332,13 +332,8 @@ static void suspend_common_wait_guest_check(libxl__egc *egc,
-     /* Convenience aliases */
-     const uint32_t domid = dsps->domid;
+ static inline unsigned int dominfo_shutdown_reason(const xc_domaininfo_t *info)
+@@ -720,27 +698,6 @@ int xc_domain_getinfo_single(xc_interface *xch,
+                              uint32_t domid,
+                              xc_domaininfo_t *info);
  
--    ret = xc_domain_getinfolist(CTX->xch, domid, 1, &info);
-+    ret = xc_domain_getinfo_single(CTX->xch, domid, &info);
-     if (ret < 0) {
--        LOGED(ERROR, domid, "unable to check for status of guest");
--        goto err;
+-/**
+- * This function will return information about one or more domains. It is
+- * designed to iterate over the list of domains. If a single domain is
+- * requested, this function will return the next domain in the list - if
+- * one exists. It is, therefore, important in this case to make sure the
+- * domain requested was the one returned.
+- *
+- * @parm xch a handle to an open hypervisor interface
+- * @parm first_domid the first domain to enumerate information from.  Domains
+- *                   are currently enumerate in order of creation.
+- * @parm max_doms the number of elements in info
+- * @parm info an array of max_doms size that will contain the information for
+- *            the enumerated domains.
+- * @return the number of domains enumerated or -1 on error
+- */
+-int xc_domain_getinfo(xc_interface *xch,
+-                      uint32_t first_domid,
+-                      unsigned int max_doms,
+-                      xc_dominfo_t *info);
+-
+-
+ /**
+  * This function will set the execution context for the specified vcpu.
+  *
+diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+index 533e3c1314..724fa6f753 100644
+--- a/tools/libs/ctrl/xc_domain.c
++++ b/tools/libs/ctrl/xc_domain.c
+@@ -357,84 +357,12 @@ int xc_domain_getinfo_single(xc_interface *xch,
+     if ( do_domctl(xch, &domctl) < 0 )
+         return -1;
+ 
+-    if ( domctl.u.getdomaininfo.domain != domid ) {
+-        errno = ESRCH;
+-        return -1;
 -    }
 -
--    if (!(ret == 1 && info.domain == domid)) {
-         LOGED(ERROR, domid, "guest we were suspending has been destroyed");
-         goto err;
-     }
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index 7f0986c185..9fa4091859 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -349,16 +349,12 @@ int libxl_domain_info(libxl_ctx *ctx, libxl_dominfo *info_r,
-     int ret;
-     GC_INIT(ctx);
+     if ( info )
+         *info = domctl.u.getdomaininfo;
  
--    ret = xc_domain_getinfolist(ctx->xch, domid, 1, &xcinfo);
-+    ret = xc_domain_getinfo_single(ctx->xch, domid, &xcinfo);
-     if (ret<0) {
--        LOGED(ERROR, domid, "Getting domain info list");
-+        LOGED(ERROR, domid, "Getting domain info: %d", ret);
-         GC_FREE;
-         return ERROR_FAIL;
-     }
--    if (ret==0 || xcinfo.domain != domid) {
--        GC_FREE;
--        return ERROR_DOMAIN_NOTFOUND;
+     return 0;
+ }
+ 
+-int xc_domain_getinfo(xc_interface *xch,
+-                      uint32_t first_domid,
+-                      unsigned int max_doms,
+-                      xc_dominfo_t *info)
+-{
+-    unsigned int nr_doms;
+-    uint32_t next_domid = first_domid;
+-    DECLARE_DOMCTL;
+-    int rc = 0;
+-
+-    memset(info, 0, max_doms*sizeof(xc_dominfo_t));
+-
+-    for ( nr_doms = 0; nr_doms < max_doms; nr_doms++ )
+-    {
+-        domctl.cmd = XEN_DOMCTL_getdomaininfo;
+-        domctl.domain = next_domid;
+-        if ( (rc = do_domctl(xch, &domctl)) < 0 )
+-            break;
+-        info->domid      = domctl.domain;
+-
+-        info->dying    = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_dying);
+-        info->shutdown = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_shutdown);
+-        info->paused   = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_paused);
+-        info->blocked  = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_blocked);
+-        info->running  = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_running);
+-        info->hvm      = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_hvm_guest);
+-        info->debugged = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_debugged);
+-        info->xenstore = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_xs_domain);
+-        info->hap      = !!(domctl.u.getdomaininfo.flags&XEN_DOMINF_hap);
+-
+-        info->shutdown_reason =
+-            (domctl.u.getdomaininfo.flags>>XEN_DOMINF_shutdownshift) &
+-            XEN_DOMINF_shutdownmask;
+-
+-        if ( info->shutdown && (info->shutdown_reason == SHUTDOWN_crash) )
+-        {
+-            info->shutdown = 0;
+-            info->crashed  = 1;
+-        }
+-
+-        info->ssidref  = domctl.u.getdomaininfo.ssidref;
+-        info->nr_pages = domctl.u.getdomaininfo.tot_pages;
+-        info->nr_outstanding_pages = domctl.u.getdomaininfo.outstanding_pages;
+-        info->nr_shared_pages = domctl.u.getdomaininfo.shr_pages;
+-        info->nr_paged_pages = domctl.u.getdomaininfo.paged_pages;
+-        info->max_memkb = domctl.u.getdomaininfo.max_pages << (PAGE_SHIFT-10);
+-        info->shared_info_frame = domctl.u.getdomaininfo.shared_info_frame;
+-        info->cpu_time = domctl.u.getdomaininfo.cpu_time;
+-        info->nr_online_vcpus = domctl.u.getdomaininfo.nr_online_vcpus;
+-        info->max_vcpu_id = domctl.u.getdomaininfo.max_vcpu_id;
+-        info->cpupool = domctl.u.getdomaininfo.cpupool;
+-        info->gpaddr_bits = domctl.u.getdomaininfo.gpaddr_bits;
+-        info->arch_config = domctl.u.getdomaininfo.arch_config;
+-
+-        memcpy(info->handle, domctl.u.getdomaininfo.handle,
+-               sizeof(xen_domain_handle_t));
+-
+-        next_domid = (uint16_t)domctl.domain + 1;
+-        info++;
 -    }
- 
-     if (info_r)
-         libxl__xcinfo2xlinfo(ctx, &xcinfo, info_r);
-@@ -1657,14 +1653,15 @@ int libxl__resolve_domid(libxl__gc *gc, const char *name, uint32_t *domid)
- libxl_vcpuinfo *libxl_list_vcpu(libxl_ctx *ctx, uint32_t domid,
-                                        int *nr_vcpus_out, int *nr_cpus_out)
- {
-+    int rc;
-     GC_INIT(ctx);
-     libxl_vcpuinfo *ptr, *ret;
-     xc_domaininfo_t domaininfo;
-     xc_vcpuinfo_t vcpuinfo;
-     unsigned int nr_vcpus;
- 
--    if (xc_domain_getinfolist(ctx->xch, domid, 1, &domaininfo) != 1) {
--        LOGED(ERROR, domid, "Getting infolist");
-+    if ((rc = xc_domain_getinfo_single(ctx->xch, domid, &domaininfo)) < 0) {
-+        LOGED(ERROR, domid, "Getting dominfo: %d", rc);
-         GC_FREE;
-         return NULL;
-     }
-diff --git a/tools/libs/light/libxl_mem.c b/tools/libs/light/libxl_mem.c
-index 92ec09f4cf..44e554adba 100644
---- a/tools/libs/light/libxl_mem.c
-+++ b/tools/libs/light/libxl_mem.c
-@@ -323,8 +323,8 @@ retry_transaction:
-     libxl__xs_printf(gc, t, GCSPRINTF("%s/memory/target", dompath),
-                      "%"PRIu64, new_target_memkb);
- 
--    r = xc_domain_getinfolist(ctx->xch, domid, 1, &info);
--    if (r != 1 || info.domain != domid) {
-+    r = xc_domain_getinfo_single(ctx->xch, domid, &info);
-+    if (r < 0) {
-         abort_transaction = 1;
-         rc = ERROR_FAIL;
-         goto out;
-diff --git a/tools/libs/light/libxl_sched.c b/tools/libs/light/libxl_sched.c
-index 7c53dc60e6..b8d0b9ccd7 100644
---- a/tools/libs/light/libxl_sched.c
-+++ b/tools/libs/light/libxl_sched.c
-@@ -219,13 +219,11 @@ static int sched_credit_domain_set(libxl__gc *gc, uint32_t domid,
-     xc_domaininfo_t domaininfo;
-     int rc;
- 
--    rc = xc_domain_getinfolist(CTX->xch, domid, 1, &domaininfo);
-+    rc = xc_domain_getinfo_single(CTX->xch, domid, &domaininfo);
-     if (rc < 0) {
--        LOGED(ERROR, domid, "Getting domain info list");
-+        LOGED(ERROR, domid, "Getting domain info: %d", rc);
-         return ERROR_FAIL;
-     }
--    if (rc != 1 || domaininfo.domain != domid)
--        return ERROR_INVAL;
- 
-     rc = xc_sched_credit_domain_get(CTX->xch, domid, &sdom);
-     if (rc != 0) {
-@@ -426,13 +424,11 @@ static int sched_credit2_domain_set(libxl__gc *gc, uint32_t domid,
-     xc_domaininfo_t info;
-     int rc;
- 
--    rc = xc_domain_getinfolist(CTX->xch, domid, 1, &info);
-+    rc = xc_domain_getinfo_single(CTX->xch, domid, &info);
-     if (rc < 0) {
--        LOGED(ERROR, domid, "Getting domain info");
-+        LOGED(ERROR, domid, "Getting domain info: %d", rc);
-         return ERROR_FAIL;
-     }
--    if (rc != 1 || info.domain != domid)
--        return ERROR_INVAL;
- 
-     rc = xc_sched_credit2_domain_get(CTX->xch, domid, &sdom);
-     if (rc != 0) {
-diff --git a/tools/xenpaging/xenpaging.c b/tools/xenpaging/xenpaging.c
-index 6e5490315d..c7a9a82477 100644
---- a/tools/xenpaging/xenpaging.c
-+++ b/tools/xenpaging/xenpaging.c
-@@ -169,8 +169,8 @@ static int xenpaging_get_tot_pages(struct xenpaging *paging)
-     xc_domaininfo_t domain_info;
-     int rc;
- 
--    rc = xc_domain_getinfolist(xch, paging->vm_event.domain_id, 1, &domain_info);
--    if ( rc != 1 )
-+    rc = xc_domain_getinfo_single(xch, paging->vm_event.domain_id, &domain_info);
-+    if ( rc < 0 )
+-
+-    if ( nr_doms == 0 )
+-        return rc;
+-
+-    return nr_doms;
+-}
+-
+ int xc_domain_getinfolist(xc_interface *xch,
+                           uint32_t first_domain,
+                           unsigned int max_domains,
+diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
+index 1dea534bba..dc858a1567 100644
+--- a/tools/libs/guest/xg_dom_boot.c
++++ b/tools/libs/guest/xg_dom_boot.c
+@@ -178,7 +178,7 @@ int xc_dom_boot_image(struct xc_dom_image *dom)
      {
-         PERROR("Error getting domain info");
+         xc_dom_panic(dom->xch, XC_INTERNAL_ERROR,
+                      "%s: getdomaininfo failed (errno=%d)",
+-                     __FUNCTION__, rc, errno);
++                     __FUNCTION__, errno);
          return -1;
-@@ -424,9 +424,9 @@ static struct xenpaging *xenpaging_init(int argc, char *argv[])
-     /* Get max_pages from guest if not provided via cmdline */
-     if ( !paging->max_pages )
+     }
+     dom->shared_info_mfn = info.shared_info_frame;
+diff --git a/xen/common/domctl.c b/xen/common/domctl.c
+index ad71ad8a4c..24a14996e6 100644
+--- a/xen/common/domctl.c
++++ b/xen/common/domctl.c
+@@ -314,7 +314,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+         /* fall through */
+     default:
+         d = rcu_lock_domain_by_id(op->domain);
+-        if ( !d && op->cmd != XEN_DOMCTL_getdomaininfo )
++        if ( !d )
+             return -ESRCH;
+     }
+ 
+@@ -534,42 +534,14 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+ 
+     case XEN_DOMCTL_getdomaininfo:
      {
--        rc = xc_domain_getinfolist(xch, paging->vm_event.domain_id, 1,
--                                   &domain_info);
--        if ( rc != 1 )
-+        rc = xc_domain_getinfo_single(xch, paging->vm_event.domain_id,
-+                                      &domain_info);
-+        if ( rc < 0 )
-         {
-             PERROR("Error getting domain info");
-             goto err;
+-        domid_t dom = DOMID_INVALID;
+-
+-        if ( !d )
+-        {
+-            ret = -EINVAL;
+-            if ( op->domain >= DOMID_FIRST_RESERVED )
+-                break;
+-
+-            rcu_read_lock(&domlist_read_lock);
+-
+-            dom = op->domain;
+-            for_each_domain ( d )
+-                if ( d->domain_id >= dom )
+-                    break;
+-        }
+-
+-        ret = -ESRCH;
+-        if ( d == NULL )
+-            goto getdomaininfo_out;
+-
+         ret = xsm_getdomaininfo(XSM_HOOK, d);
+         if ( ret )
+-            goto getdomaininfo_out;
++            break;
+ 
+         getdomaininfo(d, &op->u.getdomaininfo);
+ 
+         op->domain = op->u.getdomaininfo.domain;
+         copyback = 1;
+-
+-    getdomaininfo_out:
+-        /* When d was non-NULL upon entry, no cleanup is needed. */
+-        if ( dom == DOMID_INVALID )
+-            break;
+-
+-        rcu_read_unlock(&domlist_read_lock);
+-        d = NULL;
+         break;
+     }
+ 
 -- 
 2.34.1
 
