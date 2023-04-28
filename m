@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59595C77B61
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527224.819586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C033C7EE22
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527229.819607 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKql-0001vW-P6; Fri, 28 Apr 2023 09:57:11 +0000
+	id 1psKqm-0002Fa-OS; Fri, 28 Apr 2023 09:57:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527224.819586; Fri, 28 Apr 2023 09:57:11 +0000
+Received: by outflank-mailman (output) from mailman id 527229.819607; Fri, 28 Apr 2023 09:57:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKql-0001uC-Gr; Fri, 28 Apr 2023 09:57:11 +0000
-Received: by outflank-mailman (input) for mailman id 527224;
- Fri, 28 Apr 2023 09:52:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1psKqm-0002DX-DO; Fri, 28 Apr 2023 09:57:12 +0000
+Received: by outflank-mailman (input) for mailman id 527229;
+ Fri, 28 Apr 2023 09:54:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dCeu=AT=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
- id 1psKmh-0001fa-9d
- for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:52:59 +0000
-Received: from out0-197.mail.aliyun.com (out0-197.mail.aliyun.com
- [140.205.0.197]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7280a1d6-e5aa-11ed-8611-37d641c3527e;
- Fri, 28 Apr 2023 11:52:57 +0200 (CEST)
+ id 1psKng-0001in-Rn
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:54:00 +0000
+Received: from out0-193.mail.aliyun.com (out0-193.mail.aliyun.com
+ [140.205.0.193]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9675234d-e5aa-11ed-b224-6b7b168915f2;
+ Fri, 28 Apr 2023 11:53:57 +0200 (CEST)
 Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
- fp:SMTPD_---.STCEPaY_1682675567) by smtp.aliyun-inc.com;
- Fri, 28 Apr 2023 17:52:48 +0800
+ fp:SMTPD_---.STFoGgp_1682675627) by smtp.aliyun-inc.com;
+ Fri, 28 Apr 2023 17:53:48 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,8 +41,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7280a1d6-e5aa-11ed-8611-37d641c3527e
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R151e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047192;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=32;SR=0;TI=SMTPD_---.STCEPaY_1682675567;
+X-Inumbo-ID: 9675234d-e5aa-11ed-b224-6b7b168915f2
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R721e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047188;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=24;SR=0;TI=SMTPD_---.STFoGgp_1682675627;
 From: "Hou Wenlong" <houwenlong.hwl@antgroup.com>
 To: linux-kernel@vger.kernel.org
 Cc: "Thomas Garnier" <thgarnie@chromium.org>,
@@ -56,313 +56,202 @@ Cc: "Thomas Garnier" <thgarnie@chromium.org>,
   "Dave Hansen" <dave.hansen@linux.intel.com>,
    <x86@kernel.org>,
   "H. Peter Anvin" <hpa@zytor.com>,
-  "Peter Zijlstra" <peterz@infradead.org>,
-  "Josh Poimboeuf" <jpoimboe@kernel.org>,
-  "Pawan Gupta" <pawan.kumar.gupta@linux.intel.com>,
-  "Dennis Zhou" <dennis@kernel.org>,
-  "Tejun Heo" <tj@kernel.org>,
-  "Christoph Lameter" <cl@linux.com>,
-  "Paolo Bonzini" <pbonzini@redhat.com>,
-  "Wanpeng Li" <wanpengli@tencent.com>,
-  "Vitaly Kuznetsov" <vkuznets@redhat.com>,
   "Juergen Gross" <jgross@suse.com>,
+  "=?UTF-8?B?U3JpdmF0c2EgUy4gQmhhdCAoVk13YXJlKQ==?=" <srivatsa@csail.mit.edu>,
+  "Alexey Makhalov" <amakhalov@vmware.com>,
+  "VMware PV-Drivers Reviewers" <pv-drivers@vmware.com>,
   "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
-  "Nathan Chancellor" <nathan@kernel.org>,
-  "Nick Desaulniers" <ndesaulniers@google.com>,
-  "Tom Rix" <trix@redhat.com>,
-  "David Woodhouse" <dwmw@amazon.co.uk>,
-  "Brian Gerst" <brgerst@gmail.com>,
-   <linux-mm@kvack.org>,
-   <kvm@vger.kernel.org>,
-   <xen-devel@lists.xenproject.org>,
-   <llvm@lists.linux.dev>
-Subject: [PATCH RFC 18/43] x86/percpu: Use PC-relative addressing for percpu variable references
-Date: Fri, 28 Apr 2023 17:50:58 +0800
-Message-Id: <175116f75c38c15d8d73a03301eab805fea13a0a.1682673543.git.houwenlong.hwl@antgroup.com>
+  "Andrew Morton" <akpm@linux-foundation.org>,
+  "=?UTF-8?B?TWlrZSBSYXBvcG9ydCAoSUJNKQ==?=" <rppt@kernel.org>,
+  "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
+  "Suren Baghdasaryan" <surenb@google.com>,
+  "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+   <virtualization@lists.linux-foundation.org>,
+   <xen-devel@lists.xenproject.org>
+Subject: [PATCH RFC 36/43] x86/vsyscall: Don't use set_fixmap() to map vsyscall page
+Date: Fri, 28 Apr 2023 17:51:16 +0800
+Message-Id: <a77a84cc7fc4bf70bb8ac7fb6e55110e74bde3ca.1682673543.git.houwenlong.hwl@antgroup.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 References: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-For PIE binary, all symbol references are PC-relative addressing, even
-for percpu variable. So to keep compatible with PIE, add %rip suffix in
-percpu assembly macros if PIE is enabled. However, relocation of percpu
-variable references is broken now for PIE. It would be fixed later.
+In order to unify FIXADDR_TOP for x86 and allow fixmap area to be
+moveable, vsyscall page should be mapped individually. However, for
+XENPV guest, vsyscall page needs to be mapped into user pagetable too.
+So introduce a new PVMMU op to help to map vsyscall page.
 
 Suggested-by: Lai Jiangshan <jiangshan.ljs@antgroup.com>
 Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
 Cc: Thomas Garnier <thgarnie@chromium.org>
 Cc: Kees Cook <keescook@chromium.org>
 ---
- arch/x86/entry/calling.h             | 17 ++++++++++++----
- arch/x86/include/asm/nospec-branch.h | 10 +++++-----
- arch/x86/include/asm/percpu.h        | 29 +++++++++++++++++++++++++---
- arch/x86/kernel/head_64.S            |  2 +-
- arch/x86/kernel/kvm.c                | 21 ++++++++++++++++----
- arch/x86/lib/cmpxchg16b_emu.S        |  8 ++++----
- arch/x86/xen/xen-asm.S               | 10 +++++-----
- 7 files changed, 71 insertions(+), 26 deletions(-)
+ arch/x86/entry/vsyscall/vsyscall_64.c |  3 +--
+ arch/x86/include/asm/paravirt.h       |  7 +++++++
+ arch/x86/include/asm/paravirt_types.h |  4 ++++
+ arch/x86/include/asm/vsyscall.h       | 13 +++++++++++++
+ arch/x86/kernel/paravirt.c            |  4 ++++
+ arch/x86/xen/mmu_pv.c                 | 20 ++++++++++++++------
+ 6 files changed, 43 insertions(+), 8 deletions(-)
 
-diff --git a/arch/x86/entry/calling.h b/arch/x86/entry/calling.h
-index f6907627172b..11328578741d 100644
---- a/arch/x86/entry/calling.h
-+++ b/arch/x86/entry/calling.h
-@@ -173,7 +173,7 @@ For 32-bit we have the following conventions - kernel is built with
- .endm
+diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+index e0ca8120aea8..4373460ebbde 100644
+--- a/arch/x86/entry/vsyscall/vsyscall_64.c
++++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+@@ -385,8 +385,7 @@ void __init map_vsyscall(void)
+ 	 * page.
+ 	 */
+ 	if (vsyscall_mode == EMULATE) {
+-		__set_fixmap(VSYSCALL_PAGE, physaddr_vsyscall,
+-			     PAGE_KERNEL_VVAR);
++		__set_vsyscall_page(physaddr_vsyscall, PAGE_KERNEL_VVAR);
+ 		set_vsyscall_pgtable_user_bits(swapper_pg_dir);
+ 	}
  
- #define THIS_CPU_user_pcid_flush_mask   \
--	PER_CPU_VAR(cpu_tlbstate) + TLB_STATE_user_pcid_flush_mask
-+	PER_CPU_VAR(cpu_tlbstate + TLB_STATE_user_pcid_flush_mask)
- 
- .macro SWITCH_TO_USER_CR3_NOSTACK scratch_reg:req scratch_reg2:req
- 	ALTERNATIVE "jmp .Lend_\@", "", X86_FEATURE_PTI
-@@ -370,8 +370,8 @@ For 32-bit we have the following conventions - kernel is built with
- .endm
- 
- .macro SAVE_AND_SET_GSBASE scratch_reg:req save_reg:req
-+	GET_PERCPU_BASE \scratch_reg \save_reg
- 	rdgsbase \save_reg
--	GET_PERCPU_BASE \scratch_reg
- 	wrgsbase \scratch_reg
- .endm
- 
-@@ -407,15 +407,24 @@ For 32-bit we have the following conventions - kernel is built with
-  * Thus the kernel would consume a guest's TSC_AUX if an NMI arrives
-  * while running KVM's run loop.
-  */
--.macro GET_PERCPU_BASE reg:req
-+#ifdef CONFIG_X86_PIE
-+.macro GET_PERCPU_BASE reg:req scratch_reg:req
-+	LOAD_CPU_AND_NODE_SEG_LIMIT \reg
-+	andq	$VDSO_CPUNODE_MASK, \reg
-+	leaq	__per_cpu_offset(%rip), \scratch_reg
-+	movq	(\scratch_reg, \reg, 8), \reg
-+.endm
-+#else
-+.macro GET_PERCPU_BASE reg:req scratch_reg:req
- 	LOAD_CPU_AND_NODE_SEG_LIMIT \reg
- 	andq	$VDSO_CPUNODE_MASK, \reg
- 	movq	__per_cpu_offset(, \reg, 8), \reg
- .endm
-+#endif /* CONFIG_X86_PIE */
- 
- #else
- 
--.macro GET_PERCPU_BASE reg:req
-+.macro GET_PERCPU_BASE reg:req scratch_reg:req
- 	movq	pcpu_unit_offsets(%rip), \reg
- .endm
- 
-diff --git a/arch/x86/include/asm/nospec-branch.h b/arch/x86/include/asm/nospec-branch.h
-index edb2b0cb8efe..d8fd935e0697 100644
---- a/arch/x86/include/asm/nospec-branch.h
-+++ b/arch/x86/include/asm/nospec-branch.h
-@@ -59,13 +59,13 @@
- 
- #ifdef CONFIG_CALL_THUNKS_DEBUG
- # define CALL_THUNKS_DEBUG_INC_CALLS				\
--	incq	%gs:__x86_call_count;
-+	incq	%gs:(__x86_call_count)__percpu_rel;
- # define CALL_THUNKS_DEBUG_INC_RETS				\
--	incq	%gs:__x86_ret_count;
-+	incq	%gs:(__x86_ret_count)__percpu_rel;
- # define CALL_THUNKS_DEBUG_INC_STUFFS				\
--	incq	%gs:__x86_stuffs_count;
-+	incq	%gs:(__x86_stuffs_count)__percpu_rel;
- # define CALL_THUNKS_DEBUG_INC_CTXSW				\
--	incq	%gs:__x86_ctxsw_count;
-+	incq	%gs:(__x86_ctxsw_count)__percpu_rel;
- #else
- # define CALL_THUNKS_DEBUG_INC_CALLS
- # define CALL_THUNKS_DEBUG_INC_RETS
-@@ -95,7 +95,7 @@
- 	CALL_THUNKS_DEBUG_INC_CALLS
- 
- #define INCREMENT_CALL_DEPTH					\
--	sarq	$5, %gs:pcpu_hot + X86_call_depth;		\
-+	sarq	$5, %gs:(pcpu_hot + X86_call_depth)__percpu_rel;\
- 	CALL_THUNKS_DEBUG_INC_CALLS
- 
- #define ASM_INCREMENT_CALL_DEPTH				\
-diff --git a/arch/x86/include/asm/percpu.h b/arch/x86/include/asm/percpu.h
-index 13c0d63ed55e..a627a073c6ea 100644
---- a/arch/x86/include/asm/percpu.h
-+++ b/arch/x86/include/asm/percpu.h
-@@ -4,16 +4,26 @@
- 
- #ifdef CONFIG_X86_64
- #define __percpu_seg		gs
-+#ifdef CONFIG_X86_PIE
-+#define __percpu_rel		(%rip)
-+#else
-+#define __percpu_rel
-+#endif /* CONFIG_X86_PIE */
- #else
- #define __percpu_seg		fs
-+#define __percpu_rel
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 2350ceb43db0..dcc0706287ee 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -576,6 +576,13 @@ static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
+ {
+ 	pv_ops.mmu.set_fixmap(idx, phys, flags);
+ }
++
++#ifdef CONFIG_X86_VSYSCALL_EMULATION
++static inline void __set_vsyscall_page(phys_addr_t phys, pgprot_t flags)
++{
++	pv_ops.mmu.set_vsyscall_page(phys, flags);
++}
++#endif
  #endif
  
- #ifdef __ASSEMBLY__
+ #if defined(CONFIG_SMP) && defined(CONFIG_PARAVIRT_SPINLOCKS)
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 982a234f5a06..e79f38232849 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -224,6 +224,10 @@ struct pv_mmu_ops {
+ 	   an mfn.  We can tell which is which from the index. */
+ 	void (*set_fixmap)(unsigned /* enum fixed_addresses */ idx,
+ 			   phys_addr_t phys, pgprot_t flags);
++
++#ifdef CONFIG_X86_VSYSCALL_EMULATION
++	void (*set_vsyscall_page)(phys_addr_t phys, pgprot_t flags);
++#endif
+ #endif
+ } __no_randomize_layout;
  
- #ifdef CONFIG_SMP
--#define PER_CPU_VAR(var)	%__percpu_seg:var
-+/* Compatible with Position Independent Code */
-+#define PER_CPU_VAR(var)	%__percpu_seg:(var)##__percpu_rel
-+/* Rare absolute reference */
-+#define PER_CPU_VAR_ABS(var)	%__percpu_seg:var
- #else /* ! SMP */
--#define PER_CPU_VAR(var)	var
-+#define PER_CPU_VAR(var)	(var)##__percpu_rel
-+#define PER_CPU_VAR_ABS(var)	var
- #endif	/* SMP */
+diff --git a/arch/x86/include/asm/vsyscall.h b/arch/x86/include/asm/vsyscall.h
+index ab60a71a8dcb..73691fc60924 100644
+--- a/arch/x86/include/asm/vsyscall.h
++++ b/arch/x86/include/asm/vsyscall.h
+@@ -2,6 +2,7 @@
+ #ifndef _ASM_X86_VSYSCALL_H
+ #define _ASM_X86_VSYSCALL_H
  
- #ifdef CONFIG_X86_64_SMP
-@@ -148,10 +158,23 @@ do {									\
- 	(typeof(_var))(unsigned long) pfo_val__;			\
- })
++#include <asm/pgtable.h>
+ #include <linux/seqlock.h>
+ #include <uapi/asm/vsyscall.h>
  
-+/*
-+ * Position Independent code uses relative addresses only.
-+ * The 'P' modifier prevents RIP-relative addressing in GCC,
-+ * so use 'a' modifier instead. Howerver, 'P' modifier allows
-+ * RIP-relative addressing in Clang but Clang doesn't support
-+ * 'a' modifier.
-+ */
-+#if defined(CONFIG_X86_PIE) && defined(CONFIG_CC_IS_GCC)
-+#define __percpu_stable_arg	__percpu_arg(a[var])
+@@ -15,6 +16,18 @@ extern void set_vsyscall_pgtable_user_bits(pgd_t *root);
+  */
+ extern bool emulate_vsyscall(unsigned long error_code,
+ 			     struct pt_regs *regs, unsigned long address);
++static inline void native_set_vsyscall_page(phys_addr_t phys, pgprot_t flags)
++{
++	pgprot_val(flags) &= __default_kernel_pte_mask;
++	set_pte_vaddr(VSYSCALL_ADDR, pfn_pte(phys >> PAGE_SHIFT, flags));
++}
++
++#ifndef CONFIG_PARAVIRT_XXL
++#define __set_vsyscall_page	native_set_vsyscall_page
 +#else
-+#define __percpu_stable_arg	__percpu_arg(P[var])
++#include <asm/paravirt.h>
 +#endif
 +
- #define percpu_stable_op(size, op, _var)				\
- ({									\
- 	__pcpu_type_##size pfo_val__;					\
--	asm(__pcpu_op2_##size(op, __percpu_arg(P[var]), "%[val]")	\
-+	asm(__pcpu_op2_##size(op, __percpu_stable_arg, "%[val]")	\
- 	    : [val] __pcpu_reg_##size("=", pfo_val__)			\
- 	    : [var] "p" (&(_var)));					\
- 	(typeof(_var))(unsigned long) pfo_val__;			\
-diff --git a/arch/x86/kernel/head_64.S b/arch/x86/kernel/head_64.S
-index 61f1873d0ff7..1eed50b7d1ac 100644
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -396,7 +396,7 @@ SYM_CODE_START(start_cpu0)
- 	UNWIND_HINT_END_OF_STACK
+ #else
+ static inline void map_vsyscall(void) {}
+ static inline bool emulate_vsyscall(unsigned long error_code,
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index ac10b46c5832..13c81402f377 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -33,6 +33,7 @@
+ #include <asm/tlb.h>
+ #include <asm/io_bitmap.h>
+ #include <asm/gsseg.h>
++#include <asm/vsyscall.h>
  
- 	/* Find the idle task stack */
--	movq	PER_CPU_VAR(pcpu_hot) + X86_current_task, %rcx
-+	movq	PER_CPU_VAR(pcpu_hot + X86_current_task), %rcx
- 	movq	TASK_threadsp(%rcx), %rsp
- 
- 	jmp	.Ljump_to_C_code
-diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-index 1cceac5984da..32d7b201f4f0 100644
---- a/arch/x86/kernel/kvm.c
-+++ b/arch/x86/kernel/kvm.c
-@@ -794,14 +794,27 @@ PV_CALLEE_SAVE_REGS_THUNK(__kvm_vcpu_is_preempted);
- 
- extern bool __raw_callee_save___kvm_vcpu_is_preempted(long);
- 
-+#ifndef CONFIG_X86_PIE
-+#define KVM_CHECK_VCPU_PREEMPTED			\
-+	"movq	__per_cpu_offset(,%rdi,8), %rax;"	\
-+	"cmpb	$0, " __stringify(KVM_STEAL_TIME_preempted) "+steal_time(%rax);"
-+#else
-+#define KVM_CHECK_VCPU_PREEMPTED			\
-+	"pushq	%rdi;"					\
-+	"leaq	__per_cpu_offset(%rip), %rax;"		\
-+	"movq	(%rax,%rdi,8), %rax;"			\
-+	"leaq	steal_time(%rip), %rdi;"		\
-+	"cmpb	$0, (%rax, %rdi, 1);"			\
-+	"popq	%rdi;"
-+#endif
-+
  /*
-  * Hand-optimize version for x86-64 to avoid 8 64-bit register saving and
-  * restoring to/from the stack.
-  */
--#define PV_VCPU_PREEMPTED_ASM						     \
-- "movq   __per_cpu_offset(,%rdi,8), %rax\n\t"				     \
-- "cmpb   $0, " __stringify(KVM_STEAL_TIME_preempted) "+steal_time(%rax)\n\t" \
-- "setne  %al\n\t"
-+#define PV_VCPU_PREEMPTED_ASM		\
-+	KVM_CHECK_VCPU_PREEMPTED	\
-+	"setne  %al\n\t"
+  * nop stub, which must not clobber anything *including the stack* to
+@@ -357,6 +358,9 @@ struct paravirt_patch_template pv_ops = {
+ 	},
  
- DEFINE_PARAVIRT_ASM(__raw_callee_save___kvm_vcpu_is_preempted,
- 		    PV_VCPU_PREEMPTED_ASM, .text);
-diff --git a/arch/x86/lib/cmpxchg16b_emu.S b/arch/x86/lib/cmpxchg16b_emu.S
-index 33c70c0160ea..891c5e9fd868 100644
---- a/arch/x86/lib/cmpxchg16b_emu.S
-+++ b/arch/x86/lib/cmpxchg16b_emu.S
-@@ -27,13 +27,13 @@ SYM_FUNC_START(this_cpu_cmpxchg16b_emu)
- 	pushfq
- 	cli
+ 	.mmu.set_fixmap		= native_set_fixmap,
++#ifdef CONFIG_X86_VSYSCALL_EMULATION
++	.mmu.set_vsyscall_page	= native_set_vsyscall_page,
++#endif
+ #endif /* CONFIG_PARAVIRT_XXL */
  
--	cmpq PER_CPU_VAR((%rsi)), %rax
-+	cmpq PER_CPU_VAR_ABS((%rsi)), %rax
- 	jne .Lnot_same
--	cmpq PER_CPU_VAR(8(%rsi)), %rdx
-+	cmpq PER_CPU_VAR_ABS(8(%rsi)), %rdx
- 	jne .Lnot_same
+ #if defined(CONFIG_PARAVIRT_SPINLOCKS)
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index fdc91deece7e..a59bc013ee5b 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -59,6 +59,7 @@
  
--	movq %rbx, PER_CPU_VAR((%rsi))
--	movq %rcx, PER_CPU_VAR(8(%rsi))
-+	movq %rbx, PER_CPU_VAR_ABS((%rsi))
-+	movq %rcx, PER_CPU_VAR_ABS(8(%rsi))
+ #include <asm/tlbflush.h>
+ #include <asm/fixmap.h>
++#include <asm/vsyscall.h>
+ #include <asm/mmu_context.h>
+ #include <asm/setup.h>
+ #include <asm/paravirt.h>
+@@ -2020,9 +2021,6 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
  
- 	popfq
- 	mov $1, %al
-diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
-index 9e5e68008785..448958ddbaf8 100644
---- a/arch/x86/xen/xen-asm.S
-+++ b/arch/x86/xen/xen-asm.S
-@@ -28,7 +28,7 @@
-  * non-zero.
-  */
- SYM_FUNC_START(xen_irq_disable_direct)
--	movb $1, PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_mask
-+	movb $1, PER_CPU_VAR(xen_vcpu_info + XEN_vcpu_info_mask)
- 	RET
- SYM_FUNC_END(xen_irq_disable_direct)
+ 	switch (idx) {
+ 	case FIX_BTMAP_END ... FIX_BTMAP_BEGIN:
+-#ifdef CONFIG_X86_VSYSCALL_EMULATION
+-	case VSYSCALL_PAGE:
+-#endif
+ 		/* All local page mappings */
+ 		pte = pfn_pte(phys, prot);
+ 		break;
+@@ -2058,14 +2056,21 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
+ 	vaddr = __fix_to_virt(idx);
+ 	if (HYPERVISOR_update_va_mapping(vaddr, pte, UVMF_INVLPG))
+ 		BUG();
++}
  
-@@ -69,7 +69,7 @@ SYM_FUNC_END(check_events)
- SYM_FUNC_START(xen_irq_enable_direct)
- 	FRAME_BEGIN
- 	/* Unmask events */
--	movb $0, PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_mask
-+	movb $0, PER_CPU_VAR(xen_vcpu_info + XEN_vcpu_info_mask)
+ #ifdef CONFIG_X86_VSYSCALL_EMULATION
++static void xen_set_vsyscall_page(phys_addr_t phys, pgprot_t prot)
++{
++	pte_t pte = pfn_pte(phys >> PAGE_SHIFT, prot);
++
++	if (HYPERVISOR_update_va_mapping(VSYSCALL_ADDR, pte, UVMF_INVLPG))
++		BUG();
++
+ 	/* Replicate changes to map the vsyscall page into the user
+ 	   pagetable vsyscall mapping. */
+-	if (idx == VSYSCALL_PAGE)
+-		set_pte_vaddr_pud(level3_user_vsyscall, vaddr, pte);
+-#endif
++	set_pte_vaddr_pud(level3_user_vsyscall, VSYSCALL_ADDR, pte);
+ }
++#endif
  
- 	/*
- 	 * Preempt here doesn't matter because that will deal with any
-@@ -78,7 +78,7 @@ SYM_FUNC_START(xen_irq_enable_direct)
- 	 */
+ static void __init xen_post_allocator_init(void)
+ {
+@@ -2156,6 +2161,9 @@ static const typeof(pv_ops) xen_mmu_ops __initconst = {
+ 		},
  
- 	/* Test for pending */
--	testb $0xff, PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_pending
-+	testb $0xff, PER_CPU_VAR(xen_vcpu_info + XEN_vcpu_info_pending)
- 	jz 1f
+ 		.set_fixmap = xen_set_fixmap,
++#ifdef CONFIG_X86_VSYSCALL_EMULATION
++		.set_vsyscall_page = xen_set_vsyscall_page,
++#endif
+ 	},
+ };
  
- 	call check_events
-@@ -97,7 +97,7 @@ SYM_FUNC_END(xen_irq_enable_direct)
-  * x86 use opposite senses (mask vs enable).
-  */
- SYM_FUNC_START(xen_save_fl_direct)
--	testb $0xff, PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_mask
-+	testb $0xff, PER_CPU_VAR(xen_vcpu_info + XEN_vcpu_info_mask)
- 	setz %ah
- 	addb %ah, %ah
- 	RET
-@@ -113,7 +113,7 @@ SYM_FUNC_END(xen_read_cr2);
- 
- SYM_FUNC_START(xen_read_cr2_direct)
- 	FRAME_BEGIN
--	_ASM_MOV PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_arch_cr2, %_ASM_AX
-+	_ASM_MOV PER_CPU_VAR(xen_vcpu_info + XEN_vcpu_info_arch_cr2), %_ASM_AX
- 	FRAME_END
- 	RET
- SYM_FUNC_END(xen_read_cr2_direct);
 -- 
 2.31.1
 
