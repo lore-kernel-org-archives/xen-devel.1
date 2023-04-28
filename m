@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4774C77B60
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:23:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.527215.819565 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1EBC77B60
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Apr 2023 09:57:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.527226.819591 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKJm-0006ik-5L; Fri, 28 Apr 2023 09:23:06 +0000
+	id 1psKql-00021c-WD; Fri, 28 Apr 2023 09:57:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 527215.819565; Fri, 28 Apr 2023 09:23:06 +0000
+Received: by outflank-mailman (output) from mailman id 527226.819591; Fri, 28 Apr 2023 09:57:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1psKJm-0006id-1i; Fri, 28 Apr 2023 09:23:06 +0000
-Received: by outflank-mailman (input) for mailman id 527215;
- Fri, 28 Apr 2023 09:23:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1psKJl-0006iT-Hv; Fri, 28 Apr 2023 09:23:05 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1psKJl-00080C-9M; Fri, 28 Apr 2023 09:23:05 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1psKJk-0002nj-UN; Fri, 28 Apr 2023 09:23:05 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1psKJk-0005lK-Ts; Fri, 28 Apr 2023 09:23:04 +0000
+	id 1psKql-0001z7-QA; Fri, 28 Apr 2023 09:57:11 +0000
+Received: by outflank-mailman (input) for mailman id 527226;
+ Fri, 28 Apr 2023 09:53:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=dCeu=AT=antgroup.com=houwenlong.hwl@srs-se1.protection.inumbo.net>)
+ id 1psKnH-0001iA-Dx
+ for xen-devel@lists.xenproject.org; Fri, 28 Apr 2023 09:53:35 +0000
+Received: from out0-200.mail.aliyun.com (out0-200.mail.aliyun.com
+ [140.205.0.200]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 88079f65-e5aa-11ed-8611-37d641c3527e;
+ Fri, 28 Apr 2023 11:53:33 +0200 (CEST)
+Received: from localhost(mailfrom:houwenlong.hwl@antgroup.com
+ fp:SMTPD_---.STFoGYl_1682675602) by smtp.aliyun-inc.com;
+ Fri, 28 Apr 2023 17:53:23 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +41,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=UP3CF0w6rn/bV0QsoFth0J3hyoiylRQbcUvajhPJoNU=; b=Wk7FCO7Fi96II+dYqKRq6rqEq0
-	dxboiUTgcjZWOciIw3RZsg5gyHaLTWwyVwRoMtjSOiicWu41nrUdDQMXZShjbMmohQo2PFWmtNXls
-	ZRt3xTg1bu4lCaCpjihcPVomwJ1R+EABZqzMuZ9YCSdIZfHEbizNVmGMocCT0Lp5jtAM=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-180463-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 88079f65-e5aa-11ed-8611-37d641c3527e
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R211e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018047212;MF=houwenlong.hwl@antgroup.com;NM=1;PH=DS;RN=17;SR=0;TI=SMTPD_---.STFoGYl_1682675602;
+From: "Hou Wenlong" <houwenlong.hwl@antgroup.com>
+To: linux-kernel@vger.kernel.org
+Cc: "Thomas Garnier" <thgarnie@chromium.org>,
+  "Lai Jiangshan" <jiangshan.ljs@antgroup.com>,
+  "Kees Cook" <keescook@chromium.org>,
+  "Hou Wenlong" <houwenlong.hwl@antgroup.com>,
+  "Juergen Gross" <jgross@suse.com>,
+  "Boris Ostrovsky" <boris.ostrovsky@oracle.com>,
+  "Darren Hart" <dvhart@infradead.org>,
+  "Andy Shevchenko" <andy@infradead.org>,
+  "Thomas Gleixner" <tglx@linutronix.de>,
+  "Ingo Molnar" <mingo@redhat.com>,
+  "Borislav Petkov" <bp@alien8.de>,
+  "Dave Hansen" <dave.hansen@linux.intel.com>,
+   <x86@kernel.org>,
+  "H. Peter Anvin" <hpa@zytor.com>,
+   <xen-devel@lists.xenproject.org>,
+   <platform-driver-x86@vger.kernel.org>
+Subject: [PATCH RFC 29/43] x86/PVH: Adapt PVH booting for PIE support
+Date: Fri, 28 Apr 2023 17:51:09 +0800
+Message-Id: <ea6994d2ab49a50cb5a8911c24562cd6d223c2b6.1682673543.git.houwenlong.hwl@antgroup.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
+References: <cover.1682673542.git.houwenlong.hwl@antgroup.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 180463: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=95ef765839a8d0de52095e3dec3584fc347b94b2
-X-Osstest-Versions-That:
-    ovmf=e5e1cd1a83e2e7aa2179db3de5fc00d76713ec6f
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 28 Apr 2023 09:23:04 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 180463 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/180463/
+If PIE is enabled, all symbol references would be RIP-relative. However,
+PVH booting runs in low address space, which could cause wrong x86_init
+callbacks assignment. Since init_top_pgt has building high kernel
+address mapping, let PVH booting runs in high address space to make all
+things right.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 95ef765839a8d0de52095e3dec3584fc347b94b2
-baseline version:
- ovmf                 e5e1cd1a83e2e7aa2179db3de5fc00d76713ec6f
+PVH booting assumes that no relocation happened. Since the kernel
+compile address is still in top 2G, so it is allowed to use R_X86_64_32S
+for symbol references in pvh_start_xen().
 
-Last test of basis   180454  2023-04-27 22:12:22 Z    0 days
-Testing same since   180463  2023-04-28 06:10:48 Z    0 days    1 attempts
+Signed-off-by: Hou Wenlong <houwenlong.hwl@antgroup.com>
+Cc: Thomas Garnier <thgarnie@chromium.org>
+Cc: Lai Jiangshan <jiangshan.ljs@antgroup.com>
+Cc: Kees Cook <keescook@chromium.org>
+---
+ arch/x86/platform/pvh/head.S | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  BruceX Wang <brucex.wang@intel.com>
+diff --git a/arch/x86/platform/pvh/head.S b/arch/x86/platform/pvh/head.S
+index 5842fe0e4f96..09518d4de042 100644
+--- a/arch/x86/platform/pvh/head.S
++++ b/arch/x86/platform/pvh/head.S
+@@ -94,6 +94,13 @@ SYM_CODE_START_LOCAL(pvh_start_xen)
+ 	/* 64-bit entry point. */
+ 	.code64
+ 1:
++#ifdef CONFIG_X86_PIE
++	movabs  $2f, %rax
++	ANNOTATE_RETPOLINE_SAFE
++	jmp *%rax
++2:
++	ANNOTATE_NOENDBR // above
++#endif
+ 	/* Set base address in stack canary descriptor. */
+ 	mov $MSR_GS_BASE,%ecx
+ #if defined(CONFIG_STACKPROTECTOR_FIXED)
+@@ -149,9 +156,15 @@ SYM_CODE_END(pvh_start_xen)
+ 	.section ".init.data","aw"
+ 	.balign 8
+ SYM_DATA_START_LOCAL(gdt)
++	/*
++	 * Use an ASM_PTR (quad on x64) for _pa(gdt_start) because PIE requires
++	 * a pointer size storage value before applying the relocation. On
++	 * 32-bit _ASM_PTR will be a long which is aligned the space needed for
++	 * relocation.
++	 */
+ 	.word gdt_end - gdt_start
+-	.long _pa(gdt_start)
+-	.word 0
++	_ASM_PTR _pa(gdt_start)
++	.balign 8
+ SYM_DATA_END(gdt)
+ SYM_DATA_START_LOCAL(gdt_start)
+ 	.quad 0x0000000000000000            /* NULL descriptor */
+-- 
+2.31.1
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   e5e1cd1a83..95ef765839  95ef765839a8d0de52095e3dec3584fc347b94b2 -> xen-tested-master
 
