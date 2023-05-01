@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 100E6C77B73
-	for <xen-devel@archiver.kernel.org>; Mon,  1 May 2023 19:29:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.528099.820845 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5656C7EE2C
+	for <xen-devel@archiver.kernel.org>; Mon,  1 May 2023 19:31:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.528101.820857 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptZCt-0004t2-L2; Mon, 01 May 2023 19:29:07 +0000
+	id 1ptZER-0000mt-91; Mon, 01 May 2023 19:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 528099.820845; Mon, 01 May 2023 19:29:07 +0000
+Received: by outflank-mailman (output) from mailman id 528101.820857; Mon, 01 May 2023 19:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptZCt-0004rw-BG; Mon, 01 May 2023 19:29:07 +0000
-Received: by outflank-mailman (input) for mailman id 528099;
- Mon, 01 May 2023 19:29:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ptZER-0000mm-5e; Mon, 01 May 2023 19:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 528101;
+ Mon, 01 May 2023 19:30:41 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Chj3=AW=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1ptZCq-0006PY-Mg
- for xen-devel@lists.xenproject.org; Mon, 01 May 2023 19:29:04 +0000
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [2607:f8b0:4864:20::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6d8d0f37-e856-11ed-8611-37d641c3527e;
- Mon, 01 May 2023 21:29:02 +0200 (CEST)
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1aaf706768cso10983245ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 01 May 2023 12:29:01 -0700 (PDT)
-Received: from fedora.hsd1.ca.comcast.net ([2601:644:937f:7f20::9a2c])
- by smtp.googlemail.com with ESMTPSA id
- u8-20020a170902bf4800b0019c13d032d8sm18175622pls.253.2023.05.01.12.28.59
+ <SRS0=lARM=AW=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1ptZEP-0000m4-9y
+ for xen-devel@lists.xenproject.org; Mon, 01 May 2023 19:30:41 +0000
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [2607:f8b0:4864:20::831])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a7c2d785-e856-11ed-b225-6b7b168915f2;
+ Mon, 01 May 2023 21:30:40 +0200 (CEST)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-3ef6e8493ebso14045741cf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 01 May 2023 12:30:40 -0700 (PDT)
+Received: from pm2-ws13.praxislan02.com
+ (207-172-141-204.s8906.c3-0.slvr-cbr1.lnh-slvr.md.cable.rcncustomer.com.
+ [207.172.141.204]) by smtp.gmail.com with ESMTPSA id
+ d6-20020ac80606000000b003bf9f9f1844sm9351784qth.71.2023.05.01.12.30.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 May 2023 12:29:00 -0700 (PDT)
+ Mon, 01 May 2023 12:30:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,245 +48,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d8d0f37-e856-11ed-8611-37d641c3527e
+X-Inumbo-ID: a7c2d785-e856-11ed-b225-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682969341; x=1685561341;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dfen1Ya6fa7BCRlN1BPOcmTNp3Sy/DALCm51X/wHZX4=;
-        b=NGlfJzK3SLIyrzVeCW+cy/LENuF7AIYcpLjneyCln8/dN8tsSa+TUgx6Zs0xZt09V/
-         AUoO/9vVboMIkkiAJKzWw3zNTkXyZHbg5i+Uv3Zqtu+rX4tuOiaEx2sdsDxoZuaBDGgr
-         vod9dLgUvGamVrCZ2EGOCdE8ToYnRSXk/vhm78x+dP7MR2nyb1QcOC5STzovq8Qe7Hqo
-         h0w/rTHUO6l4DW/cRdBZ54cZqeORpVG+YoPGSUP9GNzfvkM/15zFtG0hwm7rzS97mp6T
-         8K3nb/fOTHh3fKdVDbkoQtqh9GEw5zSK4hVf63htcA2MUZQPuMJk5JXlIyYiKdaNTnZr
-         +1fQ==
+        d=gmail.com; s=20221208; t=1682969438; x=1685561438;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J4I9pwZJc+JjJXrrhRllN1qzGBzavb5IgPCBPwFplUc=;
+        b=fmiPSYc2nGsg78ceE6+kbaB+qUy1PF1cvWxSlRh2fDCshuHC0BS7N7CUoDCcKsUWNI
+         d3qriqn5pdIkDU3LuxpIjij2MwV09x7y7mk1aOtTW2/4tuFmYPTSpknyx+8ASI3Kzhex
+         Nm8AHOMc5dViFo+xWPkFnMLzYT5hZ3SDOH3sH18iQuvRDgrP7nKV7c7Xg7Y5jaxqqZBg
+         H4I7v+SMWoVXGDasH1UTZnVj9C0UWEpNlUkqwmJD0mn7go6wgLCkn5dGaD3M2P5dK2A8
+         PHTHrwO7yBQh0uxa0ka3Fdoy9HovpfZCViu5tV2DutmBJ63X0eNKV2aI3fZHndCBEvZQ
+         YaQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682969341; x=1685561341;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dfen1Ya6fa7BCRlN1BPOcmTNp3Sy/DALCm51X/wHZX4=;
-        b=dQANMYcFTypk+0dw2i8Pr8QpO5rIvlzvisICD9U11IGWs8UWTA22JUzbvfUU68M6fS
-         CJ1bJyg7L/sppHsJHAIjRfamfauXi4rVuGlWU7xGQDBNRYoxGy3Ekndeuax7iS+oOxJL
-         kkOt/FJg9+bmb8KF83pkhO5sEn+eTnSzqb/sHd0b9duCO/i1TdZP4xlUesl/jGyT3Mlz
-         6Ix3bN9v8bwCvZTFi+UARLTId7v0yee12DvBEhD4ioYR+W9ycNvJWSB6bMHLZKirFfUF
-         CL2HWRCOFtYFI3fBOQV4qlX6ueyUg4Bfmiz/ZjZ3XM6s/SB5oyMdIuTLSgG4SNRXrI50
-         g/ow==
-X-Gm-Message-State: AC+VfDyPcafaDaxArqUqHxJ9qnZdUALzzhKZ/fJMTbYQXy8u2VihkMdc
-	13w4LoPTFj2sa0ot1wFpVt4=
-X-Google-Smtp-Source: ACHHUZ4bym3aGkcEwh3pzEy9AQ1AIJMbPocjKSt/BA7y0pQIbB80eZOWxLwavvxYdF9801tFQUA10w==
-X-Received: by 2002:a17:903:124b:b0:1a2:8c7e:f315 with SMTP id u11-20020a170903124b00b001a28c7ef315mr17565749plh.21.1682969341343;
-        Mon, 01 May 2023 12:29:01 -0700 (PDT)
-From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>
-Cc: linux-mm@kvack.org,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	kvm@vger.kernel.org,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
-	Arnd Bergmann <arnd@arndb.de>
-Subject: [PATCH v2 19/34] pgalloc: Convert various functions to use ptdescs
-Date: Mon,  1 May 2023 12:28:14 -0700
-Message-Id: <20230501192829.17086-20-vishal.moola@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230501192829.17086-1-vishal.moola@gmail.com>
-References: <20230501192829.17086-1-vishal.moola@gmail.com>
+        d=1e100.net; s=20221208; t=1682969438; x=1685561438;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=J4I9pwZJc+JjJXrrhRllN1qzGBzavb5IgPCBPwFplUc=;
+        b=AkwP21x1YMHz+VDLjyXWd8TYSwJAFfHE/le+wxlnZH4Z/+BxCM4mSJoF7yDNQpM4o1
+         Yx2Y2c0TZSR+lqstxRXbxfrAAZX2dZHe+xaQ0M9hWkiK+NPezLtVfmdjz21VZz7FbwNp
+         87IKrmaUTXA1U0zTN8cTFBB9ukaxDSYLMl/xDgy7WJhc+KHDe7PmE5XBxGI8aKO17VvZ
+         yVh8aff8ZQAh+CyFd7nMajNkocoOGv1QWpg6XSusYyAbkjdzIMpRGq5rVqkMT6W8MidC
+         CamCeibj3MFFYtapovFoN2RhM01DE6OldzGOFs14tUpjtBEP6ae/UjnvW1VJaexKI5b6
+         EvGQ==
+X-Gm-Message-State: AC+VfDxL6NsLG1fagJBnwdkcaegE+M7uwg3rdIGfZD4snFyz4v4gYTh5
+	rz5Fb05apbPKSOE+0bxKyz+HxaLYgSo=
+X-Google-Smtp-Source: ACHHUZ6JC6uoyLOBqmP1EpZkLhQWLiit8irznw5BGejX4UnZK6DMIMe/egnWLI5OCWF/y+K3B+ujnQ==
+X-Received: by 2002:ac8:5846:0:b0:3ef:3511:f494 with SMTP id h6-20020ac85846000000b003ef3511f494mr24788647qth.16.1682969438585;
+        Mon, 01 May 2023 12:30:38 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Henry Wang <Henry.Wang@arm.com>,
+	Community Manager <community.manager@xenproject.org>
+Subject: [PATCH v3 00/14 RESEND] Intel Hardware P-States (HWP) support
+Date: Mon,  1 May 2023 15:30:20 -0400
+Message-Id: <20230501193034.88575-1-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+Hi,
 
-Some of the functions use the *get*page*() helper functions. Convert
-these to use ptdesc_alloc() and ptdesc_address() instead to help
-standardize page tables further.
+Resending since I messed up the To: line.  Sorry about that.
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
----
- include/asm-generic/pgalloc.h | 62 +++++++++++++++++++++--------------
- 1 file changed, 37 insertions(+), 25 deletions(-)
+This patch series adds Hardware-Controlled Performance States (HWP) for
+Intel processors to Xen.
 
-diff --git a/include/asm-generic/pgalloc.h b/include/asm-generic/pgalloc.h
-index a7cf825befae..7d4a1f5d3c17 100644
---- a/include/asm-generic/pgalloc.h
-+++ b/include/asm-generic/pgalloc.h
-@@ -18,7 +18,11 @@
-  */
- static inline pte_t *__pte_alloc_one_kernel(struct mm_struct *mm)
- {
--	return (pte_t *)__get_free_page(GFP_PGTABLE_KERNEL);
-+	struct ptdesc *ptdesc = ptdesc_alloc(GFP_PGTABLE_KERNEL, 0);
-+
-+	if (!ptdesc)
-+		return NULL;
-+	return (pte_t *)ptdesc_address(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE_KERNEL
-@@ -41,7 +45,7 @@ static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm)
-  */
- static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
- {
--	free_page((unsigned long)pte);
-+	ptdesc_free(virt_to_ptdesc(pte));
- }
- 
- /**
-@@ -49,7 +53,7 @@ static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
-  * @mm: the mm_struct of the current context
-  * @gfp: GFP flags to use for the allocation
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocates a ptdesc and runs the ptdesc_pte_ctor().
-  *
-  * This function is intended for architectures that need
-  * anything beyond simple page allocation or must have custom GFP flags.
-@@ -58,17 +62,17 @@ static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
-  */
- static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
- {
--	struct page *pte;
-+	struct ptdesc *ptdesc;
- 
--	pte = alloc_page(gfp);
--	if (!pte)
-+	ptdesc = ptdesc_alloc(gfp, 0);
-+	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pte_page_ctor(pte)) {
--		__free_page(pte);
-+	if (!ptdesc_pte_ctor(ptdesc)) {
-+		ptdesc_free(ptdesc);
- 		return NULL;
- 	}
- 
--	return pte;
-+	return ptdesc_page(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE
-@@ -76,7 +80,7 @@ static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
-  * pte_alloc_one - allocate a page for PTE-level user page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocates a ptdesc and runs the ptdesc_pte_ctor().
-  *
-  * Return: `struct page` initialized as page table or %NULL on error
-  */
-@@ -98,8 +102,10 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
-  */
- static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
- {
--	pgtable_pte_page_dtor(pte_page);
--	__free_page(pte_page);
-+	struct ptdesc *ptdesc = page_ptdesc(pte_page);
-+
-+	ptdesc_pte_dtor(ptdesc);
-+	ptdesc_free(ptdesc);
- }
- 
- 
-@@ -110,7 +116,7 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
-  * pmd_alloc_one - allocate a page for PMD-level page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pmd_page_ctor().
-+ * Allocates a ptdesc and runs the ptdesc_pmd_ctor().
-  * Allocations use %GFP_PGTABLE_USER in user context and
-  * %GFP_PGTABLE_KERNEL in kernel context.
-  *
-@@ -118,28 +124,30 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
-  */
- static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
- {
--	struct page *page;
-+	struct ptdesc *ptdesc;
- 	gfp_t gfp = GFP_PGTABLE_USER;
- 
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	page = alloc_page(gfp);
--	if (!page)
-+	ptdesc = ptdesc_alloc(gfp, 0);
-+	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pmd_page_ctor(page)) {
--		__free_page(page);
-+	if (!ptdesc_pmd_ctor(ptdesc)) {
-+		ptdesc_free(ptdesc);
- 		return NULL;
- 	}
--	return (pmd_t *)page_address(page);
-+	return (pmd_t *)ptdesc_address(ptdesc);
- }
- #endif
- 
- #ifndef __HAVE_ARCH_PMD_FREE
- static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- {
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pmd);
-+
- 	BUG_ON((unsigned long)pmd & (PAGE_SIZE-1));
--	pgtable_pmd_page_dtor(virt_to_page(pmd));
--	free_page((unsigned long)pmd);
-+	ptdesc_pmd_dtor(ptdesc);
-+	ptdesc_free(ptdesc);
- }
- #endif
- 
-@@ -149,11 +157,15 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- 
- static inline pud_t *__pud_alloc_one(struct mm_struct *mm, unsigned long addr)
- {
--	gfp_t gfp = GFP_PGTABLE_USER;
-+	gfp_t gfp = GFP_PGTABLE_USER | __GFP_ZERO;
-+	struct ptdesc *ptdesc;
- 
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	return (pud_t *)get_zeroed_page(gfp);
-+	ptdesc = ptdesc_alloc(gfp, 0);
-+	if (!ptdesc)
-+		return NULL;
-+	return (pud_t *)ptdesc_address(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PUD_ALLOC_ONE
-@@ -175,7 +187,7 @@ static inline pud_t *pud_alloc_one(struct mm_struct *mm, unsigned long addr)
- static inline void __pud_free(struct mm_struct *mm, pud_t *pud)
- {
- 	BUG_ON((unsigned long)pud & (PAGE_SIZE-1));
--	free_page((unsigned long)pud);
-+	ptdesc_free(virt_to_ptdesc(pud));
- }
- 
- #ifndef __HAVE_ARCH_PUD_FREE
-@@ -190,7 +202,7 @@ static inline void pud_free(struct mm_struct *mm, pud_t *pud)
- #ifndef __HAVE_ARCH_PGD_FREE
- static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
- {
--	free_page((unsigned long)pgd);
-+	ptdesc_free(virt_to_ptdesc(pgd));
- }
- #endif
- 
+v2 was only partially reviewed, so v3 is mostly a reposting of v2.  In v2 &
+v3, I think I addressed all comments for v1.  I kept patch 11 "xenpm:
+Factor out a non-fatal cpuid_parse variant", with a v2 comment
+explaining why I keep it.
+
+v3 adds "xen/x86: Tweak PDC bits when using HWP".  Qubes testing revealed
+an issue where enabling HWP can crash firwmare code (maybe SMM).  This
+requires a Linux change to get the PDC bits from Xen and pass them to
+ACPI.  Roger has a patch [0] to set the PDC bits.  Roger's 3 patch
+series was tested with "xen/x86: Tweak PDC bits when using HWP" on
+affected hardware and allowed proper operation.
+
+Previous cover letter:
+
+With HWP, the processor makes its own determinations for frequency
+selection, though users can set some parameters and preferences.  There
+is also Turbo Boost which dynamically pushes the max frequency if
+possible.
+
+The existing governors don't work with HWP since they select frequencies
+and HWP doesn't expose those.  Therefore a dummy hwp-interal governor is
+used that doesn't do anything.
+
+xenpm get-cpufreq-para is extended to show HWP parameters, and
+set-cpufreq-hwp is added to set them.
+
+A lightly loaded OpenXT laptop showed ~1W power savings according to
+powertop.  A mostly idle Fedora system (dom0 only) showed a more modest
+power savings.
+
+This for for a 10th gen 6-core 1600 MHz base 4900 MHZ max cpu.  In the
+default balance mode, Turbo Boost doesn't exceed 4GHz.  Tweaking the
+energy_perf preference with `xenpm set-cpufreq-hwp balance ene:64`,
+I've seen the CPU hit 4.7GHz before throttling down and bouncing around
+between 4.3 and 4.5 GHz.  Curiously the other cores read ~4GHz when
+turbo boost takes affect.  This was done after pinning all dom0 cores,
+and using taskset to pin to vCPU/pCPU 11 and running a bash tightloop.
+
+HWP defaults to disabled and running with the existing HWP configuration
+- it doesn't reconfigure by default.  It can be enabled with
+cpufreq=xen:hwp.
+
+Hardware Duty Cycling (HDC) is another feature to autonomously powerdown
+things.  It defaults to enabled when HWP is enabled, but HDC can be
+disabled on the command line.  cpufreq=xen:hwp,no-hdc
+
+I've only tested on 8th gen and 10th gen systems with activity window
+and energy_perf support.  So the pathes for CPUs lacking those features
+are untested.
+
+Fast MSR support was removed in v2.  The model specific checking was not
+done properly, and I don't have hardware to test with.  Since writes are
+expected to be infrequent, I just removed the code.
+
+This changes the systcl_pm_op hypercall, so that wants review.
+
+Regards,
+Jason
+
+[0] https://lore.kernel.org/xen-devel/20221121102113.41893-3-roger.pau@citrix.com/
+
+Jason Andryuk (14):
+  cpufreq: Allow restricting to internal governors only
+  cpufreq: Add perf_freq to cpuinfo
+  cpufreq: Export intel_feature_detect
+  cpufreq: Add Hardware P-State (HWP) driver
+  xenpm: Change get-cpufreq-para output for internal
+  xen/x86: Tweak PDC bits when using HWP
+  cpufreq: Export HWP parameters to userspace
+  libxc: Include hwp_para in definitions
+  xenpm: Print HWP parameters
+  xen: Add SET_CPUFREQ_HWP xen_sysctl_pm_op
+  libxc: Add xc_set_cpufreq_hwp
+  xenpm: Factor out a non-fatal cpuid_parse variant
+  xenpm: Add set-cpufreq-hwp subcommand
+  CHANGELOG: Add Intel HWP entry
+
+ CHANGELOG.md                              |   1 +
+ docs/misc/xen-command-line.pandoc         |   8 +-
+ tools/include/xenctrl.h                   |   6 +
+ tools/libs/ctrl/xc_pm.c                   |  18 +
+ tools/misc/xenpm.c                        | 355 +++++++++++-
+ xen/arch/x86/acpi/cpufreq/Makefile        |   1 +
+ xen/arch/x86/acpi/cpufreq/cpufreq.c       |  15 +-
+ xen/arch/x86/acpi/cpufreq/hwp.c           | 633 ++++++++++++++++++++++
+ xen/arch/x86/acpi/lib.c                   |   5 +
+ xen/arch/x86/cpu/mcheck/mce_intel.c       |   6 +
+ xen/arch/x86/include/asm/cpufeature.h     |  13 +-
+ xen/arch/x86/include/asm/msr-index.h      |  14 +
+ xen/drivers/acpi/pmstat.c                 |  23 +
+ xen/drivers/cpufreq/cpufreq.c             |  40 ++
+ xen/drivers/cpufreq/utility.c             |   1 +
+ xen/include/acpi/cpufreq/cpufreq.h        |  14 +
+ xen/include/acpi/cpufreq/processor_perf.h |   4 +
+ xen/include/acpi/pdc_intel.h              |   1 +
+ xen/include/public/sysctl.h               |  57 ++
+ 19 files changed, 1187 insertions(+), 28 deletions(-)
+ create mode 100644 xen/arch/x86/acpi/cpufreq/hwp.c
+
 -- 
-2.39.2
+2.40.0
 
 
