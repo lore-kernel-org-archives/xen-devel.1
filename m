@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30AD3C7EE24
-	for <xen-devel@archiver.kernel.org>; Tue,  2 May 2023 23:38:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.528865.822597 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04431C7EE26
+	for <xen-devel@archiver.kernel.org>; Tue,  2 May 2023 23:38:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.528869.822620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptzZ2-0007i9-24; Tue, 02 May 2023 23:37:44 +0000
+	id 1ptzZ5-000060-6Y; Tue, 02 May 2023 23:37:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 528865.822597; Tue, 02 May 2023 23:37:43 +0000
+Received: by outflank-mailman (output) from mailman id 528869.822620; Tue, 02 May 2023 23:37:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptzZ1-0007h6-MS; Tue, 02 May 2023 23:37:43 +0000
-Received: by outflank-mailman (input) for mailman id 528865;
- Tue, 02 May 2023 23:37:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ptzZ4-00004v-UB; Tue, 02 May 2023 23:37:46 +0000
+Received: by outflank-mailman (input) for mailman id 528869;
+ Tue, 02 May 2023 23:37:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/cxx=AX=amd.com=vikram.garhwal@srs-se1.protection.inumbo.net>)
- id 1ptzZ0-0004sC-C1
- for xen-devel@lists.xenproject.org; Tue, 02 May 2023 23:37:42 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2060e.outbound.protection.outlook.com
- [2a01:111:f400:7e89::60e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 547f4a68-e942-11ed-b225-6b7b168915f2;
- Wed, 03 May 2023 01:37:41 +0200 (CEST)
-Received: from DS7PR03CA0208.namprd03.prod.outlook.com (2603:10b6:5:3b6::33)
- by DM4PR12MB5071.namprd12.prod.outlook.com (2603:10b6:5:38a::6) with
+ id 1ptzZ2-0005Si-I8
+ for xen-devel@lists.xenproject.org; Tue, 02 May 2023 23:37:44 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20615.outbound.protection.outlook.com
+ [2a01:111:f400:7eab::615])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 542f6709-e942-11ed-8611-37d641c3527e;
+ Wed, 03 May 2023 01:37:42 +0200 (CEST)
+Received: from BN9PR03CA0353.namprd03.prod.outlook.com (2603:10b6:408:f6::28)
+ by DS0PR12MB8017.namprd12.prod.outlook.com (2603:10b6:8:146::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.31; Tue, 2 May
- 2023 23:37:36 +0000
-Received: from DM6NAM11FT068.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:3b6:cafe::99) by DS7PR03CA0208.outlook.office365.com
- (2603:10b6:5:3b6::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.32 via Frontend
- Transport; Tue, 2 May 2023 23:37:36 +0000
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT068.mail.protection.outlook.com (10.13.173.67) with Microsoft SMTP
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.20; Tue, 2 May
+ 2023 23:37:38 +0000
+Received: from BN8NAM11FT047.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:f6:cafe::79) by BN9PR03CA0353.outlook.office365.com
+ (2603:10b6:408:f6::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.21 via Frontend
+ Transport; Tue, 2 May 2023 23:37:38 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT047.mail.protection.outlook.com (10.13.177.220) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6363.21 via Frontend Transport; Tue, 2 May 2023 23:37:36 +0000
-Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6363.21 via Frontend Transport; Tue, 2 May 2023 23:37:38 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 2 May
- 2023 18:37:32 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB07.amd.com
- (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 2 May
- 2023 16:37:32 -0700
+ 2023 18:37:37 -0500
 Received: from xsjfnuv50.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Tue, 2 May 2023 18:37:32 -0500
+ Transport; Tue, 2 May 2023 18:37:37 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,36 +61,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 547f4a68-e942-11ed-b225-6b7b168915f2
+X-Inumbo-ID: 542f6709-e942-11ed-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SrS7MKU7griNkYaA1QkcHvAz1NT8Pcu0D5BbYbnr/ayE3Ag2TZjEAUJeykBeDaXsA5VusHzafAfq9VJXw3ttMv2CFBiLSJ0z5I7f0vh1BFv9GDdfZpWFzPGSek133i900JsoaYci0E48xxOkP1vEnh4P2N2QEPWI/SFxduijnXRENOkau8cBF9ZrbApazqiLabACxtapl0C+j5BfSa67NWNL3LN84UAQ48hNyQbfigittrGm++/NF3A4fSh5sEQ+UolZsEPgxCkZTwtpDnnCgPWkuAffKFSCQhmPtjtCZztWuem8sZTmwvJvEYaL4Eyb66/3gcL2XV1GjUdCUzQhRw==
+ b=lbLrY0XLfmtX5VteDWmQwhU0kk2Ylnhgds6RZ+kfmVv+oussvigC+N19O6lGs47+KeUblhHXdolMu9LH6xcHSmkRtx+yYjeY2V1qZTGJo7ZCRPwbhTYpVYUHIRmEpJbdX1P2cAHvf3C2RksP+jLk6vMv/ByNntBL78KPO2SNbGAAe3vTB8Q83yTXoKrXtEIAUovJ6/HTXVJPWI7TWQbOck8P7Tae/+L/rUiXDEL6IrRRYNRRWsMS1zYbVMPo9XClfsovvTbbvDeQpLMqEbBnj8eP0igPQb1TU/c4Aww3cmwDbkYqiI/XQcz231ht3T1raBkk6Oz05iiYUq0i7X4mbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Izi8iFk0zRF4BRyNOjdDxCvThsPDcczKcmdhMhR/3Sk=;
- b=KwdI1Z2YIxKavOXDxN7d/J7eEfXh5WYQDKccFRFeEFXolQusimheCwFSdn/y7h3MTVrREeYn2U3ccn+o4HiGQGONPtDZI6ZmYrBYkS7i2z9EuhY32wnsQ+G+QvsEVfvdNKRZx9D3ZHx7c1FgN4Q+9EQieG2qGsQh6FDuUDTBHOlTplJBB7qE8QZ4khYu9Hj1yRAKSj+sf5WFHUitLLhsn7sWoaOWlLahHCnTiDj03VcwJxJ0WA0RJpstYXxRSTwvmM7TaqhTB3C2oh29RKc1dspvpZxorovjxYTwUGWOkIFs8a1SaeZcpwCNdZnbigNbsHvaX7jxLv70qGCwGoqb7g==
+ bh=+CZpvoQNw8JQfGrQR7sP9j/mivY1rVi0G0xxugML0N8=;
+ b=OYsyBQ2qtqWf9g4uKUwiBP9H0/uFQGZgVXvKlpP8iP5ZoN4x9aKo/EFMymredk4PiW4oSgu3M5BWjelyXrC5qMVLoKFCLxWVOm2e6lgMhpwnbviHTt3NEhe5ivHhIrqa0bBFHNkqWBZLY8KddIbB6/W4T+vhlFyzWnjk3DQLF8RRYe21RM8so3gX9N1dJW2FzJWV3WanfYdE2DU0DbFmQkL8JKuOyf7L4cAmuDwiuqIZdkV70RS6oVV+bOEA89Y/TWwz/lkHPbQdKw1oLrYKh2rpqYesYyCN5AefVo/vtk/zeWTFbpWNaCK/xHq8t4KkmvMo35sAFYfpLLDpiS29Dw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Izi8iFk0zRF4BRyNOjdDxCvThsPDcczKcmdhMhR/3Sk=;
- b=VuNvzciNWJ4Lx0/rMEBLsVGEvfM3eIhHYxvb38q6fUaQhmahn2jrDfK13eOT4zO6kuHGYo2lPTbE7BXQUoePeXmsaxTwV8kiZL/Z/DO0z0UHp++qYoBWDSmBDt5+3mUR876gzcBMLQaWKvZ6KAQLrZ8tKHedZ0VE5wcw/d43Z0Q=
+ bh=+CZpvoQNw8JQfGrQR7sP9j/mivY1rVi0G0xxugML0N8=;
+ b=wPIjnURyLlj93gqdi6Z9aCwXcg+joWkR/kkmEM8sFZVJWqiAR9Zzf0gTzm0bh6clUjcfjwg/jMz6JuCxjD1vPxnPWM3Dqpc7cgWJanHT2GKTQ0W6aORAjlFk1ik/ZvSlwGmyUcBI+Ab0WbZQwEutjYwJ9Gj1xFpOVhJ40cnjhUQ=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 From: Vikram Garhwal <vikram.garhwal@amd.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <vikram.garhwal@amd.com>,
-	<michal.orzel@amd.com>, Julien Grall <julien@xen.org>, Vikram Garhwal
-	<fnu.vikram@xilinx.com>, David Gibson <david@gibson.dropbear.id.au>
-Subject: [XEN][PATCH v6 07/19] libfdt: overlay: change overlay_get_target()
-Date: Tue, 2 May 2023 16:36:38 -0700
-Message-ID: <20230502233650.20121-8-vikram.garhwal@amd.com>
+	<michal.orzel@amd.com>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN][PATCH v6 13/19] asm/smp.h: Fix circular dependency for device_tree.h and rwlock.h
+Date: Tue, 2 May 2023 16:36:44 -0700
+Message-ID: <20230502233650.20121-14-vikram.garhwal@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230502233650.20121-1-vikram.garhwal@amd.com>
 References: <20230502233650.20121-1-vikram.garhwal@amd.com>
@@ -102,162 +98,76 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT068:EE_|DM4PR12MB5071:EE_
-X-MS-Office365-Filtering-Correlation-Id: f6d2c9fa-7007-410d-69ba-08db4b6635a2
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT047:EE_|DS0PR12MB8017:EE_
+X-MS-Office365-Filtering-Correlation-Id: 497fbd75-4f3b-410f-3942-08db4b663709
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	eVMJI7TaxrFA/V7rVr0NqyN0WoPsJmJvpK7gnokNKWc6GU6g0vqSn53EQn8c3sZR+4IlT+SZXnzwOdMGL8hBC27wg9fxzUer8ui8dimykTIZ39M61mFWDrIOkU3MaSYs08NbJBF78SvnQ3Rl/04M5ZQbnm50kYVM+xuuysOjHSwg7ADDjZAFOKudF2RLo345dH7lylPcFnBHCKhj8areY+Awtd+W04IxWTRr5VWlON1qYjC+IwzZbe96lxO/By9yFLCrFaOBIr5a28yf+R8w2Wa9BxsO/v9QrzTRYmuDORLX0yFSPNCG6rnLRUHdJTO2S7cN6vobJXqW7qHGuEAgOo6vVEIQV2Za+BzFLAGFEjWOGfJTiGTf8pVefihRFj7KWqxpVtycFmywKfjkJDdePu2d/vCZ0nuqC0/ogh6BxUZ2YXenwusJuHyul7Mb/PUMGFgOvz1kjU90KxxHT3NPC/l4kpEmmcO/nDaZ8HevIC071FtUTX8DvlZp7LOOLSFhIiSAcXWJWHBsmw3inYsPkoA7DPVySm699o/TNOrps57+iASgLNDV6HnGxdCodGHRL6gtJP8wJRzVbK1k2YNYhvzhlKlO4AXbfPmzYTVUstKBm+eXr9sF5kCCF+0cLWKtJd8dFYTvmWS8R0LCEUzYbHfeL8a8/2xO+eoJGsghtKUwk849j0WhKaQxucynE+dIkj3Z8JtIlmgoMFzrw/rp2rTWFGUIwdP+W+4XR+Qkzqg=
+	QDJUL5UEsyw4J3mOZMHxO6MCIzm75A6YFTW2AkkQIcsuLRHs5vWqj64AKqydffx5mFFgPMwILp2KH7S/s2EeVNQYdWveT69oPyb25LzbrtBEY592D+WV68LQ/kx6hV3nBM1JFUIjzLIgJWIyHWGIorDRg4GP1w5RAXulf+7Q61hrJYNXc4Pd9DFyeJqOAFYhXwKMW5c41bI7WgyN/jD4cbQtX4+6oBUuizaN5u4f164CJMLg3DyiDK5/ecex3eh97PyONaJDMjaq4B74FyltkzLDz0YtnSA9VveGUs3Xe1smDdM9pATBCVOIjfVHem1wkh8FFVPBU0N9imnou9JI+jT+CS8rhHl4D860WfrG8ZjIkl+7yY4czOHf95HOZyR8Vf426SllumytAZFP3XhrP7bVD4tfqPGqy/VEe8Zf+HsmgtCyd0wcvYtBxi1VoozpHHUrdNm3mUAvnZ0S8MJ9U2nJnYFSI+mcemuUSkVWFxadpIokx9PaJ4VZQM42dtFk8cCW7QHC+7Jte7kNSJ2b339pKiQiYj70ICIhvNywYHEL7eOzXMUvoUqnKx1IRDGhVu9xeyVIOylmJpw0eQ3sl80hABabLPFDJLRct2aPwDDHF0tYgL2JNPAFDVnzs7ZsO6Zdzxh3A0SeGwDw0nYk4+Bknur1eOWtGSDxHvo/j715/FTzc6LAIlQUoGk3DM9tzpbwNTHw2Ga+YJ/rb/btLKHjzTx9KHbjiGOnco08ufU=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(136003)(396003)(346002)(39860400002)(376002)(451199021)(36840700001)(40470700004)(46966006)(26005)(1076003)(40460700003)(316002)(2906002)(70586007)(8936002)(70206006)(6916009)(5660300002)(86362001)(4326008)(8676002)(44832011)(356005)(81166007)(82740400003)(41300700001)(82310400005)(40480700001)(186003)(478600001)(47076005)(36860700001)(2616005)(336012)(426003)(54906003)(36756003)(83380400001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(396003)(136003)(346002)(39860400002)(376002)(451199021)(36840700001)(46966006)(40470700004)(81166007)(356005)(82740400003)(44832011)(41300700001)(8936002)(5660300002)(8676002)(2906002)(40480700001)(86362001)(40460700003)(82310400005)(6666004)(36860700001)(47076005)(54906003)(478600001)(186003)(36756003)(2616005)(70206006)(83380400001)(1076003)(26005)(336012)(6916009)(70586007)(4326008)(426003)(316002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2023 23:37:36.0859
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2023 23:37:38.4843
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6d2c9fa-7007-410d-69ba-08db4b6635a2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 497fbd75-4f3b-410f-3942-08db4b663709
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DM6NAM11FT068.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT047.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5071
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8017
 
-Rename overlay_get_target() to fdt_overlay_target_offset() and remove static
-function type.
+Dynamic programming ops will modify the dt_host and there might be other
+function which are browsing the dt_host at the same time. To avoid the race
+conditions, adding rwlock for browsing the dt_host. But adding rwlock in
+device_tree.h causes following circular dependency:
+    device_tree.h->rwlock.h->smp.h->asm/smp.h->device_tree.h
 
-This is done to get the target path for the overlay nodes which is very useful
-in many cases. For example, Xen hypervisor needs it when applying overlays
-because Xen needs to do further processing of the overlay nodes, e.g. mapping of
-resources(IRQs and IOMMUs) to other VMs, creation of SMMU pagetables, etc.
-
-Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
-Message-Id: <1637204036-382159-2-git-send-email-fnu.vikram@xilinx.com>
-Signed-off-by: David Gibson <david@gibson.dropbear.id.au>
-Origin: git://git.kernel.org/pub/scm/utils/dtc/dtc.git 45f3d1a095dd
+To fix this, removed the "#include <xen/device_tree.h> and forward declared
+"struct dt_device_node".
 
 Signed-off-by: Vikram Garhwal <vikram.garhwal@amd.com>
+Reviewed-by: Henry Wang <Henry.Wang@arm.com>
 Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
- xen/common/libfdt/fdt_overlay.c | 29 +++++++----------------------
- xen/common/libfdt/version.lds   |  1 +
- xen/include/xen/libfdt/libfdt.h | 18 ++++++++++++++++++
- 3 files changed, 26 insertions(+), 22 deletions(-)
+ xen/arch/arm/include/asm/smp.h | 3 ++-
+ xen/arch/arm/smpboot.c         | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/libfdt/fdt_overlay.c b/xen/common/libfdt/fdt_overlay.c
-index 7b95e2b639..acf0c4c2a6 100644
---- a/xen/common/libfdt/fdt_overlay.c
-+++ b/xen/common/libfdt/fdt_overlay.c
-@@ -41,37 +41,22 @@ static uint32_t overlay_get_target_phandle(const void *fdto, int fragment)
- 	return fdt32_to_cpu(*val);
- }
+diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
+index a37ca55bff..b12949ba8a 100644
+--- a/xen/arch/arm/include/asm/smp.h
++++ b/xen/arch/arm/include/asm/smp.h
+@@ -3,13 +3,14 @@
  
--/**
-- * overlay_get_target - retrieves the offset of a fragment's target
-- * @fdt: Base device tree blob
-- * @fdto: Device tree overlay blob
-- * @fragment: node offset of the fragment in the overlay
-- * @pathp: pointer which receives the path of the target (or NULL)
-- *
-- * overlay_get_target() retrieves the target offset in the base
-- * device tree of a fragment, no matter how the actual targeting is
-- * done (through a phandle or a path)
-- *
-- * returns:
-- *      the targeted node offset in the base device tree
-- *      Negative error code on error
-- */
--static int overlay_get_target(const void *fdt, const void *fdto,
--			      int fragment, char const **pathp)
-+int fdt_overlay_target_offset(const void *fdt, const void *fdto,
-+			      int fragment_offset, char const **pathp)
- {
- 	uint32_t phandle;
- 	const char *path = NULL;
- 	int path_len = 0, ret;
+ #ifndef __ASSEMBLY__
+ #include <xen/cpumask.h>
+-#include <xen/device_tree.h>
+ #include <asm/current.h>
+ #endif
  
- 	/* Try first to do a phandle based lookup */
--	phandle = overlay_get_target_phandle(fdto, fragment);
-+	phandle = overlay_get_target_phandle(fdto, fragment_offset);
- 	if (phandle == (uint32_t)-1)
- 		return -FDT_ERR_BADPHANDLE;
+ DECLARE_PER_CPU(cpumask_var_t, cpu_sibling_mask);
+ DECLARE_PER_CPU(cpumask_var_t, cpu_core_mask);
  
- 	/* no phandle, try path */
- 	if (!phandle) {
- 		/* And then a path based lookup */
--		path = fdt_getprop(fdto, fragment, "target-path", &path_len);
-+		path = fdt_getprop(fdto, fragment_offset, "target-path", &path_len);
- 		if (path)
- 			ret = fdt_path_offset(fdt, path);
- 		else
-@@ -638,7 +623,7 @@ static int overlay_merge(void *fdt, void *fdto)
- 		if (overlay < 0)
- 			return overlay;
- 
--		target = overlay_get_target(fdt, fdto, fragment, NULL);
-+		target = fdt_overlay_target_offset(fdt, fdto, fragment, NULL);
- 		if (target < 0)
- 			return target;
- 
-@@ -781,7 +766,7 @@ static int overlay_symbol_update(void *fdt, void *fdto)
- 			return -FDT_ERR_BADOVERLAY;
- 
- 		/* get the target of the fragment */
--		ret = overlay_get_target(fdt, fdto, fragment, &target_path);
-+		ret = fdt_overlay_target_offset(fdt, fdto, fragment, &target_path);
- 		if (ret < 0)
- 			return ret;
- 		target = ret;
-@@ -803,7 +788,7 @@ static int overlay_symbol_update(void *fdt, void *fdto)
- 
- 		if (!target_path) {
- 			/* again in case setprop_placeholder changed it */
--			ret = overlay_get_target(fdt, fdto, fragment, &target_path);
-+			ret = fdt_overlay_target_offset(fdt, fdto, fragment, &target_path);
- 			if (ret < 0)
- 				return ret;
- 			target = ret;
-diff --git a/xen/common/libfdt/version.lds b/xen/common/libfdt/version.lds
-index 7ab85f1d9d..cbce5d4a8b 100644
---- a/xen/common/libfdt/version.lds
-+++ b/xen/common/libfdt/version.lds
-@@ -77,6 +77,7 @@ LIBFDT_1.2 {
- 		fdt_appendprop_addrrange;
- 		fdt_setprop_inplace_namelen_partial;
- 		fdt_create_with_flags;
-+		fdt_overlay_target_offset;
- 	local:
- 		*;
- };
-diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
-index c71689e2be..fabddbee8c 100644
---- a/xen/include/xen/libfdt/libfdt.h
-+++ b/xen/include/xen/libfdt/libfdt.h
-@@ -2109,6 +2109,24 @@ int fdt_del_node(void *fdt, int nodeoffset);
-  */
- int fdt_overlay_apply(void *fdt, void *fdto);
- 
-+/**
-+ * fdt_overlay_target_offset - retrieves the offset of a fragment's target
-+ * @fdt: Base device tree blob
-+ * @fdto: Device tree overlay blob
-+ * @fragment_offset: node offset of the fragment in the overlay
-+ * @pathp: pointer which receives the path of the target (or NULL)
-+ *
-+ * fdt_overlay_target_offset() retrieves the target offset in the base
-+ * device tree of a fragment, no matter how the actual targeting is
-+ * done (through a phandle or a path)
-+ *
-+ * returns:
-+ *      the targeted node offset in the base device tree
-+ *      Negative error code on error
-+ */
-+int fdt_overlay_target_offset(const void *fdt, const void *fdto,
-+			      int fragment_offset, char const **pathp);
++struct dt_device_node;
 +
- /**********************************************************************/
- /* Debugging / informational functions                                */
- /**********************************************************************/
+ #define cpu_is_offline(cpu) unlikely(!cpu_online(cpu))
+ 
+ #define smp_processor_id() get_processor_id()
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index 4a89b3a834..255bbcc967 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -10,6 +10,7 @@
+ #include <xen/cpu.h>
+ #include <xen/cpumask.h>
+ #include <xen/delay.h>
++#include <xen/device_tree.h>
+ #include <xen/domain_page.h>
+ #include <xen/errno.h>
+ #include <xen/init.h>
 -- 
 2.17.1
 
