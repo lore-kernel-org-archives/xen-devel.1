@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50F4C77B78
-	for <xen-devel@archiver.kernel.org>; Tue,  2 May 2023 18:57:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.528784.822355 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D3DC77B73
+	for <xen-devel@archiver.kernel.org>; Tue,  2 May 2023 19:10:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.528788.822365 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptvBq-0000ki-2X; Tue, 02 May 2023 18:57:30 +0000
+	id 1ptvNl-0002Yt-4L; Tue, 02 May 2023 19:09:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 528784.822355; Tue, 02 May 2023 18:57:30 +0000
+Received: by outflank-mailman (output) from mailman id 528788.822365; Tue, 02 May 2023 19:09:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ptvBp-0000kb-VU; Tue, 02 May 2023 18:57:29 +0000
-Received: by outflank-mailman (input) for mailman id 528784;
- Tue, 02 May 2023 18:57:28 +0000
+	id 1ptvNl-0002Ym-1V; Tue, 02 May 2023 19:09:49 +0000
+Received: by outflank-mailman (input) for mailman id 528788;
+ Tue, 02 May 2023 19:09:48 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ptvBo-0000kJ-37
- for xen-devel@lists.xenproject.org; Tue, 02 May 2023 18:57:28 +0000
+ (envelope-from <julien@xen.org>) id 1ptvNj-0002Yg-V4
+ for xen-devel@lists.xenproject.org; Tue, 02 May 2023 19:09:47 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ptvBn-0003j4-FA; Tue, 02 May 2023 18:57:27 +0000
+ id 1ptvNi-00046d-Un; Tue, 02 May 2023 19:09:46 +0000
 Received: from 54-240-197-228.amazon.com ([54.240.197.228]
  helo=[192.168.27.23]) by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ptvBn-0005E7-98; Tue, 02 May 2023 18:57:27 +0000
+ id 1ptvNi-0005pv-Oo; Tue, 02 May 2023 19:09:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,38 +44,65 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
 	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=mUiVQ/ID7Mf9r5d/C6BFsfv6tI7q/JAE0UDgvSyOPsU=; b=WjTQ2BOSDP4ntjMiRL3gHONm9R
-	n2Yfob7K1cXcYtRbvpEDozixeJDvHAGGbHov5ntM5ebI7W/OW3XGRG6fcohxFQhCgPxcRtglKnyjq
-	bmlipOCZ2jeFBhhijBM86Ht368+KQlbzrDpFzekXjwSYlRVIAJISslizVXJkvhQ8lXDE=;
-Message-ID: <4e7f5761-e21c-ee8b-6bb4-cd3753ce9b33@xen.org>
-Date: Tue, 2 May 2023 19:57:25 +0100
+	bh=PQKNilhygwzDZCPuPcBWG5h80MuAqj51hGz16gI1WKI=; b=DMe6v1X6sejoZtew8uhtaR2Uyv
+	sA3qEhyiP0+gDqjWtRj+EZZjr0NlZ7gf+k5Pow/h+tBNdpseczojI1WGOYQzUhY9pDYG74sfj1wVe
+	4rsJ4pLvNYPtpvADJVpeW38QRE0+LO7qOmcKhNKxGUPSxUuI0A2zT/PigfRcgvd/qqfc=;
+Message-ID: <25027287-441a-304c-f035-0d3da3572d3a@xen.org>
+Date: Tue, 2 May 2023 20:09:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v4 06/13] tools/xenstore: add current connection to
- domain_memory_add() parameters
+Subject: Re: [PATCH v4 07/13] tools/xenstore: use accounting data array for
+ per-domain values
 Content-Language: en-US
 To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
 Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
 References: <20230405070349.25293-1-jgross@suse.com>
- <20230405070349.25293-7-jgross@suse.com>
+ <20230405070349.25293-8-jgross@suse.com>
 From: Julien Grall <julien@xen.org>
-In-Reply-To: <20230405070349.25293-7-jgross@suse.com>
+In-Reply-To: <20230405070349.25293-8-jgross@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Hi Juergen,
 
 On 05/04/2023 08:03, Juergen Gross wrote:
-> In order to enable switching memory accounting to the generic array
-> based accounting, add the current connection to the parameters of
-> domain_memory_add().
-> 
-> This requires to add the connection to some other functions, too.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+> index 5cfd730cf6..0d61bf4344 100644
+> --- a/tools/xenstore/xenstored_domain.h
+> +++ b/tools/xenstore/xenstored_domain.h
+> @@ -28,7 +28,10 @@ enum accitem {
+>   	ACC_NODES,
+>   	ACC_REQ_N,		/* Number of elements per request. */
+>   	ACC_TR_N = ACC_REQ_N,	/* Number of elements per transaction. */
+> -	ACC_N = ACC_TR_N,	/* Number of elements per domain. */
+> +	ACC_WATCH = ACC_TR_N,
+> +	ACC_OUTST,
+> +	ACC_MEM,
+> +	ACC_N,			/* Number of elements per domain. */
+>   };
+>   
+>   void handle_event(void);
+> @@ -107,9 +110,8 @@ static inline void domain_memory_add_nochk(struct connection *conn,
+>   void domain_watch_inc(struct connection *conn);
+>   void domain_watch_dec(struct connection *conn);
+>   int domain_watch(struct connection *conn);
+> -void domain_outstanding_inc(struct connection *conn);
+> -void domain_outstanding_dec(struct connection *conn);
+> -void domain_outstanding_domid_dec(unsigned int domid);
+> +void domain_outstanding_inc(struct connection *conn, unsigned int domid);
 
-Acked-by: Julien Grall <jgrall@amazon.com>
+AFAICT, all the caller of domain_outstanding_inc() will pass 'conn->id'. 
+So it is not entirely clear what's the benefits to add the extra parameter.
+
+I am not against this change (and same for removing *domid_dec()). But I 
+think this ought to be explained in the commit message as this feels 
+unrelated.
+
+> +void domain_outstanding_dec(struct connection *conn, unsigned int domid);
+>   int domain_get_quota(const void *ctx, struct connection *conn,
+>   		     unsigned int domid);
+>   
 
 Cheers,
 
