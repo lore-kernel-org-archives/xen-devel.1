@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C15AC77B7F
-	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 16:32:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529381.823735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D4BC77B78
+	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 16:32:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529380.823729 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puFOl-0004D8-J4; Wed, 03 May 2023 16:32:11 +0000
+	id 1puFOl-00047h-9j; Wed, 03 May 2023 16:32:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529381.823735; Wed, 03 May 2023 16:32:11 +0000
+Received: by outflank-mailman (output) from mailman id 529380.823729; Wed, 03 May 2023 16:32:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puFOl-0004Ay-BX; Wed, 03 May 2023 16:32:11 +0000
-Received: by outflank-mailman (input) for mailman id 529381;
- Wed, 03 May 2023 16:32:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1puFOl-00046e-1Y; Wed, 03 May 2023 16:32:11 +0000
+Received: by outflank-mailman (input) for mailman id 529380;
+ Wed, 03 May 2023 16:32:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=O9tK=AY=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1puFOj-0003pk-UX
+ id 1puFOj-0003pe-9y
  for xen-devel@lists.xenproject.org; Wed, 03 May 2023 16:32:09 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0c6e7a89-e9d0-11ed-b225-6b7b168915f2;
- Wed, 03 May 2023 18:32:08 +0200 (CEST)
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2ac79d4858dso1400431fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 03 May 2023 09:32:09 -0700 (PDT)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [2a00:1450:4864:20::12a])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0b1c3d72-e9d0-11ed-8611-37d641c3527e;
+ Wed, 03 May 2023 18:32:06 +0200 (CEST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-4f00c33c3d6so6788921e87.2
+ for <xen-devel@lists.xenproject.org>; Wed, 03 May 2023 09:32:06 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- h20-20020a2e9ed4000000b002a634bfa224sm6074321ljk.40.2023.05.03.09.32.07
+ h20-20020a2e9ed4000000b002a634bfa224sm6074321ljk.40.2023.05.03.09.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 May 2023 09:32:08 -0700 (PDT)
+ Wed, 03 May 2023 09:32:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c6e7a89-e9d0-11ed-b225-6b7b168915f2
+X-Inumbo-ID: 0b1c3d72-e9d0-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683131529; x=1685723529;
+        d=gmail.com; s=20221208; t=1683131526; x=1685723526;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sf2FBCUITLNv92K79Iv4iXww3Xtu3EP3+kJgTTV/WyQ=;
-        b=Wwb8m+A/MBKxX8/aWnWoEAimCvThAmY/wZKelw/NuyBSqjIs8K3Lh/c9Sq/1t/ME/B
-         ksePu5gs7LyHEmnqWN/5snSwFgID7DcOdjRzLgdyz6UeQ2TvdJq3H43a1PqnL468docT
-         nIyX+mzpXdJRddfjR681v6+JpEBQU55RJmGrZdq8eWhr+7EytTMr2nkRF2an9QIDFhY/
-         2hmGYZkQhzdVs8kMqWkfcGYopmM/kPsfP8H2SCeonQNHF/NcwTvMQLYvzD5OFOuQTX/W
-         /3u4WkPKpUYJ7j0GoR1w93PxgQBL26pniiLXqZ5ZlNj6fXtAn8Qc7MkjTJNl4CnIuwhx
-         NYxg==
+        bh=Na1AM2pS/tIxc8UzxXCz1qX+aY29hkPhhjEAhDGZruo=;
+        b=YN4i0x2Yf/gqJP/4Wil8NwO76B5aVgrwNYJfDOi8HrmreBLvnv7H08aytbVqZ11YhL
+         4KekE+f6UrOsu3MY9X0MLjVCZYapuKXWZQmCGXGqq8oAdXx3NeEHZitnOUlLKf47hQIK
+         vlcgKcr35nyhsh7XF1oHcpG/Q4bJJS3fAYMSY0cvU/HeMXSfq6cRBqE/bRG/69xs0Sr6
+         4icKCS2Oqd4uKktE5QoUTobPVOK4ETFx7dZIOhK1XQ8c7XZdnXz09wuhqf0jo67vsRsp
+         NK2vVQRZ+tmQYCMI8Qneg6sD6J93ozqM+SGdnvl+wYsxK5GDUpBkMIECURDrm9kV4ydO
+         tPxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683131529; x=1685723529;
+        d=1e100.net; s=20221208; t=1683131526; x=1685723526;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sf2FBCUITLNv92K79Iv4iXww3Xtu3EP3+kJgTTV/WyQ=;
-        b=itYgQfLeDAabNWq+STTHVqECHBZTPPusIWluzEq7TGW4478FN7Cp/Iui5ygvamzwUz
-         JUAV66xWxSEX948KZk1GevSBgnhGzWI4xMzE2DaS/igSZXBJFae2SySdBfRDtfYf1n+p
-         u1U4c+HRXJw6kukM/QewFONLXP9uONwT4eGZoO+uUbujyWcn+jLRXn25d5sQ5C6qndwp
-         mi2ln2SezsltZD7ZZ9GKCbbStixHj+y0aBBtlJRY1F2mgOI4zM2rrUN0Z9j4Yqo45IxC
-         8GW+IddELgLi9StkoUKABfyXscAJc377tDztVnlcEzkPPYj1NatWf4vTf2fsg4SI411L
-         3kUQ==
-X-Gm-Message-State: AC+VfDxoM+imqHaFJOZOmag6SnuTtLl9gmWnpP4NIvC1PoOHA3oqFq5C
-	4nYv+Mx2UskN5h5v9qaDfnCOHnQpTKA=
-X-Google-Smtp-Source: ACHHUZ5ONYjmDZJcXbTYja7oYhZ9BtG1XHn25ZZdgX5rmJ5PlsbPBv4Yf2u9gk6gVigp38rrlLOaxA==
-X-Received: by 2002:a2e:2c13:0:b0:2a7:6812:ed9d with SMTP id s19-20020a2e2c13000000b002a76812ed9dmr149304ljs.50.1683131528551;
-        Wed, 03 May 2023 09:32:08 -0700 (PDT)
+        bh=Na1AM2pS/tIxc8UzxXCz1qX+aY29hkPhhjEAhDGZruo=;
+        b=eII/XvRzZF/PXjkQ8ZFZoREfOlqHoiknav+w5Sz+PIpOGfLmLQWOQE7EXUR2XWtR5D
+         aLjnTOtf7S6GUHp9rOYfl2xzCB8Y5aIwsoGMDWKZJz++4ozQ28tbHQugnFluD+HV5/Rx
+         sfpU7IhZqV8uOe3HQCk4JmGlMzwnEYI+HbrozCES3w3LvRdRAluXM1Nc+ShDefJm1SUL
+         zRC9/8Kyl3J0AwowVYT+C/sD13gKHfLDGWAXd+JlxwrRi8nXhcYdipY9pyKEM7quvudO
+         qG2xjHzKb7IPn1Q5hErenOiaZj8RSEDIMGgCXzkoo+TByMfuF5Pk5wPlCu9zctWt44hb
+         N7eQ==
+X-Gm-Message-State: AC+VfDysJH1CQn/S7VEFuRQRKd3yt7XIhzg/2gU27msm2wh/9+O/Kcd1
+	67Ke0iL1sgT9NjKlc8rmAAvVj/Fys2w=
+X-Google-Smtp-Source: ACHHUZ6yZKqCW5UQULMXODri/ZEA/RVcnsdSbX8Yx5MfUVYSJ4SkZhriZAecO1eFmtWzAYYMtP4P3g==
+X-Received: by 2002:ac2:42d4:0:b0:4ec:9fe9:fea9 with SMTP id n20-20020ac242d4000000b004ec9fe9fea9mr1289229lfl.56.1683131525895;
+        Wed, 03 May 2023 09:32:05 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -87,57 +87,72 @@ Cc: Julien Grall <julien@xen.org>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v6 4/4] xen/riscv: remove dummy_bss variable
-Date: Wed,  3 May 2023 19:32:01 +0300
-Message-Id: <b651cf8d8f5aaa3e5b3ab57e41befc666b7629f1.1683131359.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v6 1/4] xen/riscv: add VM space layout
+Date: Wed,  3 May 2023 19:31:58 +0300
+Message-Id: <a4004849c87990e5379acc5d60a52492385cd8e0.1683131359.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1683131359.git.oleksii.kurochko@gmail.com>
 References: <cover.1683131359.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-After introduction of initial pagetables there is no any sense
-in dummy_bss variable as bss section will not be empty anymore.
+Also it was added explanation about ignoring of top VA bits
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V6:
- - Nothing changed. Only rebase
+ - update comment above the RISCV-64 layout table
+ - add Slot column to the table with RISCV-64 Layout
+ - update RV-64 layout table.
 ---
 Changes in V5:
- - Nothing changed. Only rebase
+* the patch was introduced in the current patch series.
 ---
-Changes in V4:
- - Nothing changed. Only rebase
----
-Changes in V3:
- * patch was introduced in the current one patch series (v3).
----
-Changes in V2:
- * patch was introduced in the current one patch series (v2).
----
- xen/arch/riscv/setup.c | 8 --------
- 1 file changed, 8 deletions(-)
+ xen/arch/riscv/include/asm/config.h | 31 +++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index cf5dc5824e..845d18d86f 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -8,14 +8,6 @@
- unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
-     __aligned(STACK_SIZE);
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 763a922a04..73b86ce789 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -4,6 +4,37 @@
+ #include <xen/const.h>
+ #include <xen/page-size.h>
  
--/*  
-- * To be sure that .bss isn't zero. It will simplify code of
-- * .bss initialization.
-- * TODO:
-- *   To be deleted when the first real .bss user appears
-- */
--int dummy_bss __attribute__((unused));
--
- void __init noreturn start_xen(unsigned long bootcpu_id,
-                                paddr_t dtb_addr)
- {
++/*
++ * RISC-V64 Layout:
++ *
++ * From the riscv-privileged doc:
++ *   When mapping between narrower and wider addresses,
++ *   RISC-V zero-extends a narrower physical address to a wider size.
++ *   The mapping between 64-bit virtual addresses and the 39-bit usable
++ *   address space of Sv39 is not based on zero-extension but instead
++ *   follows an entrenched convention that allows an OS to use one or
++ *   a few of the most-significant bits of a full-size (64-bit) virtual
++ *   address to quickly distinguish user and supervisor address regions.
++ *
++ * It means that:
++ *   top VA bits are simply ignored for the purpose of translating to PA.
++ *
++ * ============================================================================
++ *    Start addr    |   End addr        |  Size  | Slot       |area description
++ * ============================================================================
++ * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
++ * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
++ * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
++ *                 ...                  |  1 GB  | L2 510     | Unused
++ * 0000003200000000 |  0000007f40000000 | 331 GB | L2 200-609 | Direct map
++ *                 ...                  |  1 GB  | L2 199     | Unused
++ * 0000003100000000 |  0000003140000000 |  3 GB  | L2 196-198 | Frametable
++ *                 ...                  |  1 GB  | L2 195     | Unused
++ * 0000003080000000 |  00000030c0000000 |  1 GB  | L2 194     | VMAP
++ *     .................. unused ..................
++ * ============================================================================
++ */
++
+ #if defined(CONFIG_RISCV_64)
+ # define LONG_BYTEORDER 3
+ # define ELFSIZE 64
 -- 
 2.40.1
 
