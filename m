@@ -4,59 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C1B0C77B78
-	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 18:37:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529447.823874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C990EC7EE23
+	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 18:58:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529455.823884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puHLe-0007W7-MM; Wed, 03 May 2023 18:37:06 +0000
+	id 1puHgL-0001X2-Ck; Wed, 03 May 2023 18:58:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529447.823874; Wed, 03 May 2023 18:37:06 +0000
+Received: by outflank-mailman (output) from mailman id 529455.823884; Wed, 03 May 2023 18:58:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puHLe-0007W0-JX; Wed, 03 May 2023 18:37:06 +0000
-Received: by outflank-mailman (input) for mailman id 529447;
- Wed, 03 May 2023 18:26:55 +0000
+	id 1puHgL-0001Wv-9i; Wed, 03 May 2023 18:58:29 +0000
+Received: by outflank-mailman (input) for mailman id 529455;
+ Wed, 03 May 2023 18:58:28 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6/6o=AY=intel.com=sohil.mehta@srs-se1.protection.inumbo.net>)
- id 1puHBn-0006ZA-Gs
- for xen-devel@lists.xenproject.org; Wed, 03 May 2023 18:26:55 +0000
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1221fb74-e9e0-11ed-b225-6b7b168915f2;
- Wed, 03 May 2023 20:26:52 +0200 (CEST)
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 May 2023 11:14:32 -0700
-Received: from fmsmsx603.amr.corp.intel.com ([10.18.126.83])
- by fmsmga008.fm.intel.com with ESMTP; 03 May 2023 11:14:31 -0700
-Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
- fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Wed, 3 May 2023 11:14:31 -0700
-Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
- fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Wed, 3 May 2023 11:14:31 -0700
-Received: from FMSEDG603.ED.cps.intel.com (10.1.192.133) by
- fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23 via Frontend Transport; Wed, 3 May 2023 11:14:31 -0700
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.176)
- by edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.23; Wed, 3 May 2023 11:14:30 -0700
-Received: from BYAPR11MB3320.namprd11.prod.outlook.com (2603:10b6:a03:18::25)
- by BN9PR11MB5529.namprd11.prod.outlook.com (2603:10b6:408:102::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.22; Wed, 3 May
- 2023 18:14:28 +0000
-Received: from BYAPR11MB3320.namprd11.prod.outlook.com
- ([fe80::a0e0:efa7:eda3:b36b]) by BYAPR11MB3320.namprd11.prod.outlook.com
- ([fe80::a0e0:efa7:eda3:b36b%6]) with mapi id 15.20.6340.031; Wed, 3 May 2023
- 18:14:28 +0000
+ <SRS0=ZlPw=AY=citrix.com=prvs=4803f4e7c=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1puHgJ-0001Wp-Sn
+ for xen-devel@lists.xenproject.org; Wed, 03 May 2023 18:58:28 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7a7728d0-e9e4-11ed-b226-6b7b168915f2;
+ Wed, 03 May 2023 20:58:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -68,144 +38,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1221fb74-e9e0-11ed-b225-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1683138412; x=1714674412;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=YU1LpqW36QSHkB5/jJBCAPcOaEJjCOlcwEq4cJabuDE=;
-  b=NIJrpZ1nl7ilNw570AgiH8u45EuwVQrgX6BRoH5zYo3ddmWpP9SDuJcn
-   5wGPDcblT4zhfReqimwa5oJQux3Glg77RWzAlhBoQdRvyPFTZ+cgZ5w65
-   YsiynqCF45lj6IhguEnPR0K1pG0tFc3Tx39rsLkMNg4lCNsLRV4mtVeZr
-   vPP4VGBbt6u/+6C0tI55LEJxQf+Rl25KH9WfVvf4UlJ/tNBo5s480KlYk
-   SIkhiYk4Sk6MHvYKbMC5eOsGDqkHG2lW42SyrUpO2R6P6uBmGKsgUHCXl
-   6y/b3IXY3s+94psKDEllJzUhIVx3YDcyAXu5QE6mYsnbVgj1DqFNfIoG7
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10699"; a="347551839"
-X-IronPort-AV: E=Sophos;i="5.99,248,1677571200"; 
-   d="scan'208";a="347551839"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10699"; a="761589777"
-X-IronPort-AV: E=Sophos;i="5.99,247,1677571200"; 
-   d="scan'208";a="761589777"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gTPuKaefgy/ZBI5yTNUOYt0GMYuuLIQiUjXpmenHdINhxGqLze9cIZ9zPCq5YA8j4dJuhi5a4VzI3cyl5cnoe2VP49Zt/wdakJHNTS5eLz8owErWD+nODsbZuUwFhGpZDo8UtYcarQUl+8ttLjNjDdb7M8HWDSKhmGLduc1SgVDdxsGh+/paOrZV7hZIXZmcKZ6oFf/iYDQsDtvQjY4nckax7+8tjdaaJPOQlOcyQP5okZuyJ/RzWlhIx62pnxiZoNo6djMY5jh5i1nw0tHovAGb/a+4162xKDz5c/jaZQScqOAses2uMSmCsRWHkhZ0LNBBGhs9RTS0wI8KsfgeEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=acApguog1hrw9FK2yIo2Pl8uvzK1Ho/Twm/E37M8al4=;
- b=T+T7MBorv47xi1TIOwGHyMRcmEKDOQVcW0BNGrcJ4It2pq8/VSWC+803n/LbvLlYJ95N7InSprwc7yKA6Gv0w7fZltFvXwgtjxx6NaNeCEknq03Xf5LKhiNpp+BxtYV13P43SDxS6qEAyPiOhvgRv12oHKOU/kDYj4siTaprfcrWRdmdduKKa2HBW68qd8PdC029D+lKIEIDlS00C0uq9q6wBpxIzBP1gVsWJo+7ayOYy6fFIJhQTi5yHfZS1JMCpPtUwDW5Qx6bboKr4xWvbDHQyWiTHMliPYe9q7BCOuRdJdnf7BNXeqaBubM2eK7ifzCXvNHphDgYrEUUelynhg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Message-ID: <26e6947c-6c56-d8c0-1baf-1ff006258679@intel.com>
-Date: Wed, 3 May 2023 11:14:25 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v6 00/16] x86/mtrr: fix handling with PAT but without MTRR
-To: Juergen Gross <jgross@suse.com>
-CC: <mikelley@microsoft.com>, Thomas Gleixner <tglx@linutronix.de>, "Ingo
- Molnar" <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
-	<dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, "K. Y.
- Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, "Wei
- Liu" <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Boris Ostrovsky
-	<boris.ostrovsky@oracle.com>, <xen-devel@lists.xenproject.org>, "Jonathan
- Corbet" <corbet@lwn.net>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra
-	<peterz@infradead.org>, <linux-kernel@vger.kernel.org>, <x86@kernel.org>,
-	<linux-hyperv@vger.kernel.org>, <linux-doc@vger.kernel.org>
-References: <20230502120931.20719-1-jgross@suse.com>
-Content-Language: en-US
-From: Sohil Mehta <sohil.mehta@intel.com>
-In-Reply-To: <20230502120931.20719-1-jgross@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR05CA0048.namprd05.prod.outlook.com
- (2603:10b6:a03:33f::23) To BYAPR11MB3320.namprd11.prod.outlook.com
- (2603:10b6:a03:18::25)
+X-Inumbo-ID: 7a7728d0-e9e4-11ed-b226-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1683140305;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=TZ0uzHXRe5NFf4mFFjml7I3UzuX0lFxn2xNYPMCq6gY=;
+  b=a2QIiL5KdIyMuroyjjK4+MXSGFEJrKCyxdl/o1kLvWMN8s4I4ueCjYP4
+   hCIxpASNXch9cBuWjPq7TbUVUQm3jqQuT/IR3X2LtedyIa8D522MjNqlc
+   poCq2jo6+9VHIpr75H0oSgbw+btwuw0iL5hx6j87QVvK8IGFpIjc7hrUu
+   E=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 110204666
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+IronPort-Data: A9a23:8svK163+VERbbQF1EPbD5atxkn2cJEfYwER7XKvMYLTBsI5bpzMFx
+ mAbWDvTaPePazb1L951OYS2pk8Gvp6Hx9I3Hlc4pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+ J9OAjXkBJppJpMJjk71atANlVEliefTAOK6ULWeUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
+ tq3qMDEULOf82cc3lk8tuTS+XuDgNyo4GlD5gFmPqgQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
+ 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfDGhBx
+ P40JyI0X1OGl9Ob7L/mb+J+mZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJwNxB7E+
+ DyYl4j/KjQBJMSazzPYyy2Pr8PMrA/cdZ0dJqLto5aGh3XMnzdOWXX6T2CTvv2RmkO4HdVFJ
+ CQ86ico6KQ/6kGvZt38RAGj5m6JuAYGXNhdGPF87xuCooL2yQuEAmkPThZadccr8sQxQFQXO
+ kShxo2zQ2Y16fvMFCzbr+3Pxd+vBcQLBWILah4GYQQX2uigpZECoz7CE/NoArHg27UZBgrML
+ yC2QDkW3utD1pZSjfXkojgrkBr3+MGXE1ddChH/Gzv8s1gnPNPNi5mAswCz0BpWEGqOorBtV
+ lAgktPW0u0BBIrleMelELRUR+HBCxpo3VThbb9T83oJrW7FF4aLJ9w43d2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSX6NvcqON/oUZ5zncAM8OjYug38NIISMvCdiifelM2RWaJg9z+0yxV9+U3OE
+ ZyabdytHR4nNEiT9xLvH711+eZylkgDKZb7GciT5w65yoCXeHP9Ye5DaDNimMhltvLbyOgUm
+ v4DX/a3J+J3CbCnPnWKqtZMdTjn7xETXPjLliCeTcbbSiIOJY3rI6W5LW8JE2C9o5loqw==
+IronPort-HdrOrdr: A9a23:5hNiYKgNQUymdnn2984wpRfx6XBQXuQji2hC6mlwRA09TyX4ra
+ GTdZEgvnXJYVkqKRIdcLy7VZVoOEmsk6KdgrN+AV7BZmXbUQKTRelfBeGL+UyYJ8SUzIFgPM
+ lbE5SXBLXLfDpHZcuT2njeLz4rqOP3lZxBio/lvhNQcT0=
+X-Talos-CUID: 9a23:RltK3GEu6OG/keIfqmJq/UElGOwqYETsj3LAEmKUBDtMQ6+KHAo=
+X-Talos-MUID: 9a23:Yh4tvwVtzxDBkFbq/Br3lClnMs412vuNIWwOoLkhltaLBzMlbg==
+X-IronPort-AV: E=Sophos;i="5.99,248,1677560400"; 
+   d="scan'208";a="110204666"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH] x86/ucode: Refresh raw CPU policy after microcode load
+Date: Wed, 3 May 2023 19:58:13 +0100
+Message-ID: <20230503185813.3050382-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3320:EE_|BN9PR11MB5529:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd3be5c8-54b9-4457-ca96-08db4c023b98
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: hNgUlvKNNJaYjJgnnPrK3FzXCampfuny5QwS+vmt6f2QTBm1OtW4v4FoxRAWr2v3oX/pQ6GNPD9tjH2DacjOJtF+fYMJ7ZKqrGVjxOyQ/iBJNcqUYKpWywvlW9WNfwOtGbf11KIr2L4Wjf0LdRQhFBjWqFU3ut6vFm9r+7t2DVSMijey2HtR8mfakAYSRtjGIMkZfpRQAK6Kr2zOvbIuGsK7DfwlxsYuRCousZF4c5+tXJETZMpVknUeCIlzq5dWExFaM7JTBKHGGayNYgkxLvzaocGhFKhvBYqUXP86/sy2HTNuUXjp3BqQ6WBvknnX7VbD1vv25aUS88bTQ/EgR0bx0RAZEGdR05YEiciZTAKQa4YiNDDIUrHDUZZHRlXeteBm09FZ/PI9OZ7kby99SrNYtZKj+8jYOLe1Nx0zsDKR27rXeUr9s7Zug0EZWYebbcqV0ISZToGiqAiT6VP/C/NDZhygAF4crUWL3vej2SWNT/Cp5JniHptxrxnpaTKYRF/QaGTAXFqDwcKN08px/o0mOdEC0ofUySi/iBX1Fl2SLeDAu16SvLroS7NVSy1r6EMe1g5wuliOexjTbkPHPkT0N8Co713V7/6v/iQ++Tvzp2cxuhYdH/7ZaMtXbj4fpcqHRfKvjm5hbe5AqKwEnw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3320.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(136003)(39860400002)(366004)(346002)(376002)(396003)(451199021)(478600001)(2906002)(316002)(66946007)(66556008)(66476007)(4326008)(6486002)(6666004)(6916009)(82960400001)(36756003)(186003)(41300700001)(6506007)(6512007)(26005)(2616005)(86362001)(38100700002)(54906003)(7416002)(31686004)(8676002)(8936002)(31696002)(44832011)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QkQrTE5vd2lFV2h0TDNacUxjbXhzS3ZYSHlmTzdCRG8wcHArd1ZLK29BNlh0?=
- =?utf-8?B?eGg3RkNVVkp4eEU0TGxQZHkrYkRkMVJHTnJ3SXFwYmFCbTZqeTIvQnk5aWpK?=
- =?utf-8?B?ZnF1ZlBsNVR6QnFNRXFGbnhwR2E5QWFBUmsrZzZieWJEbWFHV1lyTlRtQkhI?=
- =?utf-8?B?S2N5cXNxaVhJUmtPREZwRVNkczRLTUZsMEtkT1F4QXBuWWw5NzUvclpMclZR?=
- =?utf-8?B?M3luYUsyUUxIT1hwRWlaUm1tc0Y3Zmpjczl6b2Y2YmNsT3Y4Q0ZlTVJrMFp1?=
- =?utf-8?B?WVltM0R3c2tRTlRUQWl6cW5SZC94bThnMXUySzlMc3lvZFptQkowUXdXZjc1?=
- =?utf-8?B?SXRIK3hwMWhXUyt6ek1CcWFtdysxZDk0ekUzTDA0Ukt5aFk1RGV1ek1GUWI2?=
- =?utf-8?B?d240NzRGUmlHMlQyUDk2NURDS2JKamp3cTl3NGZEOVR3S2g3RHlqRTNPcS9l?=
- =?utf-8?B?MUE1cS8yRTJQeE1ZNW83OUsyQTN0Y2lUbmZoZGpJdFZpN1F0ejUvYSs4Nkxh?=
- =?utf-8?B?UlQyU1RnQjB4aHVQWTVld2ZKQ1Jac3NBMm5jVzNHdlZUNmt6VEoybkt0Ni9j?=
- =?utf-8?B?MFVxYjkya2ZpekY0c1A0dmZyOWlWNS9rNU1HNDBSeFQzSkRKdkFEYkovZjlw?=
- =?utf-8?B?TDNpOXZ3RHNNUzVZZWljMnJuVC91TjFyK3IzNEwxdCtwUlJUbnFKbm5mVHEy?=
- =?utf-8?B?NmpEc1BvNEphSmRCV0tOSFRLblBLbElYS08yeFc1UUFEVnUyQVh5M0ZrMmxq?=
- =?utf-8?B?WFZ6dEN3ck1Hd1ZqYkxrSU10UTJqa3RhVmJPeTRRNHVnL3kyV045WEhMamN0?=
- =?utf-8?B?dXNzYUFYd1hmTEdTbko3TFVtenJZeHJlSXhsNk10UlZ2WWZXTkJrUDJLN2pV?=
- =?utf-8?B?anNUZ3NKN1NWcFN3QTZZdlRUbEpDVzVMNUJzZ1dXUWVyU2ZXQitxbFFZME4r?=
- =?utf-8?B?WTVwUzdkSWhyVUd2Tm1KRlh6V3d3MjFadUZ2YUlYeGd5TGZWU1djM3J6U25v?=
- =?utf-8?B?Mk0vWlBxeVhtYTViV01pbWFEaGxENnc4WDhwNDZaOTMxUENYVDNLanhLNDVP?=
- =?utf-8?B?akpFemxiWGJ4ZmUxd1VwOVVXd05wSGVuMHBnbGREWFJwR3NBSDJ6Qnl3QXkx?=
- =?utf-8?B?aGRGSWRhOUprODVrNVEvRzFmQjRPL1NlT2s5UmZ1WFR4SUFYZlJaL1ZCRWpl?=
- =?utf-8?B?L1VRSWJjT25RN1hwb1hzZnliS0VjYUhhTEMvSVFIRllTSzBSS1F4QWN0bDYz?=
- =?utf-8?B?ZVBqQTdlaXZ2eWRVcnZwdklJSWpxSUVCVlV6blFyTVk1UWcwNXRDcDNiR0Zv?=
- =?utf-8?B?ZTZJTTFXZXNIMEpzREdTS0ZJcGI2RFRoYU9rbDg1emljeENoSDdaT0V5U2l3?=
- =?utf-8?B?a01ZOEZ5U1ZHL1p5T3JzaTBEQlZMZWtUK3VPUG9TdG14eFNtanpxSzZtOFlD?=
- =?utf-8?B?ZTlIU0kxT0FiNGlhTGNRY2lETnhTM0tGYWowQ1kyd29KT25yZ1FtNmUzVFhC?=
- =?utf-8?B?b1FNMnpaV3J5ZkVIUVdmS1UwcXdORkNMVko2ZXlEUkJFbm9TYWl4citBTnJY?=
- =?utf-8?B?c256YkNJUGFPaVdIODBxVkZSZGZaWVFOZnBtWHVST1B1R1Z4azI2RGZIeDJl?=
- =?utf-8?B?aVViVyswTUZURmdrRGhmd0piYkdOMlhFV0NybFMyTWtIbmcwcjN4NGc2bm5J?=
- =?utf-8?B?NlhhR0pQSlo0ZnIyV1p2V1Y2Um8zUnhrQkdEa2FJaS8rdDR2eUMrK3VDV0x3?=
- =?utf-8?B?NENtdEVHUWxqLzJNNVJoZjRKUlhUYmoyTU9iemtSN0lNRVpNZG8xT2dXalJp?=
- =?utf-8?B?M1pwWk1Nakc4KzdWMU9memdUeUJldkdaV1Z6S29RYzlYUkhFN1lXbHBBZ2xa?=
- =?utf-8?B?L3NDMHlRb2dQQVoxR0xSWWJjeWNUMXgxN0J0MmtyNlFvME1DY05qTDEvcytm?=
- =?utf-8?B?Sm82V1NKZUY3WE5ycEEzeXUvNjJzY2dIWEdVUHZSU1kvLytFOXhtSDhFZzZn?=
- =?utf-8?B?bmFpT05rZk9YSEdqZXRUeDZaazlmdFRPTnZKQWtpRjBTYTBkQURZWUVGbjFM?=
- =?utf-8?B?NUUvUDFBSjdRanV1T0pKZlV2bEx3cS93QjMvWFFURHhXbmVnQnQ4QzdCWk02?=
- =?utf-8?Q?ps/1dgk7bcBs1d+wmhSmBhegD?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd3be5c8-54b9-4457-ca96-08db4c023b98
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3320.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2023 18:14:27.8377
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8ktFFMmqRMunU622QH2XA2R1m6wBuoC/irgg/3W26PGzyAN7jZ4Tz010x8zYpjva6OQxsQ2CxSOtMsk2EVa7oA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR11MB5529
-X-OriginatorOrg: intel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-> Juergen Gross (16):
->   x86/mtrr: remove physical address size calculation
->   x86/mtrr: replace some constants with defines
->   x86/mtrr: support setting MTRR state for software defined MTRRs
->   x86/hyperv: set MTRR state when running as SEV-SNP Hyper-V guest
->   x86/xen: set MTRR state when running as Xen PV initial domain
->   x86/mtrr: replace vendor tests in MTRR code
->   x86/mtrr: have only one set_mtrr() variant
->   x86/mtrr: move 32-bit code from mtrr.c to legacy.c
->   x86/mtrr: allocate mtrr_value array dynamically
->   x86/mtrr: add get_effective_type() service function
->   x86/mtrr: construct a memory map with cache modes
->   x86/mtrr: add mtrr=debug command line option
->   x86/mtrr: use new cache_map in mtrr_type_lookup()
->   x86/mtrr: don't let mtrr_type_lookup() return MTRR_TYPE_INVALID
->   x86/mm: only check uniform after calling mtrr_type_lookup()
->   x86/mtrr: remove unused code
-> 
+Loading microcode can cause new features to appear.  This has happened
+routinely since Spectre/Meltdown, and even the presence of new status bits can
+mean the administrator has no further work to perform.
 
-A Nit -> Documentation/process/maintainer-tip.rst suggests:
-"The condensed patch description in the subject line should start with a
-uppercase letter and ..."
+Refresh the raw CPU policy after late microcode load, so xen-cpuid can reflect
+the updated state of the system.
 
--Sohil
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+
+This is also the first step of being able to livepatch support for new
+functionality in microcode.
+---
+ xen/arch/x86/cpu-policy.c             | 6 +++---
+ xen/arch/x86/cpu/microcode/core.c     | 4 ++++
+ xen/arch/x86/include/asm/cpu-policy.h | 6 ++++++
+ 3 files changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
+index a58bf6cad54e..ef6a2d0d180a 100644
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -15,7 +15,7 @@
+ #include <asm/setup.h>
+ #include <asm/xstate.h>
+ 
+-struct cpu_policy __ro_after_init     raw_cpu_policy;
++struct cpu_policy __read_mostly       raw_cpu_policy;
+ struct cpu_policy __ro_after_init    host_cpu_policy;
+ #ifdef CONFIG_PV
+ struct cpu_policy __ro_after_init  pv_max_cpu_policy;
+@@ -343,7 +343,7 @@ static void recalculate_misc(struct cpu_policy *p)
+     }
+ }
+ 
+-static void __init calculate_raw_policy(void)
++void calculate_raw_cpu_policy(void)
+ {
+     struct cpu_policy *p = &raw_cpu_policy;
+ 
+@@ -655,7 +655,7 @@ static void __init calculate_hvm_def_policy(void)
+ 
+ void __init init_guest_cpu_policies(void)
+ {
+-    calculate_raw_policy();
++    calculate_raw_cpu_policy();
+     calculate_host_policy();
+ 
+     if ( IS_ENABLED(CONFIG_PV) )
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 61cd36d601d6..cd456c476fbf 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -34,6 +34,7 @@
+ #include <xen/watchdog.h>
+ 
+ #include <asm/apic.h>
++#include <asm/cpu-policy.h>
+ #include <asm/delay.h>
+ #include <asm/nmi.h>
+ #include <asm/processor.h>
+@@ -677,6 +678,9 @@ static long cf_check microcode_update_helper(void *data)
+         spin_lock(&microcode_mutex);
+         microcode_update_cache(patch);
+         spin_unlock(&microcode_mutex);
++
++        /* Refresh the raw CPU policy, in case the features have changed. */
++        calculate_raw_cpu_policy();
+     }
+     else
+         microcode_free_patch(patch);
+diff --git a/xen/arch/x86/include/asm/cpu-policy.h b/xen/arch/x86/include/asm/cpu-policy.h
+index b361537a602b..99d5a8e67eeb 100644
+--- a/xen/arch/x86/include/asm/cpu-policy.h
++++ b/xen/arch/x86/include/asm/cpu-policy.h
+@@ -24,4 +24,10 @@ void init_dom0_cpuid_policy(struct domain *d);
+ /* Clamp the CPUID policy to reality. */
+ void recalculate_cpuid_policy(struct domain *d);
+ 
++/*
++ * Collect the raw CPUID and MSR values.  Called during boot, and after late
++ * microcode loading.
++ */
++void calculate_raw_cpu_policy(void);
++
+ #endif /* X86_CPU_POLICY_H */
+-- 
+2.30.2
+
 
