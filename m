@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02357C77B75
-	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 15:15:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529289.823537 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABFDAC77B78
+	for <xen-devel@archiver.kernel.org>; Wed,  3 May 2023 15:15:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529298.823547 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puEBt-0002J4-51; Wed, 03 May 2023 15:14:49 +0000
+	id 1puECX-0002xY-JF; Wed, 03 May 2023 15:15:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529289.823537; Wed, 03 May 2023 15:14:49 +0000
+Received: by outflank-mailman (output) from mailman id 529298.823547; Wed, 03 May 2023 15:15:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puEBt-0002Ix-2C; Wed, 03 May 2023 15:14:49 +0000
-Received: by outflank-mailman (input) for mailman id 529289;
- Wed, 03 May 2023 15:11:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uDRO=AY=linaro.org=dan.carpenter@srs-se1.protection.inumbo.net>)
- id 1puE8t-0001rK-Ob
- for xen-devel@lists.xenproject.org; Wed, 03 May 2023 15:11:43 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cf90cd04-e9c4-11ed-b225-6b7b168915f2;
- Wed, 03 May 2023 17:11:42 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-3f192c23fffso33825995e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 03 May 2023 08:11:42 -0700 (PDT)
-Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- d15-20020adfe84f000000b002fb60c7995esm34427038wrn.8.2023.05.03.08.11.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 May 2023 08:11:40 -0700 (PDT)
+	id 1puECX-0002xR-GQ; Wed, 03 May 2023 15:15:29 +0000
+Received: by outflank-mailman (input) for mailman id 529298;
+ Wed, 03 May 2023 15:15:27 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1puECV-0002wu-Lv
+ for xen-devel@lists.xenproject.org; Wed, 03 May 2023 15:15:27 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1puECR-0005qG-T8; Wed, 03 May 2023 15:15:23 +0000
+Received: from 54-240-197-238.amazon.com ([54.240.197.238] helo=[192.168.7.72])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1puECR-0001Ng-KE; Wed, 03 May 2023 15:15:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,99 +41,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf90cd04-e9c4-11ed-b225-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1683126702; x=1685718702;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=omxGsHaKkcGC+xqSddM+y0Rv4lJTnT54/CknYbjXVhY=;
-        b=YfDzGylBhlR3CVxpMMI4acCmCfqTfHfM5iBfgOCW6OyIloOXcvH8dEmNrR80OObTjK
-         IwiUIcA3EAalQUC1fcg6MNtj8x4BJYd3sJPyd1U6v+NcbtOe5wHOosZpqzvgGp8d60s/
-         GEuDIhroTKLKU3RLl3Q1FYflOwqkteq5501Hv7jKKV+O+4lgokZlz6LlAf+t4oJvNHp0
-         ZWyt5MEIYS7GLmms+q9eXjK+KzyG/JMYwSlML9xXTrZnmx3fQyKd5U046ZCENMYczcQL
-         jcsxZ8mDjvZC0tP1ENbJbTfiTKJKjO/AZbTZ0Prl4nDNDNwD+/yjN0s7b2KBvKuTLtdC
-         JPDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683126702; x=1685718702;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=omxGsHaKkcGC+xqSddM+y0Rv4lJTnT54/CknYbjXVhY=;
-        b=RmCb0C9AyrlrhUXPumuOMPebQTYtdtXm62T9O1nJYIH2SkJxLep/u7zTMj5A5jDJlC
-         6+oRe7WVe7JYp+r37ZTzFSRSNOZZk2giURZ2kOQTJ4p2honMbO2au+Jz5jNXN6U5Xc8Y
-         IpYNFndVbQPy1DsugbWHsYPO4ThMqAjj4LvnC/iFXcmUBLvpNq0QeEZJWNn19bF1Vt9I
-         iTEEo/yog2kjOKTBPmDhAduEqI9DAcnT62mCXfju4/EG9J9LmU5aWxxBN+of6mlcKfiM
-         WGVQYkNJNDt4lPRp+7vqKeCUk/l1q+GDzQG1gqSCxCJm+3o7p3YoDEFf9B5mbDJfZSSt
-         Mheg==
-X-Gm-Message-State: AC+VfDy2HybHgahXaThD4ADmZOxYn8j6YW7nyc5g34HbztCHBV+sKcgf
-	hhgugVTsbrAn7SeoDAaeUsS2fw==
-X-Google-Smtp-Source: ACHHUZ5OZVQBtqAWZgaLWLuVjAfGEiqAlM8i3902hJEurNrW2MxWTzUvvq1ZwT17Z0WElKBzUOcmHw==
-X-Received: by 2002:adf:dd4c:0:b0:2f6:8834:5952 with SMTP id u12-20020adfdd4c000000b002f688345952mr361499wrm.8.1683126701992;
-        Wed, 03 May 2023 08:11:41 -0700 (PDT)
-Date: Wed, 3 May 2023 18:11:35 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Juergen Gross <jgross@suse.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org
-Subject: [PATCH] xen/pvcalls-back: fix double frees with
- pvcalls_new_active_socket()
-Message-ID: <e5f98dc2-0305-491f-a860-71bbd1398a2f@kili.mountain>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=nIC/YWeeZCwRzdVGnmO3ranVa2mAyxX8vWqqRl7z65g=; b=ZoinoO1kru205KIRLGGkkYOr05
+	mgcw4CV/vDzgUVEGElf4q9zwXk6Rty5M8N7GijXNoGiHYtriNOkJXMpnMDhfa6PjlOOg5a4t05Wup
+	0aTzZikFJTod+pR/ETpK/WZC9uZoO9jEFIfAlc+h1v1PseVv/05G7yCxqdchNV6dsxoQ=;
+Message-ID: <28235d38-ad7f-f1bd-f093-bd83f9fd6589@xen.org>
+Date: Wed, 3 May 2023 16:15:20 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.10.0
+Subject: Re: dom0less vs xenstored setup race Was: xen | Failed pipeline for
+ staging | 6a47ba2f
+Content-Language: en-US
+To: andrew.cooper3@citrix.com, Stefano Stabellini <sstabellini@kernel.org>,
+ alejandro.vallejo@cloud.com
+Cc: committers@xenproject.org, michal.orzel@amd.com,
+ xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
+ Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edwin.torok@cloud.com>
+References: <644bfbc6939d8_2a49bbb403253f4@gitlab-sidekiq-catchall-v2-78885c497-qxnp2.mail>
+ <alpine.DEB.2.22.394.2304281905020.974517@ubuntu-linux-20-04-desktop>
+ <c74d231f-75e2-a26d-f2c4-3a135cc1ac10@citrix.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <c74d231f-75e2-a26d-f2c4-3a135cc1ac10@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-In the pvcalls_new_active_socket() function, most error paths call
-pvcalls_back_release_active(fedata->dev, fedata, map) which calls
-sock_release() on "sock".  The bug is that the caller also frees sock.
+Hi,
 
-Fix this by making every error path in pvcalls_new_active_socket()
-release the sock, and don't free it in the caller.
+On 03/05/2023 15:38, andrew.cooper3@citrix.com wrote:
+> Hello,
+> 
+> After what seems like an unreasonable amount of debugging, we've tracked
+> down exactly what is going wrong here.
+> 
+> https://gitlab.com/xen-project/people/andyhhp/xen/-/jobs/4219721944
+> 
+> Of note is the smoke.serial log around:
+> 
+> io: IN 0xffff90fec250 d0 20230503 14:20:42 INTRODUCE (1 233473 1 )
+> obj: CREATE connection 0xffff90fff1f0
+> *** d1 CONN RESET req_cons 00000000, req_prod 0000003a rsp_cons
+> 00000000, rsp_prod 00000000
+> io: OUT 0xffff9105cef0 d0 20230503 14:20:42 WATCH_EVENT
+> (@introduceDomain domlist )
+> 
+> XS_INTRODUCE (in C xenstored at least, not checked O yet) always
+> clobbers the ring pointers.  The added pressure on dom0 that the
+> xensconsoled adds with it's 4M hypercall bounce buffer occasionally
+> defers xenstored long enough that the XS_INTRODUCE clobbers the first
+> message that dom1 wrote into the ring.
+> 
+> The other behaviour seen was xenstored observing a header looking like this:
+> 
+> *** d1 HDR { ty 0x746e6f63, rqid 0x2f6c6f72, txid 0x74616c70, len
+> 0x6d726f66 }
+> 
+> which was rejected as being too long.  That's "control/platform" in
+> ASCII, so the XS_INTRODUCE intersected dom1 between writing the header
+> and writing the payload.
+> 
+> 
+> Anyway, it is buggy for XS_INTRODUCE to be called on a live an
+> unsuspecting connection.  It is ultimately init-dom0less's fault for
+> telling dom1 it's good to go before having waited for XS_INTRODUCE to
+> complete.
 
-Fixes: 5db4d286a8ef ("xen/pvcalls: implement connect command")
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
- drivers/xen/pvcalls-back.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+So the problem is xenstored will set interface->connection to 
+XENSTORE_CONNECTED before finalizing the connection. Caqn you try the 
+following, for now, very hackish patch:
 
-diff --git a/drivers/xen/pvcalls-back.c b/drivers/xen/pvcalls-back.c
-index 1f5219e12cc3..7beaf2c41fbb 100644
---- a/drivers/xen/pvcalls-back.c
-+++ b/drivers/xen/pvcalls-back.c
-@@ -325,8 +325,10 @@ static struct sock_mapping *pvcalls_new_active_socket(
- 	void *page;
- 
- 	map = kzalloc(sizeof(*map), GFP_KERNEL);
--	if (map == NULL)
-+	if (map == NULL) {
-+		sock_release(sock);
- 		return NULL;
-+	}
- 
- 	map->fedata = fedata;
- 	map->sock = sock;
-@@ -418,10 +420,8 @@ static int pvcalls_back_connect(struct xenbus_device *dev,
- 					req->u.connect.ref,
- 					req->u.connect.evtchn,
- 					sock);
--	if (!map) {
-+	if (!map)
- 		ret = -EFAULT;
--		sock_release(sock);
--	}
- 
- out:
- 	rsp = RING_GET_RESPONSE(&fedata->ring, fedata->ring.rsp_prod_pvt++);
-@@ -561,7 +561,6 @@ static void __pvcalls_back_accept(struct work_struct *work)
- 					sock);
- 	if (!map) {
- 		ret = -EFAULT;
--		sock_release(sock);
- 		goto out_error;
- 	}
- 
+diff --git a/tools/xenstore/xenstored_domain.c 
+b/tools/xenstore/xenstored_domain.c
+index f62be2245c42..bbf85bbbea3b 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -688,6 +688,7 @@ static struct domain *introduce_domain(const void *ctx,
+                 talloc_steal(domain->conn, domain);
+
+                 if (!restore) {
++                       domain_conn_reset(domain);
+                         /* Notify the domain that xenstore is available */
+                         interface->connection = XENSTORE_CONNECTED;
+                         xenevtchn_notify(xce_handle, domain->port);
+@@ -730,8 +731,6 @@ int do_introduce(const void *ctx, struct connection 
+*conn,
+         if (!domain)
+                 return errno;
+
+-       domain_conn_reset(domain);
+-
+         send_ack(conn, XS_INTRODUCE);
+
+         return 0;
+
+Cheers,
+
 -- 
-2.39.2
-
+Julien Grall
 
