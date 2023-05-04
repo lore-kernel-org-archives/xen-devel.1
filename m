@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4C4C77B78
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 20:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.530110.825486 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A5EC77B78
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 20:00:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.530116.825511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puf7W-0005Az-45; Thu, 04 May 2023 20:00:06 +0000
+	id 1puf7d-0005tz-5D; Thu, 04 May 2023 20:00:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 530110.825486; Thu, 04 May 2023 20:00:06 +0000
+Received: by outflank-mailman (output) from mailman id 530116.825511; Thu, 04 May 2023 20:00:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puf7V-0005As-VA; Thu, 04 May 2023 20:00:05 +0000
-Received: by outflank-mailman (input) for mailman id 530110;
- Thu, 04 May 2023 20:00:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1puf7c-0005so-V1; Thu, 04 May 2023 20:00:12 +0000
+Received: by outflank-mailman (input) for mailman id 530116;
+ Thu, 04 May 2023 20:00:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EoaW=AZ=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1puf1y-0003xx-0Y
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:54:22 +0000
+ id 1puf1t-0003iB-Vn
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:54:17 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 752ae21e-eab5-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:54:20 +0200 (CEST)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7358d671-eab5-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:54:17 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-635-rnzRckGWN_uYxyN68Qx0aw-1; Thu, 04 May 2023 15:54:15 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-94-EVERd-b1O6iV68LQZZKd_A-1; Thu, 04 May 2023 15:54:10 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A63E5101A531;
- Thu,  4 May 2023 19:54:13 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EC0B6A0F389;
+ Thu,  4 May 2023 19:54:08 +0000 (UTC)
 Received: from localhost (unknown [10.39.192.57])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E92B763F3E;
- Thu,  4 May 2023 19:54:12 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 51B294020960;
+ Thu,  4 May 2023 19:54:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 752ae21e-eab5-11ed-8611-37d641c3527e
+X-Inumbo-ID: 7358d671-eab5-11ed-b226-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1683230059;
+	s=mimecast20190719; t=1683230056;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=94EbW6UEPYMLwV9zB8HOwndWfCZlP2kutpuX+h7WMqo=;
-	b=TaCAoYoEpnhHFw4ZKWwTsG7GbZ0YvaDn5NTWcZ/jZDa3c4KlIcULOT36dZiExKMMTVnE7o
-	UBao6Axld3t7VTAfWW3isW+Ye8ny5/OtoWfP+3Z2s7drTiyrp8aidxwNY9jwqu3QjltNcY
-	p8HKKe6OkyZ4msncWm5i5djPhMndmko=
-X-MC-Unique: rnzRckGWN_uYxyN68Qx0aw-1
+	bh=bn7vYKIN4BAATa1eS0drL+2+35bJodnZI5fsBJiYTKs=;
+	b=E6pRBqtnxp0TP87WMNL+URfi5WzVeWaz1lK3LF8Jf47/gjBQowXxde02YVjVwNLuWbYNB6
+	/rdqsEIHgki4Ndsn5e4KruXtYhgcERq6rdpvSzIUwB4XwmDVj+6aHHHTb3nU8KQ4D9QD4j
+	SzHpPG6CzzghWV6mKeKo/CVRplBXH5g=
+X-MC-Unique: EVERd-b1O6iV68LQZZKd_A-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Ronnie Sahlberg <ronniesahlberg@gmail.com>,
@@ -96,80 +96,103 @@ Cc: Ronnie Sahlberg <ronniesahlberg@gmail.com>,
 	"Richard W.M. Jones" <rjones@redhat.com>,
 	Fam Zheng <fam@euphon.net>,
 	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: [PATCH v5 17/21] virtio: make it possible to detach host notifier from any thread
-Date: Thu,  4 May 2023 15:53:23 -0400
-Message-Id: <20230504195327.695107-18-stefanha@redhat.com>
+Subject: [PATCH v5 15/21] block/export: don't require AioContext lock around blk_exp_ref/unref()
+Date: Thu,  4 May 2023 15:53:21 -0400
+Message-Id: <20230504195327.695107-16-stefanha@redhat.com>
 In-Reply-To: <20230504195327.695107-1-stefanha@redhat.com>
 References: <20230504195327.695107-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 
-virtio_queue_aio_detach_host_notifier() does two things:
-1. It removes the fd handler from the event loop.
-2. It processes the virtqueue one last time.
+The FUSE export calls blk_exp_ref/unref() without the AioContext lock.
+Instead of fixing the FUSE export, adjust blk_exp_ref/unref() so they
+work without the AioContext lock. This way it's less error-prone.
 
-The first step can be peformed by any thread and without taking the
-AioContext lock.
-
-The second step may need the AioContext lock (depending on the device
-implementation) and runs in the thread where request processing takes
-place. virtio-blk and virtio-scsi therefore call
-virtio_queue_aio_detach_host_notifier() from a BH that is scheduled in
-AioContext
-
-Scheduling a BH is undesirable for .drained_begin() functions. The next
-patch will introduce a .drained_begin() function that needs to call
-virtio_queue_aio_detach_host_notifier().
-
-Move the virtqueue processing out to the callers of
-virtio_queue_aio_detach_host_notifier() so that the function can be
-called from any thread. This is in preparation for the next patch.
-
+Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- hw/block/dataplane/virtio-blk.c | 2 ++
- hw/scsi/virtio-scsi-dataplane.c | 9 +++++++++
- 2 files changed, 11 insertions(+)
+ include/block/export.h   |  2 ++
+ block/export/export.c    | 13 ++++++-------
+ block/export/vduse-blk.c |  4 ----
+ 3 files changed, 8 insertions(+), 11 deletions(-)
 
-diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
-index a6202997ee..27eafa6c92 100644
---- a/hw/block/dataplane/virtio-blk.c
-+++ b/hw/block/dataplane/virtio-blk.c
-@@ -287,8 +287,10 @@ static void virtio_blk_data_plane_stop_bh(void *opaque)
+diff --git a/include/block/export.h b/include/block/export.h
+index 7feb02e10d..f2fe0f8078 100644
+--- a/include/block/export.h
++++ b/include/block/export.h
+@@ -57,6 +57,8 @@ struct BlockExport {
+      * Reference count for this block export. This includes strong references
+      * both from the owner (qemu-nbd or the monitor) and clients connected to
+      * the export.
++     *
++     * Use atomics to access this field.
+      */
+     int refcount;
  
-     for (i = 0; i < s->conf->num_queues; i++) {
-         VirtQueue *vq = virtio_get_queue(s->vdev, i);
-+        EventNotifier *host_notifier = virtio_queue_get_host_notifier(vq);
+diff --git a/block/export/export.c b/block/export/export.c
+index 62c7c22d45..ab007e9d31 100644
+--- a/block/export/export.c
++++ b/block/export/export.c
+@@ -202,11 +202,10 @@ fail:
+     return NULL;
+ }
  
-         virtio_queue_aio_detach_host_notifier(vq, s->ctx);
-+        virtio_queue_host_notifier_read(host_notifier);
+-/* Callers must hold exp->ctx lock */
+ void blk_exp_ref(BlockExport *exp)
+ {
+-    assert(exp->refcount > 0);
+-    exp->refcount++;
++    assert(qatomic_read(&exp->refcount) > 0);
++    qatomic_inc(&exp->refcount);
+ }
+ 
+ /* Runs in the main thread */
+@@ -229,11 +228,10 @@ static void blk_exp_delete_bh(void *opaque)
+     aio_context_release(aio_context);
+ }
+ 
+-/* Callers must hold exp->ctx lock */
+ void blk_exp_unref(BlockExport *exp)
+ {
+-    assert(exp->refcount > 0);
+-    if (--exp->refcount == 0) {
++    assert(qatomic_read(&exp->refcount) > 0);
++    if (qatomic_fetch_dec(&exp->refcount) == 1) {
+         /* Touch the block_exports list only in the main thread */
+         aio_bh_schedule_oneshot(qemu_get_aio_context(), blk_exp_delete_bh,
+                                 exp);
+@@ -341,7 +339,8 @@ void qmp_block_export_del(const char *id,
+     if (!has_mode) {
+         mode = BLOCK_EXPORT_REMOVE_MODE_SAFE;
+     }
+-    if (mode == BLOCK_EXPORT_REMOVE_MODE_SAFE && exp->refcount > 1) {
++    if (mode == BLOCK_EXPORT_REMOVE_MODE_SAFE &&
++        qatomic_read(&exp->refcount) > 1) {
+         error_setg(errp, "export '%s' still in use", exp->id);
+         error_append_hint(errp, "Use mode='hard' to force client "
+                           "disconnect\n");
+diff --git a/block/export/vduse-blk.c b/block/export/vduse-blk.c
+index a25556fe04..e0455551f9 100644
+--- a/block/export/vduse-blk.c
++++ b/block/export/vduse-blk.c
+@@ -44,9 +44,7 @@ static void vduse_blk_inflight_inc(VduseBlkExport *vblk_exp)
+ {
+     if (qatomic_fetch_inc(&vblk_exp->inflight) == 0) {
+         /* Prevent export from being deleted */
+-        aio_context_acquire(vblk_exp->export.ctx);
+         blk_exp_ref(&vblk_exp->export);
+-        aio_context_release(vblk_exp->export.ctx);
      }
  }
  
-diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
-index 20bb91766e..81643445ed 100644
---- a/hw/scsi/virtio-scsi-dataplane.c
-+++ b/hw/scsi/virtio-scsi-dataplane.c
-@@ -71,12 +71,21 @@ static void virtio_scsi_dataplane_stop_bh(void *opaque)
- {
-     VirtIOSCSI *s = opaque;
-     VirtIOSCSICommon *vs = VIRTIO_SCSI_COMMON(s);
-+    EventNotifier *host_notifier;
-     int i;
+@@ -57,9 +55,7 @@ static void vduse_blk_inflight_dec(VduseBlkExport *vblk_exp)
+         aio_wait_kick();
  
-     virtio_queue_aio_detach_host_notifier(vs->ctrl_vq, s->ctx);
-+    host_notifier = virtio_queue_get_host_notifier(vs->ctrl_vq);
-+    virtio_queue_host_notifier_read(host_notifier);
-+
-     virtio_queue_aio_detach_host_notifier(vs->event_vq, s->ctx);
-+    host_notifier = virtio_queue_get_host_notifier(vs->event_vq);
-+    virtio_queue_host_notifier_read(host_notifier);
-+
-     for (i = 0; i < vs->conf.num_queues; i++) {
-         virtio_queue_aio_detach_host_notifier(vs->cmd_vqs[i], s->ctx);
-+        host_notifier = virtio_queue_get_host_notifier(vs->cmd_vqs[i]);
-+        virtio_queue_host_notifier_read(host_notifier);
+         /* Now the export can be deleted */
+-        aio_context_acquire(vblk_exp->export.ctx);
+         blk_exp_unref(&vblk_exp->export);
+-        aio_context_release(vblk_exp->export.ctx);
      }
  }
  
