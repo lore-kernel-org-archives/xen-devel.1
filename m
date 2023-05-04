@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DDDDC7EE25
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529893.824902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD22C7EE2D
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529884.824813 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDY-0006Vy-7L; Thu, 04 May 2023 19:02:16 +0000
+	id 1pueDM-000432-2q; Thu, 04 May 2023 19:02:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529893.824902; Thu, 04 May 2023 19:02:16 +0000
+Received: by outflank-mailman (output) from mailman id 529884.824813; Thu, 04 May 2023 19:02:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDY-0006Vl-2N; Thu, 04 May 2023 19:02:16 +0000
-Received: by outflank-mailman (input) for mailman id 529893;
- Thu, 04 May 2023 19:02:14 +0000
+	id 1pueDL-00042v-Vs; Thu, 04 May 2023 19:02:03 +0000
+Received: by outflank-mailman (input) for mailman id 529884;
+ Thu, 04 May 2023 19:02:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDW-00042j-AX
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:14 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pueDK-00042j-Fc
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:02 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e1282a7-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:13 +0200 (CEST)
+ id 268624e9-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e1282a7-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185936.802783450@linutronix.de>
+X-Inumbo-ID: 268624e9-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185936.367031787@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226933;
+	s=2020; t=1683226920;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=djhcX/6oz1v3ZZHjWNR6fK2ATXnp39FPHavEh8Z2jPk=;
-	b=ga7wmIakplENkJi6T5NoX0Dl4GKg+ap6nn7fRMuH4AJ0N/j8tLX4hOYKXxI82FfjNe6bvd
-	vJmMRr19EbOXhlvWVBPj00971oHJ7EVwTVpYtKkKm1bHOPAtWTEqef+PWJeugHX4N45lMG
-	uoAym6vetzrOuFxrlyf44EwZaO13wrZDfo/XkIGx0LvkxSOhnQMBCiqIzIQDgAgSp3wxnj
-	y26KQIzEJjp7eB7O+cYD+6cb4y96+ikG+vSFWeNtad9FTEpCRcUHe+gEoz7H09GJDNgB1J
-	AKbp/YjUjDEWvORBc7uiaoZEw4Hkz37CASo4CL84FTmpzcTx9pDR5194rYnnxw==
+	 references:references; bh=Mxn87t9DPEW945il616r0H0SsMXLyUAeJz1AKeylD8A=;
+	b=gN6osUOUj5A4g4ikKpXMxZ7xRrn0bkpwHrNdWYplv0k7rI8gYfItE27E6osNTA/nV1mrk6
+	WWlzivAwHb3vuxBg3D/Ns21CditKMkPPd9EuijqE+Nl5O62KUwKu3kPrFtGxrKeH/ZJJrC
+	NGZ2k4dOGaPPd/q3/QBB7j+SwZjA+XWe0JSQ1Pjv2a+MTO268fjYE3GMmFpYdhCRR1vFB4
+	W35O70R3dhw4wdItVUsrhBSyeS38/14353iSux461nIW3VIT8Vl8zXmiSxiD/GMMsuMkzg
+	wRMAaeVRVTGibV6maAbKj32s9VnEdmCl40bZStr+bAA0dwvsHXYOC5oLT4h4Jw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226933;
+	s=2020e; t=1683226920;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=djhcX/6oz1v3ZZHjWNR6fK2ATXnp39FPHavEh8Z2jPk=;
-	b=9d54JiewPSGmVQNrhzbBmbqIIQ6FHVsRs8p39dYcszm+2PpRs6UAq3uJ7Lp1hIlyibfgPq
-	eWLViIKxHt4DgPAQ==
+	 references:references; bh=Mxn87t9DPEW945il616r0H0SsMXLyUAeJz1AKeylD8A=;
+	b=11ibvq89apUCBbI307f/UhkVNeawUcpQ0C+FqbsH6snqLrHmocC2FzctyE3MrTYESrxN+r
+	cfzlPdKVby530BCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,131 +94,82 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 09/38] x86/smpboot: Get rid of cpu_init_secondary()
+Subject:
+ [patch V2 01/38] x86/smpboot: Cleanup topology_phys_to_logical_pkg()/die()
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:13 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:00 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The synchronization of the AP with the control CPU is a SMP boot problem
-and has nothing to do with cpu_init().
-
-Open code cpu_init_secondary() in start_secondary() and move
-wait_for_master_cpu() into the SMP boot code.
-
-No functional change.
+Make topology_phys_to_logical_pkg_die() static as it's only used in
+smpboot.c and fixup the kernel-doc warnings for both functions.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/include/asm/processor.h |    1 -
- arch/x86/kernel/cpu/common.c     |   27 ---------------------------
- arch/x86/kernel/smpboot.c        |   24 +++++++++++++++++++-----
- 3 files changed, 19 insertions(+), 33 deletions(-)
+ arch/x86/include/asm/topology.h |    3 ---
+ arch/x86/kernel/smpboot.c       |   10 ++++++----
+ 2 files changed, 6 insertions(+), 7 deletions(-)
 ---
---- a/arch/x86/include/asm/processor.h
-+++ b/arch/x86/include/asm/processor.h
-@@ -551,7 +551,6 @@ extern void switch_gdt_and_percpu_base(i
- extern void load_direct_gdt(int);
- extern void load_fixmap_gdt(int);
- extern void cpu_init(void);
--extern void cpu_init_secondary(void);
- extern void cpu_init_exception_handling(void);
- extern void cr4_init(void);
- 
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2123,19 +2123,6 @@ static void dbg_restore_debug_regs(void)
- #define dbg_restore_debug_regs()
- #endif /* ! CONFIG_KGDB */
- 
--static void wait_for_master_cpu(int cpu)
--{
--#ifdef CONFIG_SMP
--	/*
--	 * wait for ACK from master CPU before continuing
--	 * with AP initialization
--	 */
--	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
--	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
--		cpu_relax();
--#endif
--}
--
- static inline void setup_getcpu(int cpu)
- {
- 	unsigned long cpudata = vdso_encode_cpunode(cpu, early_cpu_to_node(cpu));
-@@ -2239,8 +2226,6 @@ void cpu_init(void)
- 	struct task_struct *cur = current;
- 	int cpu = raw_smp_processor_id();
- 
--	wait_for_master_cpu(cpu);
--
- 	ucode_cpu_init(cpu);
- 
- #ifdef CONFIG_NUMA
-@@ -2293,18 +2278,6 @@ void cpu_init(void)
- 	load_fixmap_gdt(cpu);
- }
- 
--#ifdef CONFIG_SMP
--void cpu_init_secondary(void)
--{
--	/*
--	 * Relies on the BP having set-up the IDT tables, which are loaded
--	 * on this CPU in cpu_init_exception_handling().
--	 */
--	cpu_init_exception_handling();
--	cpu_init();
--}
--#endif
--
- #ifdef CONFIG_MICROCODE_LATE_LOADING
- /**
-  * store_cpu_caps() - Store a snapshot of CPU capabilities
+--- a/arch/x86/include/asm/topology.h
++++ b/arch/x86/include/asm/topology.h
+@@ -139,7 +139,6 @@ static inline int topology_max_smt_threa
+ int topology_update_package_map(unsigned int apicid, unsigned int cpu);
+ int topology_update_die_map(unsigned int dieid, unsigned int cpu);
+ int topology_phys_to_logical_pkg(unsigned int pkg);
+-int topology_phys_to_logical_die(unsigned int die, unsigned int cpu);
+ bool topology_is_primary_thread(unsigned int cpu);
+ bool topology_smt_supported(void);
+ #else
+@@ -149,8 +148,6 @@ topology_update_package_map(unsigned int
+ static inline int
+ topology_update_die_map(unsigned int dieid, unsigned int cpu) { return 0; }
+ static inline int topology_phys_to_logical_pkg(unsigned int pkg) { return 0; }
+-static inline int topology_phys_to_logical_die(unsigned int die,
+-		unsigned int cpu) { return 0; }
+ static inline int topology_max_die_per_package(void) { return 1; }
+ static inline int topology_max_smt_threads(void) { return 1; }
+ static inline bool topology_is_primary_thread(unsigned int cpu) { return true; }
 --- a/arch/x86/kernel/smpboot.c
 +++ b/arch/x86/kernel/smpboot.c
-@@ -220,6 +220,17 @@ static void ap_calibrate_delay(void)
- 	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
- }
+@@ -288,6 +288,7 @@ bool topology_smt_supported(void)
  
-+static void wait_for_master_cpu(int cpu)
-+{
-+	/*
-+	 * Wait for release by control CPU before continuing with AP
-+	 * initialization.
-+	 */
-+	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
-+	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
-+		cpu_relax();
-+}
-+
- /*
-  * Activate a secondary processor.
+ /**
+  * topology_phys_to_logical_pkg - Map a physical package id to a logical
++ * @phys_pkg:	The physical package id to map
+  *
+  * Returns logical package id or -1 if not found
   */
-@@ -237,13 +248,16 @@ static void notrace start_secondary(void
- 	load_cr3(swapper_pg_dir);
- 	__flush_tlb_all();
- #endif
-+	cpu_init_exception_handling();
+@@ -304,15 +305,17 @@ int topology_phys_to_logical_pkg(unsigne
+ 	return -1;
+ }
+ EXPORT_SYMBOL(topology_phys_to_logical_pkg);
 +
- 	/*
--	 * Sync point with wait_cpu_initialized(). Before proceeding through
--	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
--	 * own bit in cpu_initialized_mask and then waits for the BSP to set
--	 * its bit in cpu_callout_mask to release it.
-+	 * Sync point with wait_cpu_initialized(). Sets AP in
-+	 * cpu_initialized_mask and then waits for the control CPU
-+	 * to release it.
- 	 */
--	cpu_init_secondary();
-+	wait_for_master_cpu(raw_smp_processor_id());
-+
-+	cpu_init();
- 	rcu_cpu_starting(raw_smp_processor_id());
- 	x86_cpuinit.early_percpu_clock_init();
+ /**
+  * topology_phys_to_logical_die - Map a physical die id to logical
++ * @die_id:	The physical die id to map
++ * @cur_cpu:	The CPU for which the mapping is done
+  *
+  * Returns logical die id or -1 if not found
+  */
+-int topology_phys_to_logical_die(unsigned int die_id, unsigned int cur_cpu)
++static int topology_phys_to_logical_die(unsigned int die_id, unsigned int cur_cpu)
+ {
+-	int cpu;
+-	int proc_id = cpu_data(cur_cpu).phys_proc_id;
++	int cpu, proc_id = cpu_data(cur_cpu).phys_proc_id;
  
+ 	for_each_possible_cpu(cpu) {
+ 		struct cpuinfo_x86 *c = &cpu_data(cpu);
+@@ -323,7 +326,6 @@ int topology_phys_to_logical_die(unsigne
+ 	}
+ 	return -1;
+ }
+-EXPORT_SYMBOL(topology_phys_to_logical_die);
+ 
+ /**
+  * topology_update_package_map - Update the physical to logical package map
 
 
