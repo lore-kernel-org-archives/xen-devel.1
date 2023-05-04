@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A181FC7EE2A
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529891.824883 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E8EC7EE29
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529886.824833 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDV-0005vD-CC; Thu, 04 May 2023 19:02:13 +0000
+	id 1pueDN-0004Vw-Gb; Thu, 04 May 2023 19:02:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529891.824883; Thu, 04 May 2023 19:02:13 +0000
+Received: by outflank-mailman (output) from mailman id 529886.824833; Thu, 04 May 2023 19:02:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDV-0005uu-7x; Thu, 04 May 2023 19:02:13 +0000
-Received: by outflank-mailman (input) for mailman id 529891;
- Thu, 04 May 2023 19:02:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pueDN-0004VM-Da; Thu, 04 May 2023 19:02:05 +0000
+Received: by outflank-mailman (input) for mailman id 529886;
+ Thu, 04 May 2023 19:02:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDT-00042j-Kl
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:11 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2c24286f-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:11 +0200 (CEST)
+ id 1pueDM-00042k-2U
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:04 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 276b5184-eaae-11ed-8611-37d641c3527e;
+ Thu, 04 May 2023 21:02:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c24286f-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185936.696863260@linutronix.de>
+X-Inumbo-ID: 276b5184-eaae-11ed-8611-37d641c3527e
+Message-ID: <20230504185936.424138296@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226930;
+	s=2020; t=1683226922;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=oNktQrwN+fatH513QPoGkxuTXmWxbBJSO1kVQSmt5aw=;
-	b=gBya4Wdiox20HXnYxId2o92/cZNTV4kT8ZfWJZEW8ITXjndCeX8dDH5GHwnbCKYq4N2LZ7
-	1Vliet33ezvFZfT7hZ49SRcTQY9GGkgXhlSt5j4FLFBbo8w2LMXaeiXjsd9i1J9IMUzHg1
-	sJN1go/y7aKDt6GemaqC60gjrJ2Y/O06s8spq6n5PMT68ouOvPdBNo/CzyJcNIvXElJXAl
-	XdjDvEAOi1DHoGQz2s+P9J0LaJZ0aZZ0+hC8ebSl7akG4yKA5FQhYbj1MWyqNbSv7kr//g
-	wKJSvQLOs5Ac6Rvs5KHpecAWJnrhruw0ihD4m2E9ZObgEFCoaikI3NMnkVCBlA==
+	 references:references; bh=waVaB+iOXpEeeQbnpvRruizzYbSaWW2RRSBQj1T/hXA=;
+	b=fL/KXBGwhDgZ0aNNihOGlOrNlSV1oXSPmnek3reTOPzGU26K9/7I6++pxRi1WwqUlxPjOt
+	5Tyij4lipwiE5wx00Ug/OlbZuQGzLQ5bz0yPSCT5LRqx0FtA/i9SOYFEBjjKXXhsEYmcX0
+	Syt5stMGuEr0o0+HSblbMnvWZeQN7TaTrhA7dHR9yfdBmu3FPAPBUqggwPcIQGD3m48Bt5
+	zOf6iElxOZzofzp19LMFZlMc7WEm/MIBFclvIFumjzIiZLJwDWozF9bZ+XBECVGvq7VpEs
+	oWtzcnhMZlsuZosoXBPM96pPurYq5mz+wcdyir0ZGlT+xHDklreyFq9FgGAJog==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226930;
+	s=2020e; t=1683226922;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=oNktQrwN+fatH513QPoGkxuTXmWxbBJSO1kVQSmt5aw=;
-	b=ne/7c8UNDxt/B5By5H8OrJEC2F33AGALC1UJsqUQEjBRB84Yn90Pp71hqA5iKSc8E1YfLo
-	xVfQnGoIgwAl59BQ==
+	 references:references; bh=waVaB+iOXpEeeQbnpvRruizzYbSaWW2RRSBQj1T/hXA=;
+	b=FgatqUwh+JsOxmHUn9Bvq7DTwB3Lr8g2wziGsZ2rOwgPZthkB6nTAdx3egi9uzi5HZxDkx
+	9oTTBrbEEnqsEmDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,69 +94,60 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 07/38] x86/smpboot: Restrict soft_restart_cpu() to SEV
+Subject: [patch V2 02/38] cpu/hotplug: Mark arch_disable_smp_support() and
+ bringup_nonboot_cpus() __init
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:09 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:01 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Now that the CPU0 hotplug cruft is gone, the only user is AMD SEV.
+No point in keeping them around.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Tom Lendacky <thomas.lendacky@amd.com>
 
 ---
- arch/x86/kernel/callthunks.c |    2 +-
- arch/x86/kernel/head_32.S    |   14 --------------
- arch/x86/kernel/head_64.S    |    2 +-
- 3 files changed, 2 insertions(+), 16 deletions(-)
+ arch/x86/kernel/smpboot.c |    4 ++--
+ kernel/cpu.c              |    2 +-
+ kernel/smp.c              |    2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 ---
---- a/arch/x86/kernel/callthunks.c
-+++ b/arch/x86/kernel/callthunks.c
-@@ -133,7 +133,7 @@ static bool skip_addr(void *dest)
- 	/* Accounts directly */
- 	if (dest == ret_from_fork)
- 		return true;
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
- 	if (dest == soft_restart_cpu)
- 		return true;
- #endif
---- a/arch/x86/kernel/head_32.S
-+++ b/arch/x86/kernel/head_32.S
-@@ -138,20 +138,6 @@ SYM_CODE_START(startup_32)
- 	jmp .Ldefault_entry
- SYM_CODE_END(startup_32)
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -1269,9 +1269,9 @@ int native_cpu_up(unsigned int cpu, stru
+ }
  
--#ifdef CONFIG_HOTPLUG_CPU
--/*
-- * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-- * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-- * unplug. Everything is set up already except the stack.
-- */
--SYM_FUNC_START(soft_restart_cpu)
--	movl initial_stack, %ecx
--	movl %ecx, %esp
--	call *(initial_code)
--1:	jmp 1b
--SYM_FUNC_END(soft_restart_cpu)
--#endif
--
- /*
-  * Non-boot CPU entry point; entered from trampoline.S
-  * We can't lgdt here, because lgdt itself uses a data segment, but
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -375,7 +375,7 @@ SYM_CODE_END(secondary_startup_64)
- #include "verify_cpu.S"
- #include "sev_verify_cbit.S"
+ /**
+- * arch_disable_smp_support() - disables SMP support for x86 at runtime
++ * arch_disable_smp_support() - Disables SMP support for x86 at boottime
+  */
+-void arch_disable_smp_support(void)
++void __init arch_disable_smp_support(void)
+ {
+ 	disable_ioapic_support();
+ }
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -1502,7 +1502,7 @@ int bringup_hibernate_cpu(unsigned int s
+ 	return 0;
+ }
  
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
- /*
-  * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-  * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
+-void bringup_nonboot_cpus(unsigned int setup_max_cpus)
++void __init bringup_nonboot_cpus(unsigned int setup_max_cpus)
+ {
+ 	unsigned int cpu;
+ 
+--- a/kernel/smp.c
++++ b/kernel/smp.c
+@@ -892,7 +892,7 @@ EXPORT_SYMBOL(setup_max_cpus);
+  * SMP mode to <NUM>.
+  */
+ 
+-void __weak arch_disable_smp_support(void) { }
++void __weak __init arch_disable_smp_support(void) { }
+ 
+ static int __init nosmp(char *str)
+ {
 
 
