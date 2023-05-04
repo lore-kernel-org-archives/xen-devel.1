@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38095C7EE25
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529969.825093 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E83C7EE21
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529971.825105 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKw-0001XP-Om; Thu, 04 May 2023 19:09:54 +0000
+	id 1pueKx-0001l0-RO; Thu, 04 May 2023 19:09:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529969.825093; Thu, 04 May 2023 19:09:54 +0000
+Received: by outflank-mailman (output) from mailman id 529971.825105; Thu, 04 May 2023 19:09:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKw-0001XC-KV; Thu, 04 May 2023 19:09:54 +0000
-Received: by outflank-mailman (input) for mailman id 529969;
- Thu, 04 May 2023 19:09:53 +0000
+	id 1pueKx-0001jk-Gw; Thu, 04 May 2023 19:09:55 +0000
+Received: by outflank-mailman (input) for mailman id 529971;
+ Thu, 04 May 2023 19:09:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDr-00042k-HX
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:35 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pueDz-00042k-ID
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:43 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 39a58b9c-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:33 +0200 (CEST)
+ id 3c993d89-eaae-11ed-8611-37d641c3527e;
+ Thu, 04 May 2023 21:02:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 39a58b9c-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185937.477649111@linutronix.de>
+X-Inumbo-ID: 3c993d89-eaae-11ed-8611-37d641c3527e
+Message-ID: <20230504185937.637064751@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226952;
+	s=2020; t=1683226957;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=J5ghl8+CFsq8rw8xRo6ZeJvRj8tj82GRgWZ3Thf5XTs=;
-	b=QenhqFcoejPtec/MlD+hqV1n9MlgT2acU00U3XD2Oc1Pol7q/9eI63VtS15ZCC/d+9WDGA
-	KxchOK615tOJzZsBewTOkPd1Jd5+B3is2a42u/N5CTkPLatyJZrrvz8FEIqC7XWO8in3oU
-	53hbjDByv1h2xPpYpva0v6RgjUscQ2HfSl/jqKFOass4OpUQpzxo6UHcGhtLw9087/2M+Z
-	tt8EMVFZ49ggeVcETqNdsJDpa2BsXfwNUKKIIKpi+M53OvsvG9KFTR5Ffn+WK+321Pqy5y
-	ZzdinLtGlwMYQuT48xSu+HgHHks4RytPcjC2QUYQ0+Ziux8bRvvTSEM3m/LHVw==
+	 references:references; bh=ALZqTI1WqQMy7B72Ez5E7IdIQ5oXhT4SB1G1mM+q//8=;
+	b=mYnm5MYhl9rGIzht43o2lcVxhO0R8y3aB5aRyOtlB+9KK0J/QmknXcGx5x8PN1YVWVRD3B
+	GUQu025b731mf+nEkF4GI7Ob8UvQa6VPVPqdlahyw70W2WOH/igwzfOVqHBxPSurCU6YxH
+	wEkOpPoEv2xWwm6a7bLiW9tbt8M7692eEWBhWTyKA7OHmC/IgVgvkO72HGXojQ0SvaAoib
+	/bQLIpJj1VFAg0Ej8YehB8/VUFNEcW2ew88JgN73+AojuUn//mB8Tv1GcP3eB1NNPqtphq
+	S4khIQBFzuPtperawUGsq3BmEdOg4bh3XSPwjL4h9A1+3VCy4w0hb5wdRZyzeQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226952;
+	s=2020e; t=1683226957;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=J5ghl8+CFsq8rw8xRo6ZeJvRj8tj82GRgWZ3Thf5XTs=;
-	b=jA8uBZa7TYtw4jZ6vKFGruDR2mfnjcH3f8p0I307i2kdUOd1y2C6N6fsUQhyOplmByw+pg
-	yUiP5bOguA/FxuBw==
+	 references:references; bh=ALZqTI1WqQMy7B72Ez5E7IdIQ5oXhT4SB1G1mM+q//8=;
+	b=zeGslggBYWDsSd6dEoQqGkVdC/21I+ltkoKmpa5dw1d5iL4yHtQATpFjTDZBiPLB8z5y7b
+	LQX/S5Chy8uvrCAw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -96,85 +95,145 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
 Subject:
- [patch V2 21/38] ARM: smp: Switch to hotplug core state synchronization
+ [patch V2 24/38] MIPS: SMP_CPS: Switch to hotplug core state synchronization
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:32 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:37 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
 Switch to the CPU hotplug core state tracking and synchronization
-mechanim. No functional change intended.
+mechanim. This unfortunately requires to add dead reporting to the non CPS
+platforms as CPS is the only user, but it allows an overall consolidation
+of this functionality.
+
+No functional change intended.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: linux-arm-kernel@lists.infradead.org
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Cc: linux-mips@vger.kernel.org
 
 ---
- arch/arm/Kconfig           |    1 +
- arch/arm/include/asm/smp.h |    2 +-
- arch/arm/kernel/smp.c      |   18 +++++++-----------
- 3 files changed, 9 insertions(+), 12 deletions(-)
+ arch/mips/Kconfig               |    1 +
+ arch/mips/cavium-octeon/smp.c   |    1 +
+ arch/mips/include/asm/smp-ops.h |    1 +
+ arch/mips/kernel/smp-bmips.c    |    1 +
+ arch/mips/kernel/smp-cps.c      |   14 +++++---------
+ arch/mips/kernel/smp.c          |    8 ++++++++
+ arch/mips/loongson64/smp.c      |    1 +
+ 7 files changed, 18 insertions(+), 9 deletions(-)
 ---
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -124,6 +124,7 @@ config ARM
- 	select HAVE_SYSCALL_TRACEPOINTS
- 	select HAVE_UID16
- 	select HAVE_VIRT_CPU_ACCOUNTING_GEN
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -2285,6 +2285,7 @@ config MIPS_CPS
+ 	select MIPS_CM
+ 	select MIPS_CPS_PM if HOTPLUG_CPU
+ 	select SMP
 +	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
- 	select IRQ_FORCED_THREADING
- 	select MODULES_USE_ELF_REL
- 	select NEED_DMA_MAP_STATE
---- a/arch/arm/include/asm/smp.h
-+++ b/arch/arm/include/asm/smp.h
-@@ -64,7 +64,7 @@ extern void secondary_startup_arm(void);
+ 	select SYNC_R4K if (CEVT_R4K || CSRC_R4K)
+ 	select SYS_SUPPORTS_HOTPLUG_CPU
+ 	select SYS_SUPPORTS_SCHED_SMT if CPU_MIPSR6
+--- a/arch/mips/cavium-octeon/smp.c
++++ b/arch/mips/cavium-octeon/smp.c
+@@ -345,6 +345,7 @@ void play_dead(void)
+ 	int cpu = cpu_number_map(cvmx_get_core_num());
  
- extern int __cpu_disable(void);
+ 	idle_task_exit();
++	cpuhp_ap_report_dead();
+ 	octeon_processor_boot = 0xff;
+ 	per_cpu(cpu_state, cpu) = CPU_DEAD;
  
--extern void __cpu_die(unsigned int cpu);
-+static inline void __cpu_die(unsigned int cpu) { }
- 
- extern void arch_send_call_function_single_ipi(int cpu);
- extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
---- a/arch/arm/kernel/smp.c
-+++ b/arch/arm/kernel/smp.c
-@@ -288,15 +288,11 @@ int __cpu_disable(void)
- }
- 
- /*
-- * called on the thread which is asking for a CPU to be shutdown -
-- * waits until shutdown has completed, or it is timed out.
-+ * called on the thread which is asking for a CPU to be shutdown after the
-+ * shutdown completed.
-  */
--void __cpu_die(unsigned int cpu)
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
+--- a/arch/mips/include/asm/smp-ops.h
++++ b/arch/mips/include/asm/smp-ops.h
+@@ -33,6 +33,7 @@ struct plat_smp_ops {
+ #ifdef CONFIG_HOTPLUG_CPU
+ 	int (*cpu_disable)(void);
+ 	void (*cpu_die)(unsigned int cpu);
++	void (*cleanup_dead_cpu)(unsigned cpu);
+ #endif
+ #ifdef CONFIG_KEXEC
+ 	void (*kexec_nonboot_cpu)(void);
+--- a/arch/mips/kernel/smp-bmips.c
++++ b/arch/mips/kernel/smp-bmips.c
+@@ -392,6 +392,7 @@ static void bmips_cpu_die(unsigned int c
+ void __ref play_dead(void)
  {
--	if (!cpu_wait_death(cpu, 5)) {
--		pr_err("CPU%u: cpu didn't die\n", cpu);
--		return;
--	}
- 	pr_debug("CPU%u: shutdown\n", cpu);
+ 	idle_task_exit();
++	cpuhp_ap_report_dead();
  
- 	clear_tasks_mm_cpumask(cpu);
-@@ -336,11 +332,11 @@ void __noreturn arch_cpu_idle_dead(void)
- 	flush_cache_louis();
+ 	/* flush data cache */
+ 	_dma_cache_wback_inv(0, ~0);
+--- a/arch/mips/kernel/smp-cps.c
++++ b/arch/mips/kernel/smp-cps.c
+@@ -503,8 +503,7 @@ void play_dead(void)
+ 		}
+ 	}
  
- 	/*
--	 * Tell __cpu_die() that this CPU is now safe to dispose of.  Once
--	 * this returns, power and/or clocks can be removed at any point
--	 * from this CPU and its cache by platform_cpu_kill().
-+	 * Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose
-+	 * of. Once this returns, power and/or clocks can be removed at
-+	 * any point from this CPU and its cache by platform_cpu_kill().
- 	 */
+-	/* This CPU has chosen its way out */
 -	(void)cpu_report_death();
 +	cpuhp_ap_report_dead();
  
+ 	cps_shutdown_this_cpu(cpu_death);
+ 
+@@ -527,7 +526,9 @@ static void wait_for_sibling_halt(void *
+ 	} while (!(halted & TCHALT_H));
+ }
+ 
+-static void cps_cpu_die(unsigned int cpu)
++static void cps_cpu_die(unsigned int cpu) { }
++
++static void cps_cleanup_dead_cpu(unsigned cpu)
+ {
+ 	unsigned core = cpu_core(&cpu_data[cpu]);
+ 	unsigned int vpe_id = cpu_vpe_id(&cpu_data[cpu]);
+@@ -535,12 +536,6 @@ static void cps_cpu_die(unsigned int cpu
+ 	unsigned stat;
+ 	int err;
+ 
+-	/* Wait for the cpu to choose its way out */
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_err("CPU%u: didn't offline\n", cpu);
+-		return;
+-	}
+-
  	/*
- 	 * Ensure that the cache lines associated with that completion are
+ 	 * Now wait for the CPU to actually offline. Without doing this that
+ 	 * offlining may race with one or more of:
+@@ -624,6 +619,7 @@ static const struct plat_smp_ops cps_smp
+ #ifdef CONFIG_HOTPLUG_CPU
+ 	.cpu_disable		= cps_cpu_disable,
+ 	.cpu_die		= cps_cpu_die,
++	.cleanup_dead_cpu	= cps_cleanup_dead_cpu,
+ #endif
+ #ifdef CONFIG_KEXEC
+ 	.kexec_nonboot_cpu	= cps_kexec_nonboot_cpu,
+--- a/arch/mips/kernel/smp.c
++++ b/arch/mips/kernel/smp.c
+@@ -690,6 +690,14 @@ void flush_tlb_one(unsigned long vaddr)
+ EXPORT_SYMBOL(flush_tlb_page);
+ EXPORT_SYMBOL(flush_tlb_one);
+ 
++#ifdef CONFIG_HOTPLUG_CPU
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
++{
++	if (mp_ops->cleanup_dead_cpu)
++		mp_ops->cleanup_dead_cpu(cpu);
++}
++#endif
++
+ #ifdef CONFIG_GENERIC_CLOCKEVENTS_BROADCAST
+ 
+ static void tick_broadcast_callee(void *info)
+--- a/arch/mips/loongson64/smp.c
++++ b/arch/mips/loongson64/smp.c
+@@ -775,6 +775,7 @@ void play_dead(void)
+ 	void (*play_dead_at_ckseg1)(int *);
+ 
+ 	idle_task_exit();
++	cpuhp_ap_report_dead();
+ 
+ 	prid_imp = read_c0_prid() & PRID_IMP_MASK;
+ 	prid_rev = read_c0_prid() & PRID_REV_MASK;
 
 
