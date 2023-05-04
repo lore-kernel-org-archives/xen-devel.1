@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84984C7EE21
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:03:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529907.824973 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7335C7EE21
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529922.824982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDq-0001n3-1E; Thu, 04 May 2023 19:02:34 +0000
+	id 1pueKB-0005HU-Nw; Thu, 04 May 2023 19:09:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529907.824973; Thu, 04 May 2023 19:02:33 +0000
+Received: by outflank-mailman (output) from mailman id 529922.824982; Thu, 04 May 2023 19:09:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDp-0001mL-R0; Thu, 04 May 2023 19:02:33 +0000
-Received: by outflank-mailman (input) for mailman id 529907;
- Thu, 04 May 2023 19:02:32 +0000
+	id 1pueKB-0005HN-LL; Thu, 04 May 2023 19:09:07 +0000
+Received: by outflank-mailman (input) for mailman id 529922;
+ Thu, 04 May 2023 19:09:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDo-00042k-HN
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:32 +0000
+ id 1pueED-00042k-9y
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:57 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 37c968b4-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:30 +0200 (CEST)
+ id 47244339-eaae-11ed-8611-37d641c3527e;
+ Thu, 04 May 2023 21:02:55 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37c968b4-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185937.370022257@linutronix.de>
+X-Inumbo-ID: 47244339-eaae-11ed-8611-37d641c3527e
+Message-ID: <20230504185938.232336513@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226949;
+	s=2020; t=1683226975;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=mat1riu4O6AbPNpAmsMwayxE5kfc1RXkToP7jRe4U7o=;
-	b=xeQ5SCOYldQBRnXkZ526uAbaB3KT8qlhRpTTXdBUQxwAwpI82XKOL3tevipA06i7tc5ik1
-	/VIoaKs7slgXkoJFe/mtHfTaoLddU3MEOBEllwMSIf2d4NknWjTSWrq+h0v75+R1qK5t3r
-	8j7mXzu4SOfMAjxADMA1u0nZP2bTlZ1UBthabyfdIS8xqStZnpoA/DeBzH2/80q+vsgWeN
-	FK2jo8/F0W9ovDdsnYpGGqEqqyguyf1eDfkchtVyJxwbc5saq03VkAo4AB8uim4+borl6r
-	hmKF3zSrVJF46+/dF1reYrrlXBVWx9cYHY3XLgoVznWRXMJEKbMR9Q5+tqaJWQ==
+	 references:references; bh=PaGuo8GAZ65ZbtTn7wzwCB2xmjp/8CcdVtBqqK3zJyY=;
+	b=WBrmRYfVh8Hf7VAtaZM+773NG/l2NaZEQY2PbsMWpwgijTHlkaPZNZwTTqZqSePaJs28Tp
+	huH2qX95r4oDUOSFSd9zA+6+RZv5lgr0xa0QdgDkEncw9LVXBvKPVIlHpBCwardNQlPmIT
+	cajVqbzngFG+dnpn2I0UeA+RYWcEBwo1QkYYSYABAtHiWYiay4DXWTSDKMd3/FerfS7z8b
+	xwX6otdMILDZ1YbCULvPsUARGQzswNTUUkZzB3iKqcysyV9JxG2dUxCWqjPi7FUYFLn/3T
+	jkRxQ4LmxpZMkrdtxeZw1NAb25wiC+Tx1duuJ885D0xawxhq7zhP9DRXxAmkFA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226949;
+	s=2020e; t=1683226975;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=mat1riu4O6AbPNpAmsMwayxE5kfc1RXkToP7jRe4U7o=;
-	b=rxfY29HsuqZlJnuRZ3LKPx2xJrN/rplKUe2pMIlsDATOFZW6zMzLCZaZHUFpor639GkOdB
-	FN/fmxQ4O5AleqBA==
+	 references:references; bh=PaGuo8GAZ65ZbtTn7wzwCB2xmjp/8CcdVtBqqK3zJyY=;
+	b=G0tsDBn5b6jENP+Wz6pMSYtlj20+hRg4V3sQlU3KTcd+8sMa78JVCQNTfSLn2dU5TfjS5i
+	VD5uznhB/0z5zkAQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,509 +94,62 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject:
- [patch V2 19/38] x86/smpboot: Switch to hotplug core state synchronization
+Subject: [patch V2 35/38] x86/apic: Save the APIC virtual base address
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:29 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:55 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The new AP state tracking and synchronization mechanism in the CPU hotplug
-core code allows to remove quite some x86 specific code:
+For parallel CPU brinugp it's required to read the APIC ID in the low level
+startup code. The virtual APIC base address is a constant because its a
+fix-mapped address. Exposing that constant which is composed via macros to
+assembly code is non-trivial dues to header inclusion hell.
 
-  1) The AP alive synchronization based on cpumasks
+Aside of that it's constant only because of the vsyscall ABI
+requirement. Once vsyscall is out of the picture the fixmap can be placed
+at runtime.
 
-  2) The decision whether an AP can be brought up again
+Avoid header hell, stay flexible and store the address in a variable which
+can be exposed to the low level startup code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org
+
 ---
-V2: Use for_each_online_cpu() - Brian
+ arch/x86/include/asm/smp.h  |    1 +
+ arch/x86/kernel/apic/apic.c |    4 ++++
+ 2 files changed, 5 insertions(+)
 ---
- arch/x86/Kconfig           |    1 
- arch/x86/include/asm/smp.h |    7 +
- arch/x86/kernel/smp.c      |    1 
- arch/x86/kernel/smpboot.c  |  161 ++++++++++-----------------------------------
- arch/x86/xen/smp_hvm.c     |   16 +---
- arch/x86/xen/smp_pv.c      |   39 ++++++----
- 6 files changed, 73 insertions(+), 152 deletions(-)
----
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -274,6 +274,7 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
- 	select HAVE_GENERIC_VDSO
-+	select HOTPLUG_CORE_SYNC_FULL		if SMP
- 	select HOTPLUG_SMT			if SMP
- 	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
 --- a/arch/x86/include/asm/smp.h
 +++ b/arch/x86/include/asm/smp.h
-@@ -38,6 +38,8 @@ struct smp_ops {
- 	void (*crash_stop_other_cpus)(void);
- 	void (*smp_send_reschedule)(int cpu);
+@@ -196,6 +196,7 @@ extern void nmi_selftest(void);
+ #endif
  
-+	void (*cleanup_dead_cpu)(unsigned cpu);
-+	void (*poll_sync_state)(void);
- 	int (*cpu_up)(unsigned cpu, struct task_struct *tidle);
- 	int (*cpu_disable)(void);
- 	void (*cpu_die)(unsigned int cpu);
-@@ -90,7 +92,8 @@ static inline int __cpu_disable(void)
+ extern unsigned int smpboot_control;
++extern unsigned long apic_mmio_base;
  
- static inline void __cpu_die(unsigned int cpu)
- {
--	smp_ops.cpu_die(cpu);
-+	if (smp_ops.cpu_die)
-+		smp_ops.cpu_die(cpu);
- }
+ #endif /* !__ASSEMBLY__ */
  
- static inline void __noreturn play_dead(void)
-@@ -123,8 +126,6 @@ void native_smp_cpus_done(unsigned int m
- int common_cpu_up(unsigned int cpunum, struct task_struct *tidle);
- int native_cpu_up(unsigned int cpunum, struct task_struct *tidle);
- int native_cpu_disable(void);
--int common_cpu_die(unsigned int cpu);
--void native_cpu_die(unsigned int cpu);
- void __noreturn hlt_play_dead(void);
- void native_play_dead(void);
- void play_dead_common(void);
---- a/arch/x86/kernel/smp.c
-+++ b/arch/x86/kernel/smp.c
-@@ -269,7 +269,6 @@ struct smp_ops smp_ops = {
- 	.smp_send_reschedule	= native_smp_send_reschedule,
- 
- 	.cpu_up			= native_cpu_up,
--	.cpu_die		= native_cpu_die,
- 	.cpu_disable		= native_cpu_disable,
- 	.play_dead		= native_play_dead,
- 
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -57,6 +57,7 @@
- #include <linux/pgtable.h>
- #include <linux/overflow.h>
- #include <linux/stackprotector.h>
-+#include <linux/cpuhotplug.h>
- 
- #include <asm/acpi.h>
- #include <asm/cacheinfo.h>
-@@ -101,9 +102,6 @@ EXPORT_PER_CPU_SYMBOL(cpu_die_map);
- DEFINE_PER_CPU_READ_MOSTLY(struct cpuinfo_x86, cpu_info);
- EXPORT_PER_CPU_SYMBOL(cpu_info);
- 
--/* All of these masks are initialized in setup_cpu_local_masks() */
--static cpumask_var_t cpu_initialized_mask;
--static cpumask_var_t cpu_callout_mask;
- /* Representing CPUs for which sibling maps can be computed */
- static cpumask_var_t cpu_sibling_setup_mask;
- 
-@@ -169,8 +167,8 @@ static void smp_callin(void)
- 	int cpuid = smp_processor_id();
- 
- 	/*
--	 * If waken up by an INIT in an 82489DX configuration
--	 * cpu_callout_mask guarantees we don't get here before an
-+	 * If waken up by an INIT in an 82489DX configuration the alive
-+	 * synchronization guarantees we don't get here before an
- 	 * INIT_deassert IPI reaches our local APIC, so it is now safe to
- 	 * touch our local APIC.
- 	 *
-@@ -216,17 +214,6 @@ static void ap_calibrate_delay(void)
- 	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
- }
- 
--static void wait_for_master_cpu(int cpu)
--{
--	/*
--	 * Wait for release by control CPU before continuing with AP
--	 * initialization.
--	 */
--	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
--	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
--		cpu_relax();
--}
--
- /*
-  * Activate a secondary processor.
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -101,6 +101,9 @@ static int apic_extnmi __ro_after_init =
   */
-@@ -247,11 +234,11 @@ static void notrace start_secondary(void
- 	cpu_init_exception_handling();
+ static bool virt_ext_dest_id __ro_after_init;
  
- 	/*
--	 * Sync point with wait_cpu_initialized(). Sets AP in
--	 * cpu_initialized_mask and then waits for the control CPU
--	 * to release it.
-+	 * Synchronization point with the hotplug core. Sets the
-+	 * synchronization state to ALIVE and waits for the control CPU to
-+	 * release this CPU for further bringup.
- 	 */
--	wait_for_master_cpu(raw_smp_processor_id());
-+	cpuhp_ap_sync_alive();
- 
- 	cpu_init();
- 	rcu_cpu_starting(raw_smp_processor_id());
-@@ -284,7 +271,6 @@ static void notrace start_secondary(void
- 	set_cpu_online(smp_processor_id(), true);
- 	lapic_online();
- 	unlock_vector_lock();
--	cpu_set_state_online(smp_processor_id());
- 	x86_platform.nmi_init();
- 
- 	/* enable local interrupts */
-@@ -735,9 +721,9 @@ static void impress_friends(void)
- 	 * Allow the user to impress friends.
- 	 */
- 	pr_debug("Before bogomips\n");
--	for_each_possible_cpu(cpu)
--		if (cpumask_test_cpu(cpu, cpu_callout_mask))
--			bogosum += cpu_data(cpu).loops_per_jiffy;
-+	for_each_online_cpu(cpu)
-+		bogosum += cpu_data(cpu).loops_per_jiffy;
++/* For parallel bootup. */
++unsigned long apic_mmio_base __ro_after_init;
 +
- 	pr_info("Total of %d processors activated (%lu.%02lu BogoMIPS)\n",
- 		num_online_cpus(),
- 		bogosum/(500000/HZ),
-@@ -1009,6 +995,7 @@ int common_cpu_up(unsigned int cpu, stru
- static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
- {
- 	unsigned long start_ip = real_mode_header->trampoline_start;
-+	int ret;
+ /*
+  * Map cpu index to physical APIC ID
+  */
+@@ -2163,6 +2166,7 @@ void __init register_lapic_address(unsig
  
- #ifdef CONFIG_X86_64
- 	/* If 64-bit wakeup method exists, use the 64-bit mode trampoline IP */
-@@ -1049,13 +1036,6 @@ static int do_boot_cpu(int apicid, int c
- 		}
+ 	if (!x2apic_mode) {
+ 		set_fixmap_nocache(FIX_APIC_BASE, address);
++		apic_mmio_base = APIC_BASE;
+ 		apic_printk(APIC_VERBOSE, "mapped APIC to %16lx (%16lx)\n",
+ 			    APIC_BASE, address);
  	}
- 
--	/*
--	 * AP might wait on cpu_callout_mask in cpu_init() with
--	 * cpu_initialized_mask set if previous attempt to online
--	 * it timed-out. Clear cpu_initialized_mask so that after
--	 * INIT/SIPI it could start with a clean state.
--	 */
--	cpumask_clear_cpu(cpu, cpu_initialized_mask);
- 	smp_mb();
- 
- 	/*
-@@ -1066,47 +1046,16 @@ static int do_boot_cpu(int apicid, int c
- 	 * - Use an INIT boot APIC message
- 	 */
- 	if (apic->wakeup_secondary_cpu_64)
--		return apic->wakeup_secondary_cpu_64(apicid, start_ip);
-+		ret = apic->wakeup_secondary_cpu_64(apicid, start_ip);
- 	else if (apic->wakeup_secondary_cpu)
--		return apic->wakeup_secondary_cpu(apicid, start_ip);
--
--	return wakeup_secondary_cpu_via_init(apicid, start_ip);
--}
--
--static int wait_cpu_cpumask(unsigned int cpu, const struct cpumask *mask)
--{
--	unsigned long timeout;
--
--	/*
--	 * Wait up to 10s for the CPU to report in.
--	 */
--	timeout = jiffies + 10*HZ;
--	while (time_before(jiffies, timeout)) {
--		if (cpumask_test_cpu(cpu, mask))
--			return 0;
--
--		schedule();
--	}
--	return -1;
--}
--
--/*
-- * Bringup step two: Wait for the target AP to reach cpu_init_secondary()
-- * and thus wait_for_master_cpu(), then set cpu_callout_mask to allow it
-- * to proceed.  The AP will then proceed past setting its 'callin' bit
-- * and end up waiting in check_tsc_sync_target() until we reach
-- * wait_cpu_online() to tend to it.
-- */
--static int wait_cpu_initialized(unsigned int cpu)
--{
--	/*
--	 * Wait for first sign of life from AP.
--	 */
--	if (wait_cpu_cpumask(cpu, cpu_initialized_mask))
--		return -1;
-+		ret = apic->wakeup_secondary_cpu(apicid, start_ip);
-+	else
-+		ret = wakeup_secondary_cpu_via_init(apicid, start_ip);
- 
--	cpumask_set_cpu(cpu, cpu_callout_mask);
--	return 0;
-+	/* If the wakeup mechanism failed, cleanup the warm reset vector */
-+	if (ret)
-+		arch_cpuhp_cleanup_kick_cpu(cpu);
-+	return ret;
- }
- 
- static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
-@@ -1131,11 +1080,6 @@ static int native_kick_ap(unsigned int c
- 	 */
- 	mtrr_save_state();
- 
--	/* x86 CPUs take themselves offline, so delayed offline is OK. */
--	err = cpu_check_up_prepare(cpu);
--	if (err && err != -EBUSY)
--		return err;
--
- 	/* the FPU context is blank, nobody can own it */
- 	per_cpu(fpu_fpregs_owner_ctx, cpu) = NULL;
- 
-@@ -1152,17 +1096,29 @@ static int native_kick_ap(unsigned int c
- 
- int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
- {
--	int ret;
--
--	ret = native_kick_ap(cpu, tidle);
--	if (!ret)
--		ret = wait_cpu_initialized(cpu);
-+	return native_kick_ap(cpu, tidle);
-+}
- 
-+void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu)
-+{
- 	/* Cleanup possible dangling ends... */
--	if (x86_platform.legacy.warm_reset)
-+	if (smp_ops.cpu_up == native_cpu_up && x86_platform.legacy.warm_reset)
- 		smpboot_restore_warm_reset_vector();
-+}
- 
--	return ret;
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
-+{
-+	if (smp_ops.cleanup_dead_cpu)
-+		smp_ops.cleanup_dead_cpu(cpu);
-+
-+	if (system_state == SYSTEM_RUNNING)
-+		pr_info("CPU %u is now offline\n", cpu);
-+}
-+
-+void arch_cpuhp_sync_state_poll(void)
-+{
-+	if (smp_ops.poll_sync_state)
-+		smp_ops.poll_sync_state();
- }
- 
- /**
-@@ -1354,9 +1310,6 @@ void __init native_smp_prepare_boot_cpu(
- 	if (!IS_ENABLED(CONFIG_SMP))
- 		switch_gdt_and_percpu_base(me);
- 
--	/* already set me in cpu_online_mask in boot_cpu_init() */
--	cpumask_set_cpu(me, cpu_callout_mask);
--	cpu_set_state_online(me);
- 	native_pv_lock_init();
- }
- 
-@@ -1483,8 +1436,6 @@ early_param("possible_cpus", _setup_poss
- /* correctly size the local cpu masks */
- void __init setup_cpu_local_masks(void)
- {
--	alloc_bootmem_cpumask_var(&cpu_initialized_mask);
--	alloc_bootmem_cpumask_var(&cpu_callout_mask);
- 	alloc_bootmem_cpumask_var(&cpu_sibling_setup_mask);
- }
- 
-@@ -1546,9 +1497,6 @@ static void remove_siblinginfo(int cpu)
- static void remove_cpu_from_maps(int cpu)
- {
- 	set_cpu_online(cpu, false);
--	cpumask_clear_cpu(cpu, cpu_callout_mask);
--	/* was set by cpu_init() */
--	cpumask_clear_cpu(cpu, cpu_initialized_mask);
- 	numa_remove_cpu(cpu);
- }
- 
-@@ -1599,36 +1547,11 @@ int native_cpu_disable(void)
- 	return 0;
- }
- 
--int common_cpu_die(unsigned int cpu)
--{
--	int ret = 0;
--
--	/* We don't do anything here: idle task is faking death itself. */
--
--	/* They ack this in play_dead() by setting CPU_DEAD */
--	if (cpu_wait_death(cpu, 5)) {
--		if (system_state == SYSTEM_RUNNING)
--			pr_info("CPU %u is now offline\n", cpu);
--	} else {
--		pr_err("CPU %u didn't die...\n", cpu);
--		ret = -1;
--	}
--
--	return ret;
--}
--
--void native_cpu_die(unsigned int cpu)
--{
--	common_cpu_die(cpu);
--}
--
- void play_dead_common(void)
- {
- 	idle_task_exit();
- 
--	/* Ack it */
--	(void)cpu_report_death();
--
-+	cpuhp_ap_report_dead();
- 	/*
- 	 * With physical CPU hotplug, we should halt the cpu
- 	 */
-@@ -1730,12 +1653,6 @@ int native_cpu_disable(void)
- 	return -ENOSYS;
- }
- 
--void native_cpu_die(unsigned int cpu)
--{
--	/* We said "no" in __cpu_disable */
--	BUG();
--}
--
- void native_play_dead(void)
- {
- 	BUG();
---- a/arch/x86/xen/smp_hvm.c
-+++ b/arch/x86/xen/smp_hvm.c
-@@ -55,18 +55,16 @@ static void __init xen_hvm_smp_prepare_c
- }
- 
- #ifdef CONFIG_HOTPLUG_CPU
--static void xen_hvm_cpu_die(unsigned int cpu)
-+static void xen_hvm_cleanup_dead_cpu(unsigned int cpu)
- {
--	if (common_cpu_die(cpu) == 0) {
--		if (xen_have_vector_callback) {
--			xen_smp_intr_free(cpu);
--			xen_uninit_lock_cpu(cpu);
--			xen_teardown_timer(cpu);
--		}
-+	if (xen_have_vector_callback) {
-+		xen_smp_intr_free(cpu);
-+		xen_uninit_lock_cpu(cpu);
-+		xen_teardown_timer(cpu);
- 	}
- }
- #else
--static void xen_hvm_cpu_die(unsigned int cpu)
-+static void xen_hvm_cleanup_dead_cpu(unsigned int cpu)
- {
- 	BUG();
- }
-@@ -77,7 +75,7 @@ void __init xen_hvm_smp_init(void)
- 	smp_ops.smp_prepare_boot_cpu = xen_hvm_smp_prepare_boot_cpu;
- 	smp_ops.smp_prepare_cpus = xen_hvm_smp_prepare_cpus;
- 	smp_ops.smp_cpus_done = xen_smp_cpus_done;
--	smp_ops.cpu_die = xen_hvm_cpu_die;
-+	smp_ops.cleanup_dead_cpu = xen_hvm_cleanup_dead_cpu;
- 
- 	if (!xen_have_vector_callback) {
- #ifdef CONFIG_PARAVIRT_SPINLOCKS
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -62,6 +62,7 @@ static void cpu_bringup(void)
- 	int cpu;
- 
- 	cr4_init();
-+	cpuhp_ap_sync_alive();
- 	cpu_init();
- 	touch_softlockup_watchdog();
- 
-@@ -83,7 +84,7 @@ static void cpu_bringup(void)
- 
- 	set_cpu_online(cpu, true);
- 
--	cpu_set_state_online(cpu);  /* Implies full memory barrier. */
-+	smp_mb();
- 
- 	/* We can take interrupts now: we're officially "up". */
- 	local_irq_enable();
-@@ -323,14 +324,6 @@ static int xen_pv_cpu_up(unsigned int cp
- 
- 	xen_setup_runstate_info(cpu);
- 
--	/*
--	 * PV VCPUs are always successfully taken down (see 'while' loop
--	 * in xen_cpu_die()), so -EBUSY is an error.
--	 */
--	rc = cpu_check_up_prepare(cpu);
--	if (rc)
--		return rc;
--
- 	/* make sure interrupts start blocked */
- 	per_cpu(xen_vcpu, cpu)->evtchn_upcall_mask = 1;
- 
-@@ -349,6 +342,11 @@ static int xen_pv_cpu_up(unsigned int cp
- 	return 0;
- }
- 
-+static void xen_pv_poll_sync_state(void)
-+{
-+	HYPERVISOR_sched_op(SCHEDOP_yield, NULL);
-+}
-+
- #ifdef CONFIG_HOTPLUG_CPU
- static int xen_pv_cpu_disable(void)
- {
-@@ -364,18 +362,18 @@ static int xen_pv_cpu_disable(void)
- 
- static void xen_pv_cpu_die(unsigned int cpu)
- {
--	while (HYPERVISOR_vcpu_op(VCPUOP_is_up,
--				  xen_vcpu_nr(cpu), NULL)) {
-+	while (HYPERVISOR_vcpu_op(VCPUOP_is_up, xen_vcpu_nr(cpu), NULL)) {
- 		__set_current_state(TASK_UNINTERRUPTIBLE);
- 		schedule_timeout(HZ/10);
- 	}
-+}
- 
--	if (common_cpu_die(cpu) == 0) {
--		xen_smp_intr_free(cpu);
--		xen_uninit_lock_cpu(cpu);
--		xen_teardown_timer(cpu);
--		xen_pmu_finish(cpu);
--	}
-+static void xen_pv_cleanup_dead_cpu(unsigned int cpu)
-+{
-+	xen_smp_intr_free(cpu);
-+	xen_uninit_lock_cpu(cpu);
-+	xen_teardown_timer(cpu);
-+	xen_pmu_finish(cpu);
- }
- 
- static void __noreturn xen_pv_play_dead(void) /* used only with HOTPLUG_CPU */
-@@ -397,6 +395,11 @@ static void xen_pv_cpu_die(unsigned int
- 	BUG();
- }
- 
-+static void xen_pv_cleanup_dead_cpu(unsigned int cpu)
-+{
-+	BUG();
-+}
-+
- static void __noreturn xen_pv_play_dead(void)
- {
- 	BUG();
-@@ -437,6 +440,8 @@ static const struct smp_ops xen_smp_ops
- 
- 	.cpu_up = xen_pv_cpu_up,
- 	.cpu_die = xen_pv_cpu_die,
-+	.cleanup_dead_cpu = xen_pv_cleanup_dead_cpu,
-+	.poll_sync_state = xen_pv_poll_sync_state,
- 	.cpu_disable = xen_pv_cpu_disable,
- 	.play_dead = xen_pv_play_dead,
- 
 
 
