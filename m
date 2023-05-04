@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC161C7EE21
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529970.825098 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76A6EC7EE22
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529972.825123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKx-0001bs-6N; Thu, 04 May 2023 19:09:55 +0000
+	id 1pueL0-0002ZF-LW; Thu, 04 May 2023 19:09:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529970.825098; Thu, 04 May 2023 19:09:55 +0000
+Received: by outflank-mailman (output) from mailman id 529972.825123; Thu, 04 May 2023 19:09:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKx-0001bL-0M; Thu, 04 May 2023 19:09:55 +0000
-Received: by outflank-mailman (input) for mailman id 529970;
- Thu, 04 May 2023 19:09:54 +0000
+	id 1pueL0-0002Yt-Fp; Thu, 04 May 2023 19:09:58 +0000
+Received: by outflank-mailman (input) for mailman id 529972;
+ Thu, 04 May 2023 19:09:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueE7-00042j-LH
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:51 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pueDz-00042j-PH
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:43 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 444a8d57-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:51 +0200 (CEST)
+ id 3f704063-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 444a8d57-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185938.073662723@linutronix.de>
+X-Inumbo-ID: 3f704063-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185937.806324260@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226970;
+	s=2020; t=1683226962;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=uPvntfwXoWAcfAS+SI4cvobPK1ZyCeBK1UEsrRJoKHI=;
-	b=pGPnJYtp3Tpg+MMWkzGo2xuJZap0dH1jxlVLp3HnSKPjWhKQ7lUp8uBcRJgQC6IITlm0cJ
-	1aGXFaHVXyvjBYzo9xhPU6Q9Hlb63Li5My1zMC5rKjhrcSFv9FrMoJC2AzdXeGim5XsZqz
-	9v+nMgLyDTt/fW+8fRbtwh/FoW+E8TIs7Of6L7ZL4PjyPe5sHR924eR8F6uIhyHQM8vAHb
-	4Q2e21rxSOrBXM8NWwvByPprou5mbPG7hQgLJJYj7UgEiLVag9IaPlw+QpmbIBOOjhqHUl
-	BPFnbOSeBcOh1u6IqXuRouJv9SchS3OwdJYKx3EiyYmJQVnhihqfn9NcfJFqRg==
+	 references:references; bh=PIHn3pYsUJ8IshGaa3kU/Fr0bIJzVI5udpOrlPrYz+E=;
+	b=QNGmIIt+/To56nrNKLo3wlp/uoA0S+O2aHLtwODYUDkrU8Guyvv03S4Uol8KKlrIgPdDLI
+	qPjhMQNUAIZdRs2om4WUPJMT1jXnWhngn8GF42pSedv+mPXqPDg6dporcNAvFdzUw+egQ+
+	Vqg53SlSVRiuRBZMIzV5FPs2l5GIv84C01a0Qxu+Mq65QbnphJFA5Ir3subA78ZM6E8kf2
+	ZWThMRZ9iqmdUJfsdKFtkK4qDI92/cMPImPqXf9PZUVb/qwqechT+XgrR1ZcB+r0K7YQf/
+	HeZhI+W/xkNZVJpDF4ppx/B//2tg7mVNz3rodO8pj9sfyrrX+kNXbJXXhJW8oA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226970;
+	s=2020e; t=1683226962;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=uPvntfwXoWAcfAS+SI4cvobPK1ZyCeBK1UEsrRJoKHI=;
-	b=x2+bLbNKqKUzBlReY4wD0HaXB51VfG+zRONPZUd5afPPYXsV8jL1krzs8Tu9sGDHvinTTA
-	c6yOUa4jvvA0hODA==
+	 references:references; bh=PIHn3pYsUJ8IshGaa3kU/Fr0bIJzVI5udpOrlPrYz+E=;
+	b=wXxqyLYYRXuQOss/+ZoLBYE+oLaf2tb90zR4AxAwAajqpA22CmYoLXhycZjVGB2N2Jkdnq
+	PQRh0paL0Sj8j3Bw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,215 +93,115 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
- "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- David Woodhouse <dwmw@amazon.co.uk>
-Subject: [patch V2 32/38] cpu/hotplug: Allow "parallel" bringup up to
- CPUHP_BP_KICK_AP_STATE
+ "Michael Kelley (LINUX)" <mikelley@microsoft.com>
+Subject: [patch V2 27/38] cpu/hotplug: Remove unused state functions
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:50 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:42 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-There is often significant latency in the early stages of CPU bringup, and
-time is wasted by waking each CPU (e.g. with SIPI/INIT/INIT on x86) and
-then waiting for it to respond before moving on to the next.
+All users converted to the hotplug core mechanism.
 
-Allow a platform to enable parallel setup which brings all to be onlined
-CPUs up to the CPUHP_BP_KICK_AP state. While this state advancement on the
-control CPU (BP) is single-threaded the important part is the last state
-CPUHP_BP_KICK_AP which wakes the to be onlined CPUs up.
-
-This allows the CPUs to run up to the first sychronization point
-cpuhp_ap_sync_alive() where they wait for the control CPU to release them
-one by one for the full onlining procedure.
-
-This parallelism depends on the CPU hotplug core sync mechanism which
-ensures that the parallel brought up CPUs wait for release before touching
-any state which would make the CPU visible to anything outside the hotplug
-control mechanism.
-
-To handle the SMT constraints of X86 correctly the bringup happens in two
-iterations when CONFIG_HOTPLUG_SMT is enabled. The control CPU brings up
-the primary SMT threads of each core first, which can load the microcode
-without the need to rendevouz with the thread siblings. Once that's
-completed it brings up the secondary SMT threads.
-
-Co-developed-by: David Woodhouse <dwmw@amazon.co.uk>
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- Documentation/admin-guide/kernel-parameters.txt |    6 +
- arch/Kconfig                                    |    4 
- include/linux/cpuhotplug.h                      |    1 
- kernel/cpu.c                                    |  103 ++++++++++++++++++++++--
- 4 files changed, 109 insertions(+), 5 deletions(-)
+ include/linux/cpu.h |    2 -
+ kernel/smpboot.c    |   75 ----------------------------------------------------
+ 2 files changed, 77 deletions(-)
 ---
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -838,6 +838,12 @@
- 			on every CPU online, such as boot, and resume from suspend.
- 			Default: 10000
- 
-+	cpuhp.parallel=
-+			[SMP] Enable/disable parallel bringup of secondary CPUs
-+			Format: <bool>
-+			Default is enabled if CONFIG_HOTPLUG_PARALLEL=y. Otherwise
-+			the parameter has no effect.
-+
- 	crash_kexec_post_notifiers
- 			Run kdump after running panic-notifiers and dumping
- 			kmsg. This only for the users who doubt kdump always
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -53,6 +53,10 @@ config HOTPLUG_SPLIT_STARTUP
- 	bool
- 	select HOTPLUG_CORE_SYNC_FULL
- 
-+config HOTPLUG_PARALLEL
-+	bool
-+	select HOTPLUG_SPLIT_STARTUP
-+
- config GENERIC_ENTRY
- 	bool
- 
---- a/include/linux/cpuhotplug.h
-+++ b/include/linux/cpuhotplug.h
-@@ -524,6 +524,7 @@ void cpuhp_ap_sync_alive(void);
- void arch_cpuhp_sync_state_poll(void);
- void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
- int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle);
-+bool arch_cpuhp_init_parallel_bringup(void);
- 
- #ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
- void cpuhp_ap_report_dead(void);
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -649,8 +649,23 @@ bool cpu_smt_possible(void)
- 		cpu_smt_control != CPU_SMT_NOT_SUPPORTED;
+--- a/include/linux/cpu.h
++++ b/include/linux/cpu.h
+@@ -193,8 +193,6 @@ static inline void play_idle(unsigned lo
  }
- EXPORT_SYMBOL_GPL(cpu_smt_possible);
-+
-+static inline bool cpuhp_smt_aware(void)
-+{
-+	return topology_smt_supported();
-+}
-+
-+static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
-+{
-+	return cpu_primary_thread_mask;
-+}
+ 
+ #ifdef CONFIG_HOTPLUG_CPU
+-bool cpu_wait_death(unsigned int cpu, int seconds);
+-bool cpu_report_death(void);
+ void cpuhp_report_idle_dead(void);
  #else
- static inline bool cpu_smt_allowed(unsigned int cpu) { return true; }
-+static inline bool cpuhp_smt_aware(void) { return false; }
-+static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
-+{
-+	return cpu_present_mask;
-+}
- #endif
- 
- static inline enum cpuhp_state
-@@ -1743,16 +1758,94 @@ int bringup_hibernate_cpu(unsigned int s
- 	return 0;
+ static inline void cpuhp_report_idle_dead(void) { }
+--- a/kernel/smpboot.c
++++ b/kernel/smpboot.c
+@@ -325,78 +325,3 @@ void smpboot_unregister_percpu_thread(st
+ 	cpus_read_unlock();
  }
- 
--void __init bringup_nonboot_cpus(unsigned int setup_max_cpus)
-+static void __init cpuhp_bringup_mask(const struct cpumask *mask, unsigned int ncpus,
-+				      enum cpuhp_state target)
- {
- 	unsigned int cpu;
- 
--	for_each_present_cpu(cpu) {
--		if (num_online_cpus() >= setup_max_cpus)
-+	for_each_cpu(cpu, mask) {
-+		struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-+
-+		if (!--ncpus)
- 			break;
--		if (!cpu_online(cpu))
--			cpu_up(cpu, CPUHP_ONLINE);
-+
-+		if (cpu_up(cpu, target) && can_rollback_cpu(st)) {
-+			/*
-+			 * If this failed then cpu_up() might have only
-+			 * rolled back to CPUHP_BP_KICK_AP for the final
-+			 * online. Clean it up. NOOP if already rolled back.
-+			 */
-+			WARN_ON(cpuhp_invoke_callback_range(false, cpu, st, CPUHP_OFFLINE));
-+		}
-+	}
-+}
-+
-+#ifdef CONFIG_HOTPLUG_PARALLEL
-+static bool __cpuhp_parallel_bringup __ro_after_init = true;
-+
-+static int __init parallel_bringup_parse_param(char *arg)
-+{
-+	return kstrtobool(arg, &__cpuhp_parallel_bringup);
-+}
-+early_param("cpuhp.parallel", parallel_bringup_parse_param);
-+
-+/*
-+ * On architectures which have enabled parallel bringup this invokes all BP
-+ * prepare states for each of the to be onlined APs first. The last state
-+ * sends the startup IPI to the APs. The APs proceed through the low level
-+ * bringup code in parallel and then wait for the control CPU to release
-+ * them one by one for the final onlining procedure.
-+ *
-+ * This avoids waiting for each AP to respond to the startup IPI in
-+ * CPUHP_BRINGUP_CPU.
-+ */
-+static bool __init cpuhp_bringup_cpus_parallel(unsigned int ncpus)
-+{
-+	const struct cpumask *mask = cpu_present_mask;
-+
-+	if (__cpuhp_parallel_bringup)
-+		__cpuhp_parallel_bringup = arch_cpuhp_init_parallel_bringup();
-+	if (!__cpuhp_parallel_bringup)
-+		return false;
-+
-+	if (cpuhp_smt_aware()) {
-+		const struct cpumask *pmask = cpuhp_get_primary_thread_mask();
-+		static struct cpumask tmp_mask __initdata;
-+
-+		/*
-+		 * X86 requires to prevent that SMT siblings stopped while
-+		 * the primary thread does a microcode update for various
-+		 * reasons. Bring the primary threads up first.
-+		 */
-+		cpumask_and(&tmp_mask, mask, pmask);
-+		cpuhp_bringup_mask(&tmp_mask, ncpus, CPUHP_BP_KICK_AP);
-+		cpuhp_bringup_mask(&tmp_mask, ncpus, CPUHP_ONLINE);
-+		/* Account for the online CPUs */
-+		ncpus -= num_online_cpus();
-+		if (!ncpus)
-+			return true;
-+		/* Create the mask for secondary CPUs */
-+		cpumask_andnot(&tmp_mask, mask, pmask);
-+		mask = &tmp_mask;
- 	}
-+
-+	/* Bring the not-yet started CPUs up */
-+	cpuhp_bringup_mask(mask, ncpus, CPUHP_BP_KICK_AP);
-+	cpuhp_bringup_mask(mask, ncpus, CPUHP_ONLINE);
-+	return true;
-+}
-+#else
-+static inline bool cpuhp_bringup_cpus_parallel(unsigned int ncpus) { return false; }
-+#endif /* CONFIG_HOTPLUG_PARALLEL */
-+
-+void __init bringup_nonboot_cpus(unsigned int setup_max_cpus)
-+{
-+	/* Try parallel bringup optimization if enabled */
-+	if (cpuhp_bringup_cpus_parallel(setup_max_cpus))
-+		return;
-+
-+	/* Full per CPU serialized bringup */
-+	cpuhp_bringup_mask(cpu_present_mask, setup_max_cpus, CPUHP_ONLINE);
- }
- 
- #ifdef CONFIG_PM_SLEEP_SMP
+ EXPORT_SYMBOL_GPL(smpboot_unregister_percpu_thread);
+-
+-#ifndef CONFIG_HOTPLUG_CORE_SYNC
+-static DEFINE_PER_CPU(atomic_t, cpu_hotplug_state) = ATOMIC_INIT(CPU_POST_DEAD);
+-
+-#ifdef CONFIG_HOTPLUG_CPU
+-/*
+- * Wait for the specified CPU to exit the idle loop and die.
+- */
+-bool cpu_wait_death(unsigned int cpu, int seconds)
+-{
+-	int jf_left = seconds * HZ;
+-	int oldstate;
+-	bool ret = true;
+-	int sleep_jf = 1;
+-
+-	might_sleep();
+-
+-	/* The outgoing CPU will normally get done quite quickly. */
+-	if (atomic_read(&per_cpu(cpu_hotplug_state, cpu)) == CPU_DEAD)
+-		goto update_state_early;
+-	udelay(5);
+-
+-	/* But if the outgoing CPU dawdles, wait increasingly long times. */
+-	while (atomic_read(&per_cpu(cpu_hotplug_state, cpu)) != CPU_DEAD) {
+-		schedule_timeout_uninterruptible(sleep_jf);
+-		jf_left -= sleep_jf;
+-		if (jf_left <= 0)
+-			break;
+-		sleep_jf = DIV_ROUND_UP(sleep_jf * 11, 10);
+-	}
+-update_state_early:
+-	oldstate = atomic_read(&per_cpu(cpu_hotplug_state, cpu));
+-update_state:
+-	if (oldstate == CPU_DEAD) {
+-		/* Outgoing CPU died normally, update state. */
+-		smp_mb(); /* atomic_read() before update. */
+-		atomic_set(&per_cpu(cpu_hotplug_state, cpu), CPU_POST_DEAD);
+-	} else {
+-		/* Outgoing CPU still hasn't died, set state accordingly. */
+-		if (!atomic_try_cmpxchg(&per_cpu(cpu_hotplug_state, cpu),
+-					&oldstate, CPU_BROKEN))
+-			goto update_state;
+-		ret = false;
+-	}
+-	return ret;
+-}
+-
+-/*
+- * Called by the outgoing CPU to report its successful death.  Return
+- * false if this report follows the surviving CPU's timing out.
+- *
+- * A separate "CPU_DEAD_FROZEN" is used when the surviving CPU
+- * timed out.  This approach allows architectures to omit calls to
+- * cpu_check_up_prepare() and cpu_set_state_online() without defeating
+- * the next cpu_wait_death()'s polling loop.
+- */
+-bool cpu_report_death(void)
+-{
+-	int oldstate;
+-	int newstate;
+-	int cpu = smp_processor_id();
+-
+-	oldstate = atomic_read(&per_cpu(cpu_hotplug_state, cpu));
+-	do {
+-		if (oldstate != CPU_BROKEN)
+-			newstate = CPU_DEAD;
+-		else
+-			newstate = CPU_DEAD_FROZEN;
+-	} while (!atomic_try_cmpxchg(&per_cpu(cpu_hotplug_state, cpu),
+-				     &oldstate, newstate));
+-	return newstate == CPU_DEAD;
+-}
+-
+-#endif /* #ifdef CONFIG_HOTPLUG_CPU */
+-#endif /* !CONFIG_HOTPLUG_CORE_SYNC */
 
 
