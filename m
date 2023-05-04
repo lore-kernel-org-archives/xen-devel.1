@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7335C7EE21
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529922.824982 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18AA6C7EE22
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529931.825003 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKB-0005HU-Nw; Thu, 04 May 2023 19:09:07 +0000
+	id 1pueKV-00060U-Cm; Thu, 04 May 2023 19:09:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529922.824982; Thu, 04 May 2023 19:09:07 +0000
+Received: by outflank-mailman (output) from mailman id 529931.825003; Thu, 04 May 2023 19:09:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKB-0005HN-LL; Thu, 04 May 2023 19:09:07 +0000
-Received: by outflank-mailman (input) for mailman id 529922;
- Thu, 04 May 2023 19:09:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pueKV-00060L-9u; Thu, 04 May 2023 19:09:27 +0000
+Received: by outflank-mailman (input) for mailman id 529931;
+ Thu, 04 May 2023 19:09:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueED-00042k-9y
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:57 +0000
+ id 1pueDw-00042j-22
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:40 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 47244339-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:55 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3d7c3870-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47244339-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185938.232336513@linutronix.de>
+X-Inumbo-ID: 3d7c3870-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185937.700483457@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226975;
+	s=2020; t=1683226959;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=PaGuo8GAZ65ZbtTn7wzwCB2xmjp/8CcdVtBqqK3zJyY=;
-	b=WBrmRYfVh8Hf7VAtaZM+773NG/l2NaZEQY2PbsMWpwgijTHlkaPZNZwTTqZqSePaJs28Tp
-	huH2qX95r4oDUOSFSd9zA+6+RZv5lgr0xa0QdgDkEncw9LVXBvKPVIlHpBCwardNQlPmIT
-	cajVqbzngFG+dnpn2I0UeA+RYWcEBwo1QkYYSYABAtHiWYiay4DXWTSDKMd3/FerfS7z8b
-	xwX6otdMILDZ1YbCULvPsUARGQzswNTUUkZzB3iKqcysyV9JxG2dUxCWqjPi7FUYFLn/3T
-	jkRxQ4LmxpZMkrdtxeZw1NAb25wiC+Tx1duuJ885D0xawxhq7zhP9DRXxAmkFA==
+	 references:references; bh=o04fXgOhQs8+8CE7g0ZkhrpkLD4QHZg/LLM7Otp+9z8=;
+	b=p4kcKoUjBHHJo7zBT76SAr4kx217XWJeqQlJZM4VxHPykLQrWLTEC/uzx8rVhbv5iqkHWl
+	eKFtH9Dh+4qwsJ89ZP4rLm01HMJyfuh1U+U+HK5bkx7PCIfmaji3wiKDM0hoVurLEfzD81
+	Wt5Ubm2jEjitMnzdFcIqEG1m9GNIikM3c5w8xOJBg2D9IGfl3i1Bdd22uIIaFwPx6R+oIN
+	02fFHC7cYoeNHnd0KZn/7sG2vBaI1ZwTr6vd36gfFqo6mvp2OfPm/JhGUYVjsHiJsALYHO
+	f8H4F6s4Sw0iVizvLScdCi66AVg3wSgMwKU7em9hN7nVzpd/ip3L0uFyKgVW2A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226975;
+	s=2020e; t=1683226959;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=PaGuo8GAZ65ZbtTn7wzwCB2xmjp/8CcdVtBqqK3zJyY=;
-	b=G0tsDBn5b6jENP+Wz6pMSYtlj20+hRg4V3sQlU3KTcd+8sMa78JVCQNTfSLn2dU5TfjS5i
-	VD5uznhB/0z5zkAQ==
+	 references:references; bh=o04fXgOhQs8+8CE7g0ZkhrpkLD4QHZg/LLM7Otp+9z8=;
+	b=ZnZlGAwTWV21lQJdfFlOE3KOrdxbCyckyIQwnUuLhsAipHYSOksGllyP3kynqMPIKSFyh4
+	3HRt8jQRFFxBADCA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,62 +94,67 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 35/38] x86/apic: Save the APIC virtual base address
+Subject: [patch V2 25/38] parisc: Switch to hotplug core state synchronization
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:55 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:38 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-For parallel CPU brinugp it's required to read the APIC ID in the low level
-startup code. The virtual APIC base address is a constant because its a
-fix-mapped address. Exposing that constant which is composed via macros to
-assembly code is non-trivial dues to header inclusion hell.
-
-Aside of that it's constant only because of the vsyscall ABI
-requirement. Once vsyscall is out of the picture the fixmap can be placed
-at runtime.
-
-Avoid header hell, stay flexible and store the address in a variable which
-can be exposed to the low level startup code.
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
+Cc: Helge Deller <deller@gmx.de>
+Cc: linux-parisc@vger.kernel.org
 
 ---
- arch/x86/include/asm/smp.h  |    1 +
- arch/x86/kernel/apic/apic.c |    4 ++++
- 2 files changed, 5 insertions(+)
+ arch/parisc/Kconfig          |    1 +
+ arch/parisc/kernel/process.c |    4 ++--
+ arch/parisc/kernel/smp.c     |    7 +++----
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 ---
---- a/arch/x86/include/asm/smp.h
-+++ b/arch/x86/include/asm/smp.h
-@@ -196,6 +196,7 @@ extern void nmi_selftest(void);
- #endif
+--- a/arch/parisc/Kconfig
++++ b/arch/parisc/Kconfig
+@@ -57,6 +57,7 @@ config PARISC
+ 	select HAVE_ARCH_SECCOMP_FILTER
+ 	select HAVE_ARCH_TRACEHOOK
+ 	select HAVE_REGS_AND_STACK_ACCESS_API
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select GENERIC_SCHED_CLOCK
+ 	select GENERIC_IRQ_MIGRATION if SMP
+ 	select HAVE_UNSTABLE_SCHED_CLOCK if SMP
+--- a/arch/parisc/kernel/process.c
++++ b/arch/parisc/kernel/process.c
+@@ -166,8 +166,8 @@ void __noreturn arch_cpu_idle_dead(void)
  
- extern unsigned int smpboot_control;
-+extern unsigned long apic_mmio_base;
+ 	local_irq_disable();
  
- #endif /* !__ASSEMBLY__ */
+-	/* Tell __cpu_die() that this CPU is now safe to dispose of. */
+-	(void)cpu_report_death();
++	/* Tell the core that this CPU is now safe to dispose of. */
++	cpuhp_ap_report_dead();
  
---- a/arch/x86/kernel/apic/apic.c
-+++ b/arch/x86/kernel/apic/apic.c
-@@ -101,6 +101,9 @@ static int apic_extnmi __ro_after_init =
-  */
- static bool virt_ext_dest_id __ro_after_init;
+ 	/* Ensure that the cache lines are written out. */
+ 	flush_cache_all_local();
+--- a/arch/parisc/kernel/smp.c
++++ b/arch/parisc/kernel/smp.c
+@@ -500,11 +500,10 @@ int __cpu_disable(void)
+ void __cpu_die(unsigned int cpu)
+ {
+ 	pdc_cpu_rendezvous_lock();
++}
  
-+/* For parallel bootup. */
-+unsigned long apic_mmio_base __ro_after_init;
-+
- /*
-  * Map cpu index to physical APIC ID
-  */
-@@ -2163,6 +2166,7 @@ void __init register_lapic_address(unsig
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_crit("CPU%u: cpu didn't die\n", cpu);
+-		return;
+-	}
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
++{
+ 	pr_info("CPU%u: is shutting down\n", cpu);
  
- 	if (!x2apic_mode) {
- 		set_fixmap_nocache(FIX_APIC_BASE, address);
-+		apic_mmio_base = APIC_BASE;
- 		apic_printk(APIC_VERBOSE, "mapped APIC to %16lx (%16lx)\n",
- 			    APIC_BASE, address);
- 	}
+ 	/* set task's state to interruptible sleep */
 
 
