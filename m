@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 250DEC7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11930C77B78
 	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529885.824818 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.529887.824843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDM-00045K-CC; Thu, 04 May 2023 19:02:04 +0000
+	id 1pueDO-0004md-Om; Thu, 04 May 2023 19:02:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529885.824818; Thu, 04 May 2023 19:02:04 +0000
+Received: by outflank-mailman (output) from mailman id 529887.824843; Thu, 04 May 2023 19:02:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDM-00044v-6c; Thu, 04 May 2023 19:02:04 +0000
-Received: by outflank-mailman (input) for mailman id 529885;
- Thu, 04 May 2023 19:02:02 +0000
+	id 1pueDO-0004mU-LO; Thu, 04 May 2023 19:02:06 +0000
+Received: by outflank-mailman (input) for mailman id 529887;
+ Thu, 04 May 2023 19:02:05 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDK-00042k-Py
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:02 +0000
+ id 1pueDN-00042k-Ol
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:05 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 25ed47b2-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:00 +0200 (CEST)
+ id 2854e7bf-eaae-11ed-8611-37d641c3527e;
+ Thu, 04 May 2023 21:02:04 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,23 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25ed47b2-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185733.126511787@linutronix.de>
+X-Inumbo-ID: 2854e7bf-eaae-11ed-8611-37d641c3527e
+Message-ID: <20230504185936.480193035@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226919;
+	s=2020; t=1683226923;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc; bh=Owpn3VAzXYYF5pE4nW59O5YtNe6oATS3CJHH6pOEc+Q=;
-	b=ydWEHvQKju6ua5QrgIvoNFizD1mp/ScmeGKoSzoDnG7Bbtt8/QnpnQ3+taJ6G0kL830h+i
-	7ID/utgQdKCvUYsl6w6CO2W2gJuO8HL9LCU4D0vVfB6YxemlrHUeCt4ToRjPCaRBB5yHoD
-	U1z1RXcQdP2U5KMvTNzHXSugPczS5MTUtGDtT8qHk2Yf+N4IEi6AoiUHeLjn63zurjgLOd
-	4VlOYXYRkaR1ek5ywemLfh9oakl4kmjQRYWBDRl/UvRYBt4y2JOaZBadJTEhsdykMmsR/p
-	RzfI1eYCgw7RPP+JveXpGF8/O3jsZY1WVFPEdOuBnlsQhWH5/KilpYnEwkhH7g==
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=Eo225NP0lj/KI2zgHR0OIjiIzH0Ctds/GymtbPvmwBU=;
+	b=LT/pOG5ZQQZ4Xkdn780R40Y7lueqSZR9oNFurLJq5jRV+Eu/Z/jjyhKXcNyYjcCaq3OxeZ
+	D2BFgv0ZO2Yf12YjG235klE3IV29/RVeRocRuGfGAjifygXZaaoDJGgVt3+VOUiu6ohxFY
+	p+SEyhTtLcmwBOdSZGNp6YT7r03nx+0ZjhTXH5U8LULRcg9p9u1Xn+PZrAfH0AGtejHGc2
+	1WhTgb8mnl3tB5GijGDHQHQsbB76zY/aLri5dB0ODauWKsUjq6zqrj/wdK3i0TilxS51J9
+	6cNAT2zbq0mtuwkLISVz29ZrTYOY6WH2fUJB84fiM72rjbd3hSxTAIA7/5hPnQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226919;
+	s=2020e; t=1683226923;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc; bh=Owpn3VAzXYYF5pE4nW59O5YtNe6oATS3CJHH6pOEc+Q=;
-	b=t9YK5Y1XQbyMkzjkBl9J4dD0O18uiVWSVJxE2v987VhpllLfPD1+SKL0rJE7GDXI8icRF3
-	WCaTcXYHj80XrzAw==
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=Eo225NP0lj/KI2zgHR0OIjiIzH0Ctds/GymtbPvmwBU=;
+	b=c5fBzhVL9IXHiAIx3H5VnWToAYIP+2Zl7riSaIQdNQo8s6Prq7ZCnHaTOt6HvVUYoRs7oU
+	ozupCaSo8Ov1mvAw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -92,158 +94,136 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 00/38] cpu/hotplug, x86: Reworked parallel CPU bringup
-Date: Thu,  4 May 2023 21:01:58 +0200 (CEST)
+Subject: [patch V2 03/38] x86/smpboot: Avoid pointless delay calibration if
+ TSC is synchronized
+References: <20230504185733.126511787@linutronix.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Date: Thu,  4 May 2023 21:02:03 +0200 (CEST)
 
-Hi!
+From: Thomas Gleixner <tglx@linutronix.de>
 
-This is version 2 of the reworked parallel bringup series. Version 1 can be
-found here:
+When TSC is synchronized across sockets then there is no reason to
+calibrate the delay for the first CPU which comes up on a socket.
 
-   https://lore.kernel.org/lkml/20230414225551.858160935@linutronix.de
+Just reuse the existing calibration value.
 
-Background
-----------
+This removes 100ms pointlessly wasted time from CPU hotplug per socket.
 
-The reason why people are interested in parallel bringup is to shorten the
-(kexec) reboot time of cloud servers to reduce the downtime of the VM
-tenants.
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
-The current fully serialized bringup does the following per AP:
-
-    1) Prepare callbacks (allocate, intialize, create threads)
-    2) Kick the AP alive (e.g. INIT/SIPI on x86)
-    3) Wait for the AP to report alive state
-    4) Let the AP continue through the atomic bringup
-    5) Let the AP run the threaded bringup to full online state
-
-There are two significant delays:
-
-    #3 The time for an AP to report alive state in start_secondary() on x86
-       has been measured in the range between 350us and 3.5ms depending on
-       vendor and CPU type, BIOS microcode size etc.
-
-    #4 The atomic bringup does the microcode update. This has been measured
-       to take up to ~8ms on the primary threads depending on the microcode
-       patch size to apply.
-
-On a two socket SKL server with 56 cores (112 threads) the boot CPU spends
-on current mainline about 800ms busy waiting for the APs to come up and
-apply microcode. That's more than 80% of the actual onlining procedure.
-
-By splitting the actual bringup mechanism into two parts this can be
-reduced to waiting for the first AP to report alive or if the system is
-large enough the first AP is already waiting when the boot CPU finished the
-wake-up of the last AP. That reduces the AP bringup time on that SKL from
-~800ms to ~80ms.
-
-The actual gain varies wildly depending on the system, CPU, microcode patch
-size and other factors.
-
-The V1 cover letter has more details and a deep analysis.
-
-Changes vs. V1:
-
-  1) Switch APIC ID retrieval from CPUID to reading the APIC itself.
-
-     This is required because CPUID based APIC ID retrieval can only
-     provide the initial APIC ID, which might have been overruled by the
-     firmware. Some AMD APUs come up with APIC ID = initial APIC ID + 0x10,
-     so the APIC ID to CPU number lookup would fail miserably if based on
-     CPUID. The only requirement is that the actual APIC IDs are consistent
-     with the APCI/MADT table.
-
-  2) As a consequence of #1 parallel bootup support for SEV guest has been
-     dropped.
-
-     Reading the APIC ID in a SEV guest is done via RDMSR. That RDMSR is
-     intercepted and raises #VC which cannot be handled at that point as
-     there is no stack and no IDT. There is no GHCB protocol for RDMSR
-     like there is for CPUID. Left as an exercise for SEV wizards.
-
-  3) Address review comments from Brian and the fallout reported by the
-     kernel robot
-
-  4) Unbreak i386 which exploded when bringing up the secondary CPUs due to
-     the unconditinal load_ucode_ap() invocation in start_secondary(). That
-     happens because on 32-bit load_ucode_ap() is invoked on the secondary
-     CPUs from assembly code before paging is initialized and therefore
-     uses physical addresses which are obviously invalid after paging is
-     enabled.
-
-  5) Small enhancements and comment updates.
-
-  6) Rebased on Linux tree (1a5304fecee5)
-
-The series applies on Linus tree and is also available from git:
-
-    git://git.kernel.org/pub/scm/linux/kernel/git/tglx/devel.git hotplug
-
-Thanks,
-
-	tglx
 ---
- Documentation/admin-guide/kernel-parameters.txt |   20 
- Documentation/core-api/cpu_hotplug.rst          |   13 
- arch/Kconfig                                    |   23 +
- arch/arm/Kconfig                                |    1 
- arch/arm/include/asm/smp.h                      |    2 
- arch/arm/kernel/smp.c                           |   18 
- arch/arm64/Kconfig                              |    1 
- arch/arm64/include/asm/smp.h                    |    2 
- arch/arm64/kernel/smp.c                         |   14 
- arch/csky/Kconfig                               |    1 
- arch/csky/include/asm/smp.h                     |    2 
- arch/csky/kernel/smp.c                          |    8 
- arch/mips/Kconfig                               |    1 
- arch/mips/cavium-octeon/smp.c                   |    1 
- arch/mips/include/asm/smp-ops.h                 |    1 
- arch/mips/kernel/smp-bmips.c                    |    1 
- arch/mips/kernel/smp-cps.c                      |   14 
- arch/mips/kernel/smp.c                          |    8 
- arch/mips/loongson64/smp.c                      |    1 
- arch/parisc/Kconfig                             |    1 
- arch/parisc/kernel/process.c                    |    4 
- arch/parisc/kernel/smp.c                        |    7 
- arch/riscv/Kconfig                              |    1 
- arch/riscv/include/asm/smp.h                    |    2 
- arch/riscv/kernel/cpu-hotplug.c                 |   14 
- arch/x86/Kconfig                                |   45 --
- arch/x86/include/asm/apic.h                     |    5 
- arch/x86/include/asm/apicdef.h                  |    5 
- arch/x86/include/asm/cpu.h                      |    5 
- arch/x86/include/asm/cpumask.h                  |    5 
- arch/x86/include/asm/processor.h                |    1 
- arch/x86/include/asm/realmode.h                 |    3 
- arch/x86/include/asm/smp.h                      |   24 -
- arch/x86/include/asm/topology.h                 |   23 -
- arch/x86/include/asm/tsc.h                      |    2 
- arch/x86/kernel/acpi/sleep.c                    |    9 
- arch/x86/kernel/apic/apic.c                     |   26 -
- arch/x86/kernel/callthunks.c                    |    4 
- arch/x86/kernel/cpu/amd.c                       |    2 
- arch/x86/kernel/cpu/cacheinfo.c                 |   21 
- arch/x86/kernel/cpu/common.c                    |   50 --
- arch/x86/kernel/cpu/topology.c                  |    3 
- arch/x86/kernel/head_32.S                       |   14 
- arch/x86/kernel/head_64.S                       |   87 +++
- arch/x86/kernel/sev.c                           |    2 
- arch/x86/kernel/smp.c                           |    3 
- arch/x86/kernel/smpboot.c                       |  526 ++++++++----------------
- arch/x86/kernel/topology.c                      |   98 ----
- arch/x86/kernel/tsc.c                           |   20 
- arch/x86/kernel/tsc_sync.c                      |   36 -
- arch/x86/power/cpu.c                            |   37 -
- arch/x86/realmode/init.c                        |    3 
- arch/x86/realmode/rm/trampoline_64.S            |   27 +
- arch/x86/xen/enlighten_hvm.c                    |   11 
- arch/x86/xen/smp_hvm.c                          |   16 
- arch/x86/xen/smp_pv.c                           |   56 +-
- drivers/acpi/processor_idle.c                   |    4 
- include/linux/cpu.h                             |    4 
- include/linux/cpuhotplug.h                      |   17 
- kernel/cpu.c                                    |  396 +++++++++++++++++-
- kernel/smp.c                                    |    2 
- kernel/smpboot.c                                |  163 -------
- 62 files changed, 934 insertions(+), 982 deletions(-)
+ arch/x86/kernel/smpboot.c |   38 ++++++++++++++++++++++++--------------
+ arch/x86/kernel/tsc.c     |   20 ++++++++++++++++----
+ 2 files changed, 40 insertions(+), 18 deletions(-)
+---
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -178,10 +178,7 @@ static void smp_callin(void)
+ 	 */
+ 	apic_ap_setup();
+ 
+-	/*
+-	 * Save our processor parameters. Note: this information
+-	 * is needed for clock calibration.
+-	 */
++	/* Save our processor parameters. */
+ 	smp_store_cpu_info(cpuid);
+ 
+ 	/*
+@@ -192,14 +189,6 @@ static void smp_callin(void)
+ 
+ 	ap_init_aperfmperf();
+ 
+-	/*
+-	 * Get our bogomips.
+-	 * Update loops_per_jiffy in cpu_data. Previous call to
+-	 * smp_store_cpu_info() stored a value that is close but not as
+-	 * accurate as the value just calculated.
+-	 */
+-	calibrate_delay();
+-	cpu_data(cpuid).loops_per_jiffy = loops_per_jiffy;
+ 	pr_debug("Stack at about %p\n", &cpuid);
+ 
+ 	wmb();
+@@ -212,8 +201,24 @@ static void smp_callin(void)
+ 	cpumask_set_cpu(cpuid, cpu_callin_mask);
+ }
+ 
++static void ap_calibrate_delay(void)
++{
++	/*
++	 * Calibrate the delay loop and update loops_per_jiffy in cpu_data.
++	 * smp_store_cpu_info() stored a value that is close but not as
++	 * accurate as the value just calculated.
++	 *
++	 * As this is invoked after the TSC synchronization check,
++	 * calibrate_delay_is_known() will skip the calibration routine
++	 * when TSC is synchronized across sockets.
++	 */
++	calibrate_delay();
++	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
++}
++
+ static int cpu0_logical_apicid;
+ static int enable_start_cpu0;
++
+ /*
+  * Activate a secondary processor.
+  */
+@@ -240,10 +245,15 @@ static void notrace start_secondary(void
+ 
+ 	/* otherwise gcc will move up smp_processor_id before the cpu_init */
+ 	barrier();
++	/* Check TSC synchronization with the control CPU: */
++	check_tsc_sync_target();
++
+ 	/*
+-	 * Check TSC synchronization with the boot CPU:
++	 * Calibrate the delay loop after the TSC synchronization check.
++	 * This allows to skip the calibration when TSC is synchronized
++	 * across sockets.
+ 	 */
+-	check_tsc_sync_target();
++	ap_calibrate_delay();
+ 
+ 	speculative_store_bypass_ht_init();
+ 
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -1598,10 +1598,7 @@ void __init tsc_init(void)
+ 
+ #ifdef CONFIG_SMP
+ /*
+- * If we have a constant TSC and are using the TSC for the delay loop,
+- * we can skip clock calibration if another cpu in the same socket has already
+- * been calibrated. This assumes that CONSTANT_TSC applies to all
+- * cpus in the socket - this should be a safe assumption.
++ * Check whether existing calibration data can be reused.
+  */
+ unsigned long calibrate_delay_is_known(void)
+ {
+@@ -1609,6 +1606,21 @@ unsigned long calibrate_delay_is_known(v
+ 	int constant_tsc = cpu_has(&cpu_data(cpu), X86_FEATURE_CONSTANT_TSC);
+ 	const struct cpumask *mask = topology_core_cpumask(cpu);
+ 
++	/*
++	 * If TSC has constant frequency and TSC is synchronized across
++	 * sockets then reuse CPU0 calibration.
++	 */
++	if (constant_tsc && !tsc_unstable)
++		return cpu_data(0).loops_per_jiffy;
++
++	/*
++	 * If TSC has constant frequency and TSC is not synchronized across
++	 * sockets and this is not the first CPU in the socket, then reuse
++	 * the calibration value of an already online CPU on that socket.
++	 *
++	 * This assumes that CONSTANT_TSC is consistent for all CPUs in a
++	 * socket.
++	 */
+ 	if (!constant_tsc || !mask)
+ 		return 0;
+ 
+
 
