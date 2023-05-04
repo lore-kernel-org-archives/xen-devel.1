@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11930C77B78
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529887.824843 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2DCC7EE25
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:02:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529889.824858 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDO-0004md-Om; Thu, 04 May 2023 19:02:06 +0000
+	id 1pueDR-00058F-Gz; Thu, 04 May 2023 19:02:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529887.824843; Thu, 04 May 2023 19:02:06 +0000
+Received: by outflank-mailman (output) from mailman id 529889.824858; Thu, 04 May 2023 19:02:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueDO-0004mU-LO; Thu, 04 May 2023 19:02:06 +0000
-Received: by outflank-mailman (input) for mailman id 529887;
- Thu, 04 May 2023 19:02:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pueDR-000581-B5; Thu, 04 May 2023 19:02:09 +0000
+Received: by outflank-mailman (input) for mailman id 529889;
+ Thu, 04 May 2023 19:02:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDN-00042k-Ol
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:05 +0000
+ id 1pueDQ-00042j-2o
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:08 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2854e7bf-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:04 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2a42af00-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:07 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2854e7bf-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185936.480193035@linutronix.de>
+X-Inumbo-ID: 2a42af00-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185936.590281709@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226923;
+	s=2020; t=1683226927;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Eo225NP0lj/KI2zgHR0OIjiIzH0Ctds/GymtbPvmwBU=;
-	b=LT/pOG5ZQQZ4Xkdn780R40Y7lueqSZR9oNFurLJq5jRV+Eu/Z/jjyhKXcNyYjcCaq3OxeZ
-	D2BFgv0ZO2Yf12YjG235klE3IV29/RVeRocRuGfGAjifygXZaaoDJGgVt3+VOUiu6ohxFY
-	p+SEyhTtLcmwBOdSZGNp6YT7r03nx+0ZjhTXH5U8LULRcg9p9u1Xn+PZrAfH0AGtejHGc2
-	1WhTgb8mnl3tB5GijGDHQHQsbB76zY/aLri5dB0ODauWKsUjq6zqrj/wdK3i0TilxS51J9
-	6cNAT2zbq0mtuwkLISVz29ZrTYOY6WH2fUJB84fiM72rjbd3hSxTAIA7/5hPnQ==
+	 references:references; bh=IjEqVwuDXy6l11CZOhb2Q9Y7uBHaszP86r8c69YcU4c=;
+	b=1TjCsPNIyVe0J97AnMZ9IZuq5klCTmb8uOqmiS6QP7ZxFmpOciabd4+mZXTpZt5PKaBC3+
+	tShhthEpUYU1PR0O6G3TAKNFHt5nf1NpPdvBpi/KOT/ebUi2EI8FLEgU6k80VCWhJI6XJu
+	rdlacFVoZAD33FbY1MiLPzbfOdt5caRuE6+hd9z2DCXlPIQ+LrOM0u1VlHpb9igmtMFSjX
+	biJHT/ieDdtdnU2SskStM2vMbaj83W3ZNAkvtv4DHH1Q8FTO6wyJZvCKM2vsuaZPc/wXqB
+	4zIAc45oyX3TzFS3xg5Y4mqLrWDKm1CH9YSWlqdnpwKJWQa8TDMH4rl3Gug5TQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226923;
+	s=2020e; t=1683226927;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Eo225NP0lj/KI2zgHR0OIjiIzH0Ctds/GymtbPvmwBU=;
-	b=c5fBzhVL9IXHiAIx3H5VnWToAYIP+2Zl7riSaIQdNQo8s6Prq7ZCnHaTOt6HvVUYoRs7oU
-	ozupCaSo8Ov1mvAw==
+	 references:references; bh=IjEqVwuDXy6l11CZOhb2Q9Y7uBHaszP86r8c69YcU4c=;
+	b=9diOKqSJbLdnSrqHxlovDTLpCZmCgBMmL7vKik0+pcztGx/FVE2OzspIn02s8YsczZddy6
+	W6MOr2qwUqkfM0DA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,136 +94,298 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 03/38] x86/smpboot: Avoid pointless delay calibration if
- TSC is synchronized
+Subject: [patch V2 05/38] x86/topology: Remove CPU0 hotplug option
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:03 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:06 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-When TSC is synchronized across sockets then there is no reason to
-calibrate the delay for the first CPU which comes up on a socket.
+This was introduced together with commit e1c467e69040 ("x86, hotplug: Wake
+up CPU0 via NMI instead of INIT, SIPI, SIPI") to eventually support
+physical hotplug of CPU0:
 
-Just reuse the existing calibration value.
+ "We'll change this code in the future to wake up hard offlined CPU0 if
+  real platform and request are available."
 
-This removes 100ms pointlessly wasted time from CPU hotplug per socket.
+11 years later this has not happened and physical hotplug is not officially
+supported. Remove the cruft.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/kernel/smpboot.c |   38 ++++++++++++++++++++++++--------------
- arch/x86/kernel/tsc.c     |   20 ++++++++++++++++----
- 2 files changed, 40 insertions(+), 18 deletions(-)
+ Documentation/admin-guide/kernel-parameters.txt |   14 ---
+ Documentation/core-api/cpu_hotplug.rst          |   13 ---
+ arch/x86/Kconfig                                |   43 ----------
+ arch/x86/include/asm/cpu.h                      |    3 
+ arch/x86/kernel/topology.c                      |   98 ------------------------
+ arch/x86/power/cpu.c                            |   37 ---------
+ 6 files changed, 6 insertions(+), 202 deletions(-)
 ---
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -178,10 +178,7 @@ static void smp_callin(void)
- 	 */
- 	apic_ap_setup();
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -818,20 +818,6 @@
+ 			Format:
+ 			<first_slot>,<last_slot>,<port>,<enum_bit>[,<debug>]
  
--	/*
--	 * Save our processor parameters. Note: this information
--	 * is needed for clock calibration.
--	 */
-+	/* Save our processor parameters. */
- 	smp_store_cpu_info(cpuid);
+-	cpu0_hotplug	[X86] Turn on CPU0 hotplug feature when
+-			CONFIG_BOOTPARAM_HOTPLUG_CPU0 is off.
+-			Some features depend on CPU0. Known dependencies are:
+-			1. Resume from suspend/hibernate depends on CPU0.
+-			Suspend/hibernate will fail if CPU0 is offline and you
+-			need to online CPU0 before suspend/hibernate.
+-			2. PIC interrupts also depend on CPU0. CPU0 can't be
+-			removed if a PIC interrupt is detected.
+-			It's said poweroff/reboot may depend on CPU0 on some
+-			machines although I haven't seen such issues so far
+-			after CPU0 is offline on a few tested machines.
+-			If the dependencies are under your control, you can
+-			turn on cpu0_hotplug.
+-
+ 	cpuidle.off=1	[CPU_IDLE]
+ 			disable the cpuidle sub-system
  
- 	/*
-@@ -192,14 +189,6 @@ static void smp_callin(void)
+--- a/Documentation/core-api/cpu_hotplug.rst
++++ b/Documentation/core-api/cpu_hotplug.rst
+@@ -127,17 +127,8 @@ Once the CPU is shutdown, it will be rem
+  $ echo 1 > /sys/devices/system/cpu/cpu4/online
+  smpboot: Booting Node 0 Processor 4 APIC 0x1
  
- 	ap_init_aperfmperf();
+-The CPU is usable again. This should work on all CPUs. CPU0 is often special
+-and excluded from CPU hotplug. On X86 the kernel option
+-*CONFIG_BOOTPARAM_HOTPLUG_CPU0* has to be enabled in order to be able to
+-shutdown CPU0. Alternatively the kernel command option *cpu0_hotplug* can be
+-used. Some known dependencies of CPU0:
+-
+-* Resume from hibernate/suspend. Hibernate/suspend will fail if CPU0 is offline.
+-* PIC interrupts. CPU0 can't be removed if a PIC interrupt is detected.
+-
+-Please let Fenghua Yu <fenghua.yu@intel.com> know if you find any dependencies
+-on CPU0.
++The CPU is usable again. This should work on all CPUs, but CPU0 is often special
++and excluded from CPU hotplug.
  
--	/*
--	 * Get our bogomips.
--	 * Update loops_per_jiffy in cpu_data. Previous call to
--	 * smp_store_cpu_info() stored a value that is close but not as
--	 * accurate as the value just calculated.
--	 */
--	calibrate_delay();
--	cpu_data(cpuid).loops_per_jiffy = loops_per_jiffy;
- 	pr_debug("Stack at about %p\n", &cpuid);
+ The CPU hotplug coordination
+ ============================
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -2305,49 +2305,6 @@ config HOTPLUG_CPU
+ 	def_bool y
+ 	depends on SMP
  
- 	wmb();
-@@ -212,8 +201,24 @@ static void smp_callin(void)
- 	cpumask_set_cpu(cpuid, cpu_callin_mask);
- }
+-config BOOTPARAM_HOTPLUG_CPU0
+-	bool "Set default setting of cpu0_hotpluggable"
+-	depends on HOTPLUG_CPU
+-	help
+-	  Set whether default state of cpu0_hotpluggable is on or off.
+-
+-	  Say Y here to enable CPU0 hotplug by default. If this switch
+-	  is turned on, there is no need to give cpu0_hotplug kernel
+-	  parameter and the CPU0 hotplug feature is enabled by default.
+-
+-	  Please note: there are two known CPU0 dependencies if you want
+-	  to enable the CPU0 hotplug feature either by this switch or by
+-	  cpu0_hotplug kernel parameter.
+-
+-	  First, resume from hibernate or suspend always starts from CPU0.
+-	  So hibernate and suspend are prevented if CPU0 is offline.
+-
+-	  Second dependency is PIC interrupts always go to CPU0. CPU0 can not
+-	  offline if any interrupt can not migrate out of CPU0. There may
+-	  be other CPU0 dependencies.
+-
+-	  Please make sure the dependencies are under your control before
+-	  you enable this feature.
+-
+-	  Say N if you don't want to enable CPU0 hotplug feature by default.
+-	  You still can enable the CPU0 hotplug feature at boot by kernel
+-	  parameter cpu0_hotplug.
+-
+-config DEBUG_HOTPLUG_CPU0
+-	def_bool n
+-	prompt "Debug CPU0 hotplug"
+-	depends on HOTPLUG_CPU
+-	help
+-	  Enabling this option offlines CPU0 (if CPU0 can be offlined) as
+-	  soon as possible and boots up userspace with CPU0 offlined. User
+-	  can online CPU0 back after boot time.
+-
+-	  To debug CPU0 hotplug, you need to enable CPU0 offline/online
+-	  feature by either turning on CONFIG_BOOTPARAM_HOTPLUG_CPU0 during
+-	  compilation or giving cpu0_hotplug kernel parameter at boot.
+-
+-	  If unsure, say N.
+-
+ config COMPAT_VDSO
+ 	def_bool n
+ 	prompt "Disable the 32-bit vDSO (needed for glibc 2.3.3)"
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -31,9 +31,6 @@ struct x86_cpu {
+ extern int arch_register_cpu(int num);
+ extern void arch_unregister_cpu(int);
+ extern void soft_restart_cpu(void);
+-#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
+-extern int _debug_hotplug_cpu(int cpu, int action);
+-#endif
+ #endif
  
-+static void ap_calibrate_delay(void)
-+{
-+	/*
-+	 * Calibrate the delay loop and update loops_per_jiffy in cpu_data.
-+	 * smp_store_cpu_info() stored a value that is close but not as
-+	 * accurate as the value just calculated.
-+	 *
-+	 * As this is invoked after the TSC synchronization check,
-+	 * calibrate_delay_is_known() will skip the calibration routine
-+	 * when TSC is synchronized across sockets.
-+	 */
-+	calibrate_delay();
-+	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
-+}
-+
- static int cpu0_logical_apicid;
- static int enable_start_cpu0;
-+
- /*
-  * Activate a secondary processor.
-  */
-@@ -240,10 +245,15 @@ static void notrace start_secondary(void
+ extern void ap_init_aperfmperf(void);
+--- a/arch/x86/kernel/topology.c
++++ b/arch/x86/kernel/topology.c
+@@ -38,102 +38,12 @@
+ static DEFINE_PER_CPU(struct x86_cpu, cpu_devices);
  
- 	/* otherwise gcc will move up smp_processor_id before the cpu_init */
- 	barrier();
-+	/* Check TSC synchronization with the control CPU: */
-+	check_tsc_sync_target();
-+
- 	/*
--	 * Check TSC synchronization with the boot CPU:
-+	 * Calibrate the delay loop after the TSC synchronization check.
-+	 * This allows to skip the calibration when TSC is synchronized
-+	 * across sockets.
- 	 */
--	check_tsc_sync_target();
-+	ap_calibrate_delay();
- 
- 	speculative_store_bypass_ht_init();
- 
---- a/arch/x86/kernel/tsc.c
-+++ b/arch/x86/kernel/tsc.c
-@@ -1598,10 +1598,7 @@ void __init tsc_init(void)
- 
- #ifdef CONFIG_SMP
- /*
-- * If we have a constant TSC and are using the TSC for the delay loop,
-- * we can skip clock calibration if another cpu in the same socket has already
-- * been calibrated. This assumes that CONSTANT_TSC applies to all
-- * cpus in the socket - this should be a safe assumption.
-+ * Check whether existing calibration data can be reused.
-  */
- unsigned long calibrate_delay_is_known(void)
+ #ifdef CONFIG_HOTPLUG_CPU
+-
+-#ifdef CONFIG_BOOTPARAM_HOTPLUG_CPU0
+-static int cpu0_hotpluggable = 1;
+-#else
+-static int cpu0_hotpluggable;
+-static int __init enable_cpu0_hotplug(char *str)
+-{
+-	cpu0_hotpluggable = 1;
+-	return 1;
+-}
+-
+-__setup("cpu0_hotplug", enable_cpu0_hotplug);
+-#endif
+-
+-#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
+-/*
+- * This function offlines a CPU as early as possible and allows userspace to
+- * boot up without the CPU. The CPU can be onlined back by user after boot.
+- *
+- * This is only called for debugging CPU offline/online feature.
+- */
+-int _debug_hotplug_cpu(int cpu, int action)
+-{
+-	int ret;
+-
+-	if (!cpu_is_hotpluggable(cpu))
+-		return -EINVAL;
+-
+-	switch (action) {
+-	case 0:
+-		ret = remove_cpu(cpu);
+-		if (!ret)
+-			pr_info("DEBUG_HOTPLUG_CPU0: CPU %u is now offline\n", cpu);
+-		else
+-			pr_debug("Can't offline CPU%d.\n", cpu);
+-		break;
+-	case 1:
+-		ret = add_cpu(cpu);
+-		if (ret)
+-			pr_debug("Can't online CPU%d.\n", cpu);
+-
+-		break;
+-	default:
+-		ret = -EINVAL;
+-	}
+-
+-	return ret;
+-}
+-
+-static int __init debug_hotplug_cpu(void)
++int arch_register_cpu(int cpu)
  {
-@@ -1609,6 +1606,21 @@ unsigned long calibrate_delay_is_known(v
- 	int constant_tsc = cpu_has(&cpu_data(cpu), X86_FEATURE_CONSTANT_TSC);
- 	const struct cpumask *mask = topology_core_cpumask(cpu);
+-	_debug_hotplug_cpu(0, 0);
+-	return 0;
+-}
+-
+-late_initcall_sync(debug_hotplug_cpu);
+-#endif /* CONFIG_DEBUG_HOTPLUG_CPU0 */
+-
+-int arch_register_cpu(int num)
+-{
+-	struct cpuinfo_x86 *c = &cpu_data(num);
+-
+-	/*
+-	 * Currently CPU0 is only hotpluggable on Intel platforms. Other
+-	 * vendors can add hotplug support later.
+-	 * Xen PV guests don't support CPU0 hotplug at all.
+-	 */
+-	if (c->x86_vendor != X86_VENDOR_INTEL ||
+-	    cpu_feature_enabled(X86_FEATURE_XENPV))
+-		cpu0_hotpluggable = 0;
+-
+-	/*
+-	 * Two known BSP/CPU0 dependencies: Resume from suspend/hibernate
+-	 * depends on BSP. PIC interrupts depend on BSP.
+-	 *
+-	 * If the BSP dependencies are under control, one can tell kernel to
+-	 * enable BSP hotplug. This basically adds a control file and
+-	 * one can attempt to offline BSP.
+-	 */
+-	if (num == 0 && cpu0_hotpluggable) {
+-		unsigned int irq;
+-		/*
+-		 * We won't take down the boot processor on i386 if some
+-		 * interrupts only are able to be serviced by the BSP in PIC.
+-		 */
+-		for_each_active_irq(irq) {
+-			if (!IO_APIC_IRQ(irq) && irq_has_action(irq)) {
+-				cpu0_hotpluggable = 0;
+-				break;
+-			}
+-		}
+-	}
+-	if (num || cpu0_hotpluggable)
+-		per_cpu(cpu_devices, num).cpu.hotpluggable = 1;
++	struct x86_cpu *xc = per_cpu_ptr(&cpu_devices, cpu);
  
-+	/*
-+	 * If TSC has constant frequency and TSC is synchronized across
-+	 * sockets then reuse CPU0 calibration.
-+	 */
-+	if (constant_tsc && !tsc_unstable)
-+		return cpu_data(0).loops_per_jiffy;
-+
-+	/*
-+	 * If TSC has constant frequency and TSC is not synchronized across
-+	 * sockets and this is not the first CPU in the socket, then reuse
-+	 * the calibration value of an already online CPU on that socket.
-+	 *
-+	 * This assumes that CONSTANT_TSC is consistent for all CPUs in a
-+	 * socket.
-+	 */
- 	if (!constant_tsc || !mask)
- 		return 0;
+-	return register_cpu(&per_cpu(cpu_devices, num).cpu, num);
++	xc->cpu.hotpluggable = cpu > 0;
++	return register_cpu(&xc->cpu, cpu);
+ }
+ EXPORT_SYMBOL(arch_register_cpu);
  
+--- a/arch/x86/power/cpu.c
++++ b/arch/x86/power/cpu.c
+@@ -351,43 +351,6 @@ static int bsp_pm_callback(struct notifi
+ 	case PM_HIBERNATION_PREPARE:
+ 		ret = bsp_check();
+ 		break;
+-#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
+-	case PM_RESTORE_PREPARE:
+-		/*
+-		 * When system resumes from hibernation, online CPU0 because
+-		 * 1. it's required for resume and
+-		 * 2. the CPU was online before hibernation
+-		 */
+-		if (!cpu_online(0))
+-			_debug_hotplug_cpu(0, 1);
+-		break;
+-	case PM_POST_RESTORE:
+-		/*
+-		 * When a resume really happens, this code won't be called.
+-		 *
+-		 * This code is called only when user space hibernation software
+-		 * prepares for snapshot device during boot time. So we just
+-		 * call _debug_hotplug_cpu() to restore to CPU0's state prior to
+-		 * preparing the snapshot device.
+-		 *
+-		 * This works for normal boot case in our CPU0 hotplug debug
+-		 * mode, i.e. CPU0 is offline and user mode hibernation
+-		 * software initializes during boot time.
+-		 *
+-		 * If CPU0 is online and user application accesses snapshot
+-		 * device after boot time, this will offline CPU0 and user may
+-		 * see different CPU0 state before and after accessing
+-		 * the snapshot device. But hopefully this is not a case when
+-		 * user debugging CPU0 hotplug. Even if users hit this case,
+-		 * they can easily online CPU0 back.
+-		 *
+-		 * To simplify this debug code, we only consider normal boot
+-		 * case. Otherwise we need to remember CPU0's state and restore
+-		 * to that state and resolve racy conditions etc.
+-		 */
+-		_debug_hotplug_cpu(0, 0);
+-		break;
+-#endif
+ 	default:
+ 		break;
+ 	}
 
 
