@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E648C7EE21
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529958.825062 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D28CC77B7C
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529949.825052 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKt-0000bl-Jy; Thu, 04 May 2023 19:09:51 +0000
+	id 1pueKo-0008MM-C9; Thu, 04 May 2023 19:09:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529958.825062; Thu, 04 May 2023 19:09:51 +0000
+Received: by outflank-mailman (output) from mailman id 529949.825052; Thu, 04 May 2023 19:09:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKt-0000bV-HK; Thu, 04 May 2023 19:09:51 +0000
-Received: by outflank-mailman (input) for mailman id 529958;
- Thu, 04 May 2023 19:09:50 +0000
+	id 1pueKo-0008MD-9H; Thu, 04 May 2023 19:09:46 +0000
+Received: by outflank-mailman (input) for mailman id 529949;
+ Thu, 04 May 2023 19:09:45 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDh-00042j-KE
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:25 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ id 1pueE9-00042j-3B
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:53 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 34e19d1e-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:25 +0200 (CEST)
+ id 453fc104-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34e19d1e-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185937.201611990@linutronix.de>
+X-Inumbo-ID: 453fc104-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185938.126719312@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226944;
+	s=2020; t=1683226972;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=8IR2ZEar7xSTX3+WcC3NFIdAp4AUTKg+YP70lXONDYs=;
-	b=b5Dhpk7DXri1g+Jk4Fccefqph5HHh5m0O6WHx1dP1v8spz8TW/ZVEXRzP6Fu5Vyp4twGau
-	0WJ5VSOP7FkG0YM49DJA3ab9WsH+lMCnQQToJbW5YLIvGGqyCD5SuatG+70PddmmocvInY
-	sbywrL3O4QW1MGnAo6cSBXhCM/VRCDBpxMydY3h/7/ooJkjuTTpet2ZIX0gkrKNjXC4iyZ
-	NM25MYCPlURsUrvY1AdwvXfa3J2aswhoiO4UsIkjW2ZgbjIhOmU0uQ9SDbhRPFEyzNsNh0
-	mS7KdesNxpuJcwz0hAomc0k47L5YQTKWUQ3/pEIBgfRwzYecCD6MkvQPPrVSxw==
+	 references:references; bh=C2xEv0EYOzjjBDOf0WNXDnbg3SxiEflVftHaff1ezNc=;
+	b=R7TFizeMBd1vCDVjEXU0BtfNbQoQd0Q7O5Cmi/GhoH+A7DPO/eDCQYvwL8d0EzW6TZevXV
+	zTSW3dCyZNMiwvAMbTbcTVfTHbY6pLve5Gv/afd1jzhLujx3f5ZspMS2zkpgXg0oDc3s5d
+	kXcBYyWoHlipJH2VBBXdFP8QtRznLbAKZV10Ph92/Hk65CJwnRS+0u5oUwspH7khzqSQ/u
+	SpYu0bcq4JwwE/JeCF3NwhBMiC+1RMRMfogzt5BdrL549/PBdPFpI4eEajMl9aEC63+JVF
+	9zu2Vsz02+ZJpxAIfDIw2+6pnaLRSdZXjwd9Lq61E8b+1bqiBtxkam2eHoBKxg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226944;
+	s=2020e; t=1683226972;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=8IR2ZEar7xSTX3+WcC3NFIdAp4AUTKg+YP70lXONDYs=;
-	b=dn+I2+Yxq6eST9WYLeBz7I//tSeh1zP1C4UnkiRYUPrB/Bi9OJVO0kV5NCl8mWHGp/F1Kx
-	csRGXLzl80A3yQBw==
+	 references:references; bh=C2xEv0EYOzjjBDOf0WNXDnbg3SxiEflVftHaff1ezNc=;
+	b=L3yFFvyeaWcbSL4+w4FNUsUl3Xq9FYBhGlVedajTlxgN49PBR5/K5uqBP8Q/AEH8xz/YfX
+	kk6rHy0rbLZe69Cw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,47 +95,53 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 16/38] x86/xen/smp_pv: Remove wait for CPU online
+Subject:
+ [patch V2 33/38] x86/topology: Store extended topology leaf information
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:24 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:51 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Now that the core code drops sparse_irq_lock after the idle thread
-synchronized, it's pointless to wait for the AP to mark itself online.
-
-Whether the control CPU runs in a wait loop or sleeps in the core code
-waiting for the online operation to complete makes no difference.
+Save the extended topology leaf number if it exists and is valid in
+preparation of parallel CPU bringup.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org
 
 ---
- arch/x86/xen/smp_pv.c |   10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ arch/x86/include/asm/topology.h |    1 +
+ arch/x86/kernel/cpu/topology.c  |    3 +++
+ 2 files changed, 4 insertions(+)
 ---
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -340,11 +340,11 @@ static int xen_pv_cpu_up(unsigned int cp
+--- a/arch/x86/include/asm/topology.h
++++ b/arch/x86/include/asm/topology.h
+@@ -121,6 +121,7 @@ extern unsigned int __max_die_per_packag
+ #define topology_core_cpumask(cpu)		(per_cpu(cpu_core_map, cpu))
+ #define topology_sibling_cpumask(cpu)		(per_cpu(cpu_sibling_map, cpu))
  
- 	xen_pmu_init(cpu);
++extern unsigned int topology_extended_leaf;
+ extern unsigned int __max_logical_packages;
+ #define topology_max_packages()			(__max_logical_packages)
  
--	rc = HYPERVISOR_vcpu_op(VCPUOP_up, xen_vcpu_nr(cpu), NULL);
--	BUG_ON(rc);
--
--	while (cpu_report_state(cpu) != CPU_ONLINE)
--		HYPERVISOR_sched_op(SCHEDOP_yield, NULL);
-+	/*
-+	 * Why is this a BUG? If the hypercall fails then everything can be
-+	 * rolled back, no?
-+	 */
-+	BUG_ON(HYPERVISOR_vcpu_op(VCPUOP_up, xen_vcpu_nr(cpu), NULL));
+--- a/arch/x86/kernel/cpu/topology.c
++++ b/arch/x86/kernel/cpu/topology.c
+@@ -29,6 +29,8 @@ unsigned int __max_die_per_package __rea
+ EXPORT_SYMBOL(__max_die_per_package);
  
- 	return 0;
- }
+ #ifdef CONFIG_SMP
++unsigned int topology_extended_leaf __read_mostly;
++
+ /*
+  * Check if given CPUID extended topology "leaf" is implemented
+  */
+@@ -72,6 +74,7 @@ int detect_extended_topology_early(struc
+ 	if (leaf < 0)
+ 		return -1;
+ 
++	topology_extended_leaf = leaf;
+ 	set_cpu_cap(c, X86_FEATURE_XTOPOLOGY);
+ 
+ 	cpuid_count(leaf, SMT_LEVEL, &eax, &ebx, &ecx, &edx);
 
 
