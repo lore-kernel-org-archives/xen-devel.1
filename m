@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9A4C7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 918F1C7EE21
 	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529973.825129 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.529978.825162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueL1-0002en-8w; Thu, 04 May 2023 19:09:59 +0000
+	id 1pueL8-0004Mh-6t; Thu, 04 May 2023 19:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529973.825129; Thu, 04 May 2023 19:09:59 +0000
+Received: by outflank-mailman (output) from mailman id 529978.825162; Thu, 04 May 2023 19:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueL0-0002dv-Va; Thu, 04 May 2023 19:09:58 +0000
-Received: by outflank-mailman (input) for mailman id 529973;
- Thu, 04 May 2023 19:09:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pueL7-0004Kt-LI; Thu, 04 May 2023 19:10:05 +0000
+Received: by outflank-mailman (input) for mailman id 529978;
+ Thu, 04 May 2023 19:10:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueE5-00042k-Cm
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:49 +0000
+ id 1pueDm-00042j-Bn
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:30 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 425723d3-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:02:47 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 36d8d8f1-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 425723d3-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185937.966056940@linutronix.de>
+X-Inumbo-ID: 36d8d8f1-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185937.314874897@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226967;
+	s=2020; t=1683226948;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OPmaW7DXf6JnyvIw0i7yNDoe4KbapH95hpIdiwQiys8=;
-	b=OHQM462Vlb4JUW68TEIl6fNm2wkG4SDJ/WmVKvLWMnKsvspXVogdjc2LngewLspjgzA1Jq
-	L9eSuPiamrsyKrs8ZIYXvKQpCwzQsD/75Jm/wrxCCu2OxmCX8aK3ZbXJ/x2bOGmRyErPSO
-	atYwr+JfOvoX9acRV+IiSIOe7gwgCiejv0oRBsUcMHNCvvplg663yGDlt+xcKaV0X1m/XU
-	a5X+xuwQ5SZKVhitdTR8euHAFdO4DSjfLUG5pj4Ay6ZQljwWh0/Wr2g/g1eJ5tOUZnZOcZ
-	KSbTJC0Z3mA9V2DpMSFA7mFMz/TZyEqm0eNXH2mOdMyg3lCXhJt8qaKcz/vc6A==
+	 references:references; bh=80kCLRDMZbd9+iHbBsmneisFdctM67+RT5wquUUhx5I=;
+	b=GQZls3V5BLNNRryAlLiFemgQiD0SpRgV3iLbWQvRpTmYB/4c20aGsFDBWXI8Uweg/5YWWM
+	12/ixEeO6WH/mwVBUzGqqUHfcNtCdkryRnIkY5kjUftL+C8Vj5d7X5voyN7S90aO+JUtGa
+	QWqGgNPb9aB4YZ45GmT1B6RFWwT1VUmtodnu+ekNia7eOS//ayShRUnJRaze7yrTE/+nbI
+	YLCwGu7Zqgfoq78Rwwsbz2qQezZsI5V8aOQCZJKpk+4sOYMq3egl0/9DC5HEt0dP2BRrx4
+	5e3+lx2Ovzoigk9nXaArk+xUOPBPz0jXa4oBuRkcRD2cRp3G5LGH9+UYpvQqzQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226967;
+	s=2020e; t=1683226948;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OPmaW7DXf6JnyvIw0i7yNDoe4KbapH95hpIdiwQiys8=;
-	b=2pZygmqrbSKaKtOa6782fVVLu32t0VpQpHaUmZC3Qqmhzk/7sEVd08EWFmIUQoV6w+fmeA
-	aSMnAotAR3MHv7AA==
+	 references:references; bh=80kCLRDMZbd9+iHbBsmneisFdctM67+RT5wquUUhx5I=;
+	b=sdydGLJIcakndZUdj794su6Aylk7Gsh33YzKsSvlvoJrUbguKLp6hxQFCUOzGunVvVlCBM
+	I+/zQvKwtvWmlkDg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,140 +94,374 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 30/38] x86/smpboot: Enable split CPU startup
+Subject:
+ [patch V2 18/38] cpu/hotplug: Add CPU state tracking and synchronization
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:46 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:27 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The x86 CPU bringup state currently does AP wake-up, wait for AP to
-respond and then release it for full bringup.
+The CPU state tracking and synchronization mechanism in smpboot.c is
+completely independent of the hotplug code and all logic around it is
+implemented in architecture specific code.
 
-It is safe to be split into a wake-up and and a separate wait+release
-state.
+Except for the state reporting of the AP there is absolutely nothing
+architecture specific and the sychronization and decision functions can be
+moved into the generic hotplug core code.
 
-Provide the required functions and enable the split CPU bringup, which
-prepares for parallel bringup, where the bringup of the non-boot CPUs takes
-two iterations: One to prepare and wake all APs and the second to wait and
-release them. Depending on timing this can eliminate the wait time
-completely.
+Provide an integrated variant and add the core synchronization and decision
+points. This comes in two flavours:
+
+  1) DEAD state synchronization
+
+     Updated by the architecture code once the AP reaches the point where
+     it is ready to be torn down by the control CPU, e.g. by removing power
+     or clocks or tear down via the hypervisor.
+
+     The control CPU waits for this state to be reached with a timeout. If
+     the state is reached an architecture specific cleanup function is
+     invoked.
+
+  2) Full state synchronization
+
+     This extends #1 with AP alive synchronization. This is new
+     functionality, which allows to replace architecture specific wait
+     mechanims, e.g. cpumasks, completely.
+
+     It also prevents that an AP which is in a limbo state can be brought
+     up again. This can happen when an AP failed to report dead state
+     during a previous off-line operation.
+
+The dead synchronization is what most architectures use. Only x86 makes a
+bringup decision based on that state at the moment.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/Kconfig           |    2 +-
- arch/x86/include/asm/smp.h |    9 ++-------
- arch/x86/kernel/smp.c      |    2 +-
- arch/x86/kernel/smpboot.c  |    8 ++++----
- arch/x86/xen/smp_pv.c      |    4 ++--
- 5 files changed, 10 insertions(+), 15 deletions(-)
+ arch/Kconfig               |   15 +++
+ include/linux/cpuhotplug.h |   12 ++
+ kernel/cpu.c               |  193 ++++++++++++++++++++++++++++++++++++++++++++-
+ kernel/smpboot.c           |    2 
+ 4 files changed, 221 insertions(+), 1 deletion(-)
 ---
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -274,8 +274,8 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
- 	select HAVE_GENERIC_VDSO
--	select HOTPLUG_CORE_SYNC_FULL		if SMP
- 	select HOTPLUG_SMT			if SMP
-+	select HOTPLUG_SPLIT_STARTUP		if SMP
- 	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
---- a/arch/x86/include/asm/smp.h
-+++ b/arch/x86/include/asm/smp.h
-@@ -40,7 +40,7 @@ struct smp_ops {
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -34,6 +34,21 @@ config ARCH_HAS_SUBPAGE_FAULTS
+ config HOTPLUG_SMT
+ 	bool
  
- 	void (*cleanup_dead_cpu)(unsigned cpu);
- 	void (*poll_sync_state)(void);
--	int (*cpu_up)(unsigned cpu, struct task_struct *tidle);
-+	int (*kick_ap_alive)(unsigned cpu, struct task_struct *tidle);
- 	int (*cpu_disable)(void);
- 	void (*cpu_die)(unsigned int cpu);
- 	void (*play_dead)(void);
-@@ -80,11 +80,6 @@ static inline void smp_cpus_done(unsigne
- 	smp_ops.smp_cpus_done(max_cpus);
- }
++# Selected by HOTPLUG_CORE_SYNC_DEAD or HOTPLUG_CORE_SYNC_FULL
++config HOTPLUG_CORE_SYNC
++	bool
++
++# Basic CPU dead synchronization selected by architecture
++config HOTPLUG_CORE_SYNC_DEAD
++	bool
++	select HOTPLUG_CORE_SYNC
++
++# Full CPU synchronization with alive state selected by architecture
++config HOTPLUG_CORE_SYNC_FULL
++	bool
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
++	select HOTPLUG_CORE_SYNC
++
+ config GENERIC_ENTRY
+ 	bool
  
--static inline int __cpu_up(unsigned int cpu, struct task_struct *tidle)
--{
--	return smp_ops.cpu_up(cpu, tidle);
--}
--
- static inline int __cpu_disable(void)
- {
- 	return smp_ops.cpu_disable();
-@@ -124,7 +119,7 @@ void native_smp_prepare_cpus(unsigned in
- void calculate_max_logical_packages(void);
- void native_smp_cpus_done(unsigned int max_cpus);
- int common_cpu_up(unsigned int cpunum, struct task_struct *tidle);
--int native_cpu_up(unsigned int cpunum, struct task_struct *tidle);
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle);
- int native_cpu_disable(void);
- void __noreturn hlt_play_dead(void);
- void native_play_dead(void);
---- a/arch/x86/kernel/smp.c
-+++ b/arch/x86/kernel/smp.c
-@@ -268,7 +268,7 @@ struct smp_ops smp_ops = {
+--- a/include/linux/cpuhotplug.h
++++ b/include/linux/cpuhotplug.h
+@@ -517,4 +517,16 @@ void cpuhp_online_idle(enum cpuhp_state
+ static inline void cpuhp_online_idle(enum cpuhp_state state) { }
  #endif
- 	.smp_send_reschedule	= native_smp_send_reschedule,
  
--	.cpu_up			= native_cpu_up,
-+	.kick_ap_alive		= native_kick_ap,
- 	.cpu_disable		= native_cpu_disable,
- 	.play_dead		= native_play_dead,
- 
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -1058,7 +1058,7 @@ static int do_boot_cpu(int apicid, int c
- 	return ret;
++void cpuhp_ap_sync_alive(void);
++void arch_cpuhp_sync_state_poll(void);
++void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
++void cpuhp_ap_report_dead(void);
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu);
++#else
++static inline void cpuhp_ap_report_dead(void) { }
++static inline void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu) { }
++#endif
++
+ #endif
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -17,6 +17,7 @@
+ #include <linux/cpu.h>
+ #include <linux/oom.h>
+ #include <linux/rcupdate.h>
++#include <linux/delay.h>
+ #include <linux/export.h>
+ #include <linux/bug.h>
+ #include <linux/kthread.h>
+@@ -59,6 +60,7 @@
+  * @last:	For multi-instance rollback, remember how far we got
+  * @cb_state:	The state for a single callback (install/uninstall)
+  * @result:	Result of the operation
++ * @ap_sync_state:	State for AP synchronization
+  * @done_up:	Signal completion to the issuer of the task for cpu-up
+  * @done_down:	Signal completion to the issuer of the task for cpu-down
+  */
+@@ -76,6 +78,7 @@ struct cpuhp_cpu_state {
+ 	struct hlist_node	*last;
+ 	enum cpuhp_state	cb_state;
+ 	int			result;
++	atomic_t		ap_sync_state;
+ 	struct completion	done_up;
+ 	struct completion	done_down;
+ #endif
+@@ -276,6 +279,182 @@ static bool cpuhp_is_atomic_state(enum c
+ 	return CPUHP_AP_IDLE_DEAD <= state && state < CPUHP_AP_ONLINE;
  }
  
--static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
- {
- 	int apicid = apic->cpu_present_to_apicid(cpu);
- 	int err;
-@@ -1094,15 +1094,15 @@ static int native_kick_ap(unsigned int c
- 	return err;
- }
++/* Synchronization state management */
++enum cpuhp_sync_state {
++	SYNC_STATE_DEAD,
++	SYNC_STATE_KICKED,
++	SYNC_STATE_SHOULD_DIE,
++	SYNC_STATE_ALIVE,
++	SYNC_STATE_SHOULD_ONLINE,
++	SYNC_STATE_ONLINE,
++};
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC
++/**
++ * cpuhp_ap_update_sync_state - Update synchronization state during bringup/teardown
++ * @state:	The synchronization state to set
++ *
++ * No synchronization point. Just update of the synchronization state.
++ */
++static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state)
++{
++	atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
++	int sync = atomic_read(st);
++
++	while (!atomic_try_cmpxchg(st, &sync, state));
++}
++
++void __weak arch_cpuhp_sync_state_poll(void) { cpu_relax(); }
++
++static bool cpuhp_wait_for_sync_state(unsigned int cpu, enum cpuhp_sync_state state,
++				      enum cpuhp_sync_state next_state)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	ktime_t now, end, start = ktime_get();
++	int sync;
++
++	end = start + 10ULL * NSEC_PER_SEC;
++
++	sync = atomic_read(st);
++	while (1) {
++		if (sync == state) {
++			if (!atomic_try_cmpxchg(st, &sync, next_state))
++				continue;
++			return true;
++		}
++
++		now = ktime_get();
++		if (now > end) {
++			/* Timeout. Leave the state unchanged */
++			return false;
++		} else if (now - start < NSEC_PER_MSEC) {
++			/* Poll for one millisecond */
++			arch_cpuhp_sync_state_poll();
++		} else {
++			usleep_range_state(USEC_PER_MSEC, 2 * USEC_PER_MSEC, TASK_UNINTERRUPTIBLE);
++		}
++		sync = atomic_read(st);
++	}
++	return true;
++}
++#else  /* CONFIG_HOTPLUG_CORE_SYNC */
++static inline void cpuhp_ap_update_sync_state(enum cpuhp_sync_state state) { }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC */
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
++/**
++ * cpuhp_ap_report_dead - Update synchronization state to DEAD
++ *
++ * No synchronization point. Just update of the synchronization state.
++ */
++void cpuhp_ap_report_dead(void)
++{
++	cpuhp_ap_update_sync_state(SYNC_STATE_DEAD);
++}
++
++void __weak arch_cpuhp_cleanup_dead_cpu(unsigned int cpu) { }
++
++/*
++ * Late CPU shutdown synchronization point. Cannot use cpuhp_state::done_down
++ * because the AP cannot issue complete() at this stage.
++ */
++static void cpuhp_bp_sync_dead(unsigned int cpu)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	int sync = atomic_read(st);
++
++	do {
++		/* CPU can have reported dead already. Don't overwrite that! */
++		if (sync == SYNC_STATE_DEAD)
++			break;
++	} while (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_SHOULD_DIE));
++
++	if (cpuhp_wait_for_sync_state(cpu, SYNC_STATE_DEAD, SYNC_STATE_DEAD)) {
++		/* CPU reached dead state. Invoke the cleanup function */
++		arch_cpuhp_cleanup_dead_cpu(cpu);
++		return;
++	}
++
++	/* No further action possible. Emit message and give up. */
++	pr_err("CPU%u failed to report dead state\n", cpu);
++}
++#else /* CONFIG_HOTPLUG_CORE_SYNC_DEAD */
++static inline void cpuhp_bp_sync_dead(unsigned int cpu) { }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC_DEAD */
++
++#ifdef CONFIG_HOTPLUG_CORE_SYNC_FULL
++/**
++ * cpuhp_ap_sync_alive - Synchronize AP with the control CPU once it is alive
++ *
++ * Updates the AP synchronization state to SYNC_STATE_ALIVE and waits
++ * for the BP to release it.
++ */
++void cpuhp_ap_sync_alive(void)
++{
++	atomic_t *st = this_cpu_ptr(&cpuhp_state.ap_sync_state);
++
++	cpuhp_ap_update_sync_state(SYNC_STATE_ALIVE);
++
++	/* Wait for the control CPU to release it. */
++	while (atomic_read(st) != SYNC_STATE_SHOULD_ONLINE)
++		cpu_relax();
++}
++
++static bool cpuhp_can_boot_ap(unsigned int cpu)
++{
++	atomic_t *st = per_cpu_ptr(&cpuhp_state.ap_sync_state, cpu);
++	int sync = atomic_read(st);
++
++again:
++	switch (sync) {
++	case SYNC_STATE_DEAD:
++		/* CPU is properly dead */
++		break;
++	case SYNC_STATE_KICKED:
++		/* CPU did not come up in previous attempt */
++		break;
++	case SYNC_STATE_ALIVE:
++		/* CPU is stuck cpuhp_ap_sync_alive(). */
++		break;
++	default:
++		/* CPU failed to report online or dead and is in limbo state. */
++		return false;
++	}
++
++	/* Prepare for booting */
++	if (!atomic_try_cmpxchg(st, &sync, SYNC_STATE_KICKED))
++		goto again;
++
++	return true;
++}
++
++void __weak arch_cpuhp_cleanup_kick_cpu(unsigned int cpu) { }
++
++/*
++ * Early CPU bringup synchronization point. Cannot use cpuhp_state::done_up
++ * because the AP cannot issue complete() so early in the bringup.
++ */
++static int cpuhp_bp_sync_alive(unsigned int cpu)
++{
++	int ret = 0;
++
++	if (!IS_ENABLED(CONFIG_HOTPLUG_CORE_SYNC_FULL))
++		return 0;
++
++	if (!cpuhp_wait_for_sync_state(cpu, SYNC_STATE_ALIVE, SYNC_STATE_SHOULD_ONLINE)) {
++		pr_err("CPU%u failed to report alive state\n", cpu);
++		ret = -EIO;
++	}
++
++	/* Let the architecture cleanup the kick alive mechanics. */
++	arch_cpuhp_cleanup_kick_cpu(cpu);
++	return ret;
++}
++#else /* CONFIG_HOTPLUG_CORE_SYNC_FULL */
++static inline int cpuhp_bp_sync_alive(unsigned int cpu) { return 0; }
++static inline bool cpuhp_can_boot_ap(unsigned int cpu) { return true; }
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC_FULL */
++
+ /* Serializes the updates to cpu_online_mask, cpu_present_mask */
+ static DEFINE_MUTEX(cpu_add_remove_lock);
+ bool cpuhp_tasks_frozen;
+@@ -588,6 +767,9 @@ static int bringup_cpu(unsigned int cpu)
+ 	struct task_struct *idle = idle_thread_get(cpu);
+ 	int ret;
  
--int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
-+int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle)
- {
--	return native_kick_ap(cpu, tidle);
-+	return smp_ops.kick_ap_alive(cpu, tidle);
- }
++	if (!cpuhp_can_boot_ap(cpu))
++		return -EAGAIN;
++
+ 	/*
+ 	 * Reset stale stack state from the last time this CPU was online.
+ 	 */
+@@ -606,6 +788,10 @@ static int bringup_cpu(unsigned int cpu)
+ 	if (ret)
+ 		goto out_unlock;
  
- void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu)
- {
- 	/* Cleanup possible dangling ends... */
--	if (smp_ops.cpu_up == native_cpu_up && x86_platform.legacy.warm_reset)
-+	if (smp_ops.kick_ap_alive == native_kick_ap && x86_platform.legacy.warm_reset)
- 		smpboot_restore_warm_reset_vector();
- }
++	ret = cpuhp_bp_sync_alive(cpu);
++	if (ret)
++		goto out_unlock;
++
+ 	ret = bringup_wait_for_ap_online(cpu);
+ 	if (ret)
+ 		goto out_unlock;
+@@ -1109,6 +1295,8 @@ static int takedown_cpu(unsigned int cpu
+ 	/* This actually kills the CPU. */
+ 	__cpu_die(cpu);
  
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -314,7 +314,7 @@ cpu_initialize_context(unsigned int cpu,
++	cpuhp_bp_sync_dead(cpu);
++
+ 	tick_cleanup_dead_cpu(cpu);
+ 	rcutree_migrate_callbacks(cpu);
  	return 0;
+@@ -1355,8 +1543,10 @@ void cpuhp_online_idle(enum cpuhp_state
+ 	if (state != CPUHP_AP_ONLINE_IDLE)
+ 		return;
+ 
++	cpuhp_ap_update_sync_state(SYNC_STATE_ONLINE);
++
+ 	/*
+-	 * Unpart the stopper thread before we start the idle loop (and start
++	 * Unpark the stopper thread before we start the idle loop (and start
+ 	 * scheduling); this ensures the stopper task is always available.
+ 	 */
+ 	stop_machine_unpark(smp_processor_id());
+@@ -2733,6 +2923,7 @@ void __init boot_cpu_hotplug_init(void)
+ {
+ #ifdef CONFIG_SMP
+ 	cpumask_set_cpu(smp_processor_id(), &cpus_booted_once_mask);
++	atomic_set(this_cpu_ptr(&cpuhp_state.ap_sync_state), SYNC_STATE_ONLINE);
+ #endif
+ 	this_cpu_write(cpuhp_state.state, CPUHP_ONLINE);
+ 	this_cpu_write(cpuhp_state.target, CPUHP_ONLINE);
+--- a/kernel/smpboot.c
++++ b/kernel/smpboot.c
+@@ -326,6 +326,7 @@ void smpboot_unregister_percpu_thread(st
+ }
+ EXPORT_SYMBOL_GPL(smpboot_unregister_percpu_thread);
+ 
++#ifndef CONFIG_HOTPLUG_CORE_SYNC
+ static DEFINE_PER_CPU(atomic_t, cpu_hotplug_state) = ATOMIC_INIT(CPU_POST_DEAD);
+ 
+ /*
+@@ -488,3 +489,4 @@ bool cpu_report_death(void)
  }
  
--static int xen_pv_cpu_up(unsigned int cpu, struct task_struct *idle)
-+static int xen_pv_kick_ap(unsigned int cpu, struct task_struct *idle)
- {
- 	int rc;
- 
-@@ -438,7 +438,7 @@ static const struct smp_ops xen_smp_ops
- 	.smp_prepare_cpus = xen_pv_smp_prepare_cpus,
- 	.smp_cpus_done = xen_smp_cpus_done,
- 
--	.cpu_up = xen_pv_cpu_up,
-+	.kick_ap_alive = xen_pv_kick_ap,
- 	.cpu_die = xen_pv_cpu_die,
- 	.cleanup_dead_cpu = xen_pv_cleanup_dead_cpu,
- 	.poll_sync_state = xen_pv_poll_sync_state,
+ #endif /* #ifdef CONFIG_HOTPLUG_CPU */
++#endif /* !CONFIG_HOTPLUG_CORE_SYNC */
 
 
