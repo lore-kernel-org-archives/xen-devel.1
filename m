@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D28CC77B7C
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529949.825052 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD52C7EE22
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:10:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529963.825074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKo-0008MM-C9; Thu, 04 May 2023 19:09:46 +0000
+	id 1pueKu-0000oq-OH; Thu, 04 May 2023 19:09:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529949.825052; Thu, 04 May 2023 19:09:46 +0000
+Received: by outflank-mailman (output) from mailman id 529963.825074; Thu, 04 May 2023 19:09:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKo-0008MD-9H; Thu, 04 May 2023 19:09:46 +0000
-Received: by outflank-mailman (input) for mailman id 529949;
- Thu, 04 May 2023 19:09:45 +0000
+	id 1pueKu-0000kh-7H; Thu, 04 May 2023 19:09:52 +0000
+Received: by outflank-mailman (input) for mailman id 529963;
+ Thu, 04 May 2023 19:09:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueE9-00042j-3B
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:53 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pueDx-00042j-TZ
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:41 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 453fc104-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:52 +0200 (CEST)
+ id 3e871476-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 453fc104-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185938.126719312@linutronix.de>
+X-Inumbo-ID: 3e871476-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185937.753526411@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226972;
+	s=2020; t=1683226961;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=C2xEv0EYOzjjBDOf0WNXDnbg3SxiEflVftHaff1ezNc=;
-	b=R7TFizeMBd1vCDVjEXU0BtfNbQoQd0Q7O5Cmi/GhoH+A7DPO/eDCQYvwL8d0EzW6TZevXV
-	zTSW3dCyZNMiwvAMbTbcTVfTHbY6pLve5Gv/afd1jzhLujx3f5ZspMS2zkpgXg0oDc3s5d
-	kXcBYyWoHlipJH2VBBXdFP8QtRznLbAKZV10Ph92/Hk65CJwnRS+0u5oUwspH7khzqSQ/u
-	SpYu0bcq4JwwE/JeCF3NwhBMiC+1RMRMfogzt5BdrL549/PBdPFpI4eEajMl9aEC63+JVF
-	9zu2Vsz02+ZJpxAIfDIw2+6pnaLRSdZXjwd9Lq61E8b+1bqiBtxkam2eHoBKxg==
+	 references:references; bh=t+vCm64b4itQSl2LfKU8VrA27XKQ2KG5zUbd2mh4iV8=;
+	b=ml6E+TXawV3yhhGCubFqgqufAZpTjpSiELyk/vrlZ3ms0dhrtAmXtDWQA1yMzAcLqw6EXj
+	bFhc2tyQcBuQ33Bsz5zsKXgWIdU4zRB8yjhEhspCgWXshlokE4Q+JyTBI+TjRiiOk+rcml
+	fl/hAT8Iw2GAj9Ot9oyk6BKqozcGuo7sJpNIvJzE2R06g9w52Mgyku0JBRkEGvJz486uRf
+	KmExkb3oHx2qMv2bo4NLcSHevFECI+NeAIr4un5UMnquDQpRk4nWHteXJM1j5VItMYBQJc
+	o8sXV0liH2x+qJwyn7FfgcHXOI887Tp59x5IcGaiawsgGKlKejdPBbAmAX9ZSw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226972;
+	s=2020e; t=1683226961;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=C2xEv0EYOzjjBDOf0WNXDnbg3SxiEflVftHaff1ezNc=;
-	b=L3yFFvyeaWcbSL4+w4FNUsUl3Xq9FYBhGlVedajTlxgN49PBR5/K5uqBP8Q/AEH8xz/YfX
-	kk6rHy0rbLZe69Cw==
+	 references:references; bh=t+vCm64b4itQSl2LfKU8VrA27XKQ2KG5zUbd2mh4iV8=;
+	b=9+U6SgXZ5rZ8A4IIpjwy8ijpc6qsJ1JIDkx+eqNJ7PC4GKp6PdTneYgE7ZC/9vOEWcjfFc
+	AmLbek9quVdxpeCQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,54 +93,94 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
- "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject:
- [patch V2 33/38] x86/topology: Store extended topology leaf information
+ "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>
+Subject: [patch V2 26/38] riscv: Switch to hotplug core state synchronization
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:51 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:40 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Save the extended topology leaf number if it exists and is valid in
-preparation of parallel CPU bringup.
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Cc: Paul Walmsley <paul.walmsley@sifive.com>
+Cc: linux-riscv@lists.infradead.org
 
 ---
- arch/x86/include/asm/topology.h |    1 +
- arch/x86/kernel/cpu/topology.c  |    3 +++
- 2 files changed, 4 insertions(+)
+ arch/riscv/Kconfig              |    1 +
+ arch/riscv/include/asm/smp.h    |    2 +-
+ arch/riscv/kernel/cpu-hotplug.c |   14 +++++++-------
+ 3 files changed, 9 insertions(+), 8 deletions(-)
 ---
---- a/arch/x86/include/asm/topology.h
-+++ b/arch/x86/include/asm/topology.h
-@@ -121,6 +121,7 @@ extern unsigned int __max_die_per_packag
- #define topology_core_cpumask(cpu)		(per_cpu(cpu_core_map, cpu))
- #define topology_sibling_cpumask(cpu)		(per_cpu(cpu_sibling_map, cpu))
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -122,6 +122,7 @@ config RISCV
+ 	select HAVE_RSEQ
+ 	select HAVE_STACKPROTECTOR
+ 	select HAVE_SYSCALL_TRACEPOINTS
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select IRQ_DOMAIN
+ 	select IRQ_FORCED_THREADING
+ 	select KASAN_VMALLOC if KASAN
+--- a/arch/riscv/include/asm/smp.h
++++ b/arch/riscv/include/asm/smp.h
+@@ -70,7 +70,7 @@ asmlinkage void smp_callin(void);
  
-+extern unsigned int topology_extended_leaf;
- extern unsigned int __max_logical_packages;
- #define topology_max_packages()			(__max_logical_packages)
+ #if defined CONFIG_HOTPLUG_CPU
+ int __cpu_disable(void);
+-void __cpu_die(unsigned int cpu);
++static inline void __cpu_die(unsigned int cpu) { }
+ #endif /* CONFIG_HOTPLUG_CPU */
  
---- a/arch/x86/kernel/cpu/topology.c
-+++ b/arch/x86/kernel/cpu/topology.c
-@@ -29,6 +29,8 @@ unsigned int __max_die_per_package __rea
- EXPORT_SYMBOL(__max_die_per_package);
+ #else
+--- a/arch/riscv/kernel/cpu-hotplug.c
++++ b/arch/riscv/kernel/cpu-hotplug.c
+@@ -8,6 +8,7 @@
+ #include <linux/sched.h>
+ #include <linux/err.h>
+ #include <linux/irq.h>
++#include <linux/cpuhotplug.h>
+ #include <linux/cpu.h>
+ #include <linux/sched/hotplug.h>
+ #include <asm/irq.h>
+@@ -49,17 +50,15 @@ int __cpu_disable(void)
+ 	return ret;
+ }
  
- #ifdef CONFIG_SMP
-+unsigned int topology_extended_leaf __read_mostly;
-+
++#ifdef CONFIG_HOTPLUG_CPU
  /*
-  * Check if given CPUID extended topology "leaf" is implemented
+- * Called on the thread which is asking for a CPU to be shutdown.
++ * Called on the thread which is asking for a CPU to be shutdown, if the
++ * CPU reported dead to the hotplug core.
   */
-@@ -72,6 +74,7 @@ int detect_extended_topology_early(struc
- 	if (leaf < 0)
- 		return -1;
+-void __cpu_die(unsigned int cpu)
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
+ {
+ 	int ret = 0;
  
-+	topology_extended_leaf = leaf;
- 	set_cpu_cap(c, X86_FEATURE_XTOPOLOGY);
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_err("CPU %u: didn't die\n", cpu);
+-		return;
+-	}
+ 	pr_notice("CPU%u: off\n", cpu);
  
- 	cpuid_count(leaf, SMT_LEVEL, &eax, &ebx, &ecx, &edx);
+ 	/* Verify from the firmware if the cpu is really stopped*/
+@@ -76,9 +75,10 @@ void __noreturn arch_cpu_idle_dead(void)
+ {
+ 	idle_task_exit();
+ 
+-	(void)cpu_report_death();
++	cpuhp_ap_report_dead();
+ 
+ 	cpu_ops[smp_processor_id()]->cpu_stop();
+ 	/* It should never reach here */
+ 	BUG();
+ }
++#endif
 
 
