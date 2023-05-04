@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F003EC7EE21
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529928.824993 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D778C7EE21
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529935.825018 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKS-0005ec-0E; Thu, 04 May 2023 19:09:24 +0000
+	id 1pueKa-0006Pw-1a; Thu, 04 May 2023 19:09:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529928.824993; Thu, 04 May 2023 19:09:23 +0000
+Received: by outflank-mailman (output) from mailman id 529935.825018; Thu, 04 May 2023 19:09:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKR-0005eT-TY; Thu, 04 May 2023 19:09:23 +0000
-Received: by outflank-mailman (input) for mailman id 529928;
- Thu, 04 May 2023 19:09:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pueKZ-0006PM-PN; Thu, 04 May 2023 19:09:31 +0000
+Received: by outflank-mailman (input) for mailman id 529935;
+ Thu, 04 May 2023 19:09:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueEI-00042k-O1
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:03:02 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4a29c51a-eaae-11ed-8611-37d641c3527e;
- Thu, 04 May 2023 21:03:00 +0200 (CEST)
+ id 1pueE2-00042j-Qd
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:46 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 415bc34c-eaae-11ed-b226-6b7b168915f2;
+ Thu, 04 May 2023 21:02:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a29c51a-eaae-11ed-8611-37d641c3527e
-Message-ID: <20230504185938.393373946@linutronix.de>
+X-Inumbo-ID: 415bc34c-eaae-11ed-b226-6b7b168915f2
+Message-ID: <20230504185937.912510359@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226980;
+	s=2020; t=1683226965;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=DnnEFfJ8qHS51cV93bPVxAhJn4egJudPWNxPdxHp+6I=;
-	b=3Ex1oay3deKBQTCKUX4Ih8IGgIbgjtd18ImqJ1vJckFzp4vqpeCRciYL26XaBXwtGetEt9
-	jQYdqvvfPpYi34oU2dU7fjuiZ3WyUQcsrd4BPREXrzjkH9groi0TU6YGHBW08cmpwip9QC
-	vnXlEPucLe8Pxu/DAQZhHSJgvAG1br+71W5AkzFErVTB5fdbrjcZJ7I/PMvvfD3nV+Fpt+
-	Y9+eS6OIW46jTxBhE1zoqPIcGpnWyrhDXCq+doarlLORorIO2HSYQo2DibMTzYhsGwQ8ko
-	wng2jKhRiMwK0oOD7H54yErcCMVtMuv2wW3qjiAj1OaBH6NB6N7JtXkq+JhyKQ==
+	 references:references; bh=F8kXoaR1nBQ6o9VxPp8Uz6U2V5tkVIrZOYAD+Uqf6yU=;
+	b=FHHwtM3MehcvxyTD3IIJz8sgSlPXUlchZh7xJFV6jf2jNACHHUSgTO098Ser6A+TKYqwby
+	MlO+QBW9B7CBztPuD5tg+w+tvkSrJZeyBsoOwfT3EBQQwdnjzUEH5V/q7RLkoQV5ifNNa+
+	at9KsHlVkTZ1F4ajKTdjiM9iHVozExltMcmveGrXQs/fOlHDH8HgFUnTWmeo5rouQexRZ4
+	Xry4XkxaL7TCkZzvLR+YbuqgPQqwNW1A3kMmXVynnWeMARwsSVesHKDo20gZt3Skv9srif
+	0A1QbnYXe4Tj6Hfs/b/c+uuWIPdrOvy2KufgGEj/6EkbPvsEiWUj1xzdM/2/FQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226980;
+	s=2020e; t=1683226965;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=DnnEFfJ8qHS51cV93bPVxAhJn4egJudPWNxPdxHp+6I=;
-	b=6kDZyW5GTa+KS1pHyq0SY7syfYnd6TB6StPbtFwCKnOC1peAStPMetQpfCSqmue8lUL4Wc
-	NQ0I2S6hl8MhwzDA==
+	 references:references; bh=F8kXoaR1nBQ6o9VxPp8Uz6U2V5tkVIrZOYAD+Uqf6yU=;
+	b=eKOKrA/+YsiD2CsaRIq67Pl+6fGbLOp23MnHr4M6jOIgCJwCHmPsKgxoXghxnT8I2GMUKL
+	U9rUX94YG+zIxfDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,215 +94,211 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 38/38] x86/smpboot/64: Implement
- arch_cpuhp_init_parallel_bringup() and enable it
+Subject:
+ [patch V2 29/38] cpu/hotplug: Provide a split up CPUHP_BRINGUP mechanism
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:03:00 +0200 (CEST)
+Date: Thu,  4 May 2023 21:02:45 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Implement the validation function which tells the core code whether
-parallel bringup is possible.
+The bring up logic of a to be onlined CPU consists of several parts, which
+are considered to be a single hotplug state:
 
-The only condition for now is that the kernel does not run in an encrypted
-guest as these will trap the RDMSR via #VC, which cannot be handled at that
-point in early startup.
+  1) Control CPU issues the wake-up
 
-There was an earlier variant for AMD-SEV which used the GHBC protocol for
-retrieving the APIC ID via CPUID, but there is no guarantee that the
-initial APIC ID in CPUID is the same as the real APIC ID. There is no
-enforcement from the secure firmware and the hypervisor can assign APIC IDs
-as it sees fit as long as the ACPI/MADT table is consistent with that
-assignment.
+  2) To be onlined CPU starts up, does the minimal initialization,
+     reports to be alive and waits for release into the complete bring-up.
 
-Unfortunately there is no RDMSR GHCB protocol at the moment, so enabling
-AMD-SEV guests for parallel startup needs some more thought.
+  3) Control CPU waits for the alive report and releases the upcoming CPU
+     for the complete bring-up.
 
-Intel-TDX provides a secure RDMSR hypercall, but supporting that is outside
-the scope of this change.
+Allow to split this into two states:
 
-Fixup announce_cpu() as e.g. on Hyper-V CPU1 is the secondary sibling of
-CPU0, which makes the @cpu == 1 logic in announce_cpu() fall apart.
+  1) Control CPU issues the wake-up
 
-[ mikelley: Reported the announce_cpu() fallout
+     After that the to be onlined CPU starts up, does the minimal
+     initialization, reports to be alive and waits for release into the
+     full bring-up. As this can run after the control CPU dropped the
+     hotplug locks the code which is executed on the AP before it reports
+     alive has to be carefully audited to not violate any of the hotplug
+     constraints, especially not modifying any of the various cpumasks.
 
-Originally-by: David Woodhouse <dwmw@amazon.co.uk>
+     This is really only meant to avoid waiting for the AP to react on the
+     wake-up. Of course an architecture can move strict CPU related setup
+     functionality, e.g. microcode loading, with care before the
+     synchronization point to save further pointless waiting time.
+
+  2) Control CPU waits for the alive report and releases the upcoming CPU
+     for the complete bring-up.
+
+This allows that the two states can be split up to run all to be onlined
+CPUs up to state #1 on the control CPU and then at a later point run state
+#2. This spares some of the latencies of the full serialized per CPU
+bringup by avoiding the per CPU wakeup/wait serialization. The assumption
+is that the first AP already waits when the last AP has been woken up. This
+obvioulsy depends on the hardware latencies and depending on the timings
+this might still not completely eliminate all wait scenarios.
+
+This split is just a preparatory step for enabling the parallel bringup
+later. The boot time bringup is still fully serialized. It has a separate
+config switch so that architectures which want to support parallel bringup
+can test the split of the CPUHP_BRINGUG step separately.
+
+To enable this the architecture must support the CPU hotplug core sync
+mechanism and has to be audited that there are no implicit hotplug state
+dependencies which require a fully serialized bringup.
+
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+
 ---
-V2: Fixup announce_cpu() - Michael Kelley
+ arch/Kconfig               |    4 ++
+ include/linux/cpuhotplug.h |    4 ++
+ kernel/cpu.c               |   70 +++++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 76 insertions(+), 2 deletions(-)
 ---
- arch/x86/Kconfig             |    3 +
- arch/x86/kernel/cpu/common.c |    6 ---
- arch/x86/kernel/smpboot.c    |   83 ++++++++++++++++++++++++++++++++++++-------
- 3 files changed, 73 insertions(+), 19 deletions(-)
----
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -274,8 +274,9 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
- 	select HAVE_GENERIC_VDSO
-+	select HOTPLUG_PARALLEL			if SMP && X86_64
- 	select HOTPLUG_SMT			if SMP
--	select HOTPLUG_SPLIT_STARTUP		if SMP
-+	select HOTPLUG_SPLIT_STARTUP		if SMP && X86_32
- 	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2128,11 +2128,7 @@ static inline void setup_getcpu(int cpu)
- }
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -49,6 +49,10 @@ config HOTPLUG_CORE_SYNC_FULL
+ 	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select HOTPLUG_CORE_SYNC
  
- #ifdef CONFIG_X86_64
--static inline void ucode_cpu_init(int cpu)
--{
--	if (cpu)
--		load_ucode_ap();
--}
-+static inline void ucode_cpu_init(int cpu) { }
- 
- static inline void tss_setup_ist(struct tss_struct *tss)
- {
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -58,6 +58,7 @@
- #include <linux/overflow.h>
- #include <linux/stackprotector.h>
- #include <linux/cpuhotplug.h>
-+#include <linux/mc146818rtc.h>
- 
- #include <asm/acpi.h>
- #include <asm/cacheinfo.h>
-@@ -75,7 +76,7 @@
- #include <asm/fpu/api.h>
- #include <asm/setup.h>
- #include <asm/uv/uv.h>
--#include <linux/mc146818rtc.h>
-+#include <asm/microcode.h>
- #include <asm/i8259.h>
- #include <asm/misc.h>
- #include <asm/qspinlock.h>
-@@ -128,7 +129,6 @@ int arch_update_cpu_topology(void)
- 	return retval;
- }
- 
--
- static unsigned int smpboot_warm_reset_vector_count;
- 
- static inline void smpboot_setup_warm_reset_vector(unsigned long start_eip)
-@@ -229,16 +229,43 @@ static void notrace start_secondary(void
- 	 */
- 	cr4_init();
- 
--#ifdef CONFIG_X86_32
--	/* switch away from the initial page table */
--	load_cr3(swapper_pg_dir);
--	__flush_tlb_all();
--#endif
-+	/*
-+	 * 32-bit specific. 64-bit reaches this code with the correct page
-+	 * table established. Yet another historical divergence.
-+	 */
-+	if (IS_ENABLED(CONFIG_X86_32)) {
-+		/* switch away from the initial page table */
-+		load_cr3(swapper_pg_dir);
-+		__flush_tlb_all();
-+	}
++config HOTPLUG_SPLIT_STARTUP
++	bool
++	select HOTPLUG_CORE_SYNC_FULL
 +
- 	cpu_init_exception_handling();
+ config GENERIC_ENTRY
+ 	bool
+ 
+--- a/include/linux/cpuhotplug.h
++++ b/include/linux/cpuhotplug.h
+@@ -133,6 +133,7 @@ enum cpuhp_state {
+ 	CPUHP_MIPS_SOC_PREPARE,
+ 	CPUHP_BP_PREPARE_DYN,
+ 	CPUHP_BP_PREPARE_DYN_END		= CPUHP_BP_PREPARE_DYN + 20,
++	CPUHP_BP_KICK_AP,
+ 	CPUHP_BRINGUP_CPU,
  
  	/*
--	 * Synchronization point with the hotplug core. Sets the
--	 * synchronization state to ALIVE and waits for the control CPU to
-+	 * 32-bit systems load the microcode from the ASM startup code for
-+	 * historical reasons.
-+	 *
-+	 * On 64-bit systems load it before reaching the AP alive
-+	 * synchronization point below so it is not part of the full per
-+	 * CPU serialized bringup part when "parallel" bringup is enabled.
-+	 *
-+	 * That's even safe when hyperthreading is enabled in the CPU as
-+	 * the core code starts the primary threads first and leaves the
-+	 * secondary threads waiting for SIPI. Loading microcode on
-+	 * physical cores concurrently is a safe operation.
-+	 *
-+	 * This covers both the Intel specific issue that concurrent
-+	 * microcode loading on SMT siblings must be prohibited and the
-+	 * vendor independent issue`that microcode loading which changes
-+	 * CPUID, MSRs etc. must be strictly serialized to maintain
-+	 * software state correctness.
-+	 */
-+	if (IS_ENABLED(CONFIG_X86_64))
-+		load_ucode_ap();
+@@ -517,9 +518,12 @@ void cpuhp_online_idle(enum cpuhp_state
+ static inline void cpuhp_online_idle(enum cpuhp_state state) { }
+ #endif
+ 
++struct task_struct;
 +
-+	/*
-+	 * Synchronization point with the hotplug core. Sets this CPUs
-+	 * synchronization state to ALIVE and spin-waits for the control CPU to
- 	 * release this CPU for further bringup.
- 	 */
- 	cpuhp_ap_sync_alive();
-@@ -934,10 +961,10 @@ static void announce_cpu(int cpu, int ap
- 	if (!node_width)
- 		node_width = num_digits(num_possible_nodes()) + 1; /* + '#' */
+ void cpuhp_ap_sync_alive(void);
+ void arch_cpuhp_sync_state_poll(void);
+ void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
++int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle);
  
--	if (cpu == 1)
--		printk(KERN_INFO "x86: Booting SMP configuration:\n");
--
- 	if (system_state < SYSTEM_RUNNING) {
-+		if (num_online_cpus() == 1)
-+			pr_info("x86: Booting SMP configuration:\n");
-+
- 		if (node != current_node) {
- 			if (current_node > (-1))
- 				pr_cont("\n");
-@@ -948,7 +975,7 @@ static void announce_cpu(int cpu, int ap
- 		}
- 
- 		/* Add padding for the BSP */
--		if (cpu == 1)
-+		if (num_online_cpus() == 1)
- 			pr_cont("%*s", width + 1, " ");
- 
- 		pr_cont("%*s#%d", width - num_digits(cpu), " ", cpu);
-@@ -1242,6 +1269,36 @@ void __init smp_prepare_cpus_common(void
- 	set_cpu_sibling_map(0);
+ #ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
+ void cpuhp_ap_report_dead(void);
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -761,6 +761,47 @@ static int bringup_wait_for_ap_online(un
+ 	return 0;
  }
  
-+#ifdef CONFIG_X86_64
-+/* Establish whether parallel bringup can be supported. */
-+bool __init arch_cpuhp_init_parallel_bringup(void)
++#ifdef CONFIG_HOTPLUG_SPLIT_STARTUP
++static int cpuhp_kick_ap_alive(unsigned int cpu)
 +{
-+	/*
-+	 * Encrypted guests require special handling. They enforce X2APIC
-+	 * mode but the RDMSR to read the APIC ID is intercepted and raises
-+	 * #VC or #VE which cannot be handled in the early startup code.
-+	 *
-+	 * AMD-SEV does not provide a RDMSR GHCB protocol so the early
-+	 * startup code cannot directly communicate with the secure
-+	 * firmware. The alternative solution to retrieve the APIC ID via
-+	 * CPUID(0xb), which is covered by the GHCB protocol, is not viable
-+	 * either because there is no enforcement of the CPUID(0xb)
-+	 * provided "initial" APIC ID to be the same as the real APIC ID.
-+	 *
-+	 * Intel-TDX has a secure RDMSR hypercall, but that needs to be
-+	 * implemented seperately in the low level startup ASM code.
-+	 */
-+	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
-+		pr_info("Parallel CPU startup disabled due to guest state encryption\n");
-+		return false;
-+	}
++	if (!cpuhp_can_boot_ap(cpu))
++		return -EAGAIN;
 +
-+	smpboot_control = STARTUP_READ_APICID;
-+	pr_debug("Parallel CPU startup enabled: 0x%08x\n", smpboot_control);
-+	return true;
++	return arch_cpuhp_kick_ap_alive(cpu, idle_thread_get(cpu));
 +}
-+#endif
 +
- /*
-  * Prepare for SMP bootup.
-  * @max_cpus: configured maximum number of CPUs, It is a legacy parameter
++static int cpuhp_bringup_ap(unsigned int cpu)
++{
++	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
++	int ret;
++
++	/*
++	 * Some architectures have to walk the irq descriptors to
++	 * setup the vector space for the cpu which comes online.
++	 * Prevent irq alloc/free across the bringup.
++	 */
++	irq_lock_sparse();
++
++	ret = cpuhp_bp_sync_alive(cpu);
++	if (ret)
++		goto out_unlock;
++
++	ret = bringup_wait_for_ap_online(cpu);
++	if (ret)
++		goto out_unlock;
++
++	irq_unlock_sparse();
++
++	if (st->target <= CPUHP_AP_ONLINE_IDLE)
++		return 0;
++
++	return cpuhp_kick_ap(cpu, st, st->target);
++
++out_unlock:
++	irq_unlock_sparse();
++	return ret;
++}
++#else
+ static int bringup_cpu(unsigned int cpu)
+ {
+ 	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
+@@ -777,7 +818,6 @@ static int bringup_cpu(unsigned int cpu)
+ 	 */
+ 	irq_lock_sparse();
+ 
+-	/* Arch-specific enabling code. */
+ 	ret = __cpu_up(cpu, idle);
+ 	if (ret)
+ 		goto out_unlock;
+@@ -801,6 +841,7 @@ static int bringup_cpu(unsigned int cpu)
+ 	irq_unlock_sparse();
+ 	return ret;
+ }
++#endif
+ 
+ static int finish_cpu(unsigned int cpu)
+ {
+@@ -1940,13 +1981,38 @@ static struct cpuhp_step cpuhp_hp_states
+ 		.startup.single		= timers_prepare_cpu,
+ 		.teardown.single	= timers_dead_cpu,
+ 	},
+-	/* Kicks the plugged cpu into life */
++
++#ifdef CONFIG_HOTPLUG_SPLIT_STARTUP
++	/*
++	 * Kicks the AP alive. AP will wait in cpuhp_ap_sync_alive() until
++	 * the next step will release it.
++	 */
++	[CPUHP_BP_KICK_AP] = {
++		.name			= "cpu:kick_ap",
++		.startup.single		= cpuhp_kick_ap_alive,
++	},
++
++	/*
++	 * Waits for the AP to reach cpuhp_ap_sync_alive() and then
++	 * releases it for the complete bringup.
++	 */
++	[CPUHP_BRINGUP_CPU] = {
++		.name			= "cpu:bringup",
++		.startup.single		= cpuhp_bringup_ap,
++		.teardown.single	= finish_cpu,
++		.cant_stop		= true,
++	},
++#else
++	/*
++	 * All-in-one CPU bringup state which includes the kick alive.
++	 */
+ 	[CPUHP_BRINGUP_CPU] = {
+ 		.name			= "cpu:bringup",
+ 		.startup.single		= bringup_cpu,
+ 		.teardown.single	= finish_cpu,
+ 		.cant_stop		= true,
+ 	},
++#endif
+ 	/* Final state before CPU kills itself */
+ 	[CPUHP_AP_IDLE_DEAD] = {
+ 		.name			= "idle:dead",
 
 
