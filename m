@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18AA6C7EE22
-	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.529931.825003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F003EC7EE21
+	for <xen-devel@archiver.kernel.org>; Thu,  4 May 2023 19:09:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.529928.824993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKV-00060U-Cm; Thu, 04 May 2023 19:09:27 +0000
+	id 1pueKS-0005ec-0E; Thu, 04 May 2023 19:09:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 529931.825003; Thu, 04 May 2023 19:09:27 +0000
+Received: by outflank-mailman (output) from mailman id 529928.824993; Thu, 04 May 2023 19:09:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pueKV-00060L-9u; Thu, 04 May 2023 19:09:27 +0000
-Received: by outflank-mailman (input) for mailman id 529931;
- Thu, 04 May 2023 19:09:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pueKR-0005eT-TY; Thu, 04 May 2023 19:09:23 +0000
+Received: by outflank-mailman (input) for mailman id 529928;
+ Thu, 04 May 2023 19:09:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=srgM=AZ=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pueDw-00042j-22
- for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:02:40 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d7c3870-eaae-11ed-b226-6b7b168915f2;
- Thu, 04 May 2023 21:02:39 +0200 (CEST)
+ id 1pueEI-00042k-O1
+ for xen-devel@lists.xenproject.org; Thu, 04 May 2023 19:03:02 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4a29c51a-eaae-11ed-8611-37d641c3527e;
+ Thu, 04 May 2023 21:03:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d7c3870-eaae-11ed-b226-6b7b168915f2
-Message-ID: <20230504185937.700483457@linutronix.de>
+X-Inumbo-ID: 4a29c51a-eaae-11ed-8611-37d641c3527e
+Message-ID: <20230504185938.393373946@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683226959;
+	s=2020; t=1683226980;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=o04fXgOhQs8+8CE7g0ZkhrpkLD4QHZg/LLM7Otp+9z8=;
-	b=p4kcKoUjBHHJo7zBT76SAr4kx217XWJeqQlJZM4VxHPykLQrWLTEC/uzx8rVhbv5iqkHWl
-	eKFtH9Dh+4qwsJ89ZP4rLm01HMJyfuh1U+U+HK5bkx7PCIfmaji3wiKDM0hoVurLEfzD81
-	Wt5Ubm2jEjitMnzdFcIqEG1m9GNIikM3c5w8xOJBg2D9IGfl3i1Bdd22uIIaFwPx6R+oIN
-	02fFHC7cYoeNHnd0KZn/7sG2vBaI1ZwTr6vd36gfFqo6mvp2OfPm/JhGUYVjsHiJsALYHO
-	f8H4F6s4Sw0iVizvLScdCi66AVg3wSgMwKU7em9hN7nVzpd/ip3L0uFyKgVW2A==
+	 references:references; bh=DnnEFfJ8qHS51cV93bPVxAhJn4egJudPWNxPdxHp+6I=;
+	b=3Ex1oay3deKBQTCKUX4Ih8IGgIbgjtd18ImqJ1vJckFzp4vqpeCRciYL26XaBXwtGetEt9
+	jQYdqvvfPpYi34oU2dU7fjuiZ3WyUQcsrd4BPREXrzjkH9groi0TU6YGHBW08cmpwip9QC
+	vnXlEPucLe8Pxu/DAQZhHSJgvAG1br+71W5AkzFErVTB5fdbrjcZJ7I/PMvvfD3nV+Fpt+
+	Y9+eS6OIW46jTxBhE1zoqPIcGpnWyrhDXCq+doarlLORorIO2HSYQo2DibMTzYhsGwQ8ko
+	wng2jKhRiMwK0oOD7H54yErcCMVtMuv2wW3qjiAj1OaBH6NB6N7JtXkq+JhyKQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683226959;
+	s=2020e; t=1683226980;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=o04fXgOhQs8+8CE7g0ZkhrpkLD4QHZg/LLM7Otp+9z8=;
-	b=ZnZlGAwTWV21lQJdfFlOE3KOrdxbCyckyIQwnUuLhsAipHYSOksGllyP3kynqMPIKSFyh4
-	3HRt8jQRFFxBADCA==
+	 references:references; bh=DnnEFfJ8qHS51cV93bPVxAhJn4egJudPWNxPdxHp+6I=;
+	b=6kDZyW5GTa+KS1pHyq0SY7syfYnd6TB6StPbtFwCKnOC1peAStPMetQpfCSqmue8lUL4Wc
+	NQ0I2S6hl8MhwzDA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,67 +95,215 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch V2 25/38] parisc: Switch to hotplug core state synchronization
+Subject: [patch V2 38/38] x86/smpboot/64: Implement
+ arch_cpuhp_init_parallel_bringup() and enable it
 References: <20230504185733.126511787@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Thu,  4 May 2023 21:02:38 +0200 (CEST)
+Date: Thu,  4 May 2023 21:03:00 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Switch to the CPU hotplug core state tracking and synchronization
-mechanim. No functional change intended.
+Implement the validation function which tells the core code whether
+parallel bringup is possible.
 
+The only condition for now is that the kernel does not run in an encrypted
+guest as these will trap the RDMSR via #VC, which cannot be handled at that
+point in early startup.
+
+There was an earlier variant for AMD-SEV which used the GHBC protocol for
+retrieving the APIC ID via CPUID, but there is no guarantee that the
+initial APIC ID in CPUID is the same as the real APIC ID. There is no
+enforcement from the secure firmware and the hypervisor can assign APIC IDs
+as it sees fit as long as the ACPI/MADT table is consistent with that
+assignment.
+
+Unfortunately there is no RDMSR GHCB protocol at the moment, so enabling
+AMD-SEV guests for parallel startup needs some more thought.
+
+Intel-TDX provides a secure RDMSR hypercall, but supporting that is outside
+the scope of this change.
+
+Fixup announce_cpu() as e.g. on Hyper-V CPU1 is the secondary sibling of
+CPU0, which makes the @cpu == 1 logic in announce_cpu() fall apart.
+
+[ mikelley: Reported the announce_cpu() fallout
+
+Originally-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
-Cc: Helge Deller <deller@gmx.de>
-Cc: linux-parisc@vger.kernel.org
-
 ---
- arch/parisc/Kconfig          |    1 +
- arch/parisc/kernel/process.c |    4 ++--
- arch/parisc/kernel/smp.c     |    7 +++----
- 3 files changed, 6 insertions(+), 6 deletions(-)
+V2: Fixup announce_cpu() - Michael Kelley
 ---
---- a/arch/parisc/Kconfig
-+++ b/arch/parisc/Kconfig
-@@ -57,6 +57,7 @@ config PARISC
- 	select HAVE_ARCH_SECCOMP_FILTER
- 	select HAVE_ARCH_TRACEHOOK
- 	select HAVE_REGS_AND_STACK_ACCESS_API
-+	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
- 	select GENERIC_SCHED_CLOCK
- 	select GENERIC_IRQ_MIGRATION if SMP
- 	select HAVE_UNSTABLE_SCHED_CLOCK if SMP
---- a/arch/parisc/kernel/process.c
-+++ b/arch/parisc/kernel/process.c
-@@ -166,8 +166,8 @@ void __noreturn arch_cpu_idle_dead(void)
+ arch/x86/Kconfig             |    3 +
+ arch/x86/kernel/cpu/common.c |    6 ---
+ arch/x86/kernel/smpboot.c    |   83 ++++++++++++++++++++++++++++++++++++-------
+ 3 files changed, 73 insertions(+), 19 deletions(-)
+---
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -274,8 +274,9 @@ config X86
+ 	select HAVE_UNSTABLE_SCHED_CLOCK
+ 	select HAVE_USER_RETURN_NOTIFIER
+ 	select HAVE_GENERIC_VDSO
++	select HOTPLUG_PARALLEL			if SMP && X86_64
+ 	select HOTPLUG_SMT			if SMP
+-	select HOTPLUG_SPLIT_STARTUP		if SMP
++	select HOTPLUG_SPLIT_STARTUP		if SMP && X86_32
+ 	select IRQ_FORCED_THREADING
+ 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
+ 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2128,11 +2128,7 @@ static inline void setup_getcpu(int cpu)
+ }
  
- 	local_irq_disable();
+ #ifdef CONFIG_X86_64
+-static inline void ucode_cpu_init(int cpu)
+-{
+-	if (cpu)
+-		load_ucode_ap();
+-}
++static inline void ucode_cpu_init(int cpu) { }
  
--	/* Tell __cpu_die() that this CPU is now safe to dispose of. */
--	(void)cpu_report_death();
-+	/* Tell the core that this CPU is now safe to dispose of. */
-+	cpuhp_ap_report_dead();
- 
- 	/* Ensure that the cache lines are written out. */
- 	flush_cache_all_local();
---- a/arch/parisc/kernel/smp.c
-+++ b/arch/parisc/kernel/smp.c
-@@ -500,11 +500,10 @@ int __cpu_disable(void)
- void __cpu_die(unsigned int cpu)
+ static inline void tss_setup_ist(struct tss_struct *tss)
  {
- 	pdc_cpu_rendezvous_lock();
-+}
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -58,6 +58,7 @@
+ #include <linux/overflow.h>
+ #include <linux/stackprotector.h>
+ #include <linux/cpuhotplug.h>
++#include <linux/mc146818rtc.h>
  
--	if (!cpu_wait_death(cpu, 5)) {
--		pr_crit("CPU%u: cpu didn't die\n", cpu);
--		return;
--	}
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
+ #include <asm/acpi.h>
+ #include <asm/cacheinfo.h>
+@@ -75,7 +76,7 @@
+ #include <asm/fpu/api.h>
+ #include <asm/setup.h>
+ #include <asm/uv/uv.h>
+-#include <linux/mc146818rtc.h>
++#include <asm/microcode.h>
+ #include <asm/i8259.h>
+ #include <asm/misc.h>
+ #include <asm/qspinlock.h>
+@@ -128,7 +129,6 @@ int arch_update_cpu_topology(void)
+ 	return retval;
+ }
+ 
+-
+ static unsigned int smpboot_warm_reset_vector_count;
+ 
+ static inline void smpboot_setup_warm_reset_vector(unsigned long start_eip)
+@@ -229,16 +229,43 @@ static void notrace start_secondary(void
+ 	 */
+ 	cr4_init();
+ 
+-#ifdef CONFIG_X86_32
+-	/* switch away from the initial page table */
+-	load_cr3(swapper_pg_dir);
+-	__flush_tlb_all();
+-#endif
++	/*
++	 * 32-bit specific. 64-bit reaches this code with the correct page
++	 * table established. Yet another historical divergence.
++	 */
++	if (IS_ENABLED(CONFIG_X86_32)) {
++		/* switch away from the initial page table */
++		load_cr3(swapper_pg_dir);
++		__flush_tlb_all();
++	}
++
+ 	cpu_init_exception_handling();
+ 
+ 	/*
+-	 * Synchronization point with the hotplug core. Sets the
+-	 * synchronization state to ALIVE and waits for the control CPU to
++	 * 32-bit systems load the microcode from the ASM startup code for
++	 * historical reasons.
++	 *
++	 * On 64-bit systems load it before reaching the AP alive
++	 * synchronization point below so it is not part of the full per
++	 * CPU serialized bringup part when "parallel" bringup is enabled.
++	 *
++	 * That's even safe when hyperthreading is enabled in the CPU as
++	 * the core code starts the primary threads first and leaves the
++	 * secondary threads waiting for SIPI. Loading microcode on
++	 * physical cores concurrently is a safe operation.
++	 *
++	 * This covers both the Intel specific issue that concurrent
++	 * microcode loading on SMT siblings must be prohibited and the
++	 * vendor independent issue`that microcode loading which changes
++	 * CPUID, MSRs etc. must be strictly serialized to maintain
++	 * software state correctness.
++	 */
++	if (IS_ENABLED(CONFIG_X86_64))
++		load_ucode_ap();
++
++	/*
++	 * Synchronization point with the hotplug core. Sets this CPUs
++	 * synchronization state to ALIVE and spin-waits for the control CPU to
+ 	 * release this CPU for further bringup.
+ 	 */
+ 	cpuhp_ap_sync_alive();
+@@ -934,10 +961,10 @@ static void announce_cpu(int cpu, int ap
+ 	if (!node_width)
+ 		node_width = num_digits(num_possible_nodes()) + 1; /* + '#' */
+ 
+-	if (cpu == 1)
+-		printk(KERN_INFO "x86: Booting SMP configuration:\n");
+-
+ 	if (system_state < SYSTEM_RUNNING) {
++		if (num_online_cpus() == 1)
++			pr_info("x86: Booting SMP configuration:\n");
++
+ 		if (node != current_node) {
+ 			if (current_node > (-1))
+ 				pr_cont("\n");
+@@ -948,7 +975,7 @@ static void announce_cpu(int cpu, int ap
+ 		}
+ 
+ 		/* Add padding for the BSP */
+-		if (cpu == 1)
++		if (num_online_cpus() == 1)
+ 			pr_cont("%*s", width + 1, " ");
+ 
+ 		pr_cont("%*s#%d", width - num_digits(cpu), " ", cpu);
+@@ -1242,6 +1269,36 @@ void __init smp_prepare_cpus_common(void
+ 	set_cpu_sibling_map(0);
+ }
+ 
++#ifdef CONFIG_X86_64
++/* Establish whether parallel bringup can be supported. */
++bool __init arch_cpuhp_init_parallel_bringup(void)
 +{
- 	pr_info("CPU%u: is shutting down\n", cpu);
- 
- 	/* set task's state to interruptible sleep */
++	/*
++	 * Encrypted guests require special handling. They enforce X2APIC
++	 * mode but the RDMSR to read the APIC ID is intercepted and raises
++	 * #VC or #VE which cannot be handled in the early startup code.
++	 *
++	 * AMD-SEV does not provide a RDMSR GHCB protocol so the early
++	 * startup code cannot directly communicate with the secure
++	 * firmware. The alternative solution to retrieve the APIC ID via
++	 * CPUID(0xb), which is covered by the GHCB protocol, is not viable
++	 * either because there is no enforcement of the CPUID(0xb)
++	 * provided "initial" APIC ID to be the same as the real APIC ID.
++	 *
++	 * Intel-TDX has a secure RDMSR hypercall, but that needs to be
++	 * implemented seperately in the low level startup ASM code.
++	 */
++	if (cc_platform_has(CC_ATTR_GUEST_STATE_ENCRYPT)) {
++		pr_info("Parallel CPU startup disabled due to guest state encryption\n");
++		return false;
++	}
++
++	smpboot_control = STARTUP_READ_APICID;
++	pr_debug("Parallel CPU startup enabled: 0x%08x\n", smpboot_control);
++	return true;
++}
++#endif
++
+ /*
+  * Prepare for SMP bootup.
+  * @max_cpus: configured maximum number of CPUs, It is a legacy parameter
 
 
