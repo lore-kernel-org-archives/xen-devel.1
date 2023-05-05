@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D3F5C77B7C
-	for <xen-devel@archiver.kernel.org>; Fri,  5 May 2023 12:46:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.530322.825863 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F58C77B7C
+	for <xen-devel@archiver.kernel.org>; Fri,  5 May 2023 13:05:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.530327.825879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puuoY-0001XU-6S; Fri, 05 May 2023 12:45:34 +0000
+	id 1puv84-00043w-7u; Fri, 05 May 2023 13:05:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 530322.825863; Fri, 05 May 2023 12:45:34 +0000
+Received: by outflank-mailman (output) from mailman id 530327.825879; Fri, 05 May 2023 13:05:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puuoY-0001XN-39; Fri, 05 May 2023 12:45:34 +0000
-Received: by outflank-mailman (input) for mailman id 530322;
- Fri, 05 May 2023 12:45:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1puv84-00043P-0p; Fri, 05 May 2023 13:05:44 +0000
+Received: by outflank-mailman (input) for mailman id 530327;
+ Fri, 05 May 2023 13:05:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vWC1=A2=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1puuoV-0001XH-N8
- for xen-devel@lists.xenproject.org; Fri, 05 May 2023 12:45:32 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7505a15-eb42-11ed-8611-37d641c3527e;
- Fri, 05 May 2023 14:45:29 +0200 (CEST)
+ <SRS0=XVLi=A2=citrix.com=prvs=4822586d7=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1puv82-0003zO-OD
+ for xen-devel@lists.xenproject.org; Fri, 05 May 2023 13:05:42 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 899ce7c8-eb45-11ed-b226-6b7b168915f2;
+ Fri, 05 May 2023 15:05:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,74 +38,265 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7505a15-eb42-11ed-8611-37d641c3527e
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683290728;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ro/VOFl72UDWFwy8gwNK93pOtDrJEFznvt3NXDl6cF8=;
-	b=NEssImE7oVj95z4/FBIZJnxzphr31CeA4k7oJeJinz1r5r1l9dXN1gppKxrfH844UqDO9z
-	4QSvSZ+MCzWy04loOUdVFWsJabtUy+6xAHaZOnUP3kDamwQqqChUVjh6yxS90kqh/3foQl
-	BxPnqXdK0mEFhXKLhgXSM8yu090mNdF9FRSITtHjxNfxijznNsQsOy0jITHZ9ajNCFSUr7
-	ixcpybMXO0+Tte9hyNa1D9uPISenZGZ0GM57Wg5ua9BDE6mitsB+qwg3eCN369M6O0Jwe5
-	/MuZBe8FpjmVO3WPvPxa64u3KW+r1rcVtivlIiAVpuzcTFgSsngi+McsE/7vlQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683290728;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ro/VOFl72UDWFwy8gwNK93pOtDrJEFznvt3NXDl6cF8=;
-	b=65zpCtdzuEaRqOzhfQTeNfeiCJfu8TviFjuPm0aorQPKM8pLdEAQ4DrGamxrKih4/79CxI
-	kPU4Ye7GnkFx6vAA==
-To: Andrew Cooper <andrew.cooper3@citrix.com>, LKML
- <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, David Woodhouse <dwmw2@infradead.org>, Brian Gerst
- <brgerst@gmail.com>, Arjan van de Veen <arjan@linux.intel.com>, Paolo
- Bonzini <pbonzini@redhat.com>, Paul McKenney <paulmck@kernel.org>, Tom
- Lendacky <thomas.lendacky@amd.com>, Sean Christopherson
- <seanjc@google.com>, Oleksandr Natalenko <oleksandr@natalenko.name>, Paul
- Menzel <pmenzel@molgen.mpg.de>, "Guilherme G. Piccoli"
- <gpiccoli@igalia.com>, Piotr Gorski <lucjan.lucjanov@gmail.com>, Usama
- Arif <usama.arif@bytedance.com>, Juergen Gross <jgross@suse.com>, Boris
- Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org,
- Russell King <linux@armlinux.org.uk>, Arnd Bergmann <arnd@arndb.de>,
- linux-arm-kernel@lists.infradead.org, Catalin Marinas
- <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Guo Ren
- <guoren@kernel.org>, linux-csky@vger.kernel.org, Thomas Bogendoerfer
- <tsbogend@alpha.franken.de>, linux-mips@vger.kernel.org, "James E.J.
- Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller
- <deller@gmx.de>, linux-parisc@vger.kernel.org, Paul Walmsley
- <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- linux-riscv@lists.infradead.org, Mark Rutland <mark.rutland@arm.com>,
- Sabin Rapan <sabrapan@amazon.com>, "Michael Kelley (LINUX)"
- <mikelley@microsoft.com>
-Subject: Re: [patch V2 34/38] x86/cpu/amd; Invoke
- detect_extended_topology_early() on boot CPU
-In-Reply-To: <38b259bb-050b-023e-4f43-212f95f022ac@citrix.com>
-References: <20230504185733.126511787@linutronix.de>
- <20230504185938.179661118@linutronix.de>
- <38b259bb-050b-023e-4f43-212f95f022ac@citrix.com>
-Date: Fri, 05 May 2023 14:45:28 +0200
-Message-ID: <87354b3q1j.ffs@tglx>
+X-Inumbo-ID: 899ce7c8-eb45-11ed-b226-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1683291942;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=4e+XjBWakkBin20cYWqiIerVP51elQbRzoIyhzyYm2o=;
+  b=hakdqJd5ugNOJu+NI7hp7CCMJakGJ0XOh85aSLQzHfY/zjepDZYtQOBI
+   7ImEGnMgX8DCY90zs1SyY0+WccGI5EIis5aMRAc1cl/1eLZXZZCz00svK
+   Hy+1byRfDqR/cxXUhMmjfGg47QOBjDx8KLLlmJT/16U3A32jNCC2eG/dL
+   4=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 108401386
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+IronPort-Data: A9a23:3NIipq9xDPUPxShaHkxMDrUDmX6TJUtcMsCJ2f8bNWPcYEJGY0x3z
+ GEfXjyOaKvbYjenKNgiaIiypEhU7Z+Ax4RrGQRo+Cg8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
+ 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ire7kI+1BjOkGlA5AdmOKgW5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkl3z
+ tIheWwEbSrEpNOO6oK3dvlPq8EseZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGOkcUUrsUIMtWcOOAr3/zaTBH7nmSorI6+TP7xw1tyrn9dtHSf7RmQO0MxhbE/
+ judrzqR7hcyFNCWwjO6/VCW1tTCw33LcoMqReyz36s/6LGU7jNKU0BHPbehmtGph0j7V99BJ
+ kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c/h6HvA+6QqN4rHJ+AvfDW8BJhZac8AvvsIyQT0s1
+ 3eKksnvCDgpt6eaIVqC8p+EoDX0PjIaRUcAeCsFQA0t89Tl5oYpgXryos1LSfDvyIevQHepn
+ m7M9XJl71kOsSIV/5yA02mW3zuvnN/qfzYf1gnrTkGI6wwsMeZJeLeUBUjnAedoddjJFQPc7
+ SFdxKBy/8hVU8jTyXXlrPElWejwuq3baGC0bUtHRcFJyti7x5K0kWm8ChlaLVwhDMsLcCSBj
+ KT76VIIv8870JdHgMZKj2ON5ycCl/KI+SzNDKy8Uza3SsEZmPW71C9vf1WM+GvmjVIhl6oyU
+ b/CL5b3VyxEVf02lGHpLwv47YLHOwhknT+DLXwF503PPUWiiI69Fu5ebQrmghER56KYugTFm
+ +ti2z+x40wHCoXWO3CHmbP/2HhWdRDX87iq8Z0IHgNCSyI6cFwc5wj5nep9J9c/wPsIxo8lP
+ BiVAydl9bY2vlWfQS3iV5ypQOqHsUpXxZ7jARERAA==
+IronPort-HdrOrdr: A9a23:oVL1Eq+3qKMuWJ8BjdJuk+DfI+orL9Y04lQ7vn2ZKCYlFPBw8v
+ rF8cjzuiWUtN98YhEdcKm7VpVoIkmskqKdg7NhWItKNTOO0ACVxedZnOjfKlXbdxEWndQtsZ
+ uIHZIOauEZ0jBB4voTh2GDYq8d/OU=
+X-Talos-CUID: =?us-ascii?q?9a23=3ARQHoHWuV73GsVFdrnZOoiJKA6IscSVPknSvZIHX?=
+ =?us-ascii?q?/KldRYo2ZdU+z1aZrxp8=3D?=
+X-Talos-MUID: 9a23:f41KWAsS4PDmOULOs82npD1rP85X7IaUWHsAz8s2kci8ZH17EmLI
+X-IronPort-AV: E=Sophos;i="5.99,252,1677560400"; 
+   d="scan'208";a="108401386"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
+	<julien@xen.org>
+Subject: [PATCH 1/2] LICENSES: Improve the legibility of these files
+Date: Fri, 5 May 2023 14:05:32 +0100
+Message-ID: <20230505130533.3580545-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230505130533.3580545-1-andrew.cooper3@citrix.com>
+References: <20230505130533.3580545-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-On Fri, May 05 2023 at 00:04, Andrew Cooper wrote:
-> On 04/05/2023 8:02 pm, Thomas Gleixner wrote:
->> From: Thomas Gleixner <tglx@linutronix.de>
->>
->> The early detection stores the extended topology leaf number which is
->> required for parallel hotplug.
->>
->> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
->
-> It occurs to me that this and the previous patch are stale given that we
-> no longer look at CPUID in the trampoline.
->
-> They're probably useful changes in isolation, but the commit messages
-> want adjusting to remove the association with parallel boot.
+A few newlines go a very long way
 
-Duh. Indeed. Completely forgot about that.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+---
+ LICENSES/BSD-2-Clause       | 4 ++++
+ LICENSES/BSD-3-Clause       | 4 ++++
+ LICENSES/BSD-3-Clause-Clear | 4 ++++
+ LICENSES/CC-BY-4.0          | 5 +++++
+ LICENSES/GPL-2.0            | 5 +++++
+ LICENSES/LGPL-2.0           | 6 ++++++
+ LICENSES/LGPL-2.1           | 6 ++++++
+ LICENSES/MIT                | 4 ++++
+ 8 files changed, 38 insertions(+)
+
+diff --git a/LICENSES/BSD-2-Clause b/LICENSES/BSD-2-Clause
+index da366e2ce50b..694d8c93221c 100644
+--- a/LICENSES/BSD-2-Clause
++++ b/LICENSES/BSD-2-Clause
+@@ -1,10 +1,14 @@
+ Valid-License-Identifier: BSD-2-Clause
++
+ SPDX-URL: https://spdx.org/licenses/BSD-2-Clause.html
++
+ Usage-Guide:
++
+   To use the BSD 2-clause "Simplified" License put the following SPDX
+   tag/value pair into a comment according to the placement guidelines in
+   the licensing rules documentation:
+     SPDX-License-Identifier: BSD-2-Clause
++
+ License-Text:
+ 
+ Copyright (c) <year> <owner> . All rights reserved.
+diff --git a/LICENSES/BSD-3-Clause b/LICENSES/BSD-3-Clause
+index 34c7f057c8d5..1441947f92e0 100644
+--- a/LICENSES/BSD-3-Clause
++++ b/LICENSES/BSD-3-Clause
+@@ -1,10 +1,14 @@
+ Valid-License-Identifier: BSD-3-Clause
++
+ SPDX-URL: https://spdx.org/licenses/BSD-3-Clause.html
++
+ Usage-Guide:
++
+   To use the BSD 3-clause "New" or "Revised" License put the following SPDX
+   tag/value pair into a comment according to the placement guidelines in
+   the licensing rules documentation:
+     SPDX-License-Identifier: BSD-3-Clause
++
+ License-Text:
+ 
+ Copyright (c) <year> <owner> . All rights reserved.
+diff --git a/LICENSES/BSD-3-Clause-Clear b/LICENSES/BSD-3-Clause-Clear
+index e53b56092b90..2b27f24a65a0 100644
+--- a/LICENSES/BSD-3-Clause-Clear
++++ b/LICENSES/BSD-3-Clause-Clear
+@@ -1,10 +1,14 @@
+ Valid-License-Identifier: BSD-3-Clause-Clear
++
+ SPDX-URL: https://spdx.org/licenses/BSD-3-Clause-Clear.html
++
+ Usage-Guide:
++
+   To use the BSD 3-clause "Clear" License put the following SPDX
+   tag/value pair into a comment according to the placement guidelines in
+   the licensing rules documentation:
+     SPDX-License-Identifier: BSD-3-Clause-Clear
++
+ License-Text:
+ 
+ The Clear BSD License
+diff --git a/LICENSES/CC-BY-4.0 b/LICENSES/CC-BY-4.0
+index 27dfefa95ccf..4197ceb180ff 100644
+--- a/LICENSES/CC-BY-4.0
++++ b/LICENSES/CC-BY-4.0
+@@ -1,15 +1,20 @@
+ Valid-License-Identifier: CC-BY-4.0
++
+ SPDX-URL: https://spdx.org/licenses/CC-BY-4.0
++
+ Usage-Guide:
++
+   Do NOT use this license for code, but it's acceptable for content like artwork
+   or documentation. When using it for the latter, it's best to use it together
+   with a GPL2 compatible license using "OR", as CC-BY-4.0 texts processed by
+   the kernel's build system might combine it with content taken from more
+   restrictive licenses.
++
+   To use the Creative Commons Attribution 4.0 International license put
+   the following SPDX tag/value pair into a comment according to the
+   placement guidelines in the licensing rules documentation:
+     SPDX-License-Identifier: CC-BY-4.0
++
+ License-Text:
+ 
+ Creative Commons Attribution 4.0 International
+diff --git a/LICENSES/GPL-2.0 b/LICENSES/GPL-2.0
+index 9f09528a8bce..0022a7c17788 100644
+--- a/LICENSES/GPL-2.0
++++ b/LICENSES/GPL-2.0
+@@ -2,11 +2,15 @@ Valid-License-Identifier: GPL-2.0
+ Valid-License-Identifier: GPL-2.0-only
+ Valid-License-Identifier: GPL-2.0+
+ Valid-License-Identifier: GPL-2.0-or-later
++
+ SPDX-URL: https://spdx.org/licenses/GPL-2.0.html
++
+ Usage-Guide:
++
+   To use this license in source code, put one of the following SPDX
+   tag/value pairs into a comment according to the placement
+   guidelines in the licensing rules documentation.
++
+   For 'GNU General Public License (GPL) version 2 only' use:
+     SPDX-License-Identifier: GPL-2.0-only
+   or (now deprecated)
+@@ -15,6 +19,7 @@ Usage-Guide:
+     SPDX-License-Identifier: GPL-2.0+
+   or
+     SPDX-License-Identifier: GPL-2.0-or-later
++
+ License-Text:
+ 
+ 		    GNU GENERAL PUBLIC LICENSE
+diff --git a/LICENSES/LGPL-2.0 b/LICENSES/LGPL-2.0
+index 957d798fe037..2fa16d72eabf 100644
+--- a/LICENSES/LGPL-2.0
++++ b/LICENSES/LGPL-2.0
+@@ -1,15 +1,21 @@
+ Valid-License-Identifier: LGPL-2.0
+ Valid-License-Identifier: LGPL-2.0+
++
+ SPDX-URL: https://spdx.org/licenses/LGPL-2.0.html
++
+ Usage-Guide:
++
+   To use this license in source code, put one of the following SPDX
+   tag/value pairs into a comment according to the placement
+   guidelines in the licensing rules documentation.
++
+   For 'GNU Library General Public License (LGPL) version 2.0 only' use:
+     SPDX-License-Identifier: LGPL-2.0
++
+   For 'GNU Library General Public License (LGPL) version 2.0 or any later
+   version' use:
+     SPDX-License-Identifier: LGPL-2.0+
++
+ License-Text:
+ 
+ GNU LIBRARY GENERAL PUBLIC LICENSE
+diff --git a/LICENSES/LGPL-2.1 b/LICENSES/LGPL-2.1
+index 27bb4342a3e8..b366c7e49199 100644
+--- a/LICENSES/LGPL-2.1
++++ b/LICENSES/LGPL-2.1
+@@ -1,15 +1,21 @@
+ Valid-License-Identifier: LGPL-2.1
+ Valid-License-Identifier: LGPL-2.1+
++
+ SPDX-URL: https://spdx.org/licenses/LGPL-2.1.html
++
+ Usage-Guide:
++
+   To use this license in source code, put one of the following SPDX
+   tag/value pairs into a comment according to the placement
+   guidelines in the licensing rules documentation.
++
+   For 'GNU Lesser General Public License (LGPL) version 2.1 only' use:
+     SPDX-License-Identifier: LGPL-2.1
++
+   For 'GNU Lesser General Public License (LGPL) version 2.1 or any later
+   version' use:
+     SPDX-License-Identifier: LGPL-2.1+
++
+ License-Text:
+ 
+ GNU LESSER GENERAL PUBLIC LICENSE
+diff --git a/LICENSES/MIT b/LICENSES/MIT
+index f33a68ceb3ea..eba1549f93e4 100644
+--- a/LICENSES/MIT
++++ b/LICENSES/MIT
+@@ -1,10 +1,14 @@
+ Valid-License-Identifier: MIT
++
+ SPDX-URL: https://spdx.org/licenses/MIT.html
++
+ Usage-Guide:
++
+   To use the MIT License put the following SPDX tag/value pair into a
+   comment according to the placement guidelines in the licensing rules
+   documentation:
+     SPDX-License-Identifier: MIT
++
+ License-Text:
+ 
+ MIT License
+-- 
+2.30.2
+
 
