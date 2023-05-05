@@ -4,35 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A8CBC77B7C
-	for <xen-devel@archiver.kernel.org>; Fri,  5 May 2023 15:22:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.530419.826025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75327C77B7F
+	for <xen-devel@archiver.kernel.org>; Fri,  5 May 2023 15:31:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.530475.826100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puxGN-0008M8-L5; Fri, 05 May 2023 15:22:27 +0000
+	id 1puxOp-0006Dm-Bj; Fri, 05 May 2023 15:31:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 530419.826025; Fri, 05 May 2023 15:22:27 +0000
+Received: by outflank-mailman (output) from mailman id 530475.826100; Fri, 05 May 2023 15:31:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1puxGN-0008Iz-FC; Fri, 05 May 2023 15:22:27 +0000
-Received: by outflank-mailman (input) for mailman id 530419;
- Fri, 05 May 2023 15:22:03 +0000
+	id 1puxOp-0006Df-8o; Fri, 05 May 2023 15:31:11 +0000
+Received: by outflank-mailman (input) for mailman id 530475;
+ Fri, 05 May 2023 15:31:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=C6Wy=A2=digikod.net=mic@srs-se1.protection.inumbo.net>)
- id 1puxFz-0007pX-BI
- for xen-devel@lists.xenproject.org; Fri, 05 May 2023 15:22:03 +0000
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [2001:1600:4:17::8faa])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9535c569-eb58-11ed-b226-6b7b168915f2;
- Fri, 05 May 2023 17:22:02 +0200 (CEST)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4QCZD81Wj3zMqHLq;
- Fri,  5 May 2023 17:22:00 +0200 (CEST)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4QCZD73gl0zMpxBk; Fri,  5 May 2023 17:21:59 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=fp4m=A2=citrix.com=prvs=4826eee3f=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1puxOn-0006DZ-Cm
+ for xen-devel@lists.xenproject.org; Fri, 05 May 2023 15:31:09 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d91dfa4f-eb59-11ed-b226-6b7b168915f2;
+ Fri, 05 May 2023 17:31:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,546 +38,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9535c569-eb58-11ed-b226-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=digikod.net;
-	s=20191114; t=1683300120;
-	bh=lpToIjkPWA0duCR50VLguq+aftI5CkhRhLIM9+Y09DI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=zFJPl8PCpV0TqwQBoPoSGHQX+/8+SSuy0c9K2NPBDqUtmLq0QmGY7FWD3HryhaVm/
-	 17tCkfTiTGYBupyQ9RSGCsspEYrGNJuhBEUcpQDTrOdzsDu04Esrk+DE1xaHkpmpk1
-	 MM8P5jZUL4ILscFaudbqPEsff1UIBvirPP3WnImg=
-From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To: Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Kees Cook <keescook@chromium.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>
-Cc: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-	Alexander Graf <graf@amazon.com>,
-	Forrest Yuan Yu <yuanyu@google.com>,
-	James Morris <jamorris@linux.microsoft.com>,
-	John Andersen <john.s.andersen@intel.com>,
-	Liran Alon <liran.alon@oracle.com>,
-	"Madhavan T . Venkataraman" <madvenka@linux.microsoft.com>,
-	Marian Rotariu <marian.c.rotariu@gmail.com>,
-	=?UTF-8?q?Mihai=20Don=C8=9Bu?= <mdontu@bitdefender.com>,
-	=?UTF-8?q?Nicu=C8=99or=20C=C3=AE=C8=9Bu?= <nicu.citu@icloud.com>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Thara Gopinath <tgopinath@microsoft.com>,
-	Will Deacon <will@kernel.org>,
-	Zahra Tarkhani <ztarkhani@microsoft.com>,
-	=?UTF-8?q?=C8=98tefan=20=C8=98icleru?= <ssicleru@bitdefender.com>,
-	dev@lists.cloudhypervisor.org,
-	kvm@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-security-module@vger.kernel.org,
-	qemu-devel@nongnu.org,
-	virtualization@lists.linux-foundation.org,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v1 3/9] virt: Implement Heki common code
-Date: Fri,  5 May 2023 17:20:40 +0200
-Message-Id: <20230505152046.6575-4-mic@digikod.net>
-In-Reply-To: <20230505152046.6575-1-mic@digikod.net>
-References: <20230505152046.6575-1-mic@digikod.net>
+X-Inumbo-ID: d91dfa4f-eb59-11ed-b226-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1683300666;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=pd6I1EXHaLBuaVUf35P+v7jHRWsGbpVWYeZwKsxvbI4=;
+  b=ZB0YRwaXS9HqLH8x2ILKW0zepcElfgKob2wJGOfujFO+GAavNbVJA/nW
+   R5+6Ac5OnoMiG6HLksjs/nw7IL57UStapxr3z5PAFS4G5oxyCoHkduswZ
+   8CNU6GR/Ofa1rS7bSYUaDvHLtWOypAPFU/TqY6WTX9uFplb6K8Lbf37ah
+   8=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 4.0
+X-MesageID: 106778848
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.123
+X-Policy: $RELAYED
+IronPort-Data: A9a23:sJsI5KoFxnawG7lFbZlWSLf1km5eBmIyZRIvgKrLsJaIsI4StFCzt
+ garIBnXPquDZGPzctslYdm3oUlUucSAnIA2SVNqpS5kFi1Dp5uZCYyVIHmrMnLJJKUvbq7FA
+ +Y2MYCccZ9uHhcwgj/3b9ANeFEljfngqoLUUbKCYWYpA1c/Ek/NsDo788YhmIlknNOlNA2Ev
+ NL2sqX3NUSsnjV5KQr40YrawP9UlKm06WJwUmAWP6gR5weDzyRNVvrzGInqR5fGatgMdgKFb
+ 76rIIGRpgvx4xorA9W5pbf3GmVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0MC+7vw6hjdFpo
+ OihgLTrIesf0g8gr8xGO/VQO3kW0aSrY9YrK1Dn2SCY5xWun3cBX5yCpaz5VGEV0r8fPI1Ay
+ RAXAB9TTh+Fndm9+rmiWMln2sMAffPuB4xK7xmMzRmBZRonaZXKQqGM7t5ExjYgwMtJGJ4yZ
+ eJAN2ApNk6ZJUQSZBFOUslWcOSA3xETdxVRrk6VoqwmpXDe1gVr3JDmMcbPe8zMTsJQ9qqdj
+ jueoTumUkFGZLRzzxKCrW/zvOHEhR/ZXb8KH7+hxNd1jEaMkzl75Bo+CgLg/KjRZlSFc8JSL
+ QkY9zQjqYA29Ve3VZ/tUhugunmGsxUAHd1KHIUSyiuA167V6AaxHXUfQ3hKb9lOnNQtWTUg2
+ 1uNntXoLT9iqruYTTSa7Lj8hSy2ETgYKykFfyBsZQkY59jupqkjgxSJScxseIa8ltDvECv86
+ yyLpiM5wb4UiKY2O76TpA6dxWj2/96QE1Bzv1+MNo640u9nTKH7R4Ou82PQ1/1ZPqaSEl6i7
+ UIBoMfLuYjiEqqxeDyxrPQlRe/5vKzYYWSF3jaDDLF6qW3zpifLkZR4pWgneRw3aptslSrBO
+ he7hO9H2HNE0JJGh4dTapn5NcklxLOI+T/NBqGNNYomjnScmWa6EMBSia24hTqFfLAEy/1XB
+ HtiWZ/E4YwmIapm1iGqYOwWzKUmwCszrUuKG8CglU75jePPPCXKIVvgDGZik8hjtP/UyOkr2
+ 4832zS2J+V3D7SlP3i/HX87JlEWN3krba3LRzhsXrfbeGJOQThxY8I9NJt9I+SJaYwJzLaXl
+ px8M2cEoGfCaYrvcFrRMS8/MuOxBf6SbxsTZEQRALph4FB7Ca7H0UvVX8FfkWUPnAC78cNJc
+ g==
+IronPort-HdrOrdr: A9a23:qVE71q3T0ySNbBavHrvGcgqjBIgkLtp133Aq2lEZdPUCSL3+qy
+ nIpoV56faUslYssR4b8uxoVJPrfZq+z/9ICOsqUotKBzOW3FdARbsKhbcKpQeMJ8SUzIBgPM
+ lbH5SXp7fLfD5HZWqR2njbLz6AquP3lZyVuQ==
+X-Talos-CUID: =?us-ascii?q?9a23=3A9AH+I2iAWrmViYKK6NNScXjCKDJuXSP9w3HKGES?=
+ =?us-ascii?q?CAn97aLbJTnzBwqZfnJ87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AbLj8Kw372EAKKl45AHLNV3l0tTUj5PuzV3oDmo0?=
+ =?us-ascii?q?6mcy5LSdyIgW0kzisXdpy?=
+X-IronPort-AV: E=Sophos;i="5.99,252,1677560400"; 
+   d="scan'208";a="106778848"
+Date: Fri, 5 May 2023 16:30:52 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
+	<julien@xen.org>
+Subject: Re: [PATCH 2/2] LICENSES: Remove the use of deprecated LGPL SPDX tags
+Message-ID: <ZFUhLBm1fzlbpAux@perard>
+References: <20230505130533.3580545-1-andrew.cooper3@citrix.com>
+ <20230505130533.3580545-3-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230505130533.3580545-3-andrew.cooper3@citrix.com>
 
-From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
+On Fri, May 05, 2023 at 02:05:33PM +0100, Andrew Cooper wrote:
+> ---
+>  LICENSES/GPL-2.0                    | 12 ++++++------
+>  LICENSES/LGPL-2.0                   |  8 ++++----
+>  LICENSES/LGPL-2.1                   |  8 ++++----
+> 
+> diff --git a/LICENSES/GPL-2.0 b/LICENSES/GPL-2.0
+> index 0022a7c17788..dcd969aa85b5 100644
+> --- a/LICENSES/GPL-2.0
+> +++ b/LICENSES/GPL-2.0
+> @@ -1,8 +1,9 @@
+> -Valid-License-Identifier: GPL-2.0
+>  Valid-License-Identifier: GPL-2.0-only
+> -Valid-License-Identifier: GPL-2.0+
+>  Valid-License-Identifier: GPL-2.0-or-later
+>  
+> +Deprecated-Identifier: GPL-2.0
+> +Deprecated-Identifier: GPL-2.0+
+> +
+>  SPDX-URL: https://spdx.org/licenses/GPL-2.0.html
 
-Hypervisor Enforced Kernel Integrity (Heki) is a feature that will use
-the hypervisor to enhance guest virtual machine security.
+You probably want to update the URLs as well, this one point to a page
+with a deprecated notice. New url is:
+    https://spdx.org/licenses/GPL-2.0-only.html
 
-Configuration
-=============
+Same remark for the other licences file changed.
 
-Define the config variables for the feature. This feature depends on
-support from the architecture as well as the hypervisor.
+Also, maybe they want to be renamed as well, to match the identifier,
+I'm not sure.
 
-Enabling HEKI
-=============
+Cheers,
 
-Define a kernel command line parameter "heki" to turn the feature on or
-off. By default, Heki is on.
-
-Feature initialization
-======================
-
-The linker script, vmlinux.lds.S, defines a number of sections that are
-loaded in kernel memory. Each of these sections has its own permissions.
-For instance, .text has HEKI_ATTR_MEM_EXEC | HEKI_ATTR_MEM_NOWRITE, and
-.rodata has HEKI_ATTR_MEM_NOWRITE.
-
-Define an architecture specific init function, heki_arch_init(). In this
-function, collect the ranges of all of the sections. These sections will
-be protected in the host page table with their respective permissions so
-that even if the guest kernel is compromised, their permissions cannot
-be changed.
-
-Define heki_early_init() to initialize the feature. For now, this
-function just checks if the feature is enabled and calls
-heki_arch_init().
-
-Define heki_late_init() that protects the sections in the host page
-table. This needs hypervisor support which will be introduced in the
-future.  This function is called at the end of kernel init.
-
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: H. Peter Anvin <hpa@zytor.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Cc: Mickaël Salaün <mic@digikod.net>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Sean Christopherson <seanjc@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
-Cc: Wanpeng Li <wanpengli@tencent.com>
-Signed-off-by: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
-Link: https://lore.kernel.org/r/20230505152046.6575-4-mic@digikod.net
----
- Kconfig                         |   2 +
- arch/x86/Kconfig                |   1 +
- arch/x86/include/asm/sections.h |   4 +
- arch/x86/kernel/setup.c         |  49 ++++++++++++
- include/linux/heki.h            |  90 +++++++++++++++++++++
- init/main.c                     |   3 +
- virt/Makefile                   |   1 +
- virt/heki/Kconfig               |  22 ++++++
- virt/heki/Makefile              |   3 +
- virt/heki/heki.c                | 135 ++++++++++++++++++++++++++++++++
- 10 files changed, 310 insertions(+)
- create mode 100644 include/linux/heki.h
- create mode 100644 virt/heki/Kconfig
- create mode 100644 virt/heki/Makefile
- create mode 100644 virt/heki/heki.c
-
-diff --git a/Kconfig b/Kconfig
-index 745bc773f567..0c844d9bcb03 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -29,4 +29,6 @@ source "lib/Kconfig"
- 
- source "lib/Kconfig.debug"
- 
-+source "virt/heki/Kconfig"
-+
- source "Documentation/Kconfig"
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 3604074a878b..5cf5a7a97811 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -297,6 +297,7 @@ config X86
- 	select FUNCTION_ALIGNMENT_4B
- 	imply IMA_SECURE_AND_OR_TRUSTED_BOOT    if EFI
- 	select HAVE_DYNAMIC_FTRACE_NO_PATCHABLE
-+	select ARCH_SUPPORTS_HEKI		if X86_64
- 
- config INSTRUCTION_DECODER
- 	def_bool y
-diff --git a/arch/x86/include/asm/sections.h b/arch/x86/include/asm/sections.h
-index a6e8373a5170..42ef1e33b8a5 100644
---- a/arch/x86/include/asm/sections.h
-+++ b/arch/x86/include/asm/sections.h
-@@ -18,6 +18,10 @@ extern char __end_of_kernel_reserve[];
- 
- extern unsigned long _brk_start, _brk_end;
- 
-+extern int __start_orc_unwind_ip[], __stop_orc_unwind_ip[];
-+extern struct orc_entry __start_orc_unwind[], __stop_orc_unwind[];
-+extern unsigned int orc_lookup[], orc_lookup_end[];
-+
- static inline bool arch_is_kernel_initmem_freed(unsigned long addr)
- {
- 	/*
-diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
-index 88188549647c..f0ddaf24ab63 100644
---- a/arch/x86/kernel/setup.c
-+++ b/arch/x86/kernel/setup.c
-@@ -11,6 +11,7 @@
- #include <linux/dma-map-ops.h>
- #include <linux/dmi.h>
- #include <linux/efi.h>
-+#include <linux/heki.h>
- #include <linux/ima.h>
- #include <linux/init_ohci1394_dma.h>
- #include <linux/initrd.h>
-@@ -850,6 +851,54 @@ static void __init x86_report_nx(void)
- 	}
- }
- 
-+#ifdef CONFIG_HEKI
-+
-+/*
-+ * Gather all of the statically defined sections so heki_late_init() can
-+ * protect these sections in the host page table.
-+ *
-+ * The sections are defined under "SECTIONS" in vmlinux.lds.S
-+ * Keep this array in sync with SECTIONS.
-+ */
-+struct heki_va_range __initdata heki_va_ranges[] = {
-+	{
-+		.va_start = _stext,
-+		.va_end = _etext,
-+		.attributes = HEKI_ATTR_MEM_NOWRITE | HEKI_ATTR_MEM_EXEC,
-+	},
-+	{
-+		.va_start = __start_rodata,
-+		.va_end = __end_rodata,
-+		.attributes = HEKI_ATTR_MEM_NOWRITE,
-+	},
-+#ifdef CONFIG_UNWINDER_ORC
-+	{
-+		.va_start = __start_orc_unwind_ip,
-+		.va_end = __stop_orc_unwind_ip,
-+		.attributes = HEKI_ATTR_MEM_NOWRITE,
-+	},
-+	{
-+		.va_start = __start_orc_unwind,
-+		.va_end = __stop_orc_unwind,
-+		.attributes = HEKI_ATTR_MEM_NOWRITE,
-+	},
-+	{
-+		.va_start = orc_lookup,
-+		.va_end = orc_lookup_end,
-+		.attributes = HEKI_ATTR_MEM_NOWRITE,
-+	},
-+#endif /* CONFIG_UNWINDER_ORC */
-+};
-+
-+void __init heki_arch_init(void)
-+{
-+	heki.num_static_ranges = ARRAY_SIZE(heki_va_ranges);
-+	heki.static_ranges =
-+		heki_alloc_pa_ranges(heki_va_ranges, heki.num_static_ranges);
-+}
-+
-+#endif /* CONFIG_HEKI */
-+
- /*
-  * Determine if we were loaded by an EFI loader.  If so, then we have also been
-  * passed the efi memmap, systab, etc., so we should use these data structures
-diff --git a/include/linux/heki.h b/include/linux/heki.h
-new file mode 100644
-index 000000000000..e4a3192ba687
---- /dev/null
-+++ b/include/linux/heki.h
-@@ -0,0 +1,90 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Hypervisor Enforced Kernel Integrity (Heki) - Headers
-+ *
-+ * Copyright © 2023 Microsoft Corporation
-+ */
-+
-+#ifndef __HEKI_H__
-+#define __HEKI_H__
-+
-+#ifdef CONFIG_HEKI
-+
-+#include <linux/kvm_types.h>
-+
-+/* Heki attributes for memory pages. */
-+/* clang-format off */
-+#define HEKI_ATTR_MEM_NOWRITE		(1ULL << 0)
-+#define HEKI_ATTR_MEM_EXEC		(1ULL << 1)
-+/* clang-format on */
-+
-+/*
-+ * heki_va_range is used to specify a virtual address range within the kernel
-+ * address space along with their attributes.
-+ */
-+struct heki_va_range {
-+	void *va_start;
-+	void *va_end;
-+	u64 attributes;
-+};
-+
-+/*
-+ * heki_pa_range is passed to the VMM or hypervisor so it can be processed by
-+ * the VMM or the hypervisor based on range attributes. Examples of ranges:
-+ *
-+ *	- a range whose permissions need to be set in the host page table
-+ *	- a range that contains information needed for authentication
-+ *
-+ * When an array of these is passed to the Hypervisor or VMM, the array
-+ * must be in physically contiguous memory.
-+ */
-+struct heki_pa_range {
-+	gfn_t gfn_start;
-+	gfn_t gfn_end;
-+	u64 attributes;
-+};
-+
-+/*
-+ * A hypervisor that supports Heki will instantiate this structure to
-+ * provide hypervisor specific functions for Heki.
-+ */
-+struct heki_hypervisor {
-+	int (*protect_ranges)(struct heki_pa_range *ranges, int num_ranges);
-+	int (*lock_crs)(void);
-+};
-+
-+/*
-+ * If the architecture supports Heki, it will initialize static_ranges in
-+ * early boot.
-+ *
-+ * If the active hypervisor supports Heki, it will plug its heki_hypervisor
-+ * pointer into this heki structure.
-+ */
-+struct heki {
-+	struct heki_pa_range *static_ranges;
-+	int num_static_ranges;
-+	struct heki_hypervisor *hypervisor;
-+};
-+
-+extern struct heki heki;
-+
-+void heki_early_init(void);
-+void heki_arch_init(void);
-+void heki_late_init(void);
-+
-+struct heki_pa_range *heki_alloc_pa_ranges(struct heki_va_range *va_ranges,
-+					   int num_ranges);
-+void heki_free_pa_ranges(struct heki_pa_range *pa_ranges, int num_ranges);
-+
-+#else /* !CONFIG_HEKI */
-+
-+static inline void heki_early_init(void)
-+{
-+}
-+static inline void heki_late_init(void)
-+{
-+}
-+
-+#endif /* CONFIG_HEKI */
-+
-+#endif /* __HEKI_H__ */
-diff --git a/init/main.c b/init/main.c
-index e1c3911d7c70..8649dbb07f18 100644
---- a/init/main.c
-+++ b/init/main.c
-@@ -102,6 +102,7 @@
- #include <linux/stackdepot.h>
- #include <linux/randomize_kstack.h>
- #include <net/net_namespace.h>
-+#include <linux/heki.h>
- 
- #include <asm/io.h>
- #include <asm/bugs.h>
-@@ -999,6 +1000,7 @@ asmlinkage __visible void __init __no_sanitize_address start_kernel(void)
- 	sort_main_extable();
- 	trap_init();
- 	mm_init();
-+	heki_early_init();
- 	poking_init();
- 	ftrace_init();
- 
-@@ -1530,6 +1532,7 @@ static int __ref kernel_init(void *unused)
- 	exit_boot_config();
- 	free_initmem();
- 	mark_readonly();
-+	heki_late_init();
- 
- 	/*
- 	 * Kernel mappings are now finalized - update the userspace page-table
-diff --git a/virt/Makefile b/virt/Makefile
-index 1cfea9436af9..4550dc624466 100644
---- a/virt/Makefile
-+++ b/virt/Makefile
-@@ -1,2 +1,3 @@
- # SPDX-License-Identifier: GPL-2.0-only
- obj-y	+= lib/
-+obj-$(CONFIG_HEKI) += heki/
-diff --git a/virt/heki/Kconfig b/virt/heki/Kconfig
-new file mode 100644
-index 000000000000..9858a827fe17
---- /dev/null
-+++ b/virt/heki/Kconfig
-@@ -0,0 +1,22 @@
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Hypervisor Enforced Kernel Integrity (HEKI)
-+#
-+
-+config HEKI
-+	bool "Hypervisor Enforced Kernel Integrity (Heki)"
-+	default y
-+	depends on !JUMP_LABEL && ARCH_SUPPORTS_HEKI
-+	select KVM_EXTERNAL_WRITE_TRACKING if KVM
-+	help
-+	  This feature enhances guest virtual machine security by taking
-+	  advantage of security features provided by the hypervisor for guests.
-+	  This feature is helpful in maintaining guest virtual machine security
-+	  even after the guest kernel has been compromised.
-+
-+config ARCH_SUPPORTS_HEKI
-+	bool "Architecture support for HEKI"
-+	help
-+	  An architecture should select this when it can successfully build
-+	  and run with CONFIG_HEKI. That is, it should provide all of the
-+	  architecture support required for the HEKI feature.
-diff --git a/virt/heki/Makefile b/virt/heki/Makefile
-new file mode 100644
-index 000000000000..2bc2061c9dfc
---- /dev/null
-+++ b/virt/heki/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+
-+obj-y += heki.o
-diff --git a/virt/heki/heki.c b/virt/heki/heki.c
-new file mode 100644
-index 000000000000..c8cb1b84cceb
---- /dev/null
-+++ b/virt/heki/heki.c
-@@ -0,0 +1,135 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Hypervisor Enforced Kernel Integrity (Heki) - Common code
-+ *
-+ * Copyright © 2023 Microsoft Corporation
-+ */
-+
-+#include <linux/cache.h>
-+#include <linux/heki.h>
-+#include <linux/kernel.h>
-+#include <linux/mm.h>
-+#include <linux/printk.h>
-+#include <linux/types.h>
-+#include <linux/vmalloc.h>
-+
-+#ifdef pr_fmt
-+#undef pr_fmt
-+#endif
-+
-+#define pr_fmt(fmt) "heki-guest: " fmt
-+
-+static bool heki_enabled __ro_after_init = true;
-+
-+struct heki heki = {};
-+
-+struct heki_pa_range *heki_alloc_pa_ranges(struct heki_va_range *va_ranges,
-+					   int num_ranges)
-+{
-+	struct heki_pa_range *pa_ranges, *pa_range;
-+	struct heki_va_range *va_range;
-+	u64 attributes;
-+	size_t size;
-+	int i;
-+
-+	size = PAGE_ALIGN(sizeof(struct heki_pa_range) * num_ranges);
-+	pa_ranges = alloc_pages_exact(size, GFP_KERNEL);
-+	if (!pa_ranges)
-+		return NULL;
-+
-+	for (i = 0; i < num_ranges; i++) {
-+		va_range = &va_ranges[i];
-+		pa_range = &pa_ranges[i];
-+
-+		pa_range->gfn_start = PFN_DOWN(__pa_symbol(va_range->va_start));
-+		pa_range->gfn_end = PFN_UP(__pa_symbol(va_range->va_end)) - 1;
-+		pa_range->attributes = va_range->attributes;
-+
-+		/*
-+		 * WARNING:
-+		 * Leaks addresses, should only be kept for development.
-+		 */
-+		attributes = pa_range->attributes;
-+		pr_warn("Configuring GFN 0x%llx-0x%llx with %s\n",
-+			pa_range->gfn_start, pa_range->gfn_end,
-+			(attributes & HEKI_ATTR_MEM_NOWRITE) ? "[nowrite]" :
-+							       "");
-+	}
-+
-+	return pa_ranges;
-+}
-+
-+void heki_free_pa_ranges(struct heki_pa_range *pa_ranges, int num_ranges)
-+{
-+	size_t size;
-+
-+	size = PAGE_ALIGN(sizeof(struct heki_pa_range) * num_ranges);
-+	free_pages_exact(pa_ranges, size);
-+}
-+
-+void __init heki_early_init(void)
-+{
-+	if (!heki_enabled) {
-+		pr_warn("Disabled\n");
-+		return;
-+	}
-+	pr_warn("Enabled\n");
-+
-+	heki_arch_init();
-+}
-+
-+void heki_late_init(void)
-+{
-+	struct heki_hypervisor *hypervisor = heki.hypervisor;
-+	int ret;
-+
-+	if (!heki_enabled)
-+		return;
-+
-+	if (!heki.static_ranges) {
-+		pr_warn("Architecture did not initialize static ranges\n");
-+		return;
-+	}
-+
-+	/*
-+	 * Hypervisor support will be added in the future. When it is, the
-+	 * hypervisor will be used to protect guest kernel memory and
-+	 * control registers.
-+	 */
-+
-+	if (!hypervisor) {
-+		/* This happens for kernels running on bare metal as well. */
-+		pr_warn("No hypervisor support\n");
-+		goto out;
-+	}
-+
-+	/* Protects statically defined sections in the host page table. */
-+	ret = hypervisor->protect_ranges(heki.static_ranges,
-+					 heki.num_static_ranges);
-+	if (WARN(ret, "Failed to protect static sections: %d\n", ret))
-+		goto out;
-+	pr_warn("Static sections protected\n");
-+
-+	/*
-+	 * Locks control registers so a compromised guest cannot change
-+	 * them.
-+	 */
-+	ret = hypervisor->lock_crs();
-+	if (WARN(ret, "Failed to lock control registers: %d\n", ret))
-+		goto out;
-+	pr_warn("Control registers locked\n");
-+
-+out:
-+	heki_free_pa_ranges(heki.static_ranges, heki.num_static_ranges);
-+	heki.static_ranges = NULL;
-+	heki.num_static_ranges = 0;
-+}
-+
-+static int __init heki_parse_config(char *str)
-+{
-+	if (strtobool(str, &heki_enabled))
-+		pr_warn("Invalid option string for heki: '%s'\n", str);
-+	return 1;
-+}
-+
-+__setup("heki=", heki_parse_config);
 -- 
-2.40.1
-
+Anthony PERARD
 
