@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67B5C7EE24
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531752.827592 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F9EC7EE22
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:44:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531756.827622 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6ls-0006m6-R7; Mon, 08 May 2023 19:43:44 +0000
+	id 1pw6lx-0007vJ-MJ; Mon, 08 May 2023 19:43:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531752.827592; Mon, 08 May 2023 19:43:44 +0000
+Received: by outflank-mailman (output) from mailman id 531756.827622; Mon, 08 May 2023 19:43:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6ls-0006ks-LP; Mon, 08 May 2023 19:43:44 +0000
-Received: by outflank-mailman (input) for mailman id 531752;
- Mon, 08 May 2023 19:43:43 +0000
+	id 1pw6lx-0007tc-FE; Mon, 08 May 2023 19:43:49 +0000
+Received: by outflank-mailman (input) for mailman id 531756;
+ Mon, 08 May 2023 19:43:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6lr-0004Y5-58
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:43 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pw6lw-0004Y5-F4
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:48 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1cf5cbf-edd8-11ed-8611-37d641c3527e;
- Mon, 08 May 2023 21:43:41 +0200 (CEST)
+ id a5b515e3-edd8-11ed-8611-37d641c3527e;
+ Mon, 08 May 2023 21:43:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1cf5cbf-edd8-11ed-8611-37d641c3527e
-Message-ID: <20230508185217.671595388@linutronix.de>
+X-Inumbo-ID: a5b515e3-edd8-11ed-8611-37d641c3527e
+Message-ID: <20230508185217.898282342@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575020;
+	s=2020; t=1683575026;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0q1aETu6bFeN3kD2/0xHoCf/51ZXAzUMjn9pP2AnX0s=;
-	b=cVh3jWdyX+zcrRH936wg6/kt9IRtzA5ofxglmadS4D7yqxXjL+vTnFNlQsOMEiiXu8XUFn
-	oOgQ7PQuxs7incQUDCiP1F1nybF0Kpl9Rx7yedKtJv18/UtElco0r+y+ebysJ8v8BmVIMf
-	tzuEGK9VFeV1JAjK0Rj0BmHngpw8FuJJSGigGCnANdFiBVVRiGWMdyHiHbTp9127mH2nr9
-	ExHcBiTrkoX8YaNmTVJycyoKtdznubwLMVJnHxRoPZNsXHvb5tjynNcMh7iWyq39QScM1f
-	ydIGmovKSBPRr3E0k5xQldSo30IfRQmhDh/Bo/a3TW3dGSYKRC7eC/Me28ck1Q==
+	 references:references; bh=WRyTY63fFKNT8NNe9pdrXSxP97ZO9fcfInZz6PguA8M=;
+	b=1cHMH34GyxfIxkvmlBecr+5mzqthYk0E5c5P4+XqqcL8e6XurHWWxoOFIeJNtH/QSimVPW
+	18V4fky6NzTdKRpcATR0yTdNUZbSMxJNRORImkmezodXTP7pe74xPQQAr7BpbhkgTBLmJ9
+	9+OjV54jcwTxOTA+n9J3KUmsDNgl2gb3hdT1mCXG5keQW7p23s7uTtMRmJhNI8qHCATek2
+	VFYxci2MRuYhxjE+yAzrFzousZ3auxKM0KBHlEanvL+LGxBtvIkKatD++/+hdxq+0bTgJP
+	Q8JQ6UU2zRO8a9/lotv6c8YTYGM7ip1GcZN4ZI6sLMyO//NiTtDVmoUIAZOoIQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575020;
+	s=2020e; t=1683575026;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0q1aETu6bFeN3kD2/0xHoCf/51ZXAzUMjn9pP2AnX0s=;
-	b=wG2ubOdBEVCcWDlSU4MGXW9jUu84w7IsaGsYdweGau1DadNC3D/VSWHEhMpzsnuTaDB8jW
-	jkp8XTT9SW4h9uCw==
+	 references:references; bh=WRyTY63fFKNT8NNe9pdrXSxP97ZO9fcfInZz6PguA8M=;
+	b=a+XTx0gdMg20467/DY65JXjTt0K7JO0GQA4Eac40m+yQL/vp4DDGDsEbZstdM86jzLh2iO
+	AyCWRRDCHHJEPTBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,266 +93,78 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
- "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- David Woodhouse <dwmw@amazon.co.uk>
-Subject: [patch v3 08/36] x86/smpboot: Split up native_cpu_up() into separate
- phases and document them
+ "Michael Kelley (LINUX)" <mikelley@microsoft.com>
+Subject: [patch v3 12/36] [patch V2 12/38] x86/smpboot: Make TSC
+ synchronization function call based
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:43:39 +0200 (CEST)
+Date: Mon,  8 May 2023 21:43:46 +0200 (CEST)
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Thomas Gleixner <tglx@linutronix.de>
 
-There are four logical parts to what native_cpu_up() does on the BSP (or
-on the controlling CPU for a later hotplug):
+Spin-waiting on the control CPU until the AP reaches the TSC
+synchronization is just a waste especially in the case that there is no
+synchronization required.
 
- 1) Wake the AP by sending the INIT/SIPI/SIPI sequence.
+As the synchronization has to run with interrupts disabled the control CPU
+part can just be done from a SMP function call. The upcoming AP issues that
+call async only in the case that synchronization is required.
 
- 2) Wait for the AP to make it as far as wait_for_master_cpu() which
-    sets that CPU's bit in cpu_initialized_mask, then sets the bit in
-    cpu_callout_mask to let the AP proceed through cpu_init().
-
- 3) Wait for the AP to finish cpu_init() and get as far as the
-    smp_callin() call, which sets that CPU's bit in cpu_callin_mask.
-
- 4) Perform the TSC synchronization and wait for the AP to actually
-    mark itself online in cpu_online_mask.
-
-In preparation to allow these phases to operate in parallel on multiple
-APs, split them out into separate functions and document the interactions
-a little more clearly in both the BP and AP code paths.
-
-No functional change intended.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- arch/x86/kernel/smpboot.c |  187 +++++++++++++++++++++++++++++-----------------
- 1 file changed, 121 insertions(+), 66 deletions(-)
+ arch/x86/include/asm/tsc.h |    2 --
+ arch/x86/kernel/smpboot.c  |   20 +++-----------------
+ arch/x86/kernel/tsc_sync.c |   36 +++++++++++-------------------------
+ 3 files changed, 14 insertions(+), 44 deletions(-)
 ---
 
+--- a/arch/x86/include/asm/tsc.h
++++ b/arch/x86/include/asm/tsc.h
+@@ -55,12 +55,10 @@ extern bool tsc_async_resets;
+ #ifdef CONFIG_X86_TSC
+ extern bool tsc_store_and_check_tsc_adjust(bool bootcpu);
+ extern void tsc_verify_tsc_adjust(bool resume);
+-extern void check_tsc_sync_source(int cpu);
+ extern void check_tsc_sync_target(void);
+ #else
+ static inline bool tsc_store_and_check_tsc_adjust(bool bootcpu) { return false; }
+ static inline void tsc_verify_tsc_adjust(bool resume) { }
+-static inline void check_tsc_sync_source(int cpu) { }
+ static inline void check_tsc_sync_target(void) { }
+ #endif
+ 
 --- a/arch/x86/kernel/smpboot.c
 +++ b/arch/x86/kernel/smpboot.c
-@@ -193,6 +193,10 @@ static void smp_callin(void)
- 
- 	wmb();
- 
-+	/*
-+	 * This runs the AP through all the cpuhp states to its target
-+	 * state (CPUHP_ONLINE in the case of serial bringup).
-+	 */
- 	notify_cpu_starting(cpuid);
- 
- 	/*
-@@ -233,14 +237,31 @@ static void notrace start_secondary(void
- 	load_cr3(swapper_pg_dir);
- 	__flush_tlb_all();
- #endif
-+	/*
-+	 * Sync point with wait_cpu_initialized(). Before proceeding through
-+	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
-+	 * own bit in cpu_initialized_mask and then waits for the BSP to set
-+	 * its bit in cpu_callout_mask to release it.
-+	 */
- 	cpu_init_secondary();
- 	rcu_cpu_starting(raw_smp_processor_id());
- 	x86_cpuinit.early_percpu_clock_init();
-+
-+	/*
-+	 * Sync point with wait_cpu_callin(). The AP doesn't wait here
-+	 * but just sets the bit to let the controlling CPU (BSP) know that
-+	 * it's got this far.
-+	 */
- 	smp_callin();
- 
--	/* otherwise gcc will move up smp_processor_id before the cpu_init */
-+	/* Otherwise gcc will move up smp_processor_id() before cpu_init() */
+@@ -278,11 +278,7 @@ static void notrace start_secondary(void
+ 	/* Otherwise gcc will move up smp_processor_id() before cpu_init() */
  	barrier();
--	/* Check TSC synchronization with the control CPU: */
-+
-+	/*
-+	 * Check TSC synchronization with the control CPU, which will do
-+	 * its part of this from wait_cpu_online(), making it an implicit
-+	 * synchronization point.
-+	 */
+ 
+-	/*
+-	 * Check TSC synchronization with the control CPU, which will do
+-	 * its part of this from wait_cpu_online(), making it an implicit
+-	 * synchronization point.
+-	 */
++	/* Check TSC synchronization with the control CPU. */
  	check_tsc_sync_target();
  
  	/*
-@@ -259,6 +280,7 @@ static void notrace start_secondary(void
- 	 * half valid vector space.
- 	 */
- 	lock_vector_lock();
-+	/* Sync point with do_wait_cpu_online() */
- 	set_cpu_online(smp_processor_id(), true);
- 	lapic_online();
- 	unlock_vector_lock();
-@@ -981,17 +1003,13 @@ int common_cpu_up(unsigned int cpu, stru
- /*
-  * NOTE - on most systems this is a PHYSICAL apic ID, but on multiquad
-  * (ie clustered apic addressing mode), this is a LOGICAL apic ID.
-- * Returns zero if CPU booted OK, else error code from
-+ * Returns zero if startup was successfully sent, else error code from
-  * ->wakeup_secondary_cpu.
-  */
- static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
- {
--	/* start_ip had better be page-aligned! */
- 	unsigned long start_ip = real_mode_header->trampoline_start;
- 
--	unsigned long boot_error = 0;
--	unsigned long timeout;
--
- #ifdef CONFIG_X86_64
- 	/* If 64-bit wakeup method exists, use the 64-bit mode trampoline IP */
- 	if (apic->wakeup_secondary_cpu_64)
-@@ -1048,60 +1066,89 @@ static int do_boot_cpu(int apicid, int c
- 	 * - Use an INIT boot APIC message
- 	 */
- 	if (apic->wakeup_secondary_cpu_64)
--		boot_error = apic->wakeup_secondary_cpu_64(apicid, start_ip);
-+		return apic->wakeup_secondary_cpu_64(apicid, start_ip);
- 	else if (apic->wakeup_secondary_cpu)
--		boot_error = apic->wakeup_secondary_cpu(apicid, start_ip);
--	else
--		boot_error = wakeup_secondary_cpu_via_init(apicid, start_ip);
-+		return apic->wakeup_secondary_cpu(apicid, start_ip);
- 
--	if (!boot_error) {
--		/*
--		 * Wait 10s total for first sign of life from AP
--		 */
--		boot_error = -1;
--		timeout = jiffies + 10*HZ;
--		while (time_before(jiffies, timeout)) {
--			if (cpumask_test_cpu(cpu, cpu_initialized_mask)) {
--				/*
--				 * Tell AP to proceed with initialization
--				 */
--				cpumask_set_cpu(cpu, cpu_callout_mask);
--				boot_error = 0;
--				break;
--			}
--			schedule();
--		}
--	}
-+	return wakeup_secondary_cpu_via_init(apicid, start_ip);
-+}
- 
--	if (!boot_error) {
--		/*
--		 * Wait till AP completes initial initialization
--		 */
--		while (!cpumask_test_cpu(cpu, cpu_callin_mask)) {
--			/*
--			 * Allow other tasks to run while we wait for the
--			 * AP to come online. This also gives a chance
--			 * for the MTRR work(triggered by the AP coming online)
--			 * to be completed in the stop machine context.
--			 */
--			schedule();
--		}
--	}
-+static int wait_cpu_cpumask(unsigned int cpu, const struct cpumask *mask)
-+{
-+	unsigned long timeout;
- 
--	if (x86_platform.legacy.warm_reset) {
--		/*
--		 * Cleanup possible dangling ends...
--		 */
--		smpboot_restore_warm_reset_vector();
-+	/*
-+	 * Wait up to 10s for the CPU to report in.
-+	 */
-+	timeout = jiffies + 10*HZ;
-+	while (time_before(jiffies, timeout)) {
-+		if (cpumask_test_cpu(cpu, mask))
-+			return 0;
-+
-+		schedule();
- 	}
-+	return -1;
-+}
- 
--	return boot_error;
-+/*
-+ * Bringup step two: Wait for the target AP to reach cpu_init_secondary()
-+ * and thus wait_for_master_cpu(), then set cpu_callout_mask to allow it
-+ * to proceed.  The AP will then proceed past setting its 'callin' bit
-+ * and end up waiting in check_tsc_sync_target() until we reach
-+ * do_wait_cpu_online() to tend to it.
-+ */
-+static int wait_cpu_initialized(unsigned int cpu)
-+{
-+	/*
-+	 * Wait for first sign of life from AP.
-+	 */
-+	if (wait_cpu_cpumask(cpu, cpu_initialized_mask))
-+		return -1;
-+
-+	cpumask_set_cpu(cpu, cpu_callout_mask);
-+	return 0;
+@@ -1144,21 +1140,11 @@ static void wait_cpu_callin(unsigned int
  }
  
--int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
-+/*
-+ * Bringup step three: Wait for the target AP to reach smp_callin().
-+ * The AP is not waiting for us here so we don't need to parallelise
-+ * this step. Not entirely clear why we care about this, since we just
-+ * proceed directly to TSC synchronization which is the next sync
-+ * point with the AP anyway.
-+ */
-+static void wait_cpu_callin(unsigned int cpu)
-+{
-+	while (!cpumask_test_cpu(cpu, cpu_callin_mask))
-+		schedule();
-+}
-+
-+/*
-+ * Bringup step four: Synchronize the TSC and wait for the target AP
-+ * to reach set_cpu_online() in start_secondary().
-+ */
-+static void wait_cpu_online(unsigned int cpu)
+ /*
+- * Bringup step four: Synchronize the TSC and wait for the target AP
+- * to reach set_cpu_online() in start_secondary().
++ * Bringup step four: Wait for the target AP to reach set_cpu_online() in
++ * start_secondary().
+  */
+ static void wait_cpu_online(unsigned int cpu)
  {
--	int apicid = apic->cpu_present_to_apicid(cpu);
- 	unsigned long flags;
-+
-+	/*
-+	 * Check TSC synchronization with the AP (keep irqs disabled
-+	 * while doing so):
-+	 */
-+	local_irq_save(flags);
-+	check_tsc_sync_source(cpu);
-+	local_irq_restore(flags);
-+
-+	/*
-+	 * Wait for the AP to mark itself online, so the core caller
-+	 * can drop sparse_irq_lock.
-+	 */
-+	while (!cpu_online(cpu))
-+		schedule();
-+}
-+
-+static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
-+{
-+	int apicid = apic->cpu_present_to_apicid(cpu);
- 	int err;
- 
- 	lockdep_assert_irqs_enabled();
-@@ -1142,25 +1189,33 @@ int native_cpu_up(unsigned int cpu, stru
- 		return err;
- 
- 	err = do_boot_cpu(apicid, cpu, tidle);
--	if (err) {
-+	if (err)
- 		pr_err("do_boot_cpu failed(%d) to wakeup CPU#%u\n", err, cpu);
--		return err;
--	}
- 
+-	unsigned long flags;
+-
 -	/*
 -	 * Check TSC synchronization with the AP (keep irqs disabled
 -	 * while doing so):
@@ -361,38 +172,97 @@ Tested-by: Michael Kelley <mikelley@microsoft.com>
 -	local_irq_save(flags);
 -	check_tsc_sync_source(cpu);
 -	local_irq_restore(flags);
-+	return err;
-+}
+-
+ 	/*
+ 	 * Wait for the AP to mark itself online, so the core caller
+ 	 * can drop sparse_irq_lock.
+--- a/arch/x86/kernel/tsc_sync.c
++++ b/arch/x86/kernel/tsc_sync.c
+@@ -245,7 +245,6 @@ bool tsc_store_and_check_tsc_adjust(bool
+  */
+ static atomic_t start_count;
+ static atomic_t stop_count;
+-static atomic_t skip_test;
+ static atomic_t test_runs;
  
--	while (!cpu_online(cpu)) {
--		cpu_relax();
--		touch_nmi_watchdog();
--	}
-+int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
-+{
-+	int ret;
- 
--	return 0;
-+	ret = native_kick_ap(cpu, tidle);
-+	if (ret)
-+		goto out;
-+
-+	ret = wait_cpu_initialized(cpu);
-+	if (ret)
-+		goto out;
-+
-+	wait_cpu_callin(cpu);
-+	wait_cpu_online(cpu);
-+
-+out:
-+	/* Cleanup possible dangling ends... */
-+	if (x86_platform.legacy.warm_reset)
-+		smpboot_restore_warm_reset_vector();
-+
-+	return ret;
+ /*
+@@ -344,21 +343,14 @@ static inline unsigned int loop_timeout(
  }
  
- /**
+ /*
+- * Source CPU calls into this - it waits for the freshly booted
+- * target CPU to arrive and then starts the measurement:
++ * The freshly booted CPU initiates this via an async SMP function call.
+  */
+-void check_tsc_sync_source(int cpu)
++static void check_tsc_sync_source(void *__cpu)
+ {
++	unsigned int cpu = (unsigned long)__cpu;
+ 	int cpus = 2;
+ 
+ 	/*
+-	 * No need to check if we already know that the TSC is not
+-	 * synchronized or if we have no TSC.
+-	 */
+-	if (unsynchronized_tsc())
+-		return;
+-
+-	/*
+ 	 * Set the maximum number of test runs to
+ 	 *  1 if the CPU does not provide the TSC_ADJUST MSR
+ 	 *  3 if the MSR is available, so the target can try to adjust
+@@ -368,16 +360,9 @@ void check_tsc_sync_source(int cpu)
+ 	else
+ 		atomic_set(&test_runs, 3);
+ retry:
+-	/*
+-	 * Wait for the target to start or to skip the test:
+-	 */
+-	while (atomic_read(&start_count) != cpus - 1) {
+-		if (atomic_read(&skip_test) > 0) {
+-			atomic_set(&skip_test, 0);
+-			return;
+-		}
++	/* Wait for the target to start. */
++	while (atomic_read(&start_count) != cpus - 1)
+ 		cpu_relax();
+-	}
+ 
+ 	/*
+ 	 * Trigger the target to continue into the measurement too:
+@@ -397,14 +382,14 @@ void check_tsc_sync_source(int cpu)
+ 	if (!nr_warps) {
+ 		atomic_set(&test_runs, 0);
+ 
+-		pr_debug("TSC synchronization [CPU#%d -> CPU#%d]: passed\n",
++		pr_debug("TSC synchronization [CPU#%d -> CPU#%u]: passed\n",
+ 			smp_processor_id(), cpu);
+ 
+ 	} else if (atomic_dec_and_test(&test_runs) || random_warps) {
+ 		/* Force it to 0 if random warps brought us here */
+ 		atomic_set(&test_runs, 0);
+ 
+-		pr_warn("TSC synchronization [CPU#%d -> CPU#%d]:\n",
++		pr_warn("TSC synchronization [CPU#%d -> CPU#%u]:\n",
+ 			smp_processor_id(), cpu);
+ 		pr_warn("Measured %Ld cycles TSC warp between CPUs, "
+ 			"turning off TSC clock.\n", max_warp);
+@@ -457,11 +442,12 @@ void check_tsc_sync_target(void)
+ 	 * SoCs the TSC is frequency synchronized, but still the TSC ADJUST
+ 	 * register might have been wreckaged by the BIOS..
+ 	 */
+-	if (tsc_store_and_check_tsc_adjust(false) || tsc_clocksource_reliable) {
+-		atomic_inc(&skip_test);
++	if (tsc_store_and_check_tsc_adjust(false) || tsc_clocksource_reliable)
+ 		return;
+-	}
+ 
++	/* Kick the control CPU into the TSC synchronization function */
++	smp_call_function_single(cpumask_first(cpu_online_mask), check_tsc_sync_source,
++				 (unsigned long *)(unsigned long)cpu, 0);
+ retry:
+ 	/*
+ 	 * Register this CPU's participation and wait for the
 
 
 
