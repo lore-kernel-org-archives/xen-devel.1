@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E599C7EE24
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531750.827566 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F19C7EE2A
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531745.827522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lp-0005wj-8s; Mon, 08 May 2023 19:43:41 +0000
+	id 1pw6li-0004ks-JA; Mon, 08 May 2023 19:43:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531750.827566; Mon, 08 May 2023 19:43:41 +0000
+Received: by outflank-mailman (output) from mailman id 531745.827522; Mon, 08 May 2023 19:43:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lp-0005vp-1q; Mon, 08 May 2023 19:43:41 +0000
-Received: by outflank-mailman (input) for mailman id 531750;
- Mon, 08 May 2023 19:43:39 +0000
+	id 1pw6li-0004kd-Ez; Mon, 08 May 2023 19:43:34 +0000
+Received: by outflank-mailman (input) for mailman id 531745;
+ Mon, 08 May 2023 19:43:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6ln-0004GB-6u
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:39 +0000
+ id 1pw6lg-0004GB-Sv
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:32 +0000
 Received: from galois.linutronix.de (galois.linutronix.de
  [2a0a:51c0:0:12e:550::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a0e19a96-edd8-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 21:43:38 +0200 (CEST)
+ id 9d08aa25-edd8-11ed-b226-6b7b168915f2;
+ Mon, 08 May 2023 21:43:32 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0e19a96-edd8-11ed-b226-6b7b168915f2
-Message-ID: <20230508185217.618219949@linutronix.de>
+X-Inumbo-ID: 9d08aa25-edd8-11ed-b226-6b7b168915f2
+Message-ID: <20230508185217.405187204@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575018;
+	s=2020; t=1683575012;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Nq+EVjEHwGvHRlseUbUpbAQd2uYa+p7t28i6JGIOJ78=;
-	b=l050jCE5Rr8v/gugpUq1Ss+TlvOTAU6bHW5tmCokiaoqtw5CJrnjAQqxTBqzm46r10H8V/
-	PN/C85twXsUJTaTtz1N6lrClgA/Gywes1nzaKTKsIwa99M6sRy4sGklJiGciZ0ImlUVQ80
-	BCh6GCvig4h53NBkh/6pnZ/bEmQ5POZmqaNW5u1zjMqAwqiP+mkv0AM8PZR2tBTf7vMFzv
-	Vk5CiVSe4cZsa28TSPkqrniRc0oqqy9ISXDKayjUa0EChnVUegmMMNAcBSr7NGh9c0+rJ5
-	gYcfpjceJWyADjwArci8tisYfWTvchOJq06bNOx2RJdGtIqY/RHVI8A1x+wuBg==
+	 references:references; bh=HvbbbIiCrteaI1bndI/LX3oIuQfCpfxndnpojb5RiKc=;
+	b=BfN8q4YGZrvvr3hwXOfVCQXAM0cSaY1SEoSphmNTsut/rUAni3XtelvN4CHoNkC2+34Ymi
+	TExugThNdfAh5Fp1/heIMO4QUnZPoX/5/+WK/OdLeyR3RF9vIZeGhZsFY4OLhi5HdKiIER
+	/YIJWQAT9QzRFGpqH7CAPTxY9UkNRCpCd4alyqj4+UmOC+6AxHr5xWXJsqeSXPmKwFhv1A
+	ubCJW6/Egd3JKzrvz6jHP0y5xHT+UfGDn1rLC92NRh5X9Mx/ylbzv+ZZQOLMPjHx0w/hZY
+	PLLJPmQ9Y1thsJxqAo8DO9T8VrZNf4ZCHtIxyjWM81zadG9cxhkbFRB3VFi7xA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575018;
+	s=2020e; t=1683575012;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Nq+EVjEHwGvHRlseUbUpbAQd2uYa+p7t28i6JGIOJ78=;
-	b=OBLEtPDPwv/0EcuR38ddNfg8WWZsz2t8tgAu+g3ffoBnaypodVLNrO9gR6tjF5qfnG9zHm
-	9+H9v5nuCGMGmXAw==
+	 references:references; bh=HvbbbIiCrteaI1bndI/LX3oIuQfCpfxndnpojb5RiKc=;
+	b=TGUqtBVLw37zc5671ZnaxyCwD1VN/ytP+JSMajykmRFyOCcIZ2eBHNHYynrijOrC/OQEpW
+	IDlSUjUrSbEGPyCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,72 +95,140 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch v3 07/36] x86/smpboot: Restrict soft_restart_cpu() to SEV
+Subject: [patch v3 03/36] x86/smpboot: Avoid pointless delay calibration if
+ TSC is synchronized
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:43:37 +0200 (CEST)
+Date: Mon,  8 May 2023 21:43:31 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Now that the CPU0 hotplug cruft is gone, the only user is AMD SEV.
+When TSC is synchronized across sockets then there is no reason to
+calibrate the delay for the first CPU which comes up on a socket.
+
+Just reuse the existing calibration value.
+
+This removes 100ms pointlessly wasted time from CPU hotplug per socket.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- arch/x86/kernel/callthunks.c |    2 +-
- arch/x86/kernel/head_32.S    |   14 --------------
- arch/x86/kernel/head_64.S    |    2 +-
- 3 files changed, 2 insertions(+), 16 deletions(-)
+ arch/x86/kernel/smpboot.c |   38 ++++++++++++++++++++++++--------------
+ arch/x86/kernel/tsc.c     |   20 ++++++++++++++++----
+ 2 files changed, 40 insertions(+), 18 deletions(-)
 ---
 
---- a/arch/x86/kernel/callthunks.c
-+++ b/arch/x86/kernel/callthunks.c
-@@ -133,7 +133,7 @@ static bool skip_addr(void *dest)
- 	/* Accounts directly */
- 	if (dest == ret_from_fork)
- 		return true;
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
- 	if (dest == soft_restart_cpu)
- 		return true;
- #endif
---- a/arch/x86/kernel/head_32.S
-+++ b/arch/x86/kernel/head_32.S
-@@ -138,20 +138,6 @@ SYM_CODE_START(startup_32)
- 	jmp .Ldefault_entry
- SYM_CODE_END(startup_32)
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -178,10 +178,7 @@ static void smp_callin(void)
+ 	 */
+ 	apic_ap_setup();
  
--#ifdef CONFIG_HOTPLUG_CPU
--/*
-- * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-- * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-- * unplug. Everything is set up already except the stack.
-- */
--SYM_FUNC_START(soft_restart_cpu)
--	movl initial_stack, %ecx
--	movl %ecx, %esp
--	call *(initial_code)
--1:	jmp 1b
--SYM_FUNC_END(soft_restart_cpu)
--#endif
--
- /*
-  * Non-boot CPU entry point; entered from trampoline.S
-  * We can't lgdt here, because lgdt itself uses a data segment, but
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -375,7 +375,7 @@ SYM_CODE_END(secondary_startup_64)
- #include "verify_cpu.S"
- #include "sev_verify_cbit.S"
+-	/*
+-	 * Save our processor parameters. Note: this information
+-	 * is needed for clock calibration.
+-	 */
++	/* Save our processor parameters. */
+ 	smp_store_cpu_info(cpuid);
  
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
+ 	/*
+@@ -192,14 +189,6 @@ static void smp_callin(void)
+ 
+ 	ap_init_aperfmperf();
+ 
+-	/*
+-	 * Get our bogomips.
+-	 * Update loops_per_jiffy in cpu_data. Previous call to
+-	 * smp_store_cpu_info() stored a value that is close but not as
+-	 * accurate as the value just calculated.
+-	 */
+-	calibrate_delay();
+-	cpu_data(cpuid).loops_per_jiffy = loops_per_jiffy;
+ 	pr_debug("Stack at about %p\n", &cpuid);
+ 
+ 	wmb();
+@@ -212,8 +201,24 @@ static void smp_callin(void)
+ 	cpumask_set_cpu(cpuid, cpu_callin_mask);
+ }
+ 
++static void ap_calibrate_delay(void)
++{
++	/*
++	 * Calibrate the delay loop and update loops_per_jiffy in cpu_data.
++	 * smp_store_cpu_info() stored a value that is close but not as
++	 * accurate as the value just calculated.
++	 *
++	 * As this is invoked after the TSC synchronization check,
++	 * calibrate_delay_is_known() will skip the calibration routine
++	 * when TSC is synchronized across sockets.
++	 */
++	calibrate_delay();
++	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
++}
++
+ static int cpu0_logical_apicid;
+ static int enable_start_cpu0;
++
  /*
-  * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-  * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
+  * Activate a secondary processor.
+  */
+@@ -240,10 +245,15 @@ static void notrace start_secondary(void
+ 
+ 	/* otherwise gcc will move up smp_processor_id before the cpu_init */
+ 	barrier();
++	/* Check TSC synchronization with the control CPU: */
++	check_tsc_sync_target();
++
+ 	/*
+-	 * Check TSC synchronization with the boot CPU:
++	 * Calibrate the delay loop after the TSC synchronization check.
++	 * This allows to skip the calibration when TSC is synchronized
++	 * across sockets.
+ 	 */
+-	check_tsc_sync_target();
++	ap_calibrate_delay();
+ 
+ 	speculative_store_bypass_ht_init();
+ 
+--- a/arch/x86/kernel/tsc.c
++++ b/arch/x86/kernel/tsc.c
+@@ -1598,10 +1598,7 @@ void __init tsc_init(void)
+ 
+ #ifdef CONFIG_SMP
+ /*
+- * If we have a constant TSC and are using the TSC for the delay loop,
+- * we can skip clock calibration if another cpu in the same socket has already
+- * been calibrated. This assumes that CONSTANT_TSC applies to all
+- * cpus in the socket - this should be a safe assumption.
++ * Check whether existing calibration data can be reused.
+  */
+ unsigned long calibrate_delay_is_known(void)
+ {
+@@ -1609,6 +1606,21 @@ unsigned long calibrate_delay_is_known(v
+ 	int constant_tsc = cpu_has(&cpu_data(cpu), X86_FEATURE_CONSTANT_TSC);
+ 	const struct cpumask *mask = topology_core_cpumask(cpu);
+ 
++	/*
++	 * If TSC has constant frequency and TSC is synchronized across
++	 * sockets then reuse CPU0 calibration.
++	 */
++	if (constant_tsc && !tsc_unstable)
++		return cpu_data(0).loops_per_jiffy;
++
++	/*
++	 * If TSC has constant frequency and TSC is not synchronized across
++	 * sockets and this is not the first CPU in the socket, then reuse
++	 * the calibration value of an already online CPU on that socket.
++	 *
++	 * This assumes that CONSTANT_TSC is consistent for all CPUs in a
++	 * socket.
++	 */
+ 	if (!constant_tsc || !mask)
+ 		return 0;
+ 
 
 
 
