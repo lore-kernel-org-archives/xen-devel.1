@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0532C87FDC
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 11:48:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531415.827085 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13E6C77B7F
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 11:49:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531420.827094 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pvzMB-0007S9-L8; Mon, 08 May 2023 11:48:43 +0000
+	id 1pvzMN-0008Jp-W6; Mon, 08 May 2023 11:48:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531415.827085; Mon, 08 May 2023 11:48:43 +0000
+Received: by outflank-mailman (output) from mailman id 531420.827094; Mon, 08 May 2023 11:48:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pvzMB-0007S0-Hc; Mon, 08 May 2023 11:48:43 +0000
-Received: by outflank-mailman (input) for mailman id 531415;
- Mon, 08 May 2023 11:48:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pvzMN-0008Ii-TJ; Mon, 08 May 2023 11:48:55 +0000
+Received: by outflank-mailman (input) for mailman id 531420;
+ Mon, 08 May 2023 11:48:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SOTd=A5=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1pvzMA-0004FA-BZ
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 11:48:42 +0000
+ id 1pvzMM-00040G-IB
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 11:48:54 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 474ba90e-ed96-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 13:48:41 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4df9619e-ed96-11ed-8611-37d641c3527e;
+ Mon, 08 May 2023 13:48:52 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 687D81FE43;
- Mon,  8 May 2023 11:48:41 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A482E1FE46;
+ Mon,  8 May 2023 11:48:52 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2AD791346B;
- Mon,  8 May 2023 11:48:41 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 713EF1346B;
+ Mon,  8 May 2023 11:48:52 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id IpQiCZnhWGRJNwAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 08 May 2023 11:48:41 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 6TECGqThWGRrNwAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 08 May 2023 11:48:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,104 +53,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 474ba90e-ed96-11ed-b226-6b7b168915f2
+X-Inumbo-ID: 4df9619e-ed96-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1683546521; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1683546532; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=HoO5vhLxJfHeUF6CaN4B5hMFR55WKl59O7dl7jFaRfo=;
-	b=Yz3s02wIMFCTIEwsPY87/4US/J/9IK8jK5QOI19zTpnkV5jTVuuwlHFacpPhig//JplOeA
-	+2UgwIzGy6D00Eh2C19Udvu9LoX0bkWQNaQTzkRujwPMJtb9i02aAOWU/pDNJYz/eQvoih
-	xIWnQ1eZcXqhAgqu+4Ug8dc78QTZ33I=
+	bh=WygQN3u5bQxjz80/E369O7e/SKWPMMg7pxJNcjOOWFg=;
+	b=mvlYw5GR4eaquZyEsApbJk1NuKRWSUXDggk7PfmrKXIZZygpP9dh8q6X9ic/dw1zp6BvhV
+	IVNf8T6aJLqpgXRtrIiyHROxWYy3ESsNET0ASkNexOJsFHiGTUZB1mXUTUlGvj4qtrEnHV
+	ZEEit0tOUdX5l545/bDkQo3EFzy0lRA=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v5 08/14] tools/xenstore: add accounting trace support
-Date: Mon,  8 May 2023 13:47:48 +0200
-Message-Id: <20230508114754.31514-9-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v5 10/14] tools/xenstore: switch transaction accounting to generic accounting
+Date: Mon,  8 May 2023 13:47:50 +0200
+Message-Id: <20230508114754.31514-11-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230508114754.31514-1-jgross@suse.com>
 References: <20230508114754.31514-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new trace switch "acc" and the related trace calls.
-
-The "acc" switch is off per default.
+As transaction accounting is active for unprivileged domains only, it
+can easily be added to the generic per-domain accounting.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.c   |  2 +-
- tools/xenstore/xenstored_core.h   |  1 +
- tools/xenstore/xenstored_domain.c | 10 ++++++++++
- 3 files changed, 12 insertions(+), 1 deletion(-)
+V5:
+- use list_empty(&conn->transaction_list) for detection of "no
+  transaction active" (Julien Grall)
+---
+ tools/xenstore/xenstored_core.c        |  3 +--
+ tools/xenstore/xenstored_core.h        |  1 -
+ tools/xenstore/xenstored_domain.c      | 21 ++++++++++++++++++---
+ tools/xenstore/xenstored_domain.h      |  4 ++++
+ tools/xenstore/xenstored_transaction.c | 14 ++++++--------
+ 5 files changed, 29 insertions(+), 14 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index e7f86f9487..15654730a6 100644
+index 3caf9e45dc..c98d30561f 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -2750,7 +2750,7 @@ static void set_quota(const char *arg, bool soft)
- 
- /* Sorted by bit values of TRACE_* flags. Flag is (1u << index). */
- const char *const trace_switches[] = {
--	"obj", "io", "wrl",
-+	"obj", "io", "wrl", "acc",
- 	NULL
- };
- 
+@@ -2087,7 +2087,7 @@ static void consider_message(struct connection *conn)
+ 	 * stalled. This will ignore new requests until Live-Update happened
+ 	 * or it was aborted.
+ 	 */
+-	if (lu_is_pending() && conn->transaction_started == 0 &&
++	if (lu_is_pending() && list_empty(&conn->transaction_list) &&
+ 	    conn->in->hdr.msg.type == XS_TRANSACTION_START) {
+ 		trace("Delaying transaction start for connection %p req_id %u\n",
+ 		      conn, conn->in->hdr.msg.req_id);
+@@ -2194,7 +2194,6 @@ struct connection *new_connection(const struct interface_funcs *funcs)
+ 	new->funcs = funcs;
+ 	new->is_ignored = false;
+ 	new->is_stalled = false;
+-	new->transaction_started = 0;
+ 	INIT_LIST_HEAD(&new->out_list);
+ 	INIT_LIST_HEAD(&new->acc_list);
+ 	INIT_LIST_HEAD(&new->ref_list);
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 1f811f38cb..3e0734a6c6 100644
+index 5a11dc1231..3564d85d7d 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -302,6 +302,7 @@ extern unsigned int trace_flags;
- #define TRACE_OBJ	0x00000001
- #define TRACE_IO	0x00000002
- #define TRACE_WRL	0x00000004
-+#define TRACE_ACC	0x00000008
- extern const char *const trace_switches[];
- int set_trace_switch(const char *arg);
+@@ -151,7 +151,6 @@ struct connection
+ 	/* List of in-progress transactions. */
+ 	struct list_head transaction_list;
+ 	uint32_t next_transaction_id;
+-	unsigned int transaction_started;
+ 	time_t ta_start_time;
  
+ 	/* List of delayed requests. */
 diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index a35ed97fd7..03825ca24b 100644
+index 03825ca24b..25c6d20036 100644
 --- a/tools/xenstore/xenstored_domain.c
 +++ b/tools/xenstore/xenstored_domain.c
-@@ -538,6 +538,12 @@ static struct domain *find_domain_by_domid(unsigned int domid)
- 	return (d && d->introduced) ? d : NULL;
+@@ -417,12 +417,10 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+ {
+ 	struct domain *d = find_domain_struct(domid);
+ 	char *resp;
+-	int ta;
+ 
+ 	if (!d)
+ 		return ENOENT;
+ 
+-	ta = d->conn ? d->conn->transaction_started : 0;
+ 	resp = talloc_asprintf(ctx, "Domain %u:\n", domid);
+ 	if (!resp)
+ 		return ENOMEM;
+@@ -433,7 +431,7 @@ int domain_get_quota(const void *ctx, struct connection *conn,
+ 
+ 	ent(nodes, d->acc[ACC_NODES]);
+ 	ent(watches, d->acc[ACC_WATCH]);
+-	ent(transactions, ta);
++	ent(transactions, d->acc[ACC_TRANS]);
+ 	ent(outstanding, d->acc[ACC_OUTST]);
+ 	ent(memory, d->acc[ACC_MEM]);
+ 
+@@ -1298,6 +1296,23 @@ void domain_outstanding_dec(struct connection *conn, unsigned int domid)
+ 	domain_acc_add(conn, domid, ACC_OUTST, -1, true);
  }
  
-+#define trace_acc(...)				\
-+do {						\
-+	if (trace_flags & TRACE_ACC)		\
-+		trace("acc: " __VA_ARGS__);	\
-+} while (0)
++void domain_transaction_inc(struct connection *conn)
++{
++	domain_acc_add(conn, conn->id, ACC_TRANS, 1, true);
++}
 +
- int acc_fix_domains(struct list_head *head, bool chk_quota, bool update)
- {
- 	struct changed_domain *cd;
-@@ -601,6 +607,8 @@ static int acc_add_changed_dom(const void *ctx, struct list_head *head,
- 		return 0;
++void domain_transaction_dec(struct connection *conn)
++{
++	domain_acc_add(conn, conn->id, ACC_TRANS, -1, true);
++}
++
++unsigned int domain_transaction_get(struct connection *conn)
++{
++	return (domain_is_unprivileged(conn))
++		? domain_acc_add(conn, conn->id, ACC_TRANS, 0, true)
++		: 0;
++}
++
+ static wrl_creditt wrl_config_writecost      = WRL_FACTOR;
+ static wrl_creditt wrl_config_rate           = WRL_RATE   * WRL_FACTOR;
+ static wrl_creditt wrl_config_dburst         = WRL_DBURST * WRL_FACTOR;
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 086133407b..01b6f1861b 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -32,6 +32,7 @@ enum accitem {
+ 	ACC_WATCH = ACC_TR_N,
+ 	ACC_OUTST,
+ 	ACC_MEM,
++	ACC_TRANS,
+ 	ACC_N,			/* Number of elements per domain. */
+ };
  
- 	errno = 0;
-+	trace_acc("local change domid %u: what=%u %d add %d\n", domid, what,
-+		  cd->acc[what], val);
- 	cd->acc[what] += val;
+@@ -113,6 +114,9 @@ void domain_watch_dec(struct connection *conn);
+ int domain_watch(struct connection *conn);
+ void domain_outstanding_inc(struct connection *conn);
+ void domain_outstanding_dec(struct connection *conn, unsigned int domid);
++void domain_transaction_inc(struct connection *conn);
++void domain_transaction_dec(struct connection *conn);
++unsigned int domain_transaction_get(struct connection *conn);
+ int domain_get_quota(const void *ctx, struct connection *conn,
+ 		     unsigned int domid);
  
- 	return cd->acc[what];
-@@ -1112,6 +1120,8 @@ static int domain_acc_add(struct connection *conn, unsigned int domid,
- 		return domain_acc_add_valid(d, what, ret);
- 	}
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index 11c8bcec84..b9e9d76a1f 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -479,8 +479,7 @@ int do_transaction_start(const void *ctx, struct connection *conn,
+ 	if (conn->transaction)
+ 		return EBUSY;
  
-+	trace_acc("global change domid %u: what=%u %u add %d\n", domid, what,
-+		  d->acc[what], add);
- 	d->acc[what] = domain_acc_add_valid(d, what, add);
+-	if (domain_is_unprivileged(conn) &&
+-	    conn->transaction_started > quota_max_transaction)
++	if (domain_transaction_get(conn) > quota_max_transaction)
+ 		return ENOSPC;
  
- 	return d->acc[what];
+ 	/* Attach transaction to ctx for autofree until it's complete */
+@@ -502,12 +501,12 @@ int do_transaction_start(const void *ctx, struct connection *conn,
+ 	} while (!IS_ERR(exists));
+ 
+ 	/* Now we own it. */
++	if (list_empty(&conn->transaction_list))
++		conn->ta_start_time = time(NULL);
+ 	list_add_tail(&trans->list, &conn->transaction_list);
+ 	talloc_steal(conn, trans);
+ 	talloc_set_destructor(trans, destroy_transaction);
+-	if (!conn->transaction_started)
+-		conn->ta_start_time = time(NULL);
+-	conn->transaction_started++;
++	domain_transaction_inc(conn);
+ 	wrl_ntransactions++;
+ 
+ 	snprintf(id_str, sizeof(id_str), "%u", trans->id);
+@@ -533,8 +532,8 @@ int do_transaction_end(const void *ctx, struct connection *conn,
+ 
+ 	conn->transaction = NULL;
+ 	list_del(&trans->list);
+-	conn->transaction_started--;
+-	if (!conn->transaction_started)
++	domain_transaction_dec(conn);
++	if (list_empty(&conn->transaction_list))
+ 		conn->ta_start_time = 0;
+ 
+ 	chk_quota = trans->node_created && domain_is_unprivileged(conn);
+@@ -588,7 +587,6 @@ void conn_delete_all_transactions(struct connection *conn)
+ 
+ 	assert(conn->transaction == NULL);
+ 
+-	conn->transaction_started = 0;
+ 	conn->ta_start_time = 0;
+ }
+ 
 -- 
 2.35.3
 
