@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2305C7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:47:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531792.827728 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51331C7EE22
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:47:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531795.827733 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pg-0006qx-SZ; Mon, 08 May 2023 19:47:40 +0000
+	id 1pw6ph-0006zW-Gb; Mon, 08 May 2023 19:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531792.827728; Mon, 08 May 2023 19:47:40 +0000
+Received: by outflank-mailman (output) from mailman id 531795.827733; Mon, 08 May 2023 19:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pg-0006pV-JT; Mon, 08 May 2023 19:47:40 +0000
-Received: by outflank-mailman (input) for mailman id 531792;
+	id 1pw6ph-0006xp-1q; Mon, 08 May 2023 19:47:41 +0000
+Received: by outflank-mailman (input) for mailman id 531795;
  Mon, 08 May 2023 19:47:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6mA-0004GB-3l
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:02 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ae6cacde-edd8-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 21:44:01 +0200 (CEST)
+ id 1pw6mO-0004Y5-Eu
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:16 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b658fe77-edd8-11ed-8611-37d641c3527e;
+ Mon, 08 May 2023 21:44:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae6cacde-edd8-11ed-b226-6b7b168915f2
-Message-ID: <20230508185218.413540718@linutronix.de>
+X-Inumbo-ID: b658fe77-edd8-11ed-8611-37d641c3527e
+Message-ID: <20230508185218.856286839@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575041;
+	s=2020; t=1683575054;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=38nzuLvukobfje6Ccppy0BhMMd+JJk7+K0e3k3P15Wg=;
-	b=x5uunjrfWzFDxVEDVb12W2XtAz1xdLN26NVHk7bMNEu2wIJNaum7qGKPG0dROx5n0HhLC+
-	FzBIUNB9IVFoDocC8+UO+48hmJZTHkBagkRSbcBi10tPYzBz2N+KBu3+t/DwlLjK8qgbHm
-	Zyl2slxhswI4y0jqXj5mdHQ7jfB6T53pzIasGJrkcbdNjcE/FqTbh3cIh4s2CI2dpENglT
-	jZGblTZh1KTfeLW19FXrR8et4/tPPGpgkP+CMulFHzL902fUKU7E5w1yXi6/rZi2EGU8tO
-	CSr4Jls1MoB22W6EUMLB/NCwWjqQzCr6exaZi0Y+dcSIy9UXOvzD4rMbjXRcvg==
+	 references:references; bh=S1u0Rr9+GOXQtpnupcrVF2C6hZgp3Qx9VyPMOZrmGUo=;
+	b=oISYDK58uyxEqUGHyMJl0yjUCJNOL5/7EGvOZggKHrsRbzI+Zfvw/3LqoASrcYSbpSofdk
+	smv5bYqSUgI37EvCpKk1bIpdP6plTO/QVQFaxEN/bX+VNPLK6e9fxhxLFDKIXJiJ8+kSiF
+	cQZuVcY4mwsCMKCnQL+NO+4vqzlN0ZiMTQ6qbV+dFndB1QkTtSbQxRgBNU1jh3+qlg559v
+	oxQCzKKAnn8gCc+1y89JF3fvz5z1Xn99zAaSiyaLuoBN6+lOS/ZxYYzwXkZkWIhNnC+9+0
+	MzcZbiKvl223hH1JPAYQnBF6gNdXhbpmdcQST4cZ+iIm+WtHU0bzyy3U3O2+oQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575041;
+	s=2020e; t=1683575054;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=38nzuLvukobfje6Ccppy0BhMMd+JJk7+K0e3k3P15Wg=;
-	b=OFaURbehZY+bjBk6HdPJsuKX1EooATeyF0S/YDbEsa+/7byZljllwL7I/PloYv0yfuXe68
-	qGHlWRIfIq35xrAg==
+	 references:references; bh=S1u0Rr9+GOXQtpnupcrVF2C6hZgp3Qx9VyPMOZrmGUo=;
+	b=AZidL7FELSVa1ikq306vI32X2wbks/dMZeZ9LLRMIVoxLB22DPBpW8f+vd00DqVCG0ZwZH
+	HJ9bhkUAS1wb3vBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,87 +95,215 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch v3 21/36] [patch V2 21/38] ARM: smp: Switch to hotplug core
- state synchronization
+Subject: [patch v3 29/36] [patch V2 29/38] cpu/hotplug: Provide a split up
+ CPUHP_BRINGUP mechanism
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:44:00 +0200 (CEST)
+Date: Mon,  8 May 2023 21:44:13 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Switch to the CPU hotplug core state tracking and synchronization
-mechanim. No functional change intended.
+The bring up logic of a to be onlined CPU consists of several parts, which
+are considered to be a single hotplug state:
+
+  1) Control CPU issues the wake-up
+
+  2) To be onlined CPU starts up, does the minimal initialization,
+     reports to be alive and waits for release into the complete bring-up.
+
+  3) Control CPU waits for the alive report and releases the upcoming CPU
+     for the complete bring-up.
+
+Allow to split this into two states:
+
+  1) Control CPU issues the wake-up
+
+     After that the to be onlined CPU starts up, does the minimal
+     initialization, reports to be alive and waits for release into the
+     full bring-up. As this can run after the control CPU dropped the
+     hotplug locks the code which is executed on the AP before it reports
+     alive has to be carefully audited to not violate any of the hotplug
+     constraints, especially not modifying any of the various cpumasks.
+
+     This is really only meant to avoid waiting for the AP to react on the
+     wake-up. Of course an architecture can move strict CPU related setup
+     functionality, e.g. microcode loading, with care before the
+     synchronization point to save further pointless waiting time.
+
+  2) Control CPU waits for the alive report and releases the upcoming CPU
+     for the complete bring-up.
+
+This allows that the two states can be split up to run all to be onlined
+CPUs up to state #1 on the control CPU and then at a later point run state
+#2. This spares some of the latencies of the full serialized per CPU
+bringup by avoiding the per CPU wakeup/wait serialization. The assumption
+is that the first AP already waits when the last AP has been woken up. This
+obvioulsy depends on the hardware latencies and depending on the timings
+this might still not completely eliminate all wait scenarios.
+
+This split is just a preparatory step for enabling the parallel bringup
+later. The boot time bringup is still fully serialized. It has a separate
+config switch so that architectures which want to support parallel bringup
+can test the split of the CPUHP_BRINGUG step separately.
+
+To enable this the architecture must support the CPU hotplug core sync
+mechanism and has to be audited that there are no implicit hotplug state
+dependencies which require a fully serialized bringup.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- arch/arm/Kconfig           |    1 +
- arch/arm/include/asm/smp.h |    2 +-
- arch/arm/kernel/smp.c      |   18 +++++++-----------
- 3 files changed, 9 insertions(+), 12 deletions(-)
+ arch/Kconfig               |    4 ++
+ include/linux/cpuhotplug.h |    4 ++
+ kernel/cpu.c               |   70 +++++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 76 insertions(+), 2 deletions(-)
 ---
 
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -124,6 +124,7 @@ config ARM
- 	select HAVE_SYSCALL_TRACEPOINTS
- 	select HAVE_UID16
- 	select HAVE_VIRT_CPU_ACCOUNTING_GEN
-+	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
- 	select IRQ_FORCED_THREADING
- 	select MODULES_USE_ELF_REL
- 	select NEED_DMA_MAP_STATE
---- a/arch/arm/include/asm/smp.h
-+++ b/arch/arm/include/asm/smp.h
-@@ -64,7 +64,7 @@ extern void secondary_startup_arm(void);
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -49,6 +49,10 @@ config HOTPLUG_CORE_SYNC_FULL
+ 	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select HOTPLUG_CORE_SYNC
  
- extern int __cpu_disable(void);
++config HOTPLUG_SPLIT_STARTUP
++	bool
++	select HOTPLUG_CORE_SYNC_FULL
++
+ config GENERIC_ENTRY
+ 	bool
  
--extern void __cpu_die(unsigned int cpu);
-+static inline void __cpu_die(unsigned int cpu) { }
+--- a/include/linux/cpuhotplug.h
++++ b/include/linux/cpuhotplug.h
+@@ -133,6 +133,7 @@ enum cpuhp_state {
+ 	CPUHP_MIPS_SOC_PREPARE,
+ 	CPUHP_BP_PREPARE_DYN,
+ 	CPUHP_BP_PREPARE_DYN_END		= CPUHP_BP_PREPARE_DYN + 20,
++	CPUHP_BP_KICK_AP,
+ 	CPUHP_BRINGUP_CPU,
  
- extern void arch_send_call_function_single_ipi(int cpu);
- extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
---- a/arch/arm/kernel/smp.c
-+++ b/arch/arm/kernel/smp.c
-@@ -288,15 +288,11 @@ int __cpu_disable(void)
+ 	/*
+@@ -517,9 +518,12 @@ void cpuhp_online_idle(enum cpuhp_state
+ static inline void cpuhp_online_idle(enum cpuhp_state state) { }
+ #endif
+ 
++struct task_struct;
++
+ void cpuhp_ap_sync_alive(void);
+ void arch_cpuhp_sync_state_poll(void);
+ void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
++int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle);
+ 
+ #ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
+ void cpuhp_ap_report_dead(void);
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -761,6 +761,47 @@ static int bringup_wait_for_ap_online(un
+ 	return 0;
  }
  
- /*
-- * called on the thread which is asking for a CPU to be shutdown -
-- * waits until shutdown has completed, or it is timed out.
-+ * called on the thread which is asking for a CPU to be shutdown after the
-+ * shutdown completed.
-  */
--void __cpu_die(unsigned int cpu)
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
++#ifdef CONFIG_HOTPLUG_SPLIT_STARTUP
++static int cpuhp_kick_ap_alive(unsigned int cpu)
++{
++	if (!cpuhp_can_boot_ap(cpu))
++		return -EAGAIN;
++
++	return arch_cpuhp_kick_ap_alive(cpu, idle_thread_get(cpu));
++}
++
++static int cpuhp_bringup_ap(unsigned int cpu)
++{
++	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
++	int ret;
++
++	/*
++	 * Some architectures have to walk the irq descriptors to
++	 * setup the vector space for the cpu which comes online.
++	 * Prevent irq alloc/free across the bringup.
++	 */
++	irq_lock_sparse();
++
++	ret = cpuhp_bp_sync_alive(cpu);
++	if (ret)
++		goto out_unlock;
++
++	ret = bringup_wait_for_ap_online(cpu);
++	if (ret)
++		goto out_unlock;
++
++	irq_unlock_sparse();
++
++	if (st->target <= CPUHP_AP_ONLINE_IDLE)
++		return 0;
++
++	return cpuhp_kick_ap(cpu, st, st->target);
++
++out_unlock:
++	irq_unlock_sparse();
++	return ret;
++}
++#else
+ static int bringup_cpu(unsigned int cpu)
  {
--	if (!cpu_wait_death(cpu, 5)) {
--		pr_err("CPU%u: cpu didn't die\n", cpu);
--		return;
--	}
- 	pr_debug("CPU%u: shutdown\n", cpu);
- 
- 	clear_tasks_mm_cpumask(cpu);
-@@ -336,11 +332,11 @@ void __noreturn arch_cpu_idle_dead(void)
- 	flush_cache_louis();
- 
- 	/*
--	 * Tell __cpu_die() that this CPU is now safe to dispose of.  Once
--	 * this returns, power and/or clocks can be removed at any point
--	 * from this CPU and its cache by platform_cpu_kill().
-+	 * Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose
-+	 * of. Once this returns, power and/or clocks can be removed at
-+	 * any point from this CPU and its cache by platform_cpu_kill().
+ 	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
+@@ -777,7 +818,6 @@ static int bringup_cpu(unsigned int cpu)
  	 */
--	(void)cpu_report_death();
-+	cpuhp_ap_report_dead();
+ 	irq_lock_sparse();
  
- 	/*
- 	 * Ensure that the cache lines associated with that completion are
+-	/* Arch-specific enabling code. */
+ 	ret = __cpu_up(cpu, idle);
+ 	if (ret)
+ 		goto out_unlock;
+@@ -801,6 +841,7 @@ static int bringup_cpu(unsigned int cpu)
+ 	irq_unlock_sparse();
+ 	return ret;
+ }
++#endif
+ 
+ static int finish_cpu(unsigned int cpu)
+ {
+@@ -1940,13 +1981,38 @@ static struct cpuhp_step cpuhp_hp_states
+ 		.startup.single		= timers_prepare_cpu,
+ 		.teardown.single	= timers_dead_cpu,
+ 	},
+-	/* Kicks the plugged cpu into life */
++
++#ifdef CONFIG_HOTPLUG_SPLIT_STARTUP
++	/*
++	 * Kicks the AP alive. AP will wait in cpuhp_ap_sync_alive() until
++	 * the next step will release it.
++	 */
++	[CPUHP_BP_KICK_AP] = {
++		.name			= "cpu:kick_ap",
++		.startup.single		= cpuhp_kick_ap_alive,
++	},
++
++	/*
++	 * Waits for the AP to reach cpuhp_ap_sync_alive() and then
++	 * releases it for the complete bringup.
++	 */
++	[CPUHP_BRINGUP_CPU] = {
++		.name			= "cpu:bringup",
++		.startup.single		= cpuhp_bringup_ap,
++		.teardown.single	= finish_cpu,
++		.cant_stop		= true,
++	},
++#else
++	/*
++	 * All-in-one CPU bringup state which includes the kick alive.
++	 */
+ 	[CPUHP_BRINGUP_CPU] = {
+ 		.name			= "cpu:bringup",
+ 		.startup.single		= bringup_cpu,
+ 		.teardown.single	= finish_cpu,
+ 		.cant_stop		= true,
+ 	},
++#endif
+ 	/* Final state before CPU kills itself */
+ 	[CPUHP_AP_IDLE_DEAD] = {
+ 		.name			= "idle:dead",
 
 
 
