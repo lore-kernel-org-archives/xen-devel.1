@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF7DC7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E4F0C7EE2C
 	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531743.827502 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.531751.827582 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lf-0004GW-VK; Mon, 08 May 2023 19:43:31 +0000
+	id 1pw6lr-0006V7-HB; Mon, 08 May 2023 19:43:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531743.827502; Mon, 08 May 2023 19:43:31 +0000
+Received: by outflank-mailman (output) from mailman id 531751.827582; Mon, 08 May 2023 19:43:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lf-0004GP-Se; Mon, 08 May 2023 19:43:31 +0000
-Received: by outflank-mailman (input) for mailman id 531743;
- Mon, 08 May 2023 19:43:30 +0000
+	id 1pw6lr-0006Uv-Bm; Mon, 08 May 2023 19:43:43 +0000
+Received: by outflank-mailman (input) for mailman id 531751;
+ Mon, 08 May 2023 19:43:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6le-0004GB-BE
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:30 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pw6lq-0004GB-Gf
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:42 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9a860726-edd8-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 21:43:28 +0200 (CEST)
+ id a2c93318-edd8-11ed-b226-6b7b168915f2;
+ Mon, 08 May 2023 21:43:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,23 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a860726-edd8-11ed-b226-6b7b168915f2
-Message-ID: <20230508181633.089804905@linutronix.de>
+X-Inumbo-ID: a2c93318-edd8-11ed-b226-6b7b168915f2
+Message-ID: <20230508185217.725507622@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575007;
+	s=2020; t=1683575021;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc; bh=cSONB8rAwM/DhP8pLyA+5ZPUbC2lOuuQwaVdJRn5WDM=;
-	b=TUKnHdyKCm2jhBxD5IlUGRPEG/QaxWUEEk5j+F5TiwGQh75MzfKnWvvga1ogV0FWpqsAk0
-	Z/VqPwKzVgozvsmFgeZHc6fKtgAWVGs7xGme4vq54PLJoTakzMDfDNVCbcO2rny0q4HnR6
-	qlFXb43Qt1L8lTxJDtVVOKBuzxeXABCLtAFoVNNIdEV1p8ow/ukbkpiR2uIVB/FYpjA6p3
-	h6hKX4cZFsqIirm+tNd9G+ACRA1lcKi+gtx7U3umktHuz9juvrtG2mgbwLKrM2SK5QyvS3
-	r9jvL2zUpq3y0guhjpTb2zQUgu9MH/0dN+oTlFfspWYXJjDrCu5rao9nchjzhw==
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=l2ZAdiTSxc4Ph8TyhAnDuEUhjcNUoY+vPQjmK9rgSOw=;
+	b=gaT1OuAZ/GfjuakxTEJ2KYFHHzuQGSX55lDDjTfN7H14JbYbNLMM4m5KEMtJmbQjf5dGd8
+	u6xaJZJ4RDdDY8AEhdNSWuCFNXk+TTJsi8/yzR94kBccocw9u25EGL8O6o4TOYanqr+EXt
+	NhIFRD+lDCv3rQ1zF9CsAlmwrDH3WUd0arfpWQUXnSr9BmI2oikrsACB3KufetuUHeTXx6
+	Dfmr70iicTai9wWJcUCYXfrT+e3fQNAy7f7bAiHZh1hN8Pw4PKOZApdT4wEEG7OYby4pO/
+	J0L7EIGZ0mmjG5HI8U9pfnUs9mQdXGK6TXfo6ya7SFw/bbUl1OddNzvQqalhdg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575007;
+	s=2020e; t=1683575021;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc; bh=cSONB8rAwM/DhP8pLyA+5ZPUbC2lOuuQwaVdJRn5WDM=;
-	b=i5YP5va30wPZDaaNSG4+BZNoSkYS91jOjq0F96kx0dzX5lZgVd2tGOGcKaXMK8erIbX4td
-	IGoM8wVZMNo8tHAg==
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=l2ZAdiTSxc4Ph8TyhAnDuEUhjcNUoY+vPQjmK9rgSOw=;
+	b=DHa8pWb6DR3SZOX4vG2QWSchsl3pME0lzD5CYQrhDWXg/TvCY5mWEc+2tWrjc+r9aOnyjo
+	ukEASnIuuQDnS6AQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -93,32 +94,135 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch v3 00/36] cpu/hotplug, x86: Reworked parallel CPU bringup
-Date: Mon,  8 May 2023 21:43:26 +0200 (CEST)
+Subject: [patch v3 09/36] x86/smpboot: Get rid of cpu_init_secondary()
+References: <20230508181633.089804905@linutronix.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Date: Mon,  8 May 2023 21:43:41 +0200 (CEST)
 
-Hi!
+From: Thomas Gleixner <tglx@linutronix.de>
 
-This is version 3 of the reworked parallel bringup series. Version 2 can be
-found here:
+The synchronization of the AP with the control CPU is a SMP boot problem
+and has nothing to do with cpu_init().
 
-   https://lore.kernel.org/lkml/20230504185733.126511787@linutronix.de
+Open code cpu_init_secondary() in start_secondary() and move
+wait_for_master_cpu() into the SMP boot code.
 
-This is just a quick reiteration to address the following details:
+No functional change.
 
-  1) Drop the two extended topology leaf patches as they are not longer
-     relevant (Andrew Cooper)
-
-  2) Make the announce_cpu() fixup work for real (Micheal Kelley)
-
-Other than that there are no changes and the other details are all the same
-as in V2.
-
-Thanks,
-
-	tglx
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
+---
+ arch/x86/include/asm/processor.h |    1 -
+ arch/x86/kernel/cpu/common.c     |   27 ---------------------------
+ arch/x86/kernel/smpboot.c        |   24 +++++++++++++++++++-----
+ 3 files changed, 19 insertions(+), 33 deletions(-)
+---
 
+--- a/arch/x86/include/asm/processor.h
++++ b/arch/x86/include/asm/processor.h
+@@ -551,7 +551,6 @@ extern void switch_gdt_and_percpu_base(i
+ extern void load_direct_gdt(int);
+ extern void load_fixmap_gdt(int);
+ extern void cpu_init(void);
+-extern void cpu_init_secondary(void);
+ extern void cpu_init_exception_handling(void);
+ extern void cr4_init(void);
+ 
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -2123,19 +2123,6 @@ static void dbg_restore_debug_regs(void)
+ #define dbg_restore_debug_regs()
+ #endif /* ! CONFIG_KGDB */
+ 
+-static void wait_for_master_cpu(int cpu)
+-{
+-#ifdef CONFIG_SMP
+-	/*
+-	 * wait for ACK from master CPU before continuing
+-	 * with AP initialization
+-	 */
+-	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
+-	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
+-		cpu_relax();
+-#endif
+-}
+-
+ static inline void setup_getcpu(int cpu)
+ {
+ 	unsigned long cpudata = vdso_encode_cpunode(cpu, early_cpu_to_node(cpu));
+@@ -2239,8 +2226,6 @@ void cpu_init(void)
+ 	struct task_struct *cur = current;
+ 	int cpu = raw_smp_processor_id();
+ 
+-	wait_for_master_cpu(cpu);
+-
+ 	ucode_cpu_init(cpu);
+ 
+ #ifdef CONFIG_NUMA
+@@ -2293,18 +2278,6 @@ void cpu_init(void)
+ 	load_fixmap_gdt(cpu);
+ }
+ 
+-#ifdef CONFIG_SMP
+-void cpu_init_secondary(void)
+-{
+-	/*
+-	 * Relies on the BP having set-up the IDT tables, which are loaded
+-	 * on this CPU in cpu_init_exception_handling().
+-	 */
+-	cpu_init_exception_handling();
+-	cpu_init();
+-}
+-#endif
+-
+ #ifdef CONFIG_MICROCODE_LATE_LOADING
+ /**
+  * store_cpu_caps() - Store a snapshot of CPU capabilities
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -220,6 +220,17 @@ static void ap_calibrate_delay(void)
+ 	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
+ }
+ 
++static void wait_for_master_cpu(int cpu)
++{
++	/*
++	 * Wait for release by control CPU before continuing with AP
++	 * initialization.
++	 */
++	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
++	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
++		cpu_relax();
++}
++
+ /*
+  * Activate a secondary processor.
+  */
+@@ -237,13 +248,16 @@ static void notrace start_secondary(void
+ 	load_cr3(swapper_pg_dir);
+ 	__flush_tlb_all();
+ #endif
++	cpu_init_exception_handling();
++
+ 	/*
+-	 * Sync point with wait_cpu_initialized(). Before proceeding through
+-	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
+-	 * own bit in cpu_initialized_mask and then waits for the BSP to set
+-	 * its bit in cpu_callout_mask to release it.
++	 * Sync point with wait_cpu_initialized(). Sets AP in
++	 * cpu_initialized_mask and then waits for the control CPU
++	 * to release it.
+ 	 */
+-	cpu_init_secondary();
++	wait_for_master_cpu(raw_smp_processor_id());
++
++	cpu_init();
+ 	rcu_cpu_starting(raw_smp_processor_id());
+ 	x86_cpuinit.early_percpu_clock_init();
+ 
 
 
 
