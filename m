@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 257E8C7EE2A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6CFC7EE2C
 	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:47:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531805.827762 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.531814.827777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pm-0008AX-MX; Mon, 08 May 2023 19:47:46 +0000
+	id 1pw6pp-0000AC-3b; Mon, 08 May 2023 19:47:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531805.827762; Mon, 08 May 2023 19:47:46 +0000
+Received: by outflank-mailman (output) from mailman id 531814.827777; Mon, 08 May 2023 19:47:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pm-00089t-GO; Mon, 08 May 2023 19:47:46 +0000
-Received: by outflank-mailman (input) for mailman id 531805;
- Mon, 08 May 2023 19:47:44 +0000
+	id 1pw6po-0008WT-MG; Mon, 08 May 2023 19:47:48 +0000
+Received: by outflank-mailman (input) for mailman id 531814;
+ Mon, 08 May 2023 19:47:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6mP-0004Y5-Rf
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:17 +0000
+ id 1pw6mD-0004Y5-Hj
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:05 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7436e10-edd8-11ed-8611-37d641c3527e;
- Mon, 08 May 2023 21:44:16 +0200 (CEST)
+ id af9025bb-edd8-11ed-8611-37d641c3527e;
+ Mon, 08 May 2023 21:44:03 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7436e10-edd8-11ed-8611-37d641c3527e
-Message-ID: <20230508185218.909138139@linutronix.de>
+X-Inumbo-ID: af9025bb-edd8-11ed-8611-37d641c3527e
+Message-ID: <20230508185218.472786557@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575056;
+	s=2020; t=1683575043;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=kwmqj85oJPkZidDSe6wGXZxA0ULq99wzodNu0T1h+kk=;
-	b=wg1uBLGtSoxcaJSU0iEE4x0UcfBChTrLt0gyE4M5PDuGfK5fjT22t8ZTBBC2tynpzI6HHh
-	6Y7wX0lp4t6osRCyrG3TT1YgnOHCxIFJnJkEGdJWSzb30rEUBKI5nxlG8O7tNjZVGxOjHb
-	SANeefFOJGw6DUXAVXM56kO2xHkef7AW/0tPOsy0YwgLmgzJMjuxG1N7Phieoka0kZqbc+
-	SwamRLfl76kZk/gDSsJbzFLV/CAY9FezjErFfEBAxnMp56mRQxgPmpsjeFT7Dxl3HIxRAN
-	Y1+kfoeoNJM9pmRMjeHWlK/tpJMX+RNO6kr+gmNFYozmaU/eCEE9q4itJyCt1A==
+	 references:references; bh=/iWTZekX5kQrNbDZ4qzevgkextn6cmGYi8Qwr8K2wd0=;
+	b=lOv5CV/JU1toOLovRLqZlTvcRCZ8ltOCGkp6Tu2FEmBz8l2BhYz8Z5gaEUl2tvbeMaUktu
+	naeM1OYPPOb/TMivhvW1pX2QwmNH1QEr1EYdTMeEJicu1SC1DRtYs7/3EGdirqV+PjAVb4
+	fEhKbiUZ+Ma4Qf+7o2PWQhcdfityfGcgCU0bnUUvTHKObm1jWKBFtPw2zMaDQdulrkbawI
+	+xLgFfoRyCWbU/EZ1Kt9ViC/DeiNSYKzoja1i6f6FtvQCBkZdP+kJFuq9OJu18AL6ddLsp
+	pM+tuBp7BqzPFWb2FuWk5s0zh/tMRx3ZrKdi4WuN3YRev8DqBKVO4GAYXrxTKQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575056;
+	s=2020e; t=1683575043;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=kwmqj85oJPkZidDSe6wGXZxA0ULq99wzodNu0T1h+kk=;
-	b=hBj0Uqf6QiSA9MqtLkZVoZtNNYgv3nBK9gQda39ezyZ0ekHS2uiMmy5gmQpbYtX4lR0BfY
-	+Xmymckx4LlMyoDw==
+	 references:references; bh=/iWTZekX5kQrNbDZ4qzevgkextn6cmGYi8Qwr8K2wd0=;
+	b=KbtCrmqgK+WkhRxMq4lpiF9CN1ShevgS463Q/CW1CH+7hVRAoy+HCJrLtfTvSHjNpPNlk0
+	gXiYZp/kgdvkEdAQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,144 +94,84 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch v3 30/36] x86/smpboot: Enable split CPU startup
+Subject:
+ [patch v3 22/36] arm64: smp: Switch to hotplug core state synchronization
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:44:15 +0200 (CEST)
+Date: Mon,  8 May 2023 21:44:02 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The x86 CPU bringup state currently does AP wake-up, wait for AP to
-respond and then release it for full bringup.
-
-It is safe to be split into a wake-up and and a separate wait+release
-state.
-
-Provide the required functions and enable the split CPU bringup, which
-prepares for parallel bringup, where the bringup of the non-boot CPUs takes
-two iterations: One to prepare and wake all APs and the second to wait and
-release them. Depending on timing this can eliminate the wait time
-completely.
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Mark Rutland <mark.rutland@arm.com>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
-
 ---
- arch/x86/Kconfig           |    2 +-
- arch/x86/include/asm/smp.h |    9 ++-------
- arch/x86/kernel/smp.c      |    2 +-
- arch/x86/kernel/smpboot.c  |    8 ++++----
- arch/x86/xen/smp_pv.c      |    4 ++--
- 5 files changed, 10 insertions(+), 15 deletions(-)
+ arch/arm64/Kconfig           |    1 +
+ arch/arm64/include/asm/smp.h |    2 +-
+ arch/arm64/kernel/smp.c      |   14 +++++---------
+ 3 files changed, 7 insertions(+), 10 deletions(-)
 ---
 
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -274,8 +274,8 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -222,6 +222,7 @@ config ARM64
+ 	select HAVE_KPROBES
+ 	select HAVE_KRETPROBES
  	select HAVE_GENERIC_VDSO
--	select HOTPLUG_CORE_SYNC_FULL		if SMP
- 	select HOTPLUG_SMT			if SMP
-+	select HOTPLUG_SPLIT_STARTUP		if SMP
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select IRQ_DOMAIN
  	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
---- a/arch/x86/include/asm/smp.h
-+++ b/arch/x86/include/asm/smp.h
-@@ -40,7 +40,7 @@ struct smp_ops {
+ 	select KASAN_VMALLOC if KASAN
+--- a/arch/arm64/include/asm/smp.h
++++ b/arch/arm64/include/asm/smp.h
+@@ -99,7 +99,7 @@ static inline void arch_send_wakeup_ipi_
  
- 	void (*cleanup_dead_cpu)(unsigned cpu);
- 	void (*poll_sync_state)(void);
--	int (*cpu_up)(unsigned cpu, struct task_struct *tidle);
-+	int (*kick_ap_alive)(unsigned cpu, struct task_struct *tidle);
- 	int (*cpu_disable)(void);
- 	void (*cpu_die)(unsigned int cpu);
- 	void (*play_dead)(void);
-@@ -80,11 +80,6 @@ static inline void smp_cpus_done(unsigne
- 	smp_ops.smp_cpus_done(max_cpus);
+ extern int __cpu_disable(void);
+ 
+-extern void __cpu_die(unsigned int cpu);
++static inline void __cpu_die(unsigned int cpu) { }
+ extern void __noreturn cpu_die(void);
+ extern void __noreturn cpu_die_early(void);
+ 
+--- a/arch/arm64/kernel/smp.c
++++ b/arch/arm64/kernel/smp.c
+@@ -332,17 +332,13 @@ static int op_cpu_kill(unsigned int cpu)
  }
  
--static inline int __cpu_up(unsigned int cpu, struct task_struct *tidle)
--{
--	return smp_ops.cpu_up(cpu, tidle);
--}
--
- static inline int __cpu_disable(void)
+ /*
+- * called on the thread which is asking for a CPU to be shutdown -
+- * waits until shutdown has completed, or it is timed out.
++ * Called on the thread which is asking for a CPU to be shutdown after the
++ * shutdown completed.
+  */
+-void __cpu_die(unsigned int cpu)
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
  {
- 	return smp_ops.cpu_disable();
-@@ -124,7 +119,7 @@ void native_smp_prepare_cpus(unsigned in
- void calculate_max_logical_packages(void);
- void native_smp_cpus_done(unsigned int max_cpus);
- int common_cpu_up(unsigned int cpunum, struct task_struct *tidle);
--int native_cpu_up(unsigned int cpunum, struct task_struct *tidle);
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle);
- int native_cpu_disable(void);
- void __noreturn hlt_play_dead(void);
- void native_play_dead(void);
---- a/arch/x86/kernel/smp.c
-+++ b/arch/x86/kernel/smp.c
-@@ -268,7 +268,7 @@ struct smp_ops smp_ops = {
- #endif
- 	.smp_send_reschedule	= native_smp_send_reschedule,
- 
--	.cpu_up			= native_cpu_up,
-+	.kick_ap_alive		= native_kick_ap,
- 	.cpu_disable		= native_cpu_disable,
- 	.play_dead		= native_play_dead,
- 
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -1058,7 +1058,7 @@ static int do_boot_cpu(int apicid, int c
- 	return ret;
- }
- 
--static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
- {
- 	int apicid = apic->cpu_present_to_apicid(cpu);
  	int err;
-@@ -1094,15 +1094,15 @@ static int native_kick_ap(unsigned int c
- 	return err;
- }
  
--int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
-+int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle)
- {
--	return native_kick_ap(cpu, tidle);
-+	return smp_ops.kick_ap_alive(cpu, tidle);
- }
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_crit("CPU%u: cpu didn't die\n", cpu);
+-		return;
+-	}
+ 	pr_debug("CPU%u: shutdown\n", cpu);
  
- void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu)
- {
- 	/* Cleanup possible dangling ends... */
--	if (smp_ops.cpu_up == native_cpu_up && x86_platform.legacy.warm_reset)
-+	if (smp_ops.kick_ap_alive == native_kick_ap && x86_platform.legacy.warm_reset)
- 		smpboot_restore_warm_reset_vector();
- }
+ 	/*
+@@ -369,8 +365,8 @@ void __noreturn cpu_die(void)
  
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -314,7 +314,7 @@ cpu_initialize_context(unsigned int cpu,
- 	return 0;
- }
+ 	local_daif_mask();
  
--static int xen_pv_cpu_up(unsigned int cpu, struct task_struct *idle)
-+static int xen_pv_kick_ap(unsigned int cpu, struct task_struct *idle)
- {
- 	int rc;
+-	/* Tell __cpu_die() that this CPU is now safe to dispose of */
+-	(void)cpu_report_death();
++	/* Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose of */
++	cpuhp_ap_report_dead();
  
-@@ -438,7 +438,7 @@ static const struct smp_ops xen_smp_ops
- 	.smp_prepare_cpus = xen_pv_smp_prepare_cpus,
- 	.smp_cpus_done = xen_smp_cpus_done,
- 
--	.cpu_up = xen_pv_cpu_up,
-+	.kick_ap_alive = xen_pv_kick_ap,
- 	.cpu_die = xen_pv_cpu_die,
- 	.cleanup_dead_cpu = xen_pv_cleanup_dead_cpu,
- 	.poll_sync_state = xen_pv_poll_sync_state,
+ 	/*
+ 	 * Actually shutdown the CPU. This must never fail. The specific hotplug
 
 
 
