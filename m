@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 923C7C7EE30
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531747.827542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A36D9C7EE2F
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531753.827602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lk-0005Fx-3L; Mon, 08 May 2023 19:43:36 +0000
+	id 1pw6lu-000798-K3; Mon, 08 May 2023 19:43:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531747.827542; Mon, 08 May 2023 19:43:36 +0000
+Received: by outflank-mailman (output) from mailman id 531753.827602; Mon, 08 May 2023 19:43:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lj-0005F8-Uo; Mon, 08 May 2023 19:43:35 +0000
-Received: by outflank-mailman (input) for mailman id 531747;
- Mon, 08 May 2023 19:43:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pw6lu-000782-Dr; Mon, 08 May 2023 19:43:46 +0000
+Received: by outflank-mailman (input) for mailman id 531753;
+ Mon, 08 May 2023 19:43:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6li-0004GB-EW
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:34 +0000
+ id 1pw6lt-0004Y5-3r
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:45 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9dfae0e5-edd8-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 21:43:33 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a3ccb2dc-edd8-11ed-8611-37d641c3527e;
+ Mon, 08 May 2023 21:43:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9dfae0e5-edd8-11ed-b226-6b7b168915f2
-Message-ID: <20230508185217.458393998@linutronix.de>
+X-Inumbo-ID: a3ccb2dc-edd8-11ed-8611-37d641c3527e
+Message-ID: <20230508185217.779457690@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575013;
+	s=2020; t=1683575023;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=YVvAw0WAsVmopE5OIHIsJcpjHcWT9bVzoHoSegD/6OE=;
-	b=G8jY8noRcocsOMuudUmnigMS5g2D2j/illqfnrAKMDSwZNAyNByW7W91CB5A0qyup8xoLU
-	ju1ecTOFYCXG1ZOzwfeLNIWu4WEoDoD6p+1D+AqZKyOSugeGaOehdmkoA/nlGtcew2jUOh
-	DzAZFh9YTiogntfcZ4P9+UPNch+6emIC0ae/WUtPo0aud1Iu4QPNUMUDCBmri2TlGBp9jT
-	AA6L+H6VK8adYXgBNCf9r3PVCVhzwleTI15/nfJTmsMFQVq+7axqKZpItAeazqI90AqRIf
-	nMTxkJ3sBvJwkZTMIR7xYS+DUgVAJRQlg/jUyMsipvPSuiu4phOaq20wyRyl4g==
+	 references:references; bh=hGYrzvnylJOzDXAat75Sb7qGF0AwMNGvLNaazC51fRk=;
+	b=CF0aLnbIsxwy11PPaGSo9/qeT6BDOr9z6WOZ1n5alNxMpu2v9rWR0KwWbfAKKSqQHnu2Hn
+	NnnSo+WQJLNlwX0V8RASx7bUePgeQQucrN8jozqHWn53CWFEZvXdW6Y2qKuXf2sMuO8LFd
+	vPFSd9/cKf6jPiVXrKOCNBpqoC5p2O4AreHmLXAsBLw7vhozQ4sYeaLwrKGhc6krbZC3oC
+	pq7zyVxdn/hqe1GUvju73Vol+z3Myrurw5iGjanI0WSm1tR559wW7/7IR9FR2DUET3Pet6
+	d9J7XLK6/DSrSBUNRugaS2ELxaaKrUV3h9/hQgurMpa7sjjcuL3FKGuJi92j9w==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575013;
+	s=2020e; t=1683575023;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=YVvAw0WAsVmopE5OIHIsJcpjHcWT9bVzoHoSegD/6OE=;
-	b=s+ViDYzSQVsqYkVETBJLWwXeFyinDS8d3eNTrYKk8dlzptBDC/K8uzHkO4TXLBIVOdRrGS
-	hKy0R6/dTZ++mCAg==
+	 references:references; bh=hGYrzvnylJOzDXAat75Sb7qGF0AwMNGvLNaazC51fRk=;
+	b=zBhk/M4G/ZDNvqYEqQApQE+J8NOSpsSrbhi32/stcCYNqlxvc9b49l1CCvmbf0GB531PSJ
+	vM0+Vo+LFsbAPKDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,115 +94,87 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject:
- [patch v3 04/36] x86/smpboot: Rename start_cpu0() to soft_restart_cpu()
+Subject: [patch v3 10/36] [patch V2 10/38] x86/cpu/cacheinfo: Remove
+ cpu_callout_mask dependency
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:43:33 +0200 (CEST)
+Date: Mon,  8 May 2023 21:43:42 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-This is used in the SEV play_dead() implementation to re-online CPUs. But
-that has nothing to do with CPU0.
+cpu_callout_mask is used for the stop machine based MTRR/PAT init.
+
+In preparation of moving the BP/AP synchronization to the core hotplug
+code, use a private CPU mask for cacheinfo and manage it in the
+starting/dying hotplug state.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- arch/x86/include/asm/cpu.h   |    2 +-
- arch/x86/kernel/callthunks.c |    2 +-
- arch/x86/kernel/head_32.S    |   10 +++++-----
- arch/x86/kernel/head_64.S    |   10 +++++-----
- arch/x86/kernel/sev.c        |    2 +-
- 5 files changed, 13 insertions(+), 13 deletions(-)
+ arch/x86/kernel/cpu/cacheinfo.c |   21 +++++++++++++++++----
+ 1 file changed, 17 insertions(+), 4 deletions(-)
 ---
 
---- a/arch/x86/include/asm/cpu.h
-+++ b/arch/x86/include/asm/cpu.h
-@@ -30,7 +30,7 @@ struct x86_cpu {
- #ifdef CONFIG_HOTPLUG_CPU
- extern int arch_register_cpu(int num);
- extern void arch_unregister_cpu(int);
--extern void start_cpu0(void);
-+extern void soft_restart_cpu(void);
- #ifdef CONFIG_DEBUG_HOTPLUG_CPU0
- extern int _debug_hotplug_cpu(int cpu, int action);
- #endif
---- a/arch/x86/kernel/callthunks.c
-+++ b/arch/x86/kernel/callthunks.c
-@@ -134,7 +134,7 @@ static bool skip_addr(void *dest)
- 	if (dest == ret_from_fork)
- 		return true;
- #ifdef CONFIG_HOTPLUG_CPU
--	if (dest == start_cpu0)
-+	if (dest == soft_restart_cpu)
- 		return true;
- #endif
- #ifdef CONFIG_FUNCTION_TRACER
---- a/arch/x86/kernel/head_32.S
-+++ b/arch/x86/kernel/head_32.S
-@@ -140,16 +140,16 @@ SYM_CODE_END(startup_32)
+--- a/arch/x86/kernel/cpu/cacheinfo.c
++++ b/arch/x86/kernel/cpu/cacheinfo.c
+@@ -39,6 +39,8 @@ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t
+ /* Shared L2 cache maps */
+ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_l2c_shared_map);
  
- #ifdef CONFIG_HOTPLUG_CPU
- /*
-- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
-- * up already except stack. We just set up stack here. Then call
-- * start_secondary().
-+ * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-+ * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-+ * unplug. Everything is set up already except the stack.
-  */
--SYM_FUNC_START(start_cpu0)
-+SYM_FUNC_START(soft_restart_cpu)
- 	movl initial_stack, %ecx
- 	movl %ecx, %esp
- 	call *(initial_code)
- 1:	jmp 1b
--SYM_FUNC_END(start_cpu0)
-+SYM_FUNC_END(soft_restart_cpu)
- #endif
++static cpumask_var_t cpu_cacheinfo_mask;
++
+ /* Kernel controls MTRR and/or PAT MSRs. */
+ unsigned int memory_caching_control __ro_after_init;
  
- /*
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -377,11 +377,11 @@ SYM_CODE_END(secondary_startup_64)
- 
- #ifdef CONFIG_HOTPLUG_CPU
- /*
-- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
-- * up already except stack. We just set up stack here. Then call
-- * start_secondary() via .Ljump_to_C_code.
-+ * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-+ * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-+ * unplug. Everything is set up already except the stack.
-  */
--SYM_CODE_START(start_cpu0)
-+SYM_CODE_START(soft_restart_cpu)
- 	ANNOTATE_NOENDBR
- 	UNWIND_HINT_END_OF_STACK
- 
-@@ -390,7 +390,7 @@ SYM_CODE_START(start_cpu0)
- 	movq	TASK_threadsp(%rcx), %rsp
- 
- 	jmp	.Ljump_to_C_code
--SYM_CODE_END(start_cpu0)
-+SYM_CODE_END(soft_restart_cpu)
- #endif
- 
- #ifdef CONFIG_AMD_MEM_ENCRYPT
---- a/arch/x86/kernel/sev.c
-+++ b/arch/x86/kernel/sev.c
-@@ -1328,7 +1328,7 @@ static void sev_es_play_dead(void)
- 	 * If we get here, the VCPU was woken up again. Jump to CPU
- 	 * startup code to get it back online.
- 	 */
--	start_cpu0();
-+	soft_restart_cpu();
+@@ -1172,8 +1174,10 @@ void cache_bp_restore(void)
+ 		cache_cpu_init();
  }
- #else  /* CONFIG_HOTPLUG_CPU */
- #define sev_es_play_dead	native_play_dead
+ 
+-static int cache_ap_init(unsigned int cpu)
++static int cache_ap_online(unsigned int cpu)
+ {
++	cpumask_set_cpu(cpu, cpu_cacheinfo_mask);
++
+ 	if (!memory_caching_control || get_cache_aps_delayed_init())
+ 		return 0;
+ 
+@@ -1191,11 +1195,17 @@ static int cache_ap_init(unsigned int cp
+ 	 *      lock to prevent MTRR entry changes
+ 	 */
+ 	stop_machine_from_inactive_cpu(cache_rendezvous_handler, NULL,
+-				       cpu_callout_mask);
++				       cpu_cacheinfo_mask);
+ 
+ 	return 0;
+ }
+ 
++static int cache_ap_offline(unsigned int cpu)
++{
++	cpumask_clear_cpu(cpu, cpu_cacheinfo_mask);
++	return 0;
++}
++
+ /*
+  * Delayed cache initialization for all AP's
+  */
+@@ -1210,9 +1220,12 @@ void cache_aps_init(void)
+ 
+ static int __init cache_ap_register(void)
+ {
++	zalloc_cpumask_var(&cpu_cacheinfo_mask, GFP_KERNEL);
++	cpumask_set_cpu(smp_processor_id(), cpu_cacheinfo_mask);
++
+ 	cpuhp_setup_state_nocalls(CPUHP_AP_CACHECTRL_STARTING,
+ 				  "x86/cachectrl:starting",
+-				  cache_ap_init, NULL);
++				  cache_ap_online, cache_ap_offline);
+ 	return 0;
+ }
+-core_initcall(cache_ap_register);
++early_initcall(cache_ap_register);
 
 
 
