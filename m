@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C15C7EE31
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531744.827505 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 923C7C7EE30
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:43:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531747.827542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lg-0004Ju-7H; Mon, 08 May 2023 19:43:32 +0000
+	id 1pw6lk-0005Fx-3L; Mon, 08 May 2023 19:43:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531744.827505; Mon, 08 May 2023 19:43:32 +0000
+Received: by outflank-mailman (output) from mailman id 531747.827542; Mon, 08 May 2023 19:43:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6lg-0004Iq-38; Mon, 08 May 2023 19:43:32 +0000
-Received: by outflank-mailman (input) for mailman id 531744;
- Mon, 08 May 2023 19:43:31 +0000
+	id 1pw6lj-0005F8-Uo; Mon, 08 May 2023 19:43:35 +0000
+Received: by outflank-mailman (input) for mailman id 531747;
+ Mon, 08 May 2023 19:43:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6lf-0004GB-0k
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:31 +0000
+ id 1pw6li-0004GB-EW
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:43:34 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9b2f47c9-edd8-11ed-b226-6b7b168915f2;
- Mon, 08 May 2023 21:43:29 +0200 (CEST)
+ id 9dfae0e5-edd8-11ed-b226-6b7b168915f2;
+ Mon, 08 May 2023 21:43:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b2f47c9-edd8-11ed-b226-6b7b168915f2
-Message-ID: <20230508185217.287533369@linutronix.de>
+X-Inumbo-ID: 9dfae0e5-edd8-11ed-b226-6b7b168915f2
+Message-ID: <20230508185217.458393998@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575008;
+	s=2020; t=1683575013;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=TIFcpQKDkUA3tA8gujt3zKN0CCqeTM3e8ZIS8vByT1c=;
-	b=Wf4mqDxFrL1eWhI5cpdoRdFllQIJr50VWM3iPhe3WsbZ/Iw75OzzMXvNpDiX4/F1RlUka/
-	FuaadHz8U/UJgoRuNI+eiueis1okBnBTdsW7K3h/5cJff54TU9cNXi2Eo25oxatOtt8Ped
-	uqIwnl5vpuaeMpBtb7hOTKugxduUe8Augp4O7OKVi2nBKgfwEY926yQ5SmqvUi7xIbg97V
-	fQtSCNhqHK3HwtnrdayfMk5OYNYQqF7Po1kCsNkOoJVvrU6F54wA+I/A0Pn8m/abs0ww8P
-	YoKjgZ69Z9J+x/KjldafuRP3SwFynPh5Zr2/PtLG0H6Hu60gav2dDq7D6S6DFA==
+	 references:references; bh=YVvAw0WAsVmopE5OIHIsJcpjHcWT9bVzoHoSegD/6OE=;
+	b=G8jY8noRcocsOMuudUmnigMS5g2D2j/illqfnrAKMDSwZNAyNByW7W91CB5A0qyup8xoLU
+	ju1ecTOFYCXG1ZOzwfeLNIWu4WEoDoD6p+1D+AqZKyOSugeGaOehdmkoA/nlGtcew2jUOh
+	DzAZFh9YTiogntfcZ4P9+UPNch+6emIC0ae/WUtPo0aud1Iu4QPNUMUDCBmri2TlGBp9jT
+	AA6L+H6VK8adYXgBNCf9r3PVCVhzwleTI15/nfJTmsMFQVq+7axqKZpItAeazqI90AqRIf
+	nMTxkJ3sBvJwkZTMIR7xYS+DUgVAJRQlg/jUyMsipvPSuiu4phOaq20wyRyl4g==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575008;
+	s=2020e; t=1683575013;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=TIFcpQKDkUA3tA8gujt3zKN0CCqeTM3e8ZIS8vByT1c=;
-	b=LftWUnhcnLdQ0KvHaFRp+CDhSV7AuCp+oemkbqukqx/mhhoAfEVrKqqXitjKTnGoiLrrvy
-	h0+2Iv+MwcjSr/DA==
+	 references:references; bh=YVvAw0WAsVmopE5OIHIsJcpjHcWT9bVzoHoSegD/6OE=;
+	b=s+ViDYzSQVsqYkVETBJLWwXeFyinDS8d3eNTrYKk8dlzptBDC/K8uzHkO4TXLBIVOdRrGS
+	hKy0R6/dTZ++mCAg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,86 +94,115 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>
-Subject: [patch v3 01/36] [patch V2 01/38] x86/smpboot: Cleanup
- topology_phys_to_logical_pkg()/die()
+Subject:
+ [patch v3 04/36] x86/smpboot: Rename start_cpu0() to soft_restart_cpu()
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:43:28 +0200 (CEST)
+Date: Mon,  8 May 2023 21:43:33 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Make topology_phys_to_logical_pkg_die() static as it's only used in
-smpboot.c and fixup the kernel-doc warnings for both functions.
+This is used in the SEV play_dead() implementation to re-online CPUs. But
+that has nothing to do with CPU0.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- arch/x86/include/asm/topology.h |    3 ---
- arch/x86/kernel/smpboot.c       |   10 ++++++----
- 2 files changed, 6 insertions(+), 7 deletions(-)
+ arch/x86/include/asm/cpu.h   |    2 +-
+ arch/x86/kernel/callthunks.c |    2 +-
+ arch/x86/kernel/head_32.S    |   10 +++++-----
+ arch/x86/kernel/head_64.S    |   10 +++++-----
+ arch/x86/kernel/sev.c        |    2 +-
+ 5 files changed, 13 insertions(+), 13 deletions(-)
 ---
 
---- a/arch/x86/include/asm/topology.h
-+++ b/arch/x86/include/asm/topology.h
-@@ -139,7 +139,6 @@ static inline int topology_max_smt_threa
- int topology_update_package_map(unsigned int apicid, unsigned int cpu);
- int topology_update_die_map(unsigned int dieid, unsigned int cpu);
- int topology_phys_to_logical_pkg(unsigned int pkg);
--int topology_phys_to_logical_die(unsigned int die, unsigned int cpu);
- bool topology_is_primary_thread(unsigned int cpu);
- bool topology_smt_supported(void);
- #else
-@@ -149,8 +148,6 @@ topology_update_package_map(unsigned int
- static inline int
- topology_update_die_map(unsigned int dieid, unsigned int cpu) { return 0; }
- static inline int topology_phys_to_logical_pkg(unsigned int pkg) { return 0; }
--static inline int topology_phys_to_logical_die(unsigned int die,
--		unsigned int cpu) { return 0; }
- static inline int topology_max_die_per_package(void) { return 1; }
- static inline int topology_max_smt_threads(void) { return 1; }
- static inline bool topology_is_primary_thread(unsigned int cpu) { return true; }
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -288,6 +288,7 @@ bool topology_smt_supported(void)
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -30,7 +30,7 @@ struct x86_cpu {
+ #ifdef CONFIG_HOTPLUG_CPU
+ extern int arch_register_cpu(int num);
+ extern void arch_unregister_cpu(int);
+-extern void start_cpu0(void);
++extern void soft_restart_cpu(void);
+ #ifdef CONFIG_DEBUG_HOTPLUG_CPU0
+ extern int _debug_hotplug_cpu(int cpu, int action);
+ #endif
+--- a/arch/x86/kernel/callthunks.c
++++ b/arch/x86/kernel/callthunks.c
+@@ -134,7 +134,7 @@ static bool skip_addr(void *dest)
+ 	if (dest == ret_from_fork)
+ 		return true;
+ #ifdef CONFIG_HOTPLUG_CPU
+-	if (dest == start_cpu0)
++	if (dest == soft_restart_cpu)
+ 		return true;
+ #endif
+ #ifdef CONFIG_FUNCTION_TRACER
+--- a/arch/x86/kernel/head_32.S
++++ b/arch/x86/kernel/head_32.S
+@@ -140,16 +140,16 @@ SYM_CODE_END(startup_32)
  
- /**
-  * topology_phys_to_logical_pkg - Map a physical package id to a logical
-+ * @phys_pkg:	The physical package id to map
-  *
-  * Returns logical package id or -1 if not found
+ #ifdef CONFIG_HOTPLUG_CPU
+ /*
+- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
+- * up already except stack. We just set up stack here. Then call
+- * start_secondary().
++ * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
++ * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
++ * unplug. Everything is set up already except the stack.
   */
-@@ -304,15 +305,17 @@ int topology_phys_to_logical_pkg(unsigne
- 	return -1;
- }
- EXPORT_SYMBOL(topology_phys_to_logical_pkg);
-+
- /**
-  * topology_phys_to_logical_die - Map a physical die id to logical
-+ * @die_id:	The physical die id to map
-+ * @cur_cpu:	The CPU for which the mapping is done
-  *
-  * Returns logical die id or -1 if not found
+-SYM_FUNC_START(start_cpu0)
++SYM_FUNC_START(soft_restart_cpu)
+ 	movl initial_stack, %ecx
+ 	movl %ecx, %esp
+ 	call *(initial_code)
+ 1:	jmp 1b
+-SYM_FUNC_END(start_cpu0)
++SYM_FUNC_END(soft_restart_cpu)
+ #endif
+ 
+ /*
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -377,11 +377,11 @@ SYM_CODE_END(secondary_startup_64)
+ 
+ #ifdef CONFIG_HOTPLUG_CPU
+ /*
+- * Boot CPU0 entry point. It's called from play_dead(). Everything has been set
+- * up already except stack. We just set up stack here. Then call
+- * start_secondary() via .Ljump_to_C_code.
++ * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
++ * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
++ * unplug. Everything is set up already except the stack.
   */
--int topology_phys_to_logical_die(unsigned int die_id, unsigned int cur_cpu)
-+static int topology_phys_to_logical_die(unsigned int die_id, unsigned int cur_cpu)
- {
--	int cpu;
--	int proc_id = cpu_data(cur_cpu).phys_proc_id;
-+	int cpu, proc_id = cpu_data(cur_cpu).phys_proc_id;
+-SYM_CODE_START(start_cpu0)
++SYM_CODE_START(soft_restart_cpu)
+ 	ANNOTATE_NOENDBR
+ 	UNWIND_HINT_END_OF_STACK
  
- 	for_each_possible_cpu(cpu) {
- 		struct cpuinfo_x86 *c = &cpu_data(cpu);
-@@ -323,7 +326,6 @@ int topology_phys_to_logical_die(unsigne
- 	}
- 	return -1;
+@@ -390,7 +390,7 @@ SYM_CODE_START(start_cpu0)
+ 	movq	TASK_threadsp(%rcx), %rsp
+ 
+ 	jmp	.Ljump_to_C_code
+-SYM_CODE_END(start_cpu0)
++SYM_CODE_END(soft_restart_cpu)
+ #endif
+ 
+ #ifdef CONFIG_AMD_MEM_ENCRYPT
+--- a/arch/x86/kernel/sev.c
++++ b/arch/x86/kernel/sev.c
+@@ -1328,7 +1328,7 @@ static void sev_es_play_dead(void)
+ 	 * If we get here, the VCPU was woken up again. Jump to CPU
+ 	 * startup code to get it back online.
+ 	 */
+-	start_cpu0();
++	soft_restart_cpu();
  }
--EXPORT_SYMBOL(topology_phys_to_logical_die);
- 
- /**
-  * topology_update_package_map - Update the physical to logical package map
+ #else  /* CONFIG_HOTPLUG_CPU */
+ #define sev_es_play_dead	native_play_dead
 
 
 
