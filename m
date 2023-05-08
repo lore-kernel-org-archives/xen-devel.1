@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF73EC7EE2A
-	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:47:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.531791.827721 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2305C7EE2E
+	for <xen-devel@archiver.kernel.org>; Mon,  8 May 2023 19:47:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.531792.827728 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pg-0006i2-1k; Mon, 08 May 2023 19:47:40 +0000
+	id 1pw6pg-0006qx-SZ; Mon, 08 May 2023 19:47:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 531791.827721; Mon, 08 May 2023 19:47:39 +0000
+Received: by outflank-mailman (output) from mailman id 531792.827728; Mon, 08 May 2023 19:47:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pw6pf-0006hS-P6; Mon, 08 May 2023 19:47:39 +0000
-Received: by outflank-mailman (input) for mailman id 531791;
- Mon, 08 May 2023 19:47:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pw6pg-0006pV-JT; Mon, 08 May 2023 19:47:40 +0000
+Received: by outflank-mailman (input) for mailman id 531792;
+ Mon, 08 May 2023 19:47:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=49Re=A5=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pw6mT-0004Y5-83
- for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:21 +0000
+ id 1pw6mA-0004GB-3l
+ for xen-devel@lists.xenproject.org; Mon, 08 May 2023 19:44:02 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9373003-edd8-11ed-8611-37d641c3527e;
- Mon, 08 May 2023 21:44:19 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ae6cacde-edd8-11ed-b226-6b7b168915f2;
+ Mon, 08 May 2023 21:44:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9373003-edd8-11ed-8611-37d641c3527e
-Message-ID: <20230508185219.016841363@linutronix.de>
+X-Inumbo-ID: ae6cacde-edd8-11ed-b226-6b7b168915f2
+Message-ID: <20230508185218.413540718@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683575059;
+	s=2020; t=1683575041;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=209TLBvRBeEafFURgM0Y1ht7eQ7Y0xFjxVmui7BNI1o=;
-	b=n00hUXstsdyfUPFcrDAYr9qfqXyIIcwLYM+NMXKmbpRXuAwK6NgEAWLRBbou/zHFnXIEod
-	8New7so5w76Tb6aP+ykkJPN+I2CJwBwHZMzePhRQEpwGX52DB5Z1gdG558koxONpDK5vHV
-	Nw3vZn8ZYXWXENECHg8/+P4uLipUY5x32lSL0Ye9CYi84jhqQ0/1HAPCNaEXglJl15NFbz
-	zfcfgBtb+CGqOrVf91xrpFIeSR0Cfa5oQ5LpNyu3yK2Hb8OUT10cao1Vz6GemRAHhna574
-	D0JjHpAmGP3ofXOD9DehizPjgrf0doKL7iorp17NI6K6epm+KVwswpLQO+EHLA==
+	 references:references; bh=38nzuLvukobfje6Ccppy0BhMMd+JJk7+K0e3k3P15Wg=;
+	b=x5uunjrfWzFDxVEDVb12W2XtAz1xdLN26NVHk7bMNEu2wIJNaum7qGKPG0dROx5n0HhLC+
+	FzBIUNB9IVFoDocC8+UO+48hmJZTHkBagkRSbcBi10tPYzBz2N+KBu3+t/DwlLjK8qgbHm
+	Zyl2slxhswI4y0jqXj5mdHQ7jfB6T53pzIasGJrkcbdNjcE/FqTbh3cIh4s2CI2dpENglT
+	jZGblTZh1KTfeLW19FXrR8et4/tPPGpgkP+CMulFHzL902fUKU7E5w1yXi6/rZi2EGU8tO
+	CSr4Jls1MoB22W6EUMLB/NCwWjqQzCr6exaZi0Y+dcSIy9UXOvzD4rMbjXRcvg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683575059;
+	s=2020e; t=1683575041;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=209TLBvRBeEafFURgM0Y1ht7eQ7Y0xFjxVmui7BNI1o=;
-	b=HZPvGLiAxw+6fgkpd1LobrgVgwanW2gWFTwlrLJ+Qy03Ucp5K4TQSj/S8iTBeqfZ2ooZAu
-	VgXE2xAvT1s4U6AA==
+	 references:references; bh=38nzuLvukobfje6Ccppy0BhMMd+JJk7+K0e3k3P15Wg=;
+	b=OFaURbehZY+bjBk6HdPJsuKX1EooATeyF0S/YDbEsa+/7byZljllwL7I/PloYv0yfuXe68
+	qGHlWRIfIq35xrAg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -93,219 +93,88 @@ Cc: x86@kernel.org,
  linux-riscv@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
- "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- David Woodhouse <dwmw@amazon.co.uk>
-Subject: [patch v3 32/36] cpu/hotplug: Allow "parallel" bringup up to
- CPUHP_BP_KICK_AP_STATE
+ "Michael Kelley (LINUX)" <mikelley@microsoft.com>
+Subject: [patch v3 21/36] [patch V2 21/38] ARM: smp: Switch to hotplug core
+ state synchronization
 References: <20230508181633.089804905@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  8 May 2023 21:44:18 +0200 (CEST)
+Date: Mon,  8 May 2023 21:44:00 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-There is often significant latency in the early stages of CPU bringup, and
-time is wasted by waking each CPU (e.g. with SIPI/INIT/INIT on x86) and
-then waiting for it to respond before moving on to the next.
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
-Allow a platform to enable parallel setup which brings all to be onlined
-CPUs up to the CPUHP_BP_KICK_AP state. While this state advancement on the
-control CPU (BP) is single-threaded the important part is the last state
-CPUHP_BP_KICK_AP which wakes the to be onlined CPUs up.
-
-This allows the CPUs to run up to the first sychronization point
-cpuhp_ap_sync_alive() where they wait for the control CPU to release them
-one by one for the full onlining procedure.
-
-This parallelism depends on the CPU hotplug core sync mechanism which
-ensures that the parallel brought up CPUs wait for release before touching
-any state which would make the CPU visible to anything outside the hotplug
-control mechanism.
-
-To handle the SMT constraints of X86 correctly the bringup happens in two
-iterations when CONFIG_HOTPLUG_SMT is enabled. The control CPU brings up
-the primary SMT threads of each core first, which can load the microcode
-without the need to rendevouz with the thread siblings. Once that's
-completed it brings up the secondary SMT threads.
-
-Co-developed-by: David Woodhouse <dwmw@amazon.co.uk>
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 
 
 ---
- Documentation/admin-guide/kernel-parameters.txt |    6 +
- arch/Kconfig                                    |    4 
- include/linux/cpuhotplug.h                      |    1 
- kernel/cpu.c                                    |  103 ++++++++++++++++++++++--
- 4 files changed, 109 insertions(+), 5 deletions(-)
+ arch/arm/Kconfig           |    1 +
+ arch/arm/include/asm/smp.h |    2 +-
+ arch/arm/kernel/smp.c      |   18 +++++++-----------
+ 3 files changed, 9 insertions(+), 12 deletions(-)
 ---
 
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -838,6 +838,12 @@
- 			on every CPU online, such as boot, and resume from suspend.
- 			Default: 10000
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -124,6 +124,7 @@ config ARM
+ 	select HAVE_SYSCALL_TRACEPOINTS
+ 	select HAVE_UID16
+ 	select HAVE_VIRT_CPU_ACCOUNTING_GEN
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select IRQ_FORCED_THREADING
+ 	select MODULES_USE_ELF_REL
+ 	select NEED_DMA_MAP_STATE
+--- a/arch/arm/include/asm/smp.h
++++ b/arch/arm/include/asm/smp.h
+@@ -64,7 +64,7 @@ extern void secondary_startup_arm(void);
  
-+	cpuhp.parallel=
-+			[SMP] Enable/disable parallel bringup of secondary CPUs
-+			Format: <bool>
-+			Default is enabled if CONFIG_HOTPLUG_PARALLEL=y. Otherwise
-+			the parameter has no effect.
-+
- 	crash_kexec_post_notifiers
- 			Run kdump after running panic-notifiers and dumping
- 			kmsg. This only for the users who doubt kdump always
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -53,6 +53,10 @@ config HOTPLUG_SPLIT_STARTUP
- 	bool
- 	select HOTPLUG_CORE_SYNC_FULL
+ extern int __cpu_disable(void);
  
-+config HOTPLUG_PARALLEL
-+	bool
-+	select HOTPLUG_SPLIT_STARTUP
-+
- config GENERIC_ENTRY
- 	bool
+-extern void __cpu_die(unsigned int cpu);
++static inline void __cpu_die(unsigned int cpu) { }
  
---- a/include/linux/cpuhotplug.h
-+++ b/include/linux/cpuhotplug.h
-@@ -524,6 +524,7 @@ void cpuhp_ap_sync_alive(void);
- void arch_cpuhp_sync_state_poll(void);
- void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu);
- int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle);
-+bool arch_cpuhp_init_parallel_bringup(void);
- 
- #ifdef CONFIG_HOTPLUG_CORE_SYNC_DEAD
- void cpuhp_ap_report_dead(void);
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -649,8 +649,23 @@ bool cpu_smt_possible(void)
- 		cpu_smt_control != CPU_SMT_NOT_SUPPORTED;
- }
- EXPORT_SYMBOL_GPL(cpu_smt_possible);
-+
-+static inline bool cpuhp_smt_aware(void)
-+{
-+	return topology_smt_supported();
-+}
-+
-+static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
-+{
-+	return cpu_primary_thread_mask;
-+}
- #else
- static inline bool cpu_smt_allowed(unsigned int cpu) { return true; }
-+static inline bool cpuhp_smt_aware(void) { return false; }
-+static inline const struct cpumask *cpuhp_get_primary_thread_mask(void)
-+{
-+	return cpu_present_mask;
-+}
- #endif
- 
- static inline enum cpuhp_state
-@@ -1743,16 +1758,94 @@ int bringup_hibernate_cpu(unsigned int s
- 	return 0;
+ extern void arch_send_call_function_single_ipi(int cpu);
+ extern void arch_send_call_function_ipi_mask(const struct cpumask *mask);
+--- a/arch/arm/kernel/smp.c
++++ b/arch/arm/kernel/smp.c
+@@ -288,15 +288,11 @@ int __cpu_disable(void)
  }
  
--void __init bringup_nonboot_cpus(unsigned int setup_max_cpus)
-+static void __init cpuhp_bringup_mask(const struct cpumask *mask, unsigned int ncpus,
-+				      enum cpuhp_state target)
+ /*
+- * called on the thread which is asking for a CPU to be shutdown -
+- * waits until shutdown has completed, or it is timed out.
++ * called on the thread which is asking for a CPU to be shutdown after the
++ * shutdown completed.
+  */
+-void __cpu_die(unsigned int cpu)
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
  {
- 	unsigned int cpu;
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_err("CPU%u: cpu didn't die\n", cpu);
+-		return;
+-	}
+ 	pr_debug("CPU%u: shutdown\n", cpu);
  
--	for_each_present_cpu(cpu) {
--		if (num_online_cpus() >= setup_max_cpus)
-+	for_each_cpu(cpu, mask) {
-+		struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
-+
-+		if (!--ncpus)
- 			break;
--		if (!cpu_online(cpu))
--			cpu_up(cpu, CPUHP_ONLINE);
-+
-+		if (cpu_up(cpu, target) && can_rollback_cpu(st)) {
-+			/*
-+			 * If this failed then cpu_up() might have only
-+			 * rolled back to CPUHP_BP_KICK_AP for the final
-+			 * online. Clean it up. NOOP if already rolled back.
-+			 */
-+			WARN_ON(cpuhp_invoke_callback_range(false, cpu, st, CPUHP_OFFLINE));
-+		}
-+	}
-+}
-+
-+#ifdef CONFIG_HOTPLUG_PARALLEL
-+static bool __cpuhp_parallel_bringup __ro_after_init = true;
-+
-+static int __init parallel_bringup_parse_param(char *arg)
-+{
-+	return kstrtobool(arg, &__cpuhp_parallel_bringup);
-+}
-+early_param("cpuhp.parallel", parallel_bringup_parse_param);
-+
-+/*
-+ * On architectures which have enabled parallel bringup this invokes all BP
-+ * prepare states for each of the to be onlined APs first. The last state
-+ * sends the startup IPI to the APs. The APs proceed through the low level
-+ * bringup code in parallel and then wait for the control CPU to release
-+ * them one by one for the final onlining procedure.
-+ *
-+ * This avoids waiting for each AP to respond to the startup IPI in
-+ * CPUHP_BRINGUP_CPU.
-+ */
-+static bool __init cpuhp_bringup_cpus_parallel(unsigned int ncpus)
-+{
-+	const struct cpumask *mask = cpu_present_mask;
-+
-+	if (__cpuhp_parallel_bringup)
-+		__cpuhp_parallel_bringup = arch_cpuhp_init_parallel_bringup();
-+	if (!__cpuhp_parallel_bringup)
-+		return false;
-+
-+	if (cpuhp_smt_aware()) {
-+		const struct cpumask *pmask = cpuhp_get_primary_thread_mask();
-+		static struct cpumask tmp_mask __initdata;
-+
-+		/*
-+		 * X86 requires to prevent that SMT siblings stopped while
-+		 * the primary thread does a microcode update for various
-+		 * reasons. Bring the primary threads up first.
-+		 */
-+		cpumask_and(&tmp_mask, mask, pmask);
-+		cpuhp_bringup_mask(&tmp_mask, ncpus, CPUHP_BP_KICK_AP);
-+		cpuhp_bringup_mask(&tmp_mask, ncpus, CPUHP_ONLINE);
-+		/* Account for the online CPUs */
-+		ncpus -= num_online_cpus();
-+		if (!ncpus)
-+			return true;
-+		/* Create the mask for secondary CPUs */
-+		cpumask_andnot(&tmp_mask, mask, pmask);
-+		mask = &tmp_mask;
- 	}
-+
-+	/* Bring the not-yet started CPUs up */
-+	cpuhp_bringup_mask(mask, ncpus, CPUHP_BP_KICK_AP);
-+	cpuhp_bringup_mask(mask, ncpus, CPUHP_ONLINE);
-+	return true;
-+}
-+#else
-+static inline bool cpuhp_bringup_cpus_parallel(unsigned int ncpus) { return false; }
-+#endif /* CONFIG_HOTPLUG_PARALLEL */
-+
-+void __init bringup_nonboot_cpus(unsigned int setup_max_cpus)
-+{
-+	/* Try parallel bringup optimization if enabled */
-+	if (cpuhp_bringup_cpus_parallel(setup_max_cpus))
-+		return;
-+
-+	/* Full per CPU serialized bringup */
-+	cpuhp_bringup_mask(cpu_present_mask, setup_max_cpus, CPUHP_ONLINE);
- }
+ 	clear_tasks_mm_cpumask(cpu);
+@@ -336,11 +332,11 @@ void __noreturn arch_cpu_idle_dead(void)
+ 	flush_cache_louis();
  
- #ifdef CONFIG_PM_SLEEP_SMP
+ 	/*
+-	 * Tell __cpu_die() that this CPU is now safe to dispose of.  Once
+-	 * this returns, power and/or clocks can be removed at any point
+-	 * from this CPU and its cache by platform_cpu_kill().
++	 * Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose
++	 * of. Once this returns, power and/or clocks can be removed at
++	 * any point from this CPU and its cache by platform_cpu_kill().
+ 	 */
+-	(void)cpu_report_death();
++	cpuhp_ap_report_dead();
+ 
+ 	/*
+ 	 * Ensure that the cache lines associated with that completion are
 
 
 
