@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F3B8C7EE22
-	for <xen-devel@archiver.kernel.org>; Tue,  9 May 2023 10:06:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.532060.828041 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF241C77B7C
+	for <xen-devel@archiver.kernel.org>; Tue,  9 May 2023 10:20:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.532072.828060 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwKEA-0000up-3u; Tue, 09 May 2023 10:05:50 +0000
+	id 1pwKRi-00036g-M7; Tue, 09 May 2023 10:19:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 532060.828041; Tue, 09 May 2023 10:05:50 +0000
+Received: by outflank-mailman (output) from mailman id 532072.828060; Tue, 09 May 2023 10:19:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwKEA-0000ui-0N; Tue, 09 May 2023 10:05:50 +0000
-Received: by outflank-mailman (input) for mailman id 532060;
- Tue, 09 May 2023 10:05:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pwKRi-00036Z-JX; Tue, 09 May 2023 10:19:50 +0000
+Received: by outflank-mailman (input) for mailman id 532072;
+ Tue, 09 May 2023 10:19:48 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SDpd=A6=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1pwKE8-0000uX-4u
- for xen-devel@lists.xenproject.org; Tue, 09 May 2023 10:05:48 +0000
+ id 1pwKRg-00036R-Sg
+ for xen-devel@lists.xenproject.org; Tue, 09 May 2023 10:19:48 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 107b4676-ee51-11ed-b227-6b7b168915f2;
- Tue, 09 May 2023 12:05:46 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0512a847-ee53-11ed-8611-37d641c3527e;
+ Tue, 09 May 2023 12:19:45 +0200 (CEST)
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pwKCp-00F8Kf-BN; Tue, 09 May 2023 10:04:27 +0000
+ id 1pwKQx-00F95R-HR; Tue, 09 May 2023 10:19:03 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id AE21E300451;
- Tue,  9 May 2023 12:04:21 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 4B1FF300451;
+ Tue,  9 May 2023 12:19:02 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 36C9B20B0882F; Tue,  9 May 2023 12:04:21 +0200 (CEST)
+ id 29A6F20B21BBE; Tue,  9 May 2023 12:19:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 107b4676-ee51-11ed-b227-6b7b168915f2
+X-Inumbo-ID: 0512a847-ee53-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
 	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
 	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=iQWsW3vK30T3lTlKXPjWF0ZCCCbqYMC5X75lG5LhBXg=; b=cDPXLQL0z0hLF1/yioFQfmCaBB
-	N8lg3b/6x/H60+tu73L248gNyd5xmZKox7zPuU6VKCA8HcngpEx3i7EoIRxvCJJ2pou+WtOB8+c9l
-	YAHhjctqF48WprPL0AyMzqqVZVwEpLUFVHpyjG9u8qxjZkI2cmceUyq18t9h1WvD06PgFHVUtc705
-	oUIyYOlqGQYWw9krcv5O2YQSBJhVKeLH6KQpRFn783U2eBmeNUpii/ZsJVFV2chFCnrg6UHHo2dd7
-	DFXEbQ718ZPPJ5wbZiakPwUWdfgyQIDGAdRJdu8G/8DVLYhi0TuNwKpexszZz1O5menSPb5zkPzoM
-	5WEFDxwA==;
-Date: Tue, 9 May 2023 12:04:21 +0200
+	bh=PKLh6UaLISIjcUauhr3iF6UlbMhF5g8Vn0HXFbC39j0=; b=K8SrgFC3k1Pze4pOS36EiCmG5X
+	E4mGhrJh8Tp4MMzIggJmmXSFDZoSRoQqK8ZUoW5YCSL9s//gW2n7gBpJeQTN7vOfD2LUm3mpTdcjL
+	DTdVl75NGlZb4DOM8Wve9/AenoFUKmgzoAxcsYqONDoeb7PPUXjOxPipqJ24L4IRLmGatnmIZpg2K
+	HOlNGraQ3bkXrLYD9MfaMGh6bgWxWd7JPQwv1bSEkvzLwsfu5SOyXdDbvpO1kezDEFG52JV23LZ25
+	KZPTC+yVvXc+uJTxC9FqAeTMucXuRrB9TjfoerWv5xB7Ih77dPE2yMPM9BF4mN/7ksbc1OfszoqR+
+	0x9nU15w==;
+Date: Tue, 9 May 2023 12:19:02 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: Thomas Gleixner <tglx@linutronix.de>
 Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
@@ -101,7 +101,7 @@ Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
 	David Woodhouse <dwmw@amazon.co.uk>
 Subject: Re: [patch v3 08/36] x86/smpboot: Split up native_cpu_up() into
  separate phases and document them
-Message-ID: <20230509100421.GU83892@hirez.programming.kicks-ass.net>
+Message-ID: <20230509101902.GV83892@hirez.programming.kicks-ass.net>
 References: <20230508181633.089804905@linutronix.de>
  <20230508185217.671595388@linutronix.de>
 MIME-Version: 1.0
@@ -109,51 +109,43 @@ Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20230508185217.671595388@linutronix.de>
 
+
+Again, not really this patch, but since I had to look at this code ....
+
 On Mon, May 08, 2023 at 09:43:39PM +0200, Thomas Gleixner wrote:
+> @@ -1048,60 +1066,89 @@ static int do_boot_cpu(int apicid, int c
 
-> @@ -233,14 +237,31 @@ static void notrace start_secondary(void
->  	load_cr3(swapper_pg_dir);
->  	__flush_tlb_all();
->  #endif
-> +	/*
-> +	 * Sync point with wait_cpu_initialized(). Before proceeding through
-> +	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
-> +	 * own bit in cpu_initialized_mask and then waits for the BSP to set
-> +	 * its bit in cpu_callout_mask to release it.
-> +	 */
->  	cpu_init_secondary();
->  	rcu_cpu_starting(raw_smp_processor_id());
->  	x86_cpuinit.early_percpu_clock_init();
-> +
-> +	/*
-> +	 * Sync point with wait_cpu_callin(). The AP doesn't wait here
-> +	 * but just sets the bit to let the controlling CPU (BSP) know that
-> +	 * it's got this far.
-> +	 */
->  	smp_callin();
+	/*
+	 * AP might wait on cpu_callout_mask in cpu_init() with
+	 * cpu_initialized_mask set if previous attempt to online
+	 * it timed-out. Clear cpu_initialized_mask so that after
+	 * INIT/SIPI it could start with a clean state.
+	 */
+	cpumask_clear_cpu(cpu, cpu_initialized_mask);
+	smp_mb();
+
+^^^ that barrier is weird too, cpumask_clear_cpu() is an atomic op and
+implies much the same (this is x86 after all). If you want to be super
+explicit about it write:
+
+	smp_mb__after_atomic();
+
+(which is a no-op) but then it still very much requires a comment as to
+what exactly it orders against what.
+
+
+	/*
+	 * Wake up a CPU in difference cases:
+	 * - Use a method from the APIC driver if one defined, with wakeup
+	 *   straight to 64-bit mode preferred over wakeup to RM.
+	 * Otherwise,
+>  	 * - Use an INIT boot APIC message
+>  	 */
+>  	if (apic->wakeup_secondary_cpu_64)
+> +		return apic->wakeup_secondary_cpu_64(apicid, start_ip);
+>  	else if (apic->wakeup_secondary_cpu)
+> +		return apic->wakeup_secondary_cpu(apicid, start_ip);
 >  
-> -	/* otherwise gcc will move up smp_processor_id before the cpu_init */
-> +	/* Otherwise gcc will move up smp_processor_id() before cpu_init() */
->  	barrier();
-
-Not to the detriment of this patch, but this barrier() and it's comment
-seem weird vs smp_callin(). That function ends with an atomic bitop (it
-has to, at the very least it must not be weaker than store-release) but
-also has an explicit wmb() to order setup vs CPU_STARTING.
-
-(arguably that should be a full fence *AND* get a comment)
-
-There is no way the smp_processor_id() referred to in this comment can
-land before cpu_init() even without the barrier().
-
-> -	/* Check TSC synchronization with the control CPU: */
-> +
-> +	/*
-> +	 * Check TSC synchronization with the control CPU, which will do
-> +	 * its part of this from wait_cpu_online(), making it an implicit
-> +	 * synchronization point.
-> +	 */
->  	check_tsc_sync_target();
->  
->  	/*
+> +	return wakeup_secondary_cpu_via_init(apicid, start_ip);
+> +}
 
