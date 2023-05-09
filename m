@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A91FC7EE24
-	for <xen-devel@archiver.kernel.org>; Tue,  9 May 2023 16:44:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.532378.828568 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB918C7EE23
+	for <xen-devel@archiver.kernel.org>; Tue,  9 May 2023 16:44:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.532376.828544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwQRK-0002cm-0Y; Tue, 09 May 2023 16:43:50 +0000
+	id 1pwQRF-0001ua-Dv; Tue, 09 May 2023 16:43:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 532378.828568; Tue, 09 May 2023 16:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 532376.828544; Tue, 09 May 2023 16:43:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwQRJ-0002cd-TN; Tue, 09 May 2023 16:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 532378;
- Tue, 09 May 2023 16:43:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pwQRF-0001u9-8O; Tue, 09 May 2023 16:43:45 +0000
+Received: by outflank-mailman (input) for mailman id 532376;
+ Tue, 09 May 2023 16:43:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kELI=A6=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1pwQRI-0002Ky-DQ
- for xen-devel@lists.xenproject.org; Tue, 09 May 2023 16:43:48 +0000
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [2a00:1450:4864:20::436])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aabb4d0a-ee88-11ed-8611-37d641c3527e;
- Tue, 09 May 2023 18:43:46 +0200 (CEST)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3064099f9b6so3915731f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 May 2023 09:43:46 -0700 (PDT)
+ id 1pwQRD-0001qp-VG
+ for xen-devel@lists.xenproject.org; Tue, 09 May 2023 16:43:43 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a8d2fb1d-ee88-11ed-b229-6b7b168915f2;
+ Tue, 09 May 2023 18:43:43 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3f42ba32e24so7279585e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 09 May 2023 09:43:43 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- s9-20020a5d5109000000b002ffbf2213d4sm14754606wrt.75.2023.05.09.09.43.44
+ s9-20020a5d5109000000b002ffbf2213d4sm14754606wrt.75.2023.05.09.09.43.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 May 2023 09:43:44 -0700 (PDT)
+ Tue, 09 May 2023 09:43:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,220 +47,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aabb4d0a-ee88-11ed-8611-37d641c3527e
+X-Inumbo-ID: a8d2fb1d-ee88-11ed-b229-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1683650625; x=1686242625;
+        d=cloud.com; s=cloud; t=1683650622; x=1686242622;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=16GgcLP2BBqsFeayUECe7ljf4/vLwO1azevfRpDiAnE=;
-        b=HuBJiOT6QALlrn9nb56NQbzi6cla2ddOsWT7xW5nGmKpcyzIYNsdiPxKyWV9v1KN4B
-         /uIHJ7Xy/LdlgRK3eynfeh8W3+AQGlV/DVg0JCRSqLnHxZqU4FpCzVgbw242PvnRAFrb
-         KZv11Jspf0AuzoLRYVG11tRamYzXLmkAKH/E8=
+        bh=2enxHJVvB53hhS6w5p4MreN4cLpgSnyXWT9wrZUvS/4=;
+        b=Jx1Y62UZFeAOx2gMKCjK4jBHh3yhgyKAn9n7FuUAvNutUqg8yAeuRofpXYb8vErxfI
+         7mrXPYxG+D4C8qtZvknk5JZ1buBWqM91LA8CGQylC4OiOQNkJyFM8JFHan2FaHKM8qrS
+         D4S45+nSoit9/DdwrTanwMs6g87mBGlF5IcYU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683650625; x=1686242625;
+        d=1e100.net; s=20221208; t=1683650622; x=1686242622;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=16GgcLP2BBqsFeayUECe7ljf4/vLwO1azevfRpDiAnE=;
-        b=Qe/kYIS/nk4zN18OEe5bPE3UVMbbzCbwoaeuyPGvzySAp3ncE6zy/6k2xNL1Kp9pNc
-         Nx3ZcYLAKr6+0ne2bchZYI4JN4BIS4zgoCEwweD1Qz0VnMZT/rLBGrLGXVrzhOaUTF7P
-         xDRK/eo4d1jaAujPuko+JE1jJo0ROxDqVlEUCCVBPRievF5Sr+ns6k3Q2/jExK7T6mmj
-         87BNNRjVN1Xz+5LLUF8qzX19ldiXo5oBH43uuJOSibZAdf/g/FbTlhBbUDlYeDJIs7n6
-         BqQ5fBlkAdrjMtJPSBSbB5s8at0AHvDND1iX12oNse57p3B/dyg0TvCHenGO8hCHz2Cr
-         lXNA==
-X-Gm-Message-State: AC+VfDwvdx8U8E18cBtw9bqGMkmX9WxVLoCW19jJVHwOLdPkrqgM2GVg
-	WMtSKKlDhionSoW90SrKDSBHu3dMoQtX09Q4oK4=
-X-Google-Smtp-Source: ACHHUZ7NMADEFOOpRrJnC2oe43bnCiHaWZNRSN6qIYJRojhJXSRulKGcG6OnzfawBJdlc/o7zsGVEg==
-X-Received: by 2002:a5d:5701:0:b0:307:2ba7:c617 with SMTP id a1-20020a5d5701000000b003072ba7c617mr10532538wrv.52.1683650625641;
-        Tue, 09 May 2023 09:43:45 -0700 (PDT)
+        bh=2enxHJVvB53hhS6w5p4MreN4cLpgSnyXWT9wrZUvS/4=;
+        b=F+RtZctmdlk1u4hnyJaebmVIITPuxovDcCUH9M5PiGIjHzVJw7EtwKmAwU83XB4gCr
+         gv67lLrH4IIwNdMleLU/5Umq13hBN0JARzZmpFVMdzfnK20FgWWdvJzXCvGqFUiAmu0F
+         7lxRxns8kfYX/WGGxZP8/KRI8Oxr+6Zveqvi2jtRruz9GvAtHZKgh4Vzhe1FW9BJD50z
+         U9cg1MTMQ0FlNGKa8lkYIu7yBpwj5UR6opRa5bBBkjJtJX5YsP4WzTJ8EGDBAeXg9qpP
+         m49XQ7mRPXR0X89DCO2UG62FjtKJcz9g67wytX6YxRGX5mWELFF02gfKtLLnyDXlZKRz
+         LMeA==
+X-Gm-Message-State: AC+VfDxVHJPam9f7x1Yy0O51mWMYpNhF+7+6Z8QCqLZTQbof7kq6G37A
+	qQwBzninmoSbTx5llR5TlwYsCiZvflXaM9BplII=
+X-Google-Smtp-Source: ACHHUZ581+1hPFk3uezFqtzRz8gKAsnHQjClnXioOR9gPVCwBkgpowVceLxszo8PH6MPDLUn03qoRg==
+X-Received: by 2002:a05:600c:2206:b0:3f4:2220:28cc with SMTP id z6-20020a05600c220600b003f4222028ccmr5959782wml.9.1683650622346;
+        Tue, 09 May 2023 09:43:42 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 3/3] x86: Add support for CpuidUserDis
-Date: Tue,  9 May 2023 17:43:36 +0100
-Message-Id: <20230509164336.12523-4-alejandro.vallejo@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 1/3] x86: Add AMD's CpuidUserDis bit definitions
+Date: Tue,  9 May 2023 17:43:34 +0100
+Message-Id: <20230509164336.12523-2-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230509164336.12523-1-alejandro.vallejo@cloud.com>
 References: <20230509164336.12523-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Because CpuIdUserDis is reported in CPUID itself, the extended leaf
-containing that bit must be retrieved before calling c_early_init()
+AMD reports support for CpuidUserDis in CPUID and provides the toggle in HWCR.
+This patch adds the positions of both of those bits to both xen and tools.
+
+No functional change.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
-v2:
- * Style fixes
- * MSR index inlined in rdmsr/wrmsr
- * Swapped Intel's conditional guard so typically true condition goes first
- * Factored the vendor-specific non functional changes into another patch
----
- xen/arch/x86/cpu/amd.c         | 20 ++++++++++++++++-
- xen/arch/x86/cpu/common.c      | 40 +++++++++++++++++++++++-----------
- xen/arch/x86/cpu/intel.c       |  5 ++++-
- xen/arch/x86/include/asm/amd.h |  1 +
- 4 files changed, 51 insertions(+), 15 deletions(-)
+ tools/libs/light/libxl_cpuid.c              | 1 +
+ tools/misc/xen-cpuid.c                      | 2 ++
+ xen/arch/x86/include/asm/msr-index.h        | 1 +
+ xen/include/public/arch-x86/cpufeatureset.h | 1 +
+ 4 files changed, 5 insertions(+)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 899bae7a10..cc9c89fd19 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -279,8 +279,12 @@ static void __init noinline amd_init_levelling(void)
- 	 * that can only be present when Xen is itself virtualized (because
- 	 * it can be emulated)
- 	 */
--	if (cpu_has_hypervisor && probe_cpuid_faulting())
-+	if ((cpu_has_hypervisor && probe_cpuid_faulting()) ||
-+	    boot_cpu_has(X86_FEATURE_CPUID_USER_DIS)) {
-+		expected_levelling_cap |= LCAP_faulting;
-+		levelling_caps |=  LCAP_faulting;
- 		return;
-+	}
+diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
+index 5f0bf93810..4d2fab5414 100644
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -317,6 +317,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
  
- 	probe_masking_msrs();
+         {"lfence+",      0x80000021, NA, CPUID_REG_EAX,  2,  1},
+         {"nscb",         0x80000021, NA, CPUID_REG_EAX,  6,  1},
++        {"cpuid-user-dis", 0x80000021, NA, CPUID_REG_EAX, 17,  1},
  
-@@ -371,6 +375,20 @@ static void __init noinline amd_init_levelling(void)
- 		ctxt_switch_masking = amd_ctxt_switch_masking;
- }
+         {"maxhvleaf",    0x40000000, NA, CPUID_REG_EAX,  0,  8},
  
-+void amd_set_cpuid_user_dis(bool enable)
-+{
-+	const uint64_t bit = K8_HWCR_CPUID_USER_DIS;
-+	uint64_t val;
-+
-+	rdmsrl(MSR_K8_HWCR, val);
-+
-+	if (!!(val & bit) == enable)
-+		return;
-+
-+	val ^= bit;
-+	wrmsrl(MSR_K8_HWCR, val);
-+}
-+
- /*
-  * Check for the presence of an AMD erratum. Arguments are defined in amd.h 
-  * for each known erratum. Return 1 if erratum is found.
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 4bfaac4590..9bbb385db4 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -4,6 +4,7 @@
- #include <xen/param.h>
- #include <xen/smp.h>
- 
-+#include <asm/amd.h>
- #include <asm/cpu-policy.h>
- #include <asm/current.h>
- #include <asm/debugreg.h>
-@@ -144,8 +145,6 @@ bool __init probe_cpuid_faulting(void)
- 		return false;
- 	}
- 
--	expected_levelling_cap |= LCAP_faulting;
--	levelling_caps |=  LCAP_faulting;
- 	setup_force_cpu_cap(X86_FEATURE_CPUID_FAULTING);
- 
- 	return true;
-@@ -168,8 +167,10 @@ static void set_cpuid_faulting(bool enable)
- void ctxt_switch_levelling(const struct vcpu *next)
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index d7efc59d31..8ec143ebc8 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -199,6 +199,8 @@ static const char *const str_e21a[32] =
  {
- 	const struct domain *nextd = next ? next->domain : NULL;
-+	bool enable_cpuid_faulting;
- 
--	if (cpu_has_cpuid_faulting) {
-+	if (cpu_has_cpuid_faulting ||
-+	    boot_cpu_has(X86_FEATURE_CPUID_USER_DIS)) {
- 		/*
- 		 * No need to alter the faulting setting if we are switching
- 		 * to idle; it won't affect any code running in idle context.
-@@ -190,12 +191,18 @@ void ctxt_switch_levelling(const struct vcpu *next)
- 		 * an interim escape hatch in the form of
- 		 * `dom0=no-cpuid-faulting` to restore the older behaviour.
- 		 */
--		set_cpuid_faulting(nextd && (opt_dom0_cpuid_faulting ||
--					     !is_control_domain(nextd) ||
--					     !is_pv_domain(nextd)) &&
--				   (is_pv_domain(nextd) ||
--				    next->arch.msrs->
--				    misc_features_enables.cpuid_faulting));
-+		enable_cpuid_faulting = nextd && (opt_dom0_cpuid_faulting ||
-+		                                  !is_control_domain(nextd) ||
-+		                                  !is_pv_domain(nextd)) &&
-+		                        (is_pv_domain(nextd) ||
-+		                         next->arch.msrs->
-+		                         misc_features_enables.cpuid_faulting);
+     [ 2] = "lfence+",
+     [ 6] = "nscb",
 +
-+		if (cpu_has_cpuid_faulting)
-+			set_cpuid_faulting(enable_cpuid_faulting);
-+		else
-+			amd_set_cpuid_user_dis(enable_cpuid_faulting);
-+
- 		return;
- 	}
++    /* 16 */                [17] = "cpuid-user-dis",
+ };
  
-@@ -404,6 +411,17 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 	c->apicid = phys_pkg_id((ebx >> 24) & 0xFF, 0);
- 	c->phys_proc_id = c->apicid;
+ static const char *const str_7b1[32] =
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index fa771ed0b5..082fb2e0d9 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -337,6 +337,7 @@
  
-+	eax = cpuid_eax(0x80000000);
-+	if ((eax >> 16) == 0x8000)
-+		c->extended_cpuid_level = eax;
-+
-+	/*
-+	 * These AMD-defined flags are out of place, but we need
-+	 * them early for the CPUID faulting probe code
-+	 */
-+	if (c->extended_cpuid_level >= 0x80000021)
-+		c->x86_capability[FEATURESET_e21a] = cpuid_eax(0x80000021);
-+
- 	if (this_cpu->c_early_init)
- 		this_cpu->c_early_init(c);
+ #define MSR_K8_HWCR			0xc0010015
+ #define K8_HWCR_TSC_FREQ_SEL		(1ULL << 24)
++#define K8_HWCR_CPUID_USER_DIS		(1ULL << 35)
  
-@@ -420,10 +438,6 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 	     (cpuid_ecx(CPUID_PM_LEAF) & CPUID6_ECX_APERFMPERF_CAPABILITY) )
- 		__set_bit(X86_FEATURE_APERFMPERF, c->x86_capability);
+ #define MSR_K7_FID_VID_CTL		0xc0010041
+ #define MSR_K7_FID_VID_STATUS		0xc0010042
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 12e3dc80c6..623dcb1bce 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -287,6 +287,7 @@ XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
+ /* AMD-defined CPU features, CPUID level 0x80000021.eax, word 11 */
+ XEN_CPUFEATURE(LFENCE_DISPATCH,    11*32+ 2) /*A  LFENCE always serializing */
+ XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and limit too) */
++XEN_CPUFEATURE(CPUID_USER_DIS,     11*32+17) /*   CPUID disable for non-privileged software */
  
--	eax = cpuid_eax(0x80000000);
--	if ((eax >> 16) == 0x8000)
--		c->extended_cpuid_level = eax;
--
- 	/* AMD-defined flags: level 0x80000001 */
- 	if (c->extended_cpuid_level >= 0x80000001)
- 		cpuid(0x80000001, &tmp, &tmp,
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index a04414ba1d..bbe7b7d1ce 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -233,8 +233,11 @@ static void __init noinline intel_init_levelling(void)
- 	 * MSRs may be emulated though, so we allow it in that case.
- 	 */
- 	if ((boot_cpu_data.x86 != 0xf || cpu_has_hypervisor) &&
--	    probe_cpuid_faulting())
-+	    probe_cpuid_faulting()) {
-+		expected_levelling_cap |= LCAP_faulting;
-+		levelling_caps |=  LCAP_faulting;
- 		return;
-+	}
- 
- 	probe_masking_msrs();
- 
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index a975d3de26..09ee52dc1c 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -155,5 +155,6 @@ extern bool amd_legacy_ssbd;
- extern bool amd_virt_spec_ctrl;
- bool amd_setup_legacy_ssbd(void);
- void amd_set_legacy_ssbd(bool enable);
-+void amd_set_cpuid_user_dis(bool enable);
- 
- #endif /* __AMD_H__ */
+ /* Intel-defined CPU features, CPUID level 0x00000007:1.ebx, word 12 */
+ XEN_CPUFEATURE(INTEL_PPIN,         12*32+ 0) /*   Protected Processor Inventory Number */
 -- 
 2.34.1
 
