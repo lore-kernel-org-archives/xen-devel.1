@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCFDEC77B7C
-	for <xen-devel@archiver.kernel.org>; Wed, 10 May 2023 05:14:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.532612.828882 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D31C77B7D
+	for <xen-devel@archiver.kernel.org>; Wed, 10 May 2023 05:14:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.532609.828869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwc9N-0001Mk-WD; Wed, 10 May 2023 05:14:06 +0000
+	id 1pwc9N-0001Ba-8a; Wed, 10 May 2023 05:14:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 532612.828882; Wed, 10 May 2023 05:14:05 +0000
+Received: by outflank-mailman (output) from mailman id 532609.828869; Wed, 10 May 2023 05:14:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pwc9N-0001Lj-Oo; Wed, 10 May 2023 05:14:05 +0000
-Received: by outflank-mailman (input) for mailman id 532612;
- Wed, 10 May 2023 00:18:39 +0000
+	id 1pwc9N-0001BT-5t; Wed, 10 May 2023 05:14:05 +0000
+Received: by outflank-mailman (input) for mailman id 532609;
+ Wed, 10 May 2023 00:18:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VlwF=A7=hotmail.com=rafael_andreas@srs-se1.protection.inumbo.net>)
- id 1pwXXT-0004li-Sy
- for xen-devel@lists.xenproject.org; Wed, 10 May 2023 00:18:39 +0000
+ id 1pwXXO-0004li-5W
+ for xen-devel@lists.xenproject.org; Wed, 10 May 2023 00:18:34 +0000
 Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02olkn20822.outbound.protection.outlook.com
- [2a01:111:f400:fe13::822])
+ (mail-am0eur02olkn20800.outbound.protection.outlook.com
+ [2a01:111:f400:fe13::800])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 36252708-eec8-11ed-b229-6b7b168915f2;
- Wed, 10 May 2023 02:18:38 +0200 (CEST)
+ id 32251c1f-eec8-11ed-b229-6b7b168915f2;
+ Wed, 10 May 2023 02:18:32 +0200 (CEST)
 Received: from DU0P192MB1700.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:3bf::6) by
  AM9P192MB0871.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::6) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6363.33; Wed, 10 May 2023 00:18:38 +0000
+ 15.20.6363.33; Wed, 10 May 2023 00:18:31 +0000
 Received: from DU0P192MB1700.EURP192.PROD.OUTLOOK.COM
  ([fe80::5056:b334:c71f:b047]) by DU0P192MB1700.EURP192.PROD.OUTLOOK.COM
  ([fe80::5056:b334:c71f:b047%6]) with mapi id 15.20.6363.033; Wed, 10 May 2023
- 00:18:38 +0000
+ 00:18:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,21 +49,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36252708-eec8-11ed-b229-6b7b168915f2
+X-Inumbo-ID: 32251c1f-eec8-11ed-b229-6b7b168915f2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JpxuxsysUsDSy+raGfwZoQG51JT6QRIdG++XXpcSoUesQw9F8jwVr0CgyxdY5R1VWVm5xIdvfHI3sWj6Z0zJJQVYrvodrggawSqPEizDJuK7Jnrj8qjgZhvnW4eb8YyOOcvawrzlq6Hzk/idD2yl1nWTqFB4j3yphKgZ+G3GHeahTanKOZ9jhTI5OZPRvtzbUuBuUFyz4tx2uI6vdxgj+JtpecFWHwvtaQ9dGM7L55c88nhG0qC6TVGbyCDBr1ZetSQnlkrB25+06IgTPZP7cUxjU59sMb0EWsMq5qpe5Akaaj/zFEQDctr5asjw4mPRl1HJG60hHHzmkr+IBo9+LQ==
+ b=e6ggHOMYqA+VDkqkLM68zo3xoa3Im/SBUvsAq441pKH/4JAmGm6lBaPQSyIhOVrb7TQrnLvqtXP5f7ZcAv0Xh5k4OA2qVebfapADHlVxPgr+MFHNkNsK/JZN9huKiLMSFFAFF85a/X6CDsPTE289L3oXx+iJYGSEyQxnSNQdvPAVTy3zvyEIdt7OBg/yB4sap+vMuJOC18XB5R3k9HGZZ37VNUfl5ZELpCXoscROY6AsrENtwk4hjb2iBl8Eq66nHXlbk4VewO8S/0J6l0aKW9rgxN2bl5Ug0scGB4+y5jh8A7eHcSdssx2frZH8b1AFK1KZtVO+6A1J8+pxqYPq8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Co0A8XpUzSdvSffHfW1JcfS0NgGlehxe6pGZTt39HIE=;
- b=T5BOE9bB0TEiD5VWiQpmV7JGoup47DkMRhy1Y6WnVG6R2Nz1dioJx3xrlqr1RpOh3FRtFmDx0gBOiksojwbH5dXSMEqhHvL8Kh0gJ7fNogjiTh/s9lIWBkABKx4fkgKywqHX3q0V8Boavg0lJXNNgQAVHYwvEuBIux+5J9L71X51i9v0TbF2pBXAUZIR5ClNSc9LK/zUtly9yxCA7QHxbVeyAxg0OK0qusSGVfSQtsZujKowVj5SFYkEMs701RmSmruWKJDz+6+Rmmp23tTVDq2OuwMfIzrllGOmbp4eZV7Sn648HQa/x43ojBic33Omlf6dOCsLZpEL0EKEKRpYgw==
+ bh=0HVxw76X4sNRQ9I6fgOOtesQKW3CkebbZBE9wbgYkqE=;
+ b=oJg1Kn+8Rd1cLUYZQZJ+2xmot3wGRrKFPcCbsVZubCR+uKfFAg6E9SQAAXmFb0GedBelIAm4IH1W/PJr2eNzavj0xNWt7mR6cKkuDLXyPUUeMPgB6Hq0O3oybrq8L3uULH+eN/bZraKHEiUO+rV2B8QEpOSI4A/CzaN9+Am9i1hncTKRF0IiFqnG5uxzmdySvOfXESI7XLMBLQKeHkqtLrBPoH6qieUtVhen4Uk8I1o1B9TzzAd80sAXbPL348i558qYtw9yWctdfbkyPH0iB7cnf/gwkTRbk6otmcV0VYtr0DSD0sG5FirzVgaai9CGMZuI2okPOQGGYEt87sJ/HQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Co0A8XpUzSdvSffHfW1JcfS0NgGlehxe6pGZTt39HIE=;
- b=RIat4IdLGcLGFwu7+3bnNxBZdsF8F5KYs7DP+LXUPfgq9THaa7pZ3Os8sFfsjAwB5fdvJH8a97htQNrNib0c/qCJjmclRDcHntrpmJEHkBlK7ucGLq2HUTK6M35AbXNY/AOYFub+JqqhpiCH22WjkJxEB2ArhChsMEZK7HZ89DCHKfykWiRH7syXrbPvpQs8lN3Th/iDFcumvSTmhVFoZr4zjg0zHcOv1H8loSrUPA51+ZRWKsJMSo2ZS6Km0ofGotSrUD/OfWCesFINzSX1+3omg2HMZRW2oOhwnZ2Be6bFTaf8SqGtF6gcBCz3l8hMe5Z6ar0poKpGVNYgUppsmA==
+ bh=0HVxw76X4sNRQ9I6fgOOtesQKW3CkebbZBE9wbgYkqE=;
+ b=eEjrJN9Cqodg2ENtj2iZJMJA2zMvzbV81Xq0POlDJc+WWGFB1w53H0oZdeJ/Ya9BeVHyaaOXOzspGju+c7zsdt7sQSTSiijo0swh/33ClDbN0TMmMPh0b8tXDVPASO481sSLR91YQU5yOzRrAy1zCATdxzEwuRCYVDxd4dOGDrwF4xO+BeL4FEydKjzVxv4hA30mV3AcOf8Fr+qs53tQMc2EhPOQS4mAKt3KSicr3TyfKnmpg+BQ3B+GPM7WhrddGqhkoKcF9EbuL8v/fVuovROm7NznNWr5ZgcI5kAlmk+7hsgXBEnqMaSDB2N6MLNVTh3B4UIOzA9jDIZxhegytw==
 From: =?UTF-8?q?Rafa=C3=ABl=20Kooi?= <rafael_andreas@hotmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Rafa=C3=ABl=20Kooi?= <rafael_andreas@hotmail.com>,
@@ -73,68 +73,66 @@ Cc: =?UTF-8?q?Rafa=C3=ABl=20Kooi?= <rafael_andreas@hotmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 2/2] x86/Dom0: Use streaming decompression for ZSTD compressed kernels
-Date: Wed, 10 May 2023 02:18:22 +0200
+Subject: [XEN PATCH 0/2] Use streaming decompression for ZSTD kernels
+Date: Wed, 10 May 2023 02:18:20 +0200
 Message-ID:
- <DU0P192MB1700F6DFE45A48D90B5FE679E3779@DU0P192MB1700.EURP192.PROD.OUTLOOK.COM>
+ <DU0P192MB170087F1C604F82B946E0CD5E3779@DU0P192MB1700.EURP192.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <cover.1683673597.git.rafael_andreas@hotmail.com>
-References: <cover.1683673597.git.rafael_andreas@hotmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-TMN: [HcumDLXUQx2Ka6y8dbImpEzA8tER5uiK1S3VfeyYV5wT2Hi4Nw5fZ9XqlsqI5KUK]
+X-TMN: [beReuaQEGpvvNbuXWl9DsV1UepjdXlqA/OFaDoYM0Eh/m0k42bwxKZ3y6Hazqxye]
 X-ClientProxiedBy: LO2P265CA0052.GBRP265.PROD.OUTLOOK.COM
  (2603:10a6:600:60::16) To DU0P192MB1700.EURP192.PROD.OUTLOOK.COM
  (2603:10a6:10:3bf::6)
 X-Microsoft-Original-Message-ID:
- <c99bfbb52fa28dbc50c588828e2e325ba12be52a.1683673598.git.rafael_andreas@hotmail.com>
+ <cover.1683673597.git.rafael_andreas@hotmail.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU0P192MB1700:EE_|AM9P192MB0871:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91a01a52-a7fb-4686-ab79-08db50ec19c7
+X-MS-Office365-Filtering-Correlation-Id: e80615e6-f4ff-4213-4d0c-08db50ec1586
 X-MS-Exchange-SLBlob-MailProps:
-	ZILSnhm0P3k2XayEnZ/FXgv66CsfMCS1d7vfnlsnkxPz9PUXJadlSovgYnwo3lJ6PxRKlGP/SxcNROzPIHNCRtP3M+1kuBI/U+oo7Dpgd+Cwj1g1PGktYMMwagUf+Fjl1181pDhQnaVi/teLqHASkpl1GFzJW0BraS7JuIUeP2gOtW5TRGOYoiZbWtidRWc/NYabT2xh+8CWAfawcyO751KLlO+DDiFD8fo3sPVzPiFeHju87Lu126nUFDfVAnRWdxvr/TZaiZqEVKUEQEohD0UYOHjqDDJ7pePb0jY3qFbHK6TxMrCQYycSpVsASUuuoPPsQMG52S/tDRs2Jk5kKcNPCVKtBZ1iez8uVDvf30oRt+KPzvxcD3hDlWqPXIDd1VVL3kAE1Nh/zllFkiujAt8NOPLwJJPO03XhzLoJlGzBaDUBIYFSN4hFpvshdp4zpkfny5Ksv52QXI6KJKv9X38f5uskkhQ60EVXVzSTglTsFdjcarpU573Thb8ezfJ97eWc8ER6TAFxzAc1FBPI81N2QfEByfP4FfKnfk3ee6VjwkXptZDjGd+hfl9Qi2qUPG1Oym80RH//ULTm1WL4/LTpz9cyIBB2KPi6Hnf+ca9C0bxJwy182OxXb1KnM0Ri15/D81jvL2biMVcBWPkpwRoVSDni8iuB1SXRhJ37Spoe4Rcb6Yo9qPkZFt80WagRwOqCuin9ejZHacIp3uQ0ZkoGM6YPzlVvJK03GLNndk3+54cGbPV2+hIH6ZUHa1O2Q0apHGOImIIjRJYBZ4RjjNpXuy8+YQLV
+	ymJijV9pwJmf0wTWvqOqqkTBWKB/77TABiBo5ZvpMUBhh6UTcjUfUxQ7enf06q6+eSMzXfClCxGJ3JFYCJhmRcPQ6jkmu31XbHF8Wcw5ocbIJSCq9JR9umdgARHejUCalI8WpDqtZjo61adrBQEiwRi4IZR/99u9xAbwVJSIJ5IIxAhSBE9zE2xzCBBuCBUo9NMSZ2PJpdpRBy7nwLXY/FpKxHIl8EDUNNbXr2Ioy2zao5gfX8/Atz55rzADkvkQqidDAcTHIj4R2cdxGboYFzOxix9cTDSGQ8Kz1jtM/Tao4G500mTUAzVjAqUjcFtMbQURKPzBQoBTjqGirBujuIfXQsGuTgflw5aerwRstjIUE3LetKvZcrvcgytD+AWDcthtVbWeWsjGsX41K0w9DZPp01JAEsUMbkrdIQZdpJxau3H0VfqQz+FjPsiC8PvUS6g/PiqEgGH645Sbpz3Pbmf6ksyVNi/TDFQC/isRJcbZ5DWpCEVe6OGN60iyDdafneWFezhYM8wQZS7OJxs00hcddwRXiNvIctZaZSvZ9zytArfDXESAuRtOFdf5XYux15LB0PJta+g9AJmJeVzAnp2mdk/844IoZ4jAI1e9W2FwhYXpjQuQ+WFOLgao3gwWOQ30P3uNauIWfqlEmyaoOe4G749HQ4hnygm8GC9lLvVUhDuviUZw9B7NoPChJz3a8zYL6rGBW7euLBOkSvGRAdKZoqKt8HHUWcBBBlZLlkYvifhgMBuCiNfsxiVxfIjyn9myem07H4gLxZvsLKuBSqRy0qEAX876tbrr1OeCiDVgWnjKLXHn4MNw/qCVT2FA
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	W5pC3f03pX93RXyqnro6AjJ8bptsX7vbdbLudov9rnBmZnW4pJtG5Z3hUX7qylEk6zEYu5mOu6Hq/ZLU7WrkoTFMb2H50RAfAIDWRLf8U+pW1w/Ez7DRmObRgD+2q7VPNyvxvjBanHX+FU42Aex0LbpdfH7i5nPl2b21UTu2J84F8uAs+8JBzeiC6wDXSazpagrBVnvSPsnzr0V5rNPQI8YCn2+rWqgo/kf/90jzOACVKY0ryFi3x24n66K+s2FFANPvbyk3N7JQzTO5UPwxKbNfegx0ApnURgrnf8bwwtfy/2MQnowLBYaqmFM2+TDy/NbxV7k6DgKkEioLakTeeqCxr+1tPQuaR9O16bLFMyOzb1EaNwIzuw7tny4dl5I1/Mgz7R1BJ3wXKQ+OUZ3taqwxQKTQqA6Q2xzyd2PXWQ8pMODyqkJeNhtjneDOXA4CilWl3z6ZExjcqDIvdX/N0WYGTVMvbxzk79mMDlZHZp9D++4irUe7XjqPWBNeJ7xyw8HhNXWLmx+i2RaqbL2/BQuz5zJLCgw6pCphhbZjqcIdgoVtB29AoJwkMEfPiSwRJBgDknUw5jCKHWh3FwHP1R+i0zuNETbepDlMdEjapyec33qkfjqPxdhR1PJIzVWv
+	gp7JB/is2poLvR1Hg1XZuV+GG6gIVp0+xC8MfgDSSGGtPoQyL4J9HVMny2tKxCXv1OqMOOGzYQNlMejKy5Di2o5mFFjm6rHKDgK/xF8rdwXosiCJpPyPvRiVWWTP6LqsbjId3r3ouEHrSr9Zd9pjnNIOK6HlcE7L+ZW0YfyBScOW8ZUpJ26pEBFGkmRVSbqeVgWOhrNaG9UflBslb1WPzMoAWVJ5Jo5w26uI/iYG/MM+WOip6OXlNNyTBjsru3bHU1rfMNm9je09cDX4I2si1yvbbXba0F7DSJ6IBPbENKg4IZ65gIH1g1OztemHriIRcQQxejNHpOjbwuUwGcoP0lHe2oW0gZBsHrKNA5qUr8IKBGJcUN52V6OMGvz7uzyzpHhvREjseCvpTErIsyhITcIbFVJH7rZOfODaeP/KQdXwwx+Rd6XEKR8ptSey06yoiiHlbqiQBMG4/sj3ZjQJTK7H2xlNjpmxR8amCkK3SWywaoxY6Ays7BNeBgup+av5kkPXYkadTevv4f/hbEEfEyouZG/xDzA2oRTSSaM/lOWLY6Se8fK+kMgIFkCOaJf+cyltX4pKW6kRG2QGMQaQ1Qf51Eu05EQPe11DwUkWiPo=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZTJhekZaeFpSd3JKV3I3Qi8rSnFpNjRBWXNNQWlGUXovcUZ4Q0crNTJiNG5W?=
- =?utf-8?B?L29qZEtKNWhqR2dNeXJheHExTjhKM3lMb3JpSVF2VExGU3ZRb3Q2enBtUDJ3?=
- =?utf-8?B?OVRMZDZnTm5ESUJyRUs4MzcrWDNFSHZmT0pwU3RVaENHbHYrMkZzbzJicFFi?=
- =?utf-8?B?NlRoTWNPcm1RZ3J4RENRMzR3UDZvdFVmOHd4QUdFMWlpMEl5OW85d3JDSGZI?=
- =?utf-8?B?ZUJONUNNQUlKajJScHZ0dXVIUkxabGJpOC9WSlRncE0rWHY3NTFVTWQ2L2dO?=
- =?utf-8?B?dU9IWjl2cDZKOS9QeVN2TjRSS1FoY0QzYXgrVTZrK3AybFNEemJ1aHBVWFhS?=
- =?utf-8?B?N2hRVlhsbCtucnN0cTdxbm41QklOQ0hUZW11RlBPdE9nTW9WQ1lhYWQxMFZJ?=
- =?utf-8?B?Q1lWT3c0Yk83YmR2ajliQWFUZWFxSVBPYnY1S1VUb3Jud2N5RE5OL2NLSGYx?=
- =?utf-8?B?SURyTERmVWhIQTZ5YklVNHMvdWw1QWVZYU13Q3RKRWZRQUZzZktXWE95Y0xT?=
- =?utf-8?B?L1JzTFc5Q0ZLMFBBUG5hb0tHWmgybU1Pa2R6eDQ4MWVMaUFJQkozb1hMN0JE?=
- =?utf-8?B?a2hpc3FxN3RvK1ArOXRya1N1LzFuTkM5QWhKR3F0b014SW0za0pHdzhLSGtx?=
- =?utf-8?B?aUVpZW5vOUxURy8zWjZGVVRnZjBDOWxRc2hhY0dKZ0dFcHZiUE45Z0tkWTZ0?=
- =?utf-8?B?SFh0ckZtVzdXZGxKT2dIOThQelVDV3U0SUVLWFo4ck9UbWtnYkhCU0l5dnFn?=
- =?utf-8?B?SW4rY0UybWd6WlRXZ3AydkhWSGd4YkczUEtXVXFJb1p2OXh1ay8vYWoxdEN3?=
- =?utf-8?B?UmpRUDJJRG9VYzBOcFNucUcyQkx5TVlReEFVU2dqNFk4eElsdEhpcFRHSHdr?=
- =?utf-8?B?Y3FEK29uZ3RMOXVrdThSUWdBRjNLcGpmUG5wY0kvKzhIQ3VWd2RyS2pWVENG?=
- =?utf-8?B?WjZWZ1N0bWo3UkdlTzVDQnk4c1Evek9Kc05Jb1hGditZSmNHMWM5dkFpd0d4?=
- =?utf-8?B?R2dFUTRlK2N2dnpOM0xyR09EUGZCSlFINi9VOG5JZC9sTktmRG5mS3ZvUmhn?=
- =?utf-8?B?TXhTVGxCMTVkUERPdHRSRTlEcmRxNW5Tc1V5WTQxekRnWjBjRHFKWUJJRE9F?=
- =?utf-8?B?ZktKNkV6aUZpTUgrRk1ia3EwWmdsc2NWb3ZEWHFaN2F5dnhyQUNXUDRuWmdp?=
- =?utf-8?B?MmtGNG1yUjkwYmVWcDVYZ05HNlYzQ3g1NFhBMXZMbFM2czFETTRnZEk3RTdQ?=
- =?utf-8?B?SnlDUG4wMlNRaDJFWHdFUVV3Y1J0VS9tY3ZneHBEM0NLZzNxbjhDUldrWW04?=
- =?utf-8?B?U3d1SFZncDhPOUVncjQzQ3ZuSWErSTRkcHdhY3l3RDJKOVRtTFhGeGREanRo?=
- =?utf-8?B?bHNwS0FLWTNpRUdybVlMSHJTQmtScERRMEJYakROK0t3NnJtSW82Ykh5SWpS?=
- =?utf-8?B?ZEx3dzVDakVyZ25DdmU0SW5mYVQyTmcyaWE0bzNZc3REaXd6d01id05LQnQw?=
- =?utf-8?B?NEZ3OElSUUVvRnRQb0FGaGNDNlVubitwUTE0MFhQTjZFdG1TZTVtS0FULzJV?=
- =?utf-8?B?S0t4T0pOME9pTDZ6eU1Od2dBZ2lodDhrM21KamptZXpqRnpVUjJUWThJb2Vj?=
- =?utf-8?B?NlJtR054b2FoZXFqMWlEZDRXbDZRKzdrQXU1WDlUWHBGd0w4a1VOaTFNT21P?=
- =?utf-8?B?Y0N4UHl1NjRJSUNiT2lHUzFTdTJxUlhON24zQVhJZ2NzZG1kdmtlUlRzTXdx?=
- =?utf-8?Q?8Xrx4eLFd8qMRBfmMI=3D?=
+	=?utf-8?B?SHZEK2lQWGZNTndjQ0I3dHIrck5zZ2FQVlV6TjUzdXMxaHM1alA5ekdVZXhN?=
+ =?utf-8?B?ZmZndEtGUlV5MU1uejk0VTFBdlFva2Z1WkdkcU1pQzc5TmxXTk91azh2a21Z?=
+ =?utf-8?B?MzRzV2VCQ0lKY2Zwc1ZIVWtDWGNGWGdtZURrNjVhbTk5QlA2M3ZsVzFFZjc2?=
+ =?utf-8?B?VFY3b0VySjMvSnNEMXlId3YxNzZqdEtnNzZQK2xjdXNFOUV5Q2FTd0FJWVo2?=
+ =?utf-8?B?L2xpNTNaQ0Y3aEN1V2tQUDFFYWgydzA5aHgxTmJjWjgvSXFXVkpXK3lSdTBi?=
+ =?utf-8?B?REFndTl6d3M3c0tleUVUQlgvVHZGcWgyZXk1UjVJQ2xGbHVlVEFHU2c0SjRy?=
+ =?utf-8?B?bE9kQXc2Rno1MnIraFBTTzNUbkxOV1U2MHZHRHgzbEFKM1VMRCtFcFVBS1c4?=
+ =?utf-8?B?R3VoaFVuSDJLRHB5Q0hLMi9PNDNqa01UZ1NvNUxIZi9XckY0Sk9LazJCY3B4?=
+ =?utf-8?B?UGZBaEdqczVRaThyUCsvWDI4M2Jid1lzU3RPeXFCdlBPQ3RyV3ZHNyswVFhI?=
+ =?utf-8?B?NFBrTnpGUU5HZDhpMXZmNWlRdnVuVitSdWFoUzgrNVdjNG5aWWdjQXFlclNF?=
+ =?utf-8?B?Y1krQk0rYmFKQTRDVVkrWXBRU3JaWVNXTmVFdVBwSTZUemRVZVpXSFYrZGFH?=
+ =?utf-8?B?N0VFanJSbFZ0NGRNdmthaDVBK0ZrY2lRK283QzlkOFQ2UGpLZnpmdUNIN3Zi?=
+ =?utf-8?B?d21nZFhEcm1mamRzVG1ORGE1RG5lcHh1ZXhnV1dOLy9MbUVkS0t3WWhpUjYz?=
+ =?utf-8?B?ZElLTFBTTjM3eURXYWx3RWxINDhKMGhuc3ZrTzQwb1pRcmYvelJJUUZTckNh?=
+ =?utf-8?B?aSswdktabnpJc2pmWFMrV3FZRkN4alR0bzRlMFY3VEZUdjlqMTVTckNHUTNk?=
+ =?utf-8?B?RUVNVjJ0TnRKZUlJT1FObnNiZ3dMazFUYjlTU1Z4VCtJcXpoUC91QWpPRDFj?=
+ =?utf-8?B?SWFHMmZGUlhPaHFPbFFrbW1aSHdsNTFLWkR2ZFljaXBWd2tRQXFpNXljTGNQ?=
+ =?utf-8?B?OWR0YU5DcUw5dEZpYXlYZzJoMk45c3k4MUoxa2VjYVg2ci92UjVHU01xT3pO?=
+ =?utf-8?B?TmN4ell1bi9kck1FOWNLb1RRTVFRdVQxbUtvaEJPdDlEOHVUblFHR0tkeUlv?=
+ =?utf-8?B?WjZQRDR3Skoxb3J2VWZPTVN2NzhzdWFYdUFGTnFOd1VaVlk4RG01M244S3FX?=
+ =?utf-8?B?MHhuYjkybWxzQWZxZnB3emJGd1FhUW9nNTVHcC9KL3hvNjIvRk5OZjJKVjBi?=
+ =?utf-8?B?TTNYTFJDLy9ZT3ZETnBjVXU5YTRlZjJuUFVra0NJVTBFMGJ5dVdzbWF2Z0Yw?=
+ =?utf-8?B?MnorcTFETUlINlpNSXRnYTljNWJaQkJJS0VwMG5GUjlUcS85alRWdFRVNEVl?=
+ =?utf-8?B?Yi9LLzVaR3JzWU4zWUc0aWJCS0t4V1h0dXFPS2t4S1d6SEI5c2haNnNJU1l0?=
+ =?utf-8?B?VUo5K3IzZ0MyZVJMZE5URkdRcGhGVThpUFRJVlFFTm40N3E0SHI2R0I3eGYx?=
+ =?utf-8?B?cXMxQXFtUE81cHJ3c3JRUnEvdUF4cWpTRDJVMUc5Rjl1QkxPUTNZcnhhRVNK?=
+ =?utf-8?B?OWdHK1A3TFEzQ252Mm5CNWE4UURoaC9YWVJVY0hodmlXczRiOWVwZWNIOHJV?=
+ =?utf-8?B?YnNNZU9XWlJoaFFlYlU1NFduVGpMQkRlRVhna3VrTGU1R2RTTUJOcWZIb2t2?=
+ =?utf-8?B?b3hWcXZrQm5VamFQTUEzUjhHUTJESVAvUk55L2JQa2dzL2t4cWV4UE1SeUk3?=
+ =?utf-8?Q?WkXBGW0mFt9Zf+8pPU=3D?=
 X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-fb43a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91a01a52-a7fb-4686-ab79-08db50ec19c7
+X-MS-Exchange-CrossTenant-Network-Message-Id: e80615e6-f4ff-4213-4d0c-08db50ec1586
 X-MS-Exchange-CrossTenant-AuthSource: DU0P192MB1700.EURP192.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 May 2023 00:18:38.1978
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 May 2023 00:18:31.0806
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
@@ -142,86 +140,38 @@ X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
 	00000000-0000-0000-0000-000000000000
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P192MB0871
 
-On Arch Linux kernel decompression will fail when Xen has been unified
-with the kernel and initramfs as a single binary. This change works for
-both streaming and non-streaming ZSTD content.
+I've attempted to get Xen to boot Arch Linux as a unified EFI binary.
+Using https://xenbits.xen.org/docs/unstable/misc/efi.html as my source
+of information, I've been able to build a unified binary. When trying to
+boot the kernel Xen complains that the stream is corrupt
+("ZSTD-compressed data is corrupt"). I've been able to reproduce the
+issue locally in user-mode, and confirmed that the issue is also present
+in the latest ZSTD version.
 
-Signed-off-by: Rafaël Kooi <rafael_andreas@hotmail.com>
----
- xen/common/decompress.c | 37 +++++++++++++++++++++++++++++++------
- 1 file changed, 31 insertions(+), 6 deletions(-)
+Using streaming decompression the kernel gets unpacked properly and the
+output is the same as if doing `cat kernel.zst | unzstd > bzImage`.
 
-diff --git a/xen/common/decompress.c b/xen/common/decompress.c
-index 989336983f..cde754ffb1 100644
---- a/xen/common/decompress.c
-+++ b/xen/common/decompress.c
-@@ -3,11 +3,26 @@
- #include <xen/string.h>
- #include <xen/decompress.h>
- 
-+typedef struct _ZSTD_state
-+{
-+    void *write_buf;
-+    unsigned int write_pos;
-+} ZSTD_state;
-+
- static void __init cf_check error(const char *msg)
- {
-     printk("%s\n", msg);
- }
- 
-+static int __init cf_check ZSTD_flush(void *buf, unsigned int pos,
-+                                      void *userptr)
-+{
-+    ZSTD_state *state = (ZSTD_state*)userptr;
-+    memcpy(state->write_buf + state->write_pos, buf, pos);
-+    state->write_pos += pos;
-+    return pos;
-+}
-+
- int __init decompress(void *inbuf, unsigned int len, void *outbuf)
- {
- #if 0 /* Not needed here yet. */
-@@ -17,22 +32,32 @@ int __init decompress(void *inbuf, unsigned int len, void *outbuf)
- #endif
- 
-     if ( len >= 3 && !memcmp(inbuf, "\x42\x5a\x68", 3) )
--        return bunzip2(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+        return bunzip2(inbuf, len, NULL, NULL, outbuf, NULL, error, NULL);
- 
-     if ( len >= 6 && !memcmp(inbuf, "\3757zXZ", 6) )
--        return unxz(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+        return unxz(inbuf, len, NULL, NULL, outbuf, NULL, error, NULL);
- 
-     if ( len >= 2 && !memcmp(inbuf, "\135\000", 2) )
--        return unlzma(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+        return unlzma(inbuf, len, NULL, NULL, outbuf, NULL, error, NULL);
- 
-     if ( len >= 5 && !memcmp(inbuf, "\x89LZO", 5) )
--        return unlzo(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+        return unlzo(inbuf, len, NULL, NULL, outbuf, NULL, error, NULL);
- 
-     if ( len >= 2 && !memcmp(inbuf, "\x02\x21", 2) )
--	return unlz4(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+        return unlz4(inbuf, len, NULL, NULL, outbuf, NULL, error, NULL);
- 
-     if ( len >= 4 && !memcmp(inbuf, "\x28\xb5\x2f\xfd", 4) )
--	return unzstd(inbuf, len, NULL, NULL, outbuf, NULL, error);
-+    {
-+        // NOTE (Rafaël): On Arch Linux the kernel is compressed in a way
-+        // that requires streaming ZSTD decompression. Otherwise decompression
-+        // will fail when using a unified EFI binary. Somehow decompression
-+        // works when not using a unified EFI binary, I suspect this is the
-+        // kernel self decompressing. Or there is a code path that I am not
-+        // aware of that takes care of the use case properly.
-+
-+        ZSTD_state state = (ZSTD_state){ outbuf, 0 };
-+        return unzstd(inbuf, len, NULL, ZSTD_flush, NULL, NULL, error, &state);
-+    }
- 
-     return 1;
- }
--- 
+A problem I ran into was that adding book keeping to decompress.c would
+result in either a .data section being added or a .bss.* section. The
+linker would complain about this. And since I am not familiar with this
+code, and why it is this way, I opted to add a user-pointer to the
+internal decompression API.
+
+Rafaël Kooi (2):
+  xen/decompress: Add a user pointer for book keeping in the callbacks
+  x86/Dom0: Use streaming decompression for ZSTD compressed kernels
+
+ xen/common/bunzip2.c         | 23 ++++++++++++----------
+ xen/common/decompress.c      | 37 ++++++++++++++++++++++++++++++------
+ xen/common/unlz4.c           | 15 ++++++++-------
+ xen/common/unlzma.c          | 30 +++++++++++++++++------------
+ xen/common/unlzo.c           | 13 +++++++------
+ xen/common/unxz.c            | 11 ++++++-----
+ xen/common/unzstd.c          | 13 +++++++------
+ xen/include/xen/decompress.h | 10 +++++++---
+ 8 files changed, 97 insertions(+), 55 deletions(-)
+
+--
 2.40.0
 
 
