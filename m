@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29EF9C7EE22
-	for <xen-devel@archiver.kernel.org>; Thu, 11 May 2023 12:07:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533330.829901 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72B0C77B7C
+	for <xen-devel@archiver.kernel.org>; Thu, 11 May 2023 12:08:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533340.829911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1px54o-0001h9-W9; Thu, 11 May 2023 12:07:18 +0000
+	id 1px55j-0002ma-9S; Thu, 11 May 2023 12:08:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533330.829901; Thu, 11 May 2023 12:07:18 +0000
+Received: by outflank-mailman (output) from mailman id 533340.829911; Thu, 11 May 2023 12:08:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1px54o-0001h2-Sy; Thu, 11 May 2023 12:07:18 +0000
-Received: by outflank-mailman (input) for mailman id 533330;
- Thu, 11 May 2023 12:07:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1px55j-0002mT-5g; Thu, 11 May 2023 12:08:15 +0000
+Received: by outflank-mailman (input) for mailman id 533340;
+ Thu, 11 May 2023 12:08:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CrlD=BA=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1px54o-0000KI-3M
- for xen-devel@lists.xenproject.org; Thu, 11 May 2023 12:07:18 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0601.outbound.protection.outlook.com
- [2a01:111:f400:fe0c::601])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5e8ca344-eff4-11ed-8611-37d641c3527e;
- Thu, 11 May 2023 14:07:16 +0200 (CEST)
+ id 1px55h-0002N3-Df
+ for xen-devel@lists.xenproject.org; Thu, 11 May 2023 12:08:13 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2060b.outbound.protection.outlook.com
+ [2a01:111:f400:7e1a::60b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 80769162-eff4-11ed-b229-6b7b168915f2;
+ Thu, 11 May 2023 14:08:12 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by VI1PR04MB7072.eurprd04.prod.outlook.com (2603:10a6:800:12c::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DB9PR04MB9500.eurprd04.prod.outlook.com (2603:10a6:10:361::5) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.33; Thu, 11 May
- 2023 12:07:14 +0000
+ 2023 12:08:11 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::8e41:82b6:a27f:2e0c]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::8e41:82b6:a27f:2e0c%4]) with mapi id 15.20.6363.033; Thu, 11 May 2023
- 12:07:14 +0000
+ 12:08:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,28 +49,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e8ca344-eff4-11ed-8611-37d641c3527e
+X-Inumbo-ID: 80769162-eff4-11ed-b229-6b7b168915f2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QLE6lLNvVHuSw/fdKAAzSm3vbMHlxyKjSYP1wn7xnBhFEAgjwWTW63L1poNNwN1UqW4DwHMwPbZhQq3+wz4BalLFpaS73N509zDQpmQr+WG6eeJZutserc20TH0r6XAjrUPqHY//t+DwqMXSS3UWj91LQqQYGLUNuQiGsVFCMoSzO/ywD9zyxg3S692T914FJNgbg8g6WuWhh5cQEunOdW1d/MvOLOIgDQN8QTBMyeJ7m94wHM9D2h4g+g+uqX/buceQMWdR3ohgVyA0GUPYzLGtRQq/G/HfvjcWoOuzByC77uYg+tsZOzfYkSEcYDD+fzJAMhEh3JuHqcu9m9bZHQ==
+ b=GRsdVBXLWggBdeJz9wDXs/c0bpNMEwVxqf8eD7b4kYCdKfyYjJWtNgah0v7RcR+bMpp0KdpJch5HhN2wEUtIxbfbdy1WoObqG2oCiPbCijkScVfqdjRrFUbtIcKYlNb0UeMulNIr7GGwP/omCd7VuhkSBbCqx0dWX3YdJStlIIJntzS/sp2GEtbXX0AUMaCcHqyhazEYU+BQ7rtBoKLjxwNyQV1iyoTzo/Jp4VUw/Lp1dNF/sVQNW4T4Trsa0EdA10DGCAFpF77VTwosQeNAKmGDuoU6K1mPkHlvWNeIQuU/SCr/YSuUwkZlg7vRtHQyKnqmwDayj4XPPbgXNnM96g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m8K8rfTh8nTzrnw7JpPtZZMmTWFZSgvhcqiMn1zjH5Y=;
- b=ZssgIDn4uYLKy92R3VrnrvWrVB4GnVJYeKzmqHKi7FO8BBW9bcq3wB7A0EXpzd2o77eN4y6PFhm2RdzAVWOIPpz6tI9Umlwf9musXSnswLoZncxgrZvfPS/akNjmunZ0vAdbLc6oL4oT5Jd32gZ99V18xLMygL38i8Tsu4ru7edz6CzK8A2RScgUP2xfjXrsIgrrXt0/rPcHVqYyrG1EsBIoJUYtQUy+M/zHbTpDmZdOj0uOM3cBjYHlu//iesPkY6pvV9RdgYcYiliG4x19rQ0aEUasl+ZTvMxh4mLpUPh5gc5s/TtG30V9aundapwsOLf0R2oWcyqnfxROifTngw==
+ bh=G+zqZGPqfnT5MVrIi37WQFaIf6fuLMsYpLckidDxeS8=;
+ b=j8PqPPaOhWr9n9lovQd0CVjd0QwrMmCRNxnOLj7+qF//i8k7Lj/923RH+TuGwzWNOHRcnHSDyAqr3N23gv1F9h5eoyE23VhESUvQMoCorGZv3HPzjI6O6dY558MvmJruEWC1v64IEyRcI3IQqa89EE7hikq0dwqAWKR6JW07yDktb3o3JIjMp7Dz0gcNhE0INtRJDwEdApiaxAuRfHxSuKJTLZs3E74THuK4qA3vE7UT1Q20t2fQmb/bk0D4I0goo+shSDkQSaItFwwLursLwDhxWvo7jEPGVjRByaJbZL6+Gv3t8hPDQlJHnICBcNXhirkf5nd3KHAQrnZXOubN8w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=m8K8rfTh8nTzrnw7JpPtZZMmTWFZSgvhcqiMn1zjH5Y=;
- b=JhCfwXzO0baWy9CqDtDbNLF9ZaTgt4sYVeyB4ea1qSpYiZqRYrogTS10Q1ryKf/ViF45BPCHQifQn9gX6vd422yOn2pwGg4vgTK+58Zal310WAE2KRtzO5pSNZXiTxn8ZW+rLAaoIdPUSAxJ5WK01+vfYU23U20Xn8BBrH5vygdPCw6kKglPGY9r1txhbsKpJKpPgfj4MJe4rlb3QL3xFHaLddUG3rs5mlUsWHeipf/hf5XVYBfbMQku83fb2cW/dvHe8dyDzjdvrDNDkJNOfpIopAu02s2gtvtD1WOaTv+gwLo9GY46NkRBT6pGJ658hNP++TkQu1A3LsWa3PB/9A==
+ bh=G+zqZGPqfnT5MVrIi37WQFaIf6fuLMsYpLckidDxeS8=;
+ b=X/eaUmwPTaHbbav2G5Q7c8e2osiyFc8R2cVrI3PwdMf6VG8+RvbAwQOJiXjIxJgSgoVtkde8jRWO2Yj4aKTgjaIGvUDqBOAYT8NXxPCE8wPvt8xv0MtcS2ejxs3Dg0H0dRNeE+3UZOjEMLD3LuMlLIj5bskjDzcwB0z03Zy8kAaPfY0Amt/9pLs5SAsTEE3hNTNa76ivuhxeqbQykN6zFbJSzdk8OCQf2Lp3hhFGUnjiuwvrdPl7FWcpiiHjWw5gT/4cN4WSqBt2FJF0W7ilMQkusc2YEfgObqEtJTcm9vdZ8xlTQ/G8HbiSBmteYIK7RyoH3mHD9W5dixWgaNSqYg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <042f76dd-d189-c40a-baec-68ded32aa797@suse.com>
-Date: Thu, 11 May 2023 14:07:12 +0200
+Message-ID: <118fa3e5-e1ac-ab3e-8b86-1ec751513434@suse.com>
+Date: Thu, 11 May 2023 14:08:09 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.1
-Subject: [PATCH 5/7] x86: detect PIT aliasing on ports other than 0x4[0-3]
+Subject: [PATCH 7/7] x86: don't allow Dom0 access to ELCR ports
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -80,199 +80,99 @@ References: <95129c04-f37c-9e26-e65d-786a1db2f003@suse.com>
 In-Reply-To: <95129c04-f37c-9e26-e65d-786a1db2f003@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0221.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ac::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0102.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::18) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|VI1PR04MB7072:EE_
-X-MS-Office365-Filtering-Correlation-Id: 88a83702-e00d-411a-3ce5-08db5218420f
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DB9PR04MB9500:EE_
+X-MS-Office365-Filtering-Correlation-Id: 473e6907-3e34-46d4-d0cb-08db521863e6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	Piw6xsXWIlRnmjXfRN6ILvU41a/F2MUffr1rvlRQAgppIDeqYvesIV98II/UysaHxr/WmArp9kARj2198WkAr+2PhkRUlisFg+6qYr+EUHDS3EZRsB8CQRrTaiTUMe/xje18lRQllTIV0FneYeglDwdDijoipoYbsgy5+s5CkR+ARor9ReIesOOfluOK9L7naOHnYo2XreX+Dq2ENkIMlmXJrQG1OcOj6tH1tIqFaCyEGWbqcMn5nJh8KYKWJoJ4ZSXUrKHlLYeS3gzEwzRjVHWXr9M+ruD6/KrnGkaJ42Hkk6WDrOtxEqlR4iKF1fAOnrN0ADOe6ybJY8HALQmU1S4YOGdsMCZy/XB+17LIGD21clyYrIvLaoZplZrmK4l5wkx3KgF2hX7BeKQuBEFMRRh/g3/A1QHc9V9wgaPmZQl0Y0UF7Fw3rxwhgQnMFIXiJ4J6Zla1V9wG+HhFMlBh0pssqOtbLZa+fvz79qHKj4EOy/L82S8SRFHIi4tyPOwYyde8HWS2g/5Fb68y8u9psa63Zpfq+vov06zkWVNrbhZp3QTyRF57LCkGPVZDnoqxwc1BIxkz3Sz3Ea7E2WHxELr5g5qDcDLtFQ5QnWjkK2RXw0CFbIoQvzhuA7+YTsZqGlbJv5Dut8FmrbKZQwO28Q==
+	cOZvflC5zg2EVPAOnJ36A7aTTo+8zh2mLLhgqvwgKH5bbUJZTTMJxxDyxukYqHUKmZ4mWfK3VWvu7697nS/3JUpz8dhgjH6eWXXWiQvQR/NCvq/z53tj42Bt3Crq6U1i84KSsM+og4RsN9hzAmddkZMLNHgbqk9YDAbGDOwuox3Uc0cuEPM7elksG32O0UrVzC0dimyC5OiZ83tVnn6Wc5C9O7r2U6m9nqU+WcNgphEVdUBORLig/oyKi1GkoocMsIZQdp+S0HhlwCdyp/KtT7vba8rXkdA7eR/Pts7vigsS5wo8CY+nZAJM4V6wWeP4ahjBIu4DFucmCj96Wsj4I9AqGrvRpjbxLF5A1TWLBnQ6eTlC/xnidjmtcn9WjUoCBfM+O+GuOcB7aETOyHpcjYjWSWgXZGB9BP4Ua9pR8RUIWncCV7Y8x0lGRQyTM0ZupuSX0LUc1aEb2HS83G4IhBp0EBOaRVTbkBiVk00WRIqXdFlMYLo/jc1Fuv73PjdgjDJvYEoTfv1VAHy6OVJ38xyxvjS0xY7V+0SjszYup0Pgl75+hBblsTiyRaMCoE66DIeRJtY4HGS9R9eM1qBwyvWwHd7xN658p8RBCt2AWavGpIqWcszBotGqAEF7pcqjUJt8kaStU58y7KCxgTRP1g==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(366004)(39860400002)(136003)(396003)(346002)(451199021)(31686004)(36756003)(2906002)(41300700001)(86362001)(38100700002)(8676002)(31696002)(5660300002)(8936002)(4326008)(316002)(83380400001)(478600001)(66946007)(6506007)(6916009)(186003)(6486002)(66476007)(66556008)(26005)(54906003)(6512007)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(366004)(396003)(346002)(136003)(39860400002)(376002)(451199021)(31686004)(6486002)(86362001)(41300700001)(2906002)(31696002)(36756003)(38100700002)(8936002)(8676002)(5660300002)(83380400001)(478600001)(66946007)(4326008)(6916009)(26005)(316002)(2616005)(66476007)(6506007)(54906003)(6512007)(186003)(66556008)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZXFETDJWbjlyY01PYm51SHpQTFhmNWI4c05aZUZ0VnNKNmthb3RLYktlVUFN?=
- =?utf-8?B?TXRRWGk2NXlWdmp5MmVKWEhCSjBCbXVBVkkxVTBTV0hUQXNuU3Jva1Z0UkZ4?=
- =?utf-8?B?Tlk3Qzk5ZkFXQkxEMzVPZ1liMkFxR2JuYlpuMXM2aVJ6cGhtWEF2a01Jek1R?=
- =?utf-8?B?VytBODlybWg5bUFZSUZCS0l0cXl0WVpTVTNVTGdRSWZROEx6azhERTB5T0FT?=
- =?utf-8?B?QWNKNzUrSE9rSHYvM0s1Qy9NS0hJS1F2dVdMYU1yejBBSEowaW1WSXlaakRV?=
- =?utf-8?B?T2w3TmZNRGc4TzI2bUxpWkdqWEtKa2tzc3NYaEkxeDQ1WXNUKzlFLzh0azVU?=
- =?utf-8?B?L3VyNDRZMWJBdUJmTnhMaU5jaTgyVmZpWVlRazJxNGl3K0RjU29XdDBjSEM2?=
- =?utf-8?B?bzdqd2lsTFliZkUrZU5pRk8xbkdjYkdwM2NSUXdlWmhOQit1cjZwa25iM2pP?=
- =?utf-8?B?NitCOXZobmJDdi96TlB1UUZqQlVwMTh4MVd5TnJmUnNXZHNlbUxIOGRGTFNU?=
- =?utf-8?B?RTRpV29JNEZQV0xQcTVqNDA3WFBpcGdrMmFTcUxwbTVySTZ3N2NpbVo0ZXNy?=
- =?utf-8?B?V3A0QmRTQXRkd3lFN1MyMWI2d2dUb3hOR29KTERxQ1NjTUl2S2h2SmVac3dq?=
- =?utf-8?B?VmVPVS9mdmVzb0hRUDJFanM4dUZoQ0hCK0R0WVVmSWdyOW5kTERRWENrSlpJ?=
- =?utf-8?B?cWtIRGJKWjZTRWxhVHh3cmxycktqZzNNOEhKTjJEMXVhT1grWjNnMWpJd0Zs?=
- =?utf-8?B?Zkpob1dRNlErSldMVk9BcUp2VVFlaG9IaGtZNmxCOUdyOVV0czZTMXRRdlZV?=
- =?utf-8?B?RVZWczBXNis1M2NpeGxETjFjZGRJdmgwQjRUN3ZDQlp5WW9WQTUzNURLMHJn?=
- =?utf-8?B?MWxEQkZ0cEllRTRHK0xVYVRVTEF6UkFvem5GSjNKbWZHU0ExSkQzOGd2bFAx?=
- =?utf-8?B?ZTNsV3VjZ1VQYytFS0hqV1ByQ2VITDlTeTRSd3JMUVpiZjUxcEdTL2dja0xh?=
- =?utf-8?B?YUpXR2xoU3JhY0htV2lNQ01INjVseFMvTXlNanZnVDVobUUwK3VKcEVjSGU4?=
- =?utf-8?B?UmhuTy9HR3hvRm1HRXE0UGFpZGdZbmY3R2NEaFFtenBncjVsVnFuWW02Vld6?=
- =?utf-8?B?My9UZTQvVGRhRG9TSCszejlEbXFsMmxDQXJueWxCb3NjZ0pEVHdBQkJlWity?=
- =?utf-8?B?cVZkNm9YQ3l2VHBYM0c4WjMralhlaktjazl2VThVZTRZeUZDZVZrQk1uOFph?=
- =?utf-8?B?a3FBT2trWmVFdmdja2JXZG9IMDBOM1R0K1FtUGUzdTJPLzJiZzRRd3gvR1Mr?=
- =?utf-8?B?eFBIbzBGRjd4UmE2cFhmUGZXWFduVkpTQ0N2ck04OE9nWXIrOURwM0lmd2tY?=
- =?utf-8?B?d0o5bkxENWIrRFRRNndIOGhEcVN6RWNmTzZmcEtIR253bXdRa3hOdE9idTJo?=
- =?utf-8?B?R1N3Q2FQeEtnQzg2Uzh2bVR6cWNHaUpZa3BIYUFaN2lPKzVxcTMxQ3dnNjhj?=
- =?utf-8?B?SUlYQUVZTXdGRDlYOWkrZkFYN0JaVloxRitKb3RobEZjeFdxUnJOYUxBOEF3?=
- =?utf-8?B?TFk0WUFQbkFSY3Ztd0lDcWtQZ2MrVXFEMW9hWjNkUHdYYkdqWE9NTGhVQjIw?=
- =?utf-8?B?QnMrYkpucGxCMGhPNHZ0OXJOYktvL2JSZmVYNmlBMGJiVzl6K2NYZmQ3V0cv?=
- =?utf-8?B?RWdpa2dGWjkrbWhRWDNPMW51dDJZUXZJcG9lUVBqYVc3REgvV0d2amNKcVA1?=
- =?utf-8?B?T0RqTVE1VkNpZ2xUNFEvUU02cTVwSXRodDJzb2NBQ3hqUE5rQ0E1ejNYTUht?=
- =?utf-8?B?bXlNVjlMTW5kek5iMi9RS010SWs3V2xUdUU3YzAwb3M2SGZ6YWN3OTYzdkpr?=
- =?utf-8?B?WG5UbWZENXQxcjVZVHRDOTRzcjVQNytGMW5RMFFpalM5UWlwNFVkTnhYTFBa?=
- =?utf-8?B?ZU5sd0ZiamtZQ1NyTDkxeG5tMlNhaHRuMVpCQmQrQXdJZHlJNUQ0VUp4YWJ3?=
- =?utf-8?B?b3FUSTNzMU1FOHZCanY1YTQ3dWpKd1NLTkcxaVBmUGxUTzVhQXRmcElSdlJU?=
- =?utf-8?B?QnAxOGZ1aGI1bTg4S1pZR1JXbEk4aExPam83L0RrcUN0MzhpRFpVRDVreGVG?=
- =?utf-8?Q?pzFGROsaQU26Z4WUpawlDJppk?=
+	=?utf-8?B?SUhTSlFYNFhvS2duZkZ3Qys2YndvMC9PekRabzFjTGpRQmZNbG1VM3VpRDRR?=
+ =?utf-8?B?UFVyWnBXOTN5cm9Eeld0ZjJTT2cwSWNGd3JHS05PUlFOcDBFWHo1SjVER3Vp?=
+ =?utf-8?B?UVJhMWFTZi9lNjRXY2J5RG5CUUZmSzZSc0EwRFpMR3pnVXFjb3lEczMrWUh6?=
+ =?utf-8?B?WlhFYjIzZHM0V21lUXloclZ2YVdWUFpjTWZwYmE0VWdSYXdwUSt5RmFPWngx?=
+ =?utf-8?B?Z3ozL2JIZFBkdnN3cWxLVGxVaWlVZDBvVndhcFpldVZjTjRiUnhPTHdRZm92?=
+ =?utf-8?B?dkZMNFMvN0xoNEZNbFc2dWhMY25TWGtkUzhlblBuTVJQbEFUcGhkelJsT2FY?=
+ =?utf-8?B?V3V1MUwzWVUrQ0FRREFCVUJreFdUcmdIdXYrTlFCc3B1cm1aWjY3SUpWYzVl?=
+ =?utf-8?B?RVNRWkt1RE1UYVkzMW5kVlloN2Y5RStpckxuZk9QUkhCT1RHTFBUellYejRQ?=
+ =?utf-8?B?M3BmOFVEZWY4VkxpOVVJUGVPd09UMzYzWTFPRi9kWHVRUVU4dUtBdmRVNmd1?=
+ =?utf-8?B?dDBOOUVUVzFCbHJzMy9JZjdxRUJKUnRuRXlNY29sSXBPQk11bnZlU041VkQw?=
+ =?utf-8?B?cmRFV09oMFRrNkhhblEwSHdsdEtDeWdVcGxzcld4S1ZBUVQ5eDRSZXdMSEFJ?=
+ =?utf-8?B?a3pyWmJVaVE1SUR4UjQzVHN6YjY5endsTG9GTjlmWmdDVk9KVHlHQmlZYlQ4?=
+ =?utf-8?B?REd6RnM3QWNOQlRiRm1YeDBnWGtvUFNUUTFQcDcxSnhGanJ2RVIxV2YvdXhX?=
+ =?utf-8?B?RmtsQkdLVDRBK3pNNE9Lb2doRk9YQ0JGNjVObzlBRmJmcWkybDlmSVFEWmx4?=
+ =?utf-8?B?SFJNUjRRSDcrQVVrbmFvWTBuOWZrTjA1bWVNb3BnOVB2MVZuZlVJNmppUnIz?=
+ =?utf-8?B?VkdVd1hUdGpWSUhncmVXUTdRRWxTVjVJWmEzZ2N1bUdzY3hndllKdUo0WC9p?=
+ =?utf-8?B?R2NIc01lOG42RXcvRkdHUmtOSCtqbUovWlNVeXdBRFQ2cVZsOXhkY1YrZDVG?=
+ =?utf-8?B?YVBnUWEzeEQrU2RwTEhnT2lnSWxXTFYrWnJUZWZlaytHaEVHaWJ1OGhmTnBi?=
+ =?utf-8?B?cFZ0MWQ5MHNEOHphZ2p0d2h2NW01N1JiblVZUE15dGpNL245Mys2L0psQ3NH?=
+ =?utf-8?B?WmxWN2RCMG1zNm05WXlyMDZ4Yy90WnNwdlVIck45UjdkWHNPZFBIVG5SdW02?=
+ =?utf-8?B?Q0RwZVhXQlRzaldDKzgvc1owZlVrOGVOaDhybkZxS3lWbTBVaG1YK282Q1Ix?=
+ =?utf-8?B?TDU3dTIrSHMvWTlpZTFZa2JsSjlqczB5SUJLcGxjNDlVcHFqT05uR0pjL0tq?=
+ =?utf-8?B?R0JrZG15UlVQRHpaa1Z4ZVJsazBhczNyTzA1d0JQVnNOaGVORkFZNjdETW9H?=
+ =?utf-8?B?Sk5IbnJ1YlNZcXRaeUNtUjhmaW9zSmRMRzNjdnB5cSs5Q2ZscTBvQ0lqRlRz?=
+ =?utf-8?B?MW51RkhrcjBRTHhmb2xETTVGYmhYYzB5TG5vcEJGdm5lM1l1YkxCeitxdGhp?=
+ =?utf-8?B?bHEyQXFJRjl1TTkrSjd6WCtabGRLZUxwQkdlSG9FeFFxRHRtQUdvWGcrb0V1?=
+ =?utf-8?B?R3FQeUx4Ukl2Tm9pV012L05DSmZ2NE1iellWSEkyR2pnd3I5VlBYS1V4K3gr?=
+ =?utf-8?B?K0FQWVZvbU9RTTllT0JxZzVPU1p5aVQwYjloRFByZkt6SlptVk5ncjlqek8w?=
+ =?utf-8?B?NVoxRVFRVjhISjZpaHZHMFE1M1JKbnV4NFp1aEVoay9DR3o5b09uUDVydExj?=
+ =?utf-8?B?c3R6em1TbzRyNmdMa0pQdkFTa0lOeDdpNWNodmV2SjNBVVJSM0dISDRvblBn?=
+ =?utf-8?B?azhNS1NZMnlTUWt0ZVFReFFPUXhCNUtPYW1aRXdKWTJOVnhSWnNJbm1aV1Nq?=
+ =?utf-8?B?d0J5SzFrVHBhS2JzOEpWRFR4b2Iyc0lGMUFlMnhGekhjQTlGcjFWS0F2YzYr?=
+ =?utf-8?B?dldDdU5jTXc1cURSME1QSFdTQkg5WEFodzlJY1B6U2FMZHZIbGdMODdQN0Z4?=
+ =?utf-8?B?S2tNQ0dDSUlYMmYwUzVLNVloa3RuOEM4K3haSWtPbFA0NDFoZU04ckJLRVY4?=
+ =?utf-8?B?QzJ0QzR3cDhvamI1YmJoOGdrUEZHK1FsalVWaU9YTXRPZ2NnUHNIQnhSVUFm?=
+ =?utf-8?Q?Co6AAniq/G28ZTPT/sY/smwmZ?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88a83702-e00d-411a-3ce5-08db5218420f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 473e6907-3e34-46d4-d0cb-08db521863e6
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2023 12:07:14.5554
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2023 12:08:11.3268
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +YOKnAJl09OcsZ+ZZzuKHL3FKqG08+tHX1y4K+dqtN+HaGc/c0hfJSjxbKqtebzTKJUiW/8vvY+KZkFpDBpCRg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7072
+X-MS-Exchange-CrossTenant-UserPrincipalName: e8g8PXSXfiaE2KZ+sCDJ+yxYt1jxPbZ9xkNcJHErPsuF80VIhnqxJz7LP0HovPSvZk6CaIWDxs8us17YoRRmAw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9500
 
-... in order to also deny Dom0 access through the alias ports. Without
-this it is only giving the impression of denying access to PIT. Unlike
-for CMOS/RTC, do detection pretty early, to avoid disturbing normal
-operation later on (even if typically we won't use much of the PIT).
-
-Like for CMOS/RTC a fundamental assumption of the probing is that reads
-from the probed alias port won't have side effects (beyond such that PIT
-reads have anyway) in case it does not alias the PIT's.
-
-At to the port 0x61 accesses: Unlike other accesses we do, this masks
-off the top four bits (in addition to the bottom two ones), following
-Intel chipset documentation saying that these (read-only) bits should
-only be written with zero.
+Much like the other PIC ports, Dom0 has no business touching these. Even
+our own uses are somewhat questionable, as the corresponding IO-APIC
+code in Linux is enclosed in a CONFIG_EISA conditional; I don't think
+there are any x86-64 EISA systems.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-If Xen was running on top of another instance of itself (in HVM mode,
-not PVH, i.e. not as a shim), I'm afraid our vPIT logic would not allow
-the "Try to further make sure ..." check to pass in the Xen running on
-top: We don't respect the gate bit being clear when handling counter
-reads. (There are more unhandled [and unmentioned as being so] aspects
-of PIT behavior though, yet it's unclear in how far addressing at least
-some of them would be useful.)
+RFC: For Linux'es (matching our) construct_default_ioirq_mptable() we
+     may need to permit read access at least for PVH, if such default
+     table construction is assumed to be sensible there in the first
+     place (we assume ACPI and no PIC for PVH Dom0, after all).
+
+RFC: Linux further has ACPI boot code accessing ELCR
+     (acpi_pic_sci_set_trigger() and acpi_register_gsi_pic()), which we
+     have no equivalent of.
+
+Taken together, perhaps the hiding needs to be limited to PVH Dom0?
 
 --- a/xen/arch/x86/dom0_build.c
 +++ b/xen/arch/x86/dom0_build.c
-@@ -504,7 +504,11 @@ int __init dom0_setup_permissions(struct
+@@ -503,6 +503,9 @@ int __init dom0_setup_permissions(struct
+         rc |= ioports_deny_access(d, 0xA0 + offs, 0xA1 + offs);
      }
  
++    /* ELCR of both PICs. */
++    rc |= ioports_deny_access(d, 0x4D0, 0x4D1);
++
      /* Interval Timer (PIT). */
--    rc |= ioports_deny_access(d, 0x40, 0x43);
-+    for ( offs = 0, i = pit_alias_mask & -pit_alias_mask ?: 4;
-+          offs <= pit_alias_mask; offs += i )
-+        if ( !(offs & ~pit_alias_mask) )
-+            rc |= ioports_deny_access(d, 0x40 + offs, 0x43 + offs);
-+
-     /* PIT Channel 2 / PC Speaker Control. */
-     rc |= ioports_deny_access(d, 0x61, 0x61);
- 
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -53,6 +53,7 @@ extern unsigned long highmem_start;
- #endif
- 
- extern unsigned int pic_alias_mask;
-+extern unsigned int pit_alias_mask;
- 
- extern int8_t opt_smt;
- 
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -425,6 +425,69 @@ static struct platform_timesource __init
-     .resume = resume_pit,
- };
- 
-+unsigned int __initdata pit_alias_mask;
-+
-+static void __init probe_pit_alias(void)
-+{
-+    unsigned int mask = 0x1c;
-+    uint8_t val = 0;
-+
-+    /*
-+     * Use channel 2 in mode 0 for probing.  In this mode even a non-initial
-+     * count is loaded independent of counting being / becoming enabled.  Thus
-+     * we have a 16-bit value fully under our control, to write and then check
-+     * whether we can also read it back unaltered.
-+     */
-+
-+    /* Turn off speaker output and disable channel 2 counting. */
-+    outb(inb(0x61) & 0x0c, 0x61);
-+
-+    outb((2 << 6) | (3 << 4) | (0 << 1), PIT_MODE); /* Mode 0, LSB/MSB. */
-+
-+    do {
-+        uint8_t val2;
-+        unsigned int offs;
-+
-+        outb(val, PIT_CH2);
-+        outb(val ^ 0xff, PIT_CH2);
-+
-+        /* Wait for the Null Count bit to clear. */
-+        do {
-+            /* Latch status. */
-+            outb((3 << 6) | (1 << 5) | (1 << 3), PIT_MODE);
-+
-+            /* Try to make sure we're actually having a PIT here. */
-+            val2 = inb(PIT_CH2);
-+            if ( (val2 & ~(3 << 6)) != ((3 << 4) | (0 << 1)) )
-+                return;
-+        } while ( val2 & (1 << 6) );
-+
-+        /*
-+         * Try to further make sure we're actually having a PIT here.
-+         *
-+         * NB: Deliberately |, not ||, as we always want both reads.
-+         */
-+        val2 = inb(PIT_CH2);
-+        if ( (val2 ^ val) | (inb(PIT_CH2) ^ val ^ 0xff) )
-+            return;
-+
-+        for ( offs = mask & -mask; offs <= mask; offs <<= 1 )
-+        {
-+            if ( !(mask & offs) )
-+                continue;
-+            val2 = inb(PIT_CH2 + offs);
-+            if ( (val2 ^ val) | (inb(PIT_CH2 + offs) ^ val ^ 0xff) )
-+                mask &= ~offs;
-+        }
-+    } while ( mask && (val += 0x0b) );  /* Arbitrary uneven number. */
-+
-+    if ( mask )
-+    {
-+        dprintk(XENLOG_INFO, "PIT aliasing mask: %02x\n", mask);
-+        pit_alias_mask = mask;
-+    }
-+}
-+
- /************************************************************
-  * PLATFORM TIMER 2: HIGH PRECISION EVENT TIMER (HPET)
-  */
-@@ -2390,6 +2453,8 @@ void __init early_time_init(void)
-     }
- 
-     preinit_pit();
-+    probe_pit_alias();
-+
-     tmp = init_platform_timer();
-     plt_tsc.frequency = tmp;
- 
+     for ( offs = 0, i = pit_alias_mask & -pit_alias_mask ?: 4;
+           offs <= pit_alias_mask; offs += i )
 
 
