@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02317C7EE26
-	for <xen-devel@archiver.kernel.org>; Thu, 11 May 2023 17:09:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533490.830221 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F29FC7EE23
+	for <xen-devel@archiver.kernel.org>; Thu, 11 May 2023 17:09:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533494.830262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1px9nQ-0002M1-Mt; Thu, 11 May 2023 17:09:40 +0000
+	id 1px9nU-0003FN-A9; Thu, 11 May 2023 17:09:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533490.830221; Thu, 11 May 2023 17:09:40 +0000
+Received: by outflank-mailman (output) from mailman id 533494.830262; Thu, 11 May 2023 17:09:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1px9nQ-0002Lu-K2; Thu, 11 May 2023 17:09:40 +0000
-Received: by outflank-mailman (input) for mailman id 533490;
- Thu, 11 May 2023 17:09:39 +0000
+	id 1px9nU-0003Dm-5S; Thu, 11 May 2023 17:09:44 +0000
+Received: by outflank-mailman (input) for mailman id 533494;
+ Thu, 11 May 2023 17:09:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bPy6=BA=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1px9nP-0002Lh-Mq
- for xen-devel@lists.xenproject.org; Thu, 11 May 2023 17:09:39 +0000
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [2a00:1450:4864:20::22b])
+ id 1px9nS-0002Lh-7i
+ for xen-devel@lists.xenproject.org; Thu, 11 May 2023 17:09:42 +0000
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [2a00:1450:4864:20::230])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9c949eed-f01e-11ed-b229-6b7b168915f2;
- Thu, 11 May 2023 19:09:38 +0200 (CEST)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ac8c0fbb16so82671261fa.2
- for <xen-devel@lists.xenproject.org>; Thu, 11 May 2023 10:09:38 -0700 (PDT)
+ id 9e5329c5-f01e-11ed-b229-6b7b168915f2;
+ Thu, 11 May 2023 19:09:41 +0200 (CEST)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2ac90178fdaso72974961fa.3
+ for <xen-devel@lists.xenproject.org>; Thu, 11 May 2023 10:09:41 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- c9-20020a05651c014900b002aa3cff0529sm2443830ljd.74.2023.05.11.10.09.36
+ c9-20020a05651c014900b002aa3cff0529sm2443830ljd.74.2023.05.11.10.09.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 May 2023 10:09:37 -0700 (PDT)
+ Thu, 11 May 2023 10:09:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9c949eed-f01e-11ed-b229-6b7b168915f2
+X-Inumbo-ID: 9e5329c5-f01e-11ed-b229-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683824978; x=1686416978;
+        d=gmail.com; s=20221208; t=1683824981; x=1686416981;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=a8bc8sBrfSe9Kkfb3sttx5nGDE1LXzDoaGCPR0OUB4U=;
-        b=TR1Xt4pS5K4Vz1znogj/0rL73x12kbzbC2UCZyysdZOPd+11rHyWr9kPh8x/llH618
-         N2/vKAGXJdC6OVTUN9N3Q2FN7iR1bdL3bI9xJCSlHyBokp2DMRrYMEgq5K8AGg06Ape/
-         1rezhud1SRMlOd0zXlifugILIPOZV+o6qZg18jseLMqocHWfoObO8BFf2kQLk3oG134l
-         9wKZilUShYfBD9slOAvNC3RuyPgxWpfNggnc9pdca9igu1/VCr23RrMdOrzcYl65DAA9
-         3KWc/qCXj0TCue011TpmwW1mM3ZqLS8JfTH04MAQQRD0+yRTmKzPISi7QJCoLtZplI2y
-         SWjg==
+        bh=sf2FBCUITLNv92K79Iv4iXww3Xtu3EP3+kJgTTV/WyQ=;
+        b=C+0/yYQ/2pH7HIj1RH6MaN0sFqlcocZq3ErT3et2CrJb2vdQyi5GSMRCD4S1GjeLRM
+         y2JFyo9CZuyEoxBWR0WQczTPUXNZNAkRqf9HZfArg+tFVY5jC56RsezQEuCBNTFx2jqA
+         nq6zHBSc2hhxyTTwySCsxljuAazrqhXiY+7ELuTVYU8hmfsetnCJUUiAkz2H/zPQ6+z8
+         C5z/Cnt2hm+Y+ymhw0MVgX6IXD0mr1rdhPo5TSc11lp+xjnd+vWl1fMw/TXMoef2Sk0C
+         OI+es7txnV3+hXIQHQ5J9Sf2d28PKARiQ0e75hgmY5TeFIH08rpziXwaLxsBhvfyTSaG
+         DA3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683824978; x=1686416978;
+        d=1e100.net; s=20221208; t=1683824981; x=1686416981;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=a8bc8sBrfSe9Kkfb3sttx5nGDE1LXzDoaGCPR0OUB4U=;
-        b=WBW2JdVzIm30nqU8MXcMYFPT0QfDSPEnNIHfJzgBt9Fz9ZhF1SmZzNSu8vfv0lGe6U
-         +5NSz3dO4njzbMZmBZqYGM1UdyGE2gPK+lrGBiuHMjX0HfE9Yu0Y72QPoMMi2Gmlz7T5
-         1GI8rmeOp5elHsM6DHwiKQSIxUoSnSMCcmJhfr0nym/X0OTlTPZl+6DDfzz8zkoWXmg/
-         oNCmqcprb86BM9k8TV5q7tAqRSQhfQwacoRaG5ygHx4tPKl9vLgIaxHdTXXNoTC7XVWO
-         TezjonZMLPpJZ0Tl3QwP4aYxtY8fl+CaSiyIo5jFXszJgngLvNJBmW+sSGyFKnRKY0ua
-         yozg==
-X-Gm-Message-State: AC+VfDxhVJsWcXYSFk4uD9bjHcF0M67qUxiURTBJyQkT6jRW53OfcKC3
-	t0pjn70ctF9fK1uIbgVvuoLJnewjbSg=
-X-Google-Smtp-Source: ACHHUZ5StywoRO9/FVyt83hqn6Wq7FxO91WQxwO81pg8PQemoYjsnLzH82cDNAhPhqX7mtRiQqb5hQ==
-X-Received: by 2002:a2e:a1c7:0:b0:2a8:c520:da1d with SMTP id c7-20020a2ea1c7000000b002a8c520da1dmr3066201ljm.29.1683824977866;
-        Thu, 11 May 2023 10:09:37 -0700 (PDT)
+        bh=sf2FBCUITLNv92K79Iv4iXww3Xtu3EP3+kJgTTV/WyQ=;
+        b=Zyg9rcpFwGFdRn2E+uz1jE18YGaSa2WwJWYtzoqgpeASCb++LCXxwEDguvOZNHAhMn
+         msslw9WfxS0L6v1ojDjpT/i9s9sI/mXtLcWMkKy4nDjeWiipQc1+t3BYF6kjX9mR8QF6
+         PryoVYoJiifDm/ezWazfJfPdV4xC4iQY5Mr6O+GrP3XuyBDA6zwJBEFflkymOXclCjHJ
+         MJ8uOlP2laOt9A8S9U6r/iHj4KiT/3YrJjBKPgmFK7pRZfC1IPlmTf2hdCC8ZxkkK85f
+         8VzuTpCbixUia8v384aFV0C+po/TBbxMQtfnGKkpgFgVUxf506aP0Y9r4SqutWGYoGL0
+         dhQA==
+X-Gm-Message-State: AC+VfDxMa5wkisn9G1gajT06T2tDO2vzEhEpUHLTyqt0fC0Q8Ixda9YD
+	iTO/a66sBZ2xMuhxsrMLLdIDeHSLWj0=
+X-Google-Smtp-Source: ACHHUZ4EyFu8mwEU1QYN86KZyNdN0+84ERXHNRwWS2bKpDaLjYjmYkAZX6xNdgA/4cykJvE19Bs+AA==
+X-Received: by 2002:a2e:7004:0:b0:2a7:7055:97f5 with SMTP id l4-20020a2e7004000000b002a7705597f5mr3382400ljc.0.1683824980936;
+        Thu, 11 May 2023 10:09:40 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien@xen.org>,
@@ -87,83 +87,57 @@ Cc: Julien Grall <julien@xen.org>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v7 1/5] xen/riscv: add VM space layout
-Date: Thu, 11 May 2023 20:09:29 +0300
-Message-Id: <7b03dbf21718ed9c05859a629f4442167d74553c.1683824347.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v7 5/5] xen/riscv: remove dummy_bss variable
+Date: Thu, 11 May 2023 20:09:33 +0300
+Message-Id: <a8bb8b567166e9906815958317770c2c41106fe9.1683824347.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1683824347.git.oleksii.kurochko@gmail.com>
 References: <cover.1683824347.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Also it was added explanation about ignoring of top VA bits
+After introduction of initial pagetables there is no any sense
+in dummy_bss variable as bss section will not be empty anymore.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-Changes in V7:
- - Fix range of frametable range in RV64 layout.
- - Add ifdef SV39 to the RV64 layout comment to make it explicit that
-   description if for SV39 mode.
- - Add missed row in the RV64 layout table.
----
 Changes in V6:
- - update comment above the RISCV-64 layout table
- - add Slot column to the table with RISCV-64 Layout
- - update RV-64 layout table.
+ - Nothing changed. Only rebase
 ---
 Changes in V5:
-* the patch was introduced in the current patch series.
+ - Nothing changed. Only rebase
 ---
- xen/arch/riscv/include/asm/config.h | 36 +++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+Changes in V4:
+ - Nothing changed. Only rebase
+---
+Changes in V3:
+ * patch was introduced in the current one patch series (v3).
+---
+Changes in V2:
+ * patch was introduced in the current one patch series (v2).
+---
+ xen/arch/riscv/setup.c | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 763a922a04..a53833afee 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -4,6 +4,42 @@
- #include <xen/const.h>
- #include <xen/page-size.h>
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index cf5dc5824e..845d18d86f 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -8,14 +8,6 @@
+ unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
+     __aligned(STACK_SIZE);
  
-+/*
-+ * RISC-V64 Layout:
-+ *
-+ * #ifdef SV39
-+ *
-+ * From the riscv-privileged doc:
-+ *   When mapping between narrower and wider addresses,
-+ *   RISC-V zero-extends a narrower physical address to a wider size.
-+ *   The mapping between 64-bit virtual addresses and the 39-bit usable
-+ *   address space of Sv39 is not based on zero-extension but instead
-+ *   follows an entrenched convention that allows an OS to use one or
-+ *   a few of the most-significant bits of a full-size (64-bit) virtual
-+ *   address to quickly distinguish user and supervisor address regions.
-+ *
-+ * It means that:
-+ *   top VA bits are simply ignored for the purpose of translating to PA.
-+ *
-+ * ============================================================================
-+ *    Start addr    |   End addr        |  Size  | Slot       |area description
-+ * ============================================================================
-+ * FFFFFFFFC0800000 |  FFFFFFFFFFFFFFFF |1016 MB | L2 511     | Unused
-+ * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
-+ * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
-+ * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
-+ *                 ...                  |  1 GB  | L2 510     | Unused
-+ * 0000003200000000 |  0000007f40000000 | 309 GB | L2 200-509 | Direct map
-+ *                 ...                  |  1 GB  | L2 199     | Unused
-+ * 0000003100000000 |  00000031C0000000 |  3 GB  | L2 196-198 | Frametable
-+ *                 ...                  |  1 GB  | L2 195     | Unused
-+ * 0000003080000000 |  00000030C0000000 |  1 GB  | L2 194     | VMAP
-+ *                 ...                  | 194 GB | L2 0 - 193 | Unused
-+ * ============================================================================
-+ *
-+ * #endif
-+ */
-+
- #if defined(CONFIG_RISCV_64)
- # define LONG_BYTEORDER 3
- # define ELFSIZE 64
+-/*  
+- * To be sure that .bss isn't zero. It will simplify code of
+- * .bss initialization.
+- * TODO:
+- *   To be deleted when the first real .bss user appears
+- */
+-int dummy_bss __attribute__((unused));
+-
+ void __init noreturn start_xen(unsigned long bootcpu_id,
+                                paddr_t dtb_addr)
+ {
 -- 
 2.40.1
 
