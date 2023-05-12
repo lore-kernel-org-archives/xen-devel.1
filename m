@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE031C77B7C
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534042.831279 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF3BEC77B75
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534044.831282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9e-0007zU-V9; Fri, 12 May 2023 21:18:22 +0000
+	id 1pxa9f-00083d-9n; Fri, 12 May 2023 21:18:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534042.831279; Fri, 12 May 2023 21:18:22 +0000
+Received: by outflank-mailman (output) from mailman id 534044.831282; Fri, 12 May 2023 21:18:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9e-0007z6-Qh; Fri, 12 May 2023 21:18:22 +0000
-Received: by outflank-mailman (input) for mailman id 534042;
+	id 1pxa9f-00082J-3d; Fri, 12 May 2023 21:18:23 +0000
+Received: by outflank-mailman (input) for mailman id 534044;
  Fri, 12 May 2023 21:18:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZzT-0004F7-H9
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:51 +0000
+ id 1pxZzV-0004FP-Ty
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:53 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0bf74c58-f109-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:47 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0ee2342e-f109-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0bf74c58-f109-11ed-8611-37d641c3527e
-Message-ID: <20230512205257.133453992@linutronix.de>
+X-Inumbo-ID: 0ee2342e-f109-11ed-b229-6b7b168915f2
+Message-ID: <20230512205257.299231005@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925667;
+	s=2020; t=1683925672;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=s6m9J4c1JvP70cnTGmFjRaHjxV+T4Hc55BQMBWx1oPc=;
-	b=y2DUc1fXfsXkDW8K6WaMiHDe6gR4IEKxgaOddkKmSwSv+DqEsvnjWzXgPjyq32d1wpWK5Z
-	DhULLjmoSJ6Twf97uZUUSDmOErh5HW4b2tsf6z1y+M36Y3f2xB7zi4wFgw7y4DDIduarbz
-	yeLsAcWQsBCl07tIF0QqY/Jj/avRssPe2AvWtNVRytlleptjLfnchKkKtZCHOE5wyaDkBF
-	6X8iVUK0NIWo0to7bK0cANrtWwlUAJ9ihLJH1D1NrqOK2ldq23z0J7UlmUsOUeID7o25Cf
-	4F7tlHyUzLkqHXoKB/QYb/4diEkgPLMMdkcjx5AD44P4tw9zfHRvswMyp4a7FQ==
+	 references:references; bh=1NEBWklEox1EHC85h866UHlaj72PU/D3Dw3p+jMC/F0=;
+	b=AxLTeRaqaMDLy4ioLj6zEL9HPmP3cx+s/iQLQ36KY9z4ru+T511Ht9KAXa6I3GInzxRIU1
+	auZCeKjxgzcWperPNzAB6/xoxSxZZT3u87ymCz3VAy/9CvphzwHc79I4z9See9dnYiwzvz
+	bYSv0JUTpntUltbnxM2mkF4WxFblikPEgXHSvRGwaVfq73pCN36um7FFZl4vXhlXIHBRyk
+	wdNVsJkRU8XRhNBC0JX4ba3dJqo9Z0BrkVvSLSPvH7jhRowqf1Jy1tcFMxYdxDiUMofIyI
+	JqzBNBvPaJetJyHovLVoc2IeuKZ0XpgQRph7CuJjaFv7vGl5Yd3+ReqjtvieoQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925667;
+	s=2020e; t=1683925672;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=s6m9J4c1JvP70cnTGmFjRaHjxV+T4Hc55BQMBWx1oPc=;
-	b=yCQezV+nLz69U6F8kXkQMvva3l/BtuBu7i4swHXcyBl7X7TgPYqW8jXLbGqot3jpiZi7IT
-	CU7Sn35pJ28UiwBg==
+	 references:references; bh=1NEBWklEox1EHC85h866UHlaj72PU/D3Dw3p+jMC/F0=;
+	b=RcKUBGkIIKdhAcY84iUu32ds5jxMMcMhQacX7+NkfuyvLzMFgdSYMRTqeLxsIuyjcb0y9C
+	Eb2r1CihAReSwIBw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,139 +95,65 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 31/37] x86/smpboot: Enable split CPU startup
+Subject: [patch V4 34/37] x86/apic: Save the APIC virtual base address
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:46 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:51 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The x86 CPU bringup state currently does AP wake-up, wait for AP to
-respond and then release it for full bringup.
+For parallel CPU brinugp it's required to read the APIC ID in the low level
+startup code. The virtual APIC base address is a constant because its a
+fix-mapped address. Exposing that constant which is composed via macros to
+assembly code is non-trivial due to header inclusion hell.
 
-It is safe to be split into a wake-up and and a separate wait+release
-state.
+Aside of that it's constant only because of the vsyscall ABI
+requirement. Once vsyscall is out of the picture the fixmap can be placed
+at runtime.
 
-Provide the required functions and enable the split CPU bringup, which
-prepares for parallel bringup, where the bringup of the non-boot CPUs takes
-two iterations: One to prepare and wake all APs and the second to wait and
-release them. Depending on timing this can eliminate the wait time
-completely.
+Avoid header hell, stay flexible and store the address in a variable which
+can be exposed to the low level startup code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/Kconfig           |    2 +-
- arch/x86/include/asm/smp.h |    9 ++-------
- arch/x86/kernel/smp.c      |    2 +-
- arch/x86/kernel/smpboot.c  |    8 ++++----
- arch/x86/xen/smp_pv.c      |    4 ++--
- 5 files changed, 10 insertions(+), 15 deletions(-)
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -274,8 +274,8 @@ config X86
- 	select HAVE_UNSTABLE_SCHED_CLOCK
- 	select HAVE_USER_RETURN_NOTIFIER
- 	select HAVE_GENERIC_VDSO
--	select HOTPLUG_CORE_SYNC_FULL		if SMP
- 	select HOTPLUG_SMT			if SMP
-+	select HOTPLUG_SPLIT_STARTUP		if SMP
- 	select IRQ_FORCED_THREADING
- 	select NEED_PER_CPU_EMBED_FIRST_CHUNK
- 	select NEED_PER_CPU_PAGE_FIRST_CHUNK
+V4: Fixed changelog typo - Sergey
+---
+ arch/x86/include/asm/smp.h  |    1 +
+ arch/x86/kernel/apic/apic.c |    4 ++++
+ 2 files changed, 5 insertions(+)
 --- a/arch/x86/include/asm/smp.h
 +++ b/arch/x86/include/asm/smp.h
-@@ -40,7 +40,7 @@ struct smp_ops {
- 
- 	void (*cleanup_dead_cpu)(unsigned cpu);
- 	void (*poll_sync_state)(void);
--	int (*cpu_up)(unsigned cpu, struct task_struct *tidle);
-+	int (*kick_ap_alive)(unsigned cpu, struct task_struct *tidle);
- 	int (*cpu_disable)(void);
- 	void (*cpu_die)(unsigned int cpu);
- 	void (*play_dead)(void);
-@@ -80,11 +80,6 @@ static inline void smp_cpus_done(unsigne
- 	smp_ops.smp_cpus_done(max_cpus);
- }
- 
--static inline int __cpu_up(unsigned int cpu, struct task_struct *tidle)
--{
--	return smp_ops.cpu_up(cpu, tidle);
--}
--
- static inline int __cpu_disable(void)
- {
- 	return smp_ops.cpu_disable();
-@@ -124,7 +119,7 @@ void native_smp_prepare_cpus(unsigned in
- void calculate_max_logical_packages(void);
- void native_smp_cpus_done(unsigned int max_cpus);
- int common_cpu_up(unsigned int cpunum, struct task_struct *tidle);
--int native_cpu_up(unsigned int cpunum, struct task_struct *tidle);
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle);
- int native_cpu_disable(void);
- void __noreturn hlt_play_dead(void);
- void native_play_dead(void);
---- a/arch/x86/kernel/smp.c
-+++ b/arch/x86/kernel/smp.c
-@@ -268,7 +268,7 @@ struct smp_ops smp_ops = {
+@@ -196,6 +196,7 @@ extern void nmi_selftest(void);
  #endif
- 	.smp_send_reschedule	= native_smp_send_reschedule,
  
--	.cpu_up			= native_cpu_up,
-+	.kick_ap_alive		= native_kick_ap,
- 	.cpu_disable		= native_cpu_disable,
- 	.play_dead		= native_play_dead,
+ extern unsigned int smpboot_control;
++extern unsigned long apic_mmio_base;
  
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -1052,7 +1052,7 @@ static int do_boot_cpu(int apicid, int c
- 	return ret;
- }
+ #endif /* !__ASSEMBLY__ */
  
--static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
-+int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
- {
- 	int apicid = apic->cpu_present_to_apicid(cpu);
- 	int err;
-@@ -1088,15 +1088,15 @@ static int native_kick_ap(unsigned int c
- 	return err;
- }
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -101,6 +101,9 @@ static int apic_extnmi __ro_after_init =
+  */
+ static bool virt_ext_dest_id __ro_after_init;
  
--int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
-+int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle)
- {
--	return native_kick_ap(cpu, tidle);
-+	return smp_ops.kick_ap_alive(cpu, tidle);
- }
++/* For parallel bootup. */
++unsigned long apic_mmio_base __ro_after_init;
++
+ /*
+  * Map cpu index to physical APIC ID
+  */
+@@ -2163,6 +2166,7 @@ void __init register_lapic_address(unsig
  
- void arch_cpuhp_cleanup_kick_cpu(unsigned int cpu)
- {
- 	/* Cleanup possible dangling ends... */
--	if (smp_ops.cpu_up == native_cpu_up && x86_platform.legacy.warm_reset)
-+	if (smp_ops.kick_ap_alive == native_kick_ap && x86_platform.legacy.warm_reset)
- 		smpboot_restore_warm_reset_vector();
- }
- 
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -314,7 +314,7 @@ cpu_initialize_context(unsigned int cpu,
- 	return 0;
- }
- 
--static int xen_pv_cpu_up(unsigned int cpu, struct task_struct *idle)
-+static int xen_pv_kick_ap(unsigned int cpu, struct task_struct *idle)
- {
- 	int rc;
- 
-@@ -438,7 +438,7 @@ static const struct smp_ops xen_smp_ops
- 	.smp_prepare_cpus = xen_pv_smp_prepare_cpus,
- 	.smp_cpus_done = xen_smp_cpus_done,
- 
--	.cpu_up = xen_pv_cpu_up,
-+	.kick_ap_alive = xen_pv_kick_ap,
- 	.cpu_die = xen_pv_cpu_die,
- 	.cleanup_dead_cpu = xen_pv_cleanup_dead_cpu,
- 	.poll_sync_state = xen_pv_poll_sync_state,
+ 	if (!x2apic_mode) {
+ 		set_fixmap_nocache(FIX_APIC_BASE, address);
++		apic_mmio_base = APIC_BASE;
+ 		apic_printk(APIC_VERBOSE, "mapped APIC to %16lx (%16lx)\n",
+ 			    APIC_BASE, address);
+ 	}
+
+
 
 
