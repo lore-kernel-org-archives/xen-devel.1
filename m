@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD66C77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5131C7EE2A
 	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533916.831009 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.533913.830972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyu-0007Mw-TC; Fri, 12 May 2023 21:07:16 +0000
+	id 1pxZyo-0005wV-Ca; Fri, 12 May 2023 21:07:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533916.831009; Fri, 12 May 2023 21:07:16 +0000
+Received: by outflank-mailman (output) from mailman id 533913.830972; Fri, 12 May 2023 21:07:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyu-0007Lu-Nb; Fri, 12 May 2023 21:07:16 +0000
-Received: by outflank-mailman (input) for mailman id 533916;
- Fri, 12 May 2023 21:07:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pxZyo-0005vH-5y; Fri, 12 May 2023 21:07:10 +0000
+Received: by outflank-mailman (input) for mailman id 533913;
+ Fri, 12 May 2023 21:07:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZyt-0004F7-7U
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:15 +0000
+ id 1pxZyn-0004FP-E9
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:09 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f7a8aa7f-f108-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:13 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f4d7f447-f108-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:08 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f7a8aa7f-f108-11ed-8611-37d641c3527e
-Message-ID: <20230512205255.981999763@linutronix.de>
+X-Inumbo-ID: f4d7f447-f108-11ed-b229-6b7b168915f2
+Message-ID: <20230512205255.822234014@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925633;
+	s=2020; t=1683925628;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=q33LoArtTxRD/Ru/7HNy8KNvjUqDiwm6+syFdpZ/kWw=;
-	b=298zc4LQSXT6SexxbOrNR+pxdBUapgKN2FhLEK6OUjzceaZSFfF3gQZ/P02XnQJKV7onMX
-	G82tp6FGlvEJCHk/fYGghxxqy0XquQ6dVAokNULe1uFj1f2YvF9kZo12v5AuT4x9dpb6LM
-	MIV+WOcXU9u/9w2UWdlkf7j62NoVP8gL3gHpZTNYTPR4F3tjV1vXnCvr9cNhZILyGgQ3o6
-	luGpxQQIC7NP6ZTlVMhe86GpRZLF8muTdGi2x+adhcL/y1D6yQ/W8J/tsp4QGhjHHs1Kbg
-	sDQlO7c/Pp6NHwxuRk82HeXQRbgkvp6C+hpt8zSSXeTW3e5BQ1ba3sKB1TDAhg==
+	 references:references; bh=Tu4ROvEgCDi3LP+wUPgYfwXC0d1wYCtN1rgZS5iXCTQ=;
+	b=MZw4QYwhSKWUBgjySGtCLDIrNNjvvQrhL4KcBEOLiBVM/Xw3o0S0OP8efQHUilTkVgZ5uH
+	V9lBZ9q2fPoE92w0/ZGYCX2Se/3i5TRE0KYKDmcJ9xA7PzNrkGdKRykS5AIxuIPSoIzOSR
+	qquFenj8YNpFTpXPIh+OE91cddixF4zU9bT3S5YiNOAuuJODxHBH9C+Og6fOAQlNlkVK7/
+	43Abm8kVyCrbP29RIsjsrJBt1KKm3ZqvVZMRUHpDw+q6Q/pktl3hX7SzxGL5NzDv4dD045
+	lAy6zjykzhyBxbFzFjVgVFWfc60zNYE4XSYTbPM3UgP7tkubuyN97MhVhVFnTw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925633;
+	s=2020e; t=1683925628;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=q33LoArtTxRD/Ru/7HNy8KNvjUqDiwm6+syFdpZ/kWw=;
-	b=o/qZFH2k47iHoIluy2YsRj5WdNcKSir3sAheA0GheiTuEAqo2lMSo8uRRCc3N6NV3aBHkN
-	EzHISfCLZ+rbXGCg==
+	 references:references; bh=Tu4ROvEgCDi3LP+wUPgYfwXC0d1wYCtN1rgZS5iXCTQ=;
+	b=nDZua/3lTIIczi9cGRpK+vOoiWt3kdE9sPPGo3SiN4kVNdEYfjj0VQ75ukCQ/EVkS9lzyq
+	osDYwtJ/lUnA8jCQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,132 +95,69 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 10/37] x86/smpboot: Get rid of cpu_init_secondary()
+Subject: [patch V4 07/37] x86/smpboot: Restrict soft_restart_cpu() to SEV
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:12 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:08 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The synchronization of the AP with the control CPU is a SMP boot problem
-and has nothing to do with cpu_init().
-
-Open code cpu_init_secondary() in start_secondary() and move
-wait_for_master_cpu() into the SMP boot code.
-
-No functional change.
+Now that the CPU0 hotplug cruft is gone, the only user is AMD SEV.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/include/asm/processor.h |    1 -
- arch/x86/kernel/cpu/common.c     |   27 ---------------------------
- arch/x86/kernel/smpboot.c        |   24 +++++++++++++++++++-----
- 3 files changed, 19 insertions(+), 33 deletions(-)
+ arch/x86/kernel/callthunks.c |    2 +-
+ arch/x86/kernel/head_32.S    |   14 --------------
+ arch/x86/kernel/head_64.S    |    2 +-
+ 3 files changed, 2 insertions(+), 16 deletions(-)
 
---- a/arch/x86/include/asm/processor.h
-+++ b/arch/x86/include/asm/processor.h
-@@ -551,7 +551,6 @@ extern void switch_gdt_and_percpu_base(i
- extern void load_direct_gdt(int);
- extern void load_fixmap_gdt(int);
- extern void cpu_init(void);
--extern void cpu_init_secondary(void);
- extern void cpu_init_exception_handling(void);
- extern void cr4_init(void);
- 
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2123,19 +2123,6 @@ static void dbg_restore_debug_regs(void)
- #define dbg_restore_debug_regs()
- #endif /* ! CONFIG_KGDB */
- 
--static void wait_for_master_cpu(int cpu)
--{
--#ifdef CONFIG_SMP
--	/*
--	 * wait for ACK from master CPU before continuing
--	 * with AP initialization
--	 */
--	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
--	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
--		cpu_relax();
--#endif
--}
--
- static inline void setup_getcpu(int cpu)
- {
- 	unsigned long cpudata = vdso_encode_cpunode(cpu, early_cpu_to_node(cpu));
-@@ -2239,8 +2226,6 @@ void cpu_init(void)
- 	struct task_struct *cur = current;
- 	int cpu = raw_smp_processor_id();
- 
--	wait_for_master_cpu(cpu);
--
- 	ucode_cpu_init(cpu);
- 
- #ifdef CONFIG_NUMA
-@@ -2293,18 +2278,6 @@ void cpu_init(void)
- 	load_fixmap_gdt(cpu);
- }
- 
--#ifdef CONFIG_SMP
--void cpu_init_secondary(void)
--{
--	/*
--	 * Relies on the BP having set-up the IDT tables, which are loaded
--	 * on this CPU in cpu_init_exception_handling().
--	 */
--	cpu_init_exception_handling();
--	cpu_init();
--}
--#endif
--
- #ifdef CONFIG_MICROCODE_LATE_LOADING
- /**
-  * store_cpu_caps() - Store a snapshot of CPU capabilities
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -220,6 +220,17 @@ static void ap_calibrate_delay(void)
- 	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
- }
- 
-+static void wait_for_master_cpu(int cpu)
-+{
-+	/*
-+	 * Wait for release by control CPU before continuing with AP
-+	 * initialization.
-+	 */
-+	WARN_ON(cpumask_test_and_set_cpu(cpu, cpu_initialized_mask));
-+	while (!cpumask_test_cpu(cpu, cpu_callout_mask))
-+		cpu_relax();
-+}
-+
- /*
-  * Activate a secondary processor.
-  */
-@@ -237,13 +248,16 @@ static void notrace start_secondary(void
- 	load_cr3(swapper_pg_dir);
- 	__flush_tlb_all();
+--- a/arch/x86/kernel/callthunks.c
++++ b/arch/x86/kernel/callthunks.c
+@@ -133,7 +133,7 @@ static bool skip_addr(void *dest)
+ 	/* Accounts directly */
+ 	if (dest == ret_from_fork)
+ 		return true;
+-#ifdef CONFIG_HOTPLUG_CPU
++#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
+ 	if (dest == soft_restart_cpu)
+ 		return true;
  #endif
-+	cpu_init_exception_handling();
-+
- 	/*
--	 * Sync point with wait_cpu_initialized(). Before proceeding through
--	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
--	 * own bit in cpu_initialized_mask and then waits for the BSP to set
--	 * its bit in cpu_callout_mask to release it.
-+	 * Sync point with wait_cpu_initialized(). Sets AP in
-+	 * cpu_initialized_mask and then waits for the control CPU
-+	 * to release it.
- 	 */
--	cpu_init_secondary();
-+	wait_for_master_cpu(raw_smp_processor_id());
-+
-+	cpu_init();
- 	rcu_cpu_starting(raw_smp_processor_id());
- 	x86_cpuinit.early_percpu_clock_init();
+--- a/arch/x86/kernel/head_32.S
++++ b/arch/x86/kernel/head_32.S
+@@ -138,20 +138,6 @@ SYM_CODE_START(startup_32)
+ 	jmp .Ldefault_entry
+ SYM_CODE_END(startup_32)
  
+-#ifdef CONFIG_HOTPLUG_CPU
+-/*
+- * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
+- * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
+- * unplug. Everything is set up already except the stack.
+- */
+-SYM_FUNC_START(soft_restart_cpu)
+-	movl initial_stack, %ecx
+-	movl %ecx, %esp
+-	call *(initial_code)
+-1:	jmp 1b
+-SYM_FUNC_END(soft_restart_cpu)
+-#endif
+-
+ /*
+  * Non-boot CPU entry point; entered from trampoline.S
+  * We can't lgdt here, because lgdt itself uses a data segment, but
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -375,7 +375,7 @@ SYM_CODE_END(secondary_startup_64)
+ #include "verify_cpu.S"
+ #include "sev_verify_cbit.S"
+ 
+-#ifdef CONFIG_HOTPLUG_CPU
++#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
+ /*
+  * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
+  * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
 
 
 
