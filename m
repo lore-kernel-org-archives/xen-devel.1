@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48C7CC77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C265C7EE24
 	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:17:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533963.831130 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.533966.831142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa8r-0000o0-OY; Fri, 12 May 2023 21:17:33 +0000
+	id 1pxa8s-0000zf-CG; Fri, 12 May 2023 21:17:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533963.831130; Fri, 12 May 2023 21:17:33 +0000
+Received: by outflank-mailman (output) from mailman id 533966.831142; Fri, 12 May 2023 21:17:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa8r-0000nt-K9; Fri, 12 May 2023 21:17:33 +0000
-Received: by outflank-mailman (input) for mailman id 533963;
+	id 1pxa8s-0000xI-5A; Fri, 12 May 2023 21:17:34 +0000
+Received: by outflank-mailman (input) for mailman id 533966;
  Fri, 12 May 2023 21:17:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZzE-0004F7-Ed
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:36 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ id 1pxZzY-0004F7-IB
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:56 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 042fa99a-f109-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:34 +0200 (CEST)
+ id 0fdd00c1-f109-11ed-8611-37d641c3527e;
+ Fri, 12 May 2023 23:07:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 042fa99a-f109-11ed-8611-37d641c3527e
-Message-ID: <20230512205256.690926018@linutronix.de>
+X-Inumbo-ID: 0fdd00c1-f109-11ed-8611-37d641c3527e
+Message-ID: <20230512205257.355425551@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925654;
+	s=2020; t=1683925674;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/FbhQUaNPV/QmzMYEl0ZGQWeo+zsZNC/fHGpKaYgyVM=;
-	b=sIkpRPZWtZDLRJsNbJqeMaIGrlSPPZQ54swrLTPGjSTFwGmKt9Oaa/S3e7+FMM/zwS3yh1
-	zBi00At6yibSu1ow+h/o1wevr8Ct+nV3aQorHuUl5ADPJuwBO+bchPZ8ALQZ+kx6i0GW+w
-	zqdpAbyLGX6msZM0R+So0xbvh7Y3sqfgTWEpUi4IiFsYvIytynrP4vP72VrzYLW0n/0gI5
-	dcjuaB3bMiEaTjpeMR+ijjym0v0KwwT8U989zzsyAvMiMrnZ6zXBcVm77ZsVDRiZB9alDd
-	vSvyAFgEvgFWYPzgBfw025kkJmJ87QGr2kj6vjn8as5Hgwu4BsQPx+xpR6SaPg==
+	 references:references; bh=IP4bdlmLdqVc3LCZrNxGXTkJh6c/m5h1IVAGFT7rdmU=;
+	b=r7gtP8cd7Oi46e4lE/ByHI+khRt47Q1tdhvFutLNb1nZ0EzY0luf/WbDQ0k8nKgYTLl4fZ
+	6jVUGYKF/8lveenjXvvre5ndfySMPCdjlJpKvZns1rWXPEqcXr6eVN8NK8cZAbmnCQ6yQp
+	Yx3aUoQDw2kxMWvLVB4RoPcVQxwMr1TEQt/JyflnlrUKkC5yB1WXFRYeLO2qGcavmQy/xb
+	TWM6HpGmz8K6kbaRe7K69Mm4B+cOxkraoO55h4/F16N4d4HFqv7paqDclFhhm777QOq+fn
+	+XmNnPyatRLfjMogFbBl6Kr8xcpvcs8sEUSklzYMFqy5aqxV2atkp8bBibVO7g==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925654;
+	s=2020e; t=1683925674;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/FbhQUaNPV/QmzMYEl0ZGQWeo+zsZNC/fHGpKaYgyVM=;
-	b=dLO2baNTFk8RA1y+U+P6lN/kShhUhW/oiig8SXDmVflPM4GheqDBwaU3qN83KID4Lvii4k
-	Tfhlc28wF/mJXYCQ==
+	 references:references; bh=IP4bdlmLdqVc3LCZrNxGXTkJh6c/m5h1IVAGFT7rdmU=;
+	b=jvsTBFPAx2r/a9Hm2XoIkmPwImha2AedATS4Qf2wMfcTkLbpvnlZqm6V6xCv2m4a7aeYFX
+	WwQng/2elbC/s/DA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,85 +95,154 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- Ross Philipson <ross.philipson@oracle.com>
-Subject:
- [patch V4 23/37] arm64: smp: Switch to hotplug core state synchronization
+ Ross Philipson <ross.philipson@oracle.com>,
+ David Woodhouse <dwmw@amazon.co.uk>
+Subject: [patch V4 35/37] x86/smpboot: Implement a bit spinlock to protect the
+ realmode stack
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:33 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:53 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Switch to the CPU hotplug core state tracking and synchronization
-mechanim. No functional change intended.
+Parallel AP bringup requires that the APs can run fully parallel through
+the early startup code including the real mode trampoline.
 
+To prepare for this implement a bit-spinlock to serialize access to the
+real mode stack so that parallel upcoming APs are not going to corrupt each
+others stack while going through the real mode startup code.
+
+Co-developed-by: David Woodhouse <dwmw@amazon.co.uk>
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Tested-by: Mark Rutland <mark.rutland@arm.com>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/arm64/Kconfig           |    1 +
- arch/arm64/include/asm/smp.h |    2 +-
- arch/arm64/kernel/smp.c      |   14 +++++---------
- 3 files changed, 7 insertions(+), 10 deletions(-)
-
-
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -222,6 +222,7 @@ config ARM64
- 	select HAVE_KPROBES
- 	select HAVE_KRETPROBES
- 	select HAVE_GENERIC_VDSO
-+	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
- 	select IRQ_DOMAIN
- 	select IRQ_FORCED_THREADING
- 	select KASAN_VMALLOC if KASAN
---- a/arch/arm64/include/asm/smp.h
-+++ b/arch/arm64/include/asm/smp.h
-@@ -99,7 +99,7 @@ static inline void arch_send_wakeup_ipi_
+V4: Simplify the lock implementation - Peter Z.
+---
+ arch/x86/include/asm/realmode.h      |    3 +++
+ arch/x86/kernel/head_64.S            |   12 ++++++++++++
+ arch/x86/realmode/init.c             |    3 +++
+ arch/x86/realmode/rm/trampoline_64.S |   23 ++++++++++++++++++-----
+ 4 files changed, 36 insertions(+), 5 deletions(-)
+--- a/arch/x86/include/asm/realmode.h
++++ b/arch/x86/include/asm/realmode.h
+@@ -52,6 +52,7 @@ struct trampoline_header {
+ 	u64 efer;
+ 	u32 cr4;
+ 	u32 flags;
++	u32 lock;
+ #endif
+ };
  
- extern int __cpu_disable(void);
+@@ -64,6 +65,8 @@ extern unsigned long initial_stack;
+ extern unsigned long initial_vc_handler;
+ #endif
  
--extern void __cpu_die(unsigned int cpu);
-+static inline void __cpu_die(unsigned int cpu) { }
- extern void __noreturn cpu_die(void);
- extern void __noreturn cpu_die_early(void);
++extern u32 *trampoline_lock;
++
+ extern unsigned char real_mode_blob[];
+ extern unsigned char real_mode_relocs[];
  
---- a/arch/arm64/kernel/smp.c
-+++ b/arch/arm64/kernel/smp.c
-@@ -332,17 +332,13 @@ static int op_cpu_kill(unsigned int cpu)
- }
- 
- /*
-- * called on the thread which is asking for a CPU to be shutdown -
-- * waits until shutdown has completed, or it is timed out.
-+ * Called on the thread which is asking for a CPU to be shutdown after the
-+ * shutdown completed.
-  */
--void __cpu_die(unsigned int cpu)
-+void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
- {
- 	int err;
- 
--	if (!cpu_wait_death(cpu, 5)) {
--		pr_crit("CPU%u: cpu didn't die\n", cpu);
--		return;
--	}
- 	pr_debug("CPU%u: shutdown\n", cpu);
+--- a/arch/x86/kernel/head_64.S
++++ b/arch/x86/kernel/head_64.S
+@@ -252,6 +252,16 @@ SYM_INNER_LABEL(secondary_startup_64_no_
+ 	movq	TASK_threadsp(%rax), %rsp
  
  	/*
-@@ -369,8 +365,8 @@ void __noreturn cpu_die(void)
++	 * Now that this CPU is running on its own stack, drop the realmode
++	 * protection. For the boot CPU the pointer is NULL!
++	 */
++	movq	trampoline_lock(%rip), %rax
++	testq	%rax, %rax
++	jz	.Lsetup_gdt
++	movl	$0, (%rax)
++
++.Lsetup_gdt:
++	/*
+ 	 * We must switch to a new descriptor in kernel space for the GDT
+ 	 * because soon the kernel won't have access anymore to the userspace
+ 	 * addresses where we're currently running on. We have to do that here
+@@ -433,6 +443,8 @@ SYM_DATA(initial_code,	.quad x86_64_star
+ #ifdef CONFIG_AMD_MEM_ENCRYPT
+ SYM_DATA(initial_vc_handler,	.quad handle_vc_boot_ghcb)
+ #endif
++
++SYM_DATA(trampoline_lock, .quad 0);
+ 	__FINITDATA
  
- 	local_daif_mask();
+ 	__INIT
+--- a/arch/x86/realmode/init.c
++++ b/arch/x86/realmode/init.c
+@@ -154,6 +154,9 @@ static void __init setup_real_mode(void)
  
--	/* Tell __cpu_die() that this CPU is now safe to dispose of */
--	(void)cpu_report_death();
-+	/* Tell cpuhp_bp_sync_dead() that this CPU is now safe to dispose of */
-+	cpuhp_ap_report_dead();
+ 	trampoline_header->flags = 0;
  
- 	/*
- 	 * Actually shutdown the CPU. This must never fail. The specific hotplug
-
-
++	trampoline_lock = &trampoline_header->lock;
++	*trampoline_lock = 0;
++
+ 	trampoline_pgd = (u64 *) __va(real_mode_header->trampoline_pgd);
+ 
+ 	/* Map the real mode stub as virtual == physical */
+--- a/arch/x86/realmode/rm/trampoline_64.S
++++ b/arch/x86/realmode/rm/trampoline_64.S
+@@ -37,6 +37,20 @@
+ 	.text
+ 	.code16
+ 
++.macro LOAD_REALMODE_ESP
++	/*
++	 * Make sure only one CPU fiddles with the realmode stack
++	*/
++.Llock_rm\@:
++        lock btsl       $0, tr_lock
++        jnc             2f
++        pause
++        jmp             .Llock_rm\@
++2:
++	# Setup stack
++	movl	$rm_stack_end, %esp
++.endm
++
+ 	.balign	PAGE_SIZE
+ SYM_CODE_START(trampoline_start)
+ 	cli			# We should be safe anyway
+@@ -49,8 +63,7 @@ SYM_CODE_START(trampoline_start)
+ 	mov	%ax, %es
+ 	mov	%ax, %ss
+ 
+-	# Setup stack
+-	movl	$rm_stack_end, %esp
++	LOAD_REALMODE_ESP
+ 
+ 	call	verify_cpu		# Verify the cpu supports long mode
+ 	testl   %eax, %eax		# Check for return code
+@@ -93,8 +106,7 @@ SYM_CODE_START(sev_es_trampoline_start)
+ 	mov	%ax, %es
+ 	mov	%ax, %ss
+ 
+-	# Setup stack
+-	movl	$rm_stack_end, %esp
++	LOAD_REALMODE_ESP
+ 
+ 	jmp	.Lswitch_to_protected
+ SYM_CODE_END(sev_es_trampoline_start)
+@@ -177,7 +189,7 @@ SYM_CODE_START(pa_trampoline_compat)
+ 	 * In compatibility mode.  Prep ESP and DX for startup_32, then disable
+ 	 * paging and complete the switch to legacy 32-bit mode.
+ 	 */
+-	movl	$rm_stack_end, %esp
++	LOAD_REALMODE_ESP
+ 	movw	$__KERNEL_DS, %dx
+ 
+ 	movl	$(CR0_STATE & ~X86_CR0_PG), %eax
+@@ -241,6 +253,7 @@ SYM_DATA_START(trampoline_header)
+ 	SYM_DATA(tr_efer,		.space 8)
+ 	SYM_DATA(tr_cr4,		.space 4)
+ 	SYM_DATA(tr_flags,		.space 4)
++	SYM_DATA(tr_lock,		.space 4)
+ SYM_DATA_END(trampoline_header)
+ 
+ #include "trampoline_common.S"
 
 
