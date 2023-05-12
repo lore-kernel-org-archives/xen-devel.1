@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47F40C77B75
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534018.831239 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E499C7EE24
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534028.831257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9R-0005l8-1D; Fri, 12 May 2023 21:18:09 +0000
+	id 1pxa9T-0006Sh-JL; Fri, 12 May 2023 21:18:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534018.831239; Fri, 12 May 2023 21:18:08 +0000
+Received: by outflank-mailman (output) from mailman id 534028.831257; Fri, 12 May 2023 21:18:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9Q-0005kW-PW; Fri, 12 May 2023 21:18:08 +0000
-Received: by outflank-mailman (input) for mailman id 534018;
- Fri, 12 May 2023 21:18:07 +0000
+	id 1pxa9T-0006S8-Eo; Fri, 12 May 2023 21:18:11 +0000
+Received: by outflank-mailman (input) for mailman id 534028;
+ Fri, 12 May 2023 21:18:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZzQ-0004F7-GW
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:48 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1pxZzJ-0004F7-FO
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:41 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 09efbfc1-f109-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:44 +0200 (CEST)
+ id 071160ff-f109-11ed-8611-37d641c3527e;
+ Fri, 12 May 2023 23:07:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09efbfc1-f109-11ed-8611-37d641c3527e
-Message-ID: <20230512205257.027075560@linutronix.de>
+X-Inumbo-ID: 071160ff-f109-11ed-8611-37d641c3527e
+Message-ID: <20230512205256.859920443@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925664;
+	s=2020; t=1683925659;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=QdUmczWTVhK7K/GEDp21ZZBW6QiyoqITsSHkVbZTwSo=;
-	b=QxFsCk8M0IwU/AWXJTbXBb8OmrmczN7eSVShQBD/xtp9CSloxhz1odBQguueWNc/vEM52/
-	0Kl3gldkf4/0GgZgMmCaVqarwnt6c2WxoW5biu9zyuJifvGtM9/Jij2+5GahK4gODm1Y1Q
-	1hd8RJJvQbU0l+Gnh64z7qRhDPk39TNRP842ELWqPXiUeNBVOhZ36Jqvxt0WeLRCeD/TLr
-	8ppgeI8QfGvfUVwsNNPzx6acsMuK+QD0Sy+DuKWmGes0FQJYbkh9eWywGTaBGzAG8N39CJ
-	IMTWuS0FUzsmcC8AS5xDPopwnYu51b4FiPLMJd67kDoqwu/y1krpwzf6eMhGgw==
+	 references:references; bh=4KTNmmFPJXZljDpOFQFSwkn0vJx9v7UbMNIhdACke4E=;
+	b=LDLOAD2i8A3n7wKvyw/OHjYjE9g2++H+Ra6znb14aQBES5w+tCFjEYDcf9R4VTOZvx9n/u
+	aJPKVhpjaAwY/9/gG5nbXzIELvXFhBTj6ik9OFCKp0sTKTUqsxOkjkPU5EOD3pLZJZ4Q08
+	mBjq2r7Ehgaq64GBwCCWKc9urhnQ2OFs9Pi8ZnDO+A9Gy5HJGaINPnYSxBdC6tTcGbRZFa
+	FZhkykTgFM2zztGv9fUkORf1CGPgc7ibQGmtESQXEt7iMvWTsEjR7OCpRCp0F7VavIl+3g
+	BX/UupJRv8rSiDtBIxr6kkKrNs6sYKYM7ptmqJMF/1rd4KRE6ZPzMWlA9jlybw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925664;
+	s=2020e; t=1683925659;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=QdUmczWTVhK7K/GEDp21ZZBW6QiyoqITsSHkVbZTwSo=;
-	b=kpZz6QyptBqFfMzJcx1ZcoW9ytkNNQFs/6P8KAIUryIP/ZE4SXsEP30lmowL1TlGesMnkc
-	+R008NAdqKJ6jZCQ==
+	 references:references; bh=4KTNmmFPJXZljDpOFQFSwkn0vJx9v7UbMNIhdACke4E=;
+	b=Gt2zwUCq7iu8dnyaeJHibD3RPnYUHsIc76G4Lbvo/gsvpFIWUZKRoyxcLE+Vi7t38Qh+jZ
+	on551572+Ltc/RBA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,67 +94,68 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- Ross Philipson <ross.philipson@oracle.com>,
- David Woodhouse <dwmw@amazon.co.uk>
-Subject: [patch V4 29/37] cpu/hotplug: Reset task stack state in _cpu_up()
+ Ross Philipson <ross.philipson@oracle.com>
+Subject: [patch V4 26/37] parisc: Switch to hotplug core state synchronization
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:43 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:38 +0200 (CEST)
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Thomas Gleixner <tglx@linutronix.de>
 
-Commit dce1ca0525bf ("sched/scs: Reset task stack state in bringup_cpu()")
-ensured that the shadow call stack and KASAN poisoning were removed from
-a CPU's stack each time that CPU is brought up, not just once.
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
-This is not incorrect. However, with parallel bringup the idle thread setup
-will happen at a different step. As a consequence the cleanup in
-bringup_cpu() would be too late.
-
-Move the SCS/KASAN cleanup to the generic _cpu_up() function instead,
-which already ensures that the new CPU's stack is available, purely to
-allow for early failure. This occurs when the CPU to be brought up is
-in the CPUHP_OFFLINE state, which should correctly do the cleanup any
-time the CPU has been taken down to the point where such is needed.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Tested-by: Mark Rutland <mark.rutland@arm.com>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
-Reviewed-by: Mark Rutland <mark.rutland@arm.com>
 ---
- kernel/cpu.c |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ arch/parisc/Kconfig          |    1 +
+ arch/parisc/kernel/process.c |    4 ++--
+ arch/parisc/kernel/smp.c     |    7 +++----
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
 
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -771,12 +771,6 @@ static int bringup_cpu(unsigned int cpu)
- 		return -EAGAIN;
+--- a/arch/parisc/Kconfig
++++ b/arch/parisc/Kconfig
+@@ -57,6 +57,7 @@ config PARISC
+ 	select HAVE_ARCH_SECCOMP_FILTER
+ 	select HAVE_ARCH_TRACEHOOK
+ 	select HAVE_REGS_AND_STACK_ACCESS_API
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select GENERIC_SCHED_CLOCK
+ 	select GENERIC_IRQ_MIGRATION if SMP
+ 	select HAVE_UNSTABLE_SCHED_CLOCK if SMP
+--- a/arch/parisc/kernel/process.c
++++ b/arch/parisc/kernel/process.c
+@@ -166,8 +166,8 @@ void __noreturn arch_cpu_idle_dead(void)
  
- 	/*
--	 * Reset stale stack state from the last time this CPU was online.
--	 */
--	scs_task_reset(idle);
--	kasan_unpoison_task_stack(idle);
--
--	/*
- 	 * Some architectures have to walk the irq descriptors to
- 	 * setup the vector space for the cpu which comes online.
- 	 *
-@@ -1587,6 +1581,12 @@ static int _cpu_up(unsigned int cpu, int
- 			ret = PTR_ERR(idle);
- 			goto out;
- 		}
-+
-+		/*
-+		 * Reset stale stack state from the last time this CPU was online.
-+		 */
-+		scs_task_reset(idle);
-+		kasan_unpoison_task_stack(idle);
- 	}
+ 	local_irq_disable();
  
- 	cpuhp_tasks_frozen = tasks_frozen;
+-	/* Tell __cpu_die() that this CPU is now safe to dispose of. */
+-	(void)cpu_report_death();
++	/* Tell the core that this CPU is now safe to dispose of. */
++	cpuhp_ap_report_dead();
+ 
+ 	/* Ensure that the cache lines are written out. */
+ 	flush_cache_all_local();
+--- a/arch/parisc/kernel/smp.c
++++ b/arch/parisc/kernel/smp.c
+@@ -500,11 +500,10 @@ int __cpu_disable(void)
+ void __cpu_die(unsigned int cpu)
+ {
+ 	pdc_cpu_rendezvous_lock();
++}
+ 
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_crit("CPU%u: cpu didn't die\n", cpu);
+-		return;
+-	}
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
++{
+ 	pr_info("CPU%u: is shutting down\n", cpu);
+ 
+ 	/* set task's state to interruptible sleep */
+
+
 
 
