@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1803C87FE4
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534001.831209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBAEC7EE24
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:18:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534005.831223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9E-0003lM-R4; Fri, 12 May 2023 21:17:56 +0000
+	id 1pxa9G-00044k-IC; Fri, 12 May 2023 21:17:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534001.831209; Fri, 12 May 2023 21:17:56 +0000
+Received: by outflank-mailman (output) from mailman id 534005.831223; Fri, 12 May 2023 21:17:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa9E-0003l0-KQ; Fri, 12 May 2023 21:17:56 +0000
-Received: by outflank-mailman (input) for mailman id 534001;
- Fri, 12 May 2023 21:17:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pxa9G-00043i-5L; Fri, 12 May 2023 21:17:58 +0000
+Received: by outflank-mailman (input) for mailman id 534005;
+ Fri, 12 May 2023 21:17:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZzR-0004FP-VO
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:49 +0000
+ id 1pxZzB-0004F7-EU
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:33 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0cf2c146-f109-11ed-b229-6b7b168915f2;
- Fri, 12 May 2023 23:07:49 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 028239f8-f109-11ed-8611-37d641c3527e;
+ Fri, 12 May 2023 23:07:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cf2c146-f109-11ed-b229-6b7b168915f2
-Message-ID: <20230512205257.186599880@linutronix.de>
+X-Inumbo-ID: 028239f8-f109-11ed-8611-37d641c3527e
+Message-ID: <20230512205256.582584351@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925669;
+	s=2020; t=1683925651;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Sn7EVHuimLKHkyL78WG8/WoMj36d51IE8hgcVFYO1Jg=;
-	b=PgR2wWsegIPAljVCteHv3vb3ZngXvLBqfIDF3Gmbh21DDdZ1EJBxDZerQjkrUY9SqyqwSI
-	7aCqhJcqE5EKxRul/Ekwl/+galMZgMYU/gsWyFePML5w0XtzpexbnbzcNH1ipLbmFtfUSJ
-	sqj9mWlGmLa0srSDuSb3SK3zhOMPqX+olbYzQ/7oto5OTbOj13kWkRgiBByPBzkoOvyiFh
-	s9BOzttECCt/mEPHn8jSQ7MwBRnl2KjLKTxaYYSTCPXPM0LOj5hC/jqAIJeZJlskC6CODd
-	HffzltHP+m0RInj+D1XpyMr21HkCoSFtFqybeYAqvqEeQaISI8zQCoQUIG6Y3A==
+	 references:references; bh=rBjhgMw+R3T5P7fIX0knHpgERmAnldETzGDcA6m3soI=;
+	b=cbaRZFL8MG+FpoRLi83o8C0jAfcbHTHB+vfFTRdb6Fb5sn0p9lXLPNX7cm2p36LZqMBqmR
+	1io+Dw1jv1H97vrkFacfHVWEtoGH53aEdX3vz4beRct8h0e0dd26xWSWd8eZW1KCcIJC7Q
+	IQjkl2Ljo3IYhaQRAOEzrdGinOoTCNtqBI4rzplYXNLyGSql4W9oEPvKLwby3cjoIJikik
+	vY7h0DuJoO+oJqXbmBmpR/nMx6mZkS+vKcfhwlFUdevTe78P5zT0sVzDMJyx2aF2BpjVmT
+	1nL7SZdRWGuShjCMJNYSq1acmRBhEsUAZ4zDDuAqjK77jqt83aYfTHAfG+pL7A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925669;
+	s=2020e; t=1683925651;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Sn7EVHuimLKHkyL78WG8/WoMj36d51IE8hgcVFYO1Jg=;
-	b=n6leXlfK754qoJremHc8EPvPr8gU3EoTvqoTXngFAP+h9W+kwsO3dRJXP1shvFCuejE5tj
-	W/Ol0BleyOREMyCg==
+	 references:references; bh=rBjhgMw+R3T5P7fIX0knHpgERmAnldETzGDcA6m3soI=;
+	b=JWEuLlJQJHioUWfttr6TJZop/D83BErX+18Kxt47uf7+fJoL0/b+dnZa33N9Vj8OnGttOs
+	Ptz2z9++OXaZSQCA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,149 +95,137 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 32/37] x86/apic: Provide cpu_primary_thread mask
+Subject: [patch V4 21/37] cpu/hotplug: Remove cpu_report_state() and related
+ unused cruft
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:48 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:30 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Make the primary thread tracking CPU mask based in preparation for simpler
-handling of parallel bootup.
+No more users.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/include/asm/apic.h     |    2 --
- arch/x86/include/asm/topology.h |   19 +++++++++++++++----
- arch/x86/kernel/apic/apic.c     |   20 +++++++++-----------
- arch/x86/kernel/smpboot.c       |   12 +++---------
- 4 files changed, 27 insertions(+), 26 deletions(-)
---- a/arch/x86/include/asm/apic.h
-+++ b/arch/x86/include/asm/apic.h
-@@ -506,10 +506,8 @@ extern int default_check_phys_apicid_pre
- #endif /* CONFIG_X86_LOCAL_APIC */
+ include/linux/cpu.h |    2 -
+ kernel/smpboot.c    |   90 ----------------------------------------------------
+ 2 files changed, 92 deletions(-)
+
+
+--- a/include/linux/cpu.h
++++ b/include/linux/cpu.h
+@@ -184,8 +184,6 @@ void arch_cpu_idle_enter(void);
+ void arch_cpu_idle_exit(void);
+ void __noreturn arch_cpu_idle_dead(void);
  
- #ifdef CONFIG_SMP
--bool apic_id_is_primary_thread(unsigned int id);
- void apic_smt_update(void);
- #else
--static inline bool apic_id_is_primary_thread(unsigned int id) { return false; }
- static inline void apic_smt_update(void) { }
- #endif
+-int cpu_report_state(int cpu);
+-int cpu_check_up_prepare(int cpu);
+ void cpu_set_state_online(int cpu);
+ void play_idle_precise(u64 duration_ns, u64 latency_ns);
  
---- a/arch/x86/include/asm/topology.h
-+++ b/arch/x86/include/asm/topology.h
-@@ -31,9 +31,9 @@
-  * CONFIG_NUMA.
-  */
- #include <linux/numa.h>
-+#include <linux/cpumask.h>
+--- a/kernel/smpboot.c
++++ b/kernel/smpboot.c
+@@ -329,97 +329,7 @@ EXPORT_SYMBOL_GPL(smpboot_unregister_per
+ #ifndef CONFIG_HOTPLUG_CORE_SYNC
+ static DEFINE_PER_CPU(atomic_t, cpu_hotplug_state) = ATOMIC_INIT(CPU_POST_DEAD);
  
- #ifdef CONFIG_NUMA
--#include <linux/cpumask.h>
- 
- #include <asm/mpspec.h>
- #include <asm/percpu.h>
-@@ -139,9 +139,20 @@ static inline int topology_max_smt_threa
- int topology_update_package_map(unsigned int apicid, unsigned int cpu);
- int topology_update_die_map(unsigned int dieid, unsigned int cpu);
- int topology_phys_to_logical_pkg(unsigned int pkg);
--bool topology_is_primary_thread(unsigned int cpu);
- bool topology_smt_supported(void);
--#else
-+
-+extern struct cpumask __cpu_primary_thread_mask;
-+#define cpu_primary_thread_mask ((const struct cpumask *)&__cpu_primary_thread_mask)
-+
-+/**
-+ * topology_is_primary_thread - Check whether CPU is the primary SMT thread
-+ * @cpu:	CPU to check
-+ */
-+static inline bool topology_is_primary_thread(unsigned int cpu)
-+{
-+	return cpumask_test_cpu(cpu, cpu_primary_thread_mask);
-+}
-+#else /* CONFIG_SMP */
- #define topology_max_packages()			(1)
- static inline int
- topology_update_package_map(unsigned int apicid, unsigned int cpu) { return 0; }
-@@ -152,7 +163,7 @@ static inline int topology_max_die_per_p
- static inline int topology_max_smt_threads(void) { return 1; }
- static inline bool topology_is_primary_thread(unsigned int cpu) { return true; }
- static inline bool topology_smt_supported(void) { return false; }
--#endif
-+#endif /* !CONFIG_SMP */
- 
- static inline void arch_fix_phys_package_id(int num, u32 slot)
- {
---- a/arch/x86/kernel/apic/apic.c
-+++ b/arch/x86/kernel/apic/apic.c
-@@ -2386,20 +2386,16 @@ bool arch_match_cpu_phys_id(int cpu, u64
- }
- 
- #ifdef CONFIG_SMP
--/**
-- * apic_id_is_primary_thread - Check whether APIC ID belongs to a primary thread
-- * @apicid: APIC ID to check
+-/*
+- * Called to poll specified CPU's state, for example, when waiting for
+- * a CPU to come online.
 - */
--bool apic_id_is_primary_thread(unsigned int apicid)
-+static void cpu_mark_primary_thread(unsigned int cpu, unsigned int apicid)
- {
--	u32 mask;
--
--	if (smp_num_siblings == 1)
--		return true;
- 	/* Isolate the SMT bit(s) in the APICID and check for 0 */
--	mask = (1U << (fls(smp_num_siblings) - 1)) - 1;
--	return !(apicid & mask);
-+	u32 mask = (1U << (fls(smp_num_siblings) - 1)) - 1;
-+
-+	if (smp_num_siblings == 1 || !(apicid & mask))
-+		cpumask_set_cpu(cpu, &__cpu_primary_thread_mask);
- }
-+#else
-+static inline void cpu_mark_primary_thread(unsigned int cpu, unsigned int apicid) { }
- #endif
- 
- /*
-@@ -2544,6 +2540,8 @@ int generic_processor_info(int apicid, i
- 	set_cpu_present(cpu, true);
- 	num_processors++;
- 
-+	cpu_mark_primary_thread(cpu, apicid);
-+
- 	return cpu;
- }
- 
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -102,6 +102,9 @@ EXPORT_PER_CPU_SYMBOL(cpu_die_map);
- DEFINE_PER_CPU_READ_MOSTLY(struct cpuinfo_x86, cpu_info);
- EXPORT_PER_CPU_SYMBOL(cpu_info);
- 
-+/* CPUs which are the primary SMT threads */
-+struct cpumask __cpu_primary_thread_mask __read_mostly;
-+
- /* Representing CPUs for which sibling maps can be computed */
- static cpumask_var_t cpu_sibling_setup_mask;
- 
-@@ -277,15 +280,6 @@ static void notrace start_secondary(void
- }
- 
- /**
-- * topology_is_primary_thread - Check whether CPU is the primary SMT thread
-- * @cpu:	CPU to check
-- */
--bool topology_is_primary_thread(unsigned int cpu)
+-int cpu_report_state(int cpu)
 -{
--	return apic_id_is_primary_thread(per_cpu(x86_cpu_to_apicid, cpu));
+-	return atomic_read(&per_cpu(cpu_hotplug_state, cpu));
 -}
 -
--/**
-  * topology_smt_supported - Check whether SMT is supported by the CPUs
+-/*
+- * If CPU has died properly, set its state to CPU_UP_PREPARE and
+- * return success.  Otherwise, return -EBUSY if the CPU died after
+- * cpu_wait_death() timed out.  And yet otherwise again, return -EAGAIN
+- * if cpu_wait_death() timed out and the CPU still hasn't gotten around
+- * to dying.  In the latter two cases, the CPU might not be set up
+- * properly, but it is up to the arch-specific code to decide.
+- * Finally, -EIO indicates an unanticipated problem.
+- *
+- * Note that it is permissible to omit this call entirely, as is
+- * done in architectures that do no CPU-hotplug error checking.
+- */
+-int cpu_check_up_prepare(int cpu)
+-{
+-	if (!IS_ENABLED(CONFIG_HOTPLUG_CPU)) {
+-		atomic_set(&per_cpu(cpu_hotplug_state, cpu), CPU_UP_PREPARE);
+-		return 0;
+-	}
+-
+-	switch (atomic_read(&per_cpu(cpu_hotplug_state, cpu))) {
+-
+-	case CPU_POST_DEAD:
+-
+-		/* The CPU died properly, so just start it up again. */
+-		atomic_set(&per_cpu(cpu_hotplug_state, cpu), CPU_UP_PREPARE);
+-		return 0;
+-
+-	case CPU_DEAD_FROZEN:
+-
+-		/*
+-		 * Timeout during CPU death, so let caller know.
+-		 * The outgoing CPU completed its processing, but after
+-		 * cpu_wait_death() timed out and reported the error. The
+-		 * caller is free to proceed, in which case the state
+-		 * will be reset properly by cpu_set_state_online().
+-		 * Proceeding despite this -EBUSY return makes sense
+-		 * for systems where the outgoing CPUs take themselves
+-		 * offline, with no post-death manipulation required from
+-		 * a surviving CPU.
+-		 */
+-		return -EBUSY;
+-
+-	case CPU_BROKEN:
+-
+-		/*
+-		 * The most likely reason we got here is that there was
+-		 * a timeout during CPU death, and the outgoing CPU never
+-		 * did complete its processing.  This could happen on
+-		 * a virtualized system if the outgoing VCPU gets preempted
+-		 * for more than five seconds, and the user attempts to
+-		 * immediately online that same CPU.  Trying again later
+-		 * might return -EBUSY above, hence -EAGAIN.
+-		 */
+-		return -EAGAIN;
+-
+-	case CPU_UP_PREPARE:
+-		/*
+-		 * Timeout while waiting for the CPU to show up. Allow to try
+-		 * again later.
+-		 */
+-		return 0;
+-
+-	default:
+-
+-		/* Should not happen.  Famous last words. */
+-		return -EIO;
+-	}
+-}
+-
+-/*
+- * Mark the specified CPU online.
+- *
+- * Note that it is permissible to omit this call entirely, as is
+- * done in architectures that do no CPU-hotplug error checking.
+- */
+-void cpu_set_state_online(int cpu)
+-{
+-	(void)atomic_xchg(&per_cpu(cpu_hotplug_state, cpu), CPU_ONLINE);
+-}
+-
+ #ifdef CONFIG_HOTPLUG_CPU
+-
+ /*
+  * Wait for the specified CPU to exit the idle loop and die.
   */
- bool topology_smt_supported(void)
+
+
 
 
