@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B942AC7EE2E
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533912.830968 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5726C7EE30
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533917.831013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyn-0005sQ-WD; Fri, 12 May 2023 21:07:10 +0000
+	id 1pxZyv-0007So-Ed; Fri, 12 May 2023 21:07:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533912.830968; Fri, 12 May 2023 21:07:09 +0000
+Received: by outflank-mailman (output) from mailman id 533917.831013; Fri, 12 May 2023 21:07:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyn-0005rP-Sb; Fri, 12 May 2023 21:07:09 +0000
-Received: by outflank-mailman (input) for mailman id 533912;
- Fri, 12 May 2023 21:07:08 +0000
+	id 1pxZyv-0007RI-8l; Fri, 12 May 2023 21:07:17 +0000
+Received: by outflank-mailman (input) for mailman id 533917;
+ Fri, 12 May 2023 21:07:15 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZym-0004FP-BD
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:08 +0000
+ id 1pxZyt-0004FP-Pq
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:15 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f3d80c7a-f108-11ed-b229-6b7b168915f2;
- Fri, 12 May 2023 23:07:07 +0200 (CEST)
+ id f8a78f7c-f108-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:15 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3d80c7a-f108-11ed-b229-6b7b168915f2
-Message-ID: <20230512205255.768845190@linutronix.de>
+X-Inumbo-ID: f8a78f7c-f108-11ed-b229-6b7b168915f2
+Message-ID: <20230512205256.035041005@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925627;
+	s=2020; t=1683925635;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Vdgu0US5isMOkXvsbtEKbpQbMn5jiJ+2zBLMqmM0YL8=;
-	b=rHjvfgvb2+9T3PZ89upCVf/htUJYRgaiE4wYsm0JoNYDceADItU6dQkHNUxMVT0mAKxQCQ
-	g1/OIsowQWZ6Bng8y3rPxKD6j9JG6nO9AqcKXUIfNqadj2wqAP10ZTZqf/wQ8bZuweIxU8
-	FbGJYBtbB0RLpj8XodKxfM0T9yYAZ8rC5lIdf6QnDplFrmHRxCno1cLmIswNLEF/jQuqCF
-	ufPsxRi6VSkjYg9pqBKmigegl+aCRSB9QunUmA1+oo3u2YiKlvmXRZ/YpzUK4x67YwhumP
-	TeVJDM0kZMKjpua2HnPGv2PoAp8D/THStbkBRKgjlP6r9216eUdapX+gssKumg==
+	 references:references; bh=eF12ofNTJSRvTVUxVjnfh7vrXqrzAu3KwLqma5Svbqk=;
+	b=UCtRDgTYjJ+kttYU7M2mEpsUrBis05axy9leXWtF3JfKsHzJdY7XDzWQPHnc/2SfbSgxN3
+	8m5ad//4LAOnFAOL/Bgz84MaRBcO8q4cF80CAbsgBeiJOqNvHtlhaoNC/64M0YgHrD7WZF
+	m7FV4aKz3m5h6Cp6yr8xhr2AsQLLE9oZWQrHYW7hmApYt9s+zdNMxCD8Sk8khgr3V7jlH9
+	24gCCAqrup+dWEuJ3AbsClaZO7eYMsrW2hnkYlv3wZF2rR4sXKxZwEhr7++CGNWie8aJ7i
+	WfiNAqAgMWsw6ewnu1bT4mVJ2qzYDEvD4Kt4UFMTRKFhnF6SyLakq+SftbvVqQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925627;
+	s=2020e; t=1683925635;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Vdgu0US5isMOkXvsbtEKbpQbMn5jiJ+2zBLMqmM0YL8=;
-	b=Nt8LRINmVeDr769RErpnLaIeXfPELF9qhbpYFR7qzL7qqBvkabcnCfZ6XufKRvpBRaDcqh
-	7k1uPZJfBkBIsNBA==
+	 references:references; bh=eF12ofNTJSRvTVUxVjnfh7vrXqrzAu3KwLqma5Svbqk=;
+	b=JUU+NLGEbC5VmebxGTxNM/TRbUGPyU8jXOJXmTvwOZyX3Vb6ZSwKxKk/9v+Ol3pfmA4OJd
+	pwHgp2Bl/LROYvCg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,372 +95,83 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 06/37] x86/smpboot: Remove the CPU0 hotplug kludge
+Subject:
+ [patch V4 11/37] x86/cpu/cacheinfo: Remove cpu_callout_mask dependency
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:06 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:14 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-This was introduced with commit e1c467e69040 ("x86, hotplug: Wake up CPU0
-via NMI instead of INIT, SIPI, SIPI") to eventually support physical
-hotplug of CPU0:
+cpu_callout_mask is used for the stop machine based MTRR/PAT init.
 
- "We'll change this code in the future to wake up hard offlined CPU0 if
-  real platform and request are available."
-
-11 years later this has not happened and physical hotplug is not officially
-supported. Remove the cruft.
+In preparation of moving the BP/AP synchronization to the core hotplug
+code, use a private CPU mask for cacheinfo and manage it in the
+starting/dying hotplug state.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/include/asm/apic.h   |    1 
- arch/x86/include/asm/smp.h    |    1 
- arch/x86/kernel/smpboot.c     |  170 +++---------------------------------------
- drivers/acpi/processor_idle.c |    4 
- 4 files changed, 14 insertions(+), 162 deletions(-)
+ arch/x86/kernel/cpu/cacheinfo.c |   21 +++++++++++++++++----
+ 1 file changed, 17 insertions(+), 4 deletions(-)
 
---- a/arch/x86/include/asm/apic.h
-+++ b/arch/x86/include/asm/apic.h
-@@ -377,7 +377,6 @@ extern struct apic *__apicdrivers[], *__
-  * APIC functionality to boot other CPUs - only used on SMP:
-  */
- #ifdef CONFIG_SMP
--extern int wakeup_secondary_cpu_via_nmi(int apicid, unsigned long start_eip);
- extern int lapic_can_unplug_cpu(void);
- #endif
+--- a/arch/x86/kernel/cpu/cacheinfo.c
++++ b/arch/x86/kernel/cpu/cacheinfo.c
+@@ -39,6 +39,8 @@ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t
+ /* Shared L2 cache maps */
+ DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_l2c_shared_map);
  
---- a/arch/x86/include/asm/smp.h
-+++ b/arch/x86/include/asm/smp.h
-@@ -130,7 +130,6 @@ void native_play_dead(void);
- void play_dead_common(void);
- void wbinvd_on_cpu(int cpu);
- int wbinvd_on_all_cpus(void);
--void cond_wakeup_cpu0(void);
++static cpumask_var_t cpu_cacheinfo_mask;
++
+ /* Kernel controls MTRR and/or PAT MSRs. */
+ unsigned int memory_caching_control __ro_after_init;
  
- void native_smp_send_reschedule(int cpu);
- void native_send_call_func_ipi(const struct cpumask *mask);
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -216,9 +216,6 @@ static void ap_calibrate_delay(void)
- 	cpu_data(smp_processor_id()).loops_per_jiffy = loops_per_jiffy;
+@@ -1172,8 +1174,10 @@ void cache_bp_restore(void)
+ 		cache_cpu_init();
  }
  
--static int cpu0_logical_apicid;
--static int enable_start_cpu0;
--
- /*
-  * Activate a secondary processor.
-  */
-@@ -241,8 +238,6 @@ static void notrace start_secondary(void
- 	x86_cpuinit.early_percpu_clock_init();
- 	smp_callin();
+-static int cache_ap_init(unsigned int cpu)
++static int cache_ap_online(unsigned int cpu)
+ {
++	cpumask_set_cpu(cpu, cpu_cacheinfo_mask);
++
+ 	if (!memory_caching_control || get_cache_aps_delayed_init())
+ 		return 0;
  
--	enable_start_cpu0 = 0;
--
- 	/* otherwise gcc will move up smp_processor_id before the cpu_init */
- 	barrier();
- 	/* Check TSC synchronization with the control CPU: */
-@@ -410,7 +405,7 @@ void smp_store_cpu_info(int id)
- 	c->cpu_index = id;
- 	/*
- 	 * During boot time, CPU0 has this setup already. Save the info when
--	 * bringing up AP or offlined CPU0.
-+	 * bringing up an AP.
+@@ -1191,11 +1195,17 @@ static int cache_ap_init(unsigned int cp
+ 	 *      lock to prevent MTRR entry changes
  	 */
- 	identify_secondary_cpu(c);
- 	c->initialized = true;
-@@ -807,51 +802,14 @@ static void __init smp_quirk_init_udelay
+ 	stop_machine_from_inactive_cpu(cache_rendezvous_handler, NULL,
+-				       cpu_callout_mask);
++				       cpu_cacheinfo_mask);
+ 
+ 	return 0;
  }
  
- /*
-- * Poke the other CPU in the eye via NMI to wake it up. Remember that the normal
-- * INIT, INIT, STARTUP sequence will reset the chip hard for us, and this
-- * won't ... remember to clear down the APIC, etc later.
-- */
--int
--wakeup_secondary_cpu_via_nmi(int apicid, unsigned long start_eip)
--{
--	u32 dm = apic->dest_mode_logical ? APIC_DEST_LOGICAL : APIC_DEST_PHYSICAL;
--	unsigned long send_status, accept_status = 0;
--	int maxlvt;
--
--	/* Target chip */
--	/* Boot on the stack */
--	/* Kick the second */
--	apic_icr_write(APIC_DM_NMI | dm, apicid);
--
--	pr_debug("Waiting for send to finish...\n");
--	send_status = safe_apic_wait_icr_idle();
--
--	/*
--	 * Give the other CPU some time to accept the IPI.
--	 */
--	udelay(200);
--	if (APIC_INTEGRATED(boot_cpu_apic_version)) {
--		maxlvt = lapic_get_maxlvt();
--		if (maxlvt > 3)			/* Due to the Pentium erratum 3AP.  */
--			apic_write(APIC_ESR, 0);
--		accept_status = (apic_read(APIC_ESR) & 0xEF);
--	}
--	pr_debug("NMI sent\n");
--
--	if (send_status)
--		pr_err("APIC never delivered???\n");
--	if (accept_status)
--		pr_err("APIC delivery error (%lx)\n", accept_status);
--
--	return (send_status | accept_status);
--}
--
--static int
--wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
-+ * Wake up AP by INIT, INIT, STARTUP sequence.
-+ */
-+static int wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
- {
- 	unsigned long send_status = 0, accept_status = 0;
- 	int maxlvt, num_starts, j;
- 
-+	preempt_disable();
- 	maxlvt = lapic_get_maxlvt();
- 
- 	/*
-@@ -957,6 +915,7 @@ wakeup_secondary_cpu_via_init(int phys_a
- 	if (accept_status)
- 		pr_err("APIC delivery error (%lx)\n", accept_status);
- 
-+	preempt_enable();
- 	return (send_status | accept_status);
- }
- 
-@@ -997,67 +956,6 @@ static void announce_cpu(int cpu, int ap
- 			node, cpu, apicid);
- }
- 
--static int wakeup_cpu0_nmi(unsigned int cmd, struct pt_regs *regs)
--{
--	int cpu;
--
--	cpu = smp_processor_id();
--	if (cpu == 0 && !cpu_online(cpu) && enable_start_cpu0)
--		return NMI_HANDLED;
--
--	return NMI_DONE;
--}
--
--/*
-- * Wake up AP by INIT, INIT, STARTUP sequence.
-- *
-- * Instead of waiting for STARTUP after INITs, BSP will execute the BIOS
-- * boot-strap code which is not a desired behavior for waking up BSP. To
-- * void the boot-strap code, wake up CPU0 by NMI instead.
-- *
-- * This works to wake up soft offlined CPU0 only. If CPU0 is hard offlined
-- * (i.e. physically hot removed and then hot added), NMI won't wake it up.
-- * We'll change this code in the future to wake up hard offlined CPU0 if
-- * real platform and request are available.
-- */
--static int
--wakeup_cpu_via_init_nmi(int cpu, unsigned long start_ip, int apicid,
--	       int *cpu0_nmi_registered)
--{
--	int id;
--	int boot_error;
--
--	preempt_disable();
--
--	/*
--	 * Wake up AP by INIT, INIT, STARTUP sequence.
--	 */
--	if (cpu) {
--		boot_error = wakeup_secondary_cpu_via_init(apicid, start_ip);
--		goto out;
--	}
--
--	/*
--	 * Wake up BSP by nmi.
--	 *
--	 * Register a NMI handler to help wake up CPU0.
--	 */
--	boot_error = register_nmi_handler(NMI_LOCAL,
--					  wakeup_cpu0_nmi, 0, "wake_cpu0");
--
--	if (!boot_error) {
--		enable_start_cpu0 = 1;
--		*cpu0_nmi_registered = 1;
--		id = apic->dest_mode_logical ? cpu0_logical_apicid : apicid;
--		boot_error = wakeup_secondary_cpu_via_nmi(id, start_ip);
--	}
--
--out:
--	preempt_enable();
--
--	return boot_error;
--}
--
- int common_cpu_up(unsigned int cpu, struct task_struct *idle)
- {
- 	int ret;
-@@ -1086,8 +984,7 @@ int common_cpu_up(unsigned int cpu, stru
-  * Returns zero if CPU booted OK, else error code from
-  * ->wakeup_secondary_cpu.
-  */
--static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle,
--		       int *cpu0_nmi_registered)
-+static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
- {
- 	/* start_ip had better be page-aligned! */
- 	unsigned long start_ip = real_mode_header->trampoline_start;
-@@ -1120,7 +1017,6 @@ static int do_boot_cpu(int apicid, int c
- 	 * This grunge runs the startup process for
- 	 * the targeted processor.
- 	 */
--
- 	if (x86_platform.legacy.warm_reset) {
- 
- 		pr_debug("Setting warm reset code and vector.\n");
-@@ -1149,15 +1045,14 @@ static int do_boot_cpu(int apicid, int c
- 	 * - Use a method from the APIC driver if one defined, with wakeup
- 	 *   straight to 64-bit mode preferred over wakeup to RM.
- 	 * Otherwise,
--	 * - Use an INIT boot APIC message for APs or NMI for BSP.
-+	 * - Use an INIT boot APIC message
- 	 */
- 	if (apic->wakeup_secondary_cpu_64)
- 		boot_error = apic->wakeup_secondary_cpu_64(apicid, start_ip);
- 	else if (apic->wakeup_secondary_cpu)
- 		boot_error = apic->wakeup_secondary_cpu(apicid, start_ip);
- 	else
--		boot_error = wakeup_cpu_via_init_nmi(cpu, start_ip, apicid,
--						     cpu0_nmi_registered);
-+		boot_error = wakeup_secondary_cpu_via_init(apicid, start_ip);
- 
- 	if (!boot_error) {
- 		/*
-@@ -1206,9 +1101,8 @@ static int do_boot_cpu(int apicid, int c
- int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
- {
- 	int apicid = apic->cpu_present_to_apicid(cpu);
--	int cpu0_nmi_registered = 0;
- 	unsigned long flags;
--	int err, ret = 0;
-+	int err;
- 
- 	lockdep_assert_irqs_enabled();
- 
-@@ -1247,11 +1141,10 @@ int native_cpu_up(unsigned int cpu, stru
- 	if (err)
- 		return err;
- 
--	err = do_boot_cpu(apicid, cpu, tidle, &cpu0_nmi_registered);
-+	err = do_boot_cpu(apicid, cpu, tidle);
- 	if (err) {
- 		pr_err("do_boot_cpu failed(%d) to wakeup CPU#%u\n", err, cpu);
--		ret = -EIO;
--		goto unreg_nmi;
-+		return err;
- 	}
- 
- 	/*
-@@ -1267,15 +1160,7 @@ int native_cpu_up(unsigned int cpu, stru
- 		touch_nmi_watchdog();
- 	}
- 
--unreg_nmi:
--	/*
--	 * Clean up the nmi handler. Do this after the callin and callout sync
--	 * to avoid impact of possible long unregister time.
--	 */
--	if (cpu0_nmi_registered)
--		unregister_nmi_handler(NMI_LOCAL, "wake_cpu0");
--
--	return ret;
++static int cache_ap_offline(unsigned int cpu)
++{
++	cpumask_clear_cpu(cpu, cpu_cacheinfo_mask);
 +	return 0;
- }
- 
- /**
-@@ -1373,14 +1258,6 @@ static void __init smp_cpu_index_default
- 	}
- }
- 
--static void __init smp_get_logical_apicid(void)
--{
--	if (x2apic_mode)
--		cpu0_logical_apicid = apic_read(APIC_LDR);
--	else
--		cpu0_logical_apicid = GET_APIC_LOGICAL_ID(apic_read(APIC_LDR));
--}
--
- void __init smp_prepare_cpus_common(void)
- {
- 	unsigned int i;
-@@ -1443,8 +1320,6 @@ void __init native_smp_prepare_cpus(unsi
- 	/* Setup local timer */
- 	x86_init.timers.setup_percpu_clockev();
- 
--	smp_get_logical_apicid();
--
- 	pr_info("CPU0: ");
- 	print_cpu_info(&cpu_data(0));
- 
-@@ -1752,18 +1627,6 @@ void play_dead_common(void)
- 	local_irq_disable();
- }
- 
--/**
-- * cond_wakeup_cpu0 - Wake up CPU0 if needed.
-- *
-- * If NMI wants to wake up CPU0, start CPU0.
-- */
--void cond_wakeup_cpu0(void)
--{
--	if (smp_processor_id() == 0 && enable_start_cpu0)
--		start_cpu0();
--}
--EXPORT_SYMBOL_GPL(cond_wakeup_cpu0);
--
++}
++
  /*
-  * We need to flush the caches before going to sleep, lest we have
-  * dirty data in our caches when we come back up.
-@@ -1831,8 +1694,6 @@ static inline void mwait_play_dead(void)
- 		__monitor(mwait_ptr, 0, 0);
- 		mb();
- 		__mwait(eax, 0);
--
--		cond_wakeup_cpu0();
- 	}
+  * Delayed cache initialization for all AP's
+  */
+@@ -1210,9 +1220,12 @@ void cache_aps_init(void)
+ 
+ static int __init cache_ap_register(void)
+ {
++	zalloc_cpumask_var(&cpu_cacheinfo_mask, GFP_KERNEL);
++	cpumask_set_cpu(smp_processor_id(), cpu_cacheinfo_mask);
++
+ 	cpuhp_setup_state_nocalls(CPUHP_AP_CACHECTRL_STARTING,
+ 				  "x86/cachectrl:starting",
+-				  cache_ap_init, NULL);
++				  cache_ap_online, cache_ap_offline);
+ 	return 0;
  }
- 
-@@ -1841,11 +1702,8 @@ void __noreturn hlt_play_dead(void)
- 	if (__this_cpu_read(cpu_info.x86) >= 4)
- 		wbinvd();
- 
--	while (1) {
-+	while (1)
- 		native_halt();
--
--		cond_wakeup_cpu0();
--	}
- }
- 
- void native_play_dead(void)
---- a/drivers/acpi/processor_idle.c
-+++ b/drivers/acpi/processor_idle.c
-@@ -597,10 +597,6 @@ static int acpi_idle_play_dead(struct cp
- 			io_idle(cx->address);
- 		} else
- 			return -ENODEV;
--
--#if defined(CONFIG_X86) && defined(CONFIG_HOTPLUG_CPU)
--		cond_wakeup_cpu0();
--#endif
- 	}
- 
- 	/* Never reached */
-
-
+-core_initcall(cache_ap_register);
++early_initcall(cache_ap_register);
 
 
