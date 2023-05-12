@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C4CEC7EE25
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533914.830988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9016C7EE32
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533924.831057 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyr-0006V6-1Z; Fri, 12 May 2023 21:07:13 +0000
+	id 1pxZz3-00012J-2r; Fri, 12 May 2023 21:07:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533914.830988; Fri, 12 May 2023 21:07:13 +0000
+Received: by outflank-mailman (output) from mailman id 533924.831057; Fri, 12 May 2023 21:07:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyq-0006Ui-UI; Fri, 12 May 2023 21:07:12 +0000
-Received: by outflank-mailman (input) for mailman id 533914;
- Fri, 12 May 2023 21:07:11 +0000
+	id 1pxZz2-000101-K0; Fri, 12 May 2023 21:07:24 +0000
+Received: by outflank-mailman (input) for mailman id 533924;
+ Fri, 12 May 2023 21:07:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZyo-0004FP-Vs
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:10 +0000
+ id 1pxZz0-0004FP-ES
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:22 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f5c0cce5-f108-11ed-b229-6b7b168915f2;
- Fri, 12 May 2023 23:07:10 +0200 (CEST)
+ id fc9122c5-f108-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f5c0cce5-f108-11ed-b229-6b7b168915f2
-Message-ID: <20230512205255.875713771@linutronix.de>
+X-Inumbo-ID: fc9122c5-f108-11ed-b229-6b7b168915f2
+Message-ID: <20230512205256.263722880@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925630;
+	s=2020; t=1683925641;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=CERacbFmAU0r2YyiKnQSCmUMCfPrzAHfru8m3ZNl0KY=;
-	b=mlVKNpwrrZo8g1O5g2m+Me4aq4cJcRqHlfaggouQckkiLNuNl3gMI9wJGW+qTK77NJ8L1t
-	BNZic2MIATVICLudtbI4AZFCsrK6yBKlMcV3RCwHbtApC9WMnfOTf/384jFhT6DDyDkJLU
-	68mjGx+kFnbdgLpBHRHDsZybKUUSd4DCRTEkmrpezylPkqkyKvPz75OmYdO3ljKUmH8DT+
-	qileb82DTQnWi+EWLiBSaCU365hMQBR6WvjZdiFAVtGRc9MA/Xyms7EJNSpFNCUC672GYD
-	N9c4DHYS2yGrtOZTD5VUq08pLhp9Cqoy87Bcu1VdvrO1+17UGGzGP2jJGlQcVA==
+	 references:references; bh=6HcPZ1S0gKGilIW8DEzs+8FA47mShbE6fcxT9xps3qM=;
+	b=wq6r7KiTpvagWfasCy7BpMaZc62MAFu3oUyN8IkTQnL9aLQt2J8dO9GuPVqDCozi0utj8B
+	4IkD4xWAu5eTIAkrXomOEfRirhMpcSmjIuqx0o7p3I34k341WcbR0oawavbm30EBV5G/SQ
+	pqVHGdr8O5AONZrQcM1b3A+l1qf3n3+2rHPsKgwNOlF2vQ3k5Npt0LMG9aJW+erlOl1Ibn
+	pyPvj+RRfga1j85S0Dc2olvz/HEP4GwJI0tr9/CeQrVpZHiYB9toQXczVgnAW4f1NLnOxh
+	6UTdAjUh2XFk2HO9QVoMZ6pTiLkYX7+zo/CatpFvhsqM4XVqS07nh/cjtfBz3A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925630;
+	s=2020e; t=1683925641;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=CERacbFmAU0r2YyiKnQSCmUMCfPrzAHfru8m3ZNl0KY=;
-	b=pI9Kl0/aVsNuuAI/L8tX3o8uA++5XGmGpbq0v8JJXHVuwg59C4dNMi5XaYjRi8u2L2df6G
-	eiU05lrMbsKzBPAA==
+	 references:references; bh=6HcPZ1S0gKGilIW8DEzs+8FA47mShbE6fcxT9xps3qM=;
+	b=kLfIJYpL8LcaVnGjQ4Dcmt10BIgjcw/Luxkj9XlqF3gpecWWEb7C3Qu2IrxE2br/1iTpq7
+	mpK48/gsNDr9qICw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,83 +94,94 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- Ross Philipson <ross.philipson@oracle.com>,
- Peter Zijlstra <peterz@infradead.org>
-Subject: [patch V4 08/37] x86/smpboot: Remove unnecessary barrier()
+ Ross Philipson <ross.philipson@oracle.com>
+Subject:
+ [patch V4 15/37] cpu/hotplug: Rework sparse_irq locking in bringup_cpu()
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:09 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:21 +0200 (CEST)
 
-Peter stumbled over the barrier() after the invocation of smp_callin() in
-start_secondary():
+From: Thomas Gleixner <tglx@linutronix.de>
 
-  "...this barrier() and it's comment seem weird vs smp_callin(). That
-   function ends with an atomic bitop (it has to, at the very least it must
-   not be weaker than store-release) but also has an explicit wmb() to order
-   setup vs CPU_STARTING.
+There is no harm to hold sparse_irq lock until the upcoming CPU completes
+in cpuhp_online_idle(). This allows to remove cpu_online() synchronization
+from architecture code.
 
-   There is no way the smp_processor_id() referred to in this comment can land
-   before cpu_init() even without the barrier()."
-
-The barrier() along with the comment was added in 2003 with commit
-d8f19f2cac70 ("[PATCH] x86-64 merge") in the history tree. One of those
-well documented combo patches of that time which changes world and some
-more. The context back then was:
-
-	/*
-	 * Dont put anything before smp_callin(), SMP
-	 * booting is too fragile that we want to limit the
-	 * things done here to the most necessary things.
-	 */
-	cpu_init();
-	smp_callin();
-
-+	/* otherwise gcc will move up smp_processor_id before the cpu_init */
-+ 	barrier();
-
-	Dprintk("cpu %d: waiting for commence\n", smp_processor_id()); 
-
-Even back in 2003 the compiler was not allowed to reorder that
-smp_processor_id() invocation before the cpu_init() function call.
-Especially not as smp_processor_id() resolved to:
-
-  asm volatile("movl %%gs:%c1,%0":"=r" (ret__):"i"(pda_offset(field)):"memory");
-
-There is no trace of this change in any mailing list archive including the
-back then official x86_64 list discuss@x86-64.org, which would explain the
-problem this change solved.
-
-The debug prints are gone by now and the the only smp_processor_id()
-invocation today is farther down in start_secondary() after locking
-vector_lock which itself prevents reordering.
-
-Even if the compiler would be allowed to reorder this, the code would still
-be correct as GSBASE is set up early in the assembly code and is valid when
-the CPU reaches start_secondary(), while the code at the time when this
-barrier was added did the GSBASE setup in cpu_init().
-
-As the barrier has zero value, remove it.
-
-Reported-by: Peter Zijlstra <peterz@infradead.org>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Link: https://lore.kernel.org/r/20230509100421.GU83892@hirez.programming.kicks-ass.net
+Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
-V4: New patch
+V4: Amend comment about sparse irq lock - Peter Z.
 ---
- arch/x86/kernel/smpboot.c |    2 --
- 1 file changed, 2 deletions(-)
+ kernel/cpu.c |   34 ++++++++++++++++++++++++----------
+ 1 file changed, 24 insertions(+), 10 deletions(-)
 
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -238,8 +238,6 @@ static void notrace start_secondary(void
- 	x86_cpuinit.early_percpu_clock_init();
- 	smp_callin();
+--- a/kernel/cpu.c
++++ b/kernel/cpu.c
+@@ -558,7 +558,7 @@ static int cpuhp_kick_ap(int cpu, struct
+ 	return ret;
+ }
  
--	/* otherwise gcc will move up smp_processor_id before the cpu_init */
--	barrier();
- 	/* Check TSC synchronization with the control CPU: */
- 	check_tsc_sync_target();
+-static int bringup_wait_for_ap(unsigned int cpu)
++static int bringup_wait_for_ap_online(unsigned int cpu)
+ {
+ 	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
  
+@@ -579,15 +579,12 @@ static int bringup_wait_for_ap(unsigned
+ 	 */
+ 	if (!cpu_smt_allowed(cpu))
+ 		return -ECANCELED;
+-
+-	if (st->target <= CPUHP_AP_ONLINE_IDLE)
+-		return 0;
+-
+-	return cpuhp_kick_ap(cpu, st, st->target);
++	return 0;
+ }
+ 
+ static int bringup_cpu(unsigned int cpu)
+ {
++	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
+ 	struct task_struct *idle = idle_thread_get(cpu);
+ 	int ret;
+ 
+@@ -600,16 +597,33 @@ static int bringup_cpu(unsigned int cpu)
+ 	/*
+ 	 * Some architectures have to walk the irq descriptors to
+ 	 * setup the vector space for the cpu which comes online.
+-	 * Prevent irq alloc/free across the bringup.
++	 *
++	 * Prevent irq alloc/free across the bringup by acquiring the
++	 * sparse irq lock. Hold it until the upcoming CPU completes the
++	 * startup in cpuhp_online_idle() which allows to avoid
++	 * intermediate synchronization points in the architecture code.
+ 	 */
+ 	irq_lock_sparse();
+ 
+ 	/* Arch-specific enabling code. */
+ 	ret = __cpu_up(cpu, idle);
+-	irq_unlock_sparse();
+ 	if (ret)
+-		return ret;
+-	return bringup_wait_for_ap(cpu);
++		goto out_unlock;
++
++	ret = bringup_wait_for_ap_online(cpu);
++	if (ret)
++		goto out_unlock;
++
++	irq_unlock_sparse();
++
++	if (st->target <= CPUHP_AP_ONLINE_IDLE)
++		return 0;
++
++	return cpuhp_kick_ap(cpu, st, st->target);
++
++out_unlock:
++	irq_unlock_sparse();
++	return ret;
+ }
+ 
+ static int finish_cpu(unsigned int cpu)
 
 
