@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1BCC7EE31
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533932.831076 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E64C2C77B7C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533941.831089 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZz8-0002O3-A9; Fri, 12 May 2023 21:07:30 +0000
+	id 1pxZzD-0003la-Rm; Fri, 12 May 2023 21:07:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533932.831076; Fri, 12 May 2023 21:07:30 +0000
+Received: by outflank-mailman (output) from mailman id 533941.831089; Fri, 12 May 2023 21:07:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZz8-0002MY-35; Fri, 12 May 2023 21:07:30 +0000
-Received: by outflank-mailman (input) for mailman id 533932;
- Fri, 12 May 2023 21:07:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pxZzD-0003jH-MP; Fri, 12 May 2023 21:07:35 +0000
+Received: by outflank-mailman (input) for mailman id 533941;
+ Fri, 12 May 2023 21:07:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZz7-0004F7-Dh
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:29 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ff656733-f108-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:26 +0200 (CEST)
+ id 1pxZz2-0004FP-In
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:24 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fd7cf51e-f108-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff656733-f108-11ed-8611-37d641c3527e
-Message-ID: <20230512205256.423407127@linutronix.de>
+X-Inumbo-ID: fd7cf51e-f108-11ed-b229-6b7b168915f2
+Message-ID: <20230512205256.316417181@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925646;
+	s=2020; t=1683925643;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=1rKmHmZAbJT08KPFiwa9L0tLfU68vKcUg6wSGkvdHSU=;
-	b=oQbDXlWOfM0QoeIS7fBd1ZDXblWtvo4+j/S5K5bAfdSwYbOZAW2gSSiDW+OyvgXb/rXSk2
-	+/cGl59AtTsBjSk7vwY4uPAQTNLGgW4cVw5R5p0BPvJlNfEfRufZHS7KlZQMVwbmLXJxKb
-	s6aysUoLSt4mwWJ1tetWxrFJExUFkRYOeNoA8l6IhoUsrN3BFbahOePPwtYjw/So5TqD69
-	2Cz8B/vuKEN0Yd2xMrYK0SQw8UE0HL8tHmnz5xhL98Md0D/lNdYrgp9dQF6YIxHSHgOtX9
-	NYORCVxryHyjQrZpsLDTBMe0I9/XQv2spHgCmpdrV7IAP/NBWUx7dh/o0Bd+yA==
+	 references:references; bh=DlXLIimSUyDsLnpaLCie3XUbsPcjE+B3Y5/np73/syk=;
+	b=0n8XyUqdMKHvhCV5NvBs8uq0bkyvVXbfLtaGYG0ApQJEOyilZiFp81ncYSBr6upR2FGS65
+	C/nM69M5fEGpiISmkmAowedNeMh8stJLEoOo7kEL2Yn2+06PaBevfLVashkK38xEMls2k0
+	f/2djYvKqyUSewvgr/tLWZAR3cGWoQ2BFlZWa6eUYCxL/R/BBbwHpxF3oihmcCNqrcO5vL
+	DdSUgTidw3Y3j0rys0Ztwy/cnS3zHqjKWZhecFMnqr4ICUwW5Yz4Fvu/UCxs3vooavSjLb
+	kpbMhzb9bUAKVmUd7V7KcFTAjo4mQTSyfyHcI0YMf+BOz6gUP+32KRGIcgecpA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925646;
+	s=2020e; t=1683925643;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=1rKmHmZAbJT08KPFiwa9L0tLfU68vKcUg6wSGkvdHSU=;
-	b=UfaoCMCiIYhlxZAtqiJhn7AYfYyYM9daYEgmWZsmdMFm1YeoGErpKjOwH0iDKmu7TweDmj
-	Ryr2+mWXOS82QjCw==
+	 references:references; bh=DlXLIimSUyDsLnpaLCie3XUbsPcjE+B3Y5/np73/syk=;
+	b=NxwadJuaL5bNYJvtkxpDH+oWBvMqBd0ae6N3DUYGY2xW3p33/XvIRC9MwzW0Aq6/9Tjy03
+	UcA8T+Ga+8Z9ZeBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,49 +96,72 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 18/37] x86/xen/hvm: Get rid of DEAD_FROZEN handling
+Subject: [patch V4 16/37] x86/smpboot: Remove wait for cpu_online()
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:25 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:22 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-No point in this conditional voodoo. Un-initializing the lock mechanism is
-safe to be called unconditionally even if it was already invoked when the
-CPU died.
-
-Remove the invocation of xen_smp_intr_free() as that has been already
-cleaned up in xen_cpu_dead_hvm().
+Now that the core code drops sparse_irq_lock after the idle thread
+synchronized, it's pointless to wait for the AP to mark itself online.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/xen/enlighten_hvm.c |   11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ arch/x86/kernel/smpboot.c |   26 ++------------------------
+ 1 file changed, 2 insertions(+), 24 deletions(-)
 
---- a/arch/x86/xen/enlighten_hvm.c
-+++ b/arch/x86/xen/enlighten_hvm.c
-@@ -161,13 +161,12 @@ static int xen_cpu_up_prepare_hvm(unsign
- 	int rc = 0;
- 
- 	/*
--	 * This can happen if CPU was offlined earlier and
--	 * offlining timed out in common_cpu_die().
-+	 * If a CPU was offlined earlier and offlining timed out then the
-+	 * lock mechanism is still initialized. Uninit it unconditionally
-+	 * as it's safe to call even if already uninited. Interrupts and
-+	 * timer have already been handled in xen_cpu_dead_hvm().
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -275,7 +275,6 @@ static void notrace start_secondary(void
+ 	 * half valid vector space.
  	 */
--	if (cpu_report_state(cpu) == CPU_DEAD_FROZEN) {
--		xen_smp_intr_free(cpu);
--		xen_uninit_lock_cpu(cpu);
--	}
-+	xen_uninit_lock_cpu(cpu);
+ 	lock_vector_lock();
+-	/* Sync point with do_wait_cpu_online() */
+ 	set_cpu_online(smp_processor_id(), true);
+ 	lapic_online();
+ 	unlock_vector_lock();
+@@ -1104,20 +1103,6 @@ static int wait_cpu_initialized(unsigned
+ 	return 0;
+ }
  
- 	if (cpu_acpi_id(cpu) != U32_MAX)
- 		per_cpu(xen_vcpu_id, cpu) = cpu_acpi_id(cpu);
-
-
+-/*
+- * Bringup step three: Wait for the target AP to reach set_cpu_online() in
+- * start_secondary().
+- */
+-static void wait_cpu_online(unsigned int cpu)
+-{
+-	/*
+-	 * Wait for the AP to mark itself online, so the core caller
+-	 * can drop sparse_irq_lock.
+-	 */
+-	while (!cpu_online(cpu))
+-		schedule();
+-}
+-
+ static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
+ {
+ 	int apicid = apic->cpu_present_to_apicid(cpu);
+@@ -1164,16 +1149,9 @@ int native_cpu_up(unsigned int cpu, stru
+ 	int ret;
+ 
+ 	ret = native_kick_ap(cpu, tidle);
+-	if (ret)
+-		goto out;
+-
+-	ret = wait_cpu_initialized(cpu);
+-	if (ret)
+-		goto out;
+-
+-	wait_cpu_online(cpu);
++	if (!ret)
++		ret = wait_cpu_initialized(cpu);
+ 
+-out:
+ 	/* Cleanup possible dangling ends... */
+ 	if (x86_platform.legacy.warm_reset)
+ 		smpboot_restore_warm_reset_vector();
 
 
