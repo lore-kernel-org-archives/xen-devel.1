@@ -4,36 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F27C77B7C
-	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:13:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533959.831119 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A37C77B7C
+	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:17:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.533965.831136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa4d-0000B7-6K; Fri, 12 May 2023 21:13:11 +0000
+	id 1pxa8s-0000rk-3R; Fri, 12 May 2023 21:17:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533959.831119; Fri, 12 May 2023 21:13:11 +0000
+Received: by outflank-mailman (output) from mailman id 533965.831136; Fri, 12 May 2023 21:17:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxa4d-0000B0-2o; Fri, 12 May 2023 21:13:11 +0000
-Received: by outflank-mailman (input) for mailman id 533959;
- Fri, 12 May 2023 21:13:09 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pxa8r-0000rM-Rb; Fri, 12 May 2023 21:17:33 +0000
+Received: by outflank-mailman (input) for mailman id 533965;
+ Fri, 12 May 2023 21:17:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0kdp=BB=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1pxa4b-0000At-KC
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:13:09 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ca245d49-f109-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:13:07 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2367863658;
- Fri, 12 May 2023 21:13:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B580C433D2;
- Fri, 12 May 2023 21:13:04 +0000 (UTC)
+ <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
+ id 1pxZzJ-0004FP-MU
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:41 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 08144d87-f109-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,61 +38,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca245d49-f109-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1683925985;
-	bh=Sj34y1UnMe+RdJ+d2LBaBf2d2ip7dGtT1ZKiNppIFOQ=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=n56X88njBufIX+d33OvAnz9LtQYd8cDaGAHCoscM3uoEmY1Ndn53CKeW8g6nt+DJP
-	 DgvdodSZw9Paasj2pow+TxQ05txCX5hhy9rVNs2usgOfrhe+mRBy/nw9hW53UVM+m6
-	 zLPgBAKe3vbivnJT5dC2ebwE7bJpSqd7qAQyjYQi5lxQp6n+bAQJEJ4SfTsvWIMisw
-	 pZlz8c9VVw4uZRrOUX07QFB2fcmtPiH4HScrQdB50jcwG52YAILNoxGq5IshiV6kiA
-	 gOKmwOGSzMhQk/8XtU4QYaODo9gcHCMgqw+6FxJGjsOYyEv1oYGjch1FJPHVomjI42
-	 WWqdXucwQYsaw==
-Date: Fri, 12 May 2023 14:12:57 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Olaf Hering <olaf@aepfle.de>
-cc: Paolo Bonzini <pbonzini@redhat.com>, John Snow <jsnow@redhat.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, qemu-devel@nongnu.org, 
-    qemu-block@nongnu.org, 
-    =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PATCH v2] piix: fix regression during unplug in Xen HVM domUs
-In-Reply-To: <20230510094719.26fb79e5.olaf@aepfle.de>
-Message-ID: <alpine.DEB.2.22.394.2305121411310.3748626@ubuntu-linux-20-04-desktop>
-References: <20210317070046.17860-1-olaf@aepfle.de> <4441d32f-bd52-9408-cabc-146b59f0e4dc@redhat.com> <20210325121219.7b5daf76.olaf@aepfle.de> <dae251e1-f808-708e-902c-05cfcbbea9cf@redhat.com> <20230509225818.GA16290@aepfle.de>
- <20230510094719.26fb79e5.olaf@aepfle.de>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 08144d87-f109-11ed-b229-6b7b168915f2
+Message-ID: <20230512205256.916055844@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1683925660;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=3WyGAeXCoINo+ZjbtqDSmG4Uv4XxBoW1eRT13EQq0fk=;
+	b=gCuo784jqFHJl8ajBn8394w4OmHWarWHua689soLfocU0hu6yonNTwuMrKteuZS5UiIuEV
+	qrcv15f4Q6TokbWN0YfdK3MSd6z8xiHfnEZzev7CF61wRptMWuiL7c2cva2fdafmy4x44i
+	QLCrGnHJHlwNB/wrQX3E9sCIWLmnibPYc8f6Fvn0Mhtkx8DzedCkReA25Zy2fK9LabrFWb
+	x1UPFk0hgEJqdWWpnRwgFxJ1i3v5p9suQyaN5MHQM1jUq9DQq3rPXVvibiH0XDHv/RMwo0
+	mWl2Aksb+Mjpq0yv8/Ii5IfUB3vzQQo6B2UpFf/trJXJtP52QvDOQWDArAV10Q==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1683925660;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=3WyGAeXCoINo+ZjbtqDSmG4Uv4XxBoW1eRT13EQq0fk=;
+	b=LWXqEciaP4I0I25ywyzxuHHtRRVAY1D7DccVqnOk2GJSZvUntz/BBxlff7vjipNfXjw8l7
+	MDKU/BWHM78qyUDA==
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: x86@kernel.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Brian Gerst <brgerst@gmail.com>,
+ Arjan van de Veen <arjan@linux.intel.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Paul McKenney <paulmck@kernel.org>,
+ Tom Lendacky <thomas.lendacky@amd.com>,
+ Sean Christopherson <seanjc@google.com>,
+ Oleksandr Natalenko <oleksandr@natalenko.name>,
+ Paul Menzel <pmenzel@molgen.mpg.de>,
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+ Piotr Gorski <lucjan.lucjanov@gmail.com>,
+ Usama Arif <usama.arif@bytedance.com>,
+ Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ xen-devel@lists.xenproject.org,
+ Russell King <linux@armlinux.org.uk>,
+ Arnd Bergmann <arnd@arndb.de>,
+ linux-arm-kernel@lists.infradead.org,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Will Deacon <will@kernel.org>,
+ Guo Ren <guoren@kernel.org>,
+ linux-csky@vger.kernel.org,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>,
+ linux-parisc@vger.kernel.org,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ linux-riscv@lists.infradead.org,
+ Mark Rutland <mark.rutland@arm.com>,
+ Sabin Rapan <sabrapan@amazon.com>,
+ "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+ Ross Philipson <ross.philipson@oracle.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>
+Subject: [patch V4 27/37] riscv: Switch to hotplug core state synchronization
+References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 12 May 2023 23:07:40 +0200 (CEST)
 
-On Wed, 10 May 2023, Olaf Hering wrote:
-> Wed, 10 May 2023 00:58:27 +0200 Olaf Hering <olaf@aepfle.de>:
-> 
-> > In my debugging (with v8.0.0) it turned out the three pci_set_word
-> > causes the domU to hang. In fact, it is just the last one:
-> > 
-> >    pci_set_byte(pci_conf + 0x20, 0x01);  /* BMIBA: 20-23h */
-> > 
-> > It changes the value from 0xc121 to 0x1.
-> 
-> If I disable just "pci_set_word(pci_conf + PCI_COMMAND, 0x0000);" it works as well.
-> It changes the value from 0x5 to 0.
-> 
-> In general I feel it is wrong to fiddle with PCI from the host side.
-> This is most likely not the intention of the Xen unplug protocol.
-> I'm sure the guest does not expect such changes under the hood.
-> It happens to work by luck with pvops kernels because their PCI discovery
-> is done after the unplug.
-> 
-> So, what do we do here to get this off the table?
+From: Thomas Gleixner <tglx@linutronix.de>
 
-I don't have a concrete suggestion because I don't understand the root
-cause of the issue. Looking back at Paolo's reply from 2021
+Switch to the CPU hotplug core state tracking and synchronization
+mechanim. No functional change intended.
 
-https://marc.info/?l=xen-devel&m=161669099305992&w=2
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Michael Kelley <mikelley@microsoft.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+---
+ arch/riscv/Kconfig              |    1 +
+ arch/riscv/include/asm/smp.h    |    2 +-
+ arch/riscv/kernel/cpu-hotplug.c |   14 +++++++-------
+ 3 files changed, 9 insertions(+), 8 deletions(-)
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -122,6 +122,7 @@ config RISCV
+ 	select HAVE_RSEQ
+ 	select HAVE_STACKPROTECTOR
+ 	select HAVE_SYSCALL_TRACEPOINTS
++	select HOTPLUG_CORE_SYNC_DEAD if HOTPLUG_CPU
+ 	select IRQ_DOMAIN
+ 	select IRQ_FORCED_THREADING
+ 	select KASAN_VMALLOC if KASAN
+--- a/arch/riscv/include/asm/smp.h
++++ b/arch/riscv/include/asm/smp.h
+@@ -70,7 +70,7 @@ asmlinkage void smp_callin(void);
+ 
+ #if defined CONFIG_HOTPLUG_CPU
+ int __cpu_disable(void);
+-void __cpu_die(unsigned int cpu);
++static inline void __cpu_die(unsigned int cpu) { }
+ #endif /* CONFIG_HOTPLUG_CPU */
+ 
+ #else
+--- a/arch/riscv/kernel/cpu-hotplug.c
++++ b/arch/riscv/kernel/cpu-hotplug.c
+@@ -8,6 +8,7 @@
+ #include <linux/sched.h>
+ #include <linux/err.h>
+ #include <linux/irq.h>
++#include <linux/cpuhotplug.h>
+ #include <linux/cpu.h>
+ #include <linux/sched/hotplug.h>
+ #include <asm/irq.h>
+@@ -49,17 +50,15 @@ int __cpu_disable(void)
+ 	return ret;
+ }
+ 
++#ifdef CONFIG_HOTPLUG_CPU
+ /*
+- * Called on the thread which is asking for a CPU to be shutdown.
++ * Called on the thread which is asking for a CPU to be shutdown, if the
++ * CPU reported dead to the hotplug core.
+  */
+-void __cpu_die(unsigned int cpu)
++void arch_cpuhp_cleanup_dead_cpu(unsigned int cpu)
+ {
+ 	int ret = 0;
+ 
+-	if (!cpu_wait_death(cpu, 5)) {
+-		pr_err("CPU %u: didn't die\n", cpu);
+-		return;
+-	}
+ 	pr_notice("CPU%u: off\n", cpu);
+ 
+ 	/* Verify from the firmware if the cpu is really stopped*/
+@@ -76,9 +75,10 @@ void __noreturn arch_cpu_idle_dead(void)
+ {
+ 	idle_task_exit();
+ 
+-	(void)cpu_report_death();
++	cpuhp_ap_report_dead();
+ 
+ 	cpu_ops[smp_processor_id()]->cpu_stop();
+ 	/* It should never reach here */
+ 	BUG();
+ }
++#endif
 
-I think he was right. We can either fix the root cause of the issue or
-avoid calling qdev_reset_all on unplug. I am OK with either one.
+
+
 
