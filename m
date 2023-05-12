@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5131C7EE2A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AD98C77B7C
 	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533913.830972 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.533919.831029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyo-0005wV-Ca; Fri, 12 May 2023 21:07:10 +0000
+	id 1pxZyy-0008Bz-5h; Fri, 12 May 2023 21:07:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533913.830972; Fri, 12 May 2023 21:07:10 +0000
+Received: by outflank-mailman (output) from mailman id 533919.831029; Fri, 12 May 2023 21:07:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZyo-0005vH-5y; Fri, 12 May 2023 21:07:10 +0000
-Received: by outflank-mailman (input) for mailman id 533913;
- Fri, 12 May 2023 21:07:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pxZyx-0008AM-VQ; Fri, 12 May 2023 21:07:19 +0000
+Received: by outflank-mailman (input) for mailman id 533919;
+ Fri, 12 May 2023 21:07:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZyn-0004FP-E9
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:09 +0000
+ id 1pxZyw-0004F7-E2
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:18 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f4d7f447-f108-11ed-b229-6b7b168915f2;
- Fri, 12 May 2023 23:07:08 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f98ec97d-f108-11ed-8611-37d641c3527e;
+ Fri, 12 May 2023 23:07:16 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4d7f447-f108-11ed-b229-6b7b168915f2
-Message-ID: <20230512205255.822234014@linutronix.de>
+X-Inumbo-ID: f98ec97d-f108-11ed-8611-37d641c3527e
+Message-ID: <20230512205256.091511483@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925628;
+	s=2020; t=1683925636;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Tu4ROvEgCDi3LP+wUPgYfwXC0d1wYCtN1rgZS5iXCTQ=;
-	b=MZw4QYwhSKWUBgjySGtCLDIrNNjvvQrhL4KcBEOLiBVM/Xw3o0S0OP8efQHUilTkVgZ5uH
-	V9lBZ9q2fPoE92w0/ZGYCX2Se/3i5TRE0KYKDmcJ9xA7PzNrkGdKRykS5AIxuIPSoIzOSR
-	qquFenj8YNpFTpXPIh+OE91cddixF4zU9bT3S5YiNOAuuJODxHBH9C+Og6fOAQlNlkVK7/
-	43Abm8kVyCrbP29RIsjsrJBt1KKm3ZqvVZMRUHpDw+q6Q/pktl3hX7SzxGL5NzDv4dD045
-	lAy6zjykzhyBxbFzFjVgVFWfc60zNYE4XSYTbPM3UgP7tkubuyN97MhVhVFnTw==
+	 references:references; bh=JaqZxTMPaJm1imrOji7tK0gvC/N5/O2xb6G86Du4TqQ=;
+	b=cDejufDlaxyCx5CGX4hiOWO/B+3Z4Wh19xsvilcT9IPO7FIYNiPHNJX+pqRc5X+N/dDVs5
+	tKDZ+XQ4GQv9J6hR2SPc85jI+MqPX6q6xxXuGbFXUxAJjXbPQHMFewGqbQuhrfB7sY2u2u
+	nkHDr5FQjj8WBPk6AwjKUsu+7FyPK4nSUfby3R43DpF7wYT+TQ8zFWGIr2lnlOG6YYmjM4
+	uygdhGu263NI6nr6HYNtETYJgziVDxphZhDBdka0UYVVHe8n5+ats7GS5MAlTVrF+827ll
+	IFxU3itG8+fVOGZr/SA1ZuDUQI+EuEEA8a+PjeX7nu7Hjbhz0RXLqD2NveT9KQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925628;
+	s=2020e; t=1683925636;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Tu4ROvEgCDi3LP+wUPgYfwXC0d1wYCtN1rgZS5iXCTQ=;
-	b=nDZua/3lTIIczi9cGRpK+vOoiWt3kdE9sPPGo3SiN4kVNdEYfjj0VQ75ukCQ/EVkS9lzyq
-	osDYwtJ/lUnA8jCQ==
+	 references:references; bh=JaqZxTMPaJm1imrOji7tK0gvC/N5/O2xb6G86Du4TqQ=;
+	b=sOj3zUEdJE/NxvevxKX5WPFqqf/zY9uCI4lEroCJWyOhcwEBsNa+MdD4dK9wBn2igUgSdu
+	8HJ4zRRiu3a17ODw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -95,70 +95,125 @@ Cc: x86@kernel.org,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
  Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 07/37] x86/smpboot: Restrict soft_restart_cpu() to SEV
+Subject:
+ [patch V4 12/37] x86/smpboot: Move synchronization masks to SMP boot code
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:08 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:16 +0200 (CEST)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Now that the CPU0 hotplug cruft is gone, the only user is AMD SEV.
+The usage is in smpboot.c and not in the CPU initialization code.
+
+The XEN_PV usage of cpu_callout_mask is obsolete as cpu_init() not longer
+waits and cacheinfo has its own CPU mask now, so cpu_callout_mask can be
+made static too.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- arch/x86/kernel/callthunks.c |    2 +-
- arch/x86/kernel/head_32.S    |   14 --------------
- arch/x86/kernel/head_64.S    |    2 +-
- 3 files changed, 2 insertions(+), 16 deletions(-)
-
---- a/arch/x86/kernel/callthunks.c
-+++ b/arch/x86/kernel/callthunks.c
-@@ -133,7 +133,7 @@ static bool skip_addr(void *dest)
- 	/* Accounts directly */
- 	if (dest == ret_from_fork)
- 		return true;
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
- 	if (dest == soft_restart_cpu)
- 		return true;
- #endif
---- a/arch/x86/kernel/head_32.S
-+++ b/arch/x86/kernel/head_32.S
-@@ -138,20 +138,6 @@ SYM_CODE_START(startup_32)
- 	jmp .Ldefault_entry
- SYM_CODE_END(startup_32)
+ arch/x86/include/asm/cpumask.h |    5 -----
+ arch/x86/kernel/cpu/common.c   |   17 -----------------
+ arch/x86/kernel/smpboot.c      |   16 ++++++++++++++++
+ arch/x86/xen/smp_pv.c          |    3 ---
+ 4 files changed, 16 insertions(+), 25 deletions(-)
+--- a/arch/x86/include/asm/cpumask.h
++++ b/arch/x86/include/asm/cpumask.h
+@@ -4,11 +4,6 @@
+ #ifndef __ASSEMBLY__
+ #include <linux/cpumask.h>
  
--#ifdef CONFIG_HOTPLUG_CPU
--/*
-- * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-- * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-- * unplug. Everything is set up already except the stack.
-- */
--SYM_FUNC_START(soft_restart_cpu)
--	movl initial_stack, %ecx
--	movl %ecx, %esp
--	call *(initial_code)
--1:	jmp 1b
--SYM_FUNC_END(soft_restart_cpu)
--#endif
+-extern cpumask_var_t cpu_callin_mask;
+-extern cpumask_var_t cpu_callout_mask;
+-extern cpumask_var_t cpu_initialized_mask;
+-extern cpumask_var_t cpu_sibling_setup_mask;
 -
- /*
-  * Non-boot CPU entry point; entered from trampoline.S
-  * We can't lgdt here, because lgdt itself uses a data segment, but
---- a/arch/x86/kernel/head_64.S
-+++ b/arch/x86/kernel/head_64.S
-@@ -375,7 +375,7 @@ SYM_CODE_END(secondary_startup_64)
- #include "verify_cpu.S"
- #include "sev_verify_cbit.S"
+ extern void setup_cpu_local_masks(void);
  
--#ifdef CONFIG_HOTPLUG_CPU
-+#if defined(CONFIG_HOTPLUG_CPU) && defined(CONFIG_AMD_MEM_ENCRYPT)
  /*
-  * Entry point for soft restart of a CPU. Invoked from xxx_play_dead() for
-  * restarting the boot CPU or for restarting SEV guest CPUs after CPU hot
-
-
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -67,14 +67,6 @@
+ 
+ u32 elf_hwcap2 __read_mostly;
+ 
+-/* all of these masks are initialized in setup_cpu_local_masks() */
+-cpumask_var_t cpu_initialized_mask;
+-cpumask_var_t cpu_callout_mask;
+-cpumask_var_t cpu_callin_mask;
+-
+-/* representing cpus for which sibling maps can be computed */
+-cpumask_var_t cpu_sibling_setup_mask;
+-
+ /* Number of siblings per CPU package */
+ int smp_num_siblings = 1;
+ EXPORT_SYMBOL(smp_num_siblings);
+@@ -169,15 +161,6 @@ static void ppin_init(struct cpuinfo_x86
+ 	clear_cpu_cap(c, info->feature);
+ }
+ 
+-/* correctly size the local cpu masks */
+-void __init setup_cpu_local_masks(void)
+-{
+-	alloc_bootmem_cpumask_var(&cpu_initialized_mask);
+-	alloc_bootmem_cpumask_var(&cpu_callin_mask);
+-	alloc_bootmem_cpumask_var(&cpu_callout_mask);
+-	alloc_bootmem_cpumask_var(&cpu_sibling_setup_mask);
+-}
+-
+ static void default_init(struct cpuinfo_x86 *c)
+ {
+ #ifdef CONFIG_X86_64
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -101,6 +101,13 @@ EXPORT_PER_CPU_SYMBOL(cpu_die_map);
+ DEFINE_PER_CPU_READ_MOSTLY(struct cpuinfo_x86, cpu_info);
+ EXPORT_PER_CPU_SYMBOL(cpu_info);
+ 
++/* All of these masks are initialized in setup_cpu_local_masks() */
++static cpumask_var_t cpu_initialized_mask;
++static cpumask_var_t cpu_callout_mask;
++static cpumask_var_t cpu_callin_mask;
++/* Representing CPUs for which sibling maps can be computed */
++static cpumask_var_t cpu_sibling_setup_mask;
++
+ /* Logical package management. We might want to allocate that dynamically */
+ unsigned int __max_logical_packages __read_mostly;
+ EXPORT_SYMBOL(__max_logical_packages);
+@@ -1548,6 +1555,15 @@ early_param("possible_cpus", _setup_poss
+ 		set_cpu_possible(i, true);
+ }
+ 
++/* correctly size the local cpu masks */
++void __init setup_cpu_local_masks(void)
++{
++	alloc_bootmem_cpumask_var(&cpu_initialized_mask);
++	alloc_bootmem_cpumask_var(&cpu_callin_mask);
++	alloc_bootmem_cpumask_var(&cpu_callout_mask);
++	alloc_bootmem_cpumask_var(&cpu_sibling_setup_mask);
++}
++
+ #ifdef CONFIG_HOTPLUG_CPU
+ 
+ /* Recompute SMT state for all CPUs on offline */
+--- a/arch/x86/xen/smp_pv.c
++++ b/arch/x86/xen/smp_pv.c
+@@ -254,15 +254,12 @@ cpu_initialize_context(unsigned int cpu,
+ 	struct desc_struct *gdt;
+ 	unsigned long gdt_mfn;
+ 
+-	/* used to tell cpu_init() that it can proceed with initialization */
+-	cpumask_set_cpu(cpu, cpu_callout_mask);
+ 	if (cpumask_test_and_set_cpu(cpu, xen_cpu_initialized_map))
+ 		return 0;
+ 
+ 	ctxt = kzalloc(sizeof(*ctxt), GFP_KERNEL);
+ 	if (ctxt == NULL) {
+ 		cpumask_clear_cpu(cpu, xen_cpu_initialized_map);
+-		cpumask_clear_cpu(cpu, cpu_callout_mask);
+ 		return -ENOMEM;
+ 	}
+ 
 
 
