@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D54ADC7EE2F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1868DC7EE2D
 	for <xen-devel@archiver.kernel.org>; Fri, 12 May 2023 21:07:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.533911.830959 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.533915.830998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZym-0005af-Nl; Fri, 12 May 2023 21:07:08 +0000
+	id 1pxZys-0006ng-IX; Fri, 12 May 2023 21:07:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 533911.830959; Fri, 12 May 2023 21:07:08 +0000
+Received: by outflank-mailman (output) from mailman id 533915.830998; Fri, 12 May 2023 21:07:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxZym-0005aQ-Ji; Fri, 12 May 2023 21:07:08 +0000
-Received: by outflank-mailman (input) for mailman id 533911;
- Fri, 12 May 2023 21:07:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1pxZys-0006mC-CC; Fri, 12 May 2023 21:07:14 +0000
+Received: by outflank-mailman (input) for mailman id 533915;
+ Fri, 12 May 2023 21:07:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5PQu=BB=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1pxZyl-0004F7-Cj
- for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:07 +0000
+ id 1pxZyq-0004FP-UQ
+ for xen-devel@lists.xenproject.org; Fri, 12 May 2023 21:07:12 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f2e1a438-f108-11ed-8611-37d641c3527e;
- Fri, 12 May 2023 23:07:05 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f6bde649-f108-11ed-b229-6b7b168915f2;
+ Fri, 12 May 2023 23:07:12 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2e1a438-f108-11ed-8611-37d641c3527e
-Message-ID: <20230512205255.715707999@linutronix.de>
+X-Inumbo-ID: f6bde649-f108-11ed-b229-6b7b168915f2
+Message-ID: <20230512205255.928917242@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1683925625;
+	s=2020; t=1683925631;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=gxV9HvRA1jE0dGSE4CHHvLVIJlrSKDn4gpz4DP4Ulu8=;
-	b=pMTNWJsceyKNdg61fjbgscmBiEya/qXyQ1hUAzJ7A7/eDZzveZgJQ1/Ofw9uXoUE0QwUxx
-	zQMqliw+eqf0lOxHhpDPglVC9nQREayoLreN0YRA11SqKCWboSqP3a+xqKu7cQ4PyAYps3
-	32ILY/vwdyGB79ZyA7SeZqzbdhT3PyOqjZVa+M9STgi/eJ3Iz+EGcHmN2p2V4IHTWmX4qQ
-	TtsuPEsrbiwun4gHWBsg09kRwy+KArC18NO9wP18KIxcKmcvaY5Gla8Tt9W2MwGLiMWb77
-	B0s97A4u0JnxD4936vMJ4C5LbS7RTpBC4LzVoMDgosuWPoxfYQEHzbTtdneXLA==
+	 references:references; bh=Xd8AfLi0wqokosOeIBU6PRKsH+asSTGynrmD4wsPm3o=;
+	b=OSWq/hFbqxJ6Ld5bfeAs5sTSUkgPJakeSoZZI0W04OZW4wK4OOwnMfEKPPf6LMMX3NpWwW
+	Dw4oxAh67Lba1WppJhoyY3dyiIlcsvkzneZoqU7XnbQXHi8hmoJddUBFlvsLuYO7WNwcg9
+	oZ7GEYlfUP3vYCsu28zEkP4RaHpa8n3Kt6TrKtLK1CQyXhpuha29p8BqlPkYBXAms2NGUm
+	hNxWEb0zb4I54IvTNXGA1RBYiIyA1H5VtF9jtMNRk7K5f5CxwO1qZcIeVQoael1ouMlHHt
+	tc5I9SZCozwjDydA+emJNdIPmTkPL/s1O/lL5z/4MOdeiiHhbgz4LufEJIMbKw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1683925625;
+	s=2020e; t=1683925631;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=gxV9HvRA1jE0dGSE4CHHvLVIJlrSKDn4gpz4DP4Ulu8=;
-	b=gM0S3YIFPYsQR5xI9sMpI9LN66f78xaB9ow7U++iKEWI+6+2HqGIc9AiXsr1YcxwC38vcW
-	1TCJYhmxK4OuJJDA==
+	 references:references; bh=Xd8AfLi0wqokosOeIBU6PRKsH+asSTGynrmD4wsPm3o=;
+	b=Wbi8Q504asBnwQfAHxOaKyo6ldSeRV/i3NagxF3YUutPr0oEnV00hx/+nvDf+RtAS3JZ5j
+	jwje6NG5bt6L3sBQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org,
@@ -94,301 +94,297 @@ Cc: x86@kernel.org,
  Mark Rutland <mark.rutland@arm.com>,
  Sabin Rapan <sabrapan@amazon.com>,
  "Michael Kelley (LINUX)" <mikelley@microsoft.com>,
- Ross Philipson <ross.philipson@oracle.com>
-Subject: [patch V4 05/37] x86/topology: Remove CPU0 hotplug option
+ Ross Philipson <ross.philipson@oracle.com>,
+ David Woodhouse <dwmw@amazon.co.uk>
+Subject: [patch V4 09/37] x86/smpboot: Split up native_cpu_up() into separate
+ phases and document them
 References: <20230512203426.452963764@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 12 May 2023 23:07:04 +0200 (CEST)
+Date: Fri, 12 May 2023 23:07:11 +0200 (CEST)
 
-From: Thomas Gleixner <tglx@linutronix.de>
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-This was introduced together with commit e1c467e69040 ("x86, hotplug: Wake
-up CPU0 via NMI instead of INIT, SIPI, SIPI") to eventually support
-physical hotplug of CPU0:
+There are four logical parts to what native_cpu_up() does on the BSP (or
+on the controlling CPU for a later hotplug):
 
- "We'll change this code in the future to wake up hard offlined CPU0 if
-  real platform and request are available."
+ 1) Wake the AP by sending the INIT/SIPI/SIPI sequence.
 
-11 years later this has not happened and physical hotplug is not officially
-supported. Remove the cruft.
+ 2) Wait for the AP to make it as far as wait_for_master_cpu() which
+    sets that CPU's bit in cpu_initialized_mask, then sets the bit in
+    cpu_callout_mask to let the AP proceed through cpu_init().
 
+ 3) Wait for the AP to finish cpu_init() and get as far as the
+    smp_callin() call, which sets that CPU's bit in cpu_callin_mask.
+
+ 4) Perform the TSC synchronization and wait for the AP to actually
+    mark itself online in cpu_online_mask.
+
+In preparation to allow these phases to operate in parallel on multiple
+APs, split them out into separate functions and document the interactions
+a little more clearly in both the BP and AP code paths.
+
+No functional change intended.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Michael Kelley <mikelley@microsoft.com>
 ---
- Documentation/admin-guide/kernel-parameters.txt |   14 ---
- Documentation/core-api/cpu_hotplug.rst          |   13 ---
- arch/x86/Kconfig                                |   43 ----------
- arch/x86/include/asm/cpu.h                      |    3 
- arch/x86/kernel/topology.c                      |   98 ------------------------
- arch/x86/power/cpu.c                            |   37 ---------
- 6 files changed, 6 insertions(+), 202 deletions(-)
+ arch/x86/kernel/smpboot.c |  184 +++++++++++++++++++++++++++++-----------------
+ 1 file changed, 119 insertions(+), 65 deletions(-)
 
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -818,20 +818,6 @@
- 			Format:
- 			<first_slot>,<last_slot>,<port>,<enum_bit>[,<debug>]
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -193,6 +193,10 @@ static void smp_callin(void)
  
--	cpu0_hotplug	[X86] Turn on CPU0 hotplug feature when
--			CONFIG_BOOTPARAM_HOTPLUG_CPU0 is off.
--			Some features depend on CPU0. Known dependencies are:
--			1. Resume from suspend/hibernate depends on CPU0.
--			Suspend/hibernate will fail if CPU0 is offline and you
--			need to online CPU0 before suspend/hibernate.
--			2. PIC interrupts also depend on CPU0. CPU0 can't be
--			removed if a PIC interrupt is detected.
--			It's said poweroff/reboot may depend on CPU0 on some
--			machines although I haven't seen such issues so far
--			after CPU0 is offline on a few tested machines.
--			If the dependencies are under your control, you can
--			turn on cpu0_hotplug.
--
- 	cpuidle.off=1	[CPU_IDLE]
- 			disable the cpuidle sub-system
+ 	wmb();
  
---- a/Documentation/core-api/cpu_hotplug.rst
-+++ b/Documentation/core-api/cpu_hotplug.rst
-@@ -127,17 +127,8 @@ Once the CPU is shutdown, it will be rem
-  $ echo 1 > /sys/devices/system/cpu/cpu4/online
-  smpboot: Booting Node 0 Processor 4 APIC 0x1
++	/*
++	 * This runs the AP through all the cpuhp states to its target
++	 * state CPUHP_ONLINE.
++	 */
+ 	notify_cpu_starting(cpuid);
  
--The CPU is usable again. This should work on all CPUs. CPU0 is often special
--and excluded from CPU hotplug. On X86 the kernel option
--*CONFIG_BOOTPARAM_HOTPLUG_CPU0* has to be enabled in order to be able to
--shutdown CPU0. Alternatively the kernel command option *cpu0_hotplug* can be
--used. Some known dependencies of CPU0:
--
--* Resume from hibernate/suspend. Hibernate/suspend will fail if CPU0 is offline.
--* PIC interrupts. CPU0 can't be removed if a PIC interrupt is detected.
--
--Please let Fenghua Yu <fenghua.yu@intel.com> know if you find any dependencies
--on CPU0.
-+The CPU is usable again. This should work on all CPUs, but CPU0 is often special
-+and excluded from CPU hotplug.
- 
- The CPU hotplug coordination
- ============================
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -2305,49 +2305,6 @@ config HOTPLUG_CPU
- 	def_bool y
- 	depends on SMP
- 
--config BOOTPARAM_HOTPLUG_CPU0
--	bool "Set default setting of cpu0_hotpluggable"
--	depends on HOTPLUG_CPU
--	help
--	  Set whether default state of cpu0_hotpluggable is on or off.
--
--	  Say Y here to enable CPU0 hotplug by default. If this switch
--	  is turned on, there is no need to give cpu0_hotplug kernel
--	  parameter and the CPU0 hotplug feature is enabled by default.
--
--	  Please note: there are two known CPU0 dependencies if you want
--	  to enable the CPU0 hotplug feature either by this switch or by
--	  cpu0_hotplug kernel parameter.
--
--	  First, resume from hibernate or suspend always starts from CPU0.
--	  So hibernate and suspend are prevented if CPU0 is offline.
--
--	  Second dependency is PIC interrupts always go to CPU0. CPU0 can not
--	  offline if any interrupt can not migrate out of CPU0. There may
--	  be other CPU0 dependencies.
--
--	  Please make sure the dependencies are under your control before
--	  you enable this feature.
--
--	  Say N if you don't want to enable CPU0 hotplug feature by default.
--	  You still can enable the CPU0 hotplug feature at boot by kernel
--	  parameter cpu0_hotplug.
--
--config DEBUG_HOTPLUG_CPU0
--	def_bool n
--	prompt "Debug CPU0 hotplug"
--	depends on HOTPLUG_CPU
--	help
--	  Enabling this option offlines CPU0 (if CPU0 can be offlined) as
--	  soon as possible and boots up userspace with CPU0 offlined. User
--	  can online CPU0 back after boot time.
--
--	  To debug CPU0 hotplug, you need to enable CPU0 offline/online
--	  feature by either turning on CONFIG_BOOTPARAM_HOTPLUG_CPU0 during
--	  compilation or giving cpu0_hotplug kernel parameter at boot.
--
--	  If unsure, say N.
--
- config COMPAT_VDSO
- 	def_bool n
- 	prompt "Disable the 32-bit vDSO (needed for glibc 2.3.3)"
---- a/arch/x86/include/asm/cpu.h
-+++ b/arch/x86/include/asm/cpu.h
-@@ -31,9 +31,6 @@ struct x86_cpu {
- extern int arch_register_cpu(int num);
- extern void arch_unregister_cpu(int);
- extern void soft_restart_cpu(void);
--#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
--extern int _debug_hotplug_cpu(int cpu, int action);
--#endif
+ 	/*
+@@ -233,12 +237,28 @@ static void notrace start_secondary(void
+ 	load_cr3(swapper_pg_dir);
+ 	__flush_tlb_all();
  #endif
++	/*
++	 * Sync point with wait_cpu_initialized(). Before proceeding through
++	 * cpu_init(), the AP will call wait_for_master_cpu() which sets its
++	 * own bit in cpu_initialized_mask and then waits for the BSP to set
++	 * its bit in cpu_callout_mask to release it.
++	 */
+ 	cpu_init_secondary();
+ 	rcu_cpu_starting(raw_smp_processor_id());
+ 	x86_cpuinit.early_percpu_clock_init();
++
++	/*
++	 * Sync point with wait_cpu_callin(). The AP doesn't wait here
++	 * but just sets the bit to let the controlling CPU (BSP) know that
++	 * it's got this far.
++	 */
+ 	smp_callin();
  
- extern void ap_init_aperfmperf(void);
---- a/arch/x86/kernel/topology.c
-+++ b/arch/x86/kernel/topology.c
-@@ -38,102 +38,12 @@
- static DEFINE_PER_CPU(struct x86_cpu, cpu_devices);
+-	/* Check TSC synchronization with the control CPU: */
++	/*
++	 * Check TSC synchronization with the control CPU, which will do
++	 * its part of this from wait_cpu_online(), making it an implicit
++	 * synchronization point.
++	 */
+ 	check_tsc_sync_target();
  
- #ifdef CONFIG_HOTPLUG_CPU
--
--#ifdef CONFIG_BOOTPARAM_HOTPLUG_CPU0
--static int cpu0_hotpluggable = 1;
--#else
--static int cpu0_hotpluggable;
--static int __init enable_cpu0_hotplug(char *str)
--{
--	cpu0_hotpluggable = 1;
--	return 1;
--}
--
--__setup("cpu0_hotplug", enable_cpu0_hotplug);
--#endif
--
--#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
--/*
-- * This function offlines a CPU as early as possible and allows userspace to
-- * boot up without the CPU. The CPU can be onlined back by user after boot.
-- *
-- * This is only called for debugging CPU offline/online feature.
-- */
--int _debug_hotplug_cpu(int cpu, int action)
--{
--	int ret;
--
--	if (!cpu_is_hotpluggable(cpu))
--		return -EINVAL;
--
--	switch (action) {
--	case 0:
--		ret = remove_cpu(cpu);
--		if (!ret)
--			pr_info("DEBUG_HOTPLUG_CPU0: CPU %u is now offline\n", cpu);
--		else
--			pr_debug("Can't offline CPU%d.\n", cpu);
--		break;
--	case 1:
--		ret = add_cpu(cpu);
--		if (ret)
--			pr_debug("Can't online CPU%d.\n", cpu);
--
--		break;
--	default:
--		ret = -EINVAL;
--	}
--
--	return ret;
--}
--
--static int __init debug_hotplug_cpu(void)
-+int arch_register_cpu(int cpu)
+ 	/*
+@@ -257,6 +277,7 @@ static void notrace start_secondary(void
+ 	 * half valid vector space.
+ 	 */
+ 	lock_vector_lock();
++	/* Sync point with do_wait_cpu_online() */
+ 	set_cpu_online(smp_processor_id(), true);
+ 	lapic_online();
+ 	unlock_vector_lock();
+@@ -979,17 +1000,13 @@ int common_cpu_up(unsigned int cpu, stru
+ /*
+  * NOTE - on most systems this is a PHYSICAL apic ID, but on multiquad
+  * (ie clustered apic addressing mode), this is a LOGICAL apic ID.
+- * Returns zero if CPU booted OK, else error code from
++ * Returns zero if startup was successfully sent, else error code from
+  * ->wakeup_secondary_cpu.
+  */
+ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle)
  {
--	_debug_hotplug_cpu(0, 0);
--	return 0;
--}
+-	/* start_ip had better be page-aligned! */
+ 	unsigned long start_ip = real_mode_header->trampoline_start;
+ 
+-	unsigned long boot_error = 0;
+-	unsigned long timeout;
 -
--late_initcall_sync(debug_hotplug_cpu);
--#endif /* CONFIG_DEBUG_HOTPLUG_CPU0 */
--
--int arch_register_cpu(int num)
--{
--	struct cpuinfo_x86 *c = &cpu_data(num);
--
--	/*
--	 * Currently CPU0 is only hotpluggable on Intel platforms. Other
--	 * vendors can add hotplug support later.
--	 * Xen PV guests don't support CPU0 hotplug at all.
--	 */
--	if (c->x86_vendor != X86_VENDOR_INTEL ||
--	    cpu_feature_enabled(X86_FEATURE_XENPV))
--		cpu0_hotpluggable = 0;
--
--	/*
--	 * Two known BSP/CPU0 dependencies: Resume from suspend/hibernate
--	 * depends on BSP. PIC interrupts depend on BSP.
--	 *
--	 * If the BSP dependencies are under control, one can tell kernel to
--	 * enable BSP hotplug. This basically adds a control file and
--	 * one can attempt to offline BSP.
--	 */
--	if (num == 0 && cpu0_hotpluggable) {
--		unsigned int irq;
+ #ifdef CONFIG_X86_64
+ 	/* If 64-bit wakeup method exists, use the 64-bit mode trampoline IP */
+ 	if (apic->wakeup_secondary_cpu_64)
+@@ -1046,60 +1063,89 @@ static int do_boot_cpu(int apicid, int c
+ 	 * - Use an INIT boot APIC message
+ 	 */
+ 	if (apic->wakeup_secondary_cpu_64)
+-		boot_error = apic->wakeup_secondary_cpu_64(apicid, start_ip);
++		return apic->wakeup_secondary_cpu_64(apicid, start_ip);
+ 	else if (apic->wakeup_secondary_cpu)
+-		boot_error = apic->wakeup_secondary_cpu(apicid, start_ip);
+-	else
+-		boot_error = wakeup_secondary_cpu_via_init(apicid, start_ip);
++		return apic->wakeup_secondary_cpu(apicid, start_ip);
+ 
+-	if (!boot_error) {
 -		/*
--		 * We won't take down the boot processor on i386 if some
--		 * interrupts only are able to be serviced by the BSP in PIC.
+-		 * Wait 10s total for first sign of life from AP
 -		 */
--		for_each_active_irq(irq) {
--			if (!IO_APIC_IRQ(irq) && irq_has_action(irq)) {
--				cpu0_hotpluggable = 0;
+-		boot_error = -1;
+-		timeout = jiffies + 10*HZ;
+-		while (time_before(jiffies, timeout)) {
+-			if (cpumask_test_cpu(cpu, cpu_initialized_mask)) {
+-				/*
+-				 * Tell AP to proceed with initialization
+-				 */
+-				cpumask_set_cpu(cpu, cpu_callout_mask);
+-				boot_error = 0;
 -				break;
 -			}
+-			schedule();
 -		}
 -	}
--	if (num || cpu0_hotpluggable)
--		per_cpu(cpu_devices, num).cpu.hotpluggable = 1;
-+	struct x86_cpu *xc = per_cpu_ptr(&cpu_devices, cpu);
++	return wakeup_secondary_cpu_via_init(apicid, start_ip);
++}
  
--	return register_cpu(&per_cpu(cpu_devices, num).cpu, num);
-+	xc->cpu.hotpluggable = cpu > 0;
-+	return register_cpu(&xc->cpu, cpu);
- }
- EXPORT_SYMBOL(arch_register_cpu);
+-	if (!boot_error) {
+-		/*
+-		 * Wait till AP completes initial initialization
+-		 */
+-		while (!cpumask_test_cpu(cpu, cpu_callin_mask)) {
+-			/*
+-			 * Allow other tasks to run while we wait for the
+-			 * AP to come online. This also gives a chance
+-			 * for the MTRR work(triggered by the AP coming online)
+-			 * to be completed in the stop machine context.
+-			 */
+-			schedule();
+-		}
+-	}
++static int wait_cpu_cpumask(unsigned int cpu, const struct cpumask *mask)
++{
++	unsigned long timeout;
  
---- a/arch/x86/power/cpu.c
-+++ b/arch/x86/power/cpu.c
-@@ -351,43 +351,6 @@ static int bsp_pm_callback(struct notifi
- 	case PM_HIBERNATION_PREPARE:
- 		ret = bsp_check();
- 		break;
--#ifdef CONFIG_DEBUG_HOTPLUG_CPU0
--	case PM_RESTORE_PREPARE:
+-	if (x86_platform.legacy.warm_reset) {
 -		/*
--		 * When system resumes from hibernation, online CPU0 because
--		 * 1. it's required for resume and
--		 * 2. the CPU was online before hibernation
+-		 * Cleanup possible dangling ends...
 -		 */
--		if (!cpu_online(0))
--			_debug_hotplug_cpu(0, 1);
--		break;
--	case PM_POST_RESTORE:
--		/*
--		 * When a resume really happens, this code won't be called.
--		 *
--		 * This code is called only when user space hibernation software
--		 * prepares for snapshot device during boot time. So we just
--		 * call _debug_hotplug_cpu() to restore to CPU0's state prior to
--		 * preparing the snapshot device.
--		 *
--		 * This works for normal boot case in our CPU0 hotplug debug
--		 * mode, i.e. CPU0 is offline and user mode hibernation
--		 * software initializes during boot time.
--		 *
--		 * If CPU0 is online and user application accesses snapshot
--		 * device after boot time, this will offline CPU0 and user may
--		 * see different CPU0 state before and after accessing
--		 * the snapshot device. But hopefully this is not a case when
--		 * user debugging CPU0 hotplug. Even if users hit this case,
--		 * they can easily online CPU0 back.
--		 *
--		 * To simplify this debug code, we only consider normal boot
--		 * case. Otherwise we need to remember CPU0's state and restore
--		 * to that state and resolve racy conditions etc.
--		 */
--		_debug_hotplug_cpu(0, 0);
--		break;
--#endif
- 	default:
- 		break;
+-		smpboot_restore_warm_reset_vector();
++	/*
++	 * Wait up to 10s for the CPU to report in.
++	 */
++	timeout = jiffies + 10*HZ;
++	while (time_before(jiffies, timeout)) {
++		if (cpumask_test_cpu(cpu, mask))
++			return 0;
++
++		schedule();
  	}
-
-
++	return -1;
++}
+ 
+-	return boot_error;
++/*
++ * Bringup step two: Wait for the target AP to reach cpu_init_secondary()
++ * and thus wait_for_master_cpu(), then set cpu_callout_mask to allow it
++ * to proceed.  The AP will then proceed past setting its 'callin' bit
++ * and end up waiting in check_tsc_sync_target() until we reach
++ * do_wait_cpu_online() to tend to it.
++ */
++static int wait_cpu_initialized(unsigned int cpu)
++{
++	/*
++	 * Wait for first sign of life from AP.
++	 */
++	if (wait_cpu_cpumask(cpu, cpu_initialized_mask))
++		return -1;
++
++	cpumask_set_cpu(cpu, cpu_callout_mask);
++	return 0;
+ }
+ 
+-int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
++/*
++ * Bringup step three: Wait for the target AP to reach smp_callin().
++ * The AP is not waiting for us here so we don't need to parallelise
++ * this step. Not entirely clear why we care about this, since we just
++ * proceed directly to TSC synchronization which is the next sync
++ * point with the AP anyway.
++ */
++static void wait_cpu_callin(unsigned int cpu)
++{
++	while (!cpumask_test_cpu(cpu, cpu_callin_mask))
++		schedule();
++}
++
++/*
++ * Bringup step four: Synchronize the TSC and wait for the target AP
++ * to reach set_cpu_online() in start_secondary().
++ */
++static void wait_cpu_online(unsigned int cpu)
+ {
+-	int apicid = apic->cpu_present_to_apicid(cpu);
+ 	unsigned long flags;
++
++	/*
++	 * Check TSC synchronization with the AP (keep irqs disabled
++	 * while doing so):
++	 */
++	local_irq_save(flags);
++	check_tsc_sync_source(cpu);
++	local_irq_restore(flags);
++
++	/*
++	 * Wait for the AP to mark itself online, so the core caller
++	 * can drop sparse_irq_lock.
++	 */
++	while (!cpu_online(cpu))
++		schedule();
++}
++
++static int native_kick_ap(unsigned int cpu, struct task_struct *tidle)
++{
++	int apicid = apic->cpu_present_to_apicid(cpu);
+ 	int err;
+ 
+ 	lockdep_assert_irqs_enabled();
+@@ -1140,25 +1186,33 @@ int native_cpu_up(unsigned int cpu, stru
+ 		return err;
+ 
+ 	err = do_boot_cpu(apicid, cpu, tidle);
+-	if (err) {
++	if (err)
+ 		pr_err("do_boot_cpu failed(%d) to wakeup CPU#%u\n", err, cpu);
+-		return err;
+-	}
+ 
+-	/*
+-	 * Check TSC synchronization with the AP (keep irqs disabled
+-	 * while doing so):
+-	 */
+-	local_irq_save(flags);
+-	check_tsc_sync_source(cpu);
+-	local_irq_restore(flags);
++	return err;
++}
+ 
+-	while (!cpu_online(cpu)) {
+-		cpu_relax();
+-		touch_nmi_watchdog();
+-	}
++int native_cpu_up(unsigned int cpu, struct task_struct *tidle)
++{
++	int ret;
+ 
+-	return 0;
++	ret = native_kick_ap(cpu, tidle);
++	if (ret)
++		goto out;
++
++	ret = wait_cpu_initialized(cpu);
++	if (ret)
++		goto out;
++
++	wait_cpu_callin(cpu);
++	wait_cpu_online(cpu);
++
++out:
++	/* Cleanup possible dangling ends... */
++	if (x86_platform.legacy.warm_reset)
++		smpboot_restore_warm_reset_vector();
++
++	return ret;
+ }
+ 
+ /**
 
 
