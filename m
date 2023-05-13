@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA03C77B7F
-	for <xen-devel@archiver.kernel.org>; Sat, 13 May 2023 01:17:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534090.831319 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A847FC77B7F
+	for <xen-devel@archiver.kernel.org>; Sat, 13 May 2023 01:29:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534103.831339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxdt3-0001ES-Uc; Sat, 13 May 2023 01:17:29 +0000
+	id 1pxe3u-0003ZW-GV; Sat, 13 May 2023 01:28:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534090.831319; Sat, 13 May 2023 01:17:29 +0000
+Received: by outflank-mailman (output) from mailman id 534103.831339; Sat, 13 May 2023 01:28:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pxdt3-0001EL-RS; Sat, 13 May 2023 01:17:29 +0000
-Received: by outflank-mailman (input) for mailman id 534090;
- Sat, 13 May 2023 01:17:29 +0000
+	id 1pxe3u-0003ZP-CC; Sat, 13 May 2023 01:28:42 +0000
+Received: by outflank-mailman (input) for mailman id 534103;
+ Sat, 13 May 2023 01:28:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lw2b=BC=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1pxdt2-0001E1-Vd
- for xen-devel@lists.xenproject.org; Sat, 13 May 2023 01:17:28 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1pxe3t-0003ZH-99
+ for xen-devel@lists.xenproject.org; Sat, 13 May 2023 01:28:41 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eb5e9da5-f12b-11ed-8611-37d641c3527e;
- Sat, 13 May 2023 03:17:26 +0200 (CEST)
+ id 7c5dfdff-f12d-11ed-8611-37d641c3527e;
+ Sat, 13 May 2023 03:28:38 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0358661DB1;
- Sat, 13 May 2023 01:17:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C0C7C433D2;
- Sat, 13 May 2023 01:17:23 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AF48761DBC;
+ Sat, 13 May 2023 01:28:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57E94C433EF;
+ Sat, 13 May 2023 01:28:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,99 +45,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb5e9da5-f12b-11ed-8611-37d641c3527e
+X-Inumbo-ID: 7c5dfdff-f12d-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1683940644;
-	bh=2XytKpG4OSRs3JrzoCNRkbwec3tS/ewt5oNDo9tHoCI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=clI0cieSNQPbJOut//0+xr5HlGcqxjGzeb4OQjYWS7GeROGV1/7ThtgGAqlS8WEDM
-	 T8KNWl1ydCZMZloixzBO1PY+xv8aNNd+/3Ba0ToRPTOlVDZE/zXIIZwT8FBbQ911A7
-	 ICmcO7ZhAeWUFc8FE/wykT8xWlN1c58TQmyNrCiu3FgoBhKvqfJfnfrEibnEZ+ABNH
-	 up0Hnc5vZ2BJwXJ4gfGuoi7qKw4lXazOF2dX+s4d/2+4i3WGxGiC/B2q02zrKXD98H
-	 mj7W3XjeQn6iQL7WR4vzlWyeHBLNSIi4YFq+HXUo7kCl8fUABZ9JtsPivC2jP8T+zf
-	 cLj40ROvLnFwA==
+	s=k20201202; t=1683941317;
+	bh=g8o3uwylLBuE9F/y1l0IWZ3FGGtPG9MdJzEjSOTO+vI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=QSyBF95jB/W1K3LaL71FEECsNrzKHfyzHIMPNMJy70rk3edF5aF+K4TYWyfN9woHH
+	 705Ujnj5CeckOLx698n/tG7jlM9vBffwHwnMqnBwfTUDR5ceIirtkszrZOnA6CZ5Ch
+	 qUyJEyg1d0dnfhmiM2Lollr1Jy84sjk7dPZBW5SkZc335+kYmyjVQKAhwM1E+8Geih
+	 3D1a/uP0HRXMYd7EWU3BWVSWw1tDH+EDZfgaCWz2Xv0VCBFahSW0+uW5L2i1LWItHA
+	 xD4sH2PTH+SdlpVRZGN7i1vlKSs5Dp1l/7Nsd/p4C7SBzvPspKH28FZvAN3BwNDkVp
+	 aDoakhUviDg5A==
 From: Stefano Stabellini <sstabellini@kernel.org>
-To: roger.pau@citrix.com,
-	andrew.cooper3@citrix.com,
-	jbeulich@suse.com
-Cc: sstabellini@kernel.org,
-	xen-devel@lists.xenproject.org,
-	Xenia.Ragiadakou@amd.com,
+To: xen-devel@lists.xenproject.org
+Cc: marmarek@invisiblethingslab.com,
+	cardoe@cardoe.com,
+	sstabellini@kernel.org,
 	Stefano Stabellini <stefano.stabellini@amd.com>
-Subject: [PATCH 1/2] xen/x86/pvh: use preset XSDT header for XSDT generation
-Date: Fri, 12 May 2023 18:17:19 -0700
-Message-Id: <20230513011720.3978354-1-sstabellini@kernel.org>
+Subject: [PATCH] automation: add a Dom0 PVH test based on Qubes' runner
+Date: Fri, 12 May 2023 18:28:33 -0700
+Message-Id: <20230513012833.3980872-1-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <alpine.DEB.2.22.394.2305121801460.3748626@ubuntu-linux-20-04-desktop>
-References: <alpine.DEB.2.22.394.2305121801460.3748626@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Stefano Stabellini <stefano.stabellini@amd.com>
 
-Xen always generates a XSDT table even if the firmware provided a RSDT
-table. Instead of copying the XSDT header from the firmware table (that
-might be missing), generate the XSDT header from a preset.
+Straightforward Dom0 PVH test based on the existing basic Smoke test for
+the Qubes runner.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
 ---
- xen/arch/x86/hvm/dom0_build.c | 32 +++++++++-----------------------
- 1 file changed, 9 insertions(+), 23 deletions(-)
+ automation/gitlab-ci/test.yaml     |  8 ++++++++
+ automation/scripts/qubes-x86-64.sh | 14 +++++++++-----
+ 2 files changed, 17 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
-index 307edc6a8c..5fde769863 100644
---- a/xen/arch/x86/hvm/dom0_build.c
-+++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -963,13 +963,18 @@ static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
-                                       paddr_t *addr)
- {
-     struct acpi_table_xsdt *xsdt;
--    struct acpi_table_header *table;
--    struct acpi_table_rsdp *rsdp;
-     const struct acpi_table_desc *tables = acpi_gbl_root_table_list.tables;
-     unsigned long size = sizeof(*xsdt);
-     unsigned int i, j, num_tables = 0;
--    paddr_t xsdt_paddr;
-     int rc;
-+    struct acpi_table_header header = {
-+        .signature    = "XSDT",
-+        .length       = sizeof(struct acpi_table_header),
-+        .revision     = 0x1,
-+        .oem_id       = "Xen",
-+        .oem_table_id = "HVM",
-+        .oem_revision = 0,
-+    };
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 55ca0c27dc..9c0e08d456 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -149,6 +149,14 @@ adl-smoke-x86-64-gcc-debug:
+     - *x86-64-test-needs
+     - alpine-3.12-gcc-debug
  
-     /*
-      * Restore original DMAR table signature, we are going to filter it from
-@@ -1001,26 +1006,7 @@ static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
-         goto out;
-     }
++adl-smoke-x86-64-dom0pvh-gcc-debug:
++  extends: .adl-x86-64
++  script:
++    - ./automation/scripts/qubes-x86-64.sh dom0pvh 2>&1 | tee ${LOGFILE}
++  needs:
++    - *x86-64-test-needs
++    - alpine-3.12-gcc-debug
++
+ adl-suspend-x86-64-gcc-debug:
+   extends: .adl-x86-64
+   script:
+diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+index 056faf9e6d..35b9386e5d 100755
+--- a/automation/scripts/qubes-x86-64.sh
++++ b/automation/scripts/qubes-x86-64.sh
+@@ -5,6 +5,7 @@ set -ex
+ test_variant=$1
  
--    /* Copy the native XSDT table header. */
--    rsdp = acpi_os_map_memory(acpi_os_get_root_pointer(), sizeof(*rsdp));
--    if ( !rsdp )
--    {
--        printk("Unable to map RSDP\n");
--        rc = -EINVAL;
--        goto out;
--    }
--    xsdt_paddr = rsdp->xsdt_physical_address;
--    acpi_os_unmap_memory(rsdp, sizeof(*rsdp));
--    table = acpi_os_map_memory(xsdt_paddr, sizeof(*table));
--    if ( !table )
--    {
--        printk("Unable to map XSDT\n");
--        rc = -EINVAL;
--        goto out;
--    }
--    xsdt->header = *table;
--    acpi_os_unmap_memory(table, sizeof(*table));
--
-+    xsdt->header = header;
-     /* Add the custom MADT. */
-     xsdt->table_offset_entry[0] = madt_addr;
+ ### defaults
++dom0pvh=
+ wait_and_wakeup=
+ timeout=120
+ domU_config='
+@@ -18,8 +19,8 @@ vif = [ "bridge=xenbr0", ]
+ disk = [ ]
+ '
  
+-### test: smoke test
+-if [ -z "${test_variant}" ]; then
++### test: smoke test & smoke test PVH
++if [ -z "${test_variant}" ] || [ "${test_variant}" = "dom0pvh" ]; then
+     passed="ping test passed"
+     domU_check="
+ ifconfig eth0 192.168.0.2
+@@ -36,6 +37,9 @@ done
+ tail -n 100 /var/log/xen/console/guest-domU.log
+ echo \"${passed}\"
+ "
++if [ "${test_variant}" = "dom0pvh" ]; then
++    dom0pvh="dom0=pvh"
++fi
+ 
+ ### test: S3
+ elif [ "${test_variant}" = "s3" ]; then
+@@ -184,11 +188,11 @@ cd ..
+ TFTP=/scratch/gitlab-runner/tftp
+ CONTROLLER=control@thor.testnet
+ 
+-echo '
+-multiboot2 (http)/gitlab-ci/xen console=com1 com1=115200,8n1 loglvl=all guest_loglvl=all dom0_mem=4G
++echo "
++multiboot2 (http)/gitlab-ci/xen console=com1 com1=115200,8n1 loglvl=all guest_loglvl=all dom0_mem=4G $dom0pvh
+ module2 (http)/gitlab-ci/vmlinuz console=hvc0 root=/dev/ram0
+ module2 (http)/gitlab-ci/initrd-dom0
+-' > $TFTP/grub.cfg
++" > $TFTP/grub.cfg
+ 
+ cp -f binaries/xen $TFTP/xen
+ cp -f binaries/bzImage $TFTP/vmlinuz
 -- 
 2.25.1
 
