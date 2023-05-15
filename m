@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FF0C7EE26
-	for <xen-devel@archiver.kernel.org>; Mon, 15 May 2023 14:43:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534780.832155 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ACFBC77B7D
+	for <xen-devel@archiver.kernel.org>; Mon, 15 May 2023 15:04:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534801.832185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyZQ9-0001hG-3b; Mon, 15 May 2023 14:43:29 +0000
+	id 1pyZkM-0006BW-GN; Mon, 15 May 2023 15:04:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534780.832155; Mon, 15 May 2023 14:43:29 +0000
+Received: by outflank-mailman (output) from mailman id 534801.832185; Mon, 15 May 2023 15:04:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyZQ8-0001gg-WD; Mon, 15 May 2023 14:43:29 +0000
-Received: by outflank-mailman (input) for mailman id 534780;
- Mon, 15 May 2023 14:43:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pyZkM-0006BP-Cz; Mon, 15 May 2023 15:04:22 +0000
+Received: by outflank-mailman (input) for mailman id 534801;
+ Mon, 15 May 2023 15:04:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uWdz=BE=citrix.com=prvs=492993889=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pyZQ8-0000CT-8M
- for xen-devel@lists.xenproject.org; Mon, 15 May 2023 14:43:28 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d97bc3d2-f32e-11ed-b229-6b7b168915f2;
- Mon, 15 May 2023 16:43:27 +0200 (CEST)
+ <SRS0=1RbS=BE=citrix.com=prvs=492829998=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1pyZkK-0006BJ-Uf
+ for xen-devel@lists.xenproject.org; Mon, 15 May 2023 15:04:20 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bfc00883-f331-11ed-8611-37d641c3527e;
+ Mon, 15 May 2023 17:04:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,102 +38,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d97bc3d2-f32e-11ed-b229-6b7b168915f2
+X-Inumbo-ID: bfc00883-f331-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684161807;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Et7lO32iFTeTcBuxF+aOHF19+4pOz9StdzKvbkzwkgA=;
-  b=boiO6rGVhvHSiBWhpv3UkQ+HG1UZlrW+kFW4CgMTegIQaNZWxDmbMSZl
-   d8bac/piW7cMjPNUIAqRQx4OcjQLz1QejeYoxr9VXNtU4+cvgx4VIQcaw
-   V20y5bji4Zshi77S13okAVmjaHe3XxpnOiIlrwzE1KnGZVXhd183k+w+I
-   o=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1684163053;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=bQrXqaeJcD+jm1ccN670onl+ctwTMzM6NSMGay6Q+zI=;
+  b=VjsMB0ouwx/UkZ9uyrBqgBEbmoc6bOD+V28ubbSWlVhlpmsEYSZXMiEU
+   bV6NWrwJYPlyMgcVcxM7YuTi+MxlBzjXyl7JzGpuRhquVJPKyPmQkMRQO
+   S79pIQDubqi/64oubBE/w0f2m8QU+SpgHEyPK2R6JIEG04kXAuZxN26Nn
+   k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 111537997
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 108418728
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Atd2O64DhIOwVmg94CPbvwxRtDPHchMFZxGqfqrLsTDasY5as4F+v
- jZNDW6PPP+PYGqge94gbdmw9RgA6MSHn9dqSQdlr3g9Hi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+IronPort-Data: A9a23:li/UNq6hV1ZED69X2GkIewxRtM7HchMFZxGqfqrLsTDasY5as4F+v
+ jQYUW2Obv+JNmbxe98gbonk9xkEucPWzNc1QQs/qSszHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
  plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraCYnsrLeNdYH9JoQp5nOIkiZJfj9G8Agec0
  fv/uMSaM1K+s9JOGjt8B5mr9VU+7ZwehBtC5gZlPa0S4QeE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
  86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
- I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m8
- 6QydSwTdQG6lvuR+6iGbeRpu+18I5y+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
- YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx/B+
- zmZrjWmav0cHPyk5zzeqWqVurDSxHPCYbkWOqWK2tc/1TV/wURMUUZLBDNXu8KRlUqWS99Zb
- UsO9UIGvaU0sUCmUNT5dxm5u2Kf+A4RXcJKFO834x3LzbDbiy67LGUZSj9KaPQ9qdQ7Azct0
- ze0c8jBXGI19ufPEDTEq+nS9GnpUcQIEYMcTSlcZ1YZ/cLymZAqqSnVc/FuFZOc0dKgTFkc3
- Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7DFjG8U
- G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gKulmSx28zaK7onAMFh
- 2eN0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZrH02NR/KgDu9yxBEfUQD1
- XCzIK6R4YsyU/w7nFJauc9HuVPU+szO7TyKHs2qp/hW+bGfeGSUWd84Dbd6VchgtPnsiFyMo
- 75i2z6il003vBvWPnOGrub+7DkicRAGOHwBg5YKJ7/efFA3RDlJ5j246epJRrGJVp99zo/gl
- kxRkGcHkjITWVWvxd22V01e
-IronPort-HdrOrdr: A9a23:BtMzv6BgLGoQsYTlHelc55DYdb4zR+YMi2TDt3oddfWaSKylfq
- GV7ZAmPHrP4gr5N0tOpTntAse9qBDnhPtICOsqTNSftWDd0QPFEGgL1+DfKlbbak/DH4BmtJ
- uICJIOb+EZDTJB/LrHCAvTKade/DFQmprY+9s3zB1WPHBXg7kL1XYeNu4CeHcGPjWvA/ACZe
- Ohz/sCnRWMU1INYP+2A3EUNtKz2uEixPrdEGY77wdM0nj0sQ+V
-X-Talos-CUID: =?us-ascii?q?9a23=3AjB92CWvAv4eK4/LHFrcnKynO6IsjKleA0GnLMna?=
- =?us-ascii?q?pEEFSUoCyRFqt0fxrxp8=3D?=
-X-Talos-MUID: 9a23:wYigsQmiGrWx2xyDHZ4WdnpCD+luuP+2MXxSjMxWgvC/MQJoCRu02WE=
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m9
+ 9gxCm0EShq5pueKmoqiF6pXl+V+BZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrnD5bz1frkPTvact6nLf5AdwzKLsIJzefdniqcB9xx7I+
+ juWoD6pav0cHNWOwzeUyGuJuu2VlBL3f4Y3T4KoyuE/1TV/wURMUUZLBDNXu8KRj0ekXttFJ
+ k88+ywwrLMz/kimUtn8WRKjpHeO+BUbXrJ4CuA/9USBx7TZ5y6fAW4LSCMHb8Yp3Oc/XTEw3
+ 0WFt8/oDzdo9raSTBq15rqS6D+/JyURBWsDfjMfCxsI5cH5p4M+hQ6JScxseIa3h9v5AyDtw
+ BiFqSE/g/MYistj/76g4VnNjjaop57IZg04/APaWiSi9AwRTJaseoiA+VXdq/FaI+6kokKp5
+ SZe3ZLEtaZXUM/LzXbWKAkQIF23z/ShGR+BiHplJbgky26V4iPgRpFxvRgrcS+FLf04UTPuZ
+ UbSvyZY65lSIGamYMdLXm6hNyg55fO+TIq4D5g4evILO8EsL1HfoEmCcGbKhwjQfF4QfbbT0
+ HtxWeKlFj4kBKtu11JarM9NgOZwlkjSKY4+LK0XLihLM5LEPhZ5qp9fajNii9zVC4vayDg5C
+ /4Fa6O3J+x3CYUSmBX//48JNkwtJnMmH53woME/XrfdclY+SDB7VKSBmutJl2lZc0N9x4/1E
+ oyVABcEmDITe1WdQel1VpyTQOy2BssuxZ7KFSctIUypyxAeXGpb149GL8FfVeB+pIReIQtcE
+ 6FtlzOoXq4eFVwqOl01MfHAkWCVXE721FPTYXD0PGBXklwJb1Whx+IItzDHrEEmZhdbf+Nny
+ 1F8/ms3maY+ejk=
+IronPort-HdrOrdr: A9a23:v0sOLqzlO1N3/Ee+W/DGKrPw8L1zdoMgy1knxilNoH1uA7elfq
+ WV98jzuiWbtN98YhwdcJO7Sc29qArnlKKduLNwAV7AZniFhILLFvAb0WKK+VSJcREWkNQtsJ
+ uIGJIQNDSfNzRHZInBkW6F+nsbsb+62bHtr933i11qSRhua6lm5Qs8MACGCUd7LTM2ZqbRUK
+ Dsn/Z6mw==
+X-Talos-CUID: 9a23:cdAeUmAjf/2nCvr6EytD3WxJE+QvSFzY8C3oOhL7MndIFZTAHA==
+X-Talos-MUID: 9a23:wQwRawsYw9+IUEQAfs2njSBoOdZS+oGSChoEoJkhv+zfCjxMJGLI
 X-IronPort-AV: E=Sophos;i="5.99,277,1677560400"; 
-   d="scan'208";a="111537997"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 0/6] x86: Introduce MSR_ARCH_CAPS into featuresets
-Date: Mon, 15 May 2023 15:42:53 +0100
-Message-ID: <20230515144259.1009245-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
+   d="scan'208";a="108418728"
+Date: Mon, 15 May 2023 16:03:55 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Jason Andryuk <jandryuk@gmail.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+	<xen-devel@lists.xenproject.org>, Marek
+ =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	<qemu-devel@nongnu.org>
+Subject: Re: [PATCH] xen: Fix host pci for stubdom
+Message-ID: <48c55d33-aa16-4867-a477-f6df45c7d9d9@perard>
+References: <20230320000554.8219-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230320000554.8219-1-jandryuk@gmail.com>
 
-Also cleanup of the various special cases we've already got.  No practical
-change to a system, but this is the trimmed view of the featuresets on a
-Cascade Lake CPU with the series in place.
+On Sun, Mar 19, 2023 at 08:05:54PM -0400, Jason Andryuk wrote:
+> diff --git a/hw/xen/xen-host-pci-device.c b/hw/xen/xen-host-pci-device.c
+> index 8c6e9a1716..51a72b432d 100644
+> --- a/hw/xen/xen-host-pci-device.c
+> +++ b/hw/xen/xen-host-pci-device.c
+> @@ -33,13 +34,101 @@
+>  #define IORESOURCE_PREFETCH     0x00001000      /* No side effects */
+>  #define IORESOURCE_MEM_64       0x00100000
+>  
+> +/*
+> + * Non-passthrough (dom0) accesses are local PCI devices and use the given BDF
+> + * Passthough (stubdom) accesses are through PV frontend PCI device.  Those
+> + * either have a BDF identical to the backend's BFD (xen-backend.passthrough=1)
+> + * or a local virtual BDF (xen-backend.passthrough=0)
+> + *
+> + * We are always given the backend's BDF and need to lookup the appropriate
+> + * local BDF for sysfs access.
+> + */
+> +static void xen_host_pci_fill_local_addr(XenHostPCIDevice *d, Error **errp)
+> +{
+> +    unsigned int num_devs, len, i;
+> +    unsigned int domain, bus, dev, func;
+> +    char *be_path;
+> +    char path[80];
+> +    char *msg;
+> +
+> +    be_path = qemu_xen_xs_read(xenstore, 0, "device/pci/0/backend", &len);
+> +    if (!be_path) {
+> +        /*
+> +         * be_path doesn't exist, so we are dealing with a local
+> +         * (non-passthough) device.
+> +         */
+> +        d->local_domain = d->domain;
+> +        d->local_bus = d->bus;
+> +        d->local_dev = d->dev;
+> +        d->local_func = d->func;
+> +
+> +        return;
+> +    }
+> +
+> +    snprintf(path, sizeof(path), "%s/num_devs", be_path);
 
-                        KEY ... 10Al     10Ah
-  Static sets:
-  Known                     ... 01beffff:00000000
-  Special                   ... 00080004:00000000
-  PV Max                    ... 011ae17f:00000000
-  PV Default                ... 011ae17f:00000000
-  HVM Shadow Max            ... 011ae17f:00000000
-  HVM Shadow Default        ... 011ae17f:00000000
-  HVM Hap Max               ... 011ae17f:00000000
-  HVM Hap Default           ... 011ae17f:00000000
+Is 80 bytes for `path` enough?
+What if the path is truncated due to the limit?
 
-  Dynamic sets:
-  Raw                       ... 000aacab:00000000
-  Host                      ... 000aacab:00000000
-  PV Default                ... 00000000:00000000
-  HVM Default               ... 00000000:00000000
-  PV Max                    ... 000aa02b:00000000
-  HVM Max                   ... 000aa02b:00000000
 
-Andrew Cooper (6):
-  x86/boot: Rework dom0 feature configuration
-  x86/boot: Adjust MSR_ARCH_CAPS handling for the Host policy
-  x86/cpu-policy: Infrastructure for MSR_ARCH_CAPS
-  x86/cpu-policy: MSR_ARCH_CAPS feature names
-  x86/boot: Record MSR_ARCH_CAPS for the Raw and Host CPU policy
-  x86/boot: Expose MSR_ARCH_CAPS data in guest max policies
+There's xs_node_scanf() which might be useful. It does the error
+handling and call scanf(). But I'm not sure if it can be used here, in
+this file.
 
- tools/misc/xen-cpuid.c                      | 23 ++++++
- xen/arch/x86/cpu-policy.c                   | 83 ++++++++++-----------
- xen/arch/x86/cpu/common.c                   |  5 ++
- xen/include/public/arch-x86/cpufeatureset.h | 27 +++++++
- xen/include/xen/lib/x86/cpu-policy.h        | 18 ++---
- xen/lib/x86/cpuid.c                         | 11 ++-
- xen/tools/gen-cpuid.py                      |  3 +
- 7 files changed, 117 insertions(+), 53 deletions(-)
+> +    msg = qemu_xen_xs_read(xenstore, 0, path, &len);
+> +    if (!msg) {
+> +        goto err_out;
+> +    }
+> +
+> +    if (sscanf(msg, "%u", &num_devs) != 1) {
+
+libxl writes `num_devs` as "%d". So I think qemu should read a %d.
+
+
+> +        error_setg(errp, "Failed to parse %s (%s)", msg, path);
+> +        goto err_out;
+> +    }
+> +    free(msg);
+> +
+> +    for (i = 0; i < num_devs; i++) {
+> +        snprintf(path, sizeof(path), "%s/dev-%u", be_path, i);
+
+Same here, the path is written with a %d, even if that doesn't change the
+result.
+
+
+Thanks,
 
 -- 
-2.30.2
-
+Anthony PERARD
 
