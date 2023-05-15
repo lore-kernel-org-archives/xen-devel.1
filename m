@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BD8C77B7D
-	for <xen-devel@archiver.kernel.org>; Mon, 15 May 2023 21:19:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.534848.832248 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277F7C77B7D
+	for <xen-devel@archiver.kernel.org>; Mon, 15 May 2023 22:21:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.534858.832268 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyfbF-0006qS-Pz; Mon, 15 May 2023 21:19:21 +0000
+	id 1pygZU-0005vz-MB; Mon, 15 May 2023 22:21:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 534848.832248; Mon, 15 May 2023 21:19:21 +0000
+Received: by outflank-mailman (output) from mailman id 534858.832268; Mon, 15 May 2023 22:21:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyfbF-0006qL-MF; Mon, 15 May 2023 21:19:21 +0000
-Received: by outflank-mailman (input) for mailman id 534848;
- Mon, 15 May 2023 21:19:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pygZU-0005vr-JO; Mon, 15 May 2023 22:21:36 +0000
+Received: by outflank-mailman (input) for mailman id 534858;
+ Mon, 15 May 2023 22:21:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=u/nm=BE=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1pyfbD-0006qD-VY
- for xen-devel@lists.xenproject.org; Mon, 15 May 2023 21:19:20 +0000
-Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
- [64.147.123.24]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2582250d-f366-11ed-b229-6b7b168915f2;
- Mon, 15 May 2023 23:19:18 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 247503200A27;
- Mon, 15 May 2023 17:19:14 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Mon, 15 May 2023 17:19:14 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 15 May 2023 17:19:12 -0400 (EDT)
+ <SRS0=l5iH=BE=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1pygZT-0005gJ-O0
+ for xen-devel@lists.xenproject.org; Mon, 15 May 2023 22:21:35 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d91e955e-f36e-11ed-8611-37d641c3527e;
+ Tue, 16 May 2023 00:21:34 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 086F060EA2;
+ Mon, 15 May 2023 22:21:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB4B9C433D2;
+ Mon, 15 May 2023 22:21:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,186 +45,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2582250d-f366-11ed-b229-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1684185553; x=1684271953; bh=OgtNy6SeWKcYOssXQEa/LBl3yzyAva65px6
-	mmQPjocE=; b=Sc/MIHBOnZk5wjA3qVp5qucV3/yh7pXMevbDZSdn2On2j1JO6oO
-	+t7IDBxe/FJJzOqFN9zWsgLqWcC+cu1MLWTQp0J8XzeLQLOrU3/siqG2BFYKjf/t
-	lSCL6JWhT/PhbQzngBfBT1P0VmhypH9ZeqYHYgyyuYUYst3wAQFN476ns6WFCWO4
-	wQJK+pe4/svWfVJORzkrlG+Ns9LlHeibNzyjvSZsZ03A9d6CmpjjgR4dUmw38A1j
-	GtROIhV5D7UcEDhWT81sHYlVjrkvXz07jFK6OYSCdxFDI840G7wQIDlwTNj/PQmB
-	oIXa84YMAFUPbXUQbqNYVsitdhjh2X2i7DA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1684185553; x=1684271953; bh=OgtNy6SeWKcYO
-	ssXQEa/LBl3yzyAva65px6mmQPjocE=; b=kqriT+enfIi3UVirdTqw6mUuWYqpO
-	SqI5PS4Ve1v+M8G9MaSJQGyf+MABxod9wjvWh2qtvDYlhZyaXgoKThkW0eFbOSU8
-	0uyb9Fm3Kadfef4fXFhdl8pjxFZYNmYAIZ6DXUcTceVfReTKfA234e8NBAYFeGCS
-	rpOQybGTOG77x8d6D9m8+cO/FY5H5CNvz3tj58SvsMf/kfarEX2MvxqPgzOs490r
-	1QW/vEZoSZ+4QfUo0UlkS2SLOjKgHgIcLtUJ+tHx+f7AaOXhZ5HVCbF1nd9BYR7a
-	CTiJQCWZGsLdLYHmG9qLSI89BwGpbvvJEQmcvhbBmHf1spPVix6pAqvbA==
-X-ME-Sender: <xms:0aFiZHgYo7ubm-52Uf27Ue1HmToS2AFAi524QkHnEP-gVHA5kyk-fA>
-    <xme:0aFiZEBXA1PAKgIFi5sFAN-HJUrqONyfqnvThqc-bjZDRwl2IwIjpwNAoji53hqv0
-    TnFnUnE7kBJzg>
-X-ME-Received: <xmr:0aFiZHH-Lz-VQA228-IqtN6pWRPkF-6nwUwo3SEy46ScgY8w_D9bK3EFgSbDI0KoTQHvljHOGcFU3YH53dWlBI1z3ShBbaxPo1c>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeehjedgudeivdcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghr
-    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
-    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
-    udelteefvefhfeehieetleeihfejhfeludevteetkeevtedtvdegueetfeejudenucevlh
-    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
-    khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:0aFiZERIGNlv4pRDLEoibSNn2YmcjuS-XLs8MFvxbQ6nuaHZLEGbyw>
-    <xmx:0aFiZEyhNxP5Shc3c7tRIP9-yx39tVSV1y3ZUWRCP8mlHeB6Xh37-A>
-    <xmx:0aFiZK6RkEQA_syw3GD5u9MXy4xhxwlkEQlk7B_qNlOoofv7aO87Mg>
-    <xmx:0aFiZBqYLtqnXOl2Ba_prG06wSurB2FyyJjOLvtaYukwMUftZzD3fw>
-Feedback-ID: i1568416f:Fastmail
-Date: Mon, 15 May 2023 23:19:09 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, cardoe@cardoe.com,
-	Stefano Stabellini <stefano.stabellini@amd.com>
-Subject: Re: [PATCH v2] automation: add a Dom0 PVH test based on Qubes' runner
-Message-ID: <ZGKhzYPupmzjH/h+@mail-itl>
-References: <20230515204919.4174845-1-sstabellini@kernel.org>
+X-Inumbo-ID: d91e955e-f36e-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1684189292;
+	bh=a4xUeaSWwpxYCw0nSoScWM3lYFDEh6TK0oocKUuFlCc=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=l9KB/gTLnaLw0kD5zDf5t3LH8iS+jFEmgbt3zgDEX0HcadgD8naFbjCkv6mQk+6pD
+	 Z9WfCbt29c8ciKjMPWTPihhBNOk/UqIqZRKFqsf9HCS2Z+Tmk5ZuIpyyFdpWNGd/AZ
+	 qmUuq8fhoz9i5Shf5RiGZTCAO0Zx1pFPfrr9cjynrztwHxKrxeZFMBGiy4o+bw9U1V
+	 xX3RfJYNZ/M5zixpivo6/P8faArGAmzxWxLf019nlNTUyrqTcJexQOeZqXCZlxmlTR
+	 YHbjClAc+9TU7atKlBpCCx1lFQCEfBPPOIQBfnngk/NEeHsMl3gjqW1QzhJrMMtoLB
+	 oummFdvOKbNIw==
+Date: Mon, 15 May 2023 15:21:30 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 2/4] automation: enable earlyprintk=xen for both dom0
+ and domU in hw tests
+In-Reply-To: <7247aca99f5faf35ff1c6efd048a10c08883bc41.1683943670.git-series.marmarek@invisiblethingslab.com>
+Message-ID: <alpine.DEB.2.22.394.2305151443230.4125828@ubuntu-linux-20-04-desktop>
+References: <cover.83768735557180cd65fb5f932c285271063e04ac.1683943670.git-series.marmarek@invisiblethingslab.com> <7247aca99f5faf35ff1c6efd048a10c08883bc41.1683943670.git-series.marmarek@invisiblethingslab.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="GK4DG6VUkYPb4lb9"
-Content-Disposition: inline
-In-Reply-To: <20230515204919.4174845-1-sstabellini@kernel.org>
+Content-Type: multipart/mixed; BOUNDARY="8323329-1248633201-1684187008=:4125828"
+Content-ID: <alpine.DEB.2.22.394.2305151521260.4125828@ubuntu-linux-20-04-desktop>
 
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
---GK4DG6VUkYPb4lb9
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 15 May 2023 23:19:09 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, cardoe@cardoe.com,
-	Stefano Stabellini <stefano.stabellini@amd.com>
-Subject: Re: [PATCH v2] automation: add a Dom0 PVH test based on Qubes' runner
+--8323329-1248633201-1684187008=:4125828
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.22.394.2305151521261.4125828@ubuntu-linux-20-04-desktop>
 
-On Mon, May 15, 2023 at 01:49:19PM -0700, Stefano Stabellini wrote:
-> From: Stefano Stabellini <stefano.stabellini@amd.com>
->=20
-> Straightforward Dom0 PVH test based on the existing basic Smoke test for
-> the Qubes runner.
->=20
-> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+On Sat, 13 May 2023, Marek Marczykowski-Górecki wrote:
+> Make debugging early boot failures easier based on just CI logs.
+> 
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
 
 > ---
-> Changes in v2:
-> - rename dom0pvh to extra_xen_opts
-> ---
->  automation/gitlab-ci/test.yaml     |  8 ++++++++
->  automation/scripts/qubes-x86-64.sh | 14 +++++++++-----
->  2 files changed, 17 insertions(+), 5 deletions(-)
->=20
-> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.y=
-aml
-> index 55ca0c27dc..9c0e08d456 100644
-> --- a/automation/gitlab-ci/test.yaml
-> +++ b/automation/gitlab-ci/test.yaml
-> @@ -149,6 +149,14 @@ adl-smoke-x86-64-gcc-debug:
->      - *x86-64-test-needs
->      - alpine-3.12-gcc-debug
-> =20
-> +adl-smoke-x86-64-dom0pvh-gcc-debug:
-> +  extends: .adl-x86-64
-> +  script:
-> +    - ./automation/scripts/qubes-x86-64.sh dom0pvh 2>&1 | tee ${LOGFILE}
-> +  needs:
-> +    - *x86-64-test-needs
-> +    - alpine-3.12-gcc-debug
-> +
->  adl-suspend-x86-64-gcc-debug:
->    extends: .adl-x86-64
->    script:
-> diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qube=
-s-x86-64.sh
-> index 056faf9e6d..4f17f1dd0b 100755
+>  automation/scripts/qubes-x86-64.sh | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/automation/scripts/qubes-x86-64.sh b/automation/scripts/qubes-x86-64.sh
+> index ae766395d184..bd09451d7d28 100755
 > --- a/automation/scripts/qubes-x86-64.sh
 > +++ b/automation/scripts/qubes-x86-64.sh
-> @@ -5,6 +5,7 @@ set -ex
->  test_variant=3D$1
-> =20
->  ### defaults
-> +extra_xen_opts=3D
->  wait_and_wakeup=3D
->  timeout=3D120
->  domU_config=3D'
-> @@ -18,8 +19,8 @@ vif =3D [ "bridge=3Dxenbr0", ]
->  disk =3D [ ]
->  '
-> =20
-> -### test: smoke test
-> -if [ -z "${test_variant}" ]; then
-> +### test: smoke test & smoke test PVH
-> +if [ -z "${test_variant}" ] || [ "${test_variant}" =3D "dom0pvh" ]; then
->      passed=3D"ping test passed"
->      domU_check=3D"
->  ifconfig eth0 192.168.0.2
-> @@ -36,6 +37,9 @@ done
->  tail -n 100 /var/log/xen/console/guest-domU.log
->  echo \"${passed}\"
->  "
-> +if [ "${test_variant}" =3D "dom0pvh" ]; then
-> +    extra_xen_opts=3D"dom0=3Dpvh"
-> +fi
-> =20
->  ### test: S3
->  elif [ "${test_variant}" =3D "s3" ]; then
-> @@ -184,11 +188,11 @@ cd ..
->  TFTP=3D/scratch/gitlab-runner/tftp
->  CONTROLLER=3Dcontrol@thor.testnet
-> =20
-> -echo '
-> -multiboot2 (http)/gitlab-ci/xen console=3Dcom1 com1=3D115200,8n1 loglvl=
-=3Dall guest_loglvl=3Dall dom0_mem=3D4G
-> +echo "
-> +multiboot2 (http)/gitlab-ci/xen console=3Dcom1 com1=3D115200,8n1 loglvl=
-=3Dall guest_loglvl=3Dall dom0_mem=3D4G $extra_xen_opts
->  module2 (http)/gitlab-ci/vmlinuz console=3Dhvc0 root=3D/dev/ram0
+> @@ -80,7 +80,7 @@ type = "'${test_variant#pci-}'"
+>  name = "domU"
+>  kernel = "/boot/vmlinuz"
+>  ramdisk = "/boot/initrd-domU"
+> -extra = "root=/dev/ram0 console=hvc0"
+> +extra = "root=/dev/ram0 console=hvc0 earlyprintk=xen"
+>  memory = 512
+>  vif = [ ]
+>  disk = [ ]
+> @@ -186,7 +186,7 @@ CONTROLLER=control@thor.testnet
+>  
+>  echo "
+>  multiboot2 (http)/gitlab-ci/xen $CONSOLE_OPTS loglvl=all guest_loglvl=all dom0_mem=4G
+> -module2 (http)/gitlab-ci/vmlinuz console=hvc0 root=/dev/ram0
+> +module2 (http)/gitlab-ci/vmlinuz console=hvc0 root=/dev/ram0 earlyprintk=xen
 >  module2 (http)/gitlab-ci/initrd-dom0
-> -' > $TFTP/grub.cfg
-> +" > $TFTP/grub.cfg
-> =20
->  cp -f binaries/xen $TFTP/xen
->  cp -f binaries/bzImage $TFTP/vmlinuz
-> --=20
-> 2.25.1
->=20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---GK4DG6VUkYPb4lb9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmRioc4ACgkQ24/THMrX
-1yzSagf+MiMMMa7ap6mPghOsDZHxNpyYTiSQ4rMRjBodAdWPmXt3WtvNeSWbJDQP
-BDpQLD+wv5Wzzr6KRcCbm3uV9hx43tT0mGsSHXO/l/ILR3yPVPSbPEFUyBGFZjJJ
-55zOIsk2O3e3BIGnyIRCn55uNZ/XWT/kz47lirE7gYboLToQ3wyNsej9GLu9RpxT
-Csn0O8jPi1QfmGL7U5Bw5WlkgQftJoxGT86PTFxF4unXr+czrGYchKg9UevIzs7t
-6smuoWVZDR1SJmgOhZB10KEhSWwCwQDC65OqoudouVezmptiHFCyApwB8/jfgDtT
-97lQL1oBI7aGe6yUbtjN8UDfUJmkXQ==
-=WG9b
------END PGP SIGNATURE-----
-
---GK4DG6VUkYPb4lb9--
+>  " > $TFTP/grub.cfg
+>  
+> -- 
+> git-series 0.9.1
+> 
+--8323329-1248633201-1684187008=:4125828--
 
