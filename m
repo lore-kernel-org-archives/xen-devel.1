@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8709DC77B7A
-	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 19:39:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.535602.833518 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADEEC77B75
+	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 19:40:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.535606.833528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pz0WV-0007kO-Cx; Tue, 16 May 2023 19:39:51 +0000
+	id 1pz0We-0008Su-LF; Tue, 16 May 2023 19:40:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 535602.833518; Tue, 16 May 2023 19:39:51 +0000
+Received: by outflank-mailman (output) from mailman id 535606.833528; Tue, 16 May 2023 19:40:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pz0WV-0007kF-9f; Tue, 16 May 2023 19:39:51 +0000
-Received: by outflank-mailman (input) for mailman id 535602;
- Tue, 16 May 2023 19:39:50 +0000
+	id 1pz0We-0008Se-I3; Tue, 16 May 2023 19:40:00 +0000
+Received: by outflank-mailman (input) for mailman id 535606;
+ Tue, 16 May 2023 19:39:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=oY92=BF=kernel.org=arnd@srs-se1.protection.inumbo.net>)
- id 1pz0UD-0001kC-E9
- for xen-devel@lists.xenproject.org; Tue, 16 May 2023 19:37:29 +0000
+ id 1pz0U1-0001kC-Tz
+ for xen-devel@lists.xenproject.org; Tue, 16 May 2023 19:37:17 +0000
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 17327862-f421-11ed-b229-6b7b168915f2;
- Tue, 16 May 2023 21:37:28 +0200 (CEST)
+ id 0fdbeda6-f421-11ed-b229-6b7b168915f2;
+ Tue, 16 May 2023 21:37:16 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 92C7963E89;
- Tue, 16 May 2023 19:37:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57333C4339B;
- Tue, 16 May 2023 19:37:21 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4538563EA1;
+ Tue, 16 May 2023 19:37:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D45FC433EF;
+ Tue, 16 May 2023 19:37:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17327862-f421-11ed-b229-6b7b168915f2
+X-Inumbo-ID: 0fdbeda6-f421-11ed-b229-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1684265847;
-	bh=J5EKXsQ8JpkrI9Gz8p7tvN4WBF349kQdKYOIvFSrsNU=;
+	s=k20201202; t=1684265834;
+	bh=+aTnWzkkpkhZD/Q7mAQ3dRAZxC9ekU9RPhso/2vdjUI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XIN+eFgSG5axh0khDn+f/DfiFa2fy/Gl7HlqCu4DFGR/Gh/jJBZE6kogRn1pGLSf0
-	 H7p3sJKdHoW15hlgh4PqRp1aSRxoJGu8xkUBD8UOV/7Wc3R0dnNCmKZ0BDGWJZb8D1
-	 oH2yP6PbTSse4jjfW7V1Oui8ScgC+ip8wsTfipPJG3h+KlhBMS7cqSGZFq5vDlKiy0
-	 RswG11Urln0rfwHreMBoCRqO+yKcqFn55K7Ppwg4ukMOh1RtnbSr9DTsibIdx1NEsh
-	 DnzXMlfpiLzkeqt66J/wTfnFD+0D1bBh1mk3F7Als3cmaZdCeWg7QJDwUyVhPN3vUW
-	 T784GEZx+Ea6A==
+	b=iMBAvFb2VaJhJEHCkXY8xN9dopzfCYxzGAVtlxmPc4ecgoxsfcVqAYWppizbCyYp/
+	 VTvljPsItuhT+KslruGdf17RZHnkXZTeI5SNB0HcVA3Q2is1QzaTJ7NIWpw6KBUWf/
+	 zV4XavdE98t65jnuE5hyhNvdFmgDjcz0+x8JQ3Pa2M+Ke5oMTbpixoiurollUeJB73
+	 blh6OUjzwzOwaiTkJeA6SFn1+VvUJj1MKmXFKzsle/9hQMjVA4gOvU8RBqzqzy+ig5
+	 svmuwCrWyPhEepXDnslmThYsgGibYlGdcBhMAypATUJEGwuGF8kbOigthqqwhCFfB8
+	 Ic0+xYNIrQ58Q==
 From: Arnd Bergmann <arnd@kernel.org>
 To: x86@kernel.org
 Cc: Arnd Bergmann <arnd@arndb.de>,
@@ -85,9 +85,9 @@ Cc: Arnd Bergmann <arnd@arndb.de>,
 	xen-devel@lists.xenproject.org,
 	linux-pm@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 13/20] x86: hibernate: declare global functions in suspend.h
-Date: Tue, 16 May 2023 21:35:42 +0200
-Message-Id: <20230516193549.544673-14-arnd@kernel.org>
+Subject: [PATCH 11/20] x86: entry: add  do_SYSENTER_32() prototype
+Date: Tue, 16 May 2023 21:35:40 +0200
+Message-Id: <20230516193549.544673-12-arnd@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230516193549.544673-1-arnd@kernel.org>
 References: <20230516193549.544673-1-arnd@kernel.org>
@@ -96,61 +96,36 @@ Content-Transfer-Encoding: 8bit
 
 From: Arnd Bergmann <arnd@arndb.de>
 
-Three functions that are defined in x86 specific code to override
-generic __weak implementations cause a warning because of a missing
-prototype:
+The 32-bit system call entry points can be called on both 32-bit
+and 64-bit kernels, but on the former the declarations are hidden:
 
-arch/x86/power/cpu.c:298:5: error: no previous prototype for 'hibernate_resume_nonboot_cpu_disable' [-Werror=missing-prototypes]
-arch/x86/power/hibernate.c:129:5: error: no previous prototype for 'arch_hibernation_header_restore' [-Werror=missing-prototypes]
-arch/x86/power/hibernate.c:91:5: error: no previous prototype for 'arch_hibernation_header_save' [-Werror=missing-prototypes]
+arch/x86/entry/common.c:238:24: error: no previous prototype for 'do_SYSENTER_32' [-Werror=missing-prototypes]
 
-Move the declarations into a global header so it can be included
-by any file defining one of these.
+Move them all out of the #ifdef block to avoid the warnings.
 
 Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 ---
- include/linux/suspend.h | 4 ++++
- kernel/power/power.h    | 5 -----
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ arch/x86/include/asm/syscall.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/suspend.h b/include/linux/suspend.h
-index 7ec73e77e652..bc911fecb8e8 100644
---- a/include/linux/suspend.h
-+++ b/include/linux/suspend.h
-@@ -452,6 +452,10 @@ extern struct pbe *restore_pblist;
- int pfn_is_nosave(unsigned long pfn);
- 
- int hibernate_quiet_exec(int (*func)(void *data), void *data);
-+int hibernate_resume_nonboot_cpu_disable(void);
-+int arch_hibernation_header_save(void *addr, unsigned int max_size);
-+int arch_hibernation_header_restore(void *addr);
-+
- #else /* CONFIG_HIBERNATION */
- static inline void register_nosave_region(unsigned long b, unsigned long e) {}
- static inline int swsusp_page_is_forbidden(struct page *p) { return 0; }
-diff --git a/kernel/power/power.h b/kernel/power/power.h
-index b83c8d5e188d..a6a16faf0ead 100644
---- a/kernel/power/power.h
-+++ b/kernel/power/power.h
-@@ -26,9 +26,6 @@ extern void __init hibernate_image_size_init(void);
- /* Maximum size of architecture specific data in a hibernation header */
- #define MAX_ARCH_HEADER_SIZE	(sizeof(struct new_utsname) + 4)
- 
--extern int arch_hibernation_header_save(void *addr, unsigned int max_size);
--extern int arch_hibernation_header_restore(void *addr);
--
- static inline int init_header_complete(struct swsusp_info *info)
- {
- 	return arch_hibernation_header_save(info, MAX_ARCH_HEADER_SIZE);
-@@ -41,8 +38,6 @@ static inline const char *check_image_kernel(struct swsusp_info *info)
+diff --git a/arch/x86/include/asm/syscall.h b/arch/x86/include/asm/syscall.h
+index 5b85987a5e97..4fb36fba4b5a 100644
+--- a/arch/x86/include/asm/syscall.h
++++ b/arch/x86/include/asm/syscall.h
+@@ -127,9 +127,11 @@ static inline int syscall_get_arch(struct task_struct *task)
  }
- #endif /* CONFIG_ARCH_HIBERNATION_HEADER */
  
--extern int hibernate_resume_nonboot_cpu_disable(void);
--
- /*
-  * Keep some memory free so that I/O operations can succeed without paging
-  * [Might this be more than 4 MB?]
+ void do_syscall_64(struct pt_regs *regs, int nr);
+-void do_int80_syscall_32(struct pt_regs *regs);
+-long do_fast_syscall_32(struct pt_regs *regs);
+ 
+ #endif	/* CONFIG_X86_32 */
+ 
++void do_int80_syscall_32(struct pt_regs *regs);
++long do_fast_syscall_32(struct pt_regs *regs);
++long do_SYSENTER_32(struct pt_regs *regs);
++
+ #endif	/* _ASM_X86_SYSCALL_H */
 -- 
 2.39.2
 
