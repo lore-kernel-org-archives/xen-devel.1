@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70279C7EE25
-	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 14:45:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.535252.832924 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531FEC77B7A
+	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 14:54:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.535262.832948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyvvf-0004dl-0G; Tue, 16 May 2023 14:45:31 +0000
+	id 1pyw3h-0006Sa-D2; Tue, 16 May 2023 14:53:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 535252.832924; Tue, 16 May 2023 14:45:30 +0000
+Received: by outflank-mailman (output) from mailman id 535262.832948; Tue, 16 May 2023 14:53:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyvve-0004de-T7; Tue, 16 May 2023 14:45:30 +0000
-Received: by outflank-mailman (input) for mailman id 535252;
- Tue, 16 May 2023 14:45:29 +0000
+	id 1pyw3h-0006S2-83; Tue, 16 May 2023 14:53:49 +0000
+Received: by outflank-mailman (input) for mailman id 535262;
+ Tue, 16 May 2023 14:53:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=a0wm=BF=citrix.com=prvs=4936e02c6=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1pyvvd-0004dY-9O
- for xen-devel@lists.xenproject.org; Tue, 16 May 2023 14:45:29 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b8e6d0c-f3f8-11ed-b229-6b7b168915f2;
- Tue, 16 May 2023 16:45:27 +0200 (CEST)
+ <SRS0=7WEk=BF=citrix.com=prvs=493b78b38=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1pyw3g-0006OC-DR
+ for xen-devel@lists.xenproject.org; Tue, 16 May 2023 14:53:48 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 745f770e-f3f9-11ed-b229-6b7b168915f2;
+ Tue, 16 May 2023 16:53:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,123 +38,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b8e6d0c-f3f8-11ed-b229-6b7b168915f2
+X-Inumbo-ID: 745f770e-f3f9-11ed-b229-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684248327;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=XPbviYIhCynnrTIGSWjvBLeKf07MWzJPqOrTjUu9r5I=;
-  b=Rn9iuD+eL/B+VGyEQW0mPQR9cPqW6gfC5lWllG9JqA6pIsy+/M1C35z4
-   qmXTS4cAjpaOYe3HYT+7w6+xZos4aRNgVsGFKDreA5JM8vcjZkIBUhNf5
-   jKMghPB4ixZSI8Gxlkilnv4WBvOa3CzNAnjIBhgKWkNazu6BSawk0SRI0
-   g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1684248825;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=nyQur+30ZM6XscWFa3iBiYiEbv5nHeYpGVnr0FExeKQ=;
+  b=VSFv6Z+6ku77nlo+gSIF+uvMIjQD5fKGuo89Oz6Z/p/fsGeEFtMU8fVm
+   VmxTHFSIpTwyZ03W5i1bx4Z+m4is51H6MQHH5ywC+UgqnraOTf/ejMDpm
+   b5+vNtjRvkp/bsb4kriQRPoM0nsXpy77GZPDCHhB4mGedk4PjfPCY9BY9
+   I=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 107987435
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 109117764
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23: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
- yCyDqqjjyiD6Rs=
-IronPort-HdrOrdr: A9a23:i8/w/66P2n8iNL3sBQPXwBHXdLJyesId70hD6qkRc20pTiX8ra
- uTdZsgtCMc9wxhPk3I9ertBEDCewKkyXcN2/hrAV76ZnidhILKFvAf0WKB+V3d8kTFn4Y26U
- 4HScdD4bbLYGSS4/yV3OHEe+xQuOVvJJrY59s3sx9WPGZXgtlbnmRE4/GgYylLraB9dP8EKK
- Y=
-X-Talos-CUID: =?us-ascii?q?9a23=3AZLK7BGsYtRCVIPp0+bq9dZAP6Is6MX7v5nmJGnX?=
- =?us-ascii?q?pAG9PRIOcGVic6J5rxp8=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AYNIFCA2MWV/pGIwZcp8iK6/F0TUjw4n0Blk9g5w?=
- =?us-ascii?q?6t5eeLCZJay/EvD+TXdpy?=
+IronPort-Data: A9a23:QB58IK71qn8wGRrfY7ImjgxRtDHHchMFZxGqfqrLsTDasY5as4F+v
+ jcbD2iHOqmKNjHyc412PIrnoE9T6p7WndJgSAU4rHxhHi5G8cbLO4+Ufxz6V8+wwm8vb2o8t
+ plDNYOQRCwQZiWBzvt4GuG59RGQ7YnRGvynTraCYnsrLeNdYH9JoQp5nOIkiZJfj9G8Agec0
+ fv/uMSaM1K+s9JOGjt8B5mr9VU+7ZwehBtC5gZlPa0S4geE/5UoJMl3yZ+ZfiOQrrZ8RoZWd
+ 86bpJml82XQ+QsaC9/Nut4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5iXBYoUm9Fii3hojxE4
+ I4lWapc6+seFvakdOw1C3G0GszlVEFM0OevzXOX6aR/w6BaGpdFLjoH4EweZOUlFuhL7W5m3
+ uIFAzcNPlO4rO+omI2DW9tn1+t7BZy+VG8fkikIITDxCP8nRdbIQrnQ5M8e1zA17ixMNa+AP
+ YxDM2MpNUmeJUQVYT/7C7pn9AusrlD5fydVtxS+oq0v7nKI5AdwzKLsIJzefdniqcB9xx7J/
+ zuZoDqlav0cHIez1Weo7FGoveCMpjrEe4U8G/6WrfE/1TV/wURMUUZLBDNXu8KRlUqWS99Zb
+ UsO9UIGvaU0sUCmUNT5dxm5u2Kf+A4RXcJKFO834x3LzbDbiy67LGUZSj9KaPQ9qdQ7Azct0
+ ze0c8jBXGI19ufPEDTEq+nS9GnpUcQIEYMcTQQaUCAC44mgm6o+kErwdsdRG/+a1vSgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7DFjG8U
+ G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gKuFmSx28zaK7onAMFh
+ 2eN0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZrH03OhPOjjmxzxJEfUQD1
+ XCzIK6R4YsyU/w7nFJauc9HuVPU+szO7TyKHs2qp/hW+bGfeGSUWd84Dbd6VchgtPnsiFyMo
+ 75i2z6il003vBvWPnOGrub+7DkicRAGOHwBg5IHKbPTflU/QwnMyZb5mNscRmCspIwN/s+gw
+ 513chYwJIbX7ZEfFTi3Vw==
+IronPort-HdrOrdr: A9a23:VvZXy6HQsft+I1SQpLqFUpHXdLJyesId70hD6qkvc3Jom52j+P
+ xGws526fatskdsZJkh8erwXJVoMkmsiqKdgLNhcItKOTOGhILGFvAb0WKP+UyDJ8S6zJ8h6U
+ 4CSdkzNDSTNykAsS+S2mDReLxMoKjlzEnrv5al854Ed3AtV0gK1XYfNu/vKDwOeOAwP+teKH
+ Pz3Lsjm9OIQwVZUu2LQl0+G8TTrdzCk5zrJTQcAQQ81QWIhTS0rJbnDhmxxH4lInJy6IZn1V
+ KAvx3y562lvf3+4ATbzXXv45Nfn8ak4sdfBfaLltMeJlzX+0aVjcVaKv6/VQIO0aSSAWUR4Z
+ 3xSiIbToZOAzS4RBD6nfKi4Xim7N9k0Q6d9bbRuwqTnSW+fkNjN+NxwbtQaAHU5ncgp9dh3q
+ Ns2FuDu55WFx/b9R6NvuQgHisa5nacsD4sl/UegGdYVpZbYLhNrZYH9EcQC5sYGjnmgbpXWN
+ WGo/uskMq+XGnqGUwxhFMfieCETzA2BFOLU0ICssua33xfm2141VIRwIgakm0b/JwwRpFY76
+ CcW54Y3o1mX4sTd+ZwFe0BScy4BijERg/NKnubJRDiGLscM3zAppbr6PE+5f2sepYP0Jwu8a
+ 6xG2+wdVRCDH4GJff+qaGjqCq9M1lVdQ6duP1j2w==
+X-Talos-CUID: =?us-ascii?q?9a23=3AcNYIIWhBew4ACRNy0Gp+98n0PzJuWWPA53DQcwy?=
+ =?us-ascii?q?DImt3EIKtWG2bqYw8up87?=
+X-Talos-MUID: =?us-ascii?q?9a23=3A1sEVUQ7S5rIBv2XxGS2G2UO2xowzz7jzJV4ula4?=
+ =?us-ascii?q?J+PKdCg93FTjeom+4F9o=3D?=
 X-IronPort-AV: E=Sophos;i="5.99,278,1677560400"; 
-   d="scan'208";a="107987435"
-Date: Tue, 16 May 2023 15:45:14 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-CC: <qemu-devel@nongnu.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
-	Aarushi Mehta <mehta.aaru20@gmail.com>, <qemu-block@nongnu.org>, Paul Durrant
-	<paul@xen.org>, Peter Lieven <pl@kamp.de>, Stefan Weil <sw@weilnetz.de>, Xie
- Yongji <xieyongji@bytedance.com>, Kevin Wolf <kwolf@redhat.com>, Paolo
- Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
-	Leonardo Bras <leobras@redhat.com>, Peter Xu <peterx@redhat.com>, Hanna Reitz
-	<hreitz@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Richard
- Henderson <richard.henderson@linaro.org>, David Woodhouse
-	<dwmw2@infradead.org>, Coiby Xu <Coiby.Xu@gmail.com>, Eduardo Habkost
-	<eduardo@habkost.net>, Stefano Garzarella <sgarzare@redhat.com>, Philippe
- =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Daniel
- =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>, Julia Suvorova
-	<jusual@redhat.com>, <xen-devel@lists.xenproject.org>, <eesposit@redhat.com>,
-	Juan Quintela <quintela@redhat.com>, "Richard W.M. Jones"
-	<rjones@redhat.com>, Fam Zheng <fam@euphon.net>, Marcel Apfelbaum
-	<marcel.apfelbaum@gmail.com>
-Subject: Re: [PATCH v5 12/21] xen-block: implement
- BlockDevOps->drained_begin()
-Message-ID: <481d1f56-298c-49a3-9a55-5a205d4b20fd@perard>
-References: <20230504195327.695107-1-stefanha@redhat.com>
- <20230504195327.695107-13-stefanha@redhat.com>
+   d="scan'208";a="109117764"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 1/4] x86/cpufeature: Rework {boot_,}cpu_has()
+Date: Tue, 16 May 2023 15:53:31 +0100
+Message-ID: <20230516145334.1271347-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230516145334.1271347-1-andrew.cooper3@citrix.com>
+References: <20230516145334.1271347-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230504195327.695107-13-stefanha@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, May 04, 2023 at 03:53:18PM -0400, Stefan Hajnoczi wrote:
-> @@ -819,11 +841,9 @@ void xen_block_dataplane_start(XenBlockDataPlane *dataplane,
->      blk_set_aio_context(dataplane->blk, dataplane->ctx, NULL);
->      aio_context_release(old_context);
->  
-> -    /* Only reason for failure is a NULL channel */
-> -    aio_context_acquire(dataplane->ctx);
-> -    xen_device_set_event_channel_context(xendev, dataplane->event_channel,
-> -                                         dataplane->ctx, &error_abort);
-> -    aio_context_release(dataplane->ctx);
-> +    if (!blk_in_drain(dataplane->blk)) {
+One area where Xen deviates from Linux is that test_bit() forces a volatile
+read.  This leads to poor code generation, because the optimiser cannot merge
+bit operations on the same word.
 
-There's maybe something missing in the patch.
-xen_block_dataplane_start() calls xen_device_bind_event_channel() just
-before xen_block_dataplane_attach().
+Drop the use of test_bit(), and write the expressions in regular C.  This
+removes the include of bitops.h (which is a frequent source of header
+tangles), and it offers the optimiser far more flexibility.
 
-And xen_device_bind_event_channel() sets the event context to
-qemu_get_aio_context() instead of NULL.
+Bloat-o-meter reports a net change of:
 
-So, even if we don't call xen_block_dataplane_attach() while in drain,
-there's already a fd_handler attach to the fd. So should
-xen_device_bind_event_channel() be changed as well? Or maybe a call to
-xen_block_dataplane_detach() would be enough.
+  add/remove: 0/0 grow/shrink: 21/87 up/down: 641/-2751 (-2110)
 
-(There's only one user of xen_device_bind_event_channel() at the moment
-so I don't know if other implementation making use of this API will want
-to call set_event_channel_context or not.)
+with half of that in x86_emulate() alone.  vmx_ctxt_switch_to() seems to be
+the fastpath with the greatest delta at -24, where the optimiser has
+successfully removed the branch hidden in cpu_has_msr_tsc_aux.
 
-> +        xen_block_dataplane_attach(dataplane);
-> +    }
->  
->      return;
->  
+No functional change.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/arch/x86/include/asm/cpufeature.h | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 4140ec0938b2..4f827cc6ff91 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -7,6 +7,7 @@
+ #define __ASM_I386_CPUFEATURE_H
+ 
+ #include <xen/const.h>
++#include <xen/stdbool.h>
+ #include <asm/cpuid.h>
+ 
+ #define cpufeat_word(idx)	((idx) / 32)
+@@ -17,7 +18,6 @@
+ #define X86_FEATURE_ALWAYS      X86_FEATURE_LM
+ 
+ #ifndef __ASSEMBLY__
+-#include <xen/bitops.h>
+ 
+ struct cpuinfo_x86 {
+     unsigned char x86;                 /* CPU family */
+@@ -43,8 +43,15 @@ struct cpuinfo_x86 {
+ 
+ extern struct cpuinfo_x86 boot_cpu_data;
+ 
+-#define cpu_has(c, bit)		test_bit(bit, (c)->x86_capability)
+-#define boot_cpu_has(bit)	test_bit(bit, boot_cpu_data.x86_capability)
++static inline bool cpu_has(const struct cpuinfo_x86 *info, unsigned int feat)
++{
++    return info->x86_capability[cpufeat_word(feat)] & cpufeat_mask(feat);
++}
++
++static inline bool boot_cpu_has(unsigned int feat)
++{
++    return cpu_has(&boot_cpu_data, feat);
++}
+ 
+ #define CPUID_PM_LEAF                    6
+ #define CPUID6_ECX_APERFMPERF_CAPABILITY 0x1
+
+base-commit: 8f9c8274a4e3e860bd777269cb2c91971e9fa69e
+prerequisite-patch-id: ceeba7d5ab9498cb188e5012953c7e8c9a86347d
+prerequisite-patch-id: c0957b9e1157ae6eb8de973c96716fd02587c486
+prerequisite-patch-id: d2574bba15748cd021e5b33fa50e6cadc38863b6
+prerequisite-patch-id: 0f66cd4287ffdc06f24dc01c7d26fb428f3e8c09
+prerequisite-patch-id: a585f61b546ff96be3624ff253f8100b2f465de6
+prerequisite-patch-id: 54551cdefaca083b4a4b97528d27d0f3dc9753ee
+prerequisite-patch-id: 051423463e4a34728ab524f03e801e7103777684
 -- 
-Anthony PERARD
+2.30.2
+
 
