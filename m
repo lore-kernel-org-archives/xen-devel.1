@@ -4,36 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F924C7EE2C
-	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 18:46:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.535450.833158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20120C77B7A
+	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 19:03:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.535456.833188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyzgd-0008To-Gi; Tue, 16 May 2023 18:46:15 +0000
+	id 1pyzwt-00031b-B5; Tue, 16 May 2023 19:03:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 535450.833158; Tue, 16 May 2023 18:46:15 +0000
+Received: by outflank-mailman (output) from mailman id 535456.833188; Tue, 16 May 2023 19:03:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyzgd-0008Th-Cn; Tue, 16 May 2023 18:46:15 +0000
-Received: by outflank-mailman (input) for mailman id 535450;
- Tue, 16 May 2023 18:46:13 +0000
+	id 1pyzwt-00031R-7n; Tue, 16 May 2023 19:03:03 +0000
+Received: by outflank-mailman (input) for mailman id 535456;
+ Tue, 16 May 2023 19:03:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PFhh=BF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1pyzgb-0008Tb-Ac
- for xen-devel@lists.xenproject.org; Tue, 16 May 2023 18:46:13 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ <SRS0=zzm0=BF=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
+ id 1pyzws-0002US-CU
+ for xen-devel@lists.xenproject.org; Tue, 16 May 2023 19:03:02 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id eb40b857-f419-11ed-8611-37d641c3527e;
- Tue, 16 May 2023 20:46:08 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4699fd0f-f41c-11ed-8611-37d641c3527e;
+ Tue, 16 May 2023 21:03:00 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-392-bwAvUUZhPMqJaK6CQaIk6A-1; Tue, 16 May 2023 15:02:54 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3E74B63DDE;
- Tue, 16 May 2023 18:46:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F03A2C433EF;
- Tue, 16 May 2023 18:46:05 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BEB543C0BE32;
+ Tue, 16 May 2023 19:02:51 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.44])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 246F840C6EC4;
+ Tue, 16 May 2023 19:02:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,91 +52,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb40b857-f419-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1684262766;
-	bh=1Y2StiZOojJk/Xg/VTyj/LVT3Er3HprFlZgifKkAtW8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=ItI/DVGnVZCAb9XdzTBz+uWME/BrzEyL9EyDhdDpdOYrRQ7zvLjCt2z9JZiiNsAHb
-	 46X6Lwpd6cnW53kBEQzbdX/CEZp2r2OJz4ozZpL0X+rp1ue5QEhBl3ACk0hTGjBvGL
-	 d+UO6f8nMS3tOI5L+lzVXBwKmofix/9P4jK3Wn3ftgXMR9eNW04VHfP6I+DPSMph/J
-	 k33g3keARRuLXdqp5gv557y0Yf5c5TWtWdqdGfM8yHuWFKAnzdFiEIgSnkE985jwxT
-	 58P2Tq6rr2PPhjYvbAP+fkGAlP8WhDkjGaDg2i3df4dXqdLNCEeHUrM0z6YTu/df/K
-	 s3qbALaeD4yQg==
-Date: Tue, 16 May 2023 11:46:00 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Olaf Hering <olaf@aepfle.de>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v1] automation: provide example for downloading an existing
- container
-In-Reply-To: <20230516105155.0c59143a@sender>
-Message-ID: <alpine.DEB.2.22.394.2305161145540.62578@ubuntu-linux-20-04-desktop>
-References: <20230502201444.6532-1-olaf@aepfle.de> <alpine.DEB.2.22.394.2305151533320.4125828@ubuntu-linux-20-04-desktop> <20230516105155.0c59143a@sender>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 4699fd0f-f41c-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1684263779;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=eWBF29RQlo3PxqGi5ARBdz9mjgsC7oCE+g384OxkQik=;
+	b=VOvraVyB+bdgJf0piH3fnCVkPy5nfh7XTuZrZD2kLQ2hVAoYmRLJKV1Vr94t7sHfXZKGMC
+	EwJwLp2PRPLSqmMNfoE9u1CctwpKfcp4MKnNtTWAEjcZV9uP9uUtuUae89fNoP1caH08e5
+	1aEm6XAqr306+t/cvN3VqgQ8QJTtIG4=
+X-MC-Unique: bwAvUUZhPMqJaK6CQaIk6A-1
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Coiby Xu <Coiby.Xu@gmail.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	"Richard W.M. Jones" <rjones@redhat.com>,
+	Peter Xu <peterx@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	Kevin Wolf <kwolf@redhat.com>,
+	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Julia Suvorova <jusual@redhat.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	Leonardo Bras <leobras@redhat.com>,
+	eesposit@redhat.com,
+	Fam Zheng <fam@euphon.net>,
+	Aarushi Mehta <mehta.aaru20@gmail.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Xie Yongji <xieyongji@bytedance.com>,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	qemu-block@nongnu.org,
+	Eduardo Habkost <eduardo@habkost.net>,
+	Paul Durrant <paul@xen.org>,
+	Stefan Weil <sw@weilnetz.de>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Peter Lieven <pl@kamp.de>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+	Juan Quintela <quintela@redhat.com>
+Subject: [PATCH v6 02/20] hw/qdev: introduce qdev_is_realized() helper
+Date: Tue, 16 May 2023 15:02:20 -0400
+Message-Id: <20230516190238.8401-3-stefanha@redhat.com>
+In-Reply-To: <20230516190238.8401-1-stefanha@redhat.com>
+References: <20230516190238.8401-1-stefanha@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 
-On Tue, 16 May 2023, Olaf Hering wrote:
-> Am Mon, 15 May 2023 16:03:01 -0700 (PDT)
-> schrieb Stefano Stabellini <sstabellini@kernel.org>:
-> 
-> > Given that opensuse-tumbleweed is still broken (doesn't complete the
-> > Xen build successfully) even after these patches, I suggest we use a
-> > different example?
-> 
-> I think the example in automation/build/README.md needs to be fixed.
-> Right now it does something different than the Gitlab CI.
-> 
-> The CI runs automation/scripts/build with some environment variables
-> set, the example runs automation/scripts/containerize.
- 
-I think you have a point that automation/build/README.md should also
-describe how to do what gitlab-ci does but locally (i.e. call
-automation/scripts/build). It should not only describe
-automation/scripts/containerize.
+Add a helper function to check whether the device is realized without
+requiring the Big QEMU Lock. The next patch adds a second caller. The
+goal is to avoid spreading DeviceState field accesses throughout the
+code.
 
- 
-> For me qemu-xen builds, I assume it is supposed to be 'master ==
-> "8c51cd9705 (HEAD -> dummy, origin/staging, origin/master, origin/HEAD,
-> master) hw/xen/xen_pt: fix uninitialized variable", but we do not know
-> what GI tests, because scripts/git-checkout.sh does not show what HEAD
-> actually is. I think it needs to run "$GIT --no-pager log --oneline
-> -n1" at the end, so everyone knows what 'dummy' actually is.
-
-Gitlab-ci only runs automation/scripts/build which builds QEMU as part
-of a regular Xen build.
-
-If you want to see details of a failure:
-https://gitlab.com/xen-project/xen/-/jobs/4284741849
-
+Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+Reviewed-by: Kevin Wolf <kwolf@redhat.com>
 ---
-In file included from /builds/xen-project/xen/tools/qemu-xen-dir-remote/include/qemu/coroutine.h:18,
-                 from /builds/xen-project/xen/tools/qemu-xen-dir-remote/include/block/aio.h:20,
-                 from ../qemu-xen-dir-remote/util/async.c:28:
-../qemu-xen-dir-remote/util/async.c: In function 'aio_bh_poll':
-/builds/xen-project/xen/tools/qemu-xen-dir-remote/include/qemu/queue.h:303:22: error: storing the address of local variable 'slice' in '*ctx.bh_slice_list.sqh_last' [-Werror=dangling-pointer=]
-  303 |     (head)->sqh_last = &(elm)->field.sqe_next;                          \
-      |     ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
-../qemu-xen-dir-remote/util/async.c:161:5: note: in expansion of macro 'QSIMPLEQ_INSERT_TAIL'
-  161 |     QSIMPLEQ_INSERT_TAIL(&ctx->bh_slice_list, &slice, next);
-      |     ^~~~~~~~~~~~~~~~~~~~
-../qemu-xen-dir-remote/util/async.c:156:17: note: 'slice' declared here
-  156 |     BHListSlice slice;
-      |                 ^~~~~
-../qemu-xen-dir-remote/util/async.c:154:29: note: 'ctx' declared here
-  154 | int aio_bh_poll(AioContext *ctx)
-      |                 ~~~~~~~~~~~~^~~
-cc1: all warnings being treated as errors
----
+ include/hw/qdev-core.h | 17 ++++++++++++++---
+ hw/scsi/scsi-bus.c     |  3 +--
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
-> I think it is perfectly fine that both examples refer to Tumbleweed,
-> because one may need to fix future build errors, not test on something
-> from which we already know that it works.
+diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
+index 7623703943..f1070d6dc7 100644
+--- a/include/hw/qdev-core.h
++++ b/include/hw/qdev-core.h
+@@ -1,6 +1,7 @@
+ #ifndef QDEV_CORE_H
+ #define QDEV_CORE_H
+ 
++#include "qemu/atomic.h"
+ #include "qemu/queue.h"
+ #include "qemu/bitmap.h"
+ #include "qemu/rcu.h"
+@@ -168,9 +169,6 @@ typedef struct {
+ 
+ /**
+  * DeviceState:
+- * @realized: Indicates whether the device has been fully constructed.
+- *            When accessed outside big qemu lock, must be accessed with
+- *            qatomic_load_acquire()
+  * @reset: ResettableState for the device; handled by Resettable interface.
+  *
+  * This structure should not be accessed directly.  We declare it here
+@@ -339,6 +337,19 @@ DeviceState *qdev_new(const char *name);
+  */
+ DeviceState *qdev_try_new(const char *name);
+ 
++/**
++ * qdev_is_realized:
++ * @dev: The device to check.
++ *
++ * May be called outside big qemu lock.
++ *
++ * Returns: %true% if the device has been fully constructed, %false% otherwise.
++ */
++static inline bool qdev_is_realized(DeviceState *dev)
++{
++    return qatomic_load_acquire(&dev->realized);
++}
++
+ /**
+  * qdev_realize: Realize @dev.
+  * @dev: device to realize
+diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
+index 3c20b47ad0..8857ff41f6 100644
+--- a/hw/scsi/scsi-bus.c
++++ b/hw/scsi/scsi-bus.c
+@@ -60,8 +60,7 @@ static SCSIDevice *do_scsi_device_find(SCSIBus *bus,
+      * the user access the device.
+      */
+ 
+-    if (retval && !include_unrealized &&
+-        !qatomic_load_acquire(&retval->qdev.realized)) {
++    if (retval && !include_unrealized && !qdev_is_realized(&retval->qdev)) {
+         retval = NULL;
+     }
+ 
+-- 
+2.40.1
 
-Sure I see your point. On the other hand Tumbleweed jobs are the ones
-and only with "allow_failure". So among all the possible choices as
-example, do we really need to pick the one and only that has been
-failing for months? :-)
 
