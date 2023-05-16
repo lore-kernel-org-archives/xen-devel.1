@@ -4,29 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6550C77B7A
-	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 14:54:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.535266.832980 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08DEC77B75
+	for <xen-devel@archiver.kernel.org>; Tue, 16 May 2023 14:58:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.535290.832993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyw3q-0007Oi-G4; Tue, 16 May 2023 14:53:58 +0000
+	id 1pyw7s-00019N-U9; Tue, 16 May 2023 14:58:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 535266.832980; Tue, 16 May 2023 14:53:58 +0000
+Received: by outflank-mailman (output) from mailman id 535290.832993; Tue, 16 May 2023 14:58:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pyw3q-0007Ny-7K; Tue, 16 May 2023 14:53:58 +0000
-Received: by outflank-mailman (input) for mailman id 535266;
- Tue, 16 May 2023 14:53:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7WEk=BF=citrix.com=prvs=493b78b38=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1pyw3o-00067V-Dw
- for xen-devel@lists.xenproject.org; Tue, 16 May 2023 14:53:56 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 799ec1ce-f3f9-11ed-8611-37d641c3527e;
- Tue, 16 May 2023 16:53:54 +0200 (CEST)
+	id 1pyw7s-00019G-Qw; Tue, 16 May 2023 14:58:08 +0000
+Received: by outflank-mailman (input) for mailman id 535290;
+ Tue, 16 May 2023 14:58:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=00Q8=BF=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1pyw7r-000198-Io
+ for xen-devel@lists.xenproject.org; Tue, 16 May 2023 14:58:07 +0000
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on0616.outbound.protection.outlook.com
+ [2a01:111:f400:fe0c::616])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1057dd41-f3fa-11ed-b229-6b7b168915f2;
+ Tue, 16 May 2023 16:58:06 +0200 (CEST)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by DB9PR04MB8445.eurprd04.prod.outlook.com (2603:10a6:10:2cf::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6387.23; Tue, 16 May
+ 2023 14:58:05 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::e442:306f:7711:e24c]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::e442:306f:7711:e24c%4]) with mapi id 15.20.6387.032; Tue, 16 May 2023
+ 14:58:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,161 +49,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 799ec1ce-f3f9-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684248834;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=lMkiMk+JiUBw0hNgilS4qSHGS05jFL3O36UzQf8lnjo=;
-  b=Z151AEIeZh+lgWZLiUIM5oxx1Z1Y6Jiq2q3620FydbOlm5KvHcC/v/cv
-   zq3v6rj3K1jhuSKQXI1Mzuq0sMQUcehBqNbB/ZrKRyzi5hko1+aYvtNaF
-   DoRsJFU5dszRLjYQ3PdXsPHQuGj0upCrN3dAO6LOID+hy7r9gwew+vbFV
-   s=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 111689032
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:jULSca17vEt4G5MuofbD5dpxkn2cJEfYwER7XKvMYLTBsI5bp2MOy
- GtNCm2EM/2CN2r3Loh2boqy80xUsZKAmoM1QAdrpC1hF35El5HIVI+TRqvS04F+DeWYFR46s
- J9OAjXkBJppJpMJjk71atANlVEliefTAOK6ULWeUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
- tq3qMDEULOf82cc3lk8tuTS+XuDgNyo4GlD5gFnO6gR1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
- 87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfLGh3/
- tUIJwg0Qk6fprOX6oKgT8tgmZF2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJwMwBbJ/
- jmcl4j/KkE4JNaa6yufyF72jcL/mDP4Qp4OTKLto5aGh3XMnzdOWXX6T2CTsfS/z0KzRd9bA
- 0gV4TY167g/8lSxSdvwVAH+p2SL1jY+cddNF+wx6CmW17HZpQ2eAwAsUTppeNEg8sgsSlQXO
- kShxo2zQ2Y16fvMFCzbr+3Pxd+vBcQLBUILXCQtXQQ92vW9vKBirzj/VdNBHLHg27UZBgrM6
- zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4adO6kok+9U
- G/ociR0xMQHFtmzmSOEW43h95n5tq/eYFUwbbOCdqTNFghBGVb5Jei8Axkkfi+F1/ronhe3C
- HI/QSsLuPdu0IKCNMebmb6ZBcUw1rTHHt/4TP3SZdcmSsEvJFPeo3wwNBfMgDqFfK0QfUYXa
- P+mnTuEVy5GWcyLMhLsLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaodFvxC3PXNrpRxPrd8G3oH
- yN3a5PiJ+N3DLevPUE6MOc7cTg3EJTMLc6m9JEHKrHaeWKL2ggJUpfs/F/oQKQ994w9qwsC1
- ijVtpNwoLYnuUD6FA==
-IronPort-HdrOrdr: A9a23:LJl+wKjSpoGFeaLJsqaEaHZe7HBQX9J23DAbv31ZSRFFG/FwyP
- rCoB1L73XJYWgqM03IwerwXpVoMkmsjKKdgLNhdItKOTOLhILGFvAH0WKP+Vzd8k7Fh6ZgPM
- VbAs9D4bTLZDAU4/oSizPIcOrIteP3lZxA8t2urUuFIzsLV4hQqyNCTiqLGEx/QwdLQbI/CZ
- qn/8JC4xawZHgNacy/J38dG8zOvcfCmp7KaQMPQ0dP0njFsRqYrJrBVzSI1BYXVD1ChZ8k7G
- j+igT8oomzrv2hzRfY9mnLq7BbgsHoxNdvDNGFzuIVNjLvoAC1Y5kJYczIgBkF5MWUrHo6mt
- jFpBkte+5p7WnKQ22zqRzxnyH9zTcH8RbZuBOlqEqmhfa8aCMxCsJHi44cWADe8VAcsNZ117
- 8O936FtqBQEQjLkE3Glpf1vlBR5wSJSEgZ4K4uZk9kIMgjgXhq3M4iFXZuYdY99eTBmcUa+a
- dVfYXhDb1tACunhjjizxJSKZqXLzkO9169MzU/UsD56UktoFlpi0Qf38ARhXEG6dY0TIRF/f
- 3NNuBymKhJVdJ+V9MIOA4te7rENoX2e2O4DEuCZVD8UK0XMXPErJD6pL0z+eGxYZQNiJ8/go
- 7IXl9UvXM7PxuGM7z54LRbthTWBGmtVzXkzc9To5B/p73nXbLudSmOUkonncesq+gWRsfbR/
- GwMpRLBOKLFxqYJa9ZmwnlH5VCI3gXV8MY/t49RlKVu8rObpbns+TKGcyjV4YF0QxUKl8XLk
- FzIgQbfv8wknxDckWI/yT5SjfqZlH1+452HezT4/UTobJ9R7Fxjg==
-X-Talos-CUID: =?us-ascii?q?9a23=3ARgzM4mro4N4SQVM0cCe2GszmUe0sS3b03HjoGmP?=
- =?us-ascii?q?mFUc4aZelUlqy9Lwxxg=3D=3D?=
-X-Talos-MUID: 9a23:O88yugtWlovu7NLUDs2n1BNyPsJK8r6UJBoGvKUDq8qeKTAoJGLI
-X-IronPort-AV: E=Sophos;i="5.99,278,1677560400"; 
-   d="scan'208";a="111689032"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 3/4] x86/tsx: Remove opencoded MSR_ARCH_CAPS check
-Date: Tue, 16 May 2023 15:53:33 +0100
-Message-ID: <20230516145334.1271347-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230516145334.1271347-1-andrew.cooper3@citrix.com>
-References: <20230516145334.1271347-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 1057dd41-f3fa-11ed-b229-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IPtBLE9yNVGUPbyDwZU0hHOv0ZQ5N5MczuoEMNlvF1uiX16JNFlQjbLQGfAcJMJuarba6HBknzsLIySPm/0FinOMqfwL/hdMcXEAlvcTc5ey0elqFzHBp91oEU3+kjVE2pnTYjYA2OVBESuHeQ6HNYs5cvMm0ghICLvOh97tXv3/HCncX6eMsaisnYbobL1j96RRTH1wKOxpJrq8Rippdj+X+L+6ObN5lQAVQY74P8zh0NbX+Z87LYbCwIhO/dW4UWfggtzThRz+8o04cmmSfro6r4cez1kqWV5uH5vYFco5IgH6OPcZrTMg3DWQnxFwTMk8d1XULTXH5zLin9ZFLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qOWyj1RNtyffmMO8fnLkKiE6NI7uYuHL2YVFcqmqZg4=;
+ b=KItRshzB5Ltrn8BdBhABsQdqUVgb9o+OnlwWKEBCfle4UEq9Bt3EUwnWjimAjuuxA+XKe7Zfpq3iMLNCLuNIrWtX/BklKMUE4MWGm1aKvhUeKJ9kjZ3dd8smSdLGUOhDzeb4r5XB5Afo7hxvu85itIzJ7Cr9kNKBLWOhRACI7hNzSLUtbxVBnfgRt2QZR98s445QaWx4ToTbX/goxGssRSHF/Xd+rmMUZwTylo/2MtgGtTotCk6MKiOtsFfoLIQOkQLR9mhd8hxL8lpC6UioONTl6zFLYIR9nXnpZdOatQtjgoWFpDmo236jrJ441ZLiPflPETfWM8tkTBvSpyLkwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qOWyj1RNtyffmMO8fnLkKiE6NI7uYuHL2YVFcqmqZg4=;
+ b=QTOnae0ardATfmda7Sp6J27V6XaIgYMTrh00kKFcIM3RXdlzwobBEkbkBEPv8sFuZo4mkJZnNWnWe5vxxbXYpWz3PEJ3M3AqZkjHCe5Q2/2WPIdLQnbEb+Tlg/FGLjlR9Q95Wvul1OvPJlVnTGveUzHOOCKCQJH36afZb6SSw57WqQB/1uziLACglseoQqFq7wc+HqVR6rQSk2GtiieOWsX/bcngBvqMB3su/qTkrflrFa9SGhKwt+XdS1DWgRk4txpm6k2fXBR5UzKf7mWz/WCuai6AT/9ATdpYT1TrZOz7MOrvNnldRn8+zMblI3QHhLwPrSba0ZUSudDhD48bzg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <327eb858-f5f5-bf09-edfb-53c5c23a6c17@suse.com>
+Date: Tue, 16 May 2023 16:58:02 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.1
+Subject: Re: [PATCH 6/6] x86/boot: Expose MSR_ARCH_CAPS data in guest max
+ policies
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+References: <20230515144259.1009245-1-andrew.cooper3@citrix.com>
+ <20230515144259.1009245-7-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <20230515144259.1009245-7-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0152.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b3::7) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DB9PR04MB8445:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d693d98-51d0-4c9c-552e-08db561df3a4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	wAFNQu2G0ozE1t+XuaSdugwqTuXOxGC9fbdr5FLIVF2lfe+gtZ+U8latCC1rnm/pe1PvowX+BT+JkguPwydie3wk3oiHi3/AK5zxwV8Y0b2i7lXybYH513lhwS7KVLRPRKvhXg0GJmhRwpLuNiXGM3zvnH8viqBt/Xjs+3R6qs4Z1HG5iLfXkA/Nd+a75TRG25Y963ulcrx39v7qf6wQ+og26eWsGcU9DcXxpzyMJrLfRRd+nbcKYB61K4aHg3ZCgMg0pwT3yQpMwt6UcuHYEu781WPwQG1lT38aIo+bCZ+WEkyS8ad17DcEdzOTlRcunf4w6UukAviDkfK+5KfwGg2T6Osg1gCxKnzPK5IUKB7HuPZhPnQVuUHlUIJhL0QObBZQl2GgAie8O33fNxWV6xRXLcCZ4rFC6duYOWFgr53m9O1jO5kUz6Bx1KUeIKiFSO3ROetPPEqMu4fT5eBU8tqYbfVlaIe5I4SsPy+voxKfyudJzy/y543mF3jwm4ppPgypULfMGzFyMvLK8IHxWAobu3R814k688FlHjy0AlJ466er4SQ7K3FKe/++F3j1KluCAaIbYzkG9Wa0uBwbhSA8RlqnHrPejTvVyWS+CK/TjlbJ82M0roJsZm/jbvElVVz9c1nwc0i+mJJZ8Rmo8g==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(136003)(346002)(396003)(376002)(366004)(39860400002)(451199021)(31686004)(66899021)(83380400001)(2616005)(186003)(41300700001)(4326008)(66946007)(8936002)(66556008)(6916009)(26005)(53546011)(8676002)(5660300002)(316002)(31696002)(6506007)(54906003)(478600001)(6486002)(38100700002)(66476007)(86362001)(6512007)(36756003)(2906002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ODgzbGF2bm5mVGl4a3lHUTFMakxqVGxmdlBmSGwzYVJpSVRjYnZjRlE2aVAy?=
+ =?utf-8?B?VkdHQkxzV3ZTZzR0Si9MdEplYVFNWTFFSlkzaDdGTzVKRlhraGM5eGxZRlU5?=
+ =?utf-8?B?LzdZRmM0SXI4ait1T2JqZElQTUJZa0ttQWZ0TVAwVU5rQXppcG9hQXdnem9j?=
+ =?utf-8?B?TzBXZ3ZBZjVHUTJBSmJncEpjUVczSk14SjllYWlkTVVraDZWbE8zTlVjQ1M3?=
+ =?utf-8?B?S0VTekIwWG5DaVBYcTlRWkE4UWpiZHF6eGpiYWJvNldQaElXVmppc1M1MFNm?=
+ =?utf-8?B?d1FxQVY3NkNqMExUb2M4eGdEa1kxQTBPdzJ0NHRzQzhRdmZsR0RSejRhbVJY?=
+ =?utf-8?B?czJiS1cya1hMQzRVQWh3R1R0OUJIdmY1dmlMcWpadm0wbHJDR0RVd2dtbGdX?=
+ =?utf-8?B?M1RIZmRVbFZJWFVWTFJPQ0pGUlpsMGFZVHIrR0FBR05VcW1VbXltZHVteENu?=
+ =?utf-8?B?VjlYVms4cFB1WEYrUHJ6SHVNYmR6Um1tVUYrNFNkRXdzVzY2eW5OY2xpMzJp?=
+ =?utf-8?B?UFFzM29FUk1sSlFOMkxWMStUdFhUelMvbnRvaUVuUE4xSDB0RlAvZ0pTdjlD?=
+ =?utf-8?B?NUxnZC9JQklVbDhWVmhRSEVsWVhtazZDSkRMU0RMRFBiL3VvL3lybXhnUkFi?=
+ =?utf-8?B?eDk5dWhtTWN2b2t0b1Fqa3dBMlFYcE5zbHpwVHA5bHpRS3NETythYkwwNU11?=
+ =?utf-8?B?c3Y2aGVxcUFkejFDVXdTdHo1eXVrQndLanU5MC9PdlR0cW1rb2lCWVZvd1Fs?=
+ =?utf-8?B?elN4MTVPejNSRGUrOTR5cDhSc0dOOXVhcmpXdkozcHFaSlZRaTNOTXl0L0Jw?=
+ =?utf-8?B?TUdvenliMmxZM3dMcHJOUW1KV1ZMVEFTa24wM000ZGJ6SGFrZDJwY05PREUz?=
+ =?utf-8?B?SkZWRzAwbmVteVhlUlcxSStxa3UzT01sUHJzQUVGVnJ4SEJRK2wxeG9yS2py?=
+ =?utf-8?B?MVZLSVZhem9SZkMvZkkwWWFGK3ZiVjNjWG9LOGl4WGgyQ1dnN1pqenFlcjVh?=
+ =?utf-8?B?MVd1allHYVJHQTdsZHRZWG1FQzFuQXlNWnVYWDN6MzRaRWtSMnhuMWw5SXpu?=
+ =?utf-8?B?djF5dElPN1hxbUV3UEo4YXQyTThHUy9FTTdWZjZwZjJWMWFJaGJFeFd4RVZa?=
+ =?utf-8?B?RVcwMnVaRmJuQ3M5UC83WnNSUGdNVGRrVG5lK1RnUk84ejg1RUpvRlVkZ0Yv?=
+ =?utf-8?B?L0tmTHcvN2VzZmxqVWduZ3c4MUdSNkZVQjRJYzhpTHErN29UQlIycEt0Vldv?=
+ =?utf-8?B?dDFXeHpaT1oxNlNkOXorVFhvQXFzV0xNdmJOc3gzQ1hXQzliRWNIN0RwZzdK?=
+ =?utf-8?B?bldCT1B6Z3owdEVENWE0SHRSdmpFNTZES1N2MlFuc1VXWFRaZzZGVTFhQlAy?=
+ =?utf-8?B?TUhhRDJhZFRsN2o0d0wvODB0RFpzL1F0eHNVYWNSZmZTQTlrTkkzUHlDMU1i?=
+ =?utf-8?B?VkVtY1NMZEFhd1NpZ1REcnR2a1BYamtNY0JwT0FBVkpwZFdtQTFzTGJvYUVm?=
+ =?utf-8?B?QlZveUs5NVRScDMvbXMyUys3bmdSUm82Qm5XVmMrM2xSVGZ5ek9xdUwvcEM2?=
+ =?utf-8?B?QlVjUXdMclEycnF4WXlsTnpoMU5aYmZwckJsRnVTSGxhTWdOZTF0RVFZZVI5?=
+ =?utf-8?B?M0VJZ0tFM1JQMWgrZjdoTm82Tk1lc0VmeU12VTR4RUl0UUR2ZmJWR2J6bU8y?=
+ =?utf-8?B?elRZUEIyS1NuTUN6SzJGRkhVQ0pubStuWkNUT2RWUE1Nb2JkUkx1UVJWNjkv?=
+ =?utf-8?B?RVNHaEpVbzVzb01jUjRMZzl1Y1F3aXhIcGc5ZVZabGtqYU96WjJEditMbzdp?=
+ =?utf-8?B?MU5QQU5sZG50QmZIZElHS1ltVThlK1lHOTViTitRUWNUbFlKb0pVVnYxWnNU?=
+ =?utf-8?B?bEFTUXN5RVQ0L3N1L1NsN2lIdDc3a3ZHLzAvemlaUThiV2kwR2NvazVHTysw?=
+ =?utf-8?B?K0gwWFc5U1hkRk0yVkxTRThaUFIwT2hFUUthbCtJQWhnVWM3RnhkOUE4Skg2?=
+ =?utf-8?B?VngvaVdKd21TbjNEV2JkUGZhYVUzYWpyZzFrT25sNjIrY2tqMktSUTNQNTRt?=
+ =?utf-8?B?TVkxa1ozS3p4OUoyRFBPQkF3VzZiSGZiZGFiTm5NNTBlbzYzVXArRS9Lc2ZE?=
+ =?utf-8?Q?9lTsaSvaH9hebqDKTmenFsM3h?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d693d98-51d0-4c9c-552e-08db561df3a4
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2023 14:58:04.6831
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QG8aJ2VRx1DtyW1IYHNh8TE9Dm5qLJye0NiV1WP1dnhTwsnFTkOi3kIhAm0SlCFtV/GAQ+mtS3oKy4M0DknkzQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8445
 
-The current cpu_has_tsx_ctrl tristate is serving double pupose; to signal the
-first pass through tsx_init(), and the availability of MSR_TSX_CTRL.
+On 15.05.2023 16:42, Andrew Cooper wrote:
+> --- a/xen/arch/x86/cpu-policy.c
+> +++ b/xen/arch/x86/cpu-policy.c
+> @@ -408,6 +408,25 @@ static void __init calculate_host_policy(void)
+>      p->platform_info.cpuid_faulting = cpu_has_cpuid_faulting;
+>  }
+>  
+> +static void __init guest_common_max_feature_adjustments(uint32_t *fs)
+> +{
+> +    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL )
+> +    {
+> +        /*
+> +         * MSR_ARCH_CAPS is just feature data, and we can offer it to guests
+> +         * unconditionally, although limit it to Intel systems as it is highly
+> +         * uarch-specific.
+> +         *
+> +         * In particular, the RSBA and RRSBA bits mean "you might migrate to a
+> +         * system where RSB underflow uses alternative predictors (a.k.a
+> +         * Retpoline not safe)", so these need to be visible to a guest in all
+> +         * cases, even when it's only some other server in the pool which
+> +         * suffers the identified behaviour.
+> +         */
+> +        __set_bit(X86_FEATURE_ARCH_CAPS, fs);
+> +    }
+> +}
 
-Drop the variable, replacing it with a once boolean, and altering
-cpu_has_tsx_ctrl to come out of the feature information.
+Wouldn't this better be accompanied by marking the bit !a in the public header?
 
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/include/asm/cpufeature.h |  1 +
- xen/arch/x86/include/asm/processor.h  |  2 +-
- xen/arch/x86/tsx.c                    | 13 ++++++++-----
- 3 files changed, 10 insertions(+), 6 deletions(-)
-
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index 8446f98625f7..deca5bfc2629 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -185,6 +185,7 @@ static inline bool boot_cpu_has(unsigned int feat)
- 
- /* MSR_ARCH_CAPS 10A */
- #define cpu_has_if_pschange_mc_no boot_cpu_has(X86_FEATURE_IF_PSCHANGE_MC_NO)
-+#define cpu_has_tsx_ctrl        boot_cpu_has(X86_FEATURE_TSX_CTRL)
- 
- /* Synthesized. */
- #define cpu_has_arch_perfmon    boot_cpu_has(X86_FEATURE_ARCH_PERFMON)
-diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
-index 0eaa2c3094d0..f983ff501d95 100644
---- a/xen/arch/x86/include/asm/processor.h
-+++ b/xen/arch/x86/include/asm/processor.h
-@@ -535,7 +535,7 @@ static inline uint8_t get_cpu_family(uint32_t raw, uint8_t *model,
-     return fam;
- }
- 
--extern int8_t opt_tsx, cpu_has_tsx_ctrl;
-+extern int8_t opt_tsx;
- extern bool rtm_disabled;
- void tsx_init(void);
- 
-diff --git a/xen/arch/x86/tsx.c b/xen/arch/x86/tsx.c
-index 41b6092cfe16..fc199815994d 100644
---- a/xen/arch/x86/tsx.c
-+++ b/xen/arch/x86/tsx.c
-@@ -19,7 +19,6 @@
-  * controlling TSX behaviour, and where TSX isn't force-disabled by firmware.
-  */
- int8_t __read_mostly opt_tsx = -1;
--int8_t __read_mostly cpu_has_tsx_ctrl = -1;
- bool __read_mostly rtm_disabled;
- 
- static int __init cf_check parse_tsx(const char *s)
-@@ -37,24 +36,28 @@ custom_param("tsx", parse_tsx);
- 
- void tsx_init(void)
- {
-+    static bool __read_mostly once;
-+
-     /*
-      * This function is first called between microcode being loaded, and CPUID
-      * being scanned generally.  Read into boot_cpu_data.x86_capability[] for
-      * the cpu_has_* bits we care about using here.
-      */
--    if ( unlikely(cpu_has_tsx_ctrl < 0) )
-+    if ( unlikely(!once) )
-     {
--        uint64_t caps = 0;
-         bool has_rtm_always_abort;
- 
-+        once = true;
-+
-         if ( boot_cpu_data.cpuid_level >= 7 )
-             boot_cpu_data.x86_capability[FEATURESET_7d0]
-                 = cpuid_count_edx(7, 0);
- 
-         if ( cpu_has_arch_caps )
--            rdmsrl(MSR_ARCH_CAPABILITIES, caps);
-+            rdmsr(MSR_ARCH_CAPABILITIES,
-+                  boot_cpu_data.x86_capability[FEATURESET_10Al],
-+                  boot_cpu_data.x86_capability[FEATURESET_10Ah]);
- 
--        cpu_has_tsx_ctrl = !!(caps & ARCH_CAPS_TSX_CTRL);
-         has_rtm_always_abort = cpu_has_rtm_always_abort;
- 
-         if ( cpu_has_tsx_ctrl && cpu_has_srbds_ctrl )
--- 
-2.30.2
-
+Jan
 
