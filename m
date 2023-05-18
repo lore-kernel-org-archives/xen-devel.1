@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ACE6C7EE2A
-	for <xen-devel@archiver.kernel.org>; Thu, 18 May 2023 17:01:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.535914.834818 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 365EDC77B7D
+	for <xen-devel@archiver.kernel.org>; Thu, 18 May 2023 17:29:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.536486.834847 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pzh04-0005zW-U9; Thu, 18 May 2023 17:01:12 +0000
+	id 1pzhR7-0001Nd-7P; Thu, 18 May 2023 17:29:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 535914.834818; Thu, 18 May 2023 17:01:12 +0000
+Received: by outflank-mailman (output) from mailman id 536486.834847; Thu, 18 May 2023 17:29:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1pzh04-0005zP-QI; Thu, 18 May 2023 17:01:12 +0000
-Received: by outflank-mailman (input) for mailman id 535914;
- Wed, 17 May 2023 12:47:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1pzhR7-0001NW-4a; Thu, 18 May 2023 17:29:09 +0000
+Received: by outflank-mailman (input) for mailman id 536486;
+ Thu, 18 May 2023 17:29:07 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5JRk=BG=linux.microsoft.com=madvenka@srs-se1.protection.inumbo.net>)
- id 1pzGYw-0007bO-IN
- for xen-devel@lists.xenproject.org; Wed, 17 May 2023 12:47:26 +0000
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id f8f14aac-f4b0-11ed-b229-6b7b168915f2;
- Wed, 17 May 2023 14:47:25 +0200 (CEST)
-Received: from [192.168.254.32] (unknown [47.186.50.133])
- by linux.microsoft.com (Postfix) with ESMTPSA id D164820F069A;
- Wed, 17 May 2023 05:47:21 -0700 (PDT)
+ <SRS0=EfMJ=BH=intel.com=dave.hansen@srs-se1.protection.inumbo.net>)
+ id 1pzhR5-0001NK-68
+ for xen-devel@lists.xenproject.org; Thu, 18 May 2023 17:29:07 +0000
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 79fc4896-f5a1-11ed-8611-37d641c3527e;
+ Thu, 18 May 2023 19:29:02 +0200 (CEST)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 May 2023 10:28:58 -0700
+Received: from nroy-mobl1.amr.corp.intel.com (HELO [10.209.81.123])
+ ([10.209.81.123])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 May 2023 10:28:58 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,163 +45,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8f14aac-f4b0-11ed-b229-6b7b168915f2
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com D164820F069A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1684327643;
-	bh=LhIkPpJhPvIClwJ39pJZmrIh6zoXx6jE68xfB8W+VWs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=mumhyWRm4PGisYlV+6k79BLPaamhkccyeiIlh7D48PRTzPjbzjxh2vVIF5IMgB/kg
-	 ffvKm60yYk2+lOntvrropzUTEW8F4BOwI+8ppjyBg+mNGMVj/ubDGGKoWDypVfUwG4
-	 iLdY81ZYifmsEzXVwEDBYtRVqeqDXr8NLjfUncbw=
-Message-ID: <e8fcc1b8-6c0f-9556-a110-bd994d3fe3c6@linux.microsoft.com>
-Date: Wed, 17 May 2023 07:47:20 -0500
+X-Inumbo-ID: 79fc4896-f5a1-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1684430942; x=1715966942;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=YbB0ITNWC6W+DKq+pyGIH80h6yd4xEjccS7jew/3CTQ=;
+  b=aKZT4vEpd/1SU6W4n3H/qvzp094XJ3lgXfgWAzUXUkefbl/I8nNwkN5P
+   2JM6nSjwuvkv1EcEf4gorDf1Zar2ueQ91us7eP5v4ooLxlRqgYayYZ9Ul
+   2PjHBjnx04lMQa6DqTQrHLX/9kOpVStF1oGyqImObVWW1CEKgXev7A3Bv
+   NvlRB/JrIVT+F5FfO8MWkBIAV60xb4B+dnP/1Tb4Xkcx9aHrK2mMOIEEJ
+   Lrt2yFUa2aZHftKCc9ga42ij0Irohm724zB3XP3daqs5VQPSdvALIypPP
+   rRKbCg1BIyxApr0SNpgCp8QjZM/bCvKRQwSegvA+iV8OVStktLHz9QMhH
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10714"; a="354474559"
+X-IronPort-AV: E=Sophos;i="6.00,174,1681196400"; 
+   d="scan'208";a="354474559"
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10714"; a="702214993"
+X-IronPort-AV: E=Sophos;i="6.00,174,1681196400"; 
+   d="scan'208";a="702214993"
+Message-ID: <cabdd839-71d5-aabb-aee6-d37ebcabf2ab@intel.com>
+Date: Thu, 18 May 2023 10:28:58 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v1 3/9] virt: Implement Heki common code
-To: Wei Liu <wei.liu@kernel.org>, =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?=
- <mic@digikod.net>
-Cc: Borislav Petkov <bp@alien8.de>, Dave Hansen
- <dave.hansen@linux.intel.com>, "H . Peter Anvin" <hpa@zytor.com>,
- Ingo Molnar <mingo@redhat.com>, Kees Cook <keescook@chromium.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>,
- Alexander Graf <graf@amazon.com>, Forrest Yuan Yu <yuanyu@google.com>,
- James Morris <jamorris@linux.microsoft.com>,
- John Andersen <john.s.andersen@intel.com>, Liran Alon
- <liran.alon@oracle.com>, Marian Rotariu <marian.c.rotariu@gmail.com>,
- =?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>,
- =?UTF-8?B?TmljdciZb3IgQ8OuyJt1?= <nicu.citu@icloud.com>,
- Rick Edgecombe <rick.p.edgecombe@intel.com>,
- Thara Gopinath <tgopinath@microsoft.com>, Will Deacon <will@kernel.org>,
- Zahra Tarkhani <ztarkhani@microsoft.com>,
- =?UTF-8?Q?=c8=98tefan_=c8=98icleru?= <ssicleru@bitdefender.com>,
- dev@lists.cloudhypervisor.org, kvm@vger.kernel.org,
- linux-hardening@vger.kernel.org, linux-hyperv@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
- qemu-devel@nongnu.org, virtualization@lists.linux-foundation.org,
- x86@kernel.org, xen-devel@lists.xenproject.org
-References: <20230505152046.6575-1-mic@digikod.net>
- <20230505152046.6575-4-mic@digikod.net>
- <ZFkxhWhjyIzrPkt8@liuwe-devbox-debian-v2>
+ Thunderbird/102.10.0
+Subject: Re: [PATCH 10/20] x86: xen: add missing prototypes
 Content-Language: en-US
-From: "Madhavan T. Venkataraman" <madvenka@linux.microsoft.com>
-In-Reply-To: <ZFkxhWhjyIzrPkt8@liuwe-devbox-debian-v2>
+To: Arnd Bergmann <arnd@kernel.org>, x86@kernel.org
+Cc: Arnd Bergmann <arnd@arndb.de>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Andy Lutomirski <luto@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Juergen Gross <jgross@suse.com>,
+ "Srivatsa S. Bhat (VMware)" <srivatsa@csail.mit.edu>,
+ Alexey Makhalov <amakhalov@vmware.com>,
+ VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
+ Peter Zijlstra <peterz@infradead.org>, Darren Hart <dvhart@infradead.org>,
+ Andy Shevchenko <andy@infradead.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-pci@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-pm@vger.kernel.org, linux-mm@kvack.org
+References: <20230516193549.544673-1-arnd@kernel.org>
+ <20230516193549.544673-11-arnd@kernel.org>
+From: Dave Hansen <dave.hansen@intel.com>
+In-Reply-To: <20230516193549.544673-11-arnd@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Sorry for the delay. See inline...
-
-On 5/8/23 12:29, Wei Liu wrote:
-> On Fri, May 05, 2023 at 05:20:40PM +0200, Mickaël Salaün wrote:
->> From: Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
->>
->> Hypervisor Enforced Kernel Integrity (Heki) is a feature that will use
->> the hypervisor to enhance guest virtual machine security.
->>
->> Configuration
->> =============
->>
->> Define the config variables for the feature. This feature depends on
->> support from the architecture as well as the hypervisor.
->>
->> Enabling HEKI
->> =============
->>
->> Define a kernel command line parameter "heki" to turn the feature on or
->> off. By default, Heki is on.
+On 5/16/23 12:35, Arnd Bergmann wrote:
+> From: Arnd Bergmann <arnd@arndb.de>
 > 
-> For such a newfangled feature can we have it off by default? Especially
-> when there are unsolved issues around dynamically loaded code.
-> 
+> arch/x86/xen/enlighten_pv.c:1233:34: error: no previous prototype for 'xen_start_kernel' [-Werror=missing-prototypes]
+> arch/x86/xen/irq.c:22:14: error: no previous prototype for 'xen_force_evtchn_callback' [-Werror=missing-prototypes]
+> arch/x86/xen/mmu_pv.c:358:20: error: no previous prototype for 'xen_pte_val' [-Werror=missing-prototypes]
+> arch/x86/xen/mmu_pv.c:366:20: error: no previous prototype for 'xen_pgd_val' [-Werror=missing-prototypes]
 
-Yes. We can certainly do that.
+What's the deal with this one?
 
->>
-> [...]
->> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
->> index 3604074a878b..5cf5a7a97811 100644
->> --- a/arch/x86/Kconfig
->> +++ b/arch/x86/Kconfig
->> @@ -297,6 +297,7 @@ config X86
->>  	select FUNCTION_ALIGNMENT_4B
->>  	imply IMA_SECURE_AND_OR_TRUSTED_BOOT    if EFI
->>  	select HAVE_DYNAMIC_FTRACE_NO_PATCHABLE
->> +	select ARCH_SUPPORTS_HEKI		if X86_64
-> 
-> Why is there a restriction on X86_64?
-> 
+The patch is doing a bunch functions on top of the ones from the commit
+message.  Were you just showing a snippet of what the actual set of
+warnings is?
 
-We want to get the PoC working and reviewed on X64 first. We have tested this only on X64 so far.
+Also, fwiw, it would be nice to have actual words in the changelog, even
+for these maddeningly repetitive series.  Even something like:
 
->>  
->>  config INSTRUCTION_DECODER
->>  	def_bool y
->> diff --git a/arch/x86/include/asm/sections.h b/arch/x86/include/asm/sections.h
->> index a6e8373a5170..42ef1e33b8a5 100644
->> --- a/arch/x86/include/asm/sections.h
->> +++ b/arch/x86/include/asm/sections.h
-> [...]
->>  
->> +#ifdef CONFIG_HEKI
->> +
->> +/*
->> + * Gather all of the statically defined sections so heki_late_init() can
->> + * protect these sections in the host page table.
->> + *
->> + * The sections are defined under "SECTIONS" in vmlinux.lds.S
->> + * Keep this array in sync with SECTIONS.
->> + */
-> 
-> This seems a bit fragile, because it requires constant attention from
-> people who care about this functionality. Can this table be
-> automatically generated?
-> 
-
-We realize that. But I don't know of a way this can be automatically generated. Also, the permissions for
-each section is specific to the use of that section. The developer who introduces a new section is the
-one who will know what the permissions should be.
-
-If any one has any ideas of how we can generate this table automatically or even just add a build time check
-of some sort, please let us know.
-
-Thanks.
-
-Madhavan
-
-> Thanks,
-> Wei.
-> 
->> +struct heki_va_range __initdata heki_va_ranges[] = {
->> +	{
->> +		.va_start = _stext,
->> +		.va_end = _etext,
->> +		.attributes = HEKI_ATTR_MEM_NOWRITE | HEKI_ATTR_MEM_EXEC,
->> +	},
->> +	{
->> +		.va_start = __start_rodata,
->> +		.va_end = __end_rodata,
->> +		.attributes = HEKI_ATTR_MEM_NOWRITE,
->> +	},
->> +#ifdef CONFIG_UNWINDER_ORC
->> +	{
->> +		.va_start = __start_orc_unwind_ip,
->> +		.va_end = __stop_orc_unwind_ip,
->> +		.attributes = HEKI_ATTR_MEM_NOWRITE,
->> +	},
->> +	{
->> +		.va_start = __start_orc_unwind,
->> +		.va_end = __stop_orc_unwind,
->> +		.attributes = HEKI_ATTR_MEM_NOWRITE,
->> +	},
->> +	{
->> +		.va_start = orc_lookup,
->> +		.va_end = orc_lookup_end,
->> +		.attributes = HEKI_ATTR_MEM_NOWRITE,
->> +	},
->> +#endif /* CONFIG_UNWINDER_ORC */
->> +};
->> +
+	Xen has a bunch of these because of how the paravirt code uses
+	inline assembly.
 
