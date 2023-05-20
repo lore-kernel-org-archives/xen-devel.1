@@ -4,46 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8CA0C77B7A
-	for <xen-devel@archiver.kernel.org>; Sat, 20 May 2023 06:02:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.537194.836524 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D09C77B7D
+	for <xen-devel@archiver.kernel.org>; Sat, 20 May 2023 06:21:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.537401.836561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q0Ffa-0002CA-Th; Sat, 20 May 2023 06:02:22 +0000
+	id 1q0Fxm-0006Dn-ER; Sat, 20 May 2023 06:21:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 537194.836524; Sat, 20 May 2023 06:02:22 +0000
+Received: by outflank-mailman (output) from mailman id 537401.836561; Sat, 20 May 2023 06:21:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q0Ffa-0002B1-Na; Sat, 20 May 2023 06:02:22 +0000
-Received: by outflank-mailman (input) for mailman id 537194;
- Fri, 19 May 2023 16:30:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4+OQ=BI=quicinc.com=quic_jhugo@srs-se1.protection.inumbo.net>)
- id 1q030B-0004h7-QP
- for xen-devel@lists.xenproject.org; Fri, 19 May 2023 16:30:47 +0000
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8044404c-f662-11ed-8611-37d641c3527e;
- Fri, 19 May 2023 18:30:44 +0200 (CEST)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34JBfjsB011872; Fri, 19 May 2023 16:29:01 GMT
-Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3qp4ccs7tp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 May 2023 16:29:01 +0000
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA05.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 34JGSxwm014994
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 May 2023 16:28:59 GMT
-Received: from [10.226.59.182] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.42; Fri, 19 May
- 2023 09:28:57 -0700
+	id 1q0Fxm-0006Dg-Bf; Sat, 20 May 2023 06:21:10 +0000
+Received: by outflank-mailman (input) for mailman id 537401;
+ Sat, 20 May 2023 06:21:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=FQK3=BJ=lst.de=hch@srs-se1.protection.inumbo.net>)
+ id 1q0Fxl-0006Da-A0
+ for xen-devel@lists.xenproject.org; Sat, 20 May 2023 06:21:09 +0000
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8154bae3-f6d6-11ed-b22d-6b7b168915f2;
+ Sat, 20 May 2023 08:21:07 +0200 (CEST)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 5472F68CFE; Sat, 20 May 2023 08:21:03 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,175 +40,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8044404c-f662-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=yZ+c8uZcJrlAlno5FxTnPElzATRQ31IF/+qQxmh4X7Y=;
- b=JXYLKwcI2GbfAQOyp3pqNSg6DjU0Y7APV0UkqvAq+7mPhE6jU2niZ2R4O5GEnV8Jv3vY
- GKGhPl9R8u8z9GTQRJNoPGaU+0mzwGn4MRHzlqrkBUJqPBmbmvIdtKopPW+l45x2R2N4
- N53tfhOYno5CyDkZBijlZR00Ad7cvVpDEdEpXoDABtsI85/Pq3Lm9EQeADaOgh7BPKhU
- vCAzv/tTJH7NrLUDiiqElo6FSx31LTwIxiOoWrGKsGUnDbsEy4Z69PrEn6OpGxkbbO+u
- mhtvqcavuyOXh7qnKKh25rs7jG7FJgFRefJwgVrMfeYuSSMcB+UmlbDChCuJ2ha23dwu fw== 
-Message-ID: <16562305-3bc0-c69f-0cb5-1b9da1014f19@quicinc.com>
-Date: Fri, 19 May 2023 10:28:56 -0600
+X-Inumbo-ID: 8154bae3-f6d6-11ed-b22d-6b7b168915f2
+Date: Sat, 20 May 2023 08:21:03 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Christoph Hellwig <hch@lst.de>,
+	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>, Ben Skeggs <bskeggs@redhat.com>,
+	Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+	xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
+	linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH 2/4] x86: always initialize xen-swiotlb when
+ xen-pcifront is enabling
+Message-ID: <20230520062103.GA1225@lst.de>
+References: <20230518134253.909623-1-hch@lst.de> <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl> <20230519040405.GA10818@lst.de> <ZGdLErBzi9MANL3i@mail-itl> <20230519124118.GA5869@lst.de> <8617570c-6dc4-74f5-7418-98f04f7e0ece@citrix.com> <20230519125857.GA6994@lst.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.0
-Subject: Re: [patch V4 36/37] x86/smpboot: Support parallel startup of
- secondary CPUs
-Content-Language: en-US
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>,
-        David Woodhouse <dwmw2@infradead.org>
-CC: <x86@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
-        Brian Gerst
-	<brgerst@gmail.com>,
-        Arjan van de Veen <arjan@linux.intel.com>,
-        Paolo Bonzini
-	<pbonzini@redhat.com>,
-        Paul McKenney <paulmck@kernel.org>,
-        Tom Lendacky
-	<thomas.lendacky@amd.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Oleksandr
- Natalenko <oleksandr@natalenko.name>,
-        Paul Menzel <pmenzel@molgen.mpg.de>,
-        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-        Piotr Gorski
-	<lucjan.lucjanov@gmail.com>,
-        Usama Arif <usama.arif@bytedance.com>,
-        Juergen
- Gross <jgross@suse.com>,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        <xen-devel@lists.xenproject.org>, Russell King <linux@armlinux.org.uk>,
-        Arnd
- Bergmann <arnd@arndb.de>, <linux-arm-kernel@lists.infradead.org>,
-        Catalin
- Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>, Guo Ren
-	<guoren@kernel.org>,
-        <linux-csky@vger.kernel.org>,
-        Thomas Bogendoerfer
-	<tsbogend@alpha.franken.de>,
-        <linux-mips@vger.kernel.org>,
-        "James E.J.
- Bottomley" <James.Bottomley@HansenPartnership.com>,
-        Helge Deller
-	<deller@gmx.de>, <linux-parisc@vger.kernel.org>,
-        Paul Walmsley
-	<paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>, <linux-riscv@lists.infradead.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Sabin
- Rapan <sabrapan@amazon.com>,
-        "Michael Kelley (LINUX)"
-	<mikelley@microsoft.com>,
-        Ross Philipson <ross.philipson@oracle.com>,
-        David
- Woodhouse <dwmw@amazon.co.uk>
-References: <20230512203426.452963764@linutronix.de>
- <20230512205257.411554373@linutronix.de>
-From: Jeffrey Hugo <quic_jhugo@quicinc.com>
-In-Reply-To: <20230512205257.411554373@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: l2X6Bcn3k_Nws-GO_lVKOQ5EQSj3BbaM
-X-Proofpoint-ORIG-GUID: l2X6Bcn3k_Nws-GO_lVKOQ5EQSj3BbaM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-19_11,2023-05-17_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 impostorscore=0 spamscore=0 bulkscore=0
- phishscore=0 mlxlogscore=999 suspectscore=0 malwarescore=0 clxscore=1011
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
- definitions=main-2305190140
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230519125857.GA6994@lst.de>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-On 5/12/2023 3:07 PM, Thomas Gleixner wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
+On Fri, May 19, 2023 at 02:58:57PM +0200, Christoph Hellwig wrote:
+> On Fri, May 19, 2023 at 01:49:46PM +0100, Andrew Cooper wrote:
+> > > The alternative would be to finally merge swiotlb-xen into swiotlb, in
+> > > which case we might be able to do this later.  Let me see what I can
+> > > do there.
+> > 
+> > If that is an option, it would be great to reduce the special-cashing.
 > 
-> In parallel startup mode the APs are kicked alive by the control CPU
-> quickly after each other and run through the early startup code in
-> parallel. The real-mode startup code is already serialized with a
-> bit-spinlock to protect the real-mode stack.
-> 
-> In parallel startup mode the smpboot_control variable obviously cannot
-> contain the Linux CPU number so the APs have to determine their Linux CPU
-> number on their own. This is required to find the CPUs per CPU offset in
-> order to find the idle task stack and other per CPU data.
-> 
-> To achieve this, export the cpuid_to_apicid[] array so that each AP can
-> find its own CPU number by searching therein based on its APIC ID.
-> 
-> Introduce a flag in the top bits of smpboot_control which indicates that
-> the AP should find its CPU number by reading the APIC ID from the APIC.
-> 
-> This is required because CPUID based APIC ID retrieval can only provide the
-> initial APIC ID, which might have been overruled by the firmware. Some AMD
-> APUs come up with APIC ID = initial APIC ID + 0x10, so the APIC ID to CPU
-> number lookup would fail miserably if based on CPUID. Also virtualization
-> can make its own APIC ID assignements. The only requirement is that the
-> APIC IDs are consistent with the APCI/MADT table.
-> 
-> For the boot CPU or in case parallel bringup is disabled the control bits
-> are empty and the CPU number is directly available in bit 0-23 of
-> smpboot_control.
-> 
-> [ tglx: Initial proof of concept patch with bitlock and APIC ID lookup ]
-> [ dwmw2: Rework and testing, commit message, CPUID 0x1 and CPU0 support ]
-> [ seanc: Fix stray override of initial_gs in common_cpu_up() ]
-> [ Oleksandr Natalenko: reported suspend/resume issue fixed in
->    x86_acpi_suspend_lowlevel ]
-> [ tglx: Make it read the APIC ID from the APIC instead of using CPUID,
->    	split the bitlock part out ]
-> 
-> Co-developed-by: Thomas Gleixner <tglx@linutronix.de>
-> Co-developed-by: Brian Gerst <brgerst@gmail.com>
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Signed-off-by: Brian Gerst <brgerst@gmail.com>
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Tested-by: Michael Kelley <mikelley@microsoft.com>
-> ---
+> I think it's doable, and I've been wanting it for a while.  I just
+> need motivated testers, but it seems like I just found at least two :)
 
-I pulled in this change via the next tree, tag next-20230519 and I get a 
-build failure using the x86_64_defconfig -
+So looking at swiotlb-xen it does these off things where it takes a value
+generated originally be xen_phys_to_dma, then only does a dma_to_phys
+to go back and call pfn_valid on the result.  Does this make sense, or
+is it wrong and just works by accident?  I.e. is the patch below correct?
 
-   DESCEND objtool
-   INSTALL libsubcmd_headers
-   CALL    scripts/checksyscalls.sh
-   AS      arch/x86/kernel/head_64.o
-arch/x86/kernel/head_64.S: Assembler messages:
-arch/x86/kernel/head_64.S:261: Error: missing ')'
-arch/x86/kernel/head_64.S:261: Error: junk `UL<<10)' after expression
-   CC      arch/x86/kernel/head64.o
-   CC      arch/x86/kernel/ebda.o
-   CC      arch/x86/kernel/platform-quirks.o
-scripts/Makefile.build:374: recipe for target 
-'arch/x86/kernel/head_64.o' failed
-make[3]: *** [arch/x86/kernel/head_64.o] Error 1
-make[3]: *** Waiting for unfinished jobs....
-scripts/Makefile.build:494: recipe for target 'arch/x86/kernel' failed
-make[2]: *** [arch/x86/kernel] Error 2
-scripts/Makefile.build:494: recipe for target 'arch/x86' failed
-make[1]: *** [arch/x86] Error 2
-make[1]: *** Waiting for unfinished jobs....
-Makefile:2026: recipe for target '.' failed
-make: *** [.] Error 2
 
-This is with GCC 5.4.0, if it matters.
-
-Reverting this change allows the build to move forward, although I also 
-need to revert "x86/smpboot/64: Implement 
-arch_cpuhp_init_parallel_bringup() and enable it" for the build to fully 
-succeed.
-
-I'm not familiar with this code, and nothing obvious stands out to me. 
-What can I do to help root cause this?
-
--Jeff
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index 67aa74d201627d..3396c5766f0dd8 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -90,9 +90,7 @@ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
+ 
+ static int is_xen_swiotlb_buffer(struct device *dev, dma_addr_t dma_addr)
+ {
+-	unsigned long bfn = XEN_PFN_DOWN(dma_to_phys(dev, dma_addr));
+-	unsigned long xen_pfn = bfn_to_local_pfn(bfn);
+-	phys_addr_t paddr = (phys_addr_t)xen_pfn << XEN_PAGE_SHIFT;
++	phys_addr_t paddr = xen_dma_to_phys(dev, dma_addr);
+ 
+ 	/* If the address is outside our domain, it CAN
+ 	 * have the same virtual address as another address
+@@ -234,7 +232,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
+ 
+ done:
+ 	if (!dev_is_dma_coherent(dev) && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
+-		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dev_addr))))
++		if (pfn_valid(PFN_DOWN(phys)))
+ 			arch_sync_dma_for_device(phys, size, dir);
+ 		else
+ 			xen_dma_sync_for_device(dev, dev_addr, size, dir);
+@@ -258,7 +256,7 @@ static void xen_swiotlb_unmap_page(struct device *hwdev, dma_addr_t dev_addr,
+ 	BUG_ON(dir == DMA_NONE);
+ 
+ 	if (!dev_is_dma_coherent(hwdev) && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
+-		if (pfn_valid(PFN_DOWN(dma_to_phys(hwdev, dev_addr))))
++		if (pfn_valid(PFN_DOWN(paddr)))
+ 			arch_sync_dma_for_cpu(paddr, size, dir);
+ 		else
+ 			xen_dma_sync_for_cpu(hwdev, dev_addr, size, dir);
+@@ -276,7 +274,7 @@ xen_swiotlb_sync_single_for_cpu(struct device *dev, dma_addr_t dma_addr,
+ 	phys_addr_t paddr = xen_dma_to_phys(dev, dma_addr);
+ 
+ 	if (!dev_is_dma_coherent(dev)) {
+-		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dma_addr))))
++		if (pfn_valid(PFN_DOWN(paddr)))
+ 			arch_sync_dma_for_cpu(paddr, size, dir);
+ 		else
+ 			xen_dma_sync_for_cpu(dev, dma_addr, size, dir);
+@@ -296,7 +294,7 @@ xen_swiotlb_sync_single_for_device(struct device *dev, dma_addr_t dma_addr,
+ 		swiotlb_sync_single_for_device(dev, paddr, size, dir);
+ 
+ 	if (!dev_is_dma_coherent(dev)) {
+-		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dma_addr))))
++		if (pfn_valid(PFN_DOWN(paddr)))
+ 			arch_sync_dma_for_device(paddr, size, dir);
+ 		else
+ 			xen_dma_sync_for_device(dev, dma_addr, size, dir);
 
