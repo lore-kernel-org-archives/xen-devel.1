@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17DA4C7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F82C77B75
 	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:47:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538600.838706 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538615.838725 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VAc-0006d5-RJ; Tue, 23 May 2023 16:47:34 +0000
+	id 1q1VAf-00078p-8P; Tue, 23 May 2023 16:47:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538600.838706; Tue, 23 May 2023 16:47:34 +0000
+Received: by outflank-mailman (output) from mailman id 538615.838725; Tue, 23 May 2023 16:47:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VAc-0006cy-LI; Tue, 23 May 2023 16:47:34 +0000
-Received: by outflank-mailman (input) for mailman id 538600;
- Tue, 23 May 2023 16:47:33 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q1VAf-00078g-5W; Tue, 23 May 2023 16:47:37 +0000
+Received: by outflank-mailman (input) for mailman id 538615;
+ Tue, 23 May 2023 16:47:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UuGZ=BM=citrix.com=prvs=5000a0748=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1q1V2L-0006Dq-Jd
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:39:01 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 50b7961c-f988-11ed-b22d-6b7b168915f2;
- Tue, 23 May 2023 18:38:59 +0200 (CEST)
+ id 1q1V2Y-0006Dr-O2
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:39:14 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 58185c51-f988-11ed-8611-37d641c3527e;
+ Tue, 23 May 2023 18:39:12 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,56 +38,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50b7961c-f988-11ed-b22d-6b7b168915f2
+X-Inumbo-ID: 58185c51-f988-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684859939;
+  d=citrix.com; s=securemail; t=1684859952;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=FFiqj1ESYfIyZ3l/pGkAtoeGdSC6hrZ1HgE4QjQoKLM=;
-  b=hMONPKQOWRfooN7SyTyrio+zS/vcRROvZLp181GlE5D33I+65KK2C7ej
-   +KemFwvr0142Q2QZ04hlW+oHHrWW4ztf/4NdUzjgCo2cnEJHvjHQQSMIp
-   qohS/yv96aFPorMNXf9MrGYx1akmPWjPBixvY2n/1hPRrQraovA3lFhQd
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=M4sHTi4LXEAqx1EAv6HnupNoWKrhWbjNFEYPRFSBd30=;
+  b=FXqQmfhChlxuws1lESkt8GOLKq5qPnLTRoXombK+s/Fbth5Q4gQVeEMh
+   QrMXI+dz7XHobgG4QX3YHRdR2CTLXlKrtF7/KbGleNLtbofhdiC7S+fP5
+   T+RQrui7D0yafb/mZTaqta+w0qEKKe1W29oTBaB3olWFrfOblWc8tKi9f
+   A=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 112568352
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 109422966
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:4tWeS6heu9iS9JxuHAdsVXmFX161UxAKZh0ujC45NGQN5FlHY01je
- htvXjuAb/aPa2X9eo1xOY2090gO6JPcmtNkHFQ6q39gFC8b9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
- cKai8DEMRqu1iUc3lg8sspvkzsx+qyq0N8klgZmP6sT4QWFzyN94K83fsldEVOpGuG4IcbiL
- wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
- OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
- tQGEBQ/Szuqp9if/+q4SfRwuPUGNJnSadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
- pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XejtEqFWTtOwv7nLa1gBZ27nxKtvFPNeNQK25m27B/
- ziboTSiX0ty2Nq322uez2qhmez0pAjUQoM8GoKkpsNxjwjGroAUIEJPDgbqyRWjsWa8RtZeJ
- ko86ico668o+ySDTNPwQhm5q36spQMHVpxbFOhSwB6J4rrZ5UCeHGdsZiVadNUsucsyRDor/
- lyEhdXkAXpoqrL9YWKQ8PKYoC2/PQARLHQefmkUQA0d+d7hrYovyBXVQb5e/LWd14OvX2uqm
- nbT8XZ43u9I5SIW60ml1U7/pwCJjbHpdCcKvgbUQ36b3yZhNLfwMuRE9mPnxfpHKY+YSHyIs
- 34Fh9WS4YgyMH2dqMCeaL5TRe/0vp5pJBWZ2AcyRMd5q1xB7lb5JehtDCdCyFCF2yruURvge
- wfttAxY//e/11P6PPYsM+pd5ynHpJUM9OgJtNiONrKigbArLmdrGR2CgmbOt10BaGB2zckC1
- W6zKK5A90oyB6V91yaRTOwAy7ItzS1W7TqNFcykn0z7iuvHPCL9pVI53LymN7pR0U95iF+Nr
- 4Y32zWikH2zr9ESkgGIqNVOfDjm3FAwBIzsqtw/S9Nv1jFOQTl7Y9eImONJRmCQt/gN/gs+1
- i3nCxAwJZuWrSGvFDhmnVg4MOm+Askn/SNnVcHuVH7xs0UejU+UxP93X/MKkXMProSPEdYco
- yE5Rvi9
-IronPort-HdrOrdr: A9a23:IP5oP6h9NcmKU0Mfu0DocS4MvXBQXrkji2hC6mlwRA09TyX4ra
- CTdZEgviMc5wx9ZJhNo7q90cq7IE80i6Qb3WB5B97LYOCMggeVxe9Zg7ff/w==
-X-Talos-CUID: 9a23:8Gg8sWwFN2FrOH2iILjFBgUKIuQXV1b07E35HBe7Cnt1doywUQ+prfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3AYUm1dgz3etzLgAZcjWMAOCwuFAyaqLb/E30VnIo?=
- =?us-ascii?q?FgPCvGjZxFTmikGSKWYByfw=3D=3D?=
+IronPort-Data: A9a23:0b29w6zc/W3WM3pV9YB6t+ffxirEfRIJ4+MujC+fZmUNrF6WrkVWn
+ GcWXGrSOPyDYmKketp2bYmwo04HuZHUx4QwGQtq+CAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTrafYEidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw/zF8EsHUMja4mtC5QRjP6sT5jcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KXwUr
+ O03Miw9VBK8rNq847ehdOdeu9t2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+hgGX/dDtJ7kqYv6Mt70DYzRBr0airO93QEjCPbZwNzxrC/
+ DOYoQwVBDk0d9q8kySizU6TudfTpjn4U6wKTqeRo6sCbFq7mTVIVUx+uUGAiea9ol6zXZRYM
+ UN80jE1saE4+UivT9/8dx61uniJulgbQdU4O+c38h2Xw6zYpQOQHHEZTyVpYcYj8sQxQFQC6
+ FiNmN/4AC11h5ecQ3md67S8oCu7PG4eKmpqTS0ZSQoI5fHzrYd1iQjAJv5zHajwgtDrFDXYx
+ zGRsDN4l7gVldQM1aiw4RbAmT3EjprDQxMx5w7Xdnm49Q4/b4mgD7FE8nCCs6wGdtzACADc4
+ j5dwZP2AP0y4Y+liXbUUcoXAIGT5cmuCDf/hERREasc6GH4k5K8Rrx47DZ7LUZvF88Lfz71f
+ UPe0T9sCI9v0GiCNvEuPd/oYyg+5e25TIm+CKiIBjZbSsIpHDJr6h2CcqJ5M4rFtEE32Z8yN
+ p6AGSpHJSZLUP83pNZaqgp07FPK+szc7TmLLXwY5079uVZ7WJJyYeltDbd2RrplhJ5oWS2Mm
+ zqlC+OEyg9ETMr1aTTN/IgYIDgidCZrWc+m85AMJ7fbfmKK/V3N7NeIm9scl3FNxfwJxo8kA
+ FnmMqOn9LYPrSKecljbApySQLjuQYx+vRoGAMDYBn7xgyJLSd/2vM8im24fIeFPGBpLkaQlE
+ JHouqyoXpxyd9gw029FN8ii89QyJUjDaMDnF3PNXQXTtqVIH2ThkuIItCO2rUHi0gLfWRMCn
+ oCd
+IronPort-HdrOrdr: A9a23:xSa81KwvOvR54IamfYmiKrPwT71zdoMgy1knxilNoH1uEvBw8v
+ rEoB1173LJYVoqMk3I+urgBED/exzhHPdOiOEs1NyZMDUO1lHHEL1f
+X-Talos-CUID: 9a23:+LDj4WwHUmK7At+y8MC1BgUJQJk0XWfB/E3SHGSAA0VsUoObe2KPrfY=
+X-Talos-MUID: 9a23:bP208AmVrVf/tWaddmyDdnpMd8FLubqJN3wyrq0agNOHPgJoYS202WE=
 X-IronPort-AV: E=Sophos;i="6.00,186,1681185600"; 
-   d="scan'208";a="112568352"
+   d="scan'208";a="109422966"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
  Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 15/15] build: remove Config.mk include from Rules.mk
-Date: Tue, 23 May 2023 17:38:11 +0100
-Message-ID: <20230523163811.30792-16-anthony.perard@citrix.com>
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH 12/15] build: avoid Config.mk's CFLAGS
+Date: Tue, 23 May 2023 17:38:08 +0100
+Message-ID: <20230523163811.30792-13-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230523163811.30792-1-anthony.perard@citrix.com>
 References: <20230523163811.30792-1-anthony.perard@citrix.com>
@@ -95,85 +97,82 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Everything needed to build the hypervisor should already be configured
-by "xen/Makefile", thus Config.mk shouldn't be needed.
+The variable $(CFLAGS) is too often set in the environment,
+especially when building a package for a distribution. Often, those
+CFLAGS are intended to be use to build user spaces binaries, not a
+kernel. This mean packager needs to takes extra steps to build Xen by
+overriding the CFLAGS provided by the package build environment.
 
-Then, Config.mk keeps on testing support of some CFLAGS with CC, the
-result of this testing is not used at this stage so the build is
-slowed unnecessarily.
+With this patch, we avoid using the variable $(CFLAGS). Also, the
+hypervisor's build system have complete control over which CFLAGS are
+used.
 
-Likewise, GCC is checked to be at the minimum at 4.2 when entering
-every sub-directory, so the check have run countless time at this
-stage.
-
-We only need to export a few more configuration variables. And add
-some variables in Kbuild.include, and macro fallbacks for Make older
-than 3.81. (Adding `or` just in case. it's only used in xen/Makefile,
-which includes Config.mk and so has already the fallback.)
+No change intended to XEN_CFLAGS used, beside some flags which may be
+in a different order on the command line.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
 
 Notes:
-    Removing Config.mk benefit:
-        Rebuild on my computer is aboud 1 second faster overall.
-        Save maybe 3 seconds of user time
-        system less loaded
+    There's still $(EXTRA_CFLAGS_XEN_CORE) which allows to add more CFLAGS
+    if someone building Xen needs to add more CFLAGS to the hypervisor
+    build.
 
- xen/Makefile               | 4 ++++
- xen/Rules.mk               | 1 -
- xen/scripts/Kbuild.include | 7 +++++++
- 3 files changed, 11 insertions(+), 1 deletion(-)
+ xen/Makefile         | 11 ++++++++++-
+ xen/arch/arm/arch.mk |  4 ++++
+ xen/arch/x86/arch.mk |  2 ++
+ 3 files changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/xen/Makefile b/xen/Makefile
-index 4dc3acf2a6..9af7223c66 100644
+index b3bffe8c6f..4dc3acf2a6 100644
 --- a/xen/Makefile
 +++ b/xen/Makefile
-@@ -246,10 +246,14 @@ export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
-                             sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-                                 -e s'/riscv.*/riscv/g')
+@@ -259,7 +259,16 @@ export KBUILD_DEFCONFIG := $(ARCH)_defconfig
+ export XEN_TREEWIDE_CFLAGS := $(CFLAGS)
  
-+export XEN_COMPILE_ARCH XEN_TARGET_ARCH
- export CONFIG_SHELL := $(SHELL)
- export CC CXX LD NM OBJCOPY OBJDUMP ADDR2LINE
-+export CPP AR
- export YACC = $(if $(BISON),$(BISON),bison)
- export LEX = $(if $(FLEX),$(FLEX),flex)
-+export HOSTCC HOSTCXX HOSTCFLAGS
-+export EMBEDDED_EXTRA_CFLAGS LDFLAGS_DIRECT
+ XEN_AFLAGS =
+-XEN_CFLAGS = $(CFLAGS)
++XEN_CFLAGS =
++ifeq ($(XEN_OS),SunOS)
++    XEN_CFLAGS +=  -Wa,--divide -D_POSIX_C_SOURCE=200112L -D__EXTENSIONS__
++endif
++XEN_CFLAGS += -fno-strict-aliasing
++XEN_CFLAGS += -std=gnu99
++XEN_CFLAGS += -Wall -Wstrict-prototypes
++$(call cc-option-add,XEN_CFLAGS,CC,-Wdeclaration-after-statement)
++$(call cc-option-add,XEN_CFLAGS,CC,-Wno-unused-but-set-variable)
++$(call cc-option-add,XEN_CFLAGS,CC,-Wno-unused-local-typedefs)
  
- # Default file for 'make defconfig'.
- export KBUILD_DEFCONFIG := $(ARCH)_defconfig
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 8177d405c3..8291e0a573 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -17,7 +17,6 @@ __build:
+ # CLANG_FLAGS needs to be calculated before calling Kconfig
+ ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
+diff --git a/xen/arch/arm/arch.mk b/xen/arch/arm/arch.mk
+index 300b8bf7ae..0478fadde2 100644
+--- a/xen/arch/arm/arch.mk
++++ b/xen/arch/arm/arch.mk
+@@ -1,6 +1,10 @@
+ ########################################
+ # arm-specific definitions
  
- -include $(objtree)/include/config/auto.conf
- 
--include $(XEN_ROOT)/Config.mk
- include $(srctree)/scripts/Kbuild.include
- include $(XEN_ROOT)/config/compiler-testing.mk
- 
-diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index d820595e2f..dfa66f2c8a 100644
---- a/xen/scripts/Kbuild.include
-+++ b/xen/scripts/Kbuild.include
-@@ -8,6 +8,13 @@ empty   :=
- space   := $(empty) $(empty)
- space_escape := _-_SPACE_-_
- pound   := \#
-+comma   := ,
-+open    := (
-+close   := )
++ifeq ($(XEN_TARGET_ARCH),arm32)
++    XEN_CFLAGS += -marm
++endif
 +
-+# fallbacks for GNU Make older than 3.81
-+realpath = $(wildcard $(foreach file,$(1),$(shell cd -P $(dir $(file)) && echo "$$PWD/$(notdir $(file))")))
-+or       = $(if $(strip $(1)),$(1),$(if $(strip $(2)),$(2),$(if $(strip $(3)),$(3),$(if $(strip $(4)),$(4)))))
+ $(call cc-options-add,XEN_CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ $(call cc-option-add,XEN_CFLAGS,CC,-Wnested-externs)
  
- ###
- # Name of target with a '.' as filename prefix. foo/bar.o => foo/.bar.o
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index 5df3cf6bc3..fc3b1dc922 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -1,6 +1,8 @@
+ ########################################
+ # x86-specific definitions
+ 
++XEN_CFLAGS += -m64
++
+ export XEN_IMG_OFFSET := 0x200000
+ 
+ XEN_CFLAGS += -I$(srctree)/arch/x86/include/asm/mach-generic
 -- 
 Anthony PERARD
 
