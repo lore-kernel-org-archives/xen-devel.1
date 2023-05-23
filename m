@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF76CC77B75
-	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:38:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538552.838570 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98AC1C7EE30
+	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:38:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.538555.838604 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1V1q-0006Gb-9d; Tue, 23 May 2023 16:38:30 +0000
+	id 1q1V1y-0007Jz-2A; Tue, 23 May 2023 16:38:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538552.838570; Tue, 23 May 2023 16:38:30 +0000
+Received: by outflank-mailman (output) from mailman id 538555.838604; Tue, 23 May 2023 16:38:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1V1q-0006Fz-4e; Tue, 23 May 2023 16:38:30 +0000
-Received: by outflank-mailman (input) for mailman id 538552;
- Tue, 23 May 2023 16:38:28 +0000
+	id 1q1V1x-0007Jo-Vj; Tue, 23 May 2023 16:38:37 +0000
+Received: by outflank-mailman (input) for mailman id 538555;
+ Tue, 23 May 2023 16:38:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UuGZ=BM=citrix.com=prvs=5000a0748=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1q1V1o-0006Dr-2J
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:38:28 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c14679e-f988-11ed-8611-37d641c3527e;
- Tue, 23 May 2023 18:38:25 +0200 (CEST)
+ id 1q1V1w-0006Dr-3m
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:38:36 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 415f2f5f-f988-11ed-8611-37d641c3527e;
+ Tue, 23 May 2023 18:38:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,56 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c14679e-f988-11ed-8611-37d641c3527e
+X-Inumbo-ID: 415f2f5f-f988-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684859905;
+  d=citrix.com; s=securemail; t=1684859914;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ufpNHiN8OYSwXkEse8X/FKw/mqXv9HClfgFsxNyVIRY=;
-  b=equVlQO6SOBlBialkLEL+65Z23Fhq6nlIMoGvfhVkOCK5kQBu4j1iAF/
-   NPUi12Ath/hbK/1vZMUhz5x47SthJavkLBoq771rzwZFD7t1r9LBTBEaZ
-   mhy67+j2H+4oBwGQznj20EsTaMedoEfEt9ikNVuPZ2sKnxHMXPwsgLvWg
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=IEGR3JC5y7uEKhXS+Y9a7VtCNob5XWmUbPOoOUvPi10=;
+  b=cDkzbdqIILspKHeRoP+W1aLY9tz8Pt3L99A2u5Lx2rOsepGySQEUneJk
+   G1c9gnb+mIYXGzxpg0lGW3M5ACERAWmYWBIktrhCmyKI9fEv95a3viToL
+   CfOVdgsTtVX/QSi5BLtBTadJDwfsaMtkGR4m7TdQKh7UQFWQLwjwcqLbj
+   I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 110501175
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 112568309
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:tcMeqanrWvY+NtgZ0nDXRGTo5gy7JkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIYCGjXMv2MZTHxLdtwOYu//UNSuMSHz9QyTwNr+y4wQiMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE0p5KyaVA8w5ARkPqgW5gSGzRH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- dMVJzcDPg+Dvs2ZxpeXW8Y1oNQ4Eca+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglH2dSFYr1SE47I6+WHJwCR60aT3McqTcduPLSlQth/B/
- j+epj2mX3n2MvS5xj2HyC6Bq9bRgCHKdJ0TH+O7tft11Qj7Kms7V0RNCArTTeOCol6zXZdTJ
- lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4Eec39QWMwar8+BuCCy4PSTspQN47sM47QxQ62
- 1nPmMnmbRR0q6GcQ3+Z8raSrBuxNDITIGtEYjULJSMa5/HzrYd1iQjAJuuPC4bs0IezQ2uph
- WnX8m5n3e57YdM3O7uT0l3IhDz8uZjwYSEzwynGcTuD/hhEa9vwD2C30mTz4fFFJYefa1COu
- nkYhsSThNwz4YGxeD+lG7tUQuzwjxqRGHiF2AM0QcF9n9i40yT7Fb289g2SM6uA3iwsXTbyK
- HHetgpKjHO4FCv7NPQnC25d5ilD8EQBKTgHfqqMBjatSsIrHONiwM2JTRD44owVuBJw+ZzTw
- 6uzf8e2Fmo9Aq961jewTOp1+eZ1lnxhlTuPHsGil0jPPV+iiJm9EO1tDbdzRrphsPPsTPv9q
- L6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOK0aX/d/L7bZSiI/QTFJNhMk6e95E6R/gb9vn/vFl
- lnkHBcwJKzX2SeWdm1nqxlLNNvSYHqIhSljZ31zYg74iiRLjETGxP53SqbbtIIPrIRLpcOYh
- dFcEylcKpyjkgj6xgk=
-IronPort-HdrOrdr: A9a23:QBWQ86BMY0QaU/nlHenP55DYdb4zR+YMi2TDtnoQdfUxSKelfq
- +V8cjzuSWftN9zYhAdcK67V5VoKEm0naKdirN8AV7NZmfbhFc=
-X-Talos-CUID: 9a23:ii66Rm2k+/7t96EQWhLX37xfNc0qdXON03fpDGC+LEp4Z+SzWUSt9/Yx
-X-Talos-MUID: =?us-ascii?q?9a23=3A2WhmcQ/33Dqs4r4wFMr/YOeQf+Fn5KaUVG0gqIs?=
- =?us-ascii?q?bufioKi17ZTTeiSviFw=3D=3D?=
+IronPort-Data: A9a23:GKpitKNvQsKLJbnvrR2tl8FynXyQoLVcMsEvi/4bfWQNrUomhDZTy
+ jYXXGyAPfqNZjH3L953bd/j8RhS6pfcy9c1TQto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGjxSs/rrRC9H5qyo42tF5AdmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0uBQGlgV6
+ N4REhZTcTuGi/Ky8buJYPY506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
+ ZNEN3w2Nk+ojx5nYz/7DLo3mvuogX/uNSVVsluPqYI84nTJzRw327/oWDbQUoXTH5gLzh3A9
+ woq+UynEwgTN9ux4gG5rHaGp8KMkyShdYQdQejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxassgYHXttME8Uz8AyX1rfP+AGdG3QFSThaLtchsacLqScCj
+ wHT2YmzXHo27ePTECjGnluJkd+sES4yNlZZeA0Ndy1b/PLmrJE3vxv9ZMk2RcZZkebJMT33x
+ jmLqg03iLMSkdMH2s2HwLzXv96/jsOXF1Bov207Skrgt1okP9D9O+RE/HCBtZ59wJClok5tV
+ ZTus+yX96gwAJ6Ej0Rhq81dTejyt55p3NAx6GOD/qXNFRz3oxZPnqgKulmSwXuF1e5aEQIFm
+ GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQMsQuJFfbp3A3PRL4M4XRfK8EyPtXB
+ HtmWZz0USZy5VpPl1JauNvxIZd0n3tjlAs/tLjwzgi90Kr2WUN5vYwtaQPUBshgtfPsnekg2
+ 4oHXyd840kFAbKWj+i+2dJ7EG3m2lBgXcqn9JMPJr/fSuekcUl4Y8LsLXoaU9QNt8xoei3gp
+ RlRhmcwJILDuED6
+IronPort-HdrOrdr: A9a23:ZH80mahGIJG3ZyMc8MxBHr1FMnBQXrkji2hC6mlwRA09TyX4ra
+ CTdZEgviMc5wx9ZJhNo7q90cq7IE80i6Qb3WB5B97LYOCMggeVxe9Zg7ff/w==
+X-Talos-CUID: 9a23:BCGbFG/R8fdHfma3dIaVv0gzAfl+b1/U9lGOPGS9BXZtebSnY0DFrQ==
+X-Talos-MUID: 9a23:U3QjYwnkB/TNRTWZubgZdno8Jd5h4KOAI3sxz5EsmuTHOysqFjGS2WE=
 X-IronPort-AV: E=Sophos;i="6.00,186,1681185600"; 
-   d="scan'208";a="110501175"
+   d="scan'208";a="112568309"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 02/15] build: rework asm-offsets.* build step to use kbuild
-Date: Tue, 23 May 2023 17:37:58 +0100
-Message-ID: <20230523163811.30792-3-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [XEN PATCH 04/15] build: hide policy.bin commands
+Date: Tue, 23 May 2023 17:38:00 +0100
+Message-ID: <20230523163811.30792-5-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230523163811.30792-1-anthony.perard@citrix.com>
 References: <20230523163811.30792-1-anthony.perard@citrix.com>
@@ -95,79 +91,38 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Use $(if_changed_dep, ) macro to generate "asm-offsets.s" and remove
-the use of $(move-if-changes,). That mean that "asm-offset.s" will be
-changed even when the output doesn't change.
+Instead, show only when "policy.bin" is been updated.
 
-But "asm-offsets.s" is only used to generated "asm-offsets.h". So
-instead of regenerating "asm-offsets.h" every time "asm-offsets.s"
-change, we will use "$(filechk, )" to only update the ".h" when the
-output change. Also, with "$(filechk, )", the file does get
-regenerated when the rule change in the makefile.
-
-This changes also result in a cleaner build log.
+We still have the full command from the flask/policy Makefile, but we
+can't change that Makefile.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ xen/xsm/flask/Makefile | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-Instead of having a special $(cmd_asm-offsets.s) command, we could
-probably reuse $(cmd_cc_s_c) from Rules.mk, but that would mean that
-an hypothetical additional flags "-flto" in CFLAGS would not be
-removed anymore, not sure if that matter here.
-
-But then we could write this:
-
-targets += arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.s
-arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.s: CFLAGS-y += -g0
-arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.s FORCE
-
-instead of having to write a rule for asm-offsets.s
----
- xen/build.mk | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
-
-diff --git a/xen/build.mk b/xen/build.mk
-index 758590c68e..e2a78aa806 100644
---- a/xen/build.mk
-+++ b/xen/build.mk
-@@ -40,13 +40,15 @@ include/xen/compile.h: include/xen/compile.h.in .banner FORCE
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index 3fdcf7727e..fc44ad684f 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -48,10 +48,15 @@ targets += flask-policy.S
+ FLASK_BUILD_DIR := $(abs_objtree)/$(obj)
+ POLICY_SRC := $(FLASK_BUILD_DIR)/xenpolicy-$(XEN_FULLVERSION)
  
- targets += include/xen/compile.h
++policy_chk = \
++    $(Q)if ! cmp -s $(POLICY_SRC) $@; then \
++        $(kecho) '  UPD     $@'; \
++        cp $(POLICY_SRC) $@; \
++    fi
+ $(obj)/policy.bin: FORCE
+-	$(MAKE) -f $(XEN_ROOT)/tools/flask/policy/Makefile.common \
++	$(Q)$(MAKE) -f $(XEN_ROOT)/tools/flask/policy/Makefile.common \
+ 	        -C $(XEN_ROOT)/tools/flask/policy \
+ 	        FLASK_BUILD_DIR=$(FLASK_BUILD_DIR) POLICY_FILENAME=$(POLICY_SRC)
+-	cmp -s $(POLICY_SRC) $@ || cp $(POLICY_SRC) $@
++	$(call policy_chk)
  
---include $(wildcard .asm-offsets.s.d)
--asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
--	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
--	$(call move-if-changed,$@.new,$@)
-+quiet_cmd_asm-offsets.s = CC      $@
-+cmd_asm-offsets.s = $(CC) $(call cpp_flags,$(c_flags)) -S -g0 $< -o $@
- 
--arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s
--	@(set -e; \
-+asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c FORCE
-+	$(call if_changed_dep,asm-offsets.s)
-+
-+targets += asm-offsets.s
-+
-+define filechk_asm-offsets.h
- 	  echo "/*"; \
- 	  echo " * DO NOT MODIFY."; \
- 	  echo " *"; \
-@@ -57,9 +59,13 @@ arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	  echo "#ifndef __ASM_OFFSETS_H__"; \
- 	  echo "#define __ASM_OFFSETS_H__"; \
- 	  echo ""; \
--	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
-+	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}" $<; \
- 	  echo ""; \
--	  echo "#endif") <$< >$@
-+	  echo "#endif"
-+endef
-+
-+arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s FORCE
-+	$(call filechk,asm-offsets.h)
- 
- build-dirs := $(patsubst %/built_in.o,%,$(filter %/built_in.o,$(ALL_OBJS) $(ALL_LIBS)))
- 
+ clean-files := policy.* $(POLICY_SRC)
 -- 
 Anthony PERARD
 
