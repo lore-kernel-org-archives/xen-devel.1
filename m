@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D271C77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80275C7EE30
 	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 17:13:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538632.838745 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538634.838761 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZR-0003Je-J9; Tue, 23 May 2023 17:13:13 +0000
+	id 1q1VZU-0003c4-54; Tue, 23 May 2023 17:13:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538632.838745; Tue, 23 May 2023 17:13:13 +0000
+Received: by outflank-mailman (output) from mailman id 538634.838761; Tue, 23 May 2023 17:13:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZR-0003JX-GR; Tue, 23 May 2023 17:13:13 +0000
-Received: by outflank-mailman (input) for mailman id 538632;
- Tue, 23 May 2023 17:13:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q1VZT-0003bQ-Up; Tue, 23 May 2023 17:13:15 +0000
+Received: by outflank-mailman (input) for mailman id 538634;
+ Tue, 23 May 2023 17:13:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YZ9c=BM=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q1VZQ-0003JO-Qr
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:12 +0000
+ id 1q1VZS-0003Rc-SC
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:14 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 16eaa886-f98d-11ed-8611-37d641c3527e;
- Tue, 23 May 2023 19:13:09 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 18f315e8-f98d-11ed-b22d-6b7b168915f2;
+ Tue, 23 May 2023 19:13:13 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-605-6zDAZPuTMHuYV4TW0N4iPQ-1; Tue, 23 May 2023 13:13:03 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
+ us-mta-390-U7wtUpM-PKeB1Q5oAQl4JQ-1; Tue, 23 May 2023 13:13:08 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5DCDC1C08780;
- Tue, 23 May 2023 17:13:02 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E180B811E86;
+ Tue, 23 May 2023 17:13:07 +0000 (UTC)
 Received: from localhost (unknown [10.39.195.107])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9437F1121314;
- Tue, 23 May 2023 17:13:01 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 452C940C6CD9;
+ Tue, 23 May 2023 17:13:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16eaa886-f98d-11ed-8611-37d641c3527e
+X-Inumbo-ID: 18f315e8-f98d-11ed-b22d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1684861988;
+	s=mimecast20190719; t=1684861992;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=3MBKX2AXrRRW1fC3P4hqaX0bBaxtga1xMfpCUvm9y3Y=;
-	b=AiE7Evsj1IxfRCsO+umt7TYkxqVD4AyvDAC3G62aNGPyxLPp8TjQdT2YrMOZLlN5pnjwQR
-	Df7Fmx4qji7Obv0PIfTCvNNA7ZiDJfV6KeIH/aHgtHpF7csOLCTaxNSnFJL20Z4U0hHya3
-	9wjUmLu0abiPieNvYHCFTJxVGeb+lbs=
-X-MC-Unique: 6zDAZPuTMHuYV4TW0N4iPQ-1
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=gl1BF0SyL3LhZIAAGPQ17yn9AeFfqz/sAdquKqfMac8=;
+	b=PjoZO4BN9usTpYk74+1eR9sCmkitsUf+Y5w0UyhDWzumVxhBT6jawoFyp+UncUF94d9HNL
+	6JIUgglfndKReyYmETCEayNeK+L1WhZaE3QDJR72fItTyVMs9Yj76e4JBErhw2sWlRrFyl
+	nCfa9YlWV0HAuDQAJfaksWZwqRFAcHc=
+X-MC-Unique: U7wtUpM-PKeB1Q5oAQl4JQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
@@ -81,92 +82,146 @@ Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
 	eblake@redhat.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	qemu-block@nongnu.org
-Subject: [PATCH v2 0/6] block: add blk_io_plug_call() API
-Date: Tue, 23 May 2023 13:12:54 -0400
-Message-Id: <20230523171300.132347-1-stefanha@redhat.com>
-Content-Type: text/plain; charset="utf-8"
+Subject: [PATCH v2 2/6] block/nvme: convert to blk_io_plug_call() API
+Date: Tue, 23 May 2023 13:12:56 -0400
+Message-Id: <20230523171300.132347-3-stefanha@redhat.com>
+In-Reply-To: <20230523171300.132347-1-stefanha@redhat.com>
+References: <20230523171300.132347-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
 
+Stop using the .bdrv_co_io_plug() API because it is not multi-queue
+block layer friendly. Use the new blk_io_plug_call() API to batch I/O
+submission instead.
+
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+Reviewed-by: Eric Blake <eblake@redhat.com>
+---
 v2
-- Patch 1: "is not be freed" -> "is not freed" [Eric]
-- Patch 2: Remove unused nvme_process_completion_queue_plugged trace event
+- Remove unused nvme_process_completion_queue_plugged trace event
   [Stefano]
-- Patch 3: Add missing #include and fix blkio_unplug_fn() prototype [Stefano]
-- Patch 4: Removed whitespace hunk [Eric]
+---
+ block/nvme.c       | 44 ++++++++++++--------------------------------
+ block/trace-events |  1 -
+ 2 files changed, 12 insertions(+), 33 deletions(-)
 
-The existing blk_io_plug() API is not block layer multi-queue friendly because
-the plug state is per-BlockDriverState.
-
-Change blk_io_plug()'s implementation so it is thread-local. This is done by
-introducing the blk_io_plug_call() function that block drivers use to batch
-calls while plugged. It is relatively easy to convert block drivers from
-.bdrv_co_io_plug() to blk_io_plug_call().
-
-Random read 4KB performance with virtio-blk on a host NVMe block device:
-
-iodepth   iops   change vs today
-1        45612   -4%
-2        87967   +2%
-4       129872   +0%
-8       171096   -3%
-16      194508   -4%
-32      208947   -1%
-64      217647   +0%
-128     229629   +0%
-
-The results are within the noise for these benchmarks. This is to be expected
-because the plugging behavior for a single thread hasn't changed in this patch
-series, only that the state is thread-local now.
-
-The following graph compares several approaches:
-https://vmsplice.net/~stefan/blk_io_plug-thread-local.png
-- v7.2.0: before most of the multi-queue block layer changes landed.
-- with-blk_io_plug: today's post-8.0.0 QEMU.
-- blk_io_plug-thread-local: this patch series.
-- no-blk_io_plug: what happens when we simply remove plugging?
-- call-after-dispatch: what if we integrate plugging into the event loop? I
-  decided against this approach in the end because it's more likely to
-  introduce performance regressions since I/O submission is deferred until the
-  end of the event loop iteration.
-
-Aside from the no-blk_io_plug case, which bottlenecks much earlier than the
-others, we see that all plugging approaches are more or less equivalent in this
-benchmark. It is also clear that QEMU 8.0.0 has lower performance than 7.2.0.
-
-The Ansible playbook, fio results, and a Jupyter notebook are available here:
-https://github.com/stefanha/qemu-perf/tree/remove-blk_io_plug
-
-Stefan Hajnoczi (6):
-  block: add blk_io_plug_call() API
-  block/nvme: convert to blk_io_plug_call() API
-  block/blkio: convert to blk_io_plug_call() API
-  block/io_uring: convert to blk_io_plug_call() API
-  block/linux-aio: convert to blk_io_plug_call() API
-  block: remove bdrv_co_io_plug() API
-
- MAINTAINERS                       |   1 +
- include/block/block-io.h          |   3 -
- include/block/block_int-common.h  |  11 ---
- include/block/raw-aio.h           |  14 ---
- include/sysemu/block-backend-io.h |  13 +--
- block/blkio.c                     |  43 ++++----
- block/block-backend.c             |  22 -----
- block/file-posix.c                |  38 -------
- block/io.c                        |  37 -------
- block/io_uring.c                  |  44 ++++-----
- block/linux-aio.c                 |  41 +++-----
- block/nvme.c                      |  44 +++------
- block/plug.c                      | 159 ++++++++++++++++++++++++++++++
- hw/block/dataplane/xen-block.c    |   8 +-
- hw/block/virtio-blk.c             |   4 +-
- hw/scsi/virtio-scsi.c             |   6 +-
- block/meson.build                 |   1 +
- block/trace-events                |   6 +-
- 18 files changed, 239 insertions(+), 256 deletions(-)
- create mode 100644 block/plug.c
-
+diff --git a/block/nvme.c b/block/nvme.c
+index 5b744c2bda..100b38b592 100644
+--- a/block/nvme.c
++++ b/block/nvme.c
+@@ -25,6 +25,7 @@
+ #include "qemu/vfio-helpers.h"
+ #include "block/block-io.h"
+ #include "block/block_int.h"
++#include "sysemu/block-backend.h"
+ #include "sysemu/replay.h"
+ #include "trace.h"
+ 
+@@ -119,7 +120,6 @@ struct BDRVNVMeState {
+     int blkshift;
+ 
+     uint64_t max_transfer;
+-    bool plugged;
+ 
+     bool supports_write_zeroes;
+     bool supports_discard;
+@@ -282,7 +282,7 @@ static void nvme_kick(NVMeQueuePair *q)
+ {
+     BDRVNVMeState *s = q->s;
+ 
+-    if (s->plugged || !q->need_kick) {
++    if (!q->need_kick) {
+         return;
+     }
+     trace_nvme_kick(s, q->index);
+@@ -387,10 +387,6 @@ static bool nvme_process_completion(NVMeQueuePair *q)
+     NvmeCqe *c;
+ 
+     trace_nvme_process_completion(s, q->index, q->inflight);
+-    if (s->plugged) {
+-        trace_nvme_process_completion_queue_plugged(s, q->index);
+-        return false;
+-    }
+ 
+     /*
+      * Support re-entrancy when a request cb() function invokes aio_poll().
+@@ -480,6 +476,15 @@ static void nvme_trace_command(const NvmeCmd *cmd)
+     }
+ }
+ 
++static void nvme_unplug_fn(void *opaque)
++{
++    NVMeQueuePair *q = opaque;
++
++    QEMU_LOCK_GUARD(&q->lock);
++    nvme_kick(q);
++    nvme_process_completion(q);
++}
++
+ static void nvme_submit_command(NVMeQueuePair *q, NVMeRequest *req,
+                                 NvmeCmd *cmd, BlockCompletionFunc cb,
+                                 void *opaque)
+@@ -496,8 +501,7 @@ static void nvme_submit_command(NVMeQueuePair *q, NVMeRequest *req,
+            q->sq.tail * NVME_SQ_ENTRY_BYTES, cmd, sizeof(*cmd));
+     q->sq.tail = (q->sq.tail + 1) % NVME_QUEUE_SIZE;
+     q->need_kick++;
+-    nvme_kick(q);
+-    nvme_process_completion(q);
++    blk_io_plug_call(nvme_unplug_fn, q);
+     qemu_mutex_unlock(&q->lock);
+ }
+ 
+@@ -1567,27 +1571,6 @@ static void nvme_attach_aio_context(BlockDriverState *bs,
+     }
+ }
+ 
+-static void coroutine_fn nvme_co_io_plug(BlockDriverState *bs)
+-{
+-    BDRVNVMeState *s = bs->opaque;
+-    assert(!s->plugged);
+-    s->plugged = true;
+-}
+-
+-static void coroutine_fn nvme_co_io_unplug(BlockDriverState *bs)
+-{
+-    BDRVNVMeState *s = bs->opaque;
+-    assert(s->plugged);
+-    s->plugged = false;
+-    for (unsigned i = INDEX_IO(0); i < s->queue_count; i++) {
+-        NVMeQueuePair *q = s->queues[i];
+-        qemu_mutex_lock(&q->lock);
+-        nvme_kick(q);
+-        nvme_process_completion(q);
+-        qemu_mutex_unlock(&q->lock);
+-    }
+-}
+-
+ static bool nvme_register_buf(BlockDriverState *bs, void *host, size_t size,
+                               Error **errp)
+ {
+@@ -1664,9 +1647,6 @@ static BlockDriver bdrv_nvme = {
+     .bdrv_detach_aio_context  = nvme_detach_aio_context,
+     .bdrv_attach_aio_context  = nvme_attach_aio_context,
+ 
+-    .bdrv_co_io_plug          = nvme_co_io_plug,
+-    .bdrv_co_io_unplug        = nvme_co_io_unplug,
+-
+     .bdrv_register_buf        = nvme_register_buf,
+     .bdrv_unregister_buf      = nvme_unregister_buf,
+ };
+diff --git a/block/trace-events b/block/trace-events
+index 32665158d6..048ad27519 100644
+--- a/block/trace-events
++++ b/block/trace-events
+@@ -141,7 +141,6 @@ nvme_kick(void *s, unsigned q_index) "s %p q #%u"
+ nvme_dma_flush_queue_wait(void *s) "s %p"
+ nvme_error(int cmd_specific, int sq_head, int sqid, int cid, int status) "cmd_specific %d sq_head %d sqid %d cid %d status 0x%x"
+ nvme_process_completion(void *s, unsigned q_index, int inflight) "s %p q #%u inflight %d"
+-nvme_process_completion_queue_plugged(void *s, unsigned q_index) "s %p q #%u"
+ nvme_complete_command(void *s, unsigned q_index, int cid) "s %p q #%u cid %d"
+ nvme_submit_command(void *s, unsigned q_index, int cid) "s %p q #%u cid %d"
+ nvme_submit_command_raw(int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7) "%02x %02x %02x %02x %02x %02x %02x %02x"
 -- 
 2.40.1
 
