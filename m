@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CF0C7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC91C7EE2A
 	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 07:43:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538274.838178 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538268.838118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1MgP-0005CZ-6v; Tue, 23 May 2023 07:43:49 +0000
+	id 1q1MgH-0003XV-0E; Tue, 23 May 2023 07:43:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538274.838178; Tue, 23 May 2023 07:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 538268.838118; Tue, 23 May 2023 07:43:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1MgP-0005CB-2G; Tue, 23 May 2023 07:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 538274;
- Tue, 23 May 2023 07:43:47 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q1MgG-0003XO-T5; Tue, 23 May 2023 07:43:40 +0000
+Received: by outflank-mailman (input) for mailman id 538268;
+ Tue, 23 May 2023 07:43:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kqVG=BM=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1q1MgN-0003Zx-Bu
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 07:43:47 +0000
+ id 1q1MgF-0003IN-RV
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 07:43:39 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 8bce095a-f93d-11ed-8611-37d641c3527e;
- Tue, 23 May 2023 09:43:45 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 87e1922f-f93d-11ed-b22d-6b7b168915f2;
+ Tue, 23 May 2023 09:43:38 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1261F153B;
- Tue, 23 May 2023 00:44:30 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 442A81515;
+ Tue, 23 May 2023 00:44:23 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B58313F762;
- Tue, 23 May 2023 00:43:43 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 583E53F762;
+ Tue, 23 May 2023 00:43:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,300 +44,318 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8bce095a-f93d-11ed-8611-37d641c3527e
+X-Inumbo-ID: 87e1922f-f93d-11ed-b22d-6b7b168915f2
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v7 07/12] xen: enable Dom0 to use SVE feature
-Date: Tue, 23 May 2023 08:43:21 +0100
-Message-Id: <20230523074326.3035745-8-luca.fancellu@arm.com>
+Subject: [PATCH v7 02/12] xen/arm: add SVE vector length field to the domain
+Date: Tue, 23 May 2023 08:43:16 +0100
+Message-Id: <20230523074326.3035745-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230523074326.3035745-1-luca.fancellu@arm.com>
 References: <20230523074326.3035745-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a command line parameter to allow Dom0 the use of SVE resources,
-the command line parameter sve=<integer>, sub argument of dom0=,
-controls the feature on this domain and sets the maximum SVE vector
-length for Dom0.
+Add sve_vl field to arch_domain and xen_arch_domainconfig struct,
+to allow the domain to have an information about the SVE feature
+and the number of SVE register bits that are allowed for this
+domain.
 
-Add a new function, parse_signed_integer(), to parse an integer
-command line argument.
+sve_vl field is the vector length in bits divided by 128, this
+allows to use less space in the structures.
+
+The field is used also to allow or forbid a domain to use SVE,
+because a value equal to zero means the guest is not allowed to
+use the feature.
+
+Check that the requested vector length is lower or equal to the
+platform supported vector length, otherwise fail on domain
+creation.
+
+Check that only 64 bit domains have SVE enabled, otherwise fail.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
 Changes from v6:
- - Fixed case for e==NULL in parse_signed_integer, drop parenthesis
-   from if conditions, delete inline sve_domctl_vl_param and rely on
-   DCE from the compiler (Jan)
- - Drop parenthesis from opt_dom0_sve (Julien)
- - Do not continue if 'sve' is in command line args but
-   CONFIG_ARM64_SVE is not selected:
-   https://lore.kernel.org/all/7614AE25-F59D-430A-9C3E-30B1CE0E1580@arm.com/
+ - Style fix, have is_sve_domain as static inline instead of macro
+   (Julien)
 Changes from v5:
- - stop the domain if VL error occurs (Julien, Bertrand)
- - update the documentation
- - Rename sve_sanitize_vl_param to sve_domctl_vl_param to
-   mark the fact that we are sanitizing a parameter coming from
-   the user before encoding it into sve_vl in domctl structure.
-   (suggestion from Bertrand in a separate discussion)
- - update comment in parse_signed_integer, return boolean in
-   sve_domctl_vl_param (Jan).
+ - Update commit message stating the interface ver. bump (Bertrand)
+ - in struct arch_domain, protect sve_vl with CONFIG_ARM64_SVE,
+   given the change, move also is_sve_domain() where it's protected
+   inside sve.h and create a stub when the macro is not defined,
+   protect the usage of sve_vl where needed.
+   (Julien)
+ - Add a check for 32 bit guest running on top of 64 bit host that
+   have sve parameter enabled to stop the domain creation, added in
+   construct_domain() of domain_build.c and subarch_do_domctl of
+   domctl.c. (Julien)
 Changes from v4:
- - Negative values as user param means max supported HW VL (Jan)
- - update documentation, make use of no_config_param(), rename
-   parse_integer into parse_signed_integer and take long long *,
-   also put a comment on the -2 return condition, update
-   declaration comment to reflect the modifications (Jan)
+ - Return 0 in get_sys_vl_len() if sve is not supported, code style fix,
+   removed else if since the conditions can't fallthrough, removed not
+   needed condition checking for VL bits validity because it's already
+   covered, so delete is_vl_valid() function. (Jan)
 Changes from v3:
- - Don't use fixed len types when not needed (Jan)
- - renamed domainconfig_encode_vl to sve_encode_vl
- - Use a sub argument of dom0= to enable the feature (Jan)
- - Add parse_integer() function
+ - don't use fixed types when not needed, use encoded value also in
+   arch_domain so rename sve_vl_bits in sve_vl. (Jan)
+ - rename domainconfig_decode_vl to sve_decode_vl because it will now
+   be used also to decode from arch_domain value
+ - change sve_vl from uint16_t to uint8_t and move it after "type" field
+   to optimize space.
 Changes from v2:
- - xen_domctl_createdomain field has changed into sve_vl and its
-   value now is the VL / 128, create an helper function for that.
+ - rename field in xen_arch_domainconfig from "sve_vl_bits" to
+   "sve_vl" and use the implicit padding after gic_version to
+   store it, now this field is the VL/128. (Jan)
+ - Created domainconfig_decode_vl() function to decode the sve_vl
+   field and use it as plain bits value inside arch_domain.
+ - Changed commit message reflecting the changes
 Changes from v1:
- - No changes
+ - no changes
 Changes from RFC:
- - Changed docs to explain that the domain won't be created if the
-   requested vector length is above the supported one from the
-   platform.
+ - restore zcr_el2 in sve_restore_state, that will be introduced
+   later in this serie, so remove zcr_el2 related code from this
+   patch and move everything to the later patch (Julien)
+ - add explicit padding into struct xen_arch_domainconfig (Julien)
+ - Don't lower down the vector length, just fail to create the
+   domain. (Julien)
 ---
- docs/misc/xen-command-line.pandoc    | 20 ++++++++++++++++++--
- xen/arch/arm/arm64/sve.c             | 20 ++++++++++++++++++++
- xen/arch/arm/domain_build.c          | 26 ++++++++++++++++++++++++++
- xen/arch/arm/include/asm/arm64/sve.h | 10 ++++++++++
- xen/common/kernel.c                  | 28 ++++++++++++++++++++++++++++
- xen/include/xen/lib.h                | 10 ++++++++++
- 6 files changed, 112 insertions(+), 2 deletions(-)
+ xen/arch/arm/arm64/domctl.c          |  4 ++++
+ xen/arch/arm/arm64/sve.c             | 12 +++++++++++
+ xen/arch/arm/domain.c                | 29 ++++++++++++++++++++++++++
+ xen/arch/arm/domain_build.c          |  7 +++++++
+ xen/arch/arm/include/asm/arm64/sve.h | 31 ++++++++++++++++++++++++++++
+ xen/arch/arm/include/asm/domain.h    |  5 +++++
+ xen/include/public/arch-arm.h        |  2 ++
+ 7 files changed, 90 insertions(+)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index e0b89b7d3319..47e5b4eb6199 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -777,9 +777,9 @@ Specify the bit width of the DMA heap.
+diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
+index 0de89b42c448..14fc622e9956 100644
+--- a/xen/arch/arm/arm64/domctl.c
++++ b/xen/arch/arm/arm64/domctl.c
+@@ -10,6 +10,7 @@
+ #include <xen/sched.h>
+ #include <xen/hypercall.h>
+ #include <public/domctl.h>
++#include <asm/arm64/sve.h>
+ #include <asm/cpufeature.h>
  
- ### dom0
-     = List of [ pv | pvh, shadow=<bool>, verbose=<bool>,
--                cpuid-faulting=<bool>, msr-relaxed=<bool> ]
-+                cpuid-faulting=<bool>, msr-relaxed=<bool> ] (x86)
- 
--    Applicability: x86
-+    = List of [ sve=<integer> ] (Arm)
- 
- Controls for how dom0 is constructed on x86 systems.
- 
-@@ -838,6 +838,22 @@ Controls for how dom0 is constructed on x86 systems.
- 
-     If using this option is necessary to fix an issue, please report a bug.
- 
-+Enables features on dom0 on Arm systems.
-+
-+*   The `sve` integer parameter enables Arm SVE usage for Dom0 domain and sets
-+    the maximum SVE vector length, the option is applicable only to AArch64
-+    guests.
-+    A value equal to 0 disables the feature, this is the default value.
-+    Values below 0 means the feature uses the maximum SVE vector length
-+    supported by hardware, if SVE is supported.
-+    Values above 0 explicitly set the maximum SVE vector length for Dom0,
-+    allowed values are from 128 to maximum 2048, being multiple of 128.
-+    Please note that when the user explicitly specifies the value, if that value
-+    is above the hardware supported maximum SVE vector length, the domain
-+    creation will fail and the system will stop, the same will occur if the
-+    option is provided with a non zero value, but the platform doesn't support
-+    SVE.
-+
- ### dom0-cpuid
-     = List of comma separated booleans
- 
+ static long switch_mode(struct domain *d, enum domain_type type)
+@@ -43,6 +44,9 @@ long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+         case 32:
+             if ( !cpu_has_el1_32 )
+                 return -EINVAL;
++            /* SVE is not supported for 32 bit domain */
++            if ( is_sve_domain(d) )
++                return -EINVAL;
+             return switch_mode(d, DOMAIN_32BIT);
+         case 64:
+             return switch_mode(d, DOMAIN_64BIT);
 diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
-index 84a6dedc1fd7..feaca2cf647d 100644
+index e05ccc38a896..a9144e48ef6b 100644
 --- a/xen/arch/arm/arm64/sve.c
 +++ b/xen/arch/arm/arm64/sve.c
-@@ -13,6 +13,9 @@
+@@ -8,6 +8,7 @@
+ #include <xen/types.h>
+ #include <asm/arm64/sve.h>
+ #include <asm/arm64/sysregs.h>
++#include <asm/cpufeature.h>
  #include <asm/processor.h>
  #include <asm/system.h>
  
-+/* opt_dom0_sve: allow Dom0 to use SVE and set maximum vector length. */
-+int __initdata opt_dom0_sve;
-+
- extern unsigned int sve_get_hw_vl(void);
- 
- /*
-@@ -152,6 +155,23 @@ void sve_restore_state(struct vcpu *v)
-     sve_load_ctx(v->arch.vfp.sve_zreg_ctx_end, v->arch.vfp.fpregs, 1);
+@@ -49,6 +50,17 @@ register_t compute_max_zcr(void)
+     return vl_to_zcr(hw_vl);
  }
  
-+bool __init sve_domctl_vl_param(int val, unsigned int *out)
++/* Get the system sanitized value for VL in bits */
++unsigned int get_sys_vl_len(void)
 +{
-+    /*
-+     * Negative SVE parameter value means to use the maximum supported
-+     * vector length, otherwise if a positive value is provided, check if the
-+     * vector length is a multiple of 128
-+     */
-+    if ( val < 0 )
-+        *out = get_sys_vl_len();
-+    else if ( (val % SVE_VL_MULTIPLE_VAL) == 0 )
-+        *out = val;
-+    else
-+        return false;
++    if ( !cpu_has_sve )
++        return 0;
 +
-+    return true;
++    /* ZCR_ELx len field is ((len + 1) * 128) = vector bits length */
++    return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
++            SVE_VL_MULTIPLE_VAL;
 +}
 +
  /*
   * Local variables:
   * mode: C
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index d5ab15db46c4..6c22551b0ed2 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -13,6 +13,7 @@
+ #include <xen/wait.h>
+ 
+ #include <asm/alternative.h>
++#include <asm/arm64/sve.h>
+ #include <asm/cpuerrata.h>
+ #include <asm/cpufeature.h>
+ #include <asm/current.h>
+@@ -555,6 +556,8 @@ int arch_vcpu_create(struct vcpu *v)
+     v->arch.vmpidr = MPIDR_SMP | vcpuid_to_vaffinity(v->vcpu_id);
+ 
+     v->arch.cptr_el2 = get_default_cptr_flags();
++    if ( is_sve_domain(v->domain) )
++        v->arch.cptr_el2 &= ~HCPTR_CP(8);
+ 
+     v->arch.hcr_el2 = get_default_hcr_flags();
+ 
+@@ -599,6 +602,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+     unsigned int max_vcpus;
+     unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
+     unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu);
++    unsigned int sve_vl_bits = sve_decode_vl(config->arch.sve_vl);
+ 
+     if ( (config->flags & ~flags_optional) != flags_required )
+     {
+@@ -607,6 +611,26 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
+ 
++    /* Check feature flags */
++    if ( sve_vl_bits > 0 )
++    {
++        unsigned int zcr_max_bits = get_sys_vl_len();
++
++        if ( !zcr_max_bits )
++        {
++            dprintk(XENLOG_INFO, "SVE is unsupported on this machine.\n");
++            return -EINVAL;
++        }
++
++        if ( sve_vl_bits > zcr_max_bits )
++        {
++            dprintk(XENLOG_INFO,
++                    "Requested SVE vector length (%u) > supported length (%u)\n",
++                    sve_vl_bits, zcr_max_bits);
++            return -EINVAL;
++        }
++    }
++
+     /* The P2M table must always be shared between the CPU and the IOMMU */
+     if ( config->iommu_opts & XEN_DOMCTL_IOMMU_no_sharept )
+     {
+@@ -749,6 +773,11 @@ int arch_domain_create(struct domain *d,
+     if ( (rc = domain_vpci_init(d)) != 0 )
+         goto fail;
+ 
++#ifdef CONFIG_ARM64_SVE
++    /* Copy the encoded vector length sve_vl from the domain configuration */
++    d->arch.sve_vl = config->arch.sve_vl;
++#endif
++
+     return 0;
+ 
+ fail:
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index f373a5024783..9202a96d9c28 100644
+index 71f307a572e9..9dd1ed5bce44 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -62,6 +62,22 @@ custom_param("dom0_mem", parse_dom0_mem);
+@@ -26,6 +26,7 @@
+ #include <asm/platform.h>
+ #include <asm/psci.h>
+ #include <asm/setup.h>
++#include <asm/arm64/sve.h>
+ #include <asm/cpufeature.h>
+ #include <asm/domain_build.h>
+ #include <xen/event.h>
+@@ -3670,6 +3671,12 @@ static int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+         return -EINVAL;
+     }
  
- int __init parse_arch_dom0_param(const char *s, const char *e)
- {
-+    long long val;
-+
-+    if ( !parse_signed_integer("sve", s, e, &val) )
++    if ( is_sve_domain(d) && (kinfo->type == DOMAIN_32BIT) )
 +    {
-+#ifdef CONFIG_ARM64_SVE
-+        if ( (val >= INT_MIN) && (val <= INT_MAX) )
-+            opt_dom0_sve = val;
-+        else
-+            printk(XENLOG_INFO "'sve=%lld' value out of range!\n", val);
-+
-+        return 0;
-+#else
-+        panic("'sve' property found, but CONFIG_ARM64_SVE not selected");
-+#endif
++        printk("SVE is not available for 32-bit domain\n");
++        return -EINVAL;
 +    }
 +
-     return -EINVAL;
- }
+     if ( is_64bit_domain(d) )
+         vcpu_switch_to_aarch64_mode(v);
  
-@@ -4113,6 +4129,16 @@ void __init create_dom0(void)
-     if ( iommu_enabled )
-         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
- 
-+    if ( opt_dom0_sve )
-+    {
-+        unsigned int vl;
-+
-+        if ( sve_domctl_vl_param(opt_dom0_sve, &vl) )
-+            dom0_cfg.arch.sve_vl = sve_encode_vl(vl);
-+        else
-+            panic("SVE vector length error\n");
-+    }
-+
-     dom0 = domain_create(0, &dom0_cfg, CDF_privileged | CDF_directmap);
-     if ( IS_ERR(dom0) )
-         panic("Error creating domain 0 (rc = %ld)\n", PTR_ERR(dom0));
 diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
-index 65b46685d263..a71d6a295dcc 100644
+index c0466243c7bc..4b63412727fc 100644
 --- a/xen/arch/arm/include/asm/arm64/sve.h
 +++ b/xen/arch/arm/include/asm/arm64/sve.h
-@@ -21,14 +21,22 @@ static inline unsigned int sve_decode_vl(unsigned int sve_vl)
-     return sve_vl * SVE_VL_MULTIPLE_VAL;
- }
+@@ -8,13 +8,44 @@
+ #ifndef _ARM_ARM64_SVE_H
+ #define _ARM_ARM64_SVE_H
  
-+static inline unsigned int sve_encode_vl(unsigned int sve_vl_bits)
++#include <xen/sched.h>
++
+ #define SVE_VL_MAX_BITS 2048U
+ 
+ /* Vector length must be multiple of 128 */
+ #define SVE_VL_MULTIPLE_VAL 128U
+ 
++static inline unsigned int sve_decode_vl(unsigned int sve_vl)
 +{
-+    return sve_vl_bits / SVE_VL_MULTIPLE_VAL;
++    /* SVE vector length is stored as VL/128 in xen_arch_domainconfig */
++    return sve_vl * SVE_VL_MULTIPLE_VAL;
 +}
 +
  register_t compute_max_zcr(void);
- int sve_context_init(struct vcpu *v);
- void sve_context_free(struct vcpu *v);
- void sve_save_state(struct vcpu *v);
- void sve_restore_state(struct vcpu *v);
-+bool sve_domctl_vl_param(int val, unsigned int *out);
  
- #ifdef CONFIG_ARM64_SVE
- 
-+extern int opt_dom0_sve;
++#ifdef CONFIG_ARM64_SVE
 +
- static inline bool is_sve_domain(const struct domain *d)
- {
-     return d->arch.sve_vl > 0;
-@@ -38,6 +46,8 @@ unsigned int get_sys_vl_len(void);
- 
- #else /* !CONFIG_ARM64_SVE */
- 
-+#define opt_dom0_sve     0
-+
- static inline bool is_sve_domain(const struct domain *d)
- {
-     return false;
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index f7b1f65f373c..7cd00a4c999a 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -314,6 +314,34 @@ int parse_boolean(const char *name, const char *s, const char *e)
-     return -1;
- }
- 
-+int __init parse_signed_integer(const char *name, const char *s, const char *e,
-+                                long long *val)
++static inline bool is_sve_domain(const struct domain *d)
 +{
-+    size_t slen, nlen;
-+    const char *str;
-+    long long pval;
++    return d->arch.sve_vl > 0;
++}
 +
-+    slen = e ? ({ ASSERT(e >= s); e - s; }) : strlen(s);
-+    nlen = strlen(name);
++unsigned int get_sys_vl_len(void);
 +
-+    if ( !e )
-+        e = s + slen;
++#else /* !CONFIG_ARM64_SVE */
 +
-+    /* Check that this is the name we're looking for and a value was provided */
-+    if ( slen <= nlen || strncmp(s, name, nlen) || s[nlen] != '=' )
-+        return -1;
++static inline bool is_sve_domain(const struct domain *d)
++{
++    return false;
++}
 +
-+    pval = simple_strtoll(&s[nlen + 1], &str, 10);
-+
-+    /* Number not recognised */
-+    if ( str != e )
-+        return -2;
-+
-+    *val = pval;
-+
++static inline unsigned int get_sys_vl_len(void)
++{
 +    return 0;
 +}
 +
- int cmdline_strcmp(const char *frag, const char *name)
- {
-     for ( ; ; frag++, name++ )
-diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-index e914ccade095..5343ee7a944a 100644
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -94,6 +94,16 @@ int parse_bool(const char *s, const char *e);
-  */
- int parse_boolean(const char *name, const char *s, const char *e);
- 
-+/**
-+ * Given a specific name, parses a string of the form:
-+ *   $NAME=<integer number>
-+ * returning 0 and a value in val, for a recognised integer.
-+ * Returns -1 for name not found, general errors, or -2 if name is found but
-+ * not recognised number.
-+ */
-+int parse_signed_integer(const char *name, const char *s, const char *e,
-+                         long long *val);
++#endif /* CONFIG_ARM64_SVE */
 +
- /**
-  * Very similar to strcmp(), but will declare a match if the NUL in 'name'
-  * lines up with comma, colon, semicolon or equals in 'frag'.  Designed for
+ #endif /* _ARM_ARM64_SVE_H */
+ 
+ /*
+diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+index e776ee704b7d..331da0f3bcc3 100644
+--- a/xen/arch/arm/include/asm/domain.h
++++ b/xen/arch/arm/include/asm/domain.h
+@@ -67,6 +67,11 @@ struct arch_domain
+     enum domain_type type;
+ #endif
+ 
++#ifdef CONFIG_ARM64_SVE
++    /* max SVE encoded vector length */
++    uint8_t sve_vl;
++#endif
++
+     /* Virtual MMU */
+     struct p2m_domain p2m;
+ 
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index 1528ced5097a..38311f559581 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -300,6 +300,8 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+ struct xen_arch_domainconfig {
+     /* IN/OUT */
+     uint8_t gic_version;
++    /* IN - Contains SVE vector length divided by 128 */
++    uint8_t sve_vl;
+     /* IN */
+     uint16_t tee_type;
+     /* IN */
 -- 
 2.34.1
 
