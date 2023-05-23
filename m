@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48948C7EE2D
-	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:47:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538601.838711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6CE9C77B75
+	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:49:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.538625.838735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VAd-0006ft-3j; Tue, 23 May 2023 16:47:35 +0000
+	id 1q1VCa-0008HU-Jt; Tue, 23 May 2023 16:49:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538601.838711; Tue, 23 May 2023 16:47:35 +0000
+Received: by outflank-mailman (output) from mailman id 538625.838735; Tue, 23 May 2023 16:49:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VAc-0006de-Sg; Tue, 23 May 2023 16:47:34 +0000
-Received: by outflank-mailman (input) for mailman id 538601;
- Tue, 23 May 2023 16:47:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q1VCa-0008HN-GQ; Tue, 23 May 2023 16:49:36 +0000
+Received: by outflank-mailman (input) for mailman id 538625;
+ Tue, 23 May 2023 16:49:34 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UuGZ=BM=citrix.com=prvs=5000a0748=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1q1V2Q-0006Dr-EE
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:39:06 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5365c366-f988-11ed-8611-37d641c3527e;
- Tue, 23 May 2023 18:39:04 +0200 (CEST)
+ id 1q1VCY-0008HF-NS
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:49:34 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ca612a8c-f989-11ed-b22d-6b7b168915f2;
+ Tue, 23 May 2023 18:49:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,132 +38,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5365c366-f988-11ed-8611-37d641c3527e
+X-Inumbo-ID: ca612a8c-f989-11ed-b22d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684859944;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=CUr6Ia8hka4MDdYyEkCHkmCAcxvFP9VRnjNhVX7Kyj0=;
-  b=QrX94MT2nLvMK7ov1dkRAEoc7v/E8vKdoyPHO/DszDViYpBAmSD6Jnx2
-   f8AzT8AZAVMeNCO73ZuztKU1D+10yFDHPwjlIOZRyuzDPY+JhihJ/tBbU
-   roLvkU/BUpSneGTVrFzSHhEWn10AsxXKZYkt9nL0o+oSTXOQOflXiJa3c
-   U=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1684860573;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Zl9vTPqi6RVZJGxKRYtGaBAPuiSWpOT0k2k62r7HVqA=;
+  b=D1J7JO5QicrFAlF3DMcgfTEGyNXyzFOihlD1TVqYGILwR52NpYtvfRNo
+   pXtQsfICzEgq45U/sBDEmnDpSGAIxLRRnJkE50EbnEnl1j/qGUmVnzCMH
+   Gwa//OcQSJ4eiKSO5bJzsPSHsqKQYCPeL6gtk0l3hhFUI72MuclXu8oKF
+   8=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 108859061
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 112569755
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:D/UT8aIYpTbgJanbFE+R4pUlxSXFcZb7ZxGr2PjKsXjdYENS1DMPm
- mZKCm7Qb62PZGXxfohyPNy2oUpX68fUy4JmSAtlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpKrfrbwP9TlK6q4mhA4wZlPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5HX2xi/
- uEJFgscMEGmitOsm7uXds1V05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpNU6bC/FMEg5/5JYWleG0hn75YntApUicv6Yf6GnP1g1hlrPqNbI5f/TTHZUFwxfA+
- DuuE2LREChKNMSNlyi86V2zrLXGnir0c78NLejtnhJtqALKnTFCYPEMbnOguuWwgEO6X9NZK
- mQX9zAooKx081akJvH/Qhm5rXisrhMaHd1KHIUS9wWl2qfSpQGDCQAsTDRMddgnv88eXiEx2
- xmCmNaBLSxitviZRGyQ8p+QrCiuIm4FIGkafygGQAAZpd75r+kOYgnnF4g5VvTv15usRG+2m
- mrRxMQju1kNpf5V2omw4EH5uCPy973EfxRu7ynrelvwu2uVe7WZT4Cv7FHa69NJI4CYUkSNs
- RA4piSO0AwdJcrTzXLQGY3hCJnsvq/Ya2OE3TaDCrF7r1yQF2ifkZe8Cd2UDGNgKY46dDDge
- yc/UisBtcYIbBNGgUKaCr9d6vjGL4C6TbwJtdiONLKih6SdkyfZlByCnWbKgwjQfLEEyMnTw
- 6uzf8e2Fmo9Aq961jewTOp1+eZ1lnxhlTuPHsGil0jPPV+iiJm9EO1tDbdzRrphsPPsTPv9q
- L6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOK0aX/d/L7bZSiI/QTFJNhMk6e95E2CTt/gPx7igE
- 7DUchMw9WcTclWccV/bNS87OOKzNXu9xFpiVRER0Z+T8yBLSe6SAG03J/PboZFPGDRf8MNJ
-IronPort-HdrOrdr: A9a23:xHAr66iFYpiKja7gCBVG0uA6YXBQXuIji2hC6mlwRA09TySZ//
- rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
-X-Talos-CUID: 9a23:LWJsim4kRj7cSE9xI9ssxBAZNss4Y0Pm3SmBBkKJEz1gZIGxcArF
-X-Talos-MUID: 9a23:rxKyPgjR7Zoc9PX/l/qAdcMpJv4447y8VlI0iroZkZONNiV/EAqCtWHi
+IronPort-Data: A9a23:wq/fba82syAfjNCismedDrUDcn6TJUtcMsCJ2f8bNWPcYEJGY0x3m
+ mIYDD+DPavYNmv2fYojao6y9kNT78Lcz9dmTQFo/no8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
+ 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
+ d7pqojUNUTNNwRcawr40Ird7ks31BjOkGlA5AdmOKoQ5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
+ 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
+ 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkkJz
+ dtGCwocRCyyvLiMzOmqddRKu548eZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
+ ZBDMHw2MUqGOkcUUrsUIMtWcOOAj3/jczpeuRSNqLA++WT7xw1tyrn9dtHSf7RmQO0MxxzF+
+ DOZojmR7hcyJeSE6See81SVi+7dwDrCVbg3TbTi36s/6LGU7jNKU0BHPbehmtG9l0W3HdxWL
+ UcZ/i4zhaEo8QqgSdyVdw21pjuIswARX/JUEvYm80edx6zM+QGbC2MYCDlbZ7QOvsIsWSYj0
+ FPPmtrzHCFuq5WcU3fb/bCRxRutNClTJm8PYwcNVw5D6N7myKksijrfQ9AlF7S65vXvHir62
+ TeNry4WiLAajMpN3KK+lXjFjCirvYPhVRMu60PcWWfNxgphaZSsfYCA9VnR5vEGJ4GcJmRtp
+ 1BdxZLYtrpXS8jQymrUGr5l8KyVC+itdwX7331VDrMdxg/3wXL4bL9txgwkOxI8WiobQgPBb
+ EjWsAJXwZZcOnq2cKN6C76M59QWIbvIToq8CK2NBjZaSt0oLVLconkyDaKF9zq1+HXAh53TL
+ ntynSyEKX8BQZpqwzOtLwv2+e96n3turY8/qH2S8vhG7VZ8TCTNIVvmGAHUBgzc0E9jiFu9z
+ jqnH5HWoyizqcWnCsUtzaYdLEoRMV8wDo3spspce4are1Q2RD5xU6OKkOp5J+SJepi5cc+Rp
+ BmAtrJwkgKj1RUr1y3RApycVF8fdckm9i9qVcDdFV2px2Iice6S0UvrTLNuJeNP3LU6nZZJo
+ wwtJ53o7gJnFm6WpFzwrPDV8ORfSfhcrVnWZXv6P2BvLsIIqs6g0oaMQzYDPRImVkKf3fbSa
+ ZX8vu8HafLvnzhfMfs=
+IronPort-HdrOrdr: A9a23:SbtdiK+F2cX3G2cF9yVuk+C7I+orL9Y04lQ7vn2ZKCY0TiX8ra
+ uTdZsguCMc5Ax6ZJhCo7G90de7Lk80nKQdibX5Vo3PYOCJggWVEL0=
+X-Talos-CUID: 9a23:u2WO9WF9kvMiHHYaqmIgzGlKOfo0WEHs9y3qLxSpNltPdeeKHAo=
+X-Talos-MUID: 9a23:T9n1swaaPIPIauBTpgf3pCx5NeFR7qW8VVk0nK8j4sDeHHkl
 X-IronPort-AV: E=Sophos;i="6.00,186,1681185600"; 
-   d="scan'208";a="108859061"
+   d="scan'208";a="112569755"
+Date: Tue, 23 May 2023 17:49:19 +0100
 From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH 10/15] build: rename $(AFLAGS) to $(XEN_AFLAGS)
-Date: Tue, 23 May 2023 17:38:06 +0100
-Message-ID: <20230523163811.30792-11-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230523163811.30792-1-anthony.perard@citrix.com>
-References: <20230523163811.30792-1-anthony.perard@citrix.com>
+To: Luca Fancellu <luca.fancellu@arm.com>
+CC: <xen-devel@lists.xenproject.org>, <bertrand.marquis@arm.com>,
+	<wei.chen@arm.com>, Wei Liu <wl@xen.org>, George Dunlap
+	<george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>, "Juergen
+ Gross" <jgross@suse.com>
+Subject: Re: [PATCH v7 10/12] xen/tools: add sve parameter in XL configuration
+Message-ID: <1c32737f-771a-4172-84ef-65d24a42e8d4@perard>
+References: <20230523074326.3035745-1-luca.fancellu@arm.com>
+ <20230523074326.3035745-11-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230523074326.3035745-11-luca.fancellu@arm.com>
 
-We don't want the AFLAGS from the environment, they are usually meant
-to build user space application and not for the hypervisor.
+On Tue, May 23, 2023 at 08:43:24AM +0100, Luca Fancellu wrote:
+> Add sve parameter in XL configuration to allow guests to use
+> SVE feature.
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 
-Config.mk doesn't provied any $(AFLAGS) so we can start a fresh
-$(XEN_AFLAGS).
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/Makefile         | 10 ++++++----
- xen/arch/x86/arch.mk |  2 +-
- 2 files changed, 7 insertions(+), 5 deletions(-)
+Thanks,
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 127c0e40b5..c4a83fca76 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -258,6 +258,8 @@ export KBUILD_DEFCONFIG := $(ARCH)_defconfig
- # reparsing Config.mk by e.g. arch/x86/boot/.
- export XEN_TREEWIDE_CFLAGS := $(CFLAGS)
- 
-+XEN_AFLAGS =
-+
- # CLANG_FLAGS needs to be calculated before calling Kconfig
- ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
- CLANG_FLAGS :=
-@@ -412,9 +414,9 @@ ifneq ($(CONFIG_CC_IS_CLANG),y)
- CFLAGS += -Wa,--strip-local-absolute
- endif
- 
--AFLAGS += -D__ASSEMBLY__
-+XEN_AFLAGS += -D__ASSEMBLY__
- 
--$(call cc-option-add,AFLAGS,CC,-Wa$(comma)--noexecstack)
-+$(call cc-option-add,XEN_AFLAGS,CC,-Wa$(comma)--noexecstack)
- 
- LDFLAGS-$(call ld-option,--warn-rwx-segments) += --no-warn-rwx-segments
- 
-@@ -425,7 +427,7 @@ CFLAGS += $(EXTRA_CFLAGS_XEN_CORE)
- # Most CFLAGS are safe for assembly files:
- #  -std=gnu{89,99} gets confused by #-prefixed end-of-line comments
- #  -flto makes no sense and annoys clang
--AFLAGS += $(filter-out -std=gnu% -flto,$(CFLAGS)) $(AFLAGS-y)
-+XEN_AFLAGS += $(filter-out -std=gnu% -flto,$(CFLAGS)) $(AFLAGS-y)
- 
- # LDFLAGS are only passed directly to $(LD)
- LDFLAGS += $(LDFLAGS_DIRECT) $(LDFLAGS-y)
-@@ -462,7 +464,7 @@ include $(srctree)/arch/$(TARGET_ARCH)/arch.mk
- 
- # define new variables to avoid the ones defined in Config.mk
- export XEN_CFLAGS := $(CFLAGS)
--export XEN_AFLAGS := $(AFLAGS)
-+export XEN_AFLAGS := $(XEN_AFLAGS)
- export XEN_LDFLAGS := $(LDFLAGS)
- export CFLAGS_UBSAN
- 
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index 7b5be9fe46..13ec88a628 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -80,7 +80,7 @@ ifeq ($(CONFIG_LD_IS_GNU),y)
- AFLAGS-$(call ld-option,--print-output-format) += -DHAVE_LD_SORT_BY_INIT_PRIORITY
- else
- # Assume all versions of LLD support this.
--AFLAGS += -DHAVE_LD_SORT_BY_INIT_PRIORITY
-+XEN_AFLAGS += -DHAVE_LD_SORT_BY_INIT_PRIORITY
- endif
- 
- ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
 -- 
 Anthony PERARD
-
 
