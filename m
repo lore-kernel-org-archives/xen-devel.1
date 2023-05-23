@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5875AC7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D271C77B75
 	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 17:13:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538636.838782 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538632.838745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZY-0004DT-RG; Tue, 23 May 2023 17:13:20 +0000
+	id 1q1VZR-0003Je-J9; Tue, 23 May 2023 17:13:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538636.838782; Tue, 23 May 2023 17:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 538632.838745; Tue, 23 May 2023 17:13:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZY-0004BV-Md; Tue, 23 May 2023 17:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 538636;
- Tue, 23 May 2023 17:13:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q1VZR-0003JX-GR; Tue, 23 May 2023 17:13:13 +0000
+Received: by outflank-mailman (input) for mailman id 538632;
+ Tue, 23 May 2023 17:13:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YZ9c=BM=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q1VZX-0003Rc-Ji
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:19 +0000
+ id 1q1VZQ-0003JO-Qr
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:12 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1bf03b41-f98d-11ed-b22d-6b7b168915f2;
- Tue, 23 May 2023 19:13:18 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 16eaa886-f98d-11ed-8611-37d641c3527e;
+ Tue, 23 May 2023 19:13:09 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-301-gzuX83o1N-G_u96V8qK1mA-1; Tue, 23 May 2023 13:13:10 -0400
+ us-mta-605-6zDAZPuTMHuYV4TW0N4iPQ-1; Tue, 23 May 2023 13:13:03 -0400
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
  [10.11.54.3])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 29DD6101A55C;
- Tue, 23 May 2023 17:13:10 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5DCDC1C08780;
+ Tue, 23 May 2023 17:13:02 +0000 (UTC)
 Received: from localhost (unknown [10.39.195.107])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8332E1121314;
- Tue, 23 May 2023 17:13:09 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9437F1121314;
+ Tue, 23 May 2023 17:13:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bf03b41-f98d-11ed-b22d-6b7b168915f2
+X-Inumbo-ID: 16eaa886-f98d-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1684861997;
+	s=mimecast20190719; t=1684861988;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DQ+Ta4jd8QCmtIt4q28Sl6gRjCrcvbURcmSRFrOguqY=;
-	b=YxFvshAv3NUnokaHr4nhb//fLti70q/xzkkBimEBSj6jsmMky8gJUbVZfS3/5c2RzghPPc
-	Lm66z7okm5fJS673gee5O2dX6lcyp0GtO7qhhRTzXLRcJEsl3gGUCwReagnGcDny1kB4W9
-	opZkOejQIK2nfDJ4CO1gs9asi/MJo7U=
-X-MC-Unique: gzuX83o1N-G_u96V8qK1mA-1
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=3MBKX2AXrRRW1fC3P4hqaX0bBaxtga1xMfpCUvm9y3Y=;
+	b=AiE7Evsj1IxfRCsO+umt7TYkxqVD4AyvDAC3G62aNGPyxLPp8TjQdT2YrMOZLlN5pnjwQR
+	Df7Fmx4qji7Obv0PIfTCvNNA7ZiDJfV6KeIH/aHgtHpF7csOLCTaxNSnFJL20Z4U0hHya3
+	9wjUmLu0abiPieNvYHCFTJxVGeb+lbs=
+X-MC-Unique: 6zDAZPuTMHuYV4TW0N4iPQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
@@ -82,151 +81,92 @@ Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
 	eblake@redhat.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	qemu-block@nongnu.org
-Subject: [PATCH v2 3/6] block/blkio: convert to blk_io_plug_call() API
-Date: Tue, 23 May 2023 13:12:57 -0400
-Message-Id: <20230523171300.132347-4-stefanha@redhat.com>
-In-Reply-To: <20230523171300.132347-1-stefanha@redhat.com>
-References: <20230523171300.132347-1-stefanha@redhat.com>
+Subject: [PATCH v2 0/6] block: add blk_io_plug_call() API
+Date: Tue, 23 May 2023 13:12:54 -0400
+Message-Id: <20230523171300.132347-1-stefanha@redhat.com>
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
 
-Stop using the .bdrv_co_io_plug() API because it is not multi-queue
-block layer friendly. Use the new blk_io_plug_call() API to batch I/O
-submission instead.
-
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
----
 v2
-- Add missing #include and fix blkio_unplug_fn() prototype [Stefano]
----
- block/blkio.c | 43 ++++++++++++++++++++++++-------------------
- 1 file changed, 24 insertions(+), 19 deletions(-)
+- Patch 1: "is not be freed" -> "is not freed" [Eric]
+- Patch 2: Remove unused nvme_process_completion_queue_plugged trace event
+  [Stefano]
+- Patch 3: Add missing #include and fix blkio_unplug_fn() prototype [Stefano]
+- Patch 4: Removed whitespace hunk [Eric]
 
-diff --git a/block/blkio.c b/block/blkio.c
-index 0cdc99a729..93c6d20d39 100644
---- a/block/blkio.c
-+++ b/block/blkio.c
-@@ -17,6 +17,7 @@
- #include "qemu/error-report.h"
- #include "qapi/qmp/qdict.h"
- #include "qemu/module.h"
-+#include "sysemu/block-backend.h"
- #include "exec/memory.h" /* for ram_block_discard_disable() */
- 
- #include "block/block-io.h"
-@@ -325,16 +326,30 @@ static void blkio_detach_aio_context(BlockDriverState *bs)
-                        false, NULL, NULL, NULL, NULL, NULL);
- }
- 
--/* Call with s->blkio_lock held to submit I/O after enqueuing a new request */
--static void blkio_submit_io(BlockDriverState *bs)
-+/*
-+ * Called by blk_io_unplug() or immediately if not plugged. Called without
-+ * blkio_lock.
-+ */
-+static void blkio_unplug_fn(void *opaque)
- {
--    if (qatomic_read(&bs->io_plugged) == 0) {
--        BDRVBlkioState *s = bs->opaque;
-+    BDRVBlkioState *s = opaque;
- 
-+    WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_do_io(s->blkioq, NULL, 0, 0, NULL);
-     }
- }
- 
-+/*
-+ * Schedule I/O submission after enqueuing a new request. Called without
-+ * blkio_lock.
-+ */
-+static void blkio_submit_io(BlockDriverState *bs)
-+{
-+    BDRVBlkioState *s = bs->opaque;
-+
-+    blk_io_plug_call(blkio_unplug_fn, s);
-+}
-+
- static int coroutine_fn
- blkio_co_pdiscard(BlockDriverState *bs, int64_t offset, int64_t bytes)
- {
-@@ -345,9 +360,9 @@ blkio_co_pdiscard(BlockDriverState *bs, int64_t offset, int64_t bytes)
- 
-     WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_discard(s->blkioq, offset, bytes, &cod, 0);
--        blkio_submit_io(bs);
-     }
- 
-+    blkio_submit_io(bs);
-     qemu_coroutine_yield();
-     return cod.ret;
- }
-@@ -378,9 +393,9 @@ blkio_co_preadv(BlockDriverState *bs, int64_t offset, int64_t bytes,
- 
-     WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_readv(s->blkioq, offset, iov, iovcnt, &cod, 0);
--        blkio_submit_io(bs);
-     }
- 
-+    blkio_submit_io(bs);
-     qemu_coroutine_yield();
- 
-     if (use_bounce_buffer) {
-@@ -423,9 +438,9 @@ static int coroutine_fn blkio_co_pwritev(BlockDriverState *bs, int64_t offset,
- 
-     WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_writev(s->blkioq, offset, iov, iovcnt, &cod, blkio_flags);
--        blkio_submit_io(bs);
-     }
- 
-+    blkio_submit_io(bs);
-     qemu_coroutine_yield();
- 
-     if (use_bounce_buffer) {
-@@ -444,9 +459,9 @@ static int coroutine_fn blkio_co_flush(BlockDriverState *bs)
- 
-     WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_flush(s->blkioq, &cod, 0);
--        blkio_submit_io(bs);
-     }
- 
-+    blkio_submit_io(bs);
-     qemu_coroutine_yield();
-     return cod.ret;
- }
-@@ -472,22 +487,13 @@ static int coroutine_fn blkio_co_pwrite_zeroes(BlockDriverState *bs,
- 
-     WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
-         blkioq_write_zeroes(s->blkioq, offset, bytes, &cod, blkio_flags);
--        blkio_submit_io(bs);
-     }
- 
-+    blkio_submit_io(bs);
-     qemu_coroutine_yield();
-     return cod.ret;
- }
- 
--static void coroutine_fn blkio_co_io_unplug(BlockDriverState *bs)
--{
--    BDRVBlkioState *s = bs->opaque;
--
--    WITH_QEMU_LOCK_GUARD(&s->blkio_lock) {
--        blkio_submit_io(bs);
--    }
--}
--
- typedef enum {
-     BMRR_OK,
-     BMRR_SKIP,
-@@ -1009,7 +1015,6 @@ static void blkio_refresh_limits(BlockDriverState *bs, Error **errp)
-         .bdrv_co_pwritev         = blkio_co_pwritev, \
-         .bdrv_co_flush_to_disk   = blkio_co_flush, \
-         .bdrv_co_pwrite_zeroes   = blkio_co_pwrite_zeroes, \
--        .bdrv_co_io_unplug       = blkio_co_io_unplug, \
-         .bdrv_refresh_limits     = blkio_refresh_limits, \
-         .bdrv_register_buf       = blkio_register_buf, \
-         .bdrv_unregister_buf     = blkio_unregister_buf, \
+The existing blk_io_plug() API is not block layer multi-queue friendly because
+the plug state is per-BlockDriverState.
+
+Change blk_io_plug()'s implementation so it is thread-local. This is done by
+introducing the blk_io_plug_call() function that block drivers use to batch
+calls while plugged. It is relatively easy to convert block drivers from
+.bdrv_co_io_plug() to blk_io_plug_call().
+
+Random read 4KB performance with virtio-blk on a host NVMe block device:
+
+iodepth   iops   change vs today
+1        45612   -4%
+2        87967   +2%
+4       129872   +0%
+8       171096   -3%
+16      194508   -4%
+32      208947   -1%
+64      217647   +0%
+128     229629   +0%
+
+The results are within the noise for these benchmarks. This is to be expected
+because the plugging behavior for a single thread hasn't changed in this patch
+series, only that the state is thread-local now.
+
+The following graph compares several approaches:
+https://vmsplice.net/~stefan/blk_io_plug-thread-local.png
+- v7.2.0: before most of the multi-queue block layer changes landed.
+- with-blk_io_plug: today's post-8.0.0 QEMU.
+- blk_io_plug-thread-local: this patch series.
+- no-blk_io_plug: what happens when we simply remove plugging?
+- call-after-dispatch: what if we integrate plugging into the event loop? I
+  decided against this approach in the end because it's more likely to
+  introduce performance regressions since I/O submission is deferred until the
+  end of the event loop iteration.
+
+Aside from the no-blk_io_plug case, which bottlenecks much earlier than the
+others, we see that all plugging approaches are more or less equivalent in this
+benchmark. It is also clear that QEMU 8.0.0 has lower performance than 7.2.0.
+
+The Ansible playbook, fio results, and a Jupyter notebook are available here:
+https://github.com/stefanha/qemu-perf/tree/remove-blk_io_plug
+
+Stefan Hajnoczi (6):
+  block: add blk_io_plug_call() API
+  block/nvme: convert to blk_io_plug_call() API
+  block/blkio: convert to blk_io_plug_call() API
+  block/io_uring: convert to blk_io_plug_call() API
+  block/linux-aio: convert to blk_io_plug_call() API
+  block: remove bdrv_co_io_plug() API
+
+ MAINTAINERS                       |   1 +
+ include/block/block-io.h          |   3 -
+ include/block/block_int-common.h  |  11 ---
+ include/block/raw-aio.h           |  14 ---
+ include/sysemu/block-backend-io.h |  13 +--
+ block/blkio.c                     |  43 ++++----
+ block/block-backend.c             |  22 -----
+ block/file-posix.c                |  38 -------
+ block/io.c                        |  37 -------
+ block/io_uring.c                  |  44 ++++-----
+ block/linux-aio.c                 |  41 +++-----
+ block/nvme.c                      |  44 +++------
+ block/plug.c                      | 159 ++++++++++++++++++++++++++++++
+ hw/block/dataplane/xen-block.c    |   8 +-
+ hw/block/virtio-blk.c             |   4 +-
+ hw/scsi/virtio-scsi.c             |   6 +-
+ block/meson.build                 |   1 +
+ block/trace-events                |   6 +-
+ 18 files changed, 239 insertions(+), 256 deletions(-)
+ create mode 100644 block/plug.c
+
 -- 
 2.40.1
 
