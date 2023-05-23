@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADEF5C7EE2D
-	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:39:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538563.838655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492FFC77B75
+	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:39:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.538567.838665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1V2G-0001Xz-W2; Tue, 23 May 2023 16:38:56 +0000
+	id 1q1V2J-0001y2-EL; Tue, 23 May 2023 16:38:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538563.838655; Tue, 23 May 2023 16:38:56 +0000
+Received: by outflank-mailman (output) from mailman id 538567.838665; Tue, 23 May 2023 16:38:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1V2G-0001Xj-Sr; Tue, 23 May 2023 16:38:56 +0000
-Received: by outflank-mailman (input) for mailman id 538563;
- Tue, 23 May 2023 16:38:55 +0000
+	id 1q1V2J-0001x6-AR; Tue, 23 May 2023 16:38:59 +0000
+Received: by outflank-mailman (input) for mailman id 538567;
+ Tue, 23 May 2023 16:38:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UuGZ=BM=citrix.com=prvs=5000a0748=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1q1V2F-0006Dq-IC
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:38:55 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d58af33-f988-11ed-b22d-6b7b168915f2;
- Tue, 23 May 2023 18:38:54 +0200 (CEST)
+ id 1q1V2H-0006Dq-Ij
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 16:38:57 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4e613f36-f988-11ed-b22d-6b7b168915f2;
+ Tue, 23 May 2023 18:38:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,57 +38,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d58af33-f988-11ed-b22d-6b7b168915f2
+X-Inumbo-ID: 4e613f36-f988-11ed-b22d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684859934;
+  d=citrix.com; s=securemail; t=1684859936;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=xUrRJZg21IcuIXPT65Mny77WEiL8WRyRZGb2P5u/V+k=;
-  b=LZ61PVuPAlSVkaOC4RYQddLagOPLe1XbU0xz7v36taSS2HOe/PAKUWMk
-   euDVWxBUxQ3ODQcGXOgEXCNeTnnPxLxM3GSRdRxlctLd7X6vaPfxkbsZn
-   D1b0nLMkKm6bEtXggTb0GfsSoKq+A0ttIOKTqdvPF1NI3wYkn7FO1ZQeL
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=1S/PIs/4N3VAkKwJ+CBkSKlCj5ulIeeoVMLk5Q/XC08=;
+  b=ReGjuiPeDNGs5/wWMLup3ywIS2NAdQ8aqbibv7LZRQ2OZr2HV2MwNDrF
+   T7Xn86TkJ8VO3jIu3ONEOC6u8iQEECaz5PhjkE4W8PLFtL+ZD+PhCCzed
+   r7K7+pVWaEFz21b2BkFTVXMG/x8/cjcOUM/h6PK/e0HDGjfkqNA+kb3/K
+   Q=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 110112588
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 109985443
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:CRZ2A6ODbD5H+ZXvrR2Wl8FynXyQoLVcMsEvi/4bfWQNrUoghGMFn
- GsYDD2DbPeOM2D8fIh1aou19xgHucWHzIJkSgto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
- 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
- Nj/uKUzAnf8s9JPGjxSs/rrRC9H5qyo42tF5AdmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
- +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
- HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0t11KjhX8
- 8w3EmpOUD6biMir+4uUF+Y506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
- ZNEN3w2Nk+ojx5nYz/7DLo3mvuogX/uNSVVsluPqYI84nTJzRw327/oWDbQUoXTHZwMxBvI9
- goq+UzwMB03d9qgkgap1X6ptrORgHOiVqE7QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasvBQRRt5RGO0S8xyWx+zf5APxLmoZSj9MbvQ2uclwQiYlv
- neShM/gDzFrtLyTSFqe+62SoDf0PjIaRUcdYQcUQA1D5MPsyLzflTqWEIwlSvTsyISoR3epm
- WviQDUCa6s7tswgjry9zX/92XGSiIDGZBMO3yqKUTfwhu9mX7KNa4ut4FndyP9PKoeFU1WM1
- EQ5d9iiAPMmVs/UynHUKAkZNPTwvqvebmWA6bJ6N8N5nwlB7UJPamy5DNtWAE5yevgJdjbyC
- KM4kVMAvcQDVJdGgEIeXm5QNyjI5fK4fTgGfqqOBjarXnSWXFHvwc2WTRTMt10BaWB1+U3FB
- b+VcNy3EVERArl9wTy9So81iOF7mn9unT+IFMmjk3xLNIZyg1bME9843KamNLhlvMtoXi2Om
- zqgCyd640oGC7CvCsUm2YUSMUoLPRAGOHwCkOQOLrTrClM/SAkc5wr5netJl3pNw/4EyY8lP
- xiVBidl9bYIrSafc1TVNSgzOe+HsFQWhStTABHA9G2AgxALCbtDJo9GH3frVdHLLNBe8MM=
-IronPort-HdrOrdr: A9a23:CD91cKvMtS3VwGBX/AUAJYtZ7skDhtV00zEX/kB9WHVpm6yj+v
- xG/c5rsSMc7Qx6ZJhOo7+90cW7L080lqQFhLX5X43SPzUO0VHARO1fBO3ZogEIcxeUygc379
- YDT0ERMr3N5CNB/KHHCAnTKadd/DGEmprY+ts3GR1WPH9Xg6IL1XYJNu6CeHcGIjWvnfACZe
- ChDswsnUvYRV0nKv6VK1MiROb5q9jChPvdEGM7705O0nj3sduwgoSKaCSl4g==
-X-Talos-CUID: 9a23:KD4jOmyU9n6r63qOtdRbBgUvGOt8a3vt402KYHGWEWlDVYasZgKfrfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3AZnozNw/eKAaoSy0k1ob4b3KQf85a74ntDn9Wrbk?=
- =?us-ascii?q?ht8y0aXJta26Trx3iFw=3D=3D?=
+IronPort-Data: A9a23:n7tHLaiFli/lPQhkHvJ7ujoCX161UhAKZh0ujC45NGQN5FlHY01je
+ htvWmGFOv2LZmD8fYp+OYy18BhS6MPdnIRlGQJo/ClnRi4b9cadCdqndUqhZCn6wu8v7q5Ex
+ 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
+ cKai8DEMRqu1iUc3lg8sspvkzsx+qyq0N8klgZmP6sT4QWFzyN94K83fsldEVOpGuG4IcbiL
+ wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
+ OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
+ tQ2GQg0Nlezl96MzbTgEbNLgNQRBZDSadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
+ pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XejtEqFWTtOwv7nLa1gBZ27nxKtvFPNeNQK25m27B/
+ jOXrzmlXkpy2Nq3kCq0+G6vn9XzmhzmZ4ApHq2jq8BonwjGroAUIEJPDgbqyRWjsWa8RtZeJ
+ ko86ico668o+ySDTNPwQhm5q36spQMHVpxbFOhSwB6J4rrZ5UCeHGdsZiVadNUsucsyRDor/
+ lyEhdXkAXpoqrL9YWKQ8PKYoC2/PQARLHQefmkUQA0d+d7hrYovyBXVQb5e/LWd14OvX2uqm
+ nbT8XZ43u9I5SIW60ml1X72uwv04ajZcjQ44F6MBEWj/jFQPbfwMuRE9mPnxfpHKY+YSHyIs
+ 34Fh9WS4YgyMH2dqMCeaL5TRe/0vp5pJBWZ2AcyRMd5q1xB7lb5JehtDCdCyFCF2yruURvge
+ wfttAxY//e/11P6PPYsM+pd5ynHpJUM9OgJtNiONrKigbArLmdrGR2CgmbOt10BaGB2zckC1
+ W6zKK5A90oyB6V91yaRTOwAy7ItzS1W7TqNFcykn0z7iuvHPCL9pVI53LymN7pR0U95iF+Nr
+ 4Y32zWikH2zr9ESkgGIqNVOfDjm3FAwBIzsqtw/S9Nv1jFOQTl7Y9eImONJRmCQt/gN/gs+1
+ i3nCxAwJZuWrSGvFDhmnVg4MOm+Askn/SNnVcHuVH7xs0UejU+UxP93X/MKkXMPrbELISJcJ
+ xXdR/i9Pw==
+IronPort-HdrOrdr: A9a23:U9TLsKoPt5qbgWg/NZ2IesAaV5oTeYIsimQD101hICG8cqSj+f
+ xG+85rsyMc6QxhIE3I9urhBEDtex/hHNtOkOws1NSZLW7bUQmTXeJfBOLZqlWKcUDDH6xmpM
+ NdmsBFeaTN5DNB7PoSjjPWLz9Z+qjkzJyV
+X-Talos-CUID: 9a23:dGDAdWBLlX3GBFT6EwdWzHdMXfA1TkfQyiyLeWi+GVRAEYTAHA==
+X-Talos-MUID: 9a23:1zO0yQaC0Av2oOBT7i/dji1hLf1U5JuzN0I2m4Ud5veGKnkl
 X-IronPort-AV: E=Sophos;i="6.00,186,1681185600"; 
-   d="scan'208";a="110112588"
+   d="scan'208";a="109985443"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
  Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
  Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 13/15] build: fix compile.h compiler version command line
-Date: Tue, 23 May 2023 17:38:09 +0100
-Message-ID: <20230523163811.30792-14-anthony.perard@citrix.com>
+Subject: [XEN PATCH 05/15] build: introduce a generic command for gzip
+Date: Tue, 23 May 2023 17:38:01 +0100
+Message-ID: <20230523163811.30792-6-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230523163811.30792-1-anthony.perard@citrix.com>
 References: <20230523163811.30792-1-anthony.perard@citrix.com>
@@ -96,32 +95,53 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-CFLAGS is just from Config.mk, instead use the flags used to build
-Xen.
+Make the gzip command generic and use -9 which wasn't use for
+config.gz. (xen.gz does use -9)
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ xen/Rules.mk        | 5 +++++
+ xen/common/Makefile | 8 ++++----
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
-Notes:
-    I don't know if CFLAGS is even useful there, just --version without the
-    flags might produce the same result.
-
- xen/build.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/xen/build.mk b/xen/build.mk
-index e2a78aa806..d468bb6e26 100644
---- a/xen/build.mk
-+++ b/xen/build.mk
-@@ -23,7 +23,7 @@ define cmd_compile.h
- 	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
- 	    -e 's/@@domain@@/$(XEN_DOMAIN)/g' \
- 	    -e 's/@@hostname@@/$(XEN_BUILD_HOST)/g' \
--	    -e 's!@@compiler@@!$(shell $(CC) $(CFLAGS) --version 2>&1 | head -1)!g' \
-+	    -e 's!@@compiler@@!$(shell $(CC) $(XEN_CFLAGS) --version 2>&1 | head -1)!g' \
- 	    -e 's/@@version@@/$(XEN_VERSION)/g' \
- 	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
- 	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 59072ae8df..68b10ca5ef 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -63,6 +63,11 @@ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
+ quiet_cmd_binfile = BINFILE $@
+ cmd_binfile = $(SHELL) $(srctree)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
+ 
++# gzip
++quiet_cmd_gzip = GZIP    $@
++cmd_gzip = \
++    cat $(real-prereqs) | gzip -n -f -9 > $@
++
+ # Figure out what we need to build from the various variables
+ # ===========================================================================
+ 
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 46049eac35..f45f19c391 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -78,13 +78,13 @@ obj-$(CONFIG_NEEDS_LIBELF) += libelf/
+ obj-$(CONFIG_HAS_DEVICE_TREE) += libfdt/
+ 
+ CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(objtree)/)$(KCONFIG_CONFIG)
+-$(obj)/config.gz: $(CONF_FILE)
+-	gzip -n -c $< >$@
++$(obj)/config.gz: $(CONF_FILE) FORCE
++	$(call if_changed,gzip)
++
++targets += config.gz
+ 
+ $(obj)/config_data.o: $(obj)/config.gz
+ 
+ $(obj)/config_data.S: $(srctree)/tools/binfile FORCE
+ 	$(call if_changed,binfile,$(obj)/config.gz xen_config_data)
+ targets += config_data.S
+-
+-clean-files := config.gz
 -- 
 Anthony PERARD
 
