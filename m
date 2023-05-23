@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73314C7EE2E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0397C7EE2F
 	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 17:13:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538635.838775 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538633.838755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZY-00045u-Bq; Tue, 23 May 2023 17:13:20 +0000
+	id 1q1VZT-0003YZ-QJ; Tue, 23 May 2023 17:13:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538635.838775; Tue, 23 May 2023 17:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 538633.838755; Tue, 23 May 2023 17:13:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1VZY-00045l-8d; Tue, 23 May 2023 17:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 538635;
- Tue, 23 May 2023 17:13:18 +0000
+	id 1q1VZT-0003YS-Mh; Tue, 23 May 2023 17:13:15 +0000
+Received: by outflank-mailman (input) for mailman id 538633;
+ Tue, 23 May 2023 17:13:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YZ9c=BM=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q1VZW-0003Rc-JU
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:18 +0000
+ id 1q1VZS-0003Rc-77
+ for xen-devel@lists.xenproject.org; Tue, 23 May 2023 17:13:14 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1ba180ba-f98d-11ed-b22d-6b7b168915f2;
- Tue, 23 May 2023 19:13:17 +0200 (CEST)
+ id 1891f5db-f98d-11ed-b22d-6b7b168915f2;
+ Tue, 23 May 2023 19:13:12 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-495-ZauBHbUoNY-qinf-3koLiw-1; Tue, 23 May 2023 13:13:13 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-446-OWN8SbHRN8KoJsCl-5O8JQ-1; Tue, 23 May 2023 13:13:06 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 99A238037AD;
- Tue, 23 May 2023 17:13:12 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 593C48032FE;
+ Tue, 23 May 2023 17:13:05 +0000 (UTC)
 Received: from localhost (unknown [10.39.195.107])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 015D020296C8;
- Tue, 23 May 2023 17:13:11 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 34221C1ED99;
+ Tue, 23 May 2023 17:13:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ba180ba-f98d-11ed-b22d-6b7b168915f2
+X-Inumbo-ID: 1891f5db-f98d-11ed-b22d-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1684861996;
+	s=mimecast20190719; t=1684861991;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=adsezOIruOLlF6TNGoaz9EB3Mhcv/eh3FPCDU/pv2jU=;
-	b=HP5NACv1aNHN28e/zcPmGUBBaKEwR4/4wvvQYsVGFiqiNyXBvIflyObzP1cE42nhrlzZcf
-	l9BgYJZv+xtw9aEfJDRKzFc2yTtrW2BEfEQbyKfEtzRqJhwlXfAFnUchj2R2KQTUGAonwF
-	b5W7aLq10wK3uZiBb4SVgGNljdumIxA=
-X-MC-Unique: ZauBHbUoNY-qinf-3koLiw-1
+	bh=lWkemwIYHqUqRrd9czrbQXH/T+H09BEI6lXtVpoxOE0=;
+	b=ei7xrdCUKJ1Qm804EVuueRqHxBUiBb96YkfPe+W/ReR7NvJ6pE/oyNTyryVmPxiehR6ri2
+	FZiMTVJVpPsJ1+qnztG8mu1QJcMTnQpHxJxXJq4SAB36dnmEJtixw1gidByVK5lXKQBg/b
+	90k7GTwrSJ2UlVEVzybamMQ5acwaXyc=
+X-MC-Unique: OWN8SbHRN8KoJsCl-5O8JQ-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
@@ -82,182 +82,386 @@ Cc: Aarushi Mehta <mehta.aaru20@gmail.com>,
 	eblake@redhat.com,
 	Anthony Perard <anthony.perard@citrix.com>,
 	qemu-block@nongnu.org
-Subject: [PATCH v2 4/6] block/io_uring: convert to blk_io_plug_call() API
-Date: Tue, 23 May 2023 13:12:58 -0400
-Message-Id: <20230523171300.132347-5-stefanha@redhat.com>
+Subject: [PATCH v2 1/6] block: add blk_io_plug_call() API
+Date: Tue, 23 May 2023 13:12:55 -0400
+Message-Id: <20230523171300.132347-2-stefanha@redhat.com>
 In-Reply-To: <20230523171300.132347-1-stefanha@redhat.com>
 References: <20230523171300.132347-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 
-Stop using the .bdrv_co_io_plug() API because it is not multi-queue
-block layer friendly. Use the new blk_io_plug_call() API to batch I/O
-submission instead.
+Introduce a new API for thread-local blk_io_plug() that does not
+traverse the block graph. The goal is to make blk_io_plug() multi-queue
+friendly.
+
+Instead of having block drivers track whether or not we're in a plugged
+section, provide an API that allows them to defer a function call until
+we're unplugged: blk_io_plug_call(fn, opaque). If blk_io_plug_call() is
+called multiple times with the same fn/opaque pair, then fn() is only
+called once at the end of the function - resulting in batching.
+
+This patch introduces the API and changes blk_io_plug()/blk_io_unplug().
+blk_io_plug()/blk_io_unplug() no longer require a BlockBackend argument
+because the plug state is now thread-local.
+
+Later patches convert block drivers to blk_io_plug_call() and then we
+can finally remove .bdrv_co_io_plug() once all block drivers have been
+converted.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
 v2
-- Removed whitespace hunk [Eric]
+- "is not be freed" -> "is not freed" [Eric]
 ---
- include/block/raw-aio.h |  7 -------
- block/file-posix.c      | 10 ----------
- block/io_uring.c        | 44 ++++++++++++++++-------------------------
- block/trace-events      |  5 ++---
- 4 files changed, 19 insertions(+), 47 deletions(-)
+ MAINTAINERS                       |   1 +
+ include/sysemu/block-backend-io.h |  13 +--
+ block/block-backend.c             |  22 -----
+ block/plug.c                      | 159 ++++++++++++++++++++++++++++++
+ hw/block/dataplane/xen-block.c    |   8 +-
+ hw/block/virtio-blk.c             |   4 +-
+ hw/scsi/virtio-scsi.c             |   6 +-
+ block/meson.build                 |   1 +
+ 8 files changed, 173 insertions(+), 41 deletions(-)
+ create mode 100644 block/plug.c
 
-diff --git a/include/block/raw-aio.h b/include/block/raw-aio.h
-index 0fe85ade77..da60ca13ef 100644
---- a/include/block/raw-aio.h
-+++ b/include/block/raw-aio.h
-@@ -81,13 +81,6 @@ int coroutine_fn luring_co_submit(BlockDriverState *bs, int fd, uint64_t offset,
-                                   QEMUIOVector *qiov, int type);
- void luring_detach_aio_context(LuringState *s, AioContext *old_context);
- void luring_attach_aio_context(LuringState *s, AioContext *new_context);
--
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1b6466496d..2be6f0c26b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -2646,6 +2646,7 @@ F: util/aio-*.c
+ F: util/aio-*.h
+ F: util/fdmon-*.c
+ F: block/io.c
++F: block/plug.c
+ F: migration/block*
+ F: include/block/aio.h
+ F: include/block/aio-wait.h
+diff --git a/include/sysemu/block-backend-io.h b/include/sysemu/block-backend-io.h
+index d62a7ee773..be4dcef59d 100644
+--- a/include/sysemu/block-backend-io.h
++++ b/include/sysemu/block-backend-io.h
+@@ -100,16 +100,9 @@ void blk_iostatus_set_err(BlockBackend *blk, int error);
+ int blk_get_max_iov(BlockBackend *blk);
+ int blk_get_max_hw_iov(BlockBackend *blk);
+ 
 -/*
-- * luring_io_plug/unplug work in the thread's current AioContext, therefore the
-- * caller must ensure that they are paired in the same IOThread.
+- * blk_io_plug/unplug are thread-local operations. This means that multiple
+- * IOThreads can simultaneously call plug/unplug, but the caller must ensure
+- * that each unplug() is called in the same IOThread of the matching plug().
 - */
--void luring_io_plug(void);
--void luring_io_unplug(void);
- #endif
+-void coroutine_fn blk_co_io_plug(BlockBackend *blk);
+-void co_wrapper blk_io_plug(BlockBackend *blk);
+-
+-void coroutine_fn blk_co_io_unplug(BlockBackend *blk);
+-void co_wrapper blk_io_unplug(BlockBackend *blk);
++void blk_io_plug(void);
++void blk_io_unplug(void);
++void blk_io_plug_call(void (*fn)(void *), void *opaque);
  
- #ifdef _WIN32
-diff --git a/block/file-posix.c b/block/file-posix.c
-index 0ab158efba..7baa8491dd 100644
---- a/block/file-posix.c
-+++ b/block/file-posix.c
-@@ -2558,11 +2558,6 @@ static void coroutine_fn raw_co_io_plug(BlockDriverState *bs)
-         laio_io_plug();
-     }
- #endif
--#ifdef CONFIG_LINUX_IO_URING
--    if (s->use_linux_io_uring) {
--        luring_io_plug();
+ AioContext *blk_get_aio_context(BlockBackend *blk);
+ BlockAcctStats *blk_get_stats(BlockBackend *blk);
+diff --git a/block/block-backend.c b/block/block-backend.c
+index ca537cd0ad..1f1d226ba6 100644
+--- a/block/block-backend.c
++++ b/block/block-backend.c
+@@ -2568,28 +2568,6 @@ void blk_add_insert_bs_notifier(BlockBackend *blk, Notifier *notify)
+     notifier_list_add(&blk->insert_bs_notifiers, notify);
+ }
+ 
+-void coroutine_fn blk_co_io_plug(BlockBackend *blk)
+-{
+-    BlockDriverState *bs = blk_bs(blk);
+-    IO_CODE();
+-    GRAPH_RDLOCK_GUARD();
+-
+-    if (bs) {
+-        bdrv_co_io_plug(bs);
 -    }
--#endif
- }
- 
- static void coroutine_fn raw_co_io_unplug(BlockDriverState *bs)
-@@ -2573,11 +2568,6 @@ static void coroutine_fn raw_co_io_unplug(BlockDriverState *bs)
-         laio_io_unplug(s->aio_max_batch);
-     }
- #endif
--#ifdef CONFIG_LINUX_IO_URING
--    if (s->use_linux_io_uring) {
--        luring_io_unplug();
--    }
--#endif
- }
- 
- static int coroutine_fn raw_co_flush_to_disk(BlockDriverState *bs)
-diff --git a/block/io_uring.c b/block/io_uring.c
-index 82cab6a5bd..4e25b56c9c 100644
---- a/block/io_uring.c
-+++ b/block/io_uring.c
-@@ -16,6 +16,7 @@
- #include "block/raw-aio.h"
- #include "qemu/coroutine.h"
- #include "qapi/error.h"
-+#include "sysemu/block-backend.h"
- #include "trace.h"
- 
- /* Only used for assertions.  */
-@@ -41,7 +42,6 @@ typedef struct LuringAIOCB {
- } LuringAIOCB;
- 
- typedef struct LuringQueue {
--    int plugged;
-     unsigned int in_queue;
-     unsigned int in_flight;
-     bool blocked;
-@@ -267,7 +267,7 @@ static void luring_process_completions_and_submit(LuringState *s)
- {
-     luring_process_completions(s);
- 
--    if (!s->io_q.plugged && s->io_q.in_queue > 0) {
-+    if (s->io_q.in_queue > 0) {
-         ioq_submit(s);
-     }
- }
-@@ -301,29 +301,17 @@ static void qemu_luring_poll_ready(void *opaque)
- static void ioq_init(LuringQueue *io_q)
- {
-     QSIMPLEQ_INIT(&io_q->submit_queue);
--    io_q->plugged = 0;
-     io_q->in_queue = 0;
-     io_q->in_flight = 0;
-     io_q->blocked = false;
- }
- 
--void luring_io_plug(void)
-+static void luring_unplug_fn(void *opaque)
- {
--    AioContext *ctx = qemu_get_current_aio_context();
--    LuringState *s = aio_get_linux_io_uring(ctx);
--    trace_luring_io_plug(s);
--    s->io_q.plugged++;
 -}
 -
--void luring_io_unplug(void)
+-void coroutine_fn blk_co_io_unplug(BlockBackend *blk)
 -{
--    AioContext *ctx = qemu_get_current_aio_context();
--    LuringState *s = aio_get_linux_io_uring(ctx);
--    assert(s->io_q.plugged);
--    trace_luring_io_unplug(s, s->io_q.blocked, s->io_q.plugged,
--                           s->io_q.in_queue, s->io_q.in_flight);
--    if (--s->io_q.plugged == 0 &&
--        !s->io_q.blocked && s->io_q.in_queue > 0) {
-+    LuringState *s = opaque;
-+    trace_luring_unplug_fn(s, s->io_q.blocked, s->io_q.in_queue,
-+                           s->io_q.in_flight);
-+    if (!s->io_q.blocked && s->io_q.in_queue > 0) {
-         ioq_submit(s);
-     }
- }
-@@ -370,14 +358,16 @@ static int luring_do_submit(int fd, LuringAIOCB *luringcb, LuringState *s,
- 
-     QSIMPLEQ_INSERT_TAIL(&s->io_q.submit_queue, luringcb, next);
-     s->io_q.in_queue++;
--    trace_luring_do_submit(s, s->io_q.blocked, s->io_q.plugged,
--                           s->io_q.in_queue, s->io_q.in_flight);
--    if (!s->io_q.blocked &&
--        (!s->io_q.plugged ||
--         s->io_q.in_flight + s->io_q.in_queue >= MAX_ENTRIES)) {
--        ret = ioq_submit(s);
--        trace_luring_do_submit_done(s, ret);
--        return ret;
-+    trace_luring_do_submit(s, s->io_q.blocked, s->io_q.in_queue,
-+                           s->io_q.in_flight);
-+    if (!s->io_q.blocked) {
-+        if (s->io_q.in_flight + s->io_q.in_queue >= MAX_ENTRIES) {
-+            ret = ioq_submit(s);
-+            trace_luring_do_submit_done(s, ret);
-+            return ret;
-+        }
+-    BlockDriverState *bs = blk_bs(blk);
+-    IO_CODE();
+-    GRAPH_RDLOCK_GUARD();
+-
+-    if (bs) {
+-        bdrv_co_io_unplug(bs);
+-    }
+-}
+-
+ BlockAcctStats *blk_get_stats(BlockBackend *blk)
+ {
+     IO_CODE();
+diff --git a/block/plug.c b/block/plug.c
+new file mode 100644
+index 0000000000..98a155d2f4
+--- /dev/null
++++ b/block/plug.c
+@@ -0,0 +1,159 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Block I/O plugging
++ *
++ * Copyright Red Hat.
++ *
++ * This API defers a function call within a blk_io_plug()/blk_io_unplug()
++ * section, allowing multiple calls to batch up. This is a performance
++ * optimization that is used in the block layer to submit several I/O requests
++ * at once instead of individually:
++ *
++ *   blk_io_plug(); <-- start of plugged region
++ *   ...
++ *   blk_io_plug_call(my_func, my_obj); <-- deferred my_func(my_obj) call
++ *   blk_io_plug_call(my_func, my_obj); <-- another
++ *   blk_io_plug_call(my_func, my_obj); <-- another
++ *   ...
++ *   blk_io_unplug(); <-- end of plugged region, my_func(my_obj) is called once
++ *
++ * This code is actually generic and not tied to the block layer. If another
++ * subsystem needs this functionality, it could be renamed.
++ */
 +
-+        blk_io_plug_call(luring_unplug_fn, s);
++#include "qemu/osdep.h"
++#include "qemu/coroutine-tls.h"
++#include "qemu/notify.h"
++#include "qemu/thread.h"
++#include "sysemu/block-backend.h"
++
++/* A function call that has been deferred until unplug() */
++typedef struct {
++    void (*fn)(void *);
++    void *opaque;
++} UnplugFn;
++
++/* Per-thread state */
++typedef struct {
++    unsigned count;       /* how many times has plug() been called? */
++    GArray *unplug_fns;   /* functions to call at unplug time */
++} Plug;
++
++/* Use get_ptr_plug() to fetch this thread-local value */
++QEMU_DEFINE_STATIC_CO_TLS(Plug, plug);
++
++/* Called at thread cleanup time */
++static void blk_io_plug_atexit(Notifier *n, void *value)
++{
++    Plug *plug = get_ptr_plug();
++    g_array_free(plug->unplug_fns, TRUE);
++}
++
++/* This won't involve coroutines, so use __thread */
++static __thread Notifier blk_io_plug_atexit_notifier;
++
++/**
++ * blk_io_plug_call:
++ * @fn: a function pointer to be invoked
++ * @opaque: a user-defined argument to @fn()
++ *
++ * Call @fn(@opaque) immediately if not within a blk_io_plug()/blk_io_unplug()
++ * section.
++ *
++ * Otherwise defer the call until the end of the outermost
++ * blk_io_plug()/blk_io_unplug() section in this thread. If the same
++ * @fn/@opaque pair has already been deferred, it will only be called once upon
++ * blk_io_unplug() so that accumulated calls are batched into a single call.
++ *
++ * The caller must ensure that @opaque is not freed before @fn() is invoked.
++ */
++void blk_io_plug_call(void (*fn)(void *), void *opaque)
++{
++    Plug *plug = get_ptr_plug();
++
++    /* Call immediately if we're not plugged */
++    if (plug->count == 0) {
++        fn(opaque);
++        return;
++    }
++
++    GArray *array = plug->unplug_fns;
++    if (!array) {
++        array = g_array_new(FALSE, FALSE, sizeof(UnplugFn));
++        plug->unplug_fns = array;
++        blk_io_plug_atexit_notifier.notify = blk_io_plug_atexit;
++        qemu_thread_atexit_add(&blk_io_plug_atexit_notifier);
++    }
++
++    UnplugFn *fns = (UnplugFn *)array->data;
++    UnplugFn new_fn = {
++        .fn = fn,
++        .opaque = opaque,
++    };
++
++    /*
++     * There won't be many, so do a linear search. If this becomes a bottleneck
++     * then a binary search (glib 2.62+) or different data structure could be
++     * used.
++     */
++    for (guint i = 0; i < array->len; i++) {
++        if (memcmp(&fns[i], &new_fn, sizeof(new_fn)) == 0) {
++            return; /* already exists */
++        }
++    }
++
++    g_array_append_val(array, new_fn);
++}
++
++/**
++ * blk_io_plug: Defer blk_io_plug_call() functions until blk_io_unplug()
++ *
++ * blk_io_plug/unplug are thread-local operations. This means that multiple
++ * threads can simultaneously call plug/unplug, but the caller must ensure that
++ * each unplug() is called in the same thread of the matching plug().
++ *
++ * Nesting is supported. blk_io_plug_call() functions are only called at the
++ * outermost blk_io_unplug().
++ */
++void blk_io_plug(void)
++{
++    Plug *plug = get_ptr_plug();
++
++    assert(plug->count < UINT32_MAX);
++
++    plug->count++;
++}
++
++/**
++ * blk_io_unplug: Run any pending blk_io_plug_call() functions
++ *
++ * There must have been a matching blk_io_plug() call in the same thread prior
++ * to this blk_io_unplug() call.
++ */
++void blk_io_unplug(void)
++{
++    Plug *plug = get_ptr_plug();
++
++    assert(plug->count > 0);
++
++    if (--plug->count > 0) {
++        return;
++    }
++
++    GArray *array = plug->unplug_fns;
++    if (!array) {
++        return;
++    }
++
++    UnplugFn *fns = (UnplugFn *)array->data;
++
++    for (guint i = 0; i < array->len; i++) {
++        fns[i].fn(fns[i].opaque);
++    }
++
++    /*
++     * This resets the array without freeing memory so that appending is cheap
++     * in the future.
++     */
++    g_array_set_size(array, 0);
++}
+diff --git a/hw/block/dataplane/xen-block.c b/hw/block/dataplane/xen-block.c
+index d8bc39d359..e49c24f63d 100644
+--- a/hw/block/dataplane/xen-block.c
++++ b/hw/block/dataplane/xen-block.c
+@@ -537,7 +537,7 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+      * is below us.
+      */
+     if (inflight_atstart > IO_PLUG_THRESHOLD) {
+-        blk_io_plug(dataplane->blk);
++        blk_io_plug();
      }
+     while (rc != rp) {
+         /* pull request from ring */
+@@ -577,12 +577,12 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+ 
+         if (inflight_atstart > IO_PLUG_THRESHOLD &&
+             batched >= inflight_atstart) {
+-            blk_io_unplug(dataplane->blk);
++            blk_io_unplug();
+         }
+         xen_block_do_aio(request);
+         if (inflight_atstart > IO_PLUG_THRESHOLD) {
+             if (batched >= inflight_atstart) {
+-                blk_io_plug(dataplane->blk);
++                blk_io_plug();
+                 batched = 0;
+             } else {
+                 batched++;
+@@ -590,7 +590,7 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+         }
+     }
+     if (inflight_atstart > IO_PLUG_THRESHOLD) {
+-        blk_io_unplug(dataplane->blk);
++        blk_io_unplug();
+     }
+ 
+     return done_something;
+diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
+index 8f65ea4659..b4286424c1 100644
+--- a/hw/block/virtio-blk.c
++++ b/hw/block/virtio-blk.c
+@@ -1134,7 +1134,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
+     bool suppress_notifications = virtio_queue_get_notification(vq);
+ 
+     aio_context_acquire(blk_get_aio_context(s->blk));
+-    blk_io_plug(s->blk);
++    blk_io_plug();
+ 
+     do {
+         if (suppress_notifications) {
+@@ -1158,7 +1158,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
+         virtio_blk_submit_multireq(s, &mrb);
+     }
+ 
+-    blk_io_unplug(s->blk);
++    blk_io_unplug();
+     aio_context_release(blk_get_aio_context(s->blk));
+ }
+ 
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 612c525d9d..534a44ee07 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -799,7 +799,7 @@ static int virtio_scsi_handle_cmd_req_prepare(VirtIOSCSI *s, VirtIOSCSIReq *req)
+         return -ENOBUFS;
+     }
+     scsi_req_ref(req->sreq);
+-    blk_io_plug(d->conf.blk);
++    blk_io_plug();
+     object_unref(OBJECT(d));
      return 0;
  }
-diff --git a/block/trace-events b/block/trace-events
-index 048ad27519..6f121b7636 100644
---- a/block/trace-events
-+++ b/block/trace-events
-@@ -64,9 +64,8 @@ file_paio_submit(void *acb, void *opaque, int64_t offset, int count, int type) "
- # io_uring.c
- luring_init_state(void *s, size_t size) "s %p size %zu"
- luring_cleanup_state(void *s) "%p freed"
--luring_io_plug(void *s) "LuringState %p plug"
--luring_io_unplug(void *s, int blocked, int plugged, int queued, int inflight) "LuringState %p blocked %d plugged %d queued %d inflight %d"
--luring_do_submit(void *s, int blocked, int plugged, int queued, int inflight) "LuringState %p blocked %d plugged %d queued %d inflight %d"
-+luring_unplug_fn(void *s, int blocked, int queued, int inflight) "LuringState %p blocked %d queued %d inflight %d"
-+luring_do_submit(void *s, int blocked, int queued, int inflight) "LuringState %p blocked %d queued %d inflight %d"
- luring_do_submit_done(void *s, int ret) "LuringState %p submitted to kernel %d"
- luring_co_submit(void *bs, void *s, void *luringcb, int fd, uint64_t offset, size_t nbytes, int type) "bs %p s %p luringcb %p fd %d offset %" PRId64 " nbytes %zd type %d"
- luring_process_completion(void *s, void *aiocb, int ret) "LuringState %p luringcb %p ret %d"
+@@ -810,7 +810,7 @@ static void virtio_scsi_handle_cmd_req_submit(VirtIOSCSI *s, VirtIOSCSIReq *req)
+     if (scsi_req_enqueue(sreq)) {
+         scsi_req_continue(sreq);
+     }
+-    blk_io_unplug(sreq->dev->conf.blk);
++    blk_io_unplug();
+     scsi_req_unref(sreq);
+ }
+ 
+@@ -836,7 +836,7 @@ static void virtio_scsi_handle_cmd_vq(VirtIOSCSI *s, VirtQueue *vq)
+                 while (!QTAILQ_EMPTY(&reqs)) {
+                     req = QTAILQ_FIRST(&reqs);
+                     QTAILQ_REMOVE(&reqs, req, next);
+-                    blk_io_unplug(req->sreq->dev->conf.blk);
++                    blk_io_unplug();
+                     scsi_req_unref(req->sreq);
+                     virtqueue_detach_element(req->vq, &req->elem, 0);
+                     virtio_scsi_free_req(req);
+diff --git a/block/meson.build b/block/meson.build
+index 486dda8b85..fb4332bd66 100644
+--- a/block/meson.build
++++ b/block/meson.build
+@@ -23,6 +23,7 @@ block_ss.add(files(
+   'mirror.c',
+   'nbd.c',
+   'null.c',
++  'plug.c',
+   'qapi.c',
+   'qcow2-bitmap.c',
+   'qcow2-cache.c',
 -- 
 2.40.1
 
