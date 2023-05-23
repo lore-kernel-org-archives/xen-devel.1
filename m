@@ -4,43 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85C7C7EE23
-	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 15:49:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538536.838545 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C6CC77B75
+	for <xen-devel@archiver.kernel.org>; Tue, 23 May 2023 16:24:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.538543.838555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1UGE-0007mo-36; Tue, 23 May 2023 15:49:18 +0000
+	id 1q1Und-0004Zu-K5; Tue, 23 May 2023 16:23:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538536.838545; Tue, 23 May 2023 15:49:18 +0000
+Received: by outflank-mailman (output) from mailman id 538543.838555; Tue, 23 May 2023 16:23:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1UGD-0007mh-W6; Tue, 23 May 2023 15:49:18 +0000
-Received: by outflank-mailman (input) for mailman id 538536;
- Tue, 23 May 2023 15:49:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YZ9c=BM=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q1UGC-0005mv-CU
- for xen-devel@lists.xenproject.org; Tue, 23 May 2023 15:49:16 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5dcc5c3e-f981-11ed-8611-37d641c3527e;
- Tue, 23 May 2023 17:49:14 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-22-ydMYk082PL-T9DEkukad9A-1; Tue, 23 May 2023 11:48:48 -0400
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8706629AA3B0;
- Tue, 23 May 2023 15:48:20 +0000 (UTC)
-Received: from localhost (unknown [10.39.195.107])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 06F37C5146F;
- Tue, 23 May 2023 15:48:19 +0000 (UTC)
+	id 1q1Und-0004Zn-Gt; Tue, 23 May 2023 16:23:49 +0000
+Received: by outflank-mailman (input) for mailman id 538543;
+ Tue, 23 May 2023 16:23:47 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q1Unb-0004Zd-Hl; Tue, 23 May 2023 16:23:47 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q1Unb-0001k0-BE; Tue, 23 May 2023 16:23:47 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q1Una-0004Le-Pv; Tue, 23 May 2023 16:23:46 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1q1Una-0001IU-PX; Tue, 23 May 2023 16:23:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,87 +44,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5dcc5c3e-f981-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1684856953;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=rQ6nlvqTSvY4+s9JAwczIEJjWTozdr3kOea/XsYr2bY=;
-	b=XybKL35SLveJARaInMFrMuAvJbKeTnEBrbouGBp0fZNkg9B9HLjbns0MWwe2iy168Kn7bF
-	Gn1iNTehKw+VupZ53Kg4Gih6+FKlMdEgB3KcjWJWn64He2oUQNXWrjtUeprnlYmfKKKbih
-	6HPF0rpGq4r/uUqNy2IAbDARSu8EmqQ=
-X-MC-Unique: ydMYk082PL-T9DEkukad9A-1
-Date: Tue, 23 May 2023 11:48:18 -0400
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org,
-	Julia Suvorova <jusual@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
-	Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>, qemu-block@nongnu.org,
-	Paul Durrant <paul@xen.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Aarushi Mehta <mehta.aaru20@gmail.com>,
-	Hanna Reitz <hreitz@redhat.com>
-Subject: Re: [PATCH 3/6] block/blkio: convert to blk_io_plug_call() API
-Message-ID: <20230523154818.GE96478@fedora>
-References: <20230517221022.325091-1-stefanha@redhat.com>
- <20230517221022.325091-4-stefanha@redhat.com>
- <wtyut5kd4v5vapon7fzpvi3kghvpplokcas5ovcwnjhiwyuccb@rm6eb6jjhhp5>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=o67MDz3Setw89Es7oxMbf0iPfsmidIZ+RznLTQ4/QyM=; b=JncyGgEh3ZnerxHkJ3f8kLFyf7
+	ZpZrtwxMVlWrsMxGQjwUtOSGfrU5kmhv8Q0MM5ZwMJmYb/w7n17orOo9bABiHMAidiHQObK9JrAeI
+	e1Oeu2TiLLujXrgAJ5aCC1/K1bfu3LCkghRtyHjv2pJorBX3oc8Op8JTmtR9CW7G2xVY=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-180910-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="y9sI4btH/QqT9qV/"
-Content-Disposition: inline
-In-Reply-To: <wtyut5kd4v5vapon7fzpvi3kghvpplokcas5ovcwnjhiwyuccb@rm6eb6jjhhp5>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+Subject: [libvirt test] 180910: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    libvirt:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+    libvirt:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    libvirt=3b6d69237f0a07bf8d9807cd68a387f8d42b076f
+X-Osstest-Versions-That:
+    libvirt=90404c53682f464b4a26efd618887dc336d9da80
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 23 May 2023 16:23:46 +0000
+
+flight 180910 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/180910/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 180714
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 180714
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 180714
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 15 saverestore-support-check    fail never pass
+ test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ libvirt              3b6d69237f0a07bf8d9807cd68a387f8d42b076f
+baseline version:
+ libvirt              90404c53682f464b4a26efd618887dc336d9da80
+
+Last test of basis   180714  2023-05-19 04:18:50 Z    4 days
+Testing same since   180910  2023-05-23 04:18:51 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrea Bolognani <abologna@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-libvirt-raw                                  pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
 
 
---y9sI4btH/QqT9qV/
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-On Fri, May 19, 2023 at 10:47:00AM +0200, Stefano Garzarella wrote:
-> On Wed, May 17, 2023 at 06:10:19PM -0400, Stefan Hajnoczi wrote:
-> > Stop using the .bdrv_co_io_plug() API because it is not multi-queue
-> > block layer friendly. Use the new blk_io_plug_call() API to batch I/O
-> > submission instead.
-> >=20
-> > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> > ---
-> > block/blkio.c | 40 +++++++++++++++++++++-------------------
-> > 1 file changed, 21 insertions(+), 19 deletions(-)
->=20
-> With this patch, the build fails in several places, maybe it's an old
-> version:
->=20
-> ../block/blkio.c:347:5: error: implicit declaration of function
-> =E2=80=98blk_io_plug_call=E2=80=99 [-Werror=3Dimplicit-function-declarati=
-on]
->   347 |     blk_io_plug_call(blkio_unplug_fn, bs);
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Will fix, thanks!
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-Stefan
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
---y9sI4btH/QqT9qV/
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+Pushing revision :
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmRs4EIACgkQnKSrs4Gr
-c8jxMgf/ZdgG8aDCuwHwEH9aJ8kuEqAjFKKDKa/eAzlnouLXNCYig1RhfL9cDWaZ
-4Zd/vBacIMN9YdG/gtrMl8iJlbz8fzNj9XqZnQuEByHQg82r/8+ehKP1tP+lhLWY
-92jI+7BiJGCzg7nmFPW9CnADyWDmDvkWgmpXuLOZNGn9O3VTFLlmSjGv0BXi7kUT
-pAIPfTrIanIJgLykGqSe606MCIo0aAefJ5zqAUhxT5jAk3R49722wMXYNbG2huFC
-gWm3wH6hcTqRYpfbHZNo2hgz0PwEBqETuoH6VpylmcU8PLp54faw7euHo7eEqF1R
-rJs7BnbeXR/04nOSnMfHWnLiql1OZw==
-=duel
------END PGP SIGNATURE-----
-
---y9sI4btH/QqT9qV/--
-
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   90404c5368..3b6d69237f  3b6d69237f0a07bf8d9807cd68a387f8d42b076f -> xen-tested-master
 
