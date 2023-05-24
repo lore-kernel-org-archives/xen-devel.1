@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C34C77B7A
-	for <xen-devel@archiver.kernel.org>; Wed, 24 May 2023 11:26:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538976.839486 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4A1C77B7A
+	for <xen-devel@archiver.kernel.org>; Wed, 24 May 2023 11:26:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.538979.839496 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mcy-0000u8-5b; Wed, 24 May 2023 11:26:00 +0000
+	id 1q1md4-00023d-Kf; Wed, 24 May 2023 11:26:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538976.839486; Wed, 24 May 2023 11:26:00 +0000
+Received: by outflank-mailman (output) from mailman id 538979.839496; Wed, 24 May 2023 11:26:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mcy-0000tm-0p; Wed, 24 May 2023 11:26:00 +0000
-Received: by outflank-mailman (input) for mailman id 538976;
- Wed, 24 May 2023 11:25:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q1md4-00023O-GL; Wed, 24 May 2023 11:26:06 +0000
+Received: by outflank-mailman (input) for mailman id 538979;
+ Wed, 24 May 2023 11:26:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KTJK=BN=citrix.com=prvs=501cbbf32=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1q1mcw-0006nQ-Tc
- for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:25:58 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c04d50ee-fa25-11ed-b22f-6b7b168915f2;
- Wed, 24 May 2023 13:25:58 +0200 (CEST)
+ id 1q1md4-0006dp-0f
+ for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:26:06 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c351b31c-fa25-11ed-8611-37d641c3527e;
+ Wed, 24 May 2023 13:26:02 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,58 +38,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c04d50ee-fa25-11ed-b22f-6b7b168915f2
+X-Inumbo-ID: c351b31c-fa25-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684927557;
+  d=citrix.com; s=securemail; t=1684927562;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lb/LSILGLCd6gJWJslDO2ppBGoRSQMQXkFRr5JMK4ms=;
-  b=drk7pOLZ6UJE9rAViFLetIpYGok3ByzpvgK99/0mGDPesKzAzTu6/2GI
-   3+ceFvSfakjeiEUt+8fD6hbKGCN5ESXxHD52vcJMN5RVLMfwIcmc1uaTn
-   dIcoF41I7Fh2c4S1ZCOh89i2PY9roX3Lc3VTkVy+99VxgReuEiuUR7Emt
-   s=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=DtKNj1X+fbwrK8e7vMIUyEUyV/cXQDpO7JUIGknehMg=;
+  b=M91kP5SnkPjyQVv0mzzx77lVtyeiYvdGjNzYUh7rYShoLKZlaArsSdLa
+   okQhiVy5CDoIkA2qNrHaIwQv2AWKrObNCgs/hCz87q71BDdxqJ4+NyO8d
+   1TZ5lQo3umNIYR7cElyfIT9ghsSO0Wr+ttAC5bTqU5xlgepu0gPRyxnob
+   U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 109533433
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 112680598
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:o4YfL62lWqzXFzG5LfbD5epxkn2cJEfYwER7XKvMYLTBsI5bpzdRz
- TAdX2mDb/iPNzP0eIsga9yz8UlQu5aHnIc3GVY+pC1hF35El5HIVI+TRqvS04F+DeWYFR46s
+IronPort-Data: A9a23:+RRWQK2QWq/XF7tKefbD5dtxkn2cJEfYwER7XKvMYLTBsI5bp2MOz
+ 2YXD22Ga6zfNmH2LdwiOYjj8x8Bu8fSxtVrGQRupC1hF35El5HIVI+TRqvS04F+DeWYFR46s
  J9OAjXkBJppJpMJjk71atANlVEliefTAOK6ULWeUsxIbVcMYD87jh5+kPIOjIdtgNyoayuAo
  tq3qMDEULOf82cc3lk8teTb8HuDgNyo4GlD5gFkOagQ1LPjvyJ94Kw3dPnZw0TQGuG4LsbiL
  87fwbew+H/u/htFIrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRrukoPD9IOaF8/ttm8t4sZJ
- OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfPDFP3
- NwCOB42TFOPhqW1/uubVetJr5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
- ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJ0Ewx3D+
- jmdl4j/Kj0gLcCt6iGVyGvylqzhgyngQdlKEITto5aGh3XMnzdOWXX6T2CTsfS/z0KzRd9bA
- 0gV4TY167g/8lSxSdvwVAH+p2SL1jYeUddNF+wx6CmW17HZpQ2eAwAsUTppeNEg8sgsSlQC1
- EKP2dXgBjVtsbicYXOb6rqQ6zi1PEA9LmIcZClCUQoM5fHipp0+ilTESdMLLUKupoSrQ3eqm
- WnM9XVgwexJ1qbnyplX43j60zOFhoLZYDUXpQnWGWGbtyNmZquMMtnABUfg0d5MK4OQT1+kt
- XcCmtSD4O1mMaxhhBBhU81WQuj3uq/t3Cn0xAc2QsJ/r2jFF2uLJ9g43d1oGKt+3i/okxfNa
- VSbhw5e7YQ70JCCPf4uONLZ5yjHIMHd+TXZuhL8NIImjntZLlXvEMRSiam4gQjQfLAEy/1XB
- HtiWZ/E4YwmIapm1iGqYOwWzKUmwCszrUuKG8Cnn0r5gebFOi/PIVvgDLdpRrljhJ5oXS2Pq
- 4oPXyd04043vBLCjtn/rtdIcAFiwYkTDpHqsc1HHtO+zv5dMDh5UZf5mOpxE7GJaowJzo8kC
- FnhAB4HoLc+7FWbQTi3hodLN+62As8m8SNkVcHuVH7xs0UejU+UxP93X/MKkXMPrbcLISJcJ
- xXdR/i9Pw==
-IronPort-HdrOrdr: A9a23:YaXTEaCs0UI/nqnlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
- xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 9dmsNFaeEYY2IUsS+D2njbL+od
-X-Talos-CUID: 9a23:YwxQ6GFtG711vo4hqmJapE89Oto1XEb/j3vRZEyGUEZ2Spi8HAo=
-X-Talos-MUID: =?us-ascii?q?9a23=3AqReWIQzJ0kRRTQsSZ+74frqh5jeaqIiUEVw/so4?=
- =?us-ascii?q?WgdDaJW9eJT2GlW/vRrZyfw=3D=3D?=
+ OOhF3CHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqFvnrSFL/hGVSkL0YMkFulfXWFPx
+ KwUdRYxQE67rPznmuijbblSr5F2RCXrFNt3VnBIyDjYCbAtQIzZQrWM7thdtNsyrpkQR7CEP
+ ZNfMGcxKk2aOHWjOX9OYH46tM6uimPybHtzr1WNqLBsy2PS0BZwwP7mN9+9ltmiHJwPwBbA+
+ zOWl4j/KgwnP/i5xzmVyDWXqsbSngjaSNobGLLto5aGh3XMnzdOWXX6T2CTvv2RmkO4HdVFJ
+ CQ86ico6KQ/6kGvZt38RAGj5m6JuAYGXNhdGPF87xuCooL2yQuEAmkPThZadccr8sQxQFQXO
+ kShxo2zQ2Y16fvMFCzbr+3Pxd+vBcQLBTMCZB5UQVYj3/e9mKot30iVVvEzLofg27UZBgrM6
+ zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4adO6kok+9U
+ G/ociR0xMQHFtmzmSOEW43h95n5tq/eYFUwbbOCdqTNFghBGVb5Jei8Axkkfi+F1/ronhe3C
+ HI/QSsLuPdu0IKCNMebmb6ZBcUw1rTHHt/4TP3SZdcmSsEvJFPXon8+ORXOjjqFfK0QfUYXY
+ M3zTCpRJSxCVfQPIMSeHI/xLoPHNghhnDiOFPgXPjys0KaEZW79dIrpxGCmN7hjhIvd+VW9z
+ jqqH5fSo/mpeLGkM3a/HE96BQxiEEXX8rip9pUIL7ffc1UO9aNII6a5/I7NsrdNx8x9/tokN
+ FnkMqOE4DITXUH6FDg=
+IronPort-HdrOrdr: A9a23:hzoYdaFuYX3PegjnpLqELMeALOsnbusQ8zAXPiBKJCC9E/bo8v
+ xG+c5w6faaslkssR0b9+xoW5PwI080l6QU3WB5B97LMDUO0FHCEGgI1/qA/9SPIUzDHu4279
+ YbT0B9YueAcGSTW6zBkXWF+9VL+qj5zEix792uq0uE1WtRGtldBwESMHf9LmRGADNoKLAeD5
+ Sm6s9Ot1ObCA8qhpTSPAhiYwDbzee77a7bXQ==
+X-Talos-CUID: =?us-ascii?q?9a23=3AL6vDXWtyMTfYkwei8UjlrTkP6It5cnzsnHuNBXO?=
+ =?us-ascii?q?WV15CVuzPE0e3qJ1Nxp8=3D?=
+X-Talos-MUID: 9a23:0/lztARkwZZSeuOeRXTxuTpGEslr857pM2wkjJYtmtncPCB/bmI=
 X-IronPort-AV: E=Sophos;i="6.00,189,1681185600"; 
-   d="scan'208";a="109533433"
+   d="scan'208";a="112680598"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH v2 08/10] x86/vtx: Remove opencoded MSR_ARCH_CAPS check
-Date: Wed, 24 May 2023 12:25:24 +0100
-Message-ID: <20230524112526.3475200-9-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 10/10] x86/spec-ctrl: Remove opencoded MSR_ARCH_CAPS check
+Date: Wed, 24 May 2023 12:25:26 +0100
+Message-ID: <20230524112526.3475200-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
 References: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
@@ -97,61 +95,247 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-MSR_ARCH_CAPS data is now included in featureset information.
+MSR_ARCH_CAPS data is now included in featureset information.  Replace
+opencoded checks with regular feature ones.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
 ---
- xen/arch/x86/hvm/vmx/vmx.c            | 8 ++------
- xen/arch/x86/include/asm/cpufeature.h | 3 +++
- 2 files changed, 5 insertions(+), 6 deletions(-)
+ xen/arch/x86/include/asm/cpufeature.h |  7 ++++
+ xen/arch/x86/spec_ctrl.c              | 56 +++++++++++++--------------
+ 2 files changed, 33 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 096c69251d58..9dc16d0cc6b9 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2849,8 +2849,6 @@ static void __init ler_to_fixup_check(void);
-  */
- static bool __init has_if_pschange_mc(void)
- {
--    uint64_t caps = 0;
--
-     /*
-      * If we are virtualised, there is nothing we can do.  Our EPT tables are
-      * shadowed by our hypervisor, and not walked by hardware.
-@@ -2858,10 +2856,8 @@ static bool __init has_if_pschange_mc(void)
-     if ( cpu_has_hypervisor )
-         return false;
- 
--    if ( cpu_has_arch_caps )
--        rdmsrl(MSR_ARCH_CAPABILITIES, caps);
--
--    if ( caps & ARCH_CAPS_IF_PSCHANGE_MC_NO )
-+    /* Hardware reports itself as fixed. */
-+    if ( cpu_has_if_pschange_mc_no )
-         return false;
- 
-     /*
 diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index d0ead8e7a51e..e3154ec5800d 100644
+index 9047ea43f503..50235f098d70 100644
 --- a/xen/arch/x86/include/asm/cpufeature.h
 +++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -182,6 +182,9 @@ static inline bool boot_cpu_has(unsigned int feat)
- #define cpu_has_avx_vnni_int8   boot_cpu_has(X86_FEATURE_AVX_VNNI_INT8)
+@@ -183,8 +183,15 @@ static inline bool boot_cpu_has(unsigned int feat)
  #define cpu_has_avx_ne_convert  boot_cpu_has(X86_FEATURE_AVX_NE_CONVERT)
  
-+/* MSR_ARCH_CAPS */
-+#define cpu_has_if_pschange_mc_no boot_cpu_has(X86_FEATURE_IF_PSCHANGE_MC_NO)
-+
+ /* MSR_ARCH_CAPS */
++#define cpu_has_rdcl_no         boot_cpu_has(X86_FEATURE_RDCL_NO)
++#define cpu_has_eibrs           boot_cpu_has(X86_FEATURE_EIBRS)
++#define cpu_has_rsba            boot_cpu_has(X86_FEATURE_RSBA)
++#define cpu_has_skip_l1dfl      boot_cpu_has(X86_FEATURE_SKIP_L1DFL)
++#define cpu_has_mds_no          boot_cpu_has(X86_FEATURE_MDS_NO)
+ #define cpu_has_if_pschange_mc_no boot_cpu_has(X86_FEATURE_IF_PSCHANGE_MC_NO)
+ #define cpu_has_tsx_ctrl        boot_cpu_has(X86_FEATURE_TSX_CTRL)
++#define cpu_has_taa_no          boot_cpu_has(X86_FEATURE_TAA_NO)
++#define cpu_has_fb_clear        boot_cpu_has(X86_FEATURE_FB_CLEAR)
+ 
  /* Synthesized. */
  #define cpu_has_arch_perfmon    boot_cpu_has(X86_FEATURE_ARCH_PERFMON)
- #define cpu_has_cpuid_faulting  boot_cpu_has(X86_FEATURE_CPUID_FAULTING)
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index f81db2143328..50d467f74cf8 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -282,12 +282,10 @@ custom_param("spec-ctrl", parse_spec_ctrl);
+ int8_t __read_mostly opt_xpti_hwdom = -1;
+ int8_t __read_mostly opt_xpti_domu = -1;
+ 
+-static __init void xpti_init_default(uint64_t caps)
++static __init void xpti_init_default(void)
+ {
+-    if ( boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+-        caps = ARCH_CAPS_RDCL_NO;
+-
+-    if ( caps & ARCH_CAPS_RDCL_NO )
++    if ( (boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
++         cpu_has_rdcl_no )
+     {
+         if ( opt_xpti_hwdom < 0 )
+             opt_xpti_hwdom = 0;
+@@ -390,9 +388,10 @@ static int __init cf_check parse_pv_l1tf(const char *s)
+ }
+ custom_param("pv-l1tf", parse_pv_l1tf);
+ 
+-static void __init print_details(enum ind_thunk thunk, uint64_t caps)
++static void __init print_details(enum ind_thunk thunk)
+ {
+     unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, max = 0, tmp;
++    uint64_t caps = 0;
+ 
+     /* Collect diagnostics about available mitigations. */
+     if ( boot_cpu_data.cpuid_level >= 7 )
+@@ -401,6 +400,8 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
+         cpuid_count(7, 2, &tmp, &tmp, &tmp, &_7d2);
+     if ( boot_cpu_data.extended_cpuid_level >= 0x80000008 )
+         cpuid(0x80000008, &tmp, &e8b, &tmp, &tmp);
++    if ( cpu_has_arch_caps )
++        rdmsrl(MSR_ARCH_CAPABILITIES, caps);
+ 
+     printk("Speculative mitigation facilities:\n");
+ 
+@@ -578,7 +579,7 @@ static bool __init check_smt_enabled(void)
+ }
+ 
+ /* Calculate whether Retpoline is known-safe on this CPU. */
+-static bool __init retpoline_safe(uint64_t caps)
++static bool __init retpoline_safe(void)
+ {
+     unsigned int ucode_rev = this_cpu(cpu_sig).rev;
+ 
+@@ -596,7 +597,7 @@ static bool __init retpoline_safe(uint64_t caps)
+      * Processors offering Enhanced IBRS are not guarenteed to be
+      * repoline-safe.
+      */
+-    if ( caps & (ARCH_CAPS_RSBA | ARCH_CAPS_IBRS_ALL) )
++    if ( cpu_has_rsba || cpu_has_eibrs )
+         return false;
+ 
+     switch ( boot_cpu_data.x86_model )
+@@ -845,7 +846,7 @@ static void __init ibpb_calculations(void)
+ }
+ 
+ /* Calculate whether this CPU is vulnerable to L1TF. */
+-static __init void l1tf_calculations(uint64_t caps)
++static __init void l1tf_calculations(void)
+ {
+     bool hit_default = false;
+ 
+@@ -933,7 +934,7 @@ static __init void l1tf_calculations(uint64_t caps)
+     }
+ 
+     /* Any processor advertising RDCL_NO should be not vulnerable to L1TF. */
+-    if ( caps & ARCH_CAPS_RDCL_NO )
++    if ( cpu_has_rdcl_no )
+         cpu_has_bug_l1tf = false;
+ 
+     if ( cpu_has_bug_l1tf && hit_default )
+@@ -992,7 +993,7 @@ static __init void l1tf_calculations(uint64_t caps)
+ }
+ 
+ /* Calculate whether this CPU is vulnerable to MDS. */
+-static __init void mds_calculations(uint64_t caps)
++static __init void mds_calculations(void)
+ {
+     /* MDS is only known to affect Intel Family 6 processors at this time. */
+     if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
+@@ -1000,7 +1001,7 @@ static __init void mds_calculations(uint64_t caps)
+         return;
+ 
+     /* Any processor advertising MDS_NO should be not vulnerable to MDS. */
+-    if ( caps & ARCH_CAPS_MDS_NO )
++    if ( cpu_has_mds_no )
+         return;
+ 
+     switch ( boot_cpu_data.x86_model )
+@@ -1113,10 +1114,6 @@ void __init init_speculation_mitigations(void)
+     enum ind_thunk thunk = THUNK_DEFAULT;
+     bool has_spec_ctrl, ibrs = false, hw_smt_enabled;
+     bool cpu_has_bug_taa;
+-    uint64_t caps = 0;
+-
+-    if ( cpu_has_arch_caps )
+-        rdmsrl(MSR_ARCH_CAPABILITIES, caps);
+ 
+     hw_smt_enabled = check_smt_enabled();
+ 
+@@ -1163,7 +1160,7 @@ void __init init_speculation_mitigations(void)
+              * On all hardware, we'd like to use retpoline in preference to
+              * IBRS, but only if it is safe on this hardware.
+              */
+-            if ( retpoline_safe(caps) )
++            if ( retpoline_safe() )
+                 thunk = THUNK_RETPOLINE;
+             else if ( has_spec_ctrl )
+                 ibrs = true;
+@@ -1392,13 +1389,13 @@ void __init init_speculation_mitigations(void)
+      * threads.  Activate this if SMT is enabled, and Xen is using a non-zero
+      * MSR_SPEC_CTRL setting.
+      */
+-    if ( boot_cpu_has(X86_FEATURE_IBRSB) && !(caps & ARCH_CAPS_IBRS_ALL) &&
++    if ( boot_cpu_has(X86_FEATURE_IBRSB) && !cpu_has_eibrs &&
+          hw_smt_enabled && default_xen_spec_ctrl )
+         setup_force_cpu_cap(X86_FEATURE_SC_MSR_IDLE);
+ 
+-    xpti_init_default(caps);
++    xpti_init_default();
+ 
+-    l1tf_calculations(caps);
++    l1tf_calculations();
+ 
+     /*
+      * By default, enable PV domU L1TF mitigations on all L1TF-vulnerable
+@@ -1419,7 +1416,7 @@ void __init init_speculation_mitigations(void)
+     if ( !boot_cpu_has(X86_FEATURE_L1D_FLUSH) )
+         opt_l1d_flush = 0;
+     else if ( opt_l1d_flush == -1 )
+-        opt_l1d_flush = cpu_has_bug_l1tf && !(caps & ARCH_CAPS_SKIP_L1DFL);
++        opt_l1d_flush = cpu_has_bug_l1tf && !cpu_has_skip_l1dfl;
+ 
+     /* We compile lfence's in by default, and nop them out if requested. */
+     if ( !opt_branch_harden )
+@@ -1442,7 +1439,7 @@ void __init init_speculation_mitigations(void)
+             "enabled.  Please assess your configuration and choose an\n"
+             "explicit 'smt=<bool>' setting.  See XSA-273.\n");
+ 
+-    mds_calculations(caps);
++    mds_calculations();
+ 
+     /*
+      * Parts which enumerate FB_CLEAR are those which are post-MDS_NO and have
+@@ -1454,7 +1451,7 @@ void __init init_speculation_mitigations(void)
+      * the return-to-guest path.
+      */
+     if ( opt_unpriv_mmio )
+-        opt_fb_clear_mmio = caps & ARCH_CAPS_FB_CLEAR;
++        opt_fb_clear_mmio = cpu_has_fb_clear;
+ 
+     /*
+      * By default, enable PV and HVM mitigations on MDS-vulnerable hardware.
+@@ -1484,7 +1481,7 @@ void __init init_speculation_mitigations(void)
+      */
+     if ( opt_md_clear_pv || opt_md_clear_hvm || opt_fb_clear_mmio )
+         setup_force_cpu_cap(X86_FEATURE_SC_VERW_IDLE);
+-    opt_md_clear_hvm &= !(caps & ARCH_CAPS_SKIP_L1DFL) && !opt_l1d_flush;
++    opt_md_clear_hvm &= !cpu_has_skip_l1dfl && !opt_l1d_flush;
+ 
+     /*
+      * Warn the user if they are on MLPDS/MFBDS-vulnerable hardware with HT
+@@ -1515,8 +1512,7 @@ void __init init_speculation_mitigations(void)
+      *       we check both to spot TSX in a microcode/cmdline independent way.
+      */
+     cpu_has_bug_taa =
+-        (cpu_has_rtm || (caps & ARCH_CAPS_TSX_CTRL)) &&
+-        (caps & (ARCH_CAPS_MDS_NO | ARCH_CAPS_TAA_NO)) == ARCH_CAPS_MDS_NO;
++        (cpu_has_rtm || cpu_has_tsx_ctrl) && cpu_has_mds_no && !cpu_has_taa_no;
+ 
+     /*
+      * On TAA-affected hardware, disabling TSX is the preferred mitigation, vs
+@@ -1535,7 +1531,7 @@ void __init init_speculation_mitigations(void)
+      * plausibly value TSX higher than Hyperthreading...), disable TSX to
+      * mitigate TAA.
+      */
+-    if ( opt_tsx == -1 && cpu_has_bug_taa && (caps & ARCH_CAPS_TSX_CTRL) &&
++    if ( opt_tsx == -1 && cpu_has_bug_taa && cpu_has_tsx_ctrl &&
+          ((hw_smt_enabled && opt_smt) ||
+           !boot_cpu_has(X86_FEATURE_SC_VERW_IDLE)) )
+     {
+@@ -1560,15 +1556,15 @@ void __init init_speculation_mitigations(void)
+     if ( cpu_has_srbds_ctrl )
+     {
+         if ( opt_srb_lock == -1 && !opt_unpriv_mmio &&
+-             (caps & (ARCH_CAPS_MDS_NO|ARCH_CAPS_TAA_NO)) == ARCH_CAPS_MDS_NO &&
+-             (!cpu_has_hle || ((caps & ARCH_CAPS_TSX_CTRL) && rtm_disabled)) )
++             cpu_has_mds_no && !cpu_has_taa_no &&
++             (!cpu_has_hle || (cpu_has_tsx_ctrl && rtm_disabled)) )
+             opt_srb_lock = 0;
+ 
+         set_in_mcu_opt_ctrl(MCU_OPT_CTRL_RNGDS_MITG_DIS,
+                             opt_srb_lock ? 0 : MCU_OPT_CTRL_RNGDS_MITG_DIS);
+     }
+ 
+-    print_details(thunk, caps);
++    print_details(thunk);
+ 
+     /*
+      * If MSR_SPEC_CTRL is available, apply Xen's default setting and discard
 -- 
 2.30.2
 
