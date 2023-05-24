@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D0AC7EE2E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2CBCC7EE2D
 	for <xen-devel@archiver.kernel.org>; Wed, 24 May 2023 11:26:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538970.839426 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538968.839406 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mcl-0007O8-G6; Wed, 24 May 2023 11:25:47 +0000
+	id 1q1mcj-0006th-O2; Wed, 24 May 2023 11:25:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538970.839426; Wed, 24 May 2023 11:25:47 +0000
+Received: by outflank-mailman (output) from mailman id 538968.839406; Wed, 24 May 2023 11:25:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mcl-0007Ny-Bq; Wed, 24 May 2023 11:25:47 +0000
-Received: by outflank-mailman (input) for mailman id 538970;
- Wed, 24 May 2023 11:25:46 +0000
+	id 1q1mcj-0006ta-L6; Wed, 24 May 2023 11:25:45 +0000
+Received: by outflank-mailman (input) for mailman id 538968;
+ Wed, 24 May 2023 11:25:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KTJK=BN=citrix.com=prvs=501cbbf32=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1q1mck-0006nQ-3u
- for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:25:46 +0000
+ id 1q1mci-0006nQ-8i
+ for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:25:44 +0000
 Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
  [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b9607717-fa25-11ed-b22f-6b7b168915f2;
- Wed, 24 May 2023 13:25:45 +0200 (CEST)
+ id b729bd84-fa25-11ed-b22f-6b7b168915f2;
+ Wed, 24 May 2023 13:25:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,56 +38,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9607717-fa25-11ed-b22f-6b7b168915f2
+X-Inumbo-ID: b729bd84-fa25-11ed-b22f-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684927544;
+  d=citrix.com; s=securemail; t=1684927542;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GLjlEWjBPEDl+W06sqlUB6iIlh53o/yxuzce6ss5CB0=;
-  b=Qi+5BXGND01m6HTjC3X8D6gegEGs66jAiIWtUfSqLNU5xepQ2M7q1/oC
-   +6Zf0/5C67BqpEkHzLIsv3/4F+WUZgkjwEq1pAltj5fLMwwFmwBMWILBI
-   1rOW3pv3H5NkUr7B7XTzMKxS/xNqT9KfqavyzaNNxqHy/nmtOM4vvPbuM
-   s=;
+  bh=A+NR5il01dJbxGEp0G0M8wxuLUYrizJXy1p52xy/KWk=;
+  b=JxN82FwO6dKy9lb2+ngbZy6VHUiBdD9QdygBJ1z3pI/fFHM3+knEMRPY
+   JW/xM2Ms1JvwDCWrJHUGcZ7S9zqBw6aCH7TKIyB51FznQoJ8IptSI7B/g
+   RhLsdMyTkzAJkGGOA0owWEILNalBDZmJFD4vGEXQ621dEhHaQHNN0Gg+4
+   o=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 110226277
+X-MesageID: 110226275
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:TvcuLaDjCBcjSBVW/yHjw5YqxClBgxIJ4kV8jS/XYbTApDMg0mAGz
- mAfWW6HPfqKMDejctogad/n8xsEvJ7dydQyQQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
- yk6QoOdRCzhZiaE/n9BCpC48T8nk/nOHuGmYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArIs
- t7pyyHlEAbNNwVcbCRMs8pvlDs15K6p4G5C4gRlDRx2lAS2e0c9Xcp3yZ6ZdxMUcqEMdsamS
- uDKyq2O/2+x13/B3fv8z94X2mVTKlLjFVDmZkh+AsBOsTAbzsAG6Y4pNeJ0VKtio27hc+ada
- jl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CA6IoKvn3bEmp1T4E8K0YIww7tJRj1nx
- 8chLh8wSA6fhd+E2fG/Vbw57igjBJGD0II3v3hhyXfSDOo8QICFSKLPjTNa9G5u3IYUR6+YP
- pdHL2M1N3wsYDUWUrsTILs4kP2lmT/UdDpApUjOjaE2/3LS3Ep6172F3N/9I4XSH58LxBnHz
- o7A10TjOANBG8Gt8gCq2COBrOaMwgb8XKtHQdVU8dY12QbOlwT/EiY+Sl+TsfS/zEmkVLp3O
- 0ESvyYjs6U23EiqVcXmGQ21pmaeuRwRUMYWFPc1gCmPwKfJ5weSBkAfUyVMLtchsacLqScCj
- wHT2YmzXHo27ePTECjGnluJkd+sERFIEyheTB0/dA0q3v/9vIMOvAuMSsk2RcZZkebJMT33x
- jmLqg03iLMSkdMH2s2HwLzXv96/jsOXF1Bov207Skrgt1okP9D9O+RE/HCBtZ59wJClok5tV
- ZTus+yX96gwAJ6Ej0Rhq81dTejyt55p3NAx6GOD/qXNFRz3oxZPnqgKulmSwXuF1e5aEQIFm
- GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQMsQhKlHXoHowNBT4M4XRfK8EyPtXB
- HtmWZz0USZy5VpPl1JauNvxIZd0n3tjlAs/tLjwzgi90Kr2WUN5vYwtaQPUBshgtfPsnekg2
- 4oHXyd840kFAbKWj+i+2dJ7EG3m2lBkWMmp8pULJ7Hrz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
- p1hcie0EGbCuEA=
-IronPort-HdrOrdr: A9a23:e5orrazYnQeFjQXbdo0XKrPw6L1zdoMgy1knxilNoHxuH/Bw9v
- re+cjzsCWftN9/Yh4dcLy7VpVoIkmsl6Kdg7NwAV7KZmCP1FdARLsI0WKI+UyCJ8SRzI9gPa
- cLSdkFNDXzZ2IK8PoTNmODYqodKNrsytHWuQ/HpU0dKT2D88tbnn9E4gDwKDwQeCB2QaAXOb
- C7/cR9qz+paR0sH7+G7ilsZZmkmzXT/qiWGCI7Ow==
-X-Talos-CUID: 9a23:K7xl32M4NjuJLO5DYXRZsxI9KPscdFLg6mnMIXKKECVtV+jA
-X-Talos-MUID: 9a23:QRZiswSiWR5vjkV6RXTMngtwb+h10Z+UJ2pcvL8P+JahMihZbmI=
+IronPort-Data: A9a23:ijCp+6sjDkAJa6Kg7YiH+Z138ufnVF5eMUV32f8akzHdYApBsoF/q
+ tZmKWCGa6yJYjfyc9snPYi+/UIPv8SHy9ExTFFuqCxjHiNE+JbJXdiXEBz9bniYRiHhoOCLz
+ O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg3HVQ+IMsYoUoLs/YjhYJ1isSODQqIu
+ Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq4Fv0gnRkPaoQ5AKEyyFOZH4iDfrZw0XQE9E88tGSH
+ 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
+ Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
+ fMwEW0zKUyqtdmPxp2GbPdwhPkRNYrvI9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
+ 5NHM3w1Nk2GOkARfA5NU/rSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw/
+ zuepT6nWE5HXDCZ4SWp8FCWnf3FpADieL0iPqef1dlTmXTGkwT/DzVJDADm8JFVkHWWS99Zb
+ kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQOq8seVTEsk
+ FiTkLvU6SdH6ePPDyjHr/HN8G30YHJORYMfWcMaZTJY3Z6/ibMItxTgc/B9DKyIvMS2HS6ll
+ lhmsxMCr7kUiMcK0YCy8lbGny+gq/D1c+Il2unEdjn7t10kPeZJc6TtsAGGtqgYcO51W3Hb5
+ BA5d96iAPfi5H1nvAiEW60zEb6g/J5p2xWM0Ac0T/HNG9lAkkNPnLy8AhkkfC+F0e5eI1cFh
+ XM/XisPjKK/xFPwMcdKj3uZUqzGN5TIG9X/TezzZdFTeJV3fwLv1HgwNRLAgT69zBNywPtX1
+ XKnnSGEVCxyNEia5GDuG7d1PUEDnUjSOl8/tbiklk/6gNJylVaeSKsfMUvmU93VGJis+V2Pm
+ /4Gbpvi9vmqeLGmCsUh2dJJfA9iwLlSLcyelvG7gcbcf1M5QTh9WqC5LHFIU9UNopm5X9zgp
+ hmVMnK0AnKm7ZEbAW1mskxeVY4=
+IronPort-HdrOrdr: A9a23:3mGHUK0SBdDGszx9Qs00IQqjBHYkLtp133Aq2lEZdPU0SKGlfq
+ GV7ZEmPHrP4gr5N0tOpTntAse9qBDnhPxICOsqXYtKNTOO0AeVxelZhrcKqAeQeBEWmNQ96U
+ 9hGZIOcuEZDzJB/LvHCN/TKadd/DGFmprY+ts31x1WPGVXgzkL1XYANu6ceHcGIzVuNN4CO7
+ e3wNFInDakcWR/VLXBOpFUN9KzweEijfjdEGc7OyI=
+X-Talos-CUID: 9a23:MW32G2AlI/WX9Yj6ExA6yglIM/IeS3vy8VHOP02FO38qTKLAHA==
+X-Talos-MUID: 9a23:RwS9AgtXTfBb2hWyZ82nmx1gFv1z8a6XK1ktrqUsoe6nEhVpEmLI
 X-IronPort-AV: E=Sophos;i="6.00,189,1681185600"; 
-   d="scan'208";a="110226277"
+   d="scan'208";a="110226275"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
 	<wl@xen.org>
-Subject: [PATCH v2 05/10] x86/boot: Record MSR_ARCH_CAPS for the Raw and Host CPU policy
-Date: Wed, 24 May 2023 12:25:21 +0100
-Message-ID: <20230524112526.3475200-6-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 02/10] x86/boot: Adjust MSR_ARCH_CAPS handling for the Host policy
+Date: Wed, 24 May 2023 12:25:18 +0100
+Message-ID: <20230524112526.3475200-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
 References: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
@@ -95,99 +95,39 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Extend x86_cpu_policy_fill_native() with a read of ARCH_CAPS based on the
-CPUID information just read, removing the specially handling in
-calculate_raw_cpu_policy().
+We are about to move MSR_ARCH_CAPS into featureset, but the order of
+operations (copy raw policy, then copy x86_capabilitiles[] in) will end up
+clobbering the ARCH_CAPS value.
 
-Right now, the only use of x86_cpu_policy_fill_native() outside of Xen is the
-unit tests.  Getting MSR data in this context is left to whomever first
-encounters a genuine need to have it.
+Some toolstacks use this information to handle TSX compatibility across the
+CPUs and microcode versions where support was removed.
 
-Extend generic_identify() to read ARCH_CAPS into x86_capability[], which is
-fed into the Host Policy.  This in turn means there's no need to special case
-arch_caps in calculate_host_policy().
-
-No practical change.
+To avoid this transient breakage, read from raw_cpu_policy rather than
+modifying it in place.  This logic will be removed entirely in due course.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-
-v2:
- * Extend commit message to discuss the absence of MSRs outside of __XEN__
 ---
- xen/arch/x86/cpu-policy.c | 12 ------------
- xen/arch/x86/cpu/common.c |  5 +++++
- xen/lib/x86/cpuid.c       |  7 ++++++-
- 3 files changed, 11 insertions(+), 13 deletions(-)
+ xen/arch/x86/cpu-policy.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index 49f5465ec445..dfd9abd8564c 100644
+index 5e7e19fbcda8..49f5465ec445 100644
 --- a/xen/arch/x86/cpu-policy.c
 +++ b/xen/arch/x86/cpu-policy.c
-@@ -354,9 +354,6 @@ void calculate_raw_cpu_policy(void)
- 
-     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
-     /* Was already added by probe_cpuid_faulting() */
--
--    if ( cpu_has_arch_caps )
--        rdmsrl(MSR_ARCH_CAPABILITIES, p->arch_caps.raw);
- }
- 
- static void __init calculate_host_policy(void)
-@@ -409,15 +406,6 @@ static void __init calculate_host_policy(void)
-     /* 0x000000ce  MSR_INTEL_PLATFORM_INFO */
-     /* probe_cpuid_faulting() sanity checks presence of MISC_FEATURES_ENABLES */
+@@ -411,7 +411,7 @@ static void __init calculate_host_policy(void)
      p->platform_info.cpuid_faulting = cpu_has_cpuid_faulting;
--
--    /* Temporary, until we have known_features[] for feature bits in MSRs. */
--    p->arch_caps.raw = raw_cpu_policy.arch_caps.raw &
--        (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
--         ARCH_CAPS_SKIP_L1DFL | ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO |
--         ARCH_CAPS_IF_PSCHANGE_MC_NO | ARCH_CAPS_TSX_CTRL | ARCH_CAPS_TAA_NO |
--         ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO | ARCH_CAPS_PSDP_NO |
--         ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA | ARCH_CAPS_BHI_NO |
--         ARCH_CAPS_PBRSB_NO);
- }
  
- static void __init guest_common_default_feature_adjustments(uint32_t *fs)
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 9bbb385db42d..f1084bb1ed36 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -477,6 +477,11 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 		cpuid_count(0xd, 1,
- 			    &c->x86_capability[FEATURESET_Da1],
- 			    &tmp, &tmp, &tmp);
-+
-+	if (test_bit(X86_FEATURE_ARCH_CAPS, c->x86_capability))
-+		rdmsr(MSR_ARCH_CAPABILITIES,
-+		      c->x86_capability[FEATURESET_10Al],
-+		      c->x86_capability[FEATURESET_10Ah]);
- }
- 
- /*
-diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
-index e795ce375032..07e550191448 100644
---- a/xen/lib/x86/cpuid.c
-+++ b/xen/lib/x86/cpuid.c
-@@ -226,7 +226,12 @@ void x86_cpu_policy_fill_native(struct cpu_policy *p)
-     p->hv_limit = 0;
-     p->hv2_limit = 0;
- 
--    /* TODO MSRs */
-+#ifdef __XEN__
-+    /* TODO MSR_PLATFORM_INFO */
-+
-+    if ( p->feat.arch_caps )
-+        rdmsrl(MSR_ARCH_CAPABILITIES, p->arch_caps.raw);
-+#endif
- 
-     x86_cpu_policy_recalc_synth(p);
- }
+     /* Temporary, until we have known_features[] for feature bits in MSRs. */
+-    p->arch_caps.raw &=
++    p->arch_caps.raw = raw_cpu_policy.arch_caps.raw &
+         (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
+          ARCH_CAPS_SKIP_L1DFL | ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO |
+          ARCH_CAPS_IF_PSCHANGE_MC_NO | ARCH_CAPS_TSX_CTRL | ARCH_CAPS_TAA_NO |
 -- 
 2.30.2
 
