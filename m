@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14453C7EE37
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ADCDC77B7A
 	for <xen-devel@archiver.kernel.org>; Wed, 24 May 2023 11:26:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.538969.839412 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.538967.839396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mck-000704-7W; Wed, 24 May 2023 11:25:46 +0000
+	id 1q1mch-0006eL-Hb; Wed, 24 May 2023 11:25:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 538969.839412; Wed, 24 May 2023 11:25:46 +0000
+Received: by outflank-mailman (output) from mailman id 538967.839396; Wed, 24 May 2023 11:25:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1mck-0006yY-1f; Wed, 24 May 2023 11:25:46 +0000
-Received: by outflank-mailman (input) for mailman id 538969;
- Wed, 24 May 2023 11:25:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q1mch-0006eE-EI; Wed, 24 May 2023 11:25:43 +0000
+Received: by outflank-mailman (input) for mailman id 538967;
+ Wed, 24 May 2023 11:25:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KTJK=BN=citrix.com=prvs=501cbbf32=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1q1mci-0006nQ-U2
- for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:25:44 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b8ac8520-fa25-11ed-b22f-6b7b168915f2;
- Wed, 24 May 2023 13:25:44 +0200 (CEST)
+ id 1q1mcg-0006dp-BG
+ for xen-devel@lists.xenproject.org; Wed, 24 May 2023 11:25:42 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b4502455-fa25-11ed-8611-37d641c3527e;
+ Wed, 24 May 2023 13:25:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,57 +38,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8ac8520-fa25-11ed-b22f-6b7b168915f2
+X-Inumbo-ID: b4502455-fa25-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1684927543;
+  d=citrix.com; s=securemail; t=1684927538;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GzTaYahCvQbgziVS0gqwaK4qufFZHl9uL0tpi65cPFw=;
-  b=NI4TuNsVkjTErUwcS4vm6g7fuSQqvtWQc2W4gjWa6m5lbCxy3EjkBa0J
-   A9jUfcGh6wv/4ptscnWyRCaH6gJEbWBLLZdCikQNzQ2KdMJTaJb9XPsjY
-   tWF5G5W30Jmc+qT936fFi7Xh+tpGRSC0Ln2UaKHkfO7SVc140Y4pUhaCb
-   o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=cEqAKJhSYdiDhZzPNXI65MjIM+ej5xzXmsT0GY2hH+4=;
+  b=ecRy0NUWX5vR+LD/lWKf91PrAFnKjGEXvfsj7EpjZwcZdJKDR35eQoY3
+   DzwN3aRSGQ1JCHh5KVtSz5dlyvqJCc6tS52Syko6yV0kbJO8UTBg1Dola
+   Wk0zfxYwe+nPj4hetJ9KTHo0wHvWg5u1viVALBodQpZBZXfxegbE9e5J0
+   w=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 110226276
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 110611672
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:BPtf06vvZQDj7fcV+yRiuCfg+ufnVF5eMUV32f8akzHdYApBsoF/q
- tZmKW7QOK7ZMWryfNglb4qw90sFupWGz9c3TQQ/+30xQy8S+JbJXdiXEBz9bniYRiHhoOCLz
- O1FM4Wdc5pkJpP4jk3wWlQ0hSAkjclkfpKlVKiffHg3HVQ+IMsYoUoLs/YjhYJ1isSODQqIu
- Nfjy+XSI1bg0DNvWo4uw/vrRChH4rKq4Fv0gnRkPaoQ5AKEyyFOZH4iDfrZw0XQE9E88tGSH
- 44v/JnhlkvF8hEkDM+Sk7qTWiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JFAatjsB2bnsgZ9
- Tl4ncfYpTHFnEH7sL91vxFwS0mSNEDdkVPNCSDXXce7lyUqf5ZwqhnH4Y5f0YAwo45K7W9yG
- fMwEW0zKUyqtdmPxp2GbPdwhPkRNYrvI9ZK0p1g5Wmx4fcORJnCR+PB5MNC3Sd2jcdLdRrcT
- 5NHM3w1Nk2GOkARfA5NU/rSn8/x7pX7WxRepEiYuuwc5G/LwRYq+LPsLMDUapqBQsA9ckOw/
- zuepT6nWE5EXDCZ4RCe3nn0oObBoX36RL4CE4ay5MQ133TGkwT/DzVJDADm8JFVkHWWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQOq8seVTEsk
- FiTkLvU6SdH6ePPDyjHr/HN8G30YHJORYMfWcMaZTJY3Z6/ibMItxTgc/B9DKyIvMS2HS6ll
- lhmsxMCr7kUiMcK0YCy8lbGny+gq/D1c+Il2unEdjn7t10kPeZJc6TtsAGGtqgYcO51W3Hb5
- BA5d96iAPfi5H1nvAiEW60zEb6g/J5p2xWM0Ac0T/HNG9lAkkNPnLy8AhkkfC+F0e5eI1cFh
- XM/XisPjKK/xFPwMcdKj3uZUqzGN5TIG9X/TezzZdFTeJV3fwLv1HgwNRLAgT69zBNywPtX1
- XKnnSGEVCxyNEia5GDuG7d1PUEDnUjSOl8/tbiklk/6gNJylVaeSKsfMUvmU93VGJis+V2Pm
- /4Gbpvi9vmqeLGmCsUh2dJJfA9iwLlSLcyelvG7gcbcf1M5QTh9WqC5LHFIU9UNopm5X9zgp
- hmVMnK0AnKm7ZEbAW1mskxeVY4=
-IronPort-HdrOrdr: A9a23:R0+V5KrTmuAziqFCCO7W7M8aV5rveYIsimQD101hICG9Evb0qy
- nOpoV/6faQslwssR4b9uxoVJPvfZq+z+8W3WByB9eftWDd0QPFEGgL1+DfKlbbak7DH4BmtJ
- uJc8JFeafN5VoRt7eG3OFveexQvOVu88qT9JjjJ28Gd3APV0n5hT0JcjpyFCdNNW57LKt8Lr
- WwzOxdqQGtfHwGB/7LfUXsD4D41rv2fIuNW29+OyIa
-X-Talos-CUID: =?us-ascii?q?9a23=3A2GQLlWqKhvDRLz/dE7vP32vmUfl4TDqB5UXrGkm?=
- =?us-ascii?q?XNEB3VL+oe0bT/Lwxxg=3D=3D?=
-X-Talos-MUID: 9a23:hyHvygW7wTVQmEXq/BX3qDo6Es5m3/qvFHwdlq4MqfPbagUlbg==
+IronPort-Data: A9a23:HTHsMKzAyxe0REPuBV96t+c/xirEfRIJ4+MujC+fZmUNrF6WrkUEx
+ mIdD2iDOKmCZzD0fN0jYISy/B9X6sSGzYI1TApu/yAxQypGp/SeCIXCJC8cHc8wwu7rFxs7s
+ ppEOrEsCOhuExcwcz/0auCJQUFUjP3OHfykTrafYEidfCc8IA85kxVvhuUltYBhhNm9Emult
+ Mj75sbSIzdJ4RYtWo4vw/zF8EsHUMja4mtC5QRjP6wT5zcyqlFOZH4hDfDpR5fHatE88t6SH
+ 47r0Ly/92XFyBYhYvvNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ai87XAME0e0ZP4whlqvgqo
+ Dl7WT5cfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQq2pYjqhljJBheAGEWxgp4KV4R+
+ vo5cS0gVxKCq9rqh+LqWu1Autt2eaEHPKtH0p1h5TTQDPJgSpHfWaTao9Rf2V/chOgXQ6yYP
+ ZBAL2MyMlKZOUYn1lQ/UfrSmM+BgHXlfiIeg1WSvactuEDYzRBr0airO93QEjCPbZwMxhjB/
+ zyZpQwVBDkQPvLYyGKFzUv2revwty/RepMSM7uno6sCbFq7mTVIVUx+uUGAiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0efBdDuk74wGl0bfP7kCSAW1sZiFFQMwrsokxXzNC6
+ 7OSt4q3X3o16uTTEC/DsO7O9lteJBT5M0c9OiACbFIYzuDhoa0L0lWfH8ZnPJKq24id9S7L/
+ xiGqy03hrM2hMEN1rmm8V2vvw9AtqQlXSZuuFyJAzvNAhdRIdf8Otf2sQSzAeNodt7xc7WXg
+ JQTdyFyBsgqBIrFqiGCSf5l8FqBt6fca220bbKC8vAcG9WRF5yLJ9g4DNJWfh0B3iM4ldjBP
+ ifuVft5vsM7AZdTRfYfj3iNI8or17P8Mt/uS+rZaNFDCrAoKl/brH8wNRLLgTG3+KTJrU3YE
+ c7BGftA8F5AUfg3pNZIb7x1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYo43K+1Rrlhtsus+VyFm
+ +uzwuPWk32zpsWiOHiImWPSRHhWRUUG6Wfe9JEOKbfafls5cIzjYteIqY4cl0Vet/w9vo/1E
+ ruVAye0FHKXaaX7FDi3
+IronPort-HdrOrdr: A9a23:pkObz6kqQG8KfA9w0wipdxQ6n5DpDfLo3DAbv31ZSRFFG/Fw9/
+ rCoB17726QtN91YhsdcL+7V5VoLUmzyXcX2/hyAV7BZmnbUQKTRekP0WKL+Vbd8kbFh41gPM
+ lbEpSXCLfLfCJHZcSR2njELz73quP3jJxBho3lvghQpRkBUdAF0+/gYDzranGfQmN9dP0EPa
+ vZ3OVrjRy6d08aa8yqb0N1JNQq97Xw5fTbiQdtPW9f1DWz
+X-Talos-CUID: =?us-ascii?q?9a23=3Azi/5dGmKKTxOD+MkxR/u9dONFnTXOUKCw3HxelK?=
+ =?us-ascii?q?VMGRoZIXJDg/B6KdIr9U7zg=3D=3D?=
+X-Talos-MUID: 9a23:1/JwWArI4B1l889VhuIezztoGoBpu6SRMRomlaost+OmJCxXPSjI2Q==
 X-IronPort-AV: E=Sophos;i="6.00,189,1681185600"; 
-   d="scan'208";a="110226276"
+   d="scan'208";a="110611672"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH v2 01/10] x86/boot: Rework dom0 feature configuration
-Date: Wed, 24 May 2023 12:25:17 +0100
-Message-ID: <20230524112526.3475200-2-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 03/10] x86/cpu-policy: Infrastructure for MSR_ARCH_CAPS
+Date: Wed, 24 May 2023 12:25:19 +0100
+Message-ID: <20230524112526.3475200-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
 References: <20230524112526.3475200-1-andrew.cooper3@citrix.com>
@@ -96,137 +95,221 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Right now, dom0's feature configuration is split between between the common
-path and a dom0-specific one.  This mostly is by accident, and causes some
-very subtle bugs.
+Bits through 24 are already defined, meaning that we're not far off needing
+the second word.  Put both in right away.
 
-First, start by clearly defining init_dom0_cpuid_policy() to be the domain
-that Xen builds automatically.  The late hwdom case is still constructed in a
-mostly normal way, with the control domain having full discretion over the CPU
-policy.
+As both halves are present now, the arch_caps field is full width.  Adjust the
+unit test, which notices.
 
-Identifying this highlights a latent bug - the two halves of the MSR_ARCH_CAPS
-bodge are asymmetric with respect to the hardware domain.  This means that
-shim, or a control-only dom0 sees the MSR_ARCH_CAPS CPUID bit but none of the
-MSR content.  This in turn declares the hardware to be retpoline-safe by
-failing to advertise the {R,}RSBA bits appropriately.  Restrict this logic to
-the hardware domain, although the special case will cease to exist shortly.
+The bool bitfield names in the arch_caps union are unused, and somewhat out of
+date.  They'll shortly be automatically generated.
 
-For the CPUID Faulting adjustment, the comment in ctxt_switch_levelling()
-isn't actually relevant.  Provide a better explanation.
-
-Move the recalculate_cpuid_policy() call outside of the dom0-cpuid= case.
-This is no change for now, but will become necessary shortly.
-
-Finally, place the second half of the MSR_ARCH_CAPS bodge after the
-recalculate_cpuid_policy() call.  This is necessary to avoid transiently
-breaking the hardware domain's view while the handling is cleaned up.  This
-special case will cease to exist shortly.
+Add CPUID and MSR prefixes to the ./xen-cpuid verbose output, now that there
+are a mix of the two.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/cpu-policy.c | 57 +++++++++++++++++++++------------------
- 1 file changed, 31 insertions(+), 26 deletions(-)
 
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index ef6a2d0d180a..5e7e19fbcda8 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -687,29 +687,6 @@ int init_domain_cpu_policy(struct domain *d)
-     if ( !p )
-         return -ENOMEM;
+v2:
+ * Adjust the unit test.
+ * Use an m prefix on the short name.
+ * Add CPUID/MSR to the verbose name.
+---
+ tools/misc/xen-cpuid.c                      | 44 +++++++++++-------
+ tools/tests/cpu-policy/test-cpu-policy.c    |  5 ---
+ xen/include/public/arch-x86/cpufeatureset.h |  4 ++
+ xen/include/xen/lib/x86/cpu-policy.h        | 50 ++++++++++-----------
+ xen/lib/x86/cpuid.c                         |  4 ++
+ 5 files changed, 59 insertions(+), 48 deletions(-)
+
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 8ec143ebc854..15ad2d33e2a1 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -226,31 +226,41 @@ static const char *const str_7d2[32] =
+     [ 4] = "bhi-ctrl",      [ 5] = "mcdt-no",
+ };
  
--    /* See comment in ctxt_switch_levelling() */
--    if ( !opt_dom0_cpuid_faulting && is_control_domain(d) && is_pv_domain(d) )
--        p->platform_info.cpuid_faulting = false;
--
--    /*
--     * Expose the "hardware speculation behaviour" bits of ARCH_CAPS to dom0,
--     * so dom0 can turn off workarounds as appropriate.  Temporary, until the
--     * domain policy logic gains a better understanding of MSRs.
--     */
--    if ( is_hardware_domain(d) && cpu_has_arch_caps )
--    {
--        uint64_t val;
--
--        rdmsrl(MSR_ARCH_CAPABILITIES, val);
--
--        p->arch_caps.raw = val &
--            (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
--             ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO | ARCH_CAPS_IF_PSCHANGE_MC_NO |
--             ARCH_CAPS_TAA_NO | ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO |
--             ARCH_CAPS_PSDP_NO | ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA |
--             ARCH_CAPS_BHI_NO | ARCH_CAPS_PBRSB_NO);
--    }
--
-     d->arch.cpu_policy = p;
- 
-     recalculate_cpuid_policy(d);
-@@ -845,11 +822,15 @@ void recalculate_cpuid_policy(struct domain *d)
-         p->extd.raw[0x19] = EMPTY_LEAF;
- }
- 
-+/*
-+ * Adjust the CPU policy for dom0.  Really, this is "the domain Xen builds
-+ * automatically on boot", and might not have the domid 0 (e.g. pvshim).
-+ */
- void __init init_dom0_cpuid_policy(struct domain *d)
++static const char *const str_10Al[32] =
++{
++};
++
++static const char *const str_10Ah[32] =
++{
++};
++
+ static const struct {
+     const char *name;
+     const char *abbr;
+     const char *const *strs;
+ } decodes[] =
  {
-     struct cpu_policy *p = d->arch.cpuid;
+-    { "0x00000001.edx",   "1d",  str_1d },
+-    { "0x00000001.ecx",   "1c",  str_1c },
+-    { "0x80000001.edx",   "e1d", str_e1d },
+-    { "0x80000001.ecx",   "e1c", str_e1c },
+-    { "0x0000000d:1.eax", "Da1", str_Da1 },
+-    { "0x00000007:0.ebx", "7b0", str_7b0 },
+-    { "0x00000007:0.ecx", "7c0", str_7c0 },
+-    { "0x80000007.edx",   "e7d", str_e7d },
+-    { "0x80000008.ebx",   "e8b", str_e8b },
+-    { "0x00000007:0.edx", "7d0", str_7d0 },
+-    { "0x00000007:1.eax", "7a1", str_7a1 },
+-    { "0x80000021.eax",  "e21a", str_e21a },
+-    { "0x00000007:1.ebx", "7b1", str_7b1 },
+-    { "0x00000007:2.edx", "7d2", str_7d2 },
+-    { "0x00000007:1.ecx", "7c1", str_7c1 },
+-    { "0x00000007:1.edx", "7d1", str_7d1 },
++    { "CPUID 0x00000001.edx",        "1d", str_1d },
++    { "CPUID 0x00000001.ecx",        "1c", str_1c },
++    { "CPUID 0x80000001.edx",       "e1d", str_e1d },
++    { "CPUID 0x80000001.ecx",       "e1c", str_e1c },
++    { "CPUID 0x0000000d:1.eax",     "Da1", str_Da1 },
++    { "CPUID 0x00000007:0.ebx",     "7b0", str_7b0 },
++    { "CPUID 0x00000007:0.ecx",     "7c0", str_7c0 },
++    { "CPUID 0x80000007.edx",       "e7d", str_e7d },
++    { "CPUID 0x80000008.ebx",       "e8b", str_e8b },
++    { "CPUID 0x00000007:0.edx",     "7d0", str_7d0 },
++    { "CPUID 0x00000007:1.eax",     "7a1", str_7a1 },
++    { "CPUID 0x80000021.eax",      "e21a", str_e21a },
++    { "CPUID 0x00000007:1.ebx",     "7b1", str_7b1 },
++    { "CPUID 0x00000007:2.edx",     "7d2", str_7d2 },
++    { "CPUID 0x00000007:1.ecx",     "7c1", str_7c1 },
++    { "CPUID 0x00000007:1.edx",     "7d1", str_7d1 },
++    { "MSR   0x0000010a.lo",      "m10Al", str_10Al },
++    { "MSR   0x0000010a.hi",      "m10Ah", str_10Ah },
+ };
  
--    /* dom0 can't migrate.  Give it ITSC if available. */
-+    /* Dom0 doesn't migrate relative to Xen.  Give it ITSC if available. */
-     if ( cpu_has_itsc )
-         p->extd.itsc = true;
+-#define COL_ALIGN "18"
++#define COL_ALIGN "24"
  
-@@ -858,7 +839,7 @@ void __init init_dom0_cpuid_policy(struct domain *d)
-      * so dom0 can turn off workarounds as appropriate.  Temporary, until the
-      * domain policy logic gains a better understanding of MSRs.
+ static const char *const fs_names[] = {
+     [XEN_SYSCTL_cpu_featureset_raw]     = "Raw",
+diff --git a/tools/tests/cpu-policy/test-cpu-policy.c b/tools/tests/cpu-policy/test-cpu-policy.c
+index f1d968adfc39..301df2c00285 100644
+--- a/tools/tests/cpu-policy/test-cpu-policy.c
++++ b/tools/tests/cpu-policy/test-cpu-policy.c
+@@ -391,11 +391,6 @@ static void test_msr_deserialise_failure(void)
+             .msr = { .idx = 0xce, .val = ~0ull },
+             .rc = -EOVERFLOW,
+         },
+-        {
+-            .name = "truncated val",
+-            .msr = { .idx = 0x10a, .val = ~0ull },
+-            .rc = -EOVERFLOW,
+-        },
+     };
+ 
+     printf("Testing MSR deserialise failure:\n");
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 8de73aebc3e0..032cec3ccba2 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -307,6 +307,10 @@ XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32+ 4) /*A  AVX-VNNI-INT8 Instructions */
+ XEN_CPUFEATURE(AVX_NE_CONVERT,     15*32+ 5) /*A  AVX-NE-CONVERT Instructions */
+ XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks safe to use */
+ 
++/* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.eax, word 16 */
++
++/* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.edx, word 17 */
++
+ #endif /* XEN_CPUFEATURE */
+ 
+ /* Clean up from a default include.  Close the enum (for C). */
+diff --git a/xen/include/xen/lib/x86/cpu-policy.h b/xen/include/xen/lib/x86/cpu-policy.h
+index bfa425060464..6d5e9edd269b 100644
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -4,22 +4,24 @@
+ 
+ #include <xen/lib/x86/cpuid-autogen.h>
+ 
+-#define FEATURESET_1d     0 /* 0x00000001.edx      */
+-#define FEATURESET_1c     1 /* 0x00000001.ecx      */
+-#define FEATURESET_e1d    2 /* 0x80000001.edx      */
+-#define FEATURESET_e1c    3 /* 0x80000001.ecx      */
+-#define FEATURESET_Da1    4 /* 0x0000000d:1.eax    */
+-#define FEATURESET_7b0    5 /* 0x00000007:0.ebx    */
+-#define FEATURESET_7c0    6 /* 0x00000007:0.ecx    */
+-#define FEATURESET_e7d    7 /* 0x80000007.edx      */
+-#define FEATURESET_e8b    8 /* 0x80000008.ebx      */
+-#define FEATURESET_7d0    9 /* 0x00000007:0.edx    */
+-#define FEATURESET_7a1   10 /* 0x00000007:1.eax    */
+-#define FEATURESET_e21a  11 /* 0x80000021.eax      */
+-#define FEATURESET_7b1   12 /* 0x00000007:1.ebx    */
+-#define FEATURESET_7d2   13 /* 0x00000007:2.edx    */
+-#define FEATURESET_7c1   14 /* 0x00000007:1.ecx    */
+-#define FEATURESET_7d1   15 /* 0x00000007:1.edx    */
++#define FEATURESET_1d         0 /* 0x00000001.edx      */
++#define FEATURESET_1c         1 /* 0x00000001.ecx      */
++#define FEATURESET_e1d        2 /* 0x80000001.edx      */
++#define FEATURESET_e1c        3 /* 0x80000001.ecx      */
++#define FEATURESET_Da1        4 /* 0x0000000d:1.eax    */
++#define FEATURESET_7b0        5 /* 0x00000007:0.ebx    */
++#define FEATURESET_7c0        6 /* 0x00000007:0.ecx    */
++#define FEATURESET_e7d        7 /* 0x80000007.edx      */
++#define FEATURESET_e8b        8 /* 0x80000008.ebx      */
++#define FEATURESET_7d0        9 /* 0x00000007:0.edx    */
++#define FEATURESET_7a1       10 /* 0x00000007:1.eax    */
++#define FEATURESET_e21a      11 /* 0x80000021.eax      */
++#define FEATURESET_7b1       12 /* 0x00000007:1.ebx    */
++#define FEATURESET_7d2       13 /* 0x00000007:2.edx    */
++#define FEATURESET_7c1       14 /* 0x00000007:1.ecx    */
++#define FEATURESET_7d1       15 /* 0x00000007:1.edx    */
++#define FEATURESET_m10Al     16 /* 0x0000010a.eax      */
++#define FEATURESET_m10Ah     17 /* 0x0000010a.edx      */
+ 
+ struct cpuid_leaf
+ {
+@@ -350,17 +352,13 @@ struct cpu_policy
+      * fixed in hardware.
       */
--    if ( cpu_has_arch_caps )
-+    if ( is_hardware_domain(d) && cpu_has_arch_caps )
-         p->feat.arch_caps = true;
+     union {
+-        uint32_t raw;
++        uint64_t raw;
++        struct {
++            uint32_t lo, hi;
++        };
+         struct {
+-            bool rdcl_no:1;
+-            bool ibrs_all:1;
+-            bool rsba:1;
+-            bool skip_l1dfl:1;
+-            bool ssb_no:1;
+-            bool mds_no:1;
+-            bool if_pschange_mc_no:1;
+-            bool tsx_ctrl:1;
+-            bool taa_no:1;
++            DECL_BITFIELD(m10Al);
++            DECL_BITFIELD(m10Ah);
+         };
+     } arch_caps;
  
-     /* Apply dom0-cpuid= command line settings, if provided. */
-@@ -876,8 +857,32 @@ void __init init_dom0_cpuid_policy(struct domain *d)
-         }
- 
-         x86_cpu_featureset_to_policy(fs, p);
-+    }
-+
-+    /*
-+     * PV Control domains used to require unfiltered CPUID.  This was fixed in
-+     * Xen 4.13, but there is an cmdline knob to restore the prior behaviour.
-+     *
-+     * If the domain is getting unfiltered CPUID, don't let the guest kernel
-+     * play with CPUID faulting either, as Xen's CPUID path won't cope.
-+     */
-+    if ( !opt_dom0_cpuid_faulting && is_control_domain(d) && is_pv_domain(d) )
-+        p->platform_info.cpuid_faulting = false;
- 
--        recalculate_cpuid_policy(d);
-+    recalculate_cpuid_policy(d);
-+
-+    if ( is_hardware_domain(d) && cpu_has_arch_caps )
-+    {
-+        uint64_t val;
-+
-+        rdmsrl(MSR_ARCH_CAPABILITIES, val);
-+
-+        p->arch_caps.raw = val &
-+            (ARCH_CAPS_RDCL_NO | ARCH_CAPS_IBRS_ALL | ARCH_CAPS_RSBA |
-+             ARCH_CAPS_SSB_NO | ARCH_CAPS_MDS_NO | ARCH_CAPS_IF_PSCHANGE_MC_NO |
-+             ARCH_CAPS_TAA_NO | ARCH_CAPS_SBDR_SSDP_NO | ARCH_CAPS_FBSDP_NO |
-+             ARCH_CAPS_PSDP_NO | ARCH_CAPS_FB_CLEAR | ARCH_CAPS_RRSBA |
-+             ARCH_CAPS_BHI_NO | ARCH_CAPS_PBRSB_NO);
-     }
+diff --git a/xen/lib/x86/cpuid.c b/xen/lib/x86/cpuid.c
+index 68aafb404927..e795ce375032 100644
+--- a/xen/lib/x86/cpuid.c
++++ b/xen/lib/x86/cpuid.c
+@@ -79,6 +79,8 @@ void x86_cpu_policy_to_featureset(
+     fs[FEATURESET_7d2]       = p->feat._7d2;
+     fs[FEATURESET_7c1]       = p->feat._7c1;
+     fs[FEATURESET_7d1]       = p->feat._7d1;
++    fs[FEATURESET_m10Al]     = p->arch_caps.lo;
++    fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
  }
  
+ void x86_cpu_featureset_to_policy(
+@@ -100,6 +102,8 @@ void x86_cpu_featureset_to_policy(
+     p->feat._7d2             = fs[FEATURESET_7d2];
+     p->feat._7c1             = fs[FEATURESET_7c1];
+     p->feat._7d1             = fs[FEATURESET_7d1];
++    p->arch_caps.lo          = fs[FEATURESET_m10Al];
++    p->arch_caps.hi          = fs[FEATURESET_m10Ah];
+ }
+ 
+ void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
 -- 
 2.30.2
 
