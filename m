@@ -4,46 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9D4C77B7C
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 00:38:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539264.839966 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9708BC77B7C
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 00:47:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539269.839976 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1yzw-0007GR-O6; Thu, 25 May 2023 00:38:32 +0000
+	id 1q1z7v-0000Nw-Iu; Thu, 25 May 2023 00:46:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539264.839966; Thu, 25 May 2023 00:38:32 +0000
+Received: by outflank-mailman (output) from mailman id 539269.839976; Thu, 25 May 2023 00:46:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q1yzw-0007GK-Kr; Thu, 25 May 2023 00:38:32 +0000
-Received: by outflank-mailman (input) for mailman id 539264;
- Thu, 25 May 2023 00:38:31 +0000
+	id 1q1z7v-0000Np-Fq; Thu, 25 May 2023 00:46:47 +0000
+Received: by outflank-mailman (input) for mailman id 539269;
+ Thu, 25 May 2023 00:46:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2bT+=BO=quicinc.com=quic_tsoni@srs-se1.protection.inumbo.net>)
- id 1q1yzv-0007Fv-K3
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 00:38:31 +0000
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 766847be-fa94-11ed-8611-37d641c3527e;
- Thu, 25 May 2023 02:38:27 +0200 (CEST)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34P0TOdZ014158; Thu, 25 May 2023 00:37:18 GMT
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3qscautcq9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 May 2023 00:37:18 +0000
-Received: from nasanex01a.na.qualcomm.com (nasanex01a.na.qualcomm.com
- [10.52.223.231])
- by NASANPPMTA05.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 34P0bGcV018047
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 May 2023 00:37:16 GMT
-Received: from [10.110.74.38] (10.80.80.8) by nasanex01a.na.qualcomm.com
- (10.52.223.231) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.42; Wed, 24 May
- 2023 17:37:15 -0700
+ <SRS0=gGWh=BO=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1q1z7u-0000Nj-9s
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 00:46:46 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9e5dae11-fa95-11ed-8611-37d641c3527e;
+ Thu, 25 May 2023 02:46:44 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BF8876413A;
+ Thu, 25 May 2023 00:46:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3BE3C433D2;
+ Thu, 25 May 2023 00:46:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,195 +45,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 766847be-fa94-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=/e6B8PzwIMOA1NUnKfCKwK2WyRgcsLlUL/WWtMhoXOo=;
- b=p3qB04b9XJKftly38O5+vr0J26dCdM35VoVjloUmf9fYS0RaN82z0Hr3YOWh4ZJQsIjf
- BZiPx+ihcB08jdCDDKbmzPherYn1S2m1s//fnj9cxWlR23hvxTUQUVj+hShpm/tBZn5v
- jDiBZ5ioeyyjMpK+LEvalgHQPiEK8wKmXBNCpReedGyLTdn2zyAqM3iDTmQKde8ORkWM
- T86J62r2qVscXNPcq/nHDEto456qzSc9BtrhHoCSk2cNbiTANPUKFw9/ulvZYESobBSt
- WF7jcasL0f/+Lab6joyPDPm4sna1+eyFr3WPINyTsoOpta5EBv9ueff6H1jxJGX7j1Tt ww== 
-Message-ID: <cf1d6831-dac9-f738-44b4-a9dbc575b7e9@quicinc.com>
-Date: Wed, 24 May 2023 17:37:14 -0700
+X-Inumbo-ID: 9e5dae11-fa95-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1684975602;
+	bh=nfH3mGgNwMSbNgF7ChnkiSmXD4C5vRPEvASZWFe7nwg=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=XLfV3Xaerez7xkpsVhDp+HVK9vXQ1llvLC/3PudOh9845//F+pUOXKfmnpSpW5Z2f
+	 U2l0T7wL7P2OOPYX1QWMhbA3I5ZWEyifkXoUDUkllCOwkWFyXozJtUdSCN+4qMGmFj
+	 DP8+uUsqFmjsLFGpyqEKvBeugfJnHykEDuPtBGKL5/H+IB1b/dqrauY85EZgvMkoYT
+	 9x0XZDuD/tbCw1nRoVYbuZV9g8F39cQtA5N3HWYAxs6a28yARXkILdbKHSF9a9TZgr
+	 6iLgtcSt2Ta9+mKwmw1bkLWzGMZ0ChOR7qJCxf2oEzyhKgSD/D94EFuss2+8j0b8QU
+	 Ecc7XFGvUI6Gg==
+Date: Wed, 24 May 2023 17:46:39 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Luca Fancellu <luca.fancellu@arm.com>
+cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, wei.chen@arm.com, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
+    Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+    Wei Liu <wl@xen.org>, Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH 3/3] xen/misra: xen-analysis.py: Fix cppcheck report
+ relative paths
+In-Reply-To: <20230519093019.2131896-4-luca.fancellu@arm.com>
+Message-ID: <alpine.DEB.2.22.394.2305241744170.44000@ubuntu-linux-20-04-desktop>
+References: <20230519093019.2131896-1-luca.fancellu@arm.com> <20230519093019.2131896-4-luca.fancellu@arm.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [RFC PATCH v1 0/9] Hypervisor-Enforced Kernel Integrity
-Content-Language: en-US
-To: "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>,
-        "mic@digikod.net"
-	<mic@digikod.net>,
-        "Christopherson,, Sean" <seanjc@google.com>,
-        "bp@alien8.de" <bp@alien8.de>,
-        "dave.hansen@linux.intel.com"
-	<dave.hansen@linux.intel.com>,
-        "keescook@chromium.org"
-	<keescook@chromium.org>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "mingo@redhat.com"
-	<mingo@redhat.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "pbonzini@redhat.com" <pbonzini@redhat.com>,
-        "wanpengli@tencent.com"
-	<wanpengli@tencent.com>,
-        "vkuznets@redhat.com" <vkuznets@redhat.com>
-CC: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-        "yuanyu@google.com"
-	<yuanyu@google.com>,
-        "jamorris@linux.microsoft.com"
-	<jamorris@linux.microsoft.com>,
-        "marian.c.rotariu@gmail.com"
-	<marian.c.rotariu@gmail.com>,
-        "Graf, Alexander" <graf@amazon.com>,
-        "Andersen,
- John S" <john.s.andersen@intel.com>,
-        "madvenka@linux.microsoft.com"
-	<madvenka@linux.microsoft.com>,
-        "liran.alon@oracle.com"
-	<liran.alon@oracle.com>,
-        "ssicleru@bitdefender.com"
-	<ssicleru@bitdefender.com>,
-        "tgopinath@microsoft.com"
-	<tgopinath@microsoft.com>,
-        "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>,
-        "qemu-devel@nongnu.org"
-	<qemu-devel@nongnu.org>,
-        "linux-security-module@vger.kernel.org"
-	<linux-security-module@vger.kernel.org>,
-        "will@kernel.org" <will@kernel.org>,
-        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-        "dev@lists.cloudhypervisor.org" <dev@lists.cloudhypervisor.org>,
-        "mdontu@bitdefender.com" <mdontu@bitdefender.com>,
-        "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>,
-        "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
-        "virtualization@lists.linux-foundation.org"
-	<virtualization@lists.linux-foundation.org>,
-        "nicu.citu@icloud.com"
-	<nicu.citu@icloud.com>,
-        "ztarkhani@microsoft.com" <ztarkhani@microsoft.com>,
-        "x86@kernel.org" <x86@kernel.org>
-References: <20230505152046.6575-1-mic@digikod.net>
- <93726a7b9498ec66db21c5792079996d5fed5453.camel@intel.com>
-From: Trilok Soni <quic_tsoni@quicinc.com>
-In-Reply-To: <93726a7b9498ec66db21c5792079996d5fed5453.camel@intel.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01a.na.qualcomm.com (10.52.223.231)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: IbOKlK9jsOZG2ChFhg5i0OOOj4Du3a1t
-X-Proofpoint-GUID: IbOKlK9jsOZG2ChFhg5i0OOOj4Du3a1t
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-05-24_17,2023-05-24_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
- impostorscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0
- phishscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2305250003
+Content-Type: text/plain; charset=US-ASCII
 
-On 5/24/2023 3:20 PM, Edgecombe, Rick P wrote:
-> On Fri, 2023-05-05 at 17:20 +0200, Mickaël Salaün wrote:
->> # How does it work?
->>
->> This implementation mainly leverages KVM capabilities to control the
->> Second
->> Layer Address Translation (or the Two Dimensional Paging e.g.,
->> Intel's EPT or
->> AMD's RVI/NPT) and Mode Based Execution Control (Intel's MBEC)
->> introduced with
->> the Kaby Lake (7th generation) architecture. This allows to set
->> permissions on
->> memory pages in a complementary way to the guest kernel's managed
->> memory
->> permissions. Once these permissions are set, they are locked and
->> there is no
->> way back.
->>
->> A first KVM_HC_LOCK_MEM_PAGE_RANGES hypercall enables the guest
->> kernel to lock
->> a set of its memory page ranges with either the HEKI_ATTR_MEM_NOWRITE
->> or the
->> HEKI_ATTR_MEM_EXEC attribute. The first one denies write access to a
->> specific
->> set of pages (allow-list approach), and the second only allows kernel
->> execution
->> for a set of pages (deny-list approach).
->>
->> The current implementation sets the whole kernel's .rodata (i.e., any
->> const or
->> __ro_after_init variables, which includes critical security data such
->> as LSM
->> parameters) and .text sections as non-writable, and the .text section
->> is the
->> only one where kernel execution is allowed. This is possible thanks
->> to the new
->> MBEC support also brough by this series (otherwise the vDSO would
->> have to be
->> executable). Thanks to this hardware support (VT-x, EPT and MBEC),
->> the
->> performance impact of such guest protection is negligible.
->>
->> The second KVM_HC_LOCK_CR_UPDATE hypercall enables guests to pin some
->> of its
->> CPU control register flags (e.g., X86_CR0_WP, X86_CR4_SMEP,
->> X86_CR4_SMAP),
->> which is another complementary hardening mechanism.
->>
->> Heki can be enabled with the heki=1 boot command argument.
->>
->>
+On Fri, 19 May 2023, Luca Fancellu wrote:
+> Fix the generation of the relative path from the repo, for cppcheck
+> reports, when the script is launching make with in-tree build.
 > 
-> Can the guest kernel ask the host VMM's emulated devices to DMA into
-> the protected data? It should go through the host userspace mappings I
-> think, which don't care about EPT permissions. Or did I miss where you
-> are protecting that another way? There are a lot of easy ways to ask
-> the host to write to guest memory that don't involve the EPT. You
-> probably need to protect the host userspace mappings, and also the
-> places in KVM that kmap a GPA provided by the guest.
+> Fixes: b046f7e37489 ("xen/misra: xen-analysis.py: use the relative path from the ...")
+> Reported-by: Michal Orzel <michal.orzel@amd.com>
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+> ---
+>  .../xen_analysis/cppcheck_report_utils.py     | 25 ++++++++++++++++---
+>  1 file changed, 21 insertions(+), 4 deletions(-)
 > 
-> [ snip ]
-> 
->>
->> # Current limitations
->>
->> The main limitation of this patch series is the statically enforced
->> permissions. This is not an issue for kernels without module but this
->> needs to
->> be addressed.  Mechanisms that dynamically impact kernel executable
->> memory are
->> not handled for now (e.g., kernel modules, tracepoints, eBPF JIT),
->> and such
->> code will need to be authenticated.  Because the hypervisor is highly
->> privileged and critical to the security of all the VMs, we don't want
->> to
->> implement a code authentication mechanism in the hypervisor itself
->> but delegate
->> this verification to something much less privileged. We are thinking
->> of two
->> ways to solve this: implement this verification in the VMM or spawn a
->> dedicated
->> special VM (similar to Windows's VBS). There are pros on cons to each
->> approach:
->> complexity, verification code ownership (guest's or VMM's), access to
->> guest
->> memory (i.e., confidential computing).
-> 
-> The kernel often creates writable aliases in order to write to
-> protected data (kernel text, etc). Some of this is done right as text
-> is being first written out (alternatives for example), and some happens
-> way later (jump labels, etc). So for verification, I wonder what stage
-> you would be verifying? If you want to verify the end state, you would
-> have to maintain knowledge in the verifier of all the touch-ups the
-> kernel does. I think it would get very tricky.
+> diff --git a/xen/scripts/xen_analysis/cppcheck_report_utils.py b/xen/scripts/xen_analysis/cppcheck_report_utils.py
+> index fdc299c7e029..10100f6c6a57 100644
+> --- a/xen/scripts/xen_analysis/cppcheck_report_utils.py
+> +++ b/xen/scripts/xen_analysis/cppcheck_report_utils.py
+> @@ -1,6 +1,7 @@
+>  #!/usr/bin/env python3
+>  
+> -import os
+> +import os, re
+> +from . import settings
+>  from xml.etree import ElementTree
+>  
+>  class CppcheckHTMLReportError(Exception):
+> @@ -101,12 +102,28 @@ def cppcheck_merge_txt_fragments(fragments_list, out_txt_file, strip_paths):
+>              text_report_content = list(text_report_content)
+>              # Strip path from report lines
+>              for i in list(range(0, len(text_report_content))):
+> -                for path in strip_paths:
+> -                    text_report_content[i] = text_report_content[i].replace(
+> -                                                                path + "/", "")
+>                  # Split by : separator
+>                  text_report_content[i] = text_report_content[i].split(":")
+>  
+> +                for path in strip_paths:
+> +                    text_report_content[i][0] = \
+> +                        text_report_content[i][0].replace(path + "/", "")
 
-Right and for the ARM (from what I know) is that Erratas can be applied
-using the alternatives fwk when you hotplug in the CPU post boot.
+Why moving this for loop after "Split by : separator"? If it is
+necessary, would it make sense to do it in the previous patch?
 
----Trilok Soni
+
+> +                # When the compilation is in-tree, the makefile places
+> +                # the directory in /xen/xen, making cppcheck produce
+> +                # relative path from there, so check if "xen/" is a prefix
+> +                # of the path and if it's not, check if it can be added to
+> +                # have a relative path from the repository instead of from
+> +                # /xen/xen
+> +                if not text_report_content[i][0].startswith("xen/"):
+> +                    # cppcheck first entry is in this format:
+> +                    # path/to/file(line,cols), remove (line,cols)
+> +                    cppcheck_file = re.sub(r'\(.*\)', '',
+> +                                           text_report_content[i][0])
+> +                    if os.path.isfile(settings.xen_dir + "/" + cppcheck_file):
+> +                        text_report_content[i][0] = \
+> +                            "xen/" + text_report_content[i][0]
+> +
+>              # sort alphabetically for second field (misra rule) and as second
+>              # criteria for the first field (file name)
+>              text_report_content.sort(key = lambda x: (x[1], x[0]))
+> -- 
+> 2.34.1
+> 
 
