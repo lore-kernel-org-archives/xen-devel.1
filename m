@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36559C77B7E
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 15:28:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539709.840850 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50343C7EE2D
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 15:28:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539711.840872 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2CtB-0006vz-1i; Thu, 25 May 2023 15:28:29 +0000
+	id 1q2CtF-0007bz-MH; Thu, 25 May 2023 15:28:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539709.840850; Thu, 25 May 2023 15:28:29 +0000
+Received: by outflank-mailman (output) from mailman id 539711.840872; Thu, 25 May 2023 15:28:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2CtA-0006tL-SN; Thu, 25 May 2023 15:28:28 +0000
-Received: by outflank-mailman (input) for mailman id 539709;
- Thu, 25 May 2023 15:28:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q2CtF-0007bn-J0; Thu, 25 May 2023 15:28:33 +0000
+Received: by outflank-mailman (input) for mailman id 539711;
+ Thu, 25 May 2023 15:28:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=g/QV=BO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1q2CtA-0006oN-4v
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 15:28:28 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cb3e7992-fb10-11ed-8611-37d641c3527e;
- Thu, 25 May 2023 17:28:26 +0200 (CEST)
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-4f00c33c3d6so2724974e87.2
- for <xen-devel@lists.xenproject.org>; Thu, 25 May 2023 08:28:26 -0700 (PDT)
+ id 1q2CtD-0007Iw-SB
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 15:28:31 +0000
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [2a00:1450:4864:20::136])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce124b03-fb10-11ed-b230-6b7b168915f2;
+ Thu, 25 May 2023 17:28:31 +0200 (CEST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-4f4db9987f8so482761e87.1
+ for <xen-devel@lists.xenproject.org>; Thu, 25 May 2023 08:28:31 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- d22-20020ac244d6000000b004f37c0dfcaasm246853lfm.118.2023.05.25.08.28.23
+ d22-20020ac244d6000000b004f37c0dfcaasm246853lfm.118.2023.05.25.08.28.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 May 2023 08:28:24 -0700 (PDT)
+ Thu, 25 May 2023 08:28:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb3e7992-fb10-11ed-8611-37d641c3527e
+X-Inumbo-ID: ce124b03-fb10-11ed-b230-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685028506; x=1687620506;
+        d=gmail.com; s=20221208; t=1685028511; x=1687620511;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Mm1x9FKPEwGMnotOEN0ZErT2+QXcBOPbrrKH58hZrN4=;
-        b=D3CH1CX9YfjUZGnsUIEi7FEnsOrx6s5OYDBwZb7ShKNqlque/r/fWvCOhwXB7WsXxE
-         pE6mfffKb3IdJYRSyVAPEGmPCliGcecKh6a+3yCenBLMefva9Z+FKbG53pUHSBEnq49Q
-         F0SwOdRC1adfPx4IgUhr22lYIrMkGk8UmIhfefvmY8YQL469i5wGEnr0tLjDTa88thcz
-         LFGDzh+0F29TmHRDjcilEWsw9hC57pik85xuesETEG8wQlHrMOtn8WA5Hd8/E0fBlygZ
-         /fwGlClt4P4UcwJ0Zzw8YHBtKVy+NEQO8WrpJWvVvK1mPuzgQG5uRZNjH2GKbg0LxrdX
-         /G8g==
+        bh=kekLKeFIbeYDOHCuOxDTya7bEvDS56y6sN78THRHMuo=;
+        b=L0CP3/72F4YA3SVThEPqoI7mTlLcCENpjUKA/RQczdmkGSSN/de6tE/mxtfAJdhp/b
+         s7Pmr8VVHhdqY4kZV6LfPBeV1Q9uTNKQYVB9czdcwZiT7nKq/20beg2Q/XXpIcIVl3g8
+         DnxVTZOcwq56h8WzlnSlSw8SHJFilJqe5ATvyh+KXLiZofdcdDWXrGCoR+KIIf6DDHzO
+         vUR7WmdwtwEAwZlfpBm6WgzSi4ztPzBnFxT0FGkrVTQtZxaBsQarYV2ZRSUYcyouLu/J
+         PDLHHmPqMS4W1a79PtbJ5g+k/qdARdyheDU2XrzNei7cF3DEiHKdaJEUy4Ymp9Z0W4bq
+         sBcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685028506; x=1687620506;
+        d=1e100.net; s=20221208; t=1685028511; x=1687620511;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Mm1x9FKPEwGMnotOEN0ZErT2+QXcBOPbrrKH58hZrN4=;
-        b=l5tHVABrnCOX2hKjiulaC6SgUFDnipSX1/FKKnoJsGB2QhYMY8n8PS9+8umU6rU3NC
-         +K9hsE5Ja5wur2SUIiAwx4MtzIsMeoaSxxNKCft5DmAMkbA7Wuop9b2hdxaiURUBb3e0
-         u/7S696pkbZvMxP6dDQgTjydBIGh7Tj70R/xFLCun6okLdPLK+ZKglHlxbm+qc3Y5+QA
-         WNfT+h+lsIrsdxSKrYvQ91qgLpnQl0beLvWlyjFlQ66Pjdkh22xe/1jZl2WzHNrlWkf1
-         thGg2UySgJNks49QZBZpoWVw3cQntgj4W0Z14nDjGBRQvj06TQWe0MrZAMmbijKHuxBN
-         emyg==
-X-Gm-Message-State: AC+VfDzYFQWlV2565lgcwTu+Pv1xdSFMOONhprMJlGGFBdgNEv1cEJJN
-	avsXoloyUVMDBgg9hG3M/mWzfZaLNDk=
-X-Google-Smtp-Source: ACHHUZ5YmwnjCDBxXsrdxE4FYSVhGy9E8zB7sa3ZQT449fJ8dmMhSu+11AOT8E9ycG0jaCoD5Vsvyg==
-X-Received: by 2002:ac2:5dfc:0:b0:4f3:aa09:e7e8 with SMTP id z28-20020ac25dfc000000b004f3aa09e7e8mr8090365lfq.44.1685028505609;
-        Thu, 25 May 2023 08:28:25 -0700 (PDT)
+        bh=kekLKeFIbeYDOHCuOxDTya7bEvDS56y6sN78THRHMuo=;
+        b=KnjVyu8Pqntljor17/+E23b85aOFh1jnTtP9ajheDG63U2ZZuuozuj0agIDrf2COnr
+         BgHavI9UM5CbnBK6qIftfOE5Skvbd2I+5yoPVdsVVs6AV8nGed7C3umPnhdu3E7CsJSX
+         H1ZMg8ieAcX96jMk9x0KkdqlP05fwQ3MBUcxqF3UqaNJnBo3NvDoFtce8Lq9RDXqkW6r
+         AxgRPgjC6mMZ5FtYZrmnI6mrGnejPkGV5mAYgiY7iciQ6IJX4xtXtUYPvS60Mx57OOhZ
+         DG5rsEw/Sf/RabKt2TP4SUNcjrfNi/M5TN+9Bf2PEZ8m+Qd3mOjtOowUyvaB4iCbe+s8
+         QLfg==
+X-Gm-Message-State: AC+VfDyp6Yq91aTYGqeASX4kKxGxFrDhDKobJxuGPIKPwq+2wAocMF+O
+	7bJ+kK1qV/J9LCRgxzZUcmztRrIIaGg=
+X-Google-Smtp-Source: ACHHUZ54mKL4yz2tswCT6bUSDgiMcAVpL9rQyxTaKnt81R9rivSGkf0GpgexQ4aAjwSzkEN/G8cAXg==
+X-Received: by 2002:a05:6512:3c86:b0:4eb:412f:9e0e with SMTP id h6-20020a0565123c8600b004eb412f9e0emr1126234lfv.26.1685028510793;
+        Thu, 25 May 2023 08:28:30 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -86,91 +86,67 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v9 1/5] xen/riscv: add VM space layout
-Date: Thu, 25 May 2023 18:28:14 +0300
-Message-Id: <1621fd09987d20b3233132d422e5c9dfe300e3f7.1685027257.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v9 4/5] xen/riscv: setup initial pagetables
+Date: Thu, 25 May 2023 18:28:17 +0300
+Message-Id: <6ea28216df1c7f29ebd88e20adb05cdf75af20fe.1685027257.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1685027257.git.oleksii.kurochko@gmail.com>
 References: <cover.1685027257.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Also it was added explanation about ignoring of top VA bits
+The patch does two thing:
+1. Setup initial pagetables.
+2. Enable MMU which end up with code in
+   cont_after_mmu_is_enabled()
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in V9:
- - Update comment for VM layout description.
+ - Nothing changed. Only rebase
 ---
 Changes in V8:
- - Add "#ifdef RV_STAGE1_MODE == SATP_MODE_SV39" instead of "#ifdef SV39"
-   in the comment to VM layout description.
- - Update the upper bound of direct map area in VM layout description.
+ - Nothing changed. Only rebase
 ---
 Changes in V7:
- - Fix range of frametable range in RV64 layout.
- - Add ifdef SV39 to the RV64 layout comment to make it explicit that
-   description if for SV39 mode.
- - Add missed row in the RV64 layout table.
+ - Nothing changed. Only rebase
 ---
 Changes in V6:
- - update comment above the RISCV-64 layout table
- - add Slot column to the table with RISCV-64 Layout
- - update RV-64 layout table.
+ - Nothing changed. Only rebase
 ---
 Changes in V5:
-* the patch was introduced in the current patch series.
+ - Nothing changed. Only rebase
 ---
- xen/arch/riscv/include/asm/config.h | 36 +++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+Changes in V4:
+ - Nothing changed. Only rebase
+---
+Changes in V3:
+ - update the commit message that MMU is also enabled here
+ - remove early_printk("All set up\n") as it was moved to
+   cont_after_mmu_is_enabled() function after MMU is enabled.
+---
+Changes in V2:
+ * Update the commit message
+---
+ xen/arch/riscv/setup.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 763a922a04..9900d29dab 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -4,6 +4,42 @@
- #include <xen/const.h>
- #include <xen/page-size.h>
+diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
+index 315804aa87..cf5dc5824e 100644
+--- a/xen/arch/riscv/setup.c
++++ b/xen/arch/riscv/setup.c
+@@ -21,7 +21,10 @@ void __init noreturn start_xen(unsigned long bootcpu_id,
+ {
+     early_printk("Hello from C env\n");
  
-+/*
-+ * RISC-V64 Layout:
-+ *
-+#if RV_STAGE1_MODE == SATP_MODE_SV39
-+ *
-+ * From the riscv-privileged doc:
-+ *   When mapping between narrower and wider addresses,
-+ *   RISC-V zero-extends a narrower physical address to a wider size.
-+ *   The mapping between 64-bit virtual addresses and the 39-bit usable
-+ *   address space of Sv39 is not based on zero-extension but instead
-+ *   follows an entrenched convention that allows an OS to use one or
-+ *   a few of the most-significant bits of a full-size (64-bit) virtual
-+ *   address to quickly distinguish user and supervisor address regions.
-+ *
-+ * It means that:
-+ *   top VA bits are simply ignored for the purpose of translating to PA.
-+ *
-+ * ============================================================================
-+ *    Start addr    |   End addr        |  Size  | Slot       |area description
-+ * ============================================================================
-+ * FFFFFFFFC0800000 |  FFFFFFFFFFFFFFFF |1016 MB | L2 511     | Unused
-+ * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
-+ * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
-+ * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
-+ *                 ...                  |  1 GB  | L2 510     | Unused
-+ * 0000003200000000 |  0000007F80000000 | 309 GB | L2 200-509 | Direct map
-+ *                 ...                  |  1 GB  | L2 199     | Unused
-+ * 0000003100000000 |  00000031C0000000 |  3 GB  | L2 196-198 | Frametable
-+ *                 ...                  |  1 GB  | L2 195     | Unused
-+ * 0000003080000000 |  00000030C0000000 |  1 GB  | L2 194     | VMAP
-+ *                 ...                  | 194 GB | L2 0 - 193 | Unused
-+ * ============================================================================
-+ *
-+#endif
-+ */
+-    early_printk("All set up\n");
++    setup_initial_pagetables();
 +
- #if defined(CONFIG_RISCV_64)
- # define LONG_BYTEORDER 3
- # define ELFSIZE 64
++    enable_mmu();
++
+     for ( ;; )
+         asm volatile ("wfi");
+ 
 -- 
 2.40.1
 
