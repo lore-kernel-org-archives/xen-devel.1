@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8CAC7EE2E
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 08:59:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539424.840278 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D70DC7EE2C
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 09:00:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539431.840287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26oF-0004p7-9y; Thu, 25 May 2023 08:58:59 +0000
+	id 1q26p7-0005Pz-KF; Thu, 25 May 2023 08:59:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539424.840278; Thu, 25 May 2023 08:58:59 +0000
+Received: by outflank-mailman (output) from mailman id 539431.840287; Thu, 25 May 2023 08:59:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26oF-0004p0-6w; Thu, 25 May 2023 08:58:59 +0000
-Received: by outflank-mailman (input) for mailman id 539424;
- Thu, 25 May 2023 08:58:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q26p7-0005Ps-Hc; Thu, 25 May 2023 08:59:53 +0000
+Received: by outflank-mailman (input) for mailman id 539431;
+ Thu, 25 May 2023 08:59:52 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JOix=BO=kernel.org=rppt@srs-se1.protection.inumbo.net>)
- id 1q26oE-0004nX-5n
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:58:58 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5f106e3a-fada-11ed-8611-37d641c3527e;
- Thu, 25 May 2023 10:58:53 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E55A9616BE;
- Thu, 25 May 2023 08:58:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5932C43442;
- Thu, 25 May 2023 08:58:40 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1q26p6-0005OI-GW
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:59:52 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q26p6-0000Vo-91; Thu, 25 May 2023 08:59:52 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=[192.168.31.224]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q26p6-0005L4-2R; Thu, 25 May 2023 08:59:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,314 +41,335 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f106e3a-fada-11ed-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1685005133;
-	bh=oNoesoVEhmHSzqjLPuecf1DZL/ZoWi60ZyKcNVMfFVo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=hiSzUHy75eUy1mVFCElzz3/neUE7rxHTDy2xRb8QXAlD+6lMoim/IeLDqnbd+2ow/
-	 SO/JIK+ySPeuNGcKhVYLYIXFBPVj//3J6rmBEV0G3lN6xc01u+YyUUxRpXHWlPx6Pp
-	 eEfQ/WXmV6xY0WSYRJNqg+5epfYbsC3S4xe/XrDch3HDF6usrp0dvIA10d4rEPqzvy
-	 /cz0UmYos7f1FMG/9x7hluyjJ0c7dsCs3WwZ6QoPV8vqzEPTZL/cxobm8SySST/t9p
-	 HbI0v8j8dZid+K0UklL55Bya63sq5cDfCnqZtoJrypH8E7sdkPNnq3dw+mBZR1DIpF
-	 iohe6mj09FGwg==
-Date: Thu, 25 May 2023 11:58:19 +0300
-From: Mike Rapoport <rppt@kernel.org>
-To: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org,
-	linux-arch@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org, linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
-	David Hildenbrand <david@redhat.com>,
-	Claudio Imbrenda <imbrenda@linux.ibm.com>
-Subject: Re: [PATCH v2 02/34] s390: Use _pt_s390_gaddr for gmap address
- tracking
-Message-ID: <20230525085819.GW4967@kernel.org>
-References: <20230501192829.17086-1-vishal.moola@gmail.com>
- <20230501192829.17086-3-vishal.moola@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=5FPnP54xSLr88Acy6vRkjDCgqtY7AJiaUVTjSA6QkRA=; b=gczCrFu1VXkMAbJvqrZcefJIac
+	HI+g4gTYsQLSK2U0QqgNv0aiXdnCYqUfK9zuzxcdLNUDtGgofr3F7F/3KXveFMhvp2mFFFM+KqtKx
+	96K7u0+eqSdYxssrPbHaAUgbzxGB+C6U/riMO2AdxFNU6BdP0tcAL4t1qFnNjbsJlW00=;
+Message-ID: <9dbf2ceb-e39f-3c9d-7790-51524ba67d5d@xen.org>
+Date: Thu, 25 May 2023 09:59:50 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230501192829.17086-3-vishal.moola@gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.11.0
+Subject: Re: [PATCH v7 02/12] xen/arm: add SVE vector length field to the
+ domain
+Content-Language: en-US
+To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, wei.chen@arm.com,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230523074326.3035745-1-luca.fancellu@arm.com>
+ <20230523074326.3035745-3-luca.fancellu@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20230523074326.3035745-3-luca.fancellu@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 01, 2023 at 12:27:57PM -0700, Vishal Moola (Oracle) wrote:
-> s390 uses page->index to keep track of page tables for the guest address
-> space. In an attempt to consolidate the usage of page fields in s390,
-> replace _pt_pad_2 with _pt_s390_gaddr to replace page->index in gmap.
-> 
-> This will help with the splitting of struct ptdesc from struct page, as
-> well as allow s390 to use _pt_frag_refcount for fragmented page table
-> tracking.
-> 
-> Since page->_pt_s390_gaddr aliases with mapping, ensure its set to NULL
-> before freeing the pages as well.
+Hi,
 
-Wouldn't it be easier to use _pt_pad_1 which is aliased with lru and that
-does not seem to be used by page tables at all?
- 
-> This also reverts commit 7e25de77bc5ea ("s390/mm: use pmd_pgtable_page()
-> helper in __gmap_segment_gaddr()") which had s390 use
-> pmd_pgtable_page() to get a gmap page table, as pmd_pgtable_page()
-> should be used for more generic process page tables.
+On 23/05/2023 08:43, Luca Fancellu wrote:
+> Add sve_vl field to arch_domain and xen_arch_domainconfig struct,
+> to allow the domain to have an information about the SVE feature
+> and the number of SVE register bits that are allowed for this
+> domain.
 > 
-> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+> sve_vl field is the vector length in bits divided by 128, this
+> allows to use less space in the structures.
+> 
+> The field is used also to allow or forbid a domain to use SVE,
+> because a value equal to zero means the guest is not allowed to
+> use the feature.
+> 
+> Check that the requested vector length is lower or equal to the
+> platform supported vector length, otherwise fail on domain
+> creation.
+> 
+> Check that only 64 bit domains have SVE enabled, otherwise fail.
+> 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
+
 > ---
->  arch/s390/mm/gmap.c      | 56 +++++++++++++++++++++++++++-------------
->  include/linux/mm_types.h |  2 +-
->  2 files changed, 39 insertions(+), 19 deletions(-)
+> Changes from v6:
+>   - Style fix, have is_sve_domain as static inline instead of macro
+>     (Julien)
+> Changes from v5:
+>   - Update commit message stating the interface ver. bump (Bertrand)
+>   - in struct arch_domain, protect sve_vl with CONFIG_ARM64_SVE,
+>     given the change, move also is_sve_domain() where it's protected
+>     inside sve.h and create a stub when the macro is not defined,
+>     protect the usage of sve_vl where needed.
+>     (Julien)
+>   - Add a check for 32 bit guest running on top of 64 bit host that
+>     have sve parameter enabled to stop the domain creation, added in
+>     construct_domain() of domain_build.c and subarch_do_domctl of
+>     domctl.c. (Julien)
+> Changes from v4:
+>   - Return 0 in get_sys_vl_len() if sve is not supported, code style fix,
+>     removed else if since the conditions can't fallthrough, removed not
+>     needed condition checking for VL bits validity because it's already
+>     covered, so delete is_vl_valid() function. (Jan)
+> Changes from v3:
+>   - don't use fixed types when not needed, use encoded value also in
+>     arch_domain so rename sve_vl_bits in sve_vl. (Jan)
+>   - rename domainconfig_decode_vl to sve_decode_vl because it will now
+>     be used also to decode from arch_domain value
+>   - change sve_vl from uint16_t to uint8_t and move it after "type" field
+>     to optimize space.
+> Changes from v2:
+>   - rename field in xen_arch_domainconfig from "sve_vl_bits" to
+>     "sve_vl" and use the implicit padding after gic_version to
+>     store it, now this field is the VL/128. (Jan)
+>   - Created domainconfig_decode_vl() function to decode the sve_vl
+>     field and use it as plain bits value inside arch_domain.
+>   - Changed commit message reflecting the changes
+> Changes from v1:
+>   - no changes
+> Changes from RFC:
+>   - restore zcr_el2 in sve_restore_state, that will be introduced
+>     later in this serie, so remove zcr_el2 related code from this
+>     patch and move everything to the later patch (Julien)
+>   - add explicit padding into struct xen_arch_domainconfig (Julien)
+>   - Don't lower down the vector length, just fail to create the
+>     domain. (Julien)
+> ---
+>   xen/arch/arm/arm64/domctl.c          |  4 ++++
+>   xen/arch/arm/arm64/sve.c             | 12 +++++++++++
+>   xen/arch/arm/domain.c                | 29 ++++++++++++++++++++++++++
+>   xen/arch/arm/domain_build.c          |  7 +++++++
+>   xen/arch/arm/include/asm/arm64/sve.h | 31 ++++++++++++++++++++++++++++
+>   xen/arch/arm/include/asm/domain.h    |  5 +++++
+>   xen/include/public/arch-arm.h        |  2 ++
+>   7 files changed, 90 insertions(+)
 > 
-> diff --git a/arch/s390/mm/gmap.c b/arch/s390/mm/gmap.c
-> index dfe905c7bd8e..a9e8b1805894 100644
-> --- a/arch/s390/mm/gmap.c
-> +++ b/arch/s390/mm/gmap.c
-> @@ -70,7 +70,7 @@ static struct gmap *gmap_alloc(unsigned long limit)
->  	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
->  	if (!page)
->  		goto out_free;
-> -	page->index = 0;
-> +	page->_pt_s390_gaddr = 0;
->  	list_add(&page->lru, &gmap->crst_list);
->  	table = page_to_virt(page);
->  	crst_table_init(table, etype);
-> @@ -187,16 +187,20 @@ static void gmap_free(struct gmap *gmap)
->  	if (!(gmap_is_shadow(gmap) && gmap->removed))
->  		gmap_flush_tlb(gmap);
->  	/* Free all segment & region tables. */
-> -	list_for_each_entry_safe(page, next, &gmap->crst_list, lru)
-> +	list_for_each_entry_safe(page, next, &gmap->crst_list, lru) {
-> +		page->_pt_s390_gaddr = 0;
->  		__free_pages(page, CRST_ALLOC_ORDER);
-> +	}
->  	gmap_radix_tree_free(&gmap->guest_to_host);
->  	gmap_radix_tree_free(&gmap->host_to_guest);
->  
->  	/* Free additional data for a shadow gmap */
->  	if (gmap_is_shadow(gmap)) {
->  		/* Free all page tables. */
-> -		list_for_each_entry_safe(page, next, &gmap->pt_list, lru)
-> +		list_for_each_entry_safe(page, next, &gmap->pt_list, lru) {
-> +			page->_pt_s390_gaddr = 0;
->  			page_table_free_pgste(page);
-> +		}
->  		gmap_rmap_radix_tree_free(&gmap->host_to_rmap);
->  		/* Release reference to the parent */
->  		gmap_put(gmap->parent);
-> @@ -318,12 +322,14 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
->  		list_add(&page->lru, &gmap->crst_list);
->  		*table = __pa(new) | _REGION_ENTRY_LENGTH |
->  			(*table & _REGION_ENTRY_TYPE_MASK);
-> -		page->index = gaddr;
-> +		page->_pt_s390_gaddr = gaddr;
->  		page = NULL;
->  	}
->  	spin_unlock(&gmap->guest_table_lock);
-> -	if (page)
-> +	if (page) {
-> +		page->_pt_s390_gaddr = 0;
->  		__free_pages(page, CRST_ALLOC_ORDER);
-> +	}
->  	return 0;
->  }
->  
-> @@ -336,12 +342,14 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
->  static unsigned long __gmap_segment_gaddr(unsigned long *entry)
->  {
->  	struct page *page;
-> -	unsigned long offset;
-> +	unsigned long offset, mask;
->  
->  	offset = (unsigned long) entry / sizeof(unsigned long);
->  	offset = (offset & (PTRS_PER_PMD - 1)) * PMD_SIZE;
-> -	page = pmd_pgtable_page((pmd_t *) entry);
-> -	return page->index + offset;
-> +	mask = ~(PTRS_PER_PMD * sizeof(pmd_t) - 1);
-> +	page = virt_to_page((void *)((unsigned long) entry & mask));
+> diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
+> index 0de89b42c448..14fc622e9956 100644
+> --- a/xen/arch/arm/arm64/domctl.c
+> +++ b/xen/arch/arm/arm64/domctl.c
+> @@ -10,6 +10,7 @@
+>   #include <xen/sched.h>
+>   #include <xen/hypercall.h>
+>   #include <public/domctl.h>
+> +#include <asm/arm64/sve.h>
+>   #include <asm/cpufeature.h>
+>   
+>   static long switch_mode(struct domain *d, enum domain_type type)
+> @@ -43,6 +44,9 @@ long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
+>           case 32:
+>               if ( !cpu_has_el1_32 )
+>                   return -EINVAL;
+> +            /* SVE is not supported for 32 bit domain */
+> +            if ( is_sve_domain(d) )
+> +                return -EINVAL;
+>               return switch_mode(d, DOMAIN_32BIT);
+>           case 64:
+>               return switch_mode(d, DOMAIN_64BIT);
+> diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
+> index e05ccc38a896..a9144e48ef6b 100644
+> --- a/xen/arch/arm/arm64/sve.c
+> +++ b/xen/arch/arm/arm64/sve.c
+> @@ -8,6 +8,7 @@
+>   #include <xen/types.h>
+>   #include <asm/arm64/sve.h>
+>   #include <asm/arm64/sysregs.h>
+> +#include <asm/cpufeature.h>
+>   #include <asm/processor.h>
+>   #include <asm/system.h>
+>   
+> @@ -49,6 +50,17 @@ register_t compute_max_zcr(void)
+>       return vl_to_zcr(hw_vl);
+>   }
+>   
+> +/* Get the system sanitized value for VL in bits */
+> +unsigned int get_sys_vl_len(void)
+> +{
+> +    if ( !cpu_has_sve )
+> +        return 0;
 > +
-> +	return page->_pt_s390_gaddr + offset;
->  }
->  
->  /**
-> @@ -1351,6 +1359,7 @@ static void gmap_unshadow_pgt(struct gmap *sg, unsigned long raddr)
->  	/* Free page table */
->  	page = phys_to_page(pgt);
->  	list_del(&page->lru);
-> +	page->_pt_s390_gaddr = 0;
->  	page_table_free_pgste(page);
->  }
->  
-> @@ -1379,6 +1388,7 @@ static void __gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr,
->  		/* Free page table */
->  		page = phys_to_page(pgt);
->  		list_del(&page->lru);
-> +		page->_pt_s390_gaddr = 0;
->  		page_table_free_pgste(page);
->  	}
->  }
-> @@ -1409,6 +1419,7 @@ static void gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr)
->  	/* Free segment table */
->  	page = phys_to_page(sgt);
->  	list_del(&page->lru);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  }
->  
-> @@ -1437,6 +1448,7 @@ static void __gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr,
->  		/* Free segment table */
->  		page = phys_to_page(sgt);
->  		list_del(&page->lru);
-> +		page->_pt_s390_gaddr = 0;
->  		__free_pages(page, CRST_ALLOC_ORDER);
->  	}
->  }
-> @@ -1467,6 +1479,7 @@ static void gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr)
->  	/* Free region 3 table */
->  	page = phys_to_page(r3t);
->  	list_del(&page->lru);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  }
->  
-> @@ -1495,6 +1508,7 @@ static void __gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr,
->  		/* Free region 3 table */
->  		page = phys_to_page(r3t);
->  		list_del(&page->lru);
-> +		page->_pt_s390_gaddr = 0;
->  		__free_pages(page, CRST_ALLOC_ORDER);
->  	}
->  }
-> @@ -1525,6 +1539,7 @@ static void gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr)
->  	/* Free region 2 table */
->  	page = phys_to_page(r2t);
->  	list_del(&page->lru);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  }
->  
-> @@ -1557,6 +1572,7 @@ static void __gmap_unshadow_r1t(struct gmap *sg, unsigned long raddr,
->  		/* Free region 2 table */
->  		page = phys_to_page(r2t);
->  		list_del(&page->lru);
-> +		page->_pt_s390_gaddr = 0;
->  		__free_pages(page, CRST_ALLOC_ORDER);
->  	}
->  }
-> @@ -1762,9 +1778,9 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
->  	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
->  	if (!page)
->  		return -ENOMEM;
-> -	page->index = r2t & _REGION_ENTRY_ORIGIN;
-> +	page->_pt_s390_gaddr = r2t & _REGION_ENTRY_ORIGIN;
->  	if (fake)
-> -		page->index |= GMAP_SHADOW_FAKE_TABLE;
-> +		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
->  	s_r2t = page_to_phys(page);
->  	/* Install shadow region second table */
->  	spin_lock(&sg->guest_table_lock);
-> @@ -1814,6 +1830,7 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
->  	return rc;
->  out_free:
->  	spin_unlock(&sg->guest_table_lock);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  	return rc;
->  }
-> @@ -1846,9 +1863,9 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
->  	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
->  	if (!page)
->  		return -ENOMEM;
-> -	page->index = r3t & _REGION_ENTRY_ORIGIN;
-> +	page->_pt_s390_gaddr = r3t & _REGION_ENTRY_ORIGIN;
->  	if (fake)
-> -		page->index |= GMAP_SHADOW_FAKE_TABLE;
-> +		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
->  	s_r3t = page_to_phys(page);
->  	/* Install shadow region second table */
->  	spin_lock(&sg->guest_table_lock);
-> @@ -1898,6 +1915,7 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
->  	return rc;
->  out_free:
->  	spin_unlock(&sg->guest_table_lock);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  	return rc;
->  }
-> @@ -1930,9 +1948,9 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
->  	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
->  	if (!page)
->  		return -ENOMEM;
-> -	page->index = sgt & _REGION_ENTRY_ORIGIN;
-> +	page->_pt_s390_gaddr = sgt & _REGION_ENTRY_ORIGIN;
->  	if (fake)
-> -		page->index |= GMAP_SHADOW_FAKE_TABLE;
-> +		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
->  	s_sgt = page_to_phys(page);
->  	/* Install shadow region second table */
->  	spin_lock(&sg->guest_table_lock);
-> @@ -1982,6 +2000,7 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
->  	return rc;
->  out_free:
->  	spin_unlock(&sg->guest_table_lock);
-> +	page->_pt_s390_gaddr = 0;
->  	__free_pages(page, CRST_ALLOC_ORDER);
->  	return rc;
->  }
-> @@ -2014,9 +2033,9 @@ int gmap_shadow_pgt_lookup(struct gmap *sg, unsigned long saddr,
->  	if (table && !(*table & _SEGMENT_ENTRY_INVALID)) {
->  		/* Shadow page tables are full pages (pte+pgste) */
->  		page = pfn_to_page(*table >> PAGE_SHIFT);
-> -		*pgt = page->index & ~GMAP_SHADOW_FAKE_TABLE;
-> +		*pgt = page->_pt_s390_gaddr & ~GMAP_SHADOW_FAKE_TABLE;
->  		*dat_protection = !!(*table & _SEGMENT_ENTRY_PROTECT);
-> -		*fake = !!(page->index & GMAP_SHADOW_FAKE_TABLE);
-> +		*fake = !!(page->_pt_s390_gaddr & GMAP_SHADOW_FAKE_TABLE);
->  		rc = 0;
->  	} else  {
->  		rc = -EAGAIN;
-> @@ -2054,9 +2073,9 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
->  	page = page_table_alloc_pgste(sg->mm);
->  	if (!page)
->  		return -ENOMEM;
-> -	page->index = pgt & _SEGMENT_ENTRY_ORIGIN;
-> +	page->_pt_s390_gaddr = pgt & _SEGMENT_ENTRY_ORIGIN;
->  	if (fake)
-> -		page->index |= GMAP_SHADOW_FAKE_TABLE;
-> +		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
->  	s_pgt = page_to_phys(page);
->  	/* Install shadow page table */
->  	spin_lock(&sg->guest_table_lock);
-> @@ -2101,6 +2120,7 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
->  	return rc;
->  out_free:
->  	spin_unlock(&sg->guest_table_lock);
-> +	page->_pt_s390_gaddr = 0;
->  	page_table_free_pgste(page);
->  	return rc;
->  
-> diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
-> index 306a3d1a0fa6..6161fe1ae5b8 100644
-> --- a/include/linux/mm_types.h
-> +++ b/include/linux/mm_types.h
-> @@ -144,7 +144,7 @@ struct page {
->  		struct {	/* Page table pages */
->  			unsigned long _pt_pad_1;	/* compound_head */
->  			pgtable_t pmd_huge_pte; /* protected by page->ptl */
-> -			unsigned long _pt_pad_2;	/* mapping */
-> +			unsigned long _pt_s390_gaddr;	/* mapping */
->  			union {
->  				struct mm_struct *pt_mm; /* x86 pgds only */
->  				atomic_t pt_frag_refcount; /* powerpc */
-> -- 
-> 2.39.2
-> 
-> 
+> +    /* ZCR_ELx len field is ((len + 1) * 128) = vector bits length */
+> +    return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
+> +            SVE_VL_MULTIPLE_VAL;
+> +}
+> +
+>   /*
+>    * Local variables:
+>    * mode: C
+> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+> index d5ab15db46c4..6c22551b0ed2 100644
+> --- a/xen/arch/arm/domain.c
+> +++ b/xen/arch/arm/domain.c
+> @@ -13,6 +13,7 @@
+>   #include <xen/wait.h>
+>   
+>   #include <asm/alternative.h>
+> +#include <asm/arm64/sve.h>
+>   #include <asm/cpuerrata.h>
+>   #include <asm/cpufeature.h>
+>   #include <asm/current.h>
+> @@ -555,6 +556,8 @@ int arch_vcpu_create(struct vcpu *v)
+>       v->arch.vmpidr = MPIDR_SMP | vcpuid_to_vaffinity(v->vcpu_id);
+>   
+>       v->arch.cptr_el2 = get_default_cptr_flags();
+> +    if ( is_sve_domain(v->domain) )
+> +        v->arch.cptr_el2 &= ~HCPTR_CP(8);
+>   
+>       v->arch.hcr_el2 = get_default_hcr_flags();
+>   
+> @@ -599,6 +602,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+>       unsigned int max_vcpus;
+>       unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
+>       unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu);
+> +    unsigned int sve_vl_bits = sve_decode_vl(config->arch.sve_vl);
+>   
+>       if ( (config->flags & ~flags_optional) != flags_required )
+>       {
+> @@ -607,6 +611,26 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+>           return -EINVAL;
+>       }
+>   
+> +    /* Check feature flags */
+> +    if ( sve_vl_bits > 0 )
+> +    {
+> +        unsigned int zcr_max_bits = get_sys_vl_len();
+> +
+> +        if ( !zcr_max_bits )
+> +        {
+> +            dprintk(XENLOG_INFO, "SVE is unsupported on this machine.\n");
+> +            return -EINVAL;
+> +        }
+> +
+> +        if ( sve_vl_bits > zcr_max_bits )
+> +        {
+> +            dprintk(XENLOG_INFO,
+> +                    "Requested SVE vector length (%u) > supported length (%u)\n",
+> +                    sve_vl_bits, zcr_max_bits);
+> +            return -EINVAL;
+> +        }
+> +    }
+> +
+>       /* The P2M table must always be shared between the CPU and the IOMMU */
+>       if ( config->iommu_opts & XEN_DOMCTL_IOMMU_no_sharept )
+>       {
+> @@ -749,6 +773,11 @@ int arch_domain_create(struct domain *d,
+>       if ( (rc = domain_vpci_init(d)) != 0 )
+>           goto fail;
+>   
+> +#ifdef CONFIG_ARM64_SVE
+> +    /* Copy the encoded vector length sve_vl from the domain configuration */
+> +    d->arch.sve_vl = config->arch.sve_vl;
+> +#endif
+> +
+>       return 0;
+>   
+>   fail:
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 71f307a572e9..9dd1ed5bce44 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -26,6 +26,7 @@
+>   #include <asm/platform.h>
+>   #include <asm/psci.h>
+>   #include <asm/setup.h>
+> +#include <asm/arm64/sve.h>
+>   #include <asm/cpufeature.h>
+>   #include <asm/domain_build.h>
+>   #include <xen/event.h>
+> @@ -3670,6 +3671,12 @@ static int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
+>           return -EINVAL;
+>       }
+>   
+> +    if ( is_sve_domain(d) && (kinfo->type == DOMAIN_32BIT) )
+> +    {
+> +        printk("SVE is not available for 32-bit domain\n");
+> +        return -EINVAL;
+> +    }
+> +
+>       if ( is_64bit_domain(d) )
+>           vcpu_switch_to_aarch64_mode(v);
+>   
+> diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
+> index c0466243c7bc..4b63412727fc 100644
+> --- a/xen/arch/arm/include/asm/arm64/sve.h
+> +++ b/xen/arch/arm/include/asm/arm64/sve.h
+> @@ -8,13 +8,44 @@
+>   #ifndef _ARM_ARM64_SVE_H
+>   #define _ARM_ARM64_SVE_H
+>   
+> +#include <xen/sched.h>
+> +
+>   #define SVE_VL_MAX_BITS 2048U
+>   
+>   /* Vector length must be multiple of 128 */
+>   #define SVE_VL_MULTIPLE_VAL 128U
+>   
+> +static inline unsigned int sve_decode_vl(unsigned int sve_vl)
+> +{
+> +    /* SVE vector length is stored as VL/128 in xen_arch_domainconfig */
+> +    return sve_vl * SVE_VL_MULTIPLE_VAL;
+> +}
+> +
+>   register_t compute_max_zcr(void);
+>   
+> +#ifdef CONFIG_ARM64_SVE
+> +
+> +static inline bool is_sve_domain(const struct domain *d)
+> +{
+> +    return d->arch.sve_vl > 0;
+> +}
+> +
+> +unsigned int get_sys_vl_len(void);
+> +
+> +#else /* !CONFIG_ARM64_SVE */
+> +
+> +static inline bool is_sve_domain(const struct domain *d)
+> +{
+> +    return false;
+> +}
+> +
+> +static inline unsigned int get_sys_vl_len(void)
+> +{
+> +    return 0;
+> +}
+> +
+> +#endif /* CONFIG_ARM64_SVE */
+> +
+>   #endif /* _ARM_ARM64_SVE_H */
+>   
+>   /*
+> diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
+> index e776ee704b7d..331da0f3bcc3 100644
+> --- a/xen/arch/arm/include/asm/domain.h
+> +++ b/xen/arch/arm/include/asm/domain.h
+> @@ -67,6 +67,11 @@ struct arch_domain
+>       enum domain_type type;
+>   #endif
+>   
+> +#ifdef CONFIG_ARM64_SVE
+> +    /* max SVE encoded vector length */
+> +    uint8_t sve_vl;
+> +#endif
+> +
+>       /* Virtual MMU */
+>       struct p2m_domain p2m;
+>   
+> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+> index 1528ced5097a..38311f559581 100644
+> --- a/xen/include/public/arch-arm.h
+> +++ b/xen/include/public/arch-arm.h
+> @@ -300,6 +300,8 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+>   struct xen_arch_domainconfig {
+>       /* IN/OUT */
+>       uint8_t gic_version;
+> +    /* IN - Contains SVE vector length divided by 128 */
+> +    uint8_t sve_vl;
+>       /* IN */
+>       uint16_t tee_type;
+>       /* IN */
 
 -- 
-Sincerely yours,
-Mike.
+Julien Grall
 
