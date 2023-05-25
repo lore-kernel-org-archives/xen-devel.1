@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAEFC7EE31
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 08:56:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539409.840245 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F93BC7EE2C
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 08:57:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539418.840258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26ll-0002aU-DJ; Thu, 25 May 2023 08:56:25 +0000
+	id 1q26mb-0003gk-Nq; Thu, 25 May 2023 08:57:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539409.840245; Thu, 25 May 2023 08:56:25 +0000
+Received: by outflank-mailman (output) from mailman id 539418.840258; Thu, 25 May 2023 08:57:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26ll-0002Zj-6E; Thu, 25 May 2023 08:56:25 +0000
-Received: by outflank-mailman (input) for mailman id 539409;
- Thu, 25 May 2023 08:56:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q26mb-0003gd-LD; Thu, 25 May 2023 08:57:17 +0000
+Received: by outflank-mailman (input) for mailman id 539418;
+ Thu, 25 May 2023 08:57:16 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JOix=BO=kernel.org=rppt@srs-se1.protection.inumbo.net>)
- id 1q26lk-0002XS-J0
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:56:24 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 05e84676-fada-11ed-b230-6b7b168915f2;
- Thu, 25 May 2023 10:56:23 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 443A86441D;
- Thu, 25 May 2023 08:56:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9425AC433EF;
- Thu, 25 May 2023 08:56:14 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1q26ma-0003gJ-Ab
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:57:16 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q26mZ-0000RH-V1; Thu, 25 May 2023 08:57:15 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=[192.168.31.224]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q26mZ-0005Ib-Nx; Thu, 25 May 2023 08:57:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,111 +41,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05e84676-fada-11ed-b230-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1685004981;
-	bh=T3x6HsAO3RQbrXA8lAmGWzhIEFxQo3e/SuF/zmio4Hs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=mRtUeUA+TIvgOPBLeDE0LEeluR6Lkzocki1ce4LxvGW3Kh74OsnmFoUFRRmQEOqgY
-	 vPbs8UllpBsHYQNETyRPKHNQXbkjzvcZ/qcNMJMO2YSn7oQ9dFwS8Ece6KmReDjGKv
-	 UHsfvGg5kn0tsbjmZAqeTwYppOTlzTxEsz6d+ZO+0GcrxaOJ0wF3N2ge6+B4EiqPJP
-	 Rr14bkavs3kxuqVnqdy8wSuE2VMYBsI0nPEtl+gq6jIzwj54Hlj3QoMxeOG7OsIhLt
-	 Fod2UUbjMqcZpiBjbvghJGsfjbRDVycHZQ/GoUx1cUGXfXrx/0id06caAMVPKwYBaI
-	 blTpXwhMXt6qg==
-Date: Thu, 25 May 2023 11:55:55 +0300
-From: Mike Rapoport <rppt@kernel.org>
-To: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org,
-	linux-arch@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org, linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org, kvm@vger.kernel.org
-Subject: Re: [PATCH v2 01/34] mm: Add PAGE_TYPE_OP folio functions
-Message-ID: <20230525085555.GV4967@kernel.org>
-References: <20230501192829.17086-1-vishal.moola@gmail.com>
- <20230501192829.17086-2-vishal.moola@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=2Cr5YdIAm+OmCFzy0YZ2QOgndjiPq6HghzQKMO5ZyQA=; b=YPAGZkAF+kQf8uFTnN9HteFCTL
+	X4JOg9ftqOA5rZnVWZrsN9Uxv40huYVh1ES63T3INKPaMhRn9Kf3UPKiCslUwdG8QV28TG78uygdz
+	v7hmukPotSdjAabK+1HHzaBf6CkqYWPUAXHUbRHR3C08qIDZiGdVYmqpcRo8fD8fxsnY=;
+Message-ID: <a22d37ae-46f5-6ead-26df-e4b34d23f4ac@xen.org>
+Date: Thu, 25 May 2023 09:57:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230501192829.17086-2-vishal.moola@gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.11.0
+Subject: Re: [PATCH v7 01/12] xen/arm: enable SVE extension for Xen
+Content-Language: en-US
+To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, wei.chen@arm.com,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230523074326.3035745-1-luca.fancellu@arm.com>
+ <20230523074326.3035745-2-luca.fancellu@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20230523074326.3035745-2-luca.fancellu@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
 
-On Mon, May 01, 2023 at 12:27:56PM -0700, Vishal Moola (Oracle) wrote:
-> No folio equivalents for page type operations have been defined, so
-> define them for later folio conversions.
 
-Can you please elaborate why would we need folios for page table descriptors? 
- 
-> Also changes the Page##uname macros to take in const struct page* since
-> we only read the memory here.
+On 23/05/2023 08:43, Luca Fancellu wrote:
+> Enable Xen to handle the SVE extension, add code in cpufeature module
+> to handle ZCR SVE register, disable trapping SVE feature on system
+> boot only when SVE resources are accessed.
+> While there, correct coding style for the comment on coprocessor
+> trapping.
 > 
-> Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
-> ---
->  include/linux/page-flags.h | 20 ++++++++++++++++++--
->  1 file changed, 18 insertions(+), 2 deletions(-)
+> Now cptr_el2 is part of the domain context and it will be restored
+> on context switch, this is a preparation for saving the SVE context
+> which will be part of VFP operations, so restore it before the call
+> to save VFP registers.
+> To save an additional isb barrier, restore cptr_el2 before an
+> existing isb barrier and move the call for saving VFP context after
+> that barrier. To keep a (mostly) specularity of ctxt_switch_to()
+> and ctxt_switch_from(), move vfp_save_state() up in the function.
 > 
-> diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
-> index 1c68d67b832f..607b495d1b57 100644
-> --- a/include/linux/page-flags.h
-> +++ b/include/linux/page-flags.h
-> @@ -902,6 +902,8 @@ static inline bool is_page_hwpoison(struct page *page)
->  
->  #define PageType(page, flag)						\
->  	((page->page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
-> +#define folio_test_type(folio, flag)					\
-> +	((folio->page.page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
->  
->  static inline int page_type_has_type(unsigned int page_type)
->  {
-> @@ -914,20 +916,34 @@ static inline int page_has_type(struct page *page)
->  }
->  
->  #define PAGE_TYPE_OPS(uname, lname)					\
-> -static __always_inline int Page##uname(struct page *page)		\
-> +static __always_inline int Page##uname(const struct page *page)		\
->  {									\
->  	return PageType(page, PG_##lname);				\
->  }									\
-> +static __always_inline int folio_test_##lname(const struct folio *folio)\
-> +{									\
-> +	return folio_test_type(folio, PG_##lname);			\
-> +}									\
->  static __always_inline void __SetPage##uname(struct page *page)		\
->  {									\
->  	VM_BUG_ON_PAGE(!PageType(page, 0), page);			\
->  	page->page_type &= ~PG_##lname;					\
->  }									\
-> +static __always_inline void __folio_set_##lname(struct folio *folio)	\
-> +{									\
-> +	VM_BUG_ON_FOLIO(!folio_test_type(folio, 0), folio);		\
-> +	folio->page.page_type &= ~PG_##lname;				\
-> +}									\
->  static __always_inline void __ClearPage##uname(struct page *page)	\
->  {									\
->  	VM_BUG_ON_PAGE(!Page##uname(page), page);			\
->  	page->page_type |= PG_##lname;					\
-> -}
-> +}									\
-> +static __always_inline void __folio_clear_##lname(struct folio *folio)	\
-> +{									\
-> +	VM_BUG_ON_FOLIO(!folio_test_##lname(folio), folio);		\
-> +	folio->page.page_type |= PG_##lname;				\
-> +}									\
->  
->  /*
->   * PageBuddy() indicates that the page is free and in the buddy system
-> -- 
-> 2.39.2
+> Change the KConfig entry to make ARM64_SVE symbol selectable, by
+> default it will be not selected.
 > 
+> Create sve module and sve_asm.S that contains assembly routines for
+> the SVE feature, this code is inspired from linux and it uses
+> instruction encoding to be compatible with compilers that does not
+> support SVE, imported instructions are documented in
+> README.LinuxPrimitives.
 > 
+> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
 
 -- 
-Sincerely yours,
-Mike.
+Julien Grall
 
