@@ -4,43 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7C2C7EE29
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 17:14:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539786.840996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB9FFC77B7E
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 17:52:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539790.841005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2EXA-0001Hi-Dc; Thu, 25 May 2023 17:13:52 +0000
+	id 1q2F7e-0005fI-8V; Thu, 25 May 2023 17:51:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539786.840996; Thu, 25 May 2023 17:13:52 +0000
+Received: by outflank-mailman (output) from mailman id 539790.841005; Thu, 25 May 2023 17:51:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2EXA-0001Hb-Ae; Thu, 25 May 2023 17:13:52 +0000
-Received: by outflank-mailman (input) for mailman id 539786;
- Thu, 25 May 2023 17:13:52 +0000
+	id 1q2F7e-0005fB-5x; Thu, 25 May 2023 17:51:34 +0000
+Received: by outflank-mailman (input) for mailman id 539790;
+ Thu, 25 May 2023 17:51:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RJ3/=BO=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q2EX9-0001HN-Nu
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 17:13:51 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ <SRS0=x5Sm=BO=amd.com=Stewart.Hildebrand@srs-se1.protection.inumbo.net>)
+ id 1q2F7d-0005f5-2t
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 17:51:33 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20628.outbound.protection.outlook.com
+ [2a01:111:f400:7e8a::628])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 837ac1f3-fb1f-11ed-b230-6b7b168915f2;
- Thu, 25 May 2023 19:13:49 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-219-f84HUxG6PwGfwNYI4AHG2A-1; Thu, 25 May 2023 13:13:44 -0400
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D8B86811E78;
- Thu, 25 May 2023 17:13:43 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E46F7492B00;
- Thu, 25 May 2023 17:13:42 +0000 (UTC)
+ id c6fe3548-fb24-11ed-b230-6b7b168915f2;
+ Thu, 25 May 2023 19:51:30 +0200 (CEST)
+Received: from BN8PR04CA0003.namprd04.prod.outlook.com (2603:10b6:408:70::16)
+ by CH3PR12MB8186.namprd12.prod.outlook.com (2603:10b6:610:129::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6433.15; Thu, 25 May
+ 2023 17:51:27 +0000
+Received: from BN8NAM11FT032.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:70:cafe::3a) by BN8PR04CA0003.outlook.office365.com
+ (2603:10b6:408:70::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.28 via Frontend
+ Transport; Thu, 25 May 2023 17:51:27 +0000
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN8NAM11FT032.mail.protection.outlook.com (10.13.177.88) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6433.18 via Frontend Transport; Thu, 25 May 2023 17:51:26 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 25 May
+ 2023 12:51:26 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 25 May
+ 2023 10:51:25 -0700
+Received: from ubuntu.mshome.net (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Thu, 25 May 2023 12:51:24 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,260 +65,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 837ac1f3-fb1f-11ed-b230-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685034828;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=SdjpHAWvX8URSv7CTSo6yI4LC/WzXYrrywaCg9aNOmQ=;
-	b=NeSZC3olCqtP5SI5BnFAEFAt+8JykoVjmmDYb7hP9YY+2gWunXH6LvuAX4tRkQZlnOTven
-	swCkRC0RKyv0u5OzA/GtaxNPXTx6/blsn/R7u2zoxEsIBokrwJRjTqP7Aa6Q/J7i/yoC7H
-	MCSWntT4uB9Et5CXlGWIRnw5eqinl4U=
-X-MC-Unique: f84HUxG6PwGfwNYI4AHG2A-1
-Date: Wed, 24 May 2023 15:36:34 -0400
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-Cc: qemu-devel@nongnu.org, Aarushi Mehta <mehta.aaru20@gmail.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Julia Suvorova <jusual@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>, Hanna Reitz <hreitz@redhat.com>,
-	Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
-	xen-devel@lists.xenproject.org, eblake@redhat.com,
-	Anthony Perard <anthony.perard@citrix.com>, qemu-block@nongnu.org
-Subject: Re: [PATCH v2 5/6] block/linux-aio: convert to blk_io_plug_call() API
-Message-ID: <20230524193634.GB17357@fedora>
-References: <20230523171300.132347-1-stefanha@redhat.com>
- <20230523171300.132347-6-stefanha@redhat.com>
- <n6hik7dbl26lomhxvfal2kjrq6jhdiknjepb372dvxavuwiw6q@3l3mo4eywoxq>
+X-Inumbo-ID: c6fe3548-fb24-11ed-b230-6b7b168915f2
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QmwDVvqvLBMq9rvX7/nxvfxoGSbLQPs70Yvy74wHswksUfHiAUO1ekfrMyt5duXjy6ctniy+aR81XAT+dwq2/o0Jk9oH18aVffPSolO0PIG+lQ4Y37nPGaRNZ/8pD9at3adjNazBXZUCcrMBRaGVrkgbqBPxQB+dYtsUuzUgO2TLBqjGDuKVPoINciLYiYtqTZ0AskYkkBz6Lr7wzgZu6oqIhEeWrHilZbuO0mQAjbtYzqXQc6LeWnzi+F/ZRJ0w0PGwOeY1bs2vf50ey0bxeFfgLB4gbLyqTdeYK0h1kHhD714BjTdvFsGKqR8R125hCsr0AU4TCg/GtZqeleDt6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4r+bKjQj1My3UE73dkVNZmyr82oDetzB3Ozifh2S6OI=;
+ b=h/yS2EYvlry1GKi5WgXNF7RnwQw3xaWxYh3uza1KXfxVlpuS89UAo8J9XrP5rhoQ2NiowAxAu3yUZGHGLLrddqTTwjqU5b+V793LlPSJ9RDXKL4uyKtoVpyske3GATXBvn3oiF5miiVGtQrJmT0u9etssfjwqPbxKP/QW+VibNqGsolUPHLAAIunRVmZ25QVbie4U9lZ4eX//ZvvMDVHn/MRzy2pQhX3vjIiyUvJJABRIAB6HjWU9gJp5yNEriCqTtdrGfyhjpnGaQdV7DKAON9v8oTjG9sy/ucwRISeBMJ8/KZUlGfCWXpBUggw6110uN3SXYmbf5FGfkq5DDzhHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4r+bKjQj1My3UE73dkVNZmyr82oDetzB3Ozifh2S6OI=;
+ b=LIwhuUimWdC8zR4ENl6OwMbTBmnMAbqcpEreJnUf7Rku72oZV3zppPNNpwEKcrjn8xMY5KKxdIy4B6dN4bq/grsxJM5PFaNYk/+am4GGwA6swD8nW6dkEwgSpDjiMtldLc1PGxs4J+ehgqPWkNt0i+aN0Pjge/n5V13XZoqMxa0=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH] xen/arm: un-break build with clang
+Date: Thu, 25 May 2023 13:51:15 -0400
+Message-ID: <20230525175115.110606-1-stewart.hildebrand@amd.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="GYXeKr/XNUj7Tdkf"
-Content-Disposition: inline
-In-Reply-To: <n6hik7dbl26lomhxvfal2kjrq6jhdiknjepb372dvxavuwiw6q@3l3mo4eywoxq>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT032:EE_|CH3PR12MB8186:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90b7500e-368c-4be0-af7e-08db5d48a98e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	UX+rSzk3SfpsN/vTe2L11jDBcG/JizlQGcpFGpkG3gZzZzzgnAP4ScMgey7l8rUWaSFsT7sYYuR8gD0U4hkmgC4RBw7BXkzp/pjoWh67AyIIlbgOfNBgYglzICVOH0/PhKMrTGP4Ik0aBkMgbzOyTyf5ls5F24xrvYcgnn5f9pm7ntxorIcAGJZhhwa3LB32z1s9yNDuGAQw9vWBzTrmgSZP7dYHMuUSDwd6ohdG5FnpacU3inWsLRcfD+UwHc+yRTzcO0A5lPuRIZ/VnpvuNFah3NPXLBhlxHwzhIlM55JVPAWqROoARp9I8SIwyjvvHCzq16jWoMNmLs5+WsLUFVATPoKaMKZew9RJJpBQNvhs1YuE+RPD46Rvkj28FDNvSbWA7Y6+gOBVh2MFZZWEY0q6vRg7x1mem8ZbHg4RG+LzbX+HwQkJZfyJ0aBwR3EyaBSL0yWtP0KEEJ4HCVOpcZCyyNnJzvlAPWfwinhIcPpGFtgxe+YQD0dqnUIERkjqFA2ggqU+12JL+YJpxp9E0dipX21zeEPnYSk8P5tBvzL9OJlzwHrNBEKMZZ82xIJheVgTuigoGEDBgQBGK0eHqmi8CWUuzdTJZIo7navnZ7SQDEjY3QM3+0GJmTVOJj9GMwA1KubuYQyr1Qo2THmd5g9um5C97YF7i1ky6Sbe7XqHFoEOktF3yV3CXH6/FN5zO1hmTszITIyw+oJeotPPFeL4OyGhlvlqfHjqISkf3c8gIhJCdvSRdNbMgXE9F9GziVhRykPYDQb2DBkaRJ+BDA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(376002)(396003)(346002)(39860400002)(136003)(451199021)(36840700001)(40470700004)(46966006)(81166007)(356005)(8676002)(8936002)(40460700003)(5660300002)(82740400003)(2906002)(47076005)(40480700001)(1076003)(26005)(186003)(83380400001)(426003)(82310400005)(36756003)(2616005)(336012)(86362001)(44832011)(36860700001)(4326008)(316002)(6916009)(70206006)(70586007)(6666004)(54906003)(478600001)(41300700001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2023 17:51:26.6317
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90b7500e-368c-4be0-af7e-08db5d48a98e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN8NAM11FT032.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8186
 
+clang doesn't like extern with __attribute__((__used__)):
 
---GYXeKr/XNUj7Tdkf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+  ./arch/arm/include/asm/setup.h:171:8: error: 'used' attribute ignored [-Werror,-Wignored-attributes]
+  extern DEFINE_BOOT_PAGE_TABLE(boot_pgtable);
+         ^
+  ./arch/arm/include/asm/lpae.h:273:29: note: expanded from macro 'DEFINE_BOOT_PAGE_TABLE'
+  lpae_t __aligned(PAGE_SIZE) __section(".data.page_aligned")                   \
+                              ^
+  ./include/xen/compiler.h:71:27: note: expanded from macro '__section'
+  #define __section(s)      __used __attribute__((__section__(s)))
+                            ^
+  ./include/xen/compiler.h:104:39: note: expanded from macro '__used'
+  #define __used         __attribute__((__used__))
+                                        ^
 
-On Wed, May 24, 2023 at 10:52:03AM +0200, Stefano Garzarella wrote:
-> On Tue, May 23, 2023 at 01:12:59PM -0400, Stefan Hajnoczi wrote:
-> > Stop using the .bdrv_co_io_plug() API because it is not multi-queue
-> > block layer friendly. Use the new blk_io_plug_call() API to batch I/O
-> > submission instead.
-> >=20
-> > Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
-> > Reviewed-by: Eric Blake <eblake@redhat.com>
-> > ---
-> > include/block/raw-aio.h |  7 -------
-> > block/file-posix.c      | 28 ----------------------------
-> > block/linux-aio.c       | 41 +++++++++++------------------------------
-> > 3 files changed, 11 insertions(+), 65 deletions(-)
-> >=20
-> > diff --git a/include/block/raw-aio.h b/include/block/raw-aio.h
-> > index da60ca13ef..0f63c2800c 100644
-> > --- a/include/block/raw-aio.h
-> > +++ b/include/block/raw-aio.h
-> > @@ -62,13 +62,6 @@ int coroutine_fn laio_co_submit(int fd, uint64_t off=
-set, QEMUIOVector *qiov,
-> >=20
-> > void laio_detach_aio_context(LinuxAioState *s, AioContext *old_context);
-> > void laio_attach_aio_context(LinuxAioState *s, AioContext *new_context);
-> > -
-> > -/*
-> > - * laio_io_plug/unplug work in the thread's current AioContext, theref=
-ore the
-> > - * caller must ensure that they are paired in the same IOThread.
-> > - */
-> > -void laio_io_plug(void);
-> > -void laio_io_unplug(uint64_t dev_max_batch);
-> > #endif
-> > /* io_uring.c - Linux io_uring implementation */
-> > #ifdef CONFIG_LINUX_IO_URING
-> > diff --git a/block/file-posix.c b/block/file-posix.c
-> > index 7baa8491dd..ac1ed54811 100644
-> > --- a/block/file-posix.c
-> > +++ b/block/file-posix.c
-> > @@ -2550,26 +2550,6 @@ static int coroutine_fn raw_co_pwritev(BlockDriv=
-erState *bs, int64_t offset,
-> >     return raw_co_prw(bs, offset, bytes, qiov, QEMU_AIO_WRITE);
-> > }
-> >=20
-> > -static void coroutine_fn raw_co_io_plug(BlockDriverState *bs)
-> > -{
-> > -    BDRVRawState __attribute__((unused)) *s =3D bs->opaque;
-> > -#ifdef CONFIG_LINUX_AIO
-> > -    if (s->use_linux_aio) {
-> > -        laio_io_plug();
-> > -    }
-> > -#endif
-> > -}
-> > -
-> > -static void coroutine_fn raw_co_io_unplug(BlockDriverState *bs)
-> > -{
-> > -    BDRVRawState __attribute__((unused)) *s =3D bs->opaque;
-> > -#ifdef CONFIG_LINUX_AIO
-> > -    if (s->use_linux_aio) {
-> > -        laio_io_unplug(s->aio_max_batch);
-> > -    }
-> > -#endif
-> > -}
-> > -
-> > static int coroutine_fn raw_co_flush_to_disk(BlockDriverState *bs)
-> > {
-> >     BDRVRawState *s =3D bs->opaque;
-> > @@ -3914,8 +3894,6 @@ BlockDriver bdrv_file =3D {
-> >     .bdrv_co_copy_range_from =3D raw_co_copy_range_from,
-> >     .bdrv_co_copy_range_to  =3D raw_co_copy_range_to,
-> >     .bdrv_refresh_limits =3D raw_refresh_limits,
-> > -    .bdrv_co_io_plug        =3D raw_co_io_plug,
-> > -    .bdrv_co_io_unplug      =3D raw_co_io_unplug,
-> >     .bdrv_attach_aio_context =3D raw_aio_attach_aio_context,
-> >=20
-> >     .bdrv_co_truncate                   =3D raw_co_truncate,
-> > @@ -4286,8 +4264,6 @@ static BlockDriver bdrv_host_device =3D {
-> >     .bdrv_co_copy_range_from =3D raw_co_copy_range_from,
-> >     .bdrv_co_copy_range_to  =3D raw_co_copy_range_to,
-> >     .bdrv_refresh_limits =3D raw_refresh_limits,
-> > -    .bdrv_co_io_plug        =3D raw_co_io_plug,
-> > -    .bdrv_co_io_unplug      =3D raw_co_io_unplug,
-> >     .bdrv_attach_aio_context =3D raw_aio_attach_aio_context,
-> >=20
-> >     .bdrv_co_truncate                   =3D raw_co_truncate,
-> > @@ -4424,8 +4400,6 @@ static BlockDriver bdrv_host_cdrom =3D {
-> >     .bdrv_co_pwritev        =3D raw_co_pwritev,
-> >     .bdrv_co_flush_to_disk  =3D raw_co_flush_to_disk,
-> >     .bdrv_refresh_limits    =3D cdrom_refresh_limits,
-> > -    .bdrv_co_io_plug        =3D raw_co_io_plug,
-> > -    .bdrv_co_io_unplug      =3D raw_co_io_unplug,
-> >     .bdrv_attach_aio_context =3D raw_aio_attach_aio_context,
-> >=20
-> >     .bdrv_co_truncate                   =3D raw_co_truncate,
-> > @@ -4552,8 +4526,6 @@ static BlockDriver bdrv_host_cdrom =3D {
-> >     .bdrv_co_pwritev        =3D raw_co_pwritev,
-> >     .bdrv_co_flush_to_disk  =3D raw_co_flush_to_disk,
-> >     .bdrv_refresh_limits    =3D cdrom_refresh_limits,
-> > -    .bdrv_co_io_plug        =3D raw_co_io_plug,
-> > -    .bdrv_co_io_unplug      =3D raw_co_io_unplug,
-> >     .bdrv_attach_aio_context =3D raw_aio_attach_aio_context,
-> >=20
-> >     .bdrv_co_truncate                   =3D raw_co_truncate,
-> > diff --git a/block/linux-aio.c b/block/linux-aio.c
-> > index 442c86209b..5021aed68f 100644
-> > --- a/block/linux-aio.c
-> > +++ b/block/linux-aio.c
-> > @@ -15,6 +15,7 @@
-> > #include "qemu/event_notifier.h"
-> > #include "qemu/coroutine.h"
-> > #include "qapi/error.h"
-> > +#include "sysemu/block-backend.h"
-> >=20
-> > /* Only used for assertions.  */
-> > #include "qemu/coroutine_int.h"
-> > @@ -46,7 +47,6 @@ struct qemu_laiocb {
-> > };
-> >=20
-> > typedef struct {
-> > -    int plugged;
-> >     unsigned int in_queue;
-> >     unsigned int in_flight;
-> >     bool blocked;
-> > @@ -236,7 +236,7 @@ static void qemu_laio_process_completions_and_submi=
-t(LinuxAioState *s)
-> > {
-> >     qemu_laio_process_completions(s);
-> >=20
-> > -    if (!s->io_q.plugged && !QSIMPLEQ_EMPTY(&s->io_q.pending)) {
-> > +    if (!QSIMPLEQ_EMPTY(&s->io_q.pending)) {
-> >         ioq_submit(s);
-> >     }
-> > }
-> > @@ -277,7 +277,6 @@ static void qemu_laio_poll_ready(EventNotifier *opa=
-que)
-> > static void ioq_init(LaioQueue *io_q)
-> > {
-> >     QSIMPLEQ_INIT(&io_q->pending);
-> > -    io_q->plugged =3D 0;
-> >     io_q->in_queue =3D 0;
-> >     io_q->in_flight =3D 0;
-> >     io_q->blocked =3D false;
-> > @@ -354,31 +353,11 @@ static uint64_t laio_max_batch(LinuxAioState *s, =
-uint64_t dev_max_batch)
-> >     return max_batch;
-> > }
-> >=20
-> > -void laio_io_plug(void)
-> > +static void laio_unplug_fn(void *opaque)
-> > {
-> > -    AioContext *ctx =3D qemu_get_current_aio_context();
-> > -    LinuxAioState *s =3D aio_get_linux_aio(ctx);
-> > +    LinuxAioState *s =3D opaque;
-> >=20
-> > -    s->io_q.plugged++;
-> > -}
-> > -
-> > -void laio_io_unplug(uint64_t dev_max_batch)
-> > -{
-> > -    AioContext *ctx =3D qemu_get_current_aio_context();
-> > -    LinuxAioState *s =3D aio_get_linux_aio(ctx);
-> > -
-> > -    assert(s->io_q.plugged);
-> > -    s->io_q.plugged--;
-> > -
-> > -    /*
-> > -     * Why max batch checking is performed here:
-> > -     * Another BDS may have queued requests with a higher dev_max_batc=
-h and
-> > -     * therefore in_queue could now exceed our dev_max_batch. Re-check=
- the max
-> > -     * batch so we can honor our device's dev_max_batch.
-> > -     */
-> > -    if (s->io_q.in_queue >=3D laio_max_batch(s, dev_max_batch) ||
->=20
-> Why are we removing this condition?
-> Could the same situation occur with the new API?
+Introduce a new EXTERN_DEFINE_BOOT_PAGE_TABLE macro without
+__attribute__((__used__)) and use this for the relevant declarations.
 
-The semantics of unplug_fn() are different from .bdrv_co_unplug():
-1. unplug_fn() is only called when the last blk_io_unplug() call occurs,
-   not every time blk_io_unplug() is called.
-2. unplug_fn() is per-thread, not per-BlockDriverState, so there is no
-   way to get per-BlockDriverState fields like dev_max_batch.
+Fixes: 1c78d76b67e1 ("xen/arm64: mm: Introduce helpers to prepare/enable/disable the identity mapping")
+Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+---
+I tested with clang 12 and clang 16
 
-Therefore this condition cannot be moved to laio_unplug_fn().
+Here is my make command line:
+make -j $(nproc) \
+    clang=y \
+    CC="clang --target=aarch64-none-linux-gnu -march=armv8a+nocrypto" \
+    CXX="clang++ --target=aarch64-none-linux-gnu -march=armv8a+nocrypto" \
+    HOSTCC=clang \
+    HOSTCXX=clang++ \
+    XEN_TARGET_ARCH=arm64 \
+    CROSS_COMPILE=aarch64-none-linux-gnu- \
+    dist-xen
+---
+ xen/arch/arm/include/asm/lpae.h  | 4 ++++
+ xen/arch/arm/include/asm/setup.h | 8 ++++----
+ xen/include/xen/compiler.h       | 1 +
+ 3 files changed, 9 insertions(+), 4 deletions(-)
 
-How important is this condition? I believe that dropping it does not
-have much of an effect but maybe I missed something.
-
-Also, does it make sense to define per-BlockDriverState batching limits
-when the AIO engine (Linux AIO or io_uring) is thread-local and shared
-between all BlockDriverStates? I believe the fundamental reason (that we
-discovered later) why dev_max_batch is effective is because the Linux
-kernel processes 32 I/O request submissions at a time. Anything above 32
-adds latency without a batching benefit.
-
-Stefan
-
---GYXeKr/XNUj7Tdkf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmRuZ0IACgkQnKSrs4Gr
-c8h/zwgAkZBovDywM+nj3pwJJe206j/dS6hWP+DFJEHkWevLQELYi6+0p5Vxt94o
-1Ri/jvcDuX+JPYuDiWJ5VVahwfnU4Je4NtU5XX5HDWKRcstewKDalmdQeePchKXX
-0T/x2oGpn4GVZGXle/mxqmkm9A1Nf6amsdz/4baA1WDGJQHsRNPN7WBRL4RKj6UQ
-ENIqYrhzXma5dlXadstRE9cjKcwgD2Te/4sh3gKB7axxjQYzFlXtxsoWxw9zlrEZ
-feHF3vznLdocukGw/BR+sXLAKxd591Hdaw/o8LKrJQclLSNvOnC43d9vAN/PrFwU
-E2o8ur8zGvrC5ggwZhrZ/uhfbbLDFg==
-=Hpse
------END PGP SIGNATURE-----
-
---GYXeKr/XNUj7Tdkf--
+diff --git a/xen/arch/arm/include/asm/lpae.h b/xen/arch/arm/include/asm/lpae.h
+index 3fdd5d0de28e..294a8aa4bd30 100644
+--- a/xen/arch/arm/include/asm/lpae.h
++++ b/xen/arch/arm/include/asm/lpae.h
+@@ -273,6 +273,10 @@ lpae_t mfn_to_xen_entry(mfn_t mfn, unsigned int attr);
+ lpae_t __aligned(PAGE_SIZE) __section(".data.page_aligned")                   \
+     name[XEN_PT_LPAE_ENTRIES]
+ 
++#define EXTERN_DEFINE_BOOT_PAGE_TABLE(name)                                   \
++extern lpae_t __aligned(PAGE_SIZE) __no_used_section(".data.page_aligned")    \
++    name[XEN_PT_LPAE_ENTRIES]
++
+ #define DEFINE_PAGE_TABLES(name, nr)                    \
+ lpae_t __aligned(PAGE_SIZE) name[XEN_PT_LPAE_ENTRIES * (nr)]
+ 
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 38e2ce255fcf..af53e58a6a07 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -168,13 +168,13 @@ u32 device_tree_get_u32(const void *fdt, int node,
+ int map_range_to_domain(const struct dt_device_node *dev,
+                         u64 addr, u64 len, void *data);
+ 
+-extern DEFINE_BOOT_PAGE_TABLE(boot_pgtable);
++EXTERN_DEFINE_BOOT_PAGE_TABLE(boot_pgtable);
+ 
+ #ifdef CONFIG_ARM_64
+-extern DEFINE_BOOT_PAGE_TABLE(boot_first_id);
++EXTERN_DEFINE_BOOT_PAGE_TABLE(boot_first_id);
+ #endif
+-extern DEFINE_BOOT_PAGE_TABLE(boot_second_id);
+-extern DEFINE_BOOT_PAGE_TABLE(boot_third_id);
++EXTERN_DEFINE_BOOT_PAGE_TABLE(boot_second_id);
++EXTERN_DEFINE_BOOT_PAGE_TABLE(boot_third_id);
+ 
+ /* Find where Xen will be residing at runtime and return a PT entry */
+ lpae_t pte_of_xenaddr(vaddr_t);
+diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
+index 7d7ae2e5e4d9..70ba563e29c2 100644
+--- a/xen/include/xen/compiler.h
++++ b/xen/include/xen/compiler.h
+@@ -73,6 +73,7 @@
+ #define __section(s)      __attribute__((__section__(s)))
+ #endif
+ #define __used_section(s) __used __attribute__((__section__(s)))
++#define __no_used_section(s) __attribute__((__section__(s)))
+ #define __text_section(s) __attribute__((__section__(s)))
+ 
+ #define __aligned(a) __attribute__((__aligned__(a)))
+-- 
+2.40.1
 
 
