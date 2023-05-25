@@ -4,34 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148A5C7EE29
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 15:26:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539702.840833 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36559C77B7E
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 15:28:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539709.840850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2Cqe-0006Ab-55; Thu, 25 May 2023 15:25:52 +0000
+	id 1q2CtB-0006vz-1i; Thu, 25 May 2023 15:28:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539702.840833; Thu, 25 May 2023 15:25:52 +0000
+Received: by outflank-mailman (output) from mailman id 539709.840850; Thu, 25 May 2023 15:28:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2Cqe-0006AU-29; Thu, 25 May 2023 15:25:52 +0000
-Received: by outflank-mailman (input) for mailman id 539702;
- Thu, 25 May 2023 15:25:50 +0000
+	id 1q2CtA-0006tL-SN; Thu, 25 May 2023 15:28:28 +0000
+Received: by outflank-mailman (input) for mailman id 539709;
+ Thu, 25 May 2023 15:28:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=5KKD=BO=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
- id 1q2Cqc-0006AI-GW
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 15:25:50 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [85.215.255.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6baca182-fb10-11ed-8611-37d641c3527e;
- Thu, 25 May 2023 17:25:46 +0200 (CEST)
-Received: from sender by smtp.strato.de (RZmta 49.4.0 AUTH)
- with ESMTPSA id x6987cz4PFPc4Mb
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 25 May 2023 17:25:38 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=g/QV=BO=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
+ id 1q2CtA-0006oN-4v
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 15:28:28 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cb3e7992-fb10-11ed-8611-37d641c3527e;
+ Thu, 25 May 2023 17:28:26 +0200 (CEST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-4f00c33c3d6so2724974e87.2
+ for <xen-devel@lists.xenproject.org>; Thu, 25 May 2023 08:28:26 -0700 (PDT)
+Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
+ d22-20020ac244d6000000b004f37c0dfcaasm246853lfm.118.2023.05.25.08.28.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 May 2023 08:28:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,79 +46,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6baca182-fb10-11ed-8611-37d641c3527e
-ARC-Seal: i=1; a=rsa-sha256; t=1685028339; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=quzZBMTmydlZ4adhVV6lCqYcLo9rn550c/nfskkxSU6vtao+zyVPA44GHHZRTFN1QZ
-    Rw9wEi1qTiFVNKlhAudkE09Ng7RJYzY5BUwEfGDPvD52o/9gzxQyDoXJTNnFswsbSXBu
-    wq8mW1BglPkWNSgO7LxRksP66eJwsytbWiGVoo1mTbM2DOvtedY3Ggq4pq2VSoFc5V7W
-    ifpIZld6n01OvCYD+QMixP+gXeIg2zgQxlE/pqsfsiKwe9WXzgZ9a3AmPywcj4ZD8Qpa
-    4fijOxcpYnT36OOKDsGNlKoCcd5zTau4SM84ReuijslaRsvUpHHtMnG0qMdZAd4sfCBr
-    CoFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685028339;
-    s=strato-dkim-0002; d=strato.com;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=6nkcLF5uy3qZOAbDqmnHxK6TWE4JxR4ZFTQLpYrVHLQ=;
-    b=dWGz7y+8trXENdoxg8d1slysEgSXH5u23ZnEEcGZsjFl4pQMN7QJeTPFP9E5kTTxQn
-    Hx5tt+gNReH+DWE+02pHmnQJOcMXxAob7seEGLE/abd4IRDjOWCR+QjWM58agHOw6MFA
-    ZzUnXC/N5fnsU47L8ay8uWDbPRwxR+5eYkHFAGd2u9irakvLPZ2OUB8Fy6XHXYryusZp
-    m5Myuje1c8tr7CASwE0tOzDmDMgryTV0DSe8vVhZIZjQ/b4eCy2Fpysy+fF4qdHs/5Ub
-    7oVQjR/Y9qTUTXnnyWlHznubXOemYYiRc4bSqtywC7Mwepkp/pXoVbkJJkit4jRNj+TX
-    egGQ==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685028339;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=6nkcLF5uy3qZOAbDqmnHxK6TWE4JxR4ZFTQLpYrVHLQ=;
-    b=DB/2IH+5VPsCGZ7hqpA66qWDxsVxUoK9ZOaypGXumBTPHQSYkoc2Lngm41UC4nMR2g
-    6chu4rYH0biogtOgQqsOfCFTvpe2J3Kggl0EXeEQeuoEX3MsxF6aCUddfeuQYoc1Pdks
-    k2/rKhoAcWc+nrjyfmSJQ6fB0wFb7AoQc2WF0WquS2GRnQ/AseOLj4XlzSxrOGMS8784
-    Y4/KgkQmfThGuZCYtVLMfPpSrUBCmQn7C9t99TC4WCHYt6nqTq3X6I9rnQHNX6//gyZa
-    Sy/PqNNh/Ro8PzqAoo3Lk4eey/pYNuerO0eh36d8Q3+kr7CqLda0xSx/XBDjBseeFXA1
-    RKCw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685028339;
-    s=strato-dkim-0003; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=6nkcLF5uy3qZOAbDqmnHxK6TWE4JxR4ZFTQLpYrVHLQ=;
-    b=XAPlsu7v6M5r/PoyiEpkniX21UvWfqXi4eotn5dFvZcRsMxWAnDiPxuKVdh2NPOYJe
-    SoIOKjPMBYizpPixD0Bw==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4xqFv7EJ0tgRX/vKfT/e8Ig6v0dNw4QAWpzMWrRQ=="
-From: Olaf Hering <olaf@aepfle.de>
+X-Inumbo-ID: cb3e7992-fb10-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685028506; x=1687620506;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Mm1x9FKPEwGMnotOEN0ZErT2+QXcBOPbrrKH58hZrN4=;
+        b=D3CH1CX9YfjUZGnsUIEi7FEnsOrx6s5OYDBwZb7ShKNqlque/r/fWvCOhwXB7WsXxE
+         pE6mfffKb3IdJYRSyVAPEGmPCliGcecKh6a+3yCenBLMefva9Z+FKbG53pUHSBEnq49Q
+         F0SwOdRC1adfPx4IgUhr22lYIrMkGk8UmIhfefvmY8YQL469i5wGEnr0tLjDTa88thcz
+         LFGDzh+0F29TmHRDjcilEWsw9hC57pik85xuesETEG8wQlHrMOtn8WA5Hd8/E0fBlygZ
+         /fwGlClt4P4UcwJ0Zzw8YHBtKVy+NEQO8WrpJWvVvK1mPuzgQG5uRZNjH2GKbg0LxrdX
+         /G8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685028506; x=1687620506;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Mm1x9FKPEwGMnotOEN0ZErT2+QXcBOPbrrKH58hZrN4=;
+        b=l5tHVABrnCOX2hKjiulaC6SgUFDnipSX1/FKKnoJsGB2QhYMY8n8PS9+8umU6rU3NC
+         +K9hsE5Ja5wur2SUIiAwx4MtzIsMeoaSxxNKCft5DmAMkbA7Wuop9b2hdxaiURUBb3e0
+         u/7S696pkbZvMxP6dDQgTjydBIGh7Tj70R/xFLCun6okLdPLK+ZKglHlxbm+qc3Y5+QA
+         WNfT+h+lsIrsdxSKrYvQ91qgLpnQl0beLvWlyjFlQ66Pjdkh22xe/1jZl2WzHNrlWkf1
+         thGg2UySgJNks49QZBZpoWVw3cQntgj4W0Z14nDjGBRQvj06TQWe0MrZAMmbijKHuxBN
+         emyg==
+X-Gm-Message-State: AC+VfDzYFQWlV2565lgcwTu+Pv1xdSFMOONhprMJlGGFBdgNEv1cEJJN
+	avsXoloyUVMDBgg9hG3M/mWzfZaLNDk=
+X-Google-Smtp-Source: ACHHUZ5YmwnjCDBxXsrdxE4FYSVhGy9E8zB7sa3ZQT449fJ8dmMhSu+11AOT8E9ycG0jaCoD5Vsvyg==
+X-Received: by 2002:ac2:5dfc:0:b0:4f3:aa09:e7e8 with SMTP id z28-20020ac25dfc000000b004f3aa09e7e8mr8090365lfq.44.1685028505609;
+        Thu, 25 May 2023 08:28:25 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <paul@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v1] x86/hvm/ioreq: remove empty line after function declaration
-Date: Thu, 25 May 2023 17:25:27 +0200
-Message-Id: <20230525152527.10281-1-olaf@aepfle.de>
-X-Mailer: git-send-email 2.35.3
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Bob Eshleman <bobbyeshleman@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v9 1/5] xen/riscv: add VM space layout
+Date: Thu, 25 May 2023 18:28:14 +0300
+Message-Id: <1621fd09987d20b3233132d422e5c9dfe300e3f7.1685027257.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <cover.1685027257.git.oleksii.kurochko@gmail.com>
+References: <cover.1685027257.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="us-ascii"
 
-Introduced in commit 6ddfaabceeec3c31bc97a7208c46f581de55f71d
-("x86/hvm/ioreq: simplify code and use consistent naming").
+Also it was added explanation about ignoring of top VA bits
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/x86/hvm/ioreq.c | 1 -
- 1 file changed, 1 deletion(-)
+Changes in V9:
+ - Update comment for VM layout description.
+---
+Changes in V8:
+ - Add "#ifdef RV_STAGE1_MODE == SATP_MODE_SV39" instead of "#ifdef SV39"
+   in the comment to VM layout description.
+ - Update the upper bound of direct map area in VM layout description.
+---
+Changes in V7:
+ - Fix range of frametable range in RV64 layout.
+ - Add ifdef SV39 to the RV64 layout comment to make it explicit that
+   description if for SV39 mode.
+ - Add missed row in the RV64 layout table.
+---
+Changes in V6:
+ - update comment above the RISCV-64 layout table
+ - add Slot column to the table with RISCV-64 Layout
+ - update RV-64 layout table.
+---
+Changes in V5:
+* the patch was introduced in the current patch series.
+---
+ xen/arch/riscv/include/asm/config.h | 36 +++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 20dbb4c8cf..4eb7a70182 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -169,7 +169,6 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
- }
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index 763a922a04..9900d29dab 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -4,6 +4,42 @@
+ #include <xen/const.h>
+ #include <xen/page-size.h>
  
- static void hvm_remove_ioreq_gfn(struct ioreq_server *s, bool buf)
--
- {
-     struct domain *d = s->target;
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
++/*
++ * RISC-V64 Layout:
++ *
++#if RV_STAGE1_MODE == SATP_MODE_SV39
++ *
++ * From the riscv-privileged doc:
++ *   When mapping between narrower and wider addresses,
++ *   RISC-V zero-extends a narrower physical address to a wider size.
++ *   The mapping between 64-bit virtual addresses and the 39-bit usable
++ *   address space of Sv39 is not based on zero-extension but instead
++ *   follows an entrenched convention that allows an OS to use one or
++ *   a few of the most-significant bits of a full-size (64-bit) virtual
++ *   address to quickly distinguish user and supervisor address regions.
++ *
++ * It means that:
++ *   top VA bits are simply ignored for the purpose of translating to PA.
++ *
++ * ============================================================================
++ *    Start addr    |   End addr        |  Size  | Slot       |area description
++ * ============================================================================
++ * FFFFFFFFC0800000 |  FFFFFFFFFFFFFFFF |1016 MB | L2 511     | Unused
++ * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
++ * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
++ * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
++ *                 ...                  |  1 GB  | L2 510     | Unused
++ * 0000003200000000 |  0000007F80000000 | 309 GB | L2 200-509 | Direct map
++ *                 ...                  |  1 GB  | L2 199     | Unused
++ * 0000003100000000 |  00000031C0000000 |  3 GB  | L2 196-198 | Frametable
++ *                 ...                  |  1 GB  | L2 195     | Unused
++ * 0000003080000000 |  00000030C0000000 |  1 GB  | L2 194     | VMAP
++ *                 ...                  | 194 GB | L2 0 - 193 | Unused
++ * ============================================================================
++ *
++#endif
++ */
++
+ #if defined(CONFIG_RISCV_64)
+ # define LONG_BYTEORDER 3
+ # define ELFSIZE 64
+-- 
+2.40.1
+
 
