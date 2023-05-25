@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FCBC77B7A
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 08:31:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539361.840148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8610AC77B7A
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 08:34:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539374.840174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26NO-0003u7-Hk; Thu, 25 May 2023 08:31:14 +0000
+	id 1q26QI-000580-Mu; Thu, 25 May 2023 08:34:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539361.840148; Thu, 25 May 2023 08:31:14 +0000
+Received: by outflank-mailman (output) from mailman id 539374.840174; Thu, 25 May 2023 08:34:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26NO-0003u0-Dm; Thu, 25 May 2023 08:31:14 +0000
-Received: by outflank-mailman (input) for mailman id 539361;
- Thu, 25 May 2023 08:31:12 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q26NM-0003tq-MA; Thu, 25 May 2023 08:31:12 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q26NM-0008DE-DG; Thu, 25 May 2023 08:31:12 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q26NL-0007dU-V3; Thu, 25 May 2023 08:31:12 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1q26NL-0006bZ-UY; Thu, 25 May 2023 08:31:11 +0000
+	id 1q26QI-00057c-Gr; Thu, 25 May 2023 08:34:14 +0000
+Received: by outflank-mailman (input) for mailman id 539374;
+ Thu, 25 May 2023 08:34:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zmzE=BO=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1q26QH-00054I-I4
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:34:13 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id eca93009-fad6-11ed-b230-6b7b168915f2;
+ Thu, 25 May 2023 10:34:12 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 89BA2113E;
+ Thu, 25 May 2023 01:34:56 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A8A1C3F67D;
+ Thu, 25 May 2023 01:34:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,395 +44,344 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=gqn+DZ9itr7fUDzo6mXIW4CJeMdsOQVDoeJDK+Xn2kw=; b=awPReUQXqcoGx6FE5EXHpK89Sw
-	frwDhKzPyRmOWJeb6iZ8Ky0Y5HfiYFlukMIDmuHGG0WWFmuSr2dUh33CDFFoz30/eTrWowqyhltwz
-	l539PRGw+dtgZcgm9pnAug+jT+5YYZ1QEqb6VQnhlmcK3bsSSyopQFUhnf4y1vtvIRG0=;
+X-Inumbo-ID: eca93009-fad6-11ed-b230-6b7b168915f2
+From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-180937-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 1/3] xen/misra: add diff-report.py tool
+Date: Thu, 25 May 2023 09:33:59 +0100
+Message-Id: <20230525083401.3838462-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230525083401.3838462-1-luca.fancellu@arm.com>
+References: <20230525083401.3838462-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-Subject: [qemu-mainline test] 180937: regressions - FAIL
-X-Osstest-Failures:
-    qemu-mainline:build-amd64:xen-build:fail:regression
-    qemu-mainline:build-amd64-xsm:xen-build:fail:regression
-    qemu-mainline:build-i386-xsm:xen-build:fail:regression
-    qemu-mainline:build-i386:xen-build:fail:regression
-    qemu-mainline:build-arm64:xen-build:fail:regression
-    qemu-mainline:build-arm64-xsm:xen-build:fail:regression
-    qemu-mainline:build-armhf:xen-build:fail:regression
-    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-win7-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-ws16-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-shadow:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-vhd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-libvirt-raw:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl-credit1:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl-credit2:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl-thunderx:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl-vhd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-libvirt-qcow2:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-arndale:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-multivcpu:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-rtds:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-vhd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-qemuu-rhel6hvm-amd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-pair:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-libvirt-raw:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-freebsd10-i386:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-freebsd10-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-coresched-i386-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-coresched-amd64-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-shadow:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-rtds:build-check(1):blocked:nonblocking
-    qemu-mainline:build-arm64-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-ws16-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-win7-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:build-armhf-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict:build-check(1):blocked:nonblocking
-    qemu-mainline:build-i386-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-dom0pvh-xl-amd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-dom0pvh-xl-intel:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-qcow2:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-pvshim:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-pair:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-pygrub:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-pvhv2-intel:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-qemuu-freebsd11-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-qemuu-freebsd12-amd64:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-pvhv2-amd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-qemuu-nested-amd:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-qemuu-nested-intel:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-multivcpu:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-credit1:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-amd64-xl-credit2:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-credit2:build-check(1):blocked:nonblocking
-    qemu-mainline:test-armhf-armhf-xl-credit1:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-qemuu-rhel6hvm-intel:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-pvshim:build-check(1):blocked:nonblocking
-    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    qemuu=b300c134465465385045ab705b68a42699688332
-X-Osstest-Versions-That:
-    qemuu=6972ef1440a9d685482d78672620a7482f2bd09a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 25 May 2023 08:31:11 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 180937 qemu-mainline real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/180937/
+Add a new tool, diff-report.py that can be used to make diff between
+reports generated by xen-analysis.py tool.
+Currently this tool supports the Xen cppcheck text report format in
+its operations.
 
-Regressions :-(
+The tool prints every finding that is in the report passed with -r
+(check report) which is not in the report passed with -b (baseline).
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 180691
- build-amd64-xsm               6 xen-build                fail REGR. vs. 180691
- build-i386-xsm                6 xen-build                fail REGR. vs. 180691
- build-i386                    6 xen-build                fail REGR. vs. 180691
- build-arm64                   6 xen-build                fail REGR. vs. 180691
- build-arm64-xsm               6 xen-build                fail REGR. vs. 180691
- build-armhf                   6 xen-build                fail REGR. vs. 180691
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+Tested-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+Changes from v2:
+ - Add A-by, T-by Stefano
+Changes from v1:
+ - removed 2 method from class ReportEntry that landed there by a
+   mistake on rebase.
+ - Made the script compatible also with python2
+---
+ xen/scripts/diff-report.py                    |  80 ++++++++++++++
+ .../xen_analysis/diff_tool/__init__.py        |   0
+ .../xen_analysis/diff_tool/cppcheck_report.py |  44 ++++++++
+ xen/scripts/xen_analysis/diff_tool/debug.py   |  40 +++++++
+ xen/scripts/xen_analysis/diff_tool/report.py  | 100 ++++++++++++++++++
+ 5 files changed, 264 insertions(+)
+ create mode 100755 xen/scripts/diff-report.py
+ create mode 100644 xen/scripts/xen_analysis/diff_tool/__init__.py
+ create mode 100644 xen/scripts/xen_analysis/diff_tool/cppcheck_report.py
+ create mode 100644 xen/scripts/xen_analysis/diff_tool/debug.py
+ create mode 100644 xen/scripts/xen_analysis/diff_tool/report.py
 
-Tests which did not succeed, but are not blocking:
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow  1 build-check(1)  blocked n/a
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm  1 build-check(1)      blocked n/a
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 1 build-check(1) blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
- test-amd64-i386-xl-qemuu-win7-amd64  1 build-check(1)              blocked n/a
- test-amd64-i386-xl-qemuu-ws16-amd64  1 build-check(1)              blocked n/a
- test-amd64-i386-xl-shadow     1 build-check(1)               blocked  n/a
- test-amd64-i386-xl-vhd        1 build-check(1)               blocked  n/a
- test-amd64-i386-xl-xsm        1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-raw  1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl           1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-credit1   1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-credit2   1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-thunderx  1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-vhd       1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-qcow2  1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-arndale   1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-vhd       1 build-check(1)               blocked  n/a
- test-amd64-i386-qemuu-rhel6hvm-amd  1 build-check(1)               blocked n/a
- test-amd64-i386-pair          1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-raw   1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
- test-amd64-i386-freebsd10-i386  1 build-check(1)               blocked  n/a
- test-amd64-i386-freebsd10-amd64  1 build-check(1)               blocked  n/a
- test-amd64-coresched-i386-xl  1 build-check(1)               blocked  n/a
- test-amd64-coresched-amd64-xl  1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-xsm       1 build-check(1)               blocked  n/a
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-shadow    1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-rtds      1 build-check(1)               blocked  n/a
- build-arm64-libvirt           1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ws16-amd64  1 build-check(1)             blocked n/a
- test-amd64-amd64-xl-qemuu-win7-amd64  1 build-check(1)             blocked n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- build-armhf-libvirt           1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict 1 build-check(1) blocked n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm  1 build-check(1)     blocked n/a
- test-amd64-amd64-dom0pvh-xl-amd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow  1 build-check(1) blocked n/a
- test-amd64-amd64-dom0pvh-xl-intel  1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-amd64-xl-qcow2     1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-pvshim    1 build-check(1)               blocked  n/a
- test-amd64-amd64-pair         1 build-check(1)               blocked  n/a
- test-amd64-amd64-pygrub       1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-pvhv2-intel  1 build-check(1)               blocked  n/a
- test-amd64-amd64-qemuu-freebsd11-amd64  1 build-check(1)           blocked n/a
- test-amd64-amd64-qemuu-freebsd12-amd64  1 build-check(1)           blocked n/a
- test-amd64-amd64-xl-pvhv2-amd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-qemuu-nested-amd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-qemuu-nested-intel  1 build-check(1)              blocked n/a
- test-amd64-amd64-xl-multivcpu  1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-credit1   1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-credit2   1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl-credit1   1 build-check(1)               blocked  n/a
- test-amd64-i386-qemuu-rhel6hvm-intel  1 build-check(1)             blocked n/a
- test-amd64-i386-xl            1 build-check(1)               blocked  n/a
- test-amd64-i386-xl-pvshim     1 build-check(1)               blocked  n/a
- test-amd64-i386-xl-qemuu-debianhvm-amd64  1 build-check(1)         blocked n/a
+diff --git a/xen/scripts/diff-report.py b/xen/scripts/diff-report.py
+new file mode 100755
+index 000000000000..f97cb2355cc3
+--- /dev/null
++++ b/xen/scripts/diff-report.py
+@@ -0,0 +1,80 @@
++#!/usr/bin/env python3
++
++from __future__ import print_function
++import os
++import sys
++from argparse import ArgumentParser
++from xen_analysis.diff_tool.cppcheck_report import CppcheckReport
++from xen_analysis.diff_tool.debug import Debug
++from xen_analysis.diff_tool.report import ReportError
++
++
++def log_info(text, end='\n'):
++    # type: (str, str) -> None
++    global args
++    global file_out
++
++    if (args.verbose):
++        print(text, end=end, file=file_out)
++
++
++def main(argv):
++    # type: (list) -> None
++    global args
++    global file_out
++
++    parser = ArgumentParser(prog="diff-report.py")
++    parser.add_argument("-b", "--baseline", required=True, type=str,
++                        help="Path to the baseline report.")
++    parser.add_argument("--debug", action='store_true',
++                        help="Produce intermediate reports during operations.")
++    parser.add_argument("-o", "--out", default="stdout", type=str,
++                        help="Where to print the tool output. Default is "
++                             "stdout")
++    parser.add_argument("-r", "--report", required=True, type=str,
++                        help="Path to the 'check report', the one checked "
++                             "against the baseline.")
++    parser.add_argument("-v", "--verbose", action='store_true',
++                        help="Print more informations during the run.")
++
++    args = parser.parse_args()
++
++    if args.out == "stdout":
++        file_out = sys.stdout
++    else:
++        try:
++            file_out = open(args.out, "wt")
++        except OSError as e:
++            print("ERROR: Issue opening file {}: {}".format(args.out, e))
++            sys.exit(1)
++
++    debug = Debug(args)
++
++    try:
++        baseline_path = os.path.realpath(args.baseline)
++        log_info("Loading baseline report {}".format(baseline_path), "")
++        baseline = CppcheckReport(baseline_path)
++        baseline.parse()
++        debug.debug_print_parsed_report(baseline)
++        log_info(" [OK]")
++        new_rep_path = os.path.realpath(args.report)
++        log_info("Loading check report {}".format(new_rep_path), "")
++        new_rep = CppcheckReport(new_rep_path)
++        new_rep.parse()
++        debug.debug_print_parsed_report(new_rep)
++        log_info(" [OK]")
++    except ReportError as e:
++        print("ERROR: {}".format(e))
++        sys.exit(1)
++
++    output = new_rep - baseline
++    print(output, end="", file=file_out)
++
++    if len(output) > 0:
++        sys.exit(1)
++
++    sys.exit(0)
++
++
++if __name__ == "__main__":
++    main(sys.argv[1:])
+diff --git a/xen/scripts/xen_analysis/diff_tool/__init__.py b/xen/scripts/xen_analysis/diff_tool/__init__.py
+new file mode 100644
+index 000000000000..e69de29bb2d1
+diff --git a/xen/scripts/xen_analysis/diff_tool/cppcheck_report.py b/xen/scripts/xen_analysis/diff_tool/cppcheck_report.py
+new file mode 100644
+index 000000000000..e7e80a9dde84
+--- /dev/null
++++ b/xen/scripts/xen_analysis/diff_tool/cppcheck_report.py
+@@ -0,0 +1,44 @@
++#!/usr/bin/env python3
++
++import re
++from .report import Report, ReportError
++
++
++class CppcheckReport(Report):
++    def __init__(self, report_path):
++        # type: (str) -> None
++        super(CppcheckReport, self).__init__(report_path)
++        # This matches a string like:
++        # path/to/file.c(<line number>,<digits>):<whatever>
++        # and captures file name path and line number
++        # the last capture group is used for text substitution in __str__
++        self.__report_entry_regex = re.compile(r'^(.*)\((\d+)(,\d+\):.*)$')
++
++    def parse(self):
++        # type: () -> None
++        report_path = self.get_report_path()
++        try:
++            with open(report_path, "rt") as infile:
++                report_lines = infile.readlines()
++        except OSError as e:
++            raise ReportError("Issue with reading file {}: {}"
++                              .format(report_path, e))
++        for line in report_lines:
++            entry = self.__report_entry_regex.match(line)
++            if entry and entry.group(1) and entry.group(2):
++                file_path = entry.group(1)
++                line_number = int(entry.group(2))
++                self.add_entry(file_path, line_number, line)
++            else:
++                raise ReportError("Malformed report entry in file {}:\n{}"
++                                  .format(report_path, line))
++
++    def __str__(self):
++        # type: () -> str
++        ret = ""
++        for entry in self.to_list():
++            ret += re.sub(self.__report_entry_regex,
++                          r'{}({}\3'.format(entry.file_path,
++                                            entry.line_number),
++                          entry.text)
++        return ret
+diff --git a/xen/scripts/xen_analysis/diff_tool/debug.py b/xen/scripts/xen_analysis/diff_tool/debug.py
+new file mode 100644
+index 000000000000..65cca2464110
+--- /dev/null
++++ b/xen/scripts/xen_analysis/diff_tool/debug.py
+@@ -0,0 +1,40 @@
++#!/usr/bin/env python3
++
++from __future__ import print_function
++import os
++from .report import Report
++
++
++class Debug:
++    def __init__(self, args):
++        self.args = args
++
++    def __get_debug_out_filename(self, path, type):
++        # type: (str, str) -> str
++        # Take basename
++        file_name = os.path.basename(path)
++        # Split in name and extension
++        file_name = os.path.splitext(file_name)
++        if self.args.out != "stdout":
++            out_folder = os.path.dirname(self.args.out)
++        else:
++            out_folder = "./"
++        dbg_report_path = out_folder + file_name[0] + type + file_name[1]
++
++        return dbg_report_path
++
++    def __debug_print_report(self, report, type):
++        # type: (Report, str) -> None
++        report_name = self.__get_debug_out_filename(report.get_report_path(),
++                                                    type)
++        try:
++            with open(report_name, "wt") as outfile:
++                print(report, end="", file=outfile)
++        except OSError as e:
++            print("ERROR: Issue opening file {}: {}".format(report_name, e))
++
++    def debug_print_parsed_report(self, report):
++        # type: (Report) -> None
++        if not self.args.debug:
++            return
++        self.__debug_print_report(report, ".parsed")
+diff --git a/xen/scripts/xen_analysis/diff_tool/report.py b/xen/scripts/xen_analysis/diff_tool/report.py
+new file mode 100644
+index 000000000000..4a303d61b3ea
+--- /dev/null
++++ b/xen/scripts/xen_analysis/diff_tool/report.py
+@@ -0,0 +1,100 @@
++#!/usr/bin/env python3
++
++import os
++
++
++class ReportError(Exception):
++    pass
++
++
++class Report(object):
++    class ReportEntry:
++        def __init__(self, file_path, line_number, entry_text, line_id):
++            # type: (str, int, list, int) -> None
++            if not isinstance(line_number, int) or \
++               not isinstance(line_id, int):
++                raise ReportError("ReportEntry constructor wrong type args")
++            self.file_path = file_path
++            self.line_number = line_number
++            self.text = entry_text
++            self.line_id = line_id
++
++    def __init__(self, report_path):
++        # type: (str) -> None
++        self.__entries = {}
++        self.__path = report_path
++        self.__last_line_order = 0
++
++    def parse(self):
++        # type: () -> None
++        raise ReportError("Please create a specialised class from 'Report'.")
++
++    def get_report_path(self):
++        # type: () -> str
++        return self.__path
++
++    def get_report_entries(self):
++        # type: () -> dict
++        return self.__entries
++
++    def add_entry(self, entry_path, entry_line_number, entry_text):
++        # type: (str, int, str) -> None
++        entry = Report.ReportEntry(entry_path, entry_line_number, entry_text,
++                                   self.__last_line_order)
++        if entry_path in self.__entries.keys():
++            self.__entries[entry_path].append(entry)
++        else:
++            self.__entries[entry_path] = [entry]
++        self.__last_line_order += 1
++
++    def to_list(self):
++        # type: () -> list
++        report_list = []
++        for _, entries in self.__entries.items():
++            for entry in entries:
++                report_list.append(entry)
++
++        report_list.sort(key=lambda x: x.line_id)
++        return report_list
++
++    def __str__(self):
++        # type: () -> str
++        ret = ""
++        for entry in self.to_list():
++            ret += entry.file_path + ":" + entry.line_number + ":" + entry.text
++
++        return ret
++
++    def __len__(self):
++        # type: () -> int
++        return len(self.to_list())
++
++    def __sub__(self, report_b):
++        # type: (Report) -> Report
++        if self.__class__ != report_b.__class__:
++            raise ReportError("Diff of different type of report!")
++
++        filename, file_extension = os.path.splitext(self.__path)
++        diff_report = self.__class__(filename + ".diff" + file_extension)
++        # Put in the diff report only records of this report that are not
++        # present in the report_b.
++        for file_path, entries in self.__entries.items():
++            rep_b_entries = report_b.get_report_entries()
++            if file_path in rep_b_entries.keys():
++                # File path exists in report_b, so check what entries of that
++                # file path doesn't exist in report_b and add them to the diff
++                rep_b_entries_num = [
++                    x.line_number for x in rep_b_entries[file_path]
++                ]
++                for entry in entries:
++                    if entry.line_number not in rep_b_entries_num:
++                        diff_report.add_entry(file_path, entry.line_number,
++                                              entry.text)
++            else:
++                # File path doesn't exist in report_b, so add every entry
++                # of that file path to the diff
++                for entry in entries:
++                    diff_report.add_entry(file_path, entry.line_number,
++                                          entry.text)
++
++        return diff_report
+-- 
+2.34.1
 
-version targeted for testing:
- qemuu                b300c134465465385045ab705b68a42699688332
-baseline version:
- qemuu                6972ef1440a9d685482d78672620a7482f2bd09a
-
-Last test of basis   180691  2023-05-17 10:45:22 Z    7 days
-Failing since        180699  2023-05-18 07:21:24 Z    7 days   29 attempts
-Testing same since   180937  2023-05-25 02:03:36 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Afonso Bordado <afonsobordado@gmail.com>
-  Akihiko Odaki <akihiko.odaki@daynix.com>
-  Akihiro Suda <akihiro.suda.cz@hco.ntt.co.jp>
-  Alex Bennée <alex.bennee@linaro.org>
-  Alex Williamson <alex.williamson@redhat.com>
-  Alexander Bulekov <alxndr@bu.edu>
-  Alexander Graf <graf@amazon.com>
-  Ani Sinha <ani@anisinha.ca>
-  Ani Sinha <anisinha@redhat.com>
-  Anton Johansson <anjo@rev.ng>
-  Bernhard Beschow <shentey@gmail.com>
-  Brian Cain <bcain@quicinc.com>
-  Brice Goglin <Brice.Goglin@inria.fr>
-  Camilla Conte <cconte@redhat.com>
-  Cindy Lu <lulu@redhat.com>
-  Cornelia Huck <cohuck@redhat.com>
-  Cédric Le Goater <clg@redhat.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Daniil Kovalev <dkovalev@compiler-toolchain-for.me>
-  David Hildenbrand <david@redhat.com>
-  Emanuele Giuseppe Esposito <eesposit@redhat.com>
-  Eric Blake <eblake@redhat.com>
-  Eric DeVolder <eric.devolder@oracle.com>
-  Eugenio Pérez <eperezma@redhat.com>
-  Fabiano Rosas <farosas@suse.de>
-  Fan Ni <fan.ni@samsung.com>
-  Fiona Ebner <f.ebner@proxmox.com>
-  Gavin Shan <gshan@redhat.com>
-  Gregory Price <gourry.memverge@gmail.com>
-  Gregory Price <gregory.price@memverge.com>
-  Hao Zeng <zenghao@kylinos.cn>
-  Hawkins Jiawei <yin31149@gmail.com>
-  Igor Mammedov <imammedo@redhat.com>
-  Ira Weiny <ira.weiny@intel.com>
-  Jason Wang <jasowang@redhat.com>
-  John Snow <jsnow@redhat.com>
-  Jonathan Cameron <Jonathan.Cameron@huawei.com>
-  Juan Quintela <quintela@redhat.com>
-  Kevin Wolf <kwolf@redhat.com>
-  Laurent Vivier <laurent@vivier.eu>
-  Lei Yang <leiyang@redhat.com>
-  Leonardo Bras <leobras@redhat.com>
-  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-  Marco Liebel <quic_mliebel@quicinc.com>
-  Markus Armbruster <armbru@redhat.com>
-  Matheus Tavares Bernardino <quic_mathbern@quicinc.com>
-  Mauro Matteo Cascella <mcascell@redhat.com>
-  Michael S. Tsirkin <mst@redhat.com>
-  Michael Tokarev <mjt@tls.msk.ru>
-  Palmer Dabbelt <palmer@rivosinc.com>
-  Paolo Bonzini <pbonzini@redhat.com>
-  Peter Maydell <peter.maydell@linaro.org>
-  Peter Xu <peterx@redhat.com>
-  Raghu H <raghuhack78@gmail.com>
-  Richard Henderson <richard.henderson@linaro.org>
-  Ricky Zhou <ricky@rzhou.org>
-  Sebastian Ott <sebott@redhat.com>
-  Sid Manning <sidneym@quicinc.com>
-  Stefan Hajnoczi <stefanha@redhat.com>
-  Steve Sistare <steven.sistare@oracle.com>
-  Taylor Simpson <tsimpson@quicinc.com>
-  Thomas Huth <thuth@redhat.com>
-  Thomas Weißschuh <thomas@t-8ch.de>
-  timothee.cocault@gmail.com <timothee.cocault@gmail.com>
-  Timothée Cocault <timothee.cocault@gmail.com>
-  Viktor Prutyanov <viktor@daynix.com>
-  Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-  Xinyu Li <lixinyu20s@ict.ac.cn>
-  Zeng Hao <zenghao@kylinos.cn>
-  Zhenyu Zhang <zhenyzha@redhat.com>
-  Zhenzhong Duan <zhenzhong.duan@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-arm64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-arm64                                                  fail    
- build-armhf                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-arm64-libvirt                                          blocked 
- build-armhf-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          blocked 
- test-amd64-coresched-amd64-xl                                blocked 
- test-arm64-arm64-xl                                          blocked 
- test-armhf-armhf-xl                                          blocked 
- test-amd64-i386-xl                                           blocked 
- test-amd64-coresched-i386-xl                                 blocked 
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 blocked 
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  blocked 
- test-amd64-amd64-libvirt-xsm                                 blocked 
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  blocked 
- test-amd64-amd64-xl-xsm                                      blocked 
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-i386-xl-xsm                                       blocked 
- test-amd64-amd64-qemuu-nested-amd                            blocked 
- test-amd64-amd64-xl-pvhv2-amd                                blocked 
- test-amd64-i386-qemuu-rhel6hvm-amd                           blocked 
- test-amd64-amd64-dom0pvh-xl-amd                              blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     blocked 
- test-amd64-i386-freebsd10-amd64                              blocked 
- test-amd64-amd64-qemuu-freebsd11-amd64                       blocked 
- test-amd64-amd64-qemuu-freebsd12-amd64                       blocked 
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
- test-amd64-amd64-xl-qemuu-win7-amd64                         blocked 
- test-amd64-i386-xl-qemuu-win7-amd64                          blocked 
- test-amd64-amd64-xl-qemuu-ws16-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ws16-amd64                          blocked 
- test-armhf-armhf-xl-arndale                                  blocked 
- test-amd64-amd64-xl-credit1                                  blocked 
- test-arm64-arm64-xl-credit1                                  blocked 
- test-armhf-armhf-xl-credit1                                  blocked 
- test-amd64-amd64-xl-credit2                                  blocked 
- test-arm64-arm64-xl-credit2                                  blocked 
- test-armhf-armhf-xl-credit2                                  blocked 
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        blocked 
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         blocked 
- test-amd64-i386-freebsd10-i386                               blocked 
- test-amd64-amd64-qemuu-nested-intel                          blocked 
- test-amd64-amd64-xl-pvhv2-intel                              blocked 
- test-amd64-i386-qemuu-rhel6hvm-intel                         blocked 
- test-amd64-amd64-dom0pvh-xl-intel                            blocked 
- test-amd64-amd64-libvirt                                     blocked 
- test-armhf-armhf-libvirt                                     blocked 
- test-amd64-i386-libvirt                                      blocked 
- test-amd64-amd64-xl-multivcpu                                blocked 
- test-armhf-armhf-xl-multivcpu                                blocked 
- test-amd64-amd64-pair                                        blocked 
- test-amd64-i386-pair                                         blocked 
- test-amd64-amd64-libvirt-pair                                blocked 
- test-amd64-i386-libvirt-pair                                 blocked 
- test-amd64-amd64-xl-pvshim                                   blocked 
- test-amd64-i386-xl-pvshim                                    blocked 
- test-amd64-amd64-pygrub                                      blocked 
- test-armhf-armhf-libvirt-qcow2                               blocked 
- test-amd64-amd64-xl-qcow2                                    blocked 
- test-arm64-arm64-libvirt-raw                                 blocked 
- test-armhf-armhf-libvirt-raw                                 blocked 
- test-amd64-i386-libvirt-raw                                  blocked 
- test-amd64-amd64-xl-rtds                                     blocked 
- test-armhf-armhf-xl-rtds                                     blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             blocked 
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              blocked 
- test-amd64-amd64-xl-shadow                                   blocked 
- test-amd64-i386-xl-shadow                                    blocked 
- test-arm64-arm64-xl-thunderx                                 blocked 
- test-amd64-amd64-libvirt-vhd                                 blocked 
- test-arm64-arm64-xl-vhd                                      blocked 
- test-armhf-armhf-xl-vhd                                      blocked 
- test-amd64-i386-xl-vhd                                       blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 6870 lines long.)
 
