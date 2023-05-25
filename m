@@ -4,32 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D70DC7EE2C
-	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 09:00:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.539431.840287 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AF9CC77B7E
+	for <xen-devel@archiver.kernel.org>; Thu, 25 May 2023 09:04:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.539438.840308 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26p7-0005Pz-KF; Thu, 25 May 2023 08:59:53 +0000
+	id 1q26t9-0007Cn-Ji; Thu, 25 May 2023 09:04:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 539431.840287; Thu, 25 May 2023 08:59:53 +0000
+Received: by outflank-mailman (output) from mailman id 539438.840308; Thu, 25 May 2023 09:04:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q26p7-0005Ps-Hc; Thu, 25 May 2023 08:59:53 +0000
-Received: by outflank-mailman (input) for mailman id 539431;
- Thu, 25 May 2023 08:59:52 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1q26p6-0005OI-GW
- for xen-devel@lists.xenproject.org; Thu, 25 May 2023 08:59:52 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1q26p6-0000Vo-91; Thu, 25 May 2023 08:59:52 +0000
-Received: from 54-240-197-234.amazon.com ([54.240.197.234]
- helo=[192.168.31.224]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1q26p6-0005L4-2R; Thu, 25 May 2023 08:59:52 +0000
+	id 1q26t9-0007Ce-FY; Thu, 25 May 2023 09:04:03 +0000
+Received: by outflank-mailman (input) for mailman id 539438;
+ Thu, 25 May 2023 09:04:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=UGVO=BO=amd.com=Michal.Orzel@srs-se1.protection.inumbo.net>)
+ id 1q26t8-0006wv-1p
+ for xen-devel@lists.xenproject.org; Thu, 25 May 2023 09:04:02 +0000
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20610.outbound.protection.outlook.com
+ [2a01:111:f400:7e8b::610])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 15c44897-fadb-11ed-8611-37d641c3527e;
+ Thu, 25 May 2023 11:04:00 +0200 (CEST)
+Received: from MWH0EPF00056D0E.namprd21.prod.outlook.com
+ (2603:10b6:30f:fff2:0:1:0:12) by DM8PR12MB5448.namprd12.prod.outlook.com
+ (2603:10b6:8:27::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6433.15; Thu, 25 May
+ 2023 09:03:57 +0000
+Received: from CO1NAM11FT044.eop-nam11.prod.protection.outlook.com
+ (2a01:111:f400:7eab::207) by MWH0EPF00056D0E.outlook.office365.com
+ (2603:1036:d20::b) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.6 via Frontend
+ Transport; Thu, 25 May 2023 09:03:56 +0000
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT044.mail.protection.outlook.com (10.13.175.188) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6433.17 via Frontend Transport; Thu, 25 May 2023 09:03:56 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 25 May
+ 2023 04:03:55 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 25 May
+ 2023 02:03:55 -0700
+Received: from [10.71.193.39] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Thu, 25 May 2023 04:03:54 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,335 +65,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=5FPnP54xSLr88Acy6vRkjDCgqtY7AJiaUVTjSA6QkRA=; b=gczCrFu1VXkMAbJvqrZcefJIac
-	HI+g4gTYsQLSK2U0QqgNv0aiXdnCYqUfK9zuzxcdLNUDtGgofr3F7F/3KXveFMhvp2mFFFM+KqtKx
-	96K7u0+eqSdYxssrPbHaAUgbzxGB+C6U/riMO2AdxFNU6BdP0tcAL4t1qFnNjbsJlW00=;
-Message-ID: <9dbf2ceb-e39f-3c9d-7790-51524ba67d5d@xen.org>
-Date: Thu, 25 May 2023 09:59:50 +0100
+X-Inumbo-ID: 15c44897-fadb-11ed-8611-37d641c3527e
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UycS6/KMFi9OkibPv8oMrbvHIRIo+og8qOwQpfwGwBMA3BHFNKoNIaasmx32iErv6ayizKp8XU2BDtFqWI53MrNX7kyAfgA/NHCztr5tPi6mzjiTGveMZb/46Krh6iCknN8BAIm7jO9x4ChN9WinBY22DnVfoQcegKYb+Em/tFz6dCnezFTvkPj7FaQWiA/2bTpxIuTgm1yPsgGQSwzYocjJA6+4cOcd2bZ9OpWf5HSz8MVC96sGU0VNeIKBpn7GFXCSGwsFZP5HZWoh1a3RT+ruA04DsY1VXivIRX/jQojYC05NMgzAHvQ+AEABvgrZnfanfrPzTtZJrHhWpVVWcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dBOZ3LCuYza8qg/qQVvD0R+nUvbF8irFn4EYuZyKHsg=;
+ b=XE94DOJG0pyDj005o9c5xVcKf82Plg+MelB6A/yjAUD3W/vdjDB6UGwGcagnuLHGh5fJVvtdnBZXz7+i60ZujW+joX192ggMnvr8k8vPzHhwhkC8TpmbAxXuy12MlL7tHQGvgFMllRd3JZ81p9HHJkp8GpU1+ztVKSzX2Y1DAdWdOzqkG5Oblyf1vfKivVrdyLfso+EqBLUdd2eXOs1Lo/Ms8WpjsA9awRFzZI/kxiAux8epDWrYBjP4Hv6eVqS+RUtDmSAmLzYmdaCRbRKQPpcodlraEabnNHCtOk6dhfJDG0svXaEjGmkHuiZX2ltILhhNKon69vExCRWN2EuoCw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=arm.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dBOZ3LCuYza8qg/qQVvD0R+nUvbF8irFn4EYuZyKHsg=;
+ b=bu+F03bUqfjkt6OQ8pO0c+drrt9Udj0CN2WBSOF+alAPql7kK/G1ADgY2JEynKz+KcPZRFAVf4Dn6ukn+Y/eEi4J2zCpMTSVOOcauIwZ1aFMHkRbpp0MVCj3889DF9oV4+oRwkB3oRCMTi/T4LLTTrdnysy/bi/Gwqc76O/lpK4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Message-ID: <b4d27103-6b02-d5af-980b-e9be6f41469e@amd.com>
+Date: Thu, 25 May 2023 11:03:53 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.11.0
-Subject: Re: [PATCH v7 02/12] xen/arm: add SVE vector length field to the
- domain
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v7 11/12] xen/arm: add sve property for dom0less domUs
 Content-Language: en-US
-To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com, wei.chen@arm.com,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Luca Fancellu <Luca.Fancellu@arm.com>
+CC: Bertrand Marquis <Bertrand.Marquis@arm.com>, Xen-devel
+	<xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+	"Volodymyr Babchuk" <Volodymyr_Babchuk@epam.com>
 References: <20230523074326.3035745-1-luca.fancellu@arm.com>
- <20230523074326.3035745-3-luca.fancellu@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20230523074326.3035745-3-luca.fancellu@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ <20230523074326.3035745-12-luca.fancellu@arm.com>
+ <D01601D3-8215-46A0-8539-CF126A5FE11F@arm.com>
+ <3dcbec7c-87d2-31cc-ad0f-d8ff4c8baeae@amd.com>
+ <D7FF883F-D8DF-48A0-A32D-15F2D0CF7426@arm.com>
+From: Michal Orzel <michal.orzel@amd.com>
+In-Reply-To: <D7FF883F-D8DF-48A0-A32D-15F2D0CF7426@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT044:EE_|DM8PR12MB5448:EE_
+X-MS-Office365-Filtering-Correlation-Id: ac2bba45-a760-43c3-6dc0-08db5cfef885
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	04mb6XJZMZtHnOS7jsIVw+k5t12x2SnE4t4dQp4KNF0W47EsgnmR9gpiiKugwmUV0eLWkfShjsmEB1nujY7WuMOCkmpF1QzGNCxnYQWEvhQuBxOpjx/F6uWa6Y6UH9X56nOmg1E2wbQt54KPe53Oai+aFSUBQqdvIDiab0rTFNJw1qLK9EJQkEv5IW+8PdUTp6IIWHYTfk41pys00haK01R8NeZpkhWJEhq0b17eJaRd+a1TQFpRmJLb/IoVc1hUWuXeBgRLYV6+XtjRtv2kPCrc7EbDEgQgMmXkoemr9nJXvYR+TTUVD2TWpifhmgfyC6dWAGwbBE0LRqjyseu5Wae82HfIwdR1Ln5fKMwhmj/+beGzKNph4r5LAeQvUtD+Pe98/mIaLKmSHk0JADd3WgRIOd5z51fCGOLFffp9OUEBRm5DCs8+0zoubTSjnEgTwkKW/cp5bBBtDWwW0D8gCFVFhcOvvGVOlB24y6di5iFwb0dWIR4V4Fm/ZZGhVgpOTshNjkRsAPrnKHJuFevi1dON/0zMPDCp3GKzOLI2PoeyTpTNKHyKQSsKq+7oEs1Kc2sTqM3KqBTkC98+hB+yI+b1NwgDOfv/NO6ZfkfSPzZ0kzwkaM3RSW289VvxQGZrEmqXa9w8ZAQ5dRkaA5VBJJvyZtlTXJvRfHKDTY053FGakPJqUYgMlpFGlJ24wti/uPwtIE02dUlqIUW6EnkB6HQNM66ivZHoIWSHjXdPkCRCK9h11RbGN1itavu6ea5KGUZoC3DEqfM7YPZFLN7sqZLEL9hEV5xo8GZJ+WUDv5uBbPKYbORad9XY5gSeUQb/QKp5QqpiCSs2bneDSv579w==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(396003)(136003)(346002)(376002)(39860400002)(451199021)(40470700004)(36840700001)(46966006)(2616005)(40460700003)(83380400001)(47076005)(336012)(2906002)(426003)(186003)(36756003)(86362001)(82310400005)(31696002)(82740400003)(356005)(81166007)(36860700001)(8676002)(8936002)(5660300002)(16576012)(70586007)(54906003)(31686004)(70206006)(41300700001)(6916009)(4326008)(316002)(40480700001)(26005)(478600001)(53546011)(44832011)(32563001)(43740500002)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2023 09:03:56.2593
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac2bba45-a760-43c3-6dc0-08db5cfef885
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1NAM11FT044.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM8PR12MB5448
 
-Hi,
 
-On 23/05/2023 08:43, Luca Fancellu wrote:
-> Add sve_vl field to arch_domain and xen_arch_domainconfig struct,
-> to allow the domain to have an information about the SVE feature
-> and the number of SVE register bits that are allowed for this
-> domain.
-> 
-> sve_vl field is the vector length in bits divided by 128, this
-> allows to use less space in the structures.
-> 
-> The field is used also to allow or forbid a domain to use SVE,
-> because a value equal to zero means the guest is not allowed to
-> use the feature.
-> 
-> Check that the requested vector length is lower or equal to the
-> platform supported vector length, otherwise fail on domain
-> creation.
-> 
-> Check that only 64 bit domains have SVE enabled, otherwise fail.
-> 
-> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 
-Acked-by: Julien Grall <jgrall@amazon.com>
-
-Cheers,
-
-> ---
-> Changes from v6:
->   - Style fix, have is_sve_domain as static inline instead of macro
->     (Julien)
-> Changes from v5:
->   - Update commit message stating the interface ver. bump (Bertrand)
->   - in struct arch_domain, protect sve_vl with CONFIG_ARM64_SVE,
->     given the change, move also is_sve_domain() where it's protected
->     inside sve.h and create a stub when the macro is not defined,
->     protect the usage of sve_vl where needed.
->     (Julien)
->   - Add a check for 32 bit guest running on top of 64 bit host that
->     have sve parameter enabled to stop the domain creation, added in
->     construct_domain() of domain_build.c and subarch_do_domctl of
->     domctl.c. (Julien)
-> Changes from v4:
->   - Return 0 in get_sys_vl_len() if sve is not supported, code style fix,
->     removed else if since the conditions can't fallthrough, removed not
->     needed condition checking for VL bits validity because it's already
->     covered, so delete is_vl_valid() function. (Jan)
-> Changes from v3:
->   - don't use fixed types when not needed, use encoded value also in
->     arch_domain so rename sve_vl_bits in sve_vl. (Jan)
->   - rename domainconfig_decode_vl to sve_decode_vl because it will now
->     be used also to decode from arch_domain value
->   - change sve_vl from uint16_t to uint8_t and move it after "type" field
->     to optimize space.
-> Changes from v2:
->   - rename field in xen_arch_domainconfig from "sve_vl_bits" to
->     "sve_vl" and use the implicit padding after gic_version to
->     store it, now this field is the VL/128. (Jan)
->   - Created domainconfig_decode_vl() function to decode the sve_vl
->     field and use it as plain bits value inside arch_domain.
->   - Changed commit message reflecting the changes
-> Changes from v1:
->   - no changes
-> Changes from RFC:
->   - restore zcr_el2 in sve_restore_state, that will be introduced
->     later in this serie, so remove zcr_el2 related code from this
->     patch and move everything to the later patch (Julien)
->   - add explicit padding into struct xen_arch_domainconfig (Julien)
->   - Don't lower down the vector length, just fail to create the
->     domain. (Julien)
-> ---
->   xen/arch/arm/arm64/domctl.c          |  4 ++++
->   xen/arch/arm/arm64/sve.c             | 12 +++++++++++
->   xen/arch/arm/domain.c                | 29 ++++++++++++++++++++++++++
->   xen/arch/arm/domain_build.c          |  7 +++++++
->   xen/arch/arm/include/asm/arm64/sve.h | 31 ++++++++++++++++++++++++++++
->   xen/arch/arm/include/asm/domain.h    |  5 +++++
->   xen/include/public/arch-arm.h        |  2 ++
->   7 files changed, 90 insertions(+)
+On 25/05/2023 10:55, Luca Fancellu wrote:
 > 
-> diff --git a/xen/arch/arm/arm64/domctl.c b/xen/arch/arm/arm64/domctl.c
-> index 0de89b42c448..14fc622e9956 100644
-> --- a/xen/arch/arm/arm64/domctl.c
-> +++ b/xen/arch/arm/arm64/domctl.c
-> @@ -10,6 +10,7 @@
->   #include <xen/sched.h>
->   #include <xen/hypercall.h>
->   #include <public/domctl.h>
-> +#include <asm/arm64/sve.h>
->   #include <asm/cpufeature.h>
->   
->   static long switch_mode(struct domain *d, enum domain_type type)
-> @@ -43,6 +44,9 @@ long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
->           case 32:
->               if ( !cpu_has_el1_32 )
->                   return -EINVAL;
-> +            /* SVE is not supported for 32 bit domain */
-> +            if ( is_sve_domain(d) )
-> +                return -EINVAL;
->               return switch_mode(d, DOMAIN_32BIT);
->           case 64:
->               return switch_mode(d, DOMAIN_64BIT);
-> diff --git a/xen/arch/arm/arm64/sve.c b/xen/arch/arm/arm64/sve.c
-> index e05ccc38a896..a9144e48ef6b 100644
-> --- a/xen/arch/arm/arm64/sve.c
-> +++ b/xen/arch/arm/arm64/sve.c
-> @@ -8,6 +8,7 @@
->   #include <xen/types.h>
->   #include <asm/arm64/sve.h>
->   #include <asm/arm64/sysregs.h>
-> +#include <asm/cpufeature.h>
->   #include <asm/processor.h>
->   #include <asm/system.h>
->   
-> @@ -49,6 +50,17 @@ register_t compute_max_zcr(void)
->       return vl_to_zcr(hw_vl);
->   }
->   
-> +/* Get the system sanitized value for VL in bits */
-> +unsigned int get_sys_vl_len(void)
-> +{
-> +    if ( !cpu_has_sve )
-> +        return 0;
-> +
-> +    /* ZCR_ELx len field is ((len + 1) * 128) = vector bits length */
-> +    return ((system_cpuinfo.zcr64.bits[0] & ZCR_ELx_LEN_MASK) + 1U) *
-> +            SVE_VL_MULTIPLE_VAL;
-> +}
-> +
->   /*
->    * Local variables:
->    * mode: C
-> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-> index d5ab15db46c4..6c22551b0ed2 100644
-> --- a/xen/arch/arm/domain.c
-> +++ b/xen/arch/arm/domain.c
-> @@ -13,6 +13,7 @@
->   #include <xen/wait.h>
->   
->   #include <asm/alternative.h>
-> +#include <asm/arm64/sve.h>
->   #include <asm/cpuerrata.h>
->   #include <asm/cpufeature.h>
->   #include <asm/current.h>
-> @@ -555,6 +556,8 @@ int arch_vcpu_create(struct vcpu *v)
->       v->arch.vmpidr = MPIDR_SMP | vcpuid_to_vaffinity(v->vcpu_id);
->   
->       v->arch.cptr_el2 = get_default_cptr_flags();
-> +    if ( is_sve_domain(v->domain) )
-> +        v->arch.cptr_el2 &= ~HCPTR_CP(8);
->   
->       v->arch.hcr_el2 = get_default_hcr_flags();
->   
-> @@ -599,6 +602,7 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
->       unsigned int max_vcpus;
->       unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
->       unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpmu);
-> +    unsigned int sve_vl_bits = sve_decode_vl(config->arch.sve_vl);
->   
->       if ( (config->flags & ~flags_optional) != flags_required )
->       {
-> @@ -607,6 +611,26 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
->           return -EINVAL;
->       }
->   
-> +    /* Check feature flags */
-> +    if ( sve_vl_bits > 0 )
-> +    {
-> +        unsigned int zcr_max_bits = get_sys_vl_len();
-> +
-> +        if ( !zcr_max_bits )
-> +        {
-> +            dprintk(XENLOG_INFO, "SVE is unsupported on this machine.\n");
-> +            return -EINVAL;
-> +        }
-> +
-> +        if ( sve_vl_bits > zcr_max_bits )
-> +        {
-> +            dprintk(XENLOG_INFO,
-> +                    "Requested SVE vector length (%u) > supported length (%u)\n",
-> +                    sve_vl_bits, zcr_max_bits);
-> +            return -EINVAL;
-> +        }
-> +    }
-> +
->       /* The P2M table must always be shared between the CPU and the IOMMU */
->       if ( config->iommu_opts & XEN_DOMCTL_IOMMU_no_sharept )
->       {
-> @@ -749,6 +773,11 @@ int arch_domain_create(struct domain *d,
->       if ( (rc = domain_vpci_init(d)) != 0 )
->           goto fail;
->   
-> +#ifdef CONFIG_ARM64_SVE
-> +    /* Copy the encoded vector length sve_vl from the domain configuration */
-> +    d->arch.sve_vl = config->arch.sve_vl;
-> +#endif
-> +
->       return 0;
->   
->   fail:
-> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> index 71f307a572e9..9dd1ed5bce44 100644
-> --- a/xen/arch/arm/domain_build.c
-> +++ b/xen/arch/arm/domain_build.c
-> @@ -26,6 +26,7 @@
->   #include <asm/platform.h>
->   #include <asm/psci.h>
->   #include <asm/setup.h>
-> +#include <asm/arm64/sve.h>
->   #include <asm/cpufeature.h>
->   #include <asm/domain_build.h>
->   #include <xen/event.h>
-> @@ -3670,6 +3671,12 @@ static int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
->           return -EINVAL;
->       }
->   
-> +    if ( is_sve_domain(d) && (kinfo->type == DOMAIN_32BIT) )
-> +    {
-> +        printk("SVE is not available for 32-bit domain\n");
-> +        return -EINVAL;
-> +    }
-> +
->       if ( is_64bit_domain(d) )
->           vcpu_switch_to_aarch64_mode(v);
->   
-> diff --git a/xen/arch/arm/include/asm/arm64/sve.h b/xen/arch/arm/include/asm/arm64/sve.h
-> index c0466243c7bc..4b63412727fc 100644
-> --- a/xen/arch/arm/include/asm/arm64/sve.h
-> +++ b/xen/arch/arm/include/asm/arm64/sve.h
-> @@ -8,13 +8,44 @@
->   #ifndef _ARM_ARM64_SVE_H
->   #define _ARM_ARM64_SVE_H
->   
-> +#include <xen/sched.h>
-> +
->   #define SVE_VL_MAX_BITS 2048U
->   
->   /* Vector length must be multiple of 128 */
->   #define SVE_VL_MULTIPLE_VAL 128U
->   
-> +static inline unsigned int sve_decode_vl(unsigned int sve_vl)
-> +{
-> +    /* SVE vector length is stored as VL/128 in xen_arch_domainconfig */
-> +    return sve_vl * SVE_VL_MULTIPLE_VAL;
-> +}
-> +
->   register_t compute_max_zcr(void);
->   
-> +#ifdef CONFIG_ARM64_SVE
-> +
-> +static inline bool is_sve_domain(const struct domain *d)
-> +{
-> +    return d->arch.sve_vl > 0;
-> +}
-> +
-> +unsigned int get_sys_vl_len(void);
-> +
-> +#else /* !CONFIG_ARM64_SVE */
-> +
-> +static inline bool is_sve_domain(const struct domain *d)
-> +{
-> +    return false;
-> +}
-> +
-> +static inline unsigned int get_sys_vl_len(void)
-> +{
-> +    return 0;
-> +}
-> +
-> +#endif /* CONFIG_ARM64_SVE */
-> +
->   #endif /* _ARM_ARM64_SVE_H */
->   
->   /*
-> diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-> index e776ee704b7d..331da0f3bcc3 100644
-> --- a/xen/arch/arm/include/asm/domain.h
-> +++ b/xen/arch/arm/include/asm/domain.h
-> @@ -67,6 +67,11 @@ struct arch_domain
->       enum domain_type type;
->   #endif
->   
-> +#ifdef CONFIG_ARM64_SVE
-> +    /* max SVE encoded vector length */
-> +    uint8_t sve_vl;
-> +#endif
-> +
->       /* Virtual MMU */
->       struct p2m_domain p2m;
->   
-> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-> index 1528ced5097a..38311f559581 100644
-> --- a/xen/include/public/arch-arm.h
-> +++ b/xen/include/public/arch-arm.h
-> @@ -300,6 +300,8 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
->   struct xen_arch_domainconfig {
->       /* IN/OUT */
->       uint8_t gic_version;
-> +    /* IN - Contains SVE vector length divided by 128 */
-> +    uint8_t sve_vl;
->       /* IN */
->       uint16_t tee_type;
->       /* IN */
+> 
+>> On 25 May 2023, at 09:52, Michal Orzel <michal.orzel@amd.com> wrote:
+>>
+>> Hi Luca,
+>>
+>> Sorry for jumping into this but I just wanted to read the dt binding doc and spotted one thing by accident.
+>>
+>> On 24/05/2023 17:20, Bertrand Marquis wrote:
+>>>
+>>>
+>>> Hi Luca,
+>>>
+>>>> On 23 May 2023, at 09:43, Luca Fancellu <Luca.Fancellu@arm.com> wrote:
+>>>>
+>>>> Add a device tree property in the dom0less domU configuration
+>>>> to enable the guest to use SVE.
+>>>>
+>>>> Update documentation.
+>>>>
+>>>> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+>>>
+>>> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+>>
+>> (...)
+>>>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>>>> index 9202a96d9c28..ba4fe9e165ee 100644
+>>>> --- a/xen/arch/arm/domain_build.c
+>>>> +++ b/xen/arch/arm/domain_build.c
+>>>> @@ -4008,6 +4008,34 @@ void __init create_domUs(void)
+>>>>            d_cfg.max_maptrack_frames = val;
+>>>>        }
+>>>>
+>>>> +        if ( dt_get_property(node, "sve", &val) )
+>>>> +        {
+>>>> +#ifdef CONFIG_ARM64_SVE
+>>>> +            unsigned int sve_vl_bits;
+>>>> +            bool ret = false;
+>>>> +
+>>>> +            if ( !val )
+>>>> +            {
+>>>> +                /* Property found with no value, means max HW VL supported */
+>>>> +                ret = sve_domctl_vl_param(-1, &sve_vl_bits);
+>>>> +            }
+>>>> +            else
+>>>> +            {
+>>>> +                if ( dt_property_read_u32(node, "sve", &val) )
+>>>> +                    ret = sve_domctl_vl_param(val, &sve_vl_bits);
+>>>> +                else
+>>>> +                    panic("Error reading 'sve' property");
+>> Both here and ...
+>>
+>>>> +            }
+>>>> +
+>>>> +            if ( ret )
+>>>> +                d_cfg.arch.sve_vl = sve_encode_vl(sve_vl_bits);
+>>>> +            else
+>>>> +                panic("SVE vector length error\n");
+>>>> +#else
+>>>> +            panic("'sve' property found, but CONFIG_ARM64_SVE not selected");
+>> here you are missing \n at the end of string. If you take a look at panic() implementation,
+>> new line char is not added so in your case it would result in an ugly formatted panic message.
+> 
+> Hi Michal,
+> 
+> Thank you for pointing that out! Indeed there might be some issues, I will fix in the next push.
+With that fixed,
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
--- 
-Julien Grall
+~Michal
+
 
