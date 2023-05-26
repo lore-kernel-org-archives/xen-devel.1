@@ -4,40 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD930C77B7A
-	for <xen-devel@archiver.kernel.org>; Fri, 26 May 2023 12:44:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540121.841629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D62C77B7A
+	for <xen-devel@archiver.kernel.org>; Fri, 26 May 2023 15:01:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540129.841646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2WnP-0008Iq-7Y; Fri, 26 May 2023 12:43:51 +0000
+	id 1q2Yw0-00013n-9d; Fri, 26 May 2023 15:00:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540121.841629; Fri, 26 May 2023 12:43:51 +0000
+Received: by outflank-mailman (output) from mailman id 540129.841646; Fri, 26 May 2023 15:00:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q2WnP-0008Ij-4y; Fri, 26 May 2023 12:43:51 +0000
-Received: by outflank-mailman (input) for mailman id 540121;
- Fri, 26 May 2023 12:43:49 +0000
+	id 1q2Yw0-00013G-4g; Fri, 26 May 2023 15:00:52 +0000
+Received: by outflank-mailman (input) for mailman id 540129;
+ Fri, 26 May 2023 15:00:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7mHh=BP=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1q2WnN-0008IZ-G5
- for xen-devel@lists.xenproject.org; Fri, 26 May 2023 12:43:49 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20630.outbound.protection.outlook.com
- [2a01:111:f400:7d00::630])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EF2/=BP=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
+ id 1q2Yvz-0000zw-51
+ for xen-devel@lists.xenproject.org; Fri, 26 May 2023 15:00:51 +0000
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [2a00:1450:4864:20::432])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f5a072a1-fbc2-11ed-b230-6b7b168915f2;
- Fri, 26 May 2023 14:43:48 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by PA4PR04MB9637.eurprd04.prod.outlook.com (2603:10a6:102:272::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6433.18; Fri, 26 May
- 2023 12:43:45 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::e442:306f:7711:e24c]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::e442:306f:7711:e24c%5]) with mapi id 15.20.6433.016; Fri, 26 May 2023
- 12:43:45 +0000
+ id 19fb77f0-fbd6-11ed-b230-6b7b168915f2;
+ Fri, 26 May 2023 17:00:49 +0200 (CEST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3094910b150so767740f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 26 May 2023 08:00:49 -0700 (PDT)
+Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
+ [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
+ y9-20020a5d4709000000b00307d58b3da9sm5360033wrq.25.2023.05.26.08.00.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 May 2023 08:00:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,137 +47,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f5a072a1-fbc2-11ed-b230-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RvMk3VylcAy5f8Nly3tOySrIRrT5xSA1aHhMmZeAHGg5pWXRt+6WigUSLM1vTKNh20tlqRFF2ZPDA/RYadE1L1630ws6VMoQvMxU+LIp/xU/3B0uBv+DPvIRAgmrxWzcwLz+qrhIJHk7D/QV/B0nzKMDBNc8SQ4xBTbUElsAHNgyNNb0fR8zGXQW1qveCmoTj8HUjw+90sycbz6DeNIo11lPIJ3PmV5T7+j7K0EWw6/WrxTxQV9+HRerjLVGdxCbmq5JlX7jRDJYzUKXNjkdTfoHiDvxhxrxC7GNBgZ3vmNFUBCVbIXU15SwHV2S3pxPY0QIJEIiTc8OVK8bovyVhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LbQjKUhKwl5FaUv+O+ExmUqYGjiB6T0MjPVKu0iLULw=;
- b=Lhi4uaYBB3336tfbjiEfxpduX4ua0lSdK6XeGfQJe1JxUZJR30c/77iAusJg3qt2SJ1pWYf+vplF0dZb/w9FMOt3isbFkHhGvS15CbDa8KGkDMzwRU/KQHhkN/e+sPczYEdp7KyIIJM3BRt/jC/0RPUzfdNEXrQ3e8CuUMSMhCUFrRbjRgGH+d+3PRQqRH8x/BWx9Ov+1acfW27dGoVmU3rJfL8GGsZtT0VVExwk4funphrBM+x2YZmFPt9z0vRTk6Qglvp5QZhDrJJZPRNtYJ7AKDU+CEvrQp3KfO2qAfYJ8U01tBHD6mhmUcvb3j9vKZgdpaSMQKivJgkMy/Ghjg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LbQjKUhKwl5FaUv+O+ExmUqYGjiB6T0MjPVKu0iLULw=;
- b=GxDHCE+CLmlluxP7q4oButl2gCicZsNDmtBkdPQFNUAXHW6DTyR8yWrpmOxZLncJztdPYZptn/FpD8xBYBtfG8uRGqARz1LlPnS4+szgY0SN8a5OMsmh21YsdwXOhmb3IObiECbMDFiIJY4hzzAQz2+SwAH0v06uRZSJy3n0vGcynQMGrzE7A9iFipIu4JsEgsR5AQ2TfNcZYxHMb+VeMmrakZRJPsON1Dltsh3euoJZSL0MQxzSZDeZrxfC4KTaheq1FzvSXQQdLlwKnZNFjNllIcFF8+rhsoMhlselK6dKfEYgEC5PAo37dKRlIh2zb1dzL7P+pK/ryjs1Fqpdjg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <8fbe0439-392b-e7a0-1480-878fb923e58f@suse.com>
-Date: Fri, 26 May 2023 14:43:43 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v2] xen/x86/pvh: handle ACPI RSDT table in PVH Dom0 build
-Content-Language: en-US
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org,
- Xenia.Ragiadakou@amd.com, Stefano Stabellini <stefano.stabellini@amd.com>,
- roger.pau@citrix.com
-References: <20230525231851.700750-1-sstabellini@kernel.org>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230525231851.700750-1-sstabellini@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0221.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ac::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-Inumbo-ID: 19fb77f0-fbd6-11ed-b230-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1685113249; x=1687705249;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Aq+skqTQH86wc6+81w7SMNTxMqLNXZC2DHkkGE1IzhI=;
+        b=T6BO4cqPCbGEhZ5PCjpe91ginA4nXrAzyQmSbfVLZOAvp4Zj7rvlROJFprRc/Vn0nf
+         JQy0rEWso4koi/6FhMLhhDTRNPJsuaL0qguFMWUgOD+Wrx9WPODK66DK+iOUGU/MFe+o
+         jX4+3FGfT93UqOM5G7XvXR/0SH7HaHE5Rr6Ms=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685113249; x=1687705249;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Aq+skqTQH86wc6+81w7SMNTxMqLNXZC2DHkkGE1IzhI=;
+        b=cnItFWs/GSiNG6I5uSKA0gMxRyFc/+PV1Qi9rVwJzaCojU7kXIMgTZmgPZJXsermHB
+         1DE5CBTa1h1iY3LEEXH7u+SmakVbKt2pFWSBAOql1ck7DdfehHpUZZ1sG/ABmK9kIJlw
+         vOBtEX3c7fB1pUnu3cTLYpwzBs6LBcHzj2KJ8VZURSrvzsCQb3i6rgj7AzZ+bRqeQOeC
+         cyatyW4XHDmckcp8Ppq7Rn0HzQPeUojE3jNUFKcEmSvSH6WCXI+kBNJ9DWafgD795PVu
+         rbF58LCZ8uuch9pIa6iI0fRpEU1hz2ZhaeofhwcqI702qiNkV3V/253/8x5zQb/rNdfL
+         nJcA==
+X-Gm-Message-State: AC+VfDw68pMlP3kM4G+NJT7xWNATL5wyOhkmlV8dJm0jJKCXsB4GTYmh
+	BMDonACzCTZIBkR1HwHFbCUeg+OgJk6N8ZaJ+zY=
+X-Google-Smtp-Source: ACHHUZ4/xo+8Sgu4DB3lQdQ43O8WX7nB0TnQXrZXtMOVBIJsH6U4WYusZnccaPILzgVa7xZoMHTUPw==
+X-Received: by 2002:a5d:5750:0:b0:307:8800:bbdb with SMTP id q16-20020a5d5750000000b003078800bbdbmr1427885wrw.58.1685113249085;
+        Fri, 26 May 2023 08:00:49 -0700 (PDT)
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 2/3] x86: Add support for AMD's Automatic IBRS
+Date: Fri, 26 May 2023 16:00:43 +0100
+Message-Id: <20230526150044.31553-3-alejandro.vallejo@cloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230526150044.31553-1-alejandro.vallejo@cloud.com>
+References: <20230526150044.31553-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|PA4PR04MB9637:EE_
-X-MS-Office365-Filtering-Correlation-Id: 553ca0e9-4c1e-43c6-1515-08db5de6d7df
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	EQrpYqk8augXYLzJ0iiy4juTgZdWZwNX0I7AvSYMrxE5qFhbW5X4zxtgvXsE1RV9rK3mBcPSGfbOjQOyyhecTBp8fNS/bAX/L8XZn2abfwJxvDzSUQQVmb8EK1rlI7aike2RoYwYaYmK4RLmi9fTfK+aRiz/iYbpwghUGCuXfB2M0g43R4fCzhHKQXSbfxRHHXfEsYbdN4u3a5WGmanw/32Kvcoq+aRIE/TT7chIwpGW8dn6SwR9+YkFJplJmLuqGhTXTo82TgfZcH7DJOE4Cw1Pq8UMqcFmz58ZmE3qt3gCMn6Ez8hRg3BemtCGn1FEgxUFoF3wPo0v5S2onPw/7E4UnWOhezApnrYyDadTL5rPDIGZp6kU04BBNXNOmuMteuZCRcep8oXJEPFnXl0wEzp5H3m9SLXMaUiHhgc9bEdIrkia9vOiTWrLBOcRupvYMwwASQZS/KRzk0Ctzxvx3HCJr4G2cGiO3PpqbyfrM4pWo5SHyHsmX5v7a5ttiUB/+6Akjsa+TZEQb/CL+kWhIdD22n9fUD8xNR6Umy+NIvfy5swqeSnVlAKHd7VnkAnjJd5MclxaLv4bEjRO44bzlnixzNhN/a6KG+FN6Z8oRvaNreWwufErxPWrt0g0GqT0yeUKIobxLd+N6U1u/HKsmA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(346002)(376002)(39860400002)(136003)(396003)(366004)(451199021)(41300700001)(4326008)(316002)(8676002)(66946007)(6916009)(66556008)(66476007)(2906002)(5660300002)(31686004)(8936002)(6486002)(478600001)(26005)(6506007)(186003)(36756003)(2616005)(6512007)(53546011)(38100700002)(31696002)(86362001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?U0xTcXNKZUZ2ZzhsWld3c084WUQvZDlKNGpWTWJFK1EwbVJibnYxMGkwdU9Z?=
- =?utf-8?B?bEN0MkhnMlgvRE00NzZEZXFvc0Q4M3VGNFJtUUttamhQUDUzT0ZaYmxUQUZD?=
- =?utf-8?B?aEtIYm9MZS9aMXJLQi9VZ2dnclFjWEFrS292MGIwQ29OVnk1em5kQ0p6YndZ?=
- =?utf-8?B?dE1EZDVocU5mOXI5Y3JQamVhRmFBQTRSK01uZnJZS3FlWHNsUmNLekk1Mlc4?=
- =?utf-8?B?VG5aNTRicEZ5Qkw5bDV1Z3l5cEZ3WFM3aGR5RTFkZlRtcjk1WWdhcUZnS1Jm?=
- =?utf-8?B?OGlCMTRPV2E0Z0gyTThVRzZrODNSYVlUbkZGVk0rcU5xVCtab2p0TXU1aDU4?=
- =?utf-8?B?TFdNdGh6UnhOdWhma0xzY3BTakdxVml3RFNEd2RDQ242R3NCbE1LTng3NjBv?=
- =?utf-8?B?djlhUGxJeTZxcFJRU0M3MmY1ZERXTEU0bXFTUjZMejVQMXk4dlh4MFdFUjNT?=
- =?utf-8?B?ZC9QaWs0TjNuSFhJNGNvaG1lR2FlcFZFSFpqenQvUEZlSUowMXU4V0FkV0Vi?=
- =?utf-8?B?SG5nNHYya3E4bHA2eG9TUUxSUTRVQm9ZZm1yMWpCK2xHUE9HbFQrZ0lrVDFX?=
- =?utf-8?B?MkU0VCtxNXhXVEtkL25LelJDeVBNYjJvaDRseWtGRUZYSFV3WkxVQnhCNHZy?=
- =?utf-8?B?bk44QXhpN2p1WmJ5d3ZObkI1dzJpSjhhWWkwbmllbDhtM2l4NE5HS0hqcWlJ?=
- =?utf-8?B?NFlNbE9qY2tzRS9mN1FCTHpMbW94TDV5U2s4alNIS09RRTlkUTFxWFdvejhG?=
- =?utf-8?B?c0R6bzZSNkNzanNvZno1RTBqS3lGc2JaQ0J4UjAvcEtCSFRBM3NsdjQwOEV1?=
- =?utf-8?B?bTZMc3pmY0E1eG4yNjIrR3phRytSekJLM1JCQ0xZd3k2dWRaMEl4NzdVd2lv?=
- =?utf-8?B?elhIRVdzWEJORVlnQS9VSC9USENLU3N5NERXeHZUOUhPNStneGR1ZmovdmNw?=
- =?utf-8?B?SVp1RWkvUEtzcGxBcDdCbXZxU0YrY3Z6Rjc2NFFHa0FoUEZpQllacmZ1ZFNW?=
- =?utf-8?B?TEpEZGdPbEFBRkNzelJFby96WXQrNGN5Rk1vK0tpa2hzVG9pSmNzak9CN21o?=
- =?utf-8?B?L1M1RWRpMlFZNWV1czhwQ1YyYjVxalJ5ekEyKzh5TDlZZ1Z6ZDgzSFR4TkpS?=
- =?utf-8?B?TGRoSVV3Z21MZXVoeE5WYWh0Vy9ySC9JRFBDZG1vU2kzalp5Si92UnNiMDNI?=
- =?utf-8?B?UkJocVQ5bzNNL2l4eE9acnN2cTVOM3lndjRTTlVPU2hCWXZ1Q0wvQ3RmWWJz?=
- =?utf-8?B?SjBYL0dTc2h0U0dKQlZrNndyM0cxY1BtU21GcGtWeEJranZVQ1BybFBxUDMy?=
- =?utf-8?B?R2RwWjVQVVZYa2wyRzdxamRqc3NQS0RGY29SU3liZVNBdExwczFXU25YSUNM?=
- =?utf-8?B?eUlsdW1RM0VpNEFLckIzSFlONWNNVHpHTXRqbjM5Z1E4bFZZM3VrZ1dWdGM3?=
- =?utf-8?B?Z3BqYStLbGdMVUVJLzdhZlBFT0IyRkkzcE1jOE53bGdCQ2d4RmVhY2twYW1q?=
- =?utf-8?B?cnZhcnQyT0R5dk12dmMzTmwrNnRxZXcvSndFOWQ1TWUvUklRd1c4NHl6Mjdp?=
- =?utf-8?B?cEVFaGtGWmlaeHloamY2Y0N4SklaM0hxNDhxa0VuNHRUSE14c0JKNE5RNzYw?=
- =?utf-8?B?cWE0Tk9sTGQwcVRnUDFtZkZVRGlNWFVmVDBITWJzdTVpOXhreis0bWk5WlJI?=
- =?utf-8?B?Z1hRVnhWRlZEQ1YrTVprZEhPNnJMQ3NlVnZOK3N1b0xCS1ppTHNFdlVvRkRI?=
- =?utf-8?B?UitQODltVnk3VVJNV0w0N3QyQTBsWVo1ZlNuYVVaTFVyckZPcUk4Q3l2elg1?=
- =?utf-8?B?aE10MzZmWUpxbHR0V0JVV2RFREN2Z2VBMUlsSzVOeXJ2NUkrS01hWmkrcHI0?=
- =?utf-8?B?VU1hS2ZGOGZlOWJMK204aEM5bFZBSnV5VjdVeDh1SDdIT2tsamJ1OHM1ZXYw?=
- =?utf-8?B?K2tZSzZobXl2VkpqMGQ4ZGxXUlVVbDVzVlpSOXhTYzM3Z2tzOHlVVWtkTnRZ?=
- =?utf-8?B?UVQ1TDVZMTBwOFBicnB4bzlnQjExVXpKTVNOb2dYUU1ITzhRUEprbCtvamhT?=
- =?utf-8?B?Szc4YUkyby9UUDZxSS9qV3VrN1VqQng1Uk90OE5DVENvVGsvSWVTY0lIWVdK?=
- =?utf-8?Q?krE+0OLI4s9hRA0gOqH1Ict/c?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 553ca0e9-4c1e-43c6-1515-08db5de6d7df
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2023 12:43:45.0477
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6KqC426xLfZcoiwI+jWKpZsKCz1sec441aV6/XwpQ75gqa7vabvpA0kTdnhVGbsu2B0e25InRjTjEv6OpF7xvg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9637
+Content-Transfer-Encoding: 8bit
 
-On 26.05.2023 01:18, Stefano Stabellini wrote:
-> --- a/xen/arch/x86/hvm/dom0_build.c
-> +++ b/xen/arch/x86/hvm/dom0_build.c
-> @@ -966,7 +966,16 @@ static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
->          rc = -EINVAL;
->          goto out;
->      }
-> -    xsdt_paddr = rsdp->xsdt_physical_address;
-> +    /*
-> +     * Note the header is the same for both RSDT and XSDT, so it's fine to
-> +     * copy the native RSDT header to the Xen crafted XSDT if no native
-> +     * XSDT is available.
-> +     */
-> +    if ( rsdp->revision > 1 && rsdp->xsdt_physical_address )
-> +        xsdt_paddr = rsdp->xsdt_physical_address;
-> +    else
-> +        xsdt_paddr = rsdp->rsdt_physical_address;
-> +
->      acpi_os_unmap_memory(rsdp, sizeof(*rsdp));
->      table = acpi_os_map_memory(xsdt_paddr, sizeof(*table));
->      if ( !table )
+In cases where AutoIBRS is supported by the host:
 
-To continue context some:
+* Prefer AutoIBRS to retpolines as BTI mitigation in heuristics
+  calculations.
+* Always enable AutoIBRS if IBRS is chosen as a BTI mitigation.
+* Avoid stuffing the RAS/RSB on VMEXIT if AutoIBRS is enabled.
+* Delay setting AutoIBRS until after dom0 is set up, just like setting
+  SPEC_CTRL.
 
-    {
-        printk("Unable to map XSDT\n");
-        rc = -EINVAL;
-        goto out;
-    }
-    xsdt->header = *table;
-    acpi_os_unmap_memory(table, sizeof(*table));
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+---
+ xen/arch/x86/setup.c     |  3 +++
+ xen/arch/x86/smpboot.c   |  3 +++
+ xen/arch/x86/spec_ctrl.c | 52 ++++++++++++++++++++++++++++------------
+ 3 files changed, 43 insertions(+), 15 deletions(-)
 
-You're now pointing the guest's XSDT addr at a table that's really an
-RSDT. After copying, I think you want to adjust the table signature
-('R' -> 'X'). Luckily a revision of 1 is valid for both tables.
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 74e3915a4d..09cfef2676 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2036,6 +2036,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         barrier();
+         wrmsrl(MSR_SPEC_CTRL, default_xen_spec_ctrl);
+         info->last_spec_ctrl = default_xen_spec_ctrl;
++
++        if ( cpu_has_auto_ibrs && (default_xen_spec_ctrl & SPEC_CTRL_IBRS) )
++            write_efer(read_efer() | EFER_AIBRSE);
+     }
+ 
+     /* Copy the cpu info block, and move onto the BSP stack. */
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index cf9bb220f9..1d52c1dd0a 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -376,6 +376,9 @@ void start_secondary(void *unused)
+     {
+         wrmsrl(MSR_SPEC_CTRL, default_xen_spec_ctrl);
+         info->last_spec_ctrl = default_xen_spec_ctrl;
++
++        if ( cpu_has_auto_ibrs && (default_xen_spec_ctrl & SPEC_CTRL_IBRS) )
++            write_efer(read_efer() | EFER_AIBRSE);
+     }
+     update_mcu_opt_ctrl();
+ 
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 50d467f74c..c887fc3df9 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -390,7 +390,7 @@ custom_param("pv-l1tf", parse_pv_l1tf);
+ 
+ static void __init print_details(enum ind_thunk thunk)
+ {
+-    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, max = 0, tmp;
++    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, e21a = 0, max = 0, tmp;
+     uint64_t caps = 0;
+ 
+     /* Collect diagnostics about available mitigations. */
+@@ -399,7 +399,10 @@ static void __init print_details(enum ind_thunk thunk)
+     if ( max >= 2 )
+         cpuid_count(7, 2, &tmp, &tmp, &tmp, &_7d2);
+     if ( boot_cpu_data.extended_cpuid_level >= 0x80000008 )
++    {
+         cpuid(0x80000008, &tmp, &e8b, &tmp, &tmp);
++        cpuid(0x80000021, &e21a, &tmp, &tmp, &tmp);
++    }
+     if ( cpu_has_arch_caps )
+         rdmsrl(MSR_ARCH_CAPABILITIES, caps);
+ 
+@@ -430,11 +433,12 @@ static void __init print_details(enum ind_thunk thunk)
+            (e8b  & cpufeat_mask(X86_FEATURE_IBPB_RET))       ? " IBPB_RET"       : "");
+ 
+     /* Hardware features which need driving to mitigate issues. */
+-    printk("  Hardware features:%s%s%s%s%s%s%s%s%s%s%s%s\n",
++    printk("  Hardware features:%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
+            (e8b  & cpufeat_mask(X86_FEATURE_IBPB)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_IBRSB))          ? " IBPB"           : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_IBRS)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_IBRSB))          ? " IBRS"           : "",
++           (e21a & cpufeat_mask(X86_FEATURE_AUTOMATIC_IBRS)) ? " AUTO_IBRS"      : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_AMD_STIBP)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_STIBP))          ? " STIBP"          : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_AMD_SSBD)) ||
+@@ -468,7 +472,9 @@ static void __init print_details(enum ind_thunk thunk)
+            thunk == THUNK_JMP       ? "JMP" : "?",
+            (!boot_cpu_has(X86_FEATURE_IBRSB) &&
+             !boot_cpu_has(X86_FEATURE_IBRS))         ? "No" :
+-           (default_xen_spec_ctrl & SPEC_CTRL_IBRS)  ? "IBRS+" :  "IBRS-",
++           (cpu_has_auto_ibrs &&
++            (default_xen_spec_ctrl & SPEC_CTRL_IBRS)) ? "AUTO_IBRS+" :
++            (default_xen_spec_ctrl & SPEC_CTRL_IBRS)  ? "IBRS+" : "IBRS-",
+            (!boot_cpu_has(X86_FEATURE_STIBP) &&
+             !boot_cpu_has(X86_FEATURE_AMD_STIBP))    ? "" :
+            (default_xen_spec_ctrl & SPEC_CTRL_STIBP) ? " STIBP+" : " STIBP-",
+@@ -1150,15 +1156,20 @@ void __init init_speculation_mitigations(void)
+     }
+     else
+     {
+-        /*
+-         * Evaluate the safest Branch Target Injection mitigations to use.
+-         * First, begin with compiler-aided mitigations.
+-         */
+-        if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) )
++        /* Evaluate the safest BTI mitigations with lowest overhead */
++        if ( cpu_has_auto_ibrs )
++        {
++            /*
++             * We'd rather use Automatic IBRS if present. It helps in order
++             * to avoid stuffing the RSB manually on every VMEXIT.
++             */
++            ibrs = true;
++        }
++        else if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) )
+         {
+             /*
+-             * On all hardware, we'd like to use retpoline in preference to
+-             * IBRS, but only if it is safe on this hardware.
++             * Otherwise, we'd like to use retpoline in preference to
++             * plain IBRS, but only if it is safe on this hardware.
+              */
+             if ( retpoline_safe() )
+                 thunk = THUNK_RETPOLINE;
+@@ -1357,7 +1368,9 @@ void __init init_speculation_mitigations(void)
+      */
+     if ( opt_rsb_hvm )
+     {
+-        setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
++        /* Automatic IBRS wipes the RSB for us on VMEXIT */
++        if ( !(ibrs && cpu_has_auto_ibrs) )
++            setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
+ 
+         /*
+          * For SVM, Xen's RSB safety actions are performed before STGI, so
+@@ -1582,17 +1595,26 @@ void __init init_speculation_mitigations(void)
+ 
+         bsp_delay_spec_ctrl = !cpu_has_hypervisor && default_xen_spec_ctrl;
+ 
+-        /*
+-         * If delaying MSR_SPEC_CTRL setup, use the same mechanism as
+-         * spec_ctrl_enter_idle(), by using a shadow value of zero.
+-         */
+         if ( bsp_delay_spec_ctrl )
+         {
++            /*
++             * If delaying MSR_SPEC_CTRL setup, use the same mechanism as
++             * spec_ctrl_enter_idle(), by using a shadow value of zero.
++             */
+             info->shadow_spec_ctrl = 0;
+             barrier();
+             info->spec_ctrl_flags |= SCF_use_shadow;
+             barrier();
+         }
++        else if ( ibrs && cpu_has_auto_ibrs )
++        {
++            /*
++             * If we're not delaying setting SPEC_CTRL there's no need to
++             * delay setting Automatic IBRS either. Flip the toggle if
++             * supported and IBRS is expected.
++             */
++            write_efer(read_efer() | EFER_AIBRSE);
++        }
+ 
+         val = bsp_delay_spec_ctrl ? 0 : default_xen_spec_ctrl;
+ 
+-- 
+2.34.1
 
-Jan
 
