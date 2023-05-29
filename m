@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF14C77B7E
-	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:20:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540447.842250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D71A3C77B7E
+	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:27:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540476.842273 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3SUS-0000pS-Jf; Mon, 29 May 2023 02:20:08 +0000
+	id 1q3Sbj-00049f-9m; Mon, 29 May 2023 02:27:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540447.842250; Mon, 29 May 2023 02:20:08 +0000
+Received: by outflank-mailman (output) from mailman id 540476.842273; Mon, 29 May 2023 02:27:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3SUS-0000oA-Fx; Mon, 29 May 2023 02:20:08 +0000
-Received: by outflank-mailman (input) for mailman id 540447;
- Mon, 29 May 2023 02:20:07 +0000
+	id 1q3Sbj-00049G-46; Mon, 29 May 2023 02:27:39 +0000
+Received: by outflank-mailman (input) for mailman id 540476;
+ Mon, 29 May 2023 02:27:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x08u=BS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1q3SUR-0006GL-2j
- for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:07 +0000
+ id 1q3SUm-0006GL-6F
+ for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:28 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 52d3afae-fdc7-11ed-8611-37d641c3527e;
- Mon, 29 May 2023 04:20:05 +0200 (CEST)
+ id 5ebb7b14-fdc7-11ed-8611-37d641c3527e;
+ Mon, 29 May 2023 04:20:25 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C3BB9AB6;
- Sun, 28 May 2023 19:20:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9FD6BAB6;
+ Sun, 28 May 2023 19:21:09 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 34C853F64C;
- Sun, 28 May 2023 19:20:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 4FD823F64C;
+ Sun, 28 May 2023 19:20:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,184 +45,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52d3afae-fdc7-11ed-8611-37d641c3527e
+X-Inumbo-ID: 5ebb7b14-fdc7-11ed-8611-37d641c3527e
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Wei Chen <wei.chen@arm.com>,
+Cc: Henry Wang <Henry.Wang@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v5 09/17] xen/arm: introduce a helper to parse device tree NUMA distance map
-Date: Mon, 29 May 2023 10:19:13 +0800
-Message-Id: <20230529021921.2606623-10-Henry.Wang@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v5 15/17] xen/arm: Set correct per-cpu cpu_core_mask
+Date: Mon, 29 May 2023 10:19:19 +0800
+Message-Id: <20230529021921.2606623-16-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230529021921.2606623-1-Henry.Wang@arm.com>
 References: <20230529021921.2606623-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Wei Chen <wei.chen@arm.com>
+In the common sysctl command XEN_SYSCTL_physinfo, the cores_per_socket
+is calculated based on the cpu_core_mask of CPU0. Currently on Arm
+this is a fixed value 1 (can be checked via xl info), which is not
+correct. This is because during the Arm cpu online process,
+set_cpu_sibling_map() only sets the per-cpu cpu_core_mask for itself.
 
-A NUMA aware device tree will provide a "distance-map" node to
-describe distance between any two nodes. This patch introduce a
-new helper to parse this distance map.
+cores_per_socket refers to the number of cores that belong to the same
+socket (NUMA node). Therefore, this commit introduces a helper function
+numa_set_cpu_core_mask(cpu), which sets the per-cpu cpu_core_mask to
+the cpus in the same NUMA node as cpu. Calling this function at the
+boot time can ensure the correct cpu_core_mask, leading to the correct
+cores_per_socket to be returned by XEN_SYSCTL_physinfo.
 
-Note that, since the NUMA device tree binding does not explicitly
-specify the range of valid node distance, hence rather than
-rejecting node distance values >= 0xff, saturate the distance at
-0xfe, while keeping 0xff for NUMA_NO_DISTANCE, so overall we can
-keep things consistent with ACPI.
-
-Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 ---
 v4 -> v5:
-1. Fix coding style (printk variable type and label indented) and
-   in-code comment.
-2. Check the from/to range to avoid the side-effect of the 8-bit
-   truncation by numa_set_distance().
+1. No change.
 v3 -> v4:
-1. The distance map default value is now NUMA_NO_DISTANCE, update
-   the logic accordingly and add in-code comment as a note.
+1. No change.
 v2 -> v3:
 1. No change.
 v1 -> v2:
-1. Get rid of useless braces.
-2. Use new NUMA status helper.
-3. Use PRIu32 to replace u in print messages.
-4. Fix opposite = __node_distance(to, from).
-5. disable dtb numa info table when we find an invalid data
-   in dtb.
+1. New patch
 ---
- xen/arch/arm/numa-dt.c | 116 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 116 insertions(+)
+ xen/arch/arm/include/asm/numa.h |  7 +++++++
+ xen/arch/arm/numa.c             | 11 +++++++++++
+ xen/arch/arm/setup.c            |  5 +++++
+ 3 files changed, 23 insertions(+)
 
-diff --git a/xen/arch/arm/numa-dt.c b/xen/arch/arm/numa-dt.c
-index cebc7e4300..2fb6663e08 100644
---- a/xen/arch/arm/numa-dt.c
-+++ b/xen/arch/arm/numa-dt.c
-@@ -151,3 +151,119 @@ static int __init fdt_parse_numa_memory_node(const void *fdt, int node,
-     numa_fw_bad();
+diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
+index 71b95a9a62..d4c89909d0 100644
+--- a/xen/arch/arm/include/asm/numa.h
++++ b/xen/arch/arm/include/asm/numa.h
+@@ -46,6 +46,7 @@ extern void numa_set_distance(nodeid_t from, nodeid_t to,
+ extern void numa_detect_cpu_node(unsigned int cpu);
+ extern int numa_device_tree_init(const void *fdt);
+ extern void numa_init(void);
++extern void numa_set_cpu_core_mask(int cpu);
+ 
+ /*
+  * Device tree NUMA doesn't have architecural node id.
+@@ -62,6 +63,12 @@ static inline unsigned int numa_node_to_arch_nid(nodeid_t n)
+ #define cpu_to_node(cpu) 0
+ #define node_to_cpumask(node)   (cpu_online_map)
+ 
++static inline void numa_set_cpu_core_mask(int cpu)
++{
++    cpumask_or(per_cpu(cpu_core_mask, cpu),
++               per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
++}
++
+ /*
+  * TODO: make first_valid_mfn static when NUMA is supported on Arm, this
+  * is required because the dummy helpers are using it.
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+index 13a167fc4f..1ac2df37fc 100644
+--- a/xen/arch/arm/numa.c
++++ b/xen/arch/arm/numa.c
+@@ -52,6 +52,17 @@ int __init arch_numa_setup(const char *opt)
      return -EINVAL;
  }
-+
-+/* Parse NUMA distance map v1 */
-+static int __init fdt_parse_numa_distance_map_v1(const void *fdt, int node)
+ 
++void numa_set_cpu_core_mask(int cpu)
 +{
-+    const struct fdt_property *prop;
-+    const __be32 *matrix;
-+    unsigned int i, entry_count;
-+    int len;
++    nodeid_t node = cpu_to_node[cpu];
 +
-+    printk(XENLOG_INFO "NUMA: parsing numa-distance-map\n");
++    if ( node == NUMA_NO_NODE )
++        node = 0;
 +
-+    prop = fdt_get_property(fdt, node, "distance-matrix", &len);
-+    if ( !prop )
-+    {
-+        printk(XENLOG_WARNING
-+               "NUMA: No distance-matrix property in distance-map\n");
-+        goto invalid_data;
-+    }
-+
-+    if ( len % sizeof(__be32) != 0 )
-+    {
-+        printk(XENLOG_WARNING
-+               "distance-matrix in node is not a multiple of u32\n");
-+        goto invalid_data;
-+    }
-+
-+    entry_count = len / sizeof(__be32);
-+    if ( entry_count == 0 )
-+    {
-+        printk(XENLOG_WARNING "NUMA: Invalid distance-matrix\n");
-+        goto invalid_data;
-+    }
-+
-+    matrix = (const __be32 *)prop->data;
-+    for ( i = 0; i + 2 < entry_count; i += 3 )
-+    {
-+        unsigned int from, to, distance, opposite;
-+
-+        from = dt_next_cell(1, &matrix);
-+        to = dt_next_cell(1, &matrix);
-+        distance = dt_next_cell(1, &matrix);
-+
-+        if ( from >= MAX_NUMNODES || to >= MAX_NUMNODES )
-+        {
-+            printk(XENLOG_WARNING "NUMA: invalid nodes: from=%u to=%u MAX=%u\n",
-+                   from, to, MAX_NUMNODES);
-+            goto invalid_data;
-+        }
-+
-+        if ( (from == to && distance != NUMA_LOCAL_DISTANCE) ||
-+             (from != to && distance <= NUMA_LOCAL_DISTANCE) )
-+        {
-+            printk(XENLOG_WARNING
-+                   "NUMA: Invalid distance: NODE#%u->NODE#%u:%u\n",
-+                   from, to, distance);
-+            goto invalid_data;
-+        }
-+
-+        printk(XENLOG_INFO "NUMA: distance: NODE#%u->NODE#%u:%u\n",
-+               from, to, distance);
-+
-+        /* Get opposite way distance */
-+        opposite = __node_distance(to, from);
-+        /* The default value in node_distance_map is NUMA_NO_DISTANCE */
-+        if ( opposite == NUMA_NO_DISTANCE )
-+        {
-+            /* Bi-directions are not set, set both */
-+            numa_set_distance(from, to, distance);
-+            numa_set_distance(to, from, distance);
-+        }
-+        else
-+        {
-+            /*
-+             * Opposite way distance has been set to a different value.
-+             * It may be a firmware device tree bug?
-+             */
-+            if ( opposite != distance )
-+            {
-+                /*
-+                 * In device tree NUMA distance-matrix binding:
-+                 * https://www.kernel.org/doc/Documentation/devicetree/bindings/numa.txt
-+                 * There is a notes mentions:
-+                 * "Each entry represents distance from first node to
-+                 *  second node. The distances are equal in either
-+                 *  direction."
-+                 *
-+                 * That means device tree doesn't permit this case.
-+                 * But in ACPI spec, it cares to specifically permit this
-+                 * case:
-+                 * "Except for the relative distance from a System Locality
-+                 *  to itself, each relative distance is stored twice in the
-+                 *  matrix. This provides the capability to describe the
-+                 *  scenario where the relative distances for the two
-+                 *  directions between System Localities is different."
-+                 *
-+                 * That means a real machine allows such NUMA configuration.
-+                 * So, place a WARNING here to notice system administrators,
-+                 * is it the special case that they hijack the device tree
-+                 * to support their rare machines?
-+                 */
-+                printk(XENLOG_WARNING
-+                       "Un-matched bi-direction! NODE#%u->NODE#%u:%u, NODE#%u->NODE#%u:%u\n",
-+                       from, to, distance, to, from, opposite);
-+            }
-+
-+            /* Opposite way distance was set before, just set this way */
-+            numa_set_distance(from, to, distance);
-+        }
-+    }
-+
-+    return 0;
-+
-+ invalid_data:
-+    numa_fw_bad();
-+    return -EINVAL;
++    cpumask_or(per_cpu(cpu_core_mask, cpu),
++               per_cpu(cpu_core_mask, cpu), &node_to_cpumask(node));
 +}
++
+ void __init numa_set_distance(nodeid_t from, nodeid_t to,
+                               unsigned int distance)
+ {
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index bfcb0c7b6b..9b586605a6 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -1226,6 +1226,11 @@ void __init start_xen(unsigned long boot_phys_offset,
+     }
+ 
+     printk("Brought up %ld CPUs\n", (long)num_online_cpus());
++
++    /* Set per-cpu cpu_core_mask to cpus that belongs to the same NUMA node. */
++    for_each_online_cpu ( i )
++        numa_set_cpu_core_mask(i);
++
+     /* TODO: smp_cpus_done(); */
+ 
+     /* This should be done in a vpmu driver but we do not have one yet. */
 -- 
 2.25.1
 
