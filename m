@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F313C77B7C
-	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:28:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540493.842302 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BEC7C7EE2F
+	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:28:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540496.842314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbn-0004mP-5I; Mon, 29 May 2023 02:27:43 +0000
+	id 1q3Sbo-00053n-0m; Mon, 29 May 2023 02:27:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540493.842302; Mon, 29 May 2023 02:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 540496.842314; Mon, 29 May 2023 02:27:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbm-0004l6-Qy; Mon, 29 May 2023 02:27:42 +0000
-Received: by outflank-mailman (input) for mailman id 540493;
+	id 1q3Sbn-0004zi-KZ; Mon, 29 May 2023 02:27:43 +0000
+Received: by outflank-mailman (input) for mailman id 540496;
  Mon, 29 May 2023 02:27:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x08u=BS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1q3SUh-0006GL-IW
- for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:23 +0000
+ id 1q3SUT-0005T2-6T
+ for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:09 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 5ce5dd70-fdc7-11ed-8611-37d641c3527e;
- Mon, 29 May 2023 04:20:22 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 54da51f7-fdc7-11ed-b231-6b7b168915f2;
+ Mon, 29 May 2023 04:20:08 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A3C84AB6;
- Sun, 28 May 2023 19:21:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2BF55AB6;
+ Sun, 28 May 2023 19:20:53 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 0BE463F64C;
- Sun, 28 May 2023 19:20:18 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 914E93F64C;
+ Sun, 28 May 2023 19:20:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ce5dd70-fdc7-11ed-8611-37d641c3527e
+X-Inumbo-ID: 54da51f7-fdc7-11ed-b231-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Wei Chen <wei.chen@arm.com>,
@@ -54,9 +54,9 @@ Cc: Wei Chen <wei.chen@arm.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v5 14/17] xen/arm: use CONFIG_NUMA to gate node_online_map in smpboot
-Date: Mon, 29 May 2023 10:19:18 +0800
-Message-Id: <20230529021921.2606623-15-Henry.Wang@arm.com>
+Subject: [PATCH v5 10/17] xen/arm: unified entry to parse all NUMA data from device tree
+Date: Mon, 29 May 2023 10:19:14 +0800
+Message-Id: <20230529021921.2606623-11-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230529021921.2606623-1-Henry.Wang@arm.com>
 References: <20230529021921.2606623-1-Henry.Wang@arm.com>
@@ -65,8 +65,14 @@ Content-Transfer-Encoding: 8bit
 
 From: Wei Chen <wei.chen@arm.com>
 
-node_online_map in smpboot is still needed for Arm when NUMA is
-turned off by Kconfig.
+In this function, we scan the whole device tree to parse CPU node id,
+memory node id and distance-map. Though early_scan_node will invoke
+a handler to process memory nodes. If we want to parse memory node id
+in that handler, we have to embed NUMA parse code in that handler.
+But we still need to scan whole device tree to find CPU NUMA id and
+distance-map. In this case, we include memory NUMA id parse in this
+function too. Another benefit is that we have a unique entry for device
+tree NUMA data parse.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
@@ -78,26 +84,64 @@ v3 -> v4:
 v2 -> v3:
 1. No change.
 v1 -> v2:
-1. No change.
+1. Fix typos in commit message.
+2. Fix code style and align parameters.
+3. Use strncmp to replace memcmp.
 ---
- xen/arch/arm/smpboot.c | 2 ++
- 1 file changed, 2 insertions(+)
+ xen/arch/arm/include/asm/numa.h |  1 +
+ xen/arch/arm/numa-dt.c          | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
 
-diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
-index 7506085540..eedbb57291 100644
---- a/xen/arch/arm/smpboot.c
-+++ b/xen/arch/arm/smpboot.c
-@@ -41,8 +41,10 @@ integer_param("maxcpus", max_cpus);
- /* CPU logical map: map xen cpuid to an MPIDR */
- register_t __cpu_logical_map[NR_CPUS] = { [0 ... NR_CPUS-1] = MPIDR_INVALID };
+diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
+index 2987158d16..15308f5a36 100644
+--- a/xen/arch/arm/include/asm/numa.h
++++ b/xen/arch/arm/include/asm/numa.h
+@@ -44,6 +44,7 @@ extern bool numa_disabled(void);
+ extern void numa_set_distance(nodeid_t from, nodeid_t to,
+                               unsigned int distance);
+ extern void numa_detect_cpu_node(unsigned int cpu);
++extern int numa_device_tree_init(const void *fdt);
  
-+#ifndef CONFIG_NUMA
- /* Fake one node for now. See also asm/numa.h */
- nodemask_t __read_mostly node_online_map = { { [0] = 1UL } };
-+#endif
+ #else
  
- /* Xen stack for bringing up the first CPU. */
- static unsigned char __initdata cpu0_boot_stack[STACK_SIZE]
+diff --git a/xen/arch/arm/numa-dt.c b/xen/arch/arm/numa-dt.c
+index 2fb6663e08..8198a0da2e 100644
+--- a/xen/arch/arm/numa-dt.c
++++ b/xen/arch/arm/numa-dt.c
+@@ -267,3 +267,33 @@ static int __init fdt_parse_numa_distance_map_v1(const void *fdt, int node)
+     numa_fw_bad();
+     return -EINVAL;
+ }
++
++static int __init fdt_scan_numa_nodes(const void *fdt, int node,
++                                      const char *uname, int depth,
++                                      unsigned int address_cells,
++                                      unsigned int size_cells, void *data)
++{
++    int len, ret = 0;
++    const void *prop;
++
++    prop = fdt_getprop(fdt, node, "device_type", &len);
++    if ( prop )
++    {
++        if ( strncmp(prop, "cpu", len) == 0 )
++            ret = fdt_parse_numa_cpu_node(fdt, node);
++        else if ( strncmp(prop, "memory", len) == 0 )
++            ret = fdt_parse_numa_memory_node(fdt, node, uname,
++                                address_cells, size_cells);
++    }
++    else if ( fdt_node_check_compatible(fdt, node,
++                                        "numa-distance-map-v1") == 0 )
++        ret = fdt_parse_numa_distance_map_v1(fdt, node);
++
++    return ret;
++}
++
++/* Initialize NUMA from device tree */
++int __init numa_device_tree_init(const void *fdt)
++{
++    return device_tree_for_each_node(fdt, 0, fdt_scan_numa_nodes, NULL);
++}
 -- 
 2.25.1
 
