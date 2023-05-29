@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BEC7C7EE2F
-	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:28:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540496.842314 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7457C7EE23
+	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:40:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540528.842340 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbo-00053n-0m; Mon, 29 May 2023 02:27:44 +0000
+	id 1q3Snb-0000eb-7k; Mon, 29 May 2023 02:39:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540496.842314; Mon, 29 May 2023 02:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 540528.842340; Mon, 29 May 2023 02:39:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbn-0004zi-KZ; Mon, 29 May 2023 02:27:43 +0000
-Received: by outflank-mailman (input) for mailman id 540496;
- Mon, 29 May 2023 02:27:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q3Snb-0000eU-3r; Mon, 29 May 2023 02:39:55 +0000
+Received: by outflank-mailman (input) for mailman id 540528;
+ Mon, 29 May 2023 02:39:54 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=x08u=BS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1q3SUT-0005T2-6T
- for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:09 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 54da51f7-fdc7-11ed-b231-6b7b168915f2;
- Mon, 29 May 2023 04:20:08 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2BF55AB6;
- Sun, 28 May 2023 19:20:53 -0700 (PDT)
-Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
- [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 914E93F64C;
- Sun, 28 May 2023 19:20:05 -0700 (PDT)
+ <SRS0=mgog=BS=shutemov.name=kirill@srs-se1.protection.inumbo.net>)
+ id 1q3Sna-0000eO-9t
+ for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:39:54 +0000
+Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
+ [64.147.123.20]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 14eb82a5-fdca-11ed-8611-37d641c3527e;
+ Mon, 29 May 2023 04:39:51 +0200 (CEST)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id 68EBC320083A;
+ Sun, 28 May 2023 22:39:45 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute1.internal (MEProxy); Sun, 28 May 2023 22:39:48 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
+ 28 May 2023 22:39:42 -0400 (EDT)
+Received: by box.shutemov.name (Postfix, from userid 1000)
+ id DC398109530; Mon, 29 May 2023 05:39:39 +0300 (+03)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,104 +47,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54da51f7-fdc7-11ed-b231-6b7b168915f2
-From: Henry Wang <Henry.Wang@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Wei Chen <wei.chen@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v5 10/17] xen/arm: unified entry to parse all NUMA data from device tree
-Date: Mon, 29 May 2023 10:19:14 +0800
-Message-Id: <20230529021921.2606623-11-Henry.Wang@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230529021921.2606623-1-Henry.Wang@arm.com>
-References: <20230529021921.2606623-1-Henry.Wang@arm.com>
+X-Inumbo-ID: 14eb82a5-fdca-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shutemov.name;
+	 h=cc:cc:content-type:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1685327985; x=
+	1685414385; bh=CkLoqHnVGlymW7d8k4EFDgQjQ/Ry/XUh7kKzLI6+vlE=; b=W
+	7EccITdMZC0pSl/b1cfDKDyxZJGjSM57ZL2lxSNLgeqB4IerV8LFdI9zEG9Uv3G5
+	XelSpBSDuEiMFswqvgC+uqMSU41P+0pHnc0CfVm+/om40YXV8TBgy4FQ3uAnJ0sd
+	0leGMjl2uPikmG/RgzzVFUtdTyGqRV9PoTLcM/5fX1Q+VN3mISeO/SGfktGELjZZ
+	NdxDajeL23HVze7H5M+ZON2UH8rVcjxVZPc4eeORlBj44HD0strS02gomytli9s7
+	PBU0KbXi2fQ1wTum70GIBqTrZdwfVGFyVfYmU4ShoSq7JbcP7lXhTS7MnuWZ/MSP
+	q530uy7ak3gazTiZQa03w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1685327985; x=1685414385; bh=CkLoqHnVGlymW
+	7d8k4EFDgQjQ/Ry/XUh7kKzLI6+vlE=; b=Ym18twRp4YDc99fHB93LquZJ0Z4zp
+	embehcemE/kKIw1lZWuqx1KLQozamaAeoJM8goXmgoaZW3VB8Dgu+XxcQIKA7hdr
+	ii4iswSCwWVizYzEQhscnjWq5UJr55hgxRG1klgsxQfGEpvQcFkllQ/IlrtZeuNd
+	IkgtrkaFdbgTtMVHe/1BaJAZgG5u4VOq3VGMrtOS9mrpBphl1Sv9YkU1wdeQ//ZD
+	7Iq1V0iH3LUN1FJ4cnVRQ7ifNB0s2ek3SVY9vbksOnEwoqh4M6UrCmTyI4hRZ4zX
+	H05f0ian4GSUghIm00k8vxuIOxyQfYMTfS1T0c/t3HVr9UH3nfIjwNYjw==
+X-ME-Sender: <xms:bhB0ZISkSebDoY7ePFrAHMDJbiQqzCSLtGQEC7GihGdfbUW05RzW4w>
+    <xme:bhB0ZFzAz6AVefd2szJo-ws8Uh2hNyL_zT_y1XDQB_wTeqEm_eppvzBm55tfHAdwY
+    NArb6jCfmWTz_8OPNI>
+X-ME-Received: <xmr:bhB0ZF3ndzPOosUupfAXA2uJY_qxBkSmJjfdBatmCRw5_Peevlwyk7NCarF_NFDe7DIgoQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeekgedgheelucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvfevuffkfhggtggujgesthdttddttddtvdenucfhrhhomhepfdfmihhr
+    ihhllhcutedrucfuhhhuthgvmhhovhdfuceokhhirhhilhhlsehshhhuthgvmhhovhdrnh
+    grmhgvqeenucggtffrrghtthgvrhhnpefhieeghfdtfeehtdeftdehgfehuddtvdeuheet
+    tddtheejueekjeegueeivdektdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+    epmhgrihhlfhhrohhmpehkihhrihhllhesshhhuhhtvghmohhvrdhnrghmvg
+X-ME-Proxy: <xmx:bhB0ZMB8itjXVeTPWF_K8Nmn0VUSqgIS-owqp_lG18bg5bU4EsSh7g>
+    <xmx:bhB0ZBhiT1zEB1GcRZ1uvkLgyLjitMFL8pFJUil6ufu20rCWUASJ9g>
+    <xmx:bhB0ZIrw9F7S8Wzi-Fm-LbfqbFWndpEyT87JM97uPNmv25HvJJw6bQ>
+    <xmx:cRB0ZEAbi-FwJdt75RNpPlGa_l7-Cjrsterd_z2tGu_lje6NiEeMZQ>
+Feedback-ID: ie3994620:Fastmail
+Date: Mon, 29 May 2023 05:39:39 +0300
+From: "Kirill A. Shutemov" <kirill@shutemov.name>
+To: Thomas Gleixner <tglx@linutronix.de>
+Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
+	David Woodhouse <dwmw2@infradead.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Brian Gerst <brgerst@gmail.com>,
+	Arjan van de Veen <arjan@linux.intel.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,	Paul McKenney <paulmck@kernel.org>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Oleksandr Natalenko <oleksandr@natalenko.name>,
+	Paul Menzel <pmenzel@molgen.mpg.de>,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	Piotr Gorski <lucjan.lucjanov@gmail.com>,
+	Usama Arif <usama.arif@bytedance.com>,	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org,	Russell King <linux@armlinux.org.uk>,
+ Arnd Bergmann <arnd@arndb.de>,	linux-arm-kernel@lists.infradead.org,
+	Catalin Marinas <catalin.marinas@arm.com>,	Will Deacon <will@kernel.org>,
+ Guo Ren <guoren@kernel.org>,	linux-csky@vger.kernel.org,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	linux-mips@vger.kernel.org,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>, linux-parisc@vger.kernel.org,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,	linux-riscv@lists.infradead.org,
+	Mark Rutland <mark.rutland@arm.com>,	Sabin Rapan <sabrapan@amazon.com>,
+	"Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>
+Subject: Re: [patch v3 31/36] x86/apic: Provide cpu_primary_thread mask
+Message-ID: <20230529023939.mc2akptpxcg3eh2f@box.shutemov.name>
+References: <20230508181633.089804905@linutronix.de>
+ <20230508185218.962208640@linutronix.de>
+ <20230524204818.3tjlwah2euncxzmh@box.shutemov.name>
+ <87y1lbl7r6.ffs@tglx>
+ <87sfbhlwp9.ffs@tglx>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87sfbhlwp9.ffs@tglx>
 
-From: Wei Chen <wei.chen@arm.com>
+On Sat, May 27, 2023 at 03:40:02PM +0200, Thomas Gleixner wrote:
+> On Fri, May 26 2023 at 12:14, Thomas Gleixner wrote:
+> > On Wed, May 24 2023 at 23:48, Kirill A. Shutemov wrote:
+> >> This patch causes boot regression on TDX guest. The guest crashes on SMP
+> >> bring up.
+> 
+> The below should fix that. Sigh...
 
-In this function, we scan the whole device tree to parse CPU node id,
-memory node id and distance-map. Though early_scan_node will invoke
-a handler to process memory nodes. If we want to parse memory node id
-in that handler, we have to embed NUMA parse code in that handler.
-But we still need to scan whole device tree to find CPU NUMA id and
-distance-map. In this case, we include memory NUMA id parse in this
-function too. Another benefit is that we have a unique entry for device
-tree NUMA data parse.
+Okay, this gets me fixes the boot for TDX guest:
 
-Signed-off-by: Wei Chen <wei.chen@arm.com>
-Signed-off-by: Henry Wang <Henry.Wang@arm.com>
----
-v4 -> v5:
-1. No change.
-v3 -> v4:
-1. No change.
-v2 -> v3:
-1. No change.
-v1 -> v2:
-1. Fix typos in commit message.
-2. Fix code style and align parameters.
-3. Use strncmp to replace memcmp.
----
- xen/arch/arm/include/asm/numa.h |  1 +
- xen/arch/arm/numa-dt.c          | 30 ++++++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
+Tested-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
 
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index 2987158d16..15308f5a36 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/arch/arm/include/asm/numa.h
-@@ -44,6 +44,7 @@ extern bool numa_disabled(void);
- extern void numa_set_distance(nodeid_t from, nodeid_t to,
-                               unsigned int distance);
- extern void numa_detect_cpu_node(unsigned int cpu);
-+extern int numa_device_tree_init(const void *fdt);
- 
- #else
- 
-diff --git a/xen/arch/arm/numa-dt.c b/xen/arch/arm/numa-dt.c
-index 2fb6663e08..8198a0da2e 100644
---- a/xen/arch/arm/numa-dt.c
-+++ b/xen/arch/arm/numa-dt.c
-@@ -267,3 +267,33 @@ static int __init fdt_parse_numa_distance_map_v1(const void *fdt, int node)
-     numa_fw_bad();
-     return -EINVAL;
- }
-+
-+static int __init fdt_scan_numa_nodes(const void *fdt, int node,
-+                                      const char *uname, int depth,
-+                                      unsigned int address_cells,
-+                                      unsigned int size_cells, void *data)
-+{
-+    int len, ret = 0;
-+    const void *prop;
-+
-+    prop = fdt_getprop(fdt, node, "device_type", &len);
-+    if ( prop )
-+    {
-+        if ( strncmp(prop, "cpu", len) == 0 )
-+            ret = fdt_parse_numa_cpu_node(fdt, node);
-+        else if ( strncmp(prop, "memory", len) == 0 )
-+            ret = fdt_parse_numa_memory_node(fdt, node, uname,
-+                                address_cells, size_cells);
-+    }
-+    else if ( fdt_node_check_compatible(fdt, node,
-+                                        "numa-distance-map-v1") == 0 )
-+        ret = fdt_parse_numa_distance_map_v1(fdt, node);
-+
-+    return ret;
-+}
-+
-+/* Initialize NUMA from device tree */
-+int __init numa_device_tree_init(const void *fdt)
-+{
-+    return device_tree_for_each_node(fdt, 0, fdt_scan_numa_nodes, NULL);
-+}
+But it gets broken again on "x86/smpboot: Implement a bit spinlock to
+protect the realmode stack" with
+
+[    0.554079] .... node  #0, CPUs:        #1  #2
+[    0.738071] Callback from call_rcu_tasks() invoked.
+[   10.562065] CPU2 failed to report alive state
+[   10.566337]   #3
+[   20.570066] CPU3 failed to report alive state
+[   20.574268]   #4
+...
+
+Notably CPU1 is missing from "failed to report" list. So CPU1 takes the
+lock fine, but seems never unlocks it.
+
+Maybe trampoline_lock(%rip) in head_64.S somehow is not the same as
+&tr_lock in trampoline_64.S. I donno.
+
+I haven't find the root cause yet. But bypassing locking in
+LOAD_REALMODE_ESP makes the issue go away.
+
+I will look more into it.
+
 -- 
-2.25.1
-
+  Kiryl Shutsemau / Kirill A. Shutemov
 
