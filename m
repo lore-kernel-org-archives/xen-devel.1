@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D71A3C77B7E
-	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:27:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540476.842273 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E1FDC77B7C
+	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:27:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540492.842294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbj-00049f-9m; Mon, 29 May 2023 02:27:39 +0000
+	id 1q3Sbm-0004jd-Ns; Mon, 29 May 2023 02:27:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540476.842273; Mon, 29 May 2023 02:27:39 +0000
+Received: by outflank-mailman (output) from mailman id 540492.842294; Mon, 29 May 2023 02:27:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbj-00049G-46; Mon, 29 May 2023 02:27:39 +0000
-Received: by outflank-mailman (input) for mailman id 540476;
- Mon, 29 May 2023 02:27:38 +0000
+	id 1q3Sbm-0004jI-K1; Mon, 29 May 2023 02:27:42 +0000
+Received: by outflank-mailman (input) for mailman id 540492;
+ Mon, 29 May 2023 02:27:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x08u=BS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1q3SUm-0006GL-6F
- for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:28 +0000
+ id 1q3SUc-0006GL-4Y
+ for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:18 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 5ebb7b14-fdc7-11ed-8611-37d641c3527e;
- Mon, 29 May 2023 04:20:25 +0200 (CEST)
+ id 58e20ee3-fdc7-11ed-8611-37d641c3527e;
+ Mon, 29 May 2023 04:20:15 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9FD6BAB6;
- Sun, 28 May 2023 19:21:09 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D6395C14;
+ Sun, 28 May 2023 19:20:59 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 4FD823F64C;
- Sun, 28 May 2023 19:20:22 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 476F93F64C;
+ Sun, 28 May 2023 19:20:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,115 +45,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5ebb7b14-fdc7-11ed-8611-37d641c3527e
+X-Inumbo-ID: 58e20ee3-fdc7-11ed-8611-37d641c3527e
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Henry Wang <Henry.Wang@arm.com>,
+Cc: Wei Chen <wei.chen@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 15/17] xen/arm: Set correct per-cpu cpu_core_mask
-Date: Mon, 29 May 2023 10:19:19 +0800
-Message-Id: <20230529021921.2606623-16-Henry.Wang@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [PATCH v5 12/17] xen/arm: enable device tree based NUMA in system init
+Date: Mon, 29 May 2023 10:19:16 +0800
+Message-Id: <20230529021921.2606623-13-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230529021921.2606623-1-Henry.Wang@arm.com>
 References: <20230529021921.2606623-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In the common sysctl command XEN_SYSCTL_physinfo, the cores_per_socket
-is calculated based on the cpu_core_mask of CPU0. Currently on Arm
-this is a fixed value 1 (can be checked via xl info), which is not
-correct. This is because during the Arm cpu online process,
-set_cpu_sibling_map() only sets the per-cpu cpu_core_mask for itself.
+From: Wei Chen <wei.chen@arm.com>
 
-cores_per_socket refers to the number of cores that belong to the same
-socket (NUMA node). Therefore, this commit introduces a helper function
-numa_set_cpu_core_mask(cpu), which sets the per-cpu cpu_core_mask to
-the cpus in the same NUMA node as cpu. Calling this function at the
-boot time can ensure the correct cpu_core_mask, leading to the correct
-cores_per_socket to be returned by XEN_SYSCTL_physinfo.
+In this patch, we can start to create NUMA system that is
+based on device tree.
 
+Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
 ---
 v4 -> v5:
-1. No change.
+1. Fix coding style: label indented by 1 space.
 v3 -> v4:
 1. No change.
 v2 -> v3:
 1. No change.
 v1 -> v2:
-1. New patch
+1. replace ~0 by INVALID_PADDR.
+2. only print error messages for invalid dtb data.
+3. remove unnecessary return.
+4. remove the parameter of numa_init.
 ---
- xen/arch/arm/include/asm/numa.h |  7 +++++++
- xen/arch/arm/numa.c             | 11 +++++++++++
- xen/arch/arm/setup.c            |  5 +++++
- 3 files changed, 23 insertions(+)
+ xen/arch/arm/include/asm/numa.h |  5 +++
+ xen/arch/arm/numa.c             | 57 +++++++++++++++++++++++++++++++++
+ xen/arch/arm/setup.c            |  7 ++++
+ 3 files changed, 69 insertions(+)
 
 diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index 71b95a9a62..d4c89909d0 100644
+index 15308f5a36..55ac4665db 100644
 --- a/xen/arch/arm/include/asm/numa.h
 +++ b/xen/arch/arm/include/asm/numa.h
-@@ -46,6 +46,7 @@ extern void numa_set_distance(nodeid_t from, nodeid_t to,
+@@ -45,6 +45,7 @@ extern void numa_set_distance(nodeid_t from, nodeid_t to,
+                               unsigned int distance);
  extern void numa_detect_cpu_node(unsigned int cpu);
  extern int numa_device_tree_init(const void *fdt);
- extern void numa_init(void);
-+extern void numa_set_cpu_core_mask(int cpu);
++extern void numa_init(void);
  
- /*
-  * Device tree NUMA doesn't have architecural node id.
-@@ -62,6 +63,12 @@ static inline unsigned int numa_node_to_arch_nid(nodeid_t n)
- #define cpu_to_node(cpu) 0
- #define node_to_cpumask(node)   (cpu_online_map)
+ #else
  
-+static inline void numa_set_cpu_core_mask(int cpu)
-+{
-+    cpumask_or(per_cpu(cpu_core_mask, cpu),
-+               per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
-+}
-+
- /*
-  * TODO: make first_valid_mfn static when NUMA is supported on Arm, this
-  * is required because the dummy helpers are using it.
-diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
-index 13a167fc4f..1ac2df37fc 100644
---- a/xen/arch/arm/numa.c
-+++ b/xen/arch/arm/numa.c
-@@ -52,6 +52,17 @@ int __init arch_numa_setup(const char *opt)
-     return -EINVAL;
+@@ -90,6 +91,10 @@ static inline void numa_detect_cpu_node(unsigned int cpu)
+ {
  }
  
-+void numa_set_cpu_core_mask(int cpu)
++static inline void numa_init(void)
 +{
-+    nodeid_t node = cpu_to_node[cpu];
-+
-+    if ( node == NUMA_NO_NODE )
-+        node = 0;
-+
-+    cpumask_or(per_cpu(cpu_core_mask, cpu),
-+               per_cpu(cpu_core_mask, cpu), &node_to_cpumask(node));
 +}
 +
- void __init numa_set_distance(nodeid_t from, nodeid_t to,
-                               unsigned int distance)
+ #endif
+ 
+ #define arch_want_default_dmazone() (false)
+diff --git a/xen/arch/arm/numa.c b/xen/arch/arm/numa.c
+index 08e15ebbb0..13a167fc4f 100644
+--- a/xen/arch/arm/numa.c
++++ b/xen/arch/arm/numa.c
+@@ -18,7 +18,11 @@
+  *
+  */
+ #include <xen/init.h>
++#include <xen/device_tree.h>
++#include <xen/nodemask.h>
+ #include <xen/numa.h>
++#include <xen/pfn.h>
++#include <xen/acpi.h>
+ 
+ enum dt_numa_status __ro_after_init device_tree_numa = DT_NUMA_DEFAULT;
+ 
+@@ -104,6 +108,59 @@ unsigned char __node_distance(nodeid_t from, nodeid_t to)
+     return node_distance_map[from][to];
+ }
+ 
++void __init numa_init(void)
++{
++    unsigned int idx;
++    paddr_t ram_start = INVALID_PADDR;
++    paddr_t ram_size = 0;
++    paddr_t ram_end = 0;
++
++    /* NUMA has been turned off through Xen parameters */
++    if ( numa_off )
++        goto mem_init;
++
++    /* Initialize NUMA from device tree when system is not ACPI booted */
++    if ( acpi_disabled )
++    {
++        int ret = numa_device_tree_init(device_tree_flattened);
++        if ( ret )
++        {
++            numa_off = true;
++            if ( ret == -EINVAL )
++                printk(XENLOG_WARNING
++                       "Init NUMA from device tree failed, ret=%d\n", ret);
++        }
++    }
++    else
++    {
++        /* We don't support NUMA for ACPI boot currently */
++        printk(XENLOG_WARNING
++               "ACPI NUMA has not been supported yet, NUMA off!\n");
++        numa_off = true;
++    }
++
++ mem_init:
++    /*
++     * Find the minimal and maximum address of RAM, NUMA will
++     * build a memory to node mapping table for the whole range.
++     */
++    ram_start = bootinfo.mem.bank[0].start;
++    ram_size  = bootinfo.mem.bank[0].size;
++    ram_end   = ram_start + ram_size;
++    for ( idx = 1 ; idx < bootinfo.mem.nr_banks; idx++ )
++    {
++        paddr_t bank_start = bootinfo.mem.bank[idx].start;
++        paddr_t bank_size = bootinfo.mem.bank[idx].size;
++        paddr_t bank_end = bank_start + bank_size;
++
++        ram_size  = ram_size + bank_size;
++        ram_start = min(ram_start, bank_start);
++        ram_end   = max(ram_end, bank_end);
++    }
++
++    numa_initmem_init(PFN_UP(ram_start), PFN_DOWN(ram_end));
++}
++
+ int __init arch_get_ram_range(unsigned int idx, paddr_t *start, paddr_t *end)
  {
+     if ( idx >= bootinfo.mem.nr_banks )
 diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index bfcb0c7b6b..9b586605a6 100644
+index ab9eb6fb80..bfcb0c7b6b 100644
 --- a/xen/arch/arm/setup.c
 +++ b/xen/arch/arm/setup.c
-@@ -1226,6 +1226,11 @@ void __init start_xen(unsigned long boot_phys_offset,
-     }
+@@ -1121,6 +1121,13 @@ void __init start_xen(unsigned long boot_phys_offset,
+     /* Parse the ACPI tables for possible boot-time configuration */
+     acpi_boot_table_init();
  
-     printk("Brought up %ld CPUs\n", (long)num_online_cpus());
++    /*
++     * Try to initialize NUMA system, if failed, the system will
++     * fallback to uniform system which means system has only 1
++     * NUMA node.
++     */
++    numa_init();
 +
-+    /* Set per-cpu cpu_core_mask to cpus that belongs to the same NUMA node. */
-+    for_each_online_cpu ( i )
-+        numa_set_cpu_core_mask(i);
-+
-     /* TODO: smp_cpus_done(); */
+     end_boot_allocator();
  
-     /* This should be done in a vpmu driver but we do not have one yet. */
+     /*
 -- 
 2.25.1
 
