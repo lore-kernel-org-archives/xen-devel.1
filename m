@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED782C7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:27:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540488.842290 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2ADEC77B7E
+	for <xen-devel@archiver.kernel.org>; Mon, 29 May 2023 02:27:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540475.842270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbm-0004g1-Ei; Mon, 29 May 2023 02:27:42 +0000
+	id 1q3Sbj-00048p-1t; Mon, 29 May 2023 02:27:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540488.842290; Mon, 29 May 2023 02:27:42 +0000
+Received: by outflank-mailman (output) from mailman id 540475.842270; Mon, 29 May 2023 02:27:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3Sbm-0004fu-Bf; Mon, 29 May 2023 02:27:42 +0000
-Received: by outflank-mailman (input) for mailman id 540488;
- Mon, 29 May 2023 02:27:40 +0000
+	id 1q3Sbi-00048a-TO; Mon, 29 May 2023 02:27:38 +0000
+Received: by outflank-mailman (input) for mailman id 540475;
+ Mon, 29 May 2023 02:27:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x08u=BS=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1q3SUd-0005T2-7U
- for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:19 +0000
+ id 1q3SUo-0005T2-Gz
+ for xen-devel@lists.xenproject.org; Mon, 29 May 2023 02:20:30 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 5aecbb5a-fdc7-11ed-b231-6b7b168915f2;
- Mon, 29 May 2023 04:20:18 +0200 (CEST)
+ id 60a4ea8c-fdc7-11ed-b231-6b7b168915f2;
+ Mon, 29 May 2023 04:20:28 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 55B2FAB6;
- Sun, 28 May 2023 19:21:03 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E72D6AB6;
+ Sun, 28 May 2023 19:21:12 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.5])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B1E103F64C;
- Sun, 28 May 2023 19:20:15 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 585163F64C;
+ Sun, 28 May 2023 19:20:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5aecbb5a-fdc7-11ed-b231-6b7b168915f2
+X-Inumbo-ID: 60a4ea8c-fdc7-11ed-b231-6b7b168915f2
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Wei Chen <wei.chen@arm.com>,
@@ -54,9 +54,9 @@ Cc: Wei Chen <wei.chen@arm.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH v5 13/17] xen/arm: implement numa_node_to_arch_nid for device tree NUMA
-Date: Mon, 29 May 2023 10:19:17 +0800
-Message-Id: <20230529021921.2606623-14-Henry.Wang@arm.com>
+Subject: [PATCH v5 16/17] xen/arm: Provide Kconfig options for Arm to enable NUMA
+Date: Mon, 29 May 2023 10:19:20 +0800
+Message-Id: <20230529021921.2606623-17-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230529021921.2606623-1-Henry.Wang@arm.com>
 References: <20230529021921.2606623-1-Henry.Wang@arm.com>
@@ -65,8 +65,21 @@ Content-Transfer-Encoding: 8bit
 
 From: Wei Chen <wei.chen@arm.com>
 
-Device tree based NUMA doesn't have the proximity domain like
-ACPI. So we can return node id directly as arch nid.
+Arm platforms support both ACPI and device tree. We don't
+want users to select device tree NUMA or ACPI NUMA manually.
+We hope users can just enable NUMA for Arm, and device tree
+NUMA and ACPI NUMA can be selected depends on device tree
+feature and ACPI feature status automatically. In this case,
+these two kinds of NUMA support code can be co-exist in one
+Xen binary. Xen can check feature flags to decide using
+device tree or ACPI as NUMA based firmware.
+
+So in this patch, we introduce a generic option:
+CONFIG_ARM_NUMA for users to enable NUMA for Arm.
+And one CONFIG_DEVICE_TREE_NUMA option for ARM_NUMA
+to select when HAS_DEVICE_TREE option is enabled.
+Once when ACPI NUMA for Arm is supported, ACPI_NUMA
+can be selected here too.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Henry Wang <Henry.Wang@arm.com>
@@ -78,31 +91,33 @@ v3 -> v4:
 v2 -> v3:
 1. No change.
 v1 -> v2:
-1. Use numa_node_to_arch_nid instead of dummy node_to_pxm.
+1. Remove the condition of selecting DEVICE_TREE_NUMA.
 ---
- xen/arch/arm/include/asm/numa.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ xen/arch/arm/Kconfig | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/numa.h b/xen/arch/arm/include/asm/numa.h
-index 55ac4665db..71b95a9a62 100644
---- a/xen/arch/arm/include/asm/numa.h
-+++ b/xen/arch/arm/include/asm/numa.h
-@@ -47,6 +47,15 @@ extern void numa_detect_cpu_node(unsigned int cpu);
- extern int numa_device_tree_init(const void *fdt);
- extern void numa_init(void);
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 239d3aed3c..e751ad50d1 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -39,6 +39,17 @@ config ACPI
+ config ARM_EFI
+ 	bool
  
-+/*
-+ * Device tree NUMA doesn't have architecural node id.
-+ * So we can just return node id as arch nid.
-+ */
-+static inline unsigned int numa_node_to_arch_nid(nodeid_t n)
-+{
-+    return n;
-+}
++config ARM_NUMA
++	bool "Arm NUMA (Non-Uniform Memory Access) Support (UNSUPPORTED)" if UNSUPPORTED
++	depends on HAS_DEVICE_TREE
++	select DEVICE_TREE_NUMA
++	help
++	  Enable Non-Uniform Memory Access (NUMA) for Arm architecutres
 +
- #else
- 
- /* Fake one node for now. See also node_online_map. */
++config DEVICE_TREE_NUMA
++	bool
++	select NUMA
++
+ config GICV3
+ 	bool "GICv3 driver"
+ 	depends on !NEW_VGIC
 -- 
 2.25.1
 
