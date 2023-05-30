@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39836C77B73
-	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 16:57:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.541286.843879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253ADC77B7A
+	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 16:58:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.541290.843890 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q42eJ-0000vq-EM; Tue, 30 May 2023 16:56:43 +0000
+	id 1q42fN-0001Rb-Nq; Tue, 30 May 2023 16:57:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 541286.843879; Tue, 30 May 2023 16:56:43 +0000
+Received: by outflank-mailman (output) from mailman id 541290.843890; Tue, 30 May 2023 16:57:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q42eJ-0000vj-Bb; Tue, 30 May 2023 16:56:43 +0000
-Received: by outflank-mailman (input) for mailman id 541286;
- Tue, 30 May 2023 16:56:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q42fN-0001RU-LB; Tue, 30 May 2023 16:57:49 +0000
+Received: by outflank-mailman (input) for mailman id 541290;
+ Tue, 30 May 2023 16:57:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zKAq=BT=flex--seanjc.bounces.google.com=3wyp2ZAYKCRwK62FB48GG8D6.4GEP6F-56N6DDAKLK.P6FHJGB64L.GJ8@srs-se1.protection.inumbo.net>)
- id 1q42eH-0000vd-U8
- for xen-devel@lists.xenproject.org; Tue, 30 May 2023 16:56:41 +0000
-Received: from mail-pg1-x549.google.com (mail-pg1-x549.google.com
- [2607:f8b0:4864:20::549])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f0568309-ff0a-11ed-8611-37d641c3527e;
- Tue, 30 May 2023 18:56:37 +0200 (CEST)
-Received: by mail-pg1-x549.google.com with SMTP id
- 41be03b00d2f7-53f44c2566dso2594688a12.2
- for <xen-devel@lists.xenproject.org>; Tue, 30 May 2023 09:56:37 -0700 (PDT)
+ <SRS0=wXld=BT=gmail.com=bobbyeshleman@srs-se1.protection.inumbo.net>)
+ id 1q42fM-0001RD-E2
+ for xen-devel@lists.xenproject.org; Tue, 30 May 2023 16:57:48 +0000
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [2607:f8b0:4864:20::433])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 19aed878-ff0b-11ed-b231-6b7b168915f2;
+ Tue, 30 May 2023 18:57:46 +0200 (CEST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-64d2f99c8c3so3439286b3a.0
+ for <xen-devel@lists.xenproject.org>; Tue, 30 May 2023 09:57:46 -0700 (PDT)
+Received: from localhost (ec2-52-9-159-93.us-west-1.compute.amazonaws.com.
+ [52.9.159.93]) by smtp.gmail.com with ESMTPSA id
+ k8-20020a635a48000000b0052cbd854927sm8830281pgm.18.2023.05.30.09.57.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 May 2023 09:57:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,91 +47,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f0568309-ff0a-11ed-8611-37d641c3527e
+X-Inumbo-ID: 19aed878-ff0b-11ed-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1685465796; x=1688057796;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=zUIF7qczhJfL0tzqN+Wk4Y8s0fyjf+/encaeJ8i8zo8=;
-        b=RbEfFAAf2kcBOjvt74s5UVZKgWrUGFDUy+sd7fobbo+fCQD0px8ov63e8OeZXSJ8fh
-         HG4hHegtTrDVP700YjLnXteCxE6guE54Vbd8zH/t2rCli4QSiy5tmFSofJYIZgEMn1zj
-         Qsp4LrQqCDZwVqc25d9x6Ot8kXQSMfXIZ9gqaurkMyf4wf+UYa4w1aAbMwazKXlrtuiS
-         Kk616ydOwBRsdeEiUal2WEabr5ltpvlk9LlkPPxhELMLDRXHyhZJZ3Til0KRYe81otj+
-         tS/p/kiytx6/XARdF4p/h7eKZckIQCkqvbC4w6UMN19z2FxazUFpiFD2Hr1ZsYeU6F4t
-         XCEw==
+        d=gmail.com; s=20221208; t=1685465865; x=1688057865;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=iuWqQbNxc4T0f/DD5bEBy0I3LDWfGOw8QZp3us3pmgE=;
+        b=A9AvHKYUdzFNAqzJpECrFSlpog12ItecR62EC7N/160mH8oO/LuQof1MztDRk5ZlGP
+         EvMiKoOoJhcTjrbStdshlQZXsAFeTamcUtvVxhNzFdKHGMuD0FNnQA0cgqXo//viZVA4
+         mdrGfsDayef8NCSQVHWe5KjAR15R5qCAB494JPe9Lohd37WbSOZSQcoB7UoULy9SwrWN
+         GWUJUGFLpHokW1d2XTye9RkbcjONc40tSbck382uhdiXBSSfdOkogXIdtOjRu6gv8KvW
+         bTv5kWAeM338pA0ggXAoo3LHh+6mGoAxZZmkzNuCcmFDRvtkmodWW7n2DRYcEcMxCO0R
+         t3wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685465796; x=1688057796;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zUIF7qczhJfL0tzqN+Wk4Y8s0fyjf+/encaeJ8i8zo8=;
-        b=RHEdGEght3UPOQv0PilZND+qGeiHXiUJXHQWL1gDZsR3eCtdFXX1V7a/lUjwa133Jk
-         7RVWt9zCjbhrCQ444p35hiHtPaSEqJQ/Y/ByW37mNTPY7+e/Fsg/1cAwLKui13+jbVXt
-         /BzC47Jkv9KDkcnNppU3SKb+PaQ2jwtaPcFCyyHdCi+hTzNwoc1voRyvv6oXhTOrAt6p
-         m+EMCVUFGgMUbq+g0rcpFzckQIbWsCoTBWoR7/YC8+8Q2H0VCft0RQOZ5VXtU88kRhkv
-         OHn9ldyw0QOo0lrUQzDjqB/ZLX02jJ0k1C4C3YRRqjBkx/N4jZb9FfCFf+HHuNdortNa
-         h0bg==
-X-Gm-Message-State: AC+VfDykoNhAe5MvL1ApXQrlBrldix6qF28c1sCByi11kMUrVtG62oei
-	tqzybxiHjD6Z6NA+anVe0zVvSLSsX6o=
-X-Google-Smtp-Source: ACHHUZ6elIb9Xawt5kHr4iARsASD1eAmXyJrU7yMOnucjGsQDVEv6w8ENbA+wCa+rqHlmqnxd6WixqOcZs8=
-X-Received: from zagreus.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:5c37])
- (user=seanjc job=sendgmr) by 2002:a63:512:0:b0:52c:9e55:61ee with SMTP id
- 18-20020a630512000000b0052c9e5561eemr545525pgf.3.1685465795799; Tue, 30 May
- 2023 09:56:35 -0700 (PDT)
-Date: Tue, 30 May 2023 09:56:34 -0700
-In-Reply-To: <87wn0pizbl.ffs@tglx>
-Mime-Version: 1.0
-References: <87sfbhlwp9.ffs@tglx> <20230529023939.mc2akptpxcg3eh2f@box.shutemov.name>
- <87bki3kkfi.ffs@tglx> <20230529203129.sthnhzgds7ynddxd@box.shutemov.name>
- <20230530005428.jyrc2ezx5raohlrt@box.shutemov.name> <87mt1mjhk3.ffs@tglx>
- <87jzwqjeey.ffs@tglx> <87cz2ija1e.ffs@tglx> <20230530122951.2wu5rwcu26ofov6f@box.shutemov.name>
- <87wn0pizbl.ffs@tglx>
-Message-ID: <ZHYqwsCURnrFdsVm@google.com>
-Subject: Re: [patch] x86/smpboot: Disable parallel bootup if cc_vendor != NONE
-From: Sean Christopherson <seanjc@google.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-Cc: "Kirill A. Shutemov" <kirill@shutemov.name>, Tom Lendacky <thomas.lendacky@amd.com>, 
-	LKML <linux-kernel@vger.kernel.org>, x86@kernel.org, 
-	David Woodhouse <dwmw2@infradead.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Brian Gerst <brgerst@gmail.com>, Arjan van de Veen <arjan@linux.intel.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Paul McKenney <paulmck@kernel.org>, 
-	Oleksandr Natalenko <oleksandr@natalenko.name>, Paul Menzel <pmenzel@molgen.mpg.de>, 
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>, Piotr Gorski <lucjan.lucjanov@gmail.com>, 
-	Usama Arif <usama.arif@bytedance.com>, Juergen Gross <jgross@suse.com>, 
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, 
-	Russell King <linux@armlinux.org.uk>, Arnd Bergmann <arnd@arndb.de>, 
-	linux-arm-kernel@lists.infradead.org, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>, 
-	linux-csky@vger.kernel.org, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	linux-mips@vger.kernel.org, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	linux-parisc@vger.kernel.org, Paul Walmsley <paul.walmsley@sifive.com>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, linux-riscv@lists.infradead.org, 
-	Mark Rutland <mark.rutland@arm.com>, Sabin Rapan <sabrapan@amazon.com>, 
-	"Michael Kelley (LINUX)" <mikelley@microsoft.com>, Dave Hansen <dave.hansen@linux.intel.com>
-Content-Type: text/plain; charset="us-ascii"
+        d=1e100.net; s=20221208; t=1685465865; x=1688057865;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iuWqQbNxc4T0f/DD5bEBy0I3LDWfGOw8QZp3us3pmgE=;
+        b=dcMYtrWqylYxOpetn/lxRztKPicI0we+jsFlVlyuB/eXw4yDseHax/4wAXqzboe3GA
+         yxodwCIl8HaX5o4DCUrbfcJifyaZNsoTLRNnQ9OaB5FVcL5NlyqWPKIisydjeH6PWWW1
+         id+VVAZNuFs8cwwj15vLDSA5u5Stn0zZfIQxEQnxp/rDhl4+5+bEkn2RI7LjSJYbsKNx
+         KCbXzbRX+KDSRqyxiQYkiZ6boKPV4G67pkfkSOKOmWhg3ma/H7BVgkCz3qtcifPPCgrI
+         s00m0X13RRK5m0flM7yu+OjqbmmQOfu792Jg6aNOFfFyXmqRxrV/8/1ssyQp5yqLRBII
+         qJ5A==
+X-Gm-Message-State: AC+VfDxVr+cnZX1Pa5vEr6TRV4n+8IdhR/zb1ju/TSFBbZa0Zf7Sxwc/
+	ZNQUXFlDI33zZsGss64OQoY=
+X-Google-Smtp-Source: ACHHUZ4M9TQT1zLBpaeWEjnKr3UQ82+8kna3FkFH5W/yTFjYxZnzHn7aNfvFkFOw6DtihRA3RxdRBw==
+X-Received: by 2002:a05:6a20:8e1d:b0:10e:96b5:45fa with SMTP id y29-20020a056a208e1d00b0010e96b545famr2942711pzj.43.1685465865016;
+        Tue, 30 May 2023 09:57:45 -0700 (PDT)
+Date: Tue, 30 May 2023 09:57:40 +0000
+From: Bobby Eshleman <bobbyeshleman@gmail.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gianluca Guida <gianluca@rivosinc.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: Re: [PATCH v9 1/5] xen/riscv: add VM space layout
+Message-ID: <ZHXIlG3bS437Dpow@bullseye>
+References: <cover.1685027257.git.oleksii.kurochko@gmail.com>
+ <1621fd09987d20b3233132d422e5c9dfe300e3f7.1685027257.git.oleksii.kurochko@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1621fd09987d20b3233132d422e5c9dfe300e3f7.1685027257.git.oleksii.kurochko@gmail.com>
 
-On Tue, May 30, 2023, Thomas Gleixner wrote:
-> On Tue, May 30 2023 at 15:29, Kirill A. Shutemov wrote:
-> > On Tue, May 30, 2023 at 02:09:17PM +0200, Thomas Gleixner wrote:
-> >> The decision to allow parallel bringup of secondary CPUs checks
-> >> CC_ATTR_GUEST_STATE_ENCRYPT to detect encrypted guests. Those cannot use
-> >> parallel bootup because accessing the local APIC is intercepted and raises
-> >> a #VC or #VE, which cannot be handled at that point.
-> >> 
-> >> The check works correctly, but only for AMD encrypted guests. TDX does not
-> >> set that flag.
-> >> 
-> >> Check for cc_vendor != CC_VENDOR_NONE instead. That might be overbroad, but
-> >> definitely works for both AMD and Intel.
-> >
-> > It boots fine with TDX, but I think it is wrong. cc_get_vendor() will
-> > report CC_VENDOR_AMD even on bare metal if SME is enabled. I don't think
-> > we want it.
+On Thu, May 25, 2023 at 06:28:14PM +0300, Oleksii Kurochko wrote:
+> Also it was added explanation about ignoring of top VA bits
 > 
-> Right. Did not think about that.
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> ---
+> Changes in V9:
+>  - Update comment for VM layout description.
+> ---
+> Changes in V8:
+>  - Add "#ifdef RV_STAGE1_MODE == SATP_MODE_SV39" instead of "#ifdef SV39"
+>    in the comment to VM layout description.
+>  - Update the upper bound of direct map area in VM layout description.
+> ---
+> Changes in V7:
+>  - Fix range of frametable range in RV64 layout.
+>  - Add ifdef SV39 to the RV64 layout comment to make it explicit that
+>    description if for SV39 mode.
+>  - Add missed row in the RV64 layout table.
+> ---
+> Changes in V6:
+>  - update comment above the RISCV-64 layout table
+>  - add Slot column to the table with RISCV-64 Layout
+>  - update RV-64 layout table.
+> ---
+> Changes in V5:
+> * the patch was introduced in the current patch series.
+> ---
+>  xen/arch/riscv/include/asm/config.h | 36 +++++++++++++++++++++++++++++
+>  1 file changed, 36 insertions(+)
 > 
-> But the same way is CC_ATTR_GUEST_MEM_ENCRYPT overbroad for AMD. Only
-> SEV-ES traps RDMSR if I'm understandig that maze correctly.
+> diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+> index 763a922a04..9900d29dab 100644
+> --- a/xen/arch/riscv/include/asm/config.h
+> +++ b/xen/arch/riscv/include/asm/config.h
+> @@ -4,6 +4,42 @@
+>  #include <xen/const.h>
+>  #include <xen/page-size.h>
+>  
+> +/*
+> + * RISC-V64 Layout:
+> + *
+> +#if RV_STAGE1_MODE == SATP_MODE_SV39
+> + *
+> + * From the riscv-privileged doc:
+> + *   When mapping between narrower and wider addresses,
+> + *   RISC-V zero-extends a narrower physical address to a wider size.
+> + *   The mapping between 64-bit virtual addresses and the 39-bit usable
+> + *   address space of Sv39 is not based on zero-extension but instead
+> + *   follows an entrenched convention that allows an OS to use one or
+> + *   a few of the most-significant bits of a full-size (64-bit) virtual
+> + *   address to quickly distinguish user and supervisor address regions.
+> + *
+> + * It means that:
+> + *   top VA bits are simply ignored for the purpose of translating to PA.
+> + *
+> + * ============================================================================
+> + *    Start addr    |   End addr        |  Size  | Slot       |area description
+> + * ============================================================================
+> + * FFFFFFFFC0800000 |  FFFFFFFFFFFFFFFF |1016 MB | L2 511     | Unused
+> + * FFFFFFFFC0600000 |  FFFFFFFFC0800000 |  2 MB  | L2 511     | Fixmap
+> + * FFFFFFFFC0200000 |  FFFFFFFFC0600000 |  4 MB  | L2 511     | FDT
+> + * FFFFFFFFC0000000 |  FFFFFFFFC0200000 |  2 MB  | L2 511     | Xen
+> + *                 ...                  |  1 GB  | L2 510     | Unused
+> + * 0000003200000000 |  0000007F80000000 | 309 GB | L2 200-509 | Direct map
+> + *                 ...                  |  1 GB  | L2 199     | Unused
+> + * 0000003100000000 |  00000031C0000000 |  3 GB  | L2 196-198 | Frametable
+> + *                 ...                  |  1 GB  | L2 195     | Unused
+> + * 0000003080000000 |  00000030C0000000 |  1 GB  | L2 194     | VMAP
+> + *                 ...                  | 194 GB | L2 0 - 193 | Unused
+> + * ============================================================================
+> + *
+> +#endif
+> + */
+> +
+>  #if defined(CONFIG_RISCV_64)
+>  # define LONG_BYTEORDER 3
+>  # define ELFSIZE 64
+> -- 
+> 2.40.1
+> 
+> 
 
-Ya, regular SEV doesn't encrypt register state.
+Acked-by: Bobby Eshleman <bobbyeshleman@gmail.com>
 
