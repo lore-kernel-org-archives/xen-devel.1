@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76AE5C77B7A
-	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 09:14:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540972.843209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F77BC77B7A
+	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 09:14:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540978.843220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3vQh-00011C-6k; Tue, 30 May 2023 09:14:11 +0000
+	id 1q3vQs-0001mg-JN; Tue, 30 May 2023 09:14:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540972.843209; Tue, 30 May 2023 09:14:11 +0000
+Received: by outflank-mailman (output) from mailman id 540978.843220; Tue, 30 May 2023 09:14:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3vQh-00010D-3F; Tue, 30 May 2023 09:14:11 +0000
-Received: by outflank-mailman (input) for mailman id 540972;
- Tue, 30 May 2023 09:14:10 +0000
+	id 1q3vQs-0001lo-Em; Tue, 30 May 2023 09:14:22 +0000
+Received: by outflank-mailman (input) for mailman id 540978;
+ Tue, 30 May 2023 09:14:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2tj/=BT=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1q3vQg-0006nv-Bf
- for xen-devel@lists.xenproject.org; Tue, 30 May 2023 09:14:10 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1q3vQr-0006nv-Cq
+ for xen-devel@lists.xenproject.org; Tue, 30 May 2023 09:14:21 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 55e4061e-feca-11ed-b231-6b7b168915f2;
- Tue, 30 May 2023 11:14:09 +0200 (CEST)
+ id 5c8f7838-feca-11ed-b231-6b7b168915f2;
+ Tue, 30 May 2023 11:14:20 +0200 (CEST)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8B26B21A78;
- Tue, 30 May 2023 09:14:09 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B92371FD68;
+ Tue, 30 May 2023 09:14:20 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 61E351341B;
- Tue, 30 May 2023 09:14:09 +0000 (UTC)
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 8CABA1341B;
+ Tue, 30 May 2023 09:14:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id MrCaFmG+dWT8IgAAGKfGzw
- (envelope-from <jgross@suse.com>); Tue, 30 May 2023 09:14:09 +0000
+ by imap1.suse-dmz.suse.de with ESMTPSA id jE0BIWy+dWQXIwAAGKfGzw
+ (envelope-from <jgross@suse.com>); Tue, 30 May 2023 09:14:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,117 +53,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55e4061e-feca-11ed-b231-6b7b168915f2
+X-Inumbo-ID: 5c8f7838-feca-11ed-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1685438049; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1685438060; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2qS4AOkAcsCiQqUZmpFoLkz4Si4Jg5kN7awE7TAatN8=;
-	b=G9Ai5i1flNhm3A3LcvbIXQk6brAg2AMTkkjRCmSvAElodZ4CWvFqAX1ztlU+5jTnscqsHQ
-	FSaYfw2QQEw9ZBvTbvlyoJED30dvHjDYuSYcuFJWkR2qHwEWZHZZddu9FR4RAoyJwoNeid
-	tt7i1/bo+HEf42H/BG/IU/79q5y0AZc=
+	bh=pjORuoarGwKPikziqKKH/AVmLzsVU2PLqxuLJ4KIqno=;
+	b=eyzcjnB5RKUIttvDnaGpYy2j7xiggCSmWo8L6UwkBD3P+ZAQI4yt/NzO41yrot2UNjVKsF
+	2HksuslRvKaueUwAKL19RRk6LKSozXfNBF27+f/b655fqpotLsUhekZKD51uiZSXW/SFdo
+	nTBa22MPJyH00p+1z5Mf0JxQQ/Vl5Dw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 06/11] tools/xenstore: switch get_acc_data() to use name instead of key
-Date: Tue, 30 May 2023 11:13:28 +0200
-Message-Id: <20230530091333.7678-7-jgross@suse.com>
+Subject: [PATCH 08/11] tools/xenstore: make hashtable key and value parameters const
+Date: Tue, 30 May 2023 11:13:30 +0200
+Message-Id: <20230530091333.7678-9-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230530091333.7678-1-jgross@suse.com>
 References: <20230530091333.7678-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Eliminate further TDB_DATA usage by switching get_acc_data() and
-get_acc_domid() from a TDB key to the name of the node in the data base
-as a parameter.
-
-This is in preparation to replace TDB with a more simple data storage.
+The key is never modified by hashtable code, so it should be marked
+as const.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_core.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ tools/xenstore/hashtable.c | 5 +++--
+ tools/xenstore/hashtable.h | 4 ++--
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 8fbf686331..522b2bbf5f 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -566,19 +566,20 @@ void set_tdb_key(const char *name, TDB_DATA *key)
- 	key->dsize = strlen(name);
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 11f6bf8f15..9daddd9782 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -11,7 +11,8 @@
+ 
+ struct entry
+ {
+-    void *k, *v;
++    const void *k;
++    void *v;
+     unsigned int h;
+     struct entry *next;
+ };
+@@ -140,7 +141,7 @@ static int hashtable_expand(struct hashtable *h)
+     return 0;
  }
  
--static void get_acc_data(TDB_DATA *key, struct node_account_data *acc)
-+static void get_acc_data(const char *name, struct node_account_data *acc)
+-int hashtable_add(struct hashtable *h, void *k, void *v)
++int hashtable_add(struct hashtable *h, const void *k, void *v)
  {
--	TDB_DATA old_data;
-+	TDB_DATA key, old_data;
- 	struct xs_tdb_record_hdr *hdr;
- 
- 	if (acc->memory < 0) {
--		old_data = tdb_fetch(tdb_ctx, *key);
-+		set_tdb_key(name, &key);
-+		old_data = tdb_fetch(tdb_ctx, key);
- 		/* No check for error, as the node might not exist. */
- 		if (old_data.dptr == NULL) {
- 			acc->memory = 0;
- 		} else {
--			trace_tdb("read %s size %zu\n", key->dptr,
--				  old_data.dsize + key->dsize);
-+			trace_tdb("read %s size %zu\n", name,
-+				  old_data.dsize + key.dsize);
- 			hdr = (void *)old_data.dptr;
- 			acc->memory = old_data.dsize;
- 			acc->domid = hdr->perms[0].id;
-@@ -593,11 +594,10 @@ static void get_acc_data(TDB_DATA *key, struct node_account_data *acc)
-  * count prepended (e.g. 123/local/domain/...). So testing for the node's
-  * key not to start with "/" or "@" is sufficient.
+     /* This method allows duplicate keys - but they shouldn't be used */
+     unsigned int index;
+diff --git a/tools/xenstore/hashtable.h b/tools/xenstore/hashtable.h
+index 5a2cc4a4be..792f6cda7b 100644
+--- a/tools/xenstore/hashtable.h
++++ b/tools/xenstore/hashtable.h
+@@ -48,8 +48,8 @@ create_hashtable(const void *ctx, const char *name,
+  * If in doubt, remove before insert.
   */
--static unsigned int get_acc_domid(struct connection *conn, TDB_DATA *key,
-+static unsigned int get_acc_domid(struct connection *conn, const char *name,
- 				  unsigned int domid)
- {
--	return (!conn || key->dptr[0] == '/' || key->dptr[0] == '@')
--	       ? domid : conn->id;
-+	return (!conn || name[0] == '/' || name[0] == '@') ? domid : conn->id;
- }
  
- int db_write(struct connection *conn, const char *db_name, void *data,
-@@ -618,9 +618,9 @@ int db_write(struct connection *conn, const char *db_name, void *data,
- 	else
- 		old_acc = *acc;
+-int 
+-hashtable_add(struct hashtable *h, void *k, void *v);
++int
++hashtable_add(struct hashtable *h, const void *k, void *v);
  
--	get_acc_data(&key, &old_acc);
--	old_domid = get_acc_domid(conn, &key, old_acc.domid);
--	new_domid = get_acc_domid(conn, &key, hdr->perms[0].id);
-+	get_acc_data(db_name, &old_acc);
-+	old_domid = get_acc_domid(conn, db_name, old_acc.domid);
-+	new_domid = get_acc_domid(conn, db_name, hdr->perms[0].id);
- 
- 	/*
- 	 * Don't check for ENOENT, as we want to be able to switch orphaned
-@@ -675,7 +675,7 @@ int db_delete(struct connection *conn, const char *name,
- 		acc->memory = -1;
- 	}
- 
--	get_acc_data(&key, acc);
-+	get_acc_data(name, acc);
- 
- 	if (tdb_delete(tdb_ctx, key)) {
- 		errno = EIO;
-@@ -684,7 +684,7 @@ int db_delete(struct connection *conn, const char *name,
- 	trace_tdb("delete %s\n", name);
- 
- 	if (acc->memory) {
--		domid = get_acc_domid(conn, &key, acc->domid);
-+		domid = get_acc_domid(conn, name, acc->domid);
- 		domain_memory_add_nochk(conn, domid, -acc->memory - key.dsize);
- 	}
- 
+ /*****************************************************************************
+  * hashtable_search
 -- 
 2.35.3
 
