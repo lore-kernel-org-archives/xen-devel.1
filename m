@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF15C7EE23
-	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 08:57:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.540902.843060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CEDC7EE32
+	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 08:57:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.540913.843080 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3vAd-00081J-Li; Tue, 30 May 2023 08:57:35 +0000
+	id 1q3vAf-0008LM-2N; Tue, 30 May 2023 08:57:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 540902.843060; Tue, 30 May 2023 08:57:35 +0000
+Received: by outflank-mailman (output) from mailman id 540913.843080; Tue, 30 May 2023 08:57:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3vAd-00081A-Im; Tue, 30 May 2023 08:57:35 +0000
-Received: by outflank-mailman (input) for mailman id 540902;
- Tue, 30 May 2023 08:57:33 +0000
+	id 1q3vAe-0008Ik-OK; Tue, 30 May 2023 08:57:36 +0000
+Received: by outflank-mailman (input) for mailman id 540913;
+ Tue, 30 May 2023 08:57:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2tj/=BT=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1q3v8c-00026J-Vx
- for xen-devel@lists.xenproject.org; Tue, 30 May 2023 08:55:31 +0000
+ id 1q3v8z-00026J-CP
+ for xen-devel@lists.xenproject.org; Tue, 30 May 2023 08:55:53 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9cffd27-fec7-11ed-8611-37d641c3527e;
- Tue, 30 May 2023 10:55:28 +0200 (CEST)
+ id c745943a-fec7-11ed-8611-37d641c3527e;
+ Tue, 30 May 2023 10:55:51 +0200 (CEST)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A9A4A21AC5;
- Tue, 30 May 2023 08:55:28 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 44D3321AC5;
+ Tue, 30 May 2023 08:55:51 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 7C90D1341B;
- Tue, 30 May 2023 08:55:28 +0000 (UTC)
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 1569E1341B;
+ Tue, 30 May 2023 08:55:51 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id nqsZHQC6dWTJGwAAGKfGzw
- (envelope-from <jgross@suse.com>); Tue, 30 May 2023 08:55:28 +0000
+ by imap1.suse-dmz.suse.de with ESMTPSA id DpfgAxe6dWT+GwAAGKfGzw
+ (envelope-from <jgross@suse.com>); Tue, 30 May 2023 08:55:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,576 +53,289 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9cffd27-fec7-11ed-8611-37d641c3527e
+X-Inumbo-ID: c745943a-fec7-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1685436928; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1685436951; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2wtj5eHWgzZr7krRLiuMYraBKXJGaUFEyS88A4AEvqM=;
-	b=Nwsry05T1Rngm5DXTspGyKAjGth+ONvkFoM5gfgoS+npzFYP5E9MdvZM28EDIol2CTQwV9
-	mV+usJ5MKeRYA6gDqpTD3dD2GQ1MpOJoxyHyYa23b07dQkLAia78mYFbXuAYLBWUV7erGo
-	9u2nAqvZF3lAXjgifBk47gZO+8Bpais=
+	bh=FW0C2bAkKkIHGt/B2e/wyvut7P4v8g7aX6Xek0VYr58=;
+	b=bESitT7N/VP0RcKobx2Ra1Ydei7bdiX/KL8hFEx7S6bIBeTaaEXceb5h+DXATke7XSr5jB
+	/LeXVjTJIlME7gWKnYtS+44gsAxFYed9DbzxcTMo75zeW49esYQ2FypWirLv3vWiZ/RInF
+	habeMLuctjcg7YXClZa/VgCeKa5A0lw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v3 12/16] tools/xenstore: remove no longer needed functions from xs_lib.c
-Date: Tue, 30 May 2023 10:54:14 +0200
-Message-Id: <20230530085418.5417-13-jgross@suse.com>
+Subject: [PATCH v3 16/16] tools/xenstore: remove unused stuff from list.h
+Date: Tue, 30 May 2023 10:54:18 +0200
+Message-Id: <20230530085418.5417-17-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230530085418.5417-1-jgross@suse.com>
 References: <20230530085418.5417-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xs_daemon_tdb() in xs_lib.c is no longer used at all, so it can be
-removed. xs_domain_dev() and xs_write_all() are not used by xenstored,
-so they can be moved to tools/libs/store/xs.c.
-
-xs_daemon_rootdir() is used by xenstored only and it only calls
-xs_daemon_rundir(), so replace its use cases with xs_daemon_rundir()
-and remove it from xs_lib.c.
-
-xs_daemon_socket_ro() is needed in libxenstore only, so move it to
-tools/libs/store/xs.c.
-
-Move functions used by xenstore-client only to xenstore_client.c.
+Remove the hlist defines/functions and the rcu related functions from
+tools/xenstore/list.h, as they are not used.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V2:
-- move xs_write_all(), too
-V3:
-- remove xs_daemon_rootdir(), move xs_daemon_socket_ro()
----
- tools/include/xenstore.h           |   3 +
- tools/include/xenstore_lib.h       |   3 -
- tools/libs/store/xs.c              |  43 ++++++++
- tools/xenstore/xenstore_client.c   | 129 ++++++++++++++++++++++
- tools/xenstore/xenstored_control.c |   4 +-
- tools/xenstore/xenstored_core.c    |   3 +-
- tools/xenstore/xs_lib.c            | 166 -----------------------------
- tools/xenstore/xs_lib.h            |  19 ----
- 8 files changed, 178 insertions(+), 192 deletions(-)
+ tools/xenstore/list.h | 227 ------------------------------------------
+ 1 file changed, 227 deletions(-)
 
-diff --git a/tools/include/xenstore.h b/tools/include/xenstore.h
-index 2b3f69fb61..a442252849 100644
---- a/tools/include/xenstore.h
-+++ b/tools/include/xenstore.h
-@@ -113,6 +113,9 @@ void *xs_read(struct xs_handle *h, xs_transaction_t t,
- bool xs_write(struct xs_handle *h, xs_transaction_t t,
- 	      const char *path, const void *data, unsigned int len);
- 
-+/* Simple write function: loops for you. */
-+bool xs_write_all(int fd, const void *data, unsigned int len);
-+
- /* Create a new directory.
-  * Returns false on failure, or success if it already exists.
-  */
-diff --git a/tools/include/xenstore_lib.h b/tools/include/xenstore_lib.h
-index 2266009ec1..43eec87379 100644
---- a/tools/include/xenstore_lib.h
-+++ b/tools/include/xenstore_lib.h
-@@ -47,9 +47,6 @@ const char *xs_daemon_rundir(void);
- const char *xs_daemon_socket(void);
- const char *xs_daemon_socket_ro(void);
- 
--/* Simple write function: loops for you. */
--bool xs_write_all(int fd, const void *data, unsigned int len);
--
- /* Convert strings to permissions.  False if a problem. */
- bool xs_strings_to_perms(struct xs_permissions *perms, unsigned int num,
- 			 const char *strings);
-diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
-index 76ffb1be45..bb93246bfb 100644
---- a/tools/libs/store/xs.c
-+++ b/tools/libs/store/xs.c
-@@ -311,6 +311,26 @@ struct xs_handle *xs_domain_open(void)
- 	return xs_open(0);
+diff --git a/tools/xenstore/list.h b/tools/xenstore/list.h
+index a464a38b61..d722a91220 100644
+--- a/tools/xenstore/list.h
++++ b/tools/xenstore/list.h
+@@ -88,48 +88,6 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
+ 	__list_add(new, head->prev, head);
  }
  
-+static const char *xs_domain_dev(void)
-+{
-+	char *s = getenv("XENSTORED_PATH");
-+	if (s)
-+		return s;
-+#if defined(__RUMPUSER_XEN__) || defined(__RUMPRUN__)
-+	return "/dev/xen/xenbus";
-+#elif defined(__linux__)
-+	if (access("/dev/xen/xenbus", F_OK) == 0)
-+		return "/dev/xen/xenbus";
-+	return "/proc/xen/xenbus";
-+#elif defined(__NetBSD__)
-+	return "/kern/xen/xenbus";
-+#elif defined(__FreeBSD__)
-+	return "/dev/xen/xenstore";
-+#else
-+	return "/dev/xen/xenbus";
-+#endif
-+}
-+
- struct xs_handle *xs_open(unsigned long flags)
- {
- 	struct xs_handle *xsh = NULL;
-@@ -431,6 +451,24 @@ out_false:
- #ifdef XSTEST
- #define read_all read_all_choice
- #define xs_write_all write_all_choice
-+#else
-+/* Simple routine for writing to sockets, etc. */
-+bool xs_write_all(int fd, const void *data, unsigned int len)
-+{
-+	while (len) {
-+		int done;
-+
-+		done = write(fd, data, len);
-+		if (done < 0 && errno == EINTR)
-+			continue;
-+		if (done <= 0)
-+			return false;
-+		data += done;
-+		len -= done;
-+	}
-+
-+	return true;
-+}
+-/*
+- * Insert a new entry between two known consecutive entries. 
+- *
+- * This is only for internal list manipulation where we know
+- * the prev/next entries already!
+- */
+-static __inline__ void __list_add_rcu(struct list_head * new,
+-	struct list_head * prev,
+-	struct list_head * next)
+-{
+-	new->next = next;
+-	new->prev = prev;
+-	next->prev = new;
+-	prev->next = new;
+-}
+-
+-/**
+- * list_add_rcu - add a new entry to rcu-protected list
+- * @new: new entry to be added
+- * @head: list head to add it after
+- *
+- * Insert a new entry after the specified head.
+- * This is good for implementing stacks.
+- */
+-static __inline__ void list_add_rcu(struct list_head *new, struct list_head *head)
+-{
+-	__list_add_rcu(new, head, head->next);
+-}
+-
+-/**
+- * list_add_tail_rcu - add a new entry to rcu-protected list
+- * @new: new entry to be added
+- * @head: list head to add it before
+- *
+- * Insert a new entry before the specified head.
+- * This is useful for implementing queues.
+- */
+-static __inline__ void list_add_tail_rcu(struct list_head *new, struct list_head *head)
+-{
+-	__list_add_rcu(new, head->prev, head);
+-}
+-
+ /*
+  * Delete a list entry by making the prev/next entries
+  * point to each other.
+@@ -156,23 +114,6 @@ static inline void list_del(struct list_head *entry)
+ 	entry->prev = LIST_POISON2;
+ }
+ 
+-/**
+- * list_del_rcu - deletes entry from list without re-initialization
+- * @entry: the element to delete from the list.
+- *
+- * Note: list_empty on entry does not return true after this, 
+- * the entry is in an undefined state. It is useful for RCU based
+- * lockfree traversal.
+- *
+- * In particular, it means that we can not poison the forward 
+- * pointers that may still be used for walking the list.
+- */
+-static inline void list_del_rcu(struct list_head *entry)
+-{
+-	__list_del(entry->prev, entry->next);
+-	entry->prev = LIST_POISON2;
+-}
+-
+ /**
+  * list_del_init - deletes entry from list and reinitialize it.
+  * @entry: the element to delete from the list.
+@@ -339,172 +280,4 @@ static inline void list_splice_init(struct list_head *list,
+ 	     &pos->member != (head); 					\
+ 	     pos = n, n = list_entry(n->member.next, typeof(*n), member))
+ 
+-
+-/* 
+- * Double linked lists with a single pointer list head. 
+- * Mostly useful for hash tables where the two pointer list head is 
+- * too wasteful.
+- * You lose the ability to access the tail in O(1).
+- */ 
+-
+-struct hlist_head { 
+-	struct hlist_node *first; 
+-}; 
+-
+-struct hlist_node { 
+-	struct hlist_node *next, **pprev; 
+-}; 
+-
+-#define HLIST_HEAD_INIT { .first = NULL } 
+-#define HLIST_HEAD(name) struct hlist_head name = {  .first = NULL }
+-#define INIT_HLIST_HEAD(ptr) ((ptr)->first = NULL) 
+-#define INIT_HLIST_NODE(ptr) ((ptr)->next = NULL, (ptr)->pprev = NULL)
+-
+-static __inline__ int hlist_unhashed(struct hlist_node *h) 
+-{ 
+-	return !h->pprev;
+-} 
+-
+-static __inline__ int hlist_empty(struct hlist_head *h) 
+-{ 
+-	return !h->first;
+-} 
+-
+-static __inline__ void __hlist_del(struct hlist_node *n) 
+-{
+-	struct hlist_node *next = n->next;
+-	struct hlist_node **pprev = n->pprev;
+-	*pprev = next;  
+-	if (next) 
+-		next->pprev = pprev;
+-}  
+-
+-static __inline__ void hlist_del(struct hlist_node *n)
+-{
+-	__hlist_del(n);
+-	n->next = LIST_POISON1;
+-	n->pprev = LIST_POISON2;
+-}
+-
+-/**
+- * hlist_del_rcu - deletes entry from hash list without re-initialization
+- * @entry: the element to delete from the hash list.
+- *
+- * Note: list_unhashed() on entry does not return true after this, 
+- * the entry is in an undefined state. It is useful for RCU based
+- * lockfree traversal.
+- *
+- * In particular, it means that we can not poison the forward
+- * pointers that may still be used for walking the hash list.
+- */
+-static inline void hlist_del_rcu(struct hlist_node *n)
+-{
+-	__hlist_del(n);
+-	n->pprev = LIST_POISON2;
+-}
+-
+-static __inline__ void hlist_del_init(struct hlist_node *n) 
+-{
+-	if (n->pprev)  {
+-		__hlist_del(n);
+-		INIT_HLIST_NODE(n);
+-	}
+-}  
+-
+-#define hlist_del_rcu_init hlist_del_init
+-
+-static __inline__ void hlist_add_head(struct hlist_node *n, struct hlist_head *h) 
+-{ 
+-	struct hlist_node *first = h->first;
+-	n->next = first; 
+-	if (first) 
+-		first->pprev = &n->next;
+-	h->first = n; 
+-	n->pprev = &h->first; 
+-} 
+-
+-static __inline__ void hlist_add_head_rcu(struct hlist_node *n, struct hlist_head *h) 
+-{ 
+-	struct hlist_node *first = h->first;
+-	n->next = first;
+-	n->pprev = &h->first; 
+-	if (first) 
+-		first->pprev = &n->next;
+-	h->first = n; 
+-} 
+-
+-/* next must be != NULL */
+-static __inline__ void hlist_add_before(struct hlist_node *n, struct hlist_node *next)
+-{
+-	n->pprev = next->pprev;
+-	n->next = next; 
+-	next->pprev = &n->next; 
+-	*(n->pprev) = n;
+-}
+-
+-static __inline__ void hlist_add_after(struct hlist_node *n,
+-				       struct hlist_node *next)
+-{
+-	next->next	= n->next;
+-	*(next->pprev)	= n;
+-	n->next		= next;
+-}
+-
+-#define hlist_entry(ptr, type, member) container_of(ptr,type,member)
+-
+-/* Cannot easily do prefetch unfortunately */
+-#define hlist_for_each(pos, head) \
+-	for (pos = (head)->first; pos; pos = pos->next) 
+-
+-#define hlist_for_each_safe(pos, n, head) \
+-	for (pos = (head)->first; n = pos ? pos->next : 0, pos; \
+-	     pos = n)
+-
+-/**
+- * hlist_for_each_entry	- iterate over list of given type
+- * @tpos:	the type * to use as a loop counter.
+- * @pos:	the &struct hlist_node to use as a loop counter.
+- * @head:	the head for your list.
+- * @member:	the name of the hlist_node within the struct.
+- */
+-#define hlist_for_each_entry(tpos, pos, head, member)			 \
+-	for (pos = (head)->first;					 \
+-	     pos && ({ tpos = hlist_entry(pos, typeof(*tpos), member); 1;}); \
+-	     pos = pos->next)
+-
+-/**
+- * hlist_for_each_entry_continue - iterate over a hlist continuing after existing point
+- * @tpos:	the type * to use as a loop counter.
+- * @pos:	the &struct hlist_node to use as a loop counter.
+- * @member:	the name of the hlist_node within the struct.
+- */
+-#define hlist_for_each_entry_continue(tpos, pos, member)		 \
+-	for (pos = (pos)->next;						 \
+-	     pos && ({ tpos = hlist_entry(pos, typeof(*tpos), member); 1;}); \
+-	     pos = pos->next)
+-
+-/**
+- * hlist_for_each_entry_from - iterate over a hlist continuing from existing point
+- * @tpos:	the type * to use as a loop counter.
+- * @pos:	the &struct hlist_node to use as a loop counter.
+- * @member:	the name of the hlist_node within the struct.
+- */
+-#define hlist_for_each_entry_from(tpos, pos, member)			 \
+-	for (; pos && ({ tpos = hlist_entry(pos, typeof(*tpos), member); 1;}); \
+-	     pos = pos->next)
+-
+-/**
+- * hlist_for_each_entry_safe - iterate over list of given type safe against removal of list entry
+- * @tpos:	the type * to use as a loop counter.
+- * @pos:	the &struct hlist_node to use as a loop counter.
+- * @n:		another &struct hlist_node to use as temporary storage
+- * @head:	the head for your list.
+- * @member:	the name of the hlist_node within the struct.
+- */
+-#define hlist_for_each_entry_safe(tpos, pos, n, head, member) 		 \
+-	for (pos = (head)->first;					 \
+-	     pos && ({ n = pos->next; 1; }) && 				 \
+-		({ tpos = hlist_entry(pos, typeof(*tpos), member); 1;}); \
+-	     pos = n)
+-
  #endif
- 
- static int get_error(const char *errorstring)
-@@ -1328,6 +1366,11 @@ error:
- 	return ret;
- }
- 
-+const char *xs_daemon_socket_ro(void)
-+{
-+	return xs_daemon_socket();
-+}
-+
- #ifdef USE_PTHREAD
- static void *read_thread(void *arg)
- {
-diff --git a/tools/xenstore/xenstore_client.c b/tools/xenstore/xenstore_client.c
-index 0628ba275e..8ff8abf12a 100644
---- a/tools/xenstore/xenstore_client.c
-+++ b/tools/xenstore/xenstore_client.c
-@@ -8,6 +8,7 @@
-  *
-  */
- 
-+#include <assert.h>
- #include <err.h>
- #include <errno.h>
- #include <fcntl.h>
-@@ -40,12 +41,140 @@ enum mode {
-     MODE_watch,
- };
- 
-+/* Sanitising (quoting) possibly-binary strings. */
-+struct expanding_buffer {
-+    char *buf;
-+    int avail;
-+};
-+
- static char *output_buf = NULL;
- static int output_pos = 0;
- static struct expanding_buffer ebuf;
- 
- static int output_size = 0;
- 
-+/* Ensure that given expanding buffer has at least min_avail characters. */
-+static char *expanding_buffer_ensure(struct expanding_buffer *ebuf,
-+                                     int min_avail)
-+{
-+    int want;
-+    char *got;
-+
-+    if ( ebuf->avail >= min_avail )
-+        return ebuf->buf;
-+
-+    if ( min_avail >= INT_MAX/3 )
-+        return 0;
-+
-+    want = ebuf->avail + min_avail + 10;
-+    got = realloc(ebuf->buf, want);
-+    if ( !got )
-+        return 0;
-+
-+    ebuf->buf = got;
-+    ebuf->avail = want;
-+    return ebuf->buf;
-+}
-+
-+/* sanitise_value() may return NULL if malloc fails. */
-+static char *sanitise_value(struct expanding_buffer *ebuf,
-+                            const char *val, unsigned len)
-+{
-+    int used, remain, c;
-+    unsigned char *ip;
-+
-+#define ADD(c) (ebuf->buf[used++] = (c))
-+#define ADDF(f,c) (used += sprintf(ebuf->buf+used, (f), (c)))
-+
-+    assert(len < INT_MAX/5);
-+
-+    ip = (unsigned char *)val;
-+    used = 0;
-+    remain = len;
-+
-+    if ( !expanding_buffer_ensure(ebuf, remain + 1) )
-+        return NULL;
-+
-+    while ( remain-- > 0 )
-+    {
-+        c= *ip++;
-+
-+        if ( c >= ' ' && c <= '~' && c != '\\' )
-+        {
-+            ADD(c);
-+            continue;
-+        }
-+
-+        if ( !expanding_buffer_ensure(ebuf, used + remain + 5) )
-+            /* for "<used>\\nnn<remain>\0" */
-+            return 0;
-+
-+        ADD('\\');
-+        switch (c)
-+        {
-+        case '\t':  ADD('t');   break;
-+        case '\n':  ADD('n');   break;
-+        case '\r':  ADD('r');   break;
-+        case '\\':  ADD('\\');  break;
-+        default:
-+            if ( c < 010 ) ADDF("%03o", c);
-+            else           ADDF("x%02x", c);
-+        }
-+    }
-+
-+    ADD(0);
-+    assert(used <= ebuf->avail);
-+    return ebuf->buf;
-+
-+#undef ADD
-+#undef ADDF
-+}
-+
-+/* *out_len_r on entry is ignored; out must be at least strlen(in)+1 bytes. */
-+static void unsanitise_value(char *out, unsigned *out_len_r, const char *in)
-+{
-+    const char *ip;
-+    char *op;
-+    unsigned c;
-+    int n;
-+
-+    for ( ip = in, op = out; (c = *ip++); *op++ = c )
-+    {
-+        if ( c == '\\' )
-+        {
-+            c = *ip++;
-+
-+#define GETF(f) do                   \
-+{                                    \
-+     n = 0;                          \
-+     sscanf(ip, f "%n", &c, &n);     \
-+     ip += n;                        \
-+} while ( 0 )
-+
-+            switch ( c )
-+            {
-+            case 't':           c= '\t';           break;
-+            case 'n':           c= '\n';           break;
-+            case 'r':           c= '\r';           break;
-+            case '\\':          c= '\\';           break;
-+            case 'x':           GETF("%2x");       break;
-+            case '0': case '4':
-+            case '1': case '5':
-+            case '2': case '6':
-+            case '3': case '7': --ip; GETF("%3o"); break;
-+            case 0:             --ip;              break;
-+            default:;
-+            }
-+#undef GETF
-+        }
-+    }
-+
-+    *op = 0;
-+
-+    if ( out_len_r )
-+        *out_len_r = op - out;
-+}
-+
- /* make sure there is at least 'len' more space in output_buf */
- static void expand_buffer(size_t len)
- {
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index ed80924ee4..6ef800ff64 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -560,7 +560,7 @@ static FILE *lu_dump_open(const void *ctx)
- 	char *filename;
- 	int fd;
- 
--	filename = talloc_asprintf(ctx, "%s/state_dump", xs_daemon_rootdir());
-+	filename = talloc_asprintf(ctx, "%s/state_dump", xs_daemon_rundir());
- 	if (!filename)
- 		return NULL;
- 
-@@ -583,7 +583,7 @@ static void lu_get_dump_state(struct lu_dump_state *state)
- 	state->size = 0;
- 
- 	state->filename = talloc_asprintf(NULL, "%s/state_dump",
--					  xs_daemon_rootdir());
-+					  xs_daemon_rundir());
- 	if (!state->filename)
- 		barf("Allocation failure");
- 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 07fbac55ac..a78cbf1116 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -2888,10 +2888,9 @@ int main(int argc, char *argv[])
- 
- 	reopen_log();
- 
--	/* make sure xenstored directories exist */
-+	/* Make sure xenstored directory exists. */
- 	/* Errors ignored here, will be reported when we open files */
- 	mkdir(xs_daemon_rundir(), 0755);
--	mkdir(xs_daemon_rootdir(), 0755);
- 
- 	if (dofork) {
- 		openlog("xenstored", 0, LOG_DAEMON);
-diff --git a/tools/xenstore/xs_lib.c b/tools/xenstore/xs_lib.c
-index b9941c567c..826fa7b5a8 100644
---- a/tools/xenstore/xs_lib.c
-+++ b/tools/xenstore/xs_lib.c
-@@ -32,11 +32,6 @@ const char *xs_daemon_rundir(void)
- 	return (s ? s : XEN_RUN_STORED);
- }
- 
--const char *xs_daemon_rootdir(void)
--{
--	return xs_daemon_rundir();
--}
--
- static const char *xs_daemon_path(void)
- {
- 	static char buf[PATH_MAX];
-@@ -49,61 +44,11 @@ static const char *xs_daemon_path(void)
- 	return buf;
- }
- 
--const char *xs_daemon_tdb(void)
--{
--	static char buf[PATH_MAX];
--	snprintf(buf, sizeof(buf), "%s/tdb", xs_daemon_rootdir());
--	return buf;
--}
--
- const char *xs_daemon_socket(void)
- {
- 	return xs_daemon_path();
- }
- 
--const char *xs_daemon_socket_ro(void)
--{
--	return xs_daemon_path();
--}
--
--const char *xs_domain_dev(void)
--{
--	char *s = getenv("XENSTORED_PATH");
--	if (s)
--		return s;
--#if defined(__RUMPUSER_XEN__) || defined(__RUMPRUN__)
--	return "/dev/xen/xenbus";
--#elif defined(__linux__)
--	if (access("/dev/xen/xenbus", F_OK) == 0)
--		return "/dev/xen/xenbus";
--	return "/proc/xen/xenbus";
--#elif defined(__NetBSD__)
--	return "/kern/xen/xenbus";
--#elif defined(__FreeBSD__)
--	return "/dev/xen/xenstore";
--#else
--	return "/dev/xen/xenbus";
--#endif
--}
--
--/* Simple routines for writing to sockets, etc. */
--bool xs_write_all(int fd, const void *data, unsigned int len)
--{
--	while (len) {
--		int done;
--
--		done = write(fd, data, len);
--		if (done < 0 && errno == EINTR)
--			continue;
--		if (done <= 0)
--			return false;
--		data += done;
--		len -= done;
--	}
--
--	return true;
--}
--
- /* Convert strings to permissions.  False if a problem. */
- bool xs_strings_to_perms(struct xs_permissions *perms, unsigned int num,
- 			 const char *strings)
-@@ -179,114 +124,3 @@ unsigned int xs_count_strings(const char *strings, unsigned int len)
- 
- 	return num;
- }
--
--char *expanding_buffer_ensure(struct expanding_buffer *ebuf, int min_avail)
--{
--	int want;
--	char *got;
--
--	if (ebuf->avail >= min_avail)
--		return ebuf->buf;
--
--	if (min_avail >= INT_MAX/3)
--		return 0;
--
--	want = ebuf->avail + min_avail + 10;
--	got = realloc(ebuf->buf, want);
--	if (!got)
--		return 0;
--
--	ebuf->buf = got;
--	ebuf->avail = want;
--	return ebuf->buf;
--}
--
--char *sanitise_value(struct expanding_buffer *ebuf,
--		     const char *val, unsigned len)
--{
--	int used, remain, c;
--	unsigned char *ip;
--
--#define ADD(c) (ebuf->buf[used++] = (c))
--#define ADDF(f,c) (used += sprintf(ebuf->buf+used, (f), (c)))
--
--	assert(len < INT_MAX/5);
--
--	ip = (unsigned char *)val;
--	used = 0;
--	remain = len;
--
--	if (!expanding_buffer_ensure(ebuf, remain + 1))
--		return NULL;
--
--	while (remain-- > 0) {
--		c= *ip++;
--
--		if (c >= ' ' && c <= '~' && c != '\\') {
--			ADD(c);
--			continue;
--		}
--
--		if (!expanding_buffer_ensure(ebuf, used + remain + 5))
--			/* for "<used>\\nnn<remain>\0" */
--			return 0;
--
--		ADD('\\');
--		switch (c) {
--		case '\t':  ADD('t');   break;
--		case '\n':  ADD('n');   break;
--		case '\r':  ADD('r');   break;
--		case '\\':  ADD('\\');  break;
--		default:
--			if (c < 010) ADDF("%03o", c);
--			else         ADDF("x%02x", c);
--		}
--	}
--
--	ADD(0);
--	assert(used <= ebuf->avail);
--	return ebuf->buf;
--
--#undef ADD
--#undef ADDF
--}
--
--void unsanitise_value(char *out, unsigned *out_len_r, const char *in)
--{
--	const char *ip;
--	char *op;
--	unsigned c;
--	int n;
--
--	for (ip = in, op = out; (c = *ip++); *op++ = c) {
--		if (c == '\\') {
--			c = *ip++;
--
--#define GETF(f) do {					\
--			n = 0;				\
--			sscanf(ip, f "%n", &c, &n);	\
--			ip += n;			\
--		} while (0)
--
--			switch (c) {
--			case 't':		c= '\t';		break;
--			case 'n':		c= '\n';		break;
--			case 'r':		c= '\r';		break;
--			case '\\':		c= '\\';		break;
--			case 'x':		GETF("%2x");		break;
--			case '0': case '4':
--			case '1': case '5':
--			case '2': case '6':
--			case '3': case '7':	--ip; GETF("%3o");	break;
--			case 0:			--ip;			break;
--			default:;
--			}
--#undef GETF
--		}
--	}
--
--	*op = 0;
--
--	if (out_len_r)
--		*out_len_r = op - out;
--}
-diff --git a/tools/xenstore/xs_lib.h b/tools/xenstore/xs_lib.h
-index efa05997d6..5b9874d741 100644
---- a/tools/xenstore/xs_lib.h
-+++ b/tools/xenstore/xs_lib.h
-@@ -21,10 +21,6 @@
- 
- #include "xenstore_lib.h"
- 
--const char *xs_daemon_rootdir(void);
--const char *xs_domain_dev(void);
--const char *xs_daemon_tdb(void);
--
- /* Convert permissions to a string (up to len MAX_STRLEN(unsigned int)+1). */
- bool xs_perm_to_string(const struct xs_permissions *perm,
- 		       char *buffer, size_t buf_len);
-@@ -32,19 +28,4 @@ bool xs_perm_to_string(const struct xs_permissions *perm,
- /* Given a string and a length, count how many strings (nul terms). */
- unsigned int xs_count_strings(const char *strings, unsigned int len);
- 
--/* Sanitising (quoting) possibly-binary strings. */
--struct expanding_buffer {
--	char *buf;
--	int avail;
--};
--
--/* Ensure that given expanding buffer has at least min_avail characters. */
--char *expanding_buffer_ensure(struct expanding_buffer *, int min_avail);
--
--/* sanitise_value() may return NULL if malloc fails. */
--char *sanitise_value(struct expanding_buffer *, const char *val, unsigned len);
--
--/* *out_len_r on entry is ignored; out must be at least strlen(in)+1 bytes. */
--void unsanitise_value(char *out, unsigned *out_len_r, const char *in);
--
- #endif /* XS_LIB_H */
 -- 
 2.35.3
 
