@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82571C7EE23
-	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 20:38:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.541448.844260 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC54C7EE24
+	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 20:38:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.541457.844270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q466F-0000qQ-PB; Tue, 30 May 2023 20:37:47 +0000
+	id 1q466H-00017z-6U; Tue, 30 May 2023 20:37:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 541448.844260; Tue, 30 May 2023 20:37:47 +0000
+Received: by outflank-mailman (output) from mailman id 541457.844270; Tue, 30 May 2023 20:37:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q466F-0000q7-Kj; Tue, 30 May 2023 20:37:47 +0000
-Received: by outflank-mailman (input) for mailman id 541448;
- Tue, 30 May 2023 20:37:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q466H-00017n-2g; Tue, 30 May 2023 20:37:49 +0000
+Received: by outflank-mailman (input) for mailman id 541457;
+ Tue, 30 May 2023 20:37:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8QB4=BT=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1q460t-0001yj-Gh
- for xen-devel@lists.xenproject.org; Tue, 30 May 2023 20:32:15 +0000
+ id 1q4612-0001iX-U5
+ for xen-devel@lists.xenproject.org; Tue, 30 May 2023 20:32:24 +0000
 Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
- [64.147.123.21]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0f3a81e8-ff29-11ed-b231-6b7b168915f2;
- Tue, 30 May 2023 22:32:14 +0200 (CEST)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.west.internal (Postfix) with ESMTP id 6EF803200934;
- Tue, 30 May 2023 16:32:12 -0400 (EDT)
+ [64.147.123.21]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1486eb29-ff29-11ed-8611-37d641c3527e;
+ Tue, 30 May 2023 22:32:23 +0200 (CEST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.west.internal (Postfix) with ESMTP id 0D022320096E;
+ Tue, 30 May 2023 16:32:20 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Tue, 30 May 2023 16:32:13 -0400
+ by compute4.internal (MEProxy); Tue, 30 May 2023 16:32:21 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 30 May 2023 16:32:11 -0400 (EDT)
+ 30 May 2023 16:32:19 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f3a81e8-ff29-11ed-b231-6b7b168915f2
+X-Inumbo-ID: 1486eb29-ff29-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1685478732; x=1685565132; bh=KqvPH9pDDf
-	rZerL/j1Q0a8RK2jTSm93zECezjcEfZ7Y=; b=CeUdXfyO67/whbrhgac9/avXLW
-	eru7QHUZqMx94QYfPMlVXU+ui+tRFdwVPN9xlP9gICmNJdQalLaUVoS7Zc943wjC
-	sJFZiHqqQBqawmzSq2uS5sj0kejzU2ucPIFyOcLtjPgoyrOKSyZ8v6CejqHwIIVf
-	QhSSQhpepZN1qfTatTXNiFRN45qghiX/endy/GoXyAo4OF5DvAqSC+R4tvUZql/g
-	Twf7nZVK/OZ+O5hzh/GEO/K+xp6lZGqfRa1L4ridR6SwKojehZihM4jei6a9/TkB
-	0NXGvH2/Oo567MZ7sqO1hRGDy2T5AnJVIsGfHDdoKrXfptumV12qVDqo43kA==
+	:subject:to:to; s=fm1; t=1685478740; x=1685565140; bh=gJtXKfjMb5
+	k3PryJlBFsKsS3ZINd0EksqBFZ4ekKEDw=; b=iSW8ttt26dngYvxurKxiOI2vd1
+	WHoQ92v7hwye8qiWm/sMzD3pqp5ya8c2OA22dKJKDKSCyzxijZP+Dp144KoNmvpt
+	K8OI+kD4ismX23LXNvkYBIS8haogcvQd7EEZ19u32N/1GOR8sh6VaGOBsVQxw9Bq
+	zrT17xw8paAPsuaett1MoyqWDe6uGCPznnCFymKvWzjN2rUubwy9Ob0uFq6jMg76
+	gqlN1m7Mc8Mkxu+yjAxvH0vX7/PlJqdVVec52wcaqJpFToYt9AxPY3yOgBt+RjEI
+	aG4fzuzWpC22NKMBxr6O/RMjHdv28qKWfTHlwgkpaOz+BcWrwFwxRmGMeaMg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1685478732; x=
-	1685565132; bh=KqvPH9pDDfrZerL/j1Q0a8RK2jTSm93zECezjcEfZ7Y=; b=x
-	1E+gfj51gX0i5a8eh20dla4FZptdVnV/3RIPZB3nB5jAIbu455IAdaMdcicMgN6O
-	4SBqvYe9KR4Kej10pm88BwhRbA3HJRbxH//tVjialFMNZJrovhqgY1UDyRu1wJcw
-	QHLv45kgxPU7huWf9ipWhx6WsGloc+WqNO4rAhShCMykuP4wA6usnjDEyY/0gRna
-	EhIOGzw6Zx9L9zjSbhcDkSFqBm1jjKHdeYRfdE5UB3scu3hnpjdt5yJterqlZrbv
-	J5cY6BQYk5xcpeviB3QRy1CADT22E0N/XTiASKCzbXfOkz55iiiWUGOl+t2QGjsf
-	0fnwF/t6q5vZO+QP/5VMg==
-X-ME-Sender: <xms:S112ZFgm3IeHFi6lKr5FpH5jvpfxwO-emQ2czS7Pq9uDlsy9Fog8-Q>
-    <xme:S112ZKB_RZTgfN8gOc3Qt1yLL0BLazY40yQ4kW6JyaHmpwYd6le27kfuoY0HNPe8q
-    Bg1QVfpKaNzuu4>
-X-ME-Received: <xmr:S112ZFFvIfFBGsSNVsyzjW3e8trWKGolRY9j-x5oH_a7oB_rpZIly3L0KUdHGO_X5tEjIbl3Z-4>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1685478740; x=
+	1685565140; bh=gJtXKfjMb5k3PryJlBFsKsS3ZINd0EksqBFZ4ekKEDw=; b=o
+	QbHhAjdGI/824Nl01Pip/x1ESJBxXGnNCUCk4Arc6BskEm0MTh9UC6MZYaR2q79S
+	k1Uqb9Vj1z9f6r5u3H1HVCqm/h4f+Vs2C2I55ZxnoCF18+ZrNegBzgUSduwuENN3
+	ZelAmC1BB6EziOQZ1m0S4cDcLpBIGrjkaMEsTbam0kd7jHN3XymXk0VF7iAEn4+L
+	g585WZp+QBIJWRDnqGJWJT85ZYmZick+DsS7QTOGtDLjDvulDczBAEFMf2pxjFDZ
+	z70/jIsQbBWGVBj2a0QhQ3776f+UlGOsyvyOBXKD9nxTQaFTHfPjpO3nn2UqnNoO
+	C4Idzu7QZyx3OsqotLhew==
+X-ME-Sender: <xms:VF12ZCx6LBtGDgihYZ-NBi1TQbMnT10K4M83ELm3G3ATfM8R279sSA>
+    <xme:VF12ZOSoOZisX8Dh7PgaI1Br2VXmS17_-QQHdNrd8ODedLEjRJsiupF-ePxfF5-CL
+    VIu0ou0rSk2fvk>
+X-ME-Received: <xmr:VF12ZEUZ2v-22K9HABN8joZIwupVm2l2OuN_SbATb71V0ubBkGLMjmuY97GOgzqwv3poc01Y0NU>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeekjedgudeglecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
     enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghm
     ihcuofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinh
     hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeejffejgffgueegudevvdejkefg
-    hefghffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedvne
+    hefghffhffejteekleeufeffteffhfdtudehteenucevlhhushhtvghrufhiiigvpedtne
     curfgrrhgrmhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhg
     shhlrggsrdgtohhm
-X-ME-Proxy: <xmx:S112ZKSXztYWhNh1MQVCl3fCY8DiKab0iHLF3aayTdVK2LoubaYlsA>
-    <xmx:S112ZCytp1E3O_qW43L1mXgjApcSM6g_XRGwrav4Xg9SVmX7n86Qkw>
-    <xmx:S112ZA7gcLfxJIeXwgaFf_QMQGleyKUVRN_r2UoxT_a0-RDhxoexxg>
-    <xmx:TF12ZNwxjvc_-0yaKFm8hnvtR3BECga_Ld9X_kRH4r-5lLJDCs-ZAw>
+X-ME-Proxy: <xmx:VF12ZIgsEEnwHKmC43Kv9GxV7bH-i7tiH_PkAz1p_2nBYwSEAf6YrA>
+    <xmx:VF12ZEDqiN37KhUgZoqxnScnVqOaHAYoy7GmY53oxQjsejR59koZOQ>
+    <xmx:VF12ZJLZp0lEBhXhDlI94ziBRaLfrp4UJrXDlteRIEm9FlDD8PS34w>
+    <xmx:VF12ZCA0rxPCrK0M9295LprgFjyNUobhbd0Xa629Rogk5JO32xfXOA>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Jens Axboe <axboe@kernel.dk>,
@@ -99,190 +99,95 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 13/16] xen-blkback: Implement diskseq checks
-Date: Tue, 30 May 2023 16:31:13 -0400
-Message-Id: <20230530203116.2008-14-demi@invisiblethingslab.com>
+Subject: [PATCH v2 16/16] xen-blkback: Inform userspace that device has been opened
+Date: Tue, 30 May 2023 16:31:16 -0400
+Message-Id: <20230530203116.2008-17-demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230530203116.2008-1-demi@invisiblethingslab.com>
 References: <20230530203116.2008-1-demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This allows specifying a disk sequence number in XenStore.  If it does
-not match the disk sequence number of the underlying device, the device
-will not be exported and a warning will be logged.  Userspace can use
-this to eliminate race conditions due to major/minor number reuse.
-Old kernels do not support the new syntax, but a later patch will allow
-userspace to discover that the new syntax is supported.
+Set "opened" to "0" before the hotplug script is called.  Once the
+device node has been opened, set "opened" to "1".
+
+"opened" is used exclusively by userspace.  It serves two purposes:
+
+1. It tells userspace that the diskseq Xenstore entry is supported.
+
+2. It tells userspace that it can wait for "opened" to be set to 1.
+   Once "opened" is 1, blkback has a reference to the device, so
+   userspace doesn't need to keep one.
+
+Together, these changes allow userspace to use block devices with
+delete-on-close behavior, such as loop devices with the autoclear flag
+set or device-mapper devices with the deferred-remove flag set.
 
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
 ---
- drivers/block/xen-blkback/xenbus.c | 112 +++++++++++++++++++++++------
- 1 file changed, 89 insertions(+), 23 deletions(-)
+ drivers/block/xen-blkback/xenbus.c | 35 ++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
 diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
-index 4807af1d58059394d7a992335dabaf2bc3901721..9c3eb148fbd802c74e626c3d7bcd69dcb09bd921 100644
+index 9c3eb148fbd802c74e626c3d7bcd69dcb09bd921..519a78aa9073d1faa1dce5c1b36e95ae58da534b 100644
 --- a/drivers/block/xen-blkback/xenbus.c
 +++ b/drivers/block/xen-blkback/xenbus.c
-@@ -24,6 +24,7 @@ struct backend_info {
- 	struct xenbus_watch	backend_watch;
- 	unsigned		major;
- 	unsigned		minor;
-+	unsigned long long	diskseq;
- 	char			*mode;
- };
+@@ -3,6 +3,20 @@
+     Copyright (C) 2005 Rusty Russell <rusty@rustcorp.com.au>
+     Copyright (C) 2005 XenSource Ltd
  
-@@ -479,7 +480,7 @@ static void xen_vbd_free(struct xen_vbd *vbd)
- 
- static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
- 			  unsigned major, unsigned minor, int readonly,
--			  int cdrom)
-+			  bool cdrom, u64 diskseq)
- {
- 	struct xen_vbd *vbd;
- 	struct block_device *bdev;
-@@ -507,6 +508,26 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
- 		xen_vbd_free(vbd);
- 		return -ENOENT;
- 	}
++In addition to the Xenstore nodes required by the Xen block device
++specification, this implementation of blkback uses a new Xenstore
++node: "opened".  blkback sets "opened" to "0" before the hotplug script
++is called.  Once the device node has been opened, blkback sets "opened"
++to "1".
 +
-+	if (diskseq) {
-+		struct gendisk *disk = bdev->bd_disk;
++"opened" is read exclusively by userspace.  It serves two purposes:
 +
-+		if (unlikely(disk == NULL)) {
-+			pr_err("%s: device %08x has no gendisk\n",
-+			       __func__, vbd->pdevice);
-+			xen_vbd_free(vbd);
-+			return -EFAULT;
-+		}
++1. It tells userspace that diskseq@major:minor syntax for "physical-device" is
++   supported.
 +
-+		if (unlikely(disk->diskseq != diskseq)) {
-+			pr_warn("%s: device %08x has incorrect sequence "
-+				"number 0x%llx (expected 0x%llx)\n",
-+				__func__, vbd->pdevice, disk->diskseq, diskseq);
-+			xen_vbd_free(vbd);
-+			return -ENODEV;
-+		}
-+	}
++2. It tells userspace that it can wait for "opened" to be set to 1 after writing
++   "physical-device".  Once "opened" is 1, blkback has a reference to the
++   device, so userspace doesn't need to keep one.
+ 
+ */
+ 
+@@ -699,6 +713,14 @@ static int xen_blkbk_probe(struct xenbus_device *dev,
+ 	if (err)
+ 		pr_warn("%s write out 'max-ring-page-order' failed\n", __func__);
+ 
++	/*
++	 * This informs userspace that the "opened" node will be set to "1" when
++	 * the device has been opened successfully.
++	 */
++	err = xenbus_write(XBT_NIL, dev->nodename, "opened", "0");
++	if (err)
++		goto fail;
 +
- 	vbd->size = vbd_sz(vbd);
- 
- 	if (cdrom || disk_to_cdi(vbd->bdev->bd_disk))
-@@ -707,6 +728,9 @@ static void backend_changed(struct xenbus_watch *watch,
- 	int cdrom = 0;
- 	unsigned long handle;
- 	char *device_type;
-+	char *diskseq_str = NULL;
-+	int diskseq_len;
-+	unsigned long long diskseq;
- 
- 	pr_debug("%s %p %d\n", __func__, dev, dev->otherend_id);
- 
-@@ -725,10 +749,46 @@ static void backend_changed(struct xenbus_watch *watch,
- 		return;
+ 	err = xenbus_switch_state(dev, XenbusStateInitWait);
+ 	if (err)
+ 		goto fail;
+@@ -826,6 +848,19 @@ static void backend_changed(struct xenbus_watch *watch,
+ 		goto fail;
  	}
  
--	if (be->major | be->minor) {
--		if (be->major != major || be->minor != minor)
--			pr_warn("changing physical device (from %x:%x to %x:%x) not supported.\n",
--				be->major, be->minor, major, minor);
-+	diskseq_str = xenbus_read(XBT_NIL, dev->nodename, "diskseq", &diskseq_len);
-+	if (IS_ERR(diskseq_str)) {
-+		int err = PTR_ERR(diskseq_str);
-+		diskseq_str = NULL;
-+
-+		/*
-+		 * If this does not exist, it means legacy userspace that does not
-+		 * support diskseq.
-+		 */
-+		if (unlikely(!XENBUS_EXIST_ERR(err))) {
-+			xenbus_dev_fatal(dev, err, "reading diskseq");
-+			return;
-+		}
-+		diskseq = 0;
-+	} else if (diskseq_len <= 0) {
-+		xenbus_dev_fatal(dev, -EFAULT, "diskseq must not be empty");
-+		goto fail;
-+	} else if (diskseq_len > 16) {
-+		xenbus_dev_fatal(dev, -ERANGE, "diskseq too long: got %d but limit is 16",
-+				 diskseq_len);
-+		goto fail;
-+	} else if (diskseq_str[0] == '0') {
-+		xenbus_dev_fatal(dev, -ERANGE, "diskseq must not start with '0'");
-+		goto fail;
-+	} else {
-+		char *diskseq_end;
-+		diskseq = simple_strtoull(diskseq_str, &diskseq_end, 16);
-+		if (diskseq_end != diskseq_str + diskseq_len) {
-+			xenbus_dev_fatal(dev, -EINVAL, "invalid diskseq");
-+			goto fail;
-+		}
-+		kfree(diskseq_str);
-+		diskseq_str = NULL;
-+	}
-+
-+	if (be->major | be->minor | be->diskseq) {
-+		if (be->major != major || be->minor != minor || be->diskseq != diskseq)
-+			pr_warn("changing physical device (from %x:%x:%llx to %x:%x:%llx)"
-+				" not supported.\n",
-+				be->major, be->minor, be->diskseq, major, minor, diskseq);
- 		return;
- 	}
- 
-@@ -756,29 +816,35 @@ static void backend_changed(struct xenbus_watch *watch,
- 
- 	be->major = major;
- 	be->minor = minor;
-+	be->diskseq = diskseq;
- 
- 	err = xen_vbd_create(be->blkif, handle, major, minor,
--			     !strchr(be->mode, 'w'), cdrom);
--
--	if (err)
--		xenbus_dev_fatal(dev, err, "creating vbd structure");
--	else {
--		err = xenvbd_sysfs_addif(dev);
--		if (err) {
--			xen_vbd_free(&be->blkif->vbd);
--			xenbus_dev_fatal(dev, err, "creating sysfs entries");
--		}
--	}
-+			     !strchr(be->mode, 'w'), cdrom, diskseq);
- 
- 	if (err) {
--		kfree(be->mode);
--		be->mode = NULL;
--		be->major = 0;
--		be->minor = 0;
--	} else {
--		/* We're potentially connected now */
--		xen_update_blkif_status(be->blkif);
-+		xenbus_dev_fatal(dev, err, "creating vbd structure");
-+		goto fail;
- 	}
-+
-+	err = xenvbd_sysfs_addif(dev);
++	/*
++	 * Tell userspace that the device has been opened and that blkback has a
++	 * reference to it.  Userspace can then close the device or mark it as
++	 * delete-on-close, knowing that blkback will keep the device open as
++	 * long as necessary.
++	 */
++	err = xenbus_write(XBT_NIL, dev->nodename, "opened", "1");
 +	if (err) {
-+		xenbus_dev_fatal(dev, err, "creating sysfs entries");
++		xenbus_dev_fatal(dev, err, "%s: notifying userspace device has been opened",
++				 dev->nodename);
 +		goto free_vbd;
 +	}
 +
-+	/* We're potentially connected now */
-+	xen_update_blkif_status(be->blkif);
-+	return;
-+
-+free_vbd:
-+	xen_vbd_free(&be->blkif->vbd);
-+fail:
-+	kfree(diskseq_str);
-+	kfree(be->mode);
-+	be->mode = NULL;
-+	be->major = 0;
-+	be->minor = 0;
-+	be->diskseq = 0;
- }
- 
- /*
+ 	err = xenvbd_sysfs_addif(dev);
+ 	if (err) {
+ 		xenbus_dev_fatal(dev, err, "creating sysfs entries");
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
