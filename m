@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8738C77B7A
-	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 16:59:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.541299.843909 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78E17C7EE2F
+	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 17:02:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.541303.843920 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q42gl-0002ag-DW; Tue, 30 May 2023 16:59:15 +0000
+	id 1q42jp-00046R-Sg; Tue, 30 May 2023 17:02:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 541299.843909; Tue, 30 May 2023 16:59:15 +0000
+Received: by outflank-mailman (output) from mailman id 541303.843920; Tue, 30 May 2023 17:02:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q42gl-0002aZ-B2; Tue, 30 May 2023 16:59:15 +0000
-Received: by outflank-mailman (input) for mailman id 541299;
- Tue, 30 May 2023 16:59:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q42jp-00046K-Q2; Tue, 30 May 2023 17:02:25 +0000
+Received: by outflank-mailman (input) for mailman id 541303;
+ Tue, 30 May 2023 17:02:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wXld=BT=gmail.com=bobbyeshleman@srs-se1.protection.inumbo.net>)
- id 1q42gk-0001RD-CG
- for xen-devel@lists.xenproject.org; Tue, 30 May 2023 16:59:14 +0000
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [2607:f8b0:4864:20::432])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4d996c34-ff0b-11ed-b231-6b7b168915f2;
- Tue, 30 May 2023 18:59:13 +0200 (CEST)
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-64d2a613ec4so3447367b3a.1
- for <xen-devel@lists.xenproject.org>; Tue, 30 May 2023 09:59:13 -0700 (PDT)
-Received: from localhost (ec2-52-9-159-93.us-west-1.compute.amazonaws.com.
- [52.9.159.93]) by smtp.gmail.com with ESMTPSA id
- g16-20020a62e310000000b0064d74808738sm1802929pfh.214.2023.05.30.09.59.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 09:59:12 -0700 (PDT)
+ <SRS0=m7B1=BT=shutemov.name=kirill@srs-se1.protection.inumbo.net>)
+ id 1q42jo-00046B-DJ
+ for xen-devel@lists.xenproject.org; Tue, 30 May 2023 17:02:24 +0000
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
+ [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bc2e756d-ff0b-11ed-8611-37d641c3527e;
+ Tue, 30 May 2023 19:02:20 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id 0EA885C01FE;
+ Tue, 30 May 2023 13:02:18 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Tue, 30 May 2023 13:02:18 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 30 May 2023 13:02:13 -0400 (EDT)
+Received: by box.shutemov.name (Postfix, from userid 1000)
+ id 228F410BD95; Tue, 30 May 2023 20:02:10 +0300 (+03)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,100 +47,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d996c34-ff0b-11ed-b231-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685465952; x=1688057952;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=LxaOtFfyQxSP90cwtzAnyMXl6U0rfymyfizE43djznw=;
-        b=V2yt9sTyIPblISEiz+C8LF8cLyHIhxJK7OmFpU8Ep64dQH4d1+wJQW4/JUpNCpVUBG
-         Uucq92Zm6BiS4tHpcFgts7ZJKRiKv+bww7NUaFKfA+b43HnXuW3+Yf/Cp1dS2oBJODxA
-         FtQO+yVS45JdW2EU55FmKqLXoNhX+SoRqS25PVI0PngiG4rsYa3YZJPmYh5RZ63Pioq4
-         0Irln+0nAX0hI6+wMtVy6YqDazMK4KfgGf9InaU1HtjU+aHpynx+5Felsc37BBFyI56U
-         FpL8x1zRno5A7wK138xtdz4/GM+3G6rL6wz7yVM5FeOmO4sNNkLXa/iR3koTs6C+t8ne
-         fkJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685465952; x=1688057952;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LxaOtFfyQxSP90cwtzAnyMXl6U0rfymyfizE43djznw=;
-        b=ksOZ5j/HGQ/vo/+2jPHeinrsLjcbc8xc/PVWacJg1ym4SmpMJocQkPbaLrm0VJ0HMB
-         PosBX+odbRggmGOjbZt2NZfZ/mR9gDNLsnW3IOkrS9mxmZHsbBpsi0nKPGjFIIJaZaLt
-         SICI70mD7ELgMWaxfP0qs6WYi9fUPZlwToFWbH2/Y0qw2BwCLInwq18yox48HlcQk3D/
-         hZBFoXzYhXxg/p1OBbIJ/qruuj9Nrpa6NXMrtyGDfTh2IWVR6mlU5yOZa6baA8Gd8JmT
-         3Gc5mO0QHxJRMO44xsK4G/zSHVQTR0sY6wKFsx/14AU8MTUhvUAueCdJXQP08D3YrXyR
-         dLlg==
-X-Gm-Message-State: AC+VfDyXYGnRFhBf4MZLMZV7OAQIV3xLouf9Lb478LfWKb5GkHPo+VL9
-	vrXXuSUGyYJ09vHa4RBTkX9Bt13ODUbJ2gem
-X-Google-Smtp-Source: ACHHUZ6YPzRF8ZyrWGjM4QgmvXHdoHIA3OtNf8Rdiz6lNZpZSNfAMi33LK5XppLPYrOBdhHMX5bq/A==
-X-Received: by 2002:a05:6a20:2447:b0:111:ee3b:59b1 with SMTP id t7-20020a056a20244700b00111ee3b59b1mr3878681pzc.2.1685465952344;
-        Tue, 30 May 2023 09:59:12 -0700 (PDT)
-Date: Tue, 30 May 2023 09:59:15 +0000
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+X-Inumbo-ID: bc2e756d-ff0b-11ed-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shutemov.name;
+	 h=cc:cc:content-type:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1685466137; x=
+	1685552537; bh=LP3nfKYA60CmRb8usg09zLfC4LK0DKsE4DbPaZWKkC8=; b=s
+	zV6WskACfFVEqKzRzZ6P7qAJe6qrFMSVHpBH+79Dp07d15X23DMKWcX0I0KFcXyT
+	tzvjPL6PVqxKmWl9OiZAluQTsrsRgXXSkeoGZmBjg2AqbpZoCv4E9eLQoG+5nJyS
+	HkVjFdxFuVE08S4971YSmjn/wkp41pa+PrkMvbhmYb5DpFzY5XaDud34Hh+Zhoz6
+	GurqkOPG4rEcEB8AJi91jlxm1UuPkwewI+Rc+Y0yep2GSLgqXZvuHbrcM3AwGmnK
+	nhvhwVE6CvdzeY2SmUcbH7u12o9rJdx3GhIBQURci3ZBnL3EtUUXUYCE5IO0j3Oy
+	+ve3Is8IMm7NEhKD6NgDA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1685466137; x=1685552537; bh=LP3nfKYA60CmR
+	b8usg09zLfC4LK0DKsE4DbPaZWKkC8=; b=RrRPOp3HKdgjex3qNFuRyIK+z7hQt
+	HJxtGK/mchY8kBsvhzWBNaZITNLfVOjgxQFvAOTOf7PWbRIH/fhJZ3M68cpZl3Kn
+	HDUVS/n7Z+vZxwnvikIMopbIJPPmy57YeU8FBhAPUN2sSq8d9kvTt2KyQQkK8gs4
+	No0ajlXD9loe4/8muuMVBSwc6QJe1Lj9066iqw3R3OBSLwPg9Nby7zf3HGR8BFrS
+	dYSVo6XMqyuUOZCcoeZ3/3G5JLGm2OhrRi2RCgQxZ5fd/w1BJX5y/1Ihd/UcUUuz
+	E57DkJY8AxBbAzIrP2YlwBcSBfaZjdfjJciTnAVEgX/CKECNh69XtWHjA==
+X-ME-Sender: <xms:FSx2ZM4Mq2KAXSzW7xxZWvfpDiasjaZIBeacE7HlH1FClmBTxkzytg>
+    <xme:FSx2ZN6jM2ofnqd2UQ2vPVOctwBgLs5l_3lkVcIXxAiK_wk7w0xis6VpeGHxeSfMQ
+    MfGz3AihHCrPbPLMOY>
+X-ME-Received: <xmr:FSx2ZLeRPinJ2C5f9UrPoRvDeLWSbWpsQP0zjqFZOi8_cOsPLLOLFBLd6J4hz_zV5iLd1Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeekjedguddthecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpeffhffvvefukfhfgggtuggjsehttddttddttddvnecuhfhrohhmpedfmfhi
+    rhhilhhlucetrdcuufhhuhhtvghmohhvfdcuoehkihhrihhllhesshhhuhhtvghmohhvrd
+    hnrghmvgeqnecuggftrfgrthhtvghrnhephfeigefhtdefhedtfedthefghedutddvueeh
+    tedttdehjeeukeejgeeuiedvkedtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrg
+    hmpehmrghilhhfrhhomhepkhhirhhilhhlsehshhhuthgvmhhovhdrnhgrmhgv
+X-ME-Proxy: <xmx:Fix2ZBLhJRJiOQvWIoDyOqk9SL9n8lDqxeC32Ul4urdF3eutnKxrvw>
+    <xmx:Fix2ZALFMhddyYQL6OktSRbWxIz8cLG6QYGTV0okFsA0NNYe2oPMJA>
+    <xmx:Fix2ZCxKXFgl20Rki5Rb1K8_TT3BALB_9tnh9UHkN9QeaU67GWhF0A>
+    <xmx:GSx2ZHr72m1Fde2ANoy9Cc4IuCDUtJgIl9vC2QblR6MMwhrZPaAhaw>
+Feedback-ID: ie3994620:Fastmail
+Date: Tue, 30 May 2023 20:02:10 +0300
+From: "Kirill A. Shutemov" <kirill@shutemov.name>
+To: Thomas Gleixner <tglx@linutronix.de>,
+	Tom Lendacky <thomas.lendacky@amd.com>
+Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
+	David Woodhouse <dwmw2@infradead.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Gianluca Guida <gianluca@rivosinc.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: Re: [PATCH v9 3/5] xen/riscv: align __bss_start
-Message-ID: <ZHXI8/86ibhq8FRl@bullseye>
-References: <cover.1685027257.git.oleksii.kurochko@gmail.com>
- <1158df1cde660e817c4f6d6e0a46ef22bd92dc04.1685027257.git.oleksii.kurochko@gmail.com>
+	Brian Gerst <brgerst@gmail.com>,
+	Arjan van de Veen <arjan@linux.intel.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,	Paul McKenney <paulmck@kernel.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Oleksandr Natalenko <oleksandr@natalenko.name>,
+	Paul Menzel <pmenzel@molgen.mpg.de>,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	Piotr Gorski <lucjan.lucjanov@gmail.com>,
+	Usama Arif <usama.arif@bytedance.com>,	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org,	Russell King <linux@armlinux.org.uk>,
+ Arnd Bergmann <arnd@arndb.de>,	linux-arm-kernel@lists.infradead.org,
+	Catalin Marinas <catalin.marinas@arm.com>,	Will Deacon <will@kernel.org>,
+ Guo Ren <guoren@kernel.org>,	linux-csky@vger.kernel.org,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	linux-mips@vger.kernel.org,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>, linux-parisc@vger.kernel.org,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,	linux-riscv@lists.infradead.org,
+	Mark Rutland <mark.rutland@arm.com>,	Sabin Rapan <sabrapan@amazon.com>,
+	"Michael Kelley (LINUX)" <mikelley@microsoft.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>
+Subject: Re: [patch] x86/smpboot: Disable parallel bootup if cc_vendor != NONE
+Message-ID: <20230530170210.ujkv737uyjfvdoay@box.shutemov.name>
+References: <87sfbhlwp9.ffs@tglx>
+ <20230529023939.mc2akptpxcg3eh2f@box.shutemov.name>
+ <87bki3kkfi.ffs@tglx>
+ <20230529203129.sthnhzgds7ynddxd@box.shutemov.name>
+ <20230530005428.jyrc2ezx5raohlrt@box.shutemov.name>
+ <87mt1mjhk3.ffs@tglx>
+ <87jzwqjeey.ffs@tglx>
+ <87cz2ija1e.ffs@tglx>
+ <20230530122951.2wu5rwcu26ofov6f@box.shutemov.name>
+ <87wn0pizbl.ffs@tglx>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1158df1cde660e817c4f6d6e0a46ef22bd92dc04.1685027257.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <87wn0pizbl.ffs@tglx>
 
-On Thu, May 25, 2023 at 06:28:16PM +0300, Oleksii Kurochko wrote:
-> bss clear cycle requires proper alignment of __bss_start.
+On Tue, May 30, 2023 at 06:00:46PM +0200, Thomas Gleixner wrote:
+> On Tue, May 30 2023 at 15:29, Kirill A. Shutemov wrote:
+> > On Tue, May 30, 2023 at 02:09:17PM +0200, Thomas Gleixner wrote:
+> >> The decision to allow parallel bringup of secondary CPUs checks
+> >> CC_ATTR_GUEST_STATE_ENCRYPT to detect encrypted guests. Those cannot use
+> >> parallel bootup because accessing the local APIC is intercepted and raises
+> >> a #VC or #VE, which cannot be handled at that point.
+> >> 
+> >> The check works correctly, but only for AMD encrypted guests. TDX does not
+> >> set that flag.
+> >> 
+> >> Check for cc_vendor != CC_VENDOR_NONE instead. That might be overbroad, but
+> >> definitely works for both AMD and Intel.
+> >
+> > It boots fine with TDX, but I think it is wrong. cc_get_vendor() will
+> > report CC_VENDOR_AMD even on bare metal if SME is enabled. I don't think
+> > we want it.
 > 
-> ALIGN(PAGE_SIZE) before "*(.bss.page_aligned)" in xen.lds.S
-> was removed as any contribution to "*(.bss.page_aligned)" have to
-> specify proper aligntment themselves.
+> Right. Did not think about that.
 > 
-> Fixes: cfa0409f7cbb ("xen/riscv: initialize .bss section")
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> Changes in V9:
->  * Nothing changed. Only rebase.
-> ---
-> Changes in V8:
->  * Remove ". = ALIGN(PAGE_SIZE);" before "*(.bss.page_aligned)" in
->    vmlinux.lds.S file as any contribution to .bss.page_aligned have to specify
->    proper alignment themselves.
->  * Add "Fixes: cfa0409f7cbb ("xen/riscv: initialize .bss section")" to
->    the commit message
->  * Add "Reviewed-by: Jan Beulich <jbeulich@suse.com>" to the commit message
-> ---
-> Changes in V7:
->  * the patch was introduced in the current patch series.
-> ---
->  xen/arch/riscv/xen.lds.S | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
-> index fe475d096d..df71d31e17 100644
-> --- a/xen/arch/riscv/xen.lds.S
-> +++ b/xen/arch/riscv/xen.lds.S
-> @@ -137,9 +137,9 @@ SECTIONS
->      __init_end = .;
->  
->      .bss : {                     /* BSS */
-> +        . = ALIGN(POINTER_ALIGN);
->          __bss_start = .;
->          *(.bss.stack_aligned)
-> -        . = ALIGN(PAGE_SIZE);
->          *(.bss.page_aligned)
->          . = ALIGN(PAGE_SIZE);
->          __per_cpu_start = .;
-> -- 
-> 2.40.1
-> 
-> 
+> But the same way is CC_ATTR_GUEST_MEM_ENCRYPT overbroad for AMD. Only
+> SEV-ES traps RDMSR if I'm understandig that maze correctly.
 
-Acked-by: Bobby Eshleman <bobbyeshleman@gmail.com>
+I don't know difference between SEV flavours that well.
+
+I see there's that on SEV-SNP access to x2APIC MSR range (MSR 0x800-0x8FF)
+is intercepted regardless if MSR_AMD64_SNP_ALT_INJ feature is present. But
+I'm not sure what the state on SEV or SEV-ES.
+
+Tom?
+
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
 
