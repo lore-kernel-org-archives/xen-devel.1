@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56A8C77B73
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA81FC7EE23
 	for <xen-devel@archiver.kernel.org>; Tue, 30 May 2023 13:59:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.541187.843662 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.541188.843668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3zsM-0003mE-LS; Tue, 30 May 2023 13:59:02 +0000
+	id 1q3zsM-0003xQ-Vc; Tue, 30 May 2023 13:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 541187.843662; Tue, 30 May 2023 13:59:02 +0000
+Received: by outflank-mailman (output) from mailman id 541188.843668; Tue, 30 May 2023 13:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q3zsM-0003kz-EV; Tue, 30 May 2023 13:59:02 +0000
-Received: by outflank-mailman (input) for mailman id 541187;
+	id 1q3zsM-0003vB-R4; Tue, 30 May 2023 13:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 541188;
  Tue, 30 May 2023 13:59:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4Ox2=BT=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1q3zsL-0003d9-4V
+ id 1q3zsL-0003cy-I1
  for xen-devel@lists.xenproject.org; Tue, 30 May 2023 13:59:01 +0000
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [2a00:1450:4864:20::430])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1f5b44fc-fef2-11ed-8611-37d641c3527e;
- Tue, 30 May 2023 15:58:58 +0200 (CEST)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-30ae4ec1ac7so2032769f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 30 May 2023 06:58:58 -0700 (PDT)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2089a5e4-fef2-11ed-b231-6b7b168915f2;
+ Tue, 30 May 2023 15:59:00 +0200 (CEST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-30ae61354fbso1945172f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 30 May 2023 06:59:00 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- h4-20020adfe984000000b002fe96f0b3acsm3442008wrm.63.2023.05.30.06.58.57
+ h4-20020adfe984000000b002fe96f0b3acsm3442008wrm.63.2023.05.30.06.58.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 06:58:57 -0700 (PDT)
+ Tue, 30 May 2023 06:58:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,130 +47,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f5b44fc-fef2-11ed-8611-37d641c3527e
+X-Inumbo-ID: 2089a5e4-fef2-11ed-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1685455138; x=1688047138;
+        d=cloud.com; s=cloud; t=1685455139; x=1688047139;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7VGIEfka143J0krZiSLzHrTls4eT4q/W+mkBwrLfv54=;
-        b=ZhhZfO7q72sTT5rBhH2YPnCoB1wFR4rVVUlVo6NFuQyjnyd1w8vyWkUp8w4vDvVDyV
-         7R2QiC5jAJipXukYakZZsufxLacWcThAR0EoTvElPuWcnBEsvJLz/Fq69iN0yeTsdlkO
-         LlL+Es9vag2BXH0YSLS7buxBupdLdcUoEef0k=
+        bh=np5kDlh2y0ObvKEUmXbLb6p7vYDYelZ0XKIPKrONjXY=;
+        b=ceD4bG2AVhDx9T77fVfaup8UPYlkCZtwOTU+5lg7QCiUwO1cHoYnKXlZvitfV5FsSU
+         zcFWbQ0jAPkhbRSSBcKj3XFaLXlyQ6u/b3YZG5eepASYTe7g8NWnA06mqeyzsy7ReXwI
+         R2TJWtrmGLW6Cysy78MziGZbMP+jp+gY4POZo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685455138; x=1688047138;
+        d=1e100.net; s=20221208; t=1685455139; x=1688047139;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7VGIEfka143J0krZiSLzHrTls4eT4q/W+mkBwrLfv54=;
-        b=My4loFbhE2Rptr56F6JBpCt+WXiWbu//GzT7dAUBY331Wzshk3AG8HpR8wz6kKMdlW
-         1etv+axrwwYwEReE0bDxTaeFMofjjXM9GQ3SmF5rC8jZyMIecdDc9IZq5F9gnqZVWzzK
-         Cchw6emKr6ISJmA4DsEszKOu7X6HqyXPO2nO+jwxIiLv6davngQ0/I5eUvpfeUzxsj+X
-         +cJH/NZW/VWZCtWOxZHv3RGtpygKfum6Em0nF6l8TooEep5eEIh0qrONWp87oLH6qYz/
-         ZuPjZEBTPUObBaIUt68nRj0bH8VIE9N4QepjUGmaAzbPE92A6719xzB3WxRHYYuzS5+/
-         Hykw==
-X-Gm-Message-State: AC+VfDxKG/9idoJocX0qAIzAXNZK0SgRcmT7QXDi0+8IcXt3E5g0yupI
-	X6kai26XqKyXOYVDdGEMYh1Xc+kGJKfMJDDtm+4=
-X-Google-Smtp-Source: ACHHUZ5TjpqhfIQbn9xHpTqWWLDyhcSyIuXhK0cd3ZAOY33EY1wyj0ZIUSfHnCWHKrA3DuXFOQh7Xg==
-X-Received: by 2002:adf:ff85:0:b0:2ee:f77f:3d02 with SMTP id j5-20020adfff85000000b002eef77f3d02mr1743613wrr.0.1685455138287;
-        Tue, 30 May 2023 06:58:58 -0700 (PDT)
+        bh=np5kDlh2y0ObvKEUmXbLb6p7vYDYelZ0XKIPKrONjXY=;
+        b=RTyab0RH1h79f9XafYutb5k4B1f9i+2FssDs2VmDbFTE5PNUQD6fU9Oba6+X15xn7X
+         eHZF7wTrjgjth099stNBZpYSarwp5lz68JiM9P5Uf0yvYmhzelXftiGyXe7RTEtHHH4w
+         5J3tBgLPkVDLuwQLIbeUIKbSmclPH/LYJ8hTA6JNCZJz+Ixgisi/qNva49qyF9hrvIxr
+         JbvTOeOR8uJgxCXrozlEX5xFNNCj1/Z7zTs0s9A/v6FV2VKlb12AKt4hHEW0R5D68Hbi
+         HAdPTGt1ZvCaW1WENyElIAmGtYxEmDSSf/a+eZc2JRgt2CHxyjL5znD+kD8c35nBXKlE
+         hxnw==
+X-Gm-Message-State: AC+VfDwV4283SuFAFPkUvfbOxte7xG7dF917MR5fkHuNTSZLOj4wW74T
+	jl4u2i/KkNgBVP8sHuYaJCxbqWJO3yGmrJDa2Oc=
+X-Google-Smtp-Source: ACHHUZ4GSwSns8NpfQqD2z6m8zVduqEQmAS+Sj6JmbS68rLRWiHF6PLU4LRp8pmAvlACwvAtaiUusw==
+X-Received: by 2002:a5d:5551:0:b0:306:3731:f73b with SMTP id g17-20020a5d5551000000b003063731f73bmr1748394wrw.43.1685455139554;
+        Tue, 30 May 2023 06:58:59 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 1/3] x86: Add bit definitions for Automatic IBRS
-Date: Tue, 30 May 2023 14:58:52 +0100
-Message-Id: <20230530135854.1517-2-alejandro.vallejo@cloud.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 3/3] x86: Add support for AMD's Automatic IBRS
+Date: Tue, 30 May 2023 14:58:54 +0100
+Message-Id: <20230530135854.1517-4-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230530135854.1517-1-alejandro.vallejo@cloud.com>
 References: <20230530135854.1517-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is an AMD feature to reduce the IBRS handling overhead. Once enabled,
-processes running at CPL=0 are automatically IBRS-protected even if
-SPEC_CTRL.IBRS is not set. Furthermore, the RAS/RSB is cleared on VMEXIT.
+In cases where AutoIBRS is supported by the host:
 
-The feature is exposed in CPUID and toggled in EFER.
+* Prefer AutoIBRS to retpolines as BTI mitigation in heuristics
+  calculations.
+* Always enable AutoIBRS if IBRS is chosen as a BTI mitigation.
+* Avoid stuffing the RAS/RSB on VMEXIT if AutoIBRS is enabled.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v2:
-  * Renamed AUTOMATIC -> AUTO
-  * Newline removal in xen-cpuid.c
+  * Gated CPUID read to e21a by the presence the leaf
+  * Add auto-ibrs to trampoline_efer if chosen
+  * Remove smpboot.c modifications, as they are not needed after
+    trampoline_efer is modified
+  * Avoid the AutoIBRS delay as it doesn't provide any benefit.
 ---
- tools/libs/light/libxl_cpuid.c              | 1 +
- tools/misc/xen-cpuid.c                      | 1 +
- xen/arch/x86/include/asm/cpufeature.h       | 1 +
- xen/arch/x86/include/asm/msr-index.h        | 1 +
- xen/include/public/arch-x86/cpufeatureset.h | 1 +
- 5 files changed, 5 insertions(+)
+ xen/arch/x86/spec_ctrl.c | 45 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 34 insertions(+), 11 deletions(-)
 
-diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
-index cca0f19d93..f5ce9f9795 100644
---- a/tools/libs/light/libxl_cpuid.c
-+++ b/tools/libs/light/libxl_cpuid.c
-@@ -317,6 +317,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 50d467f74c..36231e65fb 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -390,7 +390,7 @@ custom_param("pv-l1tf", parse_pv_l1tf);
  
-         {"lfence+",      0x80000021, NA, CPUID_REG_EAX,  2,  1},
-         {"nscb",         0x80000021, NA, CPUID_REG_EAX,  6,  1},
-+        {"auto-ibrs",    0x80000021, NA, CPUID_REG_EAX,  8,  1},
-         {"cpuid-user-dis", 0x80000021, NA, CPUID_REG_EAX, 17, 1},
- 
-         {"maxhvleaf",    0x40000000, NA, CPUID_REG_EAX,  0,  8},
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index 5d0c64a45f..c65d9e01bf 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -199,6 +199,7 @@ static const char *const str_e21a[32] =
+ static void __init print_details(enum ind_thunk thunk)
  {
-     [ 2] = "lfence+",
-     [ 6] = "nscb",
-+    [ 8] = "auto-ibrs",
+-    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, max = 0, tmp;
++    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, e21a = 0, max = 0, tmp;
+     uint64_t caps = 0;
  
-     /* 16 */                [17] = "cpuid-user-dis",
- };
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index 50235f098d..ace31e3b1f 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -161,6 +161,7 @@ static inline bool boot_cpu_has(unsigned int feat)
- #define cpu_has_amd_ssbd        boot_cpu_has(X86_FEATURE_AMD_SSBD)
- #define cpu_has_virt_ssbd       boot_cpu_has(X86_FEATURE_VIRT_SSBD)
- #define cpu_has_ssb_no          boot_cpu_has(X86_FEATURE_SSB_NO)
-+#define cpu_has_auto_ibrs       boot_cpu_has(X86_FEATURE_AUTO_IBRS)
+     /* Collect diagnostics about available mitigations. */
+@@ -400,6 +400,8 @@ static void __init print_details(enum ind_thunk thunk)
+         cpuid_count(7, 2, &tmp, &tmp, &tmp, &_7d2);
+     if ( boot_cpu_data.extended_cpuid_level >= 0x80000008 )
+         cpuid(0x80000008, &tmp, &e8b, &tmp, &tmp);
++    if ( boot_cpu_data.extended_cpuid_level >= 0x80000021 )
++        cpuid(0x80000021, &e21a, &tmp, &tmp, &tmp);
+     if ( cpu_has_arch_caps )
+         rdmsrl(MSR_ARCH_CAPABILITIES, caps);
  
- /* CPUID level 0x00000007:0.edx */
- #define cpu_has_avx512_4vnniw   boot_cpu_has(X86_FEATURE_AVX512_4VNNIW)
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 082fb2e0d9..73d0af2615 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -175,6 +175,7 @@
- #define  EFER_NXE                           (_AC(1, ULL) << 11) /* No Execute Enable */
- #define  EFER_SVME                          (_AC(1, ULL) << 12) /* Secure Virtual Machine Enable */
- #define  EFER_FFXSE                         (_AC(1, ULL) << 14) /* Fast FXSAVE/FXRSTOR */
-+#define  EFER_AIBRSE                        (_AC(1, ULL) << 21) /* Automatic IBRS Enable */
+@@ -430,11 +432,12 @@ static void __init print_details(enum ind_thunk thunk)
+            (e8b  & cpufeat_mask(X86_FEATURE_IBPB_RET))       ? " IBPB_RET"       : "");
  
- #define EFER_KNOWN_MASK \
-     (EFER_SCE | EFER_LME | EFER_LMA | EFER_NXE | EFER_SVME | EFER_FFXSE)
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 777041425e..3ac144100e 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -287,6 +287,7 @@ XEN_CPUFEATURE(AVX_IFMA,     10*32+23) /*A  AVX-IFMA Instructions */
- /* AMD-defined CPU features, CPUID level 0x80000021.eax, word 11 */
- XEN_CPUFEATURE(LFENCE_DISPATCH,    11*32+ 2) /*A  LFENCE always serializing */
- XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and limit too) */
-+XEN_CPUFEATURE(AUTO_IBRS,          11*32+ 8) /*   HW can handle IBRS on its own */
- XEN_CPUFEATURE(CPUID_USER_DIS,     11*32+17) /*   CPUID disable for CPL > 0 software */
+     /* Hardware features which need driving to mitigate issues. */
+-    printk("  Hardware features:%s%s%s%s%s%s%s%s%s%s%s%s\n",
++    printk("  Hardware features:%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
+            (e8b  & cpufeat_mask(X86_FEATURE_IBPB)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_IBRSB))          ? " IBPB"           : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_IBRS)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_IBRSB))          ? " IBRS"           : "",
++           (e21a & cpufeat_mask(X86_FEATURE_AUTO_IBRS))      ? " AUTO_IBRS"      : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_AMD_STIBP)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_STIBP))          ? " STIBP"          : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_AMD_SSBD)) ||
+@@ -468,7 +471,9 @@ static void __init print_details(enum ind_thunk thunk)
+            thunk == THUNK_JMP       ? "JMP" : "?",
+            (!boot_cpu_has(X86_FEATURE_IBRSB) &&
+             !boot_cpu_has(X86_FEATURE_IBRS))         ? "No" :
+-           (default_xen_spec_ctrl & SPEC_CTRL_IBRS)  ? "IBRS+" :  "IBRS-",
++           (cpu_has_auto_ibrs &&
++            (default_xen_spec_ctrl & SPEC_CTRL_IBRS)) ? "AUTO_IBRS+" :
++            (default_xen_spec_ctrl & SPEC_CTRL_IBRS)  ? "IBRS+" : "IBRS-",
+            (!boot_cpu_has(X86_FEATURE_STIBP) &&
+             !boot_cpu_has(X86_FEATURE_AMD_STIBP))    ? "" :
+            (default_xen_spec_ctrl & SPEC_CTRL_STIBP) ? " STIBP+" : " STIBP-",
+@@ -1150,15 +1155,20 @@ void __init init_speculation_mitigations(void)
+     }
+     else
+     {
+-        /*
+-         * Evaluate the safest Branch Target Injection mitigations to use.
+-         * First, begin with compiler-aided mitigations.
+-         */
+-        if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) )
++        /* Evaluate the safest BTI mitigations with lowest overhead */
++        if ( cpu_has_auto_ibrs )
++        {
++            /*
++             * We'd rather use Automatic IBRS if present. It helps in order
++             * to avoid stuffing the RSB manually on every VMEXIT.
++             */
++            ibrs = true;
++        }
++        else if ( IS_ENABLED(CONFIG_INDIRECT_THUNK) )
+         {
+             /*
+-             * On all hardware, we'd like to use retpoline in preference to
+-             * IBRS, but only if it is safe on this hardware.
++             * Otherwise, we'd like to use retpoline in preference to
++             * plain IBRS, but only if it is safe on this hardware.
+              */
+             if ( retpoline_safe() )
+                 thunk = THUNK_RETPOLINE;
+@@ -1357,7 +1367,9 @@ void __init init_speculation_mitigations(void)
+      */
+     if ( opt_rsb_hvm )
+     {
+-        setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
++        /* Automatic IBRS wipes the RSB for us on VMEXIT */
++        if ( !(ibrs && cpu_has_auto_ibrs) )
++            setup_force_cpu_cap(X86_FEATURE_SC_RSB_HVM);
  
- /* Intel-defined CPU features, CPUID level 0x00000007:1.ebx, word 12 */
+         /*
+          * For SVM, Xen's RSB safety actions are performed before STGI, so
+@@ -1594,6 +1606,17 @@ void __init init_speculation_mitigations(void)
+             barrier();
+         }
+ 
++        /*
++         * If we're to use AutoIBRS, then set it now for the BSP and mark
++         * it in trampoline_efer so it's picked up by the wakeup code. It
++         * will be used while starting up the APs and during S3 wakeups.
++         */
++        if ( ibrs && cpu_has_auto_ibrs )
++        {
++            write_efer(read_efer() | EFER_AIBRSE);
++            bootsym(trampoline_efer) |= EFER_AIBRSE;
++        }
++
+         val = bsp_delay_spec_ctrl ? 0 : default_xen_spec_ctrl;
+ 
+         wrmsrl(MSR_SPEC_CTRL, val);
 -- 
 2.34.1
 
