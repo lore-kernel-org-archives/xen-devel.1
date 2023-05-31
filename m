@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5477C7EE29
-	for <xen-devel@archiver.kernel.org>; Wed, 31 May 2023 21:38:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542105.845711 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F76C77B73
+	for <xen-devel@archiver.kernel.org>; Wed, 31 May 2023 23:33:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542178.845737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4TWB-0005Vi-C5; Wed, 31 May 2023 21:38:07 +0000
+	id 1q4VJF-0005On-20; Wed, 31 May 2023 23:32:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542105.845711; Wed, 31 May 2023 21:38:07 +0000
+Received: by outflank-mailman (output) from mailman id 542178.845737; Wed, 31 May 2023 23:32:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4TWA-0005Sg-Re; Wed, 31 May 2023 21:38:06 +0000
-Received: by outflank-mailman (input) for mailman id 542105;
- Wed, 31 May 2023 21:38:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jp8B=BU=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1q4TQI-0006xu-K7
- for xen-devel@lists.xenproject.org; Wed, 31 May 2023 21:32:02 +0000
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [2607:f8b0:4864:20::1134])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 92f508ae-fffa-11ed-b231-6b7b168915f2;
- Wed, 31 May 2023 23:31:59 +0200 (CEST)
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-561b7729a12so22050707b3.1
- for <xen-devel@lists.xenproject.org>; Wed, 31 May 2023 14:31:59 -0700 (PDT)
-Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::46])
- by smtp.googlemail.com with ESMTPSA id
- t63-20020a0dd142000000b0055aafcef659sm658905ywd.5.2023.05.31.14.31.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 May 2023 14:31:58 -0700 (PDT)
+	id 1q4VJE-0005Og-Ur; Wed, 31 May 2023 23:32:52 +0000
+Received: by outflank-mailman (input) for mailman id 542178;
+ Wed, 31 May 2023 23:32:52 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q4VJE-0005OW-Ir; Wed, 31 May 2023 23:32:52 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q4VJE-0002Ia-B6; Wed, 31 May 2023 23:32:52 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q4VJE-0002Av-2v; Wed, 31 May 2023 23:32:52 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1q4VJE-0002SO-2S; Wed, 31 May 2023 23:32:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,223 +44,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92f508ae-fffa-11ed-b231-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685568718; x=1688160718;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iEZT4iY8EEl9pa7al7MLo6hk70lgBLqPfTLtEBGVb+s=;
-        b=PGO1theuZfi6ZrSPVpMFRQAeOHsn5pMjC8xgKa8aRHHFy/i2vTnGPbNlxfLx+6Euaq
-         Hf4qVvFQ61uRrkfUN+YNchpjFmVCPYUXGh7NblhXFTi/GX4kJQBqzqLIMTqMj4VWjiVr
-         t8NWR43kuHnjQ8iMMng7kHUvIdpNqX/tRzg++sr2gZfQOVzgSjuKT3bzIA3uSG7kWgDQ
-         17UYBKLxvl6bX7QLV22k75B/kUNvf5SVMTA3n26j13v0+L9xXBnD6yck43hrFvtcREzQ
-         KMCTc+ZOGPqah06KW6AsjVfXFVLRcSZafJ7+MXnceNvSPC9LkpMpq/Z7sCtXDDCHjgXH
-         Kgmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685568718; x=1688160718;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iEZT4iY8EEl9pa7al7MLo6hk70lgBLqPfTLtEBGVb+s=;
-        b=gjB4HHzN2kuhQjs6V/GRAr+kxng9w0PNrLfan4wReHJbx9DuFW/iI1qeA9C2IXIK3z
-         yVLCojOYrVzLU8BXl9UHvrJNN3qcyp6tpLNcjgymGSf09sN7/pUzvjLMzmR8JIlCGTwN
-         M2r9OoGSO7VOJ9ywZlhnyGvPEhgCJes8hCca9Xkm/hEiYsRiHEmCrJ9vliBiziwvCefu
-         z5NwD58fPLORHFKLHAQnkAhlXs3J0h9wQIhLxAfXmxWS7Rv8qH+Efq/RS9lulDG1CV9p
-         iXRaWoxRxU0i4Nqft356LwriOu9EKM+WomAy2U2HbXxKotkoUY8SoVIK6ZQQFpXiPlXU
-         6ztg==
-X-Gm-Message-State: AC+VfDy5Xs5xGV+qfxQ+N5KdKy12/iyE78Cd156MJHH6l89w2zkBeIwC
-	kHVCq2ikrtfKp9lZKvfaOJM=
-X-Google-Smtp-Source: ACHHUZ4Otln+kVOEgUySV1ArKpIYvBeruzYUd+lmycqZnK7GGCWSTwkmzaWpGSc76/XUk7nK9Exgbg==
-X-Received: by 2002:a81:4f05:0:b0:561:987e:27a with SMTP id d5-20020a814f05000000b00561987e027amr7848466ywb.10.1685568718603;
-        Wed, 31 May 2023 14:31:58 -0700 (PDT)
-From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>
-Cc: linux-mm@kvack.org,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	kvm@vger.kernel.org,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
-	Geert Uytterhoeven <geert@linux-m68k.org>
-Subject: [PATCH v3 25/34] m68k: Convert various functions to use ptdescs
-Date: Wed, 31 May 2023 14:30:23 -0700
-Message-Id: <20230531213032.25338-26-vishal.moola@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230531213032.25338-1-vishal.moola@gmail.com>
-References: <20230531213032.25338-1-vishal.moola@gmail.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=aqx5hl7Nt0wb2PyfF9J0zKew6BrCvBt4HohtFg5cevI=; b=lTbY1JRwKpBU0wSujJPyqXKbm6
+	NUvHdtji9XhkdJPy58PwCS8JokRo/PHjYhYkicHPHhuYnFG086WXim7BpemJR0Y4vODXadCovCahe
+	LeSYPDs0CjHGdWYxcc5TXYAlQDFd8zgLgY1z71ghhHXyPFVqu94eI8A6P1b6VKnwKqEU=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-181054-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 181054: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=dc98fa74446e5abe417e5ba9a6a632b50444cfa1
+X-Osstest-Versions-That:
+    xen=94200e1bae07e725cc07238c11569c5cab7befb7
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 31 May 2023 23:32:52 +0000
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+flight 181054 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/181054/
 
-Some of the functions use the *get*page*() helper functions. Convert
-these to use pagetable_alloc() and ptdesc_address() instead to help
-standardize page tables further.
+Failures :-/ but no regressions.
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
----
- arch/m68k/include/asm/mcf_pgalloc.h  | 41 ++++++++++++++--------------
- arch/m68k/include/asm/sun3_pgalloc.h |  8 +++---
- arch/m68k/mm/motorola.c              |  4 +--
- 3 files changed, 27 insertions(+), 26 deletions(-)
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-diff --git a/arch/m68k/include/asm/mcf_pgalloc.h b/arch/m68k/include/asm/mcf_pgalloc.h
-index 5c2c0a864524..9eb4ef9e6d77 100644
---- a/arch/m68k/include/asm/mcf_pgalloc.h
-+++ b/arch/m68k/include/asm/mcf_pgalloc.h
-@@ -7,20 +7,19 @@
- 
- extern inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
- {
--	free_page((unsigned long) pte);
-+	pagetable_free(virt_to_ptdesc(pte));
- }
- 
- extern const char bad_pmd_string[];
- 
- extern inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm)
- {
--	unsigned long page = __get_free_page(GFP_DMA);
-+	struct ptdesc *ptdesc = pagetable_alloc(GFP_DMA | __GFP_ZERO, 0);
- 
--	if (!page)
-+	if (!ptdesc)
- 		return NULL;
- 
--	memset((void *)page, 0, PAGE_SIZE);
--	return (pte_t *) (page);
-+	return (pte_t *) (ptdesc_address(ptdesc));
- }
- 
- extern inline pmd_t *pmd_alloc_kernel(pgd_t *pgd, unsigned long address)
-@@ -35,36 +34,36 @@ extern inline pmd_t *pmd_alloc_kernel(pgd_t *pgd, unsigned long address)
- static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pgtable,
- 				  unsigned long address)
- {
--	struct page *page = virt_to_page(pgtable);
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pgtable);
- 
--	pgtable_pte_page_dtor(page);
--	__free_page(page);
-+	pagetable_pte_dtor(ptdesc);
-+	pagetable_free(ptdesc);
- }
- 
- static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
- {
--	struct page *page = alloc_pages(GFP_DMA, 0);
-+	struct ptdesc *ptdesc = pagetable_alloc(GFP_DMA, 0);
- 	pte_t *pte;
- 
--	if (!page)
-+	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pte_page_ctor(page)) {
--		__free_page(page);
-+	if (!pagetable_pte_ctor(ptdesc)) {
-+		pagetable_free(ptdesc);
- 		return NULL;
- 	}
- 
--	pte = page_address(page);
--	clear_page(pte);
-+	pte = ptdesc_address(ptdesc);
-+	pagetable_clear(pte);
- 
- 	return pte;
- }
- 
- static inline void pte_free(struct mm_struct *mm, pgtable_t pgtable)
- {
--	struct page *page = virt_to_page(pgtable);
-+	struct ptdesc *ptdesc = virt_to_ptdesc(ptdesc);
- 
--	pgtable_pte_page_dtor(page);
--	__free_page(page);
-+	pagetable_pte_dtor(ptdesc);
-+	pagetable_free(ptdesc);
- }
- 
- /*
-@@ -75,16 +74,18 @@ static inline void pte_free(struct mm_struct *mm, pgtable_t pgtable)
- 
- static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
- {
--	free_page((unsigned long) pgd);
-+	pagetable_free(virt_to_ptdesc(pgd));
- }
- 
- static inline pgd_t *pgd_alloc(struct mm_struct *mm)
- {
- 	pgd_t *new_pgd;
-+	struct ptdesc *ptdesc = pagetable_alloc(GFP_DMA | GFP_NOWARN, 0);
- 
--	new_pgd = (pgd_t *)__get_free_page(GFP_DMA | __GFP_NOWARN);
--	if (!new_pgd)
-+	if (!ptdesc)
- 		return NULL;
-+	new_pgd = (pgd_t *) ptdesc_address(ptdesc);
-+
- 	memcpy(new_pgd, swapper_pg_dir, PTRS_PER_PGD * sizeof(pgd_t));
- 	memset(new_pgd, 0, PAGE_OFFSET >> PGDIR_SHIFT);
- 	return new_pgd;
-diff --git a/arch/m68k/include/asm/sun3_pgalloc.h b/arch/m68k/include/asm/sun3_pgalloc.h
-index 198036aff519..ff48573db2c0 100644
---- a/arch/m68k/include/asm/sun3_pgalloc.h
-+++ b/arch/m68k/include/asm/sun3_pgalloc.h
-@@ -17,10 +17,10 @@
- 
- extern const char bad_pmd_string[];
- 
--#define __pte_free_tlb(tlb,pte,addr)			\
--do {							\
--	pgtable_pte_page_dtor(pte);			\
--	tlb_remove_page((tlb), pte);			\
-+#define __pte_free_tlb(tlb, pte, addr)				\
-+do {								\
-+	pagetable_pte_dtor(page_ptdesc(pte));			\
-+	tlb_remove_page_ptdesc((tlb), page_ptdesc(pte));	\
- } while (0)
- 
- static inline void pmd_populate_kernel(struct mm_struct *mm, pmd_t *pmd, pte_t *pte)
-diff --git a/arch/m68k/mm/motorola.c b/arch/m68k/mm/motorola.c
-index c75984e2d86b..594575a0780c 100644
---- a/arch/m68k/mm/motorola.c
-+++ b/arch/m68k/mm/motorola.c
-@@ -161,7 +161,7 @@ void *get_pointer_table(int type)
- 			 * m68k doesn't have SPLIT_PTE_PTLOCKS for not having
- 			 * SMP.
- 			 */
--			pgtable_pte_page_ctor(virt_to_page(page));
-+			pagetable_pte_ctor(virt_to_ptdesc(page));
- 		}
- 
- 		mmu_page_ctor(page);
-@@ -201,7 +201,7 @@ int free_pointer_table(void *table, int type)
- 		list_del(dp);
- 		mmu_page_dtor((void *)page);
- 		if (type == TABLE_PTE)
--			pgtable_pte_page_dtor(virt_to_page((void *)page));
-+			pagetable_pte_dtor(virt_to_ptdesc((void *)page));
- 		free_page (page);
- 		return 1;
- 	} else if (ptable_list[type].next != dp) {
--- 
-2.40.1
+version targeted for testing:
+ xen                  dc98fa74446e5abe417e5ba9a6a632b50444cfa1
+baseline version:
+ xen                  94200e1bae07e725cc07238c11569c5cab7befb7
 
+Last test of basis   181018  2023-05-30 20:00:24 Z    1 days
+Failing since        181031  2023-05-31 11:00:27 Z    0 days    4 attempts
+Testing same since   181054  2023-05-31 19:00:25 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Bobby Eshleman <bobbyeshleman@gmail.com>
+  George Dunlap <george.dunlap@cloud.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Olaf Hering <olaf@aepfle.de>
+  Oleksii Kurochko <oleksii.kurochko@gmail.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   94200e1bae..dc98fa7444  dc98fa74446e5abe417e5ba9a6a632b50444cfa1 -> smoke
 
