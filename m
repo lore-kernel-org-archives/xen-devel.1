@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E136FC7EE29
-	for <xen-devel@archiver.kernel.org>; Wed, 31 May 2023 21:31:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542021.845476 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D093C7EE2A
+	for <xen-devel@archiver.kernel.org>; Wed, 31 May 2023 21:31:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542019.845461 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4TPq-0001v5-4t; Wed, 31 May 2023 21:31:34 +0000
+	id 1q4TPn-0001PJ-4S; Wed, 31 May 2023 21:31:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542021.845476; Wed, 31 May 2023 21:31:34 +0000
+Received: by outflank-mailman (output) from mailman id 542019.845461; Wed, 31 May 2023 21:31:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4TPp-0001u4-QC; Wed, 31 May 2023 21:31:33 +0000
-Received: by outflank-mailman (input) for mailman id 542021;
- Wed, 31 May 2023 21:31:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q4TPn-0001P4-0O; Wed, 31 May 2023 21:31:31 +0000
+Received: by outflank-mailman (input) for mailman id 542019;
+ Wed, 31 May 2023 21:31:30 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jp8B=BU=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1q4TPn-0006xu-Se
- for xen-devel@lists.xenproject.org; Wed, 31 May 2023 21:31:31 +0000
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [2607:f8b0:4864:20::1132])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 827cee1c-fffa-11ed-b231-6b7b168915f2;
- Wed, 31 May 2023 23:31:31 +0200 (CEST)
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-568900c331aso736367b3.3
- for <xen-devel@lists.xenproject.org>; Wed, 31 May 2023 14:31:31 -0700 (PDT)
+ id 1q4TPm-0006zB-F4
+ for xen-devel@lists.xenproject.org; Wed, 31 May 2023 21:31:30 +0000
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [2607:f8b0:4864:20::112b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8045b566-fffa-11ed-8611-37d641c3527e;
+ Wed, 31 May 2023 23:31:28 +0200 (CEST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-565ca65e7ffso991967b3.0
+ for <xen-devel@lists.xenproject.org>; Wed, 31 May 2023 14:31:28 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::46])
  by smtp.googlemail.com with ESMTPSA id
- t63-20020a0dd142000000b0055aafcef659sm658905ywd.5.2023.05.31.14.31.29
+ t63-20020a0dd142000000b0055aafcef659sm658905ywd.5.2023.05.31.14.31.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 May 2023 14:31:30 -0700 (PDT)
+ Wed, 31 May 2023 14:31:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 827cee1c-fffa-11ed-b231-6b7b168915f2
+X-Inumbo-ID: 8045b566-fffa-11ed-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685568691; x=1688160691;
+        d=gmail.com; s=20221208; t=1685568687; x=1688160687;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=G1jEnioq7k9B+WnYjAw3S6OIwBriiVkAgPsVN7nSKAQ=;
-        b=sRB3lx4kAmnM8+wptcE+ajVYWk3XjheLnACKkDukTCUf9xFbPcDCYhPah6bex/BYdh
-         giGFY1Br6w10nUQCd9DWblMM8GH+uaGuqnqROXiLO3UcERmYA2lDrQkgyUuZp7Z8kkqA
-         nuRpQ/9G4vNwfZmkO1bs5HdxOej2dcQ5VFdd4ryduclGMMN3123XdTOk5+I53fDJyOM9
-         XY0ZeZ9oP8N1MEbhuB5it+QgLHnwrzlk6MNwsUUfvNiqVb/KKB+BbxPk/D/IjrOXLBJg
-         QnLP5YOwWWUD0KCage2oW1q2o8nxOiUGc6Utker8eoaHUzZhr+sfeHDiQePcAYy+fUoc
-         EHhQ==
+        bh=M8eY/8E6JF8s/V5NNW8TZkaDOnTKuaiqrBMcG8UrW5A=;
+        b=F74YoiyArmyQwVgOOUW2kfK/7YQSeytT5Qdq4W7jztqrHFW+OxsR62y2z0sZiEV/Pj
+         CHUjkMgQ+tHkrFh4S6EPBTtuP0+8wu5BQZyij+e15SnoNrkShPqGZvWdjF5BKJMv2Qv9
+         d//2kHJUZF8y/wk4PqE5bOyyg7AT91rLlQi2SzidEtRHvmTf0yi6wamtogBgC9EY9N9P
+         uw5EAPHRhzcCUSce1FYm7EE8CHhgk2SNgdWG+thFtb+Fd9K9ZtkE1HL6Lqu8zbrIjBxa
+         OBo4gwjzqO/AwYTPpiaC4MdC5Mq0f0RkoLNLDnNUh3I4ll9vsxHX0eJNI6QQ67EeV90U
+         TdMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685568691; x=1688160691;
+        d=1e100.net; s=20221208; t=1685568687; x=1688160687;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=G1jEnioq7k9B+WnYjAw3S6OIwBriiVkAgPsVN7nSKAQ=;
-        b=UG310g5QLkQlX5bmjjzTRQbEStub79yoFSChNGQe6fTRuIlww392dvKO+r9vVDhJJ3
-         +V/y+4ek89y3P3qHVkZisdnpBbtSvMgBkznvVVGkPnO9hnWHk8DhY1iG2lOtGTcNyrgr
-         Qrqsj8s7wF+19NONCdqDK5Fn/rWBcQerrCbxp+zCEZUhFzDpEq+1Yi0e6+Edb0oAkjio
-         9FvkDKYYHCAY4Hg/p6iw/8MUYToZYEmc2wr/KkU/GZsGbp2MEqAnwOcO7vzAeT9Rpcz9
-         ZgHJ1ANFQJHaYZZ34uyJzvdlr3uuByhJPHx96mjozhondVsJgtfp0vrYfZ8sUdb2FqoI
-         bA0Q==
-X-Gm-Message-State: AC+VfDx4oT+/DImFfSfi/QVDhwGS/8sSn60pEpv1JzN6jycE9deRm2RU
-	L7cvWrQrkiWJSTNriUECM9XPANv476q4lw==
-X-Google-Smtp-Source: ACHHUZ5VBnMU9jyAiESUYWnGmIowgKT6gU4T3B/pZNfl2GNdmiRLLxEPQJ4tr+ESELmCnMZcerU5cA==
-X-Received: by 2002:a81:49cf:0:b0:561:c5d4:ee31 with SMTP id w198-20020a8149cf000000b00561c5d4ee31mr7393100ywa.38.1685568690985;
-        Wed, 31 May 2023 14:31:30 -0700 (PDT)
+        bh=M8eY/8E6JF8s/V5NNW8TZkaDOnTKuaiqrBMcG8UrW5A=;
+        b=XNdW3u9bRAKu4MIvDXyh7ULsp+wh6Pcn+fOfE+k+yPxQvQPK+zy9RipQ1VoJW76bJS
+         rqg3ewrpt2B09+InCXy7t+b+IjKFnu2W1FxrJprS2ifFv0JMFrB0I6Q/yLvkoqUiZ9RN
+         +R6fPhCT8mSKx1OGTjW41QqnKnKXQ/Suw0FcumIWyefrhTlisMjuuGadyW4H0bQLQg5x
+         fPK7zanvR7Uq6PYeNzWvgcco+ByZiiJyDti2zcHtTftOLp00qJ3kIndZRSfbQB3ROMOR
+         k3XR+N9JP2zuE1D8Hj3u13TAcRtfpdM4Wq/GHNEUrv0kAwC1G0RJqt0V6yNBvtNSiGDi
+         kbTw==
+X-Gm-Message-State: AC+VfDynwrL9XeN6Y1cvmV3NrUlxabjoBdbdeZuUVpyxCrHnWlJ49zXI
+	lr1BZvKBz0nABTTsKzqpX9o=
+X-Google-Smtp-Source: ACHHUZ7+UFYbIzpavTgJ7f/w4fvGAPRL0PNa3hATkUDplqTdJkdO52BS/n5X3DMJ5Uv/pNitevHZ/Q==
+X-Received: by 2002:a0d:dd92:0:b0:568:be91:c2c0 with SMTP id g140-20020a0ddd92000000b00568be91c2c0mr6597562ywe.6.1685568687247;
+        Wed, 31 May 2023 14:31:27 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -98,9 +98,9 @@ Cc: linux-mm@kvack.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Subject: [PATCH v3 11/34] mm: Convert pmd_ptlock_free() to use ptdescs
-Date: Wed, 31 May 2023 14:30:09 -0700
-Message-Id: <20230531213032.25338-12-vishal.moola@gmail.com>
+Subject: [PATCH v3 09/34] mm: Convert pmd_ptlock_init() to use ptdescs
+Date: Wed, 31 May 2023 14:30:07 -0700
+Message-Id: <20230531213032.25338-10-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230531213032.25338-1-vishal.moola@gmail.com>
 References: <20230531213032.25338-1-vishal.moola@gmail.com>
@@ -116,43 +116,43 @@ Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index bc2f139de4e7..ffc82355fea6 100644
+index 6f7263fcd821..8e63e60c399c 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -2931,12 +2931,12 @@ static inline bool pmd_ptlock_init(struct ptdesc *ptdesc)
- 	return ptlock_init(ptdesc);
+@@ -2923,12 +2923,12 @@ static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
+ 	return ptlock_ptr(pmd_ptdesc(pmd));
  }
  
--static inline void pmd_ptlock_free(struct page *page)
-+static inline void pmd_ptlock_free(struct ptdesc *ptdesc)
+-static inline bool pmd_ptlock_init(struct page *page)
++static inline bool pmd_ptlock_init(struct ptdesc *ptdesc)
  {
  #ifdef CONFIG_TRANSPARENT_HUGEPAGE
--	VM_BUG_ON_PAGE(page->pmd_huge_pte, page);
-+	VM_BUG_ON_PAGE(ptdesc->pmd_huge_pte, ptdesc_page(ptdesc));
+-	page->pmd_huge_pte = NULL;
++	ptdesc->pmd_huge_pte = NULL;
  #endif
--	ptlock_free(page);
-+	ptlock_free(ptdesc_page(ptdesc));
+-	return ptlock_init(page);
++	return ptlock_init(ptdesc_page(ptdesc));
  }
  
- #define pmd_huge_pte(mm, pmd) (pmd_ptdesc(pmd)->pmd_huge_pte)
-@@ -2949,7 +2949,7 @@ static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
+ static inline void pmd_ptlock_free(struct page *page)
+@@ -2948,7 +2948,7 @@ static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
+ 	return &mm->page_table_lock;
  }
  
- static inline bool pmd_ptlock_init(struct ptdesc *ptdesc) { return true; }
--static inline void pmd_ptlock_free(struct page *page) {}
-+static inline void pmd_ptlock_free(struct ptdesc *ptdesc) {}
+-static inline bool pmd_ptlock_init(struct page *page) { return true; }
++static inline bool pmd_ptlock_init(struct ptdesc *ptdesc) { return true; }
+ static inline void pmd_ptlock_free(struct page *page) {}
  
  #define pmd_huge_pte(mm, pmd) ((mm)->pmd_huge_pte)
+@@ -2964,7 +2964,7 @@ static inline spinlock_t *pmd_lock(struct mm_struct *mm, pmd_t *pmd)
  
-@@ -2973,7 +2973,7 @@ static inline bool pgtable_pmd_page_ctor(struct page *page)
- 
- static inline void pgtable_pmd_page_dtor(struct page *page)
+ static inline bool pgtable_pmd_page_ctor(struct page *page)
  {
--	pmd_ptlock_free(page);
-+	pmd_ptlock_free(page_ptdesc(page));
- 	__ClearPageTable(page);
- 	dec_lruvec_page_state(page, NR_PAGETABLE);
- }
+-	if (!pmd_ptlock_init(page))
++	if (!pmd_ptlock_init(page_ptdesc(page)))
+ 		return false;
+ 	__SetPageTable(page);
+ 	inc_lruvec_page_state(page, NR_PAGETABLE);
 -- 
 2.40.1
 
