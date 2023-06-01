@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D428C77B7A
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:26:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542626.846740 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2E46C7EE2A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:28:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542653.846753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBt-0005tt-Ts; Thu, 01 Jun 2023 15:26:17 +0000
+	id 1q4kDg-0000Bh-Cc; Thu, 01 Jun 2023 15:28:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542626.846740; Thu, 01 Jun 2023 15:26:17 +0000
+Received: by outflank-mailman (output) from mailman id 542653.846753; Thu, 01 Jun 2023 15:28:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBt-0005tC-K9; Thu, 01 Jun 2023 15:26:17 +0000
-Received: by outflank-mailman (input) for mailman id 542626;
- Thu, 01 Jun 2023 15:26:16 +0000
+	id 1q4kDg-0000Ba-9Y; Thu, 01 Jun 2023 15:28:08 +0000
+Received: by outflank-mailman (input) for mailman id 542653;
+ Thu, 01 Jun 2023 15:28:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z77Y=BV=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q4kBs-0004Rb-HQ
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:26:16 +0000
+ id 1q4kDe-0000BF-SK
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:28:06 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a535f5d2-0090-11ee-b231-6b7b168915f2;
- Thu, 01 Jun 2023 17:26:15 +0200 (CEST)
+ id e5d8cba0-0090-11ee-b231-6b7b168915f2;
+ Thu, 01 Jun 2023 17:28:04 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-437-A75QHkCMNk6EcxhtamKjMA-1; Thu, 01 Jun 2023 11:26:12 -0400
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
+ us-mta-608-97tanEttN06cpnPrWUSb1A-1; Thu, 01 Jun 2023 11:26:19 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 27CDE817050;
- Thu,  1 Jun 2023 15:26:11 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3741C803CA2;
+ Thu,  1 Jun 2023 15:25:57 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.5])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9F5AF492B0A;
- Thu,  1 Jun 2023 15:26:10 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7572F20296C6;
+ Thu,  1 Jun 2023 15:25:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a535f5d2-0090-11ee-b231-6b7b168915f2
+X-Inumbo-ID: e5d8cba0-0090-11ee-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685633174;
+	s=mimecast20190719; t=1685633279;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nZ5BNX4c5KUjeA09sd5fBjLXzeUNTb+dTFMcgwON1rg=;
-	b=BFHsDHUkIrWf3l41Zyu7jxYurU3jZ8bY0FMP1m8w2SypsGhcCvPwDUrJOJ6XF5qRp5vshj
-	hg2dleZ7RzAavlkJhmW+PP8E1eK/zLI87GQW1kVoB3c0O84KZilBDnXhjeIRxIaa/h0dh5
-	CfsVXjySxHFrDloptWNkvZsVL/UVGxc=
-X-MC-Unique: A75QHkCMNk6EcxhtamKjMA-1
+	bh=LUW/UViDGW02kQ/3j6Afz3hRTQNvXIZflOpv+pi7CHk=;
+	b=E46T0qT461qMVdNDd7w3os7OwHIM0XE1PNJ2Ee9R3opPeQCQD9YGtWH3m1xiFhnstCJHeW
+	BJuxyayJBGGDGFl9NiGtD4xnAu3l8Pj53tqtC7oC4EhIiKqBdN29g8oPuOO94jMNveI+Kp
+	AXsjI3TKDgHl/GGJN6328KI5o6ojvi4=
+X-MC-Unique: 97tanEttN06cpnPrWUSb1A-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-block@nongnu.org,
@@ -90,75 +90,387 @@ Cc: qemu-block@nongnu.org,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	Raphael Norwitz <raphael.norwitz@nutanix.com>,
 	kvm@vger.kernel.org
-Subject: [PULL 8/8] qapi: add '@fdset' feature for BlockdevOptionsVirtioBlkVhostVdpa
-Date: Thu,  1 Jun 2023 11:25:52 -0400
-Message-Id: <20230601152552.1603119-9-stefanha@redhat.com>
+Subject: [PULL 1/8] block: add blk_io_plug_call() API
+Date: Thu,  1 Jun 2023 11:25:45 -0400
+Message-Id: <20230601152552.1603119-2-stefanha@redhat.com>
 In-Reply-To: <20230601152552.1603119-1-stefanha@redhat.com>
 References: <20230601152552.1603119-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
 
-From: Stefano Garzarella <sgarzare@redhat.com>
+Introduce a new API for thread-local blk_io_plug() that does not
+traverse the block graph. The goal is to make blk_io_plug() multi-queue
+friendly.
 
-The virtio-blk-vhost-vdpa driver in libblkio 1.3.0 supports the fd
-passing through the new 'fd' property.
+Instead of having block drivers track whether or not we're in a plugged
+section, provide an API that allows them to defer a function call until
+we're unplugged: blk_io_plug_call(fn, opaque). If blk_io_plug_call() is
+called multiple times with the same fn/opaque pair, then fn() is only
+called once at the end of the function - resulting in batching.
 
-Since now we are using qemu_open() on '@path' if the virtio-blk driver
-supports the fd passing, let's announce it.
-In this way, the management layer can pass the file descriptor of an
-already opened vhost-vdpa character device. This is useful especially
-when the device can only be accessed with certain privileges.
+This patch introduces the API and changes blk_io_plug()/blk_io_unplug().
+blk_io_plug()/blk_io_unplug() no longer require a BlockBackend argument
+because the plug state is now thread-local.
 
-Add the '@fdset' feature only when the virtio-blk-vhost-vdpa driver
-in libblkio supports it.
+Later patches convert block drivers to blk_io_plug_call() and then we
+can finally remove .bdrv_co_io_plug() once all block drivers have been
+converted.
 
-Suggested-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
-Message-id: 20230530071941.8954-3-sgarzare@redhat.com
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+Reviewed-by: Eric Blake <eblake@redhat.com>
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+Acked-by: Kevin Wolf <kwolf@redhat.com>
+Message-id: 20230530180959.1108766-2-stefanha@redhat.com
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- qapi/block-core.json | 6 ++++++
- meson.build          | 4 ++++
- 2 files changed, 10 insertions(+)
+ MAINTAINERS                       |   1 +
+ include/sysemu/block-backend-io.h |  13 +--
+ block/block-backend.c             |  22 -----
+ block/plug.c                      | 159 ++++++++++++++++++++++++++++++
+ hw/block/dataplane/xen-block.c    |   8 +-
+ hw/block/virtio-blk.c             |   4 +-
+ hw/scsi/virtio-scsi.c             |   6 +-
+ block/meson.build                 |   1 +
+ 8 files changed, 173 insertions(+), 41 deletions(-)
+ create mode 100644 block/plug.c
 
-diff --git a/qapi/block-core.json b/qapi/block-core.json
-index 98d9116dae..4bf89171c6 100644
---- a/qapi/block-core.json
-+++ b/qapi/block-core.json
-@@ -3955,10 +3955,16 @@
- #
- # @path: path to the vhost-vdpa character device.
- #
-+# Features:
-+# @fdset: Member @path supports the special "/dev/fdset/N" path
-+#     (since 8.1)
-+#
- # Since: 7.2
- ##
- { 'struct': 'BlockdevOptionsVirtioBlkVhostVdpa',
-   'data': { 'path': 'str' },
-+  'features': [ { 'name' :'fdset',
-+                  'if': 'CONFIG_BLKIO_VHOST_VDPA_FD' } ],
-   'if': 'CONFIG_BLKIO' }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4b025a7b63..89f274f85e 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -2650,6 +2650,7 @@ F: util/aio-*.c
+ F: util/aio-*.h
+ F: util/fdmon-*.c
+ F: block/io.c
++F: block/plug.c
+ F: migration/block*
+ F: include/block/aio.h
+ F: include/block/aio-wait.h
+diff --git a/include/sysemu/block-backend-io.h b/include/sysemu/block-backend-io.h
+index d62a7ee773..be4dcef59d 100644
+--- a/include/sysemu/block-backend-io.h
++++ b/include/sysemu/block-backend-io.h
+@@ -100,16 +100,9 @@ void blk_iostatus_set_err(BlockBackend *blk, int error);
+ int blk_get_max_iov(BlockBackend *blk);
+ int blk_get_max_hw_iov(BlockBackend *blk);
  
- ##
-diff --git a/meson.build b/meson.build
-index bc76ea96bf..a61d3e9b06 100644
---- a/meson.build
-+++ b/meson.build
-@@ -2106,6 +2106,10 @@ config_host_data.set('CONFIG_LZO', lzo.found())
- config_host_data.set('CONFIG_MPATH', mpathpersist.found())
- config_host_data.set('CONFIG_MPATH_NEW_API', mpathpersist_new_api)
- config_host_data.set('CONFIG_BLKIO', blkio.found())
-+if blkio.found()
-+  config_host_data.set('CONFIG_BLKIO_VHOST_VDPA_FD',
-+                       blkio.version().version_compare('>=1.3.0'))
-+endif
- config_host_data.set('CONFIG_CURL', curl.found())
- config_host_data.set('CONFIG_CURSES', curses.found())
- config_host_data.set('CONFIG_GBM', gbm.found())
+-/*
+- * blk_io_plug/unplug are thread-local operations. This means that multiple
+- * IOThreads can simultaneously call plug/unplug, but the caller must ensure
+- * that each unplug() is called in the same IOThread of the matching plug().
+- */
+-void coroutine_fn blk_co_io_plug(BlockBackend *blk);
+-void co_wrapper blk_io_plug(BlockBackend *blk);
+-
+-void coroutine_fn blk_co_io_unplug(BlockBackend *blk);
+-void co_wrapper blk_io_unplug(BlockBackend *blk);
++void blk_io_plug(void);
++void blk_io_unplug(void);
++void blk_io_plug_call(void (*fn)(void *), void *opaque);
+ 
+ AioContext *blk_get_aio_context(BlockBackend *blk);
+ BlockAcctStats *blk_get_stats(BlockBackend *blk);
+diff --git a/block/block-backend.c b/block/block-backend.c
+index 241f643507..4009ed5fed 100644
+--- a/block/block-backend.c
++++ b/block/block-backend.c
+@@ -2582,28 +2582,6 @@ void blk_add_insert_bs_notifier(BlockBackend *blk, Notifier *notify)
+     notifier_list_add(&blk->insert_bs_notifiers, notify);
+ }
+ 
+-void coroutine_fn blk_co_io_plug(BlockBackend *blk)
+-{
+-    BlockDriverState *bs = blk_bs(blk);
+-    IO_CODE();
+-    GRAPH_RDLOCK_GUARD();
+-
+-    if (bs) {
+-        bdrv_co_io_plug(bs);
+-    }
+-}
+-
+-void coroutine_fn blk_co_io_unplug(BlockBackend *blk)
+-{
+-    BlockDriverState *bs = blk_bs(blk);
+-    IO_CODE();
+-    GRAPH_RDLOCK_GUARD();
+-
+-    if (bs) {
+-        bdrv_co_io_unplug(bs);
+-    }
+-}
+-
+ BlockAcctStats *blk_get_stats(BlockBackend *blk)
+ {
+     IO_CODE();
+diff --git a/block/plug.c b/block/plug.c
+new file mode 100644
+index 0000000000..98a155d2f4
+--- /dev/null
++++ b/block/plug.c
+@@ -0,0 +1,159 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Block I/O plugging
++ *
++ * Copyright Red Hat.
++ *
++ * This API defers a function call within a blk_io_plug()/blk_io_unplug()
++ * section, allowing multiple calls to batch up. This is a performance
++ * optimization that is used in the block layer to submit several I/O requests
++ * at once instead of individually:
++ *
++ *   blk_io_plug(); <-- start of plugged region
++ *   ...
++ *   blk_io_plug_call(my_func, my_obj); <-- deferred my_func(my_obj) call
++ *   blk_io_plug_call(my_func, my_obj); <-- another
++ *   blk_io_plug_call(my_func, my_obj); <-- another
++ *   ...
++ *   blk_io_unplug(); <-- end of plugged region, my_func(my_obj) is called once
++ *
++ * This code is actually generic and not tied to the block layer. If another
++ * subsystem needs this functionality, it could be renamed.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/coroutine-tls.h"
++#include "qemu/notify.h"
++#include "qemu/thread.h"
++#include "sysemu/block-backend.h"
++
++/* A function call that has been deferred until unplug() */
++typedef struct {
++    void (*fn)(void *);
++    void *opaque;
++} UnplugFn;
++
++/* Per-thread state */
++typedef struct {
++    unsigned count;       /* how many times has plug() been called? */
++    GArray *unplug_fns;   /* functions to call at unplug time */
++} Plug;
++
++/* Use get_ptr_plug() to fetch this thread-local value */
++QEMU_DEFINE_STATIC_CO_TLS(Plug, plug);
++
++/* Called at thread cleanup time */
++static void blk_io_plug_atexit(Notifier *n, void *value)
++{
++    Plug *plug = get_ptr_plug();
++    g_array_free(plug->unplug_fns, TRUE);
++}
++
++/* This won't involve coroutines, so use __thread */
++static __thread Notifier blk_io_plug_atexit_notifier;
++
++/**
++ * blk_io_plug_call:
++ * @fn: a function pointer to be invoked
++ * @opaque: a user-defined argument to @fn()
++ *
++ * Call @fn(@opaque) immediately if not within a blk_io_plug()/blk_io_unplug()
++ * section.
++ *
++ * Otherwise defer the call until the end of the outermost
++ * blk_io_plug()/blk_io_unplug() section in this thread. If the same
++ * @fn/@opaque pair has already been deferred, it will only be called once upon
++ * blk_io_unplug() so that accumulated calls are batched into a single call.
++ *
++ * The caller must ensure that @opaque is not freed before @fn() is invoked.
++ */
++void blk_io_plug_call(void (*fn)(void *), void *opaque)
++{
++    Plug *plug = get_ptr_plug();
++
++    /* Call immediately if we're not plugged */
++    if (plug->count == 0) {
++        fn(opaque);
++        return;
++    }
++
++    GArray *array = plug->unplug_fns;
++    if (!array) {
++        array = g_array_new(FALSE, FALSE, sizeof(UnplugFn));
++        plug->unplug_fns = array;
++        blk_io_plug_atexit_notifier.notify = blk_io_plug_atexit;
++        qemu_thread_atexit_add(&blk_io_plug_atexit_notifier);
++    }
++
++    UnplugFn *fns = (UnplugFn *)array->data;
++    UnplugFn new_fn = {
++        .fn = fn,
++        .opaque = opaque,
++    };
++
++    /*
++     * There won't be many, so do a linear search. If this becomes a bottleneck
++     * then a binary search (glib 2.62+) or different data structure could be
++     * used.
++     */
++    for (guint i = 0; i < array->len; i++) {
++        if (memcmp(&fns[i], &new_fn, sizeof(new_fn)) == 0) {
++            return; /* already exists */
++        }
++    }
++
++    g_array_append_val(array, new_fn);
++}
++
++/**
++ * blk_io_plug: Defer blk_io_plug_call() functions until blk_io_unplug()
++ *
++ * blk_io_plug/unplug are thread-local operations. This means that multiple
++ * threads can simultaneously call plug/unplug, but the caller must ensure that
++ * each unplug() is called in the same thread of the matching plug().
++ *
++ * Nesting is supported. blk_io_plug_call() functions are only called at the
++ * outermost blk_io_unplug().
++ */
++void blk_io_plug(void)
++{
++    Plug *plug = get_ptr_plug();
++
++    assert(plug->count < UINT32_MAX);
++
++    plug->count++;
++}
++
++/**
++ * blk_io_unplug: Run any pending blk_io_plug_call() functions
++ *
++ * There must have been a matching blk_io_plug() call in the same thread prior
++ * to this blk_io_unplug() call.
++ */
++void blk_io_unplug(void)
++{
++    Plug *plug = get_ptr_plug();
++
++    assert(plug->count > 0);
++
++    if (--plug->count > 0) {
++        return;
++    }
++
++    GArray *array = plug->unplug_fns;
++    if (!array) {
++        return;
++    }
++
++    UnplugFn *fns = (UnplugFn *)array->data;
++
++    for (guint i = 0; i < array->len; i++) {
++        fns[i].fn(fns[i].opaque);
++    }
++
++    /*
++     * This resets the array without freeing memory so that appending is cheap
++     * in the future.
++     */
++    g_array_set_size(array, 0);
++}
+diff --git a/hw/block/dataplane/xen-block.c b/hw/block/dataplane/xen-block.c
+index 2597f38805..3b6f2b0aa2 100644
+--- a/hw/block/dataplane/xen-block.c
++++ b/hw/block/dataplane/xen-block.c
+@@ -537,7 +537,7 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+      * is below us.
+      */
+     if (inflight_atstart > IO_PLUG_THRESHOLD) {
+-        blk_io_plug(dataplane->blk);
++        blk_io_plug();
+     }
+     while (rc != rp) {
+         /* pull request from ring */
+@@ -577,12 +577,12 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+ 
+         if (inflight_atstart > IO_PLUG_THRESHOLD &&
+             batched >= inflight_atstart) {
+-            blk_io_unplug(dataplane->blk);
++            blk_io_unplug();
+         }
+         xen_block_do_aio(request);
+         if (inflight_atstart > IO_PLUG_THRESHOLD) {
+             if (batched >= inflight_atstart) {
+-                blk_io_plug(dataplane->blk);
++                blk_io_plug();
+                 batched = 0;
+             } else {
+                 batched++;
+@@ -590,7 +590,7 @@ static bool xen_block_handle_requests(XenBlockDataPlane *dataplane)
+         }
+     }
+     if (inflight_atstart > IO_PLUG_THRESHOLD) {
+-        blk_io_unplug(dataplane->blk);
++        blk_io_unplug();
+     }
+ 
+     return done_something;
+diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
+index 4ca66b5860..39e7f23fab 100644
+--- a/hw/block/virtio-blk.c
++++ b/hw/block/virtio-blk.c
+@@ -1134,7 +1134,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
+     bool suppress_notifications = virtio_queue_get_notification(vq);
+ 
+     aio_context_acquire(blk_get_aio_context(s->blk));
+-    blk_io_plug(s->blk);
++    blk_io_plug();
+ 
+     do {
+         if (suppress_notifications) {
+@@ -1158,7 +1158,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
+         virtio_blk_submit_multireq(s, &mrb);
+     }
+ 
+-    blk_io_unplug(s->blk);
++    blk_io_unplug();
+     aio_context_release(blk_get_aio_context(s->blk));
+ }
+ 
+diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
+index 4a8849cc7e..9c8ef0aaa6 100644
+--- a/hw/scsi/virtio-scsi.c
++++ b/hw/scsi/virtio-scsi.c
+@@ -799,7 +799,7 @@ static int virtio_scsi_handle_cmd_req_prepare(VirtIOSCSI *s, VirtIOSCSIReq *req)
+         return -ENOBUFS;
+     }
+     scsi_req_ref(req->sreq);
+-    blk_io_plug(d->conf.blk);
++    blk_io_plug();
+     object_unref(OBJECT(d));
+     return 0;
+ }
+@@ -810,7 +810,7 @@ static void virtio_scsi_handle_cmd_req_submit(VirtIOSCSI *s, VirtIOSCSIReq *req)
+     if (scsi_req_enqueue(sreq)) {
+         scsi_req_continue(sreq);
+     }
+-    blk_io_unplug(sreq->dev->conf.blk);
++    blk_io_unplug();
+     scsi_req_unref(sreq);
+ }
+ 
+@@ -836,7 +836,7 @@ static void virtio_scsi_handle_cmd_vq(VirtIOSCSI *s, VirtQueue *vq)
+                 while (!QTAILQ_EMPTY(&reqs)) {
+                     req = QTAILQ_FIRST(&reqs);
+                     QTAILQ_REMOVE(&reqs, req, next);
+-                    blk_io_unplug(req->sreq->dev->conf.blk);
++                    blk_io_unplug();
+                     scsi_req_unref(req->sreq);
+                     virtqueue_detach_element(req->vq, &req->elem, 0);
+                     virtio_scsi_free_req(req);
+diff --git a/block/meson.build b/block/meson.build
+index 486dda8b85..fb4332bd66 100644
+--- a/block/meson.build
++++ b/block/meson.build
+@@ -23,6 +23,7 @@ block_ss.add(files(
+   'mirror.c',
+   'nbd.c',
+   'null.c',
++  'plug.c',
+   'qapi.c',
+   'qcow2-bitmap.c',
+   'qcow2-cache.c',
 -- 
 2.40.1
 
