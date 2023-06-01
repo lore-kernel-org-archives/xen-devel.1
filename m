@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E607C7EE33
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:28:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542551.846567 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C47C77B7A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:33:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542578.846593 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHn-0007sk-67; Thu, 01 Jun 2023 14:28:19 +0000
+	id 1q4jMd-00039D-Lo; Thu, 01 Jun 2023 14:33:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542551.846567; Thu, 01 Jun 2023 14:28:19 +0000
+Received: by outflank-mailman (output) from mailman id 542578.846593; Thu, 01 Jun 2023 14:33:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHn-0007sQ-05; Thu, 01 Jun 2023 14:28:19 +0000
-Received: by outflank-mailman (input) for mailman id 542551;
- Thu, 01 Jun 2023 14:28:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q4jMd-000396-IR; Thu, 01 Jun 2023 14:33:19 +0000
+Received: by outflank-mailman (input) for mailman id 542578;
+ Thu, 01 Jun 2023 14:33:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2Xwn=BV=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
- id 1q4jHm-00066T-48
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:28:18 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [85.215.255.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8be95341-0088-11ee-b231-6b7b168915f2;
- Thu, 01 Jun 2023 16:28:16 +0200 (CEST)
-Received: from sender by smtp.strato.de (RZmta 49.5.3 AUTH)
- with ESMTPSA id L38909z51ES51Sr
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 1 Jun 2023 16:28:05 +0200 (CEST)
+ (envelope-from <SRS0=MNKN=BV=alien8.de=bp@srs-se1.protection.inumbo.net>)
+ id 1q4jMc-000390-4U
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:33:18 +0000
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3ed1d6a6-0089-11ee-8611-37d641c3527e;
+ Thu, 01 Jun 2023 16:33:16 +0200 (CEST)
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 4882C1EC069A;
+ Thu,  1 Jun 2023 16:33:15 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,89 +43,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8be95341-0088-11ee-b231-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; t=1685629685; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=SIOUw3EQmua1o2yYjwPMmZJASr8qKyB18adecfXyJTcidVR5teLqazBGF7tfTPWRCc
-    ukgfcn2V5Q3ywavto+O4Br7if/vxBYUeh2MvFzzXTT6diYInabhG8d5qNjNUEZETN0ae
-    qrxG1DkmFsHg9WRN9+lxN+6UxGZ6IBbljCCC7a9FIRcF5WUF2x4zMW+p/py7KokbxHNI
-    E9JFGSS7APuuemkE6rXhWay6CBGLDF8S+1iN632dvMvL2NQ/x0ttb29QfCzFGH6mH+1U
-    djVnGtw2lCSwoFFkLt804D65dvg52datdUbXnk+gJU/KYu1F088AauA44PnFDFFwG7g9
-    Zgtg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629685;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=sEjTVHfAtskHvr19kdJi/74vu4hsTpqgsbMYJvEi80s=;
-    b=hBziwFjJ1c9zxmW61CjU+NHyP9ICF3LDN4/Xlo8yc/tQNWV8ysN6ZIPJFyXGPPV6ry
-    617XZfslMvpSgDdi5ykSeF1l/Hto/HT58y2QW3A+VqAcibxJz5WmftOAeBWgYOm80NND
-    vmL7EEDxxt/omdoU8uAuGAAnaM4kmxe+Z4NrFhjD5SIURzjRe0xhJXMaVcF0ouiUBhAW
-    ChV6TSWt8K6xK711Sz6rKk8MUx1mo4fO1xbmi2iQVgH0zuolUPb/0CZwkJJPA/0GUu/b
-    inCNtgsxAvVLf1EpMoYPdqM1tZBtCtMcblt9Ft9osoXiNJq3FGpBR1SCGofRdABmz86q
-    Jb/w==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629685;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=sEjTVHfAtskHvr19kdJi/74vu4hsTpqgsbMYJvEi80s=;
-    b=pMDxacqZHLaasY15wAueKT5OUZfIcZFvAp/ugSYRXXJmoyHChGM90QDbqPM+KxDGeA
-    NWf29QfrGqCCZCkG8Z2D2amnxx37jcE1/3E1cljR3MfMJCn1jtebbZJNAYh4tQRLirEy
-    5EMW+C5YcTkLLEVQOTGWYC3svm2q9Vz1ZlHSUr5o08ps+nnpmRqkSx05mDkmqyQlj61z
-    tsmRqxT38J1EDRRMx10VL8Ykahs4klBKMtkCgyr0HcBYcyiG1vzRiUAmw/JmFuLfBxCm
-    kjRFrUUCUXmkk5fboN6DP+uGQfmyksQV4C2z62mr8wRJYmms7eBKLmlX6jdBGkL/aWBV
-    CL8w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685629685;
-    s=strato-dkim-0003; d=aepfle.de;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=sEjTVHfAtskHvr19kdJi/74vu4hsTpqgsbMYJvEi80s=;
-    b=JgS/g5VBquZoEB8kWoy9QgyeV88159RDKDae9L7Wu1jJ7QTw7bkEXRCsAts8ZzK2Qi
-    JgSlEuQqoD5MMygOYfDA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4xqFv7EJ0tgRX/vKfT/e8Ig6v0dNw4QAWpzMWrRQ=="
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 5/7] xenalyze: sync with vmx.h, use EXIT_REASON_VMXON
-Date: Thu,  1 Jun 2023 16:27:40 +0200
-Message-Id: <20230601142742.15489-6-olaf@aepfle.de>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230601142742.15489-1-olaf@aepfle.de>
-References: <20230601142742.15489-1-olaf@aepfle.de>
+X-Inumbo-ID: 3ed1d6a6-0089-11ee-8611-37d641c3527e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+	t=1685629995;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+	bh=lZvBDmaGdPU2hmTnAnT0K3Zl9tT18jWXHccNTnt+nRc=;
+	b=YBmEepH7K+BiKRZpTNdft93h2Mn4e7UMAk+58tsTmAYPmgp0qXRA36/DLLLTFUL85dDJgh
+	sHJHQvRxMmEXu2MXp9aAJvFI8wCY8Q//2limBAbLcjdnaKlKpm12BIbuNljjVReVQnmg2n
+	qFM4zQSKPgSZlkAh4y/xeV48F7eNc0k=
+Date: Thu, 1 Jun 2023 16:33:10 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Juergen Gross <jgross@suse.com>
+Cc: linux-kernel@vger.kernel.org, x86@kernel.org,
+	linux-hyperv@vger.kernel.org, linux-doc@vger.kernel.org,
+	mikelley@microsoft.com, Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org, Jonathan Corbet <corbet@lwn.net>,
+	Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>
+Subject: Re: [PATCH v6 00/16] x86/mtrr: fix handling with PAT but without MTRR
+Message-ID: <20230601143310.GDZHisJlbH5myXGQ8d@fat_crate.local>
+References: <4c47a11c-0565-678d-3467-e01c5ec16600@suse.com>
+ <20230511163208.GDZF0YiOfxQhSo4RDm@fat_crate.local>
+ <0cd3899b-cf3b-61c1-14ae-60b6b49d14ab@suse.com>
+ <20230530152825.GAZHYWGXAp8PHgN/w0@fat_crate.local>
+ <888f860d-4307-54eb-01da-11f9adf65559@suse.com>
+ <20230531083508.GAZHcGvB68PUAH7f+a@fat_crate.local>
+ <efe79c9e-1e31-adb9-8f93-962249bf01bb@suse.com>
+ <20230531174857.GDZHeIib57h5lT5Vh1@fat_crate.local>
+ <fe33476d-0ec1-16f1-5874-8a5ff1650c3f@suse.com>
+ <20230601132233.GCZHibmemkxYxvTjSu@fat_crate.local>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20230601132233.GCZHibmemkxYxvTjSu@fat_crate.local>
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/xentrace/xenalyze.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Thu, Jun 01, 2023 at 03:22:33PM +0200, Borislav Petkov wrote:
+> Now lemme restart testing.
 
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index d2e6c77590..88c3d5f873 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -467,7 +467,7 @@ struct {
- #define EXIT_REASON_VMRESUME            24
- #define EXIT_REASON_VMWRITE             25
- #define EXIT_REASON_VMXOFF              26
--#define EXIT_REASON_VMON                27
-+#define EXIT_REASON_VMXON               27
- #define EXIT_REASON_CR_ACCESS           28
- #define EXIT_REASON_DR_ACCESS           29
- #define EXIT_REASON_IO_INSTRUCTION      30
-@@ -523,7 +523,7 @@ const char * hvm_vmx_exit_reason_name[HVM_VMX_EXIT_REASON_MAX] = {
-     [EXIT_REASON_VMRESUME]="VMRESUME",
-     [EXIT_REASON_VMWRITE]="VMWRITE",
-     [EXIT_REASON_VMXOFF]="VMXOFF",
--    [EXIT_REASON_VMON]="VMON",
-+    [EXIT_REASON_VMXON]="VMXON",
-     [EXIT_REASON_CR_ACCESS]="CR_ACCESS",
-     [EXIT_REASON_DR_ACCESS]="DR_ACCESS",
-     [EXIT_REASON_IO_INSTRUCTION]="IO_INSTRUCTION",
+This is from another box, with the latest changes incorporated:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/bp/bp.git/log/?h=rc1-mtrr
+
+--- proc-mtrr.before    2011-03-04 01:03:35.243994733 +0100
++++ proc-mtrr.after     2023-06-01 16:28:54.959999456 +0200
+@@ -1,3 +1,3 @@
+ reg00: base=0x000000000 (    0MB), size= 2048MB, count=1: write-back
+ reg01: base=0x080000000 ( 2048MB), size= 1024MB, count=1: write-back
+-reg02: base=0x0c0000000 ( 3072MB), size=  256MB, count=1: write-back
++reg02: base=0x0c0000000 ( 3072MB), size=  128MB, count=1: write-back
+
+Want mtrr=debug output again?
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
 
