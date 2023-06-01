@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A64C7EE31
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:26:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542623.846710 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C21A9C7EE2A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:26:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542620.846684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBn-00055E-RV; Thu, 01 Jun 2023 15:26:11 +0000
+	id 1q4kBl-0004Sa-RB; Thu, 01 Jun 2023 15:26:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542623.846710; Thu, 01 Jun 2023 15:26:11 +0000
+Received: by outflank-mailman (output) from mailman id 542620.846684; Thu, 01 Jun 2023 15:26:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBn-00052m-NK; Thu, 01 Jun 2023 15:26:11 +0000
-Received: by outflank-mailman (input) for mailman id 542623;
- Thu, 01 Jun 2023 15:26:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q4kBl-0004ST-LT; Thu, 01 Jun 2023 15:26:09 +0000
+Received: by outflank-mailman (input) for mailman id 542620;
+ Thu, 01 Jun 2023 15:26:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z77Y=BV=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q4kBm-0004Ci-8i
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:26:10 +0000
+ id 1q4kBk-0004Rb-HD
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:26:08 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1290bf8-0090-11ee-8611-37d641c3527e;
- Thu, 01 Jun 2023 17:26:08 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9f801383-0090-11ee-b231-6b7b168915f2;
+ Thu, 01 Jun 2023 17:26:05 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-29-8xRkLrphPXe219NBEoZYwg-1; Thu, 01 Jun 2023 11:26:06 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
+ us-mta-227-lWN_D032PEW-zCcOIkDfhw-1; Thu, 01 Jun 2023 11:25:59 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 49B5E85829A;
- Thu,  1 Jun 2023 15:26:05 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 27AEA800159;
+ Thu,  1 Jun 2023 15:25:59 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.5])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8AA1040C6EC4;
- Thu,  1 Jun 2023 15:26:04 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8A0932166B27;
+ Thu,  1 Jun 2023 15:25:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1290bf8-0090-11ee-8611-37d641c3527e
+X-Inumbo-ID: 9f801383-0090-11ee-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1685633167;
+	s=mimecast20190719; t=1685633164;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=c2lndZBb5pLwi3SunbidGAiBTlv7HE8p3pWS3Fk2JpE=;
-	b=UkZWt/sGrOK8G7sMXJW8rCV6W++/XsGirnGWefTjhe9l+aRMfa2QJj/eoFoothb+kndGi1
-	zwD23cgB/1EIeBDapDH81WZMsqFQYWGgN61+0IRdL5w7x+8DtPFHWBV8oUZFHz7GJCv+r8
-	Qd0HK/Y6/iGCrA5ijO0I/EPVs36kKR8=
-X-MC-Unique: 8xRkLrphPXe219NBEoZYwg-1
+	bh=56sRbxTeLa9JZmQN0B8QX1cUKslR1+CU7IhQ7z+Xw5c=;
+	b=HvNDpY1i0uwe9nhgCXmysny06ANPuohRStW3BbBDV8U+Uw0Rgk2RV0fNfuS4imEE8hYhSQ
+	dzhZYm/4v7VPgW7PEYZbBWYhEMFDE3Pl3VTixVmLHUgX9cTheucanO9YeFZFQWOR6UwoEL
+	ruCWiQn3/coEXU0JVu7//anVL9ViOU4=
+X-MC-Unique: lWN_D032PEW-zCcOIkDfhw-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-block@nongnu.org,
@@ -90,217 +90,146 @@ Cc: qemu-block@nongnu.org,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	Raphael Norwitz <raphael.norwitz@nutanix.com>,
 	kvm@vger.kernel.org
-Subject: [PULL 5/8] block/linux-aio: convert to blk_io_plug_call() API
-Date: Thu,  1 Jun 2023 11:25:49 -0400
-Message-Id: <20230601152552.1603119-6-stefanha@redhat.com>
+Subject: [PULL 2/8] block/nvme: convert to blk_io_plug_call() API
+Date: Thu,  1 Jun 2023 11:25:46 -0400
+Message-Id: <20230601152552.1603119-3-stefanha@redhat.com>
 In-Reply-To: <20230601152552.1603119-1-stefanha@redhat.com>
 References: <20230601152552.1603119-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
 
 Stop using the .bdrv_co_io_plug() API because it is not multi-queue
 block layer friendly. Use the new blk_io_plug_call() API to batch I/O
 submission instead.
 
-Note that a dev_max_batch check is dropped in laio_io_unplug() because
-the semantics of unplug_fn() are different from .bdrv_co_unplug():
-1. unplug_fn() is only called when the last blk_io_unplug() call occurs,
-   not every time blk_io_unplug() is called.
-2. unplug_fn() is per-thread, not per-BlockDriverState, so there is no
-   way to get per-BlockDriverState fields like dev_max_batch.
-
-Therefore this condition cannot be moved to laio_unplug_fn(). It is not
-obvious that this condition affects performance in practice, so I am
-removing it instead of trying to come up with a more complex mechanism
-to preserve the condition.
-
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Eric Blake <eblake@redhat.com>
-Acked-by: Kevin Wolf <kwolf@redhat.com>
 Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-Message-id: 20230530180959.1108766-6-stefanha@redhat.com
+Acked-by: Kevin Wolf <kwolf@redhat.com>
+Message-id: 20230530180959.1108766-3-stefanha@redhat.com
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/block/raw-aio.h |  7 -------
- block/file-posix.c      | 28 ----------------------------
- block/linux-aio.c       | 41 +++++++++++------------------------------
- 3 files changed, 11 insertions(+), 65 deletions(-)
+ block/nvme.c       | 44 ++++++++++++--------------------------------
+ block/trace-events |  1 -
+ 2 files changed, 12 insertions(+), 33 deletions(-)
 
-diff --git a/include/block/raw-aio.h b/include/block/raw-aio.h
-index da60ca13ef..0f63c2800c 100644
---- a/include/block/raw-aio.h
-+++ b/include/block/raw-aio.h
-@@ -62,13 +62,6 @@ int coroutine_fn laio_co_submit(int fd, uint64_t offset, QEMUIOVector *qiov,
- 
- void laio_detach_aio_context(LinuxAioState *s, AioContext *old_context);
- void laio_attach_aio_context(LinuxAioState *s, AioContext *new_context);
--
--/*
-- * laio_io_plug/unplug work in the thread's current AioContext, therefore the
-- * caller must ensure that they are paired in the same IOThread.
-- */
--void laio_io_plug(void);
--void laio_io_unplug(uint64_t dev_max_batch);
- #endif
- /* io_uring.c - Linux io_uring implementation */
- #ifdef CONFIG_LINUX_IO_URING
-diff --git a/block/file-posix.c b/block/file-posix.c
-index 7baa8491dd..ac1ed54811 100644
---- a/block/file-posix.c
-+++ b/block/file-posix.c
-@@ -2550,26 +2550,6 @@ static int coroutine_fn raw_co_pwritev(BlockDriverState *bs, int64_t offset,
-     return raw_co_prw(bs, offset, bytes, qiov, QEMU_AIO_WRITE);
- }
- 
--static void coroutine_fn raw_co_io_plug(BlockDriverState *bs)
--{
--    BDRVRawState __attribute__((unused)) *s = bs->opaque;
--#ifdef CONFIG_LINUX_AIO
--    if (s->use_linux_aio) {
--        laio_io_plug();
--    }
--#endif
--}
--
--static void coroutine_fn raw_co_io_unplug(BlockDriverState *bs)
--{
--    BDRVRawState __attribute__((unused)) *s = bs->opaque;
--#ifdef CONFIG_LINUX_AIO
--    if (s->use_linux_aio) {
--        laio_io_unplug(s->aio_max_batch);
--    }
--#endif
--}
--
- static int coroutine_fn raw_co_flush_to_disk(BlockDriverState *bs)
- {
-     BDRVRawState *s = bs->opaque;
-@@ -3914,8 +3894,6 @@ BlockDriver bdrv_file = {
-     .bdrv_co_copy_range_from = raw_co_copy_range_from,
-     .bdrv_co_copy_range_to  = raw_co_copy_range_to,
-     .bdrv_refresh_limits = raw_refresh_limits,
--    .bdrv_co_io_plug        = raw_co_io_plug,
--    .bdrv_co_io_unplug      = raw_co_io_unplug,
-     .bdrv_attach_aio_context = raw_aio_attach_aio_context,
- 
-     .bdrv_co_truncate                   = raw_co_truncate,
-@@ -4286,8 +4264,6 @@ static BlockDriver bdrv_host_device = {
-     .bdrv_co_copy_range_from = raw_co_copy_range_from,
-     .bdrv_co_copy_range_to  = raw_co_copy_range_to,
-     .bdrv_refresh_limits = raw_refresh_limits,
--    .bdrv_co_io_plug        = raw_co_io_plug,
--    .bdrv_co_io_unplug      = raw_co_io_unplug,
-     .bdrv_attach_aio_context = raw_aio_attach_aio_context,
- 
-     .bdrv_co_truncate                   = raw_co_truncate,
-@@ -4424,8 +4400,6 @@ static BlockDriver bdrv_host_cdrom = {
-     .bdrv_co_pwritev        = raw_co_pwritev,
-     .bdrv_co_flush_to_disk  = raw_co_flush_to_disk,
-     .bdrv_refresh_limits    = cdrom_refresh_limits,
--    .bdrv_co_io_plug        = raw_co_io_plug,
--    .bdrv_co_io_unplug      = raw_co_io_unplug,
-     .bdrv_attach_aio_context = raw_aio_attach_aio_context,
- 
-     .bdrv_co_truncate                   = raw_co_truncate,
-@@ -4552,8 +4526,6 @@ static BlockDriver bdrv_host_cdrom = {
-     .bdrv_co_pwritev        = raw_co_pwritev,
-     .bdrv_co_flush_to_disk  = raw_co_flush_to_disk,
-     .bdrv_refresh_limits    = cdrom_refresh_limits,
--    .bdrv_co_io_plug        = raw_co_io_plug,
--    .bdrv_co_io_unplug      = raw_co_io_unplug,
-     .bdrv_attach_aio_context = raw_aio_attach_aio_context,
- 
-     .bdrv_co_truncate                   = raw_co_truncate,
-diff --git a/block/linux-aio.c b/block/linux-aio.c
-index 916f001e32..561c71a9ae 100644
---- a/block/linux-aio.c
-+++ b/block/linux-aio.c
-@@ -15,6 +15,7 @@
- #include "qemu/event_notifier.h"
- #include "qemu/coroutine.h"
- #include "qapi/error.h"
+diff --git a/block/nvme.c b/block/nvme.c
+index 17937d398d..7ca85bc44a 100644
+--- a/block/nvme.c
++++ b/block/nvme.c
+@@ -25,6 +25,7 @@
+ #include "qemu/vfio-helpers.h"
+ #include "block/block-io.h"
+ #include "block/block_int.h"
 +#include "sysemu/block-backend.h"
+ #include "sysemu/replay.h"
+ #include "trace.h"
  
- /* Only used for assertions.  */
- #include "qemu/coroutine_int.h"
-@@ -46,7 +47,6 @@ struct qemu_laiocb {
- };
+@@ -119,7 +120,6 @@ struct BDRVNVMeState {
+     int blkshift;
  
- typedef struct {
--    int plugged;
-     unsigned int in_queue;
-     unsigned int in_flight;
-     bool blocked;
-@@ -236,7 +236,7 @@ static void qemu_laio_process_completions_and_submit(LinuxAioState *s)
+     uint64_t max_transfer;
+-    bool plugged;
+ 
+     bool supports_write_zeroes;
+     bool supports_discard;
+@@ -282,7 +282,7 @@ static void nvme_kick(NVMeQueuePair *q)
  {
-     qemu_laio_process_completions(s);
+     BDRVNVMeState *s = q->s;
  
--    if (!s->io_q.plugged && !QSIMPLEQ_EMPTY(&s->io_q.pending)) {
-+    if (!QSIMPLEQ_EMPTY(&s->io_q.pending)) {
-         ioq_submit(s);
+-    if (s->plugged || !q->need_kick) {
++    if (!q->need_kick) {
+         return;
+     }
+     trace_nvme_kick(s, q->index);
+@@ -387,10 +387,6 @@ static bool nvme_process_completion(NVMeQueuePair *q)
+     NvmeCqe *c;
+ 
+     trace_nvme_process_completion(s, q->index, q->inflight);
+-    if (s->plugged) {
+-        trace_nvme_process_completion_queue_plugged(s, q->index);
+-        return false;
+-    }
+ 
+     /*
+      * Support re-entrancy when a request cb() function invokes aio_poll().
+@@ -480,6 +476,15 @@ static void nvme_trace_command(const NvmeCmd *cmd)
      }
  }
-@@ -277,7 +277,6 @@ static void qemu_laio_poll_ready(EventNotifier *opaque)
- static void ioq_init(LaioQueue *io_q)
- {
-     QSIMPLEQ_INIT(&io_q->pending);
--    io_q->plugged = 0;
-     io_q->in_queue = 0;
-     io_q->in_flight = 0;
-     io_q->blocked = false;
-@@ -354,31 +353,11 @@ static uint64_t laio_max_batch(LinuxAioState *s, uint64_t dev_max_batch)
-     return max_batch;
+ 
++static void nvme_unplug_fn(void *opaque)
++{
++    NVMeQueuePair *q = opaque;
++
++    QEMU_LOCK_GUARD(&q->lock);
++    nvme_kick(q);
++    nvme_process_completion(q);
++}
++
+ static void nvme_submit_command(NVMeQueuePair *q, NVMeRequest *req,
+                                 NvmeCmd *cmd, BlockCompletionFunc cb,
+                                 void *opaque)
+@@ -496,8 +501,7 @@ static void nvme_submit_command(NVMeQueuePair *q, NVMeRequest *req,
+            q->sq.tail * NVME_SQ_ENTRY_BYTES, cmd, sizeof(*cmd));
+     q->sq.tail = (q->sq.tail + 1) % NVME_QUEUE_SIZE;
+     q->need_kick++;
+-    nvme_kick(q);
+-    nvme_process_completion(q);
++    blk_io_plug_call(nvme_unplug_fn, q);
+     qemu_mutex_unlock(&q->lock);
  }
  
--void laio_io_plug(void)
-+static void laio_unplug_fn(void *opaque)
- {
--    AioContext *ctx = qemu_get_current_aio_context();
--    LinuxAioState *s = aio_get_linux_aio(ctx);
-+    LinuxAioState *s = opaque;
+@@ -1567,27 +1571,6 @@ static void nvme_attach_aio_context(BlockDriverState *bs,
+     }
+ }
  
--    s->io_q.plugged++;
+-static void coroutine_fn nvme_co_io_plug(BlockDriverState *bs)
+-{
+-    BDRVNVMeState *s = bs->opaque;
+-    assert(!s->plugged);
+-    s->plugged = true;
 -}
 -
--void laio_io_unplug(uint64_t dev_max_batch)
+-static void coroutine_fn nvme_co_io_unplug(BlockDriverState *bs)
 -{
--    AioContext *ctx = qemu_get_current_aio_context();
--    LinuxAioState *s = aio_get_linux_aio(ctx);
+-    BDRVNVMeState *s = bs->opaque;
+-    assert(s->plugged);
+-    s->plugged = false;
+-    for (unsigned i = INDEX_IO(0); i < s->queue_count; i++) {
+-        NVMeQueuePair *q = s->queues[i];
+-        qemu_mutex_lock(&q->lock);
+-        nvme_kick(q);
+-        nvme_process_completion(q);
+-        qemu_mutex_unlock(&q->lock);
+-    }
+-}
 -
--    assert(s->io_q.plugged);
--    s->io_q.plugged--;
+ static bool nvme_register_buf(BlockDriverState *bs, void *host, size_t size,
+                               Error **errp)
+ {
+@@ -1664,9 +1647,6 @@ static BlockDriver bdrv_nvme = {
+     .bdrv_detach_aio_context  = nvme_detach_aio_context,
+     .bdrv_attach_aio_context  = nvme_attach_aio_context,
+ 
+-    .bdrv_co_io_plug          = nvme_co_io_plug,
+-    .bdrv_co_io_unplug        = nvme_co_io_unplug,
 -
--    /*
--     * Why max batch checking is performed here:
--     * Another BDS may have queued requests with a higher dev_max_batch and
--     * therefore in_queue could now exceed our dev_max_batch. Re-check the max
--     * batch so we can honor our device's dev_max_batch.
--     */
--    if (s->io_q.in_queue >= laio_max_batch(s, dev_max_batch) ||
--        (!s->io_q.plugged &&
--         !s->io_q.blocked && !QSIMPLEQ_EMPTY(&s->io_q.pending))) {
-+    if (!s->io_q.blocked && !QSIMPLEQ_EMPTY(&s->io_q.pending)) {
-         ioq_submit(s);
-     }
- }
-@@ -410,10 +389,12 @@ static int laio_do_submit(int fd, struct qemu_laiocb *laiocb, off_t offset,
- 
-     QSIMPLEQ_INSERT_TAIL(&s->io_q.pending, laiocb, next);
-     s->io_q.in_queue++;
--    if (!s->io_q.blocked &&
--        (!s->io_q.plugged ||
--         s->io_q.in_queue >= laio_max_batch(s, dev_max_batch))) {
--        ioq_submit(s);
-+    if (!s->io_q.blocked) {
-+        if (s->io_q.in_queue >= laio_max_batch(s, dev_max_batch)) {
-+            ioq_submit(s);
-+        } else {
-+            blk_io_plug_call(laio_unplug_fn, s);
-+        }
-     }
- 
-     return 0;
+     .bdrv_register_buf        = nvme_register_buf,
+     .bdrv_unregister_buf      = nvme_unregister_buf,
+ };
+diff --git a/block/trace-events b/block/trace-events
+index 32665158d6..048ad27519 100644
+--- a/block/trace-events
++++ b/block/trace-events
+@@ -141,7 +141,6 @@ nvme_kick(void *s, unsigned q_index) "s %p q #%u"
+ nvme_dma_flush_queue_wait(void *s) "s %p"
+ nvme_error(int cmd_specific, int sq_head, int sqid, int cid, int status) "cmd_specific %d sq_head %d sqid %d cid %d status 0x%x"
+ nvme_process_completion(void *s, unsigned q_index, int inflight) "s %p q #%u inflight %d"
+-nvme_process_completion_queue_plugged(void *s, unsigned q_index) "s %p q #%u"
+ nvme_complete_command(void *s, unsigned q_index, int cid) "s %p q #%u cid %d"
+ nvme_submit_command(void *s, unsigned q_index, int cid) "s %p q #%u cid %d"
+ nvme_submit_command_raw(int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7) "%02x %02x %02x %02x %02x %02x %02x %02x"
 -- 
 2.40.1
 
