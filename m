@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBCD6C7EE2E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:28:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542545.846532 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85EE9C7EE31
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:28:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542552.846571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHb-0006iU-Uz; Thu, 01 Jun 2023 14:28:07 +0000
+	id 1q4jHn-0007xj-GU; Thu, 01 Jun 2023 14:28:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542545.846532; Thu, 01 Jun 2023 14:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 542552.846571; Thu, 01 Jun 2023 14:28:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHb-0006iJ-Rv; Thu, 01 Jun 2023 14:28:07 +0000
-Received: by outflank-mailman (input) for mailman id 542545;
- Thu, 01 Jun 2023 14:28:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q4jHn-0007vu-Co; Thu, 01 Jun 2023 14:28:19 +0000
+Received: by outflank-mailman (input) for mailman id 542552;
+ Thu, 01 Jun 2023 14:28:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2Xwn=BV=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
- id 1q4jHb-00066T-3W
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:28:07 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [85.215.255.54]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8621ad0a-0088-11ee-b231-6b7b168915f2;
- Thu, 01 Jun 2023 16:28:06 +0200 (CEST)
+ id 1q4jHm-0006Od-C5
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:28:18 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de
+ [81.169.146.171]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8c62c1b9-0088-11ee-8611-37d641c3527e;
+ Thu, 01 Jun 2023 16:28:16 +0200 (CEST)
 Received: from sender by smtp.strato.de (RZmta 49.5.3 AUTH)
- with ESMTPSA id L38909z51ERw1Sm
+ with ESMTPSA id L38909z51ESD1St
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jun 2023 16:27:58 +0200 (CEST)
+ Thu, 1 Jun 2023 16:28:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,57 +43,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8621ad0a-0088-11ee-b231-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; t=1685629678; cv=none;
+X-Inumbo-ID: 8c62c1b9-0088-11ee-8611-37d641c3527e
+ARC-Seal: i=1; a=rsa-sha256; t=1685629693; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=r/eu1fIER1wPtZpC+xC77N6N7DJLuru5V1w9oFBuvxjO5WUkg8NrG4CtdMC5BcCLO+
-    A6k7twbEcn6oKNcybOKlsc3AKnbfz7LGXC+JTLuenYilG2jbmyP4wS1e0LsQnsi+Ijmr
-    wYQrXcopUZYpgGyae55grBaS10fh2ASOcF5OjVwMwnH0DJGC2xoRmWRTnYjTxllde9nF
-    iX8s71tIXigDG2ayhNrt0v1utwjcrkVzCMvivlM6SxDdf9fm3xETwBhEcYlC1mNAR5Bd
-    zgIhe3oKLd/phROPzvWAOtzff7ipGsuATRxIv7HslBIVKhum/+azFuqa/mXOtSBfz3uS
-    3GWA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629678;
+    b=GXTCs3A3z/A4tDwzDgPrnzO+QXZJFyTjXNCa1tFuCTDuaccbOzVIm/ileLQVJZZ/vY
+    h1qJxVvDz9wWobfX6jIDmd8z3qiWNqI5CgxyEt2O5/U4Dm+8oPy1qaioPW2Svfp0UjLG
+    RP29REsdwzf/AtB5S4Ppty1xr05YIHbFOfkpn16JAWVm+OinGN3fNw8rQRnTGu6ViXM3
+    ui/hZN3N5Gr70YVMLb5iv6nKYPGLqP8fAPbbxoHLhnqNe2kWifE8pOeo5HxzlBW3Hypn
+    wkwnRIy3O0b0WIFDN1BLlxruCPt9cqr68/ILTG0pAd5wtN21n/83ILG819QAvbYR2Hw4
+    iVtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629693;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=Ycz8f4S+YBpjwDakc+Obg3kVrNZi3RzeWmvuw/COUYA=;
-    b=bpf85c1++ih3Ove1r592do1uITxcPaD31yENAjapJ9D5EcO0doWfqZ8TExpczXA5N7
-    ospyr40816WHbdGMbCPWHaOJsU4sDhc2q2aXz7dQPuFb/dj0zZj1L59Lll24NZ7FlaDX
-    12zNCcOEgt02alAoH4vretWqQPz6xFGdvBe9jnHLsgMSIqvDPb6tsU519g5WC0hRmp6I
-    oZElnIGXCf1yXK6gO4epLDPLxFoiNU3UkTKBzAVj7PWfTh2MOQ+FVYACa3s37VHnrlqC
-    UU6XGiNT/ha8vVOy++JY0RGsnGeqpTZly4EVxGrlvSktKGRCyC2pPbeiml/AhYrN5R0F
-    U6Jg==
+    bh=SQPnzeSPdSzTN5oSP1cg888bULG0jZM8rNP+r5k/y38=;
+    b=bRSqTxPWEgX+Q3mndArTMg/ytsqLcaVXZzI07FNpQPol2GmOXF3SXxHcX5bkJtDw/Q
+    3p2t0Vn84Sy+/uH4CODaowGkPhunRyWuIdZqDWYtPUbdLmUXUTYIy36X1vE4uAcnttB2
+    8B3ggFm8C1tCGxRlorGqyRhj4eJoUIEckZICUenGoAcPATuRCPUtE6MHg2BtWzyqndgg
+    iGNs0ZZqFtglPNqopPS5GJNvSYtCd8rSaxcf9+Y8Y6JoAlKKIThtNCVIlv7ULwqSoW/Y
+    tWwr5ilRH0v1ugpqf0wNRf15P0THto1t3Mz+MqAIHAxJ4ItrMKLomTMoraeidsWS/iC0
+    9eHA==
 ARC-Authentication-Results: i=1; strato.com;
     arc=none;
     dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629678;
+X-RZG-CLASS-ID: mo02
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629693;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=Ycz8f4S+YBpjwDakc+Obg3kVrNZi3RzeWmvuw/COUYA=;
-    b=PFTAfY8BdVyFK3M5hmk0NxfmH0KBGS3IvFEy8DSDdbJ5ydt5H4UtVfEnwDkFamiTzK
-    XvEH0JCTlaUJspRrwSAOik+HkOCrWtWjHK90Xut8HvHunEKULxNZLr4PC748Y/tRhZiS
-    HdfZERiDTkBy6vbQJO0in4xsbEHnUytI4JdWJnWIfgQeuPTsuuOumPYVNYskxDC7azlA
-    gA8QrJn0XLUzAXcPAVY2phzUmK+voH1ZdUMcKeRFiDzotI8qPolEfWqiFOfhLYRzmo6O
-    1ewt8W9Oeo43CzQTZ/UvJbOrBJ+G+O27b6JKwd9ZbXB0gQs5LzfW9q3z3ckxsiM+6Sjc
-    rC5w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685629678;
+    bh=SQPnzeSPdSzTN5oSP1cg888bULG0jZM8rNP+r5k/y38=;
+    b=DLoJ7ayIeAIhsPq6GiRv8vPJw62l1ovEXlAlB247dZDRqFaBI79x4Q+tFhQf80TD7m
+    u68Swltnp5PROnmexmB9go+sZygFQ9LKOoWr3rJv8MbMH/+cJkbsXzn5xBebTPkHT08h
+    zuH46ynq1qNh3p+zHCUKP4E64mAidq/4tDJYOFNRP1/S405kmtnrI9ssIKAnBBCHDOKn
+    0bXKNWFpUFdhjpMifZEtlX7nYyGBBu9FnQR0H8eP8OWytdk3x5VKmA67TlIG9XautjAx
+    OH8GJeGW3hOwlHJ5KcZlQ3+lQeYCn7wWWr3prWRlGzsZphIOKgWwny2D0c5XfiUnZzkX
+    7a6A==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685629693;
     s=strato-dkim-0003; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=Ycz8f4S+YBpjwDakc+Obg3kVrNZi3RzeWmvuw/COUYA=;
-    b=jPeOf2U4nhZ/BQZKRx1Hm0HaDs/pgr8xOyOlw2IYdmDb/XGB/XBveXnMUgq4EVNnlN
-    ccz9cwRMgObZnfiWYQBg==
+    bh=SQPnzeSPdSzTN5oSP1cg888bULG0jZM8rNP+r5k/y38=;
+    b=GiPtReQAZDCrkIY7YgLqP1fmV57RMM38WKtlA6L4snx7wsYCuFq2nAlqzJbTRYl1mB
+    xKU0mqEOEeYs5hECXxDA==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4xqFv7EJ0tgRX/vKfT/e8Ig6v0dNw4QAWpzMWrRQ=="
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 2/7] xentrace: use correct output format for pit and rtc
-Date: Thu,  1 Jun 2023 16:27:37 +0200
-Message-Id: <20230601142742.15489-3-olaf@aepfle.de>
+Subject: [PATCH v1 7/7] xenalyze: handle more potential exit reason values from vmx.h
+Date: Thu,  1 Jun 2023 16:27:42 +0200
+Message-Id: <20230601142742.15489-8-olaf@aepfle.de>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230601142742.15489-1-olaf@aepfle.de>
 References: <20230601142742.15489-1-olaf@aepfle.de>
@@ -101,28 +101,74 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="us-ascii"
 
-The input values were always 32bit.
-
-Fixes 55ee5dea32 ("xentrace: add TRC_HVM_EMUL")
+Copy and use more constants from vmx.h, to turn numbers into strings.
+Adjust the REASON_MAX value accordingly.
+Remove the size constraint from string array, the compiler will grow it
+as needed.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/xentrace/formats | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/xentrace/xenalyze.c | 28 ++++++++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/tools/xentrace/formats b/tools/xentrace/formats
-index 0fcc327a40..afb5ee0112 100644
---- a/tools/xentrace/formats
-+++ b/tools/xentrace/formats
-@@ -211,8 +211,8 @@
- 0x00802008  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  do_irq [ irq = %(1)d, began = %(2)dus, ended = %(3)dus ]
+diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
+index 9635ff453a..9af17d45bf 100644
+--- a/tools/xentrace/xenalyze.c
++++ b/tools/xentrace/xenalyze.c
+@@ -482,6 +482,7 @@ struct {
+ #define EXIT_REASON_MCE_DURING_VMENTRY  41
+ #define EXIT_REASON_TPR_BELOW_THRESHOLD 43
+ #define EXIT_REASON_APIC_ACCESS         44
++#define EXIT_REASON_EOI_INDUCED         45
+ #define EXIT_REASON_ACCESS_GDTR_OR_IDTR 46
+ #define EXIT_REASON_ACCESS_LDTR_OR_TR   47
+ #define EXIT_REASON_EPT_VIOLATION       48
+@@ -492,10 +493,18 @@ struct {
+ #define EXIT_REASON_INVVPID             53
+ #define EXIT_REASON_WBINVD              54
+ #define EXIT_REASON_XSETBV              55
+-
+-#define HVM_VMX_EXIT_REASON_MAX (EXIT_REASON_XSETBV+1)
+-
+-const char * hvm_vmx_exit_reason_name[HVM_VMX_EXIT_REASON_MAX] = {
++#define EXIT_REASON_APIC_WRITE          56
++#define EXIT_REASON_INVPCID             58
++#define EXIT_REASON_VMFUNC              59
++#define EXIT_REASON_PML_FULL            62
++#define EXIT_REASON_XSAVES              63
++#define EXIT_REASON_XRSTORS             64
++#define EXIT_REASON_BUS_LOCK            74
++#define EXIT_REASON_NOTIFY              75
++
++#define HVM_VMX_EXIT_REASON_MAX (EXIT_REASON_NOTIFY+1)
++
++const char * hvm_vmx_exit_reason_name[] = {
+     [EXIT_REASON_EXCEPTION_NMI]="EXCEPTION_NMI",
+     [EXIT_REASON_EXTERNAL_INTERRUPT]="EXTERNAL_INTERRUPT",
+     [EXIT_REASON_TRIPLE_FAULT]="TRIPLE_FAULT",
+@@ -538,6 +547,9 @@ const char * hvm_vmx_exit_reason_name[HVM_VMX_EXIT_REASON_MAX] = {
+     [EXIT_REASON_MCE_DURING_VMENTRY]="MCE_DURING_VMENTRY",
+     [EXIT_REASON_TPR_BELOW_THRESHOLD]="TPR_BELOW_THRESHOLD",
+     [EXIT_REASON_APIC_ACCESS]="APIC_ACCESS",
++    [EXIT_REASON_EOI_INDUCED]="EOI_INDUCED",
++    [EXIT_REASON_ACCESS_GDTR_OR_IDTR]="ACCESS_GDTR_OR_IDTR",
++    [EXIT_REASON_ACCESS_LDTR_OR_TR]="ACCESS_LDTR_OR_TR",
+     [EXIT_REASON_EPT_VIOLATION]="EPT_VIOLATION",
+     [EXIT_REASON_EPT_MISCONFIG]="EPT_MISCONFIG",
+     [EXIT_REASON_INVEPT]="INVEPT",
+@@ -546,6 +558,14 @@ const char * hvm_vmx_exit_reason_name[HVM_VMX_EXIT_REASON_MAX] = {
+     [EXIT_REASON_INVVPID]="INVVPID",
+     [EXIT_REASON_WBINVD]="WBINVD",
+     [EXIT_REASON_XSETBV]="XSETBV",
++    [EXIT_REASON_APIC_WRITE]="APIC_WRITE",
++    [EXIT_REASON_INVPCID]="INVPCID",
++    [EXIT_REASON_VMFUNC]="VMFUNC",
++    [EXIT_REASON_PML_FULL]="PML_FULL",
++    [EXIT_REASON_XSAVES]="XSAVES",
++    [EXIT_REASON_XRSTORS]="XRSTORS",
++    [EXIT_REASON_BUS_LOCK]="BUS_LOCK",
++    [EXIT_REASON_NOTIFY]="NOTIFY",
+ };
  
- 0x00084001  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  hpet create [ tn = %(1)d, irq = %(2)d, delta = 0x%(4)08x%(3)08x, period = 0x%(6)08x%(5)08x ]
--0x00084002  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  pit create [ delta = 0x%(1)016x, period = 0x%(2)016x ]
--0x00084003  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  rtc create [ delta = 0x%(1)016x , period = 0x%(2)016x ]
-+0x00084002  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  pit create [ delta = 0x%(1)08x, period = 0x%(2)08x ]
-+0x00084003  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  rtc create [ delta = 0x%(1)08x, period = 0x%(2)08x ]
- 0x00084004  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  vlapic create [ delta = 0x%(2)08x%(1)08x , period = 0x%(4)08x%(3)08x, irq = %(5)d ]
- 0x00084005  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  hpet destroy [ tn = %(1)d ]
- 0x00084006  CPU%(cpu)d  %(tsc)d (+%(reltsc)8d)  pit destroy  [ ]
+ /* SVM data */
 
