@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CEC7C77B7A
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:28:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542546.846542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11648C7EE2F
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:28:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542544.846523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHd-000709-6m; Thu, 01 Jun 2023 14:28:09 +0000
+	id 1q4jHY-0006Pe-IM; Thu, 01 Jun 2023 14:28:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542546.846542; Thu, 01 Jun 2023 14:28:09 +0000
+Received: by outflank-mailman (output) from mailman id 542544.846523; Thu, 01 Jun 2023 14:28:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4jHd-000702-3t; Thu, 01 Jun 2023 14:28:09 +0000
-Received: by outflank-mailman (input) for mailman id 542546;
- Thu, 01 Jun 2023 14:28:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q4jHY-0006PX-Eb; Thu, 01 Jun 2023 14:28:04 +0000
+Received: by outflank-mailman (input) for mailman id 542544;
+ Thu, 01 Jun 2023 14:28:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2Xwn=BV=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
- id 1q4jHc-00066T-59
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:28:08 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [81.169.146.165]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 86e6c215-0088-11ee-b231-6b7b168915f2;
- Thu, 01 Jun 2023 16:28:07 +0200 (CEST)
+ id 1q4jHX-0006Od-6m
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:28:03 +0000
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+ [85.215.255.23]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8354966e-0088-11ee-8611-37d641c3527e;
+ Thu, 01 Jun 2023 16:28:01 +0200 (CEST)
 Received: from sender by smtp.strato.de (RZmta 49.5.3 AUTH)
- with ESMTPSA id L38909z51ES11So
+ with ESMTPSA id L38909z51ERr1Sk
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jun 2023 16:28:01 +0200 (CEST)
+ Thu, 1 Jun 2023 16:27:53 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,57 +43,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 86e6c215-0088-11ee-b231-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; t=1685629681; cv=none;
+X-Inumbo-ID: 8354966e-0088-11ee-8611-37d641c3527e
+ARC-Seal: i=1; a=rsa-sha256; t=1685629673; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=RdU2wH2wP6gPwbVMH62EKme8z/QCnUaXOiHFqncxlGmIdDBvPrbQourb0aBlOgOH/V
-    obEQFi3tltEgdnzIzBgndNvHBHtH5tXZ0ovBWCdbGXBvgz/+pejT5xN5BaJjHBypQ7AQ
-    5ZFXDh0YBj01CetBE82YDSTEhuH/wYsqlPU8mq2E0T3TR4XoqYpzGn2KAJbNln5WjRzi
-    FLGFH4qIhYJG20bxyNK6+8QJvJxyF0tHqFUUdRfmPZ2UrAymCc1euy6GTpBbm2S1np75
-    DyoL4cv6zRYZTzWQdnpegGYyrtPTiMF9/1IyMQ2KwI04mWUQaFZEZcndXlylUS3XmRqh
-    coSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629681;
+    b=sJriocoYi7qieJcktu3vYQ1uYhv59B5RhT5eGihspvpS/Qr5KvXZbJEqpbPt9+dHOb
+    11WkBJhC8ta5pyMFYj5o5VM/EpUNAgXlVGo2e0P+y76vOrHTGkNCdNuL9mWQ2TdOHnyo
+    xHIDVoMAdBbM0OKN3LZEXsHGIsaLCEfZLUyeLKEFoOf1qn3qIKhlFfrkBYoL6P41RfQG
+    +BMbVPkizCipYeXhQkr1bzsbKSMn54iJT2GAFgyc840XldxA1HC7tKl1qZ7Sw3BOfw4N
+    SFe986SMN3qmJ51xSOPGRGBeK6+xD6m9JLRaB03u6eU0J6KpDdokGcGw9fp3RPhXweFg
+    KPpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629673;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=j6XBpMmDw+ppBy9pdGC4zIeWbEgfy6izbkgl65jdiEw=;
-    b=qJMe87sKlyuMaZB4GpR5nWLyeFEz1xReFafLn9OtuY39fPVQK43uqR6HucyloRHzak
-    r6iCLwWfGCbYkzg7zSNfTvpHF26kogC4aRlvVPdo2fSMHryaDig66ZK4iqW8LH1e6jTr
-    3KQbmuij/f24Zdvw0n4Yb1U0f7SsQnlKHXoKkgQ8rfOh4G6xbuMRF21X6eRWlk4RJKgW
-    U90i698cXEHjZSLv2NRTXgfLxAEANirPVD3RjzX/yde1YZjhoHCXu4XtKQJjN6RiO7X0
-    NsctqvyZph6HpnMbOeuVM6A48fEoAAPm9pzuUFWvJEai3OBP6zFjWWllNyJe5KEPMp65
-    djzA==
+    bh=yHH/K7mLKUIuVEhep20I7pu3fZbR52QQbMM0Cljd+e4=;
+    b=XRgIqSKsXdDVi8I6JweiJyqIEj5kEPp6r3FYeyOEJgzmYm9wj6faBbNmN0ongQPcO2
+    eBUwRLsjjEDQfQaFPfBHfOmHsV14RI3KXfFBgV7mEQF0JfLFjcMoiBLELc09MSqV3EFq
+    6kFa0PP7W9hhy6X7jIgwIq3ppxN9J0QvGdMDMwL4XnXEeoHyrzxIixD9Igkbx0uqKbZi
+    dvuSg/syyYQeWWF6glmcTXOd3ZhXqeVl45bd6roVKOAIROVCLAE+eFaY+JidoRSpyQ/e
+    EJtSPmWck1275GOhltziklOa9adsGDLnYx7OklcjZKFnsYOxf9e/DES59bdXHh/hRNo2
+    782w==
 ARC-Authentication-Results: i=1; strato.com;
     arc=none;
     dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629681;
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1685629673;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=j6XBpMmDw+ppBy9pdGC4zIeWbEgfy6izbkgl65jdiEw=;
-    b=hYFBOR4+N24HBqH7GBW6Qcmj2MK/zxJ9kFTOQdnTwbDB/1DXy0aiRbWO5jxKEAUXMJ
-    Mp6v9zgB3pI8BJPKILRaLTj0qYFOkueRgX46SBJW0eUdj9fOsP9n1prpVEOOg80itDOV
-    px4cA+qv1FZTYBpRhQmQBoKH1+yLG53dwArkJwdv5QSDAZYeXl6dG0rlMN8bQ1Cvc2Cf
-    1P2wXENH7yWKVZb8JiMR1rfeBOR7V6RosILrNT+XkQ0oV2HADWLHXAhcGCcI+NijkhbQ
-    iNBlpxlDIPBuCuDwhfCdPhl6VSHV9cXPO1+lPop66vGMqhaIGCturjJhMuR4qCCUbMLi
-    pRdw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685629681;
+    bh=yHH/K7mLKUIuVEhep20I7pu3fZbR52QQbMM0Cljd+e4=;
+    b=NUxyFsZvRq9KzWZcs8dNGLUTBfCJ2RkB0lnGJy/vAsTmmvBd0yoMnFOhQmebo1k1Ow
+    LDJc520CDRnGGAGv1Yb3dmx8TUtGaKTI9sn1rMY4jMMQxhEfHyiC22ob6AlUoAZkX9La
+    iXeqQe76DmQCNUOw+SWeKxsAlhjE19s6YWBTPDY9C6sDTEoQCXhhmyYjXVpWTbn8T5bI
+    fhm56mL6C7lfoVzqrT+yw9uOJRmQDAsllONOXi1oUiSffhqPg037Fd1iRSEYHQGZspAc
+    mkTZlSRiWg2q6e8SWd78Dky8XosBL8ta9cyGmtLQNPiKdUthNY1AYBZ/FAn7AO+cvl+n
+    UmtQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1685629673;
     s=strato-dkim-0003; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=j6XBpMmDw+ppBy9pdGC4zIeWbEgfy6izbkgl65jdiEw=;
-    b=5nc3yv1RMR484ne3P7YoKcYcBhohN8FvCgQkyKZruYSi2v0xkJZQS8/d5kaiy17XMX
-    rAUTrvjMRd1xYKEWQTAg==
+    bh=yHH/K7mLKUIuVEhep20I7pu3fZbR52QQbMM0Cljd+e4=;
+    b=7S/bqvTDfDoEkI4pHVWxU2Ga0h711EvwcxLawl/g9cxzTxAEA0DenCl77W6Ej0mBaE
+    rR4oUUQORzhqpn0azACg==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg4xqFv7EJ0tgRX/vKfT/e8Ig6v0dNw4QAWpzMWrRQ=="
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@citrix.com>,
-	Wei Liu <wl@xen.org>,
+Cc: Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 3/7] xenalyze: sync with vmx.h, use EXIT_REASON_PENDING_VIRT_INTR
-Date: Thu,  1 Jun 2023 16:27:38 +0200
-Message-Id: <20230601142742.15489-4-olaf@aepfle.de>
+Subject: [PATCH v1 1/7] xentrace: remove unimplemented option from man page
+Date: Thu,  1 Jun 2023 16:27:36 +0200
+Message-Id: <20230601142742.15489-2-olaf@aepfle.de>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20230601142742.15489-1-olaf@aepfle.de>
 References: <20230601142742.15489-1-olaf@aepfle.de>
@@ -101,40 +100,27 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="us-ascii"
 
+The documented option --usage worked because every unknown option
+showed the help.
+
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/xentrace/xenalyze.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ docs/man/xentrace.8.pod | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/tools/xentrace/xenalyze.c b/tools/xentrace/xenalyze.c
-index a50538e9a8..1cae055ef4 100644
---- a/tools/xentrace/xenalyze.c
-+++ b/tools/xentrace/xenalyze.c
-@@ -447,7 +447,7 @@ struct {
- #define EXIT_REASON_SIPI                4
- #define EXIT_REASON_IO_SMI              5
- #define EXIT_REASON_OTHER_SMI           6
--#define EXIT_REASON_PENDING_INTERRUPT   7
-+#define EXIT_REASON_PENDING_VIRT_INTR   7
- #define EXIT_REASON_PENDING_VIRT_NMI    8
- #define EXIT_REASON_TASK_SWITCH         9
- #define EXIT_REASON_CPUID               10
-@@ -503,7 +503,7 @@ const char * hvm_vmx_exit_reason_name[HVM_VMX_EXIT_REASON_MAX] = {
-     [EXIT_REASON_SIPI]="SIPI",
-     [EXIT_REASON_IO_SMI]="IO_SMI",
-     [EXIT_REASON_OTHER_SMI]="OTHER_SMI",
--    [EXIT_REASON_PENDING_INTERRUPT]="PENDING_INTERRUPT",
-+    [EXIT_REASON_PENDING_VIRT_INTR]="PENDING_VIRT_INTR",
-     [EXIT_REASON_PENDING_VIRT_NMI]="PENDING_VIRT_NMI",
-     [EXIT_REASON_TASK_SWITCH]="TASK_SWITCH",
-     [EXIT_REASON_CPUID]="CPUID",
-@@ -4632,7 +4632,7 @@ void hvm_generic_postprocess(struct hvm_data *h)
-             switch(h->exit_reason)
-             {
-                 /* These just need us to go through the return path */
--            case EXIT_REASON_PENDING_INTERRUPT:
-+            case EXIT_REASON_PENDING_VIRT_INTR:
-             case EXIT_REASON_TPR_BELOW_THRESHOLD:
-                 /* Not much to log now; may need later */
-             case EXIT_REASON_WBINVD:
+diff --git a/docs/man/xentrace.8.pod b/docs/man/xentrace.8.pod
+index 69aef05f65..4c174a84c0 100644
+--- a/docs/man/xentrace.8.pod
++++ b/docs/man/xentrace.8.pod
+@@ -69,10 +69,6 @@ set event capture mask. If not specified the TRC_ALL will be used.
+ 
+ =item B<-?>, B<--help>
+ 
+-Give this help list
+-
+-=item B<--usage>
+-
+ Give a short usage message
+ 
+ =item B<-V>, B<--version>
 
