@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0555C7EE33
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:26:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542619.846673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D428C77B7A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 15:26:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542626.846740 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBg-0004Cx-Gq; Thu, 01 Jun 2023 15:26:04 +0000
+	id 1q4kBt-0005tt-Ts; Thu, 01 Jun 2023 15:26:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542619.846673; Thu, 01 Jun 2023 15:26:04 +0000
+Received: by outflank-mailman (output) from mailman id 542626.846740; Thu, 01 Jun 2023 15:26:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4kBg-0004Cq-Da; Thu, 01 Jun 2023 15:26:04 +0000
-Received: by outflank-mailman (input) for mailman id 542619;
- Thu, 01 Jun 2023 15:26:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q4kBt-0005tC-K9; Thu, 01 Jun 2023 15:26:17 +0000
+Received: by outflank-mailman (input) for mailman id 542626;
+ Thu, 01 Jun 2023 15:26:16 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z77Y=BV=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1q4kBf-0004Ci-1P
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:26:03 +0000
+ id 1q4kBs-0004Rb-HQ
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 15:26:16 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b7eb5e0-0090-11ee-8611-37d641c3527e;
- Thu, 01 Jun 2023 17:25:58 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a535f5d2-0090-11ee-b231-6b7b168915f2;
+ Thu, 01 Jun 2023 17:26:15 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-277-5FE_cTMtMk-QY0HLTJnTJQ-1; Thu, 01 Jun 2023 11:25:56 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-437-A75QHkCMNk6EcxhtamKjMA-1; Thu, 01 Jun 2023 11:26:12 -0400
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2D09B806105;
- Thu,  1 Jun 2023 15:25:55 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 27CDE817050;
+ Thu,  1 Jun 2023 15:26:11 +0000 (UTC)
 Received: from localhost (unknown [10.39.194.5])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4A1CB8162;
- Thu,  1 Jun 2023 15:25:54 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9F5AF492B0A;
+ Thu,  1 Jun 2023 15:26:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,8 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b7eb5e0-0090-11ee-8611-37d641c3527e
-X-MC-Unique: 5FE_cTMtMk-QY0HLTJnTJQ-1
+X-Inumbo-ID: a535f5d2-0090-11ee-b231-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1685633174;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nZ5BNX4c5KUjeA09sd5fBjLXzeUNTb+dTFMcgwON1rg=;
+	b=BFHsDHUkIrWf3l41Zyu7jxYurU3jZ8bY0FMP1m8w2SypsGhcCvPwDUrJOJ6XF5qRp5vshj
+	hg2dleZ7RzAavlkJhmW+PP8E1eK/zLI87GQW1kVoB3c0O84KZilBDnXhjeIRxIaa/h0dh5
+	CfsVXjySxHFrDloptWNkvZsVL/UVGxc=
+X-MC-Unique: A75QHkCMNk6EcxhtamKjMA-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-block@nongnu.org,
@@ -80,69 +90,75 @@ Cc: qemu-block@nongnu.org,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	Raphael Norwitz <raphael.norwitz@nutanix.com>,
 	kvm@vger.kernel.org
-Subject: [PULL 0/8] Block patches
-Date: Thu,  1 Jun 2023 11:25:44 -0400
-Message-Id: <20230601152552.1603119-1-stefanha@redhat.com>
-Content-Type: text/plain; charset="utf-8"
+Subject: [PULL 8/8] qapi: add '@fdset' feature for BlockdevOptionsVirtioBlkVhostVdpa
+Date: Thu,  1 Jun 2023 11:25:52 -0400
+Message-Id: <20230601152552.1603119-9-stefanha@redhat.com>
+In-Reply-To: <20230601152552.1603119-1-stefanha@redhat.com>
+References: <20230601152552.1603119-1-stefanha@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
 
-The following changes since commit c6a5fc2ac76c5ab709896ee1b0edd33685a67ed1:
+From: Stefano Garzarella <sgarzare@redhat.com>
 
-  decodetree: Add --output-null for meson testing (2023-05-31 19:56:42 -0700)
+The virtio-blk-vhost-vdpa driver in libblkio 1.3.0 supports the fd
+passing through the new 'fd' property.
 
-are available in the Git repository at:
+Since now we are using qemu_open() on '@path' if the virtio-blk driver
+supports the fd passing, let's announce it.
+In this way, the management layer can pass the file descriptor of an
+already opened vhost-vdpa character device. This is useful especially
+when the device can only be accessed with certain privileges.
 
-  https://gitlab.com/stefanha/qemu.git tags/block-pull-request
+Add the '@fdset' feature only when the virtio-blk-vhost-vdpa driver
+in libblkio supports it.
 
-for you to fetch changes up to 98b126f5e3228a346c774e569e26689943b401dd:
+Suggested-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+Message-id: 20230530071941.8954-3-sgarzare@redhat.com
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+---
+ qapi/block-core.json | 6 ++++++
+ meson.build          | 4 ++++
+ 2 files changed, 10 insertions(+)
 
-  qapi: add '@fdset' feature for BlockdevOptionsVirtioBlkVhostVdpa (2023-06-01 11:08:21 -0400)
-
-----------------------------------------------------------------
-Pull request
-
-- Stefano Garzarella's blkio block driver 'fd' parameter
-- My thread-local blk_io_plug() series
-
-----------------------------------------------------------------
-
-Stefan Hajnoczi (6):
-  block: add blk_io_plug_call() API
-  block/nvme: convert to blk_io_plug_call() API
-  block/blkio: convert to blk_io_plug_call() API
-  block/io_uring: convert to blk_io_plug_call() API
-  block/linux-aio: convert to blk_io_plug_call() API
-  block: remove bdrv_co_io_plug() API
-
-Stefano Garzarella (2):
-  block/blkio: use qemu_open() to support fd passing for virtio-blk
-  qapi: add '@fdset' feature for BlockdevOptionsVirtioBlkVhostVdpa
-
- MAINTAINERS                       |   1 +
- qapi/block-core.json              |   6 ++
- meson.build                       |   4 +
- include/block/block-io.h          |   3 -
- include/block/block_int-common.h  |  11 ---
- include/block/raw-aio.h           |  14 ---
- include/sysemu/block-backend-io.h |  13 +--
- block/blkio.c                     |  96 ++++++++++++------
- block/block-backend.c             |  22 -----
- block/file-posix.c                |  38 -------
- block/io.c                        |  37 -------
- block/io_uring.c                  |  44 ++++-----
- block/linux-aio.c                 |  41 +++-----
- block/nvme.c                      |  44 +++------
- block/plug.c                      | 159 ++++++++++++++++++++++++++++++
- hw/block/dataplane/xen-block.c    |   8 +-
- hw/block/virtio-blk.c             |   4 +-
- hw/scsi/virtio-scsi.c             |   6 +-
- block/meson.build                 |   1 +
- block/trace-events                |   6 +-
- 20 files changed, 293 insertions(+), 265 deletions(-)
- create mode 100644 block/plug.c
-
+diff --git a/qapi/block-core.json b/qapi/block-core.json
+index 98d9116dae..4bf89171c6 100644
+--- a/qapi/block-core.json
++++ b/qapi/block-core.json
+@@ -3955,10 +3955,16 @@
+ #
+ # @path: path to the vhost-vdpa character device.
+ #
++# Features:
++# @fdset: Member @path supports the special "/dev/fdset/N" path
++#     (since 8.1)
++#
+ # Since: 7.2
+ ##
+ { 'struct': 'BlockdevOptionsVirtioBlkVhostVdpa',
+   'data': { 'path': 'str' },
++  'features': [ { 'name' :'fdset',
++                  'if': 'CONFIG_BLKIO_VHOST_VDPA_FD' } ],
+   'if': 'CONFIG_BLKIO' }
+ 
+ ##
+diff --git a/meson.build b/meson.build
+index bc76ea96bf..a61d3e9b06 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2106,6 +2106,10 @@ config_host_data.set('CONFIG_LZO', lzo.found())
+ config_host_data.set('CONFIG_MPATH', mpathpersist.found())
+ config_host_data.set('CONFIG_MPATH_NEW_API', mpathpersist_new_api)
+ config_host_data.set('CONFIG_BLKIO', blkio.found())
++if blkio.found()
++  config_host_data.set('CONFIG_BLKIO_VHOST_VDPA_FD',
++                       blkio.version().version_compare('>=1.3.0'))
++endif
+ config_host_data.set('CONFIG_CURL', curl.found())
+ config_host_data.set('CONFIG_CURSES', curses.found())
+ config_host_data.set('CONFIG_GBM', gbm.found())
 -- 
 2.40.1
 
