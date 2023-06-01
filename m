@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A068BC77B7A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06DBC7EE2E
 	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 03:19:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542204.845791 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.542206.845812 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4YqL-0002X5-29; Thu, 01 Jun 2023 03:19:17 +0000
+	id 1q4YqZ-00036b-QX; Thu, 01 Jun 2023 03:19:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542204.845791; Thu, 01 Jun 2023 03:19:17 +0000
+Received: by outflank-mailman (output) from mailman id 542206.845812; Thu, 01 Jun 2023 03:19:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4YqK-0002Wy-Vn; Thu, 01 Jun 2023 03:19:16 +0000
-Received: by outflank-mailman (input) for mailman id 542204;
- Thu, 01 Jun 2023 03:19:16 +0000
+	id 1q4YqZ-00036P-ND; Thu, 01 Jun 2023 03:19:31 +0000
+Received: by outflank-mailman (input) for mailman id 542206;
+ Thu, 01 Jun 2023 03:19:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+w1M=BV=daynix.com=akihiko.odaki@srs-se1.protection.inumbo.net>)
- id 1q4YqJ-0002Ws-V6
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 03:19:16 +0000
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [2607:f8b0:4864:20::531])
+ id 1q4YqY-0002Ws-EU
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 03:19:30 +0000
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [2607:f8b0:4864:20::535])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 14caff70-002b-11ee-b231-6b7b168915f2;
- Thu, 01 Jun 2023 05:19:13 +0200 (CEST)
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-53487355877so151114a12.1
- for <xen-devel@lists.xenproject.org>; Wed, 31 May 2023 20:19:13 -0700 (PDT)
+ id 1e2db27f-002b-11ee-b231-6b7b168915f2;
+ Thu, 01 Jun 2023 05:19:29 +0200 (CEST)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5289cf35eeaso1244522a12.1
+ for <xen-devel@lists.xenproject.org>; Wed, 31 May 2023 20:19:29 -0700 (PDT)
 Received: from alarm.flets-east.jp ([2400:4050:a840:1e00:78d2:b862:10a7:d486])
  by smtp.gmail.com with ESMTPSA id
- jd5-20020a170903260500b001a245b49731sm2146753plb.128.2023.05.31.20.19.03
+ jd5-20020a170903260500b001a245b49731sm2146753plb.128.2023.05.31.20.19.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 May 2023 20:19:11 -0700 (PDT)
+ Wed, 31 May 2023 20:19:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,35 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14caff70-002b-11ee-b231-6b7b168915f2
+X-Inumbo-ID: 1e2db27f-002b-11ee-b231-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1685589552; x=1688181552;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FrfFhcpCDB+Tgl6xUiFVZLlSppgb/hsoX/FxVOIbZUk=;
-        b=z1bUqRtFniqO+bDSlNVkZdAPV7g6hOQkUnZEIvrkOpa1HB1WNNSeN+5GTor/T6EdBn
-         9rZ1e3RoJk8fMmy0+yMVpIgUAJZC3kR34QzL4JKGdEQQw+wZgt/ELbpHmVqTt+ZreuIu
-         +nP5HB9cjZCnC7Cvfx9CdY8c7kEdx7r0R0fVVhuLS2Wl50qjZqIfWWlbubifFz9rqisq
-         qcxXFv9ln2tNzelTaAIHYnEoyHXwi4+5m8yk8EMC/8YQ+Q8GeAyqjLYt4NQMb4h0N97f
-         hoF95xvRgTZpKgNF4BGKaeuQDDq5lxnX8MCA6TPZHsURpnSVbvHzPJzKgiDxCd8Rg29I
-         huRg==
+        d=daynix-com.20221208.gappssmtp.com; s=20221208; t=1685589568; x=1688181568;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zmIxJv/RQZ1r+yT76IboD8L/ibu/PXdMmNY/Ba4zw4E=;
+        b=LifDaFHsjEizUqk1VXUEMNKpYG+2uFwQWZ6WmhqcXRIokhq+sF0/tOYP3m8p66m5Sw
+         ixVkHy6LMbrBelnPG8Q1Q9VRLCT+uqGDYCGM6cpIlvIhSQ3FFZGbw6zk85tp5GfS+ldw
+         Da0krCI3eNH0oCEHagqgTjS5JGpkwahp96+PqTHoZpg3dydVTmpmjawNVceSXeK03RKl
+         uDHry/5Rb534a/JTOwsP6b8N7HJmZpCpM7hLTgB3X2valR5fHWq29yMLiL9qGTiqTqCE
+         IGUaKyP4J9vbFD+3AyXaVCi4WEEzIHEifi3LI1MYz+fnnZmTcLeNYfg5/h7F5O8KGHQI
+         qzIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685589552; x=1688181552;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FrfFhcpCDB+Tgl6xUiFVZLlSppgb/hsoX/FxVOIbZUk=;
-        b=EXNmLjzJspQhfCpXiyLwoxUp8sKIhvwL33LnL6T8QZ64LYin0vWn5j0G18Xd5pxfLm
-         aDnxkSBY6tz+CiFBsRnRZXMKHxfjHb+2QXHYN0AcPPdtyW+5YYnJ9928HEHDIYJdhbU1
-         YVe6tAu0kBIX6EVg6V3bHl3S7wQQbjB/UKoEHDRFTqMhhjB2O//bi0V1RsEF1yEq4+A5
-         KKlbsm8TCGgX+Sv83CIofIYx7+OgYRRaiylm8XTQMG1eIybzPtrU8DHiNtngMqQcTNj3
-         xLrGq079YHxu9zxDdxKxPnF5BHnLWRwcL0QFWc/LzLzwEuaUV/uzmG6yKZfBTSOTqL/x
-         xQkA==
-X-Gm-Message-State: AC+VfDx0426Yls/gC5MDoczXfwDXWALTN80VonQyo4Nb7xxt+PQZEqhI
-	mO1aEgtmaAFBVXXvUdEhzL6d/w==
-X-Google-Smtp-Source: ACHHUZ4MZp29o+MFds/2GU+jNfvYE9Eyik8T0K+uVPXBV8iQEJ2uPuzNs2Z4+TUkzOA+GoV0RyHdvA==
-X-Received: by 2002:a05:6a20:2326:b0:10b:bf3d:bc5d with SMTP id n38-20020a056a20232600b0010bbf3dbc5dmr4805679pzc.47.1685589552099;
-        Wed, 31 May 2023 20:19:12 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1685589568; x=1688181568;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zmIxJv/RQZ1r+yT76IboD8L/ibu/PXdMmNY/Ba4zw4E=;
+        b=SvGpBABI9Hwz/+ixPn9rhKZF2N+45b7u8BvHuKENyTbb6DwJZBQQN79IPuKozRAGnK
+         tT+k91E1d3NPiWOwpWVVwj5hizRMfoLpvWz1BRp12QXxPNRnzvoGVg8e2ykyDwJXudta
+         vjERt9kJHmWTy226Cnz+TC1XR9lVoa6abFE5YR5I+WY2qaCFDmGwX8uhDOqWR37zAtq+
+         l2+U7x9XNcnCcMBinFshY1DmKhBfUdvFHbMVgMqTMIWBjSEQaTUexFFbfUuo/ok1+g1u
+         Tsut3WtoFWYI8ZivNVrnZ3ccqRemeEhM/CiqQ1ChrU9Ptv7PnU2k7UFzAlFAcdwq0sNQ
+         m1rg==
+X-Gm-Message-State: AC+VfDyREjs+PsBjAmSV6Pr5tXKDDuh19s7zAXRGZUl8RnFHpSqULcyg
+	JncRzfJUG09DvB+66fsIOZChLA==
+X-Google-Smtp-Source: ACHHUZ5miu5cdAr+t12FHP1vTIi7NetVQS5akrT+IyNAzvoVQFkZ1wGN5w557t12H8/USySWfc8W4g==
+X-Received: by 2002:a17:902:daca:b0:1ad:d542:6e14 with SMTP id q10-20020a170902daca00b001add5426e14mr680893plx.12.1685589567904;
+        Wed, 31 May 2023 20:19:27 -0700 (PDT)
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
 To: 
 Cc: Mauro Matteo Cascella <mcascell@redhat.com>,
@@ -119,10 +120,12 @@ Cc: Mauro Matteo Cascella <mcascell@redhat.com>,
 	qemu-ppc@nongnu.org,
 	xen-devel@lists.xenproject.org,
 	Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 0/2] net: Update MemReentrancyGuard for NIC
-Date: Thu,  1 Jun 2023 12:18:57 +0900
-Message-Id: <20230601031859.7115-1-akihiko.odaki@daynix.com>
+Subject: [PATCH v2 2/2] net: Update MemReentrancyGuard for NIC
+Date: Thu,  1 Jun 2023 12:18:59 +0900
+Message-Id: <20230601031859.7115-3-akihiko.odaki@daynix.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230601031859.7115-1-akihiko.odaki@daynix.com>
+References: <20230601031859.7115-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
@@ -136,58 +139,71 @@ delivering a packet to a device which is already engaging in I/O. This
 is because such reentrancy frequently happens for
 qemu_flush_queued_packets() and is insignificant.
 
-This series consists of two patches. The first patch makes a bulk change to
-add a new parameter to qemu_new_nic() and does not contain behavioral changes.
-The second patch actually implements MemReentrancyGuard update.
+Fixes: CVE-2023-3019
+Reported-by: Alexander Bulekov <alxndr@bu.edu>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+ include/net/net.h |  1 +
+ net/net.c         | 14 ++++++++++++++
+ 2 files changed, 15 insertions(+)
 
-V1 -> V2: Added the 'Fixes: CVE-2023-3019' tag
-
-Akihiko Odaki (2):
-  net: Provide MemReentrancyGuard * to qemu_new_nic()
-  net: Update MemReentrancyGuard for NIC
-
- include/net/net.h             |  2 ++
- hw/net/allwinner-sun8i-emac.c |  3 ++-
- hw/net/allwinner_emac.c       |  3 ++-
- hw/net/cadence_gem.c          |  3 ++-
- hw/net/dp8393x.c              |  3 ++-
- hw/net/e1000.c                |  3 ++-
- hw/net/e1000e.c               |  2 +-
- hw/net/eepro100.c             |  4 +++-
- hw/net/etraxfs_eth.c          |  3 ++-
- hw/net/fsl_etsec/etsec.c      |  3 ++-
- hw/net/ftgmac100.c            |  3 ++-
- hw/net/i82596.c               |  2 +-
- hw/net/igb.c                  |  2 +-
- hw/net/imx_fec.c              |  2 +-
- hw/net/lan9118.c              |  3 ++-
- hw/net/mcf_fec.c              |  3 ++-
- hw/net/mipsnet.c              |  3 ++-
- hw/net/msf2-emac.c            |  3 ++-
- hw/net/mv88w8618_eth.c        |  3 ++-
- hw/net/ne2000-isa.c           |  3 ++-
- hw/net/ne2000-pci.c           |  3 ++-
- hw/net/npcm7xx_emc.c          |  3 ++-
- hw/net/opencores_eth.c        |  3 ++-
- hw/net/pcnet.c                |  3 ++-
- hw/net/rocker/rocker_fp.c     |  4 ++--
- hw/net/rtl8139.c              |  3 ++-
- hw/net/smc91c111.c            |  3 ++-
- hw/net/spapr_llan.c           |  3 ++-
- hw/net/stellaris_enet.c       |  3 ++-
- hw/net/sungem.c               |  2 +-
- hw/net/sunhme.c               |  3 ++-
- hw/net/tulip.c                |  3 ++-
- hw/net/virtio-net.c           |  6 ++++--
- hw/net/vmxnet3.c              |  2 +-
- hw/net/xen_nic.c              |  4 ++--
- hw/net/xgmac.c                |  3 ++-
- hw/net/xilinx_axienet.c       |  3 ++-
- hw/net/xilinx_ethlite.c       |  3 ++-
- hw/usb/dev-network.c          |  3 ++-
- net/net.c                     | 15 +++++++++++++++
- 40 files changed, 90 insertions(+), 41 deletions(-)
-
+diff --git a/include/net/net.h b/include/net/net.h
+index a7d8deaccb..685ec58318 100644
+--- a/include/net/net.h
++++ b/include/net/net.h
+@@ -124,6 +124,7 @@ typedef QTAILQ_HEAD(NetClientStateList, NetClientState) NetClientStateList;
+ typedef struct NICState {
+     NetClientState *ncs;
+     NICConf *conf;
++    MemReentrancyGuard *reentrancy_guard;
+     void *opaque;
+     bool peer_deleted;
+ } NICState;
+diff --git a/net/net.c b/net/net.c
+index 982df2479f..3523cceafc 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -332,6 +332,7 @@ NICState *qemu_new_nic(NetClientInfo *info,
+     nic = g_malloc0(info->size + sizeof(NetClientState) * queues);
+     nic->ncs = (void *)nic + info->size;
+     nic->conf = conf;
++    nic->reentrancy_guard = reentrancy_guard,
+     nic->opaque = opaque;
+ 
+     for (i = 0; i < queues; i++) {
+@@ -805,6 +806,7 @@ static ssize_t qemu_deliver_packet_iov(NetClientState *sender,
+                                        int iovcnt,
+                                        void *opaque)
+ {
++    MemReentrancyGuard *owned_reentrancy_guard;
+     NetClientState *nc = opaque;
+     int ret;
+ 
+@@ -817,12 +819,24 @@ static ssize_t qemu_deliver_packet_iov(NetClientState *sender,
+         return 0;
+     }
+ 
++    if (nc->info->type != NET_CLIENT_DRIVER_NIC ||
++        qemu_get_nic(nc)->reentrancy_guard->engaged_in_io) {
++        owned_reentrancy_guard = NULL;
++    } else {
++        owned_reentrancy_guard = qemu_get_nic(nc)->reentrancy_guard;
++        owned_reentrancy_guard->engaged_in_io = true;
++    }
++
+     if (nc->info->receive_iov && !(flags & QEMU_NET_PACKET_FLAG_RAW)) {
+         ret = nc->info->receive_iov(nc, iov, iovcnt);
+     } else {
+         ret = nc_sendv_compat(nc, iov, iovcnt, flags);
+     }
+ 
++    if (owned_reentrancy_guard) {
++        owned_reentrancy_guard->engaged_in_io = false;
++    }
++
+     if (ret == 0) {
+         nc->receive_disabled = 1;
+     }
 -- 
 2.40.1
 
