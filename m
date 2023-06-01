@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B7FBC77B7E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:07:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542522.846469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB00C7EE2A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jun 2023 14:20:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542527.846484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4ixc-0001vo-UL; Thu, 01 Jun 2023 14:07:28 +0000
+	id 1q4jA4-0004L3-28; Thu, 01 Jun 2023 14:20:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542522.846469; Thu, 01 Jun 2023 14:07:28 +0000
+Received: by outflank-mailman (output) from mailman id 542527.846484; Thu, 01 Jun 2023 14:20:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4ixc-0001vh-Rf; Thu, 01 Jun 2023 14:07:28 +0000
-Received: by outflank-mailman (input) for mailman id 542522;
- Thu, 01 Jun 2023 14:07:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q4jA3-0004Kw-TW; Thu, 01 Jun 2023 14:20:19 +0000
+Received: by outflank-mailman (input) for mailman id 542527;
+ Thu, 01 Jun 2023 14:20:18 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=mTbf=BV=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1q4ixc-0001vZ-Ce
- for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:07:28 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on2077.outbound.protection.outlook.com [40.107.7.77])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1d80785-0085-11ee-8611-37d641c3527e;
- Thu, 01 Jun 2023 16:07:24 +0200 (CEST)
+ id 1q4jA2-0004Kq-PD
+ for xen-devel@lists.xenproject.org; Thu, 01 Jun 2023 14:20:18 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2060f.outbound.protection.outlook.com
+ [2a01:111:f400:7e1a::60f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6e7c4813-0087-11ee-b231-6b7b168915f2;
+ Thu, 01 Jun 2023 16:20:17 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AM8PR04MB7300.eurprd04.prod.outlook.com (2603:10a6:20b:1c7::12)
+ by AS4PR04MB9651.eurprd04.prod.outlook.com (2603:10a6:20b:4ce::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.23; Thu, 1 Jun
- 2023 14:06:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6433.24; Thu, 1 Jun
+ 2023 14:20:15 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::e442:306f:7711:e24c]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::e442:306f:7711:e24c%5]) with mapi id 15.20.6433.024; Thu, 1 Jun 2023
- 14:06:54 +0000
+ 14:20:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,133 +49,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1d80785-0085-11ee-8611-37d641c3527e
+X-Inumbo-ID: 6e7c4813-0087-11ee-b231-6b7b168915f2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hPyib4fYgA8fSBaimWVBuU9a8MTxAtDdqHTpmIElQiFL2OWJF93AJsRumpU76qt9lchu28J40XvHpYuNo2xMX5CJ48CuTN1OHVvh4MC+3ZjJUHzgdGglqf8qyL9WhhYWU5YePAVvvBn7oL6ofGP0opoko3HafQekyzbYNRn0gzp6Ef30+fIC4vbplpJAvY7OobC8kEW9v9DjL8QeNoIhTBaapuemwIGgvOXSSoV/gxe0Dhrt7Rdm+Ak+b1u+xKurIqgNJYU+DmeQh9KmKBG0VUi9wGOrCpCIf8+GQF203Ctv1QbHlVVYhrqBUeNyhWBPgJ+gCviLpBlwEyt8CRAlCw==
+ b=ih8APQJfG5uF2D2dIfYGERrzTfFdESHXY84HyLFCNa3J/gW3LoVYop7KfOphot41M9EN1S0jBeHlzQVXtGmKKysqOza3oJkucXXY67/GXAzdLUw3K4KNs6ixeX8e+8S+0uJD0+6AihGwvJKbnkNezqgohiuHsV2GlUkMLeg6a7aQ1MDK23jVGpvpWM4/uDe8FfvZrUnpemRKQU54gGiYy0KJgegeXMWNCkBON3qwIYA6T5r15MIqSpQbKdUjiohLcmLxARnTyfpXA66owgf4e3NinV8a438gFxlYHKTitJUwXmHI+j3MH4R/M5fbN9K+1BjzRfYy5eXl01OTEj006g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cag0FQovFb8An+lX5p2ZebBddZmR0g8ibj2elL7Tss8=;
- b=jU3hkya6qVVY8aKfykcWlhlXo/1fOGZVluRi8tkBj/epVkxixPSWbfWD/wqEW2pH7Aq5nexXPdQgoeR0utpWnuZ6oQtMwsY4RAJcL7kfP03tV1l0wtAq5MHZjN7iFTNmaNxe645CGhcHE4r4Ge2lprX5+3ttF2xzlXrvbTjxZFzqFTxxMwAp8DkAlWQYjNJXtuM4GsfP4TcCcAWIf80z5V9/FwzdCacbPGSdt9f3AK06OgalVyGEgKK91D2TuXQDdh5khle9cNnTK0mFG9FD4xjnDOSL0t4gm+BP+3enlzkZqjfA8G3snWOry/rg/JCPCn11D8o/MtGqPl80SHfvHA==
+ bh=Vl3lVP972xpfP1QGMljk3yfCfhHBHoJcVBg7B0MeAPM=;
+ b=arqUvxtbrTCbBcc3Ymz0Fx4YVLIBzZh3e4rSzdlgvCCU6OfK7WPjhkcqOB/Gr9j60gPm2bSyITkTVqxLNkZRnJAqIxurbFDJLzx4VVZ7XbPN/5+eRzlI3ycsYKjc4sjIxp+eIxEoyTIlShjKharSGvrn6b/2p7zjoRLRZFW1ZpaI5aa6QaoutZTILc3cwWw6G6MQXLxjWnuxHROUs3/Mx5inTmMV6esYPe9ar0d2dtobebCAD6VQz89645uf2ocI3sDM5KgnBmbUDiwc358D43vyEbGfGBFf0nmpU4C8IQ0AWxbyxA22ZDi5MAXK32dMjGjA119ryh6TqsJPR9cU9g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cag0FQovFb8An+lX5p2ZebBddZmR0g8ibj2elL7Tss8=;
- b=DTikRPm5XSOrXrV0RV98YBAl1uzGrVFzmgjgauwe8EgBz8VVh06qzSWyARyB9vD6TcAht6CZHlS1JJWOh+EWc3GwSspNJ75u8oLMdMnC38rF6XkG6Hxx7g9ef2H3/vrhjS3sGJXz31MlFatQJl8g7FcNWM5sF9LBr66FlCj1EeYh7ZTm226aAW2K5vaJYP3ev1AAhFaE+2GMaFHfHqfmBXUm5NHT8S2BtXzFp+bktIzPQalMkCLfMDB1ENT+qGjUSHwXq5umy9TKllp+GtThw7EzSEdW19fpt9b9wd+BjpVvqVuZKylCETCUM+QXfZMCNC1Jj9VqnlcH+tUy04SA/A==
+ bh=Vl3lVP972xpfP1QGMljk3yfCfhHBHoJcVBg7B0MeAPM=;
+ b=1erxI7+I5PdTsh1Znoen0OmfgiO5hcxvCSfqFPGUFk+tzCXqowSvPW/nmlo61QH5IZ1RYH4Chc3VcFdVbHdw7OqgmfPzxSRnPDOFGY27sddi6WIuq3x5gb6CGzXtnSxdntlyVrzzN/jrGwv8vV01aHi3Z4jYtUiYu2esMBxd4zaimzVPBgJBlVh3qXdBPdISEEHIyLRfDh0UCCvdqeFROcO3VkZWrxnnyZwu/U9pXeeAs3Gtep6at9FiyNkGB68Px2iwiHkty9EkF/IA1/AmL+UrdXztaq8xHcewYBN4LXmVcNXgZ+cjyQnnZRpYnu4k74yTNaHx33urkZ4ZiCLiQA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <cc87aac7-87aa-2efa-662e-f8d3628ddaab@suse.com>
-Date: Thu, 1 Jun 2023 16:06:53 +0200
+Message-ID: <dfc403ac-875e-b1a7-16e9-b2b443e57278@suse.com>
+Date: Thu, 1 Jun 2023 16:20:13 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH 1/2] x86/vPIT: re-order functions
+Subject: Re: [PATCH 2/2] x86/vPIT: account for "counter stopped" time
 Content-Language: en-US
 To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
 References: <fd113adc-6d66-5a4f-78ee-766c197ced93@suse.com>
- <b6cbf871-53a6-15ee-99d5-0ad2ab9c8b80@suse.com>
- <ZHhiLgI0oL7jvKNc@Air-de-Roger>
- <cf17abea-0ca2-5794-aa29-3d9c91355d4f@suse.com>
- <ZHiGCblQD42qfoY8@Air-de-Roger>
+ <355c5379-ea9e-582c-0131-816204eb3ace@suse.com>
+ <ZHiFliv3GV1aQnY4@Air-de-Roger>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <ZHiGCblQD42qfoY8@Air-de-Roger>
+In-Reply-To: <ZHiFliv3GV1aQnY4@Air-de-Roger>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0071.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9a::6) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0140.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:95::12) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|AM8PR04MB7300:EE_
-X-MS-Office365-Filtering-Correlation-Id: 808d2d10-6e3c-442c-e649-08db62a9745d
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|AS4PR04MB9651:EE_
+X-MS-Office365-Filtering-Correlation-Id: c7a35b40-7f46-4e09-5bf2-08db62ab51a1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	q3xudIi0J9izKpk/MXporLBYNVkB2swmNnm0OkD3MLvuhn2SXXleYPnnv5q6cwFC5Ia5tcGSNrT8tvvIB199yYPX/K5sqIqqTsLdz5QY471nwHr8bZXKXsOWwS6tzF++HyfCtRnzSh33zmMpo8Rv/UNdAVCU2yG7q/ESFPN/HZDBqxcACmOET3yD/9eODMKqR7TRd41zqa0/8Ej65Xhg30uPy0J3uqHhw9jCd91UJ4GKZiGGy7dwhFXpb+tLd1v8ie8+j7YsNk23rv65yP2nGe0jxGllchrRIPVlzoBOceIvQWI8cVnw6dOmh3u37hzS9ooilyh5TMxMKN+BFKkPomH9qD25gtRiye91ZyQhSXaTr4JFbEr913Z84k+ayfEbY6Y0DEiqhlgeVx+wjHQMv9IJGfcOtKKTpjmqBf6GJHmsbkatOy0FabG3AD8lN6yGbWkJWVidyOJTtm0jyu5PHnKy4TyZwTtohg3xTPhbIUI4e8E4Mkm8gFRYAAbTpk0vJ5HVZOPioW+JJUcEGZ0ADhSbYyWGMZeExMgSCNRqkUFvwG+VqguX4/V46C/HGuUeIpmPOWaV8hg2jc4ccMmvJShzHQBFqvl11PC4x9gEl6jWik984f51GjqL0eYIwCW76txrgzTtlNPXlN1ElGxySMaxR29dfTUTcEA5VKcoCs7adGjAVpBbY3FiMp25hDyz
+	MLHMLsAdHT730gABz7n+8ZyF/70XoML4vOHS6LSHjC8UWvgJ1LSzE7BAKN0LRuRp3VN57/Rn72oRMommJY4p/Dg+8dZo9pJyPLsZK/zFISpG4zRSAyaZbZdZ/0w8yHK/9ozWwgoVQt6ebLd4zQN2e8VHU79Jjv8Dm8OycpuhwGNenb2VBqE4Qf7sh57tzvC9UfPoIIQRIap/uO2RFg4+r5aaTiuHSEXsKjgbTPQr4Ktq54Y3gnGsfGo2mzCijKeOE+fc0Fx56UAh0wATBz0but/v+152LtZ/0z+LjnGxPYKnYFYuq4R+w0cDuvGhRqfmXnPalB9PEMLEpdYgH7DlpbusyHa4Hrmmxjp8pbguT2ZyD0DxyTWEcXIa2i+VFYVkzT0nPT3ummhNq9wgRXSPphgoc1jWoiUBD1c7O/ZVc18lq9A1I6JKrDUZFUTNWnH2tgnKDgvmR8+YMngmswRNREtTyxzOCTlNn3HCIFDRidt4gGxThosqsy9BE9qZJ4+pYWjC4Ieim0dYWgBE/DcqRMPh8ZHXxBsI9+s5drc9cEQg1VLxwP7u5Zc9LkEpV7swQHPvxnry8LmX9ees8RLxeHf4CrJlipEAmoVuGwN/ZXXtBtKux3/9exzmVnabut+pmjR7IA/y4JBT9S85ziWlQoVOY/cbDuxU9Qjf3barJY8=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(136003)(396003)(346002)(366004)(376002)(39860400002)(451199021)(2906002)(6506007)(2616005)(54906003)(186003)(6486002)(86362001)(36756003)(31696002)(6512007)(26005)(53546011)(478600001)(4326008)(6916009)(5660300002)(8676002)(8936002)(66476007)(83380400001)(316002)(66946007)(41300700001)(66556008)(31686004)(38100700002)(169823001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(366004)(396003)(346002)(376002)(39860400002)(136003)(451199021)(6486002)(41300700001)(2616005)(38100700002)(31696002)(86362001)(53546011)(83380400001)(6506007)(186003)(6512007)(2906002)(26005)(15650500001)(8936002)(5660300002)(36756003)(66946007)(66556008)(66476007)(4326008)(316002)(8676002)(54906003)(6916009)(478600001)(66899021)(31686004)(21314003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WTFmUW9RODlVTmhud0NtS3lGYzhjaDdLS2tTZmxjU0NTNWNuRTFzU2FBeGND?=
- =?utf-8?B?clNrMTdJcFRMU09jaEhvMXZyWnlXWkQwaWV3V2VCVUYzMlREbE9keGVKWmEy?=
- =?utf-8?B?ejlWT2ZGTE1kR1RRQmZjQ3pmdU5kU3Q0TEJ5UVhoMDV2WHRsUWtxb2NhUHFW?=
- =?utf-8?B?a0tTS0d6UGZoSzRWT2ZXSFd2NWtqcGhOTU9NSVBHUmh6TEpLV0xTZm45VExp?=
- =?utf-8?B?N2Z1ZHBEODFFU1hJSzNZeWY1T3REVXFiY0UyYTVXbzZvRmhacHR2cjZoWHRT?=
- =?utf-8?B?Z1B0eHFmL0JyY0JSaDNSVFFhY04rTldUYXFtUFBkU3IyUHlMK3VoTjJ4d3NG?=
- =?utf-8?B?WEFSb2YrMDdRTWwwZ0VFTjNCZHBtTDRPZkg5M1JSQlE2SnBrZldhTWVSQi92?=
- =?utf-8?B?YTJwdHQweTI3VXUxQldFYVlDRVBKcCs4MWUxeHI3Tjd3TVV6VDg0emk1ZDA2?=
- =?utf-8?B?czZCQVBzbEE2MUlsemcxRkliUDRyV0hJdkJ5K2l4VGNVdjZKZWN0V2I4bnhs?=
- =?utf-8?B?azUrMjhmVmUwVWw4NmtGY05hYm1JMlo3ZURhaW41SnQ4SzRuc3R5eUtlZERB?=
- =?utf-8?B?WVgvL0xlRWdqYVBabUVCSTVrdGZWbmVJWXFxY0V3SURnckZyd0hRSEFKazdO?=
- =?utf-8?B?MjU2WUUxb1FpNVJHajR1KzRRKzBJUUtFakhKOHB6OUxlOVVBS3lVUUoxc3V1?=
- =?utf-8?B?S1lLS2plZmpoMmpqK0tkNmlhVWZULzIxRDNCRmRkdDhUbkRCSXY1SlBScUtX?=
- =?utf-8?B?eWZtdmNEejgzT2pYVzE4YmNpdDVhVFY5OFNSaXhSWTZYZ0sxN2luakMwMlJw?=
- =?utf-8?B?cTdLUll0bjl1aFJoQmhLZWdYc2h0djErSHBhWEVMc2tyN1ovTnlKMG8xTmZi?=
- =?utf-8?B?a3hsQWZUUDdMQlllUHUvamRyUm1jd3ZNeG13UHcvUnd3NnUrY3JJTTFzVW4z?=
- =?utf-8?B?TWk2a0MrOFpSK2M1c1hMSlROckdJZWh3SWVEWFdFR3RHT0RXeWQ0SXpWck5t?=
- =?utf-8?B?cTQrZFJEVXVsYU1GQUhmamEyOWErTXNBd3pRSDVHcDVrRlMrL2k5QysrQW5D?=
- =?utf-8?B?VDlwemJwb1NKdkJ1b3pWa00yaXhuRDk2QkthL0tWNUFYNEo1bi84NWR5WG1L?=
- =?utf-8?B?b2FkVXFLQ2d6Rm9aOUpJNjM0SEVYUityYkQ4aFNvQnk3R0UzMkdudDJ6VVBr?=
- =?utf-8?B?ekhDU2xEZDJ1UmF6TEhiTXpTaDNCVHZxakx5elAvclhmUTBwQWlJMG02aDBL?=
- =?utf-8?B?dG5LNXdyTlR4enRIWGxUZUNXRDBFdVJMSk1pN2pvZmttbVdDTGcvKzhaeEVC?=
- =?utf-8?B?UWgyK2Urbmt5MTBJSGdBVWhML3ZKY0g1cHNHcDFKUDJ6Q0M0Y1RIdS9xaE5E?=
- =?utf-8?B?amhSQ2RHRytMR3FMY2V4Z05yUzZpVUpaYkVpalpuOExreWFnWHhBMUZWOTlR?=
- =?utf-8?B?eWFWSkFzZFFaRVdSNDYrbkxQY01LbzNIQlNtZWhTaE1yVEFDSkxOU3FRMTFE?=
- =?utf-8?B?WS9OcXRXWDFCZnowL2hXQm4rZVdCSTlYQnBGRFlGZGlVcGVudVRiOGtLR0c1?=
- =?utf-8?B?eGE2WTdDRGh4NGVOd1NxODY5OHpPNDl3MDZnR25Eb0JZanlxS1RLN3lVL2tY?=
- =?utf-8?B?YzNMNCtKTENwY2tjenZFU2hZQ3FBU3M4UTNrdDVtOFFwYjBYMnZrUU9Vb0NY?=
- =?utf-8?B?ZzZQWFNaSW5wWkpvL251OElhR3o5UThrZXRuUm1VZHdSOG83c0s3azFiOHk0?=
- =?utf-8?B?WVpJNklDcmkzTTg0RmQvUjYxNWtnUkJyRkxkc2NSWlp1OEduMTlEY1YzNjRp?=
- =?utf-8?B?ZnRSa2ZlTjFYMlZYZWlHM3E1M3BTOFI5ekZqWWYyT0JCRG44M2drcURJMGpx?=
- =?utf-8?B?bUNGaEVEU0t2cUdQM0hiclc3TUhoblBEelA3QkFZK0pGaC80bW5EbkhCMzVW?=
- =?utf-8?B?bWVFRDJZZlIweGs5djJ6ZTJVVHYyQ1BNRVRXM2srSjFNamhsZWtGWlBQNSty?=
- =?utf-8?B?SU9SdnZ4RUNHc2F2ampnTEhDOURxVnJNaUZmaUpwaFRCL0RTVFY1dmd6a0c4?=
- =?utf-8?B?Y05yeTZOM0pXcmZ0U2d3cHhPTUw4R3BYM2pTRGduQ09KM2JWVXA0bzRzakRB?=
- =?utf-8?Q?amdEI3rN18mKDlK7J+pxqes7O?=
+	=?utf-8?B?SFEwN21xUWRiWjVVTzI0NTdRU1RtS3pRSXhycDBOTXdrR3YyTmIvTXRCL05y?=
+ =?utf-8?B?b0NlMGFzYy9ya3VDa0tJTWJjSTg0M3krVklBaUYyOHdZT1N6QWRXVW9UR25r?=
+ =?utf-8?B?V1F1cHd0SjNsTm1ESGQvV3VpZ3VTRmtMVFhrLzhPTFpld2huSzIyTUZqN3Nh?=
+ =?utf-8?B?YldBZW80SURuUENsVmszbEFYRHpYQmtpeTZqSnY2YU9YQjd4VUcxMVJPZ0Y5?=
+ =?utf-8?B?VXkvOVh1UGw5RGE5b0RVNWlwZHZtVmp3SU1GOHB5UU5vTkVEWEc2c1g1MzlN?=
+ =?utf-8?B?c3BpUk15TDZkLzVVQmZyL3VtMXZwRE5rQUsrUFJxcENnamZuT21VdnpUQ1Qy?=
+ =?utf-8?B?RGRRQnlLV3NmVDhZSnpmaDFoMmdwaE9xRG5IVE5RUnQyR0hnbHNGTERtUGNt?=
+ =?utf-8?B?Z3JCL2FIeWhNR091SlJ2MDRnb2lWenZHckExcUtTR3QwcmNzaU9jVGZEOHBa?=
+ =?utf-8?B?RG82dWVzamEzQzhDNXRBcXpZdXBydTdpMCtjV2xuNHRqYWdsYnJWeGlzaFYz?=
+ =?utf-8?B?am1GdENFRk5VQ0wzUmVlZ05raFRBVERXbHlOK3BwYU5CaURETHQ0T2RFejZX?=
+ =?utf-8?B?VDI5UVJqUnlSdWFlMDZtYXlHU2NpLzFIbmwyU2tIWjI3THY3QUZmeXUxOE5v?=
+ =?utf-8?B?UnNNSmo0NWJaZEQ0UGVtWWY2L2NkTjgyRnhjWEFZMVN0NWJsQ1JlbkVNSXZ5?=
+ =?utf-8?B?WldoR01jSzZBZU5Gb2ZtT3NGOU5Edjlsb0NvT0NWV1h5cXVRbFRoY0tBWlFn?=
+ =?utf-8?B?WjBLKy9kT1JUUUgvWmNYZ0dlbjhDK1BDZW5nQ00wNmRBMGZhUmJTOUhPVzhm?=
+ =?utf-8?B?V3dVcG05b2dITmdpS05PTExkeFZrVDhmRlloNWFDNFB2blN2V2pxRnhrenJT?=
+ =?utf-8?B?NDBXZzlDOElLNmhXVHJLOVluRDJ1REpIRWtrWWJ4bW0vV2lXVHV2TmdjQ21v?=
+ =?utf-8?B?cUpOd3FVTzVUSXIwYWt4c2h1T3h0aXNqaHBKdEU1RVFDTTl4MDhnblhYbVdO?=
+ =?utf-8?B?RmZjSTBIam5hWmRyS2tKWUJjcDZpR3ZpVERIQkUzZm00Z24zMXFMZ0xMQk9r?=
+ =?utf-8?B?QXdvc0hIakRHR1VzdzdMSWNnNThhSUxFUkFITUpsM2V1QmpaNFZkQVBSVTRG?=
+ =?utf-8?B?V1VwcW4rZiszY0NHanVxOEN6ZDQwSzY0YzdWdmZMeCtHQ0JZQmNkY1h6RFNI?=
+ =?utf-8?B?eTFGekRFTC8yYU9NcS9nWFYxSDlpdmkxaW04eGdvR1Zja2tjcTBFb2hOMEdN?=
+ =?utf-8?B?R0U5K29NeFQ2TUNSakZGdHFqc3p4RFhGL0IxblZ6UHhuVDlBNG83dU82RWpi?=
+ =?utf-8?B?eFJEeGZFdnQ3aW9oTkE0ZUFjbzREbjY3TWJEOEhncGVBWDRJUE9Nb3Z6bnRp?=
+ =?utf-8?B?V2JIOUtHcytmNmZsNTRwNGg2TUtib1djN3l3RldvQjBqS2UrcEZGTjNiNTVr?=
+ =?utf-8?B?QTZML01vcjVhU1RJandZbitMeko2a3dZTWN2WWQ3TXBhMlNtZWRUNnlrSEx3?=
+ =?utf-8?B?WkpqcjNRYTA2WVJMVWJ6T1NONHU3ZGQzNzdmNmdkSzBZdE56dDZYeGtKMjZD?=
+ =?utf-8?B?THkwbW9PNTIza0lsVU0zNktNQ0VBenNmZTE0VzlvQjVpczM5anZXMWsvWEtL?=
+ =?utf-8?B?YnQ5UkIvNUc1cWE3ZFZnTC9BbmxDaGJNeXg0aFdHOE1WQ1IvTDdKcXh2Mkpj?=
+ =?utf-8?B?ZHhhclBVN0E5ZzRqZkhwUzhTdXZxb0FSOVJGN3hNYUtEY2lGdnAzcG91ZFBG?=
+ =?utf-8?B?anpXSGhZQ1VUM0F6b2xkZUUyek1wa3JWRzlZVWNvUzRLa0cwRURGOHhraHdB?=
+ =?utf-8?B?TFJKRndjQlRXUTE5dStXcXZ5L0E4TUJOc2gyem94Z3VVcC9xS2YwYTR2ZnNy?=
+ =?utf-8?B?QVBtenpSTlByOXo5bG81cXlTZWQwaHo3TDQ3SUhNaGZUUjh5NUlxemRvN0o1?=
+ =?utf-8?B?ZStRV0hQbVdqaGYycTNRNnB0Z2VZbm1uUDhLeGRhc29GK1RZMVBvWU1ybTNk?=
+ =?utf-8?B?djdkOElsWUJnTzF2TXh1dWhZSmltVzB6L1JBaXRaM1h1WU1TY1ZQemtFSFNq?=
+ =?utf-8?B?VnV2bWtkeVU3Y3lSMU9acUk3VlM3cjJnbStJVXJCTkVEb1dhUS91UkZWYWZG?=
+ =?utf-8?Q?CoOFKC5rVBZQvSgciCa95+p0Z?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 808d2d10-6e3c-442c-e649-08db62a9745d
+X-MS-Exchange-CrossTenant-Network-Message-Id: c7a35b40-7f46-4e09-5bf2-08db62ab51a1
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2023 14:06:54.6573
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2023 14:20:15.2776
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9PrGEu1SfNLPO2m9TeQwvYzrhS0O1XwhFiYVwL0faHi643icttl9lSaVr+mzbeT/ZyG02feYyhUIXju91uPleQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7300
+X-MS-Exchange-CrossTenant-UserPrincipalName: U6rkF1IDolNh0rvpdPGwAsVuSkbJd4i9SGb5Srp88jzufuaAf2D6E4YYzh3hW0/CWCJx4OzYtZNw/d0GCHm8/w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9651
 
-On 01.06.2023 13:50, Roger Pau Monné wrote:
-> On Thu, Jun 01, 2023 at 11:56:12AM +0200, Jan Beulich wrote:
->> On 01.06.2023 11:17, Roger Pau Monné wrote:
->>> On Tue, May 30, 2023 at 05:30:02PM +0200, Jan Beulich wrote:
->>>> To avoid the need for a forward declaration of pit_load_count() in a
->>>> subsequent change, move it earlier in the file (along with its helper
->>>> callback).
->>>>
->>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>
->>> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
->>
->> Thanks.
->>
->>> Just a couple of nits, which you might also noticed but decided to not
->>> fix given this is just code movement.
->>
->> Indeed, I meant this to be pure code movement. Nevertheless I'd be happy
->> to take care of style issues, if that's deemed okay in a "pure code
->> movement" patch. However, ...
+On 01.06.2023 13:48, Roger Pau Monné wrote:
+> On Tue, May 30, 2023 at 05:30:40PM +0200, Jan Beulich wrote:
+>> TBD: "gate" can only ever be low for chan2 (with "x86/vPIT: check/bound
+>>      values loaded from state save record" [2] in place), so in
+>>      principle we could get away without a new pair of arrays, but just
+>>      two individual fields. At the expense of more special casing in
+>>      code.
 > 
-> It's just small style issues, so it would be OK for me.
+> Hm, I guess we could rename to pit_set_gate_ch2 and remove the ch
+> parameter.  That would be OK for me.
 
-So I've done the obvious ones. There's a further signed/unsigned issue
-which isn't quite as clear whether to take care of "on the fly": The
-function's 2nd and 3rd parameters both ought to be unsigned, yet
-throughout the full file the same issue exists many more times. So I
-guess I'll leave those untouched for now.
+Well, simplifying the function is the less ugly part, so I'd be okay
+doing that. But doing _just_ that feels wrong: Why would we make the
+function less general when we still maintain all the data also for
+the other channels, just that we don't update it. My concern was
+really towards the further special casing of channel 2 that would be
+required if I didn't introduce two new arrays, but just two new
+fields.
+
+>> TBD: Should we deal with other aspects of "gate low" in pit_get_out()
+>>      here as well, right away? I was hoping to get away without ...
+>>      (Note how the two functions also disagree in their placement of the
+>>      "default" labels, even if that's largely benign when taking into
+>>      account that modes 6 and 7 are transformed to 2 and 3 respectively
+>>      by pit_load(). A difference would occur only before the guest first
+>>      sets the mode, as pit_reset() sets it to 7.)
+> 
+> I'm in general afraid of doing changes here (apart from bugfixes)
+> because we don't really have a good way to test them AFAIK,
+
+Right, hence why I'm asking.
+
+> maybe you
+> do have some XTF or similar tests to exercise those paths?
+
+I did consider making something, but I can't go the route of "try it
+directly and then compare with emulation results". Yet without that
+I'm not sure such a test (and the time spent putting it together) are
+worth it, the more that without being able to compare I might also
+end up testing some wrong behavior, simply because of not properly
+understanding the somewhat scarce documentation that's available.
+(I already had to resort to 30 years old hardcopy documentation to
+at least stand a chance of getting things right.)
+
+>> Other observations:
+>> - Loading of new counts occurs too early in some of the modes (2/3: at
+>>   end of current sequence or when gate goes high; 1/5: only when gate
+>>   goes high).
+
+Because of this ...
+
+>> @@ -109,6 +112,7 @@ static void pit_load_count(PITState *pit
+>>          pit->count_load_time[channel] = 0;
+>>      else
+>>          pit->count_load_time[channel] = get_guest_time(v);
+>> +    pit->stopped_time[channel] = 0;
+> 
+> Don't you need to also set count_stop_time == count_load_time in case
+> the counter is disabled? (s->gate == 0).
+
+... I think you're right, and I should do so unconditionally. In
+principle I think this would need to be mode dependent.
+
+>> @@ -181,22 +188,39 @@ static void pit_set_gate(PITState *pit,
+>>  
+>>      ASSERT(spin_is_locked(&pit->lock));
+>>  
+>> -    switch ( s->mode )
+>> -    {
+>> -    default:
+>> -    case 0:
+>> -    case 4:
+>> -        /* XXX: just disable/enable counting */
+>> -        break;
+>> -    case 1:
+>> -    case 5:
+>> -    case 2:
+>> -    case 3:
+>> -        /* Restart counting on rising edge. */
+>> -        if ( s->gate < val )
+>> -            pit->count_load_time[channel] = get_guest_time(v);
+>> -        break;
+>> -    }
+>> +    if ( s->gate > val )
+>> +        switch ( s->mode )
+>> +        {
+>> +        case 0:
+>> +        case 2:
+>> +        case 3:
+>> +        case 4:
+>> +            /* Disable counting. */
+>> +            if ( !channel )
+>> +                destroy_periodic_time(&pit->pt0);
+>> +            pit->count_stop_time[channel] = get_guest_time(v);
+>> +            break;
+>> +        }
+>> +
+>> +    if ( s->gate < val )
+> 
+> Shouldn't this be an else if?
+
+They could, but they don't need to be. I ended up thinking that with the
+blank line between both if()s things read slightly better. If you're
+pretty convinced that's unhelpful, I'd be willing to adjust.
 
 Jan
 
