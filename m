@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 677BBC7EE24
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Jun 2023 05:50:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.542924.847360 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23553C7EE24
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Jun 2023 06:07:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.542943.847405 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4xfJ-0004gJ-99; Fri, 02 Jun 2023 05:49:33 +0000
+	id 1q4xw4-0000XR-Ir; Fri, 02 Jun 2023 06:06:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 542924.847360; Fri, 02 Jun 2023 05:49:33 +0000
+Received: by outflank-mailman (output) from mailman id 542943.847405; Fri, 02 Jun 2023 06:06:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q4xfJ-0004gC-5t; Fri, 02 Jun 2023 05:49:33 +0000
-Received: by outflank-mailman (input) for mailman id 542924;
- Fri, 02 Jun 2023 05:49:31 +0000
+	id 1q4xw4-0000XK-G2; Fri, 02 Jun 2023 06:06:52 +0000
+Received: by outflank-mailman (input) for mailman id 542943;
+ Fri, 02 Jun 2023 06:06:50 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dv8B=BW=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1q4xfH-0004g6-7E
- for xen-devel@lists.xen.org; Fri, 02 Jun 2023 05:49:31 +0000
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [2001:4860:4864:20::2d])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=x5l8=BW=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1q4xw2-0000XE-Md
+ for xen-devel@lists.xenproject.org; Fri, 02 Jun 2023 06:06:50 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3d2a5762-0109-11ee-b231-6b7b168915f2;
- Fri, 02 Jun 2023 07:49:29 +0200 (CEST)
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-1a28de15c8aso894255fac.2
- for <xen-devel@lists.xen.org>; Thu, 01 Jun 2023 22:49:29 -0700 (PDT)
-Received: from localhost ([122.172.87.195]) by smtp.gmail.com with ESMTPSA id
- 8-20020a17090a01c800b00252d960a8dfsm2448941pjd.16.2023.06.01.22.49.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Jun 2023 22:49:27 -0700 (PDT)
+ id a92b43b5-010b-11ee-b232-6b7b168915f2;
+ Fri, 02 Jun 2023 08:06:49 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B46C821A26;
+ Fri,  2 Jun 2023 06:06:48 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5D81013A2E;
+ Fri,  2 Jun 2023 06:06:48 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id jgVyFfiGeWSiTQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 02 Jun 2023 06:06:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,93 +53,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d2a5762-0109-11ee-b231-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1685684968; x=1688276968;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4K0r0XR0o3cnSWZBLDTXJCeNa3krDTyt7mTDT7eZkck=;
-        b=uweqPSkV9aGVeWrONeFiZM3V09yrKG9ExeFmXyv4lli2j6/ACV+0a4qvS82Qnzoj58
-         lOQvR2igTTeI+dlINkURAxIoeCiypqp9S1UHr0PA7fkg5UsGW7n55Vyr0n5QNwXCDXq9
-         KVRt/pGizw63GjxwnVFp+kvLzBP7/1WQ1tAKIvdQ9xVVc2p7VpFlEq90u+x8yYB6H/zF
-         Oi5ZcbuqyOcU5654Lc6ZX+QH2YekFc91Jt0ckMDWphFgl2XLm2edEXIawqZtUGc55j1+
-         YeeNXPvSCswEvP+7WJIbW+gugvdvl9Vfe9rRQgHyCf3p5phSL/sSzwWHHL8R/6yqzcVT
-         dZ3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685684968; x=1688276968;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4K0r0XR0o3cnSWZBLDTXJCeNa3krDTyt7mTDT7eZkck=;
-        b=WmiQ2y2+k8dO07wvOE75CkPx26jKLtNby132swoa+Nq5sGevt177KeY0X6AoGDLWOk
-         304gS9OCn/IJr74VCyK492oix2za4d3FU2VHx7oeShXid1CpsgbD7alHyULZPMANXDDH
-         sNfBRNwg6SsocGmV7g7rM2fJQrzmamP4haI6lCo7uUEqu9sX8BBPOV3f0buJCncC6TLJ
-         oqiqgWli3MU9EFODl0maxZwaATNZcFIT55451QAAwdgNGJ/VBUizfCaIVel5PlkjRyQ9
-         LQOud71mzdoEVIahh8BFjoLdS65kx5n8RPiAPCVzUcXq1VRPqTBz6kho5rwx9E433vjV
-         WaSg==
-X-Gm-Message-State: AC+VfDx4tsFJ36gqwY1drM3bFw1MDTzDwE+N9rYpK94qKNpGacXt/aA5
-	9zIaWtk/rPj+pPQ5tDiBApGouFrFf3G6cs+9WSQ=
-X-Google-Smtp-Source: ACHHUZ4Zt6mDj15xRYT94E8pbmJzrDzQNwFKIIRWE7cYdDVmA3Lc3RkdVLLhDQJtmZdEuCFMxRIwWQ==
-X-Received: by 2002:a05:6358:5906:b0:127:82ef:1779 with SMTP id g6-20020a056358590600b0012782ef1779mr8082964rwf.30.1685684968241;
-        Thu, 01 Jun 2023 22:49:28 -0700 (PDT)
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: xen-devel@lists.xen.org,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>,
-	Vincent Guittot <vincent.guittot@linaro.org>,
-	stratos-dev@op-lists.linaro.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.com>,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>,
-	Erik Schilling <erik.schilling@linaro.org>
-Subject: [PATCH V3 0/3] libxl: Make grants configurable for virtio devices
-Date: Fri,  2 Jun 2023 11:19:06 +0530
-Message-Id: <cover.1685684586.git.viresh.kumar@linaro.org>
-X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+X-Inumbo-ID: a92b43b5-010b-11ee-b232-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1685686008; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=4uLBejDaJmLYOrHUuqsqz0VZ3P1si23qortwo9RjY10=;
+	b=HI+nBsQUhAE+Yhqaj7Qt7PKRi8b6FlTScCa5DSng2LkgbeF925lem+EqJaSdE2jUe/qccQ
+	kA7iOzVXfJ6j1wJtH3Txy0V9clRZzwqMLfo3esAmo5TU0CKM+r9SAY5vbsr/TM8MvdIA9K
+	ZnNhJYMEZyJ1EofSloHK5eCjj5QM9Vw=
+Message-ID: <ae881ab5-a6f9-20fa-0f2b-e1363af77857@suse.com>
+Date: Fri, 2 Jun 2023 08:06:47 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2] iscsi_ibft: Fix finding the iBFT under Xen Dom 0
+Content-Language: en-US
+To: Dave Hansen <dave.hansen@intel.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Peter Jones
+ <pjones@redhat.com>, Konrad Rzeszutek Wilk <konrad@kernel.org>
+References: <20230530150106.2703849-1-ross.lagerwall@citrix.com>
+ <5aae0317-72cf-fc3c-6ce3-7e1fe1d6b699@intel.com>
+From: Juergen Gross <jgross@suse.com>
+In-Reply-To: <5aae0317-72cf-fc3c-6ce3-7e1fe1d6b699@intel.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Cwbt90mJHsJsLjAP8FmpghOn"
 
-Hi,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Cwbt90mJHsJsLjAP8FmpghOn
+Content-Type: multipart/mixed; boundary="------------2ixzVvAB9HnBwhVeQi33gWNb";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Dave Hansen <dave.hansen@intel.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Peter Jones
+ <pjones@redhat.com>, Konrad Rzeszutek Wilk <konrad@kernel.org>
+Message-ID: <ae881ab5-a6f9-20fa-0f2b-e1363af77857@suse.com>
+Subject: Re: [PATCH v2] iscsi_ibft: Fix finding the iBFT under Xen Dom 0
+References: <20230530150106.2703849-1-ross.lagerwall@citrix.com>
+ <5aae0317-72cf-fc3c-6ce3-7e1fe1d6b699@intel.com>
+In-Reply-To: <5aae0317-72cf-fc3c-6ce3-7e1fe1d6b699@intel.com>
 
-This patchset intends to make grant mapping usage configurable for virtio
-devices. Currently they are forced enabled for backends running on non-Dom0
-domains. This patchset adds a new `grant_usage` parameter for the virtio
-devices, which can be used to enable or disable grant mappings irrespective of
-the backend domain, while still preserving the default behavior in absence of a
-parameter.
+--------------2ixzVvAB9HnBwhVeQi33gWNb
+Content-Type: multipart/mixed; boundary="------------GMGHe0Snobo2WlCJrgyl044f"
 
-V2->V3:
-- Patch 2/3 is new and fixes ordering issues with default values.
-- Reuse `libxl_defbool` instead of defining a new type, it can take values 0 and
-  1.
-- Improved commit logs and comments.
+--------------GMGHe0Snobo2WlCJrgyl044f
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-V1->V2:
-- Instead of just 0 or 1, the argument can take multiple values now and control
-  the functionality in a better way.
+T24gMDEuMDYuMjMgMTg6NTcsIERhdmUgSGFuc2VuIHdyb3RlOg0KPiBPbiA1LzMwLzIzIDA4
+OjAxLCBSb3NzIExhZ2Vyd2FsbCB3cm90ZToNCj4+IFNpbmNlIGZpcm13YXJlIGRvZXNuJ3Qg
+aW5kaWNhdGUgdGhlIGlCRlQgaW4gdGhlIEU4MjAsIGFkZCBhIHJlc2VydmVkDQo+PiByZWdp
+b24gc28gdGhhdCBpdCBnZXRzIGlkZW50aXR5IG1hcHBlZCB3aGVuIHJ1bm5pbmcgYXMgRG9t
+IDAgc28gdGhhdCBpdA0KPj4gaXMgcG9zc2libGUgdG8gc2VhcmNoIGZvciBpdC4gTW92ZSB0
+aGUgY2FsbCB0byByZXNlcnZlX2liZnRfcmVnaW9uKCkNCj4+IGxhdGVyIHNvIHRoYXQgaXQg
+aXMgY2FsbGVkIGFmdGVyIHRoZSBYZW4gaWRlbnRpdHkgbWFwcGluZyBhZGp1c3RtZW50cw0K
+Pj4gYXJlIGFwcGxpZWQuDQo+Pg0KPj4gRmluYWxseSwgaW5zdGVhZCBvZiB1c2luZyBpc2Ff
+YnVzX3RvX3ZpcnQoKSB3aGljaCBkb2Vzbid0IGRvIHRoZSByaWdodA0KPj4gdGhpbmcgdW5k
+ZXIgWGVuLCB1c2UgZWFybHlfbWVtcmVtYXAoKSBsaWtlIHRoZSBkbWlfc2NhbiBjb2RlIGRv
+ZXMuDQo+IA0KPiBUaGlzIGlzIGNvbm5lY3RpbmcgWGVuLCBpU0NTSSBhbmQgeDg2LiAgU29t
+ZSBiYWNrZ3JvdW5kIGhlcmUgd291bGQgYmUNCj4gKnJlYWxseSogbmljZSBmb3IgZHVtbWll
+cyBsaWtlIG1lIHRoYXQgZGVhbCBoZWF2aWx5IGluIG9ubHkgb25lIG9mIHRob3NlDQo+IHRo
+cmVlLg0KPiANCj4gT25lIG9yIHR3byBzZW50ZW5jZXMgbGlrZSB0aGlzOg0KPiANCj4gCUZp
+cm13YXJlIGNhbiBwcm92aWRlIGFuIGlTQ1NJLXNwZWNpZmljIHRhYmxlIGNhbGxlZCB0aGUg
+aUJGVA0KPiAJd2hpY2ggaGVscHMgdGhlIE9TIGJvb3QgZnJvbSBpU0NTSSBkZXZpY2VzLg0K
+PiANCj4gY2FuIGdvIGEgbG9uZyB3YXkgZm9yIGR1bW1pZXMgbGlrZSBtZS4gIEFzIGNvdWxk
+IHNvbWUgYmFja2dyb3VuZCBhYm91dA0KPiB3aHkgdGhpczoNCj4gDQo+IAkuLi4gYWRkIGEg
+cmVzZXJ2ZWQgcmVnaW9uIHNvIHRoYXQgaXQgZ2V0cyBpZGVudGl0eSBtYXBwZWQgd2hlbg0K
+PiAJcnVubmluZyBhcyBEb20gMCBzbyB0aGF0IGl0IGlzIHBvc3NpYmxlIHRvIHNlYXJjaCBm
+b3IgaXQuDQo+IA0KPiBUaGVzZSBhcmUgYWxsIEVuZ2xpc2ggd29yZHMsIGJ1dCBvZmYgdGhl
+IHRvcCBvZiBteSBoZWFkLCBJIGhhdmUgbm8gaWRlYQ0KPiB3aHkgcmVzZXJ2ZWQgcmVnaW9u
+cyBnZXQgaWRlbnRpdHkgbWFwcGVkIHdoZW4gcnVubmluZyBhcyBEb20gMCBvciB3aHkNCj4g
+dGhhdCBtYWtlcyBpdCBwb3NzaWJsZSB0byBzZWFyY2guDQo+IA0KPiBUaGUgYWRkcmVzc2Vz
+IGFuZCBzaXplIGhlcmU6DQo+IA0KPj4gKyNpZmRlZiBDT05GSUdfSVNDU0lfSUJGVF9GSU5E
+DQo+PiArCQkvKiBSZXNlcnZlIDAuNSBNaUIgdG8gMSBNaUIgcmVnaW9uIHNvIGlCRlQgY2Fu
+IGJlIGZvdW5kICovDQo+PiArCQl4ZW5fZTgyMF90YWJsZS5lbnRyaWVzW3hlbl9lODIwX3Rh
+YmxlLm5yX2VudHJpZXNdLmFkZHIgPSAweDgwMDAwOw0KPj4gKwkJeGVuX2U4MjBfdGFibGUu
+ZW50cmllc1t4ZW5fZTgyMF90YWJsZS5ucl9lbnRyaWVzXS5zaXplID0gMHg4MDAwMDsNCj4+
+ICsJCXhlbl9lODIwX3RhYmxlLmVudHJpZXNbeGVuX2U4MjBfdGFibGUubnJfZW50cmllc10u
+dHlwZSA9IEU4MjBfVFlQRV9SRVNFUlZFRDsNCj4+ICsJCXhlbl9lODIwX3RhYmxlLm5yX2Vu
+dHJpZXMrKzsNCj4+ICsjZW5kaWYNCj4gDQo+IGFsc28gYXBwZWFyIHRvIGJlIGNvbmp1cmVk
+IG91dCBvZiB0aGluIGFpci4NCg0KSSdkIHN1Z2dlc3QgdG8gbW92ZSB0aGUgZGVmaW5pdGlv
+bnMgb2YgSUJGVF9TVEFSVCBhbmQgSUJGVF9FTkQgZnJvbQ0KZHJpdmVycy9maXJtd2FyZS9p
+c2NzaV9pYmZ0X2ZpbmQuYyB0byBpbmNsdWRlL2xpbnV4L2lzY3NpX2liZnQuaCBhbmQgdXNl
+DQp0aGVtIGhlcmUuDQoNCg0KSnVlcmdlbg0K
+--------------GMGHe0Snobo2WlCJrgyl044f
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-- Update .gen.go files as well.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-- Don't add nodes under frontend path.
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
 
-Viresh Kumar (3):
-  libxl: virtio: Remove unused frontend nodes
-  libxl: Call libxl__virtio_devtype.set_default() early enough
-  libxl: arm: Add grant_usage parameter for virtio devices
+--------------GMGHe0Snobo2WlCJrgyl044f--
 
- docs/man/xl.cfg.5.pod.in             |  8 +++++++
- tools/golang/xenlight/helpers.gen.go |  6 +++++
- tools/golang/xenlight/types.gen.go   |  1 +
- tools/libs/light/libxl_arm.c         | 22 +++++++++++--------
- tools/libs/light/libxl_create.c      | 11 +++++++++-
- tools/libs/light/libxl_types.idl     |  1 +
- tools/libs/light/libxl_virtio.c      | 33 ++++++++++++++++++++++------
- tools/xl/xl_parse.c                  |  2 ++
- 8 files changed, 67 insertions(+), 17 deletions(-)
+--------------2ixzVvAB9HnBwhVeQi33gWNb--
 
--- 
-2.31.1.272.g89b43f80a514
+--------------Cwbt90mJHsJsLjAP8FmpghOn
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmR5hvcFAwAAAAAACgkQsN6d1ii/Ey+x
+/gf6AkOb1VnquAu0exCaTE9S55Td1Fr8djwzPygVCiGKvoryAzRca3B2buFkUwgKZBweR1r6fX13
+8hbuRe1tr/YBuafg8+gyLRgtjwQETw0w8sCVtc3MrlH6/BxNKsCpbFFvBqSeZFiCc4Ilwi1j309X
+Spc0qBwqN24ENn4duoR/AYUg6Gc0LkXflYL99iGYnslyzWcqAFH9R6nxyBRtrLsNA8y8f/vUbAFj
+ynad89gKWMBFntFhdgakhXNjkEy9hchwJ6hv2jSZu4fnyrJxo+L75GSJCeB/moou65nERaJei7cf
+YY6BnpNdjz64wAVARoo8gYbg6wtSsi3XuD6i3J7Rmg==
+=xQUA
+-----END PGP SIGNATURE-----
+
+--------------Cwbt90mJHsJsLjAP8FmpghOn--
 
