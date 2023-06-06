@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95328C83003
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D33D2C87FDC
 	for <xen-devel@archiver.kernel.org>; Tue,  6 Jun 2023 19:55:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.544190.849821 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.544188.849798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q6cm9-0004EL-5L; Tue, 06 Jun 2023 19:55:29 +0000
+	id 1q6cm6-0003St-El; Tue, 06 Jun 2023 19:55:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 544190.849821; Tue, 06 Jun 2023 19:55:29 +0000
+Received: by outflank-mailman (output) from mailman id 544188.849798; Tue, 06 Jun 2023 19:55:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q6cm9-0004E7-1A; Tue, 06 Jun 2023 19:55:29 +0000
-Received: by outflank-mailman (input) for mailman id 544190;
- Tue, 06 Jun 2023 19:55:27 +0000
+	id 1q6cm6-0003SR-7N; Tue, 06 Jun 2023 19:55:26 +0000
+Received: by outflank-mailman (input) for mailman id 544188;
+ Tue, 06 Jun 2023 19:55:25 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ymfh=B2=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1q6cm7-0002er-2B
- for xen-devel@lists.xenproject.org; Tue, 06 Jun 2023 19:55:27 +0000
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [2a00:1450:4864:20::12a])
+ id 1q6cm5-0002er-1x
+ for xen-devel@lists.xenproject.org; Tue, 06 Jun 2023 19:55:25 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1376451d-04a4-11ee-8611-37d641c3527e;
- Tue, 06 Jun 2023 21:55:24 +0200 (CEST)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-4f62b512fe2so3358224e87.1
- for <xen-devel@lists.xenproject.org>; Tue, 06 Jun 2023 12:55:24 -0700 (PDT)
+ id 127d81b0-04a4-11ee-8611-37d641c3527e;
+ Tue, 06 Jun 2023 21:55:22 +0200 (CEST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-4f6148f9679so5914935e87.3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Jun 2023 12:55:22 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- j29-20020ac2551d000000b004f1383d57ecsm1563284lfk.202.2023.06.06.12.55.22
+ j29-20020ac2551d000000b004f1383d57ecsm1563284lfk.202.2023.06.06.12.55.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jun 2023 12:55:23 -0700 (PDT)
+ Tue, 06 Jun 2023 12:55:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1376451d-04a4-11ee-8611-37d641c3527e
+X-Inumbo-ID: 127d81b0-04a4-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686081324; x=1688673324;
+        d=gmail.com; s=20221208; t=1686081322; x=1688673322;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Wh8BJIh+57sl7bOo0QhYsWa0pXdWsiCtmsxwnxt2RAU=;
-        b=OSf8GtFqo2NuhZtcfIkC5FDn0ebuqJ1uQ7XzI6k3YI5keBWCuq9M2u4IyY7MPhvifJ
-         t9P+Unj9Do1Vv0q570IxL+3snR23gk601FSsU5RGhzuSEZlMwRgfmMke9h2VcBD0d0Qq
-         QAMaRW9r92Ind9Nued7KPU36F1bZdwJRmEodOIYP/Ck9DQ3HQ+W5Kqf/hJNVwsgFiBIQ
-         NLahdPMnJ/xo1F+xZOb40fT5Zr2kvYPvnHZcrOZ0hTTahPclSVxkfkSsr0yhskFStN0d
-         0iON0sDj0jujKz12uzRbavsPR92hompWo6Fj/neSMErhluLfIW6FyjycSBqYddpXa4EW
-         Dwjw==
+        bh=R9dfuEcyOpcttJDizez0uwxVrhy0pEYRLPEtmcdqVH0=;
+        b=cO8vQhjZKZBCx/OMXvcYedquJasxp/5/p/DIaMDSm2K3nQHlfOGDVpPnc9bY5HDhKK
+         RPlE5am5L3iXLcij5OkzvzvNpdl3+Rfp2dKxUNFnGX0M7MsIGMKzOYS81zP8nygsuM80
+         eBInYtgi+/j7NN3H0eNvGjBZuvc/AOJvzrufzepeZtMJCn97QH5d4Ivhhe9W6qWqwi2K
+         qOVeKgRz8ptdjKNhpeeE35ZyZvPpf80CF8fEblojihRui3ViqhqnXkiG8u2+BxZH6Tnl
+         Jkm6JAZzGhE0eSFNKEjDbgKuDc6GBj5eq1o8d2j2jh0XGcDQ4qvVnNvj/B7jHjFdZ/y7
+         KmfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686081324; x=1688673324;
+        d=1e100.net; s=20221208; t=1686081322; x=1688673322;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Wh8BJIh+57sl7bOo0QhYsWa0pXdWsiCtmsxwnxt2RAU=;
-        b=ibpWWxE2hkbEfwm1K1Liz4MRGgd1HPF78CcNa0a/QZ9IC+mi0fXR/9VyMVlOvxNJ8Q
-         H+iHALOMqF8q0QIFOB6mK4tvTyOHB9u6dD90RgYDrDRTQfppXj1kQ8lQ1reDArKbxuvz
-         gO7GtcAN6MOJ1nmA0AOh9s8gZYZjWdtC+yO5px5xidCPaDfKFJQIlRRBtkvvpf7eU9yl
-         Jm3QtRnvA/QLv7sanPMHcNiESdaMoPsyp2srPFeTK1qJykKypyxUZRZwBLwmaDvfxwpO
-         bGWEgjA33xtdeJqO66VIiSVhpZdmzsrnwk7aL88NC3W8hmdTbujMj3gJiKc9VRgd5Dj7
-         +Uog==
-X-Gm-Message-State: AC+VfDzvBK3Pe8EeEJ/t3MjC3nFTUpjN2NzMHSk+T0e5jKImbklo72SM
-	XVvZa1N5mNHrK/PWRsC9Z7hRV6LSNQ4=
-X-Google-Smtp-Source: ACHHUZ7ntaUUio4KqesGs58TcVUdN7fp9cmIMj6BHSnc/mxy+bAhUnPCb+zwH0hWVqW0u7H9Bk9iaA==
-X-Received: by 2002:ac2:519a:0:b0:4f3:aa73:562 with SMTP id u26-20020ac2519a000000b004f3aa730562mr1307466lfi.2.1686081323644;
-        Tue, 06 Jun 2023 12:55:23 -0700 (PDT)
+        bh=R9dfuEcyOpcttJDizez0uwxVrhy0pEYRLPEtmcdqVH0=;
+        b=Ivig9W9Wh5s+b122Y9EsCksV7KaME+9udVpCVVa1qxKyTkKPbfSQxwOeRz3qSBDvEQ
+         xOE4udFdTU+h/62nBVighrfC2HA0GJcV0D057mrkyr8hAAViukyWXlNqRrKS/pUdbM9E
+         OU4tyGCUJxzH/59Hi2gKu6ARGmmObio3fsu1rHLQ8VeXZtCeTd7HFRflr0WMJrLeAoNj
+         cYk5Q+uSuDH3SqcrKnDq/xbLS0QfctHa2daoADWjgI3dplfDNUcxIugE93y8Z2C2/LxZ
+         X+F5nWHSfjr9VLa+7MTczNPdhhN8nsQxJZ1lK41zhT26jnW9uNjOxfAn9iorMfDA7XuZ
+         aarg==
+X-Gm-Message-State: AC+VfDyPYfMd2xR2WvXZrwqFVCN0ye/vhTLTrgE4Yr4dL3yT1mxiBnxv
+	WjJcH4H9NKXh1M+rWPEMT02zf4vsaLs=
+X-Google-Smtp-Source: ACHHUZ4U3H6nveqzFxmohTnQISG3EbtKgdJoOK4rxT3Anq8lXoVZ8R0n4farW5PFO3Mkc81zgFmGhw==
+X-Received: by 2002:ac2:46fc:0:b0:4f3:a91c:23d0 with SMTP id q28-20020ac246fc000000b004f3a91c23d0mr1668492lfo.31.1686081322050;
+        Tue, 06 Jun 2023 12:55:22 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -84,129 +84,84 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v1 6/8] xen/riscv: add SPDX tags
-Date: Tue,  6 Jun 2023 22:55:14 +0300
-Message-Id: <1034fa44a9b589a18f89b7849877c00ee0a362d5.1686080337.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v1 4/8] xen/riscv: introduce function for physical offset calculation
+Date: Tue,  6 Jun 2023 22:55:12 +0300
+Message-Id: <d5971bce174c7bbae61c7e16337ef95c7f3d1f62.1686080337.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1686080337.git.oleksii.kurochko@gmail.com>
 References: <cover.1686080337.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The function was introduced to not calculate and save physical
+offset before MMU is enabled because access to start() is
+PC-relative and in case of linker_addr != load_addr it will result
+in incorrect value in phys_offset.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
- xen/arch/riscv/include/asm/config.h       | 2 ++
- xen/arch/riscv/include/asm/current.h      | 2 ++
- xen/arch/riscv/include/asm/early_printk.h | 2 ++
- xen/arch/riscv/include/asm/mm.h           | 2 ++
- xen/arch/riscv/include/asm/page-bits.h    | 2 ++
- xen/arch/riscv/include/asm/page.h         | 2 ++
- xen/arch/riscv/include/asm/traps.h        | 2 ++
- xen/arch/riscv/include/asm/types.h        | 2 ++
- xen/arch/riscv/mm.c                       | 2 ++
- xen/arch/riscv/setup.c                    | 2 ++
- 10 files changed, 20 insertions(+)
+ xen/arch/riscv/include/asm/mm.h |  2 ++
+ xen/arch/riscv/mm.c             | 18 +++++++++++++++---
+ xen/arch/riscv/riscv64/head.S   |  2 ++
+ 3 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
-index 38862df0b8..3ae35f57b3 100644
---- a/xen/arch/riscv/include/asm/config.h
-+++ b/xen/arch/riscv/include/asm/config.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef __RISCV_CONFIG_H__
- #define __RISCV_CONFIG_H__
- 
-diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
-index d87e6717e0..b08f204df4 100644
---- a/xen/arch/riscv/include/asm/current.h
-+++ b/xen/arch/riscv/include/asm/current.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef __ASM_CURRENT_H
- #define __ASM_CURRENT_H
- 
-diff --git a/xen/arch/riscv/include/asm/early_printk.h b/xen/arch/riscv/include/asm/early_printk.h
-index 05106e160d..c11693bbe1 100644
---- a/xen/arch/riscv/include/asm/early_printk.h
-+++ b/xen/arch/riscv/include/asm/early_printk.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef __EARLY_PRINTK_H__
- #define __EARLY_PRINTK_H__
- 
 diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 500fdc9c5a..3b04131628 100644
+index 64293eacee..996041ce81 100644
 --- a/xen/arch/riscv/include/asm/mm.h
 +++ b/xen/arch/riscv/include/asm/mm.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef _ASM_RISCV_MM_H
- #define _ASM_RISCV_MM_H
+@@ -11,4 +11,6 @@ void setup_initial_pagetables(void);
+ void enable_mmu(void);
+ void cont_after_mmu_is_enabled(void);
  
-diff --git a/xen/arch/riscv/include/asm/page-bits.h b/xen/arch/riscv/include/asm/page-bits.h
-index 4a3e33589a..94190b3c61 100644
---- a/xen/arch/riscv/include/asm/page-bits.h
-+++ b/xen/arch/riscv/include/asm/page-bits.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
++void calc_phys_offset(void);
 +
- #ifndef __RISCV_PAGE_BITS_H__
- #define __RISCV_PAGE_BITS_H__
- 
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index a7e2eee964..8e8ec9ee36 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef _ASM_RISCV_PAGE_H
- #define _ASM_RISCV_PAGE_H
- 
-diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
-index f3fb6b25d1..2e896e0913 100644
---- a/xen/arch/riscv/include/asm/traps.h
-+++ b/xen/arch/riscv/include/asm/traps.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef __ASM_TRAPS_H__
- #define __ASM_TRAPS_H__
- 
-diff --git a/xen/arch/riscv/include/asm/types.h b/xen/arch/riscv/include/asm/types.h
-index 0c0ce78c8f..7505663efe 100644
---- a/xen/arch/riscv/include/asm/types.h
-+++ b/xen/arch/riscv/include/asm/types.h
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #ifndef __RISCV_TYPES_H__
- #define __RISCV_TYPES_H__
- 
+ #endif /* _ASM_RISCV_MM_H */
 diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index ab790f571d..b50641a80e 100644
+index 8ceed445cf..c092897f9a 100644
 --- a/xen/arch/riscv/mm.c
 +++ b/xen/arch/riscv/mm.c
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #include <xen/compiler.h>
- #include <xen/init.h>
- #include <xen/kernel.h>
-diff --git a/xen/arch/riscv/setup.c b/xen/arch/riscv/setup.c
-index c4ef0b3165..befbd07fde 100644
---- a/xen/arch/riscv/setup.c
-+++ b/xen/arch/riscv/setup.c
-@@ -1,3 +1,5 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
- #include <xen/compile.h>
- #include <xen/init.h>
+@@ -19,9 +19,11 @@ struct mmu_desc {
  
+ extern unsigned char cpu0_boot_stack[STACK_SIZE];
+ 
+-#define PHYS_OFFSET ((unsigned long)_start - XEN_VIRT_START)
+-#define LOAD_TO_LINK(addr) ((addr) - PHYS_OFFSET)
+-#define LINK_TO_LOAD(addr) ((addr) + PHYS_OFFSET)
++static unsigned long phys_offset;
++
++#define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
++#define LINK_TO_LOAD(addr) ((unsigned long)(addr) + phys_offset)
++
+ 
+ /*
+  * It is expected that Xen won't be more then 2 MB.
+@@ -273,3 +275,13 @@ void __init noreturn noinline enable_mmu()
+     switch_stack_and_jump((unsigned long)cpu0_boot_stack + STACK_SIZE,
+                           cont_after_mmu_is_enabled);
+ }
++
++/*
++ * calc_phys_offset() should be used before MMU is enabled because access to
++ * start() is PC-relative and in case when load_addr != linker_addr phys_offset
++ * will have an incorrect value
++ */
++void  calc_phys_offset(void)
++{
++    phys_offset = (unsigned long)start - XEN_VIRT_START;
++}
+diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+index 6fb7dd80fd..69f3a24987 100644
+--- a/xen/arch/riscv/riscv64/head.S
++++ b/xen/arch/riscv/riscv64/head.S
+@@ -29,6 +29,8 @@ ENTRY(start)
+ 
+         jal     reset_stack
+ 
++        jal     calc_phys_offset
++
+         tail    start_xen
+ 
+ ENTRY(reset_stack)
 -- 
 2.40.1
 
