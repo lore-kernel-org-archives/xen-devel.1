@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF857C77B7A
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jun 2023 15:16:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.544855.850931 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D132C7EE2F
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jun 2023 15:16:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.544850.850913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q6ut2-0005EE-Ht; Wed, 07 Jun 2023 15:15:48 +0000
+	id 1q6ut1-0004xV-Lz; Wed, 07 Jun 2023 15:15:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 544855.850931; Wed, 07 Jun 2023 15:15:48 +0000
+Received: by outflank-mailman (output) from mailman id 544850.850913; Wed, 07 Jun 2023 15:15:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q6ut2-0005DM-B4; Wed, 07 Jun 2023 15:15:48 +0000
-Received: by outflank-mailman (input) for mailman id 544855;
- Wed, 07 Jun 2023 15:06:53 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q6ut1-0004xO-IU; Wed, 07 Jun 2023 15:15:47 +0000
+Received: by outflank-mailman (input) for mailman id 544850;
+ Wed, 07 Jun 2023 15:06:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/iFR=B3=anastas.io=shawn@srs-se1.protection.inumbo.net>)
- id 1q6ukP-0003y0-T5
- for xen-devel@lists.xenproject.org; Wed, 07 Jun 2023 15:06:53 +0000
+ id 1q6ukJ-0003xK-Fv
+ for xen-devel@lists.xenproject.org; Wed, 07 Jun 2023 15:06:47 +0000
 Received: from alpha.anastas.io (alpha.anastas.io [104.248.188.109])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ef1ac626-0544-11ee-b232-6b7b168915f2;
- Wed, 07 Jun 2023 17:06:53 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ea0dfbbf-0544-11ee-8611-37d641c3527e;
+ Wed, 07 Jun 2023 17:06:45 +0200 (CEST)
 Received: from authenticated-user (alpha.anastas.io [104.248.188.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by alpha.anastas.io (Postfix) with ESMTPSA id F3BA63F089;
- Wed,  7 Jun 2023 08:06:50 -0700 (PDT)
+ by alpha.anastas.io (Postfix) with ESMTPSA id 695F03F060;
+ Wed,  7 Jun 2023 08:06:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,16 +44,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ef1ac626-0544-11ee-b232-6b7b168915f2
+X-Inumbo-ID: ea0dfbbf-0544-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=anastas.io; s=mail;
-	t=1686150411; bh=l1qqAGFyMyk7B24/OER4BemZKz0tyFRaVZ+91zT92kg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YEYkaS+YpSJGJ3G6VP8YsIMlwG802JU0ekWnglk6ZzsiW3NGY0JM790pAPbCVItIs
-	 u9blG88k0ulXvy4+sv6/IPrCnsUrhdgvUG8AstC/RXWAbVyw/gw8eaAPMHi6a4jrEr
-	 nZ79GxAT3R+h9ZUmVopkNMrWVB5OL4CeipuGURURJ2s0eYEJZZjGBJvfhKWrcBak59
-	 FLnE40UgT1KJ3w/ZrHMbrZYzBc+l0t0/Svq2NGlALasqkl0h+i6U5m9ddTiq7wrzFk
-	 5X7bmi3aFLq4Zk6PrZOcSgrw7UgB+z1MkWA7aqvDseDrpVjCcc6+YeQRAttRd7s/yY
-	 nHfAfCSd+guFA==
+	t=1686150402; bh=rtdgOgaEuLkzOn+6Czh7oy86GIqcCqilxzRpoDRtYzQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=HiUC6aNRJqtqu+vsbzJsqqkPTweHYZe4EoWUuA6MaYUx6DSqG3xcWrCxBrVCCc0nG
+	 mqfj8K9s96Icvm95wThwTZAMTPhz+HFh/Ag1TRziSGWtDPAkDVGQ1bClqxcv7q5gxx
+	 pc3EZTYZiA7PaaoPB+CtymlqpPZeQsIWYPKaGqnW35BOJnP3mne38W+9jteWILQQP6
+	 Z2Nhj4dZVF+8tRHbSNhePn8C8+6XsLbOmrVSg8+FIk6R3Xiblp7R+YozUEt6rYOrW7
+	 Z7IuvKunEzf318/5r8yfndEojpK2xeCy9Xl0A/Lfvo+9gu0CxFPvhfuDCGiw1fXDE2
+	 sBW0qOA1lOUxA==
 From: Shawn Anastasio <shawn@anastas.io>
 To: xen-devel@lists.xenproject.org
 Cc: tpearson@raptorengineering.com,
@@ -63,35 +63,101 @@ Cc: tpearson@raptorengineering.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Shawn Anastasio <shawnanastasio@raptorengineering.com>
-Subject: [PATCH 3/3] maintainers: Add PPC64 maintainer
-Date: Wed,  7 Jun 2023 10:06:34 -0500
-Message-Id: <2ec38b52d944919934b2326a1924200aa954008d.1686148363.git.shawn@anastas.io>
-In-Reply-To: <cover.1686148363.git.shawn@anastas.io>
-References: <cover.1686148363.git.shawn@anastas.io>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 0/3] Initial support for Power
+Date: Wed,  7 Jun 2023 10:06:31 -0500
+Message-Id: <cover.1686148363.git.shawn@anastas.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Shawn Anastasio <shawnanastasio@raptorengineering.com>
----
- MAINTAINERS | 3 +++
- 1 file changed, 3 insertions(+)
+Hello all,
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1bb7a6a839..bcd36f9019 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -451,6 +451,9 @@ M:	Wei Liu <wl@xen.org>
- S:	Supported
- T:	git https://xenbits.xenproject.org/git-http/ovmf.git
- 
-+PPC64
-+M:	Shawn Anastasio <sanastasio@raptorengineering.com>
-+
- POWER MANAGEMENT
- M:	Jan Beulich <jbeulich@suse.com>
- S:	Supported
+This patch series adds support for building a minimal image
+(head.o-only) for Power ISA 2.07B+ (POWER8+) systems. The first patch
+boots to an infinite loop and the second adds early serial console
+support on pseries VMs, with bare metal support planned next.
+
+Since Xen previously had support for a much older version of the ISA in
+version 3.2.3, we were able to carry over some headers and support
+routines from that version. Unlike that initial port though, this effort
+focuses solely on POWER8+ CPUs that are capable of running in Little
+Endian mode.
+
+With an appropriate powerpc64le-linux-gnu cross-toolchain, the minimal
+image can be built with:
+
+$ make XEN_TARGET_ARCH=ppc64 -C xen openpower_defconfig
+$ make XEN_TARGET_ARCH=ppc64 SUBSYSTEMS=xen -C xen TARGET=ppc64/head.o
+
+The resulting head.o can then be booted in a standard QEMU/pseries VM:
+
+$ qemu-system-ppc64 -M pseries-5.2 -m 256M -kernel xen/ppc64/head.o \
+	-vga none -serial mon:stdio -nographic
+
+Thanks,
+Shawn
+
+Shawn Anastasio (3):
+  xen: Add files needed for minimal Power build
+  xen/ppc: Implement early serial printk on PaPR/pseries
+  maintainers: Add PPC64 maintainer
+
+ MAINTAINERS                              |   3 +
+ config/ppc64.mk                          |   5 +
+ xen/Makefile                             |   5 +-
+ xen/arch/ppc/Kconfig                     |  42 +++++
+ xen/arch/ppc/Kconfig.debug               |   5 +
+ xen/arch/ppc/Makefile                    |  18 ++
+ xen/arch/ppc/Rules.mk                    |   0
+ xen/arch/ppc/arch.mk                     |  11 ++
+ xen/arch/ppc/boot_of.c                   | 122 +++++++++++++
+ xen/arch/ppc/configs/openpower_defconfig |  14 ++
+ xen/arch/ppc/early_printk.c              |  36 ++++
+ xen/arch/ppc/include/asm/boot.h          |  31 ++++
+ xen/arch/ppc/include/asm/bug.h           |   6 +
+ xen/arch/ppc/include/asm/byteorder.h     |  74 ++++++++
+ xen/arch/ppc/include/asm/cache.h         |   6 +
+ xen/arch/ppc/include/asm/config.h        |  66 +++++++
+ xen/arch/ppc/include/asm/early_printk.h  |  14 ++
+ xen/arch/ppc/include/asm/msr.h           |  67 +++++++
+ xen/arch/ppc/include/asm/page-bits.h     |   7 +
+ xen/arch/ppc/include/asm/processor.h     | 223 +++++++++++++++++++++++
+ xen/arch/ppc/include/asm/reg_defs.h      | 218 ++++++++++++++++++++++
+ xen/arch/ppc/include/asm/string.h        |   6 +
+ xen/arch/ppc/include/asm/types.h         |  64 +++++++
+ xen/arch/ppc/ppc64/Makefile              |   1 +
+ xen/arch/ppc/ppc64/asm-offsets.c         |  55 ++++++
+ xen/arch/ppc/ppc64/head.S                | 126 +++++++++++++
+ xen/arch/ppc/setup.c                     |  32 ++++
+ xen/arch/ppc/xen.lds.S                   | 173 ++++++++++++++++++
+ 28 files changed, 1428 insertions(+), 2 deletions(-)
+ create mode 100644 config/ppc64.mk
+ create mode 100644 xen/arch/ppc/Kconfig
+ create mode 100644 xen/arch/ppc/Kconfig.debug
+ create mode 100644 xen/arch/ppc/Makefile
+ create mode 100644 xen/arch/ppc/Rules.mk
+ create mode 100644 xen/arch/ppc/arch.mk
+ create mode 100644 xen/arch/ppc/boot_of.c
+ create mode 100644 xen/arch/ppc/configs/openpower_defconfig
+ create mode 100644 xen/arch/ppc/early_printk.c
+ create mode 100644 xen/arch/ppc/include/asm/boot.h
+ create mode 100644 xen/arch/ppc/include/asm/bug.h
+ create mode 100644 xen/arch/ppc/include/asm/byteorder.h
+ create mode 100644 xen/arch/ppc/include/asm/cache.h
+ create mode 100644 xen/arch/ppc/include/asm/config.h
+ create mode 100644 xen/arch/ppc/include/asm/early_printk.h
+ create mode 100644 xen/arch/ppc/include/asm/msr.h
+ create mode 100644 xen/arch/ppc/include/asm/page-bits.h
+ create mode 100644 xen/arch/ppc/include/asm/processor.h
+ create mode 100644 xen/arch/ppc/include/asm/reg_defs.h
+ create mode 100644 xen/arch/ppc/include/asm/string.h
+ create mode 100644 xen/arch/ppc/include/asm/types.h
+ create mode 100644 xen/arch/ppc/ppc64/Makefile
+ create mode 100644 xen/arch/ppc/ppc64/asm-offsets.c
+ create mode 100644 xen/arch/ppc/ppc64/head.S
+ create mode 100644 xen/arch/ppc/setup.c
+ create mode 100644 xen/arch/ppc/xen.lds.S
+
 -- 
 2.30.2
 
