@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF44C7EE29
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jun 2023 13:11:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.545286.851640 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0454CC7EE25
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jun 2023 13:59:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.545301.851655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7FPz-0005cb-JG; Thu, 08 Jun 2023 13:11:11 +0000
+	id 1q7GAk-0001bN-Co; Thu, 08 Jun 2023 13:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 545286.851640; Thu, 08 Jun 2023 13:11:11 +0000
+Received: by outflank-mailman (output) from mailman id 545301.851655; Thu, 08 Jun 2023 13:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7FPz-0005cU-Gk; Thu, 08 Jun 2023 13:11:11 +0000
-Received: by outflank-mailman (input) for mailman id 545286;
- Thu, 08 Jun 2023 12:19:01 +0000
+	id 1q7GAk-0001aS-88; Thu, 08 Jun 2023 13:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 545301;
+ Thu, 08 Jun 2023 13:59:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=c2ur=B4=cs.unipr.it=bagnara@srs-se1.protection.inumbo.net>)
- id 1q7EbV-0007um-UD
- for xen-devel@lists.xenproject.org; Thu, 08 Jun 2023 12:19:01 +0000
-Received: from spartacus.cs.unipr.it (unknown [160.78.48.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a51f0749-05f6-11ee-8611-37d641c3527e;
- Thu, 08 Jun 2023 14:18:59 +0200 (CEST)
-Received: from [160.78.167.217] (mozart.cs.unipr.it [160.78.167.217])
- by spartacus.cs.unipr.it (Postfix) with ESMTPSA id 2F338503EDF;
- Thu,  8 Jun 2023 14:18:58 +0200 (CEST)
+ <SRS0=pjZV=B4=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1q7GAi-0001YD-9j
+ for xen-devel@lists.xenproject.org; Thu, 08 Jun 2023 13:59:28 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id acdd517b-0604-11ee-8611-37d641c3527e;
+ Thu, 08 Jun 2023 15:59:24 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8F7491042;
+ Thu,  8 Jun 2023 07:00:09 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 14D2F3F6C4;
+ Thu,  8 Jun 2023 06:59:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,112 +44,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a51f0749-05f6-11ee-8611-37d641c3527e
-Message-ID: <9df8560d-4b06-2ab4-b09a-30241dd19676@cs.unipr.it>
-Date: Thu, 8 Jun 2023 14:18:57 +0200
+X-Inumbo-ID: acdd517b-0604-11ee-8611-37d641c3527e
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 2/2] tools/python: Fix memory leak on error path
+Date: Thu,  8 Jun 2023 14:59:13 +0100
+Message-Id: <20230608135913.560413-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230608135913.560413-1-luca.fancellu@arm.com>
+References: <20230608135913.560413-1-luca.fancellu@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.12) Gecko/20050929
- Thunderbird/1.0.7 Fedora/1.0.7-1.1.fc4 Mnenhy/0.7.3.0
-Subject: Re: Xen reliance on non-standard GCC features
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "consulting@bugseng.com" <consulting@bugseng.com>
-References: <1cd359e7-5245-a621-3be2-9323ba5b327b@bugseng.com>
- <8314e0fc-4ead-40fa-ef7b-4da8ce0655b4@suse.com>
- <80a512ac-d90e-930a-7ef7-8ebb5a80e801@bugseng.com>
- <968ba799-8fe4-e22f-b678-64e52f789026@suse.com>
-From: Roberto Bagnara <bagnara@cs.unipr.it>
-Organization: BUGSENG srl
-In-Reply-To: <968ba799-8fe4-e22f-b678-64e52f789026@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 07/06/23 09:39, Jan Beulich wrote:
-> On 05.06.2023 15:26, Roberto Bagnara wrote:
->> On 05/06/23 11:28, Jan Beulich wrote:
->>> On 05.06.2023 07:28, Roberto Bagnara wrote:
->> You are right: here are a few examples for U2:
->>
->> xen/arch/arm/cpuerrata.c:92.12-92.35:
->> empty initializer list (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7.8: "An empty initialization list." [STD.emptinit]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
->> xen/include/xen/spinlock.h:31.21-31.23: expanded from macro `_LOCK_DEBUG'
->> xen/include/xen/spinlock.h:143.57-143.67: expanded from macro `SPIN_LOCK_UNLOCKED'
->> xen/include/xen/spinlock.h:144.43-144.60: expanded from macro `DEFINE_SPINLOCK'
-> 
-> I'm afraid this is a bad example, as it goes hand-in-hand with using
-> another extension. I don't think using a non-empty initialization list
-> is going to work with
-> 
-> union lock_debug { };
+Commit 56a7aaa16bfe introduced a memory leak on the error path for a
+Py_BuildValue built object that on some newly introduced error path
+has not the correct reference count handling, fix that by decrementing
+the refcount in these path.
 
-Yes, this is C99 undefined behavior 58:
-"A structure or union is defined as containing no named members (6.7.2.1)."
+Fixes: 56a7aaa16bfe ("tools: add physinfo arch_capabilities handling for Arm")
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ tools/python/xen/lowlevel/xc/xc.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-Here is another example:
+diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowlevel/xc/xc.c
+index e14e223ec903..d3ea350e07b9 100644
+--- a/tools/python/xen/lowlevel/xc/xc.c
++++ b/tools/python/xen/lowlevel/xc/xc.c
+@@ -919,11 +919,16 @@ static PyObject *pyxc_physinfo(XcObject *self)
+         sve_vl_bits = arch_capabilities_arm_sve(pinfo.arch_capabilities);
+         py_arm_sve_vl = PyLong_FromUnsignedLong(sve_vl_bits);
+ 
+-        if ( !py_arm_sve_vl )
++        if ( !py_arm_sve_vl ) {
++            Py_DECREF(objret);
+             return NULL;
++        }
+ 
+-        if( PyDict_SetItemString(objret, "arm_sve_vl", py_arm_sve_vl) )
++        if( PyDict_SetItemString(objret, "arm_sve_vl", py_arm_sve_vl) ) {
++            Py_DECREF(py_arm_sve_vl);
++            Py_DECREF(objret);
+             return NULL;
++        }
+     }
+ #endif
+ 
+-- 
+2.34.1
 
-lpae_t pte = {};
-
-whereas we have
-
-typedef union {
-     uint64_t bits;
-     lpae_pt_t pt;
-     lpae_p2m_t p2m;
-     lpae_walk_t walk;
-} lpae_t;
-
-
->> xen/arch/arm/cpuerrata.c:678.5-678.6:
->> empty initializer list (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7.8: "An empty initialization list." [STD.emptinit]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
->>
->> xen/arch/arm/cpufeature.c:33.5-33.6:
->> empty initializer list (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7.8: "An empty initialization list." [STD.emptinit]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
-> 
-> Both of these are a common idiom we use: The "sentinel" of an array
-> of compound type initializer.
-
-Wouldn't it be possible writing such sentinels in a standard-compliant
-way, like {0} or similar, instead of {}?
-
->>>> U6) Empty declarations.
->>
->> Examples:
->>
->> xen/arch/arm/arm64/lib/find_next_bit.c:57.29:
->> empty declaration (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7: "An empty declaration." [STD.emptdecl]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
->>
->> xen/arch/arm/arm64/lib/find_next_bit.c:103.34:
->> empty declaration (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7: "An empty declaration." [STD.emptdecl]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
-> 
-> Looks like these could be taken care of by finally purging our
-> EXPORT_SYMBOL() stub.
-> 
->> xen/arch/arm/include/asm/vreg.h:143.26:
->> empty declaration (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7: "An empty declaration." [STD.emptdecl]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
->>
->> xen/arch/arm/include/asm/vreg.h:144.26:
->> empty declaration (ill-formed for the C99 standard, ISO/IEC 9899:1999 Section 6.7: "An empty declaration." [STD.emptdecl]). Tool used is `/usr/bin/aarch64-linux-gnu-gcc-12'
-> 
-> I'm having trouble spotting anything suspicious there.
-
-The macro expands to definitions of inline functions
-and after the macro invocation there is a ";".
-
-The preprocessed code is then:
-
-static inline void foo() { ... }
-;
-
-where the final ";" is an empty declaration not allowed by
-the C99 language standard.
-
-Removing the ";" after the macro invocation is a possible solution,
-but other possibilities exist if this is strongly unwanted.
-
-We are preparing a new list in RST format, which would go
-under docs/misra and constitute a more convenient way for
-the community to take note of the used extensions and
-contribute to the discussion about their adequacy.
 
