@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC64C7EE37
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jun 2023 13:59:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.545300.851651 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263EBC7EE37
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jun 2023 14:03:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.545312.851670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7GAk-0001YV-4X; Thu, 08 Jun 2023 13:59:30 +0000
+	id 1q7GEk-0003db-Rw; Thu, 08 Jun 2023 14:03:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 545300.851651; Thu, 08 Jun 2023 13:59:30 +0000
+Received: by outflank-mailman (output) from mailman id 545312.851670; Thu, 08 Jun 2023 14:03:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7GAk-0001YO-1R; Thu, 08 Jun 2023 13:59:30 +0000
-Received: by outflank-mailman (input) for mailman id 545300;
- Thu, 08 Jun 2023 13:59:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pjZV=B4=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1q7GAi-0001YD-2k
- for xen-devel@lists.xenproject.org; Thu, 08 Jun 2023 13:59:28 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id ac27c465-0604-11ee-8611-37d641c3527e;
- Thu, 08 Jun 2023 15:59:23 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DE77AB6;
- Thu,  8 Jun 2023 07:00:08 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.arm.com [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D5A413F6C4;
- Thu,  8 Jun 2023 06:59:21 -0700 (PDT)
+	id 1q7GEk-0003dU-PC; Thu, 08 Jun 2023 14:03:38 +0000
+Received: by outflank-mailman (input) for mailman id 545312;
+ Thu, 08 Jun 2023 14:03:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=g9tS=B4=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1q7GEj-0003dO-GO
+ for xen-devel@lists.xenproject.org; Thu, 08 Jun 2023 14:03:37 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 42b68ee0-0605-11ee-b232-6b7b168915f2;
+ Thu, 08 Jun 2023 16:03:36 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 921EA21A14;
+ Thu,  8 Jun 2023 14:03:35 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1B625138E6;
+ Thu,  8 Jun 2023 14:03:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 21U+BbffgWRCbwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 08 Jun 2023 14:03:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,80 +53,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac27c465-0604-11ee-8611-37d641c3527e
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 1/2] tools: Fix ifdef for aarch64 that should include also arm
-Date: Thu,  8 Jun 2023 14:59:12 +0100
-Message-Id: <20230608135913.560413-1-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.34.1
+X-Inumbo-ID: 42b68ee0-0605-11ee-b232-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1686233015; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=xLZHfs84yXjkQpWBr2AnjtulNIQynm+15xDEC6bGzuQ=;
+	b=B1BzVMJKO7TeqDYmcc2zaHSMN6eIb/lygNZttFSrSJoMUQLDWuQmBUvxa3GM+u6Ar6tK8D
+	fxHuEZv/8kO6nBmS7dq40Wp9OJc49L42sD6N3s2LIzcNQx7M1ECOJ0ObJASujCtaIrUlpM
+	8COeN5AFtNL1FH3j3PVvtFzlinSONV0=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	virtualization@lists.linux-foundation.org,
+	kvm@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	"Srivatsa S. Bhat (VMware)" <srivatsa@csail.mit.edu>,
+	Alexey Makhalov <amakhalov@vmware.com>,
+	VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Wanpeng Li <wanpengli@tencent.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	xen-devel@lists.xenproject.org
+Subject: [RFC PATCH 0/3] x86/paravirt: Get rid of paravirt patching
+Date: Thu,  8 Jun 2023 16:03:30 +0200
+Message-Id: <20230608140333.4083-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit 56a7aaa16bfe introduced some SVE related code that is protected by
-'#if defined(__aarch64__)', the issue is that this doesn't take into
-consideration when the toolstack is compiled for an arm32 Dom0 running on
-an arm64 platform, it should be able to create SVE enabled guests but with
-the current code it's not.
+This is a small series getting rid of paravirt patching by switching
+completely to alternative patching for the same functionality.
 
-So fix the issue by compiling the code when the toolstack is compiled for
-both arm32 and arm64.
+The basic idea is to add the capability to switch from indirect to
+direct calls via a special alternative patching option.
 
-Fixes: 56a7aaa16bfe ("tools: add physinfo arch_capabilities handling for Arm")
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
- tools/include/xen-tools/arm-arch-capabilities.h | 2 +-
- tools/python/xen/lowlevel/xc/xc.c               | 2 +-
- tools/xl/xl_info.c                              | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+This removes _some_ of the paravirt macro maze, but most of it needs
+to stay due to the need of hiding the call instructions from the
+compiler in order to avoid needless register save/restore.
 
-diff --git a/tools/include/xen-tools/arm-arch-capabilities.h b/tools/include/xen-tools/arm-arch-capabilities.h
-index 3849e897925d..4aa4c6c34a99 100644
---- a/tools/include/xen-tools/arm-arch-capabilities.h
-+++ b/tools/include/xen-tools/arm-arch-capabilities.h
-@@ -14,7 +14,7 @@
- static inline
- unsigned int arch_capabilities_arm_sve(unsigned int arch_capabilities)
- {
--#if defined(__aarch64__)
-+#if defined(__arm__) || defined(__aarch64__)
-     unsigned int sve_vl = MASK_EXTR(arch_capabilities,
-                                     XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
- 
-diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowlevel/xc/xc.c
-index 491e88977fd3..e14e223ec903 100644
---- a/tools/python/xen/lowlevel/xc/xc.c
-+++ b/tools/python/xen/lowlevel/xc/xc.c
-@@ -911,7 +911,7 @@ static PyObject *pyxc_physinfo(XcObject *self)
-                            "hw_caps",          cpu_cap,
-                            "virt_caps",        virt_caps);
- 
--#if defined(__aarch64__)
-+#if defined(__arm__) || defined(__aarch64__)
-     if ( objret ) {
-         unsigned int sve_vl_bits;
-         PyObject *py_arm_sve_vl;
-diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
-index ddc42f96b979..72e87eac46d1 100644
---- a/tools/xl/xl_info.c
-+++ b/tools/xl/xl_info.c
-@@ -226,7 +226,7 @@ static void output_physinfo(void)
-         );
- 
-     /* Print arm SVE vector length only on ARM platforms */
--#if defined(__aarch64__)
-+#if defined(__arm__) || defined(__aarch64__)
-     maybe_printf("arm_sve_vector_length  : %u\n",
-          arch_capabilities_arm_sve(info.arch_capabilities)
-         );
+What is going away is the nasty stacking of alternative and paravirt
+patching and (of course) the special .parainstructions linker section.
+
+I have tested the series on bare metal and as Xen PV domain to still
+work.
+
+RFC because I'm quite sure there will be some objtool work needed
+(at least removing the specific paravirt handling).
+
+Juergen Gross (3):
+  x86/paravirt: move some functions and defines to alternative
+  x86/alternative: add indirect call patching
+  x86/paravirt: switch mixed paravirt/alternative calls to alternative_2
+
+ arch/x86/include/asm/alternative.h        | 26 +++++-
+ arch/x86/include/asm/paravirt.h           | 39 ++-------
+ arch/x86/include/asm/paravirt_types.h     | 68 +++-------------
+ arch/x86/include/asm/qspinlock_paravirt.h |  4 +-
+ arch/x86/include/asm/text-patching.h      | 12 ---
+ arch/x86/kernel/alternative.c             | 99 +++++++++++------------
+ arch/x86/kernel/callthunks.c              | 17 ++--
+ arch/x86/kernel/kvm.c                     |  4 +-
+ arch/x86/kernel/module.c                  | 20 ++---
+ arch/x86/kernel/paravirt.c                | 54 ++-----------
+ arch/x86/kernel/vmlinux.lds.S             | 13 ---
+ arch/x86/tools/relocs.c                   |  2 +-
+ arch/x86/xen/irq.c                        |  2 +-
+ 13 files changed, 111 insertions(+), 249 deletions(-)
+
 -- 
-2.34.1
+2.35.3
 
 
