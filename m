@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1448C7EE29
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Jun 2023 00:48:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.545540.852006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEBCC7EE29
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Jun 2023 01:34:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.545554.852027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7QIC-0007WE-4Z; Fri, 09 Jun 2023 00:47:52 +0000
+	id 1q7R1N-0002mn-0w; Fri, 09 Jun 2023 01:34:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 545540.852006; Fri, 09 Jun 2023 00:47:52 +0000
+Received: by outflank-mailman (output) from mailman id 545554.852027; Fri, 09 Jun 2023 01:34:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7QIC-0007W7-1f; Fri, 09 Jun 2023 00:47:52 +0000
-Received: by outflank-mailman (input) for mailman id 545540;
- Fri, 09 Jun 2023 00:47:50 +0000
+	id 1q7R1M-0002m1-Po; Fri, 09 Jun 2023 01:34:32 +0000
+Received: by outflank-mailman (input) for mailman id 545554;
+ Fri, 09 Jun 2023 01:34:31 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q7QIA-0007Vv-SO; Fri, 09 Jun 2023 00:47:50 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>)
+ id 1q7R1L-0002jw-AQ; Fri, 09 Jun 2023 01:34:31 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q7QIA-00042R-ML; Fri, 09 Jun 2023 00:47:50 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1q7QIA-0003lT-48; Fri, 09 Jun 2023 00:47:50 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1q7QIA-0007Bg-3f; Fri, 09 Jun 2023 00:47:50 +0000
+ (envelope-from <julien@xen.org>)
+ id 1q7R1K-0003KN-E4; Fri, 09 Jun 2023 01:34:30 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232] helo=[10.95.166.95])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q7R1K-0005Cv-6o; Fri, 09 Jun 2023 01:34:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,97 +41,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=utqyJV5RhtbbHvvMRy5KXarm/ABFzk4JS07hbXQYE0Q=; b=lQ8+VIPishEY1CoJZSnSX3lPl+
-	euQG6LUbqjG9n2uCWJrN124RVL6hsHJxGoVLCd294oGK3DsmHam+zlllbttpV/hLrBkfqykrAvctK
-	8rB0rOQrxCatZaJE5zldYJCgyuiaaKcXDn5A/phcWXgMpxxlOZrwQy2iYvccH7faB9nU=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-181319-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=B3h+18k1zK1HHzSTWiiO1IwIppFZgRkziWTk8ZGxEo0=; b=vVddEZF1fy8iX8TBHC6k2Vh4pX
+	r6NUD+qoU+vexzF/fX3E2cZMrjsQNfvbuU0pW/tVjaBKdVYpjszr92Esh0RDDE4sGtdohOmd2OvDP
+	6PqOaWhOFpWhjU6n/HQG6Fs9bKTjftk+R2c3iwOMOWtkBL9OF+rWWNPiU1TZ06LJMKA4=;
+Message-ID: <e729d60e-b290-dec3-e35b-65c24ffbfda6@xen.org>
+Date: Fri, 9 Jun 2023 02:34:28 +0100
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 181319: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
-    xen-unstable-smoke:build-armhf:xen-build:fail:regression
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=6915a120641b5d232762af7882266048cf039ca0
-X-Osstest-Versions-That:
-    xen=64a647f8d817c6989edc000613b5afae19f03f99
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 09 Jun 2023 00:47:50 +0000
-
-flight 181319 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/181319/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 181233
- build-armhf                   6 xen-build                fail REGR. vs. 181233
-
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
-
-version targeted for testing:
- xen                  6915a120641b5d232762af7882266048cf039ca0
-baseline version:
- xen                  64a647f8d817c6989edc000613b5afae19f03f99
-
-Last test of basis   181233  2023-06-07 02:04:37 Z    1 days
-Failing since        181246  2023-06-07 11:02:03 Z    1 days   18 attempts
-Testing same since   181303  2023-06-08 11:00:25 Z    0 days    7 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@cloud.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Henry Wang <Henry.Wang@arm.com> # CHANGELOG
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Luca Fancellu <luca.fancellu@arm.com>
-  Michal Orzel <michal.orzel@amd.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  pass    
- build-armhf                                                  fail    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          blocked 
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.11.0
+Subject: Re: Asking for help to debug xen efi on Kunpeng machine
+Content-Language: en-US
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ Jiatong Shen <yshxxsjt715@gmail.com>
+Cc: xen-users@lists.xenproject.org, xen-devel@lists.xenproject.org,
+ bertrand.marquis@arm.com
+References: <CALqm=ddiMwWvdYMgyCtaKMocUEkEJyTgSQup9wJiXm4PrcDuVw@mail.gmail.com>
+ <alpine.DEB.2.22.394.2306081537590.3803068@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <alpine.DEB.2.22.394.2306081537590.3803068@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+On 08/06/2023 23:39, Stefano Stabellini wrote:
+> Hi Jiatong,
+> 
+> Do you have access to the serial? If so, it is possible that the boot
+> is actually successful and it is only the screen initialization the
+> problem.
+> 
+> If kunpeng 920 is a UEFI/ACPI machine, we know that there are issues
+> with screen initialization.
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+More importantly, you may want to check that if Xen was compiled with 
+ACPI enabled (unlikely if this is the package from Debian). If not, you 
+will need to build your own Xen.
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+Cheers,
 
-
-Not pushing.
-
-(No revision log; it would be 504 lines long.)
+-- 
+Julien Grall
 
