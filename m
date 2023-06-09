@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A49C7EE29
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Jun 2023 00:25:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.545508.851988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1448C7EE29
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Jun 2023 00:48:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.545540.852006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7PwM-0004PW-3V; Fri, 09 Jun 2023 00:25:18 +0000
+	id 1q7QIC-0007WE-4Z; Fri, 09 Jun 2023 00:47:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 545508.851988; Fri, 09 Jun 2023 00:25:18 +0000
+Received: by outflank-mailman (output) from mailman id 545540.852006; Fri, 09 Jun 2023 00:47:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7PwL-0004PP-Ux; Fri, 09 Jun 2023 00:25:17 +0000
-Received: by outflank-mailman (input) for mailman id 545508;
- Thu, 08 Jun 2023 23:34:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KhJ2=B4=linux.intel.com=yunhong.jiang@srs-se1.protection.inumbo.net>)
- id 1q7P8t-0005aS-KW
- for xen-devel@lists.xenproject.org; Thu, 08 Jun 2023 23:34:12 +0000
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f4c77fff-0654-11ee-b232-6b7b168915f2;
- Fri, 09 Jun 2023 01:34:06 +0200 (CEST)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2023 16:34:03 -0700
-Received: from yjiang5-mobl.amr.corp.intel.com (HELO localhost)
- ([10.144.161.97])
- by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2023 16:34:03 -0700
+	id 1q7QIC-0007W7-1f; Fri, 09 Jun 2023 00:47:52 +0000
+Received: by outflank-mailman (input) for mailman id 545540;
+ Fri, 09 Jun 2023 00:47:50 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q7QIA-0007Vv-SO; Fri, 09 Jun 2023 00:47:50 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q7QIA-00042R-ML; Fri, 09 Jun 2023 00:47:50 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1q7QIA-0003lT-48; Fri, 09 Jun 2023 00:47:50 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1q7QIA-0007Bg-3f; Fri, 09 Jun 2023 00:47:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,92 +44,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f4c77fff-0654-11ee-b232-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1686267246; x=1717803246;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=sN7dvQMQ+/TpXG6CIcwf0XKyIcjODwPRfKZrLnuiPSY=;
-  b=W6Eb4O2hS3W67gc5Deu1Phca8nByLkStwMEpSAfK10zpuoqhYmxnWQLq
-   o79Dj6Fa+/GiIIb7e7mIVoKDaN5fKsvNfhnWfMBvOpuA1aXPMJJtT7z3t
-   3q5PsEHkiySrRqb28J//oJ3o85hrr2u/EIXJMP1fQWzEdzDbMEFzvP6Z9
-   AMaSGmJvWASebkjo/2xrkHVTlGE/fv1byoHx9jNS4EBQaIEy5ddH2V2cr
-   NgAhDouXQqx776x04+lBmJ5x7ywxA4VPTBcrnA9CQFeB7S3bCsOIjalem
-   cdWL4vXCyndyxw/47bGVGFkh4agjSDO5Rg18txKEMApc0GP6hKge31YeN
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10735"; a="337097732"
-X-IronPort-AV: E=Sophos;i="6.00,227,1681196400"; 
-   d="scan'208";a="337097732"
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10735"; a="822822455"
-X-IronPort-AV: E=Sophos;i="6.00,227,1681196400"; 
-   d="scan'208";a="822822455"
-Date: Thu, 8 Jun 2023 16:34:02 -0700
-From: Yunhong Jiang <yunhong.jiang@linux.intel.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-Cc: "Kirill A. Shutemov" <kirill@shutemov.name>,
-	LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
-	David Woodhouse <dwmw2@infradead.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Brian Gerst <brgerst@gmail.com>,
-	Arjan van de Veen <arjan@linux.intel.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Paul McKenney <paulmck@kernel.org>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Oleksandr Natalenko <oleksandr@natalenko.name>,
-	Paul Menzel <pmenzel@molgen.mpg.de>,
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-	Piotr Gorski <lucjan.lucjanov@gmail.com>,
-	Usama Arif <usama.arif@bytedance.com>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org,
-	Russell King <linux@armlinux.org.uk>, Arnd Bergmann <arnd@arndb.de>,
-	linux-arm-kernel@lists.infradead.org,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>,
-	linux-csky@vger.kernel.org,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	linux-mips@vger.kernel.org,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	Helge Deller <deller@gmx.de>, linux-parisc@vger.kernel.org,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	linux-riscv@lists.infradead.org,
-	Mark Rutland <mark.rutland@arm.com>,
-	Sabin Rapan <sabrapan@amazon.com>,
-	"Michael Kelley (LINUX)" <mikelley@microsoft.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>
-Subject: Re: [patch] x86/realmode: Make stack lock work in trampoline_compat()
-Message-ID: <20230608233402.GA3430@yjiang5-mobl.amr.corp.intel.com>
-References: <20230508181633.089804905@linutronix.de>
- <20230508185218.962208640@linutronix.de>
- <20230524204818.3tjlwah2euncxzmh@box.shutemov.name>
- <87y1lbl7r6.ffs@tglx>
- <87sfbhlwp9.ffs@tglx>
- <20230529023939.mc2akptpxcg3eh2f@box.shutemov.name>
- <87bki3kkfi.ffs@tglx>
- <20230529203129.sthnhzgds7ynddxd@box.shutemov.name>
- <87h6rujdvl.ffs@tglx>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=utqyJV5RhtbbHvvMRy5KXarm/ABFzk4JS07hbXQYE0Q=; b=lQ8+VIPishEY1CoJZSnSX3lPl+
+	euQG6LUbqjG9n2uCWJrN124RVL6hsHJxGoVLCd294oGK3DsmHam+zlllbttpV/hLrBkfqykrAvctK
+	8rB0rOQrxCatZaJE5zldYJCgyuiaaKcXDn5A/phcWXgMpxxlOZrwQy2iYvccH7faB9nU=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-181319-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87h6rujdvl.ffs@tglx>
+Subject: [xen-unstable-smoke test] 181319: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
+    xen-unstable-smoke:build-armhf:xen-build:fail:regression
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=6915a120641b5d232762af7882266048cf039ca0
+X-Osstest-Versions-That:
+    xen=64a647f8d817c6989edc000613b5afae19f03f99
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 09 Jun 2023 00:47:50 +0000
 
-On Tue, May 30, 2023 at 12:46:22PM +0200, Thomas Gleixner wrote:
-> The stack locking and stack assignment macro LOAD_REALMODE_ESP fails to
-> work when invoked from the 64bit trampoline entry point:
-> 
-> trampoline_start64
->   trampoline_compat
->     LOAD_REALMODE_ESP <- lock
-One possibly dumb question and hope get some hints. The LOAD_REALMODE_ESP is
-defined under .code16 directive and will be used by 32-bit mode caller also. Is
-it ok because the instructions there will be same for both 16-bit and 32-bit? I
-checked
-https://ftp.gnu.org/old-gnu/Manuals/gas-2.9.1/html_chapter/as_16.html#SEC205 and
-don't find much information there.
+flight 181319 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/181319/
 
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 181233
+ build-armhf                   6 xen-build                fail REGR. vs. 181233
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  6915a120641b5d232762af7882266048cf039ca0
+baseline version:
+ xen                  64a647f8d817c6989edc000613b5afae19f03f99
+
+Last test of basis   181233  2023-06-07 02:04:37 Z    1 days
+Failing since        181246  2023-06-07 11:02:03 Z    1 days   18 attempts
+Testing same since   181303  2023-06-08 11:00:25 Z    0 days    7 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@cloud.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Henry Wang <Henry.Wang@arm.com> # CHANGELOG
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <jgrall@amazon.com>
+  Luca Fancellu <luca.fancellu@arm.com>
+  Michal Orzel <michal.orzel@amd.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 504 lines long.)
 
