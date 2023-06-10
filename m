@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1826FC7EE29
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Jun 2023 02:59:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.546337.853125 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B2CC7EE25
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Jun 2023 02:59:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.546338.853135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7opE-0001A3-JV; Sat, 10 Jun 2023 02:59:36 +0000
+	id 1q7opK-0001RG-Qe; Sat, 10 Jun 2023 02:59:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 546337.853125; Sat, 10 Jun 2023 02:59:36 +0000
+Received: by outflank-mailman (output) from mailman id 546338.853135; Sat, 10 Jun 2023 02:59:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q7opE-00019w-Gs; Sat, 10 Jun 2023 02:59:36 +0000
-Received: by outflank-mailman (input) for mailman id 546337;
- Sat, 10 Jun 2023 02:59:35 +0000
+	id 1q7opK-0001R9-O0; Sat, 10 Jun 2023 02:59:42 +0000
+Received: by outflank-mailman (input) for mailman id 546338;
+ Sat, 10 Jun 2023 02:59:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ujxR=B6=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1q7opD-00019q-JH
- for xen-devel@lists.xenproject.org; Sat, 10 Jun 2023 02:59:35 +0000
+ id 1q7opJ-00019q-D6
+ for xen-devel@lists.xenproject.org; Sat, 10 Jun 2023 02:59:41 +0000
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d1bbdd87-073a-11ee-8611-37d641c3527e;
- Sat, 10 Jun 2023 04:59:32 +0200 (CEST)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id E7BC45C019F;
- Fri,  9 Jun 2023 22:59:29 -0400 (EDT)
+ id d6f1cbd7-073a-11ee-8611-37d641c3527e;
+ Sat, 10 Jun 2023 04:59:39 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id E44D75C01A2;
+ Fri,  9 Jun 2023 22:59:38 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Fri, 09 Jun 2023 22:59:29 -0400
+ by compute5.internal (MEProxy); Fri, 09 Jun 2023 22:59:38 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 9 Jun 2023 22:59:26 -0400 (EDT)
+ 9 Jun 2023 22:59:37 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1bbdd87-073a-11ee-8611-37d641c3527e
+X-Inumbo-ID: d6f1cbd7-073a-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
-	 s=fm1; t=1686365969; x=1686452369; bh=fqqfREt6el0H4FUtv/UFCMik/
-	ekaqDFx+K8V6xPHXrA=; b=XHmMz2/TUW0yymNJduvfAI7TWUn2doI7XIGh3aeMi
-	I9DOUUxXtUb5JpEW4XKybSf1DLiIyxjVOKBlUxJAbvPa9vD/FrysI9DXX6YuZe9q
-	EyBAgoQbm/ddgbTsskP4aTOVq/brmhpYAwII7cZqgveNtm65I6gruAHDHGHmy3Lj
-	IqvkKK1ityrxYmqMlR5xLhHMX1lSjD56PQe0WoayB936GgRCViGp2qSECeLef98L
-	WjHF7grogPlYLGCm4aaN5KA+In9aS5p5RmTJf03XJyhWfNfCmdNtPiYxaV0ofdwy
-	p/4WcorAeRumhBXEOOiz2qW6yVznVvsVLc86K12yw0+Mg==
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to; s=fm1; t=1686365978; x=1686452378; bh=e12eRh5lyv
+	IG/KvFdPXdCrr7zx2xKqvfBfJtwKk/UpE=; b=AKQPI0PHuEOU5fmJQ9qD4WkgYQ
+	aNoiEv1lfrVM0NCY9ewgg8yFu5cfmny1yi8ZTNrtfImDp1pGhuDRkui/TEHC5s+K
+	/xhOVAL5AQHfiqgCeBetpDfYF+GaDlidqVKEsi6C0xbUzHx/PqDUoPV6QFq6aB0C
+	OOg0YoA7t8x2EWeZFwRJG97M00gjgS83Yl6TlolCRF6hGmsfSTI1ujrLvHwJZL0W
+	M+woz3GhEN1YABJ8oG7BW769tXKF258OMnnper1WHFH+X07RwCndRpFuDFfE7T+s
+	n72DZrUVHVYow5+16yXo6hevd822TTGQ2Fdv5qHENyPTDOZPdcvDunwPJiTQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm1; t=1686365969; x=1686452369; bh=f
-	qqfREt6el0H4FUtv/UFCMik/ekaqDFx+K8V6xPHXrA=; b=bCkb0S9qaYw8Fhd54
-	5wZBtSL6oakDSto/n91eKd2nRtAH3fjbIPrtzAaCpNTNiaHXo7GyJsRq9aJ1Qk9R
-	4R4N3PbYB1MI8x+1KG0n40mpSuu9AaWPtWnNfsDe+EF5OpPd7JUPOao1gWU0p7+/
-	ksbXJ8YcliKzdza+3AFj8c/lGWp8AA0xHq/RADyqjWolew1utIAZ9jW1UQxMIAgM
-	p6XhFilcTIrtUjumjzTiDgYe8ePoz05Bcls31udSVFyYyoXOnnlMPwqeWcXWB0Sz
-	y4ECLpJJdNdccFKAMkMV83KhVtQ2Td7i9VXieZ5ZLXPnK7NZEWurQ6vdMIuojKcP
-	yTTbg==
-X-ME-Sender: <xms:EOeDZOiw4cYUSQzMCP1JJN-Qfh-TBB33eoHDkJB_4H_H7uve2PCWOQ>
-    <xme:EOeDZPDe3gAoT11JA6Trlha6SB6z6Ti_vDULUM_91Sh4fpcVkRPkAiDwCCLhkuzIj
-    rEy5MwL6EGJeCY>
-X-ME-Received: <xmr:EOeDZGHk0DevVbhRG5On2z84eMczrD0oEh4S8_FfnhAVdKuKtUgeyxCF0Q23NbfefHR1hu0sk6Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrgedtledgieegucetufdoteggodetrfdotf
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1686365978; x=
+	1686452378; bh=e12eRh5lyvIG/KvFdPXdCrr7zx2xKqvfBfJtwKk/UpE=; b=G
+	9VxVZvzIe9D+6jHeneyaWFSJNodZvgGP36tWCCmi9ous9JGq8T+LtFFMVNxNKBVP
+	MresaRrefOqjnUcrB4yiDWx8qfazyFcNbts2DK6HNnEehk882KT2F6Zj8juL1H+F
+	EGMd5nnB1BCD3epAfyfTbNELCE+L5PN2BYKbpdok84A3GH/TGBG0/FjPZPQbfcac
+	IgY9AimP0eNkEX3UHJZealznt+phzF/ZWd7R3S5A0LdrA4WRjrcrpszwDQQEdYgf
+	CHUT3mfooyG1vP/tzzRKIamZBiNqmWCfoaecQR88wlj9ZWEAdZGDmnvVnmHOsYQZ
+	DTk3wKN7CU9rnuuMR4IcA==
+X-ME-Sender: <xms:GueDZG18f9Cg-tE7YUbukbcbpHfxslanf3EtyE5BZRXTqupjMKF0zg>
+    <xme:GueDZJEEhNIvjy07tWqGTTu7wNRaT76Bfq3-zsGrPQRL7yjlfocyiw0iDPMKRtFZp
+    a8cNDqdYT4cBHA>
+X-ME-Received: <xmr:GueDZO6PXCm--S9voaboQoLqRMpdAXi4REsf6vkjJ6dqf1lY0CSIME_XQ8uAsA6dupn_ciTEGNM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrgedtledgieehucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeffvghmihcu
-    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
-    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeekieeljeeutefgieejfffglefhieet
-    veffleefudefjeegleejvdelvdefueffveenucffohhmrghinhepkhgvrhhnvghlrdhorh
-    hgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepuggv
-    mhhisehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:EOeDZHTPb10tgvzuk4Q6r-YlLRNmxE6XgYUSvtjAQCjzIzyRz3fO-A>
-    <xmx:EOeDZLxQMVAHaUOnt82CchjE9ebQsGe3lL5MIFhZipNfifeu-NNIqw>
-    <xmx:EOeDZF7kvmmucCUMSgqgwH1BEbAb2xldb2Z8Jua_LQsglPreiowQ9Q>
-    <xmx:EeeDZMryYT-OR_G3h3vJvhsVTbhSl5lREuMt-XvP814z6VpnyNEzTw>
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepffgvmhhi
+    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
+    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepjeffjefggfeugeduvedvjeekgfeh
+    gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
+    lhgrsgdrtghomh
+X-ME-Proxy: <xmx:GueDZH2IBB4Sumu2fuMneaiI39kH0836FyDV9J2K9qo5MrsuALAF7g>
+    <xmx:GueDZJEvDlCmZm7SNd8JFmSe2VBgsOISovGKSYqab1-24hPCSCAxiQ>
+    <xmx:GueDZA8jWe2q81fNSp_fcvurdqkIUuTxfgHF7Bc_3KGGTLWYdCCftA>
+    <xmx:GueDZH_-F4gz03FlCFBUbJ1SZj5CDts9Hwx2l7iSJAaKDQRfZ4DOEQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Dwaipayan Ray <dwaipayanray1@gmail.com>,
@@ -110,190 +110,124 @@ Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH 1/4] Rip out simple_strtoll()
-Date: Fri,  9 Jun 2023 22:57:56 -0400
-Message-Id: <20230610025759.1813-1-demi@invisiblethingslab.com>
+Subject: [PATCH 3/4] Add strict version of vsscanf()
+Date: Fri,  9 Jun 2023 22:57:58 -0400
+Message-Id: <20230610025759.1813-3-demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230610025759.1813-1-demi@invisiblethingslab.com>
+References: <20230610025759.1813-1-demi@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-
-It is not used anywhere but its own unit tests.
 
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
 ---
- Documentation/dev-tools/checkpatch.rst             |  9 ++++-----
- Documentation/process/deprecated.rst               |  5 ++---
- .../translations/it_IT/process/deprecated.rst      |  9 ++++-----
- .../translations/sp_SP/process/deprecated.rst      | 14 +++++++-------
- include/linux/kstrtox.h                            |  1 -
- lib/kstrtox.c                                      |  2 +-
- lib/test_scanf.c                                   | 10 ----------
- lib/vsprintf.c                                     | 14 --------------
- 8 files changed, 18 insertions(+), 46 deletions(-)
+ include/linux/kernel.h |  4 ++++
+ lib/vsprintf.c         | 43 +++++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 44 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index c3389c6f38381f038ed5d9a884f2d333a749f8a2..0ae0ca80beb0c0171e8c04306cb5b9ccbc9fa713 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -290,11 +290,10 @@ API usage
-     See: https://www.kernel.org/doc/html/latest/process/deprecated.html#bug-and-bug-on
+diff --git a/include/linux/kernel.h b/include/linux/kernel.h
+index 0d91e0af01250c1d82f4a2ea562d2619b9cc6e9c..b348b84ce9c4e95031f67e0cbac5de8deca69aac 100644
+--- a/include/linux/kernel.h
++++ b/include/linux/kernel.h
+@@ -227,8 +227,12 @@ const char *kvasprintf_const(gfp_t gfp, const char *fmt, va_list args);
  
-   **CONSIDER_KSTRTO**
--    The simple_strtol(), simple_strtoll(), simple_strtoul(), and
--    simple_strtoull() functions explicitly ignore overflows, which
--    may lead to unexpected results in callers.  The respective kstrtol(),
--    kstrtoll(), kstrtoul(), and kstrtoull() functions tend to be the
--    correct replacements.
-+    The simple_strtol(), simple_strtoul(), and simple_strtoull() functions
-+    explicitly ignore overflows, which may lead to unexpected results in
-+    callers.  The respective kstrtol(), kstrtoll(), kstrtoul(), and kstrtoull()
-+    functions tend to be the correct replacements.
+ extern __scanf(2, 3)
+ int sscanf(const char *, const char *, ...);
++extern __scanf(2, 3)
++int sscanf_strict(const char *, const char *, ...);
+ extern __scanf(2, 0)
+ int vsscanf(const char *, const char *, va_list);
++extern __scanf(2, 0)
++int vsscanf_strict(const char *, const char *, va_list);
  
-     See: https://www.kernel.org/doc/html/latest/process/deprecated.html#simple-strtol-simple-strtoll-simple-strtoul-simple-strtoull
- 
-diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
-index f91b8441f2ef70576c5bad079e631e4077eabed6..b2f677eb6d6b12df63003b00960ef27b1656e4c3 100644
---- a/Documentation/process/deprecated.rst
-+++ b/Documentation/process/deprecated.rst
-@@ -109,10 +109,9 @@ For more details, also see array3_size() and flex_array_size(),
- as well as the related check_mul_overflow(), check_add_overflow(),
- check_sub_overflow(), and check_shl_overflow() family of functions.
- 
--simple_strtol(), simple_strtoll(), simple_strtoul(), simple_strtoull()
-+simple_strtol(), simple_strtoul(), simple_strtoull()
- ----------------------------------------------------------------------
--The simple_strtol(), simple_strtoll(),
--simple_strtoul(), and simple_strtoull() functions
-+The simple_strtol(), simple_strtoul(), and simple_strtoull() functions
- explicitly ignore overflows, which may lead to unexpected results
- in callers. The respective kstrtol(), kstrtoll(),
- kstrtoul(), and kstrtoull() functions tend to be the
-diff --git a/Documentation/translations/it_IT/process/deprecated.rst b/Documentation/translations/it_IT/process/deprecated.rst
-index ba0ed7dc154c95e0e973cb51cc36b95e786079a8..cdc0aa107bce7f4018ad241a02b4f701974e52b4 100644
---- a/Documentation/translations/it_IT/process/deprecated.rst
-+++ b/Documentation/translations/it_IT/process/deprecated.rst
-@@ -118,12 +118,11 @@ Per maggiori dettagli fate riferimento a array3_size() e flex_array_size(), ma
- anche le funzioni della famiglia check_mul_overflow(), check_add_overflow(),
- check_sub_overflow(), e check_shl_overflow().
- 
--simple_strtol(), simple_strtoll(), simple_strtoul(), simple_strtoull()
-+simple_strtol(), simple_strtoul(), simple_strtoull()
- ----------------------------------------------------------------------
--Le funzioni simple_strtol(), simple_strtoll(),
--simple_strtoul(), e simple_strtoull() ignorano volutamente
--i possibili overflow, e questo può portare il chiamante a generare risultati
--inaspettati. Le rispettive funzioni kstrtol(), kstrtoll(),
-+Le funzioni simple_strtol(), simple_strtoul(), e simple_strtoull() ignorano
-+volutamente i possibili overflow, e questo può portare il chiamante a generare
-+risultati inaspettati. Le rispettive funzioni kstrtol(), kstrtoll(),
- kstrtoul(), e kstrtoull() sono da considerarsi le corrette
- sostitute; tuttavia va notato che queste richiedono che la stringa sia
- terminata con il carattere NUL o quello di nuova riga.
-diff --git a/Documentation/translations/sp_SP/process/deprecated.rst b/Documentation/translations/sp_SP/process/deprecated.rst
-index d52120e0d75354d0d32c33d631f9f364eba32f82..f0ba93e7188f02ae98a8533e2dfee4c82cf78c5c 100644
---- a/Documentation/translations/sp_SP/process/deprecated.rst
-+++ b/Documentation/translations/sp_SP/process/deprecated.rst
-@@ -117,14 +117,14 @@ como también la familia de funciones relacionadas check_mul_overflow(),
- check_add_overflow(), check_sub_overflow(), y check_shl_overflow().
- 
- 
--simple_strtol(), simple_strtoll(), simple_strtoul(), simple_strtoull()
-+simple_strtol(), simple_strtoul(), simple_strtoull()
- ----------------------------------------------------------------------
--Las funciones: simple_strtol(), simple_strtoll(), simple_strtoul(), y
--simple_strtoull() explícitamente ignoran los desbordamientos, lo que puede
--llevar a resultados inesperados por las funciones que las llaman. Las
--funciones respectivas kstrtol(), kstrtoll(), kstrtoul(), y kstrtoull()
--tienden a ser reemplazos correctos, aunque nótese que necesitarán que la
--cadena de caracteres termine en NUL o en el carácter de línea nueva.
-+Las funciones: simple_strtol(), simple_strtoul(), y simple_strtoull()
-+explícitamente ignoran los desbordamientos, lo que puede llevar a
-+resultados inesperados por las funciones que las llaman. Las funciones
-+respectivas kstrtol(), kstrtoll(), kstrtoul(), y kstrtoull() tienden a
-+ser reemplazos correctos, aunque nótese que necesitarán que la cadena de
-+caracteres termine en NUL o en el carácter de línea nueva.
- 
- 
- strcpy()
-diff --git a/include/linux/kstrtox.h b/include/linux/kstrtox.h
-index 529974e22ea799adf5c07b48d803ac9bfc1f85a4..c3ed0ce20be49fba185937e3fd0f949e7be6f9a4 100644
---- a/include/linux/kstrtox.h
-+++ b/include/linux/kstrtox.h
-@@ -145,7 +145,6 @@ static inline int __must_check kstrtos32_from_user(const char __user *s, size_t
- extern unsigned long simple_strtoul(const char *,char **,unsigned int);
- extern long simple_strtol(const char *,char **,unsigned int);
- extern unsigned long long simple_strtoull(const char *,char **,unsigned int);
--extern long long simple_strtoll(const char *,char **,unsigned int);
- 
- static inline int strtobool(const char *s, bool *res)
- {
-diff --git a/lib/kstrtox.c b/lib/kstrtox.c
-index 08c14019841af9df6d1c354b4503ecee4c7a9da0..3397a91e07dbad814bb0f2c93d19761a375bedc5 100644
---- a/lib/kstrtox.c
-+++ b/lib/kstrtox.c
-@@ -150,7 +150,7 @@ EXPORT_SYMBOL(kstrtoull);
-  * @res: Where to write the result of the conversion on success.
-  *
-  * Returns 0 on success, -ERANGE on overflow and -EINVAL on parsing error.
-- * Preferred over simple_strtoll(). Return code must be checked.
-+ * Return code must be checked.
-  */
- noinline
- int kstrtoll(const char *s, unsigned int base, long long *res)
-diff --git a/lib/test_scanf.c b/lib/test_scanf.c
-index b620cf7de503542a98f38c45c76e9043b242746e..73e6e912f39c7746b1aaaf35eeb562c9c2d3fac8 100644
---- a/lib/test_scanf.c
-+++ b/lib/test_scanf.c
-@@ -727,15 +727,6 @@ static void __init test_simple_strtoull(void)
- 	test_simple_strtoxx(unsigned long long, simple_strtoull, "0x%llx", 0);
- }
- 
--static void __init test_simple_strtoll(void)
--{
--	test_simple_strtoxx(long long, simple_strtoll, "%lld",	 10);
--	test_simple_strtoxx(long long, simple_strtoll, "%lld",	 0);
--	test_simple_strtoxx(long long, simple_strtoll, "%llx",	 16);
--	test_simple_strtoxx(long long, simple_strtoll, "0x%llx", 16);
--	test_simple_strtoxx(long long, simple_strtoll, "0x%llx", 0);
--}
--
- static void __init test_simple_strtoul(void)
- {
- 	test_simple_strtoxx(unsigned long, simple_strtoul, "%lu",   10);
-@@ -800,7 +791,6 @@ static void __init selftest(void)
- 	test_numbers();
- 
- 	test_simple_strtoull();
--	test_simple_strtoll();
- 	test_simple_strtoul();
- 	test_simple_strtol();
+ extern int no_hash_pointers_enable(char *str);
  
 diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-index 40f560959b169b4c4ac6154d658cfe76cfd0c5a6..a60d348efb276d66ca07fe464883408df7fdab97 100644
+index 9846d2385f5b9e8f3945a5664d81047e97cf10d5..2dae357b367e1da8b1004ed6e85e051a045ca36b 100644
 --- a/lib/vsprintf.c
 +++ b/lib/vsprintf.c
-@@ -144,20 +144,6 @@ static long long simple_strntoll(const char *cp, size_t max_chars, char **endp,
- 	return simple_strntoull(cp, max_chars, endp, base);
- }
+@@ -3414,6 +3414,8 @@ EXPORT_SYMBOL_GPL(bprintf);
  
--/**
-- * simple_strtoll - convert a string to a signed long long
-- * @cp: The start of the string
-- * @endp: A pointer to the end of the parsed string will be placed here
-- * @base: The number base to use
-- *
-- * This function has caveats. Please use kstrtoll instead.
-- */
--long long simple_strtoll(const char *cp, char **endp, unsigned int base)
--{
--	return simple_strntoll(cp, INT_MAX, endp, base);
--}
--EXPORT_SYMBOL(simple_strtoll);
--
- static noinline_for_stack
- int skip_atoi(const char **s)
+ #endif /* CONFIG_BINARY_PRINTF */
+ 
++static int vsscanf_internal(const char *buf, const char *fmt, va_list args, bool strict);
++
+ /**
+  * vsscanf - Unformat a buffer into a list of arguments
+  * @buf:	input buffer
+@@ -3421,6 +3423,23 @@ EXPORT_SYMBOL_GPL(bprintf);
+  * @args:	arguments
+  */
+ int vsscanf(const char *buf, const char *fmt, va_list args)
++{
++	return vsscanf_internal(buf, fmt, args, false);
++}
++
++/**
++ * vsscanf_strict - Unformat a buffer into a list of arguments, but
++ *                  do not skip spaces.
++ * @buf:	input buffer
++ * @fmt:	format of buffer
++ * @args:	arguments
++ */
++int vsscanf_strict(const char *buf, const char *fmt, va_list args)
++{
++	return vsscanf_internal(buf, fmt, args, true);
++}
++
++static int vsscanf_internal(const char *buf, const char *fmt, va_list args, bool strict)
  {
+ 	const char *str = buf;
+ 	char *next;
+@@ -3530,8 +3549,10 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
+ 			char *s = (char *)va_arg(args, char *);
+ 			if (field_width == -1)
+ 				field_width = SHRT_MAX;
+-			/* first, skip leading white space in buffer */
+-			str = skip_spaces(str);
++			if (!strict) {
++				/* first, skip leading white space in buffer */
++				str = skip_spaces(str);
++			}
+ 
+ 			/* now copy until next white space */
+ 			while (*str && !isspace(*str) && field_width--)
+@@ -3621,7 +3642,8 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
+ 		/* have some sort of integer conversion.
+ 		 * first, skip white space in buffer.
+ 		 */
+-		str = skip_spaces(str);
++		if (!strict)
++			str = skip_spaces(str);
+ 
+ 		digit = *str;
+ 		if (is_sign && digit == '-') {
+@@ -3721,6 +3743,9 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
+ 		str = next;
+ 	}
+ 
++	if (strict && *str)
++		return -EINVAL;
++
+ 	return num;
+ }
+ EXPORT_SYMBOL(vsscanf);
+@@ -3743,3 +3768,15 @@ int sscanf(const char *buf, const char *fmt, ...)
+ 	return i;
+ }
+ EXPORT_SYMBOL(sscanf);
++int sscanf_strict(const char *buf, const char *fmt, ...)
++{
++	va_list args;
++	int i;
++
++	va_start(args, fmt);
++	i = vsscanf_strict(buf, fmt, args);
++	va_end(args);
++
++	return i;
++}
++EXPORT_SYMBOL(sscanf_strict);
 -- 
 Sincerely,
 Demi Marie Obenour (she/her/hers)
