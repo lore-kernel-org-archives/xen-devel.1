@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48ED3C7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 21:10:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.547587.855198 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B71E4C7EE2F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 21:36:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.547659.855224 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8onX-00064w-MI; Mon, 12 Jun 2023 21:09:59 +0000
+	id 1q8pCQ-0005Rl-Or; Mon, 12 Jun 2023 21:35:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 547587.855198; Mon, 12 Jun 2023 21:09:59 +0000
+Received: by outflank-mailman (output) from mailman id 547659.855224; Mon, 12 Jun 2023 21:35:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8onX-00060S-4O; Mon, 12 Jun 2023 21:09:59 +0000
-Received: by outflank-mailman (input) for mailman id 547587;
- Mon, 12 Jun 2023 21:09:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cqzT=CA=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1q8ojI-0007zJ-DO
- for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 21:05:36 +0000
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [2607:f8b0:4864:20::112c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dead4ceb-0964-11ee-8611-37d641c3527e;
- Mon, 12 Jun 2023 23:05:33 +0200 (CEST)
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-56d3d7a5b84so10006237b3.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Jun 2023 14:05:33 -0700 (PDT)
-Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
- by smtp.googlemail.com with ESMTPSA id
- s125-20020a817783000000b00569eb609458sm2757115ywc.81.2023.06.12.14.05.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Jun 2023 14:05:32 -0700 (PDT)
+	id 1q8pCQ-0005Re-MG; Mon, 12 Jun 2023 21:35:42 +0000
+Received: by outflank-mailman (input) for mailman id 547659;
+ Mon, 12 Jun 2023 21:35:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1q8pCP-0005RV-GR
+ for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 21:35:41 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q8pCP-0003l7-0i; Mon, 12 Jun 2023 21:35:41 +0000
+Received: from gw1.octic.net ([88.97.20.152] helo=[10.0.1.102])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1q8pCO-0004iI-R6; Mon, 12 Jun 2023 21:35:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,95 +41,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dead4ceb-0964-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686603933; x=1689195933;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ELrYSGf3rZcM0SKncNLanyoUH1rFlxcI1YjdtaAHWOM=;
-        b=LyMVzyXqiqaKfQOftnbB5qB90EtUnrbgPE+tRRy8u809McOQMdRt58iULBOhR8JFtH
-         hhRJmphgmRUDnbyyXP2Q9YxbwzAkn3ThfcILkwgMQG3ISbn98a07kPZmsAVC8Vehd4Mo
-         1biR1LFmmxLwxk8sGkOJv0esnaOWjdr489RSbTn71+xsATggGjgO9UBlAUeAeLB5A5f/
-         kGoRSfqAHa+jn1LV08UE8edOQfnKwbxOGGV8ICxkOoxOLTvOaFWF2RtvL1e5xr2jqLU0
-         QA04uFGbeM6zqpolABbfncapro6b5DTja8wzwTkJfjoIbnkhTJwsqQTX3z92z2Org5Ii
-         BY8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686603933; x=1689195933;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ELrYSGf3rZcM0SKncNLanyoUH1rFlxcI1YjdtaAHWOM=;
-        b=NkRaCaTf79II8p1EKLRKktfB1+9ETYmsmDyPKrMqx8SU9swQYPuSbdKc9lvY/QcnbT
-         CKA9TwXQvz7Z50pRqU9HMibgww4Hkf+YozS+fFyWPRck3N7Fy44wHzRVbbFb1MMeV5ng
-         dhbr6I6uVwgZC7lW3yKGhl/MkMt9/SPEW73+4QViyAMYpX2GYlqMTa5tcDZZFHDvW7cK
-         j4AKbjK7jKLrjunQ00qa+ZKp9YcyUlUhKlMdnkT6bZlDyCsdhcwcK7qk8I+JRTa6XEBh
-         4rYAPmaMeCfMhmW39X8uiOVrFlLd4vcPyz3vRd+9fyvpWI00Hv4CDWLjOTylJlcZFHsq
-         HSPg==
-X-Gm-Message-State: AC+VfDyAxmJmsIeyXrDhqvOh7oaEXgDsKBHpjof7MqxxdJUf11l4140O
-	zKEBPqwa/0bzOP9+i9S81jI=
-X-Google-Smtp-Source: ACHHUZ7fItlbNlNZv8dpxyHqv1w2q3utm4HiSoRDwiOPIqWB+aVpZeSy3j3Rf4mLiiGsI+aWaI88yQ==
-X-Received: by 2002:a81:8942:0:b0:56d:1f8d:b480 with SMTP id z63-20020a818942000000b0056d1f8db480mr4434878ywf.25.1686603932812;
-        Mon, 12 Jun 2023 14:05:32 -0700 (PDT)
-From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>
-Cc: linux-mm@kvack.org,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	kvm@vger.kernel.org,
-	Hugh Dickins <hughd@google.com>,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Subject: [PATCH v4 23/34] hexagon: Convert __pte_free_tlb() to use ptdescs
-Date: Mon, 12 Jun 2023 14:04:12 -0700
-Message-Id: <20230612210423.18611-24-vishal.moola@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230612210423.18611-1-vishal.moola@gmail.com>
-References: <20230612210423.18611-1-vishal.moola@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=ACo9Eki9MYwH1etmxOZaOOvGtZp3qEuWxWHbHmq59sc=; b=pcxNmf+7tbAygRbUWEpf9PL/gg
+	vtp+ugRJAXaRZtI3mV1h+pgbxm0aKd3i2bLI+8CjM/awchks1x/23sp79EXywfkfy3pP68dcFlboY
+	JZkcz0UpCqQbUjgN05Ayh4gjb/L/eiHeXS36DBVPdSboDsI6E0u1TyZHh7Ay/C8B1qbU=;
+Message-ID: <58c74c2c-e578-7534-79a6-1270e999434a@xen.org>
+Date: Mon, 12 Jun 2023 22:35:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.10.1
+Subject: Re: [PATCH v2] xen/arm: rename guest_cpuinfo in domain_cpuinfo
+To: Bertrand Marquis <bertrand.marquis@arm.com>,
+ xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <a7703b52779c39fa64fb3872be873b9d0ca83fc1.1686574689.git.bertrand.marquis@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <a7703b52779c39fa64fb3872be873b9d0ca83fc1.1686574689.git.bertrand.marquis@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents.
+Hi Bertrand,
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
----
- arch/hexagon/include/asm/pgalloc.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+On 12/06/2023 14:00, Bertrand Marquis wrote:
+> Rename the guest_cpuinfo structure to domain_cpuinfo as it is not only
+> used for guests but also for dom0 so domain is a more suitable name.
+> 
+> While there also rename the create_guest_cpuinfo function to
+> create_domain_cpuinfo to be coherent and fix comments accordingly.
+> 
+> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-diff --git a/arch/hexagon/include/asm/pgalloc.h b/arch/hexagon/include/asm/pgalloc.h
-index f0c47e6a7427..55988625e6fb 100644
---- a/arch/hexagon/include/asm/pgalloc.h
-+++ b/arch/hexagon/include/asm/pgalloc.h
-@@ -87,10 +87,10 @@ static inline void pmd_populate_kernel(struct mm_struct *mm, pmd_t *pmd,
- 		max_kernel_seg = pmdindex;
- }
- 
--#define __pte_free_tlb(tlb, pte, addr)		\
--do {						\
--	pgtable_pte_page_dtor((pte));		\
--	tlb_remove_page((tlb), (pte));		\
-+#define __pte_free_tlb(tlb, pte, addr)				\
-+do {								\
-+	pagetable_pte_dtor((page_ptdesc(pte)));			\
-+	tlb_remove_page_ptdesc((tlb), (page_ptdesc(pte)));	\
- } while (0)
- 
- #endif
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+And committed.
+
+Cheers,
+
 -- 
-2.40.1
-
+Julien Grall
 
