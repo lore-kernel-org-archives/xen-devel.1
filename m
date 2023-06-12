@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C8BC7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 14:52:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.547254.854541 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF3EC7EE2F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 14:52:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.547265.854554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8itq-0001BC-1Y; Mon, 12 Jun 2023 14:52:06 +0000
+	id 1q8iuI-0002Jh-9P; Mon, 12 Jun 2023 14:52:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 547254.854541; Mon, 12 Jun 2023 14:52:05 +0000
+Received: by outflank-mailman (output) from mailman id 547265.854554; Mon, 12 Jun 2023 14:52:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8itp-0001A2-St; Mon, 12 Jun 2023 14:52:05 +0000
-Received: by outflank-mailman (input) for mailman id 547254;
- Mon, 12 Jun 2023 14:52:05 +0000
+	id 1q8iuI-0002Ja-6u; Mon, 12 Jun 2023 14:52:34 +0000
+Received: by outflank-mailman (input) for mailman id 547265;
+ Mon, 12 Jun 2023 14:52:32 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=abR0=CA=anastas.io=shawn@srs-se1.protection.inumbo.net>)
- id 1q8itp-0000ov-CD
- for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 14:52:05 +0000
+ id 1q8iuG-0000ov-N5
+ for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 14:52:32 +0000
 Received: from alpha.anastas.io (alpha.anastas.io [104.248.188.109])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b0e1ce15-0930-11ee-8611-37d641c3527e;
- Mon, 12 Jun 2023 16:52:03 +0200 (CEST)
+ id c12d18e4-0930-11ee-8611-37d641c3527e;
+ Mon, 12 Jun 2023 16:52:30 +0200 (CEST)
 Received: from authenticated-user (alpha.anastas.io [104.248.188.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by alpha.anastas.io (Postfix) with ESMTPSA id AC45443CEC;
- Mon, 12 Jun 2023 07:52:01 -0700 (PDT)
+ by alpha.anastas.io (Postfix) with ESMTPSA id 5820043CE9;
+ Mon, 12 Jun 2023 07:51:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,16 +44,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0e1ce15-0930-11ee-8611-37d641c3527e
+X-Inumbo-ID: c12d18e4-0930-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=anastas.io; s=mail;
-	t=1686581522; bh=kxbZekarbGjd8rLMSqsHPRGP6CUOtSZDXh+06sP8JiI=;
+	t=1686581518; bh=qfGcTUScEPS/kn+AZiR+Dr4t3spHBjWMGqcd4ljzqZI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=d1TAt1LeXpsrCV+A5KmR/YXVLRVydto7elZ7zpPBzVnBIKXkv1vwTFvKhk/quHXRz
-	 mU6bwiKluxY7rJnO+pj0j4b2IG3I3LNxMfFm0HIQs0PLzySPXcF+8VWTMJmmHSuxiy
-	 TlH6HWkcVpPihUL8xWNdTuoZ31TFwhoM4zgcjyGJioUg7gQD9BpAQ2aOzxngFBri8e
-	 /sNnD3oQLpkrA2rb6t9ZknzmIxmQr8/tz+9jXKYUYjpaN0boDtXtLF/H/29bXHytVi
-	 8LeQQ1gFVEJ/zivpk0dpfeIekznRlIGoF9zqUdjV8/2xRWvG0NMLb/zRewfj4WY99q
-	 0NtAYKtE9NwWA==
+	b=RsLusLCecRpceUtzD0yda9QmLbh2qDyLtzaFRxmHSgeg9y4bhYsH+B+mEiv2BQhui
+	 +XvbXv7LeWOHlTKIfcqQTXhQVzTXWULfS5XTd9S6wnz4/G7X00Kiu3q4ahn3B/W7yT
+	 qbZqePy3UoDEHhYz6ktoyNbb5sTV5QasMHxb6iQ7jWOoPfSgXEyQ1KZPPJCcz2xMym
+	 yhlXS7aYyN+2mCEf2UtIpU9hEgft65VowfhGq/rsmNOrmBRzGGxCcC4c3Gcon/Hquk
+	 gPYSmd7vsgUo5J7+xhY+9/IkfA6FVEK2AavTrH3aJ/wlgwAvPzF0tAB5MS7cHo8lJ0
+	 jTUncOwFWDfcQ==
 From: Shawn Anastasio <shawn@anastas.io>
 To: xen-devel@lists.xenproject.org
 Cc: tpearson@raptorengineering.com,
@@ -61,99 +61,69 @@ Cc: tpearson@raptorengineering.com,
 	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH v2 3/4] automation: Add ppc64le cross-build jobs
-Date: Mon, 12 Jun 2023 09:51:38 -0500
-Message-Id: <a11af142293ff079a8a895357bf2b0420644972e.1686580752.git.shawn@anastas.io>
+Subject: [PATCH v2 1/4] automation: Add container for ppc64le builds
+Date: Mon, 12 Jun 2023 09:51:36 -0500
+Message-Id: <b970696f4f38fdf69ff112812c61f5537591d86f.1686580752.git.shawn@anastas.io>
 In-Reply-To: <cover.1686580752.git.shawn@anastas.io>
 References: <cover.1686580752.git.shawn@anastas.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add build jobs to cross-compile Xen for ppc64le.
+Add a container for cross-compiling xen for ppc64le.
 
 Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
- automation/gitlab-ci/build.yaml | 60 +++++++++++++++++++++++++++++++++
- 1 file changed, 60 insertions(+)
+ .../build/debian/bullseye-ppc64le.dockerfile  | 28 +++++++++++++++++++
+ automation/scripts/containerize               |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 automation/build/debian/bullseye-ppc64le.dockerfile
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 420ffa5acb..bd8c7332db 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -183,6 +183,33 @@
-   variables:
-     <<: *gcc
- 
-+.ppc64le-cross-build-tmpl:
-+  <<: *build
-+  variables:
-+    XEN_TARGET_ARCH: ppc64
-+  tags:
-+    - x86_64
+diff --git a/automation/build/debian/bullseye-ppc64le.dockerfile b/automation/build/debian/bullseye-ppc64le.dockerfile
+new file mode 100644
+index 0000000000..8a87631b52
+--- /dev/null
++++ b/automation/build/debian/bullseye-ppc64le.dockerfile
+@@ -0,0 +1,28 @@
++FROM debian:bullseye-slim
++LABEL maintainer.name="The Xen Project" \
++      maintainer.email="xen-devel@lists.xenproject.org"
 +
-+.ppc64le-cross-build:
-+  extends: .ppc64le-cross-build-tmpl
-+  variables:
-+    debug: n
++ENV DEBIAN_FRONTEND=noninteractive
++ENV USER root
 +
-+.ppc64le-cross-build-debug:
-+  extends: .ppc64le-cross-build-tmpl
-+  variables:
-+    debug: y
++# Add compiler path
++ENV CROSS_COMPILE powerpc64le-linux-gnu-
 +
-+.gcc-ppc64le-cross-build:
-+  extends: .ppc64le-cross-build
-+  variables:
-+    <<: *gcc
++RUN mkdir /build
++WORKDIR /build
 +
-+.gcc-ppc64le-cross-build-debug:
-+  extends: .ppc64le-cross-build-debug
-+  variables:
-+    <<: *gcc
-+
- .yocto-test:
-   stage: build
-   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-@@ -516,6 +543,39 @@ archlinux-current-gcc-riscv64-debug-randconfig:
-     EXTRA_FIXED_RANDCONFIG:
-       CONFIG_COVERAGE=n
- 
-+# Power cross-build
-+debian-bullseye-gcc-ppc64le:
-+  extends: .gcc-ppc64le-cross-build
-+  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: openpower_defconfig
-+    HYPERVISOR_ONLY: y
-+
-+debian-bullseye-gcc-ppc64le-debug:
-+  extends: .gcc-ppc64le-cross-build-debug
-+  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: openpower_defconfig
-+    HYPERVISOR_ONLY: y
-+
-+debian-bullseye-gcc-ppc64le-randconfig:
-+  extends: .gcc-ppc64le-cross-build
-+  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: openpower_defconfig
-+    RANDCONFIG: y
-+    EXTRA_FIXED_RANDCONFIG:
-+      CONFIG_COVERAGE=n
-+
-+debian-bullseye-gcc-ppc64le-debug-randconfig:
-+  extends: .gcc-ppc64le-cross-build-debug
-+  variables:
-+    CONTAINER: debian:bullseye-ppc64le
-+    KBUILD_DEFCONFIG: openpower_defconfig
-+    RANDCONFIG: y
-+    EXTRA_FIXED_RANDCONFIG:
-+      CONFIG_COVERAGE=n
-+
- # Yocto test jobs
- yocto-qemuarm64:
-   extends: .yocto-test-arm64
++# build depends
++RUN apt-get update && \
++    apt-get --quiet --yes --no-install-recommends install \
++        bison \
++        build-essential \
++        checkpolicy \
++        flex \
++        gawk \
++        gcc-powerpc64le-linux-gnu \
++        make \
++        python3-minimal \
++        && \
++        apt-get autoremove -y && \
++        apt-get clean && \
++        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index 5476ff0ea1..6d46f63665 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -33,6 +33,7 @@ case "_${CONTAINER}" in
+     _focal) CONTAINER="${BASE}/ubuntu:focal" ;;
+     _jessie) CONTAINER="${BASE}/debian:jessie" ;;
+     _jessie-i386) CONTAINER="${BASE}/debian:jessie-i386" ;;
++    _bullseye-ppc64le) CONTAINER="${BASE}/debian:bullseye-ppc64le" ;;
+     _stretch|_) CONTAINER="${BASE}/debian:stretch" ;;
+     _stretch-i386) CONTAINER="${BASE}/debian:stretch-i386" ;;
+     _buster-gcc-ibt) CONTAINER="${BASE}/debian:buster-gcc-ibt" ;;
 -- 
 2.30.2
 
