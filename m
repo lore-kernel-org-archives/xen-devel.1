@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35F7C7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 16:13:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.547361.854735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B0DC7EE2E
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 16:32:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.547384.854745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8kAg-00039q-Mo; Mon, 12 Jun 2023 16:13:34 +0000
+	id 1q8kSj-0006lq-9N; Mon, 12 Jun 2023 16:32:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 547361.854735; Mon, 12 Jun 2023 16:13:34 +0000
+Received: by outflank-mailman (output) from mailman id 547384.854745; Mon, 12 Jun 2023 16:32:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8kAg-00039Z-JX; Mon, 12 Jun 2023 16:13:34 +0000
-Received: by outflank-mailman (input) for mailman id 547361;
- Mon, 12 Jun 2023 16:13:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q8kSj-0006lj-5P; Mon, 12 Jun 2023 16:32:13 +0000
+Received: by outflank-mailman (input) for mailman id 547384;
+ Mon, 12 Jun 2023 16:32:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=abQ6=CA=citrix.com=prvs=520cb9a4c=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1q8kAf-0002qf-MU
- for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 16:13:33 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 12d40cea-093c-11ee-8611-37d641c3527e;
- Mon, 12 Jun 2023 18:13:31 +0200 (CEST)
+ <SRS0=VcSw=CA=arm.com=vincenzo.frascino@srs-se1.protection.inumbo.net>)
+ id 1q8kSi-0006ld-4E
+ for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 16:32:12 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id ad0d0282-093e-11ee-b232-6b7b168915f2;
+ Mon, 12 Jun 2023 18:32:09 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A17621FB;
+ Mon, 12 Jun 2023 09:32:53 -0700 (PDT)
+Received: from [192.168.4.21] (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 61BB23F5A1;
+ Mon, 12 Jun 2023 09:32:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,235 +44,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12d40cea-093c-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1686586411;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=22iLtmujHnwRaGN/uFzhwyYgfc8Jy+kOfUCkde5XnWc=;
-  b=VVYPXskEYZtLZPIGYQmFg7iCOnE2xp22mxSXDb8yq1j4ezUUmVVsJWLm
-   CeJxdR+4OoQYjX+Hw5ntE7Qkl+Xl5Rtni1Cmpk2bZwfnLI3x4ZONeTDME
-   AiUtPjgmbCAwMUjmEEtTJU0JwSVhLTI33UKVX1rs89KP2fETCM1cp/bwE
-   0=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 111816753
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:knENfqI0j1GTY613FE+Rq5UlxSXFcZb7ZxGr2PjKsXjdYENSg2NWx
- 2MZWz2FM/+LNjH2LdEiPIu2o00P75bVndZmS1BlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
- ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
- Jb5rta31GWNglaYCUpKrfrbwP9TlK6q4mhA4AVkPaojUGL2zBH5MrpOfcldEFOgKmVkNrbSb
- /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
- jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5MP3Br8
- /oiLQkLURfbrdr1zuq6V9Vj05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
- oxANGQpNU6bC/FMEg5/5JYWteGknHTgNRZfr0qYv/Ef6GnP1g1hlrPqNbI5f/TTHJwFxxjH+
- zmuE2LRCRQBN8ahmCK8ryy3lr+UoCP0Xrg/PejtnhJtqALKnTFCYPEMbnOrrP/8hkOgVtZ3L
- 00P5jFovaU07FasTNT2Q1u/unHsljw2VsdUEuY6wBqQ0aeS6AGcbkAbShZRZdpgs9U5LQHGz
- XfQwYmvX2Y29uTIFzTErOz8QS6O1TY9FlETQCkCdw485ebk+KsLzRyXT8tfH/vg5jHqIg0c0
- wxmvQBn2eVN155QjPTmlbzUq2ny/8aUF2bZ8i2SBzv4tV0hOeZJcqTysTDmAeB8wJF1p7Vrl
- FwNgICg4e8HFvlhfwTdEbxWTNlFCxtoWQAwYGKD/LF7rVxBA1b5IehtDMhWfS+FyPosdz7ze
- 1P0sghM/pJVN3bCRfYpM9zsU5R2lfm4SYqNuhXogj1mOMEZSeN61Hs2OR74M57FzSDAbp3Ty
- b/EKJ3xXB72+IxszSasRvd17FPY7nlW+I8nfriil07P+ePHNBaopUItbAPmghYRsPnV/204M
- r93a6O39vmoeLeuMnCKoNJJfAxiwLpSLcmelvG7v9WremJOcFzNwdeIqV/9U+SJR5hoq9o=
-IronPort-HdrOrdr: A9a23:QW7DhqvkDfa/Lhb9MyY5y8oo7skDstV00zEX/kB9WHVpm6yj+v
- xG/c5rsCMc7Qx6ZJhOo7+90cW7L080lqQFg7X5X43DYOCOggLBQL2KhbGI/9SKIVycygcy78
- Zdm6gVMqyLMbB55/yKnTVRxbwbsaW6GKPDv5ag8590JzsaD52Jd21Ce36m+ksdfnggObMJUK
- Cyy+BgvDSadXEefq2AdwI4t7iqnaysqHr+CyR2fiIa1A==
-X-Talos-CUID: 9a23:71Q+c27PrZaQ3HTzUtssz3AFP8YjSHjkykjXe2WASmgxSaCpRgrF
-X-Talos-MUID: =?us-ascii?q?9a23=3AJufGuQ5S7Mp12gGVhP1+iO72xoxj5r+tEn5ciax?=
- =?us-ascii?q?b5dKUZXdNOzibthmeF9o=3D?=
-X-IronPort-AV: E=Sophos;i="6.00,236,1681185600"; 
-   d="scan'208";a="111816753"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/4] x86/spec-ctrl: Fix up the RSBA/RRSBA bits as appropriate
-Date: Mon, 12 Jun 2023 17:13:05 +0100
-Message-ID: <20230612161306.2739572-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230612161306.2739572-1-andrew.cooper3@citrix.com>
-References: <20230612161306.2739572-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: ad0d0282-093e-11ee-b232-6b7b168915f2
+Message-ID: <4c01e43a-0275-04a0-ad9d-ee2f2bf24e1c@arm.com>
+Date: Mon, 12 Jun 2023 17:31:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v3 1/4] limits.h: add UCHAR_MAX, SCHAR_MAX, and SCHAR_MIN
+To: Demi Marie Obenour <demi@invisiblethingslab.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Lee Jones <lee@kernel.org>, Andy Lutomirski <luto@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Petr Mladek <pmladek@suse.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Cc: linux-media@vger.kernel.org, linux-staging@lists.linux.dev,
+ linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
+References: <20230610204044.3653-1-demi@invisiblethingslab.com>
+ <20230610204044.3653-2-demi@invisiblethingslab.com>
+Content-Language: en-US
+From: Vincenzo Frascino <vincenzo.frascino@arm.com>
+In-Reply-To: <20230610204044.3653-2-demi@invisiblethingslab.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-In order to level a VM safely for migration, the toolstack needs to know the
-RSBA/RRSBA properties of the CPU, whether or not they happen to be enumerated.
+Hi Demi,
 
-See the code comment for details.
+On 6/10/23 21:40, Demi Marie Obenour wrote:
+> Some drivers already defined these, and they will be used by sscanf()
+> for overflow checks later.  Also add SSIZE_MIN to limits.h, which will
+> also be needed later.
+> 
+> Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+> ---
+>  .../media/atomisp/pci/hive_isp_css_include/platform_support.h  | 1 -
+>  include/linux/limits.h                                         | 1 +
+>  include/linux/mfd/wl1273-core.h                                | 3 ---
+>  include/vdso/limits.h                                          | 3 +++
+>  4 files changed, 4 insertions(+), 4 deletions(-)
+> 
+...
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
+> diff --git a/include/vdso/limits.h b/include/vdso/limits.h
+> index 0197888ad0e00b2f853d3f25ffa764f61cca7385..0cad0a2490e5efc194d874025eb3e3b846a5c7b4 100644
+> --- a/include/vdso/limits.h
+> +++ b/include/vdso/limits.h
+> @@ -2,6 +2,9 @@
+>  #ifndef __VDSO_LIMITS_H
+>  #define __VDSO_LIMITS_H
+>  
+> +#define UCHAR_MAX	((unsigned char)~0U)
+> +#define SCHAR_MAX	((signed char)(UCHAR_MAX >> 1))
+> +#define SCHAR_MIN	((signed char)(-SCHAR_MAX - 1))
 
-v3:
- * Add a taint for bad EIBRS vs RSBA/RRSBA.
- * Minor comment improvements.
+Are you planning to use those definitions in the vDSO library?
 
-v2:
- * Rewrite almost from scratch.
----
- xen/arch/x86/include/asm/cpufeature.h |   1 +
- xen/arch/x86/spec_ctrl.c              | 100 ++++++++++++++++++++++++--
- 2 files changed, 96 insertions(+), 5 deletions(-)
+If not can you please define them in linux/limits.h, the vdso headers contain
+only what is necessary for the vDSO library.
 
-diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
-index ace31e3b1f1a..e2cb8f3cc728 100644
---- a/xen/arch/x86/include/asm/cpufeature.h
-+++ b/xen/arch/x86/include/asm/cpufeature.h
-@@ -193,6 +193,7 @@ static inline bool boot_cpu_has(unsigned int feat)
- #define cpu_has_tsx_ctrl        boot_cpu_has(X86_FEATURE_TSX_CTRL)
- #define cpu_has_taa_no          boot_cpu_has(X86_FEATURE_TAA_NO)
- #define cpu_has_fb_clear        boot_cpu_has(X86_FEATURE_FB_CLEAR)
-+#define cpu_has_rrsba           boot_cpu_has(X86_FEATURE_RRSBA)
- 
- /* Synthesized. */
- #define cpu_has_arch_perfmon    boot_cpu_has(X86_FEATURE_ARCH_PERFMON)
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 3892ce4d20ba..fb1b59b4d7e3 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -579,7 +579,10 @@ static bool __init check_smt_enabled(void)
-     return false;
- }
- 
--/* Calculate whether Retpoline is known-safe on this CPU. */
-+/*
-+ * Calculate whether Retpoline is known-safe on this CPU.  Fix up the
-+ * RSBA/RRSBA bits as necessary.
-+ */
- static bool __init retpoline_calculations(void)
- {
-     unsigned int ucode_rev = this_cpu(cpu_sig).rev;
-@@ -593,15 +596,93 @@ static bool __init retpoline_calculations(void)
-         return false;
- 
-     /*
--     * RSBA may be set by a hypervisor to indicate that we may move to a
--     * processor which isn't retpoline-safe.
-+     * The meaning of the RSBA and RRSBA bits have evolved over time.  The
-+     * agreed upon meaning at the time of writing (May 2023) is thus:
-+     *
-+     * - RSBA (RSB Alternative) means that an RSB may fall back to an
-+     *   alternative predictor on underflow.  Skylake uarch and later all have
-+     *   this property.  Broadwell too, when running microcode versions prior
-+     *   to Jan 2018.
-+     *
-+     * - All eIBRS-capable processors suffer RSBA, but eIBRS also introduces
-+     *   tagging of predictions with the mode in which they were learned.  So
-+     *   when eIBRS is active, RSBA becomes RRSBA (Restricted RSBA).
-+     *
-+     * - CPUs are not expected to enumerate both RSBA and RRSBA.
-+     *
-+     * Some parts (Broadwell) are not expected to ever enumerate this
-+     * behaviour directly.  Other parts have differing enumeration with
-+     * microcode version.  Fix up Xen's idea, so we can advertise them safely
-+     * to guests, and so toolstacks can level a VM safety for migration.
-+     *
-+     * The following states exist:
-+     *
-+     * |   | RSBA | EIBRS | RRSBA | Notes              | Action        |
-+     * |---+------+-------+-------+--------------------+---------------|
-+     * | 1 |    0 |     0 |     0 | OK (older parts)   | Maybe +RSBA   |
-+     * | 2 |    0 |     0 |     1 | Broken             | +RSBA, -RRSBA |
-+     * | 3 |    0 |     1 |     0 | OK (pre-Aug ucode) | +RRSBA        |
-+     * | 4 |    0 |     1 |     1 | OK                 |               |
-+     * | 5 |    1 |     0 |     0 | OK                 |               |
-+     * | 6 |    1 |     0 |     1 | Broken             | -RRSBA        |
-+     * | 7 |    1 |     1 |     0 | Broken             | -RSBA, +RRSBA |
-+     * | 8 |    1 |     1 |     1 | Broken             | -RSBA         |
-+     *
-+     * However, we don't need perfect adherence to the spec.  We only need
-+     * RSBA || RRSBA to indicate "alternative predictors potentially in use".
-+     * Rows 1 & 3 are fixed up by later logic, as they're known configurations
-+     * which exist in the world.
-      *
-+     * Complain loudly at the broken cases. They're safe for Xen to use (so we
-+     * don't attempt to correct), and may or may not exist in reality, but if
-+     * we ever encoutner them in practice, something is wrong and needs
-+     * further investigation.
-+     */
-+    if ( cpu_has_eibrs ? cpu_has_rsba  /* Rows 7, 8 */
-+                       : cpu_has_rrsba /* Rows 2, 6 */ )
-+    {
-+        printk(XENLOG_ERR
-+               "FIRMWARE BUG: CPU %02x-%02x-%02x, ucode 0x%08x: RSBA %u, EIBRS %u, RRSBA %u\n",
-+               boot_cpu_data.x86, boot_cpu_data.x86_model,
-+               boot_cpu_data.x86_mask, ucode_rev,
-+               cpu_has_rsba, cpu_has_eibrs, cpu_has_rrsba);
-+        add_taint(TAINT_CPU_OUT_OF_SPEC);
-+    }
-+
-+    /*
-      * Processors offering Enhanced IBRS are not guarenteed to be
-      * repoline-safe.
-      */
--    if ( cpu_has_rsba || cpu_has_eibrs )
-+    if ( cpu_has_eibrs )
-+    {
-+        /*
-+         * Prior to the August 2023 microcode, many eIBRS-capable parts did
-+         * not enumerate RRSBA.
-+         */
-+        if ( !cpu_has_rrsba )
-+            setup_force_cpu_cap(X86_FEATURE_RRSBA);
-+
-+        return false;
-+    }
-+
-+    /*
-+     * RSBA is explicitly enumerated in some cases, but may also be set by a
-+     * hypervisor to indicate that we may move to a processor which isn't
-+     * retpoline-safe.
-+     */
-+    if ( cpu_has_rsba )
-         return false;
- 
-+    /*
-+     * At this point, we've filtered all the legal RSBA || RRSBA cases (or the
-+     * known non-ideal cases).  If ARCH_CAPS is visible, trust the absence of
-+     * RSBA || RRSBA.  There's no known microcode which advertises ARCH_CAPS
-+     * without RSBA or EIBRS, and if we're virtualised we can't rely the model
-+     * check anyway.
-+     */
-+    if ( cpu_has_arch_caps )
-+        return true;
-+
-     switch ( boot_cpu_data.x86_model )
-     {
-     case 0x17: /* Penryn */
-@@ -689,6 +770,15 @@ static bool __init retpoline_calculations(void)
-         break;
-     }
- 
-+    if ( !safe )
-+    {
-+        /*
-+         * Note: the eIBRS-capable parts are filtered out earlier, so the
-+         * remainder here are the ones which suffer RSBA behaviour.
-+         */
-+        setup_force_cpu_cap(X86_FEATURE_RSBA);
-+    }
-+
-     return safe;
- }
- 
-@@ -1151,7 +1241,7 @@ void __init init_speculation_mitigations(void)
-             thunk = THUNK_JMP;
-     }
- 
--    /* Determine if retpoline is safe on this CPU. */
-+    /* Determine if retpoline is safe on this CPU.  Fix up RSBA/RRSBA enumerations. */
-     retpoline_safe = retpoline_calculations();
- 
-     /*
+Thanks!
+
+>  #define USHRT_MAX	((unsigned short)~0U)
+>  #define SHRT_MAX	((short)(USHRT_MAX >> 1))
+>  #define SHRT_MIN	((short)(-SHRT_MAX - 1))
+
 -- 
-2.30.2
-
+Regards,
+Vincenzo
 
