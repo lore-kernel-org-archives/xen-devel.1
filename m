@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B9BC7EE2F
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 14:49:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.547247.854514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A1FC7EE2E
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 14:52:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.547253.854535 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8irH-0007pu-VD; Mon, 12 Jun 2023 14:49:27 +0000
+	id 1q8itp-00014i-KM; Mon, 12 Jun 2023 14:52:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 547247.854514; Mon, 12 Jun 2023 14:49:27 +0000
+Received: by outflank-mailman (output) from mailman id 547253.854535; Mon, 12 Jun 2023 14:52:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8irH-0007pn-Sc; Mon, 12 Jun 2023 14:49:27 +0000
-Received: by outflank-mailman (input) for mailman id 547247;
- Mon, 12 Jun 2023 14:49:26 +0000
+	id 1q8itp-00014Y-F3; Mon, 12 Jun 2023 14:52:05 +0000
+Received: by outflank-mailman (input) for mailman id 547253;
+ Mon, 12 Jun 2023 14:52:04 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=COfM=CA=citrix.com=prvs=5202ad488=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1q8irG-0007ph-E5
- for xen-devel@lists.xen.org; Mon, 12 Jun 2023 14:49:26 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 514c58d7-0930-11ee-b232-6b7b168915f2;
- Mon, 12 Jun 2023 16:49:24 +0200 (CEST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=abR0=CA=anastas.io=shawn@srs-se1.protection.inumbo.net>)
+ id 1q8ito-0000x9-0w
+ for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 14:52:04 +0000
+Received: from alpha.anastas.io (alpha.anastas.io [104.248.188.109])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b005f7b8-0930-11ee-b232-6b7b168915f2;
+ Mon, 12 Jun 2023 16:52:02 +0200 (CEST)
+Received: from authenticated-user (alpha.anastas.io [104.248.188.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by alpha.anastas.io (Postfix) with ESMTPSA id E407F43CEA;
+ Mon, 12 Jun 2023 07:51:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,104 +44,537 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 514c58d7-0930-11ee-b232-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1686581364;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Uis6XNWe+venr0IO8TUfpK2RVk+OiGSkLv7q3yoC9KA=;
-  b=NgR5OSTdz9RnQyxdCLwirh42gjDOE/XvZLn6uNIzerFiLk0w4rCXPQ23
-   t8Pl7yg9PBZWKI6ZK8WDEWBIWrQA4plhGu+QQThVjf/JnYziHSdZmf7UG
-   PW0VXD1+yb6Y9kPEAnLA+Z10CkMmFQRTm3eD+Ja4f/PVasRvTkjiVWF7N
-   E=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 112362273
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:rEwOGK84dUQWjq8DQkS7DrUDwnmTJUtcMsCJ2f8bNWPcYEJGY0x3z
- WsfWG6CM/+IYTP3Kox0Pdu+oE0CuJXRzoVqHQdoqXw8E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ird7ks31BjOkGlA5AdmO6kR5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkkez
- dM3GS4oNyyTuMCX+6q5a+VojZg8eZyD0IM34hmMzBncBPciB5vCX7/L9ZlT2zJYasJmRKiEI
- ZBDMHw2MUqGOkcUUrsUIMtWcOOAj3/jczpeuRSNqLA++WT7xw1tyrn9dtHSf7RmQO0MxxzD+
- DicoD+R7hcyFu6zljSk/y2X2+6TkXKmA68bP+Cf+as/6LGU7jNKU0BHPbehmtGni1SzQNIZK
- FER8zAGqak0/VasCN7nUHWQsHOC+xIRRddUO+k78x2WjLrZ5UCeHGdsZjxOcts9r+ctWCcnk
- FSOmrvBByFrsbCTYWKQ8PGTtzzaETYUK2QPYzNCQhYE/8XkvKk3jxTGVNElF7S65vXuBSv53
- zeR6SQzmZ0UlYsP1r6n5hbDgjSlvJ+PSRQ6ji3eWm+1qAl0YoioaqSs6F7S9/EGK5yWJnGEt
- WQEmsWDqvgJDIuMmTalROQLFauuof2CNVX0hlpiHII95i+t03GmdIFUpjp5IS9BP9wFennya
- 0/SvQdQ4pB7OHqsZLVwJYWrBKwCxLDtD93/WtjIb9BFZd56cwrvwc11TRfOhSa3yhFqyPxhf
- 87BKq5AEEr2F4w39BWZdvk4iIM7+QIf/nvRZJz/xEi4hO/2iGGudVsVDLefRrlnvP3e8F6Oo
- os329iikEsGDrCnCsXD2ctKdA1RcyBmbXzjg5YPHtNvNDaKD43I5xX55bo6M7JokK1O/gsj1
- iHsAxQIoLYTaJCuFOlrVpyAQOm1NXqHhShnVRHAxH7xs5TZXa6h7b0Ea7w8dqQ9+epowJZcF
- qdVJZjYUqgXG2ybpVzxiKURS6Q4LXyWaf+mZXL5MFDTgbY9L+A2xjMUVlS2r3RfZsZGncA/v
- 6ehxmvmrWkrHmxf4DLtQKv3lTuZ5CFN8N+eqmOUerG/jm2wqtk1Q8Ew59drS/wxxeLrnGLCh
- 13KUEZB+4EgYeYdqbH0uExNlK/xe8MWI6aQNzSzAWqeXcUCwlee/A==
-IronPort-HdrOrdr: A9a23:LOy5yq/ifBXnA8uj23huk+F6db1zdoMgy1knxilNoENuEvBwxv
- rOoB1E73HJYW4qKQ4dcdDpAtjmfZquz+8K3WBxB8bsYOCIghrSEGgP1/qG/9SkIVyDygdR78
- xdmstFeZPN5DpB/LzHCWCDer5LrbXpgcPY59s2jU0dMD2CA5sQtzuRYTzrdHGeMTM2fabRY6
- Dsn/avyQDQHUg/X4CXI0BAZeLKoNrGmfvdEEQ7Li9izDPLoSKj6bb8HRTd9AwZSSlzzbAr9n
- WAuxDl54242svLiyP05iv21dB7idHhwtxMCIinkc4OMAjhjQ6uecBIR6CChjYou+uigWxa0O
- Uk4i1QfPib2UmhO11dkiGdnzUIFwxerEMK/GXow0cLZ/aJAg7SRfAx3L6xOSGpmnbI9OsMoJ
- 6jmVjp7Ka/RCmw7xjV9pzGUQpnmVGzpmdnmekPj2ZHWY9bc7NJq5cDlXklWqvoMRiKoLzPKt
- MeR/309bJTaxeXfnrZtm5gzJilWWkyBA6PRgwHttaO2zZbkXhlxw9ArfZv0kso5dY4Ud1J9u
- 7EOqNnmPVHSdIXd7t0AKMETdGsAmLATBrQOCaZIEjhFqsAJ3XRwqSHrYkd9aWvYtgF3ZEykJ
- POXBdRsnMzYVvnDYmU0JhC4nn2MSyAtXiH8LAo23G4gMyLeFPGC1z2dLl1qbrTnxw2OLyvZ8
- qO
-X-Talos-CUID: 9a23:etDO0Gwz+4yVdXbMZ0LNBgVEIu8KQ2P4lUvAHG2ZMn5rabGRQgOPrfY=
-X-Talos-MUID: 9a23:S8BT2QaNHeHKpeBTlQ3A2z9DOZhTvqXyBBFQyrgPkJSjOnkl
-X-IronPort-AV: E=Sophos;i="6.00,236,1681185600"; 
-   d="scan'208";a="112362273"
-Date: Mon, 12 Jun 2023 15:48:48 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Viresh Kumar <viresh.kumar@linaro.org>
-CC: <xen-devel@lists.xen.org>, Juergen Gross <jgross@suse.com>, Julien Grall
-	<julien@xen.org>, Vincent Guittot <vincent.guittot@linaro.org>,
-	<stratos-dev@op-lists.linaro.org>, Alex =?iso-8859-1?Q?Benn=E9e?=
-	<alex.bennee@linaro.org>, Mathieu Poirier <mathieu.poirier@linaro.com>,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>, Erik Schilling
-	<erik.schilling@linaro.org>
-Subject: Re: [PATCH V3 3/3] libxl: arm: Add grant_usage parameter for virtio
- devices
-Message-ID: <7af57d20-6145-4416-9fa1-21cac0e2e5ea@perard>
-References: <cover.1685684586.git.viresh.kumar@linaro.org>
- <0e347b2f4817cc578a5f8e41bf70503ae8cf69e3.1685684586.git.viresh.kumar@linaro.org>
+X-Inumbo-ID: b005f7b8-0930-11ee-b232-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=anastas.io; s=mail;
+	t=1686581520; bh=+YId0qIzGL2wP+hRUog7lPwPFLFjkvuez2Pylo5yEJY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=IBcBZhfFq4e7RmKUQBuwDsfPyTEtt0qkaPy2g5d9AlbhGpigsoOgnMKrCQtGiSsbY
+	 o5G+MAJ22R5RUdCEObI6SlvZhg9z//AulqbARX1qf4f01/hons0QirnNYJre1A/XRi
+	 5MRKYkIrsr9AnKzeWoxpHk36j4V+1J6RLzS6bxa5r6giqp+cBTF3nrtIoJkX0gyiif
+	 Wt180yFlYdCZCdgy7pwQkcmxAkt2JXITBeR4cJy0i9w8Wbz9ZjvvpFNrs29Y52+1AI
+	 FZEr7tQEwyVtOlyEaRHZ13yQ5iq804N1altmtEkNUSPjXpV22jT1xRH0SS7QjbmP4z
+	 6mgIi0RRrwJXQ==
+From: Shawn Anastasio <shawn@anastas.io>
+To: xen-devel@lists.xenproject.org
+Cc: tpearson@raptorengineering.com,
+	Shawn Anastasio <shawn@anastas.io>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>
+Subject: [PATCH v2 2/4] xen: Add files needed for minimal ppc64le build
+Date: Mon, 12 Jun 2023 09:51:37 -0500
+Message-Id: <d45855963671225b5e20cb0f26da1e7ec64427f2.1686580752.git.shawn@anastas.io>
+In-Reply-To: <cover.1686580752.git.shawn@anastas.io>
+References: <cover.1686580752.git.shawn@anastas.io>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <0e347b2f4817cc578a5f8e41bf70503ae8cf69e3.1685684586.git.viresh.kumar@linaro.org>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jun 02, 2023 at 11:19:09AM +0530, Viresh Kumar wrote:
-> diff --git a/tools/libs/light/libxl_virtio.c b/tools/libs/light/libxl_virtio.c
-> index f8a78e22d156..19d834984777 100644
-> --- a/tools/libs/light/libxl_virtio.c
-> +++ b/tools/libs/light/libxl_virtio.c
-> @@ -48,11 +56,13 @@ static int libxl__set_xenstore_virtio(libxl__gc *gc, uint32_t domid,
->                                        flexarray_t *ro_front)
->  {
->      const char *transport = libxl_virtio_transport_to_string(virtio->transport);
-> +    const char *grant_usage = libxl_defbool_to_string(virtio->grant_usage);
->  
->      flexarray_append_pair(back, "irq", GCSPRINTF("%u", virtio->irq));
->      flexarray_append_pair(back, "base", GCSPRINTF("%#"PRIx64, virtio->base));
->      flexarray_append_pair(back, "type", GCSPRINTF("%s", virtio->type));
->      flexarray_append_pair(back, "transport", GCSPRINTF("%s", transport));
-> +    flexarray_append_pair(back, "grant_usage", GCSPRINTF("%s", grant_usage));
+Add the build system changes required to build for ppc64le (POWER8+).
+As of now the resulting image simply boots to an infinite loop.
 
-It doesn't seems like a good idea to write a string like "True" or
-"False" in xenstore when a simple integer would work. Also I'm pretty
-sure all other bool are written as "0" or "1", for false or true.
-Could you change to write "0" or "1" instead of using
-libxl_defbool_to_string() ?
+$ make XEN_TARGET_ARCH=ppc64 -C xen openpower_defconfig
+$ make XEN_TARGET_ARCH=ppc64 SUBSYSTEMS=xen -C xen build
 
+This port targets POWER8+ CPUs running in Little Endian mode specifically,
+and does not boot on older machines. Additionally, this initial skeleton
+only implements the PaPR/pseries boot protocol which allows it to be
+booted in a standard QEMU virtual machine:
 
-Beside this, patch looks good to me.
+$ qemu-system-ppc64 -M pseries-5.2 -m 256M -kernel xen/xen
 
-Cheers,
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ config/ppc64.mk                          |   5 +
+ xen/Makefile                             |   5 +-
+ xen/arch/ppc/Kconfig                     |  42 ++++++
+ xen/arch/ppc/Kconfig.debug               |   0
+ xen/arch/ppc/Makefile                    |  16 +++
+ xen/arch/ppc/Rules.mk                    |   0
+ xen/arch/ppc/arch.mk                     |  11 ++
+ xen/arch/ppc/configs/openpower_defconfig |  13 ++
+ xen/arch/ppc/include/asm/config.h        |  63 +++++++++
+ xen/arch/ppc/include/asm/page-bits.h     |   7 +
+ xen/arch/ppc/ppc64/Makefile              |   1 +
+ xen/arch/ppc/ppc64/asm-offsets.c         |   0
+ xen/arch/ppc/ppc64/head.S                |  27 ++++
+ xen/arch/ppc/xen.lds.S                   | 173 +++++++++++++++++++++++
+ 14 files changed, 361 insertions(+), 2 deletions(-)
+ create mode 100644 config/ppc64.mk
+ create mode 100644 xen/arch/ppc/Kconfig
+ create mode 100644 xen/arch/ppc/Kconfig.debug
+ create mode 100644 xen/arch/ppc/Makefile
+ create mode 100644 xen/arch/ppc/Rules.mk
+ create mode 100644 xen/arch/ppc/arch.mk
+ create mode 100644 xen/arch/ppc/configs/openpower_defconfig
+ create mode 100644 xen/arch/ppc/include/asm/config.h
+ create mode 100644 xen/arch/ppc/include/asm/page-bits.h
+ create mode 100644 xen/arch/ppc/ppc64/Makefile
+ create mode 100644 xen/arch/ppc/ppc64/asm-offsets.c
+ create mode 100644 xen/arch/ppc/ppc64/head.S
+ create mode 100644 xen/arch/ppc/xen.lds.S
 
+diff --git a/config/ppc64.mk b/config/ppc64.mk
+new file mode 100644
+index 0000000000..597f0668c3
+--- /dev/null
++++ b/config/ppc64.mk
+@@ -0,0 +1,5 @@
++CONFIG_PPC := y
++CONFIG_PPC64 := y
++CONFIG_PPC_$(XEN_OS) := y
++
++CONFIG_XEN_INSTALL_SUFFIX :=
+diff --git a/xen/Makefile b/xen/Makefile
+index e89fc461fc..db5454fb58 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -38,7 +38,7 @@ EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
+ ARCH=$(XEN_TARGET_ARCH)
+ SRCARCH=$(shell echo $(ARCH) | \
+           sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
+-              -e s'/riscv.*/riscv/g')
++              -e s'/riscv.*/riscv/g' -e s'/ppc.*/ppc/g')
+ export ARCH SRCARCH
+ 
+ # Allow someone to change their config file
+@@ -244,7 +244,7 @@ include $(XEN_ROOT)/Config.mk
+ export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
+ export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
+                             sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
+-                                -e s'/riscv.*/riscv/g')
++                                -e s'/riscv.*/riscv/g' -e s'/ppc.*/ppc/g')
+ 
+ export CONFIG_SHELL := $(SHELL)
+ export CC CXX LD NM OBJCOPY OBJDUMP ADDR2LINE
+@@ -563,6 +563,7 @@ _clean:
+ 	$(Q)$(MAKE) $(clean)=xsm
+ 	$(Q)$(MAKE) $(clean)=crypto
+ 	$(Q)$(MAKE) $(clean)=arch/arm
++	$(Q)$(MAKE) $(clean)=arch/ppc
+ 	$(Q)$(MAKE) $(clean)=arch/riscv
+ 	$(Q)$(MAKE) $(clean)=arch/x86
+ 	$(Q)$(MAKE) $(clean)=test
+diff --git a/xen/arch/ppc/Kconfig b/xen/arch/ppc/Kconfig
+new file mode 100644
+index 0000000000..a0a70adef4
+--- /dev/null
++++ b/xen/arch/ppc/Kconfig
+@@ -0,0 +1,42 @@
++config PPC
++	def_bool y
++
++config PPC64
++	def_bool y
++	select 64BIT
++
++config ARCH_DEFCONFIG
++	string
++	default "arch/ppc/configs/openpower_defconfig"
++
++menu "Architecture Features"
++
++source "arch/Kconfig"
++
++endmenu
++
++menu "ISA Selection"
++
++choice
++	prompt "Base ISA"
++	default POWER_ISA_2_07B if PPC64
++	help
++	  This selects the base ISA version that Xen will target.
++
++config POWER_ISA_2_07B
++	bool "Power ISA 2.07B"
++	help
++	  Target version 2.07B of the Power ISA (POWER8)
++
++config POWER_ISA_3_00
++	bool "Power ISA 3.00"
++	help
++	  Target version 3.00 of the Power ISA (POWER9)
++
++endchoice
++
++endmenu
++
++source "common/Kconfig"
++
++source "drivers/Kconfig"
+diff --git a/xen/arch/ppc/Kconfig.debug b/xen/arch/ppc/Kconfig.debug
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/ppc/Makefile b/xen/arch/ppc/Makefile
+new file mode 100644
+index 0000000000..10b101cf9c
+--- /dev/null
++++ b/xen/arch/ppc/Makefile
+@@ -0,0 +1,16 @@
++obj-$(CONFIG_PPC64) += ppc64/
++
++$(TARGET): $(TARGET)-syms
++	cp -f $< $@
++
++$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
++	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) -o $@
++	$(NM) -pa --format=sysv $(@D)/$(@F) \
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
++		>$(@D)/$(@F).map
++
++$(obj)/xen.lds: $(src)/xen.lds.S FORCE
++	$(call if_changed_dep,cpp_lds_S)
++
++.PHONY: include
++include:
+diff --git a/xen/arch/ppc/Rules.mk b/xen/arch/ppc/Rules.mk
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/ppc/arch.mk b/xen/arch/ppc/arch.mk
+new file mode 100644
+index 0000000000..c185a5028a
+--- /dev/null
++++ b/xen/arch/ppc/arch.mk
+@@ -0,0 +1,11 @@
++########################################
++# Power-specific definitions
++
++ppc-march-$(CONFIG_POWER_ISA_2_07B) := power8
++ppc-march-$(CONFIG_POWER_ISA_3_00) := power9
++
++CFLAGS += -mcpu=$(ppc-march-y) -mstrict-align -mcmodel=large -mabi=elfv2 -mno-altivec -mno-vsx
++
++# TODO: Drop override when more of the build is working
++override ALL_OBJS-y = arch/$(TARGET_ARCH)/built_in.o
++override ALL_LIBS-y =
+diff --git a/xen/arch/ppc/configs/openpower_defconfig b/xen/arch/ppc/configs/openpower_defconfig
+new file mode 100644
+index 0000000000..8783eb3488
+--- /dev/null
++++ b/xen/arch/ppc/configs/openpower_defconfig
+@@ -0,0 +1,13 @@
++# CONFIG_SCHED_CREDIT is not set
++# CONFIG_SCHED_RTDS is not set
++# CONFIG_SCHED_NULL is not set
++# CONFIG_SCHED_ARINC653 is not set
++# CONFIG_TRACEBUFFER is not set
++# CONFIG_HYPFS is not set
++# CONFIG_GRANT_TABLE is not set
++# CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
++
++CONFIG_PPC64=y
++CONFIG_DEBUG=y
++CONFIG_DEBUG_INFO=y
++CONFIG_EXPERT=y
+diff --git a/xen/arch/ppc/include/asm/config.h b/xen/arch/ppc/include/asm/config.h
+new file mode 100644
+index 0000000000..7a2862ef7a
+--- /dev/null
++++ b/xen/arch/ppc/include/asm/config.h
+@@ -0,0 +1,63 @@
++#ifndef __PPC_CONFIG_H__
++#define __PPC_CONFIG_H__
++
++#include <xen/const.h>
++#include <xen/page-size.h>
++
++#if defined(CONFIG_PPC64)
++#define LONG_BYTEORDER 3
++#define ELFSIZE        64
++#define MAX_VIRT_CPUS  1024u
++#else
++#error "Unsupported PowerPC variant"
++#endif
++
++#define BYTES_PER_LONG (1 << LONG_BYTEORDER)
++#define BITS_PER_LONG  (BYTES_PER_LONG << 3)
++#define POINTER_ALIGN  BYTES_PER_LONG
++
++#define BITS_PER_LLONG 64
++
++/* xen_ulong_t is always 64 bits */
++#define BITS_PER_XEN_ULONG 64
++
++#define CONFIG_PPC_L1_CACHE_SHIFT  7
++#define CONFIG_PAGEALLOC_MAX_ORDER 18
++#define CONFIG_DOMU_MAX_ORDER      9
++#define CONFIG_HWDOM_MAX_ORDER     10
++
++#define OPT_CONSOLE_STR "dtuart"
++#define INVALID_VCPU_ID MAX_VIRT_CPUS
++
++/* Linkage for PPC */
++#ifdef __ASSEMBLY__
++#define ALIGN .align 2
++
++#define ENTRY(name)                                                            \
++    .globl name;                                                               \
++    ALIGN;                                                                     \
++    name:
++#endif
++
++#define XEN_VIRT_START _AT(UL, 0x400000)
++
++#define SMP_CACHE_BYTES (1 << 6)
++
++#define STACK_ORDER 2
++#define STACK_SIZE  (PAGE_SIZE << STACK_ORDER)
++
++/* 288 bytes below the stack pointer must be preserved by interrupt handlers */
++#define STACK_VOLATILE_AREA 288
++
++/* size of minimum stack frame; C code can write into the caller's stack */
++#define STACK_FRAME_OVERHEAD 32
++
++#endif /* __PPC_CONFIG_H__ */
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/ppc/include/asm/page-bits.h b/xen/arch/ppc/include/asm/page-bits.h
+new file mode 100644
+index 0000000000..4c01bf9716
+--- /dev/null
++++ b/xen/arch/ppc/include/asm/page-bits.h
+@@ -0,0 +1,7 @@
++#ifndef __PPC_PAGE_BITS_H__
++#define __PPC_PAGE_BITS_H__
++
++#define PAGE_SHIFT              16 /* 64 KiB Pages */
++#define PADDR_BITS              48
++
++#endif /* __PPC_PAGE_BITS_H__ */
+diff --git a/xen/arch/ppc/ppc64/Makefile b/xen/arch/ppc/ppc64/Makefile
+new file mode 100644
+index 0000000000..3340058c08
+--- /dev/null
++++ b/xen/arch/ppc/ppc64/Makefile
+@@ -0,0 +1 @@
++obj-y += head.o
+diff --git a/xen/arch/ppc/ppc64/asm-offsets.c b/xen/arch/ppc/ppc64/asm-offsets.c
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/ppc/ppc64/head.S b/xen/arch/ppc/ppc64/head.S
+new file mode 100644
+index 0000000000..e24331f95c
+--- /dev/null
++++ b/xen/arch/ppc/ppc64/head.S
+@@ -0,0 +1,27 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++.section .text.header, "ax", %progbits
++
++ENTRY(start)
++    /*
++     * Depending on how we were booted, the CPU could be running in either
++     * Little Endian or Big Endian mode. The following trampoline from Linux
++     * cleverly uses an instruction that encodes to a NOP if the CPU's
++     * endianness matches the assumption of the assembler (LE, in our case)
++     * or a branch to code that performs the endian switch in the other case.
++     */
++    tdi 0, 0, 0x48    /* Reverse endian of b . + 8          */
++    b $ + 44          /* Skip trampoline if endian is good  */
++    .long 0xa600607d  /* mfmsr r11                          */
++    .long 0x01006b69  /* xori r11,r11,1                     */
++    .long 0x00004039  /* li r10,0                           */
++    .long 0x6401417d  /* mtmsrd r10,1                       */
++    .long 0x05009f42  /* bcl 20,31,$+4                      */
++    .long 0xa602487d  /* mflr r10                           */
++    .long 0x14004a39  /* addi r10,r10,20                    */
++    .long 0xa6035a7d  /* mtsrr0 r10                         */
++    .long 0xa6037b7d  /* mtsrr1 r11                         */
++    .long 0x2400004c  /* rfid                               */
++
++    /* Now that the endianness is confirmed, continue */
++1:  b 1b
+diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+new file mode 100644
+index 0000000000..89fcdc9c00
+--- /dev/null
++++ b/xen/arch/ppc/xen.lds.S
+@@ -0,0 +1,173 @@
++#include <xen/xen.lds.h>
++
++#undef ENTRY
++#undef ALIGN
++
++OUTPUT_ARCH(powerpc:common64)
++ENTRY(start)
++
++PHDRS
++{
++    text PT_LOAD ;
++#if defined(BUILD_ID)
++    note PT_NOTE ;
++#endif
++}
++
++/**
++ * OF's base load address is 0x400000 (XEN_VIRT_START).
++ * By defining sections this way, we can keep our virtual address base at 0x400000
++ * while keeping the physical base at 0x0.
++ *
++ * Without this, OF incorrectly loads .text at 0x400000 + 0x400000 = 0x800000.
++ * Taken from x86/xen.lds.S
++ */
++#ifdef CONFIG_LD_IS_GNU
++# define DECL_SECTION(x) x : AT(ADDR(#x) - XEN_VIRT_START)
++#else
++# define DECL_SECTION(x) x : AT(ADDR(x) - XEN_VIRT_START)
++#endif
++
++SECTIONS
++{
++    . = XEN_VIRT_START;
++
++    DECL_SECTION(.text) {
++        _stext = .;            /* Text section */
++        *(.text.header)
++
++        *(.text.cold)
++        *(.text.unlikely .text.*_unlikely .text.unlikely.*)
++
++        *(.text)
++#ifdef CONFIG_CC_SPLIT_SECTIONS
++        *(.text.*)
++#endif
++
++        *(.fixup)
++        *(.gnu.warning)
++        . = ALIGN(POINTER_ALIGN);
++        _etext = .;             /* End of text section */
++    } :text
++
++    . = ALIGN(PAGE_SIZE);
++    DECL_SECTION(.rodata) {
++        _srodata = .;          /* Read-only data */
++        *(.rodata)
++        *(.rodata.*)
++        *(.data.rel.ro)
++        *(.data.rel.ro.*)
++
++        VPCI_ARRAY
++
++        . = ALIGN(POINTER_ALIGN);
++        _erodata = .;        /* End of read-only data */
++    } :text
++
++    #if defined(BUILD_ID)
++    . = ALIGN(4);
++    DECL_SECTION(.note.gnu.build-id) {
++        __note_gnu_build_id_start = .;
++        *(.note.gnu.build-id)
++        __note_gnu_build_id_end = .;
++    } :note :text
++    #endif
++    _erodata = .;                /* End of read-only data */
++
++    . = ALIGN(PAGE_SIZE);
++    DECL_SECTION(.data.ro_after_init) {
++        __ro_after_init_start = .;
++        *(.data.ro_after_init)
++        . = ALIGN(PAGE_SIZE);
++        __ro_after_init_end = .;
++    } : text
++
++    DECL_SECTION(.data.read_mostly) {
++        *(.data.read_mostly)
++    } :text
++
++    . = ALIGN(PAGE_SIZE);
++    DECL_SECTION(.data) {                    /* Data */
++        *(.data.page_aligned)
++        . = ALIGN(8);
++        __start_schedulers_array = .;
++        *(.data.schedulers)
++        __end_schedulers_array = .;
++
++        HYPFS_PARAM
++
++        *(.data .data.*)
++        CONSTRUCTORS
++    } :text
++
++    . = ALIGN(PAGE_SIZE);             /* Init code and data */
++    __init_begin = .;
++    DECL_SECTION(.init.text) {
++        _sinittext = .;
++        *(.init.text)
++        _einittext = .;
++        . = ALIGN(PAGE_SIZE);        /* Avoid mapping alt insns executable */
++    } :text
++
++    . = ALIGN(PAGE_SIZE);
++    DECL_SECTION(.init.data) {
++        *(.init.rodata)
++        *(.init.rodata.*)
++
++        . = ALIGN(POINTER_ALIGN);
++        __setup_start = .;
++        *(.init.setup)
++        __setup_end = .;
++
++        __initcall_start = .;
++        *(.initcallpresmp.init)
++        __presmp_initcall_end = .;
++        *(.initcall1.init)
++        __initcall_end = .;
++
++        LOCK_PROFILE_DATA
++
++        *(.init.data)
++        *(.init.data.rel)
++        *(.init.data.rel.*)
++
++        . = ALIGN(8);
++        __ctors_start = .;
++        *(.ctors)
++        *(.init_array)
++        *(SORT(.init_array.*))
++        __ctors_end = .;
++    } :text
++    . = ALIGN(POINTER_ALIGN);
++    __init_end = .;
++
++    DECL_SECTION(.bss) {                     /* BSS */
++        __bss_start = .;
++        *(.bss.stack_aligned)
++        . = ALIGN(PAGE_SIZE);
++        *(.bss.page_aligned)
++        . = ALIGN(PAGE_SIZE);
++        __per_cpu_start = .;
++        *(.bss.percpu.page_aligned)
++        *(.bss.percpu)
++        . = ALIGN(SMP_CACHE_BYTES);
++        *(.bss.percpu.read_mostly)
++        . = ALIGN(SMP_CACHE_BYTES);
++        __per_cpu_data_end = .;
++        *(.bss .bss.*)
++        . = ALIGN(POINTER_ALIGN);
++        __bss_end = .;
++    } :text
++    _end = . ;
++
++    /* Section for the device tree blob (if any). */
++    DECL_SECTION(.dtb) { *(.dtb) } :text
++
++    DWARF2_DEBUG_SECTIONS
++
++    DISCARD_SECTIONS
++
++    STABS_DEBUG_SECTIONS
++
++    ELF_DETAILS_SECTIONS
++}
 -- 
-Anthony PERARD
+2.30.2
+
 
