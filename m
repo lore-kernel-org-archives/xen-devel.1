@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2341EC7EE2E
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 16:13:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.547357.854695 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972A0C7EE2F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Jun 2023 16:13:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.547359.854715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8kAU-00021r-Hv; Mon, 12 Jun 2023 16:13:22 +0000
+	id 1q8kAb-0002ZE-1D; Mon, 12 Jun 2023 16:13:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 547357.854695; Mon, 12 Jun 2023 16:13:22 +0000
+Received: by outflank-mailman (output) from mailman id 547359.854715; Mon, 12 Jun 2023 16:13:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q8kAU-00021i-F2; Mon, 12 Jun 2023 16:13:22 +0000
-Received: by outflank-mailman (input) for mailman id 547357;
- Mon, 12 Jun 2023 16:13:21 +0000
+	id 1q8kAa-0002Z7-UZ; Mon, 12 Jun 2023 16:13:28 +0000
+Received: by outflank-mailman (input) for mailman id 547359;
+ Mon, 12 Jun 2023 16:13:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=abQ6=CA=citrix.com=prvs=520cb9a4c=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1q8kAT-00021a-Fh
- for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 16:13:21 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 09fa18e6-093c-11ee-b232-6b7b168915f2;
- Mon, 12 Jun 2023 18:13:18 +0200 (CEST)
+ id 1q8kAZ-00021a-FG
+ for xen-devel@lists.xenproject.org; Mon, 12 Jun 2023 16:13:27 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0fa7f518-093c-11ee-b232-6b7b168915f2;
+ Mon, 12 Jun 2023 18:13:26 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09fa18e6-093c-11ee-b232-6b7b168915f2
+X-Inumbo-ID: 0fa7f518-093c-11ee-b232-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1686586398;
+  d=citrix.com; s=securemail; t=1686586406;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=eFTZogDG8jJGUh/dvb+LH3qiXQDXhFneACQkBb0Q/Es=;
-  b=bg5kc1ZmrvtRnirllHxi81M70cExVMg0e2qUw+Fb6o+MKhtTM0Gqnpa0
-   HUUWhirQFmNb5cq6j8WMdQF5X9NA+swPX+BtUqFc6OjsjZG2WpB5NgLxo
-   /VjoHIlcS0IV5yI/oRcO6wwjsGN2I8rLPC8k66wwa4iqSTpCFHLpuOg8d
-   k=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=JSQhePAu7wLSZxBsPLSVDbChk6MZTVUce/EtRxuN6UE=;
+  b=VqKOk0WI+E2+AxOo3+931A+ulSdwxdkoOZIHtYjIWJmKwDCtnfFISALc
+   aMbg1qD0Go/GM9yfAf1XS8vz+4iCmAxyUfdaT7dKF5r2j1yjDEVy9MkI0
+   4JAA//ZuZcsdlW2nmLSdtkTnxT4kQqJKY9WzI1oP3vZhpSEn2ohdbSqBm
+   w=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 112913012
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 112508909
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Twy/iqhdSrRPQZWEQyRz7MBRX161GhAKZh0ujC45NGQN5FlHY01je
- htvWWiEaPeNMzb9fopzO9+y8U5Su5SDx9FqGgFp+SpnRCob9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
- cKai8DEMRqu1iUc3lg8sspvkzsx+qyq0N8klgZmP6sT4gaEzyN94K83fsldEVOpGuG4IcbiL
- wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
- OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
- tRFCDEUQVeMo96mxY+GS7BihZoOB/XSadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
- pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
- ziXpj+hW0ty2Nq3+SO/82mWm+zzhnnDX5ouHb+g+KdGuQjGroAUIEJPDgbqyRWjsWauVtQaJ
- 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ5sOcmSDps0
- UWG9+4FHhQ27ufTEyjEsO7J83XrY3N9wXI+iTEsECsE+vakr6UPnhfyc9c6Hq3ro/bJIGSlq
- 9yVlxTSl4n/nOZSifXlpwCc2GPxznTaZlVrv1uKBwpJ+is8Pdf4PNLwtDA3+N4adO6kok+9U
- G/ociR0xMQHFtmzmSOEW43h95n5tq/eYFUwbbOCdqTNFghBGFb5J+i8GBkkeC9U3j8sIFcFm
- nP7twJL/4N0N3C3d6JxaI/ZI510nfa9TYS5DqGMMoQmjn1NmOivpngGWKJt9zq1zBhEfV8XZ
- P93jvpA/V5FUP86nVJats8W0KMxxzBW+I8gbcmT8vhT6pLHPCT9Ye5cYDOzghURsPvsTPP9r
- 4wOaKNnCnx3DIXDX8Ug2dRDfQlXfCRhVMyeRg4+XrfrHzeK0VoJU5f5qY7NsaQ890iJvo8kJ
- k2AZ3I=
-IronPort-HdrOrdr: A9a23:n3rwrqGCQHMcLCdBpLqE7MeALOsnbusQ8zAXPhZKOHhom62j9/
- xG885x6faZslwssRIb+OxoWpPufZqGz+8R3WB5B97LYOCBggaVxepZg7cKrQeNJ8VQnNQtsp
- uJ38JFeb7N5fkRt7eZ3DWF
-X-Talos-CUID: 9a23:9BCN/W9TLDhefmW0njaVvxM0G9kKNXL58GfVHnK5UGhqFpC+dWbFrQ==
-X-Talos-MUID: 9a23:t376fgSz6G1Ez/GgRXTcnQtjL/114Ji1UngKiakPudGKbABJbmI=
+IronPort-Data: A9a23:JlpAsaO86SIlBKrvrR3fl8FynXyQoLVcMsEvi/4bfWQNrUp21DAGn
+ GEbDDjQbPbcM2ajf9AlO4/j/UIH6pTXnYNhTgto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGjxSs/rrRC9H5qyo42tG5wZmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0sBSIG1i+
+ NJEFDEMYyy4gfib3q/qE+Y506zPLOGzVG8eknRpzDWfBvc6W5HTBa7N4Le03h9p2JoIR6yHI
+ ZNEN3w2Nk+ojx5nYz/7DLoXmuuyi2a5WDpfsF+P/oI84nTJzRw327/oWDbQUoXTH5gNzhfA9
+ woq+UzBWxJdJfuj4gODySKIxd7DxSbjSKE7QejQGvlC3wTImz175ActfUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxasvBQRRt5RGO0S8xyWx+zf5APxLncAZi5MbpohrsBeeNAx/
+ gbXxZWzX2Up6eDLDyvHrd94sA9eJwAzCE4OSSIqETcE4tTfm4cpowzSH49sRfvdYsLOJd3g/
+ 9ybhHFg1+tJ3ZVQhvjTEUPv2Gz1+MWQJuIhzkCOBz/+sFskDGKwT9bwgWU3+8qsO2pworOpm
+ HEf0/aT4+kVZX1mvHzcGb5ddF1FChvsDdE9vbKMN8N7n9hV0yT/Fb28GRknTKuTDu4KeCXyf
+ GjYsh5L6ZlYMROCNPEnPd/pW5hynPC8S7wJs8w4ifIUO/BMmPKvpnkyNSZ8IUiw+KTTrU3PE
+ cjCKpv9ZZrrIa9m0CC3V48gPUwDn0gDKZfobcmjlXyPiOPODEN5vJ9ZaDNimMhltvLbyOgUm
+ v4DX/a3J+J3Cr2uO3SGrdRCcTjn7xETXPjLliCeTcbbSiIOJY3rI6a5LW8JE2C9o5loqw==
+IronPort-HdrOrdr: A9a23:PYq/paoE2I3gh82nyeqAdN0aV5oReYIsimQD101hICG9E/b1qy
+ nKpp8mPHDP5wr5NEtPpTn4AtjnfZq/z/5ICPgqXItKNTOO0AHEEGgI1/qA/9SPIVybysdtkY
+ tmbqhiGJnRIDFB/KHHCdCDYrQdKQ+8gcWVuds=
+X-Talos-CUID: 9a23:WnQU/2C9/MBkj6z6Ew9C1UI4F+55TnzcwUvrJVWVF3s4EbLAHA==
+X-Talos-MUID: 9a23:vdutSgmWka0HzMGhgT4odnpabcQv8oOSI3kLqsUi+PiIbSloKxS02WE=
 X-IronPort-AV: E=Sophos;i="6.00,236,1681185600"; 
-   d="scan'208";a="112913012"
+   d="scan'208";a="112508909"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 4/4] x86/cpu-policy: Derive RSBA/RRSBA for guest policies
-Date: Mon, 12 Jun 2023 17:13:06 +0100
-Message-ID: <20230612161306.2739572-5-andrew.cooper3@citrix.com>
+	<jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH v3 2/4] x86/spec-ctrl: Rename retpoline_safe() to retpoline_calculations()
+Date: Mon, 12 Jun 2023 17:13:04 +0100
+Message-ID: <20230612161306.2739572-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230612161306.2739572-1-andrew.cooper3@citrix.com>
 References: <20230612161306.2739572-1-andrew.cooper3@citrix.com>
@@ -93,167 +93,143 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-The RSBA bit, "RSB Alternative", means that the RSB may use alternative
-predictors when empty.  From a practical point of view, this mean "Retpoline
-not safe".
+This is prep work, split out to simply the diff on the following change.
 
-Enhanced IBRS (officially IBRS_ALL in Intel's docs, previously IBRS_ATT) is a
-statement that IBRS is implemented in hardware (as opposed to the form
-retrofitted to existing CPUs in microcode).
+ * Rename to retpoline_calculations(), and call unconditionally.  It is
+   shortly going to synthesise missing enumerations required for guest safety.
+ * For the model check switch statement, store the result in a variable and
+   break rather than returning directly.
 
-The RRSBA bit, "Restricted-RSBA", is a combination of RSBA, and the eIBRS
-property that predictions are tagged with the mode in which they were learnt.
-Therefore, it means "when eIBRS is active, the RSB may fall back to
-alternative predictors but restricted to the current prediction mode".  As
-such, it's stronger statement than RSBA, but still means "Retpoline not safe".
-
-CPUs are not expected to enumerate both RSBA and RRSBA.
-
-Add feature dependencies for EIBRS and RRSBA.  While technically they're not
-linked, absolutely nothing good can come of letting the guest see RRSBA
-without EIBRS.  Nor a guest seeing EIBRS without IBRSB.  Furthermore, we use
-this dependency to simplify the max derivation logic.
-
-The max policies gets RSBA and RRSBA unconditionally set (with the EIBRS
-dependency maybe hiding RRSBA).  We can run any VM, even if it has been told
-"somewhere you might run, Retpoline isn't safe".
-
-The default policies are more complicated.  A guest shouldn't see both bits,
-but it needs to see one if the current host suffers from any form of RSBA, and
-which bit it needs to see depends on whether eIBRS is visible or not.
-Therefore, the calculation must be performed after sanitise_featureset().
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 
-v3:
- * Minor commit message adjustment.
- * Drop changes to recalculate_cpuid_policy().  Deferred to a later series.
-
 v2:
- * Expand/adjust the comment for the max features.
- * Rewrite the default feature derivation in light of new information.
- * Fix up in recalculate_cpuid_policy() too.
+ * Extend the 'safe' variable to the entire switch statement.
 ---
- xen/arch/x86/cpu-policy.c                   | 39 +++++++++++++++++++++
- xen/include/public/arch-x86/cpufeatureset.h |  4 +--
- xen/tools/gen-cpuid.py                      |  5 ++-
- 3 files changed, 45 insertions(+), 3 deletions(-)
+ xen/arch/x86/spec_ctrl.c | 41 +++++++++++++++++++++++++---------------
+ 1 file changed, 26 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/cpu-policy.c b/xen/arch/x86/cpu-policy.c
-index ee256ff5a137..cde7f7605c28 100644
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -423,8 +423,17 @@ static void __init guest_common_max_feature_adjustments(uint32_t *fs)
-          * Retpoline not safe)", so these need to be visible to a guest in all
-          * cases, even when it's only some other server in the pool which
-          * suffers the identified behaviour.
-+         *
-+         * We can always run any VM which has previously (or will
-+         * subsequently) run on hardware where Retpoline is not safe.
-+         * Note:
-+         *  - The dependency logic may hide RRSBA for other reasons.
-+         *  - The max policy does not contitute a sensible configuration to
-+         *    run a guest in.
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 05b86edf73d3..3892ce4d20ba 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -580,9 +580,10 @@ static bool __init check_smt_enabled(void)
+ }
+ 
+ /* Calculate whether Retpoline is known-safe on this CPU. */
+-static bool __init retpoline_safe(void)
++static bool __init retpoline_calculations(void)
+ {
+     unsigned int ucode_rev = this_cpu(cpu_sig).rev;
++    bool safe = false;
+ 
+     if ( boot_cpu_data.x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
+         return true;
+@@ -620,29 +621,31 @@ static bool __init retpoline_safe(void)
+     case 0x3f: /* Haswell EX/EP */
+     case 0x45: /* Haswell D */
+     case 0x46: /* Haswell H */
+-        return true;
++        safe = true;
++        break;
+ 
+         /*
+          * Broadwell processors are retpoline-safe after specific microcode
+          * versions.
           */
-         __set_bit(X86_FEATURE_ARCH_CAPS, fs);
-+        __set_bit(X86_FEATURE_RSBA, fs);
-+        __set_bit(X86_FEATURE_RRSBA, fs);
+     case 0x3d: /* Broadwell */
+-        return ucode_rev >= 0x2a;
++        safe = ucode_rev >= 0x2a;      break;
+     case 0x47: /* Broadwell H */
+-        return ucode_rev >= 0x1d;
++        safe = ucode_rev >= 0x1d;      break;
+     case 0x4f: /* Broadwell EP/EX */
+-        return ucode_rev >= 0xb000021;
++        safe = ucode_rev >= 0xb000021; break;
+     case 0x56: /* Broadwell D */
+         switch ( boot_cpu_data.x86_mask )
+         {
+-        case 2:  return ucode_rev >= 0x15;
+-        case 3:  return ucode_rev >= 0x7000012;
+-        case 4:  return ucode_rev >= 0xf000011;
+-        case 5:  return ucode_rev >= 0xe000009;
++        case 2:  safe = ucode_rev >= 0x15;      break;
++        case 3:  safe = ucode_rev >= 0x7000012; break;
++        case 4:  safe = ucode_rev >= 0xf000011; break;
++        case 5:  safe = ucode_rev >= 0xe000009; break;
+         default:
+             printk("Unrecognised CPU stepping %#x - assuming not reptpoline safe\n",
+                    boot_cpu_data.x86_mask);
+-            return false;
++            safe = false;
++            break;
+         }
+         break;
+ 
+@@ -656,7 +659,8 @@ static bool __init retpoline_safe(void)
+     case 0x67: /* Cannonlake? */
+     case 0x8e: /* Kabylake M */
+     case 0x9e: /* Kabylake D */
+-        return false;
++        safe = false;
++        break;
+ 
+         /*
+          * Atom processors before Goldmont Plus/Gemini Lake are retpoline-safe.
+@@ -675,13 +679,17 @@ static bool __init retpoline_safe(void)
+     case 0x5c: /* Goldmont */
+     case 0x5f: /* Denverton */
+     case 0x85: /* Knights Mill */
+-        return true;
++        safe = true;
++        break;
+ 
+     default:
+         printk("Unrecognised CPU model %#x - assuming not reptpoline safe\n",
+                boot_cpu_data.x86_model);
+-        return false;
++        safe = false;
++        break;
      }
++
++    return safe;
  }
  
-@@ -532,6 +541,21 @@ static void __init calculate_pv_def_policy(void)
-     guest_common_default_feature_adjustments(fs);
+ /*
+@@ -1114,7 +1122,7 @@ void __init init_speculation_mitigations(void)
+ {
+     enum ind_thunk thunk = THUNK_DEFAULT;
+     bool has_spec_ctrl, ibrs = false, hw_smt_enabled;
+-    bool cpu_has_bug_taa;
++    bool cpu_has_bug_taa, retpoline_safe;
  
-     sanitise_featureset(fs);
-+
-+    /*
-+     * If the host suffers from RSBA of any form, and the guest can see
-+     * MSR_ARCH_CAPS, reflect the appropriate RSBA/RRSBA property to the guest
-+     * depending on the visibility of eIBRS.
-+     */
-+    if ( test_bit(X86_FEATURE_ARCH_CAPS, fs) &&
-+         (cpu_has_rsba || cpu_has_rrsba) )
-+    {
-+        bool eibrs = test_bit(X86_FEATURE_EIBRS, fs);
-+
-+        __set_bit(eibrs ? X86_FEATURE_RRSBA
-+                        : X86_FEATURE_RSBA, fs);
-+    }
-+
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
- }
-@@ -664,6 +688,21 @@ static void __init calculate_hvm_def_policy(void)
-         __set_bit(X86_FEATURE_VIRT_SSBD, fs);
+     hw_smt_enabled = check_smt_enabled();
  
-     sanitise_featureset(fs);
-+
-+    /*
-+     * If the host suffers from RSBA of any form, and the guest can see
-+     * MSR_ARCH_CAPS, reflect the appropriate RSBA/RRSBA property to the guest
-+     * depending on the visibility of eIBRS.
-+     */
-+    if ( test_bit(X86_FEATURE_ARCH_CAPS, fs) &&
-+         (cpu_has_rsba || cpu_has_rrsba) )
-+    {
-+        bool eibrs = test_bit(X86_FEATURE_EIBRS, fs);
-+
-+        __set_bit(eibrs ? X86_FEATURE_RRSBA
-+                        : X86_FEATURE_RSBA, fs);
-+    }
-+
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
- }
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index ea779c29879e..ce7407d6a10c 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -311,7 +311,7 @@ XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks s
- /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.eax, word 16 */
- XEN_CPUFEATURE(RDCL_NO,            16*32+ 0) /*A  No Rogue Data Cache Load (Meltdown) */
- XEN_CPUFEATURE(EIBRS,              16*32+ 1) /*A  Enhanced IBRS */
--XEN_CPUFEATURE(RSBA,               16*32+ 2) /*!A RSB Alternative (Retpoline not safe) */
-+XEN_CPUFEATURE(RSBA,               16*32+ 2) /*!  RSB Alternative (Retpoline not safe) */
- XEN_CPUFEATURE(SKIP_L1DFL,         16*32+ 3) /*   Don't need to flush L1D on VMEntry */
- XEN_CPUFEATURE(INTEL_SSB_NO,       16*32+ 4) /*A  No Speculative Store Bypass */
- XEN_CPUFEATURE(MDS_NO,             16*32+ 5) /*A  No Microarchitectural Data Sampling */
-@@ -327,7 +327,7 @@ XEN_CPUFEATURE(FBSDP_NO,           16*32+14) /*A  No Fill Buffer Stale Data Prop
- XEN_CPUFEATURE(PSDP_NO,            16*32+15) /*A  No Primary Stale Data Propagation */
- XEN_CPUFEATURE(FB_CLEAR,           16*32+17) /*A  Fill Buffers cleared by VERW */
- XEN_CPUFEATURE(FB_CLEAR_CTRL,      16*32+18) /*   MSR_OPT_CPU_CTRL.FB_CLEAR_DIS */
--XEN_CPUFEATURE(RRSBA,              16*32+19) /*!A Restricted RSB Alternative */
-+XEN_CPUFEATURE(RRSBA,              16*32+19) /*!  Restricted RSB Alternative */
- XEN_CPUFEATURE(BHI_NO,             16*32+20) /*A  No Branch History Injection  */
- XEN_CPUFEATURE(XAPIC_STATUS,       16*32+21) /*   MSR_XAPIC_DISABLE_STATUS */
- XEN_CPUFEATURE(OVRCLK_STATUS,      16*32+23) /*   MSR_OVERCLOCKING_STATUS */
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index 973fcc1c64e8..72cf11654ba9 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -318,7 +318,7 @@ def crunch_numbers(state):
-         # IBRSB/IBRS, and we pass this MSR directly to guests.  Treating them
-         # as dependent features simplifies Xen's logic, and prevents the guest
-         # from seeing implausible configurations.
--        IBRSB: [STIBP, SSBD, INTEL_PSFD],
-+        IBRSB: [STIBP, SSBD, INTEL_PSFD, EIBRS],
-         IBRS: [AMD_STIBP, AMD_SSBD, PSFD, AUTO_IBRS,
-                IBRS_ALWAYS, IBRS_FAST, IBRS_SAME_MODE],
-         AMD_STIBP: [STIBP_ALWAYS],
-@@ -328,6 +328,9 @@ def crunch_numbers(state):
- 
-         # The ARCH_CAPS CPUID bit enumerates the availability of the whole register.
-         ARCH_CAPS: list(range(RDCL_NO, RDCL_NO + 64)),
-+
-+        # The behaviour described by RRSBA depend on eIBRS being active.
-+        EIBRS: [RRSBA],
+@@ -1143,6 +1151,9 @@ void __init init_speculation_mitigations(void)
+             thunk = THUNK_JMP;
      }
  
-     deep_features = tuple(sorted(deps.keys()))
++    /* Determine if retpoline is safe on this CPU. */
++    retpoline_safe = retpoline_calculations();
++
+     /*
+      * Has the user specified any custom BTI mitigations?  If so, follow their
+      * instructions exactly and disable all heuristics.
+@@ -1164,7 +1175,7 @@ void __init init_speculation_mitigations(void)
+              * On all hardware, we'd like to use retpoline in preference to
+              * IBRS, but only if it is safe on this hardware.
+              */
+-            if ( retpoline_safe() )
++            if ( retpoline_safe )
+                 thunk = THUNK_RETPOLINE;
+             else if ( has_spec_ctrl )
+                 ibrs = true;
 -- 
 2.30.2
 
