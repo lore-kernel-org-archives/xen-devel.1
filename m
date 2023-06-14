@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BEDEB64D8
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jun 2023 18:04:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.549114.857478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD97EB64DB
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jun 2023 18:04:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.549117.857498 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9UqM-0005sb-Hu; Wed, 14 Jun 2023 18:03:42 +0000
+	id 1q9UqQ-0006Qc-2c; Wed, 14 Jun 2023 18:03:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 549114.857478; Wed, 14 Jun 2023 18:03:42 +0000
+Received: by outflank-mailman (output) from mailman id 549117.857498; Wed, 14 Jun 2023 18:03:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9UqM-0005sU-Ej; Wed, 14 Jun 2023 18:03:42 +0000
-Received: by outflank-mailman (input) for mailman id 549114;
- Wed, 14 Jun 2023 18:03:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q9UqP-0006QI-Ut; Wed, 14 Jun 2023 18:03:45 +0000
+Received: by outflank-mailman (input) for mailman id 549117;
+ Wed, 14 Jun 2023 18:03:44 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nA9c=CC=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1q9UqK-0005L9-NB
- for xen-devel@lists.xenproject.org; Wed, 14 Jun 2023 18:03:40 +0000
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [2607:f8b0:4864:20::f32])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c95a91c6-0add-11ee-8611-37d641c3527e;
- Wed, 14 Jun 2023 20:03:38 +0200 (CEST)
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-62de651bcf0so20024736d6.2
- for <xen-devel@lists.xenproject.org>; Wed, 14 Jun 2023 11:03:38 -0700 (PDT)
+ id 1q9UqO-0005LA-8E
+ for xen-devel@lists.xenproject.org; Wed, 14 Jun 2023 18:03:44 +0000
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [2607:f8b0:4864:20::72d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cc7940e3-0add-11ee-b232-6b7b168915f2;
+ Wed, 14 Jun 2023 20:03:43 +0200 (CEST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-75d528d0811so236863385a.0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Jun 2023 11:03:43 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
  by smtp.gmail.com with ESMTPSA id
- s5-20020a05621412c500b006262de12a8csm4851613qvv.65.2023.06.14.11.03.35
+ s5-20020a05621412c500b006262de12a8csm4851613qvv.65.2023.06.14.11.03.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jun 2023 11:03:35 -0700 (PDT)
+ Wed, 14 Jun 2023 11:03:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,112 +47,274 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c95a91c6-0add-11ee-8611-37d641c3527e
+X-Inumbo-ID: cc7940e3-0add-11ee-b232-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686765816; x=1689357816;
+        d=gmail.com; s=20221208; t=1686765822; x=1689357822;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=o5tkXnrNUw3eHjvmXo8drCoxp1uJZERpOt4e3aBqvlI=;
-        b=WfNbPQT1HJVztPPCPFYHumWFQ4f9i6Y6tO82zr5G78mf9uA5aklvR2FPBCyzFESLQv
-         HamDDASz8qUWFCp+If5uMty6mI5slouwmLtdsV+Z/wD3To1tw8w5l+U0yvu1GzWWF7qB
-         omC+MMuiNiqjmlUmT2K1td73nlWj1CyVmUThHbHTtKWcYig5dwjZzL3EUi6PaiJIc85u
-         zRDr1JhCW1j/fvWPRLJU+PFqcmHsNS2e3C9fkTEefjH/tGcPaLvZjhGNnACmDi32l2mj
-         1LRWuFsoTGiMltuqEXyNOSvA7pn7XOZs6scE45qlGB2NYCYMq1DL0/JgjFMPiE/ofZEo
-         QIBA==
+        bh=mnealSDcQ5eD4/BMHbAdAnbMLaUANznTtXLujb813pg=;
+        b=aNSOaYk5zO1KBg04VlVemwmWTnIt6/wLAeqR1wPh7xYYpSSH4qlOIMdBGatS2sXEh4
+         OcaVMqXW1jDcyxAdnVyON3c5BI+g0JwYJWyInEKwR4Bta0GBVkiORyxefZTvGQOdLvw6
+         0Is4l0/lm+JEINReuo51rkoPfx0SZTZl0wJ7wi+PDlKbEpgmHFmpx0yfCcIqFQfo34+G
+         8KwlXT14II/YNrHVOojLL8NOX9waHB2JlFSQcwWnSGo1j1HdqoTid7IiOzkGD/6BrdzA
+         RxDgez8RXmvmK4HSF5HDeyljzZfyoFSEy1aYInOzwC8J0g9yW00t5OkXRs6eE5+U1jxG
+         pETg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686765816; x=1689357816;
+        d=1e100.net; s=20221208; t=1686765822; x=1689357822;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=o5tkXnrNUw3eHjvmXo8drCoxp1uJZERpOt4e3aBqvlI=;
-        b=iTTK6LDSP6lCQvYnNHHuK2jDEznmdipTrLDOb6MgiHYWzYK3Mve6LELsd4uHGyJq8q
-         3TOx1qxajdweVizGf3gNBRzhQlGUbCG8sRC9uFzQF0erlRnQf+oWdcyeHr2NQDJ3crXv
-         s4+y6xTHcKby6CGzCH3Z3JjjKq/fDi9Tj9pQbrLMP9YgznS/b6fAS2W8gWGYKKKCkzVO
-         yDBfIzopeus5LhHZwUp4+SSyHKVFNlf8tqbPmkccB8g9N22HgvKvIOSrYNaPg2k2GnJi
-         LyzKr5ZNBNpnD4ACjFtPqeJOHjffg6fe6uEnY7l3rka+w8L8/5lE8Q5b+k8C6E3xObKo
-         NNWA==
-X-Gm-Message-State: AC+VfDw4JUqDW1ZaXVl8F3qOZsJRbg1p9q+xyFec9MSmaAv8T90BkS71
-	+uQiKvqujTvp0ad9juPqof1vlEYg/+c=
-X-Google-Smtp-Source: ACHHUZ7qj8JSis1q8yl+rMlAnzFRNgXrHEu7PaDjBjBcTiPdQNLM8Dlr3ErwVNhse3Hbf2SgHdmbUg==
-X-Received: by 2002:a05:6214:5016:b0:62f:ebc4:89bd with SMTP id jo22-20020a056214501600b0062febc489bdmr750110qvb.63.1686765816353;
-        Wed, 14 Jun 2023 11:03:36 -0700 (PDT)
+        bh=mnealSDcQ5eD4/BMHbAdAnbMLaUANznTtXLujb813pg=;
+        b=c1eA/CMvfMBuXD4Y6Y0HS8ULr1mNrJpbO+XjzbfOgxJbCbYh8jmOJUyjdfalerCJw7
+         esfdzzUBNcMxEicqGNpyVl8CAT/k7EZ+vEIJ7hvkUaarRqQed8aIPx529srSL5lva4iD
+         iZAx6ugfiQfskdacZAwn5kELK3vpxPRCDJmbGRJIP1ejAa7PHNnQCMHRkZpm9ir1LIbX
+         Sh9aFu0NO/yPiGlQO3ALnWUwEhXZcei5gq4GN28DG3wT2l654eJHExHBBjzdbFrRNyet
+         ygMrcdEYDfO+zyhDbn/3G12U02N6sEyhHvhAqN7bFPtiH6HwYon+6UOF7zYXD9MzXwVV
+         xcPQ==
+X-Gm-Message-State: AC+VfDzO+KnP78vnFk8/p6NGPZWwQgmh6JG82AtLzDFymBKBwV+MyImh
+	PFzaf9D/Xd2o9qkiTOH11/36eXP/LtE=
+X-Google-Smtp-Source: ACHHUZ7Hjc2utKPmJ0Oof45Hh1e1ert+3gNRKB/sSEHZeaA1HRXQM/ADydrx9UXqqd56EnLb+djrXA==
+X-Received: by 2002:a05:6214:2467:b0:621:17c6:2713 with SMTP id im7-20020a056214246700b0062117c62713mr9796165qvb.49.1686765821615;
+        Wed, 14 Jun 2023 11:03:41 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 02/15] cpufreq: Add perf_freq to cpuinfo
-Date: Wed, 14 Jun 2023 14:02:40 -0400
-Message-Id: <20230614180253.89958-3-jandryuk@gmail.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 04/15] xen/sysctl: Nest cpufreq scaling options
+Date: Wed, 14 Jun 2023 14:02:42 -0400
+Message-Id: <20230614180253.89958-5-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230614180253.89958-1-jandryuk@gmail.com>
 References: <20230614180253.89958-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-acpi-cpufreq scales the aperf/mperf measurements by max_freq, but HWP
-needs to scale by base frequency.  Settings max_freq to base_freq
-"works" but the code is not obvious, and returning values to userspace
-is tricky.  Add an additonal perf_freq member which is used for scaling
-aperf/mperf measurements.
+Add a union and struct so that most of the scaling variables of struct
+xen_get_cpufreq_para are within in a binary-compatible layout.  This
+allows cppc_para to live in the larger union and use uint32_ts - struct
+xen_cppc_para will be 10 uint32_t's.
+
+The new scaling struct is 3 * uint32_t + 16 bytes CPUFREQ_NAME_LEN + 4 *
+uint32_t for xen_ondemand = 11 uint32_t.  That means the old size is
+retained, int32_t turbo_enabled doesn't move and it's binary compatible.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v3:
-Add Jan's Ack
+ tools/include/xenctrl.h     | 22 +++++++++++++---------
+ tools/libs/ctrl/xc_pm.c     |  5 -----
+ tools/misc/xenpm.c          | 24 ++++++++++++------------
+ xen/drivers/acpi/pmstat.c   | 27 ++++++++++++++-------------
+ xen/include/public/sysctl.h | 22 +++++++++++++---------
+ 5 files changed, 52 insertions(+), 48 deletions(-)
 
-I don't like this, but it seems the best way to re-use the common
-aperf/mperf code.  The other option would be to add wrappers that then
-do the acpi vs. hwp scaling.
----
- xen/arch/x86/acpi/cpufreq/cpufreq.c | 2 +-
- xen/drivers/cpufreq/utility.c       | 1 +
- xen/include/acpi/cpufreq/cpufreq.h  | 3 +++
- 3 files changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 2e0067fbe5..6c70d04395 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -316,7 +316,7 @@ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag)
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index dba33d5d0f..8aedb952a0 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -1909,16 +1909,20 @@ struct xc_get_cpufreq_para {
+     uint32_t cpuinfo_cur_freq;
+     uint32_t cpuinfo_max_freq;
+     uint32_t cpuinfo_min_freq;
+-    uint32_t scaling_cur_freq;
+-
+-    char scaling_governor[CPUFREQ_NAME_LEN];
+-    uint32_t scaling_max_freq;
+-    uint32_t scaling_min_freq;
+-
+-    /* for specific governor */
+     union {
+-        xc_userspace_t userspace;
+-        xc_ondemand_t ondemand;
++        struct {
++            uint32_t scaling_cur_freq;
++
++            char scaling_governor[CPUFREQ_NAME_LEN];
++            uint32_t scaling_max_freq;
++            uint32_t scaling_min_freq;
++
++            /* for specific governor */
++            union {
++                xc_userspace_t userspace;
++                xc_ondemand_t ondemand;
++            } u;
++        } s;
+     } u;
+ 
+     int32_t turbo_enabled;
+diff --git a/tools/libs/ctrl/xc_pm.c b/tools/libs/ctrl/xc_pm.c
+index c3a9864bf7..f92542eaf7 100644
+--- a/tools/libs/ctrl/xc_pm.c
++++ b/tools/libs/ctrl/xc_pm.c
+@@ -265,15 +265,10 @@ int xc_get_cpufreq_para(xc_interface *xch, int cpuid,
+         user_para->cpuinfo_cur_freq = sys_para->cpuinfo_cur_freq;
+         user_para->cpuinfo_max_freq = sys_para->cpuinfo_max_freq;
+         user_para->cpuinfo_min_freq = sys_para->cpuinfo_min_freq;
+-        user_para->scaling_cur_freq = sys_para->scaling_cur_freq;
+-        user_para->scaling_max_freq = sys_para->scaling_max_freq;
+-        user_para->scaling_min_freq = sys_para->scaling_min_freq;
+         user_para->turbo_enabled    = sys_para->turbo_enabled;
+ 
+         memcpy(user_para->scaling_driver,
+                 sys_para->scaling_driver, CPUFREQ_NAME_LEN);
+-        memcpy(user_para->scaling_governor,
+-                sys_para->scaling_governor, CPUFREQ_NAME_LEN);
+ 
+         /* copy to user_para no matter what cpufreq governor */
+         BUILD_BUG_ON(sizeof(((struct xc_get_cpufreq_para *)0)->u) !=
+diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
+index 1bb6187e56..ee8ce5d5f2 100644
+--- a/tools/misc/xenpm.c
++++ b/tools/misc/xenpm.c
+@@ -730,39 +730,39 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
+     printf("scaling_avail_gov    : %s\n",
+            p_cpufreq->scaling_available_governors);
+ 
+-    printf("current_governor     : %s\n", p_cpufreq->scaling_governor);
+-    if ( !strncmp(p_cpufreq->scaling_governor,
++    printf("current_governor     : %s\n", p_cpufreq->u.s.scaling_governor);
++    if ( !strncmp(p_cpufreq->u.s.scaling_governor,
+                   "userspace", CPUFREQ_NAME_LEN) )
+     {
+         printf("  userspace specific :\n");
+         printf("    scaling_setspeed : %u\n",
+-               p_cpufreq->u.userspace.scaling_setspeed);
++               p_cpufreq->u.s.u.userspace.scaling_setspeed);
+     }
+-    else if ( !strncmp(p_cpufreq->scaling_governor,
++    else if ( !strncmp(p_cpufreq->u.s.scaling_governor,
+                        "ondemand", CPUFREQ_NAME_LEN) )
+     {
+         printf("  ondemand specific  :\n");
+         printf("    sampling_rate    : max [%u] min [%u] cur [%u]\n",
+-               p_cpufreq->u.ondemand.sampling_rate_max,
+-               p_cpufreq->u.ondemand.sampling_rate_min,
+-               p_cpufreq->u.ondemand.sampling_rate);
++               p_cpufreq->u.s.u.ondemand.sampling_rate_max,
++               p_cpufreq->u.s.u.ondemand.sampling_rate_min,
++               p_cpufreq->u.s.u.ondemand.sampling_rate);
+         printf("    up_threshold     : %u\n",
+-               p_cpufreq->u.ondemand.up_threshold);
++               p_cpufreq->u.s.u.ondemand.up_threshold);
+     }
+ 
+     printf("scaling_avail_freq   :");
+     for ( i = 0; i < p_cpufreq->freq_num; i++ )
+         if ( p_cpufreq->scaling_available_frequencies[i] ==
+-             p_cpufreq->scaling_cur_freq )
++             p_cpufreq->u.s.scaling_cur_freq )
+             printf(" *%d", p_cpufreq->scaling_available_frequencies[i]);
+         else
+             printf(" %d", p_cpufreq->scaling_available_frequencies[i]);
+     printf("\n");
+ 
+     printf("scaling frequency    : max [%u] min [%u] cur [%u]\n",
+-           p_cpufreq->scaling_max_freq,
+-           p_cpufreq->scaling_min_freq,
+-           p_cpufreq->scaling_cur_freq);
++           p_cpufreq->u.s.scaling_max_freq,
++           p_cpufreq->u.s.scaling_min_freq,
++           p_cpufreq->u.s.scaling_cur_freq);
+ 
+     printf("turbo mode           : %s\n",
+            p_cpufreq->turbo_enabled ? "enabled" : "disabled or n/a");
+diff --git a/xen/drivers/acpi/pmstat.c b/xen/drivers/acpi/pmstat.c
+index 1bae635101..f5a9ac3f1a 100644
+--- a/xen/drivers/acpi/pmstat.c
++++ b/xen/drivers/acpi/pmstat.c
+@@ -258,37 +258,38 @@ static int get_cpufreq_para(struct xen_sysctl_pm_op *op)
+         cpufreq_driver.get ? cpufreq_driver.get(op->cpuid) : policy->cur;
+     op->u.get_para.cpuinfo_max_freq = policy->cpuinfo.max_freq;
+     op->u.get_para.cpuinfo_min_freq = policy->cpuinfo.min_freq;
+-    op->u.get_para.scaling_cur_freq = policy->cur;
+-    op->u.get_para.scaling_max_freq = policy->max;
+-    op->u.get_para.scaling_min_freq = policy->min;
++
++    op->u.get_para.u.s.scaling_cur_freq = policy->cur;
++    op->u.get_para.u.s.scaling_max_freq = policy->max;
++    op->u.get_para.u.s.scaling_min_freq = policy->min;
+ 
+     if ( cpufreq_driver.name[0] )
+-        strlcpy(op->u.get_para.scaling_driver, 
++        strlcpy(op->u.get_para.scaling_driver,
+             cpufreq_driver.name, CPUFREQ_NAME_LEN);
      else
-         perf_percent = 0;
+         strlcpy(op->u.get_para.scaling_driver, "Unknown", CPUFREQ_NAME_LEN);
  
--    return policy->cpuinfo.max_freq * perf_percent / 100;
-+    return policy->cpuinfo.perf_freq * perf_percent / 100;
- }
+     if ( policy->governor->name[0] )
+-        strlcpy(op->u.get_para.scaling_governor, 
++        strlcpy(op->u.get_para.u.s.scaling_governor,
+             policy->governor->name, CPUFREQ_NAME_LEN);
+     else
+-        strlcpy(op->u.get_para.scaling_governor, "Unknown", CPUFREQ_NAME_LEN);
++        strlcpy(op->u.get_para.u.s.scaling_governor, "Unknown", CPUFREQ_NAME_LEN);
  
- static unsigned int cf_check get_cur_freq_on_cpu(unsigned int cpu)
-diff --git a/xen/drivers/cpufreq/utility.c b/xen/drivers/cpufreq/utility.c
-index 9eb7ecedcd..6831f62851 100644
---- a/xen/drivers/cpufreq/utility.c
-+++ b/xen/drivers/cpufreq/utility.c
-@@ -236,6 +236,7 @@ int cpufreq_frequency_table_cpuinfo(struct cpufreq_policy *policy,
+     /* governor specific para */
+-    if ( !strncasecmp(op->u.get_para.scaling_governor,
++    if ( !strncasecmp(op->u.get_para.u.s.scaling_governor,
+                       "userspace", CPUFREQ_NAME_LEN) )
+     {
+-        op->u.get_para.u.userspace.scaling_setspeed = policy->cur;
++        op->u.get_para.u.s.u.userspace.scaling_setspeed = policy->cur;
+     }
  
-     policy->min = policy->cpuinfo.min_freq = min_freq;
-     policy->max = policy->cpuinfo.max_freq = max_freq;
-+    policy->cpuinfo.perf_freq = max_freq;
-     policy->cpuinfo.second_max_freq = second_max_freq;
+-    if ( !strncasecmp(op->u.get_para.scaling_governor,
++    if ( !strncasecmp(op->u.get_para.u.s.scaling_governor,
+                       "ondemand", CPUFREQ_NAME_LEN) )
+     {
+         ret = get_cpufreq_ondemand_para(
+-            &op->u.get_para.u.ondemand.sampling_rate_max,
+-            &op->u.get_para.u.ondemand.sampling_rate_min,
+-            &op->u.get_para.u.ondemand.sampling_rate,
+-            &op->u.get_para.u.ondemand.up_threshold);
++            &op->u.get_para.u.s.u.ondemand.sampling_rate_max,
++            &op->u.get_para.u.s.u.ondemand.sampling_rate_min,
++            &op->u.get_para.u.s.u.ondemand.sampling_rate,
++            &op->u.get_para.u.s.u.ondemand.up_threshold);
+     }
+     op->u.get_para.turbo_enabled = cpufreq_get_turbo_status(op->cpuid);
  
-     if (policy->min == ~0)
-diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
-index 1c0872506a..e2e03b8bd7 100644
---- a/xen/include/acpi/cpufreq/cpufreq.h
-+++ b/xen/include/acpi/cpufreq/cpufreq.h
-@@ -37,6 +37,9 @@ extern struct acpi_cpufreq_data *cpufreq_drv_data[NR_CPUS];
- struct cpufreq_cpuinfo {
-     unsigned int        max_freq;
-     unsigned int        second_max_freq;    /* P1 if Turbo Mode is on */
-+    unsigned int        perf_freq; /* Scaling freq for aperf/mpref.
-+                                      acpi-cpufreq uses max_freq, but HWP uses
-+                                      base_freq.*/
-     unsigned int        min_freq;
-     unsigned int        transition_latency; /* in 10^(-9) s = nanoseconds */
- };
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 9d06e92d0f..bdcea99d71 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -317,16 +317,20 @@ struct xen_get_cpufreq_para {
+     uint32_t cpuinfo_cur_freq;
+     uint32_t cpuinfo_max_freq;
+     uint32_t cpuinfo_min_freq;
+-    uint32_t scaling_cur_freq;
+-
+-    char scaling_governor[CPUFREQ_NAME_LEN];
+-    uint32_t scaling_max_freq;
+-    uint32_t scaling_min_freq;
+-
+-    /* for specific governor */
+     union {
+-        struct  xen_userspace userspace;
+-        struct  xen_ondemand ondemand;
++        struct {
++            uint32_t scaling_cur_freq;
++
++            char scaling_governor[CPUFREQ_NAME_LEN];
++            uint32_t scaling_max_freq;
++            uint32_t scaling_min_freq;
++
++            /* for specific governor */
++            union {
++                struct  xen_userspace userspace;
++                struct  xen_ondemand ondemand;
++            } u;
++        } s;
+     } u;
+ 
+     int32_t turbo_enabled;
 -- 
 2.40.1
 
