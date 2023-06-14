@@ -4,44 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E2CEB64D9
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jun 2023 07:35:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.548506.856488 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9941EB64DA
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jun 2023 07:42:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.548534.856508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9L2J-0007si-4I; Wed, 14 Jun 2023 07:35:23 +0000
+	id 1q9L8u-0001rp-6Q; Wed, 14 Jun 2023 07:42:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 548506.856488; Wed, 14 Jun 2023 07:35:23 +0000
+Received: by outflank-mailman (output) from mailman id 548534.856508; Wed, 14 Jun 2023 07:42:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9L2I-0007sb-W8; Wed, 14 Jun 2023 07:35:22 +0000
-Received: by outflank-mailman (input) for mailman id 548506;
- Wed, 14 Jun 2023 07:35:22 +0000
+	id 1q9L8u-0001ri-3b; Wed, 14 Jun 2023 07:42:12 +0000
+Received: by outflank-mailman (input) for mailman id 548534;
+ Wed, 14 Jun 2023 07:42:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=h8JF=CC=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1q9L2I-0007aV-AA
- for xen-devel@lists.xenproject.org; Wed, 14 Jun 2023 07:35:22 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [2001:67c:2178:6::1d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 03f7a4a0-0a86-11ee-8611-37d641c3527e;
- Wed, 14 Jun 2023 09:35:20 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3C98C1FD6A;
- Wed, 14 Jun 2023 07:35:20 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DA9731391E;
- Wed, 14 Jun 2023 07:35:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id EWQDNLdtiWRVHwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 14 Jun 2023 07:35:19 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=cXBM=CC=arm.com=peter.hoyes@srs-se1.protection.inumbo.net>)
+ id 1q9L8t-0001bG-9N
+ for xen-devel@lists.xenproject.org; Wed, 14 Jun 2023 07:42:11 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id f75dd4a3-0a86-11ee-8611-37d641c3527e;
+ Wed, 14 Jun 2023 09:42:08 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D7EF81FB;
+ Wed, 14 Jun 2023 00:42:52 -0700 (PDT)
+Received: from e125920.cambridge.arm.com (e125920.cambridge.arm.com
+ [10.1.199.64])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5FBA93F663;
+ Wed, 14 Jun 2023 00:42:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,142 +45,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03f7a4a0-0a86-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1686728120; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jKTmIuG44BdSii87EddLytcEKZcOQpLokCYRhdq7cjM=;
-	b=oIvCas+cd9SDP91Ts9iEvkChPfeGhwMxFt/iaiZ5ygGF17F6cJ/XiH08XzsYKrHT8MXhtk
-	6itKTL5e3Mx72I9S8uNCXhCl8VGkXe5kOsPCRfg2k1Uwuc9pmmZN713yyAOvhkzO+oqPPr
-	l4PHceSRrfbdCugCtHRe4hhYqyrrFUc=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: Arnd Bergmann <arnd@arndb.de>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v4 2/2] x86: xen: add missing prototypes
-Date: Wed, 14 Jun 2023 09:35:01 +0200
-Message-Id: <20230614073501.10101-3-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20230614073501.10101-1-jgross@suse.com>
-References: <20230614073501.10101-1-jgross@suse.com>
+X-Inumbo-ID: f75dd4a3-0a86-11ee-8611-37d641c3527e
+From: Peter Hoyes <peter.hoyes@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Peter Hoyes <Peter.Hoyes@arm.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH 2/2] xl: Add escape character argument to xl console
+Date: Wed, 14 Jun 2023 08:41:44 +0100
+Message-Id: <20230614074144.3505250-2-peter.hoyes@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230614074144.3505250-1-peter.hoyes@arm.com>
+References: <20230614074144.3505250-1-peter.hoyes@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Arnd Bergmann <arnd@arndb.de>
+From: Peter Hoyes <Peter.Hoyes@arm.com>
 
-These function are all called from assembler files, or from inline
-assembler, so there is no immediate need for a prototype in a header,
-but if -Wmissing-prototypes is enabled, the compiler warns about them:
+Add -e argument to xl console and pass to new escape_character argument
+of libxl_console_exec.
 
-arch/x86/xen/efi.c:130:13: error: no previous prototype for 'xen_efi_init' [-Werror=missing-prototypes]
-arch/x86/platform/pvh/enlighten.c:120:13: error: no previous prototype for 'xen_prepare_pvh' [-Werror=missing-prototypes]
-arch/x86/xen/enlighten_pv.c:1233:34: error: no previous prototype for 'xen_start_kernel' [-Werror=missing-prototypes]
-arch/x86/xen/irq.c:22:14: error: no previous prototype for 'xen_force_evtchn_callback' [-Werror=missing-prototypes]
-arch/x86/entry/common.c:302:24: error: no previous prototype for 'xen_pv_evtchn_do_upcall' [-Werror=missing-prototypes]
+In libxl_console_exec, there are currently two call sites to execl,
+which uses varargs, in order to support optionally passing
+'start-notify-fd' to the console client. In order to support passing
+the 'escape' argument optionally too, refactor to instead have a single
+call site to execv, which has the same behavior but takes an array of
+arguments.
 
-Declare all of them in an appropriate header file to avoid the warnings.
-For consistency, also move the asm_cpu_bringup_and_idle() declaration
-out of smp_pv.c.
+If -e is not specified, --escape is not passed to the console client and
+the existing value (^]) is used as a default.
 
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Issue-Id: SCM-4958
+Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
+Change-Id: I80ffbb7fecc63e023ec1c7f1e4ad7979ccf8da44
 ---
-v4: [jgross]: remove some stubs, carve out mmu_pv.c prototypes into
-    other patch
-v3: move declations of conditional function in an #ifdef with a stub
-v2: fix up changelog
----
- arch/x86/xen/efi.c     | 2 ++
- arch/x86/xen/smp.h     | 4 ++++
- arch/x86/xen/smp_pv.c  | 1 -
- arch/x86/xen/xen-ops.h | 3 +++
- include/xen/xen.h      | 3 +++
- 5 files changed, 12 insertions(+), 1 deletion(-)
+ tools/include/libxl.h            |  8 ++++++--
+ tools/libs/light/libxl_console.c | 30 ++++++++++++++++++++++--------
+ tools/xl/xl_cmdtable.c           |  3 ++-
+ tools/xl/xl_console.c            | 10 +++++++---
+ tools/xl/xl_vmcontrol.c          |  2 +-
+ 5 files changed, 38 insertions(+), 15 deletions(-)
 
-diff --git a/arch/x86/xen/efi.c b/arch/x86/xen/efi.c
-index 7d7ffb9c826a..863d0d6b3edc 100644
---- a/arch/x86/xen/efi.c
-+++ b/arch/x86/xen/efi.c
-@@ -16,6 +16,8 @@
- #include <asm/setup.h>
- #include <asm/xen/hypercall.h>
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index cac641a7eb..c513c39483 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1958,7 +1958,8 @@ int libxl_vncviewer_exec(libxl_ctx *ctx, uint32_t domid, int autopass);
+  * the caller that it has connected to the guest console.
+  */
+ int libxl_console_exec(libxl_ctx *ctx, uint32_t domid, int cons_num,
+-                       libxl_console_type type, int notify_fd);
++                       libxl_console_type type, int notify_fd,
++                       char* escape_character);
+ /* libxl_primary_console_exec finds the domid and console number
+  * corresponding to the primary console of the given vm, then calls
+  * libxl_console_exec with the right arguments (domid might be different
+@@ -1968,9 +1969,12 @@ int libxl_console_exec(libxl_ctx *ctx, uint32_t domid, int cons_num,
+  * guests using pygrub.
+  * If notify_fd is not -1, xenconsole will write 0x00 to it to nofity
+  * the caller that it has connected to the guest console.
++ * If escape_character is not NULL, the provided value is used to exit
++ * the guest console.
+  */
+ int libxl_primary_console_exec(libxl_ctx *ctx, uint32_t domid_vm,
+-                               int notify_fd);
++                               int notify_fd,
++                               char* escape_character);
  
-+#include "xen-ops.h"
-+
- static efi_char16_t vendor[100] __initdata;
+ #if defined(LIBXL_API_VERSION) && LIBXL_API_VERSION < 0x040800
  
- static efi_system_table_t efi_systab_xen __initdata = {
-diff --git a/arch/x86/xen/smp.h b/arch/x86/xen/smp.h
-index 22fb982ff971..c20cbb14c82b 100644
---- a/arch/x86/xen/smp.h
-+++ b/arch/x86/xen/smp.h
-@@ -2,6 +2,10 @@
- #ifndef _XEN_SMP_H
+diff --git a/tools/libs/light/libxl_console.c b/tools/libs/light/libxl_console.c
+index f497be141b..0b7293fe71 100644
+--- a/tools/libs/light/libxl_console.c
++++ b/tools/libs/light/libxl_console.c
+@@ -52,7 +52,8 @@ out:
+ }
  
- #ifdef CONFIG_SMP
-+
-+void asm_cpu_bringup_and_idle(void);
-+asmlinkage void cpu_bringup_and_idle(void);
-+
- extern void xen_send_IPI_mask(const struct cpumask *mask,
- 			      int vector);
- extern void xen_send_IPI_mask_allbutself(const struct cpumask *mask,
-diff --git a/arch/x86/xen/smp_pv.c b/arch/x86/xen/smp_pv.c
-index a9cf8c8fa074..9ccf9759870d 100644
---- a/arch/x86/xen/smp_pv.c
-+++ b/arch/x86/xen/smp_pv.c
-@@ -55,7 +55,6 @@ static DEFINE_PER_CPU(struct xen_common_irq, xen_irq_work) = { .irq = -1 };
- static DEFINE_PER_CPU(struct xen_common_irq, xen_pmu_irq) = { .irq = -1 };
- 
- static irqreturn_t xen_irq_work_interrupt(int irq, void *dev_id);
--void asm_cpu_bringup_and_idle(void);
- 
- static void cpu_bringup(void)
+ int libxl_console_exec(libxl_ctx *ctx, uint32_t domid, int cons_num,
+-                       libxl_console_type type, int notify_fd)
++                       libxl_console_type type, int notify_fd,
++                       char* escape_character)
  {
-diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
-index a10903785a33..1bbbe216e6e1 100644
---- a/arch/x86/xen/xen-ops.h
-+++ b/arch/x86/xen/xen-ops.h
-@@ -148,9 +148,12 @@ int xen_cpuhp_setup(int (*cpu_up_prepare_cb)(unsigned int),
- void xen_pin_vcpu(int cpu);
+     GC_INIT(ctx);
+     char *p = GCSPRINTF("%s/xenconsole", libxl__private_bindir_path());
+@@ -75,15 +76,26 @@ int libxl_console_exec(libxl_ctx *ctx, uint32_t domid, int cons_num,
+         goto out;
+     }
  
- void xen_emergency_restart(void);
-+void xen_force_evtchn_callback(void);
++    char *args[] = {
++        p, domid_s, "--num", cons_num_s, "--type", cons_type_s,
++        NULL, NULL, NULL, NULL, // start-notify-fd, escape
++        NULL, // list terminator - do not use
++    };
++    char **args_extra = args + 6;
 +
- #ifdef CONFIG_XEN_PV
- void xen_pv_pre_suspend(void);
- void xen_pv_post_suspend(int suspend_cancelled);
-+void xen_start_kernel(struct start_info *si);
- #else
- static inline void xen_pv_pre_suspend(void) {}
- static inline void xen_pv_post_suspend(int suspend_cancelled) {}
-diff --git a/include/xen/xen.h b/include/xen/xen.h
-index 0efeb652f9b8..f989162983c3 100644
---- a/include/xen/xen.h
-+++ b/include/xen/xen.h
-@@ -31,6 +31,9 @@ extern uint32_t xen_start_flags;
+     if (notify_fd != -1) {
+         notify_fd_s = GCSPRINTF("%d", notify_fd);
+-        execl(p, p, domid_s, "--num", cons_num_s, "--type", cons_type_s,
+-              "--start-notify-fd", notify_fd_s, (void *)NULL);
+-    } else {
+-        execl(p, p, domid_s, "--num", cons_num_s, "--type", cons_type_s,
+-              (void *)NULL);
++        *args_extra++ = "--start-notify-fd";
++        *args_extra++ = notify_fd_s;
+     }
  
- #include <xen/interface/hvm/start_info.h>
- extern struct hvm_start_info pvh_start_info;
-+void xen_prepare_pvh(void);
-+struct pt_regs;
-+void xen_pv_evtchn_do_upcall(struct pt_regs *regs);
++    if (escape_character) {
++        *args_extra++ = "--escape";
++        *args_extra++ = escape_character;
++    }
++
++    execv(p, args);
++
+ out:
+     GC_FREE;
+     return ERROR_FAIL;
+@@ -156,7 +168,8 @@ out:
+     return rc;
+ }
  
- #ifdef CONFIG_XEN_DOM0
- #include <xen/interface/xen.h>
+-int libxl_primary_console_exec(libxl_ctx *ctx, uint32_t domid_vm, int notify_fd)
++int libxl_primary_console_exec(libxl_ctx *ctx, uint32_t domid_vm, int notify_fd,
++                               char* escape_character)
+ {
+     uint32_t domid;
+     int cons_num;
+@@ -165,7 +178,8 @@ int libxl_primary_console_exec(libxl_ctx *ctx, uint32_t domid_vm, int notify_fd)
+ 
+     rc = libxl__primary_console_find(ctx, domid_vm, &domid, &cons_num, &type);
+     if ( rc ) return rc;
+-    return libxl_console_exec(ctx, domid, cons_num, type, notify_fd);
++    return libxl_console_exec(ctx, domid, cons_num, type, notify_fd,
++                              escape_character);
+ }
+ 
+ int libxl_primary_console_get_tty(libxl_ctx *ctx, uint32_t domid_vm,
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index ccf4d83584..67604e9536 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -141,7 +141,8 @@ const struct cmd_spec cmd_table[] = {
+       "Attach to domain's console",
+       "[options] <Domain>\n"
+       "-t <type>       console type, pv , serial or vuart\n"
+-      "-n <number>     console number"
++      "-n <number>     console number\n"
++      "-e <escape>     escape character"
+     },
+     { "vncviewer",
+       &main_vncviewer, 0, 0,
+diff --git a/tools/xl/xl_console.c b/tools/xl/xl_console.c
+index b27f9e0136..5633c6f6f7 100644
+--- a/tools/xl/xl_console.c
++++ b/tools/xl/xl_console.c
+@@ -28,8 +28,9 @@ int main_console(int argc, char **argv)
+     int opt = 0, num = 0;
+     libxl_console_type type = 0;
+     const char *console_names = "pv, serial, vuart";
++    char* escape_character = NULL;
+ 
+-    SWITCH_FOREACH_OPT(opt, "n:t:", NULL, "console", 1) {
++    SWITCH_FOREACH_OPT(opt, "n:t:e:", NULL, "console", 1) {
+     case 't':
+         if (!strcmp(optarg, "pv"))
+             type = LIBXL_CONSOLE_TYPE_PV;
+@@ -45,13 +46,16 @@ int main_console(int argc, char **argv)
+     case 'n':
+         num = atoi(optarg);
+         break;
++    case 'e':
++        escape_character = optarg;
++        break;
+     }
+ 
+     domid = find_domain(argv[optind]);
+     if (!type)
+-        libxl_primary_console_exec(ctx, domid, -1);
++        libxl_primary_console_exec(ctx, domid, -1, escape_character);
+     else
+-        libxl_console_exec(ctx, domid, num, type, -1);
++        libxl_console_exec(ctx, domid, num, type, -1, escape_character);
+     fprintf(stderr, "Unable to attach console\n");
+     return EXIT_FAILURE;
+ }
+diff --git a/tools/xl/xl_vmcontrol.c b/tools/xl/xl_vmcontrol.c
+index 5518c78dc6..03971927e9 100644
+--- a/tools/xl/xl_vmcontrol.c
++++ b/tools/xl/xl_vmcontrol.c
+@@ -643,7 +643,7 @@ static void autoconnect_console(libxl_ctx *ctx_ignored,
+     postfork();
+ 
+     sleep(1);
+-    libxl_primary_console_exec(ctx, bldomid, notify_fd);
++    libxl_primary_console_exec(ctx, bldomid, notify_fd, NULL);
+     /* Do not return. xl continued in child process */
+     perror("xl: unable to exec console client");
+     _exit(1);
 -- 
-2.35.3
+2.34.1
 
 
