@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF53EEB64D9
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:48:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.549718.858431 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17DF4EB64DD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:48:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.549716.858405 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDI-000799-Gf; Thu, 15 Jun 2023 15:48:44 +0000
+	id 1q9pDG-0006Uy-Q1; Thu, 15 Jun 2023 15:48:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 549718.858431; Thu, 15 Jun 2023 15:48:44 +0000
+Received: by outflank-mailman (output) from mailman id 549716.858405; Thu, 15 Jun 2023 15:48:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDI-00077B-BT; Thu, 15 Jun 2023 15:48:44 +0000
-Received: by outflank-mailman (input) for mailman id 549718;
- Thu, 15 Jun 2023 15:48:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1q9pDG-0006Tx-Ln; Thu, 15 Jun 2023 15:48:42 +0000
+Received: by outflank-mailman (input) for mailman id 549716;
+ Thu, 15 Jun 2023 15:48:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IrMH=CD=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1q9pDG-0006RS-HC
- for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:48:42 +0000
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [2a00:1450:4864:20::32e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a3a6748-0b94-11ee-b232-6b7b168915f2;
- Thu, 15 Jun 2023 17:48:41 +0200 (CEST)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-3f8d176396bso19742675e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:48:41 -0700 (PDT)
+ id 1q9pDF-0006RY-CJ
+ for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:48:41 +0000
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [2a00:1450:4864:20::431])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 189f4e00-0b94-11ee-8611-37d641c3527e;
+ Thu, 15 Jun 2023 17:48:39 +0200 (CEST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-30c4c1fd511so7560183f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- e10-20020a056000194a00b0030497b3224bsm21374699wry.64.2023.06.15.08.48.40
+ e10-20020a056000194a00b0030497b3224bsm21374699wry.64.2023.06.15.08.48.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jun 2023 08:48:40 -0700 (PDT)
+ Thu, 15 Jun 2023 08:48:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a3a6748-0b94-11ee-b232-6b7b168915f2
+X-Inumbo-ID: 189f4e00-0b94-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1686844121; x=1689436121;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PygkzDMarvKkBrBEGn4BWQS9IKMe1k1LLgAi19GYhP8=;
-        b=HPzd4Zyex9as+U9ydNDI3tGQtwRCTB7c7d5MjHU1IH8Z7jJhGrRWMjIL7+bYYRmPZi
-         2/FVV3+PCcnsuD4nA9pUUZsazPWwBkfMA/NyyuLkbZLgWUjkwPp2kJke7eW5lmbkBPvr
-         9KVvJBUONVVNh0pyhy8zuMWPCpTfUYh2u/Ubk=
+        d=cloud.com; s=cloud; t=1686844118; x=1689436118;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WqvJ9lDw5wAI+BX6sbDIqPcE8HO42JuEoFJ4XXLoAX4=;
+        b=XYU46Ecf8oPKWIAttJRbkJIDmE7B4Mgbs+t0+mp19FWdQeVacmPVbbxPq4bYIWWOUD
+         7fMtacvHGoDNXqzaYw8r1vx3Z7MMc4CfpJXm58qvUjsog5po8NpX/ChfP9w/QYm3fl+P
+         4rMzRT8TjSjqWa8IKunrv2TIOePWWyaqiG2bk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686844121; x=1689436121;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PygkzDMarvKkBrBEGn4BWQS9IKMe1k1LLgAi19GYhP8=;
-        b=X/Krc+wz3zqFs9MHSjFlwCKPF5DQ0pGE45nsl7nBR1+R8T8QsSuN1zuyrkVlZmP2ZA
-         r6AE6PrxpbSoX6E6Bh5pTBTvTsL4fOXvEXF9kcJ4I5HC6CoBM49FS3aObEZnnecNeIkq
-         qw2RR9M4J1bCAU/sqNzRQIqQZhPq2zlhCN5BUxbx0EbVV71Wj0FkyPMZ3Mdh66mzd/mB
-         YdQuLPVf6ZEbuq/29G+zCd86+sVODiOIiFwBc/GExDBUvqPtlU/BGekpqMho0/c5irHb
-         m2HNhvx/eNIcuLfap0KIfi/ZBEZ6i58sucGO037LlzRamF6eqiRWCmd0Htm7DHkD9U7V
-         e8Uw==
-X-Gm-Message-State: AC+VfDxaGYxmAhKomM9SgnlLQ8rMBNqNtKDprWU0DVomBWPBfshKZvB/
-	K5Y0633ZclIfaqlebGIwWwPo0jBv5EIv5jcs/AM=
-X-Google-Smtp-Source: ACHHUZ7u+G2JRXo+ew0FlGXSbGfZJGVxMwXLRreh9PhyU0vbxEMYOMEJcEb2FgtgArGvvYTQMrt1/w==
-X-Received: by 2002:a5d:6b0f:0:b0:311:17ae:ddbf with SMTP id v15-20020a5d6b0f000000b0031117aeddbfmr1615595wrw.51.1686844121294;
-        Thu, 15 Jun 2023 08:48:41 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1686844118; x=1689436118;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WqvJ9lDw5wAI+BX6sbDIqPcE8HO42JuEoFJ4XXLoAX4=;
+        b=PYV9BW+h20XfMyMjj1+sp52ybRBhyXfiU/slt7A/ue2PWe6NGqzXbYxAPg4uc42oIZ
+         fwQ61Nz8EAzXzmy+Iduf4Gc0aIO/NXMZF00C6EG6oZmVLJWUiqdYJ0xO7FveQCZeDsBk
+         UMTCkN1o7BBmIElRrSTc3EvUQhuJ+cFN2z6XhcbCIaiVongBF7RP0DCY3T9uzv5ozMO+
+         Fn57HYRjhvBRNcKFpzbZeBMj0QsbzJWoaFzk6re0BuNTfjfTP5BNUjhi6t9r+u5yS4FF
+         bCRIVDdTbEqZrB5pAxjcMYtkX9j5yDdGr5o0955jiRf4LT//znNswFyhZirnkgrFGLDC
+         1vDw==
+X-Gm-Message-State: AC+VfDyuIdVc3X33X3OceNSQDe2mXYm8vLd4tdGFDAVHqpaO/uM/tcPz
+	A6/53RnmDYa8m5nS72OzJgbfVFDdfB/D0yrhK2I=
+X-Google-Smtp-Source: ACHHUZ5m4IR9l1MMO7wl+JUYZSl8XJRtMh12kHAJgktepYIzPRZ9w4YiZ8UVQ9d0uAk4BIKUSEqlXA==
+X-Received: by 2002:a5d:54d2:0:b0:311:13a7:2d87 with SMTP id x18-20020a5d54d2000000b0031113a72d87mr2122511wrv.66.1686844118433;
+        Thu, 15 Jun 2023 08:48:38 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -81,85 +80,66 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 4/5] x86: Read MSR_ARCH_CAPS immediately after early_microcode_init()
-Date: Thu, 15 Jun 2023 16:48:33 +0100
-Message-Id: <20230615154834.959-5-alejandro.vallejo@cloud.com>
+Subject: [PATCH v2 0/5] Prevent attempting updates known to fail
+Date: Thu, 15 Jun 2023 16:48:29 +0100
+Message-Id: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230615154834.959-1-alejandro.vallejo@cloud.com>
-References: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move MSR_ARCH_CAPS read code from tsx_init() to immediately after the
-early microcode update. This helps keep the reload closer to its cause
-and is the earliest point we can read it, as it might be exposed only after
-a microcode update.
-
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
 v3:
-  * Replaces v2/patch2. Moved after the "rev == ~0" check (Andrew)
----
- xen/arch/x86/cpu/microcode/core.c | 13 +++++++++++++
- xen/arch/x86/tsx.c                | 15 +++------------
- 2 files changed, 16 insertions(+), 12 deletions(-)
+  * Lots of hunks moved around. Individually mentioned in each patch
+  * Removed a redundant check
+  * Ignore microcode interface if the revision is -1
+  * Perform the DIS_MCU_LOAD checks during init rather than apply time
 
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 1554fa38eb..ef3c94018c 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -879,5 +879,18 @@ int __init early_microcode_init(unsigned long *module_map,
-     if ( ucode_mod.mod_end || ucode_blob.size )
-         rc = early_microcode_update_cpu();
- 
-+    /*
-+     * We might have exposed MSR_ARCH_CAPS after the microcode update.
-+     * Reload relevant fields in boot_cpu_data if so because they are
-+     * needed in tsx_init()
-+     */
-+    if ( boot_cpu_data.cpuid_level >= 7 )
-+        boot_cpu_data.x86_capability[FEATURESET_7d0]
-+            = cpuid_count_edx(7, 0);
-+    if ( cpu_has_arch_caps )
-+        rdmsr(MSR_ARCH_CAPABILITIES,
-+              boot_cpu_data.x86_capability[FEATURESET_m10Al],
-+              boot_cpu_data.x86_capability[FEATURESET_m10Ah]);
-+
-     return rc;
- }
-diff --git a/xen/arch/x86/tsx.c b/xen/arch/x86/tsx.c
-index 80c6f4cedd..11e9471180 100644
---- a/xen/arch/x86/tsx.c
-+++ b/xen/arch/x86/tsx.c
-@@ -39,9 +39,9 @@ void tsx_init(void)
-     static bool __read_mostly once;
- 
-     /*
--     * This function is first called between microcode being loaded, and CPUID
--     * being scanned generally.  Read into boot_cpu_data.x86_capability[] for
--     * the cpu_has_* bits we care about using here.
-+     * This function is first called between microcode being loaded, and
-+     * CPUID being scanned generally. early_microcode_init() has already
-+     * prepared the feature bits needed here after the microcode update.
-      */
-     if ( unlikely(!once) )
-     {
-@@ -49,15 +49,6 @@ void tsx_init(void)
- 
-         once = true;
- 
--        if ( boot_cpu_data.cpuid_level >= 7 )
--            boot_cpu_data.x86_capability[FEATURESET_7d0]
--                = cpuid_count_edx(7, 0);
--
--        if ( cpu_has_arch_caps )
--            rdmsr(MSR_ARCH_CAPABILITIES,
--                  boot_cpu_data.x86_capability[FEATURESET_m10Al],
--                  boot_cpu_data.x86_capability[FEATURESET_m10Ah]);
--
-         has_rtm_always_abort = cpu_has_rtm_always_abort;
- 
-         if ( cpu_has_tsx_ctrl && cpu_has_srbds_ctrl )
+
+Under certain conditions a CPU may not be able to perform microcode updates
+even if hardware exists to that effect. In particular:
+
+ * If Xen runs under certain hypervisors they won't allow microcode
+   updates, and will signal this fact by reporting a microcode revision of
+   -1.
+ * If the DIS_MCU_LOAD bit is set, which is expected in some baremetal
+   clouds where the owner may not trust the tenant, then the CPU is not
+   capable of loading new microcode.
+
+This series adds logic so that in both of these cases we don't needlessly
+attempt updates that are not going to succeed. Patch summary:
+
+Patch 1 Does the refactors to allow collecting cpu info on systems with
+        microcode updates disabled
+
+Patch 2 Isolates early_microcode_init() per-vendor logic in per-vendor
+        functions
+
+Patch 3 Recognizes microcode revision of -1 as a hint meaning "don't use the
+        microcode interface".
+
+Patch 4 Moves the MSR_ARCH_CAPS read from tsx_init() to
+        early_microcode_init()
+
+Patch 5 Adds the logic to detect microcode updates being disabled on Intel.
+
+Alejandro Vallejo (5):
+  x86/microcode: Allow reading microcode revision even if it can't be
+    updated
+  x86/microcode: Create per-vendor microcode_ops builders
+  x86/microcode: Ignore microcode loading interface for revision = -1
+  x86: Read MSR_ARCH_CAPS immediately after early_microcode_init()
+  x86/microcode: Disable microcode update handler if DIS_MCU_UPDATE is
+    set
+
+ xen/arch/x86/cpu/common.c             |  5 ++++
+ xen/arch/x86/cpu/microcode/amd.c      | 16 +++++++----
+ xen/arch/x86/cpu/microcode/core.c     | 41 ++++++++++++++++++++-------
+ xen/arch/x86/cpu/microcode/intel.c    | 27 ++++++++++++++----
+ xen/arch/x86/cpu/microcode/private.h  | 19 ++++++++++++-
+ xen/arch/x86/include/asm/cpufeature.h |  1 +
+ xen/arch/x86/include/asm/msr-index.h  |  5 ++++
+ xen/arch/x86/tsx.c                    | 15 ++--------
+ 8 files changed, 93 insertions(+), 36 deletions(-)
+
 -- 
 2.34.1
 
