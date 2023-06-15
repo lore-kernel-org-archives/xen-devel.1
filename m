@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86571C0015E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:48:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.549717.858410 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 739B7EB64D9
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:57:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.549743.858460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDH-0006b7-2k; Thu, 15 Jun 2023 15:48:43 +0000
+	id 1q9pL5-0002K2-AG; Thu, 15 Jun 2023 15:56:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 549717.858410; Thu, 15 Jun 2023 15:48:43 +0000
+Received: by outflank-mailman (output) from mailman id 549743.858460; Thu, 15 Jun 2023 15:56:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDG-0006a1-Vg; Thu, 15 Jun 2023 15:48:42 +0000
-Received: by outflank-mailman (input) for mailman id 549717;
- Thu, 15 Jun 2023 15:48:42 +0000
+	id 1q9pL5-0002Jv-7m; Thu, 15 Jun 2023 15:56:47 +0000
+Received: by outflank-mailman (input) for mailman id 549743;
+ Thu, 15 Jun 2023 15:56:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IrMH=CD=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1q9pDG-0006RY-29
- for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:48:42 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
+ id 1q9pL3-0002Jp-NH
+ for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:56:45 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 194a138e-0b94-11ee-8611-37d641c3527e;
- Thu, 15 Jun 2023 17:48:40 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-307d20548adso5971786f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:48:40 -0700 (PDT)
-Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
+ id 39546dd9-0b95-11ee-8611-37d641c3527e;
+ Thu, 15 Jun 2023 17:56:43 +0200 (CEST)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3094910b150so7923084f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:56:43 -0700 (PDT)
+Received: from EMEAENGAAD19049. (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- e10-20020a056000194a00b0030497b3224bsm21374699wry.64.2023.06.15.08.48.39
+ cs6-20020a056000088600b0030ae849c70csm21409966wrb.37.2023.06.15.08.56.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
+ Thu, 15 Jun 2023 08:56:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,171 +47,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 194a138e-0b94-11ee-8611-37d641c3527e
+X-Inumbo-ID: 39546dd9-0b95-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1686844119; x=1689436119;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hW/Gx0/gWuVvgcbydVmma7SPTfd/FqCS3V8cKgHysUU=;
-        b=euaZ9xVkCiDKzfJx4HtgNdKwXIAAMf/7Yr0O8yib05CeCA4cKaMQ3innKj8xLI5li+
-         oggIbJRLorHhk910Vnv6+EjP36br8jWjjeYd6ZO8SskaPuOrRtq4lZwcnPxs2KA84vt5
-         gKsv/9J8B04YWqs3b4wLLKnuw4QD6bln6oL+k=
+        d=cloud.com; s=cloud; t=1686844603; x=1689436603;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=zr4rFd+Ly2V6JooMMPLRSfzkA3i6Yeh7UUEOOrn55Ls=;
+        b=RbUk1mPTNV3DsUHmhSSQXLObhGw191TZaMVy4ie0bKQLIU7mTqKBHbbSQRvo7irA0H
+         +BBtkpOdtY9pAqAO1Tax/EeAYvPIbGAuX0Qxck1w8Mvyo+9csH9PXiI2RX1bN+Uxxoi1
+         vqbB/UlUxT3g5/SgKxgWahFQ6XG4O5D0tPTy4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686844119; x=1689436119;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hW/Gx0/gWuVvgcbydVmma7SPTfd/FqCS3V8cKgHysUU=;
-        b=UbrIV8S/Dr/CKWZ4Xwsia0aR05tevhdYoe/4HikpyX6yHHwLUdW9TDpkzUUmb7FS8s
-         V/gUW6b6GK2inP9Aff03SbEzyqtTA2yHHtGTCCUjtaSf5h/v6UOo66mIoaqSOtKoKsbL
-         7/Dano0JChBvjPeMPRNq3B7rQtZG9ASfoObGe1zSbGUiacPjXyTCjWrPyxoZZlVLvZFu
-         2ZAofYiec0hz/n/8Vd6pShqeA/1CL25vVISu1xv7VZfgotBXZtMeVwzju4rYUdNL5yj9
-         mcr3FpmhY8cG+wrgyrjK85BmG1VkuOZ5xojirzpR6i0i/wZd46grPf9q+19F9AKLCGbq
-         /rFA==
-X-Gm-Message-State: AC+VfDyDaSb6mjwLJ1yvWK4FfizmwFEB1U8u1doQTKfVk8TpstpDuOxa
-	+ImzMbenyKkRFWbjNn7cYLf7luJLSxmNsRI9uTI=
-X-Google-Smtp-Source: ACHHUZ4Z9FQLS5JRGxg0W/2DYdAKIjM0uoPCaHcxYEAGtC3t9TVrbUiMZmdnhBXDUnQSiJpPEC+6eQ==
-X-Received: by 2002:a5d:4e05:0:b0:304:8149:239b with SMTP id p5-20020a5d4e05000000b003048149239bmr10956632wrt.50.1686844119748;
-        Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1686844603; x=1689436603;
+        h=in-reply-to:content-disposition:mime-version:references:subject:cc
+         :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zr4rFd+Ly2V6JooMMPLRSfzkA3i6Yeh7UUEOOrn55Ls=;
+        b=WP/fqUmd5KP6wOcdHIOWIgMT1mfADqHty8/16Vc6IiEzEjHio8jklYPlYfU/xkALpF
+         iydx4EQ3gr5pLyZ8mTNs7qQhQb4Ef+Jg0SvWqg4xx4u++wIZfLFgvWT9ZbxEkQGvBXvW
+         iBuRz+d2wHbql6CYfF0GFdsO4CDZVFKq/3nFnLkjMlbwBLrmDNZOFSg0Fh+Wr1rbnYiE
+         sZq2UQOzXoAWcB949hCy7Whn+haGW8W+I8WfUrWyXRpko0iA8IVeXnFKzySLXPH+bsT6
+         gY/WLRKxqgZM8p1/qXOmFqkt14LEFK/a8dgpYC7O/D3CEq0pxpEsrCoHylZsItsbVrlT
+         hhrg==
+X-Gm-Message-State: AC+VfDwcL6G3gY0X/gBe73HC52CZWVoFg26fpQs8tBGp2fIzCj4DLMgO
+	sG004e8gH8bUgMNXjhDCMSpJV2jLdJ8UiWdu92g=
+X-Google-Smtp-Source: ACHHUZ5r9W81j6+Fx8RTTpn3JZ2H2d9UoCyUUkOE4mdGd2thP64oRaHDGqvM7kBpM0hW40xW8KL4VA==
+X-Received: by 2002:a5d:678e:0:b0:30f:c2a3:6281 with SMTP id v14-20020a5d678e000000b0030fc2a36281mr8838498wru.64.1686844602837;
+        Thu, 15 Jun 2023 08:56:42 -0700 (PDT)
+Message-ID: <648b34ba.050a0220.770ef.1a02@mx.google.com>
+X-Google-Original-Message-ID: <ZIs0t7+hZcQDWO7u@EMEAENGAAD19049.>
+Date: Thu, 15 Jun 2023 16:56:39 +0100
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 2/5] x86/microcode: Create per-vendor microcode_ops builders
-Date: Thu, 15 Jun 2023 16:48:31 +0100
-Message-Id: <20230615154834.959-3-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230615154834.959-1-alejandro.vallejo@cloud.com>
+Subject: Re: [PATCH v2 0/5] Prevent attempting updates known to fail
 References: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 
-Replace the ucode_ops assignments in core.c for per-vendor calls.
-This is in preparation for another patch that adds Intel-specific
-conditions.
+On Thu, Jun 15, 2023 at 04:48:29PM +0100, Alejandro Vallejo wrote:
+> v3:
+>   * Lots of hunks moved around. Individually mentioned in each patch
+>   * Removed a redundant check
+>   * Ignore microcode interface if the revision is -1
+>   * Perform the DIS_MCU_LOAD checks during init rather than apply time
 
-While moving the code around, also remove the family check on Intel, as
-microcode loading is present on every Intel 64 machine.
+You might think that looks a whole lot like the enumeration in v2, and
+you'd be right :) . I sent this ahead of time and that's incorrect. The
+actual summary is:
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
-v3:
-  * Subsumes v2/patch1
-  * Removes previous long comment on rationale for skipping family checks (Jan/Andrew)
-  * Isolates vendor-specific code in ${VENDOR}.c (Jan, from v2/patch4)
----
- xen/arch/x86/cpu/microcode/amd.c     | 16 ++++++++++------
- xen/arch/x86/cpu/microcode/core.c    | 10 +++-------
- xen/arch/x86/cpu/microcode/intel.c   | 13 +++++++------
- xen/arch/x86/cpu/microcode/private.h | 19 ++++++++++++++++++-
- 4 files changed, 38 insertions(+), 20 deletions(-)
+  * Lots of hunks moved around. Individually mentioned in each patch
+  * MSR_ARCH_CAPS read in early_cpu_init()
+  * Per-vendor functions used to encapsulate vendor-specific logic in
+    early_microcode_init()
+  * Inlined previous helper for realoading 7d0
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index a9a5557835..7c9f311454 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -432,9 +432,13 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-     return patch;
- }
- 
--const struct microcode_ops __initconst_cf_clobber amd_ucode_ops = {
--    .cpu_request_microcode            = cpu_request_microcode,
--    .collect_cpu_info                 = collect_cpu_info,
--    .apply_microcode                  = apply_microcode,
--    .compare_patch                    = compare_patch,
--};
-+void __init amd_get_ucode_ops(struct microcode_ops *ops)
-+{
-+    if ( boot_cpu_data.x86 < 0x10 )
-+        return;
-+
-+    ops->cpu_request_microcode = cpu_request_microcode;
-+    ops->collect_cpu_info      = collect_cpu_info;
-+    ops->apply_microcode       = apply_microcode;
-+    ops->compare_patch         = compare_patch;
-+}
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index df7e1df870..530e3e8267 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -845,19 +845,15 @@ static int __init early_microcode_update_cpu(void)
- int __init early_microcode_init(unsigned long *module_map,
-                                 const struct multiboot_info *mbi)
- {
--    const struct cpuinfo_x86 *c = &boot_cpu_data;
-     int rc = 0;
- 
--    switch ( c->x86_vendor )
-+    switch ( boot_cpu_data.x86_vendor )
-     {
-     case X86_VENDOR_AMD:
--        if ( c->x86 >= 0x10 )
--            ucode_ops = amd_ucode_ops;
-+        amd_get_ucode_ops(&ucode_ops);
-         break;
--
-     case X86_VENDOR_INTEL:
--        if ( c->x86 >= 6 )
--            ucode_ops = intel_ucode_ops;
-+        intel_get_ucode_ops(&ucode_ops);
-         break;
-     }
- 
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 8d4d6574aa..a99e402b98 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -385,9 +385,10 @@ static struct microcode_patch *cf_check cpu_request_microcode(
-     return patch;
- }
- 
--const struct microcode_ops __initconst_cf_clobber intel_ucode_ops = {
--    .cpu_request_microcode            = cpu_request_microcode,
--    .collect_cpu_info                 = collect_cpu_info,
--    .apply_microcode                  = apply_microcode,
--    .compare_patch                    = compare_patch,
--};
-+void __init intel_get_ucode_ops(struct microcode_ops *ops)
-+{
-+    ops->cpu_request_microcode = cpu_request_microcode;
-+    ops->collect_cpu_info      = collect_cpu_info;
-+    ops->apply_microcode       = apply_microcode;
-+    ops->compare_patch         = compare_patch;
-+}
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index 626aeb4d08..13f0c7fb8e 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -60,6 +60,23 @@ struct microcode_ops {
-         const struct microcode_patch *new, const struct microcode_patch *old);
- };
- 
--extern const struct microcode_ops amd_ucode_ops, intel_ucode_ops;
-+/**
-+ * Retrieve the vendor-specific microcode management handlers
-+ *
-+ * Note that this is not an static set of handlers and may change from
-+ * system to system depending on the presence of certain runtime features.
-+ * even for the same 
-+ *
-+ *   - If the system has no microcode facilities, no handler is set.
-+ *   - If the system has unrestricted microcode facilities, all handlers
-+ *     are set
-+ *   - If the system has microcode facilities, but they can't be used to
-+ *     update the revision, then all handlers except for apply_microcode()
-+ *     are set
-+ *
-+ * @param[out] ops Set of vendor-specific microcode handlers to overwrite
-+ */
-+void intel_get_ucode_ops(struct microcode_ops *ops);
-+void amd_get_ucode_ops(struct microcode_ops *ops);
- 
- #endif /* ASM_X86_MICROCODE_PRIVATE_H */
--- 
-2.34.1
+It addresses most concerns raised, but the final look is a bit different
+from what was reviewed before. I think it's a lot cleaner and allows future
+per-vendor logic to be neatly integrated into their per-vendor files.
 
+Alejandro
 
