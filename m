@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FADC3DA40
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:48:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.549719.858436 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E80EEB64DC
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jun 2023 15:48:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.549715.858401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDI-0007Eo-Tm; Thu, 15 Jun 2023 15:48:44 +0000
+	id 1q9pDG-0006Rq-IA; Thu, 15 Jun 2023 15:48:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 549719.858436; Thu, 15 Jun 2023 15:48:44 +0000
+Received: by outflank-mailman (output) from mailman id 549715.858401; Thu, 15 Jun 2023 15:48:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1q9pDI-0007Dv-Nj; Thu, 15 Jun 2023 15:48:44 +0000
-Received: by outflank-mailman (input) for mailman id 549719;
- Thu, 15 Jun 2023 15:48:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1q9pDG-0006Rj-E0; Thu, 15 Jun 2023 15:48:42 +0000
+Received: by outflank-mailman (input) for mailman id 549715;
+ Thu, 15 Jun 2023 15:48:40 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IrMH=CD=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1q9pDH-0006RY-2C
- for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:48:43 +0000
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [2a00:1450:4864:20::429])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 19d816cf-0b94-11ee-8611-37d641c3527e;
- Thu, 15 Jun 2023 17:48:41 +0200 (CEST)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-30aea656e36so5973964f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:48:41 -0700 (PDT)
+ id 1q9pDE-0006RS-Kd
+ for xen-devel@lists.xenproject.org; Thu, 15 Jun 2023 15:48:40 +0000
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [2a00:1450:4864:20::32f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 18e765e1-0b94-11ee-b232-6b7b168915f2;
+ Thu, 15 Jun 2023 17:48:39 +0200 (CEST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3f7fcdc7f7fso7359415e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
 Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
  [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- e10-20020a056000194a00b0030497b3224bsm21374699wry.64.2023.06.15.08.48.39
+ e10-20020a056000194a00b0030497b3224bsm21374699wry.64.2023.06.15.08.48.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
+ Thu, 15 Jun 2023 08:48:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,33 +47,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19d816cf-0b94-11ee-8611-37d641c3527e
+X-Inumbo-ID: 18e765e1-0b94-11ee-b232-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1686844120; x=1689436120;
+        d=cloud.com; s=cloud; t=1686844119; x=1689436119;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WnBLCpBRw4FnACMA6JimLolA7wsQAmylgXv84AWmx3g=;
-        b=EOe8C24/Hha9iJPhezP4egK6yCdGlX22P+KZyztDJ1gAfauTk3KiSU/GAMWBWK/1OZ
-         7qTMvvNL+03KOvJ8cUg3QS2mBasXeHqgaak5RsqyPmUdu4PDFgdfTAYKPg/rn1y6Q8T0
-         oXdfp8NqNEcWCUGVNavjXvUlL2XvW+Tvy40SI=
+        bh=lhal1etJcoQVv2Xj28gXUSWBqPiytpkGg3ZC25OkTWA=;
+        b=CJKdztpwLwg32RhJ+fc1jM+0mM9Fs37dYwmugnDGjfuYVNyiVEjIn6s/GpP6t1BWuz
+         I4n7Ve2H+GU1HlVDbkcd7/8KgNRpkYRuN7ZvUOqDeMW0DGTc2jOhnO69XwGF+g6SpSpu
+         LrLDwGG1DB+o49pWoHInDSRqHyhdfexDUOj7o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686844120; x=1689436120;
+        d=1e100.net; s=20221208; t=1686844119; x=1689436119;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=WnBLCpBRw4FnACMA6JimLolA7wsQAmylgXv84AWmx3g=;
-        b=l8Yk9n1mYWfU6h3/M0xYvpmo5Vq1po8xKr/8PApokvmlCjOQG7jUm+iOAbeFxtd2rz
-         Bg7DFDuGFgzYh8wASVzriuLzkx0v9MeHAPanT1v8EkRW8FH7SuMhmt30SdP9Yh/48o+o
-         zRatikvZ0e7jdrSL/eWBNhDrVtpwIaHIq2OisXMx7cwNXK5vrd/0z/KdZjfgq/lBJG17
-         l83jXb21Sonj4L8qr2xo4aGgybiaFCF0g9lTxMKVWzbiZbu/QPUYEDCvuu12cv8vfwgZ
-         yAOnGq1avEyAyqVnkH6tVdO0ivYUDVCdyqfrjWEMJ87u3qUyREILitEvgm1ZPVXJSLp+
-         d98g==
-X-Gm-Message-State: AC+VfDx7kOvAbbKsf4lVySchq8UfQDyv9Y8N1JvHaoyFQrKlWkSMhdYN
-	RonMDNSyVOy5nHFNj7ahqYp0tJBa2OMSHZb33Oc=
-X-Google-Smtp-Source: ACHHUZ7xfYEs4frXBMKRcOHNEZ4p3qSPH+O9sVU0knfUAn3HS5x+N+3ZXdmYbnu/CAb/i7aBM0xL7g==
-X-Received: by 2002:adf:eb8d:0:b0:309:1532:8287 with SMTP id t13-20020adfeb8d000000b0030915328287mr11785575wrn.19.1686844120373;
-        Thu, 15 Jun 2023 08:48:40 -0700 (PDT)
+        bh=lhal1etJcoQVv2Xj28gXUSWBqPiytpkGg3ZC25OkTWA=;
+        b=TmYzwuLiPq4qF60dlx2kjgX3zCG4/yVvgr4Oe24aWcW830Sn8NGbhI+O4u3X2rg3wg
+         aRsihOMPTsPjlc8Cdh9pCRKrKkwnKiHuj/cXuOn3UtNyzCPBirJ9uJJWWJFofY1Xux2r
+         J0+eHphD8vmYblzRKkody8qnLLTKSWgXO6RCbNpRUpIyI9nLG03fTYph13HOGo+DsZa+
+         QekI8vi6v6vMVzSwS0eETjQ6jiOHgQkK8h9PavXcY5PQqqUozOLE7xVuU5ct+Vm2iXqd
+         iSjRvkt+0joDUwiqxd9n1DzXPHBa2KBLBXMNympYHOA/2dLErBrhLxfDKBAzYUrF40fb
+         ly3g==
+X-Gm-Message-State: AC+VfDxMkHB9boxkFJYVDW5wrf8bkWjsHsOnAYN0KSxDhDxQigoct0DR
+	7w9LdsWY0jD+X2+zUiD5DgU9Okn9qLMLKgtdOYU=
+X-Google-Smtp-Source: ACHHUZ5pk6DdQICbIzSsGjHZ33b6KNwddueizS4fOfbWOZhYaSWZLU0xq3PVlUBAFWdH0aoj2vDItg==
+X-Received: by 2002:a5d:4687:0:b0:30f:ba3a:85c5 with SMTP id u7-20020a5d4687000000b0030fba3a85c5mr4532927wrq.25.1686844119084;
+        Thu, 15 Jun 2023 08:48:39 -0700 (PDT)
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
@@ -81,45 +81,66 @@ Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/5] x86/microcode: Ignore microcode loading interface for revision = -1
-Date: Thu, 15 Jun 2023 16:48:32 +0100
-Message-Id: <20230615154834.959-4-alejandro.vallejo@cloud.com>
+Subject: [PATCH v3 1/5] x86/microcode: Allow reading microcode revision even if it can't be updated
+Date: Thu, 15 Jun 2023 16:48:30 +0100
+Message-Id: <20230615154834.959-2-alejandro.vallejo@cloud.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 References: <20230615154834.959-1-alejandro.vallejo@cloud.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some hypervisors report ~0 as the microcode revision to mean "don't issue
-microcode updates". Ignore the microcode loading interface in that case.
+The code currently assumes all microcode handlers are set or none are. That
+won't be the case in a future patch, as apply_microcode() may not be set
+while the others are. Hence, this patch allows reading the microcode
+revision even if updating it is unavailable.
 
 Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 ---
 v3:
-  * Moved from v2/patch3 (Andrew)
+  * Hunks taken from v2/patch4 (Jan)
 ---
- xen/arch/x86/cpu/microcode/core.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ xen/arch/x86/cpu/microcode/core.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 530e3e8267..1554fa38eb 100644
+index e65af4b82e..df7e1df870 100644
 --- a/xen/arch/x86/cpu/microcode/core.c
 +++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -860,6 +860,14 @@ int __init early_microcode_init(unsigned long *module_map,
-     if ( ucode_ops.collect_cpu_info )
-         ucode_ops.collect_cpu_info();
+@@ -750,11 +750,12 @@ __initcall(microcode_init);
+ /* Load a cached update to current cpu */
+ int microcode_update_one(void)
+ {
++    if ( ucode_ops.collect_cpu_info )
++        alternative_vcall(ucode_ops.collect_cpu_info);
++
+     if ( !ucode_ops.apply_microcode )
+         return -EOPNOTSUPP;
  
-+    /*
-+     * Some hypervisors deliberately report a microcode revision of -1 to
-+     * mean that they will not accept microcode updates. We take the hint
-+     * and ignore the microcode interface in that case.
-+     */
-+    if ( this_cpu(cpu_sig).rev == ~0 )
-+        ucode_ops.apply_microcode = NULL;
+-    alternative_vcall(ucode_ops.collect_cpu_info);
+-
+     return microcode_update_cpu(NULL);
+ }
+ 
+@@ -860,6 +861,9 @@ int __init early_microcode_init(unsigned long *module_map,
+         break;
+     }
+ 
++    if ( ucode_ops.collect_cpu_info )
++        ucode_ops.collect_cpu_info();
 +
      if ( !ucode_ops.apply_microcode )
      {
          printk(XENLOG_WARNING "Microcode loading not available\n");
+@@ -868,8 +872,6 @@ int __init early_microcode_init(unsigned long *module_map,
+ 
+     microcode_grab_module(module_map, mbi);
+ 
+-    ucode_ops.collect_cpu_info();
+-
+     if ( ucode_mod.mod_end || ucode_blob.size )
+         rc = early_microcode_update_cpu();
+ 
 -- 
 2.34.1
 
