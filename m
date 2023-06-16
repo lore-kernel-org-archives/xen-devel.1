@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55126EB64D7
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 13:20:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.550227.859209 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBE1EB64D7
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 14:19:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.550257.859234 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qA9N1-0000rm-PD; Fri, 16 Jun 2023 13:20:07 +0000
+	id 1qAAIH-0008Pv-IB; Fri, 16 Jun 2023 14:19:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 550227.859209; Fri, 16 Jun 2023 13:20:07 +0000
+Received: by outflank-mailman (output) from mailman id 550257.859234; Fri, 16 Jun 2023 14:19:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qA9N1-0000qc-Ix; Fri, 16 Jun 2023 13:20:07 +0000
-Received: by outflank-mailman (input) for mailman id 550227;
- Fri, 16 Jun 2023 13:20:06 +0000
+	id 1qAAIH-0008Po-FV; Fri, 16 Jun 2023 14:19:17 +0000
+Received: by outflank-mailman (input) for mailman id 550257;
+ Fri, 16 Jun 2023 14:19:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uwsx=CE=citrix.com=prvs=524b7acb3=roger.pau@srs-se1.protection.inumbo.net>)
- id 1qA9FQ-0002qy-37
- for xen-devel@lists.xenproject.org; Fri, 16 Jun 2023 13:12:16 +0000
+ id 1qAAIF-0008Pi-KI
+ for xen-devel@lists.xenproject.org; Fri, 16 Jun 2023 14:19:16 +0000
 Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
  [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6726d063-0c47-11ee-8611-37d641c3527e;
- Fri, 16 Jun 2023 15:12:12 +0200 (CEST)
-Received: from mail-sn1nam02lp2043.outbound.protection.outlook.com (HELO
- NAM02-SN1-obe.outbound.protection.outlook.com) ([104.47.57.43])
+ id c2034d75-0c50-11ee-8611-37d641c3527e;
+ Fri, 16 Jun 2023 16:19:10 +0200 (CEST)
+Received: from mail-dm6nam12lp2173.outbound.protection.outlook.com (HELO
+ NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.173])
  by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Jun 2023 09:12:09 -0400
+ 16 Jun 2023 10:19:01 -0400
 Received: from SJ0PR03MB6423.namprd03.prod.outlook.com (2603:10b6:a03:38d::21)
- by PH0PR03MB5736.namprd03.prod.outlook.com (2603:10b6:510:37::12)
+ by SJ2PR03MB7110.namprd03.prod.outlook.com (2603:10b6:a03:4fd::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.27; Fri, 16 Jun
- 2023 13:12:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.25; Fri, 16 Jun
+ 2023 14:18:53 +0000
 Received: from SJ0PR03MB6423.namprd03.prod.outlook.com
  ([fe80::ab2a:a298:bacb:db47]) by SJ0PR03MB6423.namprd03.prod.outlook.com
  ([fe80::ab2a:a298:bacb:db47%2]) with mapi id 15.20.6477.037; Fri, 16 Jun 2023
- 13:12:06 +0000
+ 14:18:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,587 +51,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6726d063-0c47-11ee-8611-37d641c3527e
+X-Inumbo-ID: c2034d75-0c50-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1686921132;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=GZpr78/jfVQj+rN1NN3ev3EOcCzUwsdsDYWFHWDJN/s=;
-  b=h+/MITMEn8Bo/ANbwyHFP+JkDrg8jcPijWNtYqQZ8YH3BENX/8gALHrx
-   NnG4LXMP8kYeKDzXtGCbiYklgBzUBezKPjmGe7GOGsU9nagmUgpW3yzrx
-   uhUXanBpTMWwZJ60RzcW1Gfv83Ovdkky0bl1ivaDCLYs6GmSGEs7OpMkY
-   I=;
-X-IronPort-RemoteIP: 104.47.57.43
-X-IronPort-MID: 115608599
+  d=citrix.com; s=securemail; t=1686925150;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=LoGNBidYuDMD601mu4KlZfZlBuYRVPKeoHr4p2pQcMQ=;
+  b=bc3zIY6cw8TCRvbZVVkonPsOv7SljbWXgiLg0bZ3kYRwdTZ5LuHuNErN
+   MSfztoUs8mMXIXM0o7yru3JKfXgdATfZLqCZBvWAk9YsHuGyXj3kCGGZ1
+   Ozj6E+oVpB0H9FFXkTN1nM4A2/VEeXdKUJQtpNcf1X5/NwrgIg91sRl/T
+   8=;
+X-IronPort-RemoteIP: 104.47.59.173
+X-IronPort-MID: 115617747
 X-IronPort-Reputation: None
 X-IronPort-Listener: OutboundMail
 X-IronPort-SenderGroup: RELAY_O365
 X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:JYSpGa8Rqhy+pGg0Q8DqDrUDpX+TJUtcMsCJ2f8bNWPcYEJGY0x3x
- 2FKC2qHMv6KMWWjKNokYN619U8H6JbSz9EwSAZl/C08E34SpcT7XtnIdU2Y0wF+jCHgZBk+s
- 5hBMImowOQcFCK0SsKFa+C5xZVE/fjUAOG6UKicYXoZqTZMEE8JkQhkl/MynrlmiN24BxLlk
- d7pqojUNUTNNwRcawr40Ird7ks31BjOkGlA5AdmO6kV5AW2e0Q9V/rzG4ngdxMUfaEMdgKKb
- 76r5K20+Grf4yAsBruN+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+v9T2M4nQVVWk120c+VZk
- 72hg3ASpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn9IBDJyCAWlvVbD09NqbDkkJ1
- t8RIQAVbimnrOS2xouwErZUn+E8eZyD0IM34hmMzBn/JNN+G9X4ZfyP4tVVmjAtmspJAPDSI
- dIDbiZiZwjBZBsJPUoLDJU5n6GjgXyXnz9w8QrJ4/ZopTWMilAquFTuGIO9ltiiX8Jak1zev
- mvb12/4HgsbJJqUzj/tHneE37aSw3urBdNDfFG+3sdaoESKyWsKMhA5U0rhr/Plq0C8VusKf
- iT4/QJr98De7neDXtT7GhG1vnOAlhodQMZLVf037hmXzajZ6BrfAXILJhZebPQ2uclwQiYlv
- neLkMnuHidHq6CORDSW8bL8kN+pES0cLGtHfildSwIAu4PnuNtr0kmJSct/GqmoiNGzASv33
- z2BsCk5gfMUkNIP0KK4u1vAhlpAu6T0c+L83S2PNkrN0++zTNTNi1CAgbQD0ct9EQ==
-IronPort-HdrOrdr: A9a23:0KvKT6xQ0xvfQr8YNi5kKrPw4b1zdoMgy1knxilNoHxuGPBw8P
- re+cjztCWE6gr5N0tNpTntAsa9qBDnhP1ICOsqXItKNTOO0AaVxelZhrcKqAeBJ8SRzIBgPa
- cLSdkFNDXzZ2IK8PoT42ODYqodKMHsytHNuQ9HpU0dNT2DbctbnmBEIzfeKGJabi9cC6E0EZ
- KNj/A33AZJKRwsH6KG7mBuZZm7m+H2
-X-Talos-CUID: 9a23:yyI3SWOI9Bxrwe5DHwpE/UckAsAcVlbbzHHpKBfnMX9MV+jA
-X-Talos-MUID: 9a23:O+uZHwvtfjYrbeCpos2nvQFCLd5n5L2UBW8LgM8IsZWlOy59AmLI
+IronPort-Data: A9a23:dWlR26NXcxTNA+LvrR2DlsFynXyQoLVcMsEvi/4bfWQNrUpz0mNRm
+ mAfXTyCM/qDZDTweNwlaYTjp00G7ZfTyYRrTwto+SlhQUwRpJueD7x1DKtS0wC6dZSfER09v
+ 63yTvGacajYm1eF/k/F3oDJ9CU6jufQAOKnUoYoAwgpLSd8UiAtlBl/rOAwh49skLCRDhiE/
+ Nj/uKUzAnf8s9JPGjxSs/rrRC9H5qyo42tG5wJmP5ingXeF/5UrJMNHTU2OByOQrrl8RoaSW
+ +vFxbelyWLVlz9F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq/0Te5p0TJvsEAXq7vh3S9zxHJ
+ HehgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/ZqAJGpfh66wGMa04AWEX0sBIXmBQ7
+ eIbEioQNTvYoO24zpieS+Y506zPLOGzVG8ekldJ6GiDSNoDH9XESaiM4sJE1jAtgMwIBezZe
+ 8cSdTtoalLHfgFLPVAUTpk5mY9EhFGmK2Ee9A3T+PtxujeIpOBy+OGF3N79YNuFSN8Thk+Fj
+ mnH4374ElcRM9n3JT+tqyvx2LaQwn+kMG4UPJG69+dVgXu5+nEeKUNJcX+csKmhlHfrDrqzL
+ GRRoELCt5Ma9kamU938VB2Qu2Ofs1gXXN84O/037kSBx7TZ5y6dB3MYVXhRZdo+rsg0SDc2k
+ FiTkLvBGjhHoLCTD3WH+d+pQSiaPCEUKSoOYHECRA5cud37+ths1VTIU8ppF7OzgpvtAzbsz
+ juWrS84wbIOkcoM0Kb99lfC696xmqX0oscOzl2/dgqYAslROOZJu6TABYDn0Mt9
+IronPort-HdrOrdr: A9a23:QXxIsatbw9+q6qCiGmxalEVM7skDVNV00zEX/kB9WHVpm62j5q
+ WTdZEgv3LJYVkqNE3I9eruBED4ewK6yXcX2/hyAV7BZmnbUQKTRelfBO3ZrQEIcBeOldK1u5
+ 0AT0FIMqyVMbErt63HCdGDYqwdKQO8gdiVbDrlvhFQpN1RGtpdBtlCe3um+iIffng+OaYE
+X-Talos-CUID: 9a23:K1y1+WDLJPMaDDf6Ew9Yq08KAt4mSGfAl1yLBEC2B0xMSbLAHA==
+X-Talos-MUID: 9a23:ZXlirQTboZD5elAwRXTAhjB7C8ZOyZizBWFTzrEinNjULTJJbmI=
 X-IronPort-AV: E=Sophos;i="6.00,247,1681185600"; 
-   d="scan'208";a="115608599"
+   d="scan'208";a="115617747"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DN067OZThGHKGGZBLIdgV4zXVcbDq6oMZNzLDpZK+GKVeP7x6wSuYewZmfkG1GeH87auB7VWXPbDAjqz3u8XnE70ZkRP9f3QXN5Dk1WNP2toA0LiEVrRLoRsSgIydvt7XKGnq5KUjzBeX4rKkDJJ0Z61nt3jySzVBIBj1vNA1kmOpjRR5S9kDZZ+kFXNr5M4Imjw0zUfeHl6ub1KYjuCP2X9Rjji5GQGVWdkNs9S/7DFXH9nPyxE53x0JPK2cBBgBm59reavc2CSC1w/gs0w8iNeh0Ijl+yo8rC+1g7WMeMXBxionwl43FEAThoceDWxgcO8V2YtzSbvHdxpeF94Jg==
+ b=ZbrP6HmwpssHW8K0ghbY64Fz5iVMcN58ugSnGbg0b6cq66WgoW86oZ0SBvCJomgBetjY4/ZfunLkZYUaQEcqWvMkcH56EM3sFZWpHxwTnbCDkqXCzMs0Pl1eY8yvXcvBUhJWPW10XY/2PIaSfNz17aF9V05Zv2vkg6e2MeAKA0FovYZ601LKo/fP+OyL3UEAsxTeMFbO+d9Hrj5yrfGIlyqA4m7lvX9Ja1zr0ksVwyhSE9T1q3FPL0dOTi4XHhjZh/oLcDNGMjIUo1CT4jtZg/Ukg+OTBdGPBvsqcCDJI84CIyRHa86fqjXjTT03HVTh6WPgzlbEvrIRM6PzQeFfwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TwvFq2qizFz52+7Nx4padiTvAhqPe0/kcagVO7qnwS4=;
- b=OvccUVtkToW56nBSp8QUs0Q7X6vtRZ8X0u8lVpzd6EqfAK9paHuSTG3afjSMcwOOO02IKs+NvJFHwS+Q59T7wmXNL0yhuWtCxztXQuP7CJ6cH964vnEag9jvUOTrs32o9k2qd4F7qV4HfiLS7/CKv3oM1g5wdrtuX4p+xJZQPsdvR0+49eUwPMZZ2nf5B4VIJ530RgfYwO2dYFRrtl2KegLCMGKIcqOHj034taXwt3HdzObsqF9TLzUq2WVWp/JiACWLiBNaHj4EKmkZYyiNvDNziYZDCkDn7i4iBvNGRbpX1Lp5vAigqCh0PHdb5ODMbrVZThp0liGeDKQ2B4zahw==
+ bh=ZMRs5HB8KDONtHqFdLtM9HLt+kXNH5MONu4AiB7pklo=;
+ b=di2pCADf5Y1PCzNv3PHbAXrtDAWIi+8I6Zmcfp/kNIOynJbmH2TBBVNcRN2cUWvwNQSBpOXufz3VVPWRlK0z37hR6P6etMdwEplhesbBwcYKX5ebICssOPsvQ3ZCHj2uUFuPiqdQB8XO/9mWein+tFZx2eQIhUtq1JZxB1/KnKernwy7M0K2kNYiuBKlN4n7QsE24dcgzgx3NHba/99D7Cz9hcPWCa45lI5qEpCxG0ju85BJJxWDbQorfA/eQLDkYt3mjjHOvIaV+iK4c1yEVSiL+/natFsxzPdUIIrsBPadJrj4cCMyMzkiqqefj1xhQne9t3OBfSienX4Na2i0xw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TwvFq2qizFz52+7Nx4padiTvAhqPe0/kcagVO7qnwS4=;
- b=fs2iKz429zldCcmq1nBrft4FIYdxCSi+1eqoHK4Fh+OECeq/qxUlH/SKX55BdQ/oaa6LmW/WGniWVEUmtvLobptqwsbASCevU/yxu1xbBADx8eyWwe1AbQwmyyLVX7iFQU3aa2I0s5w3r1V8hd2orecUm9UEu3wppvypHnKqLFc=
+ bh=ZMRs5HB8KDONtHqFdLtM9HLt+kXNH5MONu4AiB7pklo=;
+ b=M1Oq6iAsWE2FxJyMrnmFZQ5mD12kZTLm+/9iTPd7yBeeuz2h/wrdVPw53m5qfg6wEJiz45ke9X1ZWagvCOdFZ2au8jdGnTOxsf4nMQBAWKqHIa8JIjopswIcZizLH/VJR0Fk49TjkFQ5iYQuXcXUmg6iULLGiTrcV7goOe/jbi4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 12/13] libxl: use the cpuid feature names from cpufeatureset.h
-Date: Fri, 16 Jun 2023 15:10:18 +0200
-Message-Id: <20230616131019.11476-13-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230616131019.11476-1-roger.pau@citrix.com>
-References: <20230616131019.11476-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+Date: Fri, 16 Jun 2023 16:18:49 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v2 2/2] x86/vPIT: account for "counter stopped" time
+Message-ID: <ZIxvSUurSPCHV9+1@MacBook-Air-de-Roger.local>
+References: <eaac83a2-8254-76b4-9bab-411e1e323851@suse.com>
+ <7b69e322-bc37-a1bd-444d-b2cbe1d76b39@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0122.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:192::19) To SJ0PR03MB6423.namprd03.prod.outlook.com
+In-Reply-To: <7b69e322-bc37-a1bd-444d-b2cbe1d76b39@suse.com>
+X-ClientProxiedBy: LO4P123CA0102.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:191::17) To SJ0PR03MB6423.namprd03.prod.outlook.com
  (2603:10b6:a03:38d::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB6423:EE_|PH0PR03MB5736:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2beee5bc-8fe8-4644-9983-08db6e6b4897
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB6423:EE_|SJ2PR03MB7110:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a6423a0-b16b-46dd-9088-08db6e749e86
 X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr,ExtFwd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	ignTJg1N/ZrumkJwExQdYs5RgU3qvlhBusqBG/dPxOEYOCl9CvfxF+FHsjze1Hx3kQc+mDAM1nozN2dNTvZdQSJNATFFMuebyFJ8LoszGbRIQgVHjO+PisRdvuJ3PtjKp8+FZzAmto1xsVPgrx03NQLK4p3UIlES4aglC1PECDDupyeF/fxb1H7IX9Gc6kD80OF94IsP0ZXZhHyUw6HmBKAk0soLPVJGh4gjTnZmUF7omDZvK5cBSIzMvrydburmQsoGreeWII9Uz0qk0rdP3RMHHTju9uRrjgVaDKgfdQaqkuFnLpNge0R/mAFmU4Vm6IjmV+1cWT93Szh5i7DW80EfDWiGVish1gLpgeTJiS7a9XFOILYzss0uaTsQC//gyz4Dr46fCAEEi9149HFHNogl5/b7lBvb1LX92lxK+djzSfQkUC2JXt0N2eSjS+LQl002BYALJ1+PSIvDY856f92yqENFuCwJtZ/7pMVYnfLbMu7pDC6KjOV8aS1SCLcIFrUsnfrtrWWI0qVxjOxln/fduTHzM8NTqBMOHpqfH0XIB691h4+ymVn2FHL4L4tVYXxefglXtisSu7giE2GR1Ztawi7tf0lJplEbAd/sOMs=
+	UqwCo+htZ98HnbOyihT7CNF1xvukzDG982INaklMKnu+r3Zh1IBaKqjzQgF1Urg1HR5hZi+7pOy8C2DrtdU4tHW6mUZv8RHgoTljWZhXRat2PIK0/piEtXuwgZtQJs2HQJInK8DzwDGkIDCGYhwjG3Cg2YY21f4CDnfUL54LEcNgEMdFup8OEbVqk7yHwTXQxRgW9xHxjHtE+dgVW9Odr+Td5F5mljnLBCz7d1zduYFztWZ+eEvrSO+uplDMGjUwW+e2YzFktTIRX1r8ljtcd4/e3V5Pm1xCtS4R06cSVpJ/P6VIVUek66kEAH1oNmqS0SuABRHVAaXI6Rxq/n/lFdZ7ui/Tp/VqQS/zJmE1pAnjua1W696MZqRT9f44eE63r2LhDN+dwcm3vn/mq8qtsD5IQN/sViENOSR+uaBmk2XgXqe8xGpCSTNQX7OE01uhRuEVS4LUrd/tawWBOsFBzErMXQLN3CeZAm6cqzkNTPpdi6UcMiYqFsmH+dVIUgODWbZKLh0zfH+ceJDcITpjljtRsW2Yf/DeQIdxMQqkjm+4lUHokaRli/7rK1tBELdcuCTtwurwfJSK7arxbJaF/FO4gogsZ+CeVgHEWlb2Tff2q9oj1BVFHBUOwvoX5tKqQmgIVMc/RBjFEo8Qqse5LA==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6423.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(366004)(39860400002)(346002)(136003)(376002)(451199021)(54906003)(41300700001)(8676002)(86362001)(66946007)(66476007)(66556008)(6486002)(6916009)(8936002)(316002)(6666004)(4326008)(36756003)(478600001)(6512007)(30864003)(26005)(5660300002)(83380400001)(6506007)(1076003)(66574015)(2906002)(186003)(82960400001)(38100700002)(2616005)(473944003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB6423.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(396003)(366004)(346002)(136003)(376002)(451199021)(54906003)(41300700001)(86362001)(66556008)(66946007)(316002)(6486002)(6916009)(8676002)(8936002)(6666004)(66476007)(4326008)(85182001)(66899021)(508600001)(6512007)(9686003)(5660300002)(966005)(26005)(83380400001)(6506007)(2906002)(15650500001)(186003)(82960400001)(38100700002)(67856001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ek92WTNqVURVTmtwVlZwMEJ1TU1uS1Z6QXJ2RUw1TWJFNHREWlg0cGZYL0JF?=
- =?utf-8?B?NW9GNFNwblROWmlQcThXM2F0MURIR3EvYUF2NWFqSytUTVRzZVdaRFN1Yi9P?=
- =?utf-8?B?SFkxZ0hpYmZ5R2wvb0lwQWF3UWEvRGt3NGliU0J1QVZIT1diMHdFZS9LL0ZV?=
- =?utf-8?B?Z2MzRGdPT2p1V1orOWhDbTFkVWhhOFhnNTdPa2VEZTZNWlVWMjY0S01TSlpD?=
- =?utf-8?B?STl5Z083VG1qK0xDaEJDSkFneWhpNlowRXIzU2MvcFdiUVVKeHJ5RHJXSXZB?=
- =?utf-8?B?RVVJT2lGWnVaME9hcklxUW02U21tcTFRZjJhdGx5MjBFSDROaURtZmo4NTAx?=
- =?utf-8?B?NXQvdmJlOXQvcjF2VUovdHFHVWhzcDZkQ2Q2ZkkyTDNmbnRINFdZY2M1NHNM?=
- =?utf-8?B?TFpVMUhnUFNCOWhCcFc0QnloN1Y0c2REaFFlOCtPd1pHS1JXYkVydG1qOEJm?=
- =?utf-8?B?YkRTeVVHVC9sVjYydVZQVnY0NnJkSzN6T0N5aEcrZE03bmJHQUYvOHhTZ2cw?=
- =?utf-8?B?SUJKUkNjbnNJNElGSURHRTB0djZFZStvMkhHbWx3cjN5Y1pFRGJ3WWwyeSti?=
- =?utf-8?B?czhrWkczaTViSGh2R3o3QjY2MXNZWVZKMkRHMXljUHNLT0I2MC9JRC9PRzJl?=
- =?utf-8?B?YWtJZE1VWG9PUXVSc2ZtRjB0eGc2dWRjUnFoWmxsU3BGazZkaU9PYWlVeUpw?=
- =?utf-8?B?S2hGY3BEY2hjeWhuZGNubDI1WTdFTkc2cThFa0o2V2pWQXJIeWszMTVhL3lQ?=
- =?utf-8?B?YW14djJYN3RuemhoMnZxd2F4Mzl3QXk3bkxTbE5KUzBuYThyQlhMcldpOWFp?=
- =?utf-8?B?YnVPZjVmRmMxRXY4TVptKzIzMUFRbC9aNmRNaGxFVDByR1lEUGx2cG9JZmJh?=
- =?utf-8?B?NTZDNGlRc0lXbWtHVFRNTGluOStuMGV5R2hIYkpWWHkwTU42VWt0cWY1bmI4?=
- =?utf-8?B?dGJzdlJzNnk4MmYweGVZQU5sNVptVFpWTzFteTR0dHB2MjBkR0k3aDBncWNM?=
- =?utf-8?B?YmVFYVJuVi9NUlFjWnN4Z2dZeDdMV1Q4dTFjRlJET0h6c0xISkxrK2gvckty?=
- =?utf-8?B?SlZuRVMwYU1GZXBDeitnVU1LL2hnUG1xaSt2dUhRTGxiV09nWTBEV3EyM01J?=
- =?utf-8?B?WkhmaWVLMXpRRTUwazV5VG4vL1ZBL0Q1eU1mWThzeENGbnZKbW1lQU4vTjRE?=
- =?utf-8?B?SWN0UUI1SWQrN0E2dVJ2aVAzV1NhRlJUMXZaSGI4RHFQVEl2UmNpbmFIcUVo?=
- =?utf-8?B?biszOEszYVBZd01SWCt3ck5yeUYwblRQV2F0ZVFFd2tpSjBvTTRqQ3F6Z2xj?=
- =?utf-8?B?aXBnWE1HQWlSODVaOEErTlkva1gySUQ4VFh5aEcyQ2c0UENVWmdSSjhhNVlY?=
- =?utf-8?B?NG8wb1ZBaTFId01KSjFuN1puRmg4MEp4L3RFYVJtWUVuR3pYU1ZzWldNbGkv?=
- =?utf-8?B?UG5iSVllQ3hQL25CT010S0NyQXEyWlU4enI3bmZTS2x0dzJoTjVIbUNMdWZX?=
- =?utf-8?B?NUZocUY4UkFCNFhpUzh0TWMxTEtEOGtjV0xsRzA5K25taHRKbWpGbXM2S2hU?=
- =?utf-8?B?M0xJeVFGa2NrQ1g4SzJUMm5aamVUVGRhWTFLZGNLN2NXWnVjTHZKcEZBUGdr?=
- =?utf-8?B?cEZJcjNNVm90aEQ5RXZOanJCQkhlMDVGNVJVMmM5Uzl5MVBuUkZsM0Fqd1I1?=
- =?utf-8?B?b2Q0cFJsVnZjWTB3Z2lqMGFaTmg1TlBaREp5cEVhcUQ3bzgxd1FyY01ERlhU?=
- =?utf-8?B?VE45THlienZudmVGTk5qN094NnExR1RLZlA0eStqcDNVbmFpcHRaZTZtMDJV?=
- =?utf-8?B?Z2dIQTJuSG1BMTEzK1pFb1R3b2N1QXlnVlVmVUJrWmFCSWVTbDRvRUQxb2tI?=
- =?utf-8?B?ejhpMjZINnZXTFhnUWxwc3VjdEdmWXhZeU1pQnNuOG9UZ0RpMURhb3VWbCtE?=
- =?utf-8?B?MERWNElJcEF2VkpmRURUd0NOMzJ4eEE2Q0VUd2lwalRvRWVhcm4rNXg0NjBq?=
- =?utf-8?B?aVZsMWQyOTd0YXB0SS9wNk54ZkZrUnEvM2VjZ1RUcXJpMWFjZDl4TVN4NTNs?=
- =?utf-8?B?dG0wU1pJc004b01BYy81N1I0QTVGeUZwdStxUm1UN0hiYUhLQk40TXNlV3o1?=
- =?utf-8?B?K3BQOVM3UVI0cTFvTjNrTDdxYUt2bXloQWMzSmxUTDh3bjBiSys5ejc4YXVL?=
- =?utf-8?B?UFE9PQ==?=
+	=?utf-8?B?eEdTSk1kUnZoZlQzUkcvY21HaTRKRlNka0FUMTdJQ2JzR1NOSXRTbThDNDNP?=
+ =?utf-8?B?UHJsUDg3d1JpdTd3NS96eWFkMk5mRUl5dFBGaFg3RGZ4VXBVMnZqblZDTHdR?=
+ =?utf-8?B?MnVwODZTWmZEaC9MY3poNVhUT29VNTM5MlhYRGl1NlFObVA3Z2MvdHl6ZmZS?=
+ =?utf-8?B?d3B3T05BRVhhNDdDUGwvU1VmWkJrUXVzb2Y3bkQ1QTlPTENZVlo0ZE5SSVJ4?=
+ =?utf-8?B?UnpvbExhSWZvZGo4Vk5YUXcrdmo1QXd2Rk5jMkJEQmJ2MGhqVk13VEFIeUhy?=
+ =?utf-8?B?L2VhLzN2SDZUbVQ2SnJJMVRtSDJxZStaM05VQ3FUb2FGSTVTSjl6U3FmUi9I?=
+ =?utf-8?B?aHloR2JUUnd5SC9rY2Q5Vk43QWFZd0ppK3J4V1hDdXM4UVFObTZSYlh4WjdQ?=
+ =?utf-8?B?TTEwcC9YazF0aWlvTlZUNWtXcDc2eG9pb05rT0lDM0JpL1hMVlBrQnBFS3Bh?=
+ =?utf-8?B?ajFQMzUvZndrYmliWWVnUXVzYnZkamZIWTd0cU1GaTNWempFbnJiRHlqVXpX?=
+ =?utf-8?B?WGdiVHRMMHZuaXVOS2V4QTYvK2ZObjU5YjJMZ1FYbVgrQTU3MGRhaXdRNzJ5?=
+ =?utf-8?B?RU5HcU1uN0dwZnFOWHJRY2dKbUVRWFpnejQ2N2l4YmNRaldIc0JXODc5UVRP?=
+ =?utf-8?B?VW5kVDBpRG9EQjlJZDhtbmYwbUdWUmtEaDNTTGc4SzArYi92NDF2N1hzMW1U?=
+ =?utf-8?B?Wm5pMVBhWDdpdVc0bmI5UmJaWjRPNFpTeVdYUmNtSmZzWFhta1dCMit3MnY3?=
+ =?utf-8?B?cVEybisvU2lXL2dCb3lsRHhLTmc4a1dXUXF0N25DbHpucE44elJkeUlqYmtk?=
+ =?utf-8?B?bjhZdWpDc0I5ZXBrUXdtdHIwYzBRQ3ZpbW5lRGdSWE5SajhoMFM1azJJYkZ3?=
+ =?utf-8?B?ODJXVG1kaHJWQUdUb3FmOGpqbW1Gcyt2M09BVkxlNmxjK254N0dCYzJ0VVUx?=
+ =?utf-8?B?SzZ6MHBRUlpvMWZYYWtuSjZqdUpKZUxUK21rYmpCME9DWGZ4YWtlWXVIcE5V?=
+ =?utf-8?B?aGpVU2Q5TmMyblJvRStRUk9VK2JRankwaVlTSXdmbFgrdFBjUFZoUDIvWFUw?=
+ =?utf-8?B?YXQ3aFp1Z2RYS1Y1dS9RUFRac05wakR1SEFTSFU5cHU3WHlOdWJZL1RPVGtp?=
+ =?utf-8?B?WXorTXRRZ1J2R2dJZzVwTnhUK0R1ZW5SbGlQeWRiblU4bjZyTTd5bEJvOXpH?=
+ =?utf-8?B?ZENscElGM00wYXN4dnFubXJ1blJzRU5Ob1VOVmJTclZMUGpma1BiUUlRSWh6?=
+ =?utf-8?B?V0xGclAwaXlMS2VzeWFSUy8wdFBSRUJVeklGRDN3UlNIOTBMdlQyb3RUOFFl?=
+ =?utf-8?B?eTdhcCtZNmdCbkd3K2FTeldvUEtiY2UzS0QyNzJQRHBveGIvdzhGSlNVMld1?=
+ =?utf-8?B?dUZVTGNnOVhyMTU5YWdEMm13cG1vclJFdkVRL3c5MHZ4Y3hHZlkwbFIxNkMv?=
+ =?utf-8?B?aUE1bk5RYXlwR0lRc21iSFEyU09aalVqYmxabkR2Z3hXUmxqQnQzRUtxUXFI?=
+ =?utf-8?B?dStlVk4zY1lQQ3Y2TFNKYVdDMDcrSys2QThlTVpENVVNUHJJZHBwNHJsWmxN?=
+ =?utf-8?B?cjZnRjFaVVVuZ201N3ZTMjkvNkxwcVJaSnpLRFNMNzk0ZlU5Mld6d2NVUDla?=
+ =?utf-8?B?M1JPUjFFZXUxVjExMzc5aU9aRWNUMm5xL0xqV0lET2dMckdMWTNkUkl1bWJn?=
+ =?utf-8?B?RE5tR1VNQ2hFK3NvcGVSNkljYW5OU1BzRldHUGlNVGtNN2VCMWZCV3hvLzA0?=
+ =?utf-8?B?ejJUTWhrNWkzVHM0MnpHcEVrbCtEdU9HRDAzelJybEhtZHRuRk1rRmdIRUVs?=
+ =?utf-8?B?VVpBcVFibzJPV2o3YVNlamMxRUN4MXYveUh6ZGhZUFR6OHZiOGxVSnEyN2Ra?=
+ =?utf-8?B?bE5ITmhWdmRIdzRUelRIRER2UHA5NWJFR3BnL05iZUc1NVZLRFJqd2xZQzJu?=
+ =?utf-8?B?Q3RtTzFrTHJMSndKWkFVemErRlh4VUZWa3VPR3BzcTdiWlVubllyOGVFbTdF?=
+ =?utf-8?B?Yk0yNTVhTitMdHJyV0FxUkJFNnNnbHVmWUtlZVRkbDJNdlVtdC82eDg4VkdD?=
+ =?utf-8?B?VnF5N1U0RGxEYUtxQlpTbCtSOWFua3ZWL1luRkZ0azhPZ05JQStja3hjM0Jz?=
+ =?utf-8?B?d3R2N3M4UjBCVi9MdGlmeHNXQ1E4OFF4SmdPWmduQkpWVmk4RGJIenVnWSsw?=
+ =?utf-8?B?NFE9PQ==?=
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	oq+K7avRGJyFR6axEsxr/UgU+0lJutCEyVuy+iZml9vtIhzk/9w5LZF9syKQIF/WqvIz9tC0GgdyRPqlPOVQwodPKN5rRWgFhdZqUwxz1uttV578pbUXcT/zf6Y0k6MVKcdo3ATEhkVg0NUTJUlSVPUhY4q9IMgl5kdiFnKCTkCOT7B4tL4EN+ACyL8TbapwG3RDZ0ZfmjIda1obNS8N12DAuZ9jhukJOQ8CziZ4DIG94kAyBAJWc3SqN72zy+pE1fVXGT0QurGcOWS+xrNqLi238EAdeOyEwfBNMyL0UzEWdPNLczKX2fYTpox2QN3+QGKQ6d25qMhnG+70a4ztirK7D2lnPybQ9RQPkCZvGC7RjZpk8QZOyC+pOvldpqcUjJsbp/uXe5I4/WtMCrGh5/on0DQiWufXF7W2Vg9d2Bwv7HQWQvSgJadxLMZUAZM65mgGKQz9Bx4+q5p0daFqVdsFViv8ULO+Qv3xOWBidAEYNjH0oUTegRawbLxGaVqP6x2re/0JhEtZ1zKYau4y3zFE+1cHfIOyjKGocVhTMAkhOCnynqbOCF3ULhPKHyxxIowJWxDChHRXxMxaop4ote1fk8XtpdK5BYYe8pUgB4RASs5NbZoQpbEkh7cM4qZ/NLc33zTbimhUXBJY5LZrRGNpIiNBXVbPbutUEaQdXhPKzgBHicFqW287AkvXFaIjGZjLjmxJf0aEcZ/xQKvxNC3oWC/YhKTeJ7Wfj0I6Ly43gsUbSmD35qFvCIW0VLKmgWGfZ/qojpbMXlsRaMTUmDw2xRoPtRzjN8q0B3Kbdv5GqHM2dMI2ryzM4wwfoxG8
+	VrKE2TC+cJQNelUeol3l32auTgoe0q3QIknHkqB5O7GJ5Cs7ccVw5Ohy7QA5PUjZikhvrC0FLDFO3dysYW3iJu9JJ1S6zW+0BnXfRagjr36D2VCDPKTDHhPfABmu0nRSFI5BI2Jiz7Su8b2dqTJBxCQksHdgGwoNzrEiKteTaExjKyCuRHe7B6uu1eHNl8qq2mk3L2BIQ5AXt4KRSmvznfYxvdI58QzsD0NbaTGU/VEPT1r0doE5jvruSiTzMpObcThO75R4M++Yl/bPhIaIAivk6Q7WdG1FCO/vnOW4zbwmfQiCHpKQGEgec/JwvJmgYAl3VGtZFlepsAriCRImEIa4AvA6fST3w8tOsfKrWE9CX38POd9ZnqihbjhC+FX3Uo0FlA+32IMCfwmKUtXh4SfvoMEJCcUTx3qclV7xW7OwV5/BMsXu8IOpEL5Thdd6zP4H95Ng1HwiS7LP7em3YcWZ9+J8L+9MB5P5uKvdmBWmrJ8BiWCwU+9ZchkFmxWB/u3l3AltJlc815BlLGLMceQDDr0Q6xcYwF1jfRGGbo2k9dFUumvHXNy15aOP2fyMowmi10IevL+Mlx5u25qkiEW93aHANeW0AvpY/joW0x7z1BV+kemwdnD3EgDXMOKBqM1apa+V7etaKdUkVItlBVlJ4qOfSHz7IFKVr3Tsdo+cM147HNQZ/Nk15009k8+mEV/lpUaPLE2nklO2cubSuHDuSgelz5cJ1pe4jfstt5RwAJecplLgnksGJkmesdAOUTD9lvmFeb8ee7y0obonAN4HHXoVS8qSh7uq61vHYBiRQ3lfeX86WTbL2bRGmd57
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2beee5bc-8fe8-4644-9983-08db6e6b4897
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a6423a0-b16b-46dd-9088-08db6e749e86
 X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB6423.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2023 13:12:06.4209
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2023 14:18:56.1342
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VMPvi6aEsTEocPlbtHgUmTJCjAEHS0QTR6fBsbEtSQGQisyOd8Px6svwkB65uOHnLHKUUY7GXGFJMVSLaCdYyA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB5736
+X-MS-Exchange-CrossTenant-UserPrincipalName: AfQgBqrr8nEMzHPGQZtWrAOCQbnKoiu1imCdwke1nDDZgJmdxVkTFylVRvyWyuYAOozkQcvtO6KYxSqKoFNfrw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7110
 
-The current implementation in libxl_cpuid_parse_config() requires
-keeping a list of cpuid feature bits that should be mostly in sync
-with the contents of cpufeatureset.h.
+On Thu, Jun 15, 2023 at 04:56:22PM +0200, Jan Beulich wrote:
+> For an approach like that used in "x86: detect PIT aliasing on ports
+> other than 0x4[0-3]" [1] to work, channel 2 may not (appear to) continue
+> counting when "gate" is low. Record the time when "gate" goes low, and
+> adjust pit_get_{count,out}() accordingly. Additionally for most of the
+> modes a rising edge of "gate" doesn't mean just "resume counting", but
+> "initiate counting", i.e. specifically the reloading of the counter with
+> its init value.
+> 
+> No special handling for state save/load: See the comment near the end of
+> pit_load().
+> 
+> [1] https://lists.xen.org/archives/html/xen-devel/2023-05/msg00898.html
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Avoid such duplication by using the automatically generated list of
-cpuid features in INIT_FEATURE_NAMES in order to map feature names to
-featureset bits, and then translate from featureset bits into cpuid
-leaf, subleaf, register tuple.
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Note that the full contents of the previous cpuid translation table
-can't be removed.  That's because some feature names allowed by libxl
-are not described in the featuresets, or because naming has diverged
-and the previous nomenclature is preserved for compatibility reasons.
+Albeit I have one request below I would like you to considerate.
 
-Should result in no functional change observed by callers, albeit some
-new cpuid features will be available as a result of the change.
+> ---
+> TBD: "gate" can only ever be low for chan2 (with "x86/vPIT: check/bound
+>      values loaded from state save record" [2] in place), so in
+>      principle we could get away without a new pair of arrays, but just
+>      two individual fields. At the expense of more special casing in
+>      code.
 
-While there constify cpuid_flags name field.
+One bit I'm missing is how is the gate for timers 0 and 1 is accessed.
+Is such line simply not accessible?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - const unnamed structure cast.
- - Declare struct feature_name outside the function.
- - Use strcmp.
- - Fix indentation.
- - Add back missing feature name options.
- - Return ERROR_NOMEM if allocation fails.
- - Improve xl.cfg documentation about how to reference the features
-   described in the public header.
----
- docs/man/xl.cfg.5.pod.in       |  24 +--
- tools/libs/light/libxl_cpuid.c | 267 ++++++++++++---------------------
- tools/xl/xl_parse.c            |   3 +
- 3 files changed, 107 insertions(+), 187 deletions(-)
+My i8254 spec doesn't mention this, and the (kind of random) copy of
+the ICH7 Spec I'm looking at also doesn't mention enable bits for
+timers 0 and 1 being available.  I assume those are always enabled?
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 3979be2a590a..55161856f4c7 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -2010,24 +2010,16 @@ proccount procpkg stepping
- 
- =back
- 
--List of keys taking a character:
-+List of keys taking a character can be found in the public header file
-+L<arch-x86/cpufeatureset.h|https://xenbits.xen.org/docs/unstable/hypercall/x86_64/include,public,arch-x86,cpufeatureset.h.html>
- 
--=over 4
--
--3dnow 3dnowext 3dnowprefetch abm acpi adx aes altmovcr8 apic arat avx avx2
--avx512-4fmaps avx512-4vnniw avx512bw avx512cd avx512dq avx512er avx512f
--avx512ifma avx512pf avx512vbmi avx512vl bmi1 bmi2 clflushopt clfsh clwb cmov
--cmplegacy cmpxchg16 cmpxchg8 cmt cntxid dca de ds dscpl dtes64 erms est extapic
--f16c ffxsr fma fma4 fpu fsgsbase fxsr hle htt hypervisor ia64 ibs invpcid
--invtsc lahfsahf lm lwp mca mce misalignsse mmx mmxext monitor movbe mpx msr
--mtrr nodeid nx ospke osvw osxsave pae page1gb pat pbe pcid pclmulqdq pdcm
--perfctr_core perfctr_nb pge pku popcnt pse pse36 psn rdrand rdseed rdtscp rtm
--sha skinit smap smep smx ss sse sse2 sse3 sse4.1 sse4.2 sse4_1 sse4_2 sse4a
--ssse3 svm svm_decode svm_lbrv svm_npt svm_nrips svm_pausefilt svm_tscrate
--svm_vmcbclean syscall sysenter tbm tm tm2 topoext tsc tsc-deadline tsc_adjust
--umip vme vmx wdt x2apic xop xsave xtpr
-+The feature names described in C<cpufeatureset.h> should be specified in all
-+lowercase letters, and with underscores converted to hyphens.  For example in
-+order to reference feature C<LAHF_LM> the string C<lahf-lm> should be used.
- 
--=back
-+Note that C<clflush> is described as an option that takes a value, and that
-+takes precedence over the C<clflush> flag in C<cpufeatureset.h>.  The feature
-+flag must be referenced as C<clfsh>.
- 
- =back
- 
-diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
-index d0ac5b2bc102..cbbd5d31d63b 100644
---- a/tools/libs/light/libxl_cpuid.c
-+++ b/tools/libs/light/libxl_cpuid.c
-@@ -14,6 +14,8 @@
- 
- #include "libxl_internal.h"
- 
-+#include <xen/lib/x86/cpu-policy.h>
-+
- int libxl__cpuid_policy_is_empty(libxl_cpuid_policy_list *pl)
- {
-     return !libxl_cpuid_policy_list_length(pl);
-@@ -57,7 +59,7 @@ void libxl_cpuid_dispose(libxl_cpuid_policy_list *policy)
-  * Used for the static structure describing all features.
-  */
- struct cpuid_flags {
--    char* name;
-+    const char *name;
-     uint32_t leaf;
-     uint32_t subleaf;
-     int reg;
-@@ -145,7 +147,19 @@ static int cpuid_add(libxl_cpuid_policy *policy, const struct cpuid_flags *flag,
-     entry->policy[flag->reg - 1] = resstr;
- 
-     return 0;
-+}
-+
-+struct feature_name {
-+    const char *name;
-+    unsigned int bit;
-+};
-+
-+static int search_feature(const void *a, const void *b)
-+{
-+    const char *key = a;
-+    const char *feat = ((const struct feature_name *)b)->name;
- 
-+    return strcmp(key, feat);
- }
- 
- /* parse a single key=value pair and translate it into the libxc
-@@ -168,208 +182,42 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *policy, const char* str)
-         {"proccount",    0x00000001, NA, CPUID_REG_EBX, 16,  8},
-         {"localapicid",  0x00000001, NA, CPUID_REG_EBX, 24,  8},
- 
--        {"sse3",         0x00000001, NA, CPUID_REG_ECX,  0,  1},
--        {"pclmulqdq",    0x00000001, NA, CPUID_REG_ECX,  1,  1},
--        {"dtes64",       0x00000001, NA, CPUID_REG_ECX,  2,  1},
--        {"monitor",      0x00000001, NA, CPUID_REG_ECX,  3,  1},
--        {"dscpl",        0x00000001, NA, CPUID_REG_ECX,  4,  1},
--        {"vmx",          0x00000001, NA, CPUID_REG_ECX,  5,  1},
--        {"smx",          0x00000001, NA, CPUID_REG_ECX,  6,  1},
-         {"est",          0x00000001, NA, CPUID_REG_ECX,  7,  1},
--        {"tm2",          0x00000001, NA, CPUID_REG_ECX,  8,  1},
--        {"ssse3",        0x00000001, NA, CPUID_REG_ECX,  9,  1},
-         {"cntxid",       0x00000001, NA, CPUID_REG_ECX, 10,  1},
--        {"fma",          0x00000001, NA, CPUID_REG_ECX, 12,  1},
-         {"cmpxchg16",    0x00000001, NA, CPUID_REG_ECX, 13,  1},
--        {"xtpr",         0x00000001, NA, CPUID_REG_ECX, 14,  1},
--        {"pdcm",         0x00000001, NA, CPUID_REG_ECX, 15,  1},
--        {"pcid",         0x00000001, NA, CPUID_REG_ECX, 17,  1},
--        {"dca",          0x00000001, NA, CPUID_REG_ECX, 18,  1},
-         /* Linux uses sse4_{1,2}.  Keep sse4.{1,2} for compatibility */
-         {"sse4_1",       0x00000001, NA, CPUID_REG_ECX, 19,  1},
-         {"sse4.1",       0x00000001, NA, CPUID_REG_ECX, 19,  1},
-         {"sse4_2",       0x00000001, NA, CPUID_REG_ECX, 20,  1},
-         {"sse4.2",       0x00000001, NA, CPUID_REG_ECX, 20,  1},
--        {"x2apic",       0x00000001, NA, CPUID_REG_ECX, 21,  1},
--        {"movbe",        0x00000001, NA, CPUID_REG_ECX, 22,  1},
--        {"popcnt",       0x00000001, NA, CPUID_REG_ECX, 23,  1},
--        {"tsc-deadline", 0x00000001, NA, CPUID_REG_ECX, 24,  1},
-         {"aes",          0x00000001, NA, CPUID_REG_ECX, 25,  1},
--        {"xsave",        0x00000001, NA, CPUID_REG_ECX, 26,  1},
--        {"osxsave",      0x00000001, NA, CPUID_REG_ECX, 27,  1},
--        {"avx",          0x00000001, NA, CPUID_REG_ECX, 28,  1},
--        {"f16c",         0x00000001, NA, CPUID_REG_ECX, 29,  1},
--        {"rdrand",       0x00000001, NA, CPUID_REG_ECX, 30,  1},
--        {"hypervisor",   0x00000001, NA, CPUID_REG_ECX, 31,  1},
--
--        {"fpu",          0x00000001, NA, CPUID_REG_EDX,  0,  1},
--        {"vme",          0x00000001, NA, CPUID_REG_EDX,  1,  1},
--        {"de",           0x00000001, NA, CPUID_REG_EDX,  2,  1},
--        {"pse",          0x00000001, NA, CPUID_REG_EDX,  3,  1},
--        {"tsc",          0x00000001, NA, CPUID_REG_EDX,  4,  1},
--        {"msr",          0x00000001, NA, CPUID_REG_EDX,  5,  1},
--        {"pae",          0x00000001, NA, CPUID_REG_EDX,  6,  1},
--        {"mce",          0x00000001, NA, CPUID_REG_EDX,  7,  1},
-+
-         {"cmpxchg8",     0x00000001, NA, CPUID_REG_EDX,  8,  1},
--        {"apic",         0x00000001, NA, CPUID_REG_EDX,  9,  1},
-         {"sysenter",     0x00000001, NA, CPUID_REG_EDX, 11,  1},
--        {"mtrr",         0x00000001, NA, CPUID_REG_EDX, 12,  1},
--        {"pge",          0x00000001, NA, CPUID_REG_EDX, 13,  1},
--        {"mca",          0x00000001, NA, CPUID_REG_EDX, 14,  1},
--        {"cmov",         0x00000001, NA, CPUID_REG_EDX, 15,  1},
--        {"pat",          0x00000001, NA, CPUID_REG_EDX, 16,  1},
--        {"pse36",        0x00000001, NA, CPUID_REG_EDX, 17,  1},
-         {"psn",          0x00000001, NA, CPUID_REG_EDX, 18,  1},
-         {"clfsh",        0x00000001, NA, CPUID_REG_EDX, 19,  1},
--        {"ds",           0x00000001, NA, CPUID_REG_EDX, 21,  1},
--        {"acpi",         0x00000001, NA, CPUID_REG_EDX, 22,  1},
--        {"mmx",          0x00000001, NA, CPUID_REG_EDX, 23,  1},
--        {"fxsr",         0x00000001, NA, CPUID_REG_EDX, 24,  1},
--        {"sse",          0x00000001, NA, CPUID_REG_EDX, 25,  1},
--        {"sse2",         0x00000001, NA, CPUID_REG_EDX, 26,  1},
--        {"ss",           0x00000001, NA, CPUID_REG_EDX, 27,  1},
--        {"htt",          0x00000001, NA, CPUID_REG_EDX, 28,  1},
-         {"tm",           0x00000001, NA, CPUID_REG_EDX, 29,  1},
-         {"ia64",         0x00000001, NA, CPUID_REG_EDX, 30,  1},
-         {"pbe",          0x00000001, NA, CPUID_REG_EDX, 31,  1},
- 
-         {"arat",         0x00000006, NA, CPUID_REG_EAX,  2,  1},
- 
--        {"fsgsbase",     0x00000007,  0, CPUID_REG_EBX,  0,  1},
-         {"tsc_adjust",   0x00000007,  0, CPUID_REG_EBX,  1,  1},
--        {"bmi1",         0x00000007,  0, CPUID_REG_EBX,  3,  1},
--        {"hle",          0x00000007,  0, CPUID_REG_EBX,  4,  1},
--        {"avx2",         0x00000007,  0, CPUID_REG_EBX,  5,  1},
--        {"smep",         0x00000007,  0, CPUID_REG_EBX,  7,  1},
--        {"bmi2",         0x00000007,  0, CPUID_REG_EBX,  8,  1},
--        {"erms",         0x00000007,  0, CPUID_REG_EBX,  9,  1},
--        {"invpcid",      0x00000007,  0, CPUID_REG_EBX, 10,  1},
--        {"rtm",          0x00000007,  0, CPUID_REG_EBX, 11,  1},
-         {"cmt",          0x00000007,  0, CPUID_REG_EBX, 12,  1},
--        {"mpx",          0x00000007,  0, CPUID_REG_EBX, 14,  1},
--        {"avx512f",      0x00000007,  0, CPUID_REG_EBX, 16,  1},
--        {"avx512dq",     0x00000007,  0, CPUID_REG_EBX, 17,  1},
--        {"rdseed",       0x00000007,  0, CPUID_REG_EBX, 18,  1},
--        {"adx",          0x00000007,  0, CPUID_REG_EBX, 19,  1},
--        {"smap",         0x00000007,  0, CPUID_REG_EBX, 20,  1},
--        {"avx512-ifma",  0x00000007,  0, CPUID_REG_EBX, 21,  1},
--        {"clflushopt",   0x00000007,  0, CPUID_REG_EBX, 23,  1},
--        {"clwb",         0x00000007,  0, CPUID_REG_EBX, 24,  1},
--        {"proc-trace",   0x00000007,  0, CPUID_REG_EBX, 25,  1},
--        {"avx512pf",     0x00000007,  0, CPUID_REG_EBX, 26,  1},
--        {"avx512er",     0x00000007,  0, CPUID_REG_EBX, 27,  1},
--        {"avx512cd",     0x00000007,  0, CPUID_REG_EBX, 28,  1},
--        {"sha",          0x00000007,  0, CPUID_REG_EBX, 29,  1},
--        {"avx512bw",     0x00000007,  0, CPUID_REG_EBX, 30,  1},
--        {"avx512vl",     0x00000007,  0, CPUID_REG_EBX, 31,  1},
--
--        {"prefetchwt1",  0x00000007,  0, CPUID_REG_ECX,  0,  1},
--        {"avx512-vbmi",  0x00000007,  0, CPUID_REG_ECX,  1,  1},
--        {"umip",         0x00000007,  0, CPUID_REG_ECX,  2,  1},
--        {"pku",          0x00000007,  0, CPUID_REG_ECX,  3,  1},
--        {"ospke",        0x00000007,  0, CPUID_REG_ECX,  4,  1},
--        {"avx512-vbmi2", 0x00000007,  0, CPUID_REG_ECX,  6,  1},
--        {"cet-ss",       0x00000007,  0, CPUID_REG_ECX,  7,  1},
--        {"gfni",         0x00000007,  0, CPUID_REG_ECX,  8,  1},
--        {"vaes",         0x00000007,  0, CPUID_REG_ECX,  9,  1},
--        {"vpclmulqdq",   0x00000007,  0, CPUID_REG_ECX, 10,  1},
--        {"avx512-vnni",  0x00000007,  0, CPUID_REG_ECX, 11,  1},
--        {"avx512-bitalg",0x00000007,  0, CPUID_REG_ECX, 12,  1},
--        {"avx512-vpopcntdq",0x00000007,0,CPUID_REG_ECX, 14,  1},
--        {"rdpid",        0x00000007,  0, CPUID_REG_ECX, 22,  1},
--        {"cldemote",     0x00000007,  0, CPUID_REG_ECX, 25,  1},
--        {"pks",          0x00000007,  0, CPUID_REG_ECX, 31,  1},
--
--        {"avx512-4vnniw",0x00000007,  0, CPUID_REG_EDX,  2,  1},
--        {"avx512-4fmaps",0x00000007,  0, CPUID_REG_EDX,  3,  1},
--        {"fsrm",         0x00000007,  0, CPUID_REG_EDX,  4,  1},
--        {"avx512-vp2intersect",0x00000007,0,CPUID_REG_EDX,8, 1},
--        {"srbds-ctrl",   0x00000007,  0, CPUID_REG_EDX,  9,  1},
--        {"md-clear",     0x00000007,  0, CPUID_REG_EDX, 10,  1},
--        {"serialize",    0x00000007,  0, CPUID_REG_EDX, 14,  1},
--        {"tsxldtrk",     0x00000007,  0, CPUID_REG_EDX, 16,  1},
--        {"cet-ibt",      0x00000007,  0, CPUID_REG_EDX, 20,  1},
--        {"avx512-fp16",  0x00000007,  0, CPUID_REG_EDX, 23,  1},
--        {"ibrsb",        0x00000007,  0, CPUID_REG_EDX, 26,  1},
--        {"stibp",        0x00000007,  0, CPUID_REG_EDX, 27,  1},
--        {"l1d-flush",    0x00000007,  0, CPUID_REG_EDX, 28,  1},
--        {"arch-caps",    0x00000007,  0, CPUID_REG_EDX, 29,  1},
--        {"core-caps",    0x00000007,  0, CPUID_REG_EDX, 30,  1},
--        {"ssbd",         0x00000007,  0, CPUID_REG_EDX, 31,  1},
--
--        {"avx-vnni",     0x00000007,  1, CPUID_REG_EAX,  4,  1},
--        {"avx512-bf16",  0x00000007,  1, CPUID_REG_EAX,  5,  1},
--        {"fzrm",         0x00000007,  1, CPUID_REG_EAX, 10,  1},
--        {"fsrs",         0x00000007,  1, CPUID_REG_EAX, 11,  1},
--        {"fsrcs",        0x00000007,  1, CPUID_REG_EAX, 12,  1},
--        {"wrmsrns",      0x00000007,  1, CPUID_REG_EAX, 19,  1},
--        {"avx-ifma",     0x00000007,  1, CPUID_REG_EAX, 23,  1},
--
--        {"avx-vnni-int8",0x00000007,  1, CPUID_REG_EDX,  4,  1},
--        {"avx-ne-convert",0x00000007, 1, CPUID_REG_EDX,  5,  1},
--        {"cet-sss",      0x00000007,  1, CPUID_REG_EDX, 18,  1},
--
--        {"intel-psfd",   0x00000007,  2, CPUID_REG_EDX,  0,  1},
--        {"ipred-ctrl",   0x00000007,  2, CPUID_REG_EDX,  1,  1},
--        {"rrsba-ctrl",   0x00000007,  2, CPUID_REG_EDX,  2,  1},
--        {"ddp-ctrl",     0x00000007,  2, CPUID_REG_EDX,  3,  1},
--        {"bhi-ctrl",     0x00000007,  2, CPUID_REG_EDX,  4,  1},
--        {"mcdt-no",      0x00000007,  2, CPUID_REG_EDX,  5,  1},
- 
-         {"lahfsahf",     0x80000001, NA, CPUID_REG_ECX,  0,  1},
-         {"cmplegacy",    0x80000001, NA, CPUID_REG_ECX,  1,  1},
--        {"svm",          0x80000001, NA, CPUID_REG_ECX,  2,  1},
--        {"extapic",      0x80000001, NA, CPUID_REG_ECX,  3,  1},
-         {"altmovcr8",    0x80000001, NA, CPUID_REG_ECX,  4,  1},
--        {"abm",          0x80000001, NA, CPUID_REG_ECX,  5,  1},
--        {"sse4a",        0x80000001, NA, CPUID_REG_ECX,  6,  1},
--        {"misalignsse",  0x80000001, NA, CPUID_REG_ECX,  7,  1},
--        {"3dnowprefetch",0x80000001, NA, CPUID_REG_ECX,  8,  1},
--        {"osvw",         0x80000001, NA, CPUID_REG_ECX,  9,  1},
--        {"ibs",          0x80000001, NA, CPUID_REG_ECX, 10,  1},
--        {"xop",          0x80000001, NA, CPUID_REG_ECX, 11,  1},
--        {"skinit",       0x80000001, NA, CPUID_REG_ECX, 12,  1},
--        {"wdt",          0x80000001, NA, CPUID_REG_ECX, 13,  1},
--        {"lwp",          0x80000001, NA, CPUID_REG_ECX, 15,  1},
--        {"fma4",         0x80000001, NA, CPUID_REG_ECX, 16,  1},
-         {"nodeid",       0x80000001, NA, CPUID_REG_ECX, 19,  1},
--        {"tbm",          0x80000001, NA, CPUID_REG_ECX, 21,  1},
--        {"topoext",      0x80000001, NA, CPUID_REG_ECX, 22,  1},
-         {"perfctr_core", 0x80000001, NA, CPUID_REG_ECX, 23,  1},
-         {"perfctr_nb",   0x80000001, NA, CPUID_REG_ECX, 24,  1},
- 
--        {"syscall",      0x80000001, NA, CPUID_REG_EDX, 11,  1},
--        {"nx",           0x80000001, NA, CPUID_REG_EDX, 20,  1},
--        {"mmxext",       0x80000001, NA, CPUID_REG_EDX, 22,  1},
--        {"ffxsr",        0x80000001, NA, CPUID_REG_EDX, 25,  1},
--        {"page1gb",      0x80000001, NA, CPUID_REG_EDX, 26,  1},
--        {"rdtscp",       0x80000001, NA, CPUID_REG_EDX, 27,  1},
--        {"lm",           0x80000001, NA, CPUID_REG_EDX, 29,  1},
--        {"3dnowext",     0x80000001, NA, CPUID_REG_EDX, 30,  1},
--        {"3dnow",        0x80000001, NA, CPUID_REG_EDX, 31,  1},
--
-         {"procpkg",      0x00000004,  0, CPUID_REG_EAX, 26,  6},
- 
-         {"invtsc",       0x80000007, NA, CPUID_REG_EDX,  8,  1},
- 
--        {"clzero",       0x80000008, NA, CPUID_REG_EBX,  0,  1},
--        {"rstr-fp-err-ptrs", 0x80000008, NA, CPUID_REG_EBX, 2, 1},
--        {"wbnoinvd",     0x80000008, NA, CPUID_REG_EBX,  9,  1},
--        {"ibpb",         0x80000008, NA, CPUID_REG_EBX, 12,  1},
--        {"ibrs",         0x80000008, NA, CPUID_REG_EBX, 14,  1},
--        {"amd-stibp",    0x80000008, NA, CPUID_REG_EBX, 15,  1},
--        {"ibrs-always",  0x80000008, NA, CPUID_REG_EBX, 16,  1},
--        {"stibp-always", 0x80000008, NA, CPUID_REG_EBX, 17,  1},
--        {"ibrs-fast",    0x80000008, NA, CPUID_REG_EBX, 18,  1},
--        {"ibrs-same-mode", 0x80000008, NA, CPUID_REG_EBX, 19,  1},
--        {"no-lmsl",      0x80000008, NA, CPUID_REG_EBX, 20,  1},
-         {"ppin",         0x80000008, NA, CPUID_REG_EBX, 23,  1},
--        {"amd-ssbd",     0x80000008, NA, CPUID_REG_EBX, 24,  1},
--        {"virt-ssbd",    0x80000008, NA, CPUID_REG_EBX, 25,  1},
--        {"ssb-no",       0x80000008, NA, CPUID_REG_EBX, 26,  1},
--        {"psfd",         0x80000008, NA, CPUID_REG_EBX, 28,  1},
-         {"btc-no",       0x80000008, NA, CPUID_REG_EBX, 29,  1},
--        {"ibpb-ret",     0x80000008, NA, CPUID_REG_EBX, 30,  1},
- 
-         {"nc",           0x80000008, NA, CPUID_REG_ECX,  0,  8},
-         {"apicidsize",   0x80000008, NA, CPUID_REG_ECX, 12,  4},
-@@ -383,17 +231,63 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *policy, const char* str)
-         {"svm_pausefilt",0x8000000a, NA, CPUID_REG_EDX, 10,  1},
- 
-         {"lfence+",      0x80000021, NA, CPUID_REG_EAX,  2,  1},
--        {"nscb",         0x80000021, NA, CPUID_REG_EAX,  6,  1},
--        {"auto-ibrs",    0x80000021, NA, CPUID_REG_EAX,  8,  1},
--        {"cpuid-user-dis", 0x80000021, NA, CPUID_REG_EAX, 17, 1},
- 
-         {"maxhvleaf",    0x40000000, NA, CPUID_REG_EAX,  0,  8},
- 
-         {NULL, 0, NA, CPUID_REG_INV, 0, 0}
-     };
-+    static const struct feature_name features[] = INIT_FEATURE_NAMES;
-+    /*
-+     * NB: if we switch to using a cpu_policy derived object instead of a
-+     * libxl_cpuid_policy_list we could get rid of the featureset -> cpuid leaf
-+     * conversion table and use a featureset directly as we have conversions
-+     * to/from featureset and cpu_policy.
-+     */
-+    static const struct {
-+        enum { FEAT_CPUID, FEAT_MSR } type;
-+        union {
-+            struct {
-+                uint32_t leaf, subleaf;
-+                unsigned int reg;
-+            } cpuid;
-+            struct {
-+                uint32_t index;
-+                unsigned int reg;
-+            } msr;
-+        };
-+    } feature_to_policy[] = {
-+#define CPUID_ENTRY(l, s, r) \
-+    { .type = FEAT_CPUID, .cpuid.leaf = l, .cpuid.subleaf = s, .cpuid.reg = r }
-+#define MSR_ENTRY(i, r) \
-+    { .type = FEAT_MSR, .msr.index = i, .msr.reg = r }
-+        CPUID_ENTRY(0x00000001, NA, CPUID_REG_EDX),
-+        CPUID_ENTRY(0x00000001, NA, CPUID_REG_ECX),
-+        CPUID_ENTRY(0x80000001, NA, CPUID_REG_EDX),
-+        CPUID_ENTRY(0x80000001, NA, CPUID_REG_ECX),
-+        CPUID_ENTRY(0x0000000D,  1, CPUID_REG_EAX),
-+        CPUID_ENTRY(0x00000007,  0, CPUID_REG_EBX),
-+        CPUID_ENTRY(0x00000007,  0, CPUID_REG_ECX),
-+        CPUID_ENTRY(0x80000007, NA, CPUID_REG_EDX),
-+        CPUID_ENTRY(0x80000008, NA, CPUID_REG_EBX),
-+        CPUID_ENTRY(0x00000007,  0, CPUID_REG_EDX),
-+        CPUID_ENTRY(0x00000007,  1, CPUID_REG_EAX),
-+        CPUID_ENTRY(0x80000021, NA, CPUID_REG_EAX),
-+        CPUID_ENTRY(0x00000007,  1, CPUID_REG_EBX),
-+        CPUID_ENTRY(0x00000007,  2, CPUID_REG_EDX),
-+        CPUID_ENTRY(0x00000007,  1, CPUID_REG_ECX),
-+        CPUID_ENTRY(0x00000007,  1, CPUID_REG_EDX),
-+        MSR_ENTRY(0x10a, CPUID_REG_EAX),
-+        MSR_ENTRY(0x10a, CPUID_REG_EDX),
-+#undef MSR_ENTRY
-+#undef CPUID_ENTRY
-+    };
- #undef NA
-     const char *sep, *val;
-+    char *name;
-     const struct cpuid_flags *flag;
-+    const struct feature_name *feat;
-+
-+    BUILD_BUG_ON(ARRAY_SIZE(feature_to_policy) != FEATURESET_NR_ENTRIES);
- 
-     sep = strchr(str, '=');
-     if (sep == NULL) {
-@@ -406,6 +300,37 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *policy, const char* str)
-             return cpuid_add(policy, flag, val);
-     }
- 
-+    /* Provide a NUL terminated feature name to the search helper. */
-+    name = strndup(str, sep - str);
-+    if (name == NULL)
-+        return ERROR_NOMEM;
-+
-+    feat = bsearch(name, features, ARRAY_SIZE(features), sizeof(features[0]),
-+                   search_feature);
-+    free(name);
-+
-+    if (feat == NULL)
-+        return 2;
-+
-+    switch (feature_to_policy[feat->bit / 32].type) {
-+    case FEAT_CPUID:
-+    {
-+        struct cpuid_flags f;
-+
-+        f.name = feat->name;
-+        f.leaf = feature_to_policy[feat->bit / 32].cpuid.leaf;
-+        f.subleaf = feature_to_policy[feat->bit / 32].cpuid.subleaf;
-+        f.reg = feature_to_policy[feat->bit / 32].cpuid.reg;
-+        f.bit = feat->bit % 32;
-+        f.length = 1;
-+
-+        return cpuid_add(policy, &f, val);
-+    }
-+
-+    case FEAT_MSR:
-+        return 2;
-+    }
-+
-     return 2;
- }
- 
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index f036e56fc239..7bf587455d08 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2620,6 +2620,9 @@ skip_usbdev:
-                 case 3:
-                     errstr = "illegal CPUID value (must be: [0|1|x|k|s])";
-                     break;
-+                case ERROR_NOMEM:
-+                    errstr = "out of memory";
-+                    break;
-                 default:
-                     errstr = "unknown error";
-                     break;
--- 
-2.40.0
+> 
+> TBD: Should we deal with other aspects of "gate low" in pit_get_out()
+>      here as well, right away? I was hoping to get away without ...
+>      (Note how the two functions also disagree in their placement of the
+>      "default" labels, even if that's largely benign when taking into
+>      account that modes 6 and 7 are transformed to 2 and 3 respectively
+>      by pit_load(). A difference would occur only before the guest first
+>      sets the mode, as pit_reset() sets it to 7.)
 
+I wouldn't, but as mentioned before I would also avoid touching the
+PIT much unless it's fixing an issue that's reproducible.  I think the
+chances of us messing up while modifying the code is high due to the
+lack of testing.
+
+> 
+> Other observations:
+> - Loading of new counts occurs too early in some of the modes (2/3: at
+>   end of current sequence or when gate goes high; 1/5: only when gate
+>   goes high).
+> - BCD counting doesn't appear to be properly supported either (at least
+>   that's mentioned in the public header).
+> 
+> [2] https://lists.xen.org/archives/html/xen-devel/2023-05/msg00887.html
+> ---
+> v2: In pit_load_count() also set count_stop_time from count_load_time
+>     (in case the counter is stopped). Correct spelling in comments.
+>     Correct calculations in pit_get_{count,out}().
+> 
+> --- a/xen/arch/x86/emul-i8254.c
+> +++ b/xen/arch/x86/emul-i8254.c
+> @@ -65,7 +65,10 @@ static int pit_get_count(PITState *pit,
+>  
+>      ASSERT(spin_is_locked(&pit->lock));
+>  
+> -    d = muldiv64(get_guest_time(v) - pit->count_load_time[channel],
+> +    d = pit->hw.channels[channel].gate || (c->mode & 3) == 1
+> +        ? get_guest_time(v)
+> +        : pit->count_stop_time[channel];
+> +    d = muldiv64(d - pit->count_load_time[channel] - pit->stopped_time[channel],
+>                   PIT_FREQ, SYSTEM_TIME_HZ);
+>  
+>      switch ( c->mode )
+> @@ -110,6 +113,10 @@ static void pit_load_count(PITState *pit
+>          pit->count_load_time[channel] = 0;
+>      else
+>          pit->count_load_time[channel] = get_guest_time(v);
+> +
+> +    pit->count_stop_time[channel] = pit->count_load_time[channel];
+> +    pit->stopped_time[channel] = 0;
+> +
+>      s->count = val;
+>      period = DIV_ROUND(val * SYSTEM_TIME_HZ, PIT_FREQ);
+>  
+> @@ -148,7 +155,10 @@ static int pit_get_out(PITState *pit, in
+>  
+>      ASSERT(spin_is_locked(&pit->lock));
+>  
+> -    d = muldiv64(get_guest_time(v) - pit->count_load_time[channel], 
+> +    d = pit->hw.channels[channel].gate || (s->mode & 3) == 1
+> +        ? get_guest_time(v)
+> +        : pit->count_stop_time[channel];
+> +    d = muldiv64(d - pit->count_load_time[channel] - pit->stopped_time[channel],
+>                   PIT_FREQ, SYSTEM_TIME_HZ);
+
+The above logic is repeated here and in pit_get_count(), maybe could
+be abstracted into a common helper to keep both in sync? (get_counter())
+
+Thanks, Roger.
 
