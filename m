@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B55E3EB64D7
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 17:48:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.550339.859364 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54E1EB64DA
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 17:48:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.550337.859344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qADYg-0002Cu-JQ; Fri, 16 Jun 2023 17:48:26 +0000
+	id 1qADYd-0001in-2j; Fri, 16 Jun 2023 17:48:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 550339.859364; Fri, 16 Jun 2023 17:48:26 +0000
+Received: by outflank-mailman (output) from mailman id 550337.859344; Fri, 16 Jun 2023 17:48:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qADYg-0002Cn-GC; Fri, 16 Jun 2023 17:48:26 +0000
-Received: by outflank-mailman (input) for mailman id 550339;
- Fri, 16 Jun 2023 17:48:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qADYc-0001ig-VS; Fri, 16 Jun 2023 17:48:22 +0000
+Received: by outflank-mailman (input) for mailman id 550337;
+ Fri, 16 Jun 2023 17:48:21 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+r/i=CE=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qADYf-0001uA-1o
- for xen-devel@lists.xenproject.org; Fri, 16 Jun 2023 17:48:25 +0000
+ id 1qADYb-0001iV-MI
+ for xen-devel@lists.xenproject.org; Fri, 16 Jun 2023 17:48:21 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fb0e02b3-0c6d-11ee-8611-37d641c3527e;
- Fri, 16 Jun 2023 19:48:20 +0200 (CEST)
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fa7cea49-0c6d-11ee-b232-6b7b168915f2;
+ Fri, 16 Jun 2023 19:48:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 873A48285ACC;
- Fri, 16 Jun 2023 12:48:19 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 893518285513;
+ Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id vkaCJmTDLPFp; Fri, 16 Jun 2023 12:48:19 -0500 (CDT)
+ with ESMTP id bTrGxnN3Vp94; Fri, 16 Jun 2023 12:48:17 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 049988285717;
- Fri, 16 Jun 2023 12:48:19 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 93ECF82857D3;
+ Fri, 16 Jun 2023 12:48:17 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id UWbTFFnjXTEL; Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
+ with ESMTP id 3XTbkHY92eNK; Fri, 16 Jun 2023 12:48:17 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 7CD2E8285A31;
- Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id 235DC8285717;
+ Fri, 16 Jun 2023 12:48:17 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,55 +53,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fb0e02b3-0c6d-11ee-8611-37d641c3527e
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 049988285717
+X-Inumbo-ID: fa7cea49-0c6d-11ee-b232-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 93ECF82857D3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1686937699; bh=jA1LG42ATJrlkAxSkcwEOBWl2olUCKNn9Ak/VcBw2PI=;
+	t=1686937697; bh=sLLo5kuznR7Ll5zQ+dKN851VkZneROX7L26Gc4um15c=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=lpCxyXxe9bQRo9OOm8PmakAcyC3N+ki6Ebw9EEzBaTElZRcYvvE7S7ZgS9xeqOBEj
-	 lctpbvwM0XOi6RoBmQEHf+9L1KbCA3nmzUWBboU17sDoX0FGSHoLTmxpMuW2+WDc8A
-	 Jx8xRoNatW/Ofsqv0q4/DXFqeb/paoUbsg4QMgD0=
+	b=KtRfZlmiXnT1Y1Z6FyePEZHcZgxovZ3dxbt8VRuLsp76rgsVg0mCLqQ7r2I2ORMRq
+	 hE3ru1ZuvQ217jOuywuSaoCiehx5ZxDy/Ntc/0W1tVF2plfluC1bVlFCsLWn9N0lhL
+	 nj/gIwxrqQmAzuieHJ8s/Yxtkh7CrBGrqy12r1s8=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: tpearson@raptorengineering.com,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 4/4] maintainers: Add ppc64 maintainer
-Date: Fri, 16 Jun 2023 12:48:03 -0500
-Message-Id: <ee1b287eaeeeebc2426c71ddbf18f68515876c3e.1686936278.git.sanastasio@raptorengineering.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v4 1/4] automation: Add container for ppc64le builds
+Date: Fri, 16 Jun 2023 12:48:00 -0500
+Message-Id: <0d59b5eb8de2b00839204c36a2a45eebab994369.1686936278.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1686936278.git.sanastasio@raptorengineering.com>
 References: <cover.1686936278.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
----
- MAINTAINERS | 4 ++++
- 1 file changed, 4 insertions(+)
+Add a container for cross-compiling xen for ppc64le.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1bb7a6a839..25139fe4a3 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -460,6 +460,10 @@ X:	xen/arch/x86/acpi/lib.c
- F:	xen/drivers/cpufreq/
- F:	xen/include/acpi/cpufreq/
-=20
-+PPC64
-+M:	Shawn Anastasio <sanastasio@raptorengineering.com>
-+F:	xen/arch/ppc/
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ .../build/debian/bullseye-ppc64le.dockerfile  | 28 +++++++++++++++++++
+ automation/scripts/containerize               |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 automation/build/debian/bullseye-ppc64le.dockerfile
+
+diff --git a/automation/build/debian/bullseye-ppc64le.dockerfile b/automa=
+tion/build/debian/bullseye-ppc64le.dockerfile
+new file mode 100644
+index 0000000000..8a87631b52
+--- /dev/null
++++ b/automation/build/debian/bullseye-ppc64le.dockerfile
+@@ -0,0 +1,28 @@
++FROM debian:bullseye-slim
++LABEL maintainer.name=3D"The Xen Project" \
++      maintainer.email=3D"xen-devel@lists.xenproject.org"
 +
- PUBLIC I/O INTERFACES AND PV DRIVERS DESIGNS
- M:	Juergen Gross <jgross@suse.com>
- S:	Supported
++ENV DEBIAN_FRONTEND=3Dnoninteractive
++ENV USER root
++
++# Add compiler path
++ENV CROSS_COMPILE powerpc64le-linux-gnu-
++
++RUN mkdir /build
++WORKDIR /build
++
++# build depends
++RUN apt-get update && \
++    apt-get --quiet --yes --no-install-recommends install \
++        bison \
++        build-essential \
++        checkpolicy \
++        flex \
++        gawk \
++        gcc-powerpc64le-linux-gnu \
++        make \
++        python3-minimal \
++        && \
++        apt-get autoremove -y && \
++        apt-get clean && \
++        rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+diff --git a/automation/scripts/containerize b/automation/scripts/contain=
+erize
+index 5476ff0ea1..6d46f63665 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -33,6 +33,7 @@ case "_${CONTAINER}" in
+     _focal) CONTAINER=3D"${BASE}/ubuntu:focal" ;;
+     _jessie) CONTAINER=3D"${BASE}/debian:jessie" ;;
+     _jessie-i386) CONTAINER=3D"${BASE}/debian:jessie-i386" ;;
++    _bullseye-ppc64le) CONTAINER=3D"${BASE}/debian:bullseye-ppc64le" ;;
+     _stretch|_) CONTAINER=3D"${BASE}/debian:stretch" ;;
+     _stretch-i386) CONTAINER=3D"${BASE}/debian:stretch-i386" ;;
+     _buster-gcc-ibt) CONTAINER=3D"${BASE}/debian:buster-gcc-ibt" ;;
 --=20
 2.30.2
 
