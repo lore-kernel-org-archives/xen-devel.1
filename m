@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D4D5EB64DA
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 17:03:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.550330.859335 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A79EB64D7
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Jun 2023 17:48:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.550338.859350 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qACqc-0005fG-Pw; Fri, 16 Jun 2023 17:02:54 +0000
+	id 1qADYd-0001mA-CO; Fri, 16 Jun 2023 17:48:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 550330.859335; Fri, 16 Jun 2023 17:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 550338.859350; Fri, 16 Jun 2023 17:48:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qACqc-0005f9-Ju; Fri, 16 Jun 2023 17:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 550330;
- Fri, 16 Jun 2023 17:02:53 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qACqb-0005ez-N6; Fri, 16 Jun 2023 17:02:53 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qACqb-0002AE-LD; Fri, 16 Jun 2023 17:02:53 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qACqb-0003Gj-A7; Fri, 16 Jun 2023 17:02:53 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qACqb-0003DI-9f; Fri, 16 Jun 2023 17:02:53 +0000
+	id 1qADYd-0001lk-70; Fri, 16 Jun 2023 17:48:23 +0000
+Received: by outflank-mailman (input) for mailman id 550338;
+ Fri, 16 Jun 2023 17:48:22 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+r/i=CE=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1qADYb-0001iV-Vo
+ for xen-devel@lists.xenproject.org; Fri, 16 Jun 2023 17:48:21 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id faf4300d-0c6d-11ee-b232-6b7b168915f2;
+ Fri, 16 Jun 2023 19:48:20 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 610BA82857D3;
+ Fri, 16 Jun 2023 12:48:19 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id KyTCUD6tTjYk; Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 80A828285AD7;
+ Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id PfT1xBtayfK7; Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
+Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id 234F08285717;
+ Fri, 16 Jun 2023 12:48:18 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,85 +53,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=xv9sVtvi2t5cL9hUnlR5lXlWIylDrFT/LQnbDxHq22Q=; b=cxbAyog0c1mxw499ZkNBodj3i1
-	7AHn5sApk1Mbe2uf/GnajDAC2dBsry9oO37j+u0R+87SaYZaQY5+TSA+++KNd8E8nXnmK7U2i+hht
-	OCXWyB2oRMjfmXH6Oy8k4U52N5ipKQZxqM7J4M/Jb9QRbj/jXUskXob33YhR94onl89s=;
+X-Inumbo-ID: faf4300d-0c6d-11ee-b232-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 80A828285AD7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1686937698; bh=q+rmhawpP7Wzq2WnGrOzz4f9y6ngrhvev0WPdaxoaGY=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=P31QQK+RNPJVA6AiV4UMviBqyWiBsCaI8UQXnz/ouJNCI4es3KlL+9E0fweBq15oD
+	 m85sOaScxPGGo7wtsIad7cnMCPt6iVdRKZ0VnNFJagTdFvaHWh7sWoP0Uc4w8nPMHR
+	 i9FgBygMVYhDUbIRpb/GzNzQif1/Qwaj3vAyp37E=
+X-Virus-Scanned: amavisd-new at rptsys.com
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-181466-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: tpearson@raptorengineering.com,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v4 3/4] automation: Add ppc64le cross-build jobs
+Date: Fri, 16 Jun 2023 12:48:02 -0500
+Message-Id: <1a09823b03b5054c97efcf7008f9626d8ee83f49.1686936278.git.sanastasio@raptorengineering.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1686936278.git.sanastasio@raptorengineering.com>
+References: <cover.1686936278.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 181466: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=e0586a4ff514590eec50185e2440b97f9a31cb7f
-X-Osstest-Versions-That:
-    xen=c4e492a1399b763400daf3ca35fcef3028c7a7da
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 16 Jun 2023 17:02:53 +0000
+Content-Transfer-Encoding: quoted-printable
 
-flight 181466 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/181466/
+Add build jobs to cross-compile Xen for ppc64le.
 
-Failures :-/ but no regressions.
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ automation/gitlab-ci/build.yaml | 60 +++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build=
+.yaml
+index 420ffa5acb..bd8c7332db 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -183,6 +183,33 @@
+   variables:
+     <<: *gcc
+=20
++.ppc64le-cross-build-tmpl:
++  <<: *build
++  variables:
++    XEN_TARGET_ARCH: ppc64
++  tags:
++    - x86_64
++
++.ppc64le-cross-build:
++  extends: .ppc64le-cross-build-tmpl
++  variables:
++    debug: n
++
++.ppc64le-cross-build-debug:
++  extends: .ppc64le-cross-build-tmpl
++  variables:
++    debug: y
++
++.gcc-ppc64le-cross-build:
++  extends: .ppc64le-cross-build
++  variables:
++    <<: *gcc
++
++.gcc-ppc64le-cross-build-debug:
++  extends: .ppc64le-cross-build-debug
++  variables:
++    <<: *gcc
++
+ .yocto-test:
+   stage: build
+   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
+@@ -516,6 +543,39 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     EXTRA_FIXED_RANDCONFIG:
+       CONFIG_COVERAGE=3Dn
+=20
++# Power cross-build
++debian-bullseye-gcc-ppc64le:
++  extends: .gcc-ppc64le-cross-build
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    HYPERVISOR_ONLY: y
++
++debian-bullseye-gcc-ppc64le-debug:
++  extends: .gcc-ppc64le-cross-build-debug
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    HYPERVISOR_ONLY: y
++
++debian-bullseye-gcc-ppc64le-randconfig:
++  extends: .gcc-ppc64le-cross-build
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    RANDCONFIG: y
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=3Dn
++
++debian-bullseye-gcc-ppc64le-debug-randconfig:
++  extends: .gcc-ppc64le-cross-build-debug
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    RANDCONFIG: y
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=3Dn
++
+ # Yocto test jobs
+ yocto-qemuarm64:
+   extends: .yocto-test-arm64
+--=20
+2.30.2
 
-version targeted for testing:
- xen                  e0586a4ff514590eec50185e2440b97f9a31cb7f
-baseline version:
- xen                  c4e492a1399b763400daf3ca35fcef3028c7a7da
-
-Last test of basis   181457  2023-06-15 21:00:25 Z    0 days
-Testing same since   181466  2023-06-16 14:01:56 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   c4e492a139..e0586a4ff5  e0586a4ff514590eec50185e2440b97f9a31cb7f -> smoke
 
