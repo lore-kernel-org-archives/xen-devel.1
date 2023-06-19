@@ -4,37 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA23EB64DA
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Jun 2023 13:35:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551092.860440 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2BD9EB64D9
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Jun 2023 13:45:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551128.860480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBF20-0001gd-Ch; Mon, 19 Jun 2023 13:34:56 +0000
+	id 1qBFBQ-0005ti-CW; Mon, 19 Jun 2023 13:44:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551092.860440; Mon, 19 Jun 2023 13:34:56 +0000
+Received: by outflank-mailman (output) from mailman id 551128.860480; Mon, 19 Jun 2023 13:44:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBF20-0001gR-9K; Mon, 19 Jun 2023 13:34:56 +0000
-Received: by outflank-mailman (input) for mailman id 551092;
- Mon, 19 Jun 2023 13:34:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBFBQ-0005tb-8R; Mon, 19 Jun 2023 13:44:40 +0000
+Received: by outflank-mailman (input) for mailman id 551128;
+ Mon, 19 Jun 2023 13:44:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=AnRR=CH=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qBF1z-0000wG-2K
- for xen-devel@lists.xenproject.org; Mon, 19 Jun 2023 13:34:55 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1249333c-0ea6-11ee-b234-6b7b168915f2;
- Mon, 19 Jun 2023 15:34:52 +0200 (CEST)
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2b475b54253so18176251fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 19 Jun 2023 06:34:52 -0700 (PDT)
-Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- f26-20020a2e9e9a000000b002adb0164258sm5222236ljk.112.2023.06.19.06.34.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Jun 2023 06:34:52 -0700 (PDT)
+ <SRS0=8v/a=CH=bugseng.com=roberto.bagnara@srs-se1.protection.inumbo.net>)
+ id 1qBFBO-0005tV-Cl
+ for xen-devel@lists.xenproject.org; Mon, 19 Jun 2023 13:44:38 +0000
+Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6de153c6-0ea7-11ee-8611-37d641c3527e;
+ Mon, 19 Jun 2023 15:44:36 +0200 (CEST)
+Received: from [192.168.1.143] (unknown [151.37.186.123])
+ by support.bugseng.com (Postfix) with ESMTPSA id 53CB14EE074F;
+ Mon, 19 Jun 2023 15:44:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,135 +41,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1249333c-0ea6-11ee-b234-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687181692; x=1689773692;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sORtZXgE060MfqgzUMWkg8dUi4XV3lqZfHNe2K/q7sI=;
-        b=OR0omCmUNaVSa+ABBOx/mOMTZqtSrg6iAJ0Abk/76R1iFgfm8Frq9meARruSN+bmG0
-         NHlQS33KVXMqdgY1V0vJxMgQ71srBSCBbX6JhzlwUhbIURabBcuCK3QcKg69GQKQA2qQ
-         2LiusC94Q8PFXAycaXF2gXuujHRoZO0GzijoyHLgdpWbsf0uZONS1QqeRpJ6pDhXhRta
-         8D5V83oHK62h5iZ7mxS/TG1D7/B1vrjcXWwbx/JEI8WutdZlCbE6RqgXmIaQ+7r3bJ/I
-         jt8519iFNXlj+XAD+OndzCKjxpQQl44lgAyQPzMEXV+27YHmuuJMmLplQ4ctqg250ZsT
-         jZDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687181692; x=1689773692;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=sORtZXgE060MfqgzUMWkg8dUi4XV3lqZfHNe2K/q7sI=;
-        b=Dm31vlox2de0hWddux2YxDjuoe5gv7Z7HLuImeLxZhPfGq7WV8oW1U3LO+L/bar5+P
-         HS9Xg5o/VRs1swil0sFi1iCFimaDIdxDv8SUVkF3J7aXjVX0idbsCKdR05GcHrqTYvkV
-         Wj8+HNTvMDgmQ+XAtf9BRKbpPGIA4l54NWVXBwBrFPZvXTBThQ0wlNJ4vGDvQ4l50X05
-         mIeFlnjcWafoRgQJgYIPq1SOMkYCIXi9rT4o41npbz3Ent6sryCSQl1uSYU1SoByom2d
-         3LYEXMlcLwm5vZDEZnY+Hzi0HdFypSyt6gWSdWWBQKVhKdfs+Fc5Bfc1vuPFqHselLsb
-         /e4g==
-X-Gm-Message-State: AC+VfDyL56HKCbFsG1jH1/gqJHBPgDm4lnVGf3b46rzNwydfQc4sBlXX
-	50BtVxu57D9eu6A0S15661ree7RYRd4=
-X-Google-Smtp-Source: ACHHUZ7RsJ0m8hdhaMr1HpFujvB18TcExNhz338pGRj9J7mC5H49DOpM8HXn7sen6S+9NG4lwYxjIA==
-X-Received: by 2002:a2e:b603:0:b0:2b4:6d7e:4b08 with SMTP id r3-20020a2eb603000000b002b46d7e4b08mr2968830ljn.35.1687181692290;
-        Mon, 19 Jun 2023 06:34:52 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 3/6] xen/riscv: introduce function for physical offset calculation
-Date: Mon, 19 Jun 2023 16:34:44 +0300
-Message-Id: <f84bdc5ad9f10f864d070f7581dce663ccc9cb53.1687178053.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cover.1687178053.git.oleksii.kurochko@gmail.com>
-References: <cover.1687178053.git.oleksii.kurochko@gmail.com>
+X-Inumbo-ID: 6de153c6-0ea7-11ee-8611-37d641c3527e
+Message-ID: <8f8545c1-02f8-6dfc-8320-8cc0175d5b37@bugseng.com>
+Date: Mon, 19 Jun 2023 15:44:32 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.12) Gecko/20050929
+ Thunderbird/1.0.7 Fedora/1.0.7-1.1.fc4 Mnenhy/0.7.3.0
+Subject: Re: [XEN PATCH] docs/misra: document the C dialect and translation
+ toolchain assumptions.
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, consulting@bugseng.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <db6e7432f92657c1386a475895c3b334e1c53693.1686839154.git.roberto.bagnara@bugseng.com>
+ <alpine.DEB.2.22.394.2306151444310.897208@ubuntu-linux-20-04-desktop>
+ <3499c107-ea0d-3a74-4278-86879a9d80e7@bugseng.com>
+ <90eec636-7ae5-8e1b-1561-0de62e0bc799@suse.com>
+From: Roberto Bagnara <roberto.bagnara@bugseng.com>
+In-Reply-To: <90eec636-7ae5-8e1b-1561-0de62e0bc799@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The function was introduced to calculate and save physical
-offset before MMU is enabled because access to start() is
-PC-relative and in case of linker_addr != load_addr it will
-result in incorrect value in phys_offset.
+On 19/06/23 09:54, Jan Beulich wrote:
+> On 16.06.2023 17:54, Roberto Bagnara wrote:
+>> On 16/06/23 01:26, Stefano Stabellini wrote:
+>>> On Thu, 15 Jun 2023, Roberto Bagnara wrote:
+>>>> +   * - Unspecified escape sequence is encountered in a character constant or a string literal token
+>>>> +     - X86_64
+>>>> +     - \\m:
+>>>> +          non-documented GCC extension.
+>>>
+>>> Are you saying that we are using \m and \m is not allowed by the C
+>>> standard?
+>>
+>> The C standard does not specify that escape sequence, so what is
+>> done with it, in particular by the preprocessor, is not specified.
+> 
+> Isn't it rather that gcc doesn't follow the spec to the word here?
+> As per what preprocessing-token can be, anything that isn't (among
+> other things) a string-literal or a character-constants falls under
+> "each non-white-space character that cannot be one of the above".
+> Hence since "\mode" doesn't form a valid string literal, it would
+> need to become (using '' notation for separation purposes, not to
+> indicate character constants) '"' '\' 'mode'. Which of course would
+> break what subsequently are string literals, as the supposedly
+> closing double-quote would now be an opening one. Which in turn is
+> presumably the reason why gcc (and probably other compilers as well)
+> behaves the way it does.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes in V2:
-  - add __ro_after_init for phys_offset variable.
-  - remove double blank lines.
-  - add __init for calc_phys_offset().
-  - update the commit message.
-  - declaring variable phys_off as non static as it will be used in head.S.
----
- xen/arch/riscv/include/asm/mm.h |  2 ++
- xen/arch/riscv/mm.c             | 18 +++++++++++++++---
- xen/arch/riscv/riscv64/head.S   |  2 ++
- 3 files changed, 19 insertions(+), 3 deletions(-)
+After a significant amount of work on the matter, we came to the
+following conclusions:
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 64293eacee..996041ce81 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -11,4 +11,6 @@ void setup_initial_pagetables(void);
- void enable_mmu(void);
- void cont_after_mmu_is_enabled(void);
- 
-+void calc_phys_offset(void);
-+
- #endif /* _ASM_RISCV_MM_H */
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 8ceed445cf..570033f17f 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -1,3 +1,4 @@
-+#include <xen/cache.h>
- #include <xen/compiler.h>
- #include <xen/init.h>
- #include <xen/kernel.h>
-@@ -19,9 +20,10 @@ struct mmu_desc {
- 
- extern unsigned char cpu0_boot_stack[STACK_SIZE];
- 
--#define PHYS_OFFSET ((unsigned long)_start - XEN_VIRT_START)
--#define LOAD_TO_LINK(addr) ((addr) - PHYS_OFFSET)
--#define LINK_TO_LOAD(addr) ((addr) + PHYS_OFFSET)
-+unsigned long __ro_after_init phys_offset;
-+
-+#define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
-+#define LINK_TO_LOAD(addr) ((unsigned long)(addr) + phys_offset)
- 
- /*
-  * It is expected that Xen won't be more then 2 MB.
-@@ -273,3 +275,13 @@ void __init noreturn noinline enable_mmu()
-     switch_stack_and_jump((unsigned long)cpu0_boot_stack + STACK_SIZE,
-                           cont_after_mmu_is_enabled);
- }
-+
-+/*
-+ * calc_phys_offset() should be used before MMU is enabled because access to
-+ * start() is PC-relative and in case when load_addr != linker_addr phys_offset
-+ * will have an incorrect value
-+ */
-+void __init calc_phys_offset(void)
-+{
-+    phys_offset = (unsigned long)start - XEN_VIRT_START;
-+}
-diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-index 2c0304646a..850fbb58a7 100644
---- a/xen/arch/riscv/riscv64/head.S
-+++ b/xen/arch/riscv/riscv64/head.S
-@@ -29,6 +29,8 @@ ENTRY(start)
- 
-         jal     reset_stack
- 
-+        jal     calc_phys_offset
-+
-         tail    start_xen
- 
-         .section .text, "ax", %progbits
--- 
-2.40.1
+1) In this matter, the C Standard is not at all clear regarding
+    the conditions upon which it is legitimate placing undefined
+    escape sequences in the sources.
+2) The GNU C preprocessor manual says nothing in this regard.
+3) Experimenting with a lot of compilers, it seems all implementers
+    have filled the dots in the same way, that is: during translation
+    phase 3, escape sequences are considered for the sole purpose
+    of getting preprocessing tokens right; escape sequences, whether
+    defined or undefined, are left untouched and passed over to translation
+    phase 4.
 
+Summarizing, we are now convinced that what we are facing is one
+of the cases (there are many of them), where the C Standard is
+not being clear, and not a case of undefined behavior.  Xen use
+of \m guarded by __ASSEMBLY__ is thus correct and not problematic.
+Indeed, the check for undefined escape sequences can only
+be done after preprocessing.  I have asked that ECLAIR
+is suitably amended.
+
+Thank you all, and particularly to Jan, for the perseverance.
+Kind regards,
+
+    Roberto
 
