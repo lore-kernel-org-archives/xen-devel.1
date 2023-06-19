@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4689EB64DB
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Jun 2023 13:35:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551095.860469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 939D8EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Jun 2023 13:35:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551091.860429 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBF23-0002RO-F0; Mon, 19 Jun 2023 13:34:59 +0000
+	id 1qBF1z-0001QY-4B; Mon, 19 Jun 2023 13:34:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551095.860469; Mon, 19 Jun 2023 13:34:59 +0000
+Received: by outflank-mailman (output) from mailman id 551091.860429; Mon, 19 Jun 2023 13:34:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBF23-0002Qc-A6; Mon, 19 Jun 2023 13:34:59 +0000
-Received: by outflank-mailman (input) for mailman id 551095;
- Mon, 19 Jun 2023 13:34:58 +0000
+	id 1qBF1z-0001QQ-0a; Mon, 19 Jun 2023 13:34:55 +0000
+Received: by outflank-mailman (input) for mailman id 551091;
+ Mon, 19 Jun 2023 13:34:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AnRR=CH=gmail.com=oleksii.kurochko@srs-se1.protection.inumbo.net>)
- id 1qBF22-0000wG-2d
- for xen-devel@lists.xenproject.org; Mon, 19 Jun 2023 13:34:58 +0000
+ id 1qBF1y-0000wG-2C
+ for xen-devel@lists.xenproject.org; Mon, 19 Jun 2023 13:34:54 +0000
 Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
  [2a00:1450:4864:20::231])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 13931462-0ea6-11ee-b234-6b7b168915f2;
- Mon, 19 Jun 2023 15:34:55 +0200 (CEST)
+ id 1202d6e3-0ea6-11ee-b234-6b7b168915f2;
+ Mon, 19 Jun 2023 15:34:52 +0200 (CEST)
 Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2b45e6e1b73so39972241fa.0
- for <xen-devel@lists.xenproject.org>; Mon, 19 Jun 2023 06:34:55 -0700 (PDT)
+ 38308e7fff4ca-2b46b11051aso26899771fa.3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Jun 2023 06:34:52 -0700 (PDT)
 Received: from fedora.. ([94.75.70.14]) by smtp.gmail.com with ESMTPSA id
- f26-20020a2e9e9a000000b002adb0164258sm5222236ljk.112.2023.06.19.06.34.53
+ f26-20020a2e9e9a000000b002adb0164258sm5222236ljk.112.2023.06.19.06.34.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Jun 2023 06:34:54 -0700 (PDT)
+ Mon, 19 Jun 2023 06:34:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,36 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13931462-0ea6-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 1202d6e3-0ea6-11ee-b234-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687181694; x=1689773694;
+        d=gmail.com; s=20221208; t=1687181692; x=1689773692;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A+nQRuKJN5u5llfZLQokcA1AqsaluOe8xrZ2dOYYFlU=;
-        b=IcjnYKnNhrFHWPDVKzhjiky1im4j8NA7VDhZVTZMDDywDb2b7PIBuZnmWwZAkYFZub
-         XKa29BMrVjFyxuTtBW4yMDhYO3S9gDrnU4uD+2ya0VmH4ub5inzmSbrr/EAanncUl3zx
-         Z35vq510+ztCwLilxyEQiOxCDDcIB6iKCLdtqn92wbqmWXzr7A8dtah+4sYBEPKoiXz+
-         bhrRR3TH4vAixbxwjYSyy5ZtD6kGTCCSN5YUvdBnhQLMr4sY/cPBaNGoe3SLbIFiSfNV
-         EWTD2yN0VrJgLRLleZXaadIq09oxDiX5pqECfh018w0Hfg/s0uOz5TD/S+peJUHqXnFr
-         AbOQ==
+        bh=D79BErD46lr9bA2msM28xOF0IDn3VryLu7dildSZSiQ=;
+        b=CiU8FgdpglJH1B2wDzox9elNXnPOGHvSmx8ag4Iu0woaTXZ9X/ui3yu0i8QrlR0mPw
+         o3/0Bd8Uw5YS43cMK1jGN0Wx5m9lQWPaw/yhNlBWTFCbn/F040pn7WW+IiC/mfRIdtNM
+         M9NDGNV2gVysWaXytZyMewSd0IFSmNNbTOZu2QjMxJci68N8Ssisnz8LHxKU4sxRO4jH
+         GOJmUf0fA9m0cbr94B43Lo/TmTjStbg2Mpxelv7FXUoSnXs6TdaXLERWSpz9nV3eVdMh
+         uH2Ut5vF6en9pVMsKRVK/x8L6OMs8XZXQYLYw28mqG5yan1FNs4hzjFUJy4YtLPThz1F
+         F4UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687181694; x=1689773694;
+        d=1e100.net; s=20221208; t=1687181692; x=1689773692;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A+nQRuKJN5u5llfZLQokcA1AqsaluOe8xrZ2dOYYFlU=;
-        b=Qv5X1gz/yJTHomHs3gUA9YW3OwVpYVJjWjizDKCGVkDWzsXuLnHS3ZEEKlAxnt6Ipq
-         e2qhhBBGEStQm34cQMAS5469OHqBzvA+X1DDy4oNt55RXeV2iEXBJVtoO17BudiQKW97
-         /t1VPLNRtxVofcBm+DNlR2fG1vbAuoFDcqlaE/NOhc6OPui1R/QRrnZnHMxcWmMwkKug
-         mhyekQ9/1q4zRggBcZPBZbAlEmidmuvCWOWeWlRsZZ3qQzsO50xpX/EoSgmimdjEa57/
-         0L8OksXhMFms8y5u2hw9m4dBwqo5Uhpg6iwqQbb9CAThj6rNNrudWIDTPkqTVcPB1mxt
-         XCXA==
-X-Gm-Message-State: AC+VfDwEiFxo8WQOSNaZcxL8L3gb2k7oprG9MazPiAXCHBqtCV4fOZKl
-	kCxY4KzxZTgMzkvTYc2cBGCDTmiAEoU=
-X-Google-Smtp-Source: ACHHUZ4N4kcSEsgLuUYkpuO9tCKdB4apKqEk2SMLIh9nX6/fbfCsIDWTSakOgrEa9ycVLGBiYBG9Gg==
-X-Received: by 2002:a2e:7003:0:b0:2b4:70b1:af01 with SMTP id l3-20020a2e7003000000b002b470b1af01mr2575846ljc.20.1687181694484;
-        Mon, 19 Jun 2023 06:34:54 -0700 (PDT)
+        bh=D79BErD46lr9bA2msM28xOF0IDn3VryLu7dildSZSiQ=;
+        b=A925MmXB+bWA5sTrHvNlPcx3A/Iyss0VcU5FQDuHYsOtBlkKCfCCM3Wd/wp02p6NzQ
+         JZ96u/I1YolHoywCB+VnCudYtY3Fw3NlvkZ2Y03WfXN2RNJF1iFWuyFPBuud/DyqQW7M
+         qCRRXGb+1o1KIVxUW0rH+EpEEmkKMaBZdItHRbdYBzMmoupsOfkvvy3DHrBWxiozB6HE
+         pXIuakInLUB+8NL+YNT5YqYhNomQzICB3VR19yJhxRrrr1a5tqDsPwqX1vJTuLjRL/vE
+         WIro+sqwUzjmjXAGxcMqCFDN1v17ppqODn9VrfT+6ZmZtvI/lICx62TqiN6+vN2OjxOE
+         9qMQ==
+X-Gm-Message-State: AC+VfDzWLJWfMRW2//6HnMBv6AvJlaByoCw3z2MjP2f1BZjg1W1c0suD
+	qkyARpcgIFvhNwQ8gzid6CqUU6K3PY8=
+X-Google-Smtp-Source: ACHHUZ5KWo1WLQnAxG/Ix18faBmCWyG6Ft5VzG7rhfuLO4ZVwOJ/WBt520ZwTZj7Kv88Gh3hr40WjQ==
+X-Received: by 2002:a2e:9e07:0:b0:2b4:5fdd:f588 with SMTP id e7-20020a2e9e07000000b002b45fddf588mr4174106ljk.43.1687181691633;
+        Mon, 19 Jun 2023 06:34:51 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -85,51 +85,53 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Bob Eshleman <bobbyeshleman@gmail.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>
-Subject: [PATCH v2 6/6] xen/riscv: move extern of cpu0_boot_stack to header
-Date: Mon, 19 Jun 2023 16:34:47 +0300
-Message-Id: <ce6fcda2899677cd241ff31cc4d915542475a05d.1687178053.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v2 2/6] xen/riscv: introduce reset_stack() function
+Date: Mon, 19 Jun 2023 16:34:43 +0300
+Message-Id: <6024617719467cd2da8ae03b81ddc899f2ba4311.1687178053.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1687178053.git.oleksii.kurochko@gmail.com>
 References: <cover.1687178053.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The reason for reset_stack() introduction is that stack should be
+reset twice:
+1. Before jumping to C world at the start of _start() function.
+2. After jumping from 1:1 mapping world.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 Changes in V2:
-  - add Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>.
+  - update the commit message.
+  - move out reset_stack() from .text.header to .text.
+  - add Reviewed-by: Alistair Francis <alistair.francis@wdc.com>.
 ---
- xen/arch/riscv/include/asm/mm.h | 2 ++
- xen/arch/riscv/mm.c             | 2 --
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/riscv/riscv64/head.S | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
-index 3f694a43ef..085eaab7fb 100644
---- a/xen/arch/riscv/include/asm/mm.h
-+++ b/xen/arch/riscv/include/asm/mm.h
-@@ -8,6 +8,8 @@
- #define pfn_to_paddr(pfn) ((paddr_t)(pfn) << PAGE_SHIFT)
- #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+index 8887f0cbd4..2c0304646a 100644
+--- a/xen/arch/riscv/riscv64/head.S
++++ b/xen/arch/riscv/riscv64/head.S
+@@ -27,8 +27,16 @@ ENTRY(start)
+         add     t3, t3, __SIZEOF_POINTER__
+         bltu    t3, t4, .L_clear_bss
  
-+extern unsigned char cpu0_boot_stack[];
++        jal     reset_stack
 +
- void setup_initial_pagetables(void);
++        tail    start_xen
++
++        .section .text, "ax", %progbits
++
++ENTRY(reset_stack)
+         la      sp, cpu0_boot_stack
+         li      t0, STACK_SIZE
+         add     sp, sp, t0
  
- void enable_mmu(void);
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 663048c783..602b89aeed 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -20,8 +20,6 @@ struct mmu_desc {
-     pte_t *pgtbl_base;
- };
- 
--extern unsigned char cpu0_boot_stack[STACK_SIZE];
--
- unsigned long __ro_after_init phys_offset;
- 
- #define LOAD_TO_LINK(addr) ((unsigned long)(addr) - phys_offset)
+-        tail    start_xen
++        ret
++
 -- 
 2.40.1
 
