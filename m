@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FB5EB64DB
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551544.861171 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81952C001B3
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551553.861205 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ73-0000G7-7H; Tue, 20 Jun 2023 11:01:29 +0000
+	id 1qBZ75-0000wi-BN; Tue, 20 Jun 2023 11:01:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551544.861171; Tue, 20 Jun 2023 11:01:29 +0000
+Received: by outflank-mailman (output) from mailman id 551553.861205; Tue, 20 Jun 2023 11:01:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ73-0000E6-0v; Tue, 20 Jun 2023 11:01:29 +0000
-Received: by outflank-mailman (input) for mailman id 551544;
- Tue, 20 Jun 2023 10:35:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBZ74-0000tY-Tq; Tue, 20 Jun 2023 11:01:30 +0000
+Received: by outflank-mailman (input) for mailman id 551553;
+ Tue, 20 Jun 2023 10:35:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovpU=CI=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qBYhr-0004Pq-I4
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:27 +0000
+ id 1qBYhz-0004Ou-8Q
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:35 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b8d6657-0f56-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 12:35:26 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2fa244a0-0f56-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 12:35:33 +0200 (CEST)
 Received: from beta.bugseng.com (93-40-74-174.ip37.fastwebnet.it
  [93.40.74.174])
- by support.bugseng.com (Postfix) with ESMTPSA id 079F94EE0757;
- Tue, 20 Jun 2023 12:35:24 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 8BB184EE0754;
+ Tue, 20 Jun 2023 12:35:32 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,24 +42,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b8d6657-0f56-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 2fa244a0-0f56-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 05/13] xen/common: fixed violations of MISRA C:2012 Rule 7.2
-Date: Tue, 20 Jun 2023 12:34:57 +0200
-Message-Id: <8aff4bc56b29372345e828462766d803b8c9b710.1687250177.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH 09/13] xen/public: fixed violations of MISRA C:2012 Rule 7.2
+Date: Tue, 20 Jun 2023 12:35:01 +0200
+Message-Id: <2214598125081ccfb324555288bee0340f8b1024.1687250177.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687250177.git.gianluca.luparini@bugseng.com>
 References: <cover.1687250177.git.gianluca.luparini@bugseng.com>
@@ -72,62 +68,34 @@ The xen sources contains violations of MISRA C:2012 Rule 7.2 whose headline stat
 "A "u" or "U" suffix shall be applied to all integer constants that are represented in an unsigned type".
 
 I propose to use "U" as a suffix to explicitly state when an integer constant is represented in an unsigned type.
+For homogeneity, I also added the "U" suffix in some cases that the tool didn't report as violations.
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/common/device_tree.c        | 4 ++--
- xen/include/xen/libfdt/fdt.h    | 2 +-
- xen/include/xen/libfdt/libfdt.h | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ xen/include/public/io/ring.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index 8da1052911..0677193ab3 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -2115,7 +2115,7 @@ static void __init __unflatten_device_tree(const void *fdt,
-     /* Allocate memory for the expanded device tree */
-     mem = (unsigned long)_xmalloc (size + 4, __alignof__(struct dt_device_node));
+diff --git a/xen/include/public/io/ring.h b/xen/include/public/io/ring.h
+index 025939278b..6a6deeee8f 100644
+--- a/xen/include/public/io/ring.h
++++ b/xen/include/public/io/ring.h
+@@ -36,11 +36,11 @@
+ typedef unsigned int RING_IDX;
  
--    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeef);
-+    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeefU);
+ /* Round a 32-bit unsigned constant down to the nearest power of two. */
+-#define __RD2(_x)  (((_x) & 0x00000002) ? 0x2                  : ((_x) & 0x1))
+-#define __RD4(_x)  (((_x) & 0x0000000c) ? __RD2((_x)>>2)<<2    : __RD2(_x))
+-#define __RD8(_x)  (((_x) & 0x000000f0) ? __RD4((_x)>>4)<<4    : __RD4(_x))
+-#define __RD16(_x) (((_x) & 0x0000ff00) ? __RD8((_x)>>8)<<8    : __RD8(_x))
+-#define __RD32(_x) (((_x) & 0xffff0000) ? __RD16((_x)>>16)<<16 : __RD16(_x))
++#define __RD2(_x)  (((_x) & 0x00000002U) ? 0x2                  : ((_x) & 0x1))
++#define __RD4(_x)  (((_x) & 0x0000000cU) ? __RD2((_x)>>2)<<2    : __RD2(_x))
++#define __RD8(_x)  (((_x) & 0x000000f0U) ? __RD4((_x)>>4)<<4    : __RD4(_x))
++#define __RD16(_x) (((_x) & 0x0000ff00U) ? __RD8((_x)>>8)<<8    : __RD8(_x))
++#define __RD32(_x) (((_x) & 0xffff0000U) ? __RD16((_x)>>16)<<16 : __RD16(_x))
  
-     dt_dprintk("  unflattening %lx...\n", mem);
- 
-@@ -2125,7 +2125,7 @@ static void __init __unflatten_device_tree(const void *fdt,
-     if ( be32_to_cpup((__be32 *)start) != FDT_END )
-         printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
-                   *((u32 *)start));
--    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeef )
-+    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeefU )
-         printk(XENLOG_WARNING "End of tree marker overwritten: %08x\n",
-                   be32_to_cpu(((__be32 *)mem)[size / 4]));
-     *allnextp = NULL;
-diff --git a/xen/include/xen/libfdt/fdt.h b/xen/include/xen/libfdt/fdt.h
-index f2e68807f2..7c99d838e8 100644
---- a/xen/include/xen/libfdt/fdt.h
-+++ b/xen/include/xen/libfdt/fdt.h
-@@ -47,7 +47,7 @@ struct fdt_property {
- 
- #endif /* !__ASSEMBLY */
- 
--#define FDT_MAGIC	0xd00dfeed	/* 4: version, 4: total size */
-+#define FDT_MAGIC	0xd00dfeedU	/* 4: version, 4: total size */
- #define FDT_TAGSIZE	sizeof(fdt32_t)
- 
- #define FDT_BEGIN_NODE	0x1		/* Start node: full name */
-diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
-index c71689e2be..dd6b649602 100644
---- a/xen/include/xen/libfdt/libfdt.h
-+++ b/xen/include/xen/libfdt/libfdt.h
-@@ -109,7 +109,7 @@ extern "C" {
- #define FDT_ERR_MAX		19
- 
- /* constants */
--#define FDT_MAX_PHANDLE 0xfffffffe
-+#define FDT_MAX_PHANDLE 0xfffffffeU
- 	/* Valid values for phandles range from 1 to 2^32-2. */
- 
- /**********************************************************************/
+ /*
+  * Calculate size of a shared ring, given the total available space for the
 -- 
 2.41.0
 
