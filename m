@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44FB6C0015E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FB5EB64DB
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551540.861158 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.551544.861171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ72-0008Q6-Ci; Tue, 20 Jun 2023 11:01:28 +0000
+	id 1qBZ73-0000G7-7H; Tue, 20 Jun 2023 11:01:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551540.861158; Tue, 20 Jun 2023 11:01:28 +0000
+Received: by outflank-mailman (output) from mailman id 551544.861171; Tue, 20 Jun 2023 11:01:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ72-0008OD-7M; Tue, 20 Jun 2023 11:01:28 +0000
-Received: by outflank-mailman (input) for mailman id 551540;
- Tue, 20 Jun 2023 10:35:24 +0000
+	id 1qBZ73-0000E6-0v; Tue, 20 Jun 2023 11:01:29 +0000
+Received: by outflank-mailman (input) for mailman id 551544;
+ Tue, 20 Jun 2023 10:35:27 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovpU=CI=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qBYho-0004Pq-5h
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:24 +0000
+ id 1qBYhr-0004Pq-I4
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:27 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 294fe34c-0f56-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 12:35:23 +0200 (CEST)
+ id 2b8d6657-0f56-11ee-b234-6b7b168915f2;
+ Tue, 20 Jun 2023 12:35:26 +0200 (CEST)
 Received: from beta.bugseng.com (93-40-74-174.ip37.fastwebnet.it
  [93.40.74.174])
- by support.bugseng.com (Postfix) with ESMTPSA id 8DF784EE0755;
- Tue, 20 Jun 2023 12:35:21 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 079F94EE0757;
+ Tue, 20 Jun 2023 12:35:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 294fe34c-0f56-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 2b8d6657-0f56-11ee-b234-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -50,15 +50,16 @@ Cc: consulting@bugseng.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Julien Grall <julien@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 03/13] xen/x86: fixed violations of MISRA C:2012 Rule 7.2
-Date: Tue, 20 Jun 2023 12:34:55 +0200
-Message-Id: <397206cfac500d171be31dcd3503d9f61e531a97.1687250177.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH 05/13] xen/common: fixed violations of MISRA C:2012 Rule 7.2
+Date: Tue, 20 Jun 2023 12:34:57 +0200
+Message-Id: <8aff4bc56b29372345e828462766d803b8c9b710.1687250177.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687250177.git.gianluca.luparini@bugseng.com>
 References: <cover.1687250177.git.gianluca.luparini@bugseng.com>
@@ -74,50 +75,59 @@ I propose to use "U" as a suffix to explicitly state when an integer constant is
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/x86/hvm/svm/asid.c | 2 +-
- xen/arch/x86/hvm/svm/svm.c  | 8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ xen/common/device_tree.c        | 4 ++--
+ xen/include/xen/libfdt/fdt.h    | 2 +-
+ xen/include/xen/libfdt/libfdt.h | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
-index 09f8c23fd9..56306d1a16 100644
---- a/xen/arch/x86/hvm/svm/asid.c
-+++ b/xen/arch/x86/hvm/svm/asid.c
-@@ -16,7 +16,7 @@ void svm_asid_init(const struct cpuinfo_x86 *c)
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 8da1052911..0677193ab3 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -2115,7 +2115,7 @@ static void __init __unflatten_device_tree(const void *fdt,
+     /* Allocate memory for the expanded device tree */
+     mem = (unsigned long)_xmalloc (size + 4, __alignof__(struct dt_device_node));
  
-     /* Check for erratum #170, and leave ASIDs disabled if it's present. */
-     if ( !cpu_has_amd_erratum(c, AMD_ERRATUM_170) )
--        nasids = cpuid_ebx(0x8000000A);
-+        nasids = cpuid_ebx(0x8000000AU);
+-    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeef);
++    ((__be32 *)mem)[size / 4] = cpu_to_be32(0xdeadbeefU);
  
-     hvm_asid_init(nasids);
- }
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 59a6e88dff..56cb2f61bb 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -269,9 +269,9 @@ svm_msrbit(unsigned long *msr_bitmap, uint32_t msr)
-      */
-     if ( msr <= 0x1fff )
-         msr_bit = msr_bitmap + 0x0000 / BYTES_PER_LONG;
--    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
-+    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
-         msr_bit = msr_bitmap + 0x0800 / BYTES_PER_LONG;
--    else if ( (msr >= 0xc0010000) && (msr <= 0xc0011fff) )
-+    else if ( (msr >= 0xc0010000U) && (msr <= 0xc0011fffU) )
-         msr_bit = msr_bitmap + 0x1000 / BYTES_PER_LONG;
+     dt_dprintk("  unflattening %lx...\n", mem);
  
-     return msr_bit;
-@@ -2539,8 +2539,8 @@ const struct hvm_function_table * __init start_svm(void)
+@@ -2125,7 +2125,7 @@ static void __init __unflatten_device_tree(const void *fdt,
+     if ( be32_to_cpup((__be32 *)start) != FDT_END )
+         printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
+                   *((u32 *)start));
+-    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeef )
++    if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeefU )
+         printk(XENLOG_WARNING "End of tree marker overwritten: %08x\n",
+                   be32_to_cpu(((__be32 *)mem)[size / 4]));
+     *allnextp = NULL;
+diff --git a/xen/include/xen/libfdt/fdt.h b/xen/include/xen/libfdt/fdt.h
+index f2e68807f2..7c99d838e8 100644
+--- a/xen/include/xen/libfdt/fdt.h
++++ b/xen/include/xen/libfdt/fdt.h
+@@ -47,7 +47,7 @@ struct fdt_property {
  
-     setup_vmcb_dump();
+ #endif /* !__ASSEMBLY */
  
--    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000a )
--        svm_feature_flags = cpuid_edx(0x8000000a);
-+    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000aU )
-+        svm_feature_flags = cpuid_edx(0x8000000aU);
+-#define FDT_MAGIC	0xd00dfeed	/* 4: version, 4: total size */
++#define FDT_MAGIC	0xd00dfeedU	/* 4: version, 4: total size */
+ #define FDT_TAGSIZE	sizeof(fdt32_t)
  
-     printk("SVM: Supported advanced features:\n");
+ #define FDT_BEGIN_NODE	0x1		/* Start node: full name */
+diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
+index c71689e2be..dd6b649602 100644
+--- a/xen/include/xen/libfdt/libfdt.h
++++ b/xen/include/xen/libfdt/libfdt.h
+@@ -109,7 +109,7 @@ extern "C" {
+ #define FDT_ERR_MAX		19
  
+ /* constants */
+-#define FDT_MAX_PHANDLE 0xfffffffe
++#define FDT_MAX_PHANDLE 0xfffffffeU
+ 	/* Valid values for phandles range from 1 to 2^32-2. */
+ 
+ /**********************************************************************/
 -- 
 2.41.0
 
