@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09756EB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97328C001B3
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551543.861165 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.551538.861151 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ72-0008VY-Ol; Tue, 20 Jun 2023 11:01:28 +0000
+	id 1qBZ72-0008HC-21; Tue, 20 Jun 2023 11:01:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551543.861165; Tue, 20 Jun 2023 11:01:28 +0000
+Received: by outflank-mailman (output) from mailman id 551538.861151; Tue, 20 Jun 2023 11:01:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ72-0008TF-HK; Tue, 20 Jun 2023 11:01:28 +0000
-Received: by outflank-mailman (input) for mailman id 551543;
- Tue, 20 Jun 2023 10:35:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBZ71-0008GH-Td; Tue, 20 Jun 2023 11:01:27 +0000
+Received: by outflank-mailman (input) for mailman id 551538;
+ Tue, 20 Jun 2023 10:35:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovpU=CI=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qBYhp-0004Pq-Uc
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:25 +0000
+ id 1qBYhn-0004Ou-Dm
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:23 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2a678d70-0f56-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 12:35:25 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2864a1e3-0f56-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 12:35:21 +0200 (CEST)
 Received: from beta.bugseng.com (93-40-74-174.ip37.fastwebnet.it
  [93.40.74.174])
- by support.bugseng.com (Postfix) with ESMTPSA id 364074EE0756;
- Tue, 20 Jun 2023 12:35:23 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 33C7A4EE0754;
+ Tue, 20 Jun 2023 12:35:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,22 +42,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a678d70-0f56-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 2864a1e3-0f56-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 04/13] xen/arm: fixed violations of MISRA C:2012 Rule 7.2
-Date: Tue, 20 Jun 2023 12:34:56 +0200
-Message-Id: <4d27e872f889f4080af42cc1ff2591ac56834e21.1687250177.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH 02/13] AMD/IOMMU: fixed violations of MISRA C:2012 Rule 7.2
+Date: Tue, 20 Jun 2023 12:34:54 +0200
+Message-Id: <21337a20c5c8d66dff552c2f09054ea82b253dd6.1687250177.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687250177.git.gianluca.luparini@bugseng.com>
 References: <cover.1687250177.git.gianluca.luparini@bugseng.com>
@@ -74,210 +73,276 @@ For homogeneity, I also added the "U" suffix in some cases that the tool didn't 
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/arm/domain_build.c              |  2 +-
- xen/arch/arm/efi/efi-boot.h              |  2 +-
- xen/arch/arm/gic-v2.c                    |  6 +++---
- xen/arch/arm/include/asm/arm64/brk.h     |  2 +-
- xen/arch/arm/include/asm/arm64/efibind.h | 10 +++++-----
- xen/arch/arm/include/asm/arm64/insn.h    | 16 ++++++++--------
- xen/arch/arm/include/asm/vreg.h          |  2 +-
- xen/arch/arm/kernel.c                    |  2 +-
- xen/arch/arm/traps.c                     |  4 ++--
- xen/arch/arm/vgic-v2.c                   |  2 +-
- xen/include/public/arch-arm/smccc.h      |  8 ++++----
- 11 files changed, 28 insertions(+), 28 deletions(-)
+ xen/drivers/passthrough/amd/iommu-defs.h | 122 +++++++++++------------
+ 1 file changed, 61 insertions(+), 61 deletions(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index d0d6be922d..78261352a6 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -3752,7 +3752,7 @@ static int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
-          *...
-          */
-         regs->r0 = 0; /* SBZ */
--        regs->r1 = 0xffffffff; /* We use DTB therefore no machine id */
-+        regs->r1 = 0xffffffffU; /* We use DTB therefore no machine id */
-         regs->r2 = kinfo->dtb_paddr;
-     }
- #ifdef CONFIG_ARM_64
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index bb64925d70..585332647d 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -46,7 +46,7 @@ static int get_module_file_index(const char *name, unsigned int name_len);
- static void PrintMessage(const CHAR16 *s);
+diff --git a/xen/drivers/passthrough/amd/iommu-defs.h b/xen/drivers/passthrough/amd/iommu-defs.h
+index 35de548e3a..c145248f9a 100644
+--- a/xen/drivers/passthrough/amd/iommu-defs.h
++++ b/xen/drivers/passthrough/amd/iommu-defs.h
+@@ -38,49 +38,49 @@
+         ((uint64_t)(offset) << (12 + (PTE_PER_TABLE_SHIFT * ((level) - 1))))
  
- #define DEVICE_TREE_GUID \
--{0xb1b621d5, 0xf19c, 0x41a5, {0x83, 0x0b, 0xd9, 0x15, 0x2c, 0x69, 0xaa, 0xe0}}
-+{0xb1b621d5U, 0xf19cU, 0x41a5U, {0x83U, 0x0bU, 0xd9U, 0x15U, 0x2cU, 0x69U, 0xaaU, 0xe0U}}
+ /* IOMMU Capability */
+-#define PCI_CAP_ID_MASK		0x000000FF
++#define PCI_CAP_ID_MASK		0x000000FFU
+ #define PCI_CAP_ID_SHIFT	0
+-#define PCI_CAP_NEXT_PTR_MASK	0x0000FF00
++#define PCI_CAP_NEXT_PTR_MASK	0x0000FF00U
+ #define PCI_CAP_NEXT_PTR_SHIFT	8
+-#define PCI_CAP_TYPE_MASK	0x00070000
++#define PCI_CAP_TYPE_MASK	0x00070000U
+ #define PCI_CAP_TYPE_SHIFT	16
+-#define PCI_CAP_REV_MASK	0x00F80000
++#define PCI_CAP_REV_MASK	0x00F80000U
+ #define PCI_CAP_REV_SHIFT	19
+-#define PCI_CAP_IOTLB_MASK	0x01000000
++#define PCI_CAP_IOTLB_MASK	0x01000000U
+ #define PCI_CAP_IOTLB_SHIFT	24
+-#define PCI_CAP_HT_TUNNEL_MASK	0x02000000
++#define PCI_CAP_HT_TUNNEL_MASK	0x02000000U
+ #define PCI_CAP_HT_TUNNEL_SHIFT	25
+-#define PCI_CAP_NP_CACHE_MASK	0x04000000
++#define PCI_CAP_NP_CACHE_MASK	0x04000000U
+ #define PCI_CAP_NP_CACHE_SHIFT	26
+ #define PCI_CAP_EFRSUP_SHIFT    27
+-#define PCI_CAP_RESET_MASK	0x80000000
++#define PCI_CAP_RESET_MASK	0x80000000U
+ #define PCI_CAP_RESET_SHIFT	31
  
- static struct file __initdata dtbfile;
- static void __initdata *fdt;
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index 6476ff4230..191c89b01b 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -386,9 +386,9 @@ static void gicv2_cpu_init(void)
-     /* The first 32 interrupts (PPI and SGI) are banked per-cpu, so
-      * even though they are controlled with GICD registers, they must
-      * be set up here with the other per-cpu state. */
--    writel_gicd(0xffffffff, GICD_ICACTIVER); /* Diactivate PPIs and SGIs */
--    writel_gicd(0xffff0000, GICD_ICENABLER); /* Disable all PPI */
--    writel_gicd(0x0000ffff, GICD_ISENABLER); /* Enable all SGI */
-+    writel_gicd(0xffffffffU, GICD_ICACTIVER); /* Diactivate PPIs and SGIs */
-+    writel_gicd(0xffff0000U, GICD_ICENABLER); /* Disable all PPI */
-+    writel_gicd(0x0000ffffU, GICD_ISENABLER); /* Enable all SGI */
+ #define PCI_CAP_TYPE_IOMMU		0x3
  
-     /* Set SGI priorities */
-     for ( i = 0; i < 16; i += 4 )
-diff --git a/xen/arch/arm/include/asm/arm64/brk.h b/xen/arch/arm/include/asm/arm64/brk.h
-index 04442c4b9f..3af153a053 100644
---- a/xen/arch/arm/include/asm/arm64/brk.h
-+++ b/xen/arch/arm/include/asm/arm64/brk.h
-@@ -21,7 +21,7 @@
-  * BRK instruction encoding
-  * The #imm16 value should be placed at bits[20:5] within BRK ins
-  */
--#define AARCH64_BREAK_MON 0xd4200000
-+#define AARCH64_BREAK_MON 0xd4200000U
+ #define PCI_CAP_MMIO_BAR_LOW_OFFSET	0x04
+ #define PCI_CAP_MMIO_BAR_HIGH_OFFSET	0x08
+-#define PCI_CAP_MMIO_BAR_LOW_MASK	0xFFFFC000
++#define PCI_CAP_MMIO_BAR_LOW_MASK	0xFFFFC000U
+ #define IOMMU_MMIO_REGION_LENGTH	0x4000
  
- /*
-  * BRK instruction for provoking a fault on purpose
-diff --git a/xen/arch/arm/include/asm/arm64/efibind.h b/xen/arch/arm/include/asm/arm64/efibind.h
-index 8b43bb8495..0e890b666d 100644
---- a/xen/arch/arm/include/asm/arm64/efibind.h
-+++ b/xen/arch/arm/include/asm/arm64/efibind.h
-@@ -22,12 +22,12 @@ Revision History
- #pragma pack()
- #endif
+ #define PCI_CAP_RANGE_OFFSET		0x0C
+-#define PCI_CAP_BUS_NUMBER_MASK		0x0000FF00
++#define PCI_CAP_BUS_NUMBER_MASK		0x0000FF00U
+ #define PCI_CAP_BUS_NUMBER_SHIFT	8
+-#define PCI_CAP_FIRST_DEVICE_MASK	0x00FF0000
++#define PCI_CAP_FIRST_DEVICE_MASK	0x00FF0000U
+ #define PCI_CAP_FIRST_DEVICE_SHIFT	16
+-#define PCI_CAP_LAST_DEVICE_MASK	0xFF000000
++#define PCI_CAP_LAST_DEVICE_MASK	0xFF000000U
+ #define PCI_CAP_LAST_DEVICE_SHIFT	24
  
--#define EFIERR(a)           (0x8000000000000000 | a)
--#define EFI_ERROR_MASK      0x8000000000000000
--#define EFIERR_OEM(a)       (0xc000000000000000 | a)
-+#define EFIERR(a)           (0x8000000000000000U | a)
-+#define EFI_ERROR_MASK      0x8000000000000000U
-+#define EFIERR_OEM(a)       (0xc000000000000000U | a)
+-#define PCI_CAP_UNIT_ID_MASK    0x0000001F
++#define PCI_CAP_UNIT_ID_MASK    0x0000001FU
+ #define PCI_CAP_UNIT_ID_SHIFT   0
+ #define PCI_CAP_MISC_INFO_OFFSET    0x10
+-#define PCI_CAP_MSI_NUMBER_MASK     0x0000001F
++#define PCI_CAP_MSI_NUMBER_MASK     0x0000001FU
+ #define PCI_CAP_MSI_NUMBER_SHIFT    0
  
--#define BAD_POINTER         0xFBFBFBFBFBFBFBFB
--#define MAX_ADDRESS         0xFFFFFFFFFFFFFFFF
-+#define BAD_POINTER         0xFBFBFBFBFBFBFBFBU
-+#define MAX_ADDRESS         0xFFFFFFFFFFFFFFFFU
+ /* Device Table */
+ #define IOMMU_DEV_TABLE_BASE_LOW_OFFSET		0x00
+ #define IOMMU_DEV_TABLE_BASE_HIGH_OFFSET	0x04
+-#define IOMMU_DEV_TABLE_SIZE_MASK		0x000001FF
++#define IOMMU_DEV_TABLE_SIZE_MASK		0x000001FFU
+ #define IOMMU_DEV_TABLE_SIZE_SHIFT		0
  
- #define EFI_STUB_ERROR      MAX_ADDRESS
+ #define IOMMU_DEV_TABLE_ENTRIES_PER_BUS		256
+@@ -159,13 +159,13 @@ struct amd_iommu_dte {
+ #define IOMMU_CMD_BUFFER_BASE_HIGH_OFFSET	0x0C
+ #define IOMMU_CMD_BUFFER_HEAD_OFFSET		0x2000
+ #define IOMMU_CMD_BUFFER_TAIL_OFFSET		0x2008
+-#define IOMMU_CMD_BUFFER_LENGTH_MASK		0x0F000000
++#define IOMMU_CMD_BUFFER_LENGTH_MASK		0x0F000000U
+ #define IOMMU_CMD_BUFFER_LENGTH_SHIFT		24
  
-diff --git a/xen/arch/arm/include/asm/arm64/insn.h b/xen/arch/arm/include/asm/arm64/insn.h
-index 4e0d364d41..b522b07bf5 100644
---- a/xen/arch/arm/include/asm/arm64/insn.h
-+++ b/xen/arch/arm/include/asm/arm64/insn.h
-@@ -60,14 +60,14 @@ static always_inline bool aarch64_insn_is_##abbr(u32 code) \
- static always_inline u32 aarch64_insn_get_##abbr##_value(void) \
- { return (val); }
+ #define IOMMU_CMD_BUFFER_ENTRY_ORDER            4
+ #define IOMMU_CMD_BUFFER_MAX_ENTRIES            (1u << 15)
  
--__AARCH64_INSN_FUNCS(b,		0xFC000000, 0x14000000)
--__AARCH64_INSN_FUNCS(bl,	0xFC000000, 0x94000000)
--__AARCH64_INSN_FUNCS(cbz,	0x7F000000, 0x34000000)
--__AARCH64_INSN_FUNCS(cbnz,	0x7F000000, 0x35000000)
--__AARCH64_INSN_FUNCS(tbz,	0x7F000000, 0x36000000)
--__AARCH64_INSN_FUNCS(tbnz,	0x7F000000, 0x37000000)
--__AARCH64_INSN_FUNCS(bcond,	0xFF000010, 0x54000000)
--__AARCH64_INSN_FUNCS(hint,	0xFFFFF01F, 0xD503201F)
-+__AARCH64_INSN_FUNCS(b,		0xFC000000U, 0x14000000)
-+__AARCH64_INSN_FUNCS(bl,	0xFC000000U, 0x94000000U)
-+__AARCH64_INSN_FUNCS(cbz,	0x7F000000U, 0x34000000)
-+__AARCH64_INSN_FUNCS(cbnz,	0x7F000000U, 0x35000000)
-+__AARCH64_INSN_FUNCS(tbz,	0x7F000000U, 0x36000000)
-+__AARCH64_INSN_FUNCS(tbnz,	0x7F000000U, 0x37000000)
-+__AARCH64_INSN_FUNCS(bcond,	0xFF000010U, 0x54000000)
-+__AARCH64_INSN_FUNCS(hint,	0xFFFFF01FU, 0xD503201FU)
+-#define IOMMU_CMD_OPCODE_MASK			0xF0000000
++#define IOMMU_CMD_OPCODE_MASK			0xF0000000U
+ #define IOMMU_CMD_OPCODE_SHIFT			28
+ #define IOMMU_CMD_COMPLETION_WAIT		0x1
+ #define IOMMU_CMD_INVALIDATE_DEVTAB_ENTRY	0x2
+@@ -178,50 +178,50 @@ struct amd_iommu_dte {
+ /* COMPLETION_WAIT command */
+ #define IOMMU_COMP_WAIT_DATA_BUFFER_SIZE	8
+ #define IOMMU_COMP_WAIT_DATA_BUFFER_ALIGNMENT	8
+-#define IOMMU_COMP_WAIT_S_FLAG_MASK		0x00000001
+-#define IOMMU_COMP_WAIT_I_FLAG_MASK		0x00000002
+-#define IOMMU_COMP_WAIT_F_FLAG_MASK		0x00000004
+-#define IOMMU_COMP_WAIT_ADDR_LOW_MASK		0xFFFFFFF8
++#define IOMMU_COMP_WAIT_S_FLAG_MASK		0x00000001U
++#define IOMMU_COMP_WAIT_I_FLAG_MASK		0x00000002U
++#define IOMMU_COMP_WAIT_F_FLAG_MASK		0x00000004U
++#define IOMMU_COMP_WAIT_ADDR_LOW_MASK		0xFFFFFFF8U
+ #define IOMMU_COMP_WAIT_ADDR_LOW_SHIFT		3
+-#define IOMMU_COMP_WAIT_ADDR_HIGH_MASK		0x000FFFFF
++#define IOMMU_COMP_WAIT_ADDR_HIGH_MASK		0x000FFFFFU
+ #define IOMMU_COMP_WAIT_ADDR_HIGH_SHIFT		0
  
- bool aarch64_insn_is_branch_imm(u32 insn);
+ /* INVALIDATE_IOMMU_PAGES command */
+-#define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_MASK	0x0000FFFF
++#define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_MASK	0x0000FFFFU
+ #define IOMMU_INV_IOMMU_PAGES_DOMAIN_ID_SHIFT	0
+-#define IOMMU_INV_IOMMU_PAGES_S_FLAG_MASK	0x00000001
++#define IOMMU_INV_IOMMU_PAGES_S_FLAG_MASK	0x00000001U
+ #define IOMMU_INV_IOMMU_PAGES_S_FLAG_SHIFT	0
+-#define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_MASK	0x00000002
++#define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_MASK	0x00000002U
+ #define IOMMU_INV_IOMMU_PAGES_PDE_FLAG_SHIFT	1
+-#define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_MASK	0xFFFFF000
++#define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_MASK	0xFFFFF000U
+ #define IOMMU_INV_IOMMU_PAGES_ADDR_LOW_SHIFT	12
+-#define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_MASK	0xFFFFFFFF
++#define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_MASK	0xFFFFFFFFU
+ #define IOMMU_INV_IOMMU_PAGES_ADDR_HIGH_SHIFT	0
  
-diff --git a/xen/arch/arm/include/asm/vreg.h b/xen/arch/arm/include/asm/vreg.h
-index bf945eebbd..387ce76e7e 100644
---- a/xen/arch/arm/include/asm/vreg.h
-+++ b/xen/arch/arm/include/asm/vreg.h
-@@ -56,7 +56,7 @@ static inline bool vreg_emulate_cp64(struct cpu_user_regs *regs, union hsr hsr,
+ /* INVALIDATE_DEVTAB_ENTRY command */
+-#define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_MASK   0x0000FFFF
++#define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_MASK   0x0000FFFFU
+ #define IOMMU_INV_DEVTAB_ENTRY_DEVICE_ID_SHIFT  0
  
-     if ( ret && cp64.read )
-     {
--        set_user_reg(regs, cp64.reg1, x & 0xffffffff);
-+        set_user_reg(regs, cp64.reg1, x & 0xffffffffU);
-         set_user_reg(regs, cp64.reg2, x >> 32);
-     }
+ /* INVALIDATE_INTERRUPT_TABLE command */
+-#define IOMMU_INV_INT_TABLE_DEVICE_ID_MASK   0x0000FFFF
++#define IOMMU_INV_INT_TABLE_DEVICE_ID_MASK   0x0000FFFFU
+ #define IOMMU_INV_INT_TABLE_DEVICE_ID_SHIFT  0
  
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index ca5318515e..508c54824d 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -39,7 +39,7 @@ struct minimal_dtb_header {
-     /* There are other fields but we don't use them yet. */
- };
+ /* INVALIDATE_IOTLB_PAGES command */
+-#define IOMMU_INV_IOTLB_PAGES_MAXPEND_MASK          0xff000000
++#define IOMMU_INV_IOTLB_PAGES_MAXPEND_MASK          0xff000000U
+ #define IOMMU_INV_IOTLB_PAGES_MAXPEND_SHIFT         24
+-#define IOMMU_INV_IOTLB_PAGES_PASID1_MASK           0x00ff0000
++#define IOMMU_INV_IOTLB_PAGES_PASID1_MASK           0x00ff0000U
+ #define IOMMU_INV_IOTLB_PAGES_PASID1_SHIFT          16
+-#define IOMMU_INV_IOTLB_PAGES_PASID2_MASK           0x0fff0000
++#define IOMMU_INV_IOTLB_PAGES_PASID2_MASK           0x0fff0000U
+ #define IOMMU_INV_IOTLB_PAGES_PASID2_SHIFT          16
+-#define IOMMU_INV_IOTLB_PAGES_QUEUEID_MASK          0x0000ffff
++#define IOMMU_INV_IOTLB_PAGES_QUEUEID_MASK          0x0000ffffU
+ #define IOMMU_INV_IOTLB_PAGES_QUEUEID_SHIFT         0
+-#define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_MASK        0x0000FFFF
++#define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_MASK        0x0000FFFFU
+ #define IOMMU_INV_IOTLB_PAGES_DEVICE_ID_SHIFT       0
+-#define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_MASK         0xFFFFF000
++#define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_MASK         0xFFFFF000U
+ #define IOMMU_INV_IOTLB_PAGES_ADDR_LOW_SHIFT        12
+-#define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_MASK        0xFFFFFFFF
++#define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_MASK        0xFFFFFFFFU
+ #define IOMMU_INV_IOTLB_PAGES_ADDR_HIGH_SHIFT       0
+-#define IOMMU_INV_IOTLB_PAGES_S_FLAG_MASK           0x00000001
++#define IOMMU_INV_IOTLB_PAGES_S_FLAG_MASK           0x00000001U
+ #define IOMMU_INV_IOTLB_PAGES_S_FLAG_SHIFT          0
  
--#define DTB_MAGIC 0xd00dfeed
-+#define DTB_MAGIC 0xd00dfeedU
+ /* Event Log */
+@@ -229,18 +229,18 @@ struct amd_iommu_dte {
+ #define IOMMU_EVENT_LOG_BASE_HIGH_OFFSET	0x14
+ #define IOMMU_EVENT_LOG_HEAD_OFFSET		0x2010
+ #define IOMMU_EVENT_LOG_TAIL_OFFSET		0x2018
+-#define IOMMU_EVENT_LOG_LENGTH_MASK		0x0F000000
++#define IOMMU_EVENT_LOG_LENGTH_MASK		0x0F000000U
+ #define IOMMU_EVENT_LOG_LENGTH_SHIFT		24
+-#define IOMMU_EVENT_LOG_HEAD_MASK		0x0007FFF0
++#define IOMMU_EVENT_LOG_HEAD_MASK		0x0007FFF0U
+ #define IOMMU_EVENT_LOG_HEAD_SHIFT		4
+-#define IOMMU_EVENT_LOG_TAIL_MASK		0x0007FFF0
++#define IOMMU_EVENT_LOG_TAIL_MASK		0x0007FFF0U
+ #define IOMMU_EVENT_LOG_TAIL_SHIFT		4
  
- /**
-  * copy_from_paddr - copy data from a physical address
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index ef5c6a8195..def92fafae 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -398,7 +398,7 @@ static vaddr_t exception_handler32(vaddr_t offset)
-     register_t sctlr = READ_SYSREG(SCTLR_EL1);
+ #define IOMMU_EVENT_LOG_ENTRY_SIZE 			16
+ #define IOMMU_EVENT_LOG_POWER_OF2_ENTRIES_PER_PAGE	8
+ #define IOMMU_EVENT_LOG_U32_PER_ENTRY	(IOMMU_EVENT_LOG_ENTRY_SIZE / 4)
  
-     if ( sctlr & SCTLR_A32_EL1_V )
--        return 0xffff0000 + offset;
-+        return 0xffff0000U + offset;
-     else /* always have security exceptions */
-         return READ_SYSREG(VBAR_EL1) + offset;
- }
-@@ -809,7 +809,7 @@ static void show_registers_32(const struct cpu_user_regs *regs,
- #ifdef CONFIG_ARM_64
-                (uint32_t)(ctxt->far >> 32),
-                ctxt->ifsr32_el2,
--               (uint32_t)(ctxt->far & 0xffffffff),
-+               (uint32_t)(ctxt->far & 0xffffffffU),
-                ctxt->esr_el1
- #else
-                ctxt->ifar, ctxt->ifsr, ctxt->dfar, ctxt->dfsr
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index 0b083c33e6..35363fee09 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -306,7 +306,7 @@ static int vgic_v2_distr_mmio_read(struct vcpu *v, mmio_info_t *info,
-     case VREG32(GICD_SGIR):
-         if ( dabt.size != DABT_WORD ) goto bad_width;
-         /* Write only -- read unknown */
--        *r = 0xdeadbeef;
-+        *r = 0xdeadbeefU;
-         return 1;
+-#define IOMMU_EVENT_CODE_MASK			0xF0000000
++#define IOMMU_EVENT_CODE_MASK			0xF0000000U
+ #define IOMMU_EVENT_CODE_SHIFT			28
+ #define IOMMU_EVENT_ILLEGAL_DEV_TABLE_ENTRY	0x1
+ #define IOMMU_EVENT_IO_PAGE_FAULT		0x2
+@@ -251,12 +251,12 @@ struct amd_iommu_dte {
+ #define IOMMU_EVENT_IOTLB_INV_TIMEOUT		0x7
+ #define IOMMU_EVENT_INVALID_DEV_REQUEST		0x8
  
-     case VRANGE32(0xF04, 0xF0C):
-diff --git a/xen/include/public/arch-arm/smccc.h b/xen/include/public/arch-arm/smccc.h
-index 802d800aad..8553f2f39e 100644
---- a/xen/include/public/arch-arm/smccc.h
-+++ b/xen/include/public/arch-arm/smccc.h
-@@ -26,16 +26,16 @@
- #define XEN_SMCCC_MINOR_REVISION 1
+-#define IOMMU_EVENT_DOMAIN_ID_MASK           0x0000FFFF
++#define IOMMU_EVENT_DOMAIN_ID_MASK           0x0000FFFFU
+ #define IOMMU_EVENT_DOMAIN_ID_SHIFT          0
+-#define IOMMU_EVENT_DEVICE_ID_MASK           0x0000FFFF
++#define IOMMU_EVENT_DEVICE_ID_MASK           0x0000FFFFU
+ #define IOMMU_EVENT_DEVICE_ID_SHIFT          0
+ #define IOMMU_EVENT_FLAGS_SHIFT              16
+-#define IOMMU_EVENT_FLAGS_MASK               0x0FFF0000
++#define IOMMU_EVENT_FLAGS_MASK               0x0FFF0000U
  
- /* Hypervisor Service UID. Randomly generated with uuidgen. */
--#define XEN_SMCCC_UID XEN_DEFINE_UUID(0xa71812dc, 0xc698, 0x4369, 0x9acf, \
--                                      0x79, 0xd1, 0x8d, 0xde, 0xe6, 0x67)
-+#define XEN_SMCCC_UID XEN_DEFINE_UUID(0xa71812dcU, 0xc698U, 0x4369U, 0x9acfU, \
-+                                      0x79U, 0xd1U, 0x8dU, 0xdeU, 0xe6U, 0x67U)
+ /* PPR Log */
+ #define IOMMU_PPR_LOG_ENTRY_SIZE                        16
+@@ -265,21 +265,21 @@ struct amd_iommu_dte {
  
- /* Standard Service Service Call version. */
- #define SSSC_SMCCC_MAJOR_REVISION 0
- #define SSSC_SMCCC_MINOR_REVISION 1
+ #define IOMMU_PPR_LOG_BASE_LOW_OFFSET                   0x0038
+ #define IOMMU_PPR_LOG_BASE_HIGH_OFFSET                  0x003C
+-#define IOMMU_PPR_LOG_BASE_LOW_MASK                     0xFFFFF000
++#define IOMMU_PPR_LOG_BASE_LOW_MASK                     0xFFFFF000U
+ #define IOMMU_PPR_LOG_BASE_LOW_SHIFT                    12
+-#define IOMMU_PPR_LOG_BASE_HIGH_MASK                    0x000FFFFF
++#define IOMMU_PPR_LOG_BASE_HIGH_MASK                    0x000FFFFFU
+ #define IOMMU_PPR_LOG_BASE_HIGH_SHIFT                   0
+-#define IOMMU_PPR_LOG_LENGTH_MASK                       0x0F000000
++#define IOMMU_PPR_LOG_LENGTH_MASK                       0x0F000000U
+ #define IOMMU_PPR_LOG_LENGTH_SHIFT                      24
+-#define IOMMU_PPR_LOG_HEAD_MASK                         0x0007FFF0
++#define IOMMU_PPR_LOG_HEAD_MASK                         0x0007FFF0U
+ #define IOMMU_PPR_LOG_HEAD_SHIFT                        4
+-#define IOMMU_PPR_LOG_TAIL_MASK                         0x0007FFF0
++#define IOMMU_PPR_LOG_TAIL_MASK                         0x0007FFF0U
+ #define IOMMU_PPR_LOG_TAIL_SHIFT                        4
+ #define IOMMU_PPR_LOG_HEAD_OFFSET                       0x2030
+ #define IOMMU_PPR_LOG_TAIL_OFFSET                       0x2038
+-#define IOMMU_PPR_LOG_DEVICE_ID_MASK                    0x0000FFFF
++#define IOMMU_PPR_LOG_DEVICE_ID_MASK                    0x0000FFFFU
+ #define IOMMU_PPR_LOG_DEVICE_ID_SHIFT                   0
+-#define IOMMU_PPR_LOG_CODE_MASK                         0xF0000000
++#define IOMMU_PPR_LOG_CODE_MASK                         0xF0000000U
+ #define IOMMU_PPR_LOG_CODE_SHIFT                        28
  
- /* Standard Service Call UID. Randomly generated with uuidgen. */
--#define SSSC_SMCCC_UID XEN_DEFINE_UUID(0xf863386f, 0x4b39, 0x4cbd, 0x9220,\
--                                       0xce, 0x16, 0x41, 0xe5, 0x9f, 0x6f)
-+#define SSSC_SMCCC_UID XEN_DEFINE_UUID(0xf863386fU, 0x4b39U, 0x4cbdU, 0x9220U,\
-+                                       0xceU, 0x16U, 0x41U, 0xe5U, 0x9fU, 0x6fU)
+ #define IOMMU_LOG_ENTRY_TIMEOUT                         1000
+@@ -342,17 +342,17 @@ union amd_iommu_control {
+ #define IOMMU_EXCLUSION_BASE_HIGH_OFFSET	0x24
+ #define IOMMU_EXCLUSION_LIMIT_LOW_OFFSET	0x28
+ #define IOMMU_EXCLUSION_LIMIT_HIGH_OFFSET	0x2C
+-#define IOMMU_EXCLUSION_BASE_LOW_MASK		0xFFFFF000
++#define IOMMU_EXCLUSION_BASE_LOW_MASK		0xFFFFF000U
+ #define IOMMU_EXCLUSION_BASE_LOW_SHIFT		12
+-#define IOMMU_EXCLUSION_BASE_HIGH_MASK		0xFFFFFFFF
++#define IOMMU_EXCLUSION_BASE_HIGH_MASK		0xFFFFFFFFU
+ #define IOMMU_EXCLUSION_BASE_HIGH_SHIFT		0
+-#define IOMMU_EXCLUSION_RANGE_ENABLE_MASK	0x00000001
++#define IOMMU_EXCLUSION_RANGE_ENABLE_MASK	0x00000001U
+ #define IOMMU_EXCLUSION_RANGE_ENABLE_SHIFT	0
+-#define IOMMU_EXCLUSION_ALLOW_ALL_MASK		0x00000002
++#define IOMMU_EXCLUSION_ALLOW_ALL_MASK		0x00000002U
+ #define IOMMU_EXCLUSION_ALLOW_ALL_SHIFT		1
+-#define IOMMU_EXCLUSION_LIMIT_LOW_MASK		0xFFFFF000
++#define IOMMU_EXCLUSION_LIMIT_LOW_MASK		0xFFFFF000U
+ #define IOMMU_EXCLUSION_LIMIT_LOW_SHIFT		12
+-#define IOMMU_EXCLUSION_LIMIT_HIGH_MASK		0xFFFFFFFF
++#define IOMMU_EXCLUSION_LIMIT_HIGH_MASK		0xFFFFFFFFU
+ #define IOMMU_EXCLUSION_LIMIT_HIGH_SHIFT	0
  
- #endif /* __XEN_PUBLIC_ARCH_ARM_SMCCC_H__ */
+ /* Extended Feature Register */
+@@ -476,14 +476,14 @@ union amd_iommu_pte {
  
+ #define INV_IOMMU_ALL_PAGES_ADDRESS      ((1ULL << 63) - 1)
+ 
+-#define IOMMU_RING_BUFFER_PTR_MASK                  0x0007FFF0
++#define IOMMU_RING_BUFFER_PTR_MASK                  0x0007FFF0U
+ 
+-#define IOMMU_CMD_DEVICE_ID_MASK                    0x0000FFFF
++#define IOMMU_CMD_DEVICE_ID_MASK                    0x0000FFFFU
+ #define IOMMU_CMD_DEVICE_ID_SHIFT                   0
+ 
+-#define IOMMU_REG_BASE_ADDR_LOW_MASK                0xFFFFF000
++#define IOMMU_REG_BASE_ADDR_LOW_MASK                0xFFFFF000U
+ #define IOMMU_REG_BASE_ADDR_LOW_SHIFT               12
+-#define IOMMU_REG_BASE_ADDR_HIGH_MASK               0x000FFFFF
++#define IOMMU_REG_BASE_ADDR_HIGH_MASK               0x000FFFFFU
+ #define IOMMU_REG_BASE_ADDR_HIGH_SHIFT              0
+ 
+ #endif /* AMD_IOMMU_DEFS_H */
 -- 
 2.41.0
 
