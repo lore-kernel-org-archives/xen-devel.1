@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39352EB64D7
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 18:13:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552203.862137 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C1DEB64D7
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 18:13:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552204.862147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBfqt-00067p-SZ; Tue, 20 Jun 2023 18:13:15 +0000
+	id 1qBfqv-0006N3-6c; Tue, 20 Jun 2023 18:13:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552203.862137; Tue, 20 Jun 2023 18:13:15 +0000
+Received: by outflank-mailman (output) from mailman id 552204.862147; Tue, 20 Jun 2023 18:13:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBfqt-00067i-Or; Tue, 20 Jun 2023 18:13:15 +0000
-Received: by outflank-mailman (input) for mailman id 552203;
- Tue, 20 Jun 2023 18:13:14 +0000
+	id 1qBfqv-0006Mw-2h; Tue, 20 Jun 2023 18:13:17 +0000
+Received: by outflank-mailman (input) for mailman id 552204;
+ Tue, 20 Jun 2023 18:13:15 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=G5hq=CI=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qBfqs-00067X-Qa
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 18:13:14 +0000
+ id 1qBfqt-00067X-Fh
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 18:13:15 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1d1c8f7d-0f96-11ee-8611-37d641c3527e;
+ id 1d891862-0f96-11ee-8611-37d641c3527e;
  Tue, 20 Jun 2023 20:13:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id BA10C8285935;
- Tue, 20 Jun 2023 13:13:09 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id B64F68285961;
+ Tue, 20 Jun 2023 13:13:10 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id wWYkHwc7ggid; Tue, 20 Jun 2023 13:13:08 -0500 (CDT)
+ with ESMTP id aKB1Pqco1J6z; Tue, 20 Jun 2023 13:13:09 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 4D1AE82858A5;
- Tue, 20 Jun 2023 13:13:08 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 5CF71828574D;
+ Tue, 20 Jun 2023 13:13:09 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id AC5vHRWOqcMQ; Tue, 20 Jun 2023 13:13:08 -0500 (CDT)
+ with ESMTP id O7LALMQIX8yK; Tue, 20 Jun 2023 13:13:09 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id AA0E18285738;
- Tue, 20 Jun 2023 13:13:07 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id E657B8285935;
+ Tue, 20 Jun 2023 13:13:08 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,125 +53,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d1c8f7d-0f96-11ee-8611-37d641c3527e
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 4D1AE82858A5
+X-Inumbo-ID: 1d891862-0f96-11ee-8611-37d641c3527e
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 5CF71828574D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1687284788; bh=yQ2jwAEuJk+JybKeQL7/geyz2pfCWamg3VHhHEztqDA=;
+	t=1687284789; bh=+wgNL3Cvv+qmmR8NScpG5xML8HpLuiHvrktZaaL4g5I=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=RR6jmtWoCYpYxjPioWz0xWSO1AjMWJD71+tXJ0Y3Ne9bSk4QsThaCcbF+G+Qy38xs
-	 aZho8OzdfJxXVxLrkZSKMdy1BV6lR1fVNrRFCkpWKQb27Ut6zNMWmC3skYor2orvds
-	 H6R1HSjxsvv9DAxeHo2dOgsIdaVF34S4OzQ2HBhQ=
+	b=XIKZPn0CTfQ03U0Zpkbrp33bk/1up7MRj0OIyRz4Qv5wiFs1KaW1EQkxjlgdFHtgV
+	 D+mff8gaMMmiVQj7PMJTQLFWycYArh//piK9F3ybgZ296rTf6XgHmqwNJAAbxUSq3h
+	 ZqexmP7+kL5z/58o01GKFuf1fOQGe8X9HExy0x2Y=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: tpearson@raptorengineering.com,
 	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH v5 0/3] Initial support for Power
-Date: Tue, 20 Jun 2023 13:12:46 -0500
-Message-Id: <cover.1687283294.git.sanastasio@raptorengineering.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v5 2/3] automation: Add ppc64le cross-build jobs
+Date: Tue, 20 Jun 2023 13:12:48 -0500
+Message-Id: <10e4a94316b62aafddf43c67f33f558e59eaa721.1687283294.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1687283294.git.sanastasio@raptorengineering.com>
+References: <cover.1687283294.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+Add build jobs to cross-compile Xen for ppc64le.
 
-This patch series adds support for building a minimal image
-for Power ISA 2.07B+ (POWER8+) systems. In addition to a patch adding
-support to the build system and a simple infinite loop at the
-entrypoint, patches to add ppc64le support to the CI as well as a
-MAINTAINERS update are included.
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ automation/gitlab-ci/build.yaml | 60 +++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
 
-Since Xen previously had support for a much older version of the ISA in
-version 3.2.3, we were able to carry over some headers and support
-routines from that version. Unlike that initial port though, this effort
-focuses solely on POWER8+ CPUs that are capable of running in Little
-Endian mode.
-
-With an appropriate powerpc64le-linux-gnu cross-toolchain, the minimal
-image can be built with:
-
-$ make XEN_TARGET_ARCH=3Dppc64 -C xen build
-
-The resulting binary can then be booted in a standard QEMU/pseries VM:
-
-$ qemu-system-ppc64 -M pseries-5.2 -m 256M -kernel xen/xen \
-	-vga none -serial mon:stdio -nographic
-
-Thanks,
-Shawn
-
---
-Changes from v5:
-  - Rename openpower_defconfig to ppc64_defconfig
-  - Clarify Kconfig ISA baseline help strings
-  - Add ELF metadata annotations to head.S
-  - Add dummy .got/.got.plt sections plus assertions to ld script
-  - Change .align to .p2align in config.h/ENTRY()
-
-Changes from v4:
-  - Change '$(@D)/$(@F)' to '$@' in ppc/Makefile
-  - Add -m64, -mlittle-endian to CFLAGS to allow using ppc{32,64be}
-    toolchains
-  - Change IBM-specific '$' to '.' in head.S
-  - Drop unnecessary ALIGN() in linker script in .bss
-
-Changes from v3:
-  - Fix formatting of MAINTAINERS patch
-
-Changes from v2:
-  - Add ppc64le cross-build container patch
-  - Add ppc64le cross build CI job patch
-  - Drop serial output patch (will be in future patch series)
-  - Drop setup.c and unneeded headers from minimal build patch
-  - Fixed ordering of MAINTAINERS patch + add F: line
-  - Fix config/ppc64.mk option names
-  - Clarify Kconfig Baseline ISA option help strings
-
-Shawn Anastasio (3):
-  xen: Add files needed for minimal ppc64le build
-  automation: Add ppc64le cross-build jobs
-  maintainers: Add ppc64 maintainer
-
- MAINTAINERS                          |   4 +
- automation/gitlab-ci/build.yaml      |  60 +++++++++
- config/ppc64.mk                      |   4 +
- xen/Makefile                         |   5 +-
- xen/arch/ppc/Kconfig                 |  42 ++++++
- xen/arch/ppc/Kconfig.debug           |   0
- xen/arch/ppc/Makefile                |  16 +++
- xen/arch/ppc/Rules.mk                |   0
- xen/arch/ppc/arch.mk                 |  12 ++
- xen/arch/ppc/configs/ppc64_defconfig |  13 ++
- xen/arch/ppc/include/asm/config.h    |  63 +++++++++
- xen/arch/ppc/include/asm/page-bits.h |   7 +
- xen/arch/ppc/ppc64/Makefile          |   1 +
- xen/arch/ppc/ppc64/asm-offsets.c     |   0
- xen/arch/ppc/ppc64/head.S            |  30 +++++
- xen/arch/ppc/xen.lds.S               | 188 +++++++++++++++++++++++++++
- 16 files changed, 443 insertions(+), 2 deletions(-)
- create mode 100644 config/ppc64.mk
- create mode 100644 xen/arch/ppc/Kconfig
- create mode 100644 xen/arch/ppc/Kconfig.debug
- create mode 100644 xen/arch/ppc/Makefile
- create mode 100644 xen/arch/ppc/Rules.mk
- create mode 100644 xen/arch/ppc/arch.mk
- create mode 100644 xen/arch/ppc/configs/ppc64_defconfig
- create mode 100644 xen/arch/ppc/include/asm/config.h
- create mode 100644 xen/arch/ppc/include/asm/page-bits.h
- create mode 100644 xen/arch/ppc/ppc64/Makefile
- create mode 100644 xen/arch/ppc/ppc64/asm-offsets.c
- create mode 100644 xen/arch/ppc/ppc64/head.S
- create mode 100644 xen/arch/ppc/xen.lds.S
-
---
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build=
+.yaml
+index 420ffa5acb..bd8c7332db 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -183,6 +183,33 @@
+   variables:
+     <<: *gcc
+=20
++.ppc64le-cross-build-tmpl:
++  <<: *build
++  variables:
++    XEN_TARGET_ARCH: ppc64
++  tags:
++    - x86_64
++
++.ppc64le-cross-build:
++  extends: .ppc64le-cross-build-tmpl
++  variables:
++    debug: n
++
++.ppc64le-cross-build-debug:
++  extends: .ppc64le-cross-build-tmpl
++  variables:
++    debug: y
++
++.gcc-ppc64le-cross-build:
++  extends: .ppc64le-cross-build
++  variables:
++    <<: *gcc
++
++.gcc-ppc64le-cross-build-debug:
++  extends: .ppc64le-cross-build-debug
++  variables:
++    <<: *gcc
++
+ .yocto-test:
+   stage: build
+   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
+@@ -516,6 +543,39 @@ archlinux-current-gcc-riscv64-debug-randconfig:
+     EXTRA_FIXED_RANDCONFIG:
+       CONFIG_COVERAGE=3Dn
+=20
++# Power cross-build
++debian-bullseye-gcc-ppc64le:
++  extends: .gcc-ppc64le-cross-build
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    HYPERVISOR_ONLY: y
++
++debian-bullseye-gcc-ppc64le-debug:
++  extends: .gcc-ppc64le-cross-build-debug
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    HYPERVISOR_ONLY: y
++
++debian-bullseye-gcc-ppc64le-randconfig:
++  extends: .gcc-ppc64le-cross-build
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    RANDCONFIG: y
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=3Dn
++
++debian-bullseye-gcc-ppc64le-debug-randconfig:
++  extends: .gcc-ppc64le-cross-build-debug
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    KBUILD_DEFCONFIG: openpower_defconfig
++    RANDCONFIG: y
++    EXTRA_FIXED_RANDCONFIG:
++      CONFIG_COVERAGE=3Dn
++
+ # Yocto test jobs
+ yocto-qemuarm64:
+   extends: .yocto-test-arm64
+--=20
 2.30.2
 
 
