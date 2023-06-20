@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20876EB64D8
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:29:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552101.862006 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 558BEEB64DB
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:29:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552108.862037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBfAS-0002DX-Sv; Tue, 20 Jun 2023 17:29:24 +0000
+	id 1qBfAa-00036L-Mq; Tue, 20 Jun 2023 17:29:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552101.862006; Tue, 20 Jun 2023 17:29:24 +0000
+Received: by outflank-mailman (output) from mailman id 552108.862037; Tue, 20 Jun 2023 17:29:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBfAS-0002DQ-QM; Tue, 20 Jun 2023 17:29:24 +0000
-Received: by outflank-mailman (input) for mailman id 552101;
- Tue, 20 Jun 2023 17:29:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qBfAa-00036A-Iz; Tue, 20 Jun 2023 17:29:32 +0000
+Received: by outflank-mailman (input) for mailman id 552108;
+ Tue, 20 Jun 2023 17:29:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBf7Y-0004q1-MX
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:26:24 +0000
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [2607:f8b0:4864:20::32b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9329ca32-0f8f-11ee-8611-37d641c3527e;
- Tue, 20 Jun 2023 19:26:22 +0200 (CEST)
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6b57d9043e4so1892872a34.2
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:26:22 -0700 (PDT)
+ id 1qBf7k-0005Q4-62
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:26:36 +0000
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [2607:f8b0:4864:20::112a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9aff712f-0f8f-11ee-b234-6b7b168915f2;
+ Tue, 20 Jun 2023 19:26:35 +0200 (CEST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5702415be17so42877067b3.2
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:26:35 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- e65-20020a0dc244000000b0056cffe97a11sm604604ywd.13.2023.06.20.10.26.20
+ e65-20020a0dc244000000b0056cffe97a11sm604604ywd.13.2023.06.20.10.26.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:26:20 -0700 (PDT)
+ Tue, 20 Jun 2023 10:26:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,167 +47,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9329ca32-0f8f-11ee-8611-37d641c3527e
+X-Inumbo-ID: 9aff712f-0f8f-11ee-b234-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281981; x=1689873981;
+        d=gmail.com; s=20221208; t=1687281994; x=1689873994;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K61wLAMvxduhXajLJmXKkCD2KgQmA24lyEh8ZOauW3g=;
-        b=IX6OWGyMDuquswGxYoFJvDL0Ts6f749+YDHQGq/VK7v6MzucLGn3mJLNRgyBXD73nh
-         I/uap9v+a/tpM5eiSkd2OkS0iQARyHW6tg8ULcTLPED98ouQUyuWH2UQR8ZlORK0Cr6B
-         BDgLegkcEOk635hmIGl+Bwtfz5e1hT96JE/JDmGP0Bqw0e7cIkLr/RU266DuT5tbGceb
-         zRUNYzhZb93MyWsSOjfGJeeGl5aBmP4hUNJ3PbRSOE6eRw3nAOQED29dYWIme6OHtNXm
-         5ulmEwaOXRsnulp5JjUk1Y9/q/G60rjQqvx5duoVQR4CjtOtUdcENi3WHS3YKVj8zhvS
-         WFwg==
+        bh=UQQT2DevBFB3oDkqTww+bCq8Z+NcubvcMEbZ9kPn1/I=;
+        b=fstv2AOOVoUWAQIuOJ3m6gjiU4cTxA4w47YkcRP1Rz7FBW/kBHuRMpLSFwMaTEe5b1
+         BlytFKX3BaEwTZKAkeW11PgTa8oze9Czt/+yknEl/OEBfvwDwXn7SW3PG/2w8PqeoPvm
+         av8TBcXKkS0ciL2D5leUNWfuF+rTprm3u/HkWbPk/mwfGv0uVvN2t3ZSUpWiiVE5OWrW
+         icnEMAZo2HF7BoErM6qix14wzc9gUbIHbkcx4ZwzBkJIr1KsPb4CDkdR5gy+OyiVn6w8
+         Gh4q7qXxcQBsSJwTex+JKFslShnCOfxKn4FB052N1hJQvrzjk8BGqRy3FVkARemL4CKt
+         I4yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281981; x=1689873981;
+        d=1e100.net; s=20221208; t=1687281994; x=1689873994;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=K61wLAMvxduhXajLJmXKkCD2KgQmA24lyEh8ZOauW3g=;
-        b=djD44MFWJm0v3nw6RQEDi/69ILS2qwgrWYKx6HZRor/NOJHXsut8FtzKC4xP1Dldv4
-         cBqk4kHLZZuxhh8BJKN9mQx77OS5KD2gZ5cAKSXocXYyNsq+rmgxetLxAbYOICshjATd
-         VYT6MntJQILChifhpusoF9Z1mACNLltcrH2yIuOQh3R4UUWWbEulZFihuFzIvWbQJAJz
-         IAyqOz4JyPJkni9h1pTIl9WrlCM6adGfsH2IogsSUwxjmCvCs6+i/PNOJ7xQotnOAKmV
-         iLfQP0f8HluwbV30cXvRD8eRGZVJMMM0GvpjrHJJMpJnuwrgLqkSJGVtnh8XFnn7XCTo
-         wqiQ==
-X-Gm-Message-State: AC+VfDyudPLOCvEykoZ3moXIQSeG+S/r7CXY1p+FdN3W5gOkru4qlfcd
-	FLLHsC6ZHW89fveF+jNS4oo=
-X-Google-Smtp-Source: ACHHUZ5spqw7iFHqYn8GRj32Nl0UI37k62ovrhkdOFMHxlCYXYMjF7pxPN/co2hG4xEewZ4G5pFXTg==
-X-Received: by 2002:a05:6358:1a84:b0:130:e675:3e8c with SMTP id gm4-20020a0563581a8400b00130e6753e8cmr4571923rwb.28.1687281981240;
-        Tue, 20 Jun 2023 10:26:21 -0700 (PDT)
+        bh=UQQT2DevBFB3oDkqTww+bCq8Z+NcubvcMEbZ9kPn1/I=;
+        b=CaaQBfduo8Mdv4SF19E/xLVyqjOukwcQd7Hl5riK1Hy/O8obsn81d2MrfGi+owudN1
+         bWcOJ/GBSF5N4st0kGUaRKOI6tfa5ZJOov5o4SIC/bMWhxmlb7Jm/E9oyBfNAA08UMJL
+         O5951wN/1592u2ZGVefm0Er52Wkg8IMxO/9ezKtc+Qit7jvAysl2EaiCWyKyVy3NyHoq
+         fd0H/Su8x+cRbPAPP5NPFLXOhdEkjD6doezhfntu/gHuO3cGNmdyTPPYhNCSX15f2Tfv
+         3oIEBZDe08DDhzzNIm8dXsamOyNBNC7ix0qpKpvw5pVm+VcArl6qv8vYiw8wbH9YC+qe
+         Ri2A==
+X-Gm-Message-State: AC+VfDyFPjIlbW20NCdBJoMUKLr3eguiPLS3aYHE1UoqnCoykIt/OD8k
+	/BdnJwpMposu53SJnXu2Me0=
+X-Google-Smtp-Source: ACHHUZ5TvogazAaiBwei1eL5eky/5rmlzL7gOMXYPR2q+pv034XN8iCHLrs6IQjYOJgREMAVTq8NZw==
+X-Received: by 2002:a0d:ea01:0:b0:56c:e5a3:3e1b with SMTP id t1-20020a0dea01000000b0056ce5a33e1bmr12551422ywe.22.1687281994508;
+        Tue, 20 Jun 2023 10:26:34 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Joel Upham <jupham125@gmail.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Paul Durrant <paul@xen.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Eduardo Habkost <eduardo@habkost.net>,
 	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
-Subject: [PATCH v1 13/23] xen/pt: add Vendor-specific PCIe Extended Capability descriptor and sizing
-Date: Tue, 20 Jun 2023 13:24:47 -0400
-Message-Id: <ead3c0639b91d0d0c12f91f3f1b4024547a9a0b4.1687278381.git.jupham125@gmail.com>
+Subject: [PATCH v1 20/23] xen platform: unplug ahci object
+Date: Tue, 20 Jun 2023 13:24:54 -0400
+Message-Id: <9b8183903cbf20db4e2f0dafda9e0ed271a86a8e.1687278381.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687278381.git.jupham125@gmail.com>
 References: <cover.1687278381.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The patch provides Vendor-specific PCIe Extended Capability description
-structure and corresponding sizing function. In this particular case the
-size of the Vendor capability is available in the VSEC Length field.
+This will unplug the ahci device when the Xen driver calls for an unplug.
+This has been tested to work in linux and Windows guests.
+When q35 is detected, we will remove the ahci controller
+with the hard disks.  In the libxl config, cdrom devices
+are put on a seperate ahci controller. This allows for 6 cdrom
+devices to be added, and 6 qemu hard disks.
 
-Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
+
 Signed-off-by: Joel Upham <jupham125@gmail.com>
 ---
- hw/xen/xen_pt_config_init.c | 71 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 70 insertions(+), 1 deletion(-)
+ hw/i386/xen/xen_platform.c | 19 ++++++++++++++++++-
+ hw/pci/pci.c               | 17 +++++++++++++++++
+ include/hw/pci/pci.h       |  3 +++
+ 3 files changed, 38 insertions(+), 1 deletion(-)
 
-diff --git a/hw/xen/xen_pt_config_init.c b/hw/xen/xen_pt_config_init.c
-index ed36edbc4a..20b5561d25 100644
---- a/hw/xen/xen_pt_config_init.c
-+++ b/hw/xen/xen_pt_config_init.c
-@@ -124,6 +124,17 @@ static uint32_t get_throughable_mask(const XenPCIPassthroughState *s,
-     return throughable_mask & valid_mask;
+diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
+index 57f1d742c1..0375337222 100644
+--- a/hw/i386/xen/xen_platform.c
++++ b/hw/i386/xen/xen_platform.c
+@@ -34,6 +34,7 @@
+ #include "sysemu/block-backend.h"
+ #include "qemu/error-report.h"
+ #include "qemu/module.h"
++#include "include/hw/i386/pc.h"
+ #include "qom/object.h"
+ 
+ #ifdef CONFIG_XEN
+@@ -223,6 +224,12 @@ static void unplug_disks(PCIBus *b, PCIDevice *d, void *opaque)
+         if (flags & UNPLUG_NVME_DISKS) {
+             object_unparent(OBJECT(d));
+         }
++        break;
++
++    case PCI_CLASS_STORAGE_SATA:
++	if (!aux) {
++            object_unparent(OBJECT(d));
++        }
+ 
+     default:
+         break;
+@@ -231,7 +238,17 @@ static void unplug_disks(PCIBus *b, PCIDevice *d, void *opaque)
+ 
+ static void pci_unplug_disks(PCIBus *bus, uint32_t flags)
+ {
+-    pci_for_each_device(bus, 0, unplug_disks, &flags);
++    PCIBus *q35 = find_q35();
++    if (q35) {
++        /* When q35 is detected, we will remove the ahci controller
++	 * with the hard disks.  In the libxl config, cdrom devices
++	 * are put on a seperate ahci controller. This allows for 6 cdrom
++	 * devices to be added, and 6 qemu hard disks.
++	 */
++        pci_function_for_one_bus(bus, unplug_disks, &flags);
++    } else {
++        pci_for_each_device(bus, 0, unplug_disks, &flags);
++    }
  }
  
-+static void log_pcie_extended_cap(XenPCIPassthroughState *s,
-+                                  const char *cap_name,
-+                                  uint32_t base_offset, uint32_t size)
+ static void platform_fixed_ioport_writew(void *opaque, uint32_t addr, uint32_t val)
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 1cc7c89036..8eac3d751a 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1815,6 +1815,23 @@ void pci_for_each_device_reverse(PCIBus *bus, int bus_num,
+     }
+ }
+ 
++void pci_function_for_one_bus(PCIBus *bus,
++                          void (*fn)(PCIBus *b, PCIDevice *d, void *opaque),
++                          void *opaque)
 +{
-+    if (size) {
-+        XEN_PT_LOG(&s->dev, "Found PCIe Extended Capability: %s at 0x%04x, "
-+                            "size 0x%x bytes\n", cap_name,
-+                            (uint16_t) base_offset, size);
++    bus = pci_find_bus_nr(bus, 0);
++
++    if (bus) {
++        PCIDevice *d;
++
++        d = bus->devices[PCI_DEVFN(4,0)];
++        if (d) {
++            fn(bus, d, opaque);
++            return;
++        }
 +    }
 +}
 +
- /****************
-  * general register functions
-  */
-@@ -1622,6 +1633,42 @@ static XenPTRegInfo xen_pt_emu_reg_igd_opregion[] = {
-     },
- };
- 
-+/* Vendor-specific Ext Capability Structure reg static information table */
-+static XenPTRegInfo xen_pt_ext_cap_emu_reg_vendor[] = {
-+    {
-+        .offset     = XEN_PCIE_CAP_ID,
-+        .size       = 2,
-+        .init_val   = 0x0000,
-+        .ro_mask    = 0xFFFF,
-+        .emu_mask   = 0xFFFF,
-+        .init       = xen_pt_ext_cap_capid_reg_init,
-+        .u.w.read   = xen_pt_word_reg_read,
-+        .u.w.write  = xen_pt_word_reg_write,
-+    },
-+    {
-+        .offset     = XEN_PCIE_CAP_LIST_NEXT,
-+        .size       = 2,
-+        .init_val   = 0x0000,
-+        .ro_mask    = 0xFFFF,
-+        .emu_mask   = 0xFFFF,
-+        .init       = xen_pt_ext_cap_ptr_reg_init,
-+        .u.w.read   = xen_pt_word_reg_read,
-+        .u.w.write  = xen_pt_word_reg_write,
-+    },
-+    {
-+        .offset     = PCI_VNDR_HEADER,
-+        .size       = 4,
-+        .init_val   = 0x00000000,
-+        .ro_mask    = 0xFFFFFFFF,
-+        .emu_mask   = 0x00000000,
-+        .init       = xen_pt_common_reg_init,
-+        .u.dw.read  = xen_pt_long_reg_read,
-+        .u.dw.write = xen_pt_long_reg_write,
-+    },
-+    {
-+        .size = 0,
-+    },
-+};
- /****************************
-  * Capabilities
-  */
-@@ -1647,9 +1694,23 @@ static int xen_pt_vendor_size_init(XenPCIPassthroughState *s,
-     return ret;
- }
- 
-+static int xen_pt_ext_cap_vendor_size_init(XenPCIPassthroughState *s,
-+                                           const XenPTRegGroupInfo *grp_reg,
-+                                           uint32_t base_offset,
-+                                           uint32_t *size)
+ void pci_for_each_device_under_bus(PCIBus *bus,
+                                    pci_bus_dev_fn fn, void *opaque)
  {
--    return xen_host_pci_get_byte(&s->real_device, base_offset + 0x02, size);
-+    uint32_t vsec_hdr = 0;
-+    int ret = xen_host_pci_get_long(&s->real_device,
-+                                    base_offset + PCI_VNDR_HEADER,
-+                                    &vsec_hdr);
-+
-+    *size = PCI_VNDR_HEADER_LEN(vsec_hdr);
-+
-+    log_pcie_extended_cap(s, "Vendor-specific", base_offset, *size);
-+
-+    return ret;
- }
-+
- /* get PCI Express Capability Structure register group size */
- static int xen_pt_pcie_size_init(XenPCIPassthroughState *s,
-                                  const XenPTRegGroupInfo *grp_reg,
-@@ -1876,6 +1937,14 @@ static const XenPTRegGroupInfo xen_pt_emu_reg_grps[] = {
-         .size_init   = xen_pt_reg_grp_size_init,
-         .emu_regs    = xen_pt_emu_reg_igd_opregion,
-     },
-+    /* Vendor-specific Extended Capability reg group */
-+    {
-+        .grp_id      = PCIE_EXT_CAP_ID(PCI_EXT_CAP_ID_VNDR),
-+        .grp_type    = XEN_PT_GRP_TYPE_EMU,
-+        .grp_size    = 0xFF,
-+        .size_init   = xen_pt_ext_cap_vendor_size_init,
-+        .emu_regs    = xen_pt_ext_cap_emu_reg_vendor,
-+    },
-     {
-         .grp_size = 0,
-     },
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index e6d0574a29..c53e21082a 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -343,6 +343,9 @@ void pci_for_each_device_under_bus(PCIBus *bus,
+ void pci_for_each_device_under_bus_reverse(PCIBus *bus,
+                                            pci_bus_dev_fn fn,
+                                            void *opaque);
++void pci_function_for_one_bus(PCIBus *bus,
++                         void (*fn)(PCIBus *bus, PCIDevice *d, void *opaque),
++                         void *opaque);
+ void pci_for_each_bus_depth_first(PCIBus *bus, pci_bus_ret_fn begin,
+                                   pci_bus_fn end, void *parent_state);
+ PCIDevice *pci_get_function_0(PCIDevice *pci_dev);
 -- 
 2.34.1
 
