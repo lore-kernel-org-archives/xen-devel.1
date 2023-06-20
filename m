@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ADE7EB64D8
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551547.861180 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C55EB64D7
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:02:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551558.861236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ73-0000SC-NU; Tue, 20 Jun 2023 11:01:29 +0000
+	id 1qBZ77-0001gu-QI; Tue, 20 Jun 2023 11:01:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551547.861180; Tue, 20 Jun 2023 11:01:29 +0000
+Received: by outflank-mailman (output) from mailman id 551558.861236; Tue, 20 Jun 2023 11:01:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ73-0000PD-HZ; Tue, 20 Jun 2023 11:01:29 +0000
-Received: by outflank-mailman (input) for mailman id 551547;
- Tue, 20 Jun 2023 10:35:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBZ77-0001bs-2b; Tue, 20 Jun 2023 11:01:33 +0000
+Received: by outflank-mailman (input) for mailman id 551558;
+ Tue, 20 Jun 2023 10:35:41 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovpU=CI=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qBYht-0004Pq-EJ
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:29 +0000
+ id 1qBYi5-0004Ou-SI
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:41 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2c7ac34e-0f56-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 12:35:28 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 33315939-0f56-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 12:35:39 +0200 (CEST)
 Received: from beta.bugseng.com (93-40-74-174.ip37.fastwebnet.it
  [93.40.74.174])
- by support.bugseng.com (Postfix) with ESMTPSA id DC8C24EE0753;
- Tue, 20 Jun 2023 12:35:26 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 272A74EE0752;
+ Tue, 20 Jun 2023 12:35:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,23 +42,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c7ac34e-0f56-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 33315939-0f56-11ee-8611-37d641c3527e
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 06/13] xen/efi: fixed violations of MISRA C:2012 Rule 7.2
-Date: Tue, 20 Jun 2023 12:34:58 +0200
-Message-Id: <019b934cb1e96affd7429c1632fbfe3faacc663e.1687250177.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH 13/13] xen: fixed violations of MISRA C:2012 Rule 7.2
+Date: Tue, 20 Jun 2023 12:35:05 +0200
+Message-Id: <3560de5fd05a67cc10c9426ffd55639ebe24d98d.1687250177.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687250177.git.gianluca.luparini@bugseng.com>
 References: <cover.1687250177.git.gianluca.luparini@bugseng.com>
@@ -75,217 +76,196 @@ For homogeneity, I also added the "U" suffix in some cases that the tool didn't 
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/x86/include/asm/x86_64/efibind.h | 10 +++++-----
- xen/common/efi/boot.c                     |  8 ++++----
- xen/common/efi/runtime.c                  |  2 +-
- xen/include/efi/efiapi.h                  | 10 +++++-----
- xen/include/efi/efidef.h                  |  2 +-
- xen/include/efi/efiprot.h                 | 22 +++++++++++-----------
- 6 files changed, 27 insertions(+), 27 deletions(-)
+ xen/common/gunzip.c          |  2 +-
+ xen/common/xmalloc_tlsf.c    |  2 +-
+ xen/drivers/char/ehci-dbgp.c |  4 ++--
+ xen/include/public/memory.h  |  2 +-
+ xen/include/public/sysctl.h  |  4 ++--
+ xen/include/xen/bitops.h     | 10 +++++-----
+ xen/include/xen/cper.h       | 34 +++++++++++++++++-----------------
+ xen/lib/muldiv64.c           |  2 +-
+ 8 files changed, 30 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/x86_64/efibind.h b/xen/arch/x86/include/asm/x86_64/efibind.h
-index e23cd16cb6..773ef9b063 100644
---- a/xen/arch/x86/include/asm/x86_64/efibind.h
-+++ b/xen/arch/x86/include/asm/x86_64/efibind.h
-@@ -117,13 +117,13 @@ typedef uint64_t   UINTN;
-     #endif
+diff --git a/xen/common/gunzip.c b/xen/common/gunzip.c
+index 71ec5f26be..b810499be2 100644
+--- a/xen/common/gunzip.c
++++ b/xen/common/gunzip.c
+@@ -11,7 +11,7 @@ static unsigned char *__initdata window;
+ static memptr __initdata free_mem_ptr;
+ static memptr __initdata free_mem_end_ptr;
+ 
+-#define WSIZE           0x80000000
++#define WSIZE           0x80000000U
+ 
+ static unsigned char *__initdata inbuf;
+ static unsigned int __initdata insize;
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index 75bdf18c4e..c21bf71e88 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -46,7 +46,7 @@
+ #define BHDR_OVERHEAD   (sizeof(struct bhdr) - MIN_BLOCK_SIZE)
+ 
+ #define PTR_MASK        (sizeof(void *) - 1)
+-#define BLOCK_SIZE_MASK (0xFFFFFFFF - PTR_MASK)
++#define BLOCK_SIZE_MASK (0xFFFFFFFFU - PTR_MASK)
+ 
+ #define GET_NEXT_BLOCK(addr, r) ((struct bhdr *) \
+                                 ((char *)(addr) + (r)))
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index bb9d3198d9..4d8d765122 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -375,12 +375,12 @@ static inline u32 dbgp_pid_write_update(u32 x, u32 tok)
+     static u8 data0 = USB_PID_DATA1;
+ 
+     data0 ^= USB_PID_DATA0 ^ USB_PID_DATA1;
+-    return (x & 0xffff0000) | (data0 << 8) | (tok & 0xff);
++    return (x & 0xffff0000U) | (data0 << 8) | (tok & 0xffU);
+ }
+ 
+ static inline u32 dbgp_pid_read_update(u32 x, u32 tok)
+ {
+-    return (x & 0xffffff00) | (tok & 0xff);
++    return (x & 0xffffff00U) | (tok & 0xffU);
+ }
+ 
+ static inline void dbgp_set_data(struct ehci_dbg_port __iomem *ehci_debug,
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index c5f0d31e23..5e545ae9a4 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -234,7 +234,7 @@ struct xen_add_to_physmap {
+ 
+     unsigned int space; /* => enum phys_map_space */
+ 
+-#define XENMAPIDX_grant_table_status 0x80000000
++#define XENMAPIDX_grant_table_status 0x80000000U
+ 
+     /* Index into space being mapped. */
+     xen_ulong_t idx;
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 9d06e92d0f..4e8b087502 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -384,7 +384,7 @@ struct xen_sysctl_pm_op {
+         struct xen_set_cpufreq_para set_para;
+         uint64_aligned_t get_avgfreq;
+         uint32_t                    set_sched_opt_smt;
+-#define XEN_SYSCTL_CX_UNLIMITED 0xffffffff
++#define XEN_SYSCTL_CX_UNLIMITED 0xffffffffU
+         uint32_t                    get_max_cstate;
+         uint32_t                    set_max_cstate;
+     } u;
+@@ -547,7 +547,7 @@ struct xen_sysctl_numainfo {
+ #define XEN_SYSCTL_CPUPOOL_OP_RMCPU                 5  /* R */
+ #define XEN_SYSCTL_CPUPOOL_OP_MOVEDOMAIN            6  /* M */
+ #define XEN_SYSCTL_CPUPOOL_OP_FREEINFO              7  /* F */
+-#define XEN_SYSCTL_CPUPOOL_PAR_ANY     0xFFFFFFFF
++#define XEN_SYSCTL_CPUPOOL_PAR_ANY     0xFFFFFFFFU
+ struct xen_sysctl_cpupool_op {
+     uint32_t op;          /* IN */
+     uint32_t cpupool_id;  /* IN: CDIARM OUT: CI */
+diff --git a/xen/include/xen/bitops.h b/xen/include/xen/bitops.h
+index 33619a0873..3b7e09a26e 100644
+--- a/xen/include/xen/bitops.h
++++ b/xen/include/xen/bitops.h
+@@ -227,11 +227,11 @@ static inline __u32 ror32(__u32 word, unsigned int shift)
+ }
+ 
+ /* base-2 logarithm */
+-#define __L2(_x)  (((_x) & 0x00000002) ?   1 : 0)
+-#define __L4(_x)  (((_x) & 0x0000000c) ? ( 2 + __L2( (_x)>> 2)) : __L2( _x))
+-#define __L8(_x)  (((_x) & 0x000000f0) ? ( 4 + __L4( (_x)>> 4)) : __L4( _x))
+-#define __L16(_x) (((_x) & 0x0000ff00) ? ( 8 + __L8( (_x)>> 8)) : __L8( _x))
+-#define ilog2(_x) (((_x) & 0xffff0000) ? (16 + __L16((_x)>>16)) : __L16(_x))
++#define __L2(_x)  (((_x) & 0x00000002U) ?   1 : 0)
++#define __L4(_x)  (((_x) & 0x0000000cU) ? ( 2 + __L2( (_x)>> 2)) : __L2( _x))
++#define __L8(_x)  (((_x) & 0x000000f0U) ? ( 4 + __L4( (_x)>> 4)) : __L4( _x))
++#define __L16(_x) (((_x) & 0x0000ff00U) ? ( 8 + __L8( (_x)>> 8)) : __L8( _x))
++#define ilog2(_x) (((_x) & 0xffff0000U) ? (16 + __L16((_x)>>16)) : __L16(_x))
+ 
+ /**
+  * for_each_set_bit - iterate over every set bit in a memory region
+diff --git a/xen/include/xen/cper.h b/xen/include/xen/cper.h
+index f8e5272bc1..71d14faa02 100644
+--- a/xen/include/xen/cper.h
++++ b/xen/include/xen/cper.h
+@@ -56,7 +56,7 @@ static inline uint64_t cper_next_record_id(void)
+ #define CPER_SIG_RECORD				"CPER"
+ #define CPER_SIG_SIZE				4
+ /* Used in signature_end field in struct cper_record_header */
+-#define CPER_SIG_END				0xffffffff
++#define CPER_SIG_END				0xffffffffU
+ 
+ /*
+  * CPER record header revision, used in revision field in struct
+@@ -80,36 +80,36 @@ static inline uint64_t cper_next_record_id(void)
+  * Corrected Machine Check
+  */
+ #define CPER_NOTIFY_CMC							\
+-	UUID_LE(0x2DCE8BB1, 0xBDD7, 0x450e, 0xB9, 0xAD, 0x9C, 0xF4,	\
+-		0xEB, 0xD4, 0xF8, 0x90)
++	UUID_LE(0x2DCE8BB1U, 0xBDD7U, 0x450eU, 0xB9U, 0xADU, 0x9CU, 0xF4U,	\
++		0xEBU, 0xD4U, 0xF8U, 0x90U)
+ /* Corrected Platform Error */
+ #define CPER_NOTIFY_CPE							\
+-	UUID_LE(0x4E292F96, 0xD843, 0x4a55, 0xA8, 0xC2, 0xD4, 0x81,	\
+-		0xF2, 0x7E, 0xBE, 0xEE)
++	UUID_LE(0x4E292F96U, 0xD843U, 0x4a55U, 0xA8U, 0xC2U, 0xD4U, 0x81U,	\
++		0xF2U, 0x7EU, 0xBEU, 0xEEU)
+ /* Machine Check Exception */
+ #define CPER_NOTIFY_MCE							\
+-	UUID_LE(0xE8F56FFE, 0x919C, 0x4cc5, 0xBA, 0x88, 0x65, 0xAB,	\
+-		0xE1, 0x49, 0x13, 0xBB)
++	UUID_LE(0xE8F56FFEU, 0x919CU, 0x4cc5U, 0xBAU, 0x88U, 0x65U, 0xABU,	\
++		0xE1U, 0x49U, 0x13U, 0xBBU)
+ /* PCI Express Error */
+ #define CPER_NOTIFY_PCIE						\
+-	UUID_LE(0xCF93C01F, 0x1A16, 0x4dfc, 0xB8, 0xBC, 0x9C, 0x4D,	\
+-		0xAF, 0x67, 0xC1, 0x04)
++	UUID_LE(0xCF93C01FU, 0x1A16U, 0x4dfcU, 0xB8U, 0xBCU, 0x9CU, 0x4DU,	\
++		0xAFU, 0x67U, 0xC1U, 0x04U)
+ /* INIT Record (for IPF) */
+ #define CPER_NOTIFY_INIT						\
+-	UUID_LE(0xCC5263E8, 0x9308, 0x454a, 0x89, 0xD0, 0x34, 0x0B,	\
+-		0xD3, 0x9B, 0xC9, 0x8E)
++	UUID_LE(0xCC5263E8U, 0x9308U, 0x454aU, 0x89U, 0xD0U, 0x34U, 0x0BU,	\
++		0xD3U, 0x9BU, 0xC9U, 0x8EU)
+ /* Non-Maskable Interrupt */
+ #define CPER_NOTIFY_NMI							\
+-	UUID_LE(0x5BAD89FF, 0xB7E6, 0x42c9, 0x81, 0x4A, 0xCF, 0x24,	\
+-		0x85, 0xD6, 0xE9, 0x8A)
++	UUID_LE(0x5BAD89FFU, 0xB7E6U, 0x42c9U, 0x81U, 0x4AU, 0xCFU, 0x24U,	\
++		0x85U, 0xD6U, 0xE9U, 0x8AU)
+ /* BOOT Error Record */
+ #define CPER_NOTIFY_BOOT						\
+-	UUID_LE(0x3D61A466, 0xAB40, 0x409a, 0xA6, 0x98, 0xF3, 0x62,	\
+-		0xD4, 0x64, 0xB3, 0x8F)
++	UUID_LE(0x3D61A466U, 0xAB40U, 0x409aU, 0xA6U, 0x98U, 0xF3U, 0x62U,	\
++		0xD4U, 0x64U, 0xB3U, 0x8FU)
+ /* DMA Remapping Error */
+ #define CPER_NOTIFY_DMAR						\
+-	UUID_LE(0x667DD791, 0xC6B3, 0x4c27, 0x8A, 0x6B, 0x0F, 0x8E,	\
+-		0x72, 0x2D, 0xEB, 0x41)
++	UUID_LE(0x667DD791U, 0xC6B3U, 0x4c27U, 0x8AU, 0x6BU, 0x0FU, 0x8EU,	\
++		0x72U, 0x2DU, 0xEBU, 0x41U)
+ 
+ /*
+  * Flags bits definitions for flags in struct cper_record_header
+diff --git a/xen/lib/muldiv64.c b/xen/lib/muldiv64.c
+index 78177ce616..641ac25d01 100644
+--- a/xen/lib/muldiv64.c
++++ b/xen/lib/muldiv64.c
+@@ -27,7 +27,7 @@ uint64_t muldiv64(uint64_t a, uint32_t b, uint32_t c)
+     rh = (uint64_t)u.l.high * (uint64_t)b;
+     rh += (rl >> 32);
+     res.l.high = rh / c;
+-    res.l.low = (((rh % c) << 32) + (rl & 0xffffffff)) / c;
++    res.l.low = (((rh % c) << 32) + (rl & 0xffffffffU)) / c;
+ 
+     return res.ll;
  #endif
- 
--#define EFIERR(a)           (0x8000000000000000 | a)
--#define EFI_ERROR_MASK      0x8000000000000000
--#define EFIERR_OEM(a)       (0xc000000000000000 | a)
-+#define EFIERR(a)           (0x8000000000000000U | a)
-+#define EFI_ERROR_MASK      0x8000000000000000U
-+#define EFIERR_OEM(a)       (0xc000000000000000U | a)
- 
- 
--#define BAD_POINTER         0xFBFBFBFBFBFBFBFB
--#define MAX_ADDRESS         0xFFFFFFFFFFFFFFFF
-+#define BAD_POINTER         0xFBFBFBFBFBFBFBFBU
-+#define MAX_ADDRESS         0xFFFFFFFFFFFFFFFFU
- 
- #ifdef EFI_NT_EMULATOR
-     #define BREAKPOINT()        __asm { int 3 }
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index c5850c26af..28a57fe434 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -34,13 +34,13 @@
- #define EFI_REVISION(major, minor) (((major) << 16) | (minor))
- 
- #define SMBIOS3_TABLE_GUID \
--  { 0xf2fd1544, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94} }
-+  { 0xf2fd1544U, 0x9794U, 0x4a2cU, {0x99U, 0x2eU, 0xe5U, 0xbbU, 0xcfU, 0x20U, 0xe3U, 0x94U} }
- #define SHIM_LOCK_PROTOCOL_GUID \
--  { 0x605dab50, 0xe046, 0x4300, {0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23} }
-+  { 0x605dab50U, 0xe046U, 0x4300U, {0xabU, 0xb6U, 0x3dU, 0xd8U, 0x10U, 0xddU, 0x8bU, 0x23U} }
- #define APPLE_PROPERTIES_PROTOCOL_GUID \
--  { 0x91bd12fe, 0xf6c3, 0x44fb, { 0xa5, 0xb7, 0x51, 0x22, 0xab, 0x30, 0x3a, 0xe0} }
-+  { 0x91bd12feU, 0xf6c3U, 0x44fbU, { 0xa5U, 0xb7U, 0x51U, 0x22U, 0xabU, 0x30U, 0x3aU, 0xe0U} }
- #define EFI_SYSTEM_RESOURCE_TABLE_GUID    \
--  { 0xb122a263, 0x3661, 0x4f68, {0x99, 0x29, 0x78, 0xf8, 0xb0, 0xd6, 0x21, 0x80} }
-+  { 0xb122a263U, 0x3661U, 0x4f68U, {0x99U, 0x29U, 0x78U, 0xf8U, 0xb0U, 0xd6U, 0x21U, 0x80U} }
- #define EFI_SYSTEM_RESOURCE_TABLE_FIRMWARE_RESOURCE_VERSION 1
- 
- typedef struct {
-diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
-index 13b0975866..5cb7504c96 100644
---- a/xen/common/efi/runtime.c
-+++ b/xen/common/efi/runtime.c
-@@ -698,7 +698,7 @@ int efi_runtime_call(struct xenpf_efi_runtime_call *op)
- #ifndef COMPAT
-     op->status = status;
- #else
--    op->status = (status & 0x3fffffff) | ((status >> 32) & 0xc0000000);
-+    op->status = (status & 0x3fffffffU) | ((status >> 32) & 0xc0000000U);
- #endif
- 
-     return rc;
-diff --git a/xen/include/efi/efiapi.h b/xen/include/efi/efiapi.h
-index a616d1238a..8481e176ae 100644
---- a/xen/include/efi/efiapi.h
-+++ b/xen/include/efi/efiapi.h
-@@ -868,19 +868,19 @@ typedef struct _EFI_BOOT_SERVICES {
- //
- 
- #define MPS_TABLE_GUID    \
--    { 0xeb9d2d2f, 0x2d88, 0x11d3, {0x9a, 0x16, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d} }
-+    { 0xeb9d2d2fU, 0x2d88U, 0x11d3U, {0x9aU, 0x16U, 0x0U, 0x90U, 0x27U, 0x3fU, 0xc1U, 0x4dU} }
- 
- #define ACPI_TABLE_GUID    \
--    { 0xeb9d2d30, 0x2d88, 0x11d3, {0x9a, 0x16, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d} }
-+    { 0xeb9d2d30U, 0x2d88U, 0x11d3U, {0x9aU, 0x16U, 0x0U, 0x90U, 0x27U, 0x3fU, 0xc1U, 0x4dU} }
- 
- #define ACPI_20_TABLE_GUID  \
--    { 0x8868e871, 0xe4f1, 0x11d3, {0xbc, 0x22, 0x0, 0x80, 0xc7, 0x3c, 0x88, 0x81} }
-+    { 0x8868e871U, 0xe4f1U, 0x11d3U, {0xbcU, 0x22U, 0x0U, 0x80U, 0xc7U, 0x3cU, 0x88U, 0x81U} }
- 
- #define SMBIOS_TABLE_GUID    \
--    { 0xeb9d2d31, 0x2d88, 0x11d3, {0x9a, 0x16, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d} }
-+    { 0xeb9d2d31U, 0x2d88U, 0x11d3U, {0x9aU, 0x16U, 0x0U, 0x90U, 0x27U, 0x3fU, 0xc1U, 0x4dU} }
- 
- #define SAL_SYSTEM_TABLE_GUID    \
--    { 0xeb9d2d32, 0x2d88, 0x11d3, {0x9a, 0x16, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d} }
-+    { 0xeb9d2d32U, 0x2d88U, 0x11d3U, {0x9aU, 0x16U, 0x0U, 0x90U, 0x27U, 0x3fU, 0xc1U, 0x4dU} }
- 
- 
- typedef struct _EFI_CONFIGURATION_TABLE {
-diff --git a/xen/include/efi/efidef.h b/xen/include/efi/efidef.h
-index 86a7e111bf..dab60882d2 100644
---- a/xen/include/efi/efidef.h
-+++ b/xen/include/efi/efidef.h
-@@ -167,7 +167,7 @@ typedef enum {
- #define EFI_MEMORY_MORE_RELIABLE 0x0000000000010000
- 
- // range requires a runtime mapping
--#define EFI_MEMORY_RUNTIME      0x8000000000000000
-+#define EFI_MEMORY_RUNTIME      0x8000000000000000U
- 
- #define EFI_MEMORY_DESCRIPTOR_VERSION  1
- typedef struct {
-diff --git a/xen/include/efi/efiprot.h b/xen/include/efi/efiprot.h
-index 56d7636b2b..d1a8063bde 100644
---- a/xen/include/efi/efiprot.h
-+++ b/xen/include/efi/efiprot.h
-@@ -38,7 +38,7 @@ Revision History
- //
- 
- #define BLOCK_IO_PROTOCOL \
--    { 0x964e5b21, 0x6459, 0x11d2, {0x8e, 0x39, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b} }
-+    { 0x964e5b21U, 0x6459U, 0x11d2U, {0x8eU, 0x39U, 0x0U, 0xa0U, 0xc9U, 0x69U, 0x72U, 0x3bU} }
- #define EFI_BLOCK_IO_INTERFACE_REVISION   0x00010000
- 
- INTERFACE_DECL(_EFI_BLOCK_IO);
-@@ -114,7 +114,7 @@ typedef struct _EFI_BLOCK_IO {
- //
- 
- #define DISK_IO_PROTOCOL \
--    { 0xce345171, 0xba0b, 0x11d2,  {0x8e, 0x4f, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b} }
-+    { 0xce345171U, 0xba0bU, 0x11d2U,  {0x8eU, 0x4fU, 0x0U, 0xa0U, 0xc9U, 0x69U, 0x72U, 0x3bU} }
- #define EFI_DISK_IO_INTERFACE_REVISION   0x00010000
- 
- INTERFACE_DECL(_EFI_DISK_IO);
-@@ -153,7 +153,7 @@ typedef struct _EFI_DISK_IO {
- //
- 
- #define SIMPLE_FILE_SYSTEM_PROTOCOL \
--    { 0x964e5b22, 0x6459, 0x11d2, {0x8e, 0x39, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b} }
-+    { 0x964e5b22U, 0x6459U, 0x11d2U, {0x8eU, 0x39U, 0x0U, 0xa0U, 0xc9U, 0x69U, 0x72U, 0x3bU} }
- 
- INTERFACE_DECL(_EFI_FILE_IO_INTERFACE);
- INTERFACE_DECL(_EFI_FILE_HANDLE);
-@@ -335,7 +335,7 @@ typedef struct {
- #define SIZE_OF_EFI_FILE_SYSTEM_INFO EFI_FIELD_OFFSET(EFI_FILE_SYSTEM_INFO,VolumeLabel)
- 
- #define EFI_FILE_SYSTEM_VOLUME_LABEL_INFO_ID    \
--    { 0xDB47D7D3,0xFE81, 0x11d3, {0x9A, 0x35, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D} }
-+    { 0xDB47D7D3U,0xFE81U, 0x11d3U, {0x9AU, 0x35U, 0x00U, 0x90U, 0x27U, 0x3FU, 0xC1U, 0x4DU} }
- 
- typedef struct {
-     CHAR16                  VolumeLabel[1];
-@@ -349,7 +349,7 @@ typedef struct {
- 
- 
- #define LOAD_FILE_PROTOCOL \
--    { 0x56EC3091, 0x954C, 0x11d2, {0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B} }
-+    { 0x56EC3091U, 0x954CU, 0x11d2U, {0x8EU, 0x3FU, 0x00U, 0xA0U, 0xC9U, 0x69U, 0x72U, 0x3BU} }
- 
- INTERFACE_DECL(_EFI_LOAD_FILE_INTERFACE);
- 
-@@ -373,7 +373,7 @@ typedef struct _EFI_LOAD_FILE_INTERFACE {
- //
- 
- #define DEVICE_IO_PROTOCOL \
--    { 0xaf6ac311, 0x84c3, 0x11d2, {0x8e, 0x3c, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b} }
-+    { 0xaf6ac311U, 0x84c3U, 0x11d2U, {0x8eU, 0x3cU, 0x00U, 0xa0U, 0xc9U, 0x69U, 0x72U, 0x3bU} }
- 
- INTERFACE_DECL(_EFI_DEVICE_IO_INTERFACE);
- 
-@@ -484,7 +484,7 @@ typedef struct _EFI_DEVICE_IO_INTERFACE {
- //
- 
- #define UNICODE_COLLATION_PROTOCOL \
--    { 0x1d85cd7f, 0xf43d, 0x11d2, {0x9a, 0xc,  0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d} }
-+    { 0x1d85cd7fU, 0xf43dU, 0x11d2U, {0x9aU, 0xcU,  0x0U, 0x90U, 0x27U, 0x3fU, 0xc1U, 0x4dU} }
- 
- #define UNICODE_BYTE_ORDER_MARK       (CHAR16)(0xfeff)
- 
-@@ -557,7 +557,7 @@ typedef struct _EFI_UNICODE_COLLATION_INTERFACE {
- /* Graphics output protocol */
- #define EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID \
-   { \
--    0x9042a9de, 0x23dc, 0x4a38, {0x96, 0xfb, 0x7a, 0xde, 0xd0, 0x80, 0x51, 0x6a } \
-+    0x9042a9deU, 0x23dcU, 0x4a38U, {0x96U, 0xfbU, 0x7aU, 0xdeU, 0xd0U, 0x80U, 0x51U, 0x6aU } \
-   }
- 
- typedef struct _EFI_GRAPHICS_OUTPUT_PROTOCOL EFI_GRAPHICS_OUTPUT_PROTOCOL;
-@@ -730,7 +730,7 @@ struct _EFI_GRAPHICS_OUTPUT_PROTOCOL {
-  * UEFI Specification Version 2.5 Section 11.9
-  */
- #define EFI_EDID_DISCOVERED_PROTOCOL_GUID \
--    { 0x1C0C34F6, 0xD380, 0x41FA, { 0xA0, 0x49, 0x8a, 0xD0, 0x6C, 0x1A, 0x66, 0xAA} }
-+    { 0x1C0C34F6U, 0xD380U, 0x41FAU, { 0xA0U, 0x49U, 0x8aU, 0xD0U, 0x6CU, 0x1AU, 0x66U, 0xAAU} }
- 
- typedef struct _EFI_EDID_DISCOVERED_PROTOCOL {
-     UINT32   SizeOfEdid;
-@@ -742,7 +742,7 @@ typedef struct _EFI_EDID_DISCOVERED_PROTOCOL {
-  * UEFI Specification Version 2.5 Section 11.9
-  */
- #define EFI_EDID_ACTIVE_PROTOCOL_GUID \
--    { 0xBD8C1056, 0x9F36, 0x44EC, { 0x92, 0xA8, 0xA6, 0x33, 0x7F, 0x81, 0x79, 0x86} }
-+    { 0xBD8C1056U, 0x9F36U, 0x44ECU, { 0x92U, 0xA8U, 0xA6U, 0x33U, 0x7FU, 0x81U, 0x79U, 0x86U} }
- 
- typedef struct _EFI_EDID_ACTIVE_PROTOCOL {
-     UINT32   SizeOfEdid;
-@@ -754,7 +754,7 @@ typedef struct _EFI_EDID_ACTIVE_PROTOCOL {
-  * UEFI Specification Version 2.5 Section 11.9
-  */
- #define EFI_EDID_OVERRIDE_PROTOCOL_GUID \
--    { 0x48ECB431, 0xFB72, 0x45C0, { 0xA9, 0x22, 0xF4, 0x58, 0xFE, 0x04, 0x0B, 0xD5} }
-+    { 0x48ECB431U, 0xFB72U, 0x45C0U, { 0xA9U, 0x22U, 0xF4U, 0x58U, 0xFEU, 0x04U, 0x0BU, 0xD5U} }
- 
- INTERFACE_DECL(_EFI_EDID_OVERRIDE_PROTOCOL);
- 
 -- 
 2.41.0
 
