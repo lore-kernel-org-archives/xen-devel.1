@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B16EB64DB
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551995.861862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD3AEB64DD
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552002.861897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyw-0007VO-Kz; Tue, 20 Jun 2023 17:17:30 +0000
+	id 1qBez3-0000Ye-2l; Tue, 20 Jun 2023 17:17:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551995.861862; Tue, 20 Jun 2023 17:17:30 +0000
+Received: by outflank-mailman (output) from mailman id 552002.861897; Tue, 20 Jun 2023 17:17:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyw-0007Td-DC; Tue, 20 Jun 2023 17:17:30 +0000
-Received: by outflank-mailman (input) for mailman id 551995;
- Tue, 20 Jun 2023 17:17:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBez2-0000Y9-TX; Tue, 20 Jun 2023 17:17:36 +0000
+Received: by outflank-mailman (input) for mailman id 552002;
+ Tue, 20 Jun 2023 17:17:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBeyv-0005iB-98
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:29 +0000
+ id 1qBez1-0005QM-47
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:35 +0000
 Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
  [2607:f8b0:4864:20::b2b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5507f960-0f8e-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 19:17:28 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5758b775-0f8e-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 19:17:32 +0200 (CEST)
 Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-be49e41a3d6so3677356276.1
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:28 -0700 (PDT)
+ 3f1490d57ef6-bacf685150cso4920969276.3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:32 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.26
+ f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:17:26 -0700 (PDT)
+ Tue, 20 Jun 2023 10:17:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,202 +47,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5507f960-0f8e-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 5758b775-0f8e-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281447; x=1689873447;
+        d=gmail.com; s=20221208; t=1687281451; x=1689873451;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=euxQjj1nka42h3IgnfVDkR/WuQVbd1+OBbuouObQPZw=;
-        b=ULINpF4cSUf3E0vswpH5QAioshxNpdrmsaQInoUb8RunfkwL889I8OvlIM6qjWZCk4
-         uxiDLykMuYl0naI1OGQNjyxFVfeQp0u9H1iPwZtbnWD2pX3538vZsErT3Dk3Tp9pH+7L
-         FAjy9doJWjWE9uzJVcS9FI5byrLrI0tVlqwr8Li+iM8t4S7aHz925xtqyz7Jx9ECpwtw
-         FexVqL6CDjTeADqsEE2H4t00aYSyDfWyahSmsy+rbU939psvTHIqO1x4AZ3jM5nXfIPE
-         uCq2I+i8KDo503efp04bp6AiiRaVXs7cvdJwZ5FBO3aTg3y77vtQfke+tj6WIhSUwOyi
-         1ujw==
+        bh=p0+IH6WutOOhss8a6x2jgwcV2LXw+L6iCti+oajsAV0=;
+        b=R12VZbvVmViVHNuFRP0d8ysgoYTijNG9Dm9PqMQpio4eNeBCvyuInefSHdIn+uUFhP
+         Tu6svVi9RoLuhymnDHSTc5owwsIbgdM+oBmFZBD0S2UtEXX/vT3pPy0z31Zq6XoNWBlZ
+         ohwyrSfng1ANBezTIJWtHbBWKXuO4RYqso5JnwdSdETgBSNpz/5rSgsJsAe36slFowgf
+         xWuP1xJZDCIfkUzYHZm6zJ9wwsrfYiV5gOaYMGFUCKOvFEhBjK35WX9ICqDJ0X6Px8za
+         sqZXT+QfOoIpTfoI451s3puwqycegEbJgKk7JfiiH1aA45BZy1KXJrgX6GxCnSfA/+H7
+         G/4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281447; x=1689873447;
+        d=1e100.net; s=20221208; t=1687281451; x=1689873451;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=euxQjj1nka42h3IgnfVDkR/WuQVbd1+OBbuouObQPZw=;
-        b=lma+31c3vFuN7Hzuo5WA6bloFNnQRh8U41SjonSPx98vLoW2bgRlP1Kg7K3dbU2DSV
-         h5cTIvVecn2eZsP/DS9AVVxcJ6XbamWZ6R7dDJP0dzAjfTR7R4cAGC0L5aLHo9cxS04T
-         aqRkEU6LhdahCzn5clOqqFB1IjBPUHgziHn1gcg+92lBeUjdQJqA4bZ2e2n7U/BVPMz/
-         UYaHaOihQuYOQPpuH9Zbwk+4Fri4Jsz45dQnLtjocjjNIaeWnOLzcbdMsXztsqGJhAUK
-         3RLtWGT4ttskH5Fm0OIUS6U5j7df3ZPxxALYyITlqBII8yhSuGti6jEUjrJjJnufcRz7
-         aZUA==
-X-Gm-Message-State: AC+VfDwiTfdZ/x25PNRQQAKSEfrenjLgyM37uDcdaOy6u27RrVbBaYZr
-	6WRuoD5wo3pEMvvuT0puuG2gzQ0508xrqg==
-X-Google-Smtp-Source: ACHHUZ5EB8KP3P9ZxnevN/zJy70NatbVfjPaFOUdV6sEz7ptY4/9L8nrO3fKDKVEOiFJsfGBavnyxg==
-X-Received: by 2002:a25:3620:0:b0:bc9:716d:19bf with SMTP id d32-20020a253620000000b00bc9716d19bfmr7782477yba.14.1687281447274;
-        Tue, 20 Jun 2023 10:17:27 -0700 (PDT)
+        bh=p0+IH6WutOOhss8a6x2jgwcV2LXw+L6iCti+oajsAV0=;
+        b=StmgAjKkx6BJGyWY3Tg+9UN1f7bfVQpAqX13NJtUwnD7/oNgWfrWMSu3dHjEXUizrL
+         n9eVManrMphtF90U9V73k0mzKlxTHLsDYA42RgNdXwP0tQoffbAuPjioqCVLHrDaHNg1
+         TZyRQsH4+BwGUMlkasSxSbOFbnXY1sZYKZgvgkNlPAdrx90UXqD9q/MK4aV6pvqtYi+/
+         HtH423i4IXDG00nFjiZXNyS5b4YHEGNrlZKuVjjmjSYW0HQwf36oR81TxkuMDFseMLxd
+         t+Dh12Lg1/Brwqdy8BVFtknYk6LFTANK0GMqVtJWs6CGhBEFKT1OUMwX4XUZu8Mqhbwu
+         cawA==
+X-Gm-Message-State: AC+VfDy6ojnJIUIrC27kkGvGRI6tRMdAW5w3zBiQrZPxVUujlOxdGd8b
+	DsXGCd2C92Zcv6xwoKL16P0mCEOan/YGqA==
+X-Google-Smtp-Source: ACHHUZ4OcSi/v7pNBl5g5dWsqt/1R98rs9PycPxVdap3h+BGz0V8h3JwT18jdLRU6sUQkmVbTLNoXQ==
+X-Received: by 2002:a5b:88e:0:b0:bc9:e58c:bfea with SMTP id e14-20020a5b088e000000b00bc9e58cbfeamr10556234ybq.16.1687281451157;
+        Tue, 20 Jun 2023 10:17:31 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Joel Upham <jupham125@gmail.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 09/12] libacpi: build ACPI MCFG table if requested
-Date: Tue, 20 Jun 2023 13:15:49 -0400
-Message-Id: <906595ebdc789e88715289ce48d306ae72e69fe1.1687215890.git.jupham125@gmail.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 12/12] libxl_dm: handle the new 6 port ahci controller
+Date: Tue, 20 Jun 2023 13:15:52 -0400
+Message-Id: <7556e5b5ae930a7f331293f1a87c1e7f68e8a214.1687215890.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687215890.git.jupham125@gmail.com>
 References: <cover.1687215890.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This adds construct_mcfg() function to libacpi which allows to build MCFG
-table for a given mmconfig_addr/mmconfig_len pair if the ACPI_HAS_MCFG
-flag was specified in acpi_config struct.
+This patch adds support to allow for 6 emulated devices on a
+controller, and handling cdrom drives properly. This is not from the
+original patch series.
 
-The maximum bus number is calculated from mmconfig_len using
-MCFG_SIZE_TO_NUM_BUSES macro (1MByte of MMIO space per bus).
-
-Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
 Signed-off-by: Joel Upham <jupham125@gmail.com>
 ---
- tools/libacpi/acpi2_0.h | 21 ++++++++++++++++++++
- tools/libacpi/build.c   | 43 +++++++++++++++++++++++++++++++++++++++++
- tools/libacpi/libacpi.h |  4 ++++
- 3 files changed, 68 insertions(+)
+ tools/libs/light/libxl_dm.c | 40 ++++++++++++++++++++++++++++---------
+ 1 file changed, 31 insertions(+), 9 deletions(-)
 
-diff --git a/tools/libacpi/acpi2_0.h b/tools/libacpi/acpi2_0.h
-index 6dfa939a8c..02b0cf1098 100644
---- a/tools/libacpi/acpi2_0.h
-+++ b/tools/libacpi/acpi2_0.h
-@@ -442,6 +442,24 @@ struct acpi_20_slit {
-     uint64_t localities;
-     uint8_t entry[0];
- };
-+/*
-+ * PCI Express Memory Mapped Configuration Description Table
-+ */
-+struct mcfg_range_entry {
-+    uint64_t base_address;
-+    uint16_t pci_segment;
-+    uint8_t  start_pci_bus_num;
-+    uint8_t  end_pci_bus_num;
-+    uint32_t reserved;
-+};
-+
-+struct acpi_mcfg {
-+    struct acpi_header header;
-+    uint8_t reserved[8];
-+    struct mcfg_range_entry entries[1];
-+};
-+
-+#define MCFG_SIZE_TO_NUM_BUSES(size)  ((size) >> 20)
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index 17bc2113e1..792dbc4383 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -1937,29 +1937,51 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
  
- /*
-  * Table Signatures.
-@@ -458,6 +476,8 @@ struct acpi_20_slit {
- #define ACPI_2_0_WAET_SIGNATURE ASCII32('W','A','E','T')
- #define ACPI_2_0_SRAT_SIGNATURE ASCII32('S','R','A','T')
- #define ACPI_2_0_SLIT_SIGNATURE ASCII32('S','L','I','T')
-+#define ACPI_MCFG_SIGNATURE     ASCII32('M','C','F','G')
-+
+             if (disks[i].is_cdrom) {
+                 const char *drive_id;
+-                if (disk > 4) {
++                if (disk > 4 && b_info->device_model_machine == LIBXL_DEVICE_MODEL_MACHINE_I440) {
+                     LOGD(WARN, guest_domid, "Emulated CDROM can be only one of the first 4 disks.\n"
+                          "Disk %s will be available via PV drivers but not as an "
+                          "emulated disk.",
+                          disks[i].vdev);
+                     continue;
++                } else if (disk > 6 && 
++                           b_info->device_model_machine == LIBXL_DEVICE_MODEL_MACHINE_Q35) {
++                    LOGD(WARN, guest_domid, "Emulated CDROM can be only one of the first 6 disks.\n"
++                         "Disk %s will be available via PV drivers but not as an "
++                         "emulated disk.",
++                         disks[i].vdev);
++                    continue;
+                 }
++		if (b_info->device_model_machine == LIBXL_DEVICE_MODEL_MACHINE_I440) {
++                     drive_id = GCSPRINTF("ide-%i", dev_number);
++                     drive = GCSPRINTF("if=none,readonly=on,id=%s", drive_id);
  
- /*
-  * Table revision numbers.
-@@ -473,6 +493,7 @@ struct acpi_20_slit {
- #define ACPI_1_0_FADT_REVISION 0x01
- #define ACPI_2_0_SRAT_REVISION 0x01
- #define ACPI_2_0_SLIT_REVISION 0x01
-+#define ACPI_1_0_MCFG_REVISION 0x01
+-                drive_id = GCSPRINTF("ide-%i", dev_number);
+-                drive = GCSPRINTF("if=none,readonly=on,id=%s", drive_id);
+-
+-                if (target_path)
+-                    drive = libxl__sprintf(gc, "%s,file=%s,format=%s",
+-                                           drive, target_path, format);
++                    if (target_path)
++                        drive = libxl__sprintf(gc, "%s,file=%s,format=%s",
++                                               drive, target_path, format);
  
- #pragma pack ()
- 
-diff --git a/tools/libacpi/build.c b/tools/libacpi/build.c
-index 2f29863db1..fc029d18bf 100644
---- a/tools/libacpi/build.c
-+++ b/tools/libacpi/build.c
-@@ -295,6 +295,37 @@ static struct acpi_20_slit *construct_slit(struct acpi_ctxt *ctxt,
-     return slit;
- }
- 
-+static struct acpi_mcfg *construct_mcfg(struct acpi_ctxt *ctxt,
-+                                        const struct acpi_config *config)
-+{
-+    struct acpi_mcfg *mcfg;
+-                flexarray_vappend(dm_args,
++                    flexarray_vappend(dm_args,
+                     "-drive", drive,
+                     "-device",
+                     GCSPRINTF("ide-cd,id=%s,drive=%s,bus=ide.%u,unit=%u",
+                               drive_id, drive_id,
+                               disk / 2, disk % 2),
+                     NULL);
+-                continue;
++                   continue;
++                } else {
++                    drive_id = GCSPRINTF("sata-0-%i", dev_number);
++                    drive = GCSPRINTF("if=none,readonly=on,id=%s", drive_id);
++                        if (target_path)
++                            drive = libxl__sprintf(gc, "%s,file=%s,format=%s",
++                                                   drive, target_path, format);
 +
-+    /* Warning: this code expects that we have only one PCI segment */
-+    mcfg = ctxt->mem_ops.alloc(ctxt, sizeof(*mcfg), 16);
-+    if (!mcfg)
-+        return NULL;
-+
-+    memset(mcfg, 0, sizeof(*mcfg));
-+    mcfg->header.signature    = ACPI_MCFG_SIGNATURE;
-+    mcfg->header.revision     = ACPI_1_0_MCFG_REVISION;
-+    fixed_strcpy(mcfg->header.oem_id, ACPI_OEM_ID);
-+    fixed_strcpy(mcfg->header.oem_table_id, ACPI_OEM_TABLE_ID);
-+    mcfg->header.oem_revision = ACPI_OEM_REVISION;
-+    mcfg->header.creator_id   = ACPI_CREATOR_ID;
-+    mcfg->header.creator_revision = ACPI_CREATOR_REVISION;
-+    mcfg->header.length = sizeof(*mcfg);
-+
-+    mcfg->entries[0].base_address = config->mmconfig_addr;
-+    mcfg->entries[0].pci_segment = 0;
-+    mcfg->entries[0].start_pci_bus_num = 0;
-+    mcfg->entries[0].end_pci_bus_num =
-+        MCFG_SIZE_TO_NUM_BUSES(config->mmconfig_len) - 1;
-+
-+    set_checksum(mcfg, offsetof(struct acpi_header, checksum), sizeof(*mcfg));
-+
-+    return mcfg;;
-+}
-+
- static int construct_passthrough_tables(struct acpi_ctxt *ctxt,
-                                         unsigned long *table_ptrs,
-                                         int nr_tables,
-@@ -342,6 +373,7 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
-     struct acpi_20_hpet *hpet;
-     struct acpi_20_waet *waet;
-     struct acpi_20_tcpa *tcpa;
-+    struct acpi_mcfg *mcfg;
-     struct acpi_20_tpm2 *tpm2;
-     unsigned char *ssdt;
-     void *lasa;
-@@ -402,6 +434,17 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
-         memcpy(ssdt, ssdt_laptop_slate, sizeof(ssdt_laptop_slate));
-         table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, ssdt);
-     }
-+
-+    /* MCFG */
-+    if ( config->table_flags & ACPI_HAS_MCFG )
-+    {
-+        mcfg = construct_mcfg(ctxt, config);
-+        if (!mcfg)
-+            return -1;
-+
-+        table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, mcfg);
-+    }
-+
-     /* TPM and its SSDT. */
-     if ( config->table_flags & ACPI_HAS_TPM )
-     {
-diff --git a/tools/libacpi/libacpi.h b/tools/libacpi/libacpi.h
-index deda39e5db..b4d3116ca5 100644
---- a/tools/libacpi/libacpi.h
-+++ b/tools/libacpi/libacpi.h
-@@ -27,6 +27,7 @@
- #define ACPI_HAS_8042              (1<<13)
- #define ACPI_HAS_CMOS_RTC          (1<<14)
- #define ACPI_HAS_SSDT_LAPTOP_SLATE (1<<15)
-+#define ACPI_HAS_MCFG              (1<<16)
- 
- struct xen_vmemrange;
- struct acpi_numa {
-@@ -89,6 +90,9 @@ struct acpi_config {
-     uint32_t ioapic_base_address;
-     uint16_t pci_isa_irq_mask;
-     uint8_t ioapic_id;
-+
-+    uint64_t mmconfig_addr;
-+    uint32_t mmconfig_len;
- };
- 
- int acpi_build_tables(struct acpi_ctxt *ctxt, struct acpi_config *config);
++                        flexarray_vappend(dm_args,
++                            "-drive", drive,
++                            "-device",
++                            GCSPRINTF("ide-cd,id=%s,drive=%s,bus=ide.0",
++                                      drive_id, drive_id),
++                            NULL);
++                        continue;
++                }
+             } else {
+                 /*
+                  * Explicit sd disks are passed through as is.
 -- 
 2.34.1
 
