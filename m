@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C13A2EB64DD
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551993.861857 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E80EB64D7
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551997.861877 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyw-0007Oy-4Z; Tue, 20 Jun 2023 17:17:30 +0000
+	id 1qBeyz-00087q-5U; Tue, 20 Jun 2023 17:17:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551993.861857; Tue, 20 Jun 2023 17:17:30 +0000
+Received: by outflank-mailman (output) from mailman id 551997.861877; Tue, 20 Jun 2023 17:17:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyv-0007O5-VV; Tue, 20 Jun 2023 17:17:29 +0000
-Received: by outflank-mailman (input) for mailman id 551993;
- Tue, 20 Jun 2023 17:17:28 +0000
+	id 1qBeyz-00086u-0I; Tue, 20 Jun 2023 17:17:33 +0000
+Received: by outflank-mailman (input) for mailman id 551997;
+ Tue, 20 Jun 2023 17:17:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBeyt-0005iB-UQ
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:27 +0000
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [2607:f8b0:4864:20::1129])
+ id 1qBeyw-0005iB-OT
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:30 +0000
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [2607:f8b0:4864:20::e2e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 542214f4-0f8e-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 19:17:27 +0200 (CEST)
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-570114e1feaso57381267b3.3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:27 -0700 (PDT)
+ id 55e2d089-0f8e-11ee-b234-6b7b168915f2;
+ Tue, 20 Jun 2023 19:17:30 +0200 (CEST)
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-440b66adc81so854514137.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:30 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.25
+ f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:17:25 -0700 (PDT)
+ Tue, 20 Jun 2023 10:17:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,157 +47,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 542214f4-0f8e-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 55e2d089-0f8e-11ee-b234-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281446; x=1689873446;
+        d=gmail.com; s=20221208; t=1687281448; x=1689873448;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=W6n7UkNFBYZK+AuffqP9HBzXa1ya+3d/QBUvXRQbFCI=;
-        b=r5JhHlD7JEcSljp6bqBMH7Os3GLHWYE2c3zb4auizeHvepM/3G3Xlf2oKW2nlVEHYH
-         5e81JK507vpiQX0d/WdDxIwV0mceFriEJJCP0c+pQwfk3Ca0k1fbw5/oMTtIWn5mm6R5
-         UVcaXE+9VELaWqgVPFwXixRbepznblrbBprO1OZxluVWBzdbJN8UKFt1osvLmy4Qa6aG
-         4IU2jUes4S9CGjo2fz+GfpVkBkqQAdCHon0kRXn7XgpEBdIU+BLMUUfgT1jR/XmZpzt4
-         uDyyL1Y872Qxw9Kb7n3/T9u1TIfjbZpfeA88V5yxoQMQA2A6cE5BGa8Cn6YYd6/gRYEH
-         WnhA==
+        bh=3fjtno19HlqIKZlbtqkAAG6ggnFUVfYA4lZq6D4RFmU=;
+        b=iIdMeU4y0VdO4JnA0H+pJgryhUUU5Hs0JZa7LVogJRMtTMQ3KmFElVEGGxaUU7IOOL
+         Si11cySxP2h8+a7v7oOnB0qStxH1lyRyRm5JQEhHovVwbdGRRMrOM/mJ7uV9bBf1I0nv
+         VFKFCLu1wCnO2l1Z0KfX5sKKkUyLZrfWCgn9Bcy0/CrrU8JJuJRL+jbHQSQNTk6+lvPe
+         28jKgvTsAO2VtaMVdH7CvUOyIyEE7g4fmVDYufhk5C3Kzi/j9sra83o5gMMUORNnwkm/
+         MW7GaMu/SDakwBIkSiwPwe8gOdLijkkxo0jf8L9tlsa57XPzBiILu53p56LiJNijm88i
+         qdgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281446; x=1689873446;
+        d=1e100.net; s=20221208; t=1687281448; x=1689873448;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=W6n7UkNFBYZK+AuffqP9HBzXa1ya+3d/QBUvXRQbFCI=;
-        b=bagvDyyiCK0gmC2JSgoPvy3P0JSrwRGS6Q8xmepqw5m/J4h/edeCqfoWYd9N9sYZei
-         zVkgC4FmQ73wbzaer0nx/k75GiqpKL75xZLcaZixQjbyPFGFHMIU043bnV6eKrJxU7DG
-         yVHWVvUJmaiSJkzGURYj4/On4r6enDmxt3G8V6o4kVJ74Ny5CX2oGr9j506SwD29LEZE
-         i87xPtZg5jY1k4A9j3xgLEt0jEVX7QoOFxYtv1vLr2Z38VCHdbKz7bvsRktBc0Gf20rY
-         /Z7INp2iAFQJf9vIvuP1ngX5OEFs/WEXhsAarrcG0c2AqeVDjvOS5B7mJxSN7VvJ/HBr
-         tK8Q==
-X-Gm-Message-State: AC+VfDyKS/cVb2KTb1fFWSO4wq1S4LSkJgVUKLQCQEjdBgPOEDfZLgA0
-	Ixv6Jk4h/R4C+2HBobewxOiW8MO+isGCrQ==
-X-Google-Smtp-Source: ACHHUZ68QC9oB49thILBTGeZaENYOVn48+DUMt+IbjZtfNSwljGZxv+Qb3iD0g2PT+etPmH1FI2Wow==
-X-Received: by 2002:a25:8046:0:b0:bc4:5a65:1a4f with SMTP id a6-20020a258046000000b00bc45a651a4fmr10790263ybn.5.1687281445775;
-        Tue, 20 Jun 2023 10:17:25 -0700 (PDT)
+        bh=3fjtno19HlqIKZlbtqkAAG6ggnFUVfYA4lZq6D4RFmU=;
+        b=ZFkdBLoeaqOgnCAE+W39Hs+pTl5G9V+JhJo00X5Ce2YmY+MA8jJFnnLUqTcy+sxd32
+         pXU++1UzRq7KiF//7iBqZc2uK7GoXvSKAysnTwUBvInMLrzZNuyomfqCz9JjOAgxR4OD
+         jYjXPKHd5fCSkE7poD+d9HzxjbJmdpZS0VVjqPO7Sjk8C2Phs4c8ZPNxWv4uuCMfrrO2
+         q5Y9hbYTuATGe/WgNGr9lAAMuVXwymZ4rItoOsmYjYShjC55gBUrHq8QZpcaP/6cCS1A
+         lCvDu1c8HjPmg2avRnl70xPVUUBqcc4hf1kOTDOLmadhPBQeW61klZsT3imMVInOkLO4
+         6h4g==
+X-Gm-Message-State: AC+VfDwyE22d1YtTn2ON9pOigDfsQguvN7J2Di88ffrKA/L/naKDxks/
+	3bJlbmlyrZCkQqe2ZSfQTmtmobhz4D+KMA==
+X-Google-Smtp-Source: ACHHUZ7dPxqtN7XNpJ+cQlQ2aT5wsLr5A17J5Y7tAF+5tcvPlSCLK2UFAuZAbT0eu3bkNE00SJhJCQ==
+X-Received: by 2002:a67:d087:0:b0:438:d4bd:f1f2 with SMTP id s7-20020a67d087000000b00438d4bdf1f2mr4795848vsi.22.1687281448728;
+        Tue, 20 Jun 2023 10:17:28 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Joel Upham <jupham125@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 08/12] libxl: Q35 support (new option device_model_machine)
-Date: Tue, 20 Jun 2023 13:15:48 -0400
-Message-Id: <2aaf3c01bb1e43384fa5e5e0c4583d586f0a1bfe.1687215890.git.jupham125@gmail.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 10/12] hvmloader: use libacpi to build MCFG table
+Date: Tue, 20 Jun 2023 13:15:50 -0400
+Message-Id: <d6dcd86eed99dc42aee8693fc855daedd0e2aeed.1687215890.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687215890.git.jupham125@gmail.com>
 References: <cover.1687215890.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide a new domain config option to select the emulated machine type,
-device_model_machine. It has following possible values:
-- "i440" - i440 emulation (default)
-- "q35" - emulate a Q35 machine. By default, the storage interface is AHCI.
-
-Note that omitting device_model_machine parameter means i440 system
-by default, so the default behavior doesn't change for existing domain
-config files.
-
-Setting device_model_machine to "q35" sends '-machine q35,accel=xen'
-argument to QEMU. Unlike i440, there no separate machine type
-to enable/disable Xen platform device, it is controlled via a machine
-property only. See 'libxl: Xen Platform device support for Q35' patch for
-a detailed description.
+This patch extends hvmloader_acpi_build_tables() with code which detects
+if MMCONFIG is available -- i.e. initialized and enabled (+we're running
+on Q35), obtains its base address and size and asks libacpi to build MCFG
+table for it via setting the flag ACPI_HAS_MCFG in a manner similar
+to other optional ACPI tables building.
 
 Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
 Signed-off-by: Joel Upham <jupham125@gmail.com>
 ---
- tools/libs/light/libxl_dm.c      | 20 ++++++++++++++------
- tools/libs/light/libxl_types.idl |  8 ++++++++
- tools/xl/xl_parse.c              | 14 ++++++++++++++
- 3 files changed, 36 insertions(+), 6 deletions(-)
+ tools/firmware/hvmloader/util.c | 70 +++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
 
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index fc264a3a13..17bc2113e1 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -1809,13 +1809,21 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-             flexarray_append(dm_args, b_info->extra_pv[i]);
-         break;
-     case LIBXL_DOMAIN_TYPE_HVM:
--        if (!libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
--            /* Switching here to the machine "pc" which does not add
--             * the xen-platform device instead of the default "xenfv" machine.
--             */
--            machinearg = libxl__strdup(gc, "pc,accel=xen,suppress-vmdesc=on");
-+        if (b_info->device_model_machine == LIBXL_DEVICE_MODEL_MACHINE_Q35) {
-+            if (!libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
-+                machinearg = libxl__sprintf(gc, "q35,accel=xen");
-+            } else {
-+                machinearg = libxl__sprintf(gc, "q35,accel=xen,xen-platform-dev=on");
-+            }
-         } else {
--            machinearg = libxl__strdup(gc, "xenfv,suppress-vmdesc=on");
-+            if (!libxl_defbool_val(b_info->u.hvm.xen_platform_pci)) {
-+                /* Switching here to the machine "pc" which does not add
-+                 * the xen-platform device instead of the default "xenfv" machine.
-+                 */
-+                machinearg = libxl__strdup(gc, "pc,accel=xen,suppress-vmdesc=on");
-+            } else {
-+                machinearg = libxl__strdup(gc, "xenfv,suppress-vmdesc=on");
-+            }
-         }
-         if (b_info->u.hvm.mmio_hole_memkb) {
-             uint64_t max_ram_below_4g = (1ULL << 32) -
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index c10292e0d7..b1aadae877 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -108,6 +108,13 @@ libxl_device_model_version = Enumeration("device_model_version", [
-     (2, "QEMU_XEN"),             # Upstream based qemu-xen device model
-     ])
+diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
+index ea416ebe10..7a75c07467 100644
+--- a/tools/firmware/hvmloader/util.c
++++ b/tools/firmware/hvmloader/util.c
+@@ -782,6 +782,69 @@ int get_pc_machine_type(void)
+     return machine_type;
+ }
  
-+libxl_device_model_machine = Enumeration("device_model_machine", [
-+    (0, "UNKNOWN"),
-+    (1, "I440"),
-+    (2, "Q35"),
-+    ])
++#define PCIEXBAR_ADDR_MASK_64MB     (~((1ULL << 26) - 1))
++#define PCIEXBAR_ADDR_MASK_128MB    (~((1ULL << 27) - 1))
++#define PCIEXBAR_ADDR_MASK_256MB    (~((1ULL << 28) - 1))
++#define PCIEXBAR_LENGTH_BITS(reg)   (((reg) >> 1) & 3)
++#define PCIEXBAREN                  1
 +
++static uint64_t mmconfig_get_base(void)
++{
++    uint64_t base;
++    uint32_t reg = pci_readl(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR);
 +
- libxl_console_type = Enumeration("console_type", [
-     (0, "UNKNOWN"),
-     (1, "SERIAL"),
-@@ -575,6 +582,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     ("device_model_ssidref", uint32),
-     ("device_model_ssid_label", string),
-     ("device_model_user", string),
-+    ("device_model_machine", libxl_device_model_machine),
- 
-     # extra parameters pass directly to qemu, NULL terminated
-     ("extra",            libxl_string_list),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 1f6f47daf4..e6fb7a409a 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2689,6 +2689,20 @@ skip_usbdev:
-     if (!xlu_cfg_get_long (config, "stubdomain_memory", &l, 0))
-         b_info->stubdomain_memkb = l * 1024;
- 
-+    if (!xlu_cfg_get_string (config, "device_model_machine", &buf, 0)) {
-+        if (!strcmp(buf, "i440")) {
-+            b_info->device_model_machine = LIBXL_DEVICE_MODEL_MACHINE_I440;
-+        } else if (!strcmp(buf, "q35")) {
-+            b_info->device_model_machine = LIBXL_DEVICE_MODEL_MACHINE_Q35;
-+        } else {
-+            fprintf(stderr,
-+                    "Unknown device_model_machine \"%s\" specified\n", buf);
-+            exit(1);
-+        }
-+    } else {
-+        b_info->device_model_machine = LIBXL_DEVICE_MODEL_MACHINE_UNKNOWN;
++    base = reg | (uint64_t) pci_readl(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR+4) << 32;
++
++    switch (PCIEXBAR_LENGTH_BITS(reg))
++    {
++    case 0:
++        base &= PCIEXBAR_ADDR_MASK_256MB;
++        break;
++    case 1:
++        base &= PCIEXBAR_ADDR_MASK_128MB;
++        break;
++    case 2:
++        base &= PCIEXBAR_ADDR_MASK_64MB;
++        break;
++    case 3:
++        BUG();  /* a reserved value encountered */
 +    }
 +
- #define parse_extra_args(type)                                            \
-     e = xlu_cfg_get_list_as_string_list(config, "device_model_args"#type, \
-                                     &b_info->extra##type, 0);            \
++    return base;
++}
++
++static uint32_t mmconfig_get_size(void)
++{
++    uint32_t reg = pci_readl(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR);
++
++    switch (PCIEXBAR_LENGTH_BITS(reg))
++    {
++    case 0: return MB(256);
++    case 1: return MB(128);
++    case 2: return MB(64);
++    case 3:
++        BUG();  /* a reserved value encountered */
++    }
++
++    return 0;
++}
++
++static uint32_t mmconfig_is_enabled(void)
++{
++    return pci_readl(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR) & PCIEXBAREN;
++}
++
++static int is_mmconfig_used(void)
++{
++    if (get_pc_machine_type() == MACHINE_TYPE_Q35)
++    {
++        if (mmconfig_is_enabled() && mmconfig_get_base())
++            return 1;
++    }
++
++    return 0;
++}
++
+ static void validate_hvm_info(struct hvm_info_table *t)
+ {
+     uint8_t *ptr = (uint8_t *)t;
+@@ -1022,6 +1085,13 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
+         config->pci_hi_len = pci_hi_mem_end - pci_hi_mem_start;
+     }
+ 
++    if ( is_mmconfig_used() )
++    {
++        config->table_flags |= ACPI_HAS_MCFG;
++        config->mmconfig_addr = mmconfig_get_base();
++        config->mmconfig_len  = mmconfig_get_size();
++    }
++
+     s = xenstore_read("platform/generation-id", "0:0");
+     if ( s )
+     {
 -- 
 2.34.1
 
