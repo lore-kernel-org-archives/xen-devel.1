@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F899EB64D7
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:26:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552064.861927 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4406BEB64DB
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:26:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552075.861977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBf7M-0005iw-Ve; Tue, 20 Jun 2023 17:26:12 +0000
+	id 1qBf7V-0007Ho-Ir; Tue, 20 Jun 2023 17:26:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552064.861927; Tue, 20 Jun 2023 17:26:12 +0000
+Received: by outflank-mailman (output) from mailman id 552075.861977; Tue, 20 Jun 2023 17:26:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBf7M-0005ip-Q9; Tue, 20 Jun 2023 17:26:12 +0000
-Received: by outflank-mailman (input) for mailman id 552064;
- Tue, 20 Jun 2023 17:26:10 +0000
+	id 1qBf7V-0007HO-DT; Tue, 20 Jun 2023 17:26:21 +0000
+Received: by outflank-mailman (input) for mailman id 552075;
+ Tue, 20 Jun 2023 17:26:20 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBf7K-0004q1-OA
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:26:10 +0000
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [2607:f8b0:4864:20::1133])
+ id 1qBf7U-0004q1-Gr
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:26:20 +0000
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [2607:f8b0:4864:20::32d])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8ab5614f-0f8f-11ee-8611-37d641c3527e;
- Tue, 20 Jun 2023 19:26:08 +0200 (CEST)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-56fff21c2ebso53777097b3.3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:26:08 -0700 (PDT)
+ id 90d758ef-0f8f-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 19:26:18 +0200 (CEST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-6b5853a140cso1750519a34.2
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:26:18 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- e65-20020a0dc244000000b0056cffe97a11sm604604ywd.13.2023.06.20.10.26.06
+ e65-20020a0dc244000000b0056cffe97a11sm604604ywd.13.2023.06.20.10.26.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:26:06 -0700 (PDT)
+ Tue, 20 Jun 2023 10:26:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ab5614f-0f8f-11ee-8611-37d641c3527e
+X-Inumbo-ID: 90d758ef-0f8f-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281967; x=1689873967;
+        d=gmail.com; s=20221208; t=1687281977; x=1689873977;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pVhDjOa7FHuFiuCBrjeemQ/YptYJoZezJ1j93NWRipk=;
-        b=bPEXGnB2OtY8PYvTjaUk45NIyGfaJM2vd0nUPIwq0dz+1vjogQHKnLJSGWeMF3FZiR
-         BJQr02kmNxHweWckj3n4AC4pYWAIm3gXebmre0XVSa+MyCSfP7KmzjksZfpzuEP6yi2c
-         HKrdqxIW3oi5jIN+o1+rFb7mcBEbqWQ+WLjCyNu2Le6YTLfO5bsApD3TyYLGfcWzXEpw
-         MgywIHHn/Ex9ORIPODfah/nut/515nEu59JmlDBKfJz3jeZl5XAIcDawiSkUvxQm8mCn
-         zahZTbbwNHQb4LnWfVlixwaX4ifBQy6qHwzgwKkO2Saqoz8hCtPT/HCRi58uaA1nlKxf
-         A7Ig==
+        bh=6HvrCL8rOJsuiwOG3muIoVRllaEm248y0LD47Kgrft0=;
+        b=nmgU4y9Ln0rtIz80PAR3vTp7t61K68cxtW9WeRAqn7eaE3uMj1tya6GoffQApOwPAD
+         kwbpLr9u2Y90w7sOrUMa+ArGM8Ep49feEFdPQONaGxHoMfoLK1N63oRqHGJpxj4lCw2C
+         eIX4N0M/EYtGsqpl9NfqIMVk+rbdMPaJbFUp8SNYa5mPbJB2q99z+qXsrJQXNFsxMyB1
+         NP+HYGwDfrCjlZ9JQZC6nHfjzf++zIthNMA0BoriKULZyJhp7bWZlO2SJbBUy/CXTPpV
+         urJ/7Hw4lJxU78QQ1byX2mi/JGovBTW7NtftPygrxBG8yIV8IPUBkt4HtpgLWeu9wQdm
+         3Oyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281967; x=1689873967;
+        d=1e100.net; s=20221208; t=1687281977; x=1689873977;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pVhDjOa7FHuFiuCBrjeemQ/YptYJoZezJ1j93NWRipk=;
-        b=c9fkDGSLh+JJjLeuqNTuZmw0lC0GFrJz53sMRNbxDJ0wGc+bYeowpwK21kZywn7wp7
-         3rvbLZhoNyr4kg9fn7cnNnLe9WWmH/lrw3SCiN22VWOkXG9mVw9/SgfF/8RJw57/3bij
-         TtsBl3cX25eGKiMmj0WAs5o7M6H3MdaBs4WV+taEqHRHXatmmi+lNIF7jt25YnSc1Qqk
-         uX9OrddZL/BDAe0Zl2ejrJe5HuVIf/G3y73rGAl05euzCpjXUJwlngMbtCvXK7EdSWTu
-         2KXV/B4knay20tpoWdSL9t8jXhi7Gu/G1b9Ujs7fvMEHhrJhPZhY49dBWzws/vYKKtse
-         xo/w==
-X-Gm-Message-State: AC+VfDwTRJtds/sRBpHNP1rgAySGY0nt7JoYE9pYjrESFFZ3iKxrVQye
-	GJxG1Ho9IrEbm6fDyELv0cA=
-X-Google-Smtp-Source: ACHHUZ6SdCuyO2ywOemJ8HmOK80tXYlK5MSf18GBMCkKWxXCffCWY1KnaRNAYZ9J1meknqeU888PzQ==
-X-Received: by 2002:a0d:f384:0:b0:56d:1528:c56f with SMTP id c126-20020a0df384000000b0056d1528c56fmr12677100ywf.16.1687281967212;
-        Tue, 20 Jun 2023 10:26:07 -0700 (PDT)
+        bh=6HvrCL8rOJsuiwOG3muIoVRllaEm248y0LD47Kgrft0=;
+        b=Oi5FKrVTmpSxxFKlfA40ZibIQfGHAEhD/SuXb1CjYi7LLpiK/491SH47q14BlCsFmR
+         9wJor+u64ezeY8D+LrPabUuMszeFlrhqyBbugCVWUiZohMRQwwwbkHWLJ2hDjvzrFaY2
+         eydNvNMrp+F6dUNYFWK0onDmPQbonkpwKUwTHqG6R5Gbty1mv91iCka473rzE2ZJi+ob
+         LkNHFnQ7OA9tvqqNjaHU3rIcpcEx0zZRO+sSymCH6hc7mJKW4xVCI8pgVKBQ56lYTfbm
+         us96r7L9E9gwlIKHY03YJpKSxi4QulUvsRW+3ZSKTJRKnAZ+GT0B7K3eJ501Bvcy497Z
+         Ex2A==
+X-Gm-Message-State: AC+VfDzoSWnV5T1xyenCqEJ4OCUOlRPj4VCxI379SmfWlYqKEzfAdFIE
+	VLn2o6/h5IRqIGubxqL4WX0=
+X-Google-Smtp-Source: ACHHUZ6Qt7O71pC+krywoR4rbBwRp9dAu+gyJXT+ubbJS5lT0aUS37r2zV6kUeMl6FXGYYhiuV77iQ==
+X-Received: by 2002:a05:6358:455:b0:12b:e9fd:4b53 with SMTP id 21-20020a056358045500b0012be9fd4b53mr8661292rwe.22.1687281977366;
+        Tue, 20 Jun 2023 10:26:17 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Joel Upham <jupham125@gmail.com>,
@@ -84,206 +84,144 @@ Cc: Joel Upham <jupham125@gmail.com>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Paul Durrant <paul@xen.org>,
 	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
-Subject: [PATCH v1 06/23] xen/pt: XenHostPCIDevice: provide functions for PCI Capabilities and PCIe Extended Capabilities enumeration
-Date: Tue, 20 Jun 2023 13:24:40 -0400
-Message-Id: <8a5ed3bf4f1abca1e7e3a2c6011b7f81620aedca.1687278381.git.jupham125@gmail.com>
+Subject: [PATCH v1 11/23] xen/pt: handle PCIe Extended Capabilities Next register
+Date: Tue, 20 Jun 2023 13:24:45 -0400
+Message-Id: <8687512cd728cd0ad00d9a7d35cd3ce5c3a2c2ca.1687278381.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687278381.git.jupham125@gmail.com>
 References: <cover.1687278381.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch introduces 2 new functions,
-- xen_host_pci_find_next_ext_cap (actually a reworked
-  xen_host_pci_find_ext_cap_offset function which is unused)
-- xen_host_pci_find_next_cap
+The patch adds new xen_pt_ext_cap_ptr_reg_init function which is used
+to initialize the emulated next pcie extended capability pointer.
 
-These functions allow to search for PCI/PCIe capabilities in a uniform
-way. Both functions allow to search either a specific capability or any
-encountered next (by specifying CAP_ID_ANY as a capability ID) -- this may
-be useful when we merely need to traverse the capability list one-by-one.
-In both functions the 'pos' argument allows to continue searching from
-last position (0 means to start from beginning).
-
-In order not to probe PCIe Extended Capabilities existence every time,
-xen_host_pci_find_next_ext_cap makes use of the new 'has_pcie_ext_caps'
-field in XenHostPCIDevice structure which is filled only once (in
-xen_host_pci_device_get).
+Primary mission of this function is to have a method to selectively hide
+some extended capabilities from the capability linked list, skipping them
+by altering the Next capability pointer value.
 
 Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
 Signed-off-by: Joel Upham <jupham125@gmail.com>
 ---
- hw/xen/xen-host-pci-device.c | 91 ++++++++++++++++++++++++++++++++----
- hw/xen/xen-host-pci-device.h |  5 +-
- 2 files changed, 85 insertions(+), 11 deletions(-)
+ hw/xen/xen_pt_config_init.c | 87 +++++++++++++++++++++++--------------
+ 1 file changed, 55 insertions(+), 32 deletions(-)
 
-diff --git a/hw/xen/xen-host-pci-device.c b/hw/xen/xen-host-pci-device.c
-index 8c6e9a1716..a7021a5d56 100644
---- a/hw/xen/xen-host-pci-device.c
-+++ b/hw/xen/xen-host-pci-device.c
-@@ -32,6 +32,7 @@
+diff --git a/hw/xen/xen_pt_config_init.c b/hw/xen/xen_pt_config_init.c
+index 34ed9c25c5..ed36edbc4a 100644
+--- a/hw/xen/xen_pt_config_init.c
++++ b/hw/xen/xen_pt_config_init.c
+@@ -27,7 +27,10 @@
  
- #define IORESOURCE_PREFETCH     0x00001000      /* No side effects */
- #define IORESOURCE_MEM_64       0x00100000
-+#define XEN_HOST_PCI_CAP_MAX    48
+ static int xen_pt_ptr_reg_init(XenPCIPassthroughState *s, XenPTRegInfo *reg,
+                                uint32_t real_offset, uint32_t *data);
+-
++static int xen_pt_ext_cap_ptr_reg_init(XenPCIPassthroughState *s,
++                                       XenPTRegInfo *reg,
++                                       uint32_t real_offset,
++                                       uint32_t *data);
  
- static void xen_host_pci_sysfs_path(const XenHostPCIDevice *d,
-                                     const char *name, char *buf, ssize_t size)
-@@ -198,6 +199,19 @@ static bool xen_host_pci_dev_is_virtfn(XenHostPCIDevice *d)
-     return !stat(path, &buf);
+ /* helper */
+ 
+@@ -1928,48 +1931,68 @@ out:
+     return 0;
  }
  
-+static bool xen_host_pci_dev_has_pcie_ext_caps(XenHostPCIDevice *d)
-+{
++#define PCIE_EXT_CAP_NEXT_SHIFT 4
++#define PCIE_EXT_CAP_VER_MASK   0xF
+ 
+-/*************
+- * Main
+- */
+-
+-static uint8_t find_cap_offset(XenPCIPassthroughState *s, uint8_t cap)
++static int xen_pt_ext_cap_ptr_reg_init(XenPCIPassthroughState *s,
++                                       XenPTRegInfo *reg,
++                                       uint32_t real_offset,
++                                       uint32_t *data)
+ {
+-    uint8_t id;
+-    unsigned max_cap = XEN_PCI_CAP_MAX;
+-    uint8_t pos = PCI_CAPABILITY_LIST;
+-    uint8_t status = 0;
++    int i, rc;
++    XenHostPCIDevice *d = &s->real_device;
++    uint16_t reg_field;
++    uint16_t cur_offset, version, cap_id;
 +    uint32_t header;
-+
-+    if (xen_host_pci_get_long(d, PCI_CONFIG_SPACE_SIZE, &header))
-+        return false;
-+
-+    if (header == 0 || header == ~0U)
-+        return false;
-+
-+    return true;
-+}
-+
- static void xen_host_pci_config_open(XenHostPCIDevice *d, Error **errp)
- {
-     char path[PATH_MAX];
-@@ -296,37 +310,93 @@ int xen_host_pci_set_block(XenHostPCIDevice *d, int pos, uint8_t *buf, int len)
-     return xen_host_pci_config_write(d, pos, buf, len);
- }
  
--int xen_host_pci_find_ext_cap_offset(XenHostPCIDevice *d, uint32_t cap)
-+int xen_host_pci_find_next_ext_cap(XenHostPCIDevice *d, int pos, uint32_t cap)
- {
-     uint32_t header = 0;
-     int max_cap = XEN_HOST_PCI_MAX_EXT_CAP;
--    int pos = PCI_CONFIG_SPACE_SIZE;
-+
-+    if (!d->has_pcie_ext_caps)
-+        return 0;
-+
-+    if (!pos) {
-+        pos = PCI_CONFIG_SPACE_SIZE;
-+    } else {
-+        if (xen_host_pci_get_long(d, pos, &header))
-+            return 0;
-+
-+        pos = PCI_EXT_CAP_NEXT(header);
-+    }
- 
-     do {
-+        if (!pos || pos < PCI_CONFIG_SPACE_SIZE) {
-+            break;
-+        }
-+
-         if (xen_host_pci_get_long(d, pos, &header)) {
-             break;
-         }
-         /*
-          * If we have no capabilities, this is indicated by cap ID,
-          * cap version and next pointer all being 0.
-+	 * Also check for all F's returned (which means PCIe ext conf space
-+	 * is unreadable for some reason)
-          */
--        if (header == 0) {
-+	if (header == 0 || header == ~0U) {
-             break;
-         }
- 
--        if (PCI_EXT_CAP_ID(header) == cap) {
-+        if (cap == CAP_ID_ANY) {
-+            return pos;
-+        } else if (PCI_EXT_CAP_ID(header) == cap) {
-             return pos;
-         }
- 
-         pos = PCI_EXT_CAP_NEXT(header);
--        if (pos < PCI_CONFIG_SPACE_SIZE) {
-+    } while (--max_cap);
-+
-+    return 0;
-+}
-+
-+int xen_host_pci_find_next_cap(XenHostPCIDevice *d, int pos, uint32_t cap)
-+{
-+    uint8_t id;
-+    unsigned max_cap = XEN_HOST_PCI_CAP_MAX;
-+    uint8_t status = 0;
-+    uint8_t curpos;
-+
-+    if (xen_host_pci_get_byte(d, PCI_STATUS, &status))
-+        return 0;
-+
-+    if ((status & PCI_STATUS_CAP_LIST) == 0)
-+        return 0;
-+
-+    if (pos < PCI_CAPABILITY_LIST) {
-+        curpos = PCI_CAPABILITY_LIST;
-+    } else {
-+        curpos = (uint8_t) pos;
-+    }
-+
-+    while (max_cap--) {
-+        if (xen_host_pci_get_byte(d, curpos, &curpos))
-+             break;
-+        if (!curpos)
-+             break;
-+
-+        if (cap == CAP_ID_ANY)
-+            return curpos;
-+
-+        if (xen_host_pci_get_byte(d, curpos + PCI_CAP_LIST_ID, &id))
-             break;
--        }
- 
--        max_cap--;
--    } while (max_cap > 0);
-+        if (id == 0xff)
-+            break;
-+        else if (id == cap)
-+            return curpos;
-+
-+        curpos += PCI_CAP_LIST_NEXT;
-+    }
- 
--    return -1;
-+    return 0;
- }
- 
- void xen_host_pci_device_get(XenHostPCIDevice *d, uint16_t domain,
-@@ -376,7 +446,8 @@ void xen_host_pci_device_get(XenHostPCIDevice *d, uint16_t domain,
+-    if (xen_host_pci_get_byte(&s->real_device, PCI_STATUS, &status)) {
+-        return 0;
+-    }
+-    if ((status & PCI_STATUS_CAP_LIST) == 0) {
+-        return 0;
++    if (real_offset < 0x0010) {
++        XEN_PT_ERR(&s->dev, "Incorrect PCIe extended capability offset "
++                   "encountered: 0x%04x\n", real_offset);
++        return -EINVAL;
      }
-     d->class_code = v;
  
--    d->is_virtfn = xen_host_pci_dev_is_virtfn(d);
-+    d->is_virtfn         = xen_host_pci_dev_is_virtfn(d);
-+    d->has_pcie_ext_caps = xen_host_pci_dev_has_pcie_ext_caps(d);
+-    while (max_cap--) {
+-        if (xen_host_pci_get_byte(&s->real_device, pos, &pos)) {
+-            break;
+-        }
+-        if (pos < PCI_CONFIG_HEADER_SIZE) {
+-            break;
+-        }
++    rc = xen_host_pci_get_word(d, real_offset, &reg_field);
++    if (rc)
++        return rc;
  
-     return;
+-        pos &= ~3;
+-        if (xen_host_pci_get_byte(&s->real_device,
+-                                  pos + PCI_CAP_LIST_ID, &id)) {
+-            break;
+-        }
++    /* preserve version field */
++    version    = reg_field & PCIE_EXT_CAP_VER_MASK;
++    cur_offset = reg_field >> PCIE_EXT_CAP_NEXT_SHIFT;
  
-diff --git a/hw/xen/xen-host-pci-device.h b/hw/xen/xen-host-pci-device.h
-index 4d8d34ecb0..37c5614a24 100644
---- a/hw/xen/xen-host-pci-device.h
-+++ b/hw/xen/xen-host-pci-device.h
-@@ -32,6 +32,7 @@ typedef struct XenHostPCIDevice {
-     XenHostPCIIORegion rom;
+-        if (id == 0xff) {
+-            break;
++    while (cur_offset && cur_offset != 0xFFF) {
++        rc = xen_host_pci_get_long(d, cur_offset, &header);
++        if (rc) {
++            XEN_PT_ERR(&s->dev, "Failed to read PCIe extended capability "
++                       "@0x%x (rc:%d)\n", cur_offset, rc);
++            return rc;
+         }
+-        if (id == cap) {
+-            return pos;
++
++        cap_id = PCI_EXT_CAP_ID(header);
++
++        for (i = 0; xen_pt_emu_reg_grps[i].grp_size != 0; i++) {
++            uint32_t cur_grp_id = xen_pt_emu_reg_grps[i].grp_id;
++
++            if (!IS_PCIE_EXT_CAP_ID(cur_grp_id))
++                continue;
++
++            if (xen_pt_hide_dev_cap(d, cur_grp_id))
++                continue;
++
++            if (GET_PCIE_EXT_CAP_ID(cur_grp_id) == cap_id) {
++                if (xen_pt_emu_reg_grps[i].grp_type == XEN_PT_GRP_TYPE_EMU)
++                    goto out;
++
++                /* skip TYPE_HARDWIRED capability, move the ptr to next one */
++                break;
++            }
+         }
  
-     bool is_virtfn;
-+    bool has_pcie_ext_caps;
+-        pos += PCI_CAP_LIST_NEXT;
++        /* next capability */
++        cur_offset = PCI_EXT_CAP_NEXT(header);
+     }
++
++out:
++    *data = (cur_offset << PCIE_EXT_CAP_NEXT_SHIFT) | version;
+     return 0;
+ }
  
-     int config_fd;
- } XenHostPCIDevice;
-@@ -53,6 +54,8 @@ int xen_host_pci_set_long(XenHostPCIDevice *d, int pos, uint32_t data);
- int xen_host_pci_set_block(XenHostPCIDevice *d, int pos, uint8_t *buf,
-                            int len);
- 
--int xen_host_pci_find_ext_cap_offset(XenHostPCIDevice *s, uint32_t cap);
-+#define CAP_ID_ANY  (~0U)
-+int xen_host_pci_find_next_cap(XenHostPCIDevice *s, int pos, uint32_t cap);
-+int xen_host_pci_find_next_ext_cap(XenHostPCIDevice *d, int pos, uint32_t cap);
- 
- #endif /* XEN_HOST_PCI_DEVICE_H */
 -- 
 2.34.1
 
