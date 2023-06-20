@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D134EB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44FB6C0015E
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 11:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551557.861223 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.551540.861158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ76-0001MN-N6; Tue, 20 Jun 2023 11:01:32 +0000
+	id 1qBZ72-0008Q6-Ci; Tue, 20 Jun 2023 11:01:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551557.861223; Tue, 20 Jun 2023 11:01:32 +0000
+Received: by outflank-mailman (output) from mailman id 551540.861158; Tue, 20 Jun 2023 11:01:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBZ76-0001Hz-5A; Tue, 20 Jun 2023 11:01:32 +0000
-Received: by outflank-mailman (input) for mailman id 551557;
- Tue, 20 Jun 2023 10:35:40 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qBZ72-0008OD-7M; Tue, 20 Jun 2023 11:01:28 +0000
+Received: by outflank-mailman (input) for mailman id 551540;
+ Tue, 20 Jun 2023 10:35:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ovpU=CI=bugseng.com=simone.ballarin@srs-se1.protection.inumbo.net>)
- id 1qBYi4-0004Ou-SI
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:40 +0000
+ id 1qBYho-0004Pq-5h
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 10:35:24 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3099a977-0f56-11ee-8611-37d641c3527e;
- Tue, 20 Jun 2023 12:35:35 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 294fe34c-0f56-11ee-b234-6b7b168915f2;
+ Tue, 20 Jun 2023 12:35:23 +0200 (CEST)
 Received: from beta.bugseng.com (93-40-74-174.ip37.fastwebnet.it
  [93.40.74.174])
- by support.bugseng.com (Postfix) with ESMTPSA id AE2424EE0753;
- Tue, 20 Jun 2023 12:35:33 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 8DF784EE0755;
+ Tue, 20 Jun 2023 12:35:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,14 +42,11 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3099a977-0f56-11ee-8611-37d641c3527e
+X-Inumbo-ID: 294fe34c-0f56-11ee-b234-6b7b168915f2
 From: Simone Ballarin <simone.ballarin@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
 	Gianluca Luparini <gianluca.luparini@bugseng.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
@@ -59,9 +56,9 @@ Cc: consulting@bugseng.com,
 	Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>,
 	Ayan Kumar <ayan.kumar.halder@amd.com>,
 	Simone Ballarin <simone.ballarin@bugseng.com>
-Subject: [XEN PATCH 10/13] xen/x86: fixed violations of MISRA C:2012 Rule 7.2
-Date: Tue, 20 Jun 2023 12:35:02 +0200
-Message-Id: <c22614e2febfe9078fcefeff4aae897fbaf92e39.1687250177.git.gianluca.luparini@bugseng.com>
+Subject: [XEN PATCH 03/13] xen/x86: fixed violations of MISRA C:2012 Rule 7.2
+Date: Tue, 20 Jun 2023 12:34:55 +0200
+Message-Id: <397206cfac500d171be31dcd3503d9f61e531a97.1687250177.git.gianluca.luparini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687250177.git.gianluca.luparini@bugseng.com>
 References: <cover.1687250177.git.gianluca.luparini@bugseng.com>
@@ -74,38 +71,53 @@ The xen sources contains violations of MISRA C:2012 Rule 7.2 whose headline stat
 "A "u" or "U" suffix shall be applied to all integer constants that are represented in an unsigned type".
 
 I propose to use "U" as a suffix to explicitly state when an integer constant is represented in an unsigned type.
-For homogeneity, I also added the "U" suffix in some cases that the tool didn't report as violations.
 
 Signed-off-by: Simone Ballarin <simone.ballarin@bugseng.com>
 ---
- xen/arch/x86/monitor.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/hvm/svm/asid.c | 2 +-
+ xen/arch/x86/hvm/svm/svm.c  | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/monitor.c b/xen/arch/x86/monitor.c
-index d4857faf8a..dc336c239a 100644
---- a/xen/arch/x86/monitor.c
-+++ b/xen/arch/x86/monitor.c
-@@ -48,17 +48,17 @@ static unsigned long *monitor_bitmap_for_msr(const struct domain *d, u32 *msr)
+diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
+index 09f8c23fd9..56306d1a16 100644
+--- a/xen/arch/x86/hvm/svm/asid.c
++++ b/xen/arch/x86/hvm/svm/asid.c
+@@ -16,7 +16,7 @@ void svm_asid_init(const struct cpuinfo_x86 *c)
  
-     switch ( *msr )
-     {
--    case 0 ... 0x1fff:
-+    case 0 ... 0x1fffU:
-         BUILD_BUG_ON(sizeof(d->arch.monitor.msr_bitmap->low) * 8 <= 0x1fff);
-         return d->arch.monitor.msr_bitmap->low;
+     /* Check for erratum #170, and leave ASIDs disabled if it's present. */
+     if ( !cpu_has_amd_erratum(c, AMD_ERRATUM_170) )
+-        nasids = cpuid_ebx(0x8000000A);
++        nasids = cpuid_ebx(0x8000000AU);
  
--    case 0x40000000 ... 0x40001fff:
-+    case 0x40000000U ... 0x40001fffU:
-         BUILD_BUG_ON(
-             sizeof(d->arch.monitor.msr_bitmap->hypervisor) * 8 <= 0x1fff);
-         *msr &= 0x1fff;
-         return d->arch.monitor.msr_bitmap->hypervisor;
+     hvm_asid_init(nasids);
+ }
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 59a6e88dff..56cb2f61bb 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -269,9 +269,9 @@ svm_msrbit(unsigned long *msr_bitmap, uint32_t msr)
+      */
+     if ( msr <= 0x1fff )
+         msr_bit = msr_bitmap + 0x0000 / BYTES_PER_LONG;
+-    else if ( (msr >= 0xc0000000) && (msr <= 0xc0001fff) )
++    else if ( (msr >= 0xc0000000U) && (msr <= 0xc0001fffU) )
+         msr_bit = msr_bitmap + 0x0800 / BYTES_PER_LONG;
+-    else if ( (msr >= 0xc0010000) && (msr <= 0xc0011fff) )
++    else if ( (msr >= 0xc0010000U) && (msr <= 0xc0011fffU) )
+         msr_bit = msr_bitmap + 0x1000 / BYTES_PER_LONG;
  
--    case 0xc0000000 ... 0xc0001fff:
-+    case 0xc0000000U ... 0xc0001fffU:
-         BUILD_BUG_ON(sizeof(d->arch.monitor.msr_bitmap->high) * 8 <= 0x1fff);
-         *msr &= 0x1fff;
-         return d->arch.monitor.msr_bitmap->high;
+     return msr_bit;
+@@ -2539,8 +2539,8 @@ const struct hvm_function_table * __init start_svm(void)
+ 
+     setup_vmcb_dump();
+ 
+-    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000a )
+-        svm_feature_flags = cpuid_edx(0x8000000a);
++    if ( boot_cpu_data.extended_cpuid_level >= 0x8000000aU )
++        svm_feature_flags = cpuid_edx(0x8000000aU);
+ 
+     printk("SVM: Supported advanced features:\n");
+ 
 -- 
 2.41.0
 
