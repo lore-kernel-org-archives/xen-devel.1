@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF189EB64DC
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551992.861846 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B16EB64DB
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551995.861862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyu-00077S-MN; Tue, 20 Jun 2023 17:17:28 +0000
+	id 1qBeyw-0007VO-Kz; Tue, 20 Jun 2023 17:17:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551992.861846; Tue, 20 Jun 2023 17:17:28 +0000
+Received: by outflank-mailman (output) from mailman id 551995.861862; Tue, 20 Jun 2023 17:17:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBeyu-00077E-J1; Tue, 20 Jun 2023 17:17:28 +0000
-Received: by outflank-mailman (input) for mailman id 551992;
- Tue, 20 Jun 2023 17:17:26 +0000
+	id 1qBeyw-0007Td-DC; Tue, 20 Jun 2023 17:17:30 +0000
+Received: by outflank-mailman (input) for mailman id 551995;
+ Tue, 20 Jun 2023 17:17:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBeys-0005iB-Kx
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:26 +0000
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [2607:f8b0:4864:20::b32])
+ id 1qBeyv-0005iB-98
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:29 +0000
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [2607:f8b0:4864:20::b2b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 534de959-0f8e-11ee-b234-6b7b168915f2;
- Tue, 20 Jun 2023 19:17:25 +0200 (CEST)
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-bf5f41a87ceso1815317276.1
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:25 -0700 (PDT)
+ id 5507f960-0f8e-11ee-b234-6b7b168915f2;
+ Tue, 20 Jun 2023 19:17:28 +0200 (CEST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-be49e41a3d6so3677356276.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:28 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.23
+ f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:17:23 -0700 (PDT)
+ Tue, 20 Jun 2023 10:17:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,355 +47,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 534de959-0f8e-11ee-b234-6b7b168915f2
+X-Inumbo-ID: 5507f960-0f8e-11ee-b234-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281444; x=1689873444;
+        d=gmail.com; s=20221208; t=1687281447; x=1689873447;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RM7XI3GANtEN3rKi5JobU5SJg3vOxg/6WaWdszBvqtQ=;
-        b=RBZgYaRAHUdyrJqdHgfRRDvmbr/Pt4oWavppwOuem+MSRJw9IVQCa3XeKX6Tatn8UM
-         cxn28siWSpZQYIrrxL6NJ5vBG2J6GZMJETQO6RuHpZJ7/9WNrbiokjq5EM8976YrVbwX
-         FJK5M0sclB3l1CEwnIiEGFAmlw45h+kkxGaOlDiNQeKYwTf9zGJ+4CAHy+cnRgIHe0YI
-         c2FTRIvKIRz6UBp1V7XQ4nb9kOHNWy7+eZboNej53/IOpy7LeOoT0WXH0XLBkB0XGKtP
-         8fr7SJegSvgz/ST+nUWAEqSjzL4agdCLaPYCLVaGsPeMykBwdrzZHbIINZkUtN9s4cq1
-         VXEQ==
+        bh=euxQjj1nka42h3IgnfVDkR/WuQVbd1+OBbuouObQPZw=;
+        b=ULINpF4cSUf3E0vswpH5QAioshxNpdrmsaQInoUb8RunfkwL889I8OvlIM6qjWZCk4
+         uxiDLykMuYl0naI1OGQNjyxFVfeQp0u9H1iPwZtbnWD2pX3538vZsErT3Dk3Tp9pH+7L
+         FAjy9doJWjWE9uzJVcS9FI5byrLrI0tVlqwr8Li+iM8t4S7aHz925xtqyz7Jx9ECpwtw
+         FexVqL6CDjTeADqsEE2H4t00aYSyDfWyahSmsy+rbU939psvTHIqO1x4AZ3jM5nXfIPE
+         uCq2I+i8KDo503efp04bp6AiiRaVXs7cvdJwZ5FBO3aTg3y77vtQfke+tj6WIhSUwOyi
+         1ujw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281444; x=1689873444;
+        d=1e100.net; s=20221208; t=1687281447; x=1689873447;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RM7XI3GANtEN3rKi5JobU5SJg3vOxg/6WaWdszBvqtQ=;
-        b=AkOb6EXyqNTdEQTqeuOeKNsv51ddhWKdhxqd/3Ny2GxaohB0p9CK++xbL6I2Ogffpc
-         XIj+kjTg2Tg8Eobmuv0DEScuFIcsFuNM0obRjmreKR2zErQP3mVBB6H2dVI3m3eLi3rx
-         mwxuWycUNIOEPNvcvTnRkTvwJlefWWMClDIaUFkd9/Ui7NGEM26j59S9FPvJKPhLP1we
-         F6aAOXHHCb2pyhxmAiQ3D5Tt9nIYS4E3wIQimeARyw30if/69M/DY0Nzsz2/7QDzWX1I
-         sMZmymcqi69PJm+eAsAAFQwnmitDcajEyHEanTNcOF0a8L3SvyI+Z/JlhxE2P6vu8TNU
-         /IvA==
-X-Gm-Message-State: AC+VfDwdrZSAdxDzjRa9EDKo4IFdPHo73X4JD3zZSdF9KHL1Pb0HYY2+
-	6oc55EjH6GTb56Utif/EfOqBc+VffcvdFw==
-X-Google-Smtp-Source: ACHHUZ6BePx58VbyOSs7xi34QCqm4HRe1+CoYMXNRqAbD0+Tvtsm02zuBAtOpUE/HsTRFpQCs2tC7A==
-X-Received: by 2002:a25:9191:0:b0:b9e:7ec8:5d45 with SMTP id w17-20020a259191000000b00b9e7ec85d45mr9006708ybl.55.1687281444253;
-        Tue, 20 Jun 2023 10:17:24 -0700 (PDT)
+        bh=euxQjj1nka42h3IgnfVDkR/WuQVbd1+OBbuouObQPZw=;
+        b=lma+31c3vFuN7Hzuo5WA6bloFNnQRh8U41SjonSPx98vLoW2bgRlP1Kg7K3dbU2DSV
+         h5cTIvVecn2eZsP/DS9AVVxcJ6XbamWZ6R7dDJP0dzAjfTR7R4cAGC0L5aLHo9cxS04T
+         aqRkEU6LhdahCzn5clOqqFB1IjBPUHgziHn1gcg+92lBeUjdQJqA4bZ2e2n7U/BVPMz/
+         UYaHaOihQuYOQPpuH9Zbwk+4Fri4Jsz45dQnLtjocjjNIaeWnOLzcbdMsXztsqGJhAUK
+         3RLtWGT4ttskH5Fm0OIUS6U5j7df3ZPxxALYyITlqBII8yhSuGti6jEUjrJjJnufcRz7
+         aZUA==
+X-Gm-Message-State: AC+VfDwiTfdZ/x25PNRQQAKSEfrenjLgyM37uDcdaOy6u27RrVbBaYZr
+	6WRuoD5wo3pEMvvuT0puuG2gzQ0508xrqg==
+X-Google-Smtp-Source: ACHHUZ5EB8KP3P9ZxnevN/zJy70NatbVfjPaFOUdV6sEz7ptY4/9L8nrO3fKDKVEOiFJsfGBavnyxg==
+X-Received: by 2002:a25:3620:0:b0:bc9:716d:19bf with SMTP id d32-20020a253620000000b00bc9716d19bfmr7782477yba.14.1687281447274;
+        Tue, 20 Jun 2023 10:17:27 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Joel Upham <jupham125@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 07/12] hvmloader: allocate MMCONFIG area in the MMIO hole + minor code refactoring
-Date: Tue, 20 Jun 2023 13:15:47 -0400
-Message-Id: <389d2cd465f27a32f7370e976cecd2eefdf827db.1687215890.git.jupham125@gmail.com>
+Subject: [PATCH v2 09/12] libacpi: build ACPI MCFG table if requested
+Date: Tue, 20 Jun 2023 13:15:49 -0400
+Message-Id: <906595ebdc789e88715289ce48d306ae72e69fe1.1687215890.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687215890.git.jupham125@gmail.com>
 References: <cover.1687215890.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Much like normal PCI BARs or other chipset-specific memory-mapped
-resources, MMCONFIG area needs space in MMIO hole, so we must allocate
-it manually.
+This adds construct_mcfg() function to libacpi which allows to build MCFG
+table for a given mmconfig_addr/mmconfig_len pair if the ACPI_HAS_MCFG
+flag was specified in acpi_config struct.
 
-The actual MMCONFIG size depends on a number of PCI buses available which
-should be covered by ECAM. Possible options are 64MB, 128MB and 256MB.
-As we are limited to the bus 0 currently, thus using lowest possible
-setting (64MB), #defined via PCI_MAX_MCFG_BUSES in hvmloader/config.h.
-When multiple PCI buses support for Xen will be implemented,
-PCI_MAX_MCFG_BUSES may be changed to calculation of the number of buses
-according to results of the PCI devices enumeration.
-
-The way to allocate MMCONFIG range in MMIO hole is similar to how other
-PCI BARs are allocated. The patch extends 'bars' structure to make
-it universal for any arbitrary BAR type -- either IO, MMIO, ROM or
-a chipset-specific resource.
-
-One important new field is addr_mask, which tells which bits of the base
-address can (should) be written. Different address types (ROM, MMIO BAR,
-PCIEXBAR) will have different addr_mask values.
-
-For every assignable BAR range we store its size, PCI device BDF (devfn
-actually) to which it belongs, BAR type (mem/io/mem64) and corresponding
-register offset in device PCI conf space. This way we can insert MMCONFIG
-entry into bars array in the same manner like for any other BARs. In this
-case, the devfn field will point to MCH PCI device and bar_reg will
-contain PCIEXBAR register offset. It will be assigned a slot in MMIO hole
-later in a very same way like for plain PCI BARs, with respect to its size
-alignment.
-
-Also, to reduce code complexity, all long mem/mem64 BAR flags checks are
-replaced by simple bars[i] field probing, eg.:
--        if ( (bar_reg == PCI_ROM_ADDRESS) ||
--             ((bar_data & PCI_BASE_ADDRESS_SPACE) ==
--              PCI_BASE_ADDRESS_SPACE_MEMORY) )
-+        if ( bars[i].is_mem )
+The maximum bus number is calculated from mmconfig_len using
+MCFG_SIZE_TO_NUM_BUSES macro (1MByte of MMIO space per bus).
 
 Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
 Signed-off-by: Joel Upham <jupham125@gmail.com>
 ---
- tools/firmware/hvmloader/config.h   |   5 ++
- tools/firmware/hvmloader/pci.c      | 123 +++++++++++++++++++++-------
- tools/firmware/hvmloader/pci_regs.h |   2 +
- 3 files changed, 102 insertions(+), 28 deletions(-)
+ tools/libacpi/acpi2_0.h | 21 ++++++++++++++++++++
+ tools/libacpi/build.c   | 43 +++++++++++++++++++++++++++++++++++++++++
+ tools/libacpi/libacpi.h |  4 ++++
+ 3 files changed, 68 insertions(+)
 
-diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
-index de3bbed609..53a3300d6e 100644
---- a/tools/firmware/hvmloader/config.h
-+++ b/tools/firmware/hvmloader/config.h
-@@ -55,6 +55,11 @@ extern uint8_t ioapic_version;
- #define PCI_ISA_DEVFN       0x08    /* dev 1, fn 0 */
- #define PCI_ISA_IRQ_MASK    0x0c20U /* ISA IRQs 5,10,11 are PCI connected */
- #define PCI_ICH9_LPC_DEVFN  0xf8    /* dev 31, fn 0 */
-+#define PCI_MCH_DEVFN       0       /* bus 0, dev 0, func 0 */
+diff --git a/tools/libacpi/acpi2_0.h b/tools/libacpi/acpi2_0.h
+index 6dfa939a8c..02b0cf1098 100644
+--- a/tools/libacpi/acpi2_0.h
++++ b/tools/libacpi/acpi2_0.h
+@@ -442,6 +442,24 @@ struct acpi_20_slit {
+     uint64_t localities;
+     uint8_t entry[0];
+ };
++/*
++ * PCI Express Memory Mapped Configuration Description Table
++ */
++struct mcfg_range_entry {
++    uint64_t base_address;
++    uint16_t pci_segment;
++    uint8_t  start_pci_bus_num;
++    uint8_t  end_pci_bus_num;
++    uint32_t reserved;
++};
 +
-+/* possible values are: 64, 128, 256 */
-+#define PCI_MAX_MCFG_BUSES  64
++struct acpi_mcfg {
++    struct acpi_header header;
++    uint8_t reserved[8];
++    struct mcfg_range_entry entries[1];
++};
 +
- 
- #define ACPI_TIS_HDR_ADDRESS 0xFED40F00UL
- 
-diff --git a/tools/firmware/hvmloader/pci.c b/tools/firmware/hvmloader/pci.c
-index 8249f70806..1137387c43 100644
---- a/tools/firmware/hvmloader/pci.c
-+++ b/tools/firmware/hvmloader/pci.c
-@@ -157,9 +157,10 @@ static void class_specific_pci_device_setup(uint16_t vendor_id,
- 
- void pci_setup(void)
- {
--    uint8_t is_64bar, using_64bar, bar64_relocate = 0;
-+    uint8_t is_64bar, using_64bar, bar64_relocate = 0, is_mem;
-     uint32_t devfn, bar_reg, cmd, bar_data, bar_data_upper;
-     uint64_t base, bar_sz, bar_sz_upper, mmio_total = 0;
-+    uint64_t addr_mask;
-     uint16_t vendor_id, device_id;
-     unsigned int bar, pin, link, isa_irq;
-     int is_running_on_q35 = 0;
-@@ -172,10 +173,14 @@ void pci_setup(void)
- 
-     /* Create a list of device BARs in descending order of size. */
-     struct bars {
--        uint32_t is_64bar;
-         uint32_t devfn;
-         uint32_t bar_reg;
-         uint64_t bar_sz;
-+        uint64_t addr_mask; /* which bits of the base address can be written */
-+        uint32_t bar_data;  /* initial value - BAR flags here */
-+        uint8_t  is_64bar;
-+        uint8_t  is_mem;
-+        uint8_t  padding[2];
-     } *bars = (struct bars *)scratch_start;
-     unsigned int i, nr_bars = 0;
-     uint64_t mmio_hole_size = 0;
-@@ -280,13 +285,20 @@ void pci_setup(void)
-                 bar_reg = PCI_ROM_ADDRESS;
- 
-             bar_data = pci_readl(devfn, bar_reg);
-+
-+            is_mem = !!(((bar_data & PCI_BASE_ADDRESS_SPACE) ==
-+                       PCI_BASE_ADDRESS_SPACE_MEMORY) ||
-+                       (bar_reg == PCI_ROM_ADDRESS));
-+
-             if ( bar_reg != PCI_ROM_ADDRESS )
-             {
--                is_64bar = !!((bar_data & (PCI_BASE_ADDRESS_SPACE |
--                             PCI_BASE_ADDRESS_MEM_TYPE_MASK)) ==
--                             (PCI_BASE_ADDRESS_SPACE_MEMORY |
-+                is_64bar = !!(is_mem &&
-+                             ((bar_data & PCI_BASE_ADDRESS_MEM_TYPE_MASK) ==
-                              PCI_BASE_ADDRESS_MEM_TYPE_64));
-                 pci_writel(devfn, bar_reg, ~0);
-+
-+                addr_mask = is_mem ? PCI_BASE_ADDRESS_MEM_MASK
-+                                   : PCI_BASE_ADDRESS_IO_MASK;
-             }
-             else
-             {
-@@ -294,15 +306,15 @@ void pci_setup(void)
-                 pci_writel(devfn, bar_reg,
-                            (bar_data | PCI_ROM_ADDRESS_MASK) &
-                            ~PCI_ROM_ADDRESS_ENABLE);
-+
-+                addr_mask = PCI_ROM_ADDRESS_MASK;
-             }
-             bar_sz = pci_readl(devfn, bar_reg);
-             pci_writel(devfn, bar_reg, bar_data);
- 
-             if ( bar_reg != PCI_ROM_ADDRESS )
--                bar_sz &= (((bar_data & PCI_BASE_ADDRESS_SPACE) ==
--                            PCI_BASE_ADDRESS_SPACE_MEMORY) ?
--                           PCI_BASE_ADDRESS_MEM_MASK :
--                           (PCI_BASE_ADDRESS_IO_MASK & 0xffff));
-+                bar_sz &= is_mem ? PCI_BASE_ADDRESS_MEM_MASK :
-+                                   (PCI_BASE_ADDRESS_IO_MASK & 0xffff);
-             else
-                 bar_sz &= PCI_ROM_ADDRESS_MASK;
-             if (is_64bar) {
-@@ -316,6 +328,9 @@ void pci_setup(void)
-             if ( bar_sz == 0 )
-                 continue;
- 
-+            /* leave only memtype/enable bits etc */
-+            bar_data &= ~addr_mask;
-+
-             for ( i = 0; i < nr_bars; i++ )
-                 if ( bars[i].bar_sz < bar_sz )
-                     break;
-@@ -323,14 +338,15 @@ void pci_setup(void)
-             if ( i != nr_bars )
-                 memmove(&bars[i+1], &bars[i], (nr_bars-i) * sizeof(*bars));
- 
--            bars[i].is_64bar = is_64bar;
--            bars[i].devfn   = devfn;
--            bars[i].bar_reg = bar_reg;
--            bars[i].bar_sz  = bar_sz;
-+            bars[i].is_64bar  = is_64bar;
-+            bars[i].is_mem    = is_mem;
-+            bars[i].devfn     = devfn;
-+            bars[i].bar_reg   = bar_reg;
-+            bars[i].bar_sz    = bar_sz;
-+            bars[i].addr_mask = addr_mask;
-+            bars[i].bar_data  = bar_data;
- 
--            if ( ((bar_data & PCI_BASE_ADDRESS_SPACE) ==
--                  PCI_BASE_ADDRESS_SPACE_MEMORY) ||
--                 (bar_reg == PCI_ROM_ADDRESS) )
-+            if ( is_mem )
-                 mmio_total += bar_sz;
- 
-             nr_bars++;
-@@ -358,6 +374,63 @@ void pci_setup(void)
-         pci_devfn_decode_type[devfn] = PCI_COMMAND_MASTER;
-     }
- 
-+    /*
-+     *  Calculate MMCONFIG area size and squeeze it into the bars array
-+     *  for assigning a slot in the MMIO hole
-+     */
-+    if (is_running_on_q35)
-+    {
-+        /* disable PCIEXBAR decoding for now */
-+        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR, 0);
-+        pci_writel(PCI_MCH_DEVFN, PCI_MCH_PCIEXBAR + 4, 0);
-+
-+#define PCIEXBAR_64_BUSES    (2 << 1)
-+#define PCIEXBAR_128_BUSES   (1 << 1)
-+#define PCIEXBAR_256_BUSES   (0 << 1)
-+#define PCIEXBAR_ENABLE      (1 << 0)
-+
-+        switch (PCI_MAX_MCFG_BUSES)
-+        {
-+        case 64:
-+            bar_data = PCIEXBAR_64_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(64);
-+            break;
-+
-+        case 128:
-+            bar_data = PCIEXBAR_128_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(128);
-+            break;
-+
-+        case 256:
-+            bar_data = PCIEXBAR_256_BUSES | PCIEXBAR_ENABLE;
-+            bar_sz = MB(256);
-+            break;
-+
-+        default:
-+            /* unsupported number of buses specified */
-+            BUG();
-+        }
-+
-+        addr_mask = ~(bar_sz - 1);
-+
-+        for ( i = 0; i < nr_bars; i++ )
-+            if ( bars[i].bar_sz < bar_sz )
-+                break;
-+
-+        if ( i != nr_bars )
-+            memmove(&bars[i+1], &bars[i], (nr_bars-i) * sizeof(*bars));
-+
-+        bars[i].is_mem    = 1;
-+        bars[i].devfn     = PCI_MCH_DEVFN;
-+        bars[i].bar_reg   = PCI_MCH_PCIEXBAR;
-+        bars[i].bar_sz    = bar_sz;
-+        bars[i].addr_mask = addr_mask;
-+        bars[i].bar_data  = bar_data;
-+
-+        mmio_total += bar_sz;
-+        nr_bars++;
-+    }
-+
-     if ( mmio_hole_size )
-     {
-         uint64_t max_ram_below_4g = GB(4) - mmio_hole_size;
-@@ -492,10 +565,9 @@ void pci_setup(void)
-          */
-         using_64bar = bars[i].is_64bar && bar64_relocate
-             && (mmio_total > (mem_resource.max - mem_resource.base));
--        bar_data = pci_readl(devfn, bar_reg);
-+        bar_data = bars[i].bar_data;
- 
--        if ( (bar_data & PCI_BASE_ADDRESS_SPACE) ==
--             PCI_BASE_ADDRESS_SPACE_MEMORY )
-+        if ( bars[i].is_mem )
-         {
-             /* Mapping high memory if PCI device is 64 bits bar */
-             if ( using_64bar ) {
-@@ -505,18 +577,15 @@ void pci_setup(void)
-                 if ( !pci_hi_mem_start )
-                     pci_hi_mem_start = high_mem_resource.base;
-                 resource = &high_mem_resource;
--                bar_data &= ~PCI_BASE_ADDRESS_MEM_MASK;
--            } 
-+            }
-             else {
-                 resource = &mem_resource;
--                bar_data &= ~PCI_BASE_ADDRESS_MEM_MASK;
-             }
-             mmio_total -= bar_sz;
-         }
-         else
-         {
-             resource = &io_resource;
--            bar_data &= ~PCI_BASE_ADDRESS_IO_MASK;
-         }
- 
-         base = (resource->base  + bar_sz - 1) & ~(uint64_t)(bar_sz - 1);
-@@ -538,7 +607,7 @@ void pci_setup(void)
-             }
-         }
- 
--        bar_data |= (uint32_t)base;
-+        bar_data |= (uint32_t) (base & bars[i].addr_mask);
-         bar_data_upper = (uint32_t)(base >> 32);
-         base += bar_sz;
- 
-@@ -559,10 +628,8 @@ void pci_setup(void)
-                devfn>>3, devfn&7, bar_reg,
-                PRIllx_arg(bar_sz),
-                bar_data_upper, bar_data);
--			
--        if ( (bar_reg == PCI_ROM_ADDRESS) ||
--             ((bar_data & PCI_BASE_ADDRESS_SPACE) ==
--              PCI_BASE_ADDRESS_SPACE_MEMORY) )
-+
-+        if ( bars[i].is_mem )
-             pci_devfn_decode_type[devfn] |= PCI_COMMAND_MEMORY;
-         else
-             pci_devfn_decode_type[devfn] |= PCI_COMMAND_IO;
-diff --git a/tools/firmware/hvmloader/pci_regs.h b/tools/firmware/hvmloader/pci_regs.h
-index 4d4dc0cd01..b9261ee2af 100644
---- a/tools/firmware/hvmloader/pci_regs.h
-+++ b/tools/firmware/hvmloader/pci_regs.h
-@@ -111,6 +111,8 @@
- #define PCI_DEVICE_ID_INTEL_82441        0x1237
- #define PCI_DEVICE_ID_INTEL_Q35_MCH      0x29c0
- 
-+#define PCI_MCH_PCIEXBAR                 0x60
-+
- #endif /* __HVMLOADER_PCI_REGS_H__ */
++#define MCFG_SIZE_TO_NUM_BUSES(size)  ((size) >> 20)
  
  /*
+  * Table Signatures.
+@@ -458,6 +476,8 @@ struct acpi_20_slit {
+ #define ACPI_2_0_WAET_SIGNATURE ASCII32('W','A','E','T')
+ #define ACPI_2_0_SRAT_SIGNATURE ASCII32('S','R','A','T')
+ #define ACPI_2_0_SLIT_SIGNATURE ASCII32('S','L','I','T')
++#define ACPI_MCFG_SIGNATURE     ASCII32('M','C','F','G')
++
+ 
+ /*
+  * Table revision numbers.
+@@ -473,6 +493,7 @@ struct acpi_20_slit {
+ #define ACPI_1_0_FADT_REVISION 0x01
+ #define ACPI_2_0_SRAT_REVISION 0x01
+ #define ACPI_2_0_SLIT_REVISION 0x01
++#define ACPI_1_0_MCFG_REVISION 0x01
+ 
+ #pragma pack ()
+ 
+diff --git a/tools/libacpi/build.c b/tools/libacpi/build.c
+index 2f29863db1..fc029d18bf 100644
+--- a/tools/libacpi/build.c
++++ b/tools/libacpi/build.c
+@@ -295,6 +295,37 @@ static struct acpi_20_slit *construct_slit(struct acpi_ctxt *ctxt,
+     return slit;
+ }
+ 
++static struct acpi_mcfg *construct_mcfg(struct acpi_ctxt *ctxt,
++                                        const struct acpi_config *config)
++{
++    struct acpi_mcfg *mcfg;
++
++    /* Warning: this code expects that we have only one PCI segment */
++    mcfg = ctxt->mem_ops.alloc(ctxt, sizeof(*mcfg), 16);
++    if (!mcfg)
++        return NULL;
++
++    memset(mcfg, 0, sizeof(*mcfg));
++    mcfg->header.signature    = ACPI_MCFG_SIGNATURE;
++    mcfg->header.revision     = ACPI_1_0_MCFG_REVISION;
++    fixed_strcpy(mcfg->header.oem_id, ACPI_OEM_ID);
++    fixed_strcpy(mcfg->header.oem_table_id, ACPI_OEM_TABLE_ID);
++    mcfg->header.oem_revision = ACPI_OEM_REVISION;
++    mcfg->header.creator_id   = ACPI_CREATOR_ID;
++    mcfg->header.creator_revision = ACPI_CREATOR_REVISION;
++    mcfg->header.length = sizeof(*mcfg);
++
++    mcfg->entries[0].base_address = config->mmconfig_addr;
++    mcfg->entries[0].pci_segment = 0;
++    mcfg->entries[0].start_pci_bus_num = 0;
++    mcfg->entries[0].end_pci_bus_num =
++        MCFG_SIZE_TO_NUM_BUSES(config->mmconfig_len) - 1;
++
++    set_checksum(mcfg, offsetof(struct acpi_header, checksum), sizeof(*mcfg));
++
++    return mcfg;;
++}
++
+ static int construct_passthrough_tables(struct acpi_ctxt *ctxt,
+                                         unsigned long *table_ptrs,
+                                         int nr_tables,
+@@ -342,6 +373,7 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
+     struct acpi_20_hpet *hpet;
+     struct acpi_20_waet *waet;
+     struct acpi_20_tcpa *tcpa;
++    struct acpi_mcfg *mcfg;
+     struct acpi_20_tpm2 *tpm2;
+     unsigned char *ssdt;
+     void *lasa;
+@@ -402,6 +434,17 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
+         memcpy(ssdt, ssdt_laptop_slate, sizeof(ssdt_laptop_slate));
+         table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, ssdt);
+     }
++
++    /* MCFG */
++    if ( config->table_flags & ACPI_HAS_MCFG )
++    {
++        mcfg = construct_mcfg(ctxt, config);
++        if (!mcfg)
++            return -1;
++
++        table_ptrs[nr_tables++] = ctxt->mem_ops.v2p(ctxt, mcfg);
++    }
++
+     /* TPM and its SSDT. */
+     if ( config->table_flags & ACPI_HAS_TPM )
+     {
+diff --git a/tools/libacpi/libacpi.h b/tools/libacpi/libacpi.h
+index deda39e5db..b4d3116ca5 100644
+--- a/tools/libacpi/libacpi.h
++++ b/tools/libacpi/libacpi.h
+@@ -27,6 +27,7 @@
+ #define ACPI_HAS_8042              (1<<13)
+ #define ACPI_HAS_CMOS_RTC          (1<<14)
+ #define ACPI_HAS_SSDT_LAPTOP_SLATE (1<<15)
++#define ACPI_HAS_MCFG              (1<<16)
+ 
+ struct xen_vmemrange;
+ struct acpi_numa {
+@@ -89,6 +90,9 @@ struct acpi_config {
+     uint32_t ioapic_base_address;
+     uint16_t pci_isa_irq_mask;
+     uint8_t ioapic_id;
++
++    uint64_t mmconfig_addr;
++    uint32_t mmconfig_len;
+ };
+ 
+ int acpi_build_tables(struct acpi_ctxt *ctxt, struct acpi_config *config);
 -- 
 2.34.1
 
