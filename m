@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B4CCEB64DB
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:16:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.551977.861777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B162EB64D7
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jun 2023 17:17:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.551986.861797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBexZ-0004qh-CP; Tue, 20 Jun 2023 17:16:05 +0000
+	id 1qBeym-0005gc-12; Tue, 20 Jun 2023 17:17:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 551977.861777; Tue, 20 Jun 2023 17:16:05 +0000
+Received: by outflank-mailman (output) from mailman id 551986.861797; Tue, 20 Jun 2023 17:17:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBexZ-0004qa-8v; Tue, 20 Jun 2023 17:16:05 +0000
-Received: by outflank-mailman (input) for mailman id 551977;
- Tue, 20 Jun 2023 17:16:04 +0000
+	id 1qBeyl-0005gV-UN; Tue, 20 Jun 2023 17:17:19 +0000
+Received: by outflank-mailman (input) for mailman id 551986;
+ Tue, 20 Jun 2023 17:17:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/wkg=CI=gmail.com=jupham125@srs-se1.protection.inumbo.net>)
- id 1qBexY-0004qU-52
- for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:16:04 +0000
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [2607:f8b0:4864:20::e32])
+ id 1qBeyl-0005QM-9a
+ for xen-devel@lists.xenproject.org; Tue, 20 Jun 2023 17:17:19 +0000
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [2607:f8b0:4864:20::b35])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 213a4d11-0f8e-11ee-8611-37d641c3527e;
- Tue, 20 Jun 2023 19:16:01 +0200 (CEST)
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-44096f01658so1710473137.0
- for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:16:01 -0700 (PDT)
+ id 4e6826f3-0f8e-11ee-8611-37d641c3527e;
+ Tue, 20 Jun 2023 19:17:17 +0200 (CEST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-bd5f59fb71dso5220706276.3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Jun 2023 10:17:17 -0700 (PDT)
 Received: from joel-Precision-7920-Tower.. ([24.53.71.1])
  by smtp.gmail.com with ESMTPSA id
- f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.15.59
+ f81-20020a25cf54000000b00bcc0f2e4f05sm461938ybg.59.2023.06.20.10.17.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jun 2023 10:15:59 -0700 (PDT)
+ Tue, 20 Jun 2023 10:17:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,173 +47,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 213a4d11-0f8e-11ee-8611-37d641c3527e
+X-Inumbo-ID: 4e6826f3-0f8e-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687281360; x=1689873360;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=H9e69r/0hBb1Pz3HX6FalfGvqxFEmextEqSYdmN4rrc=;
-        b=opB/iZoLem7H+PnWqBq9b24YYfHf8TdHx4A7YYNBeH8BAX+AyBdC+diJqSkYVlYWCM
-         L8UESBpinQJbo2x6cB/aKyEWk/77fT46nkf2LT6YDJGyfg9PTbZYS+GWYWRzz1fGreX2
-         ETmQU2Wl1PZRcLwrHMrgtVTTgcbaXJ+pTwlvcknUeOB56rr9cc6byBfs7USxnm7/ZM8p
-         VdsYjZjhvb48aIvBoK718J5RHrtrTH7G717W4pg7voGH0z7/IBBjeie4FgviVsV380XW
-         fqGEk4rhKzI90wVKBJvY9j0okHqsBWhk9mnpECgF/YcpehCVpPw4iIeXFid2Qr1Bog7T
-         Dr1A==
+        d=gmail.com; s=20221208; t=1687281436; x=1689873436;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rmjMX94/CnuZ+DKqQNwFS/gJapQsRaGCdFJ+ixf1jU8=;
+        b=nEXO+tw/MG+WTEDv60cExTVrsHhY517hsBKXVfVqM6MvGnYFb8LU9YYZvjI2W9g1cK
+         TLQxCR2B815QgXYKBrDkId7DekHBQ5ps/asJznNk1vJVBZad57bdHSKAPPCcglUnW5qG
+         gRgE0Ws+r17fOJYv+lVpX2XmhbFcR4AcESeqrxlGSfFo9X9KcgWtyrqT+Ohz4IvnuKJT
+         U3dkQBmezB4TO9iTTIXo1T46OuePEIzs0fqW5h/YSrqJvIs/9bI85684LYDYPbGS0zMo
+         /xtPSNEoA4AutkSwGIwWEgP18lfb5NP6eOLUbWx1yUzK4uv+PPb7C35gGdihBuQ08A/9
+         RCcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687281360; x=1689873360;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=H9e69r/0hBb1Pz3HX6FalfGvqxFEmextEqSYdmN4rrc=;
-        b=ePgXgb7Lan4Ey4sDLGtbfnqEYKmIzshLEfo34/qr4XeCSABGdupngtTWWneXGkI4Gp
-         MF5iN4jjkKO6P/28Yjhfql3siF+BEm175a96m6JupEO8hyKVB/KrBjHnfo66Lk5fXAut
-         tz4iAtgy+MkwMdVNcOjZl0kD6sA8L6kJm/oRz1en7kf57LlwfvJ1BLEqyTGHpOxeLoMZ
-         7kS6m2JR5awdndJKR/4FNwldQOjutMHWQSobt8v6GAy33IA14k60JEKczWlYem2qkW4D
-         NPxvwnWicvhQ2UnIEn9zZHYt3vDHMHfRkzlDDpECZI0GHfoSTwWBfMa4gPKH3ZE5hLj6
-         2DFQ==
-X-Gm-Message-State: AC+VfDy6tBqtJx1jOhs2++BrSIIG/OT5oaQdyBEJUPa0FMghiPY63VDM
-	/yJl4ZuKgoZSih/dNt8M1bt3BTLpWKUDsQ==
-X-Google-Smtp-Source: ACHHUZ7k+DApySytYCVci6XOU4BEoW3Jyn/QKZ38Dvl8xeVkMr0zudjtZCM/keeVEaA8jpTr9z8uKw==
-X-Received: by 2002:a67:e282:0:b0:43f:5781:59c with SMTP id g2-20020a67e282000000b0043f5781059cmr5595232vsf.9.1687281360268;
-        Tue, 20 Jun 2023 10:16:00 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1687281436; x=1689873436;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rmjMX94/CnuZ+DKqQNwFS/gJapQsRaGCdFJ+ixf1jU8=;
+        b=fH712lG4fqYi0x8dP024TgjQfCOHnOQRBRbpDS1sPjs+WP3EsNbwVhrm5K198zIxtN
+         n0AUXcAoR013S9vmgXAEO6irImbulVGcqI0WkqOSOgywVq0Ku4T1rD8vVFcKKrjIj4DX
+         VlPhTj+vU8EvIQb2mYSvfsoGogiMSGtE0mAAXNQgJaI8b14WUMAxlnFuXlqDK0z+WM5i
+         E/K2OG5dUEhiHrqwj9Tevsckv1VDovMPNjD6TrGrnrYRaQAHzfX6HuMNzQWCwMu/5TUf
+         /uPG8A58hkdFNKj15xixQSiIe3P8NMcKPG5YIMFrb/4niiZZMBF89WWieNJkSDUzB98Z
+         LKYA==
+X-Gm-Message-State: AC+VfDxipHzj31BAeSXRNSBOJSevWlqV/v88rqtVZtJuIk1l50SBKI6D
+	gax8PHR8FlrcVepS+8N6oQUtfEaNvI2LHw==
+X-Google-Smtp-Source: ACHHUZ5IYdtGjOJynA9TpDdq64wxYLUQAEz6ka8t3dG2aTivhnlshW2hypqfbNz5NkT/xVvlAf4LZQ==
+X-Received: by 2002:a25:b188:0:b0:be4:684e:1971 with SMTP id h8-20020a25b188000000b00be4684e1971mr11353800ybj.63.1687281436189;
+        Tue, 20 Jun 2023 10:17:16 -0700 (PDT)
 From: Joel Upham <jupham125@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Joel Upham <jupham125@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 00/12] Q35 Support
-Date: Tue, 20 Jun 2023 13:15:40 -0400
-Message-Id: <cover.1687215890.git.jupham125@gmail.com>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 02/12] Makefile: build and use new DSDT table for Q35
+Date: Tue, 20 Jun 2023 13:15:42 -0400
+Message-Id: <1579bbf01f01ff92496260866f87b263a95cd8fe.1687215890.git.jupham125@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1687215890.git.jupham125@gmail.com>
+References: <cover.1687215890.git.jupham125@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Q35 support using Qemu's device emulation.  I based the patches from 2017
-found on the mailing list here:
-https://lists.xenproject.org/archives/html/xen-devel/2018-03/msg01176.html
+Provide building for newly added dsdt_q35.asl file, in a way similar
+to dsdt.asl.
 
-I have been using a version of these patches on Xen 4.16 with Qemu
-version 4.1 for over 6 months.  The guest VMs are very stable, and PCIe
-PT is working as was designed (all of the PCIe devices are on the root
-PCIe device).  I have successfully passed through GPUs, NICs, etc. I was
-asked by those in the community to attempt to once again upstream the
-patches.  I have them working with Seabios and OVMF (patches are needed
-to OVMF which I will be sending to the mailing list).  I will be sending
-my Qemu patches to their mailing list in hopes of getting everything
-upstreamed. The Qemu patches allow for the xenvbd to properly unplug the
-AHCI SATA device, and all xen pv windows drivers work as intended.
+Note that '15cpu' ACPI tables are only applicable to qemu-traditional
+(which have no support for Q35), so we need to use 'anycpu' version only.
 
-I used the original author of the patches to get a majority of this to work:
-Alexey Gerasimenko.  I fixed the patches to be in line with the upstream
-Qemu and Xen versions.  Any original issues may still exist; however, I
-am sure in time they can be improved. If the code doesn't exist then they
-can't be actively looked at by the community.
-
-I am not an expert on the Q35 chipset or PCIe technology.  This is my
-first patch to this mailing list. I realized that my first patch was not
-properly formatted into a series, so this is the full series version.
-
+Signed-off-by: Alexey Gerasimenko <x1917x@xxxxxxxxx>
 Signed-off-by: Joel Upham <jupham125@gmail.com>
-Joel Upham (12):
-  libacpi: new DSDT ACPI table for Q35
-  Makefile: build and use new DSDT table for Q35
-  hvmloader: add function to query an emulated machine type (i440/Q35)
-  hvmloader: add ACPI enabling for Q35
-  hvmloader: add Q35 DSDT table loading
-  hvmloader: add basic Q35 support
-  hvmloader: allocate MMCONFIG area in the MMIO hole + minor code
-    refactoring
-  libxl: Q35 support (new option device_model_machine)
-  libacpi: build ACPI MCFG table if requested
-  hvmloader: use libacpi to build MCFG table
-  docs: provide description for device_model_machine option
-  libxl_dm: handle the new 6 port ahci controller
+---
+ tools/firmware/hvmloader/Makefile |  2 +-
+ tools/libacpi/Makefile            | 10 +++++++++-
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
- docs/man/xl.cfg.5.pod.in             |  27 ++
- tools/firmware/hvmloader/Makefile    |   2 +-
- tools/firmware/hvmloader/config.h    |   6 +
- tools/firmware/hvmloader/hvmloader.c |  13 +-
- tools/firmware/hvmloader/ovmf.c      |   5 +
- tools/firmware/hvmloader/pci.c       | 285 +++++++++----
- tools/firmware/hvmloader/pci_regs.h  |   6 +
- tools/firmware/hvmloader/seabios.c   |   5 +
- tools/firmware/hvmloader/util.c      | 130 +++++-
- tools/firmware/hvmloader/util.h      |  10 +
- tools/libacpi/Makefile               |  10 +-
- tools/libacpi/acpi2_0.h              |  21 +
- tools/libacpi/build.c                |  43 ++
- tools/libacpi/dsdt_q35.asl           | 578 +++++++++++++++++++++++++++
- tools/libacpi/libacpi.h              |   4 +
- tools/libs/light/libxl_dm.c          |  60 ++-
- tools/libs/light/libxl_types.idl     |   8 +
- tools/xl/xl_parse.c                  |  14 +
- 18 files changed, 1119 insertions(+), 108 deletions(-)
- create mode 100644 tools/libacpi/dsdt_q35.asl
-
-Qemu changes in bound to their mailing list:
-  pc/xen: Xen Q35 support: provide IRQ handling for PCI devices
-  pc/q35: Apply PCI bus BSEL property for Xen PCI device hotplug
-  q35/acpi/xen: Provide ACPI PCI hotplug interface for Xen on Q35
-  q35/xen: Add Xen platform device support for Q35
-  q35: Fix incorrect values for PCIEXBAR masks
-  xen/pt: XenHostPCIDevice: provide functions for PCI Capabilities and
-    PCIe Extended Capabilities enumeration
-  xen/pt: avoid reading PCIe device type and cap version multiple times
-  xen/pt: determine the legacy/PCIe mode for a passed through device
-  xen/pt: Xen PCIe passthrough support for Q35: bypass PCIe topology
-    check
-  xen/pt: add support for PCIe Extended Capabilities and larger config
-    space
-  xen/pt: handle PCIe Extended Capabilities Next register
-  xen/pt: allow to hide PCIe Extended Capabilities
-  xen/pt: add Vendor-specific PCIe Extended Capability descriptor and
-    sizing
-  xen/pt: add fixed-size PCIe Extended Capabilities descriptors
-  xen/pt: add AER PCIe Extended Capability descriptor and sizing
-  xen/pt: add descriptors and size calculation for
-    RCLD/ACS/PMUX/DPA/MCAST/TPH/DPC PCIe Extended Capabilities
-  xen/pt: add Resizable BAR PCIe Extended Capability descriptor and
-    sizing
-  xen/pt: add VC/VC9/MFVC PCIe Extended Capabilities descriptors and
-    sizing
-  xen/pt: Fake capability id
-  xen platform: unplug ahci object
-  pc/q35: setup q35 for xen
-  qdev-monitor/pt: bypass root device check
-  s3 support: enabling s3 with q35
-
- hw/acpi/ich9.c                |   22 +-
- hw/acpi/pcihp.c               |    6 +-
- hw/core/machine.c             |   19 +
- hw/i386/pc_piix.c             |    3 +-
- hw/i386/pc_q35.c              |   39 +-
- hw/i386/xen/xen-hvm.c         |    7 +-
- hw/i386/xen/xen_platform.c    |   19 +-
- hw/isa/lpc_ich9.c             |   53 +-
- hw/isa/piix3.c                |    2 +-
- hw/pci-host/q35.c             |   28 +-
- hw/pci/pci.c                  |   17 +
- hw/xen/xen-host-pci-device.c  |  106 +++-
- hw/xen/xen-host-pci-device.h  |    6 +-
- hw/xen/xen_pt.c               |   49 +-
- hw/xen/xen_pt.h               |   18 +-
- hw/xen/xen_pt_config_init.c   | 1103 ++++++++++++++++++++++++++++++---
- include/hw/acpi/pcihp.h       |    2 +
- include/hw/boards.h           |    1 +
- include/hw/i386/pc.h          |    3 +
- include/hw/pci-host/q35.h     |    4 +-
- include/hw/pci/pci.h          |    3 +
- include/hw/southbridge/ich9.h |    1 +
- include/hw/xen/xen.h          |    4 +-
- qemu-options.hx               |    1 +
- softmmu/qdev-monitor.c        |    4 +-
- stubs/xen-hw-stub.c           |    4 +-
- 26 files changed, 1394 insertions(+), 130 deletions(-)
-
+diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
+index e5de1ade17..e3c8eb3ca1 100644
+--- a/tools/firmware/hvmloader/Makefile
++++ b/tools/firmware/hvmloader/Makefile
+@@ -70,7 +70,7 @@ rombios.o: roms.inc
+ smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
+ 
+ ACPI_PATH = ../../libacpi
+-DSDT_FILES = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c
++DSDT_FILES = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c dsdt_q35_anycpu_qemu_xen.c
+ ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
+ $(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
+ CFLAGS += -I$(ACPI_PATH)
+diff --git a/tools/libacpi/Makefile b/tools/libacpi/Makefile
+index b21a64c6b4..d1ad2c6d85 100644
+--- a/tools/libacpi/Makefile
++++ b/tools/libacpi/Makefile
+@@ -11,7 +11,7 @@ endif
+ 
+ MK_DSDT = $(ACPI_BUILD_DIR)/mk_dsdt
+ 
+-C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c dsdt_pvh.c
++C_SRC-$(CONFIG_X86) = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c dsdt_q35_anycpu_qemu_xen.c dsdt_pvh.c
+ C_SRC-$(CONFIG_ARM_64) = dsdt_anycpu_arm.c
+ DSDT_FILES ?= $(C_SRC-y)
+ C_SRC = $(addprefix $(ACPI_BUILD_DIR)/, $(DSDT_FILES))
+@@ -54,6 +54,14 @@ $(ACPI_BUILD_DIR)/dsdt_%cpu.asl: dsdt.asl dsdt_acpi_info.asl  $(MK_DSDT)
+ 	$(MK_DSDT) --debug=$(debug) --maxcpu $*  >> $@.$(TMP_SUFFIX)
+ 	mv -f $@.$(TMP_SUFFIX) $@
+ 
++$(ACPI_BUILD_DIR)/dsdt_q35_anycpu_qemu_xen.asl: dsdt_q35.asl dsdt_acpi_info.asl $(MK_DSDT)
++	# Remove last bracket
++	awk 'NR > 1 {print s} {s=$$0}' $< > $@.$(TMP_SUFFIX)
++	cat dsdt_acpi_info.asl >> $@.$(TMP_SUFFIX)
++	$(MK_DSDT) --debug=$(debug) --dm-version qemu-xen >> $@.$(TMP_SUFFIX)
++	mv -f $@.$(TMP_SUFFIX) $@
++
++
+ $(ACPI_BUILD_DIR)/dsdt_pvh.asl: dsdt_acpi_info.asl $(MK_DSDT)
+ 	printf "DefinitionBlock (\"DSDT.aml\", \"DSDT\", 5, \"Xen\", \"HVM\", 0)\n{" > $@
+ 	cat dsdt_acpi_info.asl >> $@
 -- 
 2.34.1
 
