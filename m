@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947F6EB64DC
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 17:00:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553033.863377 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6527EB64D7
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 17:00:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553032.863363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC1Bm-0006AZ-J9; Wed, 21 Jun 2023 17:00:14 +0000
+	id 1qC1Bl-0005jp-G3; Wed, 21 Jun 2023 17:00:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553033.863377; Wed, 21 Jun 2023 17:00:14 +0000
+Received: by outflank-mailman (output) from mailman id 553032.863363; Wed, 21 Jun 2023 17:00:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC1Bm-00069B-G7; Wed, 21 Jun 2023 17:00:14 +0000
-Received: by outflank-mailman (input) for mailman id 553033;
- Wed, 21 Jun 2023 17:00:13 +0000
+	id 1qC1Bl-0005j3-9W; Wed, 21 Jun 2023 17:00:13 +0000
+Received: by outflank-mailman (input) for mailman id 553032;
+ Wed, 21 Jun 2023 17:00:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Gfgj=CJ=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qC1Bl-0005SN-9B
- for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 17:00:13 +0000
+ id 1qC1Bk-0005SN-99
+ for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 17:00:12 +0000
 Received: from raptorengineering.com (mail.raptorengineering.com
  [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 12dec698-1055-11ee-b236-6b7b168915f2;
+ id 139c3090-1055-11ee-b236-6b7b168915f2;
  Wed, 21 Jun 2023 19:00:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id 7948F8285BED
- for <xen-devel@lists.xenproject.org>; Wed, 21 Jun 2023 12:00:06 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 07BAC8285AB9
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Jun 2023 12:00:08 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id FIBAAgVpyXdW; Wed, 21 Jun 2023 12:00:05 -0500 (CDT)
+ with ESMTP id foy7nxcwUnGh; Wed, 21 Jun 2023 12:00:07 -0500 (CDT)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id B299E8285AB9;
- Wed, 21 Jun 2023 12:00:05 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTP id 4B4E78286814;
+ Wed, 21 Jun 2023 12:00:07 -0500 (CDT)
 Received: from mail.rptsys.com ([127.0.0.1])
  by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id aXwZYNeHKD_S; Wed, 21 Jun 2023 12:00:05 -0500 (CDT)
+ with ESMTP id LGD8GxPuDDRZ; Wed, 21 Jun 2023 12:00:07 -0500 (CDT)
 Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 4906282856E5;
- Wed, 21 Jun 2023 12:00:05 -0500 (CDT)
+ by mail.rptsys.com (Postfix) with ESMTPSA id BD7638285AF3;
+ Wed, 21 Jun 2023 12:00:06 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,93 +53,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12dec698-1055-11ee-b236-6b7b168915f2
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com B299E8285AB9
+X-Inumbo-ID: 139c3090-1055-11ee-b236-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 4B4E78286814
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1687366805; bh=9NaRUF1KYWzHXz2PsOE4ZqCa2F66XQdJrbpTnZaFgXU=;
+	t=1687366807; bh=By/cyaijYQTAGJgZfB6T8MO0SHbn04i59WFs7fwttoA=;
 	h=From:To:Date:Message-Id:MIME-Version;
-	b=k28wqdeyhLlfFWBHUUbxL1Iv8x1zCMaXYgV+RPCsHD12JYEbkz1G0CI82Vs9R3gOI
-	 FBCWEQcZFijfOVtqFVyhhDDKaHp3jlrIs5Lzrz2jiFLBYUfRQ09HZg5UcR/QvOOKjv
-	 EfMRwbYhHVks8mmOqs+suOul/n75MgmY21UrT8D4=
+	b=eKNTclCHeYRdWjT6nzpqrCUd4lj1McWNTVj7Xnt1UczbjyqKNRR/OEwoYlmRSIA9a
+	 kXmq0qdfb1cdZqyM4SN15KtwG12HFBIFR+4nPdSongvKzguY1/Ey92nQEm+TV07W6x
+	 jZFalootMUdl25E1/LwCxtafjqi32BRwrMjYG/aQ=
 X-Virus-Scanned: amavisd-new at rptsys.com
 From: Shawn Anastasio <sanastasio@raptorengineering.com>
 To: xen-devel@lists.xenproject.org
 Cc: tpearson@raptorengineering.com,
 	Shawn Anastasio <sanastasio@raptorengineering.com>
-Subject: [PATCH 0/4] Early serial on Power
-Date: Wed, 21 Jun 2023 11:59:49 -0500
-Message-Id: <cover.1687366665.git.sanastasio@raptorengineering.com>
+Subject: [PATCH 4/4] automation: Add smoke test for ppc64le
+Date: Wed, 21 Jun 2023 11:59:53 -0500
+Message-Id: <b34f2d37ab3b7a6a3fd1a451904c64f39a54c899.1687366665.git.sanastasio@raptorengineering.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1687366665.git.sanastasio@raptorengineering.com>
+References: <cover.1687366665.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+Add an initial smoke test that boots xen on a ppc64/pseries machine and
+checks for a magic string. Based on the riscv smoke test.
 
-This series adds support for early serial printing on Power, as well as
-a simple CI smoke test modeled after the riscv one.
+Eventually the powernv9 (POWER9 bare metal) machine type will want to be
+tested as well, but for now we only boot on pseries.
 
-The third patch, which implements the serial console, also includes a
-set of header additions required to get the build going when including
-things like xen/lib.h. When applicable, headers from the old Xen 3.2.3
-ppc tree were imported or otherwise empty stub headers were added to be
-filled in later.
-
-This will currently only run on QEMU pseries VMs, since the firmware
-interface on bare metal differs significantly. Support for bare metal
-will be added in a future series.
-
-Thanks,
-Shawn
-
-Shawn Anastasio (4):
-  automation: Add QEMU to bullseye-ppc64le
-  automation: Fix KBUILD_DEFCONFIG for *ppc64le jobs
-  xen/ppc: Implement early serial printk on pseries
-  automation: Add smoke test for ppc64le
-
- .../build/debian/bullseye-ppc64le.dockerfile  |   2 +
- automation/gitlab-ci/build.yaml               |   8 +-
- automation/gitlab-ci/test.yaml                |  20 ++
- automation/scripts/qemu-smoke-ppc64le.sh      |  27 +++
- xen/arch/ppc/Kconfig.debug                    |   5 +
- xen/arch/ppc/Makefile                         |   3 +
- xen/arch/ppc/boot-of.c                        | 116 ++++++++++
- xen/arch/ppc/configs/ppc64_defconfig          |   1 +
- xen/arch/ppc/early_printk.c                   |  28 +++
- xen/arch/ppc/include/asm/boot.h               |  24 ++
- xen/arch/ppc/include/asm/bug.h                |   6 +
- xen/arch/ppc/include/asm/byteorder.h          |  37 +++
- xen/arch/ppc/include/asm/cache.h              |   6 +
- xen/arch/ppc/include/asm/early_printk.h       |  15 ++
- xen/arch/ppc/include/asm/msr.h                |  67 ++++++
- xen/arch/ppc/include/asm/processor.h          | 207 +++++++++++++++++
- xen/arch/ppc/include/asm/reg_defs.h           | 218 ++++++++++++++++++
- xen/arch/ppc/include/asm/string.h             |   6 +
- xen/arch/ppc/include/asm/types.h              |  35 +++
- xen/arch/ppc/ppc64/Makefile                   |   1 +
- xen/arch/ppc/ppc64/asm-offsets.c              |  55 +++++
- xen/arch/ppc/ppc64/head.S                     |  48 ++--
- xen/arch/ppc/ppc64/of-call.S                  |  85 +++++++
- xen/arch/ppc/setup.c                          |  31 +++
- 24 files changed, 1025 insertions(+), 26 deletions(-)
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
+---
+ automation/gitlab-ci/test.yaml           | 20 ++++++++++++++++++
+ automation/scripts/qemu-smoke-ppc64le.sh | 27 ++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+)
  create mode 100755 automation/scripts/qemu-smoke-ppc64le.sh
- create mode 100644 xen/arch/ppc/boot-of.c
- create mode 100644 xen/arch/ppc/early_printk.c
- create mode 100644 xen/arch/ppc/include/asm/boot.h
- create mode 100644 xen/arch/ppc/include/asm/bug.h
- create mode 100644 xen/arch/ppc/include/asm/byteorder.h
- create mode 100644 xen/arch/ppc/include/asm/cache.h
- create mode 100644 xen/arch/ppc/include/asm/early_printk.h
- create mode 100644 xen/arch/ppc/include/asm/msr.h
- create mode 100644 xen/arch/ppc/include/asm/processor.h
- create mode 100644 xen/arch/ppc/include/asm/reg_defs.h
- create mode 100644 xen/arch/ppc/include/asm/string.h
- create mode 100644 xen/arch/ppc/include/asm/types.h
- create mode 100644 xen/arch/ppc/ppc64/of-call.S
- create mode 100644 xen/arch/ppc/setup.c
 
---
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.y=
+aml
+index d5cb238b0a..45e8ddb7a3 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -71,6 +71,19 @@
+   tags:
+     - x86_64
+=20
++.qemu-ppc64le:
++  extends: .test-jobs-common
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    LOGFILE: qemu-smoke-ppc64le.log
++  artifacts:
++    paths:
++      - smoke.serial
++      - '*.log'
++    when: always
++  tags:
++    - x86_64
++
+ .xilinx-arm64:
+   extends: .test-jobs-common
+   variables:
+@@ -444,3 +457,10 @@ qemu-smoke-riscv64-gcc:
+     - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - archlinux-current-gcc-riscv64-debug
++
++qemu-smoke-ppc64le-pseries-gcc:
++  extends: .qemu-ppc64le
++  script:
++    - ./automation/scripts/qemu-smoke-ppc64le.sh pseries-5.2 2>&1 | tee =
+${LOGFILE}
++  needs:
++    - debian-bullseye-gcc-ppc64le-debug
+diff --git a/automation/scripts/qemu-smoke-ppc64le.sh b/automation/script=
+s/qemu-smoke-ppc64le.sh
+new file mode 100755
+index 0000000000..eb55221221
+--- /dev/null
++++ b/automation/scripts/qemu-smoke-ppc64le.sh
+@@ -0,0 +1,27 @@
++#!/bin/bash
++
++set -ex
++
++# machine type from first arg passed directly to qemu -M
++machine=3D$1
++
++# Run the test
++rm -f smoke.serial
++set +e
++
++touch smoke.serial
++
++timeout -k 1 20 \
++qemu-system-ppc64 \
++    -M $machine \
++    -m 2g \
++    -smp 1 \
++    -vga none \
++    -monitor none \
++    -nographic \
++    -serial file:smoke.serial \
++    -kernel binaries/xen
++
++set -e
++(grep -q "Hello, ppc64le!" smoke.serial) || exit 1
++exit 0
+--=20
 2.30.2
 
 
