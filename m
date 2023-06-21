@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF116EB64D8
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 16:20:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552933.863199 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0DAEB64D8
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 16:20:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552935.863218 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC0ZF-00019X-Id; Wed, 21 Jun 2023 16:20:25 +0000
+	id 1qC0ZJ-0001fy-5V; Wed, 21 Jun 2023 16:20:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552933.863199; Wed, 21 Jun 2023 16:20:25 +0000
+Received: by outflank-mailman (output) from mailman id 552935.863218; Wed, 21 Jun 2023 16:20:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC0ZF-00019Q-E4; Wed, 21 Jun 2023 16:20:25 +0000
-Received: by outflank-mailman (input) for mailman id 552933;
- Wed, 21 Jun 2023 16:20:24 +0000
+	id 1qC0ZJ-0001fr-2G; Wed, 21 Jun 2023 16:20:29 +0000
+Received: by outflank-mailman (input) for mailman id 552935;
+ Wed, 21 Jun 2023 16:20:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=30K1=CJ=citrix.com=prvs=529504c83=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1qC0ZE-0000tN-Bd
- for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 16:20:24 +0000
+ id 1qC0ZH-0000tN-J3
+ for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 16:20:27 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 83db6185-104f-11ee-8611-37d641c3527e;
- Wed, 21 Jun 2023 18:20:22 +0200 (CEST)
+ id 86bd7a0c-104f-11ee-8611-37d641c3527e;
+ Wed, 21 Jun 2023 18:20:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,102 +38,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 83db6185-104f-11ee-8611-37d641c3527e
+X-Inumbo-ID: 86bd7a0c-104f-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1687364422;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=JWOT/JQ+ICaJDAuccPtcGYCuAD6Tj28cH0e/UkQDHRw=;
-  b=BWFredKdnKFLik1NtISIVCRBQgmGePhQrlcQo61qCh5Jpkqw0H9es6pm
-   R57BoaGmRgR4/7BCiUyJ6Lq6cAdUtQZxyJRjS3SnunKFz98P+GX9AgQUl
-   P+RGIW7eB+JHSYQMqtiSuaQNBl3C/7DeFTgxhXsyQM2zJr5+cB82lXdPf
-   Q=;
+  d=citrix.com; s=securemail; t=1687364425;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=FeiN0tZrNokVbRAYwlZ3w177gJNyDQjG2lOR1qJ+z1Q=;
+  b=MkhyOWrv9TaxZVBygKMdBLdLrLwnKQBsHJiU6rfkA8TEBuP0ZEHENoa9
+   T5ktPqX8V589HZNlo+Yi8CEAHIeooYftehwn0NnQrN62iBpsAX2kOjBeU
+   mGOmckreAkDYyVB63NvRrRqE0buVQzNOzaxVT07yIQw0AYl3XAb8KeplK
+   8=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 112968598
+X-MesageID: 112968615
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ylT4CqmgGv0pTwvdwaZMufno5gyjJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xJLUT+HOPvfM2X8f9onOYqz9khV6p/cx9IyTAE9/iFgHiMWpZLJC+rCIxarNUt+DCFhoGFPt
- JxCN4aafKjYaleG+39B55C49SEUOZmgH+a6U6icfHgqH2eIcQ954Tp7gek1n4V0ttawBgKJq
- LvartbWfVSowFaYCEpNg064gE0p5KyaVA8w5ARkPqgV5gaGyxH5MbpETU2PByqgKmVrNrbSq
- 9brlNmR4m7f9hExPdKp+p6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTbZLwXXx/mTSR9+2d/
- f0W3XCGpaXFCYWX8AgVe0Ew/yiTpsSq8pefSZS0mZT7I0Er7xIAahihZa07FdRwxwp5PY1B3
- d84FhoMRwievu2Jx4mQTPtHu+BkJ9a+aevzulk4pd3YJfMvQJSFSKTW/95Imjw3g6iiH96HO
- ZBfM2A2Kk2dPVsWYAx/5JEWxY9EglH2dSFYr1SE47I6+WHJwCR60aT3McqTcduPLSlQth/B/
- DOYrzmoUnn2MvSR5Cvc6Fn2vNbwkAPweNgTS+OxsfxT1Qj7Kms7V0RNCArTTeOCol6zXZdTJ
- lIZ/gIqrLMu7wq7Q9/lRRq6rXWY+BkGVLJ4CPYm4QuAzq7V5QexBWUeSDNFLts8u6ceRyEu1
- 1KPt8PkA3poqrL9YXCX+6qQrDiyETMINmJEbigBJSMa5/HzrYd1iQjAJuuPC4bs0IezQ2uph
- WnX8m5n3e57YdM3O7uT3nD5qTOFvoXwQTEy3S7RTEmYykRye9vwD2C30mQ3/cqsPa7AEAne5
- ihbwpjEhAwdJcrTzXLQGY3hCJnsvq/Ya2OE3DaDCrF7r1yQF2ifkZe8Cd2UDGNgKY46dDDge
- yc/UisBtcYIbBNGgUKaCr9d6vjGLoC6T7wJrtiOMrJzjmFZLWdrBh1Ga0+KxHzKm0Mxi6w5M
- przWZ/yXSlAWfo/kWrsF711PVoXKscWnzm7eHwG507/jer2iIC9FN/pz2dinshmtfjZ8W05A
- v5UNteQygU3bQENSnC/zGLnFnhTdSJTLcmv+6RqmhurflIO9JcJV6WAntvMuuVNw8xoqws/1
- iHhBhAAlAak3hUq62yiMxheVV8mZr4nxVpTAMDmFQ/0s5T/Se5DNJsiSqY=
-IronPort-HdrOrdr: A9a23:b5c+QagL/320eO0Ez1ys07bX83BQXtAji2hC6mlwRA09TySZ//
- rAoB19726RtN9xYgBEpTnuAsi9qB/nmKKdgrNhX4tKPjOHhILAFugLhuHfKlXbakrDH4Vmu5
- uIHZITNDSJNykYsfrH
-X-Talos-CUID: 9a23:8Q3/1GwcIdXYviBzrugeBgU3Ov4Pc1TF0U7fHEiDImB7Y4CxDlSPrfY=
-X-Talos-MUID: 9a23:qDXsWgSsqfHvEHF3RXTiqSA7Luwy2Z2RBWAGsc8H5JeNci5JbmI=
+IronPort-Data: A9a23:aK77MKLbiVy/ipZGFE+R75UlxSXFcZb7ZxGr2PjKsXjdYENSgWAEx
+ 2MfWjuGMvyMajOmfNwjYY63/EgF6MTVmN4xHFRlqX01Q3x08seUXt7xwmUcnc+xBpaaEB84t
+ ZV2hv3odp1coqr0/0/1WlTZhSAgk/rOHvykU7Ss1hlZHWdMUD0mhQ9oh9k3i4tphcnRKw6Ws
+ Jb5rta31GWNglaYCUpKrfrbwP9TlK6q4mhA4AZnPawjUGL2zBH5MrpOfcldEFOgKmVkNrbSb
+ /rOyri/4lTY838FYj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnVaPpIAHOgdcS9qZwChxLid/
+ jnvWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I+QrvBIAzt03ZHzaM7H09c5VXDwS3
+ PkZdAwoZxCj3fCqxuiBRNRz05FLwMnDZOvzu1llxDDdS/0nXYrCU+PB4towMDUY354UW6yEP
+ oxANGQpNU6bC/FMEg5/5JYWleG0hn75YntApUicv6Yf6GnP1g1hlrPqNbI5f/TTHJ8EwBbG/
+ z+uE2LROy1AafLO4gi/3nPyo83NrzPqV4tMG+jtnhJtqALKnTFCYPEMbnOrrP/8hkOgVtZ3L
+ 00P5jFovaU07FasTNT2Q1u/unHslhwVXdZKAvA5wA6Iw6vQpQ2eAwAsTDRMddgnv88eXiEx2
+ xmCmNaBLT5ytLyYT1qN+7HSqim9UQAONnMLbyIASQoD4vHgrZs1gxaJScxseIaqivXlFDe2x
+ CqFxBXSnJ1K05RNjf/iuwma3XT1/MOhohMJChv/fD/4sip8ZdKZQoWoyQLJ8fAaFoikUQzU1
+ JQboPRy/NziHLnUynzSGrVSReHzjxqWGGaC2AAyRvHN4xzooif+Jt4IvVmSMW8zaq45lSnVj
+ Fg/UO+7zLtaJzOUYKB+eOpd4Ox6nPG7RbwJuh05B+eig6SdlyfdpkmCnWbKgwjQfLEEyMnTw
+ 6uzf8e2Fmo9Aq961jewTOp1+eZ1ln9klT2LGMChn07PPV+iiJm9E+1tDbdzRrphsPPsTPv9r
+ r6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOHwFg5U/SwJ3GSI/QDtJI6aIkdscl3lNw/w9ehHgo
+ ivsBSe1CTPX2RX6FOl9QiA/NOy3Acok9hrW/0UEZD6V5pTqWq73hI93Snf9VeN/nAC/5ZaYl
+ 8U4Rvg=
+IronPort-HdrOrdr: A9a23:nKWhJaqIi8UpSiAqhMSQJjMaV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
+X-Talos-CUID: 9a23:HPgsfGzPI65Ukn8vPBLsBgU2R515W3jckEv1Kk+YU3R1TuevR2KPrfY=
+X-Talos-MUID: =?us-ascii?q?9a23=3AGmrBSQ7stVpQweutcoSAkZDuxoxR3/7zJhEmo68?=
+ =?us-ascii?q?qupehFy5CKyaShWq4F9o=3D?=
 X-IronPort-AV: E=Sophos;i="6.00,261,1681185600"; 
-   d="scan'208";a="112968598"
+   d="scan'208";a="112968615"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 0/3] build: reduce number of $(shell) execution on make 4.4
-Date: Wed, 21 Jun 2023 17:19:56 +0100
-Message-ID: <20230621161959.1061178-1-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jason Andryuk
+	<jandryuk@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "George
+ Dunlap" <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+Subject: [XEN PATCH 3/3] Config.mk: evaluate XEN_COMPILE_ARCH and XEN_OS on first use
+Date: Wed, 21 Jun 2023 17:19:59 +0100
+Message-ID: <20230621161959.1061178-4-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230621161959.1061178-1-anthony.perard@citrix.com>
+References: <20230621161959.1061178-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Patch series available in this git branch:
-https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.build-exported-shell-command-value-v1
-
-With GNU make 4.4, the number of execution of the command present in $(shell )
-in exported variables increased greatly. This is probably because as of make
+With GNU make 4.4, the number of execution of the command present in
+these $(shell ) increased greatly. This is probably because as of make
 4.4, exported variable are also added to the environment of $(shell )
 construct.
 
-From the annoncement:
+So, to avoid having these command been run more than necessery, we
+will use a construct to evaluate on first use.
 
-    https://lists.gnu.org/archive/html/info-gnu/2022-10/msg00008.html
-    > * WARNING: Backward-incompatibility!
-    >   Previously makefile variables marked as export were not exported to commands
-    >   started by the $(shell ...) function.  Now, all exported variables are
-    >   exported to $(shell ...).  If this leads to recursion during expansion, then
-    >   for backward-compatibility the value from the original environment is used.
-    >   To detect this change search for 'shell-export' in the .FEATURES variable.
+Reported-by: Jason Andryuk <jandryuk@gmail.com>
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ Config.mk | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Also, there's a new paragraph in the GNU make manual, but it's a warning about
-exporting all variable, still it might be relevant to the new observed
-behavior:
-
-    https://www.gnu.org/software/make/manual/make.html#Variables_002fRecursion
-    > Adding a variable’s value to the environment requires it to be expanded. If
-    > expanding a variable has side-effects (such as the info or eval or similar
-    > functions) then these side-effects will be seen every time a command is
-    > invoked.
-
-The issue was reported on IRC by jandryuk.
-
-So, I've locate a few obvious candidate to fix, maybe there's more $(shell) to
-change?
-
-Anthony PERARD (3):
-  build: define ARCH and SRCARCH later
-  build: evaluate XEN_BUILD_* and XEN_DOMAIN on first use
-  Config.mk: evaluate XEN_COMPILE_ARCH and XEN_OS on first use
-
- Config.mk    |  6 +++---
- xen/Makefile | 21 +++++++++++----------
- 2 files changed, 14 insertions(+), 13 deletions(-)
-
+diff --git a/Config.mk b/Config.mk
+index c529b1ba19cd..5fbdbc4500d2 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -19,13 +19,13 @@ or       = $(if $(strip $(1)),$(1),$(if $(strip $(2)),$(2),$(if $(strip $(3)),$(
+ 
+ -include $(XEN_ROOT)/.config
+ 
+-XEN_COMPILE_ARCH    ?= $(shell uname -m | sed -e s/i.86/x86_32/ \
++XEN_COMPILE_ARCH    ?= $(eval XEN_COMPILE_ARCH := $(shell uname -m | sed -e s/i.86/x86_32/ \
+                          -e s/i86pc/x86_32/ -e s/amd64/x86_64/ \
+                          -e s/armv7.*/arm32/ -e s/armv8.*/arm64/ \
+-                         -e s/aarch64/arm64/)
++                         -e s/aarch64/arm64/))$(XEN_COMPILE_ARCH)
+ 
+ XEN_TARGET_ARCH     ?= $(XEN_COMPILE_ARCH)
+-XEN_OS              ?= $(shell uname -s)
++XEN_OS              ?= $(eval XEN_OS := $(shell uname -s))$(XEN_OS)
+ 
+ CONFIG_$(XEN_OS) := y
+ 
 -- 
 Anthony PERARD
 
