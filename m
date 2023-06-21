@@ -4,29 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FBAEB64D7
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 21:12:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553146.863548 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAE0EB64D8
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 21:27:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553162.863557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC57l-0006uQ-MD; Wed, 21 Jun 2023 21:12:21 +0000
+	id 1qC5M9-0000jc-V0; Wed, 21 Jun 2023 21:27:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553146.863548; Wed, 21 Jun 2023 21:12:21 +0000
+Received: by outflank-mailman (output) from mailman id 553162.863557; Wed, 21 Jun 2023 21:27:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qC57l-0006uH-JC; Wed, 21 Jun 2023 21:12:21 +0000
-Received: by outflank-mailman (input) for mailman id 553146;
- Wed, 21 Jun 2023 21:12:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qC5M9-0000jV-SB; Wed, 21 Jun 2023 21:27:13 +0000
+Received: by outflank-mailman (input) for mailman id 553162;
+ Wed, 21 Jun 2023 21:27:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1i8T=CJ=citrix.com=prvs=529409482=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qC57k-0006QB-OT
- for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 21:12:20 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4e1c8d72-1078-11ee-8611-37d641c3527e;
- Wed, 21 Jun 2023 23:12:19 +0200 (CEST)
+ <SRS0=ZQ+K=CJ=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1qC5M8-0000jP-Kx
+ for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 21:27:12 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6109a4fd-107a-11ee-b237-6b7b168915f2;
+ Wed, 21 Jun 2023 23:27:10 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0397C616DC;
+ Wed, 21 Jun 2023 21:27:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CDB2C433C8;
+ Wed, 21 Jun 2023 21:27:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,124 +47,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e1c8d72-1078-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1687381938;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=8PGVbTSNvcVmjoHTepH7x0XW0Ng7LzFsr4r2eAR8kF8=;
-  b=P4TATj58J7MO8u904uY+oXByeIMax5uAPQ8R2eaPMFHWi8qBGKl2MScv
-   LEYwCViFeUdjc/RvgBN9t6su3ckjkCu7rS8TS9vAsfg8LFSp720L2KtMn
-   JWlka20lo76NWThtrmkhVgBJrBjY7WhUDO7EPo7CZ0ou8LQ/JDy7fwzF2
-   I=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 4.0
-X-MesageID: 112996392
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.123
-X-Policy: $RELAYED
-IronPort-Data: A9a23:V+2B06iFkaNFF77VpyATCjn2X161bhcKZh0ujC45NGQN5FlHY01je
- htvCz+HOqqJYDT8f9FzaYu+9xkAsZODxoA3TgVv/C9jEyIb9cadCdqndUqhZCn6wu8v7q5Ex
- 55HNoSfdpBcolv0/ErF3m3J9CEkvU2wbuOgTrWCYmYpHlUMpB4J0XpLg/Q+jpNjne+3CgaMv
- cKai8DEMRqu1iUc3lg8sspvkzsx+qyq0N8klgZmP6sT4gWHzyV94K83fsldEVOpGuG4IcbiL
- wrz5OnR1n/U+R4rFuSknt7TGqHdauePVeQmoiM+t5mK2nCulARrukoIHKN0hXNsoyeIh7hMJ
- OBl7vRcf+uL0prkw4zxWzEAe8130DYvFLXveRBTuuTLp6HKnueFL1yDwyjaMKVBktubD12i+
- tRbOjY0MEiGrdmR/+3ra/BCocY6EevSadZ3VnFIlVk1DN4jSJHHBa7L+cVZzHE7gcUm8fT2P
- pRDL2A1NVKZPkMJYw1MYH49tL7Aan3XWjtUsl+K44Ew5HDe1ldZ27nxKtvFPNeNQK25m27B/
- ziXrjqiU0ty2Nq3wie7zC3riuLzxxjBG70AE7KE394xqQjGroAUIEJPDgbqyRWjsWauVtQaJ
- 0EK9y4Gqakp6FftXtT7Rwe/onOPolgbQdU4O88Q5RyJy6HUyx2EHWVCRTlEAPQ9r9M/TzEu0
- l6PnvvqCCZpvbnTTmiSnp+LqRuiNC5TKnUNDQcGUA8E7t/LsIw1yBXVQb5LLqmxidHkHCDq9
- BqDpiM+mrY7gNYC0uOw+lWvqzihvITTRwg5oADeRHu47xhRbZSgIYev7DDz5PJBN5qQT0PHs
- mINncOf98gRAZrLnyuIKM0HG7uj9vueMDnRhFdpN5Yk/jWpvXWkeOh46zZ4IkBrPs8aeCTBb
- 0rauAcX75hWVFOtaaJ0eIOwTcc316/rFdfifv/RZ9tKJJN2cWev5yhobFWM1nvsl2A2mLkjP
- o2Wd8mtC3sXE6Vhw3y9QOJ1+aMzyykk3mTVbYry1wigy7eYa3+TRLofMV2BKOs+6cu5TB79q
- ogFcZHQklMGDbO4O3OMmWIOEbwUBTspA6mo88l9Tcm8fVpHAU8GCebs44p0LuSJgJ9pevf0E
- mCVAxEIlwGh1SObeW1meVg4NuqxAM8XQWYTeHV1YA32gyVLjZOHtv93SnchQVUwGAWPJ9ZQR
- uJNRciPC+8npt/vq2VENsmVQGCPmX2WaeOy08mNOmJXk2ZIHVChxzMdVlKHGNMyJiS2r9Aih
- LaryxnWR5EOLyw7UpaJM631lQPp4CNM8A6XY6cuCoMIEKkL2NIwQxEdc9dte51cQfk97mXyO
- /mq7ecw+rCW/t5dHCjhjqGYtYa5e9aS7WIDd1Q3GY2ebHGAlkL6mN8obQp9VWyFPI8C0Pn4N
- Lo9IjCVGKFvoWumRKImTOkylvtku4S0z1KYpyw9dEj2g52QIusIChG7MQNn7MWhGpcxVdOKZ
- 3+y
-IronPort-HdrOrdr: A9a23:8mNpzqw5JvHyB0YnHjw4KrPw3L1zdoMgy1knxilNoHxuH/Bw9v
- re+8jzsCWftN9/Yh4dcLy7VpVoBEmslqKdgrNhWYtKPjOHhILAFugLgbcKgQeQeREWntQ36U
- 4KSdkaNDSfNzlHZcaR2njFLz4jquP3j5xBU43lvglQpQIBUdAQ0+9gYDzrdHGf3GN9dOAE/J
- z33Ls/mxOQPU45Q+6cHXc/U+3Kt7Tw5e/biU5vPW9e1OGW5wnYk4LHLw==
-X-Talos-CUID: 9a23:bbIte27rI7KRUmw9Rdsst1wSI559d1fm60iPc26hJ0FrUYC3cArF
-X-Talos-MUID: 9a23:X3savwgw/n4G9MEVbalSAMMpP9pW3fvpBE0xy648+PaWMiNMEhfGpWHi
-X-IronPort-AV: E=Sophos;i="6.00,261,1681185600"; 
-   d="scan'208";a="112996392"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, "Oleksii
- Kurochko" <oleksii.kurochko@gmail.com>, Shawn Anastasio
-	<sanastasio@raptorengineering.com>, Timothy Pearson
-	<tpearson@raptorengineering.com>
-Subject: [PATCH 1/2] xen/types: Drop #ifdefary for __{SIZE,PTRDIFF}_TYPE__
-Date: Wed, 21 Jun 2023 22:11:59 +0100
-Message-ID: <20230621211200.4132989-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230621211200.4132989-1-andrew.cooper3@citrix.com>
-References: <20230621211200.4132989-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 6109a4fd-107a-11ee-b237-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1687382828;
+	bh=LTwcw+kn3NeCOrzQob9a6YR0XhphElCW+HUWW+2QnIs=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=dhnAmRq5MWeBtQm3HUNWWDJ0PRdYJEA2mCYPP+DQRCj7J291arrTicSFDjdplN5YT
+	 7M4288FPgF/JkMICzb4v1W37tngnhPGilKaKgH+kK9KCntUEGIDJ1G50lZiXPoZPS4
+	 ornX+lfRws5qAmk951QVRLgt/1kxLck9HSnVLgTic7JRSKZ7PfwUZAlIZ87PwWmvej
+	 bHLxFZP600eyVC6onF/xy9ACRx54uDHaNNvzAOSCdQ8gtzLYVvkUdElKN712uWoyK7
+	 TDcQlzFwwN2PUDY+0yEON+izSyHWq7aZcJWs16QA+W65ZWiRGT87N38weIdU/1uzol
+	 HuvvfY/lUj6xw==
+Date: Wed, 21 Jun 2023 14:27:05 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Jan Beulich <jbeulich@suse.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org, consulting@bugseng.com, 
+    Gianluca Luparini <gianluca.luparini@bugseng.com>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>, 
+    Michal Orzel <michal.orzel@amd.com>, 
+    Xenia Ragiadakou <Xenia.Ragiadakou@amd.com>, 
+    Ayan Kumar <ayan.kumar.halder@amd.com>, 
+    Simone Ballarin <simone.ballarin@bugseng.com>
+Subject: Re: [XEN PATCH 12/13] xen/x86: fixed violations of MISRA C:2012 Rule
+ 7.2
+In-Reply-To: <e1f20861-fea1-068e-06c1-83558f7885cf@suse.com>
+Message-ID: <alpine.DEB.2.22.394.2306211423300.897208@ubuntu-linux-20-04-desktop>
+References: <cover.1687250177.git.gianluca.luparini@bugseng.com> <27690fdf9658339f12061f1bd171ebe5f969eb1b.1687250177.git.gianluca.luparini@bugseng.com> <alpine.DEB.2.22.394.2306201422230.897208@ubuntu-linux-20-04-desktop>
+ <e1f20861-fea1-068e-06c1-83558f7885cf@suse.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-All supported compilers have these types.
+On Wed, 21 Jun 2023, Jan Beulich wrote:
+> First of all - please trim replies.
+> 
+> On 20.06.2023 23:23, Stefano Stabellini wrote:
+> > On Tue, 20 Jun 2023, Simone Ballarin wrote:
+> >> --- a/xen/arch/x86/percpu.c
+> >> +++ b/xen/arch/x86/percpu.c
+> >> @@ -12,7 +12,7 @@ unsigned long __per_cpu_offset[NR_CPUS];
+> >>   * possible #PF at (NULL + a little) which has security implications in the
+> >>   * context of PV guests.
+> >>   */
+> >> -#define INVALID_PERCPU_AREA (0x8000000000000000L - (long)__per_cpu_start)
+> >> +#define INVALID_PERCPU_AREA (0x8000000000000000UL - (long)__per_cpu_start)
+> >>  #define PERCPU_ORDER get_order_from_bytes(__per_cpu_data_end - __per_cpu_start)
+> > 
+> > Hi Jan, should this be ULL?
+> 
+> Not really, no - we're 64-bit only. Furthermore the expression is
+> about addresses, which correspond to "unsigned long" in our world.
 
-No functional change.
+[...]
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Bob Eshleman <bobbyeshleman@gmail.com>
-CC: Alistair Francis <alistair.francis@wdc.com>
-CC: Connor Davis <connojdavis@gmail.com>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Shawn Anastasio <sanastasio@raptorengineering.com>
-CC: Timothy Pearson <tpearson@raptorengineering.com>
+> >> --- a/xen/include/public/arch-x86/xen-x86_64.h
+> >> +++ b/xen/include/public/arch-x86/xen-x86_64.h
+> >> @@ -53,10 +53,10 @@
+> >>  #define FLAT_USER_SS32 FLAT_RING3_SS32
+> >>  #define FLAT_USER_SS   FLAT_USER_SS64
+> >>  
+> >> -#define __HYPERVISOR_VIRT_START 0xFFFF800000000000
+> >> -#define __HYPERVISOR_VIRT_END   0xFFFF880000000000
+> >> -#define __MACH2PHYS_VIRT_START  0xFFFF800000000000
+> >> -#define __MACH2PHYS_VIRT_END    0xFFFF804000000000
+> >> +#define __HYPERVISOR_VIRT_START 0xFFFF800000000000U
+> >> +#define __HYPERVISOR_VIRT_END   0xFFFF880000000000U
+> >> +#define __MACH2PHYS_VIRT_START  0xFFFF800000000000U
+> >> +#define __MACH2PHYS_VIRT_END    0xFFFF804000000000U
+> > 
+> > Also here ULL?
+> 
+> UL yes, but as above I don't think ULL is good to use for addresses.
+> That said, things are a little less clear in the public headers: In
+> principle it could be a goal for them to be usable on foreign
+> architectures (say e.g. a 32-bit tool stack, or an analysis tool
+> which can be run without being on the original host architecture) as
+> well.
+> 
+> Furthermore, open-coded use of ULL would make this no-longer-C89.
+> If anything, it would then need to be UINT64_C(), yet even that would
+> grow our public header dependencies on C99-like infrastructure being
+> available (right now we only require certain stdint.h-like types;
+> Arm alone, interestingly, also uses PRIx64 and PRIu64, which may be
+> kind of unavoidable there).
 
-https://godbolt.org/z/Y6PWcd6js
----
- xen/include/xen/types.h | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
-
-diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
-index 6aba80500aaf..8b22a02eeaa4 100644
---- a/xen/include/xen/types.h
-+++ b/xen/include/xen/types.h
-@@ -5,18 +5,11 @@
- 
- #include <asm/types.h>
- 
--#if defined(__SIZE_TYPE__)
- typedef __SIZE_TYPE__ size_t;
--#else
--typedef unsigned long size_t;
--#endif
-+
- typedef signed long ssize_t;
- 
--#if defined(__PTRDIFF_TYPE__)
- typedef __PTRDIFF_TYPE__ ptrdiff_t;
--#else
--typedef signed long ptrdiff_t;
--#endif
- 
- #define BITS_TO_LONGS(bits) \
-     (((bits)+BITS_PER_LONG-1)/BITS_PER_LONG)
--- 
-2.30.2
-
+UL seems to be the best option then.
 
