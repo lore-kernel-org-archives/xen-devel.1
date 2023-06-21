@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4D9C0015E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41727C001B3
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 13:18:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552667.862977 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.552739.863008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBxj3-0003Ao-6M; Wed, 21 Jun 2023 13:18:21 +0000
+	id 1qBxj4-0003kh-SK; Wed, 21 Jun 2023 13:18:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552667.862977; Wed, 21 Jun 2023 13:18:21 +0000
+Received: by outflank-mailman (output) from mailman id 552739.863008; Wed, 21 Jun 2023 13:18:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBxj3-000393-1M; Wed, 21 Jun 2023 13:18:21 +0000
-Received: by outflank-mailman (input) for mailman id 552667;
- Wed, 21 Jun 2023 11:18:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qBxj4-0003jO-Km; Wed, 21 Jun 2023 13:18:22 +0000
+Received: by outflank-mailman (input) for mailman id 552739;
+ Wed, 21 Jun 2023 13:17:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wbwx=CJ=intel.com=jani.nikula@srs-se1.protection.inumbo.net>)
- id 1qBvqh-0002kk-IW
- for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 11:18:07 +0000
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 48e64795-1025-11ee-b236-6b7b168915f2;
- Wed, 21 Jun 2023 13:18:03 +0200 (CEST)
+ id 1qBxiF-0002zg-Oy
+ for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 13:17:32 +0000
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f6dd6812-1035-11ee-8611-37d641c3527e;
+ Wed, 21 Jun 2023 15:17:27 +0200 (CEST)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Jun 2023 04:17:58 -0700
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Jun 2023 06:16:46 -0700
 Received: from unknown (HELO localhost) ([10.237.66.162])
  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Jun 2023 04:16:58 -0700
+ 21 Jun 2023 06:15:49 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,30 +44,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48e64795-1025-11ee-b236-6b7b168915f2
+X-Inumbo-ID: f6dd6812-1035-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1687346283; x=1718882283;
+  t=1687353448; x=1718889448;
   h=from:to:cc:subject:in-reply-to:references:date:
    message-id:mime-version;
-  bh=bNOOeYVCQ7poh+/POpUoy8h5Fc7oKKTV5NlBm31y8T8=;
-  b=GTQMkg8yX3GS3BRzRBAU2xElsglEmpsLkyU5ksXXmULCIOKAAofkjgaQ
-   Y+nH9SiSMCXNlCx6bdBjiP7E0+RNmAMdG/rqazsvqQpIpwHeq3qI1eW2D
-   evn145J5ihxK1X9F6KqmEiazfvO3lK6gqQ3h1CzhDdXGYbIQd4MxtX6zE
-   6hjllkiWX9/Dxh1WNudiKJ/HmM0Ol/B4/r2b9JSc2NtLKfk2ZHzre7tGQ
-   laYAaKrdoxMVqmVnlv18Y38ON1FDxhVg22KuFpp+cY14+TTyKEsk9msNu
-   So+azKPMkYdA6Pvdc1EXvEGL88on9jKt/CqRZmMZtofZUx89pEFQi4VqU
+  bh=9eMWiG7JI6/9oPvFtdl/3iOGYIkGUexXwjKhm4v9hgQ=;
+  b=E3x3zWSViHXTq31hieRAmxmd0qnE/6FAUkYCsRv3qvCmW1rMj/sLMUhl
+   dCneY4JN3t8027LPp2buMW4cLh3Cq9FNwdoAKFV3QebAF//r7ALTshBN2
+   hZmOAE1WMXi9pZRepyCB+IrrH5SEQ6GJbVshw6K332PnZN0thfQCQNIAx
+   fm3nt2z7YsVWXLAntigf9bqkuh/y7FNSIqTbMTLiyUhBiCHgUPu46AF5I
+   5GW1Wkr/XOvULVcBMeEjj5ymNyr+wm99y2hBFewenALA5PQxk0vXA0uX0
+   2z2wdY//8Ni0OQ8l9zOo4cnJKktSbaRxknJ+Wo0H4MW6UxiYVY7IVnRu3
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="339758042"
+X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="446546934"
 X-IronPort-AV: E=Sophos;i="6.00,260,1681196400"; 
-   d="scan'208";a="339758042"
+   d="scan'208";a="446546934"
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="664623042"
+X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="664658294"
 X-IronPort-AV: E=Sophos;i="6.00,260,1681196400"; 
-   d="scan'208";a="664623042"
+   d="scan'208";a="664658294"
 From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Joel Granados <j.granados@samsung.com>, mcgrof@kernel.org, Russell King
- <linux@armlinux.org.uk>, Catalin
+To: Joel Granados <j.granados@samsung.com>
+Cc: mcgrof@kernel.org, Russell King <linux@armlinux.org.uk>, Catalin
 	Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Michael
 	Ellerman <mpe@ellerman.id.au>, Heiko Carstens <hca@linux.ibm.com>, Vasily
 	Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>,
@@ -84,10 +84,9 @@ To: Joel Granados <j.granados@samsung.com>, mcgrof@kernel.org, Russell King
  Donenfeld" <Jason@zx2c4.com>, Joonas Lahtinen
  <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, David Airlie
- <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, "K. Y.
- Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>,
- Wei
-	Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Jason Gunthorpe
+ <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, "K. Y. Srinivasan"
+ <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu
+ <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Jason Gunthorpe
  <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>, Benjamin Herrenschmidt
  <benh@kernel.crashing.org>, Song Liu <song@kernel.org>, Robin Holt
  <robinmholt@gmail.com>, Steve Wahl <steve.wahl@hpe.com>, David Ahern
@@ -144,34 +143,34 @@ To: Joel Granados <j.granados@samsung.com>, mcgrof@kernel.org, Russell King
  <ying.xue@windriver.com>, Martin Schiller <ms@dev.tdt.de>, John Johansen
  <john.johansen@canonical.com>, Paul Moore <paul@paul-moore.com>, James
 	Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, Jarkko
-	Sakkinen <jarkko@kernel.org>
-Cc: Joel Granados <j.granados@samsung.com>, Nicholas Piggin
- <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle
- <svens@linux.ibm.com>, "H. Peter Anvin" <hpa@zytor.com>, "Rafael J.
- Wysocki" <rafael@kernel.org>, Mike Travis <mike.travis@hpe.com>, Oleksandr
- Tyshchenko <oleksandr_tyshchenko@epam.com>, Amir Goldstein
- <amir73il@gmail.com>, Matthew Bobrowski <repnop@google.com>, John
- Fastabend <john.fastabend@gmail.com>, Martin KaFai Lau
- <martin.lau@linux.dev>, Yonghong Song <yhs@fb.com>, KP Singh
- <kpsingh@kernel.org>, Stanislav
-	Fomichev <sdf@google.com>, Hao Luo <haoluo@google.com>, Jiri Olsa
+	Sakkinen <jarkko@kernel.org>, Nicholas Piggin <npiggin@gmail.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>, Christian Borntraeger
+ <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, "H.
+ Peter
+ Anvin" <hpa@zytor.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Mike
+ Travis <mike.travis@hpe.com>, Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>, Amir Goldstein <amir73il@gmail.com>,
+ Matthew Bobrowski <repnop@google.com>, John Fastabend
+ <john.fastabend@gmail.com>, Martin KaFai Lau <martin.lau@linux.dev>,
+ Yonghong Song <yhs@fb.com>, KP Singh <kpsingh@kernel.org>, Stanislav
+ Fomichev <sdf@google.com>, Hao Luo <haoluo@google.com>, Jiri Olsa
  <jolsa@kernel.org>, Waiman Long <longman@redhat.com>, Boqun Feng
  <boqun.feng@gmail.com>, John Ogness <john.ogness@linutronix.de>, Dietmar
-	Eggemann <dietmar.eggemann@arm.com>, Ben Segall <bsegall@google.com>, Mel
-	Gorman <mgorman@suse.de>, Daniel Bristot de Oliveira <bristot@redhat.com>,
- Valentin Schneider <vschneid@redhat.com>, Andy Lutomirski
- <luto@amacapital.net>, Will Drewry <wad@chromium.org>, Stephen Boyd
- <sboyd@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-ia64@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-s390@vger.kernel.org, linux-crypto@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-hyperv@vger.kernel.org,
- linux-rdma@vger.kernel.org, linux-raid@vger.kernel.org,
- netdev@vger.kernel.org, linux-scsi@vger.kernel.org,
- xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org,
- linux-aio@kvack.org, linux-cachefs@redhat.com, codalist@coda.cs.cmu.edu,
+ Eggemann <dietmar.eggemann@arm.com>, Ben Segall <bsegall@google.com>, Mel
+ Gorman <mgorman@suse.de>, Daniel
+	Bristot de Oliveira <bristot@redhat.com>, Valentin Schneider
+ <vschneid@redhat.com>, Andy Lutomirski <luto@amacapital.net>, Will Drewry
+ <wad@chromium.org>, Stephen Boyd <sboyd@kernel.org>, Miaohe Lin
+ <linmiaohe@huawei.com>, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-ia64@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org,
+ linux-crypto@vger.kernel.org, openipmi-developer@lists.sourceforge.net,
+ intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-hyperv@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-raid@vger.kernel.org, netdev@vger.kernel.org,
+ linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-fsdevel@vger.kernel.org, linux-aio@kvack.org,
+ linux-cachefs@redhat.com, codalist@telemann.coda.cs.cmu.edu,
  linux-mm@kvack.org, linux-nfs@vger.kernel.org,
  linux-ntfs-dev@lists.sourceforge.net, ocfs2-devel@oss.oracle.com,
  fsverity@lists.linux.dev, linux-xfs@vger.kernel.org, bpf@vger.kernel.org,
@@ -186,75 +185,123 @@ Cc: Joel Granados <j.granados@samsung.com>, Nicholas Piggin
  keyrings@vger.kernel.org
 Subject: Re: [PATCH 09/11] sysctl: Remove the end element in sysctl table
  arrays
-In-Reply-To: <20230621094817.433842-1-j.granados@samsung.com>
+In-Reply-To: <20230621130614.s36w4u7dzmb5d5p3@localhost>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20230621091000.424843-1-j.granados@samsung.com>
  <CGME20230621094824eucas1p2b6adfbd3f15ff3665674917f419b25d3@eucas1p2.samsung.com>
  <20230621094817.433842-1-j.granados@samsung.com>
-Date: Wed, 21 Jun 2023 14:16:55 +0300
-Message-ID: <87o7l92hg8.fsf@intel.com>
+ <87o7l92hg8.fsf@intel.com> <20230621130614.s36w4u7dzmb5d5p3@localhost>
+Date: Wed, 21 Jun 2023 16:15:46 +0300
+Message-ID: <878rcd2by5.fsf@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
 On Wed, 21 Jun 2023, Joel Granados <j.granados@samsung.com> wrote:
-> Remove the empty end element from all the arrays that are passed to the
-> register sysctl calls. In some files this means reducing the explicit
-> array size by one. Also make sure that we are using the size in
-> ctl_table_header instead of evaluating the .procname element.
+> On Wed, Jun 21, 2023 at 02:16:55PM +0300, Jani Nikula wrote:
+>> On Wed, 21 Jun 2023, Joel Granados <j.granados@samsung.com> wrote:
+>> > Remove the empty end element from all the arrays that are passed to the
+>> > register sysctl calls. In some files this means reducing the explicit
+>> > array size by one. Also make sure that we are using the size in
+>> > ctl_table_header instead of evaluating the .procname element.
+>> 
+>> Where's the harm in removing the end elements driver by driver? This is
+>> an unwieldy patch to handle.
+>
+> I totally agree. Its a big one!!! but I'm concerned of breaking bisectibility:
+> * I could for example separate all the removes into separate commits and
+>   then have a final commit that removes the check for the empty element.
+>   But this will leave the tree in a state where the for loop will have
+>   undefined behavior when it looks for the empty end element. It might
+>   or might not work (probably not :) until the final commit where I fix
+>   that.
+>
+> * I could also change the logic that looks for the final element,
+>   commit that first and then remove the empty element one commit per
+>   driver after that. But then for all the arrays that still have an
+>   empty element, there would again be undefined behavior as it would
+>   think that the last element is valid (when it is really the sentinel).
+>
+> Any ideas on how to get around these?
 
-Where's the harm in removing the end elements driver by driver? This is
-an unwieldy patch to handle.
+First add size to the register calls, and allow the last one to be
+sentinel but do not require the sentinel.
 
-> diff --git a/drivers/gpu/drm/i915/i915_perf.c b/drivers/gpu/drm/i915/i915_perf.c
-> index f43950219ffc..e4d7372afb10 100644
-> --- a/drivers/gpu/drm/i915/i915_perf.c
-> +++ b/drivers/gpu/drm/i915/i915_perf.c
-> @@ -4884,24 +4884,23 @@ int i915_perf_remove_config_ioctl(struct drm_device *dev, void *data,
->  
->  static struct ctl_table oa_table[] = {
->  	{
-> -	 .procname = "perf_stream_paranoid",
-> -	 .data = &i915_perf_stream_paranoid,
-> -	 .maxlen = sizeof(i915_perf_stream_paranoid),
-> -	 .mode = 0644,
-> -	 .proc_handler = proc_dointvec_minmax,
-> -	 .extra1 = SYSCTL_ZERO,
-> -	 .extra2 = SYSCTL_ONE,
-> -	 },
-> +		.procname = "perf_stream_paranoid",
-> +		.data = &i915_perf_stream_paranoid,
-> +		.maxlen = sizeof(i915_perf_stream_paranoid),
-> +		.mode = 0644,
-> +		.proc_handler = proc_dointvec_minmax,
-> +		.extra1 = SYSCTL_ZERO,
-> +		.extra2 = SYSCTL_ONE,
-> +	},
->  	{
-> -	 .procname = "oa_max_sample_rate",
-> -	 .data = &i915_oa_max_sample_rate,
-> -	 .maxlen = sizeof(i915_oa_max_sample_rate),
-> -	 .mode = 0644,
-> -	 .proc_handler = proc_dointvec_minmax,
-> -	 .extra1 = SYSCTL_ZERO,
-> -	 .extra2 = &oa_sample_rate_hard_limit,
-> -	 },
-> -	{}
-> +		.procname = "oa_max_sample_rate",
-> +		.data = &i915_oa_max_sample_rate,
-> +		.maxlen = sizeof(i915_oa_max_sample_rate),
-> +		.mode = 0644,
-> +		.proc_handler = proc_dointvec_minmax,
-> +		.extra1 = SYSCTL_ZERO,
-> +		.extra2 = &oa_sample_rate_hard_limit,
-> +	}
->  };
+Start removing sentinels, adjusting the size passed in.
 
-The existing indentation is off, but fixing it doesn't really belong in
-this patch.
+Once enough sentinels have been removed, add warning if the final entry
+is a sentinel.
+
+Never really remove the check? (But surely you can rework the logic to
+not count the number of elements up front, only while iterating.)
+
 
 BR,
 Jani.
 
+>> 
+>> > diff --git a/drivers/gpu/drm/i915/i915_perf.c b/drivers/gpu/drm/i915/i915_perf.c
+>> > index f43950219ffc..e4d7372afb10 100644
+>> > --- a/drivers/gpu/drm/i915/i915_perf.c
+>> > +++ b/drivers/gpu/drm/i915/i915_perf.c
+>> > @@ -4884,24 +4884,23 @@ int i915_perf_remove_config_ioctl(struct drm_device *dev, void *data,
+>> >  
+>> >  static struct ctl_table oa_table[] = {
+>> >  	{
+>> > -	 .procname = "perf_stream_paranoid",
+>> > -	 .data = &i915_perf_stream_paranoid,
+>> > -	 .maxlen = sizeof(i915_perf_stream_paranoid),
+>> > -	 .mode = 0644,
+>> > -	 .proc_handler = proc_dointvec_minmax,
+>> > -	 .extra1 = SYSCTL_ZERO,
+>> > -	 .extra2 = SYSCTL_ONE,
+>> > -	 },
+>> > +		.procname = "perf_stream_paranoid",
+>> > +		.data = &i915_perf_stream_paranoid,
+>> > +		.maxlen = sizeof(i915_perf_stream_paranoid),
+>> > +		.mode = 0644,
+>> > +		.proc_handler = proc_dointvec_minmax,
+>> > +		.extra1 = SYSCTL_ZERO,
+>> > +		.extra2 = SYSCTL_ONE,
+>> > +	},
+>> >  	{
+>> > -	 .procname = "oa_max_sample_rate",
+>> > -	 .data = &i915_oa_max_sample_rate,
+>> > -	 .maxlen = sizeof(i915_oa_max_sample_rate),
+>> > -	 .mode = 0644,
+>> > -	 .proc_handler = proc_dointvec_minmax,
+>> > -	 .extra1 = SYSCTL_ZERO,
+>> > -	 .extra2 = &oa_sample_rate_hard_limit,
+>> > -	 },
+>> > -	{}
+>> > +		.procname = "oa_max_sample_rate",
+>> > +		.data = &i915_oa_max_sample_rate,
+>> > +		.maxlen = sizeof(i915_oa_max_sample_rate),
+>> > +		.mode = 0644,
+>> > +		.proc_handler = proc_dointvec_minmax,
+>> > +		.extra1 = SYSCTL_ZERO,
+>> > +		.extra2 = &oa_sample_rate_hard_limit,
+>> > +	}
+>> >  };
+>> 
+>> The existing indentation is off, but fixing it doesn't really belong in
+>> this patch.
+>
+> Agreed. But I actually was trying to fix something that checkpatch
+> flagged. I'll change these back (which will cause this patch to be
+> flagged).
+>
+> An alternative solution would be to fix the indentation as part of the
+> preparation patches. Tell me what you think.
+>
+> Thx
+>
+>> 
+>> BR,
+>> Jani.
+>> 
+>> 
+>> -- 
+>> Jani Nikula, Intel Open Source Graphics Center
 
 -- 
 Jani Nikula, Intel Open Source Graphics Center
