@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AE8EB64D7
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 07:38:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.552497.862617 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21565EB64D7
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Jun 2023 07:59:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.552504.862627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBsPT-0000Uq-VY; Wed, 21 Jun 2023 07:37:47 +0000
+	id 1qBsjr-0002zI-P7; Wed, 21 Jun 2023 07:58:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 552497.862617; Wed, 21 Jun 2023 07:37:47 +0000
+Received: by outflank-mailman (output) from mailman id 552504.862627; Wed, 21 Jun 2023 07:58:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qBsPT-0000Uj-Ri; Wed, 21 Jun 2023 07:37:47 +0000
-Received: by outflank-mailman (input) for mailman id 552497;
- Wed, 21 Jun 2023 07:37:46 +0000
+	id 1qBsjr-0002zB-LZ; Wed, 21 Jun 2023 07:58:51 +0000
+Received: by outflank-mailman (input) for mailman id 552504;
+ Wed, 21 Jun 2023 07:58:49 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=RZUy=CJ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1qBsPS-0000Ud-Ax
- for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 07:37:46 +0000
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur01on0628.outbound.protection.outlook.com
- [2a01:111:f400:fe1f::628])
+ id 1qBsjp-0002z5-KJ
+ for xen-devel@lists.xenproject.org; Wed, 21 Jun 2023 07:58:49 +0000
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on0602.outbound.protection.outlook.com
+ [2a01:111:f400:fe02::602])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8277aed0-1006-11ee-8611-37d641c3527e;
- Wed, 21 Jun 2023 09:37:44 +0200 (CEST)
+ id 71a9a25e-1009-11ee-8611-37d641c3527e;
+ Wed, 21 Jun 2023 09:58:44 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by PAXPR04MB8688.eurprd04.prod.outlook.com (2603:10a6:102:21f::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.37; Wed, 21 Jun
- 2023 07:37:40 +0000
+ by DB9PR04MB9749.eurprd04.prod.outlook.com (2603:10a6:10:4ed::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.23; Wed, 21 Jun
+ 2023 07:58:41 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::e442:306f:7711:e24c]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::e442:306f:7711:e24c%5]) with mapi id 15.20.6500.036; Wed, 21 Jun 2023
- 07:37:40 +0000
+ 07:58:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,141 +49,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8277aed0-1006-11ee-8611-37d641c3527e
+X-Inumbo-ID: 71a9a25e-1009-11ee-8611-37d641c3527e
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MbdCG2AldNJY3vGUEcmUDiKB9vsQO1iQHUkyycDkWZFKYbP7vOwWY9JxTZkhz3gVNAfwoskPR26omo13HMlh0K0Vrq9ZLqxI82EcaiNEZpd4nEtYZ6VTGzYdsly4/B30LSBY/kr6/UmAcOIr7vIEXFV98ncKXOVlEVEYSERJ5qC7qw7SHnVg5YYy69OIww5S1UYOVnpI/bo/tgLRGFMFJKsBjyiYf9ZsjwovyDvx5XyHx1yqx4L1xfnfi9oFdYN80lOTidA0FY9Rbk3I6J33AvYLDWnIJInK3GpyQngJazyPvJCkgrY+bnYXQoo6zfaEgn0tFa5D+qgMWin2Z5B/NA==
+ b=Q1bNX1X6YgGGLMS19Dbm83EdrEd/IKGUdns+7WRSX1DOyyHQ8xIKQ6cqYKhZ/EqUWWa6qbUn9ZlNu9j/Oxp4AtLFNN4EFlSKZqcaHoQlAYHBXISyXB2p0TPDmUkkq/TRitXJvWCcuhy9a55fuiIMGNEs9fWLu9hrZ4l21c+ZI3CK4Jc06aDJ32fw4QnSLBFVRMJ5ngcOgi+0HV95iPXyjXTmay4kfUyuggt0lN2jWLpxsVH16HjxgDTLtNJqg6dtPqVLa+HqXsx5X8MmswWwJgvVR2AZOLOYGG4hBHCeFkerT7EDxAlrsgXSPnrGHRXpoO/0QzzOu06Gj2qUk+6x5Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EvIT58V+xKK+dwMjcJKjNZS1UgUeGFEnreN1wDt/KGQ=;
- b=VAA9yoagcfCxpqwgUhrlfMVbCLUPbYxk4Lis9Z06yXqI4Sb4lO/7UAlFJbcFtD0fK/4Hf4geitunh5Rws/eoB+z1mF2VlHhAs/4mCyktV6Ldt7+y4gZFHXLaJU+m1nzdWZ+oBw+qZQcrpNTfYHg/hGJ7k1oDA4wni46U/r8edj7G5AxZkLbmXpEO4IjFkUiSR1GnxQxSi+9aEDazdfTmcQDfcW7T/8x27NxsVKGdVnyt8T0YT+w3TKPyFzRfnqArjOGMK0MecLftJNnj2vzVUfyJKtV7B3Bq5qR3Sq9rC7GKFtX5cOutVkXzq3bOWAM2Rcq37gryXk9IfZ3X2Z6Njg==
+ bh=DAfFwxHXDSjBDLqPWIAXU5ZPqOr60cP91v0ziC8JE8A=;
+ b=Wd7hO93skmqVZ3iS6oNJ5DFz7j95rZj/8kKYmm2Qhb7OPq2OP4JxD//XOpJX9b8KnoK7RzLN0ZsLgTuaWvi8WhBb6ow53pFnzH1nfuDx0gmWx89i1BunODK8G4zoW7MXIyGBpuBGMUeurMqy/fvMW+nYOCRi4zlXbAQAS/+wZ6GGVpcXgUhbrLgu/wBCzPuxDUqpaHoqkH8nmByq9Jwjy35BR/0lpTp3lunjHFSUIaCTF/UGZ2lOlh6dCm9aBsx4Cec9+3VaHhQqXayzR+EB6/hJ5AwZA61xNs+f1TanvyPOpPQIjSWI663/pa3ffQiQ2jwySZXIAI5+9IOAQxI4XQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EvIT58V+xKK+dwMjcJKjNZS1UgUeGFEnreN1wDt/KGQ=;
- b=GjAeV2CIYV8hXa4GB/YQbFyOT9PRJLzl1lkchwT/hYu8bUnvX1Vpdv52YzCXoU1i1B46ad2XuKlFoexWH+sTDctQ6O2tWa65KFB7h1XIJ6SDkauBou+0tU9FftJrmFt9563QB0SNYecWEA16Q/7v9Dope4foSdDV62XoebSBfCHIJqHKRPfi+tbNsH53Jwg1d0bE00pfJuFFNRtFRKKpQ2kHJBnCQv/5W4ORGdkMVWsTY3VMHiBCggtCFZPyv95smkkdNxgqCluS4ytCK9z98HDuLFCMLqP9ZTQxPEkWbobsT/99PDSBHeey3lWfbk4rVuDMtLG+x6F8RhQt6dYkiQ==
+ bh=DAfFwxHXDSjBDLqPWIAXU5ZPqOr60cP91v0ziC8JE8A=;
+ b=X6iW/bD3yWoKPv2UwGuAMN0phBe2LH9LcImLBcrFdzMnQbAVa5OALgch6OcGrN1AlbQtPF1x/Tuhi3mtxcYE6Hy6/FqWYndqCjll3aKovfxwSiwVKz3DMzNMRsggmfjQV/iPCtOTwEVGMRBMeecmdFF//7yTjopwDlncCMzOag+qCjyN0HgJn4kQP4Usa9jEnrVk3zL3l5q3T3ZTwVUnwBISCLA3jyrURFmlQpOM6oFvA2W+og/Dpk5k1eJILDvTEq9EA6Vw37Jx2uUORjsxOwFCAUSxxfwMKc04+um7bWFzatPITUSxS/g6oHP5aC5ekSEjd8tCTqg2+P0ZiVyc/A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <3daf5b51-cf5f-b9c7-b02e-0db5b48aa03f@suse.com>
-Date: Wed, 21 Jun 2023 09:37:37 +0200
+Message-ID: <05678680-e96b-3ab7-7955-2a4f99c971b0@suse.com>
+Date: Wed, 21 Jun 2023 09:58:39 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
-Subject: Re: [PATCH] x86: Drop opt_pku entirely
+Subject: Re: [PATCH v4 06/15] cpufreq: Add Hardware P-State (HWP) driver
 Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Henry Wang <Henry.Wang@arm.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20230620174704.3907275-1-andrew.cooper3@citrix.com>
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20230614180253.89958-1-jandryuk@gmail.com>
+ <20230614180253.89958-7-jandryuk@gmail.com>
+ <66771ebb-7d56-ca84-89bc-14f69fe62bd6@suse.com>
+ <CAKf6xptNyPwMghjgxYBiU-_DU08CLc0S7rLusL4F3JViC6z0VQ@mail.gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20230620174704.3907275-1-andrew.cooper3@citrix.com>
+In-Reply-To: <CAKf6xptNyPwMghjgxYBiU-_DU08CLc0S7rLusL4F3JViC6z0VQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0035.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::22) To VE1PR04MB6560.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0119.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a8::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|PAXPR04MB8688:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97c193e8-979c-48f7-8ebe-08db722a642d
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6560:EE_|DB9PR04MB9749:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7db83d52-a987-4c22-5c23-08db722d542c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	6FyQDnjlPC9NsO8Y7RsHiTfz0pdzpVjac6trnFrzT2FnFyb/7HJXC9jXSVcihInwHqZA54I19UJqZBrfYL6gscpM3+bfRe1gbNOqCARBO6dbH3pxMktXmeMBj4pshoSEafnGQtlIHHkl1u7+D3KFNIVzgeGLpRxW8m+zzcZ08GTkRjwIiIJICj1NWtn/ljsrtMZ3MF3qhAT0Lhu8aZQKtTpc2hA8IpZLGbFsNDPQEIlRQyv2GMZuT8vsJ6yl7FaJk2/qNiP0hs1KiQG7AhsAfqBLd1/5NO+IyJqJQFUNO4qt1u50nCTIF+KJbr8WnhjfjCIaN8ebtaWcB6OV/mmc40A/CqbH1Y4cC1MbuyRzUxHoGkIravo7fQrdjyyMIfndGeS4MQtr34F4FddAVdaAaZRpZ2CgnbCIU54SmZ+hffQHcQCqyY28XLFyNz78BfhzHxRCQSgoP9bbgAjkxZnGP9E44VSJr7nJkQNnhbLrHfm3/4gYQqDjoCkIWh6eEGiXsMYegrM5kIbO0sMP8gVQQ+sBP9yK4fpI8NSCgSH+0W84IEmSHUD+TWeq4DQYKnT1y2zyLeXUFDMNbIDSZ5ZRJZsoOOxHSe6bLz8HKoA6A9LZrI87s5Mbkg6QPSVmObgYwcnajGVokVY5XeTujLc2LA==
+	Jtz3k5cf4JBr9Nmv/e6gJ+svHeDoSoESHIBXla080KWdF/13dSMsZ+sYaYekFjXM+x/wSM7RMNkrmM8or/zFGMKKd1XXW4vVpx1pcJwjqkK6d3uhGc7axAz28fXA56l+CNpfM9nYptT50ZKo6qJRg4cZfLV28MkYOacvxm/WkpogpOn8qW/6Vtes01LK5Tm4I2HAi7WzzvbPsRTcZqSjiIjVSLPQx4mbGQG5c5W0tE9smsvpfx5ULN9v95QozkAIn9Dn9Waph7R0XBu+0C6CShasE9TB16hc4umiQdFPjQWtsSqAmQrqVKKbgZm37pYro6W1JSzVdglpFvMZF3MddHsWl4wVyzzg/eWDeWN7XxmSt1fzBt5PEsBiVgZEpxTDo+SdV6V/b68c9P1X23VTjZn6g7F7WGK1MC1KBnZ5USKLK1korMxBYGosJoz6iA9am3lOvVFlznKBOwV+wx54UZLW5h9KL3OJtMBN/6KggLxpYP23gPFo5pyhoyvsAGeWuVUQWoFTDPmT0vWrvC8UQZF3gPquoMKRi1xub0gJRl1RXb/NNofXii3YU4MABdVjLEGfz+AQ4Ugr7DNgPV8R5yPF5rZPeSpteulC3NOGQmISM90BpfDjVdNu0Od49Zv9hvOF5oExWVBI1hAKRAUJnz95CpN64M5YrILtqdtCvyQk9u6Xyq0DSFB0kyj/E/DR
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(346002)(39860400002)(366004)(396003)(136003)(376002)(451199021)(6506007)(26005)(6512007)(53546011)(186003)(6486002)(36756003)(86362001)(83380400001)(38100700002)(31696002)(2616005)(54906003)(2906002)(8936002)(316002)(8676002)(31686004)(41300700001)(5660300002)(66476007)(66556008)(6916009)(66946007)(4326008)(478600001)(6666004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(346002)(366004)(136003)(396003)(376002)(39860400002)(451199021)(31686004)(6506007)(66946007)(54906003)(66556008)(478600001)(66476007)(36756003)(2616005)(31696002)(38100700002)(83380400001)(86362001)(41300700001)(8676002)(6916009)(8936002)(2906002)(6486002)(6512007)(186003)(26005)(53546011)(4326008)(316002)(5660300002)(45980500001)(43740500002)(309714004);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bTkwOWFLTDZjaU16T0dCN2Y2SHhHbnVpVENVZzR2RnhPSjZkYjJJQlV6aGNW?=
- =?utf-8?B?T0djMGV6TERENEtNNHpZeW1RbTg4SDBkVlJRcWVJdDN2NUZhVmxQd082RXU3?=
- =?utf-8?B?Q3JPTGh4Z3lYVitDbmhMWWEvSG93enBkNGIwL1F1K0ZHYy95QkZ4RFJjWHF2?=
- =?utf-8?B?VFd5TWlvT1dnOXhyNnNGcGpsQnFhcHU5YSsvR0VnQ1Z5M1U4TCtNcURlU1NR?=
- =?utf-8?B?NTZKVEp6eXh1REpuVkxieU9ESnAvZW9uR2ZlUFdvWTdlVVMxeVR2azFWV3Mr?=
- =?utf-8?B?UVB6ckVSQnVJTXV1ZGp6b2dNWDh3Y1NwTTV4QjlkSnh5NlhsNytDTWlSR053?=
- =?utf-8?B?bUNPN21XVFFJblJRemthTGZSNG5CNkJhcXhXUy8ybmRsNlBxaUZWZnRqNjhE?=
- =?utf-8?B?ZXBLVXQ0VmhFVUlKb1BncTJ2R3pNV0ZQTGthMnRKdDYwNXZwUHU1QWFualJk?=
- =?utf-8?B?M1RVWTk0Rk0rRzQ5RHpVWmMySXE4TUNOS3ZIVjlpcVB6d0N3amp4N3NqbWEy?=
- =?utf-8?B?NkNTZEJnZURrRjB5Q2crNkV5Tk4yM2psSUxtc2RnM1hUYjFrdjVacXYzQUE0?=
- =?utf-8?B?M2tFZ3JLQ1NlS0UvbEhtaEc5NUtVZWxoYXIrNWNFbkNyMkYzL0hta1pMVVE0?=
- =?utf-8?B?L3U1SHV5TVAzU3RPU1NsODM5UjFadFpSbjJSUkZRdkxxcDF2bEdvZTNWck40?=
- =?utf-8?B?REFpWFhxZk5hRlRoNytYbzRFOHhCcy9IU0U1bDNwQ3ZLbjBERDV1ODJRMEI3?=
- =?utf-8?B?WkxIVDdvczZPdVpPREVPU3FoYllzbGlvUFF2RzU2KzlIemhpQllDdDJQWVps?=
- =?utf-8?B?VFgzTEtBSWVrRkk1anR4eDA1cDQ2eTZWekdzS25rK1dwZ2NpSjVvUUk0Nnc3?=
- =?utf-8?B?Mk41VVoyZHJLdXZhd0lCeEs3aDllRUdLTW03Wk03c056bE5VdU5EbkE1N1FC?=
- =?utf-8?B?Zk8xMmxMV3pCVlpla1BuS29CY3hWdUNaV0hHc09HZlIyZHB3TU5QTGRHTXZF?=
- =?utf-8?B?alJjWWs4eGdFd3RtOEM1QXN1M0pRVThNYVpuZUcwMWo0anJWR3J3YkJlbXJa?=
- =?utf-8?B?TUE0YUgyM05yMThtbDZXU0FVcm5aamFVNXVzNFRpZ2M4WXNVbUJSTVBrL3Z3?=
- =?utf-8?B?MTVrVzRuZG04dXpUVjZpSjRYa1FkUUMzdGQ5RGk5VStGZWpWNFVXN1krRHZ2?=
- =?utf-8?B?Z05wYlBSVDluZjliUFFBWktZNm0vVWhRd2lNVTdIM3dET0tMQkxVQk40MzlQ?=
- =?utf-8?B?d0ZCU1cvTDJkZnAzR3RaRWh6dEM5WWNYZ1ZiaG4yRE1KNEdDQzlVOVJhdE9s?=
- =?utf-8?B?bXRBYXNqbUV2NEJSaWNHMGs3c09OdjBwNG9xN1g1Y2t1L29ycXF4VW9oSXVk?=
- =?utf-8?B?aUd2TU01a0ExemdHK0kyQW5HQmUrWVhEaERWNVh1WENuR1NyQmdiNWtXazdv?=
- =?utf-8?B?OXRMdmlJL1IyRm9jNjlxMVl6K2IzNWFFRlJSU0NJTWFWTmR5NlhTYUVRZ0c4?=
- =?utf-8?B?YVA2aVZLSExpcm9rdGhPTVFGbTZ3UWpYZTg1MlJrL0JBWVBMWllQSElHMzVj?=
- =?utf-8?B?eGpvMDhEbEZwSjQvQ2VpMVNwQXdHc011eHBSZnRrVzdtSjNMaFVhbHBQcDdK?=
- =?utf-8?B?TXh3NnFLVytINVdJZ1lZcUhWYmRXaTRrYW5VaGZ4RjQyVWdNRHpEbWFDVUFD?=
- =?utf-8?B?WUswK2xodVpiN04rUjR1UStFeXMvOUZKQldaZ252Vm9GNm1mRWZHVGV0L0k4?=
- =?utf-8?B?UEc1Nm9abFVjNjIwNmY2NHNWR3daUktoY1dvZVJ4RUtlbmp5M1U0cThxUkIy?=
- =?utf-8?B?cElvNzByMWYrR0RHV2JHcVA5N2FnNEdwbFdkTDhoQm15UlJ0K0ZLVHdWUFBi?=
- =?utf-8?B?OHQ5ZkRMYXdTV216QlZYVWtwVzFORE9UdDd1QVFoc3F4TitlUU1ObWZUbzgz?=
- =?utf-8?B?dlVnNVI2dTRIZE1GM2s1NVlTenVURUR3WDhremRlNmJVNTg3MEFSLzJET3RS?=
- =?utf-8?B?ZWY0d3NPUUF6RVo3bWJlcWFQcGFGbURHdWd5aWE5Vm5LRjRxYXA4Sk55TVJv?=
- =?utf-8?B?SlppYi9SRUhPZ0VNak1MZkt0b1lBNTAyY0hvSGxhTFdmUjJ2WkRKekh5cWVU?=
- =?utf-8?Q?EWN6KEM0XpzlZXbcMexx31kVy?=
+	=?utf-8?B?S0hGUUU2UDNhUU85THFhdUQwOXpiZXkwY0tqRHFwOVRwaWNwMmhhd0tEZ3Ra?=
+ =?utf-8?B?OFYwUjZSMUxMejRnQ3MxRDZ3M0pFaDRUNTJNejlkNWdaRk5wNXg0ZVhtNkNa?=
+ =?utf-8?B?ajBtcDcxMmtraFphenh1VllzR3plT01RcXlDOVRMVWcxTlJkVFVIVUZpbDkx?=
+ =?utf-8?B?Qno4KytFR3Z6bFJaVFFyNXpxTElBL2hDVEgxc0hXUGtzUDN5Ky9FZC9wbVhH?=
+ =?utf-8?B?bkpaVk1NT1RPK3NQRm5CdzNaTEtBWjlMaDYxRjNLVUV6NlBGcXpJbnZQSGVj?=
+ =?utf-8?B?akUrN1Zsay9JQmFHbk5JaUlmMGl0dlJUSXEvUEcxU1c3M1FaTGlaRDJzZ3BH?=
+ =?utf-8?B?NEpXMi92Y3h0ZDlKeEZFZFlxcy9Zb09kRkZscm1ja2R6RnNCcElhbk0zbk5O?=
+ =?utf-8?B?aTZBTmJ2anpKTnE0Z2xSa0h6Vm9MckNCWGxoNVdqRXdCU2MyZFIxd25zQlZq?=
+ =?utf-8?B?Y3o3azM0blNOQVNsdnhlMFJqZy83R2cyZnFvQ3c5MGV3N1FUN3FhZzhOUWNj?=
+ =?utf-8?B?OGNzd2dEaTZqOE5sZ1NsdmNnL3pWc3dZSno3ZHlnM3hoOE1ISGtOUzFlTDZz?=
+ =?utf-8?B?TWJXTU1POFFKV2M5MnFKYk9QV1lDQ3hJbnpUWDBWNUppenk0dG9lUUFNSlhU?=
+ =?utf-8?B?QzhSOE15bUl6c1FGYXUyOXdVQ1B1dHR6dEI5cXNuZGFqeFNkUDVhVVhFVmRl?=
+ =?utf-8?B?RURRYTFSTnVidy9vSFk0QmdSYlcyNXl6S3IyV1NFblBCY1g4MGJFNUZwZlpB?=
+ =?utf-8?B?R3FUQWl6Rm9RVWJ3TnhNQkFjSWdVSEpTay96WlFLSFhyWXRiNitwSXJJN3N2?=
+ =?utf-8?B?ZmZEanVIM21oRzAwT3pCLzk0RVE1cUFZUXF1MDVoRUVtN0lFU2JoNlBQTlVj?=
+ =?utf-8?B?RXRKcmdaTU44SFg1TVFsY0xzWHZpdU9UU3VTbVJ0dGxEZGR6bGM5WTBiS1hO?=
+ =?utf-8?B?ZHBXVUpoYnMxdzRFV0c2ZXdjdDBGcHg5WU5ZcmI2TmRpdGExNzNCWmtKdTRz?=
+ =?utf-8?B?MDdSaWJOb0N4TmluUTZRQldxa1k5dUtNaVpLVzdoUVdscjFIZWc2Y09VM3g1?=
+ =?utf-8?B?RkNtVGZhcXpycUlIRDErWEFsZkRNOWxwRVIwamVjUExIR2FNaFNrNXIraTJP?=
+ =?utf-8?B?M0tPOGJEVGtwaEVON0lFcmdDTnpLK3lKa1pTN0N1SXJ2NVg1NTQyaU13VXIz?=
+ =?utf-8?B?Ui9KMTM2QTRrR2RFdm5aa0lCYmFXemp1a2psQnQ5TGthWEVBeGNQbG1Qd0lR?=
+ =?utf-8?B?RDRNYUZKWFdwcExRMndURnBIZVBKMGpiUEx4MWZCT21Fb0kwUnRKUWd5VEhG?=
+ =?utf-8?B?Ym1VUUxsUXJKdzBJdzZvb0R2eTFSc1RYL1pPaXlkTXBPWDR2Nks0UWtUOU5s?=
+ =?utf-8?B?Y2FxREhsT1Znbm0xOGFQU1F3bzJCOUhtTHM4VWNxbXdYVHJjQ0VSMVpjWVZr?=
+ =?utf-8?B?RytNTExLTm5TbjZxbEVtb0ZIRmFIQ0ZzNTU4R2o3QWoxVGxTdVFFdHBMeDRZ?=
+ =?utf-8?B?WTJiQ3Z3UXRGVmMwM2V2M21STnF0Vjg5aXlLcjFVSElmQ09XZU1aVG0xZVNa?=
+ =?utf-8?B?S2prWG9idHRvV0wyS2tDTFpmRFVPSTd5MlNVSkdGbENFUjV3aVBXU2xMbHhO?=
+ =?utf-8?B?MjNIVVhZNExDWm1TWTNzd1BxNGRvRkY0RjY3TEhBMG9MYmVtMlRJOGVpbVlL?=
+ =?utf-8?B?QlV0T3U4NnEzTmNvWnVpWDE2N1JId29maTRKU0x2UW9Sa3JYVS9EdFNnU0xI?=
+ =?utf-8?B?M2FXei9DNm9nOFZnVy9BMWdTTnozWGV3Z0ppSHhRTW0vQjdST3VJN3dQa3pM?=
+ =?utf-8?B?NUpSRlhHOEZCUTE0YmFpU0t3QjY2K3hibDVMTTNOZGw3R0tjWnRBQUU3OG8w?=
+ =?utf-8?B?TmxmMHNFRmdNRlFZUVcvNDRjYXR5OWtQTndQNUZYZHZaWUYyUVRoL0I5Z1Qr?=
+ =?utf-8?B?dlBlSEM3T3lXU2J0WndXVHZSajRSNS9SUnF5N1lyaVQvVURnY3dObFBTZksv?=
+ =?utf-8?B?dlB1OVdEOENrOEwva3ZpSWphd2NTVjI4VEpFcW5QeFpsa0ErRlAwUElKeHps?=
+ =?utf-8?B?Q2JIMk9OcVVUMUgvN1IrTWxZZXRwR3BpNWxsZHpFK2g3dXNrdit3dUtDRmZw?=
+ =?utf-8?Q?a6jJAmmb3oassOnRwu7Gzjkv/?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97c193e8-979c-48f7-8ebe-08db722a642d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7db83d52-a987-4c22-5c23-08db722d542c
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2023 07:37:39.9562
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2023 07:58:41.5473
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nv0CBA3afNlft0005O3IzADrh02MBkwVm4H74b0MWKxI/CMX56g1+z6YtXn6cRxTtDd8TKVH8MA4ZC0XKYLjYA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8688
+X-MS-Exchange-CrossTenant-UserPrincipalName: VWWROOIpM6Y99+Te/mZKiT3jF81hwD1OrVQBpa/T7sJEX3VhmfoKQbaBbZUeZhauWN8Ac9CbFbxz2UFA1LF8Vg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9749
 
-On 20.06.2023 19:47, Andrew Cooper wrote:
-> --- a/CHANGELOG.md
-> +++ b/CHANGELOG.md
-> @@ -25,6 +25,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->   - Add support for AVX512-FP16 on x86.
->   - On Arm, Xen supports guests running SVE/SVE2 instructions. (Tech Preview)
->  
-> +### Removed
-> + - On x86, the "pku" command line option has been removed.  It has never
-> +   behaved precisely as described, and redundant with "cpuid=no-pku".
+On 20.06.2023 20:14, Jason Andryuk wrote:
+> On Mon, Jun 19, 2023 at 7:38 AM Jan Beulich <jbeulich@suse.com> wrote:
+>> On 14.06.2023 20:02, Jason Andryuk wrote:
+>>> Falling back from cpufreq=hwp to cpufreq=xen is a more user-friendly
+>>> choice than disabling cpufreq when HWP is not available.  Specifying
+>>> cpufreq=hwp indicates the user wants cpufreq, so, if HWP isn't
+>>> available, it makes sense to give them the cpufreq that can be
+>>> supported.  i.e. I can't see a user only wanting cpufreq=hwp or
+>>> cpufreq=none, but not cpufreq=xen.
+>>
+>> I continue to disagree with this, and I'd like to ask for another
+>> maintainer's opinion. To me the described behavior is like getting
+>> pears when having asked for apples. I nevertheless agree that
+>> having said fallback as an option, but I'd see that done by giving
+>> meaning to something like "cpufreq=hwp,xen" (without having checked
+>> whether that doesn't have meaning already, i.e. just to give you an
+>> idea).
+> 
+> I know you disagree with the approach.  I implemented what would be
+> useful to me and Marek.  It felt counterproductive to implement a hard
+> failure mode that is unsuitable for my use case.  Also there was the
+> possibility you wouldn't mind when you saw how it was implemented.
+> 
+> Yeah, asking for an apple and getting a pear can be the wrong thing if
+> your recipe calls for apples.  But getting *some* fruit can be better
+> than no fruit if you are hungry.
 
-Nit: Missing "was"?
+;-)
 
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -1950,16 +1950,6 @@ for all of them (`true`), only for those subject to XPTI (`xpti`) or for
->  those not subject to XPTI (`no-xpti`). The feature is used only in case
->  INVPCID is supported and not disabled via `invpcid=false`.
->  
-> -### pku (x86)
-> -> `= <boolean>`
-> -
-> -> Default: `true`
-> -
-> -Flag to enable Memory Protection Keys.
-> -
-> -The protection-key feature provides an additional mechanism by which IA-32e
-> -paging controls access to usermode addresses.
-> -
->  ### ple_gap
->  > `= <integer>`
+> As implemented here, with HWP default disabled,
+> no command line -> default cpufreq=xen
+> cpufreq=xen -> only cpufreq=xen
+> cpufreq=hwp -> try hwp and fallback to cpufreq=xen
+> 
+> If/when HWP is default enabled:
+> no command line -> try hwp and fallback to cpufreq=xen
+> cpufreq=hwp -> try hwp and fallback to cpufreq=xen
+> cpufreq=xen -> cpufreq=xen
 
-Elsewhere you said that we kind of imply that only the explicitly named
-sub-options of cpuid= are supported. If that's the case (which could do
-with saying more explicitly), you will want to add "pku" there in order
-to not regress what is (deemed) supported.
+At which point the question would be why to have such an option in
+the first place. Plus how to specify that fallback to "xen" is not
+wanted.
 
-It also looks as if the speculation control related enumeration there has
-gone stale / is now incomplete.
+> Unless some other idea comes to me, I guess I'll look at implementing
+> "cpufreq=hwp,xen".
+
+Thanks.
+
+>>> +static bool hwp_handle_option(const char *s, const char *end)
+>>> +{
+>>> +    int ret;
+>>> +
+>>> +    if ( strncmp(s, "verbose", 7) == 0 )
+>>> +    {
+>>> +        s += 7;
+>>> +        if ( *s == '=' )
+>>> +        {
+>>> +            s++;
+>>> +            cpufreq_verbose = !!simple_strtoul(s, NULL, 0);
+>>> +
+>>> +            return true;
+>>> +        }
+>>> +
+>>> +        if ( end == NULL ||
+>>> +             (end == s && (*end == '\0' || *end == ',')) )
+>>> +        {
+>>> +            cpufreq_verbose = true;
+>>> +
+>>> +            return true;
+>>> +        }
+>>> +
+>>> +        return false;
+>>> +    }
+>>
+>> Would be nice if the handling of "verbose" didn't need duplicating here.
+>> However, if that's unavoidable, did you consider handling this as a
+>> proper boolean instead of the custom way cpufreq_handle_common_option()
+>> also uses?
+> 
+> It seemed more complicated to try to re-use the "verbose" handling
+> from cpufreq_handle_common_option(), especially since minfreq and
+> maxfreq are also in there.
+> 
+> I didn't use proper boolean parsing to remain consistent with
+> cpufreq_handle_common_option() and the command line option
+> documentation.  I'm fine with switching it to a proper boolean if
+> that's what you want.
+
+It would be nice if you could do that here, but I won't insist.
+
+>>> +        goto error;
+>>> +    }
+>>> +
+>>> +    /*
+>>> +     * Check for APERF/MPERF support in hardware
+>>> +     * also check for boost/turbo support
+>>> +     */
+>>> +    intel_feature_detect(policy);
+>>> +
+>>> +    if ( feature_hdc )
+>>> +    {
+>>> +        if ( hdc_set_pkg_hdc_ctl(policy->cpu, opt_cpufreq_hdc) )
+>>> +            goto error;
+>>> +        if ( hdc_set_pm_ctl1(policy->cpu, opt_cpufreq_hdc) )
+>>> +            goto error;
+>>
+>> If either of these fails the very first time through (presumably for the
+>> BSP), wouldn't a better course of action be to clear feature_hdc?
+> 
+> So if HWP is working, but the HDC part fails, just clear feature_hdc
+> but keep using HWP?  I don't know how likely that is to happen, but
+> that seems reasonable.
+
+Just to answer the question - yes, that's what I was thinking of. Maybe
+accompanied by a log message.
+
+>>> +static int cf_check hwp_cpufreq_target(struct cpufreq_policy *policy,
+>>> +                                       unsigned int target_freq,
+>>> +                                       unsigned int relation)
+>>> +{
+>>> +    unsigned int cpu = policy->cpu;
+>>> +    struct hwp_drv_data *data = per_cpu(hwp_drv_data, cpu);
+>>> +    /* Zero everything to ensure reserved bits are zero... */
+>>> +    union hwp_request hwp_req = { .raw = 0 };
+>>> +
+>>> +    /* .. and update from there */
+>>> +    hwp_req.min_perf = data->minimum;
+>>> +    hwp_req.max_perf = data->maximum;
+>>> +    hwp_req.desired = data->desired;
+>>> +    hwp_req.energy_perf = data->energy_perf;
+>>> +    if ( feature_hwp_activity_window )
+>>> +        hwp_req.activity_window = data->activity_window;
+>>> +
+>>> +    if ( hwp_req.raw == data->curr_req.raw )
+>>> +        return 0;
+>>> +
+>>> +    data->curr_req = hwp_req;
+>>> +
+>>> +    hwp_verbose("CPU%u: wrmsr HWP_REQUEST %016lx\n", cpu, hwp_req.raw);
+>>> +    on_selected_cpus(cpumask_of(cpu), hwp_write_request, policy, 1);
+>>
+>> Is this at risk of being too verbose when the verbose option as given?
+> 
+> For my client use case, it seems fine since there aren't too many
+> CPUs.  But I think you are correct that for a server use case it would
+> be too much.  Hmmm.  Do you think I should drop it or make it
+> ratelimited?
+
+I think it may have been useful for you during development, but I'd
+rather see it dropped. Anyone needing to really fiddle with the
+driver can add back whatever logging they deem necessary for what
+they do.
+
+>>> +    return data->ret;
+>>> +}
+>>> +
+>>> +static int cf_check hwp_cpufreq_cpu_init(struct cpufreq_policy *policy)
+>>> +{
+>>> +    unsigned int cpu = policy->cpu;
+>>> +    struct hwp_drv_data *data;
+>>> +
+>>> +    data = xzalloc(struct hwp_drv_data);
+>>> +    if ( !data )
+>>> +        return -ENOMEM;
+>>> +
+>>> +    if ( cpufreq_opt_governor && strcmp(cpufreq_opt_governor->name,
+>>> +                                        cpufreq_gov_hwp.name) )
+>>
+>> Nit: I think this would better be
+>>
+>>     if ( cpufreq_opt_governor &&
+>>          strcmp(cpufreq_opt_governor->name, cpufreq_gov_hwp.name) )
+> 
+> Sounds good.  Actually, with the top level cpufreq=hwp,
+> cpufreq_opt_governor shouldn't be set anymore.  I left it since it
+> would point out something being unexpected.  policy->governor is set
+> unilaterally, so maybe this check and message should just be dropped.
+> Thoughts?
+
+I didn't realize this could be dropped. If it can be, please do.
 
 Jan
 
