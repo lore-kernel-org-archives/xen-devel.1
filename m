@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D5F4EB64D8
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 16:19:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553782.864611 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9B6EB64DB
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 16:19:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553767.864542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCN1w-0000HS-JS; Thu, 22 Jun 2023 16:19:32 +0000
+	id 1qCN1p-0006nW-06; Thu, 22 Jun 2023 16:19:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553782.864611; Thu, 22 Jun 2023 16:19:32 +0000
+Received: by outflank-mailman (output) from mailman id 553767.864542; Thu, 22 Jun 2023 16:19:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCN1w-0000Gb-DZ; Thu, 22 Jun 2023 16:19:32 +0000
-Received: by outflank-mailman (input) for mailman id 553782;
- Thu, 22 Jun 2023 16:19:30 +0000
+	id 1qCN1o-0006nP-Q5; Thu, 22 Jun 2023 16:19:24 +0000
+Received: by outflank-mailman (input) for mailman id 553767;
+ Thu, 22 Jun 2023 16:19:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4GDZ=CK=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1qCMtO-0001Gi-5Q
- for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 16:10:42 +0000
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [2a00:1450:4864:20::32c])
+ id 1qCMsu-0001Gi-06
+ for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 16:10:12 +0000
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [2a00:1450:4864:20::42a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 559fd16e-1117-11ee-b237-6b7b168915f2;
- Thu, 22 Jun 2023 18:10:41 +0200 (CEST)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-3fa71db4208so9716415e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 09:10:41 -0700 (PDT)
+ id 43a5c48f-1117-11ee-b237-6b7b168915f2;
+ Thu, 22 Jun 2023 18:10:11 +0200 (CEST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-311099fac92so8483997f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 09:10:11 -0700 (PDT)
 Received: from localhost.localdomain (230.red-88-28-3.dynamicip.rima-tde.net.
  [88.28.3.230]) by smtp.gmail.com with ESMTPSA id
- t20-20020a1c7714000000b003f900678815sm8037671wmi.39.2023.06.22.09.10.36
+ p1-20020adfcc81000000b0030ada01ca78sm7404978wrj.10.2023.06.22.09.10.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 22 Jun 2023 09:10:40 -0700 (PDT)
+ Thu, 22 Jun 2023 09:10:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 559fd16e-1117-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 43a5c48f-1117-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1687450241; x=1690042241;
+        d=linaro.org; s=google; t=1687450211; x=1690042211;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qiGDoiG1y93PPW7mQ2SAaPUCrdr0EnIkEF2xjLc8x+o=;
-        b=afjs6vIbGP/1PJJGvwXCmtbKZCbNgsjyiMItVow4+iOx2GIUdmWc+dyuANhlyir8kF
-         2aYlXh5DgFmociidTOF1UsWRAtyrmcgnlXWGI09EUFdjHUk9Cp5Np1TrftJvCgPWJRKV
-         Cq/etfX6vrPigr5Img+lY9cqze32mMWp1G+ykwR4KoeLQkkExx6kAwT8d+Nm2Mq3b+Ak
-         kEFGWfg0RzXiY6R3b5jbQH46rBTkFIcSsg5dzuY1VAZB/qN2PdND0WyzHOVoX/sDmIlf
-         G1bWhTNMmLufIJFW9cbS0CHCD27DWautHcOj1zDL9J0mWXjnjmK7IY5a1KFAFoSyVrD3
-         j9Ng==
+        bh=DKJxOwJmFtwOPAoIICT6M4A+Kzh99mIVYxe/d/9G77Y=;
+        b=eg02hjlfgcDaH24aEbjvIFOFqry3t+y3ca6mONxnjQGWPL1Jdtwu4KdzlrO2pncUEm
+         v2uAXFNtaqYiIggOc18WWF8JNx7doFAbVKyL4i5VvjAKuJTrn61jQREqSGuH7wbxPOHB
+         SQl9lpmkdOY2I8TmvPTRmSHTV/xdmaBelLgPfNn9zpSA2OubeWfB677UATrlvOYIbcR5
+         Xd77M5NfRhzJ8nLGIWLXvPckfbvl62BDfMBhKFdJDV8OUDdGPmWJ81CYWWuuNJVbGqz8
+         ykGAHRraJs8kr5Nc/YT6E4MagkrdbYLZbwKyQ84h9/BoPe+M9i29JT/WKZ3nt6qAzCaS
+         onVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687450241; x=1690042241;
+        d=1e100.net; s=20221208; t=1687450211; x=1690042211;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qiGDoiG1y93PPW7mQ2SAaPUCrdr0EnIkEF2xjLc8x+o=;
-        b=EibdM04OD7VZKmwQ+Telr1B34qUILysaNCs6o5sa26r6qQ+m0bCCOYffWPq/+B/vsq
-         E/ew07W4KcTqGAatj0hsIHX7t08qGP6XkhQ35YnHsbdF/oqrB6FpZXkWyjcfSyFYAR4a
-         ItYkgHCP6s8XY+zHlhaW6SCOU9/rNp19RAFkoUEMIKUdlSonwaoDZy97X3jNloowfa80
-         XHoBFl40289GrDTXDva2AIKaWDPbQ+RWWE4oVJRQxrHrwrjrgHDL6r/wrWYs2x9rHUB8
-         FXScvorUo2FCGZWvDFTg5N00J/yqyvDgjBGyDaDK9Rgq+1oNb+MAALvZHYxD2xNrCbFX
-         YtNw==
-X-Gm-Message-State: AC+VfDzoti+CjRnVXYxMwhQLkoLaTz1h4Kp7AKsxHTTRkB2vzzT4s9kD
-	ROgcuoDyyYEP0tiqb8ppr/vmGQ==
-X-Google-Smtp-Source: ACHHUZ5M4RURLV917KnJd3MPK+U1TPYAx4Jil2vHUAphCH9oW8qXZeRccJQsIh2dE0Pzlg9PjXcjAQ==
-X-Received: by 2002:a05:600c:2119:b0:3fa:776e:8c7a with SMTP id u25-20020a05600c211900b003fa776e8c7amr1300704wml.28.1687450241047;
-        Thu, 22 Jun 2023 09:10:41 -0700 (PDT)
+        bh=DKJxOwJmFtwOPAoIICT6M4A+Kzh99mIVYxe/d/9G77Y=;
+        b=bqiCUCahgK0jod2/eb7EVwiCOGBQMKi0H5GCCrBg7thzKhRckNr+68+w5pDPw+3vs0
+         hG79fcJSJdYpuifPJnkR5VLhI6045xVGBcGfQxVknKxYNsI8nerEO4AtCHDP+VyaDF14
+         vpCd7NmocMGV8n1rvwin1NOIfyM5MDlf3VUHrbSoEkX4H/xVybT0YK2trmO1er/BTBwg
+         knK5yxgde2BnFa6HBnAu3THEp0E4Ewxqz6UyFmd8d6KKxg2/mBwnTPgJIHlvkYP4HkP+
+         ukootCgXHC+10oM3Va+Sg7nH0OsVNXPYQ6Wfz2R0gRCdT73ONv03KNHBMA4lMTKM7PBg
+         JlUA==
+X-Gm-Message-State: AC+VfDxuXmCwwHI8ajShmri9ZIPKMSfRWTnXI7BWmiRzCvI29JzKu4Ej
+	1q/6kLxybi4Yb9EZZK+yRNOrjw==
+X-Google-Smtp-Source: ACHHUZ4UJwkfw8UWBY57D2hqCgPl1JN/hvtysVX8WTPHmCC0zEYaJGE4bKrnhQf98VbpMbWrM/7XNw==
+X-Received: by 2002:a5d:5751:0:b0:30f:c943:f925 with SMTP id q17-20020a5d5751000000b0030fc943f925mr15315373wrw.49.1687450210926;
+        Thu, 22 Jun 2023 09:10:10 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -97,9 +97,9 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
 	xen-devel@lists.xenproject.org,
 	Eduardo Habkost <eduardo@habkost.net>,
 	Cameron Esfahani <dirty@apple.com>
-Subject: [PATCH v2 13/16] accel: Rename WHPX 'struct whpx_vcpu' -> AccelCPUState
-Date: Thu, 22 Jun 2023 18:08:20 +0200
-Message-Id: <20230622160823.71851-14-philmd@linaro.org>
+Subject: [PATCH v2 10/16] accel: Rename NVMM 'struct qemu_vcpu' -> AccelCPUState
+Date: Thu, 22 Jun 2023 18:08:17 +0200
+Message-Id: <20230622160823.71851-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230622160823.71851-1-philmd@linaro.org>
 References: <20230622160823.71851-1-philmd@linaro.org>
@@ -108,157 +108,167 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 We want all accelerators to share the same opaque pointer in
-CPUState. Rename WHPX 'whpx_vcpu' as 'AccelCPUState'; use
-the typedef.
+CPUState. Rename NVMM 'qemu_vcpu' as 'AccelCPUState'; directly
+use the typedef, remove unnecessary casts.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/whpx/whpx-all.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ target/i386/nvmm/nvmm-all.c | 34 +++++++++++++++++-----------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-index 012ba696a9..107b731d3f 100644
---- a/target/i386/whpx/whpx-all.c
-+++ b/target/i386/whpx/whpx-all.c
-@@ -229,7 +229,7 @@ typedef enum WhpxStepMode {
-     WHPX_STEP_EXCLUSIVE,
- } WhpxStepMode;
+diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
+index 0588a328ae..e5ee4af084 100644
+--- a/target/i386/nvmm/nvmm-all.c
++++ b/target/i386/nvmm/nvmm-all.c
+@@ -26,7 +26,7 @@
  
--struct whpx_vcpu {
+ #include <nvmm.h>
+ 
+-struct qemu_vcpu {
 +struct AccelCPUState {
-     WHV_EMULATOR_HANDLE emulator;
-     bool window_registered;
-     bool interruptable;
-@@ -260,9 +260,9 @@ static bool whpx_has_xsave(void)
-  * VP support
-  */
+     struct nvmm_vcpu vcpu;
+     uint8_t tpr;
+     bool stop;
+@@ -49,10 +49,10 @@ struct qemu_machine {
+ static bool nvmm_allowed;
+ static struct qemu_machine qemu_mach;
  
--static struct whpx_vcpu *get_whpx_vcpu(CPUState *cpu)
-+static AccelCPUState *get_whpx_vcpu(CPUState *cpu)
+-static struct qemu_vcpu *
++static AccelCPUState *
+ get_qemu_vcpu(CPUState *cpu)
  {
--    return (struct whpx_vcpu *)cpu->accel;
-+    return (AccelCPUState *)cpu->accel;
+-    return (struct qemu_vcpu *)cpu->accel;
++    return cpu->accel;
  }
  
- static WHV_X64_SEGMENT_REGISTER whpx_seg_q2h(const SegmentCache *qs, int v86,
-@@ -390,7 +390,7 @@ static uint64_t whpx_cr8_to_apic_tpr(uint64_t cr8)
- static void whpx_set_registers(CPUState *cpu, int level)
- {
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     CPUX86State *env = cpu->env_ptr;
-     X86CPU *x86_cpu = X86_CPU(cpu);
-     struct whpx_register_set vcxt;
-@@ -609,7 +609,7 @@ static void whpx_get_xcrs(CPUState *cpu)
- static void whpx_get_registers(CPUState *cpu)
- {
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     CPUX86State *env = cpu->env_ptr;
-     X86CPU *x86_cpu = X86_CPU(cpu);
-     struct whpx_register_set vcxt;
-@@ -892,7 +892,7 @@ static const WHV_EMULATOR_CALLBACKS whpx_emu_callbacks = {
- static int whpx_handle_mmio(CPUState *cpu, WHV_MEMORY_ACCESS_CONTEXT *ctx)
- {
-     HRESULT hr;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     WHV_EMULATOR_STATUS emu_status;
- 
-     hr = whp_dispatch.WHvEmulatorTryMmioEmulation(
-@@ -917,7 +917,7 @@ static int whpx_handle_portio(CPUState *cpu,
-                               WHV_X64_IO_PORT_ACCESS_CONTEXT *ctx)
- {
-     HRESULT hr;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     WHV_EMULATOR_STATUS emu_status;
- 
-     hr = whp_dispatch.WHvEmulatorTryIoEmulation(
-@@ -1417,7 +1417,7 @@ static vaddr whpx_vcpu_get_pc(CPUState *cpu, bool exit_context_valid)
-          * of QEMU, nor this port by calling WHvSetVirtualProcessorRegisters().
-          * This is the most common case.
-          */
--        struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+        AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-         return vcpu->exit_ctx.VpContext.Rip;
-     } else {
-         /*
-@@ -1468,7 +1468,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
- {
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     CPUX86State *env = cpu->env_ptr;
-     X86CPU *x86_cpu = X86_CPU(cpu);
-     int irq;
-@@ -1590,7 +1590,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
- 
- static void whpx_vcpu_post_run(CPUState *cpu)
- {
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     CPUX86State *env = cpu->env_ptr;
-     X86CPU *x86_cpu = X86_CPU(cpu);
- 
-@@ -1617,7 +1617,7 @@ static void whpx_vcpu_process_async_events(CPUState *cpu)
+ static struct nvmm_machine *
+@@ -86,7 +86,7 @@ nvmm_set_registers(CPUState *cpu)
  {
      CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     struct nvmm_x64_state *state = vcpu->state;
+     uint64_t bitmap;
+@@ -223,7 +223,7 @@ nvmm_get_registers(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
      X86CPU *x86_cpu = X86_CPU(cpu);
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -347,7 +347,7 @@ static bool
+ nvmm_can_take_int(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     struct nvmm_machine *mach = get_nvmm_mach();
  
-     if ((cpu->interrupt_request & CPU_INTERRUPT_INIT) &&
-         !(env->hflags & HF_SMM_MASK)) {
-@@ -1656,7 +1656,7 @@ static int whpx_vcpu_run(CPUState *cpu)
+@@ -372,7 +372,7 @@ nvmm_can_take_int(CPUState *cpu)
+ static bool
+ nvmm_can_take_nmi(CPUState *cpu)
  {
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
-     struct whpx_breakpoint *stepped_over_bp = NULL;
-     WhpxStepMode exclusive_step_mode = WHPX_STEP_NONE;
-     int ret;
-@@ -2154,7 +2154,7 @@ int whpx_init_vcpu(CPUState *cpu)
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+ 
+     /*
+      * Contrary to INTs, NMIs always schedule an exit when they are
+@@ -395,7 +395,7 @@ nvmm_vcpu_pre_run(CPUState *cpu)
  {
-     HRESULT hr;
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = NULL;
-+    AccelCPUState *vcpu = NULL;
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -478,7 +478,7 @@ nvmm_vcpu_pre_run(CPUState *cpu)
+ static void
+ nvmm_vcpu_post_run(CPUState *cpu, struct nvmm_vcpu_exit *exit)
+ {
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     CPUX86State *env = cpu->env_ptr;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     uint64_t tpr;
+@@ -565,7 +565,7 @@ static int
+ nvmm_handle_rdmsr(struct nvmm_machine *mach, CPUState *cpu,
+     struct nvmm_vcpu_exit *exit)
+ {
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -610,7 +610,7 @@ static int
+ nvmm_handle_wrmsr(struct nvmm_machine *mach, CPUState *cpu,
+     struct nvmm_vcpu_exit *exit)
+ {
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_x64_state *state = vcpu->state;
+@@ -686,7 +686,7 @@ nvmm_vcpu_loop(CPUState *cpu)
+ {
+     CPUX86State *env = cpu->env_ptr;
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
+     struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     struct nvmm_vcpu_exit *exit = vcpu->exit;
+@@ -892,7 +892,7 @@ static void
+ nvmm_ipi_signal(int sigcpu)
+ {
+     if (current_cpu) {
+-        struct qemu_vcpu *qcpu = get_qemu_vcpu(current_cpu);
++        AccelCPUState *qcpu = get_qemu_vcpu(current_cpu);
+ #if NVMM_USER_VERSION >= 2
+         struct nvmm_vcpu *vcpu = &qcpu->vcpu;
+         nvmm_vcpu_stop(vcpu);
+@@ -926,7 +926,7 @@ nvmm_init_vcpu(CPUState *cpu)
+     struct nvmm_vcpu_conf_cpuid cpuid;
+     struct nvmm_vcpu_conf_tpr tpr;
      Error *local_error = NULL;
-     CPUX86State *env = cpu->env_ptr;
-     X86CPU *x86_cpu = X86_CPU(cpu);
-@@ -2177,7 +2177,7 @@ int whpx_init_vcpu(CPUState *cpu)
+-    struct qemu_vcpu *qcpu;
++    AccelCPUState *qcpu;
+     int ret, err;
+ 
+     nvmm_init_cpu_signals();
+@@ -942,7 +942,7 @@ nvmm_init_vcpu(CPUState *cpu)
          }
      }
  
--    vcpu = g_new0(struct whpx_vcpu, 1);
-+    vcpu = g_new0(AccelCPUState, 1);
+-    qcpu = g_malloc0(sizeof(*qcpu));
++    qcpu = g_new0(AccelCPUState, 1);
  
-     hr = whp_dispatch.WHvEmulatorCreateEmulator(
-         &whpx_emu_callbacks,
-@@ -2252,7 +2252,7 @@ int whpx_init_vcpu(CPUState *cpu)
+     ret = nvmm_vcpu_create(mach, cpu->cpu_index, &qcpu->vcpu);
+     if (ret == -1) {
+@@ -991,7 +991,7 @@ nvmm_init_vcpu(CPUState *cpu)
+     }
  
-     vcpu->interruptable = true;
      cpu->vcpu_dirty = true;
--    cpu->accel = (struct AccelCPUState *)vcpu;
-+    cpu->accel = (AccelCPUState *)vcpu;
-     max_vcpu_index = max(max_vcpu_index, cpu->cpu_index);
-     qemu_add_vm_change_state_handler(whpx_cpu_update_state, cpu->env_ptr);
+-    cpu->accel = (struct AccelCPUState *)qcpu;
++    cpu->accel = qcpu;
  
-@@ -2290,7 +2290,7 @@ int whpx_vcpu_exec(CPUState *cpu)
- void whpx_destroy_vcpu(CPUState *cpu)
+     return 0;
+ }
+@@ -1023,7 +1023,7 @@ void
+ nvmm_destroy_vcpu(CPUState *cpu)
  {
-     struct whpx_state *whpx = &whpx_global;
--    struct whpx_vcpu *vcpu = get_whpx_vcpu(cpu);
-+    AccelCPUState *vcpu = get_whpx_vcpu(cpu);
+     struct nvmm_machine *mach = get_nvmm_mach();
+-    struct qemu_vcpu *qcpu = get_qemu_vcpu(cpu);
++    AccelCPUState *qcpu = get_qemu_vcpu(cpu);
  
-     whp_dispatch.WHvDeleteVirtualProcessor(whpx->partition, cpu->cpu_index);
-     whp_dispatch.WHvEmulatorDestroyEmulator(vcpu->emulator);
+     nvmm_vcpu_destroy(mach, &qcpu->vcpu);
+     g_free(cpu->accel);
 -- 
 2.38.1
 
