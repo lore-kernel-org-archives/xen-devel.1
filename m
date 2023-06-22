@@ -4,44 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82ABC001DC
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553942.864812 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A19EEB64DA
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553944.864827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNR-0006Vz-Ed; Thu, 22 Jun 2023 20:58:01 +0000
+	id 1qCRNS-0006qU-6h; Thu, 22 Jun 2023 20:58:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553942.864812; Thu, 22 Jun 2023 20:58:01 +0000
+Received: by outflank-mailman (output) from mailman id 553944.864827; Thu, 22 Jun 2023 20:58:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNR-0006Td-8V; Thu, 22 Jun 2023 20:58:01 +0000
-Received: by outflank-mailman (input) for mailman id 553942;
- Thu, 22 Jun 2023 20:57:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qCRNS-0006n1-16; Thu, 22 Jun 2023 20:58:02 +0000
+Received: by outflank-mailman (input) for mailman id 553944;
+ Thu, 22 Jun 2023 20:58:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yL9z=CK=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
- id 1qCRNP-0006Mr-Lr
- for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:57:59 +0000
-Received: from raptorengineering.com (mail.raptorengineering.com
- [23.155.224.40]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 765e0976-113f-11ee-8611-37d641c3527e;
- Thu, 22 Jun 2023 22:57:56 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id E729B8285AE2;
- Thu, 22 Jun 2023 15:57:55 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id zYJAGN4Mu1JA; Thu, 22 Jun 2023 15:57:54 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rptsys.com (Postfix) with ESMTP id CF88F8285AE5;
- Thu, 22 Jun 2023 15:57:54 -0500 (CDT)
-Received: from mail.rptsys.com ([127.0.0.1])
- by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id LlOnPt1zgnWp; Thu, 22 Jun 2023 15:57:54 -0500 (CDT)
-Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
- by mail.rptsys.com (Postfix) with ESMTPSA id 399718285ABF;
- Thu, 22 Jun 2023 15:57:54 -0500 (CDT)
+ <SRS0=NTT3=CK=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
+ id 1qCRNQ-0006Mq-IE
+ for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:58:00 +0000
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [2607:f8b0:4864:20::b2f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 77d9f676-113f-11ee-b237-6b7b168915f2;
+ Thu, 22 Jun 2023 22:57:59 +0200 (CEST)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-bacf685150cso7078607276.3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 13:57:59 -0700 (PDT)
+Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::36])
+ by smtp.googlemail.com with ESMTPSA id
+ d18-20020a5b0c52000000b00bc501a1b062sm1684937ybr.42.2023.06.22.13.57.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jun 2023 13:57:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,118 +47,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 765e0976-113f-11ee-8611-37d641c3527e
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com CF88F8285AE5
+X-Inumbo-ID: 77d9f676-113f-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
-	t=1687467474; bh=0wj7QPlwOBqbHvF4gwVP4i4KfRt2HA9VfGoE95wa7yo=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=jO+gBSvY47iiWUgEi0aThEBlqtzDH+eNQNJBI/VO54MrYZas342v/UXT8UiboyBx/
-	 ewmkqXWPx4bPHSlAMwvCNkREEZ01tjGaw1uGT1SHQovf9p6s1JfNGBlBTwTsWid8NE
-	 YKSyeGlmJfQsabKYcDuE/TDrQ+60eDViKxeTnBZ8=
-X-Virus-Scanned: amavisd-new at rptsys.com
-From: Shawn Anastasio <sanastasio@raptorengineering.com>
-To: xen-devel@lists.xenproject.org
-Cc: Timothy Pearson <tpearson@raptorengineering.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Shawn Anastasio <sanastasio@raptorengineering.com>,
-	Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 0/3] Early serial on Power
-Date: Thu, 22 Jun 2023 15:57:47 -0500
-Message-Id: <cover.1687466822.git.sanastasio@raptorengineering.com>
-X-Mailer: git-send-email 2.30.2
+        d=gmail.com; s=20221208; t=1687467478; x=1690059478;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=oWqJsihW3Mww2gXtWCx6NN1vPsnSmScA0KqTPfHOB2L1LHk/oZiCduo6ehbRGsj3u1
+         3K4TZcf4ipLxkr2vI99P6IIjGRev7x1HMuDNE81bxWMzhRU6uyioFzTZTsBBM3X8iluN
+         tBK6Y8stl1G/1qCE5N0GQ3Qa+8Pmm+N03Nm44USTvnLt7V5LvALEjdohUoDqU7kxuZLt
+         IgowLw0bUJXUmFP7v8RMzC0EWbABefmvZCJB+fh5ayxmmTYy0RtnueLq29qEPJSsxOpa
+         bu8Ei1mTrJukofeSyNP/F3QTQ4sGlZhg7IWdEGo85alo6ycJggU6oX8hiEo/eX8VwR76
+         IyqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687467478; x=1690059478;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=S+YSsap9GRlXpj0ZbAxkvWrEBAACls2dJ6dalEuHq+6/kx+FSYpOXpJjd1cPfR8MQS
+         9QrGJj108k79D4YN9ApYqE0oQ/qTnNz+freprV0vol39RPZDIlOI6eikLyC89A+2jQfX
+         bWmy5oGQNzI/RW8x8M0b3Zf8nPW5i9GQd4iC1VdNG7+bVfZ7ten13G6d9BbD+xYGxMEk
+         rV4cUF8JqIfHM8GtUfQ6j9kLXDl/hm6bROy48AVwHvcN6wumt6M31hylvYY+sxa/a0Fe
+         rrPscrKP/EaiyxL/Hz3PVFYpke1/+OQdmfbwqKJCp82TsmMkHuJAkhB9M9B5L1IPWBf/
+         /SHg==
+X-Gm-Message-State: AC+VfDz9Q5oPznWXqKVincy2dgaXwkpvomoKLICpIMaF9eA0SNhAbPkY
+	ub4eOEBPXkILzSZvTEFM55E=
+X-Google-Smtp-Source: ACHHUZ6Iv2PzBVPKZ2hNXXGWhZAWkMVnsSNpndVsfJ1BDlCBJeA25OFgV2XyKC6amBhVDhSuupua4g==
+X-Received: by 2002:a25:2fce:0:b0:bac:2a78:aaa7 with SMTP id v197-20020a252fce000000b00bac2a78aaa7mr16148309ybv.54.1687467478063;
+        Thu, 22 Jun 2023 13:57:58 -0700 (PDT)
+From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>
+Cc: linux-mm@kvack.org,
+	linux-arch@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-csky@vger.kernel.org,
+	linux-hexagon@vger.kernel.org,
+	loongarch@lists.linux.dev,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-openrisc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-sh@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	linux-um@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	Hugh Dickins <hughd@google.com>,
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH v5 01/33] mm: Add PAGE_TYPE_OP folio functions
+Date: Thu, 22 Jun 2023 13:57:13 -0700
+Message-Id: <20230622205745.79707-2-vishal.moola@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230622205745.79707-1-vishal.moola@gmail.com>
+References: <20230622205745.79707-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hello all,
+No folio equivalents for page type operations have been defined, so
+define them for later folio conversions.
 
-This series adds support for early serial printing on Power, as well as
-a simple CI smoke test modeled after the riscv one.
+Also changes the Page##uname macros to take in const struct page* since
+we only read the memory here.
 
-The first patch is responsible for setting up a basic C environment with
-an initial stack and a cleared .bss while the second sets up an Open
-Firmware serial console and primitive early_printk infrastructure.
+Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+---
+ include/linux/page-flags.h | 30 +++++++++++++++++++++++-------
+ 1 file changed, 23 insertions(+), 7 deletions(-)
 
-Of note is that this series is currently based on the following series
-from Andrew Cooper: '[PATCH 0/2] xen/types: Cleanup'
-(https://lists.xenproject.org/archives/html/xen-devel/2023-06/msg01601.ht=
-ml)
-
-This will currently only run on QEMU pseries VMs, since the firmware
-interface on bare metal differs significantly. Support for bare metal
-will be added in a future series.
-
-Thanks,
-Shawn
-
---
-Changes in v2:
-  - Split main patch into two - one for basic C environment setup and
-    one for serial
-  - Mark OpenFirmware functions and early_printk functions as __init and
-    change boot-of.o to boot-of.init.o in Makefile
-  - Change <xen/lib.h> include to <xen/stdarg.h> and drop skeleton
-    headers that are no longer necessary for build as a result
-  - Add loop to clear .bss before jumping to C environment that was
-    accidentally excluded from the first series
-  - Move common asm macros from processor.h to asm-defns.h
-  - Change note in head.S about preserved registers to a multi-line
-    comment so it's more noticeable
-  - Drop reg-defs.h and use '%'-prefixed register names in assembly
-      - This is necessary since -mregnames, which allows standard
-        non-prefixed register names without manual macro definitions,
-        is not supported by LLVM's assembler.
-  - Drop inline asm swab routines in favor of __builtin_bswap family
-  - Fix up types.h in accordance with (as of now, unmerged)
-    'xen/types: Rework stdint vs __{u,s}$N types'
-  - Remove unnecessary braces for single-line statements
-  - Remove unnecessary license text when SPDX header is present
-  - Fix alphabetical ordering of object declarations in Makefile
-  - Drop 'extern' from enter_of prototype, ensure prototypes have
-    argument names
-
-Shawn Anastasio (3):
-  xen/ppc: Set up a basic C environment
-  xen/ppc: Implement early serial printk on pseries
-  automation: Add smoke test for ppc64le
-
- automation/gitlab-ci/test.yaml           |  20 ++++
- automation/scripts/qemu-smoke-ppc64le.sh |  27 +++++
- xen/arch/ppc/Kconfig.debug               |   5 +
- xen/arch/ppc/Makefile                    |   3 +
- xen/arch/ppc/boot-of.c                   | 100 +++++++++++++++++
- xen/arch/ppc/configs/ppc64_defconfig     |   1 +
- xen/arch/ppc/early_printk.c              |  28 +++++
- xen/arch/ppc/include/asm/asm-defns.h     |  53 +++++++++
- xen/arch/ppc/include/asm/boot.h          |  23 ++++
- xen/arch/ppc/include/asm/byteorder.h     |  12 ++
- xen/arch/ppc/include/asm/early_printk.h  |  15 +++
- xen/arch/ppc/include/asm/msr.h           |  51 +++++++++
- xen/arch/ppc/include/asm/processor.h     | 136 +++++++++++++++++++++++
- xen/arch/ppc/include/asm/types.h         |  21 ++++
- xen/arch/ppc/ppc64/Makefile              |   1 +
- xen/arch/ppc/ppc64/asm-offsets.c         |  55 +++++++++
- xen/arch/ppc/ppc64/head.S                |  55 +++++----
- xen/arch/ppc/ppc64/of-call.S             |  83 ++++++++++++++
- xen/arch/ppc/setup.c                     |  28 +++++
- 19 files changed, 697 insertions(+), 20 deletions(-)
- create mode 100755 automation/scripts/qemu-smoke-ppc64le.sh
- create mode 100644 xen/arch/ppc/boot-of.c
- create mode 100644 xen/arch/ppc/early_printk.c
- create mode 100644 xen/arch/ppc/include/asm/asm-defns.h
- create mode 100644 xen/arch/ppc/include/asm/boot.h
- create mode 100644 xen/arch/ppc/include/asm/byteorder.h
- create mode 100644 xen/arch/ppc/include/asm/early_printk.h
- create mode 100644 xen/arch/ppc/include/asm/msr.h
- create mode 100644 xen/arch/ppc/include/asm/processor.h
- create mode 100644 xen/arch/ppc/include/asm/types.h
- create mode 100644 xen/arch/ppc/ppc64/of-call.S
- create mode 100644 xen/arch/ppc/setup.c
-
---
-2.30.2
+diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+index 92a2063a0a23..9218028caf33 100644
+--- a/include/linux/page-flags.h
++++ b/include/linux/page-flags.h
+@@ -908,6 +908,8 @@ static inline bool is_page_hwpoison(struct page *page)
+ 
+ #define PageType(page, flag)						\
+ 	((page->page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
++#define folio_test_type(folio, flag)					\
++	((folio->page.page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
+ 
+ static inline int page_type_has_type(unsigned int page_type)
+ {
+@@ -919,27 +921,41 @@ static inline int page_has_type(struct page *page)
+ 	return page_type_has_type(page->page_type);
+ }
+ 
+-#define PAGE_TYPE_OPS(uname, lname)					\
+-static __always_inline int Page##uname(struct page *page)		\
++#define PAGE_TYPE_OPS(uname, lname, fname)				\
++static __always_inline int Page##uname(const struct page *page)		\
+ {									\
+ 	return PageType(page, PG_##lname);				\
+ }									\
++static __always_inline int folio_test_##fname(const struct folio *folio)\
++{									\
++	return folio_test_type(folio, PG_##lname);			\
++}									\
+ static __always_inline void __SetPage##uname(struct page *page)		\
+ {									\
+ 	VM_BUG_ON_PAGE(!PageType(page, 0), page);			\
+ 	page->page_type &= ~PG_##lname;					\
+ }									\
++static __always_inline void __folio_set_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_type(folio, 0), folio);		\
++	folio->page.page_type &= ~PG_##lname;				\
++}									\
+ static __always_inline void __ClearPage##uname(struct page *page)	\
+ {									\
+ 	VM_BUG_ON_PAGE(!Page##uname(page), page);			\
+ 	page->page_type |= PG_##lname;					\
+-}
++}									\
++static __always_inline void __folio_clear_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_##fname(folio), folio);		\
++	folio->page.page_type |= PG_##lname;				\
++}									\
+ 
+ /*
+  * PageBuddy() indicates that the page is free and in the buddy system
+  * (see mm/page_alloc.c).
+  */
+-PAGE_TYPE_OPS(Buddy, buddy)
++PAGE_TYPE_OPS(Buddy, buddy, buddy)
+ 
+ /*
+  * PageOffline() indicates that the page is logically offline although the
+@@ -963,7 +979,7 @@ PAGE_TYPE_OPS(Buddy, buddy)
+  * pages should check PageOffline() and synchronize with such drivers using
+  * page_offline_freeze()/page_offline_thaw().
+  */
+-PAGE_TYPE_OPS(Offline, offline)
++PAGE_TYPE_OPS(Offline, offline, offline)
+ 
+ extern void page_offline_freeze(void);
+ extern void page_offline_thaw(void);
+@@ -973,12 +989,12 @@ extern void page_offline_end(void);
+ /*
+  * Marks pages in use as page tables.
+  */
+-PAGE_TYPE_OPS(Table, table)
++PAGE_TYPE_OPS(Table, table, pgtable)
+ 
+ /*
+  * Marks guardpages used with debug_pagealloc.
+  */
+-PAGE_TYPE_OPS(Guard, guard)
++PAGE_TYPE_OPS(Guard, guard, guard)
+ 
+ extern bool is_free_buddy_page(struct page *page);
+ 
+-- 
+2.40.1
 
 
