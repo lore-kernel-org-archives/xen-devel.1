@@ -4,38 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47893C0015E
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553947.864866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A36EB64DD
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553941.864808 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNW-0007tg-42; Thu, 22 Jun 2023 20:58:06 +0000
+	id 1qCRNR-0006QB-7g; Thu, 22 Jun 2023 20:58:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553947.864866; Thu, 22 Jun 2023 20:58:06 +0000
+Received: by outflank-mailman (output) from mailman id 553941.864808; Thu, 22 Jun 2023 20:58:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNV-0007rF-ON; Thu, 22 Jun 2023 20:58:05 +0000
-Received: by outflank-mailman (input) for mailman id 553947;
- Thu, 22 Jun 2023 20:58:04 +0000
+	id 1qCRNQ-0006Oz-Vq; Thu, 22 Jun 2023 20:58:00 +0000
+Received: by outflank-mailman (input) for mailman id 553941;
+ Thu, 22 Jun 2023 20:57:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NTT3=CK=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qCRNU-0006Mq-4l
- for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:58:04 +0000
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [2607:f8b0:4864:20::b2d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7a663353-113f-11ee-b237-6b7b168915f2;
- Thu, 22 Jun 2023 22:58:03 +0200 (CEST)
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-bcd0226607bso1693159276.1
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 13:58:03 -0700 (PDT)
-Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::36])
- by smtp.googlemail.com with ESMTPSA id
- d18-20020a5b0c52000000b00bc501a1b062sm1684937ybr.42.2023.06.22.13.58.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jun 2023 13:58:02 -0700 (PDT)
+ <SRS0=yL9z=CK=raptorengineering.com=sanastasio@srs-se1.protection.inumbo.net>)
+ id 1qCRNP-0006Mq-KZ
+ for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:57:59 +0000
+Received: from raptorengineering.com (mail.raptorengineering.com
+ [23.155.224.40]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 771b5655-113f-11ee-b237-6b7b168915f2;
+ Thu, 22 Jun 2023 22:57:58 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 195248285AEA;
+ Thu, 22 Jun 2023 15:57:57 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id f-44QZf4C7zK; Thu, 22 Jun 2023 15:57:56 -0500 (CDT)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rptsys.com (Postfix) with ESMTP id 6B1A38285ABF;
+ Thu, 22 Jun 2023 15:57:56 -0500 (CDT)
+Received: from mail.rptsys.com ([127.0.0.1])
+ by localhost (vali.starlink.edu [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id v5traDQOubaK; Thu, 22 Jun 2023 15:57:56 -0500 (CDT)
+Received: from raptor-ewks-026.lan (5.edge.rptsys.com [23.155.224.38])
+ by mail.rptsys.com (Postfix) with ESMTPSA id B3FA38285AEC;
+ Thu, 22 Jun 2023 15:57:55 -0500 (CDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,158 +53,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a663353-113f-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 771b5655-113f-11ee-b237-6b7b168915f2
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rptsys.com 6B1A38285ABF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687467482; x=1690059482;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=g10wkISUfh+NWh/zmhT9FX+m3ZttfvdTUqPKBonJP24=;
-        b=pU1rNku+EwfuvvAUFkFumH3vBy2yB8eY8b9rmQMddlJoc9QhOnRcokyjWDtIUPPy9P
-         MyE7phtpnefNxvysKqFF1dCChREaY4VAw7Hj9WJFlZFrzpk6eifBId3wubz0Vyh/S2pn
-         8/Y3zkVGHHKKYxzZzu8HCxLQTltPQvJHitS9QsbrsAUgPjueiuuK933isxWF/RQdLHvt
-         zcy+Qct09qmvfH+KRctZzkT+vvZGDQDyiysBgsbHpUxND18HRJm9vVFEK6S0KHOtgU7u
-         IRCWYGiDuX3Hydg/OjrZHIGz2lGmohOF8cCd3deLunhE1oH3PJ2GTuP2PJzlmW5OQRrp
-         EAKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687467482; x=1690059482;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=g10wkISUfh+NWh/zmhT9FX+m3ZttfvdTUqPKBonJP24=;
-        b=MQm0G8oWiN+veBJUGkpMl+fUSxXmy/cUa1SlwxBgS1vJnkJk59Jems0kCSlLflLal1
-         SVxWgUCFMHpjLqUIM5W31saDVroGUU3Qks5KuHIJgMRcAlapbKS+6OMr28hShgrmDWx3
-         U4c1lZ9cKMLqTPnnM0VXQWj72pCTJbwmltH5rUjDDFdiWuQwZhNjPMyN7fS14m+G88ty
-         PKjuVSOQmedZDpmTMwzilHTWT7Ze1n+LpoRz5+UjVKmq9paP1wkdP/TwZjMMEDFqAhk0
-         JsSamm2wMRJPi+FQuDyfPPUAK7qjNw9UBj2j/oHPjMwQrQPM56KKvccRUW1dlWH0SDv8
-         /EeA==
-X-Gm-Message-State: AC+VfDxJapH5Yw0iT65eaUtVkV2eDfuZMX8OsIgOFI7SQohhv53EjNsD
-	gwM63W9m+PVczSroGHIc6S4=
-X-Google-Smtp-Source: ACHHUZ77fWcfFpcqNU9K3kqcEPsqSpbWa/fmZ/3pFZFyzvd1rtc51te7WicHxIwYc2YzOzHNnZEaEA==
-X-Received: by 2002:a25:2f85:0:b0:bd5:eeb4:55be with SMTP id v127-20020a252f85000000b00bd5eeb455bemr19092596ybv.0.1687467482307;
-        Thu, 22 Jun 2023 13:58:02 -0700 (PDT)
-From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	Matthew Wilcox <willy@infradead.org>
-Cc: linux-mm@kvack.org,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-csky@vger.kernel.org,
-	linux-hexagon@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-openrisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	kvm@vger.kernel.org,
-	Hugh Dickins <hughd@google.com>,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
-	Mike Rapoport <rppt@kernel.org>
-Subject: [PATCH v5 03/33] pgtable: Create struct ptdesc
-Date: Thu, 22 Jun 2023 13:57:15 -0700
-Message-Id: <20230622205745.79707-4-vishal.moola@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230622205745.79707-1-vishal.moola@gmail.com>
-References: <20230622205745.79707-1-vishal.moola@gmail.com>
+	d=raptorengineering.com; s=B8E824E6-0BE2-11E6-931D-288C65937AAD;
+	t=1687467476; bh=By/cyaijYQTAGJgZfB6T8MO0SHbn04i59WFs7fwttoA=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=HIgOfl4mPflnByR+AFp/3X5lBwmgwQUEYDjQaTx+JceAKTLSRwxy7gy7IkOgoT1Ux
+	 vxvPYbL/hyz0W/28jFss/nVCBR/Lg/dK/ztzBL3MYHp+MK011m4kksjL1Mt2asFyip
+	 uolp59wzcurJwzXXOwMrXogN8cY9gheYwUhPQ4EE=
+X-Virus-Scanned: amavisd-new at rptsys.com
+From: Shawn Anastasio <sanastasio@raptorengineering.com>
+To: xen-devel@lists.xenproject.org
+Cc: Timothy Pearson <tpearson@raptorengineering.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Shawn Anastasio <sanastasio@raptorengineering.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 3/3] automation: Add smoke test for ppc64le
+Date: Thu, 22 Jun 2023 15:57:50 -0500
+Message-Id: <f53737937af74dd9844bff07b5886121070a9d28.1687466822.git.sanastasio@raptorengineering.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1687466822.git.sanastasio@raptorengineering.com>
+References: <cover.1687466822.git.sanastasio@raptorengineering.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Currently, page table information is stored within struct page. As part
-of simplifying struct page, create struct ptdesc for page table
-information.
+Add an initial smoke test that boots xen on a ppc64/pseries machine and
+checks for a magic string. Based on the riscv smoke test.
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
-Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+Eventually the powernv9 (POWER9 bare metal) machine type will want to be
+tested as well, but for now we only boot on pseries.
+
+Signed-off-by: Shawn Anastasio <sanastasio@raptorengineering.com>
 ---
- include/linux/pgtable.h | 68 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
+ automation/gitlab-ci/test.yaml           | 20 ++++++++++++++++++
+ automation/scripts/qemu-smoke-ppc64le.sh | 27 ++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100755 automation/scripts/qemu-smoke-ppc64le.sh
 
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 5063b482e34f..d46cb709ce08 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -987,6 +987,74 @@ static inline void ptep_modify_prot_commit(struct vm_area_struct *vma,
- #endif /* __HAVE_ARCH_PTEP_MODIFY_PROT_TRANSACTION */
- #endif /* CONFIG_MMU */
- 
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.y=
+aml
+index d5cb238b0a..45e8ddb7a3 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -71,6 +71,19 @@
+   tags:
+     - x86_64
+=20
++.qemu-ppc64le:
++  extends: .test-jobs-common
++  variables:
++    CONTAINER: debian:bullseye-ppc64le
++    LOGFILE: qemu-smoke-ppc64le.log
++  artifacts:
++    paths:
++      - smoke.serial
++      - '*.log'
++    when: always
++  tags:
++    - x86_64
 +
-+/**
-+ * struct ptdesc -    Memory descriptor for page tables.
-+ * @__page_flags:     Same as page flags. Unused for page tables.
-+ * @pt_rcu_head:      For freeing page table pages.
-+ * @pt_list:          List of used page tables. Used for s390 and x86.
-+ * @_pt_pad_1:        Padding that aliases with page's compound head.
-+ * @pmd_huge_pte:     Protected by ptdesc->ptl, used for THPs.
-+ * @_pt_s390_gaddr:   Aliases with page's mapping. Used for s390 gmap only.
-+ * @pt_mm:            Used for x86 pgds.
-+ * @pt_frag_refcount: For fragmented page table tracking. Powerpc and s390 only.
-+ * @ptl:              Lock for the page table.
-+ * @__page_type:      Same as page->page_type. Unused for page tables.
-+ * @_refcount:        Same as page refcount. Used for s390 page tables.
-+ * @pt_memcg_data:    Memcg data. Tracked for page tables here.
-+ *
-+ * This struct overlays struct page for now. Do not modify without a good
-+ * understanding of the issues.
-+ */
-+struct ptdesc {
-+	unsigned long __page_flags;
+ .xilinx-arm64:
+   extends: .test-jobs-common
+   variables:
+@@ -444,3 +457,10 @@ qemu-smoke-riscv64-gcc:
+     - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
+   needs:
+     - archlinux-current-gcc-riscv64-debug
 +
-+	union {
-+		struct rcu_head pt_rcu_head;
-+		struct list_head pt_list;
-+		struct {
-+			unsigned long _pt_pad_1;
-+			pgtable_t pmd_huge_pte;
-+		};
-+	};
-+	unsigned long _pt_s390_gaddr;
++qemu-smoke-ppc64le-pseries-gcc:
++  extends: .qemu-ppc64le
++  script:
++    - ./automation/scripts/qemu-smoke-ppc64le.sh pseries-5.2 2>&1 | tee =
+${LOGFILE}
++  needs:
++    - debian-bullseye-gcc-ppc64le-debug
+diff --git a/automation/scripts/qemu-smoke-ppc64le.sh b/automation/script=
+s/qemu-smoke-ppc64le.sh
+new file mode 100755
+index 0000000000..eb55221221
+--- /dev/null
++++ b/automation/scripts/qemu-smoke-ppc64le.sh
+@@ -0,0 +1,27 @@
++#!/bin/bash
 +
-+	union {
-+		struct mm_struct *pt_mm;
-+		atomic_t pt_frag_refcount;
-+	};
++set -ex
 +
-+	union {
-+		unsigned long _pt_pad_2;
-+#if ALLOC_SPLIT_PTLOCKS
-+		spinlock_t *ptl;
-+#else
-+		spinlock_t ptl;
-+#endif
-+	};
-+	unsigned int __page_type;
-+	atomic_t _refcount;
-+#ifdef CONFIG_MEMCG
-+	unsigned long pt_memcg_data;
-+#endif
-+};
++# machine type from first arg passed directly to qemu -M
++machine=3D$1
 +
-+#define TABLE_MATCH(pg, pt)						\
-+	static_assert(offsetof(struct page, pg) == offsetof(struct ptdesc, pt))
-+TABLE_MATCH(flags, __page_flags);
-+TABLE_MATCH(compound_head, pt_list);
-+TABLE_MATCH(compound_head, _pt_pad_1);
-+TABLE_MATCH(pmd_huge_pte, pmd_huge_pte);
-+TABLE_MATCH(mapping, _pt_s390_gaddr);
-+TABLE_MATCH(pt_mm, pt_mm);
-+TABLE_MATCH(ptl, ptl);
-+TABLE_MATCH(rcu_head, pt_rcu_head);
-+#ifdef CONFIG_MEMCG
-+TABLE_MATCH(memcg_data, pt_memcg_data);
-+#endif
-+#undef TABLE_MATCH
-+static_assert(sizeof(struct ptdesc) <= sizeof(struct page));
++# Run the test
++rm -f smoke.serial
++set +e
 +
- /*
-  * No-op macros that just return the current protection value. Defined here
-  * because these macros can be used even if CONFIG_MMU is not defined.
--- 
-2.40.1
++touch smoke.serial
++
++timeout -k 1 20 \
++qemu-system-ppc64 \
++    -M $machine \
++    -m 2g \
++    -smp 1 \
++    -vga none \
++    -monitor none \
++    -nographic \
++    -serial file:smoke.serial \
++    -kernel binaries/xen
++
++set -e
++(grep -q "Hello, ppc64le!" smoke.serial) || exit 1
++exit 0
+--=20
+2.30.2
 
 
