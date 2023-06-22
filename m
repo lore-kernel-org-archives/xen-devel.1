@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E063FC0015E
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.553957.864939 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52BDAEB64DD
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Jun 2023 20:58:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.553954.864910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNk-0002cg-Vn; Thu, 22 Jun 2023 20:58:20 +0000
+	id 1qCRNe-00017P-Mm; Thu, 22 Jun 2023 20:58:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 553957.864939; Thu, 22 Jun 2023 20:58:20 +0000
+Received: by outflank-mailman (output) from mailman id 553954.864910; Thu, 22 Jun 2023 20:58:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qCRNk-0002a4-IN; Thu, 22 Jun 2023 20:58:20 +0000
-Received: by outflank-mailman (input) for mailman id 553957;
- Thu, 22 Jun 2023 20:58:18 +0000
+	id 1qCRNe-00017C-J4; Thu, 22 Jun 2023 20:58:14 +0000
+Received: by outflank-mailman (input) for mailman id 553954;
+ Thu, 22 Jun 2023 20:58:12 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NTT3=CK=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qCRNi-0006Mq-8u
- for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:58:18 +0000
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [2607:f8b0:4864:20::b2b])
+ id 1qCRNc-0006Mq-9z
+ for xen-devel@lists.xenproject.org; Thu, 22 Jun 2023 20:58:12 +0000
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [2607:f8b0:4864:20::b2a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 82deee1e-113f-11ee-b237-6b7b168915f2;
- Thu, 22 Jun 2023 22:58:17 +0200 (CEST)
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-be49e41a3d6so5948877276.1
- for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 13:58:17 -0700 (PDT)
+ id 7f40eb1f-113f-11ee-b237-6b7b168915f2;
+ Thu, 22 Jun 2023 22:58:11 +0200 (CEST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-bad0c4f6f50so1707021276.1
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Jun 2023 13:58:11 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::36])
  by smtp.googlemail.com with ESMTPSA id
- d18-20020a5b0c52000000b00bc501a1b062sm1684937ybr.42.2023.06.22.13.58.14
+ d18-20020a5b0c52000000b00bc501a1b062sm1684937ybr.42.2023.06.22.13.58.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Jun 2023 13:58:16 -0700 (PDT)
+ Thu, 22 Jun 2023 13:58:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82deee1e-113f-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 7f40eb1f-113f-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687467496; x=1690059496;
+        d=gmail.com; s=20221208; t=1687467490; x=1690059490;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wSwuU7fg/k+TT5PagWIdYLap7GxOydHG9fnVI01D6B4=;
-        b=I/bVEj+DUjJI8l/gEF/kUAGaYNT5Bo0ZW57h+bRIiIunD3HbfI+MBQBKO4xoy6kMld
-         by9iDd+YOlloG6orphek9MUhK7idN+HCTnjbwImmtOZyc6e9u9PHx9KvfH/RMgtU+eEw
-         KkmIT3OJU3QYrQoQpzTDW/lNw6UL91T+VL7WZPaAaf3blTIwnU3tSpIBE8mZnuXVnYm+
-         rvZ17E5R9YwQ5EOQRDXtuuSLgHPTNFwHVzddHdU5MZn7f0HGX0TpCThXTZUeoTrDSQuu
-         9j0W4VdWm0ZtykEhgIk1WPxDhiiNhplU95urAkZpVmBWbtxqWeEVwFyvBy3V06yBmQux
-         q4sw==
+        bh=Z9Q71kHk0zB6vt5ahL9ZHs7069+SCA/PofhBzVdlAuY=;
+        b=SXnr3kTV6njYUvauamdMyIGRqi3Z41OxkG9JlPzJUx0NriTeoHWuqaMEo3l+9h8t2a
+         VYkat48qctNxV1/ppcRnfQARZuWAzrRCUbykSbsoBMp8966TwG20r91mIMZZWqpjcTmW
+         hdpH7DDiGoYlRwkaTlsQfcolxJPdgdCgC9/4W8c/dT4apJrOeLX3lj0oWu+YQP0DxUAd
+         osWDaPCIsD5h/hDouYKm/GWbJh0+G1rOXddszwPTKiRotQWqfvXUbSh9a+2twyPuDXpa
+         FZNLCmQA2AiifhKNd54UF2voysI7AeqYSwKdAxxqSAv3Uf/qcrBy28RD1vznPZVN3aBc
+         SnyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687467496; x=1690059496;
+        d=1e100.net; s=20221208; t=1687467490; x=1690059490;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wSwuU7fg/k+TT5PagWIdYLap7GxOydHG9fnVI01D6B4=;
-        b=IfmDzNPyxGlo59j2RSmlSxNkx6QqF9JyIkn4sP8kcaPhb29Gu9+nmXyNTXaZfwYLe9
-         JLUDbXK+V8WHYHtPQFN5RPxEYqcs22herzJ3pLsKays5g0qgKPbPjf9yAhBYmTT6aatF
-         Ed+bdfs5Gr87P4VIAWTNmP1x4u/polQD2DkXj8ElqgaBR+ed2LmL3MaubQdTnUW1dAUQ
-         rWVQtBWMI1mput0Pym/p56ybfcr6SK78buOgkASCGRNHQsfQRHg8XBVg904ciDKEtoBU
-         3FHpfd4i+lbHFcCXAIG/PS4v4RpIUvqxHvGYKCk8Y2cIVvHYn4mfddQwX3d49ZpW1M+B
-         8RZw==
-X-Gm-Message-State: AC+VfDwh4qwuTk/pj/NE//027T4LFG0lwDjp21L4BgoUT9KQkBIwR65x
-	w5bWCzCv5XPZGktUemloj1A=
-X-Google-Smtp-Source: ACHHUZ4fKnSuVlprYtWMiqysn5f2VA+PJ55bhXLl+JTYwbJxQpJ17qCGbx2gEAsv8+8GLejR/TMFxQ==
-X-Received: by 2002:a25:6982:0:b0:ba8:1c9e:c77f with SMTP id e124-20020a256982000000b00ba81c9ec77fmr9956027ybc.22.1687467496585;
-        Thu, 22 Jun 2023 13:58:16 -0700 (PDT)
+        bh=Z9Q71kHk0zB6vt5ahL9ZHs7069+SCA/PofhBzVdlAuY=;
+        b=W5py+Q+XAtBjSqi0Euxolshel7+OwWc8JoZ5wTfrkZGBvVpxllus5ynPUCTRgXThl+
+         zsxNWvYFvhFqDQUvAyHq25C3vMLysrosZnR3D/xbjufcSqr10ho+sjdd3QjDl58SAQxc
+         L4hl4J3Oa5AF2HiPVaj0GR7UNMEl4Nhx++nLO2vNzj1PS7amkY/MJuQYphRbexBA7EsJ
+         1UnfgxrraSEy8aeaSsR2eodmubMDF+JUJNJhxQUNilEqIAlXPBK1xOuDSL/4EDwPICKk
+         i3PK7gn7yY7WfbBIkwvGGwVJV12lTproO49ddx+RlX8wUE3/TDO94XZY3FoyRKMW/fD3
+         f9/g==
+X-Gm-Message-State: AC+VfDxaStfwxZuY1T2bwcdUgYFGA2Z6gpBgigO8p8Fkb8kRlzJ96liH
+	CC17jw0YkXGBOGdCDoDjKaI=
+X-Google-Smtp-Source: ACHHUZ6BwDtDcu2DafE0mELxOK/IzeJcBBP6EuYjmA8bqRWBwzcd6lelREQA4aNwT3EjfCEygFsIlw==
+X-Received: by 2002:a25:2144:0:b0:bce:5e08:c330 with SMTP id h65-20020a252144000000b00bce5e08c330mr18770867ybh.29.1687467490539;
+        Thu, 22 Jun 2023 13:58:10 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -100,9 +100,9 @@ Cc: linux-mm@kvack.org,
 	Hugh Dickins <hughd@google.com>,
 	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
 	Mike Rapoport <rppt@kernel.org>
-Subject: [PATCH v5 10/33] mm: Convert pmd_ptlock_free() to use ptdescs
-Date: Thu, 22 Jun 2023 13:57:22 -0700
-Message-Id: <20230622205745.79707-11-vishal.moola@gmail.com>
+Subject: [PATCH v5 07/33] mm: Convert ptlock_ptr() to use ptdescs
+Date: Thu, 22 Jun 2023 13:57:19 -0700
+Message-Id: <20230622205745.79707-8-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230622205745.79707-1-vishal.moola@gmail.com>
 References: <20230622205745.79707-1-vishal.moola@gmail.com>
@@ -115,47 +115,76 @@ splitting out struct ptdesc from struct page.
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
 ---
- include/linux/mm.h | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ arch/x86/xen/mmu_pv.c |  2 +-
+ include/linux/mm.h    | 14 +++++++-------
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index e0a975165de7..8796ec310483 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -667,7 +667,7 @@ static spinlock_t *xen_pte_lock(struct page *page, struct mm_struct *mm)
+ 	spinlock_t *ptl = NULL;
+ 
+ #if USE_SPLIT_PTE_PTLOCKS
+-	ptl = ptlock_ptr(page);
++	ptl = ptlock_ptr(page_ptdesc(page));
+ 	spin_lock_nest_lock(ptl, &mm->page_table_lock);
+ #endif
+ 
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 4af424e4015a..0221675e4dc5 100644
+index 39b0a4661e44..0b230d5d229a 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -2934,12 +2934,12 @@ static inline bool pmd_ptlock_init(struct ptdesc *ptdesc)
- 	return ptlock_init(ptdesc);
- }
+@@ -2801,9 +2801,9 @@ void __init ptlock_cache_init(void);
+ bool ptlock_alloc(struct ptdesc *ptdesc);
+ extern void ptlock_free(struct page *page);
  
--static inline void pmd_ptlock_free(struct page *page)
-+static inline void pmd_ptlock_free(struct ptdesc *ptdesc)
+-static inline spinlock_t *ptlock_ptr(struct page *page)
++static inline spinlock_t *ptlock_ptr(struct ptdesc *ptdesc)
  {
- #ifdef CONFIG_TRANSPARENT_HUGEPAGE
--	VM_BUG_ON_PAGE(page->pmd_huge_pte, page);
-+	VM_BUG_ON_PAGE(ptdesc->pmd_huge_pte, ptdesc_page(ptdesc));
- #endif
--	ptlock_free(page);
-+	ptlock_free(ptdesc_page(ptdesc));
+-	return page->ptl;
++	return ptdesc->ptl;
  }
- 
- #define pmd_huge_pte(mm, pmd) (pmd_ptdesc(pmd)->pmd_huge_pte)
-@@ -2952,7 +2952,7 @@ static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
- }
- 
- static inline bool pmd_ptlock_init(struct ptdesc *ptdesc) { return true; }
--static inline void pmd_ptlock_free(struct page *page) {}
-+static inline void pmd_ptlock_free(struct ptdesc *ptdesc) {}
- 
- #define pmd_huge_pte(mm, pmd) ((mm)->pmd_huge_pte)
- 
-@@ -2976,7 +2976,7 @@ static inline bool pgtable_pmd_page_ctor(struct page *page)
- 
- static inline void pgtable_pmd_page_dtor(struct page *page)
+ #else /* ALLOC_SPLIT_PTLOCKS */
+ static inline void ptlock_cache_init(void)
+@@ -2819,15 +2819,15 @@ static inline void ptlock_free(struct page *page)
  {
--	pmd_ptlock_free(page);
-+	pmd_ptlock_free(page_ptdesc(page));
- 	__ClearPageTable(page);
- 	dec_lruvec_page_state(page, NR_PAGETABLE);
  }
+ 
+-static inline spinlock_t *ptlock_ptr(struct page *page)
++static inline spinlock_t *ptlock_ptr(struct ptdesc *ptdesc)
+ {
+-	return &page->ptl;
++	return &ptdesc->ptl;
+ }
+ #endif /* ALLOC_SPLIT_PTLOCKS */
+ 
+ static inline spinlock_t *pte_lockptr(struct mm_struct *mm, pmd_t *pmd)
+ {
+-	return ptlock_ptr(pmd_page(*pmd));
++	return ptlock_ptr(page_ptdesc(pmd_page(*pmd)));
+ }
+ 
+ static inline bool ptlock_init(struct page *page)
+@@ -2842,7 +2842,7 @@ static inline bool ptlock_init(struct page *page)
+ 	VM_BUG_ON_PAGE(*(unsigned long *)&page->ptl, page);
+ 	if (!ptlock_alloc(page_ptdesc(page)))
+ 		return false;
+-	spin_lock_init(ptlock_ptr(page));
++	spin_lock_init(ptlock_ptr(page_ptdesc(page)));
+ 	return true;
+ }
+ 
+@@ -2923,7 +2923,7 @@ static inline struct ptdesc *pmd_ptdesc(pmd_t *pmd)
+ 
+ static inline spinlock_t *pmd_lockptr(struct mm_struct *mm, pmd_t *pmd)
+ {
+-	return ptlock_ptr(ptdesc_page(pmd_ptdesc(pmd)));
++	return ptlock_ptr(pmd_ptdesc(pmd));
+ }
+ 
+ static inline bool pmd_ptlock_init(struct page *page)
 -- 
 2.40.1
 
