@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5307AEB64DA
-	for <xen-devel@archiver.kernel.org>; Sat, 24 Jun 2023 17:41:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.554640.865938 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D6BEB64DA
+	for <xen-devel@archiver.kernel.org>; Sat, 24 Jun 2023 17:42:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.554643.865957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qD7GR-00007v-A4; Sat, 24 Jun 2023 17:41:35 +0000
+	id 1qD7Gg-0000xv-Na; Sat, 24 Jun 2023 17:41:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 554640.865938; Sat, 24 Jun 2023 17:41:35 +0000
+Received: by outflank-mailman (output) from mailman id 554643.865957; Sat, 24 Jun 2023 17:41:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qD7GR-00007o-5O; Sat, 24 Jun 2023 17:41:35 +0000
-Received: by outflank-mailman (input) for mailman id 554640;
- Sat, 24 Jun 2023 17:41:34 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qD7Gg-0000xj-KB; Sat, 24 Jun 2023 17:41:50 +0000
+Received: by outflank-mailman (input) for mailman id 554643;
+ Sat, 24 Jun 2023 17:41:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=BIr0=CM=linaro.org=philmd@srs-se1.protection.inumbo.net>)
- id 1qD7GQ-0008Gp-3v
- for xen-devel@lists.xenproject.org; Sat, 24 Jun 2023 17:41:34 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5c12750f-12b6-11ee-b237-6b7b168915f2;
- Sat, 24 Jun 2023 19:41:33 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3129c55e1d1so2107431f8f.0
- for <xen-devel@lists.xenproject.org>; Sat, 24 Jun 2023 10:41:33 -0700 (PDT)
+ id 1qD7Gf-0000wd-G6
+ for xen-devel@lists.xenproject.org; Sat, 24 Jun 2023 17:41:49 +0000
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [2a00:1450:4864:20::329])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6468e15a-12b6-11ee-8611-37d641c3527e;
+ Sat, 24 Jun 2023 19:41:47 +0200 (CEST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3f9bece8d1bso22347675e9.0
+ for <xen-devel@lists.xenproject.org>; Sat, 24 Jun 2023 10:41:47 -0700 (PDT)
 Received: from m1x-phil.lan ([176.187.217.150])
  by smtp.gmail.com with ESMTPSA id
- z7-20020a5d6407000000b0030fcf3d75c4sm2609804wru.45.2023.06.24.10.41.30
+ p23-20020a1c7417000000b003f9b0f640b1sm2712454wmc.22.2023.06.24.10.41.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 24 Jun 2023 10:41:32 -0700 (PDT)
+ Sat, 24 Jun 2023 10:41:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c12750f-12b6-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 6468e15a-12b6-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1687628493; x=1690220493;
+        d=linaro.org; s=google; t=1687628507; x=1690220507;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+JIxHWMClVl6mvpALDoBK231PZeNGUQgT3foMweSwl8=;
-        b=d9EPiTdMBS6ezt21TafvsYW1DcHw6rx3bSyGYk02qijZjSVC1xbJv7hrNc8Bln/+KY
-         da9/C7KLlpChs5ekpkEMTLt+8/tTn69sMDTvOr77GosenaKuMVoIqanEcBIaB+x8/IYa
-         sMX5xiZvQgUwCoIYnw0wLy0I8qTh5UNWS2TKXn7vV66wpwVU6Arg9AwvuzGbtx5f2Fr1
-         NS187HJhnsPP5z7lKj2H5zJ9WFDNB74ee+CLe5qo2TrqCpMy25BW2hi6t3sBgrl2wrMY
-         3O1uqpNOR6dT7+pTrezI8H96sgMZeN+qygKbA8KQdg//j8BnqU62WE8Pxxa1LGwOWpQ1
-         C2DA==
+        bh=iG1kgLZ5QV1q9fprOekDS1vi4YDLS9XqOgasp153yeA=;
+        b=K86GwMMvk4Df7udKOIOJ1vd/414tWjcj7PaRdAJ3QyILeXtNH5ZrXuja1IMnbHcdr6
+         Y3ebUsAdLPajHQlE39ljJ0fh/t/JOBvYNV3b1NEe+LE9+APH19Ejl4JAt+dbQAuXBfQG
+         APP2deEp7Mz2AHGIykGQohAv+jMZxXlGcUZUUP5eB4eZ+/bp2zpXSpG45gUaftUbbM4h
+         5VXKPOKiAkaTH9X4aafmA+F7qu6COUvyHTBWEy2hotlnbHYRw86edbr2sm8Jd6RGhxKg
+         UTQS4TDFLjCbZez6jFysEJYiEbh83uGUurvLwpjCbf3TGV5woFHYcA+a7TFnE+XwwpJc
+         rP5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687628493; x=1690220493;
+        d=1e100.net; s=20221208; t=1687628507; x=1690220507;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+JIxHWMClVl6mvpALDoBK231PZeNGUQgT3foMweSwl8=;
-        b=CP0azyf6B9uqDnDA4j8gXrYWU2Sr0tIzI2ieSMROGiGcdTMRuqC/7znKZwf/nUP4mo
-         s5K2+vHVtz1ADVbPa3BihRFE1lnVjh+bUUM0Dg/7e2BkxtnLIrbdzbbQLJI9HT84jWUV
-         uAJUsjqhBzLIDdM4vin9ux68oF10PHE6bzcSSPXsS2tmQF5BlBz61lARPSTw3pX0UrXe
-         4szB9hwUJBZn3DZEVqBumVoF7zhF2KGgDPMFF3yeff0n5d8IKy5ctu2aiRe05s6muwSW
-         9iwLJ/z9cAdbaCplrJx8hp1/GxwxvToxmZ+ZJDL1Ibu//cDIvQl91tDEQUb3gnQj4ZEc
-         ccPA==
-X-Gm-Message-State: AC+VfDxm9FletFeRAEwjclEbiWIICdGxOFu0JmoCjxatR8VMb3eDH2H4
-	YRNL4XoJoEifSkfmgqGVqb9sEQ==
-X-Google-Smtp-Source: ACHHUZ4gIjgAKb4rVFXLZjiJdVzXvPynrHKyrgCEdSr0allCKh8ZZswCbWqoo+JLTWwg5/zBqsSxag==
-X-Received: by 2002:a5d:5344:0:b0:313:df09:ad04 with SMTP id t4-20020a5d5344000000b00313df09ad04mr2110290wrv.57.1687628493050;
-        Sat, 24 Jun 2023 10:41:33 -0700 (PDT)
+        bh=iG1kgLZ5QV1q9fprOekDS1vi4YDLS9XqOgasp153yeA=;
+        b=WzV8ca3ZJXh4ugua8NwCEHSBNiQLJQUDlGbFixxopDByGzHMH02exGb7BUfsd0e4VR
+         QO1YAQdF0cgOTW92VSbBEABkW/0buDSzCPX3sKp4+pk8+pLFPxsOjUMTnbMqp/3G5Y9W
+         5AqPfOgbGIqhSczqEe4+N+k/spBAp9kA+IFIiDbM7JGIErdgLOFqFmNncAqJGwruxn75
+         MLuxGv6uubr62ThUsMIqridKmwVZdF+BHR+CGExKvxUkh5LlmxGBT+ozsJGLVY/+bCL2
+         YxRh/3n3PDfop0T/tRHg9tVXWuUM35Qa38ErQXSeoVx2SeBVyn5W3bcagh/q4ysZJbwa
+         Ru3A==
+X-Gm-Message-State: AC+VfDz7Ko9ahy3tAbuuALmkUaJnS4MY0CNWdI+JaA1VwKLEwc6LEsbX
+	xV8mrwtyBhH5vOMbx2VajiDPnoCZUtTmu0Wk1w0=
+X-Google-Smtp-Source: ACHHUZ7OfepQue0fzzv7ARVu6MjpgeQ79vp0jBcJMaT0gk3oCOgSw7w1smkAWzCkTRk8bysAFxnFSg==
+X-Received: by 2002:a1c:7419:0:b0:3f9:b79d:a5fa with SMTP id p25-20020a1c7419000000b003f9b79da5famr10746278wmc.16.1687628507031;
+        Sat, 24 Jun 2023 10:41:47 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kvm@vger.kernel.org,
@@ -97,9 +97,9 @@ Cc: kvm@vger.kernel.org,
 	Eduardo Habkost <eduardo@habkost.net>,
 	Cameron Esfahani <dirty@apple.com>,
 	Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH v3 01/16] MAINTAINERS: Update Roman Bolshakov email address
-Date: Sat, 24 Jun 2023 19:41:06 +0200
-Message-Id: <20230624174121.11508-2-philmd@linaro.org>
+Subject: [PATCH v3 03/16] accel: Remove unused hThread variable on TCG/WHPX
+Date: Sat, 24 Jun 2023 19:41:08 +0200
+Message-Id: <20230624174121.11508-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230624174121.11508-1-philmd@linaro.org>
 References: <20230624174121.11508-1-philmd@linaro.org>
@@ -107,54 +107,58 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-r.bolshakov@yadro.com is bouncing: Update Roman's email address
-using one found somewhere on the Internet; this way he can Ack-by.
-
-(Reorder Taylor's line to keep the section sorted alphabetically).
+On Windows hosts, cpu->hThread is assigned but never accessed:
+remove it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- MAINTAINERS | 4 ++--
- .mailmap    | 3 ++-
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ accel/tcg/tcg-accel-ops-mttcg.c   | 4 ----
+ accel/tcg/tcg-accel-ops-rr.c      | 3 ---
+ target/i386/whpx/whpx-accel-ops.c | 3 ---
+ 3 files changed, 10 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7f323cd2eb..1da135b0c8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -497,14 +497,14 @@ F: target/arm/hvf/
+diff --git a/accel/tcg/tcg-accel-ops-mttcg.c b/accel/tcg/tcg-accel-ops-mttcg.c
+index b320ff0037..b276262007 100644
+--- a/accel/tcg/tcg-accel-ops-mttcg.c
++++ b/accel/tcg/tcg-accel-ops-mttcg.c
+@@ -152,8 +152,4 @@ void mttcg_start_vcpu_thread(CPUState *cpu)
  
- X86 HVF CPUs
- M: Cameron Esfahani <dirty@apple.com>
--M: Roman Bolshakov <r.bolshakov@yadro.com>
-+M: Roman Bolshakov <rbolshakov@ddn.com>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: target/i386/hvf/
+     qemu_thread_create(cpu->thread, thread_name, mttcg_cpu_thread_fn,
+                        cpu, QEMU_THREAD_JOINABLE);
+-
+-#ifdef _WIN32
+-    cpu->hThread = qemu_thread_get_handle(cpu->thread);
+-#endif
+ }
+diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
+index 23e4d0f452..2d523289a8 100644
+--- a/accel/tcg/tcg-accel-ops-rr.c
++++ b/accel/tcg/tcg-accel-ops-rr.c
+@@ -329,9 +329,6 @@ void rr_start_vcpu_thread(CPUState *cpu)
  
- HVF
- M: Cameron Esfahani <dirty@apple.com>
--M: Roman Bolshakov <r.bolshakov@yadro.com>
-+M: Roman Bolshakov <rbolshakov@ddn.com>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: accel/hvf/
-diff --git a/.mailmap b/.mailmap
-index b57da4827e..64ef9f4de6 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -76,9 +76,10 @@ Paul Burton <paulburton@kernel.org> <pburton@wavecomp.com>
- Philippe Mathieu-Daudé <philmd@linaro.org> <f4bug@amsat.org>
- Philippe Mathieu-Daudé <philmd@linaro.org> <philmd@redhat.com>
- Philippe Mathieu-Daudé <philmd@linaro.org> <philmd@fungible.com>
-+Roman Bolshakov <rbolshakov@ddn.com> <r.bolshakov@yadro.com>
- Stefan Brankovic <stefan.brankovic@syrmia.com> <stefan.brankovic@rt-rk.com.com>
--Yongbok Kim <yongbok.kim@mips.com> <yongbok.kim@imgtec.com>
- Taylor Simpson <ltaylorsimpson@gmail.com> <tsimpson@quicinc.com>
-+Yongbok Kim <yongbok.kim@mips.com> <yongbok.kim@imgtec.com>
+         single_tcg_halt_cond = cpu->halt_cond;
+         single_tcg_cpu_thread = cpu->thread;
+-#ifdef _WIN32
+-        cpu->hThread = qemu_thread_get_handle(cpu->thread);
+-#endif
+     } else {
+         /* we share the thread */
+         cpu->thread = single_tcg_cpu_thread;
+diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
+index e8dc4b3a47..67cad86720 100644
+--- a/target/i386/whpx/whpx-accel-ops.c
++++ b/target/i386/whpx/whpx-accel-ops.c
+@@ -71,9 +71,6 @@ static void whpx_start_vcpu_thread(CPUState *cpu)
+              cpu->cpu_index);
+     qemu_thread_create(cpu->thread, thread_name, whpx_cpu_thread_fn,
+                        cpu, QEMU_THREAD_JOINABLE);
+-#ifdef _WIN32
+-    cpu->hThread = qemu_thread_get_handle(cpu->thread);
+-#endif
+ }
  
- # Also list preferred name forms where people have changed their
- # git author config, or had utf8/latin1 encoding issues.
+ static void whpx_kick_vcpu_thread(CPUState *cpu)
 -- 
 2.38.1
 
