@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6317EEB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E58E5C001DB
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Jun 2023 20:49:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.554879.866348 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.554871.866284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDWfl-0004GB-KT; Sun, 25 Jun 2023 20:49:25 +0000
+	id 1qDWfe-0002c3-11; Sun, 25 Jun 2023 20:49:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 554879.866348; Sun, 25 Jun 2023 20:49:25 +0000
+Received: by outflank-mailman (output) from mailman id 554871.866284; Sun, 25 Jun 2023 20:49:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDWfl-0004Fu-Fd; Sun, 25 Jun 2023 20:49:25 +0000
-Received: by outflank-mailman (input) for mailman id 554879;
- Sun, 25 Jun 2023 20:49:24 +0000
+	id 1qDWfd-0002bw-UX; Sun, 25 Jun 2023 20:49:17 +0000
+Received: by outflank-mailman (input) for mailman id 554871;
+ Sun, 25 Jun 2023 20:49:16 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qDWfk-00049b-Sq
- for xen-devel@lists.xenproject.org; Sun, 25 Jun 2023 20:49:24 +0000
+ (envelope-from <julien@xen.org>) id 1qDWfc-0002bk-1q
+ for xen-devel@lists.xenproject.org; Sun, 25 Jun 2023 20:49:16 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qDWfk-0003Nd-Hy; Sun, 25 Jun 2023 20:49:24 +0000
+ id 1qDWfb-0003Lm-FS; Sun, 25 Jun 2023 20:49:15 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qDWfk-00021M-AE; Sun, 25 Jun 2023 20:49:24 +0000
+ id 1qDWfb-00021M-6f; Sun, 25 Jun 2023 20:49:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,11 +43,11 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ze41TrTEDnEX29OT1AHfqfE9eyz1GRWB/h0Tzh6x6sw=; b=t6JvaOPPa7AuK8mxOH+M6lRRH7
-	I7kQWX8z/QU8gxHbAC6LKuGGrtQToawvnjjGsoCOSw3r/IigPeVa4W9ajiG/uxS/75QnIhFRrYJ4S
-	lCebwDwGR9sJlg3z/TrvVzzoEhHiZzHZAnnAk5NHW/3l5kpMZdcnX3kH7i5yMgbCIWNA=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:Cc:To:From; bh=1fhIEl6j2vrUnpIMcwhx1Ag70rRvI+I121vLxzmF4o0=; b=OzIxOp
+	ylOUGwblfw1K313bxJYeP87ZQlpYRcKp26Mxr4x/WsmRYRNskc2kTR8rgw8/EBdGS7nQhOGedh8RO
+	QdpEzvf2puMIVBppod7nRWo6HFlgttZusl2+/axFHXnF5+J0rE37G156jgY/7OueWWF6EqNHCCM54
+	VDAkVo8/CAU=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
@@ -58,45 +58,67 @@ Cc: Luca.Fancellu@arm.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 7/9] xen/arm64: head: Rework PRINT() to work when the string is not withing +/- 1MB
-Date: Sun, 25 Jun 2023 21:49:05 +0100
-Message-Id: <20230625204907.57291-8-julien@xen.org>
+Subject: [PATCH 0/9] xen/arm: Enable UBSAN support
+Date: Sun, 25 Jun 2023 21:48:58 +0100
+Message-Id: <20230625204907.57291-1-julien@xen.org>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230625204907.57291-1-julien@xen.org>
-References: <20230625204907.57291-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-The instruction ADR is able to load an address of a symbol that is
-within the range +/- 1 MB of the instruction.
+Hi all,
 
-While today Xen is quite small (~1MB), it could grow up to 2MB in the
-current setup. So there is no guarantee that the instruction can
-load the string address (stored in rodata).
+At the moment, we are not able to enable UBSAN on Arm because the
+final binary will be over the maximum size of Xen we currently support
+(i.e. 2MB).
 
-So replace the instruction ADR with the pseudo-instruction ADR_L
-which is able to handle symbol within the range +/- 4GB.
+This patch series aim to lift the restrictions and also
+enable UBSAN. Lastly, at the end of the series, there is the first
+issue found by USBAN.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/arch/arm/arm64/head.S | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+There are a few of others. One will be fixed by the MISRA work
+in [1] and the other is a bit tricky. One the splat is (the
+others seems to be for similar reasons)
 
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index c9e2e36506d9..38f896bdb8e2 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -90,7 +90,7 @@
-  */
- #define PRINT(_s)          \
-         mov   x3, lr ;     \
--        adr   x0, 98f ;    \
-+        adr_l x0, 98f ;    \
-         bl    puts    ;    \
-         mov   lr, x3 ;     \
-         RODATA_STR(98, _s)
+(XEN) ================================================================================
+(XEN) UBSAN: Undefined behaviour in common/sched/credit2.c:2437:5
+(XEN) member access within misaligned address 43feefbc for type 'struct csched2_runqueue_data'
+(XEN) which requires 8 byte alignment
+(XEN) Xen WARN at common/ubsan/ubsan.c:172
+
+This is on 32-bit and UBSAN seems to complain about the check in
+list_for_each_entry. I haven't yet dived into the issue yet.
+
+Cheers,
+
+[1] cover.1687250177.git.gianluca.luparini@bugseng.com
+
+Julien Grall (9):
+  xen/arm: Check Xen size when linking
+  xen/arm64: head: Don't map too much in boot_third
+  xen/arm32: head: Don't map too much in boot_third
+  xen/arm32: head: Remove 'r6' from the clobber list of
+    create_page_tables()
+  xen/arm: Rework the code mapping Xen to avoid relying on the size of
+    Xen
+  xen/arm64: entry: Don't jump outside of an alternative
+  xen/arm64: head: Rework PRINT() to work when the string is not withing
+    +/- 1MB
+  xen/arm: Allow the user to build Xen with USBAN
+  xen/arm32: vfp: Add missing U for shifted constant
+
+ xen/arch/arm/Kconfig                 |  1 +
+ xen/arch/arm/arm32/head.S            | 79 +++++++++++++++++++++-------
+ xen/arch/arm/arm64/entry.S           | 21 ++++++--
+ xen/arch/arm/arm64/head.S            | 68 +++++++++++++++++++-----
+ xen/arch/arm/include/asm/arm32/vfp.h | 18 +++----
+ xen/arch/arm/include/asm/config.h    | 19 +++----
+ xen/arch/arm/include/asm/lpae.h      |  8 +--
+ xen/arch/arm/mm.c                    | 24 +++++----
+ xen/arch/arm/xen.lds.S               |  4 ++
+ 9 files changed, 176 insertions(+), 66 deletions(-)
+
 -- 
 2.40.1
 
