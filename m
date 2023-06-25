@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C0FC001B3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3735C001B0
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Jun 2023 20:49:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.554877.866343 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.554882.866373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDWfl-0004Ck-9n; Sun, 25 Jun 2023 20:49:25 +0000
+	id 1qDWfp-000578-6K; Sun, 25 Jun 2023 20:49:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 554877.866343; Sun, 25 Jun 2023 20:49:25 +0000
+Received: by outflank-mailman (output) from mailman id 554882.866373; Sun, 25 Jun 2023 20:49:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDWfl-0004By-64; Sun, 25 Jun 2023 20:49:25 +0000
-Received: by outflank-mailman (input) for mailman id 554877;
- Sun, 25 Jun 2023 20:49:23 +0000
+	id 1qDWfp-000571-1e; Sun, 25 Jun 2023 20:49:29 +0000
+Received: by outflank-mailman (input) for mailman id 554882;
+ Sun, 25 Jun 2023 20:49:27 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qDWfj-0003s5-H5
- for xen-devel@lists.xenproject.org; Sun, 25 Jun 2023 20:49:23 +0000
+ (envelope-from <julien@xen.org>) id 1qDWfn-0004qK-B4
+ for xen-devel@lists.xenproject.org; Sun, 25 Jun 2023 20:49:27 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qDWfj-0003NJ-85; Sun, 25 Jun 2023 20:49:23 +0000
+ id 1qDWfn-0003OM-5t; Sun, 25 Jun 2023 20:49:27 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qDWfj-00021M-0W; Sun, 25 Jun 2023 20:49:23 +0000
+ id 1qDWfm-00021M-Tw; Sun, 25 Jun 2023 20:49:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=gXqnczAjb+wnpPlcEiazaR11OD9Idwd3JlF3anBSmFw=; b=M75UERkVFu8wYlEek+C2JfO+dv
-	TQuIiQ7/8/x6ybcfQg6nQUAkWVJ+j7FiLj8nuoFsM5pOfYZ/hvJMuduIaPYsNytfkCids2kQ/Uzta
-	z+2wjsPjKPTvP1KjE9MPrrAPtqiY3pt06ytqG6cXmWFvwN8CEMhOzXT69U5JKf/cfgxk=;
+	bh=s5wm0nqS6ULfC32q998/nCfZN762L79rLlqFVp1Zzow=; b=3rFaz7ovZPFJqdziFudpeKwltt
+	yK1oQknZmDQSWUTCxfUks5nR5563d3DSYGRBd9QuHvGZ9SvWBbVSkPQ3vYyH3pnSSIE8RwOb/P/9u
+	90k/rQfumuIroJo1j60n5fmEPB5SCNN0A/7Yg0lnGjAjjT7XZBlQmdRWwFDUNIzwRO2A=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
@@ -58,9 +58,9 @@ Cc: Luca.Fancellu@arm.com,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 6/9] xen/arm64: entry: Don't jump outside of an alternative
-Date: Sun, 25 Jun 2023 21:49:04 +0100
-Message-Id: <20230625204907.57291-7-julien@xen.org>
+Subject: [PATCH 9/9] xen/arm32: vfp: Add missing U for shifted constant
+Date: Sun, 25 Jun 2023 21:49:07 +0100
+Message-Id: <20230625204907.57291-10-julien@xen.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230625204907.57291-1-julien@xen.org>
 References: <20230625204907.57291-1-julien@xen.org>
@@ -69,66 +69,63 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-The instruction CBNZ can only jump to a pc-relative that is in the
-range +/- 1MB.
+When enabling UBSAN on arm32, the following splat will be printed:
 
-Alternative instructions replacement are living in a separate
-subsection of the init section. This is usually placed towards
-the end of the linker. Whereas text is towards the beginning.
+(XEN) ================================================================================
+(XEN) UBSAN: Undefined behaviour in arch/arm/arm32/vfp.c:75:22
+(XEN) left shift of 255 by 24 places cannot be represented in type 'int'
 
-While today Xen is quite small (~1MB), it could grow up to
-2MB in the current setup. So there is no guarantee that the
-target address in the text section will be within the range +/-
-1MB of the CBNZ in alternative section.
+This is referring to the shift in FPSID_IMPLEMENTER_MASK. While we could
+only add the U to the value shift there, it would be better to be
+consistent and also add it for every value shifted.
 
-The easiest solution is to have the target address within the
-same section of the alternative. This means that we need to
-duplicate a couple of instructions.
+This should also addressing MISRA Rule 7.2:
+
+    A "u" or "U" suffix shall be applied to all integer constants that
+    are represented in an unsigned type
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-----
-
-I couldn't come up with a solution that would not change the number
-of instructions executed in the entry path.
 ---
- xen/arch/arm/arm64/entry.S | 21 ++++++++++++++++-----
- 1 file changed, 16 insertions(+), 5 deletions(-)
+ xen/arch/arm/include/asm/arm32/vfp.h | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
-index 95f1a9268419..492591fdef54 100644
---- a/xen/arch/arm/arm64/entry.S
-+++ b/xen/arch/arm/arm64/entry.S
-@@ -242,13 +242,24 @@
-         msr     daifclr, \iflags
-         bl      enter_hypervisor_from_guest
+diff --git a/xen/arch/arm/include/asm/arm32/vfp.h b/xen/arch/arm/include/asm/arm32/vfp.h
+index bade3bc66e1f..2f2e4b24bb40 100644
+--- a/xen/arch/arm/include/asm/arm32/vfp.h
++++ b/xen/arch/arm/include/asm/arm32/vfp.h
+@@ -1,23 +1,23 @@
+ #ifndef _ARM_ARM32_VFP_H
+ #define _ARM_ARM32_VFP_H
  
-+        /*
-+         * CBNZ can only address an offset of +/- 1MB. This means, it is
-+         * not possible to jump outside of an alternative because
-+         * the .text section and .altinstr_replacement may be further
-+         * appart. The easiest way is to duplicate the few instructions
-+         * that need to be skipped.
-+         */
-         alternative_if SKIP_SYNCHRONIZE_SERROR_ENTRY_EXIT
--        cbnz    x19, 1f
--        alternative_else_nop_endif
--
--        mov     x0, sp
--        bl      do_trap_\trap
-+        cbnz      x19, 1f
-+        mov       x0, sp
-+        bl        do_trap_\trap
- 1:
-+        alternative_else
-+        nop
-+        mov       x0, sp
-+        bl        do_trap_\trap
-+        alternative_endif
-+
-         exit    hyp=0, compat=\compat
-         .endm
+-#define FPEXC_EX                (1u << 31)
+-#define FPEXC_EN                (1u << 30)
+-#define FPEXC_FP2V              (1u << 28)
++#define FPEXC_EX                (1U << 31)
++#define FPEXC_EN                (1U << 30)
++#define FPEXC_FP2V              (1U << 28)
  
+-#define MVFR0_A_SIMD_MASK       (0xf << 0)
++#define MVFR0_A_SIMD_MASK       (0xfU << 0)
+ 
+ 
+ #define FPSID_IMPLEMENTER_BIT   (24)
+-#define FPSID_IMPLEMENTER_MASK  (0xff << FPSID_IMPLEMENTER_BIT)
++#define FPSID_IMPLEMENTER_MASK  (0xffU << FPSID_IMPLEMENTER_BIT)
+ #define FPSID_ARCH_BIT          (16)
+-#define FPSID_ARCH_MASK         (0xf << FPSID_ARCH_BIT)
++#define FPSID_ARCH_MASK         (0xfU << FPSID_ARCH_BIT)
+ #define FPSID_PART_BIT          (8)
+-#define FPSID_PART_MASK         (0xff << FPSID_PART_BIT)
++#define FPSID_PART_MASK         (0xffU << FPSID_PART_BIT)
+ #define FPSID_VARIANT_BIT       (4)
+-#define FPSID_VARIANT_MASK      (0xf << FPSID_VARIANT_BIT)
++#define FPSID_VARIANT_MASK      (0xfU << FPSID_VARIANT_BIT)
+ #define FPSID_REV_BIT           (0)
+-#define FPSID_REV_MASK          (0xf << FPSID_REV_BIT)
++#define FPSID_REV_MASK          (0xfU << FPSID_REV_BIT)
+ 
+ struct vfp_state
+ {
 -- 
 2.40.1
 
