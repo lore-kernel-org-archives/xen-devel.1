@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA4BDC001B0
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555050.866715 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D28AEB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555045.866689 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5H-00049z-HX; Mon, 26 Jun 2023 03:40:11 +0000
+	id 1qDd5C-0002gL-86; Mon, 26 Jun 2023 03:40:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555050.866715; Mon, 26 Jun 2023 03:40:11 +0000
+Received: by outflank-mailman (output) from mailman id 555045.866689; Mon, 26 Jun 2023 03:40:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5G-00044K-Ib; Mon, 26 Jun 2023 03:40:10 +0000
-Received: by outflank-mailman (input) for mailman id 555050;
- Mon, 26 Jun 2023 03:40:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qDd5A-0002Ys-SZ; Mon, 26 Jun 2023 03:40:04 +0000
+Received: by outflank-mailman (input) for mailman id 555045;
+ Mon, 26 Jun 2023 03:40:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd1g-0007ej-37
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:36:28 +0000
+ id 1qDd2I-0000HH-Ci
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:06 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id a18573a0-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:36:27 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id b7c70753-13d2-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 05:37:04 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AF7C01FB;
- Sun, 25 Jun 2023 20:37:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0370E1FB;
+ Sun, 25 Jun 2023 20:37:48 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 13BC73F64C;
- Sun, 25 Jun 2023 20:36:23 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5BAA53F64C;
+ Sun, 25 Jun 2023 20:37:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a18573a0-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: b7c70753-13d2-11ee-8611-37d641c3527e
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,106 +55,125 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 25/52] xen/mpu: introduce helpers for MPU enablement
-Date: Mon, 26 Jun 2023 11:34:16 +0800
-Message-Id: <20230626033443.2943270-26-Penny.Zheng@arm.com>
+Subject: [PATCH v3 37/52] xen/mpu: implement MPU version of copy_from_paddr
+Date: Mon, 26 Jun 2023 11:34:28 +0800
+Message-Id: <20230626033443.2943270-38-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We introduce new helpers for Xen to enable MPU in boot-time.
-enable_boot_mm() is implemented to be semantically consistent
-with the MMU version.
-
-If the Background region is enabled, then the MPU uses the
-default memory map as the Background region for generating
-the memory attributes when MPU is disabled.
-Since the default memory map of the Armv8-R AArch64
-architecture is IMPLEMENTATION DEFINED, we always turn off
-the Background region.
+When implementing MPU version of copy_from_paddr, if source physical address
+is not accessible, we shall map it temporarily with a transient MPU
+memory region for copying and pasting.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
 v3:
-- introduce code clearing SCTLR_EL2.BR
-- document the reason of isb
+- new patch
 ---
- xen/arch/arm/arm64/mpu/head.S        | 46 ++++++++++++++++++++++++++++
- xen/arch/arm/include/asm/processor.h |  1 +
- 2 files changed, 47 insertions(+)
+ xen/arch/arm/include/asm/mpu/mm.h |  3 +++
+ xen/arch/arm/mpu/mm.c             |  6 +++---
+ xen/arch/arm/mpu/setup.c          | 32 +++++++++++++++++++++++++++++++
+ 3 files changed, 38 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/mpu/head.S b/xen/arch/arm/arm64/mpu/head.S
-index 93a7a75029..3cfce126d5 100644
---- a/xen/arch/arm/arm64/mpu/head.S
-+++ b/xen/arch/arm/arm64/mpu/head.S
-@@ -170,6 +170,52 @@ ENTRY(prepare_early_mappings)
-     ret
- ENDPROC(prepare_early_mappings)
+diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
+index 98f6df65b8..452fe20c5f 100644
+--- a/xen/arch/arm/include/asm/mpu/mm.h
++++ b/xen/arch/arm/include/asm/mpu/mm.h
+@@ -7,6 +7,9 @@ extern unsigned long frametable_pdx_end;
+ 
+ extern int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags);
+ extern void setup_staticheap_mappings(void);
++extern uint8_t is_mm_range_mapped(paddr_t pa, paddr_t len);
++extern void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes);
++extern void unmap_mm_range(paddr_t pa);
+ 
+ #endif /* __ARCH_ARM_MM_MPU__ */
+ 
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index 3bb1a5c7c4..21276d6de9 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -631,7 +631,7 @@ int __init unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end)
+  * If it is mapped, the associated index will be returned.
+  * If it is not mapped, INVALID_REGION_IDX will be returned.
+  */
+-static uint8_t is_mm_range_mapped(paddr_t pa, paddr_t len)
++uint8_t is_mm_range_mapped(paddr_t pa, paddr_t len)
+ {
+     int rc;
+     uint8_t idx;
+@@ -705,7 +705,7 @@ static int is_mm_range_mapped_with_attr(paddr_t pa, paddr_t len,
+  * map_mm_range shall work with unmap_mm_range to map a chunk
+  * of memory with a transient MPU memory region for a period of short time.
+  */
+-static void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes)
++void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes)
+ {
+     if ( xen_mpumap_update(pa, pa + len, attributes | _PAGE_TRANSIENT) )
+         printk(XENLOG_ERR "Failed to map_mm_range 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
+@@ -714,7 +714,7 @@ static void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes)
+     return maddr_to_virt(pa);
+ }
+ 
+-static void unmap_mm_range(paddr_t pa)
++void unmap_mm_range(paddr_t pa)
+ {
+     uint8_t idx;
+ 
+diff --git a/xen/arch/arm/mpu/setup.c b/xen/arch/arm/mpu/setup.c
+index 31f412957c..9963975b4e 100644
+--- a/xen/arch/arm/mpu/setup.c
++++ b/xen/arch/arm/mpu/setup.c
+@@ -22,6 +22,7 @@
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
++#include <asm/arm64/mpu.h>
+ #include <asm/mpu/mm.h>
+ #include <asm/page.h>
+ #include <asm/setup.h>
+@@ -60,6 +61,37 @@ void __init setup_mm(void)
+     init_staticmem_pages();
+ }
  
 +/*
-+ * Enable EL2 MPU and data cache
-+ * If the Background region is enabled, then the MPU uses the default memory
-+ * map as the Background region for generating the memory
-+ * attributes when MPU is disabled.
-+ * Since the default memory map of the Armv8-R AArch64 architecture is
-+ * IMPLEMENTATION DEFINED, we intend to turn off the Background region here.
-+ *
-+ * Clobbers x0
-+ *
++ * copy_from_paddr - copy data from a physical address
++ * @dst: destination virtual address
++ * @paddr: source physical address
++ * @len: length to copy
 + */
-+ENTRY(enable_mpu)
-+    mrs   x0, SCTLR_EL2
-+    orr   x0, x0, #SCTLR_Axx_ELx_M    /* Enable MPU */
-+    orr   x0, x0, #SCTLR_Axx_ELx_C    /* Enable D-cache */
-+    orr   x0, x0, #SCTLR_Axx_ELx_WXN  /* Enable WXN */
-+    and   x0, x0, #SCTLR_Axx_ELx_BR   /* Disable Background region */
-+    msr   SCTLR_EL2, x0               /* now mpu memory mapping is enabled */
-+    isb                               /* Now, flush the icache */
-+    ret
-+ENDPROC(enable_mpu)
++void __init copy_from_paddr(void *dst, paddr_t paddr, unsigned long len)
++{
++    void *src, *rc = NULL;
++    uint8_t idx;
 +
-+/*
-+ * Turn on the Data Cache and the MPU. The function will return
-+ * to the virtual address provided in LR (e.g. the runtime mapping).
-+ *
-+ * Inputs:
-+ *   lr : Virtual address to return to.
-+ *
-+ * Clobbers x0 - x7
-+ */
-+ENTRY(enable_boot_mm)
-+        /* save return address */
-+        mov   x7, lr
-+
-+        bl    prepare_early_mappings
-+        bl    enable_mpu
-+
-+        mov   lr, x7
++    idx = is_mm_range_mapped(round_pgdown(paddr), round_pgup(len));
++    if ( idx == INVALID_REGION_IDX )
++    {
 +        /*
-+         * The "ret" here will use the return address in LR to
-+         * return to primary_switched
++         * If source physical address is not accessible, we shall map it
++         * temporarily for copying and pasting
 +         */
-+        ret
-+ENDPROC(enable_boot_mm)
++        rc = map_mm_range(round_pgdown(paddr), round_pgup(len),
++                          PAGE_HYPERVISOR_WC);
++        if ( !rc )
++            return;
++    }
++
++    src = maddr_to_virt(paddr);
++    memcpy(dst, src, len);
++
++    if ( rc )
++        unmap_mm_range(round_pgdown(paddr));
++}
 +
  /*
   * Local variables:
-  * mode: ASM
-diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-index 7e42ff8811..685f9b18fd 100644
---- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -167,6 +167,7 @@
- /* Common bits for SCTLR_ELx on all architectures */
- #define SCTLR_Axx_ELx_EE    BIT(25, UL)
- #define SCTLR_Axx_ELx_WXN   BIT(19, UL)
-+#define SCTLR_Axx_ELx_BR    (~BIT(17, UL))
- #define SCTLR_Axx_ELx_I     BIT(12, UL)
- #define SCTLR_Axx_ELx_C     BIT(2, UL)
- #define SCTLR_Axx_ELx_A     BIT(1, UL)
+  * mode: C
 -- 
 2.25.1
 
