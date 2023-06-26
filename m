@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC27EB64D7
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555073.866773 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF094EB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555076.866795 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5T-0007Th-Cv; Mon, 26 Jun 2023 03:40:23 +0000
+	id 1qDd5X-0008Ai-JI; Mon, 26 Jun 2023 03:40:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555073.866773; Mon, 26 Jun 2023 03:40:23 +0000
+Received: by outflank-mailman (output) from mailman id 555076.866795; Mon, 26 Jun 2023 03:40:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5T-0007QM-0R; Mon, 26 Jun 2023 03:40:23 +0000
-Received: by outflank-mailman (input) for mailman id 555073;
- Mon, 26 Jun 2023 03:40:21 +0000
+	id 1qDd5W-00083m-7k; Mon, 26 Jun 2023 03:40:26 +0000
+Received: by outflank-mailman (input) for mailman id 555076;
+ Mon, 26 Jun 2023 03:40:22 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd1L-0007ej-Vr
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:36:07 +0000
+ id 1qDd0p-0007ej-9f
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:35:35 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 95a48964-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:36:07 +0200 (CEST)
+ id 8244304c-13d2-11ee-b237-6b7b168915f2;
+ Mon, 26 Jun 2023 05:35:34 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BBB071FB;
- Sun, 25 Jun 2023 20:36:50 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33DF32F4;
+ Sun, 25 Jun 2023 20:36:18 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F381B3F64C;
- Sun, 25 Jun 2023 20:36:03 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id BE9583F64C;
+ Sun, 25 Jun 2023 20:35:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,75 +45,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95a48964-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 8244304c-13d2-11ee-b237-6b7b168915f2
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Penny Zheng <Penny.Zheng@arm.com>,
+Cc: Wei Chen <wei.chen@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>,
-	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 19/52] xen/arm: switch to use ioremap_xxx in common file
-Date: Mon, 26 Jun 2023 11:34:10 +0800
-Message-Id: <20230626033443.2943270-20-Penny.Zheng@arm.com>
+	Penny Zheng <penny.zheng@arm.com>
+Subject: [PATCH v3 09/52] xen/arm: use PA == VA for EARLY_UART_VIRTUAL_ADDRESS on MPU systems
+Date: Mon, 26 Jun 2023 11:34:00 +0800
+Message-Id: <20230626033443.2943270-10-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In arm, with the introduction of MPU system, VMAP scheme, taking
-advantage of virtual translation, will become a MMU-only feature.
-So we want to avoid using direct access to all vmap-related functions,
-like __vmap(), in common files, and switch to use more generic eoremap_xxx
-instead.
-Then later, we also just need to implement MPU version of ioremap_xxx.
+From: Wei Chen <wei.chen@arm.com>
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+There is no VMSA support on MPU systems, so we can not map early
+UART to FIXMAP_CONSOLE. In stead, we can use PA == VA for early
+UART on MPU systems.
+
 Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+---
+v2:
+1. New patch
 ---
 v3:
-- new commit
+1. fix comment
+2. change CONFIG_ARM_V8R to !CONFIG_HAS_MMU
 ---
- xen/arch/arm/kernel.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/early_printk.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index d13ef0330b..30f8bc5923 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -172,7 +172,6 @@ static __init int kernel_decompress(struct bootmodule *mod, uint32_t offset)
-     unsigned int kernel_order_out;
-     paddr_t output_size;
-     struct page_info *pages;
--    mfn_t mfn;
-     int i;
-     paddr_t addr = mod->start;
-     paddr_t size = mod->size;
-@@ -209,13 +208,18 @@ static __init int kernel_decompress(struct bootmodule *mod, uint32_t offset)
-         iounmap(input);
-         return -ENOMEM;
-     }
--    mfn = page_to_mfn(pages);
--    output = __vmap(&mfn, 1 << kernel_order_out, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
-+    output = ioremap_cache(page_to_maddr(pages),
-+                           pfn_to_paddr(1UL << kernel_order_out));
-+    if ( output == NULL )
-+    {
-+        iounmap(output);
-+        return -EFAULT;
-+    }
+diff --git a/xen/arch/arm/include/asm/early_printk.h b/xen/arch/arm/include/asm/early_printk.h
+index c5149b2976..ec5bcc343c 100644
+--- a/xen/arch/arm/include/asm/early_printk.h
++++ b/xen/arch/arm/include/asm/early_printk.h
+@@ -15,10 +15,22 @@
  
-     rc = perform_gunzip(output, input, size);
-     clean_dcache_va_range(output, output_size);
-     iounmap(input);
--    vunmap(output);
-+    iounmap(output);
+ #ifdef CONFIG_EARLY_PRINTK
  
-     if ( rc )
-     {
++#ifndef CONFIG_HAS_MMU
++
++/*
++ * For MPU systems, there is no VMSA support in EL2, so we use VA == PA
++ * for EARLY_UART_VIRTUAL_ADDRESS.
++ */
++#define EARLY_UART_VIRTUAL_ADDRESS CONFIG_EARLY_UART_BASE_ADDRESS
++
++#else
++
+ /* need to add the uart address offset in page to the fixmap address */
+ #define EARLY_UART_VIRTUAL_ADDRESS \
+     (FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
+ 
++#endif /* CONFIG_HAS_MMU */
++
+ #endif /* !CONFIG_EARLY_PRINTK */
+ 
+ #endif
 -- 
 2.25.1
 
