@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E17EB64DA
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555385.867141 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57212EB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555387.867161 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitu-0001Tz-1U; Mon, 26 Jun 2023 09:52:50 +0000
+	id 1qDity-0002Ah-MS; Mon, 26 Jun 2023 09:52:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555385.867141; Mon, 26 Jun 2023 09:52:50 +0000
+Received: by outflank-mailman (output) from mailman id 555387.867161; Mon, 26 Jun 2023 09:52:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitt-0001Tq-UE; Mon, 26 Jun 2023 09:52:49 +0000
-Received: by outflank-mailman (input) for mailman id 555385;
- Mon, 26 Jun 2023 09:52:48 +0000
+	id 1qDity-0002AW-I8; Mon, 26 Jun 2023 09:52:54 +0000
+Received: by outflank-mailman (input) for mailman id 555387;
+ Mon, 26 Jun 2023 09:52:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rDFh=CO=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qDits-0000Ov-MW
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:48 +0000
+ id 1qDitv-0000Ov-J4
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:51 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 344ca788-1407-11ee-8611-37d641c3527e;
- Mon, 26 Jun 2023 11:52:47 +0200 (CEST)
+ id 36049170-1407-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 11:52:50 +0200 (CEST)
 Received: from Dell.bugseng.com (unknown [37.163.27.55])
- by support.bugseng.com (Postfix) with ESMTPSA id 4170B4EE073F;
- Mon, 26 Jun 2023 11:52:45 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 6EE0D4EE0742;
+ Mon, 26 Jun 2023 11:52:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 344ca788-1407-11ee-8611-37d641c3527e
+X-Inumbo-ID: 36049170-1407-11ee-8611-37d641c3527e
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -53,64 +53,74 @@ Cc: consulting@bugseng.com,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v3 4/6] xen/arm: vgic: change parameter name in 'init' and 'free' functions.
-Date: Mon, 26 Jun 2023 11:52:16 +0200
-Message-Id: <0332cf060e181d60e249a004182be011f93602a2.1687771796.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH v3 6/6] xen/arm: change parameter names in replace_grant_host_mapping().
+Date: Mon, 26 Jun 2023 11:52:18 +0200
+Message-Id: <2c2b9b3c53e556945baab3dd387bf029e12434b6.1687771796.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687771796.git.federico.serafini@bugseng.com>
 References: <cover.1687771796.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In the current versions of vcpu_vgic_init() and vcpu_vgic_free(),
-the declarations (correctly) use the parameter name 'v' while the
-corresponding definitions use the parameter name 'vcpu'.
-Since it is common to use 'v' to denote a vCPU, change the parameter
-name 'vcpu' of function definitions to 'v', thus fixing violations of
-MISRA C:2012 Rule 8.3.
+In the current version of replace_grant_host_mapping() function, the
+declaration (correctly) uses the parameter names 'gpaddr' and
+'new_gpaddr', while the definition uses the parameter names 'addr' and
+'new_addr'.
+Change the parameter names of the definition to 'gpaddr' and
+'new_gpaddr' so that it is clear what type of address is expected and
+violations of MISRA C:2012 Rule 8.3 are fixed.
+
+In both declaration and definition of function
+replace_grant_host_mapping() change the parameter name 'mfn' to 'frame',
+thus improving readability and keeping consistency with name used in
+create_grant_host_mapping().
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/arm/vgic/vgic-init.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/arm/include/asm/grant_table.h |  2 +-
+ xen/arch/arm/mm.c                      | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/arm/vgic/vgic-init.c b/xen/arch/arm/vgic/vgic-init.c
-index ea739d081e..76b85ea823 100644
---- a/xen/arch/arm/vgic/vgic-init.c
-+++ b/xen/arch/arm/vgic/vgic-init.c
-@@ -196,16 +196,16 @@ int domain_vgic_init(struct domain *d, unsigned int nr_spis)
-  * vcpu_vgic_init() - Register VCPU-specific KVM iodevs
-  * was: kvm_vgic_vcpu_init()
-  * Xen: adding vgic_vx_enable() call
-- * @vcpu: pointer to the VCPU being created and initialized
-+ * @v: pointer to the VCPU being created and initialized
-  */
--int vcpu_vgic_init(struct vcpu *vcpu)
-+int vcpu_vgic_init(struct vcpu *v)
- {
-     int ret = 0;
+diff --git a/xen/arch/arm/include/asm/grant_table.h b/xen/arch/arm/include/asm/grant_table.h
+index 265e598e56..f2d115b97d 100644
+--- a/xen/arch/arm/include/asm/grant_table.h
++++ b/xen/arch/arm/include/asm/grant_table.h
+@@ -38,7 +38,7 @@ static inline bool gnttab_release_host_mappings(const struct domain *d)
  
--    vgic_vcpu_early_init(vcpu);
-+    vgic_vcpu_early_init(v);
+ int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
+                               unsigned int flags, unsigned int cache_flags);
+-int replace_grant_host_mapping(unsigned long gpaddr, mfn_t mfn,
++int replace_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
+                                unsigned long new_gpaddr, unsigned int flags);
  
-     if ( gic_hw_version() == GIC_V2 )
--        vgic_v2_enable(vcpu);
-+        vgic_v2_enable(v);
-     else
-         ret = -ENXIO;
- 
-@@ -239,9 +239,9 @@ void domain_vgic_free(struct domain *d)
-     dist->nr_spis = 0;
+ /*
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 2e9860a754..0a3e1f3b64 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -1600,17 +1600,17 @@ int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
+         return GNTST_okay;
  }
  
--int vcpu_vgic_free(struct vcpu *vcpu)
-+int vcpu_vgic_free(struct vcpu *v)
+-int replace_grant_host_mapping(unsigned long addr, mfn_t mfn,
+-                               unsigned long new_addr, unsigned int flags)
++int replace_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
++                               unsigned long new_gpaddr, unsigned int flags)
  {
--    struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic;
-+    struct vgic_cpu *vgic_cpu = &v->arch.vgic;
+-    gfn_t gfn = gaddr_to_gfn(addr);
++    gfn_t gfn = gaddr_to_gfn(gpaddr);
+     struct domain *d = current->domain;
+     int rc;
  
-     INIT_LIST_HEAD(&vgic_cpu->ap_list_head);
+-    if ( new_addr != 0 || (flags & GNTMAP_contains_pte) )
++    if ( new_gpaddr != 0 || (flags & GNTMAP_contains_pte) )
+         return GNTST_general_error;
  
+-    rc = guest_physmap_remove_page(d, gfn, mfn, 0);
++    rc = guest_physmap_remove_page(d, gfn, frame, 0);
+ 
+     return rc ? GNTST_general_error : GNTST_okay;
+ }
 -- 
 2.34.1
 
