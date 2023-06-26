@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D276DEB64DC
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555025.866627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81BBEB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555016.866598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd4y-0007oJ-U2; Mon, 26 Jun 2023 03:39:52 +0000
+	id 1qDd4u-0006m2-6P; Mon, 26 Jun 2023 03:39:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555025.866627; Mon, 26 Jun 2023 03:39:52 +0000
+Received: by outflank-mailman (output) from mailman id 555016.866598; Mon, 26 Jun 2023 03:39:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd4x-0007j3-Ut; Mon, 26 Jun 2023 03:39:51 +0000
-Received: by outflank-mailman (input) for mailman id 555025;
- Mon, 26 Jun 2023 03:39:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qDd4t-0006jm-Jx; Mon, 26 Jun 2023 03:39:47 +0000
+Received: by outflank-mailman (input) for mailman id 555016;
+ Mon, 26 Jun 2023 03:39:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd2d-0007ej-7C
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:27 +0000
+ id 1qDd2O-0000HH-Mx
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:12 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c4cd8afc-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:37:26 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id bb901191-13d2-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 05:37:10 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DE4681FB;
- Sun, 25 Jun 2023 20:38:09 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 417381FB;
+ Sun, 25 Jun 2023 20:37:54 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 425AF3F64C;
- Sun, 25 Jun 2023 20:37:23 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8CDF73F64C;
+ Sun, 25 Jun 2023 20:37:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4cd8afc-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: bb901191-13d2-11ee-8611-37d641c3527e
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,199 +55,118 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 44/52] xen/mpu: P2M initialization in MPU system
-Date: Mon, 26 Jun 2023 11:34:35 +0800
-Message-Id: <20230626033443.2943270-45-Penny.Zheng@arm.com>
+Subject: [PATCH v3 39/52] xen/mpu: support free_init_memory in MPU system
+Date: Mon, 26 Jun 2023 11:34:30 +0800
+Message-Id: <20230626033443.2943270-40-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We inherit p2m_init() to do P2M initialization in MPU system, including
-VMID assignment, setting up P2M MPU region mapping table, etc.
+This commit refines free_init_memory() to make it support in MPU system.
 
-p2m_alloc_table() is responsible for allocating per-domain P2M MPU memory
-region mapping table. As a MPU memory region structure(pr_t) takes 16 bytes,
-even with maximum supported MPU memory regions, 255, MPU memory mapping table
-at most takes up less than 4KB.
+We are supporting modify_xen_mappings() in MPU system too, and it is
+responsible for modifying memory permission of a existing MPU memory region.
+Currently, we only support modifying a *WHOLE* MPU memory region,
+part-region modification is not supported, as in worst case, it will
+leave three fragments behind.
 
-VSCTLR_EL2, Virtualization System Control Register, provides configuration
-information for VMSAv8-64 and PMSAv8-64 virtualization using stage 2
-of EL1&0 translation regime, bit[63:48] of which determines VMID for the
-EL1-Guest-OS.
+In MPU system, we map init text and init data section, each with a MPU memory
+region. So we shall destroy it seperately in free_init_memory().
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
 v3:
-- new commit
+- As MMU and MPU could share a lot of codes, we made the changes in
+original function free_init_memory() in mm.c
 ---
- xen/arch/arm/include/asm/mpu/mm.h |  3 ++
- xen/arch/arm/include/asm/p2m.h    |  5 +++
- xen/arch/arm/mpu/mm.c             | 22 ++++++++++
- xen/arch/arm/mpu/p2m.c            | 69 +++++++++++++++++++++++++++++++
- 4 files changed, 99 insertions(+)
+ xen/arch/arm/mm.c     | 14 +++++++++++++-
+ xen/arch/arm/mpu/mm.c | 33 ++++++++++++++++++++++++++++++++-
+ 2 files changed, 45 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
-index a83519ad13..4df69245c6 100644
---- a/xen/arch/arm/include/asm/mpu/mm.h
-+++ b/xen/arch/arm/include/asm/mpu/mm.h
-@@ -2,6 +2,8 @@
- #ifndef __ARCH_ARM_MM_MPU__
- #define __ARCH_ARM_MM_MPU__
- 
-+#include <asm/arm64/mpu.h>
-+
- extern struct page_info *frame_table;
- extern unsigned long frametable_pdx_end;
- 
-@@ -11,6 +13,7 @@ extern uint8_t is_mm_range_mapped(paddr_t pa, paddr_t len);
- extern void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes);
- extern void unmap_mm_range(paddr_t pa);
- extern bool is_mm_range_mapped_transient(paddr_t pa, paddr_t len);
-+extern pr_t *alloc_mpumap(void);
- 
- #endif /* __ARCH_ARM_MM_MPU__ */
- 
-diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
-index d9c91d4a98..c3598d514e 100644
---- a/xen/arch/arm/include/asm/p2m.h
-+++ b/xen/arch/arm/include/asm/p2m.h
-@@ -61,8 +61,13 @@ struct p2m_domain {
-     /* Current VMID in use */
-     uint16_t vmid;
- 
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 247d17cfa1..ba4ae74e18 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -177,7 +177,12 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int flags)
+     ASSERT(IS_ALIGNED(s, PAGE_SIZE));
+     ASSERT(IS_ALIGNED(e, PAGE_SIZE));
+     ASSERT(s <= e);
 +#ifndef CONFIG_HAS_MPU
-     /* Current Translation Table Base Register for the p2m */
-     uint64_t vttbr;
+     return xen_pt_update(s, INVALID_MFN, (e - s) >> PAGE_SHIFT, flags);
 +#else
-+    /* Current Virtualization System Control Register for the p2m */
-+    uint64_t vsctlr;
++    return xen_mpumap_update(virt_to_maddr((void *)s),
++                             virt_to_maddr((void *)e), flags);
 +#endif
+ }
  
-     /* Highest guest frame that's ever been mapped in the p2m */
-     gfn_t max_mapped_gfn;
+ /* Release all __init and __initdata ranges to be reused */
+@@ -212,10 +217,17 @@ void free_init_memory(void)
+     for ( i = 0; i < nr; i++ )
+         *(p + i) = insn;
+ 
++    /* Remove init text section */
+     rc = destroy_xen_mappings((unsigned long)__init_begin,
++                              (unsigned long)inittext_end);
++    if ( rc )
++        panic("Unable to remove the init text section (rc = %d)\n", rc);
++
++    /* Remove init data section */
++    rc = destroy_xen_mappings((unsigned long)inittext_end,
+                               (unsigned long)__init_end);
+     if ( rc )
+-        panic("Unable to remove the init section (rc = %d)\n", rc);
++        panic("Unable to remove the init data section (rc = %d)\n", rc);
+ 
+     if ( !xen_is_using_staticheap() )
+     {
 diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 27d924e449..de5da96b80 100644
+index b2419f0603..79d1c10d05 100644
 --- a/xen/arch/arm/mpu/mm.c
 +++ b/xen/arch/arm/mpu/mm.c
-@@ -872,6 +872,28 @@ void __init remove_early_mappings(paddr_t dtb_paddr)
-             panic("Unable to destroy early Device-Tree mapping.\n");
- }
+@@ -496,8 +496,39 @@ static int xen_mpumap_update_entry(paddr_t base, paddr_t limit,
+     if ( (rc < 0) || (rc == MPUMAP_REGION_OVERLAP) )
+         return -EINVAL;
  
-+/*
-+ * Standard entry to dynamically allocate MPU memory region mapping table.
-+ * A 4KB page is enough for holding the maximum supported MPU memory
-+ * regions.
-+ */
-+pr_t *alloc_mpumap(void)
-+{
-+    pr_t *map;
-+
-+    /*
-+     * A MPU memory region structure(pr_t) takes 16 bytes, even with maximum
-+     * supported MPU memory regions, 255, MPU memory mapping table at most
-+     * takes up less than 4KB.
-+     */
-+    map = alloc_xenheap_pages(0, 0);
-+    if ( map == NULL )
-+        return NULL;
-+
-+    clear_page(map);
-+    return map;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/mpu/p2m.c b/xen/arch/arm/mpu/p2m.c
-index a7a3912a9a..8f728f8957 100644
---- a/xen/arch/arm/mpu/p2m.c
-+++ b/xen/arch/arm/mpu/p2m.c
-@@ -4,6 +4,7 @@
- #include <xen/sched.h>
- #include <xen/warning.h>
- 
-+#include <asm/mpu/mm.h>
- #include <asm/p2m.h>
- #include <asm/processor.h>
- #include <asm/sysregs.h>
-@@ -97,6 +98,74 @@ fault:
-     panic("Hardware with no PMSAv8-64 support in any translation regime.\n");
- }
- 
-+static uint64_t __init generate_vsctlr(uint16_t vmid)
-+{
-+    return ((uint64_t)vmid << 48);
-+}
-+
-+static int __init p2m_alloc_table(struct domain *d)
-+{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(d);
-+    pr_t* p2m_map;
-+
-+    p2m_map = alloc_mpumap();
-+    if ( !p2m_map )
++    /* We are updating the permission. */
++    if ( (flags & _PAGE_PRESENT) && (rc == MPUMAP_REGION_FOUND ||
++                                     rc == MPUMAP_REGION_INCLUSIVE) )
 +    {
-+        printk(XENLOG_G_ERR "DOM%pd: p2m: unable to allocate P2M MPU mapping table\n", d);
-+        return -ENOMEM;
++        /*
++         * Currently, we only support modifying a *WHOLE* MPU memory region,
++         * part-region modification is not supported, as in worst case, it will
++         * leave three fragments behind.
++         * part-region modification will be introduced only when actual usage
++         * come
++         */
++        if ( rc == MPUMAP_REGION_INCLUSIVE )
++        {
++            region_printk("mpu: part-region modification is not supported\n");
++            return -EINVAL;
++        }
++
++        /* We don't allow changing memory attributes. */
++        if (xen_mpumap[idx].prlar.reg.ai != PAGE_AI_MASK(flags) )
++        {
++            region_printk("Modifying memory attributes is not allowed (0x%x -> 0x%x).\n",
++                          xen_mpumap[idx].prlar.reg.ai, PAGE_AI_MASK(flags));
++            return -EINVAL;
++        }
++
++        /* Set new permission */
++        xen_mpumap[idx].prbar.reg.ap = PAGE_AP_MASK(flags);
++        xen_mpumap[idx].prbar.reg.xn = PAGE_XN_MASK(flags);
++
++        write_protection_region((const pr_t*)(&xen_mpumap[idx]), idx);
 +    }
-+
-+    p2m->root = virt_to_page((const void *)p2m_map);
-+
-+    return 0;
-+}
-+
-+int p2m_init(struct domain *d)
-+{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(d);
-+    int rc = 0;
-+    unsigned int cpu;
-+
-+    rwlock_init(&p2m->lock);
-+    spin_lock_init(&d->arch.paging.lock);
-+
-+    p2m->vmid = INVALID_VMID;
-+    p2m->max_mapped_gfn = _gfn(0);
-+    p2m->lowest_mapped_gfn = _gfn(ULONG_MAX);
-+
-+    p2m->default_access = p2m_access_rwx;
-+    /* mem_access is NOT supported in MPU system. */
-+    p2m->mem_access_enabled = false;
-+
-+    /*
-+     * Make sure that the type chosen to is able to store an vCPU ID
-+     * between 0 and the maximum of virtual CPUS supported as long as
-+     * the INVALID_VCPU_ID.
-+     */
-+    BUILD_BUG_ON((1 << (sizeof(p2m->last_vcpu_ran[0]) * 8)) < MAX_VIRT_CPUS);
-+    BUILD_BUG_ON((1 << (sizeof(p2m->last_vcpu_ran[0]) * 8)) < INVALID_VCPU_ID);
-+
-+    for_each_possible_cpu(cpu)
-+       p2m->last_vcpu_ran[cpu] = INVALID_VCPU_ID;
-+
-+    /*
-+     * "Trivial" initialisation is now complete.  Set the backpointer so
-+     * p2m_teardown() and friends know to do something.
-+     */
-+    p2m->domain = d;
-+
-+    rc = p2m_alloc_vmid(d);
-+    if ( rc )
-+        return rc;
-+    p2m->vsctlr = generate_vsctlr(p2m->vmid);
-+
-+    rc = p2m_alloc_table(d);
-+    if ( rc )
-+        return rc;
-+
-+    return rc;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
+     /* We are inserting a mapping => Create new region. */
+-    if ( flags & _PAGE_PRESENT )
++    else if ( flags & _PAGE_PRESENT )
+     {
+         if ( rc != MPUMAP_REGION_FAILED )
+             return -EINVAL;
 -- 
 2.25.1
 
