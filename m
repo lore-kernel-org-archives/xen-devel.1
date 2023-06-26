@@ -4,32 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8308EB64D7
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555386.867151 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82838EB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 10:10:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555423.867171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitv-0001l1-9s; Mon, 26 Jun 2023 09:52:51 +0000
+	id 1qDjAl-0006JC-2E; Mon, 26 Jun 2023 10:10:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555386.867151; Mon, 26 Jun 2023 09:52:51 +0000
+Received: by outflank-mailman (output) from mailman id 555423.867171; Mon, 26 Jun 2023 10:10:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitv-0001kq-5v; Mon, 26 Jun 2023 09:52:51 +0000
-Received: by outflank-mailman (input) for mailman id 555386;
- Mon, 26 Jun 2023 09:52:50 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qDjAk-0006J5-Vk; Mon, 26 Jun 2023 10:10:14 +0000
+Received: by outflank-mailman (input) for mailman id 555423;
+ Mon, 26 Jun 2023 10:10:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rDFh=CO=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qDitu-0000Ov-62
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:50 +0000
-Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3518813d-1407-11ee-8611-37d641c3527e;
- Mon, 26 Jun 2023 11:52:48 +0200 (CEST)
-Received: from Dell.bugseng.com (unknown [37.163.27.55])
- by support.bugseng.com (Postfix) with ESMTPSA id 1A37A4EE0740;
- Mon, 26 Jun 2023 11:52:47 +0200 (CEST)
+ <SRS0=pguY=CO=linaro.org=richard.henderson@srs-se1.protection.inumbo.net>)
+ id 1qDjAj-0005SQ-H3
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 10:10:13 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a3218cc5-1409-11ee-b237-6b7b168915f2;
+ Mon, 26 Jun 2023 12:10:11 +0200 (CEST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-4f867700f36so4010414e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jun 2023 03:10:12 -0700 (PDT)
+Received: from [192.168.157.227] (141.pool92-176-132.dynamic.orange.es.
+ [92.176.132.141]) by smtp.gmail.com with ESMTPSA id
+ j19-20020a5d4533000000b0030fafcbbd33sm6833820wra.50.2023.06.26.03.10.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Jun 2023 03:10:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,153 +47,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3518813d-1407-11ee-8611-37d641c3527e
-From: Federico Serafini <federico.serafini@bugseng.com>
-To: xen-devel@lists.xenproject.org
-Cc: consulting@bugseng.com,
-	Federico Serafini <federico.serafini@bugseng.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
-	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v3 5/6] xen/arm: make parameter names of function declarations consistent.
-Date: Mon, 26 Jun 2023 11:52:17 +0200
-Message-Id: <5d0075418f0674e0ca1f63744b87b27085a0d865.1687771796.git.federico.serafini@bugseng.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1687771796.git.federico.serafini@bugseng.com>
-References: <cover.1687771796.git.federico.serafini@bugseng.com>
+X-Inumbo-ID: a3218cc5-1409-11ee-b237-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1687774211; x=1690366211;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=74FM579RKOmTf3FtTjRf/xU5EA/KuNtZjlzUaBEQ9kQ=;
+        b=S8VAOmGaHb+ynWL6PZdVTf20DDVl7Z0It/rfFFEA3rSrWW+j7oWDON4RLsGfkPpCqg
+         5K6cTpsgQ/ww7o9lKt0rscznpi0y3ON8sIMjAotM5fWDSWqhA2sWG/QGwe6xuOPyTbgu
+         TYNlDvI/QyqlbLGhnBaJ/x1CdnyNNWscnSzCSnH3cVi1dvHW9i/qn8ytvt5RZg2BcSxY
+         JAqOG8lDnR76XNPVCf8bQuQBr0C1oux9e3zeBHuaJ35patRNb5yVtEzDD4NinVJuEZ09
+         w5m4X5x6pIzlQvYSzuUAYIMRreEMGvvUVLY1IEIXa36eyW8RjH0UxtomgZPp9sG1XXId
+         Bm2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687774211; x=1690366211;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=74FM579RKOmTf3FtTjRf/xU5EA/KuNtZjlzUaBEQ9kQ=;
+        b=bS/ushDLHULNYqoIBRrBoBbmSCtUZ+WyWvzvs6+8IMQpvNKtQbCOVrTK0nWOLEQrPs
+         6gV6YQeMtZNf8flfVra0ucpzC4cNhNPIW+ZUUBUOq4xDKC8Fq2+8w4BwI6V+jU1Y4ZcI
+         wp3OORh5ZuA9hZ35DNYIqph9QWcOmDwsEAqFf0vgq38UzTJiOYb797G/jCadkvCweN1Z
+         IQW5FhNH9ffrQjk2FaOQY1vVHkukBYFWSFQy1gXmxDsHgdZY6OZb6iWaLZvChlwu2xqi
+         ZVBfICvWOEyvH38nwJOlE/zdf/iL1dkc059axMzTayphEL9mIQaSAgws74TMpwfIdx6l
+         5SOA==
+X-Gm-Message-State: AC+VfDz7SiHO5Thd+I4ghly92YcQXV19WzObSEiavd2C5G92y1rKmNs6
+	TJFm06Guehvicd6R65Sc1Oasqw==
+X-Google-Smtp-Source: ACHHUZ6vqORSRxMfrjz7CD/A/+w802FrwEYPSRxttM5nM7zy+gOj9GIQg8wRk+pyySrD350QiwEj1A==
+X-Received: by 2002:a19:7108:0:b0:4ef:f11c:f5b0 with SMTP id m8-20020a197108000000b004eff11cf5b0mr15203630lfc.54.1687774210741;
+        Mon, 26 Jun 2023 03:10:10 -0700 (PDT)
+Message-ID: <93dda239-00cb-3c5a-c7c2-6ade248e147b@linaro.org>
+Date: Mon, 26 Jun 2023 12:10:05 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v3 07/16] accel: Rename HAX 'struct hax_vcpu_state' ->
+ AccelCPUState
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: kvm@vger.kernel.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Roman Bolshakov <rbolshakov@ddn.com>, qemu-arm@nongnu.org,
+ Alexander Graf <agraf@csgraf.de>, xen-devel@lists.xenproject.org,
+ Sunil Muthuswamy <sunilmut@microsoft.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Paul Durrant <paul@xen.org>,
+ Reinoud Zandijk <reinoud@netbsd.org>, Eduardo Habkost <eduardo@habkost.net>,
+ Cameron Esfahani <dirty@apple.com>, Paolo Bonzini <pbonzini@redhat.com>
+References: <20230624174121.11508-1-philmd@linaro.org>
+ <20230624174121.11508-8-philmd@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230624174121.11508-8-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Change the parameter names of function declarations to be consistent
-with the names used in the corresponding function definitions, thus
-fixing violations of MISRA C:2012 Rule 8.3.
+On 6/24/23 19:41, Philippe Mathieu-Daudé wrote:
+> We want all accelerators to share the same opaque pointer in
+> CPUState. Start with the HAX context, renaming its forward
+> declarated structure 'hax_vcpu_state' as 'AccelCPUState'.
+> Document the CPUState field. Directly use the typedef.
+> 
+> Remove the amusing but now unnecessary casts in NVMM / WHPX.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> ---
+>   include/hw/core/cpu.h         |  5 ++---
+>   include/qemu/typedefs.h       |  1 +
+>   target/i386/hax/hax-i386.h    |  9 +++++----
+>   target/i386/hax/hax-all.c     | 16 ++++++++--------
+>   target/i386/hax/hax-posix.c   |  4 ++--
+>   target/i386/hax/hax-windows.c |  4 ++--
+>   target/i386/nvmm/nvmm-all.c   |  2 +-
+>   target/i386/whpx/whpx-all.c   |  2 +-
+>   8 files changed, 22 insertions(+), 21 deletions(-)
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
- xen/arch/arm/include/asm/fixmap.h       | 2 +-
- xen/arch/arm/include/asm/gic.h          | 2 +-
- xen/arch/arm/include/asm/gic_v3_its.h   | 5 +++--
- xen/arch/arm/include/asm/grant_table.h  | 2 +-
- xen/arch/arm/include/asm/guest_access.h | 2 +-
- xen/arch/arm/include/asm/irq.h          | 2 +-
- xen/arch/arm/include/asm/regs.h         | 2 +-
- xen/arch/arm/include/asm/vgic.h         | 4 ++--
- 8 files changed, 11 insertions(+), 10 deletions(-)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-diff --git a/xen/arch/arm/include/asm/fixmap.h b/xen/arch/arm/include/asm/fixmap.h
-index d0c9a52c8c..734eb9b1d4 100644
---- a/xen/arch/arm/include/asm/fixmap.h
-+++ b/xen/arch/arm/include/asm/fixmap.h
-@@ -30,7 +30,7 @@
- extern lpae_t xen_fixmap[XEN_PT_LPAE_ENTRIES];
- 
- /* Map a page in a fixmap entry */
--extern void set_fixmap(unsigned int map, mfn_t mfn, unsigned int attributes);
-+extern void set_fixmap(unsigned int map, mfn_t mfn, unsigned int flags);
- /* Remove a mapping from a fixmap entry */
- extern void clear_fixmap(unsigned int map);
- 
-diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
-index 76e3fa5dc4..f1ef347edc 100644
---- a/xen/arch/arm/include/asm/gic.h
-+++ b/xen/arch/arm/include/asm/gic.h
-@@ -257,7 +257,7 @@ int gic_remove_irq_from_guest(struct domain *d, unsigned int virq,
- extern void gic_clear_pending_irqs(struct vcpu *v);
- 
- extern void init_maintenance_interrupt(void);
--extern void gic_raise_guest_irq(struct vcpu *v, unsigned int irq,
-+extern void gic_raise_guest_irq(struct vcpu *v, unsigned int virtual_irq,
-         unsigned int priority);
- extern void gic_raise_inflight_irq(struct vcpu *v, unsigned int virtual_irq);
- 
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
-index fae3f6ecef..c24d4752d0 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -190,8 +190,9 @@ struct pending_irq *gicv3_its_get_event_pending_irq(struct domain *d,
-                                                     uint32_t eventid);
- int gicv3_remove_guest_event(struct domain *d, paddr_t vdoorbell_address,
-                                      uint32_t vdevid, uint32_t eventid);
--struct pending_irq *gicv3_assign_guest_event(struct domain *d, paddr_t doorbell,
--                                             uint32_t devid, uint32_t eventid,
-+struct pending_irq *gicv3_assign_guest_event(struct domain *d,
-+                                             paddr_t vdoorbell_address,
-+                                             uint32_t vdevid, uint32_t eventid,
-                                              uint32_t virt_lpi);
- void gicv3_lpi_update_host_entry(uint32_t host_lpi, int domain_id,
-                                  uint32_t virt_lpi);
-diff --git a/xen/arch/arm/include/asm/grant_table.h b/xen/arch/arm/include/asm/grant_table.h
-index e13dfeefa5..265e598e56 100644
---- a/xen/arch/arm/include/asm/grant_table.h
-+++ b/xen/arch/arm/include/asm/grant_table.h
-@@ -36,7 +36,7 @@ static inline bool gnttab_release_host_mappings(const struct domain *d)
-     return true;
- }
- 
--int create_grant_host_mapping(unsigned long gpaddr, mfn_t mfn,
-+int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
-                               unsigned int flags, unsigned int cache_flags);
- int replace_grant_host_mapping(unsigned long gpaddr, mfn_t mfn,
-                                unsigned long new_gpaddr, unsigned int flags);
-diff --git a/xen/arch/arm/include/asm/guest_access.h b/xen/arch/arm/include/asm/guest_access.h
-index 8278a45dbf..18c88b70d7 100644
---- a/xen/arch/arm/include/asm/guest_access.h
-+++ b/xen/arch/arm/include/asm/guest_access.h
-@@ -12,7 +12,7 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
- 
- /* Copy data to guest physical address, then clean the region. */
- unsigned long copy_to_guest_phys_flush_dcache(struct domain *d,
--                                              paddr_t phys,
-+                                              paddr_t gpa,
-                                               void *buf,
-                                               unsigned int len);
- 
-diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.h
-index 11bc85d111..105b33b37d 100644
---- a/xen/arch/arm/include/asm/irq.h
-+++ b/xen/arch/arm/include/asm/irq.h
-@@ -76,7 +76,7 @@ void init_IRQ(void);
- 
- int route_irq_to_guest(struct domain *d, unsigned int virq,
-                        unsigned int irq, const char *devname);
--int release_guest_irq(struct domain *d, unsigned int irq);
-+int release_guest_irq(struct domain *d, unsigned int virq);
- 
- void arch_move_irqs(struct vcpu *v);
- 
-diff --git a/xen/arch/arm/include/asm/regs.h b/xen/arch/arm/include/asm/regs.h
-index 0693a68131..ef34b38aa1 100644
---- a/xen/arch/arm/include/asm/regs.h
-+++ b/xen/arch/arm/include/asm/regs.h
-@@ -58,7 +58,7 @@ static inline bool guest_mode(const struct cpu_user_regs *r)
- }
- 
- register_t get_user_reg(struct cpu_user_regs *regs, int reg);
--void set_user_reg(struct cpu_user_regs *regs, int reg, register_t val);
-+void set_user_reg(struct cpu_user_regs *regs, int reg, register_t value);
- 
- #endif
- 
-diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
-index 328fd46d1b..aa9f49409e 100644
---- a/xen/arch/arm/include/asm/vgic.h
-+++ b/xen/arch/arm/include/asm/vgic.h
-@@ -355,8 +355,8 @@ bool vgic_evtchn_irq_pending(struct vcpu *v);
- int domain_vgic_register(struct domain *d, int *mmio_count);
- int domain_vgic_init(struct domain *d, unsigned int nr_spis);
- void domain_vgic_free(struct domain *d);
--int vcpu_vgic_init(struct vcpu *vcpu);
--int vcpu_vgic_free(struct vcpu *vcpu);
-+int vcpu_vgic_init(struct vcpu *v);
-+int vcpu_vgic_free(struct vcpu *v);
- 
- void vgic_inject_irq(struct domain *d, struct vcpu *v, unsigned int virq,
-                      bool level);
--- 
-2.34.1
-
+r~
 
