@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E723AEB64DA
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555087.866853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F096EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555084.866832 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5l-0003Pz-Li; Mon, 26 Jun 2023 03:40:41 +0000
+	id 1qDd5g-0001vI-8P; Mon, 26 Jun 2023 03:40:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555087.866853; Mon, 26 Jun 2023 03:40:41 +0000
+Received: by outflank-mailman (output) from mailman id 555084.866832; Mon, 26 Jun 2023 03:40:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5k-0003IV-F2; Mon, 26 Jun 2023 03:40:40 +0000
-Received: by outflank-mailman (input) for mailman id 555087;
- Mon, 26 Jun 2023 03:40:35 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qDd5f-0001mQ-3h; Mon, 26 Jun 2023 03:40:35 +0000
+Received: by outflank-mailman (input) for mailman id 555084;
+ Mon, 26 Jun 2023 03:40:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd2m-0007ej-M2
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:36 +0000
+ id 1qDd2h-0000HH-Kl
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:31 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ca704925-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:37:35 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id c6b0abc6-13d2-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 05:37:29 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 485401FB;
- Sun, 25 Jun 2023 20:38:19 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 034751FB;
+ Sun, 25 Jun 2023 20:38:13 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9FEE23F64C;
- Sun, 25 Jun 2023 20:37:32 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5B0603F64C;
+ Sun, 25 Jun 2023 20:37:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca704925-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: c6b0abc6-13d2-11ee-8611-37d641c3527e
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,25 +55,21 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 47/52] xen/mpu: support vcpu context switch in MPU system
-Date: Mon, 26 Jun 2023 11:34:38 +0800
-Message-Id: <20230626033443.2943270-48-Penny.Zheng@arm.com>
+Subject: [PATCH v3 45/52] xen/mpu: insert an new entry into guest physmap in MPU system
+Date: Mon, 26 Jun 2023 11:34:36 +0800
+Message-Id: <20230626033443.2943270-46-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When vcpu switching into guest mode, in MMU system, we update VTTBR_EL2
-with the incoming guest's P2M table, simple and fast.
-While in MPU system, we have MPU register PRBAR_EL2/PRLAR_EL2 for
-both stage 1 EL2 address translation and stage 2 EL1&EL0 address
-translation. That is, MPU memory region mapping table(xen_mpumap) shall be
-also updated with P2M regions during context switch.
-
-In p2m_save_state(), we need to manually disable all P2M MPU memory regions
-from last-running vcpu, and in p2m_restore_state(), we need to manually
-enable incoming guest's P2M MPU memory regions.
+Function p2m_set_entry/__p2m_set_entry is responsible for inserting an entry
+in the p2m. In MPU system, it includes the following steps:
+- checking whether mapping already exists(sgfn -> mfn)
+- constituting a new P2M MPU memory region structure(pr_t) through
+standard entry region_to_p2m_entry()
+- insert the new entry into domain P2M table(p2m->root)
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
@@ -81,141 +77,251 @@ Signed-off-by: Wei Chen <wei.chen@arm.com>
 v3:
 - new commit
 ---
- xen/arch/arm/include/asm/arm64/sysregs.h |  3 ++
- xen/arch/arm/include/asm/page.h          |  4 ++
- xen/arch/arm/mpu/mm.c                    |  6 ++-
- xen/arch/arm/mpu/p2m.c                   | 61 ++++++++++++++++++++++++
- 4 files changed, 73 insertions(+), 1 deletion(-)
+ xen/arch/arm/include/asm/arm64/mpu.h |   3 +-
+ xen/arch/arm/include/asm/mpu/mm.h    |   6 +
+ xen/arch/arm/include/asm/p2m.h       |   3 +
+ xen/arch/arm/mpu/mm.c                |   4 +-
+ xen/arch/arm/mpu/p2m.c               | 172 +++++++++++++++++++++++++++
+ 5 files changed, 185 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
-index 35d7da411d..aa6c07cd4f 100644
---- a/xen/arch/arm/include/asm/arm64/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-@@ -512,6 +512,9 @@
- /* MPU Protection Region Enable Register encode */
- #define PRENR_EL2   S3_4_C6_C1_1
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index c5e69f239a..444ca716b8 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -61,7 +61,8 @@ typedef union {
+         unsigned long ap:2;       /* Acess Permission */
+         unsigned long sh:2;       /* Sharebility */
+         unsigned long base:42;    /* Base Address */
+-        unsigned long pad:16;
++        unsigned long pad:12;
++        unsigned long p2m_type:4; /* Ignore by hardware. Used to store p2m types.*/
+     } reg;
+     uint64_t bits;
+ } prbar_t;
+diff --git a/xen/arch/arm/include/asm/mpu/mm.h b/xen/arch/arm/include/asm/mpu/mm.h
+index 4df69245c6..0abb0a6c92 100644
+--- a/xen/arch/arm/include/asm/mpu/mm.h
++++ b/xen/arch/arm/include/asm/mpu/mm.h
+@@ -14,6 +14,12 @@ extern void *map_mm_range(paddr_t pa, size_t len, unsigned int attributes);
+ extern void unmap_mm_range(paddr_t pa);
+ extern bool is_mm_range_mapped_transient(paddr_t pa, paddr_t len);
+ extern pr_t *alloc_mpumap(void);
++#define MPUMAP_REGION_FAILED    0
++#define MPUMAP_REGION_FOUND     1
++#define MPUMAP_REGION_INCLUSIVE 2
++#define MPUMAP_REGION_OVERLAP   3
++extern int mpumap_contain_region(pr_t *table, uint8_t nr_regions,
++                                 paddr_t base, paddr_t limit, uint8_t *index);
  
-+/* Virtualization System Control Register */
-+#define VSCTLR_EL2  S3_4_C2_C0_0
+ #endif /* __ARCH_ARM_MM_MPU__ */
+ 
+diff --git a/xen/arch/arm/include/asm/p2m.h b/xen/arch/arm/include/asm/p2m.h
+index c3598d514e..68837b6df7 100644
+--- a/xen/arch/arm/include/asm/p2m.h
++++ b/xen/arch/arm/include/asm/p2m.h
+@@ -67,6 +67,9 @@ struct p2m_domain {
+ #else
+     /* Current Virtualization System Control Register for the p2m */
+     uint64_t vsctlr;
 +
- /* Virtualization Secure Translation Control Register */
- #define VSTCR_EL2            S3_4_C2_C6_2
- #define VSTCR_EL2_RES1_SHIFT 31
-diff --git a/xen/arch/arm/include/asm/page.h b/xen/arch/arm/include/asm/page.h
-index a434e2205a..e28c3d59c5 100644
---- a/xen/arch/arm/include/asm/page.h
-+++ b/xen/arch/arm/include/asm/page.h
-@@ -99,22 +99,26 @@
-  * [7]   Region Present
-  * [8]   Transient Region, e.g. MPU memory region is temproraily
-  *                              mapped for a short time
-+ * [9]   P2M Region for stage 2 translation
-  */
- #define _PAGE_AI_BIT            0
- #define _PAGE_XN_BIT            3
- #define _PAGE_AP_BIT            5
- #define _PAGE_PRESENT_BIT       7
- #define _PAGE_TRANSIENT_BIT     8
-+#define _PAGE_P2M_BIT           9
- #define _PAGE_AI                (7U << _PAGE_AI_BIT)
- #define _PAGE_XN                (2U << _PAGE_XN_BIT)
- #define _PAGE_RO                (2U << _PAGE_AP_BIT)
- #define _PAGE_PRESENT           (1U << _PAGE_PRESENT_BIT)
- #define _PAGE_TRANSIENT         (1U << _PAGE_TRANSIENT_BIT)
-+#define _PAGE_P2M               (1U << _PAGE_P2M_BIT)
- #define PAGE_AI_MASK(x)         (((x) >> _PAGE_AI_BIT) & 0x7U)
- #define PAGE_XN_MASK(x)         (((x) >> _PAGE_XN_BIT) & 0x3U)
- #define PAGE_AP_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x3U)
- #define PAGE_RO_MASK(x)         (((x) >> _PAGE_AP_BIT) & 0x2U)
- #define PAGE_TRANSIENT_MASK(x)  (((x) >> _PAGE_TRANSIENT_BIT) & 0x1U)
-+#define PAGE_P2M_MASK(x)        (((x) >> _PAGE_P2M_BIT) & 0x1U)
- #endif /* CONFIG_HAS_MPU */
++    /* Number of MPU memory regions in P2M MPU memory mapping table. */
++    uint8_t nr_regions;
+ #endif
  
- /*
+     /* Highest guest frame that's ever been mapped in the p2m */
 diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
-index 8cdb7d7219..c6b287b3aa 100644
+index de5da96b80..8cdb7d7219 100644
 --- a/xen/arch/arm/mpu/mm.c
 +++ b/xen/arch/arm/mpu/mm.c
-@@ -580,7 +580,11 @@ int xen_mpumap_update(paddr_t base, paddr_t limit, unsigned int flags)
+@@ -378,8 +378,8 @@ out:
+  *  MPUMAP_REGION_INCLUSIVE: find an inclusive match in #table
+  *  MPUMAP_REGION_OVERLAP: overlap with the existing mapping
+  */
+-static int mpumap_contain_region(pr_t *table, uint8_t nr_regions,
+-                                 paddr_t base, paddr_t limit, uint8_t *index)
++int mpumap_contain_region(pr_t *table, uint8_t nr_regions,
++                          paddr_t base, paddr_t limit, uint8_t *index)
  {
-     int rc;
+     uint8_t i = 0, _index = INVALID_REGION_IDX;
  
--    if ( flags_has_rwx(flags) )
-+    /*
-+     * Mappings should not be both Writeable and Executable, unless
-+     * it is for guest P2M mapping.
-+     */
-+    if ( flags_has_rwx(flags) && !PAGE_P2M_MASK(flags) )
-     {
-         region_printk("Mappings should not be both Writeable and Executable\n");
-         return -EINVAL;
 diff --git a/xen/arch/arm/mpu/p2m.c b/xen/arch/arm/mpu/p2m.c
-index d403479229..e21b76813d 100644
+index 8f728f8957..4838d5b625 100644
 --- a/xen/arch/arm/mpu/p2m.c
 +++ b/xen/arch/arm/mpu/p2m.c
-@@ -411,6 +411,67 @@ mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
-     return p2m_get_mpu_region(p2m, gfn, 1, t, valid);
+@@ -166,6 +166,178 @@ int p2m_init(struct domain *d)
+     return rc;
  }
  
-+static unsigned int build_p2m_memory_region_flags(pr_t *p2m_region)
++static void p2m_set_permission(pr_t *region, p2m_type_t t)
 +{
-+    return (p2m_region->prlar.reg.ai << _PAGE_AI_BIT |
-+            p2m_region->prbar.reg.ap << _PAGE_AP_BIT |
-+            p2m_region->prbar.reg.xn << _PAGE_XN_BIT);
++    switch ( t )
++    {
++    case p2m_ram_rw:
++        region->prbar.reg.xn = XN_DISABLED;
++        region->prbar.reg.ap = AP_RW_ALL;
++        break;
++
++    case p2m_ram_ro:
++        region->prbar.reg.xn = XN_DISABLED;
++        region->prbar.reg.ap = AP_RO_ALL;
++        break;
++
++    case p2m_invalid:
++        region->prbar.reg.xn = XN_P2M_ENABLED;
++        region->prbar.reg.ap = AP_RO_ALL;
++        break;
++
++    case p2m_max_real_type:
++        BUG();
++        break;
++
++    case p2m_mmio_direct_dev:
++    case p2m_mmio_direct_nc:
++    case p2m_mmio_direct_c:
++    case p2m_iommu_map_ro:
++    case p2m_iommu_map_rw:
++    case p2m_map_foreign_ro:
++    case p2m_map_foreign_rw:
++    case p2m_grant_map_ro:
++    case p2m_grant_map_rw:
++        panic(XENLOG_G_ERR "p2m: UNIMPLEMENTED p2m permission in MPU system\n");
++        break;
++    }
 +}
 +
-+static int p2m_xenmpu_update(struct p2m_domain *p2m, bool online)
++static inline pr_t region_to_p2m_entry(mfn_t smfn, unsigned long nr_mfn,
++                                       p2m_type_t t)
 +{
-+    pr_t *p2m_table;
-+    unsigned int i = 0;
-+    unsigned int flags = online ? (_PAGE_PRESENT | _PAGE_P2M) : 0;
++    prbar_t prbar;
++    prlar_t prlar;
++    pr_t region;
 +
-+    p2m_table = (pr_t *)page_to_virt(p2m->root);
-+    if ( !p2m_table )
-+        return -EINVAL;
++    prbar = (prbar_t) {
++        .reg = {
++            .p2m_type = t,  /* P2M Type */
++        }};
 +
-+    for ( ; i < p2m->nr_regions; i++ )
++    prlar = (prlar_t) {
++        .reg = {
++            .ns = 0,        /* Hyp mode is in secure world */
++            .en = 1,        /* Region enabled */
++        }};
++
++    BUILD_BUG_ON(p2m_max_real_type > (1 << 4));
++
++    switch ( t )
 +    {
-+        paddr_t base = pr_get_base(&p2m_table[i]);
-+        paddr_t limit = pr_get_limit(&p2m_table[i]);
-+        unsigned int region_flags;
++    case p2m_invalid:
++    case p2m_ram_rw:
++    case p2m_ram_ro:
++    case p2m_max_real_type:
++        prbar.reg.sh = LPAE_SH_INNER;
++        prlar.reg.ai = MT_NORMAL;
++        break;
 +
-+        region_flags = build_p2m_memory_region_flags(&p2m_table[i]) | flags;
-+        if ( xen_mpumap_update(base, limit + 1, region_flags) )
++    default:
++        panic(XENLOG_G_ERR "p2m: UNIMPLEMENTED p2m type in MPU system\n");
++        break;
++    }
++
++    region = (pr_t) {
++        .prbar = prbar,
++        .prlar = prlar,
++    };
++
++    /*
++     * xn and ap bit will be defined in the p2m_set_permission
++     * based on t.
++     */
++    p2m_set_permission(&region, t);
++
++    /* Set base address and limit address */
++    pr_set_base(&region, mfn_to_maddr(smfn));
++    pr_set_limit(&region, (mfn_to_maddr(mfn_add(smfn, nr_mfn)) - 1));
++
++    return region;
++}
++
++/*
++ * Check whether guest memory [sgfn, sgfn + nr_gfns) is mapped.
++ *
++ * If it is mapped, the index of associated MPU memory region will be filled
++ * up, and 0 is returned.
++ * If it is not mapped, -ENOENT errno will be returned.
++ */
++static int is_gfns_mapped(struct p2m_domain *p2m, gfn_t sgfn,
++                          unsigned long nr_gfns, uint8_t *idx)
++{
++    paddr_t gbase = gfn_to_gaddr(sgfn),
++            glimit = gfn_to_gaddr(gfn_add(sgfn, nr_gfns)) - 1;
++    int rc;
++    pr_t *table;
++
++    table = (pr_t *)page_to_virt(p2m->root);
++    if ( !table )
++        return -EEXIST;
++
++    rc = mpumap_contain_region(table, p2m->nr_regions, gbase, glimit, idx);
++    if ( (rc == MPUMAP_REGION_FOUND) || (rc == MPUMAP_REGION_INCLUSIVE) )
++        return 0;
++    else if ( rc == MPUMAP_REGION_FAILED )
++        return -ENOENT;
++
++    /* Partially mapped */
++    return -EINVAL;
++}
++
++int __p2m_set_entry(struct p2m_domain *p2m, gfn_t sgfn, unsigned int nr,
++                    mfn_t smfn, p2m_type_t t, p2m_access_t a)
++{
++    pr_t *table;
++    mfn_t emfn = mfn_add(smfn, nr);
++    uint8_t idx = INVALID_REGION_IDX;
++
++    /*
++     * Other than removing mapping (i.e MFN_INVALID),
++     * gfn == mfn in MPU system.
++     */
++    if ( !mfn_eq(smfn, INVALID_MFN) )
++        if ( gfn_x(sgfn) != mfn_x(smfn) )
 +        {
-+            printk(XENLOG_G_ERR "p2m: unable to update MPU memory mapping with P2M region 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
-+                   base, limit + 1);
++            printk(XENLOG_G_ERR "Unable to map MFN %#"PRI_mfn" at %#"PRI_mfn"\n",
++                   mfn_x(smfn), gfn_x(sgfn));
 +            return -EINVAL;
 +        }
++
++    if ( is_gfns_mapped(p2m, sgfn, nr, &idx) != -ENOENT )
++    {
++        printk(XENLOG_G_ERR "p2m: unable to insert P2M MPU memory region 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
++               gfn_to_gaddr(sgfn), gfn_to_gaddr(gfn_add(sgfn, nr)));
++        return -EINVAL;
 +    }
++
++    table = (pr_t *)page_to_virt(p2m->root);
++    if ( !table )
++        return -EEXIST;
++    table[p2m->nr_regions] = region_to_p2m_entry(smfn, nr, t);
++    p2m->nr_regions++;
++
++    p2m->max_mapped_gfn = gfn_max(p2m->max_mapped_gfn, _gfn(mfn_x(emfn)));
++    p2m->lowest_mapped_gfn = gfn_min(p2m->lowest_mapped_gfn, _gfn(mfn_x(smfn)));
 +
 +    return 0;
 +}
 +
-+/* p2m_save_state and p2m_restore_state work in pair. */
-+void p2m_save_state(struct vcpu *p)
++int p2m_set_entry(struct p2m_domain *p2m, gfn_t sgfn, unsigned long nr,
++                  mfn_t smfn, p2m_type_t t, p2m_access_t a)
 +{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(p->domain);
++    /*
++     * Any reference taken by the P2M mappings (e.g. foreign mapping) will
++     * be dropped in relinquish_p2m_mapping(). As the P2M will still
++     * be accessible after, we need to prevent mapping to be added when the
++     * domain is dying.
++     */
++    if ( unlikely(p2m->domain->is_dying) )
++        return -ENOMEM;
 +
-+    p->arch.sctlr = READ_SYSREG(SCTLR_EL1);
-+
-+    if ( p2m_xenmpu_update(p2m, false) )
-+        panic("Failed to offline P2M MPU memory mapping\n");
-+}
-+
-+void p2m_restore_state(struct vcpu *n)
-+{
-+    struct p2m_domain *p2m = p2m_get_hostp2m(n->domain);
-+    uint8_t *last_vcpu_ran = &p2m->last_vcpu_ran[smp_processor_id()];
-+
-+    WRITE_SYSREG(n->arch.sctlr, SCTLR_EL1);
-+    WRITE_SYSREG(n->arch.hcr_el2, HCR_EL2);
-+
-+    WRITE_SYSREG64(p2m->vsctlr, VSCTLR_EL2);
-+    if ( p2m_xenmpu_update(p2m, true) )
-+        panic("Failed to online P2M MPU memory mapping\n");
-+
-+    *last_vcpu_ran = n->vcpu_id;
++    return __p2m_set_entry(p2m, sgfn, nr, smfn, t, a);
 +}
 +
  /*
