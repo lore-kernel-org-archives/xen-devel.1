@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D4CEB64DC
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:52:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555382.867121 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C265EB64D7
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555379.867101 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitq-0000wD-HU; Mon, 26 Jun 2023 09:52:46 +0000
+	id 1qDitg-0000P8-1k; Mon, 26 Jun 2023 09:52:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555382.867121; Mon, 26 Jun 2023 09:52:46 +0000
+Received: by outflank-mailman (output) from mailman id 555379.867101; Mon, 26 Jun 2023 09:52:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDitq-0000w6-DJ; Mon, 26 Jun 2023 09:52:46 +0000
-Received: by outflank-mailman (input) for mailman id 555382;
- Mon, 26 Jun 2023 09:52:45 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qDitf-0000P1-UJ; Mon, 26 Jun 2023 09:52:35 +0000
+Received: by outflank-mailman (input) for mailman id 555379;
+ Mon, 26 Jun 2023 09:52:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rDFh=CO=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qDitp-0000fc-1A
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:45 +0000
+ id 1qDite-0000Ov-Kt
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:34 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 31f811af-1407-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 11:52:43 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2a8e5802-1407-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 11:52:31 +0200 (CEST)
 Received: from Dell.bugseng.com (unknown [37.163.27.55])
- by support.bugseng.com (Postfix) with ESMTPSA id 1F0A24EE073D;
- Mon, 26 Jun 2023 11:52:41 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 2E3904EE0738;
+ Mon, 26 Jun 2023 11:52:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31f811af-1407-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 2a8e5802-1407-11ee-8611-37d641c3527e
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -53,52 +53,52 @@ Cc: consulting@bugseng.com,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v3 2/6] xen/arm: change parameter name 'vcpu' in domain() function definition.
-Date: Mon, 26 Jun 2023 11:52:14 +0200
-Message-Id: <e765493f0c0a9bc592197b5b0c102327db5eaf90.1687771796.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH v3 0/6] fix violations of MISRA C:2012 Rule 8.3 on parameter names.
+Date: Mon, 26 Jun 2023 11:52:12 +0200
+Message-Id: <cover.1687771796.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1687771796.git.federico.serafini@bugseng.com>
-References: <cover.1687771796.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In the current version of domain() function, the declaration
-(correctly) uses the parameter name 'v' while the definition uses the
-parameter name 'vcpu'.
-Since it is common to use 'v' to denote a vCPU, change the parameter
-name 'vcpu' of function definition to 'v', thus fixing a violation of
-MISRA C:2012 Rule 8.3.
+To comply with Rule 8.3 ("All declarations of an object or function
+shall use the same names and type qualifiers") change the parameter
+names in order to have function declarations consistent with the
+corresponding definitions.
 
-Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
----
- xen/arch/arm/domain.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Changes in v3:
+  - split previous patch in multiple parts to facilitate review.
+Changes in v2:
+  - adapted parameter names in function definitions to the names used
+    in function declarations when the context requires it;
+  - reflected changes to the function identifier in order to maintain
+    consistency with modifications on parameter names;
+  - extended changes to definitions under xen/arch/arm/vgic
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index add9929b79..8c18e92079 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -1155,15 +1155,15 @@ void vcpu_block_unless_event_pending(struct vcpu *v)
-         vcpu_unblock(current);
- }
- 
--void vcpu_kick(struct vcpu *vcpu)
-+void vcpu_kick(struct vcpu *v)
- {
--    bool running = vcpu->is_running;
-+    bool running = v->is_running;
- 
--    vcpu_unblock(vcpu);
--    if ( running && vcpu != current )
-+    vcpu_unblock(v);
-+    if ( running && v != current )
-     {
-         perfc_incr(vcpu_kick);
--        smp_send_event_check_mask(cpumask_of(vcpu->processor));
-+        smp_send_event_check_mask(cpumask_of(v->processor));
-     }
- }
- 
+Federico Serafini (6):
+  xen/arm: change names in function access_guest_memory_by_ipa().
+  xen/arm: change parameter name 'vcpu' in domain() function definition.
+  xen/arm: change parameter name 'pa' in ioremap_addr() definition.
+  xen/arm: vgic: change parameter name in 'init' and 'free' functions.
+  xen/arm: make parameter names of function declarations consistent.
+  xen/arm: change parameter names in replace_grant_host_mapping().
+
+ xen/arch/arm/domain.c                   | 10 +++++-----
+ xen/arch/arm/guest_walk.c               |  6 +++---
+ xen/arch/arm/guestcopy.c                |  2 +-
+ xen/arch/arm/include/asm/fixmap.h       |  2 +-
+ xen/arch/arm/include/asm/gic.h          |  2 +-
+ xen/arch/arm/include/asm/gic_v3_its.h   |  5 +++--
+ xen/arch/arm/include/asm/grant_table.h  |  4 ++--
+ xen/arch/arm/include/asm/guest_access.h |  4 ++--
+ xen/arch/arm/include/asm/irq.h          |  2 +-
+ xen/arch/arm/include/asm/regs.h         |  2 +-
+ xen/arch/arm/include/asm/vgic.h         |  4 ++--
+ xen/arch/arm/mm.c                       | 20 ++++++++++----------
+ xen/arch/arm/tee/optee.c                | 10 +++++-----
+ xen/arch/arm/vgic-v3-its.c              | 16 ++++++++--------
+ xen/arch/arm/vgic/vgic-init.c           | 12 ++++++------
+ 15 files changed, 51 insertions(+), 50 deletions(-)
+
 -- 
 2.34.1
 
