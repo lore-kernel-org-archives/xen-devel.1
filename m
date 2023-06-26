@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C0AEB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86831EB64DC
 	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:39:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.554992.866532 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.555004.866562 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd4k-0004ol-Rl; Mon, 26 Jun 2023 03:39:38 +0000
+	id 1qDd4q-0005mS-5s; Mon, 26 Jun 2023 03:39:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 554992.866532; Mon, 26 Jun 2023 03:39:38 +0000
+Received: by outflank-mailman (output) from mailman id 555004.866562; Mon, 26 Jun 2023 03:39:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd4k-0004nK-Kz; Mon, 26 Jun 2023 03:39:38 +0000
-Received: by outflank-mailman (input) for mailman id 554992;
- Mon, 26 Jun 2023 03:39:36 +0000
+	id 1qDd4p-0005jc-Pj; Mon, 26 Jun 2023 03:39:43 +0000
+Received: by outflank-mailman (input) for mailman id 555004;
+ Mon, 26 Jun 2023 03:39:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd2p-0007ej-OP
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:39 +0000
+ id 1qDd32-0007ej-8a
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:52 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id cc4ae79f-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:37:38 +0200 (CEST)
+ id d3e01bd9-13d2-11ee-b237-6b7b168915f2;
+ Mon, 26 Jun 2023 05:37:51 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CEE21FB;
- Sun, 25 Jun 2023 20:38:22 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 301021FB;
+ Sun, 25 Jun 2023 20:38:35 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B952C3F64C;
- Sun, 25 Jun 2023 20:37:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6E9333F64C;
+ Sun, 25 Jun 2023 20:37:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc4ae79f-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: d3e01bd9-13d2-11ee-b237-6b7b168915f2
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,158 +55,71 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 48/52] xen/mpu: enable MMIO region trap in MPU system
-Date: Mon, 26 Jun 2023 11:34:39 +0800
-Message-Id: <20230626033443.2943270-49-Penny.Zheng@arm.com>
+Subject: [PATCH v3 52/52] xen/arm: add Kconfig option CONFIG_HAS_MPU to enable MPU system support
+Date: Mon, 26 Jun 2023 11:34:43 +0800
+Message-Id: <20230626033443.2943270-53-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-MMIO region traps, generating from insufficient access permissions,
-will lead to data abort with Permission Fault in MPU system.
-It is different with MMU system, which generates Translation Fault instead.
+Introduce a Kconfig option CONFIG_HAS_MPU to enable MPU architecture
+support. STATIC_MEMORY, ARCH_MAP_DOMAIN_PAGE and ARM_SECURE_STATE will
+be selected by MPU system by default. Also, features like, ARM_EFI, are
+not supported right now.
 
-We extract common codes for dealing with MMIO trap into a new helper
-do_mmio_trap_stage2_abort_guest().
+Current MPU system design is only for ARM 64-bit platform.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
 v3:
-- new commit
+- select ARCH_MAP_DOMAIN_PAGE and ARM_SECURE_STATE
+- remove platform-specific config: CONFIG_ARM_V8R
 ---
- xen/arch/arm/traps.c | 81 +++++++++++++++++++++++++++++---------------
- 1 file changed, 54 insertions(+), 27 deletions(-)
+ xen/arch/arm/Kconfig | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index ef5c6a8195..bffa147c36 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -1848,6 +1848,45 @@ static inline bool check_p2m(bool is_data, paddr_t gpa)
-     return false;
- }
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 3f67aacbbf..2acdf39ec8 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -62,6 +62,7 @@ source "arch/Kconfig"
+ config HAS_MMU
+ 	bool "Memory Management Unit support in a VMSA system"
+ 	default y
++	depends on !HAS_MPU
+ 	select HAS_PAGING_MEMPOOL
+ 	select HAS_PMAP
+ 	select HAS_VMAP
+@@ -70,6 +71,17 @@ config HAS_MMU
+ 	  a memory system through a set of virtual to physical address mappings and associated memory
+ 	  properties held in memory-mapped tables known as translation tables.
  
-+static int do_mmio_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-+                                           const union hsr hsr,
-+                                           mmio_info_t *info,
-+                                           vaddr_t gva, paddr_t gpa)
-+{
-+    enum io_state state;
++config HAS_MPU
++	bool "Memory Protection Unit support in a PMSA system"
++	default n
++	depends on ARM_64
++	select ARCH_MAP_DOMAIN_PAGE
++	select ARM_SECURE_STATE
++	select STATIC_MEMORY
++	help
++	  The PMSA is based on a Memory Protection Unit (MPU), which provides a much simpler
++	  memory protection scheme than the MMU based VMSA.
 +
-+    state = try_handle_mmio(regs, info);
-+    switch ( state )
-+    {
-+        case IO_ABORT:
-+            goto inject_abt;
-+        case IO_HANDLED:
-+            /*
-+             * If the instruction was decoded and has executed successfully
-+             * on the MMIO region, then Xen should execute the next part of
-+             * the instruction. (for eg increment the rn if it is a
-+             * post-indexing instruction.
-+             */
-+            finalize_instr_emulation(&info->dabt_instr);
-+            advance_pc(regs, hsr);
-+            return 0;
-+        case IO_RETRY:
-+            /* finish later */
-+            return 0;
-+        case IO_UNHANDLED:
-+            /* IO unhandled, try another way to handle it. */
-+            return -EFAULT;
-+    }
-+
-+inject_abt:
-+    gdprintk(XENLOG_DEBUG,
-+             "HSR=%#"PRIregister" pc=%#"PRIregister" gva=%#"PRIvaddr" gpa=%#"PRIpaddr"\n",
-+             hsr.bits, regs->pc, gva, gpa);
-+    inject_dabt_exception(regs, gva, hsr.len);
-+
-+    return 0;
-+}
-+
- static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-                                        const union hsr hsr)
- {
-@@ -1862,7 +1901,6 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-     uint8_t fsc = xabt.fsc & ~FSC_LL_MASK;
-     bool is_data = (hsr.ec == HSR_EC_DATA_ABORT_LOWER_EL);
-     mmio_info_t info;
--    enum io_state state;
+ config HAS_FIXMAP
+ 	bool "Provide special-purpose 4K mapping slots in a VMSA"
+ 	depends on HAS_MMU
+@@ -85,7 +97,7 @@ config ACPI
  
-     /*
-      * If this bit has been set, it means that this stage-2 abort is caused
-@@ -1896,6 +1934,8 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-             return; /* Try again */
-     }
- 
-+    info.gpa = gpa;
-+    info.dabt = hsr.dabt;
-     switch ( fsc )
-     {
-     case FSC_FLT_PERM:
-@@ -1909,6 +1949,17 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-         };
- 
-         p2m_mem_access_check(gpa, gva, npfec);
-+
-+#ifdef CONFIG_HAS_MPU
-+        /*
-+         * MMIO region traps, generating from insufficient access permissions,
-+         * will lead to data abort with Permission fault.
-+         */
-+        if ( is_data &&
-+             (do_mmio_trap_stage2_abort_guest(regs, hsr, &info, gva, gpa) == 0) )
-+            return;
-+#endif
-+
-         /*
-          * The only way to get here right now is because of mem_access,
-          * thus reinjecting the exception to the guest is never required.
-@@ -1917,9 +1968,6 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-     }
-     case FSC_FLT_TRANS:
-     {
--        info.gpa = gpa;
--        info.dabt = hsr.dabt;
--
-         /*
-          * Assumption :- Most of the times when we get a data abort and the ISS
-          * is invalid or an instruction abort, the underlying cause is that the
-@@ -1948,29 +1996,8 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
-         if ( info.dabt_instr.state == INSTR_ERROR )
-             goto inject_abt;
- 
--        state = try_handle_mmio(regs, &info);
--
--        switch ( state )
--        {
--            case IO_ABORT:
--                goto inject_abt;
--            case IO_HANDLED:
--                /*
--                 * If the instruction was decoded and has executed successfully
--                 * on the MMIO region, then Xen should execute the next part of
--                 * the instruction. (for eg increment the rn if it is a
--                 * post-indexing instruction.
--                 */
--                finalize_instr_emulation(&info.dabt_instr);
--                advance_pc(regs, hsr);
--                return;
--            case IO_RETRY:
--                /* finish later */
--                return;
--            case IO_UNHANDLED:
--                /* IO unhandled, try another way to handle it. */
--                break;
--        }
-+        if ( do_mmio_trap_stage2_abort_guest(regs, hsr, &info, gva, gpa) == 0 )
-+            return;
- 
-         /*
-          * If the instruction syndrome was invalid, then we already checked if
+ config ARM_EFI
+ 	bool "UEFI boot service support"
+-	depends on ARM_64
++	depends on ARM_64 && !HAS_MPU
+ 	default y
+ 	help
+ 	  This option provides support for boot services through
 -- 
 2.25.1
 
