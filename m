@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE79AEB64DD
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:41:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555082.866820 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39CC9EB64DC
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:41:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555086.866845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5d-0001Gu-Ec; Mon, 26 Jun 2023 03:40:33 +0000
+	id 1qDd5j-0002k0-FD; Mon, 26 Jun 2023 03:40:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555082.866820; Mon, 26 Jun 2023 03:40:33 +0000
+Received: by outflank-mailman (output) from mailman id 555086.866845; Mon, 26 Jun 2023 03:40:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5c-0001C3-Bc; Mon, 26 Jun 2023 03:40:32 +0000
-Received: by outflank-mailman (input) for mailman id 555082;
- Mon, 26 Jun 2023 03:40:29 +0000
+	id 1qDd5i-0002Yk-38; Mon, 26 Jun 2023 03:40:38 +0000
+Received: by outflank-mailman (input) for mailman id 555086;
+ Mon, 26 Jun 2023 03:40:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd1G-0007ej-38
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:36:02 +0000
+ id 1qDd1m-0007ej-DR
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:36:34 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 91d915d0-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:36:00 +0200 (CEST)
+ id a5415410-13d2-11ee-b237-6b7b168915f2;
+ Mon, 26 Jun 2023 05:36:33 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 65C7A1FB;
- Sun, 25 Jun 2023 20:36:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E0A9C1FB;
+ Sun, 25 Jun 2023 20:37:16 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id BCC283F64C;
- Sun, 25 Jun 2023 20:35:57 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 44BE13F64C;
+ Sun, 25 Jun 2023 20:36:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91d915d0-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: a5415410-13d2-11ee-b237-6b7b168915f2
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,187 +55,169 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 17/52] xen/arm: do not give memory back to static heap
-Date: Mon, 26 Jun 2023 11:34:08 +0800
-Message-Id: <20230626033443.2943270-18-Penny.Zheng@arm.com>
+Subject: [PATCH v3 27/52] xen/mpu: introduce setup_mm_mappings
+Date: Mon, 26 Jun 2023 11:34:18 +0800
+Message-Id: <20230626033443.2943270-28-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If Xenheap is statically configured in Device Tree, its size is
-definite. So, we shall not give memory back into static heap, like
-we normally do in free_init_memory, etc, once it finishes initialization.
+Function setup_pagetables is responsible for boot-time pagetable setup
+in MMU system at C world.
+In MPU system, as we have already built up start-of-day Xen MPU memory
+region mapping in assembly boot-time, here we only need to do a few
+memory management data initializtion, including reading the number of
+maximum MPU regions supported by the EL2 MPU, and setting the according
+bitfield for regions enabled in assembly boot-time, in bitmap xen_mpumap_mask.
+This bitmap xen_mpumap_mask is responsible for recording the usage of EL2 MPU
+memory regions.
 
-We extract static_heap flag from init data bootinfo, as we also need it
-after we destroy init data section. we introduce a new helper
-xen_is_using_staticheap to tell whether Xenheap is statically configured in
-Device Tree. It is always returning false when !CONFIG_STATIC_MEMORY,
-since static heap depends on static memory feature.
+In order to keep only one codeflow in arm/setup.c, setup_mm_mappings
+, with a more generic name, is introduced to replace setup_pagetables.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 ---
 v3:
-- new commit
+- introduce bitmap xen_mpumap_mask for dynamic allocation on MPU regions
 ---
- xen/arch/arm/bootfdt.c           |  2 +-
- xen/arch/arm/include/asm/setup.h |  8 +++++++-
- xen/arch/arm/kernel.c            |  3 ++-
- xen/arch/arm/mm.c                |  8 ++++++--
- xen/arch/arm/mmu/setup.c         |  4 ++--
- xen/arch/arm/setup.c             | 29 +++++++++++++++++------------
- 6 files changed, 35 insertions(+), 19 deletions(-)
+ xen/arch/arm/include/asm/arm64/mpu.h     |  1 +
+ xen/arch/arm/include/asm/arm64/sysregs.h |  3 +++
+ xen/arch/arm/include/asm/mm.h            |  4 ++--
+ xen/arch/arm/mmu/mm.c                    |  7 +++++-
+ xen/arch/arm/mpu/mm.c                    | 30 ++++++++++++++++++++++++
+ xen/arch/arm/setup.c                     |  2 +-
+ 6 files changed, 43 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index 2673ad17a1..c4497e3b31 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -341,7 +341,7 @@ static int __init process_chosen_node(const void *fdt, int node,
-         if ( rc )
-             return rc;
+diff --git a/xen/arch/arm/include/asm/arm64/mpu.h b/xen/arch/arm/include/asm/arm64/mpu.h
+index 6ec2c10b14..407fec66c9 100644
+--- a/xen/arch/arm/include/asm/arm64/mpu.h
++++ b/xen/arch/arm/include/asm/arm64/mpu.h
+@@ -19,6 +19,7 @@
+  * or it needs adjustment.
+  */
+ #define REGION_UART_SEL            0x07
++#define MPUIR_REGION_MASK          ((_AC(1, UL) << 8) - 1)
  
--        bootinfo.static_heap = true;
-+        static_heap = true;
-     }
+ #ifndef __ASSEMBLY__
  
-     printk("Checking for initrd in /chosen\n");
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 0922549631..d691f6bf93 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -104,9 +104,15 @@ struct bootinfo {
- #ifdef CONFIG_ACPI
-     struct meminfo acpi;
- #endif
--    bool static_heap;
- };
+diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+index c41d805fde..a249a660a8 100644
+--- a/xen/arch/arm/include/asm/arm64/sysregs.h
++++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+@@ -474,6 +474,9 @@
+ /* MPU Protection Region Selection Register encode */
+ #define PRSELR_EL2  S3_4_C6_C2_1
  
-+extern bool static_heap;
-+#ifdef CONFIG_STATIC_MEMORY
-+#define xen_is_using_staticheap() (static_heap)
-+#else
-+#define xen_is_using_staticheap() (false)
-+#endif
++/* MPU Type registers encode */
++#define MPUIR_EL2   S3_4_C0_C0_4
 +
- struct map_range_data
+ #endif
+ 
+ /* Access to system registers */
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 5d890a6a45..eb520b49e3 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -201,8 +201,8 @@ extern unsigned long total_pages;
+ 
+ extern uint64_t init_mm;
+ 
+-/* Boot-time pagetable setup */
+-extern void setup_pagetables(unsigned long boot_phys_offset);
++/* Boot-time memory mapping setup */
++extern void setup_mm_mappings(unsigned long boot_phys_offset);
+ /* Map FDT in boot pagetable */
+ extern void *early_fdt_map(paddr_t fdt_paddr);
+ /* Remove early mappings */
+diff --git a/xen/arch/arm/mmu/mm.c b/xen/arch/arm/mmu/mm.c
+index 43c19fa914..d7d5bf7287 100644
+--- a/xen/arch/arm/mmu/mm.c
++++ b/xen/arch/arm/mmu/mm.c
+@@ -398,7 +398,7 @@ static void clear_table(void *table)
+ 
+ /* Boot-time pagetable setup.
+  * Changes here may need matching changes in head.S */
+-void __init setup_pagetables(unsigned long boot_phys_offset)
++static void __init setup_pagetables(unsigned long boot_phys_offset)
  {
-     struct domain *d;
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index 2e64612ab3..d13ef0330b 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -246,7 +246,8 @@ static __init int kernel_decompress(struct bootmodule *mod, uint32_t offset)
-      * Free the original kernel, update the pointers to the
-      * decompressed kernel
-      */
--    fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
-+    if ( !xen_is_using_staticheap() )
-+        fw_unreserved_regions(addr, addr + size, init_domheap_pages, 0);
- 
-     return 0;
- }
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index e665d1f97a..4b174f4d08 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -177,8 +177,12 @@ void free_init_memory(void)
-     if ( rc )
-         panic("Unable to remove the init section (rc = %d)\n", rc);
- 
--    init_domheap_pages(pa, pa + len);
--    printk("Freed %ldkB init memory.\n", (long)(__init_end-__init_begin)>>10);
-+    if ( !xen_is_using_staticheap() )
-+    {
-+        init_domheap_pages(pa, pa + len);
-+        printk("Freed %ldkB init memory.\n",
-+               (long)(__init_end-__init_begin)>>10);
-+    }
+     uint64_t ttbr;
+     lpae_t pte, *p;
+@@ -470,6 +470,11 @@ void __init setup_pagetables(unsigned long boot_phys_offset)
+ #endif
  }
  
- void arch_dump_shared_mem_info(void)
-diff --git a/xen/arch/arm/mmu/setup.c b/xen/arch/arm/mmu/setup.c
-index a7590a2443..cf7018b190 100644
---- a/xen/arch/arm/mmu/setup.c
-+++ b/xen/arch/arm/mmu/setup.c
-@@ -196,7 +196,7 @@ void __init setup_mm(void)
++void setup_mm_mappings(unsigned long boot_phys_offset)
++{
++    setup_pagetables(boot_phys_offset);
++}
++
+ static void clear_boot_pagetables(void)
+ {
+     /*
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index fb6bb721b1..e06a6e5810 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -20,6 +20,7 @@
+  */
  
-     total_pages = ram_size >> PAGE_SHIFT;
+ #include <xen/init.h>
++#include <xen/mm.h>
+ #include <xen/page-size.h>
+ #include <asm/arm64/mpu.h>
  
--    if ( bootinfo.static_heap )
-+    if ( xen_is_using_staticheap() )
-     {
-         for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
-         {
-@@ -241,7 +241,7 @@ void __init setup_mm(void)
+@@ -27,6 +28,35 @@
+ pr_t __aligned(PAGE_SIZE) __section(".data.page_aligned")
+      xen_mpumap[ARM_MAX_MPU_MEMORY_REGIONS];
  
-     do
-     {
--        e = bootinfo.static_heap ?
-+        e = xen_is_using_staticheap() ?
-             fit_xenheap_in_static_heap(pfn_to_paddr(xenheap_pages), MB(32)) :
-             consider_modules(ram_start, ram_end,
-                              pfn_to_paddr(xenheap_pages),
++/* Maximum number of supported MPU memory regions by the EL2 MPU. */
++uint8_t __ro_after_init max_xen_mpumap;
++
++/*
++ * Bitmap xen_mpumap_mask is to record the usage of EL2 MPU memory regions.
++ * Bit 0 represents MPU memory region 0, bit 1 represents MPU memory
++ * region 1, ..., and so on.
++ * If a MPU memory region gets enabled, set the according bit to 1.
++ */
++static DECLARE_BITMAP(xen_mpumap_mask, ARM_MAX_MPU_MEMORY_REGIONS);
++
++void __init setup_mm_mappings(unsigned long boot_phys_offset)
++{
++    unsigned int nr_regions = REGION_UART_SEL, i = 0;
++
++    /*
++     * MPUIR_EL2.Region[0:7] identifies the number of regions supported by
++     * the EL2 MPU.
++     */
++    max_xen_mpumap = (uint8_t)(READ_SYSREG(MPUIR_EL2) & MPUIR_REGION_MASK);
++
++    /* Set the bitfield for regions enabled in assembly boot-time. */
++#ifdef CONFIG_EARLY_PRINTK
++    nr_regions = REGION_UART_SEL + 1;
++#endif
++    for ( ; i < nr_regions; i++ )
++        set_bit(i, xen_mpumap_mask);
++}
++
+ /*
+  * Local variables:
+  * mode: C
 diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 34923d9984..6f8dd98d6b 100644
+index 6f8dd98d6b..f42b53d17b 100644
 --- a/xen/arch/arm/setup.c
 +++ b/xen/arch/arm/setup.c
-@@ -59,6 +59,8 @@ bool __read_mostly acpi_disabled;
+@@ -781,7 +781,7 @@ void __init start_xen(unsigned long boot_phys_offset,
+     /* Initialize traps early allow us to get backtrace when an error occurred */
+     init_traps();
  
- domid_t __read_mostly max_init_domid;
+-    setup_pagetables(boot_phys_offset);
++    setup_mm_mappings(boot_phys_offset);
  
-+bool __read_mostly static_heap;
-+
- static __used void init_done(void)
- {
-     int rc;
-@@ -508,22 +510,25 @@ void __init discard_initial_modules(void)
-     struct bootmodules *mi = &bootinfo.modules;
-     int i;
+     smp_clear_cpu_maps();
  
--    for ( i = 0; i < mi->nr_mods; i++ )
-+    if ( !xen_is_using_staticheap() )
-     {
--        paddr_t s = mi->module[i].start;
--        paddr_t e = s + PAGE_ALIGN(mi->module[i].size);
-+        for ( i = 0; i < mi->nr_mods; i++ )
-+        {
-+            paddr_t s = mi->module[i].start;
-+            paddr_t e = s + PAGE_ALIGN(mi->module[i].size);
- 
--        if ( mi->module[i].kind == BOOTMOD_XEN )
--            continue;
-+            if ( mi->module[i].kind == BOOTMOD_XEN )
-+                continue;
- 
--        if ( !mfn_valid(maddr_to_mfn(s)) ||
--             !mfn_valid(maddr_to_mfn(e)) )
--            continue;
-+            if ( !mfn_valid(maddr_to_mfn(s)) ||
-+                 !mfn_valid(maddr_to_mfn(e)) )
-+                continue;
- 
--        fw_unreserved_regions(s, e, init_domheap_pages, 0);
--    }
-+            fw_unreserved_regions(s, e, init_domheap_pages, 0);
-+        }
- 
--    mi->nr_mods = 0;
-+        mi->nr_mods = 0;
-+    }
- 
-     remove_early_mappings();
- }
-@@ -660,7 +665,7 @@ void __init populate_boot_allocator(void)
-     const struct meminfo *banks = &bootinfo.mem;
-     paddr_t s, e;
- 
--    if ( bootinfo.static_heap )
-+    if ( xen_is_using_staticheap() )
-     {
-         for ( i = 0 ; i < bootinfo.reserved_mem.nr_banks; i++ )
-         {
 -- 
 2.25.1
 
