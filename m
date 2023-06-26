@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57212EB64D7
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555387.867161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89660EB64DD
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 09:53:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555384.867130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDity-0002Ah-MS; Mon, 26 Jun 2023 09:52:54 +0000
+	id 1qDits-0001D7-Nd; Mon, 26 Jun 2023 09:52:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555387.867161; Mon, 26 Jun 2023 09:52:54 +0000
+Received: by outflank-mailman (output) from mailman id 555384.867130; Mon, 26 Jun 2023 09:52:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDity-0002AW-I8; Mon, 26 Jun 2023 09:52:54 +0000
-Received: by outflank-mailman (input) for mailman id 555387;
- Mon, 26 Jun 2023 09:52:51 +0000
+	id 1qDits-0001Cy-Kx; Mon, 26 Jun 2023 09:52:48 +0000
+Received: by outflank-mailman (input) for mailman id 555384;
+ Mon, 26 Jun 2023 09:52:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rDFh=CO=bugseng.com=federico.serafini@srs-se1.protection.inumbo.net>)
- id 1qDitv-0000Ov-J4
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:51 +0000
+ id 1qDitq-0000Ov-M8
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 09:52:46 +0000
 Received: from support.bugseng.com (mail.bugseng.com [162.55.131.47])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 36049170-1407-11ee-8611-37d641c3527e;
- Mon, 26 Jun 2023 11:52:50 +0200 (CEST)
+ id 331ca6ce-1407-11ee-8611-37d641c3527e;
+ Mon, 26 Jun 2023 11:52:45 +0200 (CEST)
 Received: from Dell.bugseng.com (unknown [37.163.27.55])
- by support.bugseng.com (Postfix) with ESMTPSA id 6EE0D4EE0742;
- Mon, 26 Jun 2023 11:52:48 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPSA id 501624EE0741;
+ Mon, 26 Jun 2023 11:52:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,7 +41,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36049170-1407-11ee-8611-37d641c3527e
+X-Inumbo-ID: 331ca6ce-1407-11ee-8611-37d641c3527e
 From: Federico Serafini <federico.serafini@bugseng.com>
 To: xen-devel@lists.xenproject.org
 Cc: consulting@bugseng.com,
@@ -53,74 +53,64 @@ Cc: consulting@bugseng.com,
 	Michal Orzel <michal.orzel@amd.com>,
 	Xenia Ragiadakou <xenia.ragiadakou@amd.com>,
 	Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v3 6/6] xen/arm: change parameter names in replace_grant_host_mapping().
-Date: Mon, 26 Jun 2023 11:52:18 +0200
-Message-Id: <2c2b9b3c53e556945baab3dd387bf029e12434b6.1687771796.git.federico.serafini@bugseng.com>
+Subject: [XEN PATCH v3 3/6] xen/arm: change parameter name 'pa' in ioremap_addr() definition.
+Date: Mon, 26 Jun 2023 11:52:15 +0200
+Message-Id: <74fdc69fd08d1a0e35d4f226ea0c47a6f6a3a241.1687771796.git.federico.serafini@bugseng.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1687771796.git.federico.serafini@bugseng.com>
 References: <cover.1687771796.git.federico.serafini@bugseng.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In the current version of replace_grant_host_mapping() function, the
-declaration (correctly) uses the parameter names 'gpaddr' and
-'new_gpaddr', while the definition uses the parameter names 'addr' and
-'new_addr'.
-Change the parameter names of the definition to 'gpaddr' and
-'new_gpaddr' so that it is clear what type of address is expected and
-violations of MISRA C:2012 Rule 8.3 are fixed.
-
-In both declaration and definition of function
-replace_grant_host_mapping() change the parameter name 'mfn' to 'frame',
-thus improving readability and keeping consistency with name used in
-create_grant_host_mapping().
+In the current version of ioremap_addr() function, the declaration
+uses the parameter name 'start' (consistenly with the other ioremap_*
+function declarations), while the definition uses the parameter name
+'pa'.
+Change the parameter name 'pa' of function definition to 'start', thus
+fixing a violation of MISRA C:2012 Rule 8.3 and keeping the consistency
+with other ioremap_* functions.
 
 Signed-off-by: Federico Serafini <federico.serafini@bugseng.com>
 ---
- xen/arch/arm/include/asm/grant_table.h |  2 +-
- xen/arch/arm/mm.c                      | 10 +++++-----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/arm/mm.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/grant_table.h b/xen/arch/arm/include/asm/grant_table.h
-index 265e598e56..f2d115b97d 100644
---- a/xen/arch/arm/include/asm/grant_table.h
-+++ b/xen/arch/arm/include/asm/grant_table.h
-@@ -38,7 +38,7 @@ static inline bool gnttab_release_host_mappings(const struct domain *d)
- 
- int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
-                               unsigned int flags, unsigned int cache_flags);
--int replace_grant_host_mapping(unsigned long gpaddr, mfn_t mfn,
-+int replace_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
-                                unsigned long new_gpaddr, unsigned int flags);
- 
- /*
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 2e9860a754..0a3e1f3b64 100644
+index e460249736..2e9860a754 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -1600,17 +1600,17 @@ int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
-         return GNTST_okay;
- }
- 
--int replace_grant_host_mapping(unsigned long addr, mfn_t mfn,
--                               unsigned long new_addr, unsigned int flags)
-+int replace_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
-+                               unsigned long new_gpaddr, unsigned int flags)
+@@ -736,10 +736,10 @@ void *__init arch_vmap_virt_end(void)
+  * This function should only be used to remap device address ranges
+  * TODO: add a check to verify this assumption
+  */
+-void *ioremap_attr(paddr_t pa, size_t len, unsigned int attributes)
++void *ioremap_attr(paddr_t start, size_t len, unsigned int attributes)
  {
--    gfn_t gfn = gaddr_to_gfn(addr);
-+    gfn_t gfn = gaddr_to_gfn(gpaddr);
-     struct domain *d = current->domain;
-     int rc;
+-    mfn_t mfn = _mfn(PFN_DOWN(pa));
+-    unsigned int offs = pa & (PAGE_SIZE - 1);
++    mfn_t mfn = _mfn(PFN_DOWN(start));
++    unsigned int offs = start & (PAGE_SIZE - 1);
+     unsigned int nr = PFN_UP(offs + len);
+     void *ptr = __vmap(&mfn, nr, 1, 1, attributes, VMAP_DEFAULT);
  
--    if ( new_addr != 0 || (flags & GNTMAP_contains_pte) )
-+    if ( new_gpaddr != 0 || (flags & GNTMAP_contains_pte) )
-         return GNTST_general_error;
- 
--    rc = guest_physmap_remove_page(d, gfn, mfn, 0);
-+    rc = guest_physmap_remove_page(d, gfn, frame, 0);
- 
-     return rc ? GNTST_general_error : GNTST_okay;
+@@ -1579,7 +1579,7 @@ void put_page_type(struct page_info *page)
+     return;
  }
+ 
+-int create_grant_host_mapping(unsigned long addr, mfn_t frame,
++int create_grant_host_mapping(unsigned long gpaddr, mfn_t frame,
+                               unsigned int flags, unsigned int cache_flags)
+ {
+     int rc;
+@@ -1591,7 +1591,7 @@ int create_grant_host_mapping(unsigned long addr, mfn_t frame,
+     if ( flags & GNTMAP_readonly )
+         t = p2m_grant_map_ro;
+ 
+-    rc = guest_physmap_add_entry(current->domain, gaddr_to_gfn(addr),
++    rc = guest_physmap_add_entry(current->domain, gaddr_to_gfn(gpaddr),
+                                  frame, 0, t);
+ 
+     if ( rc )
 -- 
 2.34.1
 
