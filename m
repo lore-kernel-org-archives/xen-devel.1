@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEAFEB64DC
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555074.866781 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3242EB64DA
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Jun 2023 03:40:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555072.866769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5U-0007af-Bl; Mon, 26 Jun 2023 03:40:24 +0000
+	id 1qDd5S-0007NK-P5; Mon, 26 Jun 2023 03:40:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555074.866781; Mon, 26 Jun 2023 03:40:24 +0000
+Received: by outflank-mailman (output) from mailman id 555072.866769; Mon, 26 Jun 2023 03:40:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDd5T-0007Wt-LQ; Mon, 26 Jun 2023 03:40:23 +0000
-Received: by outflank-mailman (input) for mailman id 555074;
- Mon, 26 Jun 2023 03:40:21 +0000
+	id 1qDd5S-0007ML-Fb; Mon, 26 Jun 2023 03:40:22 +0000
+Received: by outflank-mailman (input) for mailman id 555072;
+ Mon, 26 Jun 2023 03:40:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=24BZ=CO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1qDd2Z-0007ej-Ve
- for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:37:23 +0000
+ id 1qDd2B-0007ej-Bm
+ for xen-devel@lists.xenproject.org; Mon, 26 Jun 2023 03:36:59 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id c2f443a7-13d2-11ee-b237-6b7b168915f2;
- Mon, 26 Jun 2023 05:37:23 +0200 (CEST)
+ id b41595ed-13d2-11ee-b237-6b7b168915f2;
+ Mon, 26 Jun 2023 05:36:58 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C57022F4;
- Sun, 25 Jun 2023 20:38:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C69601FB;
+ Sun, 25 Jun 2023 20:37:41 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 29A203F64C;
- Sun, 25 Jun 2023 20:37:19 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2ACB33F64C;
+ Sun, 25 Jun 2023 20:36:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2f443a7-13d2-11ee-b237-6b7b168915f2
+X-Inumbo-ID: b41595ed-13d2-11ee-b237-6b7b168915f2
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Penny Zheng <Penny.Zheng@arm.com>,
@@ -55,26 +55,23 @@ Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>,
 	Wei Chen <wei.chen@arm.com>
-Subject: [PATCH v3 43/52] xen/mpu: configure VSTCR_EL2 in MPU system
-Date: Mon, 26 Jun 2023 11:34:34 +0800
-Message-Id: <20230626033443.2943270-44-Penny.Zheng@arm.com>
+Subject: [PATCH v3 35/52] xen/arm: map static memory on demand
+Date: Mon, 26 Jun 2023 11:34:26 +0800
+Message-Id: <20230626033443.2943270-36-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 References: <20230626033443.2943270-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-VSTCR_EL2, Virtualization Secure Translation Control Register，is
-the control register for stage 2 of the Secure EL1&0 translation regime.
-
-VSTCR_EL2.SA defines secure stage 2 translation output address space.
-To make sure that all stage 2 translations for the Secure PA space
-access the Secure PA space, we keep SA bit as 0.
-VSTCR_EL2.SC is NS check enable bit.
-To make sure that Stage 2 NS configuration is checked against stage 1
-NS configuration in EL1&0 translation regime for the given address, and
-generates a fault if they are different, we set SC bit 1.
+In function init_staticmem_pages, we need the access to static memory
+for proper initialization.
+It is not a problem in MMU system, as Xen map the whole RAM in
+setup_mm(). However, with limited MPU memory regions, it is too luxury
+to map the whole RAM.
+As a result, we follow the rule of "map on demand", to map static memory
+temporarily before its initialization, and unmap immediately after its
+initialization.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Signed-off-by: Wei Chen <wei.chen@arm.com>
@@ -82,62 +79,105 @@ Signed-off-by: Wei Chen <wei.chen@arm.com>
 v3:
 - new commit
 ---
- xen/arch/arm/include/asm/arm64/sysregs.h |  6 ++++++
- xen/arch/arm/mpu/p2m.c                   | 17 ++++++++++++++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
+ xen/arch/arm/include/asm/mm.h |  2 ++
+ xen/arch/arm/mmu/mm.c         | 10 ++++++++++
+ xen/arch/arm/mpu/mm.c         | 10 ++++++++++
+ xen/arch/arm/setup.c          | 21 +++++++++++++++++++++
+ 4 files changed, 43 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
-index ab0e6a97d3..35d7da411d 100644
---- a/xen/arch/arm/include/asm/arm64/sysregs.h
-+++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-@@ -512,6 +512,12 @@
- /* MPU Protection Region Enable Register encode */
- #define PRENR_EL2   S3_4_C6_C1_1
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index 66d98b9a29..cffbf8a595 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -224,6 +224,8 @@ extern void mm_init_secondary_cpu(void);
+ extern void setup_frametable_mappings(paddr_t ps, paddr_t pe);
+ /* map a physical range in virtual memory */
+ void __iomem *ioremap_attr(paddr_t start, size_t len, unsigned int attributes);
++extern int map_staticmem_pages_to_xen(paddr_t start, paddr_t end);
++extern int unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end);
  
-+/* Virtualization Secure Translation Control Register */
-+#define VSTCR_EL2            S3_4_C2_C6_2
-+#define VSTCR_EL2_RES1_SHIFT 31
-+#define VSTCR_EL2_SA         ~(_AC(0x1,UL)<<30)
-+#define VSTCR_EL2_SC         (_AC(0x1,UL)<<20)
-+
- #endif
- 
- #ifdef CONFIG_ARM_SECURE_STATE
-diff --git a/xen/arch/arm/mpu/p2m.c b/xen/arch/arm/mpu/p2m.c
-index 04c44825cb..a7a3912a9a 100644
---- a/xen/arch/arm/mpu/p2m.c
-+++ b/xen/arch/arm/mpu/p2m.c
-@@ -10,7 +10,7 @@
- 
- void __init setup_virt_paging(void)
+ static inline void __iomem *ioremap_nocache(paddr_t start, size_t len)
  {
--    uint64_t val = 0;
-+    uint64_t val = 0, val2 = 0;
-     bool p2m_vmsa = true;
+diff --git a/xen/arch/arm/mmu/mm.c b/xen/arch/arm/mmu/mm.c
+index 2f29cb53fe..4196a55c32 100644
+--- a/xen/arch/arm/mmu/mm.c
++++ b/xen/arch/arm/mmu/mm.c
+@@ -1113,6 +1113,16 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+     return xen_pt_update(virt, INVALID_MFN, nr_mfns, _PAGE_POPULATE);
+ }
  
-     /* PA size */
-@@ -76,6 +76,21 @@ void __init setup_virt_paging(void)
- 
-     WRITE_SYSREG(val, VTCR_EL2);
- 
-+    /*
-+     * VSTCR_EL2.SA defines secure stage 2 translation output address space.
-+     * To make sure that all stage 2 translations for the Secure PA space
-+     * access the Secure PA space, we keep SA bit as 0.
-+     *
-+     * VSTCR_EL2.SC is NS check enable bit.
-+     * To make sure that Stage 2 NS configuration is checked against stage 1
-+     * NS configuration in EL1&0 translation regime for the given address, and
-+     * generates a fault if they are different, we set SC bit 1.
-+     */
-+    val2 = 1 << VSTCR_EL2_RES1_SHIFT;
-+    val2 &= VSTCR_EL2_SA;
-+    val2 |= VSTCR_EL2_SC;
-+    WRITE_SYSREG(val2, VSTCR_EL2);
++int __init map_staticmem_pages_to_xen(paddr_t start, paddr_t end)
++{
++    return 0;
++}
 +
-     return;
++int __init unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end)
++{
++    return 0;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/mpu/mm.c b/xen/arch/arm/mpu/mm.c
+index a40055ae5e..9d5c1da39c 100644
+--- a/xen/arch/arm/mpu/mm.c
++++ b/xen/arch/arm/mpu/mm.c
+@@ -614,6 +614,16 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+            frametable_size - (nr_pdxs * sizeof(struct page_info)));
+ }
  
- fault:
++int __init map_staticmem_pages_to_xen(paddr_t start, paddr_t end)
++{
++    return xen_mpumap_update(start, end, PAGE_HYPERVISOR | _PAGE_TRANSIENT);
++}
++
++int __init unmap_staticmem_pages_to_xen(paddr_t start, paddr_t end)
++{
++    return xen_mpumap_update(start, end, 0);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index f42b53d17b..c21d1db763 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -637,12 +637,33 @@ void __init init_staticmem_pages(void)
+             mfn_t bank_start = _mfn(PFN_UP(bootinfo.reserved_mem.bank[bank].start));
+             unsigned long bank_pages = PFN_DOWN(bootinfo.reserved_mem.bank[bank].size);
+             mfn_t bank_end = mfn_add(bank_start, bank_pages);
++            int res;
+ 
+             if ( mfn_x(bank_end) <= mfn_x(bank_start) )
+                 return;
+ 
++            /* Map temporarily before initialization */
++            res = map_staticmem_pages_to_xen(mfn_to_maddr(bank_start),
++                                             mfn_to_maddr(bank_end));
++            if ( res )
++            {
++                printk(XENLOG_ERR "Failed to map static memory to Xen: %d\n",
++                       res);
++                return;
++            }
++
+             unprepare_staticmem_pages(mfn_to_page(bank_start),
+                                       bank_pages, false);
++
++            /* Unmap immediately after initialization */
++            res = unmap_staticmem_pages_to_xen(mfn_to_maddr(bank_start),
++                                               mfn_to_maddr(bank_end));
++            if ( res )
++            {
++                printk(XENLOG_ERR "Failed to unmap static memory to Xen: %d\n",
++                       res);
++                return;
++            }
+         }
+     }
+ #endif
 -- 
 2.25.1
 
