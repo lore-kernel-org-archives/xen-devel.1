@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA02C001B0
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 08:52:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555947.868148 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C16F8EB64D9
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 10:00:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555963.868184 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE4QA-0001gx-FA; Tue, 27 Jun 2023 08:51:34 +0000
+	id 1qE5Uf-0001Wg-36; Tue, 27 Jun 2023 10:00:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555947.868148; Tue, 27 Jun 2023 08:51:34 +0000
+Received: by outflank-mailman (output) from mailman id 555963.868184; Tue, 27 Jun 2023 10:00:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE4QA-0001gq-Bj; Tue, 27 Jun 2023 08:51:34 +0000
-Received: by outflank-mailman (input) for mailman id 555947;
- Tue, 27 Jun 2023 08:51:32 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qE4Q8-0001gg-Qs; Tue, 27 Jun 2023 08:51:32 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qE4Q8-0004qh-Ig; Tue, 27 Jun 2023 08:51:32 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1qE4Q8-0001Pq-3N; Tue, 27 Jun 2023 08:51:32 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1qE4Q8-0001Ih-2x; Tue, 27 Jun 2023 08:51:32 +0000
+	id 1qE5Ue-0001UV-U9; Tue, 27 Jun 2023 10:00:16 +0000
+Received: by outflank-mailman (input) for mailman id 555963;
+ Tue, 27 Jun 2023 09:56:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=X8So=CP=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
+ id 1qE5R5-00006I-6Q
+ for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 09:56:35 +0000
+Received: from frasgout11.his.huawei.com (unknown [14.137.139.23])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e51ab88b-14d0-11ee-8611-37d641c3527e;
+ Tue, 27 Jun 2023 11:56:32 +0200 (CEST)
+Received: from mail02.huawei.com (unknown [172.18.147.227])
+ by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Qr0Fg19Jzz9v7HG
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Jun 2023 17:45:43 +0800 (CST)
+Received: from A2101119013HW2.china.huawei.com (unknown [10.45.153.185])
+ by APP1 (Coremail) with SMTP id LxC2BwBnwdzesZpknnvHAw--.39096S6;
+ Tue, 27 Jun 2023 10:56:05 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,321 +44,574 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=zr59v/1U80O1zh4/1iBuENQKOqVlxiusluE97je11To=; b=vVoV0Dio2EGQQwYmk7mVvZR+82
-	T8zzPvba01s7dL1xbEVc0rMhog5PEYcx4w5Cj4SwK3bxErsMCJynkdUXakPqaCEHCI9egR1HIIxud
-	k39CDzwab1/GvcrN73BICsiNg4p7OIoCMk/2VOpp2srgbWvIlR1hQyPzP/dTaLg7u+mc=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-181607-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: e51ab88b-14d0-11ee-8611-37d641c3527e
+From: Petr Tesarik <petrtesarik@huaweicloud.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Kees Cook <keescook@chromium.org>,
+	Saravana Kannan <saravanak@google.com>,
+	xen-devel@lists.xenproject.org (moderated list:XEN HYPERVISOR ARM),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM PORT),
+	linux-kernel@vger.kernel.org (open list),
+	linux-mips@vger.kernel.org (open list:MIPS),
+	iommu@lists.linux.dev (open list:XEN SWIOTLB SUBSYSTEM)
+Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
+	Kefeng Wang <wangkefeng.wang@huawei.com>,
+	petr@tesarici.cz
+Subject: [PATCH v3 4/7] swiotlb: if swiotlb is full, fall back to a transient memory pool
+Date: Tue, 27 Jun 2023 11:54:26 +0200
+Message-Id: <34c2a1ba721a7bc496128aac5e20724e4077f1ab.1687859323.git.petr.tesarik.ext@huawei.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1687859323.git.petr.tesarik.ext@huawei.com>
+References: <cover.1687859323.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
-Subject: [xen-unstable test] 181607: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable:build-arm64-pvops:kernel-build:fail:regression
-    xen-unstable:test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm:debian-hvm-install:fail:heisenbug
-    xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:windows-install:fail:heisenbug
-    xen-unstable:test-amd64-i386-xl-qemuu-debianhvm-amd64:xen-install:fail:heisenbug
-    xen-unstable:test-amd64-i386-pair:xen-install/src_host:fail:heisenbug
-    xen-unstable:test-arm64-arm64-examine:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-raw:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit1:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit2:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl-thunderx:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl-vhd:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
-    xen-unstable:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    xen-unstable:test-amd64-i386-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-i386-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    xen-unstable:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-i386-xl-pvshim:guest-start:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-amd64-i386-libvirt-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
-    xen-unstable:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=5c84f1f636981dab5341e84aaba8d4dd00bbc2cb
-X-Osstest-Versions-That:
-    xen=5c84f1f636981dab5341e84aaba8d4dd00bbc2cb
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 27 Jun 2023 08:51:32 +0000
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:LxC2BwBnwdzesZpknnvHAw--.39096S6
+X-Coremail-Antispam: 1UD129KBjvAXoW3Cr4UZr48ZrW8XFyfAry5urg_yoW8AryfXo
+	W7CFn7Ww4fJryUCF45GFZ7GF47Za1kKF48AF4fuayqgayjvryYgrW3ta15X3sxur1xKFWx
+	Ar1Sqa4fWF4xAry8n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UjIYCTnIWjp_UUUOT7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+	j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
+	Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
+	84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJV
+	WxJr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+	6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+	C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+	6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+	8vn2kIc2xKxwCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC
+	6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWw
+	C2zVAF1VAY17CE14v26rWY6r4UJwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j
+	6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rV
+	WUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWx
+	JrUvcSsGvfC2KfnxnUUI43ZEXa7VUU_Ma5UUUUU==
+X-CM-SenderInfo: hshw23xhvd2x3n6k3tpzhluzxrxghudrp/
+X-CFilter-Loop: Reflected
 
-flight 181607 xen-unstable real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/181607/
+From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-Regressions :-(
+Try to allocate a transient memory pool if no suitable slots can be found,
+except when allocating from a restricted pool. The transient pool is just
+enough big for this one bounce buffer. It is inserted into a per-device
+list of transient memory pools, and it is freed again when the bounce
+buffer is unmapped.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-pvops             6 kernel-build             fail REGR. vs. 181597
+Transient memory pools are kept in an RCU list. A memory barrier is
+required after adding a new entry, because any address within a transient
+buffer must be immediately recognized as belonging to the SWIOTLB, even if
+it is passed to another CPU.
 
-Tests which are failing intermittently (not blocking):
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm 12 debian-hvm-install fail in 181597 pass in 181607
- test-amd64-amd64-xl-qemuu-win7-amd64 12 windows-install fail in 181597 pass in 181607
- test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install    fail pass in 181597
- test-amd64-i386-pair         10 xen-install/src_host       fail pass in 181597
+Deletion does not require any synchronization beyond RCU ordering
+guarantees. After a buffer is unmapped, its physical addresses may no
+longer be passed to the DMA API, so the memory range of the corresponding
+stale entry in the RCU list never matches. If the memory range gets
+allocated again, then it happens only after a RCU quiescent state.
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-examine      1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-raw  1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl           1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-credit1   1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-credit2   1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-thunderx  1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-vhd       1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl         15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl     16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-xl-xsm     15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl-credit1 15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl-xsm 16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-xl-credit1 16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-xl-credit2 15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl-credit2 16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-xl-thunderx 15 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl-thunderx 16 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check fail in 181597 never pass
- test-arm64-arm64-xl-vhd     14 migrate-support-check fail in 181597 never pass
- test-arm64-arm64-xl-vhd 15 saverestore-support-check fail in 181597 never pass
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 181582
- test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 181597
- test-amd64-i386-xl-qemuu-win7-amd64 19 guest-stop             fail like 181597
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 181597
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 181597
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 181597
- test-amd64-i386-xl-qemut-ws16-amd64 19 guest-stop             fail like 181597
- test-amd64-i386-xl-qemut-win7-amd64 19 guest-stop             fail like 181597
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 181597
- test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 181597
- test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 181597
- test-amd64-i386-xl-qemuu-ws16-amd64 19 guest-stop             fail like 181597
- test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
- test-amd64-i386-xl-pvshim    14 guest-start                  fail   never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-raw  14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
- test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
+Since bounce buffers can now be allocated from different pools, add a
+parameter to swiotlb_alloc_pool() to let the caller know which memory pool
+is used. Add swiotlb_find_pool() to find the memory pool corresponding to
+an address. This function is now also used by is_swiotlb_buffer(), because
+a simple boundary check is no longer sufficient.
 
-version targeted for testing:
- xen                  5c84f1f636981dab5341e84aaba8d4dd00bbc2cb
-baseline version:
- xen                  5c84f1f636981dab5341e84aaba8d4dd00bbc2cb
+The logic in swiotlb_alloc_tlb() is taken from __dma_direct_alloc_pages(),
+simplified and enhanced to use coherent memory pools if needed.
 
-Last test of basis   181607  2023-06-27 01:53:32 Z    0 days
-Testing same since                          (not found)         0 attempts
+Note that this is not the most efficient way to provide a bounce buffer,
+but when a DMA buffer can't be mapped, something may (and will) actually
+break. At that point it is better to make an allocation, even if it may be
+an expensive operation.
 
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-prev                                             pass    
- build-i386-prev                                              pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            fail    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          blocked 
- test-armhf-armhf-xl                                          pass    
- test-amd64-i386-xl                                           pass    
- test-amd64-coresched-i386-xl                                 pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
- test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-i386-xl-xsm                                       pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-i386-qemut-rhel6hvm-amd                           pass    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     fail    
- test-amd64-i386-freebsd10-amd64                              pass    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-i386-xl-qemut-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-i386-xl-qemut-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-examine-bios                                pass    
- test-amd64-i386-examine-bios                                 pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  blocked 
- test-armhf-armhf-xl-credit1                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  blocked 
- test-armhf-armhf-xl-credit2                                  pass    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
- test-amd64-amd64-examine                                     pass    
- test-arm64-arm64-examine                                     blocked 
- test-armhf-armhf-examine                                     pass    
- test-amd64-i386-examine                                      pass    
- test-amd64-i386-freebsd10-i386                               pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-i386-qemut-rhel6hvm-intel                         pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-livepatch                                   pass    
- test-amd64-i386-livepatch                                    pass    
- test-amd64-amd64-migrupgrade                                 pass    
- test-amd64-i386-migrupgrade                                  pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-i386-pair                                         fail    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-i386-xl-pvshim                                    fail    
- test-amd64-amd64-pygrub                                      pass    
- test-armhf-armhf-libvirt-qcow2                               pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-arm64-arm64-libvirt-raw                                 blocked 
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-libvirt-raw                                  pass    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
- test-amd64-amd64-xl-shadow                                   pass    
- test-amd64-i386-xl-shadow                                    pass    
- test-arm64-arm64-xl-thunderx                                 blocked 
- test-amd64-amd64-examine-uefi                                pass    
- test-amd64-i386-examine-uefi                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-arm64-arm64-xl-vhd                                      blocked 
- test-armhf-armhf-xl-vhd                                      pass    
- test-amd64-i386-xl-vhd                                       pass    
+Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
+---
+ include/linux/device.h      |   4 +
+ include/linux/dma-mapping.h |   2 +
+ include/linux/swiotlb.h     |  13 +-
+ kernel/dma/direct.c         |   2 +-
+ kernel/dma/swiotlb.c        | 265 ++++++++++++++++++++++++++++++++++--
+ 5 files changed, 272 insertions(+), 14 deletions(-)
 
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Published tested tree is already up to date.
+diff --git a/include/linux/device.h b/include/linux/device.h
+index 83081aa99e6a..a1ee4c5924b8 100644
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -510,6 +510,8 @@ struct device_physical_location {
+  * @dma_mem:	Internal for coherent mem override.
+  * @cma_area:	Contiguous memory area for dma allocations
+  * @dma_io_tlb_mem: Software IO TLB allocator.  Not for driver use.
++ * @dma_io_tlb_pools:	List of transient swiotlb memory pools.
++ * @dma_io_tlb_lock:	Protects changes to the list of active pools.
+  * @archdata:	For arch-specific additions.
+  * @of_node:	Associated device tree node.
+  * @fwnode:	Associated device node supplied by platform firmware.
+@@ -615,6 +617,8 @@ struct device {
+ #endif
+ #ifdef CONFIG_SWIOTLB
+ 	struct io_tlb_mem *dma_io_tlb_mem;
++	struct list_head dma_io_tlb_pools;
++	spinlock_t dma_io_tlb_lock;
+ #endif
+ 	/* arch specific additions */
+ 	struct dev_archdata	archdata;
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index 0ee20b764000..c36c5a546787 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -417,6 +417,8 @@ static inline void dma_sync_sgtable_for_device(struct device *dev,
+ #define dma_get_sgtable(d, t, v, h, s) dma_get_sgtable_attrs(d, t, v, h, s, 0)
+ #define dma_mmap_coherent(d, v, c, h, s) dma_mmap_attrs(d, v, c, h, s, 0)
+ 
++bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size);
++
+ static inline void *dma_alloc_coherent(struct device *dev, size_t size,
+ 		dma_addr_t *dma_handle, gfp_t gfp)
+ {
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 0aa6868cb68c..ae1688438850 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -63,6 +63,7 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
+ 
+ /**
+  * struct io_tlb_pool - IO TLB memory pool descriptor
++ * @node:	Member of the IO TLB memory pool list.
+  * @start:	The start address of the swiotlb memory pool. Used to do a quick
+  *		range check to see if the memory was in fact allocated by this
+  *		API.
+@@ -77,22 +78,27 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
+  *		see setup_io_tlb_npages().
+  * @used:	The number of used IO TLB slots.
+  * @late_alloc:	%true if allocated using the page allocator.
++ * @transient:  %true if transient memory pool.
+  * @nareas:	Number of areas in the pool.
+  * @area_nslabs: Number of slots in each area.
+  * @areas:	Array of memory area descriptors.
+  * @slots:	Array of slot descriptors.
++ * @rcu:	RCU head for swiotlb_dyn_free().
+  */
+ struct io_tlb_pool {
++	struct list_head node;
+ 	phys_addr_t start;
+ 	phys_addr_t end;
+ 	void *vaddr;
+ 	unsigned long nslabs;
+ 	unsigned long used;
+ 	bool late_alloc;
++	bool transient;
+ 	unsigned int nareas;
+ 	unsigned int area_nslabs;
+ 	struct io_tlb_area *areas;
+ 	struct io_tlb_slot *slots;
++	struct rcu_head rcu;
+ };
+ 
+ /**
+@@ -120,6 +126,8 @@ struct io_tlb_mem {
+ #endif
+ };
+ 
++struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr);
++
+ /**
+  * is_swiotlb_buffer() - check if a physical address belongs to a swiotlb
+  * @dev:        Device which has mapped the buffer.
+@@ -133,9 +141,8 @@ struct io_tlb_mem {
+  */
+ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
+ {
+-	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+-
+-	return mem && paddr >= mem->pool->start && paddr < mem->pool->end;
++	return dev->dma_io_tlb_mem &&
++		!!swiotlb_find_pool(dev, paddr);
+ }
+ 
+ static inline bool is_swiotlb_force_bounce(struct device *dev)
+diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
+index 5595d1d5cdcc..820561cab38d 100644
+--- a/kernel/dma/direct.c
++++ b/kernel/dma/direct.c
+@@ -66,7 +66,7 @@ static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 *phys_limit)
+ 	return 0;
+ }
+ 
+-static bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
++bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
+ {
+ 	dma_addr_t dma_addr = phys_to_dma_direct(dev, phys);
+ 
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 4c5de91bda57..06b4fa7c2e9b 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -35,6 +35,7 @@
+ #include <linux/memblock.h>
+ #include <linux/mm.h>
+ #include <linux/pfn.h>
++#include <linux/rculist.h>
+ #include <linux/scatterlist.h>
+ #include <linux/set_memory.h>
+ #include <linux/spinlock.h>
+@@ -500,6 +501,157 @@ void __init swiotlb_exit(void)
+ 	memset(mem, 0, sizeof(*mem));
+ }
+ 
++/**
++ * alloc_dma_pages() - allocate pages to be used for DMA
++ * @gfp:	GFP flags for the allocation.
++ * @bytes:	Size of the buffer.
++ *
++ * Allocate pages from the buddy allocator. If successful, make the allocated
++ * pages decrypted that they can be used for DMA.
++ *
++ * Return: Decrypted pages, or %NULL on failure.
++ */
++static struct page *alloc_dma_pages(gfp_t gfp, size_t bytes)
++{
++	unsigned int order = get_order(bytes);
++	struct page *page;
++	void *vaddr;
++
++	page = alloc_pages(gfp, order);
++	if (!page)
++		return NULL;
++
++	vaddr = page_address(page);
++	if (set_memory_decrypted((unsigned long)vaddr, PFN_UP(bytes))) {
++		__free_pages(page, order);
++		return NULL;
++	}
++
++	return page;
++}
++
++/**
++ * swiotlb_alloc_tlb() - allocate a dynamic IO TLB buffer
++ * @dev:	Device for which a memory pool is allocated.
++ * @bytes:	Size of the buffer.
++ * @phys_limit:	Maximum allowed physical address of the buffer.
++ * @gfp:	GFP flags for the allocation.
++ *
++ * Return: Allocated pages, or %NULL on allocation failure.
++ */
++static struct page *swiotlb_alloc_tlb(struct device *dev, size_t bytes,
++		u64 phys_limit, gfp_t gfp)
++{
++	struct page *page;
++
++	/*
++	 * Allocate from the atomic pools if memory is encrypted and
++	 * the allocation is atomic, because decrypting may block.
++	 */
++	if (dev && force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp)) {
++		void *vaddr;
++
++		return IS_ENABLED(CONFIG_DMA_COHERENT_POOL)
++			? dma_alloc_from_pool(dev, bytes, &vaddr, gfp,
++					      dma_coherent_ok)
++			: NULL;
++	}
++
++	gfp &= ~GFP_ZONEMASK;
++	if (phys_limit <= DMA_BIT_MASK(zone_dma_bits))
++		gfp |= __GFP_DMA;
++	else if (phys_limit <= DMA_BIT_MASK(32))
++		gfp |= __GFP_DMA32;
++
++	while ((page = alloc_dma_pages(gfp, bytes)) &&
++	       page_to_phys(page) + bytes - 1 > phys_limit) {
++		/* allocated, but too high */
++		__free_pages(page, get_order(bytes));
++
++		if (IS_ENABLED(CONFIG_ZONE_DMA32) &&
++		    phys_limit < DMA_BIT_MASK(64) &&
++		    !(gfp & (__GFP_DMA32 | __GFP_DMA)))
++			gfp |= __GFP_DMA32;
++		else if (IS_ENABLED(CONFIG_ZONE_DMA) &&
++			 !(gfp & __GFP_DMA))
++			gfp = (gfp & ~__GFP_DMA32) | __GFP_DMA;
++		else
++			return NULL;
++	}
++
++	return page;
++}
++
++/**
++ * swiotlb_free_tlb() - free a dynamically allocated IO TLB buffer
++ * @vaddr:	Virtual address of the buffer.
++ * @bytes:	Size of the buffer.
++ */
++static void swiotlb_free_tlb(void *vaddr, size_t bytes)
++{
++	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
++	    dma_free_from_pool(NULL, vaddr, bytes))
++		return;
++
++	/* Intentional leak if pages cannot be encrypted again. */
++	if (!set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes)))
++		__free_pages(virt_to_page(vaddr), get_order(bytes));
++}
++
++/**
++ * swiotlb_alloc_pool() - allocate a new IO TLB memory pool
++ * @dev:	Device for which a memory pool is allocated.
++ * @nslabs:	Desired number of slabs.
++ * @phys_limit:	Maximum DMA buffer physical address.
++ * @gfp:	GFP flags for the allocations.
++ *
++ * Allocate and initialize a new IO TLB memory pool.
++ *
++ * Return: New memory pool, or %NULL on allocation failure.
++ */
++static struct io_tlb_pool *swiotlb_alloc_pool(struct device *dev,
++		unsigned int nslabs, u64 phys_limit, gfp_t gfp)
++{
++	struct io_tlb_pool *pool;
++	struct page *tlb;
++	size_t pool_size;
++	size_t tlb_size;
++
++	pool_size = sizeof(*pool) + array_size(sizeof(*pool->areas), 1) +
++		array_size(sizeof(*pool->slots), nslabs);
++	pool = kzalloc(pool_size, gfp);
++	if (!pool)
++		goto error;
++	pool->areas = (void *)pool + sizeof(*pool);
++	pool->slots = (void *)pool->areas + sizeof(*pool->areas);
++
++	tlb_size = nslabs << IO_TLB_SHIFT;
++	tlb = swiotlb_alloc_tlb(dev, tlb_size, phys_limit, gfp);
++	if (!tlb)
++		goto error_tlb;
++
++	swiotlb_init_io_tlb_pool(pool, page_to_phys(tlb), nslabs, true, 1);
++	return pool;
++
++error_tlb:
++	kfree(pool);
++error:
++	return NULL;
++}
++
++/**
++ * swiotlb_dyn_free() - RCU callback to free a memory pool
++ * @rcu:	RCU head in the corresponding struct io_tlb_pool.
++ */
++static void swiotlb_dyn_free(struct rcu_head *rcu)
++{
++	struct io_tlb_pool *pool = container_of(rcu, struct io_tlb_pool, rcu);
++	size_t tlb_size = pool->end - pool->start;
++
++	swiotlb_free_tlb(pool->vaddr, tlb_size);
++	kfree(pool);
++}
++
+ /**
+  * swiotlb_dev_init() - initialize swiotlb fields in &struct device
+  * @dev:	Device to be initialized.
+@@ -507,6 +659,56 @@ void __init swiotlb_exit(void)
+ void swiotlb_dev_init(struct device *dev)
+ {
+ 	dev->dma_io_tlb_mem = &io_tlb_default_mem;
++	INIT_LIST_HEAD(&dev->dma_io_tlb_pools);
++	spin_lock_init(&dev->dma_io_tlb_lock);
++}
++
++/**
++ * swiotlb_find_pool() - find the IO TLB pool for a physical address
++ * @dev:        Device which has mapped the DMA buffer.
++ * @paddr:      Physical address within the DMA buffer.
++ *
++ * Find the IO TLB memory pool descriptor which contains the given physical
++ * address, if any.
++ *
++ * Return: Memory pool which contains @paddr, or %NULL if none.
++ */
++struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr)
++{
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
++	struct io_tlb_pool *pool = mem->pool;
++
++	if (paddr >= pool->start && paddr < pool->end)
++		return pool;
++
++	/* Pairs with smp_wmb() in swiotlb_find_slots(). */
++	smp_rmb();
++
++	rcu_read_lock();
++	list_for_each_entry_rcu(pool, &dev->dma_io_tlb_pools, node) {
++		if (paddr >= pool->start && paddr < pool->end)
++			goto out;
++	}
++	pool = NULL;
++out:
++	rcu_read_unlock();
++	return pool;
++}
++
++/**
++ * swiotlb_del_pool() - remove an IO TLB pool from a device
++ * @dev:	Owning device.
++ * @pool:	Memory pool to be removed.
++ */
++static void swiotlb_del_pool(struct device *dev, struct io_tlb_pool *pool)
++{
++	unsigned long flags;
++
++	spin_lock_irqsave(&dev->dma_io_tlb_lock, flags);
++	list_del_rcu(&pool->node);
++	spin_unlock_irqrestore(&dev->dma_io_tlb_lock, flags);
++
++	call_rcu(&pool->rcu, swiotlb_dyn_free);
+ }
+ 
+ /*
+@@ -523,7 +725,7 @@ static unsigned int swiotlb_align_offset(struct device *dev, u64 addr)
+ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size,
+ 			   enum dma_data_direction dir)
+ {
+-	struct io_tlb_pool *mem = dev->dma_io_tlb_mem->pool;
++	struct io_tlb_pool *mem = swiotlb_find_pool(dev, tlb_addr);
+ 	int index = (tlb_addr - mem->start) >> IO_TLB_SHIFT;
+ 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
+ 	size_t alloc_size = mem->slots[index].alloc_size;
+@@ -796,6 +998,7 @@ static int pool_find_slots(struct device *dev, struct io_tlb_pool *pool,
+  * @alloc_size: Total requested size of the bounce buffer,
+  *		including initial alignment padding.
+  * @alloc_align_mask:	Required alignment of the allocated buffer.
++ * @retpool:	Used memory pool, updated on return.
+  *
+  * Search through the whole software IO TLB to find a sequence of slots that
+  * match the allocation constraints.
+@@ -803,10 +1006,46 @@ static int pool_find_slots(struct device *dev, struct io_tlb_pool *pool,
+  * Return: Index of the first allocated slot, or -1 on error.
+  */
+ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+-		size_t alloc_size, unsigned int alloc_align_mask)
++		size_t alloc_size, unsigned int alloc_align_mask,
++		struct io_tlb_pool **retpool)
+ {
+-	return pool_find_slots(dev, dev->dma_io_tlb_mem->pool, orig_addr,
+-			       alloc_size, alloc_align_mask);
++	struct io_tlb_pool *pool;
++	unsigned long flags;
++	u64 phys_limit;
++	int index;
++
++	pool = dev->dma_io_tlb_mem->pool;
++	index = pool_find_slots(dev, pool, orig_addr,
++				alloc_size, alloc_align_mask);
++	if (index >= 0)
++		goto found;
++
++	if (dev->dma_io_tlb_mem->for_alloc)
++		return -1;
++
++	phys_limit = min_not_zero(dev->coherent_dma_mask, dev->bus_dma_limit);
++	pool = swiotlb_alloc_pool(dev, nr_slots(alloc_size), phys_limit,
++				  GFP_NOWAIT | __GFP_NOWARN);
++	if (!pool)
++		return -1;
++
++	index = pool_find_slots(dev, pool, orig_addr,
++				alloc_size, alloc_align_mask);
++	if (index < 0) {
++		swiotlb_dyn_free(&pool->rcu);
++		return -1;
++	}
++
++	pool->transient = true;
++	spin_lock_irqsave(&dev->dma_io_tlb_lock, flags);
++	list_add_rcu(&pool->node, &dev->dma_io_tlb_pools);
++	spin_unlock_irqrestore(&dev->dma_io_tlb_lock, flags);
++
++	/* Pairs with smp_rmb() in swiotlb_find_pool(). */
++	smp_wmb();
++found:
++	*retpool = pool;
++	return index;
+ }
+ 
+ /**
+@@ -869,7 +1108,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 	}
+ 
+ 	index = swiotlb_find_slots(dev, orig_addr,
+-				   alloc_size + offset, alloc_align_mask);
++				   alloc_size + offset, alloc_align_mask, &pool);
+ 	if (index == -1) {
+ 		if (!(attrs & DMA_ATTR_NO_WARN))
+ 			dev_warn_ratelimited(dev,
+@@ -883,7 +1122,6 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 	 * This is needed when we sync the memory.  Then we sync the buffer if
+ 	 * needed.
+ 	 */
+-	pool = mem->pool;
+ 	for (i = 0; i < nr_slots(alloc_size + offset); i++)
+ 		pool->slots[index + i].orig_addr = slot_addr(orig_addr, i);
+ 	tlb_addr = slot_addr(pool->start, index) + offset;
+@@ -900,7 +1138,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 
+ static void swiotlb_release_slots(struct device *dev, phys_addr_t tlb_addr)
+ {
+-	struct io_tlb_pool *mem = dev->dma_io_tlb_mem->pool;
++	struct io_tlb_pool *mem = swiotlb_find_pool(dev, tlb_addr);
+ 	unsigned long flags;
+ 	unsigned int offset = swiotlb_align_offset(dev, tlb_addr);
+ 	int index = (tlb_addr - offset - mem->start) >> IO_TLB_SHIFT;
+@@ -954,6 +1192,8 @@ void swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
+ 			      size_t mapping_size, enum dma_data_direction dir,
+ 			      unsigned long attrs)
+ {
++	struct io_tlb_pool *pool;
++
+ 	/*
+ 	 * First, sync the memory before unmapping the entry
+ 	 */
+@@ -961,7 +1201,13 @@ void swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
+ 	    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
+ 		swiotlb_bounce(dev, tlb_addr, mapping_size, DMA_FROM_DEVICE);
+ 
+-	swiotlb_release_slots(dev, tlb_addr);
++	pool = swiotlb_find_pool(dev, tlb_addr);
++	if (pool->transient) {
++		dec_used(dev->dma_io_tlb_mem, pool->nslabs);
++		swiotlb_del_pool(dev, pool);
++	} else {
++		swiotlb_release_slots(dev, tlb_addr);
++	}
+ }
+ 
+ void swiotlb_sync_single_for_device(struct device *dev, phys_addr_t tlb_addr,
+@@ -1145,11 +1391,10 @@ struct page *swiotlb_alloc(struct device *dev, size_t size)
+ 	if (!mem)
+ 		return NULL;
+ 
+-	index = swiotlb_find_slots(dev, 0, size, 0);
++	index = swiotlb_find_slots(dev, 0, size, 0, &pool);
+ 	if (index == -1)
+ 		return NULL;
+ 
+-	pool = mem->pool;
+ 	tlb_addr = slot_addr(pool->start, index);
+ 
+ 	return pfn_to_page(PFN_DOWN(tlb_addr));
+-- 
+2.25.1
 
 
