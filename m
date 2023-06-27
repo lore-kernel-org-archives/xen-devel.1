@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD301C04FE1
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 03:15:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555693.867699 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5700EC00528
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 03:15:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555683.867618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDzAw-0006Wr-Nt; Tue, 27 Jun 2023 03:15:30 +0000
+	id 1qDzAh-00045F-0H; Tue, 27 Jun 2023 03:15:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555693.867699; Tue, 27 Jun 2023 03:15:30 +0000
+Received: by outflank-mailman (output) from mailman id 555683.867618; Tue, 27 Jun 2023 03:15:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDzAw-0006WG-Gq; Tue, 27 Jun 2023 03:15:30 +0000
-Received: by outflank-mailman (input) for mailman id 555693;
- Tue, 27 Jun 2023 03:15:29 +0000
+	id 1qDzAg-000458-TS; Tue, 27 Jun 2023 03:15:14 +0000
+Received: by outflank-mailman (input) for mailman id 555683;
+ Tue, 27 Jun 2023 03:15:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1X7u=CP=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qDzAv-0003uL-I1
- for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 03:15:29 +0000
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [2607:f8b0:4864:20::1132])
+ id 1qDzAf-0003uL-WF
+ for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 03:15:14 +0000
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [2607:f8b0:4864:20::1129])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dd2441ad-1498-11ee-8611-37d641c3527e;
- Tue, 27 Jun 2023 05:15:27 +0200 (CEST)
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-570002c9b38so42369387b3.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jun 2023 20:15:27 -0700 (PDT)
+ id d30baba6-1498-11ee-8611-37d641c3527e;
+ Tue, 27 Jun 2023 05:15:11 +0200 (CEST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-57015b368c3so30863617b3.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jun 2023 20:15:11 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
  by smtp.googlemail.com with ESMTPSA id
- s4-20020a0dd004000000b0057399b3bd26sm1614798ywd.33.2023.06.26.20.15.24
+ s4-20020a0dd004000000b0057399b3bd26sm1614798ywd.33.2023.06.26.20.15.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jun 2023 20:15:26 -0700 (PDT)
+ Mon, 26 Jun 2023 20:15:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd2441ad-1498-11ee-8611-37d641c3527e
+X-Inumbo-ID: d30baba6-1498-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687835727; x=1690427727;
+        d=gmail.com; s=20221208; t=1687835710; x=1690427710;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uRcW1jW+95PozpJhE7MOWGztyyXp9a8KAqI8T3AvQGQ=;
-        b=pvA/vO4MDeq4kIIhsE3yrV9+ALefWilKkLuNIgHhecd9VDeKpQ3CrB44RRLXN/wH9a
-         v+3v6EJOL2IcXShzxOvXaOjl2qaDyEgyn03s8SsAgafbqCa5mGXGEFvhH716JQIAT0SC
-         QEIWs35jWLlJpDE0C433qu5q7ESJ8UkDS3w921ZCRctPmdDsHkPUrtmlpYzw5VwqW3do
-         SQRdIAIjkZikdiXvEEkKtp7sFgpQSLF0GRJH1HdPtksJU7st37GWKQiDw1MyawGMKHo0
-         s5ztl+d6CGvn0kzD8aZyh2iX1osumXcuHPhisUrTXBEX0Rdvq7Iup64Z2b22TeYu/gRr
-         mzYg==
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=Y5YNwg/QZrK+aHp3q3F/s+zHvk1fnDqd1/MV2/FtyEws8x/EU1okIb5gZ0g0bwjJIl
+         5VUUqN9Wuh0HLMtWdAEYbmMx90i6AJPptQg4hAlIbSGwOvljd5Q6n3O/2f8tA77gBCdK
+         YDhNGdvPzlezHyk8L+H+QUfnc3k/4+57L174UxCkkys5LGiYJFRoujM3bGB1Ibcn91ui
+         mqfwiux2PkGJoz2g2vjn5ccwHyr655voiBf0XjjuTxpjhEe8LJcN7Q6CvIBEB03riKFC
+         EsDpQXncNNWQyJs9hFhiDQn510NXqp1Pgv3vGtCcL2I6tmdj8XTW1jmQN/FUgbsQGPmI
+         XxjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687835727; x=1690427727;
+        d=1e100.net; s=20221208; t=1687835710; x=1690427710;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uRcW1jW+95PozpJhE7MOWGztyyXp9a8KAqI8T3AvQGQ=;
-        b=Jis7PpxOkJ+df+Z1njF51pNg3r+dCNlWoXHZfDZg+RwthebID2upBbY4+LPpvCup5D
-         +IKKXBWxSUWSdxd3/+CrUxvejF89Inp7DP7Uulr3yiSm999gNDykgVkxx9WKaJYSToXg
-         l1QQuMVqI7Wf4JYSReAYQH8B1qee/LT/ert6i19qhRFT6TTXJ1lywIq0cniocyAtBptL
-         weRU8ljR7M5g0nAFicUi43IpGPVe4BEWhfeFn8efJd2dG2O9JtWCfNbNCRIsxZcj3wZv
-         ERXSF+bittqWPsGpx/r1deUz0EPRSyzPRPH/VWGMU6p/Q2ZdvCN5NkEA+PNZ8CRTsNTn
-         pMfw==
-X-Gm-Message-State: AC+VfDwPoAIWTsNk+aza8rX7Kw4J3l8yNrZZwBXnmn8opyfV5H2t7uJx
-	Dri8pfqHx6ctEv6YoydfPm8SJU9scIbqtw==
-X-Google-Smtp-Source: ACHHUZ44nBppmQGdd8zdkRU4D5yhqKKKAoy0EjGlUrIReqb1/1yiuyQcU5hRXay6VI94GfMmMF8RKg==
-X-Received: by 2002:a81:c203:0:b0:561:da0d:6488 with SMTP id z3-20020a81c203000000b00561da0d6488mr27417977ywc.50.1687835726781;
-        Mon, 26 Jun 2023 20:15:26 -0700 (PDT)
+        bh=DXYENedStYVsFXpaqy8X3+wmlabVR1q8JHyD5+dxFj0=;
+        b=Xn/7qR5c7635679ceaB6D8+Rv5PfivHBcCSaMMdPNjrSKEZtDMfSy9xcQvLW/vSEUo
+         1EiHzz4iD1gUPx0C18vPew0NU7dk+wSnklNPo6W6PUQRcHAhyKKB1OrgkdCkooYqfyEG
+         rclP/RFrAB2bAPnRsLFSwDK4B9ufc/bvgu3/JMNyYvSLjQq3uy7vDUz5lARt8p+9Oz2/
+         QrpnIibahP2N+s0/DbyiBtg9KEPTzDQCuFEdFsnfPFY0vy3p2b7ukHveMRMAhjgxEi28
+         pOSHCBu+rStJ/I9QM+/lQ3nGR+hmv68/nWC4McKpmQDUPtXmBbPFvY8JYOaluGFdh/H1
+         6cyQ==
+X-Gm-Message-State: AC+VfDy6JlZw0uF+HEjW8zOW7puHpfPMGbOrycg0CSMUpS94cIK9Qx0v
+	ACm8gJAhuwg8d0E/R1ZSkbmJVEOYJ4hegQ==
+X-Google-Smtp-Source: ACHHUZ6evDL0HWuUOw/E7eS1sxmpRauJbQh+5KyxG9iaYPnpfZgG5Wrtu7krHuwGR/MT62H3t8vWEA==
+X-Received: by 2002:a0d:d681:0:b0:561:81b:7319 with SMTP id y123-20020a0dd681000000b00561081b7319mr25124050ywd.32.1687835709872;
+        Mon, 26 Jun 2023 20:15:09 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -100,76 +100,110 @@ Cc: linux-mm@kvack.org,
 	Hugh Dickins <hughd@google.com>,
 	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
 	Mike Rapoport <rppt@kernel.org>
-Subject: [PATCH v6 09/33] mm: Convert ptlock_init() to use ptdescs
-Date: Mon, 26 Jun 2023 20:14:07 -0700
-Message-Id: <20230627031431.29653-10-vishal.moola@gmail.com>
+Subject: [PATCH v6 01/33] mm: Add PAGE_TYPE_OP folio functions
+Date: Mon, 26 Jun 2023 20:13:59 -0700
+Message-Id: <20230627031431.29653-2-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230627031431.29653-1-vishal.moola@gmail.com>
 References: <20230627031431.29653-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This removes some direct accesses to struct page, working towards
-splitting out struct ptdesc from struct page.
+No folio equivalents for page type operations have been defined, so
+define them for later folio conversions.
+
+Also changes the Page##uname macros to take in const struct page* since
+we only read the memory here.
 
 Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
 Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
 ---
- include/linux/mm.h | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ include/linux/page-flags.h | 30 +++++++++++++++++++++++-------
+ 1 file changed, 23 insertions(+), 7 deletions(-)
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 1c4c6a7b69b3..4af424e4015a 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -2830,7 +2830,7 @@ static inline spinlock_t *pte_lockptr(struct mm_struct *mm, pmd_t *pmd)
- 	return ptlock_ptr(page_ptdesc(pmd_page(*pmd)));
- }
+diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+index 92a2063a0a23..9218028caf33 100644
+--- a/include/linux/page-flags.h
++++ b/include/linux/page-flags.h
+@@ -908,6 +908,8 @@ static inline bool is_page_hwpoison(struct page *page)
  
--static inline bool ptlock_init(struct page *page)
-+static inline bool ptlock_init(struct ptdesc *ptdesc)
+ #define PageType(page, flag)						\
+ 	((page->page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
++#define folio_test_type(folio, flag)					\
++	((folio->page.page_type & (PAGE_TYPE_BASE | flag)) == PAGE_TYPE_BASE)
+ 
+ static inline int page_type_has_type(unsigned int page_type)
  {
- 	/*
- 	 * prep_new_page() initialize page->private (and therefore page->ptl)
-@@ -2839,10 +2839,10 @@ static inline bool ptlock_init(struct page *page)
- 	 * It can happen if arch try to use slab for page table allocation:
- 	 * slab code uses page->slab_cache, which share storage with page->ptl.
- 	 */
--	VM_BUG_ON_PAGE(*(unsigned long *)&page->ptl, page);
--	if (!ptlock_alloc(page_ptdesc(page)))
-+	VM_BUG_ON_PAGE(*(unsigned long *)&ptdesc->ptl, ptdesc_page(ptdesc));
-+	if (!ptlock_alloc(ptdesc))
- 		return false;
--	spin_lock_init(ptlock_ptr(page_ptdesc(page)));
-+	spin_lock_init(ptlock_ptr(ptdesc));
- 	return true;
+@@ -919,27 +921,41 @@ static inline int page_has_type(struct page *page)
+ 	return page_type_has_type(page->page_type);
  }
  
-@@ -2855,13 +2855,13 @@ static inline spinlock_t *pte_lockptr(struct mm_struct *mm, pmd_t *pmd)
- 	return &mm->page_table_lock;
- }
- static inline void ptlock_cache_init(void) {}
--static inline bool ptlock_init(struct page *page) { return true; }
-+static inline bool ptlock_init(struct ptdesc *ptdesc) { return true; }
- static inline void ptlock_free(struct page *page) {}
- #endif /* USE_SPLIT_PTE_PTLOCKS */
+-#define PAGE_TYPE_OPS(uname, lname)					\
+-static __always_inline int Page##uname(struct page *page)		\
++#define PAGE_TYPE_OPS(uname, lname, fname)				\
++static __always_inline int Page##uname(const struct page *page)		\
+ {									\
+ 	return PageType(page, PG_##lname);				\
+ }									\
++static __always_inline int folio_test_##fname(const struct folio *folio)\
++{									\
++	return folio_test_type(folio, PG_##lname);			\
++}									\
+ static __always_inline void __SetPage##uname(struct page *page)		\
+ {									\
+ 	VM_BUG_ON_PAGE(!PageType(page, 0), page);			\
+ 	page->page_type &= ~PG_##lname;					\
+ }									\
++static __always_inline void __folio_set_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_type(folio, 0), folio);		\
++	folio->page.page_type &= ~PG_##lname;				\
++}									\
+ static __always_inline void __ClearPage##uname(struct page *page)	\
+ {									\
+ 	VM_BUG_ON_PAGE(!Page##uname(page), page);			\
+ 	page->page_type |= PG_##lname;					\
+-}
++}									\
++static __always_inline void __folio_clear_##fname(struct folio *folio)	\
++{									\
++	VM_BUG_ON_FOLIO(!folio_test_##fname(folio), folio);		\
++	folio->page.page_type |= PG_##lname;				\
++}									\
  
- static inline bool pgtable_pte_page_ctor(struct page *page)
- {
--	if (!ptlock_init(page))
-+	if (!ptlock_init(page_ptdesc(page)))
- 		return false;
- 	__SetPageTable(page);
- 	inc_lruvec_page_state(page, NR_PAGETABLE);
-@@ -2931,7 +2931,7 @@ static inline bool pmd_ptlock_init(struct ptdesc *ptdesc)
- #ifdef CONFIG_TRANSPARENT_HUGEPAGE
- 	ptdesc->pmd_huge_pte = NULL;
- #endif
--	return ptlock_init(ptdesc_page(ptdesc));
-+	return ptlock_init(ptdesc);
- }
+ /*
+  * PageBuddy() indicates that the page is free and in the buddy system
+  * (see mm/page_alloc.c).
+  */
+-PAGE_TYPE_OPS(Buddy, buddy)
++PAGE_TYPE_OPS(Buddy, buddy, buddy)
  
- static inline void pmd_ptlock_free(struct page *page)
+ /*
+  * PageOffline() indicates that the page is logically offline although the
+@@ -963,7 +979,7 @@ PAGE_TYPE_OPS(Buddy, buddy)
+  * pages should check PageOffline() and synchronize with such drivers using
+  * page_offline_freeze()/page_offline_thaw().
+  */
+-PAGE_TYPE_OPS(Offline, offline)
++PAGE_TYPE_OPS(Offline, offline, offline)
+ 
+ extern void page_offline_freeze(void);
+ extern void page_offline_thaw(void);
+@@ -973,12 +989,12 @@ extern void page_offline_end(void);
+ /*
+  * Marks pages in use as page tables.
+  */
+-PAGE_TYPE_OPS(Table, table)
++PAGE_TYPE_OPS(Table, table, pgtable)
+ 
+ /*
+  * Marks guardpages used with debug_pagealloc.
+  */
+-PAGE_TYPE_OPS(Guard, guard)
++PAGE_TYPE_OPS(Guard, guard, guard)
+ 
+ extern bool is_free_buddy_page(struct page *page);
+ 
 -- 
 2.40.1
 
