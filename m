@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE9FEB64D9
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD17EB64DD
 	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 10:00:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555965.868190 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.555969.868208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE5Uf-0001bf-Bs; Tue, 27 Jun 2023 10:00:17 +0000
+	id 1qE5Ug-000230-DI; Tue, 27 Jun 2023 10:00:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555965.868190; Tue, 27 Jun 2023 10:00:17 +0000
+Received: by outflank-mailman (output) from mailman id 555969.868208; Tue, 27 Jun 2023 10:00:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE5Uf-0001ZO-5u; Tue, 27 Jun 2023 10:00:17 +0000
-Received: by outflank-mailman (input) for mailman id 555965;
- Tue, 27 Jun 2023 09:56:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qE5Ug-0001xm-3L; Tue, 27 Jun 2023 10:00:18 +0000
+Received: by outflank-mailman (input) for mailman id 555969;
+ Tue, 27 Jun 2023 09:57:23 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X8So=CP=huaweicloud.com=petrtesarik@srs-se1.protection.inumbo.net>)
- id 1qE5RL-00006u-LQ
- for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 09:56:51 +0000
+ id 1qE5Rr-00008W-OU
+ for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 09:57:23 +0000
 Received: from frasgout11.his.huawei.com (unknown [14.137.139.23])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eff8835f-14d0-11ee-b237-6b7b168915f2;
- Tue, 27 Jun 2023 11:56:50 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 02515b5f-14d1-11ee-8611-37d641c3527e;
+ Tue, 27 Jun 2023 11:57:21 +0200 (CEST)
 Received: from mail02.huawei.com (unknown [172.18.147.228])
- by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Qr0Fz12pjz9v7Hg
- for <xen-devel@lists.xenproject.org>; Tue, 27 Jun 2023 17:45:59 +0800 (CST)
+ by frasgout11.his.huawei.com (SkyGuard) with ESMTP id 4Qr0Gb1LKNz9v7Hc
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Jun 2023 17:46:31 +0800 (CST)
 Received: from A2101119013HW2.china.huawei.com (unknown [10.45.153.185])
- by APP1 (Coremail) with SMTP id LxC2BwBnwdzesZpknnvHAw--.39096S7;
- Tue, 27 Jun 2023 10:56:21 +0100 (CET)
+ by APP1 (Coremail) with SMTP id LxC2BwBnwdzesZpknnvHAw--.39096S9;
+ Tue, 27 Jun 2023 10:56:53 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,7 +44,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eff8835f-14d0-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 02515b5f-14d1-11ee-8611-37d641c3527e
 From: Petr Tesarik <petrtesarik@huaweicloud.com>
 To: Stefano Stabellini <sstabellini@kernel.org>,
 	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
@@ -74,18 +74,18 @@ To: Stefano Stabellini <sstabellini@kernel.org>,
 Cc: Roberto Sassu <roberto.sassu@huaweicloud.com>,
 	Kefeng Wang <wangkefeng.wang@huawei.com>,
 	petr@tesarici.cz
-Subject: [PATCH v3 5/7] swiotlb: determine potential physical address limit
-Date: Tue, 27 Jun 2023 11:54:27 +0200
-Message-Id: <ca2a1e6ef6cc91a932c223a4c0b784267d565680.1687859323.git.petr.tesarik.ext@huawei.com>
+Subject: [PATCH v3 7/7] swiotlb: search the software IO TLB only if a device makes use of it
+Date: Tue, 27 Jun 2023 11:54:29 +0200
+Message-Id: <34b9a218e9a152dd53eb0d4b0a819c6de987c8c1.1687859323.git.petr.tesarik.ext@huawei.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1687859323.git.petr.tesarik.ext@huawei.com>
 References: <cover.1687859323.git.petr.tesarik.ext@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:LxC2BwBnwdzesZpknnvHAw--.39096S7
-X-Coremail-Antispam: 1UD129KBjvJXoWxXw4fJr1DCF4Dtr1kuF1DAwb_yoW5WF48pF
-	y8Aa1rtFsFqF1xAryxC3W7AFn3Ka1kC3y7urWa9r15Ar13Gr1rKrsrKr4Yqr1FqF409F4I
-	vFyFvayYvF4aqw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID:LxC2BwBnwdzesZpknnvHAw--.39096S9
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF15Ww18ZF1fWr1UtFW7XFb_yoWrXF1DpF
+	9xAFZ8KayDXr97Cr97CF4UZ3Wagw4vkw43CryagrnYkr1DJwnYqFyDKrWYv3s5Ar47ZFW7
+	Xryj939Ykw17Xr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
 	9KBjDU0xBIdaVrnRJUUUml14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
 	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
 	kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -105,78 +105,108 @@ X-CFilter-Loop: Reflected
 
 From: Petr Tesarik <petr.tesarik.ext@huawei.com>
 
-The value returned by default_swiotlb_limit() should not change, because it
-is used to decide whether DMA can be used. To allow allocating memory pools
-on the fly, use the maximum possible physical address rather than the
-highest address used by the default pool.
+Skip searching the software IO TLB if a device has never used it, making
+sure these devices are not affected by the introduction of multiple IO TLB
+memory pools.
 
-For swiotlb_init_remap(), this is either an arch-specific limit used by
-memblock_alloc_low(), or the highest directly mapped physical address if
-the initialization flags include SWIOTLB_ANY. For swiotlb_init_late(), the
-highest address is determined by the GFP flags.
+Additional memory barrier is required to ensure that the new value of the
+flag is visible to other CPUs after mapping a new bounce buffer. For
+efficiency, the flag check should be inlined, and then the memory barrier
+must be moved to is_swiotlb_buffer(). However, it can replace the existing
+barrier in swiotlb_find_pool(), because all callers use is_swiotlb_buffer()
+first to verify that the buffer address belongs to the software IO TLB.
 
 Signed-off-by: Petr Tesarik <petr.tesarik.ext@huawei.com>
 ---
- include/linux/swiotlb.h |  2 ++
- kernel/dma/swiotlb.c    | 11 ++++++++++-
- 2 files changed, 12 insertions(+), 1 deletion(-)
+ include/linux/device.h  |  2 ++
+ include/linux/swiotlb.h |  6 +++++-
+ kernel/dma/swiotlb.c    | 14 ++++++--------
+ 3 files changed, 13 insertions(+), 9 deletions(-)
 
+diff --git a/include/linux/device.h b/include/linux/device.h
+index a1ee4c5924b8..d4b35925a6d1 100644
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -512,6 +512,7 @@ struct device_physical_location {
+  * @dma_io_tlb_mem: Software IO TLB allocator.  Not for driver use.
+  * @dma_io_tlb_pools:	List of transient swiotlb memory pools.
+  * @dma_io_tlb_lock:	Protects changes to the list of active pools.
++ * @dma_uses_io_tlb: %true if device has used the software IO TLB.
+  * @archdata:	For arch-specific additions.
+  * @of_node:	Associated device tree node.
+  * @fwnode:	Associated device node supplied by platform firmware.
+@@ -619,6 +620,7 @@ struct device {
+ 	struct io_tlb_mem *dma_io_tlb_mem;
+ 	struct list_head dma_io_tlb_pools;
+ 	spinlock_t dma_io_tlb_lock;
++	bool dma_uses_io_tlb;
+ #endif
+ 	/* arch specific additions */
+ 	struct dev_archdata	archdata;
 diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index ae1688438850..4a3af1c216d0 100644
+index ae402890ba41..eb30b5c624f1 100644
 --- a/include/linux/swiotlb.h
 +++ b/include/linux/swiotlb.h
-@@ -105,6 +105,7 @@ struct io_tlb_pool {
-  * struct io_tlb_mem - Software IO TLB allocator
-  * @pool:	IO TLB memory pool descriptor.
-  * @nslabs:	Total number of IO TLB slabs in all pools.
-+ * @phys_limit:	Maximum allowed physical address.
-  * @debugfs:	The dentry to debugfs.
-  * @force_bounce: %true if swiotlb bouncing is forced
-  * @for_alloc:  %true if the pool is used for memory allocation
-@@ -117,6 +118,7 @@ struct io_tlb_pool {
- struct io_tlb_mem {
- 	struct io_tlb_pool *pool;
- 	unsigned long nslabs;
-+	u64 phys_limit;
- 	struct dentry *debugfs;
- 	bool force_bounce;
- 	bool for_alloc;
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 06b4fa7c2e9b..5bb83097ade6 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -333,6 +333,9 @@ void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
- 
- 	io_tlb_default_mem.force_bounce =
- 		swiotlb_force_bounce || (flags & SWIOTLB_FORCE);
-+	io_tlb_default_mem.phys_limit = flags & SWIOTLB_ANY
-+		? virt_to_phys(high_memory - 1)
-+		: ARCH_LOW_ADDRESS_LIMIT;
- 
- 	if (!default_nareas)
- 		swiotlb_adjust_nareas(num_possible_cpus());
-@@ -400,6 +403,12 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
- 		return 0;
- 
- 	io_tlb_default_mem.force_bounce = swiotlb_force_bounce;
-+	io_tlb_default_mem.phys_limit =
-+		IS_ENABLED(CONFIG_ZONE_DMA) && (gfp_mask & __GFP_DMA)
-+		? DMA_BIT_MASK(zone_dma_bits)
-+		: (IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp_mask & __GFP_DMA32)
-+		   ? DMA_BIT_MASK(32)
-+		   : virt_to_phys(high_memory - 1));
- 
- 	if (!default_nareas)
- 		swiotlb_adjust_nareas(num_possible_cpus());
-@@ -1308,7 +1317,7 @@ phys_addr_t default_swiotlb_start(void)
+@@ -148,7 +148,11 @@ struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr);
   */
- phys_addr_t default_swiotlb_limit(void)
+ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
  {
--	return io_tlb_default_pool.end - 1;
-+	return io_tlb_default_mem.phys_limit;
+-	return dev->dma_io_tlb_mem &&
++	/* Pairs with smp_wmb() in swiotlb_find_slots() and
++	 * swiotlb_dyn_alloc(), which modify the RCU lists.
++	 */
++	smp_rmb();
++	return dev->dma_uses_io_tlb &&
+ 		!!swiotlb_find_pool(dev, paddr);
  }
  
- #ifdef CONFIG_DEBUG_FS
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 7661a6402e80..26ab9ed2921b 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -701,7 +701,7 @@ static void swiotlb_dyn_alloc(struct work_struct *work)
+ 
+ 	add_mem_pool(mem, pool);
+ 
+-	/* Pairs with smp_rmb() in swiotlb_find_pool(). */
++	/* Pairs with smp_rmb() in is_swiotlb_buffer(). */
+ 	smp_wmb();
+ }
+ 
+@@ -729,6 +729,7 @@ void swiotlb_dev_init(struct device *dev)
+ 	dev->dma_io_tlb_mem = &io_tlb_default_mem;
+ 	INIT_LIST_HEAD(&dev->dma_io_tlb_pools);
+ 	spin_lock_init(&dev->dma_io_tlb_lock);
++	dev->dma_uses_io_tlb = false;
+ }
+ 
+ /**
+@@ -746,11 +747,6 @@ struct io_tlb_pool *swiotlb_find_pool(struct device *dev, phys_addr_t paddr)
+ 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+ 	struct io_tlb_pool *pool;
+ 
+-	/* Pairs with smp_wmb() in swiotlb_find_slots() and
+-	 * swiotlb_dyn_alloc(), which modify the RCU lists.
+-	 */
+-	smp_rmb();
+-
+ 	rcu_read_lock();
+ 	list_for_each_entry_rcu(pool, &mem->pools, node) {
+ 		if (paddr >= pool->start && paddr < pool->end)
+@@ -1125,9 +1121,11 @@ static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
+ 	list_add_rcu(&pool->node, &dev->dma_io_tlb_pools);
+ 	spin_unlock_irqrestore(&dev->dma_io_tlb_lock, flags);
+ 
+-	/* Pairs with smp_rmb() in swiotlb_find_pool(). */
+-	smp_wmb();
+ found:
++	dev->dma_uses_io_tlb = true;
++	/* Pairs with smp_rmb() in is_swiotlb_buffer() */
++	smp_wmb();
++
+ 	*retpool = pool;
+ 	return index;
+ }
 -- 
 2.25.1
 
