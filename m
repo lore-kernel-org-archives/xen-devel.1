@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCBA7C0015E
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 07:56:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555901.868098 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CBA1C0015E
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 07:57:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555902.868105 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE3Z2-0000IM-1i; Tue, 27 Jun 2023 07:56:40 +0000
+	id 1qE3Z2-0000RP-Ix; Tue, 27 Jun 2023 07:56:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555901.868098; Tue, 27 Jun 2023 07:56:40 +0000
+Received: by outflank-mailman (output) from mailman id 555902.868105; Tue, 27 Jun 2023 07:56:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qE3Z1-0000I6-Ue; Tue, 27 Jun 2023 07:56:39 +0000
-Received: by outflank-mailman (input) for mailman id 555901;
- Tue, 27 Jun 2023 07:56:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1qE3Z2-0000PY-Ea; Tue, 27 Jun 2023 07:56:40 +0000
+Received: by outflank-mailman (input) for mailman id 555902;
+ Tue, 27 Jun 2023 07:56:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=C4+f=CP=citrix.com=prvs=535d699d7=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1qE3Z0-0008EH-Bw
- for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 07:56:38 +0000
+ id 1qE3Z1-0008Ub-7a
+ for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 07:56:39 +0000
 Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2351cd2f-14c0-11ee-8611-37d641c3527e;
- Tue, 27 Jun 2023 09:56:35 +0200 (CEST)
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 23ce6c26-14c0-11ee-b237-6b7b168915f2;
+ Tue, 27 Jun 2023 09:56:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,67 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2351cd2f-14c0-11ee-8611-37d641c3527e
+X-Inumbo-ID: 23ce6c26-14c0-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1687852596;
+  d=citrix.com; s=securemail; t=1687852598;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=WF6+MO8uRCqSL2DrFswTeiveqvFOb1H6UCIU4GeCi+k=;
-  b=ID0vt8raTQrK7znBArIqamxjI2dz+ivQuK1r4OxRFDCNJNf81eoruraf
-   fjO4sqaJTzYOP+5dVG0Q36lt1s4v+KCYznoA4OI2lwsyYvPjnBqocyl+U
-   mudhIXa9cyjIpV6kawKkm6G7yZZ5c8jCYlBDyR/q60gD4KBpjvp9ez1Cb
-   4=;
+  bh=k1fxdFveWZOwPq//vleO1HJJOO6CSm3z/ztSLPP21Wo=;
+  b=YyvF46bSiDdKRMk+88YQjFJdS1ersHFXC9YoYTu/T39oc+F6nGovFhUU
+   uHywfmdfGV9FX9sYaq9Z4I/Pll0HxHlqmhxrqEDhwhx1tTyg21XfPcsr1
+   EKDF5ejNTxA8WYZSwpR+aU+fbdijn/PlAP2j2kQzno0z4eI+XEH0DO8oG
+   g=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 4.0
-X-MesageID: 113007169
+X-MesageID: 113007171
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.123
 X-Policy: $RELAYED
-IronPort-Data: A9a23:dl2UWqAVKAkIVRVW/w7kw5YqxClBgxIJ4kV8jS/XYbTApDgn02QBz
- 2AXUT3UP/eLZGX2Kd13aIu/9U1XvpXQn4M1QQY4rX1jcSlH+JHPbTi7wuUcHAvJd5GeExg3h
+IronPort-Data: A9a23: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
- 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
+ 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
- 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
- iqyFhNyZd1l5OuN/IYtGTcY
-IronPort-HdrOrdr: A9a23:S+hlBa4Sx2du2tLjMwPXwPLXdLJyesId70hD6qkXc203TiX4ra
- CTdZEgviMc5wx/ZJhNo7y90cq7IE80l6QFhLX5VI3KNGOKhILCFu9fBOXZslrdMhy72ulB1b
- pxN4hSYeeAa2SS9fyKgjVQyuxQpOW6zA==
-X-Talos-CUID: 9a23:DWPtTm+/WLEwxpVg8uKVv3xOQMYsKyfc9in3G0ajJnxyGYabFHbFrQ==
-X-Talos-MUID: 9a23:/EgCkwvHh68B5MyQoM2nnR4/NPly/4uVCBorytIj/MCtPhZ2JGLI
+ I2ad8nqBnEfYYx71De/Xfwa15cxzzgiwnneQ5/6yRmqy7uYazieTrJtDbeVRrlntuXe+lyTq
+ osBcZLQkH2zTdESfAH5rZcIM1EDfUQQHLfUtuBbVuG4Mip5TTRJ5+Dq/V8xR2B0t/0LxriYo
+ yjtABEwJEnX3iOed1jTApx3QPa2BMsk8ypmVcA5FQzws0XPd7pD+0v2m3EfWbA8vNJuwvdvJ
+ xXuU5XRW68fItgrFtl0UHUckGCBXE7x7e52F3D5CAXThrY5L+AzxvfqfxH06A4FBTetuM01r
+ tWIj12LHspbG1g7XZmONppDKm9dWlBHwopPs7bgeIEPKC0ADqA0Q8AOshPHC55VckiSrtdr/
+ w2XHQ0ZtYHwT3wdqbH0aVS/h97xSYNWRxMKd1Q3GJ7qbUE2CEL/m94fOAtJFBiBPF7JFFKKP
+ 7oJlKCta6RXwT6nceNUSt5W8E733PO3z5cy8+iuNCyjg4iDYl+4HkS74A==
+IronPort-HdrOrdr: A9a23:Kijq1KzoqX54I12jwYdiKrPwFr1zdoMgy1knxilNoHtuA6+lfq
+ GV/MjzsCWetN9/Yh4dcLy7VJVoIkm8yXcW2/h1AV7KZmCP0gaVxepZg7cKrQeQfBHWx6pw0r
+ phbrg7KPCYNykdsS+D2njbLz/4+qjizJyV
+X-Talos-CUID: =?us-ascii?q?9a23=3AoupztWkRvEPokZWYViDHhtJ4QSTXOVOB1WzOIkb?=
+ =?us-ascii?q?oNU1wb5+IZVOw95h0s9U7zg=3D=3D?=
+X-Talos-MUID: 9a23:YvC48AR42OW4cmeXRXTnmmhbNfZR4Z6FJwcLu4QokMONCSBJbmI=
 X-IronPort-AV: E=Sophos;i="6.01,161,1684814400"; 
-   d="scan'208";a="113007169"
+   d="scan'208";a="113007171"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<jbeulich@suse.com>, Alistair Francis <alistair.francis@wdc.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Bob Eshleman <bobbyeshleman@gmail.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, "Oleksii
- Kurochko" <oleksii.kurochko@gmail.com>, Shawn Anastasio
+	Bob Eshleman <bobbyeshleman@gmail.com>, Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>, Shawn Anastasio
 	<sanastasio@raptorengineering.com>, Timothy Pearson
-	<tpearson@raptorengineering.com>, Roberto Bagnara
-	<roberto.bagnara@bugseng.com>
-Subject: [PATCH v2 3/3] xen/types: Rework stdint vs __{u,s}$N types
-Date: Tue, 27 Jun 2023 08:56:18 +0100
-Message-ID: <20230627075618.1180248-4-andrew.cooper3@citrix.com>
+	<tpearson@raptorengineering.com>
+Subject: [PATCH v2 1/3] xen/types: Drop #ifdefary for __{SIZE,PTRDIFF}_TYPE__
+Date: Tue, 27 Jun 2023 08:56:16 +0100
+Message-ID: <20230627075618.1180248-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230627075618.1180248-1-andrew.cooper3@citrix.com>
 References: <20230627075618.1180248-1-andrew.cooper3@citrix.com>
@@ -106,24 +105,13 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Xen uses the stdint types.  Rearrange the types headers to define the
-compatibility __{u,s}$N types in terms of the stdint types, not the other way
-around.
-
-All all supported compilers on architectures other than x86 support the stdint
-__*_TYPE__ macros.  Move these into a new xen/stdint.h to avoid them being
-duplicated in each architecture.
-
-For the compilers which don't support the __*_TYPE__ macros, synthesize
-appropriate alternatives.
-
-This cleanup has the side effect of removing all use of the undocumented
-__signed__ GCC keyword.  This is a vestigial remnant of `gcc -traditional`
-mode for dialetcs of C prior to the introduction of the signed keyword.
+All supported compilers have these types.
 
 No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
@@ -138,181 +126,36 @@ CC: Connor Davis <connojdavis@gmail.com>
 CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 CC: Shawn Anastasio <sanastasio@raptorengineering.com>
 CC: Timothy Pearson <tpearson@raptorengineering.com>
-CC: Roberto Bagnara <roberto.bagnara@bugseng.com>
 
-v2:
- * Introduce xen/stdint.h as discussed at XenSummit
+https://godbolt.org/z/Y6PWcd6js
 ---
- xen/arch/arm/include/asm/types.h   | 19 -----------------
- xen/arch/riscv/include/asm/types.h | 19 -----------------
- xen/arch/x86/include/asm/types.h   | 14 -------------
- xen/include/xen/stdint.h           | 33 ++++++++++++++++++++++++++++++
- xen/include/xen/types.h            | 20 ++++++++----------
- 5 files changed, 42 insertions(+), 63 deletions(-)
- create mode 100644 xen/include/xen/stdint.h
+ xen/include/xen/types.h | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/xen/arch/arm/include/asm/types.h b/xen/arch/arm/include/asm/types.h
-index fb6618ef247f..545a5e9d1175 100644
---- a/xen/arch/arm/include/asm/types.h
-+++ b/xen/arch/arm/include/asm/types.h
-@@ -1,25 +1,6 @@
- #ifndef __ARM_TYPES_H__
- #define __ARM_TYPES_H__
- 
--typedef __signed__ char __s8;
--typedef unsigned char __u8;
--
--typedef __signed__ short __s16;
--typedef unsigned short __u16;
--
--typedef __signed__ int __s32;
--typedef unsigned int __u32;
--
--#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
--#if defined(CONFIG_ARM_32)
--typedef __signed__ long long __s64;
--typedef unsigned long long __u64;
--#elif defined (CONFIG_ARM_64)
--typedef __signed__ long __s64;
--typedef unsigned long __u64;
--#endif
--#endif
--
- typedef signed char s8;
- typedef unsigned char u8;
- 
-diff --git a/xen/arch/riscv/include/asm/types.h b/xen/arch/riscv/include/asm/types.h
-index 0c0ce78c8f6e..93a680a8f323 100644
---- a/xen/arch/riscv/include/asm/types.h
-+++ b/xen/arch/riscv/include/asm/types.h
-@@ -1,25 +1,6 @@
- #ifndef __RISCV_TYPES_H__
- #define __RISCV_TYPES_H__
- 
--typedef __signed__ char __s8;
--typedef unsigned char __u8;
--
--typedef __signed__ short __s16;
--typedef unsigned short __u16;
--
--typedef __signed__ int __s32;
--typedef unsigned int __u32;
--
--#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
--#if defined(CONFIG_RISCV_32)
--typedef __signed__ long long __s64;
--typedef unsigned long long __u64;
--#elif defined (CONFIG_RISCV_64)
--typedef __signed__ long __s64;
--typedef unsigned long __u64;
--#endif
--#endif
--
- typedef signed char s8;
- typedef unsigned char u8;
- 
-diff --git a/xen/arch/x86/include/asm/types.h b/xen/arch/x86/include/asm/types.h
-index 2d56aed66782..c9d257716551 100644
---- a/xen/arch/x86/include/asm/types.h
-+++ b/xen/arch/x86/include/asm/types.h
-@@ -1,20 +1,6 @@
- #ifndef __X86_TYPES_H__
- #define __X86_TYPES_H__
- 
--typedef __signed__ char __s8;
--typedef unsigned char __u8;
--
--typedef __signed__ short __s16;
--typedef unsigned short __u16;
--
--typedef __signed__ int __s32;
--typedef unsigned int __u32;
--
--#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
--typedef __signed__ long __s64;
--typedef unsigned long __u64;
--#endif
--
- typedef signed char s8;
- typedef unsigned char u8;
- 
-diff --git a/xen/include/xen/stdint.h b/xen/include/xen/stdint.h
-new file mode 100644
-index 000000000000..4cf82790f196
---- /dev/null
-+++ b/xen/include/xen/stdint.h
-@@ -0,0 +1,33 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __XEN_STDINT_H__
-+#define __XEN_STDINT_H__
-+
-+#ifndef __INT8_TYPE__ /* GCC <= 4.4 */
-+
-+typedef __INT8_TYPE__        int8_t;
-+typedef __UINT8_TYPE__      uint8_t;
-+typedef __INT16_TYPE__      int16_t;
-+typedef __UINT16_TYPE__    uint16_t;
-+typedef __INT32_TYPE__      int32_t;
-+typedef __UINT32_TYPE__    uint32_t;
-+typedef __INT64_TYPE__      int64_t;
-+typedef __UINT64_TYPE__    uint64_t;
-+
-+#else
-+
-+/*
-+ * Define the types using GCC internal notation.  Clang understands this too.
-+ * https://gcc.gnu.org/onlinedocs/gcc/Common-Variable-Attributes.html
-+ */
-+typedef   signed __attribute__((__mode__(QI)))     int8_t;
-+typedef unsigned __attribute__((__mode__(QI)))    uint8_t;
-+typedef   signed __attribute__((__mode__(HI)))    int16_t;
-+typedef unsigned __attribute__((__mode__(HI)))   uint16_t;
-+typedef   signed __attribute__((__mode__(SI)))    int32_t;
-+typedef unsigned __attribute__((__mode__(SI)))   uint32_t;
-+typedef   signed __attribute__((__mode__(DI)))    int64_t;
-+typedef unsigned __attribute__((__mode__(DI)))   uint64_t;
-+
-+#endif
-+
-+#endif /* __XEN_STDINT_H__ */
 diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
-index 8b22a02eeaa4..c873c81ccf06 100644
+index 6aba80500aaf..8b22a02eeaa4 100644
 --- a/xen/include/xen/types.h
 +++ b/xen/include/xen/types.h
-@@ -2,6 +2,7 @@
- #define __TYPES_H__
- 
- #include <xen/stdbool.h>
-+#include <xen/stdint.h>
+@@ -5,18 +5,11 @@
  
  #include <asm/types.h>
  
-@@ -39,17 +40,14 @@ typedef __PTRDIFF_TYPE__ ptrdiff_t;
- #define LONG_MIN        (-LONG_MAX - 1)
- #define ULONG_MAX       (~0UL)
+-#if defined(__SIZE_TYPE__)
+ typedef __SIZE_TYPE__ size_t;
+-#else
+-typedef unsigned long size_t;
+-#endif
++
+ typedef signed long ssize_t;
  
--typedef         __u8            uint8_t;
--typedef         __s8            int8_t;
--
--typedef         __u16           uint16_t;
--typedef         __s16           int16_t;
--
--typedef         __u32           uint32_t;
--typedef         __s32           int32_t;
--
--typedef         __u64           uint64_t;
--typedef         __s64           int64_t;
-+typedef uint8_t         __u8;
-+typedef int8_t          __s8;
-+typedef uint16_t        __u16;
-+typedef int16_t         __s16;
-+typedef uint32_t        __u32;
-+typedef int32_t         __s32;
-+typedef uint64_t        __u64;
-+typedef int64_t         __s64;
+-#if defined(__PTRDIFF_TYPE__)
+ typedef __PTRDIFF_TYPE__ ptrdiff_t;
+-#else
+-typedef signed long ptrdiff_t;
+-#endif
  
- typedef __u16 __le16;
- typedef __u16 __be16;
+ #define BITS_TO_LONGS(bits) \
+     (((bits)+BITS_PER_LONG-1)/BITS_PER_LONG)
 -- 
 2.30.2
 
