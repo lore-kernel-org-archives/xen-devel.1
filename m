@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7523C001DB
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 03:19:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.555738.867811 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0CAEB64DC
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jun 2023 03:19:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.555750.867860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDzEp-0004gt-Hj; Tue, 27 Jun 2023 03:19:31 +0000
+	id 1qDzEx-0006OY-Nm; Tue, 27 Jun 2023 03:19:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 555738.867811; Tue, 27 Jun 2023 03:19:31 +0000
+Received: by outflank-mailman (output) from mailman id 555750.867860; Tue, 27 Jun 2023 03:19:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qDzEp-0004cv-6C; Tue, 27 Jun 2023 03:19:31 +0000
-Received: by outflank-mailman (input) for mailman id 555738;
- Tue, 27 Jun 2023 03:19:28 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qDzEw-0006Gx-G0; Tue, 27 Jun 2023 03:19:38 +0000
+Received: by outflank-mailman (input) for mailman id 555750;
+ Tue, 27 Jun 2023 03:19:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1X7u=CP=gmail.com=vishal.moola@srs-se1.protection.inumbo.net>)
- id 1qDzBG-0003pv-LS
- for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 03:15:50 +0000
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [2607:f8b0:4864:20::1129])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e879bc77-1498-11ee-b237-6b7b168915f2;
- Tue, 27 Jun 2023 05:15:46 +0200 (CEST)
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5707b429540so62184457b3.1
- for <xen-devel@lists.xenproject.org>; Mon, 26 Jun 2023 20:15:46 -0700 (PDT)
+ id 1qDzB9-0003uL-2s
+ for xen-devel@lists.xenproject.org; Tue, 27 Jun 2023 03:15:43 +0000
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [2607:f8b0:4864:20::1133])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e4a7eae6-1498-11ee-8611-37d641c3527e;
+ Tue, 27 Jun 2023 05:15:40 +0200 (CEST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-57040e313c5so62555457b3.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Jun 2023 20:15:40 -0700 (PDT)
 Received: from unknowna0e70b2ca394.attlocal.net ([2600:1700:2f7d:1800::16])
  by smtp.googlemail.com with ESMTPSA id
- s4-20020a0dd004000000b0057399b3bd26sm1614798ywd.33.2023.06.26.20.15.43
+ s4-20020a0dd004000000b0057399b3bd26sm1614798ywd.33.2023.06.26.20.15.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jun 2023 20:15:45 -0700 (PDT)
+ Mon, 26 Jun 2023 20:15:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +47,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e879bc77-1498-11ee-b237-6b7b168915f2
+X-Inumbo-ID: e4a7eae6-1498-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687835746; x=1690427746;
+        d=gmail.com; s=20221208; t=1687835739; x=1690427739;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bBkB4loM/Mt006iaxsYk7j8UnaAx8a9/NTd5FkPootg=;
-        b=H1qFd5ryATtw8t405nCe3wIlgG+rX1BXYLLKuv1YpYWhPdhPiNJLVH72Jw72yhkr/h
-         3iJdbhNcvDeJj1R/7QZzbVvdYp8+Ef/D3y8M93HMkREuKVm52xA1EryWULik3f4dSL7k
-         14E+NJ36RkQ5e6TdqjWSx7Fc6bbQU9Nra+93+Jt2nhawSIssAg+z8tZmqu6fpDttBNOM
-         ca/S4ptlU/TspyqfylxkdmdBeNsH9f2Hrm83Obo7DrdaBuxczqOW9lHL1iMbAqq171gX
-         B7pt5M7+TmTNcw4OD4CiyQ2ipIhxzKH/nEdZ2UyNN8D+QQdMlcx6LBXeqPnQpiIanV21
-         tW0A==
+        bh=xnT0OuFQgSMPBMpNBMcjRtrAID2j2J/z+99kPRjsdFc=;
+        b=C9lK0LHuN5lKypvu+Aj6aeuTYWXXF635p2/pwdffwMnvgLPQ5DfNtjJwGjF0xWaGtG
+         k4CBfAborCW+hCWMhZ2oUELsTotpY/LgKDoPzYRghFuc0ywrV2kgKg/Bf03R4RrxER14
+         8aFizXA8XvmvkijHxeK5b0ar2PYZmVlLjrBJOqZ59csukgFcxnmc3Xf5i7RxtGtOgHDV
+         jxfjAgQfXU+ZB0gWRP2dwNno3Yad8q9D+y808smsM+9/wszItlWIKVHjO8VqsouceqTf
+         m31MSyOhX7e2LHwarw7nCVK/K8Mtdnr1+ICaXDV8yqHnDrMeoBLMORe+kyEQDKvPPqv1
+         8mBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687835746; x=1690427746;
+        d=1e100.net; s=20221208; t=1687835739; x=1690427739;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bBkB4loM/Mt006iaxsYk7j8UnaAx8a9/NTd5FkPootg=;
-        b=ZyBnuUAlgR/kMO0/xDGPl8gBOU4h2jmt79KG5JMlasr0FycNwrcz2MJ74o5Gvdiv3y
-         +4tp71yw8pSfyZevBDt/0bze+UswiWR1uvn4foKIRBwP2I/f8p+xfkxkF7eVN0d/o1nU
-         DFROd6R7mr8EpAO/pDP+SZRqLhNZuVvpKJuQPXZQMoNB+YYs4LdUFwSIlVPtCrFioCKK
-         uaNtiTsZkYLulFdm+6RpJ0r1r1XaZO53q+eEOlq6t3MIegn2+MefIWGvoagM6kGXvrTy
-         eMY57+JploxQUcxG+h0qVy/gJnZ+uyfDz/GvD3lyT9VYZjP3w6hNv4gRwiY2MAr7AExl
-         Jgag==
-X-Gm-Message-State: AC+VfDzTz2AW9g7m5RKHnijwS6F8kFtqafun3p11uT7HCRhlQp5vcre6
-	ut2INnXpOf2m8K+3WWPUmuo=
-X-Google-Smtp-Source: ACHHUZ6u2uv6uT2cSLb5CcuORgExO8yy2prZOQQwKiPsRPUBkVmf/UzBxwtB6MEmnnGsXK2WOg9dTA==
-X-Received: by 2002:a0d:ea81:0:b0:565:b76d:82c8 with SMTP id t123-20020a0dea81000000b00565b76d82c8mr32046751ywe.5.1687835745750;
-        Mon, 26 Jun 2023 20:15:45 -0700 (PDT)
+        bh=xnT0OuFQgSMPBMpNBMcjRtrAID2j2J/z+99kPRjsdFc=;
+        b=XVWllxmc8Xw0SRH7hoYVd4kYpnr242TtF1TBLphSpQEyqW6DHIAIZARa5wqeLpBBRd
+         FCvMvUgffYtBsZZClanqoHDD4PVj8/UDcS2AryHRcp9zMX45hwk3hFiiwjlyvZnoA+lF
+         LI+2TU9+xT2rJkOxCmQw4TRKLe1aJ4Co5bP/6KHZdB0lGolQaga4NzHG4Kw50qUpuws8
+         Lm52JGY6ecNccDrSsNEbmIIpLNE58wQXbRaNll19O1auXsP9LFehZDbZciu8Tcn08bhZ
+         z6yK1+koM1nrXT1Iw6avy9iZIHQsOkPvxmaQMhoCmX2vN4XLTDW1BOnwGI4XIHbqz1B5
+         StQw==
+X-Gm-Message-State: AC+VfDyFwnHVWJav57nV2h0m12+ve+oIevaudXgfP8M4AXhqLhQKDX56
+	H9jH9EKKrGl9qX/ZUP283ig=
+X-Google-Smtp-Source: ACHHUZ4s0sSEGcPfreheHOmEbwOCo2wccO0ZlMx4KueotfvtG5g+MVgAzB4cpcvHGs8z0aON7ghJ0A==
+X-Received: by 2002:a81:a191:0:b0:56d:50a:c0bb with SMTP id y139-20020a81a191000000b0056d050ac0bbmr37686199ywg.25.1687835739285;
+        Mon, 26 Jun 2023 20:15:39 -0700 (PDT)
 From: "Vishal Moola (Oracle)" <vishal.moola@gmail.com>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Matthew Wilcox <willy@infradead.org>
@@ -98,246 +98,614 @@ Cc: linux-mm@kvack.org,
 	xen-devel@lists.xenproject.org,
 	kvm@vger.kernel.org,
 	Hugh Dickins <hughd@google.com>,
-	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>
-Subject: [PATCH v6 18/33] pgalloc: Convert various functions to use ptdescs
-Date: Mon, 26 Jun 2023 20:14:16 -0700
-Message-Id: <20230627031431.29653-19-vishal.moola@gmail.com>
+	"Vishal Moola (Oracle)" <vishal.moola@gmail.com>,
+	David Hildenbrand <david@redhat.com>,
+	Claudio Imbrenda <imbrenda@linux.ibm.com>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH v6 15/33] s390: Convert various gmap functions to use ptdescs
+Date: Mon, 26 Jun 2023 20:14:13 -0700
+Message-Id: <20230627031431.29653-16-vishal.moola@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230627031431.29653-1-vishal.moola@gmail.com>
 References: <20230627031431.29653-1-vishal.moola@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As part of the conversions to replace pgtable constructor/destructors with
-ptdesc equivalents, convert various page table functions to use ptdescs.
+In order to split struct ptdesc from struct page, convert various
+functions to use ptdescs.
 
 Some of the functions use the *get*page*() helper functions. Convert
 these to use pagetable_alloc() and ptdesc_address() instead to help
 standardize page tables further.
 
-Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
----
- include/asm-generic/pgalloc.h | 88 +++++++++++++++++++++--------------
- 1 file changed, 52 insertions(+), 36 deletions(-)
+Since we're now using pagetable_free(), set _pt_s390_gaddr (which
+aliases with page->mapping) to NULL in that function instead.
 
-diff --git a/include/asm-generic/pgalloc.h b/include/asm-generic/pgalloc.h
-index a7cf825befae..c75d4a753849 100644
---- a/include/asm-generic/pgalloc.h
-+++ b/include/asm-generic/pgalloc.h
-@@ -8,7 +8,7 @@
- #define GFP_PGTABLE_USER	(GFP_PGTABLE_KERNEL | __GFP_ACCOUNT)
- 
- /**
-- * __pte_alloc_one_kernel - allocate a page for PTE-level kernel page table
-+ * __pte_alloc_one_kernel - allocate memory for a PTE-level kernel page table
-  * @mm: the mm_struct of the current context
-  *
-  * This function is intended for architectures that need
-@@ -18,12 +18,17 @@
-  */
- static inline pte_t *__pte_alloc_one_kernel(struct mm_struct *mm)
+Signed-off-by: Vishal Moola (Oracle) <vishal.moola@gmail.com>
+Acked-by: Mike Rapoport (IBM) <rppt@kernel.org>
+---
+ arch/s390/mm/gmap.c | 217 +++++++++++++++++++++++---------------------
+ include/linux/mm.h  |   3 +
+ 2 files changed, 117 insertions(+), 103 deletions(-)
+
+diff --git a/arch/s390/mm/gmap.c b/arch/s390/mm/gmap.c
+index beb4804d9ca8..8dbe0fdc0e44 100644
+--- a/arch/s390/mm/gmap.c
++++ b/arch/s390/mm/gmap.c
+@@ -34,7 +34,7 @@
+ static struct gmap *gmap_alloc(unsigned long limit)
  {
--	return (pte_t *)__get_free_page(GFP_PGTABLE_KERNEL);
-+	struct ptdesc *ptdesc = pagetable_alloc(GFP_PGTABLE_KERNEL &
-+			~__GFP_HIGHMEM, 0);
-+
-+	if (!ptdesc)
-+		return NULL;
-+	return ptdesc_address(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE_KERNEL
- /**
-- * pte_alloc_one_kernel - allocate a page for PTE-level kernel page table
-+ * pte_alloc_one_kernel - allocate memory for a PTE-level kernel page table
-  * @mm: the mm_struct of the current context
-  *
-  * Return: pointer to the allocated memory or %NULL on error
-@@ -35,40 +40,40 @@ static inline pte_t *pte_alloc_one_kernel(struct mm_struct *mm)
- #endif
- 
- /**
-- * pte_free_kernel - free PTE-level kernel page table page
-+ * pte_free_kernel - free PTE-level kernel page table memory
-  * @mm: the mm_struct of the current context
-  * @pte: pointer to the memory containing the page table
-  */
- static inline void pte_free_kernel(struct mm_struct *mm, pte_t *pte)
- {
--	free_page((unsigned long)pte);
-+	pagetable_free(virt_to_ptdesc(pte));
- }
- 
- /**
-- * __pte_alloc_one - allocate a page for PTE-level user page table
-+ * __pte_alloc_one - allocate memory for a PTE-level user page table
-  * @mm: the mm_struct of the current context
-  * @gfp: GFP flags to use for the allocation
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pte_ctor().
-  *
-  * This function is intended for architectures that need
-  * anything beyond simple page allocation or must have custom GFP flags.
-  *
-- * Return: `struct page` initialized as page table or %NULL on error
-+ * Return: `struct page` referencing the ptdesc or %NULL on error
-  */
- static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
- {
--	struct page *pte;
+ 	struct gmap *gmap;
+-	struct page *page;
 +	struct ptdesc *ptdesc;
+ 	unsigned long *table;
+ 	unsigned long etype, atype;
  
--	pte = alloc_page(gfp);
--	if (!pte)
-+	ptdesc = pagetable_alloc(gfp, 0);
+@@ -67,12 +67,12 @@ static struct gmap *gmap_alloc(unsigned long limit)
+ 	spin_lock_init(&gmap->guest_table_lock);
+ 	spin_lock_init(&gmap->shadow_lock);
+ 	refcount_set(&gmap->ref_count, 1);
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+-	if (!page)
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
 +	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pte_page_ctor(pte)) {
--		__free_page(pte);
-+	if (!pagetable_pte_ctor(ptdesc)) {
+ 		goto out_free;
+-	page->_pt_s390_gaddr = 0;
+-	list_add(&page->lru, &gmap->crst_list);
+-	table = page_to_virt(page);
++	ptdesc->_pt_s390_gaddr = 0;
++	list_add(&ptdesc->pt_list, &gmap->crst_list);
++	table = ptdesc_to_virt(ptdesc);
+ 	crst_table_init(table, etype);
+ 	gmap->table = table;
+ 	gmap->asce = atype | _ASCE_TABLE_LENGTH |
+@@ -181,25 +181,23 @@ static void gmap_rmap_radix_tree_free(struct radix_tree_root *root)
+  */
+ static void gmap_free(struct gmap *gmap)
+ {
+-	struct page *page, *next;
++	struct ptdesc *ptdesc, *next;
+ 
+ 	/* Flush tlb of all gmaps (if not already done for shadows) */
+ 	if (!(gmap_is_shadow(gmap) && gmap->removed))
+ 		gmap_flush_tlb(gmap);
+ 	/* Free all segment & region tables. */
+-	list_for_each_entry_safe(page, next, &gmap->crst_list, lru) {
+-		page->_pt_s390_gaddr = 0;
+-		__free_pages(page, CRST_ALLOC_ORDER);
++	list_for_each_entry_safe(ptdesc, next, &gmap->crst_list, pt_list) {
 +		pagetable_free(ptdesc);
- 		return NULL;
  	}
+ 	gmap_radix_tree_free(&gmap->guest_to_host);
+ 	gmap_radix_tree_free(&gmap->host_to_guest);
  
--	return pte;
-+	return ptdesc_page(ptdesc);
- }
- 
- #ifndef __HAVE_ARCH_PTE_ALLOC_ONE
-@@ -76,9 +81,9 @@ static inline pgtable_t __pte_alloc_one(struct mm_struct *mm, gfp_t gfp)
-  * pte_alloc_one - allocate a page for PTE-level user page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pte_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pte_ctor().
-  *
-- * Return: `struct page` initialized as page table or %NULL on error
-+ * Return: `struct page` referencing the ptdesc or %NULL on error
-  */
- static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
- {
-@@ -92,14 +97,16 @@ static inline pgtable_t pte_alloc_one(struct mm_struct *mm)
-  */
- 
- /**
-- * pte_free - free PTE-level user page table page
-+ * pte_free - free PTE-level user page table memory
-  * @mm: the mm_struct of the current context
-- * @pte_page: the `struct page` representing the page table
-+ * @pte_page: the `struct page` referencing the ptdesc
-  */
- static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
- {
--	pgtable_pte_page_dtor(pte_page);
--	__free_page(pte_page);
-+	struct ptdesc *ptdesc = page_ptdesc(pte_page);
-+
-+	pagetable_pte_dtor(ptdesc);
-+	pagetable_free(ptdesc);
- }
- 
- 
-@@ -107,10 +114,11 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
- 
- #ifndef __HAVE_ARCH_PMD_ALLOC_ONE
- /**
-- * pmd_alloc_one - allocate a page for PMD-level page table
-+ * pmd_alloc_one - allocate memory for a PMD-level page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page and runs the pgtable_pmd_page_ctor().
-+ * Allocate memory for a page table and ptdesc and runs pagetable_pmd_ctor().
-+ *
-  * Allocations use %GFP_PGTABLE_USER in user context and
-  * %GFP_PGTABLE_KERNEL in kernel context.
-  *
-@@ -118,28 +126,30 @@ static inline void pte_free(struct mm_struct *mm, struct page *pte_page)
-  */
- static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
+ 	/* Free additional data for a shadow gmap */
+ 	if (gmap_is_shadow(gmap)) {
+-		/* Free all page tables. */
+-		list_for_each_entry_safe(page, next, &gmap->pt_list, lru) {
+-			page->_pt_s390_gaddr = 0;
+-			page_table_free_pgste(page);
++		/* Free all ptdesc tables. */
++		list_for_each_entry_safe(ptdesc, next, &gmap->pt_list, pt_list) {
++			page_table_free_pgste(ptdesc_page(ptdesc));
+ 		}
+ 		gmap_rmap_radix_tree_free(&gmap->host_to_rmap);
+ 		/* Release reference to the parent */
+@@ -308,28 +306,27 @@ EXPORT_SYMBOL_GPL(gmap_get_enabled);
+ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
+ 			    unsigned long init, unsigned long gaddr)
  {
 -	struct page *page;
 +	struct ptdesc *ptdesc;
- 	gfp_t gfp = GFP_PGTABLE_USER;
+ 	unsigned long *new;
  
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	page = alloc_page(gfp);
+ 	/* since we dont free the gmap table until gmap_free we can unlock */
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
 -	if (!page)
-+	ptdesc = pagetable_alloc(gfp, 0);
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
 +	if (!ptdesc)
- 		return NULL;
--	if (!pgtable_pmd_page_ctor(page)) {
--		__free_page(page);
-+	if (!pagetable_pmd_ctor(ptdesc)) {
-+		pagetable_free(ptdesc);
- 		return NULL;
+ 		return -ENOMEM;
+-	new = page_to_virt(page);
++	new = ptdesc_to_virt(ptdesc);
+ 	crst_table_init(new, init);
+ 	spin_lock(&gmap->guest_table_lock);
+ 	if (*table & _REGION_ENTRY_INVALID) {
+-		list_add(&page->lru, &gmap->crst_list);
++		list_add(&ptdesc->pt_list, &gmap->crst_list);
+ 		*table = __pa(new) | _REGION_ENTRY_LENGTH |
+ 			(*table & _REGION_ENTRY_TYPE_MASK);
+-		page->_pt_s390_gaddr = gaddr;
+-		page = NULL;
++		ptdesc->_pt_s390_gaddr = gaddr;
++		ptdesc = NULL;
  	}
--	return (pmd_t *)page_address(page);
-+	return ptdesc_address(ptdesc);
- }
- #endif
- 
- #ifndef __HAVE_ARCH_PMD_FREE
- static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- {
-+	struct ptdesc *ptdesc = virt_to_ptdesc(pmd);
+ 	spin_unlock(&gmap->guest_table_lock);
+-	if (page) {
+-		page->_pt_s390_gaddr = 0;
+-		__free_pages(page, CRST_ALLOC_ORDER);
+-	}
++	if (ptdesc)
++		pagetable_free(ptdesc);
 +
- 	BUG_ON((unsigned long)pmd & (PAGE_SIZE-1));
--	pgtable_pmd_page_dtor(virt_to_page(pmd));
--	free_page((unsigned long)pmd);
-+	pagetable_pmd_dtor(ptdesc);
-+	pagetable_free(ptdesc);
+ 	return 0;
  }
- #endif
  
-@@ -150,19 +160,25 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
- static inline pud_t *__pud_alloc_one(struct mm_struct *mm, unsigned long addr)
+@@ -341,15 +338,15 @@ static int gmap_alloc_table(struct gmap *gmap, unsigned long *table,
+  */
+ static unsigned long __gmap_segment_gaddr(unsigned long *entry)
  {
- 	gfp_t gfp = GFP_PGTABLE_USER;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	unsigned long offset, mask;
+ 
+ 	offset = (unsigned long) entry / sizeof(unsigned long);
+ 	offset = (offset & (PTRS_PER_PMD - 1)) * PMD_SIZE;
+ 	mask = ~(PTRS_PER_PMD * sizeof(pmd_t) - 1);
+-	page = virt_to_page((void *)((unsigned long) entry & mask));
++	ptdesc = virt_to_ptdesc((void *)((unsigned long) entry & mask));
+ 
+-	return page->_pt_s390_gaddr + offset;
++	return ptdesc->_pt_s390_gaddr + offset;
+ }
+ 
+ /**
+@@ -1345,6 +1342,7 @@ static void gmap_unshadow_pgt(struct gmap *sg, unsigned long raddr)
+ 	unsigned long *ste;
+ 	phys_addr_t sto, pgt;
+ 	struct page *page;
 +	struct ptdesc *ptdesc;
  
- 	if (mm == &init_mm)
- 		gfp = GFP_PGTABLE_KERNEL;
--	return (pud_t *)get_zeroed_page(gfp);
-+	gfp &= ~__GFP_HIGHMEM;
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	ste = gmap_table_walk(sg, raddr, 1); /* get segment pointer */
+@@ -1358,9 +1356,10 @@ static void gmap_unshadow_pgt(struct gmap *sg, unsigned long raddr)
+ 	__gmap_unshadow_pgt(sg, raddr, __va(pgt));
+ 	/* Free page table */
+ 	page = phys_to_page(pgt);
+-	list_del(&page->lru);
+-	page->_pt_s390_gaddr = 0;
+-	page_table_free_pgste(page);
 +
-+	ptdesc = pagetable_alloc(gfp, 0);
-+	if (!ptdesc)
-+		return NULL;
-+	return ptdesc_address(ptdesc);
++	ptdesc = page_ptdesc(page);
++	list_del(&ptdesc->pt_list);
++	page_table_free_pgste(ptdesc_page(ptdesc));
  }
  
- #ifndef __HAVE_ARCH_PUD_ALLOC_ONE
  /**
-- * pud_alloc_one - allocate a page for PUD-level page table
-+ * pud_alloc_one - allocate memory for a PUD-level page table
-  * @mm: the mm_struct of the current context
-  *
-- * Allocates a page using %GFP_PGTABLE_USER for user context and
-- * %GFP_PGTABLE_KERNEL for kernel context.
-+ * Allocate memory for a page table using %GFP_PGTABLE_USER for user context
-+ * and %GFP_PGTABLE_KERNEL for kernel context.
-  *
-  * Return: pointer to the allocated memory or %NULL on error
-  */
-@@ -175,7 +191,7 @@ static inline pud_t *pud_alloc_one(struct mm_struct *mm, unsigned long addr)
- static inline void __pud_free(struct mm_struct *mm, pud_t *pud)
+@@ -1374,9 +1373,10 @@ static void gmap_unshadow_pgt(struct gmap *sg, unsigned long raddr)
+ static void __gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr,
+ 				unsigned long *sgt)
  {
- 	BUG_ON((unsigned long)pud & (PAGE_SIZE-1));
--	free_page((unsigned long)pud);
-+	pagetable_free(virt_to_ptdesc(pud));
+-	struct page *page;
+ 	phys_addr_t pgt;
+ 	int i;
++	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	for (i = 0; i < _CRST_ENTRIES; i++, raddr += _SEGMENT_SIZE) {
+@@ -1387,9 +1387,10 @@ static void __gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr,
+ 		__gmap_unshadow_pgt(sg, raddr, __va(pgt));
+ 		/* Free page table */
+ 		page = phys_to_page(pgt);
+-		list_del(&page->lru);
+-		page->_pt_s390_gaddr = 0;
+-		page_table_free_pgste(page);
++
++		ptdesc = page_ptdesc(page);
++		list_del(&ptdesc->pt_list);
++		page_table_free_pgste(ptdesc_page(ptdesc));
+ 	}
  }
  
- #ifndef __HAVE_ARCH_PUD_FREE
-@@ -190,7 +206,7 @@ static inline void pud_free(struct mm_struct *mm, pud_t *pud)
- #ifndef __HAVE_ARCH_PGD_FREE
- static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
- {
--	free_page((unsigned long)pgd);
-+	pagetable_free(virt_to_ptdesc(pgd));
+@@ -1405,6 +1406,7 @@ static void gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr)
+ 	unsigned long r3o, *r3e;
+ 	phys_addr_t sgt;
+ 	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	r3e = gmap_table_walk(sg, raddr, 2); /* get region-3 pointer */
+@@ -1418,9 +1420,10 @@ static void gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr)
+ 	__gmap_unshadow_sgt(sg, raddr, __va(sgt));
+ 	/* Free segment table */
+ 	page = phys_to_page(sgt);
+-	list_del(&page->lru);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++
++	ptdesc = page_ptdesc(page);
++	list_del(&ptdesc->pt_list);
++	pagetable_free(ptdesc);
  }
- #endif
+ 
+ /**
+@@ -1434,9 +1437,10 @@ static void gmap_unshadow_sgt(struct gmap *sg, unsigned long raddr)
+ static void __gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr,
+ 				unsigned long *r3t)
+ {
+-	struct page *page;
+ 	phys_addr_t sgt;
+ 	int i;
++	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	for (i = 0; i < _CRST_ENTRIES; i++, raddr += _REGION3_SIZE) {
+@@ -1447,9 +1451,10 @@ static void __gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr,
+ 		__gmap_unshadow_sgt(sg, raddr, __va(sgt));
+ 		/* Free segment table */
+ 		page = phys_to_page(sgt);
+-		list_del(&page->lru);
+-		page->_pt_s390_gaddr = 0;
+-		__free_pages(page, CRST_ALLOC_ORDER);
++
++		ptdesc = page_ptdesc(page);
++		list_del(&ptdesc->pt_list);
++		pagetable_free(ptdesc);
+ 	}
+ }
+ 
+@@ -1465,6 +1470,7 @@ static void gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr)
+ 	unsigned long r2o, *r2e;
+ 	phys_addr_t r3t;
+ 	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	r2e = gmap_table_walk(sg, raddr, 3); /* get region-2 pointer */
+@@ -1478,9 +1484,10 @@ static void gmap_unshadow_r3t(struct gmap *sg, unsigned long raddr)
+ 	__gmap_unshadow_r3t(sg, raddr, __va(r3t));
+ 	/* Free region 3 table */
+ 	page = phys_to_page(r3t);
+-	list_del(&page->lru);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++
++	ptdesc = page_ptdesc(page);
++	list_del(&ptdesc->pt_list);
++	pagetable_free(ptdesc);
+ }
+ 
+ /**
+@@ -1495,8 +1502,9 @@ static void __gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr,
+ 				unsigned long *r2t)
+ {
+ 	phys_addr_t r3t;
+-	struct page *page;
+ 	int i;
++	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	for (i = 0; i < _CRST_ENTRIES; i++, raddr += _REGION2_SIZE) {
+@@ -1507,9 +1515,10 @@ static void __gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr,
+ 		__gmap_unshadow_r3t(sg, raddr, __va(r3t));
+ 		/* Free region 3 table */
+ 		page = phys_to_page(r3t);
+-		list_del(&page->lru);
+-		page->_pt_s390_gaddr = 0;
+-		__free_pages(page, CRST_ALLOC_ORDER);
++
++		ptdesc = page_ptdesc(page);
++		list_del(&ptdesc->pt_list);
++		pagetable_free(ptdesc);
+ 	}
+ }
+ 
+@@ -1525,6 +1534,7 @@ static void gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr)
+ 	unsigned long r1o, *r1e;
+ 	struct page *page;
+ 	phys_addr_t r2t;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	r1e = gmap_table_walk(sg, raddr, 4); /* get region-1 pointer */
+@@ -1538,9 +1548,10 @@ static void gmap_unshadow_r2t(struct gmap *sg, unsigned long raddr)
+ 	__gmap_unshadow_r2t(sg, raddr, __va(r2t));
+ 	/* Free region 2 table */
+ 	page = phys_to_page(r2t);
+-	list_del(&page->lru);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++
++	ptdesc = page_ptdesc(page);
++	list_del(&ptdesc->pt_list);
++	pagetable_free(ptdesc);
+ }
+ 
+ /**
+@@ -1558,6 +1569,7 @@ static void __gmap_unshadow_r1t(struct gmap *sg, unsigned long raddr,
+ 	struct page *page;
+ 	phys_addr_t r2t;
+ 	int i;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	asce = __pa(r1t) | _ASCE_TYPE_REGION1;
+@@ -1571,9 +1583,10 @@ static void __gmap_unshadow_r1t(struct gmap *sg, unsigned long raddr,
+ 		r1t[i] = _REGION1_ENTRY_EMPTY;
+ 		/* Free region 2 table */
+ 		page = phys_to_page(r2t);
+-		list_del(&page->lru);
+-		page->_pt_s390_gaddr = 0;
+-		__free_pages(page, CRST_ALLOC_ORDER);
++
++		ptdesc = page_ptdesc(page);
++		list_del(&ptdesc->pt_list);
++		pagetable_free(ptdesc);
+ 	}
+ }
+ 
+@@ -1770,18 +1783,18 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
+ 	unsigned long raddr, origin, offset, len;
+ 	unsigned long *table;
+ 	phys_addr_t s_r2t;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	int rc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	/* Allocate a shadow region second table */
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+-	if (!page)
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
++	if (!ptdesc)
+ 		return -ENOMEM;
+-	page->_pt_s390_gaddr = r2t & _REGION_ENTRY_ORIGIN;
++	ptdesc->_pt_s390_gaddr = r2t & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+-	s_r2t = page_to_phys(page);
++		ptdesc->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
++	s_r2t = page_to_phys(ptdesc_page(ptdesc));
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+ 	table = gmap_table_walk(sg, saddr, 4); /* get region-1 pointer */
+@@ -1802,7 +1815,7 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
+ 		 _REGION_ENTRY_TYPE_R1 | _REGION_ENTRY_INVALID;
+ 	if (sg->edat_level >= 1)
+ 		*table |= (r2t & _REGION_ENTRY_PROTECT);
+-	list_add(&page->lru, &sg->crst_list);
++	list_add(&ptdesc->pt_list, &sg->crst_list);
+ 	if (fake) {
+ 		/* nothing to protect for fake tables */
+ 		*table &= ~_REGION_ENTRY_INVALID;
+@@ -1830,8 +1843,7 @@ int gmap_shadow_r2t(struct gmap *sg, unsigned long saddr, unsigned long r2t,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++	pagetable_free(ptdesc);
+ 	return rc;
+ }
+ EXPORT_SYMBOL_GPL(gmap_shadow_r2t);
+@@ -1855,18 +1867,18 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
+ 	unsigned long raddr, origin, offset, len;
+ 	unsigned long *table;
+ 	phys_addr_t s_r3t;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	int rc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	/* Allocate a shadow region second table */
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+-	if (!page)
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
++	if (!ptdesc)
+ 		return -ENOMEM;
+-	page->_pt_s390_gaddr = r3t & _REGION_ENTRY_ORIGIN;
++	ptdesc->_pt_s390_gaddr = r3t & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+-	s_r3t = page_to_phys(page);
++		ptdesc->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
++	s_r3t = page_to_phys(ptdesc_page(ptdesc));
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+ 	table = gmap_table_walk(sg, saddr, 3); /* get region-2 pointer */
+@@ -1887,7 +1899,7 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
+ 		 _REGION_ENTRY_TYPE_R2 | _REGION_ENTRY_INVALID;
+ 	if (sg->edat_level >= 1)
+ 		*table |= (r3t & _REGION_ENTRY_PROTECT);
+-	list_add(&page->lru, &sg->crst_list);
++	list_add(&ptdesc->pt_list, &sg->crst_list);
+ 	if (fake) {
+ 		/* nothing to protect for fake tables */
+ 		*table &= ~_REGION_ENTRY_INVALID;
+@@ -1915,8 +1927,7 @@ int gmap_shadow_r3t(struct gmap *sg, unsigned long saddr, unsigned long r3t,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++	pagetable_free(ptdesc);
+ 	return rc;
+ }
+ EXPORT_SYMBOL_GPL(gmap_shadow_r3t);
+@@ -1940,18 +1951,18 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
+ 	unsigned long raddr, origin, offset, len;
+ 	unsigned long *table;
+ 	phys_addr_t s_sgt;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	int rc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg) || (sgt & _REGION3_ENTRY_LARGE));
+ 	/* Allocate a shadow segment table */
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+-	if (!page)
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
++	if (!ptdesc)
+ 		return -ENOMEM;
+-	page->_pt_s390_gaddr = sgt & _REGION_ENTRY_ORIGIN;
++	ptdesc->_pt_s390_gaddr = sgt & _REGION_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+-	s_sgt = page_to_phys(page);
++		ptdesc->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
++	s_sgt = page_to_phys(ptdesc_page(ptdesc));
+ 	/* Install shadow region second table */
+ 	spin_lock(&sg->guest_table_lock);
+ 	table = gmap_table_walk(sg, saddr, 2); /* get region-3 pointer */
+@@ -1972,7 +1983,7 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
+ 		 _REGION_ENTRY_TYPE_R3 | _REGION_ENTRY_INVALID;
+ 	if (sg->edat_level >= 1)
+ 		*table |= sgt & _REGION_ENTRY_PROTECT;
+-	list_add(&page->lru, &sg->crst_list);
++	list_add(&ptdesc->pt_list, &sg->crst_list);
+ 	if (fake) {
+ 		/* nothing to protect for fake tables */
+ 		*table &= ~_REGION_ENTRY_INVALID;
+@@ -2000,8 +2011,7 @@ int gmap_shadow_sgt(struct gmap *sg, unsigned long saddr, unsigned long sgt,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
+-	page->_pt_s390_gaddr = 0;
+-	__free_pages(page, CRST_ALLOC_ORDER);
++	pagetable_free(ptdesc);
+ 	return rc;
+ }
+ EXPORT_SYMBOL_GPL(gmap_shadow_sgt);
+@@ -2024,8 +2034,9 @@ int gmap_shadow_pgt_lookup(struct gmap *sg, unsigned long saddr,
+ 			   int *fake)
+ {
+ 	unsigned long *table;
+-	struct page *page;
+ 	int rc;
++	struct page *page;
++	struct ptdesc *ptdesc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg));
+ 	spin_lock(&sg->guest_table_lock);
+@@ -2033,9 +2044,10 @@ int gmap_shadow_pgt_lookup(struct gmap *sg, unsigned long saddr,
+ 	if (table && !(*table & _SEGMENT_ENTRY_INVALID)) {
+ 		/* Shadow page tables are full pages (pte+pgste) */
+ 		page = pfn_to_page(*table >> PAGE_SHIFT);
+-		*pgt = page->_pt_s390_gaddr & ~GMAP_SHADOW_FAKE_TABLE;
++		ptdesc = page_ptdesc(page);
++		*pgt = ptdesc->_pt_s390_gaddr & ~GMAP_SHADOW_FAKE_TABLE;
+ 		*dat_protection = !!(*table & _SEGMENT_ENTRY_PROTECT);
+-		*fake = !!(page->_pt_s390_gaddr & GMAP_SHADOW_FAKE_TABLE);
++		*fake = !!(ptdesc->_pt_s390_gaddr & GMAP_SHADOW_FAKE_TABLE);
+ 		rc = 0;
+ 	} else  {
+ 		rc = -EAGAIN;
+@@ -2064,19 +2076,19 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
+ {
+ 	unsigned long raddr, origin;
+ 	unsigned long *table;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	phys_addr_t s_pgt;
+ 	int rc;
+ 
+ 	BUG_ON(!gmap_is_shadow(sg) || (pgt & _SEGMENT_ENTRY_LARGE));
+ 	/* Allocate a shadow page table */
+-	page = page_table_alloc_pgste(sg->mm);
+-	if (!page)
++	ptdesc = page_ptdesc(page_table_alloc_pgste(sg->mm));
++	if (!ptdesc)
+ 		return -ENOMEM;
+-	page->_pt_s390_gaddr = pgt & _SEGMENT_ENTRY_ORIGIN;
++	ptdesc->_pt_s390_gaddr = pgt & _SEGMENT_ENTRY_ORIGIN;
+ 	if (fake)
+-		page->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
+-	s_pgt = page_to_phys(page);
++		ptdesc->_pt_s390_gaddr |= GMAP_SHADOW_FAKE_TABLE;
++	s_pgt = page_to_phys(ptdesc_page(ptdesc));
+ 	/* Install shadow page table */
+ 	spin_lock(&sg->guest_table_lock);
+ 	table = gmap_table_walk(sg, saddr, 1); /* get segment pointer */
+@@ -2094,7 +2106,7 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
+ 	/* mark as invalid as long as the parent table is not protected */
+ 	*table = (unsigned long) s_pgt | _SEGMENT_ENTRY |
+ 		 (pgt & _SEGMENT_ENTRY_PROTECT) | _SEGMENT_ENTRY_INVALID;
+-	list_add(&page->lru, &sg->pt_list);
++	list_add(&ptdesc->pt_list, &sg->pt_list);
+ 	if (fake) {
+ 		/* nothing to protect for fake tables */
+ 		*table &= ~_SEGMENT_ENTRY_INVALID;
+@@ -2120,8 +2132,7 @@ int gmap_shadow_pgt(struct gmap *sg, unsigned long saddr, unsigned long pgt,
+ 	return rc;
+ out_free:
+ 	spin_unlock(&sg->guest_table_lock);
+-	page->_pt_s390_gaddr = 0;
+-	page_table_free_pgste(page);
++	page_table_free_pgste(ptdesc_page(ptdesc));
+ 	return rc;
+ 
+ }
+@@ -2821,11 +2832,11 @@ EXPORT_SYMBOL_GPL(__s390_uv_destroy_range);
+  */
+ void s390_unlist_old_asce(struct gmap *gmap)
+ {
+-	struct page *old;
++	struct ptdesc *old;
+ 
+-	old = virt_to_page(gmap->table);
++	old = virt_to_ptdesc(gmap->table);
+ 	spin_lock(&gmap->guest_table_lock);
+-	list_del(&old->lru);
++	list_del(&old->pt_list);
+ 	/*
+ 	 * Sometimes the topmost page might need to be "removed" multiple
+ 	 * times, for example if the VM is rebooted into secure mode several
+@@ -2840,7 +2851,7 @@ void s390_unlist_old_asce(struct gmap *gmap)
+ 	 * pointers, so list_del can work (and do nothing) without
+ 	 * dereferencing stale or invalid pointers.
+ 	 */
+-	INIT_LIST_HEAD(&old->lru);
++	INIT_LIST_HEAD(&old->pt_list);
+ 	spin_unlock(&gmap->guest_table_lock);
+ }
+ EXPORT_SYMBOL_GPL(s390_unlist_old_asce);
+@@ -2861,7 +2872,7 @@ EXPORT_SYMBOL_GPL(s390_unlist_old_asce);
+ int s390_replace_asce(struct gmap *gmap)
+ {
+ 	unsigned long asce;
+-	struct page *page;
++	struct ptdesc *ptdesc;
+ 	void *table;
+ 
+ 	s390_unlist_old_asce(gmap);
+@@ -2870,10 +2881,10 @@ int s390_replace_asce(struct gmap *gmap)
+ 	if ((gmap->asce & _ASCE_TYPE_MASK) == _ASCE_TYPE_SEGMENT)
+ 		return -EINVAL;
+ 
+-	page = alloc_pages(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
+-	if (!page)
++	ptdesc = pagetable_alloc(GFP_KERNEL_ACCOUNT, CRST_ALLOC_ORDER);
++	if (!ptdesc)
+ 		return -ENOMEM;
+-	table = page_to_virt(page);
++	table = ptdesc_to_virt(ptdesc);
+ 	memcpy(table, gmap->table, 1UL << (CRST_ALLOC_ORDER + PAGE_SHIFT));
+ 
+ 	/*
+@@ -2882,7 +2893,7 @@ int s390_replace_asce(struct gmap *gmap)
+ 	 * it will be freed when the VM is torn down.
+ 	 */
+ 	spin_lock(&gmap->guest_table_lock);
+-	list_add(&page->lru, &gmap->crst_list);
++	list_add(&ptdesc->pt_list, &gmap->crst_list);
+ 	spin_unlock(&gmap->guest_table_lock);
+ 
+ 	/* Set new table origin while preserving existing ASCE control bits */
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 356e79984cf9..0e4d5f6d10e5 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -2792,6 +2792,9 @@ static inline void pagetable_free(struct ptdesc *pt)
+ {
+ 	struct page *page = ptdesc_page(pt);
+ 
++	/* set page->mapping to NULL since s390 gmap may have used it */
++	pt->_pt_s390_gaddr = 0;
++
+ 	__free_pages(page, compound_order(page));
+ }
  
 -- 
 2.40.1
