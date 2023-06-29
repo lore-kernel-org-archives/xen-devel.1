@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2440DC001B0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAFDEB64DD
 	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 20:11:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557074.870134 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.557072.870120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qExzP-0006MX-19; Thu, 29 Jun 2023 20:11:39 +0000
+	id 1qExzO-00067y-4Z; Thu, 29 Jun 2023 20:11:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557074.870134; Thu, 29 Jun 2023 20:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 557072.870120; Thu, 29 Jun 2023 20:11:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qExzO-0006LF-RH; Thu, 29 Jun 2023 20:11:38 +0000
-Received: by outflank-mailman (input) for mailman id 557074;
- Thu, 29 Jun 2023 20:11:38 +0000
+	id 1qExzO-00067p-1p; Thu, 29 Jun 2023 20:11:38 +0000
+Received: by outflank-mailman (input) for mailman id 557072;
+ Thu, 29 Jun 2023 20:11:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1qExzO-000686-4o
- for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 20:11:38 +0000
+ (envelope-from <julien@xen.org>) id 1qExzM-0005or-7g
+ for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 20:11:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qExzO-0006la-0K; Thu, 29 Jun 2023 20:11:38 +0000
+ id 1qExzM-0006lD-43; Thu, 29 Jun 2023 20:11:36 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1qExzN-0000KI-Ot; Thu, 29 Jun 2023 20:11:37 +0000
+ id 1qExzL-0000KI-SW; Thu, 29 Jun 2023 20:11:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,18 +45,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=/jdx3egdYMGcVcThBa+BLos4+OXw1gDLyp5YfV1/oUM=; b=xaAZRgPF3+z/GpC7TjxSIseKlC
-	7t9Kd8yXMSvBP3u8WLx8NeQQI8KyIDSAgzdTFSUd2ioCwLszDafJ7ExldM7+wGTYYk/xIVUiIkTuf
-	0Dhc9EGq7wI6qh201tJc9addkPMXLKXACyUlbEfpLbzkKD97X+pErfe0ZtqlaC6ObmEc=;
+	bh=E0WEULIH7RKlj8ag6umBkV++f/zxydmEZbbsLJob028=; b=hOoV+7GxYhfQWP2/hhMX5h/ZAj
+	sZ2e3BkFuGve2UvNM9ypBgS2PvqyOkG170PkinZQ0knEMO/hWpf9HtK69rNnvBbVO98+x+cGb16xT
+	oz74dMXH6TdVwMBa4WFYBuezAL/SGTwa7LHZVzr0teiZrFHXpXd470E1aMriWkZOZAp4=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Luca.Fancellu@arm.com,
 	michal.orzel@amd.com,
 	Henry.Wang@arm.com,
 	Julien Grall <jgrall@amazon.com>
-Subject: [v2 4/4] xen/arm: Allow the user to build Xen with UBSAN
-Date: Thu, 29 Jun 2023 21:11:29 +0100
-Message-Id: <20230629201129.12934-5-julien@xen.org>
+Subject: [v2 2/4] xen/arm32: head: Don't map too much in boot_third
+Date: Thu, 29 Jun 2023 21:11:27 +0100
+Message-Id: <20230629201129.12934-3-julien@xen.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230629201129.12934-1-julien@xen.org>
 References: <20230629201129.12934-1-julien@xen.org>
@@ -65,101 +65,65 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-UBSAN has been enabled a few years ago on x86 but was never
-enabled on Arm because the final binary is bigger than 2MB (
-the maximum we can currently handled).
+At the moment, we are mapping the size of the reserved area for Xen
+(i.e. 2MB) even if the binary is smaller. We don't exactly know what's
+after Xen, so it is not a good idea to map more than necessary for a
+couple of reasons:
+    * We would need to use break-before-make if the extra PTE needs to
+      be updated to point to another region
+    * The extra area mapped may be mapped again by Xen with different
+      memory attribute. This would result to attribute mismatch.
 
-With the recent rework, it is now possible to grow Xen over 2MB.
-So there is no more roadblock to enable Xen other than increasing
-the reserved area.
-
-On my setup, for arm32, the final binaray was very close to 4MB.
-Furthermore, one may want to enable UBSAN and GCOV which would put
-the binary well-over 4MB (both features require for some space).
-Therefore, increase the size to 8MB which should us some margin.
+Therefore, rework the logic in create_page_tables() to map only what's
+necessary. To simplify the logic, we also want to make sure _end
+is page-aligned. So align the symbol in the linker and add an assert
+to catch any change.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
 ---
-
-The drawback with this approach is that we are adding 6 new
-page-table (3 for boot and 3 for runtime) that are statically
-allocated. So the final Xen binary will be 24KB bigger when
-neither UBSAN nor GCOV.
-
-If this is not considered acceptable, then we could make the
-size of configurable in the Kconfig and decide it based on the
-features enabled.
 
     Changes in v2:
-        - Fix typoes
+        - Fix typo
         - Add Michal's reviewed-by tag
-        - Add Henry's  reviewed-by tag
-        - Add a comment regarding the reserved size for Xen
 ---
- xen/arch/arm/Kconfig              |  1 +
- xen/arch/arm/include/asm/config.h | 22 +++++++++++++---------
- 2 files changed, 14 insertions(+), 9 deletions(-)
+ xen/arch/arm/arm32/head.S | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index 61e581b8c2b0..06b5ff755c95 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -17,6 +17,7 @@ config ARM
- 	select HAS_PASSTHROUGH
- 	select HAS_PDX
- 	select HAS_PMAP
-+	select HAS_UBSAN
- 	select IOMMU_FORCE_PT_SHARE
+diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
+index 1ad981b67460..5e3692eb3abf 100644
+--- a/xen/arch/arm/arm32/head.S
++++ b/xen/arch/arm/arm32/head.S
+@@ -459,6 +459,19 @@ create_page_tables:
+         create_table_entry boot_pgtable, boot_second, r0, 1
+         create_table_entry boot_second, boot_third, r0, 2
  
- config ARCH_DEFCONFIG
-diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
-index 6d246ab23c48..cc32802ad0e9 100644
---- a/xen/arch/arm/include/asm/config.h
-+++ b/xen/arch/arm/include/asm/config.h
-@@ -74,10 +74,10 @@
- /*
-  * ARM32 layout:
-  *   0  -   2M   Unmapped
-- *   2M -   4M   Xen text, data, bss
-- *   4M -   6M   Fixmap: special-purpose 4K mapping slots
-- *   6M -  10M   Early boot mapping of FDT
-- *   10M - 12M   Livepatch vmap (if compiled in)
-+ *   2M -  10M   Xen text, data, bss
-+ *  10M -  12M   Fixmap: special-purpose 4K mapping slots
-+ *  12M -  16M   Early boot mapping of FDT
-+ *  16M -  18M   Livepatch vmap (if compiled in)
-  *
-  *  32M - 128M   Frametable: 32 bytes per page for 12GB of RAM
-  * 256M -   1G   VMAP: ioremap and early_ioremap use this virtual address
-@@ -94,10 +94,10 @@
-  * 0x0000020000000000 - 0x0000027fffffffff (512GB, L0 slot [4])
-  *  (Relative offsets)
-  *   0  -   2M   Unmapped
-- *   2M -   4M   Xen text, data, bss
-- *   4M -   6M   Fixmap: special-purpose 4K mapping slots
-- *   6M -  10M   Early boot mapping of FDT
-- *  10M -  12M   Livepatch vmap (if compiled in)
-+ *   2M -  10M   Xen text, data, bss
-+ *  10M -  12M   Fixmap: special-purpose 4K mapping slots
-+ *  12M -  16M   Early boot mapping of FDT
-+ *  16M -  18M   Livepatch vmap (if compiled in)
-  *
-  *   1G -   2G   VMAP: ioremap and early_ioremap
-  *
-@@ -124,7 +124,11 @@
- #define XEN_VIRT_START          (SLOT0(4) + _AT(vaddr_t, MB(2)))
- #endif
++        /*
++         * Find the size of Xen in pages and multiply by the size of a
++         * PTE. This will then be compared in the mapping loop below.
++         *
++         * Note the multiplication is just to avoid using an extra
++         * register/instruction per iteration.
++         */
++        mov_w r0, _start            /* r0 := vaddr(_start) */
++        mov_w r1, _end              /* r1 := vaddr(_end) */
++        sub   r0, r1, r0            /* r0 := effective size of Xen */
++        lsr   r0, r0, #PAGE_SHIFT   /* r0 := Number of pages for Xen */
++        lsl   r0, r0, #3            /* r0 := Number of pages * PTE size */
++
+         /* Setup boot_third: */
+         adr_l r4, boot_third
  
--#define XEN_VIRT_SIZE           _AT(vaddr_t, MB(2))
-+/*
-+ * Reserve enough space so both UBSAN and GCOV can be enabled together
-+ * plus some slack for future growth.
-+ */
-+#define XEN_VIRT_SIZE           _AT(vaddr_t, MB(8))
- #define XEN_NR_ENTRIES(lvl)     (XEN_VIRT_SIZE / XEN_PT_LEVEL_SIZE(lvl))
+@@ -473,7 +486,7 @@ create_page_tables:
+ 1:      strd  r2, r3, [r4, r1]       /* Map vaddr(start) */
+         add   r2, r2, #PAGE_SIZE     /* Next page */
+         add   r1, r1, #8             /* Next slot */
+-        cmp   r1, #(XEN_PT_LPAE_ENTRIES<<3) /* 512*8-byte entries per page */
++        cmp   r1, r0                 /* Loop until we map all of Xen */
+         blo   1b
  
- #define FIXMAP_VIRT_START       (XEN_VIRT_START + XEN_VIRT_SIZE)
+         /*
 -- 
 2.40.1
 
