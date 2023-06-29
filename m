@@ -4,38 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14FE1C001B1
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 12:17:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.556812.869611 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A63BEB64DC
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 12:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.556823.869622 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qEqaT-0005Hm-Bp; Thu, 29 Jun 2023 12:17:25 +0000
+	id 1qEqlV-0007os-IP; Thu, 29 Jun 2023 12:28:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 556812.869611; Thu, 29 Jun 2023 12:17:25 +0000
+Received: by outflank-mailman (output) from mailman id 556823.869622; Thu, 29 Jun 2023 12:28:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qEqaT-0005Hf-8p; Thu, 29 Jun 2023 12:17:25 +0000
-Received: by outflank-mailman (input) for mailman id 556812;
- Thu, 29 Jun 2023 12:17:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4caF=CR=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1qEqaR-0004fh-UE
- for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 12:17:23 +0000
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [2a00:1450:4864:20::62c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e5ed28f2-1676-11ee-8611-37d641c3527e;
- Thu, 29 Jun 2023 14:17:21 +0200 (CEST)
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9928abc11deso79611466b.1
- for <xen-devel@lists.xenproject.org>; Thu, 29 Jun 2023 05:17:21 -0700 (PDT)
-Received: from localhost.localdomain (default-46-102-197-194.interdsl.co.uk.
- [46.102.197.194]) by smtp.gmail.com with ESMTPSA id
- c15-20020a170906528f00b0098866a94f14sm6773841ejm.125.2023.06.29.05.17.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Jun 2023 05:17:20 -0700 (PDT)
+	id 1qEqlV-0007ol-E0; Thu, 29 Jun 2023 12:28:49 +0000
+Received: by outflank-mailman (input) for mailman id 556823;
+ Thu, 29 Jun 2023 12:28:48 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1qEqlU-0007of-HO
+ for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 12:28:48 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qEqlU-0003Q5-1F; Thu, 29 Jun 2023 12:28:48 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234] helo=[192.168.2.72])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1qEqlT-0007aA-RR; Thu, 29 Jun 2023 12:28:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,211 +41,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5ed28f2-1676-11ee-8611-37d641c3527e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1688041041; x=1690633041;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BzrdtU96n40B5f0Aax6fU5SmE6wgwpYc6Is6WaPAmEM=;
-        b=OOTdQp+tu60q/YhuncmY1njlApzM15wUPRmmmUqJDfUajOpmtHLuzEkxAEwHxPm0DW
-         +mhO17ZOeKKY5jGRbxPKJG4459IIrdDlxaQ++dFLHApuQxWI4MMtj+nQv9nXLpdeb+aN
-         eTPUAPau5WGYZke0OjfRq8vS4eWIpn9TwgZ6s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688041041; x=1690633041;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BzrdtU96n40B5f0Aax6fU5SmE6wgwpYc6Is6WaPAmEM=;
-        b=e+L9O3tXJoaXVfGMcIT+CV5QQ/neD7dXT98zGD8UHwb63V8ULpcFbDj+SOrHUrsoKD
-         dYxW+cwZKHzAFALkea+/sQbxL6SJDePFsAL/65eHS36TnXQ/3r1dA7/ds0kbLSmA0P6j
-         FAk/Eg4A722r7mvNlXsUDcZe48Qg0lkaDBDg4TpzUGjcUoKHrTwttvM747IMGrM4tGuf
-         C1bTPIy1pODUnQyfHtbJdRGWYVIjCq3xiOjXOPf+upbcPnBo5QaD+Dwh3UaXcvCWzClc
-         r45guyd1Sqdj/YK/eesLkNHygBiOV3CugVRoQfSWSJHJG8hPooOVpBD5DEwwkL10lcmF
-         4YUA==
-X-Gm-Message-State: AC+VfDwrjmZjBnj9zleNcKBgn3UkcCQcvbZAwUvtLEA4+TFB1pxhpYsX
-	clpuW5x+yHvb1nfnAtnCgtbBHS7Sz00Na4hvSIA=
-X-Google-Smtp-Source: ACHHUZ62hBOMhM4lRAjuzlrmK0IRmL5f342eqkwqJpAYDOw14d0gjM7ODQtbH6WX+mlGfa1OOwRkKQ==
-X-Received: by 2002:a17:907:9309:b0:97e:aace:b6bc with SMTP id bu9-20020a170907930900b0097eaaceb6bcmr32766075ejc.53.1688041040890;
-        Thu, 29 Jun 2023 05:17:20 -0700 (PDT)
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Subject: [PATCH v3 2/3] x86/boot: Clear XD_DISABLE from the early boot path
-Date: Thu, 29 Jun 2023 13:17:12 +0100
-Message-Id: <20230629121713.1211-3-alejandro.vallejo@cloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230629121713.1211-1-alejandro.vallejo@cloud.com>
-References: <20230629121713.1211-1-alejandro.vallejo@cloud.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=St+CJo8MKwVqWAjm8033T97ctwOGtNlRq2HpuELe8lc=; b=hVXNJmIczj+GPxtcmMqRx6NNeH
+	OXV1WHOERHc288eZIKudUBSTlBbUyGOclI4pvpPTbtSdaK+oR6ENDaphJ2q+wBp/0oJmh05KnTP1I
+	C8NJIDo6SKMg76LsDZcM02XxpnZQvYUphftElfUZ4+ATn5F2NTQxvPNggCAwKwYkjBv4=;
+Message-ID: <96de11c9-6e9c-83f6-9d1b-39df600b549d@xen.org>
+Date: Thu, 29 Jun 2023 13:28:45 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.12.0
+Subject: Re: [PATCH 2/9] xen/arm64: head: Don't map too much in boot_third
+Content-Language: en-US
+To: Michal Orzel <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
+Cc: Luca.Fancellu@arm.com, Henry.Wang@arm.com,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20230625204907.57291-1-julien@xen.org>
+ <20230625204907.57291-3-julien@xen.org>
+ <38f33ede-0d55-bd47-412a-eccb3d4618f2@amd.com>
+ <7877f5af-12e2-808c-b2a2-fa0e302a00c3@xen.org>
+ <ad0e9f64-949f-018b-d9f1-4553859e02fb@amd.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <ad0e9f64-949f-018b-d9f1-4553859e02fb@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Intel CPUs have a bit in MSR_IA32_MISC_ENABLE that may prevent the NX bit
-from being advertised. Clear it unconditionally if we can't find the NX
-feature right away on boot.
+Hi,
 
-The conditions for the MSR being read on early boot are (in this order):
+On 29/06/2023 08:26, Michal Orzel wrote:
+> On 28/06/2023 20:21, Julien Grall wrote:
+>>
+>>
+>> Hi,
+>>
+>> On 26/06/2023 12:28, Michal Orzel wrote:
+>>> On 25/06/2023 22:49, Julien Grall wrote:
+>>>> From: Julien Grall <jgrall@amazon.com>
+>>>>
+>>>> At the moment, we are mapping the size of the reserved area for Xen
+>>>> (i.e. 2MB) even if the binary is smaller. We don't exactly know what's
+>>>> after Xen, so it is not a good idea to map more than necessary for a
+>>>> couple of reasons:
+>>>>       * We would need to use break-before-make if the extra PTE needs to
+>>>>         be updated to point to another region
+>>>>       * The extra area mapped may be mapped again by Xen with different
+>>>>         memory attribute. This would result to attribue mismatch.
+>>> s/attribue/attribute
+>>>
+>>>>
+>>>> Therefore, rework the logic in create_page_tables() to map only what's
+>>>> necessary. To simplify the logic, we also want to make sure _end
+>>>> is page-aligned. So align the symbol in the linker and add an assert
+>>>> to catch any change.
+>>>>
+>>>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>>>> ---
+>>>>    xen/arch/arm/arm64/head.S | 15 ++++++++++++++-
+>>>>    xen/arch/arm/xen.lds.S    |  3 +++
+>>>>    2 files changed, 17 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+>>>> index f37133cf7ccd..66bc85d4c39e 100644
+>>>> --- a/xen/arch/arm/arm64/head.S
+>>>> +++ b/xen/arch/arm/arm64/head.S
+>>>> @@ -572,6 +572,19 @@ create_page_tables:
+>>>>            create_table_entry boot_first, boot_second, x0, 1, x1, x2, x3
+>>>>            create_table_entry boot_second, boot_third, x0, 2, x1, x2, x3
+>>>>
+>>>> +        /*
+>>>> +         * Find the size of Xen in pages and multiply by the size of a
+>>>> +         * PTE. This will then be compared in the mapping loop below.
+>>>> +         *
+>>>> +         * Note the multiplication is just to avoid using an extra
+>>>> +         * register/instruction per iteration.
+>>>> +         */
+>>>> +        ldr   x0, =_start            /* x0 := vaddr(_start) */
+>>> x0 is already set to vaddr of _start by the first instruction of create_page_tables
+>>> and is preserved by create_table_entry. You could just reuse it instead of re-loading.
+>>
+>> I agree that the load is technically redundant. However, I find this
+>> approach easier to read (you don't have to remember that _start equals
+>> XEN_VIRT_START).
+> Ok. As a side note not related to this patch, would it make sense to add an assert in linke > script to make sure _start equals XEN_VIRT_START, since we use them 
+interchangeably?
 
-* Long Mode is supported
-* NX isn't advertised
-* The vendor is Intel
+Good point. I can add it in this patch.
 
-The order of checks has been chosen carefully so a virtualized Xen on a
-hypervisor that doesn't emulate that MSR (but supports NX) doesn't triple
-fault trying to access the non-existing MSR.
+Cheers,
 
-With that done, we can remove the XD_DISABLE checks in the intel-specific
-init path (as they are already done in early assembly). Keep a printk to
-highlight the fact that NX was forcefully enabled.
-
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
----
-v3:
-  * In head.S: s/has_nx/got_nx and s/nx_bit/nx
-  * Style changes in assembly instructions (spaces + width modifiers)
-  * Big comment in head.S replaced
-  * Jump directly to .Lno_nx if NX not found and XD_DISABLE not present
-  * Restored rdmsrl (previously refactored into rdmsr_safe() in v2) and
-    removed XD_DISABLE clearing in C (as it's now done in head.S).
-  * Moved printk in intel.c to highlight the XD_DISABLE override even when
-    done in head.S
----
- xen/arch/x86/boot/head.S               | 49 ++++++++++++++++++++++----
- xen/arch/x86/cpu/intel.c               | 16 ++++-----
- xen/arch/x86/include/asm/msr-index.h   |  2 +-
- xen/arch/x86/include/asm/x86-vendors.h |  6 ++--
- 4 files changed, 53 insertions(+), 20 deletions(-)
-
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 9fbd602ea5..0e02c28f37 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -652,16 +652,53 @@ trampoline_setup:
-         cpuid
- 1:      mov     %edx, CPUINFO_FEATURE_OFFSET(X86_FEATURE_LM) + sym_esi(boot_cpu_data)
- 
--        /* Check for NX. Adjust EFER setting if available. */
--        bt      $cpufeat_bit(X86_FEATURE_NX), %edx
--        jnc     1f
--        orb     $EFER_NXE >> 8, 1 + sym_esi(trampoline_efer)
--1:
--
-         /* Check for availability of long mode. */
-         bt      $cpufeat_bit(X86_FEATURE_LM),%edx
-         jnc     .Lbad_cpu
- 
-+        /* Check for NX */
-+        bt      $cpufeat_bit(X86_FEATURE_NX), %edx
-+        jc     .Lgot_nx
-+
-+        /*
-+         * NX appears to be unsupported, but it might be hidden.
-+         *
-+         * The feature is part of the AMD64 spec, but the very first Intel
-+         * 64bit CPUs lacked the feature, and thereafter there was a
-+         * firmware knob to disable the feature. Undo the disable if
-+         * possible.
-+         *
-+         * All 64bit Intel CPUs support this MSR. If virtualised, expect
-+         * the hypervisor to either emulate the MSR or give us NX.
-+         */
-+        xor     %eax, %eax
-+        cpuid
-+        cmp     $X86_VENDOR_INTEL_EBX, %ebx
-+        jnz     .Lno_nx
-+        cmp     $X86_VENDOR_INTEL_EDX, %edx
-+        jnz     .Lno_nx
-+        cmp     $X86_VENDOR_INTEL_ECX, %ecx
-+        jnz     .Lno_nx
-+
-+        /* Clear the XD_DISABLE bit */
-+        mov    $MSR_IA32_MISC_ENABLE, %ecx
-+        rdmsr
-+        btr     $2, %edx
-+        jnc     .Lno_nx
-+        wrmsr
-+        orb     $MSR_IA32_MISC_ENABLE_XD_DISABLE >> 32, 4 + sym_esi(trampoline_misc_enable_off)
-+
-+        /* Check again for NX */
-+        mov     $0x80000001, %eax
-+        cpuid
-+        bt      $cpufeat_bit(X86_FEATURE_NX), %edx
-+        jnc     .Lno_nx
-+
-+.Lgot_nx:
-+        /* Adjust EFER given that NX is present */
-+        orb     $EFER_NXE >> 8, 1 + sym_esi(trampoline_efer)
-+.Lno_nx:
-+
-         /* Stash TSC to calculate a good approximation of time-since-boot */
-         rdtsc
-         mov     %eax,     sym_esi(boot_tsc_stamp)
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index 168cd58f36..b2443b6831 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -304,24 +304,20 @@ static void cf_check early_init_intel(struct cpuinfo_x86 *c)
- 	if (c->x86 == 15 && c->x86_cache_alignment == 64)
- 		c->x86_cache_alignment = 128;
- 
-+	if (bootsym(trampoline_misc_enable_off) &
-+	    MSR_IA32_MISC_ENABLE_XD_DISABLE)
-+		printk(KERN_INFO
-+		       "re-enabled NX (Execute Disable) protection\n");
-+
- 	/* Unmask CPUID levels and NX if masked: */
- 	rdmsrl(MSR_IA32_MISC_ENABLE, misc_enable);
- 
--	disable = misc_enable & (MSR_IA32_MISC_ENABLE_LIMIT_CPUID |
--				 MSR_IA32_MISC_ENABLE_XD_DISABLE);
-+	disable = misc_enable & MSR_IA32_MISC_ENABLE_LIMIT_CPUID;
- 	if (disable) {
- 		wrmsrl(MSR_IA32_MISC_ENABLE, misc_enable & ~disable);
- 		bootsym(trampoline_misc_enable_off) |= disable;
--		bootsym(trampoline_efer) |= EFER_NXE;
--	}
--
--	if (disable & MSR_IA32_MISC_ENABLE_LIMIT_CPUID)
- 		printk(KERN_INFO "revised cpuid level: %d\n",
- 		       cpuid_eax(0));
--	if (disable & MSR_IA32_MISC_ENABLE_XD_DISABLE) {
--		write_efer(read_efer() | EFER_NXE);
--		printk(KERN_INFO
--		       "re-enabled NX (Execute Disable) protection\n");
- 	}
- 
- 	/* CPUID workaround for Intel 0F33/0F34 CPU */
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index 2749e433d2..4f861c0bb4 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -502,7 +502,7 @@
- #define MSR_IA32_MISC_ENABLE_MONITOR_ENABLE (1<<18)
- #define MSR_IA32_MISC_ENABLE_LIMIT_CPUID  (1<<22)
- #define MSR_IA32_MISC_ENABLE_XTPR_DISABLE (1<<23)
--#define MSR_IA32_MISC_ENABLE_XD_DISABLE	(1ULL << 34)
-+#define MSR_IA32_MISC_ENABLE_XD_DISABLE   (_AC(1, ULL) << 34)
- 
- #define MSR_IA32_TSC_DEADLINE		0x000006E0
- #define MSR_IA32_ENERGY_PERF_BIAS	0x000001b0
-diff --git a/xen/arch/x86/include/asm/x86-vendors.h b/xen/arch/x86/include/asm/x86-vendors.h
-index 0a37024cbd..9191da26d7 100644
---- a/xen/arch/x86/include/asm/x86-vendors.h
-+++ b/xen/arch/x86/include/asm/x86-vendors.h
-@@ -12,9 +12,9 @@
- #define X86_VENDOR_UNKNOWN 0
- 
- #define X86_VENDOR_INTEL (1 << 0)
--#define X86_VENDOR_INTEL_EBX 0x756e6547U /* "GenuineIntel" */
--#define X86_VENDOR_INTEL_ECX 0x6c65746eU
--#define X86_VENDOR_INTEL_EDX 0x49656e69U
-+#define X86_VENDOR_INTEL_EBX _AC(0x756e6547, U) /* "GenuineIntel" */
-+#define X86_VENDOR_INTEL_ECX _AC(0x6c65746e, U)
-+#define X86_VENDOR_INTEL_EDX _AC(0x49656e69, U)
- 
- #define X86_VENDOR_AMD (1 << 1)
- #define X86_VENDOR_AMD_EBX 0x68747541U /* "AuthenticAMD" */
 -- 
-2.34.1
-
+Julien Grall
 
