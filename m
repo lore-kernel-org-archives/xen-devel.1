@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD654C0015E
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 15:37:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.556928.869831 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D531EB64D9
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 15:47:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.556935.869851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qEthb-0004cT-Tx; Thu, 29 Jun 2023 15:36:59 +0000
+	id 1qEtr9-0006Px-4U; Thu, 29 Jun 2023 15:46:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 556928.869831; Thu, 29 Jun 2023 15:36:59 +0000
+Received: by outflank-mailman (output) from mailman id 556935.869851; Thu, 29 Jun 2023 15:46:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qEthb-0004cM-R3; Thu, 29 Jun 2023 15:36:59 +0000
-Received: by outflank-mailman (input) for mailman id 556928;
- Thu, 29 Jun 2023 15:36:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qEtr9-0006Pq-1O; Thu, 29 Jun 2023 15:46:51 +0000
+Received: by outflank-mailman (input) for mailman id 556935;
+ Thu, 29 Jun 2023 15:46:49 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4caF=CR=tibco.com=avallejo@srs-se1.protection.inumbo.net>)
- id 1qEtha-0004cG-UN
- for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 15:36:58 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c87c60d9-1692-11ee-b237-6b7b168915f2;
- Thu, 29 Jun 2023 17:36:58 +0200 (CEST)
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2b69ed7d050so12822111fa.2
- for <xen-devel@lists.xenproject.org>; Thu, 29 Jun 2023 08:36:58 -0700 (PDT)
+ id 1qEtr7-0006AR-Qv
+ for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 15:46:49 +0000
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [2a00:1450:4864:20::330])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 282067ab-1694-11ee-8611-37d641c3527e;
+ Thu, 29 Jun 2023 17:46:48 +0200 (CEST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3fbc0981755so5162085e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Jun 2023 08:46:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,94 +42,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c87c60d9-1692-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 282067ab-1694-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1688053017; x=1690645017;
+        d=cloud.com; s=cloud; t=1688053607; x=1690645607;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=dof83Fv4i0vfWq58FQd3aWC+Ttb5ONZ/LOADV8F3Ncg=;
-        b=WmMYhmaHNqL0IrwnhJ9ygyPf2RrTMZdzd/xNIu6dV2sUBUQhL8mFUZHxUaFOHlvRgs
-         4lcoxgXUoLNwfLFnhm1ndyy5FbkO1X727wEyvkxll4F/driiqPYJsVdgt5gSYNDfWn09
-         vTSB/T/8vfRPF0mWLnY6Hw5GZ3Ex/NkfvyRBg=
+        bh=qcptGNYXouZ6DvI4j4ewjdDkrCqSPX19A4IN3FJBXl8=;
+        b=YfY/9x6/Ta6bmAXA/kUn47fyY++rIUVif6tw5sHHAGul4+wy/GghxsfrmttFtxwVUi
+         3ar0hUb4UCfLoQuooGY+sRTdr0faysFpkAwfA/I8V1MyfUqzhX9HjA0KQBcfYCNE4Pei
+         k15Mh6JIzJTWgh/SQjLubm5kHx0Qw6ViBC01E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688053017; x=1690645017;
+        d=1e100.net; s=20221208; t=1688053607; x=1690645607;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=dof83Fv4i0vfWq58FQd3aWC+Ttb5ONZ/LOADV8F3Ncg=;
-        b=GbIm4tcK06olE7Lf5k57OKTTiE8l4JocfmbSgH/zrFG0PkT1m9cCkTEkSV4dk28F2M
-         Bi61Zi7n0QvIOTClMUoOkHbxCzrJKBeYUHJZzd0Zum0QO+CIFAVG975KVh57BPRDFOJx
-         KK4FXko1HqrRf5q7tDfgJs+ANsYv1/UCeaD5bFXOepSiD3V1mMOkn4A4xvB7Eo6F3HGX
-         DrAj9TZMrbDyiNgk5VQSThbKFPBYOREbNaVCaeO7GLwlrwcDdDHSV3hmQhEWowg6VGTv
-         qTb0onj908pM5tQzkKzkOGRksott9EB6AFGFV1aHynt2+vDGWH1lVqu0JTwClS5VhrYl
-         zOdw==
-X-Gm-Message-State: ABy/qLbTEK5t138gWQ9GKkiVa0f07h4A5Qej5aQE6PxrqaNXQX7iJAzT
-	qNan6IerGC3bkd60pZFn5ZBrTTc8tt+O3zFwzv6WUn7iQg+QfsxOVG8=
-X-Google-Smtp-Source: APBJJlGqj85X+kf66Ke3SZ9XUCVOCXRWiKkvNrahDeeSlp1FNaGrrtJomGmG5liZbNdFD20+cj5sd483LB2pu/U1jFA=
-X-Received: by 2002:a05:6512:2815:b0:4fb:893e:8ffc with SMTP id
- cf21-20020a056512281500b004fb893e8ffcmr301167lfb.17.1688053017359; Thu, 29
- Jun 2023 08:36:57 -0700 (PDT)
+        bh=qcptGNYXouZ6DvI4j4ewjdDkrCqSPX19A4IN3FJBXl8=;
+        b=NcVJyWGRdTv+jNCsCfQYgcPue1A+mQxq0RUYwpgTw4U781brj0J9ZFxSpO5iCFdVZE
+         6vUj20A7POK5RoHaj0ZWlDUdre0qGXSti6isXgBhT2tVIvT1H6dIgCggoDAUN2cPbAkx
+         jWi6ChDHBN3bdaGbUpYSmvKkEmBpgd6yXB3x0Klz+5ZIWQa8u1RIZ4MD5Jdgg4zQF17R
+         eyOslPCNPmFrQFOYjmyD8gzdP62wjU/ph7VKc9EesnOukZzvmMuBK8PtPd+LLizecdZB
+         nilEFAPI0BNe74q/fPmLGCydVV6afc2QsLdTwVMAC7Gkw4QosmBydd8KkIBiCJitVNvk
+         WRAQ==
+X-Gm-Message-State: AC+VfDyKYfbFPe5xQd+XGWuEdRAxOHgszTpfgO7YI2Duiw2thJRAPTqv
+	+vUDsE4CaHs1fBDhW7V2t0YtWu6TW2prVykM041GjPaD6sNlqc+n
+X-Google-Smtp-Source: ACHHUZ5+SRckBx33Rfc1gFu90iDK1UxCOlYPwBm0poWH2pPQ/B03yNEU+k46ES6ii48CYNSO/oZYpmwRsCQq+gb7x1I=
+X-Received: by 2002:a7b:c392:0:b0:3fa:8fb1:50fe with SMTP id
+ s18-20020a7bc392000000b003fa8fb150femr10869666wmj.15.1688053607327; Thu, 29
+ Jun 2023 08:46:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230629121713.1211-1-alejandro.vallejo@cloud.com>
-In-Reply-To: <20230629121713.1211-1-alejandro.vallejo@cloud.com>
+References: <20230629121713.1211-1-alejandro.vallejo@cloud.com> <20230629121713.1211-2-alejandro.vallejo@cloud.com>
+In-Reply-To: <20230629121713.1211-2-alejandro.vallejo@cloud.com>
 From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Date: Thu, 29 Jun 2023 16:36:46 +0100
-Message-ID: <CAFi36o3oX+YQxrpCU8S-zT8Y-fSKjZg9TZs=28_pZdww9LpQ5w@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] Introduce a REQUIRE_NX Kconfig option
+Date: Thu, 29 Jun 2023 16:46:37 +0100
+Message-ID: <CAFi36o11vYv4ghCq5+gNg7uPYW-kk1oTT8k5MrnUU6Pwf9tYuw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] tools: Add __AC() macro to common-macros.h
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, 
 	Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>, 
 	Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
-Content-Type: multipart/alternative; boundary="000000000000764f6805ff4678d3"
+Content-Type: multipart/alternative; boundary="000000000000a07fe605ff469b68"
 
---000000000000764f6805ff4678d3
+--000000000000a07fe605ff469b68
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, Jun 29, 2023 at 1:17=E2=80=AFPM Alejandro Vallejo <
 alejandro.vallejo@cloud.com> wrote:
 
-> v3:
->   * Fixed a Gitlab CI breakage on older toolchains (patch 1)
->   * Removed XD_DISABLE override logic from cpu/intel.c
->   * Various style fixes to patch 2 (from Andrew's feedback)
+> Currently libxl and the x86-emulator tests carry their own versions. Fact=
+or
+> those out into the common macros header so every library can make use of
+> it. This is required so the following patch can add this macro to a heade=
+r
+> used both in Xen and tools/libs.
 >
-> This option hardens Xen by forcing it to write secure (NX-enhanced) PTEs
-> regardless of the runtime NX feature bit in boot_cpu_data. This prevents =
-an
-> attacker with partial write support from affecting Xen's PTE generation
-> logic by overriding the NX feature flag. The patch asserts support for th=
-e
-> NX bit in PTEs at boot time and if so short-circuits the cpu_has_nx macro
-> to 1.
+> No functional change.
 >
-> Alejandro Vallejo (3):
->   tools: Add __AC() macro to common-macros.h
->   x86/boot: Clear XD_DISABLE from the early boot path
->   x86: Add Kconfig option to require NX bit support
+> Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+> ---
+>  tools/include/xen-tools/common-macros.h | 3 +++
+>  tools/libs/light/libxl_internal.h       | 2 --
+>  tools/tests/x86_emulator/x86-emulate.h  | 3 ---
+>  3 files changed, 3 insertions(+), 5 deletions(-)
 >
->  tools/include/xen-tools/common-macros.h |  3 ++
->  tools/libs/light/libxl_internal.h       |  2 -
->  tools/tests/x86_emulator/x86-emulate.h  |  3 --
->  xen/arch/x86/Kconfig                    | 16 +++++++
->  xen/arch/x86/boot/head.S                | 62 ++++++++++++++++++++++---
->  xen/arch/x86/boot/trampoline.S          |  3 +-
->  xen/arch/x86/cpu/intel.c                | 16 +++----
->  xen/arch/x86/efi/efi-boot.h             |  9 ++++
->  xen/arch/x86/include/asm/cpufeature.h   |  3 +-
->  xen/arch/x86/include/asm/msr-index.h    |  2 +-
->  xen/arch/x86/include/asm/x86-vendors.h  |  6 +--
->  11 files changed, 98 insertions(+), 27 deletions(-)
+> diff --git a/tools/include/xen-tools/common-macros.h
+> b/tools/include/xen-tools/common-macros.h
+> index 168691be0e..6d7de1bc0a 100644
+> --- a/tools/include/xen-tools/common-macros.h
+> +++ b/tools/include/xen-tools/common-macros.h
+> @@ -84,4 +84,7 @@
+>      (type *)((char *)mptr__ - offsetof(type, member));  \
+>  })
 >
+> +#define __AC(X,Y)   (X##Y)
+> +#define _AC(X,Y)    __AC(X,Y)
+> +
+>  #endif /* __XEN_TOOLS_COMMON_MACROS__ */
+> diff --git a/tools/libs/light/libxl_internal.h
+> b/tools/libs/light/libxl_internal.h
+> index 61f4fe1dec..1cf3d400bf 100644
+> --- a/tools/libs/light/libxl_internal.h
+> +++ b/tools/libs/light/libxl_internal.h
+> @@ -125,8 +125,6 @@
+>  #define PVSHIM_CMDLINE "pv-shim console=3Dxen,pv"
+>
+>  /* Size macros. */
+> -#define __AC(X,Y)   (X##Y)
+> -#define _AC(X,Y)    __AC(X,Y)
+>  #define MB(_mb)     (_AC(_mb, ULL) << 20)
+>  #define GB(_gb)     (_AC(_gb, ULL) << 30)
+>
+> diff --git a/tools/tests/x86_emulator/x86-emulate.h
+> b/tools/tests/x86_emulator/x86-emulate.h
+> index aa1ed75ec8..350d1a0abf 100644
+> --- a/tools/tests/x86_emulator/x86-emulate.h
+> +++ b/tools/tests/x86_emulator/x86-emulate.h
+> @@ -59,9 +59,6 @@
+>
+>  #define cf_check /* No Control Flow Integriy checking */
+>
+> -#define AC_(n,t) (n##t)
+> -#define _AC(n,t) AC_(n,t)
+> -
+>  #ifdef __GCC_ASM_FLAG_OUTPUTS__
+>  # define ASM_FLAG_OUT(yes, no) yes
+>  #else
 > --
 > 2.34.1
 >
-> Adding CCs here because I forgot to run the add_maintainers.pl script
-before sending. Ugh...
 
-Alejandro
+@mantainers
 
---000000000000764f6805ff4678d3
+--000000000000a07fe605ff469b68
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -137,52 +161,71 @@ Content-Transfer-Encoding: quoted-printable
 lejandro Vallejo &lt;<a href=3D"mailto:alejandro.vallejo@cloud.com">alejand=
 ro.vallejo@cloud.com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><bl=
 ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">v3:<br>
-=C2=A0 * Fixed a Gitlab CI breakage on older toolchains (patch 1)<br>
-=C2=A0 * Removed XD_DISABLE override logic from cpu/intel.c<br>
-=C2=A0 * Various style fixes to patch 2 (from Andrew&#39;s feedback)<br>
-<br>
-This option hardens Xen by forcing it to write secure (NX-enhanced) PTEs<br=
+t:1px solid rgb(204,204,204);padding-left:1ex">Currently libxl and the x86-=
+emulator tests carry their own versions. Factor<br>
+those out into the common macros header so every library can make use of<br=
 >
-regardless of the runtime NX feature bit in boot_cpu_data. This prevents an=
-<br>
-attacker with partial write support from affecting Xen&#39;s PTE generation=
-<br>
-logic by overriding the NX feature flag. The patch asserts support for the<=
+it. This is required so the following patch can add this macro to a header<=
 br>
-NX bit in PTEs at boot time and if so short-circuits the cpu_has_nx macro<b=
-r>
-to 1.<br>
+used both in Xen and tools/libs.<br>
 <br>
-Alejandro Vallejo (3):<br>
-=C2=A0 tools: Add __AC() macro to common-macros.h<br>
-=C2=A0 x86/boot: Clear XD_DISABLE from the early boot path<br>
-=C2=A0 x86: Add Kconfig option to require NX bit support<br>
+No functional change.<br>
 <br>
-=C2=A0tools/include/xen-tools/common-macros.h |=C2=A0 3 ++<br>
-=C2=A0tools/libs/light/libxl_internal.h=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 2=
- -<br>
-=C2=A0tools/tests/x86_emulator/x86-emulate.h=C2=A0 |=C2=A0 3 --<br>
-=C2=A0xen/arch/x86/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | 16 +++++++<br>
-=C2=A0xen/arch/x86/boot/head.S=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 | 62 ++++++++++++++++++++++---<br>
-=C2=A0xen/arch/x86/boot/trampoline.S=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
-=A0 3 +-<br>
-=C2=A0xen/arch/x86/cpu/intel.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 | 16 +++----<br>
-=C2=A0xen/arch/x86/efi/efi-boot.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 9 ++++<br>
-=C2=A0xen/arch/x86/include/asm/cpufeature.h=C2=A0 =C2=A0|=C2=A0 3 +-<br>
-=C2=A0xen/arch/x86/include/asm/msr-index.h=C2=A0 =C2=A0 |=C2=A0 2 +-<br>
-=C2=A0xen/arch/x86/include/asm/x86-vendors.h=C2=A0 |=C2=A0 6 +--<br>
-=C2=A011 files changed, 98 insertions(+), 27 deletions(-)<br>
+Signed-off-by: Alejandro Vallejo &lt;<a href=3D"mailto:alejandro.vallejo@cl=
+oud.com" target=3D"_blank">alejandro.vallejo@cloud.com</a>&gt;<br>
+---<br>
+=C2=A0tools/include/xen-tools/common-macros.h | 3 +++<br>
+=C2=A0tools/libs/light/libxl_internal.h=C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 --<br=
+>
+=C2=A0tools/tests/x86_emulator/x86-emulate.h=C2=A0 | 3 ---<br>
+=C2=A03 files changed, 3 insertions(+), 5 deletions(-)<br>
 <br>
+diff --git a/tools/include/xen-tools/common-macros.h b/tools/include/xen-to=
+ols/common-macros.h<br>
+index 168691be0e..6d7de1bc0a 100644<br>
+--- a/tools/include/xen-tools/common-macros.h<br>
++++ b/tools/include/xen-tools/common-macros.h<br>
+@@ -84,4 +84,7 @@<br>
+=C2=A0 =C2=A0 =C2=A0(type *)((char *)mptr__ - offsetof(type, member));=C2=
+=A0 \<br>
+=C2=A0})<br>
+<br>
++#define __AC(X,Y)=C2=A0 =C2=A0(X##Y)<br>
++#define _AC(X,Y)=C2=A0 =C2=A0 __AC(X,Y)<br>
++<br>
+=C2=A0#endif /* __XEN_TOOLS_COMMON_MACROS__ */<br>
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_int=
+ernal.h<br>
+index 61f4fe1dec..1cf3d400bf 100644<br>
+--- a/tools/libs/light/libxl_internal.h<br>
++++ b/tools/libs/light/libxl_internal.h<br>
+@@ -125,8 +125,6 @@<br>
+=C2=A0#define PVSHIM_CMDLINE &quot;pv-shim console=3Dxen,pv&quot;<br>
+<br>
+=C2=A0/* Size macros. */<br>
+-#define __AC(X,Y)=C2=A0 =C2=A0(X##Y)<br>
+-#define _AC(X,Y)=C2=A0 =C2=A0 __AC(X,Y)<br>
+=C2=A0#define MB(_mb)=C2=A0 =C2=A0 =C2=A0(_AC(_mb, ULL) &lt;&lt; 20)<br>
+=C2=A0#define GB(_gb)=C2=A0 =C2=A0 =C2=A0(_AC(_gb, ULL) &lt;&lt; 30)<br>
+<br>
+diff --git a/tools/tests/x86_emulator/x86-emulate.h b/tools/tests/x86_emula=
+tor/x86-emulate.h<br>
+index aa1ed75ec8..350d1a0abf 100644<br>
+--- a/tools/tests/x86_emulator/x86-emulate.h<br>
++++ b/tools/tests/x86_emulator/x86-emulate.h<br>
+@@ -59,9 +59,6 @@<br>
+<br>
+=C2=A0#define cf_check /* No Control Flow Integriy checking */<br>
+<br>
+-#define AC_(n,t) (n##t)<br>
+-#define _AC(n,t) AC_(n,t)<br>
+-<br>
+=C2=A0#ifdef __GCC_ASM_FLAG_OUTPUTS__<br>
+=C2=A0# define ASM_FLAG_OUT(yes, no) yes<br>
+=C2=A0#else<br>
 -- <br>
-2.34.1<br>
-<br></blockquote>Adding CCs here because I forgot to run the <a href=3D"htt=
-p://add_maintainers.pl">add_maintainers.pl</a> script<br>before sending. Ug=
-h...<br><div><br></div><div>Alejandro=C2=A0</div></div></div>
+2.34.1<br></blockquote><div><br></div><div><a class=3D"gmail_plusreply" id=
+=3D"plusReplyChip-0">@mantainers</a>=C2=A0</div></div></div>
 
---000000000000764f6805ff4678d3--
+--000000000000a07fe605ff469b68--
 
