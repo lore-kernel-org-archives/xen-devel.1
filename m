@@ -4,37 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E47EB64D9
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 22:44:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557187.870307 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A86EB64D9
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jun 2023 22:53:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.557191.870318 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qF0N0-0006Nx-KX; Thu, 29 Jun 2023 22:44:10 +0000
+	id 1qF0Vq-0007sG-Ey; Thu, 29 Jun 2023 22:53:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557187.870307; Thu, 29 Jun 2023 22:44:10 +0000
+Received: by outflank-mailman (output) from mailman id 557191.870318; Thu, 29 Jun 2023 22:53:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qF0N0-0006Nq-I0; Thu, 29 Jun 2023 22:44:10 +0000
-Received: by outflank-mailman (input) for mailman id 557187;
- Thu, 29 Jun 2023 22:44:10 +0000
+	id 1qF0Vq-0007s9-CJ; Thu, 29 Jun 2023 22:53:18 +0000
+Received: by outflank-mailman (input) for mailman id 557191;
+ Thu, 29 Jun 2023 22:53:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XWGL=CR=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1qF0Mz-0006Nk-Vr
- for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 22:44:09 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ <SRS0=8DWp=CR=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1qF0Vo-0007s3-Qu
+ for xen-devel@lists.xenproject.org; Thu, 29 Jun 2023 22:53:16 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2061b.outbound.protection.outlook.com
+ [2a01:111:f400:7e1b::61b])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 74a85810-16ce-11ee-b237-6b7b168915f2;
- Fri, 30 Jun 2023 00:44:08 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A972760F8C;
- Thu, 29 Jun 2023 22:44:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E260C433C0;
- Thu, 29 Jun 2023 22:44:05 +0000 (UTC)
+ id ba9a6ea8-16cf-11ee-b237-6b7b168915f2;
+ Fri, 30 Jun 2023 00:53:14 +0200 (CEST)
+Received: from DU2PR04CA0067.eurprd04.prod.outlook.com (2603:10a6:10:232::12)
+ by VI1PR08MB10103.eurprd08.prod.outlook.com (2603:10a6:800:1ce::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.19; Thu, 29 Jun
+ 2023 22:53:08 +0000
+Received: from DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:232:cafe::ab) by DU2PR04CA0067.outlook.office365.com
+ (2603:10a6:10:232::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.22 via Frontend
+ Transport; Thu, 29 Jun 2023 22:53:08 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT056.mail.protection.outlook.com (100.127.142.88) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6544.22 via Frontend Transport; Thu, 29 Jun 2023 22:53:08 +0000
+Received: ("Tessian outbound b11b8bb4dfe8:v142");
+ Thu, 29 Jun 2023 22:53:08 +0000
+Received: from bce341d42225.3
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 4BE177FF-CECF-410F-B974-B09797B6802D.1; 
+ Thu, 29 Jun 2023 22:53:02 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id bce341d42225.3
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 29 Jun 2023 22:53:02 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com (2603:10a6:20b:570::15)
+ by PAVPR08MB9040.eurprd08.prod.outlook.com (2603:10a6:102:32d::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.19; Thu, 29 Jun
+ 2023 22:53:00 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::1024:cf14:d520:9b38]) by AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::1024:cf14:d520:9b38%7]) with mapi id 15.20.6521.026; Thu, 29 Jun 2023
+ 22:53:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,215 +74,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74a85810-16ce-11ee-b237-6b7b168915f2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1688078646;
-	bh=9filNv0J2cotGulkPBa7/YioCxziO3ygn5pSV3LDoq0=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=TUm4SyCcjZ83+JixEE8t+MVWjHfHLxLRtxWkxEYXUK/FC29xUwYMZr164TfXb/o7l
-	 DSf2nooqn4mdBSBvFI9YBcb++QposdQYmMS6Kmw4+TPHybuhquS6C37FsX5sj6QRNF
-	 n01sUX9c4ly6/U3EUjVFrTv69H/VODKAyFtPAUeoFY0D3oLRHqLZsY+szcW0/KLLoB
-	 AEGzzBcIMdWne1tiVGLsFoqGONGecZpnoSjTMrfzytsghgnueDwCud3AmUnUYMr6PX
-	 Nc3cGRZ37zkYvtxEWxpnx4+/A3mju1BkrmKzOYv47C2DtOxRXrAPt8I3V289unjdpz
-	 +2Q7Bb0KcE06w==
-Date: Thu, 29 Jun 2023 15:44:04 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Petr Pavlu <petr.pavlu@suse.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-    "jgross@suse.com" <jgross@suse.com>, vikram.garhwal@amd.com
-Subject: Re: [PATCH 2/2] xen/virtio: Avoid use of the dom0 backend in dom0
-In-Reply-To: <b21398eb-2fb2-4fca-dd90-d2c81d8df1c4@epam.com>
-Message-ID: <alpine.DEB.2.22.394.2306291502150.3936094@ubuntu-linux-20-04-desktop>
-References: <20230621131214.9398-1-petr.pavlu@suse.com> <20230621131214.9398-3-petr.pavlu@suse.com> <15e31609-6c45-7372-76ee-0adf7a64fe88@epam.com> <alpine.DEB.2.22.394.2306281745010.3936094@ubuntu-linux-20-04-desktop>
- <b21398eb-2fb2-4fca-dd90-d2c81d8df1c4@epam.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: ba9a6ea8-16cf-11ee-b237-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GoVB4vG/uM5KKyFoUUtHs7ZFGShlDxHmaf6jJWSY2HE=;
+ b=txnnS6qLav1ZlK5Qdr99r8+Gxoafu3/6DGhwpWM7BouwBayWpzrSUkcM99QGo5hw5LqVOivNW4M4QbV5gG2scGyAzTqZyJ8xYsrMLMCzHoy+Vp0GDJrhMqdTPUoqiYn+7n6Cr/svrry5hOytyXGnDQqxnz2yX5MQNQxcUj2plpQ=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SHG32UIlS4sXhtl55BbiYhwvh8ihbD1+0ivyJnPjgv5OIiV99EQWmLk3WaAxoxmUT5hnn/lGOlea4AppAdnFX7TDeG7WspOxWdFYdqQtKyS3b1b1U0cLEJPgSmX1i2kHki5MnHIrbZomPLe4fcYegrPGpzvzE/1yg3hYtwl9lxyILnVCkJ8yO/DFK3U5RlnYi4pxzmHCTa2g3Y7B2uXRRcEx0+9n2GFUu33l0pTZmFGUENBGosa+sP+gjLPFR+u8eG7PuCEBylVhAicWORzLJDK3Nfiy+pTRkWSJF9rrt9HRmMQZv9vscqrJUicFhJ+Bv4H1Tb7IlRE3fiBSXyA9vQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GoVB4vG/uM5KKyFoUUtHs7ZFGShlDxHmaf6jJWSY2HE=;
+ b=h4mtR1EHLGTr+B0DlmSPvbaPDi9lr6+937pAirACElBg89kqSTK7tr+zDFA1SpWtj54vSCYVL2VKvng8ok4WedvsBnxisXgSFmnBB/T5Ozj1JyqIbME+Mx0HP2EEoYOLLHeLhSgKBGAh//SA9CjqvoHFpc/Dazux1ej0lbHOD66M6rdWBcQZWM7mnv8HPT3m700RBrhp99t2hEnQZsXXdnkTfD/DblC9SKjAphWexOoIALhRS8Nk/lW0uips9rQRfJ4r57Tr894T8g/JHgbzsyqOkVlIjHJiB/8ZDycgXVLyjh2c7sV1HBwIf896//0P9cVWttEbeQcUvX/iQqqkMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GoVB4vG/uM5KKyFoUUtHs7ZFGShlDxHmaf6jJWSY2HE=;
+ b=txnnS6qLav1ZlK5Qdr99r8+Gxoafu3/6DGhwpWM7BouwBayWpzrSUkcM99QGo5hw5LqVOivNW4M4QbV5gG2scGyAzTqZyJ8xYsrMLMCzHoy+Vp0GDJrhMqdTPUoqiYn+7n6Cr/svrry5hOytyXGnDQqxnz2yX5MQNQxcUj2plpQ=
+From: Henry Wang <Henry.Wang@arm.com>
+To: Julien Grall <julien@xen.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Luca Fancellu <Luca.Fancellu@arm.com>, "michal.orzel@amd.com"
+	<michal.orzel@amd.com>, Julien Grall <jgrall@amazon.com>, Bertrand Marquis
+	<Bertrand.Marquis@arm.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
+Subject: RE: [v2 2/4] xen/arm32: head: Don't map too much in boot_third
+Thread-Topic: [v2 2/4] xen/arm32: head: Don't map too much in boot_third
+Thread-Index: AQHZqsXt6KY/k4F950WYV4UFWmacUq+iYkag
+Date: Thu, 29 Jun 2023 22:53:00 +0000
+Message-ID:
+ <AS8PR08MB7991D84F86676D7DA7863F049225A@AS8PR08MB7991.eurprd08.prod.outlook.com>
+References: <20230629201129.12934-1-julien@xen.org>
+ <20230629201129.12934-3-julien@xen.org>
+In-Reply-To: <20230629201129.12934-3-julien@xen.org>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ts-tracking-id: D32322EBFD754A47B5D9833AB9F98AAA.0
+x-checkrecipientchecked: true
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AS8PR08MB7991:EE_|PAVPR08MB9040:EE_|DBAEUR03FT056:EE_|VI1PR08MB10103:EE_
+X-MS-Office365-Filtering-Correlation-Id: a00a812f-3e67-45fb-bb8a-08db78f39b75
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ IusDlfkXfgW9PSRIxwTG20TOJzBzwLWmsk7yPJyAuvy7eZQYtQCjLO+2miMqvnMafl4fY23+9CMVapFEEOY97csTsRDP99XV5m4keIdi0ehwwIYh/zLdjK+zndQaZyaCA/DKcCYvhiCyGmIHlyBSOhrjwtzaj8B0yBKx9thw/wgKknxmgZEqXhYYGYKapG9ZwEt6GxylAEn56zUoYyEEqx+adOHy2Pmn+5xaDuCJQetAFmlvQQDElYAMYNURZJnb556FHOcMRi3/x3u0CqN2ev/zTT1ulGmjlg1zngTan3YSqbDrqVHVm3n7rhXp/0F3hySgTNo4PaUi0bHgm99+eoW/3YXo7HoE+Mr8GSSDw+TsEqUt5RhOM2pMUbQmahfvBT7cuFpHHS3NGy+GuLKAb/22OvfkNzFBDSA01CUc1S7A/oFYTucw9S+X7LdrkxPypdhbgSIA458S7AwuocuCjiRKEaqDmzX0UjhcqqcBx9c7xeWmXHltF9yxebIezA/5yzBTVNiU47k4LV2kPmLX0pBZv1H53rn8r3eyvVg6O611VS3NXmr9m42JAx/Jv13sU098WA7cEc9XKtZqsrizIsdhkerQP38TGuZku6Q75KT2aSQZRdJXgc36EEW3CbEs
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB7991.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(39860400002)(376002)(366004)(346002)(136003)(451199021)(26005)(186003)(71200400001)(2906002)(4744005)(86362001)(7696005)(55016003)(38070700005)(4326008)(8676002)(8936002)(110136005)(54906003)(316002)(478600001)(122000001)(6506007)(9686003)(38100700002)(5660300002)(33656002)(83380400001)(52536014)(66476007)(66946007)(66556008)(76116006)(64756008)(66446008)(41300700001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9040
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	e9d724d1-f89b-42bf-9cc0-08db78f396c3
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	uXeqXrPPTBHB1nMd2cPJgkfPf/NOPljo6HfbEYxCJfBDVQHNmBZL4QyOWLeZDiz8mhxy3kea2Fz6KhiQMt0Q3WwS6SK8AC0nv+C/XW0OdLt62w2QH5zCYB/Byc4sAxwoBl7olganw+zHA0/gV+NO/LHmv02blYXHqboaAcmNUFdXpuSC8BO44CnFuYKjP4eIRivcsaHvyLULtsgUh5lYzGN8/m/c5zsSDh+CMCqogC5UPfJo/OHWPd2pb00wWU4t2qCDnxbIKBATP8BopBZKqReXJNEgN6b8vUhg+gCwgZB/2Nz8YtDL1Qgb6dKDllIq090tN8vxELWDQ/XpmhpXo2l+vQfZqBy5/2ksVr2roCJf1rKhWwVJ/F/KISZV0nh7xxLooUAl7sPvxAr8o+czp+ySUhTrtvunmB20oyHnYQM4y+RP+/Y6I8/vJlNajq+RklNiaOHosnZGlILHt7igQ6+N/1cKRvSeO121UvJ2bpab+Q3dOurP9ydoIaBUH6rdT16+WTDbqTg1rrg76cK810Bj4woVFTTLfJ9wK3bJp0R7i/e8PVJD9ILYwoOMBa1cPIy8hPsn0t69VelkQURcQ3jX2mkuezH7u6/eapGO4P3qO63nUtAasuTKMbdZ6Zz0gIcV3Il+2MOTusVylfCaVeQ6mLR/pR6nmcPt8OER6zNFB32rbK0SXZjrJA/JSACrbhWjUrkZ0vh4fz54VTqr+1NZMwi1kktre1O91+e+xpjWgYlss8JC7J5ewEivtyB5
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(376002)(39860400002)(396003)(136003)(346002)(451199021)(40470700004)(36840700001)(46966006)(82310400005)(70206006)(70586007)(54906003)(110136005)(2906002)(8936002)(316002)(41300700001)(4326008)(478600001)(336012)(83380400001)(47076005)(7696005)(356005)(82740400003)(81166007)(5660300002)(86362001)(36860700001)(52536014)(8676002)(40460700003)(33656002)(107886003)(26005)(186003)(9686003)(40480700001)(6506007)(55016003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2023 22:53:08.3627
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a00a812f-3e67-45fb-bb8a-08db78f39b75
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB10103
 
-On Thu, 29 Jun 2023, Oleksandr Tyshchenko wrote:
-> On 29.06.23 04:00, Stefano Stabellini wrote:
-> 
-> Hello Stefano
-> 
-> > On Wed, 21 Jun 2023, Oleksandr Tyshchenko wrote:
-> >> On 21.06.23 16:12, Petr Pavlu wrote:
-> >>
-> >>
-> >> Hello Petr
-> >>
-> >>
-> >>> When attempting to run Xen on a QEMU/KVM virtual machine with virtio
-> >>> devices (all x86_64), dom0 tries to establish a grant for itself which
-> >>> eventually results in a hang during the boot.
-> >>>
-> >>> The backtrace looks as follows, the while loop in __send_control_msg()
-> >>> makes no progress:
-> >>>
-> >>>     #0  virtqueue_get_buf_ctx (_vq=_vq@entry=0xffff8880074a8400, len=len@entry=0xffffc90000413c94, ctx=ctx@entry=0x0 <fixed_percpu_data>) at ../drivers/virtio/virtio_ring.c:2326
-> >>>     #1  0xffffffff817086b7 in virtqueue_get_buf (_vq=_vq@entry=0xffff8880074a8400, len=len@entry=0xffffc90000413c94) at ../drivers/virtio/virtio_ring.c:2333
-> >>>     #2  0xffffffff8175f6b2 in __send_control_msg (portdev=<optimized out>, port_id=0xffffffff, event=0x0, value=0x1) at ../drivers/char/virtio_console.c:562
-> >>>     #3  0xffffffff8175f6ee in __send_control_msg (portdev=<optimized out>, port_id=<optimized out>, event=<optimized out>, value=<optimized out>) at ../drivers/char/virtio_console.c:569
-> >>>     #4  0xffffffff817618b1 in virtcons_probe (vdev=0xffff88800585e800) at ../drivers/char/virtio_console.c:2098
-> >>>     #5  0xffffffff81707117 in virtio_dev_probe (_d=0xffff88800585e810) at ../drivers/virtio/virtio.c:305
-> >>>     #6  0xffffffff8198e348 in call_driver_probe (drv=0xffffffff82be40c0 <virtio_console>, drv=0xffffffff82be40c0 <virtio_console>, dev=0xffff88800585e810) at ../drivers/base/dd.c:579
-> >>>     #7  really_probe (dev=dev@entry=0xffff88800585e810, drv=drv@entry=0xffffffff82be40c0 <virtio_console>) at ../drivers/base/dd.c:658
-> >>>     #8  0xffffffff8198e58f in __driver_probe_device (drv=drv@entry=0xffffffff82be40c0 <virtio_console>, dev=dev@entry=0xffff88800585e810) at ../drivers/base/dd.c:800
-> >>>     #9  0xffffffff8198e65a in driver_probe_device (drv=drv@entry=0xffffffff82be40c0 <virtio_console>, dev=dev@entry=0xffff88800585e810) at ../drivers/base/dd.c:830
-> >>>     #10 0xffffffff8198e832 in __driver_attach (dev=0xffff88800585e810, data=0xffffffff82be40c0 <virtio_console>) at ../drivers/base/dd.c:1216
-> >>>     #11 0xffffffff8198bfb2 in bus_for_each_dev (bus=<optimized out>, start=start@entry=0x0 <fixed_percpu_data>, data=data@entry=0xffffffff82be40c0 <virtio_console>,
-> >>>         fn=fn@entry=0xffffffff8198e7b0 <__driver_attach>) at ../drivers/base/bus.c:368
-> >>>     #12 0xffffffff8198db65 in driver_attach (drv=drv@entry=0xffffffff82be40c0 <virtio_console>) at ../drivers/base/dd.c:1233
-> >>>     #13 0xffffffff8198d207 in bus_add_driver (drv=drv@entry=0xffffffff82be40c0 <virtio_console>) at ../drivers/base/bus.c:673
-> >>>     #14 0xffffffff8198f550 in driver_register (drv=drv@entry=0xffffffff82be40c0 <virtio_console>) at ../drivers/base/driver.c:246
-> >>>     #15 0xffffffff81706b47 in register_virtio_driver (driver=driver@entry=0xffffffff82be40c0 <virtio_console>) at ../drivers/virtio/virtio.c:357
-> >>>     #16 0xffffffff832cd34b in virtio_console_init () at ../drivers/char/virtio_console.c:2258
-> >>>     #17 0xffffffff8100105c in do_one_initcall (fn=0xffffffff832cd2e0 <virtio_console_init>) at ../init/main.c:1246
-> >>>     #18 0xffffffff83277293 in do_initcall_level (command_line=0xffff888003e2f900 "root", level=0x6) at ../init/main.c:1319
-> >>>     #19 do_initcalls () at ../init/main.c:1335
-> >>>     #20 do_basic_setup () at ../init/main.c:1354
-> >>>     #21 kernel_init_freeable () at ../init/main.c:1571
-> >>>     #22 0xffffffff81f64be1 in kernel_init (unused=<optimized out>) at ../init/main.c:1462
-> >>>     #23 0xffffffff81001f49 in ret_from_fork () at ../arch/x86/entry/entry_64.S:308
-> >>>     #24 0x0000000000000000 in ?? ()
-> >>>
-> >>> Fix the problem by preventing xen_grant_init_backend_domid() from
-> >>> setting dom0 as a backend when running in dom0.
-> >>>
-> >>> Fixes: 035e3a4321f7 ("xen/virtio: Optimize the setup of "xen-grant-dma" devices")
-> >>
-> >>
-> >> I am not 100% sure whether the Fixes tag points to precise commit. If I
-> >> am not mistaken, the said commit just moves the code in the context
-> >> without changing the logic of CONFIG_XEN_VIRTIO_FORCE_GRANT, this was
-> >> introduced before.
-> >>
-> >>
-> >>> Signed-off-by: Petr Pavlu <petr.pavlu@suse.com>
-> >>> ---
-> >>>    drivers/xen/grant-dma-ops.c | 4 +++-
-> >>>    1 file changed, 3 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.c
-> >>> index 76f6f26265a3..29ed27ac450e 100644
-> >>> --- a/drivers/xen/grant-dma-ops.c
-> >>> +++ b/drivers/xen/grant-dma-ops.c
-> >>> @@ -362,7 +362,9 @@ static int xen_grant_init_backend_domid(struct device *dev,
-> >>>    	if (np) {
-> >>>    		ret = xen_dt_grant_init_backend_domid(dev, np, backend_domid);
-> >>>    		of_node_put(np);
-> >>> -	} else if (IS_ENABLED(CONFIG_XEN_VIRTIO_FORCE_GRANT) || xen_pv_domain()) {
-> >>> +	} else if ((IS_ENABLED(CONFIG_XEN_VIRTIO_FORCE_GRANT) ||
-> >>> +		    xen_pv_domain()) &&
-> >>> +		   !xen_initial_domain()) {
-> >>
-> >> The commit lgtm, just one note:
-> >>
-> >>
-> >> I would even bail out early in xen_virtio_restricted_mem_acc() instead,
-> >> as I assume the same issue could happen on Arm with DT (although there
-> >> we don't guess the backend's domid, we read it from DT and quite
-> >> unlikely we get Dom0 being in Dom0 with correct DT).
-> >>
-> >> Something like:
-> >>
-> >> @@ -416,6 +421,10 @@ bool xen_virtio_restricted_mem_acc(struct
-> >> virtio_device *dev)
-> >>    {
-> >>           domid_t backend_domid;
-> >>
-> >> +       /* Xen grant DMA ops are not used when running as initial domain */
-> >> +       if (xen_initial_domain())
-> >> +               return false;
-> >> +
-> >>           if (!xen_grant_init_backend_domid(dev->dev.parent,
-> >> &backend_domid)) {
-> >>                   xen_grant_setup_dma_ops(dev->dev.parent, backend_domid);
-> >>                   return true;
-> >> (END)
-> >>
-> >>
-> >>
-> >> If so, that commit subject would need to be updated accordingly.
-> >>
-> >> Let's see what other reviewers will say.
-> > 
-> > This doesn't work in all cases. Imagine using PCI Passthrough to assign
-> > a "physical" virtio device to a domU. The domU will run into the same
-> > error, right?
-> > 
-> > The problem is that we need a way for the virtio backend to advertise
-> > its ability of handling grants. Right now we only have a way to do with
-> > that with device tree on ARM. On x86, we only have
-> > CONFIG_XEN_VIRTIO_FORCE_GRANT, and if we take
-> > CONFIG_XEN_VIRTIO_FORCE_GRANT at face value, it also enables grants for
-> > "physical" virtio devices. Note that in this case we are fixing a
-> > nested-virtualization bug, but there are actually physical
-> > virtio-compatible devices out there. CONFIG_XEN_VIRTIO_FORCE_GRANT will
-> > break those too.
-> 
-> 
-> If these "physical" virtio devices are also spawned by
-> drivers/virtio/virtio.c:virtio_dev_probe(), then yes, otherwise I don't 
-> see how this could even be possible, but I might miss something here.
+Hi Julien,
 
-Yes, I would imagine virtio_dev_probe() would be called for them too
+> -----Original Message-----
+> Subject: [v2 2/4] xen/arm32: head: Don't map too much in boot_third
+>=20
+> From: Julien Grall <jgrall@amazon.com>
+>=20
+> At the moment, we are mapping the size of the reserved area for Xen
+> (i.e. 2MB) even if the binary is smaller. We don't exactly know what's
+> after Xen, so it is not a good idea to map more than necessary for a
+> couple of reasons:
+>     * We would need to use break-before-make if the extra PTE needs to
+>       be updated to point to another region
+>     * The extra area mapped may be mapped again by Xen with different
+>       memory attribute. This would result to attribute mismatch.
+>=20
+> Therefore, rework the logic in create_page_tables() to map only what's
+> necessary. To simplify the logic, we also want to make sure _end
+> is page-aligned. So align the symbol in the linker and add an assert
+> to catch any change.
+>=20
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
+Reviewed-by: Henry Wang <Henry.Wang@arm.com>
 
-
-> xen_virtio_restricted_mem_acc() gets called indirectly from 
-> virtio_dev_probe()->virtio_features_ok()->
-> virtio_check_mem_acc_cb(). So the Xen grant DMA ops are only installed 
-> for those.
->
->
-> > 
-> > I think we need to add a second way? It could be anything that can help
-> > us distinguish between a non-grants-capable virtio backend and a
-> > grants-capable virtio backend, such as:
-> > - a string on xenstore
-> > - a xen param
-> > - a special PCI configuration register value
-> > - something in the ACPI tables
-> > - the QEMU machine type
-> 
-> 
-> Yes, I remember there was a discussion regarding that. The point is to 
-> choose a solution to be functional for both PV and HVM *and* to be able 
-> to support a hotplug. IIRC, the xenstore could be a possible candidate.
-
-xenstore would be among the easiest to make work. The only downside is
-the dependency on xenstore which otherwise virtio+grants doesn't have.
-
-Vikram is working on virtio with grants support in QEMU as we speak.
-Maybe we could find a way to add a flag in QEMU so that we can detect at
-runtime if a given virtio device support grants or not.
-
- 
-> > Or at least should we change CONFIG_XEN_VIRTIO_FORCE_GRANT into a
-> > command line parameter so that it can be disabled in cases like this
-> > one?
-> 
-> IIUC, this will help with HVM only.
-
-For sure this is the least attractive solution, only marginally better
-than the fix proposed in this patch
- 
-
-> > I realize that fixing this problem properly takes a lot longer than
-> > adding a trivial if (dom0) return; check in the code. If you cannot find
-> > a good way to solve the problem or you don't have time to do that now
-> > and you need this bug fixed quickly, then I would be OK with the if
-> > (dom0) return; check but please add a detailed TODO in-code comment to
-> > explain that this is just a hack and we are still looking for a real
-> > solution.
-> > 
-> > The check itself I prefer the original position because I want to retain
-> > the ability of using virtio frontends with grant on ARM in Dom0 (DomD
-> > case).
-> 
-> Makes sense, agree.
+Kind regards,
+Henry
 
