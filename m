@@ -4,34 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A05EB64D7
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Jun 2023 11:33:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557435.870775 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D080EEB64DD
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Jun 2023 11:38:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.557444.870785 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFCN6-0008TD-Ga; Fri, 30 Jun 2023 11:33:04 +0000
+	id 1qFCRs-0000iA-5I; Fri, 30 Jun 2023 11:38:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557435.870775; Fri, 30 Jun 2023 11:33:04 +0000
+Received: by outflank-mailman (output) from mailman id 557444.870785; Fri, 30 Jun 2023 11:38:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFCN6-0008T6-E2; Fri, 30 Jun 2023 11:33:04 +0000
-Received: by outflank-mailman (input) for mailman id 557435;
- Fri, 30 Jun 2023 11:33:02 +0000
+	id 1qFCRs-0000i3-2F; Fri, 30 Jun 2023 11:38:00 +0000
+Received: by outflank-mailman (input) for mailman id 557444;
+ Fri, 30 Jun 2023 11:37:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=M6/y=CS=aepfle.de=olaf@srs-se1.protection.inumbo.net>)
- id 1qFCN4-0008T0-P8
- for xen-devel@lists.xenproject.org; Fri, 30 Jun 2023 11:33:02 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [81.169.146.161]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de52788a-1739-11ee-b237-6b7b168915f2;
- Fri, 30 Jun 2023 13:33:00 +0200 (CEST)
-Received: from sender by smtp.strato.de (RZmta 49.6.0 AUTH)
- with ESMTPSA id y5401az5UBWpyNP
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Fri, 30 Jun 2023 13:32:51 +0200 (CEST)
+ (envelope-from <SRS0=SFwN=CS=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
+ id 1qFCRr-0000hx-93
+ for xen-devel@lists.xenproject.org; Fri, 30 Jun 2023 11:37:59 +0000
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [2a00:1450:4864:20::534])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8fa7ec36-173a-11ee-b237-6b7b168915f2;
+ Fri, 30 Jun 2023 13:37:58 +0200 (CEST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-51d9865b8a2so1868799a12.3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Jun 2023 04:37:58 -0700 (PDT)
+Received: from georged-x-u.eng.citrite.net ([185.25.67.249])
+ by smtp.gmail.com with ESMTPSA id
+ n3-20020aa7db43000000b0051a4361f3efsm6617282edt.61.2023.06.30.04.37.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Jun 2023 04:37:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,113 +47,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de52788a-1739-11ee-b237-6b7b168915f2
-ARC-Seal: i=1; a=rsa-sha256; t=1688124771; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=cRcjtAI/VOG4+GoSH9C6eYFR+KTj/0suAWOkzfHgw1F7QpXsrqGMdD/SpNzFmO5wso
-    mvWJRlxXMDh9Ae09lMsj1cDB3o3R9pXdC06gQPl8IwfVmrA1pKTe8wrMuUfiRpagfBSG
-    euMRvIw4YfxaWcJkRnqSlLzs365RGN8mD3k71YLEyAplZKe7GNxCmDwQJDwKbwrn9N4f
-    AjAN6Zu8qUOcGF07MmpZ4swbZTMIkp33cVHLP2xUS6Y+gJCvgqsjzqrSgw9ArLDViyX7
-    ga9xDpIYqhBhAlFEfPQvNom0Uflmt6ZaIhGSl7uftKn2QBWS2sGEImb81CTBcN1hvXhH
-    Vmlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1688124771;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=/gk7lMpgzNECZCi+/gCLLwKmUN3PQkb6jMH9TC2m/MQ=;
-    b=a7+sFiEgWoGvMgdiSq+qGYdiqYp2/RLHA6/cJM/4muZ5zWLijBe8ASnOPp4ii2uIjV
-    sayusVaiYLrdFOb4P+mmzOJmO0MvC+iNHhY3pMbMuHnNpryw+cvDBFlb2OWVEj+WThCQ
-    m7mwTaWKc/0gQYZ4o62NXUI477OnhE+7KlsV/t4m/CN9NTOnok33avX6P6OoWdQE/JgT
-    6rdHmZ2zgbSnszNBQziljCN4k1o1/+tKeO+eNkAVaKmMgc2PlJ4qpqn+yvvBxxlj89UY
-    0XxNoFJfoZ1XvWuYFlmaNn9GI8OkiSfKzNyzlmuc7Hdi30xKhH1eaM/UhgsPNJMeUGmY
-    0L+A==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1688124771;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=/gk7lMpgzNECZCi+/gCLLwKmUN3PQkb6jMH9TC2m/MQ=;
-    b=fYBN01q30vZeqh2Frh9iN/k7steP4RJ2Az4vC1H/ZAFrn6NrnnpBDKy1UY8IQYYAZ3
-    z6YbnP5TsXsS+MujV478r/Dj6D7LXM+zikAjmQnWM+fReZCXHKVo0Rg2hFuS+wUD/fnw
-    KjoEB9WSj9NgNgnCr9ryWbm8oRoZI0yv85nooLUwOqmmm/+x3DAyGmwcnhomgiYzDbli
-    wksRGExpHZTv2ld5iDbVYukb0+Yja40kBzp/uzJtxQKt0RdtSD5d1EeGe4MYq12skQlQ
-    AdVLvNap7x9Zc9C22KzzjTmEbprXUyNWE3CdjX+1Vh5MWuqimfUSY2g1fDFoUQg8UR/Q
-    gc+A==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1688124771;
-    s=strato-dkim-0003; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=/gk7lMpgzNECZCi+/gCLLwKmUN3PQkb6jMH9TC2m/MQ=;
-    b=hEf6aYcS9lS1cIrxjvszx8GUI7WptFij09TxonfrZJm/Xt6yRBByhoEi2TfJpIKat5
-    3LgbSlsr96ERdDYZbbDA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisR4VReIOE3s+xIC8HZ8TOtjelmE6SkKgUS6xMby0Q=="
-Date: Fri, 30 Jun 2023 13:32:42 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Bernhard Beschow <shentey@gmail.com>
-Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, John Snow
- <jsnow@redhat.com>, xen-devel@lists.xenproject.org, Stefano Stabellini
- <sstabellini@kernel.org>
-Subject: Re: [PATCH v2] piix: fix regression during unplug in Xen HVM domUs
-Message-ID: <20230630133242.58e6d9ed.olaf@aepfle.de>
-In-Reply-To: <367317C5-DB65-40EF-B45B-97E0E802A994@gmail.com>
-References: <20210317070046.17860-1-olaf@aepfle.de>
-	<4441d32f-bd52-9408-cabc-146b59f0e4dc@redhat.com>
-	<20210325121219.7b5daf76.olaf@aepfle.de>
-	<dae251e1-f808-708e-902c-05cfcbbea9cf@redhat.com>
-	<20230509225818.GA16290@aepfle.de>
-	<20230626231901.5b5d11c1.olaf@aepfle.de>
-	<c939b695-2b68-085a-0f19-108ecdcc1a05@redhat.com>
-	<5DB37FA5-41DF-4ED6-8C8A-CDDD6F276F42@gmail.com>
-	<20230627140740.2736f6e8.olaf@aepfle.de>
-	<4F5609FD-4A89-4450-89E2-3311CC5A9317@gmail.com>
-	<20230630092921.392b302d.olaf@aepfle.de>
-	<367317C5-DB65-40EF-B45B-97E0E802A994@gmail.com>
-X-Mailer: Claws Mail 20230601T090920.68bc28c0 hat ein Softwareproblem, kann man nichts machen.
+X-Inumbo-ID: 8fa7ec36-173a-11ee-b237-6b7b168915f2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cloud.com; s=cloud; t=1688125077; x=1690717077;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z/LI/Muc6+gIT2fOpPCQSPl2WmUiu9rE0EERxsNn5vo=;
+        b=dbBHYQkFwC0IIWY+SBc5LEVBR3N2espN106dMOISx2H2lApD2e7eXgd08IfHk1YFTf
+         PPB1IhBmTpmZXws8eDXxl6alPDV2XnL3Ua2hbMwC9S9bMMv5Paxn2fLy2Coqdpb2wdKD
+         G90xMshqS13xecjZ8X/siU+mpxhrqC0r7pbJ8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1688125077; x=1690717077;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=z/LI/Muc6+gIT2fOpPCQSPl2WmUiu9rE0EERxsNn5vo=;
+        b=HmZfoUY5MOW07N3sVwPlQpzMEuOuJuVEo3y2hSYsaoeJf1C/ghA2JVOnvchFT88D1j
+         +dCfLs7OeTEqNaeER8OyjUIfMQOvPBjQHl4IibN/0mdZ0uvqRB4lNqtkjhUWz8jX4NdV
+         m5GQzCZbszHtcUauzJusiUFkUi198+U3qgEUgI3ZErT6poUcD+YSCRTt78LZ+A9TdBZO
+         ilyR7dwy6YrCXhBjSCEVvJUX1f0eRpUBnlvAKt4/7gLV2rBXWcHcRqyXgcuHKgq/rlaR
+         wihGwQOaUChLmnLQ6fPC+WoOvOwAVa3FqfS6hPjgJWWYftzhth4A6/wctge2WcVsEQRr
+         ryTg==
+X-Gm-Message-State: ABy/qLaO60Dosvn+HB8GXwlMeT+Hg7WHKalCUw1y/nKLBlF9f5qWXW6I
+	x9i7nsfTK4Uou2UYXDU9oer+O4ninePhMF/V5v8=
+X-Google-Smtp-Source: APBJJlETAWgc5qUwa2MgtETqTA3OYLt3JAiz6zG+yZUBLPKT/zRcArDNSt1DV8D7+GqZaAwA0x1yVA==
+X-Received: by 2002:a05:6402:34e:b0:51d:9883:afdf with SMTP id r14-20020a056402034e00b0051d9883afdfmr1450546edw.12.1688125077484;
+        Fri, 30 Jun 2023 04:37:57 -0700 (PDT)
+From: George Dunlap <george.dunlap@cloud.com>
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@cloud.com>,
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [PATCH 2/2] credit: Don't steal vcpus which have yielded
+Date: Fri, 30 Jun 2023 12:37:56 +0100
+Message-Id: <20230630113756.672607-2-george.dunlap@cloud.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230630113756.672607-1-george.dunlap@cloud.com>
+References: <20230630113756.672607-1-george.dunlap@cloud.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/WOYyKbs1pq2/gEoXAojnkkq";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
---Sig_/WOYyKbs1pq2/gEoXAojnkkq
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On large systems with many vcpus yielding due to spinlock priority
+inversion, it's not uncommon for a vcpu to yield its timeslice, only
+to be immediately stolen by another pcpu looking for higher-priority
+work.
 
-Fri, 30 Jun 2023 08:05:29 +0000 Bernhard Beschow <shentey@gmail.com>:
+To prevent this:
 
-> Yes. Have a look for piix3/piix4 here: https://www.intel.com/design/archi=
-ves/chipsets/440/index.htm
+* Keep the YIELD flag until a vcpu is removed from a runqueue
 
-This is hidden behind a login or whatever.
+* When looking for work to steal, skip vcpus which have yielded
 
-I should be able to come up with a commit message without hardware specs be=
-ing available.
+NB that this does mean that sometimes a VM is inserted into an empty
+runqueue; handle that case.
 
+Signed-off-by: George Dunlap <george.dunlap@cloud.com>
+---
+CC: Dario Faggioli <dfaggioli@suse.com>
+---
+ xen/common/sched/credit.c | 34 +++++++++++++++++++---------------
+ 1 file changed, 19 insertions(+), 15 deletions(-)
 
-Olaf
+diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
+index b8bdfd5f6a..7754e9b3a0 100644
+--- a/xen/common/sched/credit.c
++++ b/xen/common/sched/credit.c
+@@ -296,14 +296,10 @@ __runq_insert(struct csched_unit *svc)
+      * runnable unit if we can.  The next runq_sort will bring it forward
+      * within 30ms if the queue too long. */
+     if ( test_bit(CSCHED_FLAG_UNIT_YIELD, &svc->flags)
+-         && __runq_elem(iter)->pri > CSCHED_PRI_IDLE )
+-    {
++         && __runq_elem(iter)->pri > CSCHED_PRI_IDLE
++         && iter->next != runq)
+         iter=iter->next;
+ 
+-        /* Some sanity checks */
+-        BUG_ON(iter == runq);
+-    }
+-
+     list_add_tail(&svc->runq_elem, iter);
+ }
+ 
+@@ -319,6 +315,11 @@ __runq_remove(struct csched_unit *svc)
+ {
+     BUG_ON( !__unit_on_runq(svc) );
+     list_del_init(&svc->runq_elem);
++
++    /*
++     * Clear YIELD flag when scheduling back in
++     */
++    clear_bit(CSCHED_FLAG_UNIT_YIELD, &svc->flags);
+ }
+ 
+ static inline void
+@@ -1638,6 +1639,13 @@ csched_runq_steal(int peer_cpu, int cpu, int pri, int balance_step)
+         if ( speer->pri <= pri )
+             break;
+ 
++        /*
++         * Don't steal a UNIT which has yielded; it's waiting for a
++         * reason
++         */
++        if (test_bit(CSCHED_FLAG_UNIT_YIELD, &speer->flags))
++            continue;
++
+         /* Is this UNIT runnable on our PCPU? */
+         unit = speer->unit;
+         BUG_ON( is_idle_unit(unit) );
+@@ -1955,11 +1963,6 @@ static void cf_check csched_schedule(
+         dec_nr_runnable(sched_cpu);
+     }
+ 
+-    /*
+-     * Clear YIELD flag before scheduling out
+-     */
+-    clear_bit(CSCHED_FLAG_UNIT_YIELD, &scurr->flags);
+-
+     do {
+         snext = __runq_elem(runq->next);
+ 
+@@ -1974,10 +1977,11 @@ static void cf_check csched_schedule(
+         /*
+          * SMP Load balance:
+          *
+-         * If the next highest priority local runnable UNIT has already eaten
+-         * through its credits, look on other PCPUs to see if we have more
+-         * urgent work... If not, csched_load_balance() will return snext, but
+-         * already removed from the runq.
++         * If the next highest priority local runnable UNIT has
++         * already eaten through its credits (and we're below the
++         * balancing ratelimit), look on other PCPUs to see if we have
++         * more urgent work... If we don't, csched_load_balance() will
++         * return snext, but already removed from the runq.
+          */
+         if ( snext->pri <= CSCHED_PRI_TS_OVER
+              && now - spc->last_load_balance > prv->load_balance_ratelimit) {
+-- 
+2.25.1
 
---Sig_/WOYyKbs1pq2/gEoXAojnkkq
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmSevVoACgkQ86SN7mm1
-DoAoiA/+Nac1y4FAslYKcs5MbXKeAht0YipykhnZnjEs5GFr1xmFi8cKvrPrzyaB
-EYjjXoosax8+YJJM/GDKaXyHx68piIf5YdMvA8Zdkp4mQ+HuAZIQa0zit9ONA+gS
-WHs154Zf/RqcQMVDjf74GcptgPP2YOmc/MPbZ6UV3GhXD+irdu8bqBnBeNqOV69q
-w/irUkAV/tBym8DHacToeoD0KB7c/aGq/6SJHlDSCYcWJElG0midU5E5dMPzNEGz
-+w97vAZ6LHcM0NVfa/lwUiXEntM6rDpPNwTyCP2todWEfUZsT+Jn8s8q+H8R6r/O
-5FIXltIRH/fl5TEIJsYYEyWYWM4cMxhcVGuTJSeNI0mjxMgqg1OMrg25YgZUNKFK
-qmALpYbLZkcLPzIG9YMFwEwAUTdU3zVCinTmuhfTUQc/SStu1I6j7UfVSmSZaScx
-sOEWkXzRlr5MbUt/HZ8NTjI2FA+WW3CF428nNFdz1Un+l7Ftq61wkDzsfJ6G6Rqj
-xQPe9W98WmaORotynCq+itxUHEzJVFXgG92Lf6/zihB4bqGZes/LXT7NiLRUUUq0
-73EOEMZ4fQuxHhsuC0M/S3UeF9I43ONbgAwksZSBOQZY8q6hnTGH5vSvzf8igd0Q
-swEhq8zVVLlvihWAHLqx2Ck8LZO8CIFRzBz/0hAHHzCJBC0QQYU=
-=8PAh
------END PGP SIGNATURE-----
-
---Sig_/WOYyKbs1pq2/gEoXAojnkkq--
 
