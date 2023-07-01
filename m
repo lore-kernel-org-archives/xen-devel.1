@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 590EBEB64DC
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 00:32:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557665.871207 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57783C0015E
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 00:32:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.557671.871267 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFOWg-0007yU-4S; Sat, 01 Jul 2023 00:31:46 +0000
+	id 1qFOWn-00016a-Bp; Sat, 01 Jul 2023 00:31:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557665.871207; Sat, 01 Jul 2023 00:31:46 +0000
+Received: by outflank-mailman (output) from mailman id 557671.871267; Sat, 01 Jul 2023 00:31:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFOWg-0007yN-1s; Sat, 01 Jul 2023 00:31:46 +0000
-Received: by outflank-mailman (input) for mailman id 557665;
- Sat, 01 Jul 2023 00:31:44 +0000
+	id 1qFOWn-000161-7S; Sat, 01 Jul 2023 00:31:53 +0000
+Received: by outflank-mailman (input) for mailman id 557671;
+ Sat, 01 Jul 2023 00:31:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ypVN=CT=gmail.com=christopher.w.clark.io@srs-se1.protection.inumbo.net>)
- id 1qFOWd-0007yB-Vc
- for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 00:31:44 +0000
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [2607:f8b0:4864:20::529])
+ id 1qFOWl-0007yB-9M
+ for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 00:31:51 +0000
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [2001:4860:4864:20::31])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a5e7dadd-17a6-11ee-b237-6b7b168915f2;
- Sat, 01 Jul 2023 02:31:42 +0200 (CEST)
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-517ab9a4a13so1609285a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 30 Jun 2023 17:31:41 -0700 (PDT)
+ id ab2fcc9f-17a6-11ee-b237-6b7b168915f2;
+ Sat, 01 Jul 2023 02:31:50 +0200 (CEST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1b0156a1c49so2153119fac.0
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Jun 2023 17:31:50 -0700 (PDT)
 Received: from cog-dev.home ([70.103.208.83]) by smtp.gmail.com with ESMTPSA id
- s68-20020a632c47000000b0055b61cd99a1sm1824296pgs.81.2023.06.30.17.31.39
+ s68-20020a632c47000000b0055b61cd99a1sm1824296pgs.81.2023.06.30.17.31.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jun 2023 17:31:39 -0700 (PDT)
+ Fri, 30 Jun 2023 17:31:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a5e7dadd-17a6-11ee-b237-6b7b168915f2
+X-Inumbo-ID: ab2fcc9f-17a6-11ee-b237-6b7b168915f2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688171500; x=1690763500;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=0KShfPa2MYNDYvy3QcwTC4m5i40zpzbfd6OhegXALTA=;
-        b=SYVViW8Kq3XV7ttdG4YkvMDrD04h3WC6+r/LzrevHdjm7LO/JG32gqJcpagAraFkJf
-         MAFA0kBDqNk7ySD9J5b6D+8K5Arg4F+ITABIIG9UTx3GK7/3sigm6NSW3Op8pHvMqGL1
-         vGG91YEVhXngmP57SYfov06GZn+BeE0C5aJOs1XuRaa6BWDI7ygOg6QFLBPkgWAH6xFe
-         JpmTRkZ4ZkdoVjeMHXr8orfmloLFvMgD/UuoDuS+i/Pbw49mjmhIv2mMLFoY6P8XuIwG
-         qzJLTHljPmyFsMRJ5l96K5YSVjUvfNTBszd/WAyds5XTOEcp+Y+kcVx7aid7aS7SQt8V
-         dVrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688171500; x=1690763500;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20221208; t=1688171508; x=1690763508;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0KShfPa2MYNDYvy3QcwTC4m5i40zpzbfd6OhegXALTA=;
-        b=XTONTon8ZoQFAoP8iUlvmOmPJMWnvjESbdUoW3kH7FNdXtToU1EBqz8B1p5FSmL7Vk
-         +q2GLrCa5A0FuA/IgognpW0lMXyxdHEQFVaY2S8bU6f6xjDAoRFCRkeCPYSCOH4g1xxR
-         w867jlB4u0KSjYJm4QoBij6OErbqlJn0WgzVF3lsHttLW1QOecVxODQbSa1Wt4Wdv8AR
-         4sjxkw2USByEaeGdjtVbNFs4qivHic6fKq8rl3WEoRBWW9oPgC1Gca26hTjENH+kMGBJ
-         M7Y8zD705qjWC9geg63taB7fqa6pyL8CiJwHu8vw1rBq7TavI1G5AoYQIRWoMqEGGAyS
-         z34g==
-X-Gm-Message-State: AC+VfDzJH1Br7CW1fuh4QFuwDCD7jVfqqBP7FZ7BYPRWmYqKM8BapjDv
-	yZHuk+8HZesMfy4lY3Ipg8hKDp61JHg=
-X-Google-Smtp-Source: ACHHUZ7Li8ezhJYAShh3/ZzQAdyQzMjFylf+La4WOAedx9NLRQbBjdH20CpyW9vn7ElsAgYNwzV3uA==
-X-Received: by 2002:a05:6a20:9719:b0:122:7e90:61c2 with SMTP id hr25-20020a056a20971900b001227e9061c2mr4071641pzc.9.1688171499907;
-        Fri, 30 Jun 2023 17:31:39 -0700 (PDT)
+        bh=0U+LCev7aRUe6kzgwNY1PJd28KyRT3ussnezbfZRMiA=;
+        b=WV+aJ1zVjq4nXbKPyve69zH6JoluUFgsXQ5zQkMXcB2gh0mkT3mMnKBgSwybZpyzla
+         jz0D5iwm/fIfnp1y0vMlFyN2W64XDxHa8OCwuKwCSNZV9N22ACjvKBfz98txPImUb88z
+         JYcqXFqcGCJM5LNpzRMBe1pSvD1kKEXulmDgIjnjCxwRV48RgP7CcQonF5yUB1MhPvZF
+         EjQVnESOoVXDThQ9H148u0UULZB6DO37JfHnRgFkgbEbykyvqnnoxp5d9NIv6tuOZLnT
+         VVr74xNXIplbDpbObtcZPEk/gCfqoRnuSwHRP5HG7tE8lBwxytN+STeILwOg9+UCeY9G
+         WExg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1688171508; x=1690763508;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=0U+LCev7aRUe6kzgwNY1PJd28KyRT3ussnezbfZRMiA=;
+        b=FpFC3LGawWmZMiPWcWoBen4PLZTgTLVeaMwnU1qnx4ZXJTKn1AvmgJF9wdyQ9GXDg9
+         kBVPX5AaiJDFQCfgVKXWFok859htOEe1zvIg2QNLMyEBaTmUTfiqSFlZdYHd/tvPx8sY
+         wfcpn6xsozoyDzoaDxiUe5+0pWo5EWV7IWyoyrsKfQTL2fNky8RaghsEpTcNFi0/+jCi
+         KRsM3ZYYS9INRL1rSK9vXuqCXwSsObRVRAtrDtXHew/O0AOBqyFpJSL1JdpUMVqmmWG3
+         qyWyyxuobhN+GiNWu5dzxYEwag7Y8PwGOI5fJdddc9EbuEM3TLPIgVhf7eSTlmM5aGUZ
+         uCmA==
+X-Gm-Message-State: ABy/qLatbhEfMEIVUkEWREUZNSvJtzs0+qGhEeobA0vT3V3tztWodjYc
+	ox0YsjrAhtVvOE/BwvJdi+SCtwYlvmk=
+X-Google-Smtp-Source: APBJJlF3sIquE7SEmuOVCL336/ZZA3DJYpw9wCSH58nhp6htUSRqmBAs9VrAM0wy0VnaimSdTk7oBw==
+X-Received: by 2002:a05:6870:ac26:b0:1ad:5634:750b with SMTP id kw38-20020a056870ac2600b001ad5634750bmr4621178oab.13.1688171508647;
+        Fri, 30 Jun 2023 17:31:48 -0700 (PDT)
 Sender: Christopher Clark <christopher.w.clark.io@gmail.com>
 From: Christopher Clark <christopher.w.clark@gmail.com>
 To: xen-devel@lists.xenproject.org
@@ -89,81 +90,116 @@ Cc: Daniel Smith <dpsmith@apertussolutions.com>,
 	Luca Fancellu <luca.fancellu@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Rich Persaud <persaur@gmail.com>
-Subject: [PATCH 00/11] v2: Boot modules for Hyperlaunch
-Date: Fri, 30 Jun 2023 17:31:21 -0700
-Message-Id: <20230701003132.2210306-1-christopher.w.clark@gmail.com>
+Subject: [PATCH 07/11] x86 boot: define paddr_t and add macros for typedefing struct pointers
+Date: Fri, 30 Jun 2023 17:31:28 -0700
+Message-Id: <20230701003132.2210306-8-christopher.w.clark@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230701003132.2210306-1-christopher.w.clark@gmail.com>
+References: <20230701003132.2210306-1-christopher.w.clark@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is a v2 series of work for Hyperlaunch for the Xen hypervisor,
-implementing a subset of the v1 series and functionality, with changes
-made to address the community feedback provided on the patches in v1.
+Pointer fields within structs need to be defined as fixed size types in
+the x86 boot build environment. Using a typedef for the field type
+rather than a struct pointer type enables the type definition to
+be changed in the 32-bit boot build and the main hypervisor build,
+allowing for a single common structure definition and a common header file.
 
-The patches in this series are primarily derived from patches 2-4 of the
-v1 full series, in a series of smaller patches for ease of review.
+Introduces DEFINE_STRUCT_PTR_TYPE which will generate typedefs with a
+_ptr_t suffix for pointers to the specified struct. This is then used
+in <xen/bootinfo.h>
 
-Thanks to AMD for supporting this work.
+The 32-bit behaviour is obtained by inclusion of "defs.h" first with a
+check for such an existing definition on the <xen/types.h> version.
 
-Documentation on Hyperlaunch:
-https://wiki.xenproject.org/wiki/Hyperlaunch
+paddr_t is used in <xen/bootinfo.h> so a definition is added here to
+the x86 boot environment defs.h header.
 
-v1 Hyperlaunch patch series:
-https://lists.xenproject.org/archives/html/xen-devel/2022-07/msg00345.html
+Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
-thanks
+New in v2 of series
+---
+ xen/arch/x86/boot/defs.h            | 5 +++++
+ xen/arch/x86/include/asm/bootinfo.h | 2 ++
+ xen/include/xen/bootinfo.h          | 7 ++++---
+ xen/include/xen/types.h             | 5 +++++
+ 4 files changed, 16 insertions(+), 3 deletions(-)
 
-Christopher
-
-Christopher Clark (11):
-  x86 setup: move x86 boot module counting into a new boot_info struct
-  x86 setup: per-arch bootmodule structure, headroom field
-  x86 setup: change bootstrap map to accept new boot module structures
-  x86 setup: porting dom0 construction logic to boot module structures
-  xsm: switch XSM init to boot info structures
-  x86 setup, microcode: switch to the new bootinfo structures
-  x86 boot: define paddr_t and add macros for typedefing struct pointers
-  types, x86 boot: define DEFINE_PTR_TYPE and char_ptr_t
-  x86, arm, riscv: add per-arch bootinfo headers to allow x86 boot
-    include
-  arm setup: include <xen/bootinfo> for bootmod defns, replacing enum
-  x86 setup: refactor entrypoints to new boot info
-
- xen/arch/arm/efi/efi-boot.h               |   6 +
- xen/arch/arm/include/asm/bootinfo.h       |  20 ++
- xen/arch/arm/include/asm/setup.h          |  11 +-
- xen/arch/riscv/include/asm/bootinfo.h     |  20 ++
- xen/arch/x86/boot/defs.h                  |  10 +
- xen/arch/x86/boot/reloc.c                 | 192 ++++++++++++------
- xen/arch/x86/bzimage.c                    |  10 +-
- xen/arch/x86/cpu/microcode/core.c         | 149 ++++++++------
- xen/arch/x86/dom0_build.c                 |  10 +-
- xen/arch/x86/efi/efi-boot.h               |  95 +++++----
- xen/arch/x86/guest/xen/pvh-boot.c         |  65 ++++--
- xen/arch/x86/hvm/dom0_build.c             |  44 ++--
- xen/arch/x86/include/asm/boot.h           |  55 +++++
- xen/arch/x86/include/asm/bootinfo.h       |  47 +++++
- xen/arch/x86/include/asm/bzimage.h        |   2 +-
- xen/arch/x86/include/asm/dom0_build.h     |  13 +-
- xen/arch/x86/include/asm/guest/pvh-boot.h |   6 +-
- xen/arch/x86/include/asm/microcode.h      |   7 +-
- xen/arch/x86/include/asm/setup.h          |   7 +-
- xen/arch/x86/pv/dom0_build.c              |  32 +--
- xen/arch/x86/setup.c                      | 232 ++++++++++++----------
- xen/common/efi/boot.c                     |   4 +-
- xen/include/xen/bootinfo.h                |  62 ++++++
- xen/include/xen/types.h                   |  11 +
- xen/include/xsm/xsm.h                     |  28 +--
- xen/xsm/xsm_core.c                        |  47 +++--
- xen/xsm/xsm_policy.c                      |  58 +++---
- 27 files changed, 821 insertions(+), 422 deletions(-)
- create mode 100644 xen/arch/arm/include/asm/bootinfo.h
- create mode 100644 xen/arch/riscv/include/asm/bootinfo.h
- create mode 100644 xen/arch/x86/include/asm/boot.h
- create mode 100644 xen/arch/x86/include/asm/bootinfo.h
- create mode 100644 xen/include/xen/bootinfo.h
-
+diff --git a/xen/arch/x86/boot/defs.h b/xen/arch/x86/boot/defs.h
+index f9840044ec..867df6d18d 100644
+--- a/xen/arch/x86/boot/defs.h
++++ b/xen/arch/x86/boot/defs.h
+@@ -60,4 +60,9 @@ typedef u64 uint64_t;
+ #define U16_MAX		((u16)(~0U))
+ #define UINT_MAX	(~0U)
+ 
++typedef unsigned long long paddr_t;
++
++#define DEFINE_STRUCT_PTR_TYPE(struct_name) \
++    typedef uint64_t struct_name ## _ptr_t;
++
+ #endif /* __BOOT_DEFS_H__ */
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 30c27980e0..8d1261503d 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -6,6 +6,7 @@ struct arch_bootmodule {
+     uint32_t flags;
+     unsigned headroom;
+ };
++DEFINE_STRUCT_PTR_TYPE(arch_bootmodule);
+ 
+ struct arch_boot_info {
+     uint32_t flags;
+@@ -19,6 +20,7 @@ struct arch_boot_info {
+     uint32_t mmap_length;
+     paddr_t mmap_addr;
+ };
++DEFINE_STRUCT_PTR_TYPE(arch_boot_info);
+ 
+ struct __packed mb_memmap {
+     uint32_t size;
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+index 2f4284a91f..8ee3ee36e9 100644
+--- a/xen/include/xen/bootinfo.h
++++ b/xen/include/xen/bootinfo.h
+@@ -35,17 +35,18 @@ struct boot_module {
+     mfn_t mfn;
+     size_t size;
+ 
+-    struct arch_bootmodule *arch;
++    arch_bootmodule_ptr_t arch;
+     struct boot_string string;
+ };
++DEFINE_STRUCT_PTR_TYPE(boot_module);
+ 
+ struct boot_info {
+     char *cmdline;
+ 
+     unsigned int nr_mods;
+-    struct boot_module *mods;
++    boot_module_ptr_t mods;
+ 
+-    struct arch_boot_info *arch;
++    arch_boot_info_ptr_t arch;
+ };
+ 
+ #endif
+diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
+index 6aba80500a..78a2079619 100644
+--- a/xen/include/xen/types.h
++++ b/xen/include/xen/types.h
+@@ -71,4 +71,9 @@ typedef bool bool_t;
+ #define test_and_set_bool(b)   xchg(&(b), true)
+ #define test_and_clear_bool(b) xchg(&(b), false)
+ 
++#ifndef DEFINE_STRUCT_PTR_TYPE
++#define DEFINE_STRUCT_PTR_TYPE(struct_name) \
++    typedef struct struct_name * struct_name ## _ptr_t;
++#endif
++
+ #endif /* __TYPES_H__ */
 -- 
 2.25.1
 
