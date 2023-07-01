@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7114DC001B0
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 07:19:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557775.871435 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D419AEB64DD
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 07:19:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.557778.871457 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFUsm-0007VE-Bn; Sat, 01 Jul 2023 07:19:00 +0000
+	id 1qFUso-00087N-JZ; Sat, 01 Jul 2023 07:19:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557775.871435; Sat, 01 Jul 2023 07:19:00 +0000
+Received: by outflank-mailman (output) from mailman id 557778.871457; Sat, 01 Jul 2023 07:19:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFUsm-0007Tv-4v; Sat, 01 Jul 2023 07:19:00 +0000
-Received: by outflank-mailman (input) for mailman id 557775;
- Sat, 01 Jul 2023 07:18:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1qFUso-00085r-A4; Sat, 01 Jul 2023 07:19:02 +0000
+Received: by outflank-mailman (input) for mailman id 557778;
+ Sat, 01 Jul 2023 07:19:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ypVN=CT=gmail.com=christopher.w.clark.io@srs-se1.protection.inumbo.net>)
- id 1qFUsk-00074A-4S
- for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 07:18:58 +0000
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [2607:f8b0:4864:20::436])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8a442a66-17df-11ee-b237-6b7b168915f2;
- Sat, 01 Jul 2023 09:18:56 +0200 (CEST)
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-666e97fcc60so1887762b3a.3
- for <xen-devel@lists.xenproject.org>; Sat, 01 Jul 2023 00:18:56 -0700 (PDT)
+ id 1qFUsm-0006No-Mf
+ for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 07:19:00 +0000
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [2607:f8b0:4864:20::22c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b9c26ca-17df-11ee-8611-37d641c3527e;
+ Sat, 01 Jul 2023 09:18:59 +0200 (CEST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3a3373211a1so1922940b6e.0
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Jul 2023 00:18:58 -0700 (PDT)
 Received: from cog-dev.home ([70.103.208.83]) by smtp.gmail.com with ESMTPSA id
- s19-20020aa78d53000000b00673e652985bsm4108866pfe.118.2023.07.01.00.18.53
+ s19-20020aa78d53000000b00673e652985bsm4108866pfe.118.2023.07.01.00.18.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Jul 2023 00:18:53 -0700 (PDT)
+ Sat, 01 Jul 2023 00:18:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 8a442a66-17df-11ee-b237-6b7b168915f2
+X-Inumbo-ID: 8b9c26ca-17df-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688195934; x=1690787934;
+        d=gmail.com; s=20221208; t=1688195937; x=1690787937;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2CCuYNE2IdEGJiRf9KcQxz9oSopCuIZzH05nVBt98V4=;
-        b=L/C1FJaAKKXcrKwwbXfoXKbQbJyRAJdJNLqD8rSSdTsYDwF3QnFSP2qbAA042bSu5Z
-         OFZIrW0J+Zhh+BmakoPWDH4ZzFTQsvVUEeVlHYaCl918lGW6Wh1jbVC1a924pKTMIMLT
-         ixYBYRX9jRyGqkbarfkYRUMvVl5fs3x8ji0pYYcTxKG4Let565+Wt7m4ReGqVoGYWV/Q
-         eZAegTnZa6qvgzw7JfcDFp7OBQWvL2j5oe7Y+LfTbHhysp/YtRNS3at1rUL4Y9/Ctk9C
-         0nM3B33hMsgll472cqdFo+kHWDEq4HWIonXRH9BcfTq55X2I9HyYK3UkD8bHLjcEwR6W
-         CSSg==
+        bh=S6Cu78312/uyuTtWf3JY9jjpC+4RgagbuKLSP43QOoI=;
+        b=UPbuVkZz1oAK/2LyG2d2Jw8INSlnXa/NlmFvB4kRqCC2gVqMidnQRphhgxR0TSHT+3
+         0s32mnwZ5C2MiyRI81PFiG2f3X7YsruBzmry+l2xRuxLJooDABjPUd+qXphVLrAW/B+y
+         6xxLai7iGBBcCRX9fk/IIKGyDalggyofNzF//yvHePzXSplMvL5ZaLhzY/JrPkWjxaqX
+         D6SRMilMh4UjMDBVz35siAbBdhGqP/ThyZryTLkDquTjEDgVeLyQU2nu+7oabv4Fmg4k
+         02BmtpWmfzce0nwrfyeA5AltLslsexA90Qc7lLM01L0VCpHq2WUAfmBo/Jp4+3M2gjMV
+         Vmjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688195934; x=1690787934;
+        d=1e100.net; s=20221208; t=1688195937; x=1690787937;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=2CCuYNE2IdEGJiRf9KcQxz9oSopCuIZzH05nVBt98V4=;
-        b=BLwRZZzEoDJzHnnwu9u+6xKgS38426q7sDor8LUo5G9n1xX+eM9GItEq65nOWeUyZ9
-         DnWseHP9hzHpvh7FuwDsMogLViTUOEo5qGByRb6dSMrFMZkC9w93CSbdksJDCh1gSwYO
-         QLTiXu8vVjsIgHAgDN4PJFCkC5YHDZmMXT/Cmu4LOISBJ5cp0Zo456YUM9LNnCUBWJfT
-         GtvSqeAHVPTdzcH+XyaSR7mDpMT7/+k/nEsw2HsczTs5qNWPJJ98BWM+J8AXDZRuIHzV
-         UpNTah1Qq6i+qRSYwepddB277+r+5vaWBy+FSDbhlkp3wbar3bkciF99bo+nfk7CLpZw
-         j24g==
-X-Gm-Message-State: ABy/qLZ9tzvuTjkna5RzisUUdxkxoNud6/YggGePXYZ+Dz2xXuWoOVWN
-	OYoRrxonIbDhan10ZXkD8WW8fWvo7zE=
-X-Google-Smtp-Source: APBJJlFwakyPH8XJc7p5VcZt6PmkVcFDYaVMV4ECD1CzygH3D1pud2JwVpwTI/RepQYB4r6d0mLbRQ==
-X-Received: by 2002:a05:6a00:1792:b0:64d:1c59:6767 with SMTP id s18-20020a056a00179200b0064d1c596767mr4767504pfg.24.1688195934527;
-        Sat, 01 Jul 2023 00:18:54 -0700 (PDT)
+        bh=S6Cu78312/uyuTtWf3JY9jjpC+4RgagbuKLSP43QOoI=;
+        b=RdSZPZBDpO2eSdqIUe7ETNoJ3aJ+B7n2f/NGW5SeC3KXHpcE/hC6pq6f92V+ZifejX
+         ZiGjER0sfM9QcOuAZjlP0lGTGyGLh+uk3/VDk9o+KB4BL7qDl/mbpWVv+UYHkL23DSpv
+         HWPtPmsDf9G9qKmj/CnrOiHUIG6qRBQ2zAEeI43J+DTj/T8J5x/zfGc76aYJYyHnxQpb
+         WXqQB5D1Qn604Wf5+o+F0eo9xFaR4WfLtp0pPJvKLwdT5Hyzjfht7rFFjUaVWCTTILAH
+         fRwYVSoOMIe3nbqfv4XgpSKkFP0O3gel7hpViWsq+IVfU4EVM1W+e8rRWMFIYupBJ4GY
+         BODA==
+X-Gm-Message-State: AC+VfDw80XbqQGGoPB5ca8mtmc4/RHNjaWUeNCbB5xMoKJ/ADRIkMSb5
+	hJ8Gu2lhOLUkRVrrGiTiw4vtxwV2fqk=
+X-Google-Smtp-Source: ACHHUZ5bs2jo7O3BDp2NAaVYCHQcw/ounbIgX+But52KUkZXfA77A5ZAv/5/HHJcZPqmWMwDeEj4RQ==
+X-Received: by 2002:a05:6808:1917:b0:3a0:6949:c884 with SMTP id bf23-20020a056808191700b003a06949c884mr6924756oib.34.1688195937374;
+        Sat, 01 Jul 2023 00:18:57 -0700 (PDT)
 Sender: Christopher Clark <christopher.w.clark.io@gmail.com>
 From: Christopher Clark <christopher.w.clark@gmail.com>
 To: xen-devel@lists.xenproject.org
@@ -90,313 +90,136 @@ Cc: Daniel Smith <dpsmith@apertussolutions.com>,
 	Luca Fancellu <luca.fancellu@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Rich Persaud <persaur@gmail.com>
-Subject: [PATCH 05/10] xsm: switch XSM init to boot info structures
-Date: Sat,  1 Jul 2023 00:18:30 -0700
-Message-Id: <20230701071835.41599-6-christopher.w.clark@gmail.com>
+Subject: [PATCH 07/10] x86 boot: define paddr_t and add macros for typedefing struct pointers
+Date: Sat,  1 Jul 2023 00:18:32 -0700
+Message-Id: <20230701071835.41599-8-christopher.w.clark@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230701071835.41599-1-christopher.w.clark@gmail.com>
 References: <20230701071835.41599-1-christopher.w.clark@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Change the XSM implementation to use the boot info structure instead of
-the multiboot module_map.
+Pointer fields within structs need to be defined as fixed size types in
+the x86 boot build environment. Using a typedef for the field type
+rather than a struct pointer type enables the type definition to
+be changed in the 32-bit boot build and the main hypervisor build,
+allowing for a single common structure definition and a common header file.
 
-Drops a dependency on CONFIG_MULTIBOOT, so boot module logic is now
-used whenever the DEVICE_TREE specific logic (for Arm) is not, with the
-bootinfo header conditionally included to ensure no change on Arm.
+Introduces DEFINE_STRUCT_PTR_TYPE and DEFINE_PTR_TYPE which will
+generate typedefs with a _ptr_t suffix for pointers to the specified
+type. This is then used in <xen/bootinfo.h> for pointers within structs
+as preparation for using these headers in the x86 boot build.
 
-Adds a multiboot header inclusion into guest/xen/pvh-boot.c
-since it is no longer provided via transitive inclusion and the source
-in that file uses multiboot structures.
+The 32-bit behaviour is obtained by inclusion of "defs.h" first with a
+check for such an existing definition on the <xen/types.h> version.
+
+paddr_t is used in <xen/bootinfo.h> so a definition is added here to
+the x86 boot environment defs.h header.
 
 Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
 ---
-Changes since v1: patch is a subset of v1 series patches 2 and 3.
-- Added the <xen/multiboot.h> inclusion to pvh-boot.c
-- Use conditional inclusion for <xen/bootinfo.h>
+Changes since v2: This is two v2 patches merged into one for v3.
+Changes since v1: New in v2 of series.
 
- xen/arch/x86/guest/xen/pvh-boot.c |  1 +
- xen/arch/x86/setup.c              |  2 +-
- xen/include/xsm/xsm.h             | 28 +++++++--------
- xen/xsm/xsm_core.c                | 47 +++++++++++++++---------
- xen/xsm/xsm_policy.c              | 59 ++++++++++++++++---------------
- 5 files changed, 77 insertions(+), 60 deletions(-)
+ xen/arch/x86/boot/defs.h            |  9 +++++++++
+ xen/arch/x86/include/asm/bootinfo.h |  4 +++-
+ xen/include/xen/bootinfo.h          |  9 +++++----
+ xen/include/xen/types.h             | 11 +++++++++++
+ 4 files changed, 28 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/guest/xen/pvh-boot.c b/xen/arch/x86/guest/xen/pvh-boot.c
-index 9cbe87b61b..1ed04d035c 100644
---- a/xen/arch/x86/guest/xen/pvh-boot.c
-+++ b/xen/arch/x86/guest/xen/pvh-boot.c
-@@ -9,6 +9,7 @@
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/mm.h>
-+#include <xen/multiboot.h>
+diff --git a/xen/arch/x86/boot/defs.h b/xen/arch/x86/boot/defs.h
+index f9840044ec..bc0f1b5cf8 100644
+--- a/xen/arch/x86/boot/defs.h
++++ b/xen/arch/x86/boot/defs.h
+@@ -60,4 +60,13 @@ typedef u64 uint64_t;
+ #define U16_MAX		((u16)(~0U))
+ #define UINT_MAX	(~0U)
  
- #include <asm/e820.h>
- #include <asm/guest.h>
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index f9b04daebd..a616ccc0a8 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1835,7 +1835,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-     mmio_ro_ranges = rangeset_new(NULL, "r/o mmio ranges",
-                                   RANGESETF_prettyprint_hex);
- 
--    xsm_multiboot_init(module_map, mbi);
-+    xsm_bootmodule_init(boot_info);
- 
-     /*
-      * IOMMU-related ACPI table parsing may require some of the system domains
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 8dad03fd3d..d409c30be6 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -16,8 +16,10 @@
- #define __XSM_H__
- 
- #include <xen/alternative-call.h>
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+# include <xen/bootinfo.h>
-+#endif
- #include <xen/sched.h>
--#include <xen/multiboot.h>
- 
- /* policy magic number (defined by XSM_MAGIC) */
- typedef uint32_t xsm_magic_t;
-@@ -776,15 +778,14 @@ static inline int xsm_argo_send(const struct domain *d, const struct domain *t)
- 
- #endif /* XSM_NO_WRAPPERS */
- 
--#ifdef CONFIG_MULTIBOOT
--int xsm_multiboot_init(
--    unsigned long *module_map, const multiboot_info_t *mbi);
--int xsm_multiboot_policy_init(
--    unsigned long *module_map, const multiboot_info_t *mbi,
--    void **policy_buffer, size_t *policy_size);
--#endif
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+int xsm_bootmodule_init(const struct boot_info *info);
-+int xsm_bootmodule_policy_init(
-+    const struct boot_info *info, const unsigned char **policy_buffer,
-+    size_t *policy_size);
++typedef unsigned long long paddr_t;
 +
-+#else
- 
--#ifdef CONFIG_HAS_DEVICE_TREE
- /*
-  * Initialize XSM
-  *
-@@ -826,15 +827,14 @@ static const inline struct xsm_ops *silo_init(void)
- 
- #include <xsm/dummy.h>
- 
--#ifdef CONFIG_MULTIBOOT
--static inline int xsm_multiboot_init (
--    unsigned long *module_map, const multiboot_info_t *mbi)
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+static inline int xsm_bootmodule_init(const struct boot_info *info)
- {
-     return 0;
- }
--#endif
- 
--#ifdef CONFIG_HAS_DEVICE_TREE
-+#else
++#define DEFINE_STRUCT_PTR_TYPE(struct_name) \
++    typedef uint64_t struct_name ## _ptr_t;
 +
- static inline int xsm_dt_init(void)
- {
-     return 0;
-diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
-index eaa028109b..301ae4dc8b 100644
---- a/xen/xsm/xsm_core.c
-+++ b/xen/xsm/xsm_core.c
-@@ -10,8 +10,12 @@
-  *  as published by the Free Software Foundation.
-  */
- 
--#include <xen/init.h>
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+# include <xen/bootinfo.h>
-+#endif
- #include <xen/errno.h>
-+#include <xen/hypercall.h>
-+#include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/param.h>
- 
-@@ -138,26 +142,35 @@ static int __init xsm_core_init(const void *policy_buffer, size_t policy_size)
-     return 0;
- }
- 
--#ifdef CONFIG_MULTIBOOT
--int __init xsm_multiboot_init(
--    unsigned long *module_map, const multiboot_info_t *mbi)
-+/*
-+ * ifdef'ing this against multiboot is no longer valid as the boot module
-+ * is agnostic and it will be possible to dropped the ifndef should Arm
-+ * adopt boot info
-+ */
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+int __init xsm_bootmodule_init(const struct boot_info *bootinfo)
- {
-     int ret = 0;
--    void *policy_buffer = NULL;
-+    const unsigned char *policy_buffer = NULL;
-     size_t policy_size = 0;
- 
-     printk("XSM Framework v" XSM_FRAMEWORK_VERSION " initialized\n");
- 
-     if ( XSM_MAGIC )
-     {
--        ret = xsm_multiboot_policy_init(module_map, mbi, &policy_buffer,
--                                        &policy_size);
--        if ( ret )
--        {
--            bootstrap_map(NULL);
--            printk(XENLOG_ERR "Error %d initializing XSM policy\n", ret);
--            return -EINVAL;
--        }
-+        int ret = xsm_bootmodule_policy_init(bootinfo, &policy_buffer,
-+                                             &policy_size);
-+        bootstrap_map(NULL);
++#define DEFINE_PTR_TYPE(type) \
++    typedef uint64_t type ## _ptr_t;
++DEFINE_PTR_TYPE(char);
 +
-+        if ( ret == -ENOENT )
-+            /*
-+             * The XSM module needs a policy file but one was not located.
-+             * Report as a warning and continue as the XSM module may late
-+             * load a policy file.
-+             */
-+            printk(XENLOG_WARNING "xsm: starting without a policy loaded!\n");
-+        else if ( ret )
-+            panic("Error %d initializing XSM policy\n", ret);
-     }
+ #endif /* __BOOT_DEFS_H__ */
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+index 30c27980e0..989fb7a1da 100644
+--- a/xen/arch/x86/include/asm/bootinfo.h
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -6,6 +6,7 @@ struct arch_bootmodule {
+     uint32_t flags;
+     unsigned headroom;
+ };
++DEFINE_STRUCT_PTR_TYPE(arch_bootmodule);
  
-     ret = xsm_core_init(policy_buffer, policy_size);
-@@ -165,9 +178,9 @@ int __init xsm_multiboot_init(
+ struct arch_boot_info {
+     uint32_t flags;
+@@ -14,11 +15,12 @@ struct arch_boot_info {
+ #define BOOTINFO_FLAG_X86_MEMMAP       1U << 6
+ #define BOOTINFO_FLAG_X86_LOADERNAME   1U << 9
  
-     return 0;
- }
--#endif
+-    char *boot_loader_name;
++    char_ptr_t boot_loader_name;
  
--#ifdef CONFIG_HAS_DEVICE_TREE
-+#else
-+
- int __init xsm_dt_init(void)
- {
-     int ret = 0;
-@@ -215,9 +228,9 @@ bool __init has_xsm_magic(paddr_t start)
+     uint32_t mmap_length;
+     paddr_t mmap_addr;
+ };
++DEFINE_STRUCT_PTR_TYPE(arch_boot_info);
  
-     return false;
- }
--#endif
-+#endif /* CONFIG_HAS_DEVICE_TREE */
+ struct __packed mb_memmap {
+     uint32_t size;
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+index 2f4284a91f..8389da4f72 100644
+--- a/xen/include/xen/bootinfo.h
++++ b/xen/include/xen/bootinfo.h
+@@ -35,17 +35,18 @@ struct boot_module {
+     mfn_t mfn;
+     size_t size;
  
--#endif
-+#endif /* CONFIG_XSM */
+-    struct arch_bootmodule *arch;
++    arch_bootmodule_ptr_t arch;
+     struct boot_string string;
+ };
++DEFINE_STRUCT_PTR_TYPE(boot_module);
  
- long do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
- {
-diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
-index c6df8c6e06..f1970c8964 100644
---- a/xen/xsm/xsm_policy.c
-+++ b/xen/xsm/xsm_policy.c
-@@ -18,62 +18,65 @@
-  *
-  */
+ struct boot_info {
+-    char *cmdline;
++    char_ptr_t cmdline;
  
--#include <xsm/xsm.h>
--#ifdef CONFIG_MULTIBOOT
--#include <asm/boot.h>
--#include <xen/multiboot.h>
--#include <asm/setup.h>
--#endif
- #include <xen/bitops.h>
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+# include <xen/bootinfo.h>
-+#endif
-+#include <xsm/xsm.h>
- #ifdef CONFIG_HAS_DEVICE_TREE
--# include <asm/setup.h>
- # include <xen/device_tree.h>
-+#else
-+#include <asm/boot.h>
+     unsigned int nr_mods;
+-    struct boot_module *mods;
++    boot_module_ptr_t mods;
+ 
+-    struct arch_boot_info *arch;
++    arch_boot_info_ptr_t arch;
+ };
+ 
  #endif
+diff --git a/xen/include/xen/types.h b/xen/include/xen/types.h
+index 6aba80500a..e807ffe255 100644
+--- a/xen/include/xen/types.h
++++ b/xen/include/xen/types.h
+@@ -71,4 +71,15 @@ typedef bool bool_t;
+ #define test_and_set_bool(b)   xchg(&(b), true)
+ #define test_and_clear_bool(b) xchg(&(b), false)
  
--#ifdef CONFIG_MULTIBOOT
--int __init xsm_multiboot_policy_init(
--    unsigned long *module_map, const multiboot_info_t *mbi,
--    void **policy_buffer, size_t *policy_size)
-+#include <asm/setup.h>
-+
-+#ifndef CONFIG_HAS_DEVICE_TREE
-+int __init xsm_bootmodule_policy_init(
-+    const struct boot_info *bootinfo, const unsigned char **policy_buffer,
-+    size_t *policy_size)
- {
--    int i;
--    module_t *mod = (module_t *)__va(mbi->mods_addr);
--    int rc = 0;
-+    unsigned long i;
-+    int rc = -ENOENT;
-     u32 *_policy_start;
-     unsigned long _policy_len;
- 
--    /*
--     * Try all modules and see whichever could be the binary policy.
--     * Adjust module_map for the module that is the binary policy.
--     */
--    for ( i = mbi->mods_count-1; i >= 1; i-- )
--    {
--        if ( !test_bit(i, module_map) )
--            continue;
-+#ifdef CONFIG_XSM_FLASK_POLICY
-+    /* Initially set to builtin policy, overriden if boot module is found. */
-+    *policy_buffer = xsm_flask_init_policy;
-+    *policy_size = xsm_flask_init_policy_size;
-+    rc = 0;
++#ifndef DEFINE_STRUCT_PTR_TYPE
++#define DEFINE_STRUCT_PTR_TYPE(struct_name) \
++    typedef struct struct_name * struct_name ## _ptr_t;
 +#endif
- 
--        _policy_start = bootstrap_map_multiboot(mod + i);
--        _policy_len   = mod[i].mod_end;
-+    i = bootmodule_index(bootinfo, BOOTMOD_UNKNOWN, 0);
-+    while ( i < bootinfo->nr_mods )
-+    {
-+        _policy_start = bootstrap_map(&bootinfo->mods[i]);
-+        _policy_len   = bootinfo->mods[i].size;
- 
-         if ( (xsm_magic_t)(*_policy_start) == XSM_MAGIC )
-         {
--            *policy_buffer = _policy_start;
-+            *policy_buffer = (unsigned char *)_policy_start;
-             *policy_size = _policy_len;
- 
-             printk("Policy len %#lx, start at %p.\n",
-                    _policy_len,_policy_start);
- 
--            __clear_bit(i, module_map);
-+            bootinfo->mods[i].bootmod_type = BOOTMOD_XSM;
-+            rc = 0;
-             break;
- 
-         }
- 
-         bootstrap_map(NULL);
-+        i = bootmodule_index(bootinfo, BOOTMOD_UNKNOWN, ++i);
-     }
- 
-     return rc;
- }
--#endif
- 
--#ifdef CONFIG_HAS_DEVICE_TREE
-+#else
 +
- int __init xsm_dt_policy_init(void **policy_buffer, size_t *policy_size)
- {
-     struct bootmodule *mod = boot_module_find_by_kind(BOOTMOD_XSM);
++#ifndef DEFINE_PTR_TYPE
++#define DEFINE_PTR_TYPE(type) \
++    typedef type * type ## _ptr_t;
++DEFINE_PTR_TYPE(char);
++#endif
++
+ #endif /* __TYPES_H__ */
 -- 
 2.25.1
 
