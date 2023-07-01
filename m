@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBFCEB64DC
-	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 07:19:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.557773.871420 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F522EB64DD
+	for <xen-devel@archiver.kernel.org>; Sat,  1 Jul 2023 07:19:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.557771.871399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFUsj-00078X-La; Sat, 01 Jul 2023 07:18:57 +0000
+	id 1qFUsg-0006cx-Va; Sat, 01 Jul 2023 07:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 557773.871420; Sat, 01 Jul 2023 07:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 557771.871399; Sat, 01 Jul 2023 07:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qFUsj-00077S-Go; Sat, 01 Jul 2023 07:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 557773;
- Sat, 01 Jul 2023 07:18:55 +0000
+	id 1qFUsg-0006cq-T3; Sat, 01 Jul 2023 07:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 557771;
+ Sat, 01 Jul 2023 07:18:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ypVN=CT=gmail.com=christopher.w.clark.io@srs-se1.protection.inumbo.net>)
- id 1qFUsh-0006No-Hn
- for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 07:18:55 +0000
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [2607:f8b0:4864:20::435])
+ id 1qFUsf-0006No-Gx
+ for xen-devel@lists.xenproject.org; Sat, 01 Jul 2023 07:18:53 +0000
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [2607:f8b0:4864:20::22e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 885db715-17df-11ee-8611-37d641c3527e;
- Sat, 01 Jul 2023 09:18:53 +0200 (CEST)
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-666e6541c98so2162693b3a.2
- for <xen-devel@lists.xenproject.org>; Sat, 01 Jul 2023 00:18:53 -0700 (PDT)
+ id 86e20dce-17df-11ee-8611-37d641c3527e;
+ Sat, 01 Jul 2023 09:18:51 +0200 (CEST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3a1d9b64837so2114109b6e.0
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Jul 2023 00:18:51 -0700 (PDT)
 Received: from cog-dev.home ([70.103.208.83]) by smtp.gmail.com with ESMTPSA id
- s19-20020aa78d53000000b00673e652985bsm4108866pfe.118.2023.07.01.00.18.50
+ s19-20020aa78d53000000b00673e652985bsm4108866pfe.118.2023.07.01.00.18.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Jul 2023 00:18:50 -0700 (PDT)
+ Sat, 01 Jul 2023 00:18:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 885db715-17df-11ee-8611-37d641c3527e
+X-Inumbo-ID: 86e20dce-17df-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688195932; x=1690787932;
+        d=gmail.com; s=20221208; t=1688195929; x=1690787929;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VZN0HVDL3v266tIzCxp1Au3MTDvSJDRQFEKwXgYQOKg=;
-        b=YpX7sawsKZYhNUkXDrP6r+4b0ejLipURz01felmUeInxxsFgxrRszTnLYke1My3tUF
-         07LH6tcTz2c2CX3LDds0yu7k5LeZO8mi3Xs1B8NEhbf5U8XuO713vF8UKegIVWbRGkPo
-         tTagkO4t7k+a8h23i2OXydHe/qLeHvgvYpA+CqIkGzxMbpDy6e8B8DwvEyHV88NA+Nsj
-         Q4BA1MovO51sb5uLAa5vKGi6o9qcZtZHNCDpjxPBBWlmzHA3R6NyeKfMwsWrzPEt/TJp
-         j0nwnTCn+yOhFyHjujJ70n+JvuUyTED5o59t9ykYnNKsg0CxJZDewB8vVRxgmIuSnxjV
-         s1pQ==
+        bh=4c9WAF4kmb19tJcbTDjvohxu3kd3fgp5qdmTKmSCTJE=;
+        b=CrY0CL1mRL0QPuwcnmaQkblnBE5P1R9sxQMKRcx7enujbSgBR6HAPycMDb2gS1AY4c
+         GSMdg9Ho2X7dHe+o+SmkXoOa4APm8vLJjz8ed+7vxoyBsabHF/6zFJRtNNnBW4mZqgs0
+         /Kh9Zwyvg3GVC2GvbUXvWfC+Zl6imp1Dt83c7Gz7W64GM7H2PsLp9Qawd4CWiMdGbfJ+
+         4ZpLlj4Ud3KBQNyr/lOBs7ci3hfKCUjakzYDIIoGJTg8cCPtn9eEPJMUhg1WXlHQsVCH
+         55FvRh0m8bfNjA2aTWhCErJlfX/ZnGxZaK4J45t8b1wnqNp9Gr9qRZ6PvA6RDY+LPK40
+         MFzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688195932; x=1690787932;
+        d=1e100.net; s=20221208; t=1688195929; x=1690787929;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=VZN0HVDL3v266tIzCxp1Au3MTDvSJDRQFEKwXgYQOKg=;
-        b=VubMhGoR5sLZvesgzl4NarPaQ/FN3m/9Ro3fsTcfH9VZIOAUaDfpAaTlMyzFdb4bUE
-         jHTWLBJ+EglgrN+ywNYnHLZp/I1WUeeHwTaLPPQlE9qLZUBaeR7rPhnMptdQs5J9OP0I
-         ctLwZP3wu4mNUj6XoieFG1OFBQKSypjbM1ATxcUMpPVmiqyWjQ0nfxzvH7HB0VHTA5ig
-         lpjfJw07/b208Ihl+ooGo0RDN559iDHopA3OceklifHGVmdJN5e/Rn8DdczxfcUHZCrc
-         9gY7wQOTQp+4RWiEd66UzWXQ9i4ckRJZ2krAbS8RtiQ0VL0SGvsKvLP3VF5MWgi0gKcH
-         V2Cw==
-X-Gm-Message-State: AC+VfDy+lc/itCuWmyEOHDFBaXpfU3u0BBxTctuPhW9LchB7LWG+ZGhv
-	mHlWjBNg6/X+t4Tth3KTGWq2QnZYTaA=
-X-Google-Smtp-Source: ACHHUZ6n2a0BgJsHOuyBxhZoYcbAmTWwBgBp7Scj2tR+LuLllrO5p7qgwk+xteUe1+RZDeaLy+AScQ==
-X-Received: by 2002:a05:6a20:448:b0:126:a5e3:3938 with SMTP id b8-20020a056a20044800b00126a5e33938mr4329586pzb.19.1688195931673;
-        Sat, 01 Jul 2023 00:18:51 -0700 (PDT)
+        bh=4c9WAF4kmb19tJcbTDjvohxu3kd3fgp5qdmTKmSCTJE=;
+        b=SR70FPibjtK197iqGpuAocUm0X2cDizdg/b5smcuB/qjgWHuBK4bf5+aS2eY0Lylm+
+         tiJArrRTZpqAyauRqBFksKgcXP+gaI7OqOvuG5Gc7tqdP+utbVkifE3QwEuDA0ENiT9c
+         1sLdARp4psY5vz14g6eXO0L3YFG13DaQHt887/9OqaoFEZqbRQo80OgXw24onADATt7G
+         Bx7eZjln+wMmetrJJ0ovP86NDofQ+2C8LG1JBqVthUBx7VPhiW6ZHuF4uS/QkVG9r95F
+         qgO5o6RfCW4pNvMc5+iqN1E9zKj0dbGez4k5Upe5hoCB7aMjeyna7+qF1TCknygWHq2n
+         pjJw==
+X-Gm-Message-State: AC+VfDyiX59a5d3b9UJhgPXVnpUgr2rMyZxbvCcIP9j1ob5yiDOH8HQ5
+	HFYikFMPxGKhnj1eONz4J7MPV9m1Cyc=
+X-Google-Smtp-Source: ACHHUZ5mpapv9SYTUsV6xBXMbudnVg/NReuMAxR+qtoCnfL+g9iPwcEvsPkpPiGylED5la1TTi9fsw==
+X-Received: by 2002:a05:6808:1b0c:b0:3a1:b309:a409 with SMTP id bx12-20020a0568081b0c00b003a1b309a409mr6482050oib.4.1688195929359;
+        Sat, 01 Jul 2023 00:18:49 -0700 (PDT)
 Sender: Christopher Clark <christopher.w.clark.io@gmail.com>
 From: Christopher Clark <christopher.w.clark@gmail.com>
 To: xen-devel@lists.xenproject.org
@@ -90,25 +90,27 @@ Cc: Daniel Smith <dpsmith@apertussolutions.com>,
 	Luca Fancellu <luca.fancellu@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Rich Persaud <persaur@gmail.com>
-Subject: [PATCH 03/10] x86 setup: change bootstrap map to accept new boot module structures
-Date: Sat,  1 Jul 2023 00:18:28 -0700
-Message-Id: <20230701071835.41599-4-christopher.w.clark@gmail.com>
+Subject: [PATCH 01/10] x86 setup: move x86 boot module counting into a new boot_info struct
+Date: Sat,  1 Jul 2023 00:18:26 -0700
+Message-Id: <20230701071835.41599-2-christopher.w.clark@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230701071835.41599-1-christopher.w.clark@gmail.com>
 References: <20230701071835.41599-1-christopher.w.clark@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-To convert the x86 boot logic from multiboot to boot module structures,
-change the bootstrap map function to accept a boot module parameter.
+An initial step towards a non-multiboot internal representation of boot
+modules for common code, starting with x86 setup and converting the
+fields that are accessed for the startup calculations.
 
-To allow incremental change from multiboot to boot modules across all
-x86 setup logic, provide a temporary inline wrapper that still accepts a
-multiboot module parameter and use it where necessary. The wrapper is
-placed in a new arch/x86 header <asm/boot.h> to avoid putting a static
-inline function into an existing header that has no such functions
-already. This new header will be expanded with additional functions in
-subsequent patches in this series.
+Introduce a new header, <xen/bootinfo.h>, and populate it with a new
+boot_info structure initially containing a count of the number of boot
+modules.
+
+The naming of the header, structure and fields is intended to respect
+the boot structures on Arm -- see arm/include/asm/setup.h -- as part of
+work towards aligning common architecture-neutral boot logic and
+structures.
 
 No functional change intended.
 
@@ -116,107 +118,220 @@ Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
 ---
-A new patch so v1 series patch 3 can be implemented incrementally
-instead.
+Changes since v1: patch is a subset of v1 series patches 2 and 3.
 
- xen/arch/x86/cpu/microcode/core.c |  7 ++++---
- xen/arch/x86/hvm/dom0_build.c     |  4 +++-
- xen/arch/x86/include/asm/boot.h   | 32 +++++++++++++++++++++++++++++++
- xen/arch/x86/include/asm/setup.h  |  3 ++-
- xen/arch/x86/pv/dom0_build.c      |  3 ++-
- xen/arch/x86/setup.c              | 18 +++++++++--------
- xen/include/xen/bootinfo.h        |  3 +++
- xen/xsm/xsm_policy.c              |  3 ++-
- 8 files changed, 58 insertions(+), 15 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/boot.h
+ xen/arch/x86/setup.c       | 58 +++++++++++++++++++++++---------------
+ xen/include/xen/bootinfo.h | 20 +++++++++++++
+ 2 files changed, 55 insertions(+), 23 deletions(-)
+ create mode 100644 xen/include/xen/bootinfo.h
 
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index c3fee62906..ce3c8042a2 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -34,6 +34,7 @@
- #include <xen/watchdog.h>
- 
- #include <asm/apic.h>
-+#include <asm/boot.h>
- #include <asm/cpu-policy.h>
- #include <asm/delay.h>
- #include <asm/nmi.h>
-@@ -180,7 +181,7 @@ void __init microcode_scan_module(
-         if ( !test_bit(i, module_map) )
-             continue;
- 
--        _blob_start = bootstrap_map(&mod[i]);
-+        _blob_start = bootstrap_map_multiboot(&mod[i]);
-         _blob_size = mod[i].mod_end;
-         if ( !_blob_start )
-         {
-@@ -798,7 +799,7 @@ int __init microcode_init_cache(unsigned long *module_map,
-         microcode_scan_module(module_map, mbi);
- 
-     if ( ucode_mod.mod_end )
--        rc = early_update_cache(bootstrap_map(&ucode_mod),
-+        rc = early_update_cache(bootstrap_map_multiboot(&ucode_mod),
-                                 ucode_mod.mod_end);
-     else if ( ucode_blob.size )
-         rc = early_update_cache(ucode_blob.data, ucode_blob.size);
-@@ -821,7 +822,7 @@ static int __init early_microcode_update_cpu(void)
-     else if ( ucode_mod.mod_end )
-     {
-         len = ucode_mod.mod_end;
--        data = bootstrap_map(&ucode_mod);
-+        data = bootstrap_map_multiboot(&ucode_mod);
-     }
- 
-     if ( !data )
-diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
-index bf08998862..56fe89632b 100644
---- a/xen/arch/x86/hvm/dom0_build.c
-+++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -16,6 +16,7 @@
- 
- #include <acpi/actables.h>
- 
-+#include <asm/boot.h>
- #include <asm/bzimage.h>
- #include <asm/dom0_build.h>
- #include <asm/hvm/support.h>
-@@ -1208,7 +1209,8 @@ int __init dom0_construct_pvh(struct domain *d, const module_t *image,
-         return rc;
-     }
- 
--    rc = pvh_load_kernel(d, image, image_headroom, initrd, bootstrap_map(image),
-+    rc = pvh_load_kernel(d, image, image_headroom, initrd,
-+                         bootstrap_map_multiboot(image),
-                          cmdline, &entry, &start_info);
-     if ( rc )
-     {
-diff --git a/xen/arch/x86/include/asm/boot.h b/xen/arch/x86/include/asm/boot.h
-new file mode 100644
-index 0000000000..10b17f12b2
---- /dev/null
-+++ b/xen/arch/x86/include/asm/boot.h
-@@ -0,0 +1,32 @@
-+#ifndef __ASM_X86_BOOT_H__
-+#define __ASM_X86_BOOT_H__
-+
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 74e3915a4d..708639b236 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1,3 +1,4 @@
 +#include <xen/bootinfo.h>
-+#include <xen/multiboot.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/err.h>
+@@ -268,7 +269,16 @@ static int __init cf_check parse_acpi_param(const char *s)
+ custom_param("acpi", parse_acpi_param);
+ 
+ static const module_t *__initdata initial_images;
+-static unsigned int __initdata nr_initial_images;
++static struct boot_info __initdata *boot_info;
 +
-+#include <asm/setup.h>
-+
-+static inline void *bootstrap_map_multiboot(const module_t *mod)
++static void __init multiboot_to_bootinfo(multiboot_info_t *mbi)
 +{
-+    struct boot_module bm;
++    static struct boot_info __initdata info;
 +
-+    if ( !mod )
-+        return bootstrap_map(NULL);
++    info.nr_mods = mbi->mods_count;
 +
-+    bm.start = mod->mod_start << PAGE_SHIFT;
-+    bm.size = mod->mod_end;
-+
-+    return bootstrap_map(&bm);
++    boot_info = &info;
 +}
+ 
+ unsigned long __init initial_images_nrpages(nodeid_t node)
+ {
+@@ -277,7 +287,7 @@ unsigned long __init initial_images_nrpages(nodeid_t node)
+     unsigned long nr;
+     unsigned int i;
+ 
+-    for ( nr = i = 0; i < nr_initial_images; ++i )
++    for ( nr = i = 0; i < boot_info->nr_mods; ++i )
+     {
+         unsigned long start = initial_images[i].mod_start;
+         unsigned long end = start + PFN_UP(initial_images[i].mod_end);
+@@ -293,7 +303,7 @@ void __init discard_initial_images(void)
+ {
+     unsigned int i;
+ 
+-    for ( i = 0; i < nr_initial_images; ++i )
++    for ( i = 0; i < boot_info->nr_mods; ++i )
+     {
+         uint64_t start = (uint64_t)initial_images[i].mod_start << PAGE_SHIFT;
+ 
+@@ -301,7 +311,7 @@ void __init discard_initial_images(void)
+                            start + PAGE_ALIGN(initial_images[i].mod_end));
+     }
+ 
+-    nr_initial_images = 0;
++    boot_info->nr_mods = 0;
+     initial_images = NULL;
+ }
+ 
+@@ -1020,6 +1030,8 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         mod = __va(mbi->mods_addr);
+     }
+ 
++    multiboot_to_bootinfo(mbi);
++
+     loader = (mbi->flags & MBI_LOADERNAME)
+         ? (char *)__va(mbi->boot_loader_name) : "unknown";
+ 
+@@ -1127,18 +1139,18 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+            bootsym(boot_edd_info_nr));
+ 
+     /* Check that we have at least one Multiboot module. */
+-    if ( !(mbi->flags & MBI_MODULES) || (mbi->mods_count == 0) )
++    if ( !(mbi->flags & MBI_MODULES) || (boot_info->nr_mods == 0) )
+         panic("dom0 kernel not specified. Check bootloader configuration\n");
+ 
+     /* Check that we don't have a silly number of modules. */
+-    if ( mbi->mods_count > sizeof(module_map) * 8 )
++    if ( boot_info->nr_mods > sizeof(module_map) * 8 )
+     {
+-        mbi->mods_count = sizeof(module_map) * 8;
++        boot_info->nr_mods = sizeof(module_map) * 8;
+         printk("Excessive multiboot modules - using the first %u only\n",
+-               mbi->mods_count);
++               boot_info->nr_mods);
+     }
+ 
+-    bitmap_fill(module_map, mbi->mods_count);
++    bitmap_fill(module_map, boot_info->nr_mods);
+     __clear_bit(0, module_map); /* Dom0 kernel is always first */
+ 
+     if ( pvh_boot )
+@@ -1311,9 +1323,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+     kexec_reserve_area(&boot_e820);
+ 
+     initial_images = mod;
+-    nr_initial_images = mbi->mods_count;
++    boot_info->nr_mods = boot_info->nr_mods;
+ 
+-    for ( i = 0; !efi_enabled(EFI_LOADER) && i < mbi->mods_count; i++ )
++    for ( i = 0; !efi_enabled(EFI_LOADER) && i < boot_info->nr_mods; i++ )
+     {
+         if ( mod[i].mod_start & (PAGE_SIZE - 1) )
+             panic("Bootloader didn't honor module alignment request\n");
+@@ -1337,8 +1349,8 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+          * respective reserve_e820_ram() invocation below. No need to
+          * query efi_boot_mem_unused() here, though.
+          */
+-        mod[mbi->mods_count].mod_start = virt_to_mfn(_stext);
+-        mod[mbi->mods_count].mod_end = __2M_rwdata_end - _stext;
++        mod[boot_info->nr_mods].mod_start = virt_to_mfn(_stext);
++        mod[boot_info->nr_mods].mod_end = __2M_rwdata_end - _stext;
+     }
+ 
+     modules_headroom = bzimage_headroom(bootstrap_map(mod), mod->mod_end);
+@@ -1398,7 +1410,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         {
+             /* Don't overlap with modules. */
+             end = consider_modules(s, e, reloc_size + mask,
+-                                   mod, mbi->mods_count, -1);
++                                   mod, boot_info->nr_mods, -1);
+             end &= ~mask;
+         }
+         else
+@@ -1419,7 +1431,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         }
+ 
+         /* Is the region suitable for relocating the multiboot modules? */
+-        for ( j = mbi->mods_count - 1; j >= 0; j-- )
++        for ( j = boot_info->nr_mods - 1; j >= 0; j-- )
+         {
+             unsigned long headroom = j ? 0 : modules_headroom;
+             unsigned long size = PAGE_ALIGN(headroom + mod[j].mod_end);
+@@ -1429,7 +1441,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+ 
+             /* Don't overlap with other modules (or Xen itself). */
+             end = consider_modules(s, e, size, mod,
+-                                   mbi->mods_count + relocated, j);
++                                   boot_info->nr_mods + relocated, j);
+ 
+             if ( highmem_start && end > highmem_start )
+                 continue;
+@@ -1456,7 +1468,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         {
+             /* Don't overlap with modules (or Xen itself). */
+             e = consider_modules(s, e, PAGE_ALIGN(kexec_crash_area.size), mod,
+-                                 mbi->mods_count + relocated, -1);
++                                 boot_info->nr_mods + relocated, -1);
+             if ( s >= e )
+                 break;
+             if ( e > kexec_crash_area_limit )
+@@ -1471,7 +1483,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     if ( modules_headroom && !mod->reserved )
+         panic("Not enough memory to relocate the dom0 kernel image\n");
+-    for ( i = 0; i < mbi->mods_count; ++i )
++    for ( i = 0; i < boot_info->nr_mods; ++i )
+     {
+         uint64_t s = (uint64_t)mod[i].mod_start << PAGE_SHIFT;
+ 
+@@ -1540,7 +1552,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+                     ASSERT(j);
+                 }
+                 map_e = boot_e820.map[j].addr + boot_e820.map[j].size;
+-                for ( j = 0; j < mbi->mods_count; ++j )
++                for ( j = 0; j < boot_info->nr_mods; ++j )
+                 {
+                     uint64_t end = pfn_to_paddr(mod[j].mod_start) +
+                                    mod[j].mod_end;
+@@ -1616,7 +1628,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         }
+     }
+ 
+-    for ( i = 0; i < mbi->mods_count; ++i )
++    for ( i = 0; i < boot_info->nr_mods; ++i )
+     {
+         set_pdx_range(mod[i].mod_start,
+                       mod[i].mod_start + PFN_UP(mod[i].mod_end));
+@@ -1999,8 +2011,8 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+            cpu_has_nx ? XENLOG_INFO : XENLOG_WARNING "Warning: ",
+            cpu_has_nx ? "" : "not ");
+ 
+-    initrdidx = find_first_bit(module_map, mbi->mods_count);
+-    if ( bitmap_weight(module_map, mbi->mods_count) > 1 )
++    initrdidx = find_first_bit(module_map, boot_info->nr_mods);
++    if ( bitmap_weight(module_map, boot_info->nr_mods) > 1 )
+         printk(XENLOG_WARNING
+                "Multiple initrd candidates, picking module #%u\n",
+                initrdidx);
+@@ -2010,7 +2022,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+      * above our heap. The second module, if present, is an initrd ramdisk.
+      */
+     dom0 = create_dom0(mod, modules_headroom,
+-                       initrdidx < mbi->mods_count ? mod + initrdidx : NULL,
++                       initrdidx < boot_info->nr_mods ? mod + initrdidx : NULL,
+                        kextra, loader);
+     if ( !dom0 )
+         panic("Could not set up DOM0 guest OS\n");
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+new file mode 100644
+index 0000000000..6a7d55d20e
+--- /dev/null
++++ b/xen/include/xen/bootinfo.h
+@@ -0,0 +1,20 @@
++#ifndef __XEN_BOOTINFO_H__
++#define __XEN_BOOTINFO_H__
++
++#include <xen/types.h>
++
++struct boot_info {
++    unsigned int nr_mods;
++};
 +
 +#endif
 +
@@ -229,153 +344,6 @@ index 0000000000..10b17f12b2
 + * indent-tabs-mode: nil
 + * End:
 + */
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index ae0dd3915a..80d0bb2a21 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -1,6 +1,7 @@
- #ifndef __X86_SETUP_H_
- #define __X86_SETUP_H_
- 
-+#include <xen/bootinfo.h>
- #include <xen/multiboot.h>
- #include <asm/numa.h>
- 
-@@ -40,7 +41,7 @@ void setup_io_bitmap(struct domain *d);
- 
- unsigned long initial_images_nrpages(nodeid_t node);
- void discard_initial_images(void);
--void *bootstrap_map(const module_t *mod);
-+void *bootstrap_map(const struct boot_module *mod);
- 
- int xen_in_range(unsigned long mfn);
- 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 6ed9f8bbed..4fe806b60d 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -14,6 +14,7 @@
- #include <xen/sched.h>
- #include <xen/softirq.h>
- 
-+#include <asm/boot.h>
- #include <asm/bzimage.h>
- #include <asm/dom0_build.h>
- #include <asm/guest.h>
-@@ -374,7 +375,7 @@ int __init dom0_construct_pv(struct domain *d,
-     unsigned int flush_flags = 0;
-     start_info_t *si;
-     struct vcpu *v = d->vcpu[0];
--    void *image_base = bootstrap_map(image);
-+    void *image_base = bootstrap_map_multiboot(image);
-     unsigned long image_len = image->mod_end;
-     void *image_start = image_base + image_headroom;
-     unsigned long initrd_len = initrd ? initrd->mod_end : 0;
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index c0e8fc6ab7..3b623a4149 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -32,6 +32,7 @@
- #include <compat/xen.h>
- #endif
- #include <xen/bitops.h>
-+#include <asm/boot.h>
- #include <asm/smp.h>
- #include <asm/processor.h>
- #include <asm/mpspec.h>
-@@ -405,14 +406,14 @@ static void __init normalise_cpu_order(void)
-  * Ensure a given physical memory range is present in the bootstrap mappings.
-  * Use superpage mappings to ensure that pagetable memory needn't be allocated.
-  */
--void *__init bootstrap_map(const module_t *mod)
-+void *__init bootstrap_map(const struct boot_module *mod)
- {
-     static unsigned long __initdata map_cur = BOOTSTRAP_MAP_BASE;
-     uint64_t start, end, mask = (1L << L2_PAGETABLE_SHIFT) - 1;
-     void *ret;
- 
-     if ( system_state != SYS_STATE_early_boot )
--        return mod ? mfn_to_virt(mod->mod_start) : NULL;
-+        return mod ? maddr_to_virt(mod->start) : NULL;
- 
-     if ( !mod )
-     {
-@@ -421,8 +422,8 @@ void *__init bootstrap_map(const module_t *mod)
-         return NULL;
-     }
- 
--    start = (uint64_t)mod->mod_start << PAGE_SHIFT;
--    end = start + mod->mod_end;
-+    start = (uint64_t)mod->start;
-+    end = start + mod->size;
-     if ( start >= end )
-         return NULL;
- 
-@@ -460,7 +461,7 @@ static void __init move_memory(
-         if ( mod.mod_end > blksz )
-             mod.mod_end = blksz;
-         sz = mod.mod_end - soffs;
--        s = bootstrap_map(&mod);
-+        s = bootstrap_map_multiboot(&mod);
- 
-         mod.mod_start = (dst - doffs) >> PAGE_SHIFT;
-         mod.mod_end = doffs + size;
-@@ -468,7 +469,7 @@ static void __init move_memory(
-             mod.mod_end = blksz;
-         if ( sz > mod.mod_end - doffs )
-             sz = mod.mod_end - doffs;
--        d = bootstrap_map(&mod);
-+        d = bootstrap_map_multiboot(&mod);
- 
-         memmove(d + doffs, s + soffs, sz);
- 
-@@ -1360,8 +1361,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-         mod[boot_info->nr_mods].mod_end = __2M_rwdata_end - _stext;
-     }
- 
--    boot_info->mods[0].arch->headroom = bzimage_headroom(bootstrap_map(mod),
--                                                         mod->mod_end);
-+    boot_info->mods[0].arch->headroom =
-+        bzimage_headroom(bootstrap_map_multiboot(mod), mod->mod_end);
-+
-     bootstrap_map(NULL);
- 
- #ifndef highmem_start
-diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
-index b72ae31a66..eb93cc3439 100644
---- a/xen/include/xen/bootinfo.h
-+++ b/xen/include/xen/bootinfo.h
-@@ -10,6 +10,9 @@
- #endif
- 
- struct boot_module {
-+    paddr_t start;
-+    size_t size;
-+
-     struct arch_bootmodule *arch;
- };
- 
-diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
-index 8dafbc9381..c6df8c6e06 100644
---- a/xen/xsm/xsm_policy.c
-+++ b/xen/xsm/xsm_policy.c
-@@ -20,6 +20,7 @@
- 
- #include <xsm/xsm.h>
- #ifdef CONFIG_MULTIBOOT
-+#include <asm/boot.h>
- #include <xen/multiboot.h>
- #include <asm/setup.h>
- #endif
-@@ -49,7 +50,7 @@ int __init xsm_multiboot_policy_init(
-         if ( !test_bit(i, module_map) )
-             continue;
- 
--        _policy_start = bootstrap_map(mod + i);
-+        _policy_start = bootstrap_map_multiboot(mod + i);
-         _policy_len   = mod[i].mod_end;
- 
-         if ( (xsm_magic_t)(*_policy_start) == XSM_MAGIC )
 -- 
 2.25.1
 
