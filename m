@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDAFEEB64DA
-	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 09:25:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.558876.873344 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F33EB64DA
+	for <xen-devel@archiver.kernel.org>; Wed,  5 Jul 2023 09:35:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.558885.873401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qGylW-00045K-Em; Wed, 05 Jul 2023 09:25:38 +0000
+	id 1qGyuz-0006ga-SA; Wed, 05 Jul 2023 09:35:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 558876.873344; Wed, 05 Jul 2023 09:25:38 +0000
+Received: by outflank-mailman (output) from mailman id 558885.873401; Wed, 05 Jul 2023 09:35:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1qGylW-00045D-CH; Wed, 05 Jul 2023 09:25:38 +0000
-Received: by outflank-mailman (input) for mailman id 558876;
- Wed, 05 Jul 2023 09:25:36 +0000
+	id 1qGyuz-0006ez-Jp; Wed, 05 Jul 2023 09:35:25 +0000
+Received: by outflank-mailman (input) for mailman id 558885;
+ Wed, 05 Jul 2023 09:35:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rv0Z=CX=tibco.com=gdunlap@srs-se1.protection.inumbo.net>)
- id 1qGylU-000452-LB
- for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 09:25:36 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hy0b=CX=linaro.org=jens.wiklander@srs-se1.protection.inumbo.net>)
+ id 1qGyux-0005bC-Ps
+ for xen-devel@lists.xenproject.org; Wed, 05 Jul 2023 09:35:23 +0000
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [2a00:1450:4864:20::232])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e490d042-1b15-11ee-8611-37d641c3527e;
- Wed, 05 Jul 2023 11:25:33 +0200 (CEST)
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-4f95bf5c493so9784305e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 05 Jul 2023 02:25:33 -0700 (PDT)
+ id 43416c5a-1b17-11ee-8611-37d641c3527e;
+ Wed, 05 Jul 2023 11:35:22 +0200 (CEST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2b6ff1ad155so5535491fa.0
+ for <xen-devel@lists.xenproject.org>; Wed, 05 Jul 2023 02:35:22 -0700 (PDT)
+Received: from rayden.urgonet (h-46-59-78-111.A175.priv.bahnhof.se.
+ [46.59.78.111]) by smtp.gmail.com with ESMTPSA id
+ q22-20020a2e84d6000000b002b6d8cfb6d2sm2910625ljh.140.2023.07.05.02.35.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Jul 2023 02:35:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,159 +47,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e490d042-1b15-11ee-8611-37d641c3527e
+X-Inumbo-ID: 43416c5a-1b17-11ee-8611-37d641c3527e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cloud.com; s=cloud; t=1688549133; x=1691141133;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=0pJd0CkwnAImw3NilWU6OnypmhAU7YxkyhGF94aLpIE=;
-        b=bwvZVb0GHtSzc+R9WMXphYf3E1H9MtpRux2UdqEc7qnLxbyAayr7P8f0DR0sGzhiGQ
-         IlCS7+Ixns8vb+PG/ISsqXPUMl1QSd3T0lkbW4S+TmQuS/CoIN2UiUWIfSfq+AIu3kSz
-         U0fF2Kq/5yKrOazrHv1OU3R/Y5NwsGID0X874=
+        d=linaro.org; s=google; t=1688549721; x=1691141721;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dqoldXxWy8H0mye06Jm+vbzYDtmZMz3z5RdS7rzJXrI=;
+        b=yuMft45L04JztcnXQTMuUwXg3C+yuWG+iQk+uWUOKI7ixbPrY4+Q0OtD2WIC3VcOHm
+         hzAen+5zXi4+pOrHM32vexT8/Yo6/9Td83Xw38T7vHQUvMJXFUGam/6QZp4dX/TtEzG6
+         pl4QEO9mT6UawuiXag/RAULeGICoAF6GigS2113JMmLWmdlhO/B53XiOKlt0Ry1uOJrL
+         Nr8D/q88n18lAg2YaDHjh2P5aNwoBsPyvgjCIkz5HJPzgj/whtdIOC4CwRL2lMoqaas6
+         DNsvuP3izvZxL6BVQGgew9OTCYu9a6EArjs7ttEKqx/adWk7r7Zrxta0TaQTvX7j4k1T
+         5BDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688549133; x=1691141133;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0pJd0CkwnAImw3NilWU6OnypmhAU7YxkyhGF94aLpIE=;
-        b=K0zk8etgcMU2hgtHdzQja/hSysIOqMYe67iW78YCvGTIXSp10uAJl0AMOBs8qB3ToR
-         7SwEnuKnv+kSG2bxdidB2SoqldjLBEFrop3Yr58rY7g2tXWdgRwPZdA97peIzif0nTCV
-         OvabFAukdOXkQYAaMifLvC+c5GDsiHnUxRQp2//SVxeedcJk3RqrwjRkmOHv7aejlWbh
-         nYxQuAggBcPemqOAfRD3AQWvLN8HgHrStJ/RtQm/lbnNef7JnSzCoofvjG7sgouLohMr
-         L6Z01Lwo+iZiOF/iYCq0O8S5RZYXHmDodwZWjbv9T3BHcuLYRagQjVBQ07SkoEcVyFLw
-         DaqA==
-X-Gm-Message-State: ABy/qLZoR6RDCUdckpe0U6qT9WBPoglAiZNiW185fK2kECrIv5BwaAvj
-	q1eLtEsDgM2co9a4H4lXrERDXVNgphezLXLqXBH+Cg==
-X-Google-Smtp-Source: APBJJlF0J9mgg+iEe3+37ZZZKVPR9DjI6BJWb33J02eTDuwnjmrQUMZj1+/1VxR8NxjIt9PlzlcvyNYRNIyk8qT4iH8=
-X-Received: by 2002:a05:6512:3a83:b0:4f9:92c7:4026 with SMTP id
- q3-20020a0565123a8300b004f992c74026mr13582462lfu.1.1688549133271; Wed, 05 Jul
- 2023 02:25:33 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1688549721; x=1691141721;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=dqoldXxWy8H0mye06Jm+vbzYDtmZMz3z5RdS7rzJXrI=;
+        b=evXomomsPq5z2RohGEpEbp4qT9uSDY7LdQBhZJMLWXm0eU6ri+009/6gJ6yzXa9bge
+         5dyslFbjdrHDEQqepQRSzhTegbyOkS+maxplddUerupFkVV+b0LiZMy0hIILE55W8wjp
+         +oOzWJzF+z1PPAbJMmLu4T9RdkNoEXE9gnHKOGaGMR29EX6D9CbWCRwlwyK1dilhz+Yr
+         Qr+fL6teW1u/+4I25uuNqwYGW1wBGFOVadj4vf3VkdOXqt3Rwj3RPGGnBBXXxvlsWdpD
+         hlTYUbcklLHZsO+V0BXxWy0UijIVBajkYkZTJRUJQjJ716PMp7RRS4YW7XmmFlSG0fXj
+         IdbQ==
+X-Gm-Message-State: ABy/qLZdcaIsvsE+KC16hx/pYxmFp3jBqhHOFnBXzH7keaJSd/HV5zzd
+	PTF8jXIGTwqWFmT/Yd6ayWbrO33fBS8mGMYPnG0=
+X-Google-Smtp-Source: APBJJlHXrPKLZ1T6BqR2/M0Cyskz25seyh+y7ryNtyh9dtB3tHMVIFKLFAy9H0tdDCA4prZi9cIcGw==
+X-Received: by 2002:a05:651c:10ab:b0:2b6:9e1d:cd0f with SMTP id k11-20020a05651c10ab00b002b69e1dcd0fmr717756ljn.12.1688549721596;
+        Wed, 05 Jul 2023 02:35:21 -0700 (PDT)
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand.Marquis@arm.com,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Marc Bonnici <marc.bonnici@arm.com>,
+	Achin Gupta <achin.gupta@arm.com>,
+	Jens Wiklander <jens.wiklander@linaro.org>,
+	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Henry Wang <Henry.Wang@arm.com>
+Subject: [XEN PATCH v9 05/24] xen/arm: ffa: add remaining SMC function IDs
+Date: Wed,  5 Jul 2023 11:34:14 +0200
+Message-Id: <20230705093433.2514898-6-jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230705093433.2514898-1-jens.wiklander@linaro.org>
+References: <20230705093433.2514898-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
-References: <20230630113756.672607-1-george.dunlap@cloud.com> <b046ddf8-d70b-e2db-f996-32e6a7164cd8@citrix.com>
-In-Reply-To: <b046ddf8-d70b-e2db-f996-32e6a7164cd8@citrix.com>
-From: George Dunlap <george.dunlap@cloud.com>
-Date: Wed, 5 Jul 2023 10:25:22 +0100
-Message-ID: <CA+zSX=bqf4QspF=ZW+rWwkfNp3u4xYjzDipsJX9_j2CpdtdhLg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] credit: Limit load balancing to once per millisecond
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Dario Faggioli <dfaggioli@suse.com>, 
-	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Content-Type: multipart/alternative; boundary="0000000000004654a305ffb9fb06"
+Content-Transfer-Encoding: 8bit
 
---0000000000004654a305ffb9fb06
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Adds the remaining SMC function IDs from FF-A 1.1 specification,
+DEN0077A version 1.1 REL0.
 
-On Tue, Jul 4, 2023 at 6:34=E2=80=AFPM Andrew Cooper <andrew.cooper3@citrix=
-.com>
-wrote:
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Henry Wang <Henry.Wang@arm.com>
+---
+ xen/arch/arm/tee/ffa.c | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
-> On 30/06/2023 12:37 pm, George Dunlap wrote:
-> >
-> >  docs/misc/xen-command-line.pandoc |  6 +++++
-> >  xen/common/sched/credit.c         | 40 ++++++++++++++++++++++++++-----
-> >  xen/include/public/sysctl.h       |  6 +++++
->
-> Given this filelist, why the sysctl change?
->
-> There's no logic to drive this parameter in the xc/libxl param get/set.
->
-> The only two in-tree users I can see are xenpm, along with an
-> unconditional print to stderr saying it's deprecated and to use xl, and x=
-l.
->
+diff --git a/xen/arch/arm/tee/ffa.c b/xen/arch/arm/tee/ffa.c
+index 927c4d33a380..2296e3115beb 100644
+--- a/xen/arch/arm/tee/ffa.c
++++ b/xen/arch/arm/tee/ffa.c
+@@ -60,7 +60,41 @@
+ /* Function IDs */
+ #define FFA_ERROR                       0x84000060U
+ #define FFA_SUCCESS_32                  0x84000061U
++#define FFA_SUCCESS_64                  0xC4000061U
++#define FFA_INTERRUPT                   0x84000062U
+ #define FFA_VERSION                     0x84000063U
++#define FFA_FEATURES                    0x84000064U
++#define FFA_RX_ACQUIRE                  0x84000084U
++#define FFA_RX_RELEASE                  0x84000065U
++#define FFA_RXTX_MAP_32                 0x84000066U
++#define FFA_RXTX_MAP_64                 0xC4000066U
++#define FFA_RXTX_UNMAP                  0x84000067U
++#define FFA_PARTITION_INFO_GET          0x84000068U
++#define FFA_ID_GET                      0x84000069U
++#define FFA_SPM_ID_GET                  0x84000085U
++#define FFA_MSG_WAIT                    0x8400006BU
++#define FFA_MSG_YIELD                   0x8400006CU
++#define FFA_RUN                         0x8400006DU
++#define FFA_MSG_SEND2                   0x84000086U
++#define FFA_MSG_SEND_DIRECT_REQ_32      0x8400006FU
++#define FFA_MSG_SEND_DIRECT_REQ_64      0xC400006FU
++#define FFA_MSG_SEND_DIRECT_RESP_32     0x84000070U
++#define FFA_MSG_SEND_DIRECT_RESP_64     0xC4000070U
++#define FFA_MEM_DONATE_32               0x84000071U
++#define FFA_MEM_DONATE_64               0xC4000071U
++#define FFA_MEM_LEND_32                 0x84000072U
++#define FFA_MEM_LEND_64                 0xC4000072U
++#define FFA_MEM_SHARE_32                0x84000073U
++#define FFA_MEM_SHARE_64                0xC4000073U
++#define FFA_MEM_RETRIEVE_REQ_32         0x84000074U
++#define FFA_MEM_RETRIEVE_REQ_64         0xC4000074U
++#define FFA_MEM_RETRIEVE_RESP           0x84000075U
++#define FFA_MEM_RELINQUISH              0x84000076U
++#define FFA_MEM_RECLAIM                 0x84000077U
++#define FFA_MEM_FRAG_RX                 0x8400007AU
++#define FFA_MEM_FRAG_TX                 0x8400007BU
++#define FFA_MSG_SEND                    0x8400006EU
++#define FFA_MSG_POLL                    0x8400006AU
+ 
+ struct ffa_ctx {
+     /* FF-A version used by the guest */
+-- 
+2.34.1
 
-Yes.  I think unless someone objects then, I'll drop the sysctl interface
-from this patch, and add it in a follow-up patch (perhaps at a later date,
-depending on how much time I have this week).
-
-
-> > diff --git a/docs/misc/xen-command-line.pandoc
-> b/docs/misc/xen-command-line.pandoc
-> > index 4060ebdc5d..369557020f 100644
-> > --- a/docs/misc/xen-command-line.pandoc
-> > +++ b/docs/misc/xen-command-line.pandoc
-> > @@ -1856,6 +1856,12 @@ By default, Xen will use the INVPCID instruction
-> for TLB management if
-> >  it is available.  This option can be used to cause Xen to fall back to
-> >  older mechanisms, which are generally slower.
-> >
-> > +### load-balance-ratelimit
-> > +> `=3D <integer>`
-> > +
-> > +The minimum interval between load balancing events on a given pcpu.
-> > +At the moment only credit honors this parameter.
->
-> So this is intended to be a global scheduler parameter?
->
-
-Yes; nearly every scheduler does load balancing, and so any scheduler may
-need this sort of limitation at some point.  It doesn't make sense to have
-separate, nearly identical parameters for each scheduler.  At some point
-this should probably be implemented for credit2, although perhaps with a
-different default.
-
-Ack on the two style comments.
-
- -George
-
---0000000000004654a305ffb9fb06
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 4, 2023 at 6:34=E2=80=AFP=
-M Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"=
-_blank">andrew.cooper3@citrix.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">On 30/06/2023 12:37 pm, George Dunlap wrot=
-e:<br>
-&gt;<br>
-&gt;=C2=A0 docs/misc/xen-command-line.pandoc |=C2=A0 6 +++++<br>
-&gt;=C2=A0 xen/common/sched/credit.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 40 =
-++++++++++++++++++++++++++-----<br>
-&gt;=C2=A0 xen/include/public/sysctl.h=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 6 =
-+++++<br>
-<br>
-Given this filelist, why the sysctl change?<br>
-<br>
-There&#39;s no logic to drive this parameter in the xc/libxl param get/set.=
-<br>
-<br>
-The only two in-tree users I can see are xenpm, along with an<br>
-unconditional print to stderr saying it&#39;s deprecated and to use xl, and=
- xl.<br></blockquote><div><br></div><div>Yes.=C2=A0 I think unless someone =
-objects then, I&#39;ll drop the sysctl interface from this patch, and add i=
-t in a follow-up patch (perhaps at a later date, depending on how much time=
- I have this week).</div><div>=C2=A0</div><blockquote class=3D"gmail_quote"=
- style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
-adding-left:1ex">&gt; diff --git a/docs/misc/xen-command-line.pandoc b/docs=
-/misc/xen-command-line.pandoc<br>
-&gt; index 4060ebdc5d..369557020f 100644<br>
-&gt; --- a/docs/misc/xen-command-line.pandoc<br>
-&gt; +++ b/docs/misc/xen-command-line.pandoc<br>
-&gt; @@ -1856,6 +1856,12 @@ By default, Xen will use the INVPCID instructio=
-n for TLB management if<br>
-&gt;=C2=A0 it is available.=C2=A0 This option can be used to cause Xen to f=
-all back to<br>
-&gt;=C2=A0 older mechanisms, which are generally slower.<br>
-&gt;=C2=A0 <br>
-&gt; +### load-balance-ratelimit<br>
-&gt; +&gt; `=3D &lt;integer&gt;`<br>
-&gt; +<br>
-&gt; +The minimum interval between load balancing events on a given pcpu.<b=
-r>
-&gt; +At the moment only credit honors this parameter.<br>
-<br>
-So this is intended to be a global scheduler parameter?<br></blockquote><di=
-v><br></div><div>Yes; nearly every scheduler does load balancing, and so an=
-y scheduler may need this sort of limitation at some point.=C2=A0 It doesn&=
-#39;t make sense to have separate, nearly identical parameters for each sch=
-eduler.=C2=A0 At some point this should probably be implemented for credit2=
-, although perhaps with a different default.</div><div>=C2=A0</div><div>Ack=
- on the two style comments.</div><div><br></div><div>=C2=A0-George</div></d=
-iv></div>
-
---0000000000004654a305ffb9fb06--
 
